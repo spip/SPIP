@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Aktivovat plugin',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Nenalezeny &#382;&aacute;dn&eacute; v&yacute;sledky.',
 'avis_chemin_invalide_1' => 'Zvolili jste cestu',
 'avis_chemin_invalide_2' => 'nejsp&iacute;&#353; neplatnou. Vra&#357;te se na p&#345;edchoz&iacute; str&aacute;nku a zkontrolujte zadan&eacute; &uacute;daje.',
-'avis_connexion_echec_1' => 'Spojen&iacute; k serveru MySQL selhalo.',
+'avis_connexion_echec_1' => '<MODIF>Spojen&iacute; k serveru SQL selhalo.',
 'avis_connexion_echec_2' => 'Vra&#357;te se na p&#345;edchoz&iacute; str&aacute;nku a zkontrolujte zadan&eacute; &uacute;daje.',
-'avis_connexion_echec_3' => '<b>Pozn.:</b> V mnoha p&#345;&iacute;padech mus&iacute;te nejprve <b>po&#382;&aacute;dat</b> o aktivaci p&#345;&iacute;stupu k datab&aacute;zi MySQL a teprve pot&eacute;m ji m&#367;&#382;ete pou&#382;&iacute;vat. Nem&#367;&#382;ete-li se p&#345;ipojit, zkontrolujte, zda jste tento po&#382;adavek opravdu zadali.',
+'avis_connexion_echec_3' => '<MODIF><b>Pozn.:</b> V mnoha p&#345;&iacute;padech mus&iacute;te nejprve <b>po&#382;&aacute;dat</b> o aktivaci p&#345;&iacute;stupu k datab&aacute;zi SQL a teprve pot&eacute;m ji m&#367;&#382;ete pou&#382;&iacute;vat. Nem&#367;&#382;ete-li se p&#345;ipojit, zkontrolujte, zda jste tento po&#382;adavek opravdu zadali.',
 'avis_connexion_ldap_echec_1' => 'Selhalo p&#345;ipojen&iacute; k serveru LDAP.',
 'avis_connexion_ldap_echec_2' => 'Vra&#357;te se na p&#345;edchoz&iacute; str&aacute;nku a zkontrolujte zadan&eacute; &uacute;daje.',
 'avis_connexion_ldap_echec_3' => 'P&#345;&iacute;padn&#283; p&#345;i importu u&#382;ivatel&#367; nepou&#382;&iacute;vejte podporu LDAP.',
 'avis_conseil_selection_mot_cle' => '<b>D&#367;le&#382;it&aacute; skupina:</b> Doporu&#269;ujeme, abyste k t&eacute;to skupin&#283; vybrali kl&iacute;&#269;ov&eacute; slovo.',
 'avis_deplacement_rubrique' => 'Upozorn&#283;n&iacute;! V t&eacute;to sekci je celkem @contient_breves@ vlo&#382;en&yacute;ch novinek: potvr&#271;te jejich p&#345;esun za&#353;krtnut&iacute;m tohoto pol&iacute;&#269;ka.',
 'avis_destinataire_obligatoire' => 'P&#345;ed odesl&aacute;n&iacute;m zpr&aacute;vy mus&iacute;te vybrat adres&aacute;ta.',
-'avis_erreur_connexion_mysql' => 'Chyba p&#345;ipojen&iacute; MySQL',
+'avis_erreur_connexion_mysql' => 'Chyba p&#345;ipojen&iacute; SQL',
 'avis_erreur_version_archive' => '<b>Varov&aacute;n&iacute;! Soubor @archive@ odpov&iacute;d&aacute; jin&eacute; verzi
     syst&eacute;mu SPIP, ne&#382; je ta, kterou m&aacute;te
     nainstalov&aacute;nu.</b> D&#367;sledkem mohou b&yacute;t tyto v&aacute;&#382;n&eacute;
@@ -45,8 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Na t&#283;chto webech do&#353;lo k probl&eacute;m&#367;m se syndikalizac&iacute;',
 'avis_sites_syndiques_probleme' => 'Probl&eacute;m poch&aacute;z&iacute; z t&#283;chto syndikovan&yacute;ch web&#367;',
 'avis_suppression_base' => 'VAROV&Aacute;N&Iacute;! Odstran&#283;n&iacute; dat je nevratn&eacute;',
-'avis_version_mysql' => 'Ve va&#353;&iacute; verzi datab&aacute;ze MySQL (@version_mysql@) nelze automaticky opravovat datab&aacute;zov&eacute; tabulky.',
-
+'avis_version_mysql' => 'Ve va&#353;&iacute; verzi datab&aacute;ze SQL (@version_mysql@) nelze automaticky opravovat datab&aacute;zov&eacute; tabulky.',
 
 // B
 'bouton_acces_ldap' => 'P&#345;idat p&#345;&iacute;stup k LDAP >>',
@@ -110,13 +111,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Vypr&aacute;zdnit cache',
 'bouton_voir_message' => 'Zobrazit zpr&aacute;vu p&#345;ed odesl&aacute;n&iacute;m',
 
-
 // C
 'cache_mode_compresse' => 'Soubory cache jsou ulo&#382;eny komprimovan&#283;.',
 'cache_mode_non_compresse' => 'Soubory cache jsou ulo&#382;eny nekomprimovan&#283;.',
 'cache_modifiable_webmestre' => 'Tento parametr m&#367;&#382;e m&#283;nit spr&aacute;vce webu.',
 'calendrier_synchro' => 'Pou&#382;&iacute;v&aacute;te-li kompatibiln&iacute; kalend&aacute;&#345; <b>iCal</b>, m&#367;&#382;ete jej synchnizovat s &uacute;daji na tomto webu.',
-
 
 // D
 'date_mot_heures' => 'hodina',
@@ -127,7 +126,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'P&#345;em&iacute;st&#283;n&yacute; text',
 'diff_texte_supprime' => 'Odstran&#283;n&yacute; text',
 'double_clic_inserer_doc' => 'Tuto zkratku vlo&#382;&iacute;te do textu poklep&aacute;n&iacute;m',
-
 
 // E
 'email' => 'e-mail',
@@ -176,7 +174,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; chyb&iacute; v defini&#269;n&iacute;m souboru',
 'erreur_plugin_version_manquant' => 'Chyb&iacute; informace o verzi pluginu',
 
-
 // I
 'ical_info1' => 'Tato str&aacute;nka umo&#382;&#328;uje z&#367;stat v kontaktu s d&#283;n&iacute;m na tomto webu n&#283;kolika zp&#367;soby.',
 'ical_info2' => 'Bli&#382;&#353;&iacute; informace naleznete v <a href="http://www.spip.net/fr_suivi">dokumentaci k syst&eacute;mu SPIP</a>.',
@@ -199,6 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Vytvo&#345;it novou skupinu slov',
 'icone_creation_mots_cles' => 'Vytvo&#345;it nov&eacute; kl&iacute;&#269;ov&eacute; slovo',
 'icone_creer_auteur' => 'Vytvo&#345;it nov&eacute;ho autora a spojit ho s t&iacute;mto &#269;l&aacute;nkem',
+'icone_creer_mot_cle' => 'Zadejte nov&eacute; kl&iacute;&#269;ov&eacute; slovo a spojte jej s t&iacute;mto &#269;l&aacute;nkem',
 'icone_creer_rubrique_2' => 'Vytvo&#345;it novou sekci',
 'icone_ecrire_nouvel_article' => 'Novinky v t&eacute;to sekci',
 'icone_envoyer_message' => 'Odeslat zpr&aacute;vu',
@@ -296,7 +294,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Potvrdit nov&eacute; heslo:',
 'info_connexion_base' => 'Druh&yacute; krok : <b>Pokus o p&#345;ipojen&iacute; k datab&aacute;zi</b>',
 'info_connexion_ldap_ok' => 'P&#345;ipojen&iacute; k LDAP bylo &uacute;sp&#283;&#353;n&eacute;.</b><p /> M&#367;&#382;ete p&#345;istoupit k dal&#353;&iacute;mu kroku.',
-'info_connexion_mysql' => 'Prvn&iacute; krok: <b>P&#345;ipojen&iacute; k datab&aacute;zi MySQL</b>',
+'info_connexion_mysql' => 'Prvn&iacute; krok: <b>P&#345;ipojen&iacute; k datab&aacute;zi SQL</b>',
 'info_connexion_ok' => 'Spojen&iacute; bylo &uacute;sp&#283;&#353;n&eacute;.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Obsah &#269;l&aacute;nk&#367;',
@@ -408,7 +406,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_message_en_redaction' => 'Ba&#353;e rozpracovan&eacute; zpr&aacute;vy',
 'info_message_technique' => 'Technick&aacute; zpr&aacute;va:',
 'info_messagerie_interne' => 'Intern&iacute; syst&eacute;m zpr&aacute;v',
-'info_mise_a_niveau_base' => 'auktualizace datab&aacute;ze MySQL',
+'info_mise_a_niveau_base' => 'auktualizace datab&aacute;ze SQL',
 'info_mise_a_niveau_base_2' => '{{Pozor!}} Nainstalovali jste (star&#353;&iacute;) soubor 
   syst&eacute;mu  SPIP ne&#382; ten, kter&yacute; byl na tomto webu p&#345;edt&iacute;m.
   vystavujete se riziku ztr&aacute;ty datab&aacute;ze a nefunk&#269;nosti va&#353;eho webu. 
@@ -524,7 +522,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_reglage_ldap' => 'Mo&#382;nost: <b>Nastaven&iacute; importu LDAP</b>',
 'info_renvoi_article' => '<b>P&#345;esm&#283;rov&aacute;n&iacute;.</b> Tento &#269;l&aacute;nek odkazuje na str&aacute;nku:',
 'info_reserve_admin' => 'Pouze administr&aacute;to&#345;i sm&#283;j&iacute; modifikovat tuto adresu.',
-'info_restauration_sauvegarde' => 'obnova ulo&#382;en&iacute; @archive@',
+'info_restauration_sauvegarde' => '<MODIF>obnova ulo&#382;en&iacute; @archive@',
 'info_restreindre_rubrique' => 'Omezit spr&aacute;vu sekce :',
 'info_resultat_recherche' => 'V&yacute;sledky vyhled&aacute;v&aacute;n&iacute;:',
 'info_rubriques' => 'Sekce',
@@ -693,13 +691,10 @@ ukazuje jejich stav:',
 'item_utiliser_syndication' => 'Pou&#382;&iacute;vat automatickou syndikaci',
 'item_visiteur' => 'n&aacute;v&#353;t&#283;vn&iacute;k',
 
-
 // J
 'jour_non_connu_nc' => 'neuvedeno',
 
-
 // L
-'les_deux' => 'dva',
 'lien_ajout_destinataire' => 'P&#345;idat p&#345;&iacute;jemce',
 'lien_ajouter_auteur' => 'P&#345;idat autora',
 'lien_ajouter_participant' => 'P&#345;idat &uacute;&#269;astn&iacute;ka',
@@ -732,7 +727,6 @@ ukazuje jejich stav:',
 'logo_standard_rubrique' => 'STANDARDN&Iacute; LOGO SEKCE',
 'logo_survol' => 'LOGO P&#344;I P&#344;ECHODU',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Volba datab&aacute;ze',
 'module_fichier_langue' => 'Jazykov&yacute; soubor',
@@ -741,7 +735,6 @@ ukazuje jejich stav:',
 'module_texte_explicatif' => 'Do &#353;ablony webu m&#367;&#382;ete vlo&#382;it n&aacute;sleduj&iacute;c&iacute; zkratky. Budou automaticky p&#345;elo&#382;eny do jazyk&#367;, pro n&#283;&#382; existuj&iacute; jazykov&eacute; soubory.',
 'module_texte_traduction' => 'Jazykov&yacute; soubor "&nbsp;@module@&nbsp;" existuje v t&#283;chto verz&iacute;ch:',
 'mois_non_connu' => 'nen&iacute; zn&aacute;mo',
-
 
 // O
 'onglet_repartition_actuelle' => 'nyn&iacute;',
@@ -759,7 +752,6 @@ ukazuje jejich stav:',
 'ortho_verif_impossible' => 'Syst&eacute;m nem&#367;&#382;e zkontrolavat p&#345;eklepy v tomto textu.',
 'ortho_verifier' => 'Zkontrolovat p&#345;eklepy',
 
-
 // P
 'plugin_etat_developpement' => 'upravuje se',
 'plugin_etat_experimental' => 'experimentaln&iacute;',
@@ -767,10 +759,8 @@ ukazuje jejich stav:',
 'plugin_etat_test' => 'testovac&iacute; verze',
 'plugins_liste' => 'Seznam plugin&#367;',
 
-
 // R
 'repertoire_plugins' => 'Adres&aacute;&#345;:',
-
 
 // S
 'statut_admin_restreint' => '(admin - vyhrazeno)',
@@ -783,7 +773,6 @@ ukazuje jejich stav:',
 'syndic_option_resume_non' => 'cel&yacute; obsah &#269;l&aacute;nk&#367; (ve form&aacute;tu HTML)',
 'syndic_option_resume_oui' => 'stru&#269;n&yacute; obsah (v textov&eacute;m form&aacute;tu)',
 'syndic_options' => 'Mo&#382;nosti syndikace:',
-
 
 // T
 'taille_cache_image' => 'Obr&aacute;zky, automaticky vypo&#269;ten&eacute; syst&eacute;mem SPIP (n&aacute;hledy dokument&#367;, n&aacute;zvy zobrazen&eacute; graficky, matematick&eacute; funkce ve form&aacute;tu TeX...) zab&iacute;raj&iacute; v adres&aacute;&#345;i @dir@ celkem @taille@.',
@@ -814,7 +803,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_breves' => 'Novinky jsou kr&aacute;tk&eacute; texty umo&#382;&#328;uj&iacute;c&iacute; rychle zve&#345;ej&#328;ovat
  stru&#269;n&eacute; informace, redigovat p&#345;ehled tisku, p&#345;ehled ud&aacute;lost&iacute;...',
 'texte_choix_base_1' => 'Zvolte datab&aacute;zi:',
-'texte_choix_base_2' => 'Na serveru MySQL je n&#283;kolik datab&aacute;z&iacute;.',
+'texte_choix_base_2' => 'Na serveru SQL je n&#283;kolik datab&aacute;z&iacute;.',
 'texte_choix_base_3' => '<b>Zvolte</b> datab&aacute;zi, kter&aacute; v&aacute;m byla p&#345;id&#283;lena poskytovatelem webov&eacute;ho prostoru:',
 'texte_commande_vider_tables_indexation' => 'Tento p&#345;&iacute;kaz slou&#382;&iacute; k vy&#269;i&#353;t&#283;n&iacute; indexov&yacute;ch tabulek, kter&eacute; pou&#382;&iacute;v&aacute;
    vyhled&aacute;va&#269;, jen&#382; je sou&#269;&aacute;st&iacute; syst&eacute;mu SPIP. Umo&#382;n&iacute; v&aacute;m z&iacute;skat v&iacute;ce
@@ -832,7 +821,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_config_groupe_mots_cles' => 'Chcete zapnout roz&#353;&iacute;&#345;en&eacute; nastaven&iacute; kl&iacute;&#269;ov&yacute;ch slov,
    nap&#345;. t&iacute;m, &#382;e umo&#382;n&iacute;te v&yacute;b&#283;r jedin&eacute;ho slova ve skupin&#283;,
    p&#345;&iacute;padn&#283; zobrazen&iacute; toho, &#382;e skupina je d&#367;le&#382;it&aacute;... ?',
-'texte_connexion_mysql' => 'Zkontrolujte informace od va&#353;eho poskytovatele webov&eacute;ho prostoru: m&#283;lo by tam b&yacute;t uvedeno, zda podporuje datab&aacute;zi MySQL a p&#345;&iacute;stupov&eacute; k&oacute;dy pro p&#345;ipojen&iacute; k serveru MySQL.',
+'texte_connexion_mysql' => '<MODIF>Zkontrolujte informace od va&#353;eho poskytovatele webov&eacute;ho prostoru: m&#283;lo by tam b&yacute;t uvedeno, zda podporuje datab&aacute;zi SQL a p&#345;&iacute;stupov&eacute; k&oacute;dy pro p&#345;ipojen&iacute; k serveru SQL.',
 'texte_contenu_article' => '(Obsah &#269;l&aacute;nku v n&#283;kolika slovech.)',
 'texte_contenu_articles' => 'Na z&aacute;klad&#283; &#353;ablony sv&eacute;ho webu se m&#367;&#382;ete rozhodnout, &#382;e n&#283;kter&eacute; prvky
   &#269;l&aacute;nk&#367; nebudete pou&#382;&iacute;vat.
@@ -922,9 +911,9 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
 'texte_recuperer_base' => 'Opravit datab&aacute;zi',
 'texte_reference_mais_redirige' => 'Na &#269;l&aacute;nek je na va&#353;em webu SPIP odkaz, ale je p&#345;esm&#283;rov&aacute;n na jinou adresu URL.',
 'texte_referencement_automatique' => '<b>Automatick&yacute; odkaz na web</b><br />Odkaz na web snadno vytvo&#345;&iacute;te zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho syndika&#269;n&iacute;ho souboru. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
-'texte_requetes_echouent' => '<b>Pokud n&#283;kter&eacute; dotazy MySQL neust&aacute;le
+'texte_requetes_echouent' => '<b>Pokud n&#283;kter&eacute; dotazy SQL neust&aacute;le
   selh&aacute;vaj&iacute; bez zjevn&eacute; p&#345;&iacute;&#269;iny, m&#367;&#382;e to b&yacute;t kv&#367;li samotn&eacute; datab&aacute;zi.</b><p />
-  Datab&aacute;ze MySQL umo&#382;&#328;uje opravu n&aacute;hodn&#283; po&#353;kozen&yacute;ch datab&aacute;zov&yacute;ch tabulek.
+  Datab&aacute;ze SQL umo&#382;&#328;uje opravu n&aacute;hodn&#283; po&#353;kozen&yacute;ch datab&aacute;zov&yacute;ch tabulek.
   O opravu se m&#367;&#382;ete pokusit.
   Pokud se obnova nezda&#345;&iacute;, ulo&#382;te si zobrazen&eacute; hl&aacute;&#353;en&iacute;.
   M&#367;&#382;e v n&#283;m b&yacute;t uvedena p&#345;&iacute;&#269;ina selh&aacute;n&iacute;...<p />
@@ -1067,8 +1056,12 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'trad_lier' => 'Toto je p&#345;eklad &#269;l&aacute;nku &#269;&iacute;slo:',
 'trad_new' => 'Nov&#283; p&#345;elo&#382;it &#269;l&aacute;nek',
 
-
 // U
+'upload_fichier_zip' => 'Komprimovan&yacute; soubor ZIP',
+'upload_fichier_zip_texte' => 'Chcete nainstalovat komprimovan&yacute; soubor ZIP.',
+'upload_fichier_zip_texte2' => 'Tento soubor m&#367;&#382;e b&yacute;t:',
+'upload_zip_decompacter' => 'rozbalen&yacute; a ka&#382;d&yacute; ze soubor&#367; v n&#283;m obsa&#382;en&yacute; bude na web nainstalov&aacute;n. Budou nainstalov&aacute;ny tyto soubory:',
+'upload_zip_telquel' => 'nainstalovat tak, jak je, tedy ve form&aacute;tu ZIP;',
 'utf8_convert_attendez' => 'Po&#269;kejte n&#283;kolik sekund a potom znovu na&#269;t&#283;te tuto str&aacute;nku.',
 'utf8_convert_avertissement' => 'Nyn&iacute; zkonvertujete obsah datab&aacute;ze (&#269;l&aacute;nky, novinky, ...) ze znakov&eacute; sady <b>@orig@</b> do znakov&eacute; sady  <b>@charset@</b>.',
 'utf8_convert_backup' => 'Nezapome&#328;te nejprve ud&#283;lat kompletn&iacute; z&aacute;lohu va&#353;eho webu. Rovn&#283;&#382; zkontrolujte, zda jsou va&#353;e &#353;ablony a jazykov&eacute; soubory kompatibiln&iacute; se znakovou sadou @charset@. ',
@@ -1079,12 +1072,9 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'utf8_convert_verifier' => 'Nyn&iacute; vypr&aacute;zdn&#283;te cache a zkontrolujte ve&#345;ejnou &#269;&aacute;st va&#353;eho webu. Pokud by nastaly v&aacute;&#382;n&eacute; probl&eacute;my, najdete z&aacute;lohu p&#367;vodn&iacute;ch dat (ve form&aacute;tu SQL) v adres&aacute;&#345;i @rep@.',
 'utf8_convertir_votre_site' => 'Zkovertujte web do UTF-8',
 
-
 // V
 'version' => 'Verze:',
 'version_initiale' => 'P&#367;vodn&iacute; verze'
-
 );
-
 
 ?>

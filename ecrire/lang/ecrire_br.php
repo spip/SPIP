@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Enaoui&ntilde; ar plugin',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Disoc\'h ebet.',
 'avis_chemin_invalide_1' => 'An hent dibabet ganeoc\'h',
 'avis_chemin_invalide_2' => 'ne seblant ket beza&ntilde; reizh. Deuit en-dro d\'ar bajenn a-raok ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
-'avis_connexion_echec_1' => 'C\'hwitet en deus ar kennaskadur ouzh ar servijer SQL.',
+'avis_connexion_echec_1' => 'C\'hwitet eo ar c\'hennaska&ntilde; ouzh an diaz-titouro&ugrave;.',
 'avis_connexion_echec_2' => 'Deuit en dro d\'ar bajenn a-raok, ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
-'avis_connexion_echec_3' => '<b>N.B.</b> War meur a servijer eo ret deoc\'h <b>goulenn</b> beza&ntilde; aotreet da dizhout an diaz SQL a-raok gallout implijout anezha&ntilde;. Ma n\'hallit ket kennaska&ntilde;, gwiriit ha graet ho peus ar goulenn-se.',
+'avis_connexion_echec_3' => '<b>N.B.</b> War meur a servijer eo ret deoc\'h <b>goulenn</b> beza&ntilde; aotreet da dizhout an diaz-titouro&ugrave; a-raok gallout implijout anezha&ntilde;. Ma n\'hallit ket kennaska&ntilde;, gwiriit ha graet ho peus ar goulenn-se.',
 'avis_connexion_ldap_echec_1' => 'C\'hwitet eo ar c\'hennaskadenn ouzh ar servijer LDAP.',
 'avis_connexion_ldap_echec_2' => 'Deuit en-dro d\'ar bajenn a-raok, ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
 'avis_connexion_ldap_echec_3' => 'Bep eil tro, n\'implijit ket ar skor LDAP evit enporzhia&ntilde; implijourien.',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_suppression_base' => 'DIWALLIT, n\'eus ket tu da zont war giz lamedigezh an titouro&ugrave;',
 'avis_version_mysql' => 'Ne aotre ket ho stumm SQL (@version_mysql@) taolenno&ugrave; an diaz da emdresa&ntilde;.',
 
-
 // B
 'bouton_acces_ldap' => 'Ouzhpenna&ntilde; ar mont-tre ouzh LDAP',
 'bouton_ajouter' => 'Ouzhpenna&ntilde;',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Disenaoui&ntilde; pep tra',
 'bouton_desinstaller' => 'Distalia&ntilde;',
 'bouton_effacer_index' => 'Diverka&ntilde; ar rollo&ugrave;',
+'bouton_effacer_statistiques' => 'Diverka&ntilde; ar statistiko&ugrave;',
 'bouton_effacer_tout' => 'Diverka&ntilde; PEP TRA',
 'bouton_envoi_message_02' => 'KAS UR C\'HEMENNADENN',
 'bouton_envoyer_message' => 'Kemennadenn peurechu : kas',
@@ -100,13 +102,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Goullonderi&ntilde; ar memoret',
 'bouton_voir_message' => 'Gwelet ar c\'hemennadenn-ma&ntilde; a-raok kadarnaat anezhi',
 
-
 // C
 'cache_mode_compresse' => 'En doare gwaeget ema&ntilde; enrollet restro&ugrave; ar memoret.',
 'cache_mode_non_compresse' => 'Enrollet eo restro&ugrave; ar memroet, met ket en doare gwaeget.',
 'cache_modifiable_webmestre' => 'Gant webmestr al lec\'hienn e c\'hell an dilenn-se beza&ntilde; kemmet',
 'calendrier_synchro' => 'Ma implijit ur meziant deiziataer heglot gant <b>iCal</b> e c\'hellit e adkenamzeria&ntilde; ouzh titouro&ugrave; al lec\'hienn-ma&ntilde;.',
 'config_activer_champs' => 'Lakaat oberiant an takado&ugrave; da-heul',
+'config_choix_base_sup' => 'rei&ntilde; un diaz evit ar servijour-ma&ntilde;',
+'config_erreur_base_sup' => 'N\'hall ket SPIP tizhout listenn an diazo&ugrave; a zo da gaout',
+'config_info_base_sup' => 'M\'ho peus diazo&ugrave;-titouro&ugrave; all d\'ober ganto dre SPIP, gant ar servijour SQL pe gant unan all, e c\'hellit diskleria&ntilde; anezho gant ar furmskrid ama&ntilde;-dindan. Ma ne skrivit netra e lec\'hio&ugrave; \'zo e vo implijet an titouro&ugrave; a dalvez evit an diaz penna&ntilde;.',
+'config_info_base_sup_disponibles' => 'Diazo&ugrave; ouzhpenn a c\'heller goulenn trao&ugrave; diganto evit ar poent :',
 'config_info_logos' => 'Gant pep elfenn ouzh al lec\'hienn e c\'hell beza&ntilde; ul logo, hag un eil pa dremen al logodenn warni',
 'config_info_logos_utiliser' => 'Ober gant al logoio&ugrave;',
 'config_info_logos_utiliser_non' => 'chom hep ober gant logoio&ugrave;',
@@ -114,9 +119,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_info_logos_utiliser_survol_non' => 'Chom hep ober gant eil logoio&ugrave; pa dremen al logodenn',
 'config_info_redirection' => 'Gant an dilenn-ma&ntilde; e vo posupl deoc\'h kroui&ntilde; pennado&ugrave; n\'int ket re gwirion, ha ne vint nemet daveo&ugrave; da bennado&ugrave; bet embannet e lec\'h all, pe e diavaez ouzh SPIP.',
 'config_redirection' => 'Pennado&ugrave; ket gwirion',
+'config_titre_base_sup' => 'Diskleriadenn un diaz ouzhpenn',
+'config_titre_base_sup_choix' => 'Diuzit un diaz ouzhpenn',
 'connexion_ldap' => 'Kennaska&ntilde; :',
 'copier_en_local' => 'Kopia&ntilde; en diabarzh',
-
 
 // D
 'date_mot_heures' => 'eur',
@@ -127,7 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Testenn dilec\'hiet',
 'diff_texte_supprime' => 'Testenn dilemet',
 'double_clic_inserer_doc' => 'Daouglikit evit ouzhpenna&ntilde; ar verradenn-ma&ntilde; en destenn',
-
 
 // E
 'email' => 'postel',
@@ -176,10 +181,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => 'N\'eus ket ouzh an astenn er restr-termeni&ntilde;',
 'erreur_plugin_version_manquant' => 'N\'eus ket ouzh arreval an astenn',
 
-
 // F
 'forum_info_original' => 'orin',
-
 
 // I
 'ical_info1' => 'War ar bajenn-ma&ntilde; ez eus meur a hentenn evit chom e-darempred gant buhez al lec\'hienn.',
@@ -222,6 +225,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_publier_breve' => 'Embann ar berrskrid-ma&ntilde;',
 'icone_referencer_nouveau_site' => 'Listenna&ntilde; ul lec\'hienn nevez',
 'icone_refuser_breve' => 'Nac\'ha&ntilde; ar berrskrid-ma&ntilde;',
+'icone_relancer_signataire' => 'Adla&ntilde;sa&ntilde; ar siner',
 'icone_retour' => 'Distro',
 'icone_retour_article' => 'Distrei&ntilde; d\'ar pennad-skrid',
 'icone_suivi_forum' => 'War ar forom foran&nbsp;: @nb_forums@&nbsp;evezhiadenn',
@@ -298,6 +302,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>vet</sup> war @liste@',
 'info_code_acces' => 'N\'ankouait ket ho kodo&ugrave; dont-tre&nbsp;!',
 'info_comment_lire_tableau' => 'Penaos lenn an daolenn-ma&ntilde;',
+'info_compresseur_activer' => 'Ober gant ar gwaska&ntilde;',
+'info_compresseur_desactiver' => '<MODIF>Chom hep ober gant ar gwaska&ntilde;',
+'info_compresseur_texte' => 'Ma ne vez ket gwasket ar pajenno&ugrave; HTML gant ho servijour evit o c\'has d\'al lennerien e c\'hellit klask redia&ntilde; ar gwaska&ntilde; evit bihanaat o vent.  <b>Diwallit</b> : gallout a ra gorrekaat servijourien \'zo.',
+'info_compresseur_titre' => '<MODIF>Bihanaat bevezi&ntilde; ar Vandennad Tremen',
 'info_config_suivi' => 'Ma\'z eo ar chomlec\'h-ma&ntilde; hini ul listenn-skigna&ntilde; e c\'hellit skriva&ntilde; ama&ntilde; ar chomlec\'h evit en em enrolla&ntilde;. Gallout a ra ar chomlec\'h-se beza&ntilde; un URL (hini ar bajenn Web m\'en em enroller warni), pe ur postel, gñant ur sujed dezha&ntilde; (da skouer : <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Gallout a rit en em enrolla&ntilde; ouzh listenn-skigna&ntilde; al lec\'hienn-ma&ntilde;. Degaset e vo neuze deoc\'h kemenno&ugrave; dre bostel pa vo kinniget pennado&ugrave; pe berrskrido&ugrave; nevez.',
 'info_confirmer_passe' => 'Gwiria&ntilde; ar ger-tremen :',
@@ -505,6 +513,9 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_question_proposer_site' => 'Piv a c\'hell kinnig lec\'hienno&ugrave; listennet&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant ho peus ober gant benvegad-enklask diabarzh SPIP&nbsp;?
 	(lakaat anezha&ntilde; dizoberiant a lak an trao&ugrave; da vont buanoc\'h.)',
+'info_question_vignettes_referer' => 'Pa sellout ouzh ar statistiko&ugrave; e c\'hellit kaout ur berrsek ouzh lec\'hienno&ugrave; orin ar gweladenno&ugrave;',
+'info_question_vignettes_referer_non' => 'Chom hep diskouez skeudennigo&ugrave; ouzh al lec\'hienno&ugrave; orin',
+'info_question_vignettes_referer_oui' => 'Diskouez skeudennigo&ugrave; ouzh al lec\'hienno&ugrave; orin',
 'info_qui_attribue_mot_cle' => 'Gerio&ugrave; ar strollad-ma&ntilde; a c\'hell beza&ntilde; roet gant&nbsp;:',
 'info_racine_site' => 'Gwrizienn al lec\'hienn',
 'info_recharger_page' => 'Adkargit ar-bajenn-ma&ntilde; dindan nebeut, mar plij.',
@@ -523,6 +534,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_renvoi_article' => '<b>Adsturia&ntilde;.</b> Kas a ra ar pennad-ma&ntilde; d\'ar bajenn :',
 'info_reserve_admin' => 'Ar merourien hepken a c\'hell kemm ar chomlec\'h-ma&ntilde;.',
 'info_restauration_sauvegarde' => 'restereul ar restr-savetei&ntilde; @archive@',
+'info_restauration_sauvegarde_insert' => 'Ouzhpenna&ntilde; @archive@ en diaz',
 'info_restreindre_rubrique' => 'Strishaat ar mera&ntilde;s d\'ar rummad :',
 'info_resultat_recherche' => 'Disoc\'ho&ugrave; an enklask',
 'info_rubriques' => 'Rummado&ugrave;',
@@ -548,6 +560,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_sauvegarde_reussi_02' => 'E-barzh @archive@ eo bet saveteet an diaz-titouro&ugrave;. Gallout a rit',
 'info_sauvegarde_reussi_03' => 'distrei&ntilde; da vera&ntilde;s',
 'info_sauvegarde_reussi_04' => 'ho lec\'hienn.',
+'info_sauvegarde_rubrique_reussi' => 'E-barzh @archive@ eo bet saveteet taolenno&ugrave; ar rubrikenn @titre@. Gallout a rit',
 'info_sauvegarde_rubriques' => 'Savetei&ntilde; ar rummado&ugrave;',
 'info_sauvegarde_signatures' => 'Savetei&ntilde; sinadurio&ugrave; ar sinadego&ugrave;',
 'info_sauvegarde_sites_references' => 'Savetei&ntilde; al lec\'hienno&ugrave; listennet',
@@ -589,6 +602,7 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_syndication_integrale_1' => 'Kinnig a ra ho lec\'hienn restro&ugrave;-sindika&ntilde; (gwelet &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Daoust ha c\'hoant ho peus da ginnig ar pennado&ugrave; a-bezh, pe da embann ur verradennig outo, un nebeud a gant arouez enni ?',
 'info_table_prefix' => 'Ma staliit meur a lec\'hienn war ar memes diaz-titouro&ugrave; e c\'hellit kemm ar rakgerio&ugrave; a zo e penn-kenta&ntilde; anv an diazo&ugrave;-titouro&ugrave;, met oc\'h ober gant lizherenno&ugrave; bihan hep sino&ugrave; ispisial (&ntilde;, &ugrave;, &eacute;, &agrave;, ...) hepken.',
+'info_taille_maximale_images' => 'Ema&ntilde; SPIP o vont da arnodi&ntilde; ment brasa&ntilde; posupl ar skeudenno&ugrave; a c\'hell beza&ntilde; meret ganta&ntilde; (e miliono&ugrave; a bixelo&ugrave;).<br />Ne vo ket diskouezet ar skeudenno&ugrave; brasoc\'h.',
 'info_taille_maximale_vignette' => 'Ment brasa&ntilde; ar skeudennigo&ugrave; krouet gant ar poellad&nbsp;:',
 'info_terminer_installation' => 'Brema&ntilde; e c\'hellit echui&ntilde; gant al labour-stalia&ntilde;.',
 'info_texte' => 'Testenn',
@@ -629,15 +643,26 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'info_visiteurs' => 'Gweladenner',
 'info_visiteurs_02' => 'Gweladenner al lec\'hienn foran',
 'install_adresse_base_hebergeur' => 'Chomlec\'h an diaz-titouro&ugrave; roet gant ar boder',
+'install_base_ok' => 'Anavezet eo bet an diaz @base@',
 'install_echec_annonce' => 'Moarvat e c\'hwito ar staliadur pe e kaso d\'ul lec\'hiennha n\'ay ket en-dro...',
 'install_extension_mbstring' => 'N\'ez a ket SPIP en-dro gant&nbsp;:',
 'install_extension_php_obligatoire' => 'Ezhomm en deus SPIP ouzh an astenn php&nbsp;:',
 'install_login_base_hebergeur' => 'Anv-kennaska&ntilde; roet gant ar boder',
 'install_nom_base_hebergeur' => 'Anv an diaz roet gant ar boder&nbsp;:',
+'install_pas_table' => 'Taolenn ebet en diaz evit poent',
 'install_pass_base_hebergeur' => 'Ger-tremen evit kennaska&ntilde; roet gant ar boder',
 'install_php_version' => 'n\'eo ket trawalc\'h arreval @version@ PHP (@minimum@ d\'an nebeuta&ntilde;)',
 'install_select_langue' => 'Diuzit ur yezh, ha klikit war &laquo;&nbsp;Da-heul&nbsp;&raquo; evit kregi&ntilde; gant ar stalia&ntilde;.',
+'install_select_type_db' => 'Roit doare an daz-titouro&ugrave;&nbsp;:',
+'install_select_type_mysql' => 'MySQL',
+'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_sqlite2' => 'SQLite 2',
+'install_select_type_sqlite3' => 'SQLite 3',
+'install_serveur_hebergeur' => 'Servijour an diaz titouro&ugrave; a vez kinniget gant ar boder',
 'install_table_prefix_hebergeur' => 'Rakger an diaz roet gant ar boder&nbsp;:',
+'install_tables_base' => 'Taolenno&ugrave; en diaz',
+'install_types_db_connus' => 'Gallout a ra SPIP ober gant <b>MySQL</b> (an hini implijeta&ntilde;), <b>PostgreSQL</b> ha <b>SQLite</b>.',
+'install_types_db_connus_avertissement' => 'Diwallit&nbsp;: lod eus an astenno&ugrave; n\'eont en-dro nemet gant MySQL',
 'intem_redacteur' => 'skridaozer',
 'item_accepter_inscriptions' => 'Degemer an enrolladenno&ugrave;',
 'item_activer_forum_administrateur' => 'Ober gant forom ar merourien',
@@ -698,13 +723,10 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'item_utiliser_syndication' => 'Ober gant al liamma&ntilde; RSS',
 'item_visiteur' => 'gweladenner',
 
-
 // J
 'jour_non_connu_nc' => 'k.a.',
 
-
 // L
-'les_deux' => 'an daou',
 'lien_ajout_destinataire' => 'Ouzhpenna&ntilde; an degemerer-ma&ntilde;',
 'lien_ajouter_auteur' => 'Ouzhpenna&ntilde; ar skridaozer-ma&ntilde;',
 'lien_ajouter_participant' => 'Ouzhpenna&ntilde; ur perzhiad',
@@ -738,7 +760,6 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'logo_standard_rubrique' => 'SKEUDENN-AROUEZ AR RUMMADO&Ugrave; DRE-VRAS',
 'logo_survol' => 'SKEUDENN-AROUEZ PA DREMEN AL LOGODENN',
 
-
 // M
 'menu_aide_installation_choix_base' => 'dibab ho tiaz',
 'module_fichier_langue' => 'Restr-yezh',
@@ -748,8 +769,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'module_texte_traduction' => 'Ar restr-yezh &laquo;&nbsp;@module@&nbsp;&raquo;a zo da gaout e&nbsp;:',
 'mois_non_connu' => 'ket anavezet',
 
-
 // O
+'onglet_declarer_une_autre_base' => 'Diskleria&ntilde; un diaz all',
 'onglet_repartition_actuelle' => 'betek-henn',
 'ortho_ajouter_ce_mot' => 'Ouzhpenna&ntilde; ar ger-ma&ntilde; d\'ar geriadur',
 'ortho_aucune_suggestion' => 'N\'eus bet kavet kinnig ebet evit ar ger-ma&ntilde;.',
@@ -765,8 +786,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'ortho_verif_impossible' => 'N\'hall ket ar genreizhad gwiria&ntilde; reizhskrivadur an destenn-ma&ntilde;.',
 'ortho_verifier' => 'Gwiria&ntilde; ar reizhskriva&ntilde;',
 
-
 // P
+'page_pas_proxy' => 'Ne rank ket ar bajenn-ma&ntilde; tremen dre ar proxy',
 'pas_de_proxy_pour' => 'Ma vez ezhomm e c\'hello rei&ntilde; ar mekaniko&ugrave; pe domanio&ugrave; ne rank ket ar proxy mont en-dro evito (da skouer&nbsp;: @exemple@)',
 'plugin_charge_paquet' => 'Karga&ntilde; ar pakad @name@',
 'plugin_erreur_charger' => 'fazi&nbsp;: dibosupl eo karga&ntilde; @zip@',
@@ -781,44 +802,46 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_info_automatique1' => 'Setu ar peh eo dav deoc\'h ober evit aotrea&ntilde; staliadur emgefreek an astenno&ugrave;&nbsp;:',
 'plugin_info_automatique2' => 'kroui&ntilde; ur roll <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'Gwiriit daoust hag-e&ntilde; eo aotreet ar servijour da skriva&ntilde; en teul-ma&ntilde;.',
-'plugin_info_automatique_creer' => '<NEW>&#224; cr&#233;er &#224; la racine du site.',
-'plugin_info_automatique_exemples' => '<NEW>exemples&nbsp;:',
-'plugin_info_automatique_ftp' => '<NEW>Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>',
-'plugin_info_automatique_lib' => '<NEW>Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.',
-'plugin_info_automatique_liste' => '<NEW>Vos listes de plugins&nbsp;:',
-'plugin_info_automatique_liste_officielle' => '<NEW>les plugins officiels',
-'plugin_info_automatique_liste_update' => '<NEW>Mettre &#224; jour les listes',
-'plugin_info_automatique_ou' => '<NEW>ou...',
-'plugin_info_automatique_select' => '<NEW>S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.',
-'plugin_info_telecharger' => '<NEW>&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@',
-'plugin_librairies_installees' => '<NEW>Librairies install&#233;es',
+'plugin_info_automatique_creer' => 'da groui&ntilde; e gwrizienn al lec\'hienn.',
+'plugin_info_automatique_exemples' => 'da skouer&nbsp;:',
+'plugin_info_automatique_ftp' => 'Gallout a rit stalia&ntilde; an astenno&ugrave; dre FTP en teul <tt>@rep@</tt>',
+'plugin_info_automatique_lib' => 'Lod ouzh an astenno&ugrave; o deus ezhomm ma vefe kaset restro&ugrave; er restr <code>lib/</code>. Ma n\'eo ket krouet eo dav kroui&ntilde; hennezh e gwrizienn al lec\'hienn.',
+'plugin_info_automatique_liste' => 'Listenno&ugrave; hoc\'h astenno&ugrave;&nbsp;:',
+'plugin_info_automatique_liste_officielle' => 'An astenno&ugrave; ofisiel',
+'plugin_info_automatique_liste_update' => 'Hizivaat al listenno&ugrave;',
+'plugin_info_automatique_ou' => 'pe...',
+'plugin_info_automatique_select' => 'Diuzit un astenn ama&ntilde;-dindan&nbsp;: pellgaget e vo gant SPIP ha staliet en teul <code>@rep@</code>&nbsp;; ma\'z eus c\'hoazh ouzh an astenn-ma&ntilde; e vo hizivaet.',
+'plugin_info_telecharger' => 'da bellgarga&ntilde; adal @url@ ha da stalia&ntilde; e-barzh @rep@',
+'plugin_librairies_installees' => 'Rollo&ugrave; bet staliet',
+'plugin_necessite_lib' => 'Ezhomm he deus an astenn-ma&ntilde; ouzh ar roll @lib@',
 'plugin_necessite_plugin' => 'Ezhomm a zo ouzh an astenn @plugin@ en arreval @version@ d\'an nebeuta&ntilde;.',
 'plugin_necessite_spip' => 'Ezhomm a zo ma vefe d\'an nebeuta&ntilde; an arreval @version@ ouzh SPIP.',
-'plugin_titre_automatique' => '<NEW>Installation automatique',
-'plugin_titre_automatique_ajouter' => '<NEW>Ajouter des plugins',
-'plugin_zip_active' => '<NEW>Continuez pour l\'activer',
-'plugin_zip_adresse' => '<NEW>indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.',
-'plugin_zip_adresse_champ' => '<NEW>Adresse du plugin ou de la liste&nbsp;',
-'plugin_zip_content' => '<NEW>Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>',
-'plugin_zip_installe_finie' => '<NEW>Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.',
-'plugin_zip_installe_rep_finie' => '<NEW>Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@',
-'plugin_zip_installer' => '<NEW>Vous pouvez maintenant l\'installer.',
-'plugin_zip_telecharge' => '<NEW>Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;',
-'plugins_actifs' => '<NEW>@count@ plugins activ&#233;s.',
-'plugins_compte' => '<NEW>@count@ plugins',
-'plugins_disponibles' => '<NEW>@count@ plugins disponibles.',
+'plugin_source' => 'orin:&nbsp;',
+'plugin_titre_automatique' => 'Stalia&ntilde; emgefreek',
+'plugin_titre_automatique_ajouter' => 'Ouzhpenna&ntilde; astenno&ugrave;',
+'plugin_zip_active' => 'Kendalc\'hit evit enaoui&ntilde; anezha&ntilde;',
+'plugin_zip_adresse' => 'roit ama&ntilde; kavlec\'h restr zip un astenn da bellgarga&ntilde;, pe hini ul listennad astenno&ugrave;.',
+'plugin_zip_adresse_champ' => 'Kavlec\'h an astenn pe al listenn&nbsp;',
+'plugin_zip_content' => 'Ar restro&ugrave; (@taille@) a zo enna&ntilde;,<br />prest da veza&ntilde; staliet en teul <code>@rep@</code>',
+'plugin_zip_installe_finie' => 'Diwasket ha staliet eo bet ar restr @zip@ .',
+'plugin_zip_installe_rep_finie' => 'Diwazket eo bet ar restr @zip@ ha staliet en teul @rep@',
+'plugin_zip_installer' => 'Brema&ntilde; e c\'hellit stalia&ntilde; anezha&ntilde;.',
+'plugin_zip_telecharge' => 'Pellgarget eo bet ar restr @zip@',
+'plugins_actifs' => '@count@ astenn implijet.',
+'plugins_compte' => '@count@ astenn',
+'plugins_disponibles' => '@count@ astenn da gaout.',
+'plugins_erreur' => 'Fazi en astenno&ugrave; : @plugins@',
 'plugins_liste' => 'Listenn an astenno&ugrave;',
-'plugins_vue_hierarchie' => '<NEW>Hi&eacute;rarchie',
-'plugins_vue_liste' => '<NEW>Liste',
+'plugins_vue_hierarchie' => 'Urzhiadur',
+'plugins_vue_liste' => 'Listenn',
 'protocole_ldap' => 'Arreval ar protokol :',
-
 
 // R
 'repertoire_plugins' => 'Teul&nbsp;:',
 
-
 // S
 'sauvegarde_fusionner' => 'Kendeuzi&ntilde; an diaz a zo brema&ntilde; gant ar savete',
+'sauvegarde_fusionner_depublier' => 'Dizembann ar pezh a zo bet strollet',
 'sauvegarde_url_origine' => 'Marteze, URL al lec\'hienn-orin',
 'statut_admin_restreint' => '(merour strishaet)',
 'syndic_choix_moderation' => 'Petra ober gant al liammo&ugrave; a zeu a teuio ouzh al lec\'hienn-ma&ntilde;&nbsp;?',
@@ -830,7 +853,6 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'syndic_option_resume_non' => 'pennad a-bezh ar pennado&ugrave; (er stumm HTML)',
 'syndic_option_resume_oui' => 'ur verradenn hepken (e stumm testenn)',
 'syndic_options' => 'Dilenno&ugrave; sindikadur&nbsp;:',
-
 
 // T
 'taille_cache_image' => '@taille@ eo ar skeudenno&ugrave; jedet gant SPIP (skeudennigo&ugrave; an teuliado&ugrave;, titlo&ugrave; skeudennaouet, fonksiono&ugrave; jedoniezh er stumm TeX,...) hag en teul @dir@  emaint.',
@@ -844,9 +866,11 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'texte_admin_effacer_01' => 'Gant se e tiverkoc\'h <i>PEP TRA</i> en ho tiaz titouro&ugrave;,
 da lavaret eo <i>an holl</i> aotreo&ugrave; evit ar merourien hag ar skridaozerien. Goude beza&ntilde; bet graet se e rankoc\'h
 adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an nebeuta&ntilde; un aotre evit ar merour',
+'texte_admin_effacer_stats' => 'Diverket e vo an holl roado&ugrave; a denn ouzh gweladenno&ugrave; al lec\'hienn, ha neuze ivez ar re a denn ouzh brud ar pennado&ugrave;.',
 'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh @dossier@. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul @img@, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
 'texte_admin_tech_02' => 'Diwallit : war ul lec\'hienn warna&ntilde; ar memes arreval HEPKEN ouzh SPIP e c\'hello ar restr-savete-ma&ntilde; beza&ntilde; implijet. Arabat neuze &laquo;&nbsp;goullonderi&ntilde; an diaz&nbsp;&raquo; o so&ntilde;jal adstalia&ntilde; ar savete goude beza&ntilde; bet nevesaet SPIP... Sellit ouzh <a href="http://www.spip.net/fr_article1489.html">diello&ugrave; SPIP</a>.',
 'texte_admin_tech_03' => 'Gallout a rit dibab savetei&ntilde; stumm gwaeget ar restr evit berraat ar saveteadur, ha ma kemerfe nebeutoc\'h a blas.',
+'texte_admin_tech_04' => 'M\'ho peus c\'hoant da strolla&ntilde; gant un diaz all e c\'hellit dibab savetei&ntilde; ur rubrikenn resis hepken: ',
 'texte_adresse_annuaire_1' => '(Ma \'z eo staliet ar roll dud er memes lec\'h hag ho lec\'hienn, ema&ntilde; moarvat e-barzh &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Ouzhpennet ez eus bet ar skridaozer-ma&ntilde; ouzh ar pennad :',
 'texte_annuaire_ldap_1' => 'M\'ho peus tro d\'ober gant ur roll dud (LDAP),e c\'hellit e implijout evit emporzha&ntilde; diouzhtu implijerien war SPIP.',
@@ -875,7 +899,7 @@ adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an 
 'texte_config_groupe_mots_cles' => 'Ha c\'hoant ho peus ober gant ardremmezi&ntilde; lemm ar gerio&ugrave;-stur,
    o resisaat da skouer e c\'heller rei&ntilde; ur ger dre strollad, 
    eo a-bouez strollad-ma&ntilde;-strollad...&nbsp;?',
-'texte_connexion_mysql' => 'Sellit en diello&ugrave; roet deoc\'h gant ho boder&nbsp;: Ma vez gouza&ntilde;vet SQL ganta&ntilde; e rankit kavout enno ar c\'hodo&ugrave;-kennaska&ntilde; SQL.',
+'texte_connexion_mysql' => 'Sellit en diello&ugrave; roet deoc\'h gant ho boder&nbsp;: Rankout a rit kavout enno servijour an diazo&ugrave;-titouro&ugrave; a vez kinniget ganta&ntilde; hag ar c\'hodo&ugrave; evit kennaska&ntilde; outo.',
 'texte_contenu_article' => '(Un nebeud gerio&ugrave; da ginnig ar pennad.)',
 'texte_contenu_articles' => 'Hevez ar maketenn dibabet evit sevel ho lec\'hienn e c\'hellit divizout
 		ne vo ket implijet elfenno&ugrave; \'zo er pennado&ugrave;.
@@ -893,6 +917,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_documents_joints_2' => 'Ne vir ket an dra-se da ziskouez skeudenno&ugrave; e-barzh ar pennad.',
 'texte_effacer_base' => 'Diverka&ntilde; diaz-titouro&ugrave; SPIP',
 'texte_effacer_donnees_indexation' => 'Diverka&ntilde; ar roado&ugrave;-listenna&ntilde;',
+'texte_effacer_statistiques' => 'Diverka&ntilde; ar statistiko&ugrave;',
 'texte_en_cours_validation' => 'Kinniget eo ar pennado&ugrave; ha berrskrido&ugrave; ama&ntilde;-dindan d\'an embann. Gallout a rit rei&ntilde; ho ali er foromo&ugrave; stag outo.',
 'texte_enrichir_mise_a_jour' => 'Gallout a rit bravaat kinnig ho testenn oc\'h implijout &laquo;&nbsp;berradenno&ugrave;-lizherenna&ntilde;&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>Ha rankout a ra SPIP kroui&ntilde; ar restro&ugrave; ispisial <tt>.htpasswd</tt>
@@ -1060,6 +1085,8 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'titre_page_sites_tous' => 'Al lec\'hienno&ugrave; listennet',
 'titre_page_statistiques' => 'Statistiko&ugrave; dre rummado&ugrave;',
 'titre_page_statistiques_referers' => 'Statistiko&ugrave; (liammo&ugrave; davet al lec\'hienn-ma&ntilde;)',
+'titre_page_statistiques_signatures_jour' => 'Niver a sinadurio&ugrave; bemdez',
+'titre_page_statistiques_signatures_mois' => 'Niver a sinadurio&ugrave; bep miz',
 'titre_page_statistiques_visites' => 'Statistiko&ugrave; ar gweladenno&ugrave;',
 'titre_page_upgrade' => 'Nevesaat SPIP',
 'titre_publication_articles_post_dates' => 'Embann ar pennado&ugrave; deiziet a-c\'houde',
@@ -1083,8 +1110,12 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'trad_lier' => 'Un droidigezh eo ar pennad-ma&ntilde;. Setu niverenn ar pennad-orin&nbsp;:',
 'trad_new' => 'Skriva&ntilde; troidigezh nevez ar pennad-skid ma&ntilde;',
 
-
 // U
+'upload_fichier_zip' => 'Restr ZIP',
+'upload_fichier_zip_texte' => 'Ur restr Zip eo ar restr a ginnigit stalia&ntilde;.',
+'upload_fichier_zip_texte2' => 'Gallout a ra hennezh beza&ntilde;&nbsp;:',
+'upload_zip_decompacter' => 'diwaeget, ha pep elfenn enna&ntilde; staliet el lec\'hienn. Ar restro&ugrave; staliet euze war al lec\'hienn a vo&nbsp;:',
+'upload_zip_telquel' => 'staliet evel-henn, da lavaret eo restro&ugrave; gwaeget Zip&nbsp;;',
 'utf8_convert_attendez' => 'Gortozit un tammig, hag adkargit ar bajenn-ma&ntilde;',
 'utf8_convert_avertissement' => 'Emaoc\'h war-nes amdrei&ntilde; endalc\'had ho tiaz-titouro&ugrave; (pennado&ugrave;, berrskrido&ugrave;, h.a.), eus al lizherennaoueg <b>@orig@</b> d\'an hini <b>@charset@</b>.',
 'utf8_convert_backup' => 'N\'ankouait ket savetei&ntilde; ho lec\'hienn penn-da-benn en a-raok. Rankout a rafec\'h ivez gwiriekaat eo heglot ho frammo&ugrave; gant @charset@.',
@@ -1095,12 +1126,10 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'utf8_convert_verifier' => 'Brema&ntilde; e rankit goullonderi&ntilde; ar vemoret ha gwiria&ntilde; eo mat pep tra war lodenn foran al lec\'hienn. Ma c\'hoarvez ur gudenn vras, ez eo bet miret ho roado&ugrave; (er stumm SQL) en teul @rep@.',
 'utf8_convertir_votre_site' => 'Amdrei&ntilde; ho lec\'hienn davet uft-8',
 
-
 // V
 'version' => 'Arreval&nbsp;:',
+'version_deplace_rubrique' => 'Dilec\'hiet adalek <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> betek <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Stumm orin'
-
 );
-
 
 ?>

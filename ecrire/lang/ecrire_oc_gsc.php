@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'aide_non_disponible' => 'Aquera part de l\'ajuda en linha n\'ei pas enq&uuml;&egrave;ra disponibla t&agrave; aquesta lenga.',
@@ -12,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Nat resultat.',
 'avis_chemin_invalide_1' => 'Lo camin qui avetz causit',
 'avis_chemin_invalide_2' => 'non sembla pas valid. Volhatz tornar a la pagina anteriora t&agrave; verificar las informacions hornidas.',
-'avis_connexion_echec_1' => 'La connexion au servider MySQL que s\'i ei mauescaduda.',
+'avis_connexion_echec_1' => '<MODIF>La connexion au servider SQL que s\'i ei mauescaduda.',
 'avis_connexion_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qui avetz hornidas.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Sus h&egrave;ra de serviders, que devetz <b>demandar</b> qu\'activen lo v&ograve;ste acc&egrave;s a la basa MySQL abans de poder utilizar-la. Se ne\'vs podetz pas connectar, verificatz qu\'ajatz plan realizat aqueth procediment.',
+'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> Sus h&egrave;ra de serviders, que devetz <b>demandar</b> qu\'activen lo v&ograve;ste acc&egrave;s a la basa SQL abans de poder utilizar-la. Se ne\'vs podetz pas connectar, verificatz qu\'ajatz plan realizat aqueth procediment.',
 'avis_connexion_ldap_echec_1' => 'La connexion au servider LDAP que s\'i ei mauescaduda.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qui avetz hornidas. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, n\'utilizetz pas lo sup&ograve;rt LDAP t&agrave; importar utilizaires.',
 'avis_conseil_selection_mot_cle' => '<b>Grop important:</b> que s\'aconselha h&ograve;rt de seleccionar un mot clau dens aqueth grop.',
 'avis_deplacement_rubrique' => 'Atention! Aquera rubrica que contien @contient_breves@ br&egrave;vas@scb@: se la despla&ccedil;atz, que voleretz plan oscar aquera casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Que devetz indicar un destinatari abans d\'enviar aqueth messatge.',
-'avis_erreur_connexion_mysql' => 'Error de connexion MySQL',
+'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
 'avis_erreur_version_archive' => '<b>Atencion! Lo fichi&egrave;r @archive@ que correspond a ua auta version d\'SPIP que la qu\'avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
@@ -38,8 +40,7 @@ la documentacion d\'SPIP</a>.',
 'avis_sites_probleme_syndication' => 'Aqueths sits qu\'an encontrat un probl&egrave;ma de sindicacion',
 'avis_sites_syndiques_probleme' => 'Aqueths sits sindicats qu\'an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las dadas qu\'ei irreversible',
-'avis_version_mysql' => 'La v&ograve;sta version de MySQL (@version_mysql@) non permet pas l\'autoreparacion de las taulas de la basa.',
-
+'avis_version_mysql' => 'La v&ograve;sta version de SQL (@version_mysql@) non permet pas l\'autoreparacion de las taulas de la basa.',
 
 // B
 'bouton_acces_ldap' => 'Ajustar l\'acc&egrave;s a LDAP >>',
@@ -102,13 +103,11 @@ la documentacion d\'SPIP</a>.',
 'bouton_vider_cache' => 'Vueidar l\'esconeder',
 'bouton_voir_message' => 'V&eacute;der aqueth messatge abans de\'u validar',
 
-
 // C
 'cache_mode_compresse' => 'Los fichi&egrave;rs de l\'esconeder que son registrats en m&ograve;de comprimit.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'esconeder que son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre deu sit que p&ograve;t modificar aquestes param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), que\'u podetz sincronizar dab l\'actualitat deu sit.',
-
 
 // D
 'date_mot_heures' => '&ograve;ras',
@@ -119,7 +118,6 @@ la documentacion d\'SPIP</a>.',
 'diff_texte_deplace' => 'T&egrave;xt ajustat',
 'diff_texte_supprime' => 'T&egrave;xt suprimit',
 'double_clic_inserer_doc' => 'Besclicatz ent&agrave; inserir aquera acorcida dens lo t&egrave;xt.',
-
 
 // E
 'email' => 'e-mail',
@@ -162,7 +160,6 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) deu v&ograve;ste sit',
 
-
 // I
 'ical_info1' => 'Aquera pagina que muisha met&ograve;des diferents ent&agrave; demorar en contacte dab la vita d\'aqueth sit.',
 'ical_info2' => 'T&agrave; ti&eacute;ner mei informacions suber aqueras tecnicas, n\'esitetz pas de consultar <a href="http://www.spip.net/fr_suivi">la documentacion d\'SPIP</a>.',
@@ -184,6 +181,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'icone_creation_groupe_mots' => 'Crear un nav&egrave;th grop de mots',
 'icone_creation_mots_cles' => 'Crear un mot clau nau',
 'icone_creer_auteur' => 'Crear un autor nau e associ&agrave;\'u a aqueth article',
+'icone_creer_mot_cle' => 'Crear un mot clau nau e lig&agrave;\'u a aqueth article',
 'icone_creer_rubrique_2' => 'Crear ua rubrica nava',
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contengudas dens aquera rubrica',
 'icone_envoyer_message' => 'Mandar aqueth messatge',
@@ -276,7 +274,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_confirmer_passe' => 'Confirmar aqueth mot de santa Clara nav&egrave;th:',
 'info_connexion_base' => 'Dusau estapa: <b>Ensai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP que s\'i ei escaduda.</b><p> Que podetz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Perm&egrave;ra estapa:<b>La v&ograve;sta connexion MySQL</b>',
+'info_connexion_mysql' => 'Perm&egrave;ra estapa:<b>La v&ograve;sta connexion SQL</b>',
 'info_connexion_ok' => 'La connexion que s\'i ei escaduda.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut deus articles',
@@ -377,7 +375,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_message_en_redaction' => 'Los v&ograve;stes messatges en cors de redaccion',
 'info_message_technique' => 'Messatge tecnic:',
 'info_messagerie_interne' => 'Messatjaria int&egrave;rna',
-'info_mise_a_niveau_base' => 'Hicada a niv&egrave;u de la v&ograve;sta basa MySQL',
+'info_mise_a_niveau_base' => 'Hicada a niv&egrave;u de la v&ograve;sta basa SQL',
 'info_mise_a_niveau_base_2' => '{{Atencion!}} Qu\'avetz installada ua version
   deus fichi&egrave;rs SPIP {anteriora} a la qui i av&egrave;va
   abans sus aqueste sit: que riscatz de p&egrave;rder la v&ograve;sta basa de dadas
@@ -488,7 +486,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<b>Redireccion.</b> Aqueth article que renvia a la pagina:',
 'info_reserve_admin' => 'Sonque los administrators que p&ograve;den modificar aquera adrei&ccedil;a.',
-'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
+'info_restauration_sauvegarde' => '<MODIF>restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la c&egrave;rca:',
 'info_rubriques' => 'Rubricas',
@@ -651,10 +649,8 @@ ua color qu\'indica lo lor estat:',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
-
 
 // L
 'lien_ajout_destinataire' => 'Ajustar aqueth destinatari',
@@ -689,7 +685,6 @@ ua color qu\'indica lo lor estat:',
 'logo_standard_rubrique' => 'L&Ograve;GO ESTANDARD DE LAS RUBRICAS',
 'logo_survol' => 'L&Ograve;GO TAU SUBERV&Ograve;L',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Causida de la v&ograve;sta basa',
 'module_fichier_langue' => 'Fichi&egrave;r de lenga',
@@ -698,7 +693,6 @@ ua color qu\'indica lo lor estat:',
 'module_texte_explicatif' => 'Que podetz inserir las acorcidas seguentas dens las esqueletas deu v&ograve;ste sit public. Que s\'arrevirar&agrave;n automaticament dens las diferentas lengas t&agrave; las quaus existeish un fichi&egrave;r de lenga.',
 'module_texte_traduction' => 'Lo fichi&egrave;r de lenga &laquo;@module@&raquo; qu\'ei disponible en:',
 'mois_non_connu' => 'non conegut',
-
 
 // O
 'onglet_repartition_actuelle' => 'uei lo dia',
@@ -716,7 +710,6 @@ ua color qu\'indica lo lor estat:',
 'ortho_verif_impossible' => 'Lo sist&egrave;ma non p&ograve;t pas verificar l\'ortografia d\'aqueste t&egrave;xt.',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
-
 // S
 'statut_admin_restreint' => '(admin. restrent)',
 'syndic_choix_moderation' => 'Que\'s p&ograve;t har dab los ligams vienents qui provienen d\'aqueth sit?',
@@ -725,7 +718,6 @@ ua color qu\'indica lo lor estat:',
 'syndic_option_miroir' => 'bloc&agrave;\'us suu c&ograve;p',
 'syndic_option_oubli' => 'escaf&agrave;\'us (apr&egrave;s @mois@&nbsp;mois)',
 'syndic_options' => 'Opcions de sindicacion:',
-
 
 // T
 'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas deus documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) qu\'ocupan dens lo repert&ograve;ri @dir@ un totau de @taille@.',
@@ -756,7 +748,7 @@ N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri 
 'texte_breves' => 'Las br&egrave;vas que son t&egrave;xtes corts e simples qui permeten de hicar en linha l&egrave;u informacions concisas, de gerir
  ua revista de premsa, un calend&egrave;r d\'eveniments...',
 'texte_choix_base_1' => 'Causitz la v&ograve;sta basa:',
-'texte_choix_base_2' => 'Lo servider MySQL que contien mei d\'ua basa de dadas.',
+'texte_choix_base_2' => 'Lo servider SQL que contien mei d\'ua basa de dadas.',
 'texte_choix_base_3' => '<b>Causitz</b> &ccedil;a devath la qui lo v&ograve;ste aubergader e vs\'a atribuida:',
 'texte_commande_vider_tables_indexation' => 'Utilizatz aquera comanda t&agrave; vueidar las taulas d\'indexacion utilizadas peu cercader integrat a SPIP. Aqu&ograve; que permeter&agrave;
  de ganhar espaci disc.',
@@ -771,7 +763,7 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_config_groupe_mots_cles' => 'E desiratz d\'activar la configuracion avan&ccedil;ada deus mots clau,
  en indicar per exemple que\'s p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop ei important...?',
-'texte_connexion_mysql' => 'Consultatz las informacions que lo v&ograve;ste aubergader e forneish: qu\'i devetz trobar, se lo v&ograve;ste aubergader sup&ograve;rta MySQL, los c&ograve;des de connexion au servider MySQL.',
+'texte_connexion_mysql' => '<MODIF>Consultatz las informacions que lo v&ograve;ste aubergader e forneish: qu\'i devetz trobar, se lo v&ograve;ste aubergader sup&ograve;rta SQL, los c&ograve;des de connexion au servider SQL.',
 'texte_contenu_article' => '(Contengut de l\'article en quauques mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que lo v&ograve;ste sit a adoptada, que podetz decidir
  que daubuns elements deus articles non s\'utilizen pas.
@@ -871,10 +863,10 @@ tornar calcular sonque ua pagina, passatz meil&egrave;u per l\'espaci public e u
 'texte_recuperer_base' => 'Reparar la basa de dadas',
 'texte_reference_mais_redirige' => 'article referenciat dens lo v&ograve;ste sit SPIP, mes redirigit de cap t&agrave; ua autra URL.',
 'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br /> Que podetz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;a devath l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a deu son fichi&egrave;r backend. SPIP que gahar&agrave; automaticament las informacions qui concerneishen aqueth sit (t&iacute;tol, descripcion...).',
-'texte_requetes_echouent' => '<b>Quora daubuas requ&egrave;stas MySQL s\'i mauescaden
+'texte_requetes_echouent' => '<b>Quora daubuas requ&egrave;stas SQL s\'i mauescaden
   sistematicament e shens rason aparenta, que\'s p&ograve;t
   qu\'aqu&ograve; venga de la quita basa de dadas.  </b><p>
-  MySQL que tien la facultat de reparar las soas
+  SQL que tien la facultat de reparar las soas
   taulas quan un accident las
  a guastadas. Ac&iacute; que podetz ensajar aquera reparacion; se 
   non s\'i escad pas, servatz ua c&ograve;pia de l\'afichatge, que contien
@@ -1027,11 +1019,15 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
 
+// U
+'upload_fichier_zip' => 'Fichi&egrave;r ZIP',
+'upload_fichier_zip_texte' => 'Lo fichi&egrave;r que prepausatz d\'installar qu\'ei un fichi&egrave;r Zip.',
+'upload_fichier_zip_texte2' => 'Aqueth fichi&egrave;r que p&ograve;t estar:',
+'upload_zip_decompacter' => 'descomprimit e cada element que contien installat suu sit. Alavetz los fichi&egrave;rs que ser&agrave;n installats suu sit que son:',
+'upload_zip_telquel' => 'installat tau com ei, com archiu comprimit Zip;',
 
 // V
 'version_initiale' => 'Version iniciau'
-
 );
-
 
 ?>

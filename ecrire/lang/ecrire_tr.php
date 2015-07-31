@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Plugin\'i etkinle&#351;tir',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Hi&ccedil; sonu&ccedil; yok.',
 'avis_chemin_invalide_1' => 'Se&ccedil;ti&#287;iniz yol',
 'avis_chemin_invalide_2' => 'ge&ccedil;ersiz g&ouml;z&uuml;k&uuml;yor. Verdi&#287;iniz bilgileri kontrol etmek i&ccedil;in l&uuml;tfen bir &ouml;nceki sayfaya d&ouml;n&uuml;n.',
-'avis_connexion_echec_1' => 'MySQL veri taban&#305;na ba&#287;lant&#305; ba&#351;ar&#305;s&#305;z.',
+'avis_connexion_echec_1' => 'SQL veri taban&#305;na ba&#287;lant&#305; ba&#351;ar&#305;s&#305;z.',
 'avis_connexion_echec_2' => 'Bir &ouml;nceki sayfaya geri d&ouml;n&uuml;p verdi&#287;iniz bilgileri kontrol edin.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Bir &ccedil;ok sunucuda, MySQL veritaban&#305; kullanabilmek i&ccedil;in aktive edilmesini <b>istemeniz</b> gerek. E&#287;er ba&#287;lanam&#305;yorsan&#305;z, bunu talep edip etmedi&#287;inizi kontrol edin.',
+'avis_connexion_echec_3' => '<b>Not:</b> Bir &ccedil;ok sunucuda, SQL veritaban&#305; kullanabilmek i&ccedil;in aktive edilmesini <b>talep etmeniz</b> gerekir. E&#287;er ba&#287;lanam&#305;yorsan&#305;z bunu talep edip etmedi&#287;inizi kontrol edin.',
 'avis_connexion_ldap_echec_1' => 'LDAP sunucusuna ba&#287;lant&#305; ba&#351;ar&#305;s&#305;z.',
 'avis_connexion_ldap_echec_2' => 'Bir &ouml;nceki sayfaya d&ouml;n&uuml;p verdi&#287;iniz bilgileri kontrol edin.',
 'avis_connexion_ldap_echec_3' => 'Buna alternatif olarak, kullan&#305;c&#305; ithal etmek i&ccedil;in LDAP sunucusunu kullanmay&#305;n.',
 'avis_conseil_selection_mot_cle' => '<b>&Ouml;nemli grup&nbsp;:</b> bu grupta anahtar s&ouml;zc&uuml;k se&ccedil;meniz &#351;iddetle &ouml;nerilir.',
 'avis_deplacement_rubrique' => 'Dikkat&nbsp;! Bu b&ouml;l&uuml;m @contient_breves@ k&#305;sa haber @scb@&nbsp; i&ccedil;eriyor: e&#287;er yerini de&#287;i&#351;tiriyorsan&#305;z (ta&#351;&#305;yorsan&#305;z) l&uuml;tfen bu onay kutucu&#287;unu i&#351;aretleyin.',
 'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan &ouml;nce kime yollamak istedi&#287;inizi belirmelisiniz.',
-'avis_erreur_connexion_mysql' => 'MySQL ba&#287;lant&#305;s&#305; hatas&#305;',
+'avis_erreur_connexion_mysql' => 'SQL ba&#287;lant&#305;s&#305; hatas&#305;',
 'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyas&#305; kulland&#305;&#287;&#305;n&#305;z
 SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla
  kar&#351;&#305;la&#351;abilirsiniz: veritaban&#305;n&#305;z&#305;n kayb&#305;,
@@ -44,8 +46,7 @@ Bu ithal istemini onaylamay&#305;n.
 'avis_sites_probleme_syndication' => 'Bu siteler payla&#351;&#305;m i&#351;leminde sorunla kar&#351;&#305;la&#351;t&#305;',
 'avis_sites_syndiques_probleme' => 'Haber payla&#351;&#305;ml&#305; &#351;u sitelerde sorun &ccedil;&#305;kt&#305;',
 'avis_suppression_base' => 'D&#304;KKAT, verileri silme i&#351;lemi geri al&#305;namaz',
-'avis_version_mysql' => 'Kulland&#305;&#287;&#305;n&#305;z MySQL s&uuml;r&uuml;m&uuml; veritaban&#305; tablolar&#305;n&#305;n otomatik onar&#305;m&#305;na izin vermiyor.',
-
+'avis_version_mysql' => 'Kulland&#305;&#287;&#305;n&#305;z (@version_mysql@) SQL s&uuml;r&uuml;m&uuml; veritaban&#305; tablolar&#305;n&#305;n otomatik onar&#305;m&#305;na izin vermiyor.',
 
 // B
 'bouton_acces_ldap' => 'LDAP\'a eri&#351;im ekle >>',
@@ -64,6 +65,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_desactive_tout' => 'Hepsinin etkinli&#287;ini durdur ',
 'bouton_desinstaller' => 'Sil',
 'bouton_effacer_index' => 'Endeksleri sil',
+'bouton_effacer_statistiques' => '&#304;statistikleri sil',
 'bouton_effacer_tout' => 'HEPS&#304;N&#304; sil',
 'bouton_envoi_message_02' => '&#304;LET&#304; YOLLA',
 'bouton_envoyer_message' => '&#304;letinin son hali : yolla',
@@ -107,13 +109,16 @@ sonradan yok edebilir).',
 'bouton_vider_cache' => '&Ouml;nbelle&#287;i bo&#351;alt',
 'bouton_voir_message' => 'Bu iletiyi onaylamadan &ouml;nce g&ouml;r&uuml;nt&uuml;le',
 
-
 // C
 'cache_mode_compresse' => '&Ouml;nbellek dosyalar&#305; s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; kipte saklan&#305;yor. ',
 'cache_mode_non_compresse' => '&Ouml;nbellek dosyalar&#305; s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; kipte saklan&#305;yor.',
 'cache_modifiable_webmestre' => 'Bu parametreler site y&ouml;neticisi taraf&#305;ndan de&#287;i&#351;tirilebilir.',
 'calendrier_synchro' => 'iCal uyumlu bir g&uuml;nl&uuml;k uygulama yaz&#305;l&#305;m&#305; kullan&#305;yorsan&#305;z onu bu sitedeki bilgilerle e&#351;zamanla&#351;t&#305;rabilirsiniz. ',
 'config_activer_champs' => '&#350;u alanlar&#305; aktive et',
+'config_choix_base_sup' => 'Bu sunucuda bir veri taban&#305; belirt',
+'config_erreur_base_sup' => 'SPIP eri&#351;ilebilir veri taban&#305;lar&#305; listesine eri&#351;emiyor',
+'config_info_base_sup' => 'SPIP &uuml;zerinden, SQL veya bir ba&#351;ka sunucu ile sorgulayaca&#287;&#305;n&#305;z ba&#351;ka veri tabanlar&#305; varsa, a&#351;a&#287;&#305;daki form bunlar&#305; tan&#305;mlaman&#305;z&#305; sa&#287;lar. Baz&#305; alanlar&#305; bo&#351; b&#305;rak&#305;rsan&#305;z ana veri taban&#305;na ba&#287;lanmak i&ccedil;in kullan&#305;lan ba&#287;lant&#305; tan&#305;mlay&#305;c&#305;lar&#305; kullan&#305;lacakt&#305;r.',
+'config_info_base_sup_disponibles' => '&#350;u anda sorgulanabilir ek veri tabanlar&#305;:',
 'config_info_logos' => 'Sitenin her eleman&#305; &laquo;&nbsp;&uuml;zerinden ge&ccedil;i&#351; logosu da dahil olmak &uuml;zere&nbsp;&raquo; bir logoya sahip olabilir ',
 'config_info_logos_utiliser' => 'Logolar&#305; kullan',
 'config_info_logos_utiliser_non' => 'Logolar&#305; kullanma',
@@ -121,9 +126,10 @@ sonradan yok edebilir).',
 'config_info_logos_utiliser_survol_non' => '&Uuml;zerinden ge&ccedil;i&#351; logolar&#305;n&#305; kullanma',
 'config_info_redirection' => 'Bu se&ccedil;ene&#287;i aktive ederek SPIP d&#305;&#351;&#305;nda veya ba&#351;ka sitelerde yay&#305;nlanm&#305;&#351; basit makale referanslar&#305; i&ccedil;eren sanal makaleler olu&#351;turabilirsiniz.',
 'config_redirection' => 'Sanal makaleler',
+'config_titre_base_sup' => 'Ek bir veri taban&#305;n&#305;n tan&#305;mlanmas&#305;',
+'config_titre_base_sup_choix' => 'Ek bir veri taban&#305; se&ccedil;iniz',
 'connexion_ldap' => 'Ba&#287;lant&#305; :',
 'copier_en_local' => 'Yerel olarak kopyala',
-
 
 // D
 'date_mot_heures' => 'saat ',
@@ -134,7 +140,6 @@ sonradan yok edebilir).',
 'diff_texte_deplace' => 'Yeri de&#287;i&#351;tirilmi&#351; metin ',
 'diff_texte_supprime' => 'Silinmi&#351; metin ',
 'double_clic_inserer_doc' => 'Bu k&#305;sayolu metne eklemek i&ccedil;in &ccedil;ift t&#305;klay&#305;n&#305;z',
-
 
 // E
 'email' => 'e-posta',
@@ -182,10 +187,8 @@ sonradan yok edebilir).',
 'erreur_plugin_tag_plugin_absent' => 'Tan&#305;mlama dosyas&#305;nda &lt;plugin&gt; eksik',
 'erreur_plugin_version_manquant' => 'Plugin\'in uyarlamas&#305; eksik',
 
-
 // F
 'forum_info_original' => 'orijinal',
-
 
 // I
 'ical_info1' => 'Bu sayfa bu sitenin ya&#351;am&#305; ile temas halinde kalmak i&ccedil;in bir ka&ccedil; y&ouml;ntem sunmaktad&#305;r. ',
@@ -228,6 +231,7 @@ sonradan yok edebilir).',
 'icone_publier_breve' => 'Bu k&#305;sa haberi yay&#305;nla',
 'icone_referencer_nouveau_site' => 'Yeni bir siteye at&#305;fta bulun',
 'icone_refuser_breve' => 'Bu haberi reddet',
+'icone_relancer_signataire' => '&#304;mzalayan&#305; tekrar ba&#351;lat',
 'icone_retour' => 'Geri d&ouml;n',
 'icone_retour_article' => 'Makaleye geri d&ouml;n',
 'icone_suivi_forum' => 'Kamu forumunun izlenmesi&nbsp;:@nb_forums@&nbsp;kat&#305;l&#305;m',
@@ -305,12 +309,17 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_classement_2' => '@liste@\'den     inci',
 'info_code_acces' => 'Kendi eri&#351;im &#351;ifrelerinizi unutmay&#305;n&#305;z&nbsp;!',
 'info_comment_lire_tableau' => 'Bu tabloyu nas&#305;l okumal&#305; ?',
+'info_compresseur_activer' => 'S&#305;k&#305;&#351;t&#305;rmay&#305; etkinle&#351;tiriniz',
+'info_compresseur_desactiver' => 'S&#305;k&#305;&#351;t&#305;rmay&#305; kapat&#305;n&#305;z',
+'info_compresseur_texte' => 'E&#287;er sunucunuz html sayfalar&#305; otomatik olarak s&#305;k&#305;&#351;t&#305;rm&#305;yorsa, y&uuml;klenen sayfa a&#287;&#305;rl&#305;klar&#305;n&#305; d&uuml;&#351;&uuml;rmek i&ccedil;in bu i&#351;lemi yapmaya zorlayabilirsiniz. <b>Dikkat</b> : bu i&#351;lem baz&#305; sunucular&#305; g&ouml;zle g&ouml;r&uuml;l&uuml;r &#351;ekilde yava&#351;latabilir.',
+'info_compresseur_titre' => 'Optimizasyon ve s&#305;k&#305;&#351;t&#305;rma',
 'info_config_suivi' => 'E&#287;er bu adres bir g&ouml;nderi listesi (mailing-list)\'ne kar&#351;&#305; d&uuml;&#351;&uuml;yorsa, a&#351;a&#287;&#305;ya site kat&#305;l&#305;mc&#305;lar&#305;n&#305;n hangi adrese kaydolabileceklerini yazabilirsiniz. Bu adres URL (&ouml;rne&#287;in listeye Web ile kaydolma sayfas&#305;), veya &ouml;zel bir konu i&ccedil;eren (&ouml;rne&#287;in: @adresse_suivi@?subject=subscribe) bir e-posta adresi olabilir:',
 'info_config_suivi_explication' => 'Bu sitenin g&ouml;nderi listesi (mailing-list)\'ne abone olabilirsiniz. O takdirde yay&#305;nlanmas&#305; &ouml;nerilen makale ve haber ilanlar&#305; e-posta yoluyla elinize ge&ccedil;ecektir. ',
 'info_confirmer_passe' => 'Yeni &#351;ifrenin teyid edilmesi :',
 'info_connexion_base' => 'Veritaban&#305;na ba&#287;lanma denemesi',
+'info_connexion_base_donnee' => 'Veri taban&#305;n&#305;za ba&#287;lant&#305;',
 'info_connexion_ldap_ok' => 'LDAP ba&#287;lant&#305;s&#305; ba&#351;ar&#305;l&#305;. Di&#287;er a&#351;amaya ge&ccedil;ebilirsiniz.',
-'info_connexion_mysql' => 'MySQL ba&#287;lant&#305;n&#305;z',
+'info_connexion_mysql' => 'SQL ba&#287;lant&#305;n&#305;z',
 'info_connexion_ok' => 'Ba&#287;lant&#305; ba&#351;ar&#305;l&#305;. ',
 'info_contact' => '&#304;leti&#351;im',
 'info_contenu_articles' => 'Makalelerin i&ccedil;eri&#287;i',
@@ -418,7 +427,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_message_en_redaction' => 'Yaz&#305;lmakta olan iletileriniz',
 'info_message_technique' => 'Teknik ileti :',
 'info_messagerie_interne' => '&#304;&ccedil; mesajla&#351;ma',
-'info_mise_a_niveau_base' => 'MySQL veritaban&#305;n&#305;z&#305;n seviye y&uuml;kseltmesi',
+'info_mise_a_niveau_base' => 'SQL veri taban&#305;n&#305;z&#305;n seviye y&uuml;kseltmesi',
 'info_mise_a_niveau_base_2' => '{{Dikkat!}}  bu sitede bulunan SPIP
             dosyalar&#305;n&#305;n {daha &ouml;nceki}
             s&uuml;r&uuml;m&uuml;n&uuml; y&uuml;klediniz:
@@ -517,6 +526,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_question_proposer_site' => 'Kim at&#305;fta bulunulan siteler &ouml;nerebilir ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin i&#351;leyi&#351;ini h&#305;zland&#305;r&#305;r)',
+'info_question_vignettes_referer' => '&#304;statistikleri inceledi&#287;inizde, ziyaretlerin yap&#305;ld&#305;&#287;&#305; kaynak sitelerden g&ouml;r&uuml;nt&uuml;ler g&ouml;rebilirsiniz',
+'info_question_vignettes_referer_non' => 'Ziyaretlerin yap&#305;ld&#305;&#287;&#305; kaynak sitelerden al&#305;nt&#305;lar&#305; g&ouml;sterme',
+'info_question_vignettes_referer_oui' => 'Ziyaretlerin yap&#305;ld&#305;&#287;&#305; kaynak sitelerden g&ouml;r&uuml;nt&uuml;ler g&ouml;ster',
 'info_qui_attribue_mot_cle' => 'Bu guruptaki anahtar s&ouml;zc&uuml;klerin kim taraf&#305;ndan verilebilece&#287;i :',
 'info_racine_site' => 'Sitenin k&ouml;k&uuml;',
 'info_recharger_page' => 'L&uuml;tfen bu sayfay&#305; az sonra tekrar y&uuml;kleyiniz.',
@@ -534,7 +546,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_reglage_ldap' => 'Se&ccedil;enekler : <b>LDAP ithalinin ayarlanmas&#305;.</b>',
 'info_renvoi_article' => '<b>Y&ouml;nlendirme.</b> Bu makalenin bizi &#351;u sayfaya y&ouml;nlendirir:',
 'info_reserve_admin' => 'Bu adresi sadece y&ouml;neticiler de&#287;i&#351;tirebilir.',
-'info_restauration_sauvegarde' => ' @archive@ yede&#287;inin geri y&uuml;klenmesi',
+'info_restauration_sauvegarde' => '@archive@ yede&#287;inin geri y&uuml;klenmesi',
+'info_restauration_sauvegarde_insert' => '@archive@ in veri taban&#305;na eklenmesi',
 'info_restreindre_rubrique' => 'Y&ouml;netimi bu b&ouml;l&uuml;mle s&#305;n&#305;rla:',
 'info_resultat_recherche' => 'Arama sonucu :',
 'info_rubriques' => 'B&ouml;l&uuml;mler',
@@ -560,6 +573,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_sauvegarde_reussi_02' => 'Veritaban&#305; ecrire/data/@archive@ de yedeklendi. Y&ouml;netime',
 'info_sauvegarde_reussi_03' => 'geri d&ouml;nebilirsiniz',
 'info_sauvegarde_reussi_04' => '.',
+'info_sauvegarde_rubrique_reussi' => '@titre@ ba&#351;l&#305;&#287;&#305;na ait tablolar @archive@ e kaydedildi. Bunlar&#305;',
 'info_sauvegarde_rubriques' => 'B&ouml;l&uuml;mleri yedekle',
 'info_sauvegarde_signatures' => 'Dilek&ccedil;e imzalar&#305;nn yedekle',
 'info_sauvegarde_sites_references' => 'At&#305;fta bulunan siteleri yedekle',
@@ -601,6 +615,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_syndication_integrale_1' => 'Siteniz payla&#351;&#305;m dosyalar&#305; &ouml;neriyor  (bkz &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Makaleleri olduklar&#305; gibi mi iletmek isterseniz yoksa bir ka&ccedil; y&uuml;z s&ouml;zc&uuml;kl&uuml;k &ouml;zetlerini mi ?',
 'info_table_prefix' => 'Ayn&#305; veritaban&#305;na bir &ccedil;ok site kuracaksan&#305;z veri tablolar&#305;n&#305;n ismindeki &ouml;n-eki de&#287;i&#351;tirebilirsiniz : yaln&#305;z aksans&#305;z k&uuml;&ccedil;&uuml;k harf kullanmal&#305;s&#305;n&#305;z.',
+'info_taille_maximale_images' => 'SPIP (milyon piksel cinsinden)i&#351;leyebilece&#287;i en b&uuml;y&uuml;k resim boyunu deneyecek.<br /> Bundan daha b&uuml;y&uuml;k resimler i&#351;lenmeyecek.',
 'info_taille_maximale_vignette' => 'Sistem taraf&#305;ndan &uuml;retilen en b&uuml;y&uuml;k ikon boyutu&nbsp;:',
 'info_terminer_installation' => 'Art&#305;k standart kurulum i&#351;lemini bitirebilirsiniz.',
 'info_texte' => 'Metin',
@@ -641,15 +656,26 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_visiteurs' => 'Ziyaret&ccedil;iler',
 'info_visiteurs_02' => 'Kamu sitesi ziyaret&ccedil;ileri ',
 'install_adresse_base_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; veritaban&#305;n&#305;n adresi',
+'install_base_ok' => '@base@ veri taban&#305; tan&#305;nd&#305;',
 'install_echec_annonce' => 'Kurulum b&uuml;y&uuml;k olas&#305;l&#305;kla ba&#351;ar&#305;s&#305;z olacak veya site &ccedil;al&#305;&#351;mayacak...',
 'install_extension_mbstring' => 'SPIP belirtilen programla &ccedil;al&#305;&#351;amaz&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP i&ccedil;in php uzant&#305;s&#305; zorunludur&nbsp;:',
 'install_login_base_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; kullan&#305;c&#305; ismi',
 'install_nom_base_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; veritaban&#305;n&#305;n ismi&nbsp;:',
+'install_pas_table' => '&#350;u anda tablo i&ccedil;ermeyen veri taban&#305;',
 'install_pass_base_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; ba&#287;lant&#305; &#351;ifresi',
 'install_php_version' => '@version@ PHP s&uuml;r&uuml;m&uuml; yetersiz (minimum = @minimum@)',
 'install_select_langue' => 'Bir dil se&ccedil;iniz, sonra &laquo;&nbsp;bir sonraki&nbsp;&raquo; d&uuml;&#287;mesini t&#305;klay&#305;p y&uuml;kleme i&#351;lemini ba&#351;lat&#305;n&#305;z.',
+'install_select_type_db' => 'Veri taban&#305;n&#305;n tipini belirtiniz&nbsp;:',
+'install_select_type_mysql' => 'MySQL',
+'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_sqlite2' => 'SQLite 2',
+'install_select_type_sqlite3' => 'SQLite 3',
+'install_serveur_hebergeur' => 'Servis sa&#287;lay&#305;c&#305; taraf&#305;ndan sa&#287;lanan veri taban&#305; sunucusu',
 'install_table_prefix_hebergeur' => 'Bar&#305;nd&#305;rma firmas&#305; taraf&#305;ndan atanm&#305;&#351; tablo &ouml;n eki',
+'install_tables_base' => 'Veri taban&#305; tablolar&#305;',
+'install_types_db_connus' => 'SPIP <b>MySQL</b> (en yayg&#305;n), <b>PostgreSQL</b> ve <b>SQLite</b> kullanmay&#305; bilir.',
+'install_types_db_connus_avertissement' => 'Dikkat&nbsp;: bir &ccedil;ok eklenti sadece MySQL ile &ccedil;al&#305;&#351;&#305;r',
 'intem_redacteur' => 'Yazar',
 'item_accepter_inscriptions' => 'Kay&#305;tlar&#305; kabul et',
 'item_activer_forum_administrateur' => 'Y&ouml;neticiler forumunun etkinle&#351;tirilmesi',
@@ -710,13 +736,10 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_utiliser_syndication' => 'Otomatik payla&#351;&#305;m&#305; kullan',
 'item_visiteur' => 'Ziyaret&ccedil;i ',
 
-
 // J
 'jour_non_connu_nc' => 'Bilinmeyen ',
 
-
 // L
-'les_deux' => 'her ikisi de',
 'lien_ajout_destinataire' => 'Bu al&#305;c&#305;y&#305; ekle',
 'lien_ajouter_auteur' => 'Bu yazar&#305;n ekle',
 'lien_ajouter_participant' => 'Bir kat&#305;l&#305;mc&#305;y&#305; ekle',
@@ -750,7 +773,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'logo_standard_rubrique' => 'STANDART B&Ouml;L&Uuml;M LOGOSU',
 'logo_survol' => '&Uuml;ZER&#304;NDEN GE&Ccedil;ME LOGOSU',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Veritaban&#305;n&#305;z&#305;n se&ccedil;imi',
 'module_fichier_langue' => 'Dil dosyas&#305; ',
@@ -760,8 +782,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'module_texte_traduction' => '&laquo;&nbsp;@module@&nbsp;&raquo; dil dosyas&#305;n&#305;n bulundu&#287;u yer&nbsp;:',
 'mois_non_connu' => 'Bilinmiyor ',
 
-
 // O
+'onglet_declarer_une_autre_base' => 'Ba&#351;ka bir veri taban&#305; bildirin',
 'onglet_repartition_actuelle' => '&#350;u anda  ',
 'ortho_ajouter_ce_mot' => 'Bu s&ouml;zc&uuml;&#287;&uuml; s&ouml;zl&uuml;&#287;e ekle',
 'ortho_aucune_suggestion' => 'Bu s&ouml;zc&uuml;k i&ccedil;in hi&ccedil; &ouml;neri bulunamad&#305;.',
@@ -777,26 +799,62 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'ortho_verif_impossible' => 'Sistem, bu metnin iml&acirc;s&#305;n&#305; denetleyemiyor. ',
 'ortho_verifier' => 'Yaz&#305;m&#305; kontrol et',
 
-
 // P
+'page_pas_proxy' => 'Bu sayfa velilden (proxy) ge&ccedil;memeli',
 'pas_de_proxy_pour' => 'Gerekirse, bu vekilin uygulanmayaca&#287;&#305;  makineleri veya alanlar&#305; belirtiniz (&ouml;rne&#287;in&nbsp;: @ornek@)',
+'plugin_charge_paquet' => '@name@ paketinin y&uuml;klenmesi',
+'plugin_erreur_charger' => 'hata&nbsp;: @zip@ y&uuml;klenmesi olanaks&#305;z',
+'plugin_erreur_droit1' => '<code>@dest@</code> dizini yazmak i&ccedil;in izinli de&#287;il.',
+'plugin_erreur_droit2' => 'Bu dizindeki haklar&#305; kontrol ediniz (ve hata durumunda olu&#351;turunuz) veya dosyalar&#305; FTP ile kurunuz.',
+'plugin_erreur_zip' => 'pclzip hatas&#305;&nbsp;: hata @status@',
 'plugin_etat_developpement' => 'geli&#351;tirme a&#351;amas&#305;nda',
 'plugin_etat_experimental' => 'deneysel',
 'plugin_etat_stable' => 'durgun ("stable")',
 'plugin_etat_test' => 'test a&#351;amas&#305;nda',
 'plugin_impossible_activer' => '@plugin@ plugin\'ini aktive etmek olanaks&#305;z',
+'plugin_info_automatique1' => 'Eklentilerin otomatik y&uuml;klenmesini istiyorsan&#305;z, l&uuml;tfen&nbsp;:',
+'plugin_info_automatique2' => '<code>@rep@</code> isimli bir dizin olu&#351;turun&nbsp;;',
+'plugin_info_automatique3' => 'sunucunun bu dizine yazma hakk&#305; oldu&#287;unu kontrol ediniz',
+'plugin_info_automatique_creer' => 'sitenin k&ouml;k dizinini olu&#351;turma',
+'plugin_info_automatique_exemples' => '&ouml;rnekler&nbsp;:',
+'plugin_info_automatique_ftp' => 'Eklentileri FTP ile <tt>@rep@</tt> dizinine y&uuml;kleyebilirsiniz',
+'plugin_info_automatique_lib' => 'Baz&#305; eklentiler  demandent aussi &agrave; pouvoir <code>lib/</code> dizinine dosya indirme iznini de gerektirirler, aksi halde bu dizini sitenin k&ouml;k dizininde olu&#351;tururlar.',
+'plugin_info_automatique_liste' => 'Eklenti listeleriniz&nbsp;:',
+'plugin_info_automatique_liste_officielle' => 'resm&icirc; eklentiler',
+'plugin_info_automatique_liste_update' => 'Listeleri g&uuml;ncelle',
+'plugin_info_automatique_ou' => 'veya...',
+'plugin_info_automatique_select' => 'A&#351;a&#287;&#305;dan bir eklenti se&ccedil;iniz&nbsp;: SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracakt&#305;r&nbsp;; e&#287;er bu eklenti zaten kurulu ise g&uuml;ncellenecektir.',
+'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine y&uuml;klemeye',
+'plugin_librairies_installees' => 'Kurulu k&uuml;t&uuml;phaneler',
+'plugin_necessite_lib' => 'Bu eklenti @lib@ k&uuml;t&uuml;phanesini gerektirir',
 'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ s&uuml;r&uuml;m&uuml;n&uuml; gerektirir.',
 'plugin_necessite_spip' => 'SPIP\'in en az @version@ s&uuml;r&uuml;m&uuml;n&uuml; gerektirir.',
+'plugin_source' => 'kaynak:&nbsp;',
+'plugin_titre_automatique' => 'Otomatik kurulum',
+'plugin_titre_automatique_ajouter' => 'Eklenti ekleyiniz',
+'plugin_zip_active' => 'Aktive etmek i&ccedil;in devam ediniz',
+'plugin_zip_adresse' => 'a&#351;a&#287;&#305;da indirilecek eklentiye ait zip dosyas&#305;n&#305;n adresini veya bir &ccedil;ok eklentinin adres listesini belirtiniz.',
+'plugin_zip_adresse_champ' => 'Eklentinin veya listenin adresi&nbsp;',
+'plugin_zip_content' => '&#350;u dosyalar&#305; i&ccedil;erir (@taille@). <br />Bu y&uuml;klenebilir dosyalar &#351;u dizinde bulunuyor :<code>@rep@</code>',
+'plugin_zip_installe_finie' => '@zip@ dosyas&#305; a&ccedil;&#305;ld&#305; ve y&uuml;klendi.',
+'plugin_zip_installe_rep_finie' => '@zip@ dosyas&#305; a&ccedil;&#305;ld&#305; ve @rep@ dizinine y&uuml;klendi.',
+'plugin_zip_installer' => '&#350;imdi y&uuml;kleyebilirsiniz.',
+'plugin_zip_telecharge' => '@zip@ dosyas&#305; bilgisayara indirildi',
+'plugins_actifs' => '@count@ eklenti etkinle&#351;tirildi.',
+'plugins_compte' => '@count@ eklenti',
+'plugins_disponibles' => '@count@ eklenti kullan&#305;labilir durumda.',
+'plugins_erreur' => 'Eklentilerde hata var : @plugins@',
 'plugins_liste' => 'Plugin listesi',
+'plugins_vue_hierarchie' => 'Hiyerar&#351;i',
+'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Protokol s&uuml;r&uuml;m&uuml; :',
-
 
 // R
 'repertoire_plugins' => 'Dizin&nbsp;:',
 
-
 // S
 'sauvegarde_fusionner' => 'Mevcut veritaban&#305; ile yede&#287;i birle&#351;tir',
+'sauvegarde_fusionner_depublier' => 'Birle&#351;tirilmi&#351; nesneleri yay&#305;nlama',
 'sauvegarde_url_origine' => 'Kaynak sitenin URL\'si :',
 'statut_admin_restreint' => '(s&#305;n&#305;rl&#305; y&ouml;netici)',
 'syndic_choix_moderation' => 'Bu siteden ileride gelecek ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
@@ -808,7 +866,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'syndic_option_resume_non' => 'makalelerin t&uuml;m i&ccedil;eri&#287;i (HTML format&#305;nda)',
 'syndic_option_resume_oui' => 'k&#305;sa bir &ouml;zet (metin format&#305;nda)',
 'syndic_options' => 'Payla&#351;&#305;m se&ccedil;enekleri&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'SPIP taraf&#305;ndan otomatik olarak hesaplanan resimler (dok&uuml;man ikonlar&#305;, grafik olarak g&ouml;sterilen ba&#351;l&#305;klar, TeX bi&ccedil;imindeki matematik i&#351;levler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
@@ -824,10 +881,12 @@ yaratabilir. Bu da otomatik olarak bir galeri
   Bu komuttan sonra, yeni bir veritaban&#305; ve bir y&ouml;netici 
   eri&#351;imi yaratmak &uuml;zere SPIP\'i 
   yeniden y&uuml;klemelisiniz. ',
+'texte_admin_effacer_stats' => 'Bu komut, site ziyareti istatistiklerine ba&#287;l&#305; t&uuml;m bilgileri siler (makalelerin pop&uuml;lerlikleri de dahil).',
 'texte_admin_tech_01' => 'Bu se&ccedil;enek, veritaban&#305;n&#305;n i&ccedil;eri&#287;ini, @dossier@ dizininde depolanacak bir dosyaya yedeklemenizi sa&#287;lar. Makale ve b&ouml;l&uuml;mlerde kullan&#305;lan resim ve dok&uuml;manlar&#305; i&ccedil;eren @img@ dizininin tamam&#305;n&#305; almay&#305; da unutmay&#305;n&#305;z. ',
 'texte_admin_tech_02' => 'Dikkat : bu yedekleme ANCAK, SPIP\'in ayn&#305; uyarlamas&#305;yla kurulabilecek bir sitede eski haline getirilebilir. Dolay&#305;s&#305;yla, sak&#305;n yedekleneni g&uuml;ncelleme i&#351;leminden sonra yeniden kurmay&#305; umarak  &laquo;&nbsp;veritaban&#305;n&#305;n bo&#351;alt&#305;lmas&#305;&nbsp;&raquo; i&#351;lemini yapmay&#305;n&#305;z...  SPIP dok&uuml;manlar&#305;na ba&#351;vurunuz.',
 'texte_admin_tech_03' => 'Sizin sunucunuza ya da bir yedekleme sunucusuna transferini h&#305;zland&#305;rmak,
     ve disk alan&#305;n&#305; bo&#351;a harcamamak i&ccedil;in, isterseniz dosyay&#305; s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; bi&ccedil;imde saklamay&#305; se&ccedil;ebilirsiniz. ',
+'texte_admin_tech_04' => 'Bir ba&#351;ka veri taban&#305; ile birle&#351;tirme amac&#305;yla yedeklemeyi &#351;u ba&#351;l&#305;kla s&#305;n&#305;rland&#305;rabilirsiniz: ',
 'texte_adresse_annuaire_1' => '(E&#287;er dizininiz bu Web sitesi ile ayn&#305; makinaya y&uuml;klenmi&#351; ise, muhtemelen bir yerel hizmet bilgisayar&#305; &laquo;localhost&raquo; s&ouml;zkonusudur.)',
 'texte_ajout_auteur' => 'Makaleye &#351;u yazar eklendi :',
 'texte_annuaire_ldap_1' => 'E&#287;er bir (LDAP) dizinine eri&#351;iminiz varsa, onu SPIP\'e otomatik olarak kullan&#305;c&#305; ithal etmek i&ccedil;in  kullanabilirsiniz. ',
@@ -842,7 +901,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
     &ouml;zl&uuml; bilgileri s&uuml;ratle &ccedil;evrimi&ccedil;i iletmeye,
     bir bas&#305;n &ouml;zeti, bir olaylar takvimi  yaratmaya yarar...',
 'texte_choix_base_1' => 'Veritaban&#305;n&#305;z&#305; se&ccedil;iniz :',
-'texte_choix_base_2' => 'MySQL sunucusu bir &ccedil;ok veritaban&#305; i&ccedil;erir.',
+'texte_choix_base_2' => 'SQL sunucusu bir &ccedil;ok veritaban&#305; i&ccedil;eriyor.',
 'texte_choix_base_3' => 'A&#351;a&#287;&#305;da servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size ayr&#305;lm&#305;&#351; olan&#305; <b>se&ccedil;iniz</b>.',
 'texte_choix_table_prefix' => 'Tablo &ouml;n-ekleri&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru taraf&#305;ndan
@@ -859,7 +918,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_config_groupe_mots_cles' => '&Ouml;rne&#287;in, grup ba&#351;&#305;na tek s&ouml;zc&uuml;k se&ccedil;me olana&#287;&#305; bulundu&#287;unu,
            bir grubun &ouml;nemli oldu&#287;unu ... belirtmek gibi,
            anahtar s&ouml;zc&uuml;klerin geli&#351;mi&#351; konfig&uuml;rasyonunu &ccedil;al&#305;&#351;t&#305;rmak ister misiniz ? ',
-'texte_connexion_mysql' => 'Servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size verilen bilgilere bak&#305;n&#305;z : orada servis sa&#287;lay&#305;c&#305;n&#305;z&#305;n MySQL\'i destekleyip desteklemedi&#287;ini ve MySQL sunucusuna ba&#287;lanma &#351;ifrelerini bulacaks&#305;n&#305;z. ',
+'texte_connexion_mysql' => 'Servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size verilen bilgilere bak&#305;n&#305;z&nbsp;: orada size &ouml;nerilen veri taban&#305; sunucusunu ve bu sunucuya ba&#287;lanmak i&ccedil;in gereken bilgileri bulacaks&#305;n&#305;z. ',
 'texte_contenu_article' => '(Birka&ccedil; s&ouml;zc&uuml;kte makalenin i&ccedil;eri&#287;i) ',
 'texte_contenu_articles' => 'Siteniz i&ccedil;in benimsenen yerle&#351;im plan&#305; uyar&#305;nca,
               makalelerin baz&#305; elemanlar&#305;n&#305;n kullan&#305;lmamas&#305;na karar verebilirsiniz.
@@ -880,6 +939,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_documents_joints_2' => 'Bu ayar, makalelere do&#287;rudan resim girilmesine engel de&#287;ildir.',
 'texte_effacer_base' => 'SPIP veritaban&#305;n&#305; sil',
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
+'texte_effacer_statistiques' => '&#304;statistikleri sil',
 'texte_en_cours_validation' => 'A&#351;a&#287;&#305;daki makale ve k&#305;sa haberler yay&#305;n i&ccedil;in &ouml;nerilmi&#351;tir. Bunlara ba&#287;l&#305; olan forumlar arac&#305;l&#305;&#287;&#305;yla fikrinizi belirtmekten &ccedil;ekinmeyiniz. ',
 'texte_enrichir_mise_a_jour' => 'Metninizin sayfa d&uuml;zenini &laquo;&nbsp;tipografi k&#305;saltmalar&#305;&nbsp;&raquo; kullanarak zenginle&#351;tirebilirsiniz.',
 'texte_fichier_authent' => 'SPIP, .htpasswd et .htpasswd-admin &ouml;zel dosyalar&#305;n&#305;  @dossier@ dizininde yaratmal&#305; m&#305;?  Bu dosyalar sizin, sitenizin ba&#351;ka yerlerine sadece yazar ve y&ouml;neticilerin eri&#351;mesini s&#305;n&#305;rlaman&#305;z&#305; sa&#287;layabilir (&ouml;rne&#287;in, d&#305;&#351;sal istatistik program&#305;). Bunun bir yarar&#305; olmad&#305;&#287;&#305;n&#305; d&uuml;&#351;&uuml;n&uuml;yorsan&#305;z bu se&ccedil;ene&#287;i varsay&#305;lan de&#287;erinde b&#305;rakabilirsiniz (dosya yaratma i&#351;lemi yap&#305;lmaz).',
@@ -926,8 +986,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_recuperer_base' => 'Veritaban&#305;n&#305; tamir et',
 'texte_reference_mais_redirige' => 'SPIP sitenizde at&#305;fta bulunulan ve ba&#351;ka bir URL\'ye y&ouml;nlendirilmi&#351; makale.',
 'texte_referencement_automatique' => '<b>Otomatik site referans&#305;</b><br /> A&#351;a&#287;&#305;ya URL adresini ya da payla&#351;&#305;m dosyas&#305;n&#305;n adresini belirterek bir Web sitesine h&#305;zla at&#305;fta bulunabilirsiniz. SPIP otomatik olarak bu siteyle ilgili bilgileri toplayacakt&#305;r (ba&#351;l&#305;k, tan&#305;mlama...).',
-'texte_requetes_echouent' => '<b>Baz&#305; MySQL talepleri sistematik olarak ve g&ouml;r&uuml;n&uuml;rde bir neden olmaks&#305;z&#305;n ba&#351;ar&#305;s&#305;z oluyorsa bunun nedeni veritaban&#305;n&#305;n kendisi olabilir.</b> <p />
-MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i vard&#305;r. Burada bu tamiri deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ediyorsa servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.',
+'texte_requetes_echouent' => '<b>Baz&#305; SQL talepleri sistematik olarak ve g&ouml;r&uuml;n&uuml;rde bir neden olmaks&#305;z&#305;n ba&#351;ar&#305;s&#305;z oluyorsa bunun nedeni veri taban&#305;n&#305;n kendisi olabilir.</b> <p />
+SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i vard&#305;r. Burada bu onar&#305;m&#305; deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ederse servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.',
 'texte_restaurer_base' => 'Veritaban&#305; yede&#287;ini geri y&uuml;kle',
 'texte_restaurer_sauvegarde' => 'Bu se&ccedil;enek, daha &ouml;nce yap&#305;lan bir veritaban&#305; yede&#287;inin geri y&uuml;klenmesini sa&#287;lar. Bunun i&ccedil;in, yedeklemeyi i&ccedil;eren dosyan&#305;n @dossier@ dizinine yerle&#351;tirilmi&#351; olmas&#305; gerekir. Bu i&#351;levi kullan&#305;rken dikkatli olunuz : <b>de&#287;i&#351;iklikler, olas&#305; kay&#305;plar, geri getirilemez.</b>',
 'texte_sauvegarde' => 'Veritaban&#305;n&#305;n i&ccedil;eri&#287;ini yedekle',
@@ -1022,6 +1082,8 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'titre_page_sites_tous' => 'At&#305;fta bulunulan siteler ',
 'titre_page_statistiques' => 'B&ouml;l&uuml;mlere g&ouml;re istatistikler ',
 'titre_page_statistiques_referers' => '&#304;statistikler (giri&#351; ba&#287;lar&#305;)',
+'titre_page_statistiques_signatures_jour' => 'G&uuml;nl&uuml;k imza say&#305;s&#305;',
+'titre_page_statistiques_signatures_mois' => 'Ayl&#305;k imza say&#305;s&#305;',
 'titre_page_statistiques_visites' => 'Ziyaret istatistikleri',
 'titre_page_upgrade' => 'SPIP seviyesinin y&uuml;kseltilmesi ',
 'titre_publication_articles_post_dates' => '&#304;leri tarihli makalelerin yay&#305;nlanmas&#305; ',
@@ -1045,8 +1107,13 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'trad_lier' => 'Bu makale &#351;u nolu makalenin &ccedil;evirisidir&nbsp;:',
 'trad_new' => 'Bu makalenin yeni bir &ccedil;evirisini yaz',
 
-
 // U
+'upload_fichier_zip' => 'ZIP dosya',
+'upload_fichier_zip_texte' => 'Kurmay&#305; &ouml;nerdi&#287;iniz dosya bir Zip dosya.',
+'upload_fichier_zip_texte2' => 'Bu dosyan&#305;n &#351;u sorunu olabilir&nbsp;:',
+'upload_zip_decompacter' => 'A&ccedil;&#305;ld&#305; ve i&ccedil;erdi&#287;i t&uuml;m elemanlar siteye kuruldu. Siteye kurulacak dosyalar &#351;unlar&nbsp;:',
+'upload_zip_telquel' => 'S&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; ZIP ar&#351;ivi olarak, oldu&#287;u gibi kurulmu&#351;&nbsp;;',
+'upload_zip_titrer' => '<MODIF>Son iki durumda, SPIP\'in her elemana dosya ismine g&ouml;re isim vermesi i&ccedil;in bu kutuyu i&#351;aretleyin.',
 'utf8_convert_attendez' => 'Bir s&uuml;re bekleyip sayfay&#305; yeniden y&uuml;kleyiniz.',
 'utf8_convert_avertissement' => 'Veritaban&#305;n&#305;z&#305;n i&ccedil;eri&#287;ini (makaleler, k&#305;sa haberler vs.) <b>@orig@</b> karakter setinden <b>@charset@</b> karakter setine d&ouml;n&uuml;&#351;t&uuml;rmektesiniz .',
 'utf8_convert_backup' => '&Ouml;nceden sitenizin tam bir yede&#287;ini almay&#305; unutmay&#305;n&#305;z. Ayr&#305;ca iskeletlerinizin ve dil dosyalar&#305;n&#305;z&#305;n @charset@ karakter setiyle uyumlu olup olmad&#305;&#287;&#305;n&#305; do&#287;rulamal&#305;s&#305;n&#305;z. ',
@@ -1057,12 +1124,10 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'utf8_convert_verifier' => '&#350;imdi &ouml;nbelle&#287;i bo&#351;altmal&#305; ve sitenin kamusal sayfalar&#305;nda her&#351;eyin yolunda oldu&#287;unu do&#287;rulamal&#305;s&#305;n&#305;z. B&uuml;y&uuml;k bir soun varsa, @rep@ dizininde verilerinizin bir yede&#287;i (SQL format&#305;nda) al&#305;nm&#305;&#351;t&#305;r.',
 'utf8_convertir_votre_site' => 'Sitenizi utf-8\'e d&ouml;n&uuml;&#351;t&uuml;rmek',
 
-
 // V
 'version' => 'S&uuml;r&uuml;m&nbsp;:',
+'version_deplace_rubrique' => '<b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> den <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b> ye ta&#351;&#305;nm&#305;&#351;.',
 'version_initiale' => '&#304;lk s&uuml;r&uuml;m'
-
 );
-
 
 ?>

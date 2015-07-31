@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'aide_non_disponible' => 'Akpaxw&eacute; &eacute;l&#596; s&iacute;n &agrave;l&#596;g&#596; k&oacute; s&#596;gb&egrave; &#598;&ograve; &agrave;t&#603; &#596; j&iacute; &#598;&ograve; gb&egrave; &eacute; l&#596; m&#603; a ',
@@ -12,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Gb&egrave;t&agrave; &#598;&eacute;b&uacute; t&iacute;&igrave;n a',
 'avis_chemin_invalide_1' => 'Al&igrave; &eacute; mi s&#596; &#596; ',
 'avis_chemin_invalide_2' => 'E pk&eacute;z&iacute;n a. mi l&#603;k&#596; y&igrave; w&ecirc;m&agrave; &#598;&ecirc; w&aacute;y&iacute; j&iacute; b&oacute; v&#596; kp&#596;n x&oacute;gb&egrave; l&#603; .',
-'avis_connexion_echec_1' => 'Mi s&iacute;w&uacute; c&aacute;l&#596; d&oacute; M&#596;xw&igrave;t&iacute;xw&igrave;t&iacute;t&agrave;t&#596; MySql t&#596;n a.',
+'avis_connexion_echec_1' => '<MODIF>Mi s&iacute;w&uacute; c&aacute;l&#596; d&oacute; M&#596;xw&igrave;t&iacute;xw&igrave;t&iacute;t&agrave;t&#596; MySql t&#596;n a.',
 'avis_connexion_echec_2' => 'Mi l&#603;k&#596; y&igrave; w&ecirc;m&agrave; &#598;&ecirc; w&aacute;y&iacute; j&iacute;, b&oacute; v&#596; kp&#596;n x&oacute;gb&egrave; mi n&aacute; l&#603; .',
-'avis_connexion_echec_3' => 'Do at&#603; gege ji &#596;, mi do na by&#596; cavi mi t&#596;n &eacute; mi na by&#596; mysql m&#603; &#596;, co e na waz&#596;. Nu mi sin wu t&#603; dowu &#596;, mi kp&#596; &#598;&#596; mi&#598;&egrave; af&#596; e n&#603; a ji.',
+'avis_connexion_echec_3' => '<MODIF>Do at&#603; gege ji &#596;, mi do na by&#596; cavi mi t&#596;n &eacute; mi na by&#596; mysql m&#603; &#596;, co e na waz&#596;. Nu mi sin wu t&#603; dowu &#596;, mi kp&#596; &#598;&#596; mi&#598;&egrave; af&#596; e n&#603; a ji.',
 'avis_connexion_ldap_echec_1' => 'Cacado&#769; do LDAP &#596; gbl&eacute;',
 'avis_connexion_ldap_echec_2' => 'Mi bo l&#603; k&#596;  yi wekpa gudo t&#596;&#770;n ji bo kp&#596;n &#598;&#596; xogb&egrave; mi t&#596;n mi s&#603;do l&#603; ',
 'avis_connexion_ldap_echec_3' => 'Mi ma zan LDAP bo do yl&#596; zizant&#596; l&#603; do z&#603;nz&#603;n o',
@@ -37,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'gblogbloji y&eacute;  ma &eacute; l&#596; l&#603;&#770; y&eacute; kl&#603;n af&#596; &#598;&eacute; l&#603;&#770;',
 'avis_suppression_base' => 'vl&#603; ! nu mi sunsun gb&egrave;tak&#603;n l&#603;&#770; &#596; &eacute; v&#596; bi s&eacute;s&eacute;',
 'avis_version_mysql' => 'Mysql mit&#596;n &#598;&eacute;vo ( @ &#598;&eacute;vo_mysql@) siwu blo ak&#596;nta gb&egrave;tak&#603;n l&#603;&#770; t&#596;n a ',
-
 
 // B
 'bouton_acces_ldap' => 'Mi z&eacute; g&#596;na LDAP',
@@ -94,13 +95,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'b&#603; sim&#603;',
 'bouton_voir_message' => 'mi xa w&#603;n &eacute; l&#596; co bo s&#596;  k&#603;n na',
 
-
 // C
 'cache_mode_compresse' => 'Wli gb&egrave;ta&#772; jando gudo l&#603;&#770;  h&#603;n',
 'cache_mode_non_compresse' => 'Wli gb&egrave;ta&#772; jando gudo l&#603;&#770;  h&#603;n',
 'cache_modifiable_webmestre' => 'm&#603; l&ograve; m&#596;&#596;j&iacute; &#596; h&#603;n &#596; &eacute; n&aacute; v&#596; &#598;i&#598;&egrave;m&#603; bl&oacute;',
 'calendrier_synchro' => 'N&uacute; j&oacute; n&aacute; z&aacute;n gb&egrave;ta, mi siw&uacute; x&ograve; b&iacute; kpl&eacute; ',
-
 
 // D
 'date_mot_heures' => 'ganm&#603; l&#603;',
@@ -110,7 +109,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'ze&#780; w&eacute; g&#596; n&aacute;',
 'diff_texte_deplace' => 's&#603; we&#780; s&iacute;n',
 'diff_texte_supprime' => 's&uacute;ns&uacute;n we&#780; s&iacute;n',
-
 
 // E
 'email' => 'e-mailu',
@@ -151,7 +149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_obligatoire' => 'x&oacute;t&aacute; dandan',
 'entree_url' => 'g&eacute;si gblogboji ton',
 
-
 // I
 'ical_info1' => 'n&uacute; mi n&aacute; &#598;&oacute; &agrave;c&eacute;j&iacute; kp&oacute;&#598;&oacute; gblogbloj&iacute; &eacute; l&#596; mi kp&#596;n w&agrave;l&#596; t&ograve;b&uacute;t&ograve;b&uacute; &eacute; l&ograve; we&#780;kp&aacute; j&iacute; &#596; .',
 'ical_info2' => 'N&uacute; mi l&#603; l&ograve; x&oacute;gb&egrave; xw&iacute;t&iacute;xw&iacute;t&iacute; b&agrave; w&#603; &#596; mi s&iacute;k&uacute; y&iacute; s&ugrave;p&iacute;p&uacute; s&iacute;n x&oacute;x&ograve;kpl&eacute;m&#603;.',
@@ -173,6 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Mi &#598;&egrave; &agrave;g&ugrave;n we&#780;kwin y&#596;y&#596; d&eacute;v&oacute; t&#596;n ',
 'icone_creation_mots_cles' => 'Mi &#598;&egrave; gb&egrave;tak&#603;n y&#596;y&#596; d&eacute;v&oacute; t&#596;n ',
 'icone_creer_auteur' => 'Mi &#598;&egrave; gb&egrave;tak&#603;n y&#596;y&#596; d&eacute;v&oacute; t&#596;n ',
+'icone_creer_mot_cle' => 'Mi z&eacute; ny&#596;wl&aacute;nt&#596; y&#596;y&#596; d&eacute;v&oacute; t&#596;n b&oacute; c&aacute;&#598;&oacute; we&#780;kp&aacute;',
 'icone_creer_rubrique_2' => 'Mi &#598;&egrave; &agrave;kp&aacute;xw&eacute; d&eacute;v&oacute; t&#596;n',
 'icone_ecrire_nouvel_article' => 'x&oacute; kl&eacute;w&uacute;n &#598;&eacute; l&ograve; &agrave;kp&aacute;xw&eacute; &eacute; l&#596; m&#603; &#596;',
 'icone_envoyer_message' => 's&#603; wh&#603;n &#598;&oacute;',
@@ -359,7 +357,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'y&egrave; kp&ograve; &#598;&ograve; w&#603;n wl&agrave;n w&#603;',
 'info_message_technique' => 'w&#603;n xw&iacute;txw&iacute;t&iacute; :',
 'info_messagerie_interne' => 'Winwl&aacute;nt&#603;nm&#603;',
-'info_mise_a_niveau_base' => 'Mi l&#603; v&#596; bl&oacute; MySQL',
+'info_mise_a_niveau_base' => 'Mi l&#603; v&#596; bl&oacute; SQL',
 'info_mise_a_niveau_base_2' => 'Mi l&#603; v&#596; bl&oacute;',
 'info_mode_fonctionnement_defaut_forum_public' => '&agrave;z&#596; yiyi w&#603;',
 'info_modifier_breve' => '&#598;y&#596; x&oacute; kl&eacute;w&uacute;n &#596;:',
@@ -453,7 +451,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_reglage_ldap' => 'w&agrave;l&#596;  : jl&#596;jl&#596; t&#603;nme',
 'info_renvoi_article' => 'w&agrave;l&#596;.W&eacute;kp&aacute; s&#603; y&iacute; e&#770;:',
 'info_reserve_admin' => 'T&igrave;t&ograve;t&#596; l&#603; k&#603;&#598;&#603; j&#603;n s&iacute;n &#598;y&#596; n&#596;t&#603;n &#596;.',
-'info_restauration_sauvegarde' => 'Mi l&#603; v&#596; wl&iacute;h&#603;n bl&oacute; @archive@',
+'info_restauration_sauvegarde' => '<MODIF>Mi l&#603; v&#596; wl&iacute;h&#603;n bl&oacute; @archive@',
 'info_restreindre_rubrique' => 'Mi &#598;&egrave; t&igrave;t&ograve; &agrave;kp&aacute;xw&eacute; &#596; t&#596;n kp&ograve; :',
 'info_resultat_recherche' => 'X&oacute;gb&egrave; y&egrave; m&#596; l&#603; :',
 'info_rubriques' => '&agrave;kp&aacute;xw&eacute;',
@@ -612,10 +610,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_utiliser_syndication' => 'mi z&aacute;n x&oacute; kl&eacute;w&uacute;n l&#603;',
 'item_visiteur' => 'j&ograve;n&#596;',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
-
 
 // L
 'lien_ajout_destinataire' => 'mi z&eacute; m&#603;&#770; g&#596;n &eacute; n&aacute; y&iacute; &#596; z&eacute; g&#596;n n&aacute;',
@@ -650,7 +646,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'logo_standard_rubrique' => 's&#596;s&iacute; &agrave;kp&aacute;xw&eacute; &#596; t&#596;n',
 'logo_survol' => 's&#596;s&iacute; z&igrave;wl&#596;n t&#596;n ',
 
-
 // M
 'menu_aide_installation_choix_base' => 'mi cy&aacute;n x&oacute;gb&egrave; l&#603; ',
 'module_fichier_langue' => 'gb&egrave; l&#603; s&iacute;n we&#780;m&agrave; ',
@@ -659,7 +654,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'module_texte_explicatif' => 'mi z&eacute; x&aacute;s&aacute;d&oacute;m&#603; &#598;&eacute; m&#603;, y&eacute; n&aacute; t&igrave;nm&#603; bl&eacute;w&uacute;n &#598;&ograve; gb&#603; l&#603; m&#603; .',
 'module_texte_traduction' => 'gb&egrave;  s&iacute;n we&#780;m&agrave;  &laquo;&nbsp;@module@&nbsp;&raquo; ',
 'mois_non_connu' => ' y&eacute; t&ugrave;n &aacute; ',
-
 
 // O
 'onglet_repartition_actuelle' => 'Hw&eacute; &eacute;l&#596; n&uacute;',
@@ -677,10 +671,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ortho_verif_impossible' => 'Mi j&#603; we&#780;m&agrave; l&#603; bl&oacute;&#598;&oacute; j&iacute; n&uacute; mi m&aacute; w&aacute; w&agrave;z&#596; g&#596;n&aacute; &oacute;.',
 'ortho_verifier' => 'mi kp&#596;n winwl&aacute;n f&#596; &#598;&igrave;&#598;&eacute;',
 
-
 // S
 'statut_admin_restreint' => '(t&igrave;to kl&eacute;w&uacute;n)',
-
 
 // T
 'taille_cache_infinie' => 't&igrave;to kl&eacute;w&uacute;n.',
@@ -706,7 +698,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_auteurs' => 'ny&#596;wl&aacute;nt&#596; l&#603; ',
 'texte_breves' => 'b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;...',
 'texte_choix_base_1' => 'mi s&#596; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; mi t&#596;n :',
-'texte_choix_base_2' => 'm&#596; MySQL n&#596; h&#603;nx&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute;',
+'texte_choix_base_2' => 'm&#596; SQL n&#596; h&#603;nx&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute;',
 'texte_choix_base_3' => 'mi cy&iacute;an &#598;e&#770; j&#603; &#598;&eacute;w&uacute; &#596;:',
 'texte_commande_vider_tables_indexation' => 'mi cy&iacute;an &#598;e&#770; j&#603; &#598;&eacute;w&uacute; &#596;.',
 'texte_comment_lire_tableau' => 'gblogbloj&iacute; &eacute; l&#596; n&#596; z&#596;n b&#596; mi n&#596; s&#603;  w&#603;n &#598;&oacute; b&oacute; n&#596; l&#603; y&iacute; w&#603;nx&oacute; kl&eacute;wun l&#603; we&#780;m&agrave; kl&eacute;w&uacute;n &#598;&eacute; l&#603; w&#603;b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;mi s&#596; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; mi t&#596;n ',
@@ -714,7 +706,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compte_element' => '@count@ kw&iacute;n',
 'texte_compte_elements' => '@count@ kw&iacute;n',
 'texte_config_groupe_mots_cles' => ' x&oacute;gb&egrave; l&#603; ny&#596;wl&aacute;nt&#596; l&#603; gblogbloj&iacute; &eacute; l&#596; n&#596; z&#596;n b&#596; mi n&#596; s&#603;  w&#603;n &#598;&oacute; b&oacute; n&#596; l&#603; y&iacute; w&#603;nx&oacute; kl&eacute;wun l&#603; we&#780;m&agrave; kl&eacute;w&uacute;n &#598;&eacute; l&#603; w&#603;b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;mi s&#596; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; mi t&#596;n ',
-'texte_connexion_mysql' => 't&ograve;b&iacute;t&ugrave;nt&igrave;to kl&eacute;w&uacute;ngb&agrave;v&iacute; &#596; j&#603; v&#596;w&#603;n &eacute; l&#596; y&eacute; s&#603; &#598;&oacute; &#596; mi k&#603;nkl&#603;&#770;n b&oacute; n&aacute; l&igrave;nl&igrave;n mi t&#596;n &#598;&eacute; w&uacute;MySQL, kpl&eacute;kpl&eacute; y&eacute; s&#596; &#598;&oacute; d&ograve; w&#596; m&#603; MySQL.',
+'texte_connexion_mysql' => '<MODIF>t&ograve;b&iacute;t&ugrave;nt&igrave;to kl&eacute;w&uacute;ngb&agrave;v&iacute; &#596; j&#603; v&#596;w&#603;n &eacute; l&#596; y&eacute; s&#603; &#598;&oacute; &#596; mi k&#603;nkl&#603;&#770;n b&oacute; n&aacute; l&igrave;nl&igrave;n mi t&#596;n &#598;&eacute; w&uacute;SQL, kpl&eacute;kpl&eacute; y&eacute; s&#596; &#598;&oacute; d&ograve; w&#596; m&#603; SQL.',
 'texte_contenu_article' => '(Mi wl&aacute;n w&eacute;kp&aacute; s&iacute;n x&ograve;m&#603; &#598;&oacute; x&aacute;s&aacute;d&oacute;m&#603;.)',
 'texte_contenu_articles' => 'gblogbloj&iacute; &eacute; l&#596; n&#596; z&#596;n b&#596; mi n&#596; s&#603;  w&#603;n &#598;&oacute; b&oacute; n&#596; l&#603; y&iacute; w&#603;nx&oacute; kl&eacute;wun l&#603; we&#780;m&agrave; kl&eacute;w&uacute;n &#598;&eacute; l&#603; w&#603;b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;mi s&#596; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; mi t&#596;n m&#596;.',
 'texte_crash_base' => 'N&uacute; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; gbl&egrave; &#596; mi s&iacute;w&uacute; l&#603; v&#596; bl&oacute;&#598;&oacute;.',
@@ -883,11 +875,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trad_lier' => 'k&ograve; ny&iacute; t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n&nbsp;:',
 'trad_new' => 'L&#603; wl&aacute;n t&igrave;nm&#603; w&eacute;kp&aacute; &#598;&eacute;v&oacute; t&#596;n',
 
+// U
+'upload_fichier_zip' => 'Fichier ZIP&ugrave;',
+'upload_fichier_zip_texte' => 'x&oacute;t&aacute; mi j&oacute; n&aacute; z&eacute; x&oacute;t&aacute; zip&ugrave; w&#603;.',
+'upload_fichier_zip_texte2' => 'x&oacute;t&aacute; &eacute; l&#596; s&iacute;w&uacute;&nbsp;:',
+'upload_zip_decompacter' => 's&#596; &#598;&eacute;m&#603; &#598;e&#770; &#598;&eacute; gb&#596;n &#596; :',
+'upload_zip_telquel' => 's&#596; &#598;&eacute;m&#603; &#598;e&#770; &#598;&eacute; gb&#596;n &#596;  Zip&nbsp;;',
 
 // V
 'version_initiale' => 'w&agrave;l&#596; b&igrave;b&#603; t&#596;n'
-
 );
-
 
 ?>

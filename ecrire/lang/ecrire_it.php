@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Attiva il plugin',
@@ -48,7 +50,6 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'avis_suppression_base' => 'ATTENZIONE, la cancellazione dei dati &egrave; irreversibile',
 'avis_version_mysql' => 'Il vostro server SQL (@version_mysql@)non permette la correzione automatica delle tabelle del database.',
 
-
 // B
 'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP ',
 'bouton_ajouter' => 'Aggiungi',
@@ -66,7 +67,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_desactive_tout' => 'Disattiva tutto',
 'bouton_desinstaller' => 'Disinstalla',
 'bouton_effacer_index' => 'Cancella gli indici',
-'bouton_effacer_statistiques' => '<NEW>Effacer les statistiques',
+'bouton_effacer_statistiques' => 'Cancellare le statistiche',
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
@@ -114,17 +115,16 @@ cancellarli successivamente).',
 'bouton_vider_cache' => 'Svuota la cache',
 'bouton_voir_message' => 'Anteprima messaggio',
 
-
 // C
 'cache_mode_compresse' => 'I file di cache sono salvati in modalit&agrave; compressa.',
 'cache_mode_non_compresse' => 'I file di cache sono salvati in modalit&agrave; non compressa.',
 'cache_modifiable_webmestre' => 'Questo parametro pu&ograve; essere modificato dal webmaster del sito.',
 'calendrier_synchro' => 'Se si utilizza un programma di agenda compatibile con <b>iCal</b>, &egrave; possibile sincronizzare i dati con le informazioni di questo sito',
 'config_activer_champs' => 'Attiva i campi seguenti',
-'config_choix_base_sup' => '<NEW>indiquer une base sur ce serveur',
-'config_erreur_base_sup' => '<NEW>SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles',
-'config_info_base_sup' => '<NEW>Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.',
-'config_info_base_sup_disponibles' => '<NEW>Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:',
+'config_choix_base_sup' => 'indicare un database su questo server',
+'config_erreur_base_sup' => 'SPIP non ha accesso all\'elenco dei database accessibili ',
+'config_info_base_sup' => 'Se si hanno altri database da interrogare attraverso SPIP, con il proprio server SQL o altro, il form sottostante permette di dichiararli. Se si lasciano alcuni campi vuoti verranno utilizzati i dati della connessione al database principale.',
+'config_info_base_sup_disponibles' => 'Database supplementari gi&agrave; dichiarati:',
 'config_info_logos' => 'Ogni elemento del sito pu&ograve; avere un logo, come pure un &laquo;&nbsp;logo per il roll-over&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizza i logo',
 'config_info_logos_utiliser_non' => 'Non utilizzare i logo',
@@ -132,11 +132,10 @@ cancellarli successivamente).',
 'config_info_logos_utiliser_survol_non' => 'Non utilizzare i logo di roll-over',
 'config_info_redirection' => 'Attivando questa opzione &egrave; possibile creare degli articoli virtuali, semplici riferimenti di articoli pubblicati su altri siti o al di fuori di SPIP.',
 'config_redirection' => 'Articoli virtuali',
-'config_titre_base_sup' => '<NEW>D&eacute;claration d\'une base suppl&eacute;mentaire',
-'config_titre_base_sup_choix' => '<NEW>Choisissez une base suppl&eacute;mentaire',
+'config_titre_base_sup' => 'Dichiarazione di un database supplementare',
+'config_titre_base_sup_choix' => 'Scegliere un database supplementare',
 'connexion_ldap' => 'Connessione:',
 'copier_en_local' => 'Copia in locale',
-
 
 // D
 'date_mot_heures' => 'ore',
@@ -147,7 +146,6 @@ cancellarli successivamente).',
 'diff_texte_deplace' => 'Testo spostato',
 'diff_texte_supprime' => 'Testo cancellato',
 'double_clic_inserer_doc' => 'Doppio clic qui per inserire la scorciatoia nel testo',
-
 
 // E
 'email' => 'email',
@@ -196,10 +194,8 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
 'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
-
 // F
 'forum_info_original' => 'originale',
-
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
@@ -242,6 +238,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'icone_publier_breve' => 'Pubblica questa breve',
 'icone_referencer_nouveau_site' => 'Inserisci un nuovo sito in repertorio',
 'icone_refuser_breve' => 'Rifiuta questa breve',
+'icone_relancer_signataire' => 'Rilanciare il firmatario',
 'icone_retour' => 'Indietro',
 'icone_retour_article' => 'Torna all\'articolo',
 'icone_suivi_forum' => 'Andamento del forum pubblico: @nb_forums@&nbsp;contributi',
@@ -319,11 +316,15 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_classement_2' => '<sup>o</sup> su @liste@',
 'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
 'info_comment_lire_tableau' => 'Come leggere questa tabella',
+'info_compresseur_activer' => 'Attivare la compressione',
+'info_compresseur_desactiver' => '<MODIF>Disattivare la compressione',
+'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, &egrave; possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ci&ograve; pu&ograve; rallentare notevolmente alcuni server.',
+'info_compresseur_titre' => '<MODIF>Ridurre il consumo di banda passante',
 'info_config_suivi' => 'Se questo indirizzo corrisponde a una mailing-list, &egrave; possibile indicare qui sotto l\'indirizzo al quale i partecipanti del sito possono iscriversi. Questo indirizzo pu&ograve; essere una URL (per esempio la pagina di iscrizione via Web alla lista), oppure un indirizzo email che contiene un Oggetto specifico (per esempio: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => '&Egrave; possibile abbonarsi alla mailing-list di questo sito. Verranno spedite per email le notifiche degli articoli e delle brevi proposte per la pubblicazione.',
 'info_confirmer_passe' => 'Conferma la nuova password:',
 'info_connexion_base' => 'Prova di connessione al database',
-'info_connexion_base_donnee' => '<NEW>Connexion &agrave; votre base de donn&eacute;es',
+'info_connexion_base_donnee' => 'Connessione al proprio database',
 'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
 'info_connexion_mysql' => 'La connessione a SQL',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
@@ -535,9 +536,9 @@ impossibile.',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
-'info_question_vignettes_referer' => '<NEW>Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites',
-'info_question_vignettes_referer_non' => '<NEW>Ne pas afficher les captures des sites d\'origine des visites',
-'info_question_vignettes_referer_oui' => '<NEW>Afficher les captures des sites d\'origine des visites',
+'info_question_vignettes_referer' => 'Quando si consultano le statistiche &egrave; possibile visualizzare delle anteprime dei siti di origine delle visite',
+'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
+'info_question_vignettes_referer_oui' => 'Visualizzare le catture di schermo dei siti di origine delle visite',
 'info_qui_attribue_mot_cle' => 'Le parole chiave di questo gruppo possono essere attribuite da:',
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
@@ -555,7 +556,8 @@ impossibile.',
 'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
 'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo gli amministratori possono modificare quest\'indirizzo.',
-'info_restauration_sauvegarde' => 'ripristino del salvataggio @archive@',
+'info_restauration_sauvegarde' => 'Ripristino del salvataggio @archive@',
+'info_restauration_sauvegarde_insert' => 'Inserimento di @archive@ nel database',
 'info_restreindre_rubrique' => 'Limita la facolt&agrave; di gestione alla rubrica:',
 'info_resultat_recherche' => 'Risultati della ricerca:',
 'info_rubriques' => 'Rubriche',
@@ -581,7 +583,7 @@ impossibile.',
 'info_sauvegarde_reussi_02' => 'Il database &egrave; stato salvato in @archive@. Puoi ',
 'info_sauvegarde_reussi_03' => 'tornare alla gestione',
 'info_sauvegarde_reussi_04' => 'del tuo sito.',
-'info_sauvegarde_rubrique_reussi' => '<NEW>Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
+'info_sauvegarde_rubrique_reussi' => 'Le tabelle della rubrica @titre@ sono state salvate in @archive@. &Egrave; possibile',
 'info_sauvegarde_rubriques' => 'Salva le rubriche',
 'info_sauvegarde_signatures' => 'Salva le adesioni alle petizioni',
 'info_sauvegarde_sites_references' => 'Salva i siti in repertorio',
@@ -623,7 +625,7 @@ impossibile.',
 'info_syndication_integrale_1' => 'Il tuo sito propone dei file di  syndication (vedi &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Si desidera trasmettere gli articoli in versione integrale oppure in versione riassunta di un centinaio di caratteri?',
 'info_table_prefix' => '&Egrave; possibile modificare il prefisso del nome delle tabelle del database (cosa indispensabile se si desidera installare pi&ugrave; siti usando il medesimo database). Questo prefisso si deve scrivere usando esclusivamente lettere minuscole, prive di accenti e senza alcuno spazio.',
-'info_taille_maximale_images' => '<NEW>SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.',
+'info_taille_maximale_images' => 'SPIP tester&agrave; la dimensione massima delle immagini che pu&ograve; manipolare (in milioni di pixel).<br /> Le immagini di dimensione maggiore non saranno ridotte.',
 'info_taille_maximale_vignette' => 'Dimensione massima delle immagini create dal sistema:',
 'info_terminer_installation' => 'Puoi ora terminare la procedura d\'installazione standard.',
 'info_texte' => 'Testo',
@@ -664,23 +666,26 @@ Le traduzioni sono associate all\'originale,
 'info_visiteurs' => 'Visitatori',
 'info_visiteurs_02' => 'Visitatori del sito pubblico',
 'install_adresse_base_hebergeur' => 'Indirizzo del database attribuito dal provider',
+'install_base_ok' => 'Il database @base@ &egrave; stato riconosciuto',
 'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalit&agrave; al sito...',
 'install_extension_mbstring' => 'SPIP non funziona con:',
 'install_extension_php_obligatoire' => 'SPIP esige l\'estensione php:',
 'install_login_base_hebergeur' => 'Login di connessione attribuito dal provider',
 'install_nom_base_hebergeur' => 'Nome del database attribuito dal provider:',
+'install_pas_table' => 'Database attualmente senza tabelle',
 'install_pass_base_hebergeur' => 'Password di connessione attribuito dal provider',
 'install_php_version' => 'PHP versione @version@ insufficiente (minimo = @minimum@)',
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
-'install_select_type_db' => '<NEW>Indiquer le type de base de donn&eacute;es&nbsp;:',
+'install_select_type_db' => 'Indicare il tipo di database:',
 'install_select_type_mysql' => 'MySQL',
 'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
-'install_serveur_hebergeur' => '<NEW>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
+'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
 'install_table_prefix_hebergeur' => 'Prefisso della tabella attribuito dal provider:',
-'install_types_db_connus' => '<NEW>SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.',
-'install_types_db_connus_avertissement' => '<NEW>Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL',
+'install_tables_base' => 'Tabelle del database',
+'install_types_db_connus' => 'SPIP pu&ograve; utilizzare <b>MySQL</b> (il pi&ugrave; diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.',
+'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL',
 'intem_redacteur' => 'redattore',
 'item_accepter_inscriptions' => 'Accetta le iscrizioni',
 'item_activer_forum_administrateur' => 'Attiva il forum degli amministratori',
@@ -741,13 +746,10 @@ Le traduzioni sono associate all\'originale,
 'item_utiliser_syndication' => 'Attiva la syndication automatica',
 'item_visiteur' => 'visitatore',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'entrambi',
 'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 'lien_ajouter_auteur' => 'Aggiungi questo autore',
 'lien_ajouter_participant' => 'Aggiungi un partecipante',
@@ -781,7 +783,6 @@ Le traduzioni sono associate all\'originale,
 'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE',
 'logo_survol' => 'LOGO ROLLOVER',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Scegliere il database',
 'module_fichier_langue' => 'File lingua',
@@ -791,9 +792,8 @@ Le traduzioni sono associate all\'originale,
 'module_texte_traduction' => 'Il file lingua &laquo;@module@&raquo; &egrave; disponibile in:',
 'mois_non_connu' => 'sconosciuto',
 
-
 // O
-'onglet_declarer_une_autre_base' => '<NEW>D&eacute;clarer une autre base',
+'onglet_declarer_une_autre_base' => 'Dichiarare un altro database',
 'onglet_repartition_actuelle' => 'attualmente',
 'ortho_ajouter_ce_mot' => 'Aggiungere questa parola al dizionario',
 'ortho_aucune_suggestion' => 'Nessun suggerimento per questa parola.',
@@ -809,64 +809,62 @@ Le traduzioni sono associate all\'originale,
 'ortho_verif_impossible' => 'Il sistema non pu&ograve; controllare l\'ortografia di questo testo.',
 'ortho_verifier' => 'Controllare l\'ortografia',
 
-
 // P
+'page_pas_proxy' => 'Questa pagina non deve passare attraverso il proxy',
 'pas_de_proxy_pour' => 'Se necessario, indicare i server o i domini per i quali non si deve applicare questo proxy (per esempio: @exemple@)',
-'plugin_charge_paquet' => '<NEW>Chargement du paquet @name@',
-'plugin_erreur_charger' => '<NEW>erreur&nbsp;: impossible de charger @zip@',
-'plugin_erreur_droit1' => '<NEW>Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.',
-'plugin_erreur_droit2' => '<NEW>Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.',
-'plugin_erreur_zip' => '<NEW>echec pclzip&nbsp;: erreur @status@',
+'plugin_charge_paquet' => 'Caricamento del pacchetto @name@',
+'plugin_erreur_charger' => 'errore: impossibile caricare @zip@',
+'plugin_erreur_droit1' => 'La cartella <code>@dest@</code> non ha i permessi di scrittura.',
+'plugin_erreur_droit2' => 'Verificare i diritti su questa cartella (e, se necessario, crearla), o installare i file tramite FTP.',
+'plugin_erreur_zip' => 'fallimento pclzip: errore @status@',
 'plugin_etat_developpement' => 'in corso di sviluppo',
 'plugin_etat_experimental' => 'sperimentale',
 'plugin_etat_stable' => 'stabile',
 'plugin_etat_test' => 'in prova',
 'plugin_impossible_activer' => 'Impossibile attivare il plug-in @plugin@',
-'plugin_info_automatique1' => '<NEW>Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:',
-'plugin_info_automatique2' => '<NEW>cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;',
-'plugin_info_automatique3' => '<NEW>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.',
-'plugin_info_automatique_creer' => '<NEW>&#224; cr&#233;er &#224; la racine du site.',
-'plugin_info_automatique_exemples' => '<NEW>exemples&nbsp;:',
-'plugin_info_automatique_ftp' => '<NEW>Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>',
-'plugin_info_automatique_lib' => '<NEW>Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.',
-'plugin_info_automatique_liste' => '<NEW>Vos listes de plugins&nbsp;:',
-'plugin_info_automatique_liste_officielle' => '<NEW>les plugins officiels',
-'plugin_info_automatique_liste_update' => '<NEW>Mettre &#224; jour les listes',
-'plugin_info_automatique_ou' => '<NEW>ou...',
-'plugin_info_automatique_select' => '<NEW>S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.',
-'plugin_info_telecharger' => '<NEW>&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@',
-'plugin_librairies_installees' => '<NEW>Librairies install&#233;es',
-'plugin_necessite_lib' => '<NEW>Ce plugin n&#233;cessite la librairie @lib@',
+'plugin_info_automatique1' => 'Se si desidera autorizzare l\'installazione automatica dei plug-in &egrave; necessario: ',
+'plugin_info_automatique2' => 'creare una cartella <code>@rep@</code>;',
+'plugin_info_automatique3' => 'verificare che il server sia autorizzato a scrivere in questa cartella.',
+'plugin_info_automatique_creer' => 'da creare alla radice del sito.',
+'plugin_info_automatique_exemples' => 'esempi:',
+'plugin_info_automatique_ftp' => '&Egrave; possibile installare plug-in tramite FTP, nella cartella <tt>@rep@</tt>',
+'plugin_info_automatique_lib' => 'Alcuni plug-in richiedono anche di poter trasferire dei file nella cartella <code>lib/</code>, da creare (se necessario) alla radice del sito.',
+'plugin_info_automatique_liste' => 'Gli elenchi dei plug-in:',
+'plugin_info_automatique_liste_officielle' => 'i plug-in ufficiali',
+'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
+'plugin_info_automatique_ou' => 'oppure...',
+'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricher&agrave; e lo installer&agrave; nella cartella <code>@rep@</code>; se questo plug-in &egrave; gi&agrave; presente verr&agrave; aggiornato.',
+'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
+'plugin_librairies_installees' => 'Librerie installate',
+'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
 'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.',
 'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
-'plugin_source' => '<NEW>source:&nbsp;',
-'plugin_titre_automatique' => '<NEW>Installation automatique',
-'plugin_titre_automatique_ajouter' => '<NEW>Ajouter des plugins',
-'plugin_zip_active' => '<NEW>Continuez pour l\'activer',
-'plugin_zip_adresse' => '<NEW>indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.',
-'plugin_zip_adresse_champ' => '<NEW>Adresse du plugin ou de la liste&nbsp;',
-'plugin_zip_content' => '<NEW>Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>',
-'plugin_zip_installe_finie' => '<NEW>Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.',
-'plugin_zip_installe_rep_finie' => '<NEW>Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@',
-'plugin_zip_installer' => '<NEW>Vous pouvez maintenant l\'installer.',
-'plugin_zip_telecharge' => '<NEW>Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;',
-'plugins_actifs' => '<NEW>@count@ plugins activ&#233;s.',
-'plugins_compte' => '<NEW>@count@ plugins',
-'plugins_disponibles' => '<NEW>@count@ plugins disponibles.',
-'plugins_erreur' => '<NEW>Erreur dans les plugins : @plugins@',
+'plugin_source' => 'origine:&nbsp;',
+'plugin_titre_automatique' => 'Installazione automatica',
+'plugin_titre_automatique_ajouter' => 'Aggiungere dei plug-in',
+'plugin_zip_active' => 'Continuare per attivarlo',
+'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
+'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco&nbsp;',
+'plugin_zip_content' => 'Esso contiene i file seguenti (@taille@),<br />pronti per essere installati nella cartella <code>@rep@</code>',
+'plugin_zip_installe_finie' => 'Il file @zip@ &egrave; stato decompresso e installato.',
+'plugin_zip_installe_rep_finie' => 'Il file @zip@ &egrave; stato decompresso e installato nella cartella @rep@',
+'plugin_zip_installer' => 'Ora &egrave; possibile installarlo.',
+'plugin_zip_telecharge' => 'Il file @zip@ &egrave; stato scaricato',
+'plugins_actifs' => '@count@ plug-in attivati.',
+'plugins_compte' => '@count@ plug-in',
+'plugins_disponibles' => '@count@ plug-in disponibili.',
+'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 'plugins_liste' => 'Elenco dei plugin',
-'plugins_vue_hierarchie' => '<NEW>Hi&eacute;rarchie',
-'plugins_vue_liste' => '<NEW>Liste',
+'plugins_vue_hierarchie' => 'Struttura gerarchica',
+'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',
-
 
 // R
 'repertoire_plugins' => 'Cartella:',
 
-
 // S
 'sauvegarde_fusionner' => 'Unire il database attuale con la copia di backup',
-'sauvegarde_fusionner_depublier' => '<NEW>D&eacute;publier les objets fusionn&eacute;s',
+'sauvegarde_fusionner_depublier' => 'Depubblicare gli oggetti fusi',
 'sauvegarde_url_origine' => 'Eventualmente, URL del sito di origine:',
 'statut_admin_restreint' => '(ammin. parziale)',
 'syndic_choix_moderation' => 'Come comportarsi con i prossimi link provenienti da questo sito?',
@@ -879,7 +877,6 @@ Le traduzioni sono associate all\'originale,
 'syndic_option_resume_oui' => 'un semplice riassunto (in formato testo)',
 'syndic_options' => 'Opzioni per la syndication:',
 
-
 // T
 'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
@@ -891,7 +888,7 @@ Le traduzioni sono associate all\'originale,
 'texte_acces_ldap_anonyme_1' => 'Alcuni server LDAP non consentono accessi anonimi. In questo caso si deve specificare un identificatore d\'accesso iniziale al fine di poter poi ricercare delle informazioni nell\'elenco. Nella maggior parte dei casi tuttavia, i campi seguenti potranno essere lasciati vuoti.',
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login dei redattori e degli amministratori. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
-'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
+'texte_admin_effacer_stats' => 'Questo comando cancella tutti i dati collegati alle statistiche delle visite al sito, comprese la popolarit&agrave; degli articoli.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
 Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
@@ -899,7 +896,7 @@ In particolare &egrave; sbagliato cancellare il database pensando di ripristinar
 Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
-'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
+'texte_admin_tech_04' => 'Al fine di una fusione con un altro database, &egrave; possibile limitare il salvataggio alla rubrica: ',
 'texte_adresse_annuaire_1' => '(Se la rubrica &egrave; installata nella stessa macchina di questo sito, dovrai probabilmente inserire "localhost".)',
 'texte_ajout_auteur' => 'Il seguente autore &egrave; stato aggiunto all\'articolo:',
 'texte_annuaire_ldap_1' => 'Se hai accesso ad una rubrica (LDAP), puoi utilizzarla per importare automaticamente degli utenti sotto SPIP.',
@@ -949,7 +946,7 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_documents_joints_2' => 'Questa impostazione non impedisce l\'inserimento diretto di immagini negli articoli.',
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
-'texte_effacer_statistiques' => '<NEW>Effacer les statistiques',
+'texte_effacer_statistiques' => 'Cancellare le statistiche',
 'texte_en_cours_validation' => 'Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
 'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
@@ -1140,6 +1137,8 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_page_sites_tous' => 'I siti repertoriati',
 'titre_page_statistiques' => 'Statistiche per rubrica',
 'titre_page_statistiques_referers' => 'Statistiche (link al tuo sito)',
+'titre_page_statistiques_signatures_jour' => 'Numero di firme al giorno',
+'titre_page_statistiques_signatures_mois' => 'Numero di firme al mese',
 'titre_page_statistiques_visites' => 'Statistiche delle visite',
 'titre_page_upgrade' => 'Aggiornamento di SPIP',
 'titre_publication_articles_post_dates' => 'Pubblicazione di articoli postdatati',
@@ -1163,8 +1162,12 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'trad_lier' => 'Questo articolo &egrave; una traduzione dell\'articolo numero:',
 'trad_new' => 'Scrivere una nuova traduzione dell\'articolo',
 
-
 // U
+'upload_fichier_zip' => 'File ZIP',
+'upload_fichier_zip_texte' => 'Il file proposto &egrave; un file ZIP.',
+'upload_fichier_zip_texte2' => 'Questo file pu&ograve; essere:',
+'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',
+'upload_zip_telquel' => 'installato cos&igrave; com\'&egrave; in quanto archivio compresso Zip;',
 'utf8_convert_attendez' => 'Attendi qualche secondo e aggiorna la pagina.',
 'utf8_convert_avertissement' => 'Stai per convertire il contenuto del proprio database (articoli, brevi, ecc.) dal set di caratteri <b>@orig@</b> al set di caratteri <b>@charset@</b>.',
 'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@.',
@@ -1175,13 +1178,10 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'utf8_convert_verifier' => 'Ora &egrave; necessario svuotale la cache e verificare che non vi siano problemi sulle pagine pubbliche del sito. In caso di problemi gravi &egrave; stato effettuato un backup dei dati (in formato SQL) nella cartella @rep@.',
 'utf8_convertir_votre_site' => 'Convertire il sito in UTF-8',
 
-
 // V
 'version' => 'Versione:',
-'version_deplace_rubrique' => '<NEW>D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.',
+'version_deplace_rubrique' => 'Spostato da <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> a <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Versione iniziale'
-
 );
-
 
 ?>

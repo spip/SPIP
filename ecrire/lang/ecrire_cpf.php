@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'F&eacute; zou&eacute; lo plugin',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'N&eacute;na pwinn r&eacute;zilta.',
 'avis_chemin_invalide_1' => 'Somin ou la swazi',
 'avis_chemin_invalide_2' => 'i sanm pa mars&eacute;. Ou p&eacute; artourn paz-d&eacute;ry&egrave;r &egrave;k v&egrave;y bann zinformasyon ou la don&eacute;.',
-'avis_connexion_echec_1' => 'Lakostaz-la sir serv&egrave;r MySQL la finn loup&eacute;.',
+'avis_connexion_echec_1' => '<MODIF>Lakostaz-la sir serv&egrave;r SQL la finn loup&eacute;.',
 'avis_connexion_echec_2' => 'Artourn paz-d&eacute;ry&egrave;r &egrave;k v&egrave;y byin bann zinformasyon ou la don&eacute;.',
-'avis_connexion_echec_3' => '<b>Tansyon Pangar!</b> Sir bonp&eacute; serv&egrave;r i dwa <b>domann</b> l&eacute;berz&egrave;r li f&eacute; zw&eacute; out permisyon pou lakostaz labaz MySQL, sinonsa i p&eacute; pa giny anserv ali. Si ou l&eacute; pa kav akost labaz, v&eacute;y byin si ou la domand&eacute; permisyon-la.',
+'avis_connexion_echec_3' => '<MODIF><b>Tansyon Pangar!</b> Sir bonp&eacute; serv&egrave;r i dwa <b>domann</b> l&eacute;berz&egrave;r li f&eacute; zw&eacute; out permisyon pou lakostaz labaz SQL, sinonsa i p&eacute; pa giny anserv ali. Si ou l&eacute; pa kav akost labaz, v&eacute;y byin si ou la domand&eacute; permisyon-la.',
 'avis_connexion_ldap_echec_1' => 'Lakostaz-la si lo serv&egrave;r LDAP, li la pa finn mars&eacute;.',
 'avis_connexion_ldap_echec_2' => 'Artourn paz-d&eacute;ry&egrave;r &egrave;k v&egrave;y byin bann zinformasyon ou la don&eacute;.',
 'avis_connexion_ldap_echec_3' => 'Dann ka-la,i giny pa a rien anserv lo supor LDAP pou import a bann zitilizat&egrave;r.',
@@ -25,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 ',
 'avis_deplacement_rubrique' => 'Pangar &nbsp;! Dann rubrik-la n&eacute;na @contient_breves@ br&egrave;ve@scb@&nbsp;: si ou d&eacute;kal ali, m&egrave;t inn krwa pou kofirm&eacute;.',
 'avis_destinataire_obligatoire' => 'Ast&egrave;r ou dwa kadr inn destinat&egrave;r pou anvway&eacute; out mod&eacute;kri.',
-'avis_erreur_connexion_mysql' => 'Ast&egrave;r n&eacute;na inn kanard &egrave;k lakostaz MySQL',
-'avis_erreur_version_archive' => '<B>Pangar! Fisy&eacute; @archive@-la i apartyin
+'avis_erreur_connexion_mysql' => 'Ast&egrave;r n&eacute;na inn kanard &egrave;k lakostaz SQL',
+'avis_erreur_version_archive' => '<b>Pangar! Fisy&eacute; @archive@-la i apartyin
 
 
 
@@ -54,8 +56,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'avis_sites_probleme_syndication' => 'Bann sitw&egrave;b-la n&eacute;na giny inn larlik pou lasindikasyon.',
 'avis_sites_syndiques_probleme' => 'Bann sitw&egrave;b sak n&eacute;na inn larlik ',
 'avis_suppression_base' => 'TANSYON PANGAR, si ou i d&eacute;gr&egrave;n bann don&eacute;-la, i p&eacute; pa batary&egrave;r pou r&eacute;kup&egrave;r azot : ou sava p&egrave;rd tout bann zinformasyon',
-'avis_version_mysql' => 'Out versyon MySQL (@version_mysql@),li perm&eacute; pa aranz tous&egrave;l bann tab d-la baz.',
-
+'avis_version_mysql' => 'Out versyon SQL (@version_mysql@),li perm&eacute; pa aranz tous&egrave;l bann tab d-la baz.',
 
 // B
 'bouton_acces_ldap' => 'Azout laks&eacute; dann LDAP >>',
@@ -135,13 +136,11 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'bouton_vider_cache' => 'D&eacute;vid kas lo sitw&egrave;b',
 'bouton_voir_message' => 'Artourn g&egrave;t mod&eacute;kri avann konfirm ali',
 
-
 // C
 'cache_mode_compresse' => 'Bann fisy&egrave; lo kas sanl&eacute; anroziztr&eacute; sanm manyir kopr&eacute;s&eacute;.',
 'cache_mode_non_compresse' => 'Bann fisy&egrave; lo kas sa l&eacute; anroziztr&eacute; sanm manyir sat l&eacute; pa kopr&eacute;s&eacute;.',
 'cache_modifiable_webmestre' => 'Lo w&egrave;bm&egrave;t lo sit, li p&eacute; sanz param&egrave;t-la. ',
 'calendrier_synchro' => 'Si ou ans&egrave;rv in lozisy&egrave;l pou in lajinda i mars &egrave;k <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...),ou p&eacute; m&egrave;t ali si lo ritm bann arnouv&egrave;lman laktyalit&eacute; lo sit-la.',
-
 
 // D
 'date_mot_heures' => '&egrave;r',
@@ -152,7 +151,6 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'diff_texte_deplace' => 'T&egrave;ks la bouz&eacute;',
 'diff_texte_supprime' => 'T&egrave;ks rotir&eacute;',
 'double_clic_inserer_doc' => 'F&egrave; in doub-klik pou m&egrave;t r&eacute;diyon-la andan out t&egrave;ks ',
-
 
 // E
 'email' => 'ladr&egrave;s im&egrave;l',
@@ -203,7 +201,6 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'erreur_plugin_tag_plugin_absent' => 'Nena pa okinn &lt;plugin&gt; andan fisy&eacute; pou la definisyon',
 'erreur_plugin_version_manquant' => 'Nena pa okinn v&eacute;syon pou plugin la',
 
-
 // I
 'ical_info1' => 'Paz-la i donn aou plizi&egrave;r many&egrave;r r&egrave;s an gatiraz &egrave;k lo vi lo sit-la.',
 'ical_info2' => 'Si ou i v&eacute; dot ranseyman si bann teknik anl&egrave;r, ezit pa rogard&eacute; <a href="http://www.spip.net/fr_suivi">bann paz dokimantasyon pou SPIP</a>.',
@@ -226,6 +223,7 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'icone_creation_groupe_mots' => 'Kr&eacute; inn nouvo group ast&egrave;r pou bann molakl&eacute;',
 'icone_creation_mots_cles' => 'Kr&eacute; inn nouvo molakl&eacute;',
 'icone_creer_auteur' => 'Kr&eacute; inn nouvo lot&egrave;r &eacute; m&egrave;t ali  ansanm dann lartik-la',
+'icone_creer_mot_cle' => 'Kr&eacute; inn nouvo molakl&eacute; &egrave; gatir ali sanm lartik-la.',
 'icone_creer_rubrique_2' => 'Kr&eacute; inn nouv&egrave;l rubrik',
 'icone_ecrire_nouvel_article' => 'Bann tit-nouv&egrave;l dann rubrik-la',
 'icone_envoyer_message' => 'Anvwa mod&eacute;kri-la',
@@ -321,7 +319,7 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_confirmer_passe' => 'Konfirm out nouvo modpass-la :',
 'info_connexion_base' => 'Dezi&egrave;m &eacute;tap : <b>Es&egrave;y lakostaz-labaz</b>',
 'info_connexion_ldap_ok' => 'Lakostaz LDAP la finn mars&eacute;.</b><p>Ou p&eacute; bat-kar&eacute; si l&eacute;tap answit.',
-'info_connexion_mysql' => 'Promy&egrave;r &eacute;tap : <b>Out lakostaz MySQL</b>',
+'info_connexion_mysql' => 'Promy&egrave;r &eacute;tap : <b>Out lakostaz SQL</b>',
 'info_connexion_ok' => 'Lakostaz la finn mars&eacute;.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kosa bann zartik i kontyin ',
@@ -424,7 +422,7 @@ SPIP anba-la, i sava pa mars&eacute;.',
 'info_message_en_redaction' => 'Out bann mod&eacute;kri l&eacute; apr&eacute; l&eacute;kritir ',
 'info_message_technique' => 'Lavi t&egrave;knik :',
 'info_messagerie_interne' => 'Kazmod&eacute;kri',
-'info_mise_a_niveau_base' => 'arniv&egrave;lman out labaz MySQL',
+'info_mise_a_niveau_base' => 'arniv&egrave;lman out labaz SQL',
 'info_mise_a_niveau_base_2' => '{{Tansyon pangar!}} Ou nana finn instal&eacute; inn verszyon
 vy&eacute; fisy&eacute; SPIP. Versyon-la l&eacute; pli zansyinn sak l&eacute;t&eacute; 
 avan sir lo sit: out bazdodn&eacute; i sava d&eacute;gr&eacute;n&eacute;
@@ -535,7 +533,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'info_reglage_ldap' => 'Bann lopsyon : <b>R&eacute;glaz linportasyon LDAP</b>',
 'info_renvoi_article' => '<b>Tourn&eacute;-vir&eacute;.</b> Lartik-la i batavan sir pazw&egrave;b-la :',
 'info_reserve_admin' => 'Bann komand&egrave;r s&eacute;lman i p&eacute; sanz ladr&egrave;s-la.',
-'info_restauration_sauvegarde' => 'rosarz l&eacute;ta lasovgard @archive@',
+'info_restauration_sauvegarde' => '<MODIF>rosarz l&eacute;ta lasovgard @archive@',
 'info_restreindre_rubrique' => 'M&egrave;t inn limit pou laz&eacute;styon la rubrik-la :',
 'info_resultat_recherche' => 'Bann r&eacute;zilta rodaz :',
 'info_rubriques' => 'Bann rubrik',
@@ -704,10 +702,8 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'item_utiliser_syndication' => 'Ans&egrave;rv lasindikasyon otomatik',
 'item_visiteur' => 'vizit&egrave;r',
 
-
 // J
 'jour_non_connu_nc' => 'p.k. (pa konu)',
-
 
 // L
 'lien_ajout_destinataire' => 'Azout kor&egrave;spondan-la',
@@ -742,7 +738,6 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'logo_standard_rubrique' => 'LOGO POU TOUT BANN RUBRIK',
 'logo_survol' => 'LOGO POU LOF&Eacute; ',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Lo swa out bazdodn&eacute;',
 'module_fichier_langue' => 'Fisy&eacute; lang',
@@ -751,7 +746,6 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'module_texte_explicatif' => 'Ou p&eacute; m&egrave;t bann r&eacute;diyon-la anadan out bann sk&eacute;l&egrave;t pou sit piblik. Banna i sava &egrave;t dir&eacute;kman tradwui  andan dif&eacute;rant lang si n&eacute;na byin in fisy&eacute; lang pou zot. ',
 'module_texte_traduction' => 'Lo fisy&eacute; lang  &laquo;&nbsp;@module@&nbsp;&raquo; , zot i va trouv ali po&nbsp;:',
 'mois_non_connu' => 'l&eacute; pa konu',
-
 
 // O
 'onglet_repartition_actuelle' => 'ast&egrave;r',
@@ -769,7 +763,6 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'ortho_verif_impossible' => 'Sist&egrave;m-la l&eacute; pa kav v&eacute;rify&eacute; lo t&egrave;ks-la.',
 'ortho_verifier' => 'V&eacute;rify&eacute; lo grafi',
 
-
 // P
 'plugin_etat_developpement' => 'l&eacute; apr&eacute; d&eacute;vlopman',
 'plugin_etat_experimental' => 'l&eacute;  selman esp&eacute;rimental',
@@ -777,10 +770,8 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'plugin_etat_test' => 'l&eacute; pou test&eacute;',
 'plugins_liste' => 'La lis bann plugin',
 
-
 // R
 'repertoire_plugins' => 'R&eacute;pertwar&nbsp;:',
-
 
 // S
 'statut_admin_restreint' => '(komand&egrave;r ti-drwa)',
@@ -793,7 +784,6 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'syndic_option_resume_non' => 'lansamn byen kompl&eacute; bann zartik (ek lo forma HTML)',
 'syndic_option_resume_oui' => 'in semp r&eacute;zim&eacute; selman( elk lo forma teks )',
 'syndic_options' => 'Bann zopsyon pou la sindikasyon&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Ban zimaz sak SPIP i p&eacute; kalkil&eacute; otomatikman (tite-zimaz dann dokiman, bann non i pr&eacute;zant grafikman, bann fonkson mat&eacute;matik dan forma TeX...)  zot i prann andan r&eacute;pertwar @dir@ in l&eacute;spas total sat i ariv @taille@.',
@@ -826,7 +816,7 @@ S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Pan
 'texte_auteurs' => 'BANN LOT&Egrave;R',
 'texte_breves' => 'Inn tit-nouv&egrave;l l&eacute; inn ti t&egrave;ks sinp  sak i perm&eacute; m&egrave;t an liyn vitman tout bann zinformasyon pr&eacute;ciz. Li perm&egrave;t osi z&egrave;r inn tourlapr&egrave;s o inn kalandry&eacute; bann z&eacute;v&eacute;nman...',
 'texte_choix_base_1' => 'Swazi out labaz :',
-'texte_choix_base_2' => 'Serv&egrave;r MySQL li kontyin  plizy&egrave;r bann bazdodn&eacute;.',
+'texte_choix_base_2' => 'Serv&egrave;r SQL li kontyin  plizy&egrave;r bann bazdodn&eacute;.',
 'texte_choix_base_3' => '<b>Swazi</b> anba terl&agrave; sak out l&eacute;b&eacute;rz&egrave;r la donn aou :',
 'texte_commande_vider_tables_indexation' => 'Itiliz komand-la pou vid bann tab lind&egrave;ksasyon sak lo rod&egrave;r SPIP i
 anserv ast&egrave;r. Kom sa ou sava giny inn p&eacute; plid l&eacute;spas-diks.',
@@ -838,7 +828,7 @@ lo nonb vizit posib sir lo sit por&eacute;zon lo ritm akty&egrave;l l&eacute; st
 'texte_compte_elements' => '@count@ bann z&eacute;l&eacute;man',
 'texte_config_groupe_mots_cles' => 'Ou v&eacute; f&eacute; zw&eacute; ast&egrave;r lakonfigirasyon pr&eacute;siz pou bann molakl&eacute; ? 
 Li p&eacute; perm&egrave;t alor swazi inn  s&egrave;l molakl&eacute; sanm group, o rand inn group pli importan, &eacute; tousala...&nbsp;',
-'texte_connexion_mysql' => 'G&egrave;t bann zinformasyon out l&eacute;berz&egrave;r la don aou &nbsp;: si li n&eacute;na MySQL, ou dwa trouv bann kod pou lakostaz sir lo serv&egrave;r MySQL.',
+'texte_connexion_mysql' => '<MODIF>G&egrave;t bann zinformasyon out l&eacute;berz&egrave;r la don aou &nbsp;: si li n&eacute;na SQL, ou dwa trouv bann kod pou lakostaz sir lo serv&egrave;r SQL.',
 'texte_contenu_article' => '(sak i va trouv dann lartik-la.)',
 'texte_contenu_articles' => 'S&eacute;lon lamak&egrave;t ou la swazi pou lo sit, i p&eacute; d&eacute;sid sak d&eacute;s&egrave;rtin z&eacute;l&eacute;man
 dann bann zartik l&eacute; pa itiliz&eacute;.
@@ -917,9 +907,9 @@ arkalkil inn s&egrave;l paz, ni kons&egrave;y aou pas dann l&eacute;spas piblik 
 'texte_recuperer_base' => 'Aranz la bazdodn&eacute;',
 'texte_reference_mais_redirige' => 'lartik l&eacute; r&eacute;f&eacute;rans&eacute; dann out sit SPIP, m&eacute; li l&eacute; tourn&eacute;-vir&eacute; sir inn ot ladr&egrave;s URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;ransman otomatik pou inn sit</b><br />Ou p&eacute; r&eacute;f&eacute;rans vitman inn sitw&egrave;b. Pou sa minm, indik anba ladr&egrave;s lo sit ou ladr&egrave;s lo fisy&eacute; pou la sindikasyon. SPIP i sava r&eacute;kup&egrave;r otomatikman bann zinformasyon sir lo sit minm (titr, kosa i sava trouv dodan...).',
-'texte_requetes_echouent' => 'Kank n&eacute;na d&eacute;sertinn rok&egrave;t MySQL i mars zam&eacute;
+'texte_requetes_echouent' => 'Kank n&eacute;na d&eacute;sertinn rok&egrave;t SQL i mars zam&eacute;
  sank ou vwa pwin okinn r&eacute;zon pou sa, l&eacute; posib lafot sa l&eacute; labazdodn&eacute; li-minm.</b><p>
-MySQL n&eacute;na inn kalit&eacute; pou aranz tout son bann tab 
+SQL n&eacute;na inn kalit&eacute; pou aranz tout son bann tab 
 kank zot l&eacute; abim&eacute; sanm inn aksidan. Ou p&eacute; es&eacute;y isi inn aranzman&nbsp;; dan ka li mars pa,  kons&egrave;rv inn kopi lafisaz, akoz n&eacute;na pet&egrave;t bann zindikasyon kosa i mars pa...<p>
 Si lo larlik-la i rest touzour, ifo koz do sa &egrave;k out l&eacute;berz&egrave;r.<p>',
 'texte_restaurer_base' => 'Rosarz lo kontnu lasovgard labaz',
@@ -1047,8 +1037,12 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
 
-
 // U
+'upload_fichier_zip' => 'Fisy&eacute; ZIP',
+'upload_fichier_zip_texte' => 'Fisy&eacute;-l&agrave; sak ou v&eacute; instal&eacute; l&eacute; inn fisy&eacute; Zip.',
+'upload_fichier_zip_texte2' => 'Fisy&eacute;-la l&eacute; pit&egrave;t&nbsp;:',
+'upload_zip_decompacter' => 'd&eacute;kopres&eacute; &eacute; sakinn z&eacute;l&eacute;man ali sr&eacute; pou instal&eacute; si lo sit. Tout bann fisy&eacute; pou instal i sra lor&nbsp;:',
+'upload_zip_telquel' => 'instal&eacute; komsa kom in larsiv kopres&eacute; Zip&nbsp;;',
 'utf8_convert_attendez' => 'Mersi esp&egrave;r in ti moman pi rocharj lo paj la.',
 'utf8_convert_avertissement' => 'Ou sava chanje lo kontni out bazdodn&eacute; (bzartik, tite-nouv&egrave;l,etousal) sat l&eacute; kom&eacute;la dan formad karakt&egrave;r <b>@orig@</b> pou pass azot dan bann karakt&egrave;r<b>@charset@</b>.',
 'utf8_convert_backup' => 'Oubly pa f&egrave; in sovgard byen kompl&eacute; out sit. Sra n&eacute;s&eacute;s&egrave;r ou gad byen sak out ban leskel&egrave;t ek bann fisy&eacute; lang zot l&eacute; kopatib ek @charset@. Pangar, si lo sist&egrave;m pou swiv bann r&eacute;vizyon l&eacute; aktiv&eacute;, li sra sirman ravaj&eacute;.',
@@ -1059,12 +1053,9 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'utf8_convert_verifier' => 'Fok ou sava vid lo kach, epi gad byen tout l&eacute; normal sir lo sit piblik. Si ou n&eacute;nna in larlik, inki&egrave;t pa ou, in sovgard out donn&eacute; la t&eacute; fin fini (ek lo forma SQL) andan lo r&eacute;pertwar @rep@.',
 'utf8_convertir_votre_site' => 'Po chanjer out sit ek utf-8',
 
-
 // V
 'version' => 'Vesyon&nbsp;:',
 'version_initiale' => 'Promy&eacute; v&egrave;rsyon'
-
 );
-
 
 ?>

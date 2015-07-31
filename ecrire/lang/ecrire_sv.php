@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Aktivera insticksmodulen',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Hittade inga resultat',
 'avis_chemin_invalide_1' => 'S&ouml;kv&auml;gen du har angett',
 'avis_chemin_invalide_2' => '&auml;r ogiltig. &Aring;terg&aring; till den f&ouml;reg&aring;ende sidan och kontrollera den angivna informationen',
-'avis_connexion_echec_1' => '<MODIF>Anslutningen till SQL-servern misslyckades.',
+'avis_connexion_echec_1' => 'Anslutningen till SQL-servern misslyckades.',
 'avis_connexion_echec_2' => '&Aring;terg&aring; till den f&ouml;reg&aring;ende sidan och kontrollera informationen du angivit.',
-'avis_connexion_echec_3' => '<MODIF><b>OBS</b> P&aring; m&aring;nga servrar m&aring;ste du  <b>beg&auml;ra</b> aktivering av din databas innan du kan anv&auml;nda den. Om du inte lyckas med uppkopplingen, se till att den &auml;r aktiverad.',
+'avis_connexion_echec_3' => '<b>OBS</b> P&aring; m&aring;nga servrar m&aring;ste du  <b>beg&auml;ra</b> aktivering av din databas innan du kan anv&auml;nda den. Om du inte lyckas med uppkopplingen, se till att den &auml;r aktiverad.',
 'avis_connexion_ldap_echec_1' => 'Anslutning till LDAP-server misslyckades.',
 'avis_connexion_ldap_echec_2' => '&Aring;terg&aring; till den f&ouml;reg&aring;ende sidan och kontrollera informationen du angivit.',
 'avis_connexion_ldap_echec_3' => 'Alternativt kan du v&auml;lja att inte anv&auml;nda LDAP st&ouml;d f&ouml;r att importera anv&auml;ndare.',
@@ -47,7 +49,6 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'avis_suppression_base' => 'OBS! Radering av data &auml;r permanent och kan inte g&ouml;ras ogjord.',
 'avis_version_mysql' => 'Din version av MySql (@mysql_version@) st&ouml;der inte automatisk reparation av databas-tabeller.',
 
-
 // B
 'bouton_acces_ldap' => 'L&auml;gg till en LDAP-katalog >>',
 'bouton_ajouter' => 'L&auml;gg till',
@@ -65,7 +66,7 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'bouton_desactive_tout' => 'Avaktivera alla',
 'bouton_desinstaller' => 'Avinstallera',
 'bouton_effacer_index' => 'Radera index',
-'bouton_effacer_statistiques' => '<NEW>Delete the statistics',
+'bouton_effacer_statistiques' => 'Radera statistiken',
 'bouton_effacer_tout' => 'Radera ALLA',
 'bouton_envoi_message_02' => 'SKICKA ETT MEDDELANDE',
 'bouton_envoyer_message' => 'F&auml;rdigt meddelande: skicka',
@@ -107,15 +108,14 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'bouton_vider_cache' => 'T&ouml;m cachen',
 'bouton_voir_message' => 'F&ouml;rhandsgranska meddelandet innan det godk&auml;nns',
 
-
 // C
 'cache_mode_compresse' => 'Cachefilerna sparas komprimerade.',
 'cache_mode_non_compresse' => 'Cachefilerna sparas utan komprimering.',
 'cache_modifiable_webmestre' => 'Den h&auml;r parametern kan &auml;ndras av den webbansvariga.',
 'calendrier_synchro' => 'Om du anv&auml;nder ett kalenderprogram som &auml;r kompatibelt med <b>iCal</b> kan du synkronisera det med informationen p&aring; den h&auml;r webbplatsen.',
 'config_activer_champs' => 'Aktivera f&ouml;ljande f&auml;lt',
-'config_choix_base_sup' => '<NEW>Name a database on this server',
-'config_erreur_base_sup' => '<NEW>SPIP does not have access to the available databases',
+'config_choix_base_sup' => 'Ge namnet p&aring; en databas p&aring; servern',
+'config_erreur_base_sup' => 'SPIP har inte tillg&aring;ng till de existerande databaserna',
 'config_info_base_sup' => '<NEW>If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.',
 'config_info_base_sup_disponibles' => '<NEW>Additional databases to which queries may be sent:',
 'config_info_logos' => 'Alla objekt p&aring; sajten kan kan ha sin egen logotype och dessutom en "mouseover" logotype',
@@ -130,7 +130,6 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'connexion_ldap' => 'ldapuppkoppling:',
 'copier_en_local' => 'Kopiera till den lokala sajten',
 
-
 // D
 'date_mot_heures' => 'h',
 'diff_para_ajoute' => 'Tillaggt stycke',
@@ -140,7 +139,6 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'diff_texte_deplace' => 'Flyttad text',
 'diff_texte_supprime' => 'Raderad text',
 'double_clic_inserer_doc' => 'Dubbelklicka f&ouml;r att s&auml;tta in den h&auml;r genv&auml;gen i texten',
-
 
 // E
 'email' => 'e-post',
@@ -188,10 +186,8 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; saknas i definitionsfilen',
 'erreur_plugin_version_manquant' => 'Denna plugin saknar version.',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Denna sida visar flera metoder att h&aring;lla dig informerad om aktiviteter p&aring; sajten.',
@@ -234,6 +230,7 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'icone_publier_breve' => 'Publicera nyhet',
 'icone_referencer_nouveau_site' => 'L&auml;nka en ny sajt',
 'icone_refuser_breve' => 'Refusera nyheten',
+'icone_relancer_signataire' => '<NEW>Contact the signatory again',
 'icone_retour' => 'Tillbaka',
 'icone_retour_article' => 'Tillbaka till artikeln',
 'icone_suivi_forum' => 'Uppf&ouml;ljning av publika forum: @nb_forums@ bidrag',
@@ -311,6 +308,10 @@ om import.<p>F&ouml;r mer information se <A HREF=\'http://www.spip.net/en_articl
 'info_classement_2' => '<NEW>&nbsp;out of @liste@',
 'info_code_acces' => 'Gl&ouml;m inte ditt eget l&ouml;senord!',
 'info_comment_lire_tableau' => 'Hur tolkar man den h&auml;r bilden',
+'info_compresseur_activer' => '<NEW>Enable compression',
+'info_compresseur_desactiver' => '<NEW>Disable compression',
+'info_compresseur_texte' => '<NEW>If your server does not automatically compress HTML pages when sending them, you can attempt to force the compression in order to reduce the size of the pages transmitted.<b>Warning</b>: this can have a noticeable adverse effect on the performance of some servers, ',
+'info_compresseur_titre' => '<NEW>Optimisations and compression',
 'info_config_suivi' => 'Om den h&auml;r adressen &auml;r en mailing lista, kan du under adressen visa var man kan registrera sig. Det kan vara en URL (till exempel en webbsida d&auml;r man kan registrera sig), eller en e-postadress med en speciell &auml;renderad (till exempel: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Du kan anm&auml;la dig till sajtens nyhetsbrev. Du kommer d&aring; att automatiskt f&aring; meddelanden om artiklar och nyheter som laddats upp f&ouml;r publicering.',
 'info_confirmer_passe' => 'Bekr&auml;fta ditt nya l&ouml;senord:',
@@ -552,7 +553,8 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_reglage_ldap' => 'inst&auml;llningar: <b>anpassar LDAP import</b>',
 'info_renvoi_article' => '<b>Ompekning.</b> Den h&auml;r artikeln pekar om till:',
 'info_reserve_admin' => 'Enbart administrat&ouml;rer kan f&ouml;r&auml;ndra adressen.',
-'info_restauration_sauvegarde' => '&Aring;terl&auml;gger backupen @archive@',
+'info_restauration_sauvegarde' => '<MODIF>&Aring;terl&auml;gger backupen @archive@',
+'info_restauration_sauvegarde_insert' => '<NEW>Inserting @archive@ in the database',
 'info_restreindre_rubrique' => 'Begr&auml;nsa administrationen till avdelningen:',
 'info_resultat_recherche' => 'S&ouml;kresultat:',
 'info_rubriques' => 'Avdelningar',
@@ -661,11 +663,13 @@ med en f&auml;rg som visar deras status:',
 'info_visiteurs' => 'Bes&ouml;kare',
 'info_visiteurs_02' => 'Be&ouml;kare p&aring; den publika delen',
 'install_adresse_base_hebergeur' => 'Databasadress tillhandah&aring;llen av webbhotellet',
+'install_base_ok' => '<NEW>The base @base@ was identified',
 'install_echec_annonce' => 'Den h&auml;r installationen kommer f&ouml;rmodligen inte att fungera, alternativt resulterar den i en sajt med reducerad funktionalitet ...',
 'install_extension_mbstring' => 'SPIP fungerar inte med:',
 'install_extension_php_obligatoire' => 'SPIP kr&auml;ver ett till&auml;gg till php:',
 'install_login_base_hebergeur' => 'Login tilldelat av leverant&ouml;ren',
 'install_nom_base_hebergeur' => 'Databasnamn tilldelat av leverant&ouml;ren:',
+'install_pas_table' => '<NEW>The database has no table yet',
 'install_pass_base_hebergeur' => 'L&ouml;senord till databasen tilldelat av leverant&ouml;ren',
 'install_php_version' => 'Versionen av PHP, @version@ &auml;r f&ouml;r gammal (minimum = @minimum@)',
 'install_select_langue' => 'V&auml;lj ett spr&aring;k, klicka sedan p&aring; knappen "forts&auml;tt" f&ouml;r att starta installationen.',
@@ -676,6 +680,7 @@ med en f&auml;rg som visar deras status:',
 'install_select_type_sqlite3' => '<NEW>SQLite 3',
 'install_serveur_hebergeur' => '<NEW>Database server attributed by the service provider',
 'install_table_prefix_hebergeur' => '<NEW>Table prefix attributed by the service provider:',
+'install_tables_base' => '<NEW>Tables of the database',
 'install_types_db_connus' => '<NEW>SPIP can use <b>MySQL</b> (the most common), <b>PostgreSQL</b> and <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => '<NEW>N.B.: some plugins only function with MySQL',
 'intem_redacteur' => 'redakt&ouml;r',
@@ -738,13 +743,10 @@ med en f&auml;rg som visar deras status:',
 'item_utiliser_syndication' => 'Anv&auml;nd automatisk syndikering',
 'item_visiteur' => 'bes&ouml;kare',
 
-
 // J
 'jour_non_connu_nc' => 'ok&auml;nd',
 
-
 // L
-'les_deux' => 'b&aring;de',
 'lien_ajout_destinataire' => 'L&auml;gg till som mottagare',
 'lien_ajouter_auteur' => 'L&auml;tt till redakt&ouml;ren',
 'lien_ajouter_participant' => 'L&auml;gg till en deltagare',
@@ -778,7 +780,6 @@ med en f&auml;rg som visar deras status:',
 'logo_standard_rubrique' => 'STANDARDLOGOTYPE F&Ouml;R AVDELNINGAR',
 'logo_survol' => 'LOGOTYPE F&Ouml;R MUS-&Ouml;VER',
 
-
 // M
 'menu_aide_installation_choix_base' => 'V&auml;lj din databas',
 'module_fichier_langue' => 'Spr&aring;kfiler',
@@ -787,7 +788,6 @@ med en f&auml;rg som visar deras status:',
 'module_texte_explicatif' => '<NEW>You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
 'module_texte_traduction' => 'Spr&aring;kfilen &laquo;&nbsp;@module@&nbsp;&raquo; finns i:',
 'mois_non_connu' => '<NEW>unknown',
-
 
 // O
 'onglet_declarer_une_autre_base' => '<NEW>Declare another database',
@@ -806,8 +806,8 @@ med en f&auml;rg som visar deras status:',
 'ortho_verif_impossible' => '<NEW>The system cannot check the spelling of this text.',
 'ortho_verifier' => '<NEW>Spell check',
 
-
 // P
+'page_pas_proxy' => '<NEW>This page shouldn\'t go through the proxy',
 'pas_de_proxy_pour' => '<NEW>If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)',
 'plugin_charge_paquet' => '<NEW>Loading the archive file @name@',
 'plugin_erreur_charger' => '<NEW>error: impossible to load @zip@',
@@ -856,10 +856,8 @@ med en f&auml;rg som visar deras status:',
 'plugins_vue_liste' => '<NEW>List',
 'protocole_ldap' => '<NEW>Protocol version:',
 
-
 // R
 'repertoire_plugins' => '<NEW>Directory:',
-
 
 // S
 'sauvegarde_fusionner' => '<NEW>Merge the current database with the backup',
@@ -875,7 +873,6 @@ med en f&auml;rg som visar deras status:',
 'syndic_option_resume_non' => '<NEW>the full content of the articles (HTML format)',
 'syndic_option_resume_oui' => '<NEW>just a summary (text format)',
 'syndic_options' => '<NEW>Syndication options:',
-
 
 // T
 'taille_cache_image' => '<NEW>The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
@@ -1151,6 +1148,8 @@ you can perform searches on sites and
 'titre_page_sites_tous' => 'Refererade webbplatser',
 'titre_page_statistiques' => 'Statistik uppdelat p&aring; avdelning',
 'titre_page_statistiques_referers' => 'Statistik (inkommande l&auml;nkar)',
+'titre_page_statistiques_signatures_jour' => '<NEW>Signatures count by day',
+'titre_page_statistiques_signatures_mois' => '<NEW>Signatures count by month',
 'titre_page_statistiques_visites' => 'Bes&ouml;ksstatistik',
 'titre_page_upgrade' => 'Uppgradera SPIP',
 'titre_publication_articles_post_dates' => 'Tidsstyrd publicering av artiklar',
@@ -1174,8 +1173,12 @@ you can perform searches on sites and
 'trad_lier' => 'Den h&auml;r artikeln &auml;r en &ouml;vers&auml;ttning av artikel nummer:',
 'trad_new' => 'Skriv en ny &ouml;vers&auml;ttning av den h&auml;r artikeln',
 
-
 // U
+'upload_fichier_zip' => 'ZIP fil',
+'upload_fichier_zip_texte' => 'Filen du f&ouml;rs&ouml;ker installera &auml;r en ZIP-fil.',
+'upload_fichier_zip_texte2' => 'Den h&auml;r filen kan:',
+'upload_zip_decompacter' => 'uppackad och alla filerna kommer ahh bli installerade p&aring; sajten. De filer som kommer att installeras &auml;r:',
+'upload_zip_telquel' => 'installerad som den &auml;r, som en ZIP-fil;',
 'utf8_convert_attendez' => 'V&auml;nta n&aring;gra sekunder och ladda sedan om den h&auml;r sidan.',
 'utf8_convert_avertissement' => 'Du h&aring;ller p&aring; att konvertera inneh&aring;llet i din databas (artiklar, notiser, etc) fr&aring;n teckenkodningen <b>@orig@</b> till teckenkodningen <b>@charset@</b>',
 'utf8_convert_backup' => '<MODIF>Gl&ouml;m inte bort att g&ouml;ra en fullst&auml;ndig s&auml;kerhetskopia av din webbplats. Du beh&ouml;ver ocks&aring; kontrollera att dina dokumentmallar och spr&aring;kfiler &auml;r kompatibla med @charset@. Om sp&aring;rning av revideringar &auml;r p&aring;slaget kommer den hur som helst att bli skadad.',
@@ -1186,13 +1189,10 @@ you can perform searches on sites and
 'utf8_convert_verifier' => 'Nu beh&ouml;ver du t&ouml;mma webbplatsens cache och sedan kontrollera att allt &auml;r bra med de offentliga delarna av webbplatsen. Om du upplever allvarliga problem har en s&auml;kerhetskopia av ditt ursprungliga data (i SQL-format) placerats i @rep@-katalogen.',
 'utf8_convertir_votre_site' => 'Konvertera din webbplats till utf-8',
 
-
 // V
 'version' => 'Version:',
 'version_deplace_rubrique' => '<NEW>Moved from <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> to <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Utg&aring;ngsversion'
-
 );
-
 
 ?>

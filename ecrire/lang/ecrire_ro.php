@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activa&#355;i plugin-ul',
@@ -40,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Aceste site-uri sindicalizate au avut o problem&#259;',
 'avis_suppression_base' => 'ATEN&#354;IE, suprimarea datelor este ireversibil&#259;',
 'avis_version_mysql' => 'Versiunea dumneavoastr&#259; de SQL (@version_mysql@) nu permite repararea automatic&#259; a tabelelor din baza de date.',
-
 
 // B
 'bouton_acces_ldap' => 'Ad&#259;uga&#355;i accesul la LDAP',
@@ -103,7 +104,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Goli&#355;i memoria tampon',
 'bouton_voir_message' => 'Vede&#355;i mesajul &icirc;nainte s&#259;-l valida&#355;i',
 
-
 // C
 'cache_mode_compresse' => 'Fi&#351;ierele de tampon sunt &icirc;nregistrate &icirc;n mod comprimat.',
 'cache_mode_non_compresse' => 'Fi&#351;ierele de tampon sunt &icirc;nregistrate &icirc;n mod necomprimat.',
@@ -126,7 +126,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conexiune :',
 'copier_en_local' => 'Copia&#355;i &icirc;n local',
 
-
 // D
 'date_mot_heures' => 'ore',
 'diff_para_ajoute' => 'Paragraf ad&#259;ugat',
@@ -136,7 +135,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Text deplasat',
 'diff_texte_supprime' => 'Text &#351;ters',
 'double_clic_inserer_doc' => 'Face&#355;i dublu-clic pentru a insera aceast&#259; scurt&#259;tur&#259; &icirc;n text',
-
 
 // E
 'email' => 'email',
@@ -185,10 +183,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; lips&#259; &icirc;n fi&#351;ierul de defini&#355;ii',
 'erreur_plugin_version_manquant' => 'Versiunea plugin-ului lips&#259;',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Aceast&#259; pagin&#259; prezint&#259; mai multe metode pentru a r&#259;m&acirc;ne &icirc;n contact cu activitatea de pe acest site.',
@@ -730,13 +726,10 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'item_utiliser_syndication' => 'Utiliza&#355;i sindicalizarea automatic&#259;',
 'item_visiteur' => 'vizitator',
 
-
 // J
 'jour_non_connu_nc' => 'necunoscut',
 
-
 // L
-'les_deux' => 'am&acirc;ndou&#259;',
 'lien_ajout_destinataire' => 'Ad&#259;uga&#355;i acest destinatar',
 'lien_ajouter_auteur' => 'Ad&#259;uga&#355;i acest autor',
 'lien_ajouter_participant' => 'Ad&#259;uga&#355;i un participant',
@@ -770,7 +763,6 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'logo_standard_rubrique' => 'VINIETA STANDARD A RUBRICILOR',
 'logo_survol' => 'VINIETA PENTRU SURVOL',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Alege&#355;i baza dumneavoastr&#259;',
 'module_fichier_langue' => 'Fi&#351;ier de limb&#259;',
@@ -779,7 +771,6 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'module_texte_explicatif' => 'Pute&#355;i s&#259; introduce&#355;i scurt&#259;turile urm&#259;toare &icirc;n scheletele folosite de site-ul public. Acestea vor fi traduse &icirc;n mod automat &icirc;n limbile pentru care exist&#259; un fi&#351;ier de limb&#259;.',
 'module_texte_traduction' => 'Fi&#351;ierul de limb&#259; &laquo;&nbsp;@module@&nbsp;&raquo; este disponibil &icirc;n&nbsp;:',
 'mois_non_connu' => 'necunoscut',
-
 
 // O
 'onglet_declarer_une_autre_base' => 'Declara&#355;i o alt&#259; baz&#259; de date',
@@ -797,7 +788,6 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'ortho_trop_de_fautes' => 'Aten&#355;ie&nbsp;: textul dumneavoastr&#259; con&#355;ine prea multe gre&#351;eli, nici o corec&#355;ie nu a fost sugerat&#259; pentru a nu supra-&icirc;nc&#259;rca sistemul.',
 'ortho_verif_impossible' => 'Sistemul nu poate verifica ortografie acestui text.',
 'ortho_verifier' => 'Verifica&#355;i ortografia',
-
 
 // P
 'page_pas_proxy' => 'Aceast&#259; pagin&#259; nu trebuie s&#259; treac&#259; prin proxy',
@@ -849,10 +839,8 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugins_vue_liste' => 'List&#259;',
 'protocole_ldap' => 'Versiunea protocolului :',
 
-
 // R
 'repertoire_plugins' => 'Director&nbsp;:',
-
 
 // S
 'sauvegarde_fusionner' => '&Icirc;mbina&#355;i baza curent&#259; cu cea salvat&#259;',
@@ -868,7 +856,6 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'syndic_option_resume_non' => 'con&#355;inutul complet al articolelor (&icirc;n format HTML)',
 'syndic_option_resume_oui' => 'un rezumat simplu (&icirc;n format text)',
 'syndic_options' => 'Op&#355;iuni de syndicalizare&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Imaginile calculate automat de c&#259;tre SPIP (viniete de documente, titluri prezentate sub form&#259; grafic&#259;, func&#355;ii matematice &icirc;n format TeX...) ocup&#259; &icirc;n directorul @dir@ un total de @taille@.',
@@ -1147,8 +1134,12 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_lier' => 'Acest articol este o traducere a articolului cu num&#259;rul&nbsp;:',
 'trad_new' => 'Scrie&#355;i o nou&#259; traducere a acestui articol',
 
-
 // U
+'upload_fichier_zip' => 'Fi&#351;ier ZIP',
+'upload_fichier_zip_texte' => 'Fi&#351;ierul pe care propune&#355;i spre instalare este un fi&#351;ier ZIP.',
+'upload_fichier_zip_texte2' => 'Acest fi&#351;ier poate fi&nbsp;:',
+'upload_zip_decompacter' => 'decomprimat &#351;i fiecare element con&#355;inut instalat pe site. Fi&#351;ierele care vor fi instalate pe site sunt&nbsp;:',
+'upload_zip_telquel' => 'instalat ca atare, ca arhiv&#259; comprimat&#259; ZIP&nbsp;;',
 'utf8_convert_attendez' => 'A&#351;tepta&#355;i c&acirc;teva momente &#351;i re&icirc;nc&#259;rca&#355;i aceast&#259; pagin&#259;.',
 'utf8_convert_avertissement' => 'Pute&#355;i s&#259; converti&#355;i con&#355;inutul bazei dumneavoastr&#259; de date (articole, &#351;tiri, etc.) din codarea <b>@orig@</b> catre codarea <b>@charset@</b>.',
 'utf8_convert_backup' => 'Nu uita&#355;i s&#259; face&#355;i &icirc;nainte de orice o copie de siguran&#355;&#259; a totalit&#259;&#355;ii site-ului dumneavoastr&#259;. Va trebui, de asemenea, s&#259; verifica&#355;i c&#259; scheletele &#351;i fi&#351;ierele de limb&#259; sunt compatibile @charset@.',
@@ -1159,13 +1150,10 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'utf8_convert_verifier' => 'Va trebui ca acum s&#259; goli&#355;i memoria tampon &#351;i s&#259; verifica&#355;i c&#259; totul se petrece bine &icirc;n cadrul site-ului public. &Icirc;n caz de probleme majore, o copie de siguran&#355;&#259; a fost efectuat&#259; (&icirc;n format SQL) &icirc;n directorul @rep@.',
 'utf8_convertir_votre_site' => 'Converti&#355;i site-ul dumneavoastr&#259; &icirc;n utf-8',
 
-
 // V
 'version' => 'Versiune&nbsp;:',
 'version_deplace_rubrique' => 'Deplasat de la <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> c&#259;tre <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Versiunea ini&#355;ial&#259;'
-
 );
-
 
 ?>

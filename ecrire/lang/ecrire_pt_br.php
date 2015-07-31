@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Ativar o plugin',
@@ -48,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Estes sites sindicados provocaram um problema',
 'avis_suppression_base' => 'ATEN&Ccedil;&Atilde;O, a supress&atilde;o dos dados &eacute; irrevers&iacute;vel',
 'avis_version_mysql' => 'A vers&atilde;o do seu servidor SQL (@version_mysql@) n&atilde;o permite a auto-repara&ccedil;&atilde;o das tabelas da base de dados.',
-
 
 // B
 'bouton_acces_ldap' => 'Incluir o acesso ao LDAP',
@@ -110,7 +111,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Limpar o cache',
 'bouton_voir_message' => 'Visualizar esta mensagem antes de validar',
 
-
 // C
 'cache_mode_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo compactado.',
 'cache_mode_non_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo n&atilde;o compactado.',
@@ -133,7 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Conex&atilde;o:',
 'copier_en_local' => 'Copiar localmente',
 
-
 // D
 'date_mot_heures' => 'horas',
 'diff_para_ajoute' => 'Par&aacute;grafo inclu&iacute;do',
@@ -143,7 +142,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Texto movido',
 'diff_texte_supprime' => 'Texto exclu&iacute;do',
 'double_clic_inserer_doc' => 'Fa&ccedil;a um clique duplo para inserir este atalho no texto',
-
 
 // E
 'email' => 'e-mail',
@@ -192,10 +190,8 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ausente no arquivo de defini&ccedil;&atilde;o',
 'erreur_plugin_version_manquant' => 'Vers&atilde;o do plugin ausente',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta diversos m&eacute;todos para se manter em contato com a vida deste site.',
@@ -522,7 +518,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es: <b>Configura&ccedil;&atilde;o da importa&ccedil;&atilde;o LDAP</b>',
 'info_renvoi_article' => '<b>Redirecionamento.</b> Esta mat&eacute;ria redireciona para a p&aacute;gina:',
 'info_reserve_admin' => 'Apenas os administradores podem alterar este endere&ccedil;o.',
-'info_restauration_sauvegarde' => 'restuaro da c&oacute;pia de seguran&ccedil;a @archive@',
+'info_restauration_sauvegarde' => '<MODIF>restuaro da c&oacute;pia de seguran&ccedil;a @archive@',
 'info_restreindre_rubrique' => 'Restringir o gerenciamento &agrave; se&ccedil;&atilde;o:',
 'info_resultat_recherche' => 'Resultados da pesquisa:',
 'info_rubriques' => 'Se&ccedil;&otilde;es',
@@ -707,13 +703,10 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'item_utiliser_syndication' => 'Utilizar a sindica&ccedil;&atilde;o autom&aacute;tica',
 'item_visiteur' => 'Visitante',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'ambos',
 'lien_ajout_destinataire' => 'Incluir este destinat&aacute;rio',
 'lien_ajouter_auteur' => 'Incluir este autor',
 'lien_ajouter_participant' => 'Incluir um participante',
@@ -747,7 +740,6 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'logo_standard_rubrique' => '&Iacute;CONE PADR&Atilde;O DAS SE&Ccedil;&Otilde;ES',
 'logo_survol' => '&Iacute;CONE PARA MOUSEOVER',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Sele&ccedil;&atilde;o da sua base',
 'module_fichier_langue' => 'Arquivo de idioma',
@@ -756,7 +748,6 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'module_texte_explicatif' => 'Voc&ecirc; pode inserir os atalhos a seguir nos gabaritos do seu site p&uacute;blico. Eles ser&atilde;o traduzidos automaticamente para os idiomas para os quais exista um arquivo de idioma.',
 'module_texte_traduction' => 'O arquivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispon&iacute;vel em:',
 'mois_non_connu' => 'desconhecido',
-
 
 // O
 'onglet_declarer_une_autre_base' => '<NEW>D&eacute;clarer une autre base',
@@ -774,7 +765,6 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'ortho_trop_de_fautes' => 'Aten&ccedil;&atilde;o: o seu texto cont&eacute;m demasiados erros, nenhuma corre&ccedil;&atilde;o ser&aacute; sugerida de modo a n&atilde;o sobrecarregar o sistema.',
 'ortho_verif_impossible' => 'O sistema n&atilde;o pode verificar a ortografia deste texto.',
 'ortho_verifier' => 'Verificar a ortografia',
-
 
 // P
 'pas_de_proxy_pour' => 'Se necess&aacute;rio, indique as m&aacute;quinas ou dom&iacute;nios para os quais este proxy n&atilde;o se aplica (por exemplo: @exemple@)',
@@ -825,10 +815,8 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Vers&atilde;o do protocolo:',
 
-
 // R
 'repertoire_plugins' => 'Diret&oacute;rio:',
-
 
 // S
 'sauvegarde_fusionner' => 'Combinar a base atual e a c&oacute;pia de seguran&ccedil;a',
@@ -844,7 +832,6 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'syndic_option_resume_non' => 'O conte&uacute;do completo das mat&eacute;rias ( em formato HTML)',
 'syndic_option_resume_oui' => 'um resumo b&aacute;sico (em formato texto)',
 'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o:',
-
 
 // T
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (&iacute;cones de documentos, t&iacute;tulos apresentados sob a forma gr&aacute;fica, fun&ccedil;&otilde;es matem&aacute;ticas em formato TeX...) ocupam, no diret&oacute;rio @dir@, um total de @taille@.',
@@ -1069,8 +1056,12 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'trad_lier' => 'Esta mat&eacute;ria &eacute; uma tradu&ccedil;&atilde;o da mat&eacute;ria n&uacute;mero:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o para esta mat&eacute;ria',
 
-
 // U
+'upload_fichier_zip' => 'Arquivo ZIP',
+'upload_fichier_zip_texte' => 'O arquivo que voc&ecirc; prop&ocirc;s instalar &eacute; um arquivo Zip.',
+'upload_fichier_zip_texte2' => 'Este arquivo pode ser:',
+'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os arquivos que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
+'upload_zip_telquel' => 'instalado; como arquivo compactado Zip;',
 'utf8_convert_attendez' => 'Aguarde alguns instantes e atualize esta p&aacute;gina.',
 'utf8_convert_avertissement' => 'Voc&ecirc; est&aacute; prestes a converter o conte&uacute;do da sua base de dados(mat&eacute;rias, notas etc) do conjunto de caracteres <b>@orig@</b> para o conjunto de caracteres <b>@charset@</b>.',
 'utf8_convert_backup' => 'N&atilde;o se esque&ccedil;a de fazer primeiro uma c&oacute;pia de seguran&ccedil;a completa do seu site. Voc&ecirc; deve tamb&eacute;m verificar se os seus esqueletos e arquivos de idioma s&atilde;o compat&iacute;veis com @charset@.',
@@ -1081,13 +1072,10 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'utf8_convert_verifier' => 'Voc&ecirc; deve agora esvaziar o cache, e verificar se est&aacute; tudo bem com as p&aacute;ginas p&uacute;blicas do site. No caso de apresentarem problemas, uma c&oacute;pia de seguran&ccedil;a dos seus dados foi feita (no formato SQL) no diret&oacute;rio @rep@.',
 'utf8_convertir_votre_site' => 'Converter o seu site para utf-8',
 
-
 // V
 'version' => 'Vers&atilde;o:',
 'version_deplace_rubrique' => '<NEW>D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.',
 'version_initiale' => 'vers&atilde;o inicial'
-
 );
-
 
 ?>

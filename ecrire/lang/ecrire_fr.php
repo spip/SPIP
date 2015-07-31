@@ -1,9 +1,9 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activer le plugin',
@@ -48,7 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me',
 'avis_suppression_base' => 'ATTENTION, la suppression des donn&eacute;es est irr&eacute;versible',
 'avis_version_mysql' => 'Votre serveur SQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
-
 
 // B
 'bouton_acces_ldap' => 'Ajouter l\'acc&egrave;s &agrave; LDAP',
@@ -115,7 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Vider le cache',
 'bouton_voir_message' => 'Voir ce message avant de le valider',
 
-
 // C
 'cache_mode_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
 'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
@@ -123,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 'config_activer_champs' => 'Activer les champs suivants',
 'config_choix_base_sup' => 'indiquer une base sur ce serveur',
-'config_erreur_base_sup' => "SPIP n'a pas acc&egrave;s &agrave; la liste des bases accessibles",
+'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles',
 'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.',
 'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:',
 'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;',
@@ -133,11 +131,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol',
 'config_info_redirection' => 'En activant cette option, vous pourrez cr&eacute;er des articles virtuels, simples r&eacute;f&eacute;rences d\'articles publi&eacute;s sur d\'autres sites ou hors de SPIP.',
 'config_redirection' => 'Articles virtuels',
-'config_titre_base_sup' => "D&eacute;claration d'une base suppl&eacute;mentaire",
+'config_titre_base_sup' => 'D&eacute;claration d\'une base suppl&eacute;mentaire',
 'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire',
 'connexion_ldap' => 'Connexion :',
 'copier_en_local' => 'Copier en local',
-
 
 // D
 'date_mot_heures' => 'heures',
@@ -148,7 +145,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Texte d&eacute;plac&eacute;',
 'diff_texte_supprime' => 'Texte supprim&eacute;',
 'double_clic_inserer_doc' => 'Double-cliquez pour ins&eacute;rer ce raccourci dans le texte',
-
 
 // E
 'email' => 'email',
@@ -198,10 +194,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
 'erreur_plugin_version_manquant' => 'Version du plugin manquante',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
@@ -326,8 +320,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_comment_lire_tableau' => 'Comment lire ce tableau',
 'info_compresseur_activer' => 'Activer la compression',
 'info_compresseur_desactiver' => 'D&#233;sactiver la compression',
-'info_compresseur_titre' => 'Optimisations et compression',
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.',
+'info_compresseur_titre' => 'Optimisations et compression',
 'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
@@ -553,8 +547,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP&nbsp;?
 	(le d&eacute;sactiver acc&eacute;l&egrave;re le fonctionnement du syst&egrave;me.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites',
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites',
+'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites',
 'info_qui_attribue_mot_cle' => 'Les mots de ce groupe peuvent &ecirc;tre attribu&eacute;s par&nbsp;:',
 'info_racine_site' => 'Racine du site',
 'info_recharger_page' => 'Veuillez recharger cette page dans quelques instants.',
@@ -700,8 +694,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'install_serveur_hebergeur' => 'Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur',
 'install_table_prefix_hebergeur' => 'Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:',
 'install_tables_base' => 'Tables de la base',
-'install_types_db_connus' => "SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.",
-'install_types_db_connus_avertissement' => "Attention&nbsp;: plusieurs plugins ne fonctionnent qu'avec MySQL",
+'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.',
+'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL',
 'intem_redacteur' => 'r&eacute;dacteur',
 'item_accepter_inscriptions' => 'Accepter les inscriptions',
 'item_activer_forum_administrateur' => 'Activer le forum des administrateurs',
@@ -762,10 +756,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
-
 
 // L
 'lien_ajout_destinataire' => 'Ajouter ce destinataire',
@@ -801,7 +793,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES',
 'logo_survol' => 'LOGO POUR SURVOL',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Choix de votre base',
 'module_fichier_langue' => 'Fichier de langue',
@@ -810,7 +801,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'module_texte_explicatif' => 'Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
 'module_texte_traduction' => 'Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'non connu',
-
 
 // O
 'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base',
@@ -829,15 +819,14 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
 'ortho_verifier' => 'V&eacute;rifier l\'orthographe',
 
-
 // P
-'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)',
 'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy',
+'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)',
 'plugin_charge_paquet' => 'Chargement du paquet @name@',
 'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@',
 'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.',
-'plugin_erreur_droit2' => "Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.",
-'plugin_erreur_zip' => "echec pclzip&nbsp;: erreur @status@",
+'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.',
+'plugin_erreur_zip' => 'echec pclzip&nbsp;: erreur @status@',
 'plugin_etat_developpement' => 'en d&eacute;veloppement',
 'plugin_etat_experimental' => 'exp&eacute;rimental',
 'plugin_etat_stable' => 'stable',
@@ -846,16 +835,16 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:',
 'plugin_info_automatique2' => 'cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.',
+'plugin_info_automatique_creer' => '&#224; cr&#233;er &#224; la racine du site.',
 'plugin_info_automatique_exemples' => 'exemples&nbsp;:',
-'plugin_info_automatique_ftp' => "Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>",
-'plugin_info_automatique_creer' => "&#224; cr&#233;er &#224; la racine du site.",
-'plugin_info_automatique_lib' => "Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.",
+'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>',
+'plugin_info_automatique_lib' => 'Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.',
 'plugin_info_automatique_liste' => 'Vos listes de plugins&nbsp;:',
 'plugin_info_automatique_liste_officielle' => 'les plugins officiels',
 'plugin_info_automatique_liste_update' => 'Mettre &#224; jour les listes',
 'plugin_info_automatique_ou' => 'ou...',
 'plugin_info_automatique_select' => 'S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.',
-'plugin_info_telecharger' => "&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@",
+'plugin_info_telecharger' => '&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@',
 'plugin_librairies_installees' => 'Librairies install&#233;es',
 'plugin_necessite_lib' => 'Ce plugin n&#233;cessite la librairie @lib@',
 'plugin_necessite_plugin' => 'N&eacute;cessite le plugin @plugin@ en version @version@ minimum.',
@@ -869,21 +858,19 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>',
 'plugin_zip_installe_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.',
 'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@',
-'plugin_zip_installer'=>'Vous pouvez maintenant l\'installer.',
+'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.',
 'plugin_zip_telecharge' => 'Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;',
 'plugins_actifs' => '@count@ plugins activ&#233;s.',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponibles' => '@count@ plugins disponibles.',
-'plugins_erreur' => "Erreur dans les plugins : @plugins@",
+'plugins_erreur' => 'Erreur dans les plugins : @plugins@',
 'plugins_liste' => 'Liste des plugins',
-'plugins_vue_liste' => 'Liste',
 'plugins_vue_hierarchie' => 'Hi&eacute;rarchie',
+'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version du protocole :',
-
 
 // R
 'repertoire_plugins' => 'R&eacute;pertoire&nbsp;:',
-
 
 // S
 'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde',
@@ -899,7 +886,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)',
 'syndic_option_resume_oui' => 'un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Options de syndication&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
@@ -918,7 +904,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
-'texte_admin_tech_04' => "Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ",
+'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
 'texte_adresse_annuaire_1' => '(Si votre annuaire est install&eacute; sur la m&ecirc;me machine que ce site Web, il s\'agit probablement de &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'L\'auteur suivant a &eacute;t&eacute; ajout&eacute; &agrave; l\'article :',
 'texte_annuaire_ldap_1' => 'Si vous avez acc&egrave;s &agrave; un annuaire (LDAP), vous pouvez l\'utiliser pour importer automatiquement des utilisateurs sous SPIP.',
@@ -952,7 +938,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
    en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
    par groupe, qu\'un groupe est important...&nbsp;?',
-'texte_connexion_mysql' =>'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver le serveur de base de donn&eacute;es qu\'il propose et vos identifiants personnels pour vous y connecter.',
+'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver le serveur de base de donn&eacute;es qu\'il propose et vos identifiants personnels pour vous y connecter.',
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)',
 'texte_contenu_articles' => 'Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
 		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
@@ -961,7 +947,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 			crash&eacute;, vous pouvez tenter une r&eacute;paration
 			automatique.',
 'texte_creer_rubrique' => 'Avant de pouvoir &eacute;crire des articles,<br /> vous devez cr&eacute;er une rubrique.',
-'texte_date_creation_article' => 'DATE DE CR&Eacute;ATION DE L\'ARTICLE&nbsp;:',
+'texte_date_creation_article' => 'DATE DE CR&Eacute;ATION DE L\'ARTICLE&nbsp;:', # on ajoute le ":"
 'texte_date_publication_anterieure' => 'Date de r&eacute;daction ant&eacute;rieure&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de r&eacute;daction ant&eacute;rieure.',
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE&nbsp;:',
@@ -1182,9 +1168,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_sites_tous' => 'Les sites r&eacute;f&eacute;renc&eacute;s',
 'titre_page_statistiques' => 'Statistiques par rubriques',
 'titre_page_statistiques_referers' => 'Statistiques (liens entrants)',
-'titre_page_statistiques_visites' => 'Statistiques des visites',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour',
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois',
+'titre_page_statistiques_visites' => 'Statistiques des visites',
 'titre_page_upgrade' => 'Mise &agrave; niveau de SPIP',
 'titre_publication_articles_post_dates' => 'Publication des articles post-dat&eacute;s',
 'titre_referencement_sites' => 'R&eacute;f&eacute;rencement de sites et syndication',
@@ -1207,9 +1193,14 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
 'trad_new' => '&Eacute;crire une nouvelle traduction de cet article',
 
-
 // U
+'upload_fichier_zip' => 'Fichier ZIP',
+'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
+'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:',
 'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction',
+'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
+'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers',
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.',
 'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',
@@ -1220,13 +1211,10 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'utf8_convert_verifier' => 'Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8',
 
-
 // V
 'version' => 'Version&nbsp;:',
-'version_deplace_rubrique' => "D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.",
+'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.',
 'version_initiale' => 'Version initiale'
-
 );
-
 
 ?>

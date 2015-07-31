@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => '<NEW>Activer le plugin',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Nije pronadjen nijedan rezultat.',
 'avis_chemin_invalide_1' => 'Opcija koju ste izabrali',
 'avis_chemin_invalide_2' => 'nije vazeca. Vratite se na  prethodnu stranicu i provjerite unesene podatke.',
-'avis_connexion_echec_1' => 'Konekcija na MySQL server nije uspijela.',
+'avis_connexion_echec_1' => '<MODIF>Konekcija na SQL server nije uspijela.',
 'avis_connexion_echec_2' => 'Vratite se na prethodnu stranicu i provjerite unesene podatke.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Na nekim serverima, trebate <b>traziti</b> aktiviranje pristupa MySQL bazi prije nego je mozete koristiti. Ako se ne mozete konektovati provjerite da li ste trazili pomenutu aktivaciju.',
+'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> Na nekim serverima, trebate <b>traziti</b> aktiviranje pristupa SQL bazi prije nego je mozete koristiti. Ako se ne mozete konektovati provjerite da li ste trazili pomenutu aktivaciju.',
 'avis_connexion_ldap_echec_1' => 'Konekcija na LDAP server nije uspjela.',
 'avis_connexion_ldap_echec_2' => 'Vratite se na prethodnu stranicu i provjerite unesene podatke.',
 'avis_connexion_ldap_echec_3' => 'Ne koristite podrsku LDAP kao alternativu za importovanje korisnika.',
 'avis_conseil_selection_mot_cle' => '<b>Vazna grupa:</b> savjetuje se da izaberete kljucnu rijec za ovu grupu.',
 'avis_deplacement_rubrique' => 'Paznja! Ova rubrika sadrzi @contient_breves@ kratke poruke: Ako je zelite premjestiti, oznacite  ovo polje kao potvrdu.',
 'avis_destinataire_obligatoire' => 'Trebate naznaciti primaoca prije nego sto posaljete ovu poruku.',
-'avis_erreur_connexion_mysql' => 'Greska u MySQL konekciji',
+'avis_erreur_connexion_mysql' => 'Greska u SQL konekciji',
 'avis_erreur_version_archive' => '<b>Paznja! Dokument @archive@  odgovara drugoj verziji SPIP od one koju ste instalirali.</b>  Riskirate velike poteskoce: opasnost od unistenja vase baze podataka, razne disfunkcije stranice, itd. Ne potvrdjujte ovaj zahtjev za importovanje! Za vise informacija pogledajte <a  href=\\http://www.spip.net/fr_article1489.html\\> SPIP dokumentaciju</a>.',
 'avis_espace_interdit' => '<b>Zabranjen prostor</b><p />SPIP je  vec instaliran.',
 'avis_lecture_noms_bases_1' => 'Instalacijski program nije uspio ucitati imena instaliranih baza podataka.',
@@ -38,8 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Doslo je do problema  prilikom sindikacije ovih stranica',
 'avis_sites_syndiques_probleme' => 'Sindikovane stranice su postavljale problem',
 'avis_suppression_base' => 'PAZNJA, brisanje podataka je  nepovratno',
-'avis_version_mysql' => 'Vasa MySQL verzija (@version_mysql@) ne dozvoljava automatsko popravljanje (ispravljanje) tabela  baze.',
-
+'avis_version_mysql' => 'Vasa SQL verzija (@version_mysql@) ne dozvoljava automatsko popravljanje (ispravljanje) tabela  baze.',
 
 // B
 'bouton_acces_ldap' => 'Dodaj pristup za LDAP >>',
@@ -81,16 +82,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne prikazuj u listi urednika',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne salji editorijalne najave',
 'bouton_radio_non_syndication' => 'Bez sindikacije',
-'bouton_radio_occidental' => 'Okcidentalni alfabet  (<tt>iso-8859-1</tt>)&nbsp;: Uglavnom dozvoljava prikazivanje  zapadno-evropskih jezika (engleski, francuski ,  njemacki...); SPIP relativno dobro vlada drugim jezicima.',
 'bouton_radio_pas_petition' => 'Bez peticije',
-'bouton_radio_personnalise' => 'Personalizovani set karaktera: izaberite ovu opciju ako namjeravate koristiti specificni set  karaktera',
 'bouton_radio_petition_activee' => 'Peticija je aktivirana',
 'bouton_radio_publication_immediate' => 'Direktna publikacija poruka (prijedlozi se prikazuju nakon slanja, administratori ih  odmah mogu izbrisati).',
 'bouton_radio_sauvegarde_compressee' => 'Snimiti sa kompresijom pod @fichier@',
 'bouton_radio_sauvegarde_non_compressee' => 'Snimiti bez  kompresije pod @fichier@',
 'bouton_radio_supprimer_petition' => 'Izbrisi peticiju',
 'bouton_radio_syndication' => 'Sindikacija:',
-'bouton_radio_universel' => 'Univerzalni alfabet (<tt>utf-8</tt>): dozvoljava prikazivanje svih jezika, ali moze postavljati probleme kompatibilnosti sa drugim programima koji sluze za izmjenu obrazaca i sa nekim software-om za citanje  e-maila.',
 'bouton_redirection' => 'PREUSMJERI',
 'bouton_relancer_installation' => 'Ponovo pokreni instalaciju',
 'bouton_restaurer_base' => 'Obnovi bazu podataka',
@@ -100,13 +98,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Isprazni kes',
 'bouton_voir_message' => 'Pregledaj poruku prije ovjere',
 
-
 // C
 'cache_mode_compresse' => 'Dokumenti kesa su snimljeni u kompresovanoj formi;.',
 'cache_mode_non_compresse' => 'Dokumenti kesa su pisani u nekompresovanoj formi.',
 'cache_modifiable_webmestre' => 'Webmaster stranice moze promijeniti ovaj parametar.',
 'calendrier_synchro' => 'Ako koristite neki kompaktibilni kalendarski software <b>iCal</b>, mozete ga uskladiti sa informacijama ove stranice.',
-
 
 // D
 'date_mot_heures' => 'sati',
@@ -117,7 +113,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Premjesten tekst',
 'diff_texte_supprime' => 'Izbrisan paragraf',
 'double_clic_inserer_doc' => 'Kliknite dva puta ako ovu precicu zelite dodati tekstu',
-
 
 // E
 'email' => 'e-mail',
@@ -165,7 +160,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '<NEW>&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
 'erreur_plugin_version_manquant' => '<NEW>Version du plugin manquante',
 
-
 // I
 'ical_info1' => 'Na ovoj strani je predstavljeno nekoliko metoda kako da ostanete u toku sa aktuelnostima ove web stranice.',
 'ical_info2' => 'Za sve informacije o ovim metodama, mozete konsultovati <a href="http://www.spip.net/fr_suivi"> SPIP  dokumentaciju </a>.',
@@ -188,6 +182,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_groupe_mots' => 'Kreiraj novu grupu rijeci',
 'icone_creation_mots_cles' => 'Kreiraj novu lozinku',
 'icone_creer_auteur' => 'Kreiraj novog autora i asociraj ga s ovim clankom',
+'icone_creer_mot_cle' => 'Kreiraj novu kljucnu rijec i povezi je sa ovim clankom',
 'icone_creer_rubrique_2' => 'Kreiraj novu rubriku',
 'icone_ecrire_nouvel_article' => 'Kratke poruke sadrzane u ovoj rubrici',
 'icone_envoyer_message' => 'Posalji ovu poruku',
@@ -280,7 +275,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Potvrdi novu lozinku:',
 'info_connexion_base' => 'Druga etapa: <b>Pokusaj konekcije sa bazom</b>',
 'info_connexion_ldap_ok' => 'Uspjesna LDAP konekcija.</b><p />  Mozete pristupiti sljedecoj etapi',
-'info_connexion_mysql' => 'Prva etapa: <b>Vasa MySQL konekcija</b>',
+'info_connexion_mysql' => 'Prva etapa: <b>Vasa SQL konekcija</b>',
 'info_connexion_ok' => 'Uspjesna konekcija.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Sadrzaj clanaka',
@@ -376,7 +371,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Vase poruke u toku uredjivanja',
 'info_message_technique' => 'Tehnicka poruka:',
 'info_messagerie_interne' => 'Interni servis za poruke',
-'info_mise_a_niveau_base' => 'nadogradnja vase MySQL baze',
+'info_mise_a_niveau_base' => 'nadogradnja vase SQL baze',
 'info_mise_a_niveau_base_2' => '\\{\\{Paznja!\\}\\} Instalirali ste verziju SPIP dokumenata, koji su stariji od one koja je vec postojala na stranici: vasa baza podataka je vjerovatno izgubljena i vasa stranica vise nece funkcionisati.  <br />\\{\\{Ponovo instalirajte SPIP dokumente\\}\\}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardni nacin funkcionisanja javnih foruma',
 'info_modifier_breve' => 'Izmijeni kratku poruku:',
@@ -472,7 +467,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_reglage_ldap' => 'Opcije: namijestanje LDAP importa</b>',
 'info_renvoi_article' => '<b>Preusmjerenje.</b> Ovaj clanak se preusmjerava na stranicu:',
 'info_reserve_admin' => 'Samo administratori mogu izmijeniti ovu adresu.',
-'info_restauration_sauvegarde' => 'obnavljanje backup arhiva @archive@',
+'info_restauration_sauvegarde' => '<MODIF>obnavljanje backup arhiva @archive@',
 'info_restreindre_rubrique' => 'Ograniciti uredjivanje rubrike:',
 'info_resultat_recherche' => 'Rezultati pretrage:',
 'info_rubriques' => 'Rubrike',
@@ -640,10 +635,8 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'item_utiliser_syndication' => 'Koristi automatsku sindikaciju',
 'item_visiteur' => 'posjetioc',
 
-
 // J
 'jour_non_connu_nc' => 'nepoznato',
-
 
 // L
 'lien_ajout_destinataire' => 'Dodaj ovog primaoca',
@@ -678,7 +671,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'logo_standard_rubrique' => 'STANDARDNI LOGOTIP ZA RUBRIKE',
 'logo_survol' => 'HOVERING LOGO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Biranje vase baze',
 'module_fichier_langue' => 'Jezicni dokument',
@@ -687,7 +679,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'module_texte_explicatif' => 'Mozete dodati sljedece precice u obrasce vase javne stranice. One ce biti automatski prevedene u razne jezike, za koje postoje jezicni dokumenti.',
 'module_texte_traduction' => 'Jezicni dokument &laquo;&nbsp;@module@&nbsp;&raquo; je na raspolaganju u:',
 'mois_non_connu' => 'nepoznato',
-
 
 // O
 'onglet_repartition_actuelle' => 'Aktuelno',
@@ -705,7 +696,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'ortho_verif_impossible' => 'Sistem ne moze provjeriti pravopis ovog teksta.',
 'ortho_verifier' => 'Provjera pravopisa',
 
-
 // P
 'plugin_etat_developpement' => 'u razvoju',
 'plugin_etat_experimental' => 'experimentalno',
@@ -713,10 +703,8 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'plugin_etat_test' => 'testira se',
 'plugins_liste' => 'Plugin lista',
 
-
 // R
 'repertoire_plugins' => 'Directorij:',
-
 
 // S
 'statut_admin_restreint' => '(ograniceni admin)',
@@ -729,7 +717,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'syndic_option_resume_non' => 'kompletni sadrzaj clanaka (u  HTML formatu)',
 'syndic_option_resume_oui' => 'jednostavni rezime (u formi teksta)',
 'syndic_options' => 'Opcije sindikacije:',
-
 
 // T
 'taille_cache_image' => 'Slike koje SPIP automatski izracunava (vinjete dokumenata, naslove predstavljene u grafickoj formi, matematicke funkcije u TeX formatu ...) zauzimaju u @dir@  repertoaru total od @taille@.',
@@ -756,7 +743,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_auteurs' => 'AUTORI',
 'texte_breves' => 'Kratke poruke su kratki i jednostavni tekstovi, koji dozvoljavaju brzo postavljanje preciznih informacija, obradjivanje casopisa, kalendara dogadjaja...',
 'texte_choix_base_1' => 'Izaberite vasu bazu:',
-'texte_choix_base_2' => 'MySQL server sadrzi vise baza podataka.',
+'texte_choix_base_2' => 'SQL server sadrzi vise baza podataka.',
 'texte_choix_base_3' => '<b>Izaberite</b> Ispod one koja vam je dodjeljena od vaseg kompjutera:',
 'texte_commande_vider_tables_indexation' => 'Koristite ovu komandu da biste ispraznili tabele za indeksiranje, koje koriste motori za pretragu integrisani u SPIP. To ce vam  omoguciti da dobijete na prostoru na disku .',
 'texte_comment_lire_tableau' => 'Rang clanka po popularnosti je naznacen u margini; popularnost clanka (broj dnevnih posjeta, ako se ritam konsultacije odrzava) i broj primljenih posjeta u polju koje se pojavi kada misem predjete preko naslova.',
@@ -764,7 +751,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elementi',
 'texte_config_groupe_mots_cles' => 'Da li zelite aktivirati naprednu konfiguraciju kljucnih rijeci, sto znaci da je moguce izabrati jednu rijec po grupi, da je jedna grupa vazna...?',
-'texte_connexion_mysql' => 'Provjerite informacije koje ste dobili od vaseg kompjutera: Trebate pronaci da li vas kompjuter podrzava MySQL i kodove za konekciju na MySQL  server.',
+'texte_connexion_mysql' => '<MODIF>Provjerite informacije koje ste dobili od vaseg kompjutera: Trebate pronaci da li vas kompjuter podrzava SQL i kodove za konekciju na SQL  server.',
 'texte_contenu_article' => '(Sadrzaj clanka u nekoliko rijeci.)',
 'texte_contenu_articles' => 'Prema rasporedu koji je prihvacen za vasu stranicu, mozete odluciti da se neki elementi clanaka ne koriste. Koristite se sa nize prikazanom listom i naznacite koji su elementi dostupni.',
 'texte_crash_base' => 'Ako je vasa baza podataka pala, mozete pokusati automatsku popravku.',
@@ -824,7 +811,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_recuperer_base' => 'Popravi bazu podataka',
 'texte_reference_mais_redirige' => 'clanak je preporucen u vasoj SPIP stranici, ali je preusmjeren na drugi URL.',
 'texte_referencement_automatique' => '<b>Automatska preporuka stranice</b><br />Mozete brzo preporuciti web stranicu, tako sto cete naznaciti zeljenu URL adresu ili adresu njenog backend dokumenta. SPIP ce automatski sakupiti informacije vezane za tu stranicu (naslov, opis...).',
-'texte_requetes_echouent' => '<b>Ako odredzeni MySQL zahtijevi sistematski i bez ociglednog razloga ne uspijevaju, moguce je da je problem u samoj bazi podataka.</b><p /> MySQL raspolaze mogucnosti popravljanja njegovih tabela, ako su one slucajno ostecene. Ovdje mozete isprobati popravku; u slucaju neuspijeha, sacuvajte kopiju prikaza na monitoru, koja mozda sadrzi naznake problema...<p/> Ako se problem nastavi, kontaktirajte vas hosting servis.<p />',
+'texte_requetes_echouent' => '<b>Ako odredzeni SQL zahtijevi sistematski i bez ociglednog razloga ne uspijevaju, moguce je da je problem u samoj bazi podataka.</b><p /> SQL raspolaze mogucnosti popravljanja njegovih tabela, ako su one slucajno ostecene. Ovdje mozete isprobati popravku; u slucaju neuspijeha, sacuvajte kopiju prikaza na monitoru, koja mozda sadrzi naznake problema...<p/> Ako se problem nastavi, kontaktirajte vas hosting servis.<p />',
 'texte_restaurer_base' => 'Obnoviti sadrzaj pohranjivanja baze',
 'texte_restaurer_sauvegarde' => 'Ova opcija vam omogucava obnavljanje ranije izvedenog pohranjivanja baze. U tom slucaju, dokument koji, sadrzi pohranjeni materijal, se treba nalaziti u repertoaru @dossier@. Budite oprezni sa ovom funkcijom: <b>moguce izmjene i gubitci su nepovratni.</b>',
 'texte_sauvegarde' => 'Snimiti sadrzj baze',
@@ -941,8 +928,12 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'trad_lier' => 'Ovaj clanak je prevod clanka broj:',
 'trad_new' => 'Napisati novi prevod ovog clanka',
 
-
 // U
+'upload_fichier_zip' => 'ZIP dokument',
+'upload_fichier_zip_texte' => 'Dokument koji predlazete za upload, je ZIP dokument.',
+'upload_fichier_zip_texte2' => 'Ovaj dokument moze biti:',
+'upload_zip_decompacter' => 'dekompresovan i svaki sadrzani dokument ce biti instaliran na stranicu. Dokumenti koji ce biti instalirani su:',
+'upload_zip_telquel' => 'instaliran kakav jeste, u ZIP formatu;',
 'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
 'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
 'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
@@ -953,12 +944,9 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
 'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
 
-
 // V
 'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'Inicijalna verzija'
-
 );
-
 
 ?>

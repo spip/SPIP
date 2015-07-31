@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Activar l\'ajuston',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Pas cap de resultat.',
 'avis_chemin_invalide_1' => 'Lo camin qu\'av&egrave;tz causit',
 'avis_chemin_invalide_2' => 'sembla pas valid. Volgatz tornar a la pagina anteriora per verificar las informacions fornidas.',
-'avis_connexion_echec_1' => 'La connexion al servidor SQL a abocat.',
+'avis_connexion_echec_1' => '<MODIF>La connexion al servidor SQL a abocat.',
 'avis_connexion_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornidas.',
-'avis_connexion_echec_3' => '<b>N.B.</b> Sus plan de servidors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa SQL abans de la poder utilizar. Se vos pod&egrave;tz pas connectar, verificatz qu\'ajatz plan realizat aquel procediment.',
+'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> Sus plan de servidors, dev&egrave;tz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa SQL abans de la poder utilizar. Se vos pod&egrave;tz pas connectar, verificatz qu\'ajatz plan realizat aquel procediment.',
 'avis_connexion_ldap_echec_1' => 'La connexion al servidor LDAP a abocat.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'av&egrave;tz fornidas. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, utilizetz pas lo sup&ograve;rt LDAP per importar d\'utilizaires.',
@@ -42,7 +44,6 @@ la documentacion d\'SPIP</a>.',
 'avis_sites_syndiques_probleme' => 'Aqueles sits sindicats an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las donadas es irreversible',
 'avis_version_mysql' => 'V&ograve;stre servidor SQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
-
 
 // B
 'bouton_acces_ldap' => 'Apondre l\'acc&egrave;s a LDAP >>',
@@ -108,7 +109,6 @@ la documentacion d\'SPIP</a>.',
 'bouton_vider_cache' => 'Vojar l\'escondedor',
 'bouton_voir_message' => 'Veire aquel messatge abans de lo validar',
 
-
 // C
 'cache_mode_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de comprimit.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
@@ -125,7 +125,6 @@ la documentacion d\'SPIP</a>.',
 'connexion_ldap' => 'Conexion :',
 'copier_en_local' => 'Copiar en local',
 
-
 // D
 'date_mot_heures' => 'oras',
 'diff_para_ajoute' => 'Paragraf apondut',
@@ -135,7 +134,6 @@ la documentacion d\'SPIP</a>.',
 'diff_texte_deplace' => 'T&egrave;xt apondut',
 'diff_texte_supprime' => 'T&egrave;xt suprimit',
 'double_clic_inserer_doc' => 'Besclicatz per inserir aquela acorcha dins lo t&egrave;xt.',
-
 
 // E
 'email' => 'e-mail',
@@ -185,10 +183,8 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'erreur_plugin_tag_plugin_absent' => '&lt;ajuston&gt; mancant dins lo fichi&egrave;r de definicion',
 'erreur_plugin_version_manquant' => 'Version de l\'ajuston mancanta',
 
-
 // F
 'forum_info_original' => 'original',
-
 
 // I
 'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per demorar en contacte amb la vida d\'aquel sit.',
@@ -527,7 +523,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Sonque los administrators p&ograve;don modificar aquela adrei&ccedil;a.',
-'info_restauration_sauvegarde' => 'restauracion de la salvagarda @archive@',
+'info_restauration_sauvegarde' => '<MODIF>restauracion de la salvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la c&egrave;rca:',
 'info_rubriques' => 'Rubricas',
@@ -703,13 +699,10 @@ una color indica lor estat:',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
 
-
 // L
-'les_deux' => 'los dos',
 'lien_ajout_destinataire' => 'Apondre aquel destinatari',
 'lien_ajouter_auteur' => 'Apondre aquel autor',
 'lien_ajouter_participant' => 'Apondre un participant',
@@ -743,7 +736,6 @@ una color indica lor estat:',
 'logo_standard_rubrique' => 'L&Ograve;GO ESTANDARD DE LAS RUBRICAS',
 'logo_survol' => 'L&Ograve;GO PEL SUBREV&Ograve;L',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Causida de v&ograve;stra basa',
 'module_fichier_langue' => 'Fichi&egrave;r de lenga',
@@ -752,7 +744,6 @@ una color indica lor estat:',
 'module_texte_explicatif' => 'Pod&egrave;tz inserir las acorchas seguentas dins las esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins las diferentas lengas per las qualas exist&iacute;s un fichi&egrave;r de lenga.',
 'module_texte_traduction' => 'Lo fichi&egrave;r de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
-
 
 // O
 'onglet_repartition_actuelle' => 'd\'aquesta passa',
@@ -770,7 +761,6 @@ una color indica lor estat:',
 'ortho_verif_impossible' => 'Lo sist&egrave;ma p&ograve;t pas verificar l\'ortografia d\'aqueste t&egrave;xt.',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
-
 // P
 'pas_de_proxy_pour' => 'Al besonh, indicatz las maquinas o dom&egrave;nis per qual aquel proxy se deu pas aplicar (per exemple&nbsp;: @exemple@)',
 'plugin_etat_developpement' => 'en cors de desvolopament',
@@ -783,10 +773,8 @@ una color indica lor estat:',
 'plugins_liste' => 'Ti&egrave;ra dels ajustons',
 'protocole_ldap' => 'Version del protoc&ograve;l :',
 
-
 // R
 'repertoire_plugins' => 'Repert&ograve;ri&nbsp;:',
-
 
 // S
 'sauvegarde_fusionner' => 'Fusionar la basa actuala e lo salvament',
@@ -801,7 +789,6 @@ una color indica lor estat:',
 'syndic_option_resume_non' => 'lo contengut complet dels articles (al format HTML)',
 'syndic_option_resume_oui' => 'un simple resumit (a format t&egrave;xt)',
 'syndic_options' => 'Opcions de sindicacion:',
-
 
 // T
 'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas dels documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repert&ograve;ri @dir@ un total de @taille@.',
@@ -847,7 +834,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_config_groupe_mots_cles' => 'Desiratz d\'activar la configuracion avan&ccedil;ada dels mots clau,
  en indicant per exemple que se p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop es important...?',
-'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre albergador forn&iacute;s: i dev&egrave;tz trobar los c&ograve;des de connexion al servidor SQL.',
+'texte_connexion_mysql' => '<MODIF>Consultatz las informacions que v&ograve;stre albergador forn&iacute;s: i dev&egrave;tz trobar los c&ograve;des de connexion al servidor SQL.',
 'texte_contenu_article' => '(Contengut de l\'article en qualques mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que v&ograve;stre sit a adoptada, pod&egrave;tz decidir
  que d\'unes elements dels articles s\'utilizen pas.
@@ -1099,8 +1086,12 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
 
-
 // U
+'upload_fichier_zip' => 'Fichi&egrave;r ZIP',
+'upload_fichier_zip_texte' => 'Lo fichi&egrave;r que prepausatz d\'installar es un fichi&egrave;r Zip.',
+'upload_fichier_zip_texte2' => 'Aquel fichi&egrave;r p&ograve;t &egrave;sser:',
+'upload_zip_decompacter' => 'descomprimit e cada element que conten installat sul sit. Alara los fichi&egrave;rs que ser&agrave;n installats sul sit son:',
+'upload_zip_telquel' => 'installat tal coma es, coma archiu comprimit Zip;',
 'utf8_convert_attendez' => 'Esperatz un momenton e tornatz cargar aquesta pagina.',
 'utf8_convert_avertissement' => 'S&egrave;tz a mand de convertir lo  contengut de v&ograve;stra basa de donadas (articles, br&egrave;vas, etc) del j&ograve;c de caract&egrave;rs <b>@orig@</b> cap al j&ograve;c de caract&egrave;rs <b>@charset@</b>.',
 'utf8_convert_backup' => 'Doblid&egrave;tz pas de far d\'en primi&egrave;r un salvament complet de v&ograve;stre sit. Vos cal tanben verificar que v&ograve;stras esqueletas e fichi&egrave;rs de lenga son compatibles @charset@. ',
@@ -1111,12 +1102,9 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'utf8_convert_verifier' => 'Vos cal ara vojar l\'escondedor, e verificar que tot va plansus las paginas publicas del sit. En cas de gr&ograve;s probl&egrave;ma, un salvament de v&ograve;stras donadas s\'es realizat (de format SQL) dins lo repert&ograve;ri @rep@.',
 'utf8_convertir_votre_site' => 'Convertir v&ograve;stre sit en utf-8',
 
-
 // V
 'version' => 'Version&nbsp;:',
 'version_initiale' => 'Version iniciala'
-
 );
-
 
 ?>

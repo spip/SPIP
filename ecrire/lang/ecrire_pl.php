@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'W&#322;&#261;cz rozszerzenie',
@@ -14,9 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Brak wynik&oacute;w szukania.',
 'avis_chemin_invalide_1' => '&#346;cie&#380;ka, kt&oacute;r&#261; wybra&#322;e&#347;',
 'avis_chemin_invalide_2' => 'wydaje si&#281; nieprawid&#322;owa. Prosz&#281; powr&oacute;ci&#263; na poprzedni&#261; stron&#281; w celu weryfikacji informacji.',
-'avis_connexion_echec_1' => 'Po&#322;&#261;czenie z serwerem SQL nie powiod&#322;o si&#281;.',
+'avis_connexion_echec_1' => '<MODIF>Po&#322;&#261;czenie z serwerem SQL nie powiod&#322;o si&#281;.',
 'avis_connexion_echec_2' => 'Powr&oacute;&#263; do poprzedniej strony i zweryfikuj podane informacje.',
-'avis_connexion_echec_3' => '<b>Uwaga</b> W przypadku wielu serwer&oacute;w musisz <b>poprosi&#263;</b> o uaktywnienie dost&#281;pu do bazy danych, aby m&oacute;c z niej korzysta&#263;. Je&#347;li nie mo&#380;esz si&#281; po&#322;&#261;czy&#263;, upewnij si&#281;, czy poprosi&#322;e&#347; o dost&#281;p.',
+'avis_connexion_echec_3' => '<MODIF><b>Uwaga</b> W przypadku wielu serwer&oacute;w musisz <b>poprosi&#263;</b> o uaktywnienie dost&#281;pu do bazy danych, aby m&oacute;c z niej korzysta&#263;. Je&#347;li nie mo&#380;esz si&#281; po&#322;&#261;czy&#263;, upewnij si&#281;, czy poprosi&#322;e&#347; o dost&#281;p.',
 'avis_connexion_ldap_echec_1' => 'Po&#322;&#261;czenie z LDAP nie powiod&#322;o si&#281;.',
 'avis_connexion_ldap_echec_2' => 'Powr&oacute;&#263; do poprzedniej strony i zweryfikuj podane informacje.',
 'avis_connexion_ldap_echec_3' => 'Nie u&#380;ywaj wsparcia LDAP do importu u&#380;ytkownik&oacute;w.',
@@ -48,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Nast&#281;puj&#261;ce strony syndykowane sprawiaj&#261; problem',
 'avis_suppression_base' => 'OSTRZE&#379;ENIE, usuni&#281;cie danych jest nieodwracalne',
 'avis_version_mysql' => 'Twoja wersja SQL (@version_mysql@) nie umo&#380;liwia auto-naprawy tablic baz danych.',
-
 
 // B
 'bouton_acces_ldap' => 'Dodaj dost&#281;p do LDAP',
@@ -114,7 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Opr&oacute;&#380;nij cache',
 'bouton_voir_message' => 'Podgl&#261;d wiadomo&#347;ci przed zatwierdzeniem',
 
-
 // C
 'cache_mode_compresse' => 'Pliki cache zosta&#322;y zapisane w postaci skompresowanej.',
 'cache_mode_non_compresse' => 'Pliki cache zosta&#322;y zapisane w trybie nieskompresowanym',
@@ -131,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'connexion_ldap' => 'Po&#322;&#261;czenie:',
 'copier_en_local' => 'Skopiuj lokalnie',
 
-
 // D
 'date_mot_heures' => 'godz.',
 'diff_para_ajoute' => 'Dodany akapit',
@@ -141,7 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Przeniesiony tekst',
 'diff_texte_supprime' => 'Usuni&#281;ty tekst',
 'double_clic_inserer_doc' => 'Kliknij dwa razy aby umie&#347;ci&#263; skr&oacute;t w tek&#347;cie',
-
 
 // E
 'email' => 'e-mail',
@@ -189,10 +187,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; nie ma w pliku definicji',
 'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
 
-
 // F
 'forum_info_original' => 'oryginalny',
-
 
 // I
 'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
@@ -549,7 +545,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_reglage_ldap' => 'Opcje: <b>Regulacja importu LDAP</b>',
 'info_renvoi_article' => '<b>Przekierowanie.</b> Ten artyku&#322; odsy&#322;a do strony:',
 'info_reserve_admin' => 'Tylko administratorzy mog&#261; zmieni&#263; ten adres.',
-'info_restauration_sauvegarde' => 'odtworzenie zapisanego pliku @archive@',
+'info_restauration_sauvegarde' => '<MODIF>odtworzenie zapisanego pliku @archive@',
 'info_restreindre_rubrique' => 'Ograniczenie zarz&#261;dzaniem rubryk&#261; :',
 'info_resultat_recherche' => 'Wyniki wyszukiwania:',
 'info_rubriques' => 'Dzia&#322;y',
@@ -724,13 +720,10 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'item_utiliser_syndication' => 'U&#380;ywaj automatycznej syndykacji',
 'item_visiteur' => 'odwiedzaj&#261;cy',
 
-
 // J
 'jour_non_connu_nc' => 'nieznany',
 
-
 // L
-'les_deux' => 'oba',
 'lien_ajout_destinataire' => 'Dodaj odbiorc&#281;',
 'lien_ajouter_auteur' => 'Dodaj autora',
 'lien_ajouter_participant' => 'Dodaj uczestnika',
@@ -764,7 +757,6 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'logo_standard_rubrique' => 'STANDARDOWE LOGO DLA DZIA&#321;&Oacute;W',
 'logo_survol' => 'LOGO ROLL-OVER',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Wybieranie bazy danych',
 'module_fichier_langue' => 'Plik j&#281;zykowy',
@@ -773,7 +765,6 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'module_texte_explicatif' => 'Mo&#380;esz umie&#347;ci&#263; nast&#281;puj&#261;ce skr&oacute;ty w szkielecie Twojej strony publicznej. Zostan&#261; automatycznie przet&#322;umaczone na r&oacute;zne j&#281;zyki, kt&oacute;rych pliki j&#281;zykowe istniej&#261;.',
 'module_texte_traduction' => 'Plik j&#281;zykowy &laquo;&nbsp;@module@&nbsp;&raquo; jest dost&#281;pny w&nbsp;:',
 'mois_non_connu' => 'nieznany',
-
 
 // O
 'onglet_repartition_actuelle' => 'teraz',
@@ -791,7 +782,6 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'ortho_verif_impossible' => 'System nie mo&#380;e sprawdzi&#263; ortografii w tym tek&#347;cie.',
 'ortho_verifier' => 'Sprawd&#378; ortografi&#281;',
 
-
 // P
 'pas_de_proxy_pour' => 'Je&#347;li potrzeba podaj serwery lub domeny, do kt&oacute;rych to proxy ma nie by&#263; u&#380;ywane: @exemple@)',
 'plugin_etat_developpement' => 'wersja rozwojowa',
@@ -804,10 +794,8 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'plugins_liste' => 'Lista rozszerze&#324;',
 'protocole_ldap' => 'Wersja protoko&#322;u:',
 
-
 // R
 'repertoire_plugins' => 'Katalog&nbsp;:',
-
 
 // S
 'sauvegarde_fusionner' => 'Dokona&#263; po&#322;&#261;czenia istniej&#261;cej bazy danych z backupem',
@@ -822,7 +810,6 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'syndic_option_resume_non' => 'pe&#322;na tre&#347;&#263; artyku&#322;&oacute;w (w formacie HTML)',
 'syndic_option_resume_oui' => 'posumowanie (w postaci tekstowej)',
 'syndic_options' => 'Opcje syndykacji&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Obrazki maj&#261; automatycznie zmieniany rozmiar przez SPIP (miniaturki dokument&oacute;w, tytu&#322;y przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmuj&#261; w katalogu @dir@ obszar @taille@.',
@@ -872,7 +859,7 @@ od pocz&#261;tku opublikowania artyku&#322;u pojawi si&#281; kiedy najedziesz my
 'texte_config_groupe_mots_cles' => 'Czy &#380;yczysz sobie, aby w&#322;&#261;czy&#263; zaawansowan&#261; konfiguracj&#281; s&#322;&oacute;w kluczowych,
    gdzie mo&#380;esz zaznaczy&#263; np. jedno s&#322;owo
    s&#322;owa wg grup, wg wa&#380;no&#347;ci grup...&nbsp;?',
-'texte_connexion_mysql' => 'Sprawd&#378; informacje dostarczone przez Tw&oacute;j serwis hostingowy&nbsp;: znajdzies tam, je&#347;li serwer korzysta z SQL, kody s&#322;u&#380;&#261;ce do po&#322;&#261;czenia z serwerem SQL.',
+'texte_connexion_mysql' => '<MODIF>Sprawd&#378; informacje dostarczone przez Tw&oacute;j serwis hostingowy&nbsp;: znajdzies tam, je&#347;li serwer korzysta z SQL, kody s&#322;u&#380;&#261;ce do po&#322;&#261;czenia z serwerem SQL.',
 'texte_contenu_article' => '(Zawarto&#347;&#263; artyku&#322;u w kilku s&#322;owach.)',
 'texte_contenu_articles' => 'Zale&#380;nie od struktury jak&#261; przyj&#261;&#322;e&#347; dla swojego serwisu, mo&#380;esz zdecydowa&#263;,
  kt&oacute;rych element&oacute;w artyku&#322;&oacute;w nie u&#380;ywa&#263;.Korzystaj&#261;c z poni&#380;szej listy, wybierz u&#380;ywane elementy.',
@@ -1114,8 +1101,12 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
 
-
 // U
+'upload_fichier_zip' => 'Plik ZIP',
+'upload_fichier_zip_texte' => 'Plik, kt&oacute;ry chcesz zainstalowa&#263; jest plikiem ZIP.',
+'upload_fichier_zip_texte2' => 'Ten plik mo&#380;e by&#263;&nbsp;:',
+'upload_zip_decompacter' => 'zdekompresowany i ka&#380;dy jego element zostanie zainstalowany w serwisie. Pliki, kt&oacute;re zostan&#261; zainstalowane w serwisie to:',
+'upload_zip_telquel' => 'zostan&#261; zainstalowane jako archiwum Zip;',
 'utf8_convert_attendez' => 'Poczekaj chwil&#281; i od&#347;wie&#380; stron&#281;.',
 'utf8_convert_avertissement' => 'Zamierzasz przekonwertowa&#263; zawarto&#347;&#263; Twojej bazy danych (artyku&#322;y, aktualno&#347;ci, etc.) z kodowania <b>@orig@</b> na kodowanie <b>@charset@</b>.',
 'utf8_convert_backup' => 'Nie zapomnij wykona&#263; wcze&#347;niej kopii bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
@@ -1126,12 +1117,9 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'utf8_convert_verifier' => 'Teraz powinene&#347; opr&oacute;&#380;ni&#263; CACHE i sprawdzi&#263;, czy wszystko przebieg&#322;o dobrze. W przypadku jakichkolwiek problem&oacute;w pami&#281;taj, &#380;e zawsze masz w odwodzie kopi&#281; bazy dancyh (w formacie SQL) w katalogu @rep@.',
 'utf8_convertir_votre_site' => 'Konwertuj stron&#281; na utf-8.',
 
-
 // V
 'version' => 'Wersja&nbsp;:',
 'version_initiale' => 'Wersja pocz&#261;tkowa'
-
 );
-
 
 ?>

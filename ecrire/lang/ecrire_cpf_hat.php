@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Aktiv plegin an',
@@ -14,16 +16,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Okenn rezilta.',
 'avis_chemin_invalide_1' => 'Chemen w te chwazi prann',
 'avis_chemin_invalide_2' => 'li samn pa bon. M&egrave;si tounyen paj d&egrave;y&egrave;  pou verifye tout enfomasyon ki w te done.',
-'avis_connexion_echec_1' => 'Koneksyon sou s&eacute;v&egrave; MySQL te pa mache.',
+'avis_connexion_echec_1' => '<MODIF>Koneksyon sou s&eacute;v&egrave; SQL te pa mache.',
 'avis_connexion_echec_2' => 'Tounyen d&egrave;y&egrave; sou paj avan, e gad byen tout enf&ograve;masyon w te bay isit-la m&egrave;m.',
-'avis_connexion_echec_3' => '<b>Atansyon</b> Ak enp&egrave; s&eacute;v&egrave; sa-yo f&ograve;k  w <b>domann</b> ou l&eacute;b&egrave;rg&egrave; te aktive laks&eacute; labaz MySQL, avan w kap itilize ali. Si w vwa se pa posib m&egrave;m konek a w, ann gad byen si w te domann ali avan.',
+'avis_connexion_echec_3' => '<MODIF><b>Atansyon</b> Ak enp&egrave; s&eacute;v&egrave; sa-yo f&ograve;k  w <b>domann</b> ou l&eacute;b&egrave;rg&egrave; te aktive laks&eacute; labaz SQL, avan w kap itilize ali. Si w vwa se pa posib m&egrave;m konek a w, ann gad byen si w te domann ali avan.',
 'avis_connexion_ldap_echec_1' => 'Koneksyon sou serv&egrave; LDAP te pa mache.',
 'avis_connexion_ldap_echec_2' => 'Tounyen d&egrave;y&egrave; paj avan pou ou byen gade ank&ograve; enf&ograve;masyon yo w te don&eacute;.',
 'avis_connexion_ldap_echec_3' => 'Ann itilize pa sip&ograve; LDAP pou gen enp&ograve;t itilizat&egrave; yo.',
 'avis_conseil_selection_mot_cle' => '<b>Gwoup-la se enp&ograve;tan&nbsp;:</b> nou kons&egrave;y w chwazi yon mokle andan gwoup-la.',
 'avis_deplacement_rubrique' => 'Atansyon&nbsp;! Ribwik la @contient_breves@ br&egrave;ve@scb@&nbsp;: si w d&eacute;plas ali, m&eacute;si ekri yon krwa po konfirmasyon.',
 'avis_destinataire_obligatoire' => 'F&ograve;k w enskri yon destinat&egrave; avan voye mesaj la.',
-'avis_erreur_connexion_mysql' => 'Er&egrave; ak koneksyon MySQL',
+'avis_erreur_connexion_mysql' => 'Er&egrave; ak koneksyon SQL',
 'avis_erreur_version_archive' => '<b>Atansyon! Fichye @archive@ ka koresponn
  l&ograve;t v&egrave;syon SPIP 
 .</b> W ke genyen gwo pwobl&egrave;m sa-yo m&egrave;m
@@ -45,8 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Sit yo se sit sak gen yon pwobl&egrave;m sendikasyon',
 'avis_sites_syndiques_probleme' => 'Sit yon se sit sak t&eacute; bay yon pwobl&egrave;m',
 'avis_suppression_base' => 'ATANSYON,  sipwesyon tout done-an se pa kav tounen dey&eacute;',
-'avis_version_mysql' => 'Ou versyon MySQL (@version_mysql@) i gen pa p&eacute;mi ranje tous&egrave;l tab yo andan la bazdon&eacute;.',
-
+'avis_version_mysql' => 'Ou versyon SQL (@version_mysql@) i gen pa p&eacute;mi ranje tous&egrave;l tab yo andan la bazdon&eacute;.',
 
 // B
 'bouton_acces_ldap' => 'Ajoute yon aks&eacute; LDAP',
@@ -110,13 +111,11 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
 'bouton_vider_cache' => 'Vid kach-la',
 'bouton_voir_message' => 'Gad mesaj-la avan konfime',
 
-
 // C
 'cache_mode_compresse' => 'Fichye yo  kach se konprese.',
 'cache_mode_non_compresse' => 'Fichye yo kach se pa konprese.',
 'cache_modifiable_webmestre' => 'Webm&egrave;t sit-la s&egrave;lman li kap chanje param&egrave;t sa-a.',
 'calendrier_synchro' => 'Si w itilize yon logisy&egrave;l pou en lajenda ki mache ak <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), w p&eacute; m&egrave;t ali swiv yon ritm laktyalit&eacute; sit-la kan li chanje.',
-
 
 // D
 'date_mot_heures' => '&egrave;r yo',
@@ -127,7 +126,6 @@ patisipasyon yo zitilizat&egrave; tout ke pa afiche sou sitw&egrave;b piblik si 
 'diff_texte_deplace' => 'T&egrave;ks se deplase',
 'diff_texte_supprime' => 'T&egrave;ks se kraze',
 'double_clic_inserer_doc' => 'Apiy&eacute;-doub pou m&egrave;t tichemen-nan nan teks sa-a',
-
 
 // E
 'email' => 'lim&egrave;l',
@@ -178,7 +176,6 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'erreur_plugin_tag_plugin_absent' => '&lt;Pa oken plegin an &gt; nan fichye pou d&eacute;finisyon',
 'erreur_plugin_version_manquant' => 'Pa oken vesyon plegin an',
 
-
 // I
 'ical_info1' => 'Paj-la ka donn a w kouman w kap gen lyen ak lavi sit-la.',
 'ical_info2' => 'Si w vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="http://www.spip.net/fr_suivi">tout paj dokimantasyon pou SPIP</a>.',
@@ -201,6 +198,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'icone_creation_groupe_mots' => 'Kreye yon nouvo gwoup mo',
 'icone_creation_mots_cles' => 'Kreye yon nouvo mokle',
 'icone_creer_auteur' => 'Kreye yon nouvo lot&egrave; ek m&egrave;t ali ak atik la',
+'icone_creer_mot_cle' => 'Kreye yon nouvo mokle ek gen yon lyen ak atik la',
 'icone_creer_rubrique_2' => 'Kreye yon nouvo ribrik',
 'icone_ecrire_nouvel_article' => 'Tinouv&egrave;l yo andan ribrik la',
 'icone_envoyer_message' => 'Voye mesaj la',
@@ -298,7 +296,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_confirmer_passe' => 'Konfime nouvo modpas-la :',
 'info_connexion_base' => 'Dezyem etap : <b>Esey f&egrave; yon koneksyon sou labaz</b>',
 'info_connexion_ldap_ok' => 'Koneksyon LDAP te mache.</b><p /> Ann gen w etap swivan.',
-'info_connexion_mysql' => 'Premye etap : <b>Ou koneksyon MySQL</b>',
+'info_connexion_mysql' => 'Premye etap : <b>Ou koneksyon SQL</b>',
 'info_connexion_ok' => 'Koneksyon nan te fin mache.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kisa ap kontni nan atik yo',
@@ -406,7 +404,7 @@ Koul&egrave; imaj rannkont stati yo (komand&egrave; = v&egrave;r; redakt&egrave;
 'info_message_en_redaction' => 'Mesaj w yo ki ap ekri ank&ograve;',
 'info_message_technique' => 'Mesaj t&egrave;knik :',
 'info_messagerie_interne' => 'Kazmod&eacute;kri andodan',
-'info_mise_a_niveau_base' => 'M&egrave;t baz MySQL nan bon nivo',
+'info_mise_a_niveau_base' => 'M&egrave;t baz SQL nan bon nivo',
 'info_mise_a_niveau_base_2' => '{{Tansyon!}} W te instal&eacute; yon v&egrave;syon
  fichye SPIP  ki  {pli vy&eacute;} v&egrave;syon sa-a ki sou sit avant
 : genyen danje bazdone ou ke p&egrave;di osnon li ki pa mache ek sit-la
@@ -523,7 +521,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_reglage_ldap' => 'Opsyon : <b>Reglaj lempotasyon LDAP</b>',
 'info_renvoi_article' => '<b>Tounyen d&egrave;y&egrave; sou yon l&ograve;t adr&egrave;s.</b> Atik-la ap s&ograve;ti sou lapaj-la:',
 'info_reserve_admin' => 'Komand&egrave; ys&egrave;lman yokapab chanje ladr&egrave;s-la',
-'info_restauration_sauvegarde' => 'Rest&ograve;wasyon las&ograve;vgad @archive@',
+'info_restauration_sauvegarde' => '<MODIF>Rest&ograve;wasyon las&ograve;vgad @archive@',
 'info_restreindre_rubrique' => 'Diminye drwa yo komand&eacute;-a pou li kapab debouye sou ribrik-la s&egrave;lman:',
 'info_resultat_recherche' => 'Rezilta ch&egrave;che w-a :',
 'info_rubriques' => 'Ribrik yo',
@@ -692,13 +690,10 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'item_utiliser_syndication' => 'Itilize sendikasyon otomatik',
 'item_visiteur' => 'vizit&egrave;',
 
-
 // J
 'jour_non_connu_nc' => 'ki pa koni',
 
-
 // L
-'les_deux' => '<NEW>les deux',
 'lien_ajout_destinataire' => 'Ajoute destinat&egrave;-a',
 'lien_ajouter_auteur' => 'Ajoute lot&egrave;-a',
 'lien_ajouter_participant' => 'Ajoute yon patisipan',
@@ -731,7 +726,6 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'logo_standard_rubrique' => 'LOGO ODIN&Egrave; TOUT RIBRIK YO',
 'logo_survol' => 'LOGO POU VOLE',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Chwa labaz w-a',
 'module_fichier_langue' => 'Fichye-lanng',
@@ -740,7 +734,6 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'module_texte_explicatif' => 'W kapab m&egrave;t tout tichemen yo ki isit apr&egrave;, nan lesk&egrave;l&egrave;t sa-yo ou sit piblik. Yo k&eacute; tradwi otomatikman nan dif&eacute;ran lanng, chak ki genyen yon fichye-lanng.',
 'module_texte_traduction' => 'fichye-lanng la &laquo;&nbsp;@module@&nbsp;&raquo; se disponib nan&nbsp;:',
 'mois_non_connu' => 'ki pa koni',
-
 
 // O
 'onglet_repartition_actuelle' => 'kounye-a',
@@ -758,7 +751,6 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'ortho_verif_impossible' => 'Sist&egrave;m-la se pa kapab gade l&ograve;tograf t&egrave;ks-la.',
 'ortho_verifier' => 'Gade l&ograve;tograf',
 
-
 // P
 'plugin_etat_developpement' => '<NEW>en d&eacute;veloppement',
 'plugin_etat_experimental' => '<NEW>exp&eacute;rimental',
@@ -766,10 +758,8 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'plugin_etat_test' => '<NEW>en test',
 'plugins_liste' => '<NEW>Liste des plugins',
 
-
 // R
 'repertoire_plugins' => '<NEW>R&eacute;pertoire&nbsp;:',
-
 
 // S
 'statut_admin_restreint' => '(komand&egrave; ki limit&eacute;)',
@@ -782,7 +772,6 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
 'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Tout opsyon pou sendikasyon&nbsp;:',
-
 
 // T
 'taille_cache_image' => 'Tout imaj ki SPIP kav kalkile otomatikman (viy&egrave;t nan dokiman, kouman li rele ki pw&eacute;zant&eacute; nan foma gwafik, tout fonksyon matematik nan foma TeX...) yo ka okipe nan r&eacute;p&egrave;twar @dir@ lespas total ki @taille@.',
@@ -812,7 +801,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_auteurs' => 'LOT&Egrave; YO',
 'texte_breves' => 'Ti-nouv&egrave;l yo se ti t&egrave;ks senp ki p&egrave;m&egrave; w f&egrave; par&egrave;t k&egrave;k ti enf&ograve;masyon taptap, osnon debouye w ek yon revi-lapr&egrave;s, ek m&egrave;m yon kalandrye pou anonse kisa moun kap soutni.',
 'texte_choix_base_1' => 'Ann chwazi labaz ou :',
-'texte_choix_base_2' => 'S&egrave;v&egrave; MySQL-la, li ka kembe k&egrave;k bazdon&eacute;.',
+'texte_choix_base_2' => 'S&egrave;v&egrave; SQL-la, li ka kembe k&egrave;k bazdon&eacute;.',
 'texte_choix_base_3' => '<b>Chwazi</b> issit anba labaz ki l&eacute;b&eacute;rj&egrave;  te bay aw:',
 'texte_commande_vider_tables_indexation' => 'Itilize komand-la pou vide tout tabl endeksasyon ki itiliz&eacute;
    nan mot&egrave;-lach&egrave;che ki pr&eacute;zan nan SPIP. Ke perm&egrave;t aw
@@ -829,7 +818,7 @@ lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks
 'texte_compte_elements' => '@count@ eleman (yo)',
 'texte_config_groupe_mots_cles' => 'W vle aktive konfigirasyon pr&eacute;si pou tout mokle,
    ek di w pa egsanp se posib chwazi yon mokle s&egrave;lman, osnon di yon gwoup-la se enp&ograve;tan... ? ',
-'texte_connexion_mysql' => 'Gade tout lenf&ograve;masyon l&eacute;b&egrave;j&egrave; te bay aw&nbsp;: f&ograve;k w rankont tout kod pou koneksyon sou s&egrave;v&egrave; MySQL la, si l&eacute;b&eacute;j&egrave; kabab bay yon baz MySQL.',
+'texte_connexion_mysql' => '<MODIF>Gade tout lenf&ograve;masyon l&eacute;b&egrave;j&egrave; te bay aw&nbsp;: f&ograve;k w rankont tout kod pou koneksyon sou s&egrave;v&egrave; SQL la, si l&eacute;b&eacute;j&egrave; kabab bay yon baz SQL.',
 'texte_contenu_article' => '(k&egrave;k mo pou di ki latik-la ka kembe.)',
 'texte_contenu_articles' => 'Selon lasp&eacute; sit piblik aw, posib chwazi k&egrave;k z&eacute;l&eacute;man latik pa itil aw.
   Lalis isit anba p&egrave;m&egrave; w chwazi &eacute;l&eacute;man sa-yo W ka kembe.
@@ -925,10 +914,10 @@ kalkil ank&ograve; yon sel paj selman, itilize plito lespas piblik ak bouton &la
 'texte_recuperer_base' => 'Aranje bazdon&eacute; la',
 'texte_reference_mais_redirige' => 'atik ki referanse nan sit SPIP aou, men ki vir&eacute; direksyon sou yon lot URL.',
 'texte_referencement_automatique' => '<MODIF><b>R&eacute;f&eacute;ransman otomatik pou yon sitweb</b><br />W kapab referanse fasilman yon sitweb si w bay ladr&egrave;s URL osnon bay ladr&egrave;s fichye backend ali. SPIP ke pran otomatikman tout enf&ograve;masyon posib pou sit-la (kouman li rele, dekrisyon...).',
-'texte_requetes_echouent' => '<b>kank k&egrave;k rek&egrave;t MySQL ki pa mache
+'texte_requetes_echouent' => '<b>kank k&egrave;k rek&egrave;t SQL ki pa mache
   sist&eacute;matikman ak ki pa r&eacute;zon vizib, se posib bagay la ki ako bazdon&eacute;-la  li m&egrave;m
 .</b><p />
-  Tounyen a kapasit&eacute; MySQL pou aranje tout tab ali kank zot se abime pa aksidan.
+  Tounyen a kapasit&eacute; SQL pou aranje tout tab ali kank zot se abime pa aksidan.
 W kapab esey issit yon aranjman&nbsp;;
  Si bagay-la ki pa mache, kenbe ou yon kopi lafichaj, ki sere p&egrave;t&egrave;t indis pou rannkont ki pa mache...<p />
   Si pwobl&egrave;m la ki kenbe, m&egrave;si kontak l&eacute;b&eacute;rj&egrave;
@@ -1078,8 +1067,12 @@ ou nan d&eacute;kripsyon atik sa-yo
 'trad_lier' => 'Atik la se tradiksyon atik nimewo&nbsp;:',
 'trad_new' => 'Ekri tradiksyon ank&ograve; pou atik la',
 
-
 // U
+'upload_fichier_zip' => 'Fichye ZIP',
+'upload_fichier_zip_texte' => 'Fichye sak w ap pwopoze instale se yon fichye Zip.',
+'upload_fichier_zip_texte2' => 'Fichye se pet&egrave;t&nbsp;:',
+'upload_zip_decompacter' => 'dekonprese ek chak eleman li ka kontni se instale sou sit-la. Fichye yo ke instale sou sit-la se &nbsp;:',
+'upload_zip_telquel' => 'te enstale komsa kom achiv koprese Zip&nbsp;;',
 'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
 'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
 'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',
@@ -1090,12 +1083,9 @@ ou nan d&eacute;kripsyon atik sa-yo
 'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
 'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
 
-
 // V
 'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'Premye versyon'
-
 );
-
 
 ?>

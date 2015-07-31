@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'activer_plugin' => 'Plugin aktivieren',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_suppression_base' => 'ACHTUNG, Daten werden unwiderruflich gel&ouml;scht.',
 'avis_version_mysql' => 'Ihre SQL-Version (@version_mysql@) erlaubt keine automatische Reparatur der Tabellen.',
 
-
 // B
 'bouton_acces_ldap' => 'LDAP Zugang hinzuf&uuml;gen',
 'bouton_ajouter' => 'Hinzuf&uuml;gen',
@@ -59,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Alles deaktivieren',
 'bouton_desinstaller' => 'Deinstallieren',
 'bouton_effacer_index' => 'Indexe l&ouml;schen',
+'bouton_effacer_statistiques' => 'Statistiken l&ouml;schen',
 'bouton_effacer_tout' => 'ALLES l&ouml;schen',
 'bouton_envoi_message_02' => 'NACHRICHT SENDEN',
 'bouton_envoyer_message' => 'Nachricht fertig: Senden',
@@ -100,13 +102,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Cache leeren',
 'bouton_voir_message' => 'Beitrag vor dem Absenden ansehen',
 
-
 // C
 'cache_mode_compresse' => 'Cache-Dateien werden komprimiert gespeichert.',
 'cache_mode_non_compresse' => 'Cache-Dateien werden unkomprimiert gespeichert.',
 'cache_modifiable_webmestre' => 'Dieser Parameter kann vom Webmaster eingestellt werden.',
 'calendrier_synchro' => 'Wenn Sie eine mit <b>iCal</b> kompatibles PIM-Programm verwenden, k&ouml;nne Sie es mit den Eintr&auml;gen dieser Website synchronisieren.',
 'config_activer_champs' => 'Aktivieren Sie folgende Felder',
+'config_choix_base_sup' => 'Eine Datenbank auf diesem Server angeben',
+'config_erreur_base_sup' => 'SPIP kann nicht auf die Liste der verf&uuml;gbaren Datenbanken zugreifen.',
+'config_info_base_sup' => 'Wenn Sie andere Datenbanken auf dem selben Server oder auf einem anderen mit SPIP abfragen m&ouml;chten, k&ouml;nnen Sie sie mit dem Formular weiter unten deklarieren. Wenn Sie Felder leer lassen, werden die Verbindungsdaten der Hauptdatenbank verwendet.',
+'config_info_base_sup_disponibles' => 'Bereits abfragbare Datenbanken:',
 'config_info_logos' => 'Jedes Element der Website kann ein Logo und ein &laquo;mouseover-Logo&raquo; erhalten.',
 'config_info_logos_utiliser' => 'Logos verwenden',
 'config_info_logos_utiliser_non' => 'Logos nicht verwenden',
@@ -114,9 +119,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_info_logos_utiliser_survol_non' => 'Mouseover-Logos nicht verwenden',
 'config_info_redirection' => 'Mit dieser Option k&ouml;nnen Sie virtuelle Artikel anlegen, die als Weiterleitung zu Artikeln anderer Websites oder ausserhalb von SPIP funktionieren.',
 'config_redirection' => 'Virtuelle Artikel',
+'config_titre_base_sup' => 'Deklaration einer zus&auml;tzlichen Datenbank',
+'config_titre_base_sup_choix' => 'W&auml;hlen Sie eine zus&auml;tzliche Datenbank',
 'connexion_ldap' => 'Verbindung:',
 'copier_en_local' => 'Lokale Koipe',
-
 
 // D
 'date_mot_heures' => 'Stunden',
@@ -127,7 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Text verschoben',
 'diff_texte_supprime' => 'Text gel&ouml;scht',
 'double_clic_inserer_doc' => 'M&uuml;gen Sie mit einem Doppelklick das K&uuml;rzel in den Text ein',
-
 
 // E
 'email' => 'E-Mail',
@@ -175,10 +180,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_tag_plugin_absent' => '&lt;Plugin&gt; fehlt in der Definitionsdatei',
 'erreur_plugin_version_manquant' => 'Version des Plugin fehlt',
 
-
 // F
 'forum_info_original' => 'Original',
-
 
 // I
 'ical_info1' => 'Diese Seite erm&ouml;glicht auf mehrere Arten an der Entwicklung der Website teilzunehmen.',
@@ -221,6 +224,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_publier_breve' => 'Meldung ver&ouml;ffentlichen',
 'icone_referencer_nouveau_site' => 'Neue Website verlinken',
 'icone_refuser_breve' => 'Kurzmeldung ablehnen',
+'icone_relancer_signataire' => '<NEW>Relancer le signataire',
 'icone_retour' => 'Zur&uuml;ck',
 'icone_retour_article' => 'Zur&uuml;ck zum Artikel',
 'icone_suivi_forum' => '&Ouml;ffentliches Forum: @nb_forums@ Beitr&auml;ge',
@@ -295,10 +299,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => 'von @liste@',
 'info_code_acces' => 'Vergessen Sie ihre Zugangsdaten nicht!',
 'info_comment_lire_tableau' => 'Interpretation der Tabelle',
+'info_compresseur_activer' => 'Kompression aktivieren',
+'info_compresseur_desactiver' => 'Kompression abschalten',
+'info_compresseur_texte' => 'Falls Ihr Server HTML Seiten nicht automatisch f&uuml;r die &Uuml;bertragung zum Websurfer komprimiert, k&ouml;nnen Sie hier versuchen, die Kompression zu erzeingen und so die Datenmenge der &uuml;bertragenen Seiten zu reduzieren. <b>Achtung</b> : Diese Einstellung kann manche Server merklich verlangsamen.',
+'info_compresseur_titre' => 'Optimierung und Kompression',
 'info_config_suivi' => 'Wenn es sich bei dieser Adresse um eine Mailing-Liste handelt, k&ouml;nnen Sie unten die Adresse angeben, unter der sich Teilnehmer der Website anmelden k&ouml;nnen. Es kann sich um den URL einer Webseite handeln (die ein Anmeldeformular enth&auml;lt) oder um eine E-Mail Adresse mit angeh&auml;ngtem Parameter (z.B. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Sie k&ouml;nnen die Mailing-Liste dieser Website abonnieren. Sie werden dann per E-Mail &uuml;ber neu zur Ver&ouml;ffentlichung vorgeschlagene Artikel informiert.',
 'info_confirmer_passe' => 'Neues Passwort best&auml;tigen:',
 'info_connexion_base' => 'Test der Verbindung zur Datenbank',
+'info_connexion_base_donnee' => 'Verbindung mit Ihrer Datenbank',
 'info_connexion_ldap_ok' => 'Die Verbindung zum LDAP-Verzeichnis wurde hergestellt.</b><p> Sie k&ouml;nnen mit dem n&auml;chsten Schritt fortfahren.',
 'info_connexion_mysql' => 'Verbindung zur SQL-Datenbank',
 'info_connexion_ok' => 'Die Verbindung wurde hergestellt.',
@@ -488,6 +497,9 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_question_mots_cles' => 'M&ouml;chten Sie Schlagworte f&uuml;r Ihre Website verwenden?',
 'info_question_proposer_site' => 'Wer darf Websites zur Verlinkung vorschlagen?',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
+'info_question_vignettes_referer' => 'Sie k&ouml;nnen die Besucherstatistiken mit Thumbnails der Herkunftswebsites (referer) erg&auml;nzen',
+'info_question_vignettes_referer_non' => 'Keine Thumbnails der Herkunftswebsites anzeigen',
+'info_question_vignettes_referer_oui' => 'Thumbnails der Herkunftswebsites anzeigen',
 'info_qui_attribue_mot_cle' => 'Schlagworte dieser Kategorie k&ouml;nnen zugeordnet werden von:',
 'info_racine_site' => 'OBERSTE EBENE DER WEBSITE',
 'info_recharger_page' => 'Bitte laden Sie diese Seite in ein paar Augenblicken erneut.',
@@ -506,6 +518,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_renvoi_article' => '<b>Umleitung.</b> Dieser Artikel zeigt auf die Seite: ',
 'info_reserve_admin' => 'Nur Administratoren k&ouml;nnen diese Seite &auml;ndern.',
 'info_restauration_sauvegarde' => 'Wiederherstellung der Sicherung @archive@',
+'info_restauration_sauvegarde_insert' => 'Einf&uuml;gen der Sicherung @archive@ in die Datenbank',
 'info_restreindre_rubrique' => 'Administrationsrechte auf diese Rubrik beschr&auml;nken:',
 'info_resultat_recherche' => 'Suchergebnisse:',
 'info_rubriques' => 'Rubriken',
@@ -531,6 +544,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_sauvegarde_reussi_02' => 'Die Datenbank wurde in @archive@ gesichert. Sie k&ouml;nnen ',
 'info_sauvegarde_reussi_03' => 'zur Administration',
 'info_sauvegarde_reussi_04' => 'Ihrer Site zur&uuml;ckkehren.',
+'info_sauvegarde_rubrique_reussi' => 'Die Tabellen der Rubrik @titre@ wurden in der Sicherung @archive@ gespeichert. Sie k&ouml;nnen',
 'info_sauvegarde_rubriques' => 'Rubriken sichern',
 'info_sauvegarde_signatures' => 'Unterschriften der Petitionen sichern',
 'info_sauvegarde_sites_references' => 'Verlinkte Websites sichern',
@@ -572,6 +586,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_syndication_integrale_1' => 'Ihre Website biete Backend-Dateien zur Syndikation an (siehe &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'M&ouml;chten sie den gesamten Text der Artikel &uuml;berragen oder nur eine Zusammenfassung von ein paar hundert Zeichen?',
 'info_table_prefix' => 'Sie k&ouml;nnen den ersten Teil (das Prefix) der Datentabellen &auml;ndern. Das ist unerl&auml;sslich, wenn sie mehrere Websites in der selben Datenbank speichern m&ouml;chten. Das Prefix besteht aus kleinen Buchstaben ohne Akzente, Sonder- oder Leerzeichen',
+'info_taille_maximale_images' => 'SPIP wird die maximale Gr&ouml;&szlig;e der Bilder (in Millionen Pixel) testen, die es bearbeiten kann.<br /> Gr&ouml;&szlig;ere Bilder werden nicht verkleinert.',
 'info_taille_maximale_vignette' => 'Maximale Gr&ouml;sse der Icons des Systems:',
 'info_terminer_installation' => 'Sie k&ouml;nnen jetzt die Standardinstallation abschliessen.',
 'info_texte' => 'Text',
@@ -612,15 +627,26 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'info_visiteurs' => 'Besucher',
 'info_visiteurs_02' => 'Besucher des &ouml;ffentlichen Bereichs',
 'install_adresse_base_hebergeur' => 'Adresse der vom Provider zugewiesenen Datenbank',
+'install_base_ok' => 'Die Datenbank @base@ wurde erkannt',
 'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
 'install_extension_mbstring' => 'SPIP funktioniert nicht mit:',
 'install_extension_php_obligatoire' => 'SPIP ben&ouml;tigt die Dateierweiterung php:',
 'install_login_base_hebergeur' => 'Vom Provider zugeteilte Login-Daten',
 'install_nom_base_hebergeur' => 'Name der vom Provider zugewiesenen Datenbank:',
+'install_pas_table' => 'Datenbank zur Zeit ohne Tabellen',
 'install_pass_base_hebergeur' => 'Vom Provider zugeteiltes Passwort',
 'install_php_version' => 'Die PHP-Version @version@ ist zu alt. (Mindestens erforderlich = @minimum@)',
 'install_select_langue' => 'W&auml;hlen Sie eine Sprache aus und klicken Sie auf &laquo;Weiter&raquo;, um die Installation zu starten.',
+'install_select_type_db' => 'Geben Sie den Typ der Datenbank an:',
+'install_select_type_mysql' => 'MySQL',
+'install_select_type_pgsql' => 'PostgreSQL',
+'install_select_type_sqlite2' => 'SQLite 2',
+'install_select_type_sqlite3' => 'SQLite 3',
+'install_serveur_hebergeur' => 'Vom Provider bereitgestellter Datenbankserver',
 'install_table_prefix_hebergeur' => 'Prefix der vom Provider zugeteilten Tabelle',
+'install_tables_base' => 'Tabellen der Datenbank',
+'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am weitesten verbreitet), <b>PostgreSQL</b> und <b>SQLite</b> verwenden.',
+'install_types_db_connus_avertissement' => 'Achtung: Mehrere Plugins ben&ouml;tigen MySQL',
 'intem_redacteur' => 'Redakteur',
 'item_accepter_inscriptions' => 'Anmeldungen erlauben',
 'item_activer_forum_administrateur' => 'Admin-Forum aktivieren',
@@ -681,13 +707,10 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'item_utiliser_syndication' => 'Automatische Syndikation verwenden',
 'item_visiteur' => 'Besucher',
 
-
 // J
 'jour_non_connu_nc' => 'unbekannt',
 
-
 // L
-'les_deux' => 'beide',
 'lien_ajout_destinataire' => 'Empf&auml;nger hinzuf&uuml;gen',
 'lien_ajouter_auteur' => 'Autor hinzuf&uuml;gen',
 'lien_ajouter_participant' => 'Teilnehmer hinzuf&uuml;gen',
@@ -721,7 +744,6 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'logo_standard_rubrique' => 'STANDARD-LOGO F&Uuml;R RUBRIKEN',
 'logo_survol' => 'MOUSEOVER-LOGO',
 
-
 // M
 'menu_aide_installation_choix_base' => 'Datenbank ausw&auml;hlen',
 'module_fichier_langue' => 'Sprachdatei',
@@ -731,8 +753,8 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'module_texte_traduction' => 'Die Sprachdatei f&uuml;r &laquo;&nbsp;@module@&nbsp;&raquo; liegt vor auf&nbsp;',
 'mois_non_connu' => 'unbekannt',
 
-
 // O
+'onglet_declarer_une_autre_base' => 'Weitere Datenbank deklarieen',
 'onglet_repartition_actuelle' => 'zur Zeit',
 'ortho_ajouter_ce_mot' => 'Wort zum W&ouml;rterbuch hinzuf&uuml;gen',
 'ortho_aucune_suggestion' => 'F&uuml;r dieses Wort wurde kein Vorschlag gefunden.',
@@ -748,26 +770,62 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'ortho_verif_impossible' => 'Das System kann die Rechtschreibung dieses Texts nicht pr&uuml;fen.',
 'ortho_verifier' => 'Rechtschreibung pr&uuml;fen',
 
-
 // P
+'page_pas_proxy' => 'Diese Seite darf nicht durch den Proxy &uuml;bertragen werden.',
 'pas_de_proxy_pour' => 'Falls erforderlich, k&ouml;nne Sie die Rechner und Domainen angeben, die nicht &uuml;ber den Proxy angesprochen werden (z.B. @exemple@)',
+'plugin_charge_paquet' => 'Paket @name@ wird geladen',
+'plugin_erreur_charger' => 'Fehler: @zip@ kann nicht geladen werden',
+'plugin_erreur_droit1' => 'In das Verzeichnis <code>@dest@</code> kann nicht geschrieben werden.',
+'plugin_erreur_droit2' => 'Bitte &uuml;berpr&uuml;fen Sie die Schreibrechte f&uuml;r dieses Verzeichnis oder legen Sie es an, falls es noch nicht existiert, oder installieren Sie die Dateien per FTP.',
+'plugin_erreur_zip' => 'Pclzip fehlgeschlagen: Fehler @status@',
 'plugin_etat_developpement' => 'In Entwicklung',
 'plugin_etat_experimental' => 'Experimentell',
 'plugin_etat_stable' => 'Stabil',
 'plugin_etat_test' => 'Im Test',
 'plugin_impossible_activer' => 'Das Plugin @plugin@ kann nicht aktiviert werden.',
+'plugin_info_automatique1' => 'Wenn Sie die automatische Installation von Plugins nutzen m&ouml;chten, f&uuml;hren Sie bitte folgende Schritte aus:',
+'plugin_info_automatique2' => 'Anlegen des Verzeichnis <code>@rep@</code>&nbsp;;',
+'plugin_info_automatique3' => '&uuml;berpr&uuml;fen, ob der Server in das Verzeuichnis schreiben kann.',
+'plugin_info_automatique_creer' => 'im Wurzelverzeichnis der Website.',
+'plugin_info_automatique_exemples' => 'Beispiele:',
+'plugin_info_automatique_ftp' => 'Sie k&ouml;nnen Plugins per FTP in dem Vezeichnis <tt>@rep@</tt> installieren',
+'plugin_info_automatique_lib' => 'Manche Plugins ben&ouml;tigen das Verzeichnis <code>lib/</code>, um Dateien downloaden zu k&ouml;nnen, das im Wurzelverzeichnis der Website angelegt werden muss.',
+'plugin_info_automatique_liste' => 'Ihre Plugin-Listen:',
+'plugin_info_automatique_liste_officielle' => 'Die offiziellen Plugins',
+'plugin_info_automatique_liste_update' => 'Listen aktualisieren',
+'plugin_info_automatique_ou' => 'oder...',
+'plugin_info_automatique_select' => 'W&auml;hlen Sie ein Plugin aus. SPIP wird es herunterladen und im Verzeichnis <code>@rep@</code> installieren. Falls das Plugin bereits installiert ist, wird es auf den neuesten Stand gebracht.',
+'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
+'plugin_librairies_installees' => 'Installierte Bibliotheken',
+'plugin_necessite_lib' => 'Dieses Plugin ben&ouml;tigt die Bibliothek @lib@',
 'plugin_necessite_plugin' => 'Ben&ouml;tigt mindestens Version @version@ des Plugin @plugin@.',
 'plugin_necessite_spip' => 'Ben&ouml;tigt mindestens Version @version@ von SPIP.',
+'plugin_source' => 'Quelle:&nbsp;',
+'plugin_titre_automatique' => 'Automatische Installation',
+'plugin_titre_automatique_ajouter' => 'Plugins hinzuf&uuml;gen',
+'plugin_zip_active' => 'Weiter zum Aktivieren',
+'plugin_zip_adresse' => 'Geben Sie hier die Adresse einer ZIP-Datei, die das Plugin enth&auml;lt, oder die Adresse einer Plugin-Liste an.',
+'plugin_zip_adresse_champ' => 'Adresse des Plugins oder der Liste&nbsp;',
+'plugin_zip_content' => 'Enth&auml;lt die folgenden Dateien (@taille@),<br />die im Verzeichnis <code>@rep@</code> installiert werden k&ouml;nnen.',
+'plugin_zip_installe_finie' => 'Die Datei @zip@ wurde entpackt und installiert.',
+'plugin_zip_installe_rep_finie' => 'Die Datei @zip@ wurde entpackt und in das Verzeichnis @rep@ installiert.',
+'plugin_zip_installer' => 'Sie k&ouml;nnen es jetzt installieren.',
+'plugin_zip_telecharge' => 'Die Datei @zip@ wurde heruntergeladen',
+'plugins_actifs' => '@count@ aktive Plugins.',
+'plugins_compte' => '@count@ Plugins',
+'plugins_disponibles' => '@count@ verf&uuml;gbare Plugins.',
+'plugins_erreur' => 'Fehler in den Plugins: @plugins@',
 'plugins_liste' => 'Liste der Plugins',
+'plugins_vue_hierarchie' => 'Hierarchie',
+'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version des Protokolls:',
-
 
 // R
 'repertoire_plugins' => 'Verzeichnis:',
 
-
 // S
 'sauvegarde_fusionner' => 'Aktuelle Datenbank und Sicherungskopie zusammenf&uuml;hren',
+'sauvegarde_fusionner_depublier' => 'Zusammengef&uuml;hrte Objekte offline stellen',
 'sauvegarde_url_origine' => 'Wenn gew&uuml;nscht URL der Quelle:',
 'statut_admin_restreint' => '(Rubrik-Admin)',
 'syndic_choix_moderation' => 'Was soll mit weiteren Links dieser Seite geschehen?',
@@ -780,7 +838,6 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'syndic_option_resume_oui' => 'Eine einfache Zusammenfassung (im Textformat)',
 'syndic_options' => 'Syndikation - Optionen:',
 
-
 // T
 'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons f&uuml;r Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdr&uuml;cke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 'taille_cache_infinie' => 'Die Gr&ouml;sse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
@@ -791,6 +848,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'text_article_propose_publication' => 'Dieser Artikel ist zur Ver&ouml;ffentlichung vorgeschlagen. Bitte teilen Sie den anderen Autoren Ihre Meinung im Forum zu diesem Artikel mit. Sie finden es weiter unten auf dieser Seite.',
 'texte_acces_ldap_anonyme_1' => 'Manche LDAP-Server erlauben keinen anonymen Zugriff. In diesem Fall muss man Zugangsdaten f&uuml;r die erste Anmeldung eingeben, um Informationen im Verzeichnis suchen zu k&ouml;nnen. Meistens kann man hingegen die folgenden Felder frei lassen.',
 'texte_admin_effacer_01' => 'Dieser Befehl l&ouml;scht den <i>gesamten</i> Inhalt der Datenbank mit <i>allen</i> Redakteuren und Administratoren. Nach der Ausf&uuml;hrung dieses Befehls m&uuml;ssen Sie SPIP neu installieren und einen ersten Administrator anlegen.',
+'texte_admin_effacer_stats' => 'Dieser Befehl l&ouml;scht alle Daten der Besucherstatistiken, auch die zur Popularit&auml;t der Artikel.',
 'texte_admin_tech_01' => 'Diese Option erm&ouml;glicht es, den Inhalt der Datenbank in das Verzeichnis @dossier@ zu sichern. Vergessen Sie bitte nicht, ebenfalls den Inhalt des Verzeichnisses <i>img/</i> zu sichern, denn es enth&auml;lt die Bilder und Grafiken, welche f&uuml;r Rubriken und Artikel verwendet werden.',
 'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="http://www.spip.net/fr_article1489.html">die SPIP Dokumentation</a>.
 
@@ -798,6 +856,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 
 ',
 'texte_admin_tech_03' => 'Sie k&ouml;nnen die Daten in komprimierter Form sichern und damit Speicherplatz auf dem Server und Downloadzeit sparen.',
+'texte_admin_tech_04' => 'Um das Zusammenf&uuml;hren mit einer anderen Datenbank vorzubereiten, k&ouml;nnen Sie die Datensicherung auf eine bestimmte Rubrik beschr&auml;nken: ',
 'texte_adresse_annuaire_1' => '(Wenn Ihr Verzeichnis auf dem selben Rechner installiert ist wie diese Website, m&uuml;ssen Sie wahrscheinlich &bdquo;localhost&ldquo; angeben.)',
 'texte_ajout_auteur' => 'Folgender Autor ist diesem Artikel zugeordnet worden:',
 'texte_annuaire_ldap_1' => 'Wenn Sie Zugang zu einem LDAP-Verzeichnis haben, k&ouml;nnen Sie es verwenden, um Benutzer automatisch nach SPIP zu importieren.',
@@ -821,7 +880,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_config_groupe_mots_cles' => 'M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r
  Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort
  pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
-'texte_connexion_mysql' => '<MODIF>Sie erhalten die erforderlichen SQL-Zugangsdaten von Ihrem Provider.',
+'texte_connexion_mysql' => 'Sie erhalten die erforderlichen SQL-Zugangsdaten von Ihrem Provider: Name des Datenbankservers und pers&ouml;nliche Zugangsdaten.',
 'texte_contenu_article' => '(Zusammenfassung des Artikels in wenigen Worten.)',
 'texte_contenu_articles' => 'Ja nach Vorlage, die Sie f&uuml;r Ihre Website verwenden, k&ouml;nnen Sie Elemente von Artikeln aktivieren oder abschalten. Bitte bestimmen Sie mit dieser Liste, welche Elemente verf&uuml;gbar sein sollen.',
 'texte_crash_base' => 'Wenn Ihre Datenbank abgest&uuml;rzt ist, k&ouml;nnen Sie eine automatische Reparatur versuchen.',
@@ -836,6 +895,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_documents_joints_2' => 'Diese Einstellung widerspricht nicht dem Einf&uuml;gen von Bildern in Artikel.',
 'texte_effacer_base' => 'SPIP-Datenbank l&ouml;schen',
 'texte_effacer_donnees_indexation' => 'Indexe l&ouml;schen',
+'texte_effacer_statistiques' => 'Statistiken l&ouml;schen',
 'texte_en_cours_validation' => 'Die folgenden Artikel und Meldungen sind zur Ver&ouml;ffentlichung vorgeschlagen. Bitte teilen Sie den anderen Autoren Ihre Meinung in den Foren mit, die Ihnen zugeordnet sind.',
 'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &bdquo;typografischen Abk&uuml;rzungen&ldquo; verwenden.',
 'texte_fichier_authent' => 'Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p> Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.<p>Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.',
@@ -992,6 +1052,8 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_page_sites_tous' => 'Verlinkte Websites',
 'titre_page_statistiques' => 'Statistiken pro Rubrik',
 'titre_page_statistiques_referers' => 'Statistik (Referer)',
+'titre_page_statistiques_signatures_jour' => 'Unterschriften pro Tag',
+'titre_page_statistiques_signatures_mois' => 'Unterschriften pro Monat',
 'titre_page_statistiques_visites' => 'Statistik der Seitenabrufe',
 'titre_page_upgrade' => 'Aktualisierung von SPIP',
 'titre_publication_articles_post_dates' => 'Ver&ouml;ffentlichung von vordatierten Artikeln',
@@ -1015,8 +1077,12 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_lier' => 'Dieser Artikel ist eine &Uuml;bersetzung des Artikels Nummer&nbsp;',
 'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
 
-
 // U
+'upload_fichier_zip' => 'ZIP-Datei',
+'upload_fichier_zip_texte' => 'Sie m&ouml;chsten eine ZIP-Datei installieren.',
+'upload_fichier_zip_texte2' => 'SPIP kann:',
+'upload_zip_decompacter' => 'Das ZIP-Archiv auspacken. Diese Dateien werden dann auf dem Server installiert:',
+'upload_zip_telquel' => 'Das ZIP-Archiv als eine Archivdatei installieren.',
 'utf8_convert_attendez' => 'Warten sie einen Augenblick und laden sie diese Seite erneut.',
 'utf8_convert_avertissement' => 'Sie werden ihre Datenbank (Artikel, Meldungen, etc.) vom Zeichensatz <b>@orig@</b> nach <b>@charset@</b> zu konvertieren.',
 'utf8_convert_backup' => 'Vergessen sie nicht, zun&auml;chst eine Sicherung ihrer Website anzulegen. Sie sollten ebenfalls &uuml;berpr&uuml;fen, ob ihre Skeltte und Sprachdateien zum Zeichensatz @charset@ kompatibel sind.',
@@ -1027,12 +1093,10 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'utf8_convert_verifier' => 'Sie m&uuml;ssen nun den Cache leeren und  das Verhalten ihrer &ouml;ffentlich zug&auml;nglichen Seiten &uuml;berpr&uuml;fen. Falls es ernste Probleme damit geben sollte, steht ihnen eine Sicherungskopie ihrer Daten (im SQL-Format) im Verzeichnis @rep@ zur Verf&uuml;gung.',
 'utf8_convertir_votre_site' => 'Website nach utf-8 konvertieren',
 
-
 // V
 'version' => 'Version:',
+'version_deplace_rubrique' => 'Verschoben von <b>&laquo;&nbsp;@from@&nbsp;&raquo;</b> nach <b>&laquo;&nbsp;@to@&nbsp;&raquo;</b>.',
 'version_initiale' => 'Urspr&uuml;ngliche Fassung'
-
 );
-
 
 ?>
