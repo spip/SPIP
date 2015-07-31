@@ -68,18 +68,18 @@ if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
 }
 
 if ($modifier_message == "oui") {
-	spip_query("UPDATE spip_messages SET titre=" . spip_abstract_quote($titre) . ", texte=" . spip_abstract_quote($texte) . " WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET titre=" . _q($titre) . ", texte=" . _q($texte) . " WHERE id_message='$id_message'");
 }
 
 if ($changer_rv) {
-  spip_query("UPDATE spip_messages SET rv=" . spip_abstract_quote($rv) . " WHERE id_message='$id_message'");
+  spip_query("UPDATE spip_messages SET rv=" . _q($rv) . " WHERE id_message='$id_message'");
 }
 
 if ($jour)
   change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin);
 
 if ($change_statut) {
-	spip_query("UPDATE spip_messages SET statut=" . spip_abstract_quote($change_statut) . " WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET statut=" . _q($change_statut) . " WHERE id_message='$id_message'");
 	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
 }
 

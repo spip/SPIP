@@ -131,7 +131,7 @@ if ($essai_login == "oui") {
 		$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
 		$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
 
-		spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
+		spip_query("UPDATE spip_auteurs SET prefs = " . _q(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
 	}
  }
 
@@ -170,7 +170,7 @@ if ($var_lang_ecrire) {
 
 	if (_FILE_CONNECT
 	AND verifier_action_auteur("cookie-var_lang_ecrire", $hash)) {
-		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($var_lang_ecrire) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
+		spip_query("UPDATE spip_auteurs SET lang = " . _q($var_lang_ecrire) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
 		$auteur_session['lang'] = $var_lang_ecrire;
 		$var_f = charger_fonction('session', 'inc');
 		$var_f($auteur_session);

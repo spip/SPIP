@@ -223,8 +223,9 @@ function spip_query($query, $serveur='') {
 
 // a demenager dans base/abstract_sql a terme
 
-// http://doc.spip.org/@spip_abstract_quote
-function spip_abstract_quote($arg_sql) {
+function spip_abstract_quote($arg_sql) {return _q($arg_sql);}
+
+function _q($arg_sql) {
 	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
 }
 

@@ -55,7 +55,7 @@ function exec_recherche_dist()
 	$where = split("[[:space:]]+", $recherche);
 	if ($where) {
 		foreach ($where as $k => $v) 
-		  $where[$k] = "'%" . substr(str_replace("%","\%", spip_abstract_quote($v)),1,-1) . "%'";
+		  $where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
 		$where = ($testnum ? "OR " : '') .
 		  ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
 	}

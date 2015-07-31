@@ -76,7 +76,7 @@ function convert_extra($v) {
 		foreach ($extra as $key=>$val)
 			$extra[$key] = unicode_to_utf_8(
 			charset2unicode($val, $charset_source));
-			return ", extra=".spip_abstract_quote(serialize($extra));
+			return ", extra="._q(serialize($extra));
 	}
 }
 
@@ -160,19 +160,19 @@ function exec_convert_utf8_dist() {
 					preg_match(',^<CONVERT (.*?)>,', $v, $reg);
 					$v = substr($v, strlen($reg[0]));
 					$charset_source = $reg[1];
-					$query[] = "$c=" . spip_abstract_quote($v);
+					$query[] = "$c=" . _q($v);
 				} else {
 					if (!is_numeric($v)
 					AND !is_ascii($v)) {
 						// traitement special car donnees serializees
 						if ($c == 'extra') {
-							$query_no_convert .= ", $c=".spip_abstract_quote($v);
+							$query_no_convert .= ", $c="._q($v);
 							$query_extra = convert_extra($v);
 						} else
-							$query[] = "$c=" . spip_abstract_quote($v);
+							$query[] = "$c=" . _q($v);
 					} else
 						# pour le backup
-						$query_no_convert .= ", $c=".spip_abstract_quote($v);
+						$query_no_convert .= ", $c="._q($v);
 				}
 			}
 

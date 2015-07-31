@@ -135,7 +135,7 @@ function calculer_visites($t) {
 		// s'assurer d'un slot pour chacun
 		foreach ($referers as $referer => $num) {
 			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
-			$insert[] = "('$date', " . spip_abstract_quote($referer) . ",
+			$insert[] = "('$date', " . _q($referer) . ",
 				$referer_md5)";
 			$ar[$num][] = $referer_md5;
 		}
@@ -155,7 +155,7 @@ function calculer_visites($t) {
 		foreach ($referers_a as $id_article => $referers)
 		foreach ($referers as $referer => $num) {
 			$referer_md5 = '0x'.substr(md5($referer), 0, 15);
-			$insert[] = "('$date', " . spip_abstract_quote($referer) . ",
+			$insert[] = "('$date', " . _q($referer) . ",
 				$referer_md5, $id_article)";
 			$ar[$num][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
 		}

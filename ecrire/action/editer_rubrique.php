@@ -107,7 +107,7 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 	}
 	else $extra = '';
 
-	spip_query("UPDATE spip_rubriques SET " . $parent . "titre=" . spip_abstract_quote($titre) . ", descriptif=" . spip_abstract_quote($descriptif) . ", texte=" . spip_abstract_quote($texte) . (!$extra ? '' :  ", extra = " . spip_abstract_quote($extra) . "") . " WHERE id_rubrique=$id_rubrique");
+	spip_query("UPDATE spip_rubriques SET " . $parent . "titre=" . _q($titre) . ", descriptif=" . _q($descriptif) . ", texte=" . _q($texte) . (!$extra ? '' :  ", extra = " . _q($extra) . "") . " WHERE id_rubrique=$id_rubrique");
 
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {

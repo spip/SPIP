@@ -43,7 +43,7 @@ function message_oubli($email, $param)
 	if (!is_array($declaration))
 		return $declaration;
 
-	$res = spip_query("SELECT id_auteur,statut,pass FROM spip_auteurs WHERE email =" . spip_abstract_quote($declaration['mail']));
+	$res = spip_query("SELECT id_auteur,statut,pass FROM spip_auteurs WHERE email =" . _q($declaration['mail']));
 
 	if (!$row = spip_fetch_array($res)) 
 		return _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
@@ -81,14 +81,14 @@ $message = '';
  if (!$p) {
 	  if ($oubli) $message = message_oubli($oubli, 'p');
  } else {
-	$res = spip_query("SELECT login FROM spip_auteurs WHERE cookie_oubli=" . spip_abstract_quote($p) . " AND statut<>'5poubelle' AND pass<>''");
+	$res = spip_query("SELECT login FROM spip_auteurs WHERE cookie_oubli=" . _q($p) . " AND statut<>'5poubelle' AND pass<>''");
 	if (!$row = spip_fetch_array($res)) 
 		$message = _T('pass_erreur_code_inconnu');
 	else {
 		if ($oubli) {
 			$mdpass = md5($oubli);
 			$htpass = generer_htpass($oubli);
-			spip_query("UPDATE spip_auteurs SET htpass='$htpass', pass='$mdpass', alea_actuel='',	cookie_oubli='' WHERE cookie_oubli=" . spip_abstract_quote($p));
+			spip_query("UPDATE spip_auteurs SET htpass='$htpass', pass='$mdpass', alea_actuel='',	cookie_oubli='' WHERE cookie_oubli=" . _q($p));
 
 			$login = $row['login'];
 			$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".

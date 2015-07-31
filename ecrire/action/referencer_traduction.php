@@ -55,11 +55,11 @@ function instituer_langue_article($id_article, $id_rubrique) {
 
 	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $changer_lang) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
 		else {
 			$langue_parent = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
 			$langue_parent=$langue_parent['lang'];
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
 			include_spip('inc/lang');
 			calculer_langues_utilisees();
 		}

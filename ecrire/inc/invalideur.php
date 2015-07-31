@@ -38,7 +38,7 @@ function maj_invalideurs ($fichier, &$page) {
 	# entre un invalideur et un appel public de page
 	$bedtime = time() + $page['entetes']['X-Spip-Cache'] + 3600;
 	$taille = @filesize(_DIR_CACHE . $fichier);
-	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES (" . spip_abstract_quote($fichier) . ",'$bedtime','t','$taille')");
+	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES (" . _q($fichier) . ",'$bedtime','t','$taille')");
 
 	// invalidations
 	insere_invalideur($page['invalideurs'], $fichier);
@@ -224,7 +224,7 @@ function retire_caches($chemin = '') {
 	if ($chemin) {
 		$f = spip_abstract_fetsel(array("fichier"),
 			array("spip_caches"),
-			array("fichier = " . spip_abstract_quote($chemin) . " ",
+			array("fichier = " . _q($chemin) . " ",
 				"type='x'"),
 			"",
 			array(),

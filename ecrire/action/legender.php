@@ -64,7 +64,7 @@ function action_legender_post($r)
 			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
 	}
 				  
-	spip_query("UPDATE spip_documents SET$d titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
+	spip_query("UPDATE spip_documents SET$d titre=" . _q($titre_document) . ", descriptif=" . _q($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
 
 	if ($date) {

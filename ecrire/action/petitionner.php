@@ -36,7 +36,7 @@ function action_petitionner_dist() {
 		$site_unique = ($site_unique == 'on') ? 'oui' : "non";
 		$message =  ($message == 'on') ? 'oui' : "non";
 
-		$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . spip_abstract_quote($texte_petition) . ")");
+		$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . _q($texte_petition) . ")");
 		}
 	else if ($change_petition == "off") {
 		$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");

@@ -31,7 +31,7 @@ function ecrire_meta($nom, $valeur) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
 		if (!_FILE_CONNECT) return;
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . spip_abstract_quote($valeur) . " )");
+		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . _q($valeur) . " )");
 	}
 }
 

@@ -27,7 +27,7 @@ function inc_auth_ldap_dist ($login, $pass) {
 	if (!($dn = auth_ldap_search($login, $pass))) return array();
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($login) . " AND source='ldap'");
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($login) . " AND source='ldap'");
 
 	// sinon importer les infos depuis LDAP, 
 	// avec le statut par defaut a l'install
@@ -108,7 +108,7 @@ function auth_ldap_inserer($dn, $statut)
 	$login = strtolower(importer_charset($login, 'utf-8'));
 
 	include_spip('base/abstract_sql');
-	$n = spip_abstract_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . spip_abstract_quote($nom) . ", " . spip_abstract_quote($login) . ", " . spip_abstract_quote($email) . ", " . spip_abstract_quote($bio) . ", " . spip_abstract_quote($statut) . ", '')");
+	$n = spip_abstract_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . _q($nom) . ", " . _q($login) . ", " . _q($email) . ", " . _q($bio) . ", " . _q($statut) . ", '')");
 
 	return spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$n");
 }

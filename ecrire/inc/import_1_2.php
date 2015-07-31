@@ -106,7 +106,7 @@ function inc_import_1_2_dist($f, $gz=false) {
 				}
 			}
 			else if ($fields==NULL or isset($fields[$col])) {
-				$values[$col] = spip_abstract_quote($value);
+				$values[$col] = _q($value);
 				if ($col == $id) $id_objet = $value;
 			}
 		}

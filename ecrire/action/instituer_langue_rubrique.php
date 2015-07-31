@@ -29,7 +29,7 @@ function action_instituer_langue_rubrique_dist() {
 	AND $GLOBALS['meta']['multi_rubriques'] == 'oui'
 	AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0)) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_rubriques SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
+			spip_query("UPDATE spip_rubriques SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
 		else {
 			if ($id_parent == 0)
 				$langue_parent = $GLOBALS['meta']['langue_site'];
@@ -37,7 +37,7 @@ function action_instituer_langue_rubrique_dist() {
 				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 				$langue_parent = $row['lang'];
 			}
-			spip_query("UPDATE spip_rubriques SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+			spip_query("UPDATE spip_rubriques SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 		}
 		include_spip('inc/rubriques');
 		calculer_rubriques();

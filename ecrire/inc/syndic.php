@@ -351,9 +351,9 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 	$le_lien = substr($data['url'], 0,255);
-	$n = spip_num_rows(spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . spip_abstract_quote($le_lien) . " AND id_syndic=$now_id_syndic"));
+	$n = spip_num_rows(spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic"));
 	if ($n == 0 and !spip_sql_error()) {
-		spip_query("INSERT INTO spip_syndic_articles (id_syndic, url, date, statut) VALUES ('$now_id_syndic', " . spip_abstract_quote($le_lien) . ", FROM_UNIXTIME(".$data['date']."), '$statut')");
+		spip_query("INSERT INTO spip_syndic_articles (id_syndic, url, date, statut) VALUES ('$now_id_syndic', " . _q($le_lien) . ", FROM_UNIXTIME(".$data['date']."), '$statut')");
 		$ajout = true;
 	}
 
@@ -391,7 +391,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
-	spip_query("UPDATE spip_syndic_articles SET				titre=" . spip_abstract_quote($data['titre']) .			 ",	".$update_date."								lesauteurs=" . spip_abstract_quote($data['lesauteurs']) . ",			descriptif=" . spip_abstract_quote($desc) . ",					lang=".spip_abstract_quote(substr($data['lang'],0,10)).",			source=".spip_abstract_quote(substr($data['source'],0,255)).",			url_source=".spip_abstract_quote(substr($data['url_source'],0,255)).",		tags=" . spip_abstract_quote($tags) .					 "	WHERE id_syndic='$now_id_syndic' AND url=" . spip_abstract_quote($le_lien));
+	spip_query("UPDATE spip_syndic_articles SET				titre=" . _q($data['titre']) .			 ",	".$update_date."								lesauteurs=" . _q($data['lesauteurs']) . ",			descriptif=" . _q($desc) . ",					lang="._q(substr($data['lang'],0,10)).",			source="._q(substr($data['source'],0,255)).",			url_source="._q(substr($data['url_source'],0,255)).",		tags=" . _q($tags) .					 "	WHERE id_syndic='$now_id_syndic' AND url=" . _q($le_lien));
 
 	// Point d'entree post_syndication
 	pipeline('post_syndication',
@@ -451,14 +451,14 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		// moderation automatique des liens qui sont sortis du feed
 		if (count($urls) > 0
 		AND $row['miroir'] == 'oui') {
-			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (url IN ("	. join(",", array_map('spip_abstract_quote',$urls))	. "))");
+			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (url IN ("	. join(",", array_map('_q',$urls))	. "))");
 		}
 
 		// suppression apres 2 mois des liens qui sont sortis du feed
 		if (count($urls) > 0
 		AND $row['oubli'] == 'oui') {
 			$time = date('U') - 61*24*3600; # deux mois
-			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (url IN (" . join(",", array_map('spip_abstract_quote',$urls)) . "))");
+			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (url IN (" . join(",", array_map('_q',$urls)) . "))");
 		}
 
 

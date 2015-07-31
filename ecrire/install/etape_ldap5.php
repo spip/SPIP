@@ -25,7 +25,7 @@ function install_etape_ldap5_dist()
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . spip_abstract_quote($statut_ldap) . " )");
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . _q($statut_ldap) . " )");
 	@unlink(_FILE_META);
 
 	echo "<B>"._T('info_ldap_ok')."</B>";

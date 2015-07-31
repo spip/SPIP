@@ -45,7 +45,7 @@ function copie_locale($source, $mode='auto') {
 				ecrire_fichier($local, $contenu);
 
 				// signaler au moteur de recherche qu'il peut reindexer ce doc
-				$id_document = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . spip_abstract_quote($source)));
+				$id_document = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
 				$id_document = $id_document['id_document'];
 				if ($id_document) {
 					include_spip('inc/indexation');
@@ -256,7 +256,7 @@ function fichier_copie_locale($source) {
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
 	// des documents -- si la source n'est pas dans la table des documents,
 	// on ne fait rien
-	$t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier=" . spip_abstract_quote($source) . " AND distant='oui'"));
+	$t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui'"));
 	if ($t) {
 		$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$t['id_type']));
 		if ($t)
@@ -280,7 +280,7 @@ function recuperer_infos_distantes($source, $max=0) {
 				"\n$headers", $regs);
 		if ($t) {
 		  $mime_type = (trim($regs[1]));
-		  $t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type=" . spip_abstract_quote($mime_type)));
+		  $t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
 		}
 		if ($t) {
 			spip_log("mime-type $mime_type ok");
