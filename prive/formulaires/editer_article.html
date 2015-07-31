@@ -30,7 +30,7 @@
 	    </li>]
 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
 		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{artrub}</em></label>
-				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+				(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
 		
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
