@@ -80,7 +80,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 				'jointures' => true
 				),
 			$serveur);
-		$points = $points[$x];
+		// pas de résultat, pas de point
+		$points = isset($points[$x]) ? $points[$x] : array();
 
 		// permettre aux plugins de modifier le resultat
 		$points = pipeline('prepare_recherche',array(

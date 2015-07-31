@@ -280,9 +280,26 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
 	}
 }
 
-// {branche ?}
-// http://www.spip.net/@branche
-// http://doc.spip.org/@critere_branche_dist
+
+/**
+ * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique
+ * 
+ * Calcule une branche d'une rubrique et conditionne la boucle avec.
+ * Cherche l'identifiant de la rubrique dans les boucles parentes ou par jointure
+ * et calcule la liste des identifiants de rubrique de toute la branche
+ *
+ * @link http://www.spip.net/@branche
+ * 
+ * @param string $idb
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param array $crit
+ * 		Paramètres du critère dans cette boucle
+ * @return
+ * 		AST complété de la condition where au niveau de la boucle,
+ * 		restreignant celle ci aux rubriques de la branche
+**/
 function critere_branche_dist($idb, &$boucles, $crit){
 
 	$not = $crit->not;
