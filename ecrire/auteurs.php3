@@ -32,10 +32,10 @@ if ($connect_statut == '0minirezo') {
 
 debut_boite_info();
 	echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-	Leur statut (r&eacute;dacteur ou administrateur) est indiqu&eacute; par la couleur de l'icone. ");
+	Leur statut est indiqu&eacute; par la couleur de leur icone  (r&eacute;dacteur = bleu; administrateur=noir). ");
 
 	if ($connect_statut == '0minirezo')
-	echo '<br>'. propre ("Les auteurs sans acc&egrave;s au site sont indiqu&eacute;s par un icone rouge;
+	echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par un icone rouge;
 		les auteurs effac&eacute;s par une poubelle.");
 fin_boite_info();
 
@@ -151,7 +151,7 @@ if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 // Affichage
 //
 
-echo "<p>";
+echo "<br><br><br>";
 gros_titre("Les auteurs");
 echo "<p>";
 
@@ -220,7 +220,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 			$image = "<img src='img_pack/bonhomme-noir.gif' alt='Admin' border='0'>";
 			break;
 		case "1comite":
-			if ($connect_statut == '0minirezo' AND ! $row['pass'])
+			if ($connect_statut == '0minirezo' AND !($row['pass'] AND $row['login']))
 				$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Sans acc&egrave;s' border='0'>";
 			else
 				$image = "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' border='0'>";
