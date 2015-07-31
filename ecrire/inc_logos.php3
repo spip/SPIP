@@ -7,24 +7,32 @@ define("_ECRIRE_INC_LOGOS", "1");
 global $flag_ecrire;
 define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
-function get_image($racine) {
+function decrire_logo($racine) {
+	global $connect_id_auteur;
+
 	foreach (array('gif','jpg','png') as $fmt) {
 		$fichier = "$racine.".$fmt;
 		$fid = _DIR_IMG . $fichier;
 		if (@file_exists($fid)) {
-			$limage = @getimagesize( _DIR_IMG . $fichier);
-
 			// contrer le cache du navigateur
-			if ($fid = @filesize($fid) . @filemtime($fid))
-				$fid = "&".md5($fid);
+			$contre = @filesize($fid) . @filemtime($fid);
+			if ($taille = @getimagesize($fid)) {
+				list($x, $y, $w, $h) = resize_logo($taille);
+				$xy = "$x x $y "._T('info_pixels');
+				$taille = " width='$w' height='$h'";
+			} else { $xy =''; $w = 0; $h = 0;}
 			return array($fichier, 
-				     (!$limage ? '' : resize_logo($limage)),
-				     $fid);
-		}
+				     $xy, 
+				     "<img src='../spip_image_reduite.php3?img=" .
+				     $fid . "&taille_x=$w&taille_y=$h&hash=" .
+				     calculer_action_auteur ("reduire $w $h") .
+				     "&hash_id_auteur=$connect_id_auteur" .
+				     (!$contre ? '' : ("&".md5($contre))) .
+				     "'$taille alt='' />");
+			  }
 	}
 	return '';
 }
-
 
 function resize_logo($limage, $maxi=190) {
 
@@ -73,31 +81,6 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 	}
 }
 
-function decrire_logo($racine) {
-	global $connect_id_auteur;
-	$logo = get_image($racine);
-	if ($logo) {
-		$taille = $logo[1];
-		if ($taille) {
-			list($x, $y, $w, $h) =  $taille;
-			$logo[1] = "$x x $y "._T('info_pixels');
-			$taille = " width='$w' height='$h'";
-		}
-		
-		$hash = calculer_action_auteur ("reduire $w $h");
-		
-		$logo[2] = "<img src='../spip_image_reduite.php3?img=" .
-			_DIR_IMG . $logo[0]. "&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur" . $logo[2] .
-			"'$taille alt='' />";
-			
-/*		$logo[2] = "<img src='" .
-			_DIR_IMG . $logo[0] . $logo[2] .
-			"'$taille alt='' />";
-			
-*/
-	}
-	return $logo;
-}
 
 function afficher_logo($racine, $titre, $logo) {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
@@ -116,6 +99,7 @@ function afficher_logo($racine, $titre, $logo) {
 
 	if ($logo) {
 		list($fichier, $taille, $img) =  $logo;
+		spip_log("$fichier, $taille, $img");
 		$hash = calculer_action_auteur("supp_image $fichier");
 
 		echo "<p><center>$img";
