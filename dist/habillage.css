@@ -87,6 +87,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-size: 1.5em; }
 #entete a { text-decoration: none; }
 #entete a .spip_logos { display: block; float: left; }
+#entete .formulaire_recherche { float: right; }
 
 /* * Fil d'Ariane */
 #hierarchie {
@@ -309,7 +310,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Habillage des forums
 /*  ------------------------------------------ */
 
-#contenu .repondre, .forum-decompte {
+.forum-repondre, .forum-decompte {
 	clear: both;
 	margin-top: 2.5em;
 	padding-top: 2px;
@@ -318,7 +319,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-weight: bold; }
 
 /* * Habillage des forums */
-
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-fil { margin-top: 1.5em; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
@@ -329,7 +329,6 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 .forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
-
 ul .message { border: 1px solid #666666; margin: 0; padding: 0; margin-bottom: 1em; }
 ul ul .message { border: 1px solid #A4A4A4; }
 ul ul ul .message { border: 1px solid #B8B8B8; }
@@ -338,7 +337,6 @@ ul ul ul ul ul .message { border: 1px solid #E0E0E0; }
 ul ul ul ul ul ul .message { border: 1px dotted #E0E0E0; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
-
 ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #C4E0E0; }
 ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
@@ -381,3 +379,10 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  ------------------------------------------ */
 .invisible { position: absolute; top: -3000em; height: 1%; }
 .nettoyeur { clear: both; margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+
+/*  ------------------------------------------
+/*  Couleurs des liens
+/*  ------------------------------------------ */
+a { text-decoration: none; color: #333333; }
+a.on { font-weight: bold; }
+a:hover { text-decoration: underline; color: #000; }

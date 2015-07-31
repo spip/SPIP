@@ -7,12 +7,12 @@
 	<fieldset class="spip_sanscadre">
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type="hidden" name="p" value="(#ENV{p})" />
-	<p><label for="oubli"><:pass_choix_pass:></label>
+	<p><label for="oubli"><:pass_choix_pass:></label><br />
 	<input type="password" name="oubli" id="oubli" /></p>
 	][
 	(#ENV{p}|?{'',' '})
 	<p><:pass_indiquez_cidessous:></p>
-	<p><label for="oubli"><:form_pet_votre_email:></label>
+	<p><label for="oubli"><:form_pet_votre_email:></label><br />
 	<input type="text" name="oubli" id="oubli" /></p>
 	]
 	<input type="submit" class="spip_bouton" value="<:pass_ok:>" />

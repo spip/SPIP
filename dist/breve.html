@@ -12,7 +12,7 @@
 	<!-- Lien vers le backend pour navigateurs eclaires -->
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend-breves}" />
 
-	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
 	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
@@ -49,7 +49,7 @@
 
 			[(#REM) Forum de la breve
 			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
-			[<h2 class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></h2>]
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></h2>]
 			<INCLURE{fond=inc-forum}{id_breve}>
 
 		</div><!-- fin contenu -->

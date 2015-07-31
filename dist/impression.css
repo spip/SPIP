@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Ne pas imprimer : on elimine les elements de navigation (display: none;)
 ---------------------------------------------- */
 #entete, #hierarchie, #navigation, .encart, #pied { display: none; }
-.repondre, .forum-repondre-message, .formulaire_spip { display: none; }
+.forum-repondre, .forum-repondre-message, .formulaire_spip { display: none; }
 .spip-admin, .spip-admin-float, .invisible { display: none; }
 
 /*  Pour les liens, on desactive les couleurs et
