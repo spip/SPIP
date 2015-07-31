@@ -17,7 +17,7 @@ echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>".typo($recherche)."</B></FONT><p>
 
 $recherche = addslashes($recherche);
 
-$query_articles = "WHERE";
+$query_articles = "SELECT * FROM spip_articles WHERE";
 $query_breves = "SELECT * FROM spip_breves WHERE ";
 $query_rubriques = "SELECT * FROM spip_rubriques WHERE ";
 $query_sites = "SELECT * FROM spip_syndic WHERE ";

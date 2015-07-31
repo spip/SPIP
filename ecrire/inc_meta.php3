@@ -73,12 +73,12 @@ function lire_meta_maj($nom) {
 	$s .= '?'.'>';
 
 	$fichier_meta_cache = ($flag_ecrire ? '' : 'ecrire/') . 'data/inc_meta_cache.php3';
+	@unlink($fichier_meta_cache);
 	$fichier_meta_cache_w = $fichier_meta_cache.'-'.@getmypid();
 	$f = @fopen($fichier_meta_cache_w, "wb");
 	if ($f) {
 		$r = @fputs($f, $s);
 		@fclose($f);
-		@unlink($fichier_meta_cache);
 		if ($r == strlen($s))
 			@rename($fichier_meta_cache_w, $fichier_meta_cache);
 		else
