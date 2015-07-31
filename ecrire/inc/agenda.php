@@ -1505,7 +1505,7 @@ function tache_redirige ($row) {
 	if ($m[0] == '=')
 	  if ($m = chapo_redirige(substr($m,1), true))
 		return $m;
-	return generer_url_ecrire("message", "id_message=".$row['UID']);
+	return generer_url_ecrire("message", "id_message=".$row['uid']);
 }
 
 // http://doc.spip.org/@quete_calendrier_taches_annonces
