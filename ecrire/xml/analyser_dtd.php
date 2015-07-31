@@ -71,7 +71,7 @@ function compilerRegle($val)
 {
 	$x = str_replace('()','',
 		preg_replace('/\s*,\s*/','',
-		preg_replace('/(\w+)\s*/','(\1 )',
+		preg_replace('/(\w+)\s*/','(?:\1 )',
 		preg_replace('/\s*\)/',')',
 		preg_replace('/\s*([(+*|?])\s*/','\1',
 		preg_replace('/\s*#\w+\s*[,|]?\s*/','', $val))))));
@@ -269,10 +269,10 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	}
 	$filles = array();
 	$contenu = expanserEntite($contenu, $dtc->macros);
-	$val = $contenu ? compilerRegle($contenu) : '(EMPTY )';
-	if ($val == '(EMPTY )')
+	$val = $contenu ? compilerRegle($contenu) : '(?:EMPTY )';
+	if ($val == '(?:EMPTY )')
 		$dtc->regles[$nom] = 'EMPTY';
-	elseif  ($val == '(ANY )') 
+	elseif  ($val == '(?:ANY )')
 		$dtc->regles[$nom] = 'ANY';
 	else {
 		$last = substr($val,-1);
