@@ -21,6 +21,13 @@ function action_cookie_dist() {
 	// La cible de notre operation de connexion
 	$url = _request('url');
 	$redirect = isset($url) ? $url : _DIR_RESTREINT_ABS;
+	$redirect_echec = _request('url_echec');
+	if (!isset($redirect_echec)) {
+		if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
+			$redirect_echec = generer_url_public('login','',true);
+		else
+			$redirect_echec = $redirect;
+	}
 
 	// rejoue le cookie pour renouveler spip_session
 	if (_request('change_session') == 'oui') {
@@ -42,9 +49,7 @@ function action_cookie_dist() {
 	// le cas echeant.
 	if (_request('test_echec_cookie') == 'oui') {
 		spip_setcookie('spip_session', 'test_echec_cookie');
-		redirige_par_entete(generer_url_public('login',
-			"var_echec_cookie=oui&url="
-			. rawurlencode($redirect), '&'));
+		redirige_par_entete(parametre_url(parametre_url($redirect_echec,'var_echec_cookie','oui','&'),'url',rawurlencode($redirect),'&'));
 	}
 
 
@@ -78,9 +83,7 @@ function action_cookie_dist() {
 
 		// Sinon, renvoyer le formulaire avec message d'erreur si 2e fois
 		if (!$auteur) {
-			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
-				$redirect = generer_url_public('login',
-					"var_login=$session_login", true);
+			$redirect = parametre_url($redirect_echec,'var_login',$session_login,'&');
 			if (_request('session_password')
 			OR _request('session_password_md5'))
 				$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
