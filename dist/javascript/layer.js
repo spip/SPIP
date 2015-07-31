@@ -1,7 +1,6 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
 var xhr_actifs = new Array();
-var load_handlers = new Array();
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
@@ -203,21 +202,6 @@ function verifForm(racine) {
     	jField.width(w+"px");
     }
   });
-}
-
-//
-// Add a function to the list of those to be executed on ajax load complete
-//
-function onAjaxLoad(f) {
-	load_handlers.push(f);
-}
-
-//
-// Call the functions that have been added to onAjaxLoad
-//
-function triggerAjaxLoad(root) {
-	for ( var i = 0; i < load_handlers.length; i++ )
-	load_handlers[i].apply( root );
 }
 
 // Alloue un gestionnaire Ajax, et le lance sur les parametres donnes
