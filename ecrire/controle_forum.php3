@@ -268,7 +268,7 @@ $wheretexte = $controle_sans ? "texte=''" : "texte!=''";
 $query_forum = "SELECT * FROM spip_forum WHERE ";
 switch ($page) {
 case 'public':
-	$query_forum .= "statut IN ('publie', 'off') AND texte!=''";
+	$query_forum .= "statut IN ('publie', 'off', 'prop') AND texte!=''";
 	break;
 case 'interne':
 	$query_forum .= "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
