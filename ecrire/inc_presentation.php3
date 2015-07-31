@@ -1861,7 +1861,7 @@ function fin_page($credits='') {
 debut_grand_cadre();
 
 echo "<div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-echo "<a href='http://www.uzine.net/spip'>SPIP $spip_version_affichee; </a>";
+echo "<a href='http://www.uzine.net/spip'>SPIP $spip_version_affichee</a> ";
 echo _T('info_copyright');
 
 
