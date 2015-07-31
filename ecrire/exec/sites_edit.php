@@ -69,7 +69,6 @@ function exec_sites_edit_dist()
 
 	$contexte = array(
 	'icone_retour'=>$new=='oui'?'':icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), "site-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
-	'redirect'=>generer_url_ecrire("sites"),
 	'titre'=>$nom_site,
 	'new'=>$new == "oui"?$new:$id_syndic,
 	'id_rubrique'=>$id_rubrique,
