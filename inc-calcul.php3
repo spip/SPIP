@@ -30,8 +30,11 @@ include_ecrire("inc_distant");
 include_local("inc-calcul-outils");
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
-if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP))
-	include_local ($f);
+// donc il faut l'inclure "en globals"
+if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP)) {
+	global $dossier_squelettes;
+	include ($f);
+}
 
 charger_generer_url();
 
