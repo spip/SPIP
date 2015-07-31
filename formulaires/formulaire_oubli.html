@@ -5,17 +5,17 @@
 <form id="oubli_form" action='spip_pass.php3' method='post'>
 	<fieldset style="border: none;"><legend></legend>[
 	<:pass_nouveau_pass:>
-	<input type='hidden' name="p" value="(#ENV{p})">
+	<input type='hidden' name="p" value="(#ENV{p})" />
 	<label>
 	    <:pass_choix_pass:>
-	    <input type="password" name="oubli">
+	    <input type="password" name="oubli" />
 	</label>][
 	(#ENV{p}|?{'',' '})
 	<label>
 	  <:pass_indiquez_cidessous:>
-	  <input type="texte" name="oubli">
+	  <input type="texte" name="oubli" />
 	</label>]
-	<input type=submit class="fondl" value="<:pass_ok:>">
+	<input type=submit class="fondl" value="<:pass_ok:>" />
       </fieldset>
 </form>
 ]
