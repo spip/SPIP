@@ -293,6 +293,7 @@ function balise_EMBED_DOCUMENT_dist($p) {
 	$p->code = "embed_document($_id_document, '" .
 	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
 	"', false)";
+	unset ($p->fonctions);
 	$p->type = 'html';
 	return $p;
 }
