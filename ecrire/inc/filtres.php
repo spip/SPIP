@@ -1312,11 +1312,10 @@ function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 				$l = key($trads);
 				$trad = $trads[$l];
 				$typographie = charger_fonction(lang_typo($l), 'typographie');
-				$trad = $typographie($trad);
+				$trad = traiter_retours_chariots($typographie($trad));
 				$trad = explode("\n", $trad);
 				foreach($trad as $i => $ligne) {
 					if (strlen($ligne)) {
-						$e = true;
 						$ligne = code_echappement($ligne, 'multi');
 						$ligne = str_replace("'", '"', inserer_attribut($ligne, 'lang', $l));
 						if (lang_dir($l) !== lang_dir($lang))
