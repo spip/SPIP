@@ -86,7 +86,7 @@ if ($titre_parent) {
 if ($modif_forum == "oui") {
 	debut_cadre_relief();
 
-	echo "<b>".propre($titre_message)."</b>";
+	echo "<b>".typo($titre_message)."</b>";
 	echo "<p>".propre($texte);
 
 	if (strlen($nom_site)>0) {
