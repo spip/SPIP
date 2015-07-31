@@ -1863,14 +1863,19 @@ function calculer_texte($texte)
 	//
 	// Reperer les balises de traduction <<toto>>
 	//
-	while (ereg("(<<(([a-z_]+):)?([a-z_]+)>>)", $code, $match)) {
+	while (eregi("(<<(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?>>)", $code, $match)) {
 		//
 		// Traiter la balise de traduction multilingue
 		//
-		$chaine = $match[4];
+		$chaine = strtolower($match[4]);
 		if (!($module = $match[3]))
-			$module = 'public';
-		$code = str_replace($match[1], "'._T('$module:$chaine').'", $code);
+			$module = 'local';
+		$remplace = "_T('$module:$chaine')";
+		if ($filtres = $match[5]) {
+			$filtres = explode('|',substr($filtres,1));
+			$remplace = applique_filtres($filtres, $remplace);
+		}
+		$code = str_replace($match[1], "'.$remplace.'", $code);
 	}
 
 	return $code;

@@ -219,6 +219,11 @@ l&eacute; pa kav rokon&egrave;t ali.',
 'dirs_commencer' => 'pou komans fransv&eacute;rit&eacute; linstalasyon ',
 'dirs_preliminaire' => 'Dabor : <B> R&egrave;g out bann drwa-laks&eacute;</b>',
 'dirs_probleme_droits' => '<b>Ast&egrave;r, n&eacute;na inn larlik &egrave;k out bann drwa-laks&eacute;</b>',
+'dirs_repertoires_absents' => '<B>L&eacute; pa posib gany bann r&eacute;p&egrave;rtwar-la&nbsp;: <ul>@bad_dirs@.</ul> </B>
+  <P>Ni pans n&eacute;na inn larlik &egrave;k l&eacute;kritir bann l&egrave;t sanm maziskil o miniskil
+  Gad byin n&eacute;na okinn diskord ant bann l&egrave;t maziskil o miniskil bann r&eacute;p&egrave;rtwar &eacute; sak l&eacute; afis&eacute;
+  anl&egrave;r ; si ou trouv i l&eacute; pa par&egrave;y, ardon inn ot non bann r&eacute;p&egrave;rtwar-la sanm out lozisy&egrave;l FTP. Komsa lo larlik i sra pou aranz&eacute;.
+  <P>Kank ou lora fini ou sra kav ',
 'dirs_repertoires_suivants' => '<B>Bann r&eacute;pertwar-la l&eacute; pa ouv&egrave;r pou l&eacute;ktritir&nbsp;: <ul>@bad_dirs@.</ul> </b>
 
 
