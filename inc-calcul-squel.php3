@@ -1359,27 +1359,33 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		switch ($pile_boucles[$id_instance]->type_requete) {
 		case "articles":
-			$'.$nom_var.' = retour_forum(0, 0, $contexte["id_article"], 0, 0);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum(0, 0, $contexte[id_article], 0, 0); ?".">";
 			break;
 
 		case "breves":
-			$'.$nom_var.' = retour_forum(0, 0, 0, $contexte["id_breve"], 0);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum(0, 0, 0, $contexte[id_breve], 0); ?".">";
 			break;
 
 		case "forums":
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"]);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum(0, $contexte[id_forum], 0, 0, 0); ?".">";
 			break;
 
 		case "rubriques":
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], 0, 0, 0, 0);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum($contexte[id_rubrique], 0, 0, 0, 0); ?".">";
 			break;
 
 		case "syndication":
-			$'.$nom_var.' = retour_forum(0, 0, 0, 0, $contexte["id_syndic"]);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum(0, 0, 0, 0, $contexte[id_syndic]); ?".">";
 			break;
 
 		default:
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"]);
+			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
+				echo retour_forum(\'$contexte[id_rubrique]\', \'$contexte[id_forum]\', \'$contexte[id_article]\', \'$contexte[id_breve]\', \'$contexte[id_syndic]\'); ?".">";
 			break;
 		}
 		';
@@ -1517,7 +1523,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	$code = applique_filtres ($fonctions, $code);
 
-	$milieu .= "	\$$nom_var = $code;\n";
+	if ($code != "\$$nom_var") $milieu .= "\t\$$nom_var = $code;\n";
 
 	return $milieu;
 }

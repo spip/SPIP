@@ -85,7 +85,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>'._T('forum_vous_inscrire').'<br>';
 		login('', false, $message_login);
 		return false;
-	} 
+	}
 }
 
 
@@ -105,22 +105,21 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	if (!$retour)
 		$retour = rawurlencode($lien);
 
-	if ($forums_publics == "abo")  // forums abo
-		$ret .= '<'.'?php include("inc-forum.php3"); if (forum_abonnement($retour)) { ?'.'>';
-	else
-		$ret .= '<'.'?php { ?'.'>';
+	if ($forums_publics == 'abo') {
+		if (!forum_abonnement($retour)) return;
+	}
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
-	if (!$id_message) {
+	if (!$id_message = intval($id_message)) {
 		$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 	}
-	
+
 	if ($forums_publics == "pri") {
 		$ret.= _T('forum_info_modere')."<p>";
 	}
 
 	// recuperer le titre
-	if (! $titre) {
+	if (!$titre) {
 		if ($id_parent)
 			$titre_select = "SELECT titre FROM spip_forum WHERE id_forum = $id_parent";
 		else if ($id_rubrique)
@@ -137,8 +136,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$res = spip_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
-
-
 
 	if ($id_message){
 		$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
@@ -161,7 +158,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$ret .= "<p>".propre($texte)."<p>";
 			}
 
-			$ret .= "<a href='$url_site'>".typo($nom_site_forum)."</a>";
+			$ret .= "<a href='".entites_html($url_site)."'>".typo($nom_site_forum)."</a>";
 
 
 			// Verifier mots associes au message
@@ -176,7 +173,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$presence_mots = true;
 
 				$ret.= "<li> $type_mot&nbsp;: <b>$titre_mot</b>";
-
 			}
 
 			if (strlen($texte) < 10 AND !$presence_mots) {
@@ -322,7 +318,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 		if (!$url_site) $url_site = "http://";
 		$ret .= "\n"._T('forum_url');
-		$ret .= "<br />\n<input type='text' class='forml' name='url_site' value=\"$url_site\" size='40' /></div>";
+		$ret .= "<br />\n<input type='text' class='forml' name='url_site' value=\"".entites_html($url_site)."\" size='40' /></div>";
 
 		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_qui_etes_vous')."<br />";
 
@@ -346,8 +342,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	else  $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_valider')."' /></div>";
 
 	$ret .= "</form>";
-
-	$ret .= '<'.'?php } ?'.'>';	// fin forums abo
 
 	return $ret;
 }
@@ -410,7 +404,6 @@ function ajout_forum() {
 		}
 	}
 
-
 	switch($forums_publics) {
 		case "non":
 			$etat = "off";
@@ -422,8 +415,6 @@ function ajout_forum() {
 			$etat = "publie";
 			break;
 	}
-
-
 
 	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$auteur_session = $GLOBALS['auteur_session']['email'];

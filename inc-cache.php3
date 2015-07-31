@@ -11,6 +11,8 @@ define("_INC_CACHE", "1");
 //
 
 function generer_nom_fichier_cache($fichier_requete) {
+	global $HTTP_POST_VARS;
+
 	$md_cache = md5($fichier_requete);
 
 	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
@@ -22,6 +24,7 @@ function generer_nom_fichier_cache($fichier_requete) {
 
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
+	if (!empty($HTTP_POST_VARS)) $fichier_cache .= '.'.@getmypid();
 	$fichier_cache .= '.'.substr($md_cache, 1, 6);
 
 	$subdir_cache = substr($md_cache, 0, 1);
