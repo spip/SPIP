@@ -41,10 +41,19 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		  "' />"));
 
 	$contexte = $row;
+
+	// on veut conserver la langue de l'interface ;
+	// on passe cette donnee sous un autre nom, au cas ou le squelette
+	// voudrait l'exploiter
+	if (isset($contexte['lang'])) {
+		$contexte['langue'] = $contexte['lang'];
+		unset($contexte['lang']);
+	}
+
 	$contexte['config'] = $config = $config_fonc($row);	
 	$contexte['browser_caret']=$GLOBALS['browser_caret'];
 	include_spip('public/assembler');
-	$form .= recuperer_fond("prive/editer/article",$contexte);
+	$form .= recuperer_fond("prive/editer/article", $contexte);
 	
 	$form .= $hidden
 	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"
