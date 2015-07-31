@@ -27,12 +27,13 @@ function install_etape_3b_dist()
 		: _request('server_db');
 
 	if (!defined('_PASS_LONGUEUR_MINI')) define('_PASS_LONGUEUR_MINI',6);
+	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT',4);
 	if($login) {
 		$echec = ($pass!=$pass_verif) ?
 		  _T('info_passes_identiques')
 		  : ((strlen($pass)<_PASS_LONGUEUR_MINI) ?
 		     _T('info_passe_trop_court_car_pluriel',array('nb'=>_PASS_LONGUEUR_MINI))
-		     : ((strlen($login)<3) ?
+		     : ((strlen($login)<_LOGIN_TROP_COURT) ?
 			_T('info_login_trop_court')
 			: ''));
 		include_spip('inc/filtres');
