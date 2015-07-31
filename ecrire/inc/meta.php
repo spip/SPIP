@@ -33,8 +33,8 @@ function lire_metas() {
 
 function ecrire_meta($nom, $valeur) {
 	$GLOBALS['meta'][$nom] = $valeur; 
-	$valeur = addslashes($valeur);
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', '$valeur')");
+
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', '" . addslashes($valeur) . "' )");
 }
 
 function effacer_meta($nom) {
