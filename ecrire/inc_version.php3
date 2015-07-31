@@ -635,13 +635,21 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 // Verifier la conformite d'une adresse email
 //
 
-function email_valide($addresse) {
+function email_valide($adresse) {
+	if (strpos($adresse,',')) {					// autoriser plusieurs emails
+		$valide = true;
+		$lesadresses = split(',', $adresse);
+		while (list(,$ad) = each($lesadresses))
+			$valide &= email_valide($ad);
+		return $valide;
+	}
+
 	return (eregi( 
 		'^[-!#$%&\'*+\\./0-9=?a-z^_`{|}~]+'.	// nom d'utilisateur
 		'@'.									// @
 		'([-0-9a-z]+\.)+' .						// hote, sous-domaine
 		'([0-9a-z]){2,4}$',						// tld 
-		trim($addresse)));
+		trim($adresse)));
 } 
 
 
