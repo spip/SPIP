@@ -80,7 +80,7 @@ echo "</div>";
 
 echo "<P align='left'>";
 
-$query_forum="SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut OFFSET 10";
+$query_forum="SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC LIMIT 10 OFFSET $debut";
 $result_forum=spip_query($query_forum);
 
 afficher_forum($result_forum,$urlforum);

@@ -81,7 +81,7 @@ $enplus = 200;	// intervalle affiche autour du debut
 $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 $limitnb = $debut + $enplus - $limitdeb;
 
-$query_forum = "SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') LIMIT $limitdeb OFFSET  $limitnb";
+$query_forum = "SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') LIMIT  $limitnb OFFSET $limitdeb";
 $result_forum = spip_query($query_forum);
 
 
@@ -118,7 +118,7 @@ if ($connect_statut == "0minirezo") {
 		AND pied.statut IN ('publie', 'off', 'prop')
 		AND thread.id_thread=pied.id_forum
 		GROUP BY id_thread
-		ORDER BY date DESC LIMIT $debut OFFSET  $pack";
+		ORDER BY date DESC LIMIT  $pack OFFSET $debut";
 	$result_forum = spip_query($query_forum);
 	afficher_forum($result_forum, $forum_retour, $id_article);
 }

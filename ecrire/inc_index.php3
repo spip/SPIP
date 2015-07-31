@@ -78,7 +78,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 function deja_indexe($type, $id_objet) {
 	$table_index = 'spip_index_'.table_objet($type);
 	$col_id = 'id_'.$type;
-	$query = "SELECT $col_id FROM $table_index WHERE $col_id=$id_objet LIMIT 0 OFFSET 1";
+	$query = "SELECT $col_id FROM $table_index WHERE $col_id=$id_objet LIMIT 1 OFFSET 0";
 	$n = @spip_num_rows(@spip_query($query));
 	return ($n > 0);
 }
@@ -300,7 +300,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		if ($row['syndication'] = "oui") {
 			$query_syndic = "SELECT titre FROM spip_syndic_articles
 			WHERE id_syndic=$id_objet AND statut='publie'
-			ORDER BY date DESC LIMIT 0 OFFSET 100";
+			ORDER BY date DESC LIMIT 100 OFFSET 0";
 			$result_syndic = spip_query($query_syndic);
 			while ($row_syndic = spip_fetch_array($result_syndic)) {
 				indexer_chaine($row_syndic['titre'], 5);
@@ -461,7 +461,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		else
 			$limit = $nombre_indexations;
 
-		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY idx='idx',idx='' LIMIT 0 OFFSET $limit");
+		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY idx='idx',idx='' LIMIT $limit OFFSET 0");
 		while ($t = spip_fetch_array($s)) {
 			$vu[$type] .= $t[0].", ";
 			indexer_objet($type, $t[0], $t[1]);
@@ -472,7 +472,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 function executer_une_indexation_syndic() {
 	$id_syndic = 0;
-	if ($row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 0 OFFSET 1"))) {
+	if ($row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1 OFFSET 0"))) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
 		marquer_indexer('syndic', $id_syndic);
@@ -512,7 +512,7 @@ function requete_txt_integral($objet, $hash_recherche) {
 		AND rec.hash IN ($hash_recherche)
 		GROUP BY objet.$id_objet
 		ORDER BY points DESC
-		LIMIT 0 OFFSET 10";
+		LIMIT 10 OFFSET 0";
 }
 
 // rechercher un mot dans le dico

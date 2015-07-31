@@ -53,7 +53,7 @@ fin_boite_info();
 
 
 if ($connect_statut == '0minirezo') {
-	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 0 OFFSET 1";
+	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1 OFFSET 0";
 	$result = spip_query($query);
 	$flag_visiteurs = spip_num_rows($result) > 0;
 
