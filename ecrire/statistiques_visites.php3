@@ -402,7 +402,7 @@ if (!$origine) {
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
-		echo _T('info_maximum').$max;
+		echo _T('info_maximum')." ".$max;
 		echo "<br>"._T('info_moyenne')." ".round($moyenne);
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
