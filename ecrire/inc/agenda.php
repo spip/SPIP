@@ -1369,7 +1369,7 @@ function  quete_calendrier_interval_forums($limites, &$evenements) {
 		if (autoriser('voir','forum',$id))
 			$evenements[$amj][]=
 			array(
-				'URL' => generer_url_entite('forum', $id),
+				'URL' => generer_url_entite($id, 'forum'),
 				'CATEGORIES' => 'calendrier-couleur7',
 				'SUMMARY' => $row['titre'],
 				'DTSTART' => date_ical($row['date_heure']));
