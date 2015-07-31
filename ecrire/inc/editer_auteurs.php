@@ -35,12 +35,11 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 		$arg_ajax.= "&titre=".urlencode($titre_boite);
 
 
-	$les_auteurs = determiner_auteurs_objet($type,$id);
-	
-	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
+	$cond_les_auteurs = "";
+	$aff_les_auteurs = afficher_auteurs_objet($type, $id, $flag, $cond_les_auteurs, $script_edit_objet, $script_edit_auteur, $arg_ajax);
 	
 	if ($flag AND $options == 'avancees') {
-		$futurs = ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax);
+		$futurs = ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax);
 	} else $futurs = '';
 
 	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $aff_les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import'],$titre_boite,$script_edit_objet, $arg_ajax);
@@ -124,16 +123,31 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 }
 
 // http://doc.spip.org/@determiner_auteurs_objet
-function determiner_auteurs_objet($type, $id, $cond='')
+function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 {
 	$les_auteurs = array();
 	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
-	$result = spip_query("SELECT id_auteur FROM spip_auteurs_{$type}s WHERE id_{$type}="._q($id) . ($cond ? " AND $cond" : ''));
-	while ($row = spip_fetch_array($result))
-		$les_auteurs[]= $row['id_auteur'];
+	$result = spip_query("SELECT id_auteur FROM spip_auteurs_{$type}s WHERE id_{$type}="._q($id) 
+	. ($cond ? " AND $cond" : '')
+	. ($limit? " LIMIT $limit": '')
+	);
 
-	return $les_auteurs;
+	return $result;
+}
+// http://doc.spip.org/@determiner_non_auteurs
+function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
+{
+	$cond = '';
+	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
+	if (spip_num_rows($res)<200){ // probleme de performance au dela, on ne filtre plus
+		while ($row = spip_fetch_array($res))
+			$cond .= ",".$row['id_auteur'];
+	}
+	if (strlen($cond))
+		$cond = "id_auteur NOT IN (" . substr($cond,1) . ') AND ';
+
+	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet
@@ -182,17 +196,30 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 }
 
 // http://doc.spip.org/@afficher_auteurs_objet
-function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $script_edit, $script_edit_auteur, $arg_ajax)
+function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $script_edit, $script_edit_auteur, $arg_ajax)
 {
 	global $connect_statut, $options,$connect_id_auteur, $spip_display;
+	
+	
+	$les_auteurs = array();
+	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
 
-	if (!$les_auteurs) return '';
+	$maxitems = 10;
+	$firstitem = 0;
+	$limit = "$firstitem,$maxitems";
+	$result = determiner_auteurs_objet($type,$id,$cond_les_auteurs,$limit);
+
+	// charger ici meme si ps d'auteurs
+	// car inc_formater_auteur peut aussi redefinir determiner_non_auteurs qui sert plus loin
+	if (!$formater_auteur = charger_fonction("formater_auteur_$type", 'inc',true))
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+
+	if (!spip_num_rows($result)) return '';
 
 	$table = array();
 
-	if (!$formater_auteur = charger_fonction("formater_auteur_$type", 'inc',true))
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-	foreach($les_auteurs as $id_auteur) {
+	while ($row = spip_fetch_array($result)) {
+		$id_auteur = $row['id_auteur'];
 		$vals = $formater_auteur($id_auteur, $script_edit_auteur);
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
@@ -214,12 +241,12 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $scrip
 
 
 // http://doc.spip.org/@ajouter_auteurs_objet
-function ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax)
+function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_ajax)
 {
 
 	if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_'.$type,'inc',true))
 		$determiner_non_auteurs = 'determiner_non_auteurs';
-	$query = $determiner_non_auteurs($les_auteurs, "statut, nom");
+	$query = $determiner_non_auteurs($type, $id, $cond_les_auteurs, "statut, nom");
 	if (!$num = spip_num_rows($query)) return '';
 
 	$js = "findObj_forcer('valider_ajouter_auteur').style.visibility='visible';";
@@ -245,17 +272,6 @@ function ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax)
 
 	return ajax_action_auteur('editer_auteurs', "$id,$type",$script_edit, "id_{$type}=$id", $sel,$arg_ajax);
 }
-
-// http://doc.spip.org/@determiner_non_auteurs
-function determiner_non_auteurs($les_auteurs, $order)
-{
-	if (!$les_auteurs)
-	  $cond = '';
-	else $cond = "id_auteur NOT IN (" . join(',',$les_auteurs) . ') AND ';
-
-	return spip_query("SELECT * FROM spip_auteurs WHERE $cond" . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY $order");
-}
-
 
 // http://doc.spip.org/@objet_auteur_select
 function objet_auteur_select($result)
