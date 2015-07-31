@@ -462,21 +462,24 @@ if ($t_jour != date('d')) {
 
 $date_opt = $meta['date_optimisation'];
 $date = time();
-if (($date - $date_opt) > 24 * 3600) {
-	ecrire_meta("date_optimisation", "$date");
-	ecrire_metas();
-	include ("optimiser.php3");
+
+if (!$bonjour) {
+	if (($date - $date_opt) > 24 * 3600) {
+		ecrire_meta("date_optimisation", "$date");
+		ecrire_metas();
+		include ("optimiser.php3");
+	}
 }
 
 
-include_ecrire ("inc_mail.php3");
+//
+// Mail nouveautes
+//
 
-envoyer_mail_quoi_de_neuf();
-
-/*include_ecrire ("inc_sites.php3");
-include_ecrire ("inc_index.php3");
-executer_une_syndication();
-executer_une_indexation_syndic();*/
+if (!$bonjour) {
+	include_ecrire ("inc_mail.php3");
+	envoyer_mail_quoi_de_neuf();
+}
 
 
 ?>
