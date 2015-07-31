@@ -17,6 +17,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * API
  */
 
+function objet_associable($objet){
+	$trouver_table = charger_fonction('trouver_table','base');
+	$table_sql = table_objet_sql($objet);
+	
+	if ($primary = id_table_objet($objet)
+	  AND $trouver_table($l = $table_sql."_liens")
+		AND !preg_match(',[^\w],',$primary)
+		AND !preg_match(',[^\w],',$table_lien))
+		return array($primary,$l);
+	
+	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l");
+	return false;
+}
+
 /**
  * Associer un ou des objets a des objets listes
  * $objets_source et $objets_lies sont de la forme
@@ -129,11 +143,9 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
 	// accepter une syntaxe minimale pour supprimer tous les liens
 	if ($objets_lies=='*') $objets_lies = array('*'=>'*');
 	
-	$trouver_table = charger_fonction('trouver_table','base');
 	foreach($objets_source as $objet=>$ids){
-		$table = table_objet_sql($objet);
-		$primary = id_table_objet($objet);
-		if ($primary AND $trouver_table($l = $table."_liens")){
+		if ($a = objet_associable($objet)) {
+			list($primary,$l) = $a;
 			if (!is_array($ids)) $ids = array($ids);
 			foreach($ids as $id) {
 				$res = $operation($objet,$primary,$l,$id,$objets_lies,$set);
@@ -165,8 +177,6 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
  * @return int
  */
 function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
-	if (preg_match(',[^\w],',$primary) OR preg_match(',[^\w],',$table_lien))
-		return false;
 	$ins = 0;
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
@@ -185,7 +195,7 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	return $ins;
 }
 
-function lien_where($objet_source, $id_source, $objet, $id_objet){
+function lien_where($primary, $id_source, $objet, $id_objet){
 	if (!strlen($id_source) 
 	  OR !strlen($objet)
 	  OR (!is_array($id_objet) AND !strlen($id_objet)))
@@ -193,7 +203,7 @@ function lien_where($objet_source, $id_source, $objet, $id_objet){
 
 	$where = array();
 	if ($id_source!=='*')
-		$where[] = id_table_objet($objet_source) . "=" . intval($id_source);
+		$where[] = addslashes($primary) . "=" . intval($id_source);
 	if ($objet!=='*')
 		$where[] = "objet=".sql_quote($objet);
 	if ($id_objet!=='*')
@@ -219,13 +229,11 @@ function lien_where($objet_source, $id_source, $objet, $id_objet){
  * @return int
  */
 function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
-	if (preg_match(',[^\w],',$primary) OR preg_match(',[^\w],',$table_lien))
-		return false;
 	$retire = array();
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$where = lien_where($objet_source, $id, $objet, $id_objet);
+			$where = lien_where($primary, $id, $objet, $id_objet);
 			sql_delete($table_lien, $where);
 			$retire[] = array('source'=>array($objet_source=>$id),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
 		}
@@ -255,8 +263,6 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @param array $qualif
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
-	if (preg_match(',[^\w],',$primary) OR preg_match(',[^\w],',$table_lien))
-		return false;
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
