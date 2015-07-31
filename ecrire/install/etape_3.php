@@ -84,7 +84,7 @@ function install_bases(){
 		$GLOBALS['connexions'][$server_db]['db'] = $sel_db;
 
 		// mettre les nouvelles install en utf-8 si mysql le supporte
-		include_spip('base/abstract_sql');
+
 		if (($server_db == 'mysql') 
 		AND ($charset = spip_sql_character_set('utf-8', true))
 		AND ($res = $fquery("SHOW CHARACTER SET LIKE "._q($charset['charset']), $server_db))

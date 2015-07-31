@@ -178,7 +178,7 @@ $spip_meta_key = array(
 
 $spip_versions = array (
 		"id_article"	=> "bigint(21) NOT NULL",
-		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
+		"id_version"	=> "bigint(21) DEFAULT 0 NOT NULL",
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"id_auteur"	=> "VARCHAR(23) DEFAULT '' NOT NULL", # stocke aussi IP(v6)
 		"titre_version"	=> "text DEFAULT '' NOT NULL",
