@@ -170,8 +170,11 @@ function declarer_url_arbo($type, $id_objet) {
 	}
 	
 	if (!isset($urls[$type][$id_objet]) OR $modifier_url) {
-		$table = table_objet_sql($type);
-		$col_id = id_table_objet($type);
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		$desc = $trouver_table(table_objet($type));
+		$table = $desc['table'];
+		$col_id =  @$desc['key']["PRIMARY KEY"];
+		if (!$col_id) return false; // Quand $type ne reference pas une table
 		$id_objet = intval($id_objet);
 	
 		// Auteurs : on prend le nom
