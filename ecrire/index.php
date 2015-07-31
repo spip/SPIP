@@ -137,9 +137,10 @@ AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_
 elseif (isset($GLOBALS['meta']["admin"])) {
 	if (isset($var_ajaxcharset) OR !isset($_COOKIE['spip_admin']))
 		die(_T('info_travaux_texte'));
-	$l = $GLOBALS['meta']["admin"];
-	spip_log("Le script $l, en cours, se substitue a $exec");
-	$exec = substr($l, 0, strpos($l, '_'));
+	if (preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)) {
+	  list(,$exec,$n) = $l;
+	  spip_log("Le script $e lance par $n se substitue a celui prevu");
+	}
 }
 // si nom pas plausible, prendre le script par defaut
 elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
