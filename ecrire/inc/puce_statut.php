@@ -267,7 +267,8 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	$desc = lister_tables_objets_sql($table);
 	if (!isset($desc['statut_textes_instituer']))
 		return $inser_puce;
-
+	
+	include_spip('inc/autoriser');
 	// cas ou l'on a un parent connu (devrait disparaitre au profit du second cas plus generique)
 	if ($id_rubrique){
 		if (!autoriser('publierdans', 'rubrique', $id_rubrique))
