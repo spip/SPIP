@@ -1,4 +1,5 @@
 <?php
+
 if (defined("_ECRIRE_INSTALL")) return;
 define("_ECRIRE_INSTALL", "1");
 
@@ -60,7 +61,7 @@ if ($etape == 6) {
 		$nom = addslashes($nom);
 		$login = addslashes($login);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-		$result = spip_query_db($query);
+		$result = spip_query($query);
 		unset($id_auteur);
 		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
 
@@ -73,10 +74,10 @@ if ($etape == 6) {
 		else {
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES('$nom','$email','$login','$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')";
 		}
-		spip_query_db($query);
+		spip_query($query);
 
 		// inserer email comme email webmaster principal
-		spip_query_db("REPLACE spip_meta (nom, valeur)
+		spip_query("REPLACE spip_meta (nom, valeur)
 			VALUES ('email_webmaster', '".addslashes($email)."')");
 	}
 
@@ -180,18 +181,22 @@ else if ($etape == 4) {
 	echo $sel_db;
 	mysql_select_db("$sel_db");
 
-	// Test si SPIP deja installe
-	@spip_query_db("SELECT COUNT(*) FROM spip_meta");
-	$nouvelle = spip_sql_errno();
+	// Message pour spip_query : tout va bien !
+	$GLOBALS['db_ok'] = true;
+	$GLOBALS['spip_connect_version'] = 0.1; # cf. inc_version
 
+	// Test si SPIP deja installe
+	spip_query("SELECT COUNT(*) FROM spip_meta");
+	$nouvelle = spip_sql_errno();
 	creer_base();
+
 	$maj_ok = maj_base();
 
 	if ($nouvelle) {
-		spip_query_db("INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
+		spip_query("INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
 		$result_ok = !spip_sql_errno();
 	} else {
-		$result = spip_query_db("SELECT COUNT(*) FROM spip_articles");
+		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
 		$result_ok = (spip_num_rows($result) > 0);
 	}
 	echo "($result_ok && $maj_ok) -->";

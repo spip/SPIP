@@ -559,13 +559,13 @@ $dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 // API d'appel a la base de donnees
 function spip_query($query) {
 
-	// Essaie de se connecter
-	if (_FILE_CONNECT)
-		include_local(_FILE_CONNECT);
-	else
-	// installation ?
-	if (_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)
-		include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	// Remarque : si on est appele par l'install,
+	// la connexion initiale a ete faite avant
+	if (!$GLOBALS['db_ok']) {
+		// Essaie de se connecter
+		if (_FILE_CONNECT)
+			include_local(_FILE_CONNECT);
+	}
 
 	// Erreur de connexion
 	if (!$GLOBALS['db_ok'])
