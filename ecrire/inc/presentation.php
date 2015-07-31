@@ -1038,7 +1038,7 @@ function f_boite_infos($flux) {
 		if (($GLOBALS['meta']["articles_versions"]=='oui')
 		AND $row['id_version']>1
 		AND autoriser('voirrevisions', $type, $id))
-			$boite .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
+			$boite .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id"), "historique-24.gif", "rien.gif", false);
 	}
 
 	$flux['data'] = $boite;
