@@ -3,29 +3,6 @@
 include ("inc.php3");
 
 
-// transformer "1er" en "01"
-function chiffrespar2($in)
-{
-	return substr('00'.ereg_replace('[^0-9]', '', $in), -2);
-}
-
-
-function numero_jour_semaine($lejour){
-	switch($lejour){
-	
-		case "Sun": $retour=0; break;
-		case "Mon": $retour= 1; break;
-		case "Tue": $retour= 2; break;
-		case "Wed": $retour= 3; break;
-		case "Thu": $retour= 4; break;
-		case "Fri": $retour= 5; break;
-		case "Sat": $retour= 6; break;
-	
-	}	
-	return $retour;
-}
-
-
 function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	global $connect_id_auteur, $connect_statut;
 	global $les_articles;
@@ -36,7 +13,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	$ce_jour=date("Y-m-d");
 
 	$nom = mktime(1,1,1,$mois_today,1,$annee_today);
-	$jour_semaine = numero_jour_semaine(date("D",$nom));
+	$jour_semaine = date("w",$nom);
 	
 	
 	if ($jour_semaine==0) $jour_semaine=7;
@@ -63,10 +40,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	while($row=spip_fetch_array($result)){
 		$id_article=$row['id_article'];
 		$titre=typo($row['titre']);
-		$lejour=jour($row['date']);
+		$lejour=journum($row['date']);
 		$lemois = mois($row['date']);		
 
-		$lejour=ereg_replace("1er","1",$lejour);
 		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</A>";
 	}
 
@@ -76,9 +52,8 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	while($row=spip_fetch_array($result)){
 		$id_breve=$row['id_breve'];
 		$titre=typo($row['titre']);
-		$lejour=jour($row['date_heure']);
+		$lejour=journum($row['date_heure']);
 		$lemois = mois($row['date_heure']);		
-		$lejour=ereg_replace("1er","1",$lejour);
 		if ($lemois == $mois_today)
 			$les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
 	}
@@ -90,8 +65,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$date_heure=$row["date_heure"];
 		$titre=typo($row["titre"]);
 		$type=$row["type"];
-		$lejour=jour($row['date_heure']);
-		$lejour=ereg_replace("1er","1",$lejour);
+		$lejour=journum($row['date_heure']);
 
 		if ($type=="normal") $la_couleur="red";
 		elseif ($type=="pb") $la_couleur="blue";
@@ -108,8 +82,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$date_heure=$row["date_heure"];
 		$titre=typo($row["titre"]);
 		$type=$row["type"];
-		$lejour=jour($row['date_heure']);
-		$lejour=ereg_replace("1er","1",$lejour);
+		$lejour=journum($row['date_heure']);
 
 		if ($type=="normal") $la_couleur="red";
 		elseif ($type=="pb") $la_couleur="blue";
@@ -141,13 +114,14 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	
 	}
 
-	for ($jour=1; $jour<32;$jour++){
+	for ($j=1; $j<32;$j++){
+		$jour = sprintf("%02d", $j);
 
 		$nom = mktime(1,1,1,$mois_today,$jour,$annee_today);
-		$jour_semaine = numero_jour_semaine(date("D",$nom));
+		$jour_semaine = date("w",$nom);
 
 		if (checkdate($mois_today,$jour,$annee_today)){
-			if ("$annee_today-$mois_today-".chiffrespar2($jour)==$ce_jour){
+			if ("$annee_today-$mois_today-$jour"==$ce_jour){
 				echo "<TD width=100 HEIGHT=80 BGCOLOR='#FFFFFF' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='red'><B>$jour</B></FONT>";
 			}else{		
 				echo "<TD width=100 HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
@@ -194,7 +168,7 @@ if (!$mois){
 	$annee=$today["year"];
 }
 
-$nom_mois = nom_mois('2000-'.chiffrespar2($mois).'-01');
+$nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 
 debut_page(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier");
 
@@ -205,7 +179,7 @@ echo "<BR><BR><BR>";
 // debut_gauche();
 // debut_droite();
 
-afficher_mois($jour,chiffrespar2($mois),$annee,$nom_mois);
+afficher_mois($jour,sprintf("%02d", $mois),$annee,$nom_mois);
 
 if (strlen($les_breves["0"]) > 0 OR $les_articles["0"] > 0){
 	echo "<table width=200 background=''><tr width=200><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
