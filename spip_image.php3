@@ -55,6 +55,8 @@ function ajout_image($source, $dest) {
 	$loc = "IMG/$dest";
 	if (!deplacer_fichier_upload($source, $loc)) return;
 
+	// analyse le type de l'image (on ne fait pas confiance au nom de
+	// fichier envoye par le browser : pour les Macs c'est plus sur)
 	$size = getimagesize($loc);
 	$type = $size[2];
 
@@ -162,6 +164,9 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	}
 }
 
+// image_name n'est valide que par POST http, mais pas par la methode ftp/upload
+if (!$image_name)
+	$image_name = $image;
 
 if ($ajout_doc == 'oui') {
 	ajout_doc($image_name, $image, $fichier, $mode, $id_document);
