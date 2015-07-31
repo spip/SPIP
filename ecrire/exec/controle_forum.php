@@ -41,8 +41,9 @@ function forum_parent($id_forum) {
 			 'valeur' => $id_article,
 			 'titre' => $titre);
 	  } else {
+	    $ancre = $forum_id_parent ? "forum$forum_id_parent" : '';
 	    return array('pref' =>  _T('lien_reponse_article'),
-			 'url' => generer_url_article($id_article),
+			 'url' => generer_url_article($id_article,'',$ancre),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
@@ -170,7 +171,8 @@ function controle_un_forum($row) {
 	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
 	$suite = "\n<br />$avant<b>$pref
-	<a href='$url'>$titre</a></b>" . "<div style='overflow:hidden'>".justifier(propre($forum_texte))."</div>";
+	<a href='$url'>$titre</a></b>"  
+	. "<div style='overflow:hidden'>".justifier(propre($forum_texte))."</div>";
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
