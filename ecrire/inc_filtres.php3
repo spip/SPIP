@@ -583,7 +583,7 @@ function affdate_base($numdate, $vue) {
 		return $nommois;
 
 	case 'mois':
-		return $mois;
+		return sprintf("%02s",$mois);
 
 	case 'jour':
 		return $jour;
