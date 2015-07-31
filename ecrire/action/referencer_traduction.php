@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Definir le lien de traduction ver sun objet de reference
+ * Definir le lien de traduction vers un objet de reference
  * si id_trad=0 : dereference le lien de traduction de id_objet
  * si id_trad=NN : reference le lien de traduction de id_objet vers NN
  * si id_objet=id_trad actuel et id_trad=new_id_trad : modifie la reference de tout le groupe de traduction
@@ -60,7 +60,7 @@ function action_referencer_traduction_dist($objet, $id_objet, $id_trad) {
 	// on a fourni un id_trad nul : sortir id_objet du groupe de trad
 	else {
 		$old_id_trad = sql_getfetsel('id_trad',$table_objet_sql,"$id_table_objet=".intval($id_objet));
-	  // supprimer le lien de traduction
+		// supprimer le lien de traduction
 		sql_updateq($table_objet_sql, array("id_trad" => 0), "$id_table_objet=".intval($id_objet));
 
 		// Verifier si l'ancien groupe ne comporte plus qu'un seul objet. Alors mettre a zero.
