@@ -339,22 +339,15 @@ function taille_image($img) {
 		$logo = $fichier ? _DIR_RACINE . $fichier : $logo;
 	}
 
-	// pour essayer de limiter les lectures disque
-	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
-	$mem = $logo;
-	if (strrpos($mem,"/") > 0) $mem = substr($mem, strrpos($mem,"/")+1, strlen($mem));
-	$mem = preg_replace(",\-flip\_v|\-flip\_h,", "", $mem);
-	$mem = preg_replace(",\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?,", "", $mem);
-
 	$srcsize = false;
-	if (isset($largeur_img[$mem]))
-		$srcWidth = $largeur_img[$mem];
-	if (isset($hauteur_img[$mem]))
-		$srcHeight = $hauteur_img[$mem];
+	if (isset($largeur_img[$logo]))
+		$srcWidth = $largeur_img[$logo];
+	if (isset($hauteur_img[$logo]))
+		$srcHeight = $hauteur_img[$logo];
 	if (!$srcWidth OR !$srcHeight){
 		if ($srcsize = @getimagesize($logo)){
-			if (!$srcWidth)	$largeur_img[$mem] = $srcWidth = $srcsize[0];
-			if (!$srcHeight)	$hauteur_img[$mem] = $srcHeight = $srcsize[1];
+			if (!$srcWidth)	$largeur_img[$logo] = $srcWidth = $srcsize[0];
+			if (!$srcHeight)	$hauteur_img[$logo] = $srcHeight = $srcsize[1];
 		}
 		// $logo peut etre une reference a une image temporaire dont a n'a que le log .src
 		// on s'y refere, l'image sera reconstruite en temps utile si necessaire
