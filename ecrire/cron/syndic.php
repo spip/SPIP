@@ -505,7 +505,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$articles = analyser_backend($rss, $url_syndic);
 
-	// Renvoyer l'erreur le cas echeant (inutilise pour le moment)
+	// Renvoyer l'erreur le cas echeant
 	if (!is_array($articles)) return $articles;
 
 	// Les enregistrer dans la base
@@ -516,16 +516,16 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	}
 
 	// moderation automatique des liens qui sont sortis du feed
-	if (count($faits) > 0
-	AND $row['miroir'] == 'oui') {
-		spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
-	}
-
+	if (count($faits) > 0) {
+		$faits = join(",", $faits);
+		if ($row['miroir'] == 'oui') {
+			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN ($faits))");
+		}
 	// suppression apres 2 mois des liens qui sont sortis du feed
-	if (count($faits) > 0
-	AND $row['oubli'] == 'oui') {
-		$time = date('U') - 61*24*3600; # deux mois
-		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$now_id_syndic AND UNIX_TIMESTAMP(maj) < $time AND UNIX_TIMESTAMP(date) < $time AND NOT (id_syndic_article IN (" . join(",", $faits) . "))");
+		if ($row['oubli'] == 'oui') {
+
+			spip_abstract_delete('spip_syndic_articles', "id_syndic=$now_id_syndic AND maj < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND date < DATE_SUB(NOW(), INTERVAL 2 MONTH) AND NOT (id_syndic_article IN ($faits))");
+		}
 	}
 
 	// Noter que la syndication est OK
