@@ -38,14 +38,13 @@ function generer_nom_fichier_cache($contexte, $page) {
 		$cache = substr($cache, 0, 24);
 	}
 
-	// Morceau de md5 selon HOST, $dossier_squelettes, $fond et $marqueur
-	// permet de changer de chemin_cache si l'on change l'un de ces elements
+	// Morceau de md5 selon HOST, $dossier_squelettes et $marqueur
+	// permet de changer le nom du cache en changeant ceux-ci
 	// donc, par exemple, de gerer differents dossiers de squelettes
 	// en parallele, ou de la "personnalisation" via un marqueur (dont la
 	// composition est totalement libre...)
 	$md_cache = md5($page . ' '
 		. $_SERVER['HTTP_HOST'] . ' '
-		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
 		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);

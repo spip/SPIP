@@ -71,20 +71,20 @@ function assembler($fond, $connect='') {
 		// (fourni par assembler_contexte lors de la mise en cache)
 			$contexte = $page['contexte'];
 		}
-		// sinon rajouter les dates dans le contexte
-		// lui rajouter les parametres implcites des URLs symboliques
+		// ATTENTION, gestion des URLs transformee par le htaccess
+		// 1. $contexte est global car cette fonction le modifie.
+		// 2. $fond est passe par reference, pour la meme raison
+		// Bref,  les URL dites propres ont une implementation sale.
+		// Interdit de nettoyer, faut assumer l'histoire.
 		// et calculer la page
 		else {
-			include_spip('inc/filtres'); // pour normaliser_date
-
-			if (!isset($contexte['date']))
-				$contexte['date'] = date("Y-m-d H:i:s");
-			else $contexte['date'] = normaliser_date($contexte['date']);
-
-			if (!isset($contexte['date_redac']))
-				$contexte['date_redac'] = date("Y-m-d H:i:s");
-			else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
-			assembler_contexte($fond);
+			$renommer = generer_url_entite();
+			if (!$renommer) {
+				// compatibilite <= 1.9.2
+				if (function_exists('recuperer_parametres_url'))
+					$renommer = 'recuperer_parametres_url';
+			}
+			if ($renommer)	$renommer($fond, nettoyer_uri());
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
@@ -131,25 +131,6 @@ function assembler($fond, $connect='') {
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
 
 	return $page;
-}
-
-// ATTENTION, gestion des URLs transformee par le htaccess
-// en appelant la fonction $renommee_urls
-// 1. $contexte est global car cette fonction le modifie.
-// 2. $fond est passe par reference, pour la meme raison
-// Bref,  les URL dites propres ont une implementation sale.
-// Interdit de nettoyer, faut assumer l'histoire.
-
-// http://doc.spip.org/@assembler_contexte
-function assembler_contexte(&$fond)
-{
-	$renommer_urls = generer_url_entite();
-	if (!$renommer_urls) {
-			// compatibilite <= 1.9.2
-			if (function_exists('recuperer_parametres_url'))
-				$renommer_urls = 'recuperer_parametres_url';
-	}
-	if ($renommer_urls) $renommer_urls($fond, nettoyer_uri());
 }
 
 //
