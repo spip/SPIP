@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/charsets');
+include_spip('inc/texte');
+
 //
 // Infos de mails sur l'hebergeur (tout ca est assez sale)
 //
@@ -92,8 +95,6 @@ function nettoyer_caracteres_mail($t) {
 // http://doc.spip.org/@inc_envoyer_mail_dist
 function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails;
-	include_spip('inc/charsets');
-	include_spip('inc/filtres');
 
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
