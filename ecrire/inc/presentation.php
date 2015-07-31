@@ -705,7 +705,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
 			include_spip ('base/abstract_sql');
-			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript_trad) . "', $hash, NOW())");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript_trad) . ", $hash, NOW())");
 		}
 	}
 
@@ -766,7 +766,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript) . ", $hash, NOW())");
 	}
 
 	if (!$deb_aff) {
@@ -939,7 +939,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript_trad) . "', $hash, NOW())");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript_trad) . ", $hash, NOW())");
 		}
 
 
@@ -984,7 +984,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript) . ", $hash, NOW())");
 		}
 
 	if (!$deb_aff) {

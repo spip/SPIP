@@ -92,7 +92,7 @@ function retire_caches($chemin = '') {
 
 	// En priorite le cache qu'on appelle maintenant
 	if ($chemin) {
-		$f = spip_abstract_fetsel(array("fichier"),  array("spip_caches"), array("fichier = '".addslashes($chemin)."' ",  "type='x'"), "", array(), 1);
+		$f = spip_abstract_fetsel(array("fichier"),  array("spip_caches"), array("fichier = " . spip_abstract_quote($chemin) . " ",  "type='x'"), "", array(), 1);
 		if ($f['fichier']) $suppr[$f['fichier']] = true;
 	}
 

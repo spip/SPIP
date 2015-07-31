@@ -685,9 +685,9 @@ function requete_dico($val) {
 
 	// cas normal
 	if (strlen($val) > $min_long) {
-		return array("dico LIKE '".addslashes($val)."%'", "dico = '".addslashes($val)."'");
+	  return array("dico LIKE ".spip_abstract_quote($val. "%"), "dico = " . spip_abstract_quote($val));
 	} else
-		return array("dico = '".addslashes($val)."___'", "dico = '".addslashes($val)."___'");
+	  return array("dico = ".spip_abstract_quote($val."___"), "dico = ".spip_abstract_quote($val."___"));
 }
 
 

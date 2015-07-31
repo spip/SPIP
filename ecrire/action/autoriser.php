@@ -33,7 +33,7 @@ function action_autoriser_dist()
   else
   {
     if (!$arg) {
-      $arg = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents AS documents WHERE documents.fichier='". addslashes($file) ."'"));
+      $arg = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents AS documents WHERE documents.fichier=" . spip_abstract_quote($file)));
 
       if (!$arg) $refus = 2;
       $arg = $arg['id_document'];

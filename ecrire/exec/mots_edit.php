@@ -77,7 +77,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		} else
 			$add_extra = '';
 
-		spip_query("UPDATE spip_mots SET titre='" . addslashes($titre_mot) ."', texte='" . addslashes($texte) ."', descriptif='" . addslashes($descriptif) ."', type='" . addslashes($type) ."', id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = '".addslashes($extra) . "'")) . " WHERE id_mot=$id_mot");
+		spip_query("UPDATE spip_mots SET titre=" . spip_abstract_quote($titre_mot) . ", texte=" . spip_abstract_quote($texte) . ", descriptif=" . spip_abstract_quote($descriptif) . ", type=" . spip_abstract_quote($type) . ", id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($extra))) . " WHERE id_mot=$id_mot");
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
@@ -263,7 +263,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
 		  $titre = _T('info_mot_sans_groupe');
-		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "('" . addslashes($titre) . "', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" . ")");
+		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . spip_abstract_quote($titre) . ", 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" . ")");
 		}
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 	}

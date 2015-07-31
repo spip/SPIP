@@ -280,8 +280,8 @@ function calculer_requete_sql(&$boucle)
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'".$boucle->limit."'" :
 			$boucle->limit). ", # LIMIT
-		'".$boucle->sous_requete."', # sous
-		'" . (!$boucle->having ? "" : "(COUNT(*)> $boucle->having)")."', # HAVING
+		'".$boucle->sous_requete. "', # sous
+		" . calculer_dump_array($boucle->having) . ", # HAVING
 		'".$boucle->id_table."', # table
 		'".$boucle->id_boucle."', # boucle
 		'".$boucle->sql_serveur."'); # serveur";

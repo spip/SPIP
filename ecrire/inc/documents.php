@@ -1355,7 +1355,7 @@ function maj_documents ($id_objet, $type) {
 					hauteur='$hauteur_document'";
 		else $wh = "";
 
-		spip_query("UPDATE spip_documents SET titre='" . addslashes($titre_document) . "', descriptif='" . addslashes($descriptif_document) . "' $wh WHERE id_document=".$id_document);
+		spip_query("UPDATE spip_documents SET titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
 			// Date du document (uniquement dans les rubriques)
 		if ($_POST['jour_doc']) {

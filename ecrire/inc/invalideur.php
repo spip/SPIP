@@ -36,7 +36,7 @@ function maj_invalideurs ($fichier, &$page, $duree) {
 	# entre un invalideur et un appel public de page
 	$bedtime = time() + $duree + 3600;
 	$taille = @filesize(_DIR_CACHE . $fichier);
-	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('".addslashes($fichier)."','$bedtime','t','$taille')");
+	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES (" . spip_abstract_quote($fichier) . ",'$bedtime','t','$taille')");
 
 	// invalidations
 	insere_invalideur($page['invalideurs'], $fichier);

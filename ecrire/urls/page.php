@@ -98,7 +98,7 @@ function recuperer_parametres_url(&$fond, $url) {
 			'$1', $url_propre));
 		$r = "spip_" . table_objet($fond);
 		$id = id_table_objet($fond);
-		$r = spip_query("SELECT $id AS id FROM $r WHERE url_propre = '" . addslashes($url_propre) . "'");
+		$r = spip_query("SELECT $id AS id FROM $r WHERE url_propre = " . spip_abstract_quote($url_propre));
 		if ($r AND $r = spip_fetch_array($r))
 			$contexte[$id] = $r['id'];
 	}

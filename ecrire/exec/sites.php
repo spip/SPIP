@@ -107,7 +107,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$url_syndic = trim($v['url_syndic']);
 		$descriptif = $v['descriptif'];
 		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic SET nom_site='" . addslashes($nom_site) . "', url_site='" . addslashes($url_site) . "', url_syndic='" . addslashes($url_syndic) . "', descriptif='" . addslashes($descriptif) . "', syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
+		$result = spip_query("UPDATE spip_syndic SET nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url_site) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ", descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
 		$redirect_ok = 'oui';
@@ -144,7 +144,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	} else
 		$add_extra = '';
 	
-	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site='" . addslashes($nom_site) . "', url_site='" . addslashes($url_site) . "', url_syndic='" . addslashes($url_syndic) . "',	descriptif='" . addslashes($descriptif) . "', syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = '".addslashes($add_extra)."'")) . " WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site=" . spip_abstract_quote($nom_site) . ", url_site=" . spip_abstract_quote($url_site) . ", url_syndic=" . spip_abstract_quote($url_syndic) . ",	descriptif=" . spip_abstract_quote($descriptif) . ", syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_syndic=$id_syndic");
 
 	propager_les_secteurs();
 
@@ -175,7 +175,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 if ($jour AND $flag_administrable) {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
-	spip_query("UPDATE spip_syndic SET date='" . addslashes("$annee-$mois-$jour") . "' WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET date=" . spip_abstract_quote("$annee-$mois-$jour") . " WHERE id_syndic=$id_syndic");
 	calculer_rubriques();
 }
 

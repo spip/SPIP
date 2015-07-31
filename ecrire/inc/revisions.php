@@ -414,11 +414,11 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	$codes = (serialize($codes));
 	$permanent = empty($titre_version) ? 'non' : 'oui';
 	if ($nouveau) {
-		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, '" . addslashes($titre_version) . "', '$permanent', NOW(), '$id_auteur', '" . addslashes($codes) . "')");
+		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, " . spip_abstract_quote($titre_version) . ", '$permanent', NOW(), '$id_auteur', " . spip_abstract_quote($codes) . ")");
 
 	}
 	else {
-		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='" . addslashes($codes) . "', permanent='$permanent', titre_version='" . addslashes($titre_version) . "' WHERE id_article=$id_article AND id_version=$id_version");
+		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs=" . spip_abstract_quote($codes) . ", permanent='$permanent', titre_version=" . spip_abstract_quote($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
 	}
 	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");

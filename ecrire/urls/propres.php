@@ -109,7 +109,7 @@ function _generer_url_propre($type, $id_objet) {
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
 
-	$n = spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet LIMIT 1"));
+	$n = spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre=" . spip_abstract_quote($url) . " AND $col_id != $id_objet LIMIT 1"));
 	if ($n > 0) {
 		$url = $url.','.$id_objet;
 	}
@@ -121,7 +121,7 @@ function _generer_url_propre($type, $id_objet) {
 		$url = $url.','.$id_objet;
 
 	// Mettre a jour dans la base
-	spip_query("UPDATE $table SET url_propre='".addslashes($url)."' WHERE $col_id=$id_objet");
+	spip_query("UPDATE $table SET url_propre=" . spip_abstract_quote($url) . " WHERE $col_id=$id_objet");
 
 	spip_release_lock($lock);
 
@@ -283,7 +283,7 @@ function recuperer_parametres_url(&$fond, $url) {
 
 	$table = "spip_".table_objet($type);
 	$col_id = id_table_objet($type);
-	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url_propre)."'");
+	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre=" . spip_abstract_quote($url_propre));
 
 	if ($row = spip_fetch_array($result)) {
 		$contexte[$col_id] = $row[$col_id];

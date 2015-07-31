@@ -344,7 +344,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			if (!$site_unique) $site_unique = "non";
 			if (!$message) $message = "non";
 
-			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '" . addslashes($texte_petition) . "')");
+			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', " . spip_abstract_quote($texte_petition) . ")");
 		}
 		else if ($change_petition == "off") {
 			$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
@@ -1340,9 +1340,9 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 	$langue_parent=$langue_parent['parent'];
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
 		else
-			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non', date_modif=NOW() WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non', date_modif=NOW() WHERE id_article=$id_article");
                 calculer_langues_utilisees();
 	}
  }
@@ -1405,7 +1405,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		$champs_extra = extra_recup_saisie("articles", $id_secteur);
 	}
 
-	spip_query("UPDATE spip_articles SET surtitre='" .			   addslashes($champs['surtitre']) .	   "', titre='" .			   addslashes($champs['titre']) .	"', soustitre='" .			   addslashes($champs['soustitre']) .	   "', id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif='" .			   addslashes($champs['descriptif']) .	   "', chapo='" .			   addslashes($champs['chapo']) .	   "', texte='" .			   addslashes($champs['texte']) .	   "', ps='" .				   addslashes($champs['ps']) .		   "', url_site='" .			   addslashes($champs['url_site']) .	   "', nom_site='" .			   addslashes($champs['nom_site']) .	   "', date_modif=NOW() " . ($champs_extra ? (", extra = '".addslashes($champs_extra) . "'") : '') . " WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1518,7 +1518,7 @@ maj_documents($id_article, 'article');
 if ($changer_virtuel) {
 	if ($virtuel = eregi_replace("^http://$", "", trim($virtuel)))
 		$chapo = corriger_caracteres("=$virtuel");
-	spip_query("UPDATE spip_articles SET chapo='" . addslashes($chapo) . "', date_modif=NOW() WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($chapo) . ", date_modif=NOW() WHERE id_article=$id_article");
 }
 
 if (isset($_POST['titre'])) {

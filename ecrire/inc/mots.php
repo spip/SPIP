@@ -591,7 +591,7 @@ function afficher_groupe_mots($id_groupe) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, " . spip_abstract_quote($jjscript) . ", $hash, NOW())");
 	}
 
 	$nb_aff = 1.5 * _TRANCHES;

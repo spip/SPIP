@@ -138,9 +138,9 @@ if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
 
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_breves SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_breve=$id_breve");
+			spip_query("UPDATE spip_breves SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
 		else
-			spip_query("UPDATE spip_breves SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_breve=$id_breve");
+			spip_query("UPDATE spip_breves SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
 		calculer_langues_utilisees();
 	}
 
@@ -267,7 +267,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	} else
 		$add_extra = '';
 
-	spip_query("UPDATE spip_breves SET titre='" . addslashes($titre) ."', texte='" . addslashes($texte) ."', lien_titre='" . addslashes($lien_titre) ."', lien_url='" . addslashes($lien_url) ."', statut='" . addslashes($statut) ."', id_rubrique=$id_rubrique " . (!$add_extra ? '' : (", extra = '".addslashes($add_extra)."'")) . " WHERE id_breve=$id_breve");
+	spip_query("UPDATE spip_breves SET titre=" . spip_abstract_quote($titre) . ", texte=" . spip_abstract_quote($texte) . ", lien_titre=" . spip_abstract_quote($lien_titre) . ", lien_url=" . spip_abstract_quote($lien_url) . ", statut=" . spip_abstract_quote($statut) . ", id_rubrique=$id_rubrique " . (!$add_extra ? '' : (", extra = " . spip_abstract_quote($add_extra))) . " WHERE id_breve=$id_breve");
 
 	// invalider et reindexer
 	include_spip('inc/invalideur');

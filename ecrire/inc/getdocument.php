@@ -139,7 +139,7 @@ function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
 	AND !ereg("^\.", basename($f))) {
 		$ext = corriger_extension((strtolower(substr(strrchr($f, "."), 1))));
-		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='" . addslashes($ext) . "' AND upload='oui'"));
+		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . spip_abstract_quote($ext) . " AND upload='oui'"));
 		return $row;
 	}
 }
@@ -225,7 +225,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$ext = (corriger_extension(strtolower($match[1])));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
-		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension='" . addslashes($ext) . "' AND upload='oui'");
+		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . spip_abstract_quote($ext) . " AND upload='oui'");
 		if (!$row = spip_fetch_array($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
@@ -359,7 +359,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = spip_abstract_insert("spip_documents", "(id_type, titre, date, distant)", "($id_type, '".addslashes($titre)."', NOW(), '$distant')");
+		$id_document = spip_abstract_insert("spip_documents", "(id_type, titre, date, distant)", "($id_type, " . spip_abstract_quote($titre) . ", NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
@@ -391,7 +391,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	// Pour les fichiers distants remettre l'URL de base
 	if ($distant == 'oui')
-		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."' WHERE id_document = $id_document");
+		spip_query("UPDATE spip_documents SET fichier=" . spip_abstract_quote($source) . " WHERE id_document = $id_document");
 
 	// Demander l'indexation du document
 	include_spip('inc/indexation');

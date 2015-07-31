@@ -209,7 +209,7 @@ function inc_forum_insert_dist() {
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
-	spip_query("UPDATE spip_forum	SET id_parent = $id_forum,	id_rubrique = $id_rubrique,	id_article = $id_article,	id_breve = $id_breve,	id_syndic = $id_syndic,	id_auteur = $id_auteur,	id_thread = $id_thread,	date_heure = NOW(),							titre = '".addslashes(corriger_caracteres($titre))."',				texte = '".addslashes(corriger_caracteres($texte))."',				nom_site = '".addslashes(corriger_caracteres($nom_site_forum))."',		url_site = '".addslashes(corriger_caracteres($url_site))."',			auteur = '".addslashes(corriger_caracteres($auteur))."',			email_auteur = '".addslashes(corriger_caracteres($email_auteur))."',		ip = '".addslashes($ip)."',							statut = '$statut'	WHERE id_forum = $id_message");
+	spip_query("UPDATE spip_forum	SET id_parent = $id_forum,	id_rubrique = $id_rubrique,	id_article = $id_article,	id_breve = $id_breve,	id_syndic = $id_syndic,	id_auteur = $id_auteur,	id_thread = $id_thread,	date_heure = NOW(),							titre = ".spip_abstract_quote(corriger_caracteres($titre)).",			texte = ".spip_abstract_quote(corriger_caracteres($texte)).",			nom_site = ".spip_abstract_quote(corriger_caracteres($nom_site_forum)).",	url_site = ".spip_abstract_quote(corriger_caracteres($url_site)).",		auteur = ".spip_abstract_quote(corriger_caracteres($auteur)).",		email_auteur = ".spip_abstract_quote(corriger_caracteres($email_auteur)).",	ip = " . spip_abstract_quote($ip) . ",						statut = '$statut'	WHERE id_forum = $id_message");
 
 	// Entrer les mots-cles associes
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
