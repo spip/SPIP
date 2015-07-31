@@ -27,9 +27,9 @@ function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
 	static $buf_len = 500;
 	static $_fread,$_feof,$_ftell;
 	if (!$_fread){
-		$_fread = ($gz) ? gzread : fread;
-		$_feof = ($gz) ? gzeof : feof;
-		$_ftell = ($gz) ? gztell : ftell;
+		$_fread = ($gz) ? 'gzread' : 'fread';
+		$_feof = ($gz) ? 'gzeof' : 'feof';
+		$_ftell = ($gz) ? 'gztell' : 'ftell';
 	}
 	
 	while (preg_match("{<([^>]*?)>}s",$buf)==FALSE)
@@ -391,7 +391,7 @@ function import_all_continue()
 
 	echo "<font color='white'>\n<!--";
 
-	$_fopen = ($gz) ? gzopen : fopen;
+	$_fopen = ($gz) ? 'gzopen' : 'fopen';
 	$f = $_fopen($archive, "rb");
 	$pos = 0;
 	$buf = "";
