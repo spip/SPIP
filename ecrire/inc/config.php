@@ -54,6 +54,10 @@ function liste_metas()
 		'rubriques_descriptif' => 'non',
 		'rubriques_texte' => 'oui',
 
+		'forums_titre' => 'oui',
+		'forums_texte' => 'oui',
+		'forums_urlref' => 'non',
+
 		'activer_sites' => 'non',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',

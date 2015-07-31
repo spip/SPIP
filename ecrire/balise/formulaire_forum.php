@@ -240,9 +240,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site, $ajouter_mot)
 {
 	$erreur = $bouton = '';
-	if (strlen($texte) < 10 AND !$ajouter_mot)
+	if (strlen($texte) < 10
+	AND !$ajouter_mot AND $GLOBALS['meta']['forums_texte'] == 'oui')
 		$erreur = _T('forum_attention_dix_caracteres');
-	else if (strlen($titre) < 3)
+	else if (strlen($titre) < 3
+	AND $GLOBALS['meta']['forums_titre'] == 'oui')
 		$erreur = _T('forum_attention_trois_caracteres');
 	else if (defined('_FORUM_LONGUEUR_MAXI')
 	AND _FORUM_LONGUEUR_MAXI > 0
