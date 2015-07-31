@@ -30,10 +30,11 @@
 	</langue>
 	<langue code="da" url="http://trad.spip.net/tradlang_module/spip?lang_cible=da" total="636" traduits="450" relire="0" modifs="54" nouveaux="132" pourcent="70.75">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/spip?lang_cible=de" total="636" traduits="631" relire="0" modifs="2" nouveaux="3" pourcent="99.21">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/spip?lang_cible=de" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benjamin Tricault" lien="http://trad.spip.net/auteur/benjamin-tricault" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="el" url="http://trad.spip.net/tradlang_module/spip?lang_cible=el" total="636" traduits="482" relire="0" modifs="15" nouveaux="139" pourcent="75.79">
 		<traducteur nom="dlatr" lien="http://trad.spip.net/auteur/dlatr" />

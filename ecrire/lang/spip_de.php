@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Abbrechen',
 	'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
 	'articles_recents' => 'Die neuesten Artikel',
+	'avis_1_erreur_saisie' => 'Ihre Eingabe enthält einen Fehler, bitte überprüfen Sie die Informationen.',
 	'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 	'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
 	'avis_attention' => 'ACHTUNG!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL-Fehler',
 	'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
 	'avis_erreur_visiteur' => 'Ein Problem beim Zugang zum Redaktionssystem ist aufgetreten.',
+	'avis_nb_erreurs_saisie' => 'Ihre Eingabe enthält @nb@ Fehler, bitte überprüfen Sie die Informationen.',
 
 	// B
 	'barre_a_accent_grave' => 'Grosses A mit accent grave einfügen',
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@:@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ um @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'am @jour@ von @heure_debut@ bis @heure_fin@', # MODIF
-	'date_fmt_jour_heure_debut_fin_abbr' => 'am @dtstart@@jour@ von @heure_debut@@dtabbr@ bis @dtstart@@heure_fin@@dtend@', # MODIF
+	'date_fmt_jour_heure_debut_fin' => '@jour@ von @heure_debut@ bis @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ von @heure_debut@@dtabbr@ bis @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@. @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -651,6 +653,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 	'titre_statistiques' => 'Statistiken',
 	'titre_titre_document' => 'Titel des Dokuments:',
 	'todo' => 'demnächst',
+	'trad_definir_reference' => 'Wählen Sie "@titre@" als Referenz für Übersetzungen',
 	'trad_reference' => '(Referenzartikel)',
 
 	// Z
