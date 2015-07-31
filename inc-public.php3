@@ -255,7 +255,7 @@ if ($use_cache && file_exists('CACHE/.purge')) {
 // Afficher un bouton 
 //
 
-function bouton($titre, $lien){
+function bouton($titre, $lien) {
 	$lapage=substr($lien, 0, strpos($lien,"?"));
 	$lesvars=substr($lien, strpos($lien,"?") + 1, strlen($lien));
 
@@ -296,14 +296,11 @@ if ($admin_ok AND !$flag_preserver) {
 		bouton("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
 
-	$fich = substr($fichier_requete, strrpos($fichier_requete, '/') + 1);
-	if (strpos($fich, '?'))
-		$fich = "./$fich&";
-	else
-		$fich = "./$fich?";
-
-	bouton ('Recalculer cette page', $fich.'recalcul=oui');
-//	bouton ('Recalculer le squelette', $fich.'recalcul=oui&recalcul_squelettes=oui');
+	$link = new Link;
+	$link->addVar('recalcul', 'oui');
+	echo $link->getForm('GET');
+	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page'>";
+	echo "</form>\n";
 }
 
 

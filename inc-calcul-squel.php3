@@ -1275,7 +1275,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$accepter_inscriptions = lire_meta("accepter_inscriptions");
 
 		if ($accepter_inscriptions == "oui") {
-			$'.$nom_var.' = "<"."? include_local(\"inc-formulaires.php3\"); formulaire_inscription(); ?".">";
+			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_inscription(); ?".">";
 		}
 		else {
 			$'.$nom_var.' = "";
@@ -1314,7 +1314,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
  		$result_petition = mysql_query($query_petition);
 
 		if ($row_petition = mysql_fetch_array($result_petition)) {
-			$'.$nom_var.' = "<"."? include_local(\"inc-formulaires.php3\"); formulaire_signature($contexte[id_article]); ?".">";
+			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_signature($contexte[id_article]); ?".">";
 		}
 		else {
 			$'.$nom_var.' = "";
@@ -1334,7 +1334,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$proposer_sites = lire_meta("proposer_sites");
 
 		if ($proposer_sites == "2") {
-			$'.$nom_var.' = "<"."? include_local(\"inc-formulaires.php3\"); formulaire_site($contexte[id_rubrique]); ?".">";
+			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_site($contexte[id_rubrique]); ?".">";
 		}
 		else {
 			$'.$nom_var.' = "";
@@ -1950,11 +1950,11 @@ function calculer_squelette($squelette, $fichier) {
 	$define = strtoupper("_SKEL_$squelette_nom");
 
 	// Debut du fichier
-	$texte .= "<"."?\n\n";
+	$texte .= "<"."?php\n\n";
 	$texte .= "\$func_squelette_executer = '$func';\n\n";
 	$texte .= "if (defined(\"$define\")) return;\n";
 	$texte .= "define(\"$define\", \"1\");\n\n\n";
-	
+
 	// Calculer le code PHP des boucles
 	if ($boucles) {
 		reset($boucles);
@@ -1973,7 +1973,7 @@ function calculer_squelette($squelette, $fichier) {
 	// Fin du fichier
 	$texte .= "?>";
 
-	$f = fopen($fichier, "w");
+	$f = fopen($fichier, "wb");
 	fwrite($f, $texte);
 	fclose($f);
 }

@@ -228,7 +228,7 @@
 <B_documents>
 <ul>
 <p align="left">
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{inclus=non}>
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{id_vignette=0}>
 <li><font size=1>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<a href="IMG/#FICHIER_DOCUMENT">DOCUMENT [(#TYPE|majuscules)]</a></font> <b>#TITRE,</b> [(#TAILLE_DOCUMENT|taille_en_octets)]
 [<br>(#DESCRIPTIF)]
 </BOUCLE_documents>
@@ -236,8 +236,8 @@
 </B_documents>
 
 
-	</FONT>
-	<BR><BR>
+</FONT>
+<BR><BR>
 
 </TD>
 </TR>
@@ -325,11 +325,6 @@
 	<P>#TEXTE
 	
 	
-	<BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
-		<li><b>#TYPE :</b> #TITRE
-	</BOUCLE_mots_forum>
-	
-	
 	<P align='right'>[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
 	</font>
 	</TD></TR></TABLE>
@@ -370,22 +365,20 @@
 	<P>
 
 	</BOUCLE_Forums>
+
 </TD>
 </TR>
 </TABLE>
 <P>
-</B_forums_liens>
+<!--/B_forums_liens-->
 
 
 </CENTER>
 
 
-
-
-
-
-
 </BOUCLE_principale>
+
+
 
 <CENTER>
 

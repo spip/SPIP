@@ -6,30 +6,25 @@ if (defined("_INC_FORMULAIRES")) return;
 define("_INC_FORMULAIRES", "1");
 
 
+function test_pass() {
+	include_local("ecrire/inc_acces.php3");
 
-function test_pass(){
-	$passw=$prop_nom.$prop_email.$prop_bio.$prop_nom_site.$prop_url_site;
-	srand(time());
-	$passw=md5($passw.rand(11,1000));
-	$passw=crypt($passw,rand(11,10000));
-	$passw=ereg_replace("\.","",$passw);
-	$passw=ereg_replace("\/","",$passw);
-	$passw=ereg_replace("I","L",$passw);
-	$passw=ereg_replace("l","L",$passw);
-	$passw=substr($passw,0,8);
-
-	$query="SELECT * FROM spip_signatures WHERE statut='$passw'";
-	$result=mysql_query($query);
-	if (mysql_num_rows($result)>0){
-		$passw = test_pass();
-	} else {
-		return $passw;
+	for (;;) {
+		$passw = creer_pass_aleatoire();
+		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";
+		$result = mysql_query($query);
+		if (!mysql_num_rows($result)) break;
 	}	
+	return $passw;
 }
 
 function test_login($mail) {
 	if (strpos($mail, "@") > 0) $login_base = substr($mail, 0, strpos($mail, "@"));
 	else $login_base = $mail;
+
+	$login_base = strtolower($login_base);
+	$login_base = ereg_replace("[^a-zA-Z0-9]", "", $login_base);
+	if (!$login_base) $login_base = "user";
 
 	for ($i = 0; ; $i++) {
 		if ($i) $login = $login_base.$i;
@@ -347,7 +342,7 @@ function formulaire_inscription() {
 			}
 			else {
 				//echo "<FONT FACE='verdana,arial,helvetica,sans-serif'>";
-				echo "Probl&eagrave; de mail&nbsp;: l'identifiant ne peut pas &ecirc;tre envoy&eacute;.";
+				echo "Probl&egrave;me de mail&nbsp;: l'identifiant ne peut pas &ecirc;tre envoy&eacute;.";
 				//echo "</FONT>";
 			}
 		}
@@ -373,7 +368,6 @@ function formulaire_site($la_rubrique) {
 	global $description_site;
 
 	if ($nom_site) {
-	
 		// Tester le nom du site
 		if (strlen ($nom_site) < 2){
 			$reponse_signature .= erreur("Veuillez indiquer le nom du site.");
@@ -388,7 +382,6 @@ function formulaire_site($la_rubrique) {
 		}
 
 		// Integrer a la base de donnees
-	
 		echo "<div class='reponse_formulaire'>";
 		
 		if ($refus !="oui"){
@@ -430,7 +423,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 	if ($GLOBALS[texte_message_auteur]) {
 		if ($GLOBALS[sujet_message_auteur] == "")
 			$erreur .= erreur("Veuillez indiquer un sujet");
-		else if (! ereg(".@.", $GLOBALS[email_message_auteur]))
+		else if (!ereg(".@.", $GLOBALS[email_message_auteur]))
 			$erreur .= erreur("Veuillez indiquer votre email");
 		else if ($GLOBALS[valide_message_auteur]) {  // verifier hash ?
 			include_local("ecrire/inc_mail.php3");

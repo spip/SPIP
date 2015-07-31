@@ -40,7 +40,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap;
 
 	if (!$from) $from = $email;
-	if (! ereg(".@.", $email)) return;
+	if (!ereg(".@.", $email)) return;
 	if ($email == "vous@fournisseur.com") return;
 
 	$headers = "From: $from\n".

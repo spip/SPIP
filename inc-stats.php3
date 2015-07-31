@@ -13,7 +13,7 @@ function ecrire_stats() {
 	$my_ref = $HTTP_REFERER;
 	$my_ref = "\n".substr(md5($my_ref), 0, 15);
 
-	$query = "SELECT visites, referers FROM spip_articles WHERE id_article=$id_article";
+	$query = "SELECT visites, referers FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
 	$result = mysql_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
