@@ -293,20 +293,6 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
-function calcul_on_off($contexte, $on = 'on', $off = 'off') {
-	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic, $id_syndic_article;
-
-	if ($id_article) $on_off = ($id_article == $contexte['id_article']);
-	else if ($id_breve) $on_off = ($id_breve == $contexte['id_breve']);
-	else if ($id_rubrique) $on_off = ($id_rubrique == $contexte['id_rubrique']);
-	else if ($id_mot) $on_off = ($id_mot == $contexte['id_mot']);
-	else if ($id_auteur) $on_off = ($id_auteur == $contexte['id_auteur']);
-	else if ($id_syndic) $on_off = ($id_syndic == $contexte['id_syndic']);
-	else if ($id_syndic_article) $on_off = ($id_syndic_article == $contexte['id_syndic_article']);
-
-	return $on_off ? $on : $off;
-}
-
 
 //////////////////////////////////////////////////////////////////////////////
 //

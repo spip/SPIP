@@ -402,7 +402,6 @@ function init_champs_squel() {
 		'syndic_articles' => "syndic_articles",
 		'types_documents' => "id_document"
 	);
-
 }
 
 init_champs_squel();
