@@ -514,53 +514,71 @@ function creer_base() {
 
 
 function remplir_type_documents() {
+	// Images reconnues par PHP
 	$query = "INSERT IGNORE spip_types_documents (id_type, extension, titre, inclus) VALUES ".
 		"(1, 'jpg', 'JPEG', 'image'), ".
 		"(2, 'png', 'PNG', 'image'), ".
 		"(3, 'gif', 'GIF', 'image')";
 	spip_query($query);
 
+	// Autres images (peuvent utiliser le tag <img>)
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
 		"('bmp', 'BMP', 'image'), ".
 		"('psd', 'Photoshop', 'image'), ".
 		"('tif', 'TIFF', 'image')";
 	spip_query($query);
 
+	// Multimedia (peuvent utiliser le tag <embed>)
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
 		"('aiff', 'AIFF', 'embed'), ".
 		"('asf', 'Windows Media', 'embed'), ".
 		"('avi', 'Windows Media', 'embed'), ".
-		"('bz2', 'BZip', 'non'), ".
-		"('doc', 'Word', 'non'), ".
-		"('djvu', 'DjVu', 'non'), ".
-		"('eps', 'PostScript', 'non'), ".
-		"('gz', 'GZ', 'non'), ".
-		"('html', 'HTML', 'non'), ".
 		"('mid', 'Midi', 'embed'), ".
+		"('mng', 'MNG', 'embed'), ".
 		"('mov', 'QuickTime', 'embed'), ".
 		"('mp3', 'MP3', 'embed'), ".
 		"('mpg', 'MPEG', 'embed'), ".
-		"('ogg', 'Ogg Vorbis', 'embed'), ".
-		"('pdf', 'PDF', 'non'), ".
-		"('ppt', 'PowerPoint', 'non'), ".
-		"('ps', 'PostScript', 'non'), ".
+		"('ogg', 'Ogg', 'embed'), ".
 		"('qt', 'QuickTime', 'embed'), ".
 		"('ra', 'RealAudio', 'embed'), ".
 		"('ram', 'RealAudio', 'embed'), ".
 		"('rm', 'RealAudio', 'embed'), ".
+		"('swf', 'Flash', 'embed'), ".
+		"('wav', 'WAV', 'embed'), ".
+		"('wmv', 'Windows Media', 'embed')";
+	spip_query($query);
+
+	// Documents varies
+	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
+		"('ai', 'Adobe Illustrator', 'non'), ".
+		"('bz2', 'BZip', 'non'), ".
+		"('c', 'C source', 'non'), ".
+		"('deb', 'Debian', 'non'), ".
+		"('doc', 'Word', 'non'), ".
+		"('djvu', 'DjVu', 'non'), ".
+		"('dvi', 'LaTeX DVI', 'non'), ".
+		"('eps', 'PostScript', 'non'), ".
+		"('gz', 'GZ', 'non'), ".
+		"('h', 'C header', 'non'), ".
+		"('html', 'HTML', 'non'), ".
+		"('pas', 'Pascal', 'non'), ".
+		"('pdf', 'PDF', 'non'), ".
+		"('ppt', 'PowerPoint', 'non'), ".
+		"('ps', 'PostScript', 'non'), ".
+		"('rpm', 'RedHat/Mandrake/SuSE', 'non'), ".
 		"('rtf', 'RTF', 'non'), ".
 		"('sdd', 'StarOffice', 'non'), ".
 		"('sdw', 'StarOffice', 'non'), ".
 		"('sit', 'Stuffit', 'non'), ".
+		"('sxc', 'OpenOffice Calc', 'non'), ".
 		"('sxi', 'OpenOffice Impress', 'non'), ".
 		"('sxw', 'OpenOffice', 'non'), ".
-		"('swf', 'Flash', 'embed'), ".
+		"('tex', 'LaTeX', 'non'), ".
 		"('tgz', 'TGZ', 'non'), ".
 		"('txt', 'texte', 'non'), ".
-		"('wav', 'WAV', 'embed'), ".
+		"('xcf', 'GIMP multi-layer', 'non'), ".
 		"('xls', 'Excel', 'non'), ".
 		"('xml', 'XML', 'non'), ".
-		"('wmv', 'Windows Media', 'embed'), ".
 		"('zip', 'Zip', 'non')";
 	spip_query($query);
 }
@@ -1212,6 +1230,11 @@ function maj_base() {
 	if ($version_installee < 1.601) {
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_syndic (id_syndic)");
 		maj_version (1.601);
+	}
+
+	if ($version_installee < 1.602) {
+		// juste des types de documents en plus (creer_base())
+		maj_version (1.602);
 	}
 }
 
