@@ -21,7 +21,7 @@ function action_instituer_groupe_mots_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (preg_match(",^(\w+)$,", $arg, $r)) 
+	if (preg_match(",^([a-zA-Z_]\w+)$,", $arg, $r)) 
 	  action_instituer_groupe_mots_get($arg);
 	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
