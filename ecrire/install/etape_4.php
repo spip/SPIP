@@ -89,7 +89,7 @@ function install_etape_4_dist()
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db("
-			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"
+			. "'$adresse_db','$port','$login_db','" . addcslashes($pass_db, "'\\") . "','$sel_db'"
 			. ");\n";
 		$conn .= "?".">";
 
