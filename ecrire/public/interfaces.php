@@ -159,6 +159,7 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 //ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
+function declarer_interfaces(){
 global $exceptions_des_tables, $table_des_tables;
 global $table_date;
 
@@ -325,5 +326,27 @@ $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 	if (!isset($table_des_traitements[$balise]['syndic_articles']))
 		$table_des_traitements[$balise]['syndic_articles'] = '%s';
+
+	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales
+	$interfaces = pipeline('declarer_tables_interfaces',
+			array(
+			'table_des_tables'=>$table_des_tables,
+			'exceptions_des_tables'=>$exceptions_des_tables,
+			'table_date'=>$table_date,
+			'tables_jointures'=>$tables_jointures,
+			'exceptions_des_jointures'=>$exceptions_des_jointures,
+			'table_des_traitements'=>$table_des_traitements,
+			));
+	if ($interfaces){
+			$table_des_tables = $interfaces['table_des_tables'];
+			$exceptions_des_tables = $interfaces['exceptions_des_tables'];
+			$table_date = $interfaces['table_date'];
+			$tables_jointures = $interfaces['tables_jointures'];
+			$exceptions_des_jointures = $interfaces['exceptions_des_jointures'];
+			$table_des_traitements = $interfaces['table_des_traitements'];
+	}
+}
+
+declarer_interfaces();
 
 ?>

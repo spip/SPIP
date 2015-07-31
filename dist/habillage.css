@@ -1,6 +1,6 @@
-/* ----------------------------------------------------------- */
-/* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
-/* ----------------------------------------------------------- */
+/* --------------------------------------------------------- */
+/* Feuille de style des squelettes par defaut pour SPIP 2.0  */
+/* --------------------------------------------------------- */
 
 
 /*  ------------------------------------------
@@ -73,9 +73,6 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
-
-/* Affichage pour les petits ecrans (type 400 x 300) */
-@media handheld { #page, #conteneur, #navigation, #extra { width: auto; } }
 
 
 /*  ------------------------------------------
@@ -186,3 +183,14 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 ---------------------------------------------- */
 a { color: #604A7F; text-decoration: none; }
 a:hover { color: #F57900; text-decoration: underline; }
+
+
+
+/*  ------------------------------------------
+/*  Autres supports
+/*  ------------------------------------------ */
+
+/* Affichage pour les petits ecrans (type 400 x 300) */
+@media handheld, only screen and (max-device-width: 481px), only and (max-device-width: 400px), only and (max-width: 400px) {
+div#page, div#conteneur, div#navigation, div#extra { width: auto; }
+}

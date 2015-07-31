@@ -218,6 +218,7 @@ $spip_pipeline = array(
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
 	'body_prive' => '',
+	'declarer_tables_interfaces'=>'',
 	'declarer_tables_principales'=>'',
 	'declarer_tables_auxiliaires'=>'',
 	'definir_session' => '',
