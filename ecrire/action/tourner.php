@@ -20,8 +20,6 @@ include_spip('inc/actions');
 function action_tourner_dist() {
 	include_spip('inc/distant'); # pour copie_locale
 
-	global $convert_command;
-
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 
@@ -68,10 +66,24 @@ function action_tourner_post($r)
 			gdRotate ($src, $dest, $var_rot);
 		}
 		else if ($process = "convert") {
-			$commande = "$convert_command -rotate $var_rot ./"
-				. escapeshellcmd($src).' ./'.escapeshellcmd($dest);
-#			spip_log($commande);
-			exec($commande);
+			if (_CONVERT_COMMAND!='') {
+				define ('_CONVERT_COMMAND', 'convert');
+				define ('_ROTATE_COMMAND', _CONVERT_COMMAND.' -rotate %t %src %dest');
+			} else
+				define ('_ROTATE_COMMAND', '');
+			if (_ROTATE_COMMAND!=='') {
+				$commande = str_replace(
+					array('%t', '%src', '%dest'),
+					array(
+						$var_rot,
+						escapeshellcmd($src),
+						escapeshellcmd($dest)
+					),
+					_ROTATE_COMMAND);
+				spip_log($commande);
+				exec($commande);
+			} else
+				$dest = $src;
 		}
 	}
 	else

@@ -105,18 +105,24 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 		// imagemagick en ligne de commande
 		else if ($process == 'convert') {
-			define ('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y! %src %dest');
+			define('_CONVERT_COMMAND', 'convert');
+			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality 85 -resize %xx%y! %src %dest');
 			$format = $formats_sortie[0];
 			$vignette = $destination.".".$format;
-			$commande = str_replace('%x', $destWidth, _CONVERT_COMMAND);
-			$commande = str_replace('%y', $destHeight, $commande);
-			$commande = str_replace('%src', $image, $commande);
-			$commande = str_replace('%dest', './'.escapeshellcmd($vignette), $commande);
+			$commande = str_replace(
+				array('%x', '%y', '%src', '%dest'),
+				array(
+					$destWidth,
+					$destHeight,
+					escapeshellcmd($image),
+					escapeshellcmd($vignette)
+				),
+				_RESIZE_COMMAND);
 			spip_log($commande);
 			exec($commande);
 			if (!@file_exists($vignette)) {
-					spip_log("echec convert sur $vignette");
-					return;	// echec commande
+				spip_log("echec convert sur $vignette");
+				return;	// echec commande
 			}
 		}
 		else
@@ -129,7 +135,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			imagick_write($handle, $vignette);
 			if (!@file_exists($vignette)) {
 				spip_log("echec imagick sur $vignette");
-				return;	
+				return;
 			}
 		}
 		else
