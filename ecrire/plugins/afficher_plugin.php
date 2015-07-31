@@ -120,7 +120,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	if ($info['dtd'] == "paquet") {
 		$nom = PtoBR(plugin_propre("{$prefix}_nom", "$dir/lang/paquet-$prefix"));
 		if (!$nom)
-			$nom = propre($info['nom']);
+			$nom = PtoBR(propre($info['nom']));
 	}
 	else
 		$nom = typo(attribut_html($info['nom']));
