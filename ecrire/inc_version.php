@@ -230,21 +230,6 @@ $formats_logos =  array ('gif', 'jpg', 'png');
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
 
-// bardee de variables de personnalisation pour la typo (cf inc/texte)
-// class_spip : savoir si on veut class="spip" sur p i strong & li
-// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
-// la difference c'est que des css specifiques existent pour les seconds
-//
-$class_spip =  '';  /*' class="spip"'*/
-$class_spip_plus =  ' class="spip"';
-$toujours_paragrapher =  true;
-$les_notes =  '';
-$compt_note =  0;
-$notes_vues =  array();
-
-# assurer que ces variables sont null
-$ligne_horizontale = $debut_intertitre = $fin_intertitre = $debut_gras = $fin_gras = $debut_italique = $fin_italique = $ouvre_ref = $ferme_ref = $ouvre_note = $ferme_note = null;
-
 
 //
 // Pipelines & plugins

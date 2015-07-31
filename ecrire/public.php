@@ -154,8 +154,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		// quelques en-tetes de plus (voire qq envoyes directement)
 
 		// restaurer l'etat des notes
-		if (isset($page['notes']) AND $page['notes']){
-			$notes = charger_fonction("notes","inc");
+		if (isset($page['notes'])
+		  AND $page['notes']
+		  AND $notes = charger_fonction("notes","inc",true)){
 			$notes($page['notes'],'restaurer_etat');
 		}
 		ob_start(); 

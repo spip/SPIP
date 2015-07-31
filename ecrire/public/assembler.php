@@ -175,13 +175,13 @@ function calculer_contexte() {
 function calculer_contexte_implicite(){
 	static $notes = null;
 	if (is_null($notes))
-		$notes = charger_fonction('notes','inc');
+		$notes = charger_fonction('notes','inc',true);
 	$contexte_implicite = array(
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
 		'espace' => test_espace_prive(),
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
-		'notes' => $notes('','contexter_cache'),
+		'notes' => $notes?$notes('','contexter_cache'):'',
 	);
 	return $contexte_implicite;
 }
@@ -495,8 +495,9 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
 	if ($page['process_ins'] != 'html') {
 		// restaurer l'etat des notes
-		if (isset($page['notes']) AND $page['notes']){
-			$notes = charger_fonction("notes","inc");
+		if (isset($page['notes'])
+		  AND $page['notes']
+		  AND $notes = charger_fonction("notes", "inc", true)){
 			$notes($page['notes'],'restaurer_etat');
 		}
 
