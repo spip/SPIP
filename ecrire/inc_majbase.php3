@@ -936,6 +936,12 @@ function maj_base() {
 		maj_version(1.809);
 	}
 
+	// Annuler les brouillons de forum jamais valides
+	if ($version_installee < 1.810) {
+		spip_query("DELETE FROM spip_forum WHERE statut='redac'");
+		maj_version(1.810);
+	}
+
 	return true;
 }
 

@@ -77,13 +77,14 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$previsu = ' ';
 
 	// Recuperer le message a previsualiser
-	if ($id_message = intval($GLOBALS['HTTP_POST_VARS']['id_message']))  {
+	if ($GLOBALS['HTTP_POST_VARS']['post_forum'])  {
 		$titre = $GLOBALS['HTTP_POST_VARS']['titre'];
 		$texte = $GLOBALS['HTTP_POST_VARS']['texte'];
 		$auteur = $GLOBALS['HTTP_POST_VARS']['auteur'];
 		$email_auteur = $GLOBALS['HTTP_POST_VARS']['email_auteur'];
 		$nom_site_forum = $GLOBALS['HTTP_POST_VARS']['nom_site_forum'];
 		$url_site = $GLOBALS['HTTP_POST_VARS']['url_site'];
+		$ajouter_mot = $GLOBALS['HTTP_POST_VARS']['ajouter_mot']; // array
 
 		if ($afficher_texte != 'non') {
 			$previsu = 
@@ -97,16 +98,21 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 			  . interdire_scripts(typo($nom_site_forum)) . "</a>";
 
 			// Verifier mots associes au message
-			$result_mots = spip_query("SELECT mots.id_mot, mots.titre, mots.type
-			FROM spip_mots_forum AS lien, spip_mots AS mots 
-			WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot
-			GROUP BY mots.id_mot");
+			if (is_array($ajouter_mot))
+				$mots = preg_replace('/[^0-9,]/', '', join(',',$ajouter_mot));
+			else $mots = '';
+
+			// affichage {par num type, type, num titre,titre}
+			$result_mots = spip_query("SELECT id_mot, titre, type
+				FROM spip_mots
+				WHERE id_mot IN (0, $mots)
+				ORDER BY 0+type,type,0+titre,titre");
 			if (spip_num_rows($result_mots)>0) {
 				$previsu .= "<p>"._T('forum_avez_selectionne')."</p><ul>";
 				while ($row = spip_fetch_array($result_mots)) {
 					$les_mots[$row['id_mot']] = "checked='checked'";
 					$presence_mots = true;
-					$previsu .= "<li class='font-size=80%'> "
+					$previsu .= "<li style='font-size: 80%;'> "
 					. typo($row['type']) . "&nbsp;: <b>"
 					. typo($row['titre']) ."</b></li>";
 				}
@@ -129,8 +135,8 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		}
 	} else {
 		// Premiere edition, initialiser l'auteur
-	  	// puis s'accorder une nouvelle entree dans la table
-		if ($spip_forum_user && is_array($cookie_user = unserialize($spip_forum_user))) {
+		if ($spip_forum_user &&
+		is_array($cookie_user = unserialize($spip_forum_user))) {
 			$auteur = $cookie_user['nom'];
 			$email_auteur = $cookie_user['email'];
 		}
@@ -138,10 +144,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
-		$id_message = spip_abstract_insert('forum', 
-					  "(date_heure, titre, ip, statut)",
-					  "(NOW(), '".addslashes($titre)."', '$REMOTE_ADDR', 'redac')");
-
 	}
 
 	// Generation d'une valeur de securite pour validation
@@ -166,8 +168,9 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		     'formulaire_forum',
 		     0,
 		     array(
-		     'afficher_non' => 
-		     ($afficher_texte != 'non' ? '' :
+		     'afficher_texte_input' => (($afficher_texte <> 'non') ? '&nbsp;' : ''),
+		     'afficher_texte_hidden' => 
+		     (($afficher_texte <> 'non') ? '' :
 		      (boutonne('hidden', 'titre', htmlspecialchars($titre)) .
 		       $table .
 		       "\n<br /><div align='right'>" .
@@ -253,7 +256,7 @@ function table_des_mots($table, $les_mots) {
 				<td width='47%' valign='top'>";
 			}
 
-			$ret .= boutonne($unseul, "ajouter_mot[$id_groupe][]", $id_mot, "id='mot$id_mot' " . $les_mots[$id_mot]) .
+			$ret .= boutonne($unseul, "ajouter_mot[]", $id_mot, "id='mot$id_mot' " . $les_mots[$id_mot]) .
 			  afficher_petits_logos_mots($id_mot)
 			. "<b><label for='mot$id_mot'>$titre_mot</label></b><br />";
 
