@@ -256,7 +256,7 @@ if ($row = spip_fetch_array($result)) {
 
 	$extra=$row["extra"];
 	
-	}
+ } else $id_syndic = 0;
 
 if ($nom_site)
 	$titre_page = "&laquo; $nom_site &raquo;";
@@ -277,7 +277,7 @@ afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
-
+ if (!$id_syndic) {echo _T('public:aucun_site'); exit;}
 
 debut_gauche();
 

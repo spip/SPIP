@@ -124,7 +124,7 @@ if ($row = spip_fetch_array($result)) {
 	$type = $row['type'];
 	$extra = $row['extra'];
 	$id_groupe = $row['id_groupe'];
-}
+ } else $id_mot = 0;
 
 debut_page("&laquo; $titre_mot &raquo;", "documents", "mots");
 debut_gauche();
@@ -144,7 +144,7 @@ if ($id_mot) {
 	voir_en_ligne ('mot', $id_mot);
 
 	fin_boite_info();
-}
+ } else {echo _T('info_mot_sans_groupe'); exit;}
 
 //////////////////////////////////////////////////////
 // Logos du mot-clef
