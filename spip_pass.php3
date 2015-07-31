@@ -102,7 +102,7 @@ if ($oubli_pass == 'oui') {
 		echo '  <input type=submit class="fondl" name="oubli" value="OK"></div></form>';
 	}
 }
-else if ($inscription_ecrire || forums_sur_abo()) {
+else if ($inscriptions_ecrire || forums_sur_abo()) {
 	// debut presentation
 	install_debut_html("Vous inscrire sur ce site");
 	echo "<p>";
