@@ -1308,6 +1308,16 @@ div.spip_poesie div {
 a.boutonlien:hover {color:#454545; text-decoration: none;}
 a.boutonlien {color:#808080; text-decoration: none;}
 
+a.triangle_block {
+	margin-top: -3px;
+	margin-bottom: -3px;
+	margin-<?php echo $right; ?>: -3px;
+}
+a.triangle_block:hover {
+	margin-<?php echo $left; ?>: 1px;
+	margin-<?php echo $right; ?>: -4px;
+}
+
 h3.spip {
 	margin-top : 40px;
 	margin-bottom : 40px;
