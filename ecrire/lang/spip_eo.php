@@ -532,7 +532,7 @@ Dankon pro via partopreno
 'lien_visites' => '@visites@&nbsp;vizitoj',
 'lien_voir_auteur' => 'Vidu tiun a&#365;toron',
 'login_acces_prive' => 'aliro al la privata spaco',
-'login_autre_identifiant' => 'ensaluti per alia ensalutilo',
+'login_autre_identifiant' => 'ensaluti per alia kromnomo',
 'login_connexion_refusee' => 'Ensaluto rifuzita.',
 'login_cookie_accepte' => 'Bonvolu &#285;ustigi vian retumilon por ke &#285;i akceptu ilin (almena&#365; por tiu &#265;i retejo).',
 'login_cookie_oblige' => 'Por sekure ensaluti&#285;i en tiu retejo, vi devas akcepti la kuketojn.',
@@ -560,7 +560,7 @@ Dankon pro via partopreno
 'login_sans_cookiie' => 'Ensaluto sen kuketo',
 'login_sinscrire' => 'registri&#285;i',
 'login_test_navigateur' => 'testo retumilo/rekonekti&#285;o',
-'login_verifiez_navigateur' => 'Kontrolu tamen ke via retumilo ne memorigis vian pasvorton...)',
+'login_verifiez_navigateur' => '(Kontrolu tamen ke via retumilo ne memorigis vian pasvorton...)',
 
 
 // M
@@ -625,7 +625,7 @@ kaj ensaluti.
 'pass_mot_oublie' => 'Pasvorto forgesita',
 'pass_nouveau_enregistre' => 'Via nova pasvorto estas registrita.',
 'pass_nouveau_pass' => 'Nova pasvorto',
-'pass_ok' => 'BONE',
+'pass_ok' => 'EK',
 'pass_oubli_mot' => 'Pasvorto-forgeso',
 'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 'pass_rappel_login' => 'Memoru: via ensalutilo (salutnomo) estas &laquo; @login@ &raquo;.',

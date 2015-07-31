@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Forigi &#264;ION',
 'bouton_envoi_message_02' => 'SENDI MESA&#284;ON',
 'bouton_envoyer_message' => 'Definitiva mesa&#285;o: sendi',
-'bouton_forum_petition' => 'FORUMO &amp; PETSKRIBO',
+'bouton_forum_petition' => '<MODIF>FORUMO &amp; PETSKRIBO',
 'bouton_modifier' => 'Modifi',
 'bouton_pense_bete' => 'PROPRA MEMORIGILO',
 'bouton_radio_activer_messagerie' => '&#348;alti la internan mesa&#285;ilon',
@@ -92,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_petition_activee' => 'Aktivigita petskribo',
 'bouton_radio_publication_immediate' => 'Tuja publikigo de mesa&#285;oj (la kontribuoj afi&#349;i&#285;as tuj post sia sendo; la mastrumantoj povas
  forigi ilin poste).',
-'bouton_radio_sauvegarde_compressee' => 'dosiero konserv-cele kompaktita en <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'dosiero nekompaktita en <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => '<MODIF>dosiero konserv-cele kompaktita en @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => '<MODIF>dosiero nekompaktita en @fichier@',
 'bouton_radio_supprimer_petition' => 'Forigi la petsbribon',
 'bouton_radio_syndication' => 'Abonrilato:',
 'bouton_redirection' => 'ALIDIREKTO',
@@ -466,7 +466,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_procedez_par_etape' => 'procedu etapo post etapo',
 'info_procedure_maj_version' => 'la &#285;isdatiga proceduro devas esti lan&#265;ita por adapti
  la datenbazon al la nova versio de SPIP.',
-'info_ps' => 'P.S',
+'info_ps' => '<MODIF>P.S',
 'info_publier' => 'publikigi',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
 'info_question_accepter_visiteurs' => '<MODIF>Se via skeleto planas la registradon de vizitantoj kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-supran opcion&nbsp;:',
@@ -523,7 +523,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sauvegarde_petitions' => '<MODIF>Konservi la subskriblistojn',
 'info_sauvegarde_refers' => '<MODIF>Konservi la referencantojn',
 'info_sauvegarde_reussi_01' => 'Savkopio sukcesis.',
-'info_sauvegarde_reussi_02' => 'La datenbazo estas konservita en <b>ecrire/data/@archive@</b>. Vi povas',
+'info_sauvegarde_reussi_02' => '<MODIF>La datenbazo estas konservita en @archive@. Vi povas',
 'info_sauvegarde_reussi_03' => 'Reen al pa&#285;o pri mastrumado',
 'info_sauvegarde_reussi_04' => 'de via retejo.',
 'info_sauvegarde_rubriques' => 'Konservi la rubrikojn',
@@ -761,8 +761,8 @@ La tradukoj estas kunligitaj al la originalo, la&#365; koloro kiu indikas ties s
 
 // T
 'taille_cache_image' => '<MODIF>La bildoj a&#365;tomate kalkulitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en la datenaro @dir@ spacon je @taille@.',
-'taille_cache_infinie' => 'Tiu retejo ne limigas grandecon de la dosierujo <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP provas limigi grandecon de la dosierujo <code>CACHE/</coche> cirka&#365; <b>@octets@</b> da datenoj.',
+'taille_cache_infinie' => '<MODIF>Tiu retejo ne limigas grandecon de la dosierujo <code>CACHE/</code>.',
+'taille_cache_maxi' => '<MODIF>SPIP provas limigi grandecon de la dosierujo <code>CACHE/</coche> cirka&#365; <b>@octets@</b> da datenoj.',
 'taille_cache_octets' => 'Grandeco de la staplo estas nun @octets@.',
 'taille_cache_vide' => 'La staplo estas malplena.',
 'taille_repertoire_cache' => 'Grandeco de stapla dosierujo',
@@ -772,7 +772,7 @@ La tradukoj estas kunligitaj al la originalo, la&#365; koloro kiu indikas ties s
 inkluzive de <i>&#265;iuj</i> alirebloj de redaktantoj kaj administrantoj. Post ties efektivigo, vi devos lan&#265;i la
 SPIP-reinstalon por rekrei novan bazon kaj novan administrantan alireblon.',
 'texte_admin_tech_01' => '<MODIF>Tiu opcio ebligas al vi konservi
-la enhavon de la bazo en dosiero stokota en la dosierujo <i>ecrire/data/</i>.
+la enhavon de la bazo en dosiero stokota en la dosierujo @dossier@.
 Ne forgesu anka&#365; reakiri la tuton de la dosierujo <i>IMG/</i>, kiu enhavas
 la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti resta&#365;rita
@@ -836,7 +836,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_en_cours_validation' => 'La artikoloj kaj fulm-informoj &#265;i-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.',
 'texte_enrichir_mise_a_jour' => 'Vi povas pliri&#265;igi la enpa&#285;igon de via teksto uzante &laquo;&nbsp;tipografiajn rapidklavojn&nbsp;&raquo;.',
 'texte_fichier_authent' => '<MODIF><b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>
-  kaj <tt>.htpasswd-admin</tt> en la dosierujo <tt>ecrire/data/</tt> ?</b><p>
+  kaj <tt>.htpasswd-admin</tt> en la dosierujo @dossier@ ?</b><p>
   Tiuj dosieroj povas servi al vi por limigi la alirrajton de la a&#365;toroj
   kaj administrantoj en aliaj lokoj de via retejo
   (ekzemple, ekstera statistik-programo).<p>
@@ -929,12 +929,12 @@ vian gastiganton.<p>',
 'texte_restaurer_base' => 'Resta&#365;ri la enhavon de datenbaza savkopio',
 'texte_restaurer_sauvegarde' => '<MODIF>Tiu opcio ebligas al vi restarigi anta&#365;e faritan savkopion de la bazo.
   Por tio, la dosiero entenanta la savkopion devas esti lokita
-  en la dosierujo <i>ecrire/data/</i>.
+  en la dosierujo @dossier@.
   Estu zorgema pri tiu funkcio&nbsp;: <b>la modifoj, eventualaj perdoj, estas
   neinversigeblaj.</b>',
 'texte_sauvegarde' => 'Konservi la enhavon de la bazo',
 'texte_sauvegarde_base' => 'Konservi la bazon',
-'texte_sauvegarde_compressee' => 'La savkopio estos farita en la nedensigita dosiero <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => '<MODIF>La savkopio estos farita en la nedensigita dosiero @fichier@.',
 'texte_selection_langue_principale' => 'Vi povas &#265;i-sube elekti la &laquo;&nbsp;&#265;efan lingvon&nbsp;&raquo; de la retejo. Tiu elekto ne devigas vin - bon&#349;ance&nbsp;! - verki viajn artikolojn en la elektita lingvo, sed ebligas determini&nbsp;:
  <ul><li> la defa&#365;ltan formaton de la datenoj en la publika spaco&nbsp;;</li>
  <li> kian tipografiilon SPIP devas uzi pri tekst-aspektigo&nbsp;;</li>

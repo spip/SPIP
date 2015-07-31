@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'l&#7883;ch tr&igrave;nh h&agrave;ng th&aacute;ng',
 'cal_par_semaine' => 'l&#7883;ch tr&igrave;nh h&agrave;ng tu&#7847;n',
 'confirm_changer_statut' => 'C&#7847;n x&aacute;c nh&#7853;n: b&#7841;n y&ecirc;u c&#7847;u thay &#273;&#7893;i t&igrave;nh tr&#7841;ng c&#7911;a b&agrave;i n&agrave;y. B&#7841;n c&oacute; mu&#7889;n ti&#7871;p t&#7909;c kh&ocirc;ng?',
+'correcte' => '<NEW>correcte',
 
 
 // D
@@ -199,9 +200,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(&#273;&acirc;y l&agrave; th&#432; t&iacute;n t&#7921; &#273;&#7897;ng)',
 'form_forum_pass' => 'm&#7853;t m&atilde;:',
 'form_forum_probleme_mail' => 'C&oacute; v&#7845;n &#273;&#7873; v&#7899;i email: T&ecirc;n g&#7885;i (ID) kh&ocirc;ng g&#7917;i &#273;i &#273;&#432;&#7907;c.',
-'form_forum_voici1' => '&#272;&acirc;y l&agrave; t&ecirc;n g&#7885;i c&#7911;a b&#7841;n &#273;&#7875; tham gia v&agrave;o c&aacute;c di&#7877;n &#273;&agrave;n "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici1' => '&#272;&acirc;y l&agrave; t&ecirc;n g&#7885;i c&#7911;a b&#7841;n &#273;&#7875; tham gia v&agrave;o c&aacute;c di&#7877;n &#273;&agrave;n
+"@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => '&#272;&acirc;y l&agrave; t&ecirc;n g&#7885;i c&#7911;a b&#7841;n &#273;&#7875; n&#7897;p b&agrave;i v&agrave;o trang web 
-"@nom_site_spip@" (@adresse_login@):',
+"@nom_site_spip@"(@adresse_login@):',
 'form_indiquer_email' => 'Xin cho v&agrave;o &#273;&#7883;a ch&#7881; email c&#7911;a b&#7841;n.',
 'form_indiquer_nom' => 'Xin cho v&agrave;o t&ecirc;n b&#7841;n.',
 'form_indiquer_nom_site' => 'Xin cho v&agrave;o t&ecirc;n c&#7911;a website b&#7841;n.',
@@ -211,7 +213,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_deja_enregistre' => 'Website n&agrave;y &#273;&atilde; &#273;&#432;&#7907;c ghi danh',
 'form_pet_deja_signe' => 'B&#7841;n &#273;&atilde; k&yacute; v&#259;n b&#7843;n n&agrave;y.',
 'form_pet_envoi_mail_confirmation' => 'M&#7897;t email x&aacute;c nh&#7853;n &#273;&atilde; &#273;&#432;&#7907;c g&#7917;i cho b&#7841;n. B&#7841;n n&ecirc;n v&agrave;o &#273;&#7883;a ch&#7881; URL &#273;&#7873; c&#7853;p trong email &#273;&oacute; &#273;&#7875; x&aacute;c nh&#7853;n ch&#7919; k&yacute; c&#7911;a m&igrave;nh.',
-'form_pet_mail_confirmation' => 'Ch&agrave;o b&#7841;n,
+'form_pet_mail_confirmation' => '<MODIF>Ch&agrave;o b&#7841;n,
 
 B&#7841;n y&ecirc;u c&#7847;u k&yacute; v&agrave;o th&#7881;nh nguy&#7879;n th&#432; @titre@.
 
@@ -334,6 +336,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'image_tourner_droite' => 'Xoay qua ph&#7843;i 90&deg;',
 'image_tourner_gauche' => 'Xoay b&ecirc;n tr&aacute;i 90&deg;',
 'img_indisponible' => 'h&igrave;nh kh&ocirc;ng c&oacute;',
+'impossible' => '<NEW>impossible',
 'info_a_suivre' => 'N&#416;I B&#7854;T &#272;&#7846;U&raquo;',
 'info_a_valider' => '[ch&#7901; th&ocirc;ng qua]',
 'info_acces_interdit' => 'Kh&ocirc;ng v&agrave;o/d&ugrave;ng &#273;&#432;&#7907;c',
@@ -368,7 +371,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_copyright_gpl' => 'theo gi&#7845;p ph&eacute;p GPL',
 'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n',
 'info_creer_repertoire' => 'Xin l&#7853;p ra m&#7897;t h&#7891; s&#417; hay m&#7897;t ng&#259;n mang t&#234;n:',
-'info_creer_repertoire_2' => 'trong ng&#259;n ph&#7909; <B>@repertoire@</b>, k&#7871; &#273;&#243;',
+'info_creer_repertoire_2' => '<MODIF>trong ng&#259;n ph&#7909; <B>@repertoire@</b>, k&#7871; &#273;&#243;',
 'info_creer_vignette' => 't&#7921; &#273;&#7897;ng t&#7841;o ra c&aacute;c h&igrave;nh m&#7851;u nh&#7887;',
 'info_deplier' => 'M&#7903; ra',
 'info_descriptif_nombre' => 'M&#244; t&#7843;:',
@@ -386,7 +389,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_erreur_requete' => 'V&#7845;n &#273;&#225;p c&#243; l&#7895;i: ',
 'info_erreur_squelette2' => 'Kh&ocirc;ng c&oacute; m&#7851;u cho trang web n&agrave;y. Kh&ocirc;ng t&igrave;m thay h&#7891; s&#417; <b>@fichier@</b>...',
 'info_erreur_systeme' => 'Th&ocirc;ng b&aacute;o l&#7895;i s&#7889; (errno @errsys@)',
-'info_erreur_systeme2' => '&#272;&#297;a c&#7913;ng c&oacute; th&#7875; &#273;&atilde; &#273;&#7847;y hay l&agrave; database b&#7883; h&#432;. <br>
+'info_erreur_systeme2' => '<MODIF>&#272;&#297;a c&#7913;ng c&oacute; th&#7875; &#273;&atilde; &#273;&#7847;y hay l&agrave; database b&#7883; h&#432;. <br>
  <font color=\'red\'>Xin <a href=\'@script@\'>s&#7917;a Database</a>,
  hay li&ecirc;n l&#7841;c v&#7899;i qu&#7843;n tr&#7883; vi&ecirc;n m&aacute;y.</font>',
 'info_fini' => 'Xong r&#7891;i! ',
@@ -399,10 +402,10 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_inclusion_directe' => 'G&#7897;p v&#224;o tr&#7921;c ti&#7871;p:',
 'info_inclusion_vignette' => 'G&#7897;p c&#225;c h&#236;nh nh&#7887; xem tr&#432;&#7899;c:',
 'info_installation_systeme_publication' => 'Thi&#7871;t tr&#237; h&#7879; th&#7889;ng ph&#225;t h&#224;nh ...',
-'info_installer_documents' => 'B&#7841;n c&#243; th&#7875; c&#224;i &#273;&#7863;t t&#7845;t c&#7843; t&#224;i li&#7879;u trong ng&#259;n @upload@.',
-'info_installer_ftp' => 'L&#224; qu&#7843;n tr&#7883; vi&#234;n, b&#7841;n c&#243; th&#7875; c&#224;i &#273;&#7863;t (d&#249;ng FTP) c&#225;c h&#7891; s&#417; trong ng&#259;n @upload@ r&#7891;i ch&#7885;n l&#7921;a ch&#250;ng sau &#273;&#243; tr&#7921;c ti&#7871;p t&#7915; &#273;&#226;y.',
+'info_installer_documents' => '<MODIF>B&#7841;n c&#243; th&#7875; c&#224;i &#273;&#7863;t t&#7845;t c&#7843; t&#224;i li&#7879;u trong ng&#259;n @upload@.',
+'info_installer_ftp' => '<MODIF>L&#224; qu&#7843;n tr&#7883; vi&#234;n, b&#7841;n c&#243; th&#7875; c&#224;i &#273;&#7863;t (d&#249;ng FTP) c&#225;c h&#7891; s&#417; trong ng&#259;n @upload@ r&#7891;i ch&#7885;n l&#7921;a ch&#250;ng sau &#273;&#243; tr&#7921;c ti&#7871;p t&#7915; &#273;&#226;y.',
 'info_installer_images' => 'B&#7841;n c&#243; th&#7875; c&#224;i &#273;&#7863;t h&#236;nh trong d&#7841;ng JPEG, GIF v&#224; PNG.',
-'info_installer_images_dossier' => 'C&#224;i &#273;&#7841;t h&#236;nh trong ng&#259;n @upload@ &#273;&#7875; c&#243; th&#7875; ch&#7885;n l&#7921;a ch&#250;ng t&#7915; &#273;&#226;y.',
+'info_installer_images_dossier' => '<MODIF>C&#224;i &#273;&#7841;t h&#236;nh trong ng&#259;n @upload@ &#273;&#7875; c&#243; th&#7875; ch&#7885;n l&#7921;a ch&#250;ng t&#7915; &#273;&#226;y.',
 'info_installer_tous_documents' => 'C&#224;i &#273;&#7863;t t&#7845;t c&#7843; t&#224;i li&#7879;u',
 'info_interface_complete' => 'Xem t&#7845;t c&#7843;',
 'info_interface_simple' => 'Xem &#273;&#417;n gi&#7843;n',
@@ -464,7 +467,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_retirer_mot' => 'X&#243;a t&#7915; then ch&#7889;t n&#224;y',
 'info_retirer_mots' => 'X&#243;a h&#7871;t t&#7845;t c&#7843; t&#7915; then ch&#7889;t',
 'info_sans_titre_2' => 'kh&#244;ng t&#7921;a &#273;&#7873;',
-'info_selectionner_fichier' => 'B&#7841;n c&#243; th&#7875; ch&#7885;n m&#7897;t h&#7891; tr&#417; trong ng&#259;n @upload@',
+'info_selectionner_fichier' => '<MODIF>B&#7841;n c&#243; th&#7875; ch&#7885;n m&#7897;t h&#7891; tr&#417; trong ng&#259;n @upload@',
 'info_selectionner_fichier_2' => 'Ch&#7885;n m&#7897;t h&#7891; s&#417;:',
 'info_site_attente' => 'Ch&#7901; ch&#7845;p thu&#7853;n website',
 'info_site_reference' => 'Website n&#7889;i k&#7871;t online',
@@ -588,7 +591,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'pass_espace_prive_bla' => 'Kh&aacute;ch th&#259;m vi&#7871;ng ch&#7881; v&agrave;o &#273;&#432;&#7907;c v&ugrave;ng ri&ecirc;ng sau khi ghi danh. Ghi danh r&#7891;i, b&#7841;n c&oacute; th&#7875; xem c&aacute;c b&agrave;i v&#7903; &#273;ang so&#7841;n, n&#7897;p b&agrave;i v&agrave;o v&agrave; tham gia v&agrave;o c&aacute;c di&#7877;n &#273;&agrave;n.',
 'pass_forum_bla' => 'Di&#7877;n &#273;&agrave;n b&#7841;n mu&#7889;n v&agrave;o ch&#7881; d&agrave;nh ri&ecirc;ng cho c&aacute;c v&#7883; kh&aacute;ch c&oacute; ghi danh.',
 'pass_indiquez_cidessous' => '&#272;&aacute;nh v&agrave;o &#273;&#7883;a ch&#7881; email m&agrave; b&#7841;n &#273;&atilde; d&ugrave;ng ghi danh tr&#432;&#7899;c &#273;&acirc;y. Sau &#273;&oacute;, b&#7841;n s&#7869; nh&#7853;n qua email chi ti&#7871;t ch&#7881; d&#7851;n c&aacute;ch t&igrave;m l&#7841;i ph&eacute;p ra/v&ocirc;.',
-'pass_mail_passcookie' => '(&#273;&acirc;y l&agrave; th&#432; t&iacute;n t&#7921; &#273;&#7897;ng)
+'pass_mail_passcookie' => '<MODIF>(&#273;&acirc;y l&agrave; th&#432; t&iacute;n t&#7921; &#273;&#7897;ng)
 
 &#272;&#7875; t&igrave;m l&#7841;i c&aacute;ch ra/v&ocirc; webiste 
 @nom_site_spip@ (@adresse_site@)
@@ -614,6 +617,9 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 
 
 // S
+'squelette' => '<NEW>squelette',
+'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
+'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ l&#7847;n vi&#7871;ng; m&#7913;c ph&#7893; th&ocirc;ng: @popularite@',
 'suivant' => 'k&#7871; ti&#7871;p',
 
@@ -633,9 +639,9 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'texte_inc_auth_2' => 'n&#7889;i l&#7841;i',
 'texte_inc_auth_3' => 'b&#7857;ng c&#225;ch ra kh&#7887;i v&#224; kh&#7903;i &#273;&#7897;ng l&#7841;i browser, n&#7871;u c&#7847;n thi&#7871;t.',
 'texte_inc_config' => 'Nh&#7919;ng s&#7917;a &#273;&#7893;i d&#432;&#7899;i &#273;&acirc;y t&aacute;c &#273;&#7897;ng &#273;&#7871;n s&#7921; v&#7853;n h&agrave;nh c&#7911;a website. Khuy&#7871;n c&aacute;o b&#7841;n kh&ocirc;ng n&ecirc;n &#273;&#7909;ng v&ocirc; tr&#7915; phi b&#7841;n n&#7855;m v&#7919;ng s&#7921; v&#7853;n h&agrave;nh c&#7911;a h&#7879; th&#7889;ng SPIP. <P align="justify"><B>T&#7889;t h&#417;n h&#7871;t, b&#7841;n n&ecirc;n &#273;&#7875; cho ng&#432;&#7901;i webmaster ch&iacute;nh lo c&aacute;c vi&#7879;c n&agrave;y.</B>',
-'texte_inc_meta_1' => 'C&oacute; v&#7845;n &#273;&#7873; khi vi&#7871;t h&#7891; s&#417; <code>@fichier@</code>.L&agrave; qu&#7843;n l&yacute; vi&ecirc;n c&#7911;a website, xin b&#7841;n ',
+'texte_inc_meta_1' => '<MODIF>C&oacute; v&#7845;n &#273;&#7873; khi vi&#7871;t h&#7891; s&#417; <code>@fichier@</code>.L&agrave; qu&#7843;n l&yacute; vi&ecirc;n c&#7911;a website, xin b&#7841;n ',
 'texte_inc_meta_2' => 'ki&#7875;m l&#7841;i quy&#7873;n h&#7841;n vi&#7871;t',
-'texte_inc_meta_3' => 'c&#7911;a ng&#259;n <code>@repertoire@</code>.',
+'texte_inc_meta_3' => '<MODIF>c&#7911;a ng&#259;n <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => '&#273;ang vi&#7871;t/so&#7841;n',
 'texte_statut_poubelle' => 'v&ocirc; th&ugrave;ng r&aacute;c',
 'texte_statut_propose_evaluation' => '&#273;&#432;&#7907;c &#273;&#7873; ngh&#7883;',
