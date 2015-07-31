@@ -106,6 +106,8 @@ EOF;
 	debut_boite_info();
 	echo _T('info_gauche_admin_tech');
 	fin_boite_info();
+	/*echo "<a href='#' onclick=\"$('input.selection').attr('checked','checked');\">"._L("tout_activer")."</a><br/>";
+	echo "<a href='#' onclick=\"$('input.selection').attr('checked','');\">"._L("tout_desactiver")."</a><br/>";*/
 
 	debut_droite();
 
@@ -286,7 +288,7 @@ function ligne_plug($plug_file, $actif, $id){
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
-		$s .= " onclick='verifchange.apply(this,[\"$plug_file\"])' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		$s .= " onclick='verifchange.apply(this,[\"$plug_file\"])' class='selection' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 
