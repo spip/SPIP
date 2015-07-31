@@ -56,18 +56,19 @@ function changer_statut_forum($id_forum, $statut) {
 }
 
 // Installer un bouton de moderation (securise) dans l'espace prive
-function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect='') {
+function controle_cache_forum($action, $id, $texte, $fond, $fonction, $but='') {
 	$link = new Link();
-
+  
 	$link->addvar('controle_forum', $action);
 	$link->addvar('id_controle_forum', $id);
 	$link->addvar('hash', calculer_action_auteur("$action$id"));
+	$link = $link->geturl() . "#id$id";
 
-	if ($redirect)
-		$link->addvar('redirect', $redirect);
+	if ($but)
+	  $link = $but . "&retour= ecrire/" . urlencode($link);
 
 	return icone($texte,
-		$link->geturl() . "#id$id",
+		     $link,
 		$fond,
 		$fonction,
 		"right",
@@ -157,9 +158,6 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			"creer.gif");
 
 	if ($valider_repondre) {
-		$link = new Link();
-		$redirect = "../forum.php3?$ref&id_forum=$id_forum&retour=ecrire/"
-			.urlencode($link->getUrl());
 
 		$controle .= controle_cache_forum($valider,
 			$id_forum,
@@ -167,7 +165,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			_T('lien_repondre_message'),
 			$logo,
 			"creer.gif",
-			$redirect
+			"../forum.php3?$ref&id_forum=$id_forum"
 		);
 	}
 
