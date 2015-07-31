@@ -41,6 +41,7 @@ function exec_export_all_dist()
 	}
 }
 
+// http://doc.spip.org/@exec_export_all_args
 function exec_export_all_args($rub, $meta)
 {
 	include_spip('inc/actions');
