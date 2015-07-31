@@ -100,7 +100,7 @@ function afficher_titre_objet($type,$row){
 function afficher_titre_site($row){
 	$syndication = $row['syndication'];
 	$s = "";
-	$s .= $row['nom_site']?typo($row['nom_site']):"("._T('info_sans_titre_2').")";
+	$s .= $row['nom_site']?(strlen($row['nom_site'])>1?typo($row['nom_site']):""._T('info_sans_titre_2').""):"("._T('info_sans_titre_2').")";
 	$s2 = "&nbsp;&nbsp; <span class='spip_xx-small'>[<a href='"
 	.$row['url_site']."'>"._T('lien_visite_site')."</a>]</span>";
 
