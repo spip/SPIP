@@ -83,7 +83,7 @@ function formulaire_signature($id_article) {
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result=spip_query($query);
 				if (mysql_num_rows($result)>0){
-					$texte .= erreur("Vous avez déjà signé ce texte.");
+					$texte .= erreur("Vous avez d&eacute;j&agrave; sign&eacute; ce texte.");
 					$refus = "oui";
 				}
 			}
@@ -93,23 +93,23 @@ function formulaire_signature($id_article) {
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
 				$result=spip_query($query);
 				if (mysql_num_rows($result)>0){
-					$texte .= erreur("Ce site est déjà enregistré");
+					$texte .= erreur("Ce site est d&eacute;j&agrave; enregistr&eacute;");
 					$refus = "oui";
 				}
 			}
 
 			if ($refus=="oui") {
-				$texte .= erreur("Vous êtes déjà inscrit.");
+				$texte .= erreur("Vous &ecirc;tes d&eacute;j&agrave; inscrit.");
 			}
 			else {
 				$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
 				$result = spip_query($query);
 			
-				$texte .= erreur("Votre signature est validée. Elle apparaîtra lors de la prochaine mise à jour du site. Merci!");
+				$texte .= erreur("Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!");
 				$texte .= erreur("Your signature is now registered. Thank you!");
 			}
 		}else{
-			$texte .= erreur("Aucune signature ne correspond à ce code...");
+			$texte .= erreur("Aucune signature ne correspond &agrave; ce code...");
 		}
 		echo "<div class='reponse_formulaire'>$texte</div>";
 	}
@@ -142,7 +142,7 @@ function formulaire_signature($id_article) {
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result = spip_query($query);
 				if (mysql_num_rows($result) > 0) {
-					$reponse_signature .= erreur("Vous avez déjà signé ce texte.");
+					$reponse_signature .= erreur("Vous avez d&eacute;j&agrave; sign&eacute; ce texte.");
 					$refus = "oui";
 				}
 			}
@@ -160,7 +160,7 @@ function formulaire_signature($id_article) {
 				include_local ("ecrire/inc_sites.php3");
 
 				if (!recuperer_page($url_site)) {
-					$reponse_signature .= erreur("L'URL que vous avez indiquée n'est pas valide.");
+					$reponse_signature .= erreur("L'URL que vous avez indiqu&eacute;e n'est pas valide.");
 					$refus = "oui";
 				}
 			}
@@ -169,7 +169,7 @@ function formulaire_signature($id_article) {
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')";
 				$result = spip_query($query);
 				if (mysql_num_rows($result) > 0) {
-					$reponse_signature .= erreur("Ce site est déjà enregistré");
+					$reponse_signature .= erreur("Ce site est d&eacute;j&agrave; enregistr&eacute;");
 					$refus = "oui";
 				}
 			}
@@ -190,12 +190,12 @@ function formulaire_signature($id_article) {
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 
-				$messagex = "Bonjour,\n\nVous avez demandé à signer la pétition :\n";
+				$messagex = "Bonjour,\n\nVous avez demand&eacute; &agrave; signer la p&eacute;tition :\n";
 				$messagex .= "  (Hi, you have asked to sign the following petition:)\n";
 				$messagex .= "    $titre.\n\nVous avez fourni les informations suivantes :\n";
 				$messagex .= "  (You have given this information:)\n    Nom: $nom_email\n";
 				$messagex .= "    Site: $nom_site - $url_site\n\nIMPORTANT...\n";
-				$messagex .= "Pour valider votre signature, il suffit de vous connecter à\n";
+				$messagex .= "Pour valider votre signature, il suffit de vous connecter &agrave;\n";
 				$messagex .= "l'adresse ci-dessous ; dans le cas contraire, votre demande\n";
 				$messagex .= "sera rejetée :\n";
 				$messagex .= "  (To confirm your signature, please follow this link, or\n";
@@ -205,7 +205,7 @@ function formulaire_signature($id_article) {
 				include_local ("ecrire/inc_mail.php3");
 				envoyer_mail($adresse_email, "Veuillez confirmer votre signature : ".$titre, $messagex);
 
-				$reponse_signature.="<P><B>Un courrier électronique de confirmation vient de vous être envoyé. Vous devrez visiter l'adresse Web mentionnée dans ce courrier pour valider votre signature.</B>";
+				$reponse_signature.="<P><B>Un courrier &eacute;lectronique de confirmation vient de vous &ecirc;tre envoy&eacute;. Vous devrez visiter l'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.</B>";
 				$reponse_signature.="<P>(A confirmation email has just been sent to you. It contains a link to a Web address you will have to visit in order to confirm your signature.)";
 
 				$nom_email = addslashes($nom_email);
