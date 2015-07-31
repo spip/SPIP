@@ -20,11 +20,10 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
   global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
 
 	$i = 0;
-	
 	if (strlen($explicite)) {
 	// Recherche d'un champ dans un etage superieur
 	  while (($idb != $explicite) && ($idb !='')) {
-#		spip_log("Cherchexpl: $nom_champ '$idb' '$i'");
+#		spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
 		}
