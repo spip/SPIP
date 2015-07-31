@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'access_interface_graphique' => 'Retour &agrave; l\'interface graphique compl&egrave;te',
+'access_mode_texte' => 'Afficher l\'interface textuelle simplifi&eacute;e',
 'admin_modifier_article' => 'Modifier cet article',
 'admin_modifier_auteur' => 'Modifier cet auteur',
 'admin_modifier_breve' => 'Modifier cette br&egrave;ve',
