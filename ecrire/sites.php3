@@ -427,10 +427,12 @@ if ($syndication == "oui" OR $syndication == "off") {
 	afficher_syndic_articles("Articles syndiqu&eacute;s tir&eacute;s de ce site",
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
 
+
+	echo "<font face='verdana,arial,helvetica' size=2>";
 	// afficher la date de dernier acces a la syndication
 	if ($date_syndic)
-		echo "<br><div align='right'><font size=2>La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le ".affdate($date_syndic)
-		." &agrave; ".heures($date_syndic)."h".minutes($date_syndic)."'".secondes($date_syndic)."\".<br><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>Mettre &agrave; jour maintenant</a>.</div>\n";
+		echo "<p><div align='left'>La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le ".affdate($date_syndic)
+		." &agrave; ".heures($date_syndic)."h ".minutes($date_syndic)."min.</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>Mettre &agrave; jour maintenant</a></div>\n";
 
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {
@@ -440,19 +442,19 @@ if ($syndication == "oui" OR $syndication == "off") {
 			$moderation = $mod;
 
 		if ($moderation == 'non' || $moderation =='')
-			echo "<br><div align='right'><font size=2>Les prochains liens en
-				provenance de ce site ne seront a priori pas
-				bloqu&eacute;s.<br> <a
+			echo "<p><div align='left'>Les prochains liens en
+				provenance de ce site seront affich&eacute;s imm&eacute;diatement sur le site public.". aide('artsyn') .
+				"</div><div align='right'><a
 				href='sites.php3?id_syndic=$id_syndic&moderation=oui'>Demander
-				un blocage a priori</a></font>" . aide('artsyn') .
-				"</div>\n";
+				un blocage a priori</a></div>\n";
 		else if ($moderation == 'oui')
-			echo "<br><div align='right'><font size=2>Les prochains liens en
-				provenance de ce site seront a priori bloqu&eacute;s. <a
+			echo "<p><div align='left'>Les prochains liens en
+				provenance de ce site seront bloqu&eacute;s a priori.</div>". aide('artsyn') .
+				"<div align='right'> <a
 				href='sites.php3?id_syndic=$id_syndic&moderation=non'>Annuler
-				ce blocage a priori</a></font>" . aide('artsyn') .
-				"</div>\n";
+				ce blocage a priori</a></div>\n";
 	}
+	echo "</font>";
 }
 
 fin_cadre_relief();
