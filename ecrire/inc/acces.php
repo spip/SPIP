@@ -10,9 +10,24 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des nombres aléatoires et de certains accès au site
+ *
+ * @package SPIP\Core\Authentification
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@creer_pass_aleatoire
+/**
+ * Créer un mot de passe 
+ *
+ * @param int $longueur
+ *     Longueur du password créé
+ * @param string $sel
+ *     Clé pour un salage supplémentaire
+ * @return string
+ *     Mot de passe
+**/
 function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	$seed = (double) (microtime() + 1) * time();
 	mt_srand($seed);
@@ -42,11 +57,9 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 }
 
 /**
- * Creer un identifiant aleatoire
+ * Créer un identifiant aléatoire
  *
- * http://doc.spip.org/@creer_uniqid
- *
- * @return string
+ * @return string Identifiant 
  */
 function creer_uniqid() {
 	static $seeded;
@@ -63,11 +76,10 @@ function creer_uniqid() {
 	return uniqid($s, 1);
 }
 
-//
-// Renouvellement de l'alea utilise pour securiser les scripts dans action/
-//
 
-// http://doc.spip.org/@renouvelle_alea
+/**
+ * Renouveller l'alea (utilisé pour sécuriser les scripts du répertoire `action/`)
+**/
 function renouvelle_alea() {
 	if (!isset($GLOBALS['meta']['alea_ephemere'])){
 		include_spip('base/abstract_sql');
@@ -80,11 +92,22 @@ function renouvelle_alea() {
 	spip_log("renouvellement de l'alea_ephemere");
 }
 
-//
-// low-security : un ensemble de fonctions pour gerer de l'identification
-// faible via les URLs (suivi RSS, iCal...)
-//
-// http://doc.spip.org/@low_sec
+
+/**
+ * Retourne une clé de sécurité faible (low_sec) pour l'auteur indiqué
+ *
+ * low-security est un ensemble de fonctions pour gérer de l'identification
+ * faible via les URLs (suivi RSS, iCal...)
+ *
+ * Retourne la clé de sécurité low_sec de l'auteur (la génère si elle n'exite pas)
+ * ou la clé de sécurité low_sec du site (si auteur invalide)(la génère si elle
+ * n'existe pas).
+ * 
+ * @param int $id_auteur
+ *     Identifiant de l'auteur 
+ * @return string
+ *     Clé de sécurité.
+**/
 function low_sec($id_auteur) {
 	// Pas d'id_auteur : low_sec
 	if (!$id_auteur = intval($id_auteur)) {
@@ -126,17 +149,46 @@ function param_low_sec($op, $args=array(), $lang='', $mime='rss')
 	  . (!$lang ? '' : "&lang=$lang");
 }
 
-// http://doc.spip.org/@afficher_low_sec
+/**
+ * Retourne une clé basée sur le low_sec de l'auteur et l'action demandé
+ *
+ * @uses low_sec()
+ * 
+ * @param int $id_auteur
+ *     Identifiant de l'auteur
+ * @param string $action
+ *     Action désirée
+ * @return string
+ *     Clé
+**/
 function afficher_low_sec ($id_auteur, $action='') {
 	return substr(md5($action.low_sec($id_auteur)),0,8);
 }
 
-// http://doc.spip.org/@verifier_low_sec
+/**
+ * Vérifie une clé basée sur le low_sec de l'auteur et l'action demandé
+ *
+ * @uses afficher_low_sec()
+ * 
+ * @param int $id_auteur
+ *     Identifiant de l'auteur
+ * @param string $cle
+ *     Clé à comparer
+ * @param string $action
+ *     Action désirée
+ * @return bool
+ *     true si les clés corresponde, false sinon
+**/
 function verifier_low_sec ($id_auteur, $cle, $action='') {
 	return ($cle == afficher_low_sec($id_auteur, $action));
 }
 
-// http://doc.spip.org/@effacer_low_sec
+/**
+ * Efface la clé de sécurité faible (low_sec) d'un auteur
+ *
+ * @param int $id_auteur
+ *     Identifiant de l'auteur
+**/
 function effacer_low_sec($id_auteur) {
 	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
 	sql_updateq("spip_auteurs", array("low_sec" => ''), "id_auteur = $id_auteur");
@@ -149,10 +201,19 @@ function initialiser_sel() {
 	else return "";
 }
 
-// Cette fonction ne sert qu'a la connexion en mode http_auth.non LDAP
-// Son role est de creer le fichier htpasswd
-// Voir le plugin "acces restreint"
-// http://doc.spip.org/@ecrire_acces
+/**
+ * Créer un fichier htpasswd
+ *
+ * Cette fonction ne sert qu'à la connexion en mode http_auth.non LDAP.
+ * Voir le plugin «Accès Restreint»
+ *
+ * S'appuie sur la meta `creer_htpasswd` pour savoir s'il faut créer
+ * le `.htpasswd`.
+ * 
+ * @return null|void
+ *     - null si pas de htpasswd à créer, ou si LDAP
+ *     - void sinon.
+**/
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
@@ -160,8 +221,9 @@ function ecrire_acces() {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint ;
 	// si .htaccess existe, outrepasser spip_meta
-	if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
-	AND !@file_exists($htaccess)) {
+	if ((!isset($GLOBALS['meta']['creer_htpasswd'])
+	  OR ($GLOBALS['meta']['creer_htpasswd'] != 'oui'))
+	  AND !@file_exists($htaccess)) {
 		spip_unlink($htpasswd);
 		spip_unlink($htpasswd."-admin");
 		return;
