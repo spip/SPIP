@@ -446,8 +446,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 	$texte = "\n";
 
 	if ($num_rows > $nb_aff) {
-		$tmp_var = $query;
-		$deb_aff = intval(getTmpVar($tmp_var));
+		$tmp_var = 't_'.substr(md5($query), 0, 4);
+		$deb_aff = intval($GLOBALS[$tmp_var]);
 		$ancre++;
 
 		$texte .= "<a name='a$ancre'></a>";
@@ -463,8 +463,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 			}
 			else {
 				$link = new Link;
-				$link->addTmpVar($tmp_var, strval($deb - 1));
-				$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">$deb</A>";
+				$link->addVar($tmp_var, strval($deb - 1));
+				$texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
 			}
 		}
 		if ($spip_display != 4) {
@@ -478,7 +478,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 			$texte .= "<B>"._T('info_tout_afficher')."</B>";
 		} else {
 			$link = new Link;
-			$link->addTmpVar($tmp_var, -1);
+			$link->addVar($tmp_var, -1);
 			$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
 		}
 
@@ -2071,23 +2071,15 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = "oui";
-	global $clean_link;
 
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-
-	// nettoyer le lien global
-	$clean_link->delVar('var_lang');
-	$clean_link->delVar('set_options');
-	$clean_link->delVar('set_couleur');
-	$clean_link->delVar('set_disp');
-	$clean_link->delVar('set_ecran');
 
 	if (strlen($adresse_site)<10) $adresse_site="../";
 
 	debut_html($titre, $rubrique, $onLoad);
 
-	$link = $clean_link;
+	$link = new Link;
 	echo "\n<map name='map_layout'>";
 	echo lien_change_var ($link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo lien_change_var ($link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
@@ -2358,11 +2350,11 @@ else {
 			// Choix display
 		//	echo"<img src='img_pack/rien.gif' width='10' />";
 			if ($options != "avancees") {
-				$lien = $clean_link;
+				$lien = new Link;
 				$lien->addVar('set_options', 'avancees');
 				$simple = "<b>"._T('icone_interface_simple')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
 			} else {
-				$lien = $clean_link;
+				$lien = new Link;
 				$lien->addVar('set_options', 'basiques');
 				$simple = "<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
 			}
@@ -2374,7 +2366,7 @@ else {
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
 			// grand ecran
-			$lien = $clean_link;
+			$lien = new Link;
 			if ($spip_ecran == "large") {
 				$lien->addVar('set_ecran', 'etroit');
 				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_petit_ecran')."\"><img src='img_pack/set-ecran-etroit.png' alt=\""._T('info_petit_ecran')."\" width='26' height='20' border='0'></a>";
@@ -2388,7 +2380,7 @@ else {
 
 			// Choix de la couleur: automatique en fonction de $couleurs_spip
 
-			$link = $clean_link;
+			$link = new Link;
 			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
 			ksort($couleurs_spip);
 			while (list($key,$val) = each($couleurs_spip)) {
@@ -2950,7 +2942,7 @@ function creer_colonne_droite($rubrique=""){
 
 function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
-	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques, $clean_link;
+	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
 	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
 	global $lang_left;
 
@@ -2988,7 +2980,7 @@ function debut_droite($rubrique="") {
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$nb_liberer ++;
-						$lien = $clean_link;
+						$lien = new Link;
 						$lien->addVar('debloquer_article', $ze_article);
 						echo "<div class='arial1' style='text-align:right;'><a href='". $lien->getUrl() ."' title='"._T('lien_liberer')."'>"._T('lien_liberer')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a></div>";
 					}
@@ -2996,7 +2988,7 @@ function debut_droite($rubrique="") {
 					echo "</div>";
 				}
 				if ($nb_liberer >= 4) {
-					$lien = $clean_link;
+					$lien = new Link;
 					$lien->addVar('debloquer_article', 'tous');
 					echo "<div class='arial2' style='text-align:right; padding:2px; border-top: 1px solid $couleur_foncee;'><a href='". $lien->getUrl() ."'>"._T('lien_liberer_tous')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='' width='7' height='7' border='0' align='middle'></a></div>";
 				}

@@ -12,7 +12,7 @@ function fichier_admin($action) {
 }
 
 function debut_admin($action, $commentaire='') {
-	global $this_link;
+	global $clean_link;
 	global $connect_statut;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
@@ -34,7 +34,7 @@ function debut_admin($action, $commentaire='') {
 		echo "<p>".propre($commentaire)."</p>";
 	}
 
-	echo $this_link->getForm('POST');
+	echo $clean_link->getForm('POST');
 	echo "<P><B>"._T('info_authentification_ftp')."</B>";
 	echo aide("ftp_auth");
 	echo "<P>"._T('info_creer_repertoire');

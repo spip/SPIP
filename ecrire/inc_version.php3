@@ -507,8 +507,6 @@ class Link {
 	var $file;
 	var $vars;
 	var $arrays;
-	var $s_vars;
-	var $t_vars, $t_var_idx, $t_var_cnt;
 
 	//
 	// Contructeur : a appeler soit avec l'URL du lien a creer,
@@ -517,23 +515,17 @@ class Link {
 	function Link($url = '', $reentrant = false) {
 		static $link = '';
 
-		// If root link not defined, create it
+/*		// If root link not defined, create it
 		if (!$link && !$reentrant) {
 			$link = new Link('', true);
 		}
+*/
 
 		$this->vars = array();
-		$this->s_vars = array();
-		$this->t_vars = array();
-		$this->t_var_idx = array();
-		$this->t_var_cnt = 0;
+		$this->arrays = array();
 
 		// Normal case
 		if ($link) {
-			$this->s_vars = $link->s_vars;
-			$this->t_vars = $link->t_vars;
-			$this->t_var_idx = $link->t_var_idx;
-			$this->t_var_cnt = $link->t_var_cnt;
 			if ($url) {
 				$v = split('[\?\&]', $url);
 				list(, $this->file) = each($v);
@@ -557,45 +549,41 @@ class Link {
 			return;
 		}
 
-		// Special case : create root link
-
-		// If no URL specified, take current one
+		// Si aucun URL n'est specifie, creer le lien "propre"
+		// ou l'on supprime de l'URL courant les bidules inutiles
 		if (!$url) {
+			// GET variables are read from the original URL
+			// (HTTP_GET_VARS may contain additional variables
+			// introduced by rewrite-rules)
 			$url = $GLOBALS['REQUEST_URI'];
 			$url = substr($url, strrpos($url, '/') + 1);
 			if (!$url) $url = "./";
-			if (count($GLOBALS['HTTP_POST_VARS'])) $vars = $GLOBALS['HTTP_POST_VARS'];
+			if (count($GLOBALS['HTTP_POST_VARS']))
+				$vars = $GLOBALS['HTTP_POST_VARS'];
 		}
 		$v = split('[\?\&]', $url);
 		list(, $this->file) = each($v);
 
-		// GET variables are read from the original URL
-		// (HTTP_GET_VARS may contain additional variables introduced by rewrite-rules)
 		if (!$vars) {
-			while (list(, $var) = each($v)) {
+			while (list(,$var) = each($v)) {
 				list($name, $value) = split('=', $var, 2);
 				$name = urldecode($name);
 				$value = urldecode($value);
-				if (ereg('^(.*)\[\]$', $name, $regs)) {
+				if (ereg('^(.*)\[\]$', $name, $regs))
 					$vars[$regs[1]][] = $value;
-				}
-				else {
+				else
 					$vars[$name] = $value;
-				}
 			}
 		}
 
 		if (is_array($vars)) {
-			reset($vars);
-			while (list($name, $value) = each($vars)) {
-				$p = substr($name, 0, 2);
-				if ($p == 's_') {
-					$this->s_vars[$name] = $value;
-				}
-				else if ($p == 't_') {
-					$this->_addTmpHash($name, $value);
-				}
-				else {
+			foreach ($vars as $name => $value) {
+				// items supprimes
+				if (!preg_match('/^('.
+				($GLOBALS['flag_ecrire'] ?
+					'lang|set_options|set_couleur|set_disp|set_ecran':
+					'submit|recalcul')
+				. ')$/i', $name)) {
 					if (is_array($value))
 						$this->arrays[$name] = $value;
 					else
@@ -605,30 +593,9 @@ class Link {
 		}
 	}
 
-	function _addTmpHash($name, $value) {
-		if ($i = $this->t_var_idx[$name]) {
-			$this->t_vars[--$i] = $value;
-		}
-		else {
-			$this->t_vars[$this->t_var_cnt] = $value;
-			$this->t_var_idx[$name] = ++$this->t_var_cnt;
-			if ($this->t_var_cnt >= 5) $this->t_var_cnt = 0;
-		}
-	}
-
-	//
-	// Effacer toutes les variables
-	//
-
-	function clearVars() {
-		$this->vars = '';
-		$this->arrays = '';
-	}
-
 	//
 	// Effacer une variable
 	//
-
 	function delVar($name) {
 		if($this->vars[$name]) unset($this->vars[$name]);
 		if($this->arrays[$name]) unset($this->arrays[$name]);
@@ -638,7 +605,6 @@ class Link {
 	// Ajouter une variable
 	// (si aucune valeur n'est specifiee, prend la valeur globale actuelle)
 	//
-
 	function addVar($name, $value = '__global__') {
 		if ($value == '__global__') $value = $GLOBALS[$name];
 		if (is_array($value))
@@ -647,82 +613,22 @@ class Link {
 			$this->vars[$name] = $value;
 	}
 
-	function getVar($name) {
-		return $this->vars[$name];
-	}
-
-	//
-	// Ajouter une variable de session
-	// (variable dont la valeur est transmise d'un lien a l'autre)
-	//
-
-	function addSessionVar($name, $value) {
-		$this->addVar('s_'.$name, $value);
-	}
-
-	function getSessionVar($name) {
-		return $this->vars['s_'.$name];
-	}
-
-	//
-	// Ajouter une variable temporaire
-	// (variable dont le nom est arbitrairement long, et dont la valeur
-	// est transmise de lien en lien dans la limite de cinq variables)
-	//
-
-	function addTmpVar($name, $value) {
-		$this->_addTmpHash('t_'.substr(md5($name), 0, 4), $value);
-	}
-
-	function getTmpVar($name) {
-		if ($i = $this->t_var_idx['t_'.substr(md5($name), 0, 4)]) {
-			return $this->t_vars[--$i];
-		}
-	}
-
-	function getAllVars() {
-		if (is_array($this->t_var_idx)) {
-			reset($this->t_var_idx);
-			while (list($name, $i) = each($this->t_var_idx)) $vars[$name] = $this->t_vars[--$i];
-		}
-		if (is_array($this->vars)) {
-			reset($this->vars);
-			while (list($name, $value) = each($this->vars)) $vars[$name] = $value;
-		}
-		if (is_array($this->s_vars)) {
-			reset($this->s_vars);
-			while (list($name, $value) = each($this->s_vars)) $vars[$name] = $value;
-		}
-		return $vars;
-	}
-
 	//
 	// Recuperer l'URL correspondant au lien
 	//
-
 	function getUrl($anchor = '') {
 		$url = $this->file;
 		if (!$url) $url = './';
 		$query = '';
-		$vars = $this->getAllVars();
-		if (is_array($vars)) {
-			$first = true;
-			reset($vars);
-			while (list($name, $value) = each($vars)) {
-				$query .= (($query) ? '&' : '?').$name.'='.urlencode($value);
-			}
-		}
-		if (is_array($this->arrays)) {
-			reset($this->arrays);
-			while (list($name, $table) = each($this->arrays)) {
-				reset($table);
-				while (list(, $value) = each($table)) {
-					$query .= (($query) ? '&' : '?').$name.'[]='.urlencode($value);
-				}
-			}
-		}
+		foreach($this->vars as $name => $value)
+			$query .= '&'.$name.'='.urlencode($value);
+
+		foreach ($this->arrays as $name => $table)
+		foreach ($table as $value)
+			$query .= '&'.$name.'[]='.urlencode($value);
+
 		if ($anchor) $anchor = '#'.$anchor;
-		return $url.$query.$anchor;
+		return $url.'?'.substr($query, 1).$anchor;
 	}
 
 	//
@@ -735,88 +641,26 @@ class Link {
 		$form = "<form method='$method' action='".$this->file.$anchor."'";
 		if ($enctype) $form .= " enctype='$enctype'";
 		$form .= " style='border: 0px; margin: 0px;'>\n";
-		$vars = $this->getAllVars();
-		if (is_array($vars)) {
-			reset($vars);
-			while (list($name, $value) = each($vars)) {
-				$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-				$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\" />\n";
-			}
+		foreach ($this->vars as $name => $value) {
+			$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
+			$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\" />\n";
 		}
-		if (is_array($this->arrays)) {
-			reset($this->arrays);
-			while (list($name, $table) = each($this->vars)) {
-				reset($table);
-				while (list(, $value) = each($table)) {
-					$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"$value\" />\n";
-				}
-			}
+		foreach ($this->arrays as $name => $table)
+		foreach ($table as $value) {
+			$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
+			$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"".$value."\" />\n";
 		}
+
 		return $form;
 	}
-
-	//
-	// Recuperer l'attribut href="<URL>" correspondant au lien
-	//
-
-	function getHref($anchor = '') {
-		return 'href="'.$this->getUrl($anchor).'"';
-	}
-}
-
-//
-// Creer un lien et retourner directement le href="<URL>" correspondant
-//
-
-function newLinkHref($url) {
-	$link = new Link($url);
-	return $link->getHref();
-}
-
-function newLinkUrl($url) {
-	$link = new Link($url);
-	return $link->getUrl();
-}
-
-//
-// Recuperer la valeur d'une variable de session sur la page courante
-//
-
-function getSessionVar($name) {
-	return $GLOBALS['this_link']->getSessionVar($name);
-}
-
-//
-// Recuperer la valeur d'une variable temporaire sur la page courante
-//
-
-function getTmpVar($name) {
-	return $GLOBALS['this_link']->getTmpVar($name);
 }
 
 
 // Lien vers la page demandee et lien nettoye ne contenant que des id_objet
-
-$this_link = new Link();
-
-$clean_link = $this_link;
-$clean_link->delVar('submit');
-$clean_link->delVar('recalcul');
-if (count($GLOBALS['HTTP_POST_VARS'])) {
-	$clean_link->clearVars();
-	$vars = array('id_article', 'coll', 'id_breve', 'id_rubrique', 'id_syndic', 'id_mot', 'id_auteur', 'var_login'); // il en manque probablement ?
-	while (list(,$var) = each($vars)) {
-		if (isset($$var)) {
-			$clean_link->addVar($var, $$var);
-			break;
-		}
-	}
-}
+$clean_link = new Link();
 
 
 // URLs avec passage & -> &amp;
-
 function quote_amp ($url) {
 	$url = str_replace("&amp;", "&", $url);
 	$url = str_replace("&", "&amp;", $url);

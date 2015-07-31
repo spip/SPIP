@@ -506,7 +506,7 @@ function verifier_lang_url() {
 	if (!($HTTP_GET_VARS['lang']<>'' AND $lang_demandee == $HTTP_GET_VARS['lang'])
 	AND !($HTTP_GET_VARS['lang']=='' AND $lang_demandee == lire_meta('langue_site')))
 	{
-		$destination = $clean_link;
+		$destination = new Link;
 		$destination->addvar('lang', $lang_demandee);
 		if ($GLOBALS['recalcul'] == 'oui')
 			$destination->addvar('recalcul', 'oui');

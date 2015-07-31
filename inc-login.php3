@@ -77,7 +77,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 	if (!$cible) {
 		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
 		else if ($prive) $cible = new Link('ecrire/');
-		else $cible = $clean_link;
+		else $cible = new Link;
 	}
 
 	$cible->delVar('var_erreur');
