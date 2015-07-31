@@ -491,7 +491,7 @@ function autoriser_modifierurl_dist($faire, $quoi, $id, $qui, $opt) {
 }
 
 function autoriser_rubrique_previsualiser_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser('previsualier');
+	return autoriser('previsualiser');
 }
 
 // http://doc.spip.org/@autoriser_rubrique_iconifier_dist
