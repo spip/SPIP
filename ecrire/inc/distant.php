@@ -155,15 +155,21 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
 // date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
 // uri_referer, preciser un referer different
-// si munge_charset est une chaine, alors c'est un nom de fichier
-// dans lequel on ecrit directement la page
+// Le second argument ($trans) :
+// * si c'est une chaine longue, alors c'est un nom de fichier
+//   dans lequel on ecrit directement la page
+// * si c'est true/null ca correspond a une demande d'encodage/charset
 // http://doc.spip.org/@recuperer_page
-function recuperer_page($url, $munge_charset=false, $get_headers=false,
+function recuperer_page($url, $trans=false, $get_headers=false,
 	$taille_max = null, $datas='', $boundary='', $refuser_gz = false,
 	$date_verif = '', $uri_referer = '') {
 	$gz = false;
+
+	// $copy = copier le fichier ?
+	$copy = (is_string($trans) AND strlen($trans) > 5); // eviter "false" :-)
+
 	if (is_null($taille_max))
-		$taille_max = is_string($munge_charset)?_COPIE_LOCALE_MAX_SIZE:1048576;
+		$taille_max = $copy ? _COPIE_LOCALE_MAX_SIZE : 1048576;
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -182,7 +188,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 	// dix tentatives maximum en cas d'entetes 301...
 	for ($i=0;$i<10;$i++) {
-		$url = recuperer_lapage($url, $munge_charset, $get, $taille_max, $datas, $boundary, $refuser_gz, $date_verif, $uri_referer);
+		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $boundary, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
 		if (is_array($url)) {
 			list($headers, $result) = $url;
@@ -198,11 +204,14 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 // http://doc.spip.org/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
-	// si on ecrit directement dans un fichier, 
-	// pour ne pas manipuler en memoire
-	// refuser gz
-	if (is_string($trans) AND $trans)
+	// $copy = copier le fichier ?
+	$copy = (is_string($trans) AND strlen($trans) > 5); // eviter "false" :-)
+
+	// si on ecrit directement dans un fichier, pour ne pas manipuler
+	// en memoire refuser gz
+	if ($copy)
 		$refuser_gz = true;
+
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
 	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas);
 	if (!$f) {
@@ -231,7 +240,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 #	spip_log("recup  $headers" );
 	if ($trans === NULL) return array($headers, '');
-	$result = recuperer_body($f, $taille_max,is_string($trans)?$trans:'');
+	$result = recuperer_body($f, $taille_max, $copy ? $trans : '');
 	fclose($f);
 	if (!$result) return array($headers, $result);
 
@@ -240,7 +249,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$result = spip_gzinflate_body($result);
 	}
 	// Faut-il l'importer dans notre charset local ?
-	if ($trans===true) {
+	if ($trans === true) {
 		include_spip('inc/charsets');
 		$result = transcoder_page ($result, $headers);
 	}
@@ -558,16 +567,14 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	else {
 		$scheme = $t['scheme']; $noproxy = $scheme.'://';
 	}
-	if (isset($t['user'])) {
-		$scheme_fsock .= $t['user'];
-		if (isset($t['pass'])) $scheme_fsock .= ':'.$t['pass'];
-		$scheme_fsock .= '@';
-	}
+	if (isset($t['user']))
+		$user = array($t['user'], $t['pass']);
+
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 	if ($t['query']) $path .= "?" .$t['query'];
 
-	$f = lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
+	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
 	if (!$f) {
 	  // fallback : fopen
 		if (!$GLOBALS['tester_proxy']) {
@@ -581,12 +588,14 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 }
 
 // http://doc.spip.org/@lance_requete
-function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
+function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
 	$http_proxy = need_proxy($host);
 
 	if ($http_proxy) {
-		$path = "$scheme://$host" . (($port != 80) ? ":$port" : "") . $path;
+		$path = "$scheme://"
+			. (!$user ? '' : urlencode($user[0]).":".urlencode($user[1])."@")
+			. "$host" . (($port != 80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
 		$proxy_user = $t2['user'];
 		$proxy_pass = $t2['pass'];
@@ -606,6 +615,8 @@ function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_
 	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
 	. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
 	. (!$site ? '' : "Referer: $site/$referer\r\n")
+	. (!$user ? '' : "Authorization: Basic "
+	     . base64_encode(urlencode($user[0]).":".urlencode($user[1])) ."\r\n")
 	. (!$proxy_user ? '' :
 	    ("Proxy-Authorization: Basic "
 	     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
