@@ -150,7 +150,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 		$alea_futur = creer_uniqid();
 		$pass = md5($alea_actuel.$new_pass);
 		$query_pass = " pass='$pass', htpass='$htpass', alea_actuel='$alea_actuel', alea_futur='$alea_futur', ";
-		effacer_low_sec($connect_id_auteur);
+		effacer_low_sec($auteur['id_auteur']);
 	} else
 		$query_pass = '';
 
