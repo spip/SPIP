@@ -223,7 +223,7 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 
 	$id = $nom . $boucle;
 	foreach($debug_objets['sequence'][$id] as $v) {
-	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/', $v[2],$r))
+	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[2],$r))
 	    $y = substr_count($v[2], "\n");
 	  else {
 	    if ($v[1][0] == '#')
@@ -231,12 +231,11 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	      $incl = $debug_objets['resultat'][$v[0]];
 	    else
 	      // inclusion
-	      $incl = $debug_objets['squelette'][trouve_squelette_inclus($v[1])];
+	      $incl = $debug_objets['squelette'][trouve_squelette_inclus($v[2])];
 	    $y = substr_count($incl, "\n")
 	      + substr_count($r[1], "\n") 
 	      + substr_count($r[3], "\n");
 	  }
-
 	  if ($n <= ($y + $debut)) {
 	    if ($v[1][0] == '?')
 	      return trouve_boucle_debug($n, $nom, $debut, substr($v[1],1));
@@ -254,9 +253,17 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 function trouve_squelette_inclus($script)
 {
   global $debug_objets;
-  // on suppose que X.php appelle le squelette X.html (a revoir)
-  ereg('^.(.*).php?3', $script, $reg);
+  preg_match('/include\(.(.*).php3?.\);/', $script, $reg);
+  // si le script X.php n'est pas ecrire/public.php
+  // on suppose qu'il prend le squelette X.html (pas sur, mais y a pas mieux)
+  if ($reg[1] == 'ecrire/public')
+    // si c'est bien ecrire/public on cherche le param 'fond'
+    if (!preg_match("/'fond' => '([^']*)'/", $script, $reg))
+      // a defaut on cherche le param 'page'
+      if (!preg_match("/'param' => '([^']*)'/", $script, $reg))
+	$reg[1] = "inconnu";
   $incl = $reg[1] . '.html$';
+
   foreach($debug_objets['sourcefile'] as $k => $v) {
     if (ereg($incl,$v)) return $k;
   }
