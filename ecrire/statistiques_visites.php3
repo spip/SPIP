@@ -505,7 +505,8 @@ if (!$origine) {
 			
 		}
 				
-		
+				
+		$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
