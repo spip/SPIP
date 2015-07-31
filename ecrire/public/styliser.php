@@ -68,12 +68,29 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 		$flux = $styliser_par_z($flux);
 	}
 
+	$flux = styliser_par_objets($flux);
+
 	// pipeline styliser
 	$squelette = pipeline('styliser', $flux);
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
 }
 
+function styliser_par_objets($flux){
+	if (test_espace_prive()
+		AND !$squelette = $flux['data']
+	  AND strncmp($flux['args']['fond'],'prive/objets/',13)==0
+	  AND $echaffauder = charger_fonction('echaffauder','prive',true)) {
+		if (strncmp($flux['args']['fond'],'prive/objets/liste/',19)==0){
+			$table = table_objet(substr($flux['args']['fond'],19));
+			$table_sql = table_objet_sql($table);
+			$objets = lister_tables_objets_sql();
+			if (isset($objets[$table_sql]))
+				$flux['data'] = $echaffauder($table,$table,$table_sql,"prive/objets/liste/objets",$flux['args']['ext']);
+		}
+	}
+	return $flux;
+}
 
 /**
  * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :

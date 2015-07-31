@@ -1,0 +1,35 @@
+#SET{picto,#ENV{objet}|objet_icone{16}}
+[(#SET{req,[select [(#ENV{objet}|id_table_objet)] as id from (#ENV{objet}|table_objet_sql) order by [(#ENV{objet}|id_table_objet)] desc]})]
+<B_objets>
+#ANCRE_PAGINATION
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})]">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{objet}|objet_info{info_1_objet},#ENV{objet}|objet_info{info_nb_objets}}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto'></th>
+			<th class='titre principale'><:info_titre:></th>
+			<th class='id'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_objets(DATA){source sql,#GET{req}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{picto}</td>
+			<td class='titre principale'><a
+							href="[(#VALEUR{id}|generer_url_entite{#ENV{objet}})]"
+							title="<:info_numero_abbreviation|attribut_html:> #VALEUR{id}">[(#RANG). ][(#INFO_TITRE{#ENV{objet},#VALEUR{id}}|sinon{<:info_sans_titre:>})]</a>
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,#ENV{objet},#VALEUR{id}}|?{
+				[<a href="[(#VALEUR{id}|generer_url_ecrire_entite_edit{#ENV{objet}})]">(#VALEUR{id})</a>],
+				[(#VALEUR{id})]
+			})]</td>
+		</tr>
+	</BOUCLE_objets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_objets>[
+<div class="liste-objets [(#ENV{objet}|objet_info{table_objet})]"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_objets>
