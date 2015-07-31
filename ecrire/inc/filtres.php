@@ -4317,8 +4317,11 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
  * 		$fichier auquel on a ajouté le timestamp 
  */
 function timestamp($fichier){
-	if (!$fichier OR !file_exists($fichier)) return $fichier;
-	$m = filemtime($fichier);
+	if (!$fichier
+		OR !file_exists($fichier)
+		OR !$m = filemtime($fichier)) {
+		return $fichier;
+	}
 	return "$fichier?$m";
 }
 
