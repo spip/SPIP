@@ -764,8 +764,8 @@ function maj_base() {
 		$result = mysql_query($query);
 	}
 
-	if ($version_installee < 1.415) {
-		mysql_query("ALTER TABLE spip_documents ADD inclus VARCHAR(3) DEFAULT 'non'");
+	if ($version_installee == 1.415) {
+		mysql_query("ALTER TABLE spip_documents DROP inclus");
 	}	
 
 	//
