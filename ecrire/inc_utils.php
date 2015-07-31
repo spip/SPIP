@@ -804,11 +804,11 @@ function spip_register_globals() {
 			if (isset($GLOBALS[$var])) {
 				if (
 				// demande par le client
-				isset ($_REQUEST[$var])
+				_request($var) !== NULL
 				// et pas modifie par les fichiers d'appel
-				AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
+				AND $GLOBALS[$var] == _request($var)
 				) // Alors on ne sait pas si c'est un hack
-					die ("$var interdite");
+					die ("register_globals: $var interdite");
 			}
 		}
 		foreach ($refuse_c as $var) {
@@ -1021,12 +1021,15 @@ function spip_initialisation() {
 // par le visiteur (sinon, pas de cache)
 //
 function tester_variable($var, $val){
-	if (!isset($GLOBALS[$var])) {
+	if (!isset($GLOBALS[$var]))
 		$GLOBALS[$var] = $val;
-		return false;
-	}
-	if (isset($_REQUEST[$var]) AND $_REQUEST[$var] == $GLOBALS[$var])
-		die ("$var interdite");
+
+	if (
+		_request($var) !== NULL
+		// et pas modifie par les fichiers d'appel
+		AND $GLOBALS[$var] == _request($var)
+	)
+		die ("tester_variable: $var interdite");
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
