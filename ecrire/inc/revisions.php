@@ -577,7 +577,7 @@ function propre_diff($texte) {
 	}
 	// quand le dernier tag est ouvrant le refermer ...
 	$reg = end($regs);
-	if (!$reg[1]) $texte.="</$reg[2]>";
+	if (!$reg[1] AND $reg[2]) $texte.="</$reg[2]>";
 
 	return $texte;
 }

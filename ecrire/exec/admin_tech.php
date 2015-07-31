@@ -81,11 +81,10 @@ function exec_admin_tech_dist()
 
 	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech');
 
-	$res .= "\n<p><label for='id_parent'>" .
+	$res .= "\n<label for='id_parent'>" .
 		  _L("Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ") .
-		  "</label>" .
-		  $form
-		  . "</p>";
+		  "</label><br /><br />" .
+		  $form . '<br />';
 
 	$file = nom_fichier_dump();
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
@@ -93,9 +92,9 @@ function exec_admin_tech_dist()
 	
 	if ($flag_gz) {
 	
-	$res .= "\n<p>" .
+	$res .= 
 	  _T('texte_admin_tech_03') .
-	  "</p>\n<ul>" .
+	  "\n<ul>" .
 	  "\n<li style='list-style:none;'><input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
 	  _T('bouton_radio_sauvegarde_compressee', array('fichier'=>'')) .
 	  " </label><br />\n" .
@@ -202,8 +201,6 @@ function exec_admin_tech_dist()
 				fin_cadre_trait_couleur(true);
 		}
 	}
-
-	echo fin_cadre_relief(true);
 
 	echo "<br />";
 

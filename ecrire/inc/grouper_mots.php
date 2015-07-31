@@ -116,9 +116,9 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 		$clic =  '<small>'
 		._T('info_supprimer_mot')
-		. "&nbsp;<img src='"
+		. "&nbsp;<img style='vertical-align: bottom;' src='"
 		. _DIR_IMG_PACK
-		. "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' />"
+		. "croix-rouge.gif' alt='X' width='7' height='7' />"
 		. '</small>';
 
 		if ($nr OR $na OR $ns OR $nb)
