@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_chercher' => 'Procurar',
 	'bouton_choisir' => 'Escolher',
 	'bouton_deplacer' => 'Deslocar',
-	'bouton_download' => 'Baixar', # MODIF
+	'bouton_download' => 'Baixar',
 	'bouton_enregistrer' => 'Gravar',
 	'bouton_radio_desactiver_messagerie_interne' => 'Desativar o sistema interno de mensagens',
 	'bouton_radio_envoi_annonces' => 'Enviar os avisos editoriais',
@@ -110,8 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ - @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'dia @jour@ de @heure_debut@ a @heure_fin@', # MODIF
-	'date_fmt_jour_heure_debut_fin_abbr' => 'dia @dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtstart@@heure_fin@@dtend@', # MODIF
+	'date_fmt_jour_heure_debut_fin' => 'dia @jour@ de @heure_debut@ a @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => 'dia @dtstart@@jour@ de @heure_debut@@dtabbr@ a @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jour@ de @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
@@ -652,6 +652,7 @@ Tente se',
 	'titre_statistiques' => 'Estatísticas do site',
 	'titre_titre_document' => 'Título do documento:',
 	'todo' => 'breve',
+	'trad_definir_reference' => 'Escolher "@titre@" como referência das traduções',
 	'trad_reference' => '(matéria das traduções)',
 
 	// Z
@@ -665,6 +666,7 @@ Tente se',
 	'zbug_champ_hors_motif' => 'Campo @champ@ fora de um contexto @motif@',
 	'zbug_code' => 'código',
 	'zbug_critere_inconnu' => 'Critério @critere@ desconhecido',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} em uma tabela sem chave primária atômica',
 	'zbug_distant_interdit' => 'Externa interdita',
 	'zbug_doublon_table_sans_cle_primaire' => 'Duplicação em tabela sem chave primária atômica',
 	'zbug_doublon_table_sans_index' => 'Doublons em uma tabela sem index',
