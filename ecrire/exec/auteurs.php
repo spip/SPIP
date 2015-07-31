@@ -65,10 +65,10 @@ function affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs)
   global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
 
-if ($tri=='nom' OR $tri=='statut')
-	$partri = " "._T('info_par_tri', array('tri' => $tri));
-else if ($tri=='nombre')
-	$partri = " "._T('info_par_nombre_article');
+if ($tri=='nom') $s = _T('info_par_nom');
+if ($tri=='statut') $s = _T('info_par_statut');
+if ($tri=='nombre') $s = _T('info_par_nombre_articles');
+$partri = ' ('._T('info_par_nombre_article').')';
 
 if ($visiteurs == "oui") {
 	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
