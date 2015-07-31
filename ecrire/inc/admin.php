@@ -53,7 +53,7 @@ function debut_admin($script, $action, $commentaire='') {
 					'valeur' => ''
 				),
 				'bouton' => array(
-					'label' => _T('info_creer_repertoire_2', array('repertoire' => '')).bouton_suivant(_T('bouton_recharger_page')),
+					'label' => _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir))) .bouton_suivant(_T('bouton_recharger_page')),
 					'valeur' => 'bouton',
 					'hidden' => true
 				)
@@ -89,7 +89,6 @@ function copy_request($script)
 		  entites_html($c) .
 		  "'  />";
 	}
-	spip_log($hidden);
 	return $hidden;
 }
 ?>
