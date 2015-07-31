@@ -2279,13 +2279,6 @@ function couleur_extreme ($couleur, $limite=0.5) {
 
 	$hsl = couleur_rgb2hsl ($red, $green, $blue);
 
-	$h = $hsl["h"];
-	$s = $hsl["s"];
-	$l = $hsl["l"];
-	
-	$rvb = couleur_hsl2rgb($h, $s, $l);
-	print_r($rvb);
-
 	if ($hsl["l"] > $limite) $couleur_texte = "ffffff";
 	else $couleur_texte = "000000";
 
