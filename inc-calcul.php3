@@ -26,6 +26,7 @@ include_ecrire("inc_documents.php3");
 include_ecrire("inc_abstract_sql.php3");
 include_ecrire("inc_forum.php3");
 include_ecrire("inc_debug_sql.php3");
+include_ecrire("inc_distant.php");
 include_local("inc-calcul-outils.php3");
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)

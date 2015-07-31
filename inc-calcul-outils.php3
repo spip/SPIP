@@ -299,7 +299,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 		// Pas de vignette, mais un fichier image -- creer la vignette
 		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
-		  include_ecrire('inc_distant.php');
 		  if ($img = copie_locale($fichier)
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {
