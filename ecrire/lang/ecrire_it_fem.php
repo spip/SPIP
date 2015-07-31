@@ -540,7 +540,7 @@ il database alla nuova versione di SPIP.',
 'info_question_activer_compactage_js' => 'Si desidera attivare la compressione degli script (javascript)?',
 'info_question_activer_compresseur' => 'Si desidera attivare la compressione del flusso HTTP?',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuove redattrici
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accettate le iscrizioni di nuove redattrici
 direttamente  dal sito pubblico? In questo caso, chi visita il sito potr&agrave; iscriversi
 grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,

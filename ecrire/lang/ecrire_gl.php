@@ -551,7 +551,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Quere activar a compactaci&oacute;n de scripts (javascript) ?',
 'info_question_activer_compresseur' => 'Quere activar a compactaci&oacute;n do fluxo  HTTP ?',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Aceptar&aacute; as inscrici&oacute;ns de novos redactores
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aceptar&aacute; as inscrici&oacute;ns de novos redactores
   dende o web p&uacute;blico? De aceptalos, os visitantes poderanse rexistrar cun
   formulario automatizado e acceder&aacute;n ao espazo privado para
   propor os seus propios artigos.<blockquote> <i>Trala fase de inscrici&oacute;n,

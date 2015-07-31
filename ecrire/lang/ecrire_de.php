@@ -514,7 +514,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_question_activer_compactage_js' => 'M&ouml;chten Sie die Javascripte komprimieren ?',
 'info_question_activer_compresseur' => 'M&ouml;chten sie die HTTP-&Uuml;bertragung komprimieren?',
 'info_question_gerer_statistiques' => 'Soll SPIP Besucherstatistiken anlegen?',
-'info_question_inscription_nouveaux_redacteurs' => 'M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich
  aus anmelden k&ouml;nnen?&nbsp; Wenn Sie das erm&ouml;glichen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
  <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch

@@ -535,7 +535,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_question_activer_compactage_js' => 'Vill du aktivera komprimering av  Javascript filer?',
 'info_question_activer_compresseur' => 'Vill du aktivera komprimering av HTTP trafiken?',
 'info_question_gerer_statistiques' => 'Skall din sajt hantera bes&ouml;ksstatistik?',
-'info_question_inscription_nouveaux_redacteurs' => '<NEW>Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
   partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
   depuis un formulaire automatis&eacute; et acc&eacute;deront alors &agrave; l\'espace priv&eacute; pour
   proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,

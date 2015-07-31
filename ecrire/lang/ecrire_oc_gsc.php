@@ -459,7 +459,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_publies' => 'Los v&ograve;stes articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas deu v&ograve;ste sit web e\'s preved lo registrament de vesitaires shens acc&egrave;s a l\'espaci privat, volhatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'E deu gerir, lo v&ograve;ste sit, las estadisticas de las vesitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que redactors nav&egrave;ths e s\'inscr&iacute;vian
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptatz que redactors nav&egrave;ths e s\'inscr&iacute;vian
  a partir deu sit public? S\'ac acceptatz, los vesitaires que\'s poir&agrave;n inscr&iacute;ver
  merc&eacute;s a un formulari automatizat e alavetz qu\'accedir&agrave;n a l\'espaci privat ent&agrave;
  perpausar articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires que receben un e-mail automatic

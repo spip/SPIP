@@ -547,7 +547,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.',
 'info_question_activer_compactage_js' => '&iquest;Quies activar la compautaci&oacute;n de los scripts (JavaScript)?',
 'info_question_activer_compresseur' => '&iquest;Quies activar la compresi&oacute;n del tr&aacute;ficu HTTP?',
 'info_question_gerer_statistiques' => '&iquest;El sitiu tien que xestionar les estad&iacute;stiques de les visites?',
-'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceutes les inscripciones de nuevos redactores dende\'l
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>&iquest;Aceutes les inscripciones de nuevos redactores dende\'l
   sitiu p&uacute;blicu? Si aceptes, los visitantes podr&aacute;n inscribise
   dende un formulariu automatiz&aacute;u y tendr&aacute;n accesu a l\'espaciu priv&aacute;u pa
   proponer art&iacute;culos propios. <blockquote><i>Tres de la fase d\'inscripci&oacute;n,

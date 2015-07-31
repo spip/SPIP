@@ -553,7 +553,7 @@ requiring an FTP access to the Web site.',
 'info_question_activer_compactage_js' => 'Do you wish to activate compression for Javascript files?',
 'info_question_activer_compresseur' => 'Do you wish to activate compression for the HTTP data?',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
-'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow the new editors to register
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Do you wish to allow the new editors to register
  from the public site? If you agree to this, visitors will be able to  register
   using an automatic form, and then access the private area to
   tender their own articles. <blockquote><i>During the registration process,

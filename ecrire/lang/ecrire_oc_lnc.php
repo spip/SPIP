@@ -496,7 +496,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_publies' => 'Los v&ograve;stres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, volgatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, las estadisticas de las vesitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;ls s\'inscrigan
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptatz que de redactors nov&egrave;ls s\'inscrigan
  a partir del sit public? Se o acceptatz, los vesitaires se poir&agrave;n inscriure
  merc&eacute;s a un formulari automatizat e alara accedir&agrave;n a l\'espaci privat per
  prepausar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires recebon un e-mail automatic
