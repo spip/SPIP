@@ -146,7 +146,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 
 	list($fid, $dir, $nom, $format) = $img;
 	include_spip('inc/filtres_images');
-	$res = image_reduire("<img src='$fid' alt='' />", $width, $height);
+	$res = image_reduire("<img src='$fid' alt='' class='miniature_logo' />", $width, $height);
 
 	if ($res)
 	    $res = "<div><a href='" .	$fid . "'>$res</a></div>";
