@@ -7,8 +7,10 @@
 
 <div class='cadre-formulaire-editer'>
 	<div class="entete-formulaire">
+		[(#ID_AUTEUR|oui)
 		[(#GET{retour}|icone_verticale{<:icone_retour:>,auteur,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
-		[<:info_modifier_auteur:>
+		]
+		[[(#ID_AUTEUR|?{<:info_modifier_auteur:>,<:titre_ajouter_un_auteur:>})]
 		<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
 	</div>
 
