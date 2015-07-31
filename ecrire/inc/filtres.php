@@ -204,7 +204,7 @@ $GLOBALS['spip_matrice']['image_graver'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_select'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_reduire_par'] = 'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_imgs_mini.php';
+$GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_images_mini.php';
 
 $GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
@@ -826,9 +826,15 @@ function date_relative($date, $decalage_maxi=0) {
 		$il_y_a = "date_il_y_a";
 	}
 	
-	if ($decal < 3600) {
-		$minutes = ceil($decal / 60);
-		$retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
+	if ($decal < 60) {
+		$secondes = ceil($decal);	
+		if ($secondes < 2) $retour = _T($il_y_a, array("delai"=>"$secondes "._T("date_une_seconde"))); 
+		else $retour = _T($il_y_a, array("delai"=>"$secondes "._T("date_secondes"))); 
+	}
+	else if ($decal < 3600) {
+		$minutes = floor($decal / 60);
+		if ($minutes < 2) $retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_une_minute"))); 
+		else $retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
 	}
 	else if ($decal < (3600 * 24) ) {
 		$heures = floor ($decal / 3600);
