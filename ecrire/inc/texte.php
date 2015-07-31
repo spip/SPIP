@@ -121,7 +121,7 @@ function traiter_echap_html_dist($regs) {
 // Echapper les <code>...</ code>
 // http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
-	$echap = entites_html($regs[3]);
+	$echap = htmlspecialchars($regs[3]); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code ! 
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {
@@ -223,7 +223,7 @@ $preg='') {
 // par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
 // ou encore dans typo()
 // http://doc.spip.org/@echappe_retour
-function echappe_retour($letexte, $source='') {
+function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
 		if (preg_match_all(
@@ -231,6 +231,7 @@ function echappe_retour($letexte, $source='') {
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
+				if ($filtre) $rempl = $filtre($rempl);
 				$letexte = str_replace($reg[0], $rempl, $letexte);
 			}
 		}
