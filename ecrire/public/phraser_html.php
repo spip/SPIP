@@ -32,7 +32,8 @@ define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S'
 
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 define('BALISE_POLYGLOTTE',',<multi>(.*)</multi>,Uims');
-define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]+)({([^\|=>]*=[^\|>]*)})?((\|[^>]*)?:>),iS');
+define('BALISE_IDIOMES',',<:(([a-z0-9_]+):)?([a-z0-9_]*)({([^\|=>]*=[^\|>]*)})?((\|[^>]*)?:>),iS');
+define('BALISE_IDIOMES_ARGS', '@^\s*([^= ]*)\s*=\s*((' . NOM_DE_CHAMP . '[{][^}]*})?[^,]*)\s*,?\s*@s');
 
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_\/][A-Z_\/0-9.]*)' . SQL_ARGS . '?`?');
@@ -112,30 +113,33 @@ function phraser_polyglotte($texte,$ligne, $result) {
 }
 
 
+// Reperer les balises de traduction
+// <:module:chaine{arg1=texte1,arg2=#BALISE}|filtre1{texte2,#BALISE}|filtre2:>
+// chaine peut etre vide si =texte1 est present et arg1 est vide
+// sinon ce n'est pas un idiome
 // http://doc.spip.org/@phraser_idiomes
 function phraser_idiomes($texte,$ligne,$result) {
-
-	// Reperer les balises de traduction <:module:chaine{argument1=texte,argument2=#BALISE}|filtre1{texte,#BALISE}|filtre2:>
 	while (preg_match(BALISE_IDIOMES, $texte, $match)) {
 		$p = strpos($texte, $match[0]);
-		$debut = substr($texte, 0, $p);
-		if ($p) $result = phraser_champs($debut, $ligne, $result);
+		$ko = (!$match[3] && ($match[5][0]!=='='));
+		$debut = substr($texte, 0, $p + ($ko ? strlen($match[0]) : 0));
+		if ($debut) $result = phraser_champs($debut, $ligne, $result);
+		$texte = substr($texte,$p+strlen($match[0]));
+		$ligne += substr_count($debut, "\n");
+		if ($ko) continue; // faux idiome
 		$champ = new Idiome;
-		$ligne += substr_count($debut, "\n");	
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
-		$texte = substr($texte,$p+strlen($match[0]));
 		// Stocker les arguments de la balise de traduction
-		$args=array();
-		$vals=preg_split('/,\s*/',$match[5]);
-		foreach ($vals as $val) {
-			$arg=preg_split('/\s*=/',$val);
-			if ($arg[0])
-			  $args[$arg[0]]=phraser_champs($arg[1], 0, array());	
+		$args = array();
+		$largs = $match[5];
+		while (preg_match(BALISE_IDIOMES_ARGS, $largs, $r)) {
+			$args[$r[1]] = phraser_champs($r[2], 0, array());
+			$largs = substr($largs, strlen($r[0]));	
 		}
-		$champ->arg=$args;
+		$champ->arg = $args;
 		$champ->nom_champ = strtolower($match[3]);
-		$champ->module = $match[2] ? $match[2] : MODULES_IDIOMES;
+		$champ->module = $match[2];
 		// pas d'imbrication pour les filtres sur langue
 		phraser_args(@$match[7], ":", '', array(), $champ);
 		$result[] = $champ;
