@@ -6,6 +6,9 @@ if (defined("_INC_ADMIN")) return;
 define("_INC_ADMIN", "1");
 
 
+$debug_messages = '';
+
+
 //
 // Afficher un bouton admin
 //
@@ -15,6 +18,8 @@ function bouton_admin($titre, $lien) {
 
 
 function boutons_admin_debug($forcer_debug = false) {
+	global $debug_messages;
+
 	if (($forcer_debug OR $GLOBALS['bouton_admin_debug']
 	OR $GLOBALS['var_afficher_debug'])
 	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
@@ -30,7 +35,9 @@ function boutons_admin_debug($forcer_debug = false) {
 		$link->addvar('recalcul', 'oui');
 		$ret .= bouton_admin(_L('Debug skel'), $link->getUrl());
 	}
-	
+
+	$ret .= $debug_messages;
+
 	return $ret;
 }
 
@@ -248,7 +255,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 	AND !$GLOBALS['afficher_erreurs'])
 		return "<br />\n<b>"._T('info_erreur_squelette')."</b><br />\n";
 	else
-		return "<div style='position: fixed; top: 10px; left: 10px;
+		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
 		z-index: 10000; background-color: pink;'>$retour</div>";
 }
 
@@ -257,10 +264,12 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 // Erreur au parsing des squelettes : afficher le code fautif
 //
 function erreur_squelette($message, $fautif, $lieu) {
-	global $auteur_session;
+	global $auteur_session, $debug_messages;
 
 	// Drapeau pour interdire d'ecrire les fichiers dans le cache
-	define('spip_erreur_fatale', 'erreur_squelette');
+	# define('spip_erreur_fatale', 'erreur_squelette');
+	# En fait, a partir du moment ou l'erreur est dans le squelette,
+	# ca ne change rien et autant cacher quand meme !
 
 	spip_log("Erreur squelette: $message | $fautif $lieu ("
 	.$GLOBALS['fond'].".html)");
@@ -277,7 +286,7 @@ function erreur_squelette($message, $fautif, $lieu) {
 			. entites_html($fautif) . '</FONT>)';
 		$message .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
 
-		echo "<div style='position: fixed; top: 10px; left: 10px;
+		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
 		z-index: 10000; background-color: pink;'>$message</div>";
 	}
 }
