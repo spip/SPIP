@@ -31,9 +31,9 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['icon']))
 		$ret['logo'] = trim(spip_xml_aplatit($arbre['icon']));
 	if (isset($arbre['auteur']))
-		$ret['auteur'] = $arbre['auteur']; // garder le 1er niveau en tableau
+		$ret['auteur'][] = trim(spip_xml_aplatit($arbre['auteur'])); // garder le 1er niveau en tableau mais traiter le multi possible
 	if (isset($arbre['licence']))
-		$ret['licence'] = spip_xml_aplatit($arbre['licence']);
+		$ret['licence'] = trim(spip_xml_aplatit($arbre['licence']));
 	if (isset($arbre['version']))
 		$ret['version'] = trim(spip_xml_aplatit($arbre['version']));
 	if (isset($arbre['version_base']))
@@ -43,9 +43,9 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 
 	$ret['description'] = $ret['slogan'] = "";
 	if (isset($arbre['slogan']))
-		$ret['slogan'] = spip_xml_aplatit($arbre['slogan']);
+		$ret['slogan'] = trim(spip_xml_aplatit($arbre['slogan']));
 	if (isset($arbre['description'])){
-		$ret['description'] = spip_xml_aplatit($arbre['description']);
+		$ret['description'] = trim(spip_xml_aplatit($arbre['description']));
 	}
 
 	if (isset($arbre['lien'])){
