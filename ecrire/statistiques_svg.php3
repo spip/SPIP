@@ -11,11 +11,11 @@ if ($connect_statut != '0minirezo') {
 
 
 header("Content-type: image/svg+xml");
-echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
+echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 
 ?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
-"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+        "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 <svg width="450" height="310" x="0" y="0">
 
 
@@ -29,16 +29,16 @@ stop-opacity:1"/>
 </defs>
 <?php
 	echo "<defs>\n";
-	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">\n';
-	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>\n';
-	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>\n';
-	echo '</linearGradient>\n';
-	echo '</defs>\n';
+	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">';
+	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>';
+	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>';
+	echo "</linearGradient>\n";
+	echo "</defs>\n";
 	
-	echo "<style type='text/css'>";
+	echo "<style type='text/css'>\n";
 	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
 	echo ".trait {stroke:black;stroke-width:1;}\n";
-	echo "</style>";
+	echo "</style>\n";
 
 
 
