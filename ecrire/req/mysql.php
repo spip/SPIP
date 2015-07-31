@@ -305,7 +305,7 @@ function traite_query($query, $db='', $prefixe='') {
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
-	var_dump($r);
+
 	#spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe", _LOG_DEBUG);
 	return $r;
 }
