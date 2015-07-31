@@ -212,23 +212,24 @@ function recuperer_parametres_url(&$fond, $url) {
 	$id_objet = 0;
 
 	// Migration depuis anciennes URLs ?
-	if ($_SERVER['REQUEST_METHOD'] != 'POST' AND
-	(preg_match(
-	',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
-	.'([?&].*)?$,', $url, $regs)
-	)) {
-		$type = $regs[3];
-		$id_objet = intval($GLOBALS[$id_table_objet = id_table_objet($type)]);
-	}
+	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+		if (preg_match(
+		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)'
+		.'([?&].*)?$,', $url, $regs)
+		) {
+			$type = $regs[3];
+			$id_table_objet = id_table_objet($type);
+			$id_objet = intval($GLOBALS[$id_table_objet]);
+		}
 
-	/* Compatibilite urls-page */
-	else if (preg_match(
-	',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
-	$url, $regs)) {
-		$type = $regs[1];
-		$id_objet = $regs[2];
+		/* Compatibilite urls-page */
+		else if (preg_match(
+		',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
+		$url, $regs)) {
+			$type = $regs[1];
+			$id_objet = $regs[2];
+		}
 	}
-
 	if ($id_objet) {
 		$func = "generer_url_$type";
 		$url_propre = $func($id_objet);

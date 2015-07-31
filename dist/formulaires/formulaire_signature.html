@@ -28,12 +28,18 @@
 	<input type="text" class="forml" name="signature_url_site" id="signature_url_site" style="text-align: left;" dir="ltr" value="http://" size="20" /></p>
 </fieldset>
 
+	[(#REM) Piege a robots spammeurs ]
+	<p style='display:none;'><label for="nobot"><:antispam_champ_vide:></label>
+	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
+
+
 [(#ENV{message})
 	<fieldset>
 		<legend><:form_pet_message_commentaire:></legend>
 		<p><label for="message"><:info_texte_message:></label>
 		<textarea class="forml" name="message" id="message" rows="3" cols="20"></textarea></p>
 	</fieldset>]
+
 
 <p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
 </form>

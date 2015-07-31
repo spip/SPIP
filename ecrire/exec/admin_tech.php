@@ -76,22 +76,29 @@ function exec_admin_tech_dist()
 		 "style='width: 48px; height: 48px; float: right;margin: 10px;'"),
    _T('texte_admin_tech_01',
      array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
+   '&nbsp;',
    _T('texte_admin_tech_02'),
   "</p>";
 
 if ($flag_gz) {
-	echo "\n<p style='text-align: justify;'>"._T('texte_admin_tech_03')."</p>\n<p>";
-	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> "._T('bouton_radio_sauvegarde_compressee',
-	array('fichier'=>'<b>'.$zfile.'</b>'))." </label><br />\n";
-	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> "._T('bouton_radio_sauvegarde_non_compressee',
-	array('fichier'=>'<b>'.$file.'</b>'))." </label><br /></p>\n";
+
+	echo "\n<p style='text-align: justify;'>", _T('texte_admin_tech_03'), "</p>\n<p>";
+	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> ",
+	  _T('bouton_radio_sauvegarde_compressee',
+	     array('fichier'=>'<b>' . str_replace('/', ' / ',$zfile) . '</b>')), " </label><br />\n";
+	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> ",
+	  _T('bouton_radio_sauvegarde_non_compressee',
+	     array('fichier'=>'<b>' . str_replace('/', ' / ',$file) . '</b>')),
+	  "</label><br /></p>\n";
 }
 else {
-	echo "\n<p style='text-align: justify;'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.$file.'</b>'));
-	echo "\n<input type='hidden' name='gz' value='0' />";
+  echo "\n<p style='text-align: justify;'>",
+    _T('texte_sauvegarde_compressee',
+       array('fichier'=>'<b>' .  str_replace('/', ' / ',$file) . '</b>'));
+  echo "\n<input type='hidden' name='gz' value='0' /></p>";
 }
 
-echo "\n<div align='right'><input class='fondo' type='submit' value='"._T('texte_sauvegarde_base')."' /></div></div></form>";
+echo "\n<div style='text-align: right'><input class='fondo' type='submit' value='", _T('texte_sauvegarde_base'), "' /></div></div></form>";
 
 echo "</td></tr>";
 echo "</table>";
@@ -114,7 +121,7 @@ echo "</table>";
 		. "' id='dump_$key' "
 		.  (($fichier==$selected)?"checked='checked' ":"")
 		. "/>\n<label for='dump_$key'>"
-		. $affiche_fichier
+		.   $file = str_replace('/', ' / ', $affiche_fichier)
 		. '&nbsp;&nbsp; ('
 		. _T('taille_octets',
 		     array('taille' => number_format(filesize($fichier), 0, ' ', ' ')))
