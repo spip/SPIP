@@ -379,7 +379,7 @@ function calculer_criteres ($idb, &$boucles) {
 
 function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	
-	global $table_date, $tables_des_serveurs_sql;
+	global $table_date, $table_des_tables;
 	global $tables_relations;
 
 	$boucle = &$boucles[$idb];
@@ -446,7 +446,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		$col_table = $ext_table . 
 		  calculer_critere_externe($boucle, $id_field, $ext_table, $type, $col);
 	// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-	elseif ($type != 'mots'
+	elseif ($type != 'mots' AND $table_des_tables[$type]
 			AND ($col == 'type_mot' OR $col == 'titre_mot'
 			OR $col == 'id_groupe')) {
 		if ($type == 'forums')
