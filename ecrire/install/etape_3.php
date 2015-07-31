@@ -87,7 +87,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 			spip_log(_DEFAULT_CHARSET . " inconnu du serveur SQL");
 			$charsetbase = 'standard';
 		}
-		spip_log("Creation des tables. Codage $charsetbase");
+		spip_log("Creation des tables $server_db de prefixe $table_prefix dans la base $sel_db, codage $charsetbase");
 		creer_base($server_db); // AT LAST
 		creer_base_types_doc($server_db);
 		// memoriser avec quel charset on l'a creee
@@ -105,12 +105,17 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 			@sql_insertq('spip_meta', $t, '', $server_db);
 		}
 		$t = array('nom' => 'version_installee',
-			   'valeur' => $spip_version_base,
-			   'impt' => 'non');
-		@sql_insertq('spip_meta', $t, '', $server_db);
-		$t['nom'] = 'nouvelle_install';
-		$t['valeur'] = 1;
-		@sql_insertq('spip_meta', $t, '', $server_db);
+				'valeur' => $spip_version_base,
+				'impt' => 'non');
+
+		if (!sql_select('valeur', 'spip_meta', "nom='version_installee'", '','','','',$server_db)) {
+			sql_insertq('spip_meta', $t, '', $server_db);
+		}
+		if (!sql_select('valeur', 'spip_meta', "nom='nouvelle_install'", '','','','',$server_db)) {
+			$t['nom'] = 'nouvelle_install';
+			$t['valeur'] = 1;
+			sql_insertq('spip_meta', $t, '', $server_db);
+		}
 		// positionner la langue par defaut du site si un cookie de lang a ete mis
 		if (isset($_COOKIE['spip_lang_ecrire'])){
 			@sql_insertq('spip_meta', array('nom'=>'langue_site','valeur'=>$_COOKIE['spip_lang_ecrire']), '', $server_db);
@@ -121,7 +126,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	  spip_log("Table des Meta deja la. Verification des autres.");
 	  creer_base($server_db); 
 
-	  $r = sql_getfetsel('valeur',  'spip_meta', "nom='version_installee'", '','','','', $server_db);
+	  $r = sql_getfetsel('valeur', 'spip_meta', "nom='version_installee'", '','','','', $server_db);
 
 	  $version_installee = !$r ? 0 : (double) $r;
 	  if (!$version_installee OR ($spip_version_base < $version_installee)) {
