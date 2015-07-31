@@ -40,13 +40,13 @@ class Auth_spip {
 		if ($this->statut == 'nouveau') { // nouvel inscrit
 			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE login='".$this->login."'");
 		}
-		if ($this->alea_futur) {
+		if ($this->md5next) {
 			include_ecrire("inc_session.php3");
 			// fait tourner le codage du pass dans la base
 			$nouvel_alea_futur = creer_uniqid();
 			$query = "UPDATE spip_auteurs SET alea_actuel = alea_futur, ".
 				"pass = '".$this->md5next."', alea_futur = '$nouvel_alea_futur' ".
-				"WHERE login='$login'";
+				"WHERE login='".$this->login."'";
 			@spip_query($query);
 		}
 	}
