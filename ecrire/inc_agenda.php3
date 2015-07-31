@@ -325,14 +325,14 @@ function afficher_taches () {
 
 	$query = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure";
 	liste_rv($query, "rv");
-	
-	if ($options == "avancees") {
-		echo debut_cadre_enfonce();
-		echo "<div class='verdana1'>"._T("calendrier_synchro")."</div>";
-		icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
-		echo fin_cadre_enfonce();
-	}
 }
 
+// afficher l'encadre "lien iCal"
+function afficher_ical() {
+	echo debut_cadre_enfonce();
+	echo "<div class='verdana1'>"._T("calendrier_synchro")."</div>";
+	icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
+	echo fin_cadre_enfonce();
+}
 
 ?>
