@@ -56,7 +56,6 @@ function sinon_interdire_acces($ok=false) {
  */
 function parametres_css_prive(){
 	global $visiteur_session;
-	global $browser_name, $browser_version;
 
 	$args = array();
 	$args['v'] = $GLOBALS['spip_version_code'];
