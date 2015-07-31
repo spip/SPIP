@@ -44,19 +44,22 @@ function exec_controle_petition_dist()
 		$r = "<b>"._T('avis_non_acces_page')."</b>";
 
 
-	if (_request('var_ajaxcharset')) ajax_retour($r);
+	if (_request('var_ajaxcharset'))
+		ajax_retour($r);
+	else {
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
-	debut_gauche();
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
+		debut_gauche();
 
-	debut_droite();
+		debut_droite();
   
-	gros_titre(_T('titre_suivi_petition'));
+		gros_titre(_T('titre_suivi_petition'));
 
-	$a = "editer_signature-" . $id_article;
+		$a = "editer_signature-" . $id_article;
 
-	echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_gauche(), fin_page();
+		echo  "<div id='", $a, "' class='serif2'>", $r, "</div>", fin_gauche(), fin_page();
+	}
 }
 
 ?>

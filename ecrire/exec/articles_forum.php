@@ -49,21 +49,23 @@ function exec_articles_forum_dist()
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 
-	if (_request('var_ajaxcharset')) ajax_retour($mess);
+	if (_request('var_ajaxcharset'))
+		ajax_retour($mess);
+	else {
 
- 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
+	 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre, "naviguer", "articles", $id_rubrique);
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($titre, "naviguer", "articles", $id_rubrique);
 
-	articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
+		articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
 
-
-	echo "<div class='serif2' id='$ancre'>";
-	echo $mess;
-	echo '</div>';
-
-	echo fin_gauche(), fin_page();
+		echo "<div class='serif2' id='$ancre'>";
+		echo $mess;
+		echo '</div>';
+		
+		echo fin_gauche(), fin_page();
+	}
 }
 
 // http://doc.spip.org/@articles_forum_cadres

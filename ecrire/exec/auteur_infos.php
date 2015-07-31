@@ -47,64 +47,62 @@ function exec_auteur_infos_dist()
 	$legender_auteur = charger_fonction('legender_auteur', 'inc');
 	$legender_auteur_r = $legender_auteur($id_auteur, $auteur, $initial, $echec, $redirect);
 
-	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur_r);
+	if (_request('var_ajaxcharset'))
+		ajax_retour($legender_auteur_r);
+	else {
 
-	if ($connect_id_auteur == $id_auteur) {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($auteur['nom'], "auteurs", "perso");
-	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
-	}
-	echo "<br /><br /><br />";
+		if ($connect_id_auteur == $id_auteur) {
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page($auteur['nom'], "auteurs", "perso");
+		} else {
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
+		}
+		echo "<br /><br /><br />";
 
-	debut_gauche();
+		debut_gauche();
 
-	echo cadre_auteur_infos($id_auteur, $auteur);
+		echo cadre_auteur_infos($id_auteur, $auteur);
 
-	echo pipeline('affiche_gauche',
-		array('args' => array(
-			'exec'=>'auteur_infos',
-			'id_auteur'=>$id_auteur),
-		'data'=>'')
-	);
+		echo pipeline('affiche_gauche',
+			      array('args' => array(
+						    'exec'=>'auteur_infos',
+						    'id_auteur'=>$id_auteur),
+				    'data'=>'')
+			      );
 
   // charger ça tout de suite pour diposer de la fonction ci-dessous
-	$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
-	$instituer_auteur_r = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
+		$instituer_auteur = charger_fonction('instituer_auteur', 'inc');
+		$instituer_auteur_r = $instituer_auteur($id_auteur, $auteur['statut'], "auteurs_edit");
 
-	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_auteur', $id_auteur, 'auteur_infos');
-	} else $icone ='';
+		if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
+			$iconifier = charger_fonction('iconifier', 'inc');
+			$icone = $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+		} else $icone ='';
 
-	creer_colonne_droite();
-	echo pipeline('affiche_droite',
-		array('args' => array(
-			'exec'=>'auteur_infos',
-			'id_auteur'=>$id_auteur),
-		'data'=>'')
-	);
+		creer_colonne_droite();
+		echo pipeline('affiche_droite',
+			      array('args' => array(
+						    'exec'=>'auteur_infos',
+						    'id_auteur'=>$id_auteur),
+				    'data'=>'')
+			      );
+		echo $icone, debut_droite();
+		echo 	  debut_cadre_relief("redacteurs-24.gif", true),
+		  $legender_auteur_r, $instituer_auteur_r;
 
-	echo $icone, 
-
-	debut_droite();
-
-	echo 
-	  debut_cadre_relief("redacteurs-24.gif", true),
-	  $legender_auteur_r, $instituer_auteur_r;
-
-	echo pipeline('affiche_milieu',
-	        array('args' => array(
-        	        'exec'=>'auteur_infos',
-                	'id_auteur'=>$id_auteur),
-		      'data'=>''));
-
-	auteurs_interventions($id_auteur, $auteur['statut']);
-
-	echo fin_cadre_relief(true),
-		fin_gauche(),
-		fin_page();
+		echo pipeline('affiche_milieu',
+			      array('args' => array(
+						    'exec'=>'auteur_infos',
+						    'id_auteur'=>$id_auteur),
+				    'data'=>''));
+		
+		auteurs_interventions($id_auteur, $auteur['statut']);
+		
+		echo fin_cadre_relief(true),
+		  fin_gauche(),
+		  fin_page();
+	}
 }
 
 // http://doc.spip.org/@cadre_auteur_infos
