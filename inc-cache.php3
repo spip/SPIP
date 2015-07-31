@@ -120,31 +120,32 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 
 // Determination du fichier cache (si besoin)
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
+
+	// Le fichier cache est-il valide ?
 	if ($delais == 0 OR !empty($GLOBALS['HTTP_POST_VARS'])) {
 		$use_cache = false;
 		$chemin_cache = '';
 	} else {
-		// Le fichier cache est-il valide ?
 		$use_cache = utiliser_cache($chemin_cache, $delais);
+	}
 
-		// Sinon, tester qu'on a la connexion a la base
-		if (!$use_cache) {
-			include_ecrire('inc_connect.php3');
-			if (!$GLOBALS['db_ok']) {
-				if (@file_exists($chemin_cache)) {
-					$use_cache = true;
+	// Sinon, tester qu'on a la connexion a la base
+	if (!$use_cache) {
+		include_ecrire('inc_connect.php3');
+		if (!$GLOBALS['db_ok']) {
+			if ($chemin_cache AND @file_exists($chemin_cache)) {
+				$use_cache = true;
+			}
+			else {
+				spip_log("Erreur base de donnees & "
+					. "impossible utiliser $chemin_cache");
+				if (!$GLOBALS['flag_preserver']) {
+					include_ecrire('inc_presentation.php3');
+					install_debut_html(_T('info_travaux_titre'));
+					echo "<p>"._T('titre_probleme_technique')."</p>\n";
+					install_fin_html();
 				}
-				else {
-					spip_log("Erreur base de donnees & "
-						. "impossible utiliser $chemin_cache");
-					if (!$GLOBALS['flag_preserver']) {
-						include_ecrire('inc_presentation.php3');
-						install_debut_html(_T('info_travaux_titre'));
-						echo "<p>"._T('titre_probleme_technique')."</p>\n";
-						install_fin_html();
-					}
-					exit;
-				}
+				exit;
 			}
 		}
 	}
