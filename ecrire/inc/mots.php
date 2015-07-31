@@ -337,7 +337,10 @@ function afficher_mots_cles($flag_editable, $id_objet, $retour, $table, $table_i
 			}
 			$vals[] = $s;
 	
-			$vals[] = $type_mot;
+			if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
+				$vals[]= "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+
+			  else	$vals[] = $type_mot;
 	
 			if ($flag_editable){
 				if ($flag_groupe)
