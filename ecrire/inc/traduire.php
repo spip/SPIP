@@ -87,7 +87,7 @@ function inc_traduire_dist($ori, $lang) {
 
 	// modules demandes explicitement <xxx/yyy/zzz:code>
 	if (strpos($ori,':')) {
-		list($modules,$code) = explode(':',$ori);
+		list($modules,$code) = explode(':',$ori,2);
 		$modules = explode('/', $modules);
 	} else {
 		$modules = array('spip', 'ecrire');
