@@ -24,7 +24,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	_T('texte_article_statut') .
 	"</b>" .
 	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
-	"onChange=\"document.statut.src='" .
+	"onchange=\"document.statut.src='" .
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
 	" setvisibility('valider_statut', 'visible');\">\n" .
@@ -36,10 +36,10 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
 	"</select>" .
 	" &nbsp; " .
-	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0' NAME='statut'") .
+	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'") .
 	"  &nbsp;\n" .
 	"<span class='visible_au_chargement' id='valider_statut'>" .
-	"<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />" .
+	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .
 	"</span>" .
 	aide("artstatut") .
 	 "</center>"

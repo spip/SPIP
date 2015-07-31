@@ -89,12 +89,12 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 			_T('info_selectionner_fichier',
 				array('upload' => '<b>' . joli_repertoire($dir_ftp) . '</b>')) .
 			":</div>" .
-			"\n<select name='source' CLASS='forml' size='1'>$afficher\n</select>" .
+			"\n<select name='source' class='forml' size='1'>$afficher\n</select>" .
 			"\n<div align='" .
 			$GLOBALS['spip_lang_right'] .
 			"'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir') .
-			"' CLASS='fondo'  style='font-size:9px' /></div>";
+			"' class='fondo'  style='font-size:9px' /></div>";
 		}
 		$afficher = "\n" .
 			_T('info_telecharger_nouveau_logo') .
@@ -121,7 +121,7 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 
 	$res = ratio_image($fid, $nom, $format, $width, $height, "alt=''");
 	if ($res)
-	    $res = "<div><a href='" .	$fid . "'>$res</a></div>";
+	    $res = "<a href='" .	$fid . "'>$res</a>";
 	else
 	    $res = "<img src='$fid' width='$width' height='$height' alt=\"" . htmlentities($titre) . '" />';
 	if ($taille = @getimagesize($fid))

@@ -329,11 +329,11 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<p>\n<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>"
+		$res .= "<br />\n<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>"
 		. "<font size='2' face='Verdana,Arial,Sans,sans-serif'>"
 		. propre($texte_case)
 		. "</font>"
-		. "</div></p>";
+		. "</div>";
 	}
 	
 	if ($statut_article == 'prop')

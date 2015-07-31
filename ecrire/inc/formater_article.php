@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
 
-function inc_formater_article($row )
+function inc_formater_article_dist($row)
 {
 	global $dir_lang, $options, $spip_lang_right, $spip_display;
 	static $pret = false;

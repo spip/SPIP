@@ -261,7 +261,7 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	. "<span class='visible_au_chargement' id='$ancre'>"
 	. "\n&nbsp; <input type='submit' value='"
 	. _T('bouton_changer')
-	. "' CLASS='fondo' style='font-size: 10px';>"
+	. "' class='fondo' style='font-size: 10px;' />"
 	. "</span>"),"&id_objet=$id_objet&objet=$objet");
 }
 
@@ -366,15 +366,15 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
-			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
 		else if ($unseul)
-			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
 		else
-			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript>";
+			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px'>";
+		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo' style='font-size:10px' />";
 		$res .= "</span>"; 
 	} else {
 
@@ -396,7 +396,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		}
 		$res .= "</select>";
 		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= "\n&nbsp;<input type='submit' value='"._T('bouton_choisir')."' CLASS='fondo' />";
+		$res .= "\n&nbsp;<input type='submit' value='"._T('bouton_choisir')."' class='fondo' />";
 		$res .= "</span>";
 	}
 
