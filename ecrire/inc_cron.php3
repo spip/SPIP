@@ -176,7 +176,7 @@ function cron_popularites($t) {
 }
 
 function cron_visites($t) {
-	calculer_visites($t);
+	calculer_visites();
 	return 1;
 }
 
