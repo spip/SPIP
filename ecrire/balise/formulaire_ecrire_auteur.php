@@ -79,16 +79,17 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 		include_spip('inc/mail');
 		envoyer_mail($mail, $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['ip']);
-		return _T('form_prop_message_envoye');
+		$mailenvoye = _T('form_prop_message_envoye');
 	}
 
 	return 
 		array('formulaire_ecrire_auteur', 0,
 			array(
 			'id' => $id,
-			'mailko' => $mailko ? ' ' : '',
+			'mailko' => $mailko ? _T('form_prop_indiquer_email') : '',
 			'mail' => $adres,
-			'sujetko' => ($texte && !$sujet) ? ' ' : '',
+			'sujetko' => ($texte && !$sujet) ? _T('form_prop_indiquer_sujet') : '',
+			'mailenvoye' => $mailenvoye,
 			'sujet' => $sujet,
 			'texte' => $texte,
 			'valide' => ($validable ? $id : ''),
