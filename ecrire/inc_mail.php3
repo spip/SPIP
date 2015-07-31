@@ -10,6 +10,8 @@ define("_ECRIRE_INC_MAIL", "1");
 //
 // Infos de mails sur l'hebergeur (tout ca est assez sale)
 //
+global $hebergeur;
+global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
 $hebergeur = '';
 
 // Lycos (ex-Multimachin)
