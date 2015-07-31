@@ -230,7 +230,7 @@ function enfant_rub($collection){
 	if ($voir_logo) {
 		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
 		$logo_f = charger_fonction('chercher_logo', 'inc');
-	}
+	} else $logo ='';
 
 	$les_enfants = "";
 
@@ -251,12 +251,12 @@ function enfant_rub($collection){
 
 		if ($voir_logo) {
 			if ($logo = $logo_f($id_rubrique, $id_rubrique, 'on'))
-				if ($logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36))
+			  if ($logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36, $logo))
 				$logo =  "<div style='$voir_logo'>$logo</div>";
 		}
 		$les_enfants .= "<div class='enfants'>" .
 			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
-			$logo .
+		  (is_string($logo) ? $logo : '') .
 		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
 		  (!acces_restreint_rubrique($id_rubrique) ? "" :
 		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
