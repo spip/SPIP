@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
-
+include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_unpack
 function install_etape_unpack_dist()
 {

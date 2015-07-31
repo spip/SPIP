@@ -64,9 +64,10 @@ function ajouter_session($auteur) {
 	}
 	$texte .= "?".">\n";
 
-	if (!ecrire_fichier($fichier_session, $texte))
+	if (!ecrire_fichier($fichier_session, $texte)) {
+		include_spip('inc/headers');
 		redirige_par_entete(generer_url_action('test_dirs','test_dir=' . _DIR_SESSIONS,true));
-	else return $spip_session;
+	} else return $spip_session;
 }
 
 //

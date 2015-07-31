@@ -270,7 +270,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 					if ($url) { // sinon les navigateurs pataugent
 						$url = texte_script(str_replace('&amp;', '&', $url));
 						return array('texte' => "<".
-						"?php redirige_par_entete('$url'); ?" . ">",
+						"?php header('Location: $url'); ?" . ">",
 						'process_ins' => 'php');
 					}
 				}

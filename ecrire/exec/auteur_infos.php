@@ -32,6 +32,7 @@ function exec_auteur_infos_dist()
 	// id_auteur nul ==> creation, et seuls les admins complets creent
 	if (!$id_auteur AND $connect_toutes_rubriques) {
 		$arg = "0/";
+		include_spip('inc/headers');
 		redirige_par_entete(generer_action_auteur('legender_auteur', $arg, $redirect, true));
 		exit;
 	}

@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/minipres');
+include_spip('inc/headers');
 include_spip('inc/layer');
 include_spip('inc/texte');
 
@@ -457,7 +458,6 @@ else {
 				$_SERVER['HTTP_IF_MODIFIED_SINCE']);
 			$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 			if ($if_modified_since == $gmoddate) {
-				include_spip('inc/headers');
 				http_status(304);
 				exit;
 			}

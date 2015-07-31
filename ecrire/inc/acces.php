@@ -165,6 +165,7 @@ function ecrire_acces() {
 		ecrire_logins($fichier, $logins);
 		fclose($fichier);
 	} else {
+	  include_spip('inc/headers');
 	  redirige_par_entete(generer_url_action('test_dirs', '', true));
 	}
 

@@ -204,6 +204,7 @@ function exec_convert_utf8_dist() {
 	// C'est fini, supprimer le fichier autorisant les modifs
 	fin_admin($action);
 	
+	include_spip('inc/headers');
 	// bouton "retour au site" + redirige_par_entete
 	echo "<p align='right'> <a href='" . generer_url_ecrire("config_lang")
 	. "'> &gt;&gt; "._T('icone_retour')."</a>";

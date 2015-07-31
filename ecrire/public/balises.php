@@ -502,7 +502,9 @@ function balise_FIN_SURLIGNE_dist($p) {
 // ATTENTION: cette balise efface parfois les boutons admin implicites
 // http://doc.spip.org/@balise_SPIP_CRON_dist
 function balise_SPIP_CRON_dist ($p) {
-	$p->code = '"' . str_replace('"', '\"', (generer_spip_cron())) . '"';
+	$p->code = '"<div style=\"background-image: url(\'' . 
+		generer_url_action('cron') .
+		'\');\"></div>"';
 	$p->interdire_scripts = false;
 	return $p;
 }

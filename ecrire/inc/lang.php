@@ -261,6 +261,7 @@ function verifier_lang_url() {
 		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
 		if (isset($GLOBALS['var_mode']))
 			$destination = parametre_url($destination, 'var_mode', $GLOBALS['var_mode'], '&');
+		include_spip('inc/headers');
 		redirige_par_entete($destination);
 	}
 

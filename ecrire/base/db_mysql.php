@@ -48,6 +48,7 @@ function base_db_mysql_dist()
 
 	if (!_DIR_RESTREINT) return false;
 
+	include_spip('inc/headers');
 	redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
 }
 

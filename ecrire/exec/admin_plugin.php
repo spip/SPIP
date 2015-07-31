@@ -29,6 +29,7 @@ function exec_admin_plugin() {
 		enregistre_modif_plugin();
 		// pour la peine, un redirige, 
 		// que les plugin charges soient coherent avec la liste
+		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_plugin'));
 	}
 	else

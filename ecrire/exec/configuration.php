@@ -26,7 +26,10 @@ include_spip('inc/config');
 	exit;
 }
 
-if (!$connect_toutes_rubriques) redirige_par_entete(generer_url_ecrire('admin_tech','',true));
+ if (!$connect_toutes_rubriques) {
+	include_spip('inc/headers');
+	redirige_par_entete(generer_url_ecrire('admin_tech','',true));
+ }
 
 //
 // Modifications

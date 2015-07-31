@@ -179,26 +179,6 @@ if ($var_lang_ecrire) {
 	$redirect = parametre_url($redirect,'lang',$var_lang_ecrire,'&');
  }
 
-// Redirection
-// Sous Apache, les cookies avec une redirection fonctionnent
-// Sinon, on fait un refresh HTTP
-if (ereg("^Apache", $GLOBALS['SERVER_SOFTWARE'])) {
-	redirige_par_entete($redirect);
+  redirige_par_entete($redirect, true);
 }
-else {
-	include_spip('inc/headers');
-	include_spip('inc/lang');
-	spip_header("Refresh: 0; url=" . $redirect);
-	echo  html_lang_attributes(),
-	  "<head><meta http-equiv='Refresh' content='0; url=",
-	  $redirect,
-	  "'></head>\n",
-	  "<body><a href='",
-	  $redirect,
-	  "'>",
-	  _T('navigateur_pas_redirige'),
-	  "</a></body></html>";
- }
-}
-
 ?>

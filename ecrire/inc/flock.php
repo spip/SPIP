@@ -183,6 +183,7 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 		fclose($f);
 	else {
 		spip_log("echec creation $base${subdir}");
+		include_spip('inc/headers');
 		redirige_par_entete(
 			generer_url_action('test_dirs',"test_dir=$base${subdir}",true));
 	}

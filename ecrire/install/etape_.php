@@ -10,15 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
 // http://doc.spip.org/@inc_install_
 function install_etape__dist()
 {
 	global $spip_lang_right;
 
 	$menu_langues = menu_langues('var_lang_ecrire');
-	if (!$menu_langues)
+	if (!$menu_langues) {
+		include_spip('inc/headers');
 		redirige_par_entete(generer_url_action('test_dirs'));
-	else {
+	} else {
 		install_debut_html();
 		echo "<div><img alt='SPIP' src='" . _DIR_IMG_PACK . "logo-spip.gif' /></div>\n",
 			"<div class='petit-centre'><p>",info_copyright(),"</p></div>\n",

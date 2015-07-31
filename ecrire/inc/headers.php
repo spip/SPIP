@@ -11,26 +11,45 @@
 \***************************************************************************/
 
 
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// envoyer le navigateur sur une nouvelle adresse
+// en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
-// Interdire les attaques par manipulation des headers
-// http://doc.spip.org/@spip_header
-function spip_header($h) {
-	@header(strtr($h, "\n\r", "  "));
+// http://doc.spip.org/@redirige_par_entete
+function redirige_par_entete($url, $equiv='') {
+
+	$url = strtr($url, "\n\r", "  ");
+	# en theorie on devrait faire ca tout le temps, mais quand la chaine
+	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
+	if ($url[0]=='?')
+		$url = url_de_base().$url;
+
+	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
+
+	if (!$equiv OR ereg("^Apache", $GLOBALS['SERVER_SOFTWARE'])) {
+		@header("Location: " . $url);
+	} else {
+		@header("Refresh: 0; url=" . $url);
+		$equiv = "<meta http-equiv='Refresh' content='0; url=$url'>";
+	}
+	include_spip('inc/lang');
+	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">',"\n",
+	  html_lang_attributes(),'
+<head>',
+	  $equiv,'
+<title>HTTP 302</title>
+</head>
+<body>
+<h1>HTTP 302</h1>
+<a href="',
+	  quote_amp($url),
+	  '">',
+	  _T('navigateur_pas_redirige'),
+	  '</a></body></html>';
+
+	exit;
 }
-
-// cf. liste des sapi_name - http://fr.php.net/php_sapi_name
-// http://doc.spip.org/@php_module
-function php_module() {
-	global $SERVER_SOFTWARE, $flag_sapi_name;
-	return (
-		($flag_sapi_name AND eregi("apache", @php_sapi_name()))
-		OR ereg("^Apache.* PHP", $SERVER_SOFTWARE)
-		);
-}
-
 
 // http://doc.spip.org/@http_status
 function http_status($status) {
@@ -73,5 +92,18 @@ function http_no_cache() {
 	header("Pragma: no-cache");
 }
 
+
+// envoi de l'image demandee dans le code ci-dessus
+// http://doc.spip.org/@envoie_image_vide
+function envoie_image_vide() {
+	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
+	header("Content-Type: image/gif");
+	header("Content-Length: ".strlen($image));
+	header("Cache-Control: no-cache,no-store");
+	header("Pragma: no-cache");
+	header("Connection: close");
+	echo $image;
+	flush();
+}
 
 ?>

@@ -31,6 +31,7 @@ function exec_legender_auteur_dist()
         }
 
 	if (!$echec AND $retour) {
+		include_spip('inc/headers');
 		redirige_par_entete(rawurldecode($retour));
 		exit;
 	}

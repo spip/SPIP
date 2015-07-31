@@ -33,6 +33,7 @@ function public_assembler_dist($fond) {
 	// Si envoi pour un forum, enregistrer puis rediriger
 	if (isset($_POST['confirmer_forum'])
 	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
+		include_spip('inc/headers');
 		$f = charger_fonction('forum_insert', 'inc');
 		redirige_par_entete($f());
 	}
@@ -49,6 +50,7 @@ function public_assembler_dist($fond) {
 		if ($auteur_session['statut'] == '0minirezo')
 			spip_log('debug !');
 		else
+			include_spip('inc/headers');
 			redirige_par_entete(generer_url_public('login',
 			'url='.rawurlencode(
 			parametre_url(self(), 'var_mode', 'debug', '&')

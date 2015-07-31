@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
+include_spip('inc/headers');
 
 // http://doc.spip.org/@exec_upgrade_dist
 function exec_upgrade_dist() {

@@ -386,9 +386,10 @@ function plugin_verifie_conformite($plug,&$arbre){
 // http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins() {
 	if (_request('exec')!="admin_plugin"){
-		if (@is_readable(_DIR_PLUGINS))
+		if (@is_readable(_DIR_PLUGINS)) {
+			include_spip('inc/headers');
 			redirige_par_entete(generer_url_ecrire("admin_plugin"));
-
+		}
 		// plus de repertoire plugin existant, le menu n'existe plus
 		// on fait une mise a jour silencieuse
 		// generer les fichiers php precompiles
