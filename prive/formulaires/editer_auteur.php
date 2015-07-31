@@ -176,6 +176,8 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
 	}
 
+	$erreurs['message_erreur'] = '';
+
 	if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)){
 		$erreurs['new_login'] = $err;
 		$erreurs['message_erreur'] .= $err;
@@ -193,6 +195,11 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 			}
 		}
 	}
+
+	if (!$erreurs['message_erreur']) {
+		unset($erreurs['message_erreur']);
+	}
+
 	return $erreurs;
 }
 
