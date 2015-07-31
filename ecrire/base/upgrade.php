@@ -1222,7 +1222,14 @@ function maj_base($version_cible = 0) {
 		spip_query("ALTER IGNORE TABLE spip_documents_rubriques DROP INDEX id_rubrique");
 		maj_version('1.920');
 	}
-
+	if (upgrade_vers(1.921, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_meta ADD impt ENUM('non', 'oui') DEFAULT 'oui' NOT NULL AFTER valeur");
+		$meta_serveur = array('version_installee','adresse_site','alea_ephemere_ancien','alea_ephemere','alea_ephemere_date','langue_site','langues_proposees','date_calcul_rubriques','derniere_modif','optimiser_table','drapeau_edition','creer_preview','taille_preview','creer_htpasswd','creer_htaccess','gd_formats_read','gd_formats',
+		'netpbm_formats','formats_graphiques','image_process','plugin_header','plugin');
+		foreach($meta_serveur as $nom)
+			spip_query("UPDATE spip_meta SET impt='non' WHERE nom="._q($nom));
+		maj_version('1.921');
+	}
 }
 
 ?>

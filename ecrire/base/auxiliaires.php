@@ -167,6 +167,7 @@ $spip_mots_documents_key = array(
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
 		"valeur"	=> "text DEFAULT ''",
+		"impt"	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_meta_key = array(

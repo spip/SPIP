@@ -114,9 +114,16 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 
 // http://doc.spip.org/@import_replace
 function import_replace($values, $table, $desc, $request) {
-	if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
-		$GLOBALS['erreur_restauration'] = spip_sql_error();
-  }
+	if (!isset($desc['field']['impt'])) // pas de champ de gestion d'import
+		if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
+			$GLOBALS['erreur_restauration'] = spip_sql_error();
+	  }
+	else { 
+		// la table contient un champ 'impt' qui permet de gerer des interdiction d'overwrite par import
+		// impt=oui : la ligne est surchargeable par import
+		// impt=non : la ligne ne doit pas etre ecrasee par un import
+		
+	}
 }
 
 // http://doc.spip.org/@import_lire_champs
