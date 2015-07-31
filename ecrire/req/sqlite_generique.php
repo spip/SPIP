@@ -1189,12 +1189,12 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 		if (!preg_match("/^[^(),]*\((([^()]*(\([^()]*\))?[^()]*)*)\)[^()]*$/", array_shift($a), $r))
 			return "";
 		else {
-			$dec = $r[1];
+			$desc = $r[1];
 			// extraction d'une KEY éventuelle en prenant garde de ne pas
-			// relever un champ dont le nom finit par KEY
-			if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $dec, $r)){
+			// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
+			if (preg_match("/^(.*?),([^,]*KEY[ (].*)$/s", $desc, $r)){
 				$namedkeys = $r[2];
-				$dec = $r[1];
+				$desc = $r[1];
 			}
 			else
 				$namedkeys = "";
@@ -1205,11 +1205,11 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 			// enlever les contenus des valeurs DEFAULT 'xxx' qui pourraient perturber
 			// par exemple s'il contiennent une virgule.
 			// /!\ cela peut aussi echapper le nom des champs si la table a eu des operations avec SQLite Manager !
-			list($dec, $echaps) = query_echappe_textes($dec);
+			list($desc, $echaps) = query_echappe_textes($desc);
 
 			// separer toutes les descriptions de champs, separes par des virgules
 			# /!\ explode peut exploser aussi DECIMAL(10,2) !
-			foreach (explode(",", $dec) as $v){
+			foreach (explode(",", $desc) as $v){
 
 				preg_match("/^\s*([^\s]+)\s+(.*)/", $v, $r);
 				// Les cles de champs peuvent etre entourees
