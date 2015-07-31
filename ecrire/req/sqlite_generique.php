@@ -1000,7 +1000,7 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true){
  *
  * @param string|array|number $v
  * @param string $type
- * @return array|string|number
+ * @return string|number
  */
 function spip_sqlite_quote($v, $type = ''){
 		if (!is_array($v))
@@ -1008,7 +1008,7 @@ function spip_sqlite_quote($v, $type = ''){
 		// si c'est un tableau, le parcourir en propageant le type
 		foreach($v as $k=>$r)
 			$v[$k] = spip_sqlite_quote($r, $type);
-		return $v;
+		return join(",", $v);
 }
 
 
