@@ -340,6 +340,12 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 
 	if ($select) lang_select();
 
+	// Si un modele contenait #SESSION, on note l'info dans $page
+	if (isset($GLOBALS['cache_utilise_session'])) {
+		$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
+		unset($GLOBALS['cache_utilise_session']);
+	}
+
 	return $page;
 }
 
