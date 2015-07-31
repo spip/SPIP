@@ -918,6 +918,35 @@ function balise_URL_PAGE_dist($p) {
 }
 
 //
+// #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
+//
+function balise_URL_ECRIRE_dist($p) {
+
+	if ($p->param && !$p->param[0][0]) {
+		$p->code =  calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		$args =  calculer_liste($p->param[0][2],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		if ($args != "''")
+			$p->code .= ','.$args;
+
+		// autres filtres (???)
+		array_shift($p->param);
+	}
+
+	$p->code = 'generer_url_ecrire(' . $p->code .')';
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
+//
 // #CHEMIN{fichier} -> find_in_path(fichier)
 //
 function balise_CHEMIN_dist($p) {
