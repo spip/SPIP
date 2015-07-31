@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Zatwierd&#378;',
 'bouton_chercher' => 'Szukaj',
 'bouton_choisir' => 'Wybierz',
+'bouton_download' => '&#346;ci&#261;gnij',
 'bouton_enregistrer' => 'Zapisz',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezaktywuj poczt&#281; wewn&#281;trzn&#261;',
 'bouton_radio_envoi_annonces' => 'Wy&#347;lij og&#322;oszenia redakcyjne',
