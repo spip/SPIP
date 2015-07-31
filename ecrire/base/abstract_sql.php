@@ -628,6 +628,33 @@ function sql_test_date($type, $serveur='', $option=true)
   return preg_match('/^(DATE|DATETIME|TIMESTAMP|TIME)/i',trim($type));
 }
 
+/**
+ * formater une date Y-m-d H:i:s sans passer par mktime
+ * qui ne sait pas gerer les dates < 1970
+ *
+ * http://doc.spip.org/@format_mysql_date
+ *
+ * @param int $annee
+ * @param int $mois
+ * @param int $jour
+ * @param int $h
+ * @param int $m
+ * @param int $s
+ * @param string $serveur
+ * @return string
+ */
+function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=''){
+	$annee = sprintf("%04s",$annee);
+	$mois = sprintf("%02s",$mois);
+
+	if ($annee == "0000") $mois = 0;
+	if ($mois == "00") $jour = 0;
+
+	return sprintf("%04u",$annee) . '-' . sprintf("%02u",$mois) . '-'
+		. sprintf("%02u",$jour) . ' ' . sprintf("%02u",$h) . ':'
+		. sprintf("%02u",$m) . ':' . sprintf("%02u",$s);
+}
+
 
 // Cette fonction devrait disparaitre
 
