@@ -75,18 +75,35 @@ function assembler($fond, $connect='') {
 			$contexte = $page['contexte'];
 		}
 		// ATTENTION, gestion des URLs transformee par le htaccess
+		// $renommer = 'urls_propres_dist';
+		// renvoie array($contexte, $fond, $url_redirect)
+		// Compat ascendante si le retour est null:
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
-		// Bref,  les URL dites propres ont une implementation sale.
-		// Interdit de nettoyer, faut assumer l'histoire.
 		// et calculer la page
 		else {
 			$renommer = generer_url_entite();
-			if ($renommer)
-				$renommer(nettoyer_uri(), $fond);
+			if ($renommer) {
+				$url = nettoyer_uri();
+				$a = $renommer($url, $fond);
+				if (is_array($a)) {
+					list($ncontexte, $nfond, $url_redirect) = $a;
+					if (isset($url_redirect)
+					AND $url !== $url_redirect) {
+						spip_log("Redirige $url vers $url_redirect");
+						include_spip('inc/headers');
+						http_status(301);
+						redirige_par_entete($url_redirect);
+					}
+					if (isset($nfond))
+						$fond = $nfond;
+					if (isset($ncontexte))
+						$contexte = $ncontexte;
+				}
+			}
 			elseif (function_exists('recuperer_parametres_url'))
 				// compatibilite <= 1.9.2
-				recuperer_parametres_url($fond,  nettoyer_uri());
+				recuperer_parametres_url($fond, nettoyer_uri());
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 

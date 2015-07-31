@@ -53,17 +53,27 @@ function _generer_url_html($type, $id, $args='', $ancre='') {
 
 // retrouver les parametres d'une URL dite "html"
 // http://doc.spip.org/@urls_html_dist
-function urls_html_dist($i, &$entite, $args='', $ancre='') {
-	global $contexte;
+function urls_html_dist($i, $entite, $args='', $ancre='') {
+	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
 
 	if (is_numeric($i))
 		return _generer_url_html($entite, $i, $args, $ancre);
 
 	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
 	if ($GLOBALS['profondeur_url']>0 AND $entite=='sommaire'){
-		$entite = '404';
+		return array(array(),'404');
 	}
 	$url = $i;
+
+	// Decoder l'url html, page ou standard
+	if (preg_match(
+	',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
+	$url, $regs)) {
+		$type = preg_replace(',s$,', '', table_objet($regs[2]));
+		$_id = id_table_objet($regs[2]);
+		$contexte[$_id] = $id = $regs[3];
+		return array($contexte, $type);
+	}
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
@@ -73,17 +83,20 @@ function urls_html_dist($i, &$entite, $args='', $ancre='') {
 	 */
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
-	$url_propre = isset($_SERVER['REDIRECT_url_propre']) ?
-		$_SERVER['REDIRECT_url_propre'] :
-		(isset($_ENV['url_propre']) ?
-			$_ENV['url_propre'] :
-			'');
-	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls|404)$,', $entite)) {
+	$url_propre = isset($url)
+		? $url
+		: (isset($_SERVER['REDIRECT_url_propre'])
+			? $_SERVER['REDIRECT_url_propre']
+			: (isset($_ENV['url_propre'])
+				? $_ENV['url_propre']
+				: ''
+				));
+	if ($url_propre) {
 		if ($GLOBALS['profondeur_url']<=0)
 			$urls_anciennes = charger_fonction('propres','urls');
 		else
 			$urls_anciennes = charger_fonction('arbo','urls');
-		$urls_anciennes($url_propre,$entite);
+		return $urls_anciennes($url_propre,$entite);
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
