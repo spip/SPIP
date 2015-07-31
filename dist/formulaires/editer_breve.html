@@ -44,7 +44,7 @@
 	    <li class="gauche champ_statut"><label for='statut'><:entree_breve_publiee:></label>
 			<select name='statut' id='statut' size='1' class='fondl'>
 				<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:item_breve_proposee:></option>
-				<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] " class='danger'><:item_breve_refusee:></option>
+				<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:item_breve_refusee:></option>
 				<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:item_breve_validee:></option>
 			</select>#AIDER{brevesstatut}
 	    </li>
