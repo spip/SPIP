@@ -248,14 +248,13 @@ echo "<p>";
 
 
 echo "<P><HR><P>";
-	
-	$titre = htmlspecialchars($titre);
+	$titre = entites_html($titre);
 	$soustitre = htmlspecialchars($soustitre);
 	$surtitre = htmlspecialchars($surtitre);
 
 	$descriptif = htmlspecialchars($descriptif);
 	$chapo = htmlspecialchars($chapo);
-	$texte = htmlspecialchars($texte);
+	$texte = entites_html($texte);
 	$ps = htmlspecialchars($ps);
 
 
