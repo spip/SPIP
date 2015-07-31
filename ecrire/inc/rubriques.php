@@ -312,13 +312,29 @@ function propager_les_secteurs()
 		// - toutes les rubriques de profondeur 0 à $prof sont bonnes
 		// - si A.profondeur = $prof+1 c'est bon
 		// - cela nous protege de la boucle infinie en cas de reference circulaire dans les rubriques
-		$r = sql_select("A.id_rubrique AS id, R.id_secteur AS secteur, R.profondeur+1 as profondeur",
-			"spip_rubriques AS A, spip_rubriques AS R",
-			"A.id_parent = R.id_rubrique AND R.profondeur=".intval($prof)." AND (A.id_secteur <> R.id_secteur OR A.profondeur > R.profondeur+1)");
+		$maxiter2 = $maxiter;
+		while ($maxiter2--
+			AND $rows = sql_allfetsel(
+			"A.id_rubrique AS id, R.id_secteur AS id_secteur, R.profondeur+1 as profondeur",
+			"spip_rubriques AS A JOIN spip_rubriques AS R ON A.id_parent = R.id_rubrique",
+			"R.profondeur=".intval($prof)." AND (A.id_secteur <> R.id_secteur OR A.profondeur > R.profondeur+1)",
+		  "","R.id_secteur","0,100")){
 
-		while ($row = sql_fetch($r)) {
-			sql_update("spip_rubriques", array("id_secteur" => $row['secteur'],'profondeur' => $row['profondeur']), "id_rubrique=".$row['id']);
+			$id_secteur = null;
+			$ids = array();
+			while ($row = array_shift($rows)) {
+				if ($row['id_secteur']!==$id_secteur){
+					if (count($ids))
+						sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
+					$id_secteur = $row['id_secteur'];
+					$ids = array();
+				}
+				$ids[] = $row['id'];
+			}
+			if (count($ids))
+				sql_updateq("spip_rubriques", array("id_secteur" => $id_secteur,'profondeur' => $prof+1), sql_in('id_rubrique',$ids));
 		}
+
 
 		// Toutes les rubriques de profondeur $prof+1 qui n'ont pas un parent de profondeur $prof sont decalees
 		$maxiter2 = $maxiter;
@@ -343,8 +359,10 @@ function propager_les_secteurs()
 	while ($continuer AND $maxiter--);
 
 	// loger si la table des rubriques semble foireuse
+	// et mettre un id_secteur=0 sur ces rubriques pour eviter toute selection par les boucles
 	if (sql_countsel("spip_rubriques","profondeur>".intval($prof+1))){
 		spip_log("Les rubriques de profondeur>".($prof+1)." semblent suspectes (branches morte ou reference circulaire dans les parents)",_LOG_CRITIQUE);
+		sql_update("spip_rubriques",array('id_secteur'=>0),"profondeur>".intval($prof+1));
 	}
 
 	// reparer les articles
