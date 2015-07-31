@@ -28,8 +28,10 @@ function test_ecrire($my_dir) {
 
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
 
-if ($test_dir)
-	$test_dirs[] = $test_dir;
+if ($test_dir) {
+  if (!ereg("/$", $test_dir)) $test_dir .= '/';
+  if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
+ }
 else {
 	if (!_FILE_CONNECT)
 	  $test_dirs[] = dirname(_FILE_CONNECT_INS);
