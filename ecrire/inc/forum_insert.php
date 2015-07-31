@@ -87,10 +87,9 @@ function tracer_erreur_forum($type='') {
 	}
 }
 
+// Un parametre permet de forcer le statut (exemple: plugin antispam)
 // http://doc.spip.org/@inc_forum_insert_dist
-function inc_forum_insert_dist() {
-
-	// Ne pas se laisser polluer par les pollueurs de globales
+function inc_forum_insert_dist($force_statut = NULL) {
 	$id_article = intval(_request('id_article'));
 	$id_breve = intval(_request('id_breve'));
 	$id_forum = intval(_request('id_forum'));
@@ -101,6 +100,12 @@ function inc_forum_insert_dist() {
 	$retour_forum = _request('retour_forum');
 
 	$retour_forum = rawurldecode($retour_forum);
+
+	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request('nobot'))) {
+		tracer_erreur_forum('champ interdit (nobot) rempli');
+		return $retour_forum; # echec silencieux du POST
+	}
 
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
@@ -169,11 +174,8 @@ function inc_forum_insert_dist() {
 	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
 						'publie');
 
-	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
-	if (strlen(_request('nobot'))) {
-		tracer_erreur_forum('champ interdit (nobot) rempli');
-		return $retour_forum; # echec silencieux du POST
-	}
+	if (isset($force_statut))
+		$statut = $force_statut;
 
 	// Entrer le message dans la base
 	$id_message = sql_insert('spip_forum', '(date_heure)', '(NOW())');

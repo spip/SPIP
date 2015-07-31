@@ -111,6 +111,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$valider_repondre = true;
 			$suppression = 'off';
 			break;
+		# forum signale comme spam sur le site public
+		case "spam":
+			$logo = "forum-public-24.gif";
+			$valider = 'publie';
+			$valider_repondre = false;
+			$suppression = false;
+			$spam = true;
+			break;
 		# forum original (reponse a un forum modifie) sur le site public
 		case "original":
 			$logo = "forum-public-24.gif";
@@ -149,6 +157,14 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 		.")</div>";
 	}
 
+	if ($spam) {
+		$controle .= "<div style='float:".$GLOBALS['spip_lang_right'].";color:red'>"
+		."("
+		._L('spam') // Marque' comme spam ?
+		.")</div>";
+	}
+
+
 	return $controle;
 }
 
@@ -173,10 +189,13 @@ function critere_statut_controle_forum($type, $id_rubrique=0, $recherche='') {
    
 	switch ($type) {
 	case 'public':
-		$and .= "F.statut IN ('publie', 'off', 'prop') AND F.texte!=''";
+		$and .= "F.statut IN ('publie', 'off', 'prop', 'spam') AND F.texte!=''";
 		break;
 	case 'prop':
 		$and .= "F.statut='prop'";
+		break;
+	case 'spam':
+		$and .= "F.statut='spam'";
 		break;
 	case 'interne':
 		$and .= "F.statut IN ('prive', 'privrac', 'privoff', 'privadm') AND F.texte!=''";
