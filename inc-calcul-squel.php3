@@ -429,6 +429,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = '';
+	spip_timer('calcul_skel');
 	include_local("inc-$gram-squel.php3");
 	$racine = parser($squelette, '',$boucles);
 	// include_local('inc-debug.php3');
@@ -507,12 +508,15 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		}
 	}
 
+	$secondes = spip_timer('calcul_skel');
+	spip_log("CALCUL SKEL $sourcefile ($secondes)");
+
 	return "
 /*
  * Squelette : $sourcefile
- * Date :    ".http_gmoddate(@filemtime($sourcefile))." GMT
- * Compile : ".http_gmoddate(time())." GMT
- * Boucles : ".join (', ', array_keys($boucles))."
+ * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
+ * Compile :   ".http_gmoddate(time())." GMT ($secondes)
+ * Boucles :   ".join (', ', array_keys($boucles))."
  */
 $code
 
