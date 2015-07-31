@@ -5,8 +5,21 @@ include ("inc.php3");
 
 debut_page(_T('titre_page_statistiques'), "suivi", "repartition");
 
+	if ($spip_ecran == "large") {
+		$largeur_table = 974;
+		$taille = 550;
+	} else {
+		$largeur_table = 750;
+		$taille = 400;
+	}	
+	
+echo "<center><table width='$largeur_table'><tr width='$largeur_table'><td width='$largeur_table' class='verdana2'>";
+
+
 echo "<br><br>";
+echo "<center>";
 gros_titre(_T('titre_page_statistiques'));
+echo "</center>";
 //if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
 //	barre_onglets("repartition", "rubriques");
 
@@ -24,9 +37,9 @@ else barre_onglets("stat_depuis", "debut");
 
 
 
-debut_gauche();
+//debut_gauche();
 
-debut_droite();
+//debut_droite();
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
@@ -74,8 +87,9 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 	global $niveau;
 	global $nombre_vis;
 	global $nombre_abs;
-	global $couleur_claire, $spip_lang_right;
+	global $couleur_claire, $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	global $abs_total;
+	global $taille;
 
 	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
 	$result=spip_query($query);
@@ -86,8 +100,8 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 		$titre = typo($row['titre']);
 
 		if ($nombre_vis[$id_rubrique]>0 OR $nombre_abs[$id_rubrique]>0){
-			$largeur_rouge = floor(($nombre_vis[$id_rubrique] - $nombre_abs[$id_rubrique]) * 100 / $abs_total);
-			$largeur_vert = floor($nombre_abs[$id_rubrique] * 100 / $abs_total);
+			$largeur_rouge = floor(($nombre_vis[$id_rubrique] - $nombre_abs[$id_rubrique]) * $taille / $abs_total);
+			$largeur_vert = floor($nombre_abs[$id_rubrique] * $taille / $abs_total);
 			
 			if ($largeur_rouge+$largeur_vert>0){
 					
@@ -102,13 +116,14 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 					$couleur="white";
 				}
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 width='100%'>";
-				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif' width='100%'><TD style='border-bottom: 1px solid #cccccc;'>";
-				if ($niveau==0){
+				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif' width='100%'>";
+				echo "<TD style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
+				if ($niveau==0 OR 1==1){
 					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*100);
-					echo "<div style='float: $spip_lang_right;'>$pourcent%</div>";
+					echo "<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
-				echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
+				//echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
 				
 			
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
@@ -118,17 +133,16 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				
 				
 				echo "</span>";
-				echo "</TD><TD ALIGN='right' width='105' style='border-bottom: 1px solid #cccccc;'>";
+				echo "</TD><TD ALIGN='right' width='".($taille+5)."' style='border-bottom: 1px solid #aaaaaa;'>";
 				
 				
 				echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=".($decalage+1+$gauche)." HEIGHT=8>";
 				echo "<TR>";
 				if ($gauche > 0) echo "<td width='".$gauche."'></td>";
-				echo "<TD BACKGROUND='img_pack/jauge-fond.gif'>";
+				echo "<TD style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 				if ($visites_abs > 0) echo "<img src='img_pack/rien.gif' width='".$visites_abs."' height=8 border=0>";
-				if ($largeur_rouge>0) echo "<IMG SRC='img_pack/jauge-rouge.gif' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
-				if ($largeur_vert>0) echo "<IMG SRC='img_pack/jauge-vert.gif' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
-				echo "<IMG SRC='img_pack/rien.gif' HEIGHT=8 WIDTH=1 BORDER=0>";
+				if ($largeur_rouge>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_foncee;' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
+				if ($largeur_vert>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_claire;' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
 				
 				echo "</TD></TR></TABLE>\n";
 				echo "</TD></TR></table>";
@@ -142,7 +156,7 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 			echo fin_block();
 			$niveau--;
 		}
-		$visites_abs = $visites_abs + round($nombre_vis[$id_rubrique]/$abs_total*100);
+		$visites_abs = $visites_abs + round($nombre_vis[$id_rubrique]/$abs_total*$taille);
 	}
 }
 
@@ -181,23 +195,20 @@ while($row = spip_fetch_array($result)) {
 if ($total_vis<1) $total_vis=1;
 
 debut_cadre_relief("statistiques-24.gif");
-//echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 style='border: 1px solid #aaaaaa;'>";
 echo "<div style='border: 1px solid #aaaaaa;'>";
-enfants_aff(0,100);
+enfants_aff(0,$taille);
 echo "</div>";
-//echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0></TD>";
 
 
-//echo "</TABLE>";
 
 echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
 
 
 fin_cadre_relief();
 
+echo "</td></tr></table></center>";
 
-
-fin_page();
+//fin_page();
 
 ?>
 

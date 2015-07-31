@@ -5,8 +5,20 @@ include ("inc.php3");
 
 debut_page(_T('onglet_repartition_lang'), "suivi", "repartition-langues");
 
+	if ($spip_ecran == "large") {
+		$largeur_table = 974;
+	} else {
+		$largeur_table = 750;
+	}	
+	$taille = $largeur_table - 200;	
+echo "<center><table width='$largeur_table'><tr width='$largeur_table'><td width='$largeur_table' class='verdana2'>";
+
+
+
 echo "<br><br>";
+echo "<center>";
 gros_titre(_T('onglet_repartition_lang'));
+echo "</center>";
 //barre_onglets("repartition", "langues");
 
 if ($GLOBALS["critere"] == "debut") {
@@ -22,12 +34,6 @@ if ($critere == "popularite") barre_onglets("rep_depuis", "popularite");
 else barre_onglets("rep_depuis", "debut");
 
 
-
-debut_gauche();
-
-
-
-debut_droite();
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
@@ -96,7 +102,7 @@ debut_cadre_enfonce("langues-24.gif");
 		
 		while ($row = spip_fetch_array($result)) {
 			$lang = $row['lang'];
-			$visites = round($row['cnt'] / $total_visites * 100);
+			$visites = round($row['cnt'] / $total_visites * $taille);
 			
 			if ($visites > 0) {
 
@@ -113,11 +119,10 @@ debut_cadre_enfonce("langues-24.gif");
 				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$visites%</div>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
-					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='100' HEIGHT=8>";
-					echo "<TR><TD BACKGROUND='img_pack/jauge-fond.gif' style='align:$spip_lang_right'>";
+					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='".($taille+5)."' HEIGHT=8>";
+					echo "<TR><TD style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 					if ($visites_abs > 0) echo "<img src='img_pack/rien.gif' width='$visites_abs' height='8'>";
-					if ($visites>0) echo "<IMG SRC='img_pack/jauge-vert.gif' WIDTH=$visites HEIGHT=8 BORDER=0>";
-					echo "<IMG SRC='img_pack/rien.gif' HEIGHT=8 WIDTH=1 BORDER=0>";
+					if ($visites>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_foncee;' WIDTH='$visites' HEIGHT=8 BORDER=0>";
 					echo "</TD></TR></TABLE>\n";
 	
 				echo "</td>";
@@ -135,7 +140,7 @@ fin_cadre_enfonce();
 
 
 
-fin_page();
+echo "</td></tr></table></center>";
 
 ?>
 
