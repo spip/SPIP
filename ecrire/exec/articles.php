@@ -159,7 +159,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. (!$flag_editable ? ''
 	   :  (bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right') . "<br class='nettoyeur' />"))
 	. (($spip_display == 4) ? ''
-	 : articles_documents($flag_editable, 'article', $id_article))
+	 : articles_documents('article', $id_article))
 
 	. (($statut_article == 'prepa' AND !$statut_rubrique
 	AND spip_num_rows(auteurs_article($id_article, " id_auteur=$connect_id_auteur")))
@@ -170,11 +170,13 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 }
 
 // http://doc.spip.org/@articles_documents
-function articles_documents($flag_editable, $type, $id)
+function articles_documents($type, $id)
 {
 	global $spip_lang_left, $spip_lang_right;
-	
-	if  ($GLOBALS['meta']["documents_$type"]=='non' OR !$flag_editable)
+
+	// Joindre ?
+	if  ($GLOBALS['meta']["documents_$type"]=='non'
+	OR !autoriser('joindredocument', $type, $id))
 		$res = '';
 	else {
 		$joindre = charger_fonction('joindre', 'inc');
@@ -205,12 +207,14 @@ function articles_documents($flag_editable, $type, $id)
 <script type='text/javascript'>
 $(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
 </script>";
-	} 
-	
+	}
+
 	$documenter = charger_fonction('documenter', 'inc');
 
-	return "<div id='portfolio'>" . $documenter($id, 'article', 'portfolio', $flag_editable) . "</div><br />"
-	. "<div id='documents'>" . $documenter($id, 'article', 'documents', $flag_editable) . "</div>"
+	$flag_editable = autoriser('modifier', $type, $id);
+
+	return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
+	. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>"
 	. $res;
 }
 
