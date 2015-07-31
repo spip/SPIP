@@ -211,10 +211,6 @@ if ($spip_display == 4) {
 	echo "<div id='selection_rubrique' style='display: none;'></div>";
 
 }
-//include_ecrire("inc_mini_nav.php");
-//echo mini_nav ($id_parent, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';", $id_rubrique, $aff_racine=true);
-
-
 
 // si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
 $query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";

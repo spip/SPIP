@@ -61,7 +61,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 				if ($la_rub == $rubs[$col]) $class="highlight";
 				else $class = "pashighlight";
 				
-				if ($rub[$i]["id_parent"] == 0) $style = "style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
+				if ($rub[$i]["id_parent"] == 0) $style = " style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
 
 				$titre = "<div class='petite-rubrique'$style>$titre</div>";
 				
@@ -130,19 +130,31 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 }
 
 function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id_rubrique=::sel::';", $rub_exclus=0, $aff_racine=false) {
-	global $couleur_claire, $couleur_foncee, $spip_lang_right;
+	global $couleur_claire, $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
 	$ret .= "<div id='$rac'>";
 	$ret .= "<div style='display: none;'>";
 	$ret .= "<input type='text' id='".$rac."_fonc' value=\"$fonction\" />";
 	$ret .= "</div>\n";
 	
-	if ($aff_racine) {
-		$onClick .= " aff_selection('rubrique','$rac', '0');";
-		$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px;'><div class='pashighlight'>";
-		$ret .= _T("info_racine_site");
-		$ret .= "</div></div>";
-	}
+	$ret .= "<table width='100%' cellpadding='0' cellspacing='0'>";
+	$ret .= "<tr>";
+
+	$ret .= "<td style='vertical-align: bottom;'>";
+	if ($aff_racine) $onClick .= " aff_selection('rubrique','$rac', '0');";
+	$onClick .= "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id_rubrique=0&col=1', '".$rac."_col_1');";
+	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
+	$ret .= _T("info_racine_site");
+	$ret .= "</div></div>";
+	$ret .= "</td>";
+
+	$ret .= "<td>";
+	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden;' id = 'img_".$rac."_col_1'");
+	$ret .= "</td>";
+
+	$ret .= "<td style='text-align: $spip_lang_right'>";
+	$ret .= "<input id='".$rac."_champ_recherche' type='search' onkeypress=\"key = event.keyCode; if (key == 13 || key == 3) { return false;} t=setTimeout('lancer_recherche_rub(\'".$rac."_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200);\" style='width: 100px;' />";
+	$ret .= "</td></tr></table>\n";
 	
 	$ret .= mini_nav_principal($sel, $rac, $rub_exclus);
 	
