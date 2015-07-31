@@ -2215,11 +2215,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 	
 }
 
-// http://doc.spip.org/@barre_typo
-function barre_typo($id,$lang='',$forum=false){
-	include_spip('inc/barre');
-	return '<div>' . afficher_barre("document.getElementById('$id')",$forum,$lang) . '</div>';
-}
+
 // http://doc.spip.org/@puce_changement_statut
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
 	$puce_statut = charger_fonction('puce_statut','inc');

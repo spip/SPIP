@@ -908,8 +908,15 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 
  'tester_variable' => '($n, $v) {
 	if (!isset($GLOBALS[$n])) $GLOBALS[$n] = $v;
-	return $GLOBALS[$n];}'
+	return $GLOBALS[$n];}',
 
+// SPIP < 2.1
+ 'barre_typo' => '($id,$lang=\'\',$forum=false){
+	return \'\';}',
+	
+ 'afficher_barre' => '(){
+	 return \'\';}',
+	 	
 ) as $f => $def) {
 	if (!function_exists($f)) {
 		eval("function $f$def");

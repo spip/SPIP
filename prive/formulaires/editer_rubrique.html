@@ -32,8 +32,7 @@
 				<label for="text_area"><:info_texte_explicatif:><em class="aide">#AIDER{raccourcis}</em></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 				][(#ENV**{_texte_trop_long,''})
-				]<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
-				<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+				]<textarea name='texte' id='text_area' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 				(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>]
 	  </ul>

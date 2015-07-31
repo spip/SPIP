@@ -78,9 +78,7 @@
 			<label for="text_area"><:info_texte:><em class="aide">#AIDER{arttexte}</em></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 			][(#ENV**{_texte_trop_long,''})]
-				<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
-				[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANGUE}})]
-				<textarea name='texte' id='text_area' class='barre_inserer'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 				(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
 				
 				<script type='text/javascript'><!--

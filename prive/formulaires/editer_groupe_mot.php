@@ -38,7 +38,6 @@ function groupes_mots_edit_config($row)
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
-	$config['afficher_barre'] = false;
 	$config['langue'] = $spip_lang;
 	return $config;
 }

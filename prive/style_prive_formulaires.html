@@ -247,7 +247,6 @@ padding-top:10px;
 .formulaire_spip li.editer_descriptif textarea,
 .formulaire_spip li.editer_chapo textarea,
 .formulaire_spip li.editer_texte textarea,
-.formulaire_spip li.editer_texte .spip_barre,
 .formulaire_spip li.editer_ps textarea,
 .formulaire_spip li.haut textarea,
 .formulaire_spip li.haut select,
@@ -408,26 +407,6 @@ padding-top:10px;
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 	color: white;
 }
-
-
-/* barre typo */
-
-.formulaire_spip table.spip_barre {
-	background-color: #GET{claire};
-	width: 97.4%;
-	padding: 5px;
-	padding-bottom: 0px;
-	clear:both;
-}
-.formulaire_spip table.spip_barre tr {
-	width: 98%;
-}
-.formulaire_spip table.spip_barre a img { 
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire}|couleur_eclaircir)], center center })]
-	padding: 3px; border: 1px outset #GET{claire}; 
-}
-.formulaire_spip table.spip_barre a:hover img { background: #fff; border: 1px solid #cc9; }
-.formulaire_spip table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #f57900; }
 
 
 .formulaire_spip li.editer_parent .choix label,
