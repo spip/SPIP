@@ -88,6 +88,17 @@ function action_charger_plugin_dist() {
 
 		if (preg_match(",^Content-Type:\s*application/zip$,Uims",$head))
 			$extension = "zip";
+		elseif (preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims",$head,$m)){
+			$f = $m[1];
+			if (pathinfo($f, PATHINFO_EXTENSION)=="zip"){
+				$fichier = (_request('fichier')?
+					_request('fichier')
+					:"h".substr(md5($zip),0,8)."-".basename($f)
+					);
+				$fichier = $tmp.basename($fichier);
+				$extension = "zip";
+			}
+		}
 		// au cas ou, si le content-type n'est pas la
 		// mais que l'extension est explicite
 		elseif(pathinfo($zip, PATHINFO_EXTENSION)=="zip")
