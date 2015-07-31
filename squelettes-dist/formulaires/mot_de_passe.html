@@ -11,12 +11,12 @@
 			<li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
 				<label for="oubli"><:pass_choix_pass:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
-				<input type='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
+				<input type='password' class='text' name='oubli' id='oubli' value="#ENV**{oubli}" />
 			</li>
 			<li class="saisie_oubli_confirm obligatoire[ (#ENV*{erreurs}|table_valeur{oubli_confirm}|oui)erreur]">
 				<label for="oubli_confirm"><:info_confirmer_passe:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{oubli_confirm})</span>]
-				<input type='password' name='oubli_confirm' id='oubli_confirm' value="#ENV**{oubli_confirm}" />
+				<input type='password' class='text' name='oubli_confirm' id='oubli_confirm' value="#ENV**{oubli_confirm}" />
 			</li>
 		</ul>
 	</fieldset>
