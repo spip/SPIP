@@ -1444,12 +1444,12 @@ function generer_url_action($script, $args="", $no_entities=false , $public = fa
 
 
 /**
- * Fonction d'initialisation groupee pour compatibilite ascendante
+ * Fonction d'initialisation groupée pour compatibilité ascendante
  *
- * @param string $pi
- * @param string $pa
- * @param string $ti
- * @param string $ta
+ * @param string $pi Répertoire permanent inaccessible
+ * @param string $pa Répertoire permanent accessible
+ * @param string $ti Répertoire temporaire inaccessible
+ * @param string $ta Répertoire temporaire accessible
  */
 function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	spip_initialisation_core($pi,$pa,$ti,$ta);
@@ -1457,18 +1457,20 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 }
 
 /**
- * Fonction d'initialisation, appellee dans inc_version ou mes_options
- * Elle definit les repertoires et fichiers non partageables
- * et indique dans $test_dirs ceux devant etre accessibles en ecriture
- * mais ne touche pas a cette variable si elle est deja definie
- * afin que mes_options.php puisse en specifier d'autres.
- * Elle definit ensuite les noms des fichiers et les droits.
- * Puis simule un register_global=on securise.
+ * Fonction d'initialisation, appellée dans inc_version ou mes_options
+ * 
+ * Elle définit les répertoires et fichiers non partageables
+ * et indique dans $test_dirs ceux devant être accessibles en écriture
+ * mais ne touche pas à cette variable si elle est déjà définie
+ * afin que mes_options.php puisse en spécifier d'autres.
+ * 
+ * Elle définit ensuite les noms des fichiers et les droits.
+ * Puis simule un register_global=on sécurisé.
  *
- * @param string $pi
- * @param string $pa
- * @param string $ti
- * @param string $ta
+ * @param string $pi Répertoire permanent inaccessible
+ * @param string $pa Répertoire permanent accessible
+ * @param string $ti Répertoire temporaire inaccessible
+ * @param string $ta Répertoire temporaire accessible
  */
 function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;

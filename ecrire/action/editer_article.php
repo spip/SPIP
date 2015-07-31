@@ -28,6 +28,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * (avec _request())
  * 
  * @link http://doc.spip.org/@action_editer_article_dist
+ * @uses article_inserer()
+ * @uses article_modifier()
  * 
  * @param null|int $arg
  *     Identifiant de l'article. En absence utilise l'argument
@@ -74,11 +76,12 @@ function action_editer_article_dist($arg=null) {
  * @param array|null $set
  *     Couples (colonne => valeur) de données à modifier.
  *     En leur absence, on cherche les données dans les champs éditables
- *     qui ont été postés (via _request())
+ *     qui ont été postés (via collecter_requests())
  * @return string|null
- *     Chaîne vide si aucune erreur,
- *     Null si aucun champ à modifier,
- *     Chaîne contenant un texte d'erreur sinon.
+ *
+ *     - Chaîne vide si aucune erreur,
+ *     - Null si aucun champ à modifier,
+ *     - Chaîne contenant un texte d'erreur sinon.
  */
 function article_modifier($id_article, $set=null) {
 
@@ -125,6 +128,7 @@ function article_modifier($id_article, $set=null) {
  * Insérer un nouvel article en base de données
  * 
  * En plus des données enregistrées par défaut, la fonction :
+ * 
  * - retrouve un identifiant de rubrique pour stocker l'article (la
  *   première rubrique racine) si l'identifiant de rubrique transmis est
  *   nul.
@@ -140,9 +144,9 @@ function article_modifier($id_article, $set=null) {
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
  *
- * @global array $GLOBALS['meta']
- * @global array $GLOBALS['visiteur_session']
- * @global string $GLOBALS['spip_lang']
+ * @global array meta
+ * @global array visiteur_session
+ * @global string spip_lang
  * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique parente
@@ -232,8 +236,8 @@ function article_inserer($id_rubrique) {
  * 
  * @global array $GLOBALS['meta'] 
  *
- * @pipeline_appel pre_insertion
- * @pipeline_appel post_insertion
+ * @pipeline_appel pre_edition
+ * @pipeline_appel post_edition
  * 
  * @param int $id_article
  *     Identifiant de l'article

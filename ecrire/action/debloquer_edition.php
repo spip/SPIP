@@ -10,13 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action debloquer_edition
+ * 
+ * @package SPIP\Core\Edition
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Lever les blocages d'édition pour l'utilisateur courant
+ *
+ * @uses debloquer_tous()
+ * @uses debloquer_edition()
  * 
- * @global array $GLOBALS['visiteur_session']
- * @link http://doc.spip.org/@action_instituer_collaboration_dist
+ * @global array visiteur_session
  * @return void
  */
 function action_debloquer_edition_dist() {
