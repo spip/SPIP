@@ -613,11 +613,13 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
 	if (!is_array($id)) $id = explode(',',$id);
 	$id = join(',', array_map('intval', $id));
-	if (isset($b[$id]))
-		return $b[$id];
 
-	// Notre branche commence par la rubrique de depart si $tout=true
-	$hier = $tout?$id:"";
+	if (isset($b[$id])) {
+		// Notre branche commence par la rubrique de depart si $tout=true
+		return $tout ? (strlen($b[$id]) ? $b[$id] . ",$id" : $id) : "";
+	}
+
+	$hier = "";
 
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement, en se protegeant des references circulaires
@@ -631,13 +633,18 @@ function inc_calcul_hierarchie_in_dist($id, $tout=true) {
 		$ids_nouveaux_parents = join(',', array_map('reset', $parents));
 		$hier = $ids_nouveaux_parents.(strlen($hier)?','.$hier:'');
 	}
-	$id = $ids_nouveaux_parents;
+
 	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
-	if (strlen($hier)<10000)
+	if (strlen($hier)<10000) {
 		$b[$id] = $hier;
+	}
+
+	// Notre branche commence par la rubrique de depart si $tout=true
+	$hier = $tout ? (strlen($hier) ? "$hier,$id" : $id) : $hier;
 
 	return $hier;
 }
+
 
 
 /**
