@@ -433,7 +433,6 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_popularite_2' => 'Popularidad del sitio:',
 'info_popularite_3' => 'Popularidad: @popularite@  Visitas: @visites@',
 'info_popularite_4' => 'Popularidad: @popularite@  Visitas: @visites@',
-'info_popularite_5' => 'Popularidad:',
 'info_post_scriptum' => 'Post Scr&iacute;ptum',
 'info_post_scriptum_2' => 'Post Scr&iacute;ptum:',
 'info_pour' => 'para',

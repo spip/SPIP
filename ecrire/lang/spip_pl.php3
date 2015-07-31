@@ -70,10 +70,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cal_apresmidi' => 'popo&#322;udniu',
 'cal_jour_entier' => 'ca&#322;y dzie&#324;',
-'cal_matin' => '<NEW>matin',
-'cal_par_jour' => '<NEW>calendrier par jour',
-'cal_par_mois' => '<NEW>calendrier par mois',
-'cal_par_semaine' => '<NEW>calendrier par semaine',
+'cal_matin' => 'rano',
+'cal_par_jour' => 'wg dni',
+'cal_par_mois' => 'wg miesi&#281;cy',
+'cal_par_semaine' => 'wg tygodni',
 'confirm_changer_statut' => 'Uwaga, czy na pewno chcesz zmieni&#263; status tego elementu ? Kontynuowa&#263; ?',
 
 
@@ -334,10 +334,10 @@ Dzi&#281;kujemy za uczestnictwo
 'icone_valider_message' => 'Zatwierd&#378; t&#281; wiadomo&#347;&#263;',
 'icone_visiter_site' => 'Odwied&#378;',
 'icone_voir_en_ligne' => 'Obejrzyj online',
-'image_tourner_180' => '<NEW>Rotation 180&deg;',
-'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
-'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
-'img_indisponible' => '<NEW>image indisponible',
+'image_tourner_180' => 'Obr&oacute;t o 180&deg;',
+'image_tourner_droite' => 'Obr&oacute;t o 90&deg; w prawo',
+'image_tourner_gauche' => 'Obr&oacute;t o 90&deg; w lewo',
+'img_indisponible' => 'obrazek niedost&#281;pny',
 'info_a_suivre' => 'KONTYNUUJ&nbsp;&raquo;',
 'info_a_valider' => '[do zatwierdzenia]',
 'info_acces_interdit' => 'Dost&#281;p zabroniony',
@@ -372,14 +372,14 @@ Dzi&#281;kujemy za uczestnictwo
 'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',
 'info_creer_repertoire_2' => 'w podkatalogu <b>ecrire/data/</b>, a nast&#281;pnie',
-'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
+'info_creer_vignette' => 'generowanie miniaturki',
 'info_deplier' => 'Rozwi&#324;',
 'info_descriptif_nombre' => 'opis(y):',
 'info_description' => 'Opis:',
 'info_description_2' => 'Opis:',
 'info_dimension' => 'Rozmiar:',
 'info_document' => 'Dokument',
-'info_documents' => '<NEW>Documents',
+'info_documents' => 'Dokumenty',
 'info_echange_message' => 'SPIP pozwala na wymian&#281; wiadomo&#347;ci i utworzenie Forum dyskusyjnego
   prywatnie pomi&#281;dzy u&#380;ytkownikami tej strony. Mo&#380;esz w&#322;&#261;czy&#263; lub wy&#322;&#261;czy&#263;
   t&#281; funkcj&#281;.',
@@ -420,9 +420,9 @@ Dzi&#281;kujemy za uczestnictwo
 'info_langue_principale' => 'J&#281;zyk g&#322;&oacute;wnej strony',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pikseli',
 'info_les_auteurs_1' => 'wg @les_auteurs@',
-'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
-'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
-'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_format_interdit' => 'Dla logo dozwolone s&#261; nast&#281;puj&#261;ce formaty: @formats@.',
+'info_logo_max_poids' => 'Logo mo&#380;e mie&#263; maksymalnie @maxi@ (teraz ma @actuel@).',
+'info_logo_max_taille' => 'Logo mo&#380;e mie&#263; maksymaln&#261; wielko&#347;&#263; @maxi@ (teraz ma wielko&#347;&#263; @actuel@).',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'WIADOMO&#346;&#262;',
 'info_message_supprime' => 'WIADOMO&#346;&#262; USUNI&#280;TA',
@@ -447,7 +447,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_pixels' => 'piksele',
 'info_plusieurs_mots_trouves' => 'Kilkana&#347;cie s&#322;&oacute;w kluczowych zosta&#322;o znalezionych dla "@cherche_mot@":',
 'info_popularite_5' => 'popularno&#347;&#263;:',
-'info_portfolio' => '<NEW>Portfolio',
+'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatyczne portfolio:',
 'info_premier_resultat' => '[@debut_limit@ pierwsze wyniki z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ pierwsze wyniki z @total@]',
@@ -497,7 +497,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_visite' => 'odwiedziny:',
 'info_visites' => 'odwiedziny:',
 'info_vos_rendez_vous' => 'Twoje przysz&#322;e spotkania',
-'info_zoom' => '<NEW>zoom',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Twoje notatki',
 'item_breve_proposee' => 'Zaproponowany news',
 
@@ -622,14 +622,14 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'pass_retour_public' => 'Powr&oacute;t do strony publicznej',
 'pass_rien_a_faire_ici' => 'Nie ma tu nic do zrobienia.',
 'pass_vousinscrire' => 'Zapisa&#347; si&#281; w tym serwisie',
-'precedent' => '<NEW>pr&eacute;c&eacute;dent',
+'precedent' => 'poprzedni',
 'previsualisation' => 'Podgl&#261;d',
 'previsualiser' => 'W&#322;&#261;cz podgl&#261;d',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ odwiedzin; popularno&#347;&#263;: @popularite@',
-'suivant' => '<NEW>suivant',
+'suivant' => 'nast&#281;pny',
 
 
 // T
@@ -700,27 +700,27 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 
 
 // Z
-'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
-'zbug_boucle' => '<NEW>boucle',
-'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
-'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
+'zbug_boucle' => 'p&#281;tla',
+'zbug_boucle_recursive_undef' => 'p&#281;tla rekursywna nie zosta&#322;a zdefiniowana',
+'zbug_champ_hors_boucle' => 'Pole @champ@ jest bez p&#281;tli',
 'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
-'zbug_code' => '<NEW>code',
-'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => '<NEW>externe interdit',
+'zbug_code' => 'kod',
+'zbug_critere_inconnu' => 'nieznane kryterium @critere@',
+'zbug_distant_interdit' => 'operacja niedozwolona w zewn&#281;trznej bazie',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: podw&oacute;jna definicja',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: brakuje znacznika zamykaj&#261;cego',
 'zbug_erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
-'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_execution_page' => 'b&#322;&#261;d w wykonaniu strony',
 'zbug_erreur_filtre' => 'B&#322;&#261;d : filtr <b>&laquo; @filtre@ &raquo;</b> nie zdefiniowany',
 'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_erreur_squelette' => 'B&#322;&#261;d (b&#322;&#281;dy) w szkielecie',
 'zbug_info_erreur_squelette' => 'B&#322;&#261;d na stronie',
 'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
 'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
-'zbug_resultat' => '<NEW>r&eacute;sultat',
-'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_resultat' => 'wynik',
+'zbug_serveur_indefini' => 'serwer SQL niezdefiniowany',
+'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; nieznana'
 
 );
 

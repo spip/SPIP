@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-lb',
 '0_langue' => 'L&euml;tzebuergesch [lb]',
 '0_liste' => 'spip-lb@rezo.net',
-'0_mainteneur' => 'jwander@pt.lu',
+'0_mainteneur' => 'jwander bei pt Punkt lu',
 
 
 // A
@@ -271,7 +271,7 @@ Merci fir &auml;r Participatioun
 'forum_votre_email' => '&Auml;r Email-Adress:',
 'forum_votre_nom' => '&Auml;re Numm (oder Pseudo):',
 'forum_vous_enregistrer' => 'Fir bei d&euml;sem Forum matzemaachen, muss dir Iech fir d\'&eacute;ischt umelden. Gidd hei &auml;r pers&eacute;inlech Identifikatioun un d&eacute;i der krut. Wann dir n&euml;t ugemelt sidd, da musst dir',
-'forum_vous_inscrire' => 'Iech fir d\'&eacute;ischt aschreiwen</a>.',
+'forum_vous_inscrire' => 'Iech aschreiwen.',
 
 
 // I
@@ -329,6 +329,9 @@ Merci fir &auml;r Participatioun
 'icone_valider_message' => 'D&euml;se Message valid&eacute;ieren',
 'icone_visiter_site' => 'Ukucken',
 'icone_voir_en_ligne' => 'Online weisen',
+'image_tourner_180' => '180&deg; dr&eacute;ien',
+'image_tourner_droite' => '90&deg; no riets dr&eacute;ien',
+'image_tourner_gauche' => '90&deg; no l&eacute;nks dr&eacute;ien',
 'img_indisponible' => 'Bild fehlt',
 'info_a_suivre' => 'AUFGABEN"',
 'info_a_valider' => '[ze valid&eacute;ieren]',
@@ -359,8 +362,9 @@ Merci fir &auml;r Participatioun
 'info_contact_developpeur' => 'Kontakt&eacute;iert w.e.g. en D&eacute;veloppeur.',
 'info_contenance' => 'D&euml;se Site huet:',
 'info_contribution' => 'Beitr&auml;g an de Forum\'en',
-'info_copyright' => 'ass eng fr&auml;i Software d&eacute;i &euml;nner <a href=\'copyright_fr.html\'>GPL-Lizenz</a> verdeelt g&euml;t.',
+'info_copyright' => '@spip@ ass eng fr&auml;i Software d&eacute;i &euml;nner @lien_gpl@ verdeelt g&euml;t.',
 'info_copyright_doc' => 'Fir m&eacute;i Informatiounen, kuckt op <a href=\'http://www.spip.net/lb\'>http://www.spip.net/lb</a>.',
+'info_copyright_gpl' => '&euml;nner GPL-Lizenz',
 'info_cours_edition' => '&Auml;r Artikelen an der Aarbecht',
 'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat d&euml;sem Numm derb&auml;i:',
 'info_creer_repertoire_2' => 'am Dossier <b>ecrire/data</b>, dann:',
@@ -371,6 +375,7 @@ Merci fir &auml;r Participatioun
 'info_description_2' => 'Beschreiwung:',
 'info_dimension' => 'Gr&eacute;isst:',
 'info_document' => 'Dokument',
+'info_documents' => 'Dokumenter',
 'info_echange_message' => 'SPIP erlaabt d\'Sch&eacute;cken vu Messagen a privat Forum\'en t&euml;schent den Mataarbechter vum Site. Dir k&euml;nnt d&euml;s Fonktionnalit&eacute;it an- oder ausschalten.',
 'info_ecire_message_prive' => 'E privaten Message sch&eacute;cken',
 'info_email_invalide' => 'Falsch Email-Adress.',
@@ -434,6 +439,8 @@ Merci fir &auml;r Participatioun
 'info_petit_ecran' => 'Klengen &Eacute;cran',
 'info_pixels' => 'Pixel',
 'info_plusieurs_mots_trouves' => 'E puer Schl&euml;sselwieder fonnt fir "@cherche_mot@":',
+'info_popularite_5' => 'Popularit&eacute;it:',
+'info_portfolio' => 'Portefeuille',
 'info_portfolio_automatique' => 'Automat&euml;schen Portfolio:',
 'info_premier_resultat' => '[@debut_limit@ &eacute;ischt Resultater vun @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ &eacute;ischt Resultater vun @total@]',
