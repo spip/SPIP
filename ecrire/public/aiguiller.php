@@ -112,6 +112,8 @@ function traiter_appels_inclusions_ajax(){
 			$page = recuperer_fond($fond,$contexte,array('trim'=>false));
 			$texte = $page;
 			if ($ancre = _request('var_ajax_ancre')){
+				// pas n'importe quoi quand meme dans la variable !
+				$ancre = str_replace(array('<','"',"'"),array('&lt;','&quot;',''),$ancre);
 				$texte = "<a href='#$ancre' name='ajax_ancre' style='display:none;'>anchor</a>".$texte;
 			}
 		}
