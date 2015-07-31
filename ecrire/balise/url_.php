@@ -14,14 +14,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Les balises URL_$type sont generiques, sauf qq cas particuliers.
 // Si ces balises sont utilisees pour la base locale,
-// production des appels  a generer_url_entite(id-courant, type_urls)
+// production des appels a generer_url_entite(id-courant, entite)
 // Si la base est externe et non geree par SPIP
 // on retourne NULL pour provoquer leur interpretation comme champ SQL normal.
 // Si la base est externe et sous SPIP,
 // on produit l'URL de l'objet si c'est une piece jointe
 // ou sinon l'URL du site local applique sur l'objet externe
 // ce qui permet de le voir a travers les squelettes du site local
-// Pour bien faire, il faudrait recuperer le choix du type-url distant
+// On communique le type-url distant a generer_url_entite mais il ne sert pas
+// car rien ne garantit que le .htaccess soit identique. A approfondir
 
 // http://doc.spip.org/@generer_generer_url
 function generer_generer_url($type, $p)
@@ -30,29 +31,27 @@ function generer_generer_url($type, $p)
 
 	if (!$_id) $_id = champ_sql('id_' . $type, $p);
 
-	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
+	$s = $p->id_boucle;
 
-	if (!$s)
-		return "generer_url_entite($_id, '$type')";
-	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
-		return NULL;
-	} else {
-		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+	if ($s AND $s = $p->boucles[$s]->sql_serveur) {
+
+// si une fonction de generation des url a ete definie pour ce connect l'utiliser
 		if (function_exists($f = 'generer_generer_url_'.$s)){
-			return $f($type,$_id,$s);
+			return $f($type, $_id, $s);
 		}
-		else {
-			$s = addslashes($s);
-			if ($type != 'document')
-				return "'./?"._SPIP_PAGE."=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
-			else {
-				$u = "quete_meta('adresse_site', '$s')";
-				$d = "quete_meta('dir_img', '$s')";
-				$f = "quete_fichier($_id,'$s')";
-				return "$u . '/' .\n\t$d . $f";
-			}
+		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
+			return NULL;
 		}
+		$s = _q($s);
+		if ($type == 'document') {
+			return 
+			"quete_meta('adresse_site', $s) . '/' .\n\t" .
+			"quete_meta('dir_img', $s) . \n\t" .
+			"quete_fichier($_id,$s)";
+		}
+		$s = ", '', '', $s, quete_meta('type_urls', $s)";
 	}
+	return "generer_url_entite($_id, '$type'$s)";
 }
 
 

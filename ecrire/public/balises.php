@@ -820,6 +820,12 @@ function balise_CONFIG_dist($p) {
 		return balise_ENV_dist($p, '$GLOBALS["meta"]');
 }
 
+function balise_CONNECT_dist($p) {
+	$p->code = '($connect ? $connect : NULL)';
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 //
 // #SESSION
 // Cette balise est un tableau des donnees du visiteur (nom, email etc)

@@ -101,7 +101,7 @@
 			<h2><:sites_web:> (#GRAND_TOTAL)</h2>
 			<ul>
 				<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}><li>
-		<a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a>
+		<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
 			</li></BOUCLE_sites>
 			</ul>
 			[<p class="pagination">(#PAGINATION)</p>]
