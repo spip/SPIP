@@ -84,17 +84,24 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 
 function calculer_boucle($id_boucle, &$boucles) {
  
-  return
-	(($boucles[$id_boucle]->type_requete == 'boucle') ?
-	 ( "\n	\$t0 = " . $boucles[$id_boucle]->return . ";") :
-	 ( calculer_requete_sql($boucles[$id_boucle]) .
-	   calculer_boucle_nonrec($id_boucle, $boucles)))
+  if ($boucles[$id_boucle]->type_requete == 'boucle')  {
+    $corps = ( "\n	\$t0 = " . $boucles[$id_boucle]->return . ";");
+    $req = "";
+    } else {
+      $corps = calculer_boucle_nonrec($id_boucle, $boucles);
+      // attention, ne calculer la requete que maintenant
+      // car la fonction precedente appelle index_pile qui influe dessus
+      $req = calculer_requete_sql($boucles[$id_boucle]);
+    }
+  return $req . $corps 
 	. (($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
 	.  "\n	return \$t0;";
 }
 
-// compil d'un boucle non recursive; son corps est un Select SQL + While PHP
+// compil d'un boucle non recursive. 
+// c'est un "while (fetch_sql)" dans le cas général,
+// qu'on essaye d'optimiser un max.
 
 function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
@@ -232,7 +239,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 }
 
 
-function calculer_requete_sql($boucle)
+function calculer_requete_sql(&$boucle)
 {
 	if (!$order = $boucle->order
 	AND !$order = $boucle->default_order)
