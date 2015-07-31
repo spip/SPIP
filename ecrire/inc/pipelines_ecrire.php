@@ -119,7 +119,7 @@ function f_boite_infos($flux) {
 function f_afficher_blocs_ecrire($flux) {
 	static $o=array();
 	if (is_string($fond=$flux['args']['fond'])) {
-		$exec = _request('exec');
+		$exec = isset($flux['args']['contexte']['exec']) ? $flux['args']['contexte']['exec'] : _request('exec');
 		if (!isset($o[$exec])){
 			$o[$exec] = trouver_objet_exec($exec);
 		}
