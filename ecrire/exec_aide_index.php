@@ -483,7 +483,7 @@ else {
 '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
 <html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>
 <head>
-<title>$title</title>\n";
+<title>"._T('info_aide_en_ligne')."</title>\n";
 
 		if ($frame == 'menu')
 			help_menu($aide, $html);

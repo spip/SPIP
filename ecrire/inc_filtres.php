@@ -1969,9 +1969,9 @@ function image_typo() {
 
 	
 	if (!file_exists($fichier) AND $flag_gd_typo) {
-		// Il faut completer avec un vrai _SPIP_PATH, de facon a pouvoir livrer des /polices dans les dossiers de squelettes
-		$font = find_in_path("polices/$police", "ecrire");
-	
+		# que faire si la police n'existe pas ?
+		$font = find_in_path('polices/'.$police, _DIR_INCLUDE);
+
 		$imgbidon = imageCreateTrueColor($largeur, 45);
 		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille);
 		$hauteur = $retour["height"];

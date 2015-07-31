@@ -40,7 +40,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	else if ($charset == 'windows-1251') $charset = 'cp1251';
 	else if ($charset == 'windows-1256') $charset = 'cp1256';
 
-	if ($f = find_in_path('charsets/'.$charset.'.php')) {
+	if ($f = find_in_path('charsets/'.$charset.'.php', _DIR_INCLUDE)) {
 		include($f);
 		return $charset;
 	} else {
