@@ -19,7 +19,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $i;
 	global $couleur_claire, $spip_lang_left;
-	global $browser_name;
+	global $browser_name, $browser_version;
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -61,9 +61,11 @@ function enfant($leparent){
 			if ($statut_rubrique!='publie') $titre = "($titre)";
 			if (lire_meta('multi_rubriques') == 'oui' AND $langue_choisie_rub == "oui") $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 
+			$selec_rub = "selec_rub";
+			if ($browser_name == "MSIE" AND $browser_version == "5.0b1") $selec_rub = ""; // Bug de MSIE MacOs 9.0
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<option".mySel($my_rubrique,$id_parent)." class='selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."\n";
+				echo "<option".mySel($my_rubrique,$id_parent)." class='$selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."\n";
 			}
 			enfant($my_rubrique);
 		}
