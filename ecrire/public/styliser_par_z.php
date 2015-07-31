@@ -104,10 +104,7 @@ function public_styliser_par_z_dist($flux){
 			// echaffaudage :
 			// si c'est un fond de contenu d'un objet en base
 			// generer un fond automatique a la volee pour les webmestres
-			elseif (strncmp($fond, "$z_contenu/", strlen($z_contenu)+1)==0
-				AND include_spip('inc/autoriser')
-				AND isset($GLOBALS['visiteur_session']['statut']) // performance
-				AND autoriser('webmestre')){
+			elseif (strncmp($fond, "$z_contenu/", strlen($z_contenu)+1)==0){
 				$type = substr($fond,strlen($z_contenu)+1);
 				if (($type=='page') AND isset($flux['args']['contexte'][$page]))
 					$type = $flux['args']['contexte'][$page];
@@ -115,9 +112,11 @@ function public_styliser_par_z_dist($flux){
 					$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
 				if (is_string($disponible[$type])) {
 					$flux['data'] = $disponible[$type];
-
 				}
 				elseif ($echaffauder
+					AND include_spip('inc/autoriser')
+					AND isset($GLOBALS['visiteur_session']['statut']) // performance
+					AND autoriser('echaffauder',$type)
 					AND $is = $disponible[$type]
 					AND is_array($is)) {
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
@@ -228,7 +227,7 @@ function z_fond_valide($squelette){
  *	nom du bloc cherche
  * @param string $fond
  *	nom de la page (ou 'dist' pour le bloc par defaut)
- * @param <type> $ext
+ * @param string $ext
  *	extension du squelette
  * @return string
  */
