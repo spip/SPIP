@@ -55,7 +55,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 			// existant mais encore muet, renvoyer les infos
 			if ($row['statut'] == 'nouveau') {
 				// recreer le pass
-				$pass = creer_pass_pour_auteur($id_auteur);
+				$pass = creer_pass_pour_auteur($row['id_auteur']);
 				$message = envoyer_inscription(
 					$mail_inscription, $row['statut'], $mode,
 					$row['login'], $pass, $nom_inscription);
