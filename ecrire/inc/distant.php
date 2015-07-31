@@ -12,7 +12,7 @@
 
 /**
  * Ce fichier gère l'obtention de données distantes
- * 
+ *
  * @package SPIP\Core\Distant
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -22,7 +22,7 @@ if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCO
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
 if (!defined('_INC_DISTANT_MAX_SIZE')) define('_INC_DISTANT_MAX_SIZE',2097152);
 
-define('_REGEXP_COPIE_LOCALE', ',' . 
+define('_REGEXP_COPIE_LOCALE', ',' .
        preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
        . "/?spip.php[?]action=acceder_document.*file=(.*)$,");
 
@@ -265,6 +265,7 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = _INC
 		return false;
 	}
 
+	$result = '';
 	// Sauf en fopen, envoyer le flux d'entree
 	// et recuperer les en-tetes de reponses
 	if ($fopen)
@@ -273,14 +274,19 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = _INC
 		$headers = recuperer_entetes($f, $date_verif);
 		if (is_numeric($headers)){
 			fclose($f);
-			// Chinoisierie inexplicable pour contrer 
+			// Chinoisierie inexplicable pour contrer
 			// les actions liberticides de l'empire du milieu
 			if ($headers){
 				spip_log("HTTP status $headers pour $url");
 				return false;
 			}
-			elseif ($result = @file_get_contents($url))
-				return array('', $result);
+			$t = @parse_url($url);
+			$host = $t['host'];
+			if (!need_proxy($host)
+				AND $result = @file_get_contents($url)){
+				// on peuple les headers de vide et on continue
+				$headers = array('');
+			}
 			else
 				return false;
 		}
@@ -300,9 +306,11 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = _INC
 	$gz = preg_match(",\bContent-Encoding: .*gzip,is", $headers) ?
 		(_DIR_TMP . md5(uniqid(mt_rand())) . '.tmp.gz') : '';
 
-#	spip_log("entete ($trans $copy $gz)\n$headers"); 
-	$result = recuperer_body($f, $taille_max, $gz ? $gz : ($copy ? $trans : ''));
-	fclose($f);
+#	spip_log("entete ($trans $copy $gz)\n$headers");
+	if (!$result){
+		$result = recuperer_body($f, $taille_max, $gz ? $gz : ($copy ? $trans : ''));
+		fclose($f);
+	}
 	if (!$result)
 		return array($headers, $result);
 
@@ -609,7 +617,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 		if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
 	}
 	$a['mime_type']=$mime_type;
-	
+
 	return $a;
 }
 
@@ -671,7 +679,8 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
 	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers, $date);
 	if (!$f){
 		// fallback : fopen
-		if (!_request('tester_proxy')){
+		if (!need_proxy($host)
+			AND !_request('tester_proxy')){
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
@@ -691,10 +700,19 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	$http_proxy = need_proxy($host);
 	if ($user) $user = urlencode($user[0]) . ":" . urlencode($user[1]);
 
+	$connect = "";
 	if ($http_proxy){
-		$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
-			. (!$user ? '' : "$user@")
-			. "$host" . (($port!=80) ? ":$port" : "") . $path;
+		if (defined('_PROXY_HTTPS_VIA_CONNECT') AND $scheme=="ssl"){
+			$path_host = (!$user ? '' : "$user@") . $host . (($port!=80) ? ":$port" : "");
+			$connect = "CONNECT " .$path_host." $vers\r\n"
+				."Host: $path_host\r\n"
+				."Proxy-Connection: Keep-Alive\r\n";
+		}
+		else {
+			$path = (($scheme=='ssl') ? 'https://' : "$scheme://")
+				. (!$user ? '' : "$user@")
+				. "$host" . (($port!=80) ? ":$port" : "") . $path;
+		}
 		$t2 = @parse_url($http_proxy);
 		$first_host = $t2['host'];
 		if (!($port = $t2['port'])) $port = 80;
@@ -704,9 +722,34 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	else
 		$first_host = $noproxy . $host;
 
-	$f = @fsockopen($first_host, $port);
-	spip_log("Recuperer $path sur $first_host:$port par $f");
-	if (!$f) return false;
+	if ($connect){
+		$streamContext = stream_context_create(array('ssl' => array('verify_peer' => false, 'allow_self_signed' => true)));
+		$f = @stream_socket_client("tcp://$first_host:$port", $nError, $sError, 10, STREAM_CLIENT_CONNECT, $streamContext);
+		spip_log("Recuperer $path sur $first_host:$port par $f (via CONNECT)","connect");
+		if (!$f) return false;
+		stream_set_timeout($f, 10);
+
+		fputs($f, $connect);
+		fputs($f, "\r\n");
+		$res = fread($f, 1024);
+		if (!$res
+		  OR !count($res = explode(' ',$res))
+		  OR $res[1]!=='200'){
+			spip_log("Echec CONNECT sur $first_host:$port","connect"._LOG_INFO_IMPORTANTE);
+			fclose($f);
+			return false;
+		}
+		// important, car sinon on lit trop vite et les donnees ne sont pas encore dispo
+		stream_set_blocking($f, true);
+		// envoyer le handshake
+		stream_socket_enable_crypto($f, true,	STREAM_CRYPTO_METHOD_SSLv23_CLIENT);
+		spip_log("OK CONNECT sur $first_host:$port","connect");
+	}
+	else {
+		$f = @fsockopen($first_host, $port);
+		spip_log("Recuperer $path sur $first_host:$port par $f");
+		if (!$f) return false;
+	}
 
 	$site = $GLOBALS['meta']["adresse_site"];
 
@@ -726,4 +769,3 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 	return $f;
 }
 
-?>
