@@ -100,7 +100,7 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 		if ($mode===-1)
 			return array('action'=>$action,'arg'=>$arg,'hash'=>$hash);
 		else
-			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $public);
+			return generer_url_action($action, "arg=".rawurlencode($arg)."&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $public);
 	}
 
 	// mode formulaire
