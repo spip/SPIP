@@ -358,7 +358,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	if (strlen($tranches) OR $toujours_afficher) {
 	 	$result = spip_query($requete);
-	 	$num_rows = mysql_num_rows($result);
 
 		if ($afficher_cadre) debut_cadre_relief("article-24.gif");
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% background=''>";
@@ -368,13 +367,11 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 		echo $tranches;
 
-		$compteur_liste = 0;
-		$table = '';
-
 		while ($row = mysql_fetch_array($result)) {
 			$vals = '';
 
 			$id_article = $row['id_article'];
+			$tous_id[] = $id_article;
 			$titre = $row['titre'];
 			$id_rubrique = $row['id_rubrique'];
 			$date = $row['date'];
@@ -448,7 +445,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if ($afficher_cadre) fin_cadre_relief();
 
 	}
-	return $num_rows;
+	return $tous_id;
 }
 
 
@@ -478,14 +475,14 @@ function afficher_breves($titre_table, $requete) {
 
 		echo $tranches;
 
-	 	$result = spip_query($requete);
-		$num_rows = mysql_num_rows($result);
+		$result = spip_query($requete);
 
 		$table = '';
 		while ($row = mysql_fetch_array($result)) {
 			$vals = '';
 
 			$id_breve = $row['id_breve'];
+			$tous_id[] = $id_breve;
 			$date_heure = $row['date_heure'];
 			$titre = $row['titre'];
 			$statut = $row['statut'];
@@ -516,7 +513,7 @@ function afficher_breves($titre_table, $requete) {
 		echo "</TABLE>";
 		fin_cadre_relief();
 	}
-	return $num_rows;
+	return $tous_id;
 }
 
 
@@ -546,14 +543,14 @@ function afficher_rubriques($titre_table, $requete) {
 
 		echo $tranches;
 
-	 	$result = spip_query($requete);
-		$num_rows = mysql_num_rows($result);
+		$result = spip_query($requete);
 
 		$table = '';
 		while ($row = mysql_fetch_array($result)) {
 			$vals = '';
 
 			$id_rubrique = $row['id_rubrique'];
+			$tous_id[] = $id_rubrique;
 			$titre = $row['titre'];
 
 			$s = "<b><a href=\"naviguer.php3?coll=$id_rubrique\">";
@@ -578,7 +575,7 @@ function afficher_rubriques($titre_table, $requete) {
 		echo "</TABLE>";
 		fin_cadre_relief();
 	}
-	return $num_rows;
+	return $tous_id;
 }
 
 //
@@ -631,16 +628,16 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
 			for ($count=2;$count<=$compteur_forum AND $count<11;$count++){
 				$fond[$count]='img_pack/rien.gif';
-				if ($i[$count]!=$nb_forum[$count]){		
+				if ($i[$count]!=$nb_forum[$count]){
 					$fond[$count]='img_pack/forum-vert.gif';
-				}		
+				}
 				$fleche='img_pack/rien.gif';
 				if ($count==$compteur_forum){		
 					$fleche='img_pack/forum-droite.gif';
-				}		
+				}
 				echo "<td width=10 valign='top' background=$fond[$count]><img src=$fleche alt='' width=10 height=13 border=0></td>\n";
 			}
-			
+
 			echo "\n<td width=100% bgcolor='#eeeeee' valign='top'>";
 
 			// Si refuse, cadre rouge

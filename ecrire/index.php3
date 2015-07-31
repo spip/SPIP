@@ -303,11 +303,13 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 //
 
 echo "<P align=left>";
-afficher_articles("Vos articles en cours de r&eacute;daction",
+$vos_articles = afficher_articles("Vos articles en cours de r&eacute;daction",
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur".
+	" AND (articles.statut='prepa' OR articles.statut='prop') ORDER BY articles.date DESC");
 
+if ($vos_articles) $vos_articles = ' AND id_article NOT IN ('.join($vos_articles,',').')';
 
 //
 // Verifier les boucles a mettre en relief
@@ -316,7 +318,7 @@ afficher_articles("Vos articles en cours de r&eacute;daction",
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles WHERE statut='prop' LIMIT 0,1";
+	$query = "SELECT id_article FROM spip_articles WHERE statut='prop'$vos_articles LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (mysql_num_rows($result) > 0);
 }
@@ -349,7 +351,7 @@ if ($relief) {
 	//
 	afficher_articles("Les articles propos&eacute;s &agrave; la publication",
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE statut='prop' ORDER BY date DESC");
+		"FROM spip_articles WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
 
 	//
@@ -398,19 +400,6 @@ if (strpos($les_enfants2,"<P>")){
 	echo "</table>";
 
 
-
-
-
-//
-// Vos articles soumis au vote
-//
-
-echo "<p>";
-afficher_articles("Vos articles en attente de validation",
-	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop' ORDER BY articles.date");
-
 if ($options == 'avancees') {
 
 	//
@@ -422,7 +411,6 @@ if ($options == 'avancees') {
 		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
-
 
 }
 
