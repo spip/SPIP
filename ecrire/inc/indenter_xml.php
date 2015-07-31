@@ -39,6 +39,10 @@ function defautElement($phraseur, $data)
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 {
+  // bug de SAX qui ne dit pas si une Entite est dans un attribut ou non
+  // ==> eliminer toutes les entites
+
+	$data = unicode2charset(html2unicode($data, true));
 	xml_parsestring($phraseur, $data);
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
 }
@@ -49,7 +53,7 @@ function phraserTout($phraseur, $data)
  var $contenu = array();
  var $ouvrant = array();
  var $reperes = array();
- var $entites = array();
+
 }
 
 // http://doc.spip.org/@inc_indenter_xml_dist
