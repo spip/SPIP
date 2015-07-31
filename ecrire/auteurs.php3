@@ -24,7 +24,7 @@ else
 	$retour = $myretour;
 $retour = urlencode($retour);
 
-if ($visiteurs == "oui" && (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
+if ($visiteurs == "oui")
 	debut_page("Visiteurs","redacteurs","redacteurs");
 else
 	debut_page("Auteurs$partri","redacteurs","redacteurs");
@@ -34,24 +34,32 @@ debut_gauche();
 
 
 debut_boite_info();
-	if ($visiteurs == "oui" && (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
+	if ($visiteurs == "oui")
 		echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
 		dans l'espace public du site (forums sur abonnement).");
 	else {
 		echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = bleu; administrateur=noir). ");
+		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur=jaune). ");
 
 		if ($connect_statut == '0minirezo')
-			echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par un icone rouge;
+			echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
 			les auteurs effac&eacute;s par une poubelle.");
 	}
 fin_boite_info();
 
 if ($connect_statut == '0minirezo') {
+	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 0,1";
+	$result = spip_query($query);
+	$flag_visiteurs = spip_num_rows($result) > 0;
+
 	debut_raccourcis();
 	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
-	if ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
-		icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
+	if ($flag_visiteurs) {
+		if ($visiteurs == "oui")
+			icone_horizontale ("Afficher les auteurs", "auteurs.php3", "redacteurs-24.gif", "");
+		else
+			icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
+	}
 	fin_raccourcis();
 }
 debut_droite();
@@ -93,7 +101,7 @@ switch ($tri) {
 }
 
 
-// si on doit afficher les auteurs par statut ou par nom, 
+// si on doit afficher les auteurs par statut ou par nom,
 // la requete principale est simple, et une autre requete
 // vient calculer les nombres d'articles publies ;
 // si en revanche on doit classer par nombre, la bonne requete
@@ -206,20 +214,20 @@ while ($i++ < $debut AND each($auteurs));
 debut_cadre_relief('redacteurs-24.gif');
 echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH='100%' class='arial2'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
-echo "<td width='50'>";
-	$img = "<img src='img_pack/bonhomme-noir.gif' alt='' border='0'>";
+echo "<td width='20'>";
+	$img = "<img src='img_pack/admin-12.gif' alt='' border='0'>";
 	if ($tri=='statut')
 		echo $img;
 	else
 		echo "<a href='auteurs.php3?tri=statut' title='Trier par statut'>$img</a>";
-	
+
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
 		echo '<b>Nom</b>';
 	else
 		echo "<a href='auteurs.php3?tri=nom' title='Trier par nom'>Nom</a>";
 
-echo "</td><td colspan=2>Contact";
+echo "</td><td colspan='2'>Contact";
 echo "</td><td>";
 	if ($visiteurs != 'oui') {
 		if ($tri=='nombre')
@@ -241,11 +249,11 @@ if ($nombre_auteurs > $max_par_page) {
 			echo "<a href=$myretour&debut=$j>$j</a>";
 		else
 			echo " <a href=$myretour>0</a>";
-			
+
 		if ($debut > $j  AND $debut < $j+$max_par_page){
 			echo " | <b>$debut</b>";
-		}	
-			
+		}
+
 	}
 	echo "</font>";
 	echo "</td></tr>\n";
@@ -257,14 +265,14 @@ if ($nombre_auteurs > $max_par_page) {
 		while (list($key,$val) = each($lettre)) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
-			else 
+			else
 				echo "<a href=$myretour&debut=$val>$key</a> ";
 		}
 		echo "</font>";
 		echo "</td></tr>\n";
 	}
 
-	
+
 	$debut_prec = max($debut - $max_par_page,0);
 	if ($debut > 0) {
 		echo "<tr bgcolor='white'><td colspan=5>";
@@ -285,7 +293,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo "<tr bgcolor='$couleur'>";
 
 	// statut auteur
-	echo "<td width='50'>";
+	echo "<td>";
 	echo bonhomme_statut($row);
 
 	// nom

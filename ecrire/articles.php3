@@ -991,12 +991,12 @@ if (spip_num_rows($result)) {
 		$url_site_auteur = $row["url_site"];
 		$statut_auteur = $row["statut"];
 		if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
-	
+
 		$les_auteurs[] = $id_auteur;
-	
+
 		if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
 		else $aff_articles = "('prop', 'publie')";
-		
+
 		$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
 			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
@@ -1011,26 +1011,8 @@ if (spip_num_rows($result)) {
 		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
 
 		echo "<TR BGCOLOR='$couleur' WIDTH=\"100%\">";
-		echo "<TD WIDTH=23>";
-		echo "<A HREF=\"$url_auteur\">";
-		switch ($statut_auteur) {
-		case "0minirezo":
-			echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
-			break;					
-		case "2redac":
-		case "1comite":
-			echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
-			break;					
-		case "5poubelle":
-			echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
-			break;					
-		case "nouveau":
-			echo "&nbsp;";
-			break;
-		default:
-			echo "&nbsp;";
-		}
-		echo "</A>";
+		echo "<TD WIDTH='20'>&nbsp;";
+		echo bonhomme_statut($row);
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
