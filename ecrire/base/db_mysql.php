@@ -189,37 +189,37 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 
 function spip_mysql_showtable($nom_table)
 {
-  $a = spip_query("SHOW TABLES LIKE '$nom_table'");
-  if (!a) return "";
-  if (!spip_fetch_array($a)) return "";
-  list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
-  if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
-    return "";
-  else {
-    $dec = $r[1];
-    if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
-      $namedkeys = $r[2];
-      $dec = $r[1];
-    }
-    else 
-      $namedkeys = "";
+	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
+	if (!a) return "";
+	if (!spip_fetch_array($a)) return "";
+	list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
+	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
+		return "";
+	else {
+		$dec = $r[1];
+		if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
+			$namedkeys = $r[2];
+			$dec = $r[1];
+		}
+		else 
+			$namedkeys = "";
 
-    $fields = array();
-    foreach(preg_split("/,\s*`/",$dec) as $v) {
-      preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
-      $fields[strtolower($r[1])] = $r[2];
-    }
-    $keys = array();
+		$fields = array();
+		foreach(preg_split("/,\s*`/",$dec) as $v) {
+			preg_match("/^\s*`?([^`]*)`\s*(.*)/",$v,$r);
+			$fields[strtolower($r[1])] = $r[2];
+		}
+		$keys = array();
 
-    foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
-	      if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
-		$k = str_replace("`", '', trim($r[1]));
-		$t = strtolower(str_replace("`", '', $r[2]));
-		if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
-	    }
-    }
-    return array('field' => $fields,	'key' => $keys);
-  }
+		foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
+			if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+				$k = str_replace("`", '', trim($r[1]));
+				$t = strtolower(str_replace("`", '', $r[2]));
+				if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
+			}
+		}
+		return array('field' => $fields,	'key' => $keys);
+	}
 } 
 
 //
