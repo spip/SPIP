@@ -115,7 +115,6 @@ function calculer_rubriques() {
 
 	// Comme ce calcul est fait apres chaque publication on en profite
 	// pour recalculer les langues utilisees sur le site
-	include_spip('inc/lang');
 	calculer_langues_utilisees();
 
 	// on calcule la date du prochain article post-date

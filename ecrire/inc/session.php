@@ -156,7 +156,7 @@ function verifier_session($change=false) {
 // http://doc.spip.org/@rejouer_session
 function rejouer_session()
 {
-	include_spip('inc/minipres');
+	include_spip('inc/filtres');
 	return	  http_img_pack('rien.gif', " ", "id='img_session' width='0' height='0'") .
 		  http_script("\ndocument.img_session.src='" . generer_url_action('cookie','change_session=oui', true) .  "'");
 }
