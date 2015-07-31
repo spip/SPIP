@@ -343,17 +343,19 @@ function phraser_criteres($params, &$result) {
 
 			if (($var->type != 'texte') ||
 			    (strpos("0123456789-", $param[strlen($param)-1])
-			     !== false))
+			     !== false)) {
 			  $op = ',';
-			else {
-			  preg_match("/^([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
-			  $op = $m[1];
-			  if ($m[2]) $v[1][0]->texte = $m[2]; else array_shift($v[1]);
+			  $not = "";
+			} else {
+			  preg_match("/^([!]?)([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
+			  $op = $m[2];
+			  $not = $m[1];
+			  if ($m[3]) $v[1][0]->texte = $m[3]; else array_shift($v[1]);
 			}
 			array_shift($v);
 			$crit = new Critere;
 			$crit->op = $op;
-			$crit->not = "";
+			$crit->not = $not;
 			$crit->param = $v;
 			$args[] = $crit;
 		  } else {
