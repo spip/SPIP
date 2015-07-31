@@ -18,96 +18,101 @@ define('_EXTENSION_PARTIES', '.gz');
 // http://doc.spip.org/@exec_export_all_args
 function inc_export_dist($meta)
 {
-	$start = false;
-	list($gz, $archive, $rub, $tables_for_dump, $etape_actuelle, $sous_etape) = 
-		unserialize($GLOBALS['meta'][$meta]);
+	if (!isset($GLOBALS['meta'][$meta])) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
+		$start = false;
+		list($gz, $archive, $rub, $tables_for_dump, $etape_actuelle, $sous_etape) = 
+			unserialize($GLOBALS['meta'][$meta]);
 
-	// determine upload va aussi initialiser l'index "restreint"
-	$maindir = determine_upload();
-	if (!$GLOBALS['visiteur_session']['restreint'])
-		$maindir = _DIR_DUMP;
-	$dir = sous_repertoire($maindir, $meta);
-	$file = $dir . $archive;
-	$metatable = $meta . '_tables';
+		// determine upload va aussi initialiser l'index "restreint"
+		$maindir = determine_upload();
+		if (!$GLOBALS['visiteur_session']['restreint'])
+			$maindir = _DIR_DUMP;
+		$dir = sous_repertoire($maindir, $meta);
+		$file = $dir . $archive;
+		$metatable = $meta . '_tables';
 
-	// Reperer une situation anormale (echec reprise sur interruption)
-	if (!$etape_actuelle AND !$sous_etape) {
-		$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
-		if ($l) {
-			spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
-			foreach($l as $dummy) spip_unlink($dummy);
+		// Reperer une situation anormale (echec reprise sur interruption)
+		if (!$etape_actuelle AND !$sous_etape) {
+			$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
+			if ($l) {
+				spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
+				foreach($l as $dummy) spip_unlink($dummy);
+			}
+			$start = true; //  utilise pour faire un premier hit moitie moins long
+			$tables_sauvegardees = array();
+		} else 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
+
+		// concatenation des fichiers crees a l'appel precedent
+		ramasse_parties($dir, $archive);
+		$all = count($tables_for_dump);
+		if ($etape_actuelle > $all OR !$all){
+			include_spip('inc/headers');
+			redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true, true));
 		}
-		$start = true; //  utilise pour faire un premier hit moitie moins long
-		$tables_sauvegardees = array();
-	} else 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
 
-	// concatenation des fichiers crees a l'appel precedent
-	ramasse_parties($dir, $archive);
-	$all = count($tables_for_dump);
-	if ($etape_actuelle > $all OR !$all){
-		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true, true));
-	}
+		include_spip('inc/minipres');
+		@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
-	include_spip('inc/minipres');
-	@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+		echo ( install_debut_html(_T('info_sauvegarde') . " ($all)"));
 
-	echo ( install_debut_html(_T('info_sauvegarde') . " ($all)"));
-
-	if (!($timeout = ini_get('max_execution_time')*1000));
-	$timeout = 30000; // parions sur une valeur tellement courante ...
+		if (!($timeout = ini_get('max_execution_time')*1000));
+		$timeout = 30000; // parions sur une valeur tellement courante ...
 	// le premier hit est moitie moins long car seulement une phase d'ecriture de morceaux
 	// sans ramassage
 	// sinon grosse ecriture au 1er hit, puis gros rammassage au deuxieme avec petite ecriture,... ca oscille
-	if ($start) $timeout = round($timeout/2);
+		if ($start) $timeout = round($timeout/2);
 
 	// Les sauvegardes partielles prennent le temps d'indiquer les logos
 	// Instancier une fois pour toutes, car on va boucler un max.
 	// On complete jusqu'au secteur pour resituer dans l'arborescence)
-	if ($rub) {
-		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
-		$les_rubriques = complete_fils(array($rub));
-		$les_meres  = complete_secteurs(array($rub));
-	} else {
-		$GLOBALS['chercher_logo'] = false;
-		$les_rubriques = $les_meres = '';
-	}
+		if ($rub) {
+			$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
+			$les_rubriques = complete_fils(array($rub));
+			$les_meres  = complete_secteurs(array($rub));
+		} else {
+			$GLOBALS['chercher_logo'] = false;
+			$les_rubriques = $les_meres = '';
+		}
 
 	// script de rechargement auto sur timeout
-	$redirect = generer_url_ecrire("export_all");
-	echo http_script("window.setTimeout('location.href=\"".$redirect."\";',$timeout)");
+		$redirect = generer_url_ecrire("export_all");
+		echo http_script("window.setTimeout('location.href=\"".$redirect."\";',$timeout)");
 
-	echo "<div style='text-align: left'>\n";
-	$etape = 1;
-	foreach($tables_for_dump as $table){
-		if ($etape_actuelle <= $etape) { // sauter les deja faits
-		  $r = sql_countsel($table);
-		  echo ( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
-		  flush();
-		  if (!$r) $r = ( _T('texte_vide'));
-		  else {
-		    $f = $dir . $archive . '.part_' . sprintf('%03d',$etape);
-		    $r = export_objets($table, $sous_etape, $r, $f, $les_rubriques, $les_meres, $meta);
-		    $r += $sous_etape*_EXPORT_TRANCHES_LIMITE;
-		    // info pas fiable si interruption+partiel
-		    if ($rub AND $etape_actuelle > 1) $r = ">= $r";
-		  }
-		  echo $r; 
-		  flush();
-		  $sous_etape = 0;
-		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
-		  $tables_sauvegardees[$table] = "$table ($r)";
-		  ecrire_meta($metatable, serialize($tables_sauvegardees),'non');
+		echo "<div style='text-align: left'>\n";
+		$etape = 1;
+		foreach($tables_for_dump as $table){
+			if ($etape_actuelle <= $etape) { // sauter les deja faits
+			  $r = sql_countsel($table);
+			  echo ( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
+			  flush();
+			  if (!$r) $r = ( _T('texte_vide'));
+			  else {
+			    $f = $dir . $archive . '.part_' . sprintf('%03d',$etape);
+			    $r = export_objets($table, $sous_etape, $r, $f, $les_rubriques, $les_meres, $meta);
+			    $r += $sous_etape*_EXPORT_TRANCHES_LIMITE;
+			    // info pas fiable si interruption+partiel
+			    if ($rub AND $etape_actuelle > 1) $r = ">= $r";
+			  }
+			  echo $r; 
+			  flush();
+			  $sous_etape = 0;
+			  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
+			  $tables_sauvegardees[$table] = "$table ($r)";
+			  ecrire_meta($metatable, serialize($tables_sauvegardees),'non');
+			}
+			$etape++;
+			$v = serialize(array($gz, $archive, $rub, $tables_for_dump, $etape,$sous_etape));
+			ecrire_meta($meta, $v,'non');
 		}
-		$etape++;
-		$v = serialize(array($gz, $archive, $rub, $tables_for_dump, $etape,$sous_etape));
-		ecrire_meta($meta, $v,'non');
+		echo ( "</div>\n");
+		// si Javascript est dispo, anticiper le Time-out
+		echo  ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
+		echo (install_fin_html());
+		flush();
 	}
-	echo ( "</div>\n");
-	// si Javascript est dispo, anticiper le Time-out
-	echo  ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
-	echo (install_fin_html());
-	flush();
 }
 
 
