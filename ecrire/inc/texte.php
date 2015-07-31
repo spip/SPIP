@@ -1234,7 +1234,7 @@ function autoliens_callback($r) {
 		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\b/S', $l)) {
 			$l = inserer_attribut(expanser_liens('[->http://'.$l.']'),
 				'rel', 'nofollow');
-			// si le texte ne contanait pas le 'http:' on le supprime aussi
+			// si le texte ne contenait pas le 'http:' on le supprime aussi
 			if (!$m)
 				$l = str_replace('>http://', '>', $l);
 			return $l;
@@ -1247,7 +1247,7 @@ function autoliens_callback($r) {
 // http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($texte) {
 	return preg_replace_callback(
-	',\[[^\[\]]*->.*?\]|<[^<>]*>|((http:|www\.)[^"\'\s\[\]]+),S',
+	',\[[^\[\]]*->.*?\]|<a\b.*?</a>|<[^<>]*>|((http:|www\.)[^"\'\s\[\]]+),Si',
 	'autoliens_callback', $texte);
 	return $texte;
 }
@@ -1432,7 +1432,7 @@ function traiter_les_notes($mes_notes) {
 // http://doc.spip.org/@propre
 function propre($t, $connect='') {
 
-	return !$t ? '' :
+	return !$t ? strval($t) :
 		echappe_retour_modeles(
 			traiter_raccourcis(
 				expanser_liens(echappe_html($t),$connect)));
