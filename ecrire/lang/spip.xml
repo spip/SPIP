@@ -174,7 +174,7 @@
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ru" total="634" traduits="630" relire="0" modifs="2" nouveaux="2" pourcent="99.37">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="634" traduits="633" relire="0" modifs="0" nouveaux="1" pourcent="99.84">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="634" traduits="634" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="sq" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sq" total="634" traduits="470" relire="0" modifs="51" nouveaux="113" pourcent="74.13">
