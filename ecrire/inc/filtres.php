@@ -3859,9 +3859,14 @@ function timestamp($fichier){
 
 /**
  * Nettoyer le titre d'un email
- * eviter une erreur lorsqu'on utilise |nettoyer_titre_email dans un squelette de mail
- * @param  $titre
- * @return mixed
+ * 
+ * Éviter une erreur lorsqu'on utilise `|nettoyer_titre_email` dans un squelette de mail
+ *
+ * @filtre nettoyer_titre_email
+ * @uses nettoyer_titre_email()
+ * 
+ * @param string $titre
+ * @return string
  */
 function filtre_nettoyer_titre_email_dist($titre){
 	include_spip('inc/envoyer_mail');
@@ -3873,6 +3878,8 @@ function filtre_nettoyer_titre_email_dist($titre){
  *
  * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
  *
+ * @uses chercher_rubrique()
+ * 
  * @param string $titre
  * @param int $id_objet
  * @param int $id_parent

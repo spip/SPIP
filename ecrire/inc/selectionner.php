@@ -10,15 +10,35 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion le l'affichage du sélecteur de rubrique AJAX
+ *
+ * @package SPIP\Core\Rubriques
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
 
-//
-// Affiche un mini-navigateur ajax positionne sur la rubrique $sel
-//
 
-// http://doc.spip.org/@inc_selectionner_dist
+/**
+ * Affiche un mini-navigateur ajax positionné sur la rubrique `$sel`
+ *
+ * @uses construire_selectionner_hierarchie()
+ * @uses inc_plonger_dist()
+ * 
+ * @param int $sel
+ *     Identifiant de la rubrique
+ * @param string $idom
+ *     Identifiant dans le dom de l'élément
+ * @param int $exclus
+ * @param bool $aff_racine
+ * @param bool $recur
+ * @param string $do
+ *     Type d'action
+ * @return string
+ *     Code HTML
+**/
 function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true, $do='aff') {
 
 	if ($recur) $recur = mini_hier($sel); else $sel = 0;
@@ -59,7 +79,20 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 	return construire_selectionner_hierarchie($idom, $plonger_r, $aff_racine, $url, 'id_parent', $url_init);
 }
 
-// http://doc.spip.org/@construire_selectionner_hierarchie
+/**
+ * Construit le sélectionneur de hierarchie
+ *
+ * @param string $idom
+ *     Identifiant dans le dom de l'élément
+ * @param string $liste
+ * @param int $racine
+ * @param string $url
+ * @param string $name
+ * @param string $name
+ * @param string $url_init
+ * @return string
+ *     Code HTML
+**/
 function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name, $url_init='')
 {
 	global $spip_lang_right;
@@ -113,7 +146,13 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. "</div></div>\n<div id='$idom3'></div></div>\n";
 }
 
-// http://doc.spip.org/@mini_hier
+/**
+ * Récupère les identifiants de hierarchie d'une rubrique
+ *
+ * @param int $id_rubrique
+ * @return array
+ *     Liste de tous les id_parent de la rubrique
+**/
 function mini_hier ($id_rubrique) {
 	
 	$liste = $id_rubrique;

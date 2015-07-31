@@ -182,12 +182,14 @@ function auth_mode()
 }
 
 /**
- * Init des globales pour tout l'espace prive si visiteur connu
+ * Initialisation des globales pour tout l'espace privé si visiteur connu
+ * 
  * Le tableau global visiteur_session contient toutes les infos pertinentes et
- * a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
+ * à jour (tandis que `$visiteur_session` peut avoir des valeurs un peu datées
  * s'il est pris dans le fichier de session)
+ * 
  * Les plus utiles sont aussi dans les variables simples ci-dessus
- * si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
+ * si la globale est vide ce n'est pas un tableau, on la force pour empêcher un warning.
  *
  * @param array $row
  * @return array|string

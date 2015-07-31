@@ -10,19 +10,42 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du sélecteur de rubrique pour les objets éditoriaux s'insérant
+ * dans une hiérarchie de rubriques
+ *
+ * @package SPIP\Core\Rubriques
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 
-//
-// Selecteur de rubriques pour l'espace prive
-// En entree :
-// - l'id_rubrique courante (0 si NEW)
-// - le type d'objet a placer (une rubrique peut aller a la racine
-//    mais pas dans elle-meme, les articles et sites peuvent aller
-//    n'importe ou (defaut), et les breves dans les secteurs.
-// $idem : en mode rubrique = la rubrique soi-meme
-// http://doc.spip.org/@inc_chercher_rubrique_dist
+
+/**
+ * Sélecteur de rubriques pour l'espace privé
+ *
+ * @uses selecteur_rubrique_html()
+ * @uses selecteur_rubrique_ajax()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de rubrique courante (0 si NEW)
+ * @param string $type
+ *     Type de l'objet à placer.
+ *
+ *     Une rubrique peut aller à la racine mais pas dans elle-même,
+ *     les articles et sites peuvent aller n'importe où (défaut),
+ *     et les brèves dans les secteurs.
+ * @param bool $restreint
+ *     True pour indiquer qu'il faut limiter les rubriques affichées
+ *     aux rubriques éditables par l'admin restreint
+ * @param int $idem
+ *     En mode rubrique, identifiant de soi-même
+ * @param string $do
+ *     Type d'action
+ * @return string
+ *     Code HTML du sélecteur
+**/
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $do='aff') {
 	if (sql_countsel('spip_rubriques')<1)
 		return '';
@@ -42,7 +65,15 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $
 // compatibilite pour extensions qui utilisaient l'ancien nom
 $GLOBALS['selecteur_rubrique'] = 'inc_chercher_rubrique_dist';
 
-// http://doc.spip.org/@style_menu_rubriques
+/**
+ * Styles appliqués sur le texte d'une rubrique pour créer visuellement
+ * une indentation en fonction de sa profondeur dans le sélecteur
+ *
+ * @param int $i
+ *     Profondeur de la rubrique
+ * @return array
+ *     Liste (classe CSS, styles en ligne, Espaces insécables)
+**/
 function style_menu_rubriques($i) {
 	global $browser_name, $spip_lang_left;
 
@@ -61,7 +92,26 @@ function style_menu_rubriques($i) {
 	return array($class,$style,$espace);
 }
 
-// http://doc.spip.org/@sous_menu_rubriques
+/**
+ * Sélecteur de sous rubriques pour l'espace privé
+ *
+ * @uses style_menu_rubriques()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de parente
+ * @param int $root
+ * @param int $niv
+ * @param array $data
+ * @param array $enfants
+ * @param int $exclus
+ * @param bool $restreint
+ *     True pour indiquer qu'il faut limiter les rubriques affichées
+ *     aux rubriques éditables par l'admin restreint
+ * @param string $type
+ *     Type de l'objet à placer.
+ * @return string
+ *     Code HTML du sélecteur
+**/
 function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $exclus, $restreint, $type) {
 	static $decalage_secteur;
 
@@ -103,8 +153,23 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	return $r.$sous;
 }
 
-// Le selecteur de rubriques en mode classique (menu)
-// http://doc.spip.org/@selecteur_rubrique_html
+/**
+ * Sélecteur de rubriques pour l'espace privé en mode classique (menu)
+ *
+ * @uses sous_menu_rubriques()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de rubrique courante (0 si NEW)
+ * @param string $type
+ *     Type de l'objet à placer.
+ * @param bool $restreint
+ *     True pour indiquer qu'il faut limiter les rubriques affichées
+ *     aux rubriques éditables par l'admin restreint
+ * @param int $idem
+ *     En mode rubrique, identifiant de soi-même
+ * @return string
+ *     Code HTML du sélecteur
+**/
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$data = array();
 	if ($type == 'rubrique' AND autoriser('publierdans','rubrique',0))
@@ -160,22 +225,33 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 }
 
 /**
- * http://doc.spip.org/@selecteur_rubrique_ajax
+ * Sélecteur de rubrique pour l'espace privé, en mode AJAX
  *
- * $restreint indique qu'il faut limiter les rubriques affichees
- * aux rubriques editables par l'admin restreint... or, ca ne marche pas.
- * Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
- * je laisse ca aux specialistes de l'ajax & des admins restreints
- * note : toutefois c'est juste un pb d'interface, car question securite
- * la verification est faite a l'arrivee des donnees (Fil)
+ * @note
+ *   `$restreint` indique qu'il faut limiter les rubriques affichées
+ *   aux rubriques éditables par l'admin restreint... or, ca ne marche pas.
+ *   Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
+ *   je laisse ça aux spécialistes de l'ajax & des admins restreints
+ * 
+ *   Toutefois c'est juste un pb d'interface, car question securite
+ *   la vérification est faite à l'arrivée des données (Fil)
  *
- *
+ * @uses construire_selecteur()
+ * @see exec_selectionner_dist() Pour l'obtention du contenu AJAX ensuite
+ * 
  * @param int $id_rubrique
+ *     Identifiant de rubrique courante (0 si NEW)
  * @param string $type
+ *     Type de l'objet à placer.
  * @param bool $restreint
+ *     True pour indiquer qu'il faut limiter les rubriques affichées
+ *     aux rubriques éditables par l'admin restreint. Ne fonctionne actuellement pas ici.
  * @param int $idem
+ *     En mode rubrique, identifiant de soi-même
  * @param string $do
+ *     Type d'action
  * @return string
+ *     Code HTML du sélecteur
  */
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) {
 
@@ -199,13 +275,32 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) 
 	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $init, $id_rubrique);
 }
 
-// construit un bloc comportant une icone clicable avec image animee a cote
-// pour charger en Ajax du code a mettre sous cette icone.
-// Attention: changer le onclick si on change le code Html.
-// (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
-// getElement en mode Ajax est trop couteux).
-
-// http://doc.spip.org/@construire_selecteur
+/**
+ * Construit un bloc permettant d'activer le sélecteur de rubrique AJAX
+ *
+ * Construit un bloc comportant une icone clicable avec image animée à côté
+ * pour charger en Ajax du code à mettre sous cette icone.
+ *
+ * @note
+ *   Attention: changer le onclick si on change le code Html.
+ *   (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
+ *   getElement en mode Ajax est trop couteux).
+ * 
+ * @param string $url
+ *     URL qui retournera le contenu du sélecteur en AJAX
+ * @param string $js
+ *     Code javascript ajouté sur onclick
+ * @param string $idom
+ *     Identifiant donné à l'image activant l'ajax et au block recevant son contenu
+ * @param string $name
+ *     Nom du champ à envoyer par le formulaire
+ * @param string $init
+ *     Code HTML à l'intérieur de l'input titreparent
+ * @param int $id
+ *     Valeur actuelle du champ
+ * @return string
+ *     Code HTML du sélecteur de rubrique AJAX
+**/
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = (strpos($idom, 'auteur')!==false) ? 'auteur-24.png' : 'rechercher-20.png';

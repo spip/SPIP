@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Action de suppression d'une rubrique
+ *
+ * @package SPIP\Core\Rubriques 
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
@@ -17,9 +23,7 @@ include_spip('inc/charsets');	# pour le nom de fichier
 /**
  * Effacer une rubrique
  *
- * http://doc.spip.org/@action_supprimer_dist
- *
- * @param null $id_rubrique
+ * @param null|int $id_rubrique
  * @return void
  */
 function action_supprimer_rubrique_dist($id_rubrique=null) {
