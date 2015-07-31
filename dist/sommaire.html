@@ -10,14 +10,14 @@
 </head>
 
 <body class="page_sommaire">
-<div id="container">
+<div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Contenu principal : derniers articles publies ]
 	<div class="hfeed" id="wrapper">
-    <div id="column span-24">
+    <div id="contenu">
 		
         <div class="cartouche">
             <h1>#NOM_SITE_SPIP</h1>
@@ -27,7 +27,7 @@
 
         [(#REM) Derniers articles ]
         <B_articles_recents>
-        <div class="column span-4">
+        <div class="menu articles">
             [(#ANCRE_PAGINATION)]
             <h2><:derniers_articles:></h2>
             <ul>
