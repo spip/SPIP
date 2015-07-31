@@ -707,6 +707,8 @@ prive/modeles/video.html -text
 prive/objets/contenu/article.html -text
 prive/objets/contenu/auteur.html -text
 prive/objets/contenu/plugin_item_rss.html -text
+prive/objets/contenu/rubrique-enfants.html -text
+prive/objets/contenu/rubrique-enfants_fonctions.php -text
 prive/objets/contenu/rubrique.html -text
 prive/objets/editer/liens.html -text
 prive/objets/editer/logo.html -text
@@ -764,6 +766,7 @@ prive/squelettes/contenu/mes_articles.html -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
+prive/squelettes/contenu/rubrique.html -text
 prive/squelettes/contenu/visiteurs.html -text
 prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text

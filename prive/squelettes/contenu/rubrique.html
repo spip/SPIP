@@ -1,0 +1,35 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{statut?}{si #ENV{exec}|=={rubrique}}>
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+				
+		[(#ID_RUBRIQUE|afficher_qui_edite{rubrique}|non)
+			[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}|icone_verticale{<:icone_modifier_rubrique:>,rubrique,edit,right ajax preload})]
+		]
+		[(#ID_RUBRIQUE|afficher_qui_edite{rubrique}|oui)
+			[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}|icone_verticale{#ID_RUBRIQUE|afficher_qui_edite{rubrique},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{#ID_PARENT|?{rubrique-24.png,secteur-24.png}}|balise_img{rubrique,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/rubrique,id=#ID_RUBRIQUE,ajax=wysiwyg}>
+</div>
+
+<!--affiche_milieu-->
+
+#BOITE_FERMER
+
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,rubrique,id_rubrique,#ID_RUBRIQUE},data,#INCLURE{fond=prive/objets/contenu/rubrique-enfants,id_rubrique,env}})]})]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,rubrique,id,#ID_RUBRIQUE},data,'<div class="nettoyeur"></div>'}}
+
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">if (window.jQuery)
+jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'rubrique'}});})
+</script>
+]
+</BOUCLE_rubrique>
+[(#ENV**{exec}|=={rubrique_edit}|?{#INCLURE{fond=prive/squelettes/contenu/rubrique_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_rubrique>

@@ -1,0 +1,33 @@
+[(#ID_RUBRIQUE|afficher_enfant_rub)]
+[(#AUTORISER{creerrubriquedans,rubrique,#ID_RUBRIQUE}|oui)
+	[(#URL_ECRIRE{rubrique_edit,new=oui&id_parent=#ID_RUBRIQUE}|icone_verticale{<:icone_creer_sous_rubrique:>,rubrique,new,right})]
+	<div class="nettoyeur"></div>
+]
+
+[(#REM)
+
+	Les articles a valider
+]
+[
+	[(#BOITE_OUVRIR{<:texte_en_cours_validation:>,'basic highlight'})]
+	(#PIPELINE{rubrique_encours,#ARRAY{args,#ARRAY{type,rubrique,id_objet,#ID_RUBRIQUE},data,#INCLURE{fond=prive/objets/liste/articles,titre=<:info_articles_proposes:>,statut=prop,id_rubrique,par=date,ajax,env}}})
+	#BOITE_FERMER
+]
+
+[(#REM)
+
+	Les articles en cours de redaction
+]
+[(#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_en_redaction:>,statut=prepa,id_rubrique,par=date,ajax,env})]
+
+[(#REM)
+
+	Les articles publies
+]
+[(#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_presents:>,statut=publie,id_rubrique,par=date,ajax,env}
+	|sinon{#INCLURE{fond=prive/objets/liste/articles,titre=<:info_tous_articles_refuses:>,statut=refuse,id_rubrique,par=date,ajax,env}})]
+
+<BOUCLE_verifierrub(RUBRIQUES){id_rubrique?}{statut==.*}{0,1}>
+	[(#URL_ECRIRE{article_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique}}|icone_verticale{<:icone_ecrire_article:>,article,new,right})]
+	<div class="nettoyeur"></div>
+</BOUCLE_verifierrub>
