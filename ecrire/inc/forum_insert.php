@@ -28,17 +28,13 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 	charger_generer_url();
 
 	if ($statut == 'prop') # forum modere
-	  $url = _DIR_RESTREINT_ABS .
-	    generer_url_ecrire('controle_forum', "debut_id_forum=$id_forum");
+	  $url = generer_url_ecrire('controle_forum', "debut_id_forum=$id_forum");
 	else if (function_exists('generer_url_forum'))
 		$url = generer_url_forum($id_forum);
 	else {
 		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
 		$url = generer_url_article($id_article);
 	}
-
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	$url = $adresse_site .'/' .  ereg_replace('^/', '', $url);
 
 	$sujet = "[" .
 	  entites_html(textebrut(typo($GLOBALS['meta']["nom_site"]))) .
