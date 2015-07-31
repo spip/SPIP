@@ -1222,26 +1222,32 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		if(!x && document.getElementById) x = document.getElementById(n); return x;
 	}
 	
+	function hide_obj(obj) {
+		element = findObj(obj);
+		if (element.style.visibility != "hidden") element.style.visibility = "hidden";
+	}
+
 	function changestyle(id_couche, element, style) {
 
 		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
-			findObj('bandeaudocuments').style.visibility = 'hidden';
-			findObj('bandeauredacteurs').style.visibility = 'hidden';
-			<?php if (lire_meta("activer_statistiques") != 'non') ?> findObj('bandeausuivi').style.visibility = 'hidden';
-			findObj('bandeauadministration').style.visibility = 'hidden';
+			hide_obj("bandeaudocuments");
+			hide_obj("bandeauredacteurs");
+			<?php if (lire_meta("activer_statistiques") != 'non') ?> hide_obj("bandeausuivi"); 
+			hide_obj("bandeauadministration"); 
 		<?php } ?>
 		
-		findObj('bandeaudeconnecter').style.visibility = 'hidden';
-		findObj('bandeautoutsite').style.visibility = 'hidden';
-		findObj('bandeaunavrapide').style.visibility = 'hidden';
-		findObj('bandeauagenda').style.visibility = 'hidden';
-		findObj('bandeaumessagerie').style.visibility = 'hidden';
-		findObj('bandeausynchro').style.visibility = 'hidden';
-		findObj('bandeaurecherche').style.visibility = 'hidden';
-		findObj('bandeauinfoperso').style.visibility = 'hidden';
-		findObj('bandeaudisplay').style.visibility = 'hidden';
-		findObj('bandeauecran').style.visibility = 'hidden';
-		findObj('bandeauinterface').style.visibility = 'hidden';
+		hide_obj("bandeaudeconnecter");
+		hide_obj("bandeautoutsite");
+		hide_obj("bandeaunavrapide");
+		hide_obj("bandeauagenda");
+		hide_obj("bandeaumessagerie");
+		hide_obj("bandeausynchro");
+		hide_obj("bandeaurecherche");
+		hide_obj("bandeauinfoperso");
+		hide_obj("bandeaudisplay");
+		hide_obj("bandeauecran");
+		hide_obj("bandeauinterface");
+		
 		
 		if (init_gauche) {
 		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
@@ -1295,7 +1301,8 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	}
 	
 	function setvisibility (objet, statut) {
-		findObj(objet).style.visibility = statut;
+		element = findObj(objet);
+		if (element.style.visibility != statut) element.style.visibility = statut;
 	}
 	
 	function getHeight(obj) {
@@ -1350,9 +1357,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	function changeVisible(input, id, select, nonselect) {
 		if (input) {
-			findObj(id).style.display = select;
+			element = findObj(id);
+			if (element.style.display != select)  element.style.display = select;
 		} else {
-			findObj(id).style.display = nonselect;
+			element = findObj(id);
+			if (element.style.display != nonselect)  element.style.display = nonselect;
 		}
 		
 	}
@@ -1797,7 +1806,8 @@ function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
 
 	$i = spip_num_rows($result_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
-		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'visible';\" onMouseOut=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'hidden';\">\n";
+//		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'visible';\" onMouseOut=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'hidden';\">\n";
+		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"setvisibility('bandeau_rub$id_rubrique', 'visible');\" onMouseOut=\"setvisibility('bandeau_rub$id_rubrique', 'hidden');\">\n";
 		echo "<div style='background: url(img_pack/triangle-droite$spip_lang_rtl.gif) $spip_lang_right center no-repeat;'><a href='naviguer.php3?coll=$id_rubrique' class='bandeau_rub' style='background-image: url(img_pack/$image);'>$titre_rubrique</a></div>\n";
 		echo "<div class='bandeau_rub' style='z-index: ".($z+1).";' id='bandeau_rub$id_rubrique'>";
 		while ($row_rub = spip_fetch_array($result_rub)) {
