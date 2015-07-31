@@ -55,7 +55,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		$fi = $debug[1]['file'];
 		if (strncmp($fi,_ROOT_RACINE,strlen(_ROOT_RACINE))==0)
 			$fi = substr($fi,strlen(_ROOT_RACINE));
-		$fu = $debug[2]['function'];
+		$fu = isset($debug[2]['function']) ? $debug[2]['function'] : '';
 		$debugverb = "$fi:L$l:$fu"."():";
 	}
 
