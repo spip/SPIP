@@ -57,6 +57,11 @@ function afficher_jour($jour){
 	}
 }
 
+if ($new == "oui") {
+	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('Nouvelle breve', NOW(), '$id_rubrique', 'refuse')";
+	$result=spip_query($query);
+	$id_breve=mysql_insert_id();
+}
 
 if ($titre AND $modifier_breve) {
 	$titre = addslashes($titre);
