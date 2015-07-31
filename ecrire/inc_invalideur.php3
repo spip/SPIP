@@ -135,24 +135,24 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 }
 
 function purger_cache() {
-	spip_log('vider le cache');
-	include_ecrire('inc_invalideur');
 	supprime_invalideurs();
 	purger_repertoire(_DIR_CACHE, 0);
 }
 
-function purger_squelettes() {
-	spip_log('effacer les squelettes compiles');
+function purger_cache_squelettes() {
 	purger_repertoire(_DIR_CACHE, 0, '^skel_');
 }
 
 
-function purger_cache_images() {
+function purger_cache_vignettes() {
 	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
+	spip_log('vider le cache');
+	purger_cache();
 }
 
 
 function calculer_cache_vignettes() {
+  	global $lang;
 	$handle = @opendir(_DIR_IMG);
 	if (!$handle) return;
 
@@ -167,6 +167,8 @@ function calculer_cache_vignettes() {
 	closedir($handle);
 	
 	include_ecrire("inc_filtres");
+	include_ecrire('inc_lang');
+	lang_select($lang);
 	echo "<html><body>\n";
 	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
 	echo "<p align='justify'>\n";

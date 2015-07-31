@@ -99,27 +99,53 @@ if ($quota_cache) {
 } else {
 	echo _T('taille_cache_infinie');
 }
-echo ' ('._T('cache_modifiable_webmestre').')</p>', 
-  "\n<form action='" . generer_url_public("spip_cache","") . "' method='post'>", 
-  "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur' />", 
-  "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "' />", 
-  "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui' />",
-  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
- "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
+
+ $action = 'purger_cache';
+ $hash = calculer_action_auteur($action);
+
+ echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
+  "\n<form action='",
+  generer_url_public("spip_cache"),
+  "' method='POST'>", 
+  "\n<input type='hidden' name='action' value='$action' />",
+  "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />", 
+  "\n<input type='hidden' name='hash' value='$hash' />", 
+  "\n<input type='hidden' name='redirect' value='",
+  generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider"),
+  "' />", 
+  "\n<p><div align='right'><input class='fondo' type='submit' value=\"",
+  str_replace('"', '&quot;', _T('bouton_vider_cache')),
+  "\"></form></div>";
 
  fin_cadre_relief();
 
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
+
+ $action = 'calculer_cache_vignettes';
+ $hash = calculer_action_auteur($action);
+
  echo "<div style='text-align: center;'>",
-   "<iframe width='530px' height='65px' src='", generer_url_public("spip_cache", "id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui&lang=$spip_lang"), "'></iframe>",
+   "<iframe width='530px' height='65px' src='",
+   generer_url_public("spip_cache", "action=$action&lang=$spip_lang&id_auteur=$connect_id_auteur&hash=$hash"),
+   "'></iframe>",
    "</div>";
 
-echo "\n<form action='" . generer_url_public("spip_cache","") . "' method='post'>", "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>",
-   "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache_images") . "'>",
-  "\n<INPUT TYPE='hidden' NAME='purger_cache_images' VALUE='oui'>",
-  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
-  "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
+ $action = 'purger_cache_vignettes';
+ $hash = calculer_action_auteur($action);
+
+ echo   "\n<form action='",
+   generer_url_public("spip_cache"),
+   "' method='POST'>",
+   "\n<input type='hidden' name='action' value='$action' />",
+   "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />",
+   "\n<input type='hidden' name='hash' value='$hash' />",
+   "\n<input type='hidden' name='redirect' value='",
+   generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider"),
+   "' />", 
+   "\n<p><DIV align='right'><input class='fondo' type='submit'  value=\"",
+   str_replace('"', '&quot;', _T('bouton_vider_cache')),
+   "\" /></form></div>";
 
 fin_cadre_relief();
 
@@ -143,17 +169,17 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	echo "\n<form action='" . generer_url_ecrire("admin_vider","") . "' method='post'>";
+	echo "\n<form action='" . generer_url_ecrire("admin_vider") . "' method='POST'>";
 	
 	$hash = calculer_action_auteur("purger_index");
 	
-	echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash'>";
-	echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui'>";
+	echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash' />";
+	echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui' />";
 	echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";
 
 fin_cadre_trait_couleur();
 
-echo "<BR>";
+echo "<br />";
 
 fin_page();
 }
