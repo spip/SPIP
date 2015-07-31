@@ -343,8 +343,8 @@ function fin_page()
 			. "<br />"
 		 	. _T('info_copyright_doc',
 				array('spipnet' => $GLOBALS['home_server']
-					. '/' .    $GLOBALS['spip_lang'])
-			. '</div>'))
+				      . '/' .    $GLOBALS['spip_lang']))
+			     . '</div>'))
 
 	. fin_grand_cadre(true)
 	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
@@ -353,7 +353,7 @@ function fin_page()
 	. generer_url_action('cron')
 	. '\');"></div>'
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')
-	. $chrono
+	   . $chrono
 	. "</body></html>\n";
 }
 
