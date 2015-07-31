@@ -185,6 +185,7 @@ function controle_forum($request,$adresse_retour) {
 	static $i;
 	global $couleur_foncee;
 	global $mots_cles_forums;
+	global $controle_sans;
 
 	
 	$compteur_forum++; 
@@ -211,29 +212,19 @@ function controle_forum($request,$adresse_retour) {
 		if ($compteur_forum==1)
 			echo "<BR><BR>";
 		if ($forum_stat=="off" OR $forum_stat == "privoff") {
-			echo "<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR='#FF0000'>";
-		}else if($forum_stat=="prop"){
-			echo "<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR='#FFFF00'>";
+			echo "<div style='border: 1px #ff0000 solid'>";
+		}
+		else if($forum_stat=="prop"){
+			echo "<div style='border: 1px yellow solid'>";
+		}
+		else {
+			echo "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>";
+			echo "<div style='border: 1px #999999 dashed; background-color: white;'>";
 		}
 		echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR>";
-		
-		for ($count = 2; $count <= $compteur_forum AND $count < 11; $count++) {
+		echo "<TD WIDTH=100% VALIGN='top'>";
 
-			$fond[$count] = 'img_pack/rien.gif';
-			if ($i[$count] != $nb_forum[$count]) {
-				$fond[$count] = 'img_pack/forum-vert.gif';
-			}		
-		
-			$fleche='img_pack/rien.gif';
-			if ($count == $compteur_forum) {
-				$fleche='img_pack/forum-droite.gif';
-			}		
-			echo "<TD WIDTH=10 VALIGN='top' BACKGROUND=$fond[$count]><IMG SRC=$fleche ALT='' WIDTH=10 HEIGHT=13 BORDER=0></TD>\n";
-		}
-		
-		echo "<TD WIDTH=100% BGCOLOR='#EEEEEE' VALIGN='top'>";
-
-		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
+		echo "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
 		echo "<TR><TD>";
 		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 		if ($forum_stat=="publie" OR $forum_stat == "off") {
@@ -253,8 +244,8 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat <> "off" AND $forum_stat <> "prioff") {
-			if ($forum_stat == "publie") icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
-			else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm") icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
+			if ($forum_stat == "publie") icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
+			else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm") icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
 		}
 		else {
 			echo "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
@@ -295,10 +286,12 @@ function controle_forum($request,$adresse_retour) {
 		echo "</TD></TR></TABLE>";
 		
 		echo "</TD></TR></TABLE>\n";
-
-		if ($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop') {
-			echo "</TD></TR></TABLE>";
+		
+		if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop')) {
+			echo "</div>";
 		}
+		
+		echo "</div>";
 	}
 }
 
