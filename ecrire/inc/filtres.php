@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
 
-// http://doc.spip.org/@chercher_filtre
+// http://adoc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
 	// Cas MIME = type/subtype
 	// sans confondre avec les appels de fonction de classe Foo::Bar
@@ -732,10 +732,15 @@ function date_interface($date, $decalage_maxi = 43200/* 12*3600 */) {
 }
 
 // http://doc.spip.org/@date_relative
-function date_relative($date, $decalage_maxi=0) {
+function date_relative($date, $decalage_maxi=0,$ref_date=null) {
 
+	if (is_null($ref_date))
+		$ref_time = time();
+	else
+		$ref_time = strtotime($ref_date);
+	
 	if (!$date) return;
-	$decal = date("U") - date("U", strtotime($date));
+	$decal = date("U",$ref_time) - date("U", strtotime($date));
 
 	if ($decalage_maxi AND ($decal > $decalage_maxi OR $decal < 0))
 		return '';
