@@ -26,11 +26,12 @@ function balise_FORMULAIRE__dist($p) {
 	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
 	$form = $p->nom_champ;
 	if (substr($form,0,11)=="FORMULAIRE_"
-	AND $form = strtolower(substr($form,11))
-	AND !find_in_path('formulaire/'.$form.'.html')) {
-		$p->code = "''";
-		$p->interdire_scripts = false;
-		return $p;
+	AND $form = strtolower(substr($form,11)) 
+	AND (!find_in_path('formulaires/'.$form.'.html')
+        OR !find_in_path($form.'.html'))) {
+		    $p->code = "''";
+		    $p->interdire_scripts = false;
+		    return $p;
 	}
 
 	// sinon renvoyer un code php dnamique
