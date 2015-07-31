@@ -261,7 +261,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// Si un descriptif est envoye, on l'utilise directement
 	if (strlen($descriptif))
-		return propre($descriptif,$connect);
+		return appliquer_traitement_champ($descriptif,'introduction','',array(),$connect);
 
 	// De preference ce qui est marque <intro>...</intro>
 	$intro = '';
@@ -302,14 +302,18 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// Supprimer les modèles avant le propre afin d'éviter qu'ils n'ajoutent du texte indésirable
 	// dans l'introduction.
 	$texte = supprime_img($texte, '');
-	$texte = propre($texte,$connect);
+	$texte = appliquer_traitement_champ($texte,'introduction','',array(),$connect);
+
 	if ($notes)
 		$notes('','depiler');
 
 	if (!defined('_INTRODUCTION_SUITE')) define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
+	// comme on a coupe il faut repasser la typo (on a perdu les insecables)
+	$texte = typo($texte,true,$connect,array());
 
 	// et reparagrapher si necessaire (coherence avec le cas descriptif)
+	// une introduction a tojours un <p>
 	if ($GLOBALS['toujours_paragrapher'])
 		// Fermer les paragraphes
 		$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
