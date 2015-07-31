@@ -543,8 +543,8 @@ if ($relief) {
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE id_rubrique='$coll' AND statut='dispo'");
+	if ($coll == 0 AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles AND statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
 			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
 	}
