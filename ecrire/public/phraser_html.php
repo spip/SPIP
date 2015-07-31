@@ -605,12 +605,12 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
-			$params = phraser_arguments_inclure($result);
-			$params = $params->param;
+			$args = phraser_arguments_inclure($result);
+			$args = $args->param;
 
-			array_unshift($params,
+			array_unshift($args,
 				      substr($type, strlen(TYPE_RECURSIF)));
-			$result->param = $params;
+			$result->param = $args;
 #			$milieu = substr($milieu, strpos($milieu, '>')+1);
 		} else {
 			$result->type_requete = $soustype;
