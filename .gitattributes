@@ -45,6 +45,7 @@ ecrire/action/purger.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
 ecrire/action/reorganiser.php -text
+ecrire/action/session.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_document.php -text
 ecrire/action/supprimer_traduction.php -text
@@ -702,6 +703,7 @@ prive/javascript/async_upload.js -text
 prive/javascript/bgiframe.js -text
 prive/javascript/dragdrop_interface.js -text
 prive/javascript/gadgets.js -text
+prive/javascript/jquery.autosave.js -text
 prive/javascript/jquery.cookie.js -text
 prive/javascript/jquery.form.js -text
 prive/javascript/jquery.ifixpng.js -text
