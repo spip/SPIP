@@ -347,7 +347,7 @@ function ancre_url($url, $ancre) {
 	}
 	$ancre = preg_replace(array('/^[^-_a-zA-Z0-9]+/', '/[^-_a-zA-Z0-9]/'), array('', '-'),
 					translitteration($ancre));
-	return $url . strlen($ancre) ? '#'. $ancre : '';
+	return $url . (strlen($ancre) ? '#'. $ancre : '');
 }
 
 //
