@@ -166,6 +166,9 @@ function controle_forum_boucle($row, $args) {
 
 	$suite = "\n<br />$avant<b>$pref\n<a href='$url'>$titre</a></b>"  
 	. "<div>".justifier(propre($forum_texte))."</div>";
+	include_spip('public/composer');
+	if ($forum_notes = safehtml(calculer_notes()))
+		$suite .= "<div class='notes'>".justifier(safehtml($forum_notes))."</div>";
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
