@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-// #MENU_LANG_ECRIRE affiche le menu des langues de l'espace privé
+// #MENU_LANG_ECRIRE affiche le menu des langues de l'espace privï¿½
 // et preselectionne celle la globale $lang
 // ou de l'arguemnt fourni: #MENU_LANG_ECRIRE{#ENV{malangue}} 
 
@@ -24,10 +24,10 @@ function balise_MENU_LANG_ECRIRE ($p) {
 
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 // http://doc.spip.org/@balise_MENU_LANG_ECRIRE_stat
-function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
+function balise_MENU_LANG_ECRIRE_stat ($args, $context_compil) {
 	include_spip('inc/lang');
 	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
-	return $filtres ? $filtres : $args;
+	return $args;
 }
 
 // normalement $opt sera toujours non vide suite au test ci-dessus

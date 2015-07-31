@@ -29,7 +29,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
 
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
-function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
+function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $id, $focus) = $args;
 	$mode = tester_config($id, $mode);
 	return $mode ? array($mode, $focus, $id) : '';
