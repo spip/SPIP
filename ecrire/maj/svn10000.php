@@ -207,6 +207,8 @@ $GLOBALS['maj'][13833] = array(
 array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
 ;
 
+// Fin upgrade commun branche 2.0
+
 $GLOBALS['maj'][13904] = array(
 array('sql_alter',"TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NOT NULL"),
 array('sql_update','spip_auteurs',array('webmestre'=>"'oui'"),sql_in("id_auteur",defined('_ID_WEBMESTRES')?explode(':',_ID_WEBMESTRES):(autoriser('configurer')?array($GLOBALS['visiteur_session']['id_auteur']):array(0)))) // le webmestre est celui qui fait l'upgrade si rien de defini
@@ -217,5 +219,14 @@ array('sql_update','spip_auteurs',array('webmestre'=>"'oui'"),sql_in("id_auteur"
 $GLOBALS['maj'][13929] = array(
 	array('sql_update',"spip_syndic",array('syndication'=>"'sus'"),"syndication LIKE '\\'%'")
 );
+
+// Types de fichiers m4a/m4b/m4p/m4u/m4v/dv
+// Types de fichiers Open XML (cro$oft)
+$GLOBALS['maj'][14558] = array(array('upgrade_types_documents'));
+
+// refaire les upgrade dont les numeros sont inferieurs a ceux de la branche 2.0
+// etre sur qu'ils sont bien unipotents(?)...
+$GLOBALS['maj'][14559] = $GLOBALS['maj'][13904]+$GLOBALS['maj'][13929]+$GLOBALS['maj'][14558];
+
 
 ?>
