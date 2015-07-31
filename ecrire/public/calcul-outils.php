@@ -413,7 +413,8 @@ function sql_rubrique($id_article) {
 function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 	$auteurs = "";
 	if ($id_article) {
-		$result_auteurs = spip_abstract_select(array('auteurs.nom', 'auteurs.email'),
+		$result_auteurs = spip_abstract_select(
+			array('auteurs.id_auteur', 'auteurs.nom'),
 			array('spip_auteurs AS auteurs',
 				'spip_auteurs_articles AS lien'), 
 			array("lien.id_article=$id_article",
@@ -422,9 +423,9 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 			$table, $id_boucle, $serveur);
 
 		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
-			$nom_auteur = typo($row_auteur["nom"]);
-			$email_auteur = $row_auteur["email"];
-			if ($email_auteur) {
+			$nom_auteur = typo($row_auteur['nom']);
+			$url_auteur = generer_url_auteur($row_auteur['id_auteur']);
+			if ($url_auteur) {
 				$auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
 			} else {
 				$auteurs[] = "$nom_auteur";
