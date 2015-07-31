@@ -85,7 +85,6 @@ function acceder_couche(couches, n, dir, icone, texte, sens) {
 	document.write('<a class="triangle_block" href="javascript:' +
 	    javasc +
 	    '"><img name="triangle' + n + '" src="' +
-	    dir + icone + '" alt="" title="' +
-	    texte +
+	    dir + icone + '" alt="' + texte + '" title="' + texte +
 	    '" width="10" height="10" border="0"></a>');
 }

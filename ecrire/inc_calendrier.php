@@ -1289,9 +1289,9 @@ function http_calendrier_rv($messages, $type) {
 		$total .= "<tr><td style='width: 24px' valign='middle'>" .
 		http_href($url,
 				     ($rv ?
-				      http_img_pack("rv.gif", '',
+				      http_img_pack("rv.gif", 'rv',
 						    http_style_background($bouton . '.gif', "no-repeat;' border='0'")) : 
-				      http_img_pack("$bouton.gif", '', "style='border: 0px'")),
+				      http_img_pack($bouton.".gif", $bouton, "style='border: 0px'")),
 				     '', '') .
 		"</td>" .
 		"<td valign='middle'>" .

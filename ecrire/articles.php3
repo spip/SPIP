@@ -768,7 +768,7 @@ echo "</td>";
 
 
 if ($flag_editable) {
-  echo "<td>". http_img_pack('rien.gif', "", "width=5") . "</td>\n";
+  echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 	echo "<td align='center'>";
 	$flag_modif = false;
 
@@ -1426,7 +1426,7 @@ if ((lire_meta('multi_articles') == 'oui')
 			echo "</form>";
 			echo "</td>\n";
 			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "", "width=2 height=2") . "</td>";
+			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 		}
 		echo "<td>";
@@ -1434,7 +1434,7 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo "</td>";
 		if ($flag_editable AND $options == "avancees" AND $ret) {
 			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', "", "width=2 height=2") . "</td>";
+			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td>";
 			icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");

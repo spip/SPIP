@@ -1118,7 +1118,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			list($icone, $largeur_icone, $hauteur_icone) =
 				vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='$url'><img src='$icone' style='border-width: 0px' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
+			  echo "<a href='$url'><img src='$icone' style='border-width: 0px' width='$largeur_icone' align='top' height='$hauteur_icone' alt='" . basename($icone) ."' /></a>\n";
 			}
 			echo "</div>\n";
 		}
