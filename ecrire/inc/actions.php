@@ -35,39 +35,6 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att='') {
 }
 
 
-
-//
-// Attention pour que Safari puisse manipuler cet evenement
-// il faut onsubmit="return AjaxSqueeze(x,'truc',...)"
-// et non pas onsubmit='return AjaxSqueeze(x,"truc",...)'
-//
-// http://doc.spip.org/@ajax_action_declencheur
-function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
-	if (strpos($request, 'this') !== 0) 
-		$request = "'".$request."'";
-
-	return '"return AjaxSqueeze('
-	. $request
-	. ",'"
-	. $noeud
-	. "',"
-	  . ($fct_ajax ? $fct_ajax : "''")
-	. ',event)"';
-}
-
-// Place un element HTML dans une div nommee,
-// sauf si c'est un appel Ajax car alors la div y est deja 
-// $fonction : denomination semantique du bloc, que l'on retouve en attribut class
-// $id : id de l'objet concerne si il y a lieu ou "", sert a construire un identifiant unique au bloc ("fonction-id")
-// http://doc.spip.org/@ajax_action_greffe
-function ajax_action_greffe($fonction, $id, $corps)
-{
-	$idom = $fonction.(strlen($id)?"-$id":"");
-	return _AJAX
-		? "$corps"
-		: "\n<div id='$idom' class='ajax-action $fonction'>$corps\n</div>\n";
-}
-
 // http://doc.spip.org/@ajax_retour
 function ajax_retour($corps,$xml = true)
 {
