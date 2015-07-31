@@ -12,6 +12,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 
+
+// Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
+// On prefere la faire ici plutot que dans inc_version, c'est moins souvent et
+// si le reglage est modifie sur un site en prod, ca fait moins mal
+if (addslashes("'") !== "\\'") die('SPIP incompatible magic_quotes_sybase');
+
 include_spip('inc/cookie');
 
 //

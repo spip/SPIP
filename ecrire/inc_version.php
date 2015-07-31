@@ -359,22 +359,19 @@ define('SPIP_ERREUR_REPORT',E_ALL ^ E_NOTICE);
 define('SPIP_ERREUR_REPORT_INCLUDE_PLUGINS',0);
 error_reporting(SPIP_ERREUR_REPORT);
 
-// Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
-if (addslashes("'") !== "\\'") die('SPIP incompatible magic_quotes_sybase');
-
 //
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 //
-// mais l'inclusion precedente a peut-etre deja appelee cette fonction
-// ou a defini certaines des constantes que cette fontion doit definir
+// mais l'inclusion precedente a peut-etre deja appele cette fonction
+// ou a defini certaines des constantes que cette fonction doit definir
 // ===> on execute en neutralisant les messages d'erreur
 
 @spip_initialisation(
-       (_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
-       (_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
-       (_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
-       (_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
-       );
+	(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+	(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+	(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+	(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+);
 
 // chargement des plugins : doit arriver en dernier
 // car dans les plugins on peut inclure inc-version
