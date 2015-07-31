@@ -26,7 +26,6 @@ include_spip('inc/cookie');
 
 $exec = _request('exec');
 $reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
-
 //
 // Les scripts d'insallation n'authentifient pas, forcement,
 // alors il faut blinder les variables d'URL
@@ -141,26 +140,31 @@ if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
   	action_converser_post($GLOBALS['visiteur_session']['lang'],true);
 }
 
+
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 // mais seulement si on a bien ete auhentifie
-if ($var_f = _request('transformer_xml') AND isset($auth)) {
+if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
-elseif (find_in_path("prive/exec/$exec." . _EXTENSION_SQUELETTES)) {
-	$exec = "fond";
-}
 
-// Trouver la fonction eventuellement surchargee
-// si absente, rerouter vers exec=404 au lieu d'echouer
+if ($var_f = tester_url_ecrire($exec))
+
+	$var_f(); // at last
+else {
+// Rien de connu: rerouter vers exec=404 au lieu d'echouer
 // ce qui permet de laisser la main a un plugin
-if (!$var_f = charger_fonction($exec,'exec',true)){
 	$var_f = charger_fonction('404');
 	$var_f($exec);
 }
-else {
-	// Z'y va
-	$var_f();
+
+$debug = ((_request('var_mode') == 'debug') OR !empty($tableau_des_temps)) ? array(1) : array();
+if ($debug) {
+	$var_mode_affiche = _request('var_mode_affiche');
+	$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+	echo erreur_squelette();
 }
+if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin)
+	echo affiche_erreurs_page($tableau_des_erreurs);
 
 ?>

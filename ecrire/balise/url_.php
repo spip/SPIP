@@ -167,17 +167,15 @@ function balise_URL_PAGE_dist($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
-	}
-
-	$p->code = interprete_argument_balise(1,$p);
+	$code = interprete_argument_balise(1,$p);
+	if (preg_match("/^'[^']*'$/", $code))
+		$fonc = $code;
+	else {$code = "(\$f = $code)"; $fonc = '$f';}
 	$args = interprete_argument_balise(2,$p);
 	if ($args != "''" && $args!==NULL)
-		$p->code .= ','.$args;
+		$fonc .= ',' . $args;
 
-	$p->code = 'generer_url_ecrire(' . $p->code .')';
+	$p->code = '(tester_url_ecrire(' . $code . ') ? generer_url_ecrire(' . $fonc .') : "")';
 	#$p->interdire_scripts = true;
 	return $p;
 }

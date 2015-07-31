@@ -836,6 +836,12 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
+function tester_url_ecrire($nom)
+{
+	if (find_in_path('prive/exec/' . $nom . '.html')) $nom = 'fond';
+	return charger_fonction($nom,'exec',true);
+}
+
 // Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
 // $id = numero de la cle primaire si nombre, URL a decoder si pas numerique
 // $entite = surnom de la table SQL (donne acces au nom de cle primaire)
