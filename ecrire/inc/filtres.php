@@ -1098,7 +1098,7 @@ function date_ical($date, $addminutes = 0) {
 function date_iso($date_heure) {
 	list($annee, $mois, $jour) = recup_date($date_heure);
 	list($heures, $minutes, $secondes) = recup_heure($date_heure);
-	$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
+	$time = @mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
 	return gmdate('Y-m-d\TH:i:s\Z', $time);
 }
 
