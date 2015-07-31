@@ -801,12 +801,6 @@ function spip_sqlite_multi ($objet, $lang) {
 }
 
 
-// http://doc.spip.org/@spip_sqlite_optimize
-function spip_sqlite_optimize($table, $serveur='',$requeter=true){
-	spip_sqlite_query("OPTIMIZE TABLE ". $table, $serveur); // <- a verifier mais ca doit pas etre ca !
-	return true;
-}
-
 /**
  * Optimise une table SQL
  * Note: Sqlite optimise TOUTE un fichier sinon rien.
