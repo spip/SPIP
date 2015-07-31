@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:', # MODIF
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Cancelar',
-'antispam_champ_vide' => '<NEW>Por favor, deixe este campo em branco&nbsp;:',
+'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:', # NEW
 'articles_recents' => 'Artigos mais recentes',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar em [liga&ccedil;&atilde;o hipertexto->http://...]',
 'barre_lien_input' => 'Favor indicar o endere&ccedil;o da sua liga&ccedil;&atilde;o (pode indicar um endere&ccedil;o Web sob a forma  http://www.monsite/com ou simplesmente indicar o n&uacute;mero de um artigo deste s&iacute;tio.) ',
 'barre_note' => 'Transformar em  [[Nota de rodap&eacute; ]]',
-'barre_paragraphe' => '<NEW>Criar um par&aacute;grafo',
+'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
 'barre_quote' => '<quote>Citar uma  mensagem</quote>',
 'bouton_ajouter_document' => 'ACRESCENTAR UM  DOCUMENTO', # MODIF
 'bouton_ajouter_image' => 'ACRESCENTAR UMA IMAGEM', # MODIF
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calend&aacute;rio por semana',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'choix  de l\'interface', # NEW
-'colonne' => '<NEW>Coluna',
+'colonne' => 'Colonne', # NEW
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, solicitou a altera&ccedil;&atilde;o do estatuto deste elemento. Deseja continuar?',
 'correcte' => 'correcte', # NEW
 
@@ -191,8 +191,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_secondes' => 'secondes', # NEW
 'date_semaines' => 'semanas',
 'date_un_mois' => 'mois', # NEW
-'date_une_heure' => '<NEW>tempo',
-'date_une_minute' => '<NEW>minuto',
+'date_une_heure' => 'heure', # NEW
+'date_une_minute' => 'minute', # NEW
 'date_une_seconde' => 'seconde', # NEW
 'date_une_semaine' => 'semaine', # NEW
 'dirs_commencer' => 'a fim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
@@ -215,8 +215,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
 'entree_titre_image' => 'T&iacute;tulo da imagem&nbsp;:',
 'envoi_via_le_site' => 'Envio pelo site',
-'erreur' => '<NEW>Erro',
-'erreur_balise_non_fermee' => '<NEW>&uacute;ltima etiqueta n&atilde;o fechada:',
+'erreur' => 'Erreur', # NEW
+'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
 'erreur_texte' => 'erreur(s)', # NEW
 'etape' => '&Eacute;tape', # NEW
 
@@ -620,6 +620,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'login_retour_site' => 'Regresso ao s&iacute;tio p&uacute;blico',
 'login_retoursitepublic' => 'Regresso&nbsp;ao&nbsp;s&iacute;tio&nbsp;p&uacute;blico',
 'login_sans_cookiie' => 'identifica&ccedil;&atilde;o sem cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscrever-se',
 'login_test_navigateur' => 'teste navega&ccedil;&atilde;o/nova liga&ccedil;&atilde;o',
 'login_verifiez_navigateur' => '(Verifique, por&eacute;m, que o seu navegador n&atilde;o memorizou a sua palavra-passe...)',
@@ -631,10 +632,10 @@ entre os participantes do s&iacute;tio. Pode activar ou
 
 // N
 'navigateur_pas_redirige' => 'Se o seu browser n&atilde;o est&aacute; redireccionado, clique aqui para continuar.',
-'numero' => '<NEW>N&uacute;mero',
+'numero' => 'Num&eacute;ro', # NEW
 
 // O
-'occurence' => '<NEW>Ocorr&ecirc;ncia',
+'occurence' => 'Occurrence', # NEW
 'onglet_affacer_base' => 'Apagar a base',
 'onglet_auteur' => 'O autor',
 'onglet_contenu_site' => 'Conte&uacute;do do s&iacute;tio',
@@ -816,7 +817,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
 'zxml_survoler' => 'survoler pour voir les corrects', # NEW
 'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-'zxml_vide_balise' => '<NEW>tag vasia',
+'zxml_vide_balise' => 'balise vide', # NEW
 'zxml_vu' => 'vu auparavant', # NE
 );
 

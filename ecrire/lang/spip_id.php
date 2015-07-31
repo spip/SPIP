@@ -621,6 +621,7 @@ Terima kasih atas partisipasi anda!
 'login_retour_site' => 'Kembali ke situs umum',
 'login_retoursitepublic' => 'kembali ke situs umum',
 'login_sans_cookiie' => 'Identifikasi tanpa cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'daftar',
 'login_test_navigateur' => 'mencoba browser/koneksi',
 'login_verifiez_navigateur' => '(Bagaimana pun, verifikasi bahwasanya browser anda tidak menyimpan kata sandi anda...)',

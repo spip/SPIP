@@ -622,6 +622,7 @@ Bedankt voor je deelname
 'login_retour_site' => 'Terug naar de publieke site',
 'login_retoursitepublic' => 'Terug naar de publieke site',
 'login_sans_cookiie' => 'Aanmelden zonder koekie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'Registreren',
 'login_test_navigateur' => 'Testen van bladerprogramma/opnieuw verbinden',
 'login_verifiez_navigateur' => '(Kijk niettemin na dat je bladerprogramma je paswoord niet heeft onthouden...)',

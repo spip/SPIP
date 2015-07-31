@@ -618,6 +618,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'login_retour_site' => '&Icirc;napoi la site-ul public',
 'login_retoursitepublic' => '&icirc;napoi&nbsp;la&nbsp;site-ul&nbsp;public',
 'login_sans_cookiie' => 'Identificare f&#259;r&#259; cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => '&icirc;nscrie&#355;i-v&#259;',
 'login_test_navigateur' => 'test de navigator/reconectare',
 'login_verifiez_navigateur' => '(Verifica&#355;i totu&#351;i c&#259; navigatorul de web nu a memorat parola dumneavoastr&#259;...)',

@@ -620,6 +620,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'login_retour_site' => 'Powr&oacute;t do strony publicznej',
 'login_retoursitepublic' => 'Powr&oacute;t do strony publicznej',
 'login_sans_cookiie' => 'Identyfikacja bez cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'rejestracja',
 'login_test_navigateur' => 'test przegl&#261;darki/&#322;&#261;cz ponownie',
 'login_verifiez_navigateur' => '(Sprawd&#378; czy Twoja przegl&#261;darka nie zapami&#281;ta&#322;a has&#322;a...)',

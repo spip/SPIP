@@ -617,6 +617,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'login_retour_site' => 'Kamusal siteye d&ouml;n',
 'login_retoursitepublic' => 'Kamusal&nbsp;siteye&nbsp;d&ouml;n',
 'login_sans_cookiie' => '&Ccedil;erezsiz tan&#305;mlanma',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'Kay&#305;t ol',
 'login_test_navigateur' => 'Gezgini dene / Tekrar ba&#287;lan',
 'login_verifiez_navigateur' => '(Ancak gezginin &#351;ifrenizi belle&#287;e almad&#305;&#287;&#305;ndan emin olunuz...)',

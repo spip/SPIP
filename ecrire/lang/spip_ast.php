@@ -621,6 +621,7 @@ Gracies por participar
 'login_retour_site' => 'Tornar pal sitiu p&uacute;blicu',
 'login_retoursitepublic' => 'tornar&nbsp;pal&nbsp;sitiu&nbsp;p&uacute;blicu',
 'login_sans_cookiie' => 'Identificaci&oacute;n ensin cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscribise',
 'login_test_navigateur' => 'preba de &ntilde;avegador/reconex&oacute;n',
 'login_verifiez_navigateur' => '(Verifica dafechu que\'l &ntilde;avegador nun s\'alcuerde de la to contrase&ntilde;a...)',

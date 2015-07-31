@@ -623,6 +623,7 @@ dann out navigat&egrave;r &eacute;',
 'login_retour_site' => 'Artourn sir figirw&egrave;b',
 'login_retoursitepublic' => 'artourn&nbsp;sir&nbsp;figirw&egrave;b',
 'login_sans_cookiie' => 'Lidantifikasyon san lo gatomakro',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inskri aou',
 'login_test_navigateur' => 'test navigat&egrave;r/nouvo lakostaz',
 'login_verifiez_navigateur' => '(Somansa g&eacute;t byin out navigat&egrave;r la pa gardant&egrave;t out modpass...)',

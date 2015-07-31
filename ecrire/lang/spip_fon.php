@@ -583,6 +583,7 @@ sera ignor&eacute;e) :
 'login_retour_site' => 'Mi l&#603;k&#596; y&igrave; gblogbloj&iacute; &#596; ',
 'login_retoursitepublic' => 'Mi l&#603;k&#596; y&igrave; gblogbloj&iacute; &#596; ',
 'login_sans_cookiie' => 'Mi s&#596; xl&#603; b&oacute; j&ograve; koki l&#603; &#598;&oacute;',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'N&aacute; ny&iacute;k&#596; ',
 'login_test_navigateur' => '&#598;&egrave;xl&#603;t&#596;/&agrave;l&#596;wl&iacute; &#598;&eacute;v&oacute;',
 'login_verifiez_navigateur' => '(mi kp&#596;n &#598;&#596; &#598;&egrave;xl&#603;t&#596; y&iacute; gb&egrave;t&aacute;k&#603;n &agrave; j&iacute; ...)',

@@ -618,6 +618,7 @@ Thank you for your participation!
 'login_retour_site' => 'Back to the public site',
 'login_retoursitepublic' => 'back to the public site',
 'login_sans_cookiie' => 'Identification without cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'register',
 'login_test_navigateur' => 'testing browser/reconnection',
 'login_verifiez_navigateur' => '(However, verify that your browser did not memorize your password...)',

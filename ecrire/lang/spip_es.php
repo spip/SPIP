@@ -618,6 +618,7 @@ se puede activar o desactivar .',
 'login_retour_site' => 'Volver al sitio p&uacute;blico',
 'login_retoursitepublic' => 'volver&nbsp;al&nbsp;sitio&nbsp;p&uacute;blico',
 'login_sans_cookiie' => 'Identificaci&oacute;n sin "cookie"',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'inscribirse',
 'login_test_navigateur' => 'prueba de navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(No obstante, comprueba que tu navegador no memoriz&oacute; tu contrase&ntilde;a...)',

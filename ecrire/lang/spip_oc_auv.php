@@ -618,6 +618,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'login_retour_site' => 'Tornar au sit public',
 'login_retoursitepublic' => 'tornar&nbsp;au&nbsp;sit&nbsp;public',
 'login_sans_cookiie' => 'Identificacion sens cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 's\'inscriure',
 'login_test_navigateur' => 'Assai navigador/tornar&nbsp;connectar',
 'login_verifiez_navigateur' => '(pasmens verificatz que v&ograve;stre navigador aja pas servat v&ograve;stre mot de santa Clara en mem&ograve;ria...)',

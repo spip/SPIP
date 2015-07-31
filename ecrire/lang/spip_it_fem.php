@@ -618,6 +618,7 @@ devi attivare Javascript nel tuo browser e',
 'login_retour_site' => 'Ritorna al sito pubblico',
 'login_retoursitepublic' => 'ritorna&nbsp;al&nbsp;sito&nbsp;pubblico',
 'login_sans_cookiie' => 'Identificazione senza cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 'registrati',
 'login_test_navigateur' => 'test browser/riconnessione',
 'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',

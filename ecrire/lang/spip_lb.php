@@ -611,6 +611,7 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'login_retour_site' => 'Zer&euml;ck op den &ouml;ffentl&euml;che Site',
 'login_retoursitepublic' => 'zer&euml;ck&nbsp;op&nbsp;den&nbsp;&ouml;ffentl&euml;che&nbsp;Site',
 'login_sans_cookiie' => 'Umeldung ouni Cookie',
+'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
 'login_sinscrire' => 's&euml;ch aschreiwen',
 'login_test_navigateur' => 'Browser/Login-Test',
 'login_verifiez_navigateur' => '(Kontroll&eacute;iert op &auml;re Browser d\'Passwuert n&euml;t gesp&auml;ichert huet...)',
