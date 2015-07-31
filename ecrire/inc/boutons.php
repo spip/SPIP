@@ -78,7 +78,7 @@ function definir_barre_boutons() {
 	else
 	if (autoriser('sauvegarder', 'admin_tech')) {
 		$boutons_admin['admin_tech']=
-		  new Bouton('administration-48.png', 'icone_maintenance_site');
+		  new Bouton('administration-48.png', 'texte_sauvegarde_base');
 	}
 
 	$boutons_admin['espacement']=null;
