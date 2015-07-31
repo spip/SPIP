@@ -3,7 +3,7 @@
 	num titre,1,
 	id_article,1,
 	points,-1
-}})
+}|defaut_tri_defined})
 ]<B_liste_art>
 #ANCRE_PAGINATION
 <div class="liste-objets articles">
@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri},session_liste_art}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_art(ARTICLES){id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,date}|defaut_tri_par{#GET{defaut_tri}},#GET{defaut_tri},session_liste_art}{par titre}{pagination #ENV{nb,10}}{!lang_select}>
 		[(#LANG|changer_typo)]
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
