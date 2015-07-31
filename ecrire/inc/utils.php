@@ -936,9 +936,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_DIR_DUMP', $ti . "dump/");
 	define('_DIR_SESSIONS', $ti . "sessions/");
 	define('_DIR_TRANSFERT', $ti . "upload/");
-	define('_DIR_CACHE', $ti . "CACHE/");
-	define('_DIR_DTD', $ti . "CACHE/dtd/");
-	define('_DIR_SKELS', $ti . "CACHE/skel/");
+	define('_DIR_CACHE', $ti . "cache/");
+	define('_DIR_DTD', $ti . "cache/dtd/");
+	define('_DIR_SKELS', $ti . "cache/skel/");
 	define('_DIR_TMP', $ti);
 
 	define('_FILE_META', $ti . 'meta_cache.txt');
