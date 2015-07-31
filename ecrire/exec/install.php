@@ -14,9 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
-include_spip('inc/minipres');
-include_spip('base/create');
-include_spip('base/db_mysql');
 
 function exec_install_dist()
 {
@@ -28,8 +25,19 @@ function exec_install_dist()
 		install_fin_html();
 		exit;
 	}
+
+	// On va supprimer les eventuelles vieilles valeurs de meta,
+	// mais il faut relancer init_langues pour savoir quelles
+	// sont les langues disponibles pour l'installation
 	@unlink(_FILE_META);
 	unset($GLOBALS['meta']);
+	include_spip('inc/lang');
+	init_langues();
+
+	include_spip('inc/minipres');
+	include_spip('base/create');
+	include_spip('base/db_mysql');
+
 	$fonc = 'install_' . $etape;
 	if (function_exists($fonc))
 		$fonc();
