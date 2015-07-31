@@ -435,9 +435,16 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
 	if (history)
 		jQuery.spip.setHistoryState(blocfrag);
 
-	jQuery(blocfrag)
-	.html(c)
-	.endLoading();
+	if (jQuery(blocfrag).attr('data-loaded-callback')){
+		var callback = eval(jQuery(blocfrag).attr('data-loaded-callback'));
+		callback.call(blocfrag, c, href, history);
+	}
+	else {
+		jQuery(blocfrag)
+		.html(c)
+		.endLoading();
+	}
+
 	if (typeof href != undefined)
 		jQuery(blocfrag).attr('data-url',href);
 	if (history) {
@@ -530,7 +537,13 @@ window.onpopstate = function(popState){
  */
 jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	var force = options.force || false;
-	jQuery(blocfrag).animateLoading();
+	if (jQuery(blocfrag).attr('data-loading-callback')){
+		var callback = eval(jQuery(blocfrag).attr('data-loading-callback'));
+		callback.call(blocfrag,url,href,options);
+	}
+	else {
+		jQuery(blocfrag).animateLoading();
+	}
 	if (jQuery.spip.preloaded_urls[url] && !force) {
 		// si on est deja en train de charger ce fragment, revenir plus tard
 		if (jQuery.spip.preloaded_urls[url]=="<!--loading-->"){
