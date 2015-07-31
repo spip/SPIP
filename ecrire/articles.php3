@@ -887,7 +887,7 @@ if ($cherche_auteur) {
 	if (!$resultat) {
 		echo "<B>Aucun r&eacute;sultat pour \"$cherche_auteur\".</B><BR>";
 	}
-	if (count($resultat) == 1) {
+	else if (count($resultat) == 1) {
 		$ajout_auteur = 'oui';
 		list(, $nouv_auteur) = each($resultat);
 		echo "<B>L'auteur suivant a &eacute;t&eacute; ajout&eacute; &agrave; l'article :</B><BR>";
