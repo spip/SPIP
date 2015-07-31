@@ -311,7 +311,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 
 	if (tester_upload()) {
 		echo "<br><b>$intitule</b>";
-		echo "<br><small><input name='image' type='File' class='fondl' style='width: 60px;'>\n";
+		echo "<br><small><input name='image' type='File' class='fondl' size='15'>\n";
 		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
 	}
 
