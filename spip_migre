@@ -4,6 +4,8 @@
 # laisse tomber les .php3 par la meme occasion
 # garde neanmoins les .php3 qui peuvent avoir été mémorisés comme signets.
 
+# differencie les inc_c charge automatiquement en les renommant en exec_
+
 for i in $(grep -l inc_version.php3 *.php*)
 do
 	sed 's/inc_version.php3/inc_version.php/' $i > x
@@ -12,15 +14,63 @@ done
 
 cd ecrire
 
-# Pour respecter "la fonction F_dist est definie dans inc_F.php"
+# Ajouter inc_ a qq fichiers derogatoires 
+
+for i in $(grep -l 'pclzip.lib' inc*php*)
+do
+    sed 's/pclzip.lib/inc_pclzip/' $i > x
+    mv x $i
+done
+
+mv pclzip.lib.php inc_pclzip.php
+
+for i in $(grep -l 'lab_' inc*php*)
+do
+    sed 's/lab_/inc_/' $i > x
+    mv x $i
+done
+
+mv lab_diff.php inc_diff.php
+mv lab_ortho.php inc_ortho.php
+mv lab_revisions.php inc_revisions.php
+
+# pour tous les scripts S ayant un inc_S associe, renommer celui-ci
+# sauf qq cas particuliers en moins
+mv index.php3 i3
+mv index.php i
+mv forum.php3 f
+for i in *.php*; do 
+	if [ -f inc_${i%3} ]; 
+	then 
+	mv inc_${i%3} exec_${i%3}
+	elif [ -f inc_$i ]; 
+	then 
+	mv inc_$i exec_${i%3}
+	fi
+done
+mv i3 index.php3 
+mv i index.php 
+mv f forum.php3 
+
+# et d'autres en plus
+mv inc_auth.php3 exec_auth.php
+mv inc_accueil.php exec_accueil.php
+
+for i in inc_spip_action*; do 
+    mv $i exec_${i#inc_}
+done
+
+for i in inc_*.php3; do 
+	mv $i ${i%3} 
+done
+
+# Pour respecter "la fonction F_dist est definie dans exec_F.php"
 # il faut remplacer - par _ dans le nom des fichiers
 
-mv inc_config-contenu.php3 inc_config_contenu.php
-mv inc_config-multilang.php3 inc_config_multilang.php
-
-mv inc_config-fonctions.php inc_config_fonctions.php
-mv inc_config-lang.php inc_config_lang.php
-mv inc_presentation.php3 inc_presentation.php
+mv exec_config-contenu.php exec_config_contenu.php
+mv exec_config-multilang.php exec_config_multilang.php
+mv exec_config-fonctions.php exec_config_fonctions.php
+mv exec_config-lang.php exec_config_lang.php
 
 # et renommer les qq fonction config-F en config_F
 
@@ -30,34 +80,18 @@ do
 	mv x $i
 done
 
-# Ajouter inc_ a qq fichiers derogatoires 
-# (+tard: a completer par leur renommage dans le source)
-#mv lab_diff.php inc_diff.php
-#mv lab_ortho.php inc_ortho.php
-#mv lab_revisions.php inc_revisions.php
-#mv pclzip.lib.php inc_pclzip.php
-
 # 2 appels de la fonction pivot qui n'ont pas de php3
-sed  's/\(generer_url_ecrire("[^.]*\).php/\1/' inc_articles.php > a
-mv a inc_articles.php 
-sed  's/\(generer_url_ecrire("[^.]*\).php/\1/' inc_presentation.php > b
-mv b inc_presentation.php
-
-# traitement specifique ci-dessous
-mv inc_version.php3 inc_version
-
-# pour tous les autres, c'est deja bon sauf le .php3 ---> .php
-
-for i in inc_*.php3
+for i in $(grep -l "generer_url_ecrire([^)]*.php" *.php*)
 do
-mv $i ${i%3}
+sed  's/\(generer_url_ecrire("[^)]*\).php/\1/g' $i > x
+mv x $i
 done
 
 # Et maintenant, changer la definition de la fonction pivot
 # et eliminer les sequelles de - en _
 
 grep -v "= include_rustine" inc_utils.php |
-sed 's/$ext=.*"\?/$args = "?exec=$script" . ($args ? "\&$args/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/' > x
+sed 's/$ext=.*"\?/$args = "?exec=$script" . ($args ? "\&$args/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/;s/(.inc_. /("exec_" /' > x
 mv x inc_utils.php
 
 # consequence 1:  inc devient index, avec une valeur par defaut en dur
@@ -65,7 +99,8 @@ sed 's/inc_version.php3/inc_version.php/;s/$SCRIPT_NAME/"accueil"/' inc.php3 > i
 
 # consequence 2: nouveau test pour les scripts sans authentification
 
-sed 's/inc_version.php3/inc_version.php/;s%SCRIPT_NAME%_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie"%'  inc_version > inc_version.php
+sed 's/inc_version.php3/inc_version.php/;s%SCRIPT_NAME%_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie"%'  inc_version.php > x
+mv x inc_version.php
 
 # pour continuer le service des .php3: changer inc pour qu'il appelle index
 # (tous les scripts .php3 valent "include('inc.php3')" a present)
