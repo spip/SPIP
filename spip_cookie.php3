@@ -7,14 +7,17 @@ include_ecrire ("inc_session.php3");
 
 
 // rejoue le cookie pour renouveler spip_session
-if ($rejoue==oui) {
+if ($change_session == "oui") {
 	if (verifier_session($spip_session)) {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
-		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
-		setcookie ('spip_session', $cookie, time() + 24 * 7 * 3600);
-		@header('Content-Type: text/javascript');
-		echo " \n";	// ne pas renvoyer un fichier vide, ca fait ramer.
+//		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
+		setcookie('spip_session', $cookie, time() + 24 * 7 * 3600);
+		@header('Content-Type: image/gif');
+		@header('Expires: 0');
+		@header('Cache-Control: no-cache');
+		@header('Pragma: no-cache');
+		@readfile('ecrire/img_pack/rien.gif');
 		exit;
 	}
 }
