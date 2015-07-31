@@ -115,7 +115,8 @@ function balise_LANG_DIR_dist($p) {
 }
 
 function balise_PUCE_dist($p) {
-	$p->code = "propre('- ')";
+	$_lang = champ_sql('lang', $p);
+	$p->code = "((lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),false,true) && \$GLOBALS['puce_rtl']) ? \$GLOBALS['puce_rtl'] : \$GLOBALS['puce'])";
 	$p->statut = 'php';
 	return $p;
 }
