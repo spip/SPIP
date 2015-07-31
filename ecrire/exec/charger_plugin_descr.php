@@ -26,12 +26,10 @@ function exec_charger_plugin_descr_dist() {
 // http://doc.spip.org/@exec_charger_plugin_descr_args
 function exec_charger_plugin_descr_args($url_plugin) {
 
-	if (!autoriser('configurer', 'plugins')) {
+	if (!autoriser('configurer', 'plugins') OR !$url_plugin) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-
-	if ($url_plugin) {
 		include_spip('inc/charger_plugin');
 		include_spip('inc/texte');
 		$liste = liste_plugins_distants($url_plugin);
@@ -48,7 +46,6 @@ function exec_charger_plugin_descr_args($url_plugin) {
 			. propre('[->'.$liste[$url_plugin][1].']')
 			);
 		echo fin_cadre_relief(true);
-	}
 	}
 }
 

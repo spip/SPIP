@@ -22,7 +22,7 @@ function exec_documenter_dist()
 }
 
 // http://doc.spip.org/@exec_documenter_args
-function exec_documenter_args($id, $type, $script, $album)
+function exec_documenter_args($id, $type, $script, $album='')
 {
 	if (!$id OR !autoriser('modifier', $type, $id)) {
 		include_spip('inc/minipres');
