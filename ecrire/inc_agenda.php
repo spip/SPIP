@@ -51,17 +51,15 @@ function calendrier_retire_args_ancre($script)
 // tous les liens de navigations sont issus de cette fonction
 // on peut definir generer_url_date et un htacces pour simplifier les URL
 
-function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) 
-{
-  if (function_exists('generer_url_date'))
-    return generer_url_date($script, $annee, $mois, $jour, $type, $finurl);
-  else return	$script .		   
-	(ereg('[?&]$', $script) ?  "" : (strpos($script,'?') ? '&amp;' : '?')) .
-		'annee=' . sprintf("%04d", $annee) . '&amp;' .
-		'mois='  . sprintf("%02d", $mois) . '&amp;' .
-		'jour='  . sprintf("%02d", $jour) . '&amp;' .
-		'type='  . $type .
-		quote_amp($finurl);
+function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
+	if (function_exists('generer_url_date'))
+		return generer_url_date($script, $annee, $mois, $jour, $type, $finurl);
+
+	$script = parametre_url($script, 'annee', sprintf("%04d", $annee));
+	$script = parametre_url($script, 'mois',  sprintf("%02d", $mois));
+	$script = parametre_url($script, 'jour',  sprintf("%02d", $jour));
+	$script = parametre_url($script, 'type',  $type);
+	return $script;
 }
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
