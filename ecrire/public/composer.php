@@ -45,7 +45,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) 
 	AND lire_fichier ($phpfile, $contenu,
 	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
-
 	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
 	OR @file_exists($fonc = $squelette . '_fonctions'.'.php3')) {
 		include_once $fonc;
@@ -430,20 +429,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		$logo = "<a href='$lien' type='$mime'>$logo</a>";
 	}
 	return $logo;
-}
-
-
-// les balises dynamiques et EMBED ont des filtres sans arguments
-// car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau
-
-// http://doc.spip.org/@argumenter_balise
-function argumenter_balise($fonctions, $sep) {
-	$res = array();
-	if ($fonctions)
-		foreach ($fonctions as $f)
-			$res[] = str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
-	return ("'" . join($sep, $res) . "'");
 }
 
 // fonction appelee par la balise #NOTES

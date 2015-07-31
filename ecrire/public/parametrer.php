@@ -204,41 +204,6 @@ function quete_meta($nom, $serveur) {
 	return sql_getfetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
 }
 
-// Compilation finale des balise #URL_xxx
-// Si ces balises sont utilisees pour la base locale,
-// Producttion des appels aux fonctions generer_url parametrees par $type_urls
-// Si la base est externe et non geree par SPIP
-// on retourne NULL pour provoquer leur interpretation comme champ SQL normal.
-// Si la base est externe et sous SPIP,
-// on produit l'URL de l'objet si c'est une piece jointe
-// ou sinon l'URL du site local applique sur l'objet externe
-// ce qui permet de le voir a travers les squelettes du site local
-
-// http://doc.spip.org/@generer_generer_url
-function generer_generer_url($type, $p)
-{
-	$_id = interprete_argument_balise(1,$p);
-
-	if (!$_id) $_id = champ_sql('id_' . $type, $p);
-
-	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
-
-	if (!$s)
-		return "generer_url_$type($_id)";
-	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
-		return NULL;
-	} else {
-		$s = addslashes($s);
-		if ($type != 'document')
-			return "'./?page=$type&amp;id_$type=' . $_id . '&connect=$s'";
-		else {
-			$u = "quete_meta('adresse_site', '$s')";
-			$f = "$_id . '&amp;file=' . quete_fichier($_id,'$s')";
-			return "$u . '?action=acceder_document&amp;arg=' .$f";
-		}
-	}
-}
-
 
 # Determine les parametres d'URL (hors reecriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 

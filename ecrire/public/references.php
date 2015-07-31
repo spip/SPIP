@@ -294,6 +294,19 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	return $p;
 }
 
+// les balises dynamiques et EMBED ont des filtres sans arguments
+// car en fait ce sont des arguments pas des filtres.
+// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau
+
+// http://doc.spip.org/@argumenter_balise
+function argumenter_balise($fonctions, $sep) {
+	$res = array();
+	if ($fonctions)
+		foreach ($fonctions as $f)
+			$res[] = str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
+	return ("'" . join($sep, $res) . "'");
+}
+
 // Construction du tableau des arguments d'une balise dynamique.
 // Ces arguments peuvent etre eux-meme des balises (cf FORMULAIRE_SIGNATURE)
 // mais gare au bouclage (on peut s'aider de $nom pour le reperer au besoin)
@@ -483,12 +496,15 @@ function compose_filtres_args($p, $args, $sep)
 function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 
 	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
-	if ($boucles[$idb]->externe)
+	if ($boucles[$idb]->externe) {
 		index_pile ($idb, $nom_champ, $boucles); 
-	// retourner $Pile[$SP] et pas $Pile[0] (bug recursion en 1ere boucle)
+		$zero = '$SP';
+	} else $zero = '0';
+	// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
 	$prec = $boucles[$idb]->id_parent;
-	return (($prec==="") ? ('$Pile[$SP][\''.$nom_champ.'\']') : 
-		index_pile($prec, $nom_champ, $boucles));
+	return (($prec === '')
+		? ('$Pile[' . $zero . "]['$nom_champ']") 
+		: index_pile($prec, $nom_champ, $boucles));
 }
 
 //
