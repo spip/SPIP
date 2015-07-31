@@ -213,7 +213,8 @@ function enregistre_modif_plugin(){
 	// mais qu'il faut pas se melanger si jamais deux repertoire existent et ne different
 	// que par un espace et un underscore
 	foreach($test as $postvar=>$file){
-		$alt_postvar = str_replace(" ","_",$postvar);
+		$alt_postvar = str_replace(" ","_",$postvar); // les espaces deviennent des _
+		$alt_postvar = str_replace(".","_",$postvar); // les points deviennent des _
 		if (!isset($test[$alt_postvar]))
 	  	$test[$alt_postvar] = $file;
 	}
