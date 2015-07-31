@@ -193,14 +193,19 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	// qu'une fois (par squelette) et on conserve le resultat
 	// en static.
 	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
-		$principal = $reference[$type];
+		$principal = isset($reference[$type])?$reference[$type]:
+			// cas de la pagination indecte @xx qui positionne la page avec l'id xx
+			// et donne la reference dynamique @type=xx dans le contexte
+			isset($reference["@$type"])?$reference["@$type"]:'';
 		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
 			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
 			if (isset($enfants[$type]))
 				foreach($enfants[$type] as $t)
-					if (isset($reference[$t])) {
+					if (isset($reference[$t])
+						// cas de la reference donnee dynamiquement par la pagination
+						OR isset($reference["@$t"])) {
 						$type = $t;
-						$principal = $reference[$type];
+						$principal = isset($reference[$type])?$reference[$type]:$reference["@$type"];
 						$parent=0;
 						continue;
 					}
