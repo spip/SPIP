@@ -275,6 +275,22 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 			return;
 		}
 
+		// Prevoir traitement specifique pour videos
+		// (http://www.getid3.org/ peut-etre
+		if ($ext == "mov") {
+			$largeur = 0;
+			$hauteur = 0;
+		} else 	if ($ext == "svg") {
+		  // recuperer les dimensions et supprimer les scripts
+				list($largeur,$hauteur)= traite_svg($fichier);
+		} else {
+		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
+			$size_image = @getimagesize($fichier);
+			$largeur = intval($size_image[0]);
+			$hauteur = intval($size_image[1]);
+			$type_image = decoder_type_image($size_image[2]);
+		}
+
 		// Quelques infos sur le fichier
 		if (!@file_exists($fichier)
 		OR !$taille = @filesize($fichier)) {
@@ -282,38 +298,24 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 			return;
 		}
 
-		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
-		$size_image = @getimagesize($fichier);
-		$largeur = intval($size_image[0]);
-		$hauteur = intval($size_image[1]);
-		$type_image = decoder_type_image($size_image[2]);
-
-		// Prevoir traitement specifique pour videos
-		// (http://www.getid3.org/ peut-etre
-		if ($ext == "mov") {
-			$largeur = 0;
-			$hauteur = 0;
-		}
-
-		$poids = filesize($fichier);
 		if (!$type_image) {
 			if (_DOC_MAX_SIZE > 0
-			AND $poids > _DOC_MAX_SIZE*1024) {
+			AND $taille > _DOC_MAX_SIZE*1024) {
 				@unlink ($fichier);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
 					array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024),
-					'actuel' => taille_en_octets($poids))));
+					'actuel' => taille_en_octets($taille))));
 			}
 		}
 		else {
 			if (_IMG_MAX_SIZE > 0
-			AND $poids > _IMG_MAX_SIZE*1024) {
+			AND $taille > _IMG_MAX_SIZE*1024) {
 				@unlink ($fichier);
 				check_upload_error(6,
 				_T('info_logo_max_poids',
 					array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024),
-					'actuel' => taille_en_octets($poids))));
+					'actuel' => taille_en_octets($taille))));
 			}
 	
 			if (_IMG_MAX_WIDTH * _IMG_MAX_HEIGHT
@@ -406,6 +408,32 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	return true;
 }
+
+function traite_svg($file)
+{
+	include_spip('inc/texte');
+	$texte = spip_file_get_contents($file);
+	$new = safehtml($texte);
+
+	// securite: virer les scripts et les references externes
+	if ($new != $texte) ecrire_fichier($file, $new);
+	$width = $height = 150;
+
+	if (preg_match(',<svg[^>]+>,', $new, $s)) {
+		$s = $s[0];
+	// si la taille est en centimetre, estimer le pixel a 1/64 de cm
+		if (preg_match(',\Wwidth\s*=\s*.(\d+)([^"\']*),', $s, $r)){
+			$width = $r[1];
+			if ($r[2] == 'cm') $width <<=6;
+		}
+		if (preg_match(',\Wheight\s*=\s*.(\d+)([^"\']*),', $s, $r)){
+                	$height = $r[1];
+			if ($r[2] == 'cm') $height <<=6;
+		}
+	}
+	return array($width, $height);
+}
+
 
 function afficher_compactes($action) {
 	minipres(_T('upload_fichier_zip'),
