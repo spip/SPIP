@@ -583,7 +583,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
-
+		$result->descr = $descr;
 # attention: reperer la premiere des 2 balises: pre_boucle ou boucle
 
 		if (!preg_match(",".BALISE_PRE_BOUCLE . '[0-9_],', $texte, $r)
@@ -722,7 +722,6 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 		if (isset($boucles[$id_boucle])) {
 			$msg = _T('zbug_erreur_boucle_double',
 				 	array('id'=>$id_boucle));
-			$result->descr = $descr;
 			erreur_squelette($msg, $result);
 		} else
 			$boucles[$id_boucle] = $result;

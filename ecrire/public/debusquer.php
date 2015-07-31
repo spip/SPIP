@@ -35,7 +35,7 @@ include_spip('public/decompiler');
  * 
  * Sert pour les tests unitaires
  */
-define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
+define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 
 //
 // Point d'entree general, 
@@ -404,6 +404,7 @@ function debusquer_navigation($self)
 	global $debug_objets, $spip_lang_right;
 
 	$res = '';
+	if (!$debug_objets['sourcefile']) return '';
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
 		$res .= "<fieldset><legend>" ._T('squelette') . ' '  . $sourcefile ."&nbsp;: ";
