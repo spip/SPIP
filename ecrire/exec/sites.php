@@ -18,34 +18,26 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_sites_dist
 function exec_sites_dist()
 {
-	$id_syndic = intval(_request('id_syndic'));
+	exec_sites_args(intval(_request('id_syndic')));
+}
 
-	if (!autoriser('voir','site',$id_syndic)){
+function exec_sites_args($id_syndic)
+{
+	if (!autoriser('voir','site',$id_syndic)
+	OR (!$row = sql_fetsel("*", "spip_syndic", "id_syndic=$id_syndic"))) {
 		include_spip('inc/minipres');
-		echo minipres();
+		echo minipres(_T('public:aucun_site')); 
 	} else {
 
-	$result = sql_select("*", "spip_syndic", "id_syndic=$id_syndic");
-
-	if ($row = sql_fetch($result)) {
 		$id_rubrique = $row["id_rubrique"];
 		$nom_site = $row["nom_site"];
 		$titre_page = "&laquo; $nom_site &raquo;";
-	} else {
-		$id_syndic = $id_rubrique = $nom_site = '';
-		$titre_page = _T('info_site');
-	}
+		pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
-	pipeline('exec_init',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
-
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
-
-	if (!$id_syndic)
-	  echo _T('public:aucun_site'); 
-	else 
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
 		afficher_site($id_syndic, $id_rubrique, $nom_site, $row);
-	echo fin_page();
+		echo fin_page();
 	}
 }
 

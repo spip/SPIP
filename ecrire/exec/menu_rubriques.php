@@ -28,7 +28,6 @@ function exec_menu_rubriques_dist() {
 		include_spip('inc/headers');
 		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
 		http_status(304);
-		exit;
 	} else {
 
 	$largeur_t = ($spip_ecran == "large") ? 900 : 650;

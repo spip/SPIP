@@ -61,8 +61,7 @@ function exec_mots_type_dist()
 	    !autoriser($id_groupe?'modifier' : 'creer', 'groupemots', $id_groupe)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	pipeline('exec_init',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -191,7 +190,6 @@ function exec_mots_type_dist()
 	),
 	fin_gauche(),
 	fin_page();
-
+	}
 }
-
 ?>

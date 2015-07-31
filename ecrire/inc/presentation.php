@@ -343,7 +343,7 @@ function afficher_objets($type, $titre_table,$requete,$formater='',$force=false)
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $spip_display;
 
-	if (!is_array($table)) return "";
+	if (!$table OR !is_array($table)) return "";
 
 	if ($spip_display != 4) {
 		$res = '';

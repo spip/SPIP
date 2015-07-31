@@ -196,17 +196,18 @@ function controle_un_forum($row) {
 // http://doc.spip.org/@exec_controle_forum_dist
 function exec_controle_forum_dist()
 {
-	$id_rubrique = intval(_request('id_rubrique'));
+  exec_controle_forum_args(intval(_request('id_rubrique')),
+			   _request('type'),
+			   intval(_request('debut')),
+			   _request('recherche'));
+}
 
+function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
+{
 	if (!autoriser('publierdans','rubrique',$id_rubrique)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	} 
-
-	$type = _request('type');
-	$debut = intval(_request('debut'));
-	$recherche = _request('recherche');
+	} else {
 
 	if (!preg_match('/^\w+$/', $type)) $type = 'public';
 	$formulaire_recherche = formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
@@ -288,6 +289,7 @@ function exec_controle_forum_dist()
 
 		echo "<div id='$ancre' class='serif2'>$mess</div>";
 		echo fin_gauche(), fin_page();
+	}
 	}
 }
 

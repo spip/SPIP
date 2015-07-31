@@ -133,21 +133,15 @@ function choix_rubriques_admin_restreint($auteur) {
 
 	$result = sql_select("rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . "", "spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques", "lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique", "", "multi");
 
+	$menu = '';
 	$restreint = (sql_count($result) > 0);
 
 	if (!$restreint) {
 		$phrase = _T('info_admin_gere_toutes_rubriques')."\n";
-		$menu = '';
 	} else {
 		// L'autorisation de modifier les rubriques restreintes
 		// est egale a l'autorisation de passer en admin
 		$modif = autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => '0minirezo'));
-
-		// Il faut un element zero pour montrer qu'on a l'interface
-		// sinon il est impossible de deslectionner toutes les rubriques
-		$menu = $modif
-			? "<input type='hidden' name='restreintes[]' value='0' />\n"
-			: '';
 
 		while ($row_admin = sql_fetch($result)) {
 			$id_rubrique = $row_admin["id_rubrique"];
@@ -162,19 +156,23 @@ function choix_rubriques_admin_restreint($auteur) {
 			. "</a>"
 			. '</li>';
 		}
+		$menu =  "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
+			. _DIR_IMG_PACK
+			. "rubrique-12.gif)'>"
+			. $menu
+			. "</ul>\n";
 
+		// Il faut un element zero pour montrer qu'on a l'interface
+		// sinon il est impossible de deslectionner toutes les rubriques
+		if ($modif)
+			$menu .= "<input type='hidden' name='restreintes[]' value='0' />\n";
 		$phrase = _T('info_admin_gere_rubriques');
 	}
 
 	if ($auteur['statut'] != '0minirezo')
 		$phrase = '';
 
-	$res = "<p>$phrase</p>\n"
-		. "<ul id='liste_rubriques_restreintes' style='list-style-image: url("
-		. _DIR_IMG_PACK
-		. "rubrique-12.gif)'>"
-		. $menu
-		. "</ul>\n";
+	$res = "<p>$phrase</p>\n$menu";
 
 	// Ajouter une rubrique a un administrateur restreint
 	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))) {

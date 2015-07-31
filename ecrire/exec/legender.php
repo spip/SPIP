@@ -24,11 +24,10 @@ function exec_legender_dist()
 	if (!autoriser('joindredocument',$type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+		include_spip('inc/actions');
+		$legender = charger_fonction('legender', 'inc');
+		ajax_retour($legender($id_document, array(), $script, $type, $id, $ancre));
 	}
-
-	include_spip('inc/actions');
-	$legender = charger_fonction('legender', 'inc');
-	ajax_retour($legender($id_document, array(), $script, $type, $id, $ancre));
 }
 ?>
