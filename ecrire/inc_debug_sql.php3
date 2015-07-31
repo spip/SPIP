@@ -31,6 +31,8 @@ function afficher_debug_contexte($env) {
 		foreach ($env as $nom => $valeur) {
 			$env_texte .= "\n<tr><td><strong>".nl2br(entites_html($nom))
 				. "</strong></td>";
+			if (is_array($valeur))
+			  $valeur = '(' . count($valeur) .' items) [' . join(',', $valeur) . ']';
 			$env_texte .= "<td>:&nbsp;".nl2br(entites_html($valeur))
 				. "</td></tr>\n";
 		}
@@ -185,7 +187,7 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	if (is_array($GLOBALS['contexte_inclus']))
 		$debug_objets['contexte'][$nom] = $GLOBALS['contexte_inclus'];
 	else {
-		$debug_objets['contexte'][$nom] = $GLOBALS['contexte'];
+	  $debug_objets['contexte'][$nom] = calculer_contexte();
 		if (!isset($debug_objets['principal']))
 		  $debug_objets['principal'] = $nom;
 	}
@@ -268,8 +270,8 @@ function reference_boucle_debug($n, $nom, $self)
   else {
   $self .= "&amp;var_mode_objet=$skel$boucle&amp;var_mode_affiche=boucle";
 
-    return !$ligne ? " (boucle <a href='$self#$skel$boucle'>$boucle</a>)" :
-      " (boucle $boucle ligne <a href='$self&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)";
+    return !$ligne ? " (boucle\n<a href='$self#$skel$boucle'>$boucle</a>)" :
+      " (boucle $boucle ligne\n<a href='$self&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)";
   }
 }
 
@@ -353,26 +355,26 @@ function debug_dumpfile ($texte, $fonc, $type) {
 					$aff = "<b>$aff</b>";
 				$res .= "\n<tr bgcolor='" .
 				  $colors[$i%2] .
-				  "'><td  align='right'>$i</td><td>" .
+				  "'><td  align='right'>$i</td><td>\n" .
 				  "<a  class='debug_link_boucle' href='" .
 				  $self .
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
 				  _T('zbug_boucle') .
-				  "</a></td><td><a class='debug_link_boucle' href='" .
+				  "</a></td><td>\n<a class='debug_link_boucle' href='" .
 				  $self .
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
 				  _T('zbug_resultat') .
-				  "</a></td><td><a class='debug_link_resultat' href='" .
+				  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 				  $self .
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=code#$nom_skel'>" .
 				  _T('zbug_code') .
-				  "</a></td><td>" .
+				  "</a></td><td>\n" .
 				  $aff .
 				  "</td></tr>";
 			}
