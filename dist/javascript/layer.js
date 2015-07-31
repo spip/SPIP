@@ -265,9 +265,22 @@ function AjaxSqueezeNode(trig, target, f, event)
 		return res;
 		
 	}
-
+	
+	if(valid) {
+		//open a blank window
+		var doc = window.open("","valider").document;
+		//create a document to enable receiving the result of the ajax post
+		doc.open();
+		doc.close();
+		//store the searching image to be able to remove it after the post completes 
+		var searching_img = $(">:first",target);
+		//set the element receiving the ajax post
+		target = doc.body;
+	}
+	
 	jQuery(trig).ajaxSubmit({"target":target,
 				    "after":function(res,status){
+		if(valid) searching_img.remove();
 		if(status=='error') return this.html('Erreur HTTP');
 		callback(res,status);
 	},
