@@ -243,7 +243,7 @@ function enfant($leparent){
 //		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
-			if ($i == 1 && !$premier) echo "<OPTION VALUE='0'>\n";
+			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
 			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
 		$premier = 0;
@@ -322,20 +322,14 @@ echo "<P><HR><P>";
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-	if (($options == "avancees") OR ($id_rubrique == 0)) {
-		debut_cadre_relief("$logo_parent");
-		
-		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
-		echo aide ("artrub");
-		echo "<BR><SELECT NAME='id_rubrique' style='background-color:$couleur_claire; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
-		enfant(0);
-		echo "</SELECT><BR>\n";
-		echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
-		fin_cadre_relief();
-	}
-	else
-		echo "<INPUT TYPE='hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";	
-
+	debut_cadre_relief("$logo_parent");
+	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
+	echo aide ("artrub");
+	echo "<BR><SELECT NAME='id_rubrique' style='background-color:$couleur_claire; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
+	enfant(0);
+	echo "</SELECT><BR>\n";
+	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
+	fin_cadre_relief();
 
 	if (($options == "avancees" AND $articles_descriptif != "non") OR strlen($descriptif) > 0) {
 		echo "<P><B>Descriptif rapide</B>";
