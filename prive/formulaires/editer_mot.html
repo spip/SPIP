@@ -3,7 +3,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}

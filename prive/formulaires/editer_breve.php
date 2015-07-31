@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_breve_charger_dist($id_breve='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='breves_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_breve_charger_dist($id_breve='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='breves_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_charger('breve',$id_breve,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
@@ -33,14 +33,14 @@ function breves_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_breve_verifier_dist($id_breve='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='breves_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_breve_verifier_dist($id_breve='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='breves_edit_config', $row=array(), $hidden=''){
 	
 	$erreurs = formulaires_editer_objet_verifier('breve',$id_breve,array('titre'));
 	return $erreurs;
 }
 
 // http://doc.spip.org/@inc_editer_article_dist
-function formulaires_editer_breve_traiter_dist($id_breve='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='breves_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_breve_traiter_dist($id_breve='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='breves_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('breve',$id_breve,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 

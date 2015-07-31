@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_editer_site_charger_dist($id_syndic='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='sites_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_site_charger_dist($id_syndic='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='sites_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('site',$id_syndic,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	# pour recuperer le logo issu d'analyse auto
 	$valeurs['logo']='';
@@ -37,7 +37,7 @@ function sites_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='sites_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='sites_edit_config', $row=array(), $hidden=''){
 	include_spip('inc/filtres');
 	include_spip('inc/site');
 	$oblis = array('nom_site','url_site');
@@ -58,7 +58,7 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 	return $erreurs;
 }
 
-function formulaires_editer_site_traiter_dist($id_syndic='new', $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='sites_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_site_traiter_dist($id_syndic='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='sites_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('site',$id_syndic,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 

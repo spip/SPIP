@@ -9,7 +9,7 @@ function instituer_auteur_ici($auteur=array()){
 }
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_auteur_charger_dist($id_auteur='new', $lier_id_article=0, $retour='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	if ($lier_id_article) $valeurs['lier_id_article'] = $lier_id_article;
 	return $valeurs;
@@ -33,7 +33,7 @@ function auteurs_edit_config($row)
 	return $config;
 }
 
-function formulaires_editer_auteur_verifier_dist($id_auteur='new', $lier_article=0, $retour='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
 	// login trop court ou existant
 	if ($p = _request('new_login')){
@@ -59,7 +59,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $lier_article
 }
 
 // http://doc.spip.org/@inc_editer_mot_dist
-function formulaires_editer_auteur_traiter_dist($id_auteur='new', $lier_article=0, $retour='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	//return $message;
 }
