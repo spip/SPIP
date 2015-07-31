@@ -613,7 +613,7 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			return $f;
 		}
 	}
-	spip_log("find_in_path n'a pas vu '$filename' dans $path");
+#	spip_log("find_in_path n'a pas vu '$filename' dans $path");
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
