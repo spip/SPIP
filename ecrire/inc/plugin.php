@@ -168,6 +168,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 	// creer une premiere liste non ordonnee mais qui ne retient
 	// que les plugins valides, et dans leur derniere version en cas de doublon
 	$liste_non_classee = array();
+
 	foreach($listes as $dir_type=>$l){
 		foreach($l as $k=>$plug) {
 			// renseigner ce plugin
@@ -617,13 +618,13 @@ function plugin_est_installe($plug_path){
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
 function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGINS){
-	include_spip('inc/xml');
 	static $infos=array();
 	static $plugin_xml_cache=NULL;
+	include_spip('inc/xml');
 	if (!isset($infos[$dir_plugins][$plug]) OR $force_reload){
 		if ($plugin_xml_cache==NULL){
 			$plugin_xml_cache = array();
-			if (is_file($f=_DIR_TMP."plugin_xml.cache")){
+			if (is_file($f=_DIR_TMP."plugin_xml_cache.gz")){
 				lire_fichier($f,$contenu);
 				$plugin_xml_cache = unserialize($contenu);
 				if (!is_array($plugin_xml_cache)) $plugin_xml_cache = array();
@@ -639,7 +640,7 @@ function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGIN
 				$ret = $info;
 		}
 		if (!count($ret)){
-		  if ((@file_exists($dir_plugins))&&(is_dir($dir_plugins))){
+			if ((@file_exists($dir_plugins))&&(is_dir($dir_plugins))){
 				if (@file_exists($f = $dir_plugins."$plug/plugin.xml")) {
 					$arbre = spip_xml_load($f);
 					if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
@@ -691,13 +692,14 @@ function plugin_get_infos($plug, $force_reload=false, $dir_plugins = _DIR_PLUGIN
 
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
-					$plugin_xml_cache[$plug]=$ret;
-					ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
+					$plugin_xml_cache[$dir_plugins][$plug]=$ret;
+					ecrire_fichier(_DIR_TMP."plugin_xml_cache.gz",serialize($plugin_xml_cache));
 				}
 			}
 		}
 		$infos[$dir_plugins][$plug] = $ret;
 	}
+
 	return $infos[$dir_plugins][$plug];
 }
 
