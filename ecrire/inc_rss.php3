@@ -338,7 +338,7 @@ function rss_breves($critere) {
 			'date' => $t['date_heure'],
 			'description' => propre(couper($t['texte'],300)),
 			'url' => _DIR_RESTREINT_ABS
-				.'breves.php3?id_breve='.$t['id_breve']
+				.'breves_voir.php3?id_breve='.$t['id_breve']
 		);
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('titre_breve_proposee').' : '.$item['title'];
