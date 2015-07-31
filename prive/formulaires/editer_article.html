@@ -54,6 +54,25 @@
 		</li>]
 			]
 
+		[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
+	  	<li class="editer_liens_sites fieldset">
+			<fieldset>
+				<h3 class="legend"><:entree_liens_sites:></h3>
+				<ul>
+				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+					<label for="nom_site"><:info_titre:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
+					]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
+				</li>
+				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+					<label for="url_site"><:info_url:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
+					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+				</li>
+				</ul>
+			</fieldset>
+		</li>]
+	    
 	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
 	    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="text_area"><:info_texte:><em class="aide">#AIDER{arttexte}</em></label>[
@@ -78,25 +97,6 @@
 			]<textarea name='ps' id='ps' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 	    </li>]
 
-	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
-	  	<li class="editer_liens_sites fieldset">
-			<fieldset>
-				<h3 class="legend"><:entree_liens_sites:></h3>
-				<ul>
-				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
-					<label for="nom_site"><:info_titre:></label>[
-					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>
-					]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
-				</li>
-				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
-					<label for="url_site"><:info_url:></label>[
-					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
-					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
-				</li>
-				</ul>
-			</fieldset>
-		</li>]
-	    
 	  </ul>
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
