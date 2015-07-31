@@ -24,6 +24,8 @@ function exec_admin_effacer_dist()
 
 	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee;
 
+	pipeline('exec_init',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
+
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_admin_effacer'), "configuration", "base");
 
@@ -38,7 +40,14 @@ function exec_admin_effacer_dist()
 	echo _T('info_gauche_admin_effacer');
 
 	fin_boite_info();
+	
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
+	
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
+	
 	debut_droite();
+
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
@@ -74,7 +83,11 @@ function exec_admin_effacer_dist()
 
 	fin_cadre_relief();
 
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));	  
+
 	echo fin_gauche(), fin_page();
+
+
 
 }
 ?>

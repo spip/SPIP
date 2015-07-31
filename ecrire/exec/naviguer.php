@@ -65,25 +65,29 @@ function exec_naviguer_dist()
 
 	  debut_gauche();
 
-	  if ($spip_display != 4) {
+	if ($spip_display != 4) {
 
 		infos_naviguer($id_rubrique, $statut);
 
-//
-// Logos de la rubrique
-//
+		//
+		// Logos de la rubrique
+		//
 		if ($flag_editable AND ($spip_display != 4)) {
 			$iconifier = charger_fonction('iconifier', 'inc');
 			echo $iconifier('id_rubrique', $id_rubrique, 'naviguer','iconifier');
 		}
+	}
 
-//
-// Afficher les boutons de creation d'article et de breve
-//
-		raccourcis_naviguer($id_rubrique, $id_parent);
-	  }
-		
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
+
+		//
+		// Afficher les boutons de creation d'article et de breve
+		//
+	if ($spip_display != 4) {
+		raccourcis_naviguer($id_rubrique, $id_parent);
+	}
+		
+
 		creer_colonne_droite();
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 		debut_droite();
@@ -122,6 +126,9 @@ function exec_naviguer_dist()
 
 		echo naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable);
 	}
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
+
 
 ////// Supprimer cette rubrique (si vide)
 

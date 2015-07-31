@@ -92,15 +92,16 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo $iconifier('id_breve', $id_breve, 'breves_voir'); 
 	}
 
-	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", false));
-
-	
 	echo pipeline('affiche_gauche',
 		array(
 		'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
 		'data'=>''
 		)
 	);
+
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", false));
+
+	
 
 	creer_colonne_droite();
 
@@ -185,6 +186,12 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 		fin_cadre_enfonce();
 	}
+	echo pipeline('affiche_milieu',
+		array(
+		'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
+		'data'=>''
+		)
+	);
 
 	echo justifier(propre($texte))."\n";
 

@@ -31,6 +31,7 @@ function exec_articles_page_dist()
 // Afficher le bouton de creation d'article
 //
 
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 	$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
 
 	if (spip_num_rows($result) > 0) {
@@ -42,7 +43,6 @@ function exec_articles_page_dist()
 	}
 }
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 debut_droite();
@@ -75,6 +75,11 @@ echo "</p>";
 
  echo "<p>",  afficher_articles(_T('info_refuses'),	array('FROM' =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse'",  'ORDER BY' => "articles.date DESC"));
 echo "</p>";
+
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_page'),'data'=>''));
+
+
 
 echo fin_gauche(), fin_page();
 }

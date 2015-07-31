@@ -27,13 +27,15 @@ function exec_mots_tous_dist()
 	echo $commencer_page(_T('titre_page_mots_tous'), "naviguer", "mots");
 	debut_gauche();
 
+
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
+
 	if (acces_mots()  AND !$conf_mot){
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
 	}
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
@@ -137,6 +139,8 @@ function exec_mots_tous_dist()
 
 		fin_cadre_enfonce();
 	}
+
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
 
 	echo fin_gauche(), fin_page();

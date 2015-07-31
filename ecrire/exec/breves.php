@@ -55,6 +55,7 @@ function exec_breves_dist()
 		}
 
 	}
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'breves'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }

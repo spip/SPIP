@@ -139,6 +139,9 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$form .= $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 
 	$form .= fin_cadre_couleur(true);
+
+	$form .= pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
+
 	
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
