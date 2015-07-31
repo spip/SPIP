@@ -175,7 +175,7 @@ function detruit_restaurateur()
 	if (sql_countsel("spip_auteurs", "id_auteur<>0"))
 		sql_delete("spip_auteurs", "id_auteur=0");
 	else {
-	  	sql_updateq("spip_auteurs", array("id_auteur" => extra), "id_auteur=0");
+	  	spip_query("UPDATE spip_auteurs SET id_auteur=extra WHERE id_auteur=0");
 	}
 }
 
