@@ -303,7 +303,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 	if (count($tous)) {
 		foreach ($tous as $mot) {
 			if (!isset($mauvais[$mot]))
-				$values[] = "('$lang', " . spip_abstract_quote($mot) . ", 1, '')";
+				$values[] = "($lang, " . spip_abstract_quote($mot) . ", 1, '')";
 		}
 	}
 	if (count($values)) {
