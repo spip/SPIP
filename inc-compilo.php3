@@ -690,8 +690,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 // Fonction principale du squelette $sourcefile
 //
 function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
-
-	return analyse_resultat_skel('$nom', \$Cache, $corps);
+	\$corps = $corps;
+	return analyse_resultat_skel('$nom', \$Cache, \$corps);
 }
 
 ?".">";
