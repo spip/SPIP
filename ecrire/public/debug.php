@@ -47,16 +47,19 @@ function afficher_debug_contexte($env) {
 // http://doc.spip.org/@affiche_erreurs_page
 function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 
-	if ($GLOBALS['exec']=='valider_xml') return '';
+	if ($GLOBALS['exec']=='valider_xml' OR !$tableau_des_erreurs)
+		return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
+	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr><td>" .$err[0] . "</td><td>".$err[1]."</td></tr>\n";
+		$res .= "<tr><td style='text-align: right'>$i</td><td>" .$err[0] . "</td><td>".$err[1]."</td></tr>\n";
+		$i++;
 	}
 	$style = _DIR_RESTREINT ? "position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
 
 	return "\n<table border='1' id='spip-debug' 
-	style='text-align: left; $style'><tr><th colspan='2'>"
+	style='text-align: left; $style'><tr><th colspan='3'>"
 	. ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
@@ -68,12 +71,16 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 // http://doc.spip.org/@chrono_requete
 function chrono_requete($tableau_des_temps)
 {
+	$res = _DIR_RESTREINT ? '' :
+		affiche_erreurs_page($GLOBALS['tableau_des_erreurs']);
+
 	foreach ($tableau_des_temps as $key => $row) {
 		  $t[$key]  = $row[0];
 		  $q[$key] = $row[1];
 		}
 	array_multisort($t, SORT_DESC, $q, $tableau_des_temps);
-	return affiche_erreurs_page($tableau_des_temps,
+
+	return $res . affiche_erreurs_page($tableau_des_temps,
 				  _T('zbug_profile', array('time'=>'')));
 }
 

@@ -73,6 +73,7 @@ function spip_query_db($query) {
 // http://doc.spip.org/@spip_mysql_trace
 function spip_mysql_trace($query, $start, $result)
 {
+	global $tableau_des_erreurs;
 	$s = mysql_errno();
 
 	if ($start) spip_mysql_timing($start, microtime(), $query, $result);
@@ -87,12 +88,9 @@ function spip_mysql_trace($query, $start, $result)
 		AND (isset($GLOBALS['auteur_session']['statut']))
 		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 			include_spip('public/debug');
-			echo _T('info_erreur_requete'),
-			  " ",
-			  htmlentities($query),
-			  "<br />&laquo; ",
-			  htmlentities($result = $s),
-			  " &raquo;<p>";
+			$tableau_des_erreurs[] = array(
+				_T('info_erreur_requete'). " "  .  htmlentities($query),
+				"&laquo; " .  htmlentities($result = $s)," &raquo;");
 		}
 		spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
 		spip_log("$result - $query", 'mysql');
@@ -104,14 +102,18 @@ function spip_mysql_trace($query, $start, $result)
 // http://doc.spip.org/@spip_mysql_timing
 function spip_mysql_timing($m1, $m2, $query, $result)
 {
-	static $tt = 0;
+	static $tt = 0, $nb=0;
 	global $tableau_des_temps;
 
 	list($usec, $sec) = explode(" ", $m1);
 	list($usec2, $sec2) = explode(" ", $m2);
  	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
-	$tableau_des_temps[] = array(sprintf("%3f", $dt), "$query -> $result");
+	$nb++;
+	$tableau_des_temps[] = array(sprintf("%3f", $dt), 
+				     "<table border='1'><tr><td>" .
+				     sprintf(" %3d", $nb) .
+				     "e</td><td>$query</td><td>$result</td></tr></table>");
 }
 
 // fonction appelant la precedente  specifiquement pour l'espace public

@@ -35,6 +35,7 @@ function exec_naviguer_dist()
 		$lang = $row["lang"];
 	} elseif ($id_rubrique)
 	      {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	      }
