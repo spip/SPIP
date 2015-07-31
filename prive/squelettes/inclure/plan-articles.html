@@ -1,13 +1,15 @@
 #SET{nomp,artrub#ID_RUBRIQUE}
 #SET{nb,50}
 <B_articles>
-<h4><:articles:></h4>
-[<p class="pagination">[<em>(#VAL{article}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
-<ul class="menu articles">
-	<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}{statut IN #SESSION{statut}|statuts_articles_visibles}{pagination #GET{nb} #GET{nomp}}{lang_select=non}>
-		<li><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
-						title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
-	</BOUCLE_articles>
-</ul>
-[<p class="pagination">[<em>(#VAL{article}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	<div class="menu">
+	<h4><:articles:></h4>
+	[<p class="pagination">[<em>(#VAL{article}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	<ul class="menu-items articles">
+		<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}{statut IN #SESSION{statut}|statuts_articles_visibles}{pagination #GET{nb} #GET{nomp}}{lang_select=non}>
+			<li class="item"><a href="[(#ID_ARTICLE|generer_url_entite{article})]"
+							title="[(#VAL{article}|objet_info{texte_objet}|_T) #ID_ARTICLE]">[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">[<em>(#VAL{article}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]
+	</div>
 </B_articles>
