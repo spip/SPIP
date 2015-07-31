@@ -155,6 +155,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	// cas particulier pour les entites html (a completer eventuellement)
 	case 'html':
 		$GLOBALS['CHARSET'][$charset] = array (
+		'ldquo'=>'&#147;', 'rdquo'=>'&#148;',
 		'cent'=>'&#162;', 'pound'=>'&#163;', 'curren'=>'&#164;', 'yen'=>'&#165;', 'brvbar'=>'&#166;',
 		'sect'=>'&#167;', 'uml'=>'&#168;', 'ordf'=>'&#170;', 'laquo'=>'&#171;', 'not'=>'&#172;',
 		'shy'=>'&#173;', 'macr'=>'&#175;', 'deg'=>'&#176;', 'plusmn'=>'&#177;', 'sup2'=>'&#178;',
@@ -183,7 +184,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	case 'translit':
 		$GLOBALS['CHARSET'][$charset] = array (
 		// latin
-		128=>'euro', 131=>'f', 140=>'OE', 153=>'TM', 156=>'oe', 159=>'Y', 160=>' ',
+		128=>'euro', 131=>'f', 140=>'OE', 147=>'\'\'', 148=>'\'\'', 153=>'TM', 156=>'oe', 159=>'Y', 160=>' ',
 		161=>'!', 162=>'c', 163=>'L', 164=>'O', 165=>'yen',166=>'|',
 		167=>'p',169=>'(c)', 171=>'<<',172=>'-',173=>'-',174=>'(R)',
 		176=>'o',177=>'+-',181=>'mu',182=>'p',183=>'.',187=>'>>', 192=>'A',

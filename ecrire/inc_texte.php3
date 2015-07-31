@@ -268,15 +268,17 @@ function typo_fr($letexte) {
 	global $flag_strtr2;
 	static $trans;
 
-	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
+	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg ; 147 = ldquo; 148 = rdquo
 	if (!$trans) {
 		$trans = array(
 			"&nbsp;" => "~",
 			"&raquo;" => "&#187;",
 			"&laquo;" => "&#171;",
+			"&rdquo;" => "&#148;",
+			"&ldquo;" => "&#147;",
 			"&deg;" => "&#176;"
 		);
-		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 176 => '&#176;');
+		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
 		$charset = lire_meta('charset');
 		include_ecrire('inc_charsets.php3');
 
