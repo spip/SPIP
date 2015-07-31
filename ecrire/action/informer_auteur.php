@@ -34,6 +34,7 @@ function action_informer_auteur_dist() {
 				include_spip('inc/filtres');
 				$row['logo'] = reduire_image($logo,100,80);
 			}
+			else $row['logo']='';
 		}
 		unset($row['id_auteur']);
 

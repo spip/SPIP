@@ -93,24 +93,28 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 <script type='text/javascript'>
 var alea_actuel;
 var alea_futur;
+var login;
 $('#pass_ajax').show().after('<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />');
 $('#var_login').blur(function(){
-	$.get('#URL_ACTION{informer_auteur}',
-		{var_login:$(this).attr('value')},
-		function (c) {
-			eval('c = '+c); // JSON
-			if (c) {
-				alea_actuel = c.alea_actuel;
-				alea_futur = c.alea_futur;
-				$('input#session_login_hidden').attr('value',c.login);
-				// indiquer le cnx si on n'y a pas touche
-				$('input#session_remember.intact')
-				.attr('checked',c.cnx=='1'?'checked':'');
-				$('#spip_logo_auteur').html(c.logo);
-			} else {
-				$('#spip_logo_auteur').html('');
-			}
-	});
+	if (login!=$(this).attr('value')) {
+		login = $(this).attr('value');
+		$.get('#URL_ACTION{informer_auteur}',
+			{var_login:$(this).attr('value')},
+			function (c) {
+				eval('c = '+c); // JSON
+				if (c) {
+					alea_actuel = c.alea_actuel;
+					alea_futur = c.alea_futur;
+					$('input#session_login_hidden').attr('value',c.login);
+					// indiquer le cnx si on n'y a pas touche
+					$('input#session_remember.intact')
+					.attr('checked',c.cnx=='1'?'checked':'');
+					$('#spip_logo_auteur').html(c.logo);
+				} else {
+					$('#spip_logo_auteur').html('');
+				}
+		});
+	}
 });
 $('form#login').submit(function(){
 	pass = $('input\u005b@name=session_password\u005d').attr('value');
