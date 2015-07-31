@@ -365,11 +365,6 @@ ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
 ecrire/statistiques_repartition.php -text
 /inc-urls-propres-qs.php3 -text
-plugins/ancres/version.php -text
-plugins/podcast_client/podcast_client.php -text
-plugins/podcast_client/version.php -text
-plugins/revision_nbsp/version.php -text
-plugins/smallcaps/version.php -text
 /puce.gif -text
 /puce_rtl.gif -text
 /rien.gif -text
