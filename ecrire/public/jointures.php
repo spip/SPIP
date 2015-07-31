@@ -38,7 +38,8 @@ function decompose_champ_id_objet($champ){
  */
 // http://doc.spip.org/@trouver_champs_decomposes
 function trouver_champs_decomposes($champ,$desc){
-	if (array_key_exists($champ,$desc['field']))
+	if (!is_array($desc) // on ne se risque pas en conjectures si on ne connait pas la table
+	  OR array_key_exists($champ,$desc['field']))
 		return array($champ);
 	if (is_array($decompose=decompose_champ_id_objet($champ))){
 		array_pop($decompose);

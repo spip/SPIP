@@ -1,10 +1,5 @@
-<BOUCLE_G(GROUPES_MOTS)
-	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
-	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
-	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
-	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
-	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
->
+#SET{table,#VAL{'(^|,)('}|concat{#ENV{table}}|concat{#CONFIG{mots_cles_forums}|choixsiegal{oui,'|forum',''},')(,|$)'}
+<BOUCLE_G(GROUPES_MOTS)	{tables_liees==#GET{table}}>
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<fieldset>
 	<p class='legend'><:mots_clefs:> : #TITRE</p>
