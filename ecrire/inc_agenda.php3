@@ -104,7 +104,7 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 
 
 	if ($large) {
-		$largeur = 350;
+		$largeur = 300;
 		$modif_decalage = 40;
 	} else {
 		$largeur = 120;
@@ -122,6 +122,42 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 		echo "<div style='position: absolute; $spip_lang_left: 2px; top: ".(($i-6)*30+2)."px; color: #666666;' class='arial0'><b class='arial0'>$i:00</b></div>";
 	}
 	echo "<div style='position: absolute; $spip_lang_left: 2px; top: 422px; color: #666666;' class='arial0'><b class='arial0'>20:00<br />23:59</b></div>";
+
+
+	if ($large) {
+		// articles du jour
+		$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee-$mois-$jour' AND date < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date";
+		$result=spip_query($query);
+		while($row=spip_fetch_array($result)){
+			$id_article=$row['id_article'];
+			$titre=typo($row['titre']);
+			$lejour=journum($row['date']);
+			$lemois = mois($row['date']);		
+			$les_articles.="<div><a href='articles.php3?id_article=$id_article' class='arial1'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</a></div>";
+		}
+	
+		// breves du jour
+		$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee-$mois-$jour' AND date_heure < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date_heure";
+		$result=spip_query($query);
+		while($row=spip_fetch_array($result)){
+			$id_breve=$row['id_breve'];
+			$titre=typo($row['titre']);
+			$lejour=journum($row['date_heure']);
+			$lemois = mois($row['date_heure']);		
+			$les_breves.="<div><a href='breves_voir.php3?id_breve=$id_breve' class='arial1'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> $titre</a></div>";
+		}
+		if ($les_articles OR $les_breves) {
+			if ($les_articles) $les_articles = "<div><b class='verdana1'>"._T('info_articles')."</b></div>".$les_articles;
+			if ($les_breves) $les_breves = "<div><b class='verdana1'>"._T('info_breves_02')."</b></div>".$les_breves;
+			echo "<div style='position: absolute; $spip_lang_left: 355px; top: 32px; width: 140px;'>";
+			echo $les_articles;
+			echo $les_breves;
+			echo "</div>";
+		}
+	}
+
+
+
 
 
 	// rendez-vous personnels
