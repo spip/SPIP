@@ -348,25 +348,31 @@ function calcul_branche ($generation) {
 // pour le critere {branche}
 // http://doc.spip.org/@calcul_branche_in
 function calcul_branche_in($id) {
+	static $b = array();
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
 	if (!is_array($id)) $id = explode(',',$id);
 	$id = join(',', array_map('intval', $id));
+	if (isset($b[$id]))
+		return $b[$id];
 
 	// Notre branche commence par la rubrique de depart
-	$branche = $id;
+	$branche = $r = $id;
 
 	// On ajoute une generation (les filles de la generation precedente)
 	// jusqu'a epuisement
 	while ($filles = sql_allfetsel(
 					'id_rubrique',
 					'spip_rubriques',
-					sql_in('id_parent', $id)." AND ". sql_in('id_rubrique', $id, 'NOT')
+					sql_in('id_parent', $r)." AND ". sql_in('id_rubrique', $r, 'NOT')
 					)) {
-		$id = join(',', array_map('array_shift', $filles));
-		$branche .= ',' . $id;
+		$r = join(',', array_map('array_shift', $filles));
+		$branche .= ',' . $r;
 	}
 
+	# securite pour ne pas plomber la conso memoire sur les sites prolifiques
+	if (strlen($branche)<10000)
+		$b[$id] = $branche;
 	return $branche;
 }
 
