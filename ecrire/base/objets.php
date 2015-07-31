@@ -325,7 +325,7 @@ function id_table_objet($type,$serveur='') {
 	$t = table_objet($type);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($t,$serveur);
-	return @$desc['key']["PRIMARY KEY"];
+	return isset($desc['key']["PRIMARY KEY"])?$desc['key']["PRIMARY KEY"]:"id_$type";
 }
 
 // http://doc.spip.org/@objet_type
