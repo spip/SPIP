@@ -716,7 +716,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if (!isset($requete['SELECT'])) {
 		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
 
-		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
+		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
 			if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 			else $langue_defaut = $GLOBALS['meta']['langue_site'];
@@ -1122,7 +1122,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	global  $couleur_foncee, $options;	
  
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
-		AND $GLOBALS['id_rubrique'] == 0)
+	     AND (!isset($GLOBALS['id_rubrique'])))
 	OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 		$afficher_langue = true;
 
@@ -1160,7 +1160,9 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$date_heure = $row['date_heure'];
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$statut = $row['statut'];
-	if ($lang = $row['lang']) changer_typo($lang);
+	if (isset($row['lang']))
+	  changer_typo($lang = $row['lang']);
+	else $lang = '';
 	$id_rubrique = $row['id_rubrique'];
 			
 	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
@@ -1618,7 +1620,7 @@ function debut_javascript($admin, $stat)
 
 	# teste la capacite ajax : on envoie un cookie -1
 	# et un script ajax ; si le script reussit le cookie passera a +1
-	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
+	if (!isset($GLOBALS['_COOKIE']['spip_accepte_ajax'])) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
 	a.open('GET', '" . generer_url_ecrire("ajax_page","fonction=test", true) .

@@ -110,7 +110,7 @@ function arbo_articles_tous()
 		$id_parent = $row['id_parent'];
 		$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
 		$nom_block = "rubrique$id_rubrique";
-		if (!$numero_block[$nom_block]){
+		if (!isset($numero_block[$nom_block])){
 			$compteur_block++;
 			$numero_block[$nom_block] = $compteur_block;
 
@@ -267,9 +267,9 @@ function afficher_rubriques_filles($id_parent) {
 			
 			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . _DIR_IMG_PACK . "$icone) $spip_lang_left center no-repeat;$bgcolor'>";
 			
-			$lesarticles = $article[$id_rubrique];
-
-			if ($enfant[$id_rubrique] OR $lesarticles) echo bouton_block_invisible("rubrique$id_rubrique");
+			$lesarticles = isset($article[$id_rubrique]) ? $article[$id_rubrique] : '';
+			$lesenfants = isset($enfant[$id_rubrique]) ? $enfant[$id_rubrique] : '';
+			if ($lesenfants OR $lesarticles) echo bouton_block_invisible("rubrique$id_rubrique");
 			
 			echo "<b class='verdana2'><a href='",
 			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
@@ -277,7 +277,7 @@ function afficher_rubriques_filles($id_parent) {
 			  $titre,
 			  "</b></a></div>\n";
 
-			if ($enfant[$id_rubrique] OR $lesarticles) {
+			if ($lesenfants OR $lesarticles) {
 				echo debut_block_invisible("rubrique$id_rubrique");
 				echo "<div class='plan-rubrique'>";
 				if ($lesarticles) {
