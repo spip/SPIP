@@ -352,6 +352,7 @@ function chercher_enclosures_zip($rss) {
 			foreach ($zips as $zip)
 				if (extraire_attribut($zip, 'type') == 'application/zip')
 					$liste[extraire_attribut($zip, 'href')] = $item['titre'];
+	spip_log(count($liste).' enclosures au format zip');
 	return $liste;
 }
 
@@ -392,6 +393,9 @@ function afficher_liste_listes_plugins() {
 			.' plugins) '.$a.'</li>';
 	}
 	$ret .= '</ul>';
+
+	$ret .= '<a href="'.parametre_url(
+			generer_action_auteur('charger_plugin', 'update_flux'),'update_flux').'">'._L('Mettre &#224; jour les listes').'</a>';
 
 	return $ret;
 }
