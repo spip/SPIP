@@ -1,10 +1,13 @@
 <div class="formulaire_spip formulaire_oubli">[
-(#ENV*{message})
+(#ENV*{message_erreur})
 ][
-(#ENV*{message}|?{'',' '})
+(#ENV*{message_ok})
+][
+(#ENV*{editable}|?{' '})
 
 <form id="oubli_form" action="[(#ENV{action})]" method="post">
-	[(#ENV{action}|form_hidden)]
+	[(#REM) activer le traitement auto et dispatch sur charger/valider/modifier]
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type="hidden" name="p" value="(#ENV{p})" />
@@ -23,9 +26,8 @@
 </div>
 
 <script type="text/javascript"><!--
-[
-(#ENV*{message}|?{'',' '})
-document.getElementById('oubli').focus()
+[(#ENV*{editable}|?{' '})
+ document.getElementById('oubli').focus()
 ]
 //--></script>
 </div>

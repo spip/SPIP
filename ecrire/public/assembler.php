@@ -97,6 +97,23 @@ function public_assembler_dist($fond, $connect='') {
 		redirige_par_entete($forum_insert());
 	}
 
+	// traiter les formulaires dynamiques simplifies en charger/valider/modifier
+	if (($form = _request('formulaire_action'))
+	 AND ($cle = _request('formulaire_action_cle'))
+	 AND (($args = _request('formulaire_action_args'))!==NULL)) {
+		include_spip('inc/securiser_action');
+		if (($cle == calculer_cle_action($form . $args))
+		 && ($valider = charger_fonction("valider","formulaires/$form/",true))
+		 // charger la langue pour les messages d'erreur et autres
+		 && (include_spip('inc/lang'))
+		 && utiliser_langue_visiteur()
+		 && (count($_POST["erreurs_$form"] = call_user_func_array($valider,unserialize(base64_decode($args))))==0)
+		 && ($modifier = charger_fonction("modifier","formulaires/$form/"))
+		 ) {
+			$_POST["message_ok_$form"] = call_user_func_array($modifier,unserialize(base64_decode($args)));
+		}
+	}
+
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
 	if (isset($_GET['var_confirm'])) {

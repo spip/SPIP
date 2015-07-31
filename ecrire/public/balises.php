@@ -1293,4 +1293,27 @@ function balise_AIDER_dist($p) {
 	return $p;
 }
 
+// creer le contexte de traitement des formulaires dynamiques en charger/valider/modifier
+// et les hidden de l'url d'action
+function balise_ACTION_FORMULAIRE($p){
+	$_form = "'".addslashes(basename($p->descr['sourcefile'],'.html'))."'";
+	$_url = interprete_argument_balise(1,$p);
+	$p->code = "";
+
+	if (strlen($_url))
+		$p->code .= " . (form_hidden($_url))";
+	if (strlen($_form))
+		$p->code .= 
+		// envoyer le nom du formulaire que l'on traite
+		". '<input type=\'hidden\' name=\'formulaire_action\' value=\'' . $_form . '\' />'"
+		// transmettre les eventuels args de la balise formulaire
+		. ". '<input type=\'hidden\' name=\'formulaire_action_args\' value=\'' . @\$Pile[0]['formulaire_args']. '\' />'"
+		. ". '<input type=\'hidden\' name=\'formulaire_action_cle\' value=\'' . (include_spip('inc/securiser_action')?calculer_cle_action(".$_form." . @\$Pile[0]['formulaire_args'] ):'') . '\' />'";
+	
+	if (strlen($p->code))
+		$p->code = "'<div>'" . $p->code . " . '</div>'";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 ?>
