@@ -72,7 +72,6 @@ $spip_auteurs_articles = array(
 
 $spip_auteurs_articles_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_article",
-		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_article"	=> "id_article");
 
 $spip_auteurs_rubriques = array(
@@ -81,7 +80,6 @@ $spip_auteurs_rubriques = array(
 
 $spip_auteurs_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_rubrique",
-		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_rubrique"	=> "id_rubrique");
 
 $spip_auteurs_messages = array(
@@ -91,7 +89,6 @@ $spip_auteurs_messages = array(
 
 $spip_auteurs_messages_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_message",
-		"KEY id_auteur"	=> "id_auteur",
 		"KEY id_message"	=> "id_message");
 
 
@@ -125,8 +122,7 @@ $spip_mots_articles = array(
 
 $spip_mots_articles_key = array(
 		"PRIMARY KEY"	=> "id_article, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_article"	=> "id_article");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_breves = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -134,8 +130,7 @@ $spip_mots_breves = array(
 
 $spip_mots_breves_key = array(
 		"PRIMARY KEY"	=> "id_breve, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_breve"	=> "id_breve");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_rubriques = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -143,8 +138,7 @@ $spip_mots_rubriques = array(
 
 $spip_mots_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_rubrique, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_rubrique"	=> "id_rubrique");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_syndic = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -152,8 +146,7 @@ $spip_mots_syndic = array(
 
 $spip_mots_syndic_key = array(
 		"PRIMARY KEY"	=> "id_syndic, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_syndic"	=> "id_syndic");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_forum = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -161,8 +154,7 @@ $spip_mots_forum = array(
 
 $spip_mots_forum_key = array(
 		"PRIMARY KEY"	=> "id_forum, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_forum"	=> "id_forum");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_documents = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -170,8 +162,7 @@ $spip_mots_documents = array(
 
 $spip_mots_documents_key = array(
 		"PRIMARY KEY"	=> "id_document, id_mot",
-		"KEY id_mot"	=> "id_mot",
-		"KEY id_document"	=> "id_document");
+		"KEY id_mot"	=> "id_mot");
 
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
