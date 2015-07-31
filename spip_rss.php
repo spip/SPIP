@@ -23,7 +23,7 @@ include_ecrire("inc_texte");
 include_ecrire('inc_rss');
 include_ecrire("inc_acces");
 // Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3"))
+if (@file_exists("inc-urls" . _EXTENSION_PHP))
 	include_local("inc-urls");
 else
 	include_local("inc-urls-".$GLOBALS['type_urls']);
@@ -84,27 +84,28 @@ switch($op) {
 		$critere = critere_statut_controle_forum($a['page']);
 		$rss = rss_suivi_forums($a, $critere, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
-		$url = _DIR_RESTREINT_ABS .'controle_forum.php3?page='.$a['page'];
+		$url = generer_url_ecrire(_DIR_RESTREINT_ABS .'controle_forum', 'page='.$a['page']);
 		break;
 	# revisions des articles
 	case 'revisions':
 		$rss = rss_suivi_versions($a);
 		$title = _T("icone_suivi_revisions");
-		$url = _DIR_RESTREINT_ABS .'suivi_revisions.php3?';
+		$url = "";
 		foreach (array('id_secteur', 'id_auteur', 'lang_choisie') as $var)
-			if ($a[$var]) $url.= '&'.$var.'='.$a[$var];
+			if ($a[$var]) $url.= $var.'='.$a[$var] . '&';
+		$url = generer_url_ecrire(_DIR_RESTREINT_ABS .'suivi_revisions', $url);
 		break;
 	# messagerie privee
 	case 'messagerie':
 		$rss = rss_suivi_messagerie($a);
 		$title = _T("icone_messagerie_personnelle");
-		$url = _DIR_RESTREINT_ABS .'messagerie.php3';
+		$url = generer_url_ecrire(_DIR_RESTREINT_ABS .'messagerie');
 		break;
 	# a suivre
 	case 'a-suivre':
 		$rss = rss_a_suivre($a);
 		$title = _T("icone_a_suivre");
-		$url = _DIR_RESTREINT_ABS .'';
+		$url = _DIR_RESTREINT_ABS;
 		break;
 	case 'erreur securite':
 		$rss = array(array('title' => _L('Erreur de s&eacute;curit&eacute;')));
