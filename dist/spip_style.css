@@ -61,7 +61,7 @@ table.spip caption {
 	font-weight: bold; }
 	
 table.spip tr.row_first { background: #F8F8E8; text-align: center; }
-table.spip tr.row_odd { background: #F0F0F0; }
+table.spip tr.row_odd { background: #f0f0f0; }
 table.spip tr.row_even { background: #FAFAFA; }
 table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
