@@ -79,23 +79,23 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		return true;
 	
 	// Chercher une fonction d'autorisation
-	// Dans l'ordre on va chercher autoriser_type_faire, autoriser_type,
-	// autoriser_faire, autoriser_defaut ; puis les memes avec _dist
+	// Dans l'ordre on va chercher autoriser_type_faire[_dist], autoriser_type[_dist],
+	// autoriser_faire[_dist], autoriser_defaut[_dist]
 	$fonctions = $type
 		? array (
 			'autoriser_'.$type.'_'.$faire,
-			'autoriser_'.$type,
-			'autoriser_'.$faire,
-			'autoriser_defaut',
 			'autoriser_'.$type.'_'.$faire.'_dist',
+			'autoriser_'.$type,
 			'autoriser_'.$type.'_dist',
+			'autoriser_'.$faire,
 			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut',
 			'autoriser_defaut_dist'
 		)
 		: array (
 			'autoriser_'.$faire,
-			'autoriser_defaut',
 			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut',
 			'autoriser_defaut_dist'
 		);
 	
