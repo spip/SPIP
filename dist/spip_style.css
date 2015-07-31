@@ -89,12 +89,17 @@ form, fieldset, legend, label, input, textarea, select, option {
 ----------------------------------------------- */
 .formulaire_spip {}
 
+.formulaire_spip form p {  
+    margin: 4px 0;  
+    padding: 0; }
+
 .spip_encadrer {
     display: block;
 	background: #FAFAFA;
 	margin: 8px 0;
 	padding: 8px;
 	border: 1px solid #CCCCCC; }
+.spip_encadrer legend { font-weight: bold; }
 
 .spip_sanscadre { border: 0; } /* inutile : a supprimer */
 
