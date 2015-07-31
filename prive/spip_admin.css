@@ -52,4 +52,6 @@ border:1px dashed blue !important;
 
 #debug-profile table.explain td,#debug-profile table.explain th {border-bottom:1px solid #999;padding:0 5px;}
 #debug-profile table.explain th {padding:0 5px;color:#444;}
-span.spip-debug-arg {font-family: Courier, "Courier New", monospace; font-weight: bold; display:block;float:left;width:3em;text-align:right;}
+
+.spip-debug-arg {font-family: Courier, "Courier New", monospace; font-weight: bold;}
+.liste-reqs .spip-debug-arg {display:block;float:left;width:3em;text-align:right;}
