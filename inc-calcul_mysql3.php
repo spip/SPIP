@@ -23,8 +23,7 @@
 # En commentaire, le court-circuit de spip_query,
 # avec traitement de table_prefix sans restriction sur son nom
 
-function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id)
-{
+function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id) {
 # if ($GLOBALS["mysql_rappel_connexion"] AND $DB = $GLOBALS["spip_mysql_db"])
 #        $DB = "`$DB`";
 # $DB .= $GLOBALS["table_prefix"] . '_';
@@ -115,22 +114,6 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic)
     'd' . ($id_syndic ? $id_syndic : '0');
 }
 
-# Critere {branche} : recuperer les descendants d'une rubrique
-
-function calcul_mysql_in($val, $valeurs, $tobeornotobe)
-{
-  $s = split(',', $valeurs, 255);
-  if (count($s) < 255)
-    return ("($val $tobeornotobe IN ($valeurs))");
-  else 
-    {
-      $valeurs = array_pop($s);
-      return ("($val $tobeornotobe IN (" . join(',',$s) . "))\n" .
-	      ($tobeornotobe ? "AND\t" : "OR\t") .
-	      calcul_mysql_in($val, $valeurs, $tobeornotobe));
-    }
-}
-  
 function calcul_exposer ($pile, $reference) {
 	static $hierarchie;
 	static $ref_precedente;
@@ -302,7 +285,6 @@ SELECT id_rubrique,lang FROM spip_articles WHERE id_article='$id'"))) {
   }
   return '';
 }
-
 
 
 ?>

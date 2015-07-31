@@ -4,23 +4,169 @@
 if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
 
-function inclure_subpage($fond, $delais_inclus, $contexte_inclus, $cache_incluant) {
-	// ce perdant de PHP ne comprend pas f(x)[y]
-	$page = inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant);
-	return $page['texte']; 
+
+//
+// Aller chercher la page dans le cache ou pas
+//
+function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $inclusion=false) {
+	global $lastmodified;
+
+	if (!$use_cache) {
+		include_local('inc-calcul.php3');
+
+		// page globale ? calculer le contexte
+		if (!$contexte)
+			$contexte = calculer_contexte();
+
+		spip_timer();
+		$page = calculer_page($chemin_cache,
+			array('fond' => $fond,
+				'contexte' => $contexte,
+				'var_recherche' => $HTTP_GET_VARS['var_recherche']),
+			$delais,
+			$inclusion);
+		if ($chemin_cache)
+			$lastmodified = filemtime($chemin_cache);
+		spip_log (($inclusion ? 'inclus':'calcul').' ('.spip_timer().
+		"): $chemin_cache");
+	} else {
+		$f = fopen($chemin_cache, "r") OR die ("Fichier cache illisible");
+		$page['texte'] = fread($f, filesize($chemin_cache));
+		fclose ($f);
+		# spip_log ("cache $chemin_cache");
+	}
+
+	// Supprimer la carte d'identite du squelette
+	if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match))
+		$page['texte'] = substr($page['texte'], strlen($match[0]));
+
+	return $page;
+}
+
+
+//
+// Appeler cette fonction pour obtenir la page principale
+//
+function afficher_page_globale ($fond, $delais) {
+	global $flag_preserver, $flag_dynamique, $recalcul, $last_modified;
+	include_local ("inc-cache.php3");
+
+	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache('', $fond);
+	$lastmodified = determiner_cache($delais, $use_cache, $chemin_cache);
+	if ($lastmodified)
+		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+
+	// Repondre gentiment aux requetes sympas
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] && ($recalcul != oui)) {
+		$headers_only = (trim(str_replace('GMT', '',
+			ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE'])))
+			== $gmoddate);
+		if ($headers_only)
+			http_status(304);
+	}
+	else {
+		$headers_only  = ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] == 'HEAD');
+	}
+
+	if ($headers_only) {
+		@header("Last-Modified: $gmoddate GMT");
+		@header("Connection: close");
+		// Pas de bouton admin pour un HEAD
+		$flag_preserver = true;
+	}
+	else {
+		// Obtenir la page
+		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
+		$fond, false);
+
+		//
+		// Entetes
+		//
+
+		// Interdire au client de cacher un login, un admin ou un recalcul
+		if ($flag_dynamique OR ($recalcul == 'oui')
+		OR $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']) {
+			@header("Cache-Control: no-cache,must-revalidate");
+			@header("Pragma: no-cache");
+			$lastmodified = time()+3600;	// ne pas autoriser les
+											// inclus a rejouer ce header
+		} else if ($lastmodified) {
+			$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+			@header("Last-Modified: $gmoddate GMT");
+		}
+
+		if ($xhtml) {
+			// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
+			// extremement risque: Mozilla passe en mode debugueur strict
+			// mais permet d'afficher du MathML directement dans le texte
+			// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
+			include_ecrire("inc_tidy.php");
+			if (version_tidy() > 0) {
+				if (ereg("application/xhtml\+xml", $GLOBALS['HTTP_ACCEPT'])) 
+					@header("Content-Type: application/xhtml+xml; ".
+					"charset=".lire_meta('charset'));
+				else 
+					@header("Content-Type: text/html; ".
+					"charset=".lire_meta('charset'));
+					
+				echo '<'.'?xml version="1.0" encoding="'.
+				lire_meta('charset').'"?'.">\n";
+			} else {
+				@header("Content-Type: text/html; ".
+				"charset=".lire_meta('charset'));
+			}
+		} else {
+			@header("Content-Type: text/html; charset=".lire_meta('charset'));
+		}
+
+		//
+		// Envoyer le body
+		//
+		$texte = admin_page($use_cache, $page['texte']);
+		eval('?' . '>' . $texte);
+	}
+
+	# Toutes les heures, menage d'un cache si le processus n'a rien recalcule.
+	# On nettoie celui de la page retournee car le systeme vient d'y acceder:
+	# il y a de bonnes chances qu'il l'ait toujours dans son cache.
+
+	if ($use_cache && (time() - lire_meta('date_purge_cache') > 3600)) {
+		ecrire_meta('date_purge_cache', time());
+#		retire_vieux_caches($cle, $delais);
+	}
+
+	// Mise a jour des fichiers langues de l'espace public
+	if ($GLOBALS['cache_lang_modifs']) {
+		include_ecrire('inc_lang.php3');
+		ecrire_caches_langues();
+	}
+
+	// Calculs en background
+	if ($use_cache)
+		taches_de_fond();
+
+	// Gestion des statistiques du site public
+	// (a la fin pour ne pas forcer le $db_ok)
+	if (lire_meta("activer_statistiques") != "non") {
+		include_local ("inc-stats.php3");
+		ecrire_stats();
+	}
 }
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
-	global $delais;
-	static $pile_delais = '', $ptr_delais = 0;
+	global $delais, $lastmodified;
+
+/*
+static $pile_delais = '', $ptr_delais = 0;
 	$ptr_delais++;
 	$pile_delais[$ptr_delais] = $delais_inclus;
+*/
 
 	spip_log("Inclusion dans $cache_incluant");
-	$cle = $fond;
-	if ($contexte_inclus)
-		foreach($contexte_inclus as $k=>$v)
-			$cle .= "&$k=$v";
+	$contexte = $contexte_inclus;
+	$contexte['fond'] = $fond;
+
+	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte, $fond);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -32,27 +178,23 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		$lang_select = true; // pour lang_dselect ci-dessous
 	}
 
-	$page = ramener_cache($cle,
-			  'cherche_page_incluse',
-			  array('fond' => $fond, 
-				'cache_incluant' => $cache_incluant,
-				'contexte' => $contexte_inclus),
-			  $pile_delais[$ptr_delais]);
-	
+	// @header ne marchera qu'en output_buffering
+	$lastmod = determiner_cache($delais, $use_cache, $chemin_cache);
+	if ($lastmod > $lastmodified) {
+		$lastmodified = $lastmod;
+		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+		@header("Last-Modified: $gmoddate GMT");
+	}
+
+	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais,
+	$use_cache, $fond, true);
+
+	// Et enfin le contenu...
+	eval('?' . '>' . $page['texte']);
+
 	if ($lang_select)
 		lang_dselect();
 
-	// si son de'lai est + court que l'incluant, il pre'domine
-	if ($ptr_delais == 1) {
-		if ($delais > $pile_delais[$ptr_delais])
-			$delais = $pile_delais[$ptr_delais];
-	}
-	else { 
-		if ($pile_delais[$ptr_delais-1] > $pile_delais[$ptr_delais])
-			$pile_delais[$ptr_delais-1] = $pile_delais[$ptr_delais];
-	}
-	$ptr_delais--;
-	return $page;
 }
 
 //
@@ -62,7 +204,7 @@ function admin_page($cached, $texte) {
 	if (!$GLOBALS['flag_preserver']
 	&& ($admin = $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
 		include_local('inc-admin.php3');
-		$a = afficher_boutons_admin($cached ? ' *' : '');
+		$a = '<'.'?php echo afficher_boutons_admin("'. ($cached ? ' *' : '').'"); ?'.'>';
 
 		// La constante doit etre definie a l'identique dans inc-form-squel
 		// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
@@ -83,7 +225,7 @@ function cherche_image_nommee($nom, $dossier) {
 	}
 }
 
-function taches_de_fond($use_cache) {
+function taches_de_fond() {
 	// Gestion des taches de fond ?  toutes les 5 secondes
 	// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 	if (!@file_exists('ecrire/data/cron.lock')
@@ -93,15 +235,8 @@ function taches_de_fond($use_cache) {
 		if (!@file_exists('ecrire/data/mysql_out')
 		OR (time() - @filemtime('ecrire/data/mysql_out') > 300)) {
 			include_ecrire('inc_cron.php3');
-			spip_cron($use_cache);
+			spip_cron();
 		}
-	}
-
-	// Gestion des statistiques du site public
-	// (a la fin pour ne pas forcer le $db_ok)
-	if (lire_meta("activer_statistiques") != "non") {
-		include_local ("inc-stats.php3");
-		ecrire_stats();
 	}
 }
 

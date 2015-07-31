@@ -1,10 +1,13 @@
 <?php
+
+
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
-// ce fichier exécute un squelette.
-
+//
+// Ce fichier calcule une page en executant un squelette.
+//
 
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
@@ -12,51 +15,104 @@ include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
 include_local("inc-calcul_mysql3.php");
-include("inc-calcul_html4.php");
+include_local("inc-calcul_html4.php");
 
 # Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
-# le répertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
+# le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
 
 if (file_exists("mes_fonctions.php3")) 
     include_local ("mes_fonctions.php3");
 
-# Provoque la recherche du squelette $fond d'une $lang donnée,
+
+function charger_squelette ($squelette) {
+	$ext = $GLOBALS['extension_squelette'];
+	$nom = $ext . '_' . md5($squelette);
+	$sourcefile = $squelette . ".$ext";
+
+	if (function_exists($nom)) {
+		#spip_log("Squelette $squelette:\t($nom) deja en memoire");
+		return $nom;
+	}
+	else {
+		$phpfile = 'CACHE/skel_' . $nom . '.php';
+
+		// le squelette est-il a compiler ?
+		if (!file_exists($phpfile) OR $GLOBALS['recalcul'] == 'oui') {
+			include_local("inc-calcul-squel.php3");
+			$f = fopen ($sourcefile, "r") OR die ("Horrible souffrances");
+			$skel = fread($f, filesize($sourcefile));
+			fclose($f);
+			$skel_compile = "<"."?php\n" .
+				calculer_squelette($skel, $nom, $ext)."\n?".">";
+			eval('?'.'>'.$skel_compile);
+			if (function_exists($nom)) {
+				ecrire_fichier_cache ($phpfile, $skel_compile);
+				return $nom;
+			} else {
+				die ("Hoorreeur squelette pas compile !!");
+			}
+		} else {
+			// Charge le squelette compile
+			include($phpfile);
+			if (function_exists($nom))
+				return $nom;
+			else
+				die ("Horreur squelette contient du baratin");
+		}
+	}
+}
+
+
+# Provoque la recherche du squelette $fond d'une $lang donnee,
 # et l'applique sur un $contexte pour un certain $cache.
-# Retourne un tableau de 3 éléments:
-# 'texte' => la page calculée
-# 'process_ins' => 'html' ou 'php' si présence d'un '<?php'
+# Retourne un tableau de 3 elements:
+# 'texte' => la page calculee
+# 'process_ins' => 'html' ou 'php' si presence d'un '<?php'
 # 'invalideurs' => les invalideurs (cf inc-calcul-squel)
 
-# La recherche est assurée par la fonction cherche_squelette
-# définie dans inc-chercher, fichier non chargé s'il existe un fichier
+# La recherche est assuree par la fonction cherche_squelette
+# definie dans inc-chercher, fichier non charge s'il existe un fichier
 # mon-chercher dans $dossier_squelettes ou dans le rep principal de Spip,
-# pour charger une autre définition de cette fonction.
+# pour charger une autre definition de cette fonction.
 
-# L'exécution est précédée du chargement éventuel d'un fichier homonyme
+# L'execution est precedee du chargement eventuel d'un fichier homonyme
 # de celui du squelette mais d'extension .php  pouvant contenir:
 # - des filtres
 # - des fonctions de traduction de balise (cf inc-index-squel)
 
-function cherche_page($cache, $contexte, $fond, $id_rubrique, $lang='') 
-{
-  global $dossier_squelettes;
+function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
+	global $dossier_squelettes;
 
-  $dir = "$dossier_squelettes/mon-chercher.php3";
-  if (file_exists($dir)) include($dir); else include_local("inc-chercher.php3");
+	/* Bonne idee mais plus tard ?
+	$dir = "$dossier_squelettes/mon-chercher.php3";
+	if (file_exists($dir)) {
+		include($dir);
+	} else { */
+		include_local("inc-chercher.php3");
+	/* }
+	*/
 
-  $skel = chercher_squelette($fond,
-			     $id_rubrique,
-			     $dossier_squelettes ? "$dossier_squelettes/" :'',
-			     $lang);
+	// Choisir entre $fond-dist.html, $fond=7.html, etc?
+	$skel = chercher_squelette($fond,
+		$id_rubrique,
+		$dossier_squelettes ? "$dossier_squelettes/" :'',
+		$lang
+	);
 
-  $dir = "$skel" . '_fonctions.php3';
-  if (file_exists($dir)) include($dir);
+	/*  Idem
+	$dir = "$skel" . '_fonctions.php3';
+	if (file_exists($dir)) include($dir);
+	*/
 
-  $fonc =  ramener_squelette($skel);
-  $timer_a = explode(" ", microtime());
-  $page =  $fonc(array('cache' =>$cache),
-		 array($contexte),
-		 array(	'articles' => '0',
+	// Charger le squelette demande et recuperer sa fonction main()
+	// (on va le compiler si besoin est)
+	$fonc = charger_squelette($skel);
+
+	// Calculer la page a partir du main() du skel compile
+	$page =  $fonc(array('cache' =>$cache),
+		array($contexte),
+		array(
+			'articles' => '0',
 			'rubriques' => '0',
 			'breves' => '0',
 			'auteurs' => '0',
@@ -65,91 +121,149 @@ function cherche_page($cache, $contexte, $fond, $id_rubrique, $lang='')
 			'mots' => '0',
 			'groupes_mots' => '0',
 			'syndication' => '0',
-			'documents' => '0'));
+			'documents' => '0'
+		)
+	);
 
-  if ($GLOBALS['xhtml']) {
-    include_ecrire("inc_tidy.php");
-    $page['texte'] = xhtml($page['texte']);
-  }
-  $timer_b = explode(" ", microtime());
-  $timer = ceil(1000*($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
-  spip_log("Page $skel: " . strlen($page['texte']) . " octets, $timer ms");
-  return $page;
-}
-
-function cherche_page_incluse($cache, $contexte)
-{
-  $contexte_inclus = $contexte['contexte'];
-  return cherche_page($cache,
-		      $contexte_inclus,
-		      $contexte['fond'], 
-		      $contexte_inclus['id_rubrique']);
-}
-
-function calculer_page_globale($cache, $contexte, $fond, $var_recherche)
- {
-   global $spip_lang;
-  
-   $id_rubrique_fond = 0;
-   $lang = $contexte['lang'];	// si inc-urls veut fixer la langue
-   if ($r = cherche_rubrique_fond($contexte, $lang ? $lang : lire_meta('langue_site')))
-     list($id_rubrique_fond, $lang) = $r;
-
-  $signale_globals = "";
-  foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
-		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe', 'id_document') as $val)
-    {
-      if ($contexte[$val])
-	$signale_globals .= '$GLOBALS[\''.$val.'\'] = '.intval($contexte[$val]).";";
-    }
-  if (!$GLOBALS['forcer_lang'])
-    lang_select($lang);
-
-  $page = cherche_page($cache, $contexte, $fond, $id_rubrique_fond, $spip_lang);
-  $texte = $page['texte'];
-
-  if ($var_recherche)
-    {
-      include_ecrire("inc_surligne.php3");
-      $texte = surligner_mots($texte, $var_recherche);
-    } 
-
-  return array('texte' => 
-	       (($page['process_ins'] || (!$signale_globals)) ? $texte :
-		('<'."?php $signale_globals ?".'>'.$texte)),
-	       'process_ins' => $page['process_ins'],
-	       'invalideurs' => $page['invalideurs']);
-}
-
-function cherche_page_incluante($cache, $contexte)
-{
-    // si le champ chapo commence par '=' c'est une redirection.
-
-  if ($id_article = intval($GLOBALS['id_article'])) {
-    $page = query_chapo($id_article);
-    if ($page) 
-      {
-	$page = $page['chapo'];
-	if (substr($page, 0, 1) == '=') {
-	  include_ecrire('inc_texte.php3');
-	  list(,$page) = extraire_lien(array('','','',substr($page, 1)));
-	  if ($page) // sinon les navigateurs pataugent
-	    {
-	      $page = addslashes($page);
-	      return array('texte' =>
-			   ("<". "?php header(\"Location: $page\"); ?" . ">"),
-			   'process_ins' => 'php');
-	    }
+	// Nettoyer le resultat si on est fou de XML
+	if ($GLOBALS['xhtml']) {
+		include_ecrire("inc_tidy.php");
+		$page['texte'] = xhtml($page['texte']);
 	}
-      }
-  }
-  return calculer_page_globale( $cache,
-				$contexte['contexte'],
-				$contexte['fond'],
-				$contexte['var_recherche']);
+
+	// Entrer les invalideurs dans la base
+	include_ecrire('inc_invalideur.php3');
+	maj_invalideurs($cache, $page['invalideurs']);
+
+	// Retourner la structure de la page
+	return $page;
 }
 
-# Fonctions appelées par les squelettes (insertion dans le code trop lourde)
+// Etablit le contexte initial a partir des globales
+function calculer_contexte() {
+	foreach($GLOBALS['HTTP_GET_VARS'] as $var => $val) {
+		if (!eregi("^(recalcul|submit|var_.*)$", $var))
+			$contexte[$var] = $val;
+	}
+	if ($GLOBALS['date'])
+		$contexte['date'] = $contexte['date_redac'] = date($GLOBALS['date']);
+	else
+		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
+
+	return $contexte;
+}
+
+function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
+	global $spip_lang;
+
+	// Mise au point des URLs personnalisees
+	if (@file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
+	else { include_local ("inc-urls-dist.php3"); }
+
+	// C'est sale mais historique
+	if (function_exists("recuperer_parametres_url")) {
+		global $contexte;
+		$contexte = $contexte_local;
+		recuperer_parametres_url($fond, nettoyer_uri());
+		if (is_array($contexte))
+			foreach ($contexte as $var=>$val)
+				$GLOBALS[$var] = $val;
+		$contexte_local = $contexte;
+	}
+
+	$id_rubrique_fond = 0;
+
+	// Si inc-urls veut fixer la langue, se baser ici
+	$lang = $contexte_local['lang'];
+
+	// Chercher le fond qui va servir de squelette
+	if ($r = cherche_rubrique_fond($contexte_local,
+	$lang ? $lang : lire_meta('langue_site')))
+		list($id_rubrique_fond, $lang) = $r;
+
+	if (!$GLOBALS['forcer_lang'])
+		lang_select($lang);
+
+	// Go to work !
+	$page = cherche_page($cache, $contexte_local, $fond, $id_rubrique_fond, $spip_lang);
+
+	// Surligne
+	if ($var_recherche) {
+		include_ecrire("inc_surligne.php3");
+		$page['texte'] = surligner_mots($page['texte'], $var_recherche);
+	} 
+
+	$signal = array();
+	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
+	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
+	'id_mot', 'id_groupe', 'id_document') as $val) {
+		if ($contexte_local[$val])
+			$signal['contexte'][$val] = intval($contexte_local[$val]);
+	}
+	$signal['process_ins'] = $page['process_ins'];
+
+# ne marchera qu'avec les inclusions 'html' (versus 'php')
+#	$signal['fraicheur'] = $page['fraicheur'];
+
+	$signal = "<!-- ".str_replace("\n", " ", serialize($signal))." -->\n";
+
+	$page['texte'] = $signal.$page['texte'];
+
+	return $page;
+}
+
+
+// Cf ramener_page +cherche_page_incluante+ cherche_page_incluse chez ESJ
+function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
+	include_local('inc-calcul.php3');
+
+	// Inclusion
+	if ($inclusion) {
+		$contexte_inclus = $elements['contexte'];
+		$page = cherche_page($chemin_cache,
+			$contexte_inclus,
+			$elements['fond'], 
+			$contexte_inclus['id_rubrique']
+		);
+	}
+	else {
+
+		// Page globale
+		// si le champ chapo commence par '=' c'est une redirection.
+		if ($id_article = intval($GLOBALS['id_article'])) {
+			$page = query_chapo($id_article);
+			if ($page) {
+				$page = $page['chapo'];
+				if (substr($page, 0, 1) == '=') {
+					include_ecrire('inc_texte.php3');
+					list(,$page) = extraire_lien(array('','','',
+					substr($page, 1)));
+					if ($page) { // sinon les navigateurs pataugent
+						$page = addslashes($page);
+						return array('texte' =>
+						("<". "?php header(\"Location: $page\"); ?" . ">"),
+						'process_ins' => 'php');
+					}
+				}
+			}
+		}
+		$page = calculer_page_globale($chemin_cache,
+			$elements['contexte'],
+			$elements['fond'],
+			$elements['var_recherche']);
+	}
+
+	// Enregistrer le fichier cache
+	if ($delais>0) {
+		ecrire_fichier_cache($chemin_cache, $page['texte']);
+	}
+
+	return $page;
+}
+
+
+
+# Fonctions appelees par les squelettes (insertion dans le code trop lourde)
 
 tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
 tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees

@@ -138,9 +138,7 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 	index_pile($id_boucle,  "accepter_forum", $boucles) . ' != "non"));
 	if ($forums_publics) {
 		if (!($lien = $GLOBALS["HTTP_GET_VARS"]["retour"])) {
-			$lien = $GLOBALS["REQUEST_URI"];
-			$lien = ereg_replace("&recalcul=oui","",
-				substr($lien, strrpos($lien, "/") + 1));
+			$lien = nettoyer_uri();
 		}
 	$lien = rawurlencode($lien); ';
 
@@ -170,8 +168,7 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 	}
 	$milieu .= "}\n";
 	$code = "(!\$forums_publics) ? '' :
-		($c .\n" . '"&cache=".rawurlencode($Cache[cache]) .' .
-		"\n\"&retour=\$lien\")";
+		($c . \"&retour=\$lien\")";
 
 	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
 	return array($c,$milieu . $m);

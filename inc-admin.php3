@@ -56,8 +56,12 @@ function afficher_boutons_admin($pop) {
 	$ret .= "</form>\n";
 
 	if (lire_meta("activer_statistiques") != "non" AND $id_article AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-		include_local ("inc-stats.php3");
-		$ret .= bouton_admin(_T('stats_visites_et_popularite', afficher_raccourci_stats($id_article)), "./ecrire/statistiques_visites.php3?id_article=$id_article");
+		if (spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article =".intval($id_article)))) {
+			include_local ("inc-stats.php3");
+			$ret .= bouton_admin(_T('stats_visites_et_popularite',
+			afficher_raccourci_stats($id_article)),
+			"./ecrire/statistiques_visites.php3?id_article=$id_article");
+		}
 	}
 
 	$ret .= "</div>";
