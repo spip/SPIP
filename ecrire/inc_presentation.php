@@ -1779,22 +1779,6 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
 
-	$res = "";
-	if ($spip_display != 4) {
-		$res .= "<link rel='alternate' type='application/rss+xml'
-			title=\"".entites_html($nom_site_spip)."\" href='"
-			. generer_url_public('backend') . "' />\n";
-		$res .= "<link rel='help' type='text/html'
-			title=\""._T('icone_aide_ligne') . 
-			"\" href='"
-			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
-			."' />\n";
-		if ($GLOBALS['meta']["activer_breves"] != "non")
-			$res .= "\n<link rel='alternate' type='application/rss+xml'
-				title='".addslashes($nom_site_spip)." ("._T("info_breves_03").
-				")' href='" . generer_url_public('backend-breves') . "' />\n";
-	}
-
 	$args =	"fond=style&couleur_claire=" .
 		substr($couleur_claire,1) .
 		'&couleur_foncee=' .
@@ -1804,33 +1788,46 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	  	'&dir=' .
 		_DIR_RESTREINT_ABS . _DIR_IMG_PACK;
 	
-	return $res . '
-<link	rel="stylesheet" 
-	type="text/css"
-	href="' . generer_url_public('page', $args) .'">'
-		. debut_javascript($connect_statut == "0minirezo"
-			AND $connect_toutes_rubriques,
-			($GLOBALS['meta']["activer_statistiques"] != 'non'))
-	
-
+	$res = '<link rel="stylesheet" type="text/css" href="' . generer_url_public('page', 'fond=style') .'" />
+'
 	// CSS calendrier
-	. '<link rel="stylesheet" href="' . _DIR_RESTREINT
-	. 'calendrier.css" type="text/css" />' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. 'calendrier.css"  />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
-	. '<link rel="stylesheet" href="' . _DIR_RESTREINT
-	. 'spip_style_print.css" type="text/css" media="print" />' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. 'spip_style_print.css" media="print" />' . "\n"
 
 	// CSS "visible au chargement", hack necessaire pour garder un depliement
 	// sympathique meme sans javascript (on exagere ?)
 	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
-	. '<link rel="alternate stylesheet" href="' . _DIR_RESTREINT
-	. 'spip_style_invisible.css" type="text/css" title="invisible" />' . "\n"
+	. '<link rel="alternate stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. 'spip_style_invisible.css" title="invisible" />' . "\n"
 	. '<link rel="stylesheet" href="' . _DIR_RESTREINT
-	. 'spip_style_visible.css" type="text/css" title="visible" />' . "\n"
+	. 'spip_style_visible.css"  title="visible" />' . "\n"
 
 	// favicon.ico
-	. '<link rel="shortcut icon" href="' . _DIR_IMG_PACK . "favicon.ico\" />\n";
+	  . '<link rel="shortcut icon" href="' . _DIR_IMG_PACK . "favicon.ico\" />\n";
+	$js = debut_javascript($connect_statut == "0minirezo"
+			AND $connect_toutes_rubriques,
+			($GLOBALS['meta']["activer_statistiques"] != 'non'));
+
+	if ($spip_display == 4) return $res . $js;
+
+	$res .= "<link rel='alternate' type='application/rss+xml'
+			title=\"".entites_html($nom_site_spip)."\" href='"
+			. generer_url_public('backend') . "' />\n";
+	$res .= "<link rel='help' type='text/html' title=\""._T('icone_aide_ligne') . 
+			"\" href='"
+			. generer_url_ecrire('aide_index',"var_lang=$spip_lang")
+			."' />\n";
+	if ($GLOBALS['meta']["activer_breves"] != "non")
+		$res .= "\n<link rel='alternate' type='application/rss+xml' title='"
+			. addslashes($nom_site_spip)
+			. " ("._T("info_breves_03")
+			. ")' href='" . generer_url_public('backend-breves') . "' />\n";
+
+	return $res . $js;
 }
 
 function debut_javascript($admin, $stat)
