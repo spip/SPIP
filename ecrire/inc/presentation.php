@@ -1261,7 +1261,12 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 // http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip) {
-	global $connect_toutes_rubriques, $spip_display, $spip_lang;
+	global $auteur_session, $connect_toutes_rubriques, $spip_display, $spip_lang;
+
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$paramcss = 'ltr='
+	. $GLOBALS['spip_lang_left'] . '&'
+	. $couleurs($auteur_session['prefs']['couleur']);
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
@@ -1270,10 +1275,10 @@ function envoi_link($nom_site_spip) {
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', _SENS_ET_COULEURS) .'" />' . "\n"
+	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
   . "<!--[if lt IE 8]>\n"
   . '<link rel="stylesheet" type="text/css" href="'
-  . generer_url_public('style_prive_ie', _SENS_ET_COULEURS) .'" />' . "\n"
+  . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
   . "<![endif]-->\n"
   
 	// CSS calendrier
