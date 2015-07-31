@@ -271,6 +271,8 @@ function spip_mysql_select_as($args)
 // Changer les noms des tables ($table_prefix)
 // Quand tous les appels SQL seront abstraits on pourra l'ameliorer
 
+define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
+
 // http://doc.spip.org/@traite_query
 function traite_query($query, $db='', $prefixe='') {
 
@@ -281,12 +283,16 @@ function traite_query($query, $db='', $prefixe='') {
 	if ($prefixe)
 		$pref .= $prefixe . "_";
 
-	if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/i', $query, $regs)) {
+	if (!preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/i', $query, $regs)) {
+		$suite ='';
+	} else {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
-	} else $suite ='';
-
-	$r = preg_replace('/([,\s])spip_/', '\1'.$pref, $query) . $suite;
+		if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r)) {
+		  $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+		}
+	}
+	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
 #	spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
 	return $r;
 }
