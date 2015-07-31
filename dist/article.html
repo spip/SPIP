@@ -51,7 +51,7 @@
 				<div class="traductions">
 					<p><:trad_article_traduction:></p>
 					<ul>
-						<li>[(#LANG|traduire_nom_langue)]</li>
+						<li[ class="(#EXPOSE)"]>[(#LANG|traduire_nom_langue)]</li>
 						<BOUCLE_traductions(ARTICLES){traduction}{exclus}>
 						<li><a[ href="(#URL_ARTICLE|url_absolue)"] rel="alternate" hreflang="#LANG"[ title="(#TITRE|couper{80}|texte_backend)"]><span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)]</span></a></li>
 						</BOUCLE_traductions>

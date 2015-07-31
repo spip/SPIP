@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-size: 0.77em;
 }
 
-.rubriques .menu-titre, .breves .menu-titre, .syndic .menu-titre, .forums .menu-titre, .divers .menu-titre {
+.menu-titre {
 	padding: 0.2em 0.4em;
 	border-bottom: 1px dotted #CCC;
 	text-align: center;
