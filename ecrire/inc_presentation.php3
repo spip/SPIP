@@ -311,6 +311,7 @@ function fin_raccourcis() {
 
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $couleur_claire;
+	global $browser_name;
 
 	if (!is_array($table)) return;
 	reset($table);
@@ -318,7 +319,8 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	while (list(, $t) = each($table)) {
 		// $couleur_fond = ($ifond ^= 1) ? '#FFFFFF' : $couleur_claire;
 		//echo "<tr bgcolor=\"$couleur_fond\">";
-		echo "<tr class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\">";
+		if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
+		echo "<tr class='tr_liste'$msover>";
 		reset($largeurs);
 		if ($styles) reset($styles);
 		while (list(, $texte) = each($t)) {
