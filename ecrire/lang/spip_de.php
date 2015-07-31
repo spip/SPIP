@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
-'bouton_telecharger' => 'Hochladen',
+'bouton_telecharger' => 'Herunterladen',
 'bouton_valider' => 'Best&auml;tigen',
 
 // C
@@ -590,7 +590,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_cookie_accepte' => 'Bitte stellen Sie Ihren Webbrowser so ein, dass er sie akzeptiert (zumindest f&uuml;r diese Website).',
 'login_cookie_oblige' => 'Zu Ihrer Sicherheit muss Ihr Browser Cookies akzeptieren, wenn Sie sich bei der Website anmelden.',
 'login_deconnexion_ok' => 'Abmeldung erfolgreich.',
-'login_erreur_pass' => 'Falsches Passwort.',
+'login_erreur_pass' => 'Passwort oder Benutzername falsch.',
 'login_espace_prive' => 'Redaktionssystem',
 'login_identifiant_inconnu' => 'Benutzer &laquo;@login@&raquo; unbekannt.',
 'login_login' => 'Login:',
