@@ -33,7 +33,7 @@ function enfant($collection){
 			$les_enfants.= $bouton_layer;
 		}
 		if (acces_restreint_rubrique($id_rubrique))
-			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques'> ";
+			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique'> ";
 
 		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		if (strlen($descriptif)>1)
@@ -116,15 +116,17 @@ function afficher_jour($jour){
 // Gerer les modifications...
 //
 
+$id_parent = intval($id_parent);
+$coll = intval($coll);
+$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($coll))); // id_parent necessaire en cas de creation de sous-rubrique
+
 if ($modifier_rubrique == "oui") {
 	calculer_rubriques();
 }
 
 if ($titre) {
-	$id_parent = intval($id_parent);
-
 	// creation, le cas echeant
-	if ($new == 'oui' AND !$coll) {
+	if ($new == 'oui' AND $flag_editable AND !$coll) {
 		$query = "INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
 		$result = spip_query($query);
 		$coll = spip_insert_id();
@@ -149,8 +151,10 @@ if ($titre) {
 	$titre = addslashes($titre);
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
-	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$coll";
-	$result = spip_query($query);
+	if ($flag_editable) {
+		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$coll";
+		$result = spip_query($query);
+	}
 
 	calculer_rubriques();
 
@@ -202,7 +206,7 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 	$query .= " WHERE id_document=$id_document";
 	spip_query($query);
 
-	if ($jour_doc AND $connect_statut == '0minirezo') {
+	if ($jour_doc AND $connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 		if ($annee_doc == "0000") $mois_doc = "00";
 		if ($mois_doc == "00") $jour_doc = "00";
 		$query = "UPDATE spip_documents SET date='$annee_doc-$mois_doc-$jour_doc' WHERE id_document=$id_document";
@@ -299,8 +303,6 @@ fin_raccourcis();
 
 
 debut_droite();
-///// Editable ?
-$flag_editable = ($connect_statut == '0minirezo' AND acces_rubrique($coll));
 
 
 if ($coll == 0) $titre = "Racine du site";
@@ -314,10 +316,12 @@ debut_cadre_relief($ze_logo);
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
-gros_titre($titre);
+if (acces_restreint_rubrique($id_rubrique))
+	$fleche = "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique'> ";
+gros_titre($fleche.$titre);
 echo "</td>";
 
-if ($coll > 0 AND $connect_statut == '0minirezo' AND acces_rubrique($coll)) {
+if ($coll > 0 AND $flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right' valign='top'>";
 	icone("Modifier cette rubrique", "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
@@ -329,7 +333,6 @@ if (strlen($descriptif) > 1) {
 	echo "<tr><td>\n";
 	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-//	echo "<b>Descriptif :</b> ";
 	echo propre($descriptif."~");
 	echo "</font>";
 	echo "</div></td></tr>\n";
@@ -339,7 +342,7 @@ echo "</table>\n";
 
 
 /// Mots-cles
-if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($coll) AND $options == 'avancees' AND $coll > 0) {
+if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $coll > 0) {
 	echo "\n<p>";
 	formulaire_mots('rubriques', $coll, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
@@ -377,7 +380,7 @@ if (strpos($les_enfants2,"<P>")){
 	echo "</td></tr>";
 	
 	echo "<tr><td align='right' valign='bottom'>";
-	if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
+	if ($flag_editable) {
 	if ($coll == "0") icone("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
 	else  icone("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
@@ -453,7 +456,7 @@ if (lire_meta("activer_sites") == 'oui') {
 }
 
 $proposer_sites=lire_meta("proposer_sites");
-if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
+if ($coll > 0 AND ($flag_editable OR $proposer_sites > 0)) {
 	$link = new Link('sites_edit.php3');
 	$link->addVar('id_rubrique', $coll);
 	$link->addVar('target', 'sites.php3');
@@ -475,7 +478,7 @@ if ($coll>0)
 
 ////// Supprimer cette rubrique (si vide)
 
-if (($coll>0) AND tester_rubrique_vide($coll) AND ($connect_statut=='0minirezo')) {
+if (($coll>0) AND tester_rubrique_vide($coll) AND $flag_editable) {
 	$link = new Link('naviguer.php3');
 	$link->addVar('coll', $id_parent);
 	$link->addVar('supp_rubrique', $coll);

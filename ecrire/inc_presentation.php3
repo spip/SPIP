@@ -1775,28 +1775,24 @@ function debut_droite($rubrique="") {
 			$num_articles_ouverts = spip_num_rows($result);
 			if ($num_articles_ouverts) {
 				echo "<p>";
-				debut_cadre_enfonce('warning-24.gif');
+				debut_cadre_formulaire('racine-24.gif');
 				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 
-				if ($num_articles_ouverts == 1)
-					echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
-				else
-					echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
-				echo typo("avant une heure.").aide("artmodif");
+				echo "En cours d'&eacute;dition".aide('artmodif');
 				while ($row = @spip_fetch_array($result)) {
 					$ze_article = $row['id_article'];
 					$ze_titre = typo($row['titre']);
-					echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+					echo "<div><font size=1><a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$lien = $clean_link;
 						$lien->addVar('debloquer_article', $ze_article);
-						echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+						echo " [<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
 					}
 					echo "</div>";
 				}
 
-				fin_cadre_enfonce();
+				fin_cadre_formulaire();
 			}
 		}
 	}
