@@ -32,12 +32,14 @@ function optimiser_base_une_table() {
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "";
 
-	$result = spip_query($q="SHOW TABLES LIKE '$table_pref%'");
-	spip_log($q);
-	// on ne va OPTIMIZE qu'une seule des tables a chaque fois,
+	$tables = array();
+	$result = spip_query("SHOW TABLES LIKE '$table_pref%'");
+
+	// on n'optimise qu'une seule table a chaque fois,
 	// pour ne pas vautrer le systeme
 	// lire http://dev.mysql.com/doc/refman/5.0/fr/optimize-table.html
-	while ($row = spip_fetch_array($result,SPIP_NUM)) $tables[] = $row[0];
+	while ($row = spip_fetch_array($result))
+		$tables[] = array_shift($row);
 
 	if ($tables) {
 		$table_op = intval($GLOBALS['meta']['optimiser_table']+1) % sizeof($tables);
@@ -74,7 +76,7 @@ function optimiser_sansref($table, $id, $sel)
 // Nomenclature des liens morts entre les tables,
 // suite a la suppresion d'articles, d'auteurs etc
 // Maintenant que MySQL 5 a des Cascades on pourrait faire autrement
-// mais on garde la compatibilite avec les version precedentes.
+// mais on garde la compatibilite avec les versions precedentes.
 
 function optimiser_base_disparus($attente = 86400) {
 
