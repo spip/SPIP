@@ -160,8 +160,11 @@ function spip_register_globals() {
 						# interdire la mise en cache de la page produite
 						switch ($var) {
 							case 'REMOTE_USER':
-							case 'fond':
 								die ("$var interdite");
+								break;
+							case 'fond':
+								if (!defined('_SPIP_PAGE'))
+									die ("$var interdite");
 								break;
 							default:
 								define ('spip_interdire_cache', true);
@@ -415,7 +418,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 $spip_version = 1.822;
 
 // version de spip
-$spip_version_affichee = "1.8.2 d";
+$spip_version_affichee = "1.8.2 e";
 
 
 // ** Securite **
@@ -580,7 +583,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		@Header("Location: upgrade.php3?reinstall=oui");
+		redirige_par_entete("upgrade.php3?reinstall=oui");
 		exit;
 	}
 
@@ -1053,11 +1056,18 @@ function creer_repertoire($base, $subdir) {
 //
 // Entetes
 //
+
+// Interdire les attaques par manipulation des headers
+function spip_header($h) {
+	@header(strtr($h, "\n\r", "  "));
+}
+
+// envoyer le navigateur sur une nouvelle adresse
 function redirige_par_entete($url) {
 	header("Location: $url");
-#	include_ecrire('inc_cron.php3');
-#	spip_cron();
 	spip_log("redirige $url");
+	http_status(302);
+	spip_header("Location: $url");
 	exit;
 }
 
