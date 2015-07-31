@@ -32,6 +32,7 @@ if ($f = find_in_path('mes_fonctions.php')) {
 	include_once(_ROOT_CWD . $f);
 }
 
+
 // surcharge possible de autoriser(), sinon autoriser_dist()
 if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser
@@ -84,28 +85,28 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
 	AND autoriser_exception($faire,$type,$id,'verifier'))
 		return true;
-	
+
 	// Chercher une fonction d'autorisation
-	// Dans l'ordre on va chercher autoriser_type_faire, autoriser_type,
-	// autoriser_faire, autoriser_defaut ; puis les memes avec _dist
+	// Dans l'ordre on va chercher autoriser_type_faire[_dist], autoriser_type[_dist],
+	// autoriser_faire[_dist], autoriser_defaut[_dist]
 	$fonctions = $type
 		? array (
 			'autoriser_'.$type.'_'.$faire,
-			'autoriser_'.$type,
-			'autoriser_'.$faire,
-			'autoriser_defaut',
 			'autoriser_'.$type.'_'.$faire.'_dist',
+			'autoriser_'.$type,
 			'autoriser_'.$type.'_dist',
+			'autoriser_'.$faire,
 			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut',
 			'autoriser_defaut_dist'
 		)
 		: array (
 			'autoriser_'.$faire,
-			'autoriser_defaut',
 			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut',
 			'autoriser_defaut_dist'
 		);
-	
+
 	foreach ($fonctions as $f) {
 		if (function_exists($f)) {
 			$a = $f($faire,$type,$id,$qui,$opt);
@@ -155,6 +156,27 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 		!==false;
 }
 
+function autoriser_dater_dist($faire, $type, $id, $qui, $opt) {
+	if (!isset($opt['statut'])){
+		$table = table_objet($type);
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table($table);
+		if (!$desc)
+			return false;
+		if (isset($desc['field']['statut'])){
+			$statut = sql_getfetsel("statut", $desc['table'], id_table_objet($type)."=".intval($id));
+		}
+		else
+			$statut = 'publie'; // pas de statut => publie
+	}
+	else
+		$statut = $opt['statut'];
+
+	if ($statut == 'publie'
+	 OR ($statut == 'prop' AND $type=='article' AND $GLOBALS['meta']["post_dates"] == "non"))
+		return autoriser('modifier', $type, $id);
+	return false;
+}
 // Autoriser a publier dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
@@ -203,7 +225,7 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 		AND $GLOBALS['meta']['activer_sites'] != 'non'
 		AND (
 			$qui['statut']=='0minirezo'
-			OR ($GLOBALS['meta']["proposer_sites"] >= 
+			OR ($GLOBALS['meta']["proposer_sites"] >=
 			    ($qui['statut']=='1comite' ? 1 : 2)));
 }
 
@@ -385,7 +407,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 
 // Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
 // pour modifier les fichiers, cf. notamment inc/admin
-// = rien ni personne sauf definition de 
+// = rien ni personne sauf definition de
 // a l'avenir peut-etre autoriser "admin numero 1" ou une interface de selection
 // http://doc.spip.org/@autoriser_webmestre_dist
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
@@ -432,7 +454,7 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
 	$n = sql_fetsel('A.id_article', 'spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON L.id_article=A.id_article', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
-	return $n ? true : false;		
+	return $n ? true : false;
 }
 
 // Modifier un auteur ?
@@ -577,14 +599,14 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 		// Fin de la recurrence : $rubriques est complet
 		if (!$r) break;
 		$table = 'spip_rubriques';
-		$where = sql_in('id_parent', $r) . ' AND ' . 
+		$where = sql_in('id_parent', $r) . ' AND ' .
 		  sql_in('id_rubrique', $r, 'NOT');
 	}
 
 	// Affecter l'auteur session le cas echeant
 	if ($GLOBALS['visiteur_session']['id_auteur'] == $id_auteur)
 		$GLOBALS['visiteur_session']['restreint'] = $rubriques;
-			
+
 
 	return $restreint[$id_auteur] = $rubriques;
 }
@@ -630,6 +652,38 @@ function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'syndic',0,$qui,$opts);
 }
 
+// http://doc.spip.org/@autoriser_rubrique_iconifier_dist
+function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
+}
+// http://doc.spip.org/@autoriser_auteur_iconifier_dist
+function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+ return (($id == $qui['id_auteur']) OR
+ 		(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
+}
+// http://doc.spip.org/@autoriser_mot_iconifier_dist
+function autoriser_mot_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+ return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+}
+// http://doc.spip.org/@autoriser_article_iconifier_dist
+function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+	// On reprend le code de l'ancien iconifier pour definir les autorisations pour les autres
+	// objets SPIP. De ce fait meme de nouveaux objets bases sur cet algorithme peuvent continuer
+	// a fonctionner. Cependant il est recommander de leur definir une autorisation specifique
+	$table = table_objet_sql($quoi);
+	$id_objet = id_table_objet($quoi);
+	$row = sql_fetsel("id_rubrique, statut", $table, "$id_objet=$id");
+	$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
+
+	if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
+	  $jointure = table_jointure('auteur', 'article');
+	  if ($droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur"))
+		$droit = true;
+	}
+
+	return $droit;
+}
+
 // Deux fonctions sans surprise pour permettre les tests
 // Dire toujours OK
 // http://doc.spip.org/@autoriser_ok_dist
@@ -638,158 +692,4 @@ function autoriser_ok_dist($faire, $type, $id, $qui, $opt) { return true; }
 // http://doc.spip.org/@autoriser_niet_dist
 function autoriser_niet_dist($faire, $type, $id, $qui, $opt) { return false; }
 
-
-/**
- * Autorisations d'acces dans la navigation du bandeau
- */
-
-/**
- * Edition
- */
-
-function autoriser_articles_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_rubriques_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_auteurs_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_breves_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return 	($GLOBALS['meta']["activer_breves"] != "non");
-}
-function autoriser_mots_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return 	($GLOBALS['meta']["articles_mots"] != "non");
-}
-function autoriser_sites_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return 	($GLOBALS['meta']["activer_sites"] != "non");
-}
-
-/**
- * Publication
- */
-
-function autoriser_synchro_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_forum_admin_suivi_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
-}
-function autoriser_messagerie_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return $GLOBALS['meta']['messagerie_agenda']!=='non';
-}
-function autoriser_calendrier_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return $GLOBALS['meta']['messagerie_agenda']!=='non';
-}
-
-
-/**
- * Activite
- */
-
-function autoriser_visiteurs_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	include_spip('inc/presentation');
-	return avoir_visiteurs(true);
-}
-
-
-/**
- * Administration
- */
-
-function autoriser_admin_vider_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('configurer', 'admin_vider');
-}
-function autoriser_admin_sauvegarder_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('sauvegarder');
-}
-function autoriser_admin_restaurer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('configurer', 'admin_tech');;
-}
-function autoriser_admin_maintenir_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('configurer', 'admin_tech');;
-}
-
-
-/**
- * Configuration
- */
-
-function autoriser_config_identite_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('configurer');
-}
-function autoriser_config_lang_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-return autoriser('configurer', 'lang');
-}
-function autoriser_config_contenu_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-return autoriser('configurer');
-}
-function autoriser_config_interactivite_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-return autoriser('configurer');
-}
-function autoriser_config_avancee_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-return autoriser('configurer');
-}
-function autoriser_admin_plugin_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('configurer', 'admin_plugin');
-}
-
-/**
- * Outils rapides
- */
-
-function select_rubrique_insertion($condition=""){
-	static $rubriques = array();
-	if (!isset($rubriques[$condition])){
-		$in = !$GLOBALS['connect_id_rubrique'] ? ''
-			: sql_in('id_rubrique', $GLOBALS['connect_id_rubrique']);
-		if ($condition)
-			$in .= ($in?" AND ":""). $condition;
-		$rubriques[$condition] = sql_getfetsel('id_rubrique', 'spip_rubriques', $in, '',  'id_rubrique DESC',  1);
-	}
-	return $rubriques[$condition];
-}
-
-
-function autoriser_rubrique_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creerrubriquedans','rubrique',_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null));
-}
-
-function autoriser_article_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
-		$id_rubrique = select_rubrique_insertion();
-	return autoriser('creerarticledans','rubrique',$id_rubrique);
-}
-
-function autoriser_auteur_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return autoriser('creer','auteur');
-}
-
-function autoriser_mot_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return ($GLOBALS['meta']['articles_mots']=='oui' AND autoriser('creer','mot'));
-}
-
-function autoriser_site_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
-		$id_rubrique = select_rubrique_insertion();
-	return autoriser('creersitedans','rubrique',$id_rubrique);
-}
-
-function autoriser_breve_creer_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	if (!$id_rubrique = intval(_request('id_rubrique',isset($opt['contexte'])?$opt['contexte']:null)))
-		$id_rubrique = select_rubrique_insertion("id_parent=0");
-	return autoriser('creerbrevedans','rubrique',$id_rubrique);
-}
-
-
-function autoriser_infos_perso_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_config_langage_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
-function autoriser_config_preferences_onglet_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
-}
 ?>
