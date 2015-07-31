@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'affichage' => 'Visa',
 'aide_non_disponible' => 'Den här delen av direkthjälpen finns inte i det aktuella språket',
 'auteur' => 'Redaktör',
-'avis_acces_interdit' => 'Tilltr&auml;de f&ouml;rbjudet.',
+'avis_acces_interdit' => 'Tilltr&amp;auml;de f&amp;ouml;rbjudet.',
 'avis_article_modifie' => 'Varning, @nom_auteur_modif@ har arbetat på den här artikeln för @date_diff@ minuter sen',
 'avis_aucun_resultat' => 'Hittade inga resultat',
 'avis_chemin_invalide_1' => 'Sökvägen du har angett',
@@ -73,7 +73,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_envoi_message_02' => 'SKICKA ETT MEDDELANDE',
 'bouton_envoyer_message' => 'Färdigt meddelande: skicka',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM & NAMNINSAMLINGAR',
+'bouton_forum_petition' => 'FORUM &amp; NAMNINSAMLINGAR',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Ändra',
 'bouton_pense_bete' => 'PERSONLIG MINNESANTECKNING',
@@ -1036,7 +1036,7 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le

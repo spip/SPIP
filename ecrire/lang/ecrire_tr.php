@@ -72,7 +72,7 @@ Bu ithal istemini onaylamayın.
 'bouton_envoi_message_02' => 'İLETİ YOLLA',
 'bouton_envoyer_message' => 'İletinin son hali : yolla',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM & İMZA KAMPANYASI',
+'bouton_forum_petition' => 'FORUM &amp; İMZA KAMPANYASI',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Değiştir',
 'bouton_pense_bete' => 'KiŞiSEL NOT DEFTERi',
@@ -191,7 +191,7 @@ sonradan yok edebilir).',
 'erreur_plugin_nom_fonction_interdit' => 'Yasaklanmış işlev ismi',
 'erreur_plugin_nom_manquant' => 'Plugin ismi eksik',
 'erreur_plugin_prefix_manquant' => 'Plugin isimlendirme alanı tanımlanmamış',
-'erreur_plugin_tag_plugin_absent' => 'Tanımlama dosyasında <plugin> eksik',
+'erreur_plugin_tag_plugin_absent' => 'Tanımlama dosyasında &lt;plugin&gt; eksik',
 'erreur_plugin_version_manquant' => 'Plugin\'in uyarlaması eksik',
 
 // F
@@ -1029,7 +1029,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_compacter_avertissement' => 'Sitenizin geliştirilmesi esnasında bu seçenekleri aktive etmeyin : sıkıştırılmış elemanlar tüm okunabilirliklerini kaybederler.',
 'texte_compacter_script_css' => 'SPIP javascript sktripleri ve CSSleri sıkıştırabilir ve bunları statik dosyalara kaydedebilir ; böylece sitenin gösterilmesi hızlanır.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(bu, sıkıştırılmış ya da sıkıştırılmamış olabilir)',
 'texte_compresseur_page' => 'SPIP site ziyaretçilerine gönderdiği her sayfayı sıkıştırabilir. Bu ayar bandı optimize eder. (site düşük debili bir bağlantıda hızlanmış olur) ama hizmet biriminden çok fazla güç ister.',
 'texte_compte_element' => '@count@ eleman',

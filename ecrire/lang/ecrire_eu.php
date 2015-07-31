@@ -994,7 +994,7 @@ Artikuluaren onarpena (berak jasoko duen eguneroko bisiten kopuruaren estimazio 
 'texte_compacter_avertissement' => 'Kontuz, aaukera horiek ez aktibatu zure gunearen garapenaren denboran : konprimitutako elementuek irakurgarritasuna galtzen dute.',
 'texte_compacter_script_css' => 'SPIPek javascript script-ak edo CSS estilo-orriak konprimitzen ahal ditu, fitxategi estatiko batzuetan grabatzeko ; horrek gunearen bistaratzea azeleratzen du.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
 'texte_compresseur_page' => 'SPIPek gunearen bisitariei bidaltzen duen orri bakotxa automatikoki konprimitzen ahal du. konfigurazio hunek banda-zabaleraren optimizatzea baimentzen du (abiadura ttipiko konexio baten gibelean gunea zaluago da), baina zerbitzariari indar gehiago eskatzen du.',
 'texte_compte_element' => '@count@ osagai',

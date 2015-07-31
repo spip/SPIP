@@ -1068,7 +1068,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'texte_compacter_script_css' => 'SPIP pò cumpressà i scripts javascript è e foglie di stile CSS, da arregitrà li in i schedari stàtichi; 
 	cusì u situ diventa più veloce.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(pò esse cumpressu o micca)',
 'texte_compresseur_page' => 'SPIP pò cumpressà in autumàticu ogni pàgina ch\'ellu manda à i visitori di u situ. Cusì vene uttimizata a banda passante 
 	(u situ diventa più veloce cù una cunnessione à dèbbitu bassu), ma richere putenza più maiò à u servore.',

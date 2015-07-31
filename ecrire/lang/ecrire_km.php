@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'ផ្ញើ​ មួយសារ',
 'bouton_envoyer_message' => 'សារ​បញ្ចប់ ៖ ផ្ញើ',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'វេទិកា & បណ្តឹងជំទាស់',
+'bouton_forum_petition' => 'វេទិកា &amp; បណ្តឹងជំទាស់',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'កែប្រែ',
 'bouton_pense_bete' => 'ការក្រើនរំលឹក ផ្ទាល់ខ្លួន',
@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'ឈ្មោះ​មុខងារ ត្រូវ​បាន​ហាម',
 'erreur_plugin_nom_manquant' => 'ខ្វះឈ្មោះ​កម្មវិធី​ជំនួយ',
 'erreur_plugin_prefix_manquant' => 'គ្មានបានកំណត់ វាលដាក់ឈ្មោះ​ នៃកម្មវិធី​ជំនួយ​',
-'erreur_plugin_tag_plugin_absent' => '<plugin> ខ្វះ ​ក្នុងសំណុំឯកសារ​និយម​ន័យ',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ខ្វះ ​ក្នុងសំណុំឯកសារ​និយម​ន័យ',
 'erreur_plugin_version_manquant' => 'ខ្វះកំណែ​ នៃ​កម្មវិធី​ជំនួយ',
 
 // F
@@ -990,7 +990,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(​នេះ​អាច​ត្រូវ​បង្រួម ឬ​មិន​អាច​)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le

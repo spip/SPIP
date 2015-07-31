@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Запрещенное название функции',
 'erreur_plugin_nom_manquant' => 'Отсутствует название плагина ',
 'erreur_plugin_prefix_manquant' => 'Неопределено пространство имен плагина',
-'erreur_plugin_tag_plugin_absent' => '<plugin> отсутствует в файле описания',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; отсутствует в файле описания',
 'erreur_plugin_version_manquant' => 'Отсутствует версия плагина',
 
 // F

@@ -70,7 +70,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_envoi_message_02' => 'MESSAGE SCHÉCKEN',
 'bouton_envoyer_message' => 'Definitiven Message: schécken',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FORUM & PETITIOUN',
+'bouton_forum_petition' => 'FORUM &amp; PETITIOUN',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Änneren',
 'bouton_pense_bete' => 'PERSÉINLECH NOTIZ',
@@ -985,7 +985,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'texte_compacter_avertissement' => 'Schalt dës Optiounen nët wärend der Entwëcklung vum Site an: déi kompriméiert Elementer sinn nët einfach liesbar.',
 'texte_compacter_script_css' => 'SPIP kann Javascript oder CSS Style-Sheets kompriméieren fir als statësch Dokumenter ze späicheren; da ginn d\'Säite vum Site méi séier gewisen.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(dee kann kompriméiert sinn oder nët)',
 'texte_compresseur_page' => 'SPIP kann automatësch all Säit kompriméieren déi ugewise gëtt. Dës Astellung erlaabt d\'Bandbreed ze spueren (de Site ass op enger lueser Leitung méi séier), mais dat verlaangt méi Leeschtung vum Server.',
 'texte_compte_element' => '@count@ Element',

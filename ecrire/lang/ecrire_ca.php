@@ -68,7 +68,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'bouton_envoi_message_02' => 'ENVIAR UN MISSATGE',
 'bouton_envoyer_message' => 'Missatge definitiu : enviar',
 'bouton_fermer' => 'Tancar',
-'bouton_forum_petition' => 'FÒRUM & PETICIÓ',
+'bouton_forum_petition' => 'FÒRUM &amp; PETICIÓ',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORI D\'ÚS PERSONAL',
@@ -192,7 +192,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'erreur_plugin_nom_fonction_interdit' => 'Nom de funció prohibit',
 'erreur_plugin_nom_manquant' => 'Falta el nom del connector',
 'erreur_plugin_prefix_manquant' => 'Espai de nom del connector no definit',
-'erreur_plugin_tag_plugin_absent' => 'falta el <connector> al fitxer de definició',
+'erreur_plugin_tag_plugin_absent' => 'falta el &lt;connector&gt; al fitxer de definició',
 'erreur_plugin_version_manquant' => 'Falta la versió del connector',
 
 // F
@@ -1008,7 +1008,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 'texte_compacter_avertissement' => 'Estigueu alerta de no activar aquestes opcions durant el desenvolupament del vostre lloc: els elements compactats perdent tota llegibilitat. ',
 'texte_compacter_script_css' => 'SPIP pot compactar els scripts javascript i els fulls d\'estil CSS, per enregistrar-los a dins dels fitxers estàtics; això accelera la presentació del lloc Web.',
 'texte_compatibilite_html' => 'Podeu demanar a SPIP que produeixi, al lloc públic, codi compatible amb la norma <i>HTML4</i>, o permetre-li utilitzar les possibilitats més modernes de l\'<i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(açò pot ser comprimit o no)',
 'texte_compresseur_page' => 'SPIP pot comprimir automàticament cada pàgina que envia als visitants del lloc Web. Aquest reglatge permet optimitzar l\'ample de banda (el lloc és més ràpid darrere una connexió més lenta), però demana més potència al sevidor.',
 'texte_compte_element' => ' @count@ element',

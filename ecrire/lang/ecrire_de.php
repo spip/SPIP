@@ -994,7 +994,7 @@ in einer Farbe, die den Status anzeigt :',
 'texte_compacter_avertissement' => 'Achtung: Bitte aktivieren Sie diese Option nicht während der Entwicklung Ihrer Site. Die komprimierten Elemente verlieren dadurch ihre Lesbarkeit.',
 'texte_compacter_script_css' => 'SPIP kann Javascripte und CSS Stilvorlagen komprimieren. Dadurch wird die Anzeigegeschwindigkeit der Website erhöht.',
 'texte_compatibilite_html' => 'Sie können SPIP so einstellen, daß die öffentlichen Seiten in <i>HTML4</i> erstellt werden, oder in <i>HTML5</i> mit seinen erweiterten Leistungsmerkmalen.',
-'texte_compatibilite_html_attention' => 'Die Verwendung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code><!DOCTYPE html></code>.',
+'texte_compatibilite_html_attention' => 'Die Verwendung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 'texte_compresseur_page' => 'SPIP kann alle Seiten, die zum Besucher übertragen werden
 komprimieren.Diese Einstellung ermöglicht es, Bandbreite zu sparen (Die

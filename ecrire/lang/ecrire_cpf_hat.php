@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'VOYE YON MESAJ',
 'bouton_envoyer_message' => 'Mesaj se bon : voye',
 'bouton_fermer' => 'Fermer', # NEW
-'bouton_forum_petition' => 'FOWOM & PETISYON',
+'bouton_forum_petition' => 'FOWOM &amp; PETISYON',
 'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
 'bouton_modifier' => 'Chanje',
 'bouton_pense_bete' => 'RAPLE-W POU W MEM',
@@ -200,7 +200,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'erreur_plugin_nom_fonction_interdit' => 'Kouman fichiye a rele se entedi  ',
 'erreur_plugin_nom_manquant' => 'W ki pa rele plegin an ',
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non défini', # NEW
-'erreur_plugin_tag_plugin_absent' => '<Pa oken plegin an > nan fichye pou définisyon',
+'erreur_plugin_tag_plugin_absent' => '&lt;Pa oken plegin an &gt; nan fichye pou définisyon',
 'erreur_plugin_version_manquant' => 'Pa oken vesyon plegin an',
 
 // F
@@ -1041,7 +1041,7 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
 'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code><!DOCTYPE html></code>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(li mèm se petèt konprese, petèt non)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
