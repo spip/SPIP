@@ -463,18 +463,18 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "</form>";
 
 
-		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
-		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('doc_supp', $id_document);
+		$link_supp = $image_link;
+		$link_supp->addVar('redirect', $redirect_url);
+		$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
+		$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
+		$link_supp->addVar('doc_supp', $id_document);
 
 		echo "</font></center>\n";
 		echo "</div>";
 		echo "</div>";
 
 		echo "<p></p><div align='center'>";
-		icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
+		icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 		echo fin_block();
 
@@ -808,11 +808,11 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 
 		
-			$link = $image_link;
-			$link->addVar('redirect', $redirect_url);
-			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('doc_supp', $id_document);
+			$link_supp = $image_link;
+			$link_supp->addVar('redirect', $redirect_url);
+			$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
+			$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
+			$link_supp->addVar('doc_supp', $id_document);
 		
 			echo "</font></center>\n";
 			echo "</div>";	
@@ -823,7 +823,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "</div>";	
 		
 			echo "<p></p><div align='center'>";
-			icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
+			icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 			echo "</div>";
 			echo fin_block();
 			
