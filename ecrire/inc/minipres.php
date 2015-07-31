@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/texte'); //inclue inc/lang et inc/filtres
 include_spip('inc/headers');
+include_spip('inc/texte'); //inclue inc/lang et inc/filtres
 
 //
 // Presentation des pages d'installation et d'erreurs
