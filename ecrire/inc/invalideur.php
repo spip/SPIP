@@ -63,9 +63,13 @@ function insere_invalideur($inval, $fichier) {
 
 //
 // Invalider les caches lies a telle condition
+// on en profite pour noter la date de mise a jour dans les metas
 //
 // http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond) {
+	include_spip('inc/meta');
+	ecrire_meta('derniere_modif', time());
+	ecrire_metas();
 	$result = spip_query("SELECT DISTINCT fichier FROM spip_caches WHERE $cond");
 	$tous = array();
 	while ($row = spip_fetch_array($result))
