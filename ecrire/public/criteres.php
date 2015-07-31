@@ -669,8 +669,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 						// cas du tri sur champ de jointure explicite
 						$t = array_search($r[1], $boucle->from);
 						if (!$t){
-							$t = trouver_champ_exterieur($r[2], array($r[1]), $boucle);
-							$t = array_search(@$t[0], $boucle->from);
+							$t = trouver_jointure_champ($r[2], $boucle, array($r[1]));
 						}
 						if (!$t){
 							return (array('zbug_critere_inconnu', array('critere' => $crit->op." $par")));
