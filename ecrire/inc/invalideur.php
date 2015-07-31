@@ -24,14 +24,21 @@ define('_AGE_CACHE_ATIME', 3600);
 // Donne le nombre de fichiers dans un repertoire (plat, pour aller vite)
 // false si erreur
 // http://doc.spip.org/@nombre_de_fichiers_repertoire
-function nombre_de_fichiers_repertoire($dir) {
+function nombre_de_fichiers_repertoire($dir,$nb_estim_taille = 20) {
+	$taille = 0; // mesurer la taille de N fichiers au hasard dans le repertoire
+	$nb = $nb_estim_taille;
 	if (!$h = @opendir($dir)) return false;
 	$total = 0;
 	while (($fichier = @readdir($h)) !== false)
-		if ($fichier[0]!='.')
+		if ($fichier[0]!='.'){
 			$total++;
+			if ($nb AND rand(1,10)==1){
+				$taille += filesize("$dir/$fichier");
+				$nb--;
+			}
+		}
 	closedir($h);
-	return $total;
+	return array($total,$taille?$taille/($nb_estim_taille-$nb):_TAILLE_MOYENNE_FICHIER_CACHE);
 }
 
 // Indique la taille du repertoire cache ; pour de gros volumes,
@@ -39,14 +46,16 @@ function nombre_de_fichiers_repertoire($dir) {
 // http://doc.spip.org/@taille_du_cache
 function taille_du_cache() {
 	$total = 0;
+	$taille = 0;
 	for ($i=0;$i<16;$i++) {
 		$l = dechex($i);
 		$dir = sous_repertoire(_DIR_CACHE, $l);
-		$total += nombre_de_fichiers_repertoire($dir);
+		list($n,$s) = nombre_de_fichiers_repertoire($dir);
+		$total += $n;
+		$taille += $s;
 	}
-	return $total * _TAILLE_MOYENNE_FICHIER_CACHE;
+	return $total * $taille / 16;
 }
-
 
 // Invalider les caches lies a telle condition
 // ici on se contente de noter la date de mise a jour dans les metas
@@ -110,15 +119,15 @@ function appliquer_quota_cache() {
 
 	$l = dechex($tour_quota_cache);
 	$dir = sous_repertoire(_DIR_CACHE, $l);
-	$nombre = nombre_de_fichiers_repertoire($dir);
-	$total_cache = _TAILLE_MOYENNE_FICHIER_CACHE * $nombre;
+	list($nombre,$taille) = nombre_de_fichiers_repertoire($dir);
+	$total_cache = $taille * $nombre;
 	spip_log("Taille du CACHE estimee ($l): "
 		.(intval(16*$total_cache/(1024*1024/10))/10)." Mo");
 
 	// Nombre max de fichiers a supprimer
 	if ($quota_cache > 0) {
 		$trop = $total_cache - ($quota_cache/16)*1024*1024;
-		$trop = 3 * intval($trop / _TAILLE_MOYENNE_FICHIER_CACHE);
+		$trop = 3 * intval($trop / $taille);
 		if ($trop > 0) {
 			$n = purger_repertoire($dir,
 				array(
