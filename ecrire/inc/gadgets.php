@@ -216,35 +216,48 @@ function repercuter_gadgets($id_rubrique) {
 	// afin de les ignorer lors des scripts speciaux (restauration etc).
 	$ajax = "\\x26var_ajaxcharset=utf8" ;
 
-	// comme on cache fortement ce menu, son url change en fonction de sa date de modif
-	$date = $GLOBALS['meta']['date_calcul_rubriques'];
+	// Il faudrait etendre generer_url_ecrire pour qu'il produise ces URL
+
+	// comme on cache fortement ce menu, 
+	// son url change en fonction de sa date de modif
+	$toutsite = "./?exec=menu_rubriques$ajax\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques'];
+	
+	$navrapide = "./?exec=menu_navigation$ajax\\x26id_rubrique=$id_rubrique";
+
+	$agenda = "./?exec=menu_agenda$ajax";
 
 	return
 
 	 "
 	jQuery('#boutonbandeautoutsite')
-	.one('mouseover',function(){
-		changestyle('bandeautoutsite');
-		jQuery('#gadget-rubriques')
-		.load('./?exec=menu_rubriques$ajax\\x26date=$date');
+	.one('mouseover',function(event){
+		if ((event.altKey || event.metaKey) != true) {
+			changestyle('bandeautoutsite');
+			jQuery('#gadget-rubriques')
+			.load('$toutsite');
+		} else { window.open('$toutsite\\x26transformer_xml=valider_xml'); }
 	})
 	.one('focus', function(){jQuery(this).mouseover();});"
 
 	."
 	jQuery('#boutonbandeaunavrapide')
-	.one('mouseover',function(){
-		changestyle('bandeaunavrapide');
-		jQuery('#gadget-navigation')
-		.load('./?exec=menu_navigation$ajax\\x26id_rubrique=$id_rubrique');
+	.one('mouseover',function(event){
+		if ((event.altKey || event.metaKey) != true) {
+			changestyle('bandeaunavrapide');
+			jQuery('#gadget-navigation')
+			.load('$navrapide');
+		} else { window.open('$navrapide\\x26transformer_xml=valider_xml'); }
 	})
 	.one('focus', function(){jQuery(this).mouseover();});"
 
 	."
 	jQuery('#boutonbandeauagenda')
-	.one('mouseover',function(){
-		changestyle('bandeauagenda');
-		jQuery('#gadget-agenda')
-		.load('./?exec=menu_agenda$ajax');
+	.one('mouseover',function(event){
+		if ((event.altKey || event.metaKey) != true) {
+			changestyle('bandeauagenda');
+			jQuery('#gadget-agenda')
+			.load('$agenda');
+		} else { window.open('$agenda\\x26transformer_xml=valider_xml'); }
 	})
 	.one('focus', function(){jQuery(this).mouseover();});"
 
