@@ -208,7 +208,6 @@ function corriger_extension($ext) {
 
 function ajout_image($source, $dest) {
 	global $redirect_url, $hash_id_auteur, $hash, $num_img;
-	spip_log("$source, $dest");
 	// Securite
 	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
 
@@ -614,15 +613,15 @@ if ($ajout_doc == 'oui') {
 
 $redirect = '';
 
-if ($test_vignette) // appel de ecrire/config-fonction
+if ($test_vignette) // appel de config-fonction
 	$redirect = tester_vignette($test_vignette);
-elseif ($vignette) // appels de ecrire/inc_logo
+elseif ($vignette) // appels de inc_logo
 	$redirect = creer_fichier_vignette($vignette);
 elseif ($ajout_logo == "oui")
 	ajout_image($image, $logo);
 elseif ($image_supp)
 	effacer_image($image_supp);
-elseif ($doc_supp) // appels de ecrire/inc_document
+elseif ($doc_supp) // appels de inc_document
 	supprime_document_et_vignette($doc_supp);
 elseif ($doc_rotate)
 	tourner_document($var_rot, $doc_rotate, $convert_command);

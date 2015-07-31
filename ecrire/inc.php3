@@ -1,20 +1,8 @@
 <?php
-# pour empecher l'acces aux sites non installes. 
-# A ameliorer pour le multi-site
-
-if (!defined('_FILE_CONNECT'))
-  define('_FILE_CONNECT', 
-	 (@file_exists("inc_connect.php3") ? "inc_connect.php3" : ''));
-
-if (!_FILE_CONNECT) {
-	header("Location: install.php3");
-}
 
 if (!defined('_ECRIRE_INC_VERSION')) { include ("inc_version.php3"); }
-// SPIP est-il installe ?
-
+spip_log("version lue " . _DIR_PREFIX1);
 include_ecrire("inc_auth.php3");
-
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");

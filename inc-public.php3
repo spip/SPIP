@@ -17,16 +17,6 @@ else {
 	define("_INC_PUBLIC", "1");
 	include ("ecrire/inc_version.php3");
 
-
-	if (!_FILE_CONNECT) {
-		$db_ok = 0;
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('info_travaux_titre'));
-		echo "<P>"._T('info_travaux_texte')."</P>";
-		install_fin_html();
-		exit;
-	}
-
 	//
 	// Initialisations
 	//

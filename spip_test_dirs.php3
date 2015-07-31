@@ -1,4 +1,6 @@
 <?php
+if (defined("_TEST_DIRS")) return;
+define("_TEST_DIRS", "1");
 
 include("ecrire/inc_version.php3");
 
@@ -30,7 +32,7 @@ if ($test_dir)
 	$test_dirs[] = $test_dir;
 else {
 	if (!_FILE_CONNECT)
-	  $test_dirs[] = basename(_FILE_CONNECT);
+	  $test_dirs[] = dirname(_FILE_CONNECT_INS);
 }
 
 unset($bad_dirs);

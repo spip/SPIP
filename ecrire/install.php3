@@ -1,7 +1,8 @@
 <?php
+if (defined("_ECRIRE_INSTALL")) return;
+define("_ECRIRE_INSTALL", "1");
 
 include ("inc_version.php3");
-
 include_ecrire ("inc_presentation.php3");
 
 utiliser_langue_visiteur();
@@ -15,9 +16,7 @@ if (_FILE_CONNECT) {
 }
 
 include_ecrire ("inc_base.php3");
-
 define('_FILE_TMP', '_install');
-
 //
 // Etapes de l'installation standard
 //
@@ -361,6 +360,7 @@ else if ($etape == 'dirs') {
 }
 else if (!$etape) {
 	$menu_langues = menu_langues('var_lang_ecrire');
+
 	if (!$menu_langues)
 	  redirige_par_entete("../spip_test_dirs.php3");
 	else {
