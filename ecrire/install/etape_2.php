@@ -131,7 +131,7 @@ function install_etape_2_form($adresse_db,$login_db,$pass_db, $hidden, $checked,
 	)
 
 	. (defined('_INSTALL_NAME_DB')
-		? '<h3>'._T('install_nom_base_hebergeur'). ' <tt>'._INSTALL_NAME_DB.'</tt>').'</h3>'
+		? '<h3>'._T('install_nom_base_hebergeur'). ' <tt>'._INSTALL_NAME_DB.'</tt>'.'</h3>'
 		: "\n<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n"
 		. $res
 		. "\n<input name=\"choix_db\" value=\"new_spip\" type='radio' id='nou'"
@@ -142,7 +142,7 @@ function install_etape_2_form($adresse_db,$login_db,$pass_db, $hidden, $checked,
 
 	. ((defined('_INSTALL_TABLE_PREFIX')
 	OR $GLOBALS['table_prefix'] != 'spip')
-		? '<h3>'._T('install_table_prefix_hebergeur').'  <tt>'.$GLOBALS['table_prefix'].'</tt>').'</h3>'
+		? '<h3>'._T('install_table_prefix_hebergeur').'  <tt>'.$GLOBALS['table_prefix'].'</tt>'.'</h3>'
 		: "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"
 	. "\n<input type='text' id='tprefix' name='tprefix' class='fondl' value='"
