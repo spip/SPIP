@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/sax');
-
 class IndenteurXML {
 
 // http://doc.spip.org/@debutElement
@@ -54,9 +52,9 @@ function phraserTout($phraseur, $data)
 }
 
 // http://doc.spip.org/@inc_indenter_xml_dist
-function inc_indenter_xml_dist($page, $apply=false)
+function xml_indenter_dist($page, $apply=false)
 {
-	$sax = charger_fonction('sax', 'inc');
+	$sax = charger_fonction('sax', 'xml');
 	return $sax($page, $apply, $GLOBALS['phraseur_xml'] = new IndenteurXML());
 
 }

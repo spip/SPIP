@@ -29,7 +29,7 @@ function exec_dater_args($id, $type)
 		if (!id_table_objet($table)) {
 			spip_log("dater: $type table inconnue");
 			$type = 'article';
-			$table = $type . 's';
+			$table = 'spip_' . $type . 's';
 		}
 		$prim = 'id_' . $type;
 		$row = sql_fetsel("*", $table, "$prim=$id");

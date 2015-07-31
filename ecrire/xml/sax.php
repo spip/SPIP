@@ -129,7 +129,7 @@ function xml_parsestring($phraseur, $data)
 	$phraseur_xml->contenu[$phraseur_xml->depth] ='';
 
 	if (!xml_parse($phraseur, $data, true)) {
-	  // ne pas commencer le message par un "<" (cf inc_sax_dist)
+	  // ne pas commencer le message par un "<" (cf xml_sax_dist)
 	  $phraseur_xml->err = array(
 	    xml_error_string(xml_get_error_code($phraseur)) .
 		  coordonnees_erreur($phraseur) . "<br />\n" .
@@ -157,13 +157,13 @@ function coordonnees_erreur($xml_parser)
 }
 
 // http://doc.spip.org/@inc_sax_dist
-function inc_sax_dist($page, $apply=false)
+function xml_sax_dist($page, $apply=false)
 {
 	global $phraseur_xml;
 
 	// init par defaut si pas fait (espace public)
 	if (!isset($GLOBALS['phraseur_xml'])) {
-		$indenter_xml = charger_fonction('indenter_xml', 'inc');
+		$indenter_xml = charger_fonction('indenter', 'xml');
 		return $indenter_xml($page, $apply);
 	}
 

@@ -54,7 +54,7 @@ function valider_xml_ok($url, $req_ext)
 			    AND preg_match('/^exec=(\w+)$/', $script, $r)) {
 				  $url = $r[1];
 			}
-			$transformer_xml = charger_fonction('valider_xml', 'inc');
+			$transformer_xml = charger_fonction('valider', 'xml');
 			$onfocus = "this.value='" . addslashes($url) . "';";
 			unset($GLOBALS['xhtml_error']);
 			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
@@ -212,7 +212,7 @@ function valider_skel($transformer_xml, $f, $dir)
 function valider_dir($files, $ext, $dir)
 {
 	$res = array();
-	$transformer_xml = charger_fonction('valider_xml', 'inc');
+	$transformer_xml = charger_fonction('valider', 'xml');
 	$valideur = $ext=='html' ? 'valider_skel' : 'valider_script';
 	foreach($files as $f) {
 		spip_log("valider $f");

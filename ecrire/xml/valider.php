@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/sax');
-
 // http://doc.spip.org/@validerElement
 function validerElement($phraseur, $name, $attrs)
 {
@@ -182,7 +180,7 @@ function valider_idref(&$own, $nom, $ligne, $col)
 }
 
 // http://doc.spip.org/@inc_valider_passe2_dist
-function inc_valider_passe2_dist(&$own)
+function xml_valider_passe2_dist(&$own)
 {
 	if (!$own->err) {
 		foreach ($own->idrefs as $idref) {
@@ -315,7 +313,7 @@ function phraserTout($phraseur, $data)
 		$GLOBALS['xhtml_error'] .= 'DOCTYPE ? 0 0<br />';
 		$this->err[]= ('DOCTYPE ? 0 0<br />');
 	} else {
-		$valider_passe2 = charger_fonction('valider_passe2', 'inc');
+		$valider_passe2 = charger_fonction('valider_passe2', 'xml');
 		$valider_passe2($this);
 	}
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
@@ -337,10 +335,10 @@ function phraserTout($phraseur, $data)
 }
 
 // http://doc.spip.org/@inc_valider_xml_dist
-function inc_valider_xml_dist($page, $apply=false)
+function xml_valider_dist($page, $apply=false)
 {
 	spip_timer('valider');
-	$sax = charger_fonction('sax', 'inc');
+	$sax = charger_fonction('sax', 'xml');
 	$sax = $sax($page, $apply, $GLOBALS['phraseur_xml'] = new ValidateurXML());
 	spip_log("validation : " . spip_timer('valider'));
 	return $sax;
