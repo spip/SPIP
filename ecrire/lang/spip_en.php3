@@ -44,6 +44,7 @@ $GLOBALS['i18n_en'] = array(
 'avis_erreur' => 'Error: see below\';',
 'avis_erreur_connexion' => 'Connection error',
 'avis_erreur_connexion_mysql' => 'MySQL connection error',
+'avis_erreur_cookie' => 'cookie problem',
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',

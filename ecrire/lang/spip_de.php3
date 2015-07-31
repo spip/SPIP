@@ -44,6 +44,7 @@ $GLOBALS['i18n_de'] = array(
 'avis_erreur' => 'Fehler: Siehe unten',
 'avis_erreur_connexion' => 'Verbindungsfehler',
 'avis_erreur_connexion_mysql' => 'Verbindungsfehler (MySQL)',
+'avis_erreur_cookie' => 'Cookie-Problem',
 'avis_erreur_fonction_contexte' => 'Programmfehler. Diese Funktion darf nicht in diesem Zusammenhang aufgerufen werden.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
