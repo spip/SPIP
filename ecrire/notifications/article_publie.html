@@ -19,6 +19,6 @@
 
 [(#CHAPO|concat{#TEXTE}|couper{700}|textebrut)]
 
-[->(#URL_ARTICLE|url_absolue)]
+[-> (#URL_ARTICLE|url_absolue)]
 </BOUCLE_art>
 #FILTRE{supprimer_tags|filtrer_entites|trim}
