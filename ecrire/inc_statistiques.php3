@@ -83,7 +83,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			$kw_referer_host = $arr_engines[$cnt][0];
 			$keywords = ereg('=', $arr_engines[$cnt][1])
 				? ${str_replace('=', '', $arr_engines[$cnt][1])}:'';
-			if ((($kw_referer_host == "Google" && ereg('[io]e=([-a-z0-9]+)', $query, $regs))
+			if ((($kw_referer_host == "Google" &&
+				ereg('[io]e=([-a-z0-9]+)', strtolower($query), $regs))
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				)) {
