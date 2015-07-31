@@ -1773,7 +1773,7 @@ function spip_sqlite_updateq($table, $champs, $where = '', $desc = array(), $ser
 
 	$set = array();
 	foreach ($champs as $champ => $val){
-		$set[] = $champ.'='._sqlite_calculer_cite($val, $fields[$champ]);
+		$set[] = $champ.'='._sqlite_calculer_cite($val, isset($fields[$champ]) ? $fields[$champ] : '');
 	}
 	return spip_sqlite_query(
 		_sqlite_calculer_expression('UPDATE', $table, ',')
