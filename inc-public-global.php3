@@ -101,7 +101,7 @@ function afficher_page_globale ($fond) {
 	list($chemin_cache, $page, $lastmodified) = 
 		determiner_cache($use_cache, NULL, $fond);
 
-	if (!$chemin_cache) $lastmodified = time();
+	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
 	// demande de previsualisation ?
 	// -> inc-calcul n'enregistrera pas les fichiers caches
@@ -111,7 +111,6 @@ function afficher_page_globale ($fond) {
 			$var_preview = true;
 			spip_log('preview !');
 		} else	$var_preview = false;
-
 
 	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
 
@@ -172,17 +171,17 @@ function afficher_page_globale ($fond) {
 					$status = 404;
 					$flag_dynamique = true;
 				}
-	// pas de mise en cache pour les observateurs (et si pas deja indique)
+	// pas de cache client pour les observateurs (et si pas deja indique)
 				if ($flag_dynamique 
 				    OR $_COOKIE['spip_admin']
-				    OR $var_mode) {
+				    OR $var_mode
+) {
 				  $page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
 				  $page['entetes']["Pragma"] = "no-cache";
 				} 
 			}
 		}
 	}
-
 	// toujours utile
 	$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
 	$page['status'] = $status;

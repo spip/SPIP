@@ -118,12 +118,7 @@ function retire_caches($chemin = '') {
 	}
 }
 
-//
-// Retourne un nombre N:
-// < 0 s'il faut calculer la page sans la mettre en cache
-// = 0 si on peut utiliser un cache existant
-// > 0 s'il faut calculer la page et le mette en cache pendant N secondes
-//
+// gestion des delais par specification a l'exterieur du squelette
 
 function cache_valide($chemin_cache, $contenu, $date) {
 	global $delais;
@@ -139,9 +134,27 @@ function cache_valide($chemin_cache, $contenu, $date) {
 	return 0;
 }
 
+// gestion des delais par specification a l'interieur du squelette
+
+function cache_valide_autodetermine($chemin_cache, $contenu, $date) {
+
+	if (!$contenu) return 1;
+
+	if (preg_match('/max-age\s*=\s*(\d+)/', 
+		       $page['entetes']['Cache-Control'],
+		       $r)) 
+	  return ($r[1] > (time() - $date)) ? 0 : $r[1];
+	
+	// squelette ancienne maniere, on se rabat sur le vieux modele
+	return cache_valide($chemin_cache, $contenu, $date);
+}
 
 // retourne le nom du fichier cache, 
-// et affecte le param use_cache selon les specs de la fonction cache_valide
+// et affecte le param use_cache avec un nombre N:
+// < 0 s'il faut calculer la page sans la mettre en cache
+// = 0 si on peut utiliser un cache existant
+// > 0 s'il faut calculer la page et le mette en cache pendant N secondes
+//
 
 function determiner_cache(&$use_cache, $contexte, $fond) {
 	global $_SERVER;
@@ -182,7 +195,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	$ok = lire_fichier($chemin_cache, $page);
 	$time = @filemtime($chemin_cache);
 	$page = restaurer_meta_donnees ($page);
-	$use_cache = cache_valide($chemin_cache, $page, $time);
+	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $time);
 
 	if (!$use_cache AND $ok) return array($chemin_cache, $page, $time);
 
@@ -206,6 +219,13 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 function creer_cache(&$page, $chemin_cache, $duree) {
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
+
+  // arbitrage entre ancien et nouveau modele de delai:
+  // primaute a la duree de vie de la page donnee a l'interieur de la page 
+	if (preg_match('/max-age\s*=\s*(\d+)/', 
+		       $page['entetes']['Cache-Control'],
+		       $r)) 
+	  $duree = $r[1];
 
 	include_ecrire('inc_invalideur');
 	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
