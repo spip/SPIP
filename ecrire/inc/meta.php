@@ -24,8 +24,7 @@ function inc_meta_dist()
 	// Lire les meta, en cache si present, valide et lisible
 	// en cas d'install ne pas faire confiance au meta_cache eventuel
 	if ((_request('exec')!=='install' OR !test_espace_prive())
-	AND $new = jeune_fichier(_FILE_META.".php", _META_CACHE_TIME)
-#   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
+	AND $new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
 	AND lire_fichier_securise(_FILE_META,$meta)
 	AND $meta = @unserialize($meta))
 		$GLOBALS['meta'] = $meta;
@@ -40,7 +39,7 @@ function inc_meta_dist()
 	AND (time() > _RENOUVELLE_ALEA + @$GLOBALS['meta']['alea_ephemere_date'])) {
 		// si on n'a pas l'acces en ecriture sur le cache,
 		// ne pas renouveller l'alea sinon le cache devient faux
-		if (supprimer_fichier(_FILE_META.".php")) {
+		if (supprimer_fichier(_FILE_META)) {
 			include_spip('inc/acces');
 			renouvelle_alea();
 			$new = false; 
@@ -75,7 +74,7 @@ function lire_metas() {
 // http://doc.spip.org/@touch_meta
 function touch_meta($antidate= false){
 
-	if (!$antidate OR !@touch(_FILE_META.".php", $antidate)) {
+	if (!$antidate OR !@touch(_FILE_META, $antidate)) {
 		$r = $GLOBALS['meta'];
 		unset($r['alea_ephemere']);
 		unset($r['alea_ephemere_ancien']);
