@@ -617,7 +617,7 @@ function calcul_balise_logo ($p) {
 	  $p->code = "calcule_logo('$type_objet', '" .
 	    (($suite_logo == '_SURVOL') ? 'off' : 'on') .
 	    "', $_id_objet," .
-	    (($suite_logo == 'RUBRIQUE') ? 
+	    (($suite_logo == '_RUBRIQUE') ? 
 	     champ_sql("id_rubrique", $p) :
 	     "''") .
 	    ", $code_lien, '$flag_fichier')";
