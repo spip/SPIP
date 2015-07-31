@@ -343,11 +343,15 @@ function image_mot($id_mot, $dossier){
 
 function image_rubrique($id_rubrique, $dossier) {
 	// Recherche recursive vers les rubriques parentes (y compris racine)
-	while ($id_rubrique) {
+	while (true) {
 		$image = cherche_image($id_rubrique, 'rub', $dossier);
-		if ($image[0]) return $image;
-		$id_rubrique = sql_parent($id_rubrique);
+		if ($image[0])
+			return $image;
+		else if ($id_rubrique)
+			$id_rubrique = sql_parent($id_rubrique);
+		else
+			return '';
 	}
-	return '';
 }
+
 ?>
