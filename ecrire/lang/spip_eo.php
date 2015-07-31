@@ -199,15 +199,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Anta&#365;faro: <b>Difinu la alir-rajtojn</b>',
 'dirs_probleme_droits' => 'Alir-rajta problemo',
 'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estas trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />La problemo ver&#349;ajne rilatas al majuskligo de literoj.
+  <p>La problemo ver&#349;ajne rilatas al majuskligo de literoj.
   Kontrolu ke la majuskloj ja kongruas kun tio kio estas afi&#349;ita &#265;i-supre;
   se ili ne kongruas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
-  <p />Post tio, vi povos',
+</p><p>Post tio, vi povos</p>',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas skribe modifeblaj&nbsp;: 
 <ul>@bad_dirs@.</ul></b>
-<p />Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
+<p>Por solvi tion, uzu vian FTP-klienton por reguligi la alir-rajtojn de &#265;iu
  el tiuj dosierujoj. La proceduron oni detale klarigas en la instalgvidlibro.
-<p />Post tio, vi povos ',
+</p><p>Post tio, vi povos </p>',
 'double_occurrence' => 'Duobla trafo', # MODIF
 
 // E

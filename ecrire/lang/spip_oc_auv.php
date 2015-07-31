@@ -199,14 +199,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Preliminar: <b>Reglar los dreits d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;ma de dreits d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
-  <p />Se p&ograve;t que venha d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
+  <p>Se p&ograve;t que venha d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan be amb qu&ograve; afichat
   &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logiciau FTP en corregir l\'error.
-  <p>Un c&ograve;p qu\'auretz fait aqu&ograve;, poiretz ',
+  </p><p>Un c&ograve;p qu\'auretz fait aqu&ograve;, poiretz </p>',
 'dirs_repertoires_suivants' => '<b>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
-  <p />Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreits d\'acc&egrave;s de chascun
+  <p>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreits d\'acc&egrave;s de chascun
   d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coss&iacute; chau procedir.
-  <p />Entre qu\'auretz faita aquela manipulacion, poiretz ',
+  </p><p>Entre qu\'auretz faita aquela manipulacion, poiretz </p>',
 'double_occurrence' => 'Double occurrence de @balise@', # NEW
 
 // E

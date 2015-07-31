@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
  acima; se n&atilde;o for o caso, renomeie os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
-  <p/>Terminada esta opera&ccedil;&atilde;o, poder&aacute;', # MODIF
+  <p>Terminada esta opera&ccedil;&atilde;o, poder&aacute;</p>', # MODIF
 'dirs_repertoires_suivants' => '<b>Os seguintes direct&oacute;rios n&atilde;o est&atilde;o acess&iacute;veis para escrita: <ul>@bad_dirs@.</ul> </b>
   <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um
   destes direct&oacute;rios. O procedimento est&aacute; explicado em detalhe no manual de instala&ccedil;&atilde;o.

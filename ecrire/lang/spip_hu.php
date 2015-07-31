@@ -199,14 +199,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Bevezet&eacute;s: <b>Hozz&aacute;f&eacute;r&eacute;si jogok be&aacute;ll&iacute;t&aacute;sa</b>',
 'dirs_probleme_droits' => 'Jogosults&aacute;gi hiba',
 'dirs_repertoires_absents' => 'A k&ouml;vetkez&#337; mapp&aacute;k nem tal&aacute;lhat&oacute;k&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Ez val&oacute;sz&iacute;n&uuml;leg egy nagy-, kisbet&#369;s probl&eacute;ma.
+  <p>Ez val&oacute;sz&iacute;n&uuml;leg egy nagy-, kisbet&#369;s probl&eacute;ma.
   Ellen&#337;rizze, hogy a fenti mapp&aacute;k nagy-, &eacute;s kisbet&#369;i megfelelnek annak, ami feljebb megjelent
   ; ha m&eacute;gsem, FTP szoftver&eacute;vel nevezze &aacute;t a mapp&aacute;kat.
-  <p />Ha megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fog',
+  </p><p>Ha megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fog</p>',
 'dirs_repertoires_suivants' => '<b>A k&ouml;vetkez&#337; mapp&aacute;kra nincs &iacute;r&aacute;si jogosults&aacute;ga&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Annak jav&iacute;t&aacute;s&aacute;ra, haszn&aacute;lja az FTP kliens&eacute;t ahhoz, hogy be&aacute;ll&iacute;tsa minden mapp&aacute; hozz&aacute;f&eacute;r&eacute;si jogait
+  <p>Annak jav&iacute;t&aacute;s&aacute;ra, haszn&aacute;lja az FTP kliens&eacute;t ahhoz, hogy be&aacute;ll&iacute;tsa minden mapp&aacute; hozz&aacute;f&eacute;r&eacute;si jogait
   Az elj&aacute;r&aacute;s r&eacute;szletesen van magyar&aacute;zva a telep&iacute;t&eacute;si k&eacute;zik&ouml;nyvben.
-  <p />A megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fogja', # MODIF
+  </p><p>A megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fogja</p>', # MODIF
 'double_occurrence' => 'K&eacute;t el&#337;fordul&aacute;s', # MODIF
 
 // E

@@ -204,9 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  ; sinon, f&ograve;k w rele yon l&ograve;t fwa tout repertwar sa-yo nan ou logisy&egrave;l FTP pou korij er&egrave;-a.</p>
   <p>Kan laf&egrave; ke fini, w ke kapab',
 'dirs_repertoires_suivants' => '<b>Pa posib ekri sou rep&egrave;twa sa-yo&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
+  <p>Pou swen bagay-la, ann itilize logisy&egrave;l FTP ou pou don drwa laks&eacute; chak
  rep&egrave;twa. Guid lenstalasyon ap di kouman w ke kapab f&egrave; bagay-la.
-  <p />Kan w ke fini w ke kapab', # MODIF
+  </p><p>Kan w ke fini w ke kapab</p>', # MODIF
 'double_occurrence' => 'Double occurrence', # MODIF
 
 // E

@@ -199,17 +199,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Pendahuluan: <b>Mengatur hak akses</b>',
 'dirs_probleme_droits' => 'Masalah dalam hak akses',
 'dirs_repertoires_absents' => '<b>Direktori-direktori berikut tidak ditemukan: <ul>@bad_dirs@.</ul> </b>
-  <p />Kemungkinan penyebabnya adalah penggunaan huruf besar atau kecil.
+  <p>Kemungkinan penyebabnya adalah penggunaan huruf besar atau kecil.
   Pastikan bahwasanya huruf besar dan kecil dari direktori ini sesuai dengan yang ditampilkan
   di atas; jika tidak, ubah nama direktori menggunakan klien FTP untuk memperbaiki kesalahan.
-  <p />Setelah ini selesai, anda dapat',
+  </p><p>Setelah ini selesai, anda dapat</p>',
 'dirs_repertoires_suivants' => '<b>Direktori-direktori berikut tidak memiliki hak akses tulis: <ul>@bad_dirs@.</ul> </b>
 
-  <p />Untuk menggantinya, gunakan klien FTP anda untuk menset hak akses setiap
+  <p>Untuk menggantinya, gunakan klien FTP anda untuk menset hak akses setiap
 
   direktori tersebut. Prosedur secara rinci dapat dilihat di manual instalasi.
 
-  <p />Setelah anda selesai melakukannya, anda dapat ',
+  </p><p>Setelah anda selesai melakukannya, anda dapat </p>',
 'double_occurrence' => 'Entri ganda', # MODIF
 
 // E

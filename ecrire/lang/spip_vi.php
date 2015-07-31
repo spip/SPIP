@@ -199,14 +199,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Ti&ecirc;n kh&#7903;i: <b>Thi&#7871;t k&#7871; quy&#7873;n h&#7841;n ra/v&ocirc;</b>',
 'dirs_probleme_droits' => 'C&oacute; v&#7845;n &#273;&#7873; v&#7899;i quy&#7873;n h&#7841;n ra/v&ocirc;',
 'dirs_repertoires_absents' => '<b>Kh&ocirc;ng t&igrave;m th&#7845;y c&aacute;c ng&#259;n ch&#7913;a sau &#273;&acirc;y: <ul>@bad_dirs@.</ul> </b>
-  <p />C&oacute; th&#7875; l&agrave; v&igrave; kh&aacute;c bi&#7879;t ch&#7919; th&#432;&#7901;ng, ch&#7919; HOA.
+  <p>C&oacute; th&#7875; l&agrave; v&igrave; kh&aacute;c bi&#7879;t ch&#7919; th&#432;&#7901;ng, ch&#7919; HOA.
   Xin xem l&#7841;i c&aacute;ch &#273;&aacute;nh v&#7847;n t&ecirc;n c&aacute;c ng&#259;n ch&#7913;a n&agrave;y cho &#273;&uacute;ng.
   N&#7871;u c&#7847;n ph&#7843;i s&#7917;a, d&ugrave;ng FTP &#273;&#7875; s&#7917;a.
-  <p />Sau &#273;&oacute;, b&#7841;n c&oacute; th&#7875;', # MODIF
+  </p><p>Sau &#273;&oacute;, b&#7841;n c&oacute; th&#7875;</p>', # MODIF
 'dirs_repertoires_suivants' => '<b>Nh&#7919;ng ng&#259;n sau &#273;&acirc;y kh&ocirc;ng &#273;&#432;&#7907;c ph&eacute;p Vi&#7871;t: <ul>@bad_dirs@.</ul> </b>
 
-<p/>&#272;&#7875; thay &#273;&#7893;i, d&ugrave;ng FTP v&agrave;o thay &#273;&#7893;i quy&#7873;n h&#7841;n ra/v&ocirc; c&#7911;a t&#7915;ng ng&#259;n. Th&#7875; th&#7913;c n&agrave;y c&oacute; ghi trong c&#7849;m nang s&#7917; d&#7909;ng.
-<p/>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;', # MODIF
+<p>&#272;&#7875; thay &#273;&#7893;i, d&ugrave;ng FTP v&agrave;o thay &#273;&#7893;i quy&#7873;n h&#7841;n ra/v&ocirc; c&#7911;a t&#7915;ng ng&#259;n. Th&#7875; th&#7913;c n&agrave;y c&oacute; ghi trong c&#7849;m nang s&#7917; d&#7909;ng.
+</p><p>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;</p>', # MODIF
 'double_occurrence' => 'Hai l&#7847;n', # MODIF
 
 // E
