@@ -670,19 +670,21 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 
 	if ($crit->not) $where = array("'NOT'", $where);
 
-	 // inserer la condition (cf {lang?})
-
-	$boucles[$idb]->where[]= (!$crit->cond ? $where :
-	  array("'?'",
-		calculer_argument_precedent($idb, $col, $boucles),
-		$where,
-		"''"));
+	// inserer la condition (cf {lang?})
+	// traiter a part la date, elle est mise d'office par SPIP,
+	if ($crit->cond) {
+		if (tester_param_date('articles', $col))
+		  $pred = '@$Pile["env"][\'' . $col ."']";
+		else $pred = calculer_argument_precedent($idb, $col, $boucles);
+		$where = array("'?'", $pred, $where,"''");
+	}
+	$boucles[$idb]->where[]= $where;
 }
 
 // http://doc.spip.org/@calculer_critere_infixe
 function calculer_critere_infixe($idb, &$boucles, $crit) {
 
-	global $table_date, $table_criteres_infixes;
+	global $table_criteres_infixes;
 	global $exceptions_des_jointures, $exceptions_des_tables;
 
 	$boucle = &$boucles[$idb];
@@ -713,14 +715,10 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	}
 
 	// Cas particulier : expressions de date
-	else if (isset($table_date[$type])
-	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
-	$col, $regs)) {
+	else if ($regs = tester_param_date($boucle->type_requete, $col)) {
 		list($col, $table) =
 		calculer_critere_infixe_date($idb, $boucles, $regs);
-	}
-
-	else  {
+	} else {
 		if (@!array_key_exists($col, $desc['field'])) {
 	  	$calculer_critere_externe = 'calculer_critere_externe_init';
 			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
@@ -773,6 +771,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	return array($arg, $op, $val, $col_alias);
 }
+
 
 // Faute de copie du champ id_secteur dans la table des forums,
 // faut le retrouver par jointure
@@ -1022,7 +1021,13 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	      // de la boucle superieure
 	      else if ($val == 'id_enfant')
 		$val = 'id_parent';
-	      $val = array(kwote(calculer_argument_precedent($idb, $val, $boucles)));
+	// un critere conditionnel sur date est traite a part
+	// car la date est mise d'office par SPIP, 
+	// il faut 
+	      if ($crit->cond AND tester_param_date('articles', $col))
+		  $val ='@$Pile["env"][\'' . $col ."']";
+	      else $val = calculer_argument_precedent($idb, $val, $boucles);
+	      $val = array(kwote($val));
 	    }
 	  } else {
 	    // comparaison explicite
@@ -1214,5 +1219,12 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
-
+function tester_param_date($type, $col)
+{
+	global $table_date;
+	if (isset($table_date[$type]) 
+	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs))
+	  return $regs;
+	else return false;
+}
 ?>
