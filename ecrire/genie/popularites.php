@@ -80,4 +80,3 @@ function genie_popularites_dist($t) {
 }
 
 ?>
-
