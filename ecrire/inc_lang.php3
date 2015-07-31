@@ -12,7 +12,7 @@ function ecrire_cache_lang($lang, $module) {
 	include_ecrire('inc_filtres.php3');
 
 	$fichier_lang = $module.'_'.$lang.'.php3';
-	if ($t = @fopen('CACHE/lang_'.$fichier_lang.'_'.getmypid(), "wb")) {
+	if ($t = @fopen('CACHE/lang_'.$fichier_lang.'_'.@getmypid(), "wb")) {
 		@fwrite($t, "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n");
 		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
 			@fwrite($t, "\$GLOBALS['i18n_".$module."_$lang'] = array(\n");
@@ -31,7 +31,7 @@ function ecrire_cache_lang($lang, $module) {
 		}
 		@fwrite($t, "\n\n?".">\n");
 		@fclose($t);
-		@rename('CACHE/lang_'.$fichier_lang.'_'.getmypid(), 'CACHE/lang_'.$fichier_lang);
+		@rename('CACHE/lang_'.$fichier_lang.'_'.@getmypid(), 'CACHE/lang_'.$fichier_lang);
 	}
 }
 

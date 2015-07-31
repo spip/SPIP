@@ -72,10 +72,11 @@ function lire_meta_maj($nom) {
 	}
 	$s .= '?'.'>';
 
-	$f = @fopen(($flag_ecrire ? "" : "ecrire/") . "data/inc_meta_cache.php3", "wb");
+	$f = @fopen(($flag_ecrire ? "" : "ecrire/") . "data/inc_meta_cache.php3".@getmypid(), "wb");
 	if ($f) {
-		fputs($f, $s);
-		fclose($f);
+		@fputs($f, $s);
+		@fclose($f);
+		@rename("data/inc_meta_cache.php3".@getmypid(), "data/inc_meta_cache.php3");
 	} else {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')
