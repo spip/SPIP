@@ -231,7 +231,7 @@ function spip_mysql_optimize($table, $serveur='',$requeter=true){
 /**
  * Retourne une explication de requête (Explain) MySQL
  * 
- * @param string $squery   Texte de la requête
+ * @param string $query    Texte de la requête
  * @param string $serveur  Nom de la connexion
  * @param bool $requeter   inutilisé
  * @return array           Tableau de l'explication
@@ -589,7 +589,7 @@ function _mysql_remplacements_definitions_table($query){
 /**
  * Crée une base de données MySQL
  *
- * @param string $nom      Nom de la base (sans l'extension de fichier)
+ * @param string $nom      Nom de la base
  * @param string $serveur  Nom de la connexion
  * @param bool   $requeter Exécuter la requête, sinon la retourner
  * @return bool true si la base est créee.
@@ -696,15 +696,23 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
-// Recupere la definition d'une table ou d'une vue MySQL
-// colonnes, indexes, etc.
-// au meme format que la definition des tables de SPIP
-// http://doc.spip.org/@spip_mysql_showtable
 /**
- * @param $nom_table
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Obtient la description d'une table ou vue MySQL
+ *
+ * Récupère la définition d'une table ou d'une vue avec colonnes, indexes, etc.
+ * au même format que la définition des tables SPIP, c'est à dire
+ * un tableau avec les clés
+ *
+ * - `field` (tableau colonne => description SQL) et
+ * - `key` (tableau type de clé => colonnes)
+ * 
+ * @param string $nom_table  Nom de la table SQL
+ * @param string $serveur    Nom de la connexion
+ * @param bool $requeter     Exécuter la requête, sinon la retourner
+ * @return array|string
+ *     - chaîne vide si pas de description obtenue
+ *     - string Texte de la requête si demandé
+ *     - array description de la table sinon
  */
 function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 {
@@ -774,40 +782,49 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	return "";
 }
 
-//
-// Recuperation des resultats
-//
-
-// http://doc.spip.org/@spip_mysql_fetch
 /**
- * @param $r
- * @param string $t
- * @param string $serveur
- * @param bool $requeter
- * @return array
+ * Rècupère une ligne de résultat
+ *
+ * Récupère la ligne suivante d'une ressource de résultat
+ * 
+ * @param Ressource $r     Ressource de résultat (issu de sql_select)
+ * @param string $t        Structure de résultat attendu (défaut MYSQL_ASSOC)
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Inutilisé
+ * @return array           Ligne de résultat
  */
 function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
 	if (!$t) $t = MYSQL_ASSOC;
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
+/**
+ * Place le pointeur de résultat sur la position indiquée
+ *
+ * @param Ressource $r     Ressource de résultat
+ * @param int $row_number  Position. Déplacer le pointeur à cette ligne
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Inutilisé
+ * @return bool True si déplacement réussi, false sinon.
+**/
 function spip_mysql_seek($r, $row_number, $serveur='',$requeter=true) {
 	if ($r and mysql_num_rows($r)) return mysql_data_seek($r,$row_number);
 }
 
 
-// http://doc.spip.org/@spip_mysql_countsel
 /**
-
- * @param array $from
- * @param array $where
- * @param string $groupby
- * @param array $having
- * @param string $serveur
- * @param bool $requeter
- * @return array|int|null|resource|string
+ * Retourne le nombre de lignes d'une sélection
  *
- */
+ * @param array|string $from     Tables à consulter (From)
+ * @param array|string $where    Conditions a remplir (Where)
+ * @param array|string $groupby  Critère de regroupement (Group by)
+ * @param array $having          Tableau des des post-conditions à remplir (Having)
+ * @param string $serveur        Nom de la connexion
+ * @param bool $requeter         Exécuter la requête, sinon la retourner
+ * @return int|string
+ *     - String Texte de la requête si demandé
+ *     - int Nombre de lignes (0 si la requête n'a pas réussie)
+**/
 function spip_mysql_countsel($from = array(), $where = array(),
 			     $groupby = '', $having = array(), $serveur='',$requeter=true)
 {
@@ -822,15 +839,20 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	return $c;
 }
 
-// Bien specifier le serveur auquel on s'adresse,
-// mais a l'install la globale n'est pas encore completement definie
-// http://doc.spip.org/@spip_mysql_error
 /**
+ * Retourne la dernière erreur generée
+ *
+ * @note
+ *   Bien spécifier le serveur auquel on s'adresse,
+ *   mais à l'install la globale n'est pas encore complètement définie.
+ * 
  * @param string $query
+ *     Requête qui était exécutée
  * @param string $serveur
- * @param bool $requeter
+ *     Nom de la connexion
  * @return string
- */
+ *     Erreur eventuelle
+ **/
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 	$s = $link ? mysql_error($link) : mysql_error();
@@ -838,13 +860,16 @@ function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	return $s;
 }
 
-// A transposer dans les portages
-// http://doc.spip.org/@spip_mysql_errno
 /**
+ * Retourne le numero de la dernière erreur SQL
+ *
  * @param string $serveur
+ *     Nom de la connexion
  * @param bool $requeter
+ *     Inutilisé
  * @return int
- */
+ *     0, pas d'erreur. Autre, numéro de l'erreur.
+ **/
 function spip_mysql_errno($serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 	$s = $link ? mysql_errno($link) : mysql_errno();
@@ -856,25 +881,30 @@ function spip_mysql_errno($serveur='',$requeter=true) {
 	return $s;
 }
 
-// Interface de abstract_sql
-// http://doc.spip.org/@spip_mysql_count
 /**
- * @param $r
- * @param string $serveur
- * @param bool $requeter
- * @return int
+ * Retourne le nombre de lignes d’une ressource de sélection obtenue
+ * avec `sql_select()`
+ * 
+ * @param Ressource $r       Ressource de résultat
+ * @param string $serveur    Nom de la connexion
+ * @param bool $requeter     Inutilisé
+ * @return int               Nombre de lignes
  */
 function spip_mysql_count($r, $serveur='',$requeter=true) {
 	if ($r)	return mysql_num_rows($r);
 }
 
 
-// http://doc.spip.org/@spip_mysql_free
 /**
- * @param $r
- * @param string $serveur
- * @param bool $requeter
- * @return bool
+ * Libère une ressource de résultat
+ *
+ * Indique à MySQL de libérer de sa mémoire la ressoucre de résultat indiquée
+ * car on n'a plus besoin de l'utiliser.
+ * 
+ * @param Ressource $r       Ressource de résultat
+ * @param string $serveur    Nom de la connexion
+ * @param bool $requeter     Inutilisé
+ * @return bool              True si réussi
  */
 function spip_mysql_free($r, $serveur='',$requeter=true) {
 	return (is_resource($r)?mysql_free_result($r):false);
