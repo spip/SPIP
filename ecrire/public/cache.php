@@ -182,9 +182,6 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 function determiner_cache(&$use_cache, $contexte, $fond) {
 
-	// tester si la base est dispo
-	spip_connect();
-
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$use_cache = -1;
@@ -203,10 +200,14 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
-	if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok']) {
-		include_spip('inc/meta');
-		lire_metas();
-		retire_caches($chemin_cache);
+	if ($GLOBALS['meta']['invalider']) {
+		// tester si la base est dispo
+		spip_connect();
+		if ($GLOBALS['db_ok']) {
+			include_spip('inc/meta');
+			lire_metas();
+			retire_caches($chemin_cache);
+		}
 	}
 
 	// cas sans jamais de cache pour raison interne
@@ -223,6 +224,9 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $time);
 
 	if (!$use_cache AND $ok) return array($chemin_cache, $page, $time);
+
+	// tester si la base est dispo
+	spip_connect();
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!$GLOBALS['db_ok']) {
