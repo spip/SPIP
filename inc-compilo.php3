@@ -98,8 +98,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	// Cas {1/3} {1,4} {n-2,1}...
 
-	$flag_cpt = $boucle->mode_partie || // pas '$compteur' a cause du cas 0
-	  strpos($return,'compteur_boucle');
+	$flag_cpt = $boucle->mode_partie ||$boucle->cptrows;
 
 	//
 	// Creer le debut du corps de la boucle :
