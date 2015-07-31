@@ -7,17 +7,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	<meta name="robots" content="none" />
 	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 
 	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
 	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'impression -->
 	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
-
-	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 </head>
 
 <body>
@@ -49,7 +48,7 @@
                 <ol>
                     <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {0,10}>
                     <li class="extrait">
-                    <h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+                    <h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
                     <small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
                     </li>
                     </BOUCLE_articles>
