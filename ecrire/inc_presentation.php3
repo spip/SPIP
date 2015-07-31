@@ -937,7 +937,7 @@ function debut_html($titre = "") {
 	@Header("Pragma: no-cache");
 	@Header("Content-Type: text/html; charset=$charset");
 
-	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n<head>\n<html>\n<title>[$nom_site_spip] $titre</title>\n";
+	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
@@ -951,6 +951,7 @@ function debut_html($titre = "") {
 	afficher_script_layer();
 ?>
 <script type='text/javascript'><!--
+
 function changeclass(objet, myClass)
 {
 		objet.className = myClass;
@@ -959,6 +960,10 @@ function changesurvol(iddiv, myClass)
 {
 		document.getElementById(iddiv).className = myClass;
 }
+
+
+
+
 //--></script>
 </head>
 <?php
