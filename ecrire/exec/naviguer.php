@@ -72,7 +72,7 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 	echo infos_naviguer($id_rubrique, $statut, $row);
 
 	$iconifier = charger_fonction('iconifier', 'inc');
-	echo $iconifier('id_rubrique', $id_rubrique, 'naviguer', false, $flag_editable);
+	echo $iconifier('rubrique', $id_rubrique, 'naviguer', false, $flag_editable);
 
 
 	echo pipeline('afficher_config_objet',array('args'=>array('type'=>'rubrique','id'=>$id_rubrique),'data'=>''));

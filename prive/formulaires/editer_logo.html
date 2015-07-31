@@ -11,6 +11,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		[(#REM) un submit pour attraper la touche entree]
 	  <div style="display:none;"><input type='submit' class='submit' value='<:bouton_telecharger:>' /></div>
+	]
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 			[(#ENV{logo_on}|oui)
@@ -19,15 +20,17 @@
 					#SET{largeur,#ENV{logo_on}|largeur}
 					#SET{hauteur,#ENV{logo_on}|hauteur}
 					<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
-					[(#ENV{logo_off}|non)
+					[(#ENV{logo_off}|non|et{#ENV{editable}})
 						<input type='submit' class='submit supprimer' id="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_on" value='<:lien_supprimer|ucfirst|attribut_html:>' />
 					]
 				</div>
-			][(#ENV{logo_on}|non)
-				<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
-				]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{15})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
-				#SET{valider,' '}
+			][(#ENV{editable})
+				[(#ENV{logo_on}|non)
+					<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_on})</span>
+					]<input type='file' class='file' name='logo_on' size="[(#ENV{_options}|table_valeur{size_input}|sinon{15})]" id='logo_on_#ENV{objet}_#ENV{id_objet}' value="" />
+					#SET{valider,' '}
+				]
 			]
 	    </li>
 		[(#ENV{logo_survol}|ou{#ENV{logo_off}}|oui)
@@ -39,23 +42,28 @@
 					#SET{largeur,#ENV{logo_off}|largeur}
 					#SET{hauteur,#ENV{logo_off}|hauteur}
 					<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
+					[(#ENV{editable})
 					<input type='submit' class='submit supprimer' id="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_off" value='<:lien_supprimer|ucfirst|attribut_html:>' />
+					]
 				</div>
-			][(#ENV{logo_off}|non)
-				<div [(#ENV**{erreurs}|table_valeur{logo_off}|non)
-					class="ajouter_survol"><a href="#" onclick="jQuery(this).parent().siblings().show().parents('form').find('.boutons').show();return false;"><:logo_survol:></a></div>
-				<div style="display:none;" #SET{hide,' '}]>
-				<label for="logo_off"><:info_telecharger_nouveau_logo:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
-				]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
-				#SET{valider,' '}
-				</div>
+			][(#ENV{editable})
+				[(#ENV{logo_off}|non)
+					<div [(#ENV**{erreurs}|table_valeur{logo_off}|non)
+						class="ajouter_survol"><a href="#" onclick="jQuery(this).parent().siblings().show().parents('form').find('.boutons').show();return false;"><:logo_survol:></a></div>
+					<div style="display:none;" #SET{hide,' '}]>
+					<label for="logo_off"><:info_telecharger_nouveau_logo:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{logo_off})</span>
+					]<input type='file' class='file' name='logo_off' size="15" id='logo_off_#ENV{objet}_#ENV{id_objet}' value="" />
+					#SET{valider,' '}
+					</div>
+				]
 			]
 	    </li>
 		]
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
+	[(#ENV{editable})
 		[(#GET{valider})
 	  <p class="boutons"[(#GET{hide})style='display:none;']><input type='submit' class='submit' value='<:bouton_telecharger:>' /></p>
 		]
