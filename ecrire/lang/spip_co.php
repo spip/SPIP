@@ -355,7 +355,7 @@ sera ignorée) :
 'info_contenance' => 'Stu situ cuntene :',
 'info_contribution' => 'contributi di foru', # MODIF
 'info_copyright' => '@spip@ hè un prugrammu lìberu distribuitu @lien_gpl@.',
-'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
+'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'sottu licenza GPL',
 'info_cours_edition' => 'I vostri artìculi in corsu di scrittura',
 'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu :',
@@ -506,7 +506,7 @@ sera ignorée) :
 'login_espace_prive' => 'spaziu privatu',
 'login_identifiant_inconnu' => 'Hè scunnisciutu u còdice « @login@ ».',
 'login_login' => 'Login :',
-'login_login2' => 'Login (còdice di cunnessione à u situ) :',
+'login_login2' => 'Login (còdice di cunnessione à u situ) :', # MODIF
 'login_login_pass_incorrect' => '(Login o password sbagliatu.)',
 'login_motpasseoublie' => 'password dimenticatu ?',
 'login_non_securise' => 'Attenti, stu furmulariu ùn hè micca sicurizatu.

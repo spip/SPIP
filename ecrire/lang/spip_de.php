@@ -349,9 +349,9 @@ wird Ihre Adresse beibehalten):
 'info_connexion_refusee' => 'Die Verbindung wurde verweigert.',
 'info_contact_developpeur' => 'Bitte kontaktieren Sie einen der Entwickler.',
 'info_contenance' => 'Diese Website enthält:',
-'info_contribution' => 'Forumsbeiträge', # MODIF
+'info_contribution' => 'Beiträge',
 'info_copyright' => '@spip@ ist freie Software im Sinne der @lien_gpl@.',
-'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.',
+'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.', # MODIF
 'info_copyright_gpl' => 'GNU Public License',
 'info_cours_edition' => 'In Bearbeitung',
 'info_creer_repertoire' => 'Bitte legen Sie eine Datei oder ein Verzeichnis mit diesem Namen an: ',
@@ -500,7 +500,7 @@ wird Ihre Adresse beibehalten):
 'login_espace_prive' => 'Redaktionssystem',
 'login_identifiant_inconnu' => 'Benutzer «@login@» unbekannt.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (für diese Website):',
+'login_login2' => 'Login (für diese Website):', # MODIF
 'login_login_pass_incorrect' => '(Login oder Passwort falsch.)',
 'login_motpasseoublie' => 'Passwort vergessen?',
 'login_non_securise' => 'Achtung, dieses Formular ist nicht abgesichert. Wenn Sie sicher stellen wollen, dass Ihr Passwort nicht im Netzwerk mitgehört werden kann, aktivieren Sie bitte Javascript und',

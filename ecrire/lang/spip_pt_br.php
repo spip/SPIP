@@ -348,7 +348,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'info_contenance' => 'Este site contém:',
 'info_contribution' => 'contribuições de fórum', # MODIF
 'info_copyright' => '@spip@ é um software livre distribuído @lien_gpl@.',
-'info_copyright_doc' => 'Para mais informações, veja o site <a href="@spipnet@">http://www.spip.net/</a>.',
+'info_copyright_doc' => 'Para mais informações, veja o site <a href="@spipnet@">http://www.spip.net/</a>.', # MODIF
 'info_copyright_gpl' => 'sob licença GPL',
 'info_cours_edition' => 'Em fase de redação',
 'info_creer_repertoire' => 'Por favor, crie um arquivo ou diretório com o nome:',
@@ -497,7 +497,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'login_espace_prive' => 'espaço privado',
 'login_identifiant_inconnu' => 'O identificador « @login@ » não está cadastrado.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificador para conexão ao site):',
+'login_login2' => 'Login (identificador para conexão ao site):', # MODIF
 'login_login_pass_incorrect' => '(Login ou senha incorreta.)',
 'login_motpasseoublie' => 'esqueceu sua senha?',
 'login_non_securise' => 'Atenção, este formulário não é seguro.

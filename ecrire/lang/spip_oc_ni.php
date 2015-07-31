@@ -354,7 +354,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'info_contenance' => 'Aqueu sit compren :',
 'info_contribution' => 'contribucions de fòro', # MODIF
 'info_copyright' => 'es un logiciau liure distribuit @lien_gpl@.',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.',
+'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
 'info_copyright_gpl' => 'sota licença GPL',
 'info_cours_edition' => 'Lu voastres articles en cors de redacion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier ò un repertòri nomat',
@@ -503,7 +503,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'login_espace_prive' => 'espaci privat',
 'login_identifiant_inconnu' => 'L\'identificant « @login@ » es desconoissut.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (identificant de connexion au sit) :',
+'login_login2' => 'Login (identificant de connexion au sit) :', # MODIF
 'login_login_pass_incorrect' => '(Login ò mòt de santa Clara incorret.)',
 'login_motpasseoublie' => 'mòt de Santa Clara oblidat ?',
 'login_non_securise' => 'Mèfi, qu\'aqueu formulari es pas securisat.

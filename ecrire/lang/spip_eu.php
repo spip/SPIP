@@ -351,7 +351,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'info_contenance' => 'Gune honek duena :',
 'info_contribution' => 'foroko ekarpenak', # MODIF
 'info_copyright' => '@spip@ software librea da, @lien_gpl@ banatua.',
-'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.',
+'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.', # MODIF
 'info_copyright_gpl' => 'GPL lizentziarekin',
 'info_cours_edition' => 'Bukatu gabe utzi dituzun artikuluak',
 'info_creer_repertoire' => 'Fitxategi edo karpeta bat sortu behar duzu, eta hari izen hau jarri :',
@@ -501,7 +501,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'login_espace_prive' => 'eremu pribatua',
 'login_identifiant_inconnu' => '«@login@» identifikatzailea ezezaguna da.',
 'login_login' => 'Identifikatzailea :',
-'login_login2' => 'Login (gunerako konexio-identifikatzailea):',
+'login_login2' => 'Login (gunerako konexio-identifikatzailea):', # MODIF
 'login_login_pass_incorrect' => '(Identifikatzaile edo pasahitz okerra.)',
 'login_motpasseoublie' => 'Pasahitza ahaztuta?',
 'login_non_securise' => 'Kontuz, inprimaki hau ez da segurtatua.

@@ -501,7 +501,7 @@ the address below. (Otherwise your request will be ignored.):
 'login_espace_prive' => 'privát rész',
 'login_identifiant_inconnu' => 'A « @login@ » azonosító ismeretlen.',
 'login_login' => 'Login :',
-'login_login2' => 'Login (honlaphoz való csatlakozási azonosító) :',
+'login_login2' => 'Login (honlaphoz való csatlakozási azonosító) :', # MODIF
 'login_login_pass_incorrect' => '(Érvénytelen login vagy jelszó.)',
 'login_motpasseoublie' => 'a jelszót elfelejtette ?',
 'login_non_securise' => 'Vigyázat, az űrlap nem biztonságos.

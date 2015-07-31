@@ -355,7 +355,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contenance' => 'Этот сайт содержит:',
 'info_contribution' => 'вложения в форум', # MODIF
 'info_copyright' => '@spip@ - это свободно распространяемое программное обеспечение. @lien_gpl@.',
-'info_copyright_doc' => 'Подробная информация, см. <a href="@spipnet@">http://www.spip.net/ru</a>.',
+'info_copyright_doc' => 'Подробная информация, см. <a href="@spipnet@">http://www.spip.net/ru</a>.', # MODIF
 'info_copyright_gpl' => 'Лицензия GPL.',
 'info_cours_edition' => 'Ваши статьи в процессе редактирования (ещё не опубликованы)',
 'info_creer_repertoire' => 'Пожалуйста создайте файл или директорию с названием:',
@@ -505,7 +505,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'login_espace_prive' => 'административная часть',
 'login_identifiant_inconnu' => 'Логин "@login@" неизвестен.',
 'login_login' => 'Логин:',
-'login_login2' => 'Логин (имя для входа на сайт):',
+'login_login2' => 'Логин (имя для входа на сайт):', # MODIF
 'login_login_pass_incorrect' => '(Неправильный логин или пароль).',
 'login_motpasseoublie' => 'забыли пароль?',
 'login_non_securise' => 'Внимание, эта форма не безопасна 

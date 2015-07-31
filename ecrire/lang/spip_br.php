@@ -352,7 +352,7 @@ sera ignorée) :
 'info_contenance' => 'El lec\'hienn-mañ ez eus :',
 'info_contribution' => 'kemennadenn er forom', # MODIF
 'info_copyright' => 'Ur meziant dieub eo @spip@, dasparzhet @lien_gpl@.',
-'info_copyright_doc' => 'Evit titouroù ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.',
+'info_copyright_doc' => 'Evit titouroù ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'dindan aotre implijout GPL',
 'info_cours_edition' => 'Ar pennadoù emaoc\'h o skrivañ',
 'info_creer_repertoire' => 'Krouit ur restr pe ur c\'havlec\'h anvet :',
@@ -501,7 +501,7 @@ sera ignorée) :
 'login_espace_prive' => 'lodenn brevez',
 'login_identifiant_inconnu' => 'N\'eo ket anavezet ar c\'hoad anaout « @login@ ».',
 'login_login' => 'Kod kevreañ :',
-'login_login2' => 'Kod kevreañ (kod anaout evit kevreañ ouzh al lec\'hienn) :',
+'login_login2' => 'Kod kevreañ (kod anaout evit kevreañ ouzh al lec\'hienn) :', # MODIF
 'login_login_pass_incorrect' => '(direizh eo ar c\'hod kevreañ pe ar ger-tremen)',
 'login_motpasseoublie' => 'ankouaet ho ker-tremen ganeoc\'h ?',
 'login_non_securise' => 'Diwallit, n\'eo ket suraet ar furmskrid-mañ.

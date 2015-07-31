@@ -505,7 +505,7 @@ sera ignorée) :
 'login_espace_prive' => 'лична зона',
 'login_identifiant_inconnu' => 'Непознат потребител @login@.',
 'login_login' => 'Вход:',
-'login_login2' => 'Вход (потребителско име за свързване със сайта):',
+'login_login2' => 'Вход (потребителско име за свързване със сайта):', # MODIF
 'login_login_pass_incorrect' => '(Погрешно потребителско име или парола).',
 'login_motpasseoublie' => 'забравена парола?',
 'login_non_securise' => 'Внимание! Тази форма не е защитена.

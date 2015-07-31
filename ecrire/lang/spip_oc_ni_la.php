@@ -503,7 +503,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 'login_espace_prive' => 'espaci privat',
 'login_identifiant_inconnu' => 'L\'identificant «@login@» es inconegut.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificant de connexion au sit):',
+'login_login2' => 'Login (identificant de connexion au sit):', # MODIF
 'login_login_pass_incorrect' => '(Login ò mot de santa Clara incorrècte.)',
 'login_motpasseoublie' => 'mot de santa Clara oblidat?',
 'login_non_securise' => 'Atencion, aqueu formulari non es securizat.

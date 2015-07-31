@@ -492,7 +492,7 @@ sera ignorée) :
 'login_espace_prive' => 'tɛnkánɖòfí',
 'login_identifiant_inconnu' => 'Yè tùn « @login@ » Nyíkɔ̂ á .',
 'login_login' => 'Nyíkɔ̂  :',
-'login_login2' => 'Nyíkɔ̂ (identifiant de connexion au site) :',
+'login_login2' => 'Nyíkɔ̂ (identifiant de connexion au site) :', # MODIF
 'login_login_pass_incorrect' => '(Nyíkɔ kàbí càvì ɔ gbo vò.)',
 'login_motpasseoublie' => 'Yé nyɔ gbètákɛn ɔ ?',
 'login_non_securise' => ' Nyíkɔ kàbí càvì ɔ gbo vò Yé nyɔ gbètákɛn ɔ',

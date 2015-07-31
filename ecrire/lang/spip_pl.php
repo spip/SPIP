@@ -502,7 +502,7 @@ serwisie "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'obszar prywatny',
 'login_identifiant_inconnu' => 'Login « @login@ » nieznany.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identyfikator) :',
+'login_login2' => 'Login (identyfikator) :', # MODIF
 'login_login_pass_incorrect' => '(Zły login lub hasło).',
 'login_motpasseoublie' => 'zapomniałeś hasła?',
 'login_non_securise' => 'Uwaga ten formularz nie jest bezpieczny.

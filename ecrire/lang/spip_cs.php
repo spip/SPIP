@@ -502,7 +502,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'login_espace_prive' => 'neveřejná oblast',
 'login_identifiant_inconnu' => 'Identifikace "@login@" je neznámá.',
 'login_login' => 'Přihlášení:',
-'login_login2' => 'Přihlašovací údaje (identifikace pro připojení k těmto stránkám):',
+'login_login2' => 'Přihlašovací údaje (identifikace pro připojení k těmto stránkám):', # MODIF
 'login_login_pass_incorrect' => '(Nesprávné uživatelské jméno nebo heslo).',
 'login_motpasseoublie' => 'zapomněli jste heslo?',
 'login_non_securise' => 'POZOR! Tento formulář není zabezpečený.

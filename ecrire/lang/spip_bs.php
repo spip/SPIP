@@ -498,7 +498,7 @@ sera ignorée) :
 'login_espace_prive' => 'privatni prostor',
 'login_identifiant_inconnu' => 'Identifikator « @login@ » je nepoznat.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identifikator za prijavu na stranicu) :',
+'login_login2' => 'Login (identifikator za prijavu na stranicu) :', # MODIF
 'login_login_pass_incorrect' => '(Login ili lozinka nije ispravna.)',
 'login_motpasseoublie' => 'zaboravili ste lozinku?',
 'login_non_securise' => 'Oprez, ovaj formular nije siguran.

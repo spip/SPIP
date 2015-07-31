@@ -352,7 +352,7 @@ sera ignorée) :
 'info_contenance' => 'Dëse Site huet:',
 'info_contribution' => 'Beiträg an de Forum\'en', # MODIF
 'info_copyright' => '@spip@ ass eng fräi Software déi ënner @lien_gpl@ verdeelt gët.',
-'info_copyright_doc' => 'Fir méi Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
+'info_copyright_doc' => 'Fir méi Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.', # MODIF
 'info_copyright_gpl' => 'ënner GPL-Lizenz',
 'info_cours_edition' => 'Är Artikelen an der Aarbecht',
 'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat dësem Numm derbäi:',
@@ -501,7 +501,7 @@ oder kontaktéiert äre Provider.</span>',
 'login_espace_prive' => 'privaten Deel',
 'login_identifiant_inconnu' => 'De Login « @login@ » ass nët bekannt.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (Identifikatioun fir dëse Site):',
+'login_login2' => 'Login (Identifikatioun fir dëse Site):', # MODIF
 'login_login_pass_incorrect' => '(Login oder Passwuert falsch.)',
 'login_motpasseoublie' => 'Passwuert vergiess?',
 'login_non_securise' => 'Opgepasst, dëse Formulaire ass nët gesëchert.

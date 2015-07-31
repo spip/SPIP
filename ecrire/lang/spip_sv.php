@@ -346,7 +346,7 @@ För att bekräfta din nya adress måste du gå till
 'info_contenance' => 'Sajten innehåller:',
 'info_contribution' => 'bidrag till forumen', # MODIF
 'info_copyright' => '@spip@ är fri programvara och distribueras @lien_gpl@.',
-'info_copyright_doc' => 'För mer information, se (på engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => 'För mer information, se (på engelska)<a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'under GPL-licensen',
 'info_cours_edition' => 'Dina artiklar under bearbetning',
 'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',
@@ -495,7 +495,7 @@ För att bekräfta din nya adress måste du gå till
 'login_espace_prive' => 'privat del',
 'login_identifiant_inconnu' => 'loginnamnet "@login@" är okänt.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (loginnamn för sajten):',
+'login_login2' => 'Login (loginnamn för sajten):', # MODIF
 'login_login_pass_incorrect' => '(fel login eller lösenord).',
 'login_motpasseoublie' => 'bortglömt lösenord?',
 'login_non_securise' => 'Varning, detta formulär är inte säkert.

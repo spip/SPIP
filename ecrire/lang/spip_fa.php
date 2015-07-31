@@ -345,7 +345,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contenance' => ': اين سايت حاوى',
 'info_contribution' => 'پيام سخنگاه', # MODIF
 'info_copyright' => '@spip@ يك نرم افزار آزاد است  كه @lien_gpl@ توزيع شده.',
-'info_copyright_doc' => ' براى اطلاعات بيشتر مراجعه كنيد به سايت <a href="@spipnet@">http://www.spip.net/fa</a>.',
+'info_copyright_doc' => ' براى اطلاعات بيشتر مراجعه كنيد به سايت <a href="@spipnet@">http://www.spip.net/fa</a>.', # MODIF
 'info_copyright_gpl' => 'با مجوز GPL ',
 'info_cours_edition' => 'مقاله در حال نگارش',
 'info_creer_repertoire' => 'خواهشمند است كه يك فايل يا يك فهرست بنام  بسازيد: ',
@@ -493,7 +493,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'login_espace_prive' => 'قسمت شخصي',
 'login_identifiant_inconnu' => '« @login@ » كلمه شناسايى ناشناس است ',
 'login_login' => ': Login ',
-'login_login2' => 'Login (كلمه شناسايى براى وصل شدن به سايت است) :',
+'login_login2' => 'Login (كلمه شناسايى براى وصل شدن به سايت است) :', # MODIF
 'login_login_pass_incorrect' => '(يا كلمه شناسايى اشتباه است Login)',
 'login_motpasseoublie' => 'آيا كلمه ورود را فراموش كرديد؟',
 'login_non_securise' => ' توجه ! اين پرسشنامه ايمن نميباشد. اگر ميخواهيد كه كلمه ورودى تان روى شبكه توسط ديگران ديده نشود، خواهشمند است جاوا اسكريپت را بروى مرورگر تان فعال نمائيد',

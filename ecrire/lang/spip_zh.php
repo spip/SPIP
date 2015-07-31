@@ -504,7 +504,7 @@ sera ignorée) :
 'login_espace_prive' => '私有区',
 'login_identifiant_inconnu' => '标识符 "@login@" 不可认.',
 'login_login' => '登录:',
-'login_login2' => '登录(连接到站点的标识符):',
+'login_login2' => '登录(连接到站点的标识符):', # MODIF
 'login_login_pass_incorrect' => '(错误的登录和密码).',
 'login_motpasseoublie' => '忘记密码?',
 'login_non_securise' => '警告, 论坛不安全.

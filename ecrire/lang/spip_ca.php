@@ -348,7 +348,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'info_contenance' => 'Aquest lloc conté:',
 'info_contribution' => 'contribucions del fòrum', # MODIF
 'info_copyright' => '@spip@ és programari lliure distribuït @lien_gpl@.',
-'info_copyright_doc' => 'Per a més informació, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.',
+'info_copyright_doc' => 'Per a més informació, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.', # MODIF
 'info_copyright_gpl' => 'sota llicència GPL',
 'info_cours_edition' => 'Els vostres articles en procés de redacció',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
@@ -497,7 +497,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'login_espace_prive' => 'espai privat',
 'login_identifiant_inconnu' => 'L\'usuari « @login@ » és desconegut',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificador de connexió al lloc):',
+'login_login2' => 'Login (identificador de connexió al lloc):', # MODIF
 'login_login_pass_incorrect' => '(Login ou contrasenya incorretecte.)',
 'login_motpasseoublie' => 'contrasenya oblidada?',
 'login_non_securise' => 'Atenció, aquest formulari no és segur. Si no voleu que la vostra contrasenya pugui ser interceptada a la xarxa, activeu Javascript al vostre navegador i ',

@@ -354,7 +354,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'info_contenance' => 'Este web contén:',
 'info_contribution' => 'contribucións no foro', # MODIF
 'info_copyright' => '@spip@ é un programa libre distribuído @lien_gpl@.',
-'info_copyright_doc' => 'Para máis información, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.',
+'info_copyright_doc' => 'Para máis información, vaia a <a href="@spipnet@">http://www.spip.net/gl</a>.', # MODIF
 'info_copyright_gpl' => 'con licenza GPL',
 'info_cours_edition' => 'Os artigos en proceso de edición',
 'info_creer_repertoire' => 'Debe crear un ficheiro ou cartafol chamado :',
@@ -503,7 +503,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'login_espace_prive' => 'Espazo privado',
 'login_identifiant_inconnu' => 'O identificador « @login@ » é descoñecido.',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificador de conexión ao web):',
+'login_login2' => 'Login (identificador de conexión ao web):', # MODIF
 'login_login_pass_incorrect' => '(Login ou chave incorrectos.)',
 'login_motpasseoublie' => 'esqueceu a chave?',
 'login_non_securise' => 'Atención, este formulario non é seguro.
