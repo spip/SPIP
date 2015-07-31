@@ -153,7 +153,7 @@ function cron_invalideur($t) {
 
 	// A revoir: il semble y avoir une desynchro ici.
 	$s = spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')");
-	$t = spip_fetch_array($t);
+	$t = spip_fetch_array($s);
 	$total_cache = $t['n'];
 	spip_log("Taille du CACHE: $total_cache octets");
 
