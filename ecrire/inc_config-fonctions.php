@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_config.php3");
 
 function affiche_config_fonctions_dist()
 {

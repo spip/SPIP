@@ -16,7 +16,7 @@
 if (defined("_ECRIRE_INC_TEXTE")) return;
 define("_ECRIRE_INC_TEXTE", "1");
 
-include_ecrire("inc_filtres.php3");
+include_ecrire ("inc_filtres.php3");
 
 //
 // Initialisation de quelques variables globales

@@ -15,7 +15,9 @@
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
-include_ecrire("inc_texte.php3");
+include_ecrire("inc_presentation.php3"); // inclut inc_layer
+include_ecrire("inc_texte.php3"); // inclut inc_filtre
+
 charger_generer_url();
 
 function calendrier_dist($type, $css="")

@@ -16,7 +16,6 @@ include ("inc.php3");
 
 include_ecrire ("inc_import.php3");
 include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
