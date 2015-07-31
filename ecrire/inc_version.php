@@ -167,12 +167,12 @@ $dossier_squelettes = "";
 $filtrer_javascript = 0;
 // PS: dans les forums, petitions, flux syndiques... c'est *toujours* securise
 
-// Type d'URLs (SPIP3: géré par plugin-dist urls_etendues / surcharge possible par options)
-// 'page': spip.php?article123 [valeur par defaut]
-// 'html': article123.html
-// 'propres': Titre-de-l-article
-// 'propres2' : Titre-de-l-article.html (base sur 'propres')
-// 'arbo' : /article/Titre
+// Type d'URLs 
+// inc/utils.php sélectionne le type 'page' (spip.php?article123) en l'absence
+// d'autre configuration stockée en $GLOBALS['meta']['type_urls] 
+// Pour les autres types: voir urls_etendues 
+// $type_urls n'a plus de valeur par défaut en 3.1 mais permet de forcer une
+// configuration d'urls dans les fichiers d'options.
 
 #la premiere date dans le menu deroulant de date de publication
 # null: automatiquement (affiche les 8 dernieres annees)
