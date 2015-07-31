@@ -175,9 +175,11 @@ function update_index_tables(){
 	ecrire_metas();
 }
 function liste_index_tables(){
-  if (!isset($GLOBALS['meta']['index_table']))
-  	lire_metas();
-	$liste_tables = unserialize($GLOBALS['meta']['index_table']);
+    $liste_tables = array();
+    if (!isset($GLOBALS['meta']['index_table']))
+        lire_metas();
+    if (isset($GLOBALS['meta']['index_table']))
+        $liste_tables = unserialize($GLOBALS['meta']['index_table']);
 	return $liste_tables;
 }
 
