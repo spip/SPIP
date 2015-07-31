@@ -3,9 +3,9 @@
 /* --------------------------------------------------------- */
 
 
-/*  ------------------------------------------
-/* 	Typographie generale (style transversaux)
-/*  ------------------------------------------ */
+/* ------------------------------------------
+/* Typographie generale (style transversaux)
+/* ------------------------------------------ */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
 body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
 
@@ -16,26 +16,40 @@ h2 { font-size: 1.40em; font-weight: normal; }
 h2, h2 a, h2 a:hover { color: #000033; }
 h3 { font-size: 1.20em; font-weight: bold; }
 h3.spip {} /*Cf.: spip_style.css*/
-
-/* Divers */
 hr.spip {} /*Cf.: spip_style.css*/
+
+/* Autres enrichissements typo */
+strong { font-weight: bold; }
+em { font-style: italic; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.90em; color: #666; }
+dfn { font-weight: bold; color: #666; }
+del { text-decoration: line-through; }
+ins { color: red !important; text-decoration: none; }
+sup, sub { font-size: .8em; font-variant: normal; }
 
-/* Listes SPIP */
+/* Listes */
 ul.spip {} /*Cf.: spip_style.css*/
 ol.spip {} /*Cf.: spip_style.css*/
+dl {}
+dt {}
+dd {}
 
 /* Citations, code et poesie */
+cite {}
+q {}
+blockquote {}
 blockquote.spip {} /*Cf.: spip_style.css*/
 blockquote.spip_poesie {} /*Cf.: spip_style.css*/
 .spip_code {} /*Cf.: spip_style.css*/
 .spip_cadre {} /*Cf.: spip_style.css*/
+address {}
 
 /* Tableaux */
 table.spip {} /*Cf.: spip_style.css*/
 
 /* Logos, documents et images */
+img { margin: 0; padding: 0; border: 0; }
 .spip_logos {} /*Cf.: spip_style.css*/
 .spip_documents {} /*Cf.: spip_style.css*/
 .spip_documents_center {} /*Cf.: spip_style.css*/
@@ -45,9 +59,9 @@ table.spip {} /*Cf.: spip_style.css*/
 .spip_doc_descriptif {} /*Cf.: spip_style.css*/
 
 
-/*  ------------------------------------------
-/*  Disposition a l'ecran des blocs principaux
-/*  ------------------------------------------ */
+/* ------------------------------------------
+/* Disposition a l'ecran des blocs principaux
+/* ------------------------------------------ */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 58em; margin: 0 auto; text-align: left; }
@@ -74,9 +88,9 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
 
-/*  ------------------------------------------
-/*  Habillage des elements du contenu
-/*  ------------------------------------------ */
+/* ------------------------------------------
+/* Habillage des elements du contenu
+/* ------------------------------------------ */
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; }
 #hierarchie, #hierarchie a { color: #666; }
@@ -110,7 +124,7 @@ abbr.published { border: 0; }
 ---------------------------------------------- */
 .repondre { clear: both; margin-top: 2.50em; margin-right: 1em; text-align: right; font-weight: bold; }
 
-/* * Habillage des forums */
+/* Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 ul.forum, ul.forum ul { list-style: none; }
 .forum-fil { margin-top: 1.50em; }
@@ -150,9 +164,9 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 #signatures .formulaire_recherche input.text { width: 10em; text-align: left; } /*Cf.: spip_formulaires.css*/
 
 
-/*  ------------------------------------------
-/*  Sous-navigation et autres menus
-/*  ------------------------------------------ */
+/* ------------------------------------------
+/* Sous-navigation et autres menus
+/* ------------------------------------------ */
 
 /* Habillage general des menus de navigation */
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
@@ -187,9 +201,9 @@ a:hover { color: #F57900; text-decoration: underline; }
 
 
 
-/*  ------------------------------------------
-/*  Autres supports
-/*  ------------------------------------------ */
+/* ------------------------------------------
+/* Autres supports
+/* ------------------------------------------ */
 
 /* Affichage pour les petits ecrans (type 400 x 300) */
 @media handheld, only screen and (max-device-width: 481px), only and (max-device-width: 400px), only and (max-width: 400px) {
