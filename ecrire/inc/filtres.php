@@ -1756,9 +1756,9 @@ function env_to_attributs ($texte){
 function f_jQuery ($texte) {
 	if (!_request('jquery_debug')
 	AND _DIR_RESTREINT)
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.pack.js\" type=\"text/javascript\"></script>\n";
+		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.3-forms.pack.js\" type=\"text/javascript\"></script>\n";
 	else
-		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.js\" type=\"text/javascript\"></script>\n";
+		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.3-forms.js\" type=\"text/javascript\"></script>\n";
  	
  	return $js.$texte;
 }

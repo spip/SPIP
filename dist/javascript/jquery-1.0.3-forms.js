@@ -1,19 +1,19 @@
 /* prevent execution of jQuery if included more then once */
 if(typeof window.jQuery == "undefined") {
 /*
- * jQuery 1.0.2 - New Wave Javascript
+ * jQuery 1.0.3 - New Wave Javascript
  *
  * Copyright (c) 2006 John Resig (jquery.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2006-10-09 20:23:18 -0400 (Mon, 09 Oct 2006) $
- * $Rev: 413 $
+ * $Date: 2006-10-27 11:15:44 -0400 (Fri, 27 Oct 2006) $
+ * $Rev: 501 $
  */
 
 // Global undefined variable
 window.undefined = window.undefined;
-jQuery = function(a,c) {
+var jQuery = function(a,c) {
 
 	// Shortcut for document ready (because $(document).each() is silly)
 	if ( a && typeof a == "function" && jQuery.fn.ready )
@@ -35,8 +35,10 @@ jQuery = function(a,c) {
 		return new jQuery(a,c);
 
 	// Handle HTML strings
-	var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
-	if ( m ) a = jQuery.clean( [ m[1] ] );
+	if ( a.constructor == String ) {
+		var m = /^[^<]*(<.+>)[^>]*$/.exec(a);
+		if ( m ) a = jQuery.clean( [ m[1] ] );
+	}
 
 	// Watch for when an array is passed in
 	this.get( a.constructor == Array || a.length && !a.nodeType && a[0] != undefined && a[0].nodeType ?
@@ -46,12 +48,14 @@ jQuery = function(a,c) {
 		// Find the matching elements and save them for later
 		jQuery.find( a, c ) );
 
-  // See if an extra function was provided
+	// See if an extra function was provided
 	var fn = arguments[ arguments.length - 1 ];
 
 	// If so, execute it in context
 	if ( fn && typeof fn == "function" )
 		this.each(fn);
+
+	return this;
 };
 
 // Map over the $ in case of overwrite
@@ -62,7 +66,7 @@ if ( typeof $ != "undefined" )
 var $ = jQuery;
 
 jQuery.fn = jQuery.prototype = {
-	jquery: "1.0.2",
+	jquery: "1.0.3",
 
 	size: function() {
 		return this.length;
@@ -204,6 +208,7 @@ jQuery.fn = jQuery.prototype = {
 				for ( var i = 0; i < t.length; i++ )
 					if ( jQuery.filter(t[i],[a]).r.length )
 						return a;
+				return false;
 			}) ||
 
 			t.constructor == Boolean &&
@@ -277,8 +282,17 @@ jQuery.fn = jQuery.prototype = {
 };
 
 jQuery.extend = jQuery.fn.extend = function(obj,prop) {
+	// Watch for the case where null or undefined gets passed in by accident
+	if ( arguments.length > 1 && (prop === null || prop == undefined) )
+		return obj;
+
+	// If no property object was provided, then we're extending jQuery
 	if ( !prop ) { prop = obj; obj = this; }
+
+	// Extend the base object
 	for ( var i in prop ) obj[i] = prop[i];
+
+	// Return the modified object
 	return obj;
 };
 
@@ -341,7 +355,7 @@ jQuery.extend({
 				fn.apply( obj[i], args || [i, obj[i]] );
 		else
 			for ( var i = 0; i < obj.length; i++ )
-				fn.apply( obj[i], args || [i, obj[i]] );
+				if ( fn.apply( obj[i], args || [i, obj[i]] ) === false ) break;
 		return obj;
 	},
 
@@ -394,9 +408,11 @@ jQuery.extend({
 					oHeight = e.offsetHeight;
 					oWidth = e.offsetWidth;
 				} else {
-					e = jQuery(e.cloneNode(true)).css({
-						visibility: "hidden", position: "absolute", display: "block", right: "0", left: "0"
-					}).appendTo(e.parentNode)[0];
+					e = jQuery(e.cloneNode(true))
+						.find(":radio").removeAttr("checked").end()
+						.css({
+							visibility: "hidden", position: "absolute", display: "block", right: "0", left: "0"
+						}).appendTo(e.parentNode)[0];
 
 					var parPos = jQuery.css(e.parentNode,"position");
 					if ( parPos == "" || parPos == "static" )
@@ -423,6 +439,9 @@ jQuery.extend({
 		
 		if (prop == 'opacity' && jQuery.browser.msie)
 			return jQuery.attr(elem.style, 'opacity');
+			
+		if (prop == "float" || prop == "cssFloat")
+		    prop = jQuery.browser.msie ? "styleFloat" : "cssFloat";
 
 		if (!force && elem.style[prop]) {
 
@@ -434,6 +453,9 @@ jQuery.extend({
 			ret = elem.currentStyle[prop] || elem.currentStyle[newProp];
 
 		} else if (document.defaultView && document.defaultView.getComputedStyle) {
+
+			if (prop == "cssFloat" || prop == "styleFloat")
+				prop = "float";
 
 			prop = prop.replace(/([A-Z])/g,"-$1").toLowerCase();
 			var cur = document.defaultView.getComputedStyle(elem, null);
@@ -451,44 +473,40 @@ jQuery.extend({
 
 		return ret;
 	},
-
+	
 	clean: function(a) {
 		var r = [];
 		for ( var i = 0; i < a.length; i++ ) {
-			if ( a[i].constructor == String ) {
-				// trim whitespace, otherwise indexOf won't work as expected
-				a[i] = jQuery.trim(a[i]);
+			var arg = a[i];
+			if ( arg.constructor == String ) { // Convert html string into DOM nodes
+				// Trim whitespace, otherwise indexOf won't work as expected
+				var s = jQuery.trim(arg), div = document.createElement("div"), wrap = [0,"",""];
+
+				if ( !s.indexOf("<opt") ) // option or optgroup
+					wrap = [1, "<select>", "</select>"];
+				else if ( !s.indexOf("<thead") || !s.indexOf("<tbody") )
+					wrap = [1, "<table>", "</table>"];
+				else if ( !s.indexOf("<tr") )
+					wrap = [2, "<table>", "</table>"];	// tbody auto-inserted
+				else if ( !s.indexOf("<td") || !s.indexOf("<th") )
+					wrap = [3, "<table><tbody><tr>", "</tr></tbody></table>"];
+
+				// Go to html and back, then peel off extra wrappers
+				div.innerHTML = wrap[1] + s + wrap[2];
+				while ( wrap[0]-- ) div = div.firstChild;
 				
-				var table = "";
-
-				if ( !a[i].indexOf("<thead") || !a[i].indexOf("<tbody") ) {
-					table = "thead";
-					a[i] = "<table>" + a[i] + "</table>";
-				} else if ( !a[i].indexOf("<tr") ) {
-					table = "tr";
-					a[i] = "<table>" + a[i] + "</table>";
-				} else if ( !a[i].indexOf("<td") || !a[i].indexOf("<th") ) {
-					table = "td";
-					a[i] = "<table><tbody><tr>" + a[i] + "</tr></tbody></table>";
-				}
-
-				var div = document.createElement("div");
-				div.innerHTML = a[i];
-
-				if ( table ) {
-					div = div.firstChild;
-					if ( table != "thead" ) div = div.firstChild;
-					if ( table == "td" ) div = div.firstChild;
-				}
-
+				// Have to loop through the childNodes here to 
+				// prevent a Safari crash with text nodes and /n characters
 				for ( var j = 0; j < div.childNodes.length; j++ )
 					r.push( div.childNodes[j] );
-				} else if ( a[i].jquery || a[i].length && !a[i].nodeType )
-					for ( var k = 0; k < a[i].length; k++ )
-						r.push( a[i][k] );
-				else if ( a[i] !== null )
-					r.push(	a[i].nodeType ? a[i] : document.createTextNode(a[i].toString()) );
+			} 
+			else if ( arg.length != undefined && !arg.nodeType ) // Handles Array, jQuery, DOM NodeList collections
+				for ( var n = 0; n < arg.length; n++ )
+					r.push(arg[n]);
+			else
+				r.push(	arg.nodeType ? arg : document.createTextNode(arg.toString()) );
 		}
+
 		return r;
 	},
 
@@ -517,7 +535,7 @@ jQuery.extend({
 			empty: "!a.childNodes.length",
 
 			// Text Check
-			contains: "(a.innerText||a.innerHTML).indexOf(m[3])>=0",
+			contains: "jQuery.fn.text.apply([a]).indexOf(m[3])>=0",
 
 			// Visibility
 			visible: "a.type!='hidden'&&jQuery.css(a,'display')!='none'&&jQuery.css(a,'visibility')!='hidden'",
@@ -669,12 +687,14 @@ jQuery.extend({
 		var fix = {
 			"for": "htmlFor",
 			"class": "className",
-			"float": "cssFloat",
+			"float": jQuery.browser.msie ? "styleFloat" : "cssFloat",
+			cssFloat: jQuery.browser.msie ? "styleFloat" : "cssFloat",
 			innerHTML: "innerHTML",
 			className: "className",
 			value: "value",
 			disabled: "disabled",
-			checked: "checked"
+			checked: "checked",
+			readonly: "readOnly"
 		};
 		
 		// IE actually uses filters for opacity ... elem is actually elem.style
@@ -698,9 +718,9 @@ jQuery.extend({
 			return elem[fix[name]];
 		} else if( value == undefined && jQuery.browser.msie && elem.nodeName && elem.nodeName.toUpperCase() == 'FORM' && (name == 'action' || name == 'method') ) {
 			return elem.getAttributeNode(name).nodeValue;
-		} else if ( elem.getAttribute != undefined ) {
+		} else if ( elem.getAttribute != undefined && elem.tagName ) { // IE elem.getAttribute passes even for style
 			if ( value != undefined ) elem.setAttribute( name, value );
-			return elem.getAttribute( name, 2 );
+			return elem.getAttribute( name );
 		} else {
 			name = name.replace(/-([a-z])/ig,function(z,b){return b.toUpperCase();});
 			if ( value != undefined ) elem[name] = value;
@@ -961,12 +981,12 @@ jQuery.extend({
 		},
 
 		handle: function(event) {
-			if ( typeof jQuery == "undefined" ) return;
+			if ( typeof jQuery == "undefined" ) return false;
 
 			event = event || jQuery.event.fix( window.event );
 
 			// If no correct event was found, fail
-			if ( !event ) return;
+			if ( !event ) return false;
 
 			var returnValue = true;
 
@@ -987,16 +1007,26 @@ jQuery.extend({
 		},
 
 		fix: function(event) {
-			if ( event ) {
-				event.preventDefault = function() {
-					this.returnValue = false;
-				};
-
-				event.stopPropagation = function() {
-					this.cancelBubble = true;
-				};
+			// check IE
+			if(jQuery.browser.msie) {
+				// get real event from window.event
+				event = window.event;
+				// fix target property
+				event.target = event.srcElement;
+			// check safari and if target is a textnode
+			} else if(jQuery.browser.safari && event.target.nodeType == 3) {
+				// target is readonly, clone the event object
+				event = jQuery.extend({}, event);
+				// get parentnode from textnode
+				event.target = event.target.parentNode;
 			}
-
+			// fix preventDefault and stopPropagation
+			event.preventDefault = function() {
+				this.returnValue = false;
+			};
+			event.stopPropagation = function() {
+				this.cancelBubble = true;
+			};
 			return event;
 		}
 
@@ -1227,20 +1257,16 @@ new function(){
 		
 		// Finally, handle events that only fire once
 		jQuery.fn["one"+o] = function(f){
-			// Attach the event listener
-			return this.each(function(){
-
-				var count = 0;
-
-				// Add the event
-				jQuery.event.add( this, o, function(e){
-					// If this function has already been executed, stop
-					if ( count++ ) return;
-				
-					// And execute the bound function
-					return f.apply(this, [e]);
-				});
-			});
+			// save cloned reference to this
+			var element = jQuery(this);
+			var handler = function() {
+				// unbind itself when executed
+				element.unbind(o, handler);
+				element = null;
+				// apply original handler with the same arguments
+				f.apply(this, arguments);
+			};
+			return this.bind(o, handler);
 		};
 			
 	};
@@ -1349,7 +1375,7 @@ jQuery.fn.extend({
 	animate: function(prop,speed,callback) {
 		return this.queue(function(){
 		
-			this.curAnim = prop;
+			this.curAnim = jQuery.extend({}, prop);
 			
 			for ( var p in prop ) {
 				var e = new jQuery.fx( this, jQuery.speed(speed,callback), p );
@@ -1508,17 +1534,14 @@ jQuery.extend({
 		};
 	
 		// Simple 'show' function
-		z.show = function( p ){
+		z.show = function(){
 			if ( !z.el.orig ) z.el.orig = {};
 
 			// Remember where we started, so that we can go back to it later
 			z.el.orig[prop] = this.cur();
 			
 			// Begin the animation
-			if (prop == "opacity")
-				z.custom(z.el.orig[prop], 1);
-			else
-				z.custom(0, z.el.orig[prop]);
+			z.custom(0, z.el.orig[prop]);
 
 			// Stupid IE, look what you made me do
 			if ( prop != "opacity" )
@@ -1539,7 +1562,7 @@ jQuery.extend({
 		};
 	
 		// Remember  the overflow of the element
-		if ( !z.el.oldOverlay )
+		if ( !z.el.oldOverflow )
 			z.el.oldOverflow = jQuery.css( z.el, "overflow" );
 	
 		// Make sure that nothing sneaks out
@@ -1575,7 +1598,7 @@ jQuery.extend({
 					// Reset the property, if the item has been hidden
 					if ( z.o.hide ) {
 						for ( var p in z.el.curAnim ) {
-							if (p == "opacity" && jQuery.browser.msie)
+							if (p == "opacity")
 								jQuery.attr(y, p, z.el.orig[p]);
 							else
 								y[ p ] = z.el.orig[p] + "px";
@@ -1639,15 +1662,11 @@ jQuery.fn.extend({
 			
 			if ( status == "success" || !ifModified && status == "notmodified" ) {
 				// Inject the HTML into all the matched elements
-				self.html(res.responseText).each( callback, [res.responseText, status] );
-				
-				// Execute all the scripts inside of the newly-injected HTML
-				jQuery("script", self).each(function(){
-					if ( this.src )
-						jQuery.getScript( this.src );
-					else
-						eval.call( window, this.text || this.textContent || this.innerHTML || "" );
-				});
+				self.html(res.responseText)
+				  // Execute all the scripts inside of the newly-injected HTML
+				  .evalScripts()
+				  // Execute callback
+				  .each( callback, [res.responseText, status] );
 			} else
 				callback.apply( self, [res.responseText, status] );
 	
@@ -1657,6 +1676,16 @@ jQuery.fn.extend({
 	},
 	serialize: function() {
 		return jQuery.param( this );
+	},
+	
+	evalScripts: function() {
+		return this.find('script').each(function(){
+			if ( this.src )
+				// for some weird reason, it doesn't work if the callback is ommited
+				jQuery.getScript( this.src, function() {} );
+			else
+				eval.call( window, this.text || this.textContent || this.innerHTML || "" );
+		}).end();
 	}
 	
 });
@@ -1687,7 +1716,7 @@ new function(){
 
 jQuery.extend({
 	get: function( url, data, callback, type, ifModified ) {
-		if ( data.constructor == Function ) {
+		if ( data && data.constructor == Function ) {
 			type = callback;
 			callback = data;
 			data = null;
@@ -1705,7 +1734,11 @@ jQuery.extend({
 		jQuery.get(url, data, callback, type, 1);
 	},
 	getScript: function( url, callback ) {
-		jQuery.get(url, callback, "script");
+		if(callback)
+			jQuery.get(url, null, callback, "script");
+		else {
+			jQuery.get(url, null, null, "script");
+		}
 	},
 	getJSON: function( url, data, callback ) {
 		if(callback)
@@ -1732,6 +1765,8 @@ jQuery.extend({
 	ajax: function( type, url, data, ret, ifModified ) {
 		// If only a single argument was passed in,
 		// assume that it is a object of key/value pairs
+		var global = true;
+		var timeout = jQuery.timeout;
 		if ( !url ) {
 			ret = type.complete;
 			var success = type.success;
@@ -1739,7 +1774,7 @@ jQuery.extend({
 			var dataType = type.dataType;
 			var global = typeof type.global == "boolean" ? type.global : true;
 			var timeout = typeof type.timeout == "number" ? type.timeout : jQuery.timeout;
-			var ifModified = type.ifModified || false;
+			ifModified = type.ifModified || false;
 			data = type.data;
 			url = type.url;
 			type = type.type;
@@ -1892,6 +1927,9 @@ jQuery.extend({
 
 		// Get the JavaScript object, if JSON is used.
 		if ( type == "json" ) eval( "data = " + data );
+		
+		// evaluate scripts within html
+		if ( type == "html" ) $("<div>").html(data).evalScripts();
 
 		return data;
 	},
