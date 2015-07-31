@@ -72,7 +72,9 @@
 	<langue code="oc_gsc" />
 	<langue code="oc_lms" />
 	<langue code="oc_lnc" />
-	<langue code="oc_ni" />
+	<langue code="oc_ni">
+		<traducteur nom="Bastian" lien="http://trad.spip.org/auteur/bastian" />
+	</langue>
 	<langue code="oc_ni_la" />
 	<langue code="oc_pro" />
 	<langue code="oc_prv" />
