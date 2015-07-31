@@ -98,8 +98,10 @@ jQuery.fn.depliant = function(cible) {
 			me.is('.deplie') ? timer : timed
 		);
 
+		me
+/*
 		// programmer les futurs clics
-		me.click(function(e){
+		.click(function(e){
 			if (t) { clearTimeout(t); t = null; }
 			// ne pas agir si on clic sur un lien (ou un enfant de...)
 			// sinon agir tout de suite
@@ -108,7 +110,7 @@ jQuery.fn.depliant = function(cible) {
 				.toggleother(cible)
 				.removeClass('hoverwait');
 		})
-
+*/
 		// et les futurs hover
 		.hover(function(e){
 			me.addClass('hover')
@@ -126,7 +128,7 @@ jQuery.fn.depliant = function(cible) {
 			jQuery(this)
 			.removeClass('hover')
 			.removeClass('hoverwait');
-		})
+		});
 	}
 	return this;
 }
