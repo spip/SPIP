@@ -45,6 +45,9 @@ Espace prive
 - bug page mots : affiche des breves liées au mot, mais sans lister
   (1|10|11....)
 
+* interface : quand on modifie le statut d'un auteur, on n'a pas ensuite la
+  page permettant de le passer admin restreint (il faut recliquer sur
+  "editer")
 
 
 Installation

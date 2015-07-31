@@ -382,7 +382,7 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	else { $img = $logo; $logo = _DIR_IMG . $logo;}
 
 	if (@file_exists($logo) AND
-	    eregi("^(.*)\.(jpg|gif|png)$", $img, $regs)) {
+	eregi("^(.*)\.(jpg|gif|png)$", $img, $regs)) {
 		include_local('inc-public-global.php3');
 		$nom = $regs[1];
 		$format = $regs[2];

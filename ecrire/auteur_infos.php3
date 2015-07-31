@@ -86,7 +86,7 @@ if ($id_auteur) {
 //
 // Modification (et creation si besoin)
 //
-if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
+if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 	if ($connect_statut == '0minirezo' AND ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut))	// changer le statut
 		$auteur['statut'] = $statut;
 
@@ -134,7 +134,11 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	}
 
 	// email
-	if ($connect_statut == '0minirezo') { // seuls les admins peuvent modifier l'email
+	// seuls les admins peuvent modifier l'email
+	// les admins restreints peuvent modifier l'email des redacteurs
+	// mais pas des autres admins
+	if ($connect_statut == '0minirezo'
+	AND ($connect_toutes_rubriques OR $statut<>'0minirezo')) { 
 		if ($email !='' AND !email_valide($email)) {
 			$echec .= "<p>"._T('info_email_invalide');
 			$auteur['email'] = $email;
@@ -280,7 +284,9 @@ echo "("._T('entree_nom_pseudo').")<BR>";
 echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40' $onfocus><P>";
 
 echo "<B>"._T('entree_adresse_email')."</B>";
-if ($connect_statut == "0minirezo") {
+
+if ($connect_statut == "0minirezo"
+AND ($connect_toutes_rubriques OR $auteur['statut']<>'0minirezo')) {
 	echo "<br><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
 }
 else {

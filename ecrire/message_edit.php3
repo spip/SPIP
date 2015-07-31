@@ -3,6 +3,31 @@
 include ("inc.php3");
 
 
+// Droits
+if ($new=='oui') {
+	switch ($type) {
+		case 'affich':
+			$ok = ($connect_statut == '0minirezo');
+			break;
+		case 'pb':
+		case 'rv':
+			$ok = true;
+			break;
+		default:
+			$ok = false;
+	}
+}
+
+if (!$ok) {
+	debut_page(_T('info_acces_refuse'));
+	debut_gauche();
+	debut_droite();
+	echo "<b>"._T('avis_non_acces_message')."</b><p>";
+	fin_page();
+	exit;
+}
+
+
 function my_sel($num, $tex, $comp) {
 	if ($num == $comp) {
 		echo "<OPTION VALUE='$num' SELECTED>$tex\n";
