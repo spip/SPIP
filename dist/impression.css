@@ -61,7 +61,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 	border-top: 2pt solid #CCCCCC;
 	font-size: 0.82em;
 }
-.ps h3, .notes h3, .forum-decompte, #documents_joints h3 { font-weight: bold; }
+.ps h3, .notes h3, .forum-decompte, #documents_joints h3 { font-weight: bold; clear: both; }
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */
