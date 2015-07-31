@@ -9,7 +9,7 @@ define("_INC_URLS2", "1");
 
 - Comment utiliser ce jeu d'URLs ?
 
-Il faut recopier le fichier htaccess-propre.txt sous le nom .htaccess
+Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
 dans le repertoire de base du site SPIP (attention a ne pas ecraser
 d'autres reglages que vous pourriez avoir mis dans ce fichier)
 
@@ -29,7 +29,9 @@ function _generer_url_propre($type, $id_objet) {
 	// Sinon, creer l'URL
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_charsets.php3");
-	$url = translitteration(corriger_caracteres(supprimer_tags(supprimer_numero($row['titre']))));
+	$url = translitteration(corriger_caracteres(
+		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
+		));
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
 	// S'il reste des caracteres non latins, utiliser l'id a la place
 	if (preg_match(",[^a-zA-Z0-9 ],", $url)) {
@@ -54,7 +56,8 @@ function _generer_url_propre($type, $id_objet) {
 	// Verifier les eventuels doublons et mettre a jour
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
-	$query = "SELECT $col_id FROM $table WHERE url_propre='".addslashes($url)."'";
+	$query = "SELECT $col_id FROM $table
+		WHERE url_propre='".addslashes($url)."'";
 	if (spip_num_rows(spip_query($query)) > 0) {
 		$url = $url.','.$id_objet;
 	}
@@ -154,7 +157,8 @@ function recuperer_parametres_url($fond, $url) {
 
 	$table = "spip_".$type."s";
 	$col_id = "id_".$type;
-	$query = "SELECT $col_id FROM $table WHERE url_propre='".addslashes($url_propre)."'";
+	$query = "SELECT $col_id FROM $table
+		WHERE url_propre='".addslashes($url_propre)."'";
 	$result = spip_query($query);
 	if (spip_num_rows($result) == 1) {
 		$row = spip_fetch_array($result);
