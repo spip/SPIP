@@ -65,7 +65,20 @@ $GLOBALS['maj'][11388] = array(array('maj_11388'));
 
 // reparer spip_mots.type = titre du groupe
 function maj_11431 () {
-	spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
+	// mysql only 
+	// spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
+	
+	// selection des mots cles dont le type est different du groupe
+	$res = sql_select(
+		array("a.id_mot AS id_mot", "b.titre AS type"), 
+		array("spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe)"),
+		array("a.type != b.titre"));
+	// mise a jour de ces mots la
+	if ($res){
+		while ($r = sql_fetch($res)){
+			sql_updateq('spip_mots', array('type'=>$r['type']), 'id_mot='.sql_quote($r['id_mot']));
+		}
+	}
 }
 $GLOBALS['maj'][11431] = array(array('maj_11431'));
 
