@@ -54,7 +54,7 @@ pipeline('exec_init',array('args'=>array('exec'=>'configuration'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
 
-echo "<br /><br /><br />";
+echo "<br /><br /><br />\n";
 gros_titre(_T('titre_configuration'));
 echo barre_onglets("configuration", "contenu");
 
@@ -79,10 +79,11 @@ echo avertissement_config();
 //
 // Afficher les options de config
 //
+	$action = generer_url_ecrire('configuration');
 
-echo generer_url_post_ecrire('configuration');
-echo "<input type='hidden' name='changer_config' value='oui' />";
-debut_cadre_couleur("racine-site-24.gif");
+        echo "<form action='$action' method='post'><div>", form_hidden($action);
+	echo "<input type='hidden' name='changer_config' value='oui' />";
+	debut_cadre_couleur("racine-site-24.gif");
 
 	// initialiser adresse_site au besoin
 	if (strlen($GLOBALS['meta']["adresse_site"])<10) {
@@ -252,7 +253,7 @@ if ($options == 'avancees') {
 
 
 
-echo "<br />";
+echo "<br />\n";
 
 
 //
@@ -265,7 +266,7 @@ $activer_breves = $GLOBALS['meta']["activer_breves"];
 
 echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 echo "<tr><td class='verdana2'>";
-echo _T('texte_breves')."<br />";
+echo _T('texte_breves')."<br />\n";
 echo _T('info_breves');
 echo "</td></tr>";
 
@@ -282,7 +283,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<br />";
+echo "<br />\n";
 
 
 //
@@ -300,7 +301,7 @@ if ($options == "avancees") {
 
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	echo "<tr><td class='verdana2'>";
-	echo _T('texte_mots_cles')."<br />";
+	echo _T('texte_mots_cles')."<br />\n";
 	echo _T('info_question_mots_cles');
 	echo "</td></tr>";
 
@@ -323,7 +324,7 @@ if ($options == "avancees") {
 	
 		echo "<div id='mots-config' style='$style'>";
 		
-		echo "<br />";
+		echo "<br />\n";
 		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
 
 		echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
@@ -340,7 +341,7 @@ if ($options == "avancees") {
 		fin_cadre_relief();
 
 		if ($forums_publics != "non"){
-			echo "<br />";
+			echo "<br />\n";
 			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
 			echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 			echo "<tr><td class='verdana2'>";
@@ -367,7 +368,7 @@ if ($options == "avancees") {
 
 	fin_cadre_trait_couleur();
 
-	echo "<br />";
+	echo "<br />\n";
 }
 
 
@@ -402,7 +403,7 @@ else $style = "display: none;";
 	
 	// Utilisateurs autorises a proposer des sites references
 	//
-		echo "<br />";
+		echo "<br />\n";
 		debut_cadre_relief();
 		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 		echo "\n<tr><td style='color: #000000' class='verdana1 spip_x-small'>";
@@ -430,7 +431,7 @@ else $style = "display: none;";
 		echo "<tr><td align='$spip_lang_left' class='verdana2'>";
 
 			echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
-			echo "<br />";
+			echo "<br />\n";
 			echo bouton_radio("activer_syndic", "non", _T('item_non_utiliser_syndication'), $activer_syndic == "non", "changeVisible(this.checked, 'config-syndic', 'none', 'block');");
 
 
@@ -494,7 +495,7 @@ echo "<tr>";
 echo "<td align='$spip_lang_left' class='verdana2'>";
 echo afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
 	array('oui' => _T('item_autoriser_syndication_integrale'),
-		'non' => _T('item_non_autoriser_syndication_integrale')), "<br />");
+		'non' => _T('item_non_autoriser_syndication_integrale')), "<br />\n");
 echo "</td></tr>";
 echo "</table>\n";
 
@@ -509,7 +510,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<br />";
+echo "<br />\n";
 
 
 //
@@ -532,11 +533,11 @@ echo "<tr>";
 echo "<td align='$spip_lang_left' class='verdana2'>";
 echo afficher_choix('documents_article', $documents_article,
 	array('oui' => _T('item_autoriser_documents_joints'),
-		'non' => _T('item_non_autoriser_documents_joints')), "<br />");
+		'non' => _T('item_non_autoriser_documents_joints')), "<br />\n");
 echo "<br /><br />\n";
 echo afficher_choix('documents_rubrique', $documents_rubrique,
 	array('oui' => _T('item_autoriser_documents_joints_rubriques'),
-		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />");
+		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />\n");
 echo "</td></tr>";
 
 echo "<tr><td style='text-align:$spip_lang_right;'>";
@@ -549,7 +550,7 @@ fin_cadre_trait_couleur();
 
 echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
 
-echo "</form>";
+echo "</div></form>";
 
 
 echo fin_gauche(), fin_page();

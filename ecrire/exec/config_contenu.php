@@ -51,8 +51,9 @@ creer_colonne_droite();
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 debut_droite();
 
- echo generer_url_post_ecrire("config_contenu");
- echo "<div><input type='hidden' name='changer_config' value='oui' />";
+ $action = generer_url_ecrire('config_contenu');
+ echo "<form action='$action' method='post'><div>", form_hidden($action);
+ echo "<input type='hidden' name='changer_config' value='oui' />";
 
 
 //

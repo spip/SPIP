@@ -101,14 +101,14 @@ function avertissement_config() {
 	global $spip_lang_right, $spip_lang_left;
 	$texte = debut_boite_info(true);
 
-	$texte .= "<div class='verdana2' style='text-align: justify'>
-	<p align='center'><b>"._T('avis_attention')."</b></p>";
+	$texte .= "\n<div class='verdana2' style='text-align: justify'>
+	<p style='text-align: center'><b>"._T('avis_attention')."</b></p>";
 	$texte .= http_img_pack("warning.gif", (_T('avis_attention')),
-		"width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
+		"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'");
 	$texte .= _T('texte_inc_config');
 	$texte .= "</div>";
 	$texte .= fin_boite_info(true);
-	$texte .= "<p>&nbsp;</p>";
+	$texte .= "<p>&nbsp;</p>\n";
 	
 	return $texte;
 }

@@ -45,7 +45,9 @@ function exec_config_fonctions_dist()
 	debut_droite();
 	lire_metas();
 
-	echo generer_url_post_ecrire('config_fonctions');
+	$action = generer_url_ecrire('config_fonctions');
+
+        echo "<form action='$action' method='post'><div>", form_hidden($action);
 	echo "<input type='hidden' name='changer_config' value='oui' />";
 
 //
@@ -100,7 +102,7 @@ function exec_config_fonctions_dist()
 /* if ($options == "avancees" AND !$REMOTE_USER ) htaccess_config();*/
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
-	echo "</form>";
+	echo "</div></form>";
 
 	echo fin_gauche(), fin_page();
 }
