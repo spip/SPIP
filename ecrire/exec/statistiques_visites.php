@@ -38,6 +38,7 @@ function http_img_rien($width, $height, $style='', $title='') {
 }
 
 // pondre les stats sous forme d'un fichier csv tres basique
+// http://doc.spip.org/@statistiques_csv
 function statistiques_csv($id_article) {
 	if ($id = intval($id_article))
 		$q = "SELECT date, visites FROM spip_visites_articles WHERE id_article=$id ORDER BY date";
