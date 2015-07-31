@@ -63,17 +63,22 @@ function login_explicite($login, $cible) {
 	if ($auteur_session AND
 	($auteur_session['statut']=='0minirezo'
 	OR $auteur_session['statut']=='1comite')) {
-		if ($cible != $action) {
-			if (!headers_sent() AND !$_GET['var_mode']) {
-				include_spip('inc/headers');
-				redirige_par_entete($cible);
-			} else {
-				include_spip('inc/minipres');
-				return http_href($cible, _T('login_par_ici'));
-			}
-		} else
-			return ''; # on est arrive on bon endroit, et logue'...
+		$auth = charger_fonction('auth','inc');
+		$auth = $auth();
+		if ($auth==="") {
+			if ($cible != $action) {
+				if (!headers_sent() AND !$_GET['var_mode']) {
+					include_spip('inc/headers');
+					redirige_par_entete($cible);
+				} else {
+					include_spip('inc/minipres');
+					return http_href($cible, _T('login_par_ici'));
+				}
+			} else
+				return ''; # on est arrive on bon endroit, et logue'...
+		}
 	}
+	
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
