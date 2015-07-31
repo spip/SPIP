@@ -18,10 +18,9 @@ function exec_dater_dist()
 	$type = _request('type');
 	$id = intval(_request('id'));
 
-	if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
-	OR ($type == 'article' AND    !autoriser('modifier','article',$id))
-	OR (!preg_match('/^\w+$/',$type))) { // securite 
-
+	// securite
+	if (!preg_match('/^\w+$/',$type)
+	OR !autoriser('voir',$type,$id)) {
 		echo minipres();
 		exit;
 	}
