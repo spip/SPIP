@@ -9,7 +9,7 @@
 
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
-//	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 	@Header ("Content-Type: text/css");
 
 	if ($headers_only) exit;
