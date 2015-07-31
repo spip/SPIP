@@ -109,10 +109,11 @@ function creer_chaine_url($x) {
 			if (!$mot) continue;
 			$url2 = $url.'-'.$mot;
 
-			// Si on depasse 35 caracteres, s'arreter
+			// Si on depasse _URLS_PROPRES_MAX caracteres, s'arreter
 			// ne pas compter 3 caracteres pour %E9 mais un seul
+			define('_URLS_PROPRES_MAX', 35);
 			$long = preg_replace(',%.,', '', $url2);
-			if (strlen($long) > 35) {
+			if (strlen($long) > _URLS_PROPRES_MAX) {
 				break;
 			}
 
