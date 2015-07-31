@@ -134,10 +134,14 @@ function genie_invalideur_dist($t) {
  * @return int
  */
 function genie_queue_watch_dist(){
+	static $deja_la = false;
+	if ($deja_la) return; // re-entrance si l'insertion des jobs echoue (pas de table spip_jobs a l'upgrade par exemple)
+	$deja_la = true;
 	$taches = taches_generales();
 	foreach($taches as $tache=>$periode){
 		queue_genie_replan_job($tache,$periode,time()-round(rand(1,$periode)));
 	}
+	$deja_la = false;
 	return 1;
 }
 
