@@ -76,7 +76,7 @@ function barre_inserer(text,champ) {
 	if( document.selection ){
 		txtarea.focus();
 		var r = document.selection.createRange();
-		if (r == null) {
+		if ((r == null) || (typeof(r.selectionStart) == "undefined")) {
 			txtarea.selectionStart = txtarea.value.length;
 			txtarea.selectionEnd = txtarea.selectionStart;
 		}
