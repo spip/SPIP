@@ -35,7 +35,7 @@ function exec_valider_xml_dist()
 // http://doc.spip.org/@valider_xml_ok
 function valider_xml_ok($url, $req_ext, $limit, $rec)
 {
-	$url = urldecode($url);
+	$url = urldecode(trim($url));
 	$rec = !$rec ? false : array();
 	if (!$limit) $limit = 200;
 	$titre = _T('analyse_xml');
@@ -56,13 +56,14 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 			}
 			if ($files) {
 				$res = valider_dir($files, $ext, $url);
-				list($err, $res) = valider_resultats($res, $ext === 'html');
-				$err = ' (' . $err . '/' . count($files) .')';
+				list($err, $terr, $res) = valider_resultats($res, $ext === 'html');
+				$err = '<br /><h2>' . $terr . " " . _T('erreur_texte') . " ($err/" . count($files) .')</h2>';
+				$res = $err . $res;
 			} else {
 				$res = _T('texte_vide');
 				$err = '';
 			}
-			$bandeau = $dir . '*' . $ext . $err;
+			$bandeau = $dir . '*' . $ext ;
 		} else {
 			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
 			  list(,$server, $dir, $script, $args) = $r;
@@ -90,7 +91,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 				list($texte, $err) = emboite_texte($res);
 			}
 			else {
-				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
+				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>x';
 				list($texte, ) = emboite_texte($res);
 			}
 
@@ -118,7 +119,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 // http://doc.spip.org/@valider_resultats
 function valider_resultats($res, $mode)
 {
-	$i = $j = 0;
+	$i = $j = $k = 0;
 	$table = '';
 	rsort($res);
 	foreach($res as $l) {
@@ -133,7 +134,7 @@ function valider_resultats($res, $mode)
 		$err = (!intval($nb)) ? '' : 
 		  ($erreurs[0][0] . ' ' . _T('ligne') . ' ' .
 		   $erreurs[0][1] .($nb==1? '': '  ...'));
-		if ($err) $j++;
+		if ($err) {$j++; $k+= $nb;}
 		$h = $mode
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
@@ -143,10 +144,10 @@ function valider_resultats($res, $mode)
 		. "<td style='text-align: right$color'>$texte</td>"
 		. "<td style='text-align: right'>$temps</td>"
 		. "<td style='text-align: left'>$err</td>"
-		. "<td>$script</td>"
-		. "<td><a href='$h'>$appel</a></td>";
+		. "<td><a href='$h' title='$appel'>$script</a></td>";
 	}
-	return array($j, "<table class='spip'>"
+
+	return array($j, $k, "<table class='spip' width='95%'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
 	  . "</th><th>" 
@@ -154,11 +155,12 @@ function valider_resultats($res, $mode)
 	  . "</th><th>"
 	  . _T('zbug_profile', array('time' =>''))
 	  . "</th><th>"
-	  . _T('message')
-	  . "</th><th>Page</th><th>args"
+	  . _T('public:message')
+	  . "</th><th>"
+	  . _T('ecrire:info_url')
 	  . "</th></tr>"
 	  . $table
-		     . "</table>");
+	  . "</table>");
 }
 
 // http://doc.spip.org/@valider_script
