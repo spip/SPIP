@@ -88,25 +88,37 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	global $flag_flock;
 
 	$fichier_tmp = $fichier.'_tmp';
+	$fichier_new = $fichier.'.NEW';
+
+	// Essayer de poser un verrou pour proteger l'ecriture du fichier
+	if (!spip_get_lock($fichier_tmp, 1)) return $fichier_new;
+	$ok = true;
 	$f = fopen($fichier_tmp, "wb");
-	if (!$f) return;
-
-	// Essayer de poser un verrou
-	if ($flag_flock) {
-		@flock($f, 6, $r);
-		if ($r) return;
+	if (!$f) $ok = false;
+	else {
+		$r = fwrite($f, $contenu);
+		if ($r != strlen($contenu)) $ok = false;
+		if (!fclose($f)) $ok = false;
 	}
-	$r = fwrite($f, $contenu);
-	if ($flag_flock) @flock($f, 3);
-	if ($r != strlen($contenu)) return;
-	if (!fclose($f)) return;
 
+	// En cas d'erreur d'ecriture, renvoyer le fichier existant
+	if (!$ok) {
+		spip_release_lock($fichier_tmp);
+		clearstatcache();
+		return file_exists($fichier_new) ? $fichier_new : $fichier;
+	}
+
+	// Finaliser
+	@unlink($fichier_new);
+	rename($fichier_tmp, $fichier_new);
 	@unlink($fichier);
-	$fichier = $fichier.'.NEW';
-	@unlink($fichier);
-	rename($fichier_tmp, $fichier);
-	if ($GLOBALS['flag_apc']) apc_rm($fichier);
-	return $fichier;
+	spip_release_lock($fichier_tmp);
+
+	if ($GLOBALS['flag_apc']) {
+		apc_rm($fichier_new);
+		apc_rm($fichier);
+	}
+	return $fichier_new;
 }
 
 
@@ -151,7 +163,8 @@ function purger_repertoire($dir, $age, $regexp = '') {
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if (($t - filemtime($chemin)) > $age OR ereg('\.NEW$', $fichier)) {
+			$d = $t - filemtime($chemin);
+			if ($d > $age OR (ereg('\.NEW$', $fichier) AND $d > 60)) {
 				@unlink($chemin);
 				$fichier = ereg_replace('\.NEW$', '', $fichier);
 				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
