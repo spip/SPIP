@@ -54,7 +54,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 				 $align);
 	  }
       }
-    else if ($id_rubrique)
+    else if ($id_rubrique !== false)
       {$type = 'rub'; $id = $id_rubrique; $id_rubrique = 0;}
     else if ($type = 'rub') $id = sql_parent($id);
     if (!$id) return '';
