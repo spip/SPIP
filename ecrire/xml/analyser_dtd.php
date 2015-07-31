@@ -59,7 +59,7 @@ function compilerRegle($val)
 function analyser_dtd($loc, $avail, &$dtc)
 {
 	if ($avail == 'SYSTEM')
-	  $file = $loc;
+	  $file = find_in_path($loc);
 	else {
 	  $file = sous_repertoire(_DIR_CACHE_XML);
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
