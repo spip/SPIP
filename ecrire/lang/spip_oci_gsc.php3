@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_oci_gsc'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -20,7 +20,7 @@ $GLOBALS['i18n_spip_oci_gsc'] = array(
 'admin_modifier_rubrique' => 'Modificar aquera rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
 'aide_non_disponible' => 'Aquera part de l\'ajuda en linha n\'ei pas enq&uuml;&egrave;ra disponibla t&agrave; aquesta lenga.',
-'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Qu\'ei impossible d\'actualizar la basa MySQL de cap t&agrave; la version @version@; dilh&egrave;u que i a un probl&egrave;ma relatiu au dret de modificar la basa de dadas. Volhatz contactar lo v&ograve;ste aubergader.',
+'alerte_maj_impossible' => '<MODIF> <b>Al&egrave;rta!</b> Qu\'ei impossible d\'actualizar la basa MySQL de cap t&agrave; la version @version@; dilh&egrave;u que i a un probl&egrave;ma relatiu au dret de modificar la basa de dadas. Volhatz contactar lo v&ograve;ste aubergader.',
 'avis_acces_interdit' => 'Acc&egrave;s pro&iuml;bit.',
 'avis_archive_incorrect' => 'lo fichi&egrave;r archiu n\'ei pas un fichi&egrave;r SPIP',
 'avis_archive_invalide' => 'lo fichi&egrave;r archiu n\'ei pas valid',
@@ -78,7 +78,6 @@ la documentacion d\'SPIP</a>.',
 'barre_gras' => 'Hicar en {{gras}}',
 'barre_guillemets' => 'Enrodar dab &laquo; verguetas francesas &raquo;',
 'barre_guillemets_de' => 'Enrodar dab &#8222;verguetas&#8220;',
-'barre_guillemets_simples' => 'Enrodar dab &#8220;verguetas&#8221;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Hicar en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
@@ -108,7 +107,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
 'bouton_forum_petition' => 'FORUM E PETICION',
 'bouton_modifier' => 'Modificar',
-'bouton_pense_bete' => 'ENT&Agrave; REMEMBR&Agrave;\'S (A USATGE PERSONAU)',
+'bouton_pense_bete' => 'ENT&Agrave; REMEMBR&Agrave;\'S (D\'USATGE PERSONAU)',
 'bouton_radio_activer_messagerie' => 'Activar la messatgeria int&egrave;rna',
 'bouton_radio_activer_messagerie_interne' => 'Activar la messatgeria int&egrave;rna',
 'bouton_radio_activer_petition' => 'Activar la peticion',
@@ -408,7 +407,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_referencer_nouveau_site' => 'Referenciar un sit nau',
 'icone_refuser_breve' => 'Arrefusar aquera br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuau',
-'icone_repartition_debut' => 'Afichar la desparticion dempuish la comen&ccedil;an&ccedil;a',
+'icone_repartition_debut' => 'Afichar la reparticion dempuish la comen&ccedil;an&ccedil;a',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_rubriques' => 'Rubricas',
@@ -439,7 +438,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_1_article' => '1 article',
 'info_1_breve' => '1 br&egrave;va',
 'info_1_site' => '1 sit',
-'info_a_suivre' => 'DE SEGUIR"',
+'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
 'info_acces_refuse' => 'Acc&egrave;s arrefusat',
@@ -519,8 +518,8 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_chemin_acces_2' => 'Ara que devetz configurar lo camin d\'acc&egrave;s a las informacions dens l\'annuari.',
 'info_chemin_acces_annuaire' => 'Opcions:<B>camin d\'acc&egrave;s dens l\'annuari',
 'info_choix_base' => 'Tresau estapa:',
-'info_classement_1' => '<sup>g&egrave;r</sup> de @liste@',
-'info_classement_2' => '<sup>nd</sup> de @liste@',
+'info_classement_1' => '&lt;sup&gt;&egrave;r&lt;/sup&gt; de @liste@',
+'info_classement_2' => '&lt;sup&gt;au&lt;/sup&gt; de @liste@',
 'info_code_acces' => 'N\'oblidetz pas los v&ograve;stes c&ograve;des d\'acc&egrave;s pr&ograve;pis!',
 'info_comment_lire_tableau' => 'Quin legir aqueth tabl&egrave;u',
 'info_confirmer_passe' => 'Confirmar aqueth mot de santa Clara nav&egrave;th:',
@@ -702,7 +701,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_nexen_1' => 'Lo v&ograve;ste aubergader qu\'ei Nexen Services.',
 'info_nexen_2' => 'Aparar lo repert&ograve;ri <tt>ecrire/data/</tt> que\'s deu har peu mejan de ',
 'info_nexen_3' => 'l\'espaci webm&egrave;stes',
-'info_nexen_4' => 'Volhatz crear manuaument la proteccion t&agrave; aqueth dorsi&egrave;r(un parelh login/mot de santa Clara qu\'ei necessari).',
+'info_nexen_4' => 'Volhatz crear manuaument la proteccion t&agrave; aqueth dorsi&egrave;r (un parelh login/mot de santa Clara qu\'ei necessari).',
 'info_nom' => 'Nom',
 'info_nom_destinataire' => 'Nom deu destinatari',
 'info_nom_non_utilisateurs_connectes' => 'Lo v&ograve;ste nom n\'apareish pas dens la t&egrave;ra deus utilizaires connectats.',
@@ -804,7 +803,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_rechercher_02' => 'Recercar:',
 'info_recommencer' => 'Volhatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
-'info_redacteur_2' => 'qui a acc&egrave;s a l\'espaci privat (<i>recomandat</i>)',
+'info_redacteur_2' => 'qui accedeish a l\'espaci privat (&lt;i&gt;recomandat&lt;/i&gt;)',
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
@@ -1259,7 +1258,7 @@ N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri 
  SONQUE dens un sit installat dab la medisha version d\'SPIP. L\'error
  qui consisteish a har ua sauvagarda abans de har ua actualizacion d\'SPIP qu\'ei correnta... Ent&agrave; mei detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Que podetz causir de sauvagardar lo fichi&egrave;r devath forma comprimida, ent&agrave;
- accelerar lo son transferiment a v&ograve;stre o a &ccedil;&ograve; d\'un servider de sauvagardas, e ent&agrave; estauviar espaci disc.',
+ accelerar lo son transferiment a v&ograve;ste o a &ccedil;&ograve; d\'un servider de sauvagardas, e ent&agrave; estauviar espaci disc.',
 'texte_adresse_annuaire_1' => '(Se lo v&ograve;ste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seguent qu\'ei estat ajustat a l\'article:',
 'texte_annuaire_ldap_1' => 'S\'acceditz a un annuari (LDAP), que\'u podetz utilizar t&agrave; importar automaticament utilizaires devath SPIP.',
@@ -1429,9 +1428,9 @@ tornar calcular sonque ua pagina, passatz meil&egrave;u per l\'espaci public e u
 'texte_restaurer_base' => 'Restaurar lo contengut d\'ua sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquera opcion que\'vs permet de restaurar ua sauvagarda 
  de la basa que l\'av&egrave;vatz h&egrave;ita abans. T&agrave; har aqu&ograve;, que cau aver botat lo fichi&egrave;r qui contien la sauvagarda 
-dens lo repert&ograve;ri <i>ecrire/data/</i>.
-  Totun, siatz prudent(a) dab aquera foncionalitat: <b>las modificacions e p&egrave;rdas eventuaus que son
-  irreversiblas.</b>',
+dens lo repert&ograve;ri &lt;i&gt;ecrire/data/&lt;/i&gt;.
+  Totun, siatz prudent(a) dab aquera foncionalitat: &lt;b&gt;las modificacions e p&egrave;rdas eventuaus que son
+  irreversiblas.&lt;/b&gt;',
 'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Sauvagardar la basa',
 'texte_sauvegarde_compressee' => 'La sauvagarda que\'s har&agrave; dens lo fichi&egrave;r non comprimit <b>ecrire/data/dump.xml</b>.',

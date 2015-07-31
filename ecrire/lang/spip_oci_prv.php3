@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_oci_prv'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -54,7 +54,7 @@ $GLOBALS['i18n_spip_oci_prv'] = array(
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir lei noms dei basas de donadas installadas.',
-'avis_lecture_noms_bases_2' => 'Si&aacute; ges de basa es disponibla, si&aacute; la foncion que permet s\'entierar lei basas es estada desactivada per de rasons de seguretat (aqu&ograve;\'s lo cas en c&ograve; de mai d\'un aubergador).',
+'avis_lecture_noms_bases_2' => 'Si&aacute; ges de basa es disponibla, si&aacute; la foncion que permet d\'entierar lei basas es estada desactivada per de rasons de seguretat (aqu&ograve;\'s lo cas en c&ograve; de mai d\'un aubergador).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta lo v&ograve;stre nom de login si&aacute; utilizabla:',
 'avis_non_acces_message' => 'Pod&egrave;tz pas accedir a aqueu messatge.',
 'avis_non_acces_page' => 'Pod&egrave;tz pas accedir a aquela pagina.',
@@ -78,6 +78,7 @@ la documentacion d\'SPIP</a>.',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Enrodar amb de &laquo; verguetas francesas &raquo;',
 'barre_guillemets_de' => 'Enrodar amb de &#8222;verguetas&#8220;',
+'barre_guillemets_simples' => '<NEW> Rodar amb de &#8220;vergetas&#8221;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [liame ipert&egrave;xt->http://...]',
@@ -107,7 +108,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
 'bouton_forum_petition' => 'FORUM E PETICION',
 'bouton_modifier' => 'Modificar',
-'bouton_pense_bete' => 'PER SE REMEMBRAR (A USATGE PERSONAU)',
+'bouton_pense_bete' => 'PER SE REMEMBRAR (D\'USATGE PERSONAU)',
 'bouton_radio_activer_messagerie' => 'Activar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_activer_messagerie_interne' => 'Activar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_activer_petition' => 'Activar la peticion',
@@ -407,7 +408,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_referencer_nouveau_site' => 'Referenciar un sit n&ograve;u',
 'icone_refuser_breve' => 'Refusar aquela br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
-'icone_repartition_debut' => 'Afichar la desparticion dempuei la comen&ccedil;an&ccedil;a',
+'icone_repartition_debut' => 'Afichar la reparticion dempuei la comen&ccedil;an&ccedil;a',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_rubriques' => 'Rubricas',
@@ -438,7 +439,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_1_article' => '1 article',
 'info_1_breve' => '1 br&egrave;va',
 'info_1_site' => '1 sit',
-'info_a_suivre' => 'DE SEGUIR"',
+'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
 'info_acces_refuse' => 'Acc&egrave;s refusat',
@@ -518,7 +519,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_chemin_acces_2' => 'Ara dev&egrave;tz configurar lo camin d\'acc&egrave;s ais informacions dins l\'annuari.',
 'info_chemin_acces_annuaire' => 'Opcions: <B>camin d\'acc&egrave;s dins l\'annuari',
 'info_choix_base' => 'Tresena estapa:',
-'info_classement_1' => '<sup>i&egrave;r</sup> de @liste@',
+'info_classement_1' => '&lt;sup&gt;ier&lt;/sup&gt; de @liste@',
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;strei c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
@@ -804,7 +805,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_rechercher_02' => 'Recercar:',
 'info_recommencer' => 'Vougatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
-'info_redacteur_2' => 'qu\'a acc&egrave;s a l\'espaci privat (<i>recomandat</i>)',
+'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (&lt;i&gt;recomandat&lt;/i&gt;)',
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
@@ -1429,9 +1430,9 @@ tornar calcular ren qu\'una pagina, passatz pusl&egrave;u per l\'espaci public e
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una sauvagarda 
  de la basa que l\'aviatz facha avans. Per aqu&ograve; faire, cau aver botat lo fichier que conten la sauvagarda 
-dans lo repert&ograve;ri <i>ecrire/data/</i>.
-  Pasmens, sigatz prudent(a) amb aquela foncionalitat: <b>lei modificacions e p&egrave;rdas eventualas son
-  irreversiblas.</b>',
+dins lo repert&ograve;ri &lt;i&gt;ecrire/data/&lt;/i&gt;.
+  Pasmens, sigatz prudent(a) amb aquela foncionalitat: &lt;b&gt;lei modificacions e p&egrave;rdas eventualas son
+  irreversiblas.&lt;/b&gt;',
 'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Sauvagardar la basa',
 'texte_sauvegarde_compressee' => 'La sauvagarda se far&agrave; dins lo fichier non comprimit <b>ecrire/data/dump.xml</b>.',

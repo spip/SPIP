@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_nl'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -82,7 +82,8 @@ $GLOBALS['i18n_spip_nl'] = array(
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
 'barre_gras' => 'In het {{vet}} zetten',
 'barre_guillemets' => 'Met &laquo; Franse haakjes &raquo; omringen',
-'barre_guillemets_simples' => 'Met “haakjes” omringen',
+'barre_guillemets_de' => 'Van „haakjes“ voorzien',
+'barre_guillemets_simples' => '-vide-',
 'barre_intertitre' => 'Omzetten naar {{{tussentitel}}}',
 'barre_italic' => '{cursief} zetten',
 'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
