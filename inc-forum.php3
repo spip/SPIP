@@ -134,24 +134,24 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	$retour = $HTTP_GET_VARS['retour'];
 	if ($retour)
-		$retour = rawurlencode($retour);
+		$retour = $retour;
 	else 
 		$retour = rawurlencode($lien);
 
-	$fich = $PATH_TRANSLATED;
-	if ($p = strrpos($PATH_TRANSLATED, '/')) $fich = substr($fich, $p + 1);
-	if ($p = strpos($fich, '?')) $fich = substr($fich, 0, $p);
+	$fich = $REQUEST_URI;
+	if ($p = strrpos($REQUEST_URI, '/')) $fich = substr($fich, $p + 1);
+	
 
 	$ret .= "\n<A NAME='formulaire_forum'>";
 	$ret .= "\n<FORM ACTION='$fich' METHOD='post'>";
 	$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
-
+	
 	if ($forums_publics == "pri") {
-		$ret .= "Ce forum est mod&eacute;r&eacute; a priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
+		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}
 	
 	if ($forums_publics == "abo") {
-		$ret .= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
+		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
 	}
 	
 	$ret .= "\n";
@@ -166,16 +166,12 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		else if ($id_breve)
 			$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve";
 		else if ($id_syndic)
-			$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
-
-		$titre_select .= " AND statut='publie'";
-
+			$titre_select = "SELECT nom_site FROM spip_syndic WHERE id_syndic = $id_syndic";
+	
 		$res = mysql_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
 	
-
-	// <previsualisation>
 
 	if (!$id_message > 0){
 		$nouveau_document = true;
@@ -236,20 +232,18 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 		$ret .= "</div>\n<p>";
 	}
-
+	
 	/*
 	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}	
 	
 	if ($forums_publics == "abo") {
-		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?>';
+		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?>';
 	}
 	*/
 	
 	$ret .= "\n";
-
-	// </previsualisation>
 
 	$seed = (double) (microtime() + 1) * time() * 1000000;
 	@mt_srand($seed);
