@@ -43,6 +43,63 @@ function base_dump_dir($meta){
 }
 
 /**
+ * Lister toutes les tables d'un serveur
+ * en excluant eventuellement une liste fournie
+ *
+ * @param string $serveur
+ * @param array $tables
+ * @param array $exclude
+ * @return array
+ */
+function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = array()) {
+	spip_connect($serveur);
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+
+	$p = '/^' . $prefixe . '/';
+	$res = $tables;
+	foreach(sql_alltable(null,$serveur) as $t) {
+		if (preg_match($p, $t)) {
+			$t = preg_replace($p, 'spip', $t);
+			if (!in_array($t, $tables) AND !in_array($t, $exclude)) $res[]= $t;
+		}
+	}
+	sort($res);
+	return $res;
+}
+
+
+/**
+ * Fabrique la liste a cocher des tables a traiter (copie, delete, sauvegarde)
+ *
+ * @param string $name
+ * @param bool $check
+ * @return string
+ */
+function base_saisie_tables($name, $tables, $exclude = array(), $post=null, $serveur='') {
+	include_spip('inc/filtres');
+	foreach ($tables as $k => $t) {
+		// par defaut tout est coche sauf les tables dans $exclude
+		if (is_null($post))
+			$check = (in_array($t,$exclude)?false:true);
+		// mais si on a poste une selection, la reprendre
+		else
+			$check = in_array($t,$post);
+
+		$res[$k] = "<input type='checkbox' value='$t' name='$name"
+			. "[]' id='$name$k'"
+			. ($check ? " checked='checked'" : '')
+			. "/>\n"
+			. "<label for='$name$k'>".$t."</label>"
+			. " ("
+			. sinon(singulier_ou_pluriel(sql_countsel($t,'','','',$serveur), 'dump:une_donnee', 'dump:nb_donnees'),_T('dump:aucune_donnee'))
+	  		. ")";
+	}
+	return $res;
+}
+
+
+/**
  * Lister les tables non exportables par defaut
  * (liste completable par le pipeline lister_tables_noexport
  *
