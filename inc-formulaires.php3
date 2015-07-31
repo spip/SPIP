@@ -306,14 +306,19 @@ function formulaire_inscription($type) {
 			$id_auteur = $row['id_auteur'];
 			$statut = $row['statut'];
 
-			echo "<b>";
+			unset ($continue);
 			if ($statut == '5poubelle')
-				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";
-			else
-				echo "Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.";
-			echo "</b>";
-		}
-		else {	// envoyer identifiants par mail
+				echo "<b>Vous n'avez plus acc&egrave;s &agrave; ce site.</b>";
+			else if ($statut == 'nouveau') {
+				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
+				$continue = true;
+			} else
+				echo "<b>Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.</b>";
+		} else
+			$continue = true;
+
+		// envoyer identifiants par mail
+		if ($continue) {
 			include_local("inc-forum.php3");
 			$pass = generer_pass_forum($mail_inscription);
 			$login = test_login($mail_inscription);
