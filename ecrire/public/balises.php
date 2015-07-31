@@ -469,7 +469,7 @@ function balise_CHAPO_dist ($p) {
 		$p->code = $_chapo;
 	else
 		$p->code = "nettoyer_chapo($_chapo)";
-	$p->interdire_scripts = false;
+	$p->interdire_scripts = true;
 	return $p;
 }
 // #LESAUTEURS
