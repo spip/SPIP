@@ -55,6 +55,16 @@ function redirige_par_entete($url, $equiv='') {
 	exit;
 }
 
+function redirige_formulaire($url, $equiv = '') {
+	if (!_request('var_ajax'))
+		redirige_par_entete($url, $equiv);
+	else {
+		spip_log("redirige formulaire ajax: $url");		
+		ajax_retour("<script type='javascript'>window.location='$url';</script>",true);
+		exit;
+	}
+}
+
 // http://doc.spip.org/@redirige_url_ecrire
 function redirige_url_ecrire($script='', $args='', $equiv='') {
 	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
