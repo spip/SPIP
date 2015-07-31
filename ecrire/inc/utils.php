@@ -198,7 +198,7 @@ function spip_log($message=NULL, $name=NULL) {
 	preg_match('/^([a-z_]*)\.?(\d)?$/iS', (string) $name, $regs);
 	if (!$logname = $regs[1])
 		$logname = null;
-	if (!$niveau = $regs[2])
+	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
 
 	if ($niveau <= 
