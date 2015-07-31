@@ -23,7 +23,14 @@ define('_DEFAULT_DB', 'spip');
 
 // http://doc.spip.org/@base_db_pg_dist
 function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
-
+	static $last_connect = array();
+	
+	// si provient de selectdb
+	if (empty($addr) && empty($port) && empty($login) && empty($pass)){
+		foreach (array('addr','port','login','pass','prefixe','ldap') as $a){
+			$$a = $last_connect[$a];
+		}
+	}
 	@list($host, $p) = split(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
 	if ($db) {
@@ -37,6 +44,17 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 	    }
 	}
 
+	if ($link)
+		$last_connect = array (
+			'addr' => $addr,
+			'port' => $port,
+			'login' => $login,
+			'pass' => $pass,
+			'db' => $db,
+			'prefixe' => $prefixe,
+			'ldap' => $ldap
+		);
+		
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($link ? 'operationnelle' : 'impossible'));
 
@@ -207,8 +225,16 @@ function spip_pg_explain($query, $serveur=''){
 }
 
 // http://doc.spip.org/@spip_pg_selectdb
-function spip_pg_selectdb($db) {
-	return pg_dbname();
+function spip_pg_selectdb($db, $serveur='') {
+	// se connecter a la base indiquee
+	// avec les identifiants connus
+	$index = $serveur ? $serveur : 0;
+
+	if ($link = spip_connect_db('', '', '', '', $db, 'pg', '', '')){
+		if (($db==$link['db']) && $GLOBALS['connexions'][$index] = $link)
+			return $db;					
+	} else
+		return false;
 }
 
 // Qu'une seule base pour le moment
