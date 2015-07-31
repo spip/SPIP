@@ -1595,8 +1595,8 @@ function fin_grand_cadre(){
 // Cadre formulaires
 
 function debut_cadre_formulaire(){
-	echo "\n<div style='border-top: 1px solid #aaaaaa; border-left: 1px solid #aaaaaa; border-right: 1px solid white; border-bottom: 1px solid white; padding: 0px;'>";
-	echo "\n<div style='border: 1px dashed #666666; padding: 10px; background-color:#e4e4e4;'>";
+	echo "\n<div style='width: 100%; border-top: 1px solid #aaaaaa; border-left: 1px solid #aaaaaa; border-right: 1px solid white; border-bottom: 1px solid white; padding: 0px;'>";
+	echo "\n<div style='width: 100%; border: 1px dashed #666666; padding: 10px; background-color:#e4e4e4;'>";
 }
 
 function fin_cadre_formulaire(){
