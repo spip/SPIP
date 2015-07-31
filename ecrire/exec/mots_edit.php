@@ -144,7 +144,7 @@ if ($id_mot) {
 	voir_en_ligne ('mot', $id_mot);
 
 	fin_boite_info();
- } else {echo _T('info_mot_sans_groupe'); exit;}
+ } else if (!$new) {echo _T('info_mot_sans_groupe'); exit;}
 
 //////////////////////////////////////////////////////
 // Logos du mot-clef
