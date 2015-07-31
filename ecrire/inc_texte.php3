@@ -88,7 +88,10 @@ function code_echappement($rempl, $source='') {
 	$mode = preg_match(',<('._BALISES_BLOCS.')[>[:space:]]>,', $rempl) ?
 		'div' : 'span';
 	$nn = ($mode == 'div') ? "\n\n" : '';
-	return "<$mode class=\"base64$source\">$base64</$mode>$nn";
+
+	return
+		inserer_attribut("<$mode class=\"base64$source\">", 'title', $base64)
+		."</$mode>$nn";
 }
 
 // - pour $source voir commentaire infra (echappe_retour)
@@ -175,13 +178,13 @@ function echappe_html($letexte, $source='', $no_transform=false) {
 // par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
 // ou encore dans typo()
 function echappe_retour($letexte, $source='') {
-	if (strpos($letexte," class=\"base64$source")) {
-		# var_dump($letexte);  ## pour les curieux
+	if (strpos($letexte,"base64$source")) {
+		# echo htmlspecialchars($letexte);  ## pour les curieux
 		if (preg_match_all(
-		',<(span|div) class="base64'.$source.'">([^<>]*)</\1>,ms',
+		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*>,Ums',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
-				$rempl = base64_decode($reg[2]);
+				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
 				$letexte = str_replace($reg[0], $rempl, $letexte);
 			}
 		}
