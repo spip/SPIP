@@ -494,7 +494,7 @@ function debug_script ($t) {
 		. "'>"
 		. $rotlvl
 		. '</a></h3>';
-		$t ='';
+		list($t, ) = emboite_texte($t);
 	} else {
 		list($t, $err) = emboite_texte($t);
 	}

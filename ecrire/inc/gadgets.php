@@ -150,7 +150,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 
 	$zdecal++;
 
-	$ret = "<div class='pos_r' \nonMouseOver=\"montrer('b_$id_rubrique');\"\nonMouseOut=\"cacher('b_$id_rubrique');\">"
+	$ret = "<div class='pos_r' \nonmouseover=\"montrer('b_$id_rubrique');\"\nonmouseout=\"cacher('b_$id_rubrique');\">"
 	  . '<div class="brt">'
 		. $nav
 		. "</div>\n<div class='bandeau_rub' style='top: 14px; left: 15px; z-index: " . 1 . ";' id='b_$id_rubrique'>"
