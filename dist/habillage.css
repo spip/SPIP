@@ -49,7 +49,6 @@ body { font-size: 100%; color: #333; }
 h1, h2, .chapo, .hyperlien, .texte, .ps, .notes, .introduction, #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
 h3 { font-family: Georgia, Times, serif; }
 body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, Tahoma, Geneva, sans-serif; }
-.notes { font-size: 0.82em; }
 
 
 /* Personnalisation des styles HTML par defaut
@@ -65,8 +64,6 @@ h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight
 /* Divers */
 hr { width: 40%; height: 2px; margin: 4em auto; background-color: #999; color: #999; border: 0; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
-.published { border-style: none;}
-address {display: inline;}
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
 
@@ -119,10 +116,10 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-.chapo { margin-bottom: 1.50em; font-weight: bold; line-height: 1.40em; color: #669; }
+.chapo { margin-bottom: 1.50em; font-weight: bold; color: #669; line-height: 1.40em; }
 .texte { line-height: 1.60em; }
-.ps, .notes { line-height: 1.40em; margin-bottom: 2em; }
-.notes { clear: both; }
+.ps, .notes { margin-bottom: 2em; line-height: 1.40em; }
+.notes { clear: both; font-size: 0.82em; }
 
 .hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 
@@ -247,6 +244,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
 .articles ul li h3 { margin: 0; padding: 0; font-weight: bold; }
 .articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
+.articles ul li abbr.published { border: 0; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
 

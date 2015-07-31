@@ -35,7 +35,7 @@
                 <li class="hentry">
                     [(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
                     <h3 class="entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE</a></h3>
-                    <small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small>
+                    <small><abbr class="published"[ title="(#DATE|date_iso)"]>[(#DATE|affdate_jourcourt)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small>
                     [<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION)</div>]
                 </li>
                 </BOUCLE_articles_recents>
