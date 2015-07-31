@@ -1736,7 +1736,7 @@ function form_hidden($action) {
 				? ''
 				: ' value="'.entites_html($val).'"'
 				)
-			. ' type="hidden"'."\n />";
+			. ' type="hidden"'."\n/>";
 	}
 	return join("", $hidden);
 }
