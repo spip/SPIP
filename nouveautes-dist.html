@@ -8,7 +8,7 @@
 
 unset($mail_nouveautes);
 
-$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes:>';
+$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes|texte_script:>';
 
 //
 // Articles
@@ -16,8 +16,8 @@ $sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes:>'
 <B_nv1>
 $mail_nouveautes = '
 
-          <:nouveaux_articles:>
-          -----------------
+          <:nouveaux_articles|texte_script:>
+          --------------------------
 
 ';
 <BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
@@ -36,8 +36,8 @@ $mail_nouveautes = '
 $mail_nouveautes .= '
 
           
-          <:nouvelles_breves:>
-          ----------------
+          <:nouvelles_breves|texte_script:>
+          --------------------------
 
 ';
 <BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
@@ -52,12 +52,12 @@ $mail_nouveautes .= '
 //	Ajouter l'entete
 //
 if ($mail_nouveautes) {
-		$mail_nouveautes = '<:bonjour:>
+	$mail_nouveautes = '<:bonjour|texte_script:>
 
-<:texte_lettre_information:> "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP).
-<:texte_lettre_information_2:> '.$jours_neuf.' <:jours:>.
+<:texte_lettre_information|texte_script:> "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP).
+<:texte_lettre_information_2|texte_script:> '.$jours_neuf.' <:jours|texte_script:>.
 
 ' . $mail_nouveautes;
-	}
+}
 
 ?>

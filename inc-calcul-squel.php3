@@ -1769,7 +1769,7 @@ function calculer_texte($texte)
 	$code = "";
 
 	//
-	// Reperer les directives d'inclusion de squelette et les balises de traduction <:toto:>
+	// Reperer les directives d'inclusion de squelette <INCLURE>
 	//
 	while (ereg("(<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $texte, $match)) {
 		$s = $match[0];
