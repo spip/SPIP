@@ -20,7 +20,7 @@
 	</BOUCLE_test_racine>
 	<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>
 	<div class="frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]">
-		<a href="[(#SELF|parametre_url{id_objet,#ID_PARENT|?{#ID_PARENT}})]" class="frame_close ajax"><img src="#CHEMIN_IMAGE{fermer-16}" alt="fermer" width="16" height="16" /></a>
+		<a href="[(#SELF|parametre_url{id_objet,#ID_PARENT|?{#ID_PARENT,0}})]" class="frame_close ajax"><img src="#CHEMIN_IMAGE{fermer-16}" alt="fermer" width="16" height="16" /></a>
 		<h2><a class="ajax" href="[(#SELF|parametre_url{id_objet,#ID_RUBRIQUE})]">#TITRE</a></h2>
 		#INCLURE{fond=formulaires/selecteur/lister, quoi=rubriques, id_rubrique, env}
 	</div>
