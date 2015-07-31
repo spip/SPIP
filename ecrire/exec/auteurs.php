@@ -81,9 +81,10 @@ function bandeau_auteurs($tri, $statut)
 {
 	global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
-	if ($tri=='nom') $s = _T('info_par_nom');
-	elseif ($tri=='statut') $s = _T('info_par_statut');
-	elseif ($tri=='nombre') $s = _T('info_par_nombre_articles');
+	if ($tri=='nom') $s = ' (' . _T('info_par_nom') . ')';
+	elseif ($tri=='statut') $s = ' (' . _T('info_par_statut') . ')';
+	elseif ($tri=='nombre') $s = ' (' . _T('info_par_nombre_articles') . ')';
+	else $s = ''; 
 
 	if ($statut == '6forum') {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
