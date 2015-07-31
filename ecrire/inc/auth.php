@@ -105,7 +105,7 @@ function inc_auth_dist() {
 		redirige_par_entete(generer_url_public('login',
 			"url=".urlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
-			. $clean_link->getUrl())),true).$erreurcookie);
+			. str_replace('&amp;', '&', self()))),true).$erreurcookie);
 	}
 
 	//
