@@ -459,7 +459,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	// Attention sous windows, getFileName() retourne un antislash. 
 	$reflector = new ReflectionFunction($fonction_balise);
 	$file = str_replace('\\', '/', $reflector->getFileName());
-	if (strncmp($file,_ROOT_RACINE,strlen(_ROOT_RACINE))==0){
+	if (strncmp($file, str_replace('\\', '/', _ROOT_RACINE), strlen(_ROOT_RACINE)) === 0) {
 		$file = substr($file, strlen(_ROOT_RACINE));
 	}
 
