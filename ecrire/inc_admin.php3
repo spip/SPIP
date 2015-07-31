@@ -97,6 +97,7 @@ function demande_maj_version()
 	global $spip_version;
 	$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
 	if ($version_installee == $spip_version) return false;
+	include_ecrire("inc_presentation.php3");
 	debut_page();
 	if (!$version_installee) $version_installee = _T('info_anterieur');
 	echo "<blockquote><blockquote><h4><font color='red'>"._T('info_message_technique')."</font><br> "._T('info_procedure_maj_version')."</h4>
