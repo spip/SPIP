@@ -1575,7 +1575,11 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	$res = '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style.css').'" />'
 
-	// CSS espace prive
+	// CSS de secours en cas de non fonct de la suivante
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
+	. 'style_prive_defaut.css" />'
+	
+	// CSS espace prive : la vrai
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $args) .'" />
 '
