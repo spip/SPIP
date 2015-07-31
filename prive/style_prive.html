@@ -19,7 +19,7 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
-#SET{chemin_img_pack,#ENV{ie,10}|intval|<{7}|?{#GET{chemin_img_pack},#EVAL{ _DIR_IMG_PACK}}}
+#SET{chemin_img_pack,#ENV{ie,10}|intval|<{7}|?{#EVAL{_DIR_IMG_PACK}|concat{'wrapper.php?file='},#EVAL{_DIR_IMG_PACK}}}
 
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
 [(#INCLURE{fond=style_vieilles_def}{couleur_claire}{couleur_foncee}{lang}{ltr})]
