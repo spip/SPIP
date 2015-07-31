@@ -381,6 +381,7 @@ function calculer_criteres ($idb, &$boucles) {
 
 		// Restriction de valeurs (implicite ou explicite)
 		else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
+			$op = $match[5];
 			// Variable comparee
 			$col = $match[1];
 			$fct = '';
@@ -392,10 +393,25 @@ function calculer_criteres ($idb, &$boucles) {
 			$col_table = $id_table;
 			// Valeur de comparaison
 			if ($match[3]) {
-				$val = calculer_param_dynamique($match[6], $boucles, $idb);
-				// erreur
-				if (is_array($val)) return $val;
-
+				if (strtoupper($op) != 'IN') {
+					$val = calculer_param_dynamique($match[6], $boucles, $idb);
+					if (is_array($val)) return $val;
+				}
+				else {
+				// traitement special des valeurs textuelles
+					ereg("^ *\(?(.*[^)])\)? *$",$match[6], $val2);
+					spip_log($match[6] . ' ' . $val2[1]);
+					$val2 = split(" *, *", $val2[1]);
+					foreach ($val2 as $v) {
+						$v = calculer_param_dynamique($v, $boucles, $idb);
+						if (is_array($v)) return $v;
+						if (strpos('"0123456789',$v[0]) !== false)
+							$val3[] = $v;
+						else
+							$val3[] = "'$v'";
+					}
+					$val = join(',', $val3);
+				}
 			}
 			
 			else {
@@ -532,22 +548,13 @@ function calculer_criteres ($idb, &$boucles) {
 				$boucle->plat = true;
 
 			// Operateur de comparaison
-			$op = $match[5];
+
 			if (!$op)
 				$op = '=';
 			else if ($op == '==')
 				$op = 'REGEXP';
 			else if (strtoupper($op) == 'IN') {
 				// traitement special des valeurs textuelles
-				$val2 = split(",", $val);
-				foreach ($val2 as $v) {
-					$v = trim($v);
-					if (ereg("^[0-9]+$",$v))
-						$val3[] = $v;
-					else
-						$val3[] = "'$v'";
-				}
-				$val = join(',', $val3);
 				$where = "$col IN ($val)";
 				if ($match[4] == '!') {
 					$where = "NOT ($where)";
