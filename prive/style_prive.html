@@ -527,7 +527,7 @@ td.message, a.message { background: url([(#CHEMIN_IMAGE{m_envoi[(#GET{rtl})].gif
 
 .liste-objets table.spip {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin-bottom:0;}
 .liste-objets table.spip caption {margin:0;text-align:left;}
-.liste-objets .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px 6px 30px;background:none no-repeat scroll 2px 2px #FFFFFF}
+.liste-objets .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px;background:none no-repeat scroll 2px 2px #FFFFFF}
 .liste-objets table.spip tr {background:white;}
 .liste-objets table.spip tr.row_odd {background:white;}
 .liste-objets table.spip tr.row_even {background:white;}
@@ -558,12 +558,12 @@ td.message, a.message { background: url([(#CHEMIN_IMAGE{m_envoi[(#GET{rtl})].gif
 .liste-objets.syndic_articles td .source {display:block;text-align:#GET{right};}
 .liste-objets.syndic_articles td .tags a {color:#666;}
 
-.liste-objets.mots .caption {background-image:url(#CHEMIN_IMAGE{mot-cle-24.gif});}
-.liste-objets.rubriques .caption {background-image:url(#CHEMIN_IMAGE{rubrique-24.gif});}
-.liste-objets.articles .caption {background-image:url(#CHEMIN_IMAGE{article-24.gif});}
-.liste-objets.breves .caption {background-image:url(#CHEMIN_IMAGE{breve-24.gif});}
-.liste-objets.sites .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});}
-.liste-objets.syndic_articles .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});}
+.liste-objets.mots .caption {background-image:url(#CHEMIN_IMAGE{mot-cle-24.gif});padding-#GET{left}:30px;}
+.liste-objets.rubriques .caption {background-image:url(#CHEMIN_IMAGE{rubrique-24.gif});padding-#GET{left}:30px;}
+.liste-objets.articles .caption {background-image:url(#CHEMIN_IMAGE{article-24.gif});padding-#GET{left}:30px;}
+.liste-objets.breves .caption {background-image:url(#CHEMIN_IMAGE{breve-24.gif});padding-#GET{left}:30px;}
+.liste-objets.sites .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
+.liste-objets.syndic_articles .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
 
 /* dans une colonne laterale, ne visualiser que l'info principale, le statut et l'id */
 #navigation .liste-objets tr > .secondaire,
