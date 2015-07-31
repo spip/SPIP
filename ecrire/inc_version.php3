@@ -1085,4 +1085,23 @@ function debut_entete($title, $entete='') {
 }
 
 
+//
+// find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
+//
+function find_in_path ($filename, $path='AUTO') {
+	if ($path == 'AUTO') {
+		$path = '.:squelettes:squelettes/dist:squelettes/dist/formulaires';
+		if ($GLOBALS['dossier_squelettes'])
+			$path = $GLOBALS['dossier_squelettes'].':'.$path;
+	}
+
+	foreach (split(':', $path) as $dir) {
+		#spip_log ("test $path for $filename");
+		if (@is_dir($dir) AND @file_exists("$dir/$filename")) {
+			#spip_log("$dir/$filename");
+			return "$dir/$filename";
+		}
+	}
+}
+
 ?>

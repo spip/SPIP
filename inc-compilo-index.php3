@@ -138,7 +138,7 @@ function calculer_balise($nom, $p) {
 	// regarder s'il existe un fichier d'inclusion au nom de la balise
 	// et contenant un tableau balise_NOM_collecte
 	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
-	if (@file_exists($file)) {
+	if ($file = find_in_path($file)) {
 		include_local($file);
 		$f = $GLOBALS['balise_' . $nom . '_collecte'];
 		if (is_array($f))

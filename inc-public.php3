@@ -48,7 +48,7 @@ else {
 	// afin que celle-ci contienne la signature
 
 	if ($GLOBALS['_GET']['val_confirm']) {
-		include_local('inc-formulaire_signature.php3');
+		include_local(find_in_path('inc-formulaire_signature.php3'));
 		reponse_confirmation($id_article, $val_confirm);
 	}
 
@@ -67,7 +67,7 @@ else {
 	if ($affiche_boutons_admin = (!$flag_preserver
 	AND ($_COOKIE['spip_admin']
 	OR $_COOKIE['spip_debug'])))
-		include_local('inc-formulaire_admin.php3');
+		include_local(find_in_path('inc-formulaire_admin.php3'));
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);

@@ -5,8 +5,8 @@
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 function affiche_boutons_admin(&$contenu) {
 	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
-	if (@file_exists('spip_admin_perso.css'))
-		$css2 = "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
+	if ($f = find_in_path('spip_admin_perso.css'))
+		$css2 = "<link rel='stylesheet' href='$f' type='text/css' />\n";
 
 	if (preg_match('@<(/head|body)@i', $contenu, $regs)) {
 		$contenu = explode($regs[0], $contenu, 2);
