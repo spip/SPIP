@@ -76,7 +76,7 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 			'texte' => $texte,
 			'site_obli' => $site_obli,
 			'message' => $message,
-			'self' => $GLOBALS["clean_link"]->getUrl()
+			'self' => str_replace('&amp;', '&', self())
 		));
 	}
 }
@@ -257,10 +257,9 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				while ($row = spip_fetch_array($result_site)) {
 					$titre = $row['titre'];
 				}
-
-				$link = new Link($url_page);
-				$link->addVar('var_confirm', $passw);
-				$url = $link->getUrl("sp$id_article");
+				$url = parametre_url($url_page,
+					'var_confirm',$passw,'&')
+					."#sp$id_article";
 	
 				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 

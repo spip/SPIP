@@ -55,7 +55,6 @@ function afficher_sites($titre_table, $requete) {
 			//echo "<tr bgcolor='$couleur'>";
 
 			//echo "<td class='arial2'>";
-			$link = new Link(generer_url_ecrire("sites","id_syndic=$id_syndic"));
 			switch ($statut) {
 			case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
@@ -84,7 +83,7 @@ function afficher_sites($titre_table, $requete) {
 				$title = _T('info_panne_site_syndique');
 			}
 
-			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
+			$s = "<a href=\"".generer_url_ecrire("sites","id_syndic=$id_syndic")."\" title=\"$title\">";
 
 			if ($voir_logo);
 				$s .= baliser_logo("site", $id_syndic, 26, 20) ;

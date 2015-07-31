@@ -51,19 +51,15 @@ function menu_lang_pour_tous($nom, $opt) {
 	if (!$opt)
 		return '';
 
-	$post = generer_url_public('spip_cookie');
-	$cible = new Link('', /* racine */ true); # lien a partir de /
-	$cible->delVar('lang');
-	$cible = $cible->getUrl();
-	$postcomplet = new Link($post);
-	$postcomplet->addvar('url', $cible);
+	$cible = parametre_url(self( /* racine */ true), 'lang' , ''); # lien a partir de /
+	$postcomplet = generer_url_action('cookie', 'url='.rawurlencode($cible));
 
 	return array('formulaire_menu_lang',
 		3600,
 		array('nom' => $nom,
 			'url' => $post,
 			'cible' => $cible,
-			'retour' => $postcomplet->getUrl(),
+			'retour' => $postcomplet,
 			'langues' => $opt
 		)
 	);

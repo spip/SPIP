@@ -24,8 +24,8 @@ function help_frame ($aide) {
 
 	echo "</head>\n";
 
-	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu") . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body") . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
+	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 		echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">';
@@ -86,13 +86,6 @@ function fichier_aide($lang_aide = '') {
 		}
 		
 		// Pas d'aide meme sur internet : n'existe pas dans la langue
-
-		// Hack: comportement special sur le serveur d'aide SPIP.NET
-		// (definir la constante SPIP.NET_...)
-		if (defined('SPIP.NET_PAS_DE_BOUCLE_AIDE')) {
-			$GLOBALS['clean_link'] = new Link("../aide/?aide=$aide");
-		}
-
 		erreur_aide_indisponible();
 	}
 
@@ -135,7 +128,7 @@ function help_body($aide, $html) {
 		$img = str_replace('/', '-', $r[3]);
 		$html .= substr($suite, 0, $p) .
 		  $r[1] . 
-		  generer_url_ecrire('aide_index', "img=$img");
+		  generer_url_ecrire('aide_index', "img=$img", false, true);
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
 
@@ -206,7 +199,7 @@ table.spip td {
 <TR WIDTH=100% HEIGHT=60%>
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 <CENTER>
-<img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif"),
+<img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
 		  '" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
@@ -421,7 +414,7 @@ function article($titre, $lien, $statut = "redac") {
 			$class = "article-inactif";
 		}
 		$texte[$ligne] .= "<a class='$class' id='$id'
- href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang") .
+ href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
 		  "' target='droite' onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
 	}
 }

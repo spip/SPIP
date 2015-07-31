@@ -324,9 +324,6 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 if (!headers_sent())
 	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net");
 
-// Lien vers la page demandee et lien nettoye ne contenant que des id_objet
-$clean_link = new Link();
-
-# spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
+# spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
 ?>

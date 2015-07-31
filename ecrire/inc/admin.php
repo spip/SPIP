@@ -18,7 +18,6 @@ function fichier_admin($action) {
 }
 
 function debut_admin($form, $action, $commentaire='') {
-	global $clean_link;
 	global $connect_statut;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {

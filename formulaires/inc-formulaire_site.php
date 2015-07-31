@@ -33,7 +33,7 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 	if (!_request('nom_site'))
 		return array('formulaire_site', $GLOBALS['delais'],
-			array('self' => $GLOBALS["clean_link"]->getUrl()
+			array('self' => str_replace('&amp;', '&', self())
 		));
 
 	// Tester le nom du site

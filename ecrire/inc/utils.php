@@ -359,67 +359,8 @@ function self($root = false) {
 }
 
 
-class Link {
-	var $uri;
-
-	//
-	// Contructeur : a appeler soit avec l'URL du lien a creer,
-	// soit sans parametres, auquel cas l'URL est l'URL courante
-	//
-	// parametre $root = demander un lien a partir de la racine du serveur /
-	function Link($url = '', $root = false) {
-		if (!$url)
-			$url = self($root);
-		$this->uri = $url;
-	}
-
-	//
-	// Effacer une variable
-	//
-	function delVar($name) {
-		$this->uri = parametre_url($this->uri, $name, '', '&');
-	}
-
-	//
-	// Ajouter une variable
-	// (si aucune valeur n'est specifiee, prend la valeur globale actuelle)
-	//
-	function addVar($name, $value = NULL) {
-		$this->uri = parametre_url($this->uri, $name, $value, '&');
-	}
-
-	//
-	// Recuperer l'URL correspondant au lien
-	//
-	function getUrl($anchor = '') {
-		return $this->uri . ($anchor ? '#'.$anchor : '');
-	}
-
-	//
-	// Recuperer le debut de formulaire correspondant au lien
-	// (tag ouvrant + entrees cachees representant les variables)
-	//
-
-	function getForm($method = 'get', $query = '', $enctype = '') {
-		include_spip('inc/filtres');
-
-		if (preg_match(',^[a-z],i', $query))
-			$action = $query;
-		else
-			$action = preg_replace(',[?].*,', '', $this->uri).$query;
-
-		$form = "<form method='$method' action='"
-		.quote_amp($action)."'";
-		if ($enctype) $form .= " enctype='$enctype'";
-		$form .= " style='border: 0px; margin: 0px;'>\n";
-		$form .= form_hidden($this->uri);
-		return $form;
-	}
-}
-
-
 //
-// Gerer les valeurs meta 
+// Gerer les valeurs meta
 //
 // Fonction lire_meta abandonnee, remplacee par son contenu. Ne plus utiliser
 function lire_meta($nom) {
