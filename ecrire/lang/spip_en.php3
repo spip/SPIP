@@ -279,7 +279,7 @@ Thank you for your participation
 		this forum, you must register. Thank you
 		for entering the personal identifier
 		supplied to you. If you are not already registered, you must',
-'forum_vous_inscrire' => 'register </a> first.',
+'forum_vous_inscrire' => 'register.',
 
 
 // I
@@ -370,8 +370,9 @@ Thank you for your participation
 'info_contact_developpeur' => 'Please contact a developer.',
 'info_contenance' => 'This site contains:',
 'info_contribution' => 'forum contributions',
-'info_copyright' => 'is free software distributed <a href=\'license.txt\'>under the GPL license.</a>',
+'info_copyright' => '@spip@ is free software distributed @lien_gpl@.',
 'info_copyright_doc' => 'For further information, see <a href=\'http://www.spip.net/en\'>http://www.spip.net/en</a>.',
+'info_copyright_gpl' => 'under the GPL license',
 'info_cours_edition' => 'Your articles in progress',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
 'info_creer_repertoire_2' => 'inside the sub-directory <b>ecrire/data/</b>, then',
