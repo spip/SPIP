@@ -170,10 +170,6 @@ if (_request('action') OR _request('var_ajax') OR _request('formulaire_action'))
 	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
 	include_spip('public/aiguiller');
 	if (
-		// cas des appels actions ?action=xxx qui peuvent etre executees dans ecrire/
-		// les urls crees par generer_url_action sont par defaut toujours dans le public
-		traiter_appels_actions()
-	OR
 		// cas des hits ajax sur les inclusions ajax
 		traiter_appels_inclusions_ajax()
 	 OR 
