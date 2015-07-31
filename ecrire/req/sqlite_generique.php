@@ -861,19 +861,22 @@ function _sqlite_calculer_order($orderby) {
 
 // renvoie des 'nom AS alias' 
 function _sqlite_calculer_select_as($args){
-	if (isset($args[-1])) {
-		$join = ' ' . $args[-1];
-		unset($args[-1]);
-	} else $join ='';
 	$res = '';
 	foreach($args as $k => $v) {
-	  if (!is_numeric($k)) {
-	  	$p = strpos($v, " ");
-		if ($p)
-		  $v = substr($v,0,$p) . " AS '$k'" . substr($v,$p);
-		else $v .= " AS '$k'";
-	  }
-	  $res .= ', ' . $v ;
+		if (substr($k,-1)=='@') {
+			// c'est une jointure qui se refere au from precedent
+			// pas de virgule
+		  $res .= '  ' . $v ;
+		}
+		else {
+			if (!is_numeric($k)) {
+				$p = strpos($v, " ");
+				if ($p)
+		  		$v = substr($v,0,$p) . " AS '$k'" . substr($v,$p);
+				else $v .= " AS '$k'";
+	  	}
+	  	$res .= ', ' . $v ;
+		}
 	}
 	return substr($res,2) . $join;
 }

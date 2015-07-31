@@ -495,28 +495,30 @@ function calculer_pg_expression($expression, $v, $join = 'AND'){
 // http://doc.spip.org/@spip_pg_select_as
 function spip_pg_select_as($args)
 {
-	if (isset($args[-1])) {
-		$join = ' ' . $args[-1];
-		unset($args[-1]);
-	} else $join ='';
-
 	$argsas = "";
-    foreach($args as $k => $v) {
-		$as = '';
-		//  spip_log("$k : $v");
-		if (!is_numeric($k)) {
-			if (preg_match('/\.(.*)$/', $k, $r))
-				$v = $k;
-			elseif ($v != $k) {
-				$p = strpos($v, " ");
-				if ($p)
-				  $v = substr($v,0,$p) . " AS $k" . substr($v,$p);
-				else  $as = " AS $k"; 
-			}
+	foreach($args as $k => $v) {
+		if (substr($k,-1)=='@') {
+			// c'est une jointure qui se refere au from precedent
+			// pas de virgule
+		  $argsas .= '  ' . $v ;
 		}
-		// spip_log("subs $k : $v avec $as");
-		// if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
-		$argsas .= ', '. $v . $as; 
+		else {
+			$as = '';
+			//  spip_log("$k : $v");
+			if (!is_numeric($k)) {
+				if (preg_match('/\.(.*)$/', $k, $r))
+					$v = $k;
+				elseif ($v != $k) {
+					$p = strpos($v, " ");
+					if ($p)
+					  $v = substr($v,0,$p) . " AS $k" . substr($v,$p);
+					else  $as = " AS $k"; 
+				}
+			}
+			// spip_log("subs $k : $v avec $as");
+			// if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
+			$argsas .= ', '. $v . $as; 
+		}
 	}
 	return substr($argsas,2) . $join;
 }
