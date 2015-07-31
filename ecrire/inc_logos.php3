@@ -10,6 +10,8 @@ define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 function decrire_logo($racine) {
 	global $connect_id_auteur;
+	
+	include_ecrire("inc_admin.php3");
 
 	foreach (array('gif','jpg','png') as $fmt) {
 		$fichier = "$racine.".$fmt;

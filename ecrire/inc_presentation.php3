@@ -1150,7 +1150,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	global $couleur_foncee;
 	global $connect_id_auteur, $connect_activer_messagerie;
 	global $mots_cles_forums;
-	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
 
 	$activer_messagerie = "oui";
 
@@ -1158,6 +1158,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 	$nb_forum[$compteur_forum] = spip_num_rows($request);
 	$i[$compteur_forum] = 1;
+	
+	if ($spip_display == 4) echo "<ul>";
+ 
  	while($row = spip_fetch_array($request)) {
 		$id_forum=$row['id_forum'];
 		$id_parent=$row['id_parent'];
@@ -1190,7 +1193,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 		if ($afficher) {
 			echo "<a id='$id_forum'></a>";
-			echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
+			if ($spip_display != 4) echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
 			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
 				$fond[$count]='img_pack/rien.gif';
 				if ($i[$count]!=$nb_forum[$count]){
@@ -1200,11 +1203,12 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 				if ($count==$compteur_forum){
 					$fleche="img_pack/forum-droite$spip_lang_rtl.gif";
 				}
-				echo "<td width=10 valign='top' background=$fond[$count]><img src='$fleche' alt='' width=10 height=13 border=0></td>\n";
+				if ($spip_display != 4) echo "<td width=10 valign='top' background=$fond[$count]><img src='$fleche' alt='' width=10 height=13 border=0></td>\n";
 			}
 
-			echo "\n<td width=100% valign='top'>";
+			if ($spip_display != 4) echo "\n<td width=100% valign='top'>";
 
+			$titre_boite = $titre;
 			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo_auteur = decrire_logo("auton$id_auteur");
@@ -1218,13 +1222,17 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$fid = $logo_auteur[2];
 					$hash = calculer_action_auteur ("reduire $w $h");
 	
-					$titre_boite = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre;
+					$titre_boite = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre_boite;
 					
 				}
 			}
-
-			if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre_boite));
-			else echo debut_cadre_thread_forum("", false, "", typo($titre_boite));
+		
+			if ($spip_display == 4) {
+				echo "<li>".typo($titre)."<br>";
+			} else {
+				if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre_boite));
+				else echo debut_cadre_thread_forum("", false, "", typo($titre_boite));
+			}
 			
 			// Si refuse, cadre rouge
 			if ($statut=="off") {
@@ -1307,17 +1315,19 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	
 			if ($statut == "off" OR $statut == "prop") echo "</div>";
 
-			if ($compteur_forum == 1) echo fin_cadre_forum();
-			else echo fin_cadre_thread_forum();
-		
+			if ($spip_display != 4) {
+				if ($compteur_forum == 1) echo fin_cadre_forum();
+				else echo fin_cadre_thread_forum();
+			}
 
-			echo "</td></tr></table>\n";
+			if ($spip_display != 4) echo "</td></tr></table>\n";
 
 			afficher_thread_forum($id_forum,$adresse_retour,$controle_id_article);
 
 		}
 		$i[$compteur_forum]++;
 	}
+	if ($spip_display == 4) echo "</ul>";
 	spip_free_result($request);
 	$compteur_forum--;
 }
