@@ -34,9 +34,12 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		# spip_log ("cache $chemin_cache");
 	}
 
-	// Supprimer la carte d'identite du squelette
-	if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match))
+	// Analyser la carte d'identite du squelette
+	if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match)) {
 		$page['texte'] = substr($page['texte'], strlen($match[0]));
+		foreach (unserialize($match[1]) as $var=>$val)
+			$page[$var] = $val;
+	}
 
 	return $page;
 }
@@ -159,7 +162,6 @@ function terminer_public_global($use_cache, $chemin_cache='') {
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
 	global $delais, $lastmodified;
 
-	spip_log("Inclusion dans $cache_incluant");
 	$contexte_inclus['fond'] = $fond;
 
 	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte_inclus, $fond);
