@@ -64,7 +64,7 @@ function expanser_liens($texte, $connect='')
 			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
 			$texte = str_replace($reg[0], $inserts[$k], $texte);
 			$r = calculer_url($reg[count($reg)-1], $titre, 'tout', $connect);
-			$regs[$k] = $lien($r['url'], $r['titre'], @$r['class'], $bulle, $hlang);
+			$regs[$k] = $lien($r['url'], $r['titre'], @$r['class'], $bulle, $hlang, isset($r['lang'])?$r['lang']:'');
 		}
 	}
 
