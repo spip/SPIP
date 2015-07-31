@@ -322,9 +322,13 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
+		$notes = calculer_notes(); // conserver les notes...
+
 		$page = $fonc(array('cache' => $cache), array($local));
 
+		// ... et les retablir
 		if ($n = calculer_notes()) spip_log("notes ignorees par $fonc: $n");
+		$GLOBALS['les_notes'] = $notes;
 
 		// spip_log: un joli contexte
 		$info = array();
