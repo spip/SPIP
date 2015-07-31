@@ -358,21 +358,24 @@ else if ($etape == 'dirs') {
 	header("Location: ../spip_test_dirs.php3");
 }
 else if (!$etape) {
-	install_debut_html();
+	$menu_langues = menu_langues();
+	if (!$menu_langues) header("Location: ../spip_test_dirs.php3");
+	else {
+		install_debut_html();
 
-	echo "<p>&nbsp;</p><p align='center'><img src='AIDE/fr/logo-spip.gif'></p>";
-	
-	echo "<p>&nbsp;</p><p>" . _T('install_select_langue');
+		echo "<p>&nbsp;</p><p align='center'><img src='img_pack/logo-spip.gif'></p>";
 
-	echo "<p><div align='center'>".menu_langues()."</div>";
+		echo "<p>&nbsp;</p><p>" . _T('install_select_langue');
 
+		echo "<p><div align='center'>".$menu_langues."</div>";
 
-	echo "<p><FORM ACTION='install.php3' METHOD='get'>";
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='dirs'>";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
-	echo "</FORM>";
+		echo "<p><FORM ACTION='install.php3' METHOD='get'>";
+		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='dirs'>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "</FORM>";
 
-	install_fin_html();
+		install_fin_html();
+	}
 }
 
 

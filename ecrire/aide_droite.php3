@@ -74,9 +74,22 @@ if ($spip_lang_rtl)
 echo ">";
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
+if (!$aide) {
+	$aide = 'spip';
+	echo '<TABLE BORDER=0 WIDTH=100% HEIGHT=60%>
+<TR WIDTH=100% HEIGHT=60%>
+<TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
+
+<CENTER>
+<img src="img_pack/logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
+</CENTER>
+
+</TD></TR></TABLE>';
+}
+
+
 // Analyser le fichier d'aide
 $html = join('', file($fichier_aide));
-if (strlen($aide) < 2) $aide = "spip";
 $html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
 $html = substr($html, 0, strpos($html, "</$aide>"));
 
