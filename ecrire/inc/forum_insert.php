@@ -216,7 +216,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 			'document', 0, &$documents_actifs);
 		// supprimer le temporaire et ses meta donnees
 		spip_unlink($_FILES['ajouter_document']['tmp_name']);
-		spip_unlink(preg_replace(',\.bin$',
+		spip_unlink(preg_replace(',\.bin$,',
 			'.txt', $_FILES['ajouter_document']['tmp_name']));
 	}
 

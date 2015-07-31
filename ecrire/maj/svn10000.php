@@ -105,5 +105,7 @@ function maj_11790 () {
 
 $GLOBALS['maj'][11790] = array(array('maj_11790'));
 
+$GLOBALS['maj'][11794] = array(); // ajout de spip_documents_forum
+
 
 ?>
