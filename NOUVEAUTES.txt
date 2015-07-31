@@ -972,8 +972,10 @@ moins des fichiers connus de SPIP)
 * la partie optionnelle AVANT d'une boucle accepte désormais d'autres
   boucles
 
+-------------------------- VERSION 1.8b1 (fin aout 2004)
+
 * révision du mode d'output-buffering et introduction de la
-  fonction spip_ob_flush();
+  fonction spip_ob_flush(); // supprimee par la suite
 
 * le mode de création de #BALISE est normalisé et *toutes* les balises
   modifiables dans mes_fonctions.php3
@@ -1021,6 +1023,9 @@ moins des fichiers connus de SPIP)
 * Affichage des referers de la veille (pas rétroactif : il faut attendre une
   journée pour voir)
 
+* L'aide en ligne n'est plus livree en standard, elle fonctionne
+  en client/serveur, avec telechargement automtique depuis spip.net
+
 * Syndication de fils au format RSS 1.0, RSS 2.0 et ATOM 0.3 (en plus de RSS
   0.91)
 
@@ -1028,4 +1033,8 @@ moins des fichiers connus de SPIP)
 
 * le correcteur d'orthographe fonctionne avec le proxy si celui-ci est
   defini
+
+* restriction de droits (rŽdacteurs et admins restreints)
+
+-------------------------- VERSION 1.8b2 (1er octobre 2004)
 
