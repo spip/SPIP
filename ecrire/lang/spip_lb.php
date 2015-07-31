@@ -375,7 +375,6 @@ Merci fir är Participatioun
 'icone_maintenance_site' => 'Maintenance vum Site',
 'icone_messagerie_personnelle' => 'Perséinlech Messagerie',
 'icone_mots_cles' => 'Schlësselwierder',
-'icone_nouvelle_breve' => 'Nei Kuerzmeldung schreiwen',
 'icone_repartition_actuelle' => 'Déi aktuell Verdeelung weisen',
 'icone_repartition_debut' => 'D\'Verdeelung säit dem Ufank weisen',
 'icone_repartition_visites' => 'Verdeelung vun de Visiten',
@@ -428,11 +427,9 @@ Merci fir är Participatioun
 'info_auteurs_nombre' => 'Auteur(en):',
 'info_authentification_ftp' => 'Umeldung (per FTP).',
 'info_bloquer_lien' => 'Link blockéieren',
-'info_breves_02' => 'Kuerzmeldungen',
 'info_breves_2' => 'Kuerzmeldungen',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Kuerzmeldungen fir ze validéieren',
 'info_connexion_refusee' => 'D\'Verbindung gouf refuséiert.',
 'info_contact_developpeur' => 'Kontaktéiert w.e.g. en Développeur.',
 'info_contenance' => 'Dëse Site huet:',
@@ -581,7 +578,6 @@ oder kontaktéiert äre Provider.</span>',
 'info_vos_rendez_vous' => 'Är Rendez-vous\'en',
 'info_zoom' => 'Zoom',
 'infos_vos_pense_bete' => 'Är Notizen', # MODIF
-'item_breve_proposee' => 'Proposéiert Kuerzmeldung',
 
 // L
 'lien_afficher_icones_seuls' => 'Nëmmen d\'Ikonen weisen',
@@ -736,9 +732,6 @@ Probéiert ',
 'texte_statut_publie' => 'publizéiert',
 'texte_statut_refuse' => 'refuséiert',
 'titre_ajouter_mot_cle' => 'SCHLËSSELWUERT DERBÄI SETZEN:',
-'titre_breve_proposee' => 'Proposéiert Kuerzmeldung',
-'titre_breve_publiee' => 'Publizéiert Kuerzmeldung',
-'titre_breve_refusee' => 'Refuséiert Kuerzmeldung',
 'titre_cadre_raccourcis' => 'OFKIIRZUNG:',
 'titre_changer_couleur_interface' => 'Faarw vum Interface änneren',
 'titre_forum' => 'Forum',

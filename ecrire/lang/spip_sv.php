@@ -369,7 +369,6 @@ Tack för ditt deltagande
 'icone_maintenance_site' => 'Underhåll av sajten',
 'icone_messagerie_personnelle' => 'Personligt meddelandesystem',
 'icone_mots_cles' => 'Nyckelord',
-'icone_nouvelle_breve' => 'Skriv en ny nyhet',
 'icone_repartition_actuelle' => 'Visa den nuvarande fördelningen',
 'icone_repartition_debut' => 'Visa fördelningen från starten',
 'icone_repartition_visites' => 'Fördelning av besök',
@@ -422,11 +421,9 @@ Tack för ditt deltagande
 'info_auteurs_nombre' => 'författare:',
 'info_authentification_ftp' => 'Authentifiering (via FTP)',
 'info_bloquer_lien' => 'blockera länken',
-'info_breves_02' => 'Nyheter',
 'info_breves_2' => 'nyheter',
 'info_breves_nb' => '@nb@ nyheter',
 'info_breves_un' => '1 nyhet',
-'info_breves_valider' => 'Nyheter som ska godkännas',
 'info_connexion_refusee' => 'Anslutning nekad',
 'info_contact_developpeur' => 'Var god och ta kontakt med en utvecklare',
 'info_contenance' => 'Sajten innehåller:',
@@ -577,7 +574,6 @@ Tack för ditt deltagande
 'info_vos_rendez_vous' => 'Dina framtida möten',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Din meddelanden', # MODIF
-'item_breve_proposee' => 'Inlämnad nyhet',
 
 // L
 'lien_afficher_icones_seuls' => 'Visa bara ikoner',
@@ -752,9 +748,6 @@ och koppla upp dig mot sajten igen.
 'texte_statut_publie' => 'publicerad online',
 'texte_statut_refuse' => 'refuserad',
 'titre_ajouter_mot_cle' => 'LÄGG TILL ETT NYCKELORD:',
-'titre_breve_proposee' => 'Uppladdade nyheter',
-'titre_breve_publiee' => 'Nyheten har publicerats',
-'titre_breve_refusee' => 'Nyheten har refuserats',
 'titre_cadre_raccourcis' => 'GENVÄGAR:',
 'titre_changer_couleur_interface' => 'Byter färg på gränssnittet',
 'titre_forum' => 'Forum',

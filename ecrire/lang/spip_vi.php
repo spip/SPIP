@@ -371,7 +371,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_maintenance_site' => 'Bảo trì',
 'icone_messagerie_personnelle' => 'Thư tín cá nhân',
 'icone_mots_cles' => 'Từ then chốt',
-'icone_nouvelle_breve' => 'Viết một tin ngắn mới',
 'icone_repartition_actuelle' => 'Cho xem phân loại hiện nay',
 'icone_repartition_debut' => 'Cho xem phân loại từ ban đầu',
 'icone_repartition_visites' => 'Phân bố số thăm viếng',
@@ -424,11 +423,9 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_auteurs_nombre' => 'tác giả:',
 'info_authentification_ftp' => 'Xác nhận (dùng FTP).',
 'info_bloquer_lien' => 'chặn điểm nối này',
-'info_breves_02' => 'Tin ngắn',
 'info_breves_2' => 'tin ngắn',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Những tin ngắn chờ thông qua',
 'info_connexion_refusee' => 'Không nối vào được',
 'info_contact_developpeur' => 'Xin liên lạc với lập trình viên.',
 'info_contenance' => 'Website có:',
@@ -577,7 +574,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'info_vos_rendez_vous' => 'Những lần hẹn sắp tới',
 'info_zoom' => 'phóng lớn',
 'infos_vos_pense_bete' => 'Bản ghi nhớ của bạn', # MODIF
-'item_breve_proposee' => 'Nộp vào',
 
 // L
 'lien_afficher_icones_seuls' => 'Xem icon mà thôi',
@@ -730,9 +726,6 @@ Nếu bạn đem vào những hình ảnh trong dạng  @gd_formats@, chúng s�
 'texte_statut_publie' => 'được đăng lên',
 'texte_statut_refuse' => 'bị từ chối',
 'titre_ajouter_mot_cle' => 'THÊM MỘT TỪ THÊN CHỐT:',
-'titre_breve_proposee' => 'Tin ngắn đã nộp',
-'titre_breve_publiee' => 'Tin ngắn đã đăng tải',
-'titre_breve_refusee' => 'Tin ngắn bị từ chối',
 'titre_cadre_raccourcis' => 'NGÕ TẮT:',
 'titre_changer_couleur_interface' => 'Thay đổi màu của giao diện',
 'titre_forum' => 'Diễn đàn',

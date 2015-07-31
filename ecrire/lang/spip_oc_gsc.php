@@ -380,7 +380,6 @@ Mercés entà la vòsta participacion
 'icone_maintenance_site' => 'Mantienença deu sit',
 'icone_messagerie_personnelle' => 'Messatjaria personau',
 'icone_mots_cles' => 'Mots clau',
-'icone_nouvelle_breve' => 'Escríver ua brèva nava',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuau',
 'icone_repartition_debut' => 'Afichar la reparticion dempuish la començança',
 'icone_repartition_visites' => 'Reparticion de las vesitas',
@@ -433,11 +432,9 @@ Mercés entà la vòsta participacion
 'info_auteurs_nombre' => 'autor(s)',
 'info_authentification_ftp' => 'autentificacion (per FTP).',
 'info_bloquer_lien' => 'Blocar aqueth ligam',
-'info_breves_02' => 'Brèvas',
 'info_breves_2' => 'brèvas',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Brèvas de validar',
 'info_connexion_refusee' => 'Connexion arrefusada',
 'info_contact_developpeur' => 'Volhatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueth sit que contien:',
@@ -585,7 +582,6 @@ Mercés entà la vòsta participacion
 'info_vos_rendez_vous' => 'Los vòstes rendetz-vos qui vienen',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Los vòstes mementos', # MODIF
-'item_breve_proposee' => 'Brèva perpausada',
 
 // L
 'lien_afficher_icones_seuls' => 'Afichar sonque las icònas',
@@ -761,9 +757,6 @@ e tornar connectà\'vs au sit.
 'texte_statut_publie' => 'publicat en linha',
 'texte_statut_refuse' => 'arrefusat',
 'titre_ajouter_mot_cle' => 'AJUSTAR UN MOT CLAU:',
-'titre_breve_proposee' => 'Brèva perpausada',
-'titre_breve_publiee' => 'Brèva publicada',
-'titre_breve_refusee' => 'Brèva arrefusada',
 'titre_cadre_raccourcis' => 'ACORCIDAS:',
 'titre_changer_couleur_interface' => 'Cambiar la color de l\'interfàcia',
 'titre_forum' => 'Forum',

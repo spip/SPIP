@@ -380,7 +380,6 @@ Dankon pro via partopreno
 'icone_maintenance_site' => 'Retejo-bontenado',
 'icone_messagerie_personnelle' => 'Persona mesaĝilo',
 'icone_mots_cles' => 'Ŝlosilvortoj',
-'icone_nouvelle_breve' => 'Skribi novan fulm-informon',
 'icone_repartition_actuelle' => 'Afiŝi la nunan distribuon',
 'icone_repartition_debut' => 'Afiŝi la distribuon ekde la komenco',
 'icone_repartition_visites' => 'Vizitoj-distribuo',
@@ -433,11 +432,9 @@ Dankon pro via partopreno
 'info_auteurs_nombre' => 'aŭtoro(j) :',
 'info_authentification_ftp' => 'Aŭtentigo (per FTP).',
 'info_bloquer_lien' => 'bloki tiun ligilon',
-'info_breves_02' => 'Fulm-informoj',
 'info_breves_2' => 'fulm-informoj',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Validigendaj fulm-informoj',
 'info_connexion_refusee' => 'Konektiĝo rifuzata',
 'info_contact_developpeur' => 'Bonvolu kontakti programiston.',
 'info_contenance' => 'Tiu retejo enhavas :',
@@ -588,7 +585,6 @@ Dankon pro via partopreno
 'info_vos_rendez_vous' => 'Viaj estontaj rendevuoj',
 'info_zoom' => 'zomo',
 'infos_vos_pense_bete' => 'Viaj memorigiloj', # MODIF
-'item_breve_proposee' => 'Proponita fulm-informo',
 
 // L
 'lien_afficher_icones_seuls' => 'Afiŝi nur la piktogramojn',
@@ -765,9 +761,6 @@ sub la respondeco de la ĉefa retejestro .</b>',
 'texte_statut_publie' => 'rete publikigita',
 'texte_statut_refuse' => 'rifuzita',
 'titre_ajouter_mot_cle' => 'ALDONI ŜLOSILVORTON:',
-'titre_breve_proposee' => 'Proponita fulm-informo',
-'titre_breve_publiee' => 'Publikigita fulm-informo',
-'titre_breve_refusee' => 'Rifuzita fulm-informo',
 'titre_cadre_raccourcis' => 'RAPIDAJ ALIROJ:',
 'titre_changer_couleur_interface' => 'Ŝanĝi la koloron de la interfaco',
 'titre_forum' => 'Forumo',

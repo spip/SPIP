@@ -378,7 +378,6 @@ Katılımınız için teşekkürler
 'icone_maintenance_site' => 'Site bakımı',
 'icone_messagerie_personnelle' => 'Kişisel iletiler',
 'icone_mots_cles' => 'Anahtar sözcükler',
-'icone_nouvelle_breve' => 'Yeni bir kısa haber yaz',
 'icone_repartition_actuelle' => 'Mevcut dağılımı göster',
 'icone_repartition_debut' => 'Dağılımı en başından itibaren göster',
 'icone_repartition_visites' => 'Ziyaretlerin dağılımı',
@@ -431,11 +430,9 @@ Katılımınız için teşekkürler
 'info_auteurs_nombre' => 'yazar(lar) :',
 'info_authentification_ftp' => 'Onay (FTP ile)',
 'info_bloquer_lien' => 'bu bağlantıyı engelle',
-'info_breves_02' => 'Kısa haberler',
 'info_breves_2' => 'kısa haberler',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Onaylanacak kısa haberler',
 'info_connexion_refusee' => 'Bağlantı reddedildi',
 'info_contact_developpeur' => 'Lütfen bir program geliştirici ile temasa geçiniz.',
 'info_contenance' => 'Site içeriği :',
@@ -586,7 +583,6 @@ Katılımınız için teşekkürler
 'info_vos_rendez_vous' => 'İlerideki randevularınız',
 'info_zoom' => 'yakınlaştır',
 'infos_vos_pense_bete' => 'Hatırlatmalarınız', # MODIF
-'item_breve_proposee' => 'Önerilen kısa haber',
 
 // L
 'lien_afficher_icones_seuls' => 'Sadece ikonları görüntüle',
@@ -748,9 +744,6 @@ Katılımınız için teşekkürler
 'texte_statut_publie' => 'Çevrimiçi yayınlandı',
 'texte_statut_refuse' => 'Reddedildi',
 'titre_ajouter_mot_cle' => 'BİR ANAHTAR-SÖZCÜK EKLE :',
-'titre_breve_proposee' => 'Önerilen kısa haber',
-'titre_breve_publiee' => 'Yayınlanan kısa haber',
-'titre_breve_refusee' => 'Reddedilen kısa haber',
 'titre_cadre_raccourcis' => 'KISA YOLLAR :',
 'titre_changer_couleur_interface' => 'Arayüz rengini değiştir',
 'titre_forum' => 'Forum',

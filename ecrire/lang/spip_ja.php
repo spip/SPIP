@@ -378,7 +378,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'サイトメンテナンス',
 'icone_messagerie_personnelle' => '個人的なメッセージ交換',
 'icone_mots_cles' => 'キーワード',
-'icone_nouvelle_breve' => '新しいニュースを書く',
 'icone_repartition_actuelle' => '現在のディストリビューションを表示する',
 'icone_repartition_debut' => '初めからのディストリビューションを表示',
 'icone_repartition_visites' => 'ディストリビューションを訪問',
@@ -431,11 +430,9 @@ sera ignorée) :
 'info_auteurs_nombre' => '著者(たち):',
 'info_authentification_ftp' => '認証 (FTPによって)。',
 'info_bloquer_lien' => 'このリンクをブロック',
-'info_breves_02' => 'ニュース',
 'info_breves_2' => 'ニュース',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => '検査済みニュース',
 'info_connexion_refusee' => '接続が拒否された',
 'info_contact_developpeur' => '開発者に連絡を取って下さい。',
 'info_contenance' => 'このサイトのコンテンツ:',
@@ -585,7 +582,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'あなたの次の約束',
 'info_zoom' => 'ズーム',
 'infos_vos_pense_bete' => 'あなたのメモ', # MODIF
-'item_breve_proposee' => 'ニュースは提出された',
 
 // L
 'lien_afficher_icones_seuls' => 'アイコン表示のみ',
@@ -759,9 +755,6 @@ sera ignorée) :
 'texte_statut_publie' => 'オンラインに公開中',
 'texte_statut_refuse' => '拒否された',
 'titre_ajouter_mot_cle' => 'キーワードの追加:',
-'titre_breve_proposee' => '提出されたニュース記事',
-'titre_breve_publiee' => '公開されたニュース記事',
-'titre_breve_refusee' => '受け付けられなかったニュース記事',
 'titre_cadre_raccourcis' => 'ショートカット:',
 'titre_changer_couleur_interface' => 'インターフェースの色を変える',
 'titre_forum' => '掲示板',

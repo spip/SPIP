@@ -381,7 +381,6 @@ Mercé de la voastra participacion
 'icone_maintenance_site' => 'Mantenença dau sit',
 'icone_messagerie_personnelle' => 'Messatgeria personala',
 'icone_mots_cles' => 'Mòts claus',
-'icone_nouvelle_breve' => 'Escriure una novèla brèva',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion despí lo principi',
 'icone_repartition_visites' => 'Desreparticion dei visitas',
@@ -434,11 +433,9 @@ Mercé de la voastra participacion
 'info_auteurs_nombre' => 'autor(s)',
 'info_authentification_ftp' => 'autentificacion (per FTP).',
 'info_bloquer_lien' => 'Blocar aquel estac',
-'info_breves_02' => 'Brèvas',
 'info_breves_2' => 'brèvas',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Brèvas de validar',
 'info_connexion_refusee' => 'Connexion refusada',
 'info_contact_developpeur' => 'Vorgatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueu sit compren :',
@@ -587,7 +584,6 @@ Mercé de la voastra participacion
 'info_vos_rendez_vous' => 'Lu voastres rendètz-vos à venir',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Li voastri nòtas de renembrança ', # MODIF
-'item_breve_proposee' => 'Brèva prepauada',
 
 // L
 'lien_afficher_icones_seuls' => 'Far paréisser li icònas unicament',
@@ -758,9 +754,6 @@ e vos tornar connectar au sit.
 'texte_statut_publie' => 'publicat en linha',
 'texte_statut_refuse' => 'refudat',
 'titre_ajouter_mot_cle' => 'AJUSTAR UN MÒT CLAU :',
-'titre_breve_proposee' => 'Breva prepauada',
-'titre_breve_publiee' => 'Breva publicada',
-'titre_breve_refusee' => 'Brèva refudada',
 'titre_cadre_raccourcis' => 'ESCORCHAS :',
 'titre_changer_couleur_interface' => 'Cambiar la color de l\'interfaça',
 'titre_forum' => 'Fòro',

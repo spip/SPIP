@@ -384,7 +384,6 @@ Arsusiwitamatxa yuspagara
 'icone_maintenance_site' => 'Qamawit uñjawi',
 'icone_messagerie_personnelle' => 'Sapa maynit yatiyañanaka',
 'icone_mots_cles' => 'Imt\'at arunaka',
-'icone_nouvelle_breve' => 'Machaq jiskht\'aptata',
 'icone_repartition_actuelle' => 'Jichha lakiraw uñachaña',
 'icone_repartition_debut' => 'Qalltatpach lakiraw uñachaña',
 'icone_repartition_visites' => 'Tumpatanakat lakirawi',
@@ -437,11 +436,9 @@ Arsusiwitamatxa yuspagara
 'info_auteurs_nombre' => 'Qillqirinaka:',
 'info_authentification_ftp' => 'Iyasawi (por FTP).',
 'info_bloquer_lien' => 'Aka chinu jark\'antaña',
-'info_breves_02' => 'Jisk\'aptatanaka',
 'info_breves_2' => 'jisk\'aptatanaka',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Jisk\'aptatanak iyaw sañataki',
 'info_connexion_refusee' => 'Arust\'awix janiw satakiti',
 'info_contact_developpeur' => 'Mä prucramaturamp aruskipt\'añamawa.',
 'info_contenance' => 'Aka qamawinx utjiwa:',
@@ -594,7 +591,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_vos_rendez_vous' => 'Aytatanakama',
 'info_zoom' => 'Jach\'aptaña jisk\'aptaña',
 'infos_vos_pense_bete' => 'Amtatanakama', # MODIF
-'item_breve_proposee' => 'Jisk\'aptat amtawi',
 
 // L
 'lien_afficher_icones_seuls' => 'Jisk\'a saltanakak uñachayaña',
@@ -740,9 +736,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'texte_statut_publie' => 'Yatiyata',
 'texte_statut_refuse' => 'Janiw sata',
 'titre_ajouter_mot_cle' => 'Mä imt\'at aru yapt\'aña',
-'titre_breve_proposee' => 'Jisk\'aptat amtata',
-'titre_breve_publiee' => 'Jisk\'aptat iyaw sata',
-'titre_breve_refusee' => 'Jisk\'aptat janiw sata',
 'titre_cadre_raccourcis' => 'Jisk\'a thakinaka...',
 'titre_changer_couleur_interface' => 'Ajanut kulur turkaña',
 'titre_forum' => 'Manqha aruskipañawi',

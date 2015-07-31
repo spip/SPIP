@@ -350,7 +350,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'Tìtòmɛ gblogblojí ɔ tɔn ',
 'icone_messagerie_personnelle' => 'wɛngbáví mi tɔn',
 'icone_mots_cles' => 'gbètákɛn',
-'icone_nouvelle_breve' => 'mi vɔ xó kléwún ɖêvó wlán',
 'icone_repartition_actuelle' => 'mi sɔ ɖìɖèmɛ lɛ xlɛ',
 'icone_repartition_debut' => 'mi sɔ ɖìɖèmɛ lɛ xlɛ sín bìbɛmɛ',
 'icone_repartition_visites' => 'tìtòmɛ jónɔ bìbà tɔn lɛ',
@@ -403,11 +402,9 @@ sera ignorée) :
 'info_auteurs_nombre' => 'Nyɔwlántɔ (lɛ̂):',
 'info_authentification_ftp' => 'Acɛ yíyí (FTP).',
 'info_bloquer_lien' => 'mi ján cácádó é lɔ',
-'info_breves_02' => 'xó kléwún lɛ',
 'info_breves_2' => 'xó kléwún lɛ',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'xó kléwún ê nà sɔkɛná',
 'info_connexion_refusee' => 'cácáɖó ɔ sɔgbè á',
 'info_contact_developpeur' => 'mi sɔ àlɔ tìtòtɔ ɔ.',
 'info_contenance' => 'gblogblojí  élɔ ɖó:',
@@ -554,7 +551,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'mi ná kpé mì ɖê',
 'info_zoom' => 'vlɔnvlɔn',
 'infos_vos_pense_bete' => 'tàmɛ lìn àgúɖágɔ', # MODIF
-'item_breve_proposee' => 'ɖɔ xó kléwún',
 
 // L
 'lien_afficher_icones_seuls' => 'jònɔ',
@@ -704,9 +700,6 @@ Nú mi ná ɖó mɔ nɔtɛn gblogblojí  é lɔ tɔn  mi yì
 'texte_statut_publie' => 'sɔɖò àtɛjí',
 'texte_statut_refuse' => 'yé gbɛ',
 'titre_ajouter_mot_cle' => 'zé gbètákɛn gɔná :',
-'titre_breve_proposee' => 'xó kléwún yé sɔ jó',
-'titre_breve_publiee' => 'xó kléwún yé sɔ xlɛ',
-'titre_breve_refusee' => 'xó kléwún yê gbɛ ɔ ',
 'titre_cadre_raccourcis' => 'xàsádó:',
 'titre_changer_couleur_interface' => 'ɖyɔ ŋtùn nú àtɛ ɔ',
 'titre_forum' => 'kplékplé',

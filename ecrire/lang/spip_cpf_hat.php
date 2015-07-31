@@ -377,7 +377,6 @@ Mèsi  w soutni petisyon-nan
 'icone_maintenance_site' => 'Swen pou sit la',
 'icone_messagerie_personnelle' => 'Kazmodékri',
 'icone_mots_cles' => 'Mokle yo',
-'icone_nouvelle_breve' => 'Ekri yon nouvo tinouvèl',
 'icone_repartition_actuelle' => 'Afiche repatisyon kounye-a',
 'icone_repartition_debut' => 'Afiche repatisyon depi koumansman',
 'icone_repartition_visites' => 'Repatisyon vizit yo',
@@ -430,11 +429,9 @@ Mèsi  w soutni petisyon-nan
 'info_auteurs_nombre' => 'lotè (yo) :',
 'info_authentification_ftp' => 'Lotantifikasyon (pa FTP).',
 'info_bloquer_lien' => 'blok lyen nan',
-'info_breves_02' => 'Tinouvèl yo',
 'info_breves_2' => 'tinouvèl yo',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Tinouvèl yo ki tann yon komandè konfime',
 'info_connexion_refusee' => 'Koneksyon te fin refize',
 'info_contact_developpeur' => 'Mèsi kotenouye yon devlopèr.',
 'info_contenance' => 'Kisa ap kontni nan sit-la :',
@@ -584,7 +581,6 @@ Mèsi  w soutni petisyon-nan
 'info_vos_rendez_vous' => 'W ke rannkont',
 'info_zoom' => 'gwoplan',
 'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w', # MODIF
-'item_breve_proposee' => 'Tinouvèl pwopoze pou parèt ',
 
 // L
 'lien_afficher_icones_seuls' => 'Afiche ikòn yo sèlman',
@@ -758,9 +754,6 @@ lès plitò jestyon paj sa-yo pou wèbmèt prensipal sou sit-la.</b>', # MODIF
 'texte_statut_publie' => 'pibliye an ly',
 'texte_statut_refuse' => 'refize',
 'titre_ajouter_mot_cle' => 'AJOUTE YON MOKLE :',
-'titre_breve_proposee' => 'Tinouvèl pwopoze pou parèt',
-'titre_breve_publiee' => 'Tinouvèl ki pibliye an liy',
-'titre_breve_refusee' => 'Tinouvèl ki refize',
 'titre_cadre_raccourcis' => 'TICHEMEN YO :',
 'titre_changer_couleur_interface' => 'Chanje koulè lentèfas',
 'titre_forum' => 'Fowom',

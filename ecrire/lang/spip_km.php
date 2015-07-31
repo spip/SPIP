@@ -371,7 +371,6 @@ sera ignorée) :
 'icone_maintenance_site' => 'តំហែទាំ​វ៉ែបសៃថ៍',
 'icone_messagerie_personnelle' => 'បញ្ញើសារ​ផ្ទាល់ខ្លួន',
 'icone_mots_cles' => 'ពាក្យ​គន្លឹះ',
-'icone_nouvelle_breve' => 'សរសេរ​ មួយពត៌មានសង្ខេប ​ថ្មី',
 'icone_repartition_actuelle' => 'បង្ហាញចេញ ​បំណែងចែក​បច្ចុប្បន្ន',
 'icone_repartition_debut' => 'បង្ហាញ​ បំណែងចែក ពី​ដំបូង',
 'icone_repartition_visites' => 'បំណែងចែក ការ​ទស្សនា',
@@ -424,11 +423,9 @@ sera ignorée) :
 'info_auteurs_nombre' => 'អ្នកនិពន្ធ ៖',
 'info_authentification_ftp' => 'ធ្វើអោយត្រឹមត្រូវ តាមភាពដើម (​ដោយ FTP)។',
 'info_bloquer_lien' => 'រាំងខ្ទប់ តំណភ្ជាប់នេះ',
-'info_breves_02' => 'ពត៌មានសង្ខេប',
 'info_breves_2' => 'ពត៌មានសង្ខេប',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'ពត៌មានសង្ខេប ​ត្រូវធ្វើ​អោយ​​សុពលភាព',
 'info_connexion_refusee' => 'បញ្ជាប់ ​ត្រូវ​បាន​បដិសេធ',
 'info_contact_developpeur' => '​ទាក់ទង​ អ្នក​អភិវឌ្ឍ។',
 'info_contenance' => 'វ៉ែបសៃថ៍ នេះ​មានផ្ទុក ៖',
@@ -575,7 +572,6 @@ sera ignorée) :
 'info_vos_rendez_vous' => 'ការ​ណាត់ជួប របស់អ្នក ក្នុងពេលខាងមុខ',
 'info_zoom' => 'ពង្រីក',
 'infos_vos_pense_bete' => 'ការក្រើនរំលឹក ​របស់​អ្នក', # MODIF
-'item_breve_proposee' => 'បានស្នើ ពត៌មាន​សង្ខេប',
 
 // L
 'lien_afficher_icones_seuls' => 'បង្ហាញ​តែ​រូបតំណាង​ប៉ុណ្ណោះ',
@@ -723,9 +719,6 @@ sera ignorée) :
 'texte_statut_publie' => 'ផ្សព្វផ្សាយ​ លើអិនរើណែត',
 'texte_statut_refuse' => 'ត្រូវ​បាន ​បដិសេធ',
 'titre_ajouter_mot_cle' => 'បន្ថែម​ មួយពាក្យ​គន្លឹះ ៖',
-'titre_breve_proposee' => 'បានស្នើ ពត៌មានសង្ខេប',
-'titre_breve_publiee' => 'បានផ្សព្វផ្សាយ ​ពត៌មានសង្ខេប',
-'titre_breve_refusee' => '​បាន​បដិសេធ ពត៌មានសង្ខេប',
 'titre_cadre_raccourcis' => 'ផ្លូវ​កាត់ ៖',
 'titre_changer_couleur_interface' => 'ផ្លាស់​ប្ដូរ ​ពណ៌ផ្ទាំង​ប្រទាក់',
 'titre_forum' => 'វេទិកា',

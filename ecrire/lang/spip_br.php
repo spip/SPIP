@@ -377,7 +377,6 @@ Trugarez da gemer perzh
 'icone_maintenance_site' => 'Ober war-dro al lec\'hienn',
 'icone_messagerie_personnelle' => 'Postelerezh hiniennel',
 'icone_mots_cles' => 'Gerioù-stur',
-'icone_nouvelle_breve' => 'Skrivañ ur berrskrid nevez',
 'icone_repartition_actuelle' => 'Diskouez an dasparzh er mare-mañ',
 'icone_repartition_debut' => 'Diskouez an dasparzh abaoe an deroù',
 'icone_repartition_visites' => 'Dasparzh ar gweladennoù',
@@ -430,11 +429,9 @@ Trugarez da gemer perzh
 'info_auteurs_nombre' => 'skridaozer(ien) :',
 'info_authentification_ftp' => 'Gwiriañ (dre FTP).',
 'info_bloquer_lien' => 'Stankañ al liamm-mañ',
-'info_breves_02' => 'Berrskridoù',
 'info_breves_2' => 'berrskridoù',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Berrskridoù da gadarnaat',
 'info_connexion_refusee' => 'Kevreañ nac\'het',
 'info_contact_developpeur' => 'Kit e darempred gant un diorroer.',
 'info_contenance' => 'El lec\'hienn-mañ ez eus :',
@@ -583,7 +580,6 @@ Trugarez da gemer perzh
 'info_vos_rendez_vous' => 'Hoc\'h emgavioù da zont',
 'info_zoom' => 'zoum',
 'infos_vos_pense_bete' => 'Ho notennigoù-eñvor', # MODIF
-'item_breve_proposee' => 'Berrskrid bet kinniget',
 
 // L
 'lien_afficher_icones_seuls' => 'Diskouez ar skeudennigoù hepken',
@@ -749,9 +745,6 @@ Aliet oc\'h da chom hep kemmañ tra ebet e-keit ha n\'oc\'h ket boas ouzh SPIP.
 'texte_statut_publie' => 'embannet',
 'texte_statut_refuse' => 'nac\'het',
 'titre_ajouter_mot_cle' => 'OUZHPENNAÑ UR GER-STUR :',
-'titre_breve_proposee' => 'Berrskrid bet kinniget',
-'titre_breve_publiee' => 'Berrskrid bet embannet',
-'titre_breve_refusee' => 'Berrskrid bet nac\'het',
 'titre_cadre_raccourcis' => 'BERRADENNOÙ :',
 'titre_changer_couleur_interface' => 'Kemm liv an etrefas',
 'titre_forum' => 'Forom',

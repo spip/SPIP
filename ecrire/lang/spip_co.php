@@ -383,7 +383,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'icone_maintenance_site' => 'Mantenimentu di u situ',
 'icone_messagerie_personnelle' => 'Messageria persunale',
 'icone_mots_cles' => 'Segni',
-'icone_nouvelle_breve' => 'Scrive un nuvellu dispacciu',
 'icone_repartition_actuelle' => 'Vede u spartimentu attuale',
 'icone_repartition_debut' => 'Vede u spartimentu da u principiu',
 'icone_repartition_visites' => 'Spartimentu di e vìsite',
@@ -436,11 +435,9 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'info_auteurs_nombre' => 'autore/i :',
 'info_authentification_ftp' => 'Autentificazione (cù FTP).',
 'info_bloquer_lien' => 'bluccà sta lea',
-'info_breves_02' => 'Dispacci',
 'info_breves_2' => 'dispacci',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
-'info_breves_valider' => 'Dispacci da cunvalidà',
 'info_connexion_refusee' => 'Cunnessione rifiutata',
 'info_contact_developpeur' => 'Cuntattate puru un sviluppore.',
 'info_contenance' => 'Stu situ cuntene :',
@@ -592,7 +589,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'info_vos_rendez_vous' => 'I vostri appuntamenti in futuru',
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'I vostri mementi', # MODIF
-'item_breve_proposee' => 'Dispacciu prupostu',
 
 // L
 'lien_afficher_icones_seuls' => 'Fà cumparisce solu l\'icone',
@@ -761,9 +757,6 @@ Puderete tandu inserisce un nuvellu password
 'texte_statut_publie' => 'pubblicatu in ligna',
 'texte_statut_refuse' => 'rifiutatu',
 'titre_ajouter_mot_cle' => 'AGHJUNGHJE UN SEGNU :',
-'titre_breve_proposee' => 'Dispacciu prupostu',
-'titre_breve_publiee' => 'Dispacciu pubblicatu',
-'titre_breve_refusee' => 'Dispacciu rifiutatu',
 'titre_cadre_raccourcis' => 'ACCURTATOGHJI :',
 'titre_changer_couleur_interface' => 'Scambià u culore di l\'interfaccia',
 'titre_forum' => 'Foru',
