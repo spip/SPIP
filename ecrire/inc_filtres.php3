@@ -855,8 +855,14 @@ function http_script($script, $src='', $noscript='') {
 function tester_config($ignore, $quoi) {
 	switch ($quoi) {
 		case 'mode_inscription':
-			return (lire_meta('accepter_inscriptions') == 'oui') ? 'redac' : '';
-		
+			if (lire_meta("accepter_inscriptions") == "oui")       
+				return 'redac';
+			else if (lire_meta("accepter_visiteurs") == "oui" 
+			OR lire_meta('forums_publics') == 'abo')               
+				return 'forum';
+			else
+				return '';
+
 		default:
 			return '';
 	}

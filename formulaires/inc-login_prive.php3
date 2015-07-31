@@ -20,12 +20,12 @@ function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 
 	$login = $args[1];
 
-	return array($cible, $login, $inscription);
+	return array($cible, $login);
 }
 
 function balise_LOGIN_PRIVE_dyn($cible, $login) {
 	return
-		login_explicite($login, $cible, 'redac');
+		login_explicite($login, $cible);
 }
 
 ?>
