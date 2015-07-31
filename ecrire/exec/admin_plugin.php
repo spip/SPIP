@@ -170,7 +170,7 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 		$chemin .= implode("/",$tcom)."/";
 	// ouvrir les repertoires jusqu'a la cible
 	while($open = array_shift($ttarg)){
-		$visible = @in_array($chemin.$open,$deplie);
+		$visible = @isset($deplie[$chemin.$open]);
 		$chemin .= $open . "/";
 		$output .= "<li>";
 		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
@@ -187,12 +187,14 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
 	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
-	$deplie = array($racine);
+	// des qu'un path est deja note deplie on s'arrete
+	$deplie = array($racine=>true);
+	$fast_liste_plugins_actifs=array();
 	foreach($liste_plugins_actifs as $key=>$plug){
-		$liste_plugins_actifs[$key] = "$racine/$plug";
+		$fast_liste_plugins_actifs["$racine/$plug"]=true;
 		$dir = dirname("$racine/$plug");$maxiter=100;
-		while(strlen($dir) && $dir!=$racine && $maxiter-->0){
-			$deplie[] = $dir;
+		while(strlen($dir) && !isset($deplie[$dir]) && $dir!=$racine && $maxiter-->0){
+			$deplie[$dir] = true;
 			$dir = dirname($dir);
 		}
 	}
@@ -204,12 +206,11 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 		$dir_index[dirname("$racine/$plug")][] = $key;
 	}
 	
-	$visible = @in_array($current_dir,$deplie);
+	$visible = @isset($deplie[$current_dir]);
 	$maxiter=1000;
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
-		#$visible = @in_array($dir,$deplie);
 		if ($dir != $current_dir)
 			echo tree_open_close_dir($current_dir,$dir,$deplie);
 			
@@ -217,7 +218,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 		if (isset($dir_index[$current_dir]))
 			foreach($dir_index[$current_dir] as $key){
 				$plug = $liste_plugins[$key];
-				$actif = @in_array($plug,$liste_plugins_actifs);
+				$actif = @isset($fast_liste_plugins_actifs[$plug]);
 				$id = substr(md5($plug),0,16);
 				echo "<li>";
 				echo ligne_plug(substr($plug,strlen($racine)+1), $actif, $id);
