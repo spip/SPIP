@@ -370,7 +370,9 @@ echo "<P><HR><P>";
 	}
 	echo "<B>Texte</B>";
 	echo aide ("arttexte");
-
+	echo "<br>Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.";
+	echo aide("raccourcis");
+	
 	echo $textes_supplement;
 
 	echo "<BR><TEXTAREA NAME='texte' CLASS='forml' ROWS='20' COLS='40' wrap=soft>";
