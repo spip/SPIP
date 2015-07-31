@@ -493,15 +493,15 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// s'il n'y a pas de nom de boucle, on ne peut pas paginer
 	if ($b === '') {
 		$msg = array('zbug_champ_hors_boucle',
-				array('champ' => '#PAGINATION')
+			array('champ' => $liste ? 'PAGINATION' : 'ANCRE_PAINATION')
 			  );
 		erreur_squelette($msg, $p);
 		return $p;
 	}
 
-	// s'il n'y a pas de total_parties, c'est qu'on se trouve
+	// s'il n'y a pas de mode_partie, c'est qu'on se trouve
 	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
-	if (!$p->boucles[$b]->total_parties) {
+	if (!$p->boucles[$b]->mode_partie) {
 		if (!$p->boucles[$b]->table_optionnelle) {
 			$msg = array('zbug_pagination_sans_critere',
 					array('champ' => '#PAGINATION')
@@ -529,10 +529,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$modif = ($type[0]!=="'") ? "'debut'.$type" 
 	  : ("'debut" .substr($type,1));
 
-	$p->code = $f_pagination."(
-	(isset(\$Numrows['$b']['grand_total']) ?
-		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), $type,
+	$p->code = $f_pagination."(\$Numrows['$b']['grand_total'], $type,
 		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
 	. $p->boucles[$b]->total_parties
 	. ", $liste, "
