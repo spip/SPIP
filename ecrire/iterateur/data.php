@@ -582,6 +582,8 @@ function inc_csv_to_array_dist($u) {
 
 	include_spip('inc/charsets');
 	foreach ($entete as $k => $v) {
+		if (is_numeric($v) and $v < 0) $v = "__".$v; // ne pas risquer d'ecraser une cle numerique
+		if (is_numeric($v)) $v = "_".$v; // ne pas risquer d'ecraser une cle numerique		
 		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
 		foreach ($csv as &$item)
 			$item[$v] = &$item[$k];
