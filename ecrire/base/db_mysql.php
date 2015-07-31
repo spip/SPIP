@@ -23,6 +23,7 @@ define('SPIP_NUM', MYSQL_NUM);
 
 // fonction pour la premiere connexion
 
+// http://doc.spip.org/@base_db_mysql_dist
 function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
 	// gerer le fichier tmp/mysql_out
@@ -61,10 +62,12 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 }
 
 // obsolete, ne plus utiliser
+// http://doc.spip.org/@spip_query_db
 function spip_query_db($query) {
 	return spip_mysql_query($query);
 }
 
+// http://doc.spip.org/@spip_mysql_query
 function spip_mysql_query($query) {
 
 	$query = traite_query($query); // traitement du prefixe de table
@@ -78,6 +81,7 @@ function spip_mysql_query($query) {
 				  mysql_query($query));
 }
 
+// http://doc.spip.org/@spip_sql_trace_start
 function spip_sql_trace_start()
 {
 	static $trace = '?';
@@ -93,7 +97,7 @@ function spip_sql_trace_start()
 	return  $trace ?  microtime() : 0;
 }
 
-// http://doc.spip.org/@spip_mysql_trace
+// http://doc.spip.org/@spip_sql_trace_end
 function spip_sql_trace_end($query, $start, $result)
 {
 	global $tableau_des_erreurs;
@@ -121,6 +125,7 @@ function spip_sql_trace_end($query, $start, $result)
 	return $result;
 }
 
+// http://doc.spip.org/@spip_sql_timing
 function spip_sql_timing($m1, $m2, $query, $result)
 {
 	static $tt = 0, $nb=0;
@@ -261,6 +266,7 @@ function spip_mysql_character_set($charset){
 }
 
 
+// http://doc.spip.org/@spip_mysql_selectdb
 function spip_mysql_selectdb($db) {
 	return mysql_select_db($db);
 }
@@ -268,6 +274,7 @@ function spip_mysql_selectdb($db) {
 
 // Retourne les bases accessibles
 
+// http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysql_listdbs() {
 	return mysql_list_dbs();
 }
@@ -409,6 +416,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $ignore='') {
 	return $r ? $r : (($r===0) ? -1 : 0);
 }
 
+// http://doc.spip.org/@spip_mysql_update
 function spip_mysql_update($table, $exp, $where='') {
 	spip_mysql_query("UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
 }

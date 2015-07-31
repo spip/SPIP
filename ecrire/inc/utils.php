@@ -194,6 +194,7 @@ function spip_log($message, $logname='spip') {
 // les identifants de connexion.
 // Si la connexion reussit, la globale db_ok memorise le nom du serveur
 
+// http://doc.spip.org/@spip_connect_db
 function spip_connect_db($host, $port, $login, $pass, $db, $serveur='mysql') {
 	global $db_ok;
 

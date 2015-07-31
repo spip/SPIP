@@ -20,6 +20,7 @@ define('SPIP_NUM', PGSQL_NUM);
 
 // Se connecte et retourne le nom de la fonction a connexion persistante
 
+// http://doc.spip.org/@base_db_pg_dist
 function base_db_pg_dist($addr, $port, $login, $pass, $db='') {
 	global $spip_pg_link;
 
@@ -36,6 +37,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='') {
 // Fonction de requete generale. 
 // Passe la main pour les idiosyncrasies MySQL a traduire
 
+// http://doc.spip.org/@spip_pg_query
 function spip_pg_query($query)
 {
 	global $spip_pg_link, $table_prefix;
@@ -55,6 +57,7 @@ function spip_pg_query($query)
 }
 
 
+// http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($query) {
   spip_log("REPLACE a implementer en postgres");
 }
@@ -62,16 +65,19 @@ function spip_pg_replace($query) {
 
 //  Qu'une seule base pour le moment
 
+// http://doc.spip.org/@spip_pg_selectdb
 function spip_pg_selectdb($db) {
 	return pg_dbname();
 }
 
 // Qu'une seule base pour le moment
 
+// http://doc.spip.org/@spip_pg_listdbs
 function spip_pg_listdbs() {
 	return array();
 }
 
+// http://doc.spip.org/@spip_pg_select
 function spip_pg_select($select, $from, $where,
                            $groupby, $orderby, $limit,
                            $sousrequete, $having,
@@ -113,6 +119,7 @@ function spip_pg_select($select, $from, $where,
 }
 
 
+// http://doc.spip.org/@calculer_pg_where
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
@@ -134,6 +141,7 @@ function calculer_pg_where($v)
 	}
 }
 
+// http://doc.spip.org/@spip_pg_select_as
 function spip_pg_select_as($args)
 {
 	$argsas = "";
@@ -143,6 +151,7 @@ function spip_pg_select_as($args)
 	return substr($argsas,2);
 }
 
+// http://doc.spip.org/@spip_pg_fetch
 function spip_pg_fetch($res, $extra='') {
 	  static $n = array();
 	  if ($extra) spip_log("fetch argument 2: $extra a revoir");
@@ -156,14 +165,17 @@ function spip_fetch_array($r, $extra='') {
 	  if ($r) return pg_fetch_array($r);
 }
 
+// http://doc.spip.org/@spip_pg_count
 function spip_pg_count($res, $serveur='') {
 		return !$res ? 0 : pg_numrows($res);
 }
   
+// http://doc.spip.org/@spip_pg_free
 function spip_pg_free($res, $serveur='') {
   // rien à faire en postgres
 }
 
+// http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 	global $tables_principales;
 	global $spip_pg_link, $table_prefix;
@@ -185,6 +197,7 @@ function spip_pg_insert($table, $champs, $valeurs, $ignore='') {
 	return $r[0];
 }
 
+// http://doc.spip.org/@spip_pg_update
 function spip_pg_update($table, $exp, $where='') {
 	global $spip_pg_link, $table_prefix;
 	if ($GLOBALS['table_prefix'])
@@ -195,19 +208,23 @@ function spip_pg_update($table, $exp, $where='') {
 }
 
 
+// http://doc.spip.org/@spip_pg_error
 function spip_pg_error() {
 	return pg_last_error();
 }
 
+// http://doc.spip.org/@spip_pg_errno
 function spip_pg_errno() {
 	return pg_last_error() ? 1 : 0;
 }
 
+// http://doc.spip.org/@spip_pg_showtable
 function spip_pg_showtable($nom_table)
 {
 	spip_log("spip_pg_showtable('$nom_table') a definir");
 }
 
+// http://doc.spip.org/@calcul_pg_in
 function calcul_pg_in($val, $valeurs, $not='') {
 //
 // IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
@@ -230,6 +247,7 @@ function calcul_pg_in($val, $valeurs, $not='') {
 // cles: type-de-cle => champ(s)
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
+// http://doc.spip.org/@spip_pg_create
 function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	global $spip_pg_link;
 	if ($GLOBALS['table_prefix'])
@@ -294,6 +312,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 // Palanquee d'idiosyncrasies MySQL dans les creations de table
 // A completer par les autres, mais essayer de reduire en amont.
 
+// http://doc.spip.org/@mysql2pg_type
 function mysql2pg_type($v)
 {
   return     preg_replace('/bigint\s*[(]\d+[)]/i', 'bigint', 
