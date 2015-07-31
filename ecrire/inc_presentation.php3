@@ -7,9 +7,7 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
-include_ecrire ("Include/PHP4/calendrier_php4.php");
-include_ecrire ("Include/MySQL3/calendrier_mysql3.php");
-include_ecrire ("Include/HTML4/calendrier_html4.php");
+include_ecrire ("inc_calendrier.php");
 
 //
 // Aide
