@@ -48,6 +48,9 @@ function exec_statistiques_visites_dist()
     $spip_lang_left;
 
 
+	$GLOBALS['accepte_svg'] = flag_svg();
+
+
   $titre = $pourarticle = "";
 
 if ($id_article = intval($id_article)){
@@ -334,7 +337,7 @@ if ($connect_statut != '0minirezo') {
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
 	
-if (flag_svg()) {
+if ($GLOBALS['accepte_svg']) {
 	echo "\n<div>";
 	echo "<object data='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
 	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
@@ -724,7 +727,7 @@ if (flag_svg()) {
 
 
 	// Le bouton pour passer de svg a htm
-	if (flag_svg()) {
+	if ($GLOBALS['accepte_svg']) {
 		$lien = 'non'; $alter = 'HTML';
 	} else {
 		$lien = 'oui'; $alter = 'SVG';
