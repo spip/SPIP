@@ -210,7 +210,7 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 		}
 	}
 
-	return $chemin_cache;
+	return ($use_cache < 0) ? "" : $chemin_cache;
 }
 
 // Passage par reference juste par souci d'economie
