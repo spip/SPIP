@@ -292,6 +292,7 @@ ecrire/inc_message.php -text
 ecrire/inc_messagerie.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
+ecrire/inc_mots_tous.php3 -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_popularites.php3 -text
 ecrire/inc_sites_edit.php -text
