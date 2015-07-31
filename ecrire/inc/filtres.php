@@ -269,7 +269,8 @@ function taille_image($img) {
 	if (isset($hauteur_img[$logo]))
 		$srcHeight = $hauteur_img[$logo];
 	if (!$srcWidth OR !$srcHeight){
-		if ($srcsize = @getimagesize($logo)){
+		if (file_exists($logo)
+			AND $srcsize = @getimagesize($logo)){
 			if (!$srcWidth)	$largeur_img[$logo] = $srcWidth = $srcsize[0];
 			if (!$srcHeight)	$hauteur_img[$logo] = $srcHeight = $srcsize[1];
 		}
