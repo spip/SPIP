@@ -367,7 +367,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			$vignette = "$destination.$destFormat";
 			$format = $destFormat;
 			if ($destFormat == "jpg")
-				ImageJPEG($destImage, $vignette, 70);
+				ImageJPEG($destImage, $vignette, 85);
 			else if ($destFormat == "gif")
 				ImageGIF($destImage, $vignette);
 			else if ($destFormat == "png")
@@ -404,24 +404,41 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 // pour les filtres |largeur et |hauteur
 //
 function taille_image($img) {
-
+	global $largeur_img, $hauteur_img;
+	
 	if (eregi("width *= *['\"]?( *[0-9]+ *)", $img, $regs))
 		$srcWidth = intval(trim($regs[1]));
 	if (eregi("height *= *['\"]?( *[0-9]+ *)", $img, $regs))
 		$srcHeight = intval(trim($regs[1]));
 
 	// recuperer le nom du fichier
-	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
+	if (eregi("src=[\"']([^'\"]+)[\"']", $img, $regs)) $logo = $regs[1];
 	if (!$logo) $logo = $img;
+	
+	
+	// pour essayer de limiter les lectures disque
+	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
+	$mem = $logo;
+	if (strrpos($mem,"/") > 0) $mem = substr($mem, strrpos($mem,"/")+1, strlen($mem));
+	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
+	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
 
-	if (!$srcWidth
-	AND $srcsize = @getimagesize($logo))
-		$srcWidth = $srcsize[0];
-
-	if (!$srcHeight
-	AND $srcsize = @getimagesize($logo))
-		$srcHeight = $srcsize[1];
-
+	if ($largeur_img["$mem"] > 0) {
+		$srcWidth = $largeur_img["$mem"];
+	} else {
+		if (!$srcWidth AND $srcsize = @getimagesize($logo)) {
+			$srcWidth = $srcsize[0];
+		 	$largeur_img["$mem"] = $srcWidth;
+		 }
+	}
+	if ($hauteur_img["$mem"] > 0) {
+		$srcHeight = $hauteur_img["$mem"];
+	} else {
+		if (!$srcHeight AND $srcsize = @getimagesize($logo)) {
+			$srcHeight = $srcsize[1];
+			$hauteur_img["$mem"] = $srcHeight;
+		}
+	}
 	return array($srcHeight, $srcWidth);
 	
 }
