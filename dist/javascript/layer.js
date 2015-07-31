@@ -48,7 +48,7 @@ function hide_obj(obj) {
 jQuery.fn.showother = function(cible) {
 	if (this.is('.replie')) {
 		this.addClass('deplie').removeClass('replie');
-		jQuery(cible).show()/*.slideDown('fast')*/.addClass('blocdeplie').removeClass('blocreplie');
+		jQuery(cible)/*.show()*/.slideDown('fast').addClass('blocdeplie').removeClass('blocreplie');
 	}
 	return this;
 }
@@ -57,7 +57,7 @@ jQuery.fn.showother = function(cible) {
 jQuery.fn.hideother = function(cible) {
 	if (!this.is('.replie')){
 		this.addClass('replie').removeClass('deplie');
-		jQuery(cible).hide()/*.slideUp('fast')*/.removeClass('blocdeplie').addClass('blocreplie');
+		jQuery(cible)/*.hide()*/.slideUp('fast').removeClass('blocdeplie').addClass('blocreplie');
 	}
 	return this;
 }
