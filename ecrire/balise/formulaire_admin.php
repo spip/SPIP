@@ -82,7 +82,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
 		}
 	}
-	$statut = isset($GLOBALS['auteur_session']) ? $GLOBALS['auteur_session']['statut'] : '';
+	$statut = isset($GLOBALS['auteur_session']['statut']) ? $GLOBALS['auteur_session']['statut'] : '';
 	// Bouton de debug
 	$debug =
 	(

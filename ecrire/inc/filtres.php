@@ -2686,14 +2686,15 @@ function pagination_item($num, $txt, $pattern, $lien_base, $debut, $ancre) {
 //
 function calcul_pagination($total, $nom, $pas, $liste = true) {
 	static $ancres = array();
-
+	$bloc_ancre = "";
+	
 	if ($pas<1) return;
 
 	if (function_exists("pagination"))
 		return pagination($total, $nom, $pas, $liste);
 
 	$separateur = '&nbsp;| ';
-	define(PAGINATION_MAX, 10);
+	define('PAGINATION_MAX', 10);
 
 	$debut = 'debut'.$nom;
 

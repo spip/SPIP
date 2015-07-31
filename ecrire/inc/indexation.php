@@ -190,6 +190,8 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	foreach ($table as $mot) {
 		if (strlen($mot) > $min_long) {
 			$h = substr(md5($mot), 0, 16);
+			if (!isset($index[$h]))
+				$index[$h] = 0;
 			$index[$h] += $val/(1+$translitteration_complexe);
 			$mots .= ",(0x$h,'$mot')";
 		}
