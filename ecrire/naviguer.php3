@@ -398,8 +398,7 @@ if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
 	if ($langue_choisie_rubrique == 'oui') $herit = false;
 	else $herit = true;
 
-	echo "[$langue_rubrique | $langue_choisie_rubrique]";
-
+	//echo "[$langue_rubrique | $langue_choisie_rubrique]";
 
 	debut_cadre_enfonce("langues-24.gif");
 		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";

@@ -1152,7 +1152,7 @@ if ((lire_meta('multi_articles') <> 'non') AND ($flag_editable)) {
 	$langue_article = $row['lang'];
 	$langue_choisie_article = $row['langue_choisie'];
 	
-	echo "[$langue_article | $langue_choisie_article]";
+	//echo "[$langue_article | $langue_choisie_article]";
 
 	if ($langue_choisie_article == 'oui') $herit = false;
 	else $herit = true;
