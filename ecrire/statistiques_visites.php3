@@ -304,6 +304,7 @@ if (!$origine) {
 		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
 	
+		/*
 		if ($spip_svg_plugin == 'oui') {
 			echo "<div>";
 			echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
@@ -312,7 +313,7 @@ if (!$origine) {
 			echo "</div>";
 		} 
 		else {
-			
+		*/
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
@@ -503,7 +504,7 @@ if (!$origine) {
 			}
 			echo "</div>";
 			
-		}
+		//}
 				
 				
 		$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
@@ -540,7 +541,6 @@ if (!$origine) {
 		echo "</td></tr></table>";	
 	}		
 	
-	/* Rendu moins interessant avec le zoom ci-dessus
 	if (count($log) > 60) {
 		echo "<p>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
@@ -689,7 +689,7 @@ if (!$origine) {
 		echo "</td></tr></table>";
 		echo "</div>";
 	}
-	*/
+	
 	/////
 		
 	fin_cadre_relief();

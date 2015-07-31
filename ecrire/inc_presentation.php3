@@ -1514,7 +1514,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	// <script type="text/javascript" src="../mathmlinHTML.js"></script>
 
 ?>
-<script type="text/javascript" src="js_detectplugins.js"></script>
+<!-- <script type="text/javascript" src="js_detectplugins.js"></script> -->
 <script type='text/javascript' src="layer.js"></script>
 <script type='text/javascript'><!--
 	var init_gauche = true;
@@ -1710,11 +1710,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	
 	
 	function verifForm() {
-		if (pluginlist.indexOf("SVG")!=-1)
+		/* if (pluginlist.indexOf("SVG")!=-1)
 			document.cookie = "spip_svg_plugin=oui";
 		else
 			document.cookie = "spip_svg_plugin=non";
-			
+		*/
 	
 		//convert2math();
 	<?php
