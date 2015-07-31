@@ -1,19 +1,6 @@
-[(#REM)
-
-	Ce squelette definit les styles de l'espace prive
-
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-]
 #CACHE{360*1000}
 #HTTP_HEADER{Content-Type: text/css}
 #HTTP_HEADER{Vary: Accept-Encoding}
-
-/*
- * Police par defaut (bof...)
- */
 body { 
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	border: 0px;
@@ -64,12 +51,12 @@ td {
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
 .fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
-	background-position: center bottom; float: none; color: #FFFFFF;
+	background-position: center bottom; float: none; color: #ffffff;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	font-weight: bold;
 }
-.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1px; border-color: #E86519; color: #E86519; 
+.fondf { background-color: #ffffff; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
 }
 
 
@@ -1288,11 +1275,11 @@ a.triangle_block:hover {
 
 .rss-button {
 	border: 1px solid;
-	border-color: #FC9 #630 #330 #F96;
+	border-color: #fc9 #630 #330 #f96;
 	padding: 0 3px;
 	font: bold 10px verdana,sans-serif;
-	color: #FFF;
-	background: #F60;
+	color: #fff;
+	background: #f60;
 	text-decoration: none;
 	margin: 0;
 }
