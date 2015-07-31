@@ -91,7 +91,7 @@ function article_select_trad($lier_trad, $id_rubrique=0) {
 		// Si le menu de langues est autorise sur les articles,
 		// on peut changer la langue quelle que soit la rubrique
 		// donc on reste dans la meme rubrique
-		if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+		if (in_array('spip_articles', explode(',',$GLOBALS['meta']['multi_objets'] == 'oui'))) {
 			$row['id_rubrique'] = $row['id_rubrique']; # explicite :-)
 		}
 		else if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
