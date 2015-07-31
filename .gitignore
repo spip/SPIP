@@ -22,10 +22,14 @@ config/*.php
 config/.htaccess
 ecrire/inc_connect.php3
 ecrire/inc_meta_cache.php3
+/extensions
 /lib
 local/*.jpg
 local/cache-*
 local/chargeur
+/mutualisation
 /plugins
+/sites
 /squelettes
+/themes
 tmp/*
