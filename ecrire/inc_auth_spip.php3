@@ -64,7 +64,11 @@ class Auth_spip {
 
 	function activer() {
 		if ($this->statut == 'nouveau') { // nouvel inscrit
-			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE login='".addslashes($this->login)."'");
+			$connect_statut =
+			(lire_meta('accepter_inscriptions') == 'oui') ?
+				'1comite' : '6forum';
+			spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
+				WHERE login='".addslashes($this->login)."'");
 		}
 		if ($this->md5next) {
 			include_ecrire("inc_session.php3");
