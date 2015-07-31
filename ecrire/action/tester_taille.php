@@ -52,6 +52,7 @@ function action_tester_taille_dist() {
 			$res = sql_select("valeur", "spip_meta", "nom='max_taille_vignettes_test'");
 			if ($row = sql_fetch($res))
 				$max_size_test = $row['valeur'];
+			unset ($res); // sinon SQLite ne peut pas ecrire dans la table spip_meta (locked)
 			if (!$max_size_test OR $max_size_test>$s)
 				ecrire_meta('max_taille_vignettes_test',$s,'non');
 			$result = filtrer('image_recadre',$image_source,$taille,$taille);
