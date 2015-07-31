@@ -28,7 +28,7 @@ function acces_restreint_rubrique($id_rubrique) {
 
 
 function auth() {
-	global $HTTP_POST_VARS, $HTTP_GET_VARS, $HTTP_COOKIE_VARS, $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
+	global $INSECURE, $HTTP_POST_VARS, $HTTP_GET_VARS, $HTTP_COOKIE_VARS, $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
 	global $auth_can_disconnect;
 
 	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
@@ -93,15 +93,14 @@ function auth() {
 	}
 
 	// Authentification .htaccess
-	else if ($REMOTE_USER &&
-		!($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"])) {
+	else if ($REMOTE_USER && !$INSECURE['REMOTE_USER']) {
 		$auth_login = $REMOTE_USER;
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}
 
 	// Tentative de login echec
-	else if ($GLOBALS['bonjour'] == 'oui') { 
+	else if ($GLOBALS['bonjour'] == 'oui') {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
 		$link->addVar('url', 'ecrire/'.$clean_link->getUrl());
