@@ -203,7 +203,7 @@ a.cellule-h td {
 	text-align: <?php echo $left; ?>;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 10px;
 	color: #606060;
 }
 a.cellule-h img {
