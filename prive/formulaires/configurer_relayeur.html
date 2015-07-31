@@ -17,7 +17,8 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
 				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}"
-				onchange="if (jQuery(this).val()) jQuery('.editer_test_proxy:hidden').show('fast'); else jQuery('.editer_test_proxy:visible').hide('fast');"
+					onclick="jQuery(this).blur();"
+					onchange="if (jQuery(this).val()) jQuery('.editer_test_proxy:hidden').show('fast'); else jQuery('.editer_test_proxy:visible').hide('fast');"
 				/>
 			</li>
 			#SET{exemple,#VAL{<b><tt>}|concat{'127.0.0.1 .mondomaine.net','</tt></b>'}}
