@@ -749,8 +749,18 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			
 		if (!ereg(",$id_document,", "$doublons")) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
+			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+				echo "<b>Inclusion de la vignette&nbsp;:</b></br>";
+			}
 			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
 			echo "</font></div>";
+			
+			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+				echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
+				echo "<b>Inclusion directe&nbsp;:</b></br>";
+				echo "<font color='333333'><div align=left>&lt;emb$id_document|left&gt;</div><div align=center>&lt;emb$id_document|center&gt;</div><div align=right>&lt;emb$id_document|right&gt;</div></font>\n";
+				echo "</font></div>";
+			}
 		}
 
 		$block = "document $id_document";
@@ -788,6 +798,12 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo htmlspecialchars($descriptif);
 			echo "</textarea>\n";
+			
+			if ($type_inclus == "embed" OR $type_inclus == "image") {
+			echo "<br><b>Dimensions&nbsp;:</b><br>\n";
+				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
+				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+			}
 		
 			echo "<div align='right'>";
 			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
