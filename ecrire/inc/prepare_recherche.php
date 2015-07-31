@@ -31,8 +31,8 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
 		return array("0 as points" /* as points */, /* where */ '');
-
-
+		
+	
 	$rechercher = false;
 
 	if (!isset($cache[$recherche][$table])){

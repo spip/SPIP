@@ -132,20 +132,23 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	if (!strlen($recherche))
 		return array();
 
+	$preg = '/'.$recherche.'/' . $options['preg_flags'];
+
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
-	if (preg_quote($recherche, '/') == $recherche) {
+	// ou si l'expression reguliere est invalide
+	if (preg_quote($recherche, '/') == $recherche
+	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$q = sql_quote(
 			"%"
-			. str_replace(array('%','_'), array('\%', '\_'), $recherche)
+			. preg_replace(",\s+,","%",str_replace(array('%','_'), array('\%', '\_'), trim($recherche)))
 			. "%"
 		);
+		$preg = '/'.preg_replace(",\s+,",".+",trim($recherche)).'/' . $options['preg_flags'];
 	} else {
 		$methode = 'REGEXP';
 		$q = sql_quote($recherche);
 	}
-
-	$preg = '/'.$recherche.'/' . $options['preg_flags'];
 
 	$jointures = $options['jointures']
 		? liste_des_jointures()
