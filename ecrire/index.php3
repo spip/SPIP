@@ -471,15 +471,4 @@ if (!$bonjour) {
 	}
 }
 
-
-//
-// Mail nouveautes
-//
-
-if (!$bonjour) {
-	include_ecrire ("inc_mail.php3");
-	envoyer_mail_quoi_de_neuf();
-}
-
-
 ?>
