@@ -98,6 +98,18 @@ function base_lister_toutes_tables($serveur='', $tables=array(), $exclude = arra
 	return $res;
 }
 
+/**
+ * Retrouver le prefixe des tables
+ * @param string $serveur
+ * @return string
+ */
+function base_prefixe_tables($serveur=''){
+	spip_connect($serveur);
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	return $prefixe;
+}
+
 
 /**
  * Fabrique la liste a cocher des tables a traiter (copie, delete, sauvegarde)
