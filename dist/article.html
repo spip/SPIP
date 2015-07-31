@@ -65,6 +65,14 @@
             [<div class="texte">#DEBUT_SURLIGNE(#TEXTE|lignes_longues|reduire_image{520,0})#FIN_SURLIGNE</div>]
 
             [(#REM) Portfolio : album d'images ]
+            <B_documents_portfolio>
+            <div id="documents_portfolio">
+                <h2><:info_portfolio:></h2>
+                <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {doublons}>
+                [<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT#documents_portfolio"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
+                </BOUCLE_documents_portfolio>
+            </div>
+            </B_documents_portfolio>
             <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
             <div class="spip_documents" id="document_actif">
                 [(#EMBED_DOCUMENT)]
@@ -72,14 +80,6 @@
                 [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
             </div>
             </BOUCLE_afficher_document>
-            <B_documents_portfolio>
-            <div id="documents_portfolio">
-                <h3 class="invisible"><:info_portfolio:></h3>
-                <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$}>
-                [<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT#document_actif"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
-                </BOUCLE_documents_portfolio>
-            </div>
-            </B_documents_portfolio>
 
             [<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
 
