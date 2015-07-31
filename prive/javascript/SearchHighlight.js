@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.35
+ * @version 0.36 (9/1/2009)
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -195,13 +195,13 @@ if (window.jQuery)
               var newtext="",match,index=0;
               SearchHighlight.regex.lastIndex = 0;
               while(match = SearchHighlight.regex.exec(textNoAcc)) {
-                newtext += text.substr(index,match.index-index)+'<span class="'+
-                SearchHighlight.subs[match[matchIndex].toLowerCase()]+'">'+text.substr(match.index,match[0].length)+"</span>";
+                newtext += SearchHighlight.fixTags(text.substr(index,match.index-index))+'<span class="'+
+                SearchHighlight.subs[match[matchIndex].toLowerCase()]+'">'+SearchHighlight.fixTags(text.substr(match.index,match[0].length))+"</span>";
                 index = match.index+match[0].length;
               }
               if(newtext) {
                 //add the last part of the text
-                newtext += text.substring(index);
+                newtext += SearchHighlight.fixTags(text.substring(index));
                 var repl = $.merge([],$("<span>"+newtext+"</span>")[0].childNodes);
                 endIndex += repl.length-1;
                 startIndex += repl.length-1;
@@ -213,6 +213,9 @@ if (window.jQuery)
             }	
           }
         }    
+    },
+    fixTags : function(text) {
+      return text.replace("<","&lt;").replace(">","&gt;");
     }
   };
 })(jQuery)
