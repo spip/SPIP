@@ -25,8 +25,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 
 	if (lire_fichier($file, $r)) {
 		if ($avail == 'SYSTEM') {
-			$src = find_in_path($grammaire);
-			if (!$src OR filemtime($file) < filemtime($src))
+			if (!$grammaire OR filemtime($file) < filemtime($grammaire))
 				$r = false;
 		}
 	}
@@ -81,10 +80,13 @@ function compilerRegle($val)
 // http://doc.spip.org/@analyser_dtd
 function analyser_dtd($loc, $avail, &$dtc)
 {
+	// creer le repertoire de cache si ce n'est fait
+	// (utile aussi pour le resultat de la compil)
+	$file = sous_repertoire(_DIR_CACHE_XML);
+	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM')
 	  $file = find_in_path($loc);
 	else {
-	  $file = sous_repertoire(_DIR_CACHE_XML);
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
 
@@ -249,7 +251,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ELEMENT\s+(\S+)\s+([^>]*)>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match('/^<!ELEMENT\s+([^>%\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
 	list(,$nom, $contenu, $dtd) = $m;
@@ -261,7 +263,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	}
 	$filles = array();
 	$contenu = expanserEntite($contenu, $dtc->macros);
-	$val = compilerRegle($contenu);
+	$val = $contenu ? compilerRegle($contenu) : '(EMPTY )';
 	if ($val == '(EMPTY )')
 		$dtc->regles[$nom] = 'EMPTY';
 	elseif  ($val == '(ANY )') 
