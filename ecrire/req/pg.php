@@ -165,8 +165,8 @@ function spip_pg_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 	if (!isset($tables[$table])){
 		
 		if (!$desc){
-			$f = charger_fonction('trouver_table', 'base');
-			$desc = $f($table, $serveur);
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			$desc = $trouver_table($table, $serveur);
 			// si pas de description, on ne fait rien, ou on die() ?
 			if (!$desc) return $couples;
 		}
