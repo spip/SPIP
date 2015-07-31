@@ -33,7 +33,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/public?lang_cible=de" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="el" url="http://trad.spip.net/tradlang_module/public?lang_cible=el" total="78" traduits="65" relire="0" modifs="4" nouveaux="9" pourcent="83.33">
+	<langue code="el" url="http://trad.spip.net/tradlang_module/public?lang_cible=el" total="78" traduits="70" relire="0" modifs="4" nouveaux="4" pourcent="89.74">
+		<traducteur nom="dlatr" lien="http://trad.spip.net/auteur/dlatr" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/public?lang_cible=en" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
