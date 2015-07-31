@@ -22,7 +22,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
-// args[0] un statut d'auteur (1comite par defaut)
+// args[0] un statut d'auteur (redacteur par defaut)
 // args[1] indique la rubrique eventuelle de proposition
 // args[2] indique le focus eventuel
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
@@ -30,7 +30,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
-	$mode = test_mode_inscription($mode);
+	$mode = tester_config($id, $mode);
 	return $mode ? array($mode, $focus, $id) : '';
 }
 
@@ -43,7 +43,7 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 // http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_dyn
 function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 
-	if (!test_mode_inscription($mode)) return _T('pass_rien_a_faire_ici');
+	if (!tester_config($id, $mode)) return _T('pass_rien_a_faire_ici');
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
 	$commentaire = ($mode=='1comite') ? _T('pass_espace_prive_bla') : _T('pass_forum_bla');
@@ -79,28 +79,6 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 		);
 }
 
-
-// Verifier que les options de configuration acceptent l'inscription demandee
-// La liste globale des statuts donne le nom du statut pour le mode
-// Si mode inconnu laisser faire, c'est une extension non std
-// mais verifier que la syntaxe est compatible avec SQL
-
-// http://doc.spip.org/@test_mode_inscription
-function test_mode_inscription($mode) {
-
-	$s = array_search($mode, $GLOBALS['liste_des_statuts']);
-	switch ($s) {
-
-	case 'info_redacteurs' : 
-	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
-
-	case 'info_visiteurs' : 
-	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
-
-	default:
-	  return ($mode AND $mode == addslashes($mode)) ? $mode : '';
-	}
-}
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
 // et donner des infos supplémentaires
