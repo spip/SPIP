@@ -380,12 +380,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	}
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 
-//code mort ???
-
-	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
-		$e .= spip_mysql_error($query); // et du fautif
-
-	return $r ? $r : (($r===0) ? -1 : 0);
+	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
 
 // http://doc.spip.org/@spip_mysql_insertq
@@ -508,13 +503,9 @@ function spip_release_lock($nom) {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($val, $type) {
-	if (
-/*	(strpos($type, 'datetime')===0)
-	OR (strpos($type, 'TIMESTAMP')===0)
-	OR
-*/	(strpos($type, 'int')===0)
-	OR (strpos($type, 'bigint')===0))
-	  return $val;
-	else return _q($val);
+	if(((strpos($type, 'datetime')===0) OR strpos($type, 'TIMESTAMP')===0)
+	 AND preg_match('/^\w+\(/', $val))
+		return $val;
+	return _q($val);
 }
 ?>
