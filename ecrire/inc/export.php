@@ -216,6 +216,7 @@ function export_objets($table, $cpt, $total, $filetable, $les_rubriques, $les_me
 		}
 		// incrementer le numero de sous-etape 
 		// au cas ou une interruption interviendrait
+		$v[5]++;
 		ecrire_meta($meta, serialize($v));
 		$debut +=  _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
