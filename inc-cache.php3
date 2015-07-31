@@ -92,7 +92,7 @@ function ramener_squelette($squelette)
   $f=fopen($phpfile, "wb"); 
   fwrite($f,"<?php # $squelette pid: " .  getmypid() ."\n");
   fwrite($f,$r);
-  fwrite($f,'?>');
+  fwrite($f,'?'.'>');
   fclose($f);
   flock($lock, LOCK_UN);
   spip_log("Squelette $squelette: ($nom)"  . strlen($r) . " octets, $timer ms");
@@ -183,7 +183,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   # - recherche (trop couteux de mémoriser une recherche précise)
   # - valeurs hors URL (i.e. POST) sauf Forum qui les traite à part
   
-  if ($GLOBALS['var_recherche']||
+  if ($GLOBALS['recherche']||
       ($HTTP_POST_VARS && !$GLOBALS['ajout_forum']))
       {
 	include_local('inc-calcul.php3');
@@ -230,9 +230,9 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   else
     flock($lock, LOCK_UN);
 #  spip_log("obtient verrou $cle et libère le général"); 
-  if ((!timeout(false,false)) OR
-      ($usefile && ($r = page_perenne($lock2, $file, $fraicheur))))
+  if ($usefile AND ($r = page_perenne($lock2, $file, $fraicheur)))
     {
+    timeout(false,false);
 #      spip_log("libère verrou $cle (page perenne)"); 
       flock($lock2, LOCK_UN);
       return $r;
