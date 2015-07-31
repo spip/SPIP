@@ -118,12 +118,16 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>MOTS-CL&Eacute;S</B></FONT>";
 		echo aide ("artmots");
 		echo "</TABLE>";
-	
+
 		//////////////////////////////////////////////////////
 		// Recherche de mot-cle
 		//
-	
-		if ($cherche_mot) {
+
+		if ($nouv_mot)
+			$nouveaux_mots[] = $nouv_mot;
+
+		$tous_les_mots = split(" *[,;] *", $cherche_mot);
+		while ((list(,$cherche_mot) = each ($tous_les_mots)) AND $cherche_mot) {
 			echo "<P ALIGN='left'>";
 			$query = "SELECT id_mot, titre FROM spip_mots WHERE id_groupe='$select_groupe'";
 			$result = spip_query($query);
@@ -139,8 +143,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				echo "<B>Aucun r&eacute;sultat pour \"$cherche_mot\".</B><BR>";
 			}
 			else if (count($resultat) == 1) {
-//				$ajout_mot = 'oui';
 				list(, $nouv_mot) = each($resultat);
+				$nouveaux_mots[] = $nouv_mot;
 				echo "<B>Le mot-cl&eacute; suivant a &eacute;t&eacute; ajout&eacute; &agrave; ";
 				if ($table == 'articles') echo "l'article";
 				else if ($table == 'breves') echo "la br&egrave;ve";
@@ -201,18 +205,24 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		//////////////////////////////////////////////////////
 		// Appliquer les modifications sur les mots-cles
 		//
-	
-		if ($nouv_mot && $flag_editable && $nouv_mot!='x') {
-			$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $id_table=$id_objet";
-			$result = spip_query($query);
-			if (!mysql_num_rows($result)) {
-				$query = "INSERT INTO spip_mots_$table (id_mot,$id_table) VALUES ($nouv_mot, $id_objet)";
+
+		if ($nouveaux_mots && $flag_editable) {
+			while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
+				$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $id_table=$id_objet";
 				$result = spip_query($query);
+				if (!mysql_num_rows($result)) {
+					$query = "INSERT INTO spip_mots_$table (id_mot,$id_table) VALUES ($nouv_mot, $id_objet)";
+					$result = spip_query($query);
+				}
 			}
 		}
 
 		if ($supp_mot && $flag_editable) {
-			$query = "DELETE FROM spip_mots_$table WHERE id_mot=$supp_mot AND $id_table=$id_objet";
+			if ($supp_mot == -1)
+				$mots_supp = "";
+			else
+				$mots_supp = " AND id_mot=$supp_mot";
+			$query = "DELETE FROM spip_mots_$table WHERE $id_table=$id_objet $mots_supp";
 			$result = spip_query($query);
 		}
 	
@@ -310,7 +320,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				echo "<TD BGCOLOR='$couleur' ALIGN='right'>";
 				$url = $url_base."&supp_mot=$id_mot";
 				
-				if ($flag_groupe)				
+				if ($flag_groupe)
 					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">Retirer ce mot</A></FONT>";
 				else echo "&nbsp;";
 				echo "</TD>";
@@ -322,7 +332,10 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		echo "<tr><td></td><td></td><td><img src='img_pack/rien.gif' width=100 height=1></td><td><img src='img_pack/rien.gif' width=90 height=1></td></tr>";
 		echo "</TABLE>";
 		
-		if ($les_mots) $les_mots = join($les_mots, ",");
+		if ($les_mots) {
+			$nombre_mots_associes = count($les_mots);
+			$les_mots = join($les_mots, ",");
+		}
 		if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
 		else $id_groupes_vus = "0";
 		
@@ -421,16 +434,19 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 						echo "</FORM>";
 					}
 				}
-			
-			
 			}
-			
 
-			
-			
 			echo "</DIV>";
 			echo fin_block();
 		}
+
+		if ($nombre_mots_associes > 3) {
+			echo "<DIV ALIGN='right'>";
+			$url = $url_base."&supp_mot=-1";
+			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">Retirer tous les mots</A></FONT>";
+			echo "</DIV>";
+		}
+
 		fin_cadre_enfonce();
 		echo "&nbsp;<P>";
 	}
