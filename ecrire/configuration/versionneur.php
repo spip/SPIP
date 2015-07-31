@@ -12,15 +12,26 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_configurer_langue_dist
-function action_configurer_langue_dist() {
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-	include_spip('inc/config');
-	include_spip('inc/rubriques');
-	include_spip('inc/lang');
-	appliquer_modifs_config();
-	calculer_langues_rubriques();
+include_spip('inc/presentation');
+include_spip('inc/config');
+
+function configuration_versionneur_dist()
+{
+	global $spip_lang_right;
+
+	$res =  "<div class='verdana2'>"
+	. _T('info_historique_texte')
+	. "</div>"
+	. "<div class='verdana2'>"
+	. afficher_choix('articles_versions', $GLOBALS['meta']["articles_versions"],
+		array('oui' => _T('info_historique_activer'),
+			'non' => _T('info_historique_desactiver')))
+	. "</div>";
+
+	return ajax_action_greffe("configurer-versionneur", 
+	 debut_cadre_trait_couleur("historique-24.gif", true, "", _T('info_historique_titre').aide("suivimodif"))
+	.  ajax_action_post('configurer', 'versionneur', 'config_fonctions', '', $res)
+	.  fin_cadre_trait_couleur(true)
+	.  "<br />");
 }
 ?>

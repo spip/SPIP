@@ -310,6 +310,20 @@ function AjaxSqueezeNode(trig, target, f, event)
 	return true; 
 }
 
+// Les Submit avec attribut name ne sont pas transmis par JQuery
+// Cette fonction clone le bouton de soumission en hidden
+// Voir l'utilisation dans ajax_action_post dans inc/actions
+
+function AjaxNamedSubmit(input)
+{
+	x=document.createElement('input');
+	x.setAttribute('type', 'hidden');
+	x.setAttribute('name', input.name);
+	x.setAttribute('value', input.value)
+	input.parentNode.appendChild(x);
+	return true;
+}
+
 function AjaxRet(res,status, target, callback)
 {
 	if (res.aborted) return;

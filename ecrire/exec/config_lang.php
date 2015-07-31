@@ -42,11 +42,11 @@ function exec_config_lang_dist()
 	  barre_onglets("config_lang", "langues"),
 	  '<br />';
  
-	$configurer_langue = charger_fonction('configurer_langue', 'inc');
-	echo $configurer_langue();
+	$langue = charger_fonction('langue', 'configuration');
+	echo $langue();
 
-	$configurer_charset = charger_fonction('configurer_charset', 'inc');
-	echo $configurer_charset();
+	$transcodeur = charger_fonction('transcodeur', 'configuration');
+	echo $transcodeur();
 
 	echo fin_gauche(), fin_page();
 }

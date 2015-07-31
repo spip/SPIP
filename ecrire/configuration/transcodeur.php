@@ -12,14 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 include_spip('inc/lang');
+include_spip('inc/presentation');
 
-// http://doc.spip.org/@inc_configurer_charset_dist
-function inc_configurer_charset_dist()
+function configuration_transcodeur_dist()
 {
-	global $spip_lang_right;
-
 	$charset = $GLOBALS['meta']["charset"];
 
 	$res =  _T('texte_jeu_caractere') .
@@ -42,19 +39,16 @@ function inc_configurer_charset_dist()
 			array('url' => generer_url_ecrire('convert_utf8'))
 		);
 
-	$res = ajax_action_post('configurer_charset',
-				'',
+	$res = ajax_action_post('configurer',
+				'transcodeur',
 				'config_lang',
 				'',
-				$res,
-				_T('bouton_valider'),
-				" class='fondo' style='float: $spip_lang_right'");
-
+				$res);
 
 	$res = debut_cadre_relief("breve-24.gif", true, "", _T('info_jeu_caractere')) .
 	  $res .
 	  fin_cadre_relief(true);
 
-	return ajax_action_greffe("configurer_charset-0", $res);
+	return ajax_action_greffe("configurer-transcodeur", $res);
 }
 ?>
