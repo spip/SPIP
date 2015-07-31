@@ -54,7 +54,6 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->doublons = "'" . $boucle->type_requete . "' . " .
 	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-
 	$NOT_IN = $crit->not ? '' : 'NOT';
 	$boucle->where[] = '" .' .
 		"calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary."', "
@@ -352,12 +351,11 @@ function calculer_criteres ($idb, &$boucles) {
 	}
 }
 
-# Criteres numeriques et de comparaison
+# Criteres de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	
 	global $table_date, $tables_des_serveurs_sql;
-	static $num_lien;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
@@ -397,7 +395,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    $op = $crit->op;
 
 	    // fonction SQL ?
-	    if (ereg("([a-z_]+)\(([a-z_]+)\)", $col,$match3)) {
+	    if (ereg("([A-Za-z_]+)\(([a-z_]+)\)", $col,$match3)) {
 	      $col = $match3[2];
 	      $fct = $match3[1];
 	    }
@@ -431,6 +429,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	if ($col == 'statut')
 		  $boucle->where['statut'] = '1';
 
+	// reperer les champs n'appartenant pas a la table de la boucle
+
 	if ($s = calculer_critere_externe($boucle, $id_field,$col, $type))
 		$col_table = $s;
 
@@ -444,14 +444,13 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		  $col_lien = "syndic";
 		else
 		  $col_lien = $type;
-		$num_lien++;
-		$boucle->from[] = "spip_mots_$col_lien AS lien_mot$num_lien";
-		$boucle->from[] = "spip_mots AS mots$num_lien";
-		$boucle->where[] = "$id_field=lien_mot$num_lien." . $primary;
-		$boucle->where[] = "lien_mot$num_lien.id_mot=mots$num_lien.id_mot";
+		$boucle->from[] = "spip_mots_$col_lien AS lien_mot";
+		$boucle->from[] = 'spip_mots AS mots';
+		$boucle->where[] = "$id_field=lien_mot." . $primary;
+		$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
 		$boucle->group = $id_field;
 		$boucle->select[] = $id_field; # pour postgres, neuneu ici
-		$col_table = "mots$num_lien";
+		$col_table = 'mots';
 
 		$boucle->lien = true;
 		if ($col == 'type_mot')
@@ -479,6 +478,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	if ($col == 'id_enfant')
 	  $col = $primary;
 	// Cas particulier : id_secteur = id_rubrique pour certaines tables
+
 	if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 	  $col = 'id_rubrique';
 
@@ -548,60 +548,81 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	($col == 'id_parent' OR $col == 'id_forum'))
 		$boucle->plat = true;
 
-	// Operateur de comparaison
+	// Rajouter le nom de la table SQL devant le nom du champ
 	if ($col_table) {
+	  //  `champ` devient `table.champ` (syntaxe SQL pour nom zarbi)
 		if ($col[0] == "`") 
 		  $col = "$col_table." . substr($col,1,-1);
 		else $col = "$col_table.$col";
 	}
-	if (strtoupper($op) == 'IN') {
-	  $val = join(" .\n\"','\" . ", $val);
+
+	// fonction SQL
+	if ($fct) $col = "$fct($col)";
+
+	if (($op != '=') || !calculer_critere_repete($boucle, $col, $val[0]))
+	  {
+	    if (strtoupper($op) == 'IN') {
+	      $val = join(" .\n\"','\" . ", $val);
 	  
-	  $where = "$col IN ('\" . $val . \"')";
-	  if ($crit->not) {
-			$where = "NOT ($where)";
-		} else {
+	      $where = "$col IN ('\" . $val . \"')";
+	      if ($crit->not) {
+		$where = "NOT ($where)";
+	      } else {
 			$boucle->default_order = 'rang';
 			$boucle->select[] =
 				"FIND_IN_SET($col, \\\"'\" . " . $val . ' . "\'\\") AS rang';
-		}
-	} else {
-		if ($op == '==') $op = 'REGEXP';
-		if ($fct) $col = "$fct($col)";
-		$where = "($col $op '\" . " . $val[0] . ' . "\')';
-		if ($crit->not)	$where = "NOT $where";
+	      }
+	    } else {
+		  if ($op == '==') $op = 'REGEXP';
+		  $where = "($col $op '\" . " . $val[0] . ' . "\')';
+		  if ($crit->not)	$where = "NOT $where";
 
 		// operateur optionnel {lang?}
-		if ($crit->cond) {
-			$champ = calculer_argument_precedent($idb, $arg1, $boucles) ;
-			$where = "\".($champ ? \"$where\" : 1).\"";
-		}
+		  if ($crit->cond) {
+		    $champ = calculer_argument_precedent($idb, $arg1, $boucles) ;
+		    $where = "\".($champ ? \"$where\" : 1).\"";
+		  }
+	    }
+	    $boucle->where[] = $where;
+	  }
+}
 
-	}
-	$boucle->where[] = $where;
+// reperer des repetitions comme {id_mot=1}{id_mot=2}
+//  pour creer une clause HAVING
+
+function calculer_critere_repete(&$boucle, $col, $val)
+{
+	foreach ($boucle->where as $k => $v)  {
+        	if (ereg(" *$col *(=|IN) *\(?'(.*)(\".*)[')]$",$v, $m)) {
+		  spip_log($boucle->where[$k]);
+                  $boucle->where[$k] = "$col IN ('$m[2] \"','\" . $val . $m[3])";
+		  spip_log($boucle->where[$k]);
+                  // esperons que c'est le meme !
+                  $boucle->having++;
+		  return true;}
+              }
+	return false;
 }
 
 // traitement des relations externes par une jointure.
 // tant qu'a faire eviter de dupliquer sa declaration,
 // mais c'est une goutte d'eau dans la mer
 
-function calculer_critere_externe(&$boucle, $id_field, $col, $type) {
+function calculer_critere_externe(&$boucle, $id_field, $col, $type)
+{
 	global $tables_relations;
-	static $num;
-
 	if ($col_table =  $tables_relations[$type][$col]) {
-		$num++;
-		$externe = "$id_field=$col_table$num." . $boucle->primary;
+		$externe = "$id_field=$col_table." . $boucle->primary;
 		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
 			$boucle->lien = true;
-			$boucle->from[] = "spip_$col_table AS $col_table$num";
+			$boucle->from[] = "spip_$col_table AS $col_table";
 			$boucle->where[] = $externe;
 			$boucle->group = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
 			$boucle->select[] = $id_field;
 		}
-		return $col_table.$num;
 	}
+	return $col_table;
 }
 
 function calculer_param_date($date_compare, $date_orig) {

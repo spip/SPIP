@@ -51,9 +51,10 @@ class Boucle {
 	// champs pour la construction de la requete SQL
 	var $tout = false;
 	var $plat = false;
-	var $select;
-	var $from;
-	var $where;
+	var $select = array();
+	var $from = array();
+	var $where = array();
+	var $having = 0;
 	var $limit;
 	var $group = '';
 	var $order = '';
@@ -62,7 +63,6 @@ class Boucle {
 	var $hash = false ;
 	var $lien = false;
 	var $sous_requete = false;
-	var $compte_requete = 1;
 	var $hierarchie = '';
 	// champs pour la construction du corps PHP
 	var $id_table;
