@@ -2013,17 +2013,19 @@ function install_debut_html($titre='AUTO', $onload='') {
 
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
-	?>
-<html>
-<head>
-<title><?php echo $titre; ?></title>
-<meta http-equiv="Expires" content="0">
-<meta http-equiv="cache-control" content="no-cache,no-store">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-<style>
-<!--
+	if (!$charset = lire_meta('charset'))
+		$charset = 'utf-8';
+	@Header("Content-Type: text/html; charset=$charset");
+
+	echo "<html><head>
+	<title>$titre</title>
+	<meta http-equiv='Expires' content='0'>
+	<meta http-equiv='cache-control' content='no-cache,no-store'>
+	<meta http-equiv='pragma' content='no-cache'>
+	<meta http-equiv='Content-Type' content='text/html; charset=$charset'>
+	<style>
+	<!--
 	a {text-decoration: none; }
 	A:Hover {color:#FF9900; text-decoration: underline;}
 	.forml {width: 100%; background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
@@ -2031,24 +2033,20 @@ function install_debut_html($titre='AUTO', $onload='') {
 	.fondl {background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
--->
-</style>
-</head>
+	-->
+	</style>
+	</head>
+	<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'";
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php
-	if ($onload) echo " onLoad=\"$onload\"";
+	if ($onload) echo ' onLoad="$onload"';
 	if ($spip_lang_rtl) echo " dir='rtl'";
-?>>
 
-<br><br><br>
-<center>
-<table width="450">
-<tr><td width="450">
-<font face="Verdana,Arial,Helvetica,sans-serif" size="4" color="#970038"><B><?php 
-	echo $titre; 
-?></b></font>
-<font face="Georgia,Garamond,Times,serif" size="3">
-	<?php
+	echo "><br><br><br>
+	<center>
+	<table width='450'>
+	<tr><td width='450'>
+	<font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#970038'><B>$titre</b></font>
+	<font face='Georgia,Garamond,Times,serif' size='3'>";
 }
 
 function install_fin_html() {
