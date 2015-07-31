@@ -784,7 +784,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$nom_auteur = typo($row['nom']);
 					$auteur_messagerie = $row['messagerie'];
 
-					if ($bio = entites_html(supprimer_tags(couper($row['bio'],50))))
+					if ($bio = texte_backend(supprimer_tags(couper($row['bio'],50))))
 						$bio = " title=\"$bio\"";
 
 
