@@ -1034,6 +1034,11 @@ function maj_base() {
 		maj_version(1.820);
 	}
 
+	// reindexer les articles (on avait oublie les auteurs)
+	if ($version_installee < 1.821) {
+		spip_query("UPDATE spip_articles SET idx='1' WHERE idx='oui'");
+		maj_version(1.821);
+	}
 
 	return true;
 }
