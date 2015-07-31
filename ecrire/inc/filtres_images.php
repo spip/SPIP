@@ -2556,7 +2556,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// Si police Postscript et que fonction existe...
 	if (
 	false AND
-	substr($font,-4) == ".pfb"
+	strtolower(substr($font,-4)) == ".pfb"
 	AND function_exists("imagepstext")) {
 		// Traitement specifique pour polices PostScript (experimental)
 		$textSizePs = round(1.32 * $textSize);
