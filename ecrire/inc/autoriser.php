@@ -190,10 +190,18 @@ function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
+// On ne peut joindre un document qu'a un article qu'on a le droit d'editer
+// mais il faut prevoir le cas d'une *creation* par un redacteur, qui correspond
+// au hack id_article = 0-id_auteur
 // http://doc.spip.org/@autoriser_joindredocument_dist
 function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt){
 	return
-		autoriser('modifier',$type, $id, $qui, $opt);
+		autoriser('modifier', $type, $id, $qui, $opt)
+		OR (
+			$type == 'article'
+			AND $id<0
+			AND autoriser('ecrire', $type, $id, $qui, $opt)
+		);
 }
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
