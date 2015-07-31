@@ -33,7 +33,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 function type_du_logo($_id_objet) {
 	return isset($GLOBALS['table_logos'][$_id_objet])
 		? $GLOBALS['table_logos'][$_id_objet]
-		: objet_type($_id_objet);
+		: objet_type(preg_replace(',^id_,','',$_id_objet));
 }
 
 // Exceptions standards (historique)
