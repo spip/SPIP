@@ -971,6 +971,26 @@ function maj_base() {
 		maj_version(1.813);
 	}
 
+	// URLs propres auteurs (et prevoir les sites, sait-on jamais)
+	if ($version_installee < 1.814) {
+		foreach (array('auteurs', 'syndic') as $objets) {
+			spip_query("ALTER TABLE spip_$objets
+				ADD url_propre VARCHAR(255) NOT NULL");
+			spip_query("ALTER TABLE spip_$objets
+				ADD INDEX url_propre (url_propre)");
+		}
+		maj_version(1.814);
+	}
+
+	// Mots-cles sur les documents
+	// + liens documents <-> sites et articles syndiques (podcasting)
+	if ($version_installee < 1.815) {
+		spip_query("ALTER TABLE spip_documents
+		ADD distant VARCHAR(3) DEFAULT 'non'");
+		maj_version(1.815);
+	}
+
+
 	return true;
 }
 

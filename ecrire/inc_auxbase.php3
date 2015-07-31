@@ -138,6 +138,17 @@ $spip_documents_breves_key = array(
 		"KEY id_document"	=> "id_document",
 		"KEY id_breve"	=> "id_breve");
 
+$spip_documents_syndic = array(
+		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_syndic"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_syndic_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL"
+		);
+
+$spip_documents_syndic_key = array(
+		"KEY id_document"	=> "id_document",
+		"KEY id_syndic"	=> "id_syndic",
+		"KEY id_syndic_article"	=> "id_syndic_article");
+
 $spip_mots_articles = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
@@ -177,6 +188,14 @@ $spip_mots_forum = array(
 $spip_mots_forum_key = array(
 		"KEY id_mot"	=> "id_mot",
 		"KEY id_forum"	=> "id_forum");
+
+$spip_mots_documents = array(
+		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+
+$spip_mots_documents_key = array(
+		"KEY id_mot"	=> "id_mot",
+		"KEY id_document"	=> "id_document");
 
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",

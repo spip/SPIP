@@ -84,6 +84,7 @@ $spip_auteurs = array(
 		"source"	=> "VARCHAR(10) DEFAULT 'spip' NOT NULL",
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
+		"url_propre" => "VARCHAR(255) NOT NULL",
 		"extra"	=> "longblob NULL");
 
 $spip_auteurs_key = array(
@@ -208,6 +209,7 @@ $spip_documents = array(
 		"hauteur"	=> "integer NOT NULL",
 		"mode"	=> "ENUM('vignette', 'document') NOT NULL",
 		"inclus"	=> "VARCHAR(3) DEFAULT 'non'",
+		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 

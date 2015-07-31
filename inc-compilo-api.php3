@@ -201,7 +201,10 @@ $tables_relations = array(
 	'documents' => array (
 		'id_article' => 'documents_articles',
 		'id_rubrique' => 'documents_rubriques',
-		'id_breve' => 'documents_breves'
+		'id_breve' => 'documents_breves',
+		'id_mot' => 'mots_documents',
+		'id_syndic' => 'documents_syndic',
+		'id_syndic_article' => 'documents_syndic'
 		),
 
 	'forums' => array (
@@ -213,7 +216,8 @@ $tables_relations = array(
 		'id_breve' => 'mots_breves',
 		'id_forum' => 'mots_forum',
 		'id_rubrique' => 'mots_rubriques',
-		'id_syndic' => 'mots_syndic'
+		'id_syndic' => 'mots_syndic',
+		'id_document' => 'mots_documents'
 		),
 
 	'groupes_mots' => array (

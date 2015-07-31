@@ -98,6 +98,19 @@ echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_num
 echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
 echo "</CENTER>";
 
+
+// "Voir en ligne" si l'auteur a un article publie
+// seuls les admins peuvent "previsualiser" une page auteur
+if (spip_num_rows(spip_query("SELECT lien.id_article
+FROM spip_auteurs_articles AS lien,
+spip_articles AS articles
+WHERE lien.id_auteur=$id_auteur
+AND lien.id_article=articles.id_article
+AND articles.statut='publie'")))
+	voir_en_ligne ('auteur', $id_auteur, 'publie');
+else if ($connect_statut == '0minirezo')
+	voir_en_ligne ('auteur', $id_auteur, 'prop');
+
 fin_boite_info();
 
 

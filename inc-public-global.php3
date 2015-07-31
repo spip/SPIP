@@ -381,19 +381,19 @@ function inclure_balise_dynamique($r, $echo=true) {
 
 function message_erreur_404 () {
 	if ($GLOBALS['id_article'])
-		$erreur = 'aucun_article';
+		$erreur = 'public:aucun_article';
 	else if ($GLOBALS['id_rubrique'])
-		$erreur = 'aucune_rubrique';
+		$erreur = 'public:aucune_rubrique';
 	else if ($GLOBALS['id_breve'])
-		$erreur = 'aucune_breve';
+		$erreur = 'public:aucune_breve';
 	else if ($GLOBALS['id_auteur'])
-		$erreur = 'aucun_auteur';
+		$erreur = 'public:aucun_auteur';
 	else if ($GLOBALS['id_syndic'])
-		$erreur = 'aucun_site';
+		$erreur = 'public:aucun_site';
 	else
 		$erreur = '';
 
-	return _T("public:".$erreur);
+	return _T($erreur);
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur

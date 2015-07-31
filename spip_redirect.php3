@@ -13,7 +13,10 @@
 // redirige vers l'URL canonique de l'article,
 // en indiquant recalcul et previsu
 
+define ('_SPIP_REDIRECT', 1);
 include ("ecrire/inc_version.php3");
+include_ecrire ("inc_session.php3");
+verifier_visiteur();
 
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
