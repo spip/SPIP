@@ -577,20 +577,28 @@ function actualise_plugins_actifs($pipe_recherche = false){
 }
 
 // http://doc.spip.org/@spip_plugin_install
-function spip_plugin_install($action,$prefix,$version_cible){
-	$nom_meta_base_version = $prefix."_base_version";
+function spip_plugin_install($action, $infos){
+	$prefix = $infos['prefix'];
+	$version_cible = $infos['version_base'];
+	if (isset($infos['meta']) AND (($table = $infos['meta']) !== 'meta'))
+		$nom_meta = "base_version";
+	else {  
+		$nom_meta = $prefix."_base_version";
+		$table = 'meta';
+	}
 	switch ($action){
 		case 'test':
-			return (isset($GLOBALS['meta'][$nom_meta_base_version]) 
-			  AND spip_version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
+			return (isset($GLOBALS[$table])
+			AND isset($GLOBALS[$table][$nom_meta]) 
+			AND spip_version_compare($GLOBALS[$table][$nom_meta],$version_cible,'>='));
 			break;
 		case 'install':
 			if (function_exists($upgrade = $prefix."_upgrade"))
-				$upgrade($nom_meta_base_version,$version_cible);
+				$upgrade($nom_meta, $version_cible, $table);
 			break;
 		case 'uninstall':
 			if (function_exists($vider_tables = $prefix."_vider_tables"))
-				$vider_tables($nom_meta_base_version);
+				$vider_tables($nom_meta, $table);
 			break;
 	}
 }
@@ -612,8 +620,8 @@ function desinstalle_un_plugin($plug,$infos){
 		return $ok;
 	}
 	if (isset($infos['version_base'])){
-		spip_plugin_install('uninstall',$infos['prefix'],$infos['version_base']);
-		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		spip_plugin_install('uninstall',$infos);
+		$ok = spip_plugin_install('test',$infos);
 		return $ok;
 	}
 
@@ -656,12 +664,12 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 	// pas de fonction instal fournie, mais une version_base dans le plugin
 	// on utilise la fonction par defaut
 	if (isset($infos['version_base'])){
-		$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+		$ok = spip_plugin_install('test',$infos);
 		if (!$ok) {
 			echo "<div class='install-plugins'>";
 			echo _T('plugin_titre_installation',array('plugin'=>typo($infos['nom'])))."<br />";
-			spip_plugin_install('install',$infos['prefix'],$infos['version_base']);
-			$ok = spip_plugin_install('test',$infos['prefix'],$infos['version_base']);
+			spip_plugin_install('install',$infos);
+			$ok = spip_plugin_install('test',$infos);
 			// vider le cache des definitions des tables
 			$trouver_table = charger_fonction('trouver_table','base');
 			$trouver_table(false);
