@@ -1238,6 +1238,8 @@ function extra($letexte, $champ) {
 // postautobr : transforme les sauts de ligne en _
 // http://doc.spip.org/@post_autobr
 function post_autobr($texte, $delim="\n_ ") {
+	if (!function_exists('echappe_html'))
+		include_spip('inc/texte_mini');
 	$texte = str_replace("\r\n", "\r", $texte);
 	$texte = str_replace("\r", "\n", $texte);
 
@@ -1248,6 +1250,14 @@ function post_autobr($texte, $delim="\n_ ") {
 
 	$texte = echappe_html($texte, '', true);
 
+	// echapper les modeles
+	if (strpos($texte,"<")!==false){
+		include_spip('inc/lien');
+		if (defined('_PREG_MODELE')){
+			$preg_modeles = "@"._PREG_MODELE."@imsS";
+			$texte = echappe_html($texte, '', true, $preg_modeles);
+		}
+	}
 
 	$debut = '';
 	$suite = $texte;
