@@ -404,7 +404,7 @@ function plugin_get_infos($plug){
 				if (isset($arbre['version_base']))
 					$ret['version_base'] = trim(end($arbre['version_base']));
 				
-				if ($t=filemtime($f)){
+				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
 					$plugin_xml_cache[$plug]=$ret;
 					ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
