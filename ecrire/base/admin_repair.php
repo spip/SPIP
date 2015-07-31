@@ -43,7 +43,7 @@ function admin_repair_plat(){
 	$out = "";
 	$repertoire = array();
 	include_spip('inc/getdocument');
-	$res = sql_select('*','spip_documents',"fichier REGEXP CONCAT('^',extension,'[^/\]')");
+	$res = sql_select('*','spip_documents',"fichier REGEXP CONCAT('^',extension,'[^/\]') AND distant='non'");
 
 	while ($row=sql_fetch($res)){
 		$ext = $row['extension'];
