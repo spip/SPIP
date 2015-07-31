@@ -60,11 +60,12 @@ $dossier_squelettes = "";
 $auto_compress = true;
 
 // Type d'URLs
+// 'page': page.php3?fond=article&id_article=123
 // 'standard': article.php3?id_article=123
 // 'html': article123.html
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
-$type_urls = 'standard';
+$type_urls = 'page';
 
 // creation des vignettes avec image magick en ligne de commande : mettre
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
