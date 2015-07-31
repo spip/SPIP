@@ -47,19 +47,16 @@ function exec_mots_type_dist()
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
 	echo debut_droite('', true);
-
 	
-	$out .= "";
 	$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
+		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous") . "#mots_tous-$id_groupe", "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 		'titre'=>$type,
 		'redirect'=>generer_url_ecrire("mots_tous",""),
 		'new'=>_request('new') == "oui"?"oui":$id_groupe,
 		'config_fonc'=>'groupes_mots_edit_config',
 	);
 
-	$out .= recuperer_fond("prive/editer/groupe_mot", $contexte);
-	echo $out;
+	echo recuperer_fond("prive/editer/groupe_mot", $contexte);
 
 	echo pipeline('affiche_milieu',
 		array('args' => array(
