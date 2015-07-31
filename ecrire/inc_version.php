@@ -140,9 +140,6 @@ $type_urls = 'page';
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
 
-// faut-il chronometrer les requetes MySQL ?
-$mysql_profile = false;
-
 // faut-il faire des connexions completes rappelant le nom du serveur et/ou de
 // la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
 // (A desactiver en cas de soucis de connexion chez certains hebergeurs)
