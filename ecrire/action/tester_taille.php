@@ -16,7 +16,7 @@ include_spip('inc/headers');
 function action_tester_taille_error_handler($output)
 {
 	// on est ici, donc echec lors de la creation de l'image
-	if (error_get_last()){
+	if ($GLOBALS['redirect']){
 		return redirige_formulaire($GLOBALS['redirect']);
 	}
 	return $output;
