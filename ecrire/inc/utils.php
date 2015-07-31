@@ -64,6 +64,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 // surcharges par redefinition de fonction (charger_fonction)
 // on inclue un numero de version de format du prefetch dans le nom du fichier
 // ce qui permet les upgrades sans soucis
+// http://doc.spip.org/@include_prefetch
 function include_prefetch($f){
 	static $encours=false;
 	if ($GLOBALS['prefetch'][$f]['fetch']==false) return false;// fichier charge et execute
@@ -106,6 +107,7 @@ function include_prefetch($f){
 	return true;
 }
 // invalidation des fichiers de prechargement
+// http://doc.spip.org/@invalide_prefetch
 function invalide_prefetch(){
 	$fetches = preg_files(_DIR_TMP,_PREFETCH_PREFIXE_FICHIERS.".*[.]php$",10,false);
 	foreach($fetches as $f) @unlink($f);
@@ -644,6 +646,7 @@ function texte_script($texte) {
 // la fonction _chemin ajoute un repertoire au chemin courant si un repertoire lui est passe en parametre
 // retourne le chemin courant sinon, sous forme de array
 // seul le dossier squelette peut etre modifie en dehors de cette fonction, pour raison historique
+// http://doc.spip.org/@_chemin
 function _chemin($dir_path=NULL){
 	static $path_base = NULL;
 	static $path_full = NULL;
