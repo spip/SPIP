@@ -202,7 +202,7 @@ function sql_showbase($spip=NULL, $serveur='')
 }
 
 // http://doc.spip.org/@sql_showtable
-function sql_showtable($table, $serveur='', $table_spip = false)
+function sql_showtable($table, $table_spip = false, $serveur='')
 {
 	if ($table_spip){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -323,8 +323,9 @@ function sql_in($val, $valeurs, $not='', $serveur='') {
 	return $f($val, $valeurs, $not, $serveur);
 }
 
+
 // http://doc.spip.org/@sql_test_int
-function sql_test_int($type)
+function sql_test_int($type, $serveur='')
 {
   return (preg_match('/^bigint/i',$type)
 	  OR preg_match('/^int/i',$type)
@@ -332,7 +333,7 @@ function sql_test_int($type)
 }
 
 // http://doc.spip.org/@sql_test_date
-function sql_test_date($type)
+function sql_test_date($type, $serveur='')
 {
   return (preg_match('/^datetime/i',$type)
 	  OR preg_match('/^timestamp/i',$type));
