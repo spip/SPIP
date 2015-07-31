@@ -297,7 +297,7 @@ function url_var_recherche($url) {
 function extraire_date($texte) {
 	// format = 2001-08
 	if (ereg("([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2])",$texte,$regs))
-		return $regs[1]."-".$regs[2]."01";
+		return $regs[1]."-".sprintf("%02d", $regs[2])."-01";
 }
 
 // Maquiller une adresse e-mail
