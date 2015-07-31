@@ -380,9 +380,9 @@ $liste_des_authentifications = array(
 $spip_version_branche = "2.1.0-dev";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
-$spip_version_code = 12691;
+$spip_version_code = 13545;
 // version de la base SQL (= numero SVN de sa derniere modif, a verifier dans le fichier ecrire/maj/sv10000.php) 
-$spip_version_base = 14558;
+$spip_version_base = 14559;
 
 // version de l'interface a la base
 $spip_sql_version = 1;
