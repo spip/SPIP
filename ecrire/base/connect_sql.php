@@ -27,7 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_connect($serveur='', $version='') {
 	global $connexions, $spip_sql_version;
 
-	$serveur = strtolower($serveur);
+	$serveur = !is_string($serveur) ? '' : strtolower($serveur);
 	$index = $serveur ? $serveur : 0;
 	if (!$version) $version = $spip_sql_version;
 	if (isset($connexions[$index][$version])) return $connexions[$index];
