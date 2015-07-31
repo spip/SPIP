@@ -145,7 +145,11 @@ function plage_punct_unicode() {
 // http://doc.spip.org/@corriger_caracteres_windows
 function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='unicode') {
 	static $trans;
-
+	
+	if (is_array($texte)) {
+		return array_map('corriger_caracteres_windows', $texte);
+	}
+	
 	if ($charset=='AUTO') $charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') {
 		$p = chr(194);
