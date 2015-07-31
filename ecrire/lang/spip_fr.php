@@ -675,6 +675,7 @@ et vous reconnecter au site.
 	'titre_titre_document' => 'Titre du document :',
 	'todo' => 'à venir',
 	'trad_reference' => '(référence des traductions)',
+	'trad_definir_reference' => 'Choisir "@titre@" comme référence des traductions',
 
 	// Z
 	'zbug_balise_b_aval' => ' : balise B en aval',
