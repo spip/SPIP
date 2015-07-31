@@ -73,17 +73,17 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	echo "<div id='changer_statut_auteur'",
 		  (($statut == '0minirezo') ? '' : " style='visibility: hidden'"),
 		  '>';
-	auteur_voir_rubriques($id_auteur, $url_self);
+	$restreint = auteur_voir_rubriques($id_auteur, $url_self);
 
 		// Ajouter une rubrique a un administrateur restreint
 	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
 		echo debut_block_visible("statut$id_auteur");
 		echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
-		if (spip_num_rows($result_admin) == 0)
+		if (!$restreint)
 			echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
 		else
 			echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
-		echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
+		echo "\n<input name='id_auteur' value='$id_auteur' type='hidden' />";
 		include_spip('inc/rubriques');
 		echo selecteur_rubrique(0, 'auteur', false);
 		echo "</div>\n";
@@ -110,18 +110,24 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 					 
 	$result_admin = spip_query("SELECT rubriques.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique");
 
-	if (!spip_num_rows($result_admin)) {
+	$restreint = spip_num_rows($result_admin);
+
+	if (!$restreint) {
 		echo _T('info_admin_gere_toutes_rubriques');
 	} else {
 		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur);
+		$redirect = generer_url_ecrire($url_self, "id_auteur=$id_auteur", true); 
 		echo _T('info_admin_gere_rubriques');
 		echo "\n<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
-			echo "<li><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>", typo($row_admin["titre"]), "</a>";
+			
+			echo "<li><a href='", generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>",
+			  typo($row_admin["titre"]),
+			  "</a>";
 			
 			if ($modif) {
-			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), "'>",
+			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_action_auteur('supprimer', "auteur_rubrique $id_auteur $id_rubrique", $redirect), "'>",
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 			}
@@ -129,6 +135,7 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 		}
 		echo "</ul>";
 	}
+	return $restreint;
 }
 
 function statut_modifiable_auteur($id_auteur, $auteur)
@@ -147,25 +154,17 @@ function statut_modifiable_auteur($id_auteur, $auteur)
 function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {
 	global $connect_statut, $connect_toutes_rubriques;
 	// changer le statut ?
-	$id_auteur= $auteur['id_auteur'];
+	$id_auteur= intval($auteur['id_auteur']);
 	if (statut_modifiable_auteur($id_auteur, $auteur) &&
 	    ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
 			$auteur['statut'] = $statut;
-			spip_query("UPDATE spip_auteurs SET statut='".$statut."'
-			WHERE id_auteur=". intval($id_auteur));
+			spip_query("UPDATE spip_auteurs SET statut='".$statut."' WHERE id_auteur=$id_auteur");
 	}
 
 	// modif auteur restreint, seulement pour les admins
 	if ($connect_toutes_rubriques) {
 		if ($add_rub=intval($add_rub))
-			spip_query("INSERT IGNORE INTO spip_auteurs_rubriques
-			(id_auteur,id_rubrique)
-			VALUES(".$auteur['id_auteur'].", $add_rub)");
-
-		if ($supp_rub=intval($supp_rub))
-			spip_query("DELETE FROM spip_auteurs_rubriques
-			WHERE id_auteur=".$auteur['id_auteur']."
-			AND id_rubrique=$supp_rub");
+		  spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur, $add_rub)");
 	}
 }
 
@@ -198,8 +197,7 @@ function choix_statut_auteur($statut) {
 	if (($statut == '6forum')
 	OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
 	OR ($GLOBALS['meta']['forums_publics'] == 'abo')
-	OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs
-	WHERE statut='6forum'")))
+	OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs WHERE statut='6forum'")))
 		$menu .= "\n<option" .
 			mySel("6forum",$statut) .
 			">" .

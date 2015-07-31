@@ -85,4 +85,11 @@ function action_supprimer_rubrique($id_rubrique)
 	suivre_invalideur("id='id_rubrique/$id_rubrique'");
 
 }
+
+function action_supprimer_auteur_rubrique($arg)
+{
+	if (preg_match(",^ *(\d+) +(\d+)$,", $arg, $r))
+		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=".$r[1]." AND id_rubrique=" . $r[2]);
+	else spip_log("$arg pas compris");
+}
 ?>
