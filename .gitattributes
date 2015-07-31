@@ -394,6 +394,7 @@ ecrire/public/index.php -text
 ecrire/public/jointures.php -text
 ecrire/public/normaliser.php -text
 ecrire/public/quete.php -text
+ecrire/public/tracer.php -text
 ecrire/req/pg.php -text
 ecrire/req/sqlite2.php -text
 ecrire/req/sqlite3.php -text

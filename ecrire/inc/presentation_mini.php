@@ -324,7 +324,7 @@ function fin_page()
 
 	// avec &var_profile=1 on a le tableau de mesures SQL
 	if (@count($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/debug');
+		include_spip('public/tracer');
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';
 

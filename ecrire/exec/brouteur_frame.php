@@ -241,7 +241,7 @@ function exec_brouteur_frame_dist() {
 	}
    }
 	if (count($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/debug');
+		include_spip('public/tracer');
 		echo chrono_requete($GLOBALS['tableau_des_temps']);
 	}
 	echo "</div>";

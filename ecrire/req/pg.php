@@ -111,7 +111,11 @@ function spip_pg_trace_query($query, $serveur='')
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+	if (isset($_GET['var_profile'])) {
+		include_spip('public/tracer');
+		$t = trace_query_start();
+	} else $t = 0 ;
+ 
 	$r = spip_pg_query_simple($link, $query);
 
 	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle

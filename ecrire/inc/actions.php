@@ -206,7 +206,7 @@ function ajax_retour($corps,$xml = true)
 	} else {
 
 		if (isset($GLOBALS['tableau_des_temps'])) {
-			include_spip('public/debug');
+			include_spip('public/tracer');
 			$fin = chrono_requete($GLOBALS['tableau_des_temps']);
 		} else $fin = '';
 
