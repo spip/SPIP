@@ -667,7 +667,7 @@ function spip_log($message) {
 	.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
-	if (filesize($logfile) > 10*1024) {
+	if (@filesize($logfile) > 10*1024) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
 	}
