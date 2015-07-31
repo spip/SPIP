@@ -149,7 +149,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result = sql_allfetsel("A.id_auteur,A.nom,A.bio,A.email,A.nom_site,A.url_site,A.login,A.pass,A.low_sec,A.statut,A.maj,A.pgp,A.htpass,A.en_ligne,A.imessage,A.messagerie,A.alea_actuel,A.alea_futur,A.prefs,A.cookie_oubli,A.source,A.lang, A.extra", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur=A.id_auteur");
+	$result = sql_allfetsel("A.*", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur=A.id_auteur");
 
 	$total_dest = count($result);
 
