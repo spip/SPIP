@@ -78,8 +78,7 @@ function ecrire_stats() {
 	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();
 	$session = sous_repertoire(_DIR_SESSIONS, 'visites') . $client_id;
-	if (@file_exists($session)
-	AND lire_fichier($session, $content))
+	if (lire_fichier($session, $content))
 		$content = @unserialize($content);
 
 	// 2. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)

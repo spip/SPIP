@@ -181,6 +181,13 @@ if (defined('_INC_PUBLIC')) {
 		ecrire_stats();
 	}
 
+	// Ecrire le noyau s'il a change ;
+	// c'est avant cron() pour ne pas l'alourdir
+	if (defined('ecrire_noyau')) {
+		include_spip('inc_meta');
+		ecrire_metas();
+	}
+
 	// Effectuer une tache de fond ?
 	cron();
 
