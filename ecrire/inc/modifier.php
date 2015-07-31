@@ -135,7 +135,7 @@ function revision_auteur($id_auteur, $c=false) {
 
 	modifier_contenu('auteur', $id_auteur,
 		array(
-			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'lien_site', 'email', 'url_propre'),
+			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'url_site', 'email', 'url_propre'),
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
 		$c);
