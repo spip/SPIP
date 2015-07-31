@@ -37,7 +37,8 @@ function champs_traitements ($p) {
 	else {
 		if ($p->nom_boucle)
 			$type = $p->boucles[$p->nom_boucle]->type_requete;
-		else $type = $p->type_requete;
+		else
+			$type = $p->type_requete;
 		$ps = $table_des_traitements[$p->nom_champ][$type];
 		if (!$ps)
 			$ps = $table_des_traitements[$p->nom_champ][0];

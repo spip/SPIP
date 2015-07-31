@@ -299,10 +299,10 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 
 // Forums & petitions : ajouter safehtml aux filtres existants
 foreach(array('TITRE','TEXTE','AUTEUR','EMAIL_AUTEUR','NOM_SITE') as $balise)
-	if (!isset($table_des_traitements[$balise]['forum']))
-		$table_des_traitements[$balise]['forum'] = 'safehtml(%s)';
+	if (!isset($table_des_traitements[$balise]['forums']))
+		$table_des_traitements[$balise]['forums'] = 'safehtml(%s)';
 foreach(array('NOM','NOM_SITE','MESSAGE','AD_EMAIL') as $balise)
-	if (!isset($table_des_traitements[$balise]['forum']))
+	if (!isset($table_des_traitements[$balise]['signatures']))
 		$table_des_traitements[$balise]['signatures'] = 'safehtml(%s)';
 
 ?>
