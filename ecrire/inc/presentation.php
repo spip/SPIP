@@ -20,74 +20,42 @@ include_spip('inc/boutons');
 include_spip('inc/actions');
 include_spip('inc/puce_statut');
 include_spip('inc/filtres_ecrire');
+include_spip('inc/filtres_boites');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
-	global $spip_display, $spip_lang_left;
-	static $accesskey = 97; // a
+	$style_mapping=array('r'=>'simple','e'=>'raccourcis','couleur'=>'basic highlight','couleur-foncee'=>'basic highlight','trait-couleur'=>'important','alerte'=>'notice','info'=>'info','sous_rub'=>'simple sous-rub');
+	$style_titre_mapping=array('couleur'=>'topper','trait-couleur'=>'section');
+	$c = isset($style_mapping[$style])?$style_mapping[$style]:'simple';
+	$class = $c . ($class?" $class":"");
+	if (!$padding)
+		$class .= ($class?" ":"")."no-padding";
 
-	//zoom:1 fixes all expanding blocks in IE, see authors block in articles.php
-	//being not standard, next step can be putting this kind of hacks in a different stylesheet
-	//visible to IE only using conditional comments.
-
-	$style_cadre = " style='";
-	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = "padding-$spip_lang_left: 38px;";
-		//$style_cadre .= "margin-top: 20px;'";
-		$style_cadre .= "'";
-	} else {
-		$style_cadre .= "'";
-		$style_gauche = '';
-	}
-
-	// accesskey pour accessibilite espace prive
-	if ($accesskey <= 122) // z
-	{
-		$accesskey_c = chr($accesskey++);
-		$ret = "<a id='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
-	} else $ret ='';
-
-	$ret .= "\n<div "
-	. ($id?"id='$id' ":"")
-	."class='cadre cadre-$style"
-	. ($class?" $class":"")
-	."'$style_cadre>";
-
-	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
+	//($id?"id='$id' ":"")
+	if (strlen($icone) > 1) {
 		if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
-			list($icone,$fonction) = $icone_renommer($icone,$fonction);
-		if ($fonction) {
-			
-			$ret .= http_img_pack("$fonction", "", " class='cadre-icone' ".http_style_background($icone, "no-repeat; padding: 0px; margin: 0px"));
+			list($fond,$fonction) = $icone_renommer($icone,$fonction);
+		$size = 24;
+		if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
+			$size = $match[1];
+		if ($fonction){
+			// 2 images pour composer l'icone : le fond (article) en background,
+			// la fonction (new) en image
+			$icone = http_img_pack($fonction, "", "class='cadre-icone' width='$size' height='$size'\n" .
+						http_style_background($fond, "no-repeat center center"));
 		}
-		else $ret .=  http_img_pack("$icone", "", " class='cadre-icone'");
-	}
-
-	if (strlen($titre) > 0) {
-		if (strpos($titre,'titrem')!==false) {
-			$ret .= $titre;
-		} elseif ($spip_display == 4) {
-			$ret .= "\n<h3 class='cadre-titre'>$titre</h3>";
-		} else {
-			$ret .= bouton_block_depliable($titre,-1);
+		else {
+			$icone = http_img_pack($fond, "", "class='cadre-icone' width='$size' height='$size'");
 		}
+		$titre = $icone . $titre;
 	}
-
-	$ret .= "<div". ($padding ?" class='cadre_padding'" : '') .">";
-
-	return $ret;
+	return boite_ouvrir($titre, $class,isset($style_titre_mapping[$style])?$style_titre_mapping[$style]:'',$id);
 }
 
 // http://doc.spip.org/@fin_cadre
-function fin_cadre($style='') {
-
-	$ret = "<div class='nettoyeur'></div></div>".
-	"</div>\n";
-
-	return $ret;
-}
+function fin_cadre() {return boite_fermer();}
 
 
 function debut_cadre_relief($icone='', $dummy='', $fonction='', $titre = '', $id="", $class=""){return debut_cadre('r', $icone, $fonction, $titre, $id, $class);}
@@ -105,7 +73,7 @@ function fin_cadre_trait_couleur(){return fin_cadre('trait-couleur');}
 function debut_boite_alerte() {return debut_cadre('alerte', '', '', '', '', '');}
 function fin_boite_alerte() {return fin_cadre('alerte');}
 function debut_boite_info() {return debut_cadre('info', '', '', '', '', '');}
-function fin_boite_info($return=false) {return fin_cadre('info');}
+function fin_boite_info() {return fin_cadre('info');}
 
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo=''){return "<h1 class='grostitre'>" . $ze_logo.' ' . typo($titre)."</h1>\n";}
@@ -115,9 +83,7 @@ function gros_titre($titre, $ze_logo=''){return "<h1 class='grostitre'>" . $ze_l
 // http://doc.spip.org/@bloc_des_raccourcis
 function bloc_des_raccourcis($bloc) {
 	return creer_colonne_droite()
-	. debut_cadre_enfonce('','','',"<h3>"._T('titre_cadre_raccourcis')."</h3>")
-	. $bloc
-	. fin_cadre_enfonce();
+	  . boite_ouvrir(_T('titre_cadre_raccourcis'),'raccourcis') . $bloc . boite_fermer();
 }
 
 // Afficher un petit "+" pour lien vers autre page

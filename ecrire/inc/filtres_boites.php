@@ -74,13 +74,13 @@ function balise_BOITE_FERMER_dist($p) {
  * @param string $class
  * @return <type>
  */
-function boite_ouvrir($titre, $class='', $head_class=''){
+function boite_ouvrir($titre, $class='', $head_class='', $id=""){
 	$class = "box $class";
 	$head_class = "clearfix hd $head_class";
 	// dans l'espace prive, titrer en h3 si pas de balise <hn>
 	if (test_espace_prive() AND strlen($titre) AND strpos($titre,'<h')===false)
 		$titre = "<h3>$titre</h3>";
-	return '<div class="'.$class.'">'
+	return '<div class="'.$class.($id?"\" id=\"$id":"").'">'
 	.'<b class="top"><b class="tl"></b><b class="tr"></b></b>'
 	.'<div class="inner">'
 	.($titre?'<div class="'.$head_class.'">'.$titre.'</div>':'')
