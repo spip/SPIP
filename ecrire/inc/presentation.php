@@ -696,7 +696,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$jjscript["requete"] = $requete;
 	$jjscript["afficher_visites"] = $afficher_visites;
 	$jjscript["afficher_auteurs"] = $afficher_auteurs;
-	$jjscript = addslashes(serialize($jjscript));
+	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
 	$tmp_var = substr($hash, 2, 6);
@@ -725,7 +725,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
 	}
 
 	if (!$deb_aff) {
@@ -1369,7 +1369,6 @@ function afficher_auteurs ($titre_table, $requete) {
 		$table[]= affiche_auteur_boucle($row, &$tous_id);
 	}
 	spip_free_result($result);
-	spip_log("afautu");
 	$largeurs = array('');
 	$styles = array('arial2');
 	echo afficher_liste($largeurs, $table, $styles);
