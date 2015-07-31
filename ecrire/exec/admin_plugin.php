@@ -268,6 +268,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 
 // http://doc.spip.org/@ligne_plug
 function ligne_plug($plug_file, $actif, $id){
+	global $spip_lang_right;
 	static $id_input=0;
 
 	$erreur = false;
@@ -280,6 +281,14 @@ function ligne_plug($plug_file, $actif, $id){
 		foreach($info['erreur'] as $err)
 			$s .= "/!\ $err <br/>";
 		$s .=  "</div>";
+	}
+	
+	// bouton de desinstallation
+	if ($actif && plugin_est_installe($plug_file)){
+		$s .= "<div style='float:$spip_lang_right'>";
+		$action = generer_action_auteur('desinstaller_plugin',$plug_file,generer_url_ecrire('admin_plugin'));
+		$s .= "<a href='$action'>"._T('bouton_effacer_tout')."</a>";
+		$s .= "</div>";
 	}
 
 	$etat = 'dev';
