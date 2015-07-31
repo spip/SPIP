@@ -162,6 +162,8 @@ function spip_abstract_countsel($from = array(), $where = array(),
 //
 // http://doc.spip.org/@calcul_mysql_in
 function calcul_mysql_in($val, $valeurs, $not='') {
+	if (is_array($valeurs))
+		$valeurs = join(',', array_map('_q', $valeurs));
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	$n = $i = 0;
