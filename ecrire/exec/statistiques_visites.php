@@ -71,7 +71,7 @@ function exec_statistiques_visites_dist()
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
 	if (!$aff_jours) $aff_jours = 105;
-	$origine = _request('origine');
+
 	// nombre de referers a afficher
 	$limit = intval(_request('limit'));
 	if ($limit == 0) $limit = 100;
@@ -82,11 +82,11 @@ function exec_statistiques_visites_dist()
 	} else {
 		if (_request('format') == 'csv')
 			statistiques_csv($id_article);
-		else exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limit);
+		else exec_statistiques_visites_args($id_article, $aff_jours, $limit);
 	}
 }
 
-function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limit)
+function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 {
 	$titre = $pourarticle = "";
 	$class = " class='arial1 spip_x-small'";
@@ -108,19 +108,6 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 
 	if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
-	if ($origine) {
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
-	echo gros_titre(_T('titre_liens_entrants'),'', false);
-	echo barre_onglets("statistiques", "referers");
-
-	echo debut_gauche('', true);
-	echo debut_boite_info(true);
-	echo "<p style='text-align: left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
-	echo fin_boite_info(true);
-	
-	echo debut_droite('', true);
-	} else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
 	echo gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>",'', false);
@@ -132,7 +119,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 	echo "<br />";
 
 	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<div style='font-size:small;' class='verdana1'>";
+	echo "<div class='verdana1 spip_x-small'>";
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
@@ -148,11 +135,10 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 	// Par popularite
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC");
 
-	$nombre_articles = sql_count($result);
-	if ($nombre_articles > 0) {
+	if (sql_count($result)) {
 		echo "<br />\n";
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
-		echo "<div style='font-size:small;' class='verdana1'>";
+		echo "<div class='verdana1 spip_x-small'>";
 		echo typo(_T('info_visites_plus_populaires'));
 		$open = "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 		echo $open;
@@ -223,7 +209,7 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 
 	if ($n) {
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
-		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'>";
+		echo "<div style='overflow:hidden;' class='verdana1 spip_x-small'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 
@@ -247,47 +233,38 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limi
 
 	echo debut_droite('', true);
 
-	}
-
-	if (!$origine) {
-
-		$vis = "visites";
-		if ($id_article) {
+	$vis = "visites";
+	if ($id_article) {
 			$table = "spip_visites_articles";
 			$table_ref = "spip_referers_articles";
 			$where = "id_article=$id_article";
-		} else {
+	} else {
 			$table = "spip_visites";
 			$table_ref = "spip_referers";
 			$where = "0=0";
-		}
+	}
 
-		$select = "UNIX_TIMESTAMP(date) AS date, UNIX_TIMESTAMP(date) AS date_time, visites";
-		$where2 = " date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)";
-		$order = "date";
+	$select = "UNIX_TIMESTAMP(date) AS date, UNIX_TIMESTAMP(date) AS date_time, visites";
+	$where2 = " date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)";
+	$order = "date";
 
-		statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement, $id_article, $liste);
+	statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement, $id_article, $liste);
 
-		if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article")) {
+	if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article")) {
 
-			echo "<br />", gros_titre(_L('Nombre de signatures par jour'),'', false);
+		echo "<br />", gros_titre(_L('Nombre de signatures par jour'),'', false);
 
-			$stable = "spip_signatures";
-			$swhere = "id_article=$id_article";
-			$sselect = "UNIX_TIMESTAMP(date_time) AS date_time, (ROUND(UNIX_TIMESTAMP(date_time) / (24*3600)) *  (24*3600)) AS date, COUNT(*) AS visites";
-			$swhere2 = " date_time > DATE_SUB(NOW(),INTERVAL 420 DAY)";
-			$sgroupby = 'date';
-			$sorder = "date_time";
+		$stable = "spip_signatures";
+		$swhere = "id_article=$id_article";
+		$sselect = "UNIX_TIMESTAMP(date_time) AS date_time, (ROUND(UNIX_TIMESTAMP(date_time) / (24*3600)) *  (24*3600)) AS date, COUNT(*) AS visites";
+		$swhere2 = " date_time > DATE_SUB(NOW(),INTERVAL 420 DAY)";
+		$sgroupby = 'date';
+		$sorder = "date_time";
 
-			statistiques_tous($sselect, $stable, $swhere, $swhere2, $sgroupby, $sorder, 0, $n, 0, $class, $style, $aff_jours);
+		statistiques_tous($sselect, $stable, $swhere, $swhere2, $sgroupby, $sorder, 0, $n, 0, $class, $style, $aff_jours);
 
-			echo "<br />", gros_titre(_L('Nombre de signatures par mois'),'', false);
-			echo statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_unix, COUNT(*) AS total_visites", 'spip_signatures',  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date_unix"), 0, $class, $style);
-		}
-	} else {
-		$where = "visites_jour>0";
-		$vis = "visites_jour";
-		$table_ref = "spip_referers";
+		echo "<br />", gros_titre(_L('Nombre de signatures par mois'),'', false);
+		echo statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_unix, COUNT(*) AS total_visites", 'spip_signatures',  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date_unix"), 0, $class, $style);
 	}
 
 	$res = sql_select("referer, referer_md5, $vis AS vis", $table_ref, $where, "", "vis DESC", $limit);
@@ -425,23 +402,23 @@ function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $
 
 	echo fin_cadre_relief(true);
 
-// Le bouton pour passer de svg a htm
+// Le bouton pour CSV et pour passer de svg a htm
+	$lui = self();
+
 	if ($accepte_svg) {
 	  $lien = 'non'; $alter = 'HTML';
 	} else {
 	  $lien = 'oui'; $alter = 'SVG';
 	}
 
-	echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . "; font-size:x-small;' class='verdana1'>
-<a href='".
-	  parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
-	  parametre_url(self(), 'format', 'csv')."'>CSV</a>".
-	  "</div>\n";
+	echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
+		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>$alter</a>" 
+		. " | <a href='"
+	  	. parametre_url($lui, 'format', 'csv')."'>CSV</a>"
+		. "</div>\n";
 }
 
 function stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $largeur, $log, $max, $maxgraph, $rapport, $style, $val_popularite, $visites_today) {
-	global $spip_lang_left;
-	
 	$res = '';
 
 	$test_agreg = $decal = $jour_prec = $val_prec =0;
@@ -584,27 +561,34 @@ function stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $large
 	. "\n<td valign='top'>"
 	. statistiques_echelle($maxgraph, $class, $style) 
 	. "</td>"  
-	. "</tr></table>";
+	. "</tr></table>"
+	. statistiques_nom_des_mois($date_debut, $date_today, ($largeur / (24*3600*$agreg)));
+	return array($moyenne, $val_prec, $res);
+}
 
-	// affichage des noms de mois			
-	$res .= "<div style='position: relative; height: 15px'>";
+function statistiques_nom_des_mois($date_debut, $date_today, $largeur)
+{
+	global $spip_lang_left;
+
+	$res = '';
 	$gauche_prec = -50;
-	for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
-		$ce_jour = date("d", $jour);
+	$pas =  (24*3600);
+	for ($jour = $date_debut; $jour <= $date_today; $jour += $pas) {
 		
-		if ($ce_jour == "1") {
-			$afficher = nom_mois(date("Y-m-d", $jour));
-			if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
-				
-			$gauche = floor($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
-			if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
-				$res .= "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
+		if (date("d", $jour) == "1") {
+			$newy = (date("m", $jour) == 1);
+			$gauche = floor(($jour - $date_debut) * $largeur);
+			if ($gauche - $gauche_prec >= 40 OR $newy) {
+				$afficher = $newy ? 
+				  ("<b>".annee(date("Y-m-d", $jour))."</b>")
+				  : nom_mois(date("Y-m-d", $jour));
+
+				  $res .= "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
 				$gauche_prec = $gauche;
 			}
 		}
 	}
-	$res .= "</div>";  
-	return array($moyenne, $val_prec, $res);
+	return "<div style='position: relative; height: 15px'>$res</div>";  
 }
 
 function statistiques_par_mois($query, $visites_today, $class, $style)
@@ -709,7 +693,7 @@ function statistiques_par_mois($query, $visites_today, $class, $style)
 
 function statistiques_echelle($maxgraph, $class, $style)
 {
-  return "<div style='font-size:small;' class='verdana1'>"
+  return "<div class='verdana1 spip_x-small'>"
  . "\n<table cellpadding='0' cellspacing='0' border='0'>"
  . "\n<tr><td style='height: 15' valign='top'>"
  . "<span class='arial1 spip_x-small'><b>" .round($maxgraph) ."</b></span>"
