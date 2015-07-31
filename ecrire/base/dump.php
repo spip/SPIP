@@ -205,7 +205,7 @@ function base_liste_table_for_dump($exclude_tables = array()){
  * @param array $tables
  * @param string $serveur
  */
-function base_vider_tables_destination_copie($tables, $serveur=''){
+function base_vider_tables_destination_copie($tables, $exlure_tables = array(), $serveur=''){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 
 	spip_log('Vider '.count($tables) . " tables sur serveur '$serveur' : " . join(', ', $tables),'base');
@@ -261,16 +261,59 @@ function base_detruire_copieur_si_besoin($serveur='')
 }
 
 /**
+ * Preparer la table dans la base de destination :
+ * la droper si elle existe (sauf si auteurs ou meta sur le serveur principal)
+ * la creer si necessaire, ou ajouter simplement les champs manquants
  *
- * @param <type> $tables
- * @param <type> $serveur_source
- * @param <type> $serveur_dest
- * @param <type> $callback_progression
- * @param <type> $max_time
- * @param <type> $drop_source
+ * @param string $table
+ * @param array $desc
+ * @param string $serveur_dest
+ * @param bool $init
+ * @return array
+ */
+function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
+	$upgrade = false;
+	// si la table existe et qu'on est a l'init, la dropper
+	if ($desc_dest=sql_showtable($table,false,$serveur_dest) AND $init) {
+		if ($serveur_dest=='' AND in_array($table,array('spip_meta','spip_auteurs'))) {
+			// ne pas dropper auteurs et meta sur le serveur principal
+			// faire un simple upgrade a la place
+			// pour ajouter les champs manquants
+			$upgrade = true;
+		}
+		else {
+			sql_drop_table($table);
+		}
+		$desc_dest = false;
+	}
+	// si la table n'existe pas dans la destination, la creer a l'identique !
+	if (!$desc_dest) {
+		include_spip('base/create');
+		$autoinc = (isset($desc['keys']['PRIMARY KEY']) AND strpos($desc['keys']['PRIMARY KEY'],',')===false);
+		creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade,$serveur_dest);
+		$desc_dest = sql_showtable($table,false,$serveur_dest);
+	}
+	
+	return $desc_dest;
+}
+
+/**
+ * Copier de base a base
+ * @param array $tables
+ *   liste des tables a copier
+ * @param string $serveur_source
+ * @param string $serveur_dest
+ * @param string $callback_progression
+ *   fonction a appeler pour afficher la progression
+ * @param int $max_time
+ *   limite de temps au dela de laquelle sortir de la fonction proprement (de la forme time()+15)
+ * @param bool $drop_source
+ *   vider les tables sources apres copie
+ * @param array $no_erase_dest
+ *   liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
  * @return <type>
  */
-function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false) {
+function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array()) {
 	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
 
 	$status_file = _DIR_TMP . "dump-copy-".md5(serialize($tables)."-$serveur_source-$serveur_dest").".txt";
@@ -286,7 +329,7 @@ function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_p
 
 	// si init pas encore faite, vider les tables du serveur destination
 	if (!$initialisation_copie) {
-		base_vider_tables_destination_copie($tables, $serveur_dest);
+		base_vider_tables_destination_copie($tables, $no_erase_dest, $serveur_dest);
 		$status["dump_status_copie"]='ok';
 		ecrire_fichier($status_file,serialize($status));
 	}
@@ -311,13 +354,8 @@ function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_p
 			if (!isset($status['tables_copiees'][$table]))
 				$status['tables_copiees'][$table] = 0;
 
-			// si la table n'existe pas dans la destination, la creer a l'identique !
-			if (!$desc_dest = sql_showtable($table,false,$serveur_dest)) {
-				$autoinc = (isset($desc_source['keys']['PRIMARY KEY']) AND strpos($desc_source['keys']['PRIMARY KEY'],',')===false);
-				sql_create($table, $desc_source['field'], $desc_source['key'], $autoinc, false, $serveur_dest);
-				$desc_dest = sql_showtable($table,false,$serveur_dest);
-			}
-			if ($status['tables_copiees'][$table]!==-1){
+			if ($status['tables_copiees'][$table]!==-1
+				AND $desc_dest = base_preparer_table_dest($table, $desc_source, $serveur_dest, $status['tables_copiees'][$table] == 0)){
 				if ($callback_progression)
 					$callback_progression(0,0,$table);
 				while (true) {
@@ -328,7 +366,7 @@ function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_p
 						// si l'enregistrement est deja en base, ca fera un echec ou un doublon
 						sql_insertq($table,$row,$desc_dest,$serveur_dest);
 						$status['tables_copiees'][$table]++;
-						if ($max_time AND time()>$_SERVER['REQUEST_TIME']+$max_time)
+						if ($max_time AND time()>$max_time)
 							break;
 					}
 					if ($n == $status['tables_copiees'][$table])
@@ -337,7 +375,7 @@ function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_p
 					if ($callback_progression)
 						$callback_progression($status['tables_copiees'][$table],0,$table);
 					ecrire_fichier($status_file,serialize($status));
-					if ($max_time AND time()>$_SERVER['REQUEST_TIME']+$max_time)
+					if ($max_time AND time()>$max_time)
 						return false; // on a pas fini, mais le temps imparti est ecoule
 				}
 				if ($drop_source) {
