@@ -234,6 +234,7 @@ $spip_pipeline = array(
 	'jquery_plugins' => '',
 #	'insert_js' => '',
 	'lister_tables_noexport' => '',
+	'libelle_association_mots' => '',
 #	'verifie_js_necessaire' => '',
 	'mots_indexation' => '',
 	'nettoyer_raccourcis_typo' => '',
