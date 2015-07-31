@@ -8,8 +8,7 @@ include_ecrire("inc_abstract_sql.php3");
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
 
-function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre)
-{
+function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre) {
 	include_ecrire('inc_texte.php3');
 	include_ecrire('inc_filtres.php3');
 	include_ecrire('inc_mail.php3');
@@ -45,20 +44,25 @@ function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre)
 		if (strlen($email) < 3) continue;
 		envoyer_mail($email, $sujet, $courr);
 	}
-}	
+}
 
+
+
+// Recuperation des donnees
 $retour_forum = rawurldecode($retour);
-$forum_id_article = intval($id_article);
-$forum_id_rubrique = intval($id_rubrique);
-$forum_id_forum = intval($id_forum);
-$forum_id_breve = intval($id_breve);
-$forum_id_syndic = intval($id_syndic);
+$id_article = intval($id_article);
+$id_rubrique = intval($id_rubrique);
+$id_forum = intval($id_forum);
+$id_breve = intval($id_breve);
+$id_syndic = intval($id_syndic);
 
+// initialisation de l'eventuel visiteur connecte
 if (!$id_auteur)
 	$id_auteur = intval($auteur_session['id_auteur']);
 
-if ($forum_id_article) {
-	$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$forum_id_article");
+// chercher le statut du forum
+if ($id_article) {
+	$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
 	$r = spip_fetch_array($r);
 	if ($r)
 		$forums_publics = $r['accepter_forum'];
@@ -88,8 +92,10 @@ if ($forums_publics == "abo") {
 	// Ne pas autoriser de changement de nom si forum sur abonnement
 	$auteur = $auteur_session['nom'];
 	$email_auteur = $auteur_session['email'];
- } 
+}
 
+
+// trop court ?
 if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
 	ask_php_auth(_T('forum_message_trop_long'),
 		_T('forum_cliquer_retour',
@@ -98,16 +104,15 @@ if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_sit
 }
 
 
-$validation_finale = (strlen($confirmer) > 0
-	OR ($afficher_texte=='non' AND $ajouter_mot));
-
-if ($validation_finale) {
+// validation finale du post ?
+if (strlen($confirmer) > 0
+OR ($afficher_texte=='non' AND $ajouter_mot)) {
 
 	// verifier droit (pour interdire de hack-poster sur des forums fermes ?)
 	include_ecrire("inc_admin.php3");
-	if (!(verifier_action_auteur("ajout_forum $forum_id_rubrique".
-	" $forum_id_forum $forum_id_article $forum_id_breve".
-	" $forum_id_syndic $alea", $hash))) {
+	if (!(verifier_action_auteur("ajout_forum $id_rubrique".
+	" $id_forum $id_article $id_breve".
+	" $id_syndic $alea", $hash))) {
 		header("Status: 404");
 		exit;
 	}
@@ -122,16 +127,16 @@ if ($validation_finale) {
 		(($forums_publics == 'pri') ? 'prop' :
 		'publie');
 
-	if ($forum_id_forum > 0)
-		$id_thread = $forum_id_forum;
+	if ($id_forum > 0)
+		$id_thread = $id_forum;
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
-	spip_query("UPDATE spip_forum SET id_parent = $forum_id_forum,
-	id_rubrique =$forum_id_rubrique,
-	id_article = $forum_id_article,
-	id_breve = $forum_id_breve,
-	id_syndic = $forum_id_syndic,
+	spip_query("UPDATE spip_forum SET id_parent = $id_forum,
+	id_rubrique =$id_rubrique,
+	id_article = $id_article,
+	id_breve = $id_breve,
+	id_syndic = $id_syndic,
 	id_auteur = $id_auteur,
 	id_thread = $id_thread,
 	date_heure = NOW(),
@@ -159,7 +164,7 @@ if ($validation_finale) {
 	// Prevenir les auteurs de l'article
 	if (lire_meta("prevenir_auteurs") == "oui"
 	AND ($afficher_texte != "non")
-	AND ($id_article = $forum_id_article))
+	AND ($id_article = $id_article))
 		prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre);
 
 	// Poser un cookie pour ne pas retaper le nom / email
@@ -172,10 +177,10 @@ if ($validation_finale) {
 	include_ecrire('inc_invalideur.php3');
 	if ($statut == 'publie') {
 		suivre_invalideur ("id='id_forum/" .
-			calcul_index_forum($forum_id_article,
-				$forum_id_breve,
-				$forum_id_rubrique,
-				$forum_id_syndic) . "'");
+			calcul_index_forum($id_article,
+				$id_breve,
+				$id_rubrique,
+				$id_syndic) . "'");
 	}
 
 	$redirect = $retour_forum;
