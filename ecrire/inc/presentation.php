@@ -604,7 +604,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
 	  . url_absolue(find_in_path('style_prive_defaut.css'))
-	. '" />'  . "\n"
+	. '" id="cssprivee" />'  . "\n"
 	
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
@@ -630,7 +630,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $paramcss) .'" id="cssprivee" />' . "\n"
+	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
   . "<!--[if lt IE 8]>\n"
   . '<link rel="stylesheet" type="text/css" href="'
   . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
