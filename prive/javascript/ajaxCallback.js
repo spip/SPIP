@@ -850,7 +850,7 @@ jQuery.fn.animateAppend = function(callback){
 		var sel=$(this);
 		// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
 		if (sel.is('tr'))
-			sel.add('>td',sel);
+			sel = sel.add('>td',sel);
 		sel.css('opacity','0.0').addClass('append').css({backgroundColor: color}).animate({opacity: "1.0"}, 1000,function(){
 			sel.animate({backgroundColor: origin}, 3000,function(){
 				sel.removeClass('append').css({backgroundColor: ''});
