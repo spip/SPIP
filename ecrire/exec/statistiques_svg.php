@@ -49,7 +49,7 @@ if ($connect_statut != '0minirezo') {
 	header("Expires: ".$expire." GMT");
 	header("Content-type: image/svg+xml");
 
-	echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
+	echo "<"."?xml version=\"1.0\" standalone=\"no\"?>\n";
 	echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
 	echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
 	echo "<style type='text/css'>\n";

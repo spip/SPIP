@@ -122,6 +122,10 @@ if (defined('_INC_PUBLIC')) {
 
 	// Execution de la page calculee
 
+	// 0. xml-hack
+	$xml_hack = ($page['entetes']['X-Xml-Hack'] == 'ok');
+	unset($page['entetes']['X-Xml-Hack']);
+
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
 		foreach($page['entetes'] as $k => $v) @header("$k: $v");
@@ -193,6 +197,9 @@ if (defined('_INC_PUBLIC')) {
 			$page['texte'] = $r[1];
 	}
 
+	// Report du hack pour <?xml (cf. public/compiler.php)
+	if ($xml_hack)
+		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)
