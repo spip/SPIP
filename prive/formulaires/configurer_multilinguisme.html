@@ -13,13 +13,12 @@
 		<input type="hidden" name="gerer_trad_objets&#91;&#93;" value="" />
 	  <ul>
 			<li class="fieldset">
-				<fieldset>
+				<fieldset><ul>
 					#SET{objets,#VAL{rubrique}|objet_info{texte_objets}|_T}
 					#SET{val,spip_rubriques}
-					<legend>#GET{objets}</legend>
-					<ul>
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label>#GET{objets}</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
@@ -56,10 +55,10 @@
 			<li class="fieldset">
 				<fieldset>
 					#SET{objets,#VALEUR{texte_objets}|_T}
-					<legend>#GET{objets}</legend>
 					<ul>
 						#SET{name,multi_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label>#GET{objets}</label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<div class="choix">
 								<input type="checkbox" name="#GET{name}&#91;&#93;" id="#GET{val}#GET{name}_oui" value="#GET{val}"
