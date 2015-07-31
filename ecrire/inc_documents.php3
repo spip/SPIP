@@ -371,6 +371,46 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 }
 
+
+//
+// Traitement des images et documents <IMGxx|right> pour inc_texte
+//
+function inserer_documents($letexte, $matches) {
+
+	foreach ($matches as $match) {
+		$type = strtoupper($match[1]);
+		if ($type == 'EMB')
+			$rempl = embed_document($match[2], $match[4]);
+		else
+			$rempl = integre_image($match[2], $match[4], $type);
+
+		// Remplacer par une <div onclick> le lien dans le cas [<docXX>->lien]
+		// (si le document est deja une <div> et pas une simple image) car sinon
+		// on est illegal en XHTML
+		if (preg_match(',<div ,', $rempl)
+		AND
+		preg_match_all(
+		',<a\s[^>]*>([^>]*'.preg_quote($match[0]).'[^>]*)</a>,ims',
+		$letexte, $mm, PREG_SET_ORDER))
+			foreach ($mm as $m) {
+				$url = extraire_attribut($m[0],'href');
+				$re = '<div onclick="document.location=\''.$url
+					.'\'"'
+##					.' href="'.$url.'"' # note: href sera legal en XHTML2
+					.'>'
+					.$m[0] # $m[1] si on veut eliminer le <a> (tidy le fait)
+					."</div>\n";
+				$letexte = str_replace($m[0], $re, $letexte);
+			}
+
+		// Installer le document
+		$letexte = str_replace($match[0], $rempl, $letexte);
+	}
+
+	return $letexte;
+}
+
+
 //
 // Parcourt recursivement le repertoire upload/ (ou tout autre repertoire, d'ailleurs)
 //

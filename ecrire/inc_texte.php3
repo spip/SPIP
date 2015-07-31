@@ -778,36 +778,6 @@ function traiter_listes ($texte) {
 	return substr($texte, 0, -2);
 }
 
-//
-// Traitement des images et documents <IMGxx|right>
-//
-function traiter_documents($letexte, $matches) {
-	include_ecrire("inc_documents");
-
-	foreach ($matches as $match) {
-		$type = strtoupper($match[1]);
-		if ($type == 'EMB')
-			$rempl = embed_document($match[2], $match[4]);
-		else
-			$rempl = integre_image($match[2], $match[4], $type);
-
-		// Bloquer par une <div> le lien dans le cas [<docXX>->lien]
-		// (si le document est deja une <div> et pas une simple image)
-		if (preg_match(',<div ,', $rempl)
-		AND
-		preg_match_all(
-		',<a\s[^>]*>[^>]*'.preg_quote($match[0]).'[^>]*</a>,ims',
-		$letexte, $mm, PREG_SET_ORDER))
-			foreach ($mm as $m)
-				$letexte = str_replace($m[0],
-				'<div>'.$m[0]."</div>\n\n", $letexte);
-
-		// Installer le document
-		$letexte = str_replace($match[0], $rempl, $letexte);
-	}
-
-	return $letexte;
-}
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis_generale($letexte) {
@@ -1012,9 +982,10 @@ function traiter_raccourcis_generale($letexte) {
 
 
 	// Installer les images et documents
-	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER))
-		$letexte = traiter_documents($letexte, $matches);
-
+	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
+		include_ecrire("inc_documents");
+		$letexte = inserer_documents($letexte, $matches);
+	}
 
 	//
 	// Affiner les paragraphes
