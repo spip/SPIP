@@ -142,7 +142,7 @@ if ($flag_ecrire) {
 $spip_version = 1.602;
 
 // version de spip
-$spip_version_affichee = "1.6b8 CVS";
+$spip_version_affichee = "1.6pr1 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
