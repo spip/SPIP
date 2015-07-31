@@ -56,24 +56,18 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 
 	// doit-on envoyer le mail ?
 	if ($validable
-	AND $id == _request('id_formulaire_ecrire_auteur')) { 
-		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
+	AND $id == _request('num_formulaire_ecrire_auteur')
+	AND _request('confirmer'.$id)) { 
+		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi(lire_meta('nom_site')))." (".lire_meta('adresse_site')."/) --\n";
 		include_ecrire("inc_mail.php3");
 		envoyer_mail($mail, $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 		return _T('form_prop_message_envoye');
 	}
 
-	$link = new Link;
-	$link->delVar('sujet_message_auteur'.$id);
-	$link->delVar('texte_message_auteur'.$id);
-	$link->delVar('email_message_auteur'.$id);
-	$link->delVar('id_formulaire_ecrire_auteur');
-
 	return 
 		array('formulaire_ecrire_auteur', 0,
 			array(
-			'action' => $link->getUrl(),
 			'id' => $id,
 			'mailko' => $mailko ? $puce : '',
 			'mail' => $adres,
@@ -81,9 +75,10 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 			'sujet' => $sujet,
 			'texte' => $texte,
 			'valide' => ($validable ? $id : ''),
-			'bouton' => ($validable ?
+			'bouton' => (_T('form_prop_envoyer')),
+			'boutonconfirmation' => ($validable ?
 				_T('form_prop_confirmer_envoi') :
-				_T('form_prop_envoyer'))
+				'')
 			)
 		);
 }
