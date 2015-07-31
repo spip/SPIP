@@ -96,11 +96,6 @@ $cookie_prefix = "spip";
 // (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)
 $dossier_squelettes = "";
 
-
-// Repertoire du cache
-// (a modifier pour certains besoins tres speciaux : cluster de SPIP...)
-$dossier_cache = "CACHE";
-
 // faut-il autoriser SPIP a compresser les pages a la volee quand le
 // navigateur l'accepte (valable pour apache 1.3 seulement) ?
 $auto_compress = true;

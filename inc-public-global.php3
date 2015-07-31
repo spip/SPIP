@@ -16,7 +16,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 		while(list($key, $val) = each($contexte_inclus)) $fichier_requete .= '&'.$key.'='.$val;
 	}
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
-	$chemin_cache = $GLOBALS['dossier_cache']."/$fichier_cache";
+	$chemin_cache = "CACHE/$fichier_cache";
 
 	$use_cache = utiliser_cache($chemin_cache, $delais);
 
@@ -42,7 +42,7 @@ $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
 $fichier_cache = generer_nom_fichier_cache($fichier_requete);
-$chemin_cache = $dossier_cache."/$fichier_cache";
+$chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
 
@@ -74,7 +74,7 @@ if (!$use_cache) {
 	$lastmodified = time();
 	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
 		ecrire_meta('date_purge_cache', $lastmodified);
-		$f = fopen($dossier_cache.'/.purge', 'w');
+		$f = fopen('CACHE/.purge', 'w');
 		fclose($f);
 	}
 
@@ -172,7 +172,7 @@ if ($effacer_cache) @unlink($chemin_cache);
 // Verifier la presence du .htaccess dans le cache, sinon le generer
 //
 
-if (!file_exists($dossier_cache."/.htaccess")) {
+if (!file_exists("CACHE/.htaccess")) {
 	if ($hebergeur == 'nexenservices'){
 		echo "<font color=\"#FF0000\">IMPORTANT : </font>";
 		echo "Votre h&eacute;bergeur est Nexen Services.<br />";
@@ -181,7 +181,7 @@ if (!file_exists($dossier_cache."/.htaccess")) {
 		echo "Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).<br />";
 	}
 	else{
-		$f = fopen($dossier_cache."/.htaccess", "w");
+		$f = fopen("CACHE/.htaccess", "w");
 		fputs($f, "deny from all\n");
 		fclose($f);
 	}
@@ -266,17 +266,17 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 // Faire du menage dans le cache (effacer les fichiers tres anciens)
 // Se declenche une fois par jour quand le cache n'est pas recalcule
 //
-if (!$timeout AND $use_cache AND file_exists($dossier_cache.'/.purge2')) {
+if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
-		unlink($dossier_cache.'/.purge2');
+		unlink('CACHE/.purge2');
 		spip_log("purge cache niveau 2");
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
 		$result = spip_query($query);
 		unset($fichiers);
 		while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
-			if (!file_exists($dossier_cache."/$fichier")) $fichiers[] = "'$fichier'";
+			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
 		}
 		if ($fichiers) {
 			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
@@ -285,12 +285,12 @@ if (!$timeout AND $use_cache AND file_exists($dossier_cache.'/.purge2')) {
 		$timeout = true;
 	}
 }
-if (!$timeout AND $use_cache AND file_exists($dossier_cache.'/.purge')) {
+if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
-		unlink($dossier_cache.'/.purge');
+		unlink('CACHE/.purge');
 		spip_log("purge cache niveau 1");
-		$f = fopen($dossier_cache.'/.purge2', 'w');
+		$f = fopen('CACHE/.purge2', 'w');
 		fclose($f);
 		include_local ("inc-cache.php3");
 		purger_repertoire('CACHE', 14 * 24 * 3600);

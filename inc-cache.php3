@@ -26,7 +26,7 @@ function generer_nom_fichier_cache($fichier_requete) {
 
 	$subdir_cache = substr($md_cache, 0, 1);
 
-	if (creer_repertoire($GLOBALS['dossier_cache'], $subdir_cache))
+	if (creer_repertoire('CACHE', $subdir_cache))
 		$fichier_cache = "$subdir_cache/$fichier_cache";
 
 	return $fichier_cache;
