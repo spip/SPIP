@@ -208,7 +208,7 @@ option.selec_rub {
 
 div.messages {
 	padding: 5px;
-	border-bottom: 1px solid <? echo $couleur_foncee; ?>;
+	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
 	font-size: 10px;
 	font-weight: bold;
 }
@@ -223,7 +223,7 @@ a.icone26 {
 	color: black;
 	text-decoration: none;
 	padding: 1px; 
-	margin-<? echo $right; ?>: 2px;
+	margin-<?php echo $right; ?>: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;
@@ -231,7 +231,7 @@ a.icone26:hover {
 a.icone26 img {
 	vertical-align: middle;
 	behavior: url("win_png.htc");
-	background-color: <? echo $couleur_foncee; ?>;
+	background-color: <?php echo $couleur_foncee; ?>;
 }
 a.icone26:hover img {
 	background: url(img_pack/fond-gris-anim.gif);
@@ -766,20 +766,20 @@ a.ortho-dico:hover {
  */
 
 table.spip_barre {
-	border-<? echo $right; ?>: 1px solid <? echo $couleur_claire; ?>;
+	border-<?php echo $right; ?>: 1px solid <?php echo $couleur_claire; ?>;
 }
 
 table.spip_barre td {
-	text-align: <? echo $left; ?>;
-	border-top: 1px solid <? echo $couleur_claire; ?>;
-	border-<? echo $left; ?>: 1px solid <? echo $couleur_claire; ?>;
+	text-align: <?php echo $left; ?>;
+	border-top: 1px solid <?php echo $couleur_claire; ?>;
+	border-<?php echo $left; ?>: 1px solid <?php echo $couleur_claire; ?>;
 }
 
 a.spip_barre img {
 	padding: 3px;
 	margin: 0px;
 	background-color: #eeeeee;
-	border-<? echo $right; ?>: 1px solid <? echo $couleur_claire; ?>;
+	border-<?php echo $right; ?>: 1px solid <?php echo $couleur_claire; ?>;
 }
 a.spip_barre:hover img {
 	background-color: white;
@@ -805,11 +805,11 @@ a.bouton_rotation img, div.bouton_rotation img {
 	padding: 1px;
 	margin-bottom: 1px;
 	background-color: #eeeeee;
-	border: 1px solid <? echo $couleur_claire; ?>;
+	border: 1px solid <?php echo $couleur_claire; ?>;
 }
 
 a.bouton_rotation:hover img {
-	border: 1px solid <? echo $couleur_foncee; ?>;
+	border: 1px solid <?php echo $couleur_foncee; ?>;
 }
 
 
@@ -862,17 +862,17 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-couleur {
-	background-color: <? echo $couleur_claire; ?>;
+	background-color: <?php echo $couleur_claire; ?>;
 	-moz-border-radius: 8px;
 }
 .cadre-couleur div.cadre-titre {
-	background: <? echo $couleur_foncee; ?>;
-	border-bottom: 2px solid <? echo $couleur_foncee; ?>;
+	background: <?php echo $couleur_foncee; ?>;
+	border-bottom: 2px solid <?php echo $couleur_foncee; ?>;
 	color: white;	
 }
 
 .cadre-couleur-foncee {
-	background-color: <? echo $couleur_foncee; ?>;
+	background-color: <?php echo $couleur_foncee; ?>;
 	-moz-border-radius: 8px;
 }
 .cadre-couleur-foncee div.cadre-titre {
@@ -883,12 +883,12 @@ a.bouton_rotation:hover img {
 
 .cadre-trait-couleur {
 	background-color: white;
-	border: 2px solid <? echo $couleur_foncee; ?>;
+	border: 2px solid <?php echo $couleur_foncee; ?>;
 	-moz-border-radius: 8px;
 }
 .cadre-trait-couleur div.cadre-titre {
-	background: <? echo $couleur_foncee; ?>;
-	border-bottom: 2px solid <? echo $couleur_foncee; ?>;
+	background: <?php echo $couleur_foncee; ?>;
+	border-bottom: 2px solid <?php echo $couleur_foncee; ?>;
 	color: white;	
 }
 
@@ -915,7 +915,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-e div.cadre-titre {
-	background: <? echo $couleur_claire; ?>;
+	background: <?php echo $couleur_claire; ?>;
 	border-bottom: 1px solid #666666;
 	color: black;	
 }
@@ -928,10 +928,10 @@ a.bouton_rotation:hover img {
 .cadre-forum {
 	background-color: white;
 	border: 1px solid #aaaaaa;
-	-moz-border-radius-top<? echo $left; ?>: 8px;
+	-moz-border-radius-top<?php echo $left; ?>: 8px;
 }
 .cadre-forum div.cadre-titre {
-	background: <? echo $couleur_claire; ?>;
+	background: <?php echo $couleur_claire; ?>;
 	border-bottom: 1px solid #aaaaaa;
 	color: black;	
 }
@@ -941,7 +941,7 @@ a.bouton_rotation:hover img {
 	border: 1px solid #666666;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-top<? echo $left; ?>: 8px;
+	-moz-border-radius-top<?php echo $left; ?>: 8px;
 }
 
 
