@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'URL',
 	'erreur_connect_deja_existant' => 'Уже существует сервер с таким названием',
 	'erreur_nom_connect_incorrect' => 'Недопустимое имя сервера',
-	'erreur_plugin_desinstalation_echouee' => 'Не удалось удалить плагин. Но вы можете отключить его.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'Не удалось удалить плагин, но вы можете отключить его.',
 	'erreur_plugin_fichier_absent' => 'Не хватает файла(ов)',
 	'erreur_plugin_fichier_def_absent' => 'Отсутствует описание файла ',
 	'erreur_plugin_nom_fonction_interdit' => 'Запрещенное название функции',
@@ -310,7 +310,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Ваша версия:',
 	'info_connexion_base' => 'Второй этап: <b>подключение к базе данных</b>',
 	'info_connexion_base_donnee' => 'Параметры подключение к базе данных',
-	'info_connexion_ldap_ok' => '<b>Cоединение c LDAP установлено. </b> <p> Вы можете перейти к следующему этапу.</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>Cоединение c LDAP установлено. </b> <p> Вы можете перейти к следующему шагу.</p>',
 	'info_connexion_mysql' => 'Подключение к SQL',
 	'info_connexion_ok' => 'Соединение установлено.',
 	'info_contact' => 'Контакт',
@@ -375,7 +375,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_images_auto' => 'Кэш файлов изображений',
 	'info_informations_personnelles' => 'Настройки профиля',
 	'info_inscription_automatique' => 'Автоматическая регистрация новых авторов',
-	'info_jeu_caractere' => 'Кодировка',
+	'info_jeu_caractere' => 'Кодировка сайта',
 	'info_jours' => 'дни',
 	'info_laisser_champs_vides' => 'оставьте эти поля пустыми)',
 	'info_langues' => 'Языки сайта',
@@ -473,10 +473,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_preview_texte' => 'Настройки пред. просмотра. Вы можете посмотреть как выглядят на сайте  материалы со статусом "на утверждении". Включить эту возможность для всех авторов, только для администраторов или отключить вообще?',
 	'info_principaux_correspondants' => 'Ваши основные корреспонденты',
 	'info_procedez_par_etape' => 'пожалуйста выполняйте шаг за шагом',
-	'info_procedure_maj_version' => 'процедура обновления должна адаптировать 
- базу данных к новой версии SPIP.',
-	'info_proxy_ok' => 'Успешный тест прокси.',
-	'info_ps' => 'П.С.',
+	'info_procedure_maj_version' => 'необходимо запустить процедуру обновления текущей базы данных для новой версии SPIP.',
+	'info_proxy_ok' => 'Прокси сервер работает.',
+	'info_ps' => 'P.S.',
 	'info_publier' => 'опубликовать',
 	'info_publies' => 'Ваши статьи, опубликованные на сайте:',
 	'info_question_accepter_visiteurs' => 'Если шаблоны Вашего сайта позволяют посетителям регистрироваться, не входя в административную часть, пожалуйста включите следующую опцию:',
@@ -569,7 +568,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_url_site' => 'АДРЕС САЙТА:',
 	'info_url_test_proxy' => 'URL для проверки',
 	'info_urlref' => 'Гиперссылка:',
-	'info_utilisation_spip' => 'SPIP готов к использованию...',
+	'info_utilisation_spip' => 'SPIP готов к работе',
 	'info_visites_par_mois' => 'Ежемесячный показ:',
 	'info_visiteur_1' => 'Посетитель',
 	'info_visiteur_2' => 'из основной части сайта',
@@ -781,7 +780,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Запустить',
-	'queue_info_purger' => 'Вы можете удалить все текущие задачи и обнулить всю очередь задач', # MODIF
+	'queue_info_purger' => 'Вы можете удалить все текущие задачи и обнулить всю очередь задач',
 	'queue_nb_jobs_in_queue' => 'В очереди @nb@ задач',
 	'queue_next_job_in_nb_sec' => 'Следующая задача  через @nb@ s',
 	'queue_no_job_in_queue' => 'Список задач пуст',
@@ -797,8 +796,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(ограниченный администратор)',
 
 	// T
-	'tache_cron_asap' => 'CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'CRON @function@ (каждые @nb@ с)', # MODIF
+	'tache_cron_asap' => 'CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'CRON @function@ (каждые @nb@ с)',
 	'taille_cache_image' => 'Кэш файлов изображений ( автоматически пережатые картинки, изображения формул и текста, трасформированного в графику) занимает @taille@ в каталоге @dir@.',
 	'taille_cache_infinie' => 'На вашем сайте нет ограничений на размер кэша.',
 	'taille_cache_maxi' => 'Заданный максимальный размер файлов кэша составляет приблизительно <b> @octets@ </b>.',
@@ -859,7 +858,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Эти файлы используются для ограничения доступа авторов и администраторов
 к другим частям  сайта (например, к папке с серверной статистикой). </p>
 <p>Если у вас нет необходимости в таких действиях, то оставьте это значение по умолчанию.</p>',
-	'texte_informations_personnelles_1' => 'Теперь система обеспечит Вам пользовательский доступ к сайту.',
+	'texte_informations_personnelles_1' => 'Теперь система создаст вашу учетную запись на сайте.',
 	'texte_informations_personnelles_2' => '(Примечание: если вы переустанавливаете SPIP и ваш старый логин и пароль все еще работает, вы можете',
 	'texte_introductif_article' => '(Вступительный текст к статье)',
 	'texte_jeu_caractere' => 'Рекомендуется использовать кодировку (<tt>utf-8</tt>) на Вашем сайте. Это сделает возможным отображать текст на любом языке. ',
@@ -869,8 +868,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_jeu_caractere_conversion' => 'Примечание: Вы можете решить преобразовать все тексты (статьи, новости, форумы, и т.д.) Вашего сайта и для всех наборов символов <tt>utf-8</tt>. Чтобы сделать это, перейдите на <a href="@url@">страницу конвертации в UTF-8 </a>.',
 	'texte_lien_hypertexte' => '(Если ваше сообщение обращается к статье, опубликованной в сети, или к странице, обеспечивающей больше информации, пожалуйста введите здесь название страницы и ее адрес.)',
 	'texte_login_ldap_1' => '(Держите пустым для анонимного доступа или войдите в полную дорожку, например «<tt> uid=smith, ou=users, dc=my-domain, dc=com </tt>».)',
-	'texte_login_precaution' => 'Предупреждение! Это - логин, с которым Вы теперь связаны 
- Используйте эту форму с предостережением...',
+	'texte_login_precaution' => 'Внимание! Это ваш текущий логин на сайте, меняйте вдумчиво.',
 	'texte_message_edit' => 'Предупреждение: это сообщение увидят  все редакторы. Используйте объявления только для важных событий в жизни сайта.',
 	'texte_messagerie_agenda' => 'Система отправки сообщений позволяет авторам сайта общаться непосредственно в редакторской части сайта. Она связана с календарем.',
 	'texte_mise_a_niveau_base_1' => 'Вы только что обновили файлы SPIP 
