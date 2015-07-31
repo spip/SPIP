@@ -8,7 +8,7 @@ CALSCALE:GREGORIAN
 PRODID: SPIP http://www.spip.net
 VERSION:2.0
 X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
-X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]<BOUCLE_article(ARTICLES){lang_select=non}{par date}{inverse}{statut="prop"}>
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]_prive<BOUCLE_article(ARTICLES){lang_select=non}{par date}{inverse}{statut="prop"}>
 BEGIN:VEVENT
 SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:info_a_valider:>
 UID:article#ID_ARTICLE @ [(#URL_SITE_SPIP|filtrer_ical)]
