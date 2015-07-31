@@ -607,7 +607,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// et http://wiki.mikejung.biz/PHP_OPcache
 	if (function_exists('opcache_get_configuration')
 		AND @ini_get('opcache.enable')
-	  AND $validate_timestamps = @ini_get('opcache.validate_timestamps')
+		AND @ini_get('opcache.validate_timestamps')
 		AND $duree = @ini_get('opcache.revalidate_freq') ) {
 		sleep($duree);
 	}
