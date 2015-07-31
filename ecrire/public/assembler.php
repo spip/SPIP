@@ -395,7 +395,7 @@ function ajouter_js_affichage_final($page,$scripts,$inline = false) {
 	//verifie c'est un script HTML et que jquery.js.html est la
 	else if($res = jquery_chargee($page)) {
 		list($pos_script,$appelle) = $res;
-		$params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts; 
+		$params = $appelle.(strpos($appelle,"&")?"|":"&amp;script=").$scripts; 
 		$page = substr_replace($page,$params,$pos_script,strlen($appelle));
 	}
 	return $page;
@@ -410,7 +410,7 @@ function jquery_chargee($page) {
 	if($pos_debut_head!==false && $pos_fin_head!==false) { 
 		$head = substr($page,$pos_debut_head,$pos_fin_head-$pos_debut_head);
 		// verifie on a l'appelle a le squelette jquery.js
-		if ($pos_script = strpos($head,'spip.php?page=jquery.js')){
+		if ($pos_script = strpos($head, generer_url_public('jquery.js'))){
 			$pos_script += $pos_debut_head;
 			$appelle = substr($page,$pos_script,strpos($page,'"',$pos_script)-$pos_script);
 			return array($pos_script,$appelle);
@@ -443,7 +443,7 @@ function analyse_js_ajoutee($page) {
 	if(count($scripts_a_ajouter)) {
 		$scripts_a_ajouter = join("|",$scripts_a_ajouter);
 		list($pos_script,$appelle) = $jquery_chargee;
-		$params = $appelle.(strpos($appelle,"&")?"|":"&script=").$scripts_a_ajouter; 
+		$params = $appelle.(strpos($appelle,"&")?"|":"&amp;script=").$scripts_a_ajouter; 
 		$corps = substr_replace($corps,$params,$pos_script,strlen($appelle));
 	}
 	$scripts_a_ajouter = array();
