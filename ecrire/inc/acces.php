@@ -169,7 +169,7 @@ function ecrire_acces() {
 	# de devenir redacteur le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
 
-	if (spip_connect_ldap()) return;
+	if (spip_connect_ldap()) return; // hum, il faudrait generaliser cela
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
 	$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));

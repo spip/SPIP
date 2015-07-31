@@ -53,6 +53,31 @@ function auth_ldap_dist ($login, $pass) {
 }
 
 /**
+ * Connexion a l'annuaire LDAP
+ * Il faut passer par spip_connect() pour avoir les info
+ * donc potentiellement indiquer un serveur
+ * meme si dans les fait cet argument est toujours vide
+ *
+ * @param string $serveur
+ * @return string
+ */
+function auth_ldap_connect($serveur='') {
+	include_spip('base/connect_sql');
+	$connexion = spip_connect($serveur);
+	if (!is_array($connexion['ldap'])) {
+		if ($connexion['authentification']['ldap']) {
+			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
+			unset($GLOBALS['ldap_link']);
+			if (is_readable($f)) include_once($f);
+			if (isset($GLOBALS['ldap_link']))
+				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
+					'base' => $GLOBALS['ldap_base']);
+		}
+	}
+	return $connexion['ldap'];
+}
+
+/**
  * Retrouver un login, et verifier son pass si demande par $checkpass
  *
  * @param string $login
@@ -67,7 +92,9 @@ function auth_ldap_search($login, $pass, $checkpass=true){
 	if (!strlen($login_search) OR ($checkpass AND !strlen($pass)) )
 		return '';
 
-	if (!$ldap = spip_connect_ldap()) return '';
+	// verifier la connexion
+	if (!$ldap = auth_ldap_connect())
+		return '';
 
 	$ldap_link = $ldap['link'];
 	$ldap_base = $ldap['base'];
@@ -104,7 +131,8 @@ function auth_ldap_retrouver($dn, $desc=array())
 {
 	// Lire les infos sur l'utilisateur a partir de son DN depuis LDAP
 
-	$ldap = spip_connect_ldap();
+	$ldap = auth_ldap_connect();
+	$ldap_link = $ldap_link['link'];
 	$ldap_link = $ldap['link'];
 	if (!$desc) {
 		$desc = $ldap['attributes'] ? $ldap['attributes'] : $GLOBALS['ldap_attributes'] ;
