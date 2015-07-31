@@ -253,6 +253,11 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
 
+		// Gerer les inclusions des documents
+		mysql_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_document");
+		if ($id_vignette > 0)
+			mysql_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_vignette");
+
 		// type d'affichage : IMG, DOC
 		$affichage_detaille = (strtoupper($type_aff) == 'DOC');
 
@@ -324,6 +329,9 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 
 			if ($titre) $retour .= "<br><b>$titre</b>";
 			if ($descriptif) $retour .= "<br>$descriptif";
+			
+			if ($mode == 'document')
+				$retour .= "<br>(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)";
 
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}
