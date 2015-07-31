@@ -131,7 +131,7 @@ function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
 	// login et mot de passe
 	if (strlen($new_login)){
 		if (strlen($new_login) < _LOGIN_TROP_COURT)
-			return 'info_login_trop_court';
+			return _T('info_login_trop_court');
 		else {
 			$n = sql_countsel('spip_auteurs', "login=" . sql_quote($new_login) . " AND id_auteur!=".intval($id_auteur)." AND statut!='5poubelle'",'','',$serveur);
 			if ($n)
