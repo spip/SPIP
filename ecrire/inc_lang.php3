@@ -202,6 +202,7 @@ function init_codes_langues() {
 	'bg' => "&#1073;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;",
 	'bh' => "Bihari",
 	'bi' => "Bislama",
+	'bm' => "Bambara",
 	'bn' => "Bengali; Bangla",
 	'bo' => "Tibetan",
 	'br' => "breton",
@@ -224,6 +225,7 @@ function init_codes_langues() {
 	'et' => "eesti",
 	'eu' => "euskara",
 	'fa' => "&#1601;&#1575;&#1585;&#1587;&#1609;",
+	'ff' => "Fulah", /* Peul */
 	'fi' => "suomi",
 	'fj' => "Fiji",
 	'fo' => "f&#248;royskt",
@@ -273,6 +275,7 @@ function init_codes_langues() {
 	'ml' => "Malayalam",
 	'mn' => "Mongolian",
 	'mo' => "Moldavian",
+	'mos' => "Mor&eacute;",
 	'mr' => "&#2350;&#2352;&#2366;&#2336;&#2368;",
 	'ms' => "Bahasa Malaysia",
 	'mt' => "Maltese",
