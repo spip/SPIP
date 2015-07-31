@@ -1368,7 +1368,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'NOTES':
-		$code = '$GLOBALS["les_notes"]';
+		$milieu = '$'.$nom_var.' = propre($GLOBALS["les_notes"]);
+			$GLOBALS["les_notes"] = "";
+			$GLOBALS["compt_note"] = 0;
+			';
 		break;
 
 	case 'RECHERCHE':
