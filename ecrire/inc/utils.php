@@ -296,7 +296,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 				return $r[2]?substr($r[2],1):'';
 			}
 			// suppression
-			elseif (!isset($v)) {
+			elseif (!strlen($v)) {
 				unset($url[$n]);
 			}
 	// Ajout. Pour une variable, remplacer au meme endroit,
@@ -313,7 +313,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	AND $args = func_get_args()
 	AND count($args)==2)
 		return $v;
-	elseif (isset($v)) {
+	elseif (strlen($v)) {
 		foreach($ajouts as $k => $n) {
 		  if (!is_array($v))
 		    $url[] = $k .'=' . $u;
