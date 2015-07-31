@@ -1001,7 +1001,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			}
 
 			if ($g = charger_fonction(
-			preg_replace('/\W/', '_', $boucle->type_requete), 'iterateurs', true)) {
+			preg_replace('/\W/', '_', $boucle->type_requete), 'iterateur', true)) {
 				$boucles[$id] = $g($boucle);
 
 			} else if ($show) {
