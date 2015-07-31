@@ -230,7 +230,7 @@ function fin_cadre_trait_couleur($return = false){
 //
 // http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
-	return "<table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
+	return "<table cellpadding='6' border='0'><tr><td style='width: 100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td style='width: 100%' bgcolor='white'>";
 }
 
 // http://doc.spip.org/@fin_boite_alerte
@@ -1244,13 +1244,13 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 		if ($j==$compteur_forum){
 			$fleche="forum-droite$spip_lang_rtl.gif";
 		}
-		$res .= "<td width='10' valign='top' style='background-color: "
+		$res .= "<td style='width: 10px' valign='top' style='background-color: "
 		.  $fond[$j]
 		.  "'>"
 		. http_img_pack($fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
-	return $res . "\n<td width='100%' valign='top'>";
+	return $res . "\n<td style='width: 100%' valign='top'>";
 }
 
 
@@ -1553,7 +1553,7 @@ function debut_grand_cadre($return=false){
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	$res =  "\n<br /><br />\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
+	$res =  "\n<br /><br />\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='width: ${largeur}px' class='serif'>";
 	if ($return) return $res; else echo $res;
 }
 
@@ -1603,8 +1603,8 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	// div fermee par debut_droite() ou creer_colonne_droite
 
 	$res = "<br /><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
-		<tr>\n<td style='width: 200' class='colonne_etroite serif' valign='top' $rspan>
-		\n<div style='width: 200px; overflow:hidden;'>
+		<tr>\n<td style='width: 200px' class='colonne_etroite serif' valign='top' $rspan>
+		\n<div style='width: 100%; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
@@ -1638,16 +1638,16 @@ function creer_colonne_droite($rubrique="", $return= false){
 			$largeur = 200;
 	}
 
-	$res = "\n</div></td><td width='"
+	$res = "\n</div></td><td style='width: "
 	.  $espacement
-	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	.  "px' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
 	. "\n<td rowspan='1' class='colonne_etroite'></td>"
-	. "\n<td width='"
+	. "\n<td style='width: "
 	.  $espacement
-	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
-	. "\n<td width='"
+	.  "px ' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	. "\n<td style='width: "
 	. $largeur 
-	. "' rowspan='2' align='"
+	. "px' rowspan='2' align='"
 	. $spip_lang_left
 	. "' valign='top' class='colonne_etroite'><p />";
 
@@ -1675,7 +1675,7 @@ function debut_droite($rubrique="", $return= false) {
 	}
 
 	if ($spip_ecran != "large") {
-		$res .= "</div></td><td width='50'>&nbsp;</td>";
+		$res .= "</div></td><td style='width: 50px'>&nbsp;</td>";
 	}
 	else {
 		$res .= creer_colonne_droite($rubrique, true)
@@ -1687,7 +1687,7 @@ function debut_droite($rubrique="", $return= false) {
 	else
 		$largeur = 500;
 
-	$res .= "\n<td width=\"".$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
+	$res .= "\n<td style='width:" . $largeur. "px' valign='top' align='" . $spip_lang_left."' rowspan='1' class='serif'>";
 
 	// touche d'acces rapide au debut du contenu
 	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
@@ -1990,7 +1990,7 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	. "\n<tr><td valign='top' width='50%' rowspan='2'>"
 	. $les_enfants
 	. "</td>"
-	. "\n<td width='20' rowspan='2'>"
+	. "\n<td style='width: 20px' rowspan='2'>"
 	. http_img_pack("rien.gif", ' ', "width='20'")
 	. "</td>\n"
 	. "\n<td valign='top' width='50%'>"
