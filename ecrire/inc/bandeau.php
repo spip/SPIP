@@ -10,10 +10,30 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier gère le bandeau supérieur de l'espace privé
+ * 
+ * @package SPIP\Core\Bandeau
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/boutons');
 
+/**
+ * Calcule le contexte pour le menu du bandeau
+ *
+ * La fonction tente de retrouver la rubrique et le secteur d'appartenance
+ * à partir du nom du fichier exec, si celui ci correspond à un objet
+ * éditorial de SPIP (et qu'il possède ces champs), et dans ce cas,
+ * l'ajoute au contexte.
+ * 
+ * @param null|array $contexte
+ *     Contexte connu.
+ *     S'il n'est pas transmis, on prend `$_GET`
+ * @return array
+ *     Contexte
+**/
 function definir_barre_contexte($contexte = null){
 	if (is_null($contexte))
 		$contexte = $_GET;
@@ -39,14 +59,15 @@ function definir_barre_contexte($contexte = null){
 }
 
 /**
- * definir la liste des boutons du haut et de ses sous-menus
- * On defini les boutons a metrtre selon les droits de l'utilisateur
+ * Définir la liste des boutons du haut et de ses sous-menus
+ * 
+ * On defini les boutons à mettre selon les droits de l'utilisateur
  * puis on balance le tout au pipeline "ajouter_menus" pour que des plugins
  * puissent y mettre leur grain de sel
  *
  * @param array $contexte
- * @param bool $icones // rechercher les icones
- * @param bool $autorise // ne renvoyer que les boutons autorises
+ * @param bool $icones Rechercher les icones
+ * @param bool $autorise Ne renvoyer que les boutons autorisés
  * @return array
  */
 function definir_barre_boutons($contexte=array(),$icones = true, $autorise = true) {
@@ -103,13 +124,13 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 }
 
 /**
- * Creer l'url a partir de exec et args, sauf si c'est deja une url formatee
+ * Créer l'URL à partir de exec et args, sauf si c'est déjà une url formatée
  *
  * @param string $url
  * @param string $args
+ * @param array|null $contexte
  * @return string
  */
-// http://doc.spip.org/@bandeau_creer_url
 function bandeau_creer_url($url, $args="", $contexte=null){
 	if (!preg_match(',[\/\?],',$url)) {
 		$url = generer_url_ecrire($url,$args,true);
@@ -130,12 +151,10 @@ function bandeau_creer_url($url, $args="", $contexte=null){
 
 
 /**
- * Construire tout le bandeau superieur de l'espace prive
+ * Construire tout le bandeau supérieur de l'espace privé
  *
- * @param unknown_type $rubrique
- * @param unknown_type $sous_rubrique
- * @param unknown_type $largeur
- * @return unknown
+ * @return string
+ *     Code HTML du bandeau
  */
 function inc_bandeau_dist() {
 	return recuperer_fond('prive/squelettes/inclure/barre-nav',$_GET);

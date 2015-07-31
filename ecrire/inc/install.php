@@ -27,7 +27,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * est chargé.
  *
  * @example
+ *     ```
  *     install_fichier_connexion(_FILE_CONNECT_TMP, $contenu);
+ *     ```
  * 
  * @todo
  *     Renommer cette fonction qui peut servir à d'autres utilisations ?
@@ -92,10 +94,10 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 /**
  * Analyse un fichier de connexion à une base de données
  * 
- * Le fichier contient normalement le resultat de la fonction install_connexion().
- * L'analyse tient également compte des syntaxes des versions precedentes.
+ * Le fichier contient normalement le résultat de la fonction install_connexion().
+ * L'analyse tient également compte des syntaxes des versions précédentes.
  * 
- * @param $string $file
+ * @param string $file
  *     Chemin du fichier de connexion à analyser
  * @return array
  *     Tableau des informations sur la connexion
@@ -127,7 +129,7 @@ function analyse_fichier_connection($file)
  * @example
  *     $bases = bases_referencees(_FILE_CONNECT_TMP);
  * 
- * @param $string $exclu
+ * @param string $exclu
  *     Exclure un connecteur particulier (nom du fichier)
  * @return array
  *     Liste des noms de connecteurs

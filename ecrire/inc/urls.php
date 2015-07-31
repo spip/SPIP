@@ -10,36 +10,49 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+/**
+ * Gestion des URLS
+ *
+ * @package SPIP\Core\URLs
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/objets');
 
 /**
- * Decoder une url en utilisant les fonctions inverse
- * gestion des URLs transformee par le htaccess
- * $renommer = 'urls_propres_dist';
- * renvoie array($contexte, $type, $url_redirect, $nfond)
- * $nfond n'est retourne que si l'url est definie apres le ?
- * et risque d'etre effacee par un form en get
- * elle est utilisee par form_hidden exclusivement
- * Compat ascendante si le retour est null en gerant une sauvegarde/restauration
- * des globales modifiees par les anciennes fonctions
+ * Décoder une URL en utilisant les fonctions inverses
+ * 
+ * Gère les URLs transformées par le htaccess.
+ *
+ * @note
+ *   `$renommer = 'urls_propres_dist';`
+ *   renvoie `array($contexte, $type, $url_redirect, $nfond)`
+ * 
+ *   `$nfond` n'est retourné que si l'URL est définie apres le `?`
+ *   et risque d'être effacée par un form en get.
+ *   Elle est utilisée par form_hidden exclusivement.
+ * 
+ *   Compat ascendante si le retour est NULL en gérant une sauvegarde/restauration
+ *   des globales modifiées par les anciennes fonctions
  *
  * @param string $url
- *  url a decoder
+ *   URL à décoder
  * @param string $fond
- *  fond initial par defaut
+ *   Fond initial par défaut
  * @param array $contexte
- *  contexte initial a prendre en compte
+ *   Contexte initial à prendre en compte
  * @param bool $assembler
- *	true si l'url correspond a l'url principale de la page qu'on est en train d'assembler
- *  dans ce cas la fonction redirigera automatiquement si besoin
- *  et utilisera les eventuelles globales $_SERVER['REDIRECT_url_propre'] et $_ENV['url_propre']
- *  provenant du htaccess
+ *   `true` si l'URL correspond à l'URL principale de la page qu'on est en train d'assembler
+ *   dans ce cas la fonction redirigera automatiquement si besoin
+ *   et utilisera les eventuelles globales `$_SERVER['REDIRECT_url_propre']` et `$_ENV['url_propre']`
+ *   provenant du htaccess
  * @return array
- *  ($fond,$contexte,$url_redirect)
- *  si l'url n'est pas valide, $fond restera a la valeur initiale passee
- *  il suffit d'appeler la fonction sans $fond et de verifier qu'a son retour celui-ci
- *  est non vide pour verifier une url
+ *   Liste `$fond, $contexte, $url_redirect`.
+ *   
+ *   Si l'url n'est pas valide, $fond restera à la valeur initiale passée.
+ *   Il suffit d'appeler la fonction sans $fond et de vérifier qu'à son retour celui-ci
+ *   est non vide pour vérifier une URL
  *
  */
 function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
@@ -118,13 +131,13 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 
 
 /**
- * Lister les objets pris en compte dans les urls
- * c'est a dire suceptibles d'avoir une url propre
+ * Lister les objets pris en compte dans les URLs
+ * c'est à dire suceptibles d'avoir une URL propre
  *
  * @param bool $preg
- *  permet de definir si la fonction retourne une chaine avec | comme separateur
+ *  Permet de définir si la fonction retourne une chaine avec `|` comme séparateur
  *  pour utiliser en preg, ou un array()
- * @return string/array
+ * @return string|array
  */
 function urls_liste_objets($preg = true){
 	static $url_objets = null;
@@ -145,9 +158,9 @@ function urls_liste_objets($preg = true){
 }
 
 /**
- * Nettoyer une url, en reperant notamment les raccourcis d'entites
- * comme ?article13, ?rubrique21 ...
- * et en les traduisant pour completer le contexte fourni en entree
+ * Nettoyer une URL, en repérant notamment les raccourcis d'entités
+ * comme `?article13`, `?rubrique21` ...
+ * et en les traduisant pour compléter le contexte fourni en entrée
  *
  * @param string $url
  * @param array $contexte
@@ -173,14 +186,16 @@ function nettoyer_url_page($url, $contexte=array())
 }
 
 /**
- * Generer l'url d'un objet dans l'espace prive,
- * fonction de son etat publie ou non
- * calcule a partir de la declaration de statut
+ * Générer l'URL d'un objet dans l'espace privé
+ * 
+ * L'URL est calculée en fonction de son état publié ou non,
+ * calculé à partir de la déclaration de statut.
  *
- * @param int $id
+ * @param string $objet Type d'objet
+ * @param int $id Identifiant de l'objet
  * @param string $args
  * @param string $ancre
- * @param string $statut
+ * @param bool|null $public
  * @param string $connect
  * @return string
  *

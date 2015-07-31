@@ -10,25 +10,38 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'installation des plugins
+ *
+ * @package SPIP\Core\Plugins
+**/
+
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Installe ou retire un plugin
  * 
  * Fonction surchargeable permettant d'installer ou retirer un plugin
- * en incluant les fichiers associes et en lancant les fonctions specifiques
- * 1. d'abord sur l'argument 'test',
- * 2. ensuite sur l'action demandee si le test repond False
- * 3. enfin sur l'argument 'test' a nouveau.
- * l'index install_test du tableau resultat est un tableau forme:
- *  - du resultat 3 
- *  - des Echo de l'etape 2
- *
- * @param string $plug, nom du plugin
- * @param string $action, nom de l'action (install|uninstall)
- * @param string $dir_type, repertoire du plugin
+ * en incluant les fichiers associés et en lançant les fonctions spécifiques
  * 
- * @return array|boolean True si deja installe, le tableau de get_infos sinon
+ * 1. d'abord sur l'argument `test`,
+ * 2. ensuite sur l'action demandée si le test repond `false`
+ * 3. enfin sur l'argument `test` à nouveau.
+ * 
+ * L'index `install_test` du tableau résultat est un tableau formé :
+ * 
+ *  - du résultat 3 
+ *  - des echo de l'étape 2
+ *
+ * @param string $plug
+ *     Nom du plugin
+ * @param string $action
+ *     Nom de l'action (install|uninstall)
+ * @param string $dir_type
+ *     Répertoire du plugin
+ * @return array|bool
+ *     True si déjà installé, le tableau de get_infos sinon
  *
  */
 function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
@@ -106,7 +119,7 @@ function spip_plugin_install($action, $infos, $version_cible){
 
 
 /**
- * Compare 2 numeros de version entre elles.
+ * Compare 2 numéros de version entre elles.
  * 
  * Cette fonction est identique (arguments et retours) a la fonction PHP
  * version_compare() qu'elle appelle. Cependant, cette fonction reformate
