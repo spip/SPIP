@@ -19,7 +19,10 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	charger_php_extension('mysql');
 	if ($port > 0) $host = "$host:$port";
 	$link = @mysql_connect($host, $login, $pass, true);
-	if (!$link) return false;
+	if (!$link) {
+		spip_log('Echec mysql_connect. Erreur : ' . mysql_error(),'mysql');
+		return false;
+	}
 	$last = '';
 	if (!$db) {
 		$ok = $link;
@@ -299,7 +302,10 @@ function traite_query($query, $db='', $prefixe='') {
 
 // http://doc.spip.org/@spip_mysql_selectdb
 function spip_mysql_selectdb($db) {
-	return mysql_select_db($db);
+	$ok = mysql_select_db($db);
+	if (!$ok)
+		spip_log('Echec mysql_selectdb. Erreur : ' . mysql_error(),'mysql');
+	return $ok;
 }
 
 
