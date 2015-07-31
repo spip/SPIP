@@ -23,8 +23,7 @@ function exec_puce_statut_dist()
 	if (in_array($type,array('article','breve'))) {
 		$table = table_objet_sql($type);
 		$prim = id_table_objet($type);
-		$s = sql_select("id_rubrique,statut", "$table", "$prim=$id");
-		$r = sql_fetch($s);
+		$r = sql_fetsel("id_rubrique,statut", "$table", "$prim=$id");
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];
 	} else {

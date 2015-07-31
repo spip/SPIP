@@ -37,8 +37,8 @@ function exec_auteur_infos_args($id_auteur, $nom, $new, $echec='', $redirect='')
 	);
 
 	if ($id_auteur) {
-		$s = sql_select("*", "spip_auteurs", "id_auteur=$id_auteur");
-		$auteur = sql_fetch($s);
+		$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
+		
 	} else {
 		$auteur = array();
 		if (strlen(_request('nom')))
