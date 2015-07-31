@@ -107,9 +107,10 @@ function auteurs_set($id_auteur, $set = null) {
 	// Modification de statut, changement de rubrique ?
 	$c = array();
 	foreach (array(
-		'statut', 'new_login','new_pass','webmestre','restreintes','id_parent'
+		'statut', 'new_login','new_pass','login','pass','webmestre','restreintes','id_parent'
 	) as $champ)
-		$c[preg_replace(',^new_,','',$champ)] = _request($champ,$set);
+		if (_request($champ,$set))
+			$c[preg_replace(',^new_,','',$champ)] = _request($champ,$set);
 
 	$err .= instituer_auteur($id_auteur, $c);
 
