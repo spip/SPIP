@@ -56,14 +56,7 @@ function exec_recherche_dist() {
 	
 	echo debut_grand_cadre(true);
 
-	if (!strlen($recherche)) {
-		$recherche_aff = _T('info_rechercher');
-		$onfocus = " onfocus=\"this.value='';\"";
-	} else $onfocus = '';
-
-	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
-	$form .= "<input type='image' width='26' height='20' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
-	echo "<div class='spip_recherche'>".generer_form_ecrire("recherche", $form, " method='get'")."</div>";
+	echo formulaire_recherche("recherche");
 
 /*
 	// Si on est autorise a modifier, proposer le choix de REMPLACER

@@ -209,12 +209,7 @@ function exec_controle_forum_dist()
 	$recherche = _request('recherche');
 
 	if (!preg_match('/^\w+$/', $type)) $type = 'public';
-	$recherche_aff = entites_html($recherche);
-	if (!strlen($recherche)) {
-			$recherche_aff = _T('info_rechercher');
-			$onfocus = " onfocus=\"this.value='';\"";
-	} else $onfocus = '';
-	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . " /><input type='hidden' name='type' value='$type' />";
+	$formulaire_recherche = formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
 
 	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
@@ -288,8 +283,7 @@ function exec_controle_forum_dist()
 		echo debut_droite('', true);
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
-		echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("controle_forum", $onfocus, " method='get'")."</div>"
-		 . "<br class='nettoyeur' />";
+		echo $formulaire_recherche . "<br class='nettoyeur' />";
 
 		echo "<div id='$ancre' class='serif2'>$mess</div>";
 		echo fin_gauche(), fin_page();

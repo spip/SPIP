@@ -1099,6 +1099,18 @@ function fin_cadre_formulaire($return=false){
 }
 
 
+function formulaire_recherche($page, $complement=""){
+	$recherche = _request('recherche');
+	$recherche_aff = entites_html($recherche);
+	if (!strlen($recherche)) {
+		$recherche_aff = _T('info_rechercher');
+		$onfocus = " onfocus=\"this.value='';\"";
+	} else $onfocus = '';
+
+	$form = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="recherche" accesskey="r"' . $onfocus . ' />';
+	$form .= "<input type='image' width='26' height='20' src='"._DIR_IMG_PACK."loupe.png' name='submit' class='submit' alt='"._T('info_rechercher')."' />";
+	return "<div class='spip_recherche'>".generer_form_ecrire($page, $form . $complement, " method='get'")."</div>";
+}
 
 //
 // Debut de la colonne de gauche
