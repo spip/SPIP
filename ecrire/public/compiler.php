@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 //
 // Fichier principal du compilateur de squelettes
 //
@@ -646,7 +645,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		case 'idiome':
 			$l = array();
 			foreach ($p->arg as $k => $v) {
-			  if ($k) $l[]= _q($k).' => '.calculer_liste($v,$p->descr,$boucles,$id_boucle);
+			  if ($k) $l[]= _q($k).' => '.calculer_liste($v,$descr,$boucles,$id_boucle);
 			}
 			$l = !$l ? '' : (", array(".implode(",\n",$l).")");
 			$code = "_T('" . $p->module . ":" .$p->nom_champ . "'$l)";
