@@ -36,15 +36,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_redirect_dist()
 {
 	$type = _request('type');
-	if (!preg_match('/^\w+$/', $type)) return;
 	$id = intval(_request('id'));
 
 	if ($m = _request('var_mode')) {
-		// forcer la mise a jour de l'url de cet objet !
-		if (!defined('_VAR_URLS')) define('_VAR_URLS',true);
+		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
 	}
 
-	$h = generer_url_entite_absolue($id, $type, '', '', true);
+	if (preg_match('/^\w+$/', $type)) {
+		$h = generer_url_entite_absolue($id, $type, '', '', true);
+	}
+	else if ($page = _request('page')
+	AND preg_match('/^\w+$/', $page)) {
+		$h = generer_url_public($page, '', true);
+	}
+	else return;
 
 	if ($m > '')
 		$h = parametre_url($h, 'var_mode', $m);
