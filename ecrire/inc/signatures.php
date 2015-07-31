@@ -115,7 +115,7 @@ function signatures_edit($script, $id, $arg, $row) {
 			  . $h2
 			  . "'>"
 			  . typo($titre_a)
-			  . "</a><a ' class='reponse_a' style='float: $spip_lang_right; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
+			  . "</a><a class='reponse_a' style='float: $spip_lang_right; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
 			. typo($titre_r)
 			. " </a></div>";
 		}

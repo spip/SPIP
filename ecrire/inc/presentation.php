@@ -76,21 +76,12 @@ function afficher_onglets_pages($ordre,$onglets){
 
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
-	global $spip_display, $spip_lang_left;
+	global $spip_display;
 	static $accesskey = 97; // a
 
 	//zoom:1 fixes all expanding blocks in IE, see authors block in articles.php
 	//being not standard, next step can be putting this kind of hacks in a different stylesheet
 	//visible to IE only using conditional comments.
-
-	$style_cadre = " style='";
-	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = "padding-$spip_lang_left: 38px;";
-		$style_cadre .= "'";
-	} else {
-		$style_cadre .= "'";
-		$style_gauche = '';
-	}
 
 	// accesskey pour accessibilite espace prive
 	if ($accesskey <= 122) // z
@@ -103,7 +94,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	. ($id?"id='$id' ":"")
 	."class='cadre cadre-$style"
 	. ($class?" $class":"")
-	."'$style_cadre>";
+	."'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		if ($fonction) {
