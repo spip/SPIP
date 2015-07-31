@@ -1314,28 +1314,28 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	if (strlen($adresse_site)<10) $adresse_site="../";
 
 	debut_html($titre);
-	
-		$ctitre = "Changer la couleur de l'interface";
-		echo "\n<map name='map_couleur'>";
-		echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 7, '0,11,10,21', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 8, '12,11,22,21', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 9, '24,11,34,21', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 10, '36,11,46,21', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 11, '48,11,58,21', $ctitre);
-		echo lien_change_var ($clean_link, 'set_couleur', 12, '60,11,70,21', $ctitre);
-		echo "\n</map>";
 
-		echo "\n<map name='map_layout'>";
-		echo lien_change_var ($clean_link, 'set_disp', 1, '36,11,46,21', "Afficher uniquement le texte");
-		echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', "Afficher les icones et le texte");
-		echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', "Afficher uniquement les icones");
-		echo "\n</map>";
+	$ctitre = "Changer la couleur de l'interface";
+	echo "\n<map name='map_couleur'>";
+	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 7, '0,11,10,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 8, '12,11,22,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 9, '24,11,34,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 10, '36,11,46,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 11, '48,11,58,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 12, '60,11,70,21', $ctitre);
+	echo "\n</map>";
+
+	echo "\n<map name='map_layout'>";
+	echo lien_change_var ($clean_link, 'set_disp', 1, '1,0,18,15', "Afficher uniquement le texte");
+	echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', "Afficher les icones et le texte");
+	echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', "Afficher uniquement les icones");
+	echo "\n</map>";
 	
 	// Icones principales
 	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif) ; border-top: solid 1px white;' width='100%'><tr width='100%'><td width='100%' align='center'>";

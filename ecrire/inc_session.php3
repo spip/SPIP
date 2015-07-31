@@ -211,11 +211,11 @@ function ask_php_auth($text_failure) {
 // et charge ses valeurs dans $GLOBALS['auteur_session']
 //
 function verifier_visiteur() {
-	return (
-			verifier_session($GLOBALS['HTTP_COOKIE_VARS']['spip_session'])
-		OR
-			verifier_php_auth ()
-	);
+	if (verifier_session($GLOBALS['HTTP_COOKIE_VARS']['spip_session']))
+		return true;
+	if (verifier_php_auth())
+		return true;
+	return false;
 }
 
 ?>

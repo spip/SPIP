@@ -3,7 +3,7 @@
 include ("ecrire/inc_version.php3");
 include_local ("inc-login.php3");
 
-if (! $url)
+if (!$url)
 	$cible = new Link('ecrire/');
 else
 	$cible = new Link(urldecode($url));

@@ -17,7 +17,7 @@ include_ecrire ("inc_texte.php3");
 function auth_http($cible, $redirect_echec, $essai_auth_http) {
 	if ($essai_auth_http == 'oui') {
 		include_ecrire('inc_session.php3');
-		if (! verifier_php_auth()) {
+		if (!verifier_php_auth()) {
 			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='login.php3?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
 		} else {
 			$cible->addVar('bonjour','oui');
@@ -34,10 +34,11 @@ function auth_http($cible, $redirect_echec, $essai_auth_http) {
 }
 
 function login($cible, $redirect_echec) {
-	global $login ;
-	global $spip_admin ;
-	global $erreur, $echec_cookie ;
-	global $php_module ;
+	global $login;
+	global $spip_admin;
+	global $erreur, $echec_cookie;
+	global $php_module;
+	global $this_link;
 
 	// initialisations
 	$nom_site = lire_meta('nom_site');
@@ -69,23 +70,21 @@ function login($cible, $redirect_echec) {
 
 	// javascript pour le focus
 	if ($login)
-		$focus = 'document.forms[0].elements[1].focus();';
+		$js_focus = 'document.form_login.session_password.focus();';
 	else
-		$focus = 'document.forms[0].elements[0].focus();';
-
+		$js_focus = 'document.form_login.login.focus();';
 
 	if ($echec_cookie == "oui") {
-		install_debut_html("$nom_site : probl&egrave;me de cookie", $focus);
+		install_debut_html("$nom_site : probl&egrave;me de cookie");
 		echo "<p><b>Pour vous identifier de fa&ccedil;on s&ucirc;re sur ce site, vous devez accepter les cookies.</b> ";
 		echo "Veuillez r&eacute;gler votre navigateur pour qu'il les accepte (au moins pour ce site).\n";
 	}
 	else {
-		install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;", $focus);
+		install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 		echo "fournis lors de votre inscription.";
 	}
-
 
 	// fond d'ecran de login
 	$images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
@@ -104,7 +103,7 @@ function login($cible, $redirect_echec) {
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
 		echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
-		echo "<form action='spip_cookie.php3' method='post'";
+		echo "<form name='form_login' action='spip_cookie.php3' method='post'";
 		echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
@@ -124,7 +123,6 @@ function login($cible, $redirect_echec) {
 		else if (file_exists("IMG/auton$id_auteur.jpg")) $logo = "IMG/auton$id_auteur.jpg";
 		else if (file_exists("IMG/auton$id_auteur.png")) $logo = "IMG/auton$id_auteur.png";
 
-
 		echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr width=100%>";
 		echo "<td width=100%>";
@@ -135,9 +133,16 @@ function login($cible, $redirect_echec) {
 		echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
 		// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
-		echo "<noscript><input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>";
+		echo "<noscript>";
+		echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
+		echo "Attention, ce formulaire n'est pas s&eacute;curis&eacute;. ";
+		echo "Si vous ne voulez pas que votre mot de passe puisse &ecirc;tre ";
+		echo "intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript ";
+		echo "dans votre navigateur et <a href=\"".$this_link->getUrl()."\">recharger cette page</a>.<p></font>\n";
+		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
+		echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>\n";
 
-		echo "<p>\n<label><b>Mot de passe :</b><br></label>";
+		echo "<p>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
 		echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
@@ -161,7 +166,7 @@ function login($cible, $redirect_echec) {
 
 	else {
 		// demander seulement le login
-		echo "<form action='$redirect_echec' method='get'>\n";
+		echo "<form name='form_login' action='$redirect_echec' method='get'>\n";
 		debut_cadre_enfonce("redacteurs-24.gif");
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 		echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
@@ -173,6 +178,9 @@ function login($cible, $redirect_echec) {
 		fin_cadre_enfonce();
 		echo "</form>";
 	}
+
+	// Gerer le focus
+	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";
 
 	if ($echec_cookie == "oui" AND $php_module) {
 		echo "<form action='$redirect_echec' method='get'>";
