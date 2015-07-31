@@ -755,7 +755,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 		$t = trace_query_start();
 	} else $t = 0 ;
  
-	$query="INSERT OR REPLACE INTO $table ".($champs?"$champs VALUES $valeurs":"DEFAULT VALUES");
+	$query="INSERT INTO $table ".($champs?"$champs VALUES $valeurs":"DEFAULT VALUES");
 	
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
 		if (!$requeter) return $r;
@@ -798,6 +798,11 @@ function spip_sqlite_insertq($table, $couples=array(), $desc=array(), $serveur='
 
 // http://doc.spip.org/@spip_sqlite_insertq_multi
 function spip_sqlite_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	if (!isset($desc['field']))
+		$desc['field'] = array();
+
 	foreach ($tab_couples as $couples) {
 		$retour = spip_sqlite_insertq($table, $couples, $desc, $serveur, $requeter);
 	}
