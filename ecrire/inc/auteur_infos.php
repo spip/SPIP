@@ -136,7 +136,7 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 
 	$corps .= "\n<br />";
 
-	if ($champs_extra) {
+	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
 		$corps .= extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
 	}

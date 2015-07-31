@@ -167,7 +167,7 @@ function action_legender_auteur_post($r) {
 		$query_pass = '';
 
 	// recoller les champs du extra
-	if ($champs_extra) {
+	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
 		$extra = extra_recup_saisie("auteurs");
 	} else
