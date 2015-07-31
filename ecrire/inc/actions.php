@@ -24,7 +24,7 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts='', $public=false) {
 
 	$r = ($public ? _DIR_RESTREINT_ABS : _DIR_RESTREINT) .
-	  generer_url_ecrire($ret, $gra, true, $public);
+	  generer_url_ecrire($ret, $gra, true, true);
 
 	return generer_action_auteur($action, $arg, $r, $mode, $atts, $public);
 }
