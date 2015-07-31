@@ -188,7 +188,7 @@ function auth_prefs()
 	if (!$GLOBALS['set_couleur'] = $_COOKIE['spip_couleur'])
 		$GLOBALS['set_couleur'] = 6;
 	if (!$GLOBALS['set_options'] = $_COOKIE['spip_options'])
-		$GLOBALS['set_options'] = 'avancees';
+		$GLOBALS['set_options'] = 'basiques';
 }
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
