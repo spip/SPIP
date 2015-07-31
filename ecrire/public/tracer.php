@@ -75,43 +75,47 @@ function chrono_requete($temps)
 	$total = 0;
 	$hors = "<i>" . _T('zbug_hors_compilation') . "</i>";
 	$t = $q = $n = $d = array();
+	// Totaliser les temps et completer le Explain
 	foreach ($temps as $key => $row) {
 		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
 		$total += $dt;
-		$d[$boucle]+= $dt;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-
-		$e = "<tr><th colspan='2' style='text-align:center'>"
-		. (!$boucle ? $hors :
-		   ($boucle . '&nbsp;(' . @++$n[$boucle] . ")"))
-		. "</th></tr>"
-		.  "<tr><td>Time</td><td>$dt</td></tr>" 
-		.  "<tr><td>Order</td><td>$nb</td></tr>" 
-		. "<tr><td>Res</td><td>$res</td></tr>" ;
+		$d[$boucle]+= $dt;
+		if  ($boucle) @++$n[$boucle];
 
 		foreach($explain as $k => $v) {
-			$e .= "<tr><td>$k</td><td>"
+			$explain[$k] = "<tr><td>$k</td><td>"
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
-		$e = "<br /><table border='1'>$e</table>";
-		$temps[$key] = array($boucle, $e, $query);
+		$e = "<br /><table border='1'>"
+		. "<caption style='text-align: left'>"
+		. $query
+		. "</caption>"
+		. "<tr><td>Time</td><td>$dt</td></tr>" 
+		. "<tr><td>Order</td><td>$nb</td></tr>" 
+		. "<tr><td>Res</td><td>$res</td></tr>" 
+		. join('', $explain)
+		. "</table>";
+
+		$temps[$key] = array($e, $boucle);
 	}
+	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);
 	arsort($d);
 	$i = 1;
 	$t = array();
+	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach($temps as $k => $v) {
-		$boucle = array_shift($v);
-		$temps[$k] = $v;
-		$x = "<a style='font-family: monospace' title='"
-		  .  textebrut(preg_replace(',</tr>,', "\n",$v[0]))
-		  . "' href='".quote_amp($GLOBALS['REQUEST_URI'])."#req$i'>"
-		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
-		  . "</a>";
-		if (count($t[$boucle]) % 30 == 29) $x .= "<br />";
-		$t[$boucle][] = $x;
+		$titre = textebrut(preg_replace(',</tr>,', "\n",$v[0]));
+		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
+
+		$t[$v[1]][]= "<span class='spip-debug-arg'>" 
+		. str_repeat('&nbsp;', 5 - strlen(strval($i)))
+		. "<a title='$titre' href='$href'>$i</a>"
+		. '</span>'
+		. ((count($t[$v[1]]) % 10 == 9) ?  "<br />" : '');
 		$i++;
 	}
 
@@ -121,24 +125,23 @@ function chrono_requete($temps)
 		$t[$hors] = $t[''];
 	}
 	unset($d['']);
+	// Fabriquer le tableau des liens de navigation dans le grand tableau
 	foreach ($d as $k => $v) {
 		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
 		  . join('',$t[$k]);
 	}
 
-	$titre = '<br />'
+	$navigation = '<br />'
 	  . _T('zbug_statistiques')
 	  . '<br />'
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
 	  . join("</td></tr>\n<tr><td>", $d)
 	  . "</td></tr>\n"
-	  . (_request('var_mode_objet') ? '' : 
+	  .  (# _request('var_mode_objet') ? '' : 
 	     ("<tr><td>" .  count($temps) . " </td><td> " . _T('info_total') . '</td><td>' . $total . "</td></td><td></td></tr>"))
 	  . "</table>";
 
-	include_spip('public/debusquer');
-	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
-	. affiche_erreurs_page($temps, $titre);
+	return array($temps, $navigation);
 }
 
 ?>

@@ -66,7 +66,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
-			if ($GLOBALS['var_profile'])
+			if (isset($_GET['var_profile']))
 				$args_ajax .= '&var_profile=1';
 			return redirige_action_post($action,
 				$id,
@@ -88,7 +88,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			false);
 
 		if ($args AND !$args_ajax) $args_ajax = "&$args";
-		if (isset($GLOBALS['var_profile']))
+		if (isset($_GET['var_profile']))
 			$args_ajax .= '&var_profile=1';
 
 		$ajax = redirige_action_auteur($action,
@@ -196,30 +196,25 @@ function ajax_action_greffe($fonction, $id, $corps)
 // http://doc.spip.org/@ajax_retour
 function ajax_retour($corps,$xml = true)
 {
-	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
+	if (isset($_COOKIE['spip_admin'])
+	AND (!empty($GLOBALS['tableau_des_erreurs']) OR !empty($GLOBALS['tableau_des_temps'])))
+		erreur_squelette('', $corps);
+	else {
+		if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
 	 	$debut = _DOCTYPE_ECRIRE
 		. "<html><head><title>Debug Spip Ajax</title></head>"
 		.  "<body><div>\n\n"
 		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n";
 
 		$fin = '</div></body></html>';
-	} else {
 
-		if (isset($GLOBALS['tableau_des_temps'])) {
-			include_spip('public/tracer');
-			$fin = chrono_requete($GLOBALS['tableau_des_temps']);
-		} else $fin = '';
-
-		$c = $GLOBALS['meta']["charset"];
-		header('Content-Type: text/html; charset='. $c);
-		$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
+		} else {
+			$c = $GLOBALS['meta']["charset"];
+			header('Content-Type: text/html; charset='. $c);
+			$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
+		}
+		echo $debut, $corps, $fin;
 	}
-	if (count($GLOBALS['tableau_des_erreurs']) AND isset($_COOKIE['spip_admin'])) {
-		include_spip('public/debusquer');
-		$corps = affiche_erreurs_page($GLOBALS['tableau_des_erreurs']) . $corps;
-	}
-
-	echo $debut, $corps, $fin;
 }
 
 // http://doc.spip.org/@determine_upload
@@ -230,7 +225,7 @@ function determine_upload($type='') {
 		return false;
 
 	$repertoire = _DIR_TRANSFERT;
-	if(!@is_dir($repertoire)) {
+	if (!@is_dir($repertoire)) {
 		$repertoire = str_replace(_DIR_TMP, '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
