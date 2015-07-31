@@ -88,12 +88,26 @@ function suivre_invalideur($cond, $modif=true) {
 
 
 
-// Utilisee pour vider le cache depuis l'espace prive
-// (ou juste les squelettes si un changement de config le necessite)
-// si $atime est passee en argument, ne pas supprimer ce qui a servi
-// plus recemment que cette date (via fileatime)
-// retourne le nombre de fichiers supprimes
-// http://doc.spip.org/@purger_repertoire
+/**
+ * Purge un répertoire de ses fichiers
+ *
+ * Utilisée entre autres pour vider le cache depuis l'espace privé
+ *
+ * @uses supprimer_fichier()
+ * 
+ * @param string $dir
+ *     Chemin du répertoire à purger
+ * @param array $options
+ *     Tableau des options. Peut être :
+ *
+ *     - atime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via fileatime)
+ *     - mtime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via filemtime)
+ *     - limit : nombre maximum de suppressions
+ * @return int
+ *     Nombre de fichiers supprimés
+**/
 function purger_repertoire($dir, $options=array()) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
@@ -105,8 +119,9 @@ function purger_repertoire($dir, $options=array()) {
 		if ($fichier[0] == '.') continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if (!isset($options['atime'])
-			OR (@fileatime($chemin) < $options['atime'])) {
+			if (  (!isset($options['atime']) OR (@fileatime($chemin) < $options['atime']))
+				AND (!isset($options['mtime']) OR (@filemtime($chemin) < $options['mtime']))
+			  ) {
 				supprimer_fichier($chemin);
 				$total ++;
 			}
