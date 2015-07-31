@@ -101,6 +101,12 @@ a.calendrier-annee:hover {
 	-moz-border-radius: 5px;
  }
 
+.calendrier-titre { 
+	padding: 5px;
+	text-align: center; 
+	font-weight: bold;
+ }
+
 .calendrier-mozleft { 
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-bottomleft: 10px;
