@@ -59,7 +59,7 @@ avertissement_config();
 
 echo "<form action='configuration.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
-debut_cadre_relief("racine-24.gif");
+debut_cadre_trait_couleur("racine-site-24.gif");
 
 	$nom_site = entites_html(lire_meta("nom_site"));
 	$adresse_site = entites_html(lire_meta("adresse_site"));
@@ -94,7 +94,7 @@ debut_cadre_relief("racine-24.gif");
 	echo "</TD></TR>";
 	echo "</TABLE>";
 
-fin_cadre_relief();
+fin_cadre_trait_couleur();
 
 echo "<p>&nbsp;<p>";
 
@@ -104,17 +104,14 @@ echo "<p>&nbsp;<p>";
 //
 
 if ($options == 'avancees') {
-	debut_cadre_enfonce("article-24.gif");
+	debut_cadre_trait_couleur("article-24.gif", false, "", _T('titre_les_articles'));
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_les_articles')."</FONT></B></TD></TR>";
-	echo "</table>";
 
 	//
 	// Champs optionnels des articles
 	//
 
-	debut_cadre_relief();
+	debut_cadre_relief("", false, "", _T('info_contenu_articles').aide ("confart"));
 
 	$articles_surtitre = lire_meta("articles_surtitre");
 	$articles_soustitre = lire_meta("articles_soustitre");
@@ -125,7 +122,6 @@ if ($options == 'avancees') {
 	$articles_urlref = lire_meta("articles_urlref");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('info_contenu_articles')."</FONT></B>".aide ("confart")."</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
 	echo _T('texte_contenu_articles');
@@ -205,13 +201,11 @@ if ($options == 'avancees') {
 	// Articles post-dates
 	//
 
-	debut_cadre_relief();
+	debut_cadre_relief("", false, "", _T('titre_publication_articles_post_dates').aide ("confdates"));
 
 	$post_dates = lire_meta("post_dates");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('titre_publication_articles_post_dates')."</FONT></B> ".aide ("confdates")."</TD></TR>";
-
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_publication_articles_post_dates');
 	echo "</TD></TR>";
@@ -228,10 +222,11 @@ if ($options == 'avancees') {
 	echo "</TABLE>\n";
 
 	fin_cadre_relief();
+
+	fin_cadre_trait_couleur();
 }
 
 
-if ($options == "avancees") fin_cadre_enfonce();
 
 echo "<p>";
 
@@ -240,14 +235,11 @@ echo "<p>";
 // Actives/desactiver les breves
 //
 
-debut_cadre_relief("breve-24.gif");
+debut_cadre_trait_couleur("breve-24.gif", false, "", _T('titre_breves').aide ("confbreves"));
 
 $activer_breves = lire_meta("activer_breves");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-echo _T('titre_breves')."</FONT></B> ".aide ("confbreves")."</TD></TR>";
-
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_breves')."<p>";
 echo _T('info_breves');
@@ -265,7 +257,7 @@ echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
-fin_cadre_relief();
+fin_cadre_trait_couleur();
 
 echo "<p>";
 
@@ -276,7 +268,7 @@ echo "<p>";
 
 if ($options == "avancees") {
 
-	debut_cadre_relief("mot-cle-24.gif");
+	debut_cadre_trait_couleur("mot-cle-24.gif", false, "", _T('info_mots_cles'));
 
 	$articles_mots = lire_meta("articles_mots");
 	$config_precise_groupes = lire_meta("config_precise_groupes");
@@ -284,8 +276,6 @@ if ($options == "avancees") {
 	$forums_publics = lire_meta("forums_publics");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mots_cles')."</FONT></B> </TD></TR>";
-
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_mots_cles')."<p>";
 	echo _T('info_question_mots_cles');
@@ -293,17 +283,27 @@ if ($options == "avancees") {
 
 	echo "<TR>";
 	echo "<TD align='center' class='verdana2'>";
-	afficher_choix('articles_mots', $articles_mots,
-		array('oui' => _T('item_utiliser_mots_cles'),
-			'non' => _T('item_non_utiliser_mots_cles')), " &nbsp; ");
-	echo "</FONT>";
-	echo "</TD></TR>";
 
-	if ($articles_mots != "non") {
 
-		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_config_groupe_mots_cles')."</FONT></B></TD></TR>";
+		echo bouton_radio("articles_mots", "oui", _T('item_utiliser_mots_cles'), $articles_mots == "oui", "changeVisible(this.checked, 'mots-config', 'block', 'none');");
+		echo " &nbsp;";
+		echo bouton_radio("articles_mots", "non", _T('item_non_utiliser_mots_cles'), $articles_mots == "non", "changeVisible(this.checked, 'mots-config', 'none', 'block');");
 
+
+//	afficher_choix('articles_mots', $articles_mots,
+//		array('oui' => _T('item_utiliser_mots_cles'),
+//			'non' => _T('item_non_utiliser_mots_cles')), "<br />");
+	echo "</TD></TR></table>";
+
+	if ($articles_mots != "non") $style = "display: block;";
+	else $style = "display: none;";
+	
+		echo "<div id='mots-config' style='$style'>";
+		
+		echo "<p />";
+		debut_cadre_relief("", false, "", _T('titre_config_groupe_mots_cles'));
+
+		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 		echo "<TR><TD class='verdana2'>";
 		echo _T('texte_config_groupe_mots_cles');
 		echo "</TD></TR>";
@@ -313,12 +313,13 @@ if ($options == "avancees") {
 		afficher_choix('config_precise_groupes', $config_precise_groupes,
 			array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
 				'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
-		echo "</TD></TR>";
+		echo "</TD></TR></table>";
+		fin_cadre_relief();
 
 		if ($forums_publics != "non"){
-			echo "<TR><TD>&nbsp;</TD></TR>";
-			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_mots_cles_dans_forum')."</FONT></B></TD></TR>";
-
+			echo "<p />";
+			debut_cadre_relief("", false, "", _T('titre_mots_cles_dans_forum'));
+			echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 			echo "<TR><TD class='verdana2'>";
 			echo _T('texte_mots_cles_dans_forum');
 			echo "</TD></TR>";
@@ -330,15 +331,19 @@ if ($options == "avancees") {
 					'non' => _T('item_non_ajout_mots_cles')));
 			echo "</FONT>";
 			echo "</TD></TR>";
+			echo "</table>";
+			fin_cadre_relief();
 		}
-	}
+		echo "</div>";
+	
 
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 
-	fin_cadre_relief();
+	fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
@@ -348,7 +353,7 @@ if ($options == "avancees") {
 // Actives/desactiver systeme de syndication
 //
 
-debut_cadre_enfonce("site-24.gif");
+debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
 
 $activer_sites = lire_meta('activer_sites');
 $activer_syndic = lire_meta("activer_syndic");
@@ -357,91 +362,104 @@ $visiter_sites = lire_meta("visiter_sites");
 $moderation_sites = lire_meta("moderation_sites");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_referencement_sites')."</FONT></B>".aide ("reference")."</TD></TR>";
-
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
-afficher_choix('activer_sites', $activer_sites,
-	array('oui' => _T('item_gerer_annuaire_site_web'),
-	'non' => _T('item_non_gerer_annuaire_site_web')));
-echo "</TD></TR>\n";
+
+		echo bouton_radio("activer_sites", "oui", _T('item_gerer_annuaire_site_web'), $activer_sites == "oui", "changeVisible(this.checked, 'config-site', 'block', 'none');");
+		echo " &nbsp;";
+		echo bouton_radio("activer_sites", "non", _T('item_non_gerer_annuaire_site_web'), $activer_sites == "non", "changeVisible(this.checked, 'config-site', 'none', 'block');");
+
+echo "</TD></TR></table>\n";
 
 
 
-if ($activer_sites != 'non') {
-	//
+if ($activer_sites != 'non') $style = "display: block;";
+else $style = "display: none;";
+
+	echo "<div id='config-site' style='$style'>";
+	
 	// Utilisateurs autorises a proposer des sites references
 	//
-	if ($options == "avancees") {
+		echo "<p />";
+		debut_cadre_relief();
+		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
-		echo "<hr><p>"._T('info_question_proposer_site');
+		echo _T('info_question_proposer_site');
 			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
 				echo "<OPTION".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."\n";
 				echo "<OPTION".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."\n";
 				echo "<OPTION".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."\n";
 			echo "</SELECT></center><P>\n";
 		echo "</FONT>";
+		echo "</TD></TR></table>";
+		fin_cadre_relief();
+
+
+	if ($options == "avancees") {
+		debut_cadre_relief("", false, "", _T('titre_syndication').aide ("rubsyn"));
+	
+		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+		//
+		// Reglage de la syndication
+		//
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo _T('texte_syndication');
 		echo "</TD></TR>";
-	}
+	
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
-	echo "</TABLE>\n";
+			echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
+			echo "<br />";
+			echo bouton_radio("activer_syndic", "non", _T('item_non_utiliser_syndication'), $activer_syndic == "non", "changeVisible(this.checked, 'config-syndic', 'none', 'block');");
 
-	debut_cadre_relief();
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_syndication')."</FONT></B> ".aide ("rubsyn")."</TD></TR>";
-
-	//
-	// Reglage de la syndication
-	//
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo _T('texte_syndication');
-	echo "</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
-	afficher_choix('activer_syndic', $activer_syndic,
-		array('oui' => _T('item_utiliser_syndication'),
-		'non' => _T('item_non_utiliser_syndication')));
-
-	if ($activer_syndic != "non" AND $options == "avancees") {
-		// Moderation par defaut des sites syndiques
-		echo "<p><hr><p align='$spip_lang_left'>";
-		echo _T('texte_liens_sites_syndiques')."<p>";
-
-		afficher_choix('moderation_sites', $moderation_sites,
-			array('oui' => _T('item_bloquer_liens_syndiques'),
-			'non' => _T('item_non_bloquer_liens_syndiques')));
-
-		// Si indexation, activer/desactiver pages recuperees
-
-		$activer_moteur = lire_meta("activer_moteur");
-		if ($activer_moteur == "oui") {
+	
+		if ($activer_syndic != "non") $style = "display: block;";
+		else $style = "display: none;";
+			
+			echo "<div id='config-syndic' style='$style'>";
+		
+			// Moderation par defaut des sites syndiques
 			echo "<p><hr><p align='$spip_lang_left'>";
-			echo _T('texte_utilisation_moteur_syndiques')." ";
-			echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
-
-			afficher_choix('visiter_sites', $visiter_sites,
-				array('non' => _T('item_limiter_recherche'),
-					'oui' => _T('item_non_limiter_recherche')));
-		}
+			echo _T('texte_liens_sites_syndiques')."<p>";
+	
+			afficher_choix('moderation_sites', $moderation_sites,
+				array('oui' => _T('item_bloquer_liens_syndiques'),
+				'non' => _T('item_non_bloquer_liens_syndiques')));
+	
+			// Si indexation, activer/desactiver pages recuperees
+	
+			$activer_moteur = lire_meta("activer_moteur");
+			if ($activer_moteur == "oui") {
+				echo "<p><hr><p align='$spip_lang_left'>";
+				echo _T('texte_utilisation_moteur_syndiques')." ";
+				echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
+	
+				afficher_choix('visiter_sites', $visiter_sites,
+					array('non' => _T('item_limiter_recherche'),
+						'oui' => _T('item_non_limiter_recherche')));
+			}
+			echo "</div>";
+		
+		echo "</TD></TR>\n";
+	
+		echo "</TABLE>\n";
+	
+		fin_cadre_relief();
 	}
-	echo "</TD></TR>\n";
+	echo "</div>";
 
-	echo "</TABLE>\n";
 
-	fin_cadre_relief();
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-}
-
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
-fin_cadre_enfonce();
+fin_cadre_trait_couleur();
 
 echo "<p>";
 
@@ -450,13 +468,12 @@ echo "<p>";
 // Gestion des documents joints
 //
 
-debut_cadre_relief("doc-24.gif");
+debut_cadre_trait_couleur("doc-24.gif", false, "", _T('titre_documents_joints'));
 
 $documents_rubrique = lire_meta("documents_rubrique");
 $documents_article = lire_meta("documents_article");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_documents_joints')."</FONT></B> </TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_documents_joints');
@@ -480,7 +497,7 @@ echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
-fin_cadre_relief();
+fin_cadre_trait_couleur();
 
 echo "<p>";
 

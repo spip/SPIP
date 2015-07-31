@@ -10,78 +10,18 @@ debut_gauche();
 
 
 
-function enfant($collection){
-	global $les_enfants, $couleur_foncee, $lang_dir;
-	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
-	$result2 = spip_query($query2);
-
-	while($row=spip_fetch_array($result2)){
-		$id_rubrique=$row['id_rubrique'];
-		$id_parent=$row['id_parent'];
-		$titre=$row['titre'];
-
-		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
-		$les_sous_enfants = sous_enfant($id_rubrique);
-
-		changer_typo($row['lang']);
-		$descriptif=propre($row['descriptif']);
-
-		$les_enfants.= "<P>";
-		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
-		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		if (strlen($les_sous_enfants) > 0){
-			$les_enfants .= $bouton_layer;
-		}
-		$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
-
-		if (acces_restreint_rubrique($id_rubrique))
-			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
-
-		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
-		if (strlen($descriptif)>1) {
-			$les_enfants .= "<br><FONT SIZE=1><span dir='$lang_dir'>$descriptif</span></FONT>";
-		}
-
-		$les_enfants.= "</FONT>";
-
-		$les_enfants .= $les_sous_enfants;
-		$les_enfants .= fin_cadre_relief(true);
-	}
-}
-
-function sous_enfant($collection2){
-	global $lang_dir, $spip_lang_dir;
-	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
-	$result3 = spip_query($query3);
-
-	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>\n<FONT SIZE=1 face='arial,helvetica,sans-serif'>";
-		while($row=spip_fetch_array($result3)){
-			$id_rubrique2=$row['id_rubrique'];
-			$id_parent2=$row['id_parent'];
-			$titre2=$row['titre'];
-			changer_typo($row['lang']);
-
-			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></A>\n";
-		}
-		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
-	}
-	
-	return $retour;
-}
-
-
 //
 // Infos personnelles : nom, utilisation de la messagerie
 //
 
 
 echo "<p>";
-debut_cadre_relief("fiche-perso-24.gif");
+if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre = bouton_block_visible("info_perso");
+else $titre_cadre = bouton_block_invisible("info_perso");
+$titre_cadre .= majuscules(typo($connect_nom));
+
+debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
 echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-if ($bonjour == "oui" OR $spip_ecran == "large") echo bouton_block_visible("info_perso");
-else echo bouton_block_invisible("info_perso");
-echo "<font size='1' color='black'><b>".majuscules(typo($connect_nom))."</b></font>";
 
 if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
 else echo debut_block_invisible("info_perso");
@@ -113,7 +53,7 @@ fin_cadre_relief();
 // Annonces
 //
 include_ecrire("inc_agenda.php3");
-afficher_taches();
+afficher_annonces();
 
 
 //
@@ -349,8 +289,8 @@ if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0m
 
 if ($relief) {
 	echo "<p>";
-	debut_cadre_enfonce();
-	echo "<font color='$couleur_foncee' face='arial,helvetica,sans-serif'><b>"._T('texte_en_cours_validation')."</b></font><p>";
+	debut_cadre_couleur();
+	echo "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')."</b></div><p>";
 
 	//
 	// Les articles a valider
@@ -401,30 +341,11 @@ if ($relief) {
 		}
 	}
 
-	fin_cadre_enfonce();
+	fin_cadre_couleur();
 }
 
 
 if ($options == 'avancees') {
-	enfant(0);
-
-	$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
-	if (strpos($les_enfants2,"<P>")){
-		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<P>"),strlen($les_enfants2));
-		$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
-	}else{
-		$les_enfants1=$les_enfants;
-		$les_enfants2="";
-	}
-
-	// Afficher les sous-rubriques
-	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr><td valign='top' width=50%>$les_enfants1</td>";
-	echo "<td width=20><img src='img_pack/rien.gif' width=20></td>";
-	echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
-	if (strlen($les_enfants2) > 0) echo "<p>";
-	echo "</td></tr>";
-	echo "</table>";
 
 	//
 	// Vos articles publies

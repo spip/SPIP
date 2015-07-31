@@ -113,13 +113,13 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 
 
 	// rendez-vous personnels
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_fin >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
+		$date_fin = $row["date_fin"];
 		$titre=typo($row["titre"]);
 		$type=$row["type"];
-		$lejour=journum($row['date_heure']);
 
 		if ($type=="normal") {
 			$la_couleur = "#02531B";
@@ -137,7 +137,48 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			$la_couleur="black";
 			$couleur_fond="#aaaaaa";
 		}
-		$les_rv["$lejour"][]="<div style='padding: 2px; margin-top: 2px; background-color: $couleur_fond; border: 1px solid $la_couleur; -moz-border-radius: 3px;' class='arial0'><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message' style='color: black;'>$titre</a></div>";
+		
+		$heure_debut = heures($date_heure);
+		$minutes_debut = minutes($date_heure);
+		$jour_debut = journum($date_heure);
+		$mois_debut = mois($date_heure);
+		$annee_debut = annee($date_heure);
+
+		// Verifier si debut est mois precedent
+		$unix_debut = date("U", mktime($heures_debut,$minutes_debut,0,$mois_debut, $jour_debut, $annee_debut));
+		$unix_debut_today = date("U", mktime(0,0,0,$mois_today, 1, $annee_today));
+
+		if ($unix_debut <= $unix_debut_today) {
+			$jour_debut = 1;
+		}
+
+		// Verifier si fin est mois suivant
+		$heure_fin = heures($date_fin);
+		$minutes_fin = minutes($date_fin);
+		$jour_fin = journum($date_fin);
+		$mois_fin = mois($date_fin);
+		$annee_fin = annee($date_fin);
+		
+		if ($heure_fin == 0 AND $minutes_fin == 0) {
+			$heure_fin = 23;
+			$minutes_fin = 59;
+			$jour_fin = $jour_fin-1;
+		}
+
+
+		$unix_fin = date("U", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+		$unix_fin_today = date("U", mktime(0,0,0,$mois_today+1, 1, $annee_today));
+
+		if ($unix_fin > $unix_fin_today) {
+			$jour_fin = 31;
+		}
+
+
+		for ($i = $jour_debut; $i <= $jour_fin; $i++) {
+			if ($i == $jour_debut) $les_rv["$i"][]="<div style='padding: 2px; margin-top: 2px; background-color: $couleur_fond; border: 1px solid $la_couleur; -moz-border-radius: 3px;' class='arial0'><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message' style='color: black;'>$titre</a></div>";
+			else $les_rv["$i"][]="<div style='padding: 2px; margin-top: 2px; background-color: $couleur_fond; border: 1px solid $la_couleur; -moz-border-radius: 3px;' class='arial0'><img src='puce$spip_lang_rtl.gif' border='0'><a href='message.php3?id_message=$id_message' style='color: black;'>$titre</a></div>";
+		}
+				
 	}
 
 	$activer_messagerie = lire_meta("activer_messagerie");

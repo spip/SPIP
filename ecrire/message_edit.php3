@@ -62,7 +62,7 @@ if ($new == "oui") {
 	$id_message = spip_insert_id();
 	
 	if ($rv) {
-		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00' WHERE id_message = $id_message");
+		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00', date_fin: '$rv 13:00:00' WHERE id_message = $id_message");
 	}
 
 	if ($type != "affich"){
@@ -91,11 +91,21 @@ if ($row = spip_fetch_array($result)) {
 	$expediteur = $row["id_auteur"];
 		if (!($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) die();
 
+	echo "<div class='arial2'>";
 
 	echo "<FORM ACTION='message.php3?id_message=$id_message' METHOD='post'>";
-	if ($type == 'normal') $le_type = _T('bouton_envoi_message_02');
-	if ($type == 'pb') $le_type = _T('bouton_pense_bete');
-	if ($type == 'affich') $le_type = _T('bouton_annonce');
+	if ($type == 'normal') {
+		$le_type = _T('bouton_envoi_message_02');
+		$logo = "message";
+	}
+	if ($type == 'pb') {
+		$le_type = _T('bouton_pense_bete');
+		$logo = "pense-bete";
+	}
+	if ($type == 'affich') {
+		$le_type = _T('bouton_annonce');
+		$logo = "annonce";
+	}
 
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
 	
@@ -118,23 +128,22 @@ if ($row = spip_fetch_array($result)) {
 	// Fixer rendez-vous?
 	//
 
-		debut_boite_info();
-		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='$couleur_foncee' colspan=2>";
-		echo "<span class='serif2' color='#FFFFFF'><B>"._T('titre_rendez_vous')."</B></span>";
-		echo "</td></tr></table>";
+		
+		echo "<p />";
+		
+		if ($rv == "oui") $fonction = "rv.gif";
+		else $fonction = "";
+
+		debut_cadre_trait_couleur("$logo.gif", false, $fonction, _T('titre_rendez_vous'));
 		echo "<input type='hidden' name='id_message' value='$id_message'>";
 		echo "<input type='hidden' name='changer_rv' value='$id_message'>";
 		if ($rv != "oui") {
-			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' id='rv_on'>";
+			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' id='rv_on' onClick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\">";
 			echo " <label for='rv_on'>"._T('item_afficher_calendrier')."</label> ";
-			echo " <br><INPUT TYPE='radio' NAME='rv' VALUE='non' CHECKED id='rv_off'>";
-			echo " <B><label for='rv_off'>"._T('item_non_afficher_calendrier')."</label></B> ";
-		}
-		else {
-			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' CHECKED id='rv_on'>";
-			echo " <b><label for='rv_on'>"._T('item_afficher_calendrier')."</label></b> ";
 
-			echo "<div style='text-align: center; padding: 4px;'><SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
+
+			echo "<div id='heure-rv' style='display: block; padding-top: 4px; padding-left: 24px;'>";
+			echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 			afficher_jour(jour($date_heure));
 			echo "</SELECT> ";
 			echo "<SELECT NAME='mois' SIZE=1 CLASS='fondl'>";
@@ -146,31 +155,96 @@ if ($row = spip_fetch_array($result)) {
 			
 			$heures_debut = heures($date_heure);
 			$minutes_debut = minutes($date_heure);
-			echo "<br><INPUT TYPE='text' CLASS='fondl' NAME='heures' VALUE=\"".$heures_debut."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
+			echo " &nbsp; <INPUT TYPE='text' CLASS='fondl' NAME='heures' VALUE=\"".$heures_debut."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
+			echo "<INPUT TYPE='text' CLASS='fondl' NAME='minutes' VALUE=\"$minutes_debut\" SIZE='3'> ";
+			
+			
+			$heures_fin = heures($date_fin);
+			$minutes_fin = minutes($date_fin);
+
+			if ($date_fin == "0000-00-00 00:00:00") {
+				$date_fin = $date_heure;
+				$heures_fin = $heures_debut + 1;
+			}
+			
+			if ($heures_fin >=24){
+				$heures_fin = 23;
+				$minutes_fin = 59;	
+			}
+
+
+			
+			echo " <br> <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp; ";
+			
+			echo "<SELECT NAME='jour_fin' SIZE=1 CLASS='fondl'>";
+			afficher_jour(jour($date_fin));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='mois_fin' SIZE=1 CLASS='fondl'>";
+			afficher_mois(mois($date_fin));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='annee_fin' SIZE=1 CLASS='fondl'>";
+			afficher_annee(annee($date_fin));
+			echo "</SELECT>\n";
+			
+			echo " &nbsp; <INPUT TYPE='text' CLASS='fondl' NAME='heures_fin' VALUE=\"".$heures_fin."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
+			echo "<INPUT TYPE='text' CLASS='fondl' NAME='minutes_fin' VALUE=\"".$minutes_fin."\" SIZE='3'> ";
+
+			echo "</div>";
+
+
+			echo " <br><INPUT TYPE='radio' NAME='rv' VALUE='non' CHECKED id='rv_off' onClick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\">";
+			echo " <B><label for='rv_off'>"._T('item_non_afficher_calendrier')."</label></B> ";
+		}
+		else {
+			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' CHECKED id='rv_on' onClick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\">";
+			echo " <b><label for='rv_on'>"._T('item_afficher_calendrier')."</label></b> ";
+
+			echo "<div id='heure-rv' style='display: block; padding-top: 4px; padding-left: 24px;'>";
+			echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
+			afficher_jour(jour($date_heure));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='mois' SIZE=1 CLASS='fondl'>";
+			afficher_mois(mois($date_heure));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl'>";
+			afficher_annee(annee($date_heure));
+			echo "</SELECT>\n";
+			
+			$heures_debut = heures($date_heure);
+			$minutes_debut = minutes($date_heure);
+			echo " &nbsp; <INPUT TYPE='text' CLASS='fondl' NAME='heures' VALUE=\"".$heures_debut."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
 			echo "<INPUT TYPE='text' CLASS='fondl' NAME='minutes' VALUE=\"$minutes_debut\" SIZE='3'> ";
 			
 			$heures_fin = heures($date_fin);
 			$minutes_fin = minutes($date_fin);
 			
-			if (($heures_fin * 60) + $minutes_fin < ($heures_debut * 60) + $minutes_debut) {
-				$minutes_fin = $minutes_debut;
-				$heures_fin = $heures_debut + 1;
-			}
 			if ($heures_fin >=24){
 				$heures_fin = 23;
 				$minutes_fin = 59;	
 			}
 			
-			echo " &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp; <INPUT TYPE='text' CLASS='fondl' NAME='heures_fin' VALUE=\"".$heures_fin."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
+			echo " <br> <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp; ";
+			
+			echo "<SELECT NAME='jour_fin' SIZE=1 CLASS='fondl'>";
+			afficher_jour(jour($date_fin));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='mois_fin' SIZE=1 CLASS='fondl'>";
+			afficher_mois(mois($date_fin));
+			echo "</SELECT> ";
+			echo "<SELECT NAME='annee_fin' SIZE=1 CLASS='fondl'>";
+			afficher_annee(annee($date_fin));
+			echo "</SELECT>\n";
+			
+			echo " &nbsp; <INPUT TYPE='text' CLASS='fondl' NAME='heures_fin' VALUE=\"".$heures_fin."\" SIZE='3'>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;";
 			echo "<INPUT TYPE='text' CLASS='fondl' NAME='minutes_fin' VALUE=\"".$minutes_fin."\" SIZE='3'> ";
 
 			echo "</div>";
 
-			echo " <p><INPUT TYPE='radio' NAME='rv' VALUE='non' id='rv_off'>";
+			echo " <p><INPUT TYPE='radio' NAME='rv' VALUE='non' id='rv_off' onClick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\">";
 			echo " <label for='rv_off'>"._T('item_non_afficher_calendrier')."</label> ";
 		}
 
-		fin_boite_info();
+		fin_cadre_trait_couleur();
 
 	echo "<p><B>"._T('info_texte_message_02')."</B><BR>";
 	echo "<TEXTAREA NAME='texte' ROWS='20' CLASS='formo' COLS='40' wrap=soft>";
@@ -179,6 +253,7 @@ if ($row = spip_fetch_array($result)) {
 
 	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</FORM>";
+	echo "</div>";
 }
 
 fin_page();

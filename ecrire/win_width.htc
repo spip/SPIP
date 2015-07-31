@@ -1,0 +1,17 @@
+<public:component>
+<PUBLIC:PROPERTY NAME="retrait">
+<script language="JScript">
+
+function fixWidth(){
+	if (element.className == "spip_cadre") retrait = 24; 
+	else retrait = 16; 
+
+	style.width = element.offsetWidth - retrait;
+}
+
+var supported = /MSIE (5\.5)|[6789]/.test(navigator.userAgent) && navigator.platform == "Win32";
+if (supported) fixWidth();
+
+</script>
+</public:component>
+

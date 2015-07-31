@@ -276,7 +276,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 
 function afficher_sites($titre_table, $requete) {
-	global $couleur_claire;
+	global $couleur_claire, $couleur_foncee;
 	global $connect_id_auteur;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
@@ -285,10 +285,11 @@ function afficher_sites($titre_table, $requete) {
 	$tranches = afficher_tranches_requete($requete, 3);
 
 	if ($tranches) {
-		debut_cadre_relief("site-24.gif");
-
+//		debut_cadre_relief("site-24.gif");
+		if ($titre_table) echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+		bandeau_titre_boite2($titre_table, "site-24.gif", $couleur_claire, "black");
 		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
-		bandeau_titre_boite($titre_table, true);
 
 		echo $tranches;
 
@@ -300,9 +301,7 @@ function afficher_sites($titre_table, $requete) {
 		
 		$compteur_liste = 0;
 		while ($row = spip_fetch_array($result)) {
-			$ifond = $ifond ^ 1;
-			$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
-
+			$vals = '';
 			$id_syndic=$row["id_syndic"];
 			$id_rubrique=$row["id_rubrique"];
 			$nom_site=typo($row["nom_site"]);
@@ -316,9 +315,9 @@ function afficher_sites($titre_table, $requete) {
 			
 			$tous_id[] = $id_syndic;
 
-			echo "<tr bgcolor='$couleur'>";
+			//echo "<tr bgcolor='$couleur'>";
 
-			echo "<td class='arial2'>";
+			//echo "<td class='arial2'>";
 			$link = new Link("sites.php3?id_syndic=$id_syndic");
 			$redirect = new Link;
 			$link->addVar('redirect', $redirect->getUrl());
@@ -327,21 +326,21 @@ function afficher_sites($titre_table, $requete) {
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-verte-anim.gif';
 				else
-					$puce='puce-verte.gif';
+					$puce='puce-verte-breve.gif';
 				$title = _T('info_site_reference');
 				break;
 			case 'prop':
 				if (acces_restreint_rubrique($id_rubrique))
-					$puce = 'puce-blanche-anim.gif';
+					$puce = 'puce-orange-anim.gif';
 				else
-					$puce='puce-blanche.gif';
+					$puce='puce-orange-breve.gif';
 				$title = _T('info_site_attente');
 				break;
 			case 'refuse':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-poubelle-anim.gif';
 				else
-					$puce='puce-poubelle.gif';
+					$puce='puce-poubelle-breve.gif';
 				$title = _T('info_site_refuse');
 				break;
 			}
@@ -350,37 +349,52 @@ function afficher_sites($titre_table, $requete) {
 				$title = _T('info_panne_site_syndique');
 			}
 
-			echo "<a href=\"".$link->getUrl()."\" title=\"$title\">";
-			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
-			if ($moderation == 'oui')
-				echo "<i>".typo($nom_site)."</i>";
+			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
+			$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+			
+			$s .= typo($nom_site);
+			/*if ($moderation == 'oui')
+				$s .= "<i>".typo($nom_site)."</i>";
 			else
-				echo typo($nom_site);
+				$s .= typo($nom_site);
+			*/
+			$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
+			$vals[] = $s;
+			
+			//echo "</td>";
 
-			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
-			echo "</td>";
-
-			echo "<td class='arial1' align='right'> &nbsp;";
+			$s = "";
+			//echo "<td class='arial1' align='right'> &nbsp;";
 			if ($syndication == "off") {
-				echo "<font color='red'>"._T('info_probleme_grave')." </font>";
+				$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
 			}
 			if ($syndication == "oui" or $syndication == "off"){
-				echo "<font color='red'>"._T('info_syndication')."</font>";
+				$s .= "<font color='red'>"._T('info_syndication')."</font>";
 			}
-			echo "</td>";					
-			echo "<td class='arial1'>";
+				$vals[] = $s;
+			//echo "</td>";					
+			//echo "<td class='arial1'>";
+			$s = "";
 			if ($syndication == "oui" OR $syndication == "off") {
 				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 				list($total_art) = spip_fetch_row($result_art);
-				echo " $total_art "._T('info_syndication_articles');
+				$s .= " $total_art "._T('info_syndication_articles');
 			} else {
-				echo "&nbsp;";
+				$s .= "&nbsp;";
 			}
-			echo "</td>";					
-			echo "</tr></n>";
+			$vals[] = $s;
+			//echo "</td>";					
+			//echo "</tr></n>";
+			$table[] = $vals;
 		}
+		spip_free_result($result);
+		
+		$largeurs = array('','','');
+		$styles = array('arial11', 'arial1', 'arial1');
+		afficher_liste($largeurs, $table, $styles);
 		echo "</TABLE>";
-		fin_cadre_relief();
+		//fin_cadre_relief();
+		echo "</div>\n";
 	}
 	return $tous_id;
 }

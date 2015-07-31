@@ -6,27 +6,25 @@ include ("inc.php3");
 debut_page(_T('titre_page_statistiques'), "suivi", "repartition");
 
 echo "<br><br>";
-gros_titre(_T('titre_statistiques'));
+gros_titre(_T('icone_repartition_visites'));
 if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
 	barre_onglets("repartition", "rubriques");
 
 if ($GLOBALS["critere"] == "debut") {
 	$critere = "visites";
-	gros_titre(_T('onglet_repartition_debut'));	
+//	gros_titre(_T('onglet_repartition_debut'));	
 }
 else {
 	$critere = "popularite";
-	gros_titre(_T('onglet_repartition_actuelle'));	
+//	gros_titre(_T('onglet_repartition_actuelle'));	
 }
+
+if ($critere == "popularite") barre_onglets("stat_depuis", "popularite");
+else barre_onglets("stat_depuis", "debut");
 
 
 
 debut_gauche();
-
-if ($critere == "popularite") icone_horizontale(_T('icone_repartition_debut'), "statistiques.php3?critere=debut", "rubrique-24.gif","");
-else icone_horizontale(_T('icone_repartition_actuelle'), "statistiques.php3", "rubrique-24.gif","");
-
-
 
 debut_droite();
 

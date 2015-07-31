@@ -53,8 +53,8 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 	if (test_barre()) {
 		$ret = afficher_script_barre();
 		$champ = "document.$formulaire.$texte";
-		$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-		$ret .= "<tr width='100%'>";
+		$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
+		$ret .= "<tr width='100%' class='spip_barre'>";
 		$ret .= "<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 
@@ -64,7 +64,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		if (!$forum) {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", _T('barre_intertitre'), $formulaire, $texte);
 		}
-		$ret .= "&nbsp;&nbsp;&nbsp;";
+		$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
 
 		// Lien hypertexte, notes de bas de page, citations
 		$ret .= bouton_barre_racc ("javascript:barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)",
@@ -73,7 +73,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $formulaire, $texte);
 		}
 		if ($forum) {
-			$ret .= "&nbsp;&nbsp;&nbsp;";
+			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "quote.png", _T('barre_quote'), $formulaire, $texte);
 		}
 
@@ -85,9 +85,11 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		}
 
 		$ret .= "</td>";
+		
+			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
 
 		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-		$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
+		$ret .= "<td style='text-align:$spip_lang_left;' valign='middle'>";
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
@@ -101,9 +103,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets'), $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&lsquo;','&rsquo;',$champ)", "guillemets-uniques.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
-		$ret .= "&nbsp;&nbsp;&nbsp;";
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
-			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", _T('barre_a_accent_grave'), $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", _T('barre_e_accent_aigu'), $formulaire, $texte);
 			if ($spip_lang == "fr") {
@@ -113,12 +113,15 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		}
 		$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $formulaire, $texte);
 		$ret .= "</td>";
+		
+			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
 
 		if ($flag_ecrire) {
 			$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
 			$col++;
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= aide("raccourcis");
+			$ret .= "&nbsp;";
 			$ret .= "</td>";
 		}
 		$ret .= "</tr>";

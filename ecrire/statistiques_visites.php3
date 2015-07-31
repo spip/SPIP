@@ -45,7 +45,7 @@ else {
 	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "suivi", "statistiques");
 	echo "<br><br>";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
-	barre_onglets("statistiques", "evolution");
+//	barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
 
 	debut_gauche();

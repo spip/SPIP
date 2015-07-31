@@ -11,19 +11,19 @@ barre_onglets("repartition", "langues");
 
 if ($GLOBALS["critere"] == "debut") {
 	$critere = "visites";
-	gros_titre(_T('onglet_repartition_debut'));	
+//	gros_titre(_T('onglet_repartition_debut'));	
 }
 else {
 	$critere = "popularite";
-	gros_titre(_T('onglet_repartition_actuelle'));	
+//	gros_titre(_T('onglet_repartition_actuelle'));	
 }
+
+if ($critere == "popularite") barre_onglets("rep_depuis", "popularite");
+else barre_onglets("rep_depuis", "debut");
 
 
 
 debut_gauche();
-
-if ($critere == "popularite") icone_horizontale(_T('icone_repartition_debut'), "statistiques_lang.php3?critere=debut", "langues-24.gif","");
-else icone_horizontale(_T('icone_repartition_actuelle'), "statistiques_lang.php3", "langues-24.gif","");
 
 
 

@@ -92,10 +92,10 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 				}
 				else {
 					if ($jour_semaine == 7) {
-						$couleur_fond = $couleur_claire;
-						$couleur = "#aaaaaa";
+						$couleur_fond = "#aaaaaa";
+						$couleur = "white";
 					} else {
-						$couleur_fond = "#eeeeee";
+						$couleur_fond = "#ffffff";
 						$couleur = "#aaaaaa";
 					}
 					if ($les_rv[$j] > 0) {
@@ -163,7 +163,7 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	
 	$nom = mktime(1,1,1,$mois,$jour,$annee);
 	$jour_semaine = date("w",$nom);
-	if ($jour_semaine == 0) $bgcolor = $couleur_claire;
+	if ($jour_semaine == 0) $bgcolor = "#e0e0e0";
 
 	if ($large == "col" ) {
 		echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate_jourcourt("$annee-$mois-$jour")."</a></b></div>";
@@ -223,7 +223,8 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	}
 
 	// rendez-vous personnels
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-$jour' AND messages.date_heure <= '$annee-$mois-$jour 23:59:59' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure <='$annee-$mois-$jour 23:59:00' AND messages.date_fin > '$annee-$mois-$jour 00:00:00' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+				// Note: le $date_fin est strictement superieur a minuit
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -250,13 +251,40 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 			$couleur_fond="#aaaaaa";
 		}
 
+
+
 		$heure_debut = heures($date_heure);
 		$minutes_debut = minutes($date_heure);
+		$jour_debut = journum($date_heure);
+		$mois_debut = mois($date_heure);
+		$annee_debut = annee($date_heure);
 
-		// En attendant gestion heure de fin...
+		// Verifier si debut est jour precedent
+		$unix_debut = date("U", mktime($heures_debut,$minutes_debut,0,$mois_debut, $jour_debut, $annee_debut));
+		$unix_debut_today = date("U", mktime(0,0,0,$mois, $jour, $annee));
+
+		if ($unix_debut < $unix_debut_today) {
+			$heure_debut = 0;
+			$minutes_debut = 0;
+		}
+
+		// Verifier si fin est jour suivant
 		$heure_fin = heures($date_fin);
 		$minutes_fin = minutes($date_fin);
+		$jour_fin = journum($date_fin);
+		$mois_fin = mois($date_fin);
+		$annee_fin = annee($date_fin);
 
+
+		$unix_fin = date("U", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+		$unix_fin_today = date("U", mktime(23,59,0,$mois, $jour, $annee));
+
+		if ($unix_fin > $unix_fin_today) {
+			$heure_fin = 23;
+			$minutes_fin = 59;
+		}
+
+		// Corriger pour l'affichage dans le tableau (debut et fin de tableau sont reduits)
 		if ($heure_debut < 6) {
 			$heure_debut = 6;
 			$minutes_debut = 0;	
@@ -331,7 +359,7 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 }
 
 function liste_rv($query, $type) {
-	global $spip_lang_rtl, $spip_lang_left;
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	
 	if ($type == annonces) {
 		$titre = _T('info_annonces_generales');
@@ -354,12 +382,12 @@ function liste_rv($query, $type) {
 
 	$result = spip_query($query);
 	if (spip_num_rows($result) > 0){
-		echo "<div>&nbsp;</div><div style='border: 1px solid #999999; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
-		echo "<div style='background-color: $couleur_titre; padding: 3px; color: $couleur_texte;'>";
-		echo "<b class='verdana1'>$titre</b>";
-		echo "</div>";
-		echo "<div style='padding: 3px;'>";
+		
+		debut_cadre_enfonce("", false, "", $titre);
+
+		echo "<table width='100%' border='0' cellpadding='0' cellspacing='2'>";
 		while ($row = spip_fetch_object($result)) {
+		
 			if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
 				$url = $match[1];
 			else
@@ -367,32 +395,57 @@ function liste_rv($query, $type) {
 				$type=$row->type;
 				$rv = $row->rv;
 				$date = $row->date_heure;
+				$date_fin = $row -> date_fin;
 
-				if ($type=="normal") $bouton = "m_envoi";
-				elseif ($type=="pb") $bouton = "m_envoi_bleu";
-				elseif ($type=="affich") $bouton = "m_envoi_jaune";
-				else $bouton = "m_envoi";
+				if ($type=="normal") $bouton = "message";
+				elseif ($type=="pb") $bouton = "pense-bete";
+				elseif ($type=="affich") $bouton = "annonce";
+				else $bouton = "message";
+			
+				//if ($rv == "oui") $bouton .= "-rv";
 			
 			$titre = typo($row->titre);
-
-			echo "<div style='margin: 5px; padding-$spip_lang_left: 20px; background: url(img_pack/$bouton$spip_lang_rtl.gif) $spip_lang_left center no-repeat;'>";
+			
 			if ($rv == "oui") {
-				echo "<b class='arial0'>".affdate_jourcourt($date)."</b><br />";
+				echo "<tr><td colspan='2'>";
+				$date_jour = affdate_jourcourt($date);
+				if ($date_jour != $date_rv) echo "<div class='arial11'><b>$date_jour</b></div>";
+				echo "</td></tr>";
 			}
-			echo "<b><a href='$url' class='arial1'>$titre</a></b>";
-			echo "</div>\n";
+			
+			echo "<tr>";
+			echo "<td width='24' valign='middle'>";
+				echo "<a href='$url'>";
+				if ($rv == "oui") echo "<img src='img_pack/rv.gif' style='background: url(img_pack/$bouton.gif) no-repeat;' border='0'>";
+				else echo "<img src='img_pack/$bouton.gif' border='0'>";
+				echo "</a>";
+			echo "</td>";
+			
+			echo "<td valign='middle'>";
+				if ($rv == "oui") {
+					echo "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>";
+				}
+			
+				echo "<div><b><a href='$url' class='arial1' style='color: #333333;'>$titre</a></b></div>";
+			echo "</td>";
+			echo "</tr>\n";
+			
+			$date_rv = $date_jour;
+			
 		}
-		echo "</div>";
-		
-		echo "</div>";
+		echo "</table>";
+		fin_cadre_enfonce();
 	}
+}
+
+function afficher_annonces () {
+	global $connect_id_auteur, $options;
+	$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC";
+	liste_rv($query, "annonces");
 }
 
 function afficher_taches () {
 	global $connect_id_auteur, $options;
-	$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC";
-	liste_rv($query, "annonces");
-
 	$query = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'";
 	liste_rv($query, "pb");
 

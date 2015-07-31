@@ -190,15 +190,9 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$acces_forum = $row_groupes['6forum'];
 
 	// Afficher le titre du groupe
-	debut_cadre_enfonce("groupe-mot-24.gif");
-	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
-	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
-	echo "</font></td>";
-	echo "<td bgcolor='$couleur_foncee' align='right'><font face='Verdana,Arial,Sans,sans-serif' size=1>";
-	echo "</font></td></tr>";
-
+	debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 	// Affichage des options du groupe (types d'éléments, permissions...)
-	echo "<tr><td colspan=3><font face='Verdana,Arial,Sans,sans-serif' size=1>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
 	if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
 	if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
 	if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
@@ -213,18 +207,23 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	if ($acces_comite == "oui") echo "> "._T('info_redacteurs')." &nbsp;&nbsp;";
 	if ($acces_forum == "oui") echo "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
-	echo "</font></td></tr></table>";
+	echo "</font>";
 
 	//
 	// Afficher les mots-cles du groupe
 	//
 	$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY titre";
 	$result = spip_query($query);
-
+	$table = '';
+	
 	if (spip_num_rows($result) > 0) {
-		debut_cadre_relief("mot-cle-24.gif");
+//		debut_cadre_relief("mot-cle-24.gif");
+		echo "<div class='liste'>";
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 		while ($row = spip_fetch_array($result)) {
+		
+			$vals = '';
+			
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
 			$type_mot = $row['type'];
@@ -239,20 +238,12 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
 				$ifond = $ifond ^ 1;
 
-				echo "<TR BGCOLOR='$couleur'>";
-				echo "<TD>";
 				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
-					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'></A>";
+					$s = "<a href='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
-					echo "<img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'>";
-				echo "</TD>";
-				echo "<TD class='serif2'>";
-				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
-					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'>".typo($titre_mot)."</A>";
-				else
-					echo typo($titre_mot);
-				echo "</TD>";
-				echo "<TD ALIGN='right' class='verdana2'>";
+					$s = typo($titre_mot);
+
+				$vals[] = $s;
 
 				$texte_lie = array();
 
@@ -276,22 +267,34 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				else if ($nb_rubriques[$id_mot] > 1)
 					$texte_lie[] = $nb_rubriques[$id_mot]." "._T('info_rubriques_02');
 
-				echo $texte_lie = join($texte_lie,", ");
+				$texte_lie = join($texte_lie,", ");
+				
+				$vals[] = $texte_lie;
+
 
 				if ($connect_statut=="0minirezo") {
-					echo " &nbsp;&nbsp;&nbsp;&nbsp; ";
-					echo "<FONT SIZE=1>[<A HREF='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."</A>]</FONT>";
-				} else
-					echo "&nbsp;";
+					$vals[] = "<a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
+				} 
 
-				echo "</TD>";
-				echo "</TR>\n";
+				$table[] = $vals;
+
+				
 			}
+				
 		}
+		if ($connect_statut=="0minirezo") {
+			$largeurs = array('', 100, 100);
+			$styles = array('arial11', 'arial1', 'arial1');
+		}
+		else {
+			$largeurs = array('', 100);
+			$styles = array('arial11', 'arial1');
+		}
+		afficher_liste($largeurs, $table, $styles);
 
 		echo "</table>";
-		fin_cadre_relief();
-	
+//		fin_cadre_relief();
+		echo "</div>";
 		$supprimer_groupe = false;
 	} 
 	else
@@ -310,8 +313,10 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 			echo "</td>";
 			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
 		}
-		echo "<td align='right'>";
+		echo "<td>";
+		echo "<div align='$spip_lang_right'>";
 		icone(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
+		echo "</div>";
 		echo "</td></tr></table>";
 	}	
 
