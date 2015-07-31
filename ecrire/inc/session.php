@@ -289,20 +289,41 @@ function session_get($nom) {
  * @api
  * @param string $nom
  * @param null $val
- * @return void
+ * @return void|array
  */
 function session_set($nom, $val=null) {
+	static $remove = array();
+	static $actualiser_sessions = false;
+	if ($nom===false) return $remove;
 	if (is_null($val)){
 		// rien a faire
 		if (!isset($GLOBALS['visiteur_session'][$nom])) return;
 		unset($GLOBALS['visiteur_session'][$nom]);
-		actualiser_sessions($GLOBALS['visiteur_session'], array($nom));
+		$remove[] = $nom;
 	}
 	else {
 		// On ajoute la valeur dans la globale
 		$GLOBALS['visiteur_session'][$nom] = $val;
-		actualiser_sessions($GLOBALS['visiteur_session']);
 	}
+	if (!$actualiser_sessions){
+		// il faut creer la session si on en a pas, la premiere fois
+		ajouter_session($GLOBALS['visiteur_session']);
+		// in register la fonction qui mettra a jour toutes les sessions en fin de hit
+		register_shutdown_function('terminer_actualiser_sessions');
+		$actualiser_sessions = true;
+	}
+}
+
+/**
+ * En fin de hit, synchroniser toutes les sessions
+ */
+function terminer_actualiser_sessions(){
+	// se remettre dans le dossier de travail au cas ou Apache a change
+	chdir(_ROOT_CWD);
+	// recuperer les variables a effacer
+	$remove = session_set(false);
+	// mettre a jour toutes les sessions
+	actualiser_sessions($GLOBALS['visiteur_session'], $remove);
 }
 
 
