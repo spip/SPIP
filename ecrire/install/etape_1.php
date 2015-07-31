@@ -50,7 +50,7 @@ function install_etape_1_dist()
 	echo info_progression_etape(1,'etape_','install/');
 
 	// ces deux chaines de langues doivent etre reecrites
-#	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
+#	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1", true));
 	echo info_etape(_T('info_connexion_base_donnee'),
 			'<p>'
 					. _T('texte_connexion_mysql')

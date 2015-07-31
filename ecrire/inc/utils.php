@@ -1950,15 +1950,22 @@ function spip_session($force = false) {
 	return $session;
 }
 
-//
-// Aide, aussi depuis l'espace prive a present.
-//  Surchargeable mais pas d'ereur fatale si indisponible.
-//
 
+/**
+ * Aide, aussi depuis l'espace prive a present.
+ * Surchargeable mais pas d'erreur fatale si indisponible.
+ * 
+ * @param string $aide
+ * 		Cle d'identification de l'aide desiree
+ * @param bool $distante
+ * 		Generer une url locale (par defaut)
+ * 		ou une url distante [directement sur spip.net]
+ * @return Lien sur une icone d'aide
+**/
 // http://doc.spip.org/@aide
-function aide($aide='') {
-	$aider = charger_fonction('aider', 'inc', true);
-	return $aider ?  $aider($aide) : '';
+function aide($aide='', $distante = false) {
+		$aider = charger_fonction('aider', 'inc', true);
+	return $aider ?  $aider($aide, '', array(), $distante) : '';
 }
 
 // normalement il faudrait creer exec/info.php, mais pour mettre juste ca:
