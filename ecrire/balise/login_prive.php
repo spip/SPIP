@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('balise/login_public'); 
 
 
+// http://doc.spip.org/@balise_LOGIN_PRIVE
 function balise_LOGIN_PRIVE ($p) {
 
 	return balise_login_public($p,'LOGIN_PRIVE');
@@ -26,11 +27,13 @@ function balise_LOGIN_PRIVE ($p) {
 #    calculer_balise_dynamique, en l'occurrence le #LOGIN courant si l'on
 #    programme une <boucle(AUTEURS)>[(#LOGIN_PRIVE{#LOGIN})]
 
+// http://doc.spip.org/@balise_LOGIN_PRIVE_stat
 function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 	 return array(isset($args[1]) ? $args[1] : '',
 		      ($filtres[0] ? $filtres[0] : $args[0]));
 }
 
+// http://doc.spip.org/@balise_LOGIN_PRIVE_dyn
 function balise_LOGIN_PRIVE_dyn($login, $cible) {
 	return login_explicite($login, $cible);
 }

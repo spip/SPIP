@@ -33,6 +33,7 @@ charger_generer_url();
 // dans le fichier d'appel, et si la table de reference est OK, proposer
 // la liste des mots-cles
 
+// http://doc.spip.org/@balise_FORMULAIRE_FORUM
 function balise_FORMULAIRE_FORUM ($p) {
 
 	$p = calculer_balise_dynamique($p,'FORMULAIRE_FORUM', array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte'));
@@ -46,6 +47,7 @@ function balise_FORMULAIRE_FORUM ($p) {
 }
 
 // verification des droits a faire du forum
+// http://doc.spip.org/@balise_FORMULAIRE_FORUM_stat
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// Note : ceci n'est pas documente !!
@@ -83,6 +85,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
+// http://doc.spip.org/@balise_FORMULAIRE_FORUM_dyn
 function balise_FORMULAIRE_FORUM_dyn(
 $titre, $table, $type, $script,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
@@ -200,6 +203,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		));
 }
 
+// http://doc.spip.org/@inclure_previsu
 function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot)
 {
 	$erreur = $bouton = '';
@@ -248,6 +252,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 // Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
 // si $afficher_texte = 'non')
 
+// http://doc.spip.org/@forum_fichier_tmp
 function forum_fichier_tmp()
 {
 # astuce : mt_rand pour autoriser les hits simultanes
@@ -275,6 +280,7 @@ function forum_fichier_tmp()
 // Chercher le titre et la configuration du forum de l'element auquel on repond
 //
 
+// http://doc.spip.org/@sql_recherche_donnees_forum
 function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('base/abstract_sql');
 spip_connect();
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 	return calculer_balise_dynamique($p, $nom, array('url'));
 }
@@ -25,10 +26,12 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 #    calculer_balise_dynamique, en l'occurence le #LOGIN courant si l'on
 #    programme une <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#LOGIN})]
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
 	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
 }
 
+// http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
 function balise_LOGIN_PUBLIC_dyn($url, $login) {
 
 	if (!$url 		# pas d'url passee en filtre ou dans le contexte
@@ -38,6 +41,7 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 	return login_explicite($login, $url);
 }
 
+// http://doc.spip.org/@login_explicite
 function login_explicite($login, $cible) {
 	global $auteur_session;
 
@@ -72,6 +76,7 @@ function login_explicite($login, $cible) {
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
+// http://doc.spip.org/@login_pour_tous
 function login_pour_tous($login, $cible, $action) {
 	global $ignore_auth_http, $_SERVER, $_COOKIE;
 
@@ -158,6 +163,7 @@ function login_pour_tous($login, $cible, $action) {
 
 // Bouton duree de connexion
 
+// http://doc.spip.org/@filtre_rester_connecte
 function filtre_rester_connecte($prefs) {
 	$prefs = unserialize(stripslashes($prefs));
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
