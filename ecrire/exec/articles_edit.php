@@ -306,8 +306,6 @@ function exec_articles_edit_dist()
 	// Pave "documents associes a l'article"
 
 	if (!$new){
-	# modifs de la description d'un des docs joints
-		maj_documents($id_article, 'article');
 
 	# affichage sur le cote des pieces jointes, en reperant les inserees
 		if (isset($row['descriptif'])) document_a_voir($row['descriptif']);

@@ -402,8 +402,7 @@ if ($relief) {
 
 /// Documents associes a la rubrique
 	if ($id_rubrique > 0) {
-	# modifs de la description d'un des docs joints
-	  if ($flag_editable) maj_documents($id_rubrique, 'rubrique');
+
 	  afficher_documents_non_inclus($id_rubrique, "rubrique", $flag_editable);
 	}
 

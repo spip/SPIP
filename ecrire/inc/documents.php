@@ -477,7 +477,7 @@ function inserer_documents($letexte) {
 
 
 //
-// Retourner le code HTML d'utilisation de fichiers uploades a la main
+// Retourner le code HTML d'utilisation de fichiers envoyes
 //
 
 function texte_upload_manuel($dir, $inclus = '') {
@@ -558,10 +558,11 @@ function afficher_formulaire_taille($document) {
 		// ou formats dont la taille ne peut etre lue par getimagesize
 		OR $extension=='rm' OR $extension=='mov'
 	)) {
-		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
-		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />";
-		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
+		return "<br /><b>"._T('entree_dimensions')."</b><br />\n" .
+		  "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
+		  " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
+	return '';
 }
 
 //
@@ -580,7 +581,7 @@ function afficher_upload($id, $intitule='', $inclus = '', $mode='', $type="", $a
 	} else $dir_ftp = $debut = $fin = '';
 
 	$res =  "\n$debut" .
-		(!$intitule ? '' : "\n\t<div>$intitule</div>") .
+		(!$intitule ? '' : "\n\t<span>$intitule</span><br />") .
 		"\n\t\t<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
 		"\n\t\t<div align='" .
 		$GLOBALS['spip_lang_right'] . 
@@ -688,6 +689,8 @@ function afficher_portfolio(
 	global $options,  $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
+
+	$modifiable = ($options == "avancees" OR $connect_statut == '0minirezo');
 
 	// la derniere case d'une rangee
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
@@ -798,7 +801,7 @@ entites_html($document['fichier'])."\" />\n";
 				else
 					echo debut_block_invisible("port$id_document");
 
-				block_document($id_article, $id_document, $type, $titre, $descriptif,$date, $document, $album, $script);
+				block_document($id_article, $id_document, $type, $titre, $descriptif, $document, $album, $script, ($modifiable ? $date : 'non'));
 			// fin bloc titre + descriptif
 				echo fin_block();
 
@@ -820,9 +823,9 @@ entites_html($document['fichier'])."\" />\n";
 	}
 }
 
-function block_document($id, $id_document, $type, $titre, $descriptif, $date, $document, $album, $script="")
+function block_document($id, $id_document, $type, $titre, $descriptif, $document, $album, $script="", $date)
 {
-	global $connect_statut, $couleur_foncee, $options;
+	global  $couleur_foncee;
 
 	if ($type == "rubrique") {
 	  if ($script=="")
@@ -831,50 +834,9 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 	  if ($script=="")
 	  	$script = 'articles';
 	}
+
 	echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
-	
-	echo generer_url_post_ecrire($script, ($id?"id_$type=$id&":""), '', "#$album");
-	echo "<b>"._T('titre_titre_document')."</b><br />\n";
-	echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
-	echo "<input type='hidden' name='modif_document' value='oui' />";
-	echo "<input type='hidden' name='id_document' value='$id_document' />";
-	echo "<input type='hidden' name='show_docs' value='$id_document' />";
-
-	// modifier la date
-	if ( #$type == 'rubrique' AND  // (seulement dans les rubriques?)
-	    $options == "avancees" AND
-	    $connect_statut == '0minirezo') {
-		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
-						$mois = $regs[2];
-						$jour = $regs[3];
-						$annee = $regs[1];
-		}
-		echo "<b>"._T('info_mise_en_ligne')."</b><br />\n",
-			afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
-			afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
-			afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\""),
-		       "<br />\n";
-	}
-
-	// bloc descriptif (affiche ou hidden)
-	if ($options == "avancees") {
-		echo "<b>"._T('info_description')."</b><br />\n";
-		echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-		echo entites_html($descriptif);
-		echo "</textarea>\n";
-		
-		if ($options == "avancees")
-		  afficher_formulaire_taille($document);
-
-	} else {
-		echo "<input type='hidden' name='descriptif_document' value=\"".entites_html($descriptif)."\" />\n";
-				}
-
-	echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
-	echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
-	echo "</div>";
-	echo "</form>";
-
+	echo formulaire_modif_document($id_document, $titre, $descriptif, $document, $script, "id_$type=$id#$album", $date);
 
 	// bloc mettre a jour la vignette
 	echo "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: ".$GLOBALS['couleur_foncee']."; background-color: ".$GLOBALS['couleur_foncee'].";' />";
@@ -1228,30 +1190,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			echo "</div>";
 		}
 
-		echo generer_url_post_ecrire($GLOBALS['exec'],
-					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
-					     "",
-					     "#document$id_document");
-
-		echo "<b>"._T('entree_titre_document')."</b><br />\n";
-		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'
-	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"><br />\n";
-
-		if ($descriptif OR $options == "avancees") {
-			echo "<b>"._T('info_description_2')."</b><br />\n";
-			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'
-	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-			echo entites_html($descriptif);
-			echo "</textarea>\n";
-		}
-
-		if ($options == "avancees")
-			afficher_formulaire_taille($document, $type_inclus);
-
-		echo "\n<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
-		echo "<input type='submit' class='fondo' style='font-size:9px;' ' VALUE='"._T('bouton_enregistrer')."'>";
-		echo "</div>\n";
-		echo "</form>";
+		echo formulaire_modif_document($id_document, $titre, $descriptif, $document, '', "id_$type=$id#document$id_document");
 
 		// Bloc edition de la vignette
 		if ($options == 'avancees') {
@@ -1344,30 +1283,11 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		echo "\n<div class='verdana1' align='center'>",
 		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur)),
 		  "</div>\n";
-
-		echo generer_url_post_ecrire($GLOBALS['exec'],
-					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
-					     "",
-					     "#document$id_document");
-
+		
 		echo "<div class='verdana1' style='color: #999999; border: 1px solid #999999; padding: 5px; margin-top: 3px; text-align: left; background-color: #eeeeee;'>";
-		echo "<b>"._T('entree_titre_image')."</b><br />\n";
-		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br />";
-
-		if ($descriptif OR $options == "avancees") {
-			echo "<b>"._T('info_description_2')."</b><br />\n";
-			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' style='font-size:9px;' wrap='soft'>";
-			echo entites_html($descriptif);
-			echo "</textarea>\n";
-		}
-
-		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
-		echo "<input class='fondo' style='font-size: 9px;' type='submit' value='"._T('bouton_enregistrer')."'>";
-		echo "</div>";
-		echo "</div>";
-		echo "</form>";
-
-		echo "<center>";
+		echo formulaire_modif_document($id_document, $titre, $descriptif, $document, '', "id_$type=$id#document$id_document");
+		
+		echo "</div>\n<center>";
 
 		icone_horizontale (_T('icone_supprimer_image'), bouton_supprime_document_et_vignette($id, $type, $id_document, 'images'), "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
@@ -1389,52 +1309,63 @@ function teste_doc_deplie($id_document) {
 	return in_array($id_document, $deplies);
 }
 
+// Formulaire de description d'un document (titre, date etc)
+// Il faudrait l'utiliser en mode Ajax pour eviter de recharger
+// toute la page ou il se trouve (surtout si c'est un portfolio)
 
-// Mettre a jour la description du document postee par le redacteur
-// TODO: pour le moment cette fonction ne sait traiter qu'un document...
-function maj_documents ($id_objet, $type) {
-	global $_POST;
+function formulaire_modif_document($id_document, $titre, $descriptif, $document, $script='', $args='', $date='non')
+{
+	global $options;
 
-	if (!isset($_POST['modif_document'])) return;
+	if (!$script) $script = $GLOBALS['exec'];
 
-	$id_document = intval($_POST['id_document']);
+	if ($document['mode'] == 'vignette') {
 
-	// "securite" : verifier que le document est bien lie a l'objet
-	$result = spip_num_rows(spip_query("SELECT * FROM spip_documents_".$type."s WHERE id_document=".$id_document."	AND id_".$type." = " . intval($id_objet)));
-	if ($result) {
-		$titre_document = (corriger_caracteres($_POST['titre_document']));
-		$descriptif_document = (corriger_caracteres($_POST['descriptif_document']));
-
-			// taille du document (cas des embed)
-		if ($largeur_document = intval($_POST['largeur_document'])
-		AND $hauteur_document = intval($_POST['hauteur_document']))
-				$wh = ", largeur='$largeur_document',
-					hauteur='$hauteur_document'";
-		else $wh = "";
-
-		spip_query("UPDATE spip_documents SET titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
-
-			// Date du document (uniquement dans les rubriques)
-		if ($_POST['jour_doc']) {
-				if ($_POST['annee_doc'] == "0000")
-					$_POST['mois_doc'] = "00";
-				if ($_POST['mois_doc'] == "00")
-					$_POST['jour_doc'] = "00";
-				$date = $_POST['annee_doc'].'-'
-				.$_POST['mois_doc'].'-'.$_POST['jour_doc'];
-
-				if (preg_match('/^[0-9-]+$/', $date)) {
-					spip_query("UPDATE spip_documents SET date='$date' WHERE id_document=$id_document");
-
-					// Changement de date, ce qui nous oblige a :
-					calculer_rubriques();
-				}
-		}
-
-		// Demander l'indexation du document
-		include_spip('inc/indexation');
-		marquer_indexer('document', $id_document);
+	  $label = _T('entree_titre_image');
+	  $taille ='';
+	} else {
+	  $label = _T('entree_titre_document');
+	  $taille = (($options != "avancees") ? '' : afficher_formulaire_taille($document));
 	}
+
+	if ($date == 'non')
+	  $date = '';
+	else  {
+		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
+						$mois = $regs[2];
+						$jour = $regs[3];
+						$annee = $regs[1];
+		}
+		$date = "<b>"._T('info_mise_en_ligne')."</b><br />\n" .
+			afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+			afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+			afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		       "<br />\n";
+	}
+
+	$corps =
+	  "<b>$label</b><br />\n" .
+	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
+	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"><br />\n" .
+	  $date .
+	  (!($descriptif OR $options == "avancees") ? '' :
+	   ("<b>"._T('info_description_2')."</b><br />\n" .
+	    "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
+	    entites_html($descriptif) .
+	    "</textarea>\n")) .
+	  $taille .
+	  "\n<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>" .
+	   "<input type='submit' class='fondo' style='font-size:9px;' value='"._T('bouton_enregistrer')."'>" .
+	  "</div>\n";
+
+	return redirige_action_auteur("documenter", 
+		$id_document,
+		$script,
+		// id_document= est superflu pour articles, rubriques, breves
+		// mais les scripts introdruit par [5752] sont opaques
+		"id_document=$id_document&show_docs=$id_document&$args",
+		$corps,
+		" method='post'");
 }
 
 ?>
