@@ -39,7 +39,7 @@ function config_fonctions_dist()
 	debut_droite();
 	lire_metas();
 
-	echo "<form action='" . generer_url_ecrire("config-fonctions","") . "' method='post'>";
+	echo generer_url_post_ecrire('config-fonctions');
 	echo "<input type='hidden' name='changer_config' value='oui'>";
 
 //

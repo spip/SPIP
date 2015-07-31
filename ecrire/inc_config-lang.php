@@ -48,8 +48,8 @@ if ($changer_config == 'oui') {
 lire_metas();
 
 
-echo "<form action='" . generer_url_ecrire("config-lang","") . "' method='post'>";
-echo "<input type='hidden' name='changer_config' value='oui'>";
+ echo generer_url_post_ecrire('config-lang');
+ echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
 //

@@ -101,10 +101,7 @@ gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
 
-if ($id_rubrique > 0)
-	echo "<form action='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' method='post'>";
-else
-	echo "<form action='" . generer_url_ecrire("naviguer","") . "' method='post'>";
+ generer_url_post_ecrire("naviguer",($id_rubrique ? "id_rubrique=$id_rubrique" : ""));
 
 $titre = entites_html($titre);
 

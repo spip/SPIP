@@ -85,12 +85,11 @@ echo aide("motsgroupes");
 if ($connect_statut =="0minirezo"){
 	$type=entites_html(urldecode($type));
 	echo "<p><font face='Verdana,Arial,Sans,sans-serif'>";
-	echo "<form action='" . generer_url_ecrire("mots_tous","") . "' method='post'>\n";
+	echo generer_url_post_ecrire("mots_tous", "$id_groupe=$id_groupe");
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
-	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
 	debut_cadre_formulaire();
-	echo "<b>"._T('info_changer_nom_groupe')."</b><br>\n";
+	echo "<b>"._T('info_changer_nom_groupe')."</b><br />\n";
 	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\" $onfocus>\n";
 
 	if ($options == 'avancees' OR $descriptif) {

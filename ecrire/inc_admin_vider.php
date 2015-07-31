@@ -105,9 +105,7 @@ if ($quota_cache) {
  $hash = calculer_action_auteur("$action $arg");
 
  echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
-  "\n<form action='",
-  generer_url_public("spip_action.php"),
-  "' method='POST'>", 
+  "\n<form action='", generer_url_public("spip_action.php"), "' method='POST'>", 
   "\n<input type='hidden' name='action' value='$action' />",
   "\n<input type='hidden' name='arg' value='$arg' />",
   "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />", 
@@ -138,9 +136,7 @@ if ($quota_cache) {
  $arg = 'vignettes';
  $hash = calculer_action_auteur("$action $arg");
 
- echo   "\n<form action='",
-   generer_url_public("spip_action.php"),
-   "' method='POST'>",
+ echo   "\n<form action='", generer_url_public("spip_action.php"), "' method='POST'>",
    "\n<input type='hidden' name='action' value='$action' />",
    "\n<input type='hidden' name='arg' value='$arg' />",
    "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />",
@@ -174,10 +170,9 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	echo "\n<form action='" . generer_url_ecrire("admin_vider") . "' method='POST'>";
-	
 	$hash = calculer_action_auteur("purger_index");
-	
+
+	echo generer_url_post_ecrire("admin_vider");
 	echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash' />";
 	echo "\n<INPUT TYPE='hidden' NAME='purger_index' VALUE='oui' />";
 	echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_effacer_index')."\"></FORM></DIV>";

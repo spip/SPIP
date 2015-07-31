@@ -273,9 +273,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$lien = generer_url_public("spip_cookie", $args);
 	}
 
-	return "<form action='"
-	  . $lien
-	  . "' method='post' style='margin:0px; padding:0px;'>"
+	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
 	  . (!$cible ? '' : "<input type='hidden' name='url' value='".quote_amp($cible)."' />")
 	  . $texte
 	  . "<select name='$nom_select' "

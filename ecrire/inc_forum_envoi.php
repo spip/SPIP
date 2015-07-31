@@ -149,7 +149,7 @@ if ($modif_forum == "oui") {
 		echo "<p><a href='$url_site'>$nom_site</a>";
 	}
 
-	echo "<form action='" . generer_url_ecrire("forum_envoi","") . "' name='formulaire' method='post'>";
+	echo generer_url_post_ecrire('forum_envoi',"",'formulaire');
 	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='"._T('bouton_envoyer_message')."'></div>";
 
 	fin_cadre_thread_forum();
@@ -163,7 +163,7 @@ if ($modif_forum == "oui") {
 	}
 }
 else {
-	echo "<form action='" . generer_url_ecrire("forum_envoi","") . "' name='formulaire' method='post'>";
+	echo generer_url_post_ecrire('forum_envoi',"",'formulaire');
 }
 
 	echo "<div>&nbsp;</div>";
