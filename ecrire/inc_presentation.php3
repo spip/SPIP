@@ -1854,6 +1854,8 @@ function debut_droite($rubrique="") {
 
 	echo '<td width="'.$largeur.'" valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
+	// touche d'acces rapide au debut du contenu
+	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
 }
 
 
