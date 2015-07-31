@@ -61,6 +61,7 @@ define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
 define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
+
 // Le nom du fichier de personnalisation
 define('_NOM_CONFIG', 'mes_options');
 
@@ -112,6 +113,13 @@ $filtrer_javascript = 0;
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
 $type_urls = 'page';
+
+#la premiere date dans le menu deroulant de date de publication
+# null: automatiquement (affiche les 8 dernieres annees)
+# 0: affiche un input libre
+# 1997: le menu commence a 1997 jusqu'a annee en cours
+$debut_date_publication = null;
+
 
 
 //
