@@ -16,22 +16,17 @@ $articles_mots = lire_meta("articles_mots");
 
 if ($id_article==0) {
 	if ($new=='oui') {
+		$id_rubrique = intval($id_rubrique);
 		if ($titre=='') $titre = _T('info_sans_titre');
-		
-		if (lire_meta("multi_rubriques") == "oui") {
-			$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-			if ($row = spip_fetch_array($result_lang_rub)) {
-				$langue_new = $row["lang"];
-			}
-			$langue_choisie_new = 'non';
-		} else if ((lire_meta("multi_articles") == "oui") AND (ereg (",".$GLOBALS['auteur_session']['lang'].",", ",".lire_meta('multi_auth').","))) { // Verifier que la langue d'interface est autorisee
-			$langue_new = $GLOBALS['auteur_session']['lang'];
-			$langue_choisie_new = 'oui';
-		} else {
-			$langue_new = lire_meta('langue_site');
-			$langue_choisie_new = 'oui';
+
+		$langue_new = '';
+		$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+		if ($row = spip_fetch_array($result_lang_rub)) {
+			$langue_new = $row["lang"];
 		}
-		
+		if (!$langue_new) $langue_new = lire_meta('langue_site');
+		$langue_choisie_new = 'non';
+
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
 		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum, lang, langue_choisie) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
 		$id_article = spip_insert_id();
@@ -878,7 +873,7 @@ if ($creer_auteur AND $connect_statut=='0minirezo'){
 	$creer_auteur = addslashes($creer_auteur);
 	$query_creer = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$creer_auteur\", '1comite')";
 	$result_creer = spip_query($query_creer);
-	
+
 	$nouv_auteur = spip_insert_id();
 	$ajout_auteur = true;
 }
@@ -961,7 +956,7 @@ if ($cherche_auteur) {
 
 
 //
-// Appliquer les modifications sur les auteurs 
+// Appliquer les modifications sur les auteurs
 //
 
 if ($ajout_auteur && $flag_editable) {
@@ -1140,7 +1135,6 @@ if ($flag_editable AND $options == 'avancees') {
 fin_cadre_enfonce(false);
 
 
-
 //////////////////////////////////////////////////////
 // Liste des mots-cles de l'article
 //
@@ -1153,67 +1147,74 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 //
 // Langue de l'article
 //
-if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 'oui') AND (lire_meta('gerer_trad') == 'oui'))) {
+if ((lire_meta('multi_articles') == 'oui')
+	OR ((lire_meta('multi_rubriques') == 'oui') AND (lire_meta('gerer_trad') == 'oui'))) {
 
-	debut_cadre_enfonce();
-	
+	debut_cadre_enfonce('langues-24.gif');
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo bouton_block_invisible('languesarticle');
+	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
+	if (lire_meta('gerer_trad') == 'oui')
+		echo _T('titre_langue_trad_article');
+	else
+		echo _T('titre_langue_article');
+	echo "</B></FONT>";
+	echo "</TD></TR></TABLE>";
+
+	echo debut_block_invisible('languesarticle');
+
 	// Choix langue article
-	if (lire_meta('multi_articles') == 'oui' AND ($flag_editable)) {
-	
+	if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
 		if ($changer_lang) {
-			spip_log ("article $id_article = $changer_lang");
-		if ($changer_lang != "herit") {
+			if ($changer_lang != "herit")
 				spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
-			} else {
+			else {
 				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$langue_parent = $row['lang'];
 				spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
 			}
 		}
-	
+
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
 		$langue_article = $row['lang'];
 		$langue_choisie_article = $row['langue_choisie'];
-		
-		//echo "[$langue_article | $langue_choisie_article]";
-	
+
 		if ($langue_choisie_article == 'oui') $herit = false;
 		else $herit = true;
-	
-			debut_cadre_enfonce("langues-24.gif");
-			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-			echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
-			echo "</font></center>\n";
-			fin_cadre_enfonce();
-	}
 
+		debut_cadre_enfonce();
+		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
+		echo "</font></center>\n";
+		fin_cadre_enfonce();
+	}
 
 	// Gerer les groupes de traductions
 	if (lire_meta('gerer_trad') == 'oui') {
 		if ($flag_editable AND $supp_trad == 'oui') { // Ne plus lier a un groupe de trad
-			spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");	
-		
+			spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");
+
 			// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
 			$result_autres_trad= spip_query("SELECT COUNT(id_article) AS total FROM spip_articles WHERE id_trad = $id_trad");
 			if ($row = spip_fetch_array($result_autres_trad))
 				$nombre_autres_trad = $row["total"];
 			if ($nombre_autres_trad == 1)
-				spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_trad = $id_trad");	
-		
+				spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_trad = $id_trad");
+
 			$id_trad = 0;
 		}
-	
+
 		if ($connect_statut=='0minirezo' AND $id_trad_new > 0) { // Changer article de reference de la trad
 			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new WHERE id_trad = $id_trad_old");
 			$id_trad = $id_trad_new;
 		}
-	
+
 		if ($flag_editable AND $lier_trad > 0) { // Lier a un groupe de trad
 			$query_lier = "SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad";
 			$result_lier = spip_query($query_lier);
 			if ($row = spip_fetch_array($result_lier)) {
 				$id_lier = $row['id_trad'];
-			
+
 				if ($id_lier == 0) { // Si l'article vise n'a pas deja de traduction, creer nouveau id_trad
 					$nouveau_trad = $lier_trad;
 				}
@@ -1221,22 +1222,22 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 					if ($id_lier == $id_trad) $err = "<div>"._T('trad_deja_traduit')."</div>";
 					$nouveau_trad = $id_lier;
 				}
-			
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $lier_trad");	
-				if ($id_lier > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_lier");	
-				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");	
-				if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");	
-			
-			
+
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $lier_trad");
+				if ($id_lier > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_lier");
+				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");
+				if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
+
+
 				$id_trad = $nouveau_trad;
 			}
 			else
 				$err .= "<div>"._T('trad_article_inexistant')."</div>";
-		
+
 			if ($err) echo "<font color='red' size=2' face='verdana,arial,helvetica,sans-serif'>$err</font>";
 		}
-	
-	
+
+
 		if ($id_trad != 0) { // Afficher la liste des traductions
 			//$query_trad = "SELECT id_article, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad AND id_article!=$id_article";
 			$query_trad = "SELECT id_article, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
@@ -1247,7 +1248,7 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 				$titre_trad = $row["titre"];
 				$lang_trad = $row["lang"];
 				$statut_trad = $row["statut"];
-			
+
 				if ($ifond == 1) {
 					$ifond = 0;
 					$bgcolor = "ffffff";
@@ -1255,8 +1256,8 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 					$ifond = 1;
 					$bgcolor = $couleur_claire;
 				}
-			
-			
+
+
 				$ret .= "<tr bgcolor='$bgcolor'>";
 				$ret .= "<td width='7'>";
 				if ($statut_trad=='publie')
@@ -1272,7 +1273,7 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 				$ret .= "</td>";
 
 				$ret .= "<td width='12'>";
-	
+
 				if ($id_article_trad == $id_trad) {
 					$ret .= "<img src='img_pack/langues-12.gif' width='12' height='12' alt='' border='0'>";
 					$titre_trad = "<b>$titre_trad</b>";
@@ -1280,9 +1281,9 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 					if ($connect_statut=='0minirezo') $ret .= "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'><img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'></a>";
 					else $ret .= "<img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'>";
 				}
-			
+
 				$ret .= "</td>";
-			
+
 				$ret .= "<td class='arial2'>";
 				if ($id_article_trad == $id_article) $ret .= "$titre_trad";
 				else $ret .= "<a href='articles.php3?id_article=$id_article_trad'>$titre_trad</a>";
@@ -1291,7 +1292,7 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 
 				$ret .= "<td class='arial2'>".traduire_nom_langue($lang_trad)."</td>\n";
 			}
-		
+
 			if ($ret) {
 				debut_cadre_enfonce("traductions-24.gif");
 				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
@@ -1299,14 +1300,14 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 				echo $ret;
 				echo "<tr><td><img src='img_pack/rien.gif' height='3'></td></tr>";
 				echo "</table>";
-			
-			
+
+
 				echo debut_block_invisible("ne_plus_lier");
 				if ($flag_editable) {
 					$lien = $GLOBALS['clean_link'];
 					$lien->delVar($nom_select);
 					$lien = $lien->getUrl();
-				
+
 					echo "<div align='right'>";
 					echo "<table width='180' cellpadding='0' cellspacing='0' border='0'><tr><td>";
 					icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
@@ -1314,37 +1315,38 @@ if ((lire_meta('multi_articles') == 'oui') OR ((lire_meta('multi_rubriques') == 
 					echo "</div>";
 				}
 				echo fin_block();
-			
+
 				fin_cadre_enfonce();
 			}
 		}
-	
+
 		echo "<table width='100%'><tr>";
 		echo "<td valign='top' width='50%' class='arial2'>";
 		if ($flag_editable AND $options == "avancees") { // Formulaire pour lier a un article
-	
+
 			$lien = $GLOBALS['clean_link'];
 			$lien->delVar($nom_select);
 			$lien = $lien->getUrl();
-	
+
 			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
 			echo " <input type='text' class='fondl' name='lier_trad' size='10'>";
 			echo "<div align='right'><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
 			echo "</form>";
-	
+
 		}
 		echo "  </td>";
-	
+
 		echo "<td><img src='img_pack/rien.gif' width=10></td>";
 		echo "<td valign='top' width='50%'>";
 		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
-		echo "</td>";	
-		
-		echo "</tr></table>";
+		echo "</td>";
 
+		echo "</tr></table>";
 	}
-	
+
+	echo fin_block();
+
 	fin_cadre_enfonce();
 }
 

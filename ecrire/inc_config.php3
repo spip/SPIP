@@ -65,8 +65,7 @@ function init_config() {
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
-		'multi_auth' => $GLOBALS['all_langs']
-
+		'langues_multilingue' => $GLOBALS['all_langs']
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
@@ -169,7 +168,7 @@ function appliquer_modifs_config() {
 	}
 
 	if ($langues_auth) {
-		$GLOBALS['multi_auth'] = join($langues_auth,",");
+		$GLOBALS['langues_multilingue'] = join($langues_auth, ",");
 	}
 
 	if (isset($email_webmaster) AND email_valide($email_webmaster))
@@ -226,8 +225,7 @@ function appliquer_modifs_config() {
 		'multi_rubriques',
 		'multi_secteurs',
 		'gerer_trad',
-		'multi_auth'
-		
+		'langues_multilingue'
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
