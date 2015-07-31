@@ -158,6 +158,10 @@ H&#7891; s&#417; SPIP</a>.',
 
 // C
 'calendrier_synchro' => 'N&#7871;u b&#7841;n c&oacute; thi&#7871;t tr&iacute; nhu li&#7879;u nh&#7853;t k&yacute; t&#432;&#417;ng &#7913;ng v&#7899;i <b>iCal</b>, b&#7841;n c&oacute; th&#7875; &#273;&#7891;ng b&#7897; h&oacute;a n&oacute; v&#7899;i trang web.',
+'calendrier_synchro_lien' => 'Truy t&igrave;m h&#7891; s&#417; <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'L&#7883;ch ghi sau &#273;&acirc;y cho b&#7841;n s&#7917; d&#7909;ng ri&ecirc;ng m&agrave; th&ocirc;i. L&#7883;ch tr&igrave;nh b&aacute;o cho b&#7841;n bi&#7871;t nh&#7919;ng s&#7921; vi&#7879;c x&#7843;y ra tr&ecirc;n trang web n&agrave;y (vi&#7879;c l&agrave;m, h&#7865;n c&aacute; nh&acirc;n, b&agrave;i v&#7903; v&agrave; tin ng&#7855;n n&#7897;p v&agrave;o ...).',
+'calendrier_synchro_public' => 'L&#7883;ch tr&igrave;nh sau &#273;&acirc;y cho ph&eacute;p b&#7841;n theo d&otilde;i nh&#7919;ng s&#7921; vi&#7879;c c&ocirc;ng c&#7897;ng c&#7911;a trang web (b&agrave;i v&#7903; v&agrave; tin ng&#7855;n ph&aacute;t h&agrave;nh).',
+'calendrier_synchro_sync' => '&#272;&#7891;ng b&#7897; h&oacute;a h&#7891; s&#417; <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -339,6 +343,18 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 
 
 // I
+'ical_info1' => '<NEW> This page presents you with several methods to keep in contact with this site\'s activity.',
+'ical_info2' => '<NEW> For mure information, do not hesitate o visit <a href="http://www.spip.net/fr_suivi">SPIP\'s documentation</a>.',
+'ical_info_calendrier' => '<NEW> Two calendars are at your disposal. The first is a site map showing all the published articles. The second contains editorial annoucements as well as your latest private messages: it is reserved for you thanks to a personal key that you can modify at any time by renewing your password.',
+'ical_methode_http' => '<NEW> Downloading',
+'ical_methode_webcal' => '<NEW> Synchronization (webcal://)',
+'ical_texte_js' => '<NEW> A line of javascript allows to display,  very easily and in any site belonging to you, the most recent articles published on this site.',
+'ical_texte_prive' => '<NEW> This calendar, which is strictly personal, informs you of the private editorial ativity of this site (tasks, personal appointements, submitted articles and news items...).',
+'ical_texte_public' => '<NEW> This calendar allows you to follow the public activity of this site (published articles and news items).',
+'ical_texte_rss' => '<NEW> You can syndicate the latest news of this site in any XML/RSS (Rich Site Summary) files reader. This is also the format that allows SPIP to read the latest news published by other sites using a compatible format of exchange.',
+'ical_titre_js' => '<NEW> Javascript',
+'ical_titre_mailing' => '<NEW> Mailing-list',
+'ical_titre_rss' => '<NEW> &laquo;Backend&raquo; file',
 'icone_a_suivre' => 'N&#417;i b&#7855;t &#273;&#7847;u',
 'icone_activer_cookie' => 'D&ugrave;ng Cookie',
 'icone_admin_site' => 'Qu&#7843;n tr&#7883; website',
@@ -517,6 +533,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_comment_lire_tableau' => 'C&#225;ch &#273;&#7885;c &#273;&#7891; th&#7883; n&#224;y',
 'info_config_suivi' => 'N&#7871;u &#273;&#7883;a ch&#7881; n&agrave;y l&agrave; c&#7911;a m&#7897;t mailing list,  b&#7841;n cho bi&#7871;t &#273;&#7883;a ch&#7881; &#273;&#7875; ghi danh. &#272;&#7883;a ch&#7881; ghi danh c&oacute; th&#7875; l&agrave; URL (th&iacute; d&#7909; trang ghi danh qua web), hay &#273;&#7883;a ch&#7881; email c&oacute; ghi r&otilde; t&#7921;a &#273;&#7873; (subject). Th&iacute; d&#7909;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'B&#7841;n c&oacute; th&#7875; ghi danh v&agrave;o mailing list d&#432;&#7899;i &#273;&acirc;y, n&#7871;u b&#7841;n mu&#7889;n nh&#7853;n th&ocirc;ng tin c&aacute;c b&agrave;i &#273;&#432;&#7907;c n&#7897;p v&agrave;o trang web n&agrave;y.',
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'X&#225;c nh&#7853;n l&#7841;i m&#7853;t m&#227; m&#7899;i:',
 'info_connexion_base' => 'B&#432;&#7899;c th&#7913; nh&igrave;: <b>th&#7917; n&#7889;i v&agrave;o database</b>',
 'info_connexion_ldap_ok' => '<B>N&#7889;i v&agrave;o LDAP t&#7889;t &#273;&#7865;p.</b><p> B&#7841;n c&oacute; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
@@ -1495,15 +1512,7 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'trad_delier' => '&#272;&#7915;ng n&#7889;i b&agrave;i n&agrave;y qua b&#7843;n d&#7883;ch',
 'trad_lier' => 'B&agrave;i n&agrave;y l&agrave; b&#7843;n d&#7883;ch c&#7911;a b&agrave;i s&#7889;',
 'trad_new' => 'D&#7883;ch b&agrave;i n&agrave;y',
-'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Truy t&igrave;m h&#7891; s&#417; <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'L&#7883;ch ghi sau &#273;&acirc;y cho b&#7841;n s&#7917; d&#7909;ng ri&ecirc;ng m&agrave; th&ocirc;i. L&#7883;ch tr&igrave;nh b&aacute;o cho b&#7841;n bi&#7871;t nh&#7919;ng s&#7921; vi&#7879;c x&#7843;y ra tr&ecirc;n trang web n&agrave;y (vi&#7879;c l&agrave;m, h&#7865;n c&aacute; nh&acirc;n, b&agrave;i v&#7903; v&agrave; tin ng&#7855;n n&#7897;p v&agrave;o ...).',
-'calendrier_synchro_public' => 'L&#7883;ch tr&igrave;nh sau &#273;&acirc;y cho ph&eacute;p b&#7841;n theo d&otilde;i nh&#7919;ng s&#7921; vi&#7879;c c&ocirc;ng c&#7897;ng c&#7911;a trang web (b&agrave;i v&#7903; v&agrave; tin ng&#7855;n ph&aacute;t h&agrave;nh).',
-'calendrier_synchro_sync' => '&#272;&#7891;ng b&#7897; h&oacute;a h&#7891; s&#417; <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
-'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
+'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)'
 
 );
 

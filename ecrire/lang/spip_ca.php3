@@ -171,10 +171,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // C
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
-'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
-'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
-'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
-'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -368,6 +364,18 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 
 
 // I
+'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
+'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que anuncia tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
+'ical_methode_http' => 'Desc&agrave;rrega',
+'ical_methode_webcal' => 'Sincronitzaci&oacute; (webcal://)',
+'ical_texte_js' => 'Els articles publicats en aquest lloc poden ser mostrats f&agrave;cilment, en qualsevol lloc vostre, mitjan&ccedil;ant una l&iacute;nia de javascript. ',
+'ical_texte_prive' => 'Aquest calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
+'ical_texte_public' => 'Aquest calendari us permet de seguir l\'activitat p&uacute;blica d\'aquest lloc (articles i breus publicats).',
+'ical_texte_rss' => 'Podeu sindicar les novetats d\'aquest lloc en qualsevol lector de fitxers en format XML/RSS (Rich Site Summary). &Eacute;s tamb&eacute; el format que permet a SPIP llegir les novetats publicades en altres llocs utilitzant un format d\'intercanvi compatible. ',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Llista de correu',
+'ical_titre_rss' => 'Fitxer &laquo; backend &raquo;',
 'icone_a_suivre' => 'Novetats',
 'icone_activer_cookie' => 'Activar la galeta de correspond&egrave;ncia',
 'icone_admin_site' => 'Administraci&oacute; del lloc',
@@ -1598,7 +1606,14 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
-'trad_reference' => '(article de refer&egrave;ncia)'
+'trad_reference' => '(article de refer&egrave;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
+'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
+'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
+'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 

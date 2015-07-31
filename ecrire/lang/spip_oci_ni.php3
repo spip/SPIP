@@ -158,6 +158,10 @@ acceptat per toi lu navigadors, ma permete unicament que de faire veire li lenga
 
 // C
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i><br />(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -352,6 +356,18 @@ Merc&eacute; de la v&ograve;stra participacion
 
 
 // I
+'ical_info1' => 'Aquela p&agrave;gina m&ograve;stra de met&ograve;des diferents per restar en contacte emb la vida d\'aqueu sit.',
+'ical_info2' => 'Per aver mai d\'informacions sobre aquelas tecnicas, esitetz pas da consultar <a href="http://www.spip.net/fr_suivi">la documentacion de SPIP</a>.',
+'ical_info_calendrier' => 'I a doi calendiers a la v&ograve;stra disposicion. Lo promier es un plan dau sit qu\'anon&ccedil;a toi lu articles publicats. Lo segond conten li anon&ccedil;as editoriali en mai dei v&ograve;stres darri&egrave;rs messatges privats: vos es reservat gra&ccedil;as a una clau personala, que la pod&egrave;tz modificar en tot moment en renovant lo v&ograve;stre m&ograve;t de santa Clara.',
+'ical_methode_http' => 'Telecargament',
+'ical_methode_webcal' => 'Sincronisacion (webcal://)',
+'ical_texte_js' => 'Lu articles publicats en aqueu sit se p&ograve;don afichar aisit, dins toi lu sits v&ograve;stres, en far servir una linha javascript. ',
+'ical_texte_prive' => 'Aqueu calendier, d\'usatge estrictament personau, vos informa de l\'activitat editoriala privada d\'aqueu sit (&ograve;bras e rend&egrave;tz-vos personaus, articles e br&egrave;vas prepauats...).',
+'ical_texte_public' => 'Aqueu calendier vos permet de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'ical_texte_rss' => 'Pod&egrave;tz sindicar li noveutats d\'aqueu sit dins tot legidor de fichiers en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir li noveutats publicadi dins d\'autres sits en utilisar un format d\'escambi compatible. ',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Mailing_list',
+'ical_titre_rss' => 'Fichier &laquo;backend&raquo;',
 'icone_a_suivre' => 'Da seguir',
 'icone_activer_cookie' => 'Activar lo cookie de corresponden&ccedil;a',
 'icone_admin_site' => 'Administracion dau sit',
@@ -1172,7 +1188,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'module_fichiers_langues' => 'Fichiers de langa',
 'module_raccourci' => 'Escorcha',
 'module_texte_affiche' => 'T&egrave;xt afichat',
-'module_texte_explicatif' => 'Pod&egrave;tz inserir li acorchas seguenti dins li esqueletas dau v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins li diferenti lengas per las qualas exist&iacute;s un fichi&egrave;r de lenga.',
+'module_texte_explicatif' => 'Pod&egrave;tz inserir li escorchas seguenti dins li esqueletas dau v&ograve;stre sit public. Se revirar&agrave;n automaticament dins li diferenti lengas per las qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Aquest fichier de lenga &laquo;&nbsp;@module@&nbsp;&raquo; es disponible en&nbsp;:',
 'mois_non_connu' => 'non conoissut',
 
@@ -1608,14 +1624,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i><br />(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de referen&ccedil;a)'
 
 );
 

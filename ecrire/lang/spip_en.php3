@@ -170,10 +170,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => '<MODIF> If you install a diary application compatible with <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), you can synchronize it with the site\'s editorial activity.',
-'calendrier_synchro_lien' => 'Retrieving the file <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'The following calendar, which is strictly for personal use, informs you of the editorial activity of this site (tasks and personal appointements, articles and news items submited...).',
-'calendrier_synchro_public' => 'The following calendar allows you to follow the public activity of this site (published articles and news items).',
-'calendrier_synchro_sync' => 'Synchronizing the file <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -367,6 +363,18 @@ Thank you for your participation
 
 
 // I
+'ical_info1' => 'This page presents you with several methods to keep in contact with this site\'s activity.',
+'ical_info2' => 'For mure information, do not hesitate o visit <a href="http://www.spip.net/fr_suivi">SPIP\'s documentation</a>.',
+'ical_info_calendrier' => 'Two calendars are at your disposal. The first is a site map showing all the published articles. The second contains editorial annoucements as well as your latest private messages: it is reserved for you thanks to a personal key that you can modify at any time by renewing your password.',
+'ical_methode_http' => 'Downloading',
+'ical_methode_webcal' => 'Synchronization (webcal://)',
+'ical_texte_js' => 'A line of javascript allows to display,  very easily and in any site belonging to you, the most recent articles published on this site.',
+'ical_texte_prive' => 'This calendar, which is strictly personal, informs you of the private editorial ativity of this site (tasks, personal appointements, submitted articles and news items...).',
+'ical_texte_public' => 'This calendar allows you to follow the public activity of this site (published articles and news items).',
+'ical_texte_rss' => 'You can syndicate the latest news of this site in any XML/RSS (Rich Site Summary) files reader. This is also the format that allows SPIP to read the latest news published by other sites using a compatible format of exchange.',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Mailing-list',
+'ical_titre_rss' => '&laquo;Backend&raquo; file',
 'icone_a_suivre' => 'Launch pad',
 'icone_activer_cookie' => 'Place a cookie',
 'icone_admin_site' => 'Site administration',
@@ -435,7 +443,7 @@ Thank you for your participation
 'icone_sites_references' => 'Referenced sites',
 'icone_statistiques' => 'Site statistics',
 'icone_statistiques_visites' => 'Visits statistics',
-'icone_suivi_activite' => 'Follow-up of editorial activity',
+'icone_suivi_activite' => '<MODIF> Follow-up of editorial activity',
 'icone_suivi_actualite' => 'Site\'s evolution',
 'icone_suivi_forum' => 'Follow-up of public forum: @nb_forums@ contribution(s)',
 'icone_suivi_forums' => 'Follow-up/manage forums',
@@ -549,7 +557,7 @@ Thank you for your participation
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_comment_lire_tableau' => 'How to read this graphic',
 'info_config_suivi' => 'If this address corresponds to amailing-list, you can indicate below the address where the site participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address endowed with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'You can receive, by automated electronic mail, the announcements concerning the editorial activity of this site by subscribing to the following mailing list:',
+'info_config_suivi_explication' => '<MODIF> You can receive, by automated electronic mail, the announcements concerning the editorial activity of this site by subscribing to the following mailing list:',
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Second step: <B>Attempting to connect to database</B>',
 'info_connexion_ldap_ok' => '<B>Your LDAP connection succeeded.</B><P> You can go to the next step.',
@@ -1224,7 +1232,7 @@ requiring an FTP access to the Web site.',
 'module_raccourci' => 'Shortcut',
 'module_texte_affiche' => 'Displayed text',
 'module_texte_explicatif' => 'You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
-'module_texte_traduction' => 'This language file is available in:',
+'module_texte_traduction' => '<MODIF> This language file is available in:',
 'mois_non_connu' => 'unknown',
 
 
@@ -1677,6 +1685,10 @@ entered important modifications on the graphics or the structure of the site.',
 
 
 // PLUS_UTILISE
+'calendrier_synchro_lien' => 'Retrieving the file <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'The following calendar, which is strictly for personal use, informs you of the editorial activity of this site (tasks and personal appointements, articles and news items submited...).',
+'calendrier_synchro_public' => 'The following calendar allows you to follow the public activity of this site (published articles and news items).',
+'calendrier_synchro_sync' => 'Synchronizing the file <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'info_config_suivi_lien' => '<NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );
