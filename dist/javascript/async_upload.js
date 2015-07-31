@@ -96,8 +96,8 @@ function async_upload_icon(res) {
   res.find(">div").each(function(){
     var cont = $("#"+this.id);
     verifForm(cont.html($(this).html()));
-    cont.find("img[@onclick]").each(function(){this.onclick();})
-    $(".form_upload_icon").async_upload(async_upload_icon);
+    $("form.form_upload_icon",cont).async_upload(async_upload_icon);
+		cont.find("img[@onclick]").each(function(){this.onclick();});
   });
   return true;                     
 }
@@ -111,6 +111,7 @@ function async_upload_portfolio_documents(res){
       .append(self.clone().get());
     }
     verifForm(cont.html(self.html()));
+    $("form.form_upload",cont).async_upload(async_upload_portfolio_documents);
   });
   return true;             
 }
