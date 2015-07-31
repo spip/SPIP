@@ -53,7 +53,7 @@ function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 
 	 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
-		$row = sql_fetsel("titre, id_rubrique", "spip_articles", "id_article=$id_article");
+		$row = sql_fetsel("titre, id_rubrique, id_secteur", "spip_articles", "id_article=$id_article");
 
 		if ($row) {
 			$titre = $row["titre"];
@@ -63,7 +63,7 @@ function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($titre, "naviguer", "articles", $id_rubrique);
 
-		articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
+		articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article", $row);
 
 		echo $res;
 		echo fin_gauche(), fin_page();
@@ -72,7 +72,7 @@ function exec_articles_forum_args($id_article, $date, $debut, $pas, $enplus)
 }
 
 // http://doc.spip.org/@articles_forum_cadres
-function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args)
+function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args, $row=array())
 {
 	global $spip_lang_right, $spip_lang_left;
 
@@ -92,6 +92,8 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  "</p>";
 
 	$url = bouton_spip_rss('forums_public', array("id_article" => $id_article));
+
+    $url = str_replace('page=rss', 'page=rss&amp;id_rubrique=' . $row['id_secteur'], $url);
 
 	echo "<div style='text-align: $spip_lang_right;'>", $url, "</div>";
 
