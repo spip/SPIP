@@ -591,7 +591,7 @@ function calculer_balise_logo ($p) {
 			$code_lien = "''";
 		$code_lien .= ", '". addslashes($align) . "'";
 	}
-
+	$code_lien .= ",'logo $type_objet ' . $_id_objet";
 	// cas des documents
 	if ($type_objet == 'DOCUMENT') {
 		$code_logo = "calcule_document($_id_objet, '" .
