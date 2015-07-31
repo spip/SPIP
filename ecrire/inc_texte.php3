@@ -224,7 +224,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "<form action=\"get\"><textarea readonly='readonly' cols='40' wrap='off' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "</p><form action=\"get\"><textarea readonly='readonly' cols='40' wrap='off' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form><p class=\"spip\">";
 		}
 		else
 		if ($regs[12]) {
@@ -233,7 +233,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = ereg_replace("\r", "\n", $lecode);
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			
-			$les_echap[$num_echap] = propre($lecode);
+			$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
 		}
 
 		$pos = strpos($letexte, $regs[0]);
