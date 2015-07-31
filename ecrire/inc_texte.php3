@@ -470,12 +470,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	//
 	// Raccourcis liens
 	//
-	$regexp = "\[([^][]*)->([^]]*)\]";
+	$regexp = "\[([^][]*)->(>?)([^]]*)\]";
 	$texte_a_voir = $letexte;
 	$texte_vu = '';
 	while (ereg($regexp, $texte_a_voir, $regs)){
 		$lien_texte = $regs[1];
-		$lien_url = trim($regs[2]);
+		$ouvrant = ($regs[2] == '>');
+		$lien_url = trim($regs[3]);
 		$compt_liens++;
 		$lien_interne = false;
 		if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site)? *([[:digit:]]+)$', $lien_url, $match)) {
@@ -548,7 +549,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 				$lien_url = "mailto:".trim($lien_url);
 		}
 
-		$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\">".typo($lien_texte)."</a>";
+		$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
+			.($ouvrant ? " target='_blank'" : '')
+			.">".typo($lien_texte)."</a>";
 		$zetexte = split($regexp,$texte_a_voir,2);
 
 		// typo en-dehors des notes
