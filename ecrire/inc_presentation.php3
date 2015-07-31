@@ -1944,9 +1944,22 @@ function fin_html() {
 function fin_page($credits='') {
 	global $spip_version_affichee;
 	global $connect_id_auteur;
-
+	global $multi_popup;
 
 	echo "</td></tr></table>";
+
+	// ici le javascript des popup multilingues.
+	if ($multi_popup) {
+		echo "<script type='text/javascript'><!-- \n";
+		echo "function openmulti(i) {\n";
+		echo "textes_multi = new Array;\n";
+		echo $multi_popup;
+		echo "alert (textes_multi[i]);
+			// afficher le texte i dans une fenetre du type
+			// http://www.dynamicdrive.com/dynamicindex11/abox.htm
+		}\n";
+		echo "// --></script>\n";
+	}
 
 	debut_grand_cadre();
 
