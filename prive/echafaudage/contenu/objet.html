@@ -6,7 +6,7 @@
 		[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|et{#OBJET|objet_info{editable}}|oui)
 
 			[(#ID_OBJET|afficher_qui_edite{#OBJET}|non)
-				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET,edit,right ajax preload})]
+				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{[(#OBJET|objet_info{texte_modifier}|_T)],#OBJET|objet_info{icone_objet},edit,right ajax preload})]
 			]
 			[(#ID_OBJET|afficher_qui_edite{#OBJET}|oui)
 				[(#ID_OBJET|generer_url_ecrire_entite_edit{#OBJET}|icone_verticale{#ID_OBJET|afficher_qui_edite{#OBJET},warning-24,'',right ajax preload})]
