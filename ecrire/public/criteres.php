@@ -681,18 +681,28 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 
 	$boucles[$idb]->in .= $x;
 
-	// inserer la negation (cf !...)
-	if ($crit2==='NOT')
-		$op = '=';
+	// l'ecriture de type FIELD ... vise a trier implicitement par l'ordre des valeurs listees dans IN x,y,z
+	// mais cela n'a aucune utilite si c'est un !IN ou si un order est deja present
+	// prendre en compte la condition {order ...} revient a differencier 
+	// {xx IN ...}{order xxx} et {order xxx}{xxx IN ...}
+	// ce qui peut etre source de confusion.
+	// Il faudrait y revenir avec une solution qui ne depende pas de l'ordre des criteres
+	if ($crit2==='NOT' OR $boucles[$idb]->order)
+		return "sql_in('$arg',$var".($crit2==='NOT'?",'NOT'":"").")";
 	else {
-		if (!$crit2)$boucles[$idb]->default_order[] = "'cpt$cpt'";
-		$op = '<>';
-	} 
-
-	$arg = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
-	if ($crit2 !== 'COND')
-		$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
-	return array("'$op'", $arg, 0);
+		// inserer la negation (cf !...)
+		if ($crit2==='NOT')
+			$op = '=';
+		else {
+			if (!$crit2)$boucles[$idb]->default_order[] = "'cpt$cpt'";
+			$op = '<>';
+		} 
+	
+		$arg = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
+		if ($crit2 !== 'COND')
+			$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
+		return array("'$op'", $arg, 0);
+	}
 }
 
 
