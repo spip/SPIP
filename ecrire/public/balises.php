@@ -1357,23 +1357,26 @@ function balise_ACTION_FORMULAIRE($p){
  * @param unknown_type $p
  * @return unknown
  */
-function balise_BOUTON_ACTION_dist($p){
-
-	$_label = interprete_argument_balise(1,$p);
-	if (!$_label) $_label="''";
-
-	$_url = interprete_argument_balise(2,$p);
-	if (!$_url) $_url="''";
-
-	$_class = interprete_argument_balise(3,$p);
-	if (!$_class) $_class="''";
-
-	$_confirm = interprete_argument_balise(4,$p);
-	if (!$_confirm) $_confirm="''";
-
-	$p->code = "bouton_action($_label, $_url, $_class, $_confirm)";
-	$p->interdire_scripts = false;
-	return $p;
-}
+// function balise_BOUTON_ACTION_dist($p){
+// 
+// 	$_label = interprete_argument_balise(1,$p);
+// 	if (!$_label) $_label="''";
+// 
+// 	$_url = interprete_argument_balise(2,$p);
+// 	if (!$_url) $_url="''";
+// 
+// 	$_class = interprete_argument_balise(3,$p);
+// 	if (!$_class) $_class="''";
+// 
+// 	$_confirm = interprete_argument_balise(4,$p);
+// 	if (!$_confirm) $_confirm="''";
+// 
+// 	$_title = interprete_argument_balise(5,$p);
+// 	if (!$_title) $_title="''";
+// 
+// 	$p->code = "bouton_action($_label, $_url, $_class, $_confirm, $_title)";
+// 	$p->interdire_scripts = false;
+// 	return $p;
+// }
 
 ?>
