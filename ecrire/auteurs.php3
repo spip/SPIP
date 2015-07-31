@@ -207,7 +207,7 @@ while ($i++ < $debut AND each($auteurs));
 
 // ici commence la vraie boucle
 debut_cadre_relief('auteur-24.gif');
-echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH='100%' class='arial2'>\n";
+echo "<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
 echo "<td width='20'>";
 	$img = "<img src='img_pack/admin-12.gif' alt='' border='0'>";
@@ -233,8 +233,8 @@ echo "</td><td>";
 echo "</td></tr>\n";
 
 if ($nombre_auteurs > $max_par_page) {
-	echo "<tr bgcolor='white'><td colspan='".($options == 'avancees' ? 5 : 3)."'>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+	echo "<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
+	//echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 		if ($j > 0) echo " | ";
 
@@ -250,20 +250,20 @@ if ($nombre_auteurs > $max_par_page) {
 		}
 
 	}
-	echo "</font>";
+	//echo "</font>";
 	echo "</td></tr>\n";
 
 	if (($tri == 'nom' OR !$tri) AND $options == 'avancees') {
 		// affichage des lettres
-		echo "<tr bgcolor='white'><td colspan='5'>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+		echo "<tr bgcolor='white'><td class='arial11' colspan='5'>";
+//		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		while (list($key,$val) = each($lettre)) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
 				echo "<a href=$retour&debut=$val>$key</a> ";
 		}
-		echo "</font>";
+//		echo "</font>";
 		echo "</td></tr>\n";
 	}
 	echo "<tr height='5'></tr>";
@@ -274,14 +274,14 @@ if ($nombre_auteurs > $max_par_page) {
 while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	// couleur de ligne
 	$couleur = ($i % 2) ? '#FFFFFF' : $couleur_claire;
-	echo "<tr bgcolor='$couleur'>";
+	echo "<tr style='background-color: #eeeeee;'>";
 
 	// statut auteur
-	echo "<td>";
+	echo "<td style='border-top: 1px solid #cccccc;'>";
 	echo bonhomme_statut($row);
 
 	// nom
-	echo '</td><td>';
+	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
 	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['statut']=='0minirezo' AND $rub_restreinte[$row['id_auteur']])
@@ -290,7 +290,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
 	// contact
 	if ($options == 'avancees') {
-		echo '</td><td>';
+		echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
 		if ($row['messagerie'] != 'non' AND $row['login']
 		AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
 			echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
@@ -301,13 +301,13 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 				echo "&nbsp;";
 
 		if (strlen($row['url_site'])>3)
-			echo "</td><td><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
+			echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
 		else
-			echo "</td><td>&nbsp;";
+			echo "</td><td style='border-top: 1px solid #cccccc;'>&nbsp;";
 	}
 
 	// nombre d'articles
-	echo '</td><td>';
+	echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
 	if ($row['compteur'] > 1)
 		echo $row['compteur']."&nbsp;"._T('info_article_2');
 	else if($row['compteur'] == 1)
@@ -337,7 +337,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		echo "</form>";
 		//echo "<a href='$retour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
 	}
-	echo "</td><td align='right'>";
+	echo "</td><td style='text-align: $spip_lang_right'>";
 	if ($debut_suivant < $nombre_auteurs) {
 		$link = new Link;
 		$link->addVar('debut', $debut_suivant);
