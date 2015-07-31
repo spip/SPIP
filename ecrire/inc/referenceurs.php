@@ -44,7 +44,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 			}
 
 			if ($tmp) {
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"").referes($referermd5);
+			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":""). ($args ? '' : referes($referermd5));
 			} else {
 				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
 				$lesliensracine[$numero] += $visites;
@@ -100,7 +100,8 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 						if (!strpos($lien, '</a>')) $lien .= '</a>';
 					} else
 						$lien = "<a href='http://".$dom."'>".$dom."</a>";
-					$aff .= "<b>".quote_amp($lien)."</b>".referes($referermd5);
+					$aff .= "<b>".quote_amp($lien)."</b>"
+					  . ($args ? '' : referes($referermd5));
 				}
 			}
 			$aff .= "</li>\n";
