@@ -380,6 +380,7 @@ function navigation_pagination($num_rows, $nb_aff=10, $href=null, $on='', $tmp_v
 	return $texte;
 }
 
+// http://doc.spip.org/@generer_onclic_ajax
 function generer_onclic_ajax($url, $idom, $val)
 {
 	return "\nonclick=\"return charger_id_url('"

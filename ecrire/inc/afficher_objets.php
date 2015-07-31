@@ -381,6 +381,7 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 // Stocke la fonction ajax dans le fichier temp pour exec=memoriser
 //
 
+// http://doc.spip.org/@sauver_requete
 function sauver_requete($titre, $requete, $formater)
 {
 	$r = $requete;
@@ -454,6 +455,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, 
 	return ajax_action_greffe($tmp_var, '', $res);
 }
 
+// http://doc.spip.org/@afficher_boutons_tri
 function afficher_boutons_tri($url, $tmp_var)
 {
 	static $monter = '';
