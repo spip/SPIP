@@ -1037,8 +1037,10 @@ function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 	// interdire la creation d'une nouvelle base, 
 	// sauf si on est dans l'installation
 	if (!is_file($f = _DIR_DB.$db.'.sqlite')
-	    && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL))
+	    && (!defined('_ECRIRE_INSTALL') || !_ECRIRE_INSTALL)){
+		spip_log("Il est interdit de creer la base $db", 'sqlite.'._LOG_HS);
 		return false;
+	}
 
 	// se connecter a la base indiquee
 	// avec les identifiants connus
