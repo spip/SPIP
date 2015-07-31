@@ -124,15 +124,21 @@ function critere_inverse_dist($idb, &$boucles, $param, $not) {
 
 // {traduction}
 // http://www.spip.net/@traduction
+//   (id_trad>0 AND id_trad=id_trad(precedent))
+//    OR id_article=id_article(precedent)
 function critere_traduction_dist($idb, &$boucles, $param, $not) {
 	$boucle = &$boucles[$idb];
 	if ($param == 'traduction') {
-		$boucle->where[] = $boucle->id_table.".id_trad > 0";
-		$boucle->where[] = $boucle->id_table.".id_trad ='\"."
-		. calculer_argument_precedent($idb, 'id_trad',
-			$boucles)
-		. ".\"'";
-
+		$boucle->where[] = "((".$boucle->id_table.".id_trad > 0 AND "
+			. $boucle->id_table.".id_trad ='\"."
+			. calculer_argument_precedent($idb, 'id_trad',
+				$boucles)
+			. ".\"')
+		OR
+			(" . $boucle->id_table.".".$boucle->primary." ='\"."
+			. calculer_argument_precedent($idb, $boucle->primary,
+				$boucles)
+			. ".\"'))";
 	} else
 		return array(_T('info_erreur_squelette'), $param);
 }
