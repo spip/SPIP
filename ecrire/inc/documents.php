@@ -576,9 +576,18 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 
-	if (!_DIR_RESTREINT AND !$vignette_de_doc)
+	if (!_DIR_RESTREINT AND !$vignette_de_doc) {
 		$dir_ftp = determine_upload();
-	else $dir_ftp = '';
+		// quels sont les docs accessibles en ftp ?
+		$l = texte_upload_manuel($dir_ftp, $inclus, $mode);
+		// s'il n'y en a pas, on affiche un message d'aide
+		// en mode document, mais pas en mode vignette
+		if ($l OR ($mode == 'document'))
+			$dir_ftp = afficher_transferer_upload($type, $l);
+		else
+			$dir_ftp = '';
+	}
+
 
 	$res = "<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
 		"\n\t\t<div align='" .
@@ -602,12 +611,8 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 			$res = $res . $milieu;
 	}
 
-	$res = $debut . ($intitule ? "<span>$intitule</span><br />" : '') .$res;
-
-	if ($dir_ftp) {
-		$l = texte_upload_manuel($dir_ftp,$inclus, $mode);
-		$res .= afficher_transferer_upload($type, $l);
-	}
+	$res = $debut . ($intitule ? "<span>$intitule</span><br />" : '')
+		. $res . $dir_ftp;
 
 	// Lien document distant, jamais en mode image
 	if ($test_distant) {
