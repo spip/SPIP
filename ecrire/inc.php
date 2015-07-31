@@ -7,16 +7,18 @@
 		return;
 	} else {
 		define('_COMPATIBLE_SPIP_LAB', 1);
-		include('inc_version.php3');
 
-		// Pour l'instant ne connait que ecrire/
+		// Appel depuis un fichier d'affichage (articles_version.php)
+		if (!defined('_ECRIRE_INC_VERSION')) {
+			include('inc.php3');
+		}
+
+		// Appel depuis un fichier librairie
 		function include_spip($fichier) {
 			global $dir_ecrire;
 
 			switch ($fichier) {
 				case 'ecrire.php':
-					global $spip_version;
-					include('inc.php3');
 					break;
 				default:
 					// charger la version spip-lab si presente
