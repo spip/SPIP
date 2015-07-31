@@ -270,7 +270,6 @@ ecrire/xml/valider.php -text
 local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
-prive/cfg.html -text
 prive/echafaudage/contenu/objet.html -text
 prive/echafaudage/contenu/objet_edit.html -text
 prive/echafaudage/contenu/objet_edit.sans_rubrique.html -text
@@ -805,6 +804,7 @@ prive/squelettes/inclure/admin_vider_images.html -text
 prive/squelettes/inclure/admin_vider_images_fonctions.php -text
 prive/squelettes/inclure/barre-nav.html -text
 prive/squelettes/inclure/barre-nav_fonctions.php -text
+prive/squelettes/inclure/cfg.html -text
 prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
