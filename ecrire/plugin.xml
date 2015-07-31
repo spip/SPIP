@@ -303,9 +303,6 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<pipeline><nom>post_boucle</nom><action></action></pipeline>
 	<pipeline><nom>post_image_filtrer</nom><action></action></pipeline>
 	<pipeline><nom>pre_propre</nom>
-		<action>traiter_poesie</action>
-	</pipeline>
-	<pipeline><nom>pre_propre</nom>
 		<action>traiter_retours_chariots</action>
 	</pipeline>
 	<pipeline><nom>pre_liens</nom>
