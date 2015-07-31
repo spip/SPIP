@@ -37,6 +37,7 @@ function formulaires_configurer_identite_verifier_dist(){
 	
 	return $erreurs;
 }
+
 function formulaires_configurer_identite_traiter_dist(){
 	include_spip('inc/config');
 	$adresse_site = isset($GLOBALS['meta']['adresse_site'])?$GLOBALS['meta']['adresse_site']:'';
