@@ -57,10 +57,12 @@ function inc_puce_statut_dist($id_objet, $statut, $id_parent, $type, $ajax=false
 	static $f_puce_statut = array();
 	$type = objet_type($type);
 	// cas prioritaire : fonction perso, qui permet aussi de gerer les cas historiques
-	if (!isset($f_puce_statut[$type]) OR is_null($f_puce_statut[$type]))
+	if (!isset($f_puce_statut[$type]) OR is_null($f_puce_statut[$type])) {
 		$f_puce_statut[$type] = charger_fonction($type,'puce_statut',true);
-	if ($f_puce_statut[$type])
+	}
+	if ($f_puce_statut[$type]) {
 		return $f_puce_statut[$type]($id_objet, $statut, $id_parent, $type, $ajax, $menu_rapide);
+	}
 
 	// si statut_image trouve quelque chose (et '' est quelque chose)
 	// composer une puce, avec si possible changement rapide
@@ -69,8 +71,9 @@ function inc_puce_statut_dist($id_objet, $statut, $id_parent, $type, $ajax=false
 	}
 
 	// sinon fausse puce avec le type de l'image
-	else
+	else {
 		return http_img_pack("$type-16.png",'');
+	}
 }
 
 /**
