@@ -16,25 +16,38 @@ include_ecrire ("inc_barre.php3");
 include_ecrire ("inc_forum.php3");
 
 
-if ($modif_forum != "oui") $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
-$nom = addslashes(corriger_caracteres($connect_nom));
+if ($modif_forum != "oui")
+	$titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
+
+$nom = corriger_caracteres($connect_nom);
 $adresse_retour = rawurldecode($adresse_retour);
 
 if ($valider_forum AND ($statut!='')) {
-	$titre_message = addslashes(corriger_caracteres($titre_message));
-	$texte = addslashes(corriger_caracteres($texte));
-	$query = "INSERT 
-		INTO spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
-		"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
+	$titre_message = corriger_caracteres($titre_message);
+	$texte = corriger_caracteres($texte);
+	$query = "INSERT INTO spip_forum
+	(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,
+	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,
+	id_message, id_syndic)
+	VALUES ('".texte_script($titre_message)."',
+	'".texte_script($texte)."', NOW(),
+	'".texte_script($nom_site)."',
+	'".texte_script($url_site)."',
+	'".texte_script($statut)."',
+	$connect_id_auteur,
+	'".texte_script($nom)."',
+	'$connect_email',
+	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',
+	'$id_message', '$id_syndic')";
 	$result = spip_query($query);
 
 	calculer_threads();
 
 	if ($id_message > 0) {
-		$query = "UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'";
+		$query = "UPDATE spip_auteurs_messages SET vu = 'non'
+			WHERE id_message='$id_message'";
 		$result = spip_query($query);
 	}
-
 	redirige_par_entete($adresse_retour);
 }
 
@@ -155,11 +168,11 @@ if ($statut != 'perso' AND $options == "avancees") {
 	echo "<B>"._T('info_lien_hypertexte')."</B><BR>";
 	echo _T('texte_lien_hypertexte')."<BR>";
 	echo _T('texte_titre_02')."<BR>";
-	echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"$nom_site\" SIZE='40'><BR>";
+	echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"".entites_html($nom_site)."\" SIZE='40'><BR>";
 
 	$lien_url="http://";
 	echo _T('info_url')."<BR>";
-	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
+	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"".entites_html($url_site)."\" SIZE='40'><P>";
 }
 
 echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_voir_message')."'></div>";
