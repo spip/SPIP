@@ -365,7 +365,6 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	  { $op = '=';
 	    $col = $crit->op;
 	    $val = $crit->op;
-	    spip_log("op: $val");
 	    // Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 	    if ($val == 'lang')
 	      $val = array('$GLOBALS[\'spip_lang\']');
@@ -396,11 +395,25 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	      $col = $match3[2];
 	      $fct = $match3[1];
 	    }
-
+	    // compatibilite ancienne version
+	    if ($op == 'IN'){
+	      $deb = $params[0][0];
+	      $k = count($params)-1;
+	      $last = $params[$k];
+	      $j = count($last)-1;
+	      $last = $last[$j];
+	      $n = strlen($last->texte);
+	      if (($deb->texte[0] == '(') &&
+		  ($last->texte[$n-1] == ')'))
+		{
+		  $params[0][0]->texte = substr($deb->texte,1);
+		  $params[$k][$j]->texte = substr($last->texte,0,$n);
+		}
+	    }
 	    $val = array();
-	    foreach ($params as $param)
+	    foreach ($params as $param) {
 	      $val[] = calculer_liste($param, array(), $boucles, $idb);
-	    spip_log("vol0: $val[0]");
+	    }
 	  }
 
 	  // cas special: statut=
@@ -408,7 +421,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	  // a la boucle de mettre ses propres criteres de statut
 	  // http://www.spip.net/@statut (a documenter)
 	if ($col == 'statut')
-		  $result->where['statut'] = '1';
+		  $boucle->where['statut'] = '1';
 
 	if ($s = calculer_critere_externe($boucle, $id_field,$col, $type))
 		$col_table = $s;
@@ -532,17 +545,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		  $col = "$col_table." . substr($col,1,-1);
 		else $col = "$col_table.$col";
 	}
-	spip_log("'$op'");
 	if (strtoupper($op) == 'IN') {
 	  // traitement special d'une suite de valeurs
 	  foreach ($val as $k => $v) {
-	    spip_log("IN '$v'");
 	    if (!ereg("^$", $v))
-	  // il manque le addslashes mais il faut d'abord eliminer la chaine
-	      // vide qui vient 
 	      $val[$k] = "\n'\" . addslashes(" . ($v) . ") . \"'";
 	  }
 	  $val = join(', ',$val);
+
 	  if (!ereg("^ *\(.*) *$", $val)) $val = "($val)";
 	  $where = "$col IN $val";
 	  if ($crit->not) {

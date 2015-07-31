@@ -381,7 +381,6 @@ function phraser_criteres($params, &$result) {
 			    $crit->cond = $m[2];
 			    if ($m[1] == 'lang_select') $crit->op = $m[1];
 		  } elseif (preg_match("/^([!]?)[[:space:]]*([a-z_]+)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
-
 		  // contient aussi les comparaisons implicites !
 			    array_shift($v);
 			    if ($m[4])
