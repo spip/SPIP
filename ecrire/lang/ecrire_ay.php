@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Lurt\'awit sutix jark\'ata',
 'erreur_plugin_nom_manquant' => 'Jan utjawi plugin ukan sutipa',
 'erreur_plugin_prefix_manquant' => 'Sutinakat ch\'usawj pluguin ukat jan qhanstata',
-'erreur_plugin_tag_plugin_absent' => 'Janiw utjkiti <plugin> qhanstayawin q\'ipita',
+'erreur_plugin_tag_plugin_absent' => 'Janiw utjkiti &lt;plugin&gt; qhanstayawin q\'ipita',
 'erreur_plugin_version_manquant' => 'Pluguin ukat uñjata jan utjkiti',
 
 // F

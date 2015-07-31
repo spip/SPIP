@@ -196,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione interdetta',
 'erreur_plugin_nom_manquant' => 'Nome di plugin inesistente',
 'erreur_plugin_prefix_manquant' => 'Spaziu per u nome di u plugin indefinitu',
-'erreur_plugin_tag_plugin_absent' => '<plugin> inesistente in u schedariu di definizione',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inesistente in u schedariu di definizione',
 'erreur_plugin_version_manquant' => 'Versione di u plugin inesistente',
 
 // F

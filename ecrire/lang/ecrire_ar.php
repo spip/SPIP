@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoi_message_02' => 'بعث برسالة',
 'bouton_envoyer_message' => 'صيغة نهائية : إرسال',
 'bouton_fermer' => 'إغلاق',
-'bouton_forum_petition' => 'المنتدى والعرائض', # MODIF
+'bouton_forum_petition' => 'المنتدى والعرائض',
 'bouton_mettre_a_jour_base' => 'تحديث قاعدة البيانات',
 'bouton_modifier' => 'تغيير',
 'bouton_pense_bete' => 'مذكرة للاستخدام الشخصي',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'اسم دالة غير مسموح به:',
 'erreur_plugin_nom_manquant' => 'اسم الملحق غير الموجود',
 'erreur_plugin_prefix_manquant' => 'حقل تسمية الملحق غير محدد',
-'erreur_plugin_tag_plugin_absent' => '&lt;ملحق&gt; غير موجود في ملف الاعداد',
+'erreur_plugin_tag_plugin_absent' => '<ملحق> غير موجود في ملف التعريف',
 'erreur_plugin_version_manquant' => 'اصدار الملحق غير موجود',
 
 // F
@@ -1047,7 +1047,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_compacter_avertissement' => 'حذار من تفعيل هذه الخيارات خلال تطوير الموقع: فالعناصر المضغوطة سوف تفقد مقروئيتها.',
 'texte_compacter_script_css' => 'يستطيع SPIP ضغط رموز جافاسكريبت واوراق الأنماط ليخزنها في ملفات ثابتة، مما يسرّع عرض الموقع.',
 'texte_compatibilite_html' => 'يمكنك الطلب من SPIP إنتاج علامات متوافقة مع مقياس <i>HTML4</i> في الموقع العمومي او السماح له باستخدام إمكانات مقياس <i>HTML5</i> الأحدث.',
-'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code>&lt;!DOCTYPE html&gt;</code>.',
+'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة، ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
 'texte_compresseur_page' => 'يستطيع SPIP، وبشكل آلي، ضغط كل صفحة يعرضها على
 زوار الموقع. ويتيح هذا الخيار تحسين تدفق البيانات (فيصبح

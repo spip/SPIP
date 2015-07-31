@@ -74,7 +74,7 @@ französischen SPIP-Dokumentation</a>.',
 'bouton_envoi_message_02' => 'NACHRICHT SENDEN',
 'bouton_envoyer_message' => 'Nachricht fertig: Senden',
 'bouton_fermer' => 'Schließen',
-'bouton_forum_petition' => 'FORUM + PETITION', # MODIF
+'bouton_forum_petition' => 'FORUM + PETITION',
 'bouton_mettre_a_jour_base' => 'Datenbank updaten',
 'bouton_modifier' => 'Ändern',
 'bouton_pense_bete' => 'PERSÖNLICHER MERKZETTEL',
@@ -167,7 +167,7 @@ französischen SPIP-Dokumentation</a>.',
 'entree_infos_perso' => 'Wer sind Sie?',
 'entree_interieur_rubrique' => 'In der Rubrik:',
 'entree_liens_sites' => '<b>Hyperlink</b> (Quelle, Website zum Thema ...)',
-'entree_login' => 'Ihr Login-Name',
+'entree_login' => 'Ihr Login',
 'entree_login_connexion_1' => 'Login für die Verbindung',
 'entree_login_connexion_2' => '(Dieser entspricht häufig Ihrem FTP-Login, bleibt in manchen Fällen leer)',
 'entree_login_ldap' => 'LDAP Basis-Login',
@@ -191,14 +191,14 @@ französischen SPIP-Dokumentation</a>.',
 'erreur_plugin_nom_fonction_interdit' => 'Unzulässiger Funktionsname',
 'erreur_plugin_nom_manquant' => 'Name des Plugin fehlt',
 'erreur_plugin_prefix_manquant' => 'Namespace des Plugin nicht definiert',
-'erreur_plugin_tag_plugin_absent' => '<Plugin> fehlt in der Definitionsdatei',
+'erreur_plugin_tag_plugin_absent' => 'fehlt in der Definitionsdatei', # modif
 'erreur_plugin_version_manquant' => 'Version des Plugin fehlt',
 
 // F
 'forum_info_original' => 'Original',
 
 // H
-'htaccess_a_simuler' => 'Achtung: Ihr HTTP-Server ist so konfiguriert, daß er @htaccess@ Dateien ignoriert. Eine sichere Konfiguration des Servers erzielen sie, indem sie diese Einstellung ändern, oder indem sie die @Konstanten@ in der Datei mes_options.php so setzen, daß die Verzeichnisse außerhalb des @document_root@ liegen.', # MODIF
+'htaccess_a_simuler' => 'Achtung: Ihr HTTP-Server ist so konfiguriert, daß er @htaccess@ Dateien ignoriert. Eine sichere Konfiguration des Servers erzielen sie, indem sie diese Einstellung ändern, oder indem sie die Konstanten  @constantes@ in der Datei mes_options.php so setzen, daß die Verzeichnisse außerhalb des @document_root@ liegen.',
 'htaccess_inoperant' => 'htaccess unwirksam',
 
 // I
@@ -319,7 +319,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_aucun_breve' => 'Keine Meldung',
 'info_aucun_message' => 'Keine Nachricht',
 'info_aucun_mot_cle' => 'Kein Schlagwort',
-'info_aucun_rubrique' => 'Keine Rubrik', # MODIF
+'info_aucun_rubrique' => 'Keine Rubrik',
 'info_aucun_site' => 'Keine Website',
 'info_aucun_visiteur' => 'Kein Besucher',
 'info_aujourdhui' => 'heute: ',
@@ -459,8 +459,8 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_liens_syndiques_6' => 'ist',
 'info_liens_syndiques_7' => 'warten auf Freigabe',
 'info_liste_redacteurs_connectes' => 'Liste der zur Zeit angemeldeten Redakteure',
-'info_login_existant' => 'Dieser Login-Name ist bereits vergeben.',
-'info_login_trop_court' => 'Login-Name zu kurz.',
+'info_login_existant' => 'Dieses Login ist bereits vergeben.',
+'info_login_trop_court' => 'Login zu kurz.',
 'info_logos' => 'Die Logos',
 'info_maximum' => 'Maximum:',
 'info_meme_rubrique' => 'In der gleichen Rubrik',
@@ -716,7 +716,7 @@ in einer Farbe, die den Status anzeigt :',
 'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
 'install_extension_mbstring' => 'SPIP funktioniert nicht mit:',
 'install_extension_php_obligatoire' => 'SPIP benötigt die Dateierweiterung php:',
-'install_login_base_hebergeur' => 'Vom Provider zugeteilte Login-Daten',
+'install_login_base_hebergeur' => 'Vom Provider zugeteiltes Login',
 'install_nom_base_hebergeur' => 'Name der vom Provider zugewiesenen Datenbank:',
 'install_pas_table' => 'Datenbank zur Zeit ohne Tabellen',
 'install_pass_base_hebergeur' => 'Vom Provider zugeteiltes Passwort',
@@ -994,7 +994,7 @@ in einer Farbe, die den Status anzeigt :',
 'texte_compacter_avertissement' => 'Achtung: Bitte aktivieren Sie diese Option nicht während der Entwicklung Ihrer Site. Die komprimierten Elemente verlieren dadurch ihre Lesbarkeit.',
 'texte_compacter_script_css' => 'SPIP kann Javascripte und CSS Stilvorlagen komprimieren. Dadurch wird die Anzeigegeschwindigkeit der Website erhöht.',
 'texte_compatibilite_html' => 'Sie können SPIP so einstellen, daß die öffentlichen Seiten in <i>HTML4</i> erstellt werden, oder in <i>HTML5</i> mit seinen erweiterten Leistungsmerkmalen.',
-'texte_compatibilite_html_attention' => 'Die Verwendung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code>&lt;!DOCTYPE html&gt;</code>.',
+'texte_compatibilite_html_attention' => 'Die Verwendung von <i>HTML5</i> ist völlig ungefährlich, nur müssen ihre Seiten dann mit der folgenden Zeile beginnen, um der HTML-Norm zu entsprechen: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 'texte_compresseur_page' => 'SPIP kann alle Seiten, die zum Besucher übertragen werden
 komprimieren.Diese Einstellung ermöglicht es, Bandbreite zu sparen (Die
@@ -1214,9 +1214,9 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_article_inexistant' => 'Es gibt keinen Artikel mit dieser Nummer.',
 'trad_article_traduction' => 'Alle Fassungen dieses Artikels:',
 'trad_deja_traduit' => 'Fehler: Dieser Artikel kann nicht mit der gewünschten Nummer verknüpft werden.',
-'trad_delier' => 'Artikel nicht mehr mit diesen Übersetzungen verbinden', # MODIF
+'trad_delier' => 'Nicht mehr mit diesen Übersetzungen verbinden',
 'trad_lier' => 'Dieser Artikel ist eine Übersetzung des Artikels Nummer ',
-'trad_new' => 'Neue Übersetzung dieses Artikels beginnen', # MODIF
+'trad_new' => 'Neue Übersetzung beginnen',
 
 // U
 'upload_fichier_zip' => 'ZIP-Datei',

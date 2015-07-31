@@ -196,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'Functienaam verboden',
 'erreur_plugin_nom_manquant' => 'Naam van de ontbrekende plugin',
 'erreur_plugin_prefix_manquant' => 'Ruimte van plugin naam is niet bepaalde ',
-'erreur_plugin_tag_plugin_absent' => '<plugin> ontbreekt in het definitiebestand',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ontbreekt in het definitiebestand',
 'erreur_plugin_version_manquant' => 'Versie van de ontbrekende plugin',
 
 // F

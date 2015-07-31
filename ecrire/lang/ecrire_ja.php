@@ -195,7 +195,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name', # NEW
 'erreur_plugin_nom_manquant' => 'Missing plugin name', # NEW
 'erreur_plugin_prefix_manquant' => 'Plugin\'s namespace undefined', # NEW
-'erreur_plugin_tag_plugin_absent' => '<plugin> missing in the definition file', # NEW
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file', # NEW
 'erreur_plugin_version_manquant' => 'Missing version of the plugin', # NEW
 
 // F

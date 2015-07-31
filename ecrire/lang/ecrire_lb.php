@@ -188,7 +188,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',
 'erreur_plugin_nom_manquant' => 'Num vum Plugin fehlt',
 'erreur_plugin_prefix_manquant' => 'Namespace vum Plugin nët definéiert',
-'erreur_plugin_tag_plugin_absent' => '<plugin> fehlt am Definitiouns-Fichier',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; fehlt am Definitiouns-Fichier',
 'erreur_plugin_version_manquant' => 'Versioun vum Plugin fehlt',
 
 // F

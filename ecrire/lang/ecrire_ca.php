@@ -68,8 +68,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'bouton_envoi_message_02' => 'ENVIAR UN MISSATGE',
 'bouton_envoyer_message' => 'Missatge definitiu : enviar',
 'bouton_fermer' => 'Tancar',
-'bouton_forum_petition' => 'FÒRUM &amp; PETICIÓ', # MODIF
-'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+'bouton_forum_petition' => 'FÒRUM &amp; PETICIÓ',
+'bouton_mettre_a_jour_base' => 'Actualització de la base de dades',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'RECORDATORI D\'ÚS PERSONAL',
 'bouton_radio_activer_messagerie' => 'Activar la missatgeria',
@@ -192,14 +192,14 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'erreur_plugin_nom_fonction_interdit' => 'Nom de funció prohibit',
 'erreur_plugin_nom_manquant' => 'Falta el nom del connector',
 'erreur_plugin_prefix_manquant' => 'Espai de nom del connector no definit',
-'erreur_plugin_tag_plugin_absent' => 'falta el &lt;connector&gt; al fitxer de definició',
+'erreur_plugin_tag_plugin_absent' => 'falta el &lt;plugin&gt; al fitxer de definició',
 'erreur_plugin_version_manquant' => 'Falta la versió del connector',
 
 // F
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Advertiment: la configuració del vostre servidor HTTP no té en compte els fitxers @htaccess@. Per garantir-vos una bona seguretat, heu de modificar aquesta configuració en aquest punt, o bé fer que les constants @constantes@ (es defineixen al fitxer mes_options.php) tinguin el valor de directoris a fora de @document_root@.', # MODIF
+'htaccess_a_simuler' => 'Advertiment: la configuració del vostre servidor HTTP no té en compte els fitxers @htaccess@. Per garantir-vos una bona seguretat, heu de modificar aquesta configuració en aquest punt, o bé fer que les constants @constantes@ (es defineixen al fitxer mes_options.php) tinguin com a valor els directoris a fora de @document_root@.',
 'htaccess_inoperant' => 'htaccess inoperant',
 
 // I
@@ -320,7 +320,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_aucun_breve' => 'Cap breu',
 'info_aucun_message' => 'Cap missatge',
 'info_aucun_mot_cle' => 'Cap paraula clau',
-'info_aucun_rubrique' => 'Cap secció', # MODIF
+'info_aucun_rubrique' => 'Cap secció',
 'info_aucun_site' => 'Cap lloc',
 'info_aucun_visiteur' => 'Cap visitant',
 'info_aujourdhui' => 'avui:',
@@ -436,7 +436,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
  a l\'espai públic del lloc (fòrums per subscripció).',
 'info_generation_miniatures_images' => 'Generació de miniatures d\'imatges',
 'info_gerer_trad' => 'Gestionar els enllaços de traducció?',
-'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+'info_gerer_trad_objets' => '@objets@ : administrar els enllaços de traducció',
 'info_groupe_important' => 'Grup important',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns proveïdors d\'hostatge desactiven l\'enviament automàtic de correus electrònics des dels seus servidors. En aquest cas, les següents funcions d\'SPIP no funcionen. ',
 'info_hier' => 'ahir:',
@@ -496,7 +496,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_multi_cet_article' => 'Idioma d\'aquest article:',
 'info_multi_langues_choisies' => 'Seleccioneu a continuació els idiomes a disposició dels redactors del vostre lloc.
   Els idiomes ja utilitzats en el vostre lloc (visualitzats en primer lloc) no es poden desactivar.',
-'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+'info_multi_objets' => '@objets@ : activar el menú de llengua',
 'info_multi_rubriques' => 'Activar el menú d\'idioma a les seccions?',
 'info_multi_secteurs' => '... només per les seccions situades a l\'arrel?',
 'info_nb_articles' => '@nb@ articles',
@@ -698,7 +698,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_tout_site6' => '<b>Atenció:</b> només es mostren els articles originals.
 Les traduccions estan associades a l\'original,
 amb un color que indica el seu estat:',
-'info_traductions' => 'Traductions', # NEW
+'info_traductions' => 'Traduccions',
 'info_travail_colaboratif' => 'Treball col·lectiu en els articles',
 'info_un_article' => 'un article,',
 'info_un_mot' => 'Una sola paraula a la vegada',
@@ -1008,7 +1008,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 'texte_compacter_avertissement' => 'Estigueu alerta de no activar aquestes opcions durant el desenvolupament del vostre lloc: els elements compactats perdent tota llegibilitat. ',
 'texte_compacter_script_css' => 'SPIP pot compactar els scripts javascript i els fulls d\'estil CSS, per enregistrar-los a dins dels fitxers estàtics; això accelera la presentació del lloc Web.',
 'texte_compatibilite_html' => 'Podeu demanar a SPIP que produeixi, al lloc públic, codi compatible amb la norma <i>HTML4</i>, o permetre-li utilitzar les possibilitats més modernes de l\'<i>HTML5</i>.',
-'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code>&lt;!DOCTYPE html&gt;</code>.',
+'texte_compatibilite_html_attention' => 'No hi ha cap risc activant la opció <i>HTML5</i>, però si ho feu, les pàgines del vostre lloc, si voleu que siguin vàlides, hauran de començar per la següent menció: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(açò pot ser comprimit o no)',
 'texte_compresseur_page' => 'SPIP pot comprimir automàticament cada pàgina que envia als visitants del lloc Web. Aquest reglatge permet optimitzar l\'ample de banda (el lloc és més ràpid darrere una connexió més lenta), però demana més potència al sevidor.',
 'texte_compte_element' => ' @count@ element',
@@ -1239,9 +1239,9 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'trad_article_inexistant' => 'No existeix cap article que porte aquest número.',
 'trad_article_traduction' => 'Totes les versions d\'aquest article:',
 'trad_deja_traduit' => 'Error: impossible enllaçar aquest article amb el número demanat.',
-'trad_delier' => 'No enllaçar aquest article amb aquestes traduccions', # MODIF
+'trad_delier' => 'No enllaçar amb aquestes traduccions',
 'trad_lier' => 'Aquest article és una traducció de l\'article número:',
-'trad_new' => 'Escriure una nova traducció d\'aquest article', # MODIF
+'trad_new' => 'Escriure una nova traducció',
 
 // U
 'upload_fichier_zip' => 'Fitxer ZIP',

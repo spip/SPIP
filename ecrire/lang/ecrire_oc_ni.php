@@ -187,7 +187,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'erreur_plugin_nom_fonction_interdit' => 'Nom de foncion proïbit',
 'erreur_plugin_nom_manquant' => 'Nom du plugin mancant',
 'erreur_plugin_prefix_manquant' => 'Espaci de nomatge dau plugin non definit',
-'erreur_plugin_tag_plugin_absent' => '<plugin> mancant dins lo fichier de definicion',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancant dins lo fichier de definicion',
 'erreur_plugin_version_manquant' => 'Pas de version dau plugin',
 
 // F
