@@ -56,8 +56,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@spip_cron
 function spip_cron($taches = array()) {
 	$t = time();
-	if (@file_exists(_FILE_MYSQL_OUT)
-	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
+	if (@file_exists(_DIR_TMP.'mysql_out')
+	AND ($t - @filemtime(_DIR_TMP.'mysql_out') < 300))
 		return;
 
 	include_spip('inc/meta');

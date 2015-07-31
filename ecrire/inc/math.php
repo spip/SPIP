@@ -36,10 +36,9 @@ function image_math($tex) {
 	}
 
 	// Regarder dans le repertoire local des images TeX et blocs MathML
-
-	if (!@is_dir(_DIR_TeX))
-		@mkdir (_DIR_TeX, _SPIP_CHMOD);
-	$fichier = _DIR_TeX .md5(trim($tex)).$ext;
+	if (!@is_dir($dir_tex = _DIR_IMG_TMP.'cache-TeX/'))
+		@mkdir ($dir_tex, _SPIP_CHMOD);
+	$fichier = $dir_tex .md5(trim($tex)).$ext;
 	
 
 	if (!@file_exists($fichier)) {
