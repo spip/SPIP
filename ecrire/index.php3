@@ -20,7 +20,7 @@ if($options != 'avancees') {
 function enfant($collection){
 	global $les_enfants;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
-	$result2 = mysql_query($query2);
+	$result2 = spip_query($query2);
 	
 	while($row=mysql_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
@@ -58,7 +58,7 @@ function enfant($collection){
 
 function sous_enfant($collection2){
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
-	$result3 = mysql_query($query3);
+	$result3 = spip_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
