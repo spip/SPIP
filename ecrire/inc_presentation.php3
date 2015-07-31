@@ -1108,6 +1108,13 @@ function barre_onglets($rubrique, $onglet){
 	if ($rubrique == "config_lang") {
 		onglet(_T('info_langue_principale'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
 		onglet(_T('info_multilinguisme'), "config-multilang.php3", "multi", $onglet, "traductions-24.gif");
+		if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
+	
+		}
+
+		
+
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1490,6 +1497,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else if ($rubrique == "administration") {
 		icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
+
 		bandeau_barre_verticale();
 		if ($options == "avancees") {
 			icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);

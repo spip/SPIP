@@ -14,18 +14,13 @@ function mySel($varaut,$variable){
 	return $retour;
 }
 
+lire_metas();
 
 debut_page(_T('titre_page_config_contenu'), "administration", "langues");
 
 echo "<br><br><br>";
 gros_titre(_T('info_langues'));
 
-barre_onglets("config_lang", "multi");
-
-
-debut_gauche();
-
-debut_droite();
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -39,7 +34,17 @@ if ($changer_config == 'oui') {
 	calculer_langues_rubriques();
 }
 
-lire_metas();
+
+barre_onglets("config_lang", "multi");
+
+
+debut_gauche();
+
+	
+	
+debut_droite();
+
+
 
 
 echo "<form action='config-multilang.php3' method='post'>";
