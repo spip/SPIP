@@ -6,13 +6,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'Home page del sito',
+'accueil_site' => 'Home page',
 'articles' => 'Articoli',
 'articles_auteur' => 'Articoli di questo autore',
-'articles_populaires' => 'Articoli pi&ugrave; popolari',
+'articles_populaires' => 'Articoli pi&ugrave; letti',
 'articles_recents' => 'Articoli pi&ugrave; recenti',
 'articles_rubrique' => 'Articoli di questa rubrica',
-'aucun_article' => 'Non ci sono articoli in questo indirizzo',
+'aucun_article' => 'Non ci sono articoli a questo indirizzo',
 'aucun_auteur' => 'Non ci sono autori a questo indirizzo',
 'aucun_site' => 'Non ci sono siti a questo indirizzo',
 'aucune_breve' => 'Non ci sono brevi a questo indirizzo',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // E
-'edition_mode_texte' => 'Edizioni in modo testo di',
+'edition_mode_texte' => 'Versione solo testo di',
 'en_reponse' => 'In risposta a:',
 'en_resume' => 'Riassunto',
 'envoyer_message' => 'Invia un messaggio',
@@ -62,13 +62,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Dello stesso autore',
-'meme_rubrique' => 'Nella medesima rubrica',
-'memes_auteurs' => 'Dei medesimi autori',
+'meme_rubrique' => 'Nella stessa rubrica',
+'memes_auteurs' => 'Degli stessi autori',
 'message' => 'Messaggio',
 'messages_forum' => 'Messaggi del forum',
 'messages_recents' => 'Messaggi pi&ugrave; recenti del forum',
 'mots_clefs' => 'Parole chiave',
-'mots_clefs_meme_groupe' => 'Parole chiave nel medesimo gruppo',
+'mots_clefs_meme_groupe' => 'Parole chiave nello stesso gruppo',
 
 
 // N
@@ -82,16 +82,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'di ',
-'participer_site' => '&Egrave; possibile partecipare alla vita di questo sito e proporre i propri articoli iscrivendovi qui sotto. Verr&agrave; spedita immediatamente una email con il codice di accesso all\'area riservata del sito.',
+'participer_site' => '&Egrave; possibile partecipare alla vita di questo sito e proporre i propri articoli iscrivendosi qui sotto. Verr&agrave; spedita immediatamente un email con il codice di accesso all\'area riservata del sito.',
 'plan_site' => 'Mappa del sito',
 'popularite' => 'Popolarit&agrave;',
-'poster_message' => 'Invia un messaggio',
+'poster_message' => 'Inviare un messaggio',
 
 
 // R
-'repondre_article' => 'Rispondere a questo articolo',
+'repondre_article' => 'Rispondere all\'articolo',
 'repondre_breve' => 'Rispondere a questa breve',
-'repondre_message' => 'Rispondi a questo messaggio',
+'repondre_message' => 'Rispondere al messaggio',
 'resultats_recherche' => 'Risultati della ricerca',
 'retour_debut_forums' => 'Ritorna all\'inizio dei forum',
 'rubrique' => 'Rubrica',
@@ -102,7 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'signatures_petition' => 'Firme',
 'site_realise_avec_spip' => 'Sito realizzato con SPIP',
 'sites_web' => 'Siti Web',
-'sous_rubriques' => 'Sotto-rubriche',
+'sous_rubriques' => 'Sottorubriche',
 'suite' => 'segue',
 'sur_web' => 'Sul Web',
 'syndiquer_rubrique' => 'Mettere in syndication questa rubrica',
@@ -110,8 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'texte_lettre_information' => 'Questa &egrave; la lettera di informazioni del sito',
-'texte_lettre_information_2' => 'Questa lettera recensisce gli articoli e le brevi pubblicati a partire da',
+'texte_lettre_information' => 'Newsletter del sito',
+'texte_lettre_information_2' => 'Questa lettera recensisce gli articoli e le brevi pubblicati a partire dal',
 
 
 // V
