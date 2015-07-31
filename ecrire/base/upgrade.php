@@ -45,7 +45,7 @@ function base_upgrade_dist($titre='', $reprise='')
 	// supprimer quelques fichiers temporaires qui peuvent se retrouver invalides
 	spip_unlink(_DIR_TMP.'plugin_xml.cache');
 	spip_unlink(_DIR_SESSIONS.'ajax_fonctions.txt');
-	spip_unlink(_DIR_TMP.'charger_pipelines.php');
+	spip_unlink(_CACHE_PIPELINES);
 	spip_unlink(_CACHE_RUBRIQUES);
 	spip_unlink(_CACHE_PLUGINS_OPT);
 	spip_unlink(_CACHE_PLUGINS_FCT);
