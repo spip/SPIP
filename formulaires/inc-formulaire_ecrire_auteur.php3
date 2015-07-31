@@ -45,7 +45,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
 	$id = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
-spip_log("id formulaire = $id, "._request("valide".$id));
+	#spip_log("id formulaire = $id, "._request("valide".$id));
 	$sujet = _request('sujet_message_auteur'.$id);
 	$texte = _request('texte_message_auteur'.$id);
 	$adres = _request('email_message_auteur'.$id);

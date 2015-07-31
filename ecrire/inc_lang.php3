@@ -42,7 +42,7 @@ function charger_langue($lang, $module = 'spip') {
 			include_lang($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
-			spip_log("module de langue : ${module}_$l.php3");
+			#spip_log("module de langue : ${module}_$l.php3");
 		}
 	}
 

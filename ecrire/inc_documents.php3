@@ -325,11 +325,13 @@ function fichiers_upload($dir) {
 	$d = opendir($dir);
 
 	while ($f = readdir($d)) {
-		if (is_file("$dir/$f") AND $f != 'remove.txt') {
+		if (is_file("$dir/$f") AND is_readable("$dir/$f")
+		AND $f != 'remove.txt') {
 			$fichiers[] = "$dir/$f";
 		}
 		else
-		if (is_dir("$dir/$f") AND $f != '.' AND $f != '..') {
+		if (is_dir("$dir/$f") AND is_readable("$dir/$f")
+		AND $f != '.' AND $f != '..') {
 			$fichiers_dir = fichiers_upload("$dir/$f");
 			while (list(,$f2) = each ($fichiers_dir))
 				$fichiers[] = $f2;
