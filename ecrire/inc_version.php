@@ -263,6 +263,7 @@ $spip_pipeline = array(
 	'afficher_fiche_objet'=>'',
 	'afficher_config_objet' => '',
 	'afficher_contenu_objet' => '',
+	'afficher_nombre_objets_associes_a' => '',
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
