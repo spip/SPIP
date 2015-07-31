@@ -1810,12 +1810,18 @@ function replace($texte, $expression, $replace='', $modif="UimsS") {
 // cherche les documents numerotes dans un texte traite par propre()
 // et affecte les doublons['documents']
 // http://doc.spip.org/@traiter_doublons_documents
+// http://doc.spip.org/@traiter_doublons_documents
 function traiter_doublons_documents(&$doublons, $letexte) {
-	if (strstr($letexte, 'spip_document_') // evite le preg_match_all si inutile
+
+	// Verifier dans le texte & les notes (pas beau, helas)
+	$t = $letexte.$GLOBALS['les_notes'];
+
+	if (strstr($t, 'spip_document_') // evite le preg_match_all si inutile
 	AND preg_match_all(
 	',<[^>]+\sclass=["\']spip_document_([0-9]+)[\s"\'],imsS',
-	$letexte, $matches, PREG_PATTERN_ORDER))
+	$t, $matches, PREG_PATTERN_ORDER))
 		$doublons['documents'] .= "," . join(',', $matches[1]);
+
 	return $letexte;
 }
 
