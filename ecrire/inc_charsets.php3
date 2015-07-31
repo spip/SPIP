@@ -220,7 +220,7 @@ function html2unicode($texte) {
 		$texte = substr($texte,$a-1);
 		if (eregi('^&([a-z][a-z0-9]+);',$texte,$match)) {
 			if ($s = $GLOBALS['CHARSET'][$trans][$match[1]])
-				$texte = ereg_replace($match[0], $s, $texte);
+				$texte = str_replace($match[0], $s, $texte);
 		}
 		// avancer d'un cran
 		$traduit .= $texte[0];
@@ -286,7 +286,7 @@ function unicode2charset($texte, $charset='AUTO') {
 				$traduit .= substr($texte,0,$a-1);
 				$texte = substr($texte,$a-1);
 				if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
-					$texte = ereg_replace($match[0], chr($s), $texte); 
+					$texte = str_replace($match[0], chr($s), $texte); 
 				// avancer d'un cran
 				$traduit .= $texte[0];
 				$texte = substr($texte,1);
@@ -386,7 +386,7 @@ function unicode_to_utf_8($texte) {
 		else if($num<32768) $s = chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
 		else if($num<2097152) $s = chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
 		else $s = '';
-		$texte = ereg_replace($regs[0], $s, $texte);
+		$texte = str_replace($regs[0], $s, $texte);
 	}
 	return $texte;
 }
