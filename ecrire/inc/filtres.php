@@ -38,7 +38,7 @@ function chercher_filtre_mime($mime){
 	// cas du sous-type MIME sans filtre associe, passer au type:
 	// si filtre_text_plain pas defini, passe a filtre_text
 	if (!$f AND $nom!==$mime) 
-		$f = chercher_filtre(preg_replace('/\W.*$/','', $filtre));
+		$f = chercher_filtre(preg_replace('/\W.*$/','', $mime));
 	return $f?$f:'';
 }
 
