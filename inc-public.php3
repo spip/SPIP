@@ -75,8 +75,6 @@ if (defined("_INC_PUBLIC")) {
 	}
 
 	// Passer la main au debuggueur le cas echeant 
-	// (depuis le forcage du recalcul du squelette, 
-	// inc-calcul doit le faire avant: ce code me semble inutile)
 	if ($var_mode == 'debug') {
 		include_ecrire("inc_debug_sql.php3");
 		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
