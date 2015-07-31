@@ -2636,4 +2636,24 @@ function wrap($texte,$wrap) {
 	}
 	return $texte;
 }
+
+
+// afficher proprement n'importe quoi
+// en cas de table profonde, l'option $join ne s'applique qu'au plus haut niveau
+// c'est VOULU !  Exemple : [(#VALEUR|print{<hr />})] va afficher de gros blocs
+// separes par des lignes, avec a l'interieur des trucs separes par des virgules
+function filtre_print_dist($u, $join=', ') {
+	if (is_string($u))
+		return typo($u);
+
+	if (is_array($u))
+		return join($join, array_map('filtre_print_dist', $u));
+
+	if (is_object($u))
+		return join($join, array_map('filtre_print_dist', (array) $u));
+
+	return $u;
+}
+
+
 ?>
