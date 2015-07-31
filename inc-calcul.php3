@@ -272,6 +272,8 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 		case 'articles':
 			if ($descriptif)
 				return propre($descriptif);
+			else if (substr($chapo, 0, 1) == '=')	// article virtuel
+				return '';
 			else
 				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500))));
 			break;
@@ -280,6 +282,12 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 			break;
 		case 'forums':
 			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+			break;
+		case 'rubriques':
+			if ($descriptif)
+				return propre($descriptif);
+			else
+				return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
 			break;
 	}
 }
