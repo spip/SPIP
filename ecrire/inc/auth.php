@@ -628,7 +628,7 @@ function lire_php_auth($login, $pw, $serveur=''){
 	if (!$row) {
 		if (spip_connect_ldap($serveur)
 		AND $auth_ldap = charger_fonction('ldap', 'auth', true))
-			return $auth_ldap($login, $pw, $serveur);
+			return $auth_ldap($login, $pw, $serveur, true);
 		return false;
 	}
 	// su pas de source definie
@@ -639,7 +639,7 @@ function lire_php_auth($login, $pw, $serveur=''){
 
 	$auteur='';
 	if ($auth)
-		$auteur = $auth($login, $pw, $serveur);
+		$auteur = $auth($login, $pw, $serveur, true);
 	// verifier que ce n'est pas un message d'erreur
 	if (is_array($auteur) AND count($auteur))
 		return $auteur;

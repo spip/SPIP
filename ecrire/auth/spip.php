@@ -19,9 +19,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $login
  * @param string $pass
  * @param string $serveur
+ * @param bool $phpauth
  * @return array|bool
  */
-function auth_spip_dist ($login, $pass, $serveur='') {
+function auth_spip_dist ($login, $pass, $serveur='', $phpauth=false) {
 
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
@@ -68,7 +69,8 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	if (!$row) return array();
 
 	// fait tourner le codage du pass dans la base
-	if ($shanext) {
+	// sauf si phpauth : cela reviendrait a changer l'alea a chaque hit, et aucune action verifiable par securiser_action()
+	if ($shanext AND !$phpauth) {
 
 		include_spip('inc/acces'); // pour creer_uniqid
 		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext,$serveur,'text'), 'alea_futur' => sql_quote(creer_uniqid(),$serveur,'text')), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass,$serveur,'text').', '.sql_quote($md5pass,$serveur,'text').')','',$serveur);

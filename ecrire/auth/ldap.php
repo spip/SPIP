@@ -42,10 +42,11 @@ if (!isset($GLOBALS['ldap_attributes']) OR !is_array($GLOBALS['ldap_attributes']
  * @param string $login
  * @param string $pass
  * @param string $serveur
+ * @param bool $phpauth
  * @return string
  */
 // http://doc.spip.org/@inc_auth_ldap_dist
-function auth_ldap_dist ($login, $pass, $serveur='') {
+function auth_ldap_dist ($login, $pass, $serveur='', $phpauth=false) {
 
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
 
