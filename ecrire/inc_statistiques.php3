@@ -262,7 +262,7 @@ function optimiser_referers() {
 		$referers = $row['referers'];
 		$visites = $row['visites'];
 
-		$popularite = $referers * $visites;
+		$popularite = ($referers + 1) * $visites;
 		$popularite_update[$popularite][] = $id_article;
 		if ($max < $popularite) $max = $popularite;
 	}

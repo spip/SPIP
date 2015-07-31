@@ -1738,10 +1738,10 @@ function creer_colonne_droite(){
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes;
 
-	$deja_colonne_droite = true;
 
 	
-	if ($flag_3_colonnes) {
+	if ($flag_3_colonnes AND !$deja_colonne_droite) {
+		$deja_colonne_droite = true;
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
@@ -1940,7 +1940,12 @@ function fin_page() {
 	global $connect_id_auteur;
 
 	?>
-<p>&nbsp;</p>
+
+</td></tr></table>
+
+<?
+debut_grand_cadre();
+?>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est un logiciel libre distribu&eacute; <a href='copyright_fr.html'>sous licence GPL.</a>
@@ -1951,8 +1956,10 @@ if (ereg("index\.php3", $GLOBALS['REQUEST_URI']) || !ereg("\.php3", $GLOBALS['RE
 }
 ?>
 </font></div>
-<br>
-</td></tr></table></center>
+<?
+fin_grand_cadre();
+?>
+</center>
 
 	<?php
 
