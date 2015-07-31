@@ -58,20 +58,22 @@ function choisir_traduction ($trads, $lang='') {
 }
 
 // retourne son 2e argument si c'est un index du premier
-// ou un index approchant sinon et si possible, 
+// ou un index approchant sinon et si possible,
 // la langue X etant consideree comme une approche de X_Y
 function approcher_langue ($trads, $lang='') {
 
-	if (!$lang) $lang = $GLOBALS['spip_lang']; 
+	if (!$lang) $lang = $GLOBALS['spip_lang'];
 
 	if (isset($trads[$lang])) {
 		return $lang;
-
-	}	// cas des langues xx_yy
-	else if (preg_match(',^([a-z]+)_,', $lang, $regs) AND isset($trads[$regs[1]])) {
-		return $regs[1];
-	}	
-	else  return '';
+	}
+	// cas des langues xx_yy
+	else {
+		$r = explode('_', $lang);
+		if (isset($trads[$r[0]]))
+			return $r[0];
+	}
+	return '';
 }
 
 // http://doc.spip.org/@traduire_nom_langue
@@ -84,7 +86,6 @@ function traduire_nom_langue($lang) {
 //
 // Filtres de langue
 //
-
 
 // Donne la direction d'ecriture a partir de la langue. Retourne 'gaucher' si
 // la langue est arabe, persan, kurde, pachto, ourdou (langues ecrites en
@@ -134,7 +135,7 @@ function changer_typo($lang = '') {
 // - 'var_lang_ecrire' = langue interface privee,
 // pour var_lang' = langue de l'article, espace public, voir les squelettes
 // pour 'changer_lang' (langue de l'article, espace prive), c'est en Ajax
-// 
+//
 // http://doc.spip.org/@menu_langues
 function menu_langues($nom_select) {
 
@@ -198,7 +199,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 			$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
 			break;
 
-# dernier choix possible : toutes les langues = langues_proposees 
+# dernier choix possible : toutes les langues = langues_proposees
 # + langues_multilingues ; mais, ne sert pas
 #			$langues = explode(',', $GLOBALS['all_langs']);
 	}

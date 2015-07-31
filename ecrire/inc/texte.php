@@ -59,7 +59,7 @@ function definir_raccourcis_alineas()
 	static $alineas = array();
 	$x = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
 	if (!isset($alineas[$x])) {
-        
+
 		$alineas[$x] = array(
 		array(
 		/* 0 */ 	"/\n(----+|____+)/S",
@@ -151,7 +151,7 @@ function traiter_echap_html_dist($regs) {
 // http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	list(,,$att,$corps) = $regs;
-	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code ! 
+	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {
@@ -257,10 +257,21 @@ $preg='') {
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
-		if (preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*>\s*</\1>,UmsS',
+		if (preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
+				// recherche d'attributs supplementaires
+				$at = array();
+				foreach(array('lang', 'dir') as $attr) {
+					if ($a = extraire_attribut($reg[0], $attr))
+						$at[$attr] = $a;
+				}
+				if ($at) {
+					$rempl = '<'.$reg[1].'>'.$rempl.'</'.$reg[1].'>';
+					foreach($at as $attr => $a)
+						$rempl = inserer_attribut($rempl, $attr, $a);
+				}
 				if ($filtre) $rempl = $filtre($rempl);
 				$letexte = str_replace($reg[0], $rempl, $letexte);
 			}
@@ -319,7 +330,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
 	$texte = nettoyer_raccourcis_typo($texte);
 
-	// corriger la longueur de coupe 
+	// corriger la longueur de coupe
 	// en fonction de la presence de caracteres utf
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
@@ -522,14 +533,8 @@ function corriger_typo($letexte, $lang='') {
 	// Caracteres de controle "illegaux"
 	$letexte = corriger_caracteres($letexte);
 
-	// Charger & appliquer les fonctions de typographie
-
-	if (!$lang) $lang = lang_typo();
-	$typo2 = '';
-	$typographie = charger_fonction($lang, 'typographie');
-
 	// Proteger les caracteres typographiques a l'interieur des tags html
-	if ($typographie AND preg_match_all(_TYPO_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
+	if (preg_match_all(_TYPO_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
 			// hack: on transforme les caracteres a proteger en les remplacant
@@ -539,44 +544,21 @@ function corriger_typo($letexte, $lang='') {
 		}
 	}
 
-	// simplifier les blocs multi,
-	// et si la selection est differente de la langue de l'objet, 
-	// (langue de l'objet absente du multi ou langue imposee par forcer_lang)
-	// la typographier selon les regles de celle trouvee si definies
+	// trouver les blocs multi et les traiter a part
+	$letexte = extraire_multi($e = $letexte, $lang);
+	$e = ($e === $letexte);
 
-	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $reg) {
-			// chercher la version de la langue du contexte
-			// (= lang_typo() sauf parfois avec forcer_lang = true)
-			$trads = extraire_trads($reg[1]);
-			$l = multi_trads($trads, $GLOBALS['spip_lang']);
-			if ($l) {
-				$trad = $trads[$l];
-				if ($lang != $GLOBALS['spip_lang']
-				AND $typo2 = charger_fonction($GLOBALS['spip_lang'], 'typographie', true)) {
-					$trad = $typo2($trad);
-					$trad = code_echappement($trad, 'multi');
-				}  
-			} else {
-				// langue absente, prendre la premiere dispo
-				$l = key($trads);
-				$trad = $trads[$l];
-				if ($typo2 = charger_fonction($l, 'typographie', true)) {
-					$trad = $typo2($trad);
-					$trad = code_echappement($trad, 'multi');
-				}
-			}
-			$letexte = str_replace($reg[0], $trad, $letexte);
-		}
-	}
+	// Charger & appliquer les fonctions de typographie
+	$typographie = charger_fonction(lang_typo($lang), 'typographie');
+	$letexte = $typographie($letexte);
 
-	if ($typographie) $letexte = $typographie($letexte);
+	// Les citations en une autre langue, s'il y a lieu
+	if (!$e) $letexte = echappe_retour($letexte, 'multi');
 
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
-	// et les citations en d'autres langues
-	if ($typo2!=='') $letexte = echappe_retour($letexte, 'multi');
 
+	// pipeline
 	$letexte = pipeline('post_typo', $letexte);
 
 	# un message pour abs_url - on est passe en mode texte
@@ -695,7 +677,7 @@ function traiter_tableau($bloc) {
 		$ligne='';
 
 		for($c=count($cols)-1; $c>=0; $c--) {
-			$attr= $numeric[$c]; 
+			$attr= $numeric[$c];
 			$cell = trim($cols[$c]);
 			if($cell=='<') {
 			  $colspan++;

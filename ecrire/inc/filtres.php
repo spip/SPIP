@@ -1330,6 +1330,48 @@ function post_autobr($texte, $delim="\n_ ") {
 // Gestion des blocs multilingues
 //
 
+define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
+// Extraire et transformer les blocs multi ; on indique la langue courante
+// pour ne pas mettre de span@lang=fr si on est deja en fr
+// http://doc.spip.org/@extraire_multi
+function extraire_multi($letexte, $lang=null) {
+	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
+	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
+		if (!$lang) $lang = $GLOBALS['spip_lang'];
+
+		foreach ($regs as $reg) {
+			// chercher la version de la langue courante
+			$trads = extraire_trads($reg[1]);
+			if ($l = approcher_langue($trads, $lang)) {
+				$trad = $trads[$l];
+			} else {
+				// langue absente, prendre la premiere dispo
+				// mais typographier le texte selon les regles de celle-ci
+				// Attention aux blocs multi sur plusieurs lignes
+				$l = key($trads);
+				$trad = $trads[$l];
+				$typographie = charger_fonction(lang_typo($l), 'typographie');
+				$trad = $typographie($trad);
+				$trad = explode("\n", $trad);
+				foreach($trad as $i => $ligne) {
+					if (strlen($ligne)) {
+						$ligne = code_echappement($ligne, 'multi');
+						$ligne = str_replace("'", '"', inserer_attribut($ligne, 'lang', $l));
+						if (lang_dir($l) !== lang_dir($lang))
+							$ligne = str_replace("'", '"', inserer_attribut($ligne, 'dir', lang_dir($l)));
+						$trad[$i] = $ligne;
+					}
+				}
+				$trad = join("\n", $trad);
+			}
+			$letexte = str_replace($reg[0], $trad, $letexte);
+		}
+	}
+	return $letexte;
+}
+
+
+
 //
 // Selection dans un tableau dont les index sont des noms de langues
 // de la valeur associee a la langue en cours
@@ -1377,22 +1419,6 @@ function extraire_trads($bloc) {
 
 	return $trads;
 		}
-
-// repere les blocs multi dans un texte et extrait le bon
-
-define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
-
-// http://doc.spip.org/@extraire_multi
-function extraire_multi ($letexte) {
-	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
-	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER))
-		foreach ($regs as $reg) {
-			$trads = extraire_trads($reg[1]);
-			$trad = multi_trad($trads);
-			$letexte = str_replace($reg[0], $trad , $letexte);
-	}
-	return $letexte;
-}
 
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
