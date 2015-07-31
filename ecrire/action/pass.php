@@ -15,7 +15,7 @@ include_ecrire("inc_session"); # pour creer_uniq_id
 include_ecrire('inc_minipres'); # charge lang et execute utiliser_lang
 include_ecrire("inc_mail"); # pour envoyer_mail
 include_ecrire("inc_acces"); # pour generer_htpass
-include_ecrire('public-global'); # pour calculer la page
+include_spip('public/global'); # pour calculer la page
 include_ecrire("inc_filtres"); # pour email_valide()
 
 // Ce fichier est celui d'une balise dynamique qui s'ignore.

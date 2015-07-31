@@ -34,7 +34,7 @@ function calcule_header_et_page ($fond) {
 
 	if (strlen($_POST['confirmer_forum']) > 0
 	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
-		include_ecrire('public-messforum');
+		include_spip('public/messforum');
 		redirige_par_entete(enregistre_forum());
 	}
 
@@ -89,7 +89,7 @@ function afficher_page_globale ($fond) {
 		$use_cache, $var_mode, $var_preview;
 	global $_COOKIE, $_SERVER;
 
-	include_ecrire('public-cache');
+	include_spip('public/cache');
 
 	// Peut-on utiliser un fichier cache ?
 	list($chemin_cache, $page, $lastmodified) = 
@@ -132,7 +132,7 @@ function afficher_page_globale ($fond) {
 		if (!$use_cache)
 			restaurer_globales($page['contexte']);
 		else {
-			include_ecrire('public-calcul');
+			include_spip('public/calcul');
 			$page = calculer_page_globale ($chemin_cache, $fond);
 			if ($chemin_cache)
 				creer_cache($page, $chemin_cache, $use_cache);
@@ -228,7 +228,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
 	} else {
-		include_ecrire('public-calcul');
+		include_spip('public/calcul');
 		$page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
 		$lastmodified = time();
 		if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
@@ -247,22 +247,15 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
-	if (!is_string($texte))
-	  {
-	    // Revoir l'API des balises dynamiques:
-	    // leurs squelettes sont petits et sans boucle,
-	    // la gestion du delai est donc superfetatoire
+	if (is_array($texte)) {
+
 		list($fond, $delainc, $contexte_inclus) = $texte;
 
 		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
-		// surcharge ? inutile ?
-		$f = find_in_path("inc-cache" . _EXTENSION_PHP);
-		if ($f && is_readable($f)) {
-		  if (!$GLOBALS['included_files']['public-cache']++) include($f);
-		} else include_ecrire('public-cache');
+		include_spip('public/cache');
 
 		$d = $GLOBALS['delais'];
 		$GLOBALS['delais'] = $delainc;
@@ -281,15 +274,15 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		if ($page['lang_select'])
 			lang_dselect();
 
-	  }
+	}
 
 	if ($GLOBALS['var_mode'] == 'debug')
-	    $GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
+		$GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
 
 	if ($echo)
-			echo $texte;
+		echo $texte;
 	else
-			return $texte;
+		return $texte;
 
 }
 
