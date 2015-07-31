@@ -158,9 +158,10 @@ function zap_sessions ($id_auteur, $zap) {
 
 			// sinon voir si c'est une session du meme auteur
 			else if ($regs[1] == $id_auteur.'_') {
-				$zap_num ++;
 				if ($zap)
 					@unlink($chemin);
+				else
+					$zap_num ++;
 			}
 
 		}

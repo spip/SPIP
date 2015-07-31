@@ -25,29 +25,25 @@ else if ($essai_auth_http == 'logout') {
 	exit;
 }
 
-/*
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
 	if (verifier_session($spip_session)) {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
-//		if ($zap_session)
-//			zap_sessions($auteur_session['id_auteur'], true);
 //		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
 		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
 		@header('Cache-Control: no-cache');
 		@header('Pragma: no-cache');
+		@header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+		@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+		@header("Cache-Control: no-store, no-cache, must-revalidate");
 		@readfile('ecrire/img_pack/rien.gif');
 		exit;
 	}
 }
-*/
 
-// zapper les mauvaises sessions
-if ($zap_session && verifier_session($spip_session))
-	zap_sessions($auteur_session['id_auteur'], true);
 
 // tentative de login
 if ($cookie_session == "non") {
