@@ -13,8 +13,7 @@
 				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
 				]<p class='explication'><:entree_nom_pseudo:></p>
-				<input type='text' class='text' name='nom' id='nom' value="[(#ENV**{nom,#VAL{ecrire:item_nouvel_auteur}|_T})]"
-				[(#ENV{nom,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+				<input type='text' class='text' name='nom' id='nom' placeholder="<:ecrire:item_nouvel_auteur|attribut_html:>" value="[(#ENV**{nom})]" />
 	    </li>
 	    [(#REM)
 	    	Modification de l'email
