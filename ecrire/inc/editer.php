@@ -62,14 +62,15 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		if  (!$new) {
 			if (!autoriser('modifier',$type,$id))
 				// interdit a l'edition
-				return _T('info_acces_interdit');
+				return array('editable'=>false,'message_erreur'=>_T('info_acces_interdit'));
 
 			elseif ($select = charger_fonction($type."_select",'inc',true))
 				$row = $select($id, $id_parent, $lier_trad);
 			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
-			if (!$row) return false; // inconnu
-			$md5 = controles_md5($row);
-		} else {
+			if ($row)
+				$md5 = controles_md5($row);
+		}
+		if (!$row) {
 			$trouver_table = charger_fonction('trouver_table','base');
 			if ($desc = $trouver_table($table_objet))
 				foreach($desc['field'] as $k=>$v) $row[$k]='';
