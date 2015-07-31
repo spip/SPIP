@@ -44,6 +44,7 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'replace' => 'spip_pg_replace',
 		'select' => 'spip_pg_select',
 		'selectdb' => 'spip_pg_selectdb',
+		'set_connect_charset' => 'spip_pg_set_connect_charset',
 		'showtable' => 'spip_pg_showtable',
 		'update' => 'spip_pg_update',
 		'updateq' => 'spip_pg_updateq',
@@ -585,6 +586,10 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 
 	foreach($keys as $index)  {@pg_query($link, $index);}
 	return $r;
+}
+
+function spip_pg_set_connect_charset($charset, $serveur=''){
+	spip_log("changement de charset sql a ecrire en PG");
 }
 
 // Selectionner la sous-chaine dans $objet
