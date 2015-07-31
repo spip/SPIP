@@ -86,14 +86,14 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 function image_reduire($img, $taille=-1, $taille_y=-1) {
 	include_spip('inc/logos');
 
-	$image = reduire_image_logo($img, $taille, $taille_y);
+	$image = reduire_image_logo($img, $taille, $taille_y, false);
 
 	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
 	if (!eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match))
 		return $image;
 	
 	$mouseover = extraire_attribut(
-			reduire_image_logo($match[1], $taille, $taille_y),
+			reduire_image_logo($match[1], $taille, $taille_y, false),
 			'src');
 
 	$mouseout = extraire_attribut($image, 'src');
