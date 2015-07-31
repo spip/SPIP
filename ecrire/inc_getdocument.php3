@@ -599,6 +599,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
 	if (is_readable($chemin) &&
 	    (preg_match("/^([a-zA-Z0-9_].*)\.([a-zA-Z0-9]+)$/", $entree, $match))) {
 	  $ext = strtolower($match[2]);
+
 	  if (($ext == 'html') || ($ext == 'htm') || ($ext == 'txt'))
 	    $textes[$match[1]] = $match[2];
 	  else {
@@ -615,6 +616,18 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
     }
   }
   closedir($handle);
+  $collecte = count($textes);
+  if (isset($textes['index'])) {
+
+    $texte = spip_file_get_contents($DIR . "/index." .$textes['index']);
+    if (preg_match(',<body[^>]*>(.*)</body>,is', $texte, $match))
+      $texte = $match[1];
+    $texte = '<html>'. $texte  . '</html>';
+    $texte = addslashes($texte);
+    spip_query("UPDATE spip_rubriques SET texte='" .$texte . "'
+WHERE id_rubrique=$id_rubrique");
+	unset($textes['index']);
+  }
 
   // integration a la base SQL en commencant par les textes,
   // afin de savoir combien ont ete crees, a chaque niveau.
@@ -622,15 +635,15 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
   if ($textes) {
     ksort($textes);
     foreach($textes as $k=>$v) {
-      
 	$titre= addslashes(trim(preg_replace('/[-_]/', ' ', $k)));
 	$chemin = "$DIR/$k." . $v;
 	$texte = spip_file_get_contents($chemin);
 	if ($v[0] == 'h') {
 	  // cas du html
 	  if (preg_match(',<body[^>]*>(.*)</body>,is', $texte, $match))
-	    $texte = '<html>'. $match[1] . '</html>';
-	}
+	    $texte = $match[1];
+	  $texte = '<html>'. $texte  . '</html>';
+	} else {$texte = '<pre>'. $texte  . '</pre>';}
 	$texte = addslashes($texte);
 	$date = date("Y-m-d H:i:s", filemtime($chemin));
 	$art=spip_abstract_insert($GLOBALS['table_prefix']. "_articles",
@@ -642,14 +655,15 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
     }
   }
 
+
   // si la rubrique a 0 ou 1  article, les documents sont 
   // joints l'article present ou de niveau superieur, sinon a la rubrique.
 
-  $n = count($textes);
-  if (($n <= 1) AND $art)
+
+  if (($collecte <= 1) AND $art)
     {$type = 'article'; $id = $art;}
   else
-    {$type = 'rubrique'; $id = $id_rubrique; $n = count($docs);}
+    {$type = 'rubrique'; $id = $id_rubrique; $collecte += count($docs);}
 
   if ($docs) {
     foreach($docs as $v) 
@@ -659,20 +673,20 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
   if ($rubriques) {
     foreach ($rubriques as $k => $v)
       {
+
 	$rub=spip_abstract_insert($GLOBALS['table_prefix'] . "_rubriques",
 				  "(titre,id_parent,statut)",
 				  "('" . addslashes($v) . "', $id_rubrique, 'prepa')");
 	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art);
 	if ($m)
-	  $n++;
+	  $collecte+=$m;
 	else {
 	  // faudrait essayer de prevenir plutot que de guerir
 	  spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$rub");
 	}
       }
   }
-  
-  return $n;
+  return $collecte;
  
 }
 

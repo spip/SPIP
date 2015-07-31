@@ -387,7 +387,7 @@ function fichiers_upload($dir) {
 function texte_upload_manuel($dir, $inclus = '') {
 	$fichiers = fichiers_upload($dir);
 	$exts = array();
-
+	$dirs = array();
 	foreach ($fichiers as $f) {
 		$f = ereg_replace("^$dir/","",$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
@@ -400,18 +400,27 @@ function texte_upload_manuel($dir, $inclus = '') {
 				else $exts[$ext] = 'non';
 			}
 			
-			$ledossier = substr($f, 0, strrpos($f,"/"));
-			$lefichier = substr($f, strrpos($f, "/"), strlen($f));
-			
-			if ($ledossier != $ledossier_prec) {
-				$texte_upload .= "\n<option value=\"$ledossier\" style='font-weight: bold;'>"
+			$k = 2*substr_count($f,'/');
+			$n = strrpos($f, "/");
+			if ($n === false)
+			  $lefichier = $f;
+			else {
+			  $lefichier = substr($f, $n+1, strlen($f));
+			  $ledossier = substr($f, 0, $n);
+			  if (!in_array($ledossier, $dirs)) {
+				$texte_upload .= "\n<option value=\"$ledossier\">"
+				. str_repeat("&nbsp;",$k) 
 				._T('tout_dossier_upload', array('upload' => $ledossier))
 				."</option>";
+				$dirs[]= $ledossier;
+			  }
 			}
-			
-			$ledossier_prec = $ledossier;
-			
-			if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier</option>";
+
+			if ($exts[$ext] == 'oui')
+			  $texte_upload .= "\n<option value=\"$f\">" .
+			    str_repeat("&nbsp;",$k+2) .
+			    $lefichier .
+			    "</option>";
 		}
 	}
 
