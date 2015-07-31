@@ -255,7 +255,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 		  if (!is_array($v))
 		    $url[] = $k .'=' . $u;
 		  else {
-		    $id = (substr($k,-2) != '[]') ? $k : ($k ."[]");
+		  	$id = (substr($k,-2) == '[]') ? $k : ($k ."[]");
 		    foreach ($v as $w) $url[]= $id .'=' . $w;
 		  }
 		}
@@ -353,7 +353,7 @@ function test_espace_prive() {
 
 /**
  * Verifie la presence d'un plugin active, identifie par son prefix
- * 
+ *
  *
  * @param string $plugin
  * @return bool
@@ -400,7 +400,7 @@ function _L($text, $args=array(), $class=NULL) {
 		}
 		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
-		if ($args) spip_log("$text:  variables inutilisées " . join(', ', $args));
+		if ($args) spip_log("$text:  variables inutilisï¿½es " . join(', ', $args));
 	}
 
 	if ($GLOBALS['test_i18n'] AND $class===NULL)
@@ -438,7 +438,7 @@ function spip_timer($t='rien') {
 		$p = ($a + $b - $time[$t]) * 1000;
 		unset($time[$t]);
 #			echo "'$p'";exit;
-		if ($p < 1000) 
+		if ($p < 1000)
 			$s = '';
 		else {
 			$s = sprintf("%d ", $x = floor($p/1000));
@@ -805,12 +805,12 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 				:  $GLOBALS['type_urls']; // pour SPIP <2
 			}
 
-			$f = charger_fonction($type, 'urls', true); 
+			$f = charger_fonction($type, 'urls', true);
 			// se rabatre sur les urls page si les urls perso non dispo
 			if (!$f)
 				$f = charger_fonction('page', 'urls', true);
 			// si $entite='', on veut la fonction de passage URL ==> id
-			if (!$entite) return $f; 
+			if (!$entite) return $f;
 			// sinon on veut effectuer le passage id ==> URL
 			$res = !$f ? '' : $f(intval($id), $entite, $args, $ancre);
 		}
@@ -1019,7 +1019,7 @@ function generer_form_action($script, $corps, $atts='', $public=false) {
 	// si l'on est dans l'espace prive, on garde dans l'url
 	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire
 	// ou non de proceder a l'authentification (cas typique de l'install par exemple)
-	$h = (_DIR_RACINE AND !$public) 
+	$h = (_DIR_RACINE AND !$public)
 	? generer_url_ecrire(_request('exec'))
 	: generer_url_public();
 
@@ -1044,7 +1044,7 @@ function generer_url_action($script, $args="", $no_entities=false , $public = fa
 	  :  generer_url_public();
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
-	
+
 	if ($no_entities) $url = str_replace('&amp;','&',$url);
 	return $url;
 }
@@ -1083,7 +1083,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
-	
+
 	define('_DIR_IMG', $pa);
 	define('_DIR_LOGOS', $pa);
 	define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
@@ -1144,7 +1144,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Se mefier des fichiers mal remplis!
 	if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', 0777);
-	
+
 	// le nom du repertoire plugins/ activables/desactivables
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
@@ -1162,7 +1162,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 		#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
 	}
-		
+
 	//
 	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()
@@ -1367,7 +1367,7 @@ function spip_initialisation_suite() {
 		else
 			define('_INTERDIRE_COMPACTE_HEAD_ECRIRE',true); // evite une page blanche car on ne saura pas calculer la css dans ce hit
 	}
-	
+
 	init_var_mode();
 }
 
@@ -1388,7 +1388,7 @@ function init_var_mode(){
 			if ($_GET['var_mode'] == 'calcul'
 			OR $_GET['var_mode'] == 'recalcul')
 				$GLOBALS['var_mode'] = $_GET['var_mode'];
-		
+
 			// preview, debug, blocs, urls et images necessitent une autorisation
 			else if (in_array($_GET['var_mode'],array('preview','debug','inclure','urls','images'))) {
 				include_spip('inc/autoriser');
@@ -1401,7 +1401,7 @@ function init_var_mode(){
 						case 'preview':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'recalcul';
-							// truquer les boucles 
+							// truquer les boucles
 							$GLOBALS['var_preview'] = true;
 							// et ne pas enregistrer de cache
 							$GLOBALS['var_nocache'] = true;
@@ -1647,7 +1647,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		// Si on a inclus sans fixer le critere de lang, on prend la langue courante
 		if (!isset($contexte['lang']))
 			$contexte['lang'] = $GLOBALS['spip_lang'];
-	
+
 		if ($contexte['lang'] != $GLOBALS['meta']['langue_site']) {
 			$lang_select = lang_select($contexte['lang']);
 		}
@@ -1664,7 +1664,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		}
 		if (isset($options['ajax'])AND $options['ajax'])
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
-			
+
 		if ($GLOBALS['var_inclure'])
 			$page['texte'] = "<fieldset class='blocs'><legend>".$page['sourcefile']."</legend>".$page['texte']."</fieldset>";
 		$page = pipeline('recuperer_fond',array(
@@ -1679,7 +1679,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	$GLOBALS['_INC_PUBLIC']--;
 
-	if ($lang_select) lang_select();	
+	if ($lang_select) lang_select();
 	if (isset($options['raw']) AND $options['raw'])
 		return is_array($fond)?$pages:reset($pages);
 	else
