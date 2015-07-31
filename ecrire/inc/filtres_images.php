@@ -104,7 +104,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$cache = "cache-vignettes";
 		$fichier_dest = basename($fichier_dest);
 		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight)){
-			// on garde la terminaison initiale car image simplement copiee, et on ne change pas son nom
+			// on garde la terminaison initiale car image simplement copiee
+			// et on postfixe son nom avec la date
 			$terminaison_dest = $terminaison;
 			$fichier_dest .= "-$date_src";
 		}
@@ -536,53 +537,40 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 				return;
 			}
 
-			# calcul de memoire desactive car pas fiable
-			#$memoryNeeded = round(($srcsize[0] * $srcsize[1] * $srcsize['bits'] * $srcsize['channels'] / 8 + 65536) * 1.65); 
-			#spip_log("GD : memory need $memoryNeeded");
-			#if (function_exists('memory_get_usage'))
-				#spip_log("GD : memory usage ".memory_get_usage());
-			#spip_log("GD : memory_limit ".ini_get('memory_limit'));
-			#if (function_exists('memory_get_usage') && memory_get_usage() + $memoryNeeded > (integer) ini_get('memory_limit') * 1048576){
-			#	spip_log("vignette gd1/gd2 impossible : memoire insuffisante $memoryNeeded necessaire");
-			#	return;
-			#}
-			#else
-			{
-				$fonction_imagecreatefrom = $valeurs['fonction_imagecreatefrom'];
-				if (!function_exists($fonction_imagecreatefrom))
-					return '';
-				$srcImage = $fonction_imagecreatefrom($image);
-				if (!$srcImage) { 
-					spip_log("echec gd1/gd2"); 
-					return; 
-				} 
+			$fonction_imagecreatefrom = $valeurs['fonction_imagecreatefrom'];
+			if (!function_exists($fonction_imagecreatefrom))
+				return '';
+			$srcImage = $fonction_imagecreatefrom($image);
+			if (!$srcImage) { 
+				spip_log("echec gd1/gd2"); 
+				return; 
+			} 
 
-				// Initialisation de l'image destination 
- 				if ($process == 'gd2' AND $destFormat != "gif") 
-					$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
-				if (!$destImage) 
-					$destImage = ImageCreate($destWidth, $destHeight); 
+			// Initialisation de l'image destination 
+				if ($process == 'gd2' AND $destFormat != "gif") 
+				$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
+			if (!$destImage) 
+				$destImage = ImageCreate($destWidth, $destHeight); 
 
-				// Recopie de l'image d'origine avec adaptation de la taille 
-				$ok = false; 
-				if (($process == 'gd2') AND function_exists('ImageCopyResampled')) { 
-					if ($format == "gif") { 
-						// Si un GIF est transparent, 
-						// fabriquer un PNG transparent  
-						$transp = imagecolortransparent($srcImage); 
-						if ($transp > 0) $destFormat = "png"; 
-					}
-					if ($destFormat == "png") { 
-						// Conserver la transparence 
-						if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
-						@imagealphablending($destImage, false); 
-						@imagesavealpha($destImage,true); 
-					}
-					$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			// Recopie de l'image d'origine avec adaptation de la taille 
+			$ok = false; 
+			if (($process == 'gd2') AND function_exists('ImageCopyResampled')) { 
+				if ($format == "gif") { 
+					// Si un GIF est transparent, 
+					// fabriquer un PNG transparent  
+					$transp = imagecolortransparent($srcImage); 
+					if ($transp > 0) $destFormat = "png"; 
 				}
-				if (!$ok)
-					$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+				if ($destFormat == "png") { 
+					// Conserver la transparence 
+					if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
+					@imagealphablending($destImage, false); 
+					@imagesavealpha($destImage,true); 
+				}
+				$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 			}
+			if (!$ok)
+				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
 			// Sauvegarde de l'image destination
 			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
