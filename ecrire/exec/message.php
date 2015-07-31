@@ -19,13 +19,7 @@ include_spip('inc/mots');
 // http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
 {
-global 
-  			$ajout_forum,
-$cherche_auteur,
-$connect_id_auteur,
-$forcer_dest,
-$id_message,
-$nouv_auteur;
+	global $cherche_auteur, $connect_id_auteur,$forcer_dest,$id_message, $nouv_auteur;
 
 	$id_message = intval($id_message);
 	$nouv_auteur = intval($nouv_auteur);
@@ -34,8 +28,8 @@ $nouv_auteur;
 	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
 	if ($row['type'] != "affich"){
-		$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
-		if (!$n['n']) {
+		$res = spip_fetch_array(spip_query("SELECT vu FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
+		if (!$res) {
 			$commencer_page = charger_fonction('commencer_page', 'inc');
 			echo $commencer_page(_T('info_acces_refuse'));
 			debut_gauche();
@@ -44,12 +38,15 @@ $nouv_auteur;
 			echo fin_gauche(), fin_page();
 			exit;
 		}
+	// Marquer le message vu pour le visiteur
+		if ($res['vu'] != 'oui') {
+			include_spip('inc/headers');
+			redirige_par_entete(redirige_action_auteur("editer_message","$id_message/:$connect_id_auteur", 'message', "id_message=$id_message", true));
+		}
 	}
 
 	exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur, $forcer_dest);
 }
-
-
 
 // http://doc.spip.org/@http_afficher_rendez_vous
 function http_afficher_rendez_vous($date_heure, $date_fin)
@@ -413,9 +410,6 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	$lannee = annee($row['date_heure']);		
 
 	
-	// Marquer le message vu pour le visiteur
-	if ($type != "affich")
-		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, "accueil", "messagerie");
