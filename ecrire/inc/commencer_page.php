@@ -85,7 +85,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 
-	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'"
+	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique "._request('exec')."'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
 			.'>');
 	if ($menu)
