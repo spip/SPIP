@@ -141,6 +141,7 @@ AND isset($GLOBALS['meta']["import_all"])) {
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
 elseif ($exec!='upgrade'
+AND !$var_auth
 AND $GLOBALS['auteur_session']['statut']=='0minirezo'
 AND !_DIR_RESTREINT
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)

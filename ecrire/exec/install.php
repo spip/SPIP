@@ -99,7 +99,7 @@ function login_hebergeur() {
 	else if (preg_match(',(.*)\.free\.fr$,', $SERVER_NAME, $regs)) {
 		$base_hebergeur = 'sql.free.fr';
 		$login_hebergeur = $regs[1];
-	}
+	} else $login_hebergeur = '';
 
 	return array($base_hebergeur, $login_hebergeur);
 }
@@ -151,9 +151,9 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
 	($legend ? "<legend>".$legend."</legend>\n" : '');
 	foreach ($champs as $nom => $contenu) {
-		$type = $contenu['hidden'] ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
-		$class = $contenu['hidden'] ? '' : "class='formo' size='40' ";
-		if(is_array($contenu['alternatives'])) {
+		$type = isset($contenu['hidden']) ? 'hidden' : (preg_match(',^pass,', $nom) ? 'password' : 'text');
+		$class = isset($contenu['hidden']) ? '' : "class='formo' size='40' ";
+		if(isset($contenu['alternatives'])) {
 			$fieldset .= $contenu['label'] ."\n";
 			foreach($contenu['alternatives'] as $valeur => $label) {
 				$fieldset .= "<input type='radio' name='".$nom .
