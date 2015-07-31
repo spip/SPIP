@@ -146,10 +146,10 @@ function hauteurTextarea() {
 
 function changeVisible(input, id, select, nonselect) {
 	if (input) {
-		element = findObj(id);
+		element = findObj_forcer(id);
 		if (element.style.display != select)  element.style.display = select;
 	} else {
-		element = findObj(id);
+		element = findObj_forcer(id);
 		if (element.style.display != nonselect)  element.style.display = nonselect;
 	}
 }

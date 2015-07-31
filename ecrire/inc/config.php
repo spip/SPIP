@@ -153,11 +153,16 @@ function appliquer_modifs_config() {
 	global $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
-	global $retour_proxy;
+	global $retour_proxy, $envoi_now;
 
 	if (_request('adresse_site'))
 		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", _request('adresse_site'));
 
+	// provoquer l'envoi des nouveautes en supprimant le fichier lock
+	if ($envoi_now) {
+	  spip_log("envoi $envoi_now");
+		@unlink(_DIR_TMP . 'mail.lock');
+	}
 	// Purger les squelettes si un changement de meta les affecte
 	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
 		$purger_skel = true;
@@ -181,14 +186,12 @@ function appliquer_modifs_config() {
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
 		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
-	spip_log("$http_proxy '$tester_proxy' '$test_proxy'");
-
 	$retour_proxy = '';
 	if ($tester_proxy) {
 		if (!$test_proxy) {
 			$retour_proxy = _T('info_adresse_non_indiquee');
 		} else {
-			include_spip('inc/minipres');
+			include_spip('inc/minipres'); // pour aide, couper, lang
 			if (strncmp("http://", $http_proxy,7)!=0)
 			  $page = '';
 			else {
