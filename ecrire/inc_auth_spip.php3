@@ -40,9 +40,9 @@ class Auth_spip {
 		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
-			$md5pass = md5($row['alea_actuel'] . $session_password);
-			$md5next = md5($row['alea_futur'] . $session_password);
-			return verifier_challenge_md5($login, $md5pass, $md5next);
+			$md5pass = md5($row['alea_actuel'] . $pass);
+			$md5next = md5($row['alea_futur'] . $pass);
+			return $this->verifier_challenge_md5($login, $md5pass, $md5next);
 		}
 		return false;
 	}
