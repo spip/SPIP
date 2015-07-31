@@ -376,7 +376,6 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 			$res .= "\n"
 				. "<span class='icone'> </span>"
 			  . "<div class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</div>"
-			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
 			  . "\nhref='"
