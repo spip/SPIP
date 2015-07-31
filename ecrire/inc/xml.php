@@ -108,7 +108,7 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 		foreach($arbre as $tag=>$feuille){
 			if (is_array($feuille)){
 				if ($tag!==intval($tag)){
-					$f = spip_xml_aplatit($feuille);
+					$f = spip_xml_aplatit($feuille, $separateur);
 					if (strlen($f)) {
 						$tagf = explode(" ",$tag);
 						$tagf = $tagf[0];
@@ -119,10 +119,74 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 				else
 					$s.=spip_xml_aplatit($feuille);
 				$s .= $separateur;
-			}				
+			}
 			else
 				$s.="$feuille$separateur";
 		}
-	return substr($s,0,strlen($s)-strlen($separateur));
+	return substr($s,0,-strlen($separateur));
 }
+
+function spip_xml_tagname($tag){
+	if (preg_match(',^([a-z][\w:]*),i',$tag,$reg))
+		return $reg[1];
+	return "";
+}
+function spip_xml_decompose_tag($tag){
+	$tagname = spip_xml_tagname($tag);
+	$liste = array();
+	$p=strpos($tag,' ');
+	$tag = substr($tag,$p);
+	$p=strpos($tag,'=');
+	while($p!==false){
+		$attr = trim(substr($tag,0,$p));
+		$tag = ltrim(substr($tag,$p+1));
+		$quote = $tag{0};
+		$p=strpos($tag,$quote,1);
+		$cont = substr($tag,1,$p-1);
+		$liste[$attr] = $cont;
+		$tag = substr($tag,$p+1);
+		$p=strpos($tag,'=');
+	}
+	return array($tagname,$liste);
+}
+
+function spip_xml_match_nodes($regexp,&$arbre,&$matches){
+	if(is_array($arbre) && count($arbre))
+		foreach(array_keys($arbre) as $tag){
+			if (preg_match($regexp,$tag))
+				$matches[$tag] = &$arbre[$tag];
+			if (is_array($arbre[$tag]))
+				foreach(array_keys($arbre[$tag]) as $occurences)
+					spip_xml_match_nodes($regexp,$arbre[$tag][$occurences],$matches);
+		}
+	return (count($matches));
+}
+// http://doc.spip.org/@spip_xml_aplatit
+/*
+function spip_xml_aplatit_coupe($arbre,$separateur = " ", $long){
+	$s = "";
+	if (is_array($arbre))
+		foreach($arbre as $tag=>$feuille){
+			if (is_array($feuille)){
+				if ($tag!==intval($tag)){
+					$f = spip_xml_aplatit($feuille, $separateur, $long);
+					if (strlen($f)) {
+						if ($long!==NULL) AND strlen($f)>strlen($long))
+							$f = couper($f,$long,""); 
+						$tagf = explode(" ",$tag);
+						$tagf = $tagf[0];
+						$s.="<$tag>$f</$tagf>";
+					}
+					else $s.="<$tag />";
+				}
+				else
+					$s.=spip_xml_aplatit($feuille);
+				$s .= $separateur;
+			}
+			else
+				$s.="$feuille$separateur";
+		}
+	return substr($s,0,-strlen($separateur));
+}*/
+
 ?>
