@@ -99,7 +99,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		$traduction = charger_fonction('referencer_traduction', 'inc');
 	else $traduction ='';
 
-	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
+	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", $id_rubrique);
 
 	$res =	debut_grand_cadre(true)
 	.	afficher_hierarchie($id_rubrique)

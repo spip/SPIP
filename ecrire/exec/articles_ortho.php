@@ -102,7 +102,7 @@ function debut_html($titre = "", $rubrique="") {
 	  "<title>[$nom_site_spip] $titre</title>\n";
 	if (strpos($rubrique, 'script>'))
 	  echo  $rubrique, "\n";
-	echo envoi_link($nom_site_spip, $rubrique);
+	echo envoi_link($nom_site_spip);
 	// Fin des entetes
 	echo "\n</head>\n";
 	echo "<body ",  _ATTRIBUTES_BODY, "

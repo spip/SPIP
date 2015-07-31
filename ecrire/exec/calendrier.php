@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_calendrier_dist
 function exec_calendrier_dist()
 {
-  global $type, $css;
+  global $type;
 // icones standards, fonction de la direction de la langue
 
   global $bleu, $vert, $jaune, $spip_lang_rtl;
@@ -46,7 +46,7 @@ function exec_calendrier_dist()
 
   if (_request('var_ajaxcharset')) return $r;
 
-  debut_page($titre, "accueil", "calendrier","",$css);
+  debut_page($titre, "accueil", "calendrier");
   echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
   echo fin_page();
 }

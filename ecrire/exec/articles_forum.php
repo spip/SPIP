@@ -53,7 +53,7 @@ function exec_articles_forum_dist()
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
-	debut_page($titre, "naviguer", "articles", "", "", $id_rubrique);
+	debut_page($titre, "naviguer", "articles", "", $id_rubrique);
 
 	articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
 
