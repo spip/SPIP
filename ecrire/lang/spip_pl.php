@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Od&#347;wie&#380; ',
 'alerte_maj_impossible' => '<b>Uwaga&nbsp;!</b> Uaktualnienie bazy danych MySQL do wersji @version@ jest nie mo&#380;liwe. Powodem jest prawdopodobnie brak mo&#380;liwo&#347;ci modyfikacji bazy danych. Skontaktuj si&#281; z administratorem.',
 'analyse_xml' => 'Analiza XML',
+'antispam_champ_vide' => 'Pozostaw puste:',
 'avis_archive_incorrect' => 'ten plik archiwalny nie nale&#380;y do SPIP',
 'avis_archive_invalide' => 'plik archiwalny jest nieprawid&#322;owy',
 'avis_attention' => 'UWAGA&nbsp;!',

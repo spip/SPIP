@@ -963,7 +963,7 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 // U
 'utf8_convert_attendez' => 'Waart e b&euml;schen a lued dann d&euml;s S&auml;it nei.',
 'utf8_convert_avertissement' => 'Dir w&auml;rt elo den Inhalt vun &auml;rer Datebank (Artikelen, Kurzmeldungen, asw) vum Character-Set <strong>@orig@</strong> ob <strong>@charset@</strong> &auml;nneren.',
-'utf8_convert_backup' => 'Vergiesst n&euml;t virdrun e kompletten Backup vun &auml;rem Site ze maachen. Dir musst och kontroll&eacute;ieren ob &auml;r Skeletter a Sproch-Fichier\'en zu @charset@ kompatibel sinn. D\'L&euml;scht vun den &Auml;nnerungen, wann d&eacute;i aktiv&eacute;iert ass, g&euml;tt zerst&eacute;iert.',
+'utf8_convert_backup' => 'Vergiesst n&euml;t virdrun e kompletten Backup vun &auml;rem Site ze maachen. Dir musst och kontroll&eacute;ieren ob &auml;r Skeletter a Sproch-Fichier\'en @charset@ kompatibel sinn.',
 'utf8_convert_erreur_deja' => '&Auml;ren Site ass schon ob @charset@, kee W&auml;rt ze konvert&eacute;ieren...',
 'utf8_convert_erreur_orig' => 'Fehler: den Character-Set @charset@ g&euml;tt n&euml;t &euml;nnerst&euml;tzt.',
 'utf8_convert_termine' => 'Et ass f&auml;rdeg!',
