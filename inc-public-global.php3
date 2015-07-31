@@ -38,7 +38,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		// un invalideur 't' dans 1 heure
 		// NB: cet invalideur connait aussi la taille du fichier
 		spip_log("cache" . $page['process_ins']);
-		if (file_exists($chemin_cache)) {
+		if (@file_exists($chemin_cache)) {
 			$bedtime = time() + 3600;
 			$taille = @filesize($chemin_cache);
 			$fichier = addslashes($chemin_cache);
@@ -289,7 +289,7 @@ function cherche_image_nommee($nom) {
 	$formats = array ('gif', 'jpg', 'png');
 	while (list(, $format) = each($formats)) {
 		$d = "$dossier/$nom.$format";
-		if (file_exists($d))
+		if (@file_exists($d))
 			return ($d);
 	}
 }

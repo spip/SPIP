@@ -231,7 +231,7 @@ function help_img($regs) {
 
 	list ($cache, $lang, $file, $ext) = $regs;
 	header("Content-Type: image/$ext");
-	if (file_exists('data/aide-'.$cache)) {
+	if (@file_exists('data/aide-'.$cache)) {
 		readfile('data/aide-'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');

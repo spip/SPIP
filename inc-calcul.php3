@@ -83,7 +83,7 @@ function charger_squelette ($squelette) {
 	// Le point 2 exige qu'il soit lu apres inc-compilo
 	// (car celui-ci initialise $tables_principales) mais avant la compil
 	$f = $squelette . '_fonctions.php3';
-	if (file_exists($f)) include($f);
+	if (@file_exists($f)) include($f);
 
 	// A quoi sert ce test ???
 	if (function_exists($nom)) return $nom;
@@ -315,7 +315,7 @@ function spip_abstract_select (
 		if (!function_exists($f)) {
 		  // non, il est decrit dans le fichier ad hoc
 			$d = 'inc_connect-' . $serveur .'.php3';
-			if (file_exists('ecrire/' . $d))
+			if (@file_exists('ecrire/' . $d))
 				include_ecrire($d);
 			$f = spip_abstract_serveur($f, $serveur);
 		}

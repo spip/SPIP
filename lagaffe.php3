@@ -22,7 +22,7 @@ include("ecrire/inc_serialbase.php3");
 
 
 # décommenter au besoin, mais faire attention au double chargement.
-#if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
+#if (@file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
 
 function dispose_boucle($nom, $corps, $criteres, $avant, $apres, $sinon)
 {
