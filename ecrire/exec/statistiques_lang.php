@@ -62,8 +62,8 @@ if ($connect_statut != '0minirezo') {
 
 debut_cadre_enfonce("langues-24.gif");
 
-		$query = "SELECT SUM(".$critere.") AS total_visites FROM spip_articles";
-		$result = spip_query($query);
+$result = spip_query("SELECT SUM(".$critere.") AS total_visites FROM spip_articles");
+
 		$visites = 1;
 		if ($row = spip_fetch_array($result))
 			$total_visites = $row['total_visites'];
@@ -71,10 +71,7 @@ debut_cadre_enfonce("langues-24.gif");
 			$total_visites = 1;
 		echo "<p>";
 
-
-		$query = "SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles WHERE statut='publie' GROUP BY lang";
-		$result = spip_query($query);
-		
+		$result = spip_query("SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles WHERE statut='publie' GROUP BY lang");
 		
 		echo "<table cellpadding = 2 cellspacing = 0 border = 0 width='100%' style='border: 1px solid #aaaaaa;'>";
 		$ifond = 1;

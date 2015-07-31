@@ -24,8 +24,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot,
 {
 	global $champs_extra, $options, $connect_statut, $les_notes;
 
-$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
-$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
+
 
 if ($row = spip_fetch_array($result)) {
 	$id_breve=$row['id_breve'];

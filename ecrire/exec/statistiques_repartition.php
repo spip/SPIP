@@ -22,15 +22,15 @@ function enfants($id_parent, $critere){
 
 	global $nombre_abs;
 
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_parent'";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_parent'");
+
 	$nombre = 0;
 
 	while($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$query2 = "SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique='$id_rubrique'";
-		$result2 = spip_query($query2);
+		$result2 = spip_query("SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique='$id_rubrique'");
+
 		$visites = 0;
 		if ($row2 = spip_fetch_array($result2)) {
 			$visites = $row2['cnt'];
@@ -55,9 +55,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	global $abs_total;
 	global $taille;
 
-	$query="SELECT id_rubrique, titre, descriptif FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY 0+titre, titre";
-	$result=spip_query($query);
-	
+	$result=spip_query("SELECT id_rubrique, titre, descriptif FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY 0+titre, titre");
 
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];

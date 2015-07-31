@@ -44,8 +44,7 @@ debut_droite();
 	while ($row = spip_fetch_array($res))
 		$types[$row['id_type']] = $row;
 
-	$query = "SELECT docs.id_document AS id_doc, docs.id_type AS type, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC";
-	$result = spip_query($query);
+	$result = spip_query("SELECT docs.id_document AS id_doc, docs.id_type AS type, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC");
 	
 	while($row=spip_fetch_array($result)){
 			$titre=$row['titre'];
