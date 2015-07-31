@@ -7,7 +7,7 @@
 
 	<ul class='liste_items sous_navigation'>
 	<BOUCLE_menusous(POUR){tableau #VALEUR{sousmenu}}>
-		[<li class="item">
+		[<li class="item[(#ENV{exec}|=={#VALEUR{url}|sinon{#CLE}}|oui)on execfound]">
 			<a href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]" class="bando2_#CLE">
 				(#VALEUR{libelle}|_T)
 			</a>
