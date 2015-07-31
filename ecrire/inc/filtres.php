@@ -2490,13 +2490,15 @@ function bando_style_prive_theme() {
  * @param string $url
  * @param string $class
  * @param string $confirm
+ * @param string $title
  * @return string
  */
-function bouton_action($libelle, $url, $class="", $confirm=""){
+function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
 	$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
+	$title = $title ? " title='$title'" : "";
 
 	return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
-		."<button type='submit' class='submit'$onclick>$libelle</button></div></form>";
+		."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 }
 
 
