@@ -327,10 +327,6 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$a = array_shift($url);
 	if (!$a) $a= './';
 
-	// ajout de la globale ?
-	//if ($v === NULL)
-	//	$v = _request($c);
-
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
 		if (preg_match(',^'.preg_quote($c,',').'(=.*)?$,', urldecode($val), $r)) {
@@ -347,7 +343,9 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	}
 
 	// ajouter notre parametre si on ne l'a pas encore trouve
-	if ($v === NULL)
+	if ($v === NULL
+	AND $args = func_get_args()
+	AND count($args)==2)
 		return $v;
 	elseif ($v)
 		$url[] = $c.'='.rawurlencode($v);
