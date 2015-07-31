@@ -195,6 +195,16 @@ function erreur_requete_boucle($query, $errno, $erreur) {
 	erreur_squelette($retour);
 }
 
+/**
+ * Definir le nombre maximal d'erreur possible dans les squelettes
+ * au dela, l'affichage est arrete et les erreurs sont affichees.
+ * Definir a zero permet de ne jamais bloquer, 
+ * mais il faut etre tres prudent avec cette utilisation
+ * 
+ * Sert pour les tests unitaires
+ */
+define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
+
 //
 // Erreur de syntaxe des squelettes : memoriser le code fautif
 //
@@ -209,7 +219,7 @@ function erreur_squelette($message='', $lieu='') {
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
-	if (++$runs > 4) {
+	if (++$runs > _DEBUG_MAX_SQUELETTE_ERREURS AND _DEBUG_MAX_SQUELETTE_ERREURS) {
 		if ($_COOKIE['spip_admin'] OR
 		($GLOBALS['var_mode'] == 'debug')) {
 			include_spip('inc/minipres');
