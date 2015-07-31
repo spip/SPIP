@@ -106,7 +106,7 @@ function forum_abonnement($retour) {
 		d'indiquer ci-dessous l'identifiant personnel qui vous a
 		&eacute;t&eacute; fourni. Si vous n'&ecirc;tes pas enregistr&eacute;, vous devez").
 ' <script language="JavaScript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=500,height=370\\\'); void(0);\\"");
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>vous inscrire</a> au pr&eacute;alable.<br>';
 		login('', false, $message_login);
 		return false;
