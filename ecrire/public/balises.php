@@ -1271,7 +1271,10 @@ function balise_FOREACH_dist($p) {
 			$__modele : 
 			($_modele ? $_modele : 'foreach');
 
-		$p->param = @array_shift(@array_shift($p->param));
+		// on passe a la balise seulement les parametres
+		// mais on enleve les 2 deja utilise
+		// [(#FOREACH{CONFIG,'',suivants}|filtre)]
+		$p->param[0] = array_merge(array(""),array_slice($p->param[0],3));
 		$p = $balise($p);
 		$filtre = chercher_filtre('foreach');
 		$p->code = $filtre . "(unserialize(" . $p->code . "), '" . $_modele . "')";
