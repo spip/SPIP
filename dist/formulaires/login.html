@@ -32,8 +32,10 @@
 					<span class='details'>&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:login_motpasseoublie:></a>&#93;</span>
 		    </li>
 				[(#ENV{rester_connecte})
-					<li><input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
-					<label class='nofx' for="session_remember"><:login_rester_identifie:></label></li>
+					<li class="editer_session">
+					    <input class='checkbox' type="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
+					    <label class='nofx' for="session_remember"><:login_rester_identifie:></label>
+			        </li>
 				]
 			</ol>
 			<p class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></p>
