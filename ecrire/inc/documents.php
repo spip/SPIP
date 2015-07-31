@@ -427,8 +427,11 @@ function inserer_documents($letexte) {
 			}
 		}
 
-		// Installer le document
-		$letexte = str_replace($match[0], $rempl."\n\n", $letexte);
+		// Installer le document ; les <div> sont suivies de deux \n de maniere
+		// a provoquer un paragraphe a la suite ; les span, non, sinon les liens
+		// [<img|left>->URL] ne fonctionnent pas.
+		$saut = preg_match(',<div ,', $rempl) ? "\n\n" : "";
+		$letexte = str_replace($match[0], $rempl . $saut, $letexte);
 	}
 
 	$pile--;
