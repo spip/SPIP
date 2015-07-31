@@ -136,7 +136,7 @@
 	<bouton id='article_creer' parent="outils_rapides">
 		<icone>images/article-new-16.png</icone>
 		<titre>icone_ecrire_article</titre>
-		<url>articles_edit</url>
+		<url>article_edit</url>
 		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 	<bouton id='auteur_creer' parent="outils_rapides">

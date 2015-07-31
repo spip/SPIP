@@ -1655,7 +1655,7 @@ function spip_desinfecte(&$t,$deep = true) {
 				$t[$key] = stripslashes($t[$key]);
 			$t[$key] = str_replace(chr(0), '-', $t[$key]);
 		}
-		// traiter aussi les "texte_plus" de articles_edit
+		// traiter aussi les "texte_plus" de article_edit
 		else if ($deep AND is_array($t[$key]) AND $key!=='GLOBALS')
 			spip_desinfecte($t[$key],$deep);
 	}

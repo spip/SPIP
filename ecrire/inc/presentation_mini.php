@@ -113,6 +113,7 @@ function liste_articles_bloques()
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {
 		include_spip('inc/drapeau_edition');
+		include_spip('inc/presentation');
 		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
 		if (count($articles_ouverts)) {
 			$res .=
@@ -249,7 +250,7 @@ function info_copyright() {
 function debloquer_article($arg, $texte) {
 
 	// cas d'un article pas liberable : on est sur sa page d'edition
-	if (_request('exec') == 'articles_edit'
+	if (_request('exec') == 'article_edit'
 	AND $arg == _request('id_article'))
 		return '';
 

@@ -96,8 +96,10 @@ function f_afficher_blocs_ecrire($flux) {
 		if ($fond == "prive/squelettes/navigation/$exec"){
 			$flux['data']['texte'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
-		if ($fond=="prive/squelettes/extra/$exec")
-			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
+		if ($fond=="prive/squelettes/extra/$exec") {
+			include_spip('inc/presentation_mini');
+			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte'])).liste_articles_bloques();
+		}
 		if ($fond=="prive/squelettes/contenu/$exec"){
 			if (!strpos($flux['data']['texte'],"<!--affiche_milieu-->"))
 				$flux['data']['texte'] = preg_replace(',<div id=["\']wysiwyg,',"<!--affiche_milieu-->\\0",$flux['data']['texte']);
