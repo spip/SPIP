@@ -21,7 +21,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
     spip_log("Inclusion dans $cache_incluant");
     $cle = $fond;
     if ($contexte_inclus)
-      while(list($k, $v) = each($contexte))$cle .= "&$k=$v";
+      while(list($k, $v) = each($contexte_inclus))$cle .= "&$k=$v";
 
     $page = ramener_cache($cle,
 			  'cherche_page_incluse',
