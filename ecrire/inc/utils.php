@@ -1451,8 +1451,10 @@ function spip_initialisation_suite() {
 		if (!is_array($x)) $x = unserialize($x); // prive.php l'a fait
 		if ($x['display'] == 4) {
 			define('_SPIP_AJAX', -1);
-			if (isset($_COOKIE['spip_accepte_ajax']))
+			if (isset($_COOKIE['spip_accepte_ajax'])) {
+				include_spip("inc/cookie");
 				spip_setcookie('spip_accepte_ajax', -1, 0);
+			}
 		}
 	}
 
