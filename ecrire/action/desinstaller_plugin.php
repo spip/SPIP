@@ -31,7 +31,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_desinstaller_plugin_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$plugin = $securiser_action();
+	$arg = $securiser_action();
+	list($dir_plugins,$plugin) = explode("::",$arg);
+	$dir_type = "_DIR_PLUGINS";
+	if (defined('_DIR_PLUGINS_SUPPL') AND $dir_plugins==_DIR_PLUGINS_SUPPL)
+		$dir_type = "_DIR_PLUGINS_SUPPL";
 	$installer_plugins = charger_fonction('installer', 'plugins');
 	$infos = $installer_plugins($plugin, 'uninstall');
 	if ($infos AND !$infos['install_test'][0]) {
