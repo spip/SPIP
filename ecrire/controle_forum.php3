@@ -283,7 +283,7 @@ if ($connect_statut != "0minirezo") {
 
 // reglages
 if (!$debut) $debut = 0;
-$pack = 5;		// nb de forums affiches par page
+$pack = 20;		// nb de forums affiches par page
 $enplus = 200;	// intervalle affiche autour du debut
 $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 $limitnb = $debut + $enplus - $limitdeb;
@@ -304,7 +304,6 @@ $result_forum = spip_query($query_forum);
 $controle = '';
 
 $i = $limitdeb;
-
 if ($i>0) $affichezero = "<A HREF='controle_forum.php3'>0</A> ... | ";
 
 while ($row = spip_fetch_array($result_forum)) {
@@ -314,10 +313,14 @@ while ($row = spip_fetch_array($result_forum)) {
 
 	// nouveaux / anciens
 	$new = ($datep AND ($datep < $row['dh']));
+
 	if ($new AND !$dejaaffichenew) {
-		echo "<small>&gt;&gt; Messages &agrave; contr&ocirc;ler :</small> ";
+		echo "<small>&gt;&gt; Messages r&eacute;cents&nbsp;:</small> ";
 		$dejaaffichenew = true;
 	}
+	if ($new AND $ok_controle)
+		$marqueranciens = "<br><br><small>&gt;&gt; Si vous avez vu les messages de cette page et des suivantes, vous pouvez <a href='controle_forum.php3?debut=$debut$controle_sans&marque=$marquepage'>les marquer comme &laquo;&nbsp;anciens&nbsp;&raquo;</a></small>";
+
 	if ($affichezero) {
 		echo $affichezero;
 		unset($affichezero);
@@ -327,19 +330,19 @@ while ($row = spip_fetch_array($result_forum)) {
 	if ($ok_controle && !$marquepage)
 		$marquepage = $row['id_forum'];
 	if ($datep == $row['dh']) {
-		echo "<br><small>&gt;&gt; Messages contr&ocirc;l&eacute;s : "; // barre de navigation
+		echo "<br><small>&gt;&gt; Messages anciens&nbsp;: "; // barre de navigation
 		$fermeanciens = "</small>";
 		if ($ok_controle)
-			$controle .= "<br><br><hr>";
+			$controle .= debut_cadre_enfonce('', true)."<p>".propre("{{Remarque:}} vous avez marqu&eacute; les messages apparaissant ci-dessous et dans les pages suivantes comme &laquo;anciens&raquo;.").fin_cadre_enfonce(true);
 	}
 	
 	// barre de navigation
 	if ($i == $pack*floor($i/$pack)) {
-		if ($i > $limitdeb) echo " | ";
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
 			echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>$i</A>";
+		echo " | ";
 	}
 
 	// elements a controler
@@ -349,8 +352,8 @@ while ($row = spip_fetch_array($result_forum)) {
 	$i ++;
 }
 
-echo " | <A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>$fermeanciens";
-echo "<br><small>&gt;&gt; <a href='controle_forum.php3?debut=$debut$controle_sans&marque=$marquepage'><font color=black>Marquer les messages contr&ocirc;l&eacute;s</font></a></small>";
+echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>$fermeanciens";
+echo $marqueranciens;
 
 echo $controle;
 
