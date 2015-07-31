@@ -193,7 +193,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 		if (!$ouverte) $i++;
 	}
 
-	// 3	
+	// 3
 	$resultats = array();
 	foreach ($todo2 as $do){
 		$do = trim($do);
@@ -314,6 +314,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 				$unique=true;
 			case 'ADD INDEX':
 			case 'ADD KEY':
+				if (!isset($unique)) $unique = false;
 				// peut etre "(colonne)" ou "nom_index (colonnes)"
 				// bug potentiel si qqn met "(colonne, colonne)"
 				//
