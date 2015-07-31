@@ -229,7 +229,7 @@ if ($connect_statut =="0minirezo"){
 	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
 
 	// dans le groupe...
-	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
+	$query_groupes = "SELECT id_groupe, titre FROM spip_groupes_mots ORDER BY titre";
 	$result = spip_query($query_groupes);
 	if (spip_num_rows($result)>1) {
 		debut_cadre_relief("groupe-mot-24.gif");
@@ -248,10 +248,11 @@ if ($connect_statut =="0minirezo"){
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
 		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots",
-							  "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
-							  "('" .
-							  addslashes(_T('info_mot_sans_groupe'))."', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'");
-
+			"(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
+			"('" . 
+			addslashes(_T('info_mot_sans_groupe')) .
+			"', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" .
+			")");
 		}
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 	}
