@@ -465,7 +465,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$url_site=$row['url_site'];
 	$statut=$row['statut'];
 	$ip=$row["ip"];
-	
+
 	$h = (!$id_article ? '' : generer_url_entite($id_article, 'article'))
 	  . "#forum$id_forum";
 
@@ -509,6 +509,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 		$style = " style='border: 1px solid green; padding: 5px;'";
 	} else $style = '';
 
+	$mots = afficher_forum_mots($id_forum);
+
 	$res .= "<table$style width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>"
 	.  afficher_forum_auteur($row)
 	. (!$controle_id_article ? '' :
@@ -521,9 +523,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	       : "<b>$nom_site</b>"))
 	. ($controle_id_article ? '' :
 	      repondre_forum($row, $titre, $statut, "$retour?$arg", _T('lien_repondre_message')))
-	   . (($GLOBALS['meta']["mots_cles_forums"] <> "oui") ? '' :
-	      afficher_forum_mots($id_forum))
-	   . "</td></tr></table>";
+	  . $mots
+	  . "</td></tr></table>";
 
 	if ($spip_display == 4) return "\n<li>$res</li>\n";
 
@@ -583,18 +584,16 @@ function afficher_forum_auteur($row)
 // http://doc.spip.org/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
-	$result = sql_select("titre, type", "spip_mots AS mots, spip_mots_forum AS lien", "lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+	if ($GLOBALS['meta']["mots_cles_forums"] <> "oui") return '';
 
-	$res = "";
-	while ($row = sql_fetch($result)) {
-		$res .= "\n<li> <b>"
-		. propre($row['titre'])
-		. " :</b> "
-		.  propre($row['type'])
-		.  "</li>";
+	$mots = sql_allfetsel("titre, type", "spip_mots AS M LEFT JOIN spip_mots_forum AS L ON L.id_mot=M.id_mot",  "L.id_forum=" . intval($id_forum));
+
+	foreach ($mots as $k => $r) {
+		$mots[$k] = propre('<b>' . $r['type'] . ' :</b>') . ' '
+		  . propre($r['titre']);
 	}
-	
-	return $res ? "\n<ul>$res</ul>\n" : $res;
+
+	return ("\n<ul><li>" . join("</li>\n<li>", $mots) . "</li></ul>\n");
 }
 
 // affiche les traits de liaisons entre les reponses
