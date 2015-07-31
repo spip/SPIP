@@ -26,11 +26,9 @@ function exec_install_dist()
 	} else {
 
 	// On va supprimer les eventuelles vieilles valeurs de meta,
-	// mais du coup on perd le boulout qui vient d'etre fait par init_langues
-	// qu'il faut donc relancer (pour langue_site et langues_proposees)
+	// on perd l'init des langues, mais elle est refaite par menu_langue
 	@unlink(_FILE_META);
 	$GLOBALS['meta'] = array();
-	init_langues();
 	include_spip('base/create');
 	include_spip('base/db_mysql');
 
