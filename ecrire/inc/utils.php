@@ -407,7 +407,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	return $a . $ancre;
 }
 
-// Prend une URL et lui ajoute/retire une ancre aprÃ¨s l'avoir nettoyee
+// Prend une URL et lui ajoute/retire une ancre aprs l'avoir nettoyee
 // pour l'ancre on translitere, vire les non alphanum du debut,
 // et on remplace ceux a l'interieur ou au bout par -
 // http://doc.spip.org/@ancre_url
@@ -454,7 +454,7 @@ function self($amp = '&amp;', $root = false) {
 			$url = parametre_url($url, $v, $c, '&');
 
 	// supprimer les variables sans interet
-	if (!_DIR_RESTREINT) {
+	if (test_espace_prive()) {
 		$url = preg_replace (',([?&])('
 		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs|'
 		.'changer_lang|var_lang|action)=[^&]*,i', '\1', $url);
@@ -473,6 +473,18 @@ function self($amp = '&amp;', $root = false) {
 	$url = preg_replace(',^$,', './', $url);
 
 	return $url;
+}
+
+// Indique si on est dans l'espace prive
+function test_espace_prive() {
+	static $prive;
+	if (!isset($prive))
+		$prive = (
+			(_DIR_RESTREINT=='')
+			OR (_request('action') !== null)
+			OR (_request('exec') !== null)
+		);
+	return $prive;
 }
 
 //
@@ -1267,12 +1279,11 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
 	// Lire les meta cachees et init noyau (espace public uniquement)
-
 	$GLOBALS['noyau'] = array();
 	if (lire_fichier(_FILE_META, $meta)) {
 		$GLOBALS['meta'] = @unserialize($meta);
 		if (_DIR_RESTREINT
-		AND (!isset($_REQUEST['var_mode']))
+		AND !isset($_REQUEST['var_mode'])
 		AND isset($GLOBALS['meta']['noyau'])
 		AND is_array($GLOBALS['meta']['noyau'])) {
 			$GLOBALS['noyau'] = $GLOBALS['meta']['noyau'];
@@ -1289,7 +1300,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 		// Forcer le renouvellement de l'alea
 
-		if ((!_DIR_RESTREINT)
+		if (test_espace_prive()
 		AND (time() > _RENOUVELLE_ALEA +  @$GLOBALS['meta']['alea_ephemere_date'])) {
 			include_spip('inc/acces');
 			renouvelle_alea();
