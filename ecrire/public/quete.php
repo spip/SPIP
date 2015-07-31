@@ -73,6 +73,7 @@ function quete_profondeur($id, $connect='') {
 
 
 # retourne la date a laquelle comparer lorsqu'il y a des post-dates
+// http://doc.spip.org/@quete_date_postdates
 function quete_date_postdates() {
 	return
 		($GLOBALS['meta']['date_prochain_postdate'] > time())
