@@ -2437,7 +2437,6 @@ else {
 			$class = "invisible_au_chargement";
 		}
 			echo "<div class='$class' id='bandeauadministration' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			//icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
 			icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
 	
 			bandeau_barre_verticale();
@@ -2451,9 +2450,14 @@ else {
 			echo "</tr></table></div></div>";
 
 
+	}
 
-	}	
-	
+	// Refermer tout de suite le bandeau deroule par defaut
+	echo "
+	<script type='text/javascript'><!--
+		changestyle('-', '-', '-');
+	// --></script>\n";
+
 	echo "</div>";
 	
 	echo "</td></tr></table>";
