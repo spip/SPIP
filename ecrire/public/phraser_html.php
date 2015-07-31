@@ -151,7 +151,7 @@ function phraser_champs($texte,$ligne,$result) {
 		$champ->nom_champ = $match[3];
 		$champ->etoile = $match[5];
 		if ($suite[0] == '{') {
-		  phraser_arg($suite, '', '', array(), $champ);
+		  phraser_arg($suite, '', array(), $champ);
 		}
 		$texte = $suite;
 		$result[] = $champ;
@@ -187,7 +187,7 @@ function phraser_champs_etendus($texte, $ligne,$result) {
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
-	$result = phraser_arg($texte, $fin, $sep, $result, $pointeur_champ);
+	$result = phraser_arg($texte, $sep, $result, $pointeur_champ);
   }
 # mettre ici la suite du texte, 
 # notamment pour que l'appelant vire le caractere fermant si besoin
@@ -195,7 +195,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   return $result;
 }
 
-function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
+function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = trim($match[1]);
@@ -217,7 +217,7 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
 		else {
-		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^$fin,}]*)([,}$fin].*)$/ms", $args, $regs);
+		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
 		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
