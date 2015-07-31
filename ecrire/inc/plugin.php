@@ -106,15 +106,6 @@ function liste_plugin_valides($liste_plug, $force = false)
 	)
 	);
 
-	// les procure de core.xml sont consideres comme des plugins installes
-	foreach($infos['_DIR_RESTREINT']['']['procure'] as $procure) {
-		$procure['nom'] = $procure['id'];
-		$procure['etat'] = '?';
-		$procure['dir_type'] = '_DIR_RESTREINT';
-		$procure['dir'] = '';
-		$liste_non_classee[strtoupper($procure['id'])] = $procure;
-	}
-	
 	foreach($liste_ext as $plug){
 	  if (isset($infos['_DIR_EXTENSIONS'][$plug]))
 	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_EXTENSIONS');
@@ -123,6 +114,21 @@ function liste_plugin_valides($liste_plug, $force = false)
 	  if (isset($infos['_DIR_PLUGINS'][$plug]))
 	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
 	}
+
+	// les procure de core.xml sont consideres comme des plugins proposes,
+	// mais surchargeables (on peut activer un plugin qui procure ca pour l'ameliorer,
+	// donc avec le meme prefixe)
+	foreach($infos['_DIR_RESTREINT']['']['procure'] as $procure) {
+		$p = strtoupper($procure['id']);
+		if (!isset($liste_non_classee[$p])){
+			$procure['nom'] = $procure['id'];
+			$procure['etat'] = '?';
+			$procure['dir_type'] = '_DIR_RESTREINT';
+			$procure['dir'] = '';
+			$liste_non_classee[$p] = $procure;
+		}
+	}
+
 	return array($infos, $liste_non_classee);
 }
 
