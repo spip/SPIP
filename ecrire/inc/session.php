@@ -310,6 +310,8 @@ function actualiser_sessions($auteur) {
  */
 function ecrire_fichier_session($fichier, $auteur) {
 
+	$row = $auteur;
+
 	// ne pas enregistrer ces elements de securite
 	// dans le fichier de session
 	unset($auteur['pass']);
@@ -317,7 +319,9 @@ function ecrire_fichier_session($fichier, $auteur) {
 	unset($auteur['low_sec']);
 	unset($auteur['alea_actuel']);
 	unset($auteur['alea_futur']);
-	
+
+	$auteur = pipeline('preparer_fichier_session',array('args'=>array('row'=>$row),'data'=>$auteur));
+
 	// ne pas enregistrer les valeurs vraiment nulle dans le fichier
 	foreach($auteur as $variable=>$valeur){
 		if ($valeur === null){
