@@ -930,8 +930,8 @@ function generer_form_public($script, $corps, $atts='') {
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
 
 	// si script=redirect, on veut basculer vers le public !
-  // et aussi le cas particulier ical qu'il fautdrait evacuer
-	if ($script=='redirect' OR $script=='ical') {
+  // et aussi le cas particulier RSS qu'il fautdrait evacuer
+	if ($script=='redirect' OR $script=='rss') {
 		return  generer_url_public('',
 				  "action=$script" .($args ? "&$args" : ''),
 				  $no_entities,$rel);
