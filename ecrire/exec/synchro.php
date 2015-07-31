@@ -127,7 +127,7 @@ if (spip_num_rows($result) > 0) {
 			$titre = htmlspecialchars($titre_rubrique);
 			
 			echo "<li>", http_href( generer_url_public('backend', "id_rubrique=$id_rubrique"), 
-			http_img_pack( 'feed.png', 'RSS', ' border="0" ') .'&nbsp; '.
+			http_img_pack( 'feed.png', 'RSS', '') .'&nbsp; '.
 			$titre_rubrique, $titre),
 			"</li>\n";
 		}
@@ -142,7 +142,7 @@ if (spip_num_rows($result) > 0) {
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
 		echo '<ul><li>' .
 		http_href( generer_url_public('backend-breves', ""), 
-			http_img_pack( 'feed.png', 'RSS', ' border="0" ') .'&nbsp; '.
+			http_img_pack( 'feed.png', 'RSS', '') .'&nbsp; '.
 			_L('syndication des br&egrave;ves du site'), _L('syndication des br&egrave;ves du site')) .
 		"</li></ul>";
 		

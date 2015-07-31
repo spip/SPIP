@@ -179,7 +179,7 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
 			(($etat !== false) ? ' checked="checked" ' : '') .
 			"id='$statut'") .
 		"&nbsp;" . 
-		http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
+		http_img_pack($img, $texte, "style='width: 8px; height: 9px; border: 0px;'", $texte) .
 		" " .
 		$texte .
 		"</label>" .

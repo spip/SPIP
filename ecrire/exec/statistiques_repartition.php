@@ -85,9 +85,6 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 					echo "\n<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
-				//echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' width='".($niveau*20+1)."' height=8 border=0>";
-				
-			
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
 				echo "<span class='verdana1'>";	
@@ -102,9 +99,9 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				echo "\n<tr>";
 				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
 				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height='8' border='0' alt= ' '/>";
-				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width='$largeur_rouge' height='8' border='0' alt=' ' />";
-				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire;' width='$largeur_vert' height='8' border='0' alt=' ' />";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='height: 8px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
+				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee; height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
+				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire; width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
 				
 				echo "</td></tr></table>\n";
 				echo "</td></tr></table>";

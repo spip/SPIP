@@ -357,12 +357,12 @@ if ($connect_statut != '0minirezo') {
 		if ($date_premier < $date_debut)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 				     'loupe-moins.gif',
-				     "border='0' style='vertical-align:center;'",
+				     "style='border: 0px; vertical-align:center;'",
 				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 				     'loupe-plus.gif',
-				     "border='0' style='vertical-align:center;'",
+				     "style='border: 0px; vertical-align:center;'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
 	

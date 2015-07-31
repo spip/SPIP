@@ -226,7 +226,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 {
 	global $spip_lang_rtl;
 
-		 
+	spip_log("forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site");
 	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "\n<tr>"
@@ -235,7 +235,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 			   . _DIR_IMG_PACK
 			   . "forum-vert.gif'" 
 			   . ">"
-			   . http_img_pack('rien.gif', ' ', "width='10' height='13' border='0'")
+			   . http_img_pack('rien.gif', ' ', "style='width: 10px; height: 13px border: 0px'")
 			   . "</td>\n<td "))
 		.  " width='100%' valign='top' rowspan='2'>"
 		.  debut_cadre_thread_forum("", true, "", typo($titre_texte))
@@ -251,7 +251,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 			: ("<tr><td style='width: 10px' valign='top' background='"
 			  . _DIR_IMG_PACK
 			  . "rien.gif'>"
-			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, "width='10' height='13' border='0'")
+			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, " style='width: 10px; height: 13px border: 0px'")
 		      . "</td>\n</tr>"))
 		. "</table>"
 		. "\n<div>&nbsp;</div>";
