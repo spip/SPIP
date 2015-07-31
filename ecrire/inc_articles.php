@@ -509,6 +509,7 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 
 function changer_statut_articles($id_article, $statut)
 {
+	$id_article = intval($id_article);
 	$result = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
 
 	if ($row = spip_fetch_array($result)) {

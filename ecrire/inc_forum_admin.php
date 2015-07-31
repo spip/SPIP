@@ -105,6 +105,7 @@ function forum_admin_dist()
 # quand on abandonnera les .php3
 
 function changer_statut_forum_admin($id_forum, $statut) {
+	$id_forum = intval($id_forum);
 	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum");
 	if (!($row = spip_fetch_array($result)))
 		return;
