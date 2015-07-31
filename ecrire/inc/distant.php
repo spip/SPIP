@@ -49,7 +49,8 @@ function copie_locale($source, $mode='auto') {
 			$contenu = recuperer_page($source,false,false,_COPIE_LOCALE_MAX_SIZE);
 			if (!$contenu) return false;
 			ecrire_fichier(_DIR_RACINE.$local, $contenu);
-
+			spip_log ('ecrire copie locale '._DIR_RACINE.$local);
+			
 			// pour une eventuelle indexation
 			pipeline('post_edition',
 				array(
@@ -354,7 +355,7 @@ function fichier_copie_locale($source) {
 	// et si il n'aurait pas deja ete rapatrie
 
 	$path_parts = pathinfo($source);
-	$ext = $path_part ? $path_parts['extension'] : '';
+	$ext = $path_parts ? $path_parts['extension'] : '';
 
 	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
 		$f = nom_fichier_copie_locale($source, $ext);
