@@ -293,14 +293,17 @@ function AjaxRet(res,status, target, callback)
 {
 	if (res.aborted) return;
 	if (status=='error') return jQuery(target).html('HTTP Error');
-
-	// Inject the HTML into all the matched elements
-	jQuery(target).html(res.responseText)
-	  // Execute all the scripts inside of the newly-injected HTML
-	  .evalScripts()
-	  // Execute callback
-	  .each( callback, [res.responseText, status] );
-	//callback(res,status);
+	
+  if (this.evalScripts)
+		// Inject the HTML into all the matched elements
+		jQuery(target).html(res.responseText)
+		  // Execute all the scripts inside of the newly-injected HTML
+		  .evalScripts()
+		  // Execute callback
+		  .each( callback, [res.responseText, status] );
+		//callback(res,status);
+  else // jQuery v1.1.4
+		jQuery(target).html(res.responseText).each( callback, [res.responseText, status] );
 }
 
 
