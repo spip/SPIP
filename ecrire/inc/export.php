@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/serial');
 include_spip('base/auxiliaires');
-include_spip('public/interfaces'); // pour table_des_tables
+include_spip('public/interfaces'); // pour table_jointures
 
 $GLOBALS['version_archive'] = '1.3';
 // NB: Ce fichier peut ajouter des tables (old-style)
@@ -64,7 +64,6 @@ function export_all_list_tables()
 	global $EXPORT_tables_noexport;
 	global $tables_principales;
 	global $tables_auxiliaires;
-	global $table_des_tables;
 	global $tables_jointures;
 
 // on construit un index des tables de liens
