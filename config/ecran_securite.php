@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.2.2'); // 2014-11-15
+define('_ECRAN_SECURITE', '1.2.2'); // 2014-12-01// 2014-12-01date
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
