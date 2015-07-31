@@ -222,7 +222,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		if ($html AND ($affiche_boutons_admin OR $debug)) {
 			$var_mode_affiche = _request('var_mode_affiche');
 			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-			echo erreur_squelette();
+			echo erreur_squelette(false);
 		}
 	} else {
 
