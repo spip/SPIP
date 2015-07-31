@@ -809,7 +809,7 @@ function bouton($titre,$lien) {
 //
 
 function debut_html($titre = "") {
-	global $couleur_foncee, $couleur_claire, $couleur_lien;
+	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	$nom_site_spip = htmlspecialchars(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
@@ -847,8 +847,8 @@ function debut_html($titre = "") {
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
 
-	a { color:<?php echo $couleur_lien; ?>; text-decoration: none; }
-	a:hover { color:#FF9900; text-decoration: underline; }
+	a { text-decoration: none; }
+	a:hover { text-decoration: underline; }
 	a.icone { text-decoration: none; }
 	a.icone:hover { text-decoration: none; }
 
@@ -916,7 +916,7 @@ afficher_script_layer();
 //-->
 </script>
 </head>
-<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_foncee; ?>" alink="<?php echo $couleur_lien ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
 <?php
 
@@ -1521,7 +1521,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
-		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid #cccccc; color: #cccccc'><b>interface compl&egrave;te</b></span>";
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid $couleur_claire; color: $couleur_claire'><b>interface compl&egrave;te</b></span>";
 		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
 	echo "</font>";
 	echo "</td>";
