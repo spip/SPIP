@@ -648,8 +648,7 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 
 function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	$total_parties = $boucles[$id_boucle]->total_parties;
-#	var_dump($total_parties);
-#	var_dump($mode);
+
 	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
 	list(, $op1, $op2) = $regs;
 	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
@@ -676,7 +675,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 					(($total_parties==1) ? "" : (' + '.($total_parties-1))) :
 					('+'.$total_parties.' - 1'));
 		}
-#var_dump($fin);die();
+
 		// {pagination}, gerer le debut_xx=-1 pour tout voir
 		if ($op1=='p'){
 			$debut .= ";\n	\$debut_boucle = ((\$tout=(\$debut_boucle == -1))?0:(\$debut_boucle))";
