@@ -182,8 +182,6 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 // on peut la surcharger en definissant dans mes_fonctions :
 // function filtre_introduction()
 //
-@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
-
 // http://doc.spip.org/@filtre_introduction_dist
 function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// Si un descriptif est envoye, on l'utilise directement
@@ -206,6 +204,7 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);
 
 	// On coupe
+	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
 
 	// on nettoie un peu car ce sera traite par traiter_raccourcis()
