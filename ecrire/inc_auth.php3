@@ -148,6 +148,7 @@ function auth() {
 		// regler les preferences de l'auteur
 		$prefs = unserialize($row['prefs']);
 
+		// vieux ! on pourra supprimer post 1.6 finale...
 		if (! isset($prefs['display'])) { // recuperer les cookies ou creer defaut
 			if ($GLOBALS['set_disp'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_display']) {}
 			else $GLOBALS['set_disp'] = 2;

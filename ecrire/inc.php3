@@ -35,17 +35,19 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
+if ($prefs_mod) {
+	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
+}
+
 if ($var_lang) {
 	if (changer_langue($var_lang)) {
-		$prefs['spip_lang'] = $var_lang;
-		$prefs_mod = true;
+		spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang)."' WHERE id_auteur = $connect_id_auteur");
+		$auteur_session['lang'] = $var_lang;
+		ajouter_session($auteur_session, $spip_session);
+
 		// Poser un cookie, pour les pages n'ayant pas acces aux meta
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
 	}
-}
-
-if ($prefs_mod) {
-	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
 if ($set_ecran) {

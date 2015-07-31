@@ -66,6 +66,7 @@ function creer_base() {
 		prefs tinytext NOT NULL,
 		cookie_oubli tinytext NOT NULL,
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
+		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut),
@@ -1232,16 +1233,30 @@ function maj_base() {
 		maj_version (1.601);
 	}
 
-	if ($version_installee < 1.602) {
+	/* if ($version_installee < 1.602) {
 		// juste des types de documents en plus (creer_base())
 		maj_version (1.602);
-	}
+	} */
 
 	if ($version_installee < 1.603) {
 		// supprimer les fichiers deplaces
 		@unlink('inc_meta_cache.php3');
 		@unlink('data/engines-list.ini');
 		maj_version (1.603);
+	}
+
+	if ($version_installee < 1.604) {
+		spip_query("ALTER TABLE spip_auteurs ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		$u = spip_query("SELECT * FROM spip_auteurs WHERE prefs LIKE '%spip_lang%'");
+		while ($row = spip_fetch_array($u)) {
+			$prefs = unserialize($row['prefs']);
+			$l = $prefs['spip_lang'];
+			unset ($prefs['spip_lang']);
+			spip_query ("UPDATE spip_auteurs SET lang='".addslashes($l)."',
+				prefs='".addslashes(serialize($prefs))."'
+				WHERE id_auteur=".$row['id_auteur']);
+		}
+		maj_version (1.604);
 	}
 }
 
