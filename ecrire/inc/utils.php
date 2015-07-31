@@ -243,8 +243,12 @@ function spip_abstract_quote($arg_sql) {
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
 // http://doc.spip.org/@_request
-function _request($var) {
+function _request($var, $val = '') {
 	global $_GET, $_POST;
+	if($val!=''){
+		if (isset($_GET[$var])) $_GET[$var] = $val;
+		elseif (isset($_POST[$var])) $_POST[$var] = $val;
+	}
 	if (isset($_GET[$var])) $a = $_GET[$var];
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
 	else return NULL;
