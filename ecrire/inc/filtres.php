@@ -64,6 +64,13 @@ function filtrer($filtre) {
 	}
 }
 
+
+// http://doc.spip.org/@spip_version
+function spip_version($texte) {
+	global $spip_version_affichee;
+	return $spip_version_affichee;
+}
+
 //
 // Fonctions graphiques
 //
@@ -912,7 +919,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 
 // Cette fonction recoit:
 // - un nombre d'evenements, 
-// - une chaine à afficher si ce nombre est nul, 
+// - une chaine ï¿½ afficher si ce nombre est nul, 
 // - un type de calendrier
 // -- et une suite de noms N.
 // Elle demande a la fonction precedente son tableau
