@@ -1,12 +1,21 @@
 <?php
 
-$fond = $_GET["fond"];
+if (!$fond = $_GET["fond"]) {
+	$fond = $contexte_inclus['fond'];
+}
 
-if (ereg("\/", $fond)) die ("Ben voyons");
-if (strpos("\.\.", $fond) > 0) die ("Faut pas se gener");
+// Securite : le squelette *doit* exister dans squelettes/
+if (strstr($fond, '..')) {
+	die ("Faut pas se gener");
+}
+if (!function_exists('find_in_path')) {
+	include ('ecrire/inc_version.php3');
+}
+if (preg_match(',^squelettes/,', find_in_path("$fond.html"))) {
+	include ("inc-public.php3");
+} else {
+	spip_log("page.php3: le squelette $fond.html *doit* se trouver dans squelettes/");
+}
 
-$delais = 24 * 3600;
-
-include ("inc-public.php3");
 
 ?>
