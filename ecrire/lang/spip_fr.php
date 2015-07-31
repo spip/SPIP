@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'afficher les traductions',
 'alerte_maj_impossible' => '<b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'analyse_xml' => 'Analyse XML',
+'annuler' => 'Annuler',
 'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'le fichier archive n\'est pas un fichier SPIP',
 'avis_archive_invalide' => 'le fichier archive n\'est pas valide',
@@ -666,6 +667,10 @@ et vous reconnecter au site.
 'precedent' => 'pr&eacute;c&eacute;dent',
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
+
+
+// R
+'retour' => 'Retour',
 
 
 // S
