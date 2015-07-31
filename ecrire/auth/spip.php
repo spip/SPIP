@@ -41,8 +41,8 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 
 		if ($row) {
 			include_spip('auth/sha256.inc');
-			$shapass = sha256($row['alea_actuel'] . $pass);
-			$shanext = sha256($row['alea_futur'] . $pass);
+			$shapass = _nano_sha256($row['alea_actuel'] . $pass);
+			$shanext = _nano_sha256($row['alea_futur'] . $pass);
 			$md5pass = md5($row['alea_actuel'] . $pass);
 		}
 	}
