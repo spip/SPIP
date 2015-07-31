@@ -297,12 +297,29 @@ function vider_url($url) {
 	return $url;
 }
 
-function parametre_url($url, $parametre, $valeur = '__global__') {
+// urls des liens spip [->article1]
+// voir la definition tordue de extraire_lien() dans inc_texte.php3
+function calculer_url($url) {
+	list(,$l) = extraire_lien(array('','','',vider_url($url)));
+	return $l;
+}
+
+//
+// Prend une URL (destinee a l'affichage) et lui ajoute/retire
+// un parametre.
+// Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
+//            [(#SELF|parametre_url{suite,''})] (supprime)
+//            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
+// http://www.spip.net/@parametre_url
+//
+function parametre_url($url, $parametre, $valeur = NULL) {
 	$link = new Link(str_replace('&amp;', '&', $url));
-	if($valeur == '__global__')
-		$valeur = $GLOBALS[$parametre];
-	if(empty($valeur)) $link->DelVar($parametre);
-	else $link->AddVar($parametre, $valeur);
+	if ($valeur === NULL)
+		$valeur = _request($parametre);
+	if (empty($valeur))
+		$link->delVar($parametre);
+	else
+		$link->addVar($parametre, $valeur);
 	return quote_amp($link->getUrl());
 }
 
