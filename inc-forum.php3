@@ -369,7 +369,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\nTitre :<BR>";
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".htmlspecialchars($nom_site_forum)."\" SIZE='40'><BR>";
 
-		$lien_url = "http://";
+		$url_site = "http://";
 		$ret .= "\nURL :<BR>";
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'></div>";
 
