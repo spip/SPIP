@@ -172,7 +172,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 
 
 	$opt = sous_menu_rubriques($id_rubrique,0, 0,$data,$enfants,$idem, $restreint, $type);
-	$att = " name='id_parent'\nstyle='font-size: 90%; width: 99%; max-height: 24px;' class='verdana1'";
+	$att = " id='id_parent' name='id_parent'\nstyle='font-size: 90%; width: 99%; max-height: 24px;' class='verdana1'";
 
 	if (preg_match(',^<option[^<>]*value=.(\d*).[^<>]*>([^<]*)</option>$,',$opt,$r))
 	  $r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[2] ;
