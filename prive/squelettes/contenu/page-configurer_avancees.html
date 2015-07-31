@@ -9,16 +9,17 @@
 	#FORMULAIRE_CONFIGURER_AVERTISSEUR
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_PREVISUALISEUR
+</div>
+
 <?php
 	include_spip('inc/presentation');
 
-	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
 	$moderniseur_html = charger_fonction('moderniseur_html', 'configuration');
 
 	echo
-
-	  $previsualiseur(), // Previsualisation sur le site public
 
 	  $relayeur(_request('retour_proxy')), // Proxy pour syndication & doc
 
