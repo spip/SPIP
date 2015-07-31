@@ -507,7 +507,7 @@ function spip_optim_select ($select = array(), $from = array(),
 	}
 
 	$fromas = array();
-	foreach($from as $k => $v) $fromas[]= "$v AS $k";
+	foreach($from as $k => $v) $fromas[]= "$v AS `$k`";
 
 	return spip_abstract_select($select, $fromas, $where,
 		  $groupby, array_filter($orderby), $limit,
