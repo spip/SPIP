@@ -1324,8 +1324,15 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			// si jamais c'est de la mutu avec sous rep, on est perdu si on se fie
 			// a spip.php qui est a la racine du spip, et vue qu'on sait pas se reperer
 			// s'en remettre a l'adresse du site. alea jacta est.
-			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES)
-			$uri_ref = (isset($GLOBALS['meta']['adresse_site'])?parse_url($GLOBALS['meta']['adresse_site'],PHP_URL_PATH).'/':'');
+			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES){
+
+			if (isset($GLOBALS['meta']['adresse_site'])) {
+				$uri_ref = parse_url($GLOBALS['meta']['adresse_site']);
+				$uri_ref = $uri_ref['path'].'/';
+			}
+		  else
+			  $uri_ref = "";
+		}
 		if (!$uri OR !$uri_ref)
 			$GLOBALS['profondeur_url'] = 0;
 		else {
