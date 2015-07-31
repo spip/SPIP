@@ -43,7 +43,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$annee=$today["year"];
 		
 		if ($mois != $mois_today OR $annee != $annee_today) {
-			icone(_T("info_aujourdhui")."<br>".nom_mois("$annee-$mois-1")." $annee", "calendrier.php3", "calendrier-24.gif", "", "center");
+			icone(_T("info_aujourdhui")."<br>".affdate_mois_annee("$annee-$mois-1"), "calendrier.php3", "calendrier-24.gif", "", "center");
 			echo "<p />";
 		}
 		$annee_avant = $annee_today - 1;
@@ -147,7 +147,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 
 
 	echo "<TR><TD align='$spip_lang_left'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
-	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
+	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT></TD>";
 	echo "<TD align='$spip_lang_right'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
 
 	echo "<TR>";
@@ -232,7 +232,7 @@ if (!$mois){
 
 $nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 
-debut_page(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier");
+debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier"));
 $activer_messagerie = lire_meta("activer_messagerie");
 $connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 

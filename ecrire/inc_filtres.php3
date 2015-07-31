@@ -315,15 +315,15 @@ function affdate_base($numdate, $vue) {
 		if ($avjc) return $annee;
 		$a = date('Y');
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return ucfirst($nommois)." $annee";
-		return  _T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
+		if ($annee != $a) return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
 
 	case 'entier':
 		if ($avjc) return $annee;
 		if ($jour)
-			return _T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
+			return d_apostrophe(_T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
 		else
-			return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
+			return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
 
 	case 'nom_mois':
 		return $nommois;
@@ -345,7 +345,7 @@ function affdate_base($numdate, $vue) {
 
 	case 'mois_annee':
 		if ($avjc) return $annee;
-		return trim(_T('date_fmt_mois_annee', array('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+		return trim(d_apostrophe(_T('date_fmt_mois_annee', array('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee))));
 
 	case 'annee':
 		return $annee;
@@ -396,6 +396,15 @@ function affdate_mois_annee($numdate) {
 
 function affdate_heure($numdate) {
 	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes($numdate)));
+}
+
+// renvoie "d'octobre" (ocitan) ou "de octubre" (espagnol)
+function d_apostrophe($texte) {
+	global $spip_lang;
+	if (ereg("^(oci_.+|fr)$",$spip_lang))
+		return ereg_replace("^(.+ )?de ([aeiou])", "\\1d'\\2", $texte);
+	else
+		return $texte;
 }
 
 
