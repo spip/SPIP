@@ -1,5 +1,3 @@
-/* prevent execution of jQuery if included more then once */
-if(typeof window.jQuery == "undefined") {
 /*
  * jQuery 1.0.4 - New Wave Javascript
  *
@@ -10,6 +8,10 @@ if(typeof window.jQuery == "undefined") {
  * $Date: 2006-12-12 15:33:10 -0500 (Tue, 12 Dec 2006) $
  * $Rev: 696 $
  */
+
+
+/* prevent execution of jQuery if included more then once */
+if(typeof window.jQuery == "undefined") {
 
 // Global undefined variable
 window.undefined = window.undefined;
@@ -67,16 +69,13 @@ if ( typeof $ != "undefined" )
 var $ = jQuery;
 
 
-
 jQuery.fn = jQuery.prototype = {
 
 	jquery: "1.0.4",
 
-
 	size: function() {
 		return this.length;
 	},
-
 
 	get: function( num ) {
 		return num == undefined ?
@@ -108,7 +107,6 @@ jQuery.fn = jQuery.prototype = {
 		return pos;
 	},
 
-
 	attr: function( key, value, type ) {
 		// Check to see if we're setting style values
 		return key.constructor != String || value != undefined ?
@@ -134,7 +132,6 @@ jQuery.fn = jQuery.prototype = {
 			jQuery[ type || "attr" ]( this[0], key );
 	},
 
-
 	css: function( key, value ) {
 		return this.attr( key, value, "curCSS" );
 	},
@@ -151,7 +148,6 @@ jQuery.fn = jQuery.prototype = {
 		}
 		return t;
 	},
-
 
 	wrap: function() {
 		// The elements to wrap the target around
@@ -174,13 +170,11 @@ jQuery.fn = jQuery.prototype = {
 		});
 	},
 
-
 	append: function() {
 		return this.domManip(arguments, true, 1, function(a){
 			this.appendChild( a );
 		});
 	},
-
 
 	prepend: function() {
 		return this.domManip(arguments, true, -1, function(a){
@@ -188,13 +182,11 @@ jQuery.fn = jQuery.prototype = {
 		});
 	},
 
-
 	before: function() {
 		return this.domManip(arguments, false, 1, function(a){
 			this.parentNode.insertBefore( a, this );
 		});
 	},
-
 
 	after: function() {
 		return this.domManip(arguments, false, -1, function(a){
@@ -220,7 +212,6 @@ jQuery.fn = jQuery.prototype = {
 		}), arguments );
 	},
 
-
 	filter: function(t) {
 		return this.pushStack(
 			t.constructor == Array &&
@@ -240,13 +231,11 @@ jQuery.fn = jQuery.prototype = {
 			jQuery.filter(t,this).r, arguments );
 	},
 
-
 	not: function(t) {
 		return this.pushStack( typeof t == "string" ?
 			jQuery.filter(t,this,false).r :
 			jQuery.grep(this,function(a){ return a != t; }), arguments );
 	},
-
 
 	add: function(t) {
 		return this.pushStack( jQuery.merge( this, typeof t == "string" ?
@@ -305,7 +294,6 @@ jQuery.fn = jQuery.prototype = {
 		return this;
 	}
 };
-
 
 jQuery.extend = jQuery.fn.extend = function() {
 	// copy reference to target object
@@ -1119,60 +1107,43 @@ jQuery.macros = {
 	},
 
 
-
 	css: "width,height,top,left,position,float,overflow,color,background".split(","),
-
 
 
 	filter: [ "eq", "lt", "gt", "contains" ],
 
 	attr: {
 
-
 		val: "value",
-
 
 		html: "innerHTML",
 
-
 		id: null,
-
 
 		title: null,
 
-
 		name: null,
-
 
 		href: null,
 
-
 		src: null,
-
 
 		rel: null
 	},
 
 	axis: {
 
-
 		parent: "a.parentNode",
-
 
 		ancestors: jQuery.parents,
 
-
 		parents: jQuery.parents,
-
 
 		next: "jQuery.sibling(a).next",
 
-
 		prev: "jQuery.sibling(a).prev",
 
-
 		siblings: "jQuery.sibling(a, null, true)",
-
 
 		children: "jQuery.sibling(a.firstChild)"
 	},
@@ -1213,7 +1184,6 @@ jQuery.macros = {
 			jQuery.className[ jQuery.className.has(this,c) ? "remove" : "add" ](this, c);
 		},
 
-
 		remove: function(a){
 			if ( !a || jQuery.filter( a, [this] ).r )
 				this.parentNode.removeChild( this );
@@ -1228,7 +1198,6 @@ jQuery.macros = {
 			jQuery.event.add( this, type, fn );
 		},
 
-
 		unbind: function( type, fn ) {
 			jQuery.event.remove( this, type, fn );
 		},
@@ -1239,7 +1208,9 @@ jQuery.macros = {
 	}
 };
 
+
 jQuery.init();
+
 jQuery.fn.extend({
 
 	// We're overriding the old toggle function, so
@@ -1650,12 +1621,15 @@ jQuery.extend({
 
 				// Begin the animation
 				z.custom(0, z.el.orig[prop]);	
+
 			} else {
 				z.o.hide = true;
 
 				// Begin the animation
 				z.custom(z.el.orig[prop], 0);
+
 			}		
+
 		};
 
 		// Each step of an animation
