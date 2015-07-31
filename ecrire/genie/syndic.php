@@ -87,7 +87,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic=$now_id_syndic");
+	sql_updateq('spip_syndic', array('syndication'=>$statut, 'date_syndic'=>'NOW()'), "id_syndic=$now_id_syndic");
 
 	// Aller chercher les donnees du RSS et les analyser
 	include_spip('inc/distant');
@@ -111,7 +111,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	if (count($faits) > 0) {
 		$faits = join(",", $faits);
 		if ($row['miroir'] == 'oui') {
-			spip_query("UPDATE spip_syndic_articles	SET statut='off', maj=maj WHERE id_syndic=$now_id_syndic AND NOT (id_syndic_article IN ($faits))");
+		  sql_update('spip_syndic_articles', array('statut'=>"'off'", 'maj'=>'maj'), "id_syndic=$now_id_syndic AND NOT (id_syndic_article IN ($faits))");
 		}
 	// suppression apres 2 mois des liens qui sont sortis du feed
 		if ($row['oubli'] == 'oui') {

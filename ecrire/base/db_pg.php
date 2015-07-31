@@ -434,22 +434,21 @@ function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 }
 
 // http://doc.spip.org/@spip_pg_update
-function spip_pg_update($table, $champs, $where='', $desc=array()) {
+function spip_pg_update($table, $champs, $where='', $desc='', $serveur='') {
 
+	if (!$champs) return;
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+	if ($where) $where = (" WHERE " . spip_pg_frommysql($where));
 	$r = '';
 	foreach ($champs as $champ => $val) {
-		$r .= ',' . $champ . '=' . 
-		  spip_pg_cite($val,  $desc['field'][$champ]);
+		$r .= ',' . $champ . '=' . $val; 
 	}
 
-	if ($r = substr($r, 1)) {
-		if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-		spip_pg_trace_query("UPDATE $table SET $r" .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
-	}
+	spip_pg_trace_query("UPDATE $table SET " . substr($r,1) . $where);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
@@ -457,20 +456,13 @@ function spip_pg_update($table, $champs, $where='', $desc=array()) {
 // http://doc.spip.org/@spip_pg_updateq
 function spip_pg_updateq($table, $champs, $where='', $desc=array(), $serveur='') {
 	if (!$champs) return;
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$prefixe = $connexion['prefixe'];
-	$link = $connexion['link'];
-	$db = $connexion['db'];
-
 	if (!$desc) $desc = description_table($table);
-	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 	$fields = $desc['field'];
-	$r = '';
-	foreach ($champs as $champ => $val) {
-		$r .= ',' . $champ . '=' . spip_pg_cite($val, $fields[$champ]);
+	foreach ($champs as $k => $val) {
+		$champs[$k] = spip_pg_cite($val, $fields[$k]);
 	}
-	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
-	return pg_query($link, $r);
+
+	return spip_pg_update($table, $champs, $where, $desc, $serveur);
 }
 
 

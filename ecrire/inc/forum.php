@@ -217,7 +217,7 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 // http://doc.spip.org/@calculer_threads
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
-	spip_query("UPDATE spip_forum SET id_thread=id_forum WHERE id_parent=0");
+	sql_update('spip_forum', array('id_thread'=>'id_forum'), "id_parent=0");
 	// reparer les messages qui n'ont pas l'id_secteur de leur parent
 	do {
 		$discussion = "0";
@@ -233,7 +233,7 @@ function calculer_threads() {
 				$discussion = $row['id'];
 			}
 		}
-		sql_updateq("spip_forum", array("id_thread" => $precedent	), "id_forum IN ($discussion)");
+		sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
 	} while ($discussion != "0");
 }
 
@@ -318,7 +318,7 @@ function conserver_original($id_forum) {
 		include_spip('base/abstract_sql');
 		$id_copie = sql_insertq('spip_forum', $t);
 		if ($id_copie) {
-			spip_query("UPDATE spip_forum SET id_parent="._q($id_forum).", statut='original' WHERE id_forum=$id_copie");
+			sql_updateq('spip_forum', array('id_parent'=> $id_forum, 'statut'=>'original'), "id_forum=$id_copie");
 			return ''; // pas d'erreur
 		}
 	}

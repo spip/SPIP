@@ -40,8 +40,8 @@ function genie_popularites_dist($t) {
 	// si la demi-vie n'est pas trop proche de la seconde ;)
 	$b = log(2) * $periode / $demivie;
 
-	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
+	// du passe, faisons table (SQL) rase
+	sql_update('spip_articles', array('maj'=>'maj', 'popularite' => "popularite * $a"));
 
 	// enregistrer les metas...
 	$row = sql_fetch(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));

@@ -95,7 +95,7 @@ function calculer_visites($t) {
 
 	// 1. les visites du site (facile)
 	spip_query("INSERT IGNORE INTO spip_visites (date) VALUES ('$date')");
-	spip_query("UPDATE spip_visites SET visites = visites+$visites WHERE date='$date'");
+	sql_update('spip_visites', array('visites' => "visites+$visites"), "date='$date'");
 
 	// 2. les visites des articles (en deux passes pour minimiser
 	// le nombre de requetes)
@@ -123,9 +123,9 @@ function calculer_visites($t) {
 			$sumref = ' + '.calcul_mysql_in('id_article',
 			array_keys($referers_a));
 
-		spip_query("UPDATE spip_visites_articles SET visites = visites $sum WHERE date='$date' AND $tous");
+		sql_update('spip_visites_articles', array('visites' => "visites $sum"), "date='$date' AND $tous");
 
-		spip_query("UPDATE spip_articles SET visites = visites $sum$sumref, popularite = popularite $sum, maj = maj WHERE $tous");
+		sql_update('spip_articles', array('visites' => "visites $sum$sumref", 'popularite' => "popularite $sum", 'maj' => 'maj'), $tous);
 			## Ajouter un JOIN sur le statut de l'article ?
 	}
 
@@ -145,7 +145,7 @@ function calculer_visites($t) {
 		// attention on appelle calcul_mysql_in en mode texte et pas array
 		// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',join(', ', $liste)));
+			sql_update('spip_referers', array('visites' => "visites+$num", 'visites_jour' => "visites_jour+$num"), calcul_mysql_in('referer_md5',join(', ', $liste)));
 		}
 	}
 	
@@ -165,7 +165,7 @@ function calculer_visites($t) {
 		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers_articles SET visites = visites+$num	WHERE ".join(" OR ", $liste));
+			sql_update('spip_referers_articles', array('visites' => "visites+$num"), join(" OR ", $liste));
 			## Ajouter un JOIN sur le statut de l'article ?
 		}
 	}
@@ -190,6 +190,4 @@ function genie_visites_dist($t) {
 
 	return 1;
 }
-
-
 ?>
