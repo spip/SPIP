@@ -90,18 +90,15 @@ echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
 if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
 else echo debut_block_invisible("info_perso");
 
-if ($connect_activer_messagerie != "non") {
-	echo "<br>Vous utilisez la messagerie interne de ce site. ";
-	
-	if ($connect_activer_imessage != "non") {
-		echo "Votre nom appara&icirc;t dans la liste des utilisateurs connect&eacute;s.";
-	}
-	else {
-		echo "Votre nom n'appara&icirc;t pas dans la liste des utilisateurs connect&eacute;s.";
-	}
-}
-else {
-	echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
+if (lire_meta('activer_messagerie') != 'non') {
+	if ($connect_activer_messagerie != "non") {
+		echo "<br>Vous utilisez la messagerie interne de ce site. ";
+		if ($connect_activer_imessage != "non")
+			echo "Votre nom appara&icirc;t dans la liste des utilisateurs connect&eacute;s.";
+		else
+			echo "Votre nom n'appara&icirc;t pas dans la liste des utilisateurs connect&eacute;s.";
+	} else
+		echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
 icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
