@@ -582,9 +582,6 @@ if (!$origine) {
 //
 if (lire_meta("activer_statistiques_ref") != "non"){
 
-	// Charger les moteurs de recherche
-	$arr_engines = stats_load_engines();
-
 	// nombre de referers a afficher
 	$limit = intval($limit);	//secu
 	if ($limit == 0)
@@ -598,88 +595,11 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 		$table_ref = "spip_referers";
 	}
 
-	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY $vis DESC LIMIT 0,$limit";
-	$result = spip_query($query);
-	
+	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
+
 	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	while ($row = spip_fetch_array($result)) {
-		$referer = interdire_scripts($row['referer']);
-		$visites = $row[$vis];
-		$tmp = "";
-		$aff = "";
-		
-		$buff = stats_show_keywords($referer, $referer);
-
-		if ($buff["host"]) {
-			$numero = substr(md5($buff["hostname"]),0,8);
-	
-			$nbvisites[$numero] = $nbvisites[$numero] + $visites;
-
-			if (strlen($buff["keywords"]) > 0) {
-				$criteres = substr(md5($buff["keywords"]),0,8);
-				if (!$lescriteres[$numero][$criteres])
-					$tmp = " &laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;";
-				$lescriteres[$numero][$criteres] = true;
-			} else {
-				$tmp = $buff["path"];
-				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
-		
-				if (strlen($tmp) > 30)
-					$tmp = "/".substr($tmp, 0, 27)."...";
-				else if (strlen($tmp) > 0)
-					$tmp = "/$tmp";
-			}
-
-			if ($tmp)
-				$lesreferers[$numero][] = "<a href='$referer'>$tmp</a>" . (($visites > 1)?" ($visites)":"");
-			else
-				$lesliensracine[$numero] += $visites;
-			$lesdomaines[$numero] = $buff["hostname"];
-			$lesurls[$numero] = $buff["host"];
-			$lesliens[$numero] = $referer;
-		}
-	}
-	
-	if (count($nbvisites) > 0) {
-		arsort($nbvisites);
-
-		echo "<ul>";
-		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
-			if ($lesdomaines[$numero] == '') next;
-
-			$visites = pos($nbvisites);
-			$ret = "\n<li>";
-		
-			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
-			else if ($visites > 1) $ret .= "$visites "._T('lnfo_liens')."&nbsp;";
-			else $ret .= "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
-			
-			if (count($lesreferers[$numero]) > 1) {
-				$referers = join ($lesreferers[$numero],"</li><li>");
-				echo "<p />";
-				echo $ret;
-				echo "<a href='http://".$lesurls[$numero]."'><b><font color='$couleur_foncee'>".$lesdomaines[$numero]."</font></b></a>";
-				if ($rac = $lesliensracine[$numero]) echo " <font size='1'>($rac)</font>";
-				echo "<ul><font size='1'><li>$referers</li></font></ul>";
-				echo "</li><p />\n";
-			} else {
-				echo $ret;
-				echo "<a href='".$lesliens[$numero]."'><b>".$lesdomaines[$numero]."</b></a>";
-				if ($lien = ereg_replace(" \([0-9]+\)$", "",$lesreferers[$numero][0]));
-					echo "<font size='1'>$lien</font>";
-				echo "</li>";
-			}
-		}
-		echo "</ul>";
-
-		// Le lien pour en afficher "plus"
-		if (spip_num_rows($result) == $limit) {
-			$lien = $clean_link;
-			$lien->addVar('limit',$limit+200);
-			echo "<div style='text-align:right;'><b><a href='".$lien->getUrl()."'>+++</a></b></div>";
-		}
-	}
-
+	echo aff_referers ($query, $limit);
+	echo "</font></p>";	
 }
 echo "</font>";
 
