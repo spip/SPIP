@@ -2,10 +2,18 @@
 
 	Charger la librairie jQuery et ses plugins
 
-]
-#CACHE{7*24*3600,cache-client}
+]#CACHE{7*24*3600,cache-client}
 #HTTP_HEADER{'Content-Type: text/javascript'}
-
-[(#CHEMIN{javascript/jquery-1.1.js}|spip_file_get_contents)]
-[(#CHEMIN{javascript/form.js}|spip_file_get_contents)]
-[(#CHEMIN{javascript/ajaxCallback.js}|spip_file_get_contents)]
+/*
+ * jQuery 1.1 - New Wave Javascript
+ *
+ * Copyright (c) 2007 John Resig (jquery.com)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ *
+ * + form.js (jquery.com)
+ * + ajaxCallback.js (www.spip.net)
+ */
+[(#CHEMIN{javascript/jquery-1.1.js}|spip_file_get_contents|compacte_js)]
+[(#CHEMIN{javascript/form.js}|spip_file_get_contents|compacte_js)]
+[(#CHEMIN{javascript/ajaxCallback.js}|spip_file_get_contents|compacte_js)]
