@@ -103,7 +103,7 @@ function exec_convert_utf8_dist() {
 		@unlink(_DIR_SESSIONS.'convert_utf8_backup.sql');
 
 		// convertir spip_meta
-		$charset_source = lire_meta('conversion_charset');
+		$charset_source = $GLOBALS['meta']['conversion_charset'];
 		foreach ($GLOBALS['meta'] as $c => $v) {
 			$v2 = unicode_to_utf_8(charset2unicode($v, $charset_source));
 			if ($v2 != $v)

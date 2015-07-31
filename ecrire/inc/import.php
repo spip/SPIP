@@ -234,7 +234,7 @@ function detruit_restaurateur()
 
 function affiche_progression_javascript($abs_pos,$table="") {
 	global $affiche_progression_pourcent;
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
 	echo " -->\n<script type='text/javascript'><!--\n";

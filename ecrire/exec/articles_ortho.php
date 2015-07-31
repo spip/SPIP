@@ -86,7 +86,7 @@ $ortho = "";
 //
 
 function debut_html($titre = "", $rubrique="") {
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 
 	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
