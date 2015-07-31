@@ -62,7 +62,12 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 		unset($_SERVER['REDIRECT_url_propre']);
 		unset($_ENV['url_propre']);
 		include_spip('inc/filtres_mini');
-		$GLOBALS['profondeur_url'] = count(explode('/',ltrim(resolve_path("/$url"),'/')))-1;
+		if (strpos($url,"://")===false){
+            $GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"),'/'),'/');
+    }
+    else {
+            $GLOBALS['profondeur_url'] = max(0,substr_count($url,"/")-substr_count($current_base,"/"));
+    }
 	}
 
 	
