@@ -1,9 +1,11 @@
-#HTTP_HEADER{Content-Type: text/csv; charset=#CHARSET}
-#HTTP_HEADER{Content-Disposition: attachment; filename=signature#ID_ARTICLE.csv}
-<BOUCLE0(ARTICLES){id_article}><B1>#TOTAL_BOUCLE <:info_signatures:> <:info_pour:>  #TITRE;
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
+if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
+?><BOUCLE2(ARTICLES){id_article}><B1>#TOTAL_BOUCLE <:info_signatures:> <:info_pour:>  #TITRE;
 <:nom:>;<:email:>
 <BOUCLE1(SIGNATURES){id_article}{par nom_email}>#NOM_EMAIL;#AD_EMAIL
-</BOUCLE1></BOUCLE0>
-
-
-
+</BOUCLE1></BOUCLE2>
+<?php
+} else {
+include_spip('inc/minipres'); 
+echo '#ENV{id}', minipres();
+}?></BOUCLE0>
