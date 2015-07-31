@@ -16,8 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // La fonction de notification de base, qui dispatche le travail
 // http://doc.spip.org/@inc_notifications_dist
 function inc_notifications_dist($quoi, $id=0, $options=array()) {
+	
 	// charger les fichiers qui veulent ajouter des definitions
-	pipeline('notifications');
+	// ou faire des trucs aussi dans le pipeline, ca fait deux api pour le prix d'une ...
+	pipeline('notifications',array('args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options)));
 
 	if (function_exists($f = 'notifications_'.$quoi)
 	OR function_exists($f = $f.'_dist')) {
