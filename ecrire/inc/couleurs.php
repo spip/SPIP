@@ -65,6 +65,34 @@ function inc_couleurs_dist($choix=NULL, $ajouter=false)
 		"couleur_lien" => "#3B5063",
 		"couleur_lien_off" => "#6D8499"
 		),
+// Vert de gris
+7 => array (
+		"couleur_foncee" => "#999966",
+		"couleur_claire" => "#CCCC99",
+		"couleur_lien" => "#666633",
+		"couleur_lien_off" => "#999966"
+		),
+// Rose vieux
+8 => array (
+		"couleur_foncee" => "#EB68B3",
+		"couleur_claire" => "#E4A7C5",
+		"couleur_lien" => "#8F004D",
+		"couleur_lien_off" => "#BE6B97"
+		),
+// Violet
+9 => array (
+		"couleur_foncee" => "#8F8FBD",
+		"couleur_claire" => "#C4C4DD",
+		"couleur_lien" => "#6071A5",
+		"couleur_lien_off" => "#5C5C8C"
+		),
+//  Gris
+10 => array (
+		"couleur_foncee" => "#909090",
+		"couleur_claire" => "#D3D3D3",
+		"couleur_lien" => "#808080",
+		"couleur_lien_off" => "#909090"
+		),
 );
 
 	if (is_numeric($choix)) {
