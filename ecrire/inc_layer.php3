@@ -158,8 +158,6 @@ function flag_svg() {
 	if (!$browser_name) verif_butineur();
 
 	$flag = false;
-		
-	if ($browser_name == "Safari" AND $browser_version >= 400) $flag = true;
 	if ($browser_name == "Mozilla" AND $browser_rev >= 1.8) $flag = true;
 			
 	return $flag;
