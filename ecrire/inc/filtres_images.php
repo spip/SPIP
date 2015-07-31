@@ -77,9 +77,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
-	$term_fonction_dest = $terminaison_dest;
-	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
-	
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
@@ -116,7 +113,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
-	$ret["fonction_image"] = "image_image".$term_fonction_dest;
+	$ret["fonction_image"] = "image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;
 	$ret["format_dest"] = $terminaison_dest;
@@ -131,26 +128,26 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 // http://doc.spip.org/@image_imagepng
 function image_imagepng($img,$fichier) {
-	$tmp = $fichier."tmp";
+	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
-	@unlink($fichier);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
 
 // http://doc.spip.org/@image_imagegif
 function image_imagegif($img,$fichier) {
-	$tmp = $fichier."tmp";
+	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
-	@unlink($fichier);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
-// http://doc.spip.org/@image_imagejpeg
-function image_imagejpeg($img,$fichier) {
-	$tmp = $fichier."tmp";
-	$ret = imagejpeg($img,$tmp);
-	@unlink($fichier);
+// http://doc.spip.org/@image_imagejpg
+function image_imagejpg($img,$fichier) {
+	$tmp = $fichier.".tmp";
+	$ret = imagejpeg($img,$tmp, 85);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
