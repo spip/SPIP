@@ -35,15 +35,15 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 
 	// On selectionne, dans l'ordre :
 	// fond=10
-	$f = "$squelette=$id_rubrique";
-	if (($id_rubrique > 0) AND (@file_exists("$f.$ext")))
-		$squelette = $f;
+	$f = "$fond=$id_rubrique";
+	if (($id_rubrique > 0) AND ($squel=find_in_path("$f.$ext")))
+		$squelette = substr($squel, 0, - strlen(".$ext"));
 	else {
 		// fond-10 fond-<rubriques parentes>
 		while ($id_rubrique > 0) {
-			$f = "$squelette-$id_rubrique";
-			if (@file_exists("$f.$ext")) {
-				$squelette = $f;
+			$f = "$fond-$id_rubrique";
+			if ($squel=find_in_path("$f.$ext")) {
+				$squelette = substr($squel, 0, - strlen(".$ext"));
 				break;
 			}
 			else
