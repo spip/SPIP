@@ -121,6 +121,14 @@ function sql_select (
 		  $table, $id, $serveur);
 }
 
+// http://doc.spip.org/@sql_countsel
+function sql_countsel($from = array(), $where = array(),
+	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
+	$serveur='') {
+  	$f = sql_serveur('countsel', $serveur);
+	return $f($from, $where, $groupby, $limit, $sousrequete, $having, $serveur);
+}
+
 // http://doc.spip.org/@sql_alter
 function sql_alter($q, $serveur='') {
 	$f = sql_serveur('alter', $serveur);
@@ -131,6 +139,12 @@ function sql_alter($q, $serveur='') {
 function sql_fetch($res, $serveur='') {
 	$f = sql_serveur('fetch', $serveur);
 	return $f($res, NULL, $serveur);
+}
+
+// http://doc.spip.org/@sql_listdbs
+function sql_listdbs($serveur='') {
+  	$f = sql_serveur('listdbs', $serveur);
+	return $f($serveur);
 }
 
 // http://doc.spip.org/@sql_selectdb
@@ -154,6 +168,9 @@ function sql_free($res, $serveur='')
 	return $f($res);
 }
 
+// Cette fonction est destinee aux MAJ automatiques par Sed de vieux code.
+// Elle ne garantit pas une portabilite totale ===> lui preferer la suivante.
+// 
 // http://doc.spip.org/@sql_insert
 function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 {
@@ -262,6 +279,14 @@ function sql_errno($serveur='') {
 	return $f();
 }
 
+// Fonction la plus generale ... et la moins portable
+// A n'utiliser qu'en derniere extremite
+
+function sql_query($ins, $serveur='') {
+  	$f = sql_serveur('query', $serveur);
+	return $f($ins);
+}
+
 # une composition tellement frequente...
 // http://doc.spip.org/@sql_fetsel
 function sql_fetsel(
@@ -289,13 +314,12 @@ $sousrequete, $having, $table, $id, $serveur),
 	return $r ? $r[$select] : NULL;
 }
 
-# une composition tellement frequente...
-// http://doc.spip.org/@sql_countsel
-function sql_countsel($from = array(), $where = array(),
-	$groupby = '', $limit = '', $sousrequete = '', $having = array(),
-	$serveur='') {
-  	$f = sql_serveur('countsel', $serveur);
-	return $f($from, $where, $groupby, $limit, $sousrequete, $having, $serveur);
+
+// http://doc.spip.org/@sql_version
+function sql_version($serveur='') {
+	$row = sql_fetsel("version() AS n", '','','','','','','','','',$serveur);
+
+	return ($row['n']);
 }
 
 //
@@ -322,19 +346,6 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	$in_sql .= "($val $not IN ($valeurs))";
 
 	return "($in_sql)";
-}
-
-// http://doc.spip.org/@sql_listdbs
-function sql_listdbs($serveur='') {
-  	$f = sql_serveur('listdbs', $serveur);
-	return $f($serveur);
-}
-
-// http://doc.spip.org/@sql_version
-function sql_version($serveur='') {
-	$row = sql_fetsel("version() AS n", '','','','','','','','','',$serveur);
-
-	return ($row['n']);
 }
 
 // http://doc.spip.org/@test_sql_int
