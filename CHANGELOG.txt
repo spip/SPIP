@@ -1,3 +1,25 @@
+Core 2.1.6 -> 2.1.7 ( 13/01/2011) 
+r16893 | fil       | 2011-01-05 09:50:20 +0100 (mer, 05 jan 2011) | eviter un Warning: Division by zero in ecrire/inc/invalideur.php on line 156
+r16897 | cedric    | 2011-01-06 09:13:31 +0100 (jeu, 06 jan 2011) | report de r16734 : Evacuer les eventuelles clauses group vide au calcul des requetes dans un squelette.Permet a un critere d'injecter une clause group dynamique, evaluee au calcul, qui rendra '' si pas de group a faire.
+r16898 | esj       | 2011-01-06 10:58:42 +0100 (jeu, 06 jan 2011) | Retour sur r16857: l'erreur du showtable provenait en fait d'une mauvaise citation de l'argument, et la correction empÍchait l'accËs aux vues. Nouveau correctif plus adaptÈ, et dÈcoupe de la fonction principale du dÈbusqueur en 2 pour pouvoir le surcharger plus facilement sans perdre le libellÈ des erreurs c'est indispensable (la preuve).
+r16904 | cedric    | 2011-01-06 12:22:01 +0100 (jeu, 06 jan 2011) | Securite : redirections absolues depuis les actions (Matsuyama)introduire une fonction tester_url_absolue() qui teste si une url est absolue.L'utiliser dans le formulaire login et dans la securisation du parametre redirect de toutes les actions via public/aiguillerainsi que pour le parametre url de l'action cookie (pourquoi n'utilise-t-on pas le meme nom de variable ici ?)parse_url ne fonctionne pas sur les urls relatives, dans le formulaire de login. On corrige donc.
+r16905 | cedric    | 2011-01-06 12:25:56 +0100 (jeu, 06 jan 2011) | securite : cast sur $exec (Matsuyama)
+r16906 | cedric    | 2011-01-06 12:28:54 +0100 (jeu, 06 jan 2011) | securite : cast string sur la variable page de l'url (Matsuyama)
+r16914 | esj       | 2011-01-07 23:28:33 +0100 (ven, 07 jan 2011) | Depuis que r14606 a enlevÈ, ‡ juste titre, le LIKE dans le SHOW TABLE, la crÈation d'un nouveau site ou la mise en route d'un plugin avec tables SQL provoque systÈmatiquement des erreurs SQL inutilement alarmantes. De plus, la variable statique ignorait la valeur de l'argument $serveur, pas vraiment utile pour le moment mais qui en cas d'erreur opacifiait ce qui se passait. On remet tout Áa au carrÈ.
+r16919 | fil       | 2011-01-08 13:13:39 +0100 (sam, 08 jan 2011) | pas de boucle infinie sur un csv vide
+r16932 | fil       | 2011-01-09 17:53:49 +0100 (dim, 09 jan 2011) | refermer les balises mal fermees par le diff
+r16942 | ben      | 2011-01-11 17:32:26 +0100 (mar, 11 jan 2011) | Visiblement c'est une fonction et pas un objet / sqlite_open 
+r16943 | cedric    | 2011-01-11 21:23:04 +0100 (mar, 11 jan 2011) | Suite a r16898, corriger l'echappement de $match pour postgre et remplacer le like par un regexp dans sqlite car ESCAPE n'est pas supporte dans les versions 2 de sqlite
+r16946 | cedric    | 2011-01-12 15:46:31 +0100 (mer, 12 jan 2011) | ne pas convertir en url absolue les url des directives filter progid:DXImageTransform.Microsoft.AlphaImageLoader(src=...,..) (nhoizey)
+r16947 | cedric    | 2011-01-12 17:32:56 +0100 (mer, 12 jan 2011) | Les plugins se desactivent dans le public si on a la mauvaise idee de mettre un sous dossier plugins/ dans le dossier plugins/
+r16948 | cedric    | 2011-01-13 11:27:07 +0100 (jeu, 13 jan 2011) | eviter de perdre son temps a chercher des fonds improbables
+r16949 | cedric    | 2011-01-13 11:28:23 +0100 (jeu, 13 jan 2011) | texte_script doit toujours etre utilise quand on utilise un #ENV dans du php dans un squelette, il n'y a pas d'exception qui tienne
+r16953 | esj       | 2011-01-13 12:43:55 +0100 (jeu, 13 jan 2011) | En mode debug, neutraliser le Content-Disposition sinon on ne voit presque rien.
+r16955 | esj       | 2011-01-13 13:18:54 +0100 (jeu, 13 jan 2011) | SÈcuriser l'appel des sous-squelettes privÈs (A. Pachot).
+
+Extensions 2.1.6 -> 2.1.7 ( 13/01/2011) 
+r43375 | cedric    | 2011-01-07 16:20:18 +0100 (ven, 07 jan 2011) | la suppression des declarations vide n'etait pas assez prudente et entrainant quelques troncature de selecteur mal a propos ! (Nicolas Hoizey)
+
 Core 2.1.5 -> 2.1.6 ( 02/01/2011) 
 r16805 | esj       | Eviter une erreur SQL dans les URL propres, quand on indique une table dont on n'a pas pr√©cis√© dans la globale {{{table_titre}}} le champ indiquant le titre de l'objet.
 r16807 | rasta     | Coh√©rence entre URLs arbo et propre : le champ utilis√© comme titre pour les objets √©ditoriaux est par d√©faut le champ nomm√© "titre" dans la base si rien n'est d√©clar√©.
