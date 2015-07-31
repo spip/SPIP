@@ -419,6 +419,7 @@ function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 // Penser a dire dans la description du serveur 
 // s'il accepte les requetes imbriquees afin d'optimiser ca
 
+// http://doc.spip.org/@sql_in_select
 function sql_in_select($in, $select, $from = array(), $where = array(),
 		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
 {
