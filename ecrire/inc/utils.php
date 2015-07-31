@@ -1279,7 +1279,7 @@ function init_var_mode(){
 		$GLOBALS['var_mode'] = false;
 		$GLOBALS['var_preview'] = false;
 		$GLOBALS['var_images'] = false;
-		$GLOBALS['var_noisettes'] = false;
+		$GLOBALS['var_inclure'] = false;
 		$GLOBALS['var_urls'] = false;
 		if (isset($_GET['var_mode'])) {
 			// tout le monde peut calcul/recalcul
@@ -1288,7 +1288,7 @@ function init_var_mode(){
 				$GLOBALS['var_mode'] = $_GET['var_mode'];
 		
 			// preview, debug, blocs, urls et images necessitent une autorisation
-			else if (in_array($_GET['var_mode'],array('preview','debug','blocs','urls','images'))) {
+			else if (in_array($_GET['var_mode'],array('preview','debug','inclure','urls','images'))) {
 				include_spip('inc/autoriser');
 				if (autoriser(
 					($_GET['var_mode'] == 'preview')
@@ -1304,10 +1304,10 @@ function init_var_mode(){
 							// et ne pas enregistrer de cache
 							$GLOBALS['var_nocache'] = true;
 							break;
-						case 'blocs':
+						case 'inclure':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
-							$GLOBALS['var_noisettes'] = true;
+							$GLOBALS['var_inclure'] = true;
 							// et ne pas enregistrer de cache
 							$GLOBALS['var_nocache'] = true;
 							break;
@@ -1545,7 +1545,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		if (isset($options['ajax'])AND $options['ajax'])
 			$page['texte'] = encoder_contexte_ajax($contexte,'',$page['texte']);
 			
-		if ($GLOBALS['var_noisettes'])
+		if ($GLOBALS['var_inclure'])
 			$page['texte'] = "<fieldset class='blocs'><legend>".$page['sourcefile']."</legend>".$page['texte']."</fieldset>";
 		$page = pipeline('recuperer_fond',array(
 			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
