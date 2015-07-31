@@ -34,7 +34,7 @@ define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
  * c'est à dire ayant id_parent=0
  *
  * @link http://www.spip.net/@racine
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -57,7 +57,7 @@ function critere_racine_dist($idb, &$boucles, $crit){
  * Compile le critère {exclus}
  *
  * Exclut du résultat l’élément dans lequel on se trouve déjà
- * 
+ *
  * @link http://www.spip.net/@exclus
  *
  * @param string $idb     Identifiant de la boucle
@@ -84,9 +84,9 @@ function critere_exclus_dist($idb, &$boucles, $crit){
  * dans un précédent critère {doublon} sur une boucle de même table.
  *
  * Il est possible de spécifier un nom au doublon tel que {doublons sommaire}
- * 
+ *
  * @link http://www.spip.net/@doublons
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -169,10 +169,10 @@ function critere_doublons_dist($idb, &$boucles, $crit){
  * les éléments dans la langue en cours. Certaines boucles
  * tel que articles et rubriques restreignent par défaut sur la langue
  * en cours.
- * 
+ *
  * Sans définir de valeur au critère, celui-ci utilise 'oui' comme
  * valeur par défaut.
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -190,7 +190,7 @@ function critere_lang_select_dist($idb, &$boucles, $crit){
  * Compile le critère {debut_xxx}
  *
  * Limite le nombre d'éléments affichés.
- * 
+ *
  * Ce critère permet de faire commencer la limitation des résultats
  * par une variable passée dans l’URL et commençant par 'debut_' tel que
  * {debut_page,10}. Le second paramètre est le nombre de résultats à
@@ -239,7 +239,7 @@ function critere_debut_dist($idb, &$boucles, $crit){
  *     {pagination #ENV{pages,5}} etc
  *     {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
  *     ```
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -293,14 +293,14 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 /**
  * Compile le critère `recherche` qui permet de sélectionner des résultats
  * d'une recherche.
- * 
+ *
  * Le texte cherché est pris dans le premier paramètre `{recherche xx}`
  * ou à défaut dans la clé `recherche` de l'environnement du squelette.
  *
  * @critere
  * @link http://www.spip.net/3878
  * @see inc_prepare_recherche_dist()
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -349,10 +349,10 @@ function critere_recherche_dist($idb, &$boucles, $crit){
  *
  * Sélectionne toutes les traductions de l'élément courant (la boucle englobante)
  * en différentes langues (y compris l'élément englobant)
- * 
+ *
  * Équivalent à
  * (id_trad>0 AND id_trad=id_trad(precedent)) OR id_xx=id_xx(precedent)
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -384,9 +384,9 @@ function critere_traduction_dist($idb, &$boucles, $crit){
  *
  * Sélectionne les éléments qui servent de base à des versions traduites
  * (par exemple les articles "originaux" sur une boucle articles)
- * 
+ *
  * Équivalent à (id_trad>0 AND id_xx=id_trad) OR (id_trad=0)
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -408,7 +408,7 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {meme_parent}
- * 
+ *
  * Sélectionne les éléments ayant le même parent que la boucle parente,
  * c'est à dire les frères et sœurs.
  *
@@ -440,7 +440,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
 /**
  * Compile le critère `branche` qui sélectionne dans une boucle les
  * éléments appartenant à une branche d'une rubrique.
- * 
+ *
  * Cherche l'identifiant de la rubrique en premier paramètre du critère {branche XX}
  * s'il est renseigné, sinon, sans paramètre ({branche} tout court) dans les
  * boucles parentes. On calcule avec lui la liste des identifiants
@@ -451,7 +451,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
  * table si c'est nécessaire pour l'obtenir.
  *
  * @link http://www.spip.net/@branche
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -496,7 +496,7 @@ function critere_branche_dist($idb, &$boucles, $crit){
  *
  * @uses lister_objets_avec_logos()
  *     Pour obtenir les éléments qui ont un logo
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -531,7 +531,7 @@ function critere_logo_dist($idb, &$boucles, $crit){
  *     ```
  *      <BOUCLE_a(articles){fusion lang}>
  *     ```
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -613,7 +613,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens = ''){
 		if ($tri[0]->type!='texte'){
 			// calculer le order dynamique qui verifie les champs
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
-			// et si ce n'est fait, ajouter un champ 'hasard' 
+			// et si ce n'est fait, ajouter un champ 'hasard'
 			// pour supporter 'hasard' comme tri dynamique
 			$par = "rand()";
 			$parha = $par." AS hasard";
@@ -873,14 +873,14 @@ function critere_agenda_dist($idb, &$boucles, $crit) {
  * Le critère {i/j} affiche une part d'éléments de la boucle.
  * Commence à i*n/j élément et boucle n/j éléments. {2/4} affiche le second
  * quart des éléments d'une boucle.
- * 
+ *
  * Traduit si possible (absence de n dans {i,j}) la demande en une
  * expression LIMIT du gestionnaire SQL
  *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return void 
+ * @return void
 **/
 function calculer_critere_parties($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -925,7 +925,7 @@ function calculer_critere_parties($idb, &$boucles, $crit){
  * Place dans la propriété partie un test vérifiant que l'élément de
  * boucle en cours de lecture appartient bien à la plage autorisée.
  * Trop tôt, passe à l'élément suivant, trop tard, sort de l'itération de boucle.
- * 
+ *
  * @param array $boucles     AST du squelette
  * @param string $id_boucle  Identifiant de la boucle
  * @param string $debut      Valeur ou code pour trouver le début (i dans {i,j})
@@ -935,7 +935,7 @@ function calculer_critere_parties($idb, &$boucles, $crit){
  *       -- qu'il faut soustraire debut du total {n-3,x}. 3 étant $debut
  *       -- qu'il faut raccourcir la fin {x,n-3} de 3 elements. 3 étant $total_parties
  *     - le signe p indique une pagination
- * @return void 
+ * @return void
 **/
 function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	$total_parties = $boucles[$id_boucle]->total_parties;
@@ -1001,11 +1001,11 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
  *
  * Pour l'élément demandé (a ou b) retrouve la valeur de l'élément,
  * et de combien il est soustrait si c'est le cas comme dans {a-3,b}
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param array $param    Paramètre à analyser (soit a, soit b dans {a,b} ou {a/b})
- * @return array          Valeur de l'élément (peut être une expression PHP), Nombre soustrait 
+ * @return array          Valeur de l'élément (peut être une expression PHP), Nombre soustrait
 **/
 function calculer_critere_parties_aux($idb, &$boucles, $param){
 	if ($param[0]->type!='texte'){
@@ -1031,10 +1031,10 @@ function calculer_critere_parties_aux($idb, &$boucles, $param){
 
 /**
  * Compile les critères d'une boucle
- * 
+ *
  * Cette fonction d'aiguillage cherche des fonctions spécifiques déclarées
  * pour chaque critère demandé, dans l'ordre ci-dessous :
- * 
+ *
  * - critere_{serveur}_{table}_{critere}, sinon avec _dist
  * - critere_{serveur}_{critere}, sinon avec _dist
  * - critere_{table}_{critere}, sinon avec _dist
@@ -1042,7 +1042,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param){
  * - calculer_critere_defaut, sinon avec _dist
  *
  * Émet une erreur de squelette si un critère retourne une erreur.
- * 
+ *
  * @param string $idb
  *     Identifiant de la boucle
  * @param array $boucles
@@ -1077,7 +1077,7 @@ function calculer_criteres($idb, &$boucles){
 			        AND (!function_exists($f = "critere_".$critere))
 			            AND (!function_exists($f = $f."_dist"))
 		){
-			// fonction critere standard 
+			// fonction critere standard
 			$f = $defaut;
 		}
 		// compile le critere
@@ -1094,7 +1094,7 @@ function calculer_criteres($idb, &$boucles){
 
 /**
  * Désemberlificote les guillements et échappe (ou fera échapper) le contenu...
- * 
+ *
  * Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
  * hum, c'est kwoi cette fonxion ? on va dire qu'elle desemberlificote les guillemets...
  *
@@ -1117,11 +1117,11 @@ function kwote($lisp, $serveur='', $type=''){
  * Compile un critère possédant l'opérateur IN : {xx IN yy}
  *
  * Permet de restreindre un champ sur une liste de valeurs tel que
- * {id_article IN 3,4} {id_article IN #LISTE{3,4}} 
+ * {id_article IN 3,4} {id_article IN #LISTE{3,4}}
  *
  * Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
  * pour faire par exemple {id_article IN #ENV**{liste_articles}}
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -1183,7 +1183,7 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 
 	$boucles[$idb]->in .= $x;
 
-	// inserer le tri par defaut selon les ordres du IN ... 
+	// inserer le tri par defaut selon les ordres du IN ...
 	// avec une ecriture de type FIELD qui degrade les performances (du meme ordre qu'un regexp)
 	// et que l'on limite donc strictement aux cas necessaires :
 	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
@@ -1196,7 +1196,7 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 
 /**
  * Compile le critère {where}
- * 
+ *
  * Ajoute une contrainte sql WHERE, tout simplement pour faire le pont
  * entre php et squelettes, en utilisant la syntaxe attendue par
  * la propriété $where d'une Boucle.
@@ -1225,7 +1225,7 @@ function critere_where_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {tri}
- * 
+ *
  * Gère un champ de tri qui peut etre modifie dynamiquement par la balise #TRI
  *
  * {tri [champ_par_defaut][,sens_par_defaut][,nom_variable]}
@@ -1309,7 +1309,7 @@ function critere_tri_dist($idb, &$boucles, $crit){
  * Compile un critère non déclaré explicitement
  *
  * Compile les critères non déclarés, ainsi que les parties de boucles
- * avec les critères {0,1} ou {1/2} 
+ * avec les critères {0,1} ou {1/2}
  *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
@@ -1336,9 +1336,9 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit){
  *
  * Ajoute en fonction des arguments trouvés par calculer_critere_infixe()
  * les conditions WHERE à appliquer sur la boucle.
- * 
+ *
  * @see calculer_critere_infixe()
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -1402,7 +1402,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args){
  * - des critères de date (jour_relatif, ...),
  * - des critères sur tables jointes explicites (mots.titre),
  * - des critères sur tables de jointure non explicite (id_mot sur une boucle articles...)
- * 
+ *
  *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
@@ -1419,7 +1419,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args){
  *         Souvent (toujours ?) un tableau d'un seul élément.
  *     - $col_alias
  *     - $where_complement
- *     
+ *
  *     Chaîne vide si on ne trouve pas le champ...
 **/
 function calculer_critere_infixe($idb, &$boucles, $crit){
@@ -1526,7 +1526,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 			$val[0] = "sql_quote($r)";
 		}
 	}
-	// Indicateur pour permettre aux fonctionx boucle_X de modifier 
+	// Indicateur pour permettre aux fonctionx boucle_X de modifier
 	// leurs requetes par defaut, notamment le champ statut
 	// Ne pas confondre champs de la table principale et des jointures
 	if ($table===$boucle->id_table){
@@ -1576,7 +1576,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
  *     - string $table
  *     - array $where
  *     - array $desc
- *     
+ *
  *     Chaîne vide si on ne trouve pas le champ par jointure...
 **/
 function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table){
@@ -1584,7 +1584,7 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	$where = '';
 
 	$calculer_critere_externe = 'calculer_critere_externe_init';
-	// gestion par les plugins des jointures tordues 
+	// gestion par les plugins des jointures tordues
 	// pas automatiques mais necessaires
 	$table_sql = table_objet_sql($table);
 	if (isset($exceptions_des_jointures[$table_sql])
@@ -1652,7 +1652,7 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 
 /**
  * Calcule une condition WHERE entre un nom du champ et une valeur
- * 
+ *
  * Ne pas appliquer sql_quote lors de la compilation,
  * car on ne connait pas le serveur SQL
  *
@@ -1674,7 +1674,7 @@ function primary_doublee($decompose, $table){
 
 /**
  * Champ hors table, ça ne peut être qu'une jointure.
- * 
+ *
  * On cherche la table du champ et on regarde si elle est déjà jointe
  * Si oui et qu'on y cherche un champ nouveau, pas de jointure supplementaire
  * Exemple: criteres {titre_mot=...}{type_mot=...}
@@ -1689,7 +1689,7 @@ function primary_doublee($decompose, $table){
  * @param string $col
  *     Colonne cible de la jointure
  * @param array $desc
- *     Description de la table 
+ *     Description de la table
  * @param bool $cond
  *     Flag pour savoir si le critère est conditionnel ou non
  * @param bool|string $checkarrivee
@@ -1747,7 +1747,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
  * pour un critère {id_xxx}
  *
  * @todo $checkarrivee doit être obligatoire ici ?
- * 
+ *
  * @param Boucle $boucle
  *     Description de la boucle
  * @param array $joints
@@ -1755,7 +1755,7 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
  * @param string $col
  *     Colonne cible de la jointure
  * @param array $desc
- *     Description de la table 
+ *     Description de la table
  * @param bool $cond
  *     Flag pour savoir si le critère est conditionnel ou non
  * @param bool|string $checkarrivee
@@ -1784,7 +1784,7 @@ function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $chec
 
 
 /**
- * Recherche la présence d'un champ dans une valeur de tableau 
+ * Recherche la présence d'un champ dans une valeur de tableau
  *
  * @param string $champ
  *     Expression régulière pour trouver un champ donné.
@@ -2069,7 +2069,7 @@ function calculer_param_date($date_compare, $date_orig){
  *
  * Permet de déclarer le mode d'obtention des données dans une boucle
  * DATA (premier argument) et les données (la suite).
- * 
+ *
  * @example
  *     (DATA){source mode, "xxxxxx", arg, arg, arg}
  *     (DATA){source tableau, #LISTE{un,deux,trois}}
@@ -2100,7 +2100,7 @@ function critere_DATA_source_dist($idb, &$boucles, $crit){
  * Permet de déclarer le mode d'obtention des données dans une boucle DATA
  *
  * @deprecated Utiliser directement le critère {source}
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -2121,7 +2121,7 @@ function critere_DATA_datasource_dist($idb, &$boucles, $crit){
  * indiquant alors au bout de combien de temps la donnée est à réobtenir.
  *
  * La durée par défaut est 1 journée.
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -2135,7 +2135,7 @@ function critere_DATA_datacache_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {args} d'une boucle PHP
- * 
+ *
  * Permet de passer des arguments à un iterateur non-spip
  * (PHP:xxxIterator){args argument1, argument2, argument3}
  *
@@ -2154,7 +2154,7 @@ function critere_php_args_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {liste} d'une boucle DATA
- * 
+ *
  * Passe une liste de données à l'itérateur DATA
  *
  * @example
@@ -2175,7 +2175,7 @@ function critere_DATA_liste_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {enum} d'une boucle DATA
- * 
+ *
  * Passe les valeurs de début et de fin d'une énumération, qui seront
  * vues comme une liste d'autant d'éléments à parcourir pour aller du
  * début à la fin.
@@ -2204,9 +2204,9 @@ function critere_DATA_enum_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {datapath} d'une boucle DATA
- * 
+ *
  * Extrait un chemin d'un tableau de données
- * 
+ *
  * (DATA){datapath query.results}
  *
  * @param string $idb     Identifiant de la boucle
@@ -2224,22 +2224,22 @@ function critere_DATA_datapath_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {si}
- * 
+ *
  * Le critère {si condition} est applicable à toutes les boucles et conditionne
  * l'exécution de la boucle au résultat de la condition. La partie alternative
  * de la boucle est alors affichée si une condition n'est pas remplie (comme
  * lorsque la boucle ne ramène pas de résultat).
  * La différence étant que si la boucle devait réaliser une requête SQL
  * (par exemple une boucle ARTICLES), celle ci n'est pas réalisée si la
- * condition n'est pas remplie. 
- * 
+ * condition n'est pas remplie.
+ *
  * Les valeurs de la condition sont forcément extérieures à cette boucle
  * (sinon il faudrait l'exécuter pour connaître le résultat, qui doit tester
  * si on exécute la boucle !)
  *
  * Si plusieurs critères {si} sont présents, ils sont cumulés :
  * si une seule des conditions n'est pas vérifiée, la boucle n'est pas exécutée.
- * 
+ *
  * @example
  *     {si #ENV{exec}|=={article}}
  *     {si (#_contenu:GRAND_TOTAL|>{10})}
@@ -2268,12 +2268,12 @@ function critere_si_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {tableau} d'une boucle POUR
- * 
+ *
  * {tableau #XX} pour compatibilite ascendante boucle POUR
  * ... préférer la notation (DATA){source tableau,#XX}
  *
  * @deprecated Utiliser une boucle (DATA){source tableau,#XX}
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -2288,13 +2288,13 @@ function critere_POUR_tableau_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {noeud}
- * 
+ *
  * Trouver tous les objets qui ont des enfants (les noeuds de l'arbre)
  * {noeud}
  * {!noeud} retourne les feuilles
  *
  * @global array $exceptions_des_tables
- * 
+ *
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
@@ -2326,7 +2326,7 @@ function critere_noeud_dist($idb, &$boucles, $crit){
 
 /**
  * Compile le critère {feuille}
- * 
+ *
  * Trouver tous les objets qui n'ont pas d'enfants (les feuilles de l'arbre)
  * {feuille}
  * {!feuille} retourne les noeuds

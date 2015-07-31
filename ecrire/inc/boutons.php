@@ -16,14 +16,6 @@
  * @package SPIP\Core\Boutons
  */
 
- * @var nulll|string $url2
- *      URL du javascript
- * @var null|string $target
- *      Pour ouvrir dans une fenêtre à part
- * @var null|mixed $sousmenu
- *      Sous-barre de boutons/onglets
- */
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
@@ -55,9 +47,9 @@ class Bouton {
   /**
    * Définit un bouton
    *
-   * @param string $icone 
+   * @param string $icone
    *    L'icone à mettre dans le bouton
-   * @param string $libelle 
+   * @param string $libelle
    *    Le nom de l'entrée i18n associé
    * @param null|string $url
    *    L'URL de la page
@@ -84,12 +76,12 @@ class Bouton {
  * Définir la liste des onglets dans une page de l'interface privée.
  *
  * On passe la main au pipeline "ajouter_onglets".
- * 
+ *
  * @uses onglets_plugins()
  * @uses autoriser()
- * 
+ *
  * @pipeline_appel ajouter_onglets
- * 
+ *
  * @param string $script
  * @return array
  */
@@ -122,14 +114,14 @@ function definir_barre_onglets($script) {
 
 
 /**
- * 
+ *
  * Création de la barre d'onglets
- * 
+ *
  * @uses definir_barre_onglets()
  * @uses onglet()
  * @uses debut_onglet()
  * @uses fin_onglet()
- * 
+ *
  * @param string $rubrique
  * @param string $ongletCourant
  * @param string $class
