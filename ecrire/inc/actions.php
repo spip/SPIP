@@ -198,25 +198,24 @@ function ajax_action_greffe($fonction, $id, $corps)
 function ajax_retour($corps,$xml = true)
 {
 	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec'] == 'valider_xml') {
-	 	echo _DOCTYPE_ECRIRE
+	 	$debut = _DOCTYPE_ECRIRE
 		. "<html><head><title>Debug Spip Ajax</title></head>"
 		.  "<body><div>\n\n"
-		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n"
-		. $corps
-		. '</div></body></html>';
-		return;
+		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n";
+
+		$fin = '</div></body></html>';
+	} else {
+
+		if (isset($GLOBALS['tableau_des_temps'])) {
+			include_spip('public/debug');
+			$fin = chrono_requete($GLOBALS['tableau_des_temps']);
+		} else $fin = '';
+
+		$c = $GLOBALS['meta']["charset"];
+		header('Content-Type: text/html; charset='. $c);
+		$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
 	}
-
-	if (isset($GLOBALS['tableau_des_temps'])) {
-		include_spip('public/debug');
-		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
-	} else $chrono = '';
-
-	$c = $GLOBALS['meta']["charset"];
-	header('Content-Type: text/html; charset='. $c);
-	$c = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
-	echo $c, $corps, $chrono;
-	exit;
+	echo $debut, $corps, $fin;
 }
 
 /* specifique FF+FB
