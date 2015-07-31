@@ -24,24 +24,33 @@ else
 	$retour = $myretour;
 $retour = urlencode($retour);
 
-debut_page("Auteurs$partri","redacteurs","redacteurs");
+if ($visiteurs == "oui")
+	debut_page("Visiteurs","redacteurs","redacteurs");
+else
+	debut_page("Auteurs$partri","redacteurs","redacteurs");
 
 debut_gauche();
 
 
 
 debut_boite_info();
-	echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-	Leur statut est indiqu&eacute; par la couleur de leur icone  (r&eacute;dacteur = bleu; administrateur=noir). ");
+	if ($visiteurs == "oui")
+		echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
+		dans l'espace public du site (forums sur abonnement).");
+	else {
+		echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
+		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = bleu; administrateur=noir). ");
 
-	if ($connect_statut == '0minirezo')
-	echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par un icone rouge;
-		les auteurs effac&eacute;s par une poubelle.");
+		if ($connect_statut == '0minirezo')
+			echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par un icone rouge;
+			les auteurs effac&eacute;s par une poubelle.");
+	}
 fin_boite_info();
 
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
 	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
 	fin_raccourcis();
 }
 debut_droite();
@@ -52,7 +61,11 @@ debut_droite();
 //
 
 // limiter les statuts affiches
-if ($connect_statut != '0minirezo') {
+if (($visiteurs == "oui") AND ($connect_statut == '0minirezo')) {
+	$sql_statut_auteurs = " AND auteurs.statut IN ('6forum', '5poubelle')";
+	$sql_statut_articles = '';
+	$tri = 'nom';
+} else if ($connect_statut != '0minirezo') {
 	$sql_statut_auteurs = " AND auteurs.statut IN ('0minirezo', '1comite')";
 	$sql_statut_articles = " AND articles.statut IN ('prop', 'publie')";
 } else {
@@ -86,6 +99,7 @@ switch ($tri) {
 // est la concatenation de $query_nombres et de $query_auteurs
 
 unset($nombre_auteurs);
+$auteurs = Array();
 
 if ($type_requete == 'auteur') {
 	$result_auteurs = spip_query("SELECT *, UPPER(nom) AS unom
@@ -170,7 +184,10 @@ if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 //
 
 echo "<br><br><br>";
-gros_titre("Les auteurs");
+if ($visiteurs=='oui')
+	gros_titre("Visiteurs");
+else
+	gros_titre("Les auteurs");
 echo "<p>";
 
 // reglage du debut
@@ -203,12 +220,13 @@ echo "</td><td>";
 
 echo "</td><td colspan=2>Contact";
 echo "</td><td>";
-	if ($tri=='nombre')
-		echo '<b>Articles</b>';
-	else
-		echo "<a href='auteurs.php3?tri=nombre' title=\"Trier par nombre d'articles\">Articles</a>";
-
-echo "</tr>\n";
+	if ($visiteurs != 'oui') {
+		if ($tri=='nombre')
+			echo '<b>Articles</b>';
+		else
+			echo "<a href='auteurs.php3?tri=nombre' title=\"Trier par nombre d'articles\">Articles</a>";
+	}
+echo "</td></tr>\n";
 
 if ($nombre_auteurs > $max_par_page) {
 	echo "<tr bgcolor='white'><td colspan=5>";

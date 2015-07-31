@@ -324,9 +324,9 @@ AND $connect_id_auteur != $id_auteur) {
 
 	echo "<OPTION".mySel("1comite",$statut).">r&eacute;dacteur";
 
-	echo "<OPTION".mySel("5poubelle",$statut).">&agrave; la poubelle";
+	/* if ($statut=="6forum") */ echo "<OPTION".mySel("6forum",$statut).">visiteur";
 
-	if ($statut=="6forum") echo "<OPTION".mySel("6forum",$statut).">participant au forum";
+	echo "<OPTION".mySel("5poubelle",$statut).">&gt; &agrave; la poubelle";
 
 	echo "</SELECT></center>\n";
 	fin_cadre_relief();
