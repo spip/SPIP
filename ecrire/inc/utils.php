@@ -2481,7 +2481,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		}
 
 		$page = pipeline('recuperer_fond',array(
-			'args'=>array('fond'=>$fond,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
+			'args'=>array('fond'=>$f,'contexte'=>$contexte,'options'=>$options,'connect'=>$connect),
 			'data'=>$page
 		));
 		if (isset($options['ajax']) AND $options['ajax']){
