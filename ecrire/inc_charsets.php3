@@ -349,7 +349,9 @@ function translitteration ($texte, $charset='AUTO') {
 		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv($charset, 'ASCII//TRANSLIT', $texte)) AND !ereg('^\?+$',$iconv)) {
 			$GLOBALS['CHARSET']['translit'][$i] = $iconv;
 				$texte = ereg_replace($regs[0], $iconv, $texte);
-		}
+		} // supprimer les caracteres inconnus
+		else
+			$texte = ereg_replace($regs[0], '.', $texte);
 	}
 	return $texte;
 }

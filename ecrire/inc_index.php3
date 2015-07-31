@@ -30,7 +30,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 
 	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';	// supprimer_tags()
 	$regs = separateurs_indexation();
-	$texte = strtr($texte, $regs, "                                                           ");
+	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
 
 	$table = spip_split(" +", $texte);
 	while (list(, $mot) = each($table)) {
