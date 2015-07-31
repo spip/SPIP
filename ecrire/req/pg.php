@@ -27,13 +27,13 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 	@list($host, $p) = split(';', $addr);
 	if ($p >0) $port = " port=$p" ; else $port = '';
 	if ($db) {
-		@$link = pg_connect("host=$host$port dbname=$db user=$login password=$pass");
-	} elseif (!@$link = pg_connect("host=$host$port user=$login password=$pass")) {
-	    if (@$link = pg_connect("host=$host$port dbname=$login user=$login password=$pass")) {
+		@$link = pg_connect("host=$host$port dbname=$db user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW);
+	} elseif (!@$link = pg_connect("host=$host$port user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW)) {
+	    if (@$link = pg_connect("host=$host$port dbname=$login user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW)) {
 	      $db = $login;
 	    } else {
 	      $db = _DEFAULT_DB;
-	      $link = pg_connect("host=$host$port dbname=$db user=$login password=$pass");
+	      $link = pg_connect("host=$host$port dbname=$db user=$login password=$pass", PGSQL_CONNECT_FORCE_NEW);
 	    }
 	}
 
