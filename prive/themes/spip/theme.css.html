@@ -191,10 +191,10 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 .lat #documents_joints {border-top:0}
 .lat #documents_joints .item {-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
 
-#wysiwyg {padding: 0;font-size: 1.2em;line-height: 145%;font-family: Cambria, Georgia, 'Times New Roman', Times, serif;text-align: justify;text-justify:newspaper;-moz-hyphens:auto;-webkit-hyphens:auto;-khtml-hyphens:auto;-ms-hyphens:auto;-o-hyphens:auto;hyphens:auto;}
-#wysiwyg p {margin: 0.8em 0;}
-#wysiwyg h3.spip {margin-top: 2.5em;margin-bottom: 1.8em;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-weight: normal;}
-#wysiwyg .spip_note_ref {vertical-align: super;font-size: 80%;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;}
+#wysiwyg,.preview {padding: 0;font-size: 1.2em;line-height: 145%;font-family: Cambria, Georgia, 'Times New Roman', Times, serif;text-align: justify;text-justify:newspaper;-moz-hyphens:auto;-webkit-hyphens:auto;-khtml-hyphens:auto;-ms-hyphens:auto;-o-hyphens:auto;hyphens:auto;}
+#wysiwyg p,.preview p {margin: 0.8em 0;}
+#wysiwyg h3.spip, .preview h3.spip {margin-top: 2.5em;margin-bottom: 1.8em;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-weight: normal;}
+#wysiwyg .spip_note_ref,.preview .spip_note_ref {vertical-align: super;font-size: 80%;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;}
 #wysiwyg .contenu_descriptif {border: 0;background-color: #eee;margin-left: -15px;margin-right: -15px;padding: 10px 15px;}
 #wysiwyg .contenu_descriptif .label {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-size: 0.8em;display: block;margin-bottom: 0.5em;color: #999;font-weight: normal;}
 #wysiwyg .contenu_descriptif p {margin: 0.5em 0em;}
@@ -208,22 +208,8 @@ h3.titrem {font-size: 1em;line-height: 125%;padding-top: 7px;padding-bottom: 7px
 #wysiwyg .contenu_notes .notes p {margin: 0.5em 0;}
 #wysiwyg .contenu_notes .notes p .spip_note_ref {margin-left: -28px;}
 
-.preview {padding: 0;font-size: 1.2em;line-height: 145%;font-family: Cambria, Georgia, 'Times New Roman', Times, serif;text-align: justify;text-justify:newspaper;-moz-hyphens:auto;-webkit-hyphens:auto;-khtml-hyphens:auto;-ms-hyphens:auto;-o-hyphens:auto;hyphens:auto;}
-.preview p {margin: 0.8em 0;}
-.preview h3.spip {margin-top: 2.5em;margin-bottom: 1.8em;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-weight: normal;}
-.preview .spip_note_ref {vertical-align: super;font-size: 80%;font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;}
-.preview .contenu_descriptif {border: 0;background-color: #eee;margin-left: -15px;margin-right: -15px;padding: 10px 15px;}
-.preview .contenu_descriptif .label {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-size: 0.8em;display: block;margin-bottom: 0.5em;color: #999;font-weight: normal;}
-.preview .contenu_descriptif p {margin: 0.5em 0em;}
-.preview .contenu_nom_site {border: 0;background-color: #eee;margin-left: -15px;margin-right: -15px;padding: 10px 15px;}
-.preview .contenu_nom_site .label {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;font-size: 0.8em;display: block;margin-bottom: 0.5em;color: #999;font-weight: normal;}
-.preview .contenu_nom_site p {margin: 0.5em 0em;}
-.preview .contenu_nom_site .label {display: inline-block;padding: 0;margin: 0;}
-.preview .contenu_nom_site .nom_site {display: inline-block;padding: 0;margin: 0;}
-.preview .contenu_notes {background-color: transparent;border-top: 0px solid #ccc;background-color: #eee;margin-left: -15px;margin-right: -15px;padding: 10px 15px;}
-.preview .contenu_notes .label {font-family: 'Lucida Grande', Tahoma, Ubuntu, Arial, Verdana, sans-serif;display: block;margin-bottom: 0.5em;color: #999;font-weight: normal;}
-.preview .contenu_notes .notes p {margin: 0.5em 0;}
-.preview .contenu_notes .notes p .spip_note_ref {margin-left: -28px;}
+#contenu .preview h1 {color: inherit;}
+
 #text_area {height: 450px;padding: 10px;outline: none;-webkit-border-top-left-radius:0px;-moz-border-radius-topleft:0px;border-top-left-radius:0px;-webkit-border-top-right-radius:0px;-moz-border-radius-topright:0px;border-top-right-radius:0px;position:relative;}
 .formulaire_editer_liens .liste-objets tr > .action button {-webkit-opacity:0.6;-moz-opacity:0.6;opacity:0.6;filter:alpha(opacity=60);font-size: 90%;}
 .formulaire_editer_liens .liste-objets tr > .action button img {float: none;margin-left: 0px;vertical-align: bottom;}
