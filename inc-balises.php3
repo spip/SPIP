@@ -88,19 +88,19 @@ function balise_CHARSET_dist($p) {
 
 
 function balise_LANG_LEFT_dist($p) {
-	$p->code = "lang_dir(\$spip_lang,'left','right')";
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_RIGHT_dist($p) {
-	$p->code = "lang_dir(\$spip_lang,'right','left')";
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'right','left')";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_DIR_dist($p) {
-	$p->code = "lang_dir(\$spip_lang,'ltr','rtl')";
+	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'ltr','rtl')";
 	$p->statut = 'php';
 	return $p;
 }
@@ -682,7 +682,7 @@ function balise_FORMULAIRE_RECHERCHE_dist($p) {
 function balise_FORMULAIRE_INSCRIPTION_dist($p) {
 
 	$p->code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
-		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
+		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$GLOBALS[\'spip_lang\']\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
 
 	$p->statut = 'php';
 	return $p;
