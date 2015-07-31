@@ -16,9 +16,7 @@ include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
 include_local("inc-forum.php3");
 include_local("inc-calcul-outils.php3");
-
-#include_local("inc-calcul_html");	# anciens noms des fichiers
-#include_local("inc-calcul_mysql");
+include_local("inc-admin.php3");
 
 
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
@@ -142,19 +140,17 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 		if ($fonc = charger_squelette($skel))
 		  $page = $fonc(array('cache' => $cache), array($contexte));
 
-			// Passer la main au debuggueur)
-		if ($GLOBALS['var_debug'] AND 
-		    $GLOBALS['debug_objet'] == $fonc AND
-		    $GLOBALS['debug_affiche'] == 'resultat')
+		// Passer la main au debuggueur)
+		if ($GLOBALS['var_debug']
+		AND $GLOBALS['debug_objet'] == $fonc
+		AND $GLOBALS['debug_affiche'] == 'resultat')
 			debug_dumpfile ($page['texte']);
 	}
-	# flag pour spip_error_handler(), cf inc-admin ??
-	$page['squelette'] = $skel;
 
 	// Nettoyer le resultat si on est fou de XML
 	if ($GLOBALS['xhtml']) {
-		  include_ecrire("inc_tidy.php");
-		  $page['texte'] = xhtml($page['texte']);
+		include_ecrire("inc_tidy.php");
+		$page['texte'] = xhtml($page['texte']);
 	}
 
 	// Entrer les invalideurs dans la base
@@ -283,6 +279,8 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	return $page;
 }
 
+
+## tout ce qui suit devrait etre ailleurs : ecrire/inc_db_(mysql|pgsql).php3
 // Cette fonction est systematiquement appelee par les squelettes
 // pour constuire une requete SQL de type "lecture" (SELECT) a partir
 // de chaque boucle.
@@ -331,12 +329,13 @@ function spip_abstract_select (
 }
 
 function spip_abstract_serveur($f, $serveur) {
-  if (function_exists($f)) return $f;
-  include_local("inc-admin.php3");
-  erreur_squelette(_L(' serveur SQL indefini'), $serveur);
-		   
-  // hack pour continuer la chasse aux erreurs
-  return 'array';
+	if (function_exists($f))
+		return $f;
+
+	erreur_squelette(_L(' serveur SQL indefini'), $serveur);
+
+	// hack pour continuer la chasse aux erreurs
+	return 'array';
 }
 
 // Les 3 fonctions suivantes exploitent le resultat de la precedente,
@@ -363,8 +362,7 @@ function spip_abstract_free($res, $serveur='')
   return $f($res);
 }
 
-# une composition tellement fréquente...
-
+# une composition tellement frequente...
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = '',
 	$groupby = '', $orderby = '', $limit = '',

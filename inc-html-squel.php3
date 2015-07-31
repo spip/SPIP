@@ -47,7 +47,6 @@ function parser_texte($texte) {
 			$champ->params = '';
 		else {
 			if (!(ereg('^\\{(.*)\\}$', $p, $params))) {
-				include_local("inc-admin.php3");
 				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $s);
 			}
 			else
@@ -210,7 +209,6 @@ function parser_param($params, &$result) {
 	}
 
 	if ($params) {
-		include_local("inc-admin.php3");
 		erreur_squelette(($result->id_boucle .
 				  _L(": Param&egrave;tre $i (ou suivants) incorrect")),
 				 $params);
@@ -241,7 +239,6 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$debut = substr($texte, 0, $p);
 		$milieu = substr($texte, $p);
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
-			include_local("inc-admin.php3");
 			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu);
 		}
 		$id_boucle = $match[1];
@@ -281,7 +278,6 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		}
 		$milieu = substr($milieu, strlen($match[0]));
 		if (strpos($milieu, $s)) {
-			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
 				$id_boucle . 
 				_L('&nbsp;: balise B en aval'));
@@ -293,7 +289,6 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$s = "</BOUCLE$id_boucle>";
 		$p = strpos($milieu, $s);
 		if ($p === false) {
-			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
 					 _T('erreur_boucle_fermant',
 						array('id'=>$id_boucle)));
@@ -329,7 +324,6 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$all_res = array_merge($all_res, parser_champs_etendus($debut));
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
-			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
 					 _T('erreur_boucle_double',
 					 	array('id'=>$id_boucle)));

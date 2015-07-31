@@ -542,13 +542,5 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 	return $res;
 }
 
-function formulaire_admin() {
-  if (!$GLOBALS['flag_preserver'] && ($GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
-    include_local('inc-admin.php3');
-    global $page, $cle, $fraicheur;
-    return afficher_boutons_admin($page, $cle, $fraicheur);
-  }
-  return '';
-}
 
 ?>

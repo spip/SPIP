@@ -3,16 +3,11 @@
 // Page inclue ?
 if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
-	$contenu = $page['texte'];
-	// Traiter var_recherche pour surligner les mots
-	if ($GLOBALS['var_recherche']) {
-	  include_ecrire("inc_surligne.php3");
-	  $contenu = surligner_mots($contenu, $var_recherche);
-		}
-	if ($page['process_ins'] == 'php') {
-		eval('?' . '>' . $contenu); // page 'php'
-	} else
-		echo $contenu; // page tout 'html'
+
+	if ($page['process_ins'] == 'html')
+		echo $page['texte'];
+	else
+		eval('?' . '>' . $page['texte']);
 
 	if ($page['lang_select'])
 		lang_dselect();
@@ -73,13 +68,12 @@ else {
 		reponse_confirmation($id_article, $val_confirm);
 	}
 
+	include_local ('inc-public-global.php3');
 
 	// demande de debug ?
 	if ($var_debug AND ($code_activation_debug == $var_debug
-	OR ($code_activation_debug == ''
-	AND $auteur_session['statut'] == '0minirezo')
+		OR $auteur_session['statut'] == '0minirezo'
 	)) {
-		include_local('inc-admin.php3');
 		$recalcul = 'oui';
 		$var_debug = true;
 		spip_log('debug !');
@@ -88,17 +82,15 @@ else {
 
 	// Faut-il preparer les boutons d'admin ?
 	$affiche_boutons_admin = (!$flag_preserver
-				  AND ($HTTP_COOKIE_VARS['spip_admin']
-				       OR $HTTP_COOKIE_VARS['spip_debug']));
-
-	// inc-admin contient aussi le traitement d'erreur
-	include_local('inc-admin.php3');
-	include_local ("inc-public-global.php3");
+		AND ($HTTP_COOKIE_VARS['spip_admin']
+			OR $HTTP_COOKIE_VARS['spip_debug']));
+	if ($affiche_boutons_admin)
+		include_local('inc-admin.php3');
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
-		// Interdire au client de cacher un login, un admin ou un recalcul
+	// Interdire au client de cacher un login, un admin ou un recalcul
 	if ($flag_dynamique OR ($recalcul == 'oui')
 			OR $HTTP_COOKIE_VARS['spip_admin']) {
 			@header("Cache-Control: no-cache,must-revalidate");
@@ -108,12 +100,52 @@ else {
 			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
 		@header("Content-Type: text/html; charset=".lire_meta('charset'));
- #entre gzip et debug, faut revoir
-		#@header('Content-Length: '.strlen($contenu));
-#		@header('Connection: close');
 
-		$contenu = $page['texte'];
-		spip_log($page['process_ins'] . strlen($contenu));
+		// Faudra-t-il post-traiter la page ?
+		define('spip_active_ob', $flag_ob AND
+		($var_debug OR $var_recherche OR $affiche_boutons_admin));
+
+		// Cas d'une page contenant uniquement du HTML :
+		if ($page['process_ins'] == 'html') {
+			if (!spip_active_ob) {
+				echo $page['texte'];
+				$contenu = '';
+			} else
+				$contenu = $page['texte'];
+		}
+
+		// Cas d'une page contenant du PHP :
+		else {
+
+			// Evaluer la page
+			if (!spip_active_ob) {
+				$res = eval('?' . '>' . $page['texte']);
+				$contenu = '';
+			} else {
+				ob_start(); 
+				$res = eval('?' . '>' . $page['texte']);
+				$contenu = ob_get_contents(); 
+				ob_end_clean();
+			}
+                      
+			// en cas d'erreur afficher un message + demander boutons debug
+			if ($affiche_boutons_admin
+			AND $auteur_session['statut'] == '0minirezo') {
+				if (function_exists('restore_error_handler'))
+					restore_error_handler();
+				if ($res === false)
+					spip_error_handler(1,'erreur de compilation','','','');
+			}
+
+		}
+
+		// Passer la main au debuggueur le cas echeant 
+		if ($var_debug) {
+			debug_dumpfile('');
+			exit;
+		} else if (count($tableau_des_erreurs) > 0)
+			affiche_erreurs_execution_page ();
+
 		// Traiter var_recherche pour surligner les mots
 		if ($var_recherche) {
 			include_ecrire("inc_surligne.php3");
@@ -123,58 +155,10 @@ else {
 		// Ajouter les boutons admins (les normaux)
 		if ($affiche_boutons_admin)
 			$contenu = calcul_admin_page($use_cache, $contenu);
-		spip_log($page['process_ins'] . $contenu);
 
-		if ($page['process_ins'] == 'html') 
-		  {if (!$var_debug) echo $contenu;}
-		else {
+		echo $contenu;
 
-		// Ici on va ruser pour intercepter les erreurs (meme les FATAL)
-		// dans le eval : on envoie le bouton debug, et on le supprime
-		// de l'autre cote ; de cette facon, si on traverse sans encombre,
-		// on est propre, et sinon on a le bouton
-
-			if ($affiche_boutons_admin) {
-
-		// recuperer les parse errors etc., type "FATAL" (cf. infra)
-			  if ($auteur_session['statut'] == '0minirezo') {
-				$page_principale = $page;
-				if (function_exists('set_error_handler'))
-					set_error_handler('spip_error_handler');
-			  }
-			  
-			}
-
-		//
-		// Evaluer la page php
-		//
-			if (!$var_debug)
-			  $res = eval('?' . '>' . $contenu); 
-			else {
-			  ob_start(); 
-			  $res = eval('?' . '>' . $contenu);
-			  $contenu = ob_get_contents(); 
-			  ob_end_clean();
-			}
-                      
-		// en cas d'erreur afficher un message + demander les boutons de debug
-			if ($affiche_boutons_admin
-			    AND $auteur_session['statut'] == '0minirezo') {
-			  if (function_exists('restore_error_handler'))
-			    restore_error_handler();
-			  if ($res === false)
-			    spip_error_handler(1,'erreur de compilation','','','');
-			}
-			
-		}
-	// Passer la main au debuggueur le cas echeant 
-	if ($var_debug)	
-	  debug_dumpfile('');
-	else {
-		if (count($tableau_des_erreurs) > 0)
-			affiche_erreurs_execution_page ();
-	}
-	terminer_public_global($use_cache, $page['cache']);
+		terminer_public_global($use_cache, $page['cache']);
 }
 
 ?>

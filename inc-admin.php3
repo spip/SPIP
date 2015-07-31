@@ -137,18 +137,14 @@ function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
 	global $tableau_des_erreurs, $page;
 
 	// On ne veut intercepter que les erreurs des $page['texte'],
-	// si le code avait ete développé proprement dès le départ
-	// ce serait moins approximatif que ci-dessous
+	// et pas celles de SPIP :^)
+	if (($errno & (E_ERROR | E_WARNING | E_PARSE))
+	&& (!strpos($filename, 'ecrire/'))) {
 
-	if (($errno & (E_ERROR | E_WARNING | E_PARSE)) &&
-	    (!strpos($filename, 'ecrire/')))
-	  {
-
-# si $filename = inc-public + eval, dénoncer le squelette,
-# sinon c'est un appel du handler explicitement par le compilateur 
-# qui donne les bons arguments tout de suite, mais avec linenum = ''
-		$tableau_des_erreurs[]
-		  = array($errno,
+		# si $filename = inc-public + eval, denoncer le squelette,
+		# sinon c'est un appel du handler explicitement par le compilateur 
+		# qui donne les bons arguments tout de suite, mais avec linenum = ''
+		$tableau_des_erreurs[] = array($errno,
 			  $errmsg,
 			  ($linenum ? "ligne $linenum" : ''),
 			  ((!strpos($filename, 'inc-public.php3(')) ? 
@@ -183,19 +179,24 @@ function affiche_erreurs_execution_page() {
 	global $tableau_des_erreurs, $affiche_boutons_admin;
 
 	if ($affiche_boutons_admin) {
-		echo "<div style='position: absolute; top: 10px;
-			z-index: 1000; background-color: pink;'>";
-		echo "<h2>",
+		include_ecrire('inc_presentation.php3');
+
+		echo "<div id='spip-debug' style='position: absolute; top: 20;",
+		" z-index: 1000;'><ul><li>",
 		_L("Erreur(s) dans le squelette"),
-		"</h2>",
-		"<code><ul>";
+
+## aide locale courte a ecrire, avec lien vers une grosse page de documentation
+#		aide('erreur_compilation'),
+
+		"<br /></li>",
+		"<ul>";
 		foreach ($tableau_des_erreurs as $err) {
 			echo "<li>$err[2] $err[3]  $err[1]",
-			"<small>$err[4]</small><br><br>",
+			"<small>$err[4]</small><br />",
 			"</li>\n";
 		}
-		echo "</ul></code>";
-		echo "</div>";
+		echo "</ul>";
+		echo "</ul></div>";
 		$GLOBALS['bouton_admin_debug'] = true;
 	}
 }
