@@ -53,7 +53,7 @@ function exec_admin_plugin_dist($retour='') {
 	$quoi = $quoi ? $quoi : 'actifs';
 
 	echo debut_gauche('plugin',true);
-	echo recuperer_fond('prive/squelettes/navigation/page-configurer',array());
+	echo recuperer_fond('prive/squelettes/navigation/configurer',array());
 
 	// la valeur de retour de la fonction ci-dessus n'est pas compatible
 	// avec ce que fait actualise_plugins_actifs, il faut recalculer. A revoir.
