@@ -246,7 +246,7 @@ function boites_de_config_articles($id_article)
 {
 	if (autoriser('modererforum', 'article', $id_article)) {
 		$regler_moderation = charger_fonction('regler_moderation', 'inc');
-		$regler = $regler_moderation($id_article,"articles","id_article=$id_article");
+		$regler = $regler_moderation($id_article,"articles","id_article=$id_article") . '<br />';
 	}
 
 	if (autoriser('modererpetition', 'article', $id_article)) {

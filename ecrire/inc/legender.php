@@ -89,17 +89,15 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "<textarea name='descriptif_document' rows='4' class='formo' cols='*' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">" .
 	    entites_html($descriptif) .
 	  "</textarea>\n" .
-	  $taille .
-	  "\n<div " .
-	  ($flag == 'ajax' ? '' : "class='display_au_chargement' ") .
-	  "id='valider_doc$id_document' align='".
-	  $GLOBALS['spip_lang_right'].
-	  "'>\n<input class='fondo spip_xx-small' value='".
-	  _T('bouton_enregistrer') .
-	  "' type='submit' />" .
-	  "</div>\n";
+	  $taille;
 
-	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+	$att = " class='fondo spip_xx-small"
+	.  ($flag == 'ajax' ? '' : " display_au_chargement")
+	.  "' id='valider_doc$id_document' style='float: "
+	.  $GLOBALS['spip_lang_right']
+	. "'";
+
+	$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 	.  $vignette . "\n\n";
 
 	$texte = _T('icone_supprimer_document');

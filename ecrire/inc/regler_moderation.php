@@ -69,15 +69,11 @@ function inc_regler_moderation_dist($id_article, $script, $args) {
 			$r .= " selected='selected'";
 		$r .= " value='$val'>".$desc."</option>";
 	}
-	$r .= "\n\t</select>\n";
+	$r .= "\n\t</select><br />\n";
 
-	$r .= "<div align='$spip_lang_right' id='valider_regler_moderation_$id_article'"
-	. " class='visible_au_chargement'"
-	. ">\n\t<input type='submit' class='fondo spip_xx-small' value='"
-	. _T('bouton_changer')
-	. "' /></div>\n";
+	$atts = " style='float: $spip_lang_right' id='valider_regler_moderation_$id_article' class='fondo visible_au_chargement spip_xx-small'";
 
-	$r = ajax_action_auteur('regler_moderation', $id_article, $script, $args, $r);
+	$r = ajax_action_post('regler_moderation', $id_article, $script, $args, $r,_T('bouton_changer'), $atts);
 
 	return ajax_action_greffe("regler_moderation-$id_article", $r);
 }

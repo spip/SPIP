@@ -267,22 +267,20 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	. _T('titre_cadre_ajouter_auteur')
 	. "</b></span>\n";
 
-	$sel = (($num <= _SPIP_SELECT_MIN_AUTEURS)
-		? ("$text<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
+	if ($num <= _SPIP_SELECT_MIN_AUTEURS){
+		$sel = "$text<select name='nouv_auteur' size='1' style='width:150px;' class='fondl' onchange=\"$js\">" .
 		   objet_auteur_select($query) .
-		   "</select>" .
-		   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .
-		   " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />" .
-		   "</span>")
-		: (((_SPIP_AJAX < 1) OR
-		    ($num >= _SPIP_SELECT_MAX_AUTEURS))
-	      ? ("$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' /><span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' /></span>")
-	      : (selecteur_auteur_ajax($type, $id, $js, $text)
-		 .  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>"
-		 . " <input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />"
-		 . "</span>")));
+		   "</select>";
+		$clic = _T('bouton_ajouter');
+	} else if  ((_SPIP_AJAX < 1) OR ($num >= _SPIP_SELECT_MAX_AUTEURS)) {
+		  $sel = "$text <input type='text' name='cherche_auteur' onclick=\"$js\" class='fondl' value='' size='20' />";
+		  $clic = _T('bouton_chercher');
+	} else {
+	    $sel = selecteur_auteur_ajax($type, $id, $js, $text);
+	    $clic = _T('bouton_ajouter');
+	}
 
-	return ajax_action_auteur('editer_auteurs', "$id,$type",$script_edit, "id_{$type}=$id", $sel,$arg_ajax);
+	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, "class='fondo visible_au_chargement' id='valider_ajouter_auteur'", $arg_ajax);
 }
 
 // http://doc.spip.org/@objet_auteur_select

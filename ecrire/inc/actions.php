@@ -101,6 +101,49 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 	}
 }
 
+
+function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts, $args_ajax='')
+{
+	if (strpos($args,"#")===FALSE)
+		$ancre = "$action-" . intval($arg);
+	else {
+		$ancre = explode("#",$args);
+		$args = $ancre[0];
+		$ancre = $ancre[1];
+	}
+
+	if (_SPIP_AJAX !== 1) {
+	  return redirige_action_auteur($action, $arg, $retour,
+					($gra . '#' . $ancre),
+				      ("<div>"
+				       . $corps 
+				       . "<span"
+				       . $atts
+				       . "><input type='submit' class='fondo' value='"
+				       . $clic
+				       ."' /></span></div>"),
+				      "\nmethod='post'");
+  } else { 
+
+	if ($gra AND !$args_ajax) $args_ajax = "&$gra";
+	$corps = "<div>"
+	  . $corps 
+	  . "<input type='submit' value='"
+	  . $clic
+	  . "' onclick=" 
+	  . ajax_action_declencheur('this.form', $ancre)
+	  . " $atts/></div>";
+
+	return redirige_action_auteur($action,
+				      $arg,
+				      $action,
+				"var_ajaxcharset=utf-8&script=$retour$args_ajax",
+				      $corps ,
+				      " method='post'");
+	}
+
+}
+
 //
 // Attention pour que Safari puisse manipuler cet evenement
 // il faut onsubmit="return AjaxSqueeze(x,'truc',...)"
@@ -108,7 +151,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 //
 // http://doc.spip.org/@ajax_action_declencheur
 function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
-	if ($request != 'this')
+	if (strpos($request, 'this') !== 0) 
 		$request = "'".$request."'";
 
 	return '"return AjaxSqueeze('

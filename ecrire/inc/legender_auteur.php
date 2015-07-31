@@ -166,11 +166,11 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 
 	$corps .= fin_cadre_relief(true)
 	. "<br />"
-	. (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur))
-	. "\n<div align='right'>"
-	. "\n<input type='submit' class='fondo' value='"
-	. _T('bouton_enregistrer')
-	. "' /></div>";
+	  . (!$setconnecte ? '' : apparait_auteur_infos($id_auteur, $auteur));
+
+	$att = " style='float: 	"
+	.  $GLOBALS['spip_lang_right']
+	. "' class='fondo'";
 
 	$arg = intval($id_auteur) . '/';
 
@@ -179,7 +179,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 	. debut_cadre_relief("fiche-perso-24.gif", true, "", _T("icone_informations_personnelles"))
 	. ($redirect
 	     ? generer_action_auteur('legender_auteur', $arg, $redirect, $corps)
-	   : ajax_action_auteur('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps))
+	   : ajax_action_post('legender_auteur', $arg, 'auteur_infos', "id_auteur=$id_auteur&initial=-1&retour=$redirect", $corps, _T('bouton_enregistrer'), $att))
 	. fin_cadre_relief(true)
 	. '</div>';
 }

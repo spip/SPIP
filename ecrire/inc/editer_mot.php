@@ -246,23 +246,22 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 		$id = $row_autres['id_mot'];
 		$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
 		$selected = ($id == $id_mot) ? " selected='selected'" : "";
-		$s .= "<option value='$id'$selected> $le_titre_mot</option>";
+		$s .= "\n<option value='$id'$selected> $le_titre_mot</option>";
 	}
 
 	$ancre = "valider_groupe_$id_groupe"; 
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
-	return ajax_action_auteur('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", (
-	"<select name='nouv_mot' onchange=\"$jscript1\""
+	$corps = "<select name='nouv_mot' onchange=\"$jscript1\""
 	. " class='fondl spip_xx-small' style='width:90px;'>"
 	. $s
-	. "</select>"
-	. "<span class='visible_au_chargement' id='$ancre'>"
-	. "\n&nbsp; <input type='submit' value='"
-	. _T('bouton_changer')
-	. "' class='fondo spip_xx-small' />"
-	. "</span>"),"&id_objet=$id_objet&objet=$objet");
+	. "</select>" 
+	. "<span >\n&nbsp;" ;
+
+	$t =  _T('bouton_changer');
+
+	return ajax_action_post('editer_mot', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "&id_objet=$id_objet&objet=$objet");
 }
 
 
@@ -306,15 +305,17 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	$ajouter ='';
 	while ($row = spip_fetch_array($result_groupes)) {
 		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
-			$menu = ajax_action_auteur('editer_mot',
+			$id_groupe = $row['id_groupe'];
+			list($corps, $clic) = $menu;
+
+			$ajouter .= ajax_action_post('editer_mot',
 				"$id_objet,,$table,$table_id,$objet",
 				$url_base,
 				"$table_id=$id_objet",
-				$menu,
-				"&id_objet=$id_objet&objet=$objet&select_groupe="
-					.$row['id_groupe']
-			);
-			$ajouter .= "<div>$menu</div>\n";
+				$corps,
+				$clic,
+				" class='visible_au_chargement fondo spip_xx-small'' id='valider_groupe_$id_groupe'",
+				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 		}
 	}
 	if ($ajouter) {
@@ -374,10 +375,8 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		else
 			$res .= "<input type='text' name='cherche_mot'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
 
-		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />";
-		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= " <input type='submit' value='"._T('bouton_chercher')."' class='fondo spip_xx-small' />";
-		$res .= "</span>"; 
+		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />&nbsp;";
+		return array($res, _T('bouton_chercher')); 
 	} else {
 
 		$jscript = "onchange=\"$jscript1\"";
@@ -396,12 +395,9 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 				textebrut(typo($row['titre'])) .
 				"</option>";
 		}
-		$res .= "</select>";
-		$res .= "<span class='visible_au_chargement' id='$ancre'>";
-		$res .= "\n&nbsp;<input type='submit' value='"._T('bouton_choisir')."' class='fondo' />";
-		$res .= "</span>";
+		$res .= "</select>&nbsp;";
+		return array($res, _T('bouton_choisir'));
 	}
 
-	return $res;
 }
 ?>
