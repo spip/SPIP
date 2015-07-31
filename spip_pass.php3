@@ -12,13 +12,13 @@
 
 
 include ("ecrire/inc_version.php3");
-include_ecrire("inc_session.php3"); # pour creer_uniq_id
-include_ecrire("inc_mail.php3"); # pour envoyer_mail
-include_ecrire("inc_acces.php3"); # pour generer_htpass
-include_local("inc-public-global.php3"); # pour calculer la page
-include_ecrire("inc_lang.php3");
-include_ecrire("inc_filtres.php3"); # pour email_valide()
-include_ecrire('inc_headers.php');
+include_ecrire("inc_session"); # pour creer_uniq_id
+include_ecrire("inc_mail"); # pour envoyer_mail
+include_ecrire("inc_acces"); # pour generer_htpass
+include_local("inc-public-global"); # pour calculer la page
+include_ecrire("inc_lang");
+include_ecrire("inc_filtres"); # pour email_valide()
+include_ecrire('inc_headers');
 
 utiliser_langue_site();
 utiliser_langue_visiteur();

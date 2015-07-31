@@ -15,7 +15,7 @@ define("_TEST_DIRS", "1");
 
 include("ecrire/inc_version.php3");
 
-include_ecrire("inc_minipres.php");
+include_ecrire("inc_minipres");
 
 utiliser_langue_visiteur();
 

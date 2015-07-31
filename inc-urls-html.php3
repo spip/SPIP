@@ -105,7 +105,7 @@ function recuperer_parametres_url($fond, $url) {
 //
 
 function generer_url_forum($id_forum, $show_thread=false) {
-	include_ecrire('inc_forum.php3');
+	include_ecrire('inc_forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
 

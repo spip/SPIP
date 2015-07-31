@@ -412,12 +412,12 @@ function balise_EMBED_DOCUMENT_dist($p) {
 // sinon elles seront remplacees par les fontions de inc_surligne
 
 function balise_DEBUT_SURLIGNE_dist($p) {
-	include_ecrire('inc_surligne.php3');
+	include_ecrire('inc_surligne');
 	$p->code = "'<" . MARQUEUR_SURLIGNE . "'";
 	return $p;
 }
 function balise_FIN_SURLIGNE_dist($p) {
-	include_ecrire('inc_surligne.php3');
+	include_ecrire('inc_surligne');
 	$p->code = "'<" . MARQUEUR_FSURLIGNE . "'";
 	return $p;
 }
@@ -644,7 +644,7 @@ function balise_EXTRA_dist ($p) {
 
 	// Gerer la notation [(#EXTRA|isbn)]
 	if ($p->params) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		list ($key, $champ_extra) = each($p->params);	// le premier filtre
 		$type_extra = $p->type_requete;
 		$champ = $champ_extra[1];
@@ -737,7 +737,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
 function code_invalideur_forums($p, $code) {
-	include_ecrire('inc_invalideur.php3');
+	include_ecrire('inc_invalideur');
 	$type = 'id_forum';
 	$valeur = "\n\t\tcalcul_index_forum("
 		// Retournera 4 [$SP] mais force la demande du champ a MySQL

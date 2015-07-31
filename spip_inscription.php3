@@ -12,9 +12,9 @@
 
 include ("ecrire/inc_version.php3");
 include_local(find_in_path("inc-formulaire_inscription.php3"));
-include_local("inc-public-global.php3"); 
-include_ecrire("inc_lang.php3");
-include_ecrire('inc_headers.php');
+include_local("inc-public-global"); 
+include_ecrire("inc_lang");
+include_ecrire('inc_headers');
 
 utiliser_langue_site();
 utiliser_langue_visiteur();

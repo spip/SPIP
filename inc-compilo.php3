@@ -22,25 +22,25 @@ define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
-include_local("inc-compilo-index.php3");  # index ? structure ? pile ?
+include_local("inc-compilo-index");  # index ? structure ? pile ?
 
 // definition des boucles
-include_local("inc-boucles.php3");
+include_local("inc-boucles");
 
 // definition des criteres
-include_local("inc-criteres.php3");
+include_local("inc-criteres");
 
 // definition des balises
-include_local("inc-balises.php3");
+include_local("inc-balises");
 
 // definition de l'API
-include_local("inc-compilo-api.php3");
+include_local("inc-compilo-api");
 
 # definition des tables
-include_ecrire('inc_serialbase.php3');
+include_ecrire('inc_serialbase');
 
 // outils pour debugguer le compilateur
-#include_local("inc-compilo-debug.php3"); # desactive
+#include_local("inc-compilo-debug"); # desactive
 
 //
 // Calculer un <INCLURE()>
@@ -569,7 +569,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	include_local("inc-$gram-squel.php3");
+	include_local("inc-$gram-squel");
 
 	$racine = phraser($squelette, '',$boucles, $nom);
 

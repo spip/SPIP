@@ -15,14 +15,14 @@
 
 define ('_SPIP_REDIRECT', 1);
 include ("ecrire/inc_version.php3");
-include_ecrire ("inc_session.php3");
+include_ecrire ("inc_session");
 verifier_visiteur();
 
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls.php3");
+	include_local("inc-urls");
 else
-	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+	include_local("inc-urls-".$GLOBALS['type_urls']);
 
 if ($id_article) {
 	$url = generer_url_article($id_article);

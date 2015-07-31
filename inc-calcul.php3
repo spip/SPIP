@@ -18,26 +18,26 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ce fichier calcule une page en executant un squelette.
 //
 
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_index.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_lang.php3");
-include_ecrire("inc_documents.php3");
-include_ecrire("inc_abstract_sql.php3");
-include_ecrire("inc_forum.php3");
-include_ecrire("inc_debug_sql.php3");
-include_ecrire("inc_distant.php");
-include_local("inc-calcul-outils.php3");
+include_ecrire("inc_meta");
+include_ecrire("inc_index");
+include_ecrire("inc_texte");
+include_ecrire("inc_lang");
+include_ecrire("inc_documents");
+include_ecrire("inc_abstract_sql");
+include_ecrire("inc_forum");
+include_ecrire("inc_debug_sql");
+include_ecrire("inc_distant");
+include_local("inc-calcul-outils");
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 if ($f = find_in_path("mes_fonctions.php3"))
 	include_local ($f);
 
 // Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls.php3");
+if (@file_exists("inc-urls.php3")) // compat vieille version
+	include_local("inc-urls");
 else
-	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+	include_local("inc-urls-".$GLOBALS['type_urls']);
 
 
 // Le squelette compile est-il trop vieux ?
@@ -55,7 +55,7 @@ function squelette_obsolete($skel, $squelette) {
 # Charge un squelette (au besoin le compile) 
 # et retoune le nom de sa fonction principale, ou '' s'il est indefini
 # Charge egalement un fichier homonyme de celui du squelette
-# mais de suffixe '_fonctions.php3' pouvant contenir:
+# mais de suffixe '_fonctions.php' pouvant contenir:
 # - des filtres
 # - des fonctions de traduction de balise, de critere et de boucle
 # - des declaration de tables SQL supplementaires
@@ -79,7 +79,7 @@ function charger_squelette ($squelette) {
 
 	// sinon, charger le compilateur et verifier que le source est lisible
 	if (!function_exists($nom)) {
-		include_local("inc-compilo.php3");
+		include_local("inc-compilo");
 		lire_fichier ($sourcefile, $skel);
 	}
 
@@ -89,8 +89,8 @@ function charger_squelette ($squelette) {
 	// Le point 1 exige qu'il soit lu dans tous les cas.
 	// Le point 2 exige qu'il soit lu apres inc-compilo
 	// (car celui-ci initialise $tables_principales) mais avant la compil
-	$f = $squelette . '_fonctions.php3';
-	if (@file_exists($f)) include($f);
+
+	include_local($squelette . '_fonctions', true);
 
 	if (function_exists($nom)) return $nom;
 
@@ -102,7 +102,7 @@ function charger_squelette ($squelette) {
 	else {
 
 		if ($GLOBALS['var_mode'] == 'debug') {
-			include_ecrire("inc_debug_sql.php3");
+			include_ecrire("inc_debug_sql");
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
 #		spip_log($skel_code);
@@ -127,11 +127,11 @@ function charger_squelette ($squelette) {
 
 # La recherche est assuree par la fonction chercher_squelette,
 # definie dans inc-chercher, fichier non charge si elle est deja definie
-# (typiquement dans mes_fonctions.php3)
+# (typiquement dans mes_fonctions.php)
 
 function cherche_page ($cache, $contexte, $fond)  {
 	if (!function_exists('chercher_squelette'))
-		include_local("inc-chercher-squelette.php3");
+		include_local("inc-chercher-squelette");
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
@@ -162,7 +162,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 		// Passer la main au debuggueur)
 		if ($GLOBALS['var_mode'] == 'debug')
 		  {
-			include_ecrire("inc_debug_sql.php3");
+			include_ecrire("inc_debug_sql");
 			debug_dumpfile ($page['texte'], $fonc, 'resultat');
 		  }
 	}
@@ -176,7 +176,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 //
 // Contexte : lors du calcul d'une page spip etablit le contexte a partir
 // des variables $_GET et $_POST, et leur ajoute la date
-// Note : pour hacker le contexte depuis le fichier d'appel (article.php3),
+// Note : pour hacker le contexte depuis le fichier d'appel (page.php),
 // il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
 //
@@ -225,7 +225,7 @@ function calculer_page_globale($cache, $fond) {
 		if ($art = sql_chapo($id_article)) {
 			$chapo = $art['chapo'];
 			if (substr($chapo, 0, 1) == '=') {
-				include_ecrire('inc_texte.php3');
+				include_ecrire('inc_texte');
 				list(,$url) = extraire_lien(array('','','',
 				substr($chapo, 1)));
 				if ($url) { // sinon les navigateurs pataugent

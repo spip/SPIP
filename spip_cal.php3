@@ -21,7 +21,7 @@ $var_f = find_in_path('inc_' . $var_nom . '.php');
 if ($var_f) 
 	include($var_f);
 else
-	include_ecrire('inc_' . $var_nom . '.php');
+	include_ecrire('inc_' . $var_nom);
 
 if (function_exists($var_nom))
 	$var_nom($id, $cle);

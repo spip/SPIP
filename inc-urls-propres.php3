@@ -83,8 +83,8 @@ function _generer_url_propre($type, $id_objet) {
 		return $row['url_propre'];
 
 	// Sinon, creer l'URL
-	include_ecrire("inc_filtres.php3");
-	include_ecrire("inc_charsets.php3");
+	include_ecrire("inc_filtres");
+	include_ecrire("inc_charsets");
 	$url = translitteration(corriger_caracteres(
 		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
 		));
@@ -159,7 +159,7 @@ function generer_url_breve($id_breve) {
 }
 
 function generer_url_forum($id_forum, $show_thread=false) {
-	include_ecrire('inc_forum.php3');
+	include_ecrire('inc_forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
 
@@ -210,7 +210,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 			$url_propre = $func($id_objet);
 			if ($url_propre
 			AND ($url_propre<>$regs[2])) {
-				include_ecrire('inc_headers.php');
+				include_ecrire('inc_headers');
 				http_status(301);
 				// recuperer les arguments supplementaires (&debut_xxx=...)
 				$reste = preg_replace('/^&/','?',

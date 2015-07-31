@@ -642,7 +642,7 @@ function trouver_def_table($nom, &$boucle)
   if ($boucle->sql_serveur && 
       $desc = $tables_des_serveurs_sql[$boucle->sql_serveur][$nom])
     return array($nom, $desc);
-  include_ecrire('inc_auxbase.php3');
+  include_ecrire('inc_auxbase');
   if ($desc = $tables_auxiliaires['spip_' . $nom])
     return array('spip_' . $nom, $desc);
 
