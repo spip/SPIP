@@ -331,19 +331,24 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 				$result[$i] = $debut;
 				$i++;
 			}
+			$nom = $match[4];
 			$champ = new Champ;
 			// ca ne marche pas encore en cas de champ imbrique
 			$champ->ligne = $x ? 0 :($n+substr_count($debut, "\n"));
 			$champ->nom_boucle = $match[3];
-			$champ->nom_champ = $match[4];
+			$champ->nom_champ = $nom;
 			$champ->etoile = $match[6];
 			// phraser_args indiquera ou commence apres
 			$result = phraser_args($match[7], ")", $sep, $result, $champ);
-			if (preg_match(",^LOGO_[A-Z]+,", $match[4])
+			if (preg_match(",^LOGO_[A-Z]+,", $nom)
 			AND $champ->param) {
 				phraser_vieux_logos($champ);
-			} elseif ($match[4] == 'EMBED_DOCUMENT')
+			} elseif ($nom == 'EMBED_DOCUMENT') {
 				phraser_vieux_emb($champ);
+			} elseif ($nom == 'FORMULAIRE_RECHERCHE'
+				AND $champ->param) {
+				phraser_vieux_recherche($champ);
+			}
 			$champ->avant =
 				phraser_champs_exterieurs($match[1],$n,$sep,$result);
 			$debut = substr($champ->apres,1);
@@ -449,7 +454,20 @@ function phraser_vieux_emb($p)
 		array_shift($p->param);
 	}
 	array_unshift($p->param, $param);	
+	spip_log('balise EMBED_DOCUMENT obsolete', 'vieilles_defs');
 	$p->nom_champ = 'MODELE';
+}
+
+function phraser_vieux_recherche($p)
+{
+	if ($p->param[0][0]) {
+		$c = new Texte;
+		$c->texte = $p->param[0][0];
+		$p->param[0][1] = array($c);
+		$p->param[0][0] = '';
+		$p->fonctions = array();
+		spip_log('FORMULAIRE_RECHERCHE avec filtre ' . $c->texte, 'vieilles_defs');
+	}
 }
 
 function phraser_logo_faux_filtres($nom)

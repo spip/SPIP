@@ -226,19 +226,13 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
-// Inclusion du fichier associe a son nom.
-// Ca donne les arguments a chercher dans la pile,on compile leur localisation
-// Ensuite on delegue a une fonction generale definie dans executer_squelette
-// qui recevra a l'execution la valeur des arguments, 
-// ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
-// mais on traite le vrai parametre si present.
-// Pour empecher la mesinterpretation des pseudo-filtres tout en gardant acces
-// a leur representation abstraite, on les deplace dans le champ "fonctions"
-// qui sert une fois de plus aux bidouillages pour cause de syntaxe mal fichue.
+// Inclusion du fichier associe a son nom, qui contient la fonction homonyme
+// donnant les arguments a chercher dans la pile, et qui sont donc compiles.
+// On leur adjoint les arguments explicites de la balise (cf #LOGIN{url})
+// La fonction nomme ci-dessous recevra a l'execution la valeur de tout ca.
 
 define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
 	array(%s%s),
-	array(%s),
 	\$GLOBALS['spip_lang'],
 	%s)");
 
@@ -249,46 +243,28 @@ function calculer_balise_dynamique($p, $nom, $l) {
 		$p->code = "''";
 		return $p;
 	}
-	$param = "";
-	$source = $a = $p->param;
-	if ($a) {
-		$c = array_shift($a);
-		if  (!array_shift($c)) {
-		  $p->fonctions = $a;
-		  array_shift( $p->param );
-		  $param = compose_filtres_args($p, $c, ',');
-		}
-	}
-	$collecte = join(',',collecter_balise_dynamique($l, $p, $nom));
+
+	if ($p->param AND ($c = $p->param[0])) {
+		// liste d'arguments commence toujours par la chaine vide
+		array_shift($c);
+		// construire la liste d'arguments comme pour un filtre
+		$param = compose_filtres_args($p, $c, ',');
+	} else	$param = "";
+	$collecte = join(',', collecter_balise_dynamique($l, $p, $nom));
 	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
 		$collecte,
 		($collecte ? $param : substr($param,1)), # virer la virgule
-		argumenter_balise($p->param, "', '"),
 		$p->ligne);
 
 	$p->interdire_scripts = false;
-	$p->fonctions = $source;
-	$p->param = array();
-
 	return $p;
-}
-
-// les balises dynamiques et EMBED ont des filtres sans arguments
-// car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra recuperer la 2e moitie du tableau
-
-// http://doc.spip.org/@argumenter_balise
-function argumenter_balise($fonctions, $sep) {
-	$res = array();
-	if ($fonctions)
-		foreach ($fonctions as $f)
-			$res[] = str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
-	return ("'" . join($sep, $res) . "'");
 }
 
 // Construction du tableau des arguments d'une balise dynamique.
 // Ces arguments peuvent etre eux-meme des balises (cf FORMULAIRE_SIGNATURE)
 // mais gare au bouclage (on peut s'aider de $nom pour le reperer au besoin)
+// En revanche ils n'ont pas de filtres, donc on appelle calculer_balise qui
+// ne s'occupe pas de ce qu'il y a dans $p (mais qui va y ecrire le code)
 
 // http://doc.spip.org/@collecter_balise_dynamique
 function collecter_balise_dynamique($l, &$p, $nom) {
