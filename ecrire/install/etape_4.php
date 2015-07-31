@@ -101,19 +101,19 @@ function install_etape_4_dist()
 	  . bouton_suivant(_T('login_espace_prive'));
 
 	$adresse_db = defined('_INSTALL_HOST_DB')
-		? _INSTALL_HOST_DB
+		? ''
 		: _request('adresse_db');
 
 	$login_db = defined('_INSTALL_USER_DB')
-		? _INSTALL_USER_DB
+		? ''
 		: _request('login_db');
 
 	$pass_db = defined('_INSTALL_PASS_DB')
-		? _INSTALL_PASS_DB
+		? ''
 		: _request('pass_db');
 
 	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
+		? ''
 		: _request('server_db');
 
 	$choix = defined('_INSTALL_NAME_DB')
@@ -137,8 +137,9 @@ function autres_bases($adresse_db, $login_db, $pass_db, $server_db, $hidden)
 		  . join("</li>\n<li>",  $tables)
 		  . "</li>\n</ul>";
 
+
 	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
-	.  _L("Toutefois, si vous avez une autre base de donn&eacute;es &agrave; interroger avec SPIP, sur ce serveur ou un autre, d&eacute;clarez-la d&egrave;s maintenant.")
+	.  _L("Toutefois, si vous avez une autre base de donn&eacute;es &agrave; interroger avec SPIP, sur ce serveur ou un autre, d&eacute;clarez-la d&egrave;s maintenant. Si vous laissez les champs ci-dessous vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.")
 	  . $tables
 	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array(), $hidden, 'sup1')
 	.  "</div>";

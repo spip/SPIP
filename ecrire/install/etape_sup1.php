@@ -16,46 +16,46 @@ include_spip('inc/headers');
 include_spip('inc/acces');
 include_spip('install/etape_2');
 
-// Mise en place d'un fichier de configuration supplementaire
+// Mise en place d'un fichier de connexion supplementaire
+// Le serveur n'est pas forcement celui standard
+// mais on se rabat dessus si on n'a pas mieux.
 
 function install_etape_sup1_dist()
 {
-	$adresse_db = defined('_INSTALL_HOST_DB')
-		? _INSTALL_HOST_DB
-		: _request('adresse_db');
+	$adresse_db = _request('adresse_db');
+	if (!$adresse_db AND defined('_INSTALL_HOST_DB'))
+		$adresse_db =_INSTALL_HOST_DB;
 
-	$login_db = defined('_INSTALL_USER_DB')
-		? _INSTALL_USER_DB
-		: _request('login_db');
+	$login_db = _request('login_db');
+	if (!$login_db AND defined('_INSTALL_USER_DB'))
+		$login_db = _INSTALL_USER_DB;
 
-	$pass_db = defined('_INSTALL_PASS_DB')
-		? _INSTALL_PASS_DB
-		: _request('pass_db');
+	$pass_db = _request('pass_db');
+	if (!$pass_db  AND defined('_INSTALL_PASS_DB'))
+		$pass_db  = _INSTALL_PASS_DB;
 
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
-		: _request('server_db');
+	$server_db =_request('server_db');
+	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
+		$server_d = _INSTALL_SERVER_DB;
 
-	$sel_db = defined('_INSTALL_NAME_DB')
-		? _INSTALL_NAME_DB
-		: _request('sel_db');
+	// Ceci indique la base principale (passe en hidden)
+	// pour qu'on la refuse comme choix de base secondaire
 
-	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
-
-	$GLOBALS['connexions'][$server_db] = $link;
+	$sel_db =_request('sel_db');
+	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
+		$server_d = _INSTALL_NAME_DB;
 
 	echo install_debut_html();
 
-	echo "\n<!--\n", join(', ', $link), " $login_db ";
-	$db_connect = 0; // revoirfunction_exists($ferrno) ? $ferrno() : 0;
-	echo join(', ', $GLOBALS['connexions'][$server_db]);
-	echo "\n-->\n";
+	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
+	if ($link) {
+		$GLOBALS['connexions'][$server_db] = $link;
 
-	if (($db_connect=="0") && $link) {
-		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>\n";
-		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
-
-		echo "\n", '<!-- ',  sql_version($server_db), ' -->' ;
+		echo "\n<!--\n", join(', ', $link), " $login_db ";
+		echo join(', ', $GLOBALS['connexions'][$server_db]);
+		echo "\n-->\n<p class='resultat'><b>";
+		echo _T('info_connexion_ok'),"</b></p>\n";
+		echo '<!-- ',  sql_version($server_db), ' -->' ;
 		$l = bases_referencees();
 		array_push($l, $sel_db);
 		list(, $res) = install_etape_liste_bases($server_db, $l);
@@ -63,9 +63,7 @@ function install_etape_sup1_dist()
 		$hidden = predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db)
 		  . (defined('_INSTALL_NAME_DB')
 		     ? ''
-		     : ("\n<input type='hidden' name='sel_db' value='" . _request('sel_db') . "' />\n"));
-
-
+		     : ("\n<input type='hidden' name='sel_db' value='$sel_db' />\n"));
 
 		echo install_etape_sup1_form($hidden, $checked, $res, 'sup2');
 	} else  {

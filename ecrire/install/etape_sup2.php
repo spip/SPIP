@@ -32,7 +32,8 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 		$tables .= "<li>" . array_shift($r) . "</li>\n";
 	}
 	
-	$res = _L('Tables de la base') . "<ol>" . $tables . "</ol>\n";
+	$res = _L('Tables de la base')
+	. "<ol style='text-align: left'>" . $tables . "</ol>\n";
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
 		list(,$adresse_db, $port) = $r;
@@ -51,36 +52,30 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 
 function install_etape_sup2_dist()
 {
-	if (file_exists(_FILE_CONNECT_TMP))
-			include(_FILE_CONNECT_TMP);
-	else
-			redirige_par_entete(generer_url_ecrire('install'));
-	
-	if (file_exists(_FILE_CHMOD_TMP))
-			include(_FILE_CHMOD_TMP);
-	else
-			redirige_par_entete(generer_url_ecrire('install'));
+	$adresse_db = _request('adresse_db');
+	if (!$adresse_db AND defined('_INSTALL_HOST_DB'))
+		$adresse_db =_INSTALL_HOST_DB;
 
-	$adresse_db = defined('_INSTALL_HOST_DB')
-		? _INSTALL_HOST_DB
-		: _request('adresse_db');
+	$login_db = _request('login_db');
+	if (!$login_db AND defined('_INSTALL_USER_DB'))
+		$login_db = _INSTALL_USER_DB;
 
-	$login_db = defined('_INSTALL_USER_DB')
-		? _INSTALL_USER_DB
-		: _request('login_db');
+	$pass_db = _request('pass_db');
+	if (!$pass_db  AND defined('_INSTALL_PASS_DB'))
+		$pass_db  = _INSTALL_PASS_DB;
 
-	$pass_db = defined('_INSTALL_PASS_DB')
-		? _INSTALL_PASS_DB
-		: _request('pass_db');
+	$server_db =_request('server_db');
+	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
+		$server_d = _INSTALL_SERVER_DB;
 
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
-		: _request('server_db');
+	// Ceci indique la base principale (passe en hidden)
+	// pour qu'on la refuse comme choix de base secondaire a chaque tour.
 
-	$sel_db = defined('_INSTALL_NAME_DB')
-		? _INSTALL_NAME_DB
-		: _request('sel_db');
+	$sel_db =_request('sel_db');
+	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
+		$server_d = _INSTALL_NAME_DB;
 
+	// le choix
 	$choix_db = _request('choix_db');
 
 	if (!$choix_db)
