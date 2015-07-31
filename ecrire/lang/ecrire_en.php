@@ -119,6 +119,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => 'This parameter can be modified by the webmaster.',
 'calendrier_synchro' => 'If you use a calendar application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
+'config_activer_champs' => 'Activate the following fields',
+'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo',
+'config_info_logos_utiliser' => 'Use logos',
+'config_info_logos_utiliser_non' => 'Do not use logos',
+'config_info_logos_utiliser_survol' => 'Use "mouseover" logos',
+'config_info_logos_utiliser_survol_non' => 'Do not use "mouseover" logos',
+'config_info_redirection' => 'By activating this option you can create virtual articles, which are simply references to articles published on other sites whether SPIP sites or not.',
+'config_redirection' => 'Virtual articles',
 'connexion_ldap' => 'Connection:',
 'copier_en_local' => 'Copy to local site',
 
@@ -396,7 +404,7 @@ requiring an FTP access to the Web site.',
 'info_jeu_caractere' => 'Character set of the site',
 'info_jours' => 'days',
 'info_laisser_champs_vides' => 'leave these fields empty)',
-'info_langues' => 'Site\'s languages',
+'info_langues' => 'The site\'s languages',
 'info_ldap_ok' => 'LDAP authentication is installed.',
 'info_lien_hypertexte' => 'Hyperlink:',
 'info_liens_syndiques_1' => 'syndicated links',
@@ -409,6 +417,7 @@ requiring an FTP access to the Web site.',
 'info_liste_redacteurs_connectes' => 'List of connected editors',
 'info_login_existant' => 'This login already exists.',
 'info_login_trop_court' => 'Login too short.',
+'info_logos' => 'The logos',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'In the same section',
 'info_message' => 'Message from',
@@ -617,8 +626,8 @@ requiring an FTP access to the Web site.',
 'info_tous_redacteurs' => 'Announcements to all editors',
 'info_tout_site' => 'The entire site',
 'info_tout_site2' => 'The article has not been translated into this language.',
-'info_tout_site3' => 'The article has been translated into this language, but some modifications had beed entered afterwards to the reference article. The translation requires updating.',
-'info_tout_site4' => 'The article has been translated into this language, and the translation is up to date.',
+'info_tout_site3' => 'The article has been translated into this language, but some changes have been made afterwards to the reference article. The translation needs updating.',
+'info_tout_site4' => 'The article has been translated into this language, and the translation is up-to-date.',
 'info_tout_site5' => 'Original article.',
 'info_tout_site6' => '<b>Warning:</b> only original articles are displayed.
 The translations are associated with the original,
@@ -640,11 +649,16 @@ in a colour indicating their status:',
 'info_visiteur_2' => 'of the public site',
 'info_visiteurs' => 'Visitors',
 'info_visiteurs_02' => 'Public site visitors',
+'install_adresse_base_hebergeur' => 'Database address attributed by the service provider',
 'install_echec_annonce' => 'This installation will probably not work, or will result in a nonfunctional site...',
 'install_extension_mbstring' => 'SPIP does not work with:',
 'install_extension_php_obligatoire' => 'SPIP requires a php extension:',
+'install_login_base_hebergeur' => 'Login attributed by the service provider',
+'install_nom_base_hebergeur' => 'Database name attributed by the service provider:',
+'install_pass_base_hebergeur' => 'Connection password attributed by the service provider',
 'install_php_version' => 'The PHP version @version@ is too old (minimum = @minimum@)',
 'install_select_langue' => 'Select a language then click on the button "next" to start the installation procedure.',
+'install_table_prefix_hebergeur' => 'Table prefix attributed by the service provider:',
 'intem_redacteur' => 'editor',
 'item_accepter_inscriptions' => 'Allow registrations',
 'item_activer_forum_administrateur' => 'Enable administrators forum',
@@ -774,10 +788,14 @@ in a colour indicating their status:',
 
 
 // P
+'pas_de_proxy_pour' => 'If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)',
 'plugin_etat_developpement' => 'under development',
 'plugin_etat_experimental' => 'experimental',
 'plugin_etat_stable' => 'stable',
 'plugin_etat_test' => 'being tested',
+'plugin_impossible_activer' => 'Impossible to activate the plugin  @plugin@',
+'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.',
+'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.',
 'plugins_liste' => 'Plugin list',
 'protocole_ldap' => 'Protocol version:',
 
@@ -918,7 +936,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
   irrespective of their section location. That way you can
   enrich the navigation of your site or even use these properties
   to customise the articles in your templates.',
-'texte_mots_cles_dans_forum' => 'Do you wish to allow the use of keywords that could be selected by visitors, in the public site forums? (Warning: this option is rather intricate to use properly.)',
+'texte_mots_cles_dans_forum' => 'Do you wish to allow visitors to select keywords in the public site forums? (Warning: this option is rather intricate to use properly.)',
 'texte_multilinguisme' => 'If you wish to manage articles in several languages, with a complicated navigation, you can add a language selection menu to the articles and/or the sections, according to the organisation of your site.',
 'texte_multilinguisme_trad' => 'Also, you can enable a link management system amongst the different translations of an article.',
 'texte_non_compresse' => '<i>uncompressed</i> (your server does not support this feature)',
@@ -933,11 +951,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_port_annuaire' => '(Default value is generally suitable.)',
 'texte_presente_plugin' => 'This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.',
 'texte_proposer_publication' => 'When your article is finished,<br /> you can submit it for publication.',
-'texte_proxy' => 'In some cases (intranet, protected networks,...),
-  it is necessary to use a <i>proxy HTTP</i> to reach syndicated sites.
-  Should there be a proxy, enter its address below, thus
-  <tt><html>http://proxy:8080</html></tt>. In general,
-  you can leave this box empty.',
+'texte_proxy' => 'In some cases (intranet, protected networks), it is necessary to use an <i>HTTP proxy</i> to reach exterior sites (SPIP documentation, syndicated sites, etc.). If this is the case, enter its address below, in the form @proxy_en_cours@. In most cases you can leave this box empty.',
 'texte_publication_articles_post_dates' => 'Which behaviour should SPIP adopt concerning articles which
 		publication have been set to
 		a future date?',
@@ -968,14 +982,11 @@ irreversible.</b>',
 'texte_sauvegarde' => 'Backup the content of the database',
 'texte_sauvegarde_base' => 'Backup the database',
 'texte_sauvegarde_compressee' => 'Backup will be stored in the uncompressed file @fichier@.',
-'texte_selection_langue_principale' => 'You can select below the "main language" of the site. Luckily, this choice does not constrain your articles to be written in the selected language, but allows to determine
+'texte_selection_langue_principale' => 'You can select below the "main language" of the site. This does not mean you can only write articles in the selected language, but determines
 
-<ul><li> the default format of the dates in the public site</li>
-
+<ul><li> the default format of the dates on the public site</li>
 <li> the nature of the typographical engine which will be used by SPIP for the text rendering;</li>
-
 <li> the language used in the forms of the public site</li>
-
 <li> the default language displayed in the private area.</li></ul>',
 'texte_signification' => 'Dark bars represent cumulative entries (total of sub-sections), light bars represent the number of visits for each section.',
 'texte_sous_titre' => 'Subtitle',

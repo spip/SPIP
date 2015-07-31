@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'tampilkan terjemahan',
 'alerte_maj_impossible' => '<b>Peringatan!</b> Gagal memperbaharui database MySQL ke versi @version@, mungkin karena ada masalah hak akses di database. Silakan hubungi ISP anda.',
 'analyse_xml' => 'Pemroresan XML',
+'annuler' => 'Batal',
 'antispam_champ_vide' => 'Mohon biarkan kolom ini kosong:',
 'avis_archive_incorrect' => 'berkas arsip bukanlah berkas SPIP yang sah',
 'avis_archive_invalide' => 'berkas arsip tidak sah',
@@ -340,7 +341,7 @@ Terima kasih atas partisipasi anda!
 'icone_gestion_langues' => 'Manajemen bahasa',
 'icone_informations_personnelles' => 'Informasi pribadi',
 'icone_interface_complet' => 'tatap muka lengkap',
-'icone_interface_simple' => 'tatap muka disederhana',
+'icone_interface_simple' => 'Tatap muka disederhana',
 'icone_maintenance_site' => 'Pemeliharaan situs',
 'icone_messagerie_personnelle' => 'Sistem pesan pribadi',
 'icone_mots_cles' => 'Kata-kata kunci',
@@ -455,6 +456,7 @@ Terima kasih atas partisipasi anda!
 'info_langue_principale' => 'Bahasa situs utama',
 'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'oleh @les_auteurs@',
+'info_lettre_heures' => 'H',
 'info_logo_format_interdit' => 'Hanya logo-logo dalam format @formats@ diperbolehkan.',
 'info_logo_max_poids' => 'Logo hendaklan kurang dari @maxi@ (berkas ini @actuel@).',
 'info_logo_max_taille' => 'Logo hendaklah kurang dari @maxi@ (berkas ini @actuel@).',
@@ -534,14 +536,16 @@ Terima kasih atas partisipasi anda!
 'info_vos_rendez_vous' => 'Janji-janji anda yang akan datang',
 'info_zoom' => 'perbesar',
 'infos_vos_pense_bete' => 'Memo anda',
+'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Artikel berita dikirim',
+'item_redacteur' => 'Redaktur',
 
 
 // L
 'lien_afficher_icones_seuls' => 'Tampilkan icon saja',
 'lien_afficher_texte_icones' => 'Tampilkan icon dan teks',
 'lien_afficher_texte_seul' => 'Tampilkan teks saja',
-'lien_icones_interface' => 'Icon tatap muka berasal dari <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
+'lien_icones_interface' => 'Ikon tatap muka berasal dari <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'rilis',
 'lien_liberer_tous' => 'bebaskan artikel-artikel ini',
 'lien_nouvea_pense_bete' => 'MEMO BARU',
@@ -567,6 +571,7 @@ Terima kasih atas partisipasi anda!
 'login_erreur_pass' => 'Kesalahan kata sandi.',
 'login_espace_prive' => 'area pribadi',
 'login_identifiant_inconnu' => 'Pengidentifikasi "@login@" tidak dikenal.',
+'login_identification' => 'identifikasi',
 'login_login' => 'Log masuk:',
 'login_login2' => 'Log masuk (pengidentifikasi untuk koneksi ke situs):',
 'login_login_pass_incorrect' => '(Log masuk atau kata sandi salah).',
@@ -603,6 +608,7 @@ Terima kasih atas partisipasi anda!
 // O
 'occurence' => 'peristiwa',
 'onglet_affacer_base' => 'Hapus database',
+'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'Penulis',
 'onglet_contenu_site' => 'Isi situs',
 'onglet_evolution_visite_mod' => 'Tingkat kunjungan',
@@ -665,6 +671,10 @@ dan mengakses situs kembali.
 'precedent' => 'sebelumnya',
 'previsualisation' => 'Preview',
 'previsualiser' => 'Tampilkan preview',
+
+
+// R
+'retour' => 'Kembali',
 
 
 // S

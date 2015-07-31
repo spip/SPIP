@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Fazi: gwelet ama&ntilde;-dindan',
 'avis_erreur_connexion' => 'Fazi-kennaska&ntilde;',
 'avis_erreur_cookie' => 'kudenn gant an toupin',
-'avis_erreur_fonction_contexte' => 'Fazi-programi&ntilde; : ne rank ket ar fonksion-ma&ntilde beza&ntilde; galvet en degouezh-ma&ntilde;.',
+'avis_erreur_fonction_contexte' => 'Fazi-programmi&ntilde;. Ne rank ket ar fonksion-ma&ntilde; beza&ntilde; galvet en degouezh-ma&ntilde;.',
 'avis_erreur_mysql' => 'Fazi MySQL',
 'avis_erreur_sauvegarde' => 'Fazi er savete (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'N\'eus ket tu da dizhout al lodenn brevez',
@@ -257,6 +257,7 @@ Trugarez da gemer perzh
 ',
 'form_pet_message_commentaire' => 'Ur gerig, un evezhiadenn&nbsp;?',
 'form_pet_nom_site2' => 'Anv ho lec\'hienn',
+'form_pet_probleme_liens' => 'Savit ho kemennadenn en-dro o tenna&ntilde; al liammo&ugrave;',
 'form_pet_probleme_technique' => 'Ur gudenn teknikel a zo, n\'haller ket sina&ntilde; evit ar poent.',
 'form_pet_signature_pasprise' => 'N\'eus ket bet dalc\'het kont ouzh ho sinadur.',
 'form_pet_signature_validee' => 'Kadarnet eo bet ho sinadur. Trugarez&nbsp;!',
@@ -411,6 +412,7 @@ Trugarez da gemer perzh
 'info_description_2' => 'Deskrivadur&nbsp;:',
 'info_dimension' => 'Ment&nbsp;:',
 'info_document' => 'Teuliad',
+'info_document_indisponible' => 'N\'ema&ntilde; ket an teul-ma&ntilde; da gaout',
 'info_documents' => 'Teuliado&ugrave;',
 'info_echange_message' => 'SPIP a ginnig eskemm kemennadenno&ugrave; ha sevel forumo&ugrave; prevez etre izili al lec\'hienn. Gallout a rit ober gant ar servij-ma&ntilde;, pe get.',
 'info_ecire_message_prive' => 'Skriva&ntilde; ur gerig prevez;',
@@ -501,6 +503,8 @@ Trugarez da gemer perzh
 'info_sans_titre_2' => 'titl ebet',
 'info_selectionner_fichier' => 'Gallout a rit diuz ur restr eus an teul @upload@',
 'info_selectionner_fichier_2' => 'Diuz ur restr&nbsp;:',
+'info_signature_supprimee' => 'Diverket eo bet ar sinadur',
+'info_signature_supprimee_erreur' => 'Fazi&nbsp;: ne glot ar c\'hod-dilemel-ma&ntilde; gant sinadur ebet.',
 'info_site_attente' => 'Lec\'hienn war-c\'hortoz beza&ntilde; asantet',
 'info_site_reference' => 'Lec\'hienn listennet',
 'info_site_refuse' => 'Lec\'hienn bet nac\'het',
@@ -685,7 +689,7 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
   N\'eo ket tremenet ar skeudenn <b>@fichier@</b> (pennad @id_article@).
   Notennit an dave-se, klaksit en-dro nevesaaat, 
   ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
-'texte_erreur_visiteur' => 'Klasket ho peus tizhout al lodenn brevez gant un anv-implijer direizh. N\'eo ket ar memes hini hag hini ar forom.',
+'texte_erreur_visiteur' => 'Klasket ho peus tizhout al lodenn brevez gant un anv-implijer direizh.',
 'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login
  <b>@auth_login@</b>, met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
   Klaskit ',

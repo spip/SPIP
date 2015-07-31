@@ -680,7 +680,7 @@ mas eles n&atilde;o foram inseridos diretamente. Dependendo da elabora&ccedil;&a
 'texte_erreur_mise_niveau_base' => 'Erro da base de dados durante a atualiza&ccedil;&atilde;o.
 A imagem <b>@fichier@</b> n&atilde;o passou (mat&eacute;ria @id_article@).
 Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, finalmente, verifique se as imagens aparecem nas mat&eacute;rias.',
-'texte_erreur_visiteur' => 'Voc&ecirc; tentou acessar o espa&ccedil;o restrito com um login que n&atilde;o tem a necess&aacute;ria permiss&atilde;o.',
+'texte_erreur_visiteur' => '<MODIF>Voc&ecirc; tentou acessar o espa&ccedil;o restrito com um login que n&atilde;o tem a permiss&atilde;o necess&aacute;ria.',
 'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
 Tente se',
 'texte_inc_auth_2' => 'reconectar',

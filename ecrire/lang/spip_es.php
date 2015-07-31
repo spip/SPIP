@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'Mostrar las traducciones',
 'alerte_maj_impossible' => '<b>&iexcl;Alerta!</b> La actualizaci&oacute;n de la base MySQL hacia la versi&oacute;n  @version@ es imposible, quiz&aacute; por un problema de derechos de modificaci&oacute;n en la base de datos. Por favor, contacta al administrador de tu hospedaje.',
 'analyse_xml' => 'An&aacute;lisis XML',
-'annuler' => '<NEW>Annuler',
+'annuler' => 'Anular',
 'antispam_champ_vide' => 'Por favor, deje este campo vac&iacute;o&nbsp;:',
 'avis_archive_incorrect' => 'El archivo de respaldo no es un archivo SPIP.',
 'avis_archive_invalide' => 'el archivo de respaldo no es v&aacute;lido',
@@ -602,7 +602,7 @@ se puede activar o desactivar .',
 
 
 // O
-'occurence' => '<MODIF>Ocurrencia',
+'occurence' => 'Ocurrencia',
 'onglet_affacer_base' => 'Borrar la base',
 'onglet_auteur' => 'La autor/a',
 'onglet_contenu_site' => 'Contenido del sitio',
@@ -664,7 +664,7 @@ volver a conectarte al sitio.
 
 
 // R
-'retour' => '<NEW>Retour',
+'retour' => 'Retorno',
 
 
 // S
@@ -688,7 +688,7 @@ volver a conectarte al sitio.
 'texte_erreur_mise_niveau_base' => 'Error de la base de datos en el curso la la actualizaci&oacute;n.
 La imagen <b>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Tome nota de esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
-'texte_erreur_visiteur' => 'Has intentado de entrar al espacio privado con un identificador que no lo permite.',
+'texte_erreur_visiteur' => 'Has intentado entrar al espacio privado con un identificador que no lo permite.',
 'texte_inc_auth_1' => 'Te identificaste con el login  <b>@auth_login@</b>, pero &eacute;ste no existe en la base.
 Intenta',
 'texte_inc_auth_2' => 'reconectarte',

@@ -258,6 +258,7 @@ Thank you for your participation!
 ',
 'form_pet_message_commentaire' => 'Any message or comment?',
 'form_pet_nom_site2' => 'Name of your web site',
+'form_pet_probleme_liens' => 'Please edit your message, taking out all hyperlinks.',
 'form_pet_probleme_technique' => 'Technical problem, signatures are interrupted momentarily.',
 'form_pet_signature_pasprise' => 'Your signature has been ignored.',
 'form_pet_signature_validee' => 'Your signature is valid. Thank you!',
@@ -413,6 +414,7 @@ Thank you for your participation!
 'info_description_2' => 'Description:',
 'info_dimension' => 'Size:',
 'info_document' => 'Document',
+'info_document_indisponible' => 'This document is unavailable',
 'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
 		discussion forums between participants to the site. You can enable or
@@ -505,6 +507,8 @@ Thank you for your participation!
 'info_sans_titre_2' => 'untitled',
 'info_selectionner_fichier' => 'You can select a file from the folder @upload@',
 'info_selectionner_fichier_2' => 'Select a file:',
+'info_signature_supprimee' => 'Signature deleted',
+'info_signature_supprimee_erreur' => 'Error: this deletion code does not correspond to any signature',
 'info_site_attente' => 'Web site pending validation',
 'info_site_reference' => 'Referenced sites online',
 'info_site_refuse' => 'Web site rejected',
