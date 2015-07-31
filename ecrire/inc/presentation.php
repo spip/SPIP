@@ -2013,8 +2013,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
  
 function init_entete($titre, $rubrique, $css='') {
 
-	if (!$nom_site_spip =
-	entites_html(textebrut(typo($GLOBALS['meta']["nom_site"]))))
+	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
