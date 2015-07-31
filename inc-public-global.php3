@@ -85,13 +85,9 @@ if ($HTTP_COOKIE_VARS['spip_session'] OR ($PHP_AUTH_USER AND !$ignore_auth_http)
 //
 // Gerer modif langue visiteur
 //
-if ($HTTP_COOKIE_VARS['spip_lang'] OR $HTTP_COOKIE_VARS['spip_lang_public']) {
+if ($HTTP_COOKIE_VARS['spip_lang']) {
 	include_ecrire('inc_lang.php3');
 	utiliser_langue_visiteur();
-}
-if ($var_lang) {
-	include_ecrire('inc_lang.php3');
-	gerer_menu_langues();
 }
 $menu_lang = $GLOBALS['spip_lang'];
 

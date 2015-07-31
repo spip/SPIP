@@ -24,6 +24,12 @@ if (!@file_exists("data/inc_meta_cache.php3")) ecrire_metas();
 // Preferences de presentation
 //
 
+if ($lang = $GLOBALS['HTTP_COOKIE_VARS']['spip_lang_ecrire'] AND $lang <> $auteur_session['lang'] AND changer_langue($lang)) {
+	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($lang)."' WHERE id_auteur = $connect_id_auteur");
+	$auteur_session['lang'] = $lang;
+	ajouter_session($auteur_session, $spip_session);
+}
+
 if ($set_couleur) {
 	$prefs['couleur'] = floor($set_couleur);
 	$prefs_mod = true;
@@ -38,17 +44,6 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 }
 if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
-}
-
-if ($var_lang) {
-	if (changer_langue($var_lang)) {
-		spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang)."' WHERE id_auteur = $connect_id_auteur");
-		$auteur_session['lang'] = $var_lang;
-		ajouter_session($auteur_session, $spip_session);
-
-		// Poser un cookie, pour les pages n'ayant pas acces aux meta
-		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
-	}
 }
 
 if ($set_ecran) {
