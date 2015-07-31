@@ -83,7 +83,7 @@ function admin_repair_tables() {
 		while ($r = sql_fetch($res1)) {
 			$tab = array_shift($r);
 	
-			$res .= "<br /><b>$tab</b> ";
+			$res .= "<div><strong>$tab</strong> ";
 			spip_log("Repare $tab", _LOG_INFO_IMPORTANTE);
 			// supprimer la meta avant de lancer la reparation
 			// car le repair peut etre long ; on ne veut pas boucler
@@ -106,14 +106,13 @@ function admin_repair_tables() {
 			else
 				$res .= "("._T('texte_vide').")\n";
 	
-			$msg = join(" ", sql_fetch($result_repair)) . ' ';
-	
-			$ok = strpos($msg, ' OK ');
-	
-			if (!$ok)
+			if ($result_repair
+			  AND $msg = join(" ", sql_fetch($result_repair)) . ' '
+				AND strpos($msg, ' OK ')==FALSE)
 				$res .= "<pre><span style='color: red; font-weight: bold;'>".htmlentities($msg)."</span></pre>\n";
 			else
-				$res .= " "._T('texte_table_ok')."<br />\n";
+				$res .= " "._T('texte_table_ok');
+			$res .="</div>";
 	  }
 	}
 	return $res;
