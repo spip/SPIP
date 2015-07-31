@@ -264,8 +264,9 @@ function spip_connect($serveur='') {
 	$connexions[$index] = $GLOBALS['db_ok'];
 	$connexions[$index]['spip_connect_version'] = isset($GLOBALS['spip_connect_version']) ? $GLOBALS['spip_connect_version'] : 0;
 
-	// initialisation du charset utilise dans les connexions SQL
-	// celle du serveur principal l'impose aux serveurs secondaires
+	// initialisation de l'alphabet utilise dans les connexions SQL
+	// si l'installation l'a determine.
+	// Celui du serveur principal l'impose aux serveurs secondaires
 
 	if (!$serveur) {
 		$charset = spip_connect_main($GLOBALS['db_ok']);
@@ -276,10 +277,12 @@ function spip_connect($serveur='') {
 		}
 	} else {
 		$charset = isset($GLOBALS['meta']['charset_sql_connexion']) ?
-		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
+		  $GLOBALS['meta']['charset_sql_connexion'] : -1;
 	}
-	$f = $GLOBALS['db_ok']['set_connect_charset'];
-	$f($charset);
+	if ($charset != -1) {
+		$f = $GLOBALS['db_ok']['set_connect_charset'];
+		$f($charset);
+	}
 	return $connexions[$index];
 }
 
@@ -306,7 +309,7 @@ function spip_connect_main($connexion)
 		return false;
 	$f = $connexion['fetch'];
 	$r = $f($r);
-	return ($r['valeur'] ? $r['valeur'] : 'utf8');
+	return ($r['valeur'] ? $r['valeur'] : -1);
 }
 
 // http://doc.spip.org/@spip_query
