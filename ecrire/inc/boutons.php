@@ -278,10 +278,9 @@ function definir_barre_onglets($rubrique) {
 		$onglets['multi']=
 		  new Bouton('traductions-24.gif', 'info_multilinguisme',
 			generer_url_ecrire("config_multilang"));
-		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
-			$onglets['fichiers']=
-			  new Bouton('traductions-24.gif', 'module_fichiers_langues',
-				generer_url_ecrire("lang_raccourcis"));
+		$onglets['fichiers']=
+		  new Bouton('traductions-24.gif', 'module_fichiers_langues',
+			generer_url_ecrire("lang_raccourcis"));
 		}
 	break;
 
