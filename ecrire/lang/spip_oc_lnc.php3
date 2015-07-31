@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_apresmidi' => 'tant&ograve;st',
 'cal_jour_entier' => 'jorn enti&egrave;r',
 'cal_matin' => 'matin',
-'cal_par_jour' => 'calendri&egrave;r per jorn',
+'cal_par_jour' => 'calendi&egrave;r per jorn',
 'cal_par_mois' => 'calendi&egrave;r per mes',
 'cal_par_semaine' => 'calendi&egrave;r per setmana',
 'calendrier_synchro_lien' => 'Recuperar lo fichi&egrave;r <i>iCal</i>',
@@ -282,7 +282,7 @@ Merc&eacute;s per v&ograve;stra participacion
   aquel forum, primi&egrave;r vos cal registrar. Merc&eacute;s
   de marcar &ccedil;ai sota l\'identificant personal qu\'av&egrave;tz recebut.
  Se s&egrave;tz pas registrat/ada, av&egrave;tz de',
-'forum_vous_inscrire' => 'vos inscriure ',
+'forum_vous_inscrire' => 'vos inscriure. ',
 
 
 // I
@@ -720,23 +720,23 @@ e vos tornar connectar al sit.
 'zbug_boucle' => 'bloca',
 'zbug_boucle_recursive_undef' => 'bloca recursiva non definida',
 'zbug_champ_hors_boucle' => 'Camp @champ@ f&ograve;ra bloca',
-'zbug_champ_hors_motif' => 'Camp @champ@ en def&ograve;ra d\'una blocla de motiu @motif@',
+'zbug_champ_hors_motif' => 'Camp @champ@ en def&ograve;ra d\'una bloca de motiu @motif@',
 'zbug_code' => 'c&ograve;de',
-'zbug_critere_inconnu' => 'crit&egrave;ri desconegut @critere@',
+'zbug_critere_inconnu' => 'crit&egrave;ri inconegut @critere@',
 'zbug_distant_interdit' => 'ext&egrave;rne enebit',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
 'zbug_erreur_execution_page' => 'error d\'execucion de la pagina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
-'zbug_erreur_meme_parent' => '{meme_parent} ne s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_meme_parent' => '{meme_parent} s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
 'zbug_info_erreur_squelette' => 'Error subre lo sit',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL indefinit',
-'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda'
+'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; inconeguda'
 
 );
 

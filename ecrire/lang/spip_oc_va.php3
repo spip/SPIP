@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // 0
 '0_URL' => 'http://www.spip.net/oc',
-'0_langue' => '<MODIF>occitan (vivaroaupenc) [oc_va]',
+'0_langue' => 'occitan (vivaroaupenc) [oc_va]',
 '0_liste' => 'spip-oc@rezo.net',
 '0_mainteneur' => 'Domergue Sumien: lenga.occitana@aprene.org ',
 
@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Tornar a l\'interf&agrave;cia grafica completa',
 'access_mode_texte' => 'Afichar l\'interf&agrave;cia textuala simplificaa',
-'admin_debug' => '<NEW>debug',
+'admin_debug' => 'desbugatge',
 'admin_modifier_article' => 'Modificar aquel article',
 'admin_modifier_auteur' => 'Modificar aquel autor',
 'admin_modifier_breve' => 'Modificar aquela br&egrave;va',
@@ -70,16 +70,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
-'cal_jour_entier' => '<NEW>jour entier',
-'cal_matin' => '<NEW>matin',
-'cal_par_jour' => '<NEW>calendrier par jour',
-'cal_par_mois' => '<NEW>calendrier par mois',
-'cal_par_semaine' => '<NEW>calendrier par semaine',
-'calendrier_synchro_lien' => 'Recuperar lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'us estrictament personau, vos informa de l\'activitat editoriala privaa d\'aquest sit (&ograve;bras e rend&egrave;tz-vos personaus, articles e br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent permet de seguir l\'activitat de l\'espaci public d\'aquest sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'cal_apresmidi' => 'tant&ograve;st',
+'cal_jour_entier' => 'jorn entier',
+'cal_matin' => 'matin',
+'cal_par_jour' => 'chalendier per jorn',
+'cal_par_mois' => 'chalendier per mes',
+'cal_par_semaine' => 'chalendier per setmana',
+'calendrier_synchro_lien' => '',
+'calendrier_synchro_prive' => '',
+'calendrier_synchro_public' => '',
+'calendrier_synchro_sync' => '',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de chamjar l\'estatut d\'aquel element. Desiratz de contunhar? ',
 
 
@@ -168,14 +168,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'endarrier',
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar verament l\'installacion',
-'dirs_preliminaire' => '<MODIF>Preliminar: <B>Reglar los dreches d\'acc&egrave;s</b>',
+'dirs_preliminaire' => 'Preliminar: <B>Reglar los dreches d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => '<b>Probl&egrave;ma de dreches d\'acc&egrave;s</b>',
-'dirs_repertoires_absents' => '<MODIF><B>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
-  <P>Se p&ograve;t que vena d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
+'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
+  <p/>Se p&ograve;t que vena d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
   &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logiciau FTP en corregissent l\'error.
   <P>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
-'dirs_repertoires_suivants' => '<MODIF><B>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<b>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
   <P>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreches d\'acc&egrave;s de chascun
   d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coma chau procedir.
   <P>Tre qu\'auretz facha aquela manipulacion, poiretz ',
@@ -192,7 +192,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Siatz ja inscrich(a).',
 'form_email_non_valide' => 'V&ograve;stra adrei&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Po&egrave;tz pas pus accedir a aqueu sit.',
-'form_forum_bonjour' => 'Bonjorn,',
+'form_forum_bonjour' => 'Bonjorn @nom@,',
 'form_forum_email_deja_enregistre' => 'Aquela adrei&ccedil;a e-mail ja es registraa, adoncas po&egrave;tz utilizar v&ograve;stre mot de santa Clara costumier.',
 'form_forum_identifiant_mail' => 'Vos av&egrave;m mandat v&ograve;stre identificant nov&egrave;u per e-mail.',
 'form_forum_identifiants' => 'Identificants personaus',
@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(aqu&ograve;\'s un messatge automatic)',
 'form_forum_pass' => 'mot de santa Clara:',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
-'form_forum_voici1' => '<MODIF>Vaic&iacute; v&ograve;stres identificants per poer participar als forums
+'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poer participar als forums
 dau sit "@nom_site_spip@" (@adresse_site@/):',
 'form_forum_voici2' => 'Vaic&iacute; v&ograve;stres identificants per prepausar d\'articles 
  sobre lo sit "@nom_site_spip@" (@adresse_site@/ecrire/):',
@@ -237,7 +237,7 @@ Merc&eacute; per v&ograve;stra participacion
 'form_pet_nom_site2' => 'Nom de v&ograve;stre sit web',
 'form_pet_probleme_technique' => 'Probl&egrave;ma tecnic, las signaturas son tempor&agrave;riament arrestaas.',
 'form_pet_signature_pasprise' => 'V&ograve;stra signatura es pas presa en c&ograve;mpte.',
-'form_pet_signature_validee' => '<MODIF>V&ograve;stra signatura es validaa. Apareisser&agrave; sobre lo sit tre l\'actualizacion que ven. Merc&eacute;!',
+'form_pet_signature_validee' => 'V&ograve;stra signatura es validaa. Merc&eacute;!',
 'form_pet_site_deja_enregistre' => 'Ja aqueu sit es registrat',
 'form_pet_url_invalide' => 'L\'URL qu\'av&egrave;tz indicaa es pas valida.',
 'form_pet_votre_email' => 'V&ograve;stra adrei&ccedil;a e-mail',
@@ -262,16 +262,16 @@ Merc&eacute; per v&ograve;stra participacion
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aic&iacute;</a> per contunhar.',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Aquest forum es moderat a pri&ograve;ri: v&ograve;stra contribucion pareisser&agrave; mas qu\'apr&egrave;s qu\'un administrator dau sit l\'aia validaa.',
-'forum_lien_hyper' => '<MODIF><B>Liam ipert&egrave;xt</b> (opcionau)',
+'forum_lien_hyper' => '<b>Liam ipert&egrave;xt</b> (opcionau)',
 'forum_message_definitif' => 'Messatge definitiu : mandar au sit',
 'forum_message_trop_long' => 'V&ograve;stre messatge es tr&ograve;p l&ograve;ng. La lonjor maximala es de 20&nbsp;000 caract&egrave;rs.',
 'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas per lo forum a l\'adrei&ccedil;a seguenta: ',
 'forum_non_inscrit' => 'Si&aacute; siatz pas inscrich(a), si&aacute; av&egrave;tz fach una error d\'adrei&ccedil;a o de mot de santa Clara. ',
-'forum_page_url' => '<MODIF>(se v&ograve;stre messatge se refer&iacute;s a un article publicat per lo web, o a una pagina que balhe mai d\'informacions, vougatz marcar &ccedil;ai sos lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
+'forum_page_url' => '(se v&ograve;stre messatge se refer&iacute;s a un article publicat per lo web, o a una pagina que baile mai d\'informacions, volhatz marcar &ccedil;ai sos lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ que fai seguia a v&ograve;stre article.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donaas, v&ograve;stre messatge s\'es pas registrat.',
-'forum_qui_etes_vous' => '<MODIF><B>Cu siatz?</b> (opcionau)',
+'forum_qui_etes_vous' => '<b>Qui siatz?</b> (opcionau)',
 'forum_texte' => 'T&egrave;xt de v&ograve;stre messatge:',
 'forum_titre' => 'T&iacute;tol:',
 'forum_titre_erreur' => 'Error...',
@@ -284,7 +284,7 @@ Merc&eacute; per v&ograve;stra participacion
   aqueu forum, d\'en primier vos chau registrar. Merc&eacute;
   de marcar &ccedil;ai sos l\'identificant personau qu\'av&egrave;tz recebut.
  Se siatz pas registrat/aa, av&egrave;tz de',
-'forum_vous_inscrire' => '<MODIF>vos inscriure </a> d\'en primier.',
+'forum_vous_inscrire' => 'vos inscriure',
 
 
 // I
@@ -312,6 +312,7 @@ Merc&eacute; per v&ograve;stra participacion
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_edition_site' => 'Edicion',
 'icone_etat_traductions' => 'Ont ne\'n son las reviraas',
+'icone_evolution_visites_2' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dels administrators',
 'icone_forum_interne' => 'Forum int&egrave;rne',
 'icone_forum_suivi' => 'Seguit dels forums',
@@ -347,10 +348,10 @@ Merc&eacute; per v&ograve;stra participacion
 'icone_valider_message' => 'Validar aqueu messatge',
 'icone_visiter_site' => 'Vesitar',
 'icone_voir_en_ligne' => 'Veire en linha',
-'image_tourner_180' => '<NEW>Rotation 180&deg;',
-'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
-'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
-'img_indisponible' => '<NEW>image indisponible',
+'image_tourner_180' => 'Rotacion 180&deg;',
+'image_tourner_droite' => 'Rotacion 90&deg; v&egrave;rs la drecha',
+'image_tourner_gauche' => 'Rotacion 90&deg; v&egrave;rs la sen&egrave;stra',
+'img_indisponible' => 'imatge indisponible',
 'info_a_suivre' => 'DE SEGUIR>>',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -380,13 +381,13 @@ Merc&eacute; per v&ograve;stra participacion
 'info_contact_developpeur' => 'Vougatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueu sit conten:',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => '<MODIF>es un logiciau liure distribuit <a href=\'copyright_fr.html\'>sos lic&eacute;ncia GPL.</a>',
+'info_copyright' => '@spip@ es un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
-'info_copyright_gpl' => '<NEW>sous licence GPL',
+'info_copyright_gpl' => 'sos lic&eacute;ncia GPL',
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Vougatz crear un fichier o un repert&ograve;ri nommat',
 'info_creer_repertoire_2' => 'Dedins lo sosrepert&ograve;ri   <b>ecrire/data/</b>, puei:',
-'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
+'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_dans_espace_prive' => '[dins l\'espaci privat]',
 'info_deplier' => 'Desplejar',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -394,7 +395,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_description_2' => 'Descripcion:',
 'info_dimension' => 'Dimensions:',
 'info_document' => 'Document ',
-'info_documents' => '<NEW>Documents',
+'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet d\'eschambiar de messatges e de constituir de forums privats de discussion entre los participants dau sit. Po&egrave;tz activar o desactivar aquela foncionalitat.',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
 'info_email_invalide' => 'Adrei&ccedil;a e-mail invalida',
@@ -436,13 +437,13 @@ Merc&eacute; per v&ograve;stra participacion
 'info_langue_interface' => 'Lenga de l\'interf&agrave;cia',
 'info_langue_principale' => 'Lenga majorala dau sit',
 'info_langues_proposees' => 'Lengas prepausaas:',
-'info_largeur_vignette' => '<MODIF>@larjor_vinheta@ x @autor_vinheta@ pix&egrave;ls',
+'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
 'info_lettre_heures' => 'H',
 'info_lien' => 'liam: ',
-'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
-'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
-'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_format_interdit' => 'Los l&ograve;gos de formats @formats@ son sols autorizats.',
+'info_logo_max_poids' => 'Los l&ograve;gos an de far mens de @maxi@ (aquest fichier fai @actuel@).',
+'info_logo_max_taille' => 'Los l&ograve;gos an de far mens de @maxi@ (aquest fichier fai @actuel@).',
 'info_mail_fournisseur' => 'vos@fornior.com',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -468,7 +469,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_pixels' => 'pix&egrave;ls',
 'info_plusieurs_mots_trouves' => 'Mai d\'un mot clau trobat per "@cherche_mot@"&nbsp;:',
 'info_popularite_5' => 'popularitat:',
-'info_portfolio' => '<NEW>Portfolio',
+'info_portfolio' => 'P&ograve;rtf&ograve;lio',
 'info_portfolio_automatique' => 'P&ograve;rtf&ograve;lio automatic:',
 'info_premier_resultat' => '[@debut_limit@ primiers resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primiers resultats de @total@]',
@@ -483,6 +484,8 @@ Merc&eacute; per v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
+'info_question_referers' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Recerchar',
 'info_rechercher_02' => 'Recerchar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinia per un l&ograve;go personalizat:',
@@ -502,7 +505,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_symbole_bleu' => 'Lo simb&egrave;u <B>blau</b> marca un <B>memento</b>: aqu&ograve; v&ograve;u dire un messatge per v&ograve;stre usatge personau.',
 'info_symbole_jaune' => 'Lo simb&egrave;u <B>jaune</b> marca un <B>anonci per tots los redactors </b>: los administrators lo p&ograve;on modificar, chasque redactor lo p&ograve;t veire.',
 'info_symbole_vert' => 'Lo simb&egrave;u <B>verd</b> marca los <B>messatges eschambiats amb d\'autres utilizaires</b> dau sit.',
-'info_syndication' => '<MODIF>sindicacion:',
+'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'Telecharjar a partir de v&ograve;stre ordenaor:',
 'info_telecharger_nouveau_logo' => 'Telecharjar un l&ograve;go n&ograve;u:',
@@ -522,13 +525,17 @@ Merc&eacute; per v&ograve;stra participacion
 'info_visite' => 'vesita:',
 'info_visites' => 'vesitas:',
 'info_vos_rendez_vous' => 'V&ograve;stres rend&egrave;tz-vos venents',
-'info_zoom' => '<NEW>zoom',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'V&ograve;stres mementos',
 'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Br&egrave;va prepausaa',
 'item_efface' => 'Esfa&ccedil;at',
+'item_gerer_referers' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
 'item_premier' => '1ier',
 'item_redacteur' => 'Redactor',
+'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -617,7 +624,7 @@ Merc&eacute; per v&ograve;stra participacion
 'onglet_messages_vide' => 'Messatges sensa t&egrave;xt',
 'onglet_origine_visites' => 'Origina de las vesitas',
 'onglet_repartition_debut' => 'dempuei lo comen&ccedil;ament',
-'onglet_repartition_lang' => '<MODIF>per lengas',
+'onglet_repartition_lang' => 'Reparticion per lengas',
 'onglet_repartition_rubrique' => 'Reparticion per rubricas',
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Voidar l\'escondeor',
@@ -665,14 +672,14 @@ e vos tornar connectar au sit.
 'pass_retour_public' => 'Tornar au sit public',
 'pass_rien_a_faire_ici' => 'Ren a faire aic&iacute;.',
 'pass_vousinscrire' => 'S\'inscriure sus aquest sit',
-'precedent' => '<NEW>pr&eacute;c&eacute;dent',
+'precedent' => 'precedent',
 'previsualisation' => 'Previsualizacion',
 'previsualiser' => 'Previsualizar',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
-'suivant' => '<NEW>suivant',
+'suivant' => 'seguent',
 
 
 // T
@@ -704,9 +711,9 @@ e vos tornar connectar au sit.
  acostumat/aa au foncionament dau sist&egrave;ma SPIP. <P align="justify"><B>
  En generau, se conselha f&ograve;rt
  de laissar la charja d\'aquestas paginas au webm&egrave;stre principau de v&ograve;stre sit.</b>',
-'texte_inc_meta_1' => '<MODIF>Vougatz, coma administrator/tritz dau sit,',
-'texte_inc_meta_2' => '<MODIF>verificar los dreches d\'escritura',
-'texte_inc_meta_3' => '<MODIF>dins lo repert&ograve;ri ecrire/',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>ecrire/data/meta_cache.php3</code>.Volhatz, coma administrator/tritz dau sit,',
+'texte_inc_meta_2' => 'verificar los dreches d\'escritura',
+'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>ecrire/data/<code>.',
 'texte_plan_trad' => 'Aquela pagina vos permet de visualizar l\'estat de las reviraas per la lenga chausia. 
   La pagina aficha los articles que son a se revirar, los articles que chau actualizar lor reviraa 
   e los articles que son pas encara revirats. ',
@@ -738,7 +745,7 @@ e vos tornar connectar au sit.
 'titre_image_redacteur_02' => 'Redactor',
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
-'titre_liens_entrants' => '<MODIF>Los liams intrants per encuei',
+'titre_liens_entrants' => 'Liams entrants ',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_page_admin_vider' => 'Mantenen&ccedil;a tecnica: gestion de l\'escondeor',
 'titre_page_etat_traductions' => 'Estat de las reviraas',
@@ -759,27 +766,27 @@ e vos tornar connectar au sit.
 
 
 // Z
-'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
-'zbug_boucle' => '<NEW>boucle',
-'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
-'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
-'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
-'zbug_code' => '<NEW>code',
-'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => '<NEW>externe interdit',
+'zbug_balise_b_aval' => '&nbsp;: balisa B en avau',
+'zbug_boucle' => 'bloca',
+'zbug_boucle_recursive_undef' => 'bloca recursiva non definia',
+'zbug_champ_hors_boucle' => 'Champ @champ@ f&ograve;ra bloca',
+'zbug_champ_hors_motif' => 'Champ @champ@ en def&ograve;ra d\'una blocla de motiu @motif@',
+'zbug_code' => 'c&ograve;de',
+'zbug_critere_inconnu' => 'crit&egrave;ri inconegut @critere@',
+'zbug_distant_interdit' => 'ext&egrave;rne enebit',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barraor manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
-'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_execution_page' => 'error d\'execucion de la pagina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
-'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_erreur_meme_parent' => '{meme_parent} s\'aplica mas qu\'a las blocas (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
 'zbug_info_erreur_squelette' => 'Error sobre lo sit',
-'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
-'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
-'zbug_resultat' => '<NEW>r&eacute;sultat',
-'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
+'zbug_resultat' => 'resultat',
+'zbug_serveur_indefini' => 'servior SQL indefinit',
+'zbug_table_inconnue' => 'Taula SQL &laquo;@table@&raquo; inconegua'
 
 );
 

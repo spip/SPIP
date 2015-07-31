@@ -69,11 +69,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'cal_apresmidi' => 'tant&ograve;st',
-'cal_jour_entier' => '<NEW>jour entier',
-'cal_matin' => '<NEW>matin',
-'cal_par_jour' => 'calendri&egrave;r per jorn',
-'cal_par_mois' => 'calendi&egrave;r per mes',
-'cal_par_semaine' => 'calendi&egrave;r per setmana',
+'cal_jour_entier' => 'dia enti&egrave;r',
+'cal_matin' => 'matin',
+'cal_par_jour' => 'calend&egrave;r per dia',
+'cal_par_mois' => 'calend&egrave;r per mes',
+'cal_par_semaine' => 'calend&egrave;r per setmana',
+'calendrier_synchro_lien' => '',
+'calendrier_synchro_prive' => '',
+'calendrier_synchro_public' => '',
+'calendrier_synchro_sync' => '',
 'confirm_changer_statut' => 'Atencion, qu\'avetz demandat de cambiar l\'estatut d\'aqueth element. E desiratz de contunhar? ',
 
 
@@ -186,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Qu\'&egrave;tz ja inscriut(a).',
 'form_email_non_valide' => 'La v&ograve;sta adrei&ccedil;a e-mail n\'ei pas valida.',
 'form_forum_access_refuse' => 'Non podetz plus accedir a aqueth sit.',
-'form_forum_bonjour' => '<MODIF>Adishiatz,',
+'form_forum_bonjour' => 'Adishatz @nom@,,',
 'form_forum_email_deja_enregistre' => 'Aquera adrei&ccedil;a e-mail ja qu\'ei registrada, doncas que podetz utilizar lo v&ograve;ste mot de santa Clara costum&egrave;r.',
 'form_forum_identifiant_mail' => 'Que vs\'av&egrave;m mandat lo v&ograve;ste identificant nav&egrave;th per e-mail.',
 'form_forum_identifiants' => 'Identificants personaus',
@@ -278,7 +282,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
   aqueth forum, en perm&egrave;ras que\'vs cau registrar. Merc&eacute;s
   de marcar &ccedil;a devath l\'identificant personau qui avetz recebut.
  Se n\'&egrave;tz pas registrat/ada, qu\'ei necessari',
-'forum_vous_inscrire' => 'de vs\'inscr&iacute;ver',
+'forum_vous_inscrire' => 'inscrive\'vs',
 
 
 // I
@@ -304,7 +308,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escr&iacute;ver un article nau',
 'icone_edition_site' => 'Edicion',
-'icone_evolution_visites_2' => '<NEW><NEW><NEW><PLUS_UTILISE>',
+'icone_evolution_visites_2' => '',
 'icone_forum_administrateur' => 'Forum deus administrators',
 'icone_forum_suivi' => 'Seguit deus forums',
 'icone_gestion_langues' => 'Gestion de las lengas',
@@ -338,8 +342,8 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_visiter_site' => 'Vesitar',
 'icone_voir_en_ligne' => 'V&eacute;der en linha',
 'image_tourner_180' => 'Rotacion 180&deg;',
-'image_tourner_droite' => 'Rotacion 90&deg; cap a drecha',
-'image_tourner_gauche' => 'Rotacion 90&deg; cap a esquerra',
+'image_tourner_droite' => 'Rotacion 90&deg; cap a dreta',
+'image_tourner_gauche' => 'Rotacion 90&deg; cap a esqu&egrave;rra',
 'img_indisponible' => 'imatge indisponible',
 'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
@@ -370,7 +374,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contact_developpeur' => 'Volhatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueth sit que contien:',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => 'qu\'ei un logiciau liure distribuit @lien_gpl@.',
+'info_copyright' => '@spip@ qu\'ei un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
 'info_copyright_gpl' => 'devath lic&eacute;ncia GPL',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion',
@@ -422,9 +426,9 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_langue_principale' => 'Lenga majorau deu sit',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
-'info_logo_format_interdit' => 'Los l&ograve;gos de formats @formats@ son sols autorizats.',
-'info_logo_max_poids' => 'Los l&ograve;gos qu\'an de har mensh de @maxi@ (aqueth fichi&egrave;r que h&egrave; @actuel@).',
-'info_logo_max_taille' => 'Los l&ograve;gos qu\'an de har mensh de @maxi@ (aqueth fichi&egrave;r que h&egrave; @actuel@).',
+'info_logo_format_interdit' => 'Los l&ograve;gos de formats @formats@ que son sols autorizats.',
+'info_logo_max_poids' => 'Los l&ograve;gos qu\'an de har mensh de @maxi@ (aqueste fichi&egrave;r que h&egrave; @actuel@).',
+'info_logo_max_taille' => 'Los l&ograve;gos qu\'an de har mensh de @maxi@ (aqueste fichi&egrave;r que h&egrave; @actuel@).',
 'info_mail_fournisseur' => 'vos@hornider.com',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -463,8 +467,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_publie_01' => 'L\'article "@titre@" qu\'ei estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] QUE PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat--------------',
-'info_question_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
+'info_question_referers' => '',
 'info_rechercher' => 'Recercar',
 'info_rechercher_02' => 'Recercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
@@ -503,10 +506,10 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Los v&ograve;stes mementos',
 'item_breve_proposee' => 'Br&egrave;va perpausada',
-'item_gerer_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
+'item_gerer_referers' => '',
+'item_non_gerer_referers' => '',
+'item_non_utiliser_moteur_recherche_forum' => '',
+'item_utiliser_moteur_recherche_forum' => '',
 
 
 // L
@@ -714,24 +717,24 @@ e tornar connect&agrave;\'vs au sit.
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
 'zbug_boucle' => 'bloca',
 'zbug_boucle_recursive_undef' => 'bloca recursiva non definida',
-'zbug_champ_hors_boucle' => 'Camp @champ@ f&ograve;ra bloca',
-'zbug_champ_hors_motif' => 'Camp @champ@ en deh&ograve;ra d\'una bloca de motiu @motif@',
+'zbug_champ_hors_boucle' => 'Camp @champ@ h&ograve;ra bloca',
+'zbug_champ_hors_motif' => 'Camp @champ@ en deh&ograve;ra d\'ua bloca de motiu @motif@',
 'zbug_code' => 'c&ograve;de',
-'zbug_critere_inconnu' => 'crit&egrave;ri desconegut @critere@',
+'zbug_critere_inconnu' => 'crit&egrave;ri inconegut @critere@',
 'zbug_distant_interdit' => 'ext&egrave;rne enebit',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrader que manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
 'zbug_erreur_execution_page' => 'error d\'execucion de la pagina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
-'zbug_erreur_meme_parent' => '{meme_parent} ne s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_meme_parent' => '{meme_parent} que s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(s) dens l\'esqueleta',
 'zbug_info_erreur_squelette' => 'Error suber lo sit',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL indefinit',
-'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda'
+'zbug_table_inconnue' => 'Taula SQL &laquo;@table@&raquo; inconeguda'
 
 );
 
