@@ -452,6 +452,8 @@ function calculer_page_globale($fond) {
 	}
 	if ($GLOBALS['date'])
 		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
+	else
+		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
 	// Calcul de la rubrique associee a la requete
 	// (selection de squelette specifique)
