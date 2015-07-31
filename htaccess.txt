@@ -1,5 +1,5 @@
 ##############################################################
-# Fichier .htaccess                               SPIP v 3.0 #
+# Fichier .htaccess                               SPIP v 3.1 #
 #                                                            #
 # Permet de controler les URLs et la version de php utilisee #
 # Compatible avec les URLs 'html', 'propres' et 'propres2'   #
@@ -19,10 +19,16 @@ RewriteEngine On
 ################ CONFIGURATION ######################
 
 ### Configuration sous-repertoire
-# Chez la plupart des hebergeurs il faut indiquer "RewriteBase /"
-# sinon modifiez cette ligne
 
-RewriteBase /
+# Calcule automatiquememt le RewriteBase (qui permet de faire fonctionner
+# les belles URLs). De la sorte, un meme site peut etre affiche en racine
+# ou dans un sous repertoire sans devoir modifier la ligne RewriteBase.
+RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+RewriteRule ^(.*) - [E=BASE:%1]
+
+# En alternative aux 2 lignes precedentes (a commenter dans ce cas),
+# vous pouvez indiquer un RewriteBase specifique
+#RewriteBase /
 
 
 # SPIP version 'php' - si vous avez d'anciennes adresses en '.php[3]',
