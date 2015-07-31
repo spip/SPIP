@@ -124,7 +124,6 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 
 	if (isset($contexte['extra']))
 		$contexte['extra'] = unserialize($contexte['extra']);
-
 	// preciser que le formulaire doit passer dans un pipeline
 	$contexte['_pipeline'] = array('editer_contenu_objet','args'=>array('type'=>$type,'id'=>$id,'contexte'=>$contexte));
 	// preciser que le formulaire doit etre securise auteur/action
