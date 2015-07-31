@@ -536,6 +536,11 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	else {
 		$scheme = $t['scheme']; $noproxy = $scheme.'://';
 	}
+	if (isset($t['user'])) {
+		$scheme_fsock .= $t['user'];
+		if (isset($t['pass'])) $scheme_fsock .= ':'.$t['pass'];
+		$scheme_fsock .= '@';
+	}
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 	if ($t['query']) $path .= "?" .$t['query'];
