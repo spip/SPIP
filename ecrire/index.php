@@ -104,7 +104,10 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 	}
 }
 // si nom pas plausible, prendre le script par defaut
-elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
+elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) {
+	$exec = "accueil";
+	set_request('exec', $exec);
+}
 
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)

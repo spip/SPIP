@@ -62,6 +62,9 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 // http://doc.spip.org/@http_auteurs_ressemblants
 function http_auteurs_ressemblants($cherche_auteur, $id_message)
 {
+
+  $cherche_auteur = htmlspecialchars($cherche_auteur);
+
   global $connect_id_auteur;
   $query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
   $table_auteurs = array();
@@ -150,7 +153,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result = sql_allfetsel("auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang, auteurs.extra", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
+	$result = sql_allfetsel("*", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
 	$total_dest = count($result);
 
