@@ -9,8 +9,8 @@
 	(#SET{item, #ENV{page_courante}|moins{2}|mult{#ENV{pas}} })
 
 	][<span
-	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url}
-	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+	class="prev[(#ENV{page_courante}|<={1}|oui)disabled]">(#ENV{url_precedent,#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 	|ancre_url{#ENV{ancre}}
 	|lien_ou_expose{#ENV{label_precedent,<:public:page_precedente:>},#ENV{page_courante}|<={1},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,prev}
@@ -21,8 +21,8 @@
 
 	][<span
 	class="next[(#ENV{page_courante}|>={#ENV{nombre_pages}}|oui)disabled]">[<span (#ENV{page_courante}|>={#ENV{nombre_pages}}|et{#GET*{sep}}|oui)
-		class='sep'>#GET*{sep}</span>](#ENV{url}
-	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}
+		class='sep'>#GET*{sep}</span>](#ENV{url_suivant,#ENV{url}
+	|parametre_url{#ENV{debut},#GET{item}|?{#GET{item}}}}
 	|ancre_url{#ENV{ancre}}
 	|lien_ou_expose{#ENV{label_suivant,<:public:page_suivante:>},#ENV{page_courante}|>={#ENV{nombre_pages}},'lien_pagination','',nofollow}
 	|inserer_attribut{rel,next}
