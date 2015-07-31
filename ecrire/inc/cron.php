@@ -52,7 +52,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Une seule tache est executee pour eviter la guillotine des 30 secondes.
 
-// http://doc.spip.org/@spip_cron
+// http://doc.spip.org/@inc_cron_dist
 function inc_cron_dist($taches = array()) {
 
 	if (!$taches)
