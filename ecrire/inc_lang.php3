@@ -442,10 +442,9 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	}
 
 	$ret = "<form action='$post' method='post' style='margin:0px; padding:0px;'>";
-	if ($cible) {
-		$cible = quote_amp($cible);
-		$ret .= "<input type='hidden' name='url' value='$cible' />";
-	}
+	if ($cible)
+		$ret .= "<input type='hidden' name='url' value='".quote_amp($cible)."' />";
+
 	if ($texte)
 		$ret .= $texte;
 
@@ -459,7 +458,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	$postcomplet = new Link($post);
 	if ($cible) $postcomplet->addvar('url', $cible);
 
-	$lien_post = quote_amp($postcomplet->geturl());
+	$lien_post = $postcomplet->geturl();
 	$ret .= "\n<select name='$nom_select' $style onchange=\"document.location.href='".$lien_post."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n";
 
 	sort($langues);
