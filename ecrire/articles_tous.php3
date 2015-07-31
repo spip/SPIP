@@ -79,137 +79,153 @@ echo "</form>";
 debut_droite();
 
 function afficher_rubriques_filles($id_parent) {
-	global $rubrique, $enfant, $article;
+	global $rubrique, $enfant, $article, $rubriques_actives;
 	global $spip_lang_left, $spip_lang_right;
 	global $couleur_claire;
 	
 	if ($enfant[$id_parent]) {
 		while (list(,$id_rubrique) = each($enfant[$id_parent]) ) {
+			$vide = !($enfant[$id_rubrique] OR $article[$id_rubrique]);
 			
 			if ($id_parent == 0) {
 				$icone = "secteur-24.gif";
-				$bgcolor = " background-color: $couleur_claire;";
+				$bgcolor = " background-image: none; background-color: $couleur_claire;";
 			}
 			else {
 				$icone = "rubrique-24.gif";
 				$bgcolor = "";
 			}
-			
-			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;$bgcolor'>";
-			
-			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
-			
-			echo "<b class='verdana2'><a href='naviguer.php3?coll=$id_rubrique'>";
+
+			echo "<div style='padding: 3px; $bgcolor'>";
+			if (!$vide) {
+				echo "<div style='float: $spip_lang_left; padding: 1px;'>";
+				echo bouton_block_invisible("rubrique$id_rubrique");
+				echo "</div>";
+			}
+			echo "<div style='float: $spip_lang_left; margin-$spip_lang_left: 5px; padding: 4px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;'>";
+
+			echo "<b class='verdana3'><a href='naviguer.php3?coll=$id_rubrique'>";
+			if ($vide && !$rubriques_actives[$id_rubrique]) echo "<font color='#909090'>";
 			echo $rubrique[$id_rubrique];
-			echo "</b></a></div>\n";
-			
+			if ($vide && !$rubriques_actives[$id_rubrique]) echo "</font>";
+			echo "</a></b></div>\n";
+			echo "<div style='clear:both;'></div>";
+			echo "</div>\n";
 
-			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) {
-				echo debut_block_invisible("rubrique$id_rubrique");			
+			if (!$vide) {
+				echo debut_block_invisible("rubrique$id_rubrique");
 
-				echo "<div style='margin-$spip_lang_left: 12px; padding-$spip_lang_left: 10px; border-$spip_lang_left: 1px dotted #666666;'>";
+				if ($id_parent)
+					echo "<div class='plan-rubrique'>";
+				else 
+					echo "<div class='plan-secteur'>";
+				
 				if ($article[$id_rubrique]) {
-					while(list(,$zarticle) = each($article[$id_rubrique]) ) {
-						
-						echo "$zarticle\n";
-					}
-								
+					echo "<div class='plan-articles'>\n";
+					echo join("", $article[$id_rubrique]);
+					echo "</div>\n";
 				}
 
-				afficher_rubriques_filles($id_rubrique);	
+				afficher_rubriques_filles($id_rubrique);
 				echo "</div>";
 				echo fin_block();
 			}
-			
+			if (!$id_parent) echo "<p>";
 		}
 	}
 }
 
 
-	// Recuperer toutes les rubriques 
-	$query = "SELECT * FROM spip_rubriques ORDER BY titre";
-	$result=spip_query($query);
-	while($row=spip_fetch_array($result)){
-		$id_rubrique=$row['id_rubrique'];
-		$titre = typo($row['titre']);
-		$id_parent=$row['id_parent'];
-		
-		$les_rubriques[] = "rubrique$id_rubrique";
-		
-		$nom_block = "rubrique$id_rubrique";
-		if (!$numero_block["$nom_block"] > 0){
-			$compteur_block++;
-			$numero_block["$nom_block"] = $compteur_block;
-
-			if (!$first_couche) $first_couche = $compteur_block;
-			$last_couche = $compteur_block;
-		}
-
-		if ($id_parent == '0') 	{
-			$rubrique[$id_rubrique] = "$titre";
-		}
-		else {
-			$rubrique[$id_rubrique] =  "$titre";
-		}
-
-		$enfant[$id_parent][] = $id_rubrique;		
-	}
-
-	// Recuperer tous les articles
-	$query = "SELECT * FROM spip_articles WHERE statut IN ($statut_art) ORDER BY titre";
-	$result=spip_query($query);
-	while($row=spip_fetch_array($result)){
-		$id_rubrique=$row['id_rubrique'];
-		$id_article = $row['id_article'];
-		$titre = typo($row['titre']);
-		$statut = $row['statut'];
-		switch ($statut) {
-			case 'publie':
-				$puce = 'verte';
-					break;
-			case 'prepa':
-				$puce = 'blanche';
-				break;
-			case 'prop':
-				$puce = 'orange';
-				break;
-			case 'refuse':
-				$puce = 'rouge';
-				break;
-			case 'poubelle':
-				$puce = 'poubelle';
-				break;
-		}
-		$puce = "puce-$puce-breve.gif";
-		
-		$article[$id_rubrique][] = "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='articles.php3?id_article=$id_article' class='verdana1'>$titre</a></div></div>";
-	}
+// Recuperer toutes les rubriques 
+$query = "SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY titre";
+$result = spip_query($query);
+while ($row = spip_fetch_array($result)) {
+	$id_rubrique = $row['id_rubrique'];
+	$titre = typo($row['titre']);
+	$id_parent = $row['id_parent'];
 	
-	$javasc_ouvrir="manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche)";
-	$javasc_fermer="manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche)";
-
-	// Demarrer l'affichage
-	if ($les_rubriques AND test_layer()) {
-		$les_rubriques = join($les_rubriques,",");
-		echo "<div>&nbsp;</div>";
-		echo "<b class='verdana2'>";
-		echo "<a href=\"javascript:$javasc_ouvrir\">";
-		echo _T('lien_tout_deplier');
-		echo "</a>";
-		echo "</b>";
-		echo " | ";
-		echo "<b class='verdana2'>";
-		echo "<a href=\"javascript:$javasc_fermer\">";
-		echo _T('lien_tout_replier');
-		echo "</a>";
-		echo "</b>";
-		echo "<div>&nbsp;</div>";
-	}
+	$les_rubriques[] = "rubrique$id_rubrique";
 	
-	afficher_rubriques_filles(0);
+	$nom_block = "rubrique$id_rubrique";
+	if (!$numero_block["$nom_block"] > 0){
+		$compteur_block++;
+		$numero_block["$nom_block"] = $compteur_block;
+
+		if (!$first_couche) $first_couche = $compteur_block;
+		$last_couche = $compteur_block;
+	}
+
+	if ($id_parent == '0') {
+		$rubrique[$id_rubrique] = "$titre";
+	}
+	else {
+		$rubrique[$id_rubrique] =  "$titre";
+	}
+
+	$enfant[$id_parent][] = $id_rubrique;		
+}
+
+$query = "SELECT DISTINCT id_rubrique FROM spip_articles";
+$result = spip_query($query);
+while ($row = spip_fetch_array($result)) {
+	$id_rubrique = $row['id_rubrique'];
+	$rubriques_actives[$id_rubrique] = $id_rubrique;
+}
+
+// Recuperer tous les articles
+$query = "SELECT id_rubrique, id_article, titre, statut FROM spip_articles WHERE statut IN ($statut_art) ORDER BY titre";
+$result = spip_query($query);
+while($row = spip_fetch_array($result)) {
+	$id_rubrique=$row['id_rubrique'];
+	$id_article = $row['id_article'];
+	$titre = typo($row['titre']);
+	$statut = $row['statut'];
+	switch ($statut) {
+		case 'publie':
+			$puce = 'verte';
+			break;
+		case 'prepa':
+			$puce = 'blanche';
+			break;
+		case 'prop':
+			$puce = 'orange';
+			break;
+		case 'refuse':
+			$puce = 'rouge';
+			break;
+		case 'poubelle':
+			$puce = 'poubelle';
+			break;
+	}
+	$puce = "puce-$puce-breve.gif";
+	
+	$article[$id_rubrique][] = "<a class='$statut' href='articles.php3?id_article=$id_article'>$titre</a>\n";
+}
+
+$javasc_ouvrir = "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche)";
+$javasc_fermer = "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche)";
+
+// Demarrer l'affichage
+if ($les_rubriques AND test_layer()) {
+	$les_rubriques = join($les_rubriques,",");
+	echo "<div>&nbsp;</div>";
+	echo "<b class='verdana3'>";
+	echo "<a href=\"javascript:$javasc_ouvrir\">";
+	echo _T('lien_tout_deplier');
+	echo "</a>";
+	echo "</b>";
+	echo " | ";
+	echo "<b class='verdana3'>";
+	echo "<a href=\"javascript:$javasc_fermer\">";
+	echo _T('lien_tout_replier');
+	echo "</a>";
+	echo "</b>";
+	echo "<div>&nbsp;</div>";
+}
+
+afficher_rubriques_filles(0);
 
 
 fin_page();
 
 ?>
-
