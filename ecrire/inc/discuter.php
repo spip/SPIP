@@ -64,7 +64,7 @@ function inc_discuter_dist($id_article, $flag, $debut=1)
 #				   " LIMIT $total_afficher OFFSET $debut" # PG
 
 	  $res = formulaire_discuter($forum, $res, $debut, $total_afficher, 'articles', "id_article=$id_article");
-  }
+  } else $res ='';
 
   return ($flag=='ajax') ? $res : "<div id='forum'>$res</div>";
 }

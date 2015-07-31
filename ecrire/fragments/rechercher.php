@@ -17,25 +17,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@fragments_rechercher_dist
 function fragments_rechercher_dist()
 {
-	global $flag_ob;
+		global $id, $exclus, $type, $rac;
 
-	if ($flag_ob) {			ob_start();		}
-	ajax_page_recherche();
-
-	if ($flag_ob) {
-			$a = ob_get_contents();
-			ob_end_clean();
-			return $a;
-	}
-}
-
-# Un moteur de recherche ?
-// http://doc.spip.org/@ajax_page_recherche
-function ajax_page_recherche()
-{
-	global $id, $exclus, $type, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
+		$id = intval($id);
+		$exclus = intval($exclus);
 
 		include_spip('inc/texte');
 		$where = split("[[:space:]]+", $type);
@@ -112,13 +97,11 @@ function ajax_page_recherche()
 				
 		}
 		if ($ret)
-			echo $ret;
+			return $ret;
 		else
-			echo "<div style='padding: 5px; color: red;'><b>"
+			return "<div style='padding: 5px; color: red;'><b>"
 			.htmlentities($type)
 			."</b> :  "._T('avis_aucun_resultat')."</div>";
 
 }
-
-
 ?>
