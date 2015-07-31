@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Aten&ccedil;&atilde;o! Esta se&ccedil;&atilde;o cont&eacute;m @contient_breves@ nota@scb@: se voc&ecirc; a transferir, por favor, marque este quadrado.',
 'avis_destinataire_obligatoire' => 'Voc&ecirc; deve informar um destinat&aacute;rio antes de enviar esta mensagem.',
 'avis_erreur_connexion_mysql' => 'Erro de conex&atilde;o SQL',
-'avis_erreur_version_archive' => '<MODIF><b>Aten&ccedil;&atilde;o! O arquivo @archive@ corresponde a
+'avis_erreur_version_archive' => '<b>Aten&ccedil;&atilde;o! O arquivo @archive@ corresponde a
     uma vers&atilde;o de SPIP diferente da que voc&ecirc;
     tem instalada.</b> Voc&ecirc; enfrentar&aacute; grandes
     dificuldades: risco de destrui&ccedil;&atilde;o da sua
@@ -196,7 +196,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta diversos m&eacute;todos para se manter em contato com a vida deste site.',
-'ical_info2' => '<MODIF>Para mais informa&ccedil;&otilde;es sobre todas estas t&eacute;cnicas, n&atilde;o deixe de consultar <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.',
+'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre todas estas t&eacute;cnicas, n&atilde;o deixe de consultar <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.',
 'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; um mapa do site anunciando todas as mat&eacute;rias publicadas. O segundo cont&eacute;m os avisos editoriais bem como suas &uacute;ltimas mensagens privadas: ele lhe &eacute; reservado gra&ccedil;as a uma chave pessoal, que voc&ecirc; pode alterar a qualquer momento ao renovar a sua senha.',
 'ical_lien_rss_breves' => 'Sindica&ccedil;&atilde;o das notas do site',
 'ical_methode_http' => 'Transfer&ecirc;ncia',
@@ -891,7 +891,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,incluindo <i>todos</i> os acessos dos redatores e administradores. Ap&oacute;s execut&aacute;-lo, voc&ecirc; dever&aacute; reinstalar o SPIP para recriar uma nova base de dados bem como um acesso inicial de administrador.',
 'texte_admin_effacer_stats' => 'Este comando apaga todos os dados ligados &agrave;s estat&iacute;sticas de visita&ccedil;&atilde;o do site, incluindo a popularidade das mat&eacute;rias.',
 'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base num arquivo que ser&aacute; gravado no diret&oacute;rio @dossier@. N&atilde;o se esque&ccedil;a, tamb&eacute;m, de tranferir a totalidade do diret&oacute;rio @img@, que cont&eacute;m as imagens e os documentos usados nas mat&eacute;rias e nas se&ccedil;&otilde;es.',
-'texte_admin_tech_02' => '<MODIF>Aten&ccedil;&atilde;o: esta c&oacute;pia de seguran&ccedil;a s&oacute; poder&aacute; ser restaurada em um site com a mesma vers&atilde;o do SPIP. Sobretudo, n&atilde;o &laquo;limpe a base&raquo; com o objetivo de reinstalar a c&oacute;pia de seguran&ccedil;a ap&oacute;s uma atualiza&ccedil;&atilde;o... Consulte <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.',
+'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta c&oacute;pia de seguran&ccedil;a s&oacute; poder&aacute; ser restaurada em um site com a mesma vers&atilde;o do SPIP. Sobretudo, n&atilde;o &laquo;limpe a base&raquo; com o objetivo de reinstalar a c&oacute;pia de seguran&ccedil;a ap&oacute;s uma atualiza&ccedil;&atilde;o... Consulte <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.',
 'texte_admin_tech_03' => 'Voc&ecirc; pode escolher fazer a c&oacute;pia de seguran&ccedil;a em formato compactado, para encurtar a sua transfer&ecirc;ncia para a sua m&aacute;quina local, ou para um servidor de c&oacute;pias de seguran&ccedil;a, e para economizar espa&ccedil;o em disco.',
 'texte_admin_tech_04' => 'Com o objetivo de fus&atilde;o com outra base de dados, voc&ecirc; pode limitar a c&oacute;pia de seguran&ccedil;a &agrave; se&ccedil;&atilde;o: ',
 'texte_adresse_annuaire_1' => '(Se o seu diret&oacute;rio est&aacute; instalado na mesma m&aacute;quina que este website, trata-se provavelmente de &laquo;localhost&raquo;.)',

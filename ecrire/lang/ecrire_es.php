@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => '&iexcl;ATENCI&Oacute;N! Esta secci&oacute;n contiene @contient_breves@ breve@scb@. Si la desplazas, activa esta casilla de confirmaci&oacute;n.',
 'avis_destinataire_obligatoire' => 'Debes indicar un destinatario antes de enviar este mensaje.',
 'avis_erreur_connexion_mysql' => 'Error de conexi&oacute;n SQL',
-'avis_erreur_version_archive' => '<MODIF><b>&iexcl;ATENCI&Oacute;N! El archivo @archive@ corresponde a otra versi&oacute;n de SPIP, diferente a la instalada.</b> Te arriesgas a tener grandes problemas: destrucci&oacute;n de tu base de datos, disfuncionamientos varios del sitio, etc. No valides esta importaci&oacute;n.<p>Para mayor informaci&oacute;n, ver
+'avis_erreur_version_archive' => '<b>&iexcl;ATENCI&Oacute;N! El archivo @archive@ corresponde a otra versi&oacute;n de SPIP, diferente a la instalada.</b> Te arriesgas a tener grandes problemas: destrucci&oacute;n de tu base de datos, disfuncionamientos varios del sitio, etc. No valides esta importaci&oacute;n.<p>Para mayor informaci&oacute;n, ver
  <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espacio prohibido</b><div>SPIP ya est&aacute; instalado.</div>',
 'avis_lecture_noms_bases_1' => 'El programa de instalaci&oacute;n no logr&oacute; leer los nombres de las bases de datos instaladas.',
@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
-'ical_info2' => '<MODIF>Para mayor informaci&oacute;n sobre todas estas t&eacute;cnicas, no dudes en consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Para mayor informaci&oacute;n sobre todas estas t&eacute;cnicas, no dudes en consultar <a href="@spipnet@">la documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Tienes dos calendarios a tu disposici&oacute;n. El primero es un plano del sitio que anuncia todos los art&iacute;culos publicados. El segundo contiene los anuncios editoriales y tus &uacute;ltimos mensajes privados: s&oacute;lo t&uacute; lo v&eacute;s gracias a una clave personal, que podr&aacute;s modificar en cualquier momento cambiando tu contrase&ntilde;a.',
 'ical_lien_rss_breves' => 'Sindicaci&oacute;n de breves del sitio',
 'ical_methode_http' => 'Descargar',
@@ -764,6 +764,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'logo_article' => 'Logotipo del art&iacute;culo...',
 'logo_auteur' => 'LOGO DEL AUTOR O AUTORA',
 'logo_breve' => 'Logotipo de la breve...',
+'logo_groupe' => 'LOGO DE ESTE GRUPO',
 'logo_mot_cle' => 'Logotipo de la palabra clave...',
 'logo_rubrique' => 'Logotipo de la secci&oacute;n...',
 'logo_site' => 'Logotipo del sitio...',
@@ -884,7 +885,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_admin_effacer_01' => 'Este comando borra <i>TODO</i> el contenido de la base de datos, redactoras y administradores inclu&iacute;dos. Despu&eacute;s de ejecutarlo tendr&aacute;s que volver a instalar SPIP, creando una nueva base al igual que un primer acceso de administraci&oacute;n.',
 'texte_admin_effacer_stats' => 'Esta orden borra todos los datos ligados con las estad&iacute;sticas de visitas al sitio, incluyendo la popularidad de los art&iacute;culos.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite respaldar el contenido de la base en un archivo que se guardar&aacute; en la carpeta @dossier@. No olvides recuperar adem&aacute;s la totalidad de la carpeta @img@, que contiene las im&aacute;genes y los documentos utilizadas en los art&iacute;culos y las secciones.',
-'texte_admin_tech_02' => '<MODIF>&iexcl;ATENCI&Oacute;N! Esta copia de respaldo S&Oacute;LO PODR&Aacute; ser restaurada en un sitio que utiliza LA MISMA versi&oacute;n de SPIP. Por ning&uacute;n motivo se deber&aacute; &laquo;&nbsp;vaciar la base&nbsp;&raquo; imaginando volver a instalar el respaldo despu&eacute;s de una actualizaci&oacute;n. Consultar la <a href="@spipnet@">documentaci&oacute;n de SPIP</a>.',
+'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de respaldo S&Oacute;LO PODR&Aacute; ser restaurada en un sitio que utiliza LA MISMA versi&oacute;n de SPIP. Por ning&uacute;n motivo se deber&aacute; &laquo;&nbsp;vaciar la base&nbsp;&raquo; imaginando volver a instalar el respaldo despu&eacute;s de una actualizaci&oacute;n. Consultar la <a href="@spipnet@">documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Puedes elegir de guardar el archivo comprimido, y as&iacute; acortar el tiempo de transferencia hacia tu ordenador o un servidor de respaldo, aparte de ganar espacio en el disco.',
 'texte_admin_tech_04' => 'En caso de fusi&oacute;n con otra base, la copia de respaldo puede limitarse a la secci&oacute;n: ',
 'texte_adresse_annuaire_1' => '(Si tu carpeta est&aacute; instalada en la misma m&aacute;quina que el sitio Web, se trata probablemente de "localhost".)',
@@ -994,8 +995,8 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br />Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; la direcci&oacute;n URL deseada, o la direcci&oacute;n de su archivo de sindicaci&oacute;n. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
 'texte_referencement_automatique_verifier' => 'Deber&iacute;as verificar la informaci&oacute;n facilitada por <tt>@url@</tt> antes de guardar.',
-'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos enm s&iacute;.</b><p />
-Tu servidor SQL es capaz de repararar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...<p />
+'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos en s&iacute;.</b><p />
+Tu servidor SQL es capaz de reparar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...<p />
 Si el problema persiste, contacta a tu hospedaje.<p />',
 'texte_restaurer_base' => 'Restaurar el contenido de una copia de respaldo',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  @dossier@.
