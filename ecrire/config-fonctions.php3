@@ -47,7 +47,7 @@ if ($flag_gd) {
 	echo _T('info_ajout_image');
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='left' class='verdana2'>";
+	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 	if ($gd_formats) {
 		afficher_choix('creer_preview', $creer_preview,
 			array('oui' => _T('item_choix_generation_miniature'),
@@ -70,7 +70,7 @@ if ($flag_gd) {
 	}
 
 	echo "</TD></TR>\n";
-	echo "<TR><TD ALIGN='right' COLSPAN=2>";
+	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 
@@ -102,7 +102,7 @@ afficher_choix('activer_moteur', $activer_moteur,
 		'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
 echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>";
@@ -147,7 +147,7 @@ if ($activer_statistiques != "non" AND $options == "avancees") {
 }
 
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -179,7 +179,7 @@ if ($options == "avancees") {
 			'non' => _T('item_non_activer_messages_avertissement')));
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -210,7 +210,7 @@ echo "</TD></TR>";
 
 
 // langue du site
-echo "<TR><TD ALIGN='left' class='verdana2'>";
+echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 echo _T('info_langue_principale')." - ";
 echo "\n<select name='changer_langue_site' class='fondl'>\n";
 echo "<option value='$langue_site' selected>".traduire_nom_langue($langue_site)."</option>\n";
@@ -222,7 +222,7 @@ while (list(,$l) = each ($langues_prop)) {
 echo "</select><br>\n";
 echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -253,7 +253,7 @@ if ($options == 'avancees') {
 	echo "</FONT>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='left' class='verdana2'>";
+	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo bouton_radio('charset', 'iso-8859-1',
 		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
 	echo "<br>";
@@ -271,7 +271,7 @@ if ($options == 'avancees') {
 		echo "<input type='hidden' name='charset_custom' value=''>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 
@@ -303,10 +303,10 @@ if ($options == 'avancees') {
 	echo "<INPUT TYPE='text' NAME='http_proxy' VALUE='$http_proxy' size='40' class='forml'>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	if ($http_proxy) {
-		echo "<p align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
+		echo "<p align='$spip_lang_left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
 			. _T('texte_test_proxy');
 		echo "</TD></TR>";
 
@@ -314,9 +314,9 @@ if ($options == 'avancees') {
 		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://rezo.net/spip-dev/' size='40' class='forml'>";
 		echo "</TD></TR>";
 
-		echo "<TR><TD ALIGN='right'>";
+		echo "<TR><TD ALIGN='$spip_lang_right'>";
 
-		echo "</font><div align='right'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='"._T('bouton_test_proxy')."' CLASS='fondo'></div>";
+		echo "</font><div align='$spip_lang_right'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='"._T('bouton_test_proxy')."' CLASS='fondo'></div>";
 	}
 	echo "</TD></TR>";
 
@@ -354,7 +354,7 @@ if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
 		'non' => _T('item_non_creer_fichiers_authent')), ' &nbsp; ');
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";

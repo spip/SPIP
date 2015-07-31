@@ -32,6 +32,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	exit;
 }
 
+
 //
 // Modifications
 //
@@ -88,7 +89,7 @@ debut_cadre_relief("racine-24.gif");
 		echo "</TD></TR>";
 	}
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";
@@ -130,60 +131,60 @@ if ($options == 'avancees') {
 	echo "</TD></TR>";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_surtitre');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_surtitre', $articles_surtitre,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_sous_titre');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_soustitre', $articles_soustitre,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_descriptif');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_descriptif', $articles_descriptif,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_chapeau_2');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_chapeau', $articles_chapeau,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_post_scriptum_2');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_ps', $articles_ps,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo _T('info_date_publication_anterieure');
 	echo "</TD>";
-	echo "<TD ALIGN='left' class='verdana2'>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('articles_redac', $articles_redac,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='right' COLSPAN=2>";
+	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";
@@ -205,13 +206,13 @@ if ($options == 'avancees') {
 	echo _T('texte_publication_articles_post_dates');
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='left' class='verdana2'>";
+	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('post_dates', $post_dates,
 		array('oui' => _T('item_publier_articles'),
 			'non' => _T('item_non_publier_articles')));
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -249,7 +250,7 @@ afficher_choix('activer_breves', $activer_breves,
 echo "</FONT>";
 echo "</TD></TR>\n";
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -298,7 +299,7 @@ if ($options == "avancees") {
 		echo "</TD></TR>";
 
 		echo "<TR>";
-		echo "<TD ALIGN='left' class='verdana2'>";
+		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 		afficher_choix('config_precise_groupes', $config_precise_groupes,
 			array('oui' => _T('item_utiliser_config_groupe_mots_cles'),
 				'non' => _T('item_non_utiliser_config_groupe_mots_cles')));
@@ -313,7 +314,7 @@ if ($options == "avancees") {
 			echo "</TD></TR>";
 
 			echo "<TR>";
-			echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+			echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 			afficher_choix('mots_cles_forums', $mots_cles_forums,
 				array('oui' => _T('item_ajout_mots_cles'),
 					'non' => _T('item_non_ajout_mots_cles')));
@@ -322,7 +323,7 @@ if ($options == "avancees") {
 		}
 	}
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -349,7 +350,7 @@ echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_referencement_sites')."</FONT></B>".aide ("reference")."</TD></TR>";
 
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 afficher_choix('activer_sites', $activer_sites,
 	array('oui' => _T('item_gerer_annuaire_site_web'),
 	'non' => _T('item_non_gerer_annuaire_site_web')));
@@ -389,14 +390,14 @@ if ($activer_sites != 'non') {
 	echo _T('texte_syndication');
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('activer_syndic', $activer_syndic,
 		array('oui' => _T('item_utiliser_syndication'),
 		'non' => _T('item_non_utiliser_syndication')));
 
 	if ($activer_syndic != "non" AND $options == "avancees") {
 		// Moderation par defaut des sites syndiques
-		echo "<p><hr><p align='left'>";
+		echo "<p><hr><p align='$spip_lang_left'>";
 		echo _T('texte_liens_sites_syndiques')."<p>";
 
 		afficher_choix('moderation_sites', $moderation_sites,
@@ -407,7 +408,7 @@ if ($activer_sites != 'non') {
 
 		$activer_moteur = lire_meta("activer_moteur");
 		if ($activer_moteur == "oui") {
-			echo "<p><hr><p align='left'>";
+			echo "<p><hr><p align='$spip_lang_left'>";
 			echo _T('texte_utilisation_moteur_syndiques')." ";
 			echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
 
@@ -425,7 +426,7 @@ if ($activer_sites != 'non') {
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 }
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -453,7 +454,7 @@ echo _T('texte_documents_joints_2');
 echo "</TD></TR>";
 
 echo "<TR>";
-echo "<TD align='left' class='verdana2'>";
+echo "<TD align='$spip_lang_left' class='verdana2'>";
 afficher_choix('documents_article', $documents_article,
 	array('oui' => _T('item_autoriser_documents_joints'),
 		'non' => _T('item_non_autoriser_documents_joints')), "<br>");
@@ -464,7 +465,7 @@ afficher_choix('documents_rubrique', $documents_rubrique,
 echo "</FONT>";
 echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";

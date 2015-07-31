@@ -73,6 +73,7 @@ function debut_cadre($style, $icone, $fonction) {
 	if ($GLOBALS['spip_lang_rtl']) {
 		$g = 'd';
 		$d = 'g';
+		$bgright = 'background-position: right; ';
 	} else {
 		$g = 'g';
 		$d = 'd';
@@ -84,7 +85,7 @@ function debut_cadre($style, $icone, $fonction) {
 		$retour_aff .= "\n<td class='$style-h$g'></td>";
 		$retour_aff .= "\n<td class='$style-h'>";
 		if ($fonction) {
-			$retour_aff .= "<div style='background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
+			$retour_aff .= "<div style='$bgright"."background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
 			$retour_aff .= "<img src='img_pack/$fonction'>";
 			$retour_aff .= "</div>";
 		}

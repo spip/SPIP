@@ -55,7 +55,7 @@ $forums_publics=lire_meta("forums_publics");
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mode_fonctionnement_defaut_forum_public')."</FONT></B> ".aide ("confforums")."</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 if ($forums_publics=="non") {
 	$checked = ' CHECKED';
 	$gras = '<b>'; $fingras = '</b>';
@@ -72,7 +72,7 @@ echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 echo _T('info_activer_forum_public');
 echo "</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 if ($forums_publics=="posteriori") {
 	$checked = ' CHECKED';
@@ -110,7 +110,7 @@ if (tester_mail()){
 
 echo "</TD></TR>\n";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 if ($options == 'avancees') {
 	echo "<ul><table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
@@ -139,7 +139,7 @@ else {
 }
 
 
-echo "<TR><TD ALIGN='right'>";
+echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -183,7 +183,7 @@ if ($options == "avancees") {
 	echo "</TD></TR>\n";
 
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -217,7 +217,7 @@ if ($options == "avancees") {
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -251,7 +251,7 @@ if (tester_mail()) {
 	echo _T('info_option_email');
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('prevenir_auteurs', $prevenir_auteurs,
 		array('oui' => _T('info_option_faire_suivre'),
 			'non' => _T('info_option_ne_pas_faire_suivre')));
@@ -273,7 +273,7 @@ if (tester_mail()) {
 	echo "</TD></TR>";
 
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 	if ($suivi_edito!="oui"){
 		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on'>";
 		echo " <label for='suivi_edito_on'>"._T('bouton_radio_envoi_annonces')."</label> ";
@@ -308,7 +308,7 @@ if (tester_mail()) {
 	echo _T('info_non_envoi_annonce_dernieres_nouveautes');
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 	if ($quoi_de_neuf != "oui") {
 		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on'>";
 		echo " <label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label> ";
@@ -329,7 +329,7 @@ if (tester_mail()) {
 	}
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
