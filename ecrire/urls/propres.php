@@ -60,20 +60,29 @@ function _generer_url_propre($type, $id_objet) {
 	else
 		$statut = 'statut';
 
+	// D'abord, essayer de recuperer l'URL existante si possible
 	$result = spip_query("SELECT url_propre, $statut, $champ_titre FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
 
-	// Essayer de recuperer l'URL si elle existe deja, 
-	// mais si c'est un admin qui passe par action/redirect, 
-	// la recalculer car les bases de son calcul ont peut-etre change
+	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
+	// ou en preview (astuce pour corriger un url-propre) + admin connecte
+	// Ne pas recalculer l'url-propre,
+	// sauf si :
+	// 1) il n'existe pas, ou
+	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
+	// 3) on le demande explicitement (preview) et on est admin connecte
+	$modif_url_propre = false;
+	if (function_exists('action_redirect_dist') AND
+	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
+	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
+		$modif_url_propre = true;
 
-	if ($row['url_propre'] 
-	AND (!function_exists('action_redirect_dist') 
-	     OR $GLOBALS['auteur_session']['statut'] != '0minirezo'))
+	if ($row['url_propre'] AND !$modif_url_propre)
 		return $row['url_propre'];
 
 	// Sinon, creer l'URL
-	include_spip('inc/filtres');//	inclue 'inc/charsets';
+	include_spip('inc/filtres');
+	include_spip('inc/charsets');
 	$url = translitteration(corriger_caracteres(
 		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
 		));
