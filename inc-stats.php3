@@ -77,6 +77,39 @@ function ecrire_stats() {
 		}
 	}
 
+	//
+	// popularite modele logarithmique (essai)
+	//
+if ($GLOBALS['populogarithme'] == 'oui') {
+	$a = 0.000160438; 	// EXP(LN(0.5)/3*24*60)-1
+	$b = 13.7964;		// (60 * 24) * (1 - POW((1-$a),60));
+
+	// 1. mise a jour a chaque hit
+	if ($id_article) {
+		$pts = ($log_referer == '') ? 1 : 2;
+		$query = "UPDATE spip_articles
+			SET popularite = popularite*POW(1-$a,NOW()-maj)+$b*$pts
+		    WHERE id_article = $id_article";
+		include_ecrire("inc_connect.php3"); // pas cool
+		if ($GLOBALS['db_ok'])
+			spip_query($query);
+	}
+
+
+	// 2. toutes les heures, update general pour faire decroitre les articles sans aucune visite
+	$date_popularite = lire_meta('date_stats_popularite');
+	if ((time() - $date_popularite) > 3600) {
+		include_ecrire("inc_connect.php3");
+		if ($GLOBALS['db_ok']) {
+			$query = "UPDATE spip_articles
+				SET popularite = popularite*POW(1-$a,NOW()-maj)";
+			spip_query($query);
+			include_ecrire("inc_meta.php3");
+			ecrire_meta("date_stats_popularite", time());
+			ecrire_metas();
+		}
+	}
+}
 	// Optimiser les referers
 	$date_refs = lire_meta('date_stats_referers');
 	if ((time() - $date_refs) > 24 * 3600) {
