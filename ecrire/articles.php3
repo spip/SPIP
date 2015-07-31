@@ -1310,9 +1310,11 @@ if ((lire_meta('multi_articles') == 'oui')
 				$ret .= "<td class='arial2'>".traduire_nom_langue($lang_trad)."</td>\n";
 			}
 
+			changer_typo($spip_lang);
+
 			// bloc traductions
 			if ($ret) {
-				echo "<div align='left' style='margin-top: 5px; padding: 0px; border: 1px dashed #999999; background-color: #f0f0f0;' $dir_lang>";
+				echo "<div align='$spip_lang_left' style='margin-top: 5px; padding: 0px; border: 1px dashed #999999; background-color: #f0f0f0;' $dir_lang>";
 				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
 				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'><b>"._T('trad_article_traduction')."</b></font></td></tr>";
 				echo $ret;
