@@ -46,10 +46,10 @@ function style_menu_rubriques($i) {
 	global $browser_name, $browser_version;
 	global $couleur_claire, $spip_lang_left;
 
+	$espace = '';
 	if (eregi("mozilla", $browser_name)) {
 		$style = "padding-$spip_lang_left: 16px; "
 		. "margin-$spip_lang_left: ".(($i-1)*16)."px;";
-		$espace = '';
 	} else {
 		$style = '';
 		for ($count = 0; $count <= $i; $count ++)
@@ -114,6 +114,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	list($style,$espace) = style_menu_rubriques($niv);
 
 	// creer l'<option> pour la rubrique $root
+	$r = '';
 	if (isset($data[$root])) # pas de racine sauf pour les rubriques
 	{
 		$r .= "<option$selected value='$root'$class$style>$espace"
@@ -123,7 +124,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	
 	// et le sous-menu pour ses enfants
 	$sous = '';
-	if ($enfants[$root])
+	if (isset($enfants[$root]))
 		foreach ($enfants[$root] as $sousrub)
 			$sous .= sous_menu_rubriques($id_rubrique, $sousrub,
 				$niv+1, $data, $enfants, $exclus, $restreint, $type);

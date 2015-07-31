@@ -82,7 +82,7 @@ function forum_envoi(
 			$parent .= fin_cadre_forum(true);
 		}
 
-	} else $parent = $titre_parent = '';
+	} else $parent = $titre_parent = $id_message = '';
 
 	if ($script == 'articles') {
 	  $table ='articles';
@@ -198,12 +198,7 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	  "</label></b><br />\n" .
 	  _T('info_creation_paragraphe') .
 	  "<br />\n" .
-	  afficher_barre('document.formulaire.texte', true) .
-	  "<textarea id='texte' name='texte' " .
-	  $GLOBALS['browser_caret'] .
-	  " rows='15' class='formo' cols='40'>" .
-	  entites_html($texte) .
-	  "</textarea>\n" .
+	  afficher_textarea_barre($texte, true) .
 	  "<input type='hidden' name='modif_forum' value='oui' />\n" .
 	  (!($statut != 'perso' AND $options == "avancees")
 	   ? ''
