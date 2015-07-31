@@ -126,7 +126,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 			$titre = htmlspecialchars($titre_rubrique);
 			
 			echo "<li>", http_href( generer_url_public('backend', "id_rubrique=$id_rubrique"), 
-	'<img src="'._DIR_IMG_PACK.'feed.png'.'" border="0" />&nbsp; ' . $titre_rubrique,
+	'<img src="'._DIR_IMG_PACK.'feed.png'.'" border="0" alt="RSS" />&nbsp; ' . $titre_rubrique,
 					       $titre),
 			  "</li>\n";
 		}

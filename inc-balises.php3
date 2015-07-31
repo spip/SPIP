@@ -770,15 +770,15 @@ function balise_ENV_dist($p, $src = NULL) {
 }
 
 //
-// #META
+// #CONFIG
 // les reglages du site
 //
-// Par exemple #META{gerer_trad} donne 'oui' ou 'non' selon le reglage
+// Par exemple #CONFIG{gerer_trad} donne 'oui' ou 'non' selon le reglage
 // Attention c'est brut de decoffrage de la table spip_meta
 //
 // La balise fonctionne exactement comme #ENV (ci-dessus)
 //
-function balise_META_dist($p) {
+function balise_CONFIG_dist($p) {
 	if(function_exists('balise_ENV'))
 		return balise_ENV($p, '$GLOBALS["meta"]');
 	else
