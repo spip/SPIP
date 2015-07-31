@@ -92,7 +92,11 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	}
 
 	$_contexte = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
-	if (isset($_contexte['env'])) {
+
+	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
+	if (isset($_contexte['env'])
+	|| isset($_contexte['self'])
+	) {
 		$flag_env = true;
 		unset($_contexte['env']);
 	}

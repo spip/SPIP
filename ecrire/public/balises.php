@@ -1187,7 +1187,10 @@ function balise_INCLURE_dist($p) {
 	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	if (isset($_contexte['fond'])) {
-		if (isset($_contexte['env'])) {
+		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
+		if (isset($_contexte['env'])
+		|| isset($_contexte['self'])
+		) {
 			$flag_env = true;
 			unset($_contexte['env']);
 		}
