@@ -1687,7 +1687,20 @@ class sqlite_traiter_requete{
 				$this->query .= $suite;
 			}
 		}
-		
+
+		// Correction possible des divisions entieres
+		// Le standard SQL (lequel? ou?) semble indiquer que
+		// a/b=c doit donner c entier si a et b sont entiers 4/3=1.
+		// C'est ce que retournent effectivement SQL Server et SQLite
+		// Ce n'est pas ce qu'applique MySQL qui retourne un reel : 4/3=1.333...
+		// 
+		// On peut forcer la conversion en multipliant par 1.0 avant la division
+		// /!\ SQLite 3.5.9 Debian/Ubuntu est victime d'un bug en plus ! 
+		// cf. https://bugs.launchpad.net/ubuntu/+source/sqlite3/+bug/254228
+		//     http://www.sqlite.org/cvstrac/tktview?tn=3202
+		// (4*1.0/3) n'est pas rendu dans ce cas !
+		# $this->query = str_replace('/','* 1.00 / ',$this->query);
+			
 		// Correction Antiquotes
 		// ` => rien
 		$this->query = str_replace('`','',$this->query);
