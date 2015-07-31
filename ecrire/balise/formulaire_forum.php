@@ -268,21 +268,21 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)
 	if ($ida) {
-		$titre = spip_abstract_fetsel('titre', 'spip_articles', "id_article = $ida");
+		$titre = spip_abstract_fetsel('titre', 'spip_articles', "statut = 'publie' AND id_article = $ida");
 		$table = "articles";
 	} else if ($idb) {
-		$titre = spip_abstract_fetsel('titre', 'spip_breves', "id_breve = $idb");
+		$titre = spip_abstract_fetsel('titre', 'spip_breves', "statut = 'publie' AND id_breve = $idb");
 		$table = "breves";
 	} else if ($ids) {
-		$titre = spip_abstract_fetsel('nom_site AS titre', 'spip_syndic', "id_syndic = $ids");
+		$titre = spip_abstract_fetsel('nom_site AS titre', 'spip_syndic', "statut = 'publie' AND id_syndic = $ids");
 		$table = "syndic";
 	} else if ($idr) {
-		$titre = spip_abstract_fetsel('titre', 'spip_rubriques', "id_rubrique = $idr");
+		$titre = spip_abstract_fetsel('titre', 'spip_rubriques', "statut = 'publie' AND id_rubrique = $idr");
 		$table = "rubriques";
 	}
 
-	if ($idf)
-		$titre = spip_abstract_fetsel('titre', 'spip_forum', "id_forum = $idf");
+	if ($idf AND $titre)
+		$titre = spip_abstract_fetsel('titre', 'spip_forum', "statut = 'publie' AND id_forum = $idf");
 
 	if ($titre) {
 		$titre = supprimer_numero($titre['titre']);
