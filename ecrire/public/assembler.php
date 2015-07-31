@@ -419,7 +419,7 @@ function f_msie ($texte) {
 		include_spip('inc/filtres'); # pour url_absolue :(
 		$texte .=
 "<script type='text/javascript'><!--
-if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".url_absolue(find_in_path('javascript/jquery.iepnghack.js'))."' , function() { $.pngfix('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
+if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '".url_absolue(find_in_path('javascript/jquery.ifixpng.js'))."' , function() { $.ifixpng('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').ifixpng(); } );
 // --></script>\n";
 	}
 

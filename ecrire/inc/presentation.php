@@ -1264,8 +1264,8 @@ function fin_page()
 		? "<script type='text/javascript'><!--
 			try { document.execCommand('BackgroundImageCache', false, true); } catch(err) {};
 			if (window.jQuery && jQuery.browser.msie) jQuery.getScript( '"
-			.url_absolue(find_in_path('javascript/jquery.iepnghack.js'))
-			."' , function() { $.pngfix('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').pngfix(); } );
+			.url_absolue(find_in_path('javascript/jquery.ifixpng.js'))
+			."' , function() { $.ifixpng('".url_absolue(_DIR_RACINE.'rien.gif')."'); jQuery('img').ifixpng(); } );
 			// --></script>"
 		: '';
 

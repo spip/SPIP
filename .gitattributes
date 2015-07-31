@@ -240,7 +240,7 @@ dist/javascript/async_upload.js -text
 dist/javascript/bgiframe.js -text
 dist/javascript/dragdrop_interface.js -text
 dist/javascript/jquery.form.js -text
-dist/javascript/jquery.iepnghack.js -text
+dist/javascript/jquery.ifixpng.js -text
 dist/javascript/jquery.js -text
 dist/javascript/multilang.js -text
 dist/javascript/pause.js -text
