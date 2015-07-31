@@ -59,6 +59,8 @@ div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
 div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
 div#top .formulaire_recherche label { display: none; }
+div#top .formulaire_recherche input.forml { width: 70%; }
+div#top .formulaire_recherche input.bouton { vertical-align: middle; }
 
 div#conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 div#contenu { padding-top: 0.30em; }
@@ -96,10 +98,9 @@ div#pied img { vertical-align: bottom; }
 
 .chapo { margin-bottom: 1.50em; font-weight: bold; color: #669; line-height: 1.40em; }
 .texte { line-height: 1.60em; }
+.hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 .ps, .notes { margin-bottom: 2em; line-height: 1.40em; }
 .notes { clear: both; font-size: 0.90em; }
-
-.hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 
 abbr.published { border: 0; }
 
