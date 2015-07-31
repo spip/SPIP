@@ -698,9 +698,16 @@ function calculer_prochain_postdate($check= false) {
 	
 	if ($t) {
 		$t =  $t['date'];
-		ecrire_meta('date_prochain_postdate', strtotime($t));
-	} else
+		if (!isset($GLOBALS['meta']['date_prochain_postdate'])
+			OR $t<>$GLOBALS['meta']['date_prochain_postdate']){
+			ecrire_meta('date_prochain_postdate', strtotime($t));
+			ecrire_meta('derniere_modif', time());
+		}
+	}
+	else {
 		effacer_meta('date_prochain_postdate');
+		ecrire_meta('derniere_modif', time());
+	}
 
 	spip_log("prochain postdate: $t");
 }
