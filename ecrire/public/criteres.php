@@ -971,7 +971,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	return array($arg, $op, $val, $col_alias, $where_complement);
 }
 
-function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table)
+function calculer_critere_infixe_externe(&$boucle, $crit, $op, $desc, $col, $col_alias, $table)
 {
 	global $exceptions_des_jointures;
 	$where = '';
