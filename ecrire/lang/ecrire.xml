@@ -39,7 +39,7 @@
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
 		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=en" total="792" traduits="790" relire="0" modifs="0" nouveaux="2" pourcent="99.75">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=en" total="792" traduits="791" relire="0" modifs="0" nouveaux="1" pourcent="99.87">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
