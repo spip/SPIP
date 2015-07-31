@@ -274,7 +274,7 @@ $rubon = "siteon$id_syndic";
 $ruboff = "siteoff$id_syndic";
 
 if ($id_syndic>0 AND $flag_administrable)
-	afficher_boite_logo($rubon, $ruboff, _T('logo_site').aide ("rublogo"), _T('logo_survol'));
+	afficher_boite_logo($rubon, $ruboff, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'));
 
 
 debut_droite();

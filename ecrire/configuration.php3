@@ -408,7 +408,7 @@ if ($activer_sites != 'non') {
 		$activer_moteur = lire_meta("activer_moteur");
 		if ($activer_moteur == "oui") {
 			echo "<p><hr><p align='left'>";
-			echo _T('texte_utilisation_moteur_syndiques');
+			echo _T('texte_utilisation_moteur_syndiques')." ";
 			echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><p>";
 
 			afficher_choix('visiter_sites', $visiter_sites,

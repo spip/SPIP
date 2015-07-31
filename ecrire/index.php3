@@ -81,7 +81,7 @@ else echo debut_block_invisible("info_perso");
 
 if (lire_meta('activer_messagerie') != 'non') {
 	if ($connect_activer_messagerie != "non") {
-		echo "<br>"._T('info_utilisation_messagerie_interne');
+		echo "<br>"._T('info_utilisation_messagerie_interne')." ";
 		if ($connect_activer_imessage != "non")
 			echo _T('info_nom_utilisateurs_connectes');
 		else
@@ -373,7 +373,7 @@ if ($relief) {
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a>"._T('info_liens_syndiques_2')."</small>";
+			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
 	}
 
 	// Les forums en attente de moderation 
@@ -382,10 +382,10 @@ if ($relief) {
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
 			echo "<br><small> <a href='controle_forum.php3'>".$row['compte']; 
 			if ($row['compte']>1)
-				echo _T('info_liens_syndiques_3')."</a>"._T('info_liens_syndiques_4');  
+				echo " "._T('info_liens_syndiques_3')."</a> "._T('info_liens_syndiques_4');  
 			else
-				echo _T('info_liens_syndiques_5')."</a>"._T('info_liens_syndiques_6');
-			echo _T('info_liens_syndiques_7')."</small>.";
+				echo " "._T('info_liens_syndiques_5')."</a> "._T('info_liens_syndiques_6');
+			echo " "._T('info_liens_syndiques_7')."</small>.";
 		}
 	}
 

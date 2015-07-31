@@ -145,7 +145,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			else if (count($resultat) == 1) {
 				list(, $nouv_mot) = each($resultat);
 				$nouveaux_mots[] = $nouv_mot;
-				echo "<B>"._T('info_mot_cle_ajoute');
+				echo "<B>"._T('info_mot_cle_ajoute')." ";
 				if ($table == 'articles') echo _T('info_l_article');
 				else if ($table == 'breves') echo _T('info_la_breve');
 				else if ($table == 'rubriques') echo _T('info_la_rubrique');

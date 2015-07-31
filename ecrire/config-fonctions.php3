@@ -268,7 +268,7 @@ if ($options == 'avancees') {
 		_T('bouton_radio_personnalise'), $charset != 'utf-8' && $charset != 'iso-8859-1');
 	echo "<br>";
 	if ($charset != 'utf-8' && $charset != 'iso-8859-1') {
-		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_entrer_code_alphabet');
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_entrer_code_alphabet')."&nbsp;";
 		echo "<input type='text' name='charset_custom' class='fondl' value='$charset' size='15'>";
 	}
 	else

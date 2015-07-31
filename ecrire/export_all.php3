@@ -90,7 +90,7 @@ if (!$etape OR $etape == 13){
 
 
 
-	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))."<a href='index.php3'>"._T('info_sauvegarde_reussi_03')."</a>"._T('info_sauvegarde_reussi_04')."\n";
+	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='index.php3'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 }
 else {
 	$etape_suivante = $etape + 1;

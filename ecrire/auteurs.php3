@@ -14,9 +14,9 @@ $retour = "auteurs.php3?";
 if ($tri) {
 	$retour .= "tri=$tri";
 	if ($tri=='nom' OR $tri=='statut')
-		$partri = _T('info_par_tri', array('tri' => $tri));
+		$partri = " "._T('info_par_tri', array('tri' => $tri));
 	else if ($tri=='nombre')
-		$partri = _T('info_par_nombre_article');
+		$partri = " "._T('info_par_nombre_article');
 }
 
 if ($visiteurs == "oui") {

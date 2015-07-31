@@ -416,7 +416,7 @@ if (count($log)>0){
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo _T('info_maximum').$max;
-		echo "<br>"._T('info_moyenne').round($moyenne);
+		echo "<br>"._T('info_moyenne')." ".round($moyenne);
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo _T('info_aujourdhui').' '.$visites_today;
@@ -425,7 +425,7 @@ if (count($log)>0){
 
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
-		echo "<b>"._T('info_total')."$total_absolu</b>";
+		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
 		if ($id_article) {
 			if ($classement[$id_article] > 0) {
@@ -437,7 +437,7 @@ if (count($log)>0){
 			}
 		} else {
 			echo "<font size=1>";
-			echo "<br>"._T('info_popularite_2');
+			echo "<br>"._T('info_popularite_2')." ";
 			echo ceil(lire_meta('popularite_total'));
 			echo "</font>";
 		}
@@ -618,8 +618,8 @@ if ($activer_statistiques_ref != "non"){
 	
 	
 		if ($visites > 5) echo "<font color='red'>$visites liens : </font>";
-		else if ($visites > 1) echo "$visites "._T('lnfo_liens');
-		else echo "<font color='#999999'>$visites "._T('info_lien')."</font>";
+		else if ($visites > 1) echo "$visites "._T('lnfo_liens')."&nbsp;";
+		else echo "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
 	
 		echo stats_show_keywords($referer, $referer);
 	}

@@ -265,9 +265,9 @@ $ruboff = "ruboff$coll";
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 	if ($coll > 0)
-		afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique').aide ("rublogo"), _T('logo_survol'));
+		afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
 	else
-		afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique').aide ("rublogo"), _T('logo_survol'));
+		afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
 }
 
 
