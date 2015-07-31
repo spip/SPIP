@@ -779,10 +779,15 @@ function forum_logo($statut)
 function envoi_link($nom_site_spip, $minipres=false) {
 	global $visiteur_session, $spip_display, $spip_lang;
 
+	$c = (is_array($visiteur_session)
+	AND is_array($visiteur_session['prefs']))
+		? $visiteur_session['prefs']['couleur']
+		: 1;
+
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$paramcss = 'ltr='
 	. $GLOBALS['spip_lang_left'] . '&'
-	. $couleurs($visiteur_session['prefs']['couleur']);
+	. $couleurs($c);
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
