@@ -35,11 +35,17 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	echo "<table cellpadding=0 cellspacing=0 border=0 width='".($largeur_table+10+$largeur_gauche)."'><tr>";
 	
 	echo "<td width='$largeur_gauche' class='verdana1' valign='top'>";
-		echo "<br />";
+
+		// date du jour
+		$today=getdate(time());
+		$mois=$today["mon"];
+		$annee=$today["year"];
 		
+		if ($mois != $mois_today OR $annee != $annee_today) {
+			icone(_T("info_aujourdhui")."<br>".nom_mois("$annee-$mois-1")." $annee", "calendrier.php3", "calendrier-24.gif", "", "center");
+		}
 		$annee_avant = $annee_today - 1;
 		$annee_apres = $annee_today + 1;
-		
 		
 		if ($mois_today <=6) {
 			debut_boite_info();
