@@ -275,7 +275,7 @@ $spip_pipeline = array(
 	'ajouter_onglets' => '',
 	'body_prive' => '',
 	'configurer_liste_metas'=>'',
-	'compter_contributions_visiteur'=>'', 
+	'compter_contributions_auteur'=>'',
 	'declarer_tables_interfaces'=>'',
 	'declarer_tables_principales'=>'',
 	'declarer_tables_auxiliaires'=>'',
@@ -316,7 +316,6 @@ $spip_pipeline = array(
 	'pre_indexation' => '',
 	'requete_dico' => '',
 	'rubrique_encours' => '',
-	'supprimer_objets_lies' => '',
 	'agenda_rendu_evenement' => '',
 	'taches_generales_cron' => '',
 	'calculer_rubriques' => '',
@@ -329,6 +328,7 @@ $spip_pipeline = array(
 	'styliser' => '||styliser_par_rubrique|styliser_par_langue',
 	'trig_calculer_prochain_postdate' => '',
 	'trig_propager_les_secteurs' => '',
+	'trig_supprimer_objets_lies' => '',
 );
 
 # la matrice standard (fichiers definissant les fonctions a inclure)

@@ -75,20 +75,20 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$vals[] =  !$url ? "&nbsp;"
 	  :  "<a href='$url'>".couper(sinon(typo($row['nom_site']), $row["url_site"]),30)."</a>";
 
-	$contributions = "";
+	$contributions = array();
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
 		$in = sql_in('statut', 
 			($connect_statut == "0minirezo"
 			? array('prepa', 'prop', 'publie', 'refuse')
 			: array('prop', 'publie')));
 		if ($cpt = sql_countsel("spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON A.id_article=L.id_article", "L.id_auteur=$id_auteur AND $in")){
-			$contributions = ($cpt>1?$cpt.' '._T('info_article_2'):_T('info_1_article'));
+			$contributions[] = ($cpt>1?$cpt.' '._T('info_article_2'):_T('info_1_article'));
 		}
-	} 
-	else 
-		$contributions = pipeline('compter_contributions_visiteur',array('args'=>array('id_auteur'=>$id_auteur,'row'=>$row),'data'=>''));
+	}
 
-	$vals[] =  $contributions?$contributions:"&nbsp;";
+	$contributions = pipeline('compter_contributions_auteur',array('args'=>array('id_auteur'=>$id_auteur,'row'=>$row),'data'=>$contributions));
+
+	$vals[] =  count($contributions)?implode('<br />',$contributions):"&nbsp;";
 
 	return $vals;
 }
