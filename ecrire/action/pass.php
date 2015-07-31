@@ -83,7 +83,7 @@ $message = '';
 		    'action' => generer_url_action('pass')));
 }
 
-function spip_action_pass_dist()
+function pass_dist()
 {
 	global $p, $oubli;
 	install_debut_html( _T('pass_mot_oublie'));

@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function spip_action_cookie_dist() {
+function cookie_dist() {
 	include_ecrire ("inc_session");
 	include_ecrire('inc_cookie');
 	spip_cookie_dist();

@@ -22,7 +22,7 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-function spip_action_autoriser_dist()
+function autoriser_dist()
 {
   global $file, $arg, $toujours;
 
@@ -109,7 +109,8 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 
 // pour envoyer un article proprement
 // spip_action.php?action=telecharger&arg=$id_article
-
+// Code mort ???
+/*
 function spip_action_telecharger_dist()
 {
   global $arg;
@@ -135,5 +136,6 @@ WHERE	id_article=" . intval($arg)
       print $text;
     }
 }
-     
+*/
+
 ?>

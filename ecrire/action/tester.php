@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_meta");
 
 // Tester nos capacites
-function spip_action_tester_dist() {
+function tester_dist() {
 	global $pnmscale_command,$arg;
 
 	// verifier les formats acceptes par GD

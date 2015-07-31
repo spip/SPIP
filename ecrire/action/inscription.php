@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function spip_action_inscription_dist() {
+function inscription_dist() {
 
 	include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
 	include_ecrire('public-global'); 
