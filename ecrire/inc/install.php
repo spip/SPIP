@@ -10,11 +10,34 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'installation de SPIP
+ *
+ * @package SPIP\Installation
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//  Pour ecrire les fichiers memorisant les parametres de connexion
 
-// http://doc.spip.org/@install_fichier_connexion
+/**
+ * Écrit un fichier PHP nécessitant SPIP
+ *
+ * Écrit le texte transmis dans un fichier PHP. Cette fonction
+ * ajoute les entêtes PHP et le test de sécurité vérifiant que SPIP
+ * est chargé.
+ *
+ * @example
+ *     install_fichier_connexion(_FILE_CONNECT_TMP, $contenu);
+ * 
+ * @internal
+ *     [todo] Renommer cette fonction qui peut servir à d'autres utilisations ?
+ * 
+ * @param string $nom
+ *     Chemin du fichier à créer
+ * @param string $texte
+ *     Code source du fichier (sans l'ouverture/fermeture PHP)
+ * @return void
+**/
 function install_fichier_connexion($nom, $texte)
 {
 	$texte = "<"."?php\n"
@@ -25,10 +48,30 @@ function install_fichier_connexion($nom, $texte)
 	ecrire_fichier($nom, $texte);
 }
 
-// Attention etape_ldap4 suppose qu'il n'y aura qu'un seul appel de fonction
-// dans le fichier produit.
 
-// http://doc.spip.org/@install_connexion
+/**
+ * Retourne le code source d'un fichier de connexion à une base de données
+ *
+ * Le code est un appel à la fonction spip_connect_db()
+ *
+ * @see spip_connect_db()
+ *
+ * @internal
+ *     Attention etape_ldap4 suppose qu'il n'y aura qu'un seul appel de fonction
+ *     dans le fichier produit.
+ * 
+ * @param string $adr       Adresse de la base de données {@example 'localhost'}
+ * @param string $port      Numéro de port
+ * @param string $login     Login de connexion
+ * @param string $pass      Mot de passe de connexion
+ * @param string $base      Nom de la base de données
+ * @param string $type      Moteur SQL {@example 'sqlite3', 'mysql'}
+ * @param string $pref      Préfixe des tables {@example 'spip'}
+ * @param string $ldap      ?
+ * @return string
+ *     Texte du fichier de connexion
+ * 
+**/
 function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $ldap='')
 {
 	$adr = addcslashes($adr,"'\\");
@@ -45,10 +88,18 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 	. ",'$type', '$pref','$ldap');\n";
 }
 
-// Analyse si un fichier contient le resultat de la fonction install_connexion
-// y compris ce qu'elle produisait dans les versions precedentes
 
-// http://doc.spip.org/@analyse_fichier_connection
+/**
+ * Analyse un fichier de connexion à une base de données
+ * 
+ * Le fichier contient normalement le resultat de la fonction install_connexion().
+ * L'analyse tient également compte des syntaxes des versions precedentes.
+ * 
+ * @param $string $file
+ *     Chemin du fichier de connexion à analyser
+ * @return array
+ *     Tableau des informations sur la connexion
+**/
 function analyse_fichier_connection($file)
 {
 	$s = @join('', file($file));
@@ -68,7 +119,19 @@ function analyse_fichier_connection($file)
 	return '';
 }
 
-// http://doc.spip.org/@bases_referencees
+/**
+ * Liste les connecteurs aux bases SQL disponibles
+ *
+ * Dans le code SPIP ces connecteurs sont souvent appelés $connect ou $serveur
+ * 
+ * @example
+ *     $bases = bases_referencees(_FILE_CONNECT_TMP);
+ * 
+ * @param $string $exclu
+ *     Exclure un connecteur particulier (nom du fichier)
+ * @return array
+ *     Liste des noms de connecteurs
+**/
 function bases_referencees($exclu='')
 {
 	$tables = array();

@@ -20,7 +20,7 @@
  * Les symboles sql_* (constantes et nom de fonctions) sont reserves
  * a cette interface, sans quoi le gestionnaire de version dysfonctionnera.
  *
- * @package SQL\API
+ * @package SPIP\SQL\API
  * @version 1
  */
 

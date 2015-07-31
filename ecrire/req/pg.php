@@ -14,7 +14,7 @@
  * Ce fichier contient les fonctions gerant
  * les instructions SQL pour PostgreSQL
  *
- * @package SQL\PostgreSQL
+ * @package SPIP\SQL\PostgreSQL
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
