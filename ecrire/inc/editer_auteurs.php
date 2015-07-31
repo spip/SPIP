@@ -117,28 +117,25 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 	return ajax_action_greffe("editer_auteurs", $id, $res);
 }
 
-// http://doc.spip.org/@determiner_auteurs_objet
-function determiner_auteurs_objet($type, $id, $cond='', $limit='')
+// Retourne les auteurs attaches a l'objet $id de type $type
+// ou rien s'il y en a trop
+
+function determiner_auteurs_objet($type, $id, $cond='', $limit=200)
 {
-	$les_auteurs = array();
-	if (!preg_match(',^[a-z]*$,',$type)) return $les_auteurs; 
+	if (!preg_match(',^[a-z]*$,',$type)) return array();
 
-	$jointure = table_jointure('auteur', $type);
-	$result = sql_select("id_auteur", "spip_{$jointure}", "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : ''),'','', $limit);
-
-	return $result;
+	$jointure = 'spip_' . table_jointure('auteur', $type);
+	$cond = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
+	if (sql_countsel($jointure, $cond) > $limit)
+	  return array();
+	else return sql_allfetsel("id_auteur", $jointure, $cond);
 }
+
 // http://doc.spip.org/@determiner_non_auteurs
-function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
+function determiner_non_auteurs($type, $id, $auteurs, $order)
 {
-	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
-	if (sql_count($res)<200){ // probleme de performance au dela, on ne filtre plus
-		$cond = array();
-		while ($row = sql_fetch($res))$cond[] = $row['id_auteur'];
-		$cond = sql_in("id_auteur", $cond, 'NOT');
-	} else  $cond = '';
-	sql_free($res);
-	return auteurs_autorises($cond, $order);
+	$cond = auteurs_autorises(determiner_auteurs_objet($type, $id, $auteurs));
+	return sql_select('*', 'spip_auteurs', $cond, '', $order);
 }
 
 // http://doc.spip.org/@rechercher_auteurs_objet
@@ -152,8 +149,8 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 	elseif (preg_match('/^\d+$/',$ids)) {
 
-		$row = sql_fetsel("nom", "spip_auteurs", "id_auteur=$ids");
-		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['nom'])."</span></b></span></li></ul>";
+		$nom = sql_getfetsel("nom", "spip_auteurs", "id_auteur=$ids");
+		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($nom)."</span></b></span></li></ul>";
 	}
 	else {
 		$ids = preg_replace('/[^0-9,]/','',$ids); // securite
