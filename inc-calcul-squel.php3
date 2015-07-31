@@ -835,7 +835,9 @@ function parser($texte) {
 		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
-		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
+		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL',
+		'LOGO_AUTEUR', 'LOGO_AUTEUR_NORMAL', 'LOGO_AUTEUR_SURVOL', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT',
+		'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 'EMBED_DOCUMENT',
 		'IP', 'VISITES', 'POPULARITE', 'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
@@ -1151,6 +1153,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'LOGO_ARTICLE_RUBRIQUE':
 	case 'LOGO_ARTICLE_SURVOL':
 	case 'LOGO_AUTEUR':
+	case 'LOGO_AUTEUR_NORMAL':
+	case 'LOGO_AUTEUR_SURVOL':
 	case 'LOGO_SITE':
 	case 'LOGO_BREVE':
 	case 'LOGO_BREVE_RUBRIQUE':
@@ -1227,6 +1231,18 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			list($logon, $logoff) = IMG_image(image_auteur($contexte["id_auteur"]));
 			';
 		}
+		else if ($type_logo == 'AUTEUR_NORMAL') {
+			$milieu .= '
+			list($logon,) = IMG_image(image_auteur($contexte["id_auteur"]));
+			$logoff = "";
+			';
+		}
+		else if ($type_logo == 'AUTEUR_SURVOL') {
+			$milieu .= '
+			list(,$logon) = IMG_image(image_auteur($contexte["id_auteur"]));
+			$logoff = "";
+			';
+		}
 		else if ($type_logo == 'BREVE') {
 			$milieu .= '
 			list($logon, $logoff) = IMG_image(image_breve($contexte["id_breve"]));
@@ -1234,9 +1250,9 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		else if ($type_logo == 'BREVE_RUBRIQUE') {
 		  $milieu .= '
-		  list($logon, $logoff) = IMG_image(image_breve($contexte["id_breve"]));
-		  if (!$logon)
-			list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
+			list($logon, $logoff) = IMG_image(image_breve($contexte["id_breve"]));
+			if (!$logon)
+				list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 		  ';
 		}
 		else if ($type_logo == 'SITE') {
@@ -1262,7 +1278,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		else if ($type_logo == 'ARTICLE_SURVOL') {
 			$milieu .= '
-			list(, $logon) = IMG_image(image_article($contexte["id_article"]));
+			list(,$logon) = IMG_image(image_article($contexte["id_article"]));
 			$logoff = "";
 			';
 		}
