@@ -5,7 +5,7 @@ Appel au script php en attendant de reecrire le head ici
 ]
 <meta http-equiv="Content-Type" content="text/html[; charset=(#CONFIG{charset})]" />
 <script type='text/javascript'>/*<![CDATA[*/
-var url_menu_rubrique="./?exec=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
+var url_menu_rubrique="[(#EVAL{_DIR_RACINE}|sinon{./})]?action=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
 (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
 [(#EVAL{$_COOKIE}|table_valeur{spip_accepte_ajax}|>={1}|non)
 function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|replace{'&amp;','\x26'})]"});}
