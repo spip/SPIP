@@ -590,7 +590,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		if ($exceptions_des_jointures[$col])
 		  // on ignore la table, quel luxe!
 			list($t, $col) = $exceptions_des_jointures[$col];
-		$table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
+		$table = calculer_critere_externe_init($boucle, $col, $desc, $crit, $t);
 	  }
 	}
 	// ajout pour le cas special d'une condition sur le champ statut:
@@ -629,9 +629,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
 // pour selectioner ce qui a exactement ces 2 mots-cles.
 
-function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
+function calculer_critere_externe_init(&$boucle, $col, $desc, $crit, $checkarrivee = false)
 {
-	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle, $checkarrivee);
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
 		if ($t) if (!trouver_champ('/\b' . $t  . ".$col" . '\b/', $boucle->where)) return $t;
@@ -798,11 +798,12 @@ function trouver_def_table($nom, &$boucle)
 			 $boucle->id_boucle);
 	}
 
-function trouver_champ_exterieur($cle, $joints, &$boucle)
+function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
   foreach($joints as $k => $join) {
     if ($join && $table = trouver_def_table($join, $boucle)) {
-      if (array_key_exists($cle, $table[1]['field'])) 
+      if (array_key_exists($cle, $table[1]['field'])
+      	&& ($checkarrivee==false || $checkarrivee==$table[0])) // si on sait ou on veut arriver, il faut que ca colle
 	return  $table;
     }
   }
