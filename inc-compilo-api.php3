@@ -43,6 +43,7 @@ class Boucle {
 	var $limit;
 	var $group = '';
 	var $order = '';
+	var $default_order = '';
 	var $date = 'date' ;
 	var $hash = false ;
 	var $lien = false;

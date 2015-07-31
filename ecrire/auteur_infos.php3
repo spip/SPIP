@@ -435,7 +435,7 @@ if ($connect_statut == "0minirezo"
 	if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
 		echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
 	echo "<OPTION".mySel("5poubelle",$statut).
-	  " style='background:url(" . _DIR_RESTREINT . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
+	  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
 
 	echo "</SELECT></center>\n";
 	fin_cadre_relief();
