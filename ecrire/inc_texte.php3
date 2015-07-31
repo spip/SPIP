@@ -325,7 +325,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 						$param_emb .= " $nom='$valeur'";
 						if ($nom == "controls" AND $valeur == "All") { 
 							$largeur = $largeur;
-							$hauteur = 90;
+							$hauteur = 100;
 						}
 					/*	if ($valeur == "PositionSlider") { 
 							$largeur = $largeur-30;
@@ -344,9 +344,9 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		
 		}
 		else if ($inclus == "embed" AND $real) {
-			$vignette .= embed_document ($id_document, "controls=ImageWindow|console=Console$id_document|nojava=true|$les_parametres", false);
+			$vignette .= embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= "<br>";
-			$vignette .= embed_document ($id_document, "controls=All|console=Console$id_document|nojava=true|$les_parametres", false);
+			$vignette .= embed_document ($id_document, "controls=All|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			//$vignette .= embed_document ($id_document, "controls=PositionSlider|console=Console$id_document|$les_parametres", false);
 		}
 		else if ($inclus == "image") {
