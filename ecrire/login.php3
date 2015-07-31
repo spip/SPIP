@@ -39,7 +39,7 @@ echo "<p>";
 affiche_formulaire_login($login, './ecrire/index.php3?essai_cookie=oui', './ecrire/login.php3');
 
 
-if ($echec_cookie == "oui") {
+if ($echec_cookie == "oui" AND $php_module) {
 	echo "<form action='index.php3' method='get'>";
 	echo "<fieldset>\n";
 	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
