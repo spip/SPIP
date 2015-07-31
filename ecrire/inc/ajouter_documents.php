@@ -373,7 +373,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 <input type='hidden' name='iframe_redirect' value='$iframe_redirect' />
 <input type='hidden' name='hash' value='$hash' />
 <input type='hidden' name='chemin' value='$zip' />
-<input type='hidden' name='arg' value='$arg))' />
+<input type='hidden' name='arg' value='$arg' />
 <input type='radio' checked='checked' name='sousaction5' value='5'>" .
 	  	_T('upload_zip_telquel').
 		"</div>".
