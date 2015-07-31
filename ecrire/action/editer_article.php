@@ -65,7 +65,6 @@ function articles_set($id_article, $c=false) {
 function insert_article($id_rubrique) {
 
 	include_spip('base/abstract_sql');
-	include_spip('inc/rubriques');
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -219,38 +218,13 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 	if (!count($champs)) return;
 
-	// Creer la requete SQL
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	// Envoyer les modifs.
 
-	spip_query("UPDATE spip_articles SET ".join(', ',$update)." WHERE id_article=$id_article");
-
-	// Si on a deplace l'article
-	// - propager les secteurs
-	// - changer sa langue (si heritee)
-	if (isset($champs['id_rubrique'])) {
-		propager_les_secteurs();
-
-		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-
-		if ($langue_choisie_old != "oui") {
-			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique="._q($champs['id_rubrique'])));
-			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_articles SET lang='$langue_new' WHERE id_article=$id_article");
-		}
-	}
+	editer_article_heritage($id_article, $id_rubrique, $statut_ancien, $champs, $calcul_rub);
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_article/$id_article'");
-
-	// Au besoin, changer le statut des rubriques concernees 
-	if ($calcul_rub)
-		calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
 	if ($date) {
 		$t = strtotime($date);
@@ -283,6 +257,39 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	return ''; // pas d'erreur
 }
 
+// fabrique la requete de modification de l'article, avec champs herites
+
+function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
+
+	// Si on deplace l'article
+	//  changer aussi son secteur et sa langue (si heritee)
+	if (isset($champs['id_rubrique'])) {
+		$id_rubrique_new = $champs['id_rubrique'];
+
+		$row_rub = sql_fetch(spip_query("SELECT id_secteur, lang FROM spip_rubriques WHERE id_rubrique="._q($id_rubrique_new)));
+
+		$langue = $row_rub['lang'];
+		$id_secteur = $row_rub['id_secteur'];
+
+		$row = sql_fetch(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . _q($langue)));
+		if ($row) $champs['lang='] = $langue;
+	}
+
+	$update = array();
+	foreach ($champs as $champ => $val)
+		$update[] = $champ . '=' . _q($val);
+
+	if (!count($update)) return;
+
+	spip_query("UPDATE spip_articles SET ".join(', ', $update)." WHERE id_article=$id_article");
+
+	// Changer le statut des rubriques concernees 
+
+	if ($cond) {
+		include_spip('inc/rubriques');
+		calculer_rubriques_if($id_rubrique, $champs, $statut);
+	}
+}
 
 //
 // Reunit les textes decoupes parce que trop longs
