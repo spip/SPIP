@@ -74,10 +74,11 @@ jQuery.fn.positionner = function() {
 		document.body[ 'scrollTop' ];
 	var h = jQuery(window).height();
 	var scroll=0;
+
 	if (offset['top'] - 5 <= scrolltop)
 		scroll = offset['top'] - 5;
 	else if (offset['top'] + hauteur - h + 5 > scrolltop)
-		scroll = offset['top'] + hauteur - h + 15;
+		scroll = Math.min(offset['top'] - 5, offset['top'] + hauteur - h + 15);
 	if (scroll)
 		jQuery('html,body')
 		.animate({scrollTop: scroll}, 300);
