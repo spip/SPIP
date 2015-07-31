@@ -1,3 +1,9 @@
 <?  // test cvs version auto 
-	echo ereg_replace('$Name$]+)$', '\1', '$Name$');
+
+	// on est appele via un tag ?
+	if ($tag = "$Name$") {
+		$version = $tag;
+	} else {
+		$version = "$Id$";
+	}
 ?>
