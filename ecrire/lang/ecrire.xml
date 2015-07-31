@@ -101,8 +101,9 @@
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=id" total="794" traduits="498" relire="0" modifs="39" nouveaux="257" pourcent="62.72">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="794" traduits="779" relire="0" modifs="2" nouveaux="13" pourcent="98.11">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it" total="794" traduits="782" relire="0" modifs="2" nouveaux="10" pourcent="98.49">
 		<traducteur nom="cam.lafit" lien="http://trad.spip.net/auteur/cam-lafit" />
+		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=it_fem" total="794" traduits="604" relire="0" modifs="35" nouveaux="155" pourcent="76.07">
