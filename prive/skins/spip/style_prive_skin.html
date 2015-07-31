@@ -34,6 +34,34 @@
 [(#REM)</style>]
 
 
+.configuration #contenu .cadre .titrem { background-color:#eee; }
+.configuration #contenu .titrem.hover { background-color: #GET{claire}; }
+.configuration #contenu .cadre-trait-couleur { border: 1px solid #bbb; }
+.configuration #contenu .cadre-trait-couleur .titrem { background-color: #GET{foncee};color: #fff; }
+.configuration #contenu .ajax-action,
+.configuration #contenu .cadre-trait-couleur .cadre_padding {
+	padding-top: 0px;
+}
+.configuration #contenu .cadre-couleur .cadre_padding .titrem,
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
+	background-color: white;
+	padding-bottom: 11px;
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
+.configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
+
+.configuration #contenu .cadre-trait-couleur .cadre-r {
+	margin-left: -6px;
+	margin-right: -6px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-left: 0px;
+}
+
+
+
+
 /* Chemin */
 
 #chemin { 
