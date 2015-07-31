@@ -130,8 +130,8 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	$i = 0;
 	while ($auteur = spip_fetch_array($query)) {
 		if ($i>=$debut AND $i<$debut+$max_par_page) {
-			if ($auteur['statut'] == '0minirezo')
-				$auteur['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur']));
+			list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur'] . " LIMIT 0,1"), SPIP_NUM);
+			$auteur['restreint'] = $n;
 			$auteurs[] = $auteur;
 		}
 		$i++;
@@ -275,18 +275,20 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// Construire la requete
 	//
 	
-	// si on n'est pas minirezo, ignorer les auteurs sans article publie
+	// si on n'est pas minirezo, ignorer les auteurs sans article
 	// sauf les admins, toujours visibles.
 	// limiter les statuts affiches
 	if ($connect_statut == '0minirezo') {
 		if (!$statut) {
-			$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
+			$sql_visible = "en_ligne <> 0";
+			$visit = false;
 		} else {
 			if ($statut[0]=='!') {
 			  $statut = substr($statut,1); $not = " NOT";
 			} else $not = '';
 			$statut = preg_replace('/\W+/',"','",$statut); 
 			$sql_visible = "aut.statut$not IN ('$statut')";
+			$visit = statut_min_redac($statut);
 		}
 	} else {
 		$sql_visible = "(
@@ -294,6 +296,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 			OR art.statut IN ('prop', 'publie')
 			OR aut.id_auteur=$connect_id_auteur
 		)";
+		$visit = false;
 	}
 	if ($in_auteurs)
 		$sql_visible = "(($sql_visible) AND $in_auteurs)";
@@ -320,7 +323,6 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		$sql_order = " multi";
 	}
 	
-	 $visit = ($statut  AND ($statut!='1comite') AND ($statut != '0minirezo'));
 	//
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
