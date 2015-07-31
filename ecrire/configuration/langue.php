@@ -32,7 +32,7 @@ function configuration_langue_dist()
 
  $res = ajax_action_post('configurer',
 			 'langue',
-			 'config_lang',
+			 'config_lang', '',
 			 "<label for='changer_langue_site'>" .
 			 _T('info_langue_principale') .
 			 "</label>" .
