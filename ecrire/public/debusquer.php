@@ -458,9 +458,9 @@ function debusquer_squelette($fonc, $mode, $self){
 	return !trim($texte) ? '' : (
 		"<div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
-			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; </a>"
+			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; "
 			. $legend
-			. "</legend>"
+			. "</a></legend>"
 			. $texte
 			. "</fieldset></div>"
 			. "</div>");
@@ -570,11 +570,11 @@ function debusquer_navigation_squelettes($self){
 			. $t_skel
 			. ' '
 			. $sourcefile
-			. "&nbsp;:\n<a href='$self2&amp;var_mode_affiche=squelette#$nom'>"
+			. "&nbsp;:\n<a href='$self2&amp;var_mode_affiche=squelette#f_$nom'>"
 			. $t_skel
-			. "</a>\n<a href='$self2&amp;var_mode_affiche=resultat#$nom'>"
+			. "</a>\n<a href='$self2&amp;var_mode_affiche=resultat#f_$nom'>"
 			. _T('zbug_resultat')
-			. "</a>\n<a href='$self2&amp;var_mode_affiche=code#$nom'>"
+			. "</a>\n<a href='$self2&amp;var_mode_affiche=code#f_$nom'>"
 			. _T('zbug_code')
 			. "</a>\n<a href='"
 			. str_replace('var_mode=debug', 'var_profile=1&amp;var_mode=recalcul', $self)
@@ -608,15 +608,15 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self, $nom_source){
 				"'><td  align='right'>$i</td><td>\n" .
 				"<a  class='debug_link_boucle' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=boucle#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=boucle#f_$nom_skel'>" .
 				_T('zbug_boucle') .
 				"</a></td><td>\n<a class='debug_link_boucle' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=resultat#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=resultat#f_$nom_skel'>" .
 				_T('zbug_resultat') .
 				"</a></td><td>\n<a class='debug_link_resultat' href='" .
 				$self2 .
-				"&amp;var_mode_affiche=code#$nom_skel$nom'>" .
+				"&amp;var_mode_affiche=code#f_$nom_skel'>" .
 				_T('zbug_code') .
 				"</a></td><td>\n<a class='debug_link_resultat' href='" .
 				str_replace('var_mode=', 'var_profile=', $self2) .
