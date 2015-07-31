@@ -17,7 +17,7 @@ function aide($aide='') {
 
 	if (!$aide) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"${dir_ecrire}aide_index.php3?aide=$aide\" target=\"spip_aide\" ".
+	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire."aide_index.php3?aide=$aide\" target=\"spip_aide\" ".
 		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
 		"resizable=yes, width=740, height=580'); return false;\"><img ".
 		"src=\"img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
@@ -935,7 +935,12 @@ function debut_html($titre = "") {
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
-	echo "spip_style.php3?couleur_claire=".urlencode($couleur_claire)."&couleur_foncee=" . urlencode($couleur_foncee) ."\">\n";
+	$link = new Link('spip_style.php3');
+	$link->addVar('couleur_claire', $couleur_claire);
+	$link->addVar('couleur_foncee', $couleur_foncee);
+	$link->addVar('left', $GLOBALS['spip_lang_left']);
+	$link->addVar('right', $GLOBALS['spip_lang_right']);
+	echo $link->getUrl()."\">\n";
 
 	afficher_script_layer();
 ?>

@@ -395,6 +395,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
 	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 
+	ksort($langues);
 	while (list(, $l) = each ($langues)) {
 		if ($l == $default) {
 			$selected = ' selected';

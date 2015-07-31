@@ -50,10 +50,10 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	padding: 2px;
 }
 .bandeau-icones .gauche {
-	float: left;
+	float: <?php echo $left; ?>;
 }
 .bandeau-icones .droite {
-	float: right;
+	float: <?php echo $right; ?>;
 }
 .bandeau-icones .milieu {
 	text-align: center;
@@ -123,15 +123,14 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 }
 
 .cellule36 a.aide, .cellule36 a.aide:hover {
-	background: url(img_pack/rien.gif);
+	display: inline;
+	background: none;
 	margin: 0px;
 	padding: 0px;
-	display: inline;
 }
 .cellule36 a.aide img {
 	margin: 0px;
 	padding: 0px;
-	display: inline;
 }
 
 /* Navigation texte */
@@ -172,28 +171,29 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 }
 .cellule-texte a.aide img {
 	margin: 0px;
-	display: inline;
 }
 
-/* Icones horizontales */
+/*
+ * Icones horizontales
+ */
 
 a.cellule-h {
-	text-align: left;
+	text-align: <?php echo $left; ?>;
 	display: block;
 	margin-top: 3px;
 	margin-bottom: 3px;
 }
 a.cellule-h {
-	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center left;
+	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
 }
 a.cellule-h:hover {
-	text-decoration: none; background: url(img_pack/pave-blanc-24.png) no-repeat center left;
+	text-decoration: none; background: url(img_pack/pave-blanc-24.png) no-repeat center <?php echo $left; ?>;
 }
 .danger a.cellule-h {
-	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center left;
+	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
 }
 .danger a.cellule-h:hover {
-	text-decoration: none; background: url(img_pack/pave-rouge-24.png) no-repeat center left;
+	text-decoration: none; background: url(img_pack/pave-rouge-24.png) no-repeat center <?php echo $left; ?>;
 }
 a.cellule-h table {
 	border: none;
@@ -201,7 +201,7 @@ a.cellule-h table {
 	margin: 0px;
 }
 a.cellule-h td {
-	text-align: left;
+	text-align: <?php echo $left; ?>;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -212,7 +212,7 @@ a.cellule-h img {
 	height: 24px;
 	border: none;
 	margin: 1px;
-	margin-right: 6px;
+	margin-<?php echo $right; ?>: 6px;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
@@ -224,7 +224,7 @@ a.cellule-h a.aide img {
 a.cellule-h-texte {
 	display: block;
 	clear: both;
-	text-align: left;
+	text-align: <?php echo $left; ?>;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -472,5 +472,3 @@ table.spip td {
 	text-align: left;
 	vertical-align: center;
 }
-
-
