@@ -83,7 +83,6 @@ if ($statut_nouv) {
 	if ($ok) {
 		$query = "UPDATE spip_articles SET statut='$statut_nouv' WHERE id_article=$id_article";
 		$result = spip_query($query);
-		calculer_rubriques();
 
 		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article) {
 			$query = "UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article";
@@ -92,6 +91,8 @@ if ($statut_nouv) {
 				indexer_article($id_article);
 			}
 		}
+		calculer_rubriques();
+
 		if ($statut_nouv == 'publie' AND $statut_article != $statut_nouv) {
 			envoyer_mail_publication($id_article);
 		}
@@ -111,8 +112,8 @@ if ($jour && $flag_editable) {
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_articles SET date='$annee-$mois-$jour' WHERE id_article=$id_article";
 	$result = spip_query($query);
+	calculer_dates_rubriques();
 }
-
 
 if ($jour_redac && $flag_editable) {
 	if ($annee_redac < 1001) $annee_redac += 9000;

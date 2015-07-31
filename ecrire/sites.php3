@@ -136,7 +136,7 @@ if ($nouveau_statut AND $flag_administrable) {
 		$query = "UPDATE spip_syndic SET date=NOW() WHERE id_syndic='$id_syndic'";
 		$result = spip_query($query);
 	}
-	calculer_rubriques_publiques();
+	calculer_rubriques();
 	if ($statut == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
 			indexer_syndic($id_syndic);
