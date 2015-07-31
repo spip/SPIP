@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 // Afficher la liste de ce qu'on va detruire et demander confirmation 
 // ca vaudrait mieux
 
+// http://doc.spip.org/@base_delete_all_dist
 function base_delete_all_dist($titre)
 {
 	spip_query("DROP TABLE spip_articles");

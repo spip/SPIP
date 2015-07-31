@@ -44,6 +44,7 @@ function import_charge_version($version_archive)
 	return  charger_fonction($fimport, 'inc', true);
 }
 
+// http://doc.spip.org/@base_import_all_dist
 function base_import_all_dist($titre, $reprise=false)
 {
 	if (!$reprise) import_all_debut();

@@ -18,6 +18,7 @@ include_spip('inc/headers');
 // memorise dans les meta que ce script est en cours d'execution
 // si elle y est deja c'est qu'il y a eu suspension du script, on reprend.
 
+// http://doc.spip.org/@inc_admin_dist
 function inc_admin_dist($script, $titre, $comment='', $retour='')
 {
 	if (!isset($GLOBALS['meta'][$script])) {

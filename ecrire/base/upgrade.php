@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_upgrade_dist
 function base_upgrade_dist($titre)
 {
 	include_spip('base/create');

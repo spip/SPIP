@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@convert_utf8_init
 function convert_utf8_init($tables_a_convertir)
 {
 	// noter dans les meta qu'on veut convertir, et quoi
@@ -34,6 +35,7 @@ function convert_utf8_init($tables_a_convertir)
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@base_convert_utf8_dist
 function base_convert_utf8_dist($titre, $reprise=false)
 {
 	// poser un verrou (et abandonner si l'action est en cours)
@@ -88,6 +90,7 @@ function base_convert_utf8_dist($titre, $reprise=false)
 }
 
 
+// http://doc.spip.org/@convert_table_utf8
 function convert_table_utf8($f, $table, $champ)
 {
 	echo "<br /><b>$table</b> &nbsp; ";
