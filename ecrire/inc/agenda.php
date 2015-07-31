@@ -1440,6 +1440,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 
 // fonction SQL, pour la messagerie
 
+// http://doc.spip.org/@tache_redirige
 function tache_redirige ($row) {
 
 	$m = $row['DESCRIPTION'];
