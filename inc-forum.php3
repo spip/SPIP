@@ -164,8 +164,10 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		else if ($id_breve)
 			$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve";
 		else if ($id_syndic)
-			$titre_select = "SELECT nom_site FROM spip_syndic WHERE id_syndic = $id_syndic";
-	
+			$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
+		else
+			$titre_select = "SELECT 'Erreur...' AS titre";	
+
 		$res = mysql_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
