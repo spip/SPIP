@@ -283,6 +283,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black") {
 //
 
 function debut_raccourcis() {
+	echo "<div>&nbsp;</div>";
 	creer_colonne_droite();
 
 	debut_cadre_enfonce();
@@ -2542,7 +2543,7 @@ function debut_droite($rubrique="") {
 		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 	}
 
-	echo "<br></td>";
+	echo "<div>&nbsp;</div></td>";
 
 	if (!$flag_3_colonnes) {
 		echo "<td width=50>&nbsp;</td>";
