@@ -243,12 +243,33 @@ function inclure_page($fond, $contexte, $connect='') {
 	return $page;
 }
 
-# Attention, un appel explicite a cette fonction suppose certains include
-# $echo = faut-il faire echo ou return
+// Fonction inseree par le compilateur dans le code compile.
+// Elle recoit un contexte pour inclure un squelette, 
+// et les valeurs du contexte de compil prepare par memoriser_contexte_compil
+// elle-meme appelee par calculer_balise_dynamique dans references.php:
+// 0: sourcefile
+// 1: codefile
+// 2: id_boucle
+// 3: ligne
+// 4: langue
+
+function inserer_balise_dynamique($contexte_exec, $contexte_compil)
+{
+	if (!is_array($contexte_exec))
+		echo $contexte_exec; // message d'erreur etc
+	else {
+		if ($contexte_compil[4] AND empty($contexte_exec[2]['lang']))
+			$contexte_exec[2]['lang'] = $contexte_compil[4];
+		inclure_balise_dynamique($contexte_exec, true, $contexte_compil);
+	}
+}
+
+// Attention, un appel explicite a cette fonction suppose certains include
+// $echo = faut-il faire echo ou return
 
 // http://doc.spip.org/@inclure_balise_dynamique
-function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
-
+function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
+{
 	if (is_array($texte)) {
 
 		list($fond, $delainc, $contexte_inclus) = $texte;
@@ -257,7 +278,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
 
-		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true));
+		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true, 'compil' => $contexte_compil));
 
 		$texte = $page['texte'];
 
@@ -287,9 +308,11 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		}
 	}
 
-	if ($GLOBALS['var_mode'] == 'debug')
+	if ($GLOBALS['var_mode'] == 'debug') {
+		// compatibilite : avant on donnait le numero de ligne ou rien.
+		$ligne =  intval(isset($contexte_compil[3]) ? $contexte_compil[3] : $contexte_compil);
 		$GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
-
+	}
 	if ($echo)
 		echo $texte;
 	else

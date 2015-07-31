@@ -290,24 +290,16 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 // http://doc.spip.org/@synthetiser_balise_dynamique
 
 define('CODE_INCLURE_BALISE', '<' . '?php 
-$lang_select = lang_select("%s");
 include_once(_DIR_RACINE . "%s");
-inclure_balise_dynamique(balise_%s_dyn(%s), 1, %s);
-if ($lang_select) lang_select();
+inserer_balise_dynamique(balise_%s_dyn(%s), array(%s));
 ?'
        .'>');
 
-// Cette fonction fabrique l'appel d'une balise dynamique a l'aide du contexte
-// de compilation prepare par memoriser_contexte_compil
-// elle-meme appelee par calculer_balise_dynamique dans references.php:
-// 0: sourcefile
-// 1: codefile
-// 2: id_boucle
-// 3: ligne
-// 4: langue
 
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
-	$r = sprintf(CODE_INCLURE_BALISE, $context_compil[4], $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $context_compil[3]);
+	$r = sprintf(CODE_INCLURE_BALISE, $file, $nom,
+	       join(', ', array_map('argumenter_squelette', $args)),
+	       join(', ', array_map('_q', $context_compil)));
 	return $r;
 }
 
