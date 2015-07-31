@@ -45,7 +45,6 @@ function enregistre_modif_plugin(){
 	foreach ($plugin as $plug)
 		$plugins_interessants2[$plug] = 10; // score initial
 	ecrire_meta('plugins_interessants', serialize($plugins_interessants2));
-	ecrire_metas();
 }
 
 // http://doc.spip.org/@action_activer_plugins_dist

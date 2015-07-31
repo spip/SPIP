@@ -22,7 +22,7 @@ function genie_popularites_dist($t) {
 	// Si c'est le premier appel, ne pas calculer
 	$t = $GLOBALS['meta']['date_popularites'];
 	ecrire_meta('date_popularites', time());
-	ecrire_metas();
+
 	if (!$t)
 		return 1;
 
@@ -58,7 +58,7 @@ function genie_popularites_dist($t) {
 	if ($date = $GLOBALS['meta']['date_statistiques']
 	AND $date != $aujourdhui) {
 		ecrire_meta('date_statistiques', $aujourdhui);
-		ecrire_metas();
+
 		#spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
 		// version 3 fois plus rapide, mais en 2 requetes
 		#spip_query("ALTER TABLE spip_referers CHANGE visites_jour visites_veille INT( 10 ) UNSIGNED NOT NULL DEFAULT '0',CHANGE visites_veille visites_jour INT( 10 ) UNSIGNED NOT NULL DEFAULT '0'");

@@ -74,7 +74,6 @@ function action_tester_dist() {
 		if ($gd_formats) $gd_formats = join(",", $gd_formats);
 		ecrire_meta("gd_formats_read", $gd_formats.$gd_formats_read_gif);
 		ecrire_meta("gd_formats", $gd_formats);
-		ecrire_metas();
 	}
 
 	// verifier les formats netpbm
@@ -123,7 +122,6 @@ function action_tester_dist() {
 		else
 			$netpbm_formats = '';
 		ecrire_meta("netpbm_formats", $netpbm_formats);
-		ecrire_metas();
 	}
 
 	// et maintenant envoyer la vignette de tests

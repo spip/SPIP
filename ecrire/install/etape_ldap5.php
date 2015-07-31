@@ -25,7 +25,6 @@ function install_etape_ldap5_dist()
 		redirige_par_entete(generer_url_ecrire('install'));
 
 	ecrire_meta('ldap_statut_import', _request('statut_ldap'));
-	spip_unlink(_FILE_META); // virer le vieux ca suffit.
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 

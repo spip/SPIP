@@ -24,6 +24,5 @@ function action_configurer_previsualiseur_dist() {
 		$i = ',' . join($i, ",") . ',';
 
 	ecrire_meta('preview', $i);
-	ecrire_metas();
 }
 ?>

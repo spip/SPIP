@@ -200,7 +200,6 @@ function liste_plugin_actifs(){
   		$t = explode(",",$meta_plugin);
   		$liste = liste_plugin_valides($t,$infos);
 			ecrire_meta('plugin',serialize($liste));
-			ecrire_metas();
 			return $liste;
   	}
   }
@@ -359,7 +358,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
 		serialize($liste_fichier_verif));
 
-	ecrire_metas();
+	if (lire_metas()) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 
 // precompilation des pipelines

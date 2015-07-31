@@ -50,7 +50,6 @@ function verifier_crash_tables() {
 		} else {
 			effacer_meta('message_crash_tables');
 		}
-		ecrire_metas();
 
 		return $crash;
 	}

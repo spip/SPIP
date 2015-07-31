@@ -22,14 +22,11 @@ function exec_install_dist()
 {
 	$etape = _request('etape');
 	if (_FILE_CONNECT AND ($etape != 'chmod')) {
+  // L'etape chmod peut etre reexecutee n'importe quand apres l'install,
+  // pour verification des chmod. Sinon, install deja faite => refus.
 		echo minipres();
 		exit;
 	}
-
-	// On va supprimer les eventuelles vieilles valeurs de meta,
-	// on perd l'init des langues, mais elle est refaite par menu_langue
-	spip_unlink(_FILE_META);
-	$GLOBALS['meta'] = array();
 	include_spip('base/create');
 	$fonc = charger_fonction("etape_$etape", 'install');
 	$fonc();

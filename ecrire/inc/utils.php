@@ -1316,15 +1316,16 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
-	// Lire les meta cachees
-	if (lire_fichier(_FILE_META, $meta))
-		$GLOBALS['meta'] = @unserialize($meta);
-
 	if  (_FILE_CONNECT) {
-	// en cas d'echec refaire le fichier
-		if (!isset($GLOBALS['meta'])) {
+		// Lire les meta, en cache si disponibles.
+		if (lire_fichier(_FILE_META, $meta))
+			$GLOBALS['meta'] = @unserialize($meta);
+		// si cache absent, le refaire.
+		if (!$GLOBALS['meta']) {
 			include_spip('inc/meta');
-			ecrire_metas();
+			if (lire_metas())
+				ecrire_fichier(_FILE_META,
+					       serialize($GLOBALS['meta']));
 		}
 
 		// Forcer le renouvellement de l'alea

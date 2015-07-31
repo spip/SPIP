@@ -107,7 +107,6 @@ function actualise_metas($liste_meta)
 	include_spip('inc/rubriques');
 	$langues = calculer_langues_utilisees();
 	ecrire_meta('langues_utilisees', $langues);
-	ecrire_metas();
 }
 
 
@@ -222,7 +221,6 @@ function appliquer_modifs_config() {
 		utiliser_langue_visiteur(); 
 	}
 
-	ecrire_metas();
 	if ($purger_skel) {
 		include_spip('inc/invalideur');
 		purger_repertoire(_DIR_SKELS);

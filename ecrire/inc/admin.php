@@ -28,7 +28,6 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 		debut_admin($script, $titre, $comment); 
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
-		ecrire_metas();
 	} 
 	if  ($script !== 'admin_repair')
 		admin_verifie_session($script);
@@ -64,7 +63,6 @@ function admin_verifie_session($script) {
 	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
 	if (!$row) {
 		ecrire_meta('admin', $signal,'non');
-		ecrire_metas();
 	} else {
 		if (($s = $row['valeur']) != $signal) {
 			if (intval(substr($s, strpos($s,'_')+1))<>
@@ -162,7 +160,6 @@ function fin_admin($action) {
 	spip_unlink($signal);
 	effacer_meta($action);
 	effacer_meta('admin');
-	spip_unlink(_FILE_META);
 }
 
 // http://doc.spip.org/@copy_request

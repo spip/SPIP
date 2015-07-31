@@ -48,7 +48,6 @@ function action_charger_plugin_dist() {
 		$syndic_plug = @unserialize($GLOBALS['meta']['syndic_plug']);
 		unset($syndic_plug[$url]);
 		ecrire_meta('syndic_plug', serialize($syndic_plug));
-		ecrire_metas();
 	}
 
 	if (!preg_match(',^(https?|ftp)://.*\.zip,',

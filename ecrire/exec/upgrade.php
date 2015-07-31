@@ -37,9 +37,6 @@ function exec_upgrade_dist() {
 		exit;
 	}
 
-	// Verifier la version, sans se fier au cache
-	@spip_unlink(_FILE_META);
-	lire_metas();
 	if (!isset($GLOBALS['meta']['version_installee']))
 		$GLOBALS['meta']['version_installee'] = 0.0;
 	else $GLOBALS['meta']['version_installee'] =

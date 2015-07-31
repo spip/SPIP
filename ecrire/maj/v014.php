@@ -118,7 +118,6 @@ function maj_v014_dist($version_installee, $version_cible)
 
 		if ($webmaster = sql_fetch($result)) {
 			ecrire_meta('email_webmaster', $webmaster['email']);
-			ecrire_metas();
 		}
 		maj_version (1.418);
 	}

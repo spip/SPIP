@@ -18,7 +18,6 @@ function convert_utf8_init($tables_a_convertir)
 	// noter dans les meta qu'on veut convertir, et quoi
 	$charset_source = $GLOBALS['meta']['charset'];
 	ecrire_meta('charset', 'utf-8');
-	ecrire_metas();
 	foreach ($tables_a_convertir as $table => $champ) {
 		spip_log("demande update charset table $table ($champ)");
 		spip_query("UPDATE $table SET $champ = CONCAT('<CONVERT ".$charset_source.">', $champ)	WHERE $champ NOT LIKE '<CONVERT %'");
@@ -32,7 +31,6 @@ function convert_utf8_init($tables_a_convertir)
 		$v2 = unicode_to_utf_8(charset2unicode($v, $charset_source));
 		if ($v2 != $v) ecrire_meta($c, $v2);
 	}
-	ecrire_metas();
 }
 
 // http://doc.spip.org/@base_convert_utf8_dist
