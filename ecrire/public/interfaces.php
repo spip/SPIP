@@ -130,6 +130,7 @@ class Idiome {
 	var $type = 'idiome';
 	var $nom_champ = ""; // la chaine a traduire
 	var $module = ""; // son module de definition
+	var $arg = array(); // les arguments a passer a la chaine
 	var $param = array(); // les filtres a appliquer au resultat
 	var $fonctions = array(); // source des filtres  (compatibilite)
 	var $avant, $apres; // inutilises mais faut = ci-dessus

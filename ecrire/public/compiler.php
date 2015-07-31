@@ -176,7 +176,7 @@ function calculer_boucle_rec($id_boucle, &$boucles) {
 }
 
 // compil d'une boucle non recursive. 
-// c'est un "while (fetch_sql)" dans le cas général,
+// c'est un "while (fetch_sql)" dans le cas general,
 // qu'on essaye d'optimiser un max.
 
 // http://doc.spip.org/@calculer_boucle_nonrec
@@ -627,7 +627,11 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			break;
 
 		case 'idiome':
-			$code = "_T('" . $p->module . ":" .$p->nom_champ . "')";
+			$args=array();
+			foreach ($p->arg as $k => $v) {
+			  if ($k) $args[]=$k.' => '.calculer_liste($v,$p->descr,$p->boucles,$p->id_boucle);
+			}
+			$code = "_T('" . $p->module . ":" .$p->nom_champ . "',array(".implode(', ',$args)."))";
 			if ($p->param) {
 			  $p->id_boucle = $id_boucle;
 			  $p->boucles = &$boucles;
