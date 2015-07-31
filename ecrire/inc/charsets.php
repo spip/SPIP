@@ -773,8 +773,8 @@ function spip_substr_manuelle($c, $start, $length = NULL) {
 
 /**
  * version utf-8 d'ucfirst
- * @param $c string
- * @return $c string La chaine avec une majuscule sur le premier mot 
+ * @param string $c
+ * @return string $c La chaine avec une majuscule sur le premier mot 
  */
 function spip_ucfirst($c){
 	// Si ce n'est pas utf-8, utiliser ucfirst 
