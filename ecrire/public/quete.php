@@ -30,12 +30,21 @@ function quete_chapo($id_article, $connect) {
 function quete_parent_lang($table,$id,$connect=''){
 	static $cache_quete = array();
 
-	if (!isset($cache_quete[$connect][$table][$id])
-	AND in_array($table,array('spip_rubriques','spip_articles','spip_syndic','spip_breves'))){
-		$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
-		$select .= in_array($table,array('spip_rubriques','spip_articles','spip_breves'))?", lang":"";
-		$_id = id_table_objet(objet_type($table));
-		$cache_quete[$connect][$table][$id] = sql_fetsel($select, $table,"$_id=".intval($id),'','','','',$connect);
+	if (!isset($cache_quete[$connect][$table][$id])) {
+		if (!isset($cache_quete[$connect][$table]['_select'])){
+			$trouver_table = charger_fonction('trouver_table','base');
+			if (!$desc=$trouver_table($table,$connect) OR !isset($desc['field']['id_rubrique']))
+				// pas de parent rubrique, on passe
+				$cache_quete[$connect][$table]['_select'] = false; 
+			else {
+				$select = ($table=='spip_rubriques'?'id_parent':'id_rubrique');
+				$select .= isset($desc['field']['lang'])?", lang":"";
+				$cache_quete[$connect][$table]['_select'] = $select;
+				$cache_quete[$connect][$table]['_id'] = id_table_objet(objet_type($table));
+			}
+		}
+		if ($cache_quete[$connect][$table]['_select'])
+			$cache_quete[$connect][$table][$id] = sql_fetsel($cache_quete[$connect][$table]['_select'], $table,$cache_quete[$connect][$table]['_id']."=".intval($id),'','','','',$connect);
 	}
 	return $cache_quete[$connect][$table][$id];
 }
