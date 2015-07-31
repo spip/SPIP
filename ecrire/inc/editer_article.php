@@ -31,6 +31,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	// (et donc: pas de lien de traduction)
 	$id_article = ($new OR $lier_trad) ? 'oui' : $row['id_article'];
 
+	$contexte = $row;
 	$contexte['config'] = $config = $config_fonc($row);
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
@@ -42,7 +43,6 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 		  $config['langue'] .
 		  "' />"));
 
-	$contexte = $row;
 
 	// on veut conserver la langue de l'interface ;
 	// on passe cette donnee sous un autre nom, au cas ou le squelette
