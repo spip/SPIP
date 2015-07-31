@@ -173,6 +173,7 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
       $args = $suite;
       if ($suite[0] == '{') {
 	$args = ltrim(substr($suite,1)); 
+	$citations = array();
 	while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
 			ereg ('^(")([^"]*)(")(.*)$', $args, $regs);
@@ -187,15 +188,21 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$champ = new Texte;
 			$champ->texte = $arg;
 			$result[] = $champ;
-			$res[] = array($champ);
+			$citations[] = $champ;
 		} else {
 
 		  $arg = phraser_champs_exterieurs(trim($arg), $sep, $result);
-		  $res[] = $arg;
+		  $citations = array_merge($citations, $arg);
 		  $result = array_merge($result, $arg);
 		}
-		$args = ltrim(($args[0] == ',') ? substr($args,1) : $args);
+		$args = ltrim($args);
+		if ($args[0] == ',') {
+		  $args = substr($args,1);
+		  if ($citations)
+		    {$res[] = $citations; $citations = array();}
+		}
 	}
+	if ($citations) {$res[] = $citations; $citations = array();}
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
