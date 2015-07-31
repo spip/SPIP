@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{0*3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -42,12 +42,16 @@
 * html .bandeau_sec ul {}
 
 /*style for #bandeau_couleur*/
-#bandeau_couleur ul {padding:2px 0}
+#bandeau_couleur ul {padding:2px 0;}
+#bandeau_couleur li {}
 #bandeau_couleur .menu-item {height:22px}
-#bandeau_couleur1 .menu-item { width:230px !important}
+#bandeau_couleur1 .menu-item { width:250px !important}
 #bandeau_couleur3 .menu-item { width:150px !important}
+.h-list li#bandeau_couleur4 {margin-left:70px;}
 #bandeau_couleur4 .menu-item{ width:68px !important;margin:0 11px}
+.h-list li#bandeau_couleur5 {margin-left:80px;}
 #bandeau_couleur5 .menu-item { width:114px !important} 
+.h-list li#bandeau_couleur6 {float:[(#ENV{ltr}|choixsiegal{left,right,left})];}
 #bandeau_couleur6 .menu-item { width:32px !important;margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:-3px;margin-[(#ENV{ltr}|choixsiegal{left,right,left})]:-6px}
 
 /*fix all layout problems of IE6 and IE7*/
