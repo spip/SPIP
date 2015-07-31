@@ -10,12 +10,12 @@ include_ecrire ("inc_abstract_sql.php3");
 $id_rubrique = intval($id_rubrique);
 $flag_mots = lire_meta("articles_mots");
 
-function enfant($id_rubriqueection){
+function enfant($collection){
 	global $les_enfants, $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 	
-	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubriqueection' ORDER BY titre";
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY titre";
 	$result2 = spip_query($query2);
 
 
@@ -86,13 +86,13 @@ function enfant($id_rubriqueection){
 	
 }
 
-function sous_enfant($id_rubriqueection2){
+function sous_enfant($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
-	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubriqueection2' ORDER BY titre";
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$id_rubriqueection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
