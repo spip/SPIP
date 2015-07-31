@@ -66,7 +66,7 @@ label {}
 
 .formo,
 input.text,
-input.password { width: 50%; display: block; margin-bottom: 20px; background: #f8f8f9 center bottom; padding: 4px; border: 1px inset; border-radius: 3px; behavior: url(win_width.htc); }
+input.password { width: 50%; display: block; margin-bottom: 20px; background: #f8f8f9 center bottom; padding: 4px; border: 1px inset; border-radius: 3px; }
 .formo,
 input.text,
 input.password,
