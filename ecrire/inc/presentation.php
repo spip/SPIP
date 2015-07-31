@@ -282,7 +282,7 @@ function bloc_des_raccourcis($bloc) {
 	. creer_colonne_droite('',true)
 	. debut_cadre_enfonce('',true)
 	. (($spip_display != 4)
-	     ? ("\n<div style='font-family: Verdana,Arial,Sans,sans-serif; font-size: x-small'><b>"
+	     ? ("\n<div style='font-size: x-small' class='verdana1'><b>"
 		._T('titre_cadre_raccourcis')
 		."</b>")
 	       : ( "<h3>"._T('titre_cadre_raccourcis')."</h3><ul>"))
@@ -298,8 +298,8 @@ function afficher_plus($lien) {
 	global $options, $spip_lang_right, $spip_display;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
-			return "\n<span style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'>" .
-			  http_img_pack("plus.gif", "+", "") ."</a></span>";
+			return "\n<a href='$lien' style='float:$spip_lang_right; padding-right: 10px;'>" .
+			  http_img_pack("plus.gif", "+", "") ."</a>";
 	}
 }
 
@@ -411,8 +411,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 		}
 	}
 	
-	$texte .= "<span class=\"arial2\" style='border-bottom: 1px solid #444444; position: absolute; top: 2px; $spip_lang_right: 15px;'>";
-
+	$style = " class='arial2' style='border-bottom: 1px solid #444444; position: absolute; top: 1px; $spip_lang_right: 15px;'";
 
 	$script = parametre_url($self, $tmp_var, -1);
 	if ($url) {
@@ -425,10 +424,10 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 				. '\');"';
 	}
 	$l = htmlentities(_T('lien_tout_afficher'));
-	$texte .= "<a href=\"$script#a$ancre\"$on><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
+	$texte .= "<a$style\nhref=\"$script#a$ancre\"$on><img\nsrc='". _DIR_IMG_PACK . "plus.gif' title=\"$l\" alt=\"$l\" /></a>";
 	
 
-	$texte .= "</span></div>\n";
+	$texte .= "</div>\n";
 
 	return $texte;
 }
@@ -1745,7 +1744,7 @@ function fin_page()
 			. "'>"
 			.  _T("access_interface_graphique")
 			. "</a></div>")
-		: ('<div style="text-align: right; font-family: Verdana; font-size: 8pt">'
+		: ("<div style='text-align: right; font-size: 11px' class='verdana1'>"
 			. info_copyright()
 			. "<br />"
 			. _T('info_copyright_doc')

@@ -97,10 +97,10 @@ function exec_mots_type_dist()
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
-	  . "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'><b>". _T('titre_groupe_mots') . "</b></span><br />"
+	  . "<span style='font-size: 12px;' class='verdana1'><b>". _T('titre_groupe_mots') . "</b></span><br />"
 	  . gros_titre($titre,'',false)
 	. aide("motsgroupes")
-	. "<div style='font-family: Verdana,Arial,Sans,sans-serif;'>"
+	. "<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
 	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
@@ -129,7 +129,7 @@ function exec_mots_type_dist()
 	. "</div>"
 	. "</td></tr></table>"
 	. fin_cadre_relief(true)
-	. "<br />\n<div style='font-family: Verdana,Arial,Sans,sans-serif;'>"
+	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
 	. "<b>"._T('info_mots_cles_association')."</b>"

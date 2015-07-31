@@ -132,7 +132,7 @@ debut_gauche();
 
 	debut_boite_info();
 
-	$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10x; font-weight: bold; text-align: center'>"
+	$res = "\n<div style='font-size: 10x; font-weight: bold; text-align: center' class='verdana1'>"
 		  .  _T('titre_site_numero')
 		  . "<br /><span style='font-size: 32px;'>"
 		  . $id_syndic
@@ -184,7 +184,7 @@ if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."..
 echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
-	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 13px; font-face: Verdana,Arial,Sans,sans-serif;'>";
+	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 13px; ' class='verdana1'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -209,7 +209,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<br />\n<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px;'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></span>";
+		echo "<br />\n<span style='font-size: 16px;' class='verdana1'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></span>";
 	}
 }
 
@@ -256,7 +256,7 @@ if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p style='font-size: 16px; font-family: Verdana,Arial,Sans,sans-serif'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
+	echo "<p style='font-size: 16px; ' class='verdana1'><a href='".htmlspecialchars($url_syndic)."'>",	http_img_pack('feed.png', 'RSS', ''),	'</a> <b>'._T('info_site_syndique').'</b></p>';
 
 	if ($erreur_syndic)
 		echo "<p style='color: red; font-weight: bold;'>",$erreur_syndic,"</p>";
@@ -285,7 +285,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 	if ($date_syndic)
 		echo "<div align='left'>".
-		  "<span style='font-family: verdana,arial,helvetica; font-size: 14px;'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)	.".</span></div>\n";
+		  "<span style='font-size: 14px;' class='verdana1'>",  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)	.".</span></div>\n";
 
 
 	echo "<div align='right'>\n";

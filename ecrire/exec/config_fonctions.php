@@ -450,7 +450,7 @@ function proxy_config()
 	echo "<input type='text' name='http_proxy' value='$http_proxy' size='40' class='forml' />";
 
 	if ($http_proxy) {
-		echo "<p align='$spip_lang_left' style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px; color: #000000;'>"
+		echo "<p align='$spip_lang_left' style='font-size: 14px; color: #000000;' class='verdana1'>"
 			. _T('texte_test_proxy');
 		echo "</p>";
 

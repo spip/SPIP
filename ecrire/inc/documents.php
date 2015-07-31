@@ -288,7 +288,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 		// Affichage du raccourci <doc...> correspondant
 		if (!$doublon) {
-			$ret .= "\n<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
+			$ret .= "\n<div style='padding:2px; font-size: 10px; ' class='arial1'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				$ret .= "<b>"._T('info_inclusion_vignette')."</b><br />";
 			}
@@ -300,7 +300,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			$ret .= "</div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				$ret .= "<div style='padding:2px; font-size: 10px; font-family: arial,helvetica,sans-serif'>";
+				$ret .= "<div style='padding:2px; font-size: 10px; ' class='arial1'>";
 				$ret .= "<b>"._T('info_inclusion_directe')."</b><br />";
 				$ret .= "<div style='color: 333333'>"
 				. affiche_raccourci_doc('emb', $id_document, 'left')
@@ -310,7 +310,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 				$ret .= "</div>";
 			}
 		} else {
-			$ret .= "<div style='padding:2px; font-size: 12px; font-family: arial,helvetica,sans-serif'>". affiche_raccourci_doc('doc', $id_document, ''). "</div>";
+			$ret .= "<div style='padding:2px; font-size: 12px; ' class='arial1'>". affiche_raccourci_doc('doc', $id_document, ''). "</div>";
 		}
 
 		$legender = charger_fonction('legender', 'inc');
@@ -343,7 +343,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		} else {
 			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');
 		}
-		$raccourci_doc = "<div style='padding:2px; font-size: 12px; font-family: arial,helvetica,sans-serif'>$raccourci_doc</div>\n";
+		$raccourci_doc = "<div style='padding:2px; font-size: 12px; ' class='arial1'>$raccourci_doc</div>\n";
 
 		//
 		// Afficher un apercu (pour les images)

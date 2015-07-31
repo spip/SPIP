@@ -107,7 +107,7 @@ function exec_statistiques_lang_dist()
 	echo "</table>\n";
 
 
-//echo "<p><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px;'>"._T('texte_signification')."</span>";
+//echo "<p><span style='font-size: 16px;' class='verdana1'>"._T('texte_signification')."</span>";
 
 	fin_cadre_enfonce();
 

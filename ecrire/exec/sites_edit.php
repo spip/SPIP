@@ -80,7 +80,7 @@ AND (
 	$connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)
 ) {
 
-	$form_auto = "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>"		. _T('texte_referencement_automatique')	. "</span>"
+	$form_auto = "<span style='font-size: 14px;' class='verdana1'>"		. _T('texte_referencement_automatique')	. "</span>"
 		. "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n"
 		. "\n<input type='hidden' name='id_parent' value='".intval(_request('id_rubrique'))."' />\n"
 		. "<input type=\"submit\"  value=\""._T('bouton_ajouter')."\" class='fondo' />\n";

@@ -80,7 +80,7 @@ global
 //
 
 	 if ($id_mot) {
-		$res = "\n<div style='font-famuily: Verdana,Arial,Sans,sans-serif; font-size: 10px; font-weight: bold; text-align: center'>" 
+		$res = "\n<div style='font-size: 10px; font-weight: bold; text-align: center' class='verdana1'>" 
 		.  _T('titre_gauche_mots_edit')
 		.  "<br /><span style='font-size: 32px;'>"
 		.  $id_mot
@@ -142,7 +142,7 @@ global
 
 
 	if ($descriptif) {
-		$out .= "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif;'>";
+		$out .= "<div style='border: 1px dashed #aaaaaa; font-size: 14px; ' class='verdana1'>";
 		$out .= "<b>" . _T('info_descriptif') . "</b> ";
 		$out .= propre($descriptif);
 		$out .= "&nbsp; ";
@@ -154,7 +154,7 @@ global
 
 
 	if (strlen($texte)>0){
-		$out .= "<p style='font-family: Verdana,Arial,Sans,sans-serif'>";
+		$out .= "<p style='font-size: 14px; ' class='verdana1'>";
 		$out .= propre($texte);
 		$out .= "</p>";
 	}

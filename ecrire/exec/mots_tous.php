@@ -86,13 +86,13 @@ function exec_mots_tous_dist()
 		if ($acces_comite == "oui") $res .= "> "._T('info_redacteurs')." &nbsp;&nbsp;";
 		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
- 		echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'>", $res, "</span>";
+ 		echo "<span style='font-size: 12px;' class='verdana1'>", $res, "</span>";
 		if ($descriptif) {
-			echo "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
+			echo "<div style='border: 1px dashed #aaaaaa; font-size: 14px; ' class='verdana1'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<span style='font-family: Verdana,Arial,Sans,sans-serif'>", propre($texte), "</span>";
+			echo "<span style='font-size: 14px; ' class='verdana1'>", propre($texte), "</span>";
 		}
 
 		//

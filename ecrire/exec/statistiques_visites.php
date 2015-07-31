@@ -80,7 +80,7 @@ function exec_statistiques_visites_dist()
 
 
   $titre = $pourarticle = "";
-  $style = "style='font-family: arial,helvetica,sans-serif; font-size: 12px; color: #999999'";
+  $style = "class='arial1' style='font-size: 12px; color: #999999'";
 
 if ($id_article = intval($id_article)){
 	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
@@ -113,7 +113,7 @@ if ($origine) {
 
 	debut_gauche();
 	debut_boite_info();
-	echo "<p align='left' style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>"._T('info_gauche_statistiques_referers')."</p>";
+	echo "<p align='left' style='font-size:small;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
 	fin_boite_info();
 	
 	debut_droite();
@@ -132,7 +132,7 @@ else {
 	echo "<br />";
 
 	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+	echo "<div style='font-size:small;' class='verdana1'>";
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
@@ -163,7 +163,7 @@ else {
 	if ($nombre_articles > 0) {
 		echo "<br />\n";
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
-		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+		echo "<div style='font-size:small;' class='verdana1'>";
 		echo typo(_T('info_visites_plus_populaires'));
 		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 		$liste = 0;
@@ -226,7 +226,7 @@ else {
 		creer_colonne_droite();
 
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
-		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;overflow:hidden;'>";
+		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 
@@ -554,34 +554,34 @@ if ($GLOBALS['accepte_svg']) {
 			echo "</td>",
 			  "<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 			echo "<td>", http_img_rien(5, 1),"</td>";
-			echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+			echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
 			echo "<table cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td height='15' valign='top'>";		
-			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph)."</b></span>";
+			echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph)."</b></span>";
+			echo "</td></tr>";
+			echo "<tr><td height='25' valign='middle' $style>";		
+			echo round(7*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span $style>",round(7*($maxgraph/8))."</span>";
+			echo "<span style='font-size: 12px;' class='arial1'>".round(3*($maxgraph/4))."</span>";
+			echo "</td></tr>";
+			echo "<tr><td height='25' valign='middle' $style>";		
+			echo round(5*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round(3*($maxgraph/4))."</span>";
+			echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph/2)."</b></span>";
+			echo "</td></tr>";
+			echo "<tr><td height='25' valign='middle' $style>";		
+			echo round(3*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span $style>",round(5*($maxgraph/8)),"</span>";
+			echo "<span style='font-size: 12px;' class='arial1'>".round($maxgraph/4)."</span>";
 			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph/2)."</b></span>";
-			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span $style>",round(3*($maxgraph/8)),"</span>";
-			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round($maxgraph/4)."</span>";
-			echo "</td></tr>";
-			echo "<tr><td height='25' valign='middle'>";		
-			echo "<span $style>",round(1*($maxgraph/8)),"</span>";
+			echo "<tr><td height='25' valign='middle' $style>";		
+			echo round(1*($maxgraph/8));
 			echo "</td></tr>";
 			echo "<tr><td height='10' valign='bottom'>";		
-			echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>0</b></span>";
+			echo "<span style='font-size: 12px;' class='arial1'><b>0</b></span>";
 			echo "</td>";
 			
 			
@@ -615,16 +615,16 @@ if ($GLOBALS['accepte_svg']) {
 		// (desactive au profit de la moeynne "glissante")
 		# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>"._T('texte_statistiques_visites')."</span>";
+		echo "<span style='font-size: 12px;' class='arial1'>"._T('texte_statistiques_visites')."</span>";
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
-		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
-		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>";
+		echo "<td valign='top' style='width: 33%; ' class='verdana1'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
+		echo "<td valign='top' style='width: 33%; ' class='verdana1'>";
 		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
 		if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
 		if ($id_article) echo "<br />"._T('info_popularite_5').' '.$val_popularite;
 
 		echo "</td>";
-		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>";
+		echo "<td valign='top' style='width: 33%; ' class='verdana1'>";
 		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
 		if ($id_article) {
@@ -643,7 +643,7 @@ if ($GLOBALS['accepte_svg']) {
 	
 	if (count($log) > 60) {
 		echo "<br />";
-		echo "<span style='font-family: verdana,arial,helvetica,sans-serif; font-size: 14px;'><b>"._T('info_visites_par_mois')."</b></span>";
+		echo "<span style='font-size: 14px;' class='verdana1'><b>"._T('info_visites_par_mois')."</b></span>";
 
 		echo "<div align='left'>";
 		///////// Affichage par mois
@@ -746,34 +746,34 @@ if ($GLOBALS['accepte_svg']) {
 		echo "</td>",
 		  "<td ".http_style_background("fond-stats.gif")." valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 		echo "<td>", http_img_rien(5, 1),"</td>";
-		echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+		echo "<td valign='top'><div style='font-size:small;' class='verdana1'>";
 		echo "<table cellpadding='0' cellspacing='0' border='0'>";
 		echo "<tr><td height='15' valign='top'>";		
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph)."</b></span>";
+		echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(7*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round(3*($maxgraph/4))."</span>";
+		echo "<span style='font-size: 12px;' class='arial1'>".round(3*($maxgraph/4))."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(5*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>".round($maxgraph/2)."</b></span>";
+		echo "<span style='font-size: 12px;' class='arial1'><b>".round($maxgraph/2)."</b></span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(3*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>".round($maxgraph/4)."</span>";
+		echo "<span style='font-size: 12px;' class='arial1'>".round($maxgraph/4)."</span>";
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle' $style>";		
 		echo round(1*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='10' valign='bottom'>";		
-		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'><b>0</b></span>";
+		echo "<span style='font-size: 12px;' class='arial1'><b>0</b></span>";
 		echo "</td>";
 
 		echo "</tr></table>";
@@ -792,7 +792,7 @@ if ($GLOBALS['accepte_svg']) {
 	} else {
 		$lien = 'oui'; $alter = 'SVG';
 	}
-	echo "\n<div align='".$GLOBALS['spip_lang_right']."' style='font-family:Verdana,Arial,Sans,sans-serif; font-size:x-small;'>
+	echo "\n<div align='".$GLOBALS['spip_lang_right']."' style='font-size:x-small;' class='verdana1'>
 	<a href='".
 	parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
 	parametre_url(self(), 'format', 'csv')."'>CSV</a>".
@@ -826,7 +826,7 @@ $result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where O
 echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
-echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;overflow:hidden;'><br />";
+echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
 echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
 echo "<br /></div>";	
 

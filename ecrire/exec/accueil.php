@@ -109,7 +109,7 @@ if ($spip_display == 4) {
 	}
 	else {
 		if ($connect_statut == '0minirezo') {
-			$res = "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
+			$res = "<div class='verdana2'>"._T('info_ecrire_article')."</div>";
 		}
 	}
 	if ($connect_toutes_rubriques) {
