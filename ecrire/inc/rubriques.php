@@ -349,9 +349,9 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 	include_spip('base/abstract_sql');
 	foreach ($arbo as $titre) {
 		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent));
-		if ($r !== NULL) 	       
+		if ($r !== NULL) {
 			$id_parent = $r;
-		else {
+		} else {
 			$id_rubrique = sql_insertq('spip_rubriques', array(
 				'titre' => $titre,
 				'id_parent' => $id_parent,
@@ -372,7 +372,7 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 		}
 	}
 
-	return intval($id_rubrique);
+	return intval($id_parent);
 }
 
 ?>
