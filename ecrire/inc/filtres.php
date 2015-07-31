@@ -2689,4 +2689,57 @@ function insert_head_css_conditionnel($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Produire un fichier statique a partir d'un squelette dynamique
+ * Permet ensuite a apache de le servir en statique sans repasser
+ * par spip.php a chaque hit sur le fichier
+ * si le format (css ou js) est passe dans contexte['format'], on l'utilise
+ * sinon on regarde si le fond finit par .css ou .js
+ * sinon on utilie "html"
+ *
+ * @param string $fond
+ * @param array $contexte
+ * @param array $options
+ * @param string $connect
+ * @return string
+ */
+function produire_fond_statique($fond, $contexte=array(), $options = array(), $connect=''){
+	if (isset($contexte['format'])){
+		$extension = $contexte['format'];
+		unset($contexte['format']);
+	}
+	else {
+		$extension = "html";
+		if (preg_match(',[.](css|js)$,',$fond,$m))
+			$extension = $m[1];
+	}
+	// recuperer le contenu produit par le squelette
+	$options['raw'] = true;
+	$cache = recuperer_fond($fond,$contexte,$options,$connect);
+
+  // calculer le nom de la css
+	$dir_var = sous_repertoire (_DIR_VAR, 'cache-'.$extension);
+	$filename = $dir_var . $extension."dyn-".md5($fond.serialize($contexte).$connect) .".$extension";
+
+	// mettre a jour le fichier si il n'existe pas
+	// ou trop ancien
+  if (!file_exists($filename)
+	  OR filemtime($filename)<$cache['lastmodified']){
+
+	  $contenu = $cache['texte'];
+	  // passer les urls en absolu si c'est une css
+	  if ($extension=="css")
+	    $contenu = urls_absolues_css($contenu, generer_url_public($fond));
+
+    $comment = "/* #PRODUIRE{fond=$fond";
+    foreach($contexte as $k=>$v)
+	    $comment .= ",$k=$v";
+    $comment .="} le ".date("Y-m-d H:i:s")." */";
+	  // et ecrire le fichier
+    ecrire_fichier($filename,$comment.$contenu);
+  }
+
+  return $filename;
+}
 ?>
