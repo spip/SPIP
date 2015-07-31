@@ -12,7 +12,8 @@
 
 include ("inc.php3");
 $charset = lire_meta("charset");
-echo "<"."?xml version='1.0' encoding='$charset'?>";
+@header('Content-type: text/html; charset=$charset');
+echo "<"."?xml version='1.0' encoding='$charset'?>\n";
 
 	if ($fonction == "aff_rub") {
 		include_ecrire("inc_mini_nav.php");
@@ -24,7 +25,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 	}
 	else if ($fonction == "aff_rubrique") {
 		include_ecrire("inc_mini_nav.php");
-		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
+		echo mini_nav ($id_rubrique, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
 	}
 	else if ($fonction == "aff_nav_recherche") {
 		include_ecrire("inc_mini_nav.php");

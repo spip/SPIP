@@ -1848,6 +1848,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		if ($activer_breves != "non")
 			echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' />";
 	}
+	
 
 	echo "\n",'<link rel="stylesheet" type="text/css" href="', _DIR_RESTREINT;
 	$link = new Link('spip_style.php3');
@@ -2710,9 +2711,9 @@ else {
 	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>";
 	echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
 	echo "<img src='"._DIR_IMG_PACK."searching.gif' id='img_nav-recherche' style='border:0px; visibility: hidden' />";
-//	afficher_menu_rubriques();
+	afficher_menu_rubriques();
 
-	echo "<div id='nav-recherche' style='width: 450px; visibility: hidden;'></div>";
+//	echo "<div id='nav-recherche' style='width: 450px; visibility: hidden;'></div>";
 	echo "</div>";
 	// FIN GADGET Menu rubriques
 	

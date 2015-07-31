@@ -399,7 +399,7 @@ echo "<P><HR><P>";
 	
 	} else {
 		echo "<table width='100%'><tr width='100%'><td width='45'>";
-		echo "<a href=\"#\" onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';} return true;\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
+		echo "<a href=\"#\" onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';}\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
 		echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
 		echo "</td><td>";
 		echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";

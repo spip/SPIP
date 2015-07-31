@@ -15,7 +15,7 @@ function changestyle(id_couche, element, style) {
 	hide_obj("bandeauagenda");
 	hide_obj("bandeaumessagerie");
 	hide_obj("bandeausynchro");
-	hide_obj("resultats_recherche");
+	hide_obj("nav-recherche");
 	hide_obj("bandeaurecherche");
 	hide_obj("bandeauinfoperso");
 	hide_obj("bandeaudisplay");
