@@ -137,6 +137,9 @@
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/public?lang_cible=oc_ni_la" total="78" traduits="66" relire="0" modifs="3" nouveaux="9" pourcent="84.62">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/public?lang_cible=oc_ni_mis" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/public?lang_cible=oc_prv" total="78" traduits="66" relire="0" modifs="3" nouveaux="9" pourcent="84.62">
 	</langue>
 	<langue code="oc_va" url="http://trad.spip.net/tradlang_module/public?lang_cible=oc_va" total="78" traduits="65" relire="0" modifs="3" nouveaux="10" pourcent="83.33">
