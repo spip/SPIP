@@ -240,7 +240,7 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
 	$icone =  icone_table($type);
-	$tranches = affiche_tranche_bandeau(&$requete, $tmp_var, $force, $skel, $arg);
+	$tranches = affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $arg);
 	$largeurs = array('7','', '', '', '100', '38');
 	$styles = array('arial11', 'arial11', 'arial1', 'arial1', 'arial1 centered', 'arial1');
 
