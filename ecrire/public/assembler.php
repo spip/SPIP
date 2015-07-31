@@ -340,4 +340,24 @@ function message_erreur_404 ($erreur= "") {
 	return inclure_page($fond, $contexte_inclus);
 }
 
+// fonction permettant de recuperer le resultat du calcul d'un squelette
+// pour une inclusion dans un flux
+function recuperer_fond($fond, $contexte=array()){
+	define ('_INC_PUBLIC', 1); // on est peut etre dans l'espace privé au moment de l'appel
+	//$contexte = array_merge($contexte,array('fond'=>$fond));
+	ob_start();
+	$page = inclure_page($fond, $contexte);
+	if ($page['process_ins'] == 'html')
+		echo $page['texte'];
+	else
+		eval('?' . '>' . $page['texte']);
+
+	if ($page['lang_select'] === true)
+		lang_dselect();
+
+	$page = ob_get_contents(); 
+	ob_end_clean();
+	return $page;
+}
+
 ?>
