@@ -142,7 +142,7 @@ function effacer_meta($nom, $table='meta') {
 	static $touch = array();
 	$antidate = time() - (_META_CACHE_TIME<<4);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
-	sql_delete('spip_' . $table, "nom='$nom'");
+	sql_delete('spip_' . $table, "nom='$nom'",'','continue');
 	unset($GLOBALS[$table][$nom]);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table); $touch[$table] = false;}
 }
