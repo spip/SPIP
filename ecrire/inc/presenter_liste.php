@@ -50,7 +50,11 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 			reset($styles);
 			$res = '';
 			foreach ($vals as $t) {
-				list(,list($style, $largeur, $nom)) = each($styles);
+				$style = $largeur = $nom = "";
+				list(,$s) = each($styles);
+				if (count($s)) $style = array_shift($s);
+				if (count($s)) $largeur = array_shift($s);
+				if (count($s)) $nom = array_shift($s);
 				if ($largeur) $largeur = " style='width: $largeur" ."px;'";
 				if ($style) $style = " class=\"$style\"";
 				$t = !trim($t) ? "&nbsp;" : lignes_longues($t);

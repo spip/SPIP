@@ -534,6 +534,8 @@ function debut_javascript()
 		        . "' width='1' height='1' alt='' /></div></noscript>\n");
 	}
 
+	if (!defined('_LARGEUR_ICONES_BANDEAU'))
+		include_spip('inc/bandeau');
 	return
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .

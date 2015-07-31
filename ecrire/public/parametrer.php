@@ -107,9 +107,9 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// spip_log: un joli contexte
 		$infos = array();
 		foreach (array_filter($contexte) as $var => $val) {
-			if (is_array($val)) $val = "[".join($val)."]";
-			if (strlen("$val") > 20)
-				$val = substr("$val", 0,17).'..';
+			if (is_array($val)) $val = serialize($val);
+			if (strlen("$val") > 30)
+				$val = substr("$val", 0,27).'..';
 			if (strstr($val,' '))
 				$val = "'$val'";
 			$infos[] = $var.'='.$val;

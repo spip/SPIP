@@ -204,7 +204,8 @@ function _request($var, $c=false) {
 	// Si on est en ajax et en POST tout a ete encode
 	// via encodeURIComponent, il faut donc repasser
 	// dans le charset local...
-	if (_AJAX
+	if (defined('_AJAX')
+	AND _AJAX
 	AND isset($GLOBALS['meta']['charset'])
 	AND $GLOBALS['meta']['charset'] != 'utf-8'
 	AND is_string($a)

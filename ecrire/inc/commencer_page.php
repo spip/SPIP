@@ -100,7 +100,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	if (!$menu) return $res;
 
 
-	$items .= "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
+	$items = "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
 		. "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>"
 		.  installer_gadgets($id_rubrique)
 		. "</div></li>"
