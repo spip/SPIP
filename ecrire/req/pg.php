@@ -98,7 +98,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 
 // Par ou ca passe une fois les traductions faites
 // http://doc.spip.org/@spip_pg_trace_query
-function spip_pg_trace_query($query, $serveur='',$requeter=true)
+function spip_pg_trace_query($query, $serveur='')
 {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
@@ -274,7 +274,7 @@ function spip_pg_select($select, $from, $where='',
 	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
 	}
 	$from =  spip_pg_from($from, $prefixe);
-	$q =  "SELECT ". $select
+	$query =  "SELECT ". $select
 	  . (!$from ? '' : "\nFROM $from")
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
@@ -288,12 +288,15 @@ function spip_pg_select($select, $from, $where='',
 
 	if ($requeter && $GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_requete($q);
+		boucle_debug_requete($query);
 	}
 
-	if (!($res = spip_pg_trace_query($q, $serveur, $requeter))) {
+	// renvoyer la requete inerte si demandee
+	if (!$requeter) return $query;
+	
+	if (!($res = spip_pg_trace_query($query, $serveur))) {
 	  include_spip('public/debug');
-	  erreur_requete_boucle($q, 0, 0);
+	  erreur_requete_boucle($query, 0, 0);
 	}
 
 	return $res;
@@ -517,13 +520,14 @@ function spip_pg_fetch($res, $t='', $serveur='',$requeter=true) {
 	if ($res) $res = pg_fetch_array($res, NULL, PGSQL_ASSOC);
 	return $res;
 }
- 
+
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
-			  $groupby=array(), $limit='', $having = array(), $serveur='',$requeter=true)
+			  $groupby=array(), $limit='', $sousrequete = '', 
+			  $having = array(), $serveur='',$requeter=true) 
 {
 	$r = spip_pg_select('COUNT(*)', $from, $where,
-			    $groupby, '', $limit, $sousrequete, $having, '','', $serveur, $requeter);
+			    $groupby, '', $limit, $having, $serveur, $requeter);
 	if ($r && $requeter) list($r) = pg_fetch_array($r, NULL, PGSQL_NUM);
 	return $r;
 }
@@ -546,10 +550,14 @@ function spip_pg_delete($table, $where='', $serveur='',$requeter=true) {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
-	return spip_pg_trace_query(
-			  calculer_pg_expression('DELETE FROM', $table, ',')
-			. calculer_pg_expression('WHERE', $where, 'AND'), 
-			$serveur, $requeter);
+	
+	$query = calculer_pg_expression('DELETE FROM', $table, ',')
+			. calculer_pg_expression('WHERE', $where, 'AND');
+			
+	// renvoyer la requete inerte si demandee
+	if (!$requeter) return $query;
+	
+	return spip_pg_trace_query($query, $serveur);
 }
 
 // http://doc.spip.org/@spip_pg_insert
@@ -611,11 +619,14 @@ function spip_pg_update($table, $champs, $where='', $desc='', $serveur='',$reque
 		$set[] = $champ . '=' . $val; 
 	}
 
-	return spip_pg_trace_query(
-		  calculer_pg_expression('UPDATE', $table, ',')
+	$query = calculer_pg_expression('UPDATE', $table, ',')
 		. calculer_pg_expression('SET', $set, ',')
-		. calculer_pg_expression('WHERE', $where, 'AND'), 
-		$serveur, $requeter);
+		. calculer_pg_expression('WHERE', $where, 'AND');
+		
+	// renvoyer la requete inerte si demandee
+	if (!$requeter) return $query;
+	
+	return spip_pg_trace_query($query, $serveur);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
