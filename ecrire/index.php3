@@ -168,19 +168,19 @@ if ($spip_display != 4) {
 	
 		// rendez-vous personnels dans le mois
 		$evt = sql_calendrier_agenda($mois, $annee);
-		if ($evt) {
-			echo "<p />";
-			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3', $evt);
-		}
-		// et ceux du jour
-		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-					     "AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) AND messages.statut='publie' LIMIT 0,1"))) {
-			echo "<p />";
-			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col", $partie_cal, $echelle);
-		}
-}
+		if ($evt) 
+		  echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3', '', $evt);
 
+		// et ceux du jour
+		$evt = date("Y-m-d");
+		$evt = sql_calendrier_interval_rv("'$evt'", "'$evt 23:59:59'");
+
+		if ($evt) 
+		  {
+		    echo http_calendrier_entetecol('calendrier.php3',$jour_today,$mois_today,$annee_today);
+		    echo http_calendrier_jour($jour_today,$mois_today,$annee_today, 90, $partie_cal, $echelle, '', '', '', array('', $evt));
+		  }
+}
 
 debut_droite();
 
