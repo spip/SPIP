@@ -790,6 +790,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_nouveaux_message' => 'Nouveaux messages',
 'info_nouveaux_messages' => 'VOUS AVEZ @total_messages@ NOUVEAUX MESSAGES',
 'info_nouvel_article' => 'Nouvel article',
+'info_nouvelle_traduction' => 'Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'ARTICLE NUM&Eacute;RO&nbsp;:',
 'info_obligatoire_02' => '[Obligatoire]',
 'info_option_email' => 'Lorsqu\'un visiteur du site poste un nouveau message dans le forum
