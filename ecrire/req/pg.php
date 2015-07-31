@@ -113,7 +113,7 @@ function spip_pg_query($query, $serveur='')
 // http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='') {
 
-	if (!preg_match('/^\s*(IGNORE\s*)?TABLE\s+(\w+)\s+(ADD|DROP|CHANGE)\s*(.*)$/i', $query, $r)) {
+	if (!preg_match('/^\s*(IGNORE\s*)?TABLE\s+(\w+)\s+(ADD|DROP|CHANGE)\s*([^,]*)(.*)$/is', $query, $r)) {
 	  spip_log("$query incompris", 'pg');
 	} else {
 	  if ($r[1]) spip_log("j'ignore IGNORE dans $query", 'pg');
@@ -122,23 +122,26 @@ function spip_pg_alter($query, $serveur='') {
 	    $f($r[2], $r[4], $serveur);
 	  else spip_log("$query non prevu", 'pg');
 	}
+	// Alter a plusieurs args. Faudrait optimiser.
+	if ($r[5])
+	  spip_pg_alter("TABLE " . $r[2] . substr($r[5],1));
 }
 	      
 // http://doc.spip.org/@spip_pg_alter_change
 function spip_pg_alter_change($table, $arg, $serveur='')
 {
-	if (!preg_match('/^`?(\w+)`?\s+`?(\w+)`?\s+(.*?)\s*(DEFAULT .*?)?(NOT\s+NULL)?$/i',$arg, $r)) {
+	if (!preg_match('/^`?(\w+)`?\s+`?(\w+)`?\s+(.*?)\s*(DEFAULT .*?)?(NOT\s+NULL)?\s*(DEFAULT .*?)?$/i',$arg, $r)) {
 	  spip_log("alter change: $arg  incompris", 'pg');
 	} else {
-	  list(,$old, $new, $type, $default, $null) = $r;
+	  list(,$old, $new, $type, $default, $null, $def2) = $r;
 	  $actions = array("ALTER $old TYPE " . mysql2pg_type($type));
 	  if ($null)
 	    $actions[]= "ALTER $old SET NOT NULL";
 	  else
 	    $actions[]= "ALTER $old DROP NOT NULL";
 
-	  if ($default)
-	    $actions[]= "ALTER $old SET $default";
+	  if ($d = ($default ? $default : $def2))
+	    $actions[]= "ALTER $old SET $d";
 	  else
 	    $actions[]= "ALTER $old DROP DEFAULT";
 
@@ -839,7 +842,8 @@ function spip_pg_multi ($objet, $lang) {
 function mysql2pg_type($v)
 {
   return     preg_replace('/bigint\s*[(]\s*\d+\s*[)]/i', 'bigint', 
-	preg_replace("/longtext/i", 'text',
+		preg_replace('/int\s*[(]\s*\d+\s*[)]/i', 'int', 
+		preg_replace("/longtext/i", 'text',
 		str_replace("mediumtext", 'text',
 		preg_replace("/tinytext/i", 'text',
 	  	str_replace("longblob", 'text',
@@ -851,7 +855,7 @@ function mysql2pg_type($v)
 		preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'bytea', 
 		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
-				 ))))))))))));
+			     )))))))))))));
 }
 
 ?>
