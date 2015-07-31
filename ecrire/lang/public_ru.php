@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Автор',
 	'autres' => 'Прочие',
 	'autres_breves' => 'Другие новости',
-	'autres_groupes_mots_clefs' => 'Другие группы ключей',
+	'autres_groupes_mots_clefs' => 'Другие группы ключевых слов',
 	'autres_sites' => 'Другие сайты',
 
 	// B
@@ -67,9 +67,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Сообщение',
 	'messages_forum' => 'Сообщения форума',
 	'messages_recents' => 'Новые сообщения форума',
-	'mots_clef' => 'Ключ',
-	'mots_clefs' => 'Ключи',
-	'mots_clefs_meme_groupe' => 'Ключи из этой группы',
+	'mots_clef' => 'Ключевое слово',
+	'mots_clefs' => 'Ключевые слова',
+	'mots_clefs_meme_groupe' => 'Ключевые слова из этой группы',
 
 	// N
 	'navigation' => 'Просмотр',
