@@ -26,9 +26,9 @@ include_ecrire ("inc_abstract_sql.php3");
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
 
-function affiche_articles_dist($id_article, $ajout_auteur, $articles_mots, $articles_redac, $articles_versions, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $dir_lang, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
+function affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
 {
- global $options, $spip_display, $spip_lang_left, $spip_lang_right;
+  global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
 $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
@@ -95,7 +95,7 @@ fin_grand_cadre();
 
 debut_gauche();
 
-boite_info_articles($id_article, $statut_article, $visites, $articles_versions, $id_version);
+boite_info_articles($id_article, $statut_article, $visites, $id_version);
 
 //
 // Logos de l'article et Boites de configuration avancee
@@ -126,7 +126,7 @@ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 echo "<div class='serif' align='$spip_lang_left'>";
 
-dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
+dates_articles($id_article, $flag_editable, $statut_article, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
 
 //
 // Liste des auteurs de l'article
@@ -164,7 +164,7 @@ fin_cadre_enfonce(false);
 // Liste des mots-cles de l'article
 //
 
-if ($options == 'avancees' AND $articles_mots != 'non') {
+if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 	formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
 
@@ -215,7 +215,7 @@ fin_page();
 
 }
 
-function boite_info_articles($id_article, $statut_article, $visites, $articles_versions, $id_version)
+function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
 	global $connect_statut, $options;
 
@@ -235,7 +235,8 @@ function boite_info_articles($id_article, $statut_article, $visites, $articles_v
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
 }
 
-	if ($articles_versions AND $id_version>1 AND $options == "avancees") {
+	if ((($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions)
+		AND $id_version>1 AND $options == "avancees") {
 	icone_horizontale(_T('info_historique_lien'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
@@ -641,7 +642,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
-function dates_articles($id_article, $flag_editable, $statut_article,  $articles_redac, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
+function dates_articles($id_article, $flag_editable, $statut_article, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
 {
 
   global $spip_lang_left, $spip_lang_right, $options;
@@ -680,7 +681,7 @@ function dates_articles($id_article, $flag_editable, $statut_article,  $articles
 	}
 
 	$possedeDateRedac=($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
-	if (($options == 'avancees' AND $articles_redac != 'non')
+	if (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
 	OR $possedeDateRedac) {
 		if ($possedeDateRedac)
 			$date_affichee = majuscules(affdate($date_redac))
@@ -1404,6 +1405,22 @@ function trop_longs_articles($texte_plus)
 }
 
 
+function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
+{
+
+// Appliquer la modification de langue
+ if ($GLOBALS['meta']['multi_articles'] == 'oui') {
+	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
+
+	if ($changer_lang) {
+		if ($changer_lang != "herit")
+			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
+		else
+			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
+	}
+ }
+}
+
 // Passer les images/docs en "inclus=non"
 
 function inclus_non_articles($id_article)
@@ -1422,7 +1439,7 @@ if (count($ze_doc)>0){
 
 }
 
-function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent, $flag_auteur, $articles_versions, $new, $champs, $id_rubrique_old) {
+function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent, $flag_auteur, $new, $champs, $id_rubrique_old) {
 {
   global $connect_id_auteur;
 	// recoller les champs du extra
@@ -1441,7 +1458,7 @@ function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent
 	}
 
 	// Stockage des versions : creer une premier version si non-existante
-	if ($articles_versions) {
+	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
 		include("lab_revisions.php");
 		if  ($new != 'oui') {
 			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
@@ -1485,8 +1502,8 @@ function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent
 	calculer_rubriques();
 
 	// Stockage des versions
-	if ($articles_versions) {
-		ajouter_version($id_article, $champs_versions, '', $connect_id_auteur);
+	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
+		ajouter_version($id_article, $champs, '', $connect_id_auteur);
 	}
 
 	// Changer la langue heritee
