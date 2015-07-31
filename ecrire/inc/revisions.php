@@ -504,7 +504,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Enregistrer les modifications
 	ajouter_fragments($id_article, $id_version, $fragments);
 
-	spip_query("UPDATE spip_articles SET id_version=$id_version WHERE id_article=$id_article");
+	sql_updateq("spip_articles", array("id_version" => $id_version), "id_article=$id_article");
 
 	// Si l'insertion ne servait que de verrou, 
 	// la detruire apres mise a jour de l'ancienne entree,

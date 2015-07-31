@@ -27,7 +27,7 @@ function action_converser_dist()
 			$securiser_action = charger_fonction('securiser_action', 'inc');
 			$securiser_action();
 
-			spip_query("UPDATE spip_auteurs SET lang = " . _q($lang) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
+			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
 			$GLOBALS['auteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
 			if ($spip_session = $session($GLOBALS['auteur_session'])) {

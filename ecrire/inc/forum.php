@@ -218,7 +218,6 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
 	spip_query("UPDATE spip_forum SET id_thread=id_forum WHERE id_parent=0");
-
 	// reparer les messages qui n'ont pas l'id_secteur de leur parent
 	do {
 		$discussion = "0";
@@ -229,12 +228,12 @@ function calculer_threads() {
 				$discussion .= "," . $row['id'];
 			else {
 				if ($precedent)
-					spip_query("UPDATE spip_forum SET id_thread=$precedent WHERE id_forum IN ($discussion)");
+					sql_updateq("spip_forum", array("id_thread" => $precedent), "id_forum IN ($discussion)");
 				$precedent = $row['thread'];
 				$discussion = $row['id'];
 			}
 		}
-		spip_query("UPDATE spip_forum SET id_thread=$precedent	WHERE id_forum IN ($discussion)");
+		sql_updateq("spip_forum", array("id_thread" => $precedent	), "id_forum IN ($discussion)");
 	} while ($discussion != "0");
 }
 

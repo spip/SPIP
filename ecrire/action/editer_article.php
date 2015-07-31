@@ -31,7 +31,7 @@ function action_editer_article_dist() {
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
 
-			spip_query("UPDATE spip_documents_articles SET id_article = $id_article WHERE id_article = ".(0-$id_auteur));
+			sql_updateq("spip_documents_articles", array("id_article" => $id_article), "id_article = ".(0-$id_auteur));
 	} 
 
 	// Enregistre l'envoi dans la BD
@@ -320,11 +320,11 @@ function article_referent ($id_article, $c) {
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
 	// articles
 	if ($id_lier == 0) {
-		spip_query("UPDATE spip_articles SET id_trad = $lier_trad WHERE id_article IN ($lier_trad, $id_article)");
+		sql_updateq("spip_articles", array("id_trad" => $lier_trad), "id_article IN ($lier_trad, $id_article)");
 	}
 	// sinon ajouter notre article dans le groupe
 	else {
-		spip_query("UPDATE spip_articles SET id_trad = $id_lier WHERE id_article = $id_article");
+		sql_updateq("spip_articles", array("id_trad" => $id_lier), "id_article = $id_article");
 	}
 
 	return ''; // pas d'erreur

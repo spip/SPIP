@@ -52,7 +52,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 		$descriptif = (corriger_caracteres($descriptif));
 
 		if ($id_groupe) {	// modif groupe
-			spip_query("UPDATE spip_mots SET type=" . _q($change_type) . " WHERE id_groupe=$id_groupe");
+			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
 
 			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire) . ", articles=" . _q($articles) . ", breves=" . _q($breves) . ", rubriques=" . _q($rubriques) . ", syndic=" . _q($syndic) . ",	minirezo=" . _q($acces_minirezo) . ", comite=" . _q($acces_comite) . ", forum=" . _q($acces_forum) . " WHERE id_groupe=$id_groupe");
 

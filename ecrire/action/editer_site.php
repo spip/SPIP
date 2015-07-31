@@ -391,15 +391,15 @@ function editer_site_options($id_syndic)
 	$resume = _request('resume');
 
 	if ($moderation == 'oui' OR $moderation == 'non')
-		spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
+		sql_updateq("spip_syndic", array("moderation" => $moderation), "id_syndic=$id_syndic");
 	if ($miroir == 'oui' OR $miroir == 'non')
-		spip_query("UPDATE spip_syndic SET miroir='$miroir'	WHERE id_syndic=$id_syndic");
+		sql_updateq("spip_syndic", array("miroir" => $miroir	), "id_syndic=$id_syndic");
 	if ($oubli == 'oui' OR $oubli == 'non')
-		spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
+		sql_updateq("spip_syndic", array("oubli" => $oubli), "id_syndic=$id_syndic");
 
 	if (!($resume == 'oui' OR $resume == 'non')) return false;
 
-	spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
+	sql_updateq("spip_syndic", array("resume" => $resume	), "id_syndic=$id_syndic");
 	return true;
 }
 

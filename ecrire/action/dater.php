@@ -34,7 +34,7 @@ function action_dater_post($r)
 
 		$date = format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute'));
 		if ($type == 'article')
-			spip_query("UPDATE spip_articles SET date=" . _q($date) . " WHERE id_article=$r[1]");
+			sql_updateq("spip_articles", array("date" => $date), "id_article=$r[1]");
 		else action_dater_breve_syndic($id, $type);
 	} else {
 		if (_request('avec_redac') == 'non')
@@ -51,7 +51,7 @@ function action_dater_post($r)
 		}
 
 		$date = format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
-		spip_query("UPDATE spip_articles SET date_redac=" . _q($date) . " WHERE id_article=$r[1]");
+		sql_updateq("spip_articles", array("date_redac" => $date), "id_article=$r[1]");
 
 	}
 
@@ -81,8 +81,8 @@ function action_dater_breve_syndic($id, $type)
 		if ($annee == "0000") $mois = "00";
 		if ($mois == "00") $jour = "00";
 		if ($type == 'breve')
-		  spip_query("UPDATE spip_breves SET date_heure=" . _q("$annee-$mois-$jour") . " WHERE id_breve=$id");
-		else spip_query("UPDATE spip_syndic SET date=" . _q("$annee-$mois-$jour") . " WHERE id_syndic=$id");
+		  sql_updateq("spip_breves", array("date_heure" => "$annee-$mois-$jour"), "id_breve=$id");
+		else sql_updateq("spip_syndic", array("date" => "$annee-$mois-$jour"), "id_syndic=$id");
 	}
 }
 ?>

@@ -93,7 +93,7 @@ function low_sec($id_auteur) {
 			$low_sec = $row["low_sec"];
 			if (!$low_sec) {
 				$low_sec = creer_pass_aleatoire();
-				spip_query("UPDATE spip_auteurs SET low_sec = '$low_sec' WHERE id_auteur = $id_auteur");
+				sql_updateq("spip_auteurs", array("low_sec" => $low_sec), "id_auteur = $id_auteur");
 			}
 		}
 	}

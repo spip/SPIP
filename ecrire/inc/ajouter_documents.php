@@ -256,7 +256,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		spip_query("UPDATE spip_documents SET taille="._q($taille).", largeur="._q($largeur)."', hauteur="._q($hauteur).", fichier="._q($chemin) ." WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
-		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
+		sql_updateq("spip_documents", array("id_vignette" => $id_document	), "id_document=$id_document_lie");
 		// hack pour que le retour vers ecrire/ active le bon doc.
 		$documents_actifs[$fichier] = $id_document_lie; 
 	}
