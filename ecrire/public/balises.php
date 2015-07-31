@@ -16,8 +16,8 @@
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
 // meme API : 
 // elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
-// Cette classe est definie dans inc-compilo-index
-//
+// Cette classe est definie dans public/interfaces
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
