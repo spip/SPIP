@@ -145,7 +145,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 
 			// ne pas mettre le <div...> s'il n'y a qu'une ligne
 			if (is_int(strpos($lecode,"\n"))) {
-				$lecode = nl2br("<div align='left' class='spip_code' dir='ltr'><tt>".$lecode."</tt></div>");
+				$lecode = nl2br("<div style='text-align: left;' class='spip_code' dir='ltr'><tt>".$lecode."</tt></div>");
 				$marqueur_echap = "</no p>$marqueur_echap<no p>";
 			} else
 				$lecode = "<span class='spip_code' dir='ltr'><tt>".$lecode."</tt></span>";
