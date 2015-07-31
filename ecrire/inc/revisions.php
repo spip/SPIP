@@ -45,16 +45,14 @@ function replace_fragment($id_article, $version_min, $version_max, $id_fragment,
 
 function exec_replace_fragments($replaces) {
 	if (count($replaces)) {
-		$query = "REPLACE spip_versions_fragments (id_article, version_min, version_max, id_fragment, compress, fragment) ".
-			"VALUES ".join(", ", $replaces);
-		spip_query($query);
+		spip_query("REPLACE spip_versions_fragments (id_article, version_min, version_max, id_fragment, compress, fragment) VALUES ".join(", ", $replaces));
+
 	}
 }
 function exec_delete_fragments($id_article, $deletes) {
 	if (count($deletes)) {
-		$query = "DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND ((".
-			join(") OR (", $deletes)."))";
-		spip_query($query);
+		spip_query("DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND ((".	join(") OR (", $deletes)."))");
+
 	}
 }
 
@@ -69,10 +67,8 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 	foreach ($fragments as $id_fragment => $texte) {
 		$nouveau = true;
 		// Recuperer la version la plus recente
-		$query = "SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments ".
-			"WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ".
-			"ORDER BY version_min DESC LIMIT 0,1";
-		$result = spip_query($query);
+		$result = spip_query("SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ORDER BY version_min DESC LIMIT 0,1");
+
 		if ($row = spip_fetch_array($result)) {
 			$fragment = $row['fragment'];
 			$version_min = $row['version_min'];
@@ -119,14 +115,11 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	$deletes = array();
 
 	// D'abord, vider les fragments inutiles
-	$query = "DELETE FROM spip_versions_fragments WHERE id_article=$id_article ".
-		"AND version_min>=$version_debut AND version_max<=$version_fin";
-	spip_query($query);
+	spip_query("DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND version_min>=$version_debut AND version_max<=$version_fin");
+
 
 	// Fragments chevauchant l'ensemble de l'intervalle, s'ils existent
-	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
-		"WHERE id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin");
 
 	while ($row = spip_fetch_array($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -147,10 +140,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	}
 
 	// Fragments chevauchant le debut de l'intervalle, s'ils existent
-	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
-		"WHERE id_article=$id_article AND version_min<$version_debut ".
-		"AND version_max>=$version_debut AND version_max<=$version_fin";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>=$version_debut AND version_max<=$version_fin");
 
 	$deb_fragment = array();
 	while ($row = spip_fetch_array($result)) {
@@ -172,10 +162,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	}
 
 	// Fragments chevauchant la fin de l'intervalle, s'ils existent
-	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
-		"WHERE id_article=$id_article AND version_max>$version_fin ".
-		"AND version_min>=$version_debut AND version_min<=$version_fin";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_max>$version_fin AND version_min>=$version_debut AND version_min<=$version_fin");
 
 	while ($row = spip_fetch_array($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -239,9 +226,7 @@ function recuperer_fragments($id_article, $id_version) {
 
 	if ($id_version == 0) return array();
 
-	$query = "SELECT id_fragment, version_min, compress, fragment FROM spip_versions_fragments ".
-		"WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_fragment, version_min, compress, fragment FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
 
 	while ($row = spip_fetch_array($result)) {
 		$id_fragment = $row['id_fragment'];
@@ -340,9 +325,7 @@ function apparier_paras($src, $dest, $flou = true) {
 // Recuperer les champs d'une version donnee
 //
 function recuperer_version($id_article, $id_version) {
-	$query = "SELECT champs FROM spip_versions ".
-		"WHERE id_article=$id_article AND id_version=$id_version";
-	$result = spip_query($query);
+	$result = spip_query("SELECT champs FROM spip_versions WHERE id_article=$id_article AND id_version=$id_version");
 	
 	if (!($row = spip_fetch_array($result))) return false;
 
@@ -360,9 +343,8 @@ function recuperer_version($id_article, $id_version) {
 }
 
 function supprimer_versions($id_article, $version_min, $version_max) {
-	$query = "DELETE FROM spip_versions WHERE id_article=$id_article ".
-		"AND id_version>=$version_min AND id_version<=$version_max";
-	spip_query($query);
+	spip_query("DELETE FROM spip_versions WHERE id_article=$id_article AND id_version>=$version_min AND id_version<=$version_max");
+
 	supprimer_fragments($id_article, $version_min, $version_max);
 }
 
@@ -376,10 +358,8 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	spip_get_lock($lock, 10);
 	
 	// Examiner la derniere version
-	$query = "SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag ".
-		"FROM spip_versions WHERE id_article=$id_article ".
-		"ORDER BY id_version DESC LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 0,1");
+
 	if ($row = spip_fetch_array($result)) {
 		$nouveau = !$row['flag'];
 		$id_version = $row['id_version'];
@@ -390,9 +370,8 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 		$nouveau = true;
 		$id_version_new = 1;
 	}
-	$query = "SELECT id_fragment FROM spip_versions_fragments ".
-		"WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 0,1");
+
 	if ($row = spip_fetch_array($result))
 		$id_fragment_next = $row['id_fragment'] + 1;
 	else
@@ -436,18 +415,14 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	$permanent = empty($titre_version) ? 'non' : 'oui';
 	$titre_version = addslashes($titre_version);
 	if ($nouveau) {
-		$query = "INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) ".
-			"VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$id_auteur', '$codes')";
-		spip_query($query);
+		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$id_auteur', '$codes')");
+
 	}
 	else {
-		$query = "UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='$codes', ".
-			"permanent='$permanent', titre_version='$titre_version' ".
-		 	"WHERE id_article=$id_article AND id_version=$id_version";
-		spip_query($query);
+		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='$codes', permanent='$permanent', titre_version='$titre_version' WHERE id_article=$id_article AND id_version=$id_version");
+
 	}
-	$query = "UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article";
-	spip_query($query);
+	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");
 
 	spip_release_lock($lock);
 
