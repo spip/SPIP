@@ -246,6 +246,7 @@ function cron_mail($t) {
 # lignes suivantes jusqu'a la premiere blanche: headers SMTP
 
 				$page = stripslashes(trim($page));
+				$page = preg_replace(",\r\n?,", "\n", $page);
 				$p = strpos($page,"\n\n");
 				$s = strpos($page,"\n");
 				if ($p AND $s) {
