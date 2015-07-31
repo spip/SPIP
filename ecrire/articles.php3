@@ -401,8 +401,10 @@ if ($articles_versions AND $id_version>1 AND $options == "avancees") {
 }
 
 	// Correction orthographique
-	$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-	icone_horizontale(_L("V&eacute;rifier l'orthographe"), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+	if (lire_meta('articles_ortho') == 'oui') {
+		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
+		icone_horizontale(_L("V&eacute;rifier l'orthographe"), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+	}
 
 echo "</div>\n";
 
