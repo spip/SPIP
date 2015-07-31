@@ -132,7 +132,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n");
 
 	$onglet_contenu =
-	  afficher_corps_articles($id_article,$virtuel,$row);
+	  afficher_corps_articles($id_article,$virtuel,$row)
+		.		"<div class='bandeau_actions'>$actions</div>";
 
 	$onglet_proprietes = ((!_INTERFACE_ONGLETS) ? "" :"")
 	  . $dater($id_article, $flag_editable, $statut_article, 'article', 'articles', $date, $date_redac)
