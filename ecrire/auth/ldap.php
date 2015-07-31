@@ -118,8 +118,8 @@ function auth_ldap_search($login, $pass, $checkpass=true, $serveur=''){
 			// (on veut un attribut unique)
 
 		if (is_array($info) AND $info['count'] == 1) {
-			if (!$checkpass) return $login;
 			$dn = $info[0]['dn'];
+			if (!$checkpass) return $dn;
 			if (@ldap_bind($ldap_link, $dn, $pass)) return $dn;
 		}
 	}
