@@ -205,8 +205,16 @@ class IterPOUR extends Iter {
 			// tout ce bloc devrait marcher par charger_fonction('xxx_to_array')
 			// si c'est du RSS
 			if (isset($this->command['sourcemode'])) {
+				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+					if (is_array($a = $g($u))) {
+						$this->tableau = $a;
+						$this->ok = true;
+					}
+				}
+				else
 				switch ($this->command['sourcemode']) {
 					case 'rss':
+					case 'atom':
 						include_spip('inc/syndic');
 						if (is_array($rss = analyser_backend($u))) {
 							$this->tableau = $rss;
@@ -232,7 +240,7 @@ class IterPOUR extends Iter {
 						if (function_exists('str_getcsv')) # PHP 5.3.0
 							$this->tableau = str_getcsv($u);
 						else
-						foreach(explode("\n",$u) as $ligne)
+						foreach(preg_split('/\r?\n/',$u) as $ligne)
 							$this->tableau[] = explode(',', $ligne);
 						$this->ok = true;
 				}
@@ -317,5 +325,8 @@ class IterPOUR extends Iter {
 }
 
 
+function inc_file_to_array_dist($u) {
+	return preg_split('/\r?\n/', $u);
+}
 
 ?>
