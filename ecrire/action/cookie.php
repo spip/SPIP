@@ -40,7 +40,6 @@ function action_cookie_dist()
     $cookie_session,
     $essai_auth_http,
     $essai_login,
-    $id_auteur,
     $ignore_auth_http,
     $retour,
     $session_login,
@@ -167,13 +166,12 @@ if ($var_lang_ecrire) {
 	spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-	if (_FILE_CONNECT AND $id_auteur) {
-		if (verifier_action_auteur("cookie-var_lang_ecrire", $hash, $id_auteur)) {
-			spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($var_lang_ecrire) . " WHERE id_auteur = " . intval($id_auteur));
-			$auteur_session['lang'] = $var_lang_ecrire;
-			$var_f = charger_fonction('session', 'inc');
-			$var_f($auteur_session);
-		}
+	if (_FILE_CONNECT
+	AND verifier_action_auteur("cookie-var_lang_ecrire", $hash)) {
+		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($var_lang_ecrire) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
+		$auteur_session['lang'] = $var_lang_ecrire;
+		$var_f = charger_fonction('session', 'inc');
+		$var_f($auteur_session);
 	}
 
 	$redirect = parametre_url($redirect,'lang',$var_lang_ecrire,'&');

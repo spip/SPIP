@@ -19,7 +19,7 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
-	global $hash, $id_auteur, $url, $chemin, $ancre, $type, $id, $id_document,
+	global $hash, $url, $chemin, $ancre, $type, $id, $id_document,
 	  $sousaction1,
 	  $sousaction2,
 	  $sousaction3,
@@ -51,7 +51,7 @@ function action_joindre_dist()
 
      if (function_exists($sousaction))
        $sousaction($path, $arg, $type, intval($id), $id_document, 
-	       $hash, $id_auteur, $redirect, $documents_actifs);
+	       $hash, $GLOBALS['auteur_session']['id_auteur'], $redirect, $documents_actifs);
 
      else spip_log("spip_action: sousaction inconnue $sousaction");
 
@@ -80,7 +80,7 @@ function spip_action_joindre2($arg, $mode, $type, $id, $id_document,$hash, $id_a
 				   array('name' => basename($arg),
 					 'tmp_name' => $arg)
 				   ), 'distant', $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+			     $hash, $redirect, $actifs);
 }
 
 // Cas d'un fichier transmis
@@ -96,7 +96,7 @@ function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	}
 
 	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+			     $hash, $redirect, $actifs);
 } 
 
 // copie de tout ou partie du repertoire upload
@@ -125,8 +125,7 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	  }
 	}
 
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs);
 }
 
 //  Zip avec confirmation "tel quel"
