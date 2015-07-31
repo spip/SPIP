@@ -165,11 +165,10 @@ function calculer_n_referers($nb_referers) {
 	while ($row = @spip_fetch_array($result)) {
 		$visites = $row['visites'];
 		$referer = addslashes($row['referer']);
-		$domaine = addslashes($row['domaine']);
 		$referer_md5 = '0x'.$row['md5'];
 
 		$referer_update[$visites][] = $referer_md5;
-		$referer_insert[] = "('$date', '$referer', '$domaine', $referer_md5, $visites, $visites)";
+		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites, $visites)";
 		$referer_vus[] = $referer_md5;
 	}
 
@@ -183,7 +182,7 @@ function calculer_n_referers($nb_referers) {
 	}
 	if (is_array($referer_insert)) {
 		$query_insert = "INSERT IGNORE INTO spip_referers ".
-			"(date, referer, domaine, referer_md5, visites, visites_jour) VALUES ".join(', ', $referer_insert);
+			"(date, referer, referer_md5, visites, visites_jour) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
 
@@ -200,11 +199,10 @@ function calculer_n_referers($nb_referers) {
 		$id_article = $row['id_objet'];
 		$visites = $row['visites'];
 		$referer = addslashes($row['referer']);
-		$domaine = addslashes($row['domaine']);
 		$referer_md5 = '0x'.$row['md5'];
 
 		$referer_update[$visites][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
-		$referer_insert[] = "('$date', '$referer', '$domaine', $referer_md5, $id_article, $visites)";
+		$referer_insert[] = "('$date', '$referer', $referer_md5, $id_article, $visites)";
 	}
 
 	// Mise a jour de la base
@@ -217,7 +215,7 @@ function calculer_n_referers($nb_referers) {
 	}
 	if (is_array($referer_insert)) {
 		$query_insert = "INSERT IGNORE INTO spip_referers_articles ".
-			"(date, referer, domaine, referer_md5, id_article, visites) VALUES ".join(', ', $referer_insert);
+			"(date, referer, referer_md5, id_article, visites) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
 
