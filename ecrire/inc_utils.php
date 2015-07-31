@@ -295,6 +295,9 @@ function self($root = false) {
 		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs'
 		.')=[^&]*,i', '', $url);
 
+	// eviter les hacks
+	$url = htmlspecialchars($url);
+
 	return $url;
 }
 
