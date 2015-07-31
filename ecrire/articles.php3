@@ -1105,12 +1105,12 @@ if ($flag_editable AND $options == 'avancees') {
 			echo "</SELECT>";
 			echo "<INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
 		}
-		echo "</FORM>";
+		echo "</div></FORM>";
 	}
 	echo fin_block();
 }
 
-fin_cadre_enfonce();
+fin_cadre_enfonce(false);
 
 
 
