@@ -13,57 +13,62 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// On fixe $GLOBALS['var_mode']
-$GLOBALS['var_mode'] = false;
-$GLOBALS['var_preview'] = false;
-$GLOBALS['var_images'] = false;
-if (isset($_GET['var_mode'])) {
-	// tout le monde peut calcul/recalcul
-	if ($_GET['var_mode'] == 'calcul'
-	OR $_GET['var_mode'] == 'recalcul')
-		$GLOBALS['var_mode'] = $_GET['var_mode'];
-
-	// preview et debug necessitent une autorisation
-	else if ($_GET['var_mode'] == 'preview'
-	OR $_GET['var_mode'] == 'debug') {
-		include_spip('inc/autoriser');
-		if (autoriser(
-			($_GET['var_mode'] == 'preview')
-				? 'previsualiser'
-				: 'debug'
-		)) {
-			// preview ?
-			if ($_GET['var_mode'] == 'preview') {
-				// forcer le compilo et ignorer les caches existants
-				$GLOBALS['var_mode'] = 'recalcul';
-				// truquer les boucles et ne pas enregistrer de cache
-				$GLOBALS['var_preview'] = true;
-			}
-			// seul cas ici: 'debug'
-			else { 
+function init_var_mode(){
+	static $done = false;
+	if (!$done) {
+		// On fixe $GLOBALS['var_mode']
+		$GLOBALS['var_mode'] = false;
+		$GLOBALS['var_preview'] = false;
+		$GLOBALS['var_images'] = false;
+		if (isset($_GET['var_mode'])) {
+			// tout le monde peut calcul/recalcul
+			if ($_GET['var_mode'] == 'calcul'
+			OR $_GET['var_mode'] == 'recalcul')
 				$GLOBALS['var_mode'] = $_GET['var_mode'];
+		
+			// preview et debug necessitent une autorisation
+			else if ($_GET['var_mode'] == 'preview'
+			OR $_GET['var_mode'] == 'debug') {
+				include_spip('inc/autoriser');
+				if (autoriser(
+					($_GET['var_mode'] == 'preview')
+						? 'previsualiser'
+						: 'debug'
+				)) {
+					// preview ?
+					if ($_GET['var_mode'] == 'preview') {
+						// forcer le compilo et ignorer les caches existants
+						$GLOBALS['var_mode'] = 'recalcul';
+						// truquer les boucles et ne pas enregistrer de cache
+						$GLOBALS['var_preview'] = true;
+					}
+					// seul cas ici: 'debug'
+					else { 
+						$GLOBALS['var_mode'] = $_GET['var_mode'];
+					}
+					spip_log($GLOBALS['auteur_session']['nom']
+						. " ".$GLOBALS['var_mode']);
+				}
+				// pas autorise ?
+				else {
+					// si on n'est pas connecte on se redirige
+					if (!$GLOBALS['auteur_session']) {
+						include_spip('inc/headers');
+						redirige_par_entete(generer_url_public('login',
+						'url='.rawurlencode(
+						parametre_url(self(), 'var_mode', $_GET['var_mode'], '&')
+						), true));
+					}
+					// sinon tant pis
+				}
 			}
-			spip_log($GLOBALS['auteur_session']['nom']
-				. " ".$GLOBALS['var_mode']);
-		}
-		// pas autorise ?
-		else {
-			// si on n'est pas connecte on se redirige
-			if (!$GLOBALS['auteur_session']) {
-				include_spip('inc/headers');
-				redirige_par_entete(generer_url_public('login',
-				'url='.rawurlencode(
-				parametre_url(self(), 'var_mode', $_GET['var_mode'], '&')
-				), true));
+			else if ($_GET['var_mode'] == 'images'){
+				// forcer le compilo et ignorer les caches existants
+				$GLOBALS['var_mode'] = 'calcul';
+				// indiquer qu'on doit recalculer les images
+				$GLOBALS['var_images'] = true;
 			}
-			// sinon tant pis
-		}
-	}
-	else if ($_GET['var_mode'] == 'images'){
-		// forcer le compilo et ignorer les caches existants
-		$GLOBALS['var_mode'] = 'calcul';
-		// indiquer qu'on doit recalculer les images
-		$GLOBALS['var_images'] = true;
+		}		
 	}
 }
 
@@ -96,7 +101,9 @@ function public_assembler_dist($fond, $connect='') {
 		include_spip('balise/formulaire_signature');
 		reponse_confirmation($_GET['var_confirm']);
 	}
-
+	
+	init_var_mode();
+	
 	if ($l) lang_select();
 	return assembler_page ($fond, $connect);
 }
@@ -249,6 +256,8 @@ function inclure_page($fond, $contexte_inclus, $connect='') {
 	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
 		$lang_select = lang_select($contexte_inclus['lang']);
 	} else $lang_select ='';
+
+	init_var_mode();
 
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache :
