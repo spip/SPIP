@@ -20,9 +20,9 @@ a mis a jour la valeur avec la page reelle]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(AUTEURS){tout}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#NOM**|extraire_multi|initiale|unique|oui)
+		(#NOM**|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutautl,@#ID_AUTEUR}|ancre_url{paginationautl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutautl,@#ID_AUTEUR}|ancre_url{paginationautl}|afficher_initiale{#NOM**|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -42,7 +42,7 @@ a mis a jour la valeur avec la page reelle]
 	</thead>
 	<tbody>
 	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV*{filtre_statut_articles,poubelle}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
