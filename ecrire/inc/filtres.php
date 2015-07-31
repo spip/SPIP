@@ -56,7 +56,7 @@ function chercher_filtre($fonc, $default=NULL) {
 	}
 	foreach (
 	array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f){
-		if (is_string($g = $GLOBALS['spip_matrice'][$f]))
+		if (isset( $GLOBALS['spip_matrice'][$f]) AND is_string($g = $GLOBALS['spip_matrice'][$f]))
 			find_in_path($g,'', true);
 		if (function_exists($f)
 		OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)
