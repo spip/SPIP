@@ -345,7 +345,12 @@ function test_previsualiser_objet_champ($type=null, $opt=array()) {
 				$champ = $c['champ'];
 				if (!isset($opt[$champ])) return false; // pas de champ passe a la demande => NIET
 				$previsu = explode(',',$c['previsu']);
-				if (!in_array($opt[$champ],$previsu)) // le statut n'est pas dans ceux definis par la previsu => NIET
+				// regarder si ce statut est autoriser pour l'auteur
+				if (in_array($opt[$champ]."/auteur",$previsu)){
+					if (!sql_countsel("spip_auteurs_liens","id_auteur=".intval($qui['id_auteur'])." AND objet=".sql_quote($type)." AND id_objet=".intval($id)))
+						return false;  // pas auteur de cet objet => NIET
+				}
+				elseif (!in_array($opt[$champ],$previsu)) // le statut n'est pas dans ceux definis par la previsu => NIET
 					return false;
 			}
 		}
