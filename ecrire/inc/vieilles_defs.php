@@ -397,4 +397,12 @@ function spip_fetch_array($r, $t=MYSQL_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
+
+// http://doc.spip.org/@envoyer_mail
+function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
+spip_log('creer_objet_multi() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	return $envoyer_mail($email,$sujet,$texte,$from,$headers);
+}
+
 ?>

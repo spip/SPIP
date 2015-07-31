@@ -398,12 +398,6 @@ function calculer_prochain_postdate($check= false) {
 	ecrire_metas(); // attention, sert aussi aux appelants
 }
 
-// http://doc.spip.org/@cron_rubriques
-function cron_rubriques($t) {
-	calculer_rubriques();
-	return 1;
-}
-
 
 // creer_rubrique_nommee('truc/machin/chose') va creer
 // une rubrique truc, une sous-rubrique machin, et une sous-sous-rubrique

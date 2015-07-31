@@ -10,8 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
+// Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
+// il faut donc definir la fonction _cron ici.
+// http://doc.spip.org/@cron_optimiser
+function cron_optimiser_dist($t) {
+
+	optimiser_base();
+	return 1;
+}
 
 // heure de reference pour le garbage collector = 24h auparavant
 // http://doc.spip.org/@optimiser_base
@@ -27,10 +36,6 @@ function optimiser_base($attente = 86400) {
 	}
 }
 
-
-	//
-	// MySQL
-	//
 
 // http://doc.spip.org/@optimiser_base_une_table
 function optimiser_base_une_table() {

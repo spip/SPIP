@@ -594,12 +594,14 @@ function action_cron() {
 // cron() : execution des taches de fond
 // quand il est appele par public.php il n'est pas gourmand;
 // quand il est appele par ?action=cron, il est gourmand
+// On peut lui passer en 2e arg le tableau de taches attendu par inc_cron()
+// Retourne Vrai si un tache a pu etre effectuee
 
 // http://doc.spip.org/@cron
-function cron ($gourmand=false) {
+function cron ($gourmand=false, $taches= array()) {
 
 	// Si base inaccessible, laisser tomber.
-	if (!spip_connect()) return; 
+	if (!spip_connect()) return false; 
 
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
@@ -616,13 +618,15 @@ function cron ($gourmand=false) {
 		if (spip_touch(_DIR_TMP.'cron.lock', 2)) {
 			$cron = charger_fonction('cron', 'inc', true);
 			if ($cron) {
-				$cron();
+				$cron($taches);
 				// redater a la fin du cron
 				// car il peut prendre plus de 2 secondes.
 				spip_touch(_DIR_TMP.'cron.lock', 0);
+				return true;
 			}
 		}# else spip_log("busy");
 	}
+	return false;
 }
 
 

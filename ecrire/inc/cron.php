@@ -21,7 +21,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - les scripts usuels standard sont limites a 30 secondes
 
 // Solution:
-// Toute connexion a SPIP s'achevent  par un appel a la fonction cron()
+// Toute connexion a SPIP s'acheve par un appel a la fonction cron()
 // qui appelle la fonction surchargeable inc_cron().
 // Sa definition standard ci-dessous prend dans une liste de taches
 // la plus prioritaire, leurs dates etant donnees par leur fichier-verrou.
@@ -49,8 +49,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // La fonction executant la tache est un homonyme de prefixe "cron_".
 // Elle doit etre definie dans le fichier homonyme du repertoire "inc/"
 // qui est automatiquement lu.
-
-// Une seule tache est executee pour eviter la guillotine des 30 secondes.
 
 // http://doc.spip.org/@inc_cron_dist
 function inc_cron_dist($taches = array()) {
@@ -83,10 +81,9 @@ function inc_cron_dist($taches = array()) {
 	if ($tache) {
 
 		spip_timer('tache');
-		include_spip("inc/$tache");
-		$f = 'cron_' . $tache;
-		$retour = $f($last);
 		touch($lock);
+		$cron = charger_fonction($tache, 'cron');
+		$retour = $cron($last);
 		// si la tache a eu un effet : log
 		if ($retour) {
 			spip_log("cron: $tache (" . spip_timer('tache') . ") $retour");
@@ -139,16 +136,15 @@ function taches_generales() {
 	return pipeline('taches_generales_cron',$taches_generales);
 }
 
+// Pas de fichier a part pour une fonction aussi petite:
+// - elle peut retirer les fichiers perimes
+// - elle fait appliquer le quota
+// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
+// http://doc.spip.org/@cron_invalideur
+function cron_invalideur_dist($t) {
 
-// Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
-// il faut donc definir la fonction _cron ici.
-// http://doc.spip.org/@cron_optimiser
-function cron_optimiser($t) {
-
-	include_spip('base/optimiser');
-	optimiser_base();
-	// relacher le verrour
+	include_spip('inc/invalideur');
+	appliquer_quota_cache();
 	return 1;
 }
-
 ?>

@@ -18,9 +18,11 @@ function action_editer_site_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
+	$resyndiquer = false;
+
 	if (preg_match(',options/(\d+),',$arg, $r)) {
 		$id_syndic = $r[1];
-		editer_site_options($id_syndic);
+		$resyndiquer = editer_site_options($id_syndic);
 	// Envoi depuis le formulaire d'edition d'un site existant
 	} else if ($id_syndic = intval($arg)) {
 
@@ -40,9 +42,9 @@ function action_editer_site_dist() {
 			set_request('reload', 'oui');
 
 		revisions_sites($id_syndic);
-	}
+	
 	// Envoi depuis le formulaire de creation d'un site
-	else if ($arg == 'oui') {
+	} else if ($arg == 'oui') {
 		set_request('reload', 'oui');
 		$id_syndic = insert_syndic(_request('id_parent'));
 		revisions_sites($id_syndic);
@@ -78,8 +80,6 @@ function action_editer_site_dist() {
 
 		$s = spip_query("SELECT id_syndic, descriptif FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
 		if ($t = spip_abstract_fetch($s)) {
-			include_spip('inc/syndic');
-			syndic_a_jour($id_syndic);
 
 			// Si on n'a pas de descriptif ou pas de logo, on va le chercher
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
@@ -94,9 +94,14 @@ function action_editer_site_dist() {
 					@rename($auto['logo'],
 					_DIR_IMG . 'siteon'.$id_syndic.'.'.$auto['format_logo']);
 			}
+			$resyndiquer = true;
 		}
 	}
 
+	if ($resyndiquer) {
+		include_spip('cron/syndic');
+		syndic_a_jour($id_syndic);		
+	}
 	// Rediriger le navigateur
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_syndic', $id_syndic, '&');
@@ -353,6 +358,8 @@ function analyser_site($url) {
 	return $result;
 }
 
+// Enregistrre les options et retourne True s'il faut syndiquer.
+
 // http://doc.spip.org/@editer_site_options
 function editer_site_options($id_syndic)
 {
@@ -368,11 +375,10 @@ function editer_site_options($id_syndic)
 	if ($oubli == 'oui' OR $oubli == 'non')
 		spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
 
-	if ($resume == 'oui' OR $resume == 'non') {
-		spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
-		include_spip('inc/syndic');
-		syndic_a_jour($id_syndic);
-	}
+	if (!($resume == 'oui' OR $resume == 'non')) return false;
+
+	spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
+	return true;
 }
 
 ?>
