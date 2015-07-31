@@ -127,13 +127,11 @@ $query = "SELECT
 	aut.url_site AS url_site,
 	aut.messagerie AS messagerie,
 	UPPER(aut.nom) AS unom,
-	count(lien.id_article) as compteur,
-	count(res.id_rubrique) as restreint
+	count(lien.id_article) as compteur
 	$sql_sel
 FROM spip_auteurs as aut
 LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur
 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)
-LEFT JOIN spip_auteurs_rubriques AS res ON res.id_auteur=aut.id_auteur
 WHERE
 	$sql_visible
 GROUP BY aut.id_auteur
@@ -157,7 +155,11 @@ $i = 0;
 $auteurs=array();
 while ($auteur = spip_fetch_array($t)) {
 	if ($i>=$debut AND $i<$debut+$max_par_page) {
-		$auteurs[] = $auteur;
+		if ($auteur['statut'] == '0minirezo')
+			$auteur['restreint'] = spip_num_rows(
+				spip_query("SELECT * FROM spip_auteurs_rubriques
+				WHERE id_auteur=".$auteur['id_auteur']));
+			$auteurs[] = $auteur;
 	}
 	$i++;
 
