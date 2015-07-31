@@ -865,8 +865,13 @@ function traiter_retours_chariots($letexte) {
 	return $letexte;
 }
 
-define('_RACCOURCI_CHAR', "{}_-");
-define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_CHAR)."][^<>]*>,imsS");
+// Ces deux constantes permettent de proteger certains caracteres
+// en les remplacanat par des caracteres "illegaux". (cf corriger_caracteres)
+
+define('_RACCOURCI_PROTEGER', "{}_-");
+define('_RACCOURCI_PROTECTEUR', "\x1\x2\x3\x4");
+
+define('_RACCOURCI_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_RACCOURCI_PROTEGER)."][^<>]*>,imsS");
 
 // Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
@@ -901,12 +906,10 @@ function traiter_raccourcis($letexte) {
 		$letexte = traiter_listes($letexte);
 
 	// Proteger les caracteres actifs a l'interieur des tags html
-	$illegal = "\x1\x2\x3\x4";
+
 	if (preg_match_all(_RACCOURCI_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
-	// hack: on transforme les caracteres a proteger en les remplacant
-	// par des caracteres "illegaux". (cf corriger_caracteres())
 		foreach ($regs as $reg) {
-			$insert = strtr($reg[0], _RACCOURCI_CHAR, $illegal);
+			$insert = strtr($reg[0], _RACCOURCI_PROTEGER, _RACCOURCI_PROTECTEUR);
 			$letexte = str_replace($reg[0], $insert, $letexte);
 		}
 	}
@@ -920,7 +923,7 @@ function traiter_raccourcis($letexte) {
 	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
 
 	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, $illegal, _RACCOURCI_CHAR);
+	$letexte = strtr($letexte, _RACCOURCI_PROTECTEUR, _RACCOURCI_PROTEGER);
 
 	// Fermer les paragraphes ; mais ne pas en creer si un seul
 	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
