@@ -114,13 +114,9 @@ function assembler($fond, $connect='') {
 			if (!strlen($fond))
 				$fond = 'sommaire';
 
-			// preparer le contexte
-			$parametrer = charger_fonction('parametrer', 'public');
-			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
-
-			// Stocker le cache sur le disque
-			if ($chemin_cache)
-				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+			// produire la page : peut mettre a jour $lastmodified
+			$produire_page = charger_fonction('produire_page','public');
+			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 		}
 
 		if ($chemin_cache) $page['cache'] = $chemin_cache;
@@ -212,22 +208,46 @@ function inclure_page($fond, $contexte, $connect='') {
 	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
 	if ($res) {return array('texte' => $res);}
 
-	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
-	if (!$use_cache) {
-		$lastmodified = max($lastmodified, $lastinclude);
-	} else {
-		$parametrer = charger_fonction('parametrer', 'public');
-		$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
-		$lastmodified = time();
-		// et on l'enregistre sur le disque
-		if ($chemin_cache
-		AND $page['entetes']['X-Spip-Cache'] > 0)
-			$cacher($contexte, $use_cache, $chemin_cache, $page,
-				$lastmodified);
+	// Si use_cache ne vaut pas 0, la page doit etre calculee
+	// produire la page : peut mettre a jour $lastinclude
+	if ($use_cache) {
+		$produire_page = charger_fonction('produire_page','public');
+		$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte, $page, $lastinclude, $connect);
 	}
+	// dans tous les cas, mettre a jour $lastmodified
+	$lastmodified = max($lastmodified, $lastinclude);
 
 	return $page;
 }
+
+/**
+ * Produire la page et la mettre en cache
+ * lorsque c'est necessaire
+ *
+ * @param string $fond
+ * @param array $contexte
+ * @param int $use_cache
+ * @param string $chemin_cache
+ * @param array $contexte_cache
+ * @param array $page
+ * @param int $lastinclude
+ * @param string $connect
+ * @return array
+ */
+function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, &$page, &$lastinclude, $connect=''){
+	$parametrer = charger_fonction('parametrer', 'public');
+	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
+	// et on l'enregistre sur le disque
+	if ($chemin_cache
+	AND $page['entetes']['X-Spip-Cache'] > 0){
+		$cacher = charger_fonction('cacher', 'public');
+		$lastinclude = time();
+		$cacher($contexte_cache, $use_cache, $chemin_cache, $page, $lastinclude);
+	}
+	return $page;
+}
+
+
 
 # Attention, un appel explicite a cette fonction suppose certains include
 # $echo = faut-il faire echo ou return
