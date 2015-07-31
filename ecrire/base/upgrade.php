@@ -142,7 +142,7 @@ function upgrade_test() {
 	return $result;
 }
 
-// pour versions anterieures a 1.922
+// pour versions <= 1.926
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
@@ -160,7 +160,7 @@ function maj_version ($version, $test = true) {
 	}
 }
 
-// pour versions anterieures a 1.945
+// pour versions <= 1.926
 // http://doc.spip.org/@upgrade_vers
 function upgrade_vers($version, $version_installee, $version_cible = 0){
 	return ($version_installee<$version

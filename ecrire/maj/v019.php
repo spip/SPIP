@@ -21,18 +21,12 @@ function maj_v019_dist($version_installee, $version_cible)
 	maj_while($version_installee, $version_cible);
 }
 
-// Cas particulier introduit en http://trac.rezo.net/trac/spip/changeset/10335
-function maj_v019_38()
-{
-	sql_alter("TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
-}
-
 /*--------------------------------------------------------------------- */
 /*			 Nouvelle gestion des MAJ			*/
 /* ca coincide avec l'état de la 1.9.2, mais c'est un peu retroactif	*/
 /*--------------------------------------------------------------------- */
 
-	// FLV est embeddable, l'upgrade precedent l'avait oublie
+	// FLV est incrustable, la MAJ precedente l'avait oublie
 $GLOBALS['maj'][1][931] = array(
 	array('spip_query', "UPDATE spip_types_documents SET `inclus`='embed' WHERE `extension`='flv'")
 	);
@@ -130,7 +124,6 @@ $GLOBALS['maj'][1][938] = array(
 		## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
 	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
 	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
-
 	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
 	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
 
@@ -257,7 +250,7 @@ $GLOBALS['maj'][1][945] = array(
     array('sql_alter', "TABLE spip_rubriques CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_rubriques CHANGE `texte` `texte` longtext DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_rubriques CHANGE `url_propre` `url_propre` VARCHAR(255) DEFAULT '' NOT NULL"),
-    array('sql_alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
+#    array('sql_alter', "TABLE spip_documents CHANGE `extension` `extension` VARCHAR(10) DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `titre` `titre` text DEFAULT '' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `date` `date` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `descriptif` `descriptif` text DEFAULT '' NOT NULL"),
@@ -423,26 +416,25 @@ if ($GLOBALS['meta']['version_installee'] > 1.950)
 		  array('sql_alter', "TABLE spip_urls CHANGE `maj` date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL")
 		  );
 
-$GLOBALS['maj'][1][956] = array(
+// la mise a jour vers 1.938 contient une erreur
+// il faut supprimer l'autoincrement avant de supprimer la PRIMARY KEY
 
-	## repasser la fin de la mise a jour vers 1.938 qui contenait une erreur'
-	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
-  array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
-    array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
-
-    array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
-    array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
-
-	## recreer la PRIMARY KEY sur spip_types_documents.extension
-    array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
+$GLOBALS['maj'][1][938] = array(
+	array('sql_alter', "TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL ") ,
+	array('sql_alter', "TABLE spip_types_documents DROP PRIMARY KEY"),
+	array('sql_alter', "TABLE spip_types_documents DROP `id_type`"),
+	array('sql_alter', "TABLE spip_types_documents DROP INDEX `extension`"),
+	array('sql_alter', "TABLE spip_types_documents ADD PRIMARY KEY (`extension`)")
 	);
+// pour ceux pour qui c'est trop tard:
+if ($GLOBALS['meta']['version_installee'] > 1.938)
+	$GLOBALS['maj'][1][956] = $GLOBALS['maj'][1][938];
 
 // PG veut une valeur par defaut a l'insertion
 // http://trac.rezo.net/trac/spip/changeset/10482
 
 $GLOBALS['maj'][1][957] = array(
-
-  array('sql_alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
+	array('sql_alter', "TABLE spip_mots CHANGE `id_groupe` `id_groupe` bigint(21) DEFAULT 0 NOT NULL"),
     array('sql_alter', "TABLE spip_documents CHANGE `mode` `mode` ENUM('vignette', 'image', 'document') DEFAULT 'document' NOT NULL")
 	);
 ?>
