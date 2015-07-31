@@ -190,7 +190,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 		if (!preg_match('/(DROP PRIMARY KEY|DROP INDEX|DROP COLUMN|DROP'
 		                .'|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME'
 		                .'|ADD PRIMARY KEY|ADD INDEX|ADD UNIQUE|ADD COLUMN|ADD'
-		                .')\s*([^\s]*)\s*(.*)?/', $do, $matches)){
+		                .')\s*([^\s]*)\s*(.*)?/i', $do, $matches)){
 			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $do \n(requete d'origine : $query)", 'sqlite.'._LOG_ERREUR);
 			return false;
 		}
