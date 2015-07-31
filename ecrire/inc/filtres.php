@@ -1396,13 +1396,13 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	$debut = 'debut'.$nom;
 
 	$pagination = array(
-		'lien_base' => self(),
+		'lien_base' => parametre_url(self(),'ahah_id',''), // nettoyer l'id ahah eventuel
 		'total' => $total,
 		'position' => intval(_request($debut)),
 		'pas' => $pas,
 		'nombre_pages' => floor(($total-1)/$pas)+1,
 		'page_courante' => floor(intval(_request($debut))/$pas)+1,
-		'lien_pagination' => '<a href="@url@">@item@</a>',
+		'lien_pagination' => '<a href="@url@" class="lien_pagination">@item@</a>',
 		'lien_item_courant' => '<span class="on">@item@</span>'
 	);
 

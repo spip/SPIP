@@ -435,6 +435,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
 
+		$ahah_out = false;
 		switch($p->type) {
 		// texte seul
 		case 'texte':
@@ -488,6 +489,8 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$newdescr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
 				$newdescr, $boucles, $id_boucle);
+			if ($boucles[$nom]->mode_partie=='p+')
+				$ahah_out = array($nom,$descr['nom']);
 			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle);
@@ -540,6 +543,10 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 					(!$apres ? "" : " . $apres");
 				$code = "((strval($t = $code)!='')"
 					." ?\n\t$tab($res) :\n\t$tab($altern))";
+			}
+			if ($ahah_out!==false){
+				$code = "(\$ahah = '<div id=\"$ahah_out[0]_$ahah_out[1]\" class=\"bloc_ahah_pagination $ahah_out[0] $ahah_out[1]\">'.$code.'</div>').
+				((\$_GET['ahah_id']=='$ahah_out[0]_$ahah_out[1]')?die(\$ahah):'')";
 			}
 		}
 		if ($code != "''")
