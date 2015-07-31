@@ -45,6 +45,8 @@
 <INCLURE{fond=prive/objets/contenu/article,id=#ID_ARTICLE,id_article=#ID_ARTICLE,virtuel=oui,ajax=wysiwyg}>
 </div>
 
+<div class="nettoyeur"></div>
+
 [(#AUTORISER{modifier,article,#ID_ARTICLE})
 
 	[(#ID_ARTICLE|afficher_qui_edite{article}|non)
