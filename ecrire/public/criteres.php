@@ -156,7 +156,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-	$boucle->mode_partie = calculer_parties($boucle, $idb, $partie, 'p+');
+	calculer_parties($boucles, $idb, $partie, 'p+');
 	// ajouter la cle primaire dans le select pour pouvoir gerer la pagination referencee par @id
 	// sauf si pas de primaire, ou si primaire composee
 	// dans ce cas, on ne sait pas gerer une pagination indirecte
@@ -595,7 +595,7 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 		$partie = ($a11 != 'n') ? $a11 : $a12;
 		$mode = (($op == '/') ? '/' :
 			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
-		$boucle->mode_partie = calculer_parties($boucle, $idb, $partie,  $mode);
+		calculer_parties($boucles, $idb, $partie,  $mode);
 	}
 }
 
@@ -603,9 +603,9 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 // Code specifique aux criteres {pagination}, {1,n} {n/m} etc
 //
 
-function calculer_parties($boucle, $id_boucle, $debut, $mode) {
+function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 
-	$total_parties = $boucle->total_parties;
+	$total_parties = $boucles[$id_boucle]->total_parties;
 	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
 	list(,$op1,$op2) = $regs;
 	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
@@ -640,12 +640,16 @@ function calculer_parties($boucle, $id_boucle, $debut, $mode) {
 	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
 	// Utiliser min pour rabattre $fin_boucle sur total_boucle.
 
-	return "\n\t"
+	$boucles[$id_boucle]->mode_partie = "\n\t"
 	. '$debut_boucle = ' . $debut .   ";\n	"
 	. '$fin_boucle = min(' . $fin . ", \$Numrows['$id_boucle']['total'] - 1);\n	"
 	. '$Numrows[\''.$id_boucle. "']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
 	. '$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
-	. "\n\tif (\$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucle->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
+	. "\n\tif (\$debut_boucle>0 AND sql_seek(\$result,\$debut_boucle,"._q($boucles[$id_boucle]->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
+
+	$boucles[$id_boucle]->partie = "
+		if (\$Numrows['$id_boucle']['compteur_boucle'] <= \$debut_boucle) continue;
+		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;";
 }
 
 // http://doc.spip.org/@calculer_critere_parties_aux

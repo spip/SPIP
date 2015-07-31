@@ -296,8 +296,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 		$corps .= 
 		  (($boucle->lang_select != 'oui') ? 
-			"\t\tif (!(isset(\$GLOBALS['forcer_lang']) AND \$GLOBALS['forcer_lang']))\n\t " : '')
-		  . "\t\tif (\$x = "
+			"\n\t\tif (!(isset(\$GLOBALS['forcer_lang']) AND \$GLOBALS['forcer_lang']))" : '')
+		  . "\n\t\tif (\$x = "
 		  . index_pile($id_boucle, 'lang', $boucles)
 		  . ') $GLOBALS["spip_lang"] = $x;';
 	  }
@@ -343,15 +343,10 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	// gerer le compteur de boucle 
 	// avec ou sans son utilisation par les criteres {1/3} {1,4} {n-2,1}...
 
-	if ($boucle->mode_partie)
-		$corps = 
-		"\n\t\t\$Numrows['$id_boucle']['compteur_boucle']++;
-		if (\$Numrows['$id_boucle']['compteur_boucle'] > \$debut_boucle) {
-		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n$corps\n		}\n";
-
-	elseif ($boucle->cptrows)
-
-		$corps = "\n\t\t\$Numrows['$id_boucle']['compteur_boucle']++;$corps";
+	if ($boucle->partie OR $boucle->cptrows)
+		$corps = "\n\t\t\$Numrows['$id_boucle']['compteur_boucle']++;"
+		. $boucle->partie 
+		. $corps;
 
 	$serveur = !$boucle->sql_serveur ? ''
 		: (', ' . _q($boucle->sql_serveur));
