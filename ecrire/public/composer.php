@@ -155,7 +155,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
 	$nom = strtolower($onoff);
 
 	while (1) {
-	  $on = cherche_logo($id, $type, $nom);
+		$on = cherche_logo($id, $type, $nom);
 		if ($on) {
 			if ($ff)
 			  return  (array('', "$on[2].$on[3]"));
