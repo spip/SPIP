@@ -205,12 +205,15 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$headers = '';
 	else {
 		$headers = recuperer_entetes($f, $date_verif);
-		if (!$headers) {
-			spip_log("ECHEC chargement $url");
+		if (is_numeric($headers)) {
+			spip_log("HTTP status $headers pour $url");
+			fclose($f);
 			return false;
 		}
-		if (!is_array($headers))
+		if (!is_array($headers)) {
+			fclose($f);
 			return $headers ; // cas Location ou Modified.
+		}
 		$headers = join('', $headers);
 	}
 
@@ -241,20 +244,19 @@ function recuperer_body($f, $taille_max=1048576)
 	return $result;
 }
 
-// Entetes de reponse HTTP sur la socket $f
-// Les retourne sous forme de tableau, 
-// sauf si presence de Location ou Last-Modified,
-// ou on renvoie une chaine et on ferme la connexion
+// Lit les entetes de reponse HTTP sur la socket $f et retourne:
+// la valeur (chaine) de l'en-tete Location si on l'a trouvee
+// la valeur (numerique) du statut si different de 200, notamment Not-Modified
+// le tableau des entetes dans tous les autres cas
 
 function recuperer_entetes($f, $date_verif='')
 {
 	$s = @trim(fgets($f, 16384));
 
 	if (!preg_match(',^HTTP/[0-9]+\.[0-9]+ ([0-9]+),', $s, $r)) {
-		@fclose($f);
-		return false;
+		return 0;
 	}
-	$status = $r[1];
+	$status = intval($r[1]);
 	$headers = array();
 	while ($s = trim(fgets($f, 16384))) {
 		$headers[]= $s."\n";
@@ -266,18 +268,14 @@ function recuperer_entetes($f, $date_verif='')
 			if(strtotime($date_verif)>=strtotime($r[1])) {
 				//Cas ou la page distante n'a pas bouge depuis
 				//la derniere visite
-				fclose($f);
 				return $status;
 			}
 		}
 	}
 	if ($status >= 300 AND $status < 400 AND $location) {
-		fclose($f);
 		return $location;
 	} else if ($status != 200){
-		spip_log("ECHEC chargement $url : Status $status");
-		@fclose($f);
-		return false;
+		return $status;
 	}
 	return $headers;
 }
