@@ -415,7 +415,7 @@ function spip_unlink($f) {
 	}
 }
 
-/*
+/**
  * Suppression complete d'un repertoire.
  *
  * @link http://www.php.net/manual/en/function.rmdir.php#92050
