@@ -27,7 +27,7 @@ include_spip('plugins/installer');
 // lecture des sous repertoire plugin existants
 // $dir_plugins pour forcer un repertoire (ex: _DIR_PLUGINS_DIST)
 // _DIR_PLUGINS_SUPPL pour aller en chercher ailleurs
-// (chemins relatifs a la racine du site, separes par des ":")
+// (chemin relatif a la racine du site)
 // http://doc.spip.org/@liste_plugin_files
 function liste_plugin_files($dir_plugins = null){
 	static $plugin_files=array();
