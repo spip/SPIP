@@ -298,7 +298,7 @@ function balise_NOTES_dist($p) {
 }
 
 function balise_RECHERCHE_dist($p) {
-	$p->code = 'entites_html($GLOBALS["recherche"])';
+	$p->code = 'entites_html(_request("recherche"))';
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -457,7 +457,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
 // ATTENTION: cette balise efface parfois les boutons admin implicites
 function balise_SPIP_CRON_dist ($p) {
-  $p->code = '"' . str_replace('"', '\"', (generer_spip_cron())) . '"';
+	$p->code = '"' . str_replace('"', '\"', (generer_spip_cron())) . '"';
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -487,6 +487,17 @@ function balise_LANG_dist ($p) {
 		$p->code = "htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang'])";
 	else
 		$p->code = "htmlentities($_lang)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+// #RANG
+// affiche le "numero de l'article" quand on l'a titre '1. Premier article';
+// ceci est transitoire afin de preparer une migration vers un vrai systeme de
+// tri des articles dans une rubrique (et plus si affinites)
+function balise_RANG_dist ($p) {
+	$_titre = champ_sql('titre', $p);
+	$p->code = "recuperer_numero($_titre)";
 	$p->interdire_scripts = false;
 	return $p;
 }

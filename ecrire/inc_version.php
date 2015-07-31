@@ -208,6 +208,9 @@ $table_date = array();
 $tables_jointures = array();
 $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 
+// Experimental : pour supprimer systematiquement l'affichage des numeros
+// de classement des titres, recopier la ligne suivante dans mes_options :
+# $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';
 
 // Droits d'acces maximum par defaut
 @umask(0);

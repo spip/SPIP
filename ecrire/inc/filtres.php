@@ -126,7 +126,7 @@ function texte_backend($texte) {
 		$texte = str_replace(chr(159), '&#159;', $texte);
 	}
 
-	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers
+	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers¡
 	$texte = str_replace("&#8217;","'",$texte);
 
 	return $texte;
@@ -134,8 +134,19 @@ function texte_backend($texte) {
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
-	$texte = preg_replace(",^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+,", "", $texte);
-	return $texte;
+	return preg_replace(
+	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,",
+	"", $texte);
+}
+
+// et la fonction inverse
+function recuperer_numero($texte) {
+	if (preg_match(
+	",^[[:space:]]*([0-9]+)([.)]|".chr(194).'?'.chr(176).")[[:space:]]+,",
+	$texte, $regs))
+		return $regs[1];
+	else
+		return '';
 }
 
 // Suppression basique et brutale de tous les <...>
