@@ -226,9 +226,12 @@ $preg='') {
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(spip_htmlspecialchars($letexte));  ## pour les curieux
-		if (strpos($letexte,"<")!==false AND
+		$max_prof = 5;
+		while (strpos($letexte,"<")!==false
+			AND
 		  preg_match_all(',<(span|div)\sclass=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
-		$letexte, $regs, PREG_SET_ORDER)) {
+		$letexte, $regs, PREG_SET_ORDER)
+		  AND $max_prof--) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
 				// recherche d'attributs supplementaires
