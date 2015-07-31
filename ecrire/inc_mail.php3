@@ -43,6 +43,8 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	if (! email_valide ($email) ) return false;
 	if ($email == "vous@fournisseur.com") return false;
 
+	spip_log("mail <$email>: $sujet");
+
 	$headers = "From: $from\n".
 		"MIME-Version: 1.0\n".
 		"Content-Type: text/plain; charset=iso-8859-1\n".
@@ -155,74 +157,5 @@ function envoyer_mail_proposition($id_article) {
 		}
 	}
 }
-
-/*
-function envoyer_mail_nouveautes($majnouv) {
-	$jours_neuf = lire_meta("jours_neuf");
-	$adresse_site = lire_meta("adresse_site");
-	$adresse_neuf = lire_meta("adresse_neuf");
-	$nom_site_spip = lire_meta("nom_site");
-	$post_dates = lire_meta("post_dates");
-
-	$courr .= "Bonjour,\n\n";
-	$courr .= "Voici la lettre d'information du site \"$nom_site_spip\" ($adresse_site),\n";
-	$courr .= "qui recense les articles et les breves publi\xe9s depuis $jours_neuf jours.\n\n";
-
-	if ($post_dates == 'non')
-		$query_post_dates = 'AND date < NOW()';
-
-	// intervalle de reference
-	if ($majnouv>0)	// depuis le dernier envoi
-		$intervalle = time()-$majnouv;
-	else			// mise a jour du site ou 'envoyer maintenant'
-		$intervalle = 3600*24*$jours_neuf;
-
-	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $intervalle SECOND) $query_post_dates ORDER BY date DESC";
- 	$result = spip_query($query);
-
-	if (spip_num_rows($result) > 0) {
-		$contenu = "\n          -----------------\n          NOUVEAUX ARTICLES\n          -----------------\n\n";
-	}
-	while ($row = spip_fetch_array($result)) {
-		$contenu .= "\n".extrait_article($row);
-	}
-	spip_free_result($result);
-
-	$activer_breves = lire_meta("activer_breves");
-
-	if ($activer_breves != "non") {
-
-	   	$query = "SELECT * FROM spip_breves WHERE statut = 'publie' AND date_heure > DATE_SUB(NOW(), INTERVAL $intervalle SECOND) ORDER BY date_heure DESC";
-	 	$result = spip_query($query);
-
-		if (spip_num_rows($result) > 0) {
-			$contenu .= "\n          -----------------\n             LES BREVES\n          -----------------\n\n";
-		}
-
-	 	while($row = spip_fetch_array($result)) {
-			$id_breve = $row['id_breve'];
-			$date_heure = nom_jour($row['date_heure'])." ".affdate($row['date_heure'], 'CORRIGER_ENTITES');
-			$breve_titre = $row['titre'];
-			$breve_texte = $row['texte'];
-
-			$extrait = textebrut(propre(couper_intro($breve_texte, 500)));
-	
-			$contenu .= "\n** $breve_titre ** - $date_heure\n\n$extrait\n\n-> ".$adresse_site."/spip_redirect.php3?id_breve=$id_breve\n\n";
-		}
-	}
-
-	if ($contenu)
-		envoyer_mail($adresse_neuf, "[$nom_site_spip] Les nouveautes", $courr.$contenu);
-}
-
-function envoyer_mail_quoi_de_neuf($force=false) {
-	if (!$force)
-		$majnouv = lire_meta('majnouv');
-	else
-		$majnouv = 0;
-	ecrire_meta('majnouv', time());
-	ecrire_metas();
-	envoyer_mail_nouveautes($majnouv);
-} */
 
 ?>

@@ -658,7 +658,8 @@ function spip_log($message) {
 	global $flag_ecrire;
 
 	if (!$pid = @getmypid()) $pid ='-';
-	if (!$uid = @get_current_user()) $uid = '-';
+	if (!$uid = @getmyuid()) $uid = '-';
+	if (!$gid = @getmygid()) $gid = '-';
 	if (!$ip = $GLOBALS['HTTP_SERVER_VARS']['REMOTE_ADDR']) $ip = '-';
 
 	$message = date("M d H:i:s")." $ip $uid"."[$pid] "
