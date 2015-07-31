@@ -227,6 +227,7 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 // dit si Row est exportable, 
 // en particulier quand on se restreint a un tableau non vide de rubriques
 
+// http://doc.spip.org/@export_select
 function export_select($row, $les_rubriques) {
 
 	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
