@@ -29,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $res = true;
 
 // Cas d'une page contenant du PHP :
-if ($page['process_ins'] != 'html') {
+if (empty($page['process_ins']) OR $page['process_ins'] != 'html') {
 
 	include_spip('inc/lang');
 
