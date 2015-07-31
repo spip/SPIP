@@ -492,11 +492,15 @@ padding-top:10px;
 
 /* Bouton de validation */
 input[type="submit"] {
-	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee})], center center })]
-	border: 1px outset [(#GET{foncee})];
+	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_claire})], center center })]
+	border: 1px outset [(#GET{claire})];
 	padding: 3px;
 	font-weight: bold;
-	color: white;
+	color: [#(#GET{foncee}|couleur_foncer)];
+}
+input[type="submit"]:hover {
+	border: 1px outset [(#GET{foncee})];
+	color: black;
 }
 
 input[type="file"] {

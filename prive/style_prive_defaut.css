@@ -11,7 +11,7 @@ body { border: 0; }
 a.lien_sous { color: #666; }
 a.lien_sous:hover { color: #000; }
 
-div.bandeau_rubriques { background-color: #eee; border: 1px solid #555; }
+div.bandeau_rubriques { background-color: #eee; border: 1px solid #ccc; border-bottom: 0px; }
 a.bandeau_rub { width: 120px; display: block; background-repeat: no-repeat; padding: 2px; border-bottom: 1px solid #ccc; font-size: 10px; text-decoration: none; color: #666; }
 a.bandeau_rub:hover { background-color: #fff; background-repeat: no-repeat; color: #333; text-decoration: none; }
 div.bandeau_rub { position: absolute; top: 4px; background-color: #eee; padding: 0; border: 1px solid #555; visibility: hidden; }
