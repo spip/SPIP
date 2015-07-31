@@ -29,7 +29,7 @@ function base_convert_sql_utf8_dist($titre='', $reprise=false)
 
 	// bouton "retour au site" + redirige_par_entete
 	echo "<p style='text-align: right'>",
-	  "<a href='", generer_url_ecrire("config_lang"), "'> &gt;&gt; ",
+	  "<a href='", generer_url_ecrire("configurer_langue"), "'> &gt;&gt; ",
 	  _T('icone_retour'),"</a></p>",
 	  install_fin_html();
 }
