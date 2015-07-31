@@ -15,7 +15,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/headers');
 
-// http://doc.spip.org/@exec_upgrade_dist
+/**
+ * Fonction d'installation et de mise à jour du core de SPIP
+ * 
+ * @return void
+**/
 function exec_upgrade_dist()
 {
 

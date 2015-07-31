@@ -938,13 +938,13 @@ function texte_script($texte) {
 /**
  * Gestion des chemins (ou path) de recherche de fichiers par SPIP
  *
- * Empile de nouveaux chemins (à la suite de ceux déjà présent, mais avant
- * le répertoire squelettes ou les dossiers squelettes), si un reéertoire
+ * Empile de nouveaux chemins (à la suite de ceux déjà présents, mais avant
+ * le répertoire `squelettes` ou les dossiers squelettes), si un répertoire
  * (ou liste de répertoires séparés par `:`) lui est passé en paramètre.
  *
  * Ainsi, si l'argument est de la forme `dir1:dir2:dir3`, ces 3 chemins sont placés
- * en tete du path, dans cet ordre (hormis squelettes & la globale
- * $dossier_squelette si definie qui resteront devant)
+ * en tête du path, dans cet ordre (hormis `squelettes` & la globale
+ * `$dossier_squelette` si définie qui resteront devant)
  * 
  * Retourne dans tous les cas la liste des chemins.
  *
