@@ -80,8 +80,6 @@ class Champ {
 // Si ca reference un champ SQL, on le memorise dans la structure $boucles
 // afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
 
-include_ecrire('inc_serialbase.php3');
-
 function index_pile($idb, $nom_champ, &$boucles) {
 	global $exceptions_des_tables, $table_des_tables, $tables_principales;
 
