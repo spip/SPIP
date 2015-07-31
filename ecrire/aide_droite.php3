@@ -68,7 +68,7 @@ if (@is_file($fichier_aide)) {
 	$html = substr($html, 0, strpos($html, "</$aide>"));
 
 	echo justifier(propre($html)."<p>");
-	echo "<font size=2>".propre($les_notes)."</font><p>";
+	echo "<font size=2>$les_notes</font><p>";
 }
 
 ?>
