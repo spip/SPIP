@@ -142,7 +142,7 @@
 	<bouton id='auteur_creer' parent="outils_rapides">
 		<icone>images/auteur-new-16.png</icone>
 		<titre>icone_creer_nouvel_auteur</titre>
-		<url>auteur_infos</url>
+		<url>auteur_edit</url>
 		<args>new=oui</args>
 	</bouton>
 
