@@ -499,7 +499,7 @@ function centrer($letexte) {
 // Export iCal
 //
 
-function filtrer_ical ($texte) {
+function filtrer_ical($texte) {
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, lire_meta('charset'), 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
@@ -508,8 +508,15 @@ function filtrer_ical ($texte) {
 	return $texte;
 }
 
-function date_ical ($date_heure, $minutes = 0) {
-	return date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+$minutes,0,mois($date_heure),jour($date_heure),annee($date_heure)));
+function date_ical($date_heure, $minutes = 0) {
+	return date("Ymd\THis", mktime(heures($date_heure),minutes($date_heure)+$minutes,0,mois($date_heure),jour($date_heure),annee($date_heure)));
+}
+
+function date_iso($date_heure) {
+	list($annee, $mois, $jour) = recup_date($date_heure);
+	list($heures, $minutes, $secondes) = recup_heure($date_heure);
+	$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
+	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
 // [(#ID_ARTICLE|exposer)] affiche 'on' si on est sur l'objet (article,
