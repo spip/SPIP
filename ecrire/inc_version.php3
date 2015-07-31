@@ -5,6 +5,8 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
+// Pas de warnings idiots
+error_reporting (E_ALL ^ E_NOTICE);
 
 //
 // Version courante de SPIP
