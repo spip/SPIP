@@ -74,7 +74,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 			ecrire_fichier ($phpfile, $skel_code);
 			return $nom;
 		} else {
-			erreur_squelette($sourcefile, _L('Erreur de compilation'));
+			erreur_squelette(_T('zbug_erreur_compilation'), $sourcefile);
 		}
 	}
 }
