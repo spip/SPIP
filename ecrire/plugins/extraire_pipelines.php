@@ -1,0 +1,44 @@
+<?php
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2011                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+/**
+ * Extraire les infos de pipeline
+ *
+ * @param array $arbre
+ */
+function plugins_extraire_pipelines_dist(&$arbre){
+	$pipeline = array();
+	if (spip_xml_match_nodes(',^pipeline,',$arbre,$pipes)){
+		foreach($pipes as $tag=>$p){
+			if (!is_array($p[0])){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$pipeline[] = $att;
+			}
+			else foreach($p as $pipe){
+				$att = array();
+				if (is_array($pipe))
+					foreach($pipe as $k=>$t)
+						$att[$k] = trim(end($t));
+				$pipeline[] = $att;
+			}
+		}
+		unset($arbre[$tag]);
+	}
+
+	return $pipeline;
+}
+
+
+?>
