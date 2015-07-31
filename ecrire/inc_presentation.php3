@@ -678,21 +678,20 @@ function afficher_auteurs ($titre_table, $requete) {
 //
 // Afficher les forums
 //
- 
+
 function afficher_forum($request, $adresse_retour, $controle = "non", $recurrence = "oui") {
 	global $debut;
 	static $compteur_forum;
 	static $nb_forum;
 	static $i;
 	global $couleur_foncee;
-	global $connect_id_auteur;
-	global $connect_activer_messagerie;	
+	global $connect_id_auteur, $connect_activer_messagerie;
 	global $mots_cles_forums;
 
 
 	$activer_messagerie = lire_meta("activer_messagerie");
-	
-	$compteur_forum++; 
+
+	$compteur_forum++;
 
 	$nb_forum[$compteur_forum] = spip_num_rows($request);
 	$i[$compteur_forum] = 1;
