@@ -95,7 +95,7 @@ function nettoyer_caracteres_mail($t) {
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails;
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
@@ -164,7 +164,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 }
 
 function extrait_article($row) {
-	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_texte");
 
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 

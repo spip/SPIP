@@ -15,7 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-include_ecrire ("inc_acces.php3");
+include_ecrire ("inc_acces");
 
 
 function xml_fetch_tag($f, &$before, $gz=false) {
@@ -352,7 +352,7 @@ function import_all($f, $gz=false) {
 	$_fseek = ($gz) ? gzseek : fseek;
 
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_ecrire('inc_meta.php3');
+	include_ecrire('inc_meta');
 	lire_metas();
 
 	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d
@@ -440,7 +440,7 @@ function import_all($f, $gz=false) {
 
 function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	flush();
 	echo " -->\n<script type='text/javascript'><!--\n";
 

@@ -14,8 +14,8 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_session.php3"); // action_auteur
-include_ecrire ("inc_date.php3");
+include_ecrire ("inc_session"); // action_auteur
+include_ecrire ("inc_date");
 
 //
 // Vignette pour les documents lies
@@ -85,8 +85,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
-		include_ecrire('inc_distant.php');
-		include_ecrire('inc_logos.php3');
+		include_ecrire('inc_distant');
+		include_ecrire('inc_logos');
 		#var_dump($document);
 		$local = copie_locale($document['fichier']);
 		if ($portfolio)
@@ -445,7 +445,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 //
 function prive_lien_image_reduite ($largeur_vignette, $hauteur_vignette, $fichier_vignette) {
 	global $connect_id_auteur;
-	include_ecrire("inc_logos.php3");
+	include_ecrire("inc_logos");
 
 	return reduire_image_logo('../'.$fichier_vignette, 120, 110);
 }
@@ -1416,7 +1416,7 @@ function maj_documents ($id_objet, $type) {
 		}
 
 		// Demander l'indexation du document
-		include_ecrire('inc_index.php3');
+		include_ecrire('inc_index');
 		marquer_indexer('document', $id_document);
 
 	}

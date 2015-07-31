@@ -94,7 +94,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. "</b></font><br />"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
-		include_ecrire('inc_minipres.php');
+		include_ecrire('inc_minipres');
 		$retour .= aide('erreur_mysql');
 		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
 	}
@@ -122,7 +122,7 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		($GLOBALS['var_mode'] == 'debug')) {
-			include_ecrire('inc_headers.php');
+			include_ecrire('inc_headers');
 			http_no_cache();
 			echo _DOCTYPE_ECRIRE,
 			  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
@@ -327,7 +327,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	// - ca fait 2 headers !
 	ob_end_clean();
 
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE,
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
@@ -418,7 +418,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    $titre = 'zbug_' . $titre;
 	  }
 	  else {
-	      include_ecrire("inc_spip_sax.php");
+	      include_ecrire("inc_spip_sax");
 	      $res = spip_sax($texte);
 	      if (!$res)
 		$err = _L("impossible");

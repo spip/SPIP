@@ -155,7 +155,7 @@ function js_menu_rubriques_dist()
 	if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
 		exit;
 	header('Content-type: text/javascript; charset='.$GLOBALS['meta']['charset']);
-	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_texte");
 	echo "document.write(\"";
 	echo "<table><tr><td valign='top' width='200'>";
 	echo bandeau_menu();

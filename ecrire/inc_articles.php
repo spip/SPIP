@@ -12,16 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_date.php3");
-include_ecrire ("inc_documents.php3");
-include_ecrire ("inc_forum.php3");
-include_ecrire ("inc_abstract_sql.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_texte");
+include_ecrire("inc_urls");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_logos");
+include_ecrire ("inc_mots");
+include_ecrire ("inc_date");
+include_ecrire ("inc_documents");
+include_ecrire ("inc_forum");
+include_ecrire ("inc_abstract_sql");
 
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
@@ -500,7 +500,7 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 		// 'depublie' => invalider les caches
 		if ($ok_nouveau_statut AND $statut_article == 'publie' 
 		    AND $GLOBALS['invalider_caches']) {
-		  include_ecrire ("inc_invalideur.php3");
+		  include_ecrire ("inc_invalideur");
 		  suivre_invalideur("id='id_article/$id_article'");
 		}
 	}
@@ -518,8 +518,8 @@ function changer_statut_articles($id_article, $statut)
 
 	if ($statut != $statut_ancien) {
 		spip_query("UPDATE spip_articles SET statut='$statut', date=NOW() WHERE id_article=$id_article");			
-		include_ecrire("inc_rubriques.php3");
-		include_ecrire('inc_texte.php3');
+		include_ecrire("inc_rubriques");
+		include_ecrire('inc_texte');
 		calculer_rubriques();
 
 		cron_articles($id_article, $statut, $statut_ancien);
@@ -534,20 +534,20 @@ function cron_articles($id_article, $statut, $statut_ancien)
 
 	if ($statut == 'publie') {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index.php3");
+			include_ecrire ("inc_index");
 			marquer_indexer('article', $id_article);
 		}
-		include_ecrire("inc_mail.php3");
+		include_ecrire("inc_mail");
 		envoyer_mail_publication($id_article);
 	}
 
 	if ($statut_ancien == 'publie' AND $invalider_caches) {
-	  	include_ecrire ("inc_invalideur.php3");
+	  	include_ecrire ("inc_invalideur");
 		suivre_invalideur("id='id_article/$id_article'");
 	}
 
 	if ($statut == "prop" AND $statut_ancien != 'publie') {
-		include_ecrire("inc_mail.php3");
+		include_ecrire("inc_mail");
 		envoyer_mail_proposition($id_article);
 	}
 }
@@ -1086,7 +1086,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 	}
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_ecrire ("inc_index");
 		marquer_indexer('article', $id_article);
 	}
   }
@@ -1096,7 +1096,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
 	$result=spip_query($query);
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_ecrire ("inc_index");
 		marquer_indexer('article', $id_article);
 	}
   }
@@ -1322,7 +1322,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		}
 		
 		if ($champs_extra AND $extra) {
-			include_ecrire("inc_extra.php3");
+			include_ecrire("inc_extra");
 			extra_affichage($extra, "articles");
 		}
 	}
@@ -1475,7 +1475,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		include_ecrire("lab_revisions.php");
+		include_ecrire("lab_revisions");
 		if  ($new != 'oui') {
 			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
 			if (!spip_num_rows(spip_query($query))) {
@@ -1495,7 +1495,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 	}
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		$champs_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
 	}
 

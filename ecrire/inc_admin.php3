@@ -22,7 +22,7 @@ function debut_admin($action, $commentaire='') {
 	global $connect_statut;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
-		include_ecrire ("inc_minipres.php");
+		include_ecrire ("inc_minipres");
 		install_debut_html(_T('info_acces_refuse'));install_fin_html();
 		exit;
 	}
@@ -32,8 +32,8 @@ function debut_admin($action, $commentaire='') {
 		return true;
 	}
 
-	include_ecrire ("inc_minipres.php");
-	include_ecrire ("inc_texte.php3");
+	include_ecrire ("inc_minipres");
+	include_ecrire ("inc_texte");
 	install_debut_html(_T('info_action', array('action' => $action)));
 
 	if ($commentaire) {

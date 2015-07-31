@@ -12,8 +12,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
-include_ecrire ("inc_session.php3");
-include_ecrire('inc_cookie.php');
+include_ecrire ("inc_session");
+include_ecrire('inc_cookie');
 
 $var_f = include_fonction('auth');
 if (!$var_f()) exit;
@@ -112,7 +112,7 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 
 // Choisir la langue et charger le minimum vital pour l'affichage
 
-include_ecrire("inc_minipres.php");
+include_ecrire("inc_minipres");
 
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
 AND $spip_lang_ecrire <> $auteur_session['lang']
@@ -132,7 +132,7 @@ if (!isset($reinstall)) {
 
 	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
 
-	  include_ecrire('inc_upgrade.php');
+	  include_ecrire('inc_upgrade');
 	  demande_maj_version();
 	}
  }

@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // mode = 'force' - charger toujours (mettre a jour)
 //
 function copie_locale($source, $mode='auto') {
-	include_ecrire('inc_getdocument.php3');
+	include_ecrire('inc_getdocument');
 
 	// Si copie_locale() est appele depuis l'espace prive
 	if (!_DIR_RESTREINT
@@ -40,7 +40,7 @@ function copie_locale($source, $mode='auto') {
 					WHERE fichier='".addslashes($source)."'");
 				list($id_document) = spip_fetch_array($a);
 				if ($id_document) {
-					include_ecrire('inc_index.php3');
+					include_ecrire('inc_index');
 					marquer_indexer('document', $id_document);
 				}
 			}
@@ -94,7 +94,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 			while ($s = trim(fgets($f, 16384))) {
 				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
-					include_ecrire('inc_filtres.php3');
+					include_ecrire('inc_filtres');
 					$location = suivre_lien($url, $r[1]);
 					spip_log("Location: $location");
 				}
@@ -129,7 +129,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 
 	// Faut-il l'importer dans notre charset local ?
 	if ($munge_charset) {
-		include_ecrire('inc_charsets.php3');
+		include_ecrire('inc_charsets');
 		$result = transcoder_page ($result, $headers);
 	}
 

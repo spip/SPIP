@@ -247,7 +247,7 @@ function modifier_forums_publics($id_article, $forums_publics) {
 			ecrire_meta('accepter_visiteurs', 'oui');
 			ecrire_metas();
 		}
-		include_ecrire('inc_invalideur.php3');
+		include_ecrire('inc_invalideur');
 		suivre_invalideur("id='id_forum/a$id_article'");
 
 }

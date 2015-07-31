@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_texte");
+include_ecrire("inc_urls");
+include_ecrire("inc_rubriques");
 
 function enfant_breves($leparent){
 	global $spip_lang_left, $spip_lang_right;
@@ -62,7 +62,7 @@ function changer_statut_breves($id_breve, $statut)
         	$query = "UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve";
 		$result = spip_query($query);
 
-		include_ecrire("inc_rubriques.php3");
+		include_ecrire("inc_rubriques");
 		calculer_rubriques();
 	}
 }
@@ -75,7 +75,7 @@ function breves_dist()
 		list($statut_ancien) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves $cond"));
 		if ($statut != $statut_ancien) {
 			spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut'" . $cond);
-			include_ecrire("inc_rubriques.php3");
+			include_ecrire("inc_rubriques");
 			calculer_rubriques();
 		}
 		redirige_par_entete("naviguer.php3?id_rubrique=$id_rubrique");

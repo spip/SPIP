@@ -12,8 +12,8 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_sites_tous.php");
+include_ecrire("inc_presentation");
+include_ecrire("inc_sites_tous");
 
 function recherche_dist()
 {
@@ -70,7 +70,7 @@ if (strlen($recherche) > 0) {
 	
 	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($activer_moteur) {	// texte integral
-		include_ecrire ('inc_index.php3');
+		include_ecrire ('inc_index');
 		list($hash_recherche,) = requete_hash ($recherche);
 		$query_articles_int = requete_txt_integral('article', $hash_recherche);
 		$query_breves_int = requete_txt_integral('breve', $hash_recherche);

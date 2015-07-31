@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_minipres.php");
-include_ecrire ("inc_base.php3");
-include_ecrire ("inc_install.php");
+include_ecrire ("inc_minipres");
+include_ecrire ("inc_base");
+include_ecrire ("inc_install");
 define('_FILE_TMP', '_install');
 
 function install()
@@ -117,7 +117,7 @@ function install_6()
 	echo "<P>"._T('info_utilisation_spip');
 
 	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
-	include_ecrire ("inc_meta.php3");
+	include_ecrire ("inc_meta");
 
 	if ($login) {
 		$nom = addslashes($nom);
@@ -143,10 +143,10 @@ function install_6()
 			VALUES ('email_webmaster', '".addslashes($email)."')");
 	}
 
-	include_ecrire("inc_config.php3");
+	include_ecrire("inc_config");
 	init_config();
 
-	include_ecrire ("inc_acces.php3");
+	include_ecrire ("inc_acces");
 	ecrire_acces();
 
 	@unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
@@ -227,7 +227,7 @@ function install_4()
 	install_debut_html();
 
 	// Necessaire pour appeler les fonctions SQL wrappees
-	include_ecrire("inc_db_mysql.php3");
+	include_ecrire("inc_db_mysql");
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
 	echo "<P>\n";
@@ -287,7 +287,7 @@ function install_4()
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.2;\n";
-		$conn .= "include_ecrire('inc_db_mysql.php3');\n";
+		$conn .= "include_ecrire('inc_db_mysql');\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
 #		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
@@ -520,7 +520,7 @@ function install_ldap5()
 	install_debut_html();
 
 	include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
-	include_ecrire('inc_meta.php3');
+	include_ecrire('inc_meta');
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();
 
@@ -749,7 +749,7 @@ function install_unpack()
 {
   global  $connect_id_auteur;
 
-  include_ecrire('inc_admin.php3');
+  include_ecrire('inc_admin');
 
   $action = _T('texte_unpack');
  

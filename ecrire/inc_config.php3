@@ -12,7 +12,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_meta");
 
 //
 // Appliquer les valeurs par defaut pour les options non initialisees
@@ -174,7 +174,7 @@ function appliquer_modifs_config() {
 			echo _T('info_adresse_non_indiquee');
 			exit;
 		} else {
-			include_ecrire('inc_distant.php');
+			include_ecrire('inc_distant');
 			$page = recuperer_page($test_proxy, true);
 			if ($page)
 				echo "<pre>".entites_html($page)."</pre>";
@@ -186,7 +186,7 @@ function appliquer_modifs_config() {
 
 	// Activer le moteur : dresser la liste des choses a indexer
 	if ($activer_moteur == 'oui' AND ($activer_moteur != $GLOBALS['meta']["activer_moteur"])) {
-		include_ecrire('inc_index.php3');
+		include_ecrire('inc_index');
 		creer_liste_indexation();
 	}
 
@@ -260,7 +260,7 @@ function appliquer_modifs_config() {
 	if (isset($GLOBALS['accepter_inscriptions'])
 	AND ($GLOBALS['accepter_inscriptions']
 	!= $GLOBALS['meta']['accepter_inscriptions'])) {
-		include_ecrire('inc_invalideur.php3');
+		include_ecrire('inc_invalideur');
 		suivre_invalideur("1"); # tout effacer
 	}
 
@@ -288,7 +288,7 @@ function appliquer_modifs_config() {
 			$modif_secu=true;
 	if ($modif_secu) {
 		$admin = _T('info_modification_parametres_securite');
-		include_ecrire ("inc_admin.php3");
+		include_ecrire ("inc_admin");
 		debut_admin($admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))

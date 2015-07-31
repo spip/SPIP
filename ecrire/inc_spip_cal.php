@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_lang.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_charsets.php3");
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_acces.php3");
+include_ecrire("inc_lang");
+include_ecrire("inc_texte");
+include_ecrire("inc_charsets");
+include_ecrire("inc_meta");
+include_ecrire("inc_acces");
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
 

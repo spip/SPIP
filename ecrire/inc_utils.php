@@ -19,21 +19,21 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 $included_files = array();
 
 function include_local($file) {
-	if (@$GLOBALS['included_files'][$file]++) return;
-
-	if (is_readable($file))
-	  include($file);
+	$nom = preg_replace("/\.php3?$/",'', $file);
+	$nom = preg_replace(",^./,",'', $nom);
+	spip_log("$nom $file");
+	if (@$GLOBALS['included_files'][$nom]++) return;
+	if (is_readable($f = $nom . '.php'))
+	  include($f);
+	else if (is_readable($f = $nom . '.php3'))
+	  include($f);
 	else spip_log($file . " illisible");
 }
 
 function include_ecrire($file) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-	$file = _DIR_INCLUDE . $file;
-	if ($GLOBALS['included_files'][$file]++) return;
-	if (is_readable($file))
-	  include($file);
-	else spip_log($file . " illisible");
+	include_local(_DIR_INCLUDE . $file);
 }
 
 // charge un fichier perso ou, a defaut, standard
@@ -42,21 +42,21 @@ function include_ecrire($file) {
 function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-	spip_log($nom);
 	$nom = preg_replace("/\.php3?$/",'', basename($nom));
-	$inc = ('inc_' . $nom . '.php');
-	$f = find_in_path($inc);
+	$inc = ('inc_' . $nom);
+	spip_log("if $inc");
+	$f = find_in_path($inc  . '.php');
 	if ($f && is_readable($f)) {
-		if (!$GLOBALS['included_files'][$f]++) include($f);
+		if (!$GLOBALS['included_files'][$inc]++) include($f);
 	} else {
-		$f = _DIR_INCLUDE . $inc;
+		$f = _DIR_INCLUDE . $inc  . '.php';
 		if (is_readable($f)) {
-			if (!$GLOBALS['included_files'][$f]++) include($f);
+			if (!$GLOBALS['included_files'][$inc]++) include($f);
 		} else {
 		  // provisoire avant renommage php/php3
 			$f = _DIR_INCLUDE . ('inc_' . $nom . '.php3');
 			if (is_readable($f)) {
-				if (!$GLOBALS['included_files'][$f]++) include($f);
+				if (!$GLOBALS['included_files'][$inc]++) include($f);
 			} else  $inc = "";
 		}
 	}
@@ -353,10 +353,10 @@ function lire_meta($nom) {
 // Traduction des textes de SPIP
 //
 function _T($texte, $args = '') {
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 	$text = traduire_chaine($texte, $args);
 	if (!empty($GLOBALS['xhtml'])) {
-		include_ecrire("inc_charsets.php3");
+		include_ecrire("inc_charsets");
 		$text = html2unicode($text);
 	}
 
@@ -442,7 +442,7 @@ function cron($gourmand = false) {
 		// Faut-il travailler ? Pas tous en meme temps svp
 		// Au passage si on travaille on bloque les autres
 		if (spip_touch(_FILE_CRON_LOCK, 2)) {
-			include_ecrire('inc_cron.php3');
+			include_ecrire('inc_cron');
 			spip_cron();
 		}
 	}
@@ -467,7 +467,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 			$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
-			include_ecrire('inc_headers.php');
+			include_ecrire('inc_headers');
 			http_status(304);
 			$headers_only = true;
 		}
@@ -482,7 +482,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 
 function redirige_par_entete($url) {
 	spip_log("redirige $url");
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	spip_header("Location: $url");
 	exit;
 }

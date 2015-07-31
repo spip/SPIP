@@ -20,13 +20,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // faudrait ne charger qu'a bon escient
 
-include_ecrire('inc_getdocument.php3');	# diverses fonctions de ce fichier
-include_ecrire("inc_charsets.php3");	# pour le nom de fichier
-include_ecrire("inc_meta.php3");	# ne pas faire confiance au cache
+include_ecrire('inc_getdocument');	# diverses fonctions de ce fichier
+include_ecrire("inc_charsets");	# pour le nom de fichier
+include_ecrire("inc_meta");	# ne pas faire confiance au cache
 					# (alea_ephemere a peut-etre change)
-include_ecrire("inc_session.php3");	# verifier_action_auteur
-include_ecrire("inc_abstract_sql.php3");# spip_insert / spip_fetch...
-include_ecrire('inc_documents.php3');	# fichiers_upload()
+include_ecrire("inc_session");	# verifier_action_auteur
+include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
+include_ecrire('inc_documents');	# fichiers_upload()
 
 
 function spip_image_joindre_dist($doc)
@@ -131,7 +131,7 @@ function spip_image_joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash
 	if (!$arg || strstr($arg, '..')) return;
 	$upload = (_DIR_TRANSFERT .$arg);
 	identifie_repertoire_et_rubrique($upload, $id, $hash_id_auteur);
-	include_ecrire("inc_rubriques.php3");
+	include_ecrire("inc_rubriques");
 	calculer_rubriques();
 }
 
@@ -378,7 +378,7 @@ function spip_image_tester_dist($test_vignette) {
 
 	// et maintenant envoyer la vignette de tests
 	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
-		include_ecrire('inc_logos.php3');
+		include_ecrire('inc_logos');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 150;
 		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
@@ -516,7 +516,7 @@ function spip_image_autoriser_dist($id_document)
   {
     if ($cookie_session = $_COOKIE['spip_session']) 
       {
-	include_ecrire("inc_session.php3");
+	include_ecrire("inc_session");
 	global $auteur_session;
 
 	if (verifier_session($cookie_session)) 

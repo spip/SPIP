@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_urls.php3');
+include_ecrire('inc_urls');
 
 function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 	global $couleur_foncee;

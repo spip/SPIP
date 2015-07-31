@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_objet_base.php3');
+include_ecrire('inc_objet_base');
 
 
 //

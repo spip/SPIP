@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_serialbase.php3');
+include_ecrire('inc_serialbase');
 
 function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");
@@ -136,7 +136,7 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 
 function purger_cache() {
 	spip_log('vider le cache');
-	include_ecrire('inc_invalideur.php3');
+	include_ecrire('inc_invalideur');
 	supprime_invalideurs();
 	purger_repertoire(_DIR_CACHE, 0);
 }
@@ -166,7 +166,7 @@ function calculer_cache_vignettes() {
 	}
 	closedir($handle);
 	
-	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_filtres");
 	echo "<html><body>\n";
 	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
 	echo "<p align='justify'>\n";

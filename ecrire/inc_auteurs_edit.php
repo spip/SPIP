@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_logos.php3");
-include_ecrire("inc_auteur_infos.php");
+include_ecrire("inc_presentation");
+include_ecrire("inc_logos");
+include_ecrire("inc_auteur_infos");
 
 function auteurs_edit_dist()
 {
@@ -98,7 +98,7 @@ function table_auteurs_edit($auteur)
 	if (strlen($pgp) > 0) { echo "<div>".propre("PGP:<cadre>".$pgp."</cadre>")."</div>"; }
 
 	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_affichage($extra, "auteurs");
 	}
 

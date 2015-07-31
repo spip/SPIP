@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function maj_version ($version, $test = true) {
 	if ($test) {
-		include_ecrire('inc_meta.php3');
+		include_ecrire('inc_meta');
 		ecrire_meta('version_installee', $version);
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
@@ -398,7 +398,7 @@ function maj_base() {
 	if ($version_installee < 1.414) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
-		include_ecrire ("inc_meta.php3");
+		include_ecrire ("inc_meta");
 		$accepter_forum = substr($GLOBALS['meta']["forums_publics"],0,3) ;
 		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
 		$result = spip_query($query);
@@ -423,7 +423,7 @@ function maj_base() {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1";
 		$result = spip_query($query);
 		if ($webmaster = spip_fetch_array($result)) {
-			include_ecrire("inc_meta.php3");
+			include_ecrire("inc_meta");
 			ecrire_meta('email_webmaster', $webmaster['email']);
 			ecrire_metas();
 		}
@@ -647,7 +647,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.600) {
-		include_ecrire('inc_index.php3');
+		include_ecrire('inc_index');
 		purger_index();
 		creer_liste_indexation();
 		maj_version (1.600);
@@ -857,7 +857,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_rubriques
 			ADD statut_tmp VARCHAR(10) NOT NULL,
 			ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
-		include_ecrire('inc_rubriques.php3');
+		include_ecrire('inc_rubriques');
 		calculer_rubriques();
 		maj_version(1.801);
 	}
@@ -899,7 +899,7 @@ function maj_base() {
 	if ($version_installee < 1.805) {
 		spip_query("ALTER TABLE spip_forum
 		ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
-		include_ecrire('inc_forum.php3');
+		include_ecrire('inc_forum');
 		calculer_threads();
 		maj_version(1.805);
 	}

@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire ("inc_date.php3");
-include_ecrire ("inc_abstract_sql.php3");
+include_ecrire("inc_presentation");
+include_ecrire ("inc_date");
+include_ecrire ("inc_abstract_sql");
 
 function message_edit_dist()
 {

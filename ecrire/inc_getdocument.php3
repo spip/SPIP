@@ -27,7 +27,7 @@ function creer_repertoire_documents($ext) {
 	}
 
 	if ($GLOBALS['meta']["creer_htaccess"] == 'oui') {
-		include_ecrire('inc_acces.php3');
+		include_ecrire('inc_acces');
 		verifier_htaccess($rep);
 	}
 
@@ -127,7 +127,7 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-	include_ecrire('inc_minipres.php');
+	include_ecrire('inc_minipres');
 	install_debut_html($msg); echo '<form action="' ,
 	  _DIR_RESTREINT_ABS,
 	  urldecode($GLOBALS['redirect']),
@@ -206,7 +206,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 // content-type est connu, et si possible recuperer la taille, voire plus.
 	spip_log ("ajout du document $nom_envoye  ($mode $type_lien $id_lien $id_document)");
 	if ($mode == 'distant') {
-		include_ecrire('inc_distant.php');
+		include_ecrire('inc_distant');
 		if ($a = recuperer_infos_distantes($source)) {
 			# fichier local pour creer la vignette (!!),
 			# on retablira la valeur de l'url a la fin
@@ -395,7 +395,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		WHERE id_document = $id_document");
 
 	// Demander l'indexation du document
-	include_ecrire('inc_index.php3');
+	include_ecrire('inc_index');
 	marquer_indexer('document', $id_document);
 
 	return true;
@@ -405,7 +405,7 @@ function afficher_compactes($fichiers, $args, $action) {
 // presenter une interface pour choisir si fichier joint ou decompacte
 // passer ca en squelette un de ces jours.
 
-	include_ecrire ("inc_minipres.php");
+	include_ecrire ("inc_minipres");
 	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
 		_T('upload_fichier_zip_texte'),
 		"</p>",
@@ -645,14 +645,14 @@ function creer_fichier_vignette($vignette, $test_cache_only=false) {
 		$ext = $regs[1];
 		$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 120;
-		include_ecrire('inc_logos.php3');
+		include_ecrire('inc_logos');
 
 		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
 		{
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];
 		}
-		include_ecrire('inc_documents.php3');
+		include_ecrire('inc_documents');
 		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }

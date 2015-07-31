@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_filtres.php3");
+include_ecrire ("inc_filtres");
 
 //
 // Initialisation de quelques variables globales
@@ -136,7 +136,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 
 	// Gestion du TeX
 	if (!(strpos($letexte, "<math>") === false)) {
-		include_ecrire("inc_math.php3");
+		include_ecrire("inc_math");
 		$letexte = traiter_math($letexte, $les_echap, $num_echap, $source);
 	}
 
@@ -171,7 +171,7 @@ function echappe_retour($letexte, $les_echap, $source='') {
 # si $rempl est un tableau, c'est le resultat (cf echappe_html) de eregi sur :
 # <(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?
 			if (is_array($rempl)) {
-				include_ecrire("inc_documents.php3");
+				include_ecrire("inc_documents");
 				$type = strtoupper($rempl[1]);
 				if ($type == 'EMB')
 					$rempl = embed_document($rempl[2], $rempl[4]);
@@ -212,7 +212,7 @@ function echappe_retour_doublon($letexte, $les_echap, $source, &$doublons)
 // Gerer les outils mb_string
 //
 function spip_substr($c, $start=0, $end='') {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	if (init_mb_string()) {
 		if ($end)
 			return mb_substr($c, $start, $end);
@@ -230,7 +230,7 @@ function spip_substr($c, $start=0, $end='') {
 }
 
 function spip_strlen($c) {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	if (init_mb_string())
 		return mb_strlen($c);
 	else
@@ -346,7 +346,7 @@ function safehtml($t) {
 	static $a;
 	define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
 	if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
-		include_local(XML_HTMLSAX3.'safehtml.php');
+		include_local(XML_HTMLSAX3.'safehtml');
 		$a =& new safehtml();
 		$t = $a->parse($t);
 	}
@@ -369,7 +369,7 @@ function typo_fr($letexte) {
 		);
 		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
 
-		include_ecrire('inc_charsets.php3');
+		include_ecrire('inc_charsets');
 		while (list($c, $r) = each($chars)) {
 			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
 			$trans[$c] = $r;
@@ -475,7 +475,7 @@ function typo_generale($letexte) {
 	// un texte anglais en interface francaise (ou l'inverse) ;
 	// sinon determiner la typo en fonction de la langue
 	if (!$lang = $GLOBALS['lang_typo']) {
-		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_lang');
 		$lang = lang_typo($spip_lang);
 	}
 	if ($lang == 'fr')
@@ -522,10 +522,10 @@ function charger_generer_url()
 {
 		// Traitement des liens internes
 	if (!_DIR_RESTREINT)
-		include_ecrire('inc_urls.php3');
+		include_ecrire('inc_urls');
 	else if (@file_exists("inc-urls.php3"))
-		include_local("inc-urls.php3");
-	else	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+		include_local("inc-urls");
+	else	include_local("inc-urls-".$GLOBALS['type_urls']);
 }
 
 
@@ -857,7 +857,7 @@ function traiter_raccourcis_generale($letexte) {
 
 	// Puce
 	if (!$lang_dir) {
-		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_lang');
 		$lang_dir = lang_dir($GLOBALS['spip_lang']);
 	}
 	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl'])

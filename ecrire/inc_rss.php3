@@ -132,7 +132,7 @@ END:'.$type.'
 //
 // Creer un bouton qui renvoie vers la bonne url spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
-	include_ecrire("inc_acces.php3");
+	include_ecrire("inc_acces");
 
 	if (is_array($args))
 		foreach ($args as $val => $var)
@@ -179,16 +179,16 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 
 // Suivi des revisions d'articles
 function rss_suivi_versions($a) {
-	include_ecrire("inc_suivi_revisions.php");
-	include_ecrire("lab_revisions.php");
-	include_ecrire("lab_diff.php");
+	include_ecrire("inc_suivi_revisions");
+	include_ecrire("lab_revisions");
+	include_ecrire("lab_diff");
 	$rss = afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
 	return $rss;
 }
 
 // Suivi des forums
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
-	include_ecrire("inc_forum.php3");
+	include_ecrire("inc_forum");
 
 	$result_forum = spip_query("
 	SELECT	* " . $query_forum . "

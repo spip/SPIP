@@ -62,18 +62,18 @@ function upgrade_dist()
 	exit;
   }
 
-  include_ecrire('inc_admin.php3');
+  include_ecrire('inc_admin');
 
   debut_admin($upgrade_titre, $commentaire);
 
-  include_ecrire ("inc_base.php3");
+  include_ecrire ("inc_base");
 
   creer_base();
   $ok = maj_base();
 
   if ($ok) {
-	include_ecrire ("inc_acces.php3");
-	include_ecrire ("inc_config.php3");
+	include_ecrire ("inc_acces");
+	include_ecrire ("inc_config");
 	ecrire_acces();
 	init_config();
   }
@@ -93,7 +93,7 @@ function upgrade_dist()
 
 function demande_maj_version()
 {
-	include_ecrire("inc_presentation.php3");
+	include_ecrire("inc_presentation");
 	debut_page();
 	echo "<blockquote><blockquote><h4><font color='red'>",
 	_T('info_message_technique'),
@@ -120,7 +120,7 @@ function info_install()
 	else if (defined("_INC_PUBLIC")) {
 		# on ne peut pas deviner ces repertoires avant l'installation !
 		$db_ok = false;
-		include_ecrire ("inc_minipres.php");
+		include_ecrire ("inc_minipres");
 		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
 		install_fin_html();
 		exit;

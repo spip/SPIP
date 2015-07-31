@@ -265,7 +265,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 
 		$f = find_in_path("inc-cache.php3");
 		if ($f && is_readable($f)) {
-		  if (!$GLOBALS['included_files'][$f]++) include($f);
+		  if (!$GLOBALS['included_files']['inc-cache']++) include($f);
 		} else include_local("inc-cache.php3");
 
 		$d = $GLOBALS['delais'];

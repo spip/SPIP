@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_lang.php3");
+include_ecrire ("inc_lang");
 utiliser_langue_visiteur();
 
 //
@@ -24,7 +24,7 @@ function install_debut_html($titre = 'AUTO') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	http_no_cache();
 	echo  _DOCTYPE_ECRIRE .
 	  "<html lang='".$GLOBALS['spip_lang'].
@@ -110,11 +110,11 @@ function iframe_action_dist()
 	global $connect_statut, $id, $action, $statut, $redirect;
 	if ($id && ($connect_statut == "0minirezo")) {
 
-		$var_f = find_in_path('inc_' . $action . '.php');
+		$var_f = find_in_path('inc_' . $action);
 		if ($var_f) 
 		  include($var_f);
 		else
-		  include_ecrire('inc_' . $action . '.php');
+		  include_ecrire('inc_' . $action);
 
 		$var_nom = 'changer_statut_' . $action;
 		if (function_exists($var_nom))

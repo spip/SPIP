@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_documents.php3");
-include_ecrire ("inc_barre.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_documents");
+include_ecrire ("inc_barre");
 
 function breves_edit_dist()
 {
@@ -125,7 +125,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
 
 	// selecteur de rubrique (pas d'ajax car toujours racine)
-	include_ecrire('inc_rubriques.php3');
+	include_ecrire('inc_rubriques');
 	echo selecteur_rubrique_html($id_rubrique, 'breve', ($statut == 'publie'));
 
 	fin_cadre_couleur();
@@ -149,7 +149,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_saisie($extra, 'breves', $id_rubrique);
 	}
 

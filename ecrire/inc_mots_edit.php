@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_abstract_sql.php3");
+include_ecrire("inc_presentation");
+include_ecrire ("inc_logos");
+include_ecrire ("inc_abstract_sql");
 
 function mots_edit_dist()
 {
@@ -81,7 +81,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 
 		// recoller les champs du extra
 		if ($champs_extra) {
-			include_ecrire("inc_extra.php3");
+			include_ecrire("inc_extra");
 			$add_extra = ", extra = '".addslashes(extra_recup_saisie("mots"))."'";
 		} else
 			$add_extra = '';
@@ -90,7 +90,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query($query);
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index.php3");
+			include_ecrire ("inc_index");
 			marquer_indexer('mot', $id_mot);
 		}
 	}
@@ -228,7 +228,7 @@ if ($id_mot) {
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC");
 
-	include_ecrire ("inc_sites_tous.php");
+	include_ecrire ("inc_sites_tous");
 	afficher_sites(_T('info_sites_lies_mot'),
 	"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC");
@@ -312,7 +312,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_saisie($extra, 'mots', $id_groupe);
 	}
 

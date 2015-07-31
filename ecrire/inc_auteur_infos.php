@@ -11,12 +11,12 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_abstract_sql.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_urls");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_acces");
+include_ecrire ("inc_logos");
+include_ecrire ("inc_abstract_sql");
 
 function auteur_infos_dist()
 {
@@ -110,7 +110,7 @@ if (strval($nom)!='') {
 	}
 
 	if ($modif_login) {
-		include_ecrire('inc_session.php3');
+		include_ecrire('inc_session');
 		zap_sessions ($auteur['id_auteur'], true);
 		if ($connect_id_auteur == $auteur['id_auteur'])
 			supprimer_session($GLOBALS['spip_session']);
@@ -155,7 +155,7 @@ if (strval($nom)!='') {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		$extra = extra_recup_saisie("auteurs");
 		$add_extra = ", extra = '".addslashes($extra)."'";
 	} else
@@ -191,7 +191,7 @@ modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['su
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd
 if ($nom OR $statut) {
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_ecrire ("inc_index");
 		marquer_indexer('auteur', $id_auteur);
 	}
 
@@ -336,7 +336,7 @@ else {
 
 echo "<p>";
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
 	}
 
@@ -572,7 +572,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 			echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
 
 			// selecteur de rubrique
-			include_ecrire('inc_rubriques.php3');
+			include_ecrire('inc_rubriques');
 			echo selecteur_rubrique(0, 'auteur', false);
 
 			echo "</div>\n";
