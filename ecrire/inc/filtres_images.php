@@ -196,7 +196,7 @@ function image_imagegif($img,$fichier) {
 	return $ret;
 }
 // http://doc.spip.org/@image_imagejpg
-function image_imagejpg($img,$fichier,$qualite=85) {
+function image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
 	$tmp = $fichier.".tmp";
 	$ret = imagejpeg($img,$tmp, $qualite);
 
@@ -210,7 +210,7 @@ function image_imagejpg($img,$fichier,$qualite=85) {
 
 // $qualite est utilise pour la qualite de compression des jpeg
 // http://doc.spip.org/@image_gd_output
-function image_gd_output($img,$valeurs, $qualite=85){
+function image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 	$fonction = "image_image".$valeurs['format_dest'];
 	$ret = false;
 	#un flag pour reperer les images gravees
@@ -2024,7 +2024,7 @@ function image_renforcement($im, $k=0.5)
 function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 {
 	if ($qualite===NULL){
-		if ($format=='jpg') $qualite=85;
+		if ($format=='jpg') $qualite=_IMG_GD_QUALITE;
 		elseif ($format=='png') $qualite=0;
 		else $qualite=128;
 	}

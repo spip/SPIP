@@ -1190,6 +1190,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0);
+	define('_IMG_GD_QUALITE', 85);
 }
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
