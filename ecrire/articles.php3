@@ -1249,7 +1249,6 @@ if ((lire_meta('multi_articles') == 'oui')
 				spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");
 				if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");
 
-
 				$id_trad = $nouveau_trad;
 			}
 			else
@@ -1275,7 +1274,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 				if ($ifond == 1) {
 					$ifond = 0;
-					$bgcolor = "ffffff";
+					$bgcolor = "white";
 				} else {
 					$ifond = 1;
 					$bgcolor = $couleur_claire;
@@ -1326,18 +1325,8 @@ if ((lire_meta('multi_articles') == 'oui')
 				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'><b>"._T('trad_article_traduction')."</b></font></td></tr>";
 				echo $ret;
 				echo "</table>";
-
-				if ($flag_editable) {
-					echo debut_block_invisible('ne_plus_lier');
-					echo "<div style='width: 100%; padding-top: 1px; padding-bottom: 3px; padding-right: 3px; text-align: $spip_lang_right;'>";
-					$lien = $GLOBALS['clean_link'];
-					$lien->delVar($nom_select);
-					$lien = $lien->getUrl();
-					echo "<a href='articles.php3?id_article=$id_article&supp_trad=oui' class='verdana1'>"._T('trad_delier')." <img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
-					echo "</div>";
-					echo fin_block();
-				}
 				echo "</div>";
+				echo "<br>\n";
 			}
 
 			changer_typo($langue_article);
@@ -1346,9 +1335,9 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo debut_block_invisible('lier_traductions');
 
 		echo "<table width='100%'><tr>";
-		echo "<td valign='top' class='arial2'>";
-		if ($flag_editable AND (!$ret OR $connect_statut == "0minirezo") AND $options == "avancees") { // Formulaire pour lier a un article
-
+		if ($flag_editable AND $options == "avancees" AND !$ret) {
+			// Formulaire pour lier a un article
+			echo "<td class='arial2' width='60%'>";
 			$lien = $GLOBALS['clean_link'];
 			$lien->delVar($nom_select);
 			$lien = $lien->getUrl();
@@ -1357,16 +1346,22 @@ if ((lire_meta('multi_articles') == 'oui')
 			echo _T('trad_lier');
 			echo "<div align='right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
 			echo "</form>";
-
+			echo "</td>\n";
+			echo "<td background='' width='10'> &nbsp; </td>";
+			echo "<td background='img_pack/tirets-separation.gif' width='2'><img src='img_pack/rien.gif' alt='' width=2 height=2></td>";
+			echo "<td background='' width='10'> &nbsp; </td>";
 		}
-		echo "  </td>";
-		echo "<td background='' width='10'> &nbsp; </td>";
-		echo "<td background='img_pack/tirets-separation.gif' width='2'><img src='img_pack/rien.gif' alt='' width=2 height=2></td>";
-		echo "<td background='' width='10'> &nbsp; </td>";
-		echo "<td valign='top' width='150'>";
+		echo "<td>";
 		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
-
 		echo "</td>";
+		if ($flag_editable AND $options == "avancees" AND $ret) {
+			echo "<td background='' width='10'> &nbsp; </td>";
+			echo "<td background='img_pack/tirets-separation.gif' width='2'><img src='img_pack/rien.gif' alt='' width=2 height=2></td>";
+			echo "<td background='' width='10'> &nbsp; </td>";
+			echo "<td>";
+			icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
+			echo "</td>\n";
+		}
 
 		echo "</tr></table>";
 
