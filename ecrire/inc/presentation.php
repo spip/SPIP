@@ -1254,10 +1254,6 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 {
 	include_spip('inc/afficher_objets');
 
-	// propose de tout publier + nombre d'elements
-	// du code experimental qu'on peut activer via un switch
-	define('_MODE_MEME_RUBRIQUE', 'non');
-
 	if (!$limit) $limit = 10;
 
 	$table = $type . 's';
@@ -1279,15 +1275,6 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$fstatut = 'puce_statut_' . $type;
 	$idom = 'rubrique_' . $table;
 
-	if (_MODE_MEME_RUBRIQUE == 'oui') {
-		$statut = 'prop';// arbitraire
-
-		$puce_rubrique = ($type == 'article')
-		  ?  (puce_statut_article(0, $statut, $id_rubrique, $idom).'&nbsp;')
-		  : ''; 
-# (puce_statut_breve(0, $statut, $id_rubrique, $type) .'&nbsp;'); manque Ajax
-	} else $puce_rubrique = '';
-
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
@@ -1301,7 +1288,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
 	}
 
-	$icone =  $puce_rubrique . '<b>' . _T('info_meme_rubrique')  . '</b>';
+	$icone =  '<b>' . _T('info_meme_rubrique')  . '</b>';
 	$bouton = bouton_block_depliable(_T('info_meme_rubrique'),true,'memerub');	
 
 	$retour = 

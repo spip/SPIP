@@ -150,7 +150,7 @@ function articles_traduction($id_article, $id_trad)
 	$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 	
 	$table= array();
-
+	$puce_statut = charger_fonction('puce_statut', 'inc');
 	while ($row = spip_fetch_array($result_trad)) {
 		$vals = array();
 		$id_article_trad = $row["id_article"];
@@ -163,7 +163,7 @@ function articles_traduction($id_article, $id_trad)
 		$lang_dir = lang_dir($lang_trad);
 		$titre_trad = "<span dir='$lang_dir'>$titre_trad</span>";
 
-		$vals[] = puce_statut($statut_trad, " class='puce'");
+		$vals[] = $puce_statut($id_article_trad, $statut_trad, $id_rubrique_trad, 'article');
 		
 		if ($id_article_trad == $id_trad) {
 			$vals[] = http_img_pack('langues-12.gif', "", " class='lang'");

@@ -348,6 +348,7 @@ function afficher_rubriques_filles(&$article, &$enfant, &$text_article, $id_pare
 function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $flag_trad) 
 {
 	$res = '';
+	$puce_statut = charger_fonction('puce_statut', 'inc');
 	while(list(,$zarticle) = each($tous) ) {
 		$attarticle = &$text_article[$zarticle];
 		$zelang = $attarticle["lang"];
@@ -365,7 +366,7 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 			}
 			$res .= "\n"
 				. "<span class='icone'> </span>"
-			  . "<div class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</div>"
+			  . "<div class='puce_statut'>".$puce_statut($zarticle, $attarticle["statut"], $id_rubrique,'article')."</div>"
 			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
 			  . "\nhref='"

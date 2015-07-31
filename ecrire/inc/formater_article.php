@@ -19,7 +19,7 @@ function inc_formater_article_dist($row)
 {
 	global $options, $spip_lang_right, $spip_display;
 	static $pret = false;
-	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue;
+	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue, $puce_statut;
 
 	if (!$pret) {
 		$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
@@ -34,6 +34,7 @@ function inc_formater_article_dist($row)
 			  ? $GLOBALS['meta']['langue_site']
 			  : $GLOBALS['langue_rubrique'];
 		}
+		$puce_statut = charger_fonction('puce_statut', 'inc');
 		$pret = true;
 	}
 
@@ -56,7 +57,7 @@ function inc_formater_article_dist($row)
 	$descriptif = $row['descriptif'];
 	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
 
-	$vals[]= puce_statut_article($id_article, $statut, $id_rubrique);
+	$vals[]= $puce_statut($id_article, $statut, $id_rubrique,'article');
 
 	$vals[]= "<div>"
 	. "<a href='"

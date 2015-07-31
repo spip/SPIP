@@ -13,17 +13,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_puce_statut_dist
-function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type) {
+function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=false) {
 	// le function_exists n'est utile qu'aux greffons
 	if (function_exists($f = "puce_statut_$type"))
-		return $f($id_objet, $statut, $id_rubrique, $type);
+		return $f($id_objet, $statut, $id_rubrique, $type, $ajax);
 	else
 		return "<img src='"._DIR_IMG_PACK. "$type-24.gif" . "' />";
 }
 
 
 // http://doc.spip.org/@puce_statut_auteur
-function puce_statut_auteur($id, $statut, $id_rubrique, $type) {
+function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
 	return bonhomme_statut(array('statut' => $statut));
 }
 
@@ -55,12 +55,12 @@ function bonhomme_statut($row) {
 
 
 // http://doc.spip.org/@puce_statut_mot
-function puce_statut_mot($id, $statut, $id_rubrique, $type) {
+function puce_statut_mot($id, $statut, $id_rubrique, $type, $ajax='') {
 	return "<img src='"._DIR_IMG_PACK. 'petite-cle.gif' . "' />";
 }
 
 // http://doc.spip.org/@puce_statut_rubrique
-function puce_statut_rubrique($id, $statut, $id_rubrique, $type) {
+function puce_statut_rubrique($id, $statut, $id_rubrique, $type, $ajax='') {
 
 	return "<img src='"._DIR_IMG_PACK. 'rubrique-12.gif' . "' />";
 }
@@ -117,7 +117,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 	  $over ='';
 	else {
 
-	  $action = generer_url_ecrire('puce_statut_article',"",true);
+	  $action = generer_url_ecrire('puce_statut',"",true);
 	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); }";
 	  $over = "\nonmouseover=\"$action\"";
 	}
@@ -128,7 +128,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 }
 
 // http://doc.spip.org/@puce_statut_breve
-function puce_statut_breve($id, $statut, $id_rubrique, $type) {
+function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 	global $lang_objet;
 
 	$lang_dir = lang_dir($lang_objet);
@@ -182,7 +182,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 }
 
 // http://doc.spip.org/@puce_statut_site
-function puce_statut_site($id_site, $statut, $id_rubrique, $type){
+function puce_statut_site($id_site, $statut, $id_rubrique, $type, $ajax=''){
 
 	$droit = autoriser('publierdans','rubrique',$id_rubrique)
 		? 'anim'
@@ -206,7 +206,7 @@ function puce_statut_site($id_site, $statut, $id_rubrique, $type){
 }
 
 // http://doc.spip.org/@puce_statut_syndic_article
-function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type){
+function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type, $ajax=''){
 	if ($statut=='publie') {
 		$puce='puce-verte.gif';
 	}

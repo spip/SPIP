@@ -590,20 +590,25 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 		      
+		phraser_args($milieu,">","",$all_res,$result);
+		$params = substr($milieu,0,strpos($milieu,$result->apres));
+		$milieu = substr($result->apres,1);
+		$result->apres = "";
+
 		//
 		// analyser les criteres et distinguer la boucle recursive
 		//
 		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
-			$result->param[0] = substr($type, strlen(TYPE_RECURSIF));
-			$milieu = substr($milieu, strpos($milieu, '>')+1);
-			$params = "";
+			$params = phraser_arguments_inclure($result);
+			$params = $params->param;
+
+			array_unshift($params,
+				      substr($type, strlen(TYPE_RECURSIF)));
+			$result->param = $params;
+#			$milieu = substr($milieu, strpos($milieu, '>')+1);
 		} else {
 			$result->type_requete = $soustype;
-			phraser_args($milieu,">","",$all_res,$result);
-			$params = substr($milieu,0,strpos($milieu,$result->apres));
-			$milieu = substr($result->apres,1);
-			$result->apres = "";
 			phraser_criteres($result->param, $result);
 		}
 

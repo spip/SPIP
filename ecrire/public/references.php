@@ -110,6 +110,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	$r = $boucles[$idb]->type_requete;
 	$s = $boucles[$idb]->sql_serveur;
 
+	if ($r == 'boucle') return array();
 	$desc= description_type_requete($r, $s);
 
 	if(!$desc) {
