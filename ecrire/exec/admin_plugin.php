@@ -166,7 +166,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 		jQuery('input.check').click(function(){
 			jQuery(this).parent().toggleClass('nomplugin_on');
 		});
-		jQuery('div.nomplugin a[@rel=info]').click(function(){
+		jQuery('div.nomplugin a[rel=info]').click(function(){
 			var prefix = jQuery(this).parent().prev().attr('name');
 			if (!jQuery(this).siblings('div.info').html()) {
 				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
