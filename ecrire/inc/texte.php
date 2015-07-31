@@ -1033,6 +1033,7 @@ define('_RACCOURCI_MODELE',
 
 define('_RACCOURCI_MODELE_DEBUT', '/^' . _RACCOURCI_MODELE .'/is');
 
+// http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false, $echap='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
