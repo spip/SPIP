@@ -25,7 +25,7 @@ function exec_breves_voir_dist()
 // http://doc.spip.org/@exec_breves_voir_args
 function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 {
-	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
+	global $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
 
 	$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
 	if (!$row OR !autoriser('voir','breve',$id_breve)){
@@ -67,8 +67,6 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	$dater = charger_fonction('dater', 'inc');
 	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$editer_mots = charger_fonction('editer_mots', 'inc');
-	if ($champs_extra AND $extra)
-		include_spip('inc/extra');
 
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 	

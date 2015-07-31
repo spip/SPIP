@@ -141,28 +141,44 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	$out .= icone_inline(_T('icone_modifier_mot'), generer_url_ecrire('mots_edit',"id_mot=$id_mot&edit=oui"), "mot-cle-24.gif", "rien.gif",$spip_lang_right,false," onclick=\"$('#mot-editer').show();$('#mot-voir').hide();return false;\"");
 	$out .= gros_titre($titre_mot,'',false);
 	$out .= "<div class='nettoyeur'></div>";
+	
+	$contenu_mot = "";
 
 	if ($descriptif) {
-		$out .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>";
-		$out .= "<b>" . _T('info_descriptif') . "</b> ";
-		$out .= propre($descriptif);
-		$out .= "&nbsp; ";
-		$out .= "</div>";
+		$contenu_mot .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>";
+		$contenu_mot .= "<b>" . _T('info_descriptif') . "</b> ";
+		$contenu_mot .= propre($descriptif);
+		$contenu_mot .= "&nbsp; ";
+		$contenu_mot .= "</div>";
 	}
 
 	if (strlen($texte)>0){
-		$out .= "<p class='verdana1 spip_small'>";
-		$out .= propre($texte);
-		$out .= "</p>";
+		$contenu_mot .= "<p class='verdana1 spip_small'>";
+		$contenu_mot .= propre($texte);
+		$contenu_mot .= "</p>";
 	}
 
 	if ($les_notes) {
-		$out .= debut_cadre_relief('',true);
-		$out .= "<div dir='" . lang_dir() ."' class='arial11'>";
-		$out .= justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-		$out .= "</div>";
-		$out .= fin_cadre_relief(true);
+		$contenu_mot .= debut_cadre_relief('',true);
+		$contenu_mot .= "<div dir='" . lang_dir() ."' class='arial11'>";
+		$contenu_mot .= justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+		$contenu_mot .= "</div>";
+		$contenu_mot .= fin_cadre_relief(true);
 	}
+	
+	$contexte = array('id'=>$id_mot);
+	// permettre aux plugin de faire des modifs ou des ajouts
+	$contenu_mot = pipeline('afficher_contenu_objet',
+		array(
+			'args'=>array(
+				'type'=>'mot',
+				'id_objet'=>$id_mot,
+				'contexte'=>$contexte
+			),
+			'data'=> $contenu_mot
+		)
+	);
+	$out .= $contenu_mot;
 
 	if ($id_mot) {
 
