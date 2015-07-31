@@ -13,9 +13,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lire_metas() {
-	// preserver le noyau, sauf si recalcul
-	if (_DIR_RESTREINT
-	AND !_request('var_mode'))
+	// preserver le noyau
+	if (_DIR_RESTREINT)
 		$noyau = $GLOBALS['meta']['noyau'];
 	else
 		$noyau = array();
