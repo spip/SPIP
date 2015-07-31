@@ -85,6 +85,10 @@ OR (@file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG 
 // et fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 // Ne pas les rendre indefinies.
 
+# comment on logge, defaut 4 tmp/spip.log de 100k, 0 ou 0 suppriment le log
+$nombre_de_logs = 4;
+$taille_des_logs = 100;
+
 // Prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
