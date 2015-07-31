@@ -418,7 +418,7 @@ function exec_accueil_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_index'), "accueil", "accueil");
 
-	debut_gauche();
+	echo debut_gauche("",true);
 
 	if ($spip_display != 4) {
 		echo personnel_accueil(@$_COOKIE['spip_admin']);
@@ -431,14 +431,14 @@ function exec_accueil_dist()
 		  fin_cadre_relief(true);
 	}
 
-	creer_colonne_droite();
+	echo creer_colonne_droite("", true);
 	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
 
 	echo "<div>&nbsp;</div>", $evtt, $evtm, $evtr;
 
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
-	debut_droite();
+	echo debut_droite("", true);
 
 	if ($GLOBALS['meta']["post_dates"] == "non" AND $connect_statut == '0minirezo') {
 		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>NOW()", 'ORDER BY' => "date"));

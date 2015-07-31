@@ -53,11 +53,11 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
-	debut_gauche();
+	echo debut_gauche("",true);
 
 	// Pave "documents associes a l'article"
 	
@@ -80,15 +80,15 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	}
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite("",true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
-	debut_droite();
+	echo debut_droite("",true);
 	
-	debut_cadre_formulaire();
+	echo debut_cadre_formulaire("", true);
 	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre']);
 	$editer_article = charger_fonction('editer_article', 'inc');
 	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc, $row);
-	fin_cadre_formulaire();
+	echo fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 
