@@ -754,7 +754,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 // M
 'menu_aide_installation_choix_base' => 'Sele&ccedil;&atilde;o da sua base',
 'module_fichier_langue' => 'Arquivo de idioma',
-'module_raccourci' => 'Atalhos',
+'module_raccourci' => 'Atalho',
 'module_texte_affiche' => 'Texto exibido',
 'module_texte_explicatif' => 'Voc&ecirc; pode inserir os atalhos a seguir nos gabaritos do seu site p&uacute;blico. Eles ser&atilde;o traduzidos automaticamente para os idiomas para os quais exista um arquivo de idioma.',
 'module_texte_traduction' => 'O arquivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispon&iacute;vel em:',
