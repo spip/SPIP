@@ -31,7 +31,7 @@ function balise_LOGO__dist ($p) {
 	}
 
 	$id_objet = id_table_objet($type);
-	if (!$_id_objet)
+	if (!isset($_id_objet) OR !$_id_objet)
 		$_id_objet = champ_sql($id_objet, $p);
 
 	$fichier = ($p->etoile === '**') ? -1 : 0;
