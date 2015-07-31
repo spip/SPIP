@@ -338,6 +338,7 @@ function emboite_texte($res, $fonc='',$self='')
 		. "</th></tr>";
 
 		$i = 0;
+		$style = "style='text-align: right; padding-right: 5px'";
 		foreach($errs as $r) {
 			$i++;
 			list($msg, $ligne, $col) = $r;
@@ -347,15 +348,15 @@ function emboite_texte($res, $fonc='',$self='')
 			else {$encore2[$msg] = $ref = 1;}
 			$err .= "<tr  style='background-color: "
 			  . $colors[$i%2]
-			  . "'><td style='text-align: right'><a href='#debut_err'>"
+			  . "'><td $style><a href='#debut_err'>"
 			  . $i
-			  . "</a></td><td  style='text-align: right'>"
+			  . "</a></td><td $style>"
 			  . "$ref/$encore[$msg]</td>"
-			  . "<td  style='text-align: right'><a href='#L"
+			  . "<td $style><a href='#L"
 			  . $ligne
 			  . "' id='T$i'>"
 			  . $ligne
-			  . "</a></td><td  style='text-align: right'>"
+			  . "</a></td><td $style>"
 			  . $col
 			  . "</td><td>$msg</td></tr>\n";
 			$fautifs[]= array($ligne, $col, $i, $msg);

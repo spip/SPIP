@@ -48,16 +48,20 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
-			$ext = !preg_match('/^\w+$/', $req_ext) ? 'php' : $req_ext;
-			$files = preg_files($dir,  $ext . '$', $limit, $rec);
+			$ext = !preg_match('/^[.*\w]+$/', $req_ext) ? 'php' : $req_ext;
+			$files = preg_files($dir,  "$ext$", $limit, $rec);
 			if (!$files AND $ext!=='html') {
 				$ext = 'html';
 				$files = preg_files($dir, "$ext$", $limit, $rec);
 			}
-			if ($files)
-				$res = valider_dir($files, $ext, $url);
-			else $res = _T('texte_vide');
-			$bandeau = $dir . '*' . $ext;
+			if ($files) {
+				list($err, $res) = valider_dir($files, $ext, $url);
+				$err = ' (' . $err . '/' . count($files) .')';
+			} else {
+				$res = _T('texte_vide');
+				$err = '';
+			}
+			$bandeau = $dir . '*' . $ext . $err;
 		} else {
 			if (preg_match('/^([^?]*)[?]([0-9a-z_]+)=(.*)$/', $url, $r)) {
 				list(,$server, $dir, $script) = $r;
@@ -107,7 +111,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 // http://doc.spip.org/@valider_resultats
 function valider_resultats($res, $mode)
 {
-	$i = 0;
+	$i = $j = 0;
 	$table = '';
 	rsort($res);
 	foreach($res as $l) {
@@ -122,6 +126,7 @@ function valider_resultats($res, $mode)
 		$err = (!intval($nb)) ? '' : 
 		  ($erreurs[0][0] . ' ' . _T('ligne') . ' ' .
 		   $erreurs[0][1] .($nb==1? '': '  ...'));
+		if ($err) $j++;
 		$h = $mode
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
@@ -134,7 +139,7 @@ function valider_resultats($res, $mode)
 		. "<td>$script</td>"
 		. "<td><a href='$h'>$appel</a></td>";
 	}
-	return "<table class='spip'>"
+	return array($j, "<table class='spip'>"
 	  . "<tr><th>" 
 	  . _T('erreur_texte')
 	  . "</th><th>" 
@@ -146,7 +151,7 @@ function valider_resultats($res, $mode)
 	  . "</th><th>Page</th><th>args"
 	  . "</th></tr>"
 	  . $table
-	  . "</table>";
+		     . "</table>");
 }
 
 // http://doc.spip.org/@valider_script
@@ -154,7 +159,7 @@ function valider_script($transformer_xml, $f, $dir, $ext)
 {
 // ne pas se controler soi-meme ni l'index du repertoire
 
-	$script = basename($f, '.' . $ext);
+	$script = basename($f, '.php');
 	if ($script == _request('exec') OR $script=='index')
 		return array('/', 0, '', $script,''); 
 
