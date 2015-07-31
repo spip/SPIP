@@ -31,9 +31,9 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 
 	$prim = $prims;
 	$prims = array();
-	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], $requete['LIMIT']);
+	$result = sql_allfetsel((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], $requete['LIMIT']);
 
-	if (!sql_count($result)) {
+	if (!count($result)) {
 		if (!$force) return '';
 	} else {
 	if ($spip_display != 4) {
@@ -44,7 +44,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 
 		$table = $head = '';
 		$th = 0;
-		while ($r = sql_fetch($result)) {
+		foreach ($result as $r) {
 		  if ($prim) $prims[]= $r[$prim];
 		  if ($vals = $fonc($r, $own)) {
 			reset($styles);
@@ -66,7 +66,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 		if (!$th) $head= '';
 		$tranches .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$head$table</table>";
 	} else {
-		while ($r = sql_fetch($result)) {
+		foreach ($result as $r) {
 			if ($prim) $prims[]= $r[$prim];
 			if ($t = $fonc($r, $own)) {
 			  	$tranches = '<li>' . join('</li><li>', $t) . '</li>';
@@ -76,7 +76,6 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 			}
 		}
 	}
-	sql_free($result);
 	}
 
 	$id = 't'.substr(md5(join('',$requete)),0,8);

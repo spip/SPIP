@@ -157,11 +157,10 @@ function ecrire_acces() {
 	# de devenir redacteur le cas echeant (auth http)... a nettoyer
 	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
 
-	$s = sql_select("login, htpass, statut", "spip_auteurs", "statut IN  ('1comite','0minirezo','nouveau')");
-	$n = sql_count($s);
-	if (!$n OR spip_connect_ldap()) return;
+	if (spip_connect_ldap()) return;
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
+	$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
 	while ($t = sql_fetch($s)) {
 		if (strlen($t['login']) AND strlen($t['htpass'])) {
 			$p1 .= $t['login'].':'.$t['htpass']."\n";
@@ -169,10 +168,11 @@ function ecrire_acces() {
 				$p2 .= $t['login'].':'.$t['htpass']."\n";
 		}
 	}
-
-	ecrire_fichier($htpasswd, $p1);
-	ecrire_fichier($htpasswd.'-admin', $p2);
-	spip_log("Ecriture de $htpasswd et $htpasswd-admin: $n auteurs");
+	if ($p1) {
+	  ecrire_fichier($htpasswd, $p1);
+	  ecrire_fichier($htpasswd.'-admin', $p2);
+	  spip_log("Ecriture de $htpasswd et $htpasswd-admin");
+	}
 }
 
 
