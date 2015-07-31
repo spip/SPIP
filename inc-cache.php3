@@ -143,9 +143,12 @@ function utiliser_cache(&$chemin_cache, $delais) {
 
 	// recalcul obligatoire
 
-	$ok_cache &= (($GLOBALS['recalcul'] != 'oui') ||
-		      (!$GLOBALS['HTTP_COOKIE_VARS']['spip_session']));
+	$recalcul = (($GLOBALS['recalcul'] == 'oui') &&
+		     ($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
+		      || $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
+		      || file_exists(_ACCESS_FILE_NAME))); # insuffisant...
 
+	$ok_cache &= !$recalcul;
 	// ne jamais recalculer pour les moteurs de recherche, proxies...
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$ok_cache = true;
