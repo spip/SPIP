@@ -300,7 +300,7 @@ function recuperer_entetes($f, $date_verif='')
 			$location = $v;
 		}
 		elseif ($date_verif AND ($d == 'Last-Modified')) {
-			if (strtotime($date_verif)>=strtotime($r[1])) {
+			if ($date_verif>=strtotime($v)) {
 				//Cas ou la page distante n'a pas bouge depuis
 				//la derniere visite
 				$not_modif = true;
