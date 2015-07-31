@@ -163,6 +163,11 @@ function aide($aide='') {
 function version_svn_courante($dir) {
 	if (!$dir) $dir = '.';
 
+	// version installee par paquet ZIP
+	if (lire_fichier($dir.'/svn.revision', $c)
+	AND preg_match(',Revision: (\d+),', $c, $d))
+		return intval($d[1]);
+
 	// version installee par SVN
 	if (lire_fichier($dir . '/.svn/entries', $c)
 	AND (
@@ -175,11 +180,6 @@ function version_svn_courante($dir) {
 	AND $v = $r1[1]
 	)))
 		return -$v;
-
-	// version installee par paquet ZIP de SPIP-Zone
-	if (lire_fichier($dir.'/svn.revision', $c)
-	AND preg_match(',Revision: (\d+),', $c, $d))
-		return intval($d[1]);
 
 	// Bug ou paquet fait main
 	return 0;
