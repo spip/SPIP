@@ -67,36 +67,6 @@ function spip_cron() {
 	include_ecrire("inc_meta.php3");
 	$t = time();
 
-	if ($t - lire_meta('date_stats_referers') > 3600)
-		cron_referers($t);
-
-	if (lire_meta('calculer_referers_now') == 'oui')
-		cron_referers_suite();
-
-	if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques")))
-		cron_archiver_stats($last_date);
-
-	if ($t - lire_meta('date_stats_popularite') > 1800) {
-		if (timeout('archiver_stats')) {
-			include_ecrire("inc_statistiques.php3");
-			calculer_popularites();
-		}
-	}
-
-	// statistiques
-	if (lire_meta("activer_statistiques") != "non") {
-		if (timeout(false, false))	// no lock, no action
-		{
-			// Conditions declenchant un eventuel calcul des stats
-			if ((lire_meta('calculer_referers_now') == 'oui')
-			OR (date("Y-m-d") <> lire_meta("date_statistiques"))
-			OR (time() - lire_meta('date_stats_popularite') > 1800)) {
-				include_local ("inc-stats.php3");
-				archiver_stats();
-			}
-		}
-	}
-
 
 	//
 	// Envoi du mail quoi de neuf
@@ -126,6 +96,36 @@ function spip_cron() {
 		}
 	}
 
+
+	// statistiques
+	if (lire_meta("activer_statistiques") != "non") {
+		if ($t - lire_meta('date_stats_referers') > 3600)
+			cron_referers($t);
+	
+		if (lire_meta('calculer_referers_now') == 'oui')
+			cron_referers_suite();
+	
+		if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques")))
+			cron_archiver_stats($last_date);
+	
+		if ($t - lire_meta('date_stats_popularite') > 1800) {
+			if (timeout('archiver_stats')) {
+				include_ecrire("inc_statistiques.php3");
+				calculer_popularites();
+			}
+		}
+
+		if (timeout(false, false))	// no lock, no action
+		{
+			// Conditions declenchant un eventuel calcul des stats
+			if ((lire_meta('calculer_referers_now') == 'oui')
+			OR (date("Y-m-d") <> lire_meta("date_statistiques"))
+			OR (time() - lire_meta('date_stats_popularite') > 1800)) {
+				include_local ("inc-stats.php3");
+				archiver_stats();
+			}
+		}
+	}
 
 	// recalcul des rubriques publiques (cas de la publication post-datee)
 	if (($t - lire_meta('calcul_rubriques') > 3600) AND timeout('calcul_rubriques')) {
