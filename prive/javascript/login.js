@@ -77,7 +77,7 @@ function login_submit(){
 			// - certains navigateurs memorisent le hash au lieu du pass ...
 			// on cree un input hidden a cote, on lui met le name="password"
 			// et on vide le champ visible
-			inputpass.after('<input name="password" type="hidden" value="'+pass+'" />');
+			inputpass.after('<input name="password" type="hidden" value="" />').attr('value',pass);
 			inputpass.attr('name','nothing').attr('value','');
 			calcule_hash_pass(pass);
 		}
