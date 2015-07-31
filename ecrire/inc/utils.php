@@ -735,6 +735,8 @@ function find_in_theme($file, $subdir='', $include=false){
 // dans _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
 function chemin_image($icone){
+	if ($f = find_in_theme("images/$icone"))
+		return $f;
 	if ($icone_renommer = charger_fonction('icone_renommer','inc',true)){
 		list($icone,$fonction) = $icone_renommer($icone,"");
 		if (file_exists($icone))
