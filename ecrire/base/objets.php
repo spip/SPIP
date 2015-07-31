@@ -152,7 +152,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				// l'ajouter au tableau
 				$GLOBALS['tables_principales'][$table] = array();
 				if (isset($infos['field']) AND isset($infos['key']))
-					$GLOBALS['tables_principales'][$table] = &$infos;
+					$GLOBALS['tables_principales'][$table] = &$infos_tables[$table];
 				else {
 					// lire sa definition en base
 					$trouver_table = charger_fonction('trouver_table','base');
@@ -168,7 +168,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	}
 	if ($table_sql)
 		return $infos_tables[$table_sql];
-	
+
 	return $infos_tables;
 }
 
