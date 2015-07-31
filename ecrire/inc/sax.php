@@ -189,10 +189,12 @@ function inc_sax_dist($page, $apply=false)
 	if ($apply) {
 		ob_start();
 		if (is_array($apply))
-		  call_user_func_array($page, $apply);
-		else $page();
+		  $r = call_user_func_array($page, $apply);
+		else $r = $page();
 		$page = ob_get_contents();
 		ob_end_clean();
+		// fonction sans aucun "echo", ca doit etre le resultat
+		if (!$page) $page = $r;
 	}
 
 	// charger la DTD et transcoder les entites,

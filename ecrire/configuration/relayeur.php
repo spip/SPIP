@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 
 /// A PASSER DANS LES FICHIERS DE LANGUE
 
-function configuration_relayeur_dist($retour_proxy)
+function configuration_relayeur_dist($retour_proxy='')
 {
 	global $spip_lang_left;
 

@@ -19,19 +19,30 @@ function exec_export_all_dist()
 	$rub = intval(_request('id_parent'));
 	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
 
-	if (!isset($GLOBALS['meta'][$meta])) {
+	if (isset($GLOBALS['meta'][$meta]))
+		exec_export_all_args($rub, $meta);
+	else {
 		$gz = _request('gz') ? '.gz' : '';
 		$archive = $gz 
 		?  _request('znom_sauvegarde') 
 		:  _request('nom_sauvegarde');
-		if (!$archive) $archive = 'dump';
-		$archive .= '.xml' . $gz;
+		if ($archive === '') $archive = 'dump';
+		if ($archive) {
+			$archive .= '.xml' . $gz;
 
-		//  creer l'en tete du fichier a partir de l'espace public
-		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true));
-	} 
+		// creer l'en tete du fichier a partir de l'espace public
+		// creer aussi la meta
+			include_spip('inc/headers');
+			redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true));
+		} else {
+			$f = charger_fonction('accueil');
+			$f();
+		} 
+	}
+}
 
+function exec_export_all_args($rub, $meta)
+{
 	include_spip('inc/actions');
 	include_spip('inc/export');
 	include_spip('base/abstract_sql');

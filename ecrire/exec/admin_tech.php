@@ -218,7 +218,7 @@ function liste_sauvegardes($key, $fichier, $class, $selected)
 		.  (($fichier==$selected)?"checked='checked' ":"")
 		. "/></td><td>\n<label for='dump_$key'>"
 		.   $file = str_replace('/', ' / ', $affiche_fichier)
-		. '</label></td><td>'
+		. "</label></td><td style='text-align: right'>"
 		. taille_en_octets(filesize($fichier))
 		. '</td><td>'
 		. affdate_heure(date('Y-m-d H:i:s',filemtime($fichier)))

@@ -49,10 +49,10 @@ function valider_xml_ok($url, $req_ext)
 			$bandeau = $url . '*' . $ext;
 		} else {
 			@list($server, $script) = preg_split('/[?]/', $url);
-			if ((!$server) OR ($server == './') 
-			    OR strpos($server, url_de_base()) === 0) {
-			  include_spip('inc/headers');
-			  redirige_par_entete(parametre_url($url,'transformer_xml','valider_xml', '&'));
+			if (((!$server) OR ($server == './') 
+			    OR strpos($server, url_de_base()) === 0)
+			    AND preg_match('/^exec=(\w+)$/', $script, $r)) {
+				  $url = $r[1];
 			}
 			$transformer_xml = charger_fonction('valider_xml', 'inc');
 			$onfocus = "this.value='" . addslashes($url) . "';";
@@ -144,14 +144,10 @@ function valider_resultats($res, $ext)
 // http://doc.spip.org/@valider_script
 function valider_script($transformer_xml, $f, $dir)
 {
-// ne pas se controler soi-meme
-// et ne pas valider les exec qui sont en fait des actions.
+// ne pas se controler soi-meme ni l'index du repertoire
 
 	$script = basename($f, '.php');
-	if ($script == $GLOBALS['exec']
-	    OR $script=='index' 
-	    OR $script == 'export_all'
-	    OR $script == 'import_all')
+	if ($script == $GLOBALS['exec'] OR $script=='index')
 		return array('/', $script,''); 
 
 	$f = charger_fonction($script, $dir, true);
@@ -178,7 +174,6 @@ function valider_script($transformer_xml, $f, $dir)
 			if (strpos($page2, "id='minipres'")) {
 				$res = 0 - strlen($page2);
 			} else $res = strlen($page2);
-#			$res = $page2;
 		}
 	}
 	return array($res, $script,
