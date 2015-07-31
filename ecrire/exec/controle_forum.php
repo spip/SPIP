@@ -196,19 +196,12 @@ function controle_un_forum($row) {
 // http://doc.spip.org/@exec_controle_forum_dist
 function exec_controle_forum_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques;
-
 	$id_rubrique = intval(_request('id_rubrique'));
 
-	# TODO autoriser
-	$droit = (($connect_statut != "0minirezo") OR 
-		  (!$connect_toutes_rubriques AND
-		   (!$id_rubrique OR !autoriser('publierdans','rubrique',$id_rubrique))));
-
-	if ($droit) {
-	  include_spip('inc/minipres');
-	  echo minipres();
-	  exit;
+	if (autoriser('publierdans','rubrique',$id_rubrique)) {
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
 	} 
 
 	$debut= intval(_request('debut'));
