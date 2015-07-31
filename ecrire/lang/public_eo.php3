@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'anta&#365;a pa&#285;o',
+'page_suivante' => 'sekvanta pa&#285;o',
 'par_auteur' => 'de ',
 'participer_site' => 'Por partopreni la vivon de tiu teksejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuje ricevos retpo&#349;tmesa&#285;on indikante vian kodon por aliri en la privata spaco.',
 'plan_site' => 'Plano de la teksejo',

@@ -370,10 +370,13 @@ Gracias pola t&uacute;a participaci&oacute;n
 'ical_texte_js' => 'Unha li&ntilde;a de javascript perm&iacute;telle cargar moi doadamente, sobre calquera web que do que dispo&ntilde;a os artigos recentes deste web.',
 'ical_texte_prive' => 'Este calendario, de uso estrictamente persoal, perm&iacute;telle informarse da actividade editorial privada deste web (tarefas e citas persoais, artigos e breves propostas...).',
 'ical_texte_public' => 'Este calendario perm&iacute;telle seguir a actividade p&uacute;blica deste web (artigos e breves publicadas).',
-'ical_texte_rss' => 'Pode sindicar as novidades deste web dentro de calquera lector de ficheiros en formato XML/RSS (Rich Site Summary). Este formato tam&eacute;n lle permite ler as novidades publicadas noutros webs que utilicen un formato de intercambio compatible.',
+'ical_texte_rss' => '<MODIF> Pode sindicar as novidades deste web dentro de calquera lector de ficheiros en formato XML/RSS (Rich Site Summary). Este formato tam&eacute;n lle permite ler as novidades publicadas noutros webs que utilicen un formato de intercambio compatible.',
+'ical_texte_rss_articles' => 'O ficheiro &laquo;backend&raquo; dos artigos deste web enc&oacute;ntrase no enderezo:',
+'ical_texte_rss_articles2' => 'Pode tam&eacute;n obter os ficheiros &laquo;backend&raquo; para os artigos de cada r&uacute;brica (secci&oacute;n) do web:',
+'ical_texte_rss_breves' => 'Est&aacute; dispo&ntilde;ible un ficheiro que cont&eacute;n as breves do web. Especificando un n&uacute;mero de secci&oacute;n obter&aacute; unicamente as breves de tal secci&oacute;n.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de correo',
-'ical_titre_rss' => 'Ficheiro &laquo; backend &raquo;',
+'ical_titre_rss' => '<MODIF> Ficheiro &laquo; backend &raquo;',
 'icone_a_suivre' => 'Panel de control',
 'icone_activer_cookie' => 'Activar a cookie de correspondencia',
 'icone_admin_site' => 'Xesti&oacute;n do lugar',
@@ -968,6 +971,14 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_tous_resultats_enregistres' => '[todo.los resultados foron rexistrados]',
 'info_tout_afficher' => 'Amosar todo',
 'info_tout_site' => 'Todo o lugar',
+'info_tout_site1' => 'Lingua do artigo.',
+'info_tout_site2' => 'O artigo non foi traducido nesta lingua.',
+'info_tout_site3' => 'O artigo foi traducido nesta lingua, pero as modificaci&oacute;ns foron aplicadas polo momento ao artigo de referencia. A traduci&oacute;n debe ser posta ao d&iacute;a.',
+'info_tout_site4' => 'O artigo foi traducido nesta lingua e a traduci&oacute;n est&aacute; actualizada.',
+'info_tout_site5' => 'Artigo orixinal.',
+'info_tout_site6' => '<b>Atenci&oacute;n&nbsp;:</b> s&oacute; os artigos orixinais son amosados.
+As traduci&oacute;ns son asociadas ao orixinal,
+cunha cor que indica o seu estado&nbsp;:',
 'info_travail_colaboratif' => 'Traballo de colaboraci&oacute;n nos artigos',
 'info_travaux_texte' => 'Este web non est&aacute; a&iacute;nda configurado. Volva m&aacute;is adiante...',
 'info_travaux_titre' => 'Web en construci&oacute;n',
@@ -1046,6 +1057,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'item_non_utiliser_breves' => 'Non usar as breves',
 'item_non_utiliser_config_groupe_mots_cles' => 'Non usar a configuraci&oacute;n avanzada dos grupos de palabras chave',
 'item_non_utiliser_moteur_recherche' => 'Non usar o motor',
+'item_non_utiliser_moteur_recherche_forum' => 'Non indexar os foros',
 'item_non_utiliser_mots_cles' => 'Non usar as palabras chave',
 'item_non_utiliser_syndication' => 'Non usar a afiliaci&oacute;n autom&aacute;tica',
 'item_nouvel_auteur' => 'Nov@ autor/a',
@@ -1059,6 +1071,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'item_utiliser_breves' => 'Empregar as breves',
 'item_utiliser_config_groupe_mots_cles' => 'Empregar a configuraci&oacute;n avanzada dos grupos de palabras chave',
 'item_utiliser_moteur_recherche' => 'Empregar o motor de percura',
+'item_utiliser_moteur_recherche_forum' => 'Indexar os foros',
 'item_utiliser_mots_cles' => 'Empregar as palabras chave',
 'item_utiliser_syndication' => 'Empregar a afiliaci&oacute;n autom&aacute;tica',
 'item_visiteur' => 'visitante',
@@ -1230,6 +1243,10 @@ Gracias pola t&uacute;a participaci&oacute;n
 'module_texte_explicatif' => 'Pode inserir os recursos seguintes dentro dos esqueletos do seu web p&uacute;blico. Ser&aacute;n automaticamente traducidos &aacute;s diferentes linguas para as que existe un ficheiro de lingua.',
 'module_texte_traduction' => 'O ficheiro de lingua &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispo&ntilde;ible en&nbsp;:',
 'mois_non_connu' => 'desco&ntilde;ecido',
+
+
+// N
+'navigateur_pas_redirige' => 'Se o seu navegador non &eacute; redirixido, prema aqu&iacute; para continuar.',
 
 
 // O
@@ -1570,7 +1587,7 @@ e reconectar co lugar.
 'titre_breve_refusee' => 'Breve rexeitada',
 'titre_breves' => 'As breves',
 'titre_cadre_afficher_article' => 'Amosar os artigos',
-'titre_cadre_afficher_traductions' => 'Fixar o estado das traduci&oacute;ns para esta lingua',
+'titre_cadre_afficher_traductions' => '<MODIF> Fixar o estado das traduci&oacute;ns para esta lingua',
 'titre_cadre_ajouter_auteur' => 'ENGADIR UN/UNHA AUTOR/A:',
 'titre_cadre_forum_administrateur' => 'Foro privado de xesti&oacute;n',
 'titre_cadre_forum_interne' => 'Foro interno',

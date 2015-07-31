@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'p&aacute;xina anterior',
+'page_suivante' => 'p&aacute;xina seguinte',
 'par_auteur' => 'por',
 'participer_site' => 'Pode participar na vida deste web e propo&ntilde;er os seus propios artigos inscrib&iacute;ndose aqu&iacute; abaixo. Recibir&aacute; inmediatamente un correo que lle indicar&aacute; o seu c&oacute;digo de acceso ao espacio privado do web.',
 'plan_site' => 'Mapa do web',
