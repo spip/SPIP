@@ -684,7 +684,7 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
   A <b>@fichier@</b> k&eacute;p nem ment &aacute;t (@id_article@ cikk).
  Jegyezze meg ezt a nevet, pr&oacute;bl&aacute;ja &uacute;jra a friss&iacute;t&eacute;st, &eacute;s v&eacute;g&uuml;l ellen&#337;rizze, hogy a k&eacute;pek mindig jelennek meg a cikkekben.',
 'texte_erreur_visiteur' => 'Olyan azonos&iacute;t&oacute;val pr&oacute;b&aacute;lt hozz&aacute;f&eacute;rni a priv&aacute;t z&oacute;n&aacute;hoz, aminek ehhez nincs jogosults&aacute;ga.',
-'texte_inc_auth_1' => '&Ouml;n a <b>@auth_login@</b> loginnal
+'texte_inc_auth_1' => '<MODIF>&Ouml;n a <b>@auth_login@</b> loginnal
 van azonos&iacute;tva, nem ez l&eacute;tezik/l&eacute;tezett az adatb&aacute;zisban. 
 Pr&oacute;b&aacute;ljon',
 'texte_inc_auth_2' => '&uacute;jra csatlakozni',

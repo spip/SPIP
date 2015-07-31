@@ -682,7 +682,7 @@ och koppla upp dig mot sajten igen.
    kontrollera efter&aring;t att bilderna fortfarande
       finns i artiklarna.',
 'texte_erreur_visiteur' => 'Du har f&ouml;rs&ouml;kt att &ouml;ppna den privata delen med  en identitet som inte har tilltr&auml;de.',
-'texte_inc_auth_1' => 'Du har identifierat dig med login
+'texte_inc_auth_1' => '<MODIF>Du har identifierat dig med login
   <b>@auth_login@</b>, men det finns inte i databasen (l&auml;ngre). 
   F&ouml;rs&ouml;k att',
 'texte_inc_auth_2' => 'Koppla upp igen',

@@ -674,7 +674,7 @@ mas eles n&atilde;o foram inseridos diretamente. Dependendo da elabora&ccedil;&a
 A imagem <b>@fichier@</b> n&atilde;o passou (mat&eacute;ria @id_article@).
 Anote esta refer&ecirc;ncia, tente novamente a atualiza&ccedil;&atilde;o e, finalmente, verifique se as imagens aparecem nas mat&eacute;rias.',
 'texte_erreur_visiteur' => 'Voc&ecirc; tentou acessar o espa&ccedil;o restrito com um login que n&atilde;o tem a permiss&atilde;o necess&aacute;ria.',
-'texte_inc_auth_1' => 'Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
+'texte_inc_auth_1' => '<MODIF>Voc&ecirc; se identificou com o login <b>@auth_login@</b>, mas ele n&atilde;o consta (mais) na base.
 Tente se',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', ap&oacute;s ter eventualmente sa&iacute;do e reiniciado o seu navegador.',

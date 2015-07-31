@@ -689,7 +689,7 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
   Zapisz te dane, i spr&oacute;buj ponownego uaktualnienia,
 a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyku&#322;ach.',
 'texte_erreur_visiteur' => 'Pr&oacute;bujesz dosta&#263; si&#281; do panelu administracyjnego za pomoc&#261; loginu, kt&oacute;ry na to nie pozwala.',
-'texte_inc_auth_1' => 'Jeste&#347; zalogowany za pomoc&#261;
+'texte_inc_auth_1' => '<MODIF>Jeste&#347; zalogowany za pomoc&#261;
   loginu <b>@auth_login@</b>, ale nie istnieje on (ju&#380;) w bazie danych. 
   Spr&oacute;buj si&#281;',
 'texte_inc_auth_2' => 'po&#322;&#261;czy&#263;',

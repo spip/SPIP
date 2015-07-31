@@ -608,7 +608,7 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'texte_erreur_mise_niveau_base' => 'Greska u bazi podataka tokom nadogradnje.
 Fotografija <b>@fichier@</b> nije predjena (clanak @id_article@).
 Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjerite da li se fotografije uvijek pojavljuju u clancima.',
-'texte_inc_auth_1' => 'Identifikovani ste pod loginom <b>@auth_login@</b>, ali on vise ne postoji u bazi. Pokusajte se ponovo',
+'texte_inc_auth_1' => '<MODIF>Identifikovani ste pod loginom <b>@auth_login@</b>, ali on vise ne postoji u bazi. Pokusajte se ponovo',
 'texte_inc_auth_2' => 'prijaviti',
 'texte_inc_auth_3' => ', nakon sto ste iskljucili, a zatim ponovo ukljucili vas navigator.',
 'texte_inc_config' => 'Dole unesene modifikacije znatno uticu na funkcionisanje vase stranice. Preporucuje se da ne intervenisete ako niste upoznati sa SPIP sistemom. <br /><br /><b>Generalno se preporucuje intervencija webmastera ove stranice.</b>',

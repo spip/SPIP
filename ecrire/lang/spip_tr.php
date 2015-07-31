@@ -683,7 +683,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
     sonradan belge eki olarak g&ouml;r&uuml;lebilir.',
 'texte_erreur_mise_niveau_base' => 'G&uuml;ncelleme s&#305;ras&#305;nda veritaban&#305; hatas&#305;. @fichier@ resmi ula&#351;mad&#305; (@id_article@ makalesi). Bu referans&#305; kaydedip g&uuml;ncelemeyi tekrar deneyiniz ve resimlerin makalelerde g&ouml;r&uuml;ld&uuml;&#287;&uuml;nden emin olunuz. ',
 'texte_erreur_visiteur' => '&Ouml;zel alana, giri&#351;e izin vermeyen bir kullan&#305;c&#305; ismiyle eri&#351;meyi denediniz.',
-'texte_inc_auth_1' => '<b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda bu kullan&#305;c&#305; ismi yok / art&#305;k yok.  &#350;unu deneyiniz :',
+'texte_inc_auth_1' => '<MODIF><b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda bu kullan&#305;c&#305; ismi yok / art&#305;k yok.  &#350;unu deneyiniz :',
 'texte_inc_auth_2' => 'gezgininizi kapat&#305;p tekrar &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z ve ',
 'texte_inc_auth_3' => 'tekrar ba&#287;lan&#305;n&#305;z.',
 'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;i &uuml;zerinde b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkilidir. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi &ouml;neririz.  <br /><br /><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalarla ilgilenme i&#351;ini sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle &ouml;neririz.</b>',

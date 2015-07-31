@@ -687,7 +687,7 @@ e vos tornar connectar al sit.
  niv&egrave;l, e verificatz pu&egrave;i que los imatges aparescan
  encara dins los articles.',
 'texte_erreur_visiteur' => 'Av&egrave;tz assajat d\'accedir a l\'espaci privat amb un identificant qu\'o permet pas.',
-'texte_inc_auth_1' => 'S&egrave;tz identificat/ada coma
+'texte_inc_auth_1' => '<MODIF>S&egrave;tz identificat/ada coma
    <b>@auth_login@</b>, mas aquel login exist&iacute;s pas o pas mai dins la basa.
   Ensajatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',

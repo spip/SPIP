@@ -690,7 +690,7 @@ kaj ensaluti.
   kaj fine kontrolu ke la bildoj plu aperu
 en la artikoloj.',
 'texte_erreur_visiteur' => 'Vi provis eniri la privatan spacon pere de ne alir-rajtiga salutnomo.',
-'texte_inc_auth_1' => 'Vi ensalutis la&#365; la
+'texte_inc_auth_1' => '<MODIF>Vi ensalutis la&#365; la
   salutnomo <b>@auth_login@</b>, sed tiu ne/ne plu ekzistas en la datenbazo.
   Provu',
 'texte_inc_auth_2' => 'rekonekti&#285;i',
