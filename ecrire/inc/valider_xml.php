@@ -30,6 +30,7 @@ class DTC {
 	var	$regles = array();
 }
 
+// http://doc.spip.org/@analyser_doctype
 function analyser_doctype($data)
 {
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
