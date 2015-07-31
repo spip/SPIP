@@ -278,7 +278,7 @@ if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserv
 		bouton_admin("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
 
-	$link = new Link;
+	$link = $GLOBALS['clean_link'];
 	$link->addVar('recalcul', 'oui');
 	$link->delVar('submit');
 	echo $link->getForm('GET');

@@ -812,7 +812,8 @@ function parser($texte) {
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 'EMBED_DOCUMENT',
 		'IP', 'VISITES', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
-		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT'
+		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
+		'LOGIN_PRIVE', 'LOGIN_PUBLIC'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1587,6 +1588,35 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 				$'.$nom_var.' = "<"."?php if (\$var_recherche) { \$mode_surligne = fin_surligne(\$var_recherche, \$mode_surligne); } ?".">";
 			';
 		}
+		break;
+
+	// formulaires de login
+	//
+	case 'LOGIN_PRIVE':
+		$milieu = '
+			$'.$nom_var.' = "<"."?php include_local (\'inc-login.php3\');
+				\$cible = new Link(\'ecrire/\');
+				login (\$cible, \$GLOBALS[\'clean_link\']->getUrl(), \'prive\'); ?".">";
+			';
+		break;
+
+	case 'LOGIN_PUBLIC':
+		$lacible = "\$GLOBALS[\'clean_link\']";
+		if ($fonctions) {
+			$filtres = array();
+			while (list(, $nom) = each($fonctions)) {
+				if (ereg("cible=(.*)", $nom, $regs))
+					$lacible = "new Link('".$regs[1]."')";
+				else
+					$filtres[] = $nom;
+			}
+			$fonctions = $filtres;
+		}
+		$milieu = '
+			$'.$nom_var.' = "<"."?php include_local (\'inc-login.php3\');
+				\$cible = ' . $lacible . ';
+				login (\$cible, \$GLOBALS[\'clean_link\']->getUrl(), false); ?".">";
+			';
 		break;
 
 	} // switch

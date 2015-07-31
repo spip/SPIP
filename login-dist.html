@@ -1,0 +1,16 @@
+<?php
+	if (!$url)
+		$cible = new Link('ecrire/');
+	else
+		$cible = new Link(urldecode($url));
+
+	// que faire si on est connecte
+	if ($auteur_session) {
+		echo "Vous &ecirc;tes connect&eacute;...";
+		exit;
+	}
+?>
+
+#LOGIN_PRIVE
+
+

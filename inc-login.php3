@@ -18,7 +18,7 @@ function auth_http($cible, $redirect_echec, $essai_auth_http) {
 	if ($essai_auth_http == 'oui') {
 		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
-			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='$redirect_echec?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
+			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='spip_cookie.php3?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
 		} else {
 			$cible->addVar('bonjour','oui');
 			@header("Location: " . $cible->getUrl() );
@@ -28,17 +28,26 @@ function auth_http($cible, $redirect_echec, $essai_auth_http) {
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
 		include_ecrire('inc_session.php3');
-		ask_php_auth("<b>D&eacute;connexion effectu&eacute;e.</b><p>(V&eacute;rifiez toutefois que votre navigateur n'a pas m&eacute;moris&eacute; votre mot de passe...)<p>[<a href='./'>Retour au site public</a>] [<a href='$redirect_echec?essai_auth_http=oui&redirect=ecrire'>test navigateur/reconnexion</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
+		ask_php_auth("<b>D&eacute;connexion effectu&eacute;e.</b><p>(V&eacute;rifiez toutefois que votre navigateur n'a pas m&eacute;moris&eacute; votre mot de passe...)<p>[<a href='./'>Retour au site public</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&redirect=ecrire'>test navigateur/reconnexion</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
 		exit;
 	}
 }
 
-function login($cible, $redirect_echec) {
+function login($cible, $redirect_echec, $prive = 'prive') {
 	global $login;
 	global $spip_admin;
 	global $erreur, $echec_cookie;
 	global $php_module;
 	global $this_link;
+	global $essai_auth_http;
+	global $logout, $auteur_session;
+	global $spip_session, $PHP_AUTH_USER;
+
+	include_ecrire("inc_session.php3");
+	verifier_visiteur();
+	if ($auteur_session AND ! $logout)
+		return;
+
 
 	// initialisations
 	$nom_site = lire_meta('nom_site');
@@ -79,15 +88,20 @@ function login($cible, $redirect_echec) {
 		echo "<p><b>Pour vous identifier de fa&ccedil;on s&ucirc;re sur ce site, vous devez accepter les cookies.</b> ";
 		echo "Veuillez r&eacute;gler votre navigateur pour qu'il les accepte (au moins pour ce site).\n";
 	}
-	else {
+	else if ($prive) {
 		install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 		echo "fournis lors de votre inscription.";
+	} else {
+		install_debut_html("$nom_site : identification");
+		echo "<p>Pour vous identifier sur ce site, ";
+		echo "vous devez entrer les codes qui vous ont &eacute;t&eacute; ";
+		echo "fournis lors de votre inscription.";
 	}
 
 	// fond d'ecran de login
-	$images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
+	$images = array ('login.gif', 'login.jpg', 'login.png');
 	while (list(,$img) = each ($images)) {
 		$img = 'IMG/icones/'.$img;
 		if (file_exists($img)) {
@@ -183,11 +197,13 @@ function login($cible, $redirect_echec) {
 	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";
 
 	if ($echec_cookie == "oui" AND $php_module) {
-		echo "<form action='$redirect_echec' method='get'>";
+		echo "<form action='spip_cookie.php3' method='get'>";
 		echo "<fieldset>\n";
 		echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
 		echo "de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;: \n";
 		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
+		$url = $cible->getUrl();
+		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
 		echo "</fieldset></form>\n";
 	}

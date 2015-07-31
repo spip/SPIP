@@ -273,10 +273,10 @@ function include_ecrire($file) {
 // Infos de config PHP
 //
 
-$php_module = ($flag_sapi_name AND @php_sapi_name() == 'apache') OR
-	(ereg("^Apache", $SERVER_SOFTWARE) AND ereg(" PHP", $SERVER_SOFTWARE));
+$php_module = (($flag_sapi_name AND @php_sapi_name() == 'apache') OR
+	ereg("^Apache.* PHP", $SERVER_SOFTWARE));
 
-$flag_upload = !$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0);
+$flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
 
 
 function tester_upload() {
@@ -303,11 +303,11 @@ if ($flag_obgz) {
 		$use_gz = false;
 
 	// special bug de proxy
-	if (eregi("NetCache|Hasd_proxy", $HTTP_SERVER_VARS['HTTP_VIA'])) {
+	if (eregi("NetCache|Hasd_proxy", $HTTP_VIA)) {
 		$use_gz = false;
 	}
 	// special bug Netscape Win 4.0x
-	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_SERVER_VARS['HTTP_USER_AGENT'])) {
+	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT)) {
 		$use_gz = false;
 	}
 
