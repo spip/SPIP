@@ -23,13 +23,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   description connue de la table sql demandee
  * @return array|bool
  */
-function lister_table_objets_sql($table_sql=null, $desc=array()){
+function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	static $infos_tables = null;
 	if (is_null($infos_tables)){
 		$infos_tables = pipeline('declarer_table_objets_sql',array(
 			'spip_articles'=> array(
 				'texte_retour' => 'icone_retour_article',
 				'texte_modifier' => 'icone_modifier_article',
+				'texte_objets' => 'info_articles_2',
 				'info_aucun_objet'=> 'info_aucun_article',
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
@@ -38,6 +39,7 @@ function lister_table_objets_sql($table_sql=null, $desc=array()){
 			'spip_auteurs' => array(
 				'texte_retour' => 'icone_retour',
 				'texte_modifier' => 'admin_modifier_auteur',
+				'texte_objets' => 'icone_auteurs',
 				'info_aucun_objet'=> 'info_aucun_auteur',
 				'info_1_objet' => 'info_1_auteur',
 				'info_nb_objets' => 'info_nb_auteurs',
@@ -47,6 +49,7 @@ function lister_table_objets_sql($table_sql=null, $desc=array()){
 				'url_voir' => 'naviguer',
 				'url_edit' => 'rubriques_edit',
 				'texte_retour' => 'icone_retour',
+				'texte_objets' => 'info_rubriques',
 				'texte_modifier' => 'icone_modifier_rubrique',
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
@@ -60,7 +63,7 @@ function lister_table_objets_sql($table_sql=null, $desc=array()){
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
 	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
-		return false;
+		return $desc?$desc:false;
 	}
 	if ($table_sql)
 		return $infos_tables[$table_sql];
@@ -133,8 +136,8 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['texte_retour'] = $infos['type'].':'.'icone_retour_'.$infos['type'];
 	if (!isset($infos['texte_modifier']))
 		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
-	if (!isset($infos['texte_modifier']))
-		$infos['texte_modifier'] = $infos['type'].':'.'icone_modifier_'.$infos['type'];
+	if (!isset($infos['texte_objets']))
+		$infos['texte_objets'] = $infos['type'].':'.'icone_'.$infos['table_objet'];
 
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
@@ -175,7 +178,7 @@ function lister_tables_objets_surnoms(){
 				'img' => 'documents',
 				'emb' => 'documents',
 			));
-		$infos_tables = lister_table_objets_sql();
+		$infos_tables = lister_tables_objets_sql();
 		foreach($infos_tables as $t=>$infos){
 			if (is_array($infos['table_objet_surnoms']) AND count($infos['table_objet_surnoms']))
 				foreach($infos['table_objet_surnoms'] as $surnom)
@@ -196,7 +199,7 @@ function lister_types_surnoms(){
 		// pour compatibilite, car il faut dorenavent utiliser
 		// declarer_table_objets_sql
 		$surnoms = pipeline('declarer_type_surnoms', array('racine-site'=>'site'));
-		$infos_tables = lister_table_objets_sql();
+		$infos_tables = lister_tables_objets_sql();
 		foreach($infos_tables as $t=>$infos){
 			if (is_array($infos['type_surnoms']) AND count($infos['type_surnoms']))
 				foreach($infos['type_surnoms'] as $surnom)
