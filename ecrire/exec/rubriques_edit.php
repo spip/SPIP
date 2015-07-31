@@ -18,7 +18,7 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
-	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new;
+	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new,$spip_lang_right;
 
 	if ($new == "oui") {
 		$id_rubrique = 0;
@@ -97,19 +97,12 @@ function exec_rubriques_edit_dist()
 
 	debut_cadre_formulaire();
 
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr>";
-	echo "<td>";
+	if ($id_rubrique) echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$spip_lang_right);
+	else echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif",$spip_lang_right);
 
-	if ($id_rubrique) echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
-	else echo icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
-
-	echo "</td>";
-	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-	echo "<td style='width: 100%'>";
 	echo _T('info_modifier_rubrique');
 	gros_titre($titre);
-	echo "</td></tr></table><br />";
+	echo "<br class='nettoyeur' />";
 
 	$titre = entites_html($titre);
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
