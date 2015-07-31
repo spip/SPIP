@@ -130,7 +130,7 @@ select.fondl { padding: 0; }
 #bandeau-principal a {cursor:hand;}
 #bandeau-principal a .icon_fond { width: 48px; height: 48px; background: #GET{claire}; margin: auto; }
 #bandeau-principal a.selection .icon_fond { width: 48px; margin:auto }
-#bandeau-principal a:hover span.icon_fond { background:url(#EVAL{ _DIR_IMG_PACK}fond-gris-anim.gif); width: 48px; height: 48px; margin: auto; }
+#bandeau-principal a:hover span.icon_fond { background:url([(#CHEMIN{[(#EVAL{ _DIR_IMG_PACK})fond-gris-anim.gif]}|url_absolue)]); width: 48px; height: 48px; margin: auto; }
 #bandeau-principal li.boutons_admin:hover .bandeau_sec,
 #bandeau-principal li.boutons_admin.sfhover .bandeau_sec { display: block; }
 #bandeau-principal span.icon_fond span { background: center top no-repeat; height: 48px; display: block; width: 48px; margin: 0; }
