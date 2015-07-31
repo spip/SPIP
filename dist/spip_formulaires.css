@@ -97,7 +97,7 @@ fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
 	margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */
 }
 .formulaire_spip fieldset legend {
-	padding:0.5em;
+	padding:0.5em 5px;
 	font-weight:bold;
 	font-style:italic;
 	font-size:1.2em;
