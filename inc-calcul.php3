@@ -189,7 +189,7 @@ function calculer_contexte() {
 	}
 
 	if ($GLOBALS['date'])
-		$contexte['date'] = $contexte['date_redac'] = date($GLOBALS['date']);
+		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
@@ -204,9 +204,12 @@ function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
 		global $contexte;
 		$contexte = $contexte_local;
 		recuperer_parametres_url($fond, nettoyer_uri());
+
+		// remettre les globales pour le bouton "Modifier cet article"
 		if (is_array($contexte))
 			foreach ($contexte as $var=>$val)
-				$GLOBALS[$var] = $val;
+				if (substr($var,0,3) == 'id_')
+					$GLOBALS[$var] = $val;
 		$contexte_local = $contexte;
 	}
 
