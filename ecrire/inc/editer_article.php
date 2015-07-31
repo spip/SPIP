@@ -73,18 +73,19 @@ function editer_article_texte($texte, $config, $aider)
 	. ($config['lignes'] +15)
 	. "' cols='40'";
 
-	$texte = entites_html($texte);
-	 // texte > 32 ko -> decouper en morceaux
-	if (strlen($texte)>29*1024) {
-	  list($texte, $sup) = editer_article_recolle($texte, $att_text);
-	} else $sup='';
-
 	if ($config['afficher_barre']) {
 		include_spip('inc/barre');
 		$afficher_barre = '<div>' 
 		.  afficher_barre('document.formulaire.texte')
 		. '</div>';
 	} else $afficher_barre = '';
+
+	$texte = entites_html($texte);
+	 // texte > 32 ko -> decouper en morceaux
+	if (strlen($texte)>29*1024) {
+	  list($texte, $sup) = editer_article_recolle($texte, $att_text);
+	} else $sup='';
+
 	return	"\n<p><b>" ._T('info_texte') ."</b>"
 	. $aider ("arttexte") . "<br />\n" 
 	. _T('texte_enrichir_mise_a_jour')
