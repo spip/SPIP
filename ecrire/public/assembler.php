@@ -198,7 +198,7 @@ function stop_inclure($fragment) {
 	}
 }
 // http://doc.spip.org/@inclure_page
-function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
+function inclure_page($fond, $contexte_inclus) {
 	global $lastmodified;
 
 	// Si un fragment est demande et deja obtenu, inutile de continuer a inclure
@@ -211,10 +211,9 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 
 	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
 	if (!isset($contexte_inclus['lang']))
-		$contexte_inclus['lang'] = ($langue_courante ? $langue_courante :  $GLOBALS['spip_lang']);
+		$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
 	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
-		include_spip('inc/lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
@@ -237,11 +236,13 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		$f = charger_fonction('parametrer', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
-		if ($chemin_cache) 
+		if ($chemin_cache)
 			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastmodified);
 	}
 	if($lang_select)
 		lang_dselect();
+
+#print_r($contexte_inclus);print_r($page);exit;
 
 	return $page;
 }

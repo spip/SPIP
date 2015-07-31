@@ -255,38 +255,37 @@ function sql_accepter_forum($id_article) {
 function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	// distinguer le premier appel des appels par inclusion
-	if (!is_array($local)) { 
+	if (!is_array($local)) {
 		global $contexte;
-	// ATTENTION, gestion des URLs personnalises (propre etc):
-	// 1. $contexte est global car cette fonction le modifie.
-	// 2. $fond est passe par reference, pour la meme raison
-	// Bref,  les URL dites propres ont une implementation sale.
-	// Interdit de nettoyer, faut assumer l'histoire.
+		// ATTENTION, gestion des URLs personnalises (propre etc):
+		// 1. $contexte est global car cette fonction le modifie.
+		// 2. $fond est passe par reference, pour la meme raison
+		// Bref,  les URL dites propres ont une implementation sale.
+		// Interdit de nettoyer, faut assumer l'histoire.
 		include_spip('inc/filtres'); // pour normaliser_date
 		$contexte = calculer_contexte();
 		if (function_exists("recuperer_parametres_url")) {
 			recuperer_parametres_url($fond, nettoyer_uri());
-	// remettre les globales (bouton "Modifier cet article" etc)
+			// remettre les globales (bouton "Modifier cet article" etc)
 			foreach ($contexte as $var=>$val) {
 				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
 			}
 		}
-	        $local = $contexte;
-	}
+		$local = $contexte;
 
-	// si le champ chapo commence par '=' c'est une redirection.
-
-	if ($fond == 'article'
-	AND $id_article = intval($local['id_article'])) {
-		if ($chapo = sql_chapo($id_article)) {
-			if (preg_match(',^=(\[->)?(.*?)[]]?$,', $chapo, $url)){
-				include_spip('inc/texte');
-				$url = calculer_url($url[2]);
-				if ($url) { // sinon les navigateurs pataugent
-					$url = texte_script(str_replace('&amp;', '&', $url));
-					return array('texte' => "<".
-					"?php redirige_par_entete('$url'); ?" . ">",
-					'process_ins' => 'php');
+		// si le champ chapo commence par '=' c'est une redirection.
+		if ($fond == 'article'
+		AND $id_article = intval($local['id_article'])) {
+			if ($chapo = sql_chapo($id_article)) {
+				if (preg_match(',^=(\[->)?(.*?)[]]?$,', $chapo, $url)){
+					include_spip('inc/texte');
+					$url = calculer_url($url[2]);
+					if ($url) { // sinon les navigateurs pataugent
+						$url = texte_script(str_replace('&amp;', '&', $url));
+						return array('texte' => "<".
+						"?php redirige_par_entete('$url'); ?" . ">",
+						'process_ins' => 'php');
+					}
 				}
 			}
 		}
@@ -327,7 +326,8 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 			 join(", ", $local)
 			.' ('.strlen($page['texte']).' octets)'
 		);
-	} else 	$page = array();
+	} else
+		$page = array();
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
