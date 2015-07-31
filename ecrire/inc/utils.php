@@ -624,7 +624,7 @@ function find_in_path ($filename) {
 
 		// Et le(s) dossier(s) des squelettes nommes
 		if ($GLOBALS['dossier_squelettes'])
-			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
+			foreach (array_reverse(explode(':', $GLOBALS['dossier_squelettes'])) as $d)
 				$path = 
 					($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/:' . $path;
 
