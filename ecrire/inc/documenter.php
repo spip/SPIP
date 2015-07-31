@@ -114,13 +114,39 @@ function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelan
 		$tous_autorises &= $flag;
 		$vu = ($document['vu']=='oui') ? ' vu':'';
 
-		$res .= "\n<td  class='document$vu'>"
-		.  $tourner($id_document, $document, $script, $flag, $type)
-		. (!$flag  ? '' :
+		$vue_document = $tourner($id_document, $document, $script, $flag, $type);
+
+		$editer_document =  (!$flag  ? '' :
 		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, in_array($id_document, $show_docs)))
-		. (!isset($document['info']) ? '' :
-		       ("<div class='verdana1'>".$document['info']."</div>"))
-		. "</td>\n";
+			. (!isset($document['info']) ? '' :
+		       ("<div class='verdana1'>".$document['info']."</div>"));
+
+		// Prevoir le passage de la vue et de l'edition sous forme de squelettes separes
+		// Ces pipelines seront alors inutiles, car integres dans l'appel des squelettes
+		$vue_document = pipeline('afficher_contenu_objet',
+			array(
+				'args' => array(
+					'type'=> 'case_document',
+					'id'=>$id_document
+				),
+				'data'=> $vue_document
+			)
+		);
+
+		$editer_document = pipeline('editer_contenu_objet',
+			array(
+				'args' => array(
+					'type'=> 'case_document',
+					'id'=>$id_document
+				),
+				'data'=> $editer_document
+			)
+		);
+
+		$res .= "\n<td  class='document$vu'>"
+			. $vue_document
+			. $editer_document
+			. "</td>\n";
 
 		$case++;
 		if ($case > $bord_droit) {
