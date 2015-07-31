@@ -127,7 +127,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// Calculer les invalideurs si c'est une boucle non constante
 
 	if ($primary && !$constant)
-		$corps .= "\n\t\t\$Cache['$primary'][" .
+		$corps .= "\n\t\t\$Cache['$primary'][intval(" .
 		  (($primary != 'id_forum')  ? 
 		   index_pile($id_boucle, $primary, $boucles) :
 		   ("calcul_index_forum(" . 
@@ -137,7 +137,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
 		    index_pile($id_boucle, 'id_syndic', $boucles) .
 		    ")")) .
-		  "] = 1; // invalideurs\n";
+		  ")] = 1; // invalideurs\n";
 
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
@@ -573,7 +573,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_ecrire('inc_charsets');
-	$squelette = transcoder_page($squelette);
+#	$squelette = transcoder_page($squelette);
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
