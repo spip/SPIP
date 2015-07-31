@@ -20,6 +20,7 @@ include_ecrire ("inc_layer");
 function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = false){
 		static $id_input=0;
 		global $couleur_claire;
+		$erreur = false;
 		$vals = array();
 		$info = plugin_get_infos($plug_file);
 		$plugok='N';
@@ -31,6 +32,13 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		if ($surligne)
 			$s .= " style='background:$couleur_claire'";
 		$s .= ">";
+		if (isset($info['erreur'])){
+			$s .=  "<div style='background:$couleur_claire'>";
+			$erreur = true;
+			foreach($info['erreur'] as $err)
+				$s .= "/!\ $err <br/>";
+			$s .=  "</div>";
+		}
 		$s .= bouton_block_invisible("$plug_file");
 		$s .= ($plugok=='O'?"<strong>":"").$info['nom'].($plugok=='O'?"</strong>":"");
 		$s .= "</div>";
@@ -64,9 +72,11 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		$vals[] = $s;
 
 		$s = "";
-		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
-		$s .= ('O' == $plugok)?" checked='checked'":"";
-		$s .= " /> <label for='label_$id_input'><strong>"._T('plugin:activer_plugin')."</strong></label>";
+		if (!$erreur){
+			$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
+			$s .= ('O' == $plugok)?" checked='checked'":"";
+			$s .= " /> <label for='label_$id_input'><strong>"._T('plugin:activer_plugin')."</strong></label>";
+		}
 		$id_input++;		
 		$vals[] = $s;
 

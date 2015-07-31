@@ -53,15 +53,22 @@ function liste_plugin_actifs(){
 }
 
 function ecrire_plugin_actifs($plugin){
-	ecrire_meta('plugin',implode(",", $plugin)); // mieux avec un serialize ?
 
+	$plugin_valides = array();
 	if (is_array($plugin)){
 		// charger les infos de plugin en memoire
 		$infos = array();
 		foreach ($plugin as $plug) {
 			$infos[$plug] = plugin_get_infos($plug);
+			if (!isset($infos[$plug]['erreur']))
+				$plugin_valides[] = $plug;
+			else
+				unset($infos[$plug]);
 		}
 	}
+
+	ecrire_meta('plugin',implode(",", $plugin_valides)); // mieux avec un serialize ?
+
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
 	
@@ -268,23 +275,105 @@ function plugin_get_infos($plug){
 		if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
 			$texte = file_get_contents(_DIR_PLUGINS."$plug/plugin.xml");
 			$arbre = parse_plugin_xml($texte);
-			$arbre = array_pop($arbre['plugin']); // derniere def plugin
-	
-			$ret['nom'] = join(' ',$arbre['nom']);
-			$ret['version'] = array_pop($arbre['version']);
-			if (isset($arbre['auteur']))
-				$ret['auteur'] = join(',',$arbre['auteur']);
-			if (isset($arbre['description']))
-				$ret['description'] = chaines_lang(join(' ',$arbre['description']));
-			if (isset($arbre['lien']))
-				$ret['lien'] = join(' ',$arbre['lien']);
-			$ret['options'] = $arbre['options'];
-			$ret['fonctions'] = $arbre['fonctions'];
-			$ret['class'] = $arbre['class'];
-			$ret['pipeline'] = $arbre['pipeline'];
+			if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
+				$arbre = array('erreur' => array(_T('plugin:erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
 		}
+		else {
+			// pour arriver ici on l'a vraiment cherche...
+			$arbre = array('erreur' => array(_T('plugin:erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
+		}
+
+		plugin_verifie_conformite($plug,$arbre);
+		
+		$ret['nom'] = join(' ',$arbre['nom']);
+		$ret['version'] = array_pop($arbre['version']);
+		if (isset($arbre['auteur']))
+			$ret['auteur'] = join(',',$arbre['auteur']);
+		if (isset($arbre['description']))
+			$ret['description'] = chaines_lang(join(' ',$arbre['description']));
+		if (isset($arbre['lien']))
+			$ret['lien'] = join(' ',$arbre['lien']);
+		if (isset($arbre['options']))
+			$ret['options'] = $arbre['options'];
+		if (isset($arbre['fonctions']))
+			$ret['fonctions'] = $arbre['fonctions'];
+		$ret['class'] = $arbre['class'];
+		if (isset($arbre['pipeline']))
+			$ret['pipeline'] = $arbre['pipeline'];
+		if (isset($arbre['erreur']))
+			$ret['erreur'] = $arbre['erreur'];
 	}
 	return $ret;
 }
 
+function plugin_verifie_conformite($plug,&$arbre){
+	$silence = false;
+	if (isset($arbre['plugin'])&&is_array($arbre['plugin']))
+		$arbre = end($arbre['plugin']); // derniere def plugin
+	else{
+		$arbre = array('erreur' => array(_T('plugin:erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
+		$silence = true;
+	}
+  // verification de la conformite du plugin avec quelques
+  // precautions elementaires
+  if (!isset($arbre['nom'])){
+  	if (!$silence)
+			$arbre['erreur'][] = _T('plugin:erreur_plugin_nom_manquant');
+		$arbre['nom'] = array("");
+	}
+  if (!isset($arbre['version'])){
+  	if (!$silence)
+			$arbre['erreur'][] = _T('plugin:erreur_plugin_version_manquant');
+		$arbre['version'] = array("");
+	}
+  if (!isset($arbre['class'])){
+  	if (!$silence)
+			$arbre['erreur'][] = _T('plugin:erreur_plugin_class_manquant');
+		$arbre['class'] = array("");
+	}
+	else{
+		$class = trim(end($arbre['class']));
+		if (isset($arbre['options'])){
+			foreach($arbre['options'] as $optfile){
+				$optfile = trim($optfile);
+				if (!@is_readable(_DIR_PLUGINS."$plug/$optfile"))
+  				if (!$silence)
+						$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $optfile";
+			}
+		}
+		if (isset($arbre['fonctions'])){
+			foreach($arbre['fonctions'] as $optfile){
+				$optfile = trim($optfile);
+				if (!@is_readable(_DIR_PLUGINS."$plug/$optfile"))
+  				if (!$silence)
+						$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $optfile";
+			}
+		}
+		$fonctions = array();
+		if (isset($arbre['fonctions']))
+			$fonctions = $arbres['fonctions'];
+	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install',strtolower($class));
+		foreach($arbre['pipeline'] as $pipe){
+			$nom = trim(end($pipe['nom']));
+			if (isset($pipe['action']))
+				$action = trim(end($pipe['action']));
+			else
+				$action = $nom;
+			// verif que la methode a un nom autorise
+			if (in_array(strtolower($action),$liste_methodes_reservees)){
+				if (!$silence)
+					$arbre['erreur'][] = _T("plugin:erreur_plugin_nom_fonction_interdit")." : $action";
+			}
+			else{
+				// verif que le fichier de def est bien present
+				if (isset($pipe['inclure'])){
+					$inclure = _DIR_PLUGINS."$plug/".end($pipe['inclure']);
+					if (!@is_readable($inclure))
+	  				if (!$silence)
+							$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $inclure";
+				}
+			}
+		}
+	}
+}
 ?>
