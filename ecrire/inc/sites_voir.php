@@ -178,7 +178,7 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 			$descriptif = safehtml($descriptif);
 		$s .= '<div class="arial1">'
 			# 385px = largeur de la colonne ou s'affiche le texte
-			. image_reduire($descriptif, 385, 550)
+			. filtrer('image_reduire',$descriptif, 385, 550)
 			. '</div>';
 	}
 
