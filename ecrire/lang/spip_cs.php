@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Změnit klíčové slovo',
 	'admin_modifier_rubrique' => 'Změnit sekci',
 	'admin_recalculer' => 'Obnovit stránku',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'vyvěsit překlady',
 	'alerte_maj_impossible' => '<b>Varování!</b> Aktualizace databáze SQL na verzi @version@ se nezdařila. Je možné, že je to kvůli problémům s přístupovými právy k databázi. Kontaktujte svého poskytovatele připojení k internetu (ISP).',
 	'alerte_modif_info_concourante' => 'VAROVÁNÍ: Tato informace byla změněna na jiném místě. Současná hodnota je :',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Změnit',
 	'bouton_chercher' => 'Najít',
 	'bouton_choisir' => 'Vybrat',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Download', # MODIF
 	'bouton_enregistrer' => 'Uložit',
 	'bouton_radio_desactiver_messagerie_interne' => 'Vypnout interní hlášení',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ září',
 	'date_demain' => 'zítra',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@date@ @nomjour@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'hodin',
 	'date_hier' => 'včera',
 	'date_il_y_a' => 'před @delai@',
@@ -181,39 +170,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'měsíců',
 	'date_mois_1' => 'Leden',
 	'date_mois_10' => 'Říjen',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Listopad',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Prosinec',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Únor',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Březen',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Duben',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Květen',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Červen',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Červenec',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Srpen',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Září',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'zima',
 	'date_saison_2' => 'jaro',
 	'date_saison_3' => 'léto',
 	'date_saison_4' => 'podzim',
-	'date_secondes' => 'seconds', # NEW
 	'date_semaines' => 'týdnů',
-	'date_un_mois' => 'month', # NEW
-	'date_une_heure' => 'hour', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'second', # NEW
-	'date_une_semaine' => 'week', # NEW
 	'dirs_commencer' => 'pro vlastní zahájení instalace',
 	'dirs_preliminaire' => 'Předběžná akce: <b>Nastavení přístupových práv</b>',
 	'dirs_probleme_droits' => 'Problém s přístupovými právy',
@@ -231,32 +202,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'en_cours' => 'probíhá zpracování',
 	'envoi_via_le_site' => 'Odeslat pomocí webu',
-	'erreur' => 'Error', # NEW
-	'erreur_balise_non_fermee' => 'last tag not closed:', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'error(s)', # NEW
-	'etape' => 'Stage', # NEW
 
 	// F
 	'fichier_introuvable' => 'Nalezen nový soubor: @fichier@',
-	'form_auteur_confirmation' => 'Please confirm your email address', # NEW
-	'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
-	'form_auteur_mail_confirmation' => 'Hello,
-
-You have asked to change your email address.
-To confirm your new address, you need to connect to
-the address below. (Otherwise your request will be ignored.):
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Už jste zaregistrováni.',
 	'form_email_non_valide' => 'Neplatná elektronická adresa.',
 	'form_forum_access_refuse' => 'K tomuto webu již nemáte přístup.',
 	'form_forum_bonjour' => 'Dobrý den @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Tato elektronická adresa je již zaregistrována. Můžete tedy používat své obvyklé heslo.',
 	'form_forum_identifiant_mail' => 'Nové identifikační údaje vám byly odeslány elektronickou poštou.',
 	'form_forum_identifiants' => 'Osobní identifikační údaje',
@@ -330,7 +282,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'icone_supprimer_image' => 'Odstranit obrázek',
 	'icone_tous_articles' => 'Všechny vaše články',
 	'icone_tous_auteur' => 'Všichni autoři',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Zobrazit web', # MODIF
 	'icone_voir_en_ligne' => 'Prohlížet online',
 	'img_indisponible' => 'Obrázek není k dispozici',
@@ -352,14 +303,10 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_article_supprime' => 'Odstraněné články',
 	'info_articles' => 'Články',
 	'info_articles_a_valider' => 'Články ke schválení',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Předložené články',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'Autor či autoři:',
 	'info_authentification_ftp' => 'Autentifikace (pomocí FTP).',
 	'info_breves_2' => 'novinky',
-	'info_breves_nb' => '@nb@ news items', # NEW
-	'info_breves_un' => '1 news item', # NEW
 	'info_connexion_refusee' => 'Spojení bylo odepřeno',
 	'info_contact_developpeur' => 'Kontaktujte vývojáře.',
 	'info_contenance' => 'Tyto stránky obsahují:',
@@ -371,14 +318,11 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Vytvořte soubor nebo adresář s názvem:',
 	'info_creer_repertoire_2' => 'v podadresáři <b>@repertoire@</b>. Potom',
 	'info_creer_vignette' => 'automatické vytvoření náhledu',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Rozbalit',
 	'info_descriptif_nombre' => 'Popis:',
 	'info_description' => 'Popis:',
 	'info_description_2' => 'Popis:',
 	'info_dimension' => 'Velikost:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Napsat soukromou zprávu',
 	'info_email_invalide' => 'Neplatný e-mail.',
 	'info_en_cours_validation' => 'Vaše rozpracované články',
@@ -418,8 +362,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'ZPRÁVA',
 	'info_message_supprime' => 'ZPRÁVA BYLA ODSTRANĚNA',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Datum zveřejnění online:',
 	'info_modification_parametres_securite' => 'úprava bezpečnostních parametrů',
 	'info_mois_courant' => 'V měsíci:',
@@ -435,10 +377,8 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_nouveau_message' => 'MÁTE NOVOU ZPRÁVU',
 	'info_nouveaux_messages' => 'MÁTE CELKEM @total_messages@ NOVÝCH ZPRÁV',
 	'info_numero_abbreviation' => 'č.',
-	'info_obligatoire' => 'This information is required', # NEW
 	'info_pense_bete' => 'POZNÁMKA',
 	'info_petit_ecran' => 'Malý displej',
-	'info_petition_close' => 'Petition closed', # NEW
 	'info_pixels' => 'pixelů',
 	'info_plusieurs_mots_trouves' => 'Pro "@cherche_mot@" bylo nalezeno několik klíčových slov:',
 	'info_portfolio_automatique' => 'Automatizované portfolio:',
@@ -457,13 +397,9 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_rechercher' => 'Najít',
 	'info_rechercher_02' => 'Najít:',
 	'info_remplacer_vignette' => 'Nahradit standardní náhled vlastním logem:',
-	'info_rubriques_nb' => '@nb@ sections', # NEW
-	'info_rubriques_un' => '1 section', # NEW
 	'info_sans_titre_2' => 'bez názvu',
 	'info_selectionner_fichier' => 'Můžete vybrat soubor ze složky @upload@',
 	'info_selectionner_fichier_2' => 'Vybrat soubor:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'odstranit náhled',
 	'info_symbole_bleu' => '<b>Modrým</b> symbolem je označena <b>interní poznámka</b>, tj. zpráva určená pro osobní potřebu.', # MODIF
 	'info_symbole_jaune' => '<b>Žlutým</b> symbolem je označena <b>zpráva pro všechny redaktory</b>: může ji upravovat kterýkoli ze správců a zobrazuje se všem redaktorům.', # MODIF
@@ -485,8 +421,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'infos_vos_pense_bete' => 'Vaše poznámky', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Zobrazit pouze ikony',
 	'lien_afficher_texte_icones' => 'Zobrazit ikony a text',
 	'lien_afficher_texte_seul' => 'Zobrazit pouze text',
@@ -505,8 +439,6 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'lien_visite_site' => 'navštívit tyto stránky',
 	'lien_visites' => '@visites@ návštěv',
 	'lien_voir_auteur' => 'Zobrazit autora',
-	'ligne' => 'Line', # NEW
-	'login' => 'Connection', # NEW
 	'login_acces_prive' => 'přístup do neveřejné oblasti',
 	'login_autre_identifiant' => 'použít jiné ID',
 	'login_cookie_accepte' => 'Nastavte prohlížeč tak, aby je přijímal (alespoň pro tento web).',
@@ -533,22 +465,18 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'login_retour_site' => 'Zpět na veřejné stránky',
 	'login_retoursitepublic' => 'zpět na veřejné stránky',
 	'login_sans_cookiie' => 'Identifikace bez použití cookies',
-	'login_securise' => 'Secured login', # NEW
 	'login_sinscrire' => 'registrovat',
 	'login_test_navigateur' => 'test prohlížeče/opakované připojení',
 	'login_verifiez_navigateur' => '(Přesvědčte se však, zda si prohlížeč nezapamatoval vaše heslo...)',
 
 	// M
-	'masquer_colonne' => 'Hide this column', # NEW
 	'masquer_trad' => 'skrýt překlady',
 	'module_fichiers_langues' => 'Jazykové soubory',
 
 	// N
 	'navigateur_pas_redirige' => 'Nedojde-li k přesměrování prohlížeče, klepněte sem.',
-	'numero' => 'Number', # NEW
 
 	// O
-	'occurence' => 'Instance', # NEW
 	'onglet_affacer_base' => 'Odstranit databázi',
 	'onglet_auteur' => 'Autor',
 	'onglet_contenu_site' => 'Obsah webu',
@@ -596,7 +524,6 @@ a znovu se ke stránkám připojíte.
 	'pass_nouveau_pass' => 'Nové heslo',
 	'pass_ok' => 'V pořádku',
 	'pass_oubli_mot' => 'Zapomenuté heslo',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Odejít z tohoto okna',
 	'pass_rappel_login' => 'Připomenutí: Vaše uživatelské jméno (login) je "@login@".',
 	'pass_recevoir_mail' => 'Obdržíte e-mail s vysvětlením, jak znovu získat přístup k těmto stránkám.',
@@ -607,11 +534,7 @@ a znovu se ke stránkám připojíte.
 	'previsualisation' => 'Náhled',
 	'previsualiser' => 'Náhled',
 
-	// R
-	'retour' => 'Return', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:', # NEW
 	'squelette' => 'šablona',
 	'squelette_inclus_ligne' => 'vložená šablona, řádek',
 	'squelette_ligne' => 'šablona, řádek',
@@ -619,7 +542,6 @@ a znovu se ke stránkám připojíte.
 	'suivant' => 'další',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytů',
@@ -636,7 +558,6 @@ a znovu se ke stránkám připojíte.
       Pečlivě si poznamenejte toto číslo, zkuste aktualizaci
       a přesvědčte se, že obrázky jsou i nadále v článcích
       zobrazeny.', # MODIF
-	'texte_erreur_visiteur' => 'You have tried to enter the private area using a login which does not permit this.', # NEW
 	'texte_inc_auth_1' => 'Přihlásili jsgte se jako
   <b>@auth_login@</b>, ale toto uživatelské jméno (již) v databázi neexistuje. 
   Zkuste', # MODIF
@@ -664,26 +585,20 @@ a znovu se ke stránkám připojíte.
 	'titre_image_auteur_supprime' => 'Autor odstraněn',
 	'titre_image_redacteur' => 'Redaktor bez přístupu',
 	'titre_image_redacteur_02' => 'Redaktor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Návštěvník',
 	'titre_joindre_document' => 'PŘIPOJIT DOKUMENT',
 	'titre_mots_cles' => 'KLÍČOVÁ SLOVA',
 	'titre_probleme_technique' => 'Varování: Z technických důvodů (server SQL) je tato část webu nepřístupná.<p>Děkujeme vám za pochopení.', # MODIF
 	'titre_publier_document' => 'ZVEŘEJNIT DOKUMENT V TÉTO ČÁSTI',
-	'titre_signatures_attente' => 'Signatures awaiting validation', # NEW
-	'titre_signatures_confirmees' => 'Confirmed signatures', # NEW
 	'titre_statistiques' => 'Statistiky stránek',
 	'titre_titre_document' => 'Název dokumentu:',
-	'todo' => 'to come', # NEW
 	'trad_reference' => '(referenční článek)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ': tag B je příliš pozdě ve smyčce',
 	'zbug_balise_inexistante' => 'error @from@: the #@balise@ tag does not exist', # MODIF
-	'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag', # NEW
 	'zbug_boucle' => 'smyčka',
 	'zbug_boucle_recursive_undef' => 'nedefinovaná rekurzivní smyčka', # MODIF
-	'zbug_calcul' => 'calculation', # NEW
 	'zbug_champ_hors_boucle' => 'Pole @champ@ je mimo smyčku',
 	'zbug_champ_hors_motif' => 'Pole @champ@ je mimo smyčku a má tag @motif@', # MODIF
 	'zbug_code' => 'kód',
@@ -694,37 +609,17 @@ a znovu se ke stránkám připojíte.
 	'zbug_erreur_boucle_double' => 'SMYČKA@id@: dvojí definice', # MODIF
 	'zbug_erreur_boucle_fermant' => 'SMYČKA@id@: chybí uzavírací tag', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Nesprávná syntax (BOUCLE)', # MODIF
-	'zbug_erreur_compilation' => 'Compilation error', # NEW
 	'zbug_erreur_execution_page' => 'chyba při výpočtu stránky', # MODIF
 	'zbug_erreur_filtre' => 'Chyba - nedefinovaný filtr: <b>"@filtre@"</b>', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} týká se jenom smyček (FORUMS) a (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'Chyba či chyby v šabloně',
-	'zbug_hors_compilation' => 'Uncompiled', # NEW
 	'zbug_info_erreur_squelette' => 'Na webu došlo k chybě',
 	'zbug_inversion_ordre_inexistant' => 'obrácené nebo neexistující pořadí', # MODIF
 	'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop', # MODIF
 	'zbug_parametres_inclus_incorrects' => 'Nesprávné parametry inkluze', # MODIF
-	'zbug_profile' => 'Calculation time: @time@', # NEW
 	'zbug_resultat' => 'výsledky',
 	'zbug_serveur_indefini' => 'Nedefinovaný server SQL', # MODIF
-	'zbug_statistiques' => 'SQL query statistics in order of duration', # NEW
-	'zbug_table_inconnue' => 'Neznámá tabulka SQL "@table@"',
-	'zxml_connus_attributs' => 'known attributes', # NEW
-	'zxml_de' => 'from', # NEW
-	'zxml_inconnu_attribut' => 'unknown attribute', # NEW
-	'zxml_inconnu_balise' => 'unknown tag', # NEW
-	'zxml_inconnu_entite' => 'unknown entity', # NEW
-	'zxml_inconnu_id' => 'unknown ID', # NEW
-	'zxml_mais_de' => 'but from', # NEW
-	'zxml_non_conforme' => 'not true to the principle', # NEW
-	'zxml_non_fils' => 'is not a child of', # NEW
-	'zxml_nonvide_balise' => 'tag not empty', # NEW
-	'zxml_obligatoire_attribut' => 'required attribute absent in', # NEW
-	'zxml_succession_fils_incorrecte' => 'incorrect child inheritance', # NEW
-	'zxml_survoler' => 'to see the correct ones, hover with the cursor', # NEW
-	'zxml_valeur_attribut' => 'attribute value', # NEW
-	'zxml_vide_balise' => 'empty tag', # NEW
-	'zxml_vu' => 'seen before' # NEW
+	'zbug_table_inconnue' => 'Neznámá tabulka SQL "@table@"'
 );
 
 ?>

@@ -231,7 +231,6 @@ Verifique se as maiúsculas e minúsuculas destes diretórios coincidem exatamen
 	'envoi_via_le_site' => 'Envio pelo site',
 	'erreur' => 'Erro',
 	'erreur_balise_non_fermee' => 'Última tag em aberto:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Um erro técnico impediu a gravação correta do campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Um erro técnico impediu a gravação.',
 	'erreur_texte' => 'erro(s)',
@@ -641,7 +640,6 @@ Tente se',
 	'titre_image_auteur_supprime' => 'Autor excluído',
 	'titre_image_redacteur' => 'Redator sem acesso',
 	'titre_image_redacteur_02' => 'Redator',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'INCLUIR UM DOCUMENTO',
 	'titre_mots_cles' => 'PALAVRAS-CHAVE',

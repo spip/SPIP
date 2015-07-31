@@ -49,8 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'DODAJ UCZESTNIKA:',
 	'bouton_annonce' => 'ZAWIADOMIENIE',
 	'bouton_annuler' => 'Anuluj',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'możliwość wysłania wiadomości',
 	'bouton_checkbox_indiquer_site' => 'Musisz wpisać nazwę strony internetowej',
 	'bouton_checkbox_signature_unique_email' => 'tylko jeden podpis na adres e-mail',
@@ -225,7 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_article_syndique' => '1 artykuł konsorcjalny',
 	'info_1_auteur' => '! autor',
 	'info_1_message' => '1 wiadomość',
-	'info_1_mot_cle' => '1 mot-clé', # NEW
 	'info_1_rubrique' => '1 sekcja',
 	'info_1_site' => '1 strona',
 	'info_1_visiteur' => '1 gość',
@@ -234,8 +231,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_etre_webmestre' => 'Daj mi prawa administratora sieci',
 	'info_admin_gere_rubriques' => 'Ten administrator zarządza następującymi działami:',
 	'info_admin_gere_toutes_rubriques' => 'Ten administrator zarządza <b>wszystkimi działami</b>.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
-	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 	'info_admin_statuer_webmestre' => 'Daj webmasterowi prawo do tego administratora.',
 	'info_admin_webmestre' => 'Ten administrator jest <b>webmestre</b>',
 	'info_administrateur' => 'Administrator',
@@ -286,7 +281,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_barre_outils' => 'z jego paska narzędzi?',
 	'info_base_installee' => 'Struktura Twojej bazy danych została zainstalowana.',
 	'info_bio' => 'Biografia',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Wstęp',
 	'info_chapeau_2' => 'Wstęp:',
 	'info_chemin_acces_1' => 'Opcje: <b>Ścieżka dostępu do katalogu</b>',
@@ -361,7 +355,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  w strefie publicznej strony (abonament forum).',
 	'info_generation_miniatures_images' => 'Generowanie miniaturek obrazków',
 	'info_gerer_trad' => 'Zarządzać linkami do przekładu?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 	'info_hebergeur_desactiver_envoi_email' => 'Niektóre serwisy hostingowe wyłączają możliwość automatycznego wywyłania
   emaili za pośrednictwem ich serwerów. W tym przypadku te funkcje
   SPIP nie będą działały.',
@@ -414,20 +407,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_multi_cet_article' => 'Język tego artykułu:',
 	'info_multi_langues_choisies' => 'Wybierz języki do dyspozycji redaktorów twojej strony.
   Języki już używane na twojej stronie(wyświetlane na początku) nie mogą być wyłączone.',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
 	'info_multi_rubriques' => 'Włącz menu językowe w działach ?',
 	'info_multi_secteurs' => ' ... tylko dla działów podstawowych ?',
 	'info_nb_articles' => '@nb@ artykuły',
-	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 	'info_nb_auteurs' => '@nb@ autorzy',
-	'info_nb_messages' => '@nb@ messages', # NEW
-	'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
-	'info_nb_rubriques' => '@nb@ rubriques', # NEW
-	'info_nb_sites' => '@nb@ sites', # NEW
 	'info_nb_visiteurs' => '@nb@ goście',
 	'info_nom' => 'Nazwisko',
 	'info_nom_destinataire' => 'Nazwisko odbiorcy',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nazwa Twojej strony',
 	'info_nombre_articles' => '@nb_articles@ artykułów,',
 	'info_nombre_partcipants' => 'UCZESTNICY DYSKUSJI:',
@@ -439,7 +425,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_non_envoi_liste_nouveautes' => 'Nie wysyłaj listy najnowszych newsów',
 	'info_non_modifiable' => 'nie może być zmienione',
 	'info_non_suppression_mot_cle' => 'Nie chcę usunąć tego słowa kluczowego.',
-	'info_note_numero' => 'Note @numero@', # NEW
 	'info_notes' => 'Notatki',
 	'info_nouveaux_message' => 'Nowe wiadomości',
 	'info_nouvel_article' => 'Nowy artykuł',
@@ -459,7 +444,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_par_statut' => 'wg statusu',
 	'info_par_tri' => '\'(par @tri@)\'',
 	'info_passe_trop_court' => 'Za krótkie hasło.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'Hasła nie są identyczne.',
 	'info_pense_bete_ancien' => 'Twoje stare notatki', # MODIF
 	'info_plus_cinq_car' => 'więcej niż 5 znaków',
@@ -507,8 +491,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_redacteurs' => 'Redaktorzy',
 	'info_redaction_en_cours' => 'REDAKCJA W TOKU',
 	'info_redirection' => 'Przekierowanie',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 	'info_refuses' => 'Twoje odrzucone artykuły',
 	'info_reglage_ldap' => 'Opcje: <b>Regulacja importu LDAP</b>',
 	'info_renvoi_article' => '<b>Przekierowanie.</b> Ten artykuł odsyła do strony:',
@@ -547,7 +529,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_syndication_integrale_1' => 'Twoja strona oferuje plik syndykacji « <a href="@url@">@titre@</a> »).',
 	'info_syndication_integrale_2' => 'Czy chcesz przesyłać całe artykuły czy wolisz dystrybuować podsumowanie ograniczone do kilkuset znaków ?',
 	'info_table_prefix' => 'Możesz użyć własnego prefixa nazw tablic w bazie danych (jest to niezbędne jeśli chcesz zainstalować więcej stron przy użyciu tej samej bazy danych). Prefix powinien być pisany bez akcentów, małymi literami i bez spacji.',
-	'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas réduites.', # NEW
 	'info_taille_maximale_vignette' => 'Maksymalny rozmiar minitaurek, generowanych przez system :',
 	'info_terminer_installation' => 'Możesz teraz zakończyć proces standardowej instalacji.',
 	'info_texte' => 'Tekst',
@@ -578,7 +559,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'info_url' => 'URL:',
 	'info_url_proxy' => 'Upoważnienie URL',
 	'info_url_site' => 'URL STRONY:',
-	'info_url_test_proxy' => 'URL de test', # NEW
 	'info_urlref' => 'Łącze hipertekstowe :',
 	'info_utilisation_spip' => 'SPIP jest już gotowy do użytku...',
 	'info_visites_par_mois' => 'Wizyt miesięcznie:',
@@ -586,10 +566,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'info_visiteur_2' => 'strony publicznej',
 	'info_visiteurs' => 'Odwiedzający',
 	'info_visiteurs_02' => 'Odwiedzający stronę publiczną',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
 	'install_adresse_base_hebergeur' => 'Adres bazy danych przyznany przez usługodawcę hostingowego',
-	'install_base_ok' => 'La base @base@ a été reconnue', # NEW
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
 	'install_echec_annonce' => 'Instalacja może się nie powieść lub może się zdażyć, że strona przestanie działać ...',
 	'install_extension_mbstring' => 'SPIP nie działa z:',
 	'install_extension_php_obligatoire' => 'SPIP wymaga rozszerzenia php:',
@@ -600,16 +577,9 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'install_php_version' => 'wersja PHP @version@ jest za niska (minimum = @minimum@)',
 	'install_select_langue' => 'Wybierz język i kliknij na przycisk "next" aby rozpocząć procedurę instalacji.',
 	'install_select_type_db' => 'Wskaż rodzaj bazy danych:',
-	'install_select_type_mysql' => 'MySQL', # NEW
-	'install_select_type_mysqli' => 'MySQLi', # NEW
-	'install_select_type_pg' => 'PostgreSQL', # NEW
-	'install_select_type_sqlite2' => 'SQLite 2', # NEW
-	'install_select_type_sqlite3' => 'SQLite 3', # NEW
 	'install_serveur_hebergeur' => 'Serwer bazy danych został przypisny przez dostawcę usług hostingowych.',
 	'install_table_prefix_hebergeur' => 'Prefix przyznany przez usługodawcę hostingowego',
 	'install_tables_base' => 'Tabele w bazie danych',
-	'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
-	'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
 	'instituer_erreur_statut_a_change' => 'Status został już zmodyfikowany',
 	'instituer_erreur_statut_non_autorise' => 'Nie możesz wybrać tego statusu',
 	'intem_redacteur' => 'redaktor',
@@ -653,8 +623,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'item_publier_articles' => 'Publikuj artykuły bez względu na datę ich publikacji.',
 	'item_reponse_article' => 'Odpowiedz na artykuł',
 	'item_utiliser_moteur_recherche' => 'Używaj wyszukiwarki',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 	'item_visiteur' => 'odwiedzający',
 
 	// J
@@ -670,9 +638,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'label_taille_ecran' => 'Szerokość ekranu',
 	'label_texte_et_icones_navigation' => 'Menu nawigacyjne',
 	'label_texte_et_icones_page' => 'Wyświetlanie stron',
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
-	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Dodaj odbiorcę',
 	'lien_ajouter_auteur' => 'Dodaj autora',
 	'lien_ajouter_participant' => 'Dodaj uczestnika',
@@ -709,9 +674,6 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'module_texte_traduction' => 'Plik językowy « @module@ » jest dostępny w :',
 	'mois_non_connu' => 'nieznany',
 
-	// N
-	'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
-
 	// O
 	'onglet_contenu' => 'Treść',
 	'onglet_declarer_une_autre_base' => 'Oświadcz inną bazę danych',
@@ -725,30 +687,21 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	// P
 	'page_pas_proxy' => 'Ta strona nie musi przejść przez pełnomocnika.',
 	'pas_de_proxy_pour' => 'Jeśli potrzeba podaj serwery lub domeny, do których to proxy ma nie być używane: @exemple@)',
-	'plugin_charge_paquet' => 'Chargement du paquet @name@', # NEW
 	'plugin_charger' => 'pobierz pliki z serwera',
-	'plugin_erreur_charger' => 'erreur : impossible de charger @zip@', # NEW
-	'plugin_erreur_droit1' => 'Le répertoire <code>@dest@</code> n\'est pas accessible en écriture.', # NEW
 	'plugin_erreur_droit2' => 'Proszę sprawdzić uprawnienia do zapisu w tym katalogu (i utworzenia katalogu, jeśli to konieczne). Ewentualnie proszę zainstalować pliki przez FTP.',
-	'plugin_erreur_zip' => 'echec pclzip : erreur @status@', # NEW
 	'plugin_etat_developpement' => 'wersja rozwojowa',
 	'plugin_etat_experimental' => 'wersja eksperymentalna',
 	'plugin_etat_stable' => 'wersja stabilna',
 	'plugin_etat_test' => 'wersja testowa',
 	'plugin_impossible_activer' => 'Nie można włączyć plugina @plugin@',
-	'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez :', # NEW
 	'plugin_info_automatique1_lib' => 'Jeśli chcesz, aby ta biblioteka została zainstalowana automatycznie, należy:',
 	'plugin_info_automatique2' => 'Utwórz katalog <code>@rep@</code> ;',
 	'plugin_info_automatique3' => 'Upewnij się że serwer ma odpowiednie uprawnienia do zapisu w tym katalogu.',
 	'plugin_info_automatique_creer' => 'Utworzyć w katalogu głównym witryny.',
 	'plugin_info_automatique_exemples' => 'przykłady:',
-	'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le répertoire <tt>@rep@</tt>', # NEW
-	'plugin_info_automatique_lib' => 'Certains plugins demandent aussi à pouvoir télécharger des fichiers dans le répertoire <code>lib/</code>, à créer le cas échéant à la racine du site.', # NEW
-	'plugin_info_automatique_liste' => 'Vos listes de plugins :', # NEW
 	'plugin_info_automatique_liste_officielle' => 'Oficjalne pluginy',
 	'plugin_info_automatique_liste_update' => 'Aktualizacja list',
 	'plugin_info_automatique_ou' => 'albo...',
-	'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
 	'plugin_info_credit' => 'Kredyty',
 	'plugin_info_erreur_xml' => 'Nieprawidłowe zgłoszenie wtyczek',
 	'plugin_info_install_ok' => 'Instalacja się udała',
@@ -756,12 +709,9 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_info_non_compatible_spip' => 'Ta wtyczka jest niezgodny z tą wersją systemu SPIP',
 	'plugin_info_plugins_dist_1' => 'Następujące wtyczki są załadowane i uruchomione w katalogu @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Nie mogą zostać wyłączone.',
-	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Biblioteka programistyczna została zainstalowana',
 	'plugin_necessite_lib' => 'Ta wtyczka wymaga biblioteki programistycznej @lib@',
 	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Potrzeba co minimum wersji SPIP @version@ .',
 	'plugin_source' => 'źródło:',
 	'plugin_titre_automatique' => 'Instalacja automatyczna ',
@@ -771,22 +721,13 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_zip_active' => 'Kontynuuj w celu aktywacji',
 	'plugin_zip_adresse' => 'Aby załadować spakowany plik wtyczki lub listę wtyczek, wprowadź ścieżkę poniżej.',
 	'plugin_zip_adresse_champ' => 'Ścieżka wtyczki lub listy',
-	'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />prêts à installer dans le répertoire <code>@rep@</code>', # NEW
 	'plugin_zip_installe_finie' => 'Plik @zip@ został rozpakowany i zainstalowany.',
 	'plugin_zip_installe_rep_finie' => 'Plik @zip@ został rozpakowany i zainstalowany w katalogu @rep@ ',
 	'plugin_zip_installer' => 'Teraz możesz to zainstalować.',
 	'plugin_zip_telecharge' => 'Plik @zip@ został załadowany',
-	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
-	'plugins_actif_un' => 'Un plugin activé.', # NEW
-	'plugins_actifs' => '@count@ plugins activés.', # NEW
 	'plugins_actifs_liste' => 'Plugins actifs', # MODIF
-	'plugins_compte' => '@count@ plugins', # NEW
 	'plugins_disponible_un' => 'Jedna wtyczka dostępna',
-	'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
-	'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
 	'plugins_liste' => 'Lista rozszerzeń',
-	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Wszystko',
 	'plugins_vue_hierarchie' => 'Hierarchia',
 	'plugins_vue_liste' => 'Lista',
@@ -808,11 +749,8 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	// S
 	'sans_heure' => 'Czas nie określony',
 	'statut_admin_restreint' => '(admin z ograniczeniami)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 	'taille_cache_image' => 'Obrazki mają automatycznie zmieniany rozmiar przez SPIP (miniaturki dokumentów, tytuły przedstawiane w postaci graficznej, funkcje matematyczne w formacie TeX...) zajmują w katalogu @dir@ obszar @taille@.',
 	'taille_cache_infinie' => 'Serwis nie ma włączonego ograniczenia dla wielkości katalogu cache.',
 	'taille_cache_maxi' => 'SPIP próbuje ograniczyć wielkość katalogu   <code>CACHE/</code> tej strony do około <b>@octets@</b> danych.',
@@ -842,8 +780,6 @@ zreinstalować SPIP w celu utworzenia nowej bazy danych i dostępu pierwszego ad
 	'texte_commande_vider_tables_indexation' => 'Skorzystaj z tego polecenia w celu opróżnienia tabeli indeksujących, które używane są
  przez zintegrowaną wyszukiwarkę SPIP.
    Pozwoli to oszczędzić przestrzeń dysku twardego.',
-	'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
-	'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 	'texte_compresse_ou_non' => '(może być skompresowany lub nie)',
 	'texte_compte_element' => '@count@ element',
 	'texte_compte_elements' => '@count@ elementy',

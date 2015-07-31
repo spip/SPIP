@@ -109,15 +109,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ di @nommois@',
 	'date_demain' => 'dumane',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ à @heure@',
 	'date_fmt_jour_heure_debut_fin' => 'u @jour@ da @heure_debut@ à @heure_fin@',
 	'date_fmt_jour_heure_debut_fin_abbr' => 'u @dtstart@@jour@ da @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ di u @annee@',
 	'date_fmt_mois_annee' => '@nommois@ di u @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'u @nomjour@ @date@',
 	'date_fmt_periode' => 'Da u @date_debut@ à u @date_fin@',
 	'date_fmt_periode_abbr' => 'Da u @dtart@@date_debut@@dtabbr@ à u @dtend@@date_fin@@dtabbr@',
@@ -235,7 +232,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Invià à traversu u situ',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ùltima balisa micca chjosa :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Per via d\'un errore tècnicu, u campu @champs@ ùn hè micca statu arregistratu.',
 	'erreur_technique_enregistrement_impossible' => 'Per via d\'un errore tècnicu, l\'arregistramentu ùn hè micca statu fattu.',
 	'erreur_texte' => 'errore/i',
@@ -245,21 +241,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_introuvable' => 'Schedariu @fichier@ inesistente',
 	'form_auteur_confirmation' => 'Cunfirmate l\'indirizzu mail',
 	'form_auteur_email_modifie' => 'Hè statu mudificatu u vostru indirizzu mail.',
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Site digià iscrittu.',
 	'form_email_non_valide' => 'Ùn hè vàlidu u vostru indirizzu email.',
 	'form_forum_access_refuse' => 'Ùn avete più accessu à stu situ.',
 	'form_forum_bonjour' => 'Bonghjornu, o @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'St\'indirizzu email hè digià arregistratu, pudete puru usà u vostru password abbituale.',
 	'form_forum_identifiant_mail' => 'U vostru nuvellu còdice vi hè statu mandatu avà per email.',
 	'form_forum_identifiants' => 'Còdici persunali',
@@ -360,8 +345,6 @@ sera ignorée) :
 	'info_auteurs_nombre' => 'autore/i :',
 	'info_authentification_ftp' => 'Autentificazione (cù FTP).',
 	'info_breves_2' => 'dispacci',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Cunnessione rifiutata',
 	'info_contact_developpeur' => 'Cuntattate puru un sviluppore.',
 	'info_contenance' => 'Stu situ cuntene :',
@@ -373,14 +356,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu :',
 	'info_creer_repertoire_2' => 'à l\'internu di u sottucartulare <b>@repertoire@</b>, poi :',
 	'info_creer_vignette' => 'creazione autumàtica di a figuretta',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Spalancà',
 	'info_descriptif_nombre' => 'descrittivu/i :',
 	'info_description' => 'Discrizzione :',
 	'info_description_2' => 'Discrizzione :',
 	'info_dimension' => 'Taglia :',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Scrive un messagiu privatu',
 	'info_email_invalide' => 'Indirizzu email invàlida.',
 	'info_en_cours_validation' => 'I vostri artìculi in corsu di scrittura',
@@ -489,7 +469,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'I vostri mementi', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 	'label_poids_fichier' => 'Taglia',
 	'lien_afficher_icones_seuls' => 'Fà cumparisce solu l\'icone',
 	'lien_afficher_texte_icones' => 'Fà cumparisce l\'icone cù u testu',
@@ -536,7 +515,6 @@ sera ignorée) :
 	'login_retour_site' => 'Ritornu à u situ pùbblicu',
 	'login_retoursitepublic' => 'ritornu à u situ pùbblicu',
 	'login_sans_cookiie' => 'Identificazione senza cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'iscrive si',
 	'login_test_navigateur' => 'prova navigatore/ricunnessione',
 	'login_verifiez_navigateur' => '(Verificate quantunque chì u vostru navigatore ùn abbia memurizatu u vostru password...)',
@@ -594,7 +572,6 @@ Puderete tandu inserisce un nuvellu password
 	'pass_nouveau_pass' => 'Nuvellu password',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Password dimenticatu',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Esce da sta finestra',
 	'pass_rappel_login' => 'Attenti : u vostru còdice (login) hè « @login@ ».',
 	'pass_recevoir_mail' => 'Avete da riceve un email spieghendu vi cumu ricuarà u vostru accessu à u situ.',
@@ -617,7 +594,6 @@ Puderete tandu inserisce un nuvellu password
 	'suivant' => 'In davanti',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@ oct',
@@ -661,7 +637,6 @@ Puderete tandu inserisce un nuvellu password
 	'titre_image_auteur_supprime' => 'Autore sguassatu',
 	'titre_image_redacteur' => 'Scrittore senza accessu',
 	'titre_image_redacteur_02' => 'Scrittore',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitore',
 	'titre_joindre_document' => 'ALLEà UN DUCUMENTU',
 	'titre_mots_cles' => 'SEGNI',

@@ -24,7 +24,6 @@ Zhen QIN (zhen_q@21cn.com)',
 	'admin_modifier_mot' => '修改关键词',
 	'admin_modifier_rubrique' => '修改此栏',
 	'admin_recalculer' => '刷新页面',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => '显示译文',
 	'alerte_maj_impossible' => '<b>警告!</b> 更新SQL到版本 @version@失败, 可能是数据库权限问题. 请联系您的ISP(INTERNET服务提供商) .', # MODIF
 	'alerte_modif_info_concourante' => '注意:这条信息在别处被更改。目前值为 :', # MODIF
@@ -65,8 +64,6 @@ Zhen QIN (zhen_q@21cn.com)',
 	'bouton_changer' => '修改',
 	'bouton_chercher' => '搜索',
 	'bouton_choisir' => '选择',
-	'bouton_deplacer' => 'Déplacer', # NEW
-	'bouton_download' => 'Télécharger', # NEW
 	'bouton_enregistrer' => '保存',
 	'bouton_radio_desactiver_messagerie_interne' => '停用内部消息',
 	'bouton_radio_envoi_annonces' => '发送可编辑的声明',
@@ -108,20 +105,11 @@ Zhen QIN (zhen_q@21cn.com)',
 	'date_de_mois_9' => '@nommois@@j@日',
 	'date_demain' => '明天',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@@heure@时',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@nommois@@jour@日',
 	'date_fmt_jour_mois_annee' => '@annee@年@nommois@@jour@日',
 	'date_fmt_mois_annee' => '@annee@年@nommois@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@nomjour@ 日@date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => '小时',
 	'date_hier' => '昨天',
 	'date_il_y_a' => ' @delai@以前',
@@ -208,13 +196,7 @@ Zhen QIN (zhen_q@21cn.com)',
 	'date_saison_2' => '春季',
 	'date_saison_3' => '夏季',
 	'date_saison_4' => '秋季',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => '周',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => '为了开始安装',
 	'dirs_preliminaire' => '初步: <b>设置访问权限</b>',
 	'dirs_probleme_droits' => '访问权限问题', # MODIF
@@ -226,38 +208,16 @@ Zhen QIN (zhen_q@21cn.com)',
   <p>修改权限请使用FTP客户端为每个目录设定访问权限. 该操作在用户指南中有详细介绍.
 
   <p>一旦完成,您可以', # MODIF
-	'double_occurrence' => 'Double occurrence de @balise@', # NEW
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => '通过本网站发送',
-	'erreur' => 'Erreur', # NEW
-	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'erreur(s)', # NEW
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => '找不到@fichier@文件',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande 
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => '您已注册.',
 	'form_email_non_valide' => '您的电子邮件无效.',
 	'form_forum_access_refuse' => '您无权继续访问该站点.',
 	'form_forum_bonjour' => '您好@nom@，', # MODIF
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => '该电子邮件地址已经记录,您可以使用常用密码.',
 	'form_forum_identifiant_mail' => '您的新标识已经通过邮件发送给您了.',
 	'form_forum_identifiants' => '个人标识符',
@@ -330,11 +290,9 @@ sera ignorée) :
 	'icone_supprimer_image' => '删除图片',
 	'icone_tous_articles' => '您所有的文章',
 	'icone_tous_auteur' => '所有作者',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => '访问', # MODIF
 	'icone_voir_en_ligne' => '在线预览',
 	'img_indisponible' => '必需图像',
-	'impossible' => 'impossible', # NEW
 	'info_a_suivre' => '跟踪 »',
 	'info_acces_interdit' => '访问禁止',
 	'info_acces_refuse' => '访问拒绝',
@@ -352,14 +310,10 @@ sera ignorée) :
 	'info_article_supprime' => '删除的文章',
 	'info_articles' => '文章',
 	'info_articles_a_valider' => '需要确认的文章',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => '提交的文章',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => '作者:',
 	'info_authentification_ftp' => '(通过 FTP)验证.',
 	'info_breves_2' => '简要',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => '连接禁止',
 	'info_contact_developpeur' => '请联系开发者.',
 	'info_contenance' => '站点包括:',
@@ -371,14 +325,11 @@ sera ignorée) :
 	'info_creer_repertoire' => '请创建一个文件或目录叫:',
 	'info_creer_repertoire_2' => '在<b>@repertoire@</b>子目录内部，然后 ：',
 	'info_creer_vignette' => '自动产生图标',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => '展开',
 	'info_descriptif_nombre' => '描述:',
 	'info_description' => '描述:',
 	'info_description_2' => '描述:',
 	'info_dimension' => '大小:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => '写一个私有信息',
 	'info_email_invalide' => '无论电子邮件地址.',
 	'info_en_cours_validation' => '进展中的文章',
@@ -418,8 +369,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => '消息',
 	'info_message_supprime' => '删除的消息',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => '在线出版物的日期:',
 	'info_modification_parametres_securite' => '修改安全参数',
 	'info_mois_courant' => '在月中:',
@@ -435,10 +384,8 @@ sera ignorée) :
 	'info_nouveau_message' => '你有新消息',
 	'info_nouveaux_messages' => '你有 @total_messages@ 条新消息',
 	'info_numero_abbreviation' => '第 ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => '忘备',
 	'info_petit_ecran' => '小图显示',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => '像素',
 	'info_plusieurs_mots_trouves' => '几个关键词找到了 "@cherche_mot@":',
 	'info_portfolio_automatique' => '自动相册:',
@@ -457,13 +404,9 @@ sera ignorée) :
 	'info_rechercher' => '搜索',
 	'info_rechercher_02' => '搜索:',
 	'info_remplacer_vignette' => '用定制的图标取代缺省的图标:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => '无标题',
 	'info_selectionner_fichier' => '从@upload@文件中选择一个文件', # MODIF
 	'info_selectionner_fichier_2' => '选择一个文件:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => '删除小插图',
 	'info_symbole_bleu' => '<b>蓝色</b>标志<b>备注</b>：例如个人使用的消息.', # MODIF
 	'info_symbole_jaune' => '<b>黄色</b>表示<b>对所有编辑者声明</b> ：所有站点管理者都能看见并编辑。', # MODIF
@@ -485,8 +428,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => '备注', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => '只显示图片',
 	'lien_afficher_texte_icones' => '显示文本和图片',
 	'lien_afficher_texte_seul' => '只显示正文',
@@ -505,8 +446,6 @@ sera ignorée) :
 	'lien_visite_site' => '访问站点',
 	'lien_visites' => '@visites@ 访问',
 	'lien_voir_auteur' => '检查作者',
-	'ligne' => 'Ligne', # NEW
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => '访问私有区',
 	'login_autre_identifiant' => '用另一个标识符',
 	'login_cookie_accepte' => '请设定你的浏览器接受它们 (至少是这个站点a).',
@@ -533,22 +472,17 @@ sera ignorée) :
 	'login_retour_site' => '返回公共站点',
 	'login_retoursitepublic' => '返回公共站点',
 	'login_sans_cookiie' => '无COOKIE的标识',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => '注册',
 	'login_test_navigateur' => '测试浏览/重新连接',
 	'login_verifiez_navigateur' => '(无论如何, 请确认你的浏览器不会记住你的密码...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => '语言文件',
 
 	// N
 	'navigateur_pas_redirige' => '如果您的浏览器没有跳转,请按这里继续.',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => '删除数据库',
 	'onglet_auteur' => '作者',
 	'onglet_contenu_site' => '站点内容',
@@ -596,7 +530,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => '新密码',
 	'pass_ok' => '好',
 	'pass_oubli_mot' => '忘记密码',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => '退出窗口',
 	'pass_rappel_login' => '记住: 你的标识符(登录) 是 "@login@".',
 	'pass_recevoir_mail' => '你将收到电子邮件解释如何访问站点.',
@@ -607,19 +540,11 @@ sera ignorée) :
 	'previsualisation' => '预览',
 	'previsualiser' => '预览',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
-	'squelette' => 'squelette', # NEW
-	'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
-	'squelette_ligne' => 'squelette, ligne', # NEW
 	'stats_visites_et_popularite' => '@visites@ 访问者; 流行: @popularite@',
 	'suivant' => '后一个',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@字符',
@@ -636,7 +561,6 @@ sera ignorée) :
 认真阅读此参考内容，
 再试整理过程，
 并注意图像始终显示在你的文件中。', # MODIF
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => '用登录名标识你自己
   <b>@auth_login@</b>, 但是在数据库中不存在 (不再存在). 
   试', # MODIF
@@ -665,67 +589,24 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => '删除的作者',
 	'titre_image_redacteur' => '不能访问的编辑者',
 	'titre_image_redacteur_02' => '编辑者',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => '访问者',
 	'titre_joindre_document' => '附加文档',
 	'titre_mots_cles' => '关键词',
 	'titre_probleme_technique' => '警告:技术问题 MYSQL 制止访问站点的这部分,谢谢理解 .', # MODIF
 	'titre_publier_document' => '在此栏下发布文档',
 	'titre_signatures_attente' => '签名等待认证', # MODIF
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => '站点统计',
 	'titre_titre_document' => '文章标题:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(参考文章)', # MODIF
 
 	// Z
-	'zbug_balise_b_aval' => ' : balise B en aval', # NEW
-	'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
-	'zbug_boucle' => 'boucle', # NEW
-	'zbug_boucle_recursive_undef' => 'Boucle récursive non définie : @nom@', # NEW
-	'zbug_calcul' => 'calcul', # NEW
-	'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle', # NEW
-	'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'un contexte @motif@', # NEW
 	'zbug_code' => '代码',
-	'zbug_critere_inconnu' => 'Critère inconnu @critere@', # NEW
-	'zbug_distant_interdit' => 'Externe interdit', # NEW
-	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
-	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index', # NEW
 	'zbug_erreur_boucle_double' => '环@id@: 重复定义', # MODIF
 	'zbug_erreur_boucle_fermant' => '环@id@: 缺少语句结尾标志', # MODIF
 	'zbug_erreur_boucle_syntaxe' => '句法中出现错误的环', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
-	'zbug_erreur_execution_page' => 'Erreur d\'exécution', # NEW
 	'zbug_erreur_filtre' => '错误: 过滤<b>« @filtre@ »</b>未定义', # MODIF
-	'zbug_erreur_meme_parent' => 'Le critère {meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)', # NEW
-	'zbug_erreur_squelette' => 'Erreur(s) dans le squelette', # NEW
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => '站点错误',
-	'zbug_inversion_ordre_inexistant' => 'Inversion d\'un ordre inexistant', # NEW
-	'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # NEW
-	'zbug_parametres_inclus_incorrects' => 'Paramètre d\'inclusion incorrect : @param@', # NEW
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
-	'zbug_resultat' => 'résultat', # NEW
-	'zbug_serveur_indefini' => 'Serveur SQL indéfini', # NEW
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'SQL表格 « @table@ » 未知',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'SQL表格 « @table@ » 未知'
 );
 
 ?>

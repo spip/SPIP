@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'ទំព័រដើម នៃសៃថ៍', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'អត្ថបទ',
 	'articles_auteur' => 'អត្ថបទ​ របស់​អ្នកនិពន្ធ​នេះ',
 	'articles_populaires' => 'អត្ថបទ​ ប្រជាប្រិយបំផុត',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'គ្មាន​សៃថ៍ នៅ អាសយដ្ឋាន​នេះ​',
 	'aucune_breve' => 'គ្មានពត៌មានសង្ខេប នៅ អាសយដ្ឋាន​នេះ​',
 	'aucune_rubrique' => 'គ្មាន​ផ្នែក នៅ អាសយដ្ឋាន​នេះ​',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'ដទៃ',
 	'autres_breves' => 'ពត៌មានសង្ខេប ដទៃ',
 	'autres_groupes_mots_clefs' => 'ក្រុម​ដទៃ នៃពាក្យ​គន្លឹះ​',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'ដាក់វិចារ សៃថ៍នេះ',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'គ្មានអាច ចំលងឯកសារ',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'សារ',
 	'messages_forum' => 'សារ​វេទិកា', # MODIF
 	'messages_recents' => 'សារ​វេទិកា​ ថ្មី​ៗ',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'ពាក្យ​គន្លឹះ',
 	'mots_clefs_meme_groupe' => 'ពាក្យ​គន្លឹះ​ ក្នុង​ក្រុម​ដដែល',
 

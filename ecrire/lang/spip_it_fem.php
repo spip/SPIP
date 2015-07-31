@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Modifica la parola chiave',
 	'admin_modifier_rubrique' => 'Modifica la rubrica',
 	'admin_recalculer' => 'Rigenera la pagina',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'visualizzare le traduzioni',
 	'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database SQL alla versione @version@ è impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
 	'alerte_modif_info_concourante' => 'ATTENZIONE: Questa informazione è stata modificata altrove. Il valore attuale è:',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Cambia',
 	'bouton_chercher' => 'Cerca',
 	'bouton_choisir' => 'Scegli',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Download', # MODIF
 	'bouton_enregistrer' => 'Salva',
 	'bouton_radio_desactiver_messagerie_interne' => 'Disattiva la messaggistica interna',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ settembre',
 	'date_demain' => 'domani',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ ore @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'il @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'ore',
 	'date_hier' => 'ieri',
 	'date_il_y_a' => '@delai@ fa',
@@ -181,39 +170,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'mesi',
 	'date_mois_1' => 'Gennaio',
 	'date_mois_10' => 'Ottobre',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Novembre',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Dicembre',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'Febbraio',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Marzo',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Aprile',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Maggio',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Giugno',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Luglio',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Agosto',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Settembre',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'inverno',
 	'date_saison_2' => 'primavera',
 	'date_saison_3' => 'estate',
 	'date_saison_4' => 'autunno',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'settimane',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => ' per iniziare realmente l\'installazione',
 	'dirs_preliminaire' => 'Prima di iniziare: <b>impostare i diritti di accesso</b>',
 	'dirs_probleme_droits' => 'Problema nei diritti di accesso',
@@ -233,31 +204,15 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 	'envoi_via_le_site' => 'Invio tramite il sito',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'errore/i',
 	'etape' => 'Fase',
 
 	// F
 	'fichier_introuvable' => 'File @fichier@ non trovato',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Sei già iscritta.',
 	'form_email_non_valide' => 'L\'indirizzo email non è valido.',
 	'form_forum_access_refuse' => 'Non hai più accesso a questo sito.',
 	'form_forum_bonjour' => 'Buongiorno @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Questo indirizzo email è già registrato, puoi dunque utilizzare la tua password abituale.',
 	'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti è stato appena inviato tramite email.',
 	'form_forum_identifiants' => 'Dati personali',
@@ -331,7 +286,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Elimina l\'immagine',
 	'icone_tous_articles' => 'Tutti i tuoi articoli',
 	'icone_tous_auteur' => 'Tutte le autrici',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Visita il sito', # MODIF
 	'icone_voir_en_ligne' => 'Vedi on line',
 	'img_indisponible' => 'immagine non disponibile',
@@ -353,14 +307,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Articolo eliminato',
 	'info_articles' => 'Articoli',
 	'info_articles_a_valider' => 'Articoli da convalidare',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Articoli proposti',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'autrice(i):',
 	'info_authentification_ftp' => 'Autenticazione (via FTP).',
 	'info_breves_2' => 'brevi',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Connessione rifiutata',
 	'info_contact_developpeur' => 'Contatta un programmatore.',
 	'info_contenance' => 'Questo sito contiene:',
@@ -372,14 +322,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 	'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 	'info_creer_vignette' => 'creazione automatica dell\'anteprima',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Espandi',
 	'info_descriptif_nombre' => 'descrizione(i):',
 	'info_description' => 'Descrizione:',
 	'info_description_2' => 'Descrizione:',
 	'info_dimension' => 'Dimensioni:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Scrivi un messaggio privato',
 	'info_email_invalide' => 'Indirizzo email non valido.',
 	'info_en_cours_validation' => 'I tuoi articoli in corso di redazione',
@@ -419,8 +366,6 @@ o contatta il tuo hoster.</font>',
 	'info_mail_fournisseur' => 'tuo@provider.com',
 	'info_message_2' => 'MESSAGGIO',
 	'info_message_supprime' => 'MESSAGGIO ELIMINATO',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Data di pubblicazione on line:',
 	'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
 	'info_mois_courant' => 'Durante il mese:',
@@ -460,13 +405,9 @@ o contatta il tuo hoster.</font>',
 	'info_rechercher' => 'Ricerca',
 	'info_rechercher_02' => 'Cerca:',
 	'info_remplacer_vignette' => 'Sostituire l\'icona predefinita con una personalizzata:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'senza titolo',
 	'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 	'info_selectionner_fichier_2' => 'Seleziona un file:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'Cancella l\'immagine',
 	'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cioè un messaggio ad uso personale.',
 	'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici</b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
@@ -488,8 +429,6 @@ o contatta il tuo hoster.</font>',
 	'infos_vos_pense_bete' => 'I tuoi memo', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Mostra solo le icone',
 	'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
 	'lien_afficher_texte_seul' => 'Mostra solo il testo',
@@ -535,7 +474,6 @@ devi attivare Javascript nel tuo browser e',
 	'login_retour_site' => 'Ritorna al sito pubblico',
 	'login_retoursitepublic' => 'ritorna al sito pubblico',
 	'login_sans_cookiie' => 'Identificazione senza cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'registrati',
 	'login_test_navigateur' => 'test browser/riconnessione',
 	'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',
@@ -595,7 +533,6 @@ e riconnetterti all\'area riservata.
 	'pass_nouveau_pass' => 'Nuova password',
 	'pass_ok' => 'OK',
 	'pass_oubli_mot' => 'Password dimenticata',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Chiudi la finestra',
 	'pass_rappel_login' => 'Ricorda: il tuo ID (login) è « @login@ ».',
 	'pass_recevoir_mail' => 'Riceverai un email contenente le istruzioni per recuperare i dati di accesso al sito.',
@@ -618,7 +555,6 @@ e riconnetterti all\'area riservata.
 	'suivant' => 'successivo',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ Kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ byte',
@@ -661,7 +597,6 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'titre_image_auteur_supprime' => 'Autrice eliminata',
 	'titre_image_redacteur' => 'Redattrice senza accesso',
 	'titre_image_redacteur_02' => 'Redattrice',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitatore',
 	'titre_joindre_document' => 'ALLEGA UN DOCUMENTO',
 	'titre_mots_cles' => 'PAROLE CHIAVE',

@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accueil_site' => 'Hemsida', # MODIF
-	'article' => 'Article', # NEW
 	'articles' => 'Artiklar',
 	'articles_auteur' => 'Författarens artiklar',
 	'articles_populaires' => 'De mest lästa artiklarna',
@@ -19,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_site' => 'Det finns ingen sajt på denna adress',
 	'aucune_breve' => 'Det finns ingen nyhet på denna adress',
 	'aucune_rubrique' => 'Det finns ingen avdelning på denna adress',
-	'auteur' => 'Auteur', # NEW
 	'autres' => 'Andra',
 	'autres_breves' => 'Andra nyheter',
 	'autres_groupes_mots_clefs' => 'Andra grupper av nyckelord',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Kommentera sajten',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'Det går inte att kopiera dokumentet',
 
 	// D
@@ -67,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Meddelande',
 	'messages_forum' => 'Forum-meddelande', # MODIF
 	'messages_recents' => 'Senaste forum-meddelandena',
-	'mots_clef' => 'Mot-clé', # NEW
 	'mots_clefs' => 'Nyckelord',
 	'mots_clefs_meme_groupe' => 'Nyckelord i samma grupp',
 

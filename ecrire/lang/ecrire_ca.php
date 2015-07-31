@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Activar el connector',
 	'affichage' => 'Presentació',
 	'aide_non_disponible' => 'Aquesta part de l\'ajuda en línia no està encara disponible en aquesta llengua.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
 	'auteur' => 'Autor:',
 	'avis_acces_interdit' => 'Accès prohibit',
 	'avis_article_modifie' => 'Atenció, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',
@@ -49,8 +48,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'bouton_ajouter_participant' => 'AFEGIR UN PARTICIPANT :',
 	'bouton_annonce' => 'ANUNCI',
 	'bouton_annuler' => 'Anul·lar',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat d\'enviar un missatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un lloc Web',
 	'bouton_checkbox_signature_unique_email' => 'una sola signatura per adreça electrònica ',
@@ -110,7 +107,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'connexion_ldap' => 'Connexió:',
 	'copier_en_local' => 'Copiar en local',
 	'creer_et_associer_un_auteur' => 'Crear i associar un autor',
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
 
 	// D
 	'date_mot_heures' => 'hores',
@@ -284,7 +280,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_barre_outils' => 'amb la seva barra d\'eines?',
 	'info_base_installee' => 'L\'estructura de la vostra bases de dades s\'ha instal·lat.',
 	'info_bio' => 'Biografia',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Encapçalament',
 	'info_chapeau_2' => 'Encapçalament:',
 	'info_chemin_acces_1' => 'Opcions: <b>Camí d\'accés al directori</b>',
@@ -374,7 +369,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_langues' => 'Idiomes del lloc',
 	'info_ldap_ok' => 'L\'autenticació LDAP està instal·lada.',
 	'info_lien_hypertexte' => 'Enllaç hipertext:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 	'info_login_existant' => 'Aquest nom d\'usuari ja existeix.',
 	'info_login_trop_court' => 'Nom d\'usuari massa curt.',
@@ -414,7 +408,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_nb_visiteurs' => '@nb@ visitants',
 	'info_nom' => 'Nom',
 	'info_nom_destinataire' => 'Nom del destinatari',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nom del vostre lloc',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSIÓ:',
@@ -582,7 +575,6 @@ amb un color que indica el seu estat:',
 	'install_select_langue' => 'Seleccioneu un idioma i després feu un clic en el botó « següent » per iniciar el procés d\'instal·lació.',
 	'install_select_type_db' => 'Indicar el tipus de base de dades:',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -657,13 +649,10 @@ amb un color que indica el seu estat:',
 	'lien_ajout_destinataire' => 'Afegir aquest destinatari',
 	'lien_ajouter_auteur' => 'Afegir aquest autor',
 	'lien_ajouter_participant' => 'Afegir un participant',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
 	'lien_email' => 'correu electrònic',
 	'lien_nom_site' => 'NOM DEL LLOC:',
 	'lien_retirer_auteur' => 'Retirar aquest autor',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
 	'lien_retirer_tous_auteurs' => 'Retirar tots els autors',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'retirar aquest participant',
 	'lien_site' => 'lloc',
 	'lien_supprimer_rubrique' => 'suprimir aquesta secció',
@@ -738,17 +727,14 @@ amb un color que indica el seu estat:',
 	'plugin_info_plugins_dist_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
 	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Requereix com a mínim la versió @version@ d\'SPIP.',
 	'plugin_source' => 'font: ',
 	'plugin_titre_automatique' => 'Instal·lació automàtica',
 	'plugin_titre_automatique_ajouter' => 'Afegir plugins',
 	'plugin_titre_installation' => 'Instal·lació del connector @plugin@',
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
 	'plugin_zip_active' => 'Continueu per activar-lo',
 	'plugin_zip_adresse' => 'indiqueu més avall l\'adreça d\'un fitxer zip de plugin a baixar, o fins i tot l\'adreça d\'una llista de plugins.',
 	'plugin_zip_adresse_champ' => 'Adreça del plugin o de la llista ',
@@ -768,14 +754,12 @@ amb un color que indica el seu estat:',
 	'plugins_liste' => 'Llista dels connectors',
 	'plugins_liste_dist' => 'Extensions', # MODIF
 	'plugins_recents' => 'Connectors recents.',
-	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Jerarquia',
 	'plugins_vue_liste' => 'Llista',
 	'protocole_ldap' => 'Versió del protocol:',
 
 	// Q
 	'queue_executer_maintenant' => 'Executar ara',
-	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ treballs en espera',
 	'queue_next_job_in_nb_sec' => 'Proper treball en @nb@ s',
 	'queue_no_job_in_queue' => 'Cap treball en espera',
@@ -789,7 +773,6 @@ amb un color que indica el seu estat:',
 	// S
 	'sans_heure' => 'sense hora',
 	'statut_admin_restreint' => '(admin restringida)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
@@ -797,7 +780,6 @@ amb un color que indica el seu estat:',
 	'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 	'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
 	'taille_cache_octets' => 'La mida de la memòria cau és actualment de @octets@.', # MODIF
 	'taille_cache_vide' => 'La memòria cau està buida.',
 	'taille_repertoire_cache' => 'Mida del directori de la memòria cau',
@@ -836,11 +818,9 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 	'texte_crash_base' => 'Si la bbdd ha deixat de funcionar correctament, es pot intentar fer una reparació automàtica.',
 	'texte_creer_rubrique' => 'Abans de poder escriure els articles, <br /> heu de crear una secció.',
 	'texte_date_creation_article' => 'DATA DE CREACIÓ DE L\'ARTICLE :',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 	'texte_date_publication_anterieure' => 'Data de redacció anterior:',
 	'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacció anterior.',
 	'texte_date_publication_article' => 'DATA DE PUBLICACIÓ EN LÍNIA :',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
 	'texte_descriptif_petition' => 'Descripció de la petició',
 	'texte_descriptif_rapide' => 'Descripció ràpida',
 	'texte_effacer_base' => 'Esborrar la base de dades SPIP',
@@ -932,7 +912,6 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 	'titre_admin_vider' => 'Manteniment tècnic',
 	'titre_ajouter_un_auteur' => 'Afegir un autor',
 	'titre_ajouter_un_mot' => 'Afegir una paraula clau',
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 	'titre_cadre_afficher_article' => 'Afegir els articles',
 	'titre_cadre_afficher_traductions' => 'Mostrar l\'estat de les traduccions per les següents llengües:',
 	'titre_cadre_ajouter_auteur' => 'AFEGIR UN AUTOR:',

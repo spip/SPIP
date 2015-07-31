@@ -23,13 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Modificar aqueu mot clau',
 	'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 	'admin_recalculer' => 'Tornar calcular la pagina',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
-	'afficher_trad' => 'afficher les traductions', # NEW
 	'alerte_maj_impossible' => '<b>Alèrta!</b> Es impossible d\'actualizar la basa SQL vèrs la version @version@; bensai i a un problèma relatiu au drech de modificar la basa de donaas. Vougatz contactar vòstre auberjaor.',
-	'alerte_modif_info_concourante' => 'ATTENTION : Cette information a été modifiée par ailleurs. La valeur actuelle est :', # NEW
 	'analyse_xml' => 'Analisi XML',
-	'annuler' => 'Annuler', # NEW
-	'antispam_champ_vide' => 'Veuillez laisser ce champ vide :', # NEW
 	'articles_recents' => 'Los articles mai recents',
 	'avis_archive_incorrect' => 'lo fichier archiu es pas un fichier SPIP',
 	'avis_archive_invalide' => 'lo fichier archiu es pas valid',
@@ -42,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_fonction_contexte' => 'Error de programacion. Chau pas apelar aquela foncion dins aqueu contèxt.',
 	'avis_erreur_mysql' => 'Error SQL ',
 	'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@)! ',
-	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
 	// B
 	'barre_a_accent_grave' => 'Inserir una A accent grèu majuscula',
@@ -59,13 +53,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_lien' => 'Transformar en [liam ipertèxt->http://...]',
 	'barre_lien_input' => 'Vougatz indicar l\'adreiça de vòstre liam (poètz indicar una adreiça web sos la forma http://www.lomieusit.com o simplament indicar lo numèro d\'un article d\'aqueu sit).',
 	'barre_note' => 'Transformar en [[Nòta de pè]]',
-	'barre_paragraphe' => 'Créer un paragraphe', # NEW
 	'barre_quote' => '<quote>Citar un messatge</quote>',
 	'bouton_changer' => 'Chambiar',
 	'bouton_chercher' => 'Cerchar',
 	'bouton_choisir' => 'Chausir',
-	'bouton_deplacer' => 'Déplacer', # NEW
-	'bouton_download' => 'Télécharger', # NEW
 	'bouton_enregistrer' => 'Registrar',
 	'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatjariá intèrna',
 	'bouton_radio_envoi_annonces' => 'Mandar los anoncis editoriaus',
@@ -83,11 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cal_par_jour' => 'chalendier per jorn',
 	'cal_par_mois' => 'chalendier per mes',
 	'cal_par_semaine' => 'chalendier per setmana',
-	'choix_couleur_interface' => 'couleur ', # NEW
-	'choix_interface' => 'choix  de l\'interface', # NEW
-	'colonne' => 'Colonne', # NEW
 	'confirm_changer_statut' => 'Atencion, avètz demandat de chamjar l\'estatut d\'aquel element. Desiratz de contunhar? ',
-	'correcte' => 'correcte', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte" NEW
 
 	// D
 	'date_aujourdhui' => 'encuei',
@@ -107,20 +94,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ de setembre',
 	'date_demain' => 'deman',
 	'date_fmt_heures_minutes' => '@h@h@m@min',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ a @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jourmois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ de @annee@',
 	'date_fmt_mois_annee' => '@nommois@ de @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => 'lo @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'oras',
 	'date_hier' => 'ièr',
 	'date_il_y_a' => 'fai @delai@',
@@ -156,64 +134,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jnum8' => '8',
 	'date_jnum9' => '9',
 	'date_jour_1' => 'dimenge',
-	'date_jour_1_abbr' => 'dim.', # NEW
-	'date_jour_1_initiale' => 'd.', # NEW
 	'date_jour_2' => 'diluns',
-	'date_jour_2_abbr' => 'lun.', # NEW
-	'date_jour_2_initiale' => 'l.', # NEW
 	'date_jour_3' => 'dimars',
-	'date_jour_3_abbr' => 'mar.', # NEW
-	'date_jour_3_initiale' => 'm.', # NEW
 	'date_jour_4' => 'dimècres',
-	'date_jour_4_abbr' => 'mer.', # NEW
-	'date_jour_4_initiale' => 'm.', # NEW
 	'date_jour_5' => 'dijòus',
-	'date_jour_5_abbr' => 'jeu.', # NEW
-	'date_jour_5_initiale' => 'j.', # NEW
 	'date_jour_6' => 'divendres',
-	'date_jour_6_abbr' => 'ven.', # NEW
-	'date_jour_6_initiale' => 'v.', # NEW
 	'date_jour_7' => 'dissande',
-	'date_jour_7_abbr' => 'sam.', # NEW
-	'date_jour_7_initiale' => 's.', # NEW
 	'date_jours' => 'jorns',
 	'date_minutes' => 'minutas',
 	'date_mois' => 'mes(es)',
 	'date_mois_1' => 'genier',
 	'date_mois_10' => 'octòbre',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'novembre',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'decembre',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'febrier',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'març',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'abriu',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'mai',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'junh',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'julh',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'aost',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'setembre',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'ivèrn',
 	'date_saison_2' => 'prima',
 	'date_saison_3' => 'estiu',
 	'date_saison_4' => 'endarrier',
-	'date_secondes' => 'secondes', # NEW
 	'date_semaines' => 'setmana(s)',
-	'date_un_mois' => 'mois', # NEW
-	'date_une_heure' => 'heure', # NEW
-	'date_une_minute' => 'minute', # NEW
-	'date_une_seconde' => 'seconde', # NEW
-	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => 'per començar verament l\'installacion',
 	'dirs_preliminaire' => 'Preliminar: <b>Reglar los dreches d\'accès</b>',
 	'dirs_probleme_droits' => 'Problèma de dreches d\'accès',
@@ -226,38 +172,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Per adobar aquò, utilizatz vòstre client FTP a fin de reglar los dreches d\'accès de chascun
   d\'aqueles repertòris. La guida d\'installacion explica en detalh coma chau procedir.
   <p>Tre qu\'auretz facha aquela manipulacion, poiretz ',
-	'double_occurrence' => 'Double occurrence de @balise@', # NEW
 
 	// E
-	'en_cours' => 'en cours', # NEW
 	'envoi_via_le_site' => 'Mandaís amb lo biais dau sit web',
-	'erreur' => 'Erreur', # NEW
-	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
-	'erreur_texte' => 'erreur(s)', # NEW
-	'etape' => 'Étape', # NEW
 
 	// F
 	'fichier_introuvable' => 'S\'es pas pogut trobar lo fichier @fichier@.',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Siatz ja inscrich(a).',
 	'form_email_non_valide' => 'Vòstra adreiça e-mail es pas valida.',
 	'form_forum_access_refuse' => 'Poètz pas pus accedir a aqueu sit.',
 	'form_forum_bonjour' => 'Bonjorn @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Aquela adreiça e-mail ja es registraa, adoncas poètz utilizar vòstre mot de santa Clara costumier.',
 	'form_forum_identifiant_mail' => 'Vos avèm mandat vòstre identificant novèu per e-mail.',
 	'form_forum_identifiants' => 'Identificants personaus',
@@ -331,11 +255,9 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'icone_supprimer_image' => 'Suprimir aquel imatge',
 	'icone_tous_articles' => 'Tots vòstres articles ',
 	'icone_tous_auteur' => 'Tots los autors ',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Vesitar', # MODIF
 	'icone_voir_en_ligne' => 'Veire en linha',
 	'img_indisponible' => 'imatge indisponible',
-	'impossible' => 'impossible', # NEW
 	'info_a_suivre' => 'DE SEGUIR>>',
 	'info_acces_interdit' => 'Accès proïbit',
 	'info_acces_refuse' => 'Accès refusat',
@@ -353,14 +275,10 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_article_supprime' => 'Article suprimit',
 	'info_articles' => 'Articles',
 	'info_articles_a_valider' => 'Los articles de validar',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Articles prepausats',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'autor(s)',
 	'info_authentification_ftp' => 'autentificacion (per FTP).',
 	'info_breves_2' => 'brèvas',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Connexion refusaa',
 	'info_contact_developpeur' => 'Vougatz contactar un desvolopaire.',
 	'info_contenance' => 'Aqueu sit conten:',
@@ -372,14 +290,11 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_creer_repertoire' => 'Vougatz crear un fichier o un repertòri nommat',
 	'info_creer_repertoire_2' => 'Dedins lo sosrepertòri   <b>@repertoire@</b>, puei:',
 	'info_creer_vignette' => 'creacion automatica de la vinheta',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplejar',
 	'info_descriptif_nombre' => 'descriptiu(s):',
 	'info_description' => 'Descripcion:',
 	'info_description_2' => 'Descripcion:',
 	'info_dimension' => 'Dimensions:',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Escriure un messatge privat',
 	'info_email_invalide' => 'Adreiça e-mail invalida',
 	'info_en_cours_validation' => 'Vòstres articles en cors de redaccion',
@@ -419,8 +334,6 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_mail_fournisseur' => 'vos@fornior.com',
 	'info_message_2' => 'MESSATGE',
 	'info_message_supprime' => 'MESSATGE SUPRIMIT',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Data de mesa en linha:',
 	'info_modification_parametres_securite' => 'modificacions dels paramètres de seguretat',
 	'info_mois_courant' => 'Dins lo corrent dau mes:',
@@ -436,10 +349,8 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_nouveau_message' => 'AVÈTZ UN MESSATGE NÒU',
 	'info_nouveaux_messages' => 'AVÈTZ @total_messages@ MESSATGES NÒUS',
 	'info_numero_abbreviation' => 'N° ',
-	'info_obligatoire' => 'Cette information est obligatoire', # NEW
 	'info_pense_bete' => 'MEMENTO',
 	'info_petit_ecran' => 'Ecran pechon',
-	'info_petition_close' => 'Pétition close', # NEW
 	'info_pixels' => 'pixèls',
 	'info_plusieurs_mots_trouves' => 'Mai d\'un mot clau trobat per "@cherche_mot@" :',
 	'info_portfolio_automatique' => 'Pòrtfòlio automatic:',
@@ -458,13 +369,9 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_rechercher' => 'Cerchar',
 	'info_rechercher_02' => 'Cerchar:',
 	'info_remplacer_vignette' => 'Remplaçar la vinheta predefinia per un lògo personalizat:',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'sensa títol',
 	'info_selectionner_fichier' => 'Poètz seleccionar un fichier dau dorsier @upload@',
 	'info_selectionner_fichier_2' => 'Seleccionar un fichier:',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'suprimir la vinheta',
 	'info_symbole_bleu' => 'Lo simbèu <b>blau</b> marca un <b>memento</b>: aquò vòu dire un messatge per vòstre usatge personau.',
 	'info_symbole_jaune' => 'Lo simbèu <b>jaune</b> marca un <b>anonci per tots los redactors </b>: los administrators lo pòon modificar, chasque redactor lo pòt veire.',
@@ -486,8 +393,6 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'infos_vos_pense_bete' => 'Vòstres mementos', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Afichar mas que las icònas',
 	'lien_afficher_texte_icones' => 'Afichar las icònas e lo tèxt',
 	'lien_afficher_texte_seul' => 'Afichar mas que lo tèxt',
@@ -506,8 +411,6 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'lien_visite_site' => 'vesitar aqueu sit',
 	'lien_visites' => '@visites@ vesitas',
 	'lien_voir_auteur' => 'Veire aquel autor',
-	'ligne' => 'Ligne', # NEW
-	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'accès a l\'espaci privat',
 	'login_autre_identifiant' => 'se connectar amb un autre identificant',
 	'login_cookie_accepte' => 'Vougatz configurar vòstre navigaor per que los accèpte (aumens amb aqueu sit).',
@@ -534,22 +437,17 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'login_retour_site' => 'Tornar au sit public',
 	'login_retoursitepublic' => 'tornar au sit public',
 	'login_sans_cookiie' => 'Identificacion sensa cookie',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 's\'inscriure',
 	'login_test_navigateur' => 'Assai navigaor/tornar connectar',
 	'login_verifiez_navigateur' => '(pasmens verificatz que vòstre navigaor aia pas servat vòstre mot de santa Clara en memòria...)',
 
 	// M
-	'masquer_colonne' => 'Masquer cette colonne', # NEW
-	'masquer_trad' => 'masquer les traductions', # NEW
 	'module_fichiers_langues' => 'Fichiers de lenga',
 
 	// N
 	'navigateur_pas_redirige' => 'Se vòstre navigaor es pas redirigit, clicatz aicí per contunhar.',
-	'numero' => 'Numéro', # NEW
 
 	// O
-	'occurence' => 'Occurrence', # NEW
 	'onglet_affacer_base' => 'Esfaçar la basa',
 	'onglet_auteur' => 'L\'autor',
 	'onglet_contenu_site' => 'Contengut dau sit',
@@ -597,7 +495,6 @@ e vos tornar connectar au sit.
 	'pass_nouveau_pass' => 'Mot de santa Clara novèu',
 	'pass_ok' => 'Consent',
 	'pass_oubli_mot' => 'Mot de santa Clara eissubliat',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Quitar aquesta fenèstra ',
 	'pass_rappel_login' => 'Remembrança: vòstre identificant (login) es «@login@».',
 	'pass_recevoir_mail' => 'Recebretz un e-mail que vos explicarà coma tornar trobar vòstre accès au sit.',
@@ -608,19 +505,11 @@ e vos tornar connectar au sit.
 	'previsualisation' => 'Previsualizacion',
 	'previsualiser' => 'Previsualizar',
 
-	// R
-	'retour' => 'Retour', # NEW
-
 	// S
-	'spip_conforme_dtd' => 'SPIP considère ce document comme conforme à son DOCTYPE :', # NEW
-	'squelette' => 'squelette', # NEW
-	'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
-	'squelette_ligne' => 'squelette, ligne', # NEW
 	'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
 	'suivant' => 'seguent',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ Ko',
 	'taille_mo' => '@taille@ Mo',
 	'taille_octets' => '@taille@ octets',
@@ -636,7 +525,6 @@ e vos tornar connectar au sit.
   Notatz ben aquela referéncia, tornatz assajar la mesa a
  nivèu, e verificatz puei que los imatges apareissan
  encara dins los articles.',
-	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.', # NEW
 	'texte_inc_auth_1' => 'Siatz identificat/aa coma
    <b>@auth_login@</b>, mas aqueu login existís pas o pas pus dins la basa.
   Assajatz de vos', # MODIF
@@ -665,67 +553,37 @@ e vos tornar connectar au sit.
 	'titre_image_auteur_supprime' => 'Autor suprimit',
 	'titre_image_redacteur' => 'Redactor sens accès',
 	'titre_image_redacteur_02' => 'Redactor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vesitaire',
 	'titre_joindre_document' => 'JÓNHER UN DOCUMENT',
 	'titre_mots_cles' => 'MOTS CLAU',
 	'titre_probleme_technique' => 'Atencion: un problèma tecnic (servior SQL) empacha d\'accedir a aquela part dau sit. Mercé de vòstra indulgéncia.',
 	'titre_publier_document' => 'PUBLICAR UN DOCUMENT DINS AQUELA RUBRICA',
-	'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-	'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 	'titre_statistiques' => 'Estadisticas dau sit',
 	'titre_titre_document' => 'Títol dau document:',
-	'todo' => 'à venir', # NEW
 	'trad_reference' => '(article de referéncia)', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' : balisa B en avau',
-	'zbug_balise_inexistante' => 'Balise @balise@ mal déclarée pour @from@', # NEW
-	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
 	'zbug_boucle' => 'bloca',
 	'zbug_boucle_recursive_undef' => 'bloca recursiva non definia', # MODIF
-	'zbug_calcul' => 'calcul', # NEW
 	'zbug_champ_hors_boucle' => 'Champ @champ@ fòra bloca',
 	'zbug_champ_hors_motif' => 'Champ @champ@ en defòra d\'una blocla de motiu @motif@', # MODIF
 	'zbug_code' => 'còde',
 	'zbug_critere_inconnu' => 'critèri inconegut @critere@', # MODIF
 	'zbug_distant_interdit' => 'extèrne enebit', # MODIF
-	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique', # NEW
-	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index', # NEW
 	'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla', # MODIF
 	'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barraor manca', # MODIF
 	'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorrècta', # MODIF
-	'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
 	'zbug_erreur_execution_page' => 'error d\'execucion de la pagina', # MODIF
 	'zbug_erreur_filtre' => 'Error: filtre <b>« @filtre@ »</b> non definit', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} s\'aplica mas qu\'a las blocas (FORUMS) o (RUBRIQUES)', # MODIF
 	'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
-	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'Error sobre lo sit',
 	'zbug_inversion_ordre_inexistant' => 'inversion d\'un òrdre inexistent', # MODIF
-	'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans critère {pagination} ou employé dans une boucle recursive', # NEW
 	'zbug_parametres_inclus_incorrects' => 'Paramètres d\'inclusion incorrèctes', # MODIF
-	'zbug_profile' => 'Temps de calcul : @time@', # NEW
 	'zbug_resultat' => 'resultat',
 	'zbug_serveur_indefini' => 'servior SQL indefinit', # MODIF
-	'zbug_statistiques' => 'Statistiques des requêtes SQL classées par durée', # NEW
-	'zbug_table_inconnue' => 'Taula SQL «@table@» inconegua',
-	'zxml_connus_attributs' => 'attributs connus', # NEW
-	'zxml_de' => 'de', # NEW
-	'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-	'zxml_inconnu_balise' => 'balise inconnue', # NEW
-	'zxml_inconnu_entite' => 'entité inconnue', # NEW
-	'zxml_inconnu_id' => 'ID inconnu', # NEW
-	'zxml_mais_de' => 'mais de', # NEW
-	'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-	'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-	'zxml_nonvide_balise' => 'balise non vide', # NEW
-	'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-	'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-	'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-	'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-	'zxml_vide_balise' => 'balise vide', # NEW
-	'zxml_vu' => 'vu auparavant' # NEW
+	'zbug_table_inconnue' => 'Taula SQL «@table@» inconegua'
 );
 
 ?>

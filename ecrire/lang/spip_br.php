@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'Kemmañ ar ger-stur-mañ',
 	'admin_modifier_rubrique' => 'Kemmañ ar rubrikenn-mañ',
 	'admin_recalculer' => 'Hizivaat ar bajenn',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'diskouez an troidigezhioù',
 	'alerte_maj_impossible' => '<b>Diwallit !</b> N\'eus ket tu da hizivaat an diaz SQL etrezek ar stumm @version@, marteze abalamour d\'ur gudenn aotre evit kemmañ an diaz titouroù. Mar plij kit e darempred gant ho herberc\'hier.',
 	'alerte_modif_info_concourante' => 'DIWALLIT : Kemmet eo bet an titour-mañ en ul lec\'h all. Setu an talvoud nevez :',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Kemmañ',
 	'bouton_chercher' => 'Klask',
 	'bouton_choisir' => 'Dibab',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'Pellgargañ', # MODIF
 	'bouton_enregistrer' => 'Enrollañ',
 	'bouton_radio_desactiver_messagerie_interne' => 'Diweredekaat ar postelerezh diabarzh',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'warc\'hoazh',
 	'date_fmt_heures_minutes' => '@h@eur@m@munut',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ da @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ a viz @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ a viz @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'eur',
 	'date_hier' => 'dec\'h',
 	'date_il_y_a' => '@delai@ zo',
@@ -181,28 +170,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'miz',
 	'date_mois_1' => 'Genver',
 	'date_mois_10' => 'Here',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'Du',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'Kerzu',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'C\'hwevrer',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'Meurzh',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'Ebrel',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'Mae',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'Mezheven',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'Gouere',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'Eost',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'Gwengolo',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'Goañv',
 	'date_saison_2' => 'nevez-amzer',
 	'date_saison_3' => 'hañv',
@@ -233,31 +210,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Kas dre al lec\'hienn',
 	'erreur' => 'Fazi',
 	'erreur_balise_non_fermee' => 'Balizenn ziwezhañ chomet digor :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'fazi',
 	'etape' => 'Pazenn',
 
 	// F
 	'fichier_introuvable' => 'Restr @fichier@ dibosupl da gavout',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'Enskrivet oc\'h c\'hoazh.',
 	'form_email_non_valide' => 'N\'eo ket reizh ho postel.',
 	'form_forum_access_refuse' => 'N\'oc\'h ket aotreet da vont war al lec\'hienn-mañ ken.',
 	'form_forum_bonjour' => 'Demat @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Enrollet eo ar postel-se dija. Gallout a rit ober gant ho ker-tremen boas neuze.',
 	'form_forum_identifiant_mail' => 'Emañ ho kod moned nevez o paouez bezañ kaset deoc\'h dre bostel.',
 	'form_forum_identifiants' => 'Titouroù hiniennel',
@@ -329,7 +290,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'Diverkañ ar skeudenn-mañ',
 	'icone_tous_articles' => 'Ho holl bennadoù',
 	'icone_tous_auteur' => 'An holl skridaozerien',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'Gweladenniñ', # MODIF
 	'icone_voir_en_ligne' => 'Gwelet enlinenn',
 	'img_indisponible' => 'skeudenn dibosupl da gaout',
@@ -351,14 +311,10 @@ sera ignorée) :
 	'info_article_supprime' => 'Pennad diverket',
 	'info_articles' => 'Pennadoù',
 	'info_articles_a_valider' => 'Ar pennadoù da gadarnaat',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'Pennadoù kinniget',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'skridaozer(ien) :',
 	'info_authentification_ftp' => 'Gwiriañ (dre FTP).',
 	'info_breves_2' => 'berrskridoù',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Kevreañ nac\'het',
 	'info_contact_developpeur' => 'Kit e darempred gant un diorroer.',
 	'info_contenance' => 'El lec\'hienn-mañ ez eus :',
@@ -370,14 +326,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Krouit ur restr pe ur c\'havlec\'h anvet :',
 	'info_creer_repertoire_2' => 'en iskavlec\'h <b>@repertoire@</b>, ha :',
 	'info_creer_vignette' => 'krouiñ emgefreek ar skeudennig',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Displegañ',
 	'info_descriptif_nombre' => 'deskrivadur(ioù) :',
 	'info_description' => 'Deskrivadur :',
 	'info_description_2' => 'Deskrivadur :',
 	'info_dimension' => 'Ment :',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'Skrivañ ur gerig prevez;',
 	'info_email_invalide' => 'Postel direizh.',
 	'info_en_cours_validation' => 'Ar pennadoù emaoc\'h o skrivañ',
@@ -417,8 +370,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'hoc\'hanv@herberc\'hier.com',
 	'info_message_2' => 'KEMENNADENN',
 	'info_message_supprime' => 'KEMENNADENN BET DIVERKET',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'Lakaet war ar rouedad d\'an :',
 	'info_modification_parametres_securite' => 'kemm an arventennoù surentez',
 	'info_mois_courant' => 'E-kerzh ar miz :',
@@ -456,13 +407,9 @@ sera ignorée) :
 	'info_rechercher' => 'Klask',
 	'info_rechercher_02' => 'Klask :',
 	'info_remplacer_vignette' => 'Erlec\'hiañ ar skeudennig dre ziouer gant ul logo deoc\'h :',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'titl ebet',
 	'info_selectionner_fichier' => 'Gallout a rit diuzañ ur restr eus an teuliad @upload@',
 	'info_selectionner_fichier_2' => 'Diuzañ ur restr :',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'diverkañ ar skeudennig',
 	'info_symbole_bleu' => 'Talvezout a ra an arouez <b>glas</b> evit un <b>notennig-eñvor</b>: da lavaret eo ur gemennadenn evidoc\'h hepken.',
 	'info_symbole_jaune' => 'Talvezout a ra an arouez <b>melen</b> evit ur <b>c\'hemenn d\'an holl skridaozerien</b> : a c\'hell bezañ kemmet gant ur merour ha lennet gant an holl skridaozerien.',
@@ -484,8 +431,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'Ho notennigoù-eñvor', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'Diskouez ar skeudennigoù hepken',
 	'lien_afficher_texte_icones' => 'Diskouez ar skeudennigoù hag an destenn',
 	'lien_afficher_texte_seul' => 'Diskouez an destenn hepken',
@@ -531,7 +476,6 @@ sera ignorée) :
 	'login_retour_site' => 'Distreiñ d\'al lodenn foran',
 	'login_retoursitepublic' => 'distreiñ d\'al lodenn foran',
 	'login_sans_cookiie' => 'Kevreañ hep toupinoù',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'en em enskrivañ',
 	'login_test_navigateur' => 'taol-arnod merdeer/adkevreañ',
 	'login_verifiez_navigateur' => '(Gwiriit memes tra n\'eo ket bet memoret ho ker-tremen gant ar merdeer...)',
@@ -589,7 +533,6 @@ kevreañ en-dro ouzh al lec\'hienn.
 	'pass_nouveau_pass' => 'Ger-tremen nevez',
 	'pass_ok' => 'MAT EO',
 	'pass_oubli_mot' => 'Ankouaet ar ger-tremen',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'Kuitaat ar prenestr-mañ',
 	'pass_rappel_login' => 'Dalc\'hit soñj : « @login@ » eo ho anv-tremen (login).',
 	'pass_recevoir_mail' => 'Ur postel a vo kaset deoc\'h, ennañ an titouroù ret da c\'hallout tizhout al lec\'hienn en-dro.',
@@ -612,7 +555,6 @@ kevreañ en-dro ouzh al lec\'hienn.
 	'suivant' => 'war-lerc\'h',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ ke',
 	'taille_mo' => '@taille@ Me',
 	'taille_octets' => '@taille@ eizhbit',
@@ -653,7 +595,6 @@ Aliet oc\'h da chom hep kemmañ tra ebet e-keit ha n\'oc\'h ket boas ouzh SPIP.
 	'titre_image_auteur_supprime' => 'Skridaozer bet diverket',
 	'titre_image_redacteur' => 'Skridaozer hep aotre moned',
 	'titre_image_redacteur_02' => 'Skridaozer',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Gweladenner',
 	'titre_joindre_document' => 'STAGAÑ UN TEUL',
 	'titre_mots_cles' => 'GERIOÙ-STUR',

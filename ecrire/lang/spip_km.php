@@ -23,7 +23,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_modifier_mot' => 'ផ្លាស់ប្តូរ ពាក្យ​គន្លឹះ​នេះ',
 	'admin_modifier_rubrique' => 'ផ្លាល់ប្តូរ ​ផ្នែក​នេះ',
 	'admin_recalculer' => 'កំណត់ឡើងវិញ ទំព័រនេះ',
-	'afficher_calendrier' => 'Afficher le calendrier', # NEW
 	'afficher_trad' => 'បង្ហាញ​ចេញ បំរែសំរួល',
 	'alerte_maj_impossible' => '<b>​ព្រមាន​!</b> គ្មានអាច បន្ទាន់សម័យ មូលដ្ឋានទិន្នន័យ SQL ទៅ​ កំណែ @version@, ប្រហែល បណ្តាលពី ​បញ្ហាសិទ្ធិផ្លាស់ប្តូរ ​លើ​មូលដ្ឋានទិន្នន័យ។ សូម​ទាក់ទង ខំព្យូរើផ្តល់ទីស្នាក់សៃថ៍ របស់​អ្នក។',
 	'alerte_modif_info_concourante' => 'ប្រយត្ន៖ ពត៌មាននេះ ត្រូវបានផ្លាស់ប្តូរ ដោយទីដទៃ។ តំលៃបច្ចុប្បន្ន ជា ៖',
@@ -64,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'ផ្លាស់ប្តូរ',
 	'bouton_chercher' => 'ស្វែងរក',
 	'bouton_choisir' => 'ជ្រើសរើស',
-	'bouton_deplacer' => 'Déplacer', # NEW
 	'bouton_download' => 'ទាញយក', # MODIF
 	'bouton_enregistrer' => 'រក្សា​ទុក',
 	'bouton_radio_desactiver_messagerie_interne' => 'អសកម្មភាព បញ្ញើ​សារ ខាងក្នុង',
@@ -107,20 +105,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_de_mois_9' => '@j@ @nommois@',
 	'date_demain' => 'ស្អែក',
 	'date_fmt_heures_minutes' => '@h@:@m@',
-	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
-	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@ វេលា @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
-	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '​ថ្ងៃ @nomjour@ @date@',
-	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
-	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
-	'date_fmt_periode_from' => 'Du', # NEW
-	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => 'ម៉ោង',
 	'date_hier' => 'ម្សិលមិញ',
 	'date_il_y_a' => 'មាន @delai@',
@@ -181,28 +170,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois' => 'ខែ',
 	'date_mois_1' => 'ខែ មក​រា',
 	'date_mois_10' => 'ខែ តុលា',
-	'date_mois_10_abbr' => 'oct.', # NEW
 	'date_mois_11' => 'ខែ វិច្ឆិកា',
-	'date_mois_11_abbr' => 'nov.', # NEW
 	'date_mois_12' => 'ខែ ធ្នូ',
-	'date_mois_12_abbr' => 'déc.', # NEW
-	'date_mois_1_abbr' => 'janv.', # NEW
 	'date_mois_2' => 'ខែ កុម្ភៈ',
-	'date_mois_2_abbr' => 'févr.', # NEW
 	'date_mois_3' => 'ខែ មីនា',
-	'date_mois_3_abbr' => 'mars', # NEW
 	'date_mois_4' => 'ខែ មេ​សា',
-	'date_mois_4_abbr' => 'avr.', # NEW
 	'date_mois_5' => 'ខែ ឧសភា',
-	'date_mois_5_abbr' => 'mai', # NEW
 	'date_mois_6' => 'ខែ មិថុនា',
-	'date_mois_6_abbr' => 'juin', # NEW
 	'date_mois_7' => 'ខែ កក្កដា',
-	'date_mois_7_abbr' => 'juil.', # NEW
 	'date_mois_8' => 'ខែ សីហា',
-	'date_mois_8_abbr' => 'août', # NEW
 	'date_mois_9' => 'ខែ កញ្ញា',
-	'date_mois_9_abbr' => 'sept.', # NEW
 	'date_saison_1' => 'រដូវ រងា',
 	'date_saison_2' => 'រដូវ ផ្ការីក',
 	'date_saison_3' => 'រដូវ ក្ដៅ',
@@ -231,31 +208,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'បញ្ញើ តាមវ៉ែបសៃថ៍',
 	'erreur' => 'កំហុស ៖',
 	'erreur_balise_non_fermee' => '​មិន​បានដាក់ ប្លាក​បិទ៖',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
-	'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
-	'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 	'erreur_texte' => 'កំហុស',
 	'etape' => 'ដំណាក់',
 
 	// F
 	'fichier_introuvable' => '​គ្មានរកឃើញ សំណុំឯកសារ ៖ @fichier@',
-	'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-	'form_auteur_email_modifie' => 'Votre adresse email a été modifiée.', # NEW
-	'form_auteur_envoi_mail_confirmation' => 'Un courrier électronique de confirmation vient d\'être envoyé à @email@. Vous devrez visiter l\'adresse Web mentionnée dans ce courrier pour valider votre adresse mail.', # NEW
-	'form_auteur_mail_confirmation' => 'Bonjour,
-
-Vous avez demandé à changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter à
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignorée) :
-
-    @url@
-', # NEW
 	'form_deja_inscrit' => 'អ្នក​ធ្លាប់បាន​ហើយ ចុះ​ឈ្មោះ​។',
 	'form_email_non_valide' => 'អាសយដ្ឋាន​អ៊ីមែវល៍ ​របស់​អ្នក គ្មាន​សុពលភាព។',
 	'form_forum_access_refuse' => 'អ្នក​គ្មានទៀត ​ចូល​ទៅសៃថ៍ នេះ ។',
 	'form_forum_bonjour' => 'សួស្តី @nom@,',
-	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'អាសយដ្ឋាន​អ៊ីមែវល៍​នេះ​ ធ្លាប់ត្រូវបានចុះ​ឈ្មោះ​, ដូច្នោះ អ្នកអាចប្រើប្រាស់ ពាក្យសំងាត់ របស់អ្នក តាមទំលាប់។',
 	'form_forum_identifiant_mail' => 'អត្តសញ្ញា​ថ្មី របស់អ្នក ទើបតែត្រូវបាន ផ្ញើទៅអ្នក តាម អ៊ីមែវល៍។',
 	'form_forum_identifiants' => 'អត្តសញ្ញា​ផ្ទាល់ខ្លួន',
@@ -327,7 +288,6 @@ sera ignorée) :
 	'icone_supprimer_image' => 'លុបចេញ ​រូបភាព​នេះ',
 	'icone_tous_articles' => 'គ្រប់អត្ថបទ ​របស់​អ្នក',
 	'icone_tous_auteur' => 'គ្រប់ អ្នកនិពន្ធ​',
-	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 	'icone_visiter_site' => 'ទស្សនា', # MODIF
 	'icone_voir_en_ligne' => '​មើល​ លើអិនរើណែត',
 	'img_indisponible' => 'គ្មាន​រូបភាព',
@@ -349,14 +309,10 @@ sera ignorée) :
 	'info_article_supprime' => 'អត្ថបទ​ ត្រូវ​បាន​លុបចេញ',
 	'info_articles' => 'អត្ថបទ',
 	'info_articles_a_valider' => 'អត្ថបទ​ ​ត្រូវធ្វើ​អោយ​​សុពលភាព',
-	'info_articles_nb' => '@nb@ articles', # NEW
 	'info_articles_proposes' => 'អត្ថបទ ​ត្រូវ​បាន​ស្នើ',
-	'info_articles_un' => '1 article', # NEW
 	'info_auteurs_nombre' => 'អ្នកនិពន្ធ ៖',
 	'info_authentification_ftp' => 'ធ្វើអោយត្រឹមត្រូវ តាមភាពដើម (​ដោយ FTP)។',
 	'info_breves_2' => 'ពត៌មានសង្ខេប',
-	'info_breves_nb' => '@nb@ brèves', # NEW
-	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'បញ្ជាប់ ​ត្រូវ​បាន​បដិសេធ',
 	'info_contact_developpeur' => '​ទាក់ទង​ អ្នក​អភិវឌ្ឍ។',
 	'info_contenance' => 'វ៉ែបសៃថ៍ នេះ​មានផ្ទុក ៖',
@@ -368,14 +324,11 @@ sera ignorée) :
 	'info_creer_repertoire' => 'សូម​បង្កើត មួយ​ឯកសារ ឬ មួយ​បញ្ជី​រាយ​នាម ដែលបានដាក់ឈ្មោះ​៖',
 	'info_creer_repertoire_2' => '​ខាងក្នុង​បញ្ជី​រាយ​នាម​រង <b>@repertoire@</b>, រួច៖',
 	'info_creer_vignette' => 'ការ​បង្កើត​​ស្វ័យប្រវត្ដិ​ នៃ​គំនូស​ព្រាង',
-	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'លាចេញ',
 	'info_descriptif_nombre' => 'ជា ការពិពណ៌នា៖',
 	'info_description' => 'ការពិពណ៌នា ៖',
 	'info_description_2' => 'ការពិពណ៌នា ៖',
 	'info_dimension' => 'ខ្នាត ៖',
-	'info_documents_nb' => '@nb@ documents', # NEW
-	'info_documents_un' => '1 document', # NEW
 	'info_ecire_message_prive' => 'សរសេរ​ សារ​ឯកជន',
 	'info_email_invalide' => 'អាសយដ្ឋាន​អ៊ីមែវល៍​ គ្មាន​សុពលភាព។',
 	'info_en_cours_validation' => 'អត្ថបទ​ របស់​អ្នក ​កំពុង​ ត្រូវបានតែង',
@@ -414,8 +367,6 @@ sera ignorée) :
 	'info_mail_fournisseur' => 'you@isp.com',
 	'info_message_2' => 'សារ',
 	'info_message_supprime' => 'បានលុបចេញ សារ​',
-	'info_messages_nb' => '@nb@ messages', # NEW
-	'info_messages_un' => '1 message', # NEW
 	'info_mise_en_ligne' => 'ថ្ងៃខែឆ្នាំ បានផ្សព្វផ្សាយ លើអិនរើណែត ៖',
 	'info_modification_parametres_securite' => 'កែប្រែ ការកំណត់សុវត្ថភាព',
 	'info_mois_courant' => 'ក្នុង​អំឡុង​ នៃខែ ៖',
@@ -452,13 +403,9 @@ sera ignorée) :
 	'info_rechercher' => 'ស្វែងរក',
 	'info_rechercher_02' => 'ស្វែងរក ៖',
 	'info_remplacer_vignette' => 'ជំនួស កូន​រូបភាព លំនាំដើម ដោយ​រូប​សញ្ញា ​ដែល​បានបង្កើត​ខ្លួនឯង ៖',
-	'info_rubriques_nb' => '@nb@ rubriques', # NEW
-	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'គ្មាន​ចំណងជើង',
 	'info_selectionner_fichier' => 'អ្នក​អាច​ជ្រើសយក មួយសំណុំឯកសារ នៃថតឯកសារ @upload@',
 	'info_selectionner_fichier_2' => 'ជ្រើសយក មួយឯកសារ ៖',
-	'info_sites_nb' => '@nb@ sites', # NEW
-	'info_sites_un' => '1 site', # NEW
 	'info_supprimer_vignette' => 'លុប​ចេញ កូនរូបភាព',
 	'info_symbole_bleu' => 'A <b>​និមិត្ដសញា​</b> ពណ៌​ខៀវ<b>​ ​បង្ហាញការរំលឹក</b>៖ មានន័យថា មួយសារសំរាប់​បំរើប្រាស់​ផ្ទាល់ខ្លួន​ របស់​អ្នក ។',
 	'info_symbole_jaune' => 'A <b>​និមិត្ដសញា​</b> ពណ៌​លឿង​<b>​បង្ហាញ មួយជំនូនដំណឹង​ ទៅគ្រប់អ្នកតែងអត្ថបទ </b>៖ ​អាចកែប្រែ ដោយគ្រប់អ្នកអភិបាល, និង អាចឃើញ ដោយគ្រប់អ្នកតែងអត្ថបទ។',
@@ -480,8 +427,6 @@ sera ignorée) :
 	'infos_vos_pense_bete' => 'ការក្រើនរំលឹក ​របស់​អ្នក', # MODIF
 
 	// L
-	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
-	'label_poids_fichier' => 'Taille', # NEW
 	'lien_afficher_icones_seuls' => 'បង្ហាញ​តែ​រូបតំណាង​ប៉ុណ្ណោះ',
 	'lien_afficher_texte_icones' => 'បង្ហាញចេញ ​រូបតំណាង និង​អត្ថបទ',
 	'lien_afficher_texte_seul' => 'បង្ហាញ​តែ​ អត្ថបទ',
@@ -525,7 +470,6 @@ sera ignorée) :
 	'login_retour_site' => 'ត្រលប់ទៅ វ៉ែបសៃថ៍ សាធារណៈ',
 	'login_retoursitepublic' => 'ត្រលប់ទៅ វ៉ែបសៃថ៍ សាធារណៈ',
 	'login_sans_cookiie' => 'ការសំគាល់ អត្ដសញា គ្មានខូកឃី',
-	'login_securise' => 'Login sécurisé', # NEW
 	'login_sinscrire' => 'ចុះ​ឈ្មោះ',
 	'login_test_navigateur' => 'សា​ល្បង​ឧបកររាវរក​/​​ភ្ជាប់​ឡើង​វិញ',
 	'login_verifiez_navigateur' => '(ផ្ទៀងផ្ទាត់​ គ្រប់ពេល ដែលឧបកររាវរក របស់អ្នក មិនបាន​ចង​ចាំ ពាក្យសំងាត់ របស់​អ្នក...)',
@@ -575,7 +519,6 @@ sera ignorée) :
 	'pass_nouveau_pass' => 'ពាក្យសំងាតថ្មី',
 	'pass_ok' => 'យល់ព្រម',
 	'pass_oubli_mot' => 'ភ្លេច​ពាក្យសំងាត់',
-	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 	'pass_quitter_fenetre' => 'ចាក​ចេញ ពី​បង្អួច​នេះ',
 	'pass_rappel_login' => 'ក្រើនរំលឹក ៖ អត្តសញ្ញា របស់​អ្នក (ការពិនិត្យ​ចូល​) គឺ "@login@"។',
 	'pass_recevoir_mail' => 'អ្នក​នឹង​ទទួល​បាន ​អ៊ីមែវល៍ ​ដោយ​ពន្យល់​អំពីវិធី រកមើលការចូលទៅ របស់អ្នក លើវ៉ែបសៃថ៍។',
@@ -598,7 +541,6 @@ sera ignorée) :
 	'suivant' => 'បន្ទាប់',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
 	'taille_ko' => '@taille@ គីឡូបៃ',
 	'taille_mo' => '@taille@ មេកាបៃ',
 	'taille_octets' => '@taille@ បៃ',
@@ -631,7 +573,6 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => 'បានលុបចេញ អ្នកនិពន្ធ',
 	'titre_image_redacteur' => 'អ្នកតែងអត្ថបទ គ្មានការចូលទៅ',
 	'titre_image_redacteur_02' => 'អ្នកតែងអត្ថបទ',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'អ្នក​ទស្សនា',
 	'titre_joindre_document' => 'ភ្ជាប់​ មួយឯកសារ',
 	'titre_mots_cles' => 'ពាក្យ​គន្លឹះ',

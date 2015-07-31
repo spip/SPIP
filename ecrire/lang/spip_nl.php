@@ -233,7 +233,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Verzending via de site',
 	'erreur' => 'Fout',
 	'erreur_balise_non_fermee' => 'laatste haakje niet opnieuw gesloten :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Een technische fout verhinderde een correcte registratie van het veld @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Een technische fout verhinderde de registratie.',
 	'erreur_texte' => 'fout(en)',
@@ -668,7 +667,6 @@ opnieuw verbinding maken met de site
 	'titre_image_auteur_supprime' => 'Auteur gewist',
 	'titre_image_redacteur' => 'Redacteur zonder toegang',
 	'titre_image_redacteur_02' => 'Redacteur',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Bezoeker',
 	'titre_joindre_document' => 'Document toevoegen',
 	'titre_mots_cles' => 'TREFWOORDEN',

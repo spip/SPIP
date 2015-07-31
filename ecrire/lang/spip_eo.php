@@ -234,7 +234,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoi_via_le_site' => 'Sendo tra la retejo',
 	'erreur' => 'Eraro',
 	'erreur_balise_non_fermee' => 'lasta ne fermita marko :',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Teknika eraro neebligis la ĝustan registradon de la kampo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Teknika eraro neebligis la registradon.',
 	'erreur_texte' => 'eraro(j)',
@@ -663,7 +662,6 @@ sub la respondeco de la ĉefa retejestro .</b>',
 	'titre_image_auteur_supprime' => 'Aŭtoro forigita',
 	'titre_image_redacteur' => 'Redaktanto sen alireblo',
 	'titre_image_redacteur_02' => 'Redaktanto',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitanto',
 	'titre_joindre_document' => 'ALDONI DOKUMENTON',
 	'titre_mots_cles' => 'ŜLOSILVORTOJ',

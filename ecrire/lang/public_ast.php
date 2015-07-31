@@ -30,7 +30,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'commenter_site' => 'Comentariu so\'l sitiu',
-	'contact' => 'Contact', # NEW
 	'copie_document_impossible' => 'Nun ye posible copiar el documentu',
 
 	// D

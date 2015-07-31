@@ -233,7 +233,6 @@ Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 	'envoi_via_le_site' => 'Via äre Site schécken',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Läschten Tag dee net zou ass:',
-	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'En technesche Problem verhënnert d\'Späichere vum Feld @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'En technesche Problem verhënnert d\'Späicheren.',
 	'erreur_texte' => 'Fehler(en)',
@@ -641,7 +640,6 @@ Probéiert ',
 	'titre_image_auteur_supprime' => 'Geläschten Auteur',
 	'titre_image_redacteur' => 'Redakter ouni Zougang',
 	'titre_image_redacteur_02' => 'Redakter',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visiteur',
 	'titre_joindre_document' => 'DOKUMENT BÄIFLÉCKEN',
 	'titre_mots_cles' => 'SCHLËSSELWIERDER',
