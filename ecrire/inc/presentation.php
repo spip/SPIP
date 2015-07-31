@@ -477,12 +477,26 @@ function envoi_link($nom_site_spip, $minipres=false) {
 
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
-	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"")
+	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"");
+
+
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	include_spip('inc/filtres_images');
+	list($fid, $dir, $nom, $format) = $chercher_logo(0, 'id_syndic', 'on');
+	$favicon = !$fid
+		? find_in_path('favicon.ico')
+		: extraire_attribut(
+			image_aplatir(
+				image_recadre(
+					image_passe_partout($fid, 32,32),
+				32,32,center),
+			'ico'),
+		'src');
 
 	// favicon.ico
-	. '<link rel="shortcut icon" href="'
-	. url_absolue(find_in_path('favicon.ico'))
-	. "\" />\n";
+	$res .= '<link rel="shortcut icon" href="'
+	. url_absolue($favicon)
+	. "\" type='image/x-icon' />\n";
 
 	$js = debut_javascript();
 
