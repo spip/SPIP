@@ -105,7 +105,7 @@ class IterateurDATA implements Iterator {
 					$this->ok = true;
 				}
 			}
-			else if (preg_match(',^http://,', $this->command['source'])) {
+			else if (preg_match(',^https?://,', $this->command['source'])) {
 				include_spip('inc/distant');
 				$u = recuperer_page($this->command['source']);
 			} else if (@is_readable($this->command['source']))
@@ -113,13 +113,21 @@ class IterateurDATA implements Iterator {
 			else
 				$u = $this->command['source'];
 
+			if (!$u) {
+				$this->err = true;
+				spip_log("erreur datasource ".$this->command['source']);
+			}
+
 			// tout ce bloc devrait marcher par charger_fonction('xxx_to_array')
 			// si c'est du RSS
-			if (isset($this->command['sourcemode'])) {
+			if (!$this->err
+			AND isset($this->command['sourcemode'])) {
 				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
 					if (is_array($a = $g($u))) {
 						$this->tableau = $a;
-						$this->ok = true;
+					} else {
+						$this->err = true;
+						spip_log("erreur sur $g(): $u");
 					}
 				}
 				else
@@ -129,21 +137,27 @@ class IterateurDATA implements Iterator {
 						include_spip('inc/syndic');
 						if (is_array($rss = analyser_backend($u))) {
 							$this->tableau = $rss;
-							$this->ok = true;
+						} else {
+							$this->err = true;
+							spip_log("rss mal forme : $u");
 						}
 						break;
 					case 'json':
 						if (is_array($json = json_decode($u))
 						OR is_object($json)) {
 							$this->tableau = (array) $json;
-							$this->ok = true;
+						} else {
+							$this->err = true;
+							spip_log("json mal forme : $u");
 						}
 						break;
 					case 'yaml':
 						include_spip('inc/yaml');
 						if (is_array($yaml = yaml_decode($u))) {
 							$this->tableau = $yaml;
-							$this->ok = true;
+						} else {
+							$this->err = true;
+							spip_log("yaml vide ou mal forme : $u");
 						}
 						break;
 					case 'csv':
@@ -154,7 +168,6 @@ class IterateurDATA implements Iterator {
 						else
 						foreach(preg_split('/\r?\n/',$u) as $ligne)
 							$this->tableau[] = explode(',', $ligne);
-						$this->ok = true;
 				}
 			}
 		}
@@ -169,10 +182,10 @@ class IterateurDATA implements Iterator {
 					}
 					# sql_quote a l'envers : pas propre...
 					eval ('$x = '.str_replace('\"', '"', $com[2]).';');
-					if (is_array($x) OR is_array($x = @unserialize($x))) {
+					if (is_array($x) OR is_array($x = @unserialize($x)))
 						$this->tableau = $x;
-						$this->ok = true;
-					}
+					else
+						$this->err = true;
 				}
 			}
 		}
@@ -185,22 +198,25 @@ class IterateurDATA implements Iterator {
 
 		// {datapath query.results}
 		// extraire le chemin "query.results" du tableau de donnees
-		if (is_array($this->command['datapath'])) {
+		if (!$this->err
+		AND is_array($this->command['datapath'])) {
 			list(,$base) = each($this->command['datapath']);
 			if (strlen($base = trim($base))) {
 				$this->tableau = table_valeur($this->tableau, $base);
 				if (!is_array($this->tableau)) {
 					$this->tableau = array();
-					# $this->fail = true; # comment signaler proprement qu'on a echoue ?
+					$this->err = true;
+					spip_log("datapath '$base' absent");
 				}
 			}
 		}
 
 
 		// Appliquer les filtres sur (cle,valeur)
-		if ($this->filtre) {
+		if (!$this->err
+		AND $this->filtre) {
 			$func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
-			#var_dump($b);
+			var_dump($b);
 			foreach($this->tableau as $cle=>$valeur) {
 				if (!$func_filtre($cle,$valeur))
 					unset($this->tableau[$cle]);

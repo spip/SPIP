@@ -363,7 +363,7 @@ define('CODE_CORPS_BOUCLE', '%s
 		%s,
 		array(%s)
 	);
-	if ($iter->valid()) {
+	if (!$iter->err()) {
 	%s%s$SP++;
 	// RESULTATS
 	%s
