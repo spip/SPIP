@@ -362,7 +362,7 @@ if ($relief) {
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
 		afficher_sites("Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me",
-			"SELECT * FROM spip_syndic WHERE syndication='off' ORDER BY nom_site");
+			"SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
 	
 	// Les articles syndiques en attente de validation
