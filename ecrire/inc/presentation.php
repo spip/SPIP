@@ -946,7 +946,10 @@ function fin_page()
 		: ("<div style='text-align: right; ' class='verdana1 spip_xx-small'>"
 			. info_copyright()
 			. "<br />"
-			. _T('info_copyright_doc')
+		 	. _T('info_copyright_doc',
+				array('spipnet' => $GLOBALS['home_server']
+					. '/' .    $GLOBALS['spip_lang']
+				      . '_'))
 			. '</div>'))
 
 	. fin_grand_cadre(true)

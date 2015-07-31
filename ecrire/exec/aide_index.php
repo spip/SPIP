@@ -60,7 +60,12 @@ function fichier_aide($lang_aide = '', $aide='') {
 // http://doc.spip.org/@help_panneau
 function help_panneau() {
 
-	  return "<div align='center'>
+	$copyleft = _T('info_copyright_doc',
+				array('spipnet' => $GLOBALS['home_server']
+					. '/' .    $GLOBALS['spip_lang']
+					. '_'));
+
+	return "<div align='center'>
 			<img src='" . chemin_image('logo-spip.gif') .
 		  "' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
 			<br />
@@ -69,7 +74,7 @@ function help_panneau() {
 			</div></div>
 			<div style='position:absolute; bottom: 10px; right:20px;
 			font-size: 12px; '>" .
-		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
+			$copyleft .
 			'</div>';
 }
 
@@ -337,9 +342,11 @@ function exec_aide_index_dist()
 		if ($html === -1) {
 			include_spip('inc/minipres');
 			echo  minipres(_T('forum_titre_erreur'),
-				       "<div>" .
+				       "<div><a href='" .
+				       $GLOBALS['home_server'] .
+				       "'>" .
 				       $GLOBALS['help_server'] .
-				       ": ".
+				       "</a>&nbsp;: ".
 				       _T('aide_non_disponible').
 				       "</div><div align='right'>".
 				       menu_langues('var_lang_ecrire').

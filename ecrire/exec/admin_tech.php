@@ -73,7 +73,11 @@ function exec_admin_tech_dist()
 	 _T('texte_admin_tech_01',
 	   array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')) .
 	 '&nbsp;' .
-	 _T('texte_admin_tech_02') .
+	  _T('texte_admin_tech_02',
+		  array('archive' => str_replace('/', ' / ', $archive),
+			'spipnet' => $GLOBALS['home_server']
+			. '/' .  $GLOBALS['spip_lang'] . '_article1489.html'
+			)) .
 	"</p>";
 	
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
