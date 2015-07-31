@@ -1060,16 +1060,30 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
-// Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
-// $id = numero de la cle primaire si nombre, URL a decoder si pas numerique
-// $entite = surnom de la table SQL (donne acces au nom de cle primaire)
-// $args = query_string a placer apres cle=$id&....
-// $ancre = ancre a mettre a la fin de l'URL a produire
-// $public = produire l'URL publique ou privee (par defaut: selon espace)
-// $type = fichier dans le repertoire ecrire/urls determinant l'apparence
-// @return string : url codee
-// @return string : fonction de decodage
-// http://doc.spip.org/@generer_url_entite
+/**
+ * Fonction codant et decodant les URLS des objets SQL mis en page par SPIP
+ *
+ * http://doc.spip.org/@generer_url_entite
+ *
+ *
+ * @param string $id
+ *   numero de la cle primaire si nombre, URL a decoder si pas numerique
+ * @param string $entite
+ *   surnom de la table SQL (donne acces au nom de cle primaire)
+ * @param string $args
+ *   query_string a placer apres cle=$id&....
+ * @param string $ancre
+ *   ancre a mettre a la fin de l'URL a produire
+ * @param bool|string $public
+ *   produire l'URL publique ou privee (par defaut: selon espace)
+ *   si string : serveur de base de donnee (nom du connect)
+ * @param string $type
+ *   fichier dans le repertoire ecrire/urls determinant l'apparence
+ * @return string|array
+ *   url codee ou fonction de decodage
+ *   array : derogatoire, la fonction d'url retourne (objet,id_objet) utilises par nettoyer_raccourcis_typo() pour generer un lien titre
+ *           (cas des raccourcis personalises [->spip20] : il faut implementer une fonction generer_url_spip et une fonction generer_url_ecrire_spip)
+ */
 function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NULL, $type=NULL)
 {
 	if ($public === NULL) $public = !test_espace_prive();
