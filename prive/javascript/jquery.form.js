@@ -54,11 +54,11 @@ $.fn.ajaxSubmit = function(options) {
         options = { success: options };
 
     // clean url (don't include hash vaue)
-    var url = this.attr('action') || window.location.toString();
+    var url = this.attr('action') || window.location.href;
     url = (url.match(/^([^#]+)/)||[])[1];
 		// if action is only an anchor and remains empty, ff fail
 		// try again with window.location in this case
-    url = url || window.location.toString();
+    url = url || window.location.href;
     url = (url.match(/^([^#]+)/)||[])[1];
     url = url || '';
 
