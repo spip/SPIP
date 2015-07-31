@@ -102,9 +102,12 @@ else {
 		if ($affiche_boutons_admin = (!$GLOBALS['flag_preserver']
 		AND $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
 			include_local('inc-admin.php3');
-			$page['texte'] .= '<'.'?php
-				define("PAS_D_ERREUR_SQUELETTE", 1);
-			?'.'>';
+
+			// recuperer les parse errors etc.
+			$drapeau_erreur_page = false;
+			if (function_exists('set_error_handler'))
+				set_error_handler('spip_error_handler');
+
 			if ($flag_ob)
 				echo afficher_boutons_admin('', true).'<!-- @@START@@ -->';
 		}
@@ -115,7 +118,7 @@ else {
 		eval('?' . '>' . $page['texte']); // page 'php'
 
 		// en cas d'erreur afficher un message + demander les boutons de debug
-		if (!defined("PAS_D_ERREUR_SQUELETTE")) {
+		if ($drapeau_erreur_page) {
 			echo "<hr /><h2>".
 			_L("Erreur dans le squelette")." $fond.html</h2>";
 			$GLOBALS['bouton_admin_debug'] = true;

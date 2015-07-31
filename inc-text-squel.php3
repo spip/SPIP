@@ -73,7 +73,8 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 			"_T('$module:$chaine')",
 			$id_boucle, 
 			$boucles,
-			$id_mere);
+			$id_mere,
+			'php');	// ne pas manger les espaces avec trim()
 		$code = str_replace($match[0], "'$ferme_multi.$c.$ouvre_multi'", $code);
 	}
 
