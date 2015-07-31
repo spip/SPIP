@@ -271,6 +271,7 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // ici :
 // * retailler les input
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
+var verifForm_clicked=false;
 function verifForm(racine) {
 
 	// Clavier pour sauver (cf. crayons)
@@ -280,15 +281,17 @@ function verifForm(racine) {
 		jQuery('form', racine||document)
 		.keypress(function(e){
 			if (
-				(e.ctrlKey && (
+				((e.ctrlKey && (
 					/* ctrl-s ou ctrl-maj-S, firefox */
 					(((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
 					/* ctrl-s, safari */
 					|| (e.charCode==19 && e.keyCode==19)
 				 )
 				) /* ctrl-s, Opera Mac */
-				|| (e.keyCode==19 && jQuery.browser.opera)
+				|| (e.keyCode==19 && jQuery.browser.opera))
+				&& !verifForm_clicked
 			) {
+				verifForm_clicked = true;
 				jQuery(this).find('input[type=submit]')
 				.click();
 				return false;
@@ -299,7 +302,8 @@ function verifForm(racine) {
 		jQuery('form', racine||document)
 		.keydown(function(e){
 			//jQuery('#ps').after("<div>ctrl:"+e.ctrlKey+"<br />charcode:"+e.charCode+"<br />keycode:"+e.keyCode+"<hr /></div>");
-			if (!e.charCode && e.keyCode == 119 /* F8, windows */){
+			if (!e.charCode && e.keyCode == 119 /* F8, windows */ && !verifForm_clicked){
+				verifForm_clicked = true;
 				jQuery(this).find('input[type=submit]')
 				.click();
 				return false;
