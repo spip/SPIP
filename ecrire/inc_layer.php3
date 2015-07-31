@@ -106,7 +106,7 @@ function produire_acceder_couche($couches, $nom, $icone) {
 // Tests sur le nom du butineur
 //
 function verif_butineur() {
-	include_ecrire("inc_minipres.php");
+
 	global $HTTP_USER_AGENT, $browser_name, $browser_version;
 	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
 	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $HTTP_USER_AGENT, $match);
@@ -168,5 +168,13 @@ ondbclick='storeCaret(this);'");
 
 $GLOBALS['browser_verifForm'] = 	(eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) ?  "verifForm();" : "";
 
+function http_script($script, $src='', $noscript='') {
+	return '<script type="text/javascript"'
+		. ($src ? " src=\"$src\"" : '')
+		. ">"
+		. ($script ? "<!--\n$script\n//-->" : '')
+		. "</script>\n"
+		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
+}
 
 ?>
