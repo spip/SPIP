@@ -408,13 +408,6 @@ function recuperer_infos_distantes($source, $max=0) {
 // http://doc.spip.org/@init_http
 function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
-	$http_proxy = $GLOBALS['meta']["http_proxy"];
-	if (strncmp("http://", $http_proxy,7)!=0)
-		$http_proxy = '';
-	else
-		$via_proxy = " (proxy $http_proxy)";
-
-	spip_log("http $get $url$via_proxy");
 
 	$t = @parse_url($url);
 	$host = $t['host'];
@@ -426,6 +419,18 @@ function init_http($get, $url, $refuse_gz=false, $uri_referer = '') {
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	$query = $t['query'];
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
+
+	$http_proxy = $GLOBALS['meta']["http_proxy"];
+	$http_noproxy = $GLOBALS['meta']["http_noproxy"];
+
+	if (strncmp("http://", $http_proxy,7)!=0
+	    OR (strpos(" $http_noproxy ", " $host ") !== false)
+	    OR (strpos(" $http_noproxy ", ' ' . substr($host,(strpos($host,'.')) . ' ')) !== false))
+		$http_proxy = '';
+	else
+		$via_proxy = " (proxy $http_proxy)";
+
+	spip_log("http $get $url$via_proxy");
 
 	if ($http_proxy) {
 		$t2 = @parse_url($http_proxy);

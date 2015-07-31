@@ -67,7 +67,7 @@ function exec_config_fonctions_dist()
 
 	  $previsualiseur(), // Previsualisation sur le site public
 
-	  $relayeur(); // Proxy pour lire syndication & doc
+	  $relayeur(_request('retour_proxy')); // Proxy pour syndication & doc
 //
 // Choix supplementaires proposees par les plugins
 //
