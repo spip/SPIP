@@ -72,7 +72,7 @@ function aider_icone($url)
 
 	$t = _T('titre_image_aide');
 
-	return "\n&nbsp;&nbsp;<a class='aide'\nhref='"
+	return "\n&nbsp;<a class='aide'\nhref='"
 	.  $url
 	. "'\nonclick=\"javascript:window.open(this.href,"
 	. "'spip_aide', "
