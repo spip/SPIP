@@ -42,11 +42,14 @@ $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', $style);
 $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', $style);
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', $style);
 
-function http_calendrier_init($date='', $ltype='mois', $lechelle='', $lpartie_cal='', $script='')
+function http_calendrier_init($date='', $ltype='', $lechelle='', $lpartie_cal='', $script='')
 {
 	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
 
-	if (!isset($type)) $type = $ltype;
+	# valeurs par defaut
+	if (!$type
+	AND !($type = $ltype))
+		$type = 'mois';
 	if (!isset($echelle)) $echelle = $lechelle;
 	if (!isset($lpartie_cal)) $partie_cal = $lpartie_cal;
 	if (!$mois){

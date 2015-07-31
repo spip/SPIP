@@ -14,7 +14,9 @@
   // a partir de l'espace public. 
   // Evidemment les messages internes a la redaction seront absents.
 
-include((@is_dir("ecrire") ? 'ecrire/' : '') . "inc_version.php3");
+if (!defined("_ECRIRE_INC_VERSION")) {
+	include((@is_dir("ecrire") ? 'ecrire/' : '') . "inc_version.php3");
+}
 
 if (!_DIR_RESTREINT)
 	include ("inc.php3");
