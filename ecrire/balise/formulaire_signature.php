@@ -69,7 +69,7 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 			_request('signature_url_site'), _request('url_page')
 		);
 
-	return array('formulaire_signature', $GLOBALS['delais'],
+	return array('formulaires/formulaire_signature', $GLOBALS['delais'],
 	array(
 		'id_article' => $id_article,
 		'petition' => $petition,

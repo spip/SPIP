@@ -138,7 +138,7 @@ function login_pour_tous($login, $cible, $action) {
 	include_spip('inc/logos');
 
 	// Appeler le squelette formulaire_login
-	return array('formulaire_login', $GLOBALS['delais'],
+	return array('formulaires/formulaire_login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(
