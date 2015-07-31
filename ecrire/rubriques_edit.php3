@@ -8,6 +8,10 @@ if ($new=="oui"){
 	$query="INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
 	$result=spip_query($query);
 	$id_rubrique=mysql_insert_id();
+	
+	// Effacer une eventuelle rubrique creee en double
+	$query_eff = "DELETE FROM spip_rubriques WHERE titre='Nouvelle rubrique' AND id_rubrique != $id_rubrique";
+	$result_eff = spip_query($query_eff);
 }
 
 
