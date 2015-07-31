@@ -66,10 +66,12 @@ switch($op) {
 		else if ($id = intval($a['id_breve'])) {
 			$critere = "statut='publie' AND id_breve=$id";
 			$url = generer_url_breve($id);
-		} else if ($id = intval($a['id_rubrique']))
+		}
+		else if ($id = intval($a['id_rubrique'])) {
 			$critere = "statut='publie' AND id_rubrique=$id";
 			$url = generer_url_rubrique($id);
-		} else if ($id = intval($a['id_thread'])) {
+		}
+		else if ($id = intval($a['id_thread'])) {
 			$critere = "statut='publie' AND id_thread=$id";
 			$url = generer_url_forum($id);
 		}
