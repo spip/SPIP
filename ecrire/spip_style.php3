@@ -139,13 +139,15 @@ a.icone:hover { text-decoration: none; }
 a.spip_barre {
 	border: 0px solid #666666;
 	padding: 4px;
-	margin-right: 3px;
+	margin-right: 1px;
+	margin-left: 1px;
 	background: url(img_pack/pave-gris-16.png);
 }
 a.spip_barre:hover {
 	border: 0px solid #666666;
 	padding: 4px;
-	margin-right: 3px;
+	margin-right: 1px;
+	margin-left: 1px;
 	background: url(img_pack/pave-blanc-16.png);
 }
 

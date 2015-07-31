@@ -12,7 +12,7 @@ function test_barre() {
 	if ($browser_name == '') verif_butineur();
 
 	if (
-	(eregi("msie", $browser_name) AND $browser_version >= 5 AND $HTTP_UA_OS != 'MacOS')
+	(eregi("msie", $browser_name) AND $browser_version >= 5.5)
 	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5 AND $browser_rev >= 1.3)
 	)
 		return true;
@@ -47,14 +47,14 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
-	global $spip_lang, $flag_ecrire, $options;
+	global $spip_lang, $flag_ecrire, $options, $spip_lang_right, $spip_lang_left;
 
 	if (test_barre()) {
 		$ret = afficher_script_barre();
 		$champ = "document.$formulaire.$texte";
 		$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		$ret .= "<tr width='100%'>";
-		$ret .= "<td align='left' style='padding-top: 4px; padding-bottom: 2px;'>";
+		$ret .= "<td align='$spip_lang_left' style='padding-top: 4px; padding-bottom: 2px;'>";
 		$col++;
 
 		// Italique, gras, intertitres
@@ -86,10 +86,13 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-		$ret .= "<td align='right' style='padding-top: 4px; padding-bottom: 2px;'>";
+		$ret .= "<td align='$spip_lang_right' style='padding-top: 4px; padding-bottom: 2px;'>";
 		$col++;
-		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
+		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
+		}
+		else if ($spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets_de'), $formulaire, $texte);
 		}
 		else {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
@@ -109,7 +112,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= "<td> &nbsp; </td>";
 			$col++;
 
-			$ret .= "<td align='right' onMouseOver=\"helpline(_T('barre_aide_rac'),helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
+			$ret .= "<td align='$spip_lang_right' onMouseOver=\"helpline(_T('barre_aide_rac'),helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
 			$col++;
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= aide("raccourcis");
