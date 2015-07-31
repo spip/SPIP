@@ -178,8 +178,14 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 		$champs['langue_choisie'] = 'non';
 	}
 
-	if (isset($desc['field']['statut']))
-		$champs['statut'] = 'prepa';
+	if (isset($desc['field']['statut'])){
+		if (isset($desc['statut_textes_instituer'])){
+			$champs['statut'] = reset(array_keys($desc['statut_textes_instituer']));
+		}
+		else
+			$champs['statut'] = 'prepa';
+	}
+
 
 	if ((isset($desc['date']) AND $d=$desc['date']) OR isset($desc['field'][$d='date']))
 		$champs[$d] = date('Y-m-d H:i:s');
