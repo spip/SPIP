@@ -594,4 +594,12 @@ function autoriser_base_reparer($faire, $type, $id, $qui, $opts) {
 
 	return true;
 }
+
+/**
+ * Auto-association de documents a du contenu editorial qui le reference
+ * par defaut true pour tous les objets
+ */
+function autoriser_autoassocierdocument($faire, $type, $id, $qui, $opts) {
+	return true;
+}
 ?>
