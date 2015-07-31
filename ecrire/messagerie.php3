@@ -19,9 +19,9 @@ debut_gauche();
 
 debut_boite_info();
 
-echo propre("La messagerie vous permet d'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d'afficher des notes en marge de chaque page.");
+echo propre("La messagerie vous permet d'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d'afficher des annonces sur la page d'accueil de l'espace priv&eacute; (si vous &ecirc;tes administrateur).");
 
-echo propre(" <br><br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{vert}} indique les {{messages &eacute;chang&eacute;s entre utilisateurs}} du site.");
+echo propre(" <br><br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{vert}} indique les {{messages &eacute;chang&eacute;s avec d'autres utilisateurs}} du site.");
 
 echo aide ("messut");
 
