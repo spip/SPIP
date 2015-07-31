@@ -51,13 +51,11 @@ function action_legender_auteur_post($r)
 	$url_site = _request('url_site');
 
 	list($tout, $id_auteur, $ajouter_id_article,$x,$s, $n) = $r;
-
-
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
 	  $auteur = array();
-	  if ($id_auteur=intval(_request('id_auteur'))) {
+	  if ($id_auteur) {
 		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	  }
 	  if (!$auteur) {
@@ -134,7 +132,7 @@ function action_legender_auteur_post($r)
 			if (is_string($acces))
 				$acces = admin_general($auteur_session['id_auteur']);
 		}
-		
+
 		if ($ok OR $acces) {
 			$email = trim($email);	 
 			if ($email !='' AND !email_valide($email)) 
