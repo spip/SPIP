@@ -91,8 +91,10 @@ label {}
 .notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
 
 .install-plugins {position:relative;margin-bottom: 0;}
-.install-plugins + .install-plugins {margin-top: 0;border-top: 0;}
+.install-plugins.success + .install-plugins.success {margin-top: 0;border-top: 0;}
+.install-plugins.error + .install-plugins.error {margin-top: 0;border-top: 0;}
 .install-plugins .result {display:block;position:absolute;top:10px;right:10px;font-weight:bold;}
+.install-plugins.success {display: none;} /* ne pas afficher les installations ok mais seulement les echecs */
 
 /* Page de login
 ---------------------------------------------- */
