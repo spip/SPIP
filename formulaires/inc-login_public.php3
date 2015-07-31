@@ -92,6 +92,19 @@ function login_pour_tous($login, $cible, $action, $mode) {
 		$s = spip_query("SELECT * FROM spip_auteurs
 			WHERE login='" .addslashes($login) ."'");
 		$row =  spip_fetch_array($s);
+
+		// Retrouver ceux qui signent de leur nom ou email
+		if (!$row AND !$GLOBALS['ldap_present']) {
+			if ($t = spip_fetch_array(
+			spip_query(
+				"SELECT * FROM spip_auteurs
+				WHERE (nom LIKE '" .addslashes($login) ."'
+				OR email LIKE '" .addslashes($login) ."')
+				AND login<>'' AND statut<>'5poubelle'"
+			)))
+				$row = $t;
+		}
+
 		if ((!$row AND !$GLOBALS['ldap_present']) OR
 			($row['statut'] == '5poubelle') OR 
 			(($row['source'] == 'spip') AND $row['pass'] == '')) {

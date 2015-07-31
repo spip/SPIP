@@ -121,8 +121,7 @@ if ($essai_login == "oui") {
 	include_local(_FILE_CONNECT); // pour savoir si ldap est present 
 	if ($ldap_present) $auths[] = 'ldap';
 	$ok = false;
-	reset($auths);
-	while (list(, $nom_auth) = each($auths)) {
+	foreach ($auths as $nom_auth) {
 		include_ecrire("inc_auth_".$nom_auth.".php3");
 		$classe_auth = "Auth_".$nom_auth;
 		$auth = new $classe_auth;
