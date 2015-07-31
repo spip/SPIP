@@ -6,7 +6,9 @@
 		<traducteur nom="Xuacu" lien="http://trad.spip.net/auteur/xuacu" />
 	</langue>
 	<langue code="bg" />
-	<langue code="br" />
+	<langue code="br" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=br">
+		<traducteur nom="Kristen" lien="http://trad.spip.net/auteur/kristen" />
+	</langue>
 	<langue code="bs" />
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
