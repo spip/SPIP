@@ -115,10 +115,12 @@ if (strval($nom)!='') {
 	// mais pas des autres admins
 	if ($connect_statut == '0minirezo'
 	AND ($connect_toutes_rubriques OR $statut<>'0minirezo')) { 
+	  if (isset($email)) {
 		$email = trim($email);	 
 		if ($email !='' AND !email_valide($email)) 
 			$echec .= "<p>"._T('info_email_invalide');
 		$auteur['email'] = $email;
+	  }
 	}
 
 	if ($connect_id_auteur == $id_auteur) {
