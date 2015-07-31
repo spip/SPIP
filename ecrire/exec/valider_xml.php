@@ -155,17 +155,15 @@ function valider_resultats($res, $mode)
 }
 
 // http://doc.spip.org/@valider_script
-function valider_script($transformer_xml, $f, $dir, $ext)
+function valider_script($transformer_xml, $script, $dir, $ext)
 {
-// ne pas se controler soi-meme ni l'index du repertoire
-
-	$script = basename($f, '.php');
-	if ($script == _request('exec') OR $script=='index')
-		return array('/', 0, '', $script,''); 
-
+	$script = basename($script, '.php');
 	$dir = basename($dir);
 	$f = charger_fonction($script, $dir, true);
-	if(!$f) return false;
+// ne pas se controler soi-meme ni l'index du repertoire ni un fichier annexe
+	if ($script == _request('exec') OR $script=='index' OR !$f)
+		return array('/', 0, '', $script,''); 
+
 	list($texte, $err) = $transformer_xml($f, true);
 	$appel = '';
 	
