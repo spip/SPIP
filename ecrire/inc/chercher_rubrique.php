@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+define(_SPIP_SELECT_RUBRIQUES, 20); /* mettre 100000 pour desactiver ajax */
+
 //
 // Selecteur de rubriques pour l'espace prive
 // En entree :
@@ -29,11 +31,10 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
 	// - soit parce qu'avec IE ca plante et c'est penible
-	if (false /* mettre true pour desactiver ajax */
-	OR (($browser_name == "MSIE" AND floor($browser_version) < "7"))
+	if ((($browser_name == "MSIE" AND floor($browser_version) < "7"))
 	OR $_COOKIE['spip_accepte_ajax'] < 1
 	OR spip_num_rows(
-	spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 21")) < 20)
+	spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT ".intval(_SPIP_SELECT_RUBRIQUES+1))) < _SPIP_SELECT_RUBRIQUES)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 
 	else
