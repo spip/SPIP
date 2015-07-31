@@ -279,7 +279,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
-			$texte .= "\n	\$old_lang = \$GLOBLAS['spip_lang'];";
+			$texte .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
 			$corps .= "\n	\$GLOBAL['spip_lang'] = \$old_lang;";
 		}
 	}
