@@ -50,7 +50,7 @@ echo debut_droite('', true);
 // Vos articles en cours de redaction
 //
 
-	echo afficher_objets('article',_T('info_en_cours_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", 'ORDER BY' => "articles.date DESC"));
+	echo afficher_objets('article',_T('info_en_cours_validation'), 	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='prepa'", "ORDER BY" => "A.date DESC"));
 
 
 
@@ -58,13 +58,13 @@ echo debut_droite('', true);
 // Vos articles soumis au vote
 //
 
-	echo afficher_objets('article',_T('info_attente_validation'), array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop'", "ORDER BY" => "articles.date"));
+	echo afficher_objets('article',_T('info_attente_validation'), 	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='prop'", "ORDER BY" => "A.date DESC"));
 
 //
 // Vos articles publies
 //
 
-	echo afficher_objets('article',_T('info_publies'),	array("FROM" =>"spip_articles AS articles, spip_auteurs_articles AS lien ", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='publie'", 'ORDER BY' => "articles.date DESC"));
+	echo afficher_objets('article',_T('info_publies'), 	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='publie'", "ORDER BY" => "A.date DESC"));
 
 //
 //  Vos articles refuses

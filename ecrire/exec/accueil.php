@@ -410,7 +410,7 @@ function exec_accueil_dist()
 // Vos articles en cours 
 //
 
-	echo afficher_objets('article',afficher_plus_info(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
+	echo afficher_objets('article',afficher_plus_info(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='prepa'", "ORDER BY" => "A.date DESC"));
 
 	if ($spip_display == 4)
 	  echo colonne_droite_eq4($id_rubrique,
