@@ -805,6 +805,62 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 'meme_rubrique' => '($id_rubrique, $id, $type, $order="date", $limit=NULL, $ajax=false) {
 	$meme_rubrique = charger_fonction("meme_rubrique", "inc");
 	return $meme_rubrique($id_rubrique, $id, $type, $order, $limit, $ajax);
+  }
+',
+'afficher_liste' => '($largeurs, $table, $styles = \'\') { 
+	global $spip_display; 
+
+	if (!$table OR !is_array($table)) return ""; 
+
+	if ($spip_display != 4) { 
+			$res = \'\'; 
+			foreach ($table as $t) { 
+					$res .= afficher_liste_display_neq4($largeurs, $t, $styles); 
+			} 
+	} else { 
+			$res = "\n<ul style=\'text-align: $spip_lang_left; background-color: white;\'>"; 
+			foreach ($table as $t) { 
+					$res .= afficher_liste_display_eq4($largeurs, $t, $styles); 
+			} 
+			$res .= "\n</ul>"; 
+	} 
+
+	return $res; 
+  }
+',
+'afficher_liste_display_neq4' => '($largeurs, $t, $styles = \'\') {
+
+	global $browser_name;
+
+	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,\'tr_liste_over\');\" onmouseout=\"changeclass(this,\'tr_liste\');\"" :\'\');
+
+	reset($largeurs);
+	if ($styles) reset($styles);
+	$res =\'\';
+	while (list(, $texte) = each($t)) {
+		$style = $largeur = "";
+		list(, $largeur) = each($largeurs);
+		if ($styles) list(, $style) = each($styles);
+		if (!trim($texte)) $texte .= "&nbsp;";
+		$res .= "\n<td" .
+			($largeur ? (" style=\'width: $largeur" ."px;\'") : \'\') .
+			($style ? " class=\"$style\"" : \'\') .
+			">" . lignes_longues($texte) . "\n</td>";
+	}
+
+	return "\n<tr class=\'tr_liste\'$evt>$res</tr>"; 
+  }
+',
+'afficher_liste_display_eq4' => '($largeurs, $t, $styles = \'\') {
+
+	reset($largeurs);
+	while (list(, $texte) = each($t)) {
+		$largeur = "";
+		list(, $largeur) = each($largeurs);
+		if (!$largeur) $res .= $texte." ";
+	}
+
+	return "\n<li>$res</li>\n";
 }'
 ) as $f => $def) {
 	if (!function_exists($f)) {
