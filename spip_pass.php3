@@ -107,7 +107,7 @@ else if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (
 		echo _T('pass_forum_bla');
 	echo "\n<p>";
 
-	formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
+	echo formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
 }
 else {
 	install_debut_html(_T('pass_erreur'));
