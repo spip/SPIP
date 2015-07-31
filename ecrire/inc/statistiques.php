@@ -125,6 +125,22 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 }
 
 //
+// Recherche des articles pointes par le referer
+//
+function referes($referermd5) {
+	$refarts = spip_query("SELECT J2.id_article, J2.titre FROM spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article WHERE (referer_md5='$referermd5' AND J1.maj>=DATE_SUB(DATE_FORMAT(NOW(),'%Y-%m-%d'), INTERVAL 2 DAY)) ORDER BY titre");
+	$retarts = array();
+	while ($rowart = sql_fetch($refarts)) {
+		$id_article = $rowart['id_article'];
+		$titre_article = $rowart['titre'];
+		$retarts[] = "<a href='".generer_url_article($id_article)."'><i>".typo($titre_article)."</i></a>";
+	}
+	if (count($retarts) > 1) $r = '<br />&rarr; '.join(',<br />&rarr; ',$retarts);
+	if (count($retarts) == 1) $r = '<br />&rarr; '.$retarts[0];
+	return $r;
+}
+
+//
 // Afficher les referers d'un article (ou du site)
 //
 // http://doc.spip.org/@aff_referers
@@ -135,11 +151,9 @@ function aff_referers ($result, $limit, $plus) {
 	$nbvisites = array();
 	$aff = '';
 	while ($row = sql_fetch($result)) {
+		$referermd5 = $row['referer_md5'];
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
-		$id_article = $row['id_article'];
-		$titre_article = typo(interdire_scripts($row['titre']));
-		
 		$tmp = "";
 		
 		$buff = stats_show_keywords($referer, $referer);
@@ -147,7 +161,8 @@ function aff_referers ($result, $limit, $plus) {
 		if ($buff["host"]) {
 			$numero = substr(md5($buff["hostname"]),0,8);
 	
-			$nbvisites[$numero] = $nbvisites[$numero] + $visites;
+			
+			$nbvisites[$numero] += $visites;
 
 			if (strlen($buff["keywords"]) > 0) {
 				$criteres = substr(md5($buff["keywords"]),0,8);
@@ -164,16 +179,15 @@ function aff_referers ($result, $limit, $plus) {
 					$tmp = "/$tmp";
 			}
 
-			if ($tmp)
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"") . (($id_article > 0)?" &rarr; <a href='".generer_url_article($id_article)."'><i>$titre_article</i></a>":"");
-			else
+			if ($tmp) {
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":"").referes($referermd5);
+			} else {
 				$lesliensracine[$numero] += $visites;
+			}
 			$lesdomaines[$numero] = $buff["hostname"];
-			$lesreferes[$numero] = $id_article;
-			$lesreferestitre[$numero] = $titre_article;
+			$lesreferermd5[$numero] = $referermd5;
 			$lesurls[$numero] = $buff["host"];
 			$lesliens[$numero] = $referer;
-			
 		}
 	}
 	
@@ -183,9 +197,7 @@ function aff_referers ($result, $limit, $plus) {
 		$aff = '';
 		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
 			$dom =  $lesdomaines[$numero];
-			$id_article = $lesreferes[$numero];
-			$titre_article = $lesreferestitre[$numero];
-			
+			$referermd5 = $lesreferermd5[$numero];
 			if (!$dom) next;
 
 			$visites = pos($nbvisites);
@@ -203,8 +215,7 @@ function aff_referers ($result, $limit, $plus) {
 
 			if ($dom == "(email)") {
 				$aff .= $ret . $bouton . "<b>".$dom."</b>";
-			}
-			else {
+			} else {
 			  $n = isset($lesreferers[$numero]) ? count($lesreferers[$numero]) : 0;
 			  if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
 					$rac = isset($lesliensracine[$numero]);
@@ -224,7 +235,7 @@ function aff_referers ($result, $limit, $plus) {
 						if (!strpos($lien, '</a>')) $lien .= '</a>';
 					} else
 						$lien = "<a href='http://".$dom."'>".$dom."</a>";
-					$aff .= "<b>".quote_amp($lien)."</b>" . (($id_article > 0)?" &rarr; <a href='".generer_url_article($id_article)."'><i>$titre_article</i></a>":"");
+					$aff .= "<b>".quote_amp($lien)."</b>".referes($referermd5);
 				}
 			}
 			$aff .= "</li>\n";
