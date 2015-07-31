@@ -1,8 +1,8 @@
 <body class="#ENV{type-page,page}[(#ENV{type-page,page}|match{_edit$}|oui)edition][ #ENV{type-page,page}_(#ENV{composition,''})] [(#REM|init_body_class)]">
 	<INCLURE{fond=prive/squelettes/inclure/barre-nav,lang,recherche,plugins=(#REM|parametres_css_prive)}>
 	<div id="page">
-		[(#SESSION{id_auteur}|alertes_auteur)]
 		<INCLURE{fond=prive/objets/liste/auteurs_enligne}>
+		[(#SESSION{id_auteur}|alertes_auteur)]
 		<div class="largeur">
 			<div id="haut">
 				<div id="chemin">
