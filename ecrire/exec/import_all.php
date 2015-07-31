@@ -45,19 +45,18 @@ function verifier_sauvegarde ($archive, $dir) {
 	$buf_len = 1024; // la version doit etre dans le premier ko
 	$g = $dir . $archive;
 
-	if (@file_exists($g) AND $f = $_fopen($g, "rb")) {
-		$buf = $_fread($f, $buf_len);
-
-		if (ereg('<SPIP [^>]* version_base="([0-9.]+)".*version_archive="([^"]+)"', $buf, $regs)
-		AND $regs[1] == $spip_version
-		AND import_charge_version($regs[2], 'inc', true))
-			return false; // c'est bon
-		else
-			return _T('avis_erreur_version_archive', array('archive' => $archive));
-	} else
+	if (!(@file_exists($g) AND $f = $_fopen($g, "rb")))
 		return _T('avis_probleme_archive', array('archive' => $g));
-}
 
+	$buf = $_fread($f, $buf_len);
+
+	if (preg_match('/<SPIP\s+[^>]*version_base="([0-9.]+)"[^>]*version_archive="([^"]+)"/', $buf, $regs)
+	AND $regs[1] == $spip_version
+	AND import_charge_version($regs[2], 'inc', true))
+		return false; // c'est bon
+
+	return _T('avis_erreur_version_archive', array('archive' => $archive));
+}
 
 // http://doc.spip.org/@import_charge_version
 function import_charge_version($version_archive)
