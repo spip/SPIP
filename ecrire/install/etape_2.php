@@ -10,8 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// http://doc.spip.org/@inc_install_3
-function install_etape_3_dist()
+function install_etape_2_dist()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod, $table_prefix;
 	if (is_null($table_prefix)) {
@@ -104,7 +103,7 @@ function install_etape_3_dist()
 		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
 	}
 	
-	echo info_progression_etape(3,'etape_','install/');
+	echo info_progression_etape(2,'etape_','install/');
 	echo install_fin_html();
 }
 
