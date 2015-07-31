@@ -236,7 +236,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				$mode = 'document';
 
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant, mode, taille, largeur, hauteur, fichier)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant', '$mode', $taille, $largeur, $hauteur," . _q($chemin) .")");
+		$id_document = sql_insert("spip_documents", "(extension, titre, date, distant, mode, taille, largeur, hauteur, fichier)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant', '$mode', "._q($taille).", "._q($largeur).", "._q($hauteur)."," . _q($chemin) .")");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
@@ -247,7 +247,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			);
 		}
 	} else 	// Mise a jour des descripteurs d'un vieux doc
-		spip_query("UPDATE spip_documents SET taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier="._q($chemin) ." WHERE id_document=$id_document");
+		spip_query("UPDATE spip_documents SET taille="._q($taille).", largeur="._q($largeur)."', hauteur="._q($hauteur).", fichier="._q($chemin) ." WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
