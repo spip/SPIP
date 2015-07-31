@@ -242,7 +242,7 @@ function spip_mysql_showtable($nom_table)
 //
 
 // http://doc.spip.org/@spip_fetch_array
-function spip_fetch_array($r, $t=SPIP_BOTH) {
+function spip_fetch_array($r, $t=SPIP_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
