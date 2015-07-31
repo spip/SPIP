@@ -78,7 +78,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 	if ($keywords != '')
 	{
-		$buffer .= "(<b>" .trim(htmlspecialchars($keywords))."</b>)\n";
+		$buffer .= "(<b>" .trim(htmlspecialchars(stripslashes($keywords)))."</b>)\n";
 	}
 
 	return( $buffer );
