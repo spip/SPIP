@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions');
 
 //
 // Changer la langue courante
@@ -138,6 +137,7 @@ function changer_typo($lang = '') {
 //
 // http://doc.spip.org/@menu_langues
 function menu_langues($nom_select) {
+	include_spip('inc/actions');
 
 	$ret = liste_options_langues($nom_select);
 
@@ -265,7 +265,10 @@ function verifier_lang_url() {
 //
 // http://doc.spip.org/@utiliser_langue_site
 function utiliser_langue_site() {
-	return changer_langue(@$GLOBALS['meta']['langue_site']);//@:install
+	if (isset($GLOBALS['meta']['langue_site'])
+	  AND $GLOBALS['spip_lang']!=$GLOBALS['meta']['langue_site'])
+		return changer_langue($GLOBALS['meta']['langue_site']);//@:install
+	return $GLOBALS['spip_lang'];
 }
 
 // http://doc.spip.org/@utiliser_langue_visiteur
