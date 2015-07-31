@@ -41,11 +41,12 @@
 </table>
 <hr /> 
 <table border='1' width='100%'>
-<tr><td colspan=2 align=center>Balises interdites hors boucle </td></tr>
+<tr><td colspan=2 align=center>Balises spécialement dans une boucle </td></tr>
 <tr><td>&#35;POINTS</td><td><BOUCLE_POINTS(ARTICLES){1,1}{recherche}>#POINTS</BOUCLE_POINTS></td></tr>
 <tr><td>&#35;TOTAL_BOUCLE</td><td><BOUCLE_TOTAL_BOUCLE(AUTEURS)> #TOTAL_BOUCLE</BOUCLE_TOTAL_BOUCLE></td></tr>
 <tr><td>&#35;COMPTEUR_BOUCLE</td><td><BOUCLE_COMPTEUR_BOUCLE(AUTEURS)> #COMPTEUR_BOUCLE</BOUCLE_COMPTEUR_BOUCLE></td></tr>
 <tr><td>&#35;EXPOSER</td><td><BOUCLE_EXPOSER(ARTICLES){1,1}> #EXPOSER</BOUCLE_EXPOSER></td></tr>
+<tr><td>&#35;LESAUTEURS</td><td><BOUCLE_LESAUTEURS(pgsql:ARTICLES){1,1}> #LESAUTEURS</BOUCLE_LESAUTEURS></td></tr>
 <tr><td>{titre=&#35;NOM_SITE_SPIP}</td><td><BOUCLE_TITRE2(ARTICLES){id_rubrique}{id_article=#NOM_SITE_SPIP}{"<br />"}>#ID_ARTICLE #TITRE #NOM_SITE_SPIP</BOUCLE_TITRE2></td></tr>
 <tr><td>{id_article=&#35;ID_RUBRIQUE}</td><td><BOUCLE1(RUBRIQUES){par id_rubrique}><BOUCLE_TITRE1(ARTICLES){id_rubrique}{id_article=#ID_RUBRIQUE}{"<br />"}>#ID_RUBRIQUE #ID_ARTICLE </BOUCLE_TITRE1><br />#TOTAL_BOUCLE</B_TITRE1> </BOUCLE1></td></tr>
 <tr><td>{titre=&#35;TITRE*}</td><td><BOUCLE3(RUBRIQUES){par id_rubrique}><BOUCLE_TITRE3(ARTICLES){id_rubrique}{id_article=#TITRE*}{"<br />"}>#ID_RUBRIQUE #TITRE #ID_ARTICLE </BOUCLE_TITRE3></B_TITRE3> </BOUCLE3></td></tr>

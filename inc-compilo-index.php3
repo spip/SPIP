@@ -29,6 +29,7 @@ class Boucle {
 	var $cond_avant, $milieu, $cond_apres, $cond_altern;
 	var $lang_select;
 	var $type_requete;
+	var $sql_serveur;
 	var $param;
 	var $separateur;
 	var $doublons;
@@ -108,7 +109,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		$desc = $tables_principales[$t];
 		if (!$desc) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_L("Table SQL $r absente de \$tables_principales dans inc_serialbase"), "'$idb'");
+			erreur_squelette(_L("Table SQL \"$r\" absente de \$tables_principales dans inc_serialbase"), "'$idb'");
 		}
 		$excep = $exceptions_des_tables[$r][$c];
 		if ($excep) {

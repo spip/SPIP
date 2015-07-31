@@ -111,11 +111,12 @@ foreach($table_des_tables as $k => $v)
 }
 
 $fond = "lagaffe";
-if (!($f = fopen($GLOBALS['dossier_squelettes'] . $fond. ".html",'w')))
+$nom = $GLOBALS['dossier_squelettes'] . $fond. ".html";
+if (!($f = fopen($nom, 'w')))
   {if (function_exists("php_sapi_name")  AND eregi("cgi", @php_sapi_name()))
       Header("Status: 503");
     else Header("HTTP/1.0 Service Unavailable");
-    echo ("impossible d'écrire le fichier de tests");
+    echo ("impossible d'écrire le fichier de tests $nom");
     exit;
   }
 fwrite($f, $res);

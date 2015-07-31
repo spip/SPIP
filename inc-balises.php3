@@ -250,7 +250,7 @@ function balise_RECHERCHE_dist($p) {
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
 		include_local("inc-admin.php3");
-		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
+		erreur_squelette(_L("Champ #COMPTEUR_BOUCLE hors boucle"), $p->id_boucle);
 		$p->code = "''";
 	} else {
 		$p->code = '$compteur_boucle';
@@ -472,10 +472,17 @@ function balise_LESAUTEURS_dist ($p) {
 	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][\'lesauteurs\']') {
 		$p->code = $_lesauteurs;
 	} else {
-		$_id_article = champ_sql('id_article', $p);
-
-		# On pourrait mieux faire qu'utiliser cette fonction assistante ?
-		$p->code = "sql_auteurs($_id_article)";
+		$nom = $p->id_boucle;
+	# On pourrait mieux faire qu'utiliser cette fonction assistante ?
+		$p->code = "sql_auteurs(" .
+			champ_sql('id_article', $p) .
+			",'" .
+			$nom .
+			"','" .
+			$p->boucles[$nom]->type_requete .
+			"','" .
+			$p->boucles[$nom]->sql_serveur .
+			"')";
 	}
 
 	$p->statut = 'html';
@@ -487,8 +494,16 @@ function balise_LESAUTEURS_dist ($p) {
 // Champ testant la presence d'une petition
 // non documente ???
 function balise_PETITION_dist ($p) {
-	$_id_article = champ_sql('id_article', $p);
-	$p->code = 'sql_petitions($_id_article)';
+	$nom = $p->id_boucle;
+	$p->code = "sql_petitions(" .
+			champ_sql('id_article', $p) .
+			",'" .
+			$nom .
+			"','" .
+			$p->boucles[$nom]->type_requete .
+			"','" .
+			$p->boucles[$nom]->sql_serveur .
+			"')";
 	$p->statut = 'php';
 	return $p;
 }
@@ -707,10 +722,20 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 //
 function balise_FORMULAIRE_SIGNATURE_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
+	$nom = $p->id_boucle;
+	$code = "sql_petitions(" .
+			$_id_article .
+			",'" .
+			$nom .
+			"','" .
+			$p->boucles[$nom]->type_requete .
+			"','" .
+			$p->boucles[$nom]->sql_serveur .
+			"')";
 
-	$p->code = '(!($petition = sql_petitions('.
-		$_id_article .
-		')) ? "" : ("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); 
+	$p->code = '(!($petition = '.
+		$code .
+		') ? "" : ("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); 
 echo formulaire_signature(".' .
 		$_id_article .
 		'.", \'".texte_script(serialize($petition))."\'); lang_dselect(); ?".">"))';
@@ -741,5 +766,18 @@ function balise_FORMULAIRE_ADMIN_dist($p) {
 	return $p;
 }
 
-
+function balise_HTTP_dist($p) {
+	if (is_array($p->fonctions)) {
+		foreach($p->fonctions as $nom) {
+			if (is_numeric($nom))
+				$p->code = " http_status($nom);";
+			else
+				$p->code = " header($nom);";
+		}
+		$p->code = '("<" . "?php ' . $p->code . ' ?" . ">")';
+		$p->fonctions = array();
+	}
+	$p->statut = 'php';
+	return $p;
+}
 ?>
