@@ -22,7 +22,7 @@ function exec_fond_dist(){
 	// c'est au fond de les gerer avec #AUTORISER, et de renvoyer un fond vide le cas echeant
 	// qui declenchera un minipres acces interdit
 	$exec = _request('exec');
-	$fond = trim(recuperer_fond("prive/exec/$exec",$_GET));
+	$fond = trim(recuperer_fond("prive/exec/$exec",$_REQUEST));
 	if (!$fond) {
 		include_spip('inc/minipres');
 		echo minipres();
