@@ -54,6 +54,10 @@ function copier_document($ext, $orig, $source) {
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
 
+	// ne pas accepter de noms de la forme -r90.jpg qui sont reserves
+	// pour les images transformees par rotation (action/documenter)
+	$dest = preg_replace(',-r(90|180|270)$,', '', $dest);
+
 	// Si le document "source" est deja au bon endroit, ne rien faire
 	if ($source == ($dir . $dest . '.' . $ext))
 		return $source;
