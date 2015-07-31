@@ -356,10 +356,4 @@ function recuperer_fond($fond, $contexte=array()) {
 	return $page['texte'];
 }
 
-// export ahah de fragments de squelettes
-function exporter_fragment($ahah){
-	header('Content-Type: text/html; charset='.$GLOBALS['meta']['charset']);
-	eval('?'.'>'.$ahah);
-	exit;
-}
 ?>
