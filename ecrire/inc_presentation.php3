@@ -355,7 +355,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
 		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
-	global $connect_id_auteur, $connect_statut;
+	global $connect_id_auteur, $connect_statut, $dir_lang;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
@@ -458,7 +458,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif>".typo($titre)."</a>";
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif><span $dir_lang>".typo($titre)."</span></a>";
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
 			if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
@@ -1699,7 +1699,7 @@ function gros_titre($titre, $ze_logo=''){
 	
 	echo "<div>";
 	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='' border=0 align='middle'> &nbsp; ";
-	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='Verdana,Arial,Helvetica,sans-serif' color='$couleur_foncee'><b>";
+	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='Verdana,Arial,Helvetica,sans-serif' color='$couleur_foncee' ".$GLOBALS['dir_lang']."><b>";
 	echo typo($titre);
 	echo "</b></font></span></div>\n";
 }
