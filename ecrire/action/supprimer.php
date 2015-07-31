@@ -89,6 +89,18 @@ function action_supprimer_auteur_rubrique($arg)
 {
 	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r))
 		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=".$r[1]." AND id_rubrique=" . $r[2]);
-	else spip_log("$arg pas compris");
+	else spip_log("action_supprimer_auteur_rubrique $arg pas compris");
+}
+
+function action_supprimer_auteur_article($arg)
+{
+	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r)) {
+		spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur=".$r[1]." AND id_article=" . $r[2]);
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+			include_spip("inc/indexation");
+			marquer_indexer('article', $r[2]);
+		}
+	}
+	else spip_log("action_supprimer_auteur_article $arg pas compris");
 }
 ?>
