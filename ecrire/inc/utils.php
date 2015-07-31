@@ -97,7 +97,7 @@ function include_spip($f, $include = true) {
 // appel unitaire d'une fonction du pipeline
 // utilisee dans le script pipeline precompile
 // http://doc.spip.org/@minipipe
-function minipipe($fonc,$val){
+function minipipe($fonc,&$val){
 
 	// fonction
 	if (function_exists($fonc))
