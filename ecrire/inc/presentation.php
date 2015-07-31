@@ -1809,9 +1809,9 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$limit = $n - $limit;
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
+	$type = 'rubrique_' . $table;
 
 	if (_MODE_MEME_RUBRIQUE == 'oui') {
-		$type = 'rubrique_' . $table;
 		$statut = 'prop';// arbitraire
 		$puce_rubrique = puce_statut_article(0, $statut, $id_rubrique, $type).'&nbsp;';
 	}
