@@ -21,9 +21,7 @@ function exec_forum_envoi_dist()
 {
 global
   $adresse_retour,
-  $connect_email,
   $connect_id_auteur,
-  $connect_nom,
   $id_article,
   $id_breve,
   $id_message,
@@ -50,7 +48,6 @@ global
 if ($modif_forum != "oui")
         $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
 
-$nom = corriger_caracteres($connect_nom);
 $adresse_retour = rawurldecode($adresse_retour);
 
 if ($valider_forum AND ($statut!='')) {
@@ -65,8 +62,8 @@ if ($valider_forum AND ($statut!='')) {
 	'".addslashes($url_site)."',
 	'".addslashes($statut)."',
 	$connect_id_auteur,
-	'".addslashes($nom)."',
-	'$connect_email',
+	'".addslashes($GLOBALS['auteur_session']['nom'])."',
+	'".addslashes($GLOBALS['auteur_session']['email'])."',
 	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',
 	'$id_message', '$id_syndic')");
 

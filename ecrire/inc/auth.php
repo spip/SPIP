@@ -36,9 +36,7 @@ function inc_auth_dist() {
 	global $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
-	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
-	global $connect_nom_site, $connect_url_site, $connect_login, $connect_pass;
-	global $connect_activer_imessage;
+	global $connect_id_auteur, $connect_login, $connect_pass;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
 	global $auteur_session, $prefs;
@@ -115,15 +113,9 @@ function inc_auth_dist() {
 
 	if ($row = spip_fetch_array($result)) {
 		$connect_id_auteur = $row['id_auteur'];
-		$connect_nom = $row['nom'];
-		$connect_bio = $row['bio'];
-		$connect_email = $row['email'];
-		$connect_nom_site = $row['nom_site'];
-		$connect_url_site = $row['url_site'];
 		$connect_login = $row['login'];
 		$connect_pass = $row['pass'];
 		$connect_statut = $row['statut'];
-		$connect_activer_imessage = "oui "; //$row["imessage"];
 
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.
