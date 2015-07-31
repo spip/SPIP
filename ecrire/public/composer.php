@@ -38,7 +38,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	//  si deja en memoire (INCLURE  a repetition) c'est bon.
 
 	if (function_exists($nom)) return array($nom);
-	spip_log("composer $nom a fabriquer");
+
 	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
 		$GLOBALS['debug_objets']['courant'] = $nom;
 

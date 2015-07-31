@@ -166,6 +166,12 @@ AND $l = @unserialize($l)) {
 	}
 }
 
+if (_request('formulaire_action') AND _request('formulaire_action_args')) {
+	include_spip('public/assembler');
+	if (traiter_formulaires_dynamiques()) exit;
+ }
+
+
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
