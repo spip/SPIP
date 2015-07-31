@@ -1825,7 +1825,9 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= '	$query = $instance->requete;
 	$result = @spip_query($query);
 	if (!$result) {
-		$retour .= "<blink>BOUCLE'.$id_boucle.'</blink> <small><i>$query</i></small> <blink>BOUCLE'.$id_boucle.'</blink>"; // debugger les squelettes
+		$retour .= "<blink>BOUCLE'.$id_boucle.'</blink> <small><i>$query</i> ";
+		$retour .= "-> ".mysql_error();
+		$retour .= "</small> <blink>BOUCLE'.$id_boucle.'</blink>"; // debugger les squelettes
 	}
 	$total_boucle = @mysql_num_rows($result);
 	$pile_boucles[$id_instance]->num_rows = $total_boucle;
