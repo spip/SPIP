@@ -60,7 +60,7 @@ function ajax_retour($corps, $content_type = null){
 	if (isset($_COOKIE['spip_admin'])
 	    AND ((_request('var_mode')=='debug') OR !empty($GLOBALS['tableau_des_temps'])))
 		$e = erreur_squelette();
-	if (isset($GLOBALS['transformer_xml']) OR $GLOBALS['exec']=='valider_xml'){
+	if (isset($GLOBALS['transformer_xml']) OR (isset($GLOBALS['exec']) AND $GLOBALS['exec']=='valider_xml')){
 		$debut = _DOCTYPE_ECRIRE
 		         ."<html><head><title>Debug Spip Ajax</title></head>"
 		         ."<body><div>\n\n"
