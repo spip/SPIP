@@ -1070,7 +1070,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		else echo debut_block_invisible($block);
 
 		echo "<b>"._T('info_vignette_personnalisee')."</b>";
-		echo "<center>$largeur_vignette &#215; $hauteur_vignette "._T('info_pixels')."</center>";
+		echo "<center>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette))."</center>";	
 		if ($flag_modif)
 			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a href='#$ancre'>"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 		echo fin_block();
@@ -1620,7 +1620,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else  echo debut_block_invisible($block);
 
 		if (ereg(",$id_document,", $doublons)) echo $raccourci_doc;
-		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>$largeur &#215; $hauteur "._T('info_pixels')."<br /></font></div>\n";
+		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>",
+		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette)),
+		  "<br /></font></div>\n";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
