@@ -486,7 +486,8 @@ function statistiques_par_mois($entrees, $script){
 
 	$all = '';
 
-	while (list($key, $value) = each($entrees)) {
+	foreach($entrees as $key=>$value) {
+		$key = substr($key,0,4).'-'.substr($key,4,2);
 		$mois = affdate_mois_annee($key);
 		if ($decal == 30) $decal = 0;
 		$decal ++;
