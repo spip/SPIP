@@ -10,6 +10,53 @@ include_ecrire ("inc_admin.php3");
 
 
 //
+// Vignette pour les documents lies
+//
+
+function vignette_par_defaut($type_extension) {
+	if ($GLOBALS['flag_ecrire'])
+		$img = "../IMG/icones";
+	else
+		$img = "IMG/icones";
+
+	$filename = "$img/$type_extension";
+
+	// Glurps !
+	if (@file_exists($filename.'.png')) {
+		$vig = "$filename.png";
+	}
+	else if (@file_exists($filename.'.gif')) {
+		$vig = "$filename.gif";
+	}
+	else if (@file_exists($filename.'-dist.png')) {
+		$vig = "$filename-dist.png";
+	}
+	else if (@file_exists($filename.'-dist.gif')) {
+		$vig = "$filename-dist.gif";
+	}
+	else if (@file_exists("$img/defaut.png")) {
+		$vig = "$img/defaut.png";
+	}
+	else if (@file_exists("$img/defaut.gif")) {
+		$vig = "$img/defaut.gif";
+	}
+	else if (@file_exists("$img/defaut-dist.png")) {
+		$vig = "$img/defaut-dist.png";
+	}
+	else if (@file_exists("$img/defaut-dist.gif")) {
+		$vig = "$img/defaut-dist.gif";
+	}
+
+	if ($size = @getimagesize($vig)) {
+		$largeur = $size[0];
+		$hauteur = $size[1];
+	}
+
+	return array($vig, $largeur, $hauteur);
+}
+
+
+//
 // Integration (embed) multimedia
 //
 
@@ -146,6 +193,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 function integre_image($id_document, $align, $type_aff = 'IMG') {
 	global $id_doublons;
+	global $flag_ecrire;
 
 	$id_doublons['documents'] .= ",$id_document";
 
@@ -163,9 +211,6 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
 
-		// type d'affichage : IMG, DOC
-		$affichage_detaille = (strtoupper($type_aff) == 'DOC');
-
 		// on construira le lien en fonction du type de doc
 		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
 		if ($type = @spip_fetch_object($result_type)) {
@@ -180,6 +225,11 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$fichier_vignette = generer_url_document($id_vignette);
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
+
+				// verifier l'existence du fichier correspondant sinon le recreer
+				$path = ($flag_ecrire?'../':'') . $fichier_vignette;
+				if (!@file_exists($path) AND (!$flag_ecrire OR !@file_exists('../IMG/test.jpg')))
+					$fichier_vignette = '';
 			}
 		}
 		else if ($mode == 'vignette') {
@@ -188,11 +238,9 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$hauteur_vignette = $hauteur;
 		}
 
-		// si pas de vignette, utiliser la vignette par defaut du type du document
-		if (!$fichier_vignette) {
-			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
-		}
-
+		// si pas de vignette, essayer de creer une preview
+		if (!$fichier_vignette)
+			$fichier_vignette = ($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
 
 		if ($type_aff=='fichier_vignette')
 			return $fichier_vignette;
@@ -221,7 +269,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$vignette = "<a href='$fichier'>$vignette</a>";
 
 		// si affichage detaille ('DOC'), ajouter une legende
-		if ($affichage_detaille) {
+		if (strtoupper($type_aff) == 'DOC') {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = spip_query($query_type);
 			if ($row_type = @spip_fetch_array($result_type)) {

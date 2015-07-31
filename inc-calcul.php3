@@ -95,53 +95,6 @@ function cherche_image($id_objet, $type_objet) {
 	return $image;
 }
 
-
-function image_document($id_document){
-	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
-	$result = spip_query($query);
-	if ($row = spip_fetch_array($result)) {
-		$id_document = $row['id_document'];
-		$id_type = $row['id_type'];
-		$titre = propre($row ['titre']);
-		$descriptif = propre($row['descriptif']);
-		$fichier = generer_url_document($id_document);
-		$largeur = $row['largeur'];
-		$hauteur = $row['hauteur'];
-		$taille = $row['taille'];
-		$mode = $row['mode'];
-		$id_vignette = $row['id_vignette'];
-
-		// recuperer la vignette pour affichage inline
-		if ($id_vignette) {
-			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
-			$result_vignette = spip_query($query_vignette);
-			if ($row_vignette = @spip_fetch_array($result_vignette)) {
-				$fichier_vignette = generer_url_document($id_vignette);
-				$largeur_vignette = $row_vignette['largeur'];
-				$hauteur_vignette = $row_vignette['hauteur'];
-			}
-		}
-		else if ($mode == 'vignette') {
-			$fichier_vignette = $fichier;
-			$largeur_vignette = $largeur;
-			$hauteur_vignette = $hauteur;
-		}
-		// si pas de vignette, utiliser la vignette par defaut du type du document
-		if (!$fichier_vignette) {
-			// on construira le lien en fonction du type de doc
-			$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
-			if ($type = @spip_fetch_object($result_type)) {
-				$extension = $type->extension;
-			}
-			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
-		}
-
-		$image[0] = $fichier_vignette;
-		return $image;
-	}
-
-}
-
 function image_article($id_article){
 	return cherche_image($id_article,'art');
 }

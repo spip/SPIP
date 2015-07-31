@@ -87,6 +87,8 @@ function afficher_logo($racine, $titre) {
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 
+	include_ecrire('inc_admin.php3');
+
 	$redirect = $clean_link->getUrl();
 	$logo = get_image($racine);
 	if ($logo) {
@@ -190,11 +192,13 @@ function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $p
 	while (list(,$fmt) = each ($formats_lecture))
 		if (@file_exists($destination.'.'.$fmt)) {
 			$vignette = $destination.'.'.$fmt;
-			@unlink($vignette);
+			if ($force) @unlink($vignette);
 		}
 
 	// utiliser le cache ?
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
+
+		$creation = true;
 
 		// Calculer le ratio
 		if (!$srcsize = @getimagesize($image)) return;
@@ -290,11 +294,45 @@ function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $p
 	}
 
 	$size = @getimagesize($vignette);
-	$retour['width'] = $size[0];
-	$retour['height'] = $size[1];
+	$retour['width'] = $largeur = $size[0];
+	$retour['height'] = $hauteur = $size[1];
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
 
+
+	// mettre a jour la base si creation
+	if ($creation AND $vignette) {
+		if ($format == "jpg") $format = 1;
+		else if ($format == "png") $format = 2;
+		else if ($format == "gif") $format = 3;
+
+		$taille = @filesize($vignette);
+		$vignette = str_replace('../', '', $vignette);
+		$image = str_replace('../', '', $image);
+
+		spip_log("creation vignette($image) -> $vignette");
+
+		if ($t = spip_query("SELECT id_vignette, id_document FROM spip_documents WHERE fichier='".addslashes($image)."'"))
+		if ($row = spip_fetch_array($t)) {
+			$id_document = $row['id_document'];
+			if (!$id_vignette = $row['id_vignette']) {
+				spip_query("INSERT INTO spip_documents (mode) VALUES ('vignette')");
+				$id_vignette = spip_insert_id();
+				spip_query("UPDATE spip_documents SET id_vignette=$id_vignette WHERE id_document=$id_document");
+			}
+			spip_query("UPDATE spip_documents SET
+				id_type = '$format',
+				largeur = '$largeur',
+				hauteur = '$hauteur',
+				taille = '$taille',
+				fichier = '$vignette',
+				date = NOW()
+				WHERE id_document = $id_vignette");
+			spip_log("(document=$id_document, vignette=$id_vignette)");
+		}
+	}
+
+	// renvoyer l'image
 	return $retour;
 }
 
