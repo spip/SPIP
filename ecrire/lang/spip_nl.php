@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuleren',
 	'antispam_champ_vide' => 'Gelieve dit veld leeg te laten :',
 	'articles_recents' => 'Meest recente artikels',
+	'avis_1_erreur_saisie' => 'Er zit één fout in de ingevoerde gegevens, controleren a.u.b.',
 	'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 	'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
 	'avis_attention' => 'OPGELET!',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'SQL fout',
 	'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Probleem met toegang tot het private gedeelden.',
+	'avis_nb_erreurs_saisie' => 'Er zitten @nb@  fouten in de ingevoerde gegevens, controleren a.u.b.',
 
 	// B
 	'barre_a_accent_grave' => 'Hoofdletter A met accent grave toevoegen',
