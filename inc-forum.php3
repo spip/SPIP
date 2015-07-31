@@ -176,9 +176,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		  "\n<br />" .
 		  _T('forum_votre_email') .
 		  "\n<br />" .
-		  boutonne('text', "class='forml' size='40'$disabled",
-			   'email_auteur',
-			   entites_html($email_auteur)) .
+		  boutonne('text', 'email_auteur', entites_html($email_auteur),
+			   "class='forml' size='40'$disabled") .
 		  "</div>\n<br /><div align='right'>" .
 		  boutonne('submit', '',  _T('forum_voir_avant'), "class='spip_bouton'") . 
 		  "</div>\n</form>")));
