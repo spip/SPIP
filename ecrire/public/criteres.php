@@ -787,7 +787,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	$total_parties = $boucles[$id_boucle]->total_parties;
 
 	preg_match(",([+-/p])([+-/])?,", $mode, $regs);
-	list(, $op1, $op2) = $regs;
+	list(, $op1, $op2) = array_pad($regs, 3, null);
 	$nombre_boucle = "\$Numrows['$id_boucle']['total']";
 	// {1/3}
 	if ($op1=='/'){
