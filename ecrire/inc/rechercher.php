@@ -244,13 +244,12 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 			)
 		) {
 			foreach ($joints as $jtable => $jj) {
-				$s = spip_query(
-				"SELECT ".id_table_objet($table).", ".id_table_objet($jtable)
-				." FROM spip_${jtable}s_${table}s"
-				." WHERE ". calcul_mysql_in('id_'.${jtable}, array_keys($jj)));
+				$it = id_table_objet($table);
+				$ij =  id_table_objet($jtable);
+				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", calcul_mysql_in('id_'.${jtable}, array_keys($jj)));
 				while ($t = sql_fetch($s)) {
-					$id = $t[id_table_objet($table)];
-					$joint = $jj[$t[id_table_objet($jtable)]];
+					$id = $t[$it];
+					$joint = $jj[$t[$ij]];
 					if (!isset($results[$table]))
 						$results[$table] = array();
 					if (!isset($results[$table][$id]))
