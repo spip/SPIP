@@ -19,12 +19,21 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Point d'entrée pour la modification d'un article
+ * Action d'édition d'un article dans la base de données dont
+ * l'identifiant est donné en paramètre de cette fonction ou
+ * en argument de l'action sécurisée
+ *
+ * Si aucun identifiant n'est donné, on crée alors un nouvel article,
+ * à condition que la rubrique parente (id_rubrique) puisse être obtenue
+ * (avec _request())
  * 
  * @link http://doc.spip.org/@action_editer_article_dist
- * @param string $arg 
- *    identifiant de l'article ou 'new' lors d'une création d'article
+ * 
+ * @param null|int $arg
+ *     Identifiant de l'article. En absence utilise l'argument
+ *     de l'action sécurisée.
  * @return array
+ *     Liste (identifiant de l'article, Texte d'erreur éventuel)
  */
 function action_editer_article_dist($arg=null) {
 	include_spip('inc/autoriser');
@@ -56,13 +65,20 @@ function action_editer_article_dist($arg=null) {
 }
 
 /**
- * Appelle toutes les fonctions de modification d'un article
- * La variable de retour est une chaine de langue en cas d'erreur, ou est vide sinon
+ * Modifier un article
  * 
- * @link http://doc.spip.org/@articles_set
+ * Appelle toutes les fonctions de modification d'un article
+ * 
  * @param int $id_article
- * @param null $set
- * @return string
+ *     Identifiant de l'article à modifier
+ * @param array|null $set
+ *     Couples (colonne => valeur) de données à modifier.
+ *     En leur absence, on cherche les données dans les champs éditables
+ *     qui ont été postés (via _request())
+ * @return string|null
+ *     Chaîne vide si aucune erreur,
+ *     Null si aucun champ à modifier,
+ *     Chaîne contenant un texte d'erreur sinon.
  */
 function article_modifier($id_article, $set=null) {
 
@@ -106,17 +122,35 @@ function article_modifier($id_article, $set=null) {
 }
 
 /**
- * Inserer un nouvel article en base
+ * Insérer un nouvel article en base de données
  * 
- * @link http://doc.spip.org/@insert_article
- * @param int $id_rubrique
+ * En plus des données enregistrées par défaut, la fonction :
+ * - retrouve un identifiant de rubrique pour stocker l'article (la
+ *   première rubrique racine) si l'identifiant de rubrique transmis est
+ *   nul.
+ * - calcule la langue de l'article, soit
+ *   - d'après la langue de la rubrique si les articles ne sont pas
+ *     configurés comme pouvant être traduits,
+ *   - d'après la langue de l'auteur en cours si les articles peuvent être traduits et
+ *     si la langue de l'auteur est acceptée en tant que langue de traduction
+ * - crée une liaison automatiquement entre l'auteur connecté et l'article
+ *   créé, de sorte que la personne devient par défaut auteur de l'article
+ *   qu'elle crée.
+ *   
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
+ *
  * @global array $GLOBALS['meta']
  * @global array $GLOBALS['visiteur_session']
  * @global string $GLOBALS['spip_lang']
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique parente
  * @return int
+ *     Identifiant du nouvel article
+ * 
  */
 function article_inserer($id_rubrique) {
-
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -192,18 +226,26 @@ function article_inserer($id_rubrique) {
 
 
 /** 
- * Modification d'un article
+ * Modification des statuts d'un article
+ *
+ * Modifie la langue, la rubrique ou les statuts d'un article.
  * 
- * 
- * @link http://doc.spip.org/@instituer_article
- * @param int $id_article 
- * @param array $c 
- *    un array ('statut', 'id_parent' = changement de rubrique)
- *    statut et rubrique sont lies, car un admin restreint peut deplacer
- *    un article publie vers une rubrique qu'il n'administre pas
- * @param bool $calcul_rub
  * @global array $GLOBALS['meta'] 
+ *
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article
+ * @param array $c
+ *     Couples (colonne => valeur) des données à instituer
+ *     Les colonnes 'statut' et 'id_parent' sont liées, car un admin restreint
+ *     peut deplacer un article publié vers une rubrique qu'il n'administre pas
+ * @param bool $calcul_rub
+ *     True pour changer le statut des rubriques concernées si un article
+ *     change de statut ou est déplacé dans une autre rubrique
  * @return string
+ *     Chaîne vide
  */
 function article_instituer($id_article, $c, $calcul_rub=true) {
 
@@ -276,7 +318,6 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 	if (!count($champs)) return '';
 
 	// Envoyer les modifs.
-
 	editer_article_heritage($id_article, $id_rubrique, $statut_ancien, $champs, $calcul_rub);
 
 	// Invalider les caches
@@ -316,16 +357,24 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 }
 
 /**
- * fabrique la requete de modification de l'article, avec champs herites
- * 
- * @link http://doc.spip.org/@editer_article_heritage
- * @param int $id_article 
- * @param int $id_rubrique 
- * @param string $statut 
- * @param array $champs 
- * @param bool $cond 
+ * Fabrique la requête de modification de l'article, avec champs hérités
+ *
  * @global array $GLOBALS['meta']
- * @return void
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique parente
+ * @param string $statut
+ *     Statut de l'article (prop, publie, ...)
+ * @param array $champs
+ *     Couples (colonne => valeur) des champs qui ont été modifiés
+ * @param bool $cond 
+ *     True pour actualiser le statut et date de publication de la rubrique
+ *     parente si nécessaire
+ * @return void|null
+ *     null si aucune action à faire
+ *     void sinon
  */
 function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $cond=true) {
 
@@ -356,9 +405,8 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 }
 
 /**
- * Reunit les textes decoupes parce que trop longs
+ * Réunit les textes decoupés parce que trop longs
  * 
- * @link http://doc.spip.org/@trop_longs_articles
  * @return void
  */
 function trop_longs_articles() {
@@ -371,19 +419,105 @@ function trop_longs_articles() {
 }
 
 
-// obsoletes
+// Fonctions Dépréciées
+// --------------------
+
+/**
+ * Créer une révision d'un article
+ * 
+ * @deprecated Utiliser article_modifier()
+ * @see article_modifier()
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article à modifier
+ * @param array|null $c
+ *     Couples (colonne => valeur) de données à modifier.
+ *     En leur absence, on cherche les données dans les champs éditables
+ *     qui ont été postés (via _request())
+ * @return string|null
+ *     Chaîne vide si aucune erreur,
+ *     Null si aucun champ à modifier,
+ *     Chaîne contenant un texte d'erreur sinon.
+ */
 function revisions_articles ($id_article, $c=false) {
 	return article_modifier($id_article,$c);
 }
+
+/**
+ * Créer une révision d'un article
+ * 
+ * @deprecated Utiliser article_modifier()
+ * @see article_modifier()
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article à modifier
+ * @param array|null $c
+ *     Couples (colonne => valeur) de données à modifier.
+ *     En leur absence, on cherche les données dans les champs éditables
+ *     qui ont été postés (via _request())
+ * @return string|null
+ *     Chaîne vide si aucune erreur,
+ *     Null si aucun champ à modifier,
+ *     Chaîne contenant un texte d'erreur sinon.
+ */
 function revision_article ($id_article, $c=false) {
 	return article_modifier($id_article,$c);
 }
+
+/**
+ * Modifier un article
+ * 
+ * @deprecated Utiliser article_modifier()
+ * @see article_modifier()
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article à modifier
+ * @param array|null $set
+ *     Couples (colonne => valeur) de données à modifier.
+ *     En leur absence, on cherche les données dans les champs éditables
+ *     qui ont été postés (via _request())
+ * @return string|null
+ *     Chaîne vide si aucune erreur,
+ *     Null si aucun champ à modifier,
+ *     Chaîne contenant un texte d'erreur sinon.
+ */
 function articles_set($id_article, $set=null) {
 	return article_modifier($id_article,$set);
 }
+
+/**
+ * Insertion d'un article dans une rubrique
+ *
+ * @deprecated Utiliser article_inserer()
+ * @see article_inserer()
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique
+ * @return int
+ *     Identifiant du nouvel article
+ */
 function insert_article($id_rubrique) {
 	return article_inserer($id_rubrique);
 }
+
+/**
+ * Instituer un article dans une rubrique
+ *
+ * @deprecated Utiliser article_instituer()
+ * @see article_instituer()
+ * 
+ * @param int $id_article
+ *     Identifiant de l'article
+ * @param array $c
+ *     Couples (colonne => valeur) des données à instituer
+ *     Les colonnes 'statut' et 'id_parent' sont liées, car un admin restreint
+ *     peut deplacer un article publié vers une rubrique qu'il n'administre pas
+ * @param bool $calcul_rub
+ *     True pour changer le statut des rubriques concernées si un article
+ *     change de statut ou est déplacé dans une autre rubrique
+ * @return string
+ *     Chaîne vide
+ */
 function instituer_article($id_article, $c, $calcul_rub=true) {
 	return article_instituer($id_article,$c,$calcul_rub);
 }

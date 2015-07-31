@@ -353,10 +353,37 @@ function balise_FIN_SURLIGNE_dist($p) {
 }
 
 
-// #INTRODUCTION
-// #INTRODUCTION{longueur}
-// http://www.spip.net/@introduction
-// http://doc.spip.org/@balise_INTRODUCTION_dist
+
+/**
+ * Compile la balise #INTRODUCTION
+ *
+ * Retourne une introduction d'un objet éditorial, c'est à dire les 600
+ * premiers caractères environ du champ 'texte' de l'objet ou le contenu
+ * indiqué entre <intro> et </intro> de ce même champ.
+ *
+ * Pour les articles, l'introduction utilisée est celle du champ 'descriptif'
+ * s'il est renseigné, sinon il est pris dans les champs 'chapo' et 'texte' et
+ * est par défaut limité à 500 caractères.
+ *
+ * Pour les rubriques, l'introduction utilisée est celle du champ 'descriptif'
+ * s'il est renseigné, sinon du champ texte.
+ *
+ * La balise accèpte 1 paramètre indiquant la longueur en nombre de caractères
+ * de l'introduction.
+ *
+ * @see filtre_introduction_dist()
+ * @example
+ *     #INTRODUCTION
+ *     #INTRODUCTION{300}
+ *
+ * @balise introduction
+ * @link http://www.spip.net/@introduction
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_INTRODUCTION_dist($p) {
 
 	$type = $p->type_requete;

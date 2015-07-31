@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Compose un squelette : compile le squelette au besoin et vérifie
+ * la validité du code compilé
+ * 
+ * @package SPIP\Core\Compilateur\Composer
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/texte');
@@ -229,12 +236,28 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 //
 
 
-//
-// fonction standard de calcul de la balise #INTRODUCTION
-// on peut la surcharger en definissant dans mes_fonctions :
-// function filtre_introduction()
-//
-// http://doc.spip.org/@filtre_introduction_dist
+/**
+ * Calcul d'une introduction
+ *
+ * L'introduction est prise dans le descriptif s'il est renseigné,
+ * sinon elle est calculée depuis le texte : à ce moment là,
+ * l'introduction est prise dans le contenu entre les balises
+ * <intro> et </intro> si présentes, sinon en coupant le
+ * texte à la taille indiquée.
+ * 
+ * Cette fonction est utilisée par la balise #INTRODUCTION
+ *
+ * @param string $descriptif
+ *     Descriptif de l'introduction
+ * @param string $texte
+ *     Texte à utiliser en absence de descriptif
+ * @param string $longueur
+ *     Longueur de l'introduction
+ * @param string $connect
+ *     Nom du connecteur à la base de données
+ * @return string
+ *     Introduction calculée
+**/
 function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// Si un descriptif est envoye, on l'utilise directement
 	if (strlen($descriptif))
