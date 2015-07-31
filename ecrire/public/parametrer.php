@@ -94,12 +94,12 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		if (!isset($contexte['date'])) {
 			$contexte['date'] = date("Y-m-d H:i:s");
 			$contexte['date_default'] = true;
-		} else $contexte['date'] = normaliser_date($contexte['date']);
+		} else $contexte['date'] = normaliser_date($contexte['date'], true);
 
 		if (!isset($contexte['date_redac'])) {
 			$contexte['date_redac'] = date("Y-m-d H:i:s");
 			$contexte['date_redac_default'] = true;
-		} else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
+		} else $contexte['date_redac'] = normaliser_date($contexte['date_redac'], true);
 
 	// Passer le nom du cache pour produire sa destruction automatique
 		$page = $fonc(array('cache' => $cache), array($contexte));

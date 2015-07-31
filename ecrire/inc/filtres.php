@@ -693,18 +693,22 @@ function choixsiegal($a1,$a2,$v,$f) {
 // Date, heure, saisons
 //
 
+// on normalise la date, si elle vient du contexte (public/parametrer.php), on force le jour
 // http://doc.spip.org/@normaliser_date
-function normaliser_date($date) {
+function normaliser_date($date, $forcer_jour = false) {
 	$date = vider_date($date);
 	if ($date) {
 		if (preg_match("/^[0-9]{8,10}$/", $date))
 			$date = date("Y-m-d H:i:s", $date);
 		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs))
-			$date = $regs[1]."-01-01".$regs[3];
+			$date = $regs[1]."-00-00".$regs[3];
 		else if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs))
-			$date = preg_replace("@/@","-",$regs[1])."-01".$regs[3];
+			$date = preg_replace("@/@","-",$regs[1])."-00".$regs[3];
 		else
 			$date = date("Y-m-d H:i:s", strtotime($date));
+
+		if ($forcer_jour)
+			$date = str_replace('-00', '-01', $date);
 	}
 	return $date;
 }
