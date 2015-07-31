@@ -213,7 +213,6 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		}
 
 		$arg = $regs[2];
-
 		if (trim($regs[1])) {
 			$champ = new Texte;
 			$champ->texte = $arg;
@@ -242,7 +241,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$result[] = $champ;
 			$collecte[] = $champ;
 		    }
-		    $rec = substr($args, $n + strlen($r[0]));
+		    $rec = substr($args, $n + strlen($r[0]) -1);
 		    $champ = new Champ;
 		    $champ->nom_boucle = $r[2];
 		    $champ->nom_champ = $r[3];
@@ -340,7 +339,7 @@ function phraser_criteres($params, &$result) {
 // plus d'un argument:
 // c'est soit le critere LIMIT debut,fin si ça se termine par un chiffre
 // soit le critere PAR soit un critere perso
-		       
+
 			if (($var->type != 'texte') ||
 			    (strpos("0123456789", $param[strlen($param)-1])
 			     !== false))
@@ -357,7 +356,6 @@ function phraser_criteres($params, &$result) {
 			$crit->param = $v;
 			$args[] = $crit;
 		  } else {
-
 		  if ($var->type != 'texte')
 			  erreur_squelette('criteres','');
 		  else {
@@ -489,8 +487,9 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 			$result->type_requete = $type;
 			phraser_args($milieu,">","",$all_res,$result);
 			$milieu = substr($result->apres,1);
-			phraser_criteres($result->param, $result);
 			$result->apres = "";
+			phraser_criteres($result->param, $result);
+
 		}
 		//
 		// Recuperer la partie conditionnelle avant
