@@ -208,6 +208,16 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	
 	$visible = @isset($deplie[$current_dir]);
 	$maxiter=1000;
+	echo http_script("// http://doc.spip.org/@verifchange\n".
+	"function verifchange(id) {\n".
+	"if(this.checked == true)\n".
+	"{\n".
+	"	document.getElementById(id).className = 'nomplugin_on';\n".
+	"}\n".
+	"else {\n".
+	"	document.getElementById(id).className = 'nomplugin';\n".
+	"}\n".
+	"}\n");
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
@@ -236,21 +246,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$erreur = false;
 	$vals = array();
 	$info = plugin_get_infos($plug_file);
-	$s = "<script type='text/javascript'>";
-$s .= <<<EOF
-// http://doc.spip.org/@verifchange
-function verifchange$id(inputp) {
-	if(inputp.checked == true)
-	{
-		document.getElementById('$plug_file').className = 'nomplugin_on';
-	}
-	else {
-		document.getElementById('$plug_file').className = 'nomplugin';
-	}
-	}
-EOF;
-	$s .= "</script>";
-	$s .= "<div id='$plug_file' class='nomplugin".($actif?'_on':'')."'>";
+	$s = "<div id='$plug_file' class='nomplugin".($actif?'_on':'')."'>";
 	if (isset($info['erreur'])){
 		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
 		$erreur = true;
@@ -286,7 +282,7 @@ EOF;
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
-		$s .= " onclick='verifchange$id(this)' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
+		$s .= " onclick='verifchange.apply(this,[\"$plug_file\"])' /> <label for='label_$id_input' style='display:none'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 	
