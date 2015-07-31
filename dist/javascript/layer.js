@@ -246,7 +246,7 @@ function AjaxSqueezeNode(trig, target, f)
     callback = function() { verifForm(this);}
   }
 	else {
-    callback = function(res,status) { f(res,status); verifForm(this);}
+    callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
   }
 	
 	if (typeof(trig) == 'string') {
