@@ -197,7 +197,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 			else {
 				include_spip('inc/auth');
 				$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-				if (is_array($r) AND !$r[$id_rubrique])
+				if (is_array($r) AND !$r[$champs['id_rubrique']])
 					$champs['statut'] = 'prop';
 			}
 		}
