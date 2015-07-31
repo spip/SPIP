@@ -64,9 +64,9 @@
         
 		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
-        [(#REM) Autres documents joints a l'article. Si un seul et texte vide, incrustation automatique ]
+        [(#REM) Autres documents joints a l'article. Si un seul et texte vide, incrustation automatique ; a noter : le {!doublons A} permet de retrouver les documents dans la boucle suivante ]
 		<BOUCLE_documents_decompte(DOCUMENTS) {id_article} {mode=document}{doublons}{doublons A}
-		 />[(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE}|?{'',' '})
+		 />[(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE**}|?{'',' '})
 		<INCLURE{fond=inc-documents}{id_article}>]
 		<//B_documents_decompte>
 		
