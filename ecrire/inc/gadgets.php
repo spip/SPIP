@@ -359,7 +359,7 @@ onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; char
 	. _T('icone_suivi_activite')
 	. "</a>"
 	. "\n<div id='gadget-suivi'><div>&nbsp;</div>"
-	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'xml.gif', '', false)
+	. icone_horizontale(_T('analyse_xml'), parametre_url(self(),'transformer_xml', 'valider_xml'), 'racine-24.gif', '', false)
 	. "</div></div>\n";
 	
 		// Infos perso
