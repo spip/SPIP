@@ -85,9 +85,9 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_moderation_priori' => 'Modera&ccedil;&atilde;o a  priori (as
  contribui&ccedil;&otilde;es aparecem publicamente s&oacute; depois da valida&ccedil;&atilde;o pelos
  administradores). ',
-'bouton_radio_modere_abonnement' => 'moderado com assinatura',
-'bouton_radio_modere_posteriori' => 'moderado a posteriori',
-'bouton_radio_modere_priori' => 'moderado a priori',
+'bouton_radio_modere_abonnement' => '<MODIF>moderado com assinatura',
+'bouton_radio_modere_posteriori' => '<MODIF>moderado a posteriori',
+'bouton_radio_modere_priori' => '<MODIF>moderado a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&atilde;o aparecer na lista dos redactores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar an&uacute;ncios editoriais',
 'bouton_radio_non_syndication' => 'N&atilde;o h&aacute; vincula&ccedil;&atilde;o',
@@ -251,8 +251,6 @@ ou da rede',
 'info_ajout_participant' => 'O seguinte participante foi acrescentado&nbsp;:',
 'info_ajouter_rubrique' => 'Acrescentar uma rubrica a administrar&nbsp;:',
 'info_annonce_nouveautes' => 'An&uacute;ncio das novidades',
-'info_annuler_blocage_priori' => 'Permitir
- a priori',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Aplicar esta escolha de modera&ccedil;&atilde;o&nbsp;:',
 'info_article' => 'artigo',
@@ -274,6 +272,7 @@ ou da rede',
 'info_avertissement' => 'Aviso',
 'info_base_installee' => 'A estrutura da sua base de dados est&aacute; instalada',
 'info_base_restauration' => 'A base est&aacute; em curso de restauro',
+'info_bloquer' => 'bloquear',
 'info_breves' => 'O seu s&iacute;tio utiliza o sistema de not&iacute;cias',
 'info_breves_03' => 'not&iacute;cias',
 'info_breves_liees_mot' => 'As not&iacute;cias ligadas a esta palavra-chave',
@@ -311,8 +310,6 @@ ou da rede',
 'info_delet_mots_cles' => 'Pediu para suprimir a palavra-chave
 <B>@titre_mot@</B> (@type_mot@). Esta palavra-chave estando ligada a
  <b>@texte_lie@</b> deve confirmar esta decis&atilde;o&nbsp;:',
-'info_demander_blocage_priori' => 'Impedir
-a priori',
 'info_derniere_etape' => '&Uacute;ltima etapa : <B>Acabou !',
 'info_derniere_syndication' => 'A &uacute;ltima vincula&ccedil;&atilde;o deste s&iacute;tio foi efectuada a',
 'info_derniers_articles_publies' => 'Os seus &uacute;ltimos artigos publicados em linha',
@@ -488,6 +485,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_procedure_maj_version' => 'o procedimento de actualiza&ccedil;&atilde;o deve ser lan&ccedil;ado para adaptar
 a base de dados &agrave; nova vers&atilde;o de SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => 'publicar',
 'info_publies' => 'Os seus artigos publicados em linha',
 'info_question_accepter_visiteurs' => 'Se os par&acirc;metros do seu site prev&ecirc;em o registo de visitantes sem acesso ao espa&ccedil;o privado, por favor, active a op&ccedil;&atilde;o abaixo:',
 'info_question_gerer_statistiques' => 'O seu s&iacute;tio deve gerir as estat&iacute;sticas das visitas&nbsp;?',
@@ -752,6 +750,12 @@ numa cor que indica o seu estado:',
 
 // S
 'statut_admin_restreint' => '(admin restrito)',
+'syndic_choix_moderation' => 'Que fazer com as novas liga&ccedil;&otilde;es provenientes deste s&iacute;tio&nbsp;?',
+'syndic_choix_oublier' => 'Que fazer com as liga&ccedil;&otilde;es que n&atilde;o aparecem mais no ficheiro de sindica&ccedil;&atilde;o &nbsp;?',
+'syndic_lien_obsolete' => 'liga&ccedil;&atilde;o desactualizada',
+'syndic_option_miroir' => 'bloquear automaticamente',
+'syndic_option_oubli' => 'eliminar (ap&oacute;s @m&ecirc;s@&nbsp;m&ecirc;s)',
+'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o&nbsp;:',
 
 
 // T
@@ -814,8 +818,6 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
 'texte_date_publication_anterieure' => 'Data de redac&ccedil;&atilde;o anterior&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de redac&ccedil;&atilde;o anterior',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
-'texte_demander_blocage_priori' => 'Os pr&oacute;ximos la&ccedil;os 
-  provenientes deste s&iacute;tio ser&atilde;o bloqueados a priori.',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o do abaixo-assinado',
 'texte_descriptif_rapide' => 'Descri&ccedil;&atilde;o r&aacute;pida',
 'texte_documents_joints' => 'Pode autorizar a inclus&atilde;o de documentos (ficheiros, imagens,  multim&eacute;dia etc.) nos artigos e/ou nas sec&ccedil;&otilde;es. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.<p />',
@@ -851,8 +853,6 @@ o s&iacute;tio p&uacute;blico (balisa<tt>#CHARSET</tt>).',
  s&iacute;tios vinculados depois da sua cria&ccedil;&atilde;o. Depois &eacute;
  poss&iacute;vel, de qualquer modo, desbloquear cada la&ccedil;o individualmente, ou escolher
 , s&iacute;tio por s&iacute;tio, bloquear os la&ccedil;os futuros deste ou daquele s&iacute;tio.',
-'texte_liens_syndication' => 'Os pr&oacute;ximos la&ccedil;os 
- provenientes deste s&iacute;tio ser&atilde;o exibidos imediatamente no s&iacute;tio p&uacute;blico.',
 'texte_login_ldap_1' => '(Deixar vazio para um acesso an&oacute;nimo, ou introduzir o caminho completo, por exemplo, &laquo;&nbsp;<tt>uid=silva, ou=users, dc=meu-dominio, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Aten&ccedil;&atilde;o&nbsp;! Isto &eacute; o login sob o qual est&aacute; ligado actualmente.
 Utilize este formul&aacute;rio com precau&ccedil;&atilde;o...',

@@ -289,7 +289,7 @@ M&egrave;si  w soutni petisyon-nan
 'icone_a_suivre' => 'Ak&egrave;y',
 'icone_admin_site' => 'Kolonaj sit la',
 'icone_agenda' => 'Ajenda',
-'icone_aide_ligne' => 'Ed',
+'icone_aide_ligne' => 'Bourad',
 'icone_articles' => 'Atik yo',
 'icone_auteurs' => 'Lot&egrave; yo',
 'icone_breves' => 'Tinouv&egrave;l yo',
