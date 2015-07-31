@@ -10,14 +10,13 @@ $GLOBALS['htaccess'] = $GLOBALS['dir_ecrire'].'.htaccess';
 $GLOBALS['htpasswd'] = $GLOBALS['dir_ecrire'].'data/.htpasswd';
 
 function creer_pass_aleatoire($longueur = 8, $sel = "") {
-	global $flag_mt_rand;
 	$seed = (double) (microtime() + 1) * time();
-	if ($flag_mt_rand) mt_srand($seed);
+	mt_srand($seed);
 	srand($seed);
 
 	for ($i = 0; $i < $longueur; $i++) {
 		if (!$s) {
-			if ($flag_mt_rand) $s = mt_rand();
+			$s = mt_rand();
 			if (!$s) $s = rand();
 			$s = substr(md5(uniqid($s).$sel), 0, 16);
 		}

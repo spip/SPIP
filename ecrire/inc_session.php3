@@ -123,16 +123,15 @@ function creer_cookie_session($auteur) {
 //
 function creer_uniqid() {
 	static $seeded;
-	global $flag_mt_rand;
 
 	if (!$seeded) {
 		$seed = (double) (microtime() + 1) * time();
-		if ($flag_mt_rand) mt_srand($seed);
+		mt_srand($seed);
 		srand($seed);
 		$seeded = true;
 	}
 
-	if ($flag_mt_rand) $s = mt_rand();
+	$s = mt_rand();
 	if (!$s) $s = rand();
 	if ($GLOBALS['flag_uniqid2'])
 		return uniqid($s, 1);

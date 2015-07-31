@@ -206,10 +206,7 @@ if ($options != 'avancees') {
 //
 
 if ($meta["debut_restauration"]) {
-
-	if ($flag_ignore_user_abort) {
-		@ignore_user_abort(1);
-	}
+	@ignore_user_abort(1);
 	include ("inc_import.php3");
 
 	$archive = $meta["fichier_restauration"];

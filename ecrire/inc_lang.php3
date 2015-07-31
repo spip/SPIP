@@ -75,14 +75,8 @@ function traduire_chaine($code, $args) {
 	}*/
 	if (!is_array($args)) return $text;
 
-	if ($GLOBALS['flag_str_replace']) {
-		while (list($name, $value) = each($args))
-			$text = str_replace ("@$name@", $value, $text);
-	}
-	else {
-		while (list($name, $value) = each($args))
-			$text = ereg_replace ("@$name@", $value, $text);
-	}
+	while (list($name, $value) = each($args))
+		$text = str_replace ("@$name@", $value, $text);
 	return $text;
 }
 

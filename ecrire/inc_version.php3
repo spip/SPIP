@@ -169,6 +169,7 @@ $dossier_squelettes = '';
 
 //
 // Infos de version PHP
+// (doit etre au moins egale a 3.0.8)
 //
 
 $php_version = explode('.', phpversion());
@@ -176,61 +177,33 @@ $php_version_maj = (int) $php_version[0];
 $php_version_med = (int) $php_version[1];
 if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
 
-$flag_function_exists = ($php_version_maj > 3 OR $php_version_min >= 7);
-$flag_ignore_user_abort = ($php_version_maj > 3 OR $php_version_min >= 7);
 $flag_levenshtein = ($php_version_maj >= 4);
-$flag_mt_rand = ($php_version_maj > 3 OR $php_version_min >= 6);
-$flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
 $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
-$flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 $flag_strtr2 = ($php_version_maj > 3);
 
-if ($flag_function_exists) {
-	$flag_ini_get = (function_exists("ini_get")
-		&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
-	$flag_gz = function_exists("gzopen");
-	$flag_ob = ($flag_ini_get
-		&& !ereg("ob_", ini_get('disable_functions'))
-		&& function_exists("ob_start"));
-	$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
-	$flag_pcre = function_exists("preg_replace");
-	$flag_crypt = function_exists("crypt");
-	$flag_wordwrap = function_exists("wordwrap");
-	$flag_apc = function_exists("apc_rm");
-	$flag_sapi_name = function_exists("php_sapi_name");
-	$flag_utf8_decode = function_exists("utf8_decode");
-	$flag_ldap = function_exists("ldap_connect");
-	$flag_flock = function_exists("flock");
-	$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor") && function_exists("gd_info");
-	$flag_ImageCopyResampled = function_exists("ImageCopyResampled") && function_exists("gd_info");
-	$flag_ImageGif = function_exists("ImageGif");
-	$flag_ImageJpeg = function_exists("ImageJpeg");
-	$flag_ImagePng = function_exists("ImagePng");
-	$flag_multibyte = function_exists("mb_encode_mimeheader");
-	$flag_iconv = function_exists("iconv");
-}
-else {
-	$flag_ini_get = false;
-	$flag_gz = false;
-	$flag_obgz = false;
-	$flag_ob = false;
-	$flag_pcre = false;
-	$flag_crypt = true; // la non-existence de crypt est une exception
-	$flag_wordwrap = false;
-	$flag_apc = false;
-	$flag_sapi_name = false;
-	$flag_utf8_decode = false;
-	$flag_ldap = false;
-	$flag_flock = false;
-	$flag_ImageCreateTrueColor = false;
-	$flag_ImageCopyResampled = false;
-	$flag_ImageGif = false;
-	$flag_ImageJpeg = false;
-	$flag_ImagePng = false;
-	$flag_multibyte = false;
-	$flag_iconv = false;
-}
+$flag_ini_get = (function_exists("ini_get")
+	&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
+$flag_gz = function_exists("gzopen");
+$flag_ob = ($flag_ini_get
+	&& !ereg("ob_", ini_get('disable_functions'))
+	&& function_exists("ob_start"));
+$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
+$flag_pcre = function_exists("preg_replace");
+$flag_crypt = function_exists("crypt");
+$flag_wordwrap = function_exists("wordwrap");
+$flag_apc = function_exists("apc_rm");
+$flag_sapi_name = function_exists("php_sapi_name");
+$flag_utf8_decode = function_exists("utf8_decode");
+$flag_ldap = function_exists("ldap_connect");
+$flag_flock = function_exists("flock");
+$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor") && function_exists("gd_info");
+$flag_ImageCopyResampled = function_exists("ImageCopyResampled") && function_exists("gd_info");
+$flag_ImageGif = function_exists("ImageGif");
+$flag_ImageJpeg = function_exists("ImageJpeg");
+$flag_ImagePng = function_exists("ImagePng");
+$flag_multibyte = function_exists("mb_encode_mimeheader");
+$flag_iconv = function_exists("iconv");
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 
