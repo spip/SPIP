@@ -7,7 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id}"/>
-	  <p class='boutons' style="display:none;"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+	  <div class="over"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></div>
 	]
 
 		<INCLURE{fond=prive/objets/liste/#ENV{_vue_liee},action='',env,ajax}>
