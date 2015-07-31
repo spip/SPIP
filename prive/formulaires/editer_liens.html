@@ -29,6 +29,9 @@
 						onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;"
 						><:bouton_fermer:></a>&#93;
 				</div>
+				<p class="boutons">
+					<input type="submit" class="submit" name="fermer" value="<:bouton_fermer:>"	onclick="jQuery(this).parents('div.selecteur').hide('fast').siblings('.toggle_box_link').show();jQuery('#visible-#ENV{id}').attr('value',0);return false;" />
+				</p>
 			</div>
 			<div class="toggle_box_link" style="display:none;">
 					&#91;<a href="#"
@@ -53,7 +56,11 @@
 	});
 	/* devrait necessiter le plugin jquery.color.js ?*/
 	jQuery('.formulaire_#FORM .append').each(function(){
-		jQuery(this).css('opacity','0.0').animate({opacity: "1.0"}, 1500).animate({backgroundColor: '#ffffff'}, 'slow',function(){jQuery(this).removeClass('append');});
+		jQuery(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000, function(){
+			jQuery('td',this).animate({backgroundColor: '#ffffff'}, 3000,function(){
+				jQuery(this).parents('tr').removeClass('append');
+			})
+		});
 	});
 
 </script>
