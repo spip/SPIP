@@ -1771,8 +1771,7 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 		$query = preg_replace(array_keys($remplace), $remplace, $query);
 		if ($autoinc OR preg_match(',AUTO_INCREMENT,is',$query))
 			$query = preg_replace(array_keys($remplace_autocinc), $remplace_autocinc, $query);
-		else
-			$query = _sqlite_collate_ci($query);
+		$query = (is_array($query)?array_map('_sqlite_collate_ci',$query):_sqlite_collate_ci($query));
 	}
 	elseif(is_array($query)){
 		foreach($query as $k=>$q) {
