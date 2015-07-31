@@ -96,9 +96,11 @@ else if ($new=='oui') {
 	$flag_editable = true;
  }
 
-	return $flag_editable ? $row : false;
+	if (!$flag_editable) return false;
 
+	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 
+	return $row;
 }
 
 ?>
