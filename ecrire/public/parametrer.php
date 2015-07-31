@@ -19,7 +19,7 @@ include_spip('public/quete'); // pour quete_chapo et ses dependances
 // donc il faut l'inclure "en globals"
 if ($f = find_in_path('mes_fonctions.php')) {
 	global $dossier_squelettes;
-	include_once (_ROOT_CWD . $f);
+	include_once(_ROOT_CWD . $f);
 }
 
 if (@is_readable(_CACHE_PLUGINS_FCT)) {
@@ -73,14 +73,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		$composer = charger_fonction('composer', 'public');
 		$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
-	} 
-	else {
-		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES)));
-		//"'$fond.$ext'"
-		//erreur_squelette($message, $lieu);
-		$code = '';
-	}
+	} else $code = '';
 
 	if (!$code) { // squelette inconnu (==='') ou faux (===false)
 		$page = $code;

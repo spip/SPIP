@@ -44,14 +44,14 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 
 	$x = _request('var_mode_objet');
 	if (isset($GLOBALS['debug']['aucasou'])) {
-		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
+		list(, $boucle, $serveur, $contexte) = $GLOBALS['debug']['aucasou'];
 		if ($x AND !preg_match("/$boucle\$/", $x))
 			return;
 		if ($serveur) $boucle .= " ($serveur)";
 		$boucle = "<b>$boucle</b>";
 	} else {
 		if ($x) return;
-		$boucle = '';
+		$boucle = $contexte = '';
 	}
 
 	list($usec, $sec) = explode(" ", $m1);
@@ -63,7 +63,7 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2",htmlentities($query));
 	$e =  sql_explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
-	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r);
+	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r, $contexte);
 }
 
 
@@ -73,32 +73,38 @@ function chrono_requete($temps)
 	$hors = "<i>" . _T('zbug_hors_compilation') . "</i>";
 	$t = $q = $n = $d = array();
 	// Totaliser les temps et completer le Explain
-	foreach ($temps as $key => $row) {
-		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
+	foreach ($temps as $key => $v) {
+		list($dt, $nb, $boucle, $query, $explain, $res, $contexte) = $v;
+		if (is_array($contexte)) {
+			$k = ($contexte[0] . " $boucle");
+			include_spip('public/compiler');
+			$env = reconstruire_contexte_compil($contexte);
+		} else $k = $env = $boucle;
+
 		$total += $dt;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-		$d[$boucle]+= $dt;
-		if  ($boucle) @++$n[$boucle];
+		$d[$k]+= $dt;
+		if ($k) @++$n[$k];
 
 		if (!is_array($explain))
 			$explain = array();
 		foreach($explain as $k => $v) {
-			$explain[$k] = "<tr><td>$k</td><td>"
+			$explain[$k] = "<tr><th>$k</th><td>"
 			  . str_replace(';','<br />',$v)
 			  . "</td></tr>";
 		}
-		$e = "<br /><table border='1'>"
-		. "<caption style='text-align: left'>"
+		$e = "<table class='explain'>"
+		. "<caption>"
 		. $query
 		. "</caption>"
-		. "<tr><td>Time</td><td>$dt</td></tr>" 
-		. "<tr><td>Order</td><td>$nb</td></tr>" 
-		. "<tr><td>Res</td><td>$res</td></tr>" 
+		. "<tr><th>Time</th><td>$dt</td></tr>"
+		. "<tr><th>Order</th><td>$nb</td></tr>"
+		. "<tr><th>Res</th><td>$res</td></tr>"
 		. join('', $explain)
 		. "</table>";
 
-		$temps[$key] = array($e, $boucle);
+		$temps[$key] = array($e, $env, $boucle);
 	}
 	// Trier par temps d'execution decroissant
 	array_multisort($t, SORT_DESC, $q, $temps);
@@ -107,14 +113,13 @@ function chrono_requete($temps)
 	$t = array();
 	// Fabriquer les liens de navigations dans le tableau des temps
 	foreach($temps as $k => $v) {
-		$titre = textebrut(preg_replace(',</tr>,', "\n",$v[0]));
+		$titre = strip_tags($v[2]);
 		$href = quote_amp($GLOBALS['REQUEST_URI'])."#req$i";
 
-		$t[$v[1]][]= "<span class='spip-debug-arg'>" 
-		. str_repeat('&nbsp;', 5 - strlen(strval($i)))
+		$t[$v[2]][]= "<span class='spip-debug-arg'> "
 		. "<a title='$titre' href='$href'>$i</a>"
 		. '</span>'
-		. ((count($t[$v[1]]) % 10 == 9) ?  "<br />" : '');
+		. ((count($t[$v[2]]) % 10 == 9) ?  "<br />" : '');
 		$i++;
 	}
 
@@ -126,18 +131,17 @@ function chrono_requete($temps)
 	unset($d['']);
 	// Fabriquer le tableau des liens de navigation dans le grand tableau
 	foreach ($d as $k => $v) {
-		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
+		$d[$k] =  $n[$k] . "</td><td>$k</td><td class='time'>$v</td><td class='liste-reqs'>"
 		  . join('',$t[$k]);
 	}
 
-	$navigation = '<br />'
-	  . _T('zbug_statistiques')
-	  . '<br />'
+	$navigation = 
+	  _T('zbug_statistiques')
 	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
-	  . join("</td></tr>\n<tr><td>", $d)
+		. join("</td></tr>\n<tr><td>", $d)
 	  . "</td></tr>\n"
 	  .  (# _request('var_mode_objet') ? '' : 
-	     ("<tr><td>" .  count($temps) . " </td><td> " . _T('info_total') . '</td><td>' . $total . "</td></td><td></td></tr>"))
+	     ("<tr><td>" .  count($temps) . "</td><td>" . _T('info_total') . '</td><td class="time">' . $total . "</td><td></td></tr>"))
 	  . "</table>";
 
 	return array($temps, $navigation);
