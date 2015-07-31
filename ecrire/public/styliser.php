@@ -15,12 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
+// Actuellement tous les squelettes se terminent par .html
+// pour des raisons historiques, ce qui est trompeur
+
 // http://doc.spip.org/@public_styliser_dist
-function public_styliser_dist($fond, $id_rubrique, $lang) {
+function public_styliser_dist($fond, $id_rubrique, $lang, $ext='html') {
 	
-  // Actuellement tous les squelettes se terminent par .html
-  // pour des raisons historiques, ce qui est trompeur
-	$ext = 'html';
 	// Accrocher un squelette de base dans le chemin, sinon erreur
 	if (!$base = find_in_path("$fond.$ext")) {
 		include_spip('public/debug');
