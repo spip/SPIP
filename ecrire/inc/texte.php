@@ -127,7 +127,7 @@ function traiter_echap_code_dist($regs) {
 	if (is_int(strpos($echap,"\n"))) {
 		// supprimer les sauts de ligne debut/fin
 		// (mais pas les espaces => ascii art).
-		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/ms", "", $echap);
+		$echap = preg_replace("/^[\n\r]+|[\n\r]+$/s", "", $echap);
 		$echap = nl2br($echap);
 		$echap = "<div style='text-align: left;' "
 		. "class='spip_code' dir='ltr'><code>"
