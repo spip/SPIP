@@ -283,6 +283,7 @@ function sql_countsel($from = array(), $where = array(),
  * @example
  * 		sql_alter('DROP COLUMN supprimer'); 
  *
+ * @api
  * @param string $q
  * 		La requete a executer (sans la preceder de 'ALTER ')
  * @param string $serveur
@@ -310,6 +311,7 @@ function sql_alter($q, $serveur='', $option=true) {
  *
  * Retourne un resultat d'une ressource obtenue avec sql_select()
  *
+ * @api
  * @param mixed
  * 		Ressource retournee par sql_select()
  * @param string $serveur
@@ -336,6 +338,7 @@ function sql_fetch($res, $serveur='', $option=true) {
  * Retourne tous les resultats d'une ressource obtenue avec sql_select()
  * dans un tableau
  *
+ * @api
  * @param mixed
  * 		Ressource retournee par sql_select()
  * @param string $serveur
@@ -369,6 +372,7 @@ function sql_fetch_all($res, $serveur='', $option=true){
  * sur une ressource issue de sql_select, afin que
  * le prochain sql_fetch recupere cette ligne.
  *
+ * @api
  * @see sql_skip() Pour sauter des enregistrements
  *
  * @param mixed $res
@@ -676,8 +680,49 @@ function sql_query($ins, $serveur='', $option=true) {
 	return $r;
 }
 
-# une composition tellement frequente...
-// http://doc.spip.org/@sql_fetsel
+/**
+ * Retourne la premiere ligne d'une selection
+ * 
+ * Retourne la premiere ligne de resultat d'une selection
+ * comme si l'on appelait successivement sql_select() puis sql_fetch()
+ * 
+ * @example
+ * 		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($id_article));
+ *		$id_rubrique = $art['id_rubrique'];
+ * 
+ * @api
+ * @uses sql_select()
+ * @uses sql_fetch()
+ * 
+ * @param array|string $select
+ * 		Liste des champs a recuperer (Select)
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array|string $orderby
+ * 		Tableau de classement (Order By)
+ * @param string $limit
+ * 		Critere de limite (Limit)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool|string $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- true -> executer la requete.
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible.
+ * 		- false -> ne pas l'executer mais la retourner.
+ * 
+ * @return array
+ * 		Tableau de la premiere ligne de resultat de la selection
+ * 		{@example
+ * 			array('id_rubrique' => 1, 'id_secteur' => 2)
+ * 		}
+ *
+**/
 function sql_fetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
@@ -689,8 +734,55 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
 	return $r;
 }
 
-// Retourne le tableau de toutes les lignes d'une requete Select
-// http://doc.spip.org/@sql_allfetsel
+
+/**
+ * Retourne le tableau de toutes les lignes d'une selection
+ * 
+ * Retourne toutes les lignes de resultat d'une selection
+ * comme si l'on appelait successivement sql_select() puis while(sql_fetch())
+ * 
+ * @example
+ * 		$rubs = sql_allfetsel('id_rubrique', 'spip_articles', 'id_secteur='.sql_quote($id_secteur));
+ *		// $rubs = array(array('id_rubrique'=>1), array('id_rubrique'=>3, ...)
+ * 
+ * @api
+ * @uses sql_select()
+ * @uses sql_fetch()
+ * 
+ * @param array|string $select
+ * 		Liste des champs a recuperer (Select)
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array|string $orderby
+ * 		Tableau de classement (Order By)
+ * @param string $limit
+ * 		Critere de limite (Limit)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool|string $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- true -> executer la requete.
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible.
+ * 		- false -> ne pas l'executer mais la retourner.
+ * 
+ * @return array
+ * 		Tableau de toutes les lignes de resultat de la selection
+ * 		Chaque entree contient un tableau des elements demandees dans le SELECT.
+ * 		{@example
+ * 			array(
+ * 				array('id_rubrique' => 1, 'id_secteur' => 2)
+ * 				array('id_rubrique' => 4, 'id_secteur' => 2)
+ * 				...
+ * 			)
+ * 		}
+ *
+**/
 function sql_allfetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
@@ -699,8 +791,45 @@ function sql_allfetsel($select = array(), $from = array(), $where = array(),
 	return sql_fetch_all($q, $serveur, $option);
 }
 
-# Retourne l'unique champ demande dans une requete Select a resultat unique
-// http://doc.spip.org/@sql_getfetsel
+
+/**
+ * Retourne un unique champ d'une selection
+ * 
+ * Retourne dans la premiere ligne de resultat d'une selection
+ * un unique champ demande
+ * 
+ * @example
+ * 		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.sql_quote($id_article));
+ *
+ * @api
+ * @uses sql_fetsel()
+ * 
+ * @param array|string $select
+ * 		Liste des champs a recuperer (Select)
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array|string $orderby
+ * 		Tableau de classement (Order By)
+ * @param string $limit
+ * 		Critere de limite (Limit)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool|string $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- true -> executer la requete.
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible.
+ * 		- false -> ne pas l'executer mais la retourner.
+ * 
+ * @return mixed
+ * 		Contenu de l'unique valeur demandee du premier enregistrement retourne
+ *
+**/
 function sql_getfetsel($select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
 	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
@@ -712,7 +841,20 @@ function sql_getfetsel($select, $from = array(), $where = array(), $groupby = ar
 	return $r[$id]; 
 }
 
-// http://doc.spip.org/@sql_version
+/**
+ * Retourne le numero de version du serveur SQL 
+ *
+ * @api
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true pour executer la requete.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ * 
+ * @return string
+ * 		Numero de version du serveur SQL
+**/
 function sql_version($serveur='', $option=true) {
 	$row = sql_fetsel("version() AS n", '','','','','','',$serveur);
 	return ($row['n']);
@@ -734,6 +876,7 @@ function sql_version($serveur='', $option=true) {
  * 			sql_demarrer_transaction();
  * 		}
  *
+ * @api
  * @see sql_demarrer_transaction()
  * @see sql_terminer_transaction()
  *
@@ -758,6 +901,7 @@ function sql_preferer_transaction($serveur='', $option=true) {
 /**
  * Demarre une transaction
  *
+ * @api
  * @see sql_terminer_transaction() Pour cloturer la transaction
  * 
  * @param string $serveur
@@ -781,6 +925,7 @@ function sql_demarrer_transaction($serveur='', $option=true) {
 /**
  * Termine une transaction
  *
+ * @api
  * @see sql_demarrer_transaction() Pour demarrer une transaction
  * 
  * @param string $serveur
@@ -808,7 +953,8 @@ function sql_terminer_transaction($serveur='', $option=true) {
  * Prend une chaine sur l'aphabet hexa
  * et retourne sa representation numerique attendue par le serveur SQL.
  * Par exemple : FF ==> 0xFF en MySQL mais x'FF' en PG
- * 
+ *
+ * @api
  * @param string $val
  * 		Chaine hexadecimale
  * @param string $serveur
@@ -827,6 +973,26 @@ function sql_hex($val, $serveur='', $option=true)
 	return $f($val);
 }
 
+/**
+ * Echapper du contenu
+ * 
+ * Echappe du contenu selon ce qu'attend le type de serveur SQL
+ * et en fonction du type de contenu.
+ * 
+ * Cette fonction est automatiquement appelee par les fonctions sql_*q
+ * tel que sql_instertq ou sql_updateq
+ *
+ * @api
+ * @param string $val
+ * 		Chaine a echapper
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param string $type
+ * 		Peut contenir une declaration de type de champ SQL
+ * 		{@example int NOT NULL} qui sert alors aussi a calculer le type d'echappement
+ * @return string
+ * 		La chaine echappee
+**/
 function sql_quote($val, $serveur='', $type='')
 {
 	$f = sql_serveur('quote', $serveur, true);
