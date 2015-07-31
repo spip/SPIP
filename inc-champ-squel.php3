@@ -231,6 +231,7 @@ function init_champs_squel() {
 		'EMAIL' => 'email_auteur',
 		'NOM_SITE' => 'nom_site',
 		'URL_SITE' => 'url_site',
+		'ID_AUTEUR' => 'id_auteur',
 		'IP' => 'ip'
 	);
 	$rows_documents = array(
