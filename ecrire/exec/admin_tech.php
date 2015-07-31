@@ -107,6 +107,11 @@ function exec_admin_tech_dist()
 	    "\n<input type='hidden' name='gz' id='gz' value='0' /></p>";
 	}
 
+	$res .= "\n<p><label for='id_rubrique'>" .
+	    _L('Vous pouvez limiter la sauvegarde &agrave; la rubrique: ') .
+	       "</label>" .
+	    "\n<input name='id_rubrique' id='id_rubrique' size='5' /></p>";
+
 	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
  
 	echo 

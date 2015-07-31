@@ -12,58 +12,64 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/meta');
 include_spip('inc/export');
 include_spip('inc/minipres');
 
 // http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
 {
-	global $spip_lang_left,$spip_lang_right;
-	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// determine upload va aussi initialiser l'index "restreint"
-	$dir = determine_upload();
-	if (!$GLOBALS['auteur_session']['restreint'] AND file_exists(_DIR_DUMP))
-		$dir = _DIR_DUMP;
+	@list($quoi, $gz, $archive, $rub) = split(',', $arg);
+	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
+	$file =  export_subdir($rub) . $archive;
 
-	list($quoi, $gz, $archive) = split(',', $arg);
-	
-	$file =  $dir . $archive;
-
-	include_spip('inc/meta');
 	utiliser_langue_visiteur();
 	if ($quoi =='start'){
 		// creer l'en tete du fichier et retourner dans l'espace prive
-		include_spip('inc/export');
 		ecrire_fichier($file, export_entete(),false);
-		ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
+		ecrire_meta($meta, "$gz::$archive::$rub::1::0",'non');
 		ecrire_metas();
 		include_spip('inc/headers');
-		  // suite=1 ne sert qu'a distinguer cette redirection
+		  // rub=$rub sert AUSSI a distinguer cette redirection
 		  // d'avec l'appel initial sinon FireFox croit malin
 		  // d'optimiser la redirection
-		redirige_par_entete(generer_url_ecrire('export_all',"suite=1", true));
-	}elseif ($quoi=='end'){
-		lire_metas();
-		$tables_sauvegardees = isset($GLOBALS['meta']['status_dump_tables'])?unserialize($GLOBALS['meta']['status_dump_tables']):array();
-		effacer_meta("status_dump");
-		effacer_meta("status_dump_tables");
-		effacer_meta("export_session_id");
-		ecrire_metas();
+		redirige_par_entete(generer_url_ecrire('export_all',"rub=$rub", true));
+	} elseif ($quoi=='end') export_all_fin($file, $meta);
+}
 
-		$size = @(!file_exists($file) ? 0 : filesize($file));
+function export_all_fin($file, $meta)
+{
+	global $spip_lang_left,$spip_lang_right;
 
-		if (!$size) {
-			$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+	lire_metas();
+	$metatable = $meta . '_tables';
+	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
+	effacer_meta($meta);
+	effacer_meta($metatable);
+	ecrire_metas();
+
+	$size = @(!file_exists($file) ? 0 : filesize($file));
+
+	if (!$size) {
+		$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	
-		} else {
+	} else {
+		$subdir = dirname($file);
+		$dir = dirname($subdir);
+		$nom = basename($file);
+		if (@rename($file, $dir . '/' . $nom)) {
+			spip_unlink($subdir);
+			spip_log("$file renomme en $dir/$nom");
+		}
 	// ne pas effrayer inutilement: il peut y avoir moins de fichiers
 	// qu'annonce' si certains etaient vides
-			$n = _T('taille_octets', array('taille' => number_format($size, 0, ' ', ' ')));
+
+		$n = _T('taille_octets', array('taille' => number_format($size, 0, ' ', ' ')));
 		
-			$corps = "<p style='text-align: $spip_lang_left'>".
+		$corps = "<p style='text-align: $spip_lang_left'>".
 			  _T('info_sauvegarde_reussi_02',
 			     array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)")) .
 			  " <a href='" . generer_url_ecrire() . "'>".
@@ -84,9 +90,8 @@ function action_export_all_dist()
 			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
 			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
 			. "<br class='nettoyeur' />";
-		}
-		echo minipres(_T('info_sauvegarde'), $corps);
-		exit;
 	}
+	echo minipres(_T('info_sauvegarde'), $corps);
+	exit;
 }
 ?>

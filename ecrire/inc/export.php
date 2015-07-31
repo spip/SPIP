@@ -150,7 +150,7 @@ define('_EXTENSION_PARTIES', '.gz');
 // et on memorise dans le serveur qu'on va passer a la table suivante.
 
 // http://doc.spip.org/@export_objets
-function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques) {
+function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques, $rub, $meta) {
 	global $tables_principales;
 
 	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
@@ -165,16 +165,14 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 		$string = build_while($debut, $table, $prim, $les_rubriques);
 		$cpt++;
 		$debut +=  _EXPORT_TRANCHES_LIMITE;
-		$status_dump = "$gz::$archive::$etape::$cpt";
+		$status_dump = "$gz::$archive::$rub::$etape::$cpt";
 
 		// attention $string vide ne suffit pas a sortir
-		// car les admins restreints peuvent parcourir
-		// une portion de table vide pour eux.
+		// car les sauvegardes partielles peuvent parcourir
+		// une table dont la portion qui les concerne sera vide..
 		if ($string) { 
-			// verifier qu'on a encore la main, sinon mourir, un autre process a pris la suite
-			export_verifie_session();
-			// on ecrit dans un fichier generique
-			// puis on le renomme pour avoir une operation atomique 
+		// on ecrit dans un fichier generique
+		// puis on le renomme pour avoir une operation atomique 
 			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
 	// le fichier destination peut deja exister
 	// si on sort d'un timeout entre le rename et le ecrire_meta
@@ -183,16 +181,34 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 		}
 		// on se contente d'une ecriture en base pour aller plus vite
 		// a la relecture on en profitera pour mettre le cache a jour
-		ecrire_meta("status_dump", $status_dump,'non');
+		ecrire_meta($meta, $status_dump,'non');
 		if ($debut >= $total) {break;}
-		echo " $debut";
+		/* pour tester la robustesse de la reprise sur interruption
+		decommenter ce qui suit,  mais voir aussi echo_flush
+		if ($cpt && 1) {
+		  spip_log("force interrup $status_dump");
+		  include_spip('inc/headers');
+		  redirige_par_entete("./?exec=export_all&rub=$rub&x=$status_dump");
+		  } */
+		echo_flush(" $debut");
 	}
-	echo " $total."; 
+	echo_flush(" $total."); 
 	
 	# on prefere ne pas faire le ramassage ici de peur d'etre interrompu par le timeout au mauvais moment
 	# le ramassage aura lieu en debut de hit suivant, et ne sera normalement pas interrompu car le temps pour ramasser
 	# est plus court que le temps pour creer les parties
 	// ramasse_parties($dir.$archive, $dir.$archive);
+}
+
+// Envoi immediat au client.
+// Pour tester la robustesse ci-dessus, 
+// commenter 3 lignes et decommenter la derniere (sinon le 302 ne marche pas)
+function echo_flush($texte)
+{
+	echo $texte;
+	if (function_exists('ob_flush')) @ob_flush();
+	flush();
+#	spip_log(str_replace('<','',$texte));
 }
 
 // Construit la version xml  des champs d'une table
@@ -230,25 +246,42 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 
 // http://doc.spip.org/@export_select
 function export_select($row, $les_rubriques) {
+	static $articles = array();
 
 	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
 	if (!$les_rubriques) return true;
-	// if (isset($row['id_auteur'])) return false; # pour les ignorer
-	if (!isset($row['id_rubrique'])) {
-		if (isset($row['id_article']))
-			return autoriser('modifier','article',$row['id_article']);
-		if (isset($row['id_breve']))
-			return autoriser('modifier','breve',$row['id_breve']);
+	// numero de rubrique present suffit, sauf pour les forums
+	if (isset($row['id_rubrique']) AND $row['id_rubrique']) {
+		if  (!in_array($row['id_rubrique'], $les_rubriques))
+		  return false;
+		$articles[$row['id_article']] = true;
+		return true;
 	}
-	if (isset($row['id_article']) OR isset($row['id_breve']))
-		return autoriser('publierdans','rubrique',$row['id_rubrique']);
-	return isset($les_rubriques[$row['id_rubrique']]);
+	//  petitions, signatures et documents associes aux articles
+	if (isset($row['id_article']) AND $row['id_article']) {
+		return array_search($row['id_article'], $articles);
+	}
+
+	// a la louche pour le reste, mais c'est a peu pres ca.
+	return (isset($row['id_groupe']) OR isset($row['id_mot']) OR isset($row['mime_type']) OR isset($row['id_document']));
 }
 
 // Conversion texte -> xml (ajout d'entites)
 // http://doc.spip.org/@text_to_xml
 function text_to_xml($string) {
 	return str_replace(array('&','<','>'), array('&amp;','&lt;','&gt;'), $string);
+}
+
+// construit le repertoire ou preparer la sauvegarde
+function export_subdir($rub)
+{
+	include_spip('inc/actions');
+	// determine upload va aussi initialiser l'index "restreint"
+	$dir = determine_upload();
+	if (!$GLOBALS['auteur_session']['restreint'])
+		$dir = _DIR_DUMP;
+	$subdir = 'export_' . $GLOBALS['auteur_session']['id_auteur'] . '_' . intval($rub);
+	return sous_repertoire($dir, $subdir);
 }
 
 // production de l'entete du fichier d'archive
