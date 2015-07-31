@@ -1295,7 +1295,7 @@ demande plus de puissance au serveur.', # NEW
 // V
 'version' => 'Version&nbsp;:', # NEW
 'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
-'version_initiale' => 'Initial version', # NE
+'version_initiale' => 'Initial version' # NEW
 );
 
 ?>

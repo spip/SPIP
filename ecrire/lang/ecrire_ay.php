@@ -1348,7 +1348,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 // V
 'version' => 'Version&nbsp;:', # NEW
 'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
-'version_initiale' => 'Version initiale', # NE
+'version_initiale' => 'Version initiale' # NEW
 );
 
 ?>
