@@ -168,9 +168,9 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	// et masquer le formulaire si on n'en a pas besoin
 
 	if (!$new AND !$echec AND !$edit) {
-		$corps .= "<script type='text/javascript'>jQuery('#auteur_infos_edit').hide()</script>\n";
+	  $corps .= http_script("jQuery('#auteur_infos_edit').hide();");
 	} else {
-		$corps .= "<script type='text/javascript'>jQuery('#auteur_infos_voir').hide()</script>\n";
+	  $corps .= http_script("jQuery('#auteur_infos_voir').hide();");
 	}
 
 	// Formulaire de statut
@@ -267,7 +267,7 @@ function legender_auteur_voir($auteur) {
 		$h = "<a\nhref='$h'>$clic</a>";
 		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
 
-		$res .= "<script type='text/javascript'><!--
+		$res .= http_script("
 		var intitule_bouton = ".sql_quote($retour).";
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
@@ -282,8 +282,7 @@ function legender_auteur_voir($auteur) {
 				intitule_bouton = tmp;
 			});
 			return false;
-		});
-		// --></script>\n";
+		});");
 		$res .= "</span>\n";
 	}
 	

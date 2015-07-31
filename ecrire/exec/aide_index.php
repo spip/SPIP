@@ -171,17 +171,12 @@ function help_body($aide, $suite, $lang_aide='') {
 	// relocaliser img_pack au bon endroit ...
 	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html . $suite);
 	
-	echo '<script type="text/javascript"><!--
-
-jQuery(function(){
+	echo http_script('jQuery(function(){
 	jQuery("a.target_blank").click(function(){
 		window.open(this.href);
 		return false;
 	});
-});
-
-//--></script>
-';
+});)';
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
 	echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
@@ -296,8 +291,7 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 function help_menu($aide, $html, $lang_aide='') {
 	global $spip_lang_rtl;
 
-	echo AIDE_STYLE_MENU, '<script type="text/javascript"><!--
-var curr_article;
+	echo AIDE_STYLE_MENU, http_script('var curr_article;
 // http://doc.spip.org/@activer_article
 function activer_article(id) {
 	if (curr_article)
@@ -313,10 +307,7 @@ jQuery(function(){
 		window.open(this.href,"droite");
 		return false;
 	});
-});
-
-//--></script>
-',
+});'),
 	$GLOBALS['browser_layer'],
 	'
 </head>
@@ -405,7 +396,7 @@ function article($titre, $lien, $statut = "redac") {
 		if (_request('aide') == $lien) {
 			$ouvrir_rubrique = 1;
 			$class = "article-actif";
-			$texte[$ligne] .= "<script type='text/javascript'><!--\ncurr_article = '$id';\n// --></script>\n";
+			$texte[$ligne] .= http_script("curr_article = '$id';");
 		}
 		else {
 			$class = "article-inactif";
@@ -459,7 +450,7 @@ function exec_aide_index_dist()
 		header("Content-Type: text/html; charset=utf-8");
 		echo _DOCTYPE_AIDE, html_lang_attributes();
 		echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
-		echo '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'jquery.js"></script>';
+		echo http_script("", _DIR_JAVASCRIPT.'jquery.js');
 
 		if (_request('frame') == 'menu'){
 			help_menu(_request('aide'), $html, $lang);

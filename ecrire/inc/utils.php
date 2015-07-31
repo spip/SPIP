@@ -507,6 +507,25 @@ function quote_amp($u) {
 		"&amp;",$u);
 }
 
+// Production d'une balise Script valide
+// http://doc.spip.org/@http_script
+function http_script($script, $src='', $noscript='') {
+
+	if ($src)
+		$src = " src='$src'";
+	if ($script)
+		$script = ("<!--\n" . 
+		preg_replace(',</([^>]*)>,','<\/\1>', $script) .
+		"\n//-->\n");
+	if ($noscript)
+		$noscript = "<noscript>\n\t$noscript\n</noscript>\n";
+
+	
+	return ($src OR $script OR $noscript)
+	? "<script type='text/javascript'$src>$script</script>$noscript"
+	: '';
+}
+
 // Transforme n'importe quel champ en une chaine utilisable
 // en PHP ou Javascript en toute securite
 // < ? php $x = '[(#TEXTE|texte_script)]'; ? >
