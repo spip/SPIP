@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 
+include_ecrire ("inc_admin.php3");
 
 debut_page("Maintenance technique : gestion du cache", "administration", "base");
 
