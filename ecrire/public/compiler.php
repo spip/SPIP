@@ -209,7 +209,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$trace = "if (count(@\$GLOBALS['debug_objets']['resultat']['$trace'])<3)
 	    \$GLOBALS['debug_objets']['resultat']['$trace'][] = \$t0;";
 	}
-	return ($boucles[$id_boucle]->type_requete == 'boucle')
+	return ($boucles[$id_boucle]->type_requete == TYPE_RECURSIF)
 	? calculer_boucle_rec($id_boucle, $boucles, $trace) 
 	: calculer_boucle_nonrec($id_boucle, $boucles, $trace);
 }
@@ -612,7 +612,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			break;
 
 		// boucle
-		case 'boucle':
+		case TYPE_RECURSIF:
 			$nom = $p->id_boucle;
 			$newdescr = $descr;
 			$newdescr['id_mere'] = $nom;
@@ -633,7 +633,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 				$commentaire= "?$nom";
 				if (!$boucles[$nom]->milieu
-				AND $boucles[$nom]->type_requete <> 'boucle') {
+				AND $boucles[$nom]->type_requete <> TYPE_RECURSIF) {
 					if ($altern != "''") $code .= "\n. $altern";
 					if ($avant<>"''" OR $apres<>"''")
 					  spip_log("boucle $nom toujours vide, code superflu dans $id");
@@ -775,6 +775,11 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	include_spip('inc/charsets');
 	$squelette = transcoder_page($squelette);
 
+	// rendre inertes les echappements de #[](){}
+	while(false !== strpos($squelette, $inerte = 'INERTE'.$i)) $i++;
+	$squelette = preg_replace_callback(',\\\\([#[()\]{}]),',
+		create_function('$a', "return '$inerte-'.ord(\$a[1]).'-';"), $squelette, -1, $esc);
+
 	$descr = array('nom' => $nom,
 			'gram' => $gram,
 			'sourcefile' => $sourcefile,
@@ -787,7 +792,18 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	$squelette = $f($squelette, '', $boucles, $descr);
 
-	return compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+
+	$a = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+
+	// restituer les echappements
+	if ($esc) foreach($a as $i=>$boucle) {
+		$a[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
+			$boucle->return);
+		$a[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\".chr($a[1]);'),
+			$boucle->descr['squelette']);
+	}
+
+	return $a;
 }
 
 // Point d'entree pour arbre de syntaxe abstraite fourni en premier argument
@@ -826,7 +842,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				compile_inclure_doublons($boucle->milieu) OR
 				compile_inclure_doublons($boucle->altern)))
 			$descr['documents'] = true;  
-		if ($type != 'boucle') {
+		if ($type != TYPE_RECURSIF) {
 			if (!$boucles[$id]->sql_serveur AND $connect)
 				$boucles[$id]->sql_serveur = $connect;
 			$show = $trouver_table($type, $boucles[$id]->sql_serveur);
@@ -868,7 +884,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 	foreach($boucles as $id => $boucle) { 
-		if ($boucle->type_requete == 'boucle' AND $boucle->param) {
+		if ($boucle->type_requete == TYPE_RECURSIF AND $boucle->param) {
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
 			if (!$rec) {
@@ -890,7 +906,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 	foreach($boucles as $id => $boucle) { 
 		$id = strval($id); // attention au type dans index_pile
 		$type = $boucle->type_requete;
-		if ($type AND $type != 'boucle') {
+		if ($type AND $type != TYPE_RECURSIF) {
 			if ($boucle->param) {
 				$res = calculer_criteres($id, $boucles);
 			}
