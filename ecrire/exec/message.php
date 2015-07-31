@@ -79,7 +79,7 @@ if ($jour)
   change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin);
 
 if ($change_statut) {
-  spip_query("UPDATE spip_messages SET statut='" . addslashes($change_statut) . "' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET statut='" . addslashes($change_statut) . "' WHERE id_message='$id_message'");
 	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
 }
 
@@ -117,10 +117,7 @@ function sql_nouveau_participant($nouv_auteur, $id_message)
 function http_auteurs_ressemblants($cherche_auteur, $id_message)
 {
   global $connect_id_auteur;
-  $query = spip_query("
-SELECT id_auteur, nom 
-FROM spip_auteurs 
-WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
+  $query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
   $table_auteurs = array();
   $table_ids = array();
   while ($row = spip_fetch_array($query)) {
@@ -180,10 +177,7 @@ function http_visualiser_participants($auteurs_tmp)
 
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
-    $query_ajout_auteurs = "SELECT * FROM spip_auteurs WHERE ";
-    if ($ze_auteurs) $query_ajout_auteurs .= "id_auteur NOT IN ($ze_auteurs) AND ";
-    $query_ajout_auteurs .= " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom";
-    $result_ajout_auteurs = spip_query($query_ajout_auteurs);
+    $result_ajout_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND ") . " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom");
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
@@ -248,8 +242,8 @@ function http_afficher_forum_perso($id_message, $titre)
 	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&adresse_retour=$forum_retour&id_message=$id_message&titre_message=$utitre"), "forum-interne-24.gif", "creer.gif");
 	echo  "</div>\n<p align='left'>";
 
-	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20";
-	afficher_forum(spip_query($query_forum), $forum_retour);
+	$query_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
+	afficher_forum($query_forum, $forum_retour);
 	echo "\n</p>";
 }
 
@@ -271,12 +265,11 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 		// Liste des participants
 		//
 
-	  $query_auteurs = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur";
-	  $result_auteurs = spip_query($query_auteurs);
+	$result_auteurs = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
-	  $total_dest = spip_num_rows($result_auteurs);
+	$total_dest = spip_num_rows($result_auteurs);
 
-	  if ($total_dest > 0) {
+	if ($total_dest > 0) {
 			$couleurs = array("#FFFFFF",$couleur_claire);
 			$auteurs_tmp = array();
 			$ze_auteurs = array();
