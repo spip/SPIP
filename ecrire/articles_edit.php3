@@ -510,11 +510,13 @@ echo "<P><HR><P>";
 	echo $texte;
 	echo "</TEXTAREA>\n";
 
-	if ($options == "avancees") {
+/* 	// traitement automatique des sauts de ligne : pas mur
+	if ($proposer_autobr AND ($options == "avancees")) {
 		echo '<div class="verdana2">';
 		echo '<input type="checkbox" class="checkbox" name="post_autobr" id="autobr" value="1" />';
 		echo '<label for="autobr">'._L("prendre en compte les sauts de ligne simples").'</label></div>';
 	}
+ */
 
 	if (($articles_ps != "non" AND $options == "avancees") OR $ps) {
 		echo "<P><B>"._T('info_post_scriptum')."</B><BR>";

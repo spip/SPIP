@@ -24,6 +24,24 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 include_ecrire('inc_index.php3');
 
 
+if ($forcer_indexation = intval($forcer_indexation))
+	effectuer_une_indexation ($forcer_indexation);
+
+if ($forcer_reindexation == 'oui')
+	creer_liste_indexation();
+
+if ($purger == 'oui') {
+	purger_index();
+	creer_liste_indexation();
+}
+
+echo "<a href='admin_index.php3?mise_a_jour=oui'>"._L('Cliquez ici pour mettre &agrave; jour les infos d\'indexation du site').'</a><br />';
+echo "<a href='admin_index.php3?forcer_indexation=20'>"._L('Cliquez ici pour forcer l\'indexation du site').'</a><br />';
+echo "<a href='admin_index.php3?forcer_reindexation=oui'>"._L('Cliquez ici pour relancer l\'indexation du site sans purger les donn&eacute;es.').'</a><br />';
+echo "<a href='admin_index.php3?purger=oui'>"._L('Cliquez ici pour purger les tables d\'indexation.').'</a><br />';
+
+
+
 
 
 // graphe des objets indexes
@@ -68,11 +86,10 @@ while (list(,$type) = each($types)) if ($index_total[$type]>0) {
 					$ifond=0;
 					$couleur="#FFFFFF";
 				}
-	echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif'><TD WIDTH=\"100%\">";
-	echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
+	echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif'><TD WIDTH=\"100\">";
 	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=2>";	
 	echo $type;
-	echo "</FONT></TD><TD>";
+	echo "</FONT><TD>";
 	jauge('rouge', $a = floor(300*$indexes[$type]['non']/$index_total[$type]));
 	jauge('vert', $b = ceil(300*$indexes[$type]['oui']/$index_total[$type]));
 	jauge('fond', 300-$a-$b);
@@ -81,12 +98,6 @@ while (list(,$type) = each($types)) if ($index_total[$type]>0) {
 echo "</table>";
 
 fin_cadre_relief();
-
-if ($forcer_indexation = intval($forcer_indexation))
-	effectuer_une_indexation ($forcer_indexation);
-
-echo "<a href='admin_index.php3?mise_a_jour=oui'>"._L('Cliquez ici pour mettre &agrave; jour les infos d\'indexation du site').'</a><br />';
-echo "<a href='admin_index.php3?forcer_indexation=20'>"._L('Cliquez ici pour forcer l\'indexation du site').'</a><br />';
 
 
 echo "<BR>";
