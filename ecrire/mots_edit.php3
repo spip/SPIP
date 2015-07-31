@@ -136,10 +136,11 @@ if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubrique
 //
 debut_raccourcis();
 
-icone_horizontale(_T('icone_voir_tous_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
-
-if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
+if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+		icone_horizontale(_T('icone_modif_groupe_mots'), "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
 		icone_horizontale(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
+ }
+icone_horizontale(_T('icone_voir_tous_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 
 fin_raccourcis();
 
