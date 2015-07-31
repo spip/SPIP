@@ -416,6 +416,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	ecrire_fichier(_CACHE_PLUGINS_VERIF,
 		serialize($liste_fichier_verif));
 	@spip_unlink(_CACHE_CHEMIN);
+
+	// attendre eventuellement l'invalidation du cache opcode
+	spip_attend_invalidation_opcode_cache();
+
 }
 
 // precompilation des pipelines

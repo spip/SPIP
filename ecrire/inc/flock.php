@@ -213,6 +213,27 @@ function raler_fichier($fichier)
 	exit;
 }
 
+
+/**
+ * si opcache est actif et en mode validate_timestamps
+ * le timestamp ne sera checke qu'apres revalidate_freq s
+ * il faut donc attendre ce temps la pour etre sur qu'on va bien beneficier de la recompilation
+ * NB c'est une config foireuse deconseillee de opcode cache mais malheureusement utilisee par Octave
+ * cf http://stackoverflow.com/questions/25649416/when-exactly-does-php-5-5-opcache-check-file-timestamp-based-on-revalidate-freq
+ * et http://wiki.mikejung.biz/PHP_OPcache
+ *
+ * Ne fait rien en dehors de ce cas
+ *
+ */
+function spip_attend_invalidation_opcode_cache(){
+	if (function_exists('opcache_get_configuration')
+	  AND @ini_get('opcache.enable')
+	  AND @ini_get('opcache.validate_timestamps')
+	  AND $duree = @ini_get('opcache.revalidate_freq') ) {
+		sleep($duree);
+	}
+}
+
 //
 // Retourne Vrai si son premier argument a ete cree il y a moins de N secondes
 //
