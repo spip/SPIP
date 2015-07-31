@@ -112,63 +112,6 @@ function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 	}
 }
 
-# Provoque la recherche du squelette $fond d'une $lang donnee,
-# et l'applique sur un $contexte pour un certain $cache.
-# Retourne un tableau de 3 elements:
-# 'texte' => la page calculee
-# 'process_ins' => 'html' ou 'php' si presence d'un '< ?php'
-# 'invalideurs' => les invalideurs (cf inc-calcul-squel)
-
-# En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
-
-# La recherche est assuree par la fonction chercher_squelette,
-# definie dans inc-chercher, fichier non charge si elle est deja definie
-# (typiquement dans mes_fonctions.php)
-
-function cherche_page ($cache, $contexte, $fond)  {
-
-	// Choisir entre $fond-dist.html, $fond=7.html, etc?
-	$id_rubrique_fond = 0;
-	// Chercher le fond qui va servir de squelette
-	if ($r = sql_rubrique_fond($contexte))
-		list($id_rubrique_fond, $lang) = $r;
-	if (!$lang)
-		$lang = $GLOBALS['meta']['langue_site'];
-	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
-	$lang = $contexte['lang'];
-
-	if (!$GLOBALS['forcer_lang'])
-		lang_select($lang);
-
-	$f = include_fonction('trouver_squelette', 'public');
-	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
-
-	// Compiler le squelette en specifiant les langages cibles et source
-	// (cette compilation n'intervient qu'en cas de modif du squelette)
-	// et appliquer sa fonction principale sur le contexte 
-	// Passer le nom du cache pour produire sa destruction automatique
-
-	$page = array();
-
-	if ($fonc = charger_squelette($skel, $mime_type, $gram, $sourcefile)){
-		spip_timer('calcul page');
-		$page = $fonc(array('cache' => $cache), array($contexte));
-		spip_log("calcul ("
-			.spip_timer('calcul page')
-			.") [$skel] ".
-			($cache ? $cache.cache_gz($page).' ' : '')
-			.'- '.strlen($page['texte']).' octets'
-		);
-	}
-
-	if ($GLOBALS['var_mode'] == 'debug') {
-		debug_dumpfile ($page['texte'], $fonc, 'resultat');
-	}
-
-	return $page;
-}
-
-
 //
 // Contexte : lors du calcul d'une page spip etablit le contexte a partir
 // des variables $_GET et $_POST, et leur ajoute la date
@@ -197,45 +140,8 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-function calculer_page_globale($cache, $fond) {
-
-	global $_SERVER, $contexte;
-
-	$contexte = calculer_contexte();
-
-	// Gestion des URLs personnalises (propre etc)
-	// ATTENTION: $contexte est global car cette fonction le modifie.
-	// $fond est passe par reference aussi pour modification
-	// (tout ca parce que ces URL masque ces donnees qu'on restaure ici)
-	// Bref,  les URL dites propres ont une implementation sale.
-	// Interdit de nettoyer, faut assumer l'histoire.
-	if (function_exists("recuperer_parametres_url")) {
-		recuperer_parametres_url($fond, nettoyer_uri());
-		// remettre les globales pour le bouton "Modifier cet article"
-		foreach ($contexte as $var=>$val)
-			if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
-	}
-
-	// si le champ chapo commence par '=' c'est une redirection.
-	if ($id_article = intval($contexte['id_article'])) {
-		if ($art = sql_chapo($id_article)) {
-			$chapo = $art['chapo'];
-			if (substr($chapo, 0, 1) == '=') {
-				include_spip('inc/texte');
-				list(,$url) = extraire_lien(array('','','',
-				substr($chapo, 1)));
-				if ($url) { // sinon les navigateurs pataugent
-					$url = texte_script(str_replace('&amp;', '&', $url));
-					return array('texte' => "<".
-					"?php redirige_par_entete('$url'); ?" . ">",
-					'process_ins' => 'php');
-				}
-			}
-		}
-	}
-
-	// Go to work !
-	$page = cherche_page($cache, $contexte, $fond);
+function signaler_squelette($contexte)
+{
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
@@ -244,9 +150,10 @@ function calculer_page_globale($cache, $fond) {
 			$signal['contexte'][$val] = intval($contexte[$val]);
 	}
 
-	$page['signal'] = $signal;
-	return $page;
+	return $signal;
 }
+
+
 
 function analyse_resultat_skel($nom, $Cache, $corps) {
 	$headers = array();
@@ -271,6 +178,96 @@ function analyse_resultat_skel($nom, $Cache, $corps) {
 		'entetes' => $headers,
 		'duree' => $headers['X-Spip-Cache']
 	);
+}
+
+# Recherche un squelette et l'applique sur un contexte pour un certain cache.
+# Retourne un tableau de 3 elements:
+# 'texte' => la page calculee
+# 'process_ins' => 'html' ou 'php' si presence d'un '< ?php'
+# 'invalideurs' => les invalideurs de cache
+# En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
+# La recherche est assuree par la fonction surchargeable trouver_squelette,
+
+function public_localiser_page_dist($fond, $local='', $cache='')  {
+
+	// distinguer le premier appel des appels par inclusion
+	if (!is_array($local)) { 
+		global $contexte;
+	// ATTENTION, gestion des URLs personnalises (propre etc):
+	// 1. $contexte est global car cette fonction le modifie.
+	// 2. $fond est passe par reference, pour la meme raison
+	// Bref,  les URL dites propres ont une implementation sale.
+	// Interdit de nettoyer, faut assumer l'histoire.
+		$contexte = calculer_contexte();
+		if (function_exists("recuperer_parametres_url")) {
+			recuperer_parametres_url($fond, nettoyer_uri());
+	// remettre les globales (bouton "Modifier cet article" etc)
+			foreach ($contexte as $var=>$val) {
+				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
+			}
+		}
+	        $local = $contexte;
+	}
+
+	// si le champ chapo commence par '=' c'est une redirection.
+
+	if ($fond == 'article'
+	AND $id_article = intval($local['id_article'])) {
+		if ($art = sql_chapo($id_article)) {
+			$chapo = $art['chapo'];
+			if (substr($chapo, 0, 1) == '=') {
+				include_spip('inc/texte');
+				list(,$url) = extraire_lien(array('','','',
+				substr($chapo, 1)));
+				if ($url) { // sinon les navigateurs pataugent
+					$url = texte_script(str_replace('&amp;', '&', $url));
+					return array('texte' => "<".
+					"?php redirige_par_entete('$url'); ?" . ">",
+					'process_ins' => 'php');
+				}
+			}
+		}
+	}
+
+	// Choisir entre $fond-dist.html, $fond=7.html, etc?
+	$id_rubrique_fond = 0;
+	// Chercher le fond qui va servir de squelette
+	if ($r = sql_rubrique_fond($local))
+		list($id_rubrique_fond, $lang) = $r;
+	if (!$lang)
+		$lang = $GLOBALS['meta']['langue_site'];
+	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
+	$lang = $local['lang'];
+
+	if (!$GLOBALS['forcer_lang'])
+		lang_select($lang);
+
+	$f = include_fonction('trouver_squelette', 'public');
+	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
+
+	// Compiler le squelette en specifiant les langages cibles et source
+	// (cette compilation n'intervient qu'en cas de modif du squelette)
+	// et appliquer sa fonction principale sur le contexte 
+	// Passer le nom du cache pour produire sa destruction automatique
+
+	$page = array();
+
+	if ($fonc = charger_squelette($skel, $mime_type, $gram, $sourcefile)){
+		spip_timer('calcul page');
+		$page = $fonc(array('cache' => $cache), array($local));
+		spip_log("calcul ("
+			.spip_timer('calcul page')
+			.") [$skel] ".
+			($cache ? $cache.cache_gz($page).' ' : '')
+			.'- '.strlen($page['texte']).' octets'
+		);
+	}
+
+	if ($GLOBALS['var_mode'] == 'debug') {
+		debug_dumpfile ($page['texte'], $fonc, 'resultat');
+	}
+	if (!is_array($signal)) $page['signal'] = signaler_squelette($local);
+	return $page;
 }
 
 ?>
