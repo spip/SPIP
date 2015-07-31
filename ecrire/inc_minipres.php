@@ -25,6 +25,7 @@ function install_debut_html($titre = 'AUTO') {
 		$titre=_T('info_installation_systeme_publication');
 
 	include_ecrire('inc_headers');
+	include_ecrire('inc_style');
 	http_no_cache();
 	$args_color = 	  "couleur_claire=" .
 			  urlencode('#FFCC66') .
@@ -39,12 +40,11 @@ function install_debut_html($titre = 'AUTO') {
 	  "<title>",
 	  $titre,
 	  "</title>\n" ,
-	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_action('style',"$args_color"), "'>
-<style type='text/css'>
-<!--
-	a {text-decoration: none; }
--->
-</style>
+	// mettre inline les styles de l'espace prive (sinon ca clignote)
+	  "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
+	  styles_ecrire(), "
+	a {text-decoration: none; }",
+	  "\n\n]]>\n--></style>\n\n
 </head>
 <body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
 <center><table style='margin-top:50px; width: 450px'>
