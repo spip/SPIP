@@ -37,20 +37,20 @@ var accepter_change_statut = false;
 
 function selec_statut(id, type, decal, puce, script) {
 
-	node = findObj('imgstatut'+type+id);
+	node = $('.imgstatut'+type+id);
 
 	if (!accepter_change_statut)
 		accepter_change_statut = confirm(confirm_changer_statut);
 
-	if (!accepter_change_statut || !node) return;
+	if (!accepter_change_statut || !node.length) return;
 
-	$('#statutdecal'+type+id)
+	$('.statutdecal'+type+id)
 	.css('margin-left', decal+'px')
 	.removeClass('on');
 
 	$.get(script, function(c) {
 		if (!c)
-			node.src = puce;
+			node.attr('src',puce);
 		else {
 			r = window.open();
 			r.document.write(c);
@@ -59,9 +59,9 @@ function selec_statut(id, type, decal, puce, script) {
 	});
 }
 
-function prepare_selec_statut(nom, type, id, action)
+function prepare_selec_statut(node, nom, type, id, action)
 {
-	$('#' + nom + type + id)
+	$(node)
 	.hoverClass('on')
 	.addClass('on')
 	.load(action + '&type='+type+'&id='+id);

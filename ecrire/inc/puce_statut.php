@@ -255,7 +255,7 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	  $ajax_node ='';
 	}
 	else
-		$ajax_node = " id='imgstatut$type$id'";
+		$ajax_node = " class='imgstatut$type$id'";
 
 
 	$inser_puce = http_img_pack($src,statut_titre($type, $statut),$ajax_node);
@@ -282,7 +282,7 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 		$out = "<span class='puce_objet_fixe $type'>"
 		. $inser_puce
 		. "</span>"
-		. "<span class='puce_objet_popup $type' id='statutdecal$type$id' style='width:{$width}px;margin-left:-{$clip}px;'>";
+		. "<span class='puce_objet_popup $type statutdecal$type$id' style='width:{$width}px;margin-left:-{$clip}px;'>";
 		$i=0;
 		foreach($desc['statut_textes_instituer'] as $s=>$t){
 			$out .= afficher_script_statut($id, $type, -$zero-$i++*$unit, statut_image($type,$s), $s, _T($t));
@@ -294,7 +294,7 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 
 		$nom = "puce_statut_";
 	  $action = generer_url_ecrire('puce_statut',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', '$id', '$action'); }";
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut(this, '$nom', '$type', '$id', '$action'); }";
 	  $over = " onmouseover=\"$action\"";
 
 		$lang_dir = lang_dir($GLOBALS['lang_objet']);
