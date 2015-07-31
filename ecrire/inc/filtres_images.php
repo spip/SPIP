@@ -57,12 +57,13 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$source = $img;
 		$img = "<img src='$source' />";
 	}
-	$fichier = $source;
+	
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
 		include_spip("inc/distant");
 		$fichier = copie_locale($source);
-	}
+		if (!$fichier) return ""; 
+	} else $fichier = $source;
 	
 	if (!file_exists($fichier)) return false;
 	

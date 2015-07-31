@@ -39,7 +39,7 @@ function inc_formater_auteur_dist($id_auteur) {
 
 	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
 		$vals[]= '&nbsp;';
-	else	$vals[]= formater_auteur_mail($row['email'], $id_auteur);
+	else	$vals[]= formater_auteur_mail($row, $id_auteur);
 
 	if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
 		$bio_auteur = " title=\"$bio_auteur\"";
@@ -66,14 +66,14 @@ function inc_formater_auteur_dist($id_auteur) {
 }
 
 // http://doc.spip.org/@formater_auteur_mail
-function formater_auteur_mail($email, $id_auteur)
+function formater_auteur_mail($row, $id_auteur)
 {
 	global $spip_lang_rtl;
 
-//	if ($email) $href='mailto:' . $email;
-//	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
-	$href = generer_action_auteur("editer_message","normal/$id_auteur");
-
+	$email = $row['email'];
+	if (($row['statut'] == '6forum') || ($row['statut'] == '5poubelle'))
+		$href= 'mailto:' . $email;
+	else $href = generer_action_auteur("editer_message","normal/$id_auteur");
 	return "<a href='$href' title=\""
 		  . _T('email')
 		  . '">'

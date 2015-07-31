@@ -27,8 +27,7 @@ function exec_forum_envoi_dist()
 		    _request('texte'),
 		    _request('titre_message'),
 		    _request('url_site'),
-		    _request('script'),
-		    _request('valider_forum'));
+		    _request('script'));
 }
 
 // http://doc.spip.org/@forum_envoi
@@ -41,8 +40,7 @@ function forum_envoi(
 		     $texte,
 		     $titre_message,
 		     $url_site,
-		     $script,
-		     $valider_forum)
+		     $script)
 {
 	global     $options, $spip_lang_rtl;
 
@@ -82,75 +80,39 @@ function forum_envoi(
 			$parent .= fin_cadre_forum(true);
 		}
 
-	} else $parent = $titre_parent = $id_message = '';
+	} else { $parent = $titre_parent = $id_message = ''; $row = array();}
 
-	if ($script == 'articles') {
-	  $table ='articles';
-	  $objet = 'id_article';
-	  $titre = 'titre';
-	  $num = _T('info_numero_article');
-	  if (!$id)  $id = $id_article;
-	} elseif ($script == 'breves_voir') {
-	  $table = 'breves';
-	  $objet = 'id_breve';
-	  $titre = 'titre';
-	  $num = _T('info_gauche_numero_breve');
-	  if (!$id)  $id = $id_breve;
-	} elseif ($script == 'message') {
-	  $table = 'messages';
-	  $objet = 'id_message';
-	  $titre = 'titre';
-	  $num = _T('message') . ' ' ._T('info_numero_abbreviation');
-	  if (!$id)  $id = $id_message;
-	} elseif ($script == 'naviguer') {
-	  $table = 'rubriques';
-	  $objet = 'id_rubrique';
-	  $titre = 'titre';
-	  $num = _T('titre_numero_rubrique');
-	  if (!$id)  $id = $id_rubrique;
-	} elseif ($script == 'sites') {
-	  $table = 'syndic';
-	  $objet = 'id_syndic';
-	  $titre = 'nom_site';
-	  $num = _T('titre_site_numero');
-	  if (!$id)  $id = $id_syndic;
-	} else {
-	  $table = 'forum';
-	  $objet = 'id_forum';
-	  $titre = 'titre'; 
-	  $id = 0;
-	  $num = '';
+	list($script,$retour) = split('\?', urldecode($script));
+	if (function_exists($f = 'forum_envoi_' . $script))
+	  list($table, $objet, $titre, $num, $retour, $id, $corps) =
+	    $f($id, $row, $retour);
+	else $table = $objet = $titre = $num = $retour = $corps ='';
+
+	if (!$titre_message) {
+		if ($table) {
+			$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
+			$q = spip_fetch_array($q);
+			$titre_message = $q['titre'];
+		} else 	$titre_message = _T('texte_nouveau_message');
 	}
-
-	if ($num AND !$titre_message) {
-		$q = spip_query("SELECT $titre AS titre FROM spip_$table WHERE $objet=$id");
-		$q = spip_fetch_array($q);
-		$titre_defaut = $q['titre'];
-	} else 	$titre_defaut = $titre_message  ? $titre_message  :_T('texte_nouveau_message');
-
 
 	// debut de page
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('texte_nouveau_message'), "accueil", $id_message ? "messagerie" : "accueil");
 	debut_gauche();
-	
-	echo debut_cadre_enfonce();
-	echo icone_horizontale(_T('icone_retour'), generer_url_ecrire($script,$id?"$objet=$id":''), "article-24.gif","rien.gif", false);
-	echo fin_cadre_enfonce();
-	
-	debut_droite();
-	gros_titre(_T('texte_nouveau_message'));
 
+	debut_droite();
+	gros_titre(($num ? "$num $id<br />" :'') . $titre_message);
 
 	// previsualisation/validation
 	if ($modif_forum == "oui") {
-		$corps = forum_envoi_entete($parent, $titre_parent, $texte, $titre_defaut, $nom_site, $url_site);
+		$corps .= forum_envoi_entete($parent, $titre_parent, $texte, $titre_message, $nom_site, $url_site);
 		$parent = '';
-	} else $corps = '';
+	}
 
 	// formulaire
 	$corps .= debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
-	. forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_defaut,  $nom_site, $url_site)
+	. forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message,  $nom_site, $url_site)
 	. "<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_voir_message')
 	. "' /></div>"
@@ -164,13 +126,78 @@ function forum_envoi(
 
 	echo  $parent,
 	  "\n<div>&nbsp;</div>"
-	  . redirige_action_auteur('poster_forum_prive',$cat, $script, "$objet=$id", $corps, "\nname='formulaire' id='formulaire'")
+	  . redirige_action_auteur('poster_forum_prive',$cat, $script, $retour, $corps, "\nmethod='post' name='formulaire' id='formulaire'")
 	  . fin_gauche()
 	  . fin_page();
 }
 
+function forum_envoi_articles($id, $row, $retour) {
+	$table ='articles';
+	$objet = 'id_article';
+	$titre = 'titre';
+	$num = _T('info_numero_article');
+	if (!$id)  $id = $row['id_article'];
+	if (!$retour) $retour = "$objet=$id"; 
+	return array($table, $objet, $titre, $num, $retour, $id, '');
+}
+
+function forum_envoi_breves_voir($id, $row, $retour) {
+	$table = 'breves';
+	$objet = 'id_breve';
+	$titre = 'titre';
+	$num = _T('info_gauche_numero_breve');
+	if (!$id)  $id = $row['id_breve'];
+	if (!$retour) $retour = "$objet=$id"; 
+	return array($table, $objet, $titre, $num, $retour, $id, '');
+}
+
+function forum_envoi_message($id, $row, $retour) {
+	$table = 'messages';
+	$objet = 'id_message';
+	$titre = 'titre';
+	$num = _T('message') . ' ' ._T('info_numero_abbreviation');
+	if (!$id)  $id = $row['id_message'];
+	if (!$retour) $retour = "$objet=$id"; 
+	return array($table, $objet, $titre, $num, $retour, $id, '');
+}
+
+function forum_envoi_naviguer($id, $row, $retour) {
+	$table = 'rubriques';
+	$objet = 'id_rubrique';
+	$titre = 'titre';
+	$num = _T('titre_numero_rubrique');
+	if (!$id)  $id = $row['id_rubrique'];
+	if (!$retour) $retour = "$objet=$id"; 
+	return array($table, $objet, $titre, $num, $retour, $id, '');
+}
+
+function forum_envoi_sites($id, $row, $retour) {
+	$table = 'syndic';
+	$objet = 'id_syndic';
+	$titre = 'nom_site';
+	$num = _T('titre_site_numero');
+	if (!$id)  $id = $row['id_syndic'];
+	if (!$retour) $retour = "$objet=$id"; 
+	return array($table, $objet, $titre, $num, $retour, $id, '');
+}
+
+function forum_envoi_forum($id, $row, $retour) {
+
+	$table = $titre = $num = '';
+	$id = 0; // pour forcer la creation dans action/poster
+	$objet = 'id_forum';
+	$debut = intval(_request('debut'));
+	$retour = ("debut=$debut"); 
+	$corps .= "<input type='hidden' name='debut' value='$debut' />";
+	return array($table, $objet, $titre, $num, $retour, $id, $corps);
+}
+
+function forum_envoi_forum_admin($id, $row, $retour) {
+	return forum_envoi_forum($id, $row, $retour);
+}
+
 // http://doc.spip.org/@forum_envoi_formulaire
-function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_page, $nom_site, $url_site)
+function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre_page, $nom_site, $url_site)
 {
 	global $options;
 
@@ -180,7 +207,7 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	else $logo = "forum-public-24.gif";
 
 	return "\n<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td>"
-	  . icone(_T('icone_retour'), generer_url_ecrire($script, "$objet=$id"), $logo, '','', false)
+	  . icone(_T('icone_retour'), $retour, $logo, '','', false)
 	  ."</td>"
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
