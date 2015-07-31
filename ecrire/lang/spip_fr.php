@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuler',
 	'antispam_champ_vide' => 'Veuillez laisser ce champ vide :',
 	'articles_recents' => 'Articles les plus récents',
+	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans dans votre saisie, veuillez vérifier les informations.',
 	'avis_archive_incorrect' => 'le fichier archive n’est pas un fichier SPIP',
 	'avis_archive_invalide' => 'le fichier archive n’est pas valide',
 	'avis_attention' => 'ATTENTION !',
@@ -41,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Erreur SQL',
 	'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d’accès à l’espace privé',
+	'avis_nb_erreurs_saisie' => 'Il y a @nb@ erreurs dans votre saisie, veuillez vérifier les informations.',
 
 	// B
 	'barre_a_accent_grave' => 'Insérer un A accent grave majuscule',
@@ -119,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@',
 	'date_fmt_periode_from' => 'Du',
 	'date_fmt_periode_to' => 'au',
-	'date_fmt_saison_annee' => '@saison@ @annee@', // Retour du filtre saison_annee "été 2014", reçoit comme argument 'saison' (string) et année (int)
+	'date_fmt_saison_annee' => '@saison@ @annee@',
 	'date_heures' => 'heures',
 	'date_hier' => 'hier',
 	'date_il_y_a' => 'il y a @delai@',
@@ -674,8 +676,8 @@ et vous reconnecter au site.
 	'titre_statistiques' => 'Statistiques du site',
 	'titre_titre_document' => 'Titre du document :',
 	'todo' => 'à venir',
-	'trad_reference' => '(référence des traductions)',
 	'trad_definir_reference' => 'Choisir "@titre@" comme référence des traductions',
+	'trad_reference' => '(référence des traductions)',
 
 	// Z
 	'zbug_balise_b_aval' => ' : balise B en aval',
