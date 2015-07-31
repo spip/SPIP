@@ -76,7 +76,8 @@ fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* Pre
 table.spip_barre { width: 100%; }
 table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
 table.spip_barre a:focus img,
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre a:hover img,
+table.spip_barre a:active img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; }
 
 /* Formulaire de forum */
