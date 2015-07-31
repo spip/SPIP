@@ -3,8 +3,8 @@
 if (defined("_INVALIDEUR")) return;
 define("_INVALIDEUR", "1");
 
-include($GLOBALS['flag_ecrire'] ? '../inc-cache.php3' : 'inc-cache.php3');
-include($GLOBALS['flag_ecrire'] ? 'inc_serialbase.php3' : 'ecrire/inc_serialbase.php3');
+include_ecrire('inc_serialbase.php3');
+include_local('inc-cache.php3');
 
 function  supprime_invalideurs()
 {
@@ -30,7 +30,7 @@ DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES . ($cond ? " WHERE $cond" :'')
 
 function maj_invalideurs($hache, $infosurpage)
 {
-    // pour l'instant on ne sait traiter que ces infos-la`:
+    // pour l'instant on ne sait traiter que ces infos-là:
   insere_invalideur($infosurpage['id_article'],'id_article', $hache);
   insere_invalideur($infosurpage['id_breve'],   'id_breve', $hache);
   insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $hache);
@@ -46,13 +46,13 @@ function insere_invalideur($a, $type, $hache) {
 INSERT IGNORE INTO spip_" . $type . _SUFFIXE_DES_CACHES . "
 (hache, " . $type . ")
 VALUES " . join(", ", $values));
-#      spip_log("De'pendances $type: " . join(", ", $values));
+#      spip_log("Dépendances $type: " . join(", ", $values));
     }
 }
 
-// Regarde dans une table de nom de caches ceux ve'rifiant une condition donne'e
-// Les retire de cette table et de la table ge'ne'rale des caches
-// Si la condition est vide, c'est une simple purge ge'ne'rale
+// Regarde dans une table de nom de caches ceux vérifiant une condition donnée
+// Les retire de cette table et de la table générale des caches
+// Si la condition est vide, c'est une simple purge générale
 
 function suivre_invalideur($cond, $table)
 {
@@ -80,7 +80,7 @@ function applique_invalideur($depart)
       $niveau = $tous;
       while ($niveau)
 	{
-# le NOT IN est the'oriquement superflu, mais prote`ge des tables endommage'es
+# le NOT IN est théoriquement superflu, mais protège des tables endommagées
 	  $result = spip_query("
 SELECT  DISTINCT hache
 FROM    spip_inclure" . _SUFFIXE_DES_CACHES . "
