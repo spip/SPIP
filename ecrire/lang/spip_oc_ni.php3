@@ -160,6 +160,7 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 'cache_mode_non_compresse' => 'Lu fichi&egrave;rs de l\'amagador son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre dau sit p&ograve;ut modificar aquelu param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
+'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
 // D

@@ -106,7 +106,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_checkbox_signature_unique_site' => 'una sola adesione per sito Web',
 'bouton_chercher' => 'Cerca',
 'bouton_choisir' => 'Scegli',
-'bouton_demande_publication' => 'Chiedi la publicazione di questo articolo',
+'bouton_demande_publication' => 'Chiedi la pubblicazione di questo articolo',
 'bouton_effacer_index' => 'Cancella gli indici',
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
@@ -175,6 +175,7 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 'cache_mode_non_compresse' => 'I file di cache sono salvati in modalit&agrave; non compressa.',
 'cache_modifiable_webmestre' => 'Questi parametri possono essere modificati dal webmaster del sito.',
 'calendrier_synchro' => 'Se si utilizza un programma di agenda compatibile con <b>iCal</b>, &egrave; possibile sincronizzare i dati con le informazioni di questo sito',
+'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 
 
 // D

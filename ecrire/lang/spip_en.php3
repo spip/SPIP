@@ -176,6 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => 'These parameters can be modified by the webmaster.',
 'calendrier_synchro' => 'If you use a diary application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
+'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
 
 
 // D

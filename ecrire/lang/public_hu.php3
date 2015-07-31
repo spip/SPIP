@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Honlap t&eacute;rk&eacute;pe',
 'popularite' => 'N&eacute;pszer&#369;s&eacute;g',
 'poster_message' => '&Uuml;zenet k&uuml;ld&eacute;s',
+'proposer_site' => 'Honlapot aj&aacute;nlhat abban a rovatban&nbsp;:',
 
 
 // R
