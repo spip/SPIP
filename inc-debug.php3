@@ -65,14 +65,8 @@ function affboucle($val) {
 	echo "\n";
 }
 
-function affboucles() {
-	global $boucles;
-	reset($boucles);
-	while (list($key, $val) = each($boucles)) affboucle($val);
+function affboucles($boucles) {
+  while (list($key, $val) = each($boucles)) affboucle($val);
 }
-
-afftable($GLOBALS['racine']);
-affboucles();
-
 
 ?>

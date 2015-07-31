@@ -1,0 +1,139 @@
+<?php
+
+# Retourne l'appel a` spip_abstract_select de'finie dans inc-calcul,
+# cense'e construire et effecteur la reque^te SQL de'termine'e 
+# par les infos mises dans $boucles.
+# A ce stade, on explicite les conditions exprime'es par les crite`res.
+# L'utilisation de x AS x n'est pas une redondance:
+# spip_abstract_select accolera au premier x la valeur de table_prefix
+# qui n'a pas de raison d'apparai^tre de`s cette e'tape.
+
+function calculer_requete(&$boucle) {
+ global $table_primary, $table_des_tables, $table_date;
+
+ $type = $boucle->type_requete;
+ $id_table = $table_des_tables[$type];
+ $id_field = $id_table . "." . $table_primary[$type];
+  switch($type) {
+  case 'articles':
+    $boucle->from[] =  "articles AS $id_table";
+    if (lire_meta("post_dates") == 'non') {
+      $boucle->where[] = "$id_table.date < NOW()";}
+    $boucle->where[] = "$id_table.statut='publie'";
+    break;
+
+  case 'auteurs':
+    $boucle->from[] =  "auteurs AS $id_table";
+    // Si pas de lien avec un article, selectionner
+    // uniquement les auteurs d'un article publie
+    if (!$boucle->lien AND !$boucle->tout) {
+      $boucle->from[] =  "auteurs_articles AS lien";
+      $boucle->from[] =  "articles AS articles";
+      $boucle->where[] = "lien.id_auteur=$id_table.id_auteur";
+      $boucle->where[] = 'lien.id_article=articles.id_article';
+      $boucle->where[] = "articles.statut='publie'";
+      $boucle->group =  "'$id_field'";
+    }
+    // pas d'auteurs poubellises
+    $boucle->where[] = "NOT($id_table.statut='5poubelle')";
+    break;
+    
+  case 'breves':
+    $boucle->from[] =  "breves AS $id_table";
+    $boucle->where[] = "$id_table.statut='publie'";
+    break;
+    
+  case 'forums':
+    $boucle->from[] =  "forum AS $id_table";
+    // Par defaut, selectionner uniquement les forums sans pere
+    if (!$boucle->tout AND !$boucle->plat) 
+      {
+	$boucle->where[] = "$id_table.id_parent=0";
+      }
+    $boucle->where[] = "$id_table.statut='publie'";
+   break;
+    
+  case 'signatures':
+    $boucle->from[] =  "signatures AS $id_table";
+    $boucle->from[] =  "petitions AS petitions";
+    $boucle->from[] =  "articles articles";
+    $boucle->where[] = "petitions.id_article=articles.id_article";
+    $boucle->where[] = "petitions.id_article=$id_table.id_article";
+    $boucle->where[] = "$id_table.statut='publie'";
+    $boucle->group = "'$id_field'";
+    break;
+    
+  case 'documents':
+    $boucle->from[] =  "documents AS $id_table";
+    $boucle->from[] =  "types_documents AS types_documents";
+    $boucle->where[] = "$id_table.id_type=types_documents.id_type";
+    $boucle->where[] = "$id_table.taille > 0";
+    break;
+    
+  case 'types_documents':
+    $boucle->from[] =  "types_documents AS $id_table";
+    break;
+    
+  case 'groupes_mots':
+    $boucle->from[] =  "groupes_mots AS $id_table";
+    break;
+    
+  case 'mots':
+    $boucle->from[] =  "mots AS $id_table";
+    break;
+    
+  case 'rubriques':
+    $boucle->from[] =  "rubriques AS $id_table";
+    if (!$boucle->tout) $boucle->where[] = "$id_table.statut='publie'";
+    break;
+    
+  case 'hierarchie':
+    $boucle->from[] =  "rubriques AS $id_table";
+    $boucle->where[] = 'rubriques.id_rubrique = $hierarchie';
+    // champ oblige' pour ge'rer le 2e while synthe'tise' dans inc-calcul-squel
+    $boucle->select[] = "rubriques.id_parent";
+    break;
+    
+  case 'syndication':
+    $boucle->from[] =  "syndic AS $id_table";
+    $boucle->where[] = "$id_table.statut='publie'";
+    break;
+    
+  case 'syndic_articles':
+    $boucle->from[] =  "syndic_articles  AS $id_table";
+    $boucle->from[] =  "syndic AS syndic";
+    $boucle->where[] = "$id_table.id_syndic=syndic.id_syndic";
+    $boucle->where[] = "$id_table.statut='publie'";
+    $boucle->where[] = "syndic.statut='publie'";
+    $boucle->select[]='syndic.nom_site AS nom_site'; # de'rogation zarbi
+    $boucle->select[]='syndic.url_site AS url_site'; # idem
+    break;
+
+  default: // table hors Spip, pourquoi pas
+    $boucle->from[] =  "$type AS $type";
+    $id_field = '*'; // utile a` TOTAL_BOUCLE seulement
+  } // fin du switch
+
+# si pas de champ c'est un de'compte on prend la primary pour avoir qqch
+# (le marteau-pilon * est trop couteux, et le COUNT incompatible avec le cas
+# ge'ne'ral)
+    return ('spip_abstract_select(array("'. 
+	    ((!$boucle->select) ? $id_field :
+	     join('", "', array_unique($boucle->select))) .
+	    '"),
+		array("' .
+	    join('","', array_unique($boucle->from)) .
+	    '"),
+		array(' .
+	    (!$boucle->where ? '' : ( '"' . join('","', $boucle->where) . '"')) .
+	    "),
+		$boucle->group,
+		$boucle->order,
+		\"$boucle->limit\",
+ 		'$boucle->sous_requete', 
+		$boucle->compte_requete,
+		'$id_table',
+		'$boucle->id_boucle')") ;
+}
+
+?>

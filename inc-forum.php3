@@ -5,15 +5,14 @@
 if (defined("_INC_FORUM")) return;
 define("_INC_FORUM", "1");
 
-
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_admin.php3");
-include_ecrire("inc_acces.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
-include_ecrire('inc_lang.php3');	// pour lang_select
-include_ecrire("inc_mail.php3");
-include_ecrire("inc_barre.php3");
+include_ecrire('inc_meta.php3');
+include_ecrire('inc_admin.php3');
+include_ecrire('inc_acces.php3');
+include_ecrire('inc_texte.php3');
+include_ecrire('inc_filtres.php3');
+include_ecrire('inc_lang.php3');
+include_ecrire('inc_mail.php3');
+include_ecrire('inc_barre.php3');
 
 if (@file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
@@ -22,179 +21,83 @@ else {
 	include_local ("inc-urls-dist.php3");
 }
 
-// dupliquee dans ecrire/articles.php3 ; mais je ne sais pas ou l'installer (Fil)...
-function get_forums_publics($id_article=0) {
-	$forums_publics = lire_meta("forums_publics");
-	if ($id_article) {
-		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
-		$res = spip_query($query);
-		if ($obj = spip_fetch_object($res))
-			$forums_publics = $obj->accepter_forum;
-	} else {
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
-	}
-	return $forums_publics;
+// fabrique un bouton d'attribut Name $n, d'attribut Value $v et autres $a
+
+function boutonne($a, $n, $v) {
+     return "\n<input $a name='$n' value=\"$v\" />";
 }
 
-function afficher_petits_logos_mots($id_mot) {
-	$racine = "IMG/moton$id_mot";
-	if (@file_exists("$racine.gif")) {
-		$image = "$racine.gif";
-	} elseif (@file_exists("$racine.jpg")) {
-		$image = "$racine.jpg";
-	} elseif (@file_exists("$racine.png")) {
-		$image = "$racine.png";
-	}
+// Re'ponse a` un forum 
 
-	if ($image) {
-		$taille = getimagesize($image);
-		$largeur = $taille[0];
-		$hauteur = $taille[1];
-		if ($largeur < 100 AND $hauteur < 100)
-			return "<IMG SRC='$image' align='middle' WIDTH='$largeur' HEIGHT='$hauteur' HSPACE='1' VSPACE='1' ALT=' ' BORDER=0 class='spip_image'> ";
-		else return "";
-	} else {
-		return "";
-	}
-}
+function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $hidden) {
 
-
-function decoder_hash_forum($email, $hash) {
-	if (!$email OR !$hash) return false;
-	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) {
-		if (verifier_action_auteur("forum public $email", $hash, $row['id_auteur'])) {
-			$ok = true;
-			break;
-		}
-	}
-	if ($ok) return $row;
-	else return false;
-}
-
-
-function forum_abonnement($retour) {
-	if ($GLOBALS['auteur_session'])
-		return true;	// autoriser le formulaire
-	else {
-		include_local("inc-login.php3");
-
-		$message_login = _T('forum_vous_enregistrer').'<a href="spip_pass.php3" target="spip_pass" onclick="'
-			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\">"
-			._T('forum_vous_inscrire')."<br>\n";
-		login('', false, $message_login);
-		return false;
-	}
-}
-
-
-//
-// Afficher le formulaire d'edition de forum en fonction du contexte
-//
-
-function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic, $titre='') {
-	global $REQUEST_URI, $HTTP_GET_VARS, $PATH_TRANSLATED, $REMOTE_ADDR, $id_message;
-	global $new, $redac, $afficher_groupe, $afficher_texte;
-	global $spip_forum_user;
-
-	$forums_publics = get_forums_publics($id_article);
-	if ($forums_publics == "non") return;
-
-	$lien = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
-
-	$retour = $HTTP_GET_VARS['retour'];
-	if (!$retour)
-		$retour = rawurlencode($lien);
-
-	if ($forums_publics == 'abo') {
-		if (!forum_abonnement($retour)) return;
-	}
-
-	$ret .= "\n<a name='formulaire_forum'></a>\n";
-
-	if ($forums_publics == "pri") {
-		$ret.= _T('forum_info_modere')."<p>";
-	}
+	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
 	// Recuperer le message a previsualiser
-	if ($id_message = intval($id_message)) {
-		$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
-		$result_forum=spip_query($query_forum);
-
-		while($row = spip_fetch_array($result_forum)) {
-			$titre=$row['titre'];
-			$texte=$row['texte'];
-			$auteur=$row['auteur'];
-			$email_auteur=$row['email_auteur'];
-			$nom_site_forum=$row['nom_site'];
-			$url_site=$row['url_site'];
-		}
+	if ($id_message = intval($GLOBALS[HTTP_POST_VARS][id_message]))  {
+		$titre = $GLOBALS[HTTP_POST_VARS][titre];
+		$texte = $GLOBALS[HTTP_POST_VARS][texte];
+		$auteur = $GLOBALS[HTTP_POST_VARS][auteur];
+		$email_auteur = $GLOBALS[HTTP_POST_VARS][email_auteur];
+		$nom_site_forum = $GLOBALS[HTTP_POST_VARS][nom_site_forum];
+		$url_site = $GLOBALS[HTTP_POST_VARS][url_site];
 
 		if ($afficher_texte != 'non') {
-			$lien = ereg_replace("\&", "&amp;", $lien);
-
-			$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
-			$ret .= "<div class='spip_encadrer'>";
-			if ($afficher_texte != "non"){
-				$ret .= "<div style='font-size: 120%; font-weigth: bold;'>".typo($titre)."</div>";
-				$ret .= "<p /><b><a href='mailto:".entites_html($email_auteur)."'>".typo($auteur)."</a></b>";
-				$ret .= "<p />".propre($texte)."<p />";
-			}
-
-			$ret .= "<a href='".entites_html($url_site)."'>".typo($nom_site_forum)."</a>";
+			$bouton = 
+			  "<div style='font-size: 120%; font-weigth: bold;'>" .
+			  typo($titre) .
+			  "</div><p /><b><a href='mailto:" .
+			  entites_html($email_auteur) .
+			  "'>" .
+			  typo($auteur) .
+			  "</a></b><p />" .
+			  propre($texte) .
+			  "<p /><a href='" .
+			  entites_html($url_site) .
+			  "'>" .
+			  typo($nom_site_forum) .
+			  "</a>";
 
 			// Verifier mots associes au message
-			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
-			$result_mots = spip_query($query_mots);
-			if (spip_num_rows($result_mots)>0) {
-				$ret .= "<p>"._T('forum_avez_selectionne')."</p>";
-				$ret .= "<ul>";
-				while ($row = spip_fetch_array($result_mots)) {
-					$id_mot = $row['id_mot'];
-					$type_mot = $row['type'];
-					$titre_mot = $row['titre'];
-					$les_mots[$id_mot] = true;
-					$presence_mots = true;
-	
-					$ret.= "<li class='font-size=80%'> $type_mot&nbsp;: <b>$titre_mot</b></li>\n";
-				}
-				$ret .= "</ul>";
-			}
-			
+			$result_mots = spip_query("
+SELECT	mots.id_mot, mots.titre, mots.type
+FROM	spip_mots_forum AS lien,
+	spip_mots AS mots 
+WHERE	id_forum='$id_message'
+    AND mots.id_mot = lien.id_mot 
+GROUP BY mots.id_mot
+");
+			if (spip_num_rows($result_mots)>0) 
+			  {
+			    $bouton .= "<p>".
+			      _T('forum_avez_selectionne') .
+			      "</p><ul>";
+			    while ($row = spip_fetch_array($result_mots)) {
+			      $les_mots[$row['id_mot']] = "checked='checked'";
+			      $presence_mots = true;
+			      $bouton .= "<li class='font-size=80%'> ".
+				$row['type'] .
+				"&nbsp;: <b>" .
+				$row['titre'] . 
+				"</b></li>";
+			    }
+			    $bouton .= '</ul>';
+			  }
+
 			if (strlen($texte) < 10 AND !$presence_mots) {
-				$ret .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
+				$bouton .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
 			}
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
-				$ret .= "<p align='right' style='color: red;'><font color=\"red\">"._T('forum_attention_trois_caracteres')."</p>\n";
+				$bouton .= "<p align='right' style='color: red;'>"._T('forum_attention_trois_caracteres')."</p>";
 			}
 			else {
-				$ret .= "\n<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
+				$bouton .= "<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
 			}
-			$ret .= "</div>\n<br />";
+			$bouton = "<div class='spip_encadrer'>$bouton</div>\n<br />";
 		}
-	}
-	else {
-		// Si premiere edition, initialiser le titre et l'auteur
-		if (!$titre) {
-			if ($id_parent)
-				$titre_select = "SELECT titre FROM spip_forum WHERE id_forum = $id_parent AND statut='publie'";
-			else if ($id_rubrique)
-				$titre_select = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $id_rubrique AND statut='publie'";
-			else if ($id_article)
-				$titre_select = "SELECT titre FROM spip_articles WHERE id_article = $id_article AND statut='publie'";
-			else if ($id_breve)
-				$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve AND statut='publie'";
-			else if ($id_syndic)
-				$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic AND statut='publie'";
-			else
-				$titre_select = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
-
-			if ($res = spip_fetch_object(spip_query($titre_select)))
-				$titre = '> ' . supprimer_numero(ereg_replace ('^[>[:space:]]*', '', $res->titre));
-			else
-				$titre = _T('forum_titre_erreur');
-		}
+	} else {
+		// Si premiere edition, initialiser l'auteur
+	  	// puis s'accorder une nouvelle entre'e dans la table
 		if ($spip_forum_user && is_array($cookie_user = unserialize($spip_forum_user))) {
 			$auteur = $cookie_user['nom'];
 			$email_auteur = $cookie_user['email'];
@@ -203,348 +106,159 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
-		$lien = ereg_replace("\&", "&amp;", $lien);
-		$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
-	}
-
-	$ret .= "\n";
-
-	// Generation d'une valeur de securite pour validation
-	$seed = (double) (microtime() + 1) * time() * 1000000;
-	@mt_srand($seed);
-	$alea = @mt_rand();
-	if (!$alea) {
-		srand($seed);
-		$alea = rand();
-	}
-	$id_rubrique = intval($id_rubrique);
-	$id_parent = intval($id_parent);
-	$id_article = intval($id_article);
-	$id_breve = intval($id_breve);
-	$id_syndic = intval($id_syndic);
-	$hash = calculer_action_auteur("ajout_forum $id_rubrique $id_parent $id_article $id_breve $id_syndic $alea");
-
-	// Afficher le formulaire d'edition
-	$titre = entites_html($titre);
-	$texte = entites_html($texte);
-
-	if ($afficher_texte == "non"){
-		$ret .= "\n<input type='hidden' name='titre' VALUE=\"$titre\" />";
-	}
-	else {
-		$ret .= "\n<div class='spip_encadrer'><b>"._T('forum_titre')."</b><br />";
-		$ret .= "\n<input type='text' class='forml' name='titre' value=\"$titre\" size='40' /></div>";
-	}
-
-	$ret .= "\n<input type='hidden' name='id_message' value=\"$id_message\" />";
-	$ret .= "\n<input type='hidden' name='ajout_forum' value=\"oui\" />";
-	$ret .= "\n<input type='hidden' name='forum_id_rubrique' value=\"$id_rubrique\" />";
-	$ret .= "\n<input type='hidden' name='forum_id_parent' value=\"$id_parent\" />";
-	$ret .= "\n<input type='hidden' name='forum_id_article' value=\"$id_article\" />";
-	$ret .= "\n<input type='hidden' name='forum_id_breve' value=\"$id_breve\" />";
-	$ret .= "\n<input type='hidden' name='forum_id_syndic' value=\"$id_syndic\" />";
-	$ret .= "\n<input type='hidden' name='alea' value=\"$alea\" />";
-	$ret .= "\n<input type='hidden' name='hash' value=\"$hash\" />";
-	$retour = ereg_replace("\&", "&amp;", $retour);
-	$ret .= "\n<input type='hidden' name='retour_forum' value=\"$retour\" />";
-
-	if ($new != "oui" AND $redac != "oui") $ret .= "\n<input type='hidden' name='new' value=\"oui\" />";
-	if ($new == "oui") $ret .= "\n<input type='hidden' name='redac' value=\"oui\" />";
-
-	if ($afficher_texte != "non"){
-		$ret .= "\n<br /><div class='spip_encadrer'><b>"._T('forum_texte')."</b><br />\n";
-		$ret .= _T('forum_creer_paragraphes');
-		$ret .= "<br />\n";
-		$ret .= afficher_barre('formulaire', 'texte', true);
-		$ret .= "<textarea name='texte' ".afficher_claret()." rows='12' class='forml' cols='40'>";
-		$ret.= $texte;
-		$ret .= "\n</textarea></div>\n";
-	}
-
-
-	// Gestion des mots-cles
-
-	$mots_cles_forums=lire_meta("mots_cles_forums");
-	if ($mots_cles_forums == "oui"){
-		if ($id_rubrique > 0) $table = "rubriques";
-		else if ($id_article > 0) $table = "articles";
-		else if ($id_breve > 0) $table = "breves";
-		else if ($id_syndic > 0) $table = "syndic";
-
-
-		if ($afficher_groupe) {
-			$afficher_groupe = join($afficher_groupe, ",");
-			$selectionner_groupe = "AND id_groupe IN ($afficher_groupe)";
-		}
-		if ($table){
-			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE 6forum = 'oui' AND $table = 'oui' $selectionner_groupe";
-			$result_groupe = spip_query($query_groupe);
-			while ($row_groupe = spip_fetch_array($result_groupe)) {
-				$id_groupe = $row_groupe['id_groupe'];
-				$titre_groupe = propre($row_groupe['titre']);
-				$unseul_groupe = $row_groupe['unseul'];
-
-				$query = "SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'";
-				$result = spip_query($query);
-				$total_rows = spip_num_rows($result);
-
-				if ($total_rows > 0){
-					$ret .= "\n<p /><div class='spip_encadrer' style='font-size: 80%;'>";
-					$ret.= "<b>$titre_groupe&nbsp;:</b>";
-
-					$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n";
-					$ret .= "<tr><td width='47%' valign='top'>";
-					$i = 0;
-
-					while ($row = spip_fetch_array($result)) {
-						$id_mot = $row['id_mot'];
-						$titre_mot = propre($row['titre']);
-						$type_mot = propre($row['type']);
-						$descriptif_mot = propre($row['descriptif']);
-
-						if ($i >= ($total_rows/2) AND $i < $total_rows){
-							$i = $total_rows + 1;
-							$ret .= "</td><td width='6%'>&nbsp;</td><td width='47%' valign='top'>";
-						}
-
-						if ($les_mots[$id_mot]) $checked = "checked='checked'";
-						else $checked = "";
-
-						if ($unseul_groupe == 'oui'){
-							$ret .= "<input type='radio' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot' /> ";
-						}
-						else {
-							$ret .= "<input type='checkbox' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot' /> ";
-						}
-
-						$ret .=  afficher_petits_logos_mots($id_mot);
-						$ret .= "<b><label for='mot$id_mot'>$titre_mot</label></b><br />";
-						if (strlen($descriptif_mot) > 0) $ret .= "$descriptif_mot<br />";
-						$i++;
-					}
-
-					$ret .= "</td></tr></table>";
-
-					$ret .= "</div>";
-				}
-			}
-		}
-	}
-
-	// Edition du texte du forum
-	if ($afficher_texte != "non") {
-		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_lien_hyper')."<br />\n";
-		$ret .= _T('forum_page_url');
-		$ret .= "<br />\n"._T('forum_titre');
-		$ret .= "<br />\n<input type='text' class='forml' name='nom_site_forum' value=\"".entites_html($nom_site_forum)."\" size='40' /><br />";
-
-		if (!$url_site) $url_site = "http://";
-		$ret .= "\n"._T('forum_url');
-		$ret .= "<br />\n<input type='text' class='forml' name='url_site' value=\"".entites_html($url_site)."\" size='40' /></div>";
-
-		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_qui_etes_vous')."<br />";
-
-		if ($forums_publics == "abo")
-			$disabled = ' disabled="disabled"';
-
-		$ret .= "\n"._T('forum_votre_nom');
-		$ret .= "<br />\n<input type='text' class='forml' name='auteur' value=\"".entites_html($auteur)."\" size='40'$disabled /><br />\n";
-
-		$ret .= _T('forum_votre_email');
-		$ret .= "<br />\n<input type='text' class='forml' name='email_auteur' value=\"".entites_html($email_auteur)."\" size='40'$disabled /></div>";
-	}
-
-	// Bouton de validation
-	if ($afficher_texte !="non") $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_voir_avant')."' /></div>";
-	else  $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_valider')."' /></div>";
-
-	$ret .= "</form>";
-
-	return $ret;
-}
-
-
-//
-// Fonction appelee a l'ajout d'un message
-// (previsualisation et validation finale)
-//
-
-function ajout_forum() {
-	global $texte, $titre, $nom_site_forum, $url_site, $auteur, $email_auteur, $retour_forum, $id_message, $confirmer;
-	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_syndic, $alea, $hash;
-	global $auteur_session;
-	global $ajouter_mot, $new;
-	global $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
-	global $afficher_texte;
-
-	if (!$GLOBALS['db_ok']) {
-		die ("<h4>"._T('forum_probleme_database')."</h4>");
-	}
-
-	$texte = addslashes($texte);
-	$titre = addslashes($titre);
-	$nom_site_forum = addslashes($nom_site_forum);
-	$url_site = addslashes($url_site);
-	$auteur = addslashes($auteur);
-	$email_auteur = addslashes($email_auteur);
-	$id_message = intval($id_message);
-	$retour_forum = rawurldecode($retour_forum);
-	$forum_id_article = intval($forum_id_article);
-	$forum_id_rubrique = intval($forum_id_rubrique);
-	$forum_id_parent = intval($forum_id_parent);
-	$forum_id_breve = intval($forum_id_breve);
-	$forum_id_syndic = intval($forum_id_syndic);
-
-	$forums_publics = get_forums_publics($forum_id_article);
-	$validation_finale = (strlen($confirmer) > 0 OR ($afficher_texte=='non' AND $ajouter_mot));
-
-	// Gestion forums sur abonnement
-	if ($forums_publics == "abo") {
-		if ($auteur_session) {
-			$statut = $auteur_session['statut'];
-
-			if (!$statut OR $statut == '5poubelle') {
-				die ("<h4>"._T('forum_acces_refuse'). "</h4>" . _T('forum_cliquer_retour', array('retour_forum' => $retour_forum)). "<p>");
-			}
-		}
-		else {
-			die ("<h4>"._T('forum_non_inscrit'). "</h4>" .
-			_T('forum_cliquer_retour', array('retour_forum' => $retour_forum))."<p>");
-		}
-		// Ne pas autoriser de changement de nom si le forum est sur abonnement
-		$auteur = $auteur_session['nom'];
-		$email_auteur = $auteur_session['email'];
-	}
-
-	// Verification des donnees et gestion du cache
-	if ($validation_finale) {
-		if (!verifier_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea", $hash)) {
-			@header("Location: $retour_forum");
-			exit;
-		}
-		if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
-			die ("<h4>"._T('forum_message_trop_long')."</h4>\n" .
-			_T('forum_cliquer_retour', array('retour_forum' => $retour_forum))."<p>");
-		}
-
-		unset($where);
-		if ($forum_id_article) $where[] = "id_article=$forum_id_article";
-		if ($forum_id_rubrique) $where[] = "id_rubrique=$forum_id_rubrique";
-		if ($forum_id_breve) $where[] = "id_breve=$forum_id_breve";
-		if ($forum_id_parent) $where[] = "id_forum=$forum_id_parent";
-		if ($where) {
-			$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
-			$result = spip_query($query);
-			unset($fichiers);
-			while ($row = spip_fetch_array($result)) {
-				$fichier = $row["fichier"];
-				@unlink("CACHE/$fichier");
-				@unlink("CACHE/$fichier.NEW");
-				$fichiers[] = "'".$fichier."'";
-			}
-			if ($fichiers) {
-				$fichiers = join(',', $fichiers);
-				$query = "DELETE FROM spip_forum_cache WHERE fichier IN ($fichiers)";
-				spip_query($query);
-			}
-		}
-	}
-
-	switch ($forums_publics) {
-		case "non":
-			$etat = "off";
-			break;
-		case "pri":
-			$etat = "prop";
-			break;
-		default:
-			$etat = "publie";
-			break;
-	}
-
-	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-
-	if ($new == "oui") {
-		$nouveau_document = true;
-		if ($HTTP_GET_VARS['titre']){
-			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
-		}
-		$query_forum = "INSERT INTO spip_forum (date_heure, titre, ip, statut)
-			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
-		$result_forum = spip_query($query_forum);
+		spip_query("
+INSERT INTO spip_forum (date_heure, titre, ip, statut)
+VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")
+");
 		$id_message = spip_insert_id();
 	}
 
-	// Ajouter les mots-cles
-	$query_mots = "DELETE FROM spip_mots_forum WHERE id_forum='$id_message'";
-	$result_mots = spip_query($query_mots);
-	if ($ajouter_mot){
-		for (reset($ajouter_mot); $key = key($ajouter_mot); next($ajouter_mot)){
-			$les_mots .= ",".join($ajouter_mot[$key],",");
-		}
+	        // Generation d'une valeur de securite pour validation
+        $seed = (double) (microtime() + 1) * time() * 1000000;
+        @mt_srand($seed);
+        $alea = @mt_rand();
+        if (!$alea) {srand($seed);$alea = rand();}
+        $forum_id_rubrique = intval($id_rubrique);
+        $forum_id_parent = intval($id_parent);
+        $forum_id_article = intval($id_article);
+        $forum_id_breve = intval($id_breve);
+        $forum_id_syndic = intval($id_syndic);
+        $hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea");
+	$titre = entites_html($titre);
+	if (!$url_site) $url_site = "http://";
+	if ($forums_publics == "abo") $disabled = " disabled='disabled'";
 
-		$les_mots = explode(",", $les_mots);
-		for ($index = 0; $index < count($les_mots); $index++){
-			$le_mot = $les_mots[$index];
-			if ($le_mot > 0)
-				spip_query("INSERT INTO spip_mots_forum (id_mot, id_forum) VALUES ('$le_mot', '$id_message')");
-		}
+	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))
+	  $table= table_des_mots($table, $les_mots);
+	else $table = '';
 
+	return ("<form action='$url' method='post'>\n$hidden" .
+		boutonne("type='hidden'", 'id_message', $id_message) .
+		boutonne("type='hidden'", 'alea', $alea) .
+                boutonne("type='hidden'", 'hash', $hash) .
+  		(($afficher_texte == "non") ?
+		 (boutonne("type='hidden'", 'titre', $titre) .
+		  $table .
+		  "\n<br /><div align='right'>" .
+		  boutonne("type='submit' class='spip_bouton'",
+			   'Valider',
+			   _T('forum_valider'). "</div>")) :
+		 ($bouton . "
+	<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />" .
+		  boutonne("type='text' class='forml' size='40'", 'titre', $titre) . "
+	</div>
+	\n<br /><div class='spip_encadrer'><b>" .
+		  _T('forum_texte') .
+		  "</b>\n<br />" .
+		  _T('forum_creer_paragraphes') .
+		  "\n<br /> " .
+#		  afficher_barre('formulaire', 'texte', true) .
+		  "<textarea name='texte' " .
+		  afficher_claret() .
+		  " rows='12' class='forml' cols='40'>" .
+		  entites_html($texte) .
+		  "</textarea></div>" .
+		  $table  .
+		 "\n<br /><div class='spip_encadrer'>" .
+		  _T('forum_lien_hyper') .
+		  "\n<br />" .
+		  _T('forum_page_url') .
+		  "\n<br />" .
+		  _T('forum_titre') .
+		  "\n<br />" .
+		  boutonne("type='text' class='forml' size='40'",
+			   'nom_site_forum',
+			   entites_html($nom_site_forum)) .
+		  "\n<br />" .
+		  _T('forum_url') .
+		  "\n<br />" .
+		  boutonne("type='text' class='forml'  size='40'", 
+			   'url_site',
+			   entites_html($url_site)) .
+		  "</div>\n<br /><div class='spip_encadrer'>" .
+		  _T('forum_qui_etes_vous') .
+		  "\n<br />" .
+		  _T('forum_votre_nom') .
+		  "\n<br />" .
+		  boutonne("type='text' class='forml' size='40'$disabled",
+			   'auteur',
+			   entites_html($auteur)) .
+		  "\n<br />" .
+		  _T('forum_votre_email') .
+		  "\n<br />" .
+		  boutonne("type='text' class='forml' size='40'$disabled",
+			   'email_auteur',
+			   entites_html($email_auteur)) .
+		  "</div>\n<br /><div align='right'>" .
+		  boutonne("type='submit' class='spip_bouton'",
+			   'Valider',
+			   _T('forum_voir_avant')) . 
+		  "</div>\n</form>")));
+}
+
+function table_des_mots($table, $les_mots) {
+  global $afficher_groupe;
+
+  $result_groupe = spip_query("
+SELECT * 
+FROM spip_groupes_mots 
+WHERE 6forum = 'oui' 
+AND $table = 'oui' " . ((!$afficher_groupe) ? '' : ("
+AND id_groupe IN (" . join($afficher_groupe, ", ")))
+);
+  
+  $ret = '';
+  while ($row_groupe = spip_fetch_array($result_groupe)) {
+    $id_groupe = $row_groupe['id_groupe'];
+    $titre_groupe = propre($row_groupe['titre']);
+    $unseul = ($row_groupe['unseul']== 'oui') ? 'radio' : 'checkbox';
+    $result =spip_query("SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'");
+    $total_rows = spip_num_rows($result);
+    
+    if ($total_rows > 0){
+      $ret .= "\n<p /><div class='spip_encadrer' style='font-size: 80%;'>";
+      $ret.= "<b>$titre_groupe&nbsp;:</b>";
+      $ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n";
+      $ret .= "<tr><td width='47%' valign='top'>";
+      $i = 0;
+      
+      while ($row = spip_fetch_array($result)) {
+	$id_mot = $row['id_mot'];
+	$titre_mot = propre($row['titre']);
+	$descriptif_mot = propre($row['descriptif']);
+	
+	if ($i >= ($total_rows/2) AND $i < $total_rows)
+	  {
+	    $i = $total_rows + 1;
+	    $ret .= "</td><td width='6%'>&nbsp;</td><td width='47%' valign='top'>";
 	}
+	
+	$ret .= boutonne("type='$unseul' id='mot$id_mot' " . $les_mots[$id_mot],
+			 "ajouter_mot[$id_groupe][]", 
+			 $id_mot) .
+	  afficher_petits_logos_mots($id_mot) .
+	  "<b><label for='mot$id_mot'>$titre_mot</label></b><br />";
+	if (strlen($descriptif_mot) > 0) $ret .= "$descriptif_mot<br />";
+	$i++;
+      }
+      
+      $ret .= "</td></tr></table>";
+      $ret .= "</div>";
+    }
+  }
+  return $ret;
+}
 
-	$query_forum = "UPDATE spip_forum
-		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\",
-			date_heure = NOW(), titre = \"$titre\", texte = \"$texte\", nom_site = \"$nom_site_forum\", url_site = \"$url_site\", auteur = \"$auteur\",
-			email_auteur = \"$email_auteur\",  ip = \"$REMOTE_ADDR\", statut = \"redac\", id_auteur = \"$id_auteur\"
-		WHERE id_forum = '$id_message'";
-	$result_forum = spip_query($query_forum);
-
-	if ($validation_finale) {
-		spip_query("UPDATE spip_forum SET statut=\"$etat\" WHERE id_forum='$id_message'");
-
-		$texte = stripslashes($texte);
-		$titre = stripslashes($titre);
-		$auteur = stripslashes($auteur);
-		$email_auteur = stripslashes($email_auteur);
-
-		// Poser un cookie pour ne pas retaper le nom / email
-		$cookie_user = array('nom' => $auteur, 'email' => $email_auteur);
-		spip_setcookie('spip_forum_user', serialize($cookie_user));
-
-		// Envoi d'un mail aux auteurs
-		$prevenir_auteurs = lire_meta("prevenir_auteurs");
-		if ($prevenir_auteurs == "oui" AND $afficher_texte != "non") {
-			if ($id_article = $forum_id_article) {
-				$url = ereg_replace('^/', '', generer_url_article($id_article));
-				$adresse_site = lire_meta("adresse_site");
-				$nom_site_spip = lire_meta("nom_site");
-				$url = "$adresse_site/$url";
-				$courr = _T('form_forum_message_auto')."\n\n";
-				$parauteur = '';
-				if (strlen($auteur) > 2) {
-					$parauteur = " "._T('forum_par_auteur', array('auteur' => $auteur));
-					if ($email_auteur) $parauteur .= " <$email_auteur>";
-				}
-				$courr .= _T('forum_poste_par', array('parauteur' => $parauteur))."\n";
-				$courr .= _T('forum_ne_repondez_pas')."\n";
-				$courr .= "$url\n";
-				$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte))."\n\n$nom_site_forum\n$url_site\n";
-				$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-				$query = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
-					"WHERE lien.id_article='$id_article' AND auteurs.id_auteur=lien.id_auteur";
-				$result = spip_query($query);
-
-				while ($row = spip_fetch_array($result)) {
-					$email_auteur = trim($row["email"]);
-					if (strlen($email_auteur) < 3) continue;
-					envoyer_mail($email_auteur, $sujet, $courr);
-				}
-			}
-		}
-
-		@header("Location: $retour_forum");
-		exit;
-	}
+function afficher_petits_logos_mots($id_mot) {
+  $image = cherche_image_nommee("moton$id_mot", $GLOBALS['dossier_images']);
+  if ($image) {
+    $taille = getimagesize($image);
+    $largeur = $taille[0];
+    $hauteur = $taille[1];
+    if ($largeur < 100 AND $hauteur < 100)
+      return "<img src='$image' align='middle' width='$largeur' height='$hauteur' hspace='1' vspace='1' alt=' ' border=0 class='spip_image'> ";
+  }
+  return "";
 }
 
 ?>
