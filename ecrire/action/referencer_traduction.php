@@ -24,10 +24,19 @@ function action_referencer_traduction_dist() {
 
 	$arg = _request('arg');
 
-	if (!preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) {
-		spip_log("action_referencer_traduction_dist $arg pas compris");
+	if (preg_match(",^(\d+)\D-(\d+)$,", $arg, $r))  {
+	  // supprimer le lien de traduction
+		spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);
+		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
+
+		if ($cpt['n'] == 1)
+			spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);
+	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
+	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
+		spip_query("UPDATE spip_articles SET id_trad = " . $r[3] . " WHERE id_trad =" . $r[2]);
 	} else {
-		spip_query("UPDATE spip_articles SET id_trad = " . $r[2] . " WHERE id_trad =" . $r[1]);
+		spip_log("action_referencer_traduction_dist $arg pas compris");
 	}
 }
 ?>

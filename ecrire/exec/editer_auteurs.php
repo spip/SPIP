@@ -36,7 +36,6 @@ function exec_editer_auteurs_dist()
 function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_editable)
 {
   global $spip_lang_left, $spip_lang_right, $options;
-  spip_log("formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_editable");
 
 //
 // complement de action/editer_auteurs.php pour notifier la recherche d'auteur
@@ -97,16 +96,17 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 
  }
 
- $bouton = (!$flag_editable
+ $bouton = (!$flag_editable 
 	    ? ''
-	    : bouton_block_invisible("auteursarticle"))
+	    : (($flag_editable === 'ajax')
+	        ? bouton_block_visible("auteursarticle")
+	       : bouton_block_invisible("auteursarticle")))
  . _T('texte_auteurs')
 . aide("artauteurs");
 
- $res =  '<div>&nbsp;</div>' // place pour l'animation pendant Ajax
- . debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+ $res =  debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
  . $reponse
- . debut_block_invisible("auteursarticle")
+ .  debut_block_invisible("auteursarticle")
  . $res
  . fin_block()
  . fin_cadre_enfonce(true);

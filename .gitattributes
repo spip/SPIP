@@ -125,6 +125,7 @@ ecrire/exec/plonger.php -text
 ecrire/exec/poster.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
+ecrire/exec/referencer_traduction.php -text
 ecrire/exec/rubriquer.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
