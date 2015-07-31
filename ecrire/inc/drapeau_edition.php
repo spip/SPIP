@@ -105,19 +105,23 @@ function ecrire_tableau_edition($edition) {
  * @param string $type
  *     Type d'objet édité
  */
-function signale_edition ($id, $auteur, $type='article') {
+function signale_edition($id, $auteur, $type='article') {
 	include_spip('base/objets');
 	include_spip('inc/filtres');
-	if (objet_info($type,'editable')!=='oui')
+	if (objet_info($type,'editable')!=='oui') {
 		return;
+	}
 
 	$edition = lire_tableau_edition();
-	if (isset($auteur['id_auteur']) and $id_a = $auteur['id_auteur'])
+	if (isset($auteur['id_auteur']) and $id_a = $auteur['id_auteur']) {
 		$nom = $auteur['nom'];
-	else
+	} else {
 		$nom = $id_a = $GLOBALS['ip'];
-	if (!is_array($edition[$type][$id]))
+	}
+
+	if (!isset($edition[$type][$id]) OR !is_array($edition[$type][$id])) {
 		$edition[$type][$id] = array();
+	}
 	$edition[$type][$id][$id_a][$nom] = time();
 	ecrire_tableau_edition($edition);
 }
