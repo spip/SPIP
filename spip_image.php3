@@ -4,6 +4,7 @@ include ("ecrire/inc_version.php3");
 include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
+include_ecrire("inc_abstract_sql.php3");
 
 function copier_document($ext, $orig, $source) {
 
