@@ -119,7 +119,7 @@ function auth() {
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = urlencode($GLOBALS['REQUEST_URI']);
-		@header("Location: ../spip_login.php3?url=$url");
+		@header("Location: ../spip_login.php3?var_url=$url");
 		exit;
 	}
 
