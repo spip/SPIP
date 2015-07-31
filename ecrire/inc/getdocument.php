@@ -411,13 +411,21 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 function traite_svg($file)
 {
-	include_spip('inc/texte');
+	global $connect_statut;
 	$texte = spip_file_get_contents($file);
 
-	// securite: virer les scripts et les references externes
-	// trop expeditif, a ameliorer
-	$new = safehtml($texte);
-	if ($new != $texte) ecrire_fichier($file, $new);
+	// Securite si pas guru: virer les scripts et les references externes
+	// Trop expeditif, a ameliorer
+
+        include_spip('inc/session');
+        $var_auth = charger_fonction('auth', 'inc');
+	$var_auth();
+
+	if ($connect_statut != '0minirezo') {
+		include_spip('inc/texte');
+		$new = trim(safehtml($texte));
+		if ($new != $texte) ecrire_fichier($file, $new);
+	}
 
 	$width = $height = 150;
 	if (preg_match(',<svg[^>]+>,', $new, $s)) {
