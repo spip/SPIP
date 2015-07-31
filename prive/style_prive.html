@@ -537,12 +537,35 @@ div.titrem a.titremancre {padding:15px 0 0 16px;background-position: [(#GET{left
 .dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #GET{foncee}; }
 
 .mots_tous #contenu .titrem.impliable { background-color: #GET{claire}; }
+
 .configuration #contenu .cadre .titrem { background-color:#eee; }
 .configuration #contenu .titrem.hover { background-color: #GET{claire}; }
-.configuration #contenu .cadre-trait-couleur .titrem { background-color: #GET{foncee};color: #fff; }
-.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { background-color: #eee;color: #000; }
+.configuration #contenu .cadre-trait-couleur { border: 1px solid #ccc; }
+.configuration #contenu .cadre-trait-couleur .titrem { background-color: #GET{claire};color: [#(#ENV{couleur_foncee}|couleur_foncer)]; text-transform: uppercase; }
+.configuration #contenu .ajax-action,
+.configuration #contenu .cadre-trait-couleur .cadre_padding {
+	padding-top: 0px;
+}
+.configuration #contenu .cadre-couleur .cadre_padding .titrem,
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
+	text-transform: none;
+	background-color: white;
+	padding-bottom: 11px;
+	color: #444444;
+	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{eeeeee, bottom [(#GET{left})] no-repeat })]
+}
 .configuration #contenu .cadre-couleur .titrem { background-color: #GET{claire}; }
-.configuration #contenu .cadre-couleur .cadre_padding .titrem { background-color:#eee; }
+
+.configuration #contenu .cadre-trait-couleur .cadre-r {
+	margin-left: -6px;
+	margin-right: -6px;
+	margin-top: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-left: 0px;
+}
+
+
 .cadre-liste .titrem { background-color: #fff; }
 .cadre-liste .titrem.hover { background-color: #GET{claire}}
 .cadre-liste .tr_liste .titrem { background-color:#eee; }
@@ -585,8 +608,10 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 
 /* exec=admin_plugin */
 .liste-plugins.formulaire_spip {border:0;background:none;padding:0;}
-.liste-plugins .liens {padding:5px;background:#ddd;}
-.liste-plugins .liste-items .item {position:relative;padding-left:70px;}
+.liste-plugins .liens {padding:6px;background:#ddd; margin-left: -6px; margin-right: -7px;}
+#liste_plugins .boutons { margin: -6px; } 
+.liste-plugins .liste-items {margin-left: -6px; margin-right: -6px;}
+.liste-plugins .liste-items .item {position:relative;padding-#GET{left}:76px; padding-#GET{right}: 10px;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
 .liste-plugins .liste-items .item.erreur {background:#fdd;}
@@ -605,7 +630,7 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 .liste-plugins .liste-items .item .nom a {color:#444;}
 .liste-plugins .liste-items .item.actif .nom a {color:#GET{foncee};}
 
-.liste-plugins .liste-items .item .icon {position:absolute;top:3px;left:28px;width:32px;height:32px;overflow:hidden;}
+.liste-plugins .liste-items .item .icon {position:absolute;top:3px;#GET{left}:34px;width:32px;height:32px;overflow:hidden;}
 .liste-plugins .liste-items .item .actions {float:#GET{right};visibility:hidden;}
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
 .liste-plugins .liste-items .item .cfg_link { position:absolute; right:4px; top:4px; }
