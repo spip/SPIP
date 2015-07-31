@@ -361,7 +361,7 @@ function etat_base_accueil()
 	if ($cpt) {
 		if ($where) {
 		  include_spip('inc/forum');
-		  list($f, $w) = critere_statut_controle_forum('public',$ids);
+		  list($f, $w) = critere_statut_controle_forum('public');
 		  $q = spip_query("SELECT COUNT(*) AS cnt, F.statut FROM $f  WHERE $w GROUP BY F.statut");
 		  while($row = sql_fetch($q)) {
 				$r = $row['statut'];
