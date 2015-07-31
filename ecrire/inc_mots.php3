@@ -404,11 +404,11 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "</td>\n<td>";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width:150px;font-size:10px;background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20'>";
 					else if ($unseul == "oui")
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width:150px;font-size:10px;background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20'>";
 					else
-						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width:150px;font-size:10px;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; ' VALUE=\"$titre_groupe\" SIZE='20'>";
 
 					echo "</td>\n<td>";
 					echo "<INPUT TYPE='hidden' NAME='select_groupe'  VALUE='$id_groupe'>";
@@ -426,11 +426,11 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "</td>\n<td>";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width:150px;font-size:10px;background-color:#E86519;' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#E86519;' CLASS='fondl'>";
 					else if ($unseul == "oui")
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width:150px;font-size:10px;background-color:#cccccc;' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; background-color:#cccccc;' CLASS='fondl'>";
 					else
-						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width:150px;font-size:10px;' CLASS='fondl'>";
+						echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width: 180px; ' CLASS='fondl'>";
 
 					$ifond == 0;
 					echo "<OPTION VALUE='x' style='font-variant: small-caps;'>$titre_groupe";
@@ -444,7 +444,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					}
 					echo "</SELECT>";
 					echo "</td>\n<td>";
-					echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_choisir')."' CLASS='fondo' STYLE='font-size:10px'>";
+					echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_choisir')."' CLASS='fondo'>";
 					echo "</FORM>";
 					echo "</td></tr>";
 				}

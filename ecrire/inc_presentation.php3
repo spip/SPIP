@@ -12,20 +12,17 @@ utiliser_langue_visiteur();
 //
 // Aide
 //
-function aide ($aide='') {
+function aide($aide) {
 	global $couleur_foncee, $spip_lang_rtl, $dir_ecrire;
 
 	if (!$aide) return;
 
-	return "&nbsp;&nbsp;<script><!--\n".
-	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
-	$aide.
-	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
-	'void(0);\">");'.
-	"\n// --></script><noscript>".
-	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
-	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif" alt="'._T('info_image_aide').'" title="'._T('titre_image_aide').'" width="12" height="12" border="0" align="middle"></a>'; // "
+	return "&nbsp;&nbsp;<a class='aide' href=\"${dir_ecrire}aide_index.php3?aide=$aide\" target=\"spip_aide\" ".
+		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
+		"resizable=yes, width=740, height=580'); return false;\"><img ".
+		"src=\"img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
+		"title=\""._T('titre_image_aide')."\" width=\"12\" height=\"12\" border=\"0\" ".
+		"align=\"middle\"></a>";
 }
 
 
@@ -132,7 +129,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 		$retour_aff = debut_cadre('r', $icone, $fonction);
 	}
 	else {
-		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'><div style='border: 1px solid #666666; padding: 5px; background-color: white;'>";
+		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc; -moz-border-radius: 6px;'><div style='border: 1px solid #666666; padding: 5px; -moz-border-radius: 6px; background-color: white;'>";
 	}
 
 	if ($return) return $retour_aff;
@@ -160,9 +157,9 @@ function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
 		$retour_aff = debut_cadre('e', $icone, $fonction);
 	}
 	else {
-		$retour_aff = "<p><div style=\"border: 1px solid #333333; background-color: #e0e0e0;\"><div style=\"padding: 5px; border-left: 1px solid #999999; border-top: 1px solid #999999;\">";
+		$retour_aff = "<p><div style=\"border: 1px solid #333333; -moz-border-radius: 6px; background-color: #e0e0e0;\"><div style=\"padding: 5px; border-left: 1px solid #999999; border-top: 1px solid #999999; -moz-border-radius: 6px;\">";
 	}
-	
+
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
@@ -1110,20 +1107,20 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	global $menu_accesskey, $compteur_survol;
 
 	if ($spip_display == 1){
-		$hauteur = 20;
+		//$hauteur = 20;
 		$largeur = 80;
 	}
 	else if ($spip_display == 3){
-		$hauteur = 50;
+		//$hauteur = 50;
 		$largeur = 60;
-		$title = " title=\"$texte\" ";
-		$alt = " alt=\"$texte\" ";
+		$title = " title=\"$texte\"";
+		$alt = " alt=\"$texte\"";
 	}
 	else {
-		$hauteur = 80;
+		//$hauteur = 80;
 		if (count(explode(" ", $texte)) > 1) $largeur = 84;
 		else $largeur = 74;
-		$alt = " alt=\" \" ";
+		$alt = " alt=\" \"";
 	}
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
@@ -1135,62 +1132,26 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$accesskey = " accesskey='0'";
 		$menu_accesskey++;
 	}
-	if ($spip_display == 3) $accesskey_icone = $accesskey;
+
+	if ($rubrique_icone == $rubrique) $class_select = " class='selection'";
 
 	if (eregi("^javascript:",$lien)) {
-		$java_lien = substr($lien, 11, strlen($lien));
-		$onClick = "";
-		$a_href_icone = '<script type="text/javascript"><!--' . "\n"
-			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
-			. "<noscript><a$accesskey_icone href='$lien_noscript' target='_blank'></noscript>\n";
-		$a_href = '<script type="text/javascript"><!--' . "\n"
-			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
-			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
+		$a_href = "<a$accesskey onClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select>";
 	}
 	else {
-		$onClick = "onClick=\"document.location='$lien'\"";
-		$a_href_icone = "<a$accesskey_icone href=\"$lien\">";
-		$a_href = "<a$accesskey href=\"$lien\" class='icone'>";
+		$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 	}
 
 	$compteur_survol ++;
-	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48gris');\" $onClick>";
-		if ($spip_display == 1) {
-			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgrison\" $onClick>";
-			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
-		}
-		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
-		if ($spip_display != 1) {
-			echo "<div class='bouton48gris' id='survol$compteur_survol'>$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a></div>";
-		}
-		if ($spip_display != 3) {
-			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a></div>";
-		}
-		if ($spip_display == 1) echo "</td></tr></table>";
-		echo "</td>\n";
-	}
-	else {
-		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton48blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton48off');\" $onClick>";
-		if ($spip_display == 1) {
-			echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
-			echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
-		}
-		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
-		if ($spip_display != 1) {
-			echo "<div class='bouton48off' id='survol$compteur_survol'>$a_href_icone<img src='img_pack/$fond'$alt$title border='0'></a></div>";
-		}
-		if ($spip_display != 3) {
-			echo "<div>$a_href<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#444444'><b>$texte</b></font></a></div>";
-		}
-		if ($spip_display == 1) echo "</td></tr></table>";
-		echo "</td>\n";
-	}
 
-	if ($spip_ecran == "large") {
-		echo "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
+	if ($spip_display != 1) {
+		echo "<td class='cellule48' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
+		if ($spip_display != 3) {
+			echo "<span>$texte</span>";
+		}
 	}
-
+	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
+	echo "</a></td>\n";
 }
 
 
@@ -1199,22 +1160,25 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	global $menu_accesskey, $compteur_survol;
 
 	if ($spip_display == 1) {
-		$hauteur = 20;
+		//$hauteur = 20;
 		$largeur = 80;
 	}
 	else if ($spip_display == 3){
-		$hauteur = 26;
+		//$hauteur = 26;
 		$largeur = 40;
 		$title = " title=\"$texte\"";
 		$alt = " alt=\"$texte\"";
 	}
 	else {
-		$hauteur = 68;
+		//$hauteur = 68;
 		if (count(explode(" ", $texte)) > 1) $largeur = 80;
 		else $largeur = 70;
 		$alt = " alt=\" \"";
 	}
-	if ($aide) $largeur += 50;
+	if ($aide AND $spip_display != 3) {
+		$largeur += 50;
+		$texte .= aide($aide);
+	}
 	if ($largeur) $width = "width='$largeur'";
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
@@ -1228,52 +1192,19 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
-	if (!eregi("^javascript:",$lien) && !$aide) {
-		$onClick = "onClick=\"document.location='$lien'\"";
-	}
-
+	if ($rubrique_icone == $rubrique) $class_select = " class='selection'";
 	$compteur_survol ++;
 
-	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36gris');\" $onClick>";
-		if ($spip_display == 1) {
-			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\">";
-			echo "<tr><td background='' align='center'>";
+	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
+
+	if ($spip_display != 1) {
+		echo "<td class='cellule36' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
+		if ($spip_display != 3) {
+			echo "<span>$texte</span>";
 		}
-		if ($spip_display != 1){
-			echo "<div class='bouton36gris' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
-		}
-		echo "<div><img src='img_pack/rien.gif' $width height=1></div>";
-		if ($spip_display != 3){
-			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a></div>";
-		}
-		if ($spip_display == 1) {
-			echo "</td></tr>";
-			echo "</table>";
-		}
-		echo "</td>";
 	}
-	else {
-		echo "\n<td background='' class='pointeur' style='padding: 2px' align='center' valign='top' $width onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36off');\" $onClick>";
-		if ($spip_display == 1) {
-			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
-			echo "<tr><td background='' align='center'>";
-		}
-		if ($spip_display != 1){
-			echo "<div class='bouton36off' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
-		}
-		echo "<div><img src='img_pack/rien.gif' $width height=1></div>";
-		if ($spip_display != 3){
-			echo "<div><a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='#444444'><b>$texte</b></font></a>";
-			if (strlen($aide)>0) echo aide($aide);
-			echo "</div>";
-		}
-		if ($spip_display == 1) {
-			echo "</td></tr>";
-			echo "</table>";
-		}
-		echo "</td>";
-	}
+	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
+	echo "</a></td>\n";
 }
 
 
@@ -1350,58 +1281,26 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
 
-	if (strlen($fonction) < 3) $fonction = "rien.gif";
+	if (!$fonction) $fonction = "rien.gif";
+	$danger = ($fonction == "supprimer.gif");
 
-	$hauteur = 42;
-	$largeur = "100%";
-
-	$style = "icone-h";
-	$classe_image = "bouton24gris";
-	if ($fonction == "supprimer.gif") {
-		$style = "icone-h-danger";
-		$classe_image = "bouton36rouge";
+	if ($danger) echo "<div class='danger'>";
+	if ($spip_display != 1) {
+		// <div> intercalaire pour konqueror / raffari
+		echo "<a href='$lien' class='cellule-h'><div><table cellpadding='0' valign='middle'><tr>\n";
+		echo "<td><img style='background: url(\"img_pack/$fond\")' src='img_pack/$fonction' alt=''></td>\n";
+		echo "<td>$texte</td>\n";
+		echo "</tr></table></div></a>\n";
 	}
-	$compteur_survol++;
-
-	echo "<div align='left'>";
-	if ($spip_display == 1) {
-		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\">";
-		echo "<tr>";
-	} else {
-		echo "\n<table cellpadding='0' class='pointeur' cellspacing='1' border='0' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
-		echo "<tr>";
+	else {
+		echo "<a href='$lien' class='cellule-h-texte'><div>$texte</div></a>\n";
 	}
-
-	if ($spip_display != 1 AND $fond != "") {
-		echo "<td>";
-		echo "<div id='survol$compteur_survol' class='$classe_image'>";
-		echo "<div style='background-image: url(\"img_pack/$fond\")'><a href='$lien'>";
-		echo "<img src='img_pack/$fonction' alt='' border='0'>";
-		echo "</a></div>";
-		echo "</div>";
-		echo "</td>";
-		echo "<td width='5'></td>";
-	}
-
-	echo "<td valign='middle'>";
-	echo "<a href='$lien' class='verdana1' style='color:#666666; font-weight:bold; text-decoration: none;'>";
-	echo "$texte";
-	echo "</a>";
-	echo "</td></tr>";
-
-	echo "</table></div>\n";
+	if ($danger) echo "</div>";
 }
 
 
 function bandeau_barre_verticale(){
-	global $spip_ecran;
-	if ($spip_ecran == "large")
-		$decalage = "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
-	echo $decalage;
-	echo "<td background='img_pack/tirets-separation.gif' width='2'>";
-	echo "<img src='img_pack/rien.gif' alt='' width=2 height=2>";
-	echo "</td>";
-	echo $decalage;
+	echo "<td class='separateur'></td>\n";
 }
 
 
@@ -1428,7 +1327,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $spip_lang_rtl;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
-	
+
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
@@ -1466,8 +1365,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "\n</map>";
 
 	// Icones principales
-	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif);' width='100%'><tr width='100%'><td width='100%' align='center'>";
-	echo "<table cellpadding='0' cellspacing='0' background='' width='$largeur'><tr width='$largeur'>";
+
+	echo "<div class='bandeau-principal' align='center'>\n";
+	echo "<div class='bandeau-icones' style='width: ".$largeur."px'>\n";
+	echo "<table class='gauche'><tr>\n";
+
 	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.gif", "documents", $rubrique);
 	if ($options == "avancees") {
@@ -1489,19 +1391,34 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		bandeau_barre_verticale();
 		icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "administration", $rubrique);
 	}
-	echo "<td background='' width='100%'>   </td>";
-	echo "<td align='center'><font size=1>";
-		echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
-	echo "</font></td>";
-		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
+
+	echo "</tr></table>\n";
+	echo "<table class='droite'><tr>\n";
+
+		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
 		icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
-	echo "</tr></table>";
-	echo "</td></tr></table>";
+
+	echo "</tr></table>\n";
+
+	// Merci le W3C pour l'alignement vertical / Thank you W3C idiots for vertical alignment
+	if ($spip_display == 1) $h = 8;
+	else if ($spip_display == 3) $h = 20;
+	else $h = 34;
+	echo "<div class='milieu' style='margin-top: ".$h."px'>";
+	echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
+	echo "</div>\n";
+
+	echo "<div class='fin'></div>\n";
+
+	echo "</div>\n";
+	echo "</div>\n";
 
 
 	// Icones secondaires
-	echo "<table cellpadding='0' bgcolor='#eeeeee' style='border-bottom: solid 1px black; border-top: solid 1px #333333;' width='100%'><tr width='100%'><td width='100%' align='center'>";
-	echo "<table cellpadding='0' cellspacing='0' background='' width='$largeur'><tr width='$largeur'>";
+
+	echo "<div class='bandeau-secondaire' align='center'>\n";
+	echo "<div class='bandeau-icones' style='width: ".$largeur."px'>\n";
+	echo "<table class='gauche'><tr>\n";
 
 	if ($rubrique == "asuivre"){
 		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
@@ -1555,8 +1472,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 			icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
-
-			bandeau_barre_verticale();
+		bandeau_barre_verticale();
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non')
 			icone_bandeau_secondaire (_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
 	}
@@ -1583,25 +1499,27 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		else
 			$recherche_aff = $recherche;
 		bandeau_barre_verticale();
-		echo "<td width='5'><img src='img_pack/rien.gif' width=5></td>";
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2")
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('info_rechercher_02')."</b></font><br>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#505050'><b>"._T('info_rechercher_02')."</b></font><br>";
 		echo '<input type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r">';
 		echo "</form>";
 		echo "</td>";
 	}
 
-	echo "<td width='100%'>   </td>";
+	echo "</tr></table>\n";
 
 	if ($auth_can_disconnect) {
-		echo "<td width='5'>&nbsp;</td>";
+		echo "<table class='droite'><tr>\n";
 		icone_bandeau_secondaire (_T('icone_deconnecter'), "../spip_cookie.php3?logout=$connect_login", "deconnecter-24$spip_lang_rtl.gif", "", $sous_rubrique, "deconnect");
+		echo "</tr></table>\n";
 	}
 
-	echo "</tr></table>";
-	echo "</td></tr></table>";
+	echo "<div class='fin'></div>\n";
+
+	echo "</div>\n";
+	echo "</div>\n";
 
 
 	// Bandeau
