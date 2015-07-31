@@ -136,7 +136,7 @@ function infos_naviguer($id_rubrique, $statut)
 		}
 		fin_boite_info();
 
-		$res = spip_query("SELECT DISTINCT A.nom, A.id_auteur FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B WHERE A.id_auteur=B.id_auteur AND id_rubrique=$id_rubrique");
+		$res = spip_query("SELECT DISTINCT A.nom, A.id_auteur FROM  spip_auteurs AS A, spip_auteurs_rubriques AS B WHERE A.id_auteur=B.id_auteur AND id_rubrique=$id_rubrique  AND A.statut='0minirezo'");
 		if (spip_num_rows($res))
 		  {
 			echo '<br />';
