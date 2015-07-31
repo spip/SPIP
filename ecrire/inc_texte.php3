@@ -19,6 +19,13 @@ $GLOBALS['ouvre_note'] = '[';
 $GLOBALS['ferme_note'] = '] ';
 $GLOBALS['les_notes']  = '';
 $GLOBALS['compt_note'] = 0;
+
+// switches pour l'affichage des documents (peut mieux faire !)
+$GLOBALS['doc_affiche_titre'] = true;
+$GLOBALS['doc_affiche_descriptif'] = true;
+$GLOBALS['doc_affiche_fichier'] = true;
+$GLOBALS['doc_affiche_largeurhauteur'] = true;
+
 if (file_exists("puce.gif")) {
 	$imgsize = getimagesize('puce.gif');
 	$GLOBALS['puce'] = "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'> ";
@@ -313,10 +320,10 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<br><b>$titre</b>";
-			if ($descriptif) $retour .= "<br>$descriptif";
-			if ($fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
-			if ($largeur && $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
+			if ($GLOBALS['doc_affiche_titre'] AND $titre) $retour .= "<br><b>$titre</b>";
+			if ($GLOBALS['doc_affiche_descriptif'] AND $descriptif) $retour .= "<br>$descriptif";
+			if ($GLOBALS['doc_affiche_fichier'] AND $fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
+			if ($GLOBALS['doc_affiche_largeurhauteur'] AND $largeur AND $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
 			
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}

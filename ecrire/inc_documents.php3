@@ -55,8 +55,10 @@ function texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette)
 function afficher_upload($link, $intitule, $inclus = '') {
 	global $this_link, $connect_statut;
 
-	if (!$link->getVar('redirect'))
-		$link->addVar('redirect', $this_link->getUrl());
+	if (!$link->getVar('redirect')) {
+		$my_link = new Link("article_documents.php3");	// faute de mieux pour l'instant (Fil)
+		$link->addVar('redirect', $my_link->getUrl());
+	}
 
 	echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>\n";
 	echo $link->getForm('POST', '', 'multipart/form-data');
@@ -177,17 +179,26 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 		echo "<font size='2'><b>IMAGE</b></font><br>\n";
 		echo texte_vignette($largeur, $hauteur, $fichier);
 		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'><br>$largeur x $hauteur pixels<br><br></font>\n";
-		echo $raccourci_doc;
+
+		if ($mode == 'vignette')// le raccourci pour une image-document est propose avec la vignette
+			echo $raccourci_doc;
+
 		echo "</td>\n";
 	}
 
-	if ($mode == 'vignette') {
-		$link = new Link();
-		$link->addVar('ajouter_vignette','oui');
-		$link->addVar('id_document',$id_document);
-		$link_ajouter = "<font size='1'>[<b><a ".$link->getHref().">AJOUTER UNE VIGNETTE</a></b>]</font>\n";
-	} else
-		unset($link_ajouter);
+	if ($type_inclus == 'image') {
+		if ($mode == 'vignette') {
+			$link = new Link();
+			$link->addVar('transformer_image','document');
+			$link->addVar('id_document',$id_document);
+			$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en document</a></b>]</font>\n";
+		} else if ($mode == 'document') {
+			$link = new Link();
+			$link->addVar('transformer_image','vignette');
+			$link->addVar('id_document',$id_document);
+			$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en image affichable</a></b>]</font>\n";
+		}
+	}
 
 	//
 	// Afficher le document en tant que tel
@@ -218,9 +229,9 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	echo "</textarea>\n";
 
 	echo "<p align='right'>";
-	echo $link_ajouter;
 	echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
 	echo "</p>";
+	if ($link_transformer) echo "<p align='right'>$link_transformer</p>";
 
 	echo "</form>";
 	echo "</font>";
@@ -251,7 +262,6 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
 			echo "supprimer la vignette";
 			echo "</a>]</font><br>\n";
-	
 			echo $raccourci_doc;
 		}
 		else {
@@ -274,7 +284,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('hash', $hash);
 	
-			afficher_upload($link, 'Charger une vignette sp&eacute;cifique&nbsp;:', 'image');
+			afficher_upload($link, 'Charger une vignette&nbsp;:', 'image');
 			echo "</div>\n";
 		}
 
