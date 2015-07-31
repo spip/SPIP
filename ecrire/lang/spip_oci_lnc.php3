@@ -49,12 +49,12 @@ $GLOBALS['i18n_spip_oci_lnc'] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cal pas apelar aquela foncion dins aquel cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la salvagarda (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<MODIF> <B>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version de SPIP que la qu\'av&egrave;tz installada.</b> Anatz de cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
+'avis_erreur_version_archive' => '<MODIF> <B>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
-la documentacion de SPIP</a>.',
+la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir los noms de las basas de donadas installadas.',
-'avis_lecture_noms_bases_2' => 'Si&aacute; cap de basa es pas disponibla, si&aacute; la foncion que permet s\'entierar las basas es estada desactivada per de rasons de seguretat (aqu&ograve;\'s lo cas en c&ograve; de mantun albergador).',
+'avis_lecture_noms_bases_2' => 'Si&aacute; cap de basa es pas disponibla, si&aacute; la foncion que permet s\'entierar las basas es estada desactivada per de rasons de seguretat (aqu&ograve;\'s lo cas en c&ograve; de mai d\'un albergador).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta lo v&ograve;stre nom de login si&aacute; utilizabla:',
 'avis_non_acces_message' => 'Pod&egrave;tz pas accedir a aquel messatge.',
 'avis_non_acces_page' => 'Pod&egrave;tz pas accedir a aquela pagina.',
@@ -97,7 +97,7 @@ la documentacion de SPIP</a>.',
 'bouton_radio_activer_messagerie_interne' => 'Activar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_activer_petition' => 'Activar la peticion',
 'bouton_radio_afficher' => 'Afichar',
-'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Far par&eacute;isser dins la ti&egrave;ra dels redactors connectats',
+'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Afichar dins la ti&egrave;ra dels redactors connectats',
 'bouton_radio_articles_futurs' => 'als articles futurs sonque (pas cap d\'accion sus la basa de donadas).',
 'bouton_radio_articles_tous' => 'als articles totes sens excepcion',
 'bouton_radio_articles_tous_sauf_forum_desactive' => 'a totes los articles, levat los que lor forum es desactivat.',
@@ -296,7 +296,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'form_pet_votre_site' => 'Se ten&egrave;tz un sit, o pod&egrave;tz marcar &ccedil;ai sota',
 'form_prop_confirmer_envoi' => 'Confirmar lo mandad&iacute;s',
 'form_prop_description' => 'Descripcion/comentari',
-'form_prop_enregistre' => 'V&ograve;tra proposicion es plan registrada, apareisser&agrave; en linha tre que los responsables del sit l\'aur&agrave;n validada .',
+'form_prop_enregistre' => 'V&ograve;stra proposicion es plan registrada, apareisser&agrave; en linha tre que los responsables del sit l\'aur&agrave;n validada .',
 'form_prop_envoyer' => 'Mandar un messatge',
 'form_prop_indiquer_email' => 'Volgatz indicar una adrei&ccedil;a e-mail valida',
 'form_prop_indiquer_nom_site' => 'Volgatz indicar lo nom del sit.',
@@ -313,12 +313,12 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aic&iacute;</a> per contunhar.',
 'forum_creer_paragraphes' => '(Per crear de paragrafes, basta de daissar de linhas vu&egrave;jas.)',
 'forum_forum' => 'forum',
-'forum_info_modere' => 'Aqueste forum es moderat a pri&ograve;ri: v&ograve;stra contribucion pareisser&agrave; pas qu\'apr&egrave;p qu\'un l\'administrator del sit l\'aja validada.',
+'forum_info_modere' => 'Aqueste forum es moderat a pri&ograve;ri: v&ograve;stra contribucion pareisser&agrave; pas qu\'apr&egrave;p qu\'un administrator del sit l\'aja validada.',
 'forum_lien_hyper' => '<B>Ligam ipert&egrave;xt</b> (opcional)',
 'forum_message_definitif' => ' Messatge definitiu : mandar al sit',
 'forum_message_trop_long' => 'V&ograve;stre messatge es tr&ograve;p long. La longor maximala es de 20&nbsp;000 caract&egrave;rs.',
 'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas pel forum a l\'adrei&ccedil;a seguenta: ',
-'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrich, si&aacute; av&egrave;tz fach una error d\'adrei&ccedil;a o de mot de santa Clara. ',
+'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrich(a), si&aacute; av&egrave;tz fach una error d\'adrei&ccedil;a o de mot de santa Clara. ',
 'forum_page_url' => '(se v&ograve;stre messatge se refer&iacute;s a un article publicat pel web, o a una pagina que balhe mai d\'informacions, volgatz marcar &ccedil;ai sota lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ que fa seguida a v&ograve;stre article.',
@@ -335,7 +335,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_vous_enregistrer' => ' Per participar a
   aquel forum, primi&egrave;r vos cal registrar. Merc&eacute;s
   de marcar &ccedil;ai sota l\'identificant personal qu\'av&egrave;tz recebut.
- Se s&egrave;tz pas registrat, av&egrave;tz de',
+ Se s&egrave;tz pas registrat/ada, av&egrave;tz de',
 'forum_vous_inscrire' => 'vos inscriure </a> d\'en primi&egrave;r.',
 
 
@@ -386,7 +386,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_modifier_rubrique' => 'Modificar aquela rubrica',
 'icone_modifier_site' => 'Modificar aquel sit',
 'icone_mots_cles' => 'Mots claus',
-'icone_nouvelle_breve' => 'Escriure una br&egrave;va mai',
+'icone_nouvelle_breve' => 'Escriure una br&egrave;va n&ograve;va',
 'icone_poster_message' => 'Postar un messatge',
 'icone_publier_breve' => 'Publicar aquela br&egrave;va',
 'icone_referencer_nouveau_site' => 'Referenciar un sit n&ograve;u',
@@ -404,7 +404,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_suivi_forum' => 'Seguit del forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerir los forums',
 'icone_suivi_pettions' => 'Seguir/gerir las peticions',
-'icone_supprimer_cookie' => 'Suprimir lo pegon (cookie) de correspond&eacute;ncia',
+'icone_supprimer_cookie' => 'Suprimir lo cookie de correspond&eacute;ncia',
 'icone_supprimer_document' => 'Suprimir aquel document',
 'icone_supprimer_groupe_mots' => 'Suprimir aquel document',
 'icone_supprimer_image' => 'Suprimir aquel imatge',
@@ -417,7 +417,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_valider_signature' => 'Validar aquela signatura',
 'icone_visiter_site' => 'Vesitar lo sit',
 'icone_voir_en_ligne' => 'Veire en linha',
-'icone_voir_sites_references' => 'Veire los sites referenciats',
+'icone_voir_sites_references' => 'Veire los sits referenciats',
 'icone_voir_tous_mots_cles' => 'Veire totes los mots claus ',
 'image_administrer_rubrique' => 'Pod&egrave;tz administrar aquela rubrica',
 'info_1_article' => '1 article',
@@ -431,11 +431,11 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_activer_cookie' => 'Pod&egrave;tz activar un <b>cookie de correspond&eacute;ncia</b>; aqu&ograve; vos permetr&agrave; de passar aisit del sit public al sit privat.',
 'info_activer_forum_public' => '<I>Per activar los forums publics, volgatz causir lor m&ograve;de de moderacion predefinit:</i>',
 'info_admin_gere_rubriques' => 'Aquel administrator ger&iacute;s las rubricas seguentas&nbsp;:',
-'info_admin_gere_toutes_rubriques' => 'Aquel administrator ger&iacute;s <b>totas as rubricas</b>.',
+'info_admin_gere_toutes_rubriques' => 'Aquel administrator ger&iacute;s <b>totas las rubricas</b>.',
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'del sit(<i>d\'utilizar amb precaucion</i>)',
-'info_administrateur_site_01' => 'Se s&egrave;tz administrator del sit, volgatz',
+'info_administrateur_site_01' => 'Se s&egrave;tz administrator/tritz del sit, volgatz',
 'info_administrateur_site_02' => 'clicar aquel ligam',
 'info_administrateurs' => 'Administrators',
 'info_administrer_rubrique' => 'Pod&egrave;tz administrar aquela rubrica',
@@ -445,7 +445,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_adresse_non_indiquee' => 'Av&egrave;tz pas indicat l\'adrei&ccedil;a de testar&nbsp;!',
 'info_adresse_url' => 'Adrei&ccedil;a (URL) del sit public',
 'info_afficher_visites' => 'Afichar las vesitas per:',
-'info_affichier_visites_articles_plus_visites' => 'Far par&eacute;isser las vesitas pels <b>articles mai vesitats dempu&egrave;i lo comen&ccedil;ament&nbsp;:</b>',
+'info_affichier_visites_articles_plus_visites' => 'Afichar las vesitas pels <b>articles mai vesitats dempu&egrave;i lo comen&ccedil;ament:</b>',
 'info_aide' => 'AJUDA&nbsp;:',
 'info_aide_en_ligne' => 'Ajuda en linha SPIP',
 'info_ajout_image' => 'Quand apond&egrave;tz d\'imatges coma estacaments jonches a un article, SPIP p&ograve;t crear automaticament per vos de vinhetas (miniaturas) dels imatges inserits. Aqu&ograve; permet per exemple de crear automaticament una galari&aacute; o un p&ograve;rtf&ograve;lio.',
@@ -557,7 +557,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_email_invalide' => 'Adrei&ccedil;a e-mail invalida',
 'info_email_webmestre' => 'Adrei&ccedil;a e-mail del responsable del sit (opcional)',
 'info_en_cours_validation' => 'V&ograve;stres articles en cors de redaccion',
-'info_en_ligne' => 'Per ara en linha&nbsp;:',
+'info_en_ligne' => 'Ara en linha:',
 'info_en_test_1' => '(en&nbsp;ensag)',
 'info_en_test_2' => '(en ensag)',
 'info_entrer_code_alphabet' => 'Picatz lo c&ograve;de de l\'alfabet d\'utilizar:',
@@ -571,7 +571,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_etape_suivante_1' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_exportation_base' => 'exportacion de la basa cap a @archive@',
-'info_facilite_suivi_activite' => 'Per facilitar lo seguit de l\'activitat editoriala del sit, SPIP vos p&ograve;t provesir per e-mail, per exemple a una mailing-list dels redactors, l\'an&oacute;ncia de las demandas de publicacion e de las validacions d\'articles.',
+'info_facilite_suivi_activite' => 'Per facilitar lo seguit de l\'activitat editoriala del sit, SPIP vos p&ograve;t fornir per e-mail, per exemple a una mailing-list dels redactors, l\'an&oacute;ncia de las demandas de publicacion e de las validacions d\'articles.',
 'info_fichiers_authent' => 'Fichi&egrave;rs d\'autentificacion &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
 'info_fini' => 'Es acabat&nbsp;!',
 'info_fonctionnement_forum' => 'Foncionament del forum:',
@@ -626,7 +626,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_la_breve' => 'la br&egrave;va',
 'info_la_rubrique' => 'la rubrica',
 'info_laisser_champs_vides' => 'daissar aqueles camps vu&egrave;ges)',
-'info_langue_defaut' => 'Lenga per defaut:',
+'info_langue_defaut' => 'Lenga predefinida:',
 'info_langue_interface' => 'Lenga de l\'interf&agrave;cia',
 'info_langue_principale' => 'Lenga majorala del sit',
 'info_langues' => 'Lengas del sit',
@@ -662,7 +662,7 @@ Merc&eacute;s per v&ograve;stra participacion
    e v&ograve;stre sit foncionar&agrave; pas mai.<br>{{Tornatz installar los
   fichi&egrave;rs d\'SPIP.}}',
 'info_mise_en_ligne' => 'Data de mesa en linha:',
-'info_mode_fonctionnement_defaut_forum_public' => 'M&ograve;de de foncionament per defaut dels forums publics',
+'info_mode_fonctionnement_defaut_forum_public' => 'M&ograve;de de foncionament predefinit dels forums publics',
 'info_modification_parametres_securite' => 'modificacions dels param&egrave;tres de seguretat',
 'info_modifier_breve' => 'Modificar la br&egrave;va:',
 'info_modifier_rubrique' => 'Modificar la rubrica:',
@@ -677,7 +677,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_moyenne' => 'mejana:',
 'info_multi_articles' => 'Activar lo menut de lenga pels articles?',
 'info_multi_cet_article' => 'Lenga d\'aqueste article:',
-'info_multi_herit' => 'Lenga per defaut',
+'info_multi_cette_rubrique' => '<NEW> Lenga emplegada dins aquesta rubrica:',
+'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Volgatz seleccionar &ccedil;ai sota las lengas que son a posita dels redactors de v&ograve;stre sit.
   Las lengas ja emplegadas dins v&ograve;stre sit (afichadas primi&egrave;ras) se p&ograve;don pas desactivar.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
@@ -695,7 +696,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_nom_utilisateurs_connectes' => 'Lo v&ograve;stre nom apareis dins la ti&egrave;ra dels utilizaires connectats.',
 'info_nombre_articles' => '@nb_articles@ articles,',
 'info_nombre_breves' => '@nb_breves@ br&egrave;vas, ',
-'info_nombre_en_ligne' => 'Per ara en linha:',
+'info_nombre_en_ligne' => 'Ara en linha:',
 'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION:',
 'info_nombre_rubriques' => '@nb_rubriques@ rubricas,',
 'info_nombre_sites' => '@nb_sites@ sits,',
@@ -795,8 +796,8 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_redirection' => 'Redireccion',
 'info_refuses' => 'V&ograve;stres articles refusats',
 'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
-'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta per defaut per un l&ograve;go personalizat:',
-'info_remplacer_vignette_defaut' => 'Rempla&ccedil;ar la vinheta per defaut per un l&ograve;go personalizat:',
+'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
+'info_remplacer_vignette_defaut' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
 'info_renvoi_article' => '<B>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Sonque los administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la salvagarda @archive@',
@@ -866,7 +867,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_statut_site_2' => 'Publicat',
 'info_statut_site_3' => 'Prepausat',
 'info_statut_site_4' => 'Al bordilhi&egrave;r',
-'info_statut_utilisateurs_1' => 'Estatut per defaut dels utilizaires importats',
+'info_statut_utilisateurs_1' => 'Estatut predefinit dels utilizaires importats',
 'info_statut_utilisateurs_2' => 'Causiss&egrave;tz l\'estatut d\'atribuir a las personas presentas dins l\'annuari LDAP quora se conn&egrave;ctan pel primi&egrave;r c&ograve;p. Poiretz pu&egrave;i modificar aquel estatut per cada autor un cas per un.',
 'info_suivi_activite' => 'Seguit de l\'activitat editoriala',
 'info_supprimer_mot' => 'suprimir aquel mot',
@@ -915,7 +916,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_utilisation_spip' => 'Ara pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_valider_lien' => 'validar aquel ligam',
 'info_verifier_image' => ', volgatz verificar que los imatges se si&aacute;n plan transferits.',
-'info_vignette_defaut' => 'Vinheta per defaut',
+'info_vignette_defaut' => 'Vinheta predefinida',
 'info_vignette_personnalisee' => 'Vinheta personalizada',
 'info_visite' => 'vesita:',
 'info_visites' => 'vesitas:',
@@ -1000,7 +1001,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 
 // L
 'lien_afficher_icones_seuls' => 'Afichar sonque las ic&ograve;nas',
-'lien_afficher_texte_icones' => 'Far par&eacute;isser las ic&ograve;nas e lo t&egrave;xt',
+'lien_afficher_texte_icones' => 'Afichar las ic&ograve;nas e lo t&egrave;xt',
 'lien_afficher_texte_seul' => 'Afichar sonque lo t&egrave;xt',
 'lien_ajout_destinataire' => 'Apondre aquel destinatari',
 'lien_ajouter_auteur' => 'Apondre aquel autor',
@@ -1026,7 +1027,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'lien_repondre_message' => 'Respondre a aquel messatge',
 'lien_reponse_article' => 'Responsa a l\'article',
 'lien_reponse_breve' => 'Responsa a la br&egrave;va',
-'lien_reponse_breve_2' => 'Responsa a la braca',
+'lien_reponse_breve_2' => 'Responsa a la br&egrave;va',
 'lien_reponse_rubrique' => 'Responsa a la rubrica',
 'lien_reponse_site_reference' => 'Responsa al sit referenciat :',
 'lien_retirer_auteur' => 'Levar l\'autor',
@@ -1050,7 +1051,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'login_autre_identifiant' => 'se connectar amb un autre identificant',
 'login_connexion_refusee' => 'Connexion refusada.',
 'login_cookie_accepte' => 'Volgatz configurar v&ograve;stre navigador per que los acc&egrave;pte (almens per aquel sit).',
-'login_cookie_oblige' => 'Per vos identificar d\'un biais segur sus aqueste sit, vos cal acceptar los pegons (cookies).',
+'login_cookie_oblige' => 'Per vos identificar d\'un biais segur sus aqueste sit, vos cal acceptar los cookies.',
 'login_deconnexion_ok' => 'S&egrave;tz desconnectat/ada.',
 'login_erreur_pass' => 'Error de mot de santa Clara.',
 'login_espace_prive' => 'espaci privat',
@@ -1065,7 +1066,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
    interceptat sul ret, volgatz activar Javascript 
    dins v&ograve;stre navigador e',
 'login_nouvelle_tentative' => 'nov&egrave;l ensag',
-'login_par_ici' => 'S&egrave;tz enregistrat... per aqu&iacute;...',
+'login_par_ici' => 'S&egrave;tz enregistrat/ada... per aqu&iacute;...',
 'login_pass2' => 'Mot de santa Clara&nbsp;:',
 'login_preferez_refuser' => '<b>Se vos agrada mai de refusar los cookies</b>, un autre met&ograve;de de connexion (mens securizat) es a v&ograve;stra disposicion:',
 'login_recharger' => 'tornar cargar aquela pagina',
@@ -1146,7 +1147,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'menu_aide_suivi_forum_articles_postes' => 'Articles p&ograve;stdatats',
 'menu_aide_suivi_forum_configuration' => 'Configuracion precisa',
 'menu_aide_suivi_forum_contenu_articles' => 'Contengut dels articles',
-'menu_aide_suivi_forum_envoi_emails' => 'Mandad&iacute;s automatic de corri&egrave;rs electronics',
+'menu_aide_suivi_forum_envoi_emails' => 'Mandad&iacute;s automatic d\'e-mails',
 'menu_aide_suivi_forum_fonctionnement' => 'Foncionament dels forums',
 'menu_aide_suivi_forum_messagerie_interne' => 'Messatjari&aacute; int&egrave;rna',
 'menu_aide_suivi_forum_moteur_recherche' => 'Motor de rec&egrave;rca integrat',
@@ -1188,7 +1189,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'pass_erreur_non_valide' => '<b>Error:</b> aquel e-mail <tt>@email_oubli@</tt> es pas valid!',
 'pass_erreur_probleme_technique' => '<b>Error:</b> pr\'amor d\'un probl&egrave;ma tecnic, l\'e-mail se p&ograve;t pas mandar. ',
 'pass_espace_prive_bla' => 'L\'espaci privat d\'aqueste sit es dob&egrave;rt als
-  vesitaires que se son inscriches. Un c&ograve;p registrat,
+  vesitaires que se son inscriches. Un c&ograve;p registrat/ada,
   poiretz consultar los articles en cors de redaccion,
   prepausar d\'articles nov&egrave;ls e participar a totes los forums.',
 'pass_forum_bla' => 'Av&egrave;tz demandat d\'intervenir dins un forum
@@ -1232,7 +1233,7 @@ e vos tornar connectar al sit.
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
 'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre vejaire gr&agrave;cias al forum estacat a aquel article (en bas de pagina).',
-'texte_acces_ldap_anonyme_1' => 'D\'unes servidors LDAP acc&egrave;ptan pas ges d\'acc&egrave;s anonim. En aquel cas, cal especifiar un identificant d\'acc&egrave;s inicial per poder pu&egrave;i recercar d\'informacions dins l\'annuari. Pasmens, los camps seguents se los poir&agrave; daissar vu&egrave;ges dins la m&agrave;ger part dels cases.',
+'texte_acces_ldap_anonyme_1' => 'D\'unes servidors LDAP acc&egrave;ptan pas ges d\'acc&egrave;s anonim. En aquel cas, cal especificar un identificant d\'acc&egrave;s inicial per poder pu&egrave;i recercar d\'informacions dins l\'annuari. Pasmens, los camps seguents se poir&agrave;n daissar vu&egrave;ges dins la m&agrave;ger part dels cases.',
 'texte_actualite_site_1' => 'Aquela pagina recensa l\'actualitat del sit e vos permet de seguir v&ograve;stras contribucions. I tornaretz trobar v&ograve;stres articles en cors de redaccion, los articles e las br&egrave;vas que vos convidam de legir per donar v&ograve;stre vejaire, pu&egrave;i una remembran&ccedil;a de v&ograve;stras contribucions.<p><hr><p>Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, poiretz clicar sus "',
 'texte_actualite_site_2' => 'interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per dobrir mai de possibilitats.',
@@ -1260,8 +1261,8 @@ Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri <i>IMG/</
 'texte_choix_base_1' => 'Causiss&egrave;tz v&ograve;stra basa:',
 'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
 'texte_choix_base_3' => '<B>Causiss&egrave;tz</b> &ccedil;ai sota la que v&ograve;stre albergador vos a atribuida:',
-'texte_choix_langue_defaut' => 'Volgatz causir &ccedil;ai jos la lenga per defaut del v&ograve;stre sit, e tanben las lengas qu\'&ograve;m prepausar&agrave; als redactors.',
-'texte_commande_vider_tables_indexation' => ' Utilisatz aquela comanda per vojar las taulas d\'indexacion utilizadas pel motor de rec&egrave;rca integrat a SPIP. Aqu&ograve; permetr&agrave;
+'texte_choix_langue_defaut' => 'Volgatz causir &ccedil;ai jos la lenga predefinida del v&ograve;stre sit, e tanben las lengas qu\'&ograve;m prepausar&agrave; als redactors.',
+'texte_commande_vider_tables_indexation' => 'Utilisatz aquela comanda per vojar las taulas d\'indexacion utilizadas pel motor de rec&egrave;rca integrat a SPIP. Aqu&ograve; permetr&agrave;
  de ganhar d\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
 dins lo classament per popularitat, es indicat dins lo marge; la popularitat de l\'article 
@@ -1282,7 +1283,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_crash_base' => 'Se v&ograve;stra basa de donadas a
  abocat, pod&egrave;tz ensajar una reparacion
  automatica.',
-'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualizacion es activada sus aquel site. S\'installatz a partir d\'aquel formulari d\'imatges al(s) format(s) @gd_formats@, s\'acompanhar&agrave;n d\'una vinheta d\'una talha maximala de @taille_preview@ pix&egrave;ls.',
+'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualizacion es activada sus aquel sit. S\'installatz a partir d\'aquel formulari d\'imatges al(s) format(s) @gd_formats@, s\'acompanhar&agrave;n d\'una vinheta d\'una talha maximala de @taille_preview@ pix&egrave;ls.',
 'texte_creer_rubrique' => 'Abans de poder escriure d\'articles,<BR> dev&egrave;tz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA',
@@ -1315,7 +1316,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
   e administrators endac&ograve;m mai dins v&ograve;stre sit
   (programa ext&egrave;rne d\'estadisticas, per exemple).<p>
  Se vos serv&iacute;s pas, pod&egrave;tz daissar aquesta opcion
-  a sa valor per defaut (pas cap de creacion
+  a sa valor predefinida (pas cap de creacion
   dels fichi&egrave;rs).',
 'texte_inc_auth_1' => 'S&egrave;tz identificat/ada coma
    <B>@auth_login@</b>, mas aquel login exist&iacute;s pas o pas mai dins la basa.
@@ -1324,19 +1325,19 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_inc_auth_3' => ', apr&egrave;p qu\'auretz quitat eventualament, pu&egrave;i
   tornat lan&ccedil;ar v&ograve;stre navigador.',
 'texte_inc_config' => 'Las modificacions fachas dins aquestas paginas influ&eacute;ncian bravament lo
- foncionament de v&ograve;tre sit. Vos aconselham d\'i intervenir pas tant que siatz pas
- acostumat al foncionament del sist&egrave;ma SPIP. <P align="justify"><B>
+ foncionament de v&ograve;stre sit. Vos aconselham d\'i intervenir pas tant que siatz pas
+ acostumat/ada al foncionament del sist&egrave;ma SPIP. <P align="justify"><B>
  En general, se conselha f&ograve;rt
- de daissar la carga d\'aquestas paginas al webm&egrave;stre principal de v&ograve;tre sit.</b>',
-'texte_inc_meta_1' => 'Volgatz, coma administrator del sit,',
+ de daissar la carga d\'aquestas paginas al webm&egrave;stre principal de v&ograve;stre sit.</b>',
+'texte_inc_meta_1' => 'Volgatz, coma administrator/tritz del sit,',
 'texte_inc_meta_2' => 'verificar los dreches d\'escritura',
 'texte_inc_meta_3' => 'dins lo repert&ograve;ri ecrire/',
 'texte_informations_personnelles_1' => 'Ara lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat al sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
 'texte_jeu_caractere' => 'Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
- differents de l\'alfabet latin (o "occidental") e sos derivats.
- Dins aquel cas, cal cambiar lo reglatge per defaut per tal d\'utilizar
+ diferents de l\'alfabet latin (o "occidental") e sos derivats.
+ Dins aquel cas, cal cambiar lo reglatge predefinit per tal d\'utilizar
  un j&ograve;c de caract&egrave;rs apropriat. Oblidetz pas tanpauc d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aqueste reglatge a pas cap d\'efi&egrave;ch retroactiu. Adoncas
@@ -1346,7 +1347,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_lien_hypertexte' => '(Se v&ograve;stre messatge se refer&iacute;s a un article publicat sul web, o a una pagina fornissent mai d\'informacions, volgatz indicar &ccedil;ai sota lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Los ligams eissits dels sits sindicats se p&ograve;don
    blocar a pri&ograve;ri; lo reglatge
-  &ccedil;ai sota indica lo reglatge per defaut dels
+  &ccedil;ai sota indica lo reglatge predefinit dels
    sits sindicats apr&egrave;p lor creacion. De tot biais,
     es possible pu&egrave;i de 
    desblocar cada ligam individualament, o de
@@ -1384,7 +1385,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, causiss&egrave;tz una autra basa o creatz-ne una nov&egrave;la. Verificatz las informacions que v&ograve;stre albergador a fornidas.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
-'texte_port_annuaire' => '(La valor indicada per defaut conven en general.)',
+'texte_port_annuaire' => '(La valor indicada coma predefinida conven en general.)',
 'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins d\'unes cases (intranet, rets protegidas...),
   se p&ograve;t que calga utilizar un <I>proxy HTTP</i> per at&eacute;nher los sits sindicats.
@@ -1400,7 +1401,7 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_recapitiule_liste_documents' => 'Aquesta pagina recapitula la ti&egrave;ra dels documents qu\'av&egrave;tz pla&ccedil;ats dins las rubricas. Per modificar las informacions de cada document, seguiss&egrave;tz lo ligam cap a la pagina de sa rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit cap a una autra URL.',
-'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br>Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sota l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichi&egrave;r backend. SPIP agantar&agrave; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sota l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichi&egrave;r backend. SPIP agantar&agrave; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora d\'unas requistas MySQL abocan
   sistematicament e sens rason aparenta, se p&ograve;t
   qu\'aqu&ograve; venga de la quita basa de donadas.  </b><p>
@@ -1421,10 +1422,10 @@ dans lo repert&ograve;ri <i>ecrire/data/</i>.
 'texte_sauvegarde_base' => 'Salvagardar la basa',
 'texte_sauvegarde_compressee' => 'La salvagarda se far&agrave; dins lo fichi&egrave;r non comprimit <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => 'Pod&egrave;tz seleccionar &ccedil;ai sota la "lenga principala" del sit. Aquela causida vos obliga pas -grand gaug- d\'escriure v&ograve;stres articles dins la lenga seleccionada, mas permet de determinar:
- <ul><li> lo format per defaut de las datas sul sit public;</li>
+ <ul><li> lo format predefinit de las datas sul sit public;</li>
  <li> la natura del motor tipografic que SPIP deu utilizar pel rendut dels t&egrave;xtes;</li>
  <li> la lenga utilizada dins los formularis del sit public;</li>
- <li> la lenga presentada per defaut dins l\'espaci privat.</li></ul>',
+ <li> la lenga presentada coma predefinida dins l\'espaci privat.</li></ul>',
 'texte_signification' => 'Las barras rojas representan las intradas cumuladas (total de las sosrubricas), las barras verdas lo nombre de vesitas per cada rubrica.',
 'texte_sous_titre' => 'Sost&iacute;tol',
 'texte_statistiques_visites' => '(barras escuras:  dimenge / corba escura: evolucion de la mejana)',
@@ -1458,7 +1459,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
   trabalhe sul meteis article, lo sist&egrave;ma
   p&ograve;t afichar los articles recentament "dob&egrave;rts"
   per tal d\'evitar las modificacions simultan&egrave;as.
-  Aquela opcion es desactivada per defaut
+  Aquela opcion es desactivada de mani&egrave;ra predefinida
   per tal d\'evitar d\'afichar de messatges d\'avertiment
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;p de resultats per "@cherche_auteur@" ; volgatz afinar la rec&egrave;rca.',

@@ -49,14 +49,14 @@ $GLOBALS['i18n_spip_en'] = array(
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
-'avis_erreur_version_archive' => '<MODIF> <B>Warning! The file @archive@ corresponds to
-				a version of SPIP other than the one you have
-				installed.</B> You are facing great
-				difficulties: risk of destruction of your database
-				various dysfunctions in the site, etc. Do not
-				submit this import request.<p>For more
-				information, please refer to <A HREF=\'http://www.spip.net/fr_article1489.html\'>
-                                the SPIP documentation</A>.',
+'avis_erreur_version_archive' => '<B>Warning! The file @archive@ corresponds to
+    a version of SPIP other than the one you have
+    installed.</b> You are facing great
+    difficulties: the risk of destroying your database,
+    various malfunctions of your site, etc. Do not
+    submit this import request.<p>For more
+    information, please see <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+                                the SPIP documentation</a>.',
 'avis_espace_interdit' => '<B>Forbidden area</B><p>SPIP is already installed.',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
 'avis_lecture_noms_bases_2' => 'Either no database is available, or the feature allowing the listing of the databases was disabled
@@ -701,8 +701,8 @@ requiring an FTP access to the Web site.',
 'info_mots_cles_association' => 'Keywords in this group can be associated with:',
 'info_moyenne' => 'average:',
 'info_multi_articles' => 'Enable the language menu for the articles?',
-'info_multi_cet_article' => '<MODIF> This article is in:',
-'info_multi_herit' => '<MODIF> parent\'s language',
+'info_multi_cet_article' => 'Language of this article:',
+'info_multi_herit' => 'Default language',
 'info_multi_langues_choisies' => 'Please select below the languages to be available to the editors of your site.
   Languages already used by your site (on top of the list) cannot be disabled.',
 'info_multi_rubriques' => 'Enable the language menu for the sections?',
@@ -1088,13 +1088,10 @@ requiring an FTP access to the Web site.',
 'login_login2' => 'Login (identifier for connection to the site):',
 'login_login_pass_incorrect' => '(Wrong login or password).',
 'login_motpasseoublie' => 'password forgotten?',
-'login_non_securise' => '<MODIF> Caution, this form is not secure.
-
-			If you do not want your password to be
-
-			intercepted on the net, please activate Javascript 
-
-			in your browser and',
+'login_non_securise' => 'Caution, this form is not secure.
+   If you do not want your password to be open to
+   interception on the network, please activate Javascript
+   in your browser and',
 'login_nouvelle_tentative' => 'New attempt',
 'login_par_ici' => 'You are registered... this way...',
 'login_pass2' => 'Password:',
