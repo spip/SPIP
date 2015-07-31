@@ -517,7 +517,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($params, true, $p->descr, $p->boucles, $p->id_boucle, false);
+	$code_contexte = argumenter_inclure($params, true, $p, $p->boucles, $p->id_boucle, false);
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
@@ -899,7 +899,7 @@ function balise_INCLURE_dist($p) {
 	// la lang n'est pas passe de facon automatique par argumenter
 	// mais le sera pas recuperer_fond, sauf si etoile=>true est passe
 	// en option
-	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $id_boucle, false, false);
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
 
@@ -939,7 +939,7 @@ function balise_INCLURE_dist($p) {
 // http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p) {
 
-	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
+	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
 
 	if (!isset($_contexte[1])) {
 		$msg = _T('zbug_balise_sans_argument', array('balise' => ' MODELE'));

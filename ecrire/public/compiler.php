@@ -50,7 +50,7 @@ include_spip('public/jointures');
 // Voir la balise #INCLURE
 
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
+function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
 
 	foreach($params as $k => $couple) {
@@ -61,8 +61,8 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 			$var = $val[0];
 			if ($var->type != 'texte') {
 			  if ($n OR $k)
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), $id_boucle);
-			  else $l[1] = calculer_liste($val, $descr, $boucles, $id_boucle);
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), $p);
+			  else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
@@ -80,12 +80,12 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 
 				if ($var == 'lang') {
 				  $lang = !$auto 
-				    ? calculer_liste($val, $descr, $boucles, $id_boucle)
+				    ? calculer_liste($val, $p->descr, $boucles, $id_boucle)
 				    : '$GLOBALS["spip_lang"]';
 				} else {
 				  $val = $auto
 				    ? index_pile($id_boucle, $var, $boucles)
-				    : calculer_liste($val, $descr, $boucles, $id_boucle);
+				    : calculer_liste($val, $p->descr, $boucles, $id_boucle);
 
 				  if ($var !== 1)
 				    $val = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
@@ -119,14 +119,14 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 // Calculer un <INCLURE()>
 //
 // http://doc.spip.org/@calculer_inclure
-function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
+function calculer_inclure($p, &$boucles, $id_boucle) {
 
-	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
+	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle);
 	if (is_string($p->texte)) {
 		$fichier = $p->texte;
 		$code = "'$fichier'";
 	} else {
-		$code = calculer_liste($p->texte, $descr, $boucles, $id_boucle);
+		$code = calculer_liste($p->texte, $p->descr, $boucles, $id_boucle);
 		if (preg_match("/^'([^']*)'/s", $code, $r))
 			$fichier = $r[1];
 		else $fichier = '';
@@ -645,7 +645,8 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
 		// inclure
 		case 'include':
-			$code = calculer_inclure($p, $descr, $boucles, $id_boucle);
+			$p->descr = $descr;
+			$code = calculer_inclure($p, $boucles, $id_boucle);
 			
 			$commentaire = '<INCLURE ' . addslashes(str_replace("\n", ' ', $code)) . '>';
 			$avant='';
