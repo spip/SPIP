@@ -4,6 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
+include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le public
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
@@ -37,6 +38,7 @@ function auteurs_edit_config($row)
 	//$config['restreint'] = ($row['statut'] == 'publie');
 	$auth_methode = $row['source'];
 	include_spip('inc/auth');
+	include_spip('inc/autoriser');
 	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('restreintes'=>true));
 	$config['edit_login'] =
 		(auth_autoriser_modifier_login($auth_methode) AND $autoriser);
