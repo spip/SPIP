@@ -40,6 +40,9 @@ else $req_where = " AND articles.statut IN ('prop','publie')";
 
 echo "<p>";
 
+
+debut_cadre_relief();
+
 echo "<div class='arial11'><ul>";
 echo "<p>";
 
@@ -91,7 +94,10 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 }
 
 
-echo "</ul></div>";
+echo "</ul></div>\n";
+
+fin_cadre_relief();
+
 
 
 //////////////////////////////////////////////////////
