@@ -19,7 +19,7 @@ else if ($session_login != '') {
 
 	if ($row_auteur = mysql_fetch_array($result)) {
 		if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
-			$cookie_admin = "@".$row['login'];
+			$cookie_admin = "@".$row_auteur['login'];
 		}
 		$cookie_session = creer_cookie_session($row_auteur);
 		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
