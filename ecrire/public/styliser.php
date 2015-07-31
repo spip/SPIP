@@ -32,6 +32,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * http://doc.spip.org/@public_styliser_dist
  */
 function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
+	static $styliser_par_z;
 
 	// s'assurer que le fond est licite
 	// car il peut etre construit a partir d'une variable d'environnement
@@ -64,7 +65,8 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	);
 
 	if (test_espace_prive() OR defined('_ZPIP')) {
-		$styliser_par_z = charger_fonction('styliser_par_z','public');
+		if (!$styliser_par_z)
+			$styliser_par_z = charger_fonction('styliser_par_z','public');
 		$flux = $styliser_par_z($flux);
 	}
 

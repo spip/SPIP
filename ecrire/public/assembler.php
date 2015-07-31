@@ -205,7 +205,7 @@ function auto_content_type($page)
 
 // http://doc.spip.org/@inclure_page
 function inclure_page($fond, $contexte, $connect='') {
-
+	static $cacher, $produire_page;
 	global $lastmodified;
 
 	// enlever le fond de contexte inclus car sinon il prend la main
@@ -214,7 +214,8 @@ function inclure_page($fond, $contexte, $connect='') {
 	unset($contexte['fond']);
 	$page = array('contexte_implicite'=>calculer_contexte_implicite());
 	$page['contexte_implicite']['cache'] = $fond;
-	$cacher = charger_fonction('cacher', 'public', true);
+	if (is_null($cacher))
+		$cacher = charger_fonction('cacher', 'public', true);
 	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	if ($cacher)
@@ -228,7 +229,8 @@ function inclure_page($fond, $contexte, $connect='') {
 	// produire la page : peut mettre a jour $lastinclude
 	// le contexte_cache envoye a cacher() a ete conserve et est passe a produire
 	if ($use_cache) {
-		$produire_page = charger_fonction('produire_page','public');
+		if (is_null($produire_page))
+			$produire_page = charger_fonction('produire_page','public');
 		$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte, $page, $lastinclude, $connect);
 	}
 	// dans tous les cas, mettre a jour $lastmodified
@@ -252,7 +254,9 @@ function inclure_page($fond, $contexte, $connect='') {
  * @return array
  */
 function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, &$page, &$lastinclude, $connect=''){
-	$parametrer = charger_fonction('parametrer', 'public');
+	static $parametrer,$cacher;
+	if (!$parametrer)
+		$parametrer = charger_fonction('parametrer', 'public');
 	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 	// et on l'enregistre sur le disque
 	if ($chemin_cache
@@ -260,7 +264,8 @@ function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, 
 	AND is_array($page)
 	AND count($page)
 	AND $page['entetes']['X-Spip-Cache'] > 0){
-		$cacher = charger_fonction('cacher', 'public', true);
+		if (is_null($cacher))
+			$cacher = charger_fonction('cacher', 'public', true);
 		$lastinclude = time();
 		if ($cacher)
 			$cacher($contexte_cache, $use_cache, $chemin_cache, $page, $lastinclude);

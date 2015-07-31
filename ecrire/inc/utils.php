@@ -36,13 +36,13 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	if (strlen($dossier) AND substr($dossier,-1) != '/') $dossier .= '/';
 	$f = str_replace('/','_',$dossier) . $nom;
-	if (isset($echecs[$f])) return $echecs[$f];
 
 	if (function_exists($f))
 		return $f;
 	if (function_exists($g = $f . '_dist'))
 		return $g;
 
+	if (isset($echecs[$f])) return $echecs[$f];
 	// Sinon charger le fichier de declaration si plausible
 
 	if (!preg_match(',^\w+$,', $f))
@@ -191,6 +191,7 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
  */
 function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
+	static $log;
 	preg_match('/^([a-z_]*)\.?(\d)?$/iS', (string) $name, $regs);
 	if (!$logname = $regs[1])
 		$logname = null;
@@ -199,7 +200,7 @@ function spip_log($message=NULL, $name=NULL) {
 
 	if ($niveau <= 
 	(defined('_LOG_FILTRE_GRAVITE')?_LOG_FILTRE_GRAVITE:_LOG_DEBUG)) {
-		if (!$pre)
+		if (!$pre){
 			$pre = array(
 				_LOG_HS=>'HS:',
 				_LOG_ALERTE_ROUGE=>'ALERTE:',
@@ -209,7 +210,8 @@ function spip_log($message=NULL, $name=NULL) {
 				_LOG_INFO_IMPORTANTE=>'!INFO:',
 				_LOG_INFO=>'info:',
 				_LOG_DEBUG=>'debug:');
-		$log = charger_fonction('log', 'inc');
+			$log = charger_fonction('log', 'inc');
+		}
 		if (!is_string($message)) $message = var_export($message, true);
 		$log($pre[$niveau].' '.$message, $logname);
 	}
@@ -854,11 +856,14 @@ function find_in_theme($file, $subdir='', $include=false){
 // dans _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
 function chemin_image($icone){
+	static $icone_renommer;
 	// si c'est un nom d'image complet (article-24.png) essayer de le renvoyer direct
 	if (preg_match(',[.](png|gif|jpg)$,',$icone) AND $f = find_in_theme("images/$icone"))
 		return $f;
 	// sinon passer par le module de renommage
-	if ($icone_renommer = charger_fonction('icone_renommer','inc',true)){
+	if (is_null($icone_renommer))
+		$icone_renommer = charger_fonction('icone_renommer','inc',true);
+	if ($icone_renommer){
 		list($icone,$fonction) = $icone_renommer($icone,"");
 		if (file_exists($icone))
 			return $icone;

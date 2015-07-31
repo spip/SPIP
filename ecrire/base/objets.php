@@ -600,10 +600,12 @@ function table_objet_sql($type,$serveur='') {
 
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type,$serveur='') {
+	static $trouver_table = null;
 	$type = objet_type($type,$serveur);
 	if (!$type) return;
 	$t = table_objet($type);
-	$trouver_table = charger_fonction('trouver_table', 'base');
+	if (!$trouver_table)
+		$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($t,$serveur);
 	if (isset($desc['key']['PRIMARY KEY']))
 		return $desc['key']['PRIMARY KEY'];
