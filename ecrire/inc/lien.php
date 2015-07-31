@@ -234,6 +234,10 @@ function traiter_autoliens($r) {
 	$url = $protocol.'://'.$k[1];
 	$lien = charger_fonction('lien', 'inc');
 	$r = $lien($url,'','','','','nofollow') . $k[2];
+
+	// ajouter la class auto
+	$r = inserer_attribut($r, 'class', trim(extraire_attribut($r,'class').' auto'));
+
 	// si l'original ne contenait pas le 'http:' on le supprime du clic
 	return $m ? $r : str_replace('>http://', '>', $r);
 }
