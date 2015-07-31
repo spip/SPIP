@@ -123,9 +123,9 @@ function aff_selection (type, rac, id) {
 
 function aff_selection_titre(titre, id_rubrique, racine, url, col, sens)
 {
-	findObj('titreparent').value=titre;
-	findObj('id_parent').value=id_rubrique;
-	findObj('selection_rubrique').style.display='none';
+	findObj_forcer('titreparent').value=titre;
+	findObj_forcer('id_parent').value=id_rubrique;
+	findObj_forcer('selection_rubrique').style.display='none';
 	return aff_selection_provisoire(id_rubrique, racine, url, col, sens);
 }
 
