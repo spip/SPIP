@@ -831,9 +831,9 @@ function timeout ($lock=false, $action=true, $connect_mysql=true) {
 		if (!$db_ok)
 			return $ok = false;
 
-		// Lock SQL ?  (10 secondes)
+		// Lock SQL ?
 		if ($lock) {
-			if (spip_get_lock($lock, 10)) {
+			if (spip_get_lock($lock)) {
 				// C'est bon
 				$ok = false;
 				return true;
