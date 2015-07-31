@@ -10,6 +10,5 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-$reinstall = 'non';
 include ("inc.php3");
 ?>

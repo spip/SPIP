@@ -59,7 +59,7 @@ echo _T('texte_sauvegarde')."</FONT></B></TD></TR>";
 
 echo "<tr><td class='serif'>";
 
-echo "\n<form action='" . generer_url_ecrire("export_all","") . "' method='get'>";
+echo "\n<form action='" . generer_url_ecrire("export_all") . "' method='GET'>";
 
 echo "\n<p align='justify'>";
 echo http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
@@ -74,10 +74,10 @@ if ($flag_gz) {
 }
 else {
 	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee');
-	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0'>";
+	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0' />";
 }
-
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('texte_sauvegarde_base')."'></FORM></DIV>";
+echo "\n<input type='hidden' name='reinstall' value='non' />";
+echo "\n<div align='right'><input class='fondo' type='submit' VALUE='"._T('texte_sauvegarde_base')."'></div></form>";
 
 echo "</td></tr>";
 echo "</TABLE>";
