@@ -1442,4 +1442,17 @@ function balise_PRODUIRE_dist($p){
 	return $p;
 }
 
+/**
+ * Definir la largeur d'ecran dans l'espace prive
+ * #LARGEUR_ECRAN{pleine_largeur}
+ * 
+ * @param  $p
+ * @return
+ */
+function balise_LARGEUR_ECRAN_dist($p){
+	$_class = interprete_argument_balise(1,$p);
+	if (!$_class) $_class='null';
+	$p->code = "(is_string($_class)?vide(\$GLOBALS['largeur_ecran']=$_class):\$GLOBALS['largeur_ecran'])";
+	return $p;
+}
 ?>
