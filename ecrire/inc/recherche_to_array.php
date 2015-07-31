@@ -58,6 +58,14 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		: array();
 
 	$_id_table = id_table_objet($table);
+
+	// c'est un pis-aller : ca a peu de chance de marcher, mais mieux quand meme que en conservant la ','
+	// (aka ca marche au moins dans certains cas comme avec spip_formulaires_reponses_champs)
+	if (strpos($_id_table,",")!==false){
+		$_id_table = explode(',',$_id_table);
+		$_id_table = reset($_id_table);
+	}
+
 	$requete['SELECT'][] = "t.".$_id_table;
 	$a = array();
 	// Recherche fulltext
