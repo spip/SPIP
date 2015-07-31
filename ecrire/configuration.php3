@@ -89,7 +89,7 @@ debut_cadre_relief("racine-24.gif");
 		echo "</TD></TR>";
 	}
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";
@@ -194,7 +194,7 @@ if ($options == 'avancees') {
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
+	echo "<TR><TD style='text-align: $spip_lang_right;' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";
@@ -222,7 +222,7 @@ if ($options == 'avancees') {
 			'non' => _T('item_non_publier_articles')));
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -260,7 +260,7 @@ afficher_choix('activer_breves', $activer_breves,
 echo "</FONT>";
 echo "</TD></TR>\n";
 
-echo "<TR><TD ALIGN='$spip_lang_right'>";
+echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -333,7 +333,7 @@ if ($options == "avancees") {
 		}
 	}
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -436,7 +436,7 @@ if ($activer_sites != 'non') {
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 }
 
-echo "<TR><TD ALIGN='$spip_lang_right'>";
+echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -475,7 +475,7 @@ afficher_choix('documents_rubrique', $documents_rubrique,
 echo "</FONT>";
 echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='$spip_lang_right'>";
+echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";

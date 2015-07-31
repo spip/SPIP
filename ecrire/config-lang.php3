@@ -75,7 +75,7 @@ while (list(,$l) = each ($langues_prop)) {
 echo "</select><br>\n";
 echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='$spip_lang_right'>";
+echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -100,7 +100,7 @@ if ($options == 'avancees') {
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('texte_jeu_caractere')."<p>";
-	echo "<blockquote><i>"._T('texte_jeu_caractere_2')."</i></blockquote>";
+	echo "<blockquote class='spip'>"._T('texte_jeu_caractere_2')."</blockquote>";
 
 	echo "</FONT>";
 	echo "</TD></TR>";
@@ -123,7 +123,7 @@ if ($options == 'avancees') {
 		echo "<input type='hidden' name='charset_custom' value=''>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 
@@ -189,7 +189,7 @@ debut_cadre_enfonce();
 		echo "<input type='hidden' name='gerer_trad' value='".lire_meta('gerer_trad')."'>";
 
 
-	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
+	echo "<TR><TD style='text-align:$spip_lang_right;' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>";
@@ -271,7 +271,7 @@ debut_cadre_enfonce();
 		}
 
 		echo "</font></td></tr>";
-		echo "<tr><td ALIGN='$spip_lang_right' COLSPAN=2>";
+		echo "<tr><td style='text-align:$spip_lang_right;' COLSPAN=2>";
 		echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 		echo "</td></tr></table>";
 
