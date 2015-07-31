@@ -680,7 +680,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	// autres raccourcis
 	if (!$flag_pcre) {
-		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
+		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
 		$letexte = ereg_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br>",$letexte);
@@ -697,7 +697,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 	else {
 		$cherche1 = array(
-			/* 0 */ 	"/\n(----+|____+)/",
+			/* 0 */ 	"/(^|\n)(----+|____+)/",
 			/* 1 */ 	"/^- */",
 			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
