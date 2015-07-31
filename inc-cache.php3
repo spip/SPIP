@@ -168,9 +168,10 @@ function purger_squelettes() {
 
 // Determination du fichier cache (si besoin)
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
+	global $_POST;
 
 	// Le fichier cache est-il valide ?
-	if ($delais == 0 OR !empty($GLOBALS['_POST'])) {
+	if ($delais == 0 OR !count($_POST)) {
 		$use_cache = 0;
 		$chemin_cache = '';
 	} else {

@@ -187,54 +187,6 @@ function optimiser_base() {
 	}
 
 
-	// 
-	// Documents
-	//
-
-/*
-	$query = "SELECT id_document FROM spip_documents_articles";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
-	$query = "SELECT id_document FROM spip_documents_rubriques";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
-	$query = "SELECT id_document FROM spip_documents_breves";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
-	$query = "SELECT DISTINCT id_vignette FROM spip_documents WHERE id_vignette != 0";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $documents[] = $row['id_vignette'];
-	
-	if ($documents) {
-		$documents = join(",", $documents);
-
-		$query = "SELECT id_document, fichier FROM spip_documents WHERE id_document NOT IN ($documents)";
-		$result = spip_query($query);
-		while ($row = spip_fetch_array($result)) {
-			$documents_poubelle[] = $row['id_document'];
-			$fichiers_poubelle[] = $row['fichier'];
-		}
-
-		if ($documents_poubelle) {
-			$documents_poubelle = join(",", $documents_poubelle);
-
-			$fichier = _DIR_RESTEINT_ABS .'data/.poubelle';
-			if (!$f = @fopen($fichier, 'a')) {
-				spip_log("impossible d'ecrire dans $fichier !");
-				@unlink($fichier);	// on essaie de forcer
-				$f = @fopen($fichier, 'a');
-			}
-			spip_log("mise a la poubelle : ".join(", ", $fichiers_poubelle));
-			$ok = fputs($f, join("\n", $fichiers_poubelle)."\n");
-			fclose($f);
-			if ($ok) {
-				$query = "DELETE FROM spip_documents WHERE id_document IN ($documents_poubelle)";
-				spip_query($query);
-			}
-		}
-	}
-*/
-
 	//
 	// Forums
 	//
@@ -297,30 +249,6 @@ function optimiser_base() {
 			spip_query("DELETE FROM $table_index WHERE id_$type IN (0$suppr)");
 	}
 
-/*
-	// les objets supprimes
-	$hash = array();
-	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
-	while (list(,$type) = each($types)) {
-		$table_objet = 'spip_'.table_objet($type);
-		$table_index = 'spip_index_'.table_objet($type);
-		$list_objets = table_objet($type);
-		if ($liste = $$list_objets)
-			spip_query("DELETE FROM $table_index WHERE id_$type NOT IN ($liste)");
-		$s = spip_query("SELECT DISTINCT(hash) FROM $table_index");
-		while ($t = spip_fetch_array($s))
-			$hash[$t[0]] = $t[0];
-	}
-	if (count($hash)) {
-		$s = spip_query("SELECT hash FROM spip_index_dico");
-		$suppr = '';
-		while ($t = spip_fetch_array($s))
-			if (!$hash[$t[0]]) $suppr.=','.$t[0];
-		if ($suppr)
-			spip_query("DELETE FROM spip_index_dico WHERE hash IN (0$suppr)");	
-	}
-*/
-
 	//
 	// MySQL
 	//
@@ -342,7 +270,7 @@ function optimiser_base() {
 
 	## debug
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo'
-	AND $GLOBALS['_GET']['optimiser'] == 'oui')
+	AND $_GET['optimiser'] == 'oui')
 		optimiser_base();
 
 ?>

@@ -721,7 +721,7 @@ function test_obgz () {
 	&& !@ini_get("output_handler");
 }
 // si un buffer est deja ouvert, stop
-if ($flag_ob AND !strlen(@ob_get_contents())) {
+if ($flag_ob AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
 	if (test_obgz())
 		ob_start('ob_gzhandler');
@@ -738,6 +738,7 @@ class Link {
 	// soit sans parametres, auquel cas l'URL est l'URL courante
 	//
 	function Link($url = '', $reentrant = false) {
+		global $_POST;
 		static $link = '';
 
 		$this->vars = array();
@@ -785,9 +786,9 @@ class Link {
 			else $v = strrpos($url, '/');
 			$url = substr($url, $v + 1);
 			if (!$url) $url = "./";
-			if (count($GLOBALS['_POST'])) {
+			if (count($_POST)) {
 				$vars = array();
-				foreach ($GLOBALS['_POST'] as $var => $val)
+				foreach ($_POST as $var => $val)
 					if (preg_match('/^id_/', $var))
 						$vars[$var] = $val;
 			}
@@ -1118,6 +1119,13 @@ function debut_entete($title, $entete='') {
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
 
+
+// Transforme n'importe quel champ en une chaine utilisable
+// en PHP ou Javascript en toute securite
+// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
+function texte_script($texte) {
+	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
+}
 
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3

@@ -49,7 +49,7 @@ function afficher_annee($annee){
 	}
 }
 
-function afficher_jour($jour){
+function afficher_jour($jour) {
 	my_sel("00",_T('jour_non_connu_nc'),$jour);
 	for($i=1;$i<32;$i++){
 		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
@@ -72,8 +72,8 @@ if (($id_breve == 0) AND ($new == "oui")) {
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')");
 
 	// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-	unset($GLOBALS['_POST']['id_rubrique']);
-	$GLOBALS['_POST']['id_breve'] = $id_breve;
+	unset($_POST['id_rubrique']);
+	$_POST['id_breve'] = $id_breve;
 	$clean_link = new Link();
 }
 

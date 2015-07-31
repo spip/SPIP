@@ -175,8 +175,8 @@ if ($titre) {
 			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 
 		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-		unset($GLOBALS['_POST']['id_parent']);
-		$GLOBALS['_POST']['id_rubrique'] = $id_rubrique;
+		unset($_POST['id_parent']);
+		$_POST['id_rubrique'] = $id_rubrique;
 		$clean_link = new Link();
 	}
 

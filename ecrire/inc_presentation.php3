@@ -2950,8 +2950,6 @@ document.img_session.src='../spip_cookie.php3?change_session=oui'");
 
 	echo "</body></html>\n";
 
-	if ($GLOBALS['flag_ob'])
-		@ob_end_flush();
 }
 
 

@@ -10,26 +10,37 @@ function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");
 }
 
+
+// Compilateur : ajouter un invalideur "$type/$valeur" a un code donne
+// Attention le type est compile, pas forcement la valeur
+function ajouter_invalideur($type, $valeur, $code) {
+	return '
+	// invalideur '.$type.'
+	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
+}
+
+
 //
-// Noter dans la base les liens d'invalidation
+// Calcul des pages : noter dans la base les liens d'invalidation
 //
-function maj_invalideurs ($fichier, $infosurpage, $delais) {
+function maj_invalideurs ($fichier, $invalideurs, $delais) {
 	$fichier = addslashes($fichier); #parano
 	if ($fichier == '') return;	// ne pas noter les POST et les delais=0
 	spip_query("DELETE FROM spip_caches WHERE fichier='$fichier'");
 
 	// invalidation des forums (l'invalideur est : 'id_forum/a23')
-	insere_invalideur($infosurpage['id_forum'],'id_forum', $fichier);
+	insere_invalideur($invalideurs['id_forum'], 'id_forum', $fichier);
 
-	// invalidation des petitions (l'invalideur est : 'petition/petition')
-	insere_invalideur($infosurpage['petition'],'petition', $fichier);
+	// invalidation des petitions et autres
+	// (l'invalideur est par exemple : 'varia/petition')
+	insere_invalideur($invalideurs['varia'], 'varia', $fichier);
 
 	// invalidation du reste - experimental a activer dans mes_options
 	if ($GLOBALS['invalider_caches']) {
-		insere_invalideur($infosurpage['id_article'],'id_article', $fichier);
-		insere_invalideur($infosurpage['id_breve'], 'id_breve', $fichier);
-		insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $fichier);
-		insere_invalideur($infosurpage['id_syndic'],'id_syndic', $fichier);
+		insere_invalideur($invalideurs['id_article'],'id_article', $fichier);
+		insere_invalideur($invalideurs['id_breve'], 'id_breve', $fichier);
+		insere_invalideur($invalideurs['id_rubrique'],'id_rubrique', $fichier);
+		insere_invalideur($invalideurs['id_syndic'],'id_syndic', $fichier);
 	}
 }
 
@@ -38,12 +49,11 @@ function insere_invalideur($a, $type, $fichier) {
 		$values = array();
 		foreach($a as $k => $v)
 			$values[] = "('$fichier', '$type/$k')";
-			$query = "INSERT IGNORE INTO spip_caches" .
-		" (fichier, id) VALUES " . join(", ", $values);
-		spip_query($query);
-		# spip_log("Dependances $type: " . join(", ", $values));
+		spip_query ("INSERT IGNORE INTO spip_caches
+			(fichier, id) VALUES " . join(", ", $values));
 	}
 }
+
 
 //
 // Invalider les caches lies a telle condition

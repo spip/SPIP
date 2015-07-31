@@ -1,0 +1,21 @@
+<div class='spip_encadrer'>
+
+<div style='font-size: 120%; font-weight: bold;'>[(#ENV*{titre})]</div>
+
+<p />
+
+[<b><a[ href="mailto:(#ENV{email_auteur})"]>(#ENV*{auteur})</a></b>]
+
+[<p />(#ENV*{texte})]
+
+[<p /><a [href="(#ENV{url_site}|urlencode)"]>(#ENV*{nom_site_forum})</a>]
+
+[(#ENV*{mots_forum})]
+
+[<p align='right' style='color: red;'>(#ENV*{erreur})</p>]
+
+[<div align='right'><input type='submit' name='confirmer_forum' class='spip_bouton' value="(#ENV*{bouton})" /></div>]
+
+</div>
+
+<br />

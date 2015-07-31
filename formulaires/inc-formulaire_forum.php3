@@ -22,37 +22,49 @@ else
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
+
+// Contexte du formulaire
 global $balise_FORMULAIRE_FORUM_collecte;
 $balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
 
+
+// verification des droits a faire du forum
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
-	list ($idr, $idf, $ida, $idb, $ids) = $args;
+
+	// Note : ceci n'est pas documente !!
+	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
+	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum.php3)]
 
 	// recuperer les donnees du forum auquel on repond, false = forum interdit
+	list ($idr, $idf, $ida, $idb, $ids) = $args;
 	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
 		return '';
 
 	list($titre, $table, $forums_publics) = $r;
+
 	return
-		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids);
+		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids,
+			$filtres[0]);
 }
 
-function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
+function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $url) {
 
-	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
+	global $REMOTE_ADDR, $afficher_texte, $_COOKIE;
 
 	// url de reference
-	if (!$url = rawurldecode($GLOBALS['url'])) 
-	    $url = $GLOBALS['REQUEST_URI'];
-	else {
-	// identifiants des parents
-	  $args = '';  
-	  if ($id_rubrique) $args .= "id_rubrique=$id_rubrique";
-	  if ($id_forum) $args .= "id_forum=$id_forum";
-	  if ($id_article) $args .= "id_article=$id_article";
-	  if ($id_breve) $args .= "id_breve=$id_breve";
-	  if ($id_syndic) $args .= "id_syndic=$id_syndic";
-	  if ($args && strpos($url,$args)===false) $url .= (strpos($url,'?') ? '&' : '?') . $args;
+	if (!$url) {
+		$url = new Link();
+		$url = $url->getUrl();
+	} else {
+		// identifiants des parents
+		$args = array();
+		if ($id_rubrique) $args[] = "id_rubrique=$id_rubrique";
+		if ($id_forum) $args[] = "id_forum=$id_forum";
+		if ($id_article) $args[] = "id_article=$id_article";
+		if ($id_breve) $args[] = "id_breve=$id_breve";
+		if ($id_syndic) $args[] = "id_syndic=$id_syndic";
+		if (count($args))
+			$url .= (strpos($url,'?') ? '&' : '?'). join('&',$args);
 	}
 
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
@@ -60,11 +72,11 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$url = ereg_replace("[?&]url=[^&]*", '', $url);
 
 	// verifier l'identite des posteurs pour les forums sur abo
-	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"]))
-	  {
-	    include_local(find_in_path('inc-login_public.php3'));
-	    return login_pour_tous($GLOBALS['var_login'], $url, true, $url, 'forum');
-	  }
+	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"])) {
+		include_local(find_in_path('inc-login_public.php3'));
+		return login_pour_tous(_request('var_login'), $url,
+			true, $url, 'forum');
+	}
 
 	$id_rubrique = intval($id_rubrique);
 	$id_forum = intval($id_forum);
@@ -73,7 +85,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$id_syndic = intval($id_syndic);
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
-
 	$previsu = ' ';
 
 	// au premier appel (pas de Post-var nommee "retour_forum")
@@ -81,13 +92,16 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	// aux appels suivants, reconduire la valeur.
 	// Initialiser aussi l'auteur
 
-	if (!$retour_forum = rawurldecode($GLOBALS['_POST']['retour_forum'])) {
-		if ($retour_forum = rawurldecode($GLOBALS['_GET']['retour']))
-			$retour_forum = ereg_replace('&var_mode=recalcul','',$retour_forum);
-		else $retour_forum = $url;
+	if (!$retour_forum = rawurldecode(_request('retour_forum'))) {
+		if ($retour_forum = rawurldecode(_request('retour')))
+			$retour_forum = str_replace('&var_mode=recalcul','',$retour_forum);
+		else {
+			$retour_forum = new Link();
+			$retour_forum = $retour_forum->getUrl();
+		}
 
-		if ($spip_forum_user &&
-		is_array($cookie_user = unserialize($spip_forum_user))) {
+		if (isset($_COOKIE['spip_forum_user'])
+		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
 			$auteur = $cookie_user['nom'];
 			$email_auteur = $cookie_user['email'];
 		} else {
@@ -97,25 +111,19 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 	} else {
 
-	// Recuperer le message a previsualiser
-		$titre = $GLOBALS['_POST']['titre'];
-		$texte = $GLOBALS['_POST']['texte'];
-		$auteur = $GLOBALS['_POST']['auteur'];
-		$email_auteur = $GLOBALS['_POST']['email_auteur'];
-		$nom_site_forum = $GLOBALS['_POST']['nom_site_forum'];
-		$url_site = $GLOBALS['_POST']['url_site'];
-		$ajouter_mot = $GLOBALS['_POST']['ajouter_mot']; // array
+		// Recuperer le message a previsualiser
+		$titre = _request('titre');
+		$texte = _request('texte');
+		$auteur = _request('auteur');
+		$email_auteur = _request('email_auteur');
+		$nom_site_forum = _request('nom_site_forum');
+		$url_site = _request('url_site');
+		$ajouter_mot = _request('ajouter_mot'); // array
 
+		//
+		// Preparer la previsualisation
+		//
 		if ($afficher_texte != 'non') {
-			$previsu = 
-			  "<div style='font-size: 120%; font-weight: bold;'>"
-			  . interdire_scripts(typo($titre))
-			  . "</div><p /><b><a href=\"mailto:"
-			  . interdire_scripts(typo($email_auteur)) . "\">"
-			  . interdire_scripts(typo($auteur)) . "</a></b><p />"
-			  . propre($texte) . "<p /><a href=\""
-			  . interdire_scripts($url_site) . "\">"
-			  . interdire_scripts(typo($nom_site_forum)) . "</a>";
 
 			// Verifier mots associes au message
 			if (is_array($ajouter_mot))
@@ -128,30 +136,46 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 				WHERE id_mot IN ($mots)
 				ORDER BY 0+type,type,0+titre,titre");
 			if (spip_num_rows($result_mots)>0) {
-				$previsu .= "<p>"._T('forum_avez_selectionne')."</p><ul>";
+				$mots_forums = "<p>"._T('forum_avez_selectionne')."</p><ul>";
 				while ($row = spip_fetch_array($result_mots)) {
 					$les_mots[$row['id_mot']] = "checked='checked'";
 					$presence_mots = true;
-					$previsu .= "<li style='font-size: 80%;'> "
+					$mots_forums .= "<li style='font-size: 80%;'> "
 					. typo($row['type']) . "&nbsp;: <b>"
 					. typo($row['titre']) ."</b></li>";
 				}
-				$previsu .= '</ul>';
+				$mots_forums .= '</ul>';
 			}
 
-			if (strlen($texte) < 10 AND !$presence_mots) {
-				$previsu .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
-			}
-			else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
-				$previsu .= "<p align='right' style='color: red;'>"._T('forum_attention_trois_caracteres')."</p>";
-			}
-			else {
-				$previsu .= "<div align='right'><input type='submit' name='confirmer_forum' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
-			}
-			$previsu = "<div class='spip_encadrer'>$previsu</div>\n<br />";
+			if (strlen($texte) < 10 AND !$presence_mots)
+				$erreur = _T('forum_attention_dix_caracteres');
+			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
+				$erreur = _T('forum_attention_trois_caracteres');
+			else
+				$bouton = _T('forum_message_definitif');
+
+			$previsu = inclure_balise_dynamique(
+				array(
+					'formulaire_forum_previsu',
+					0,
+					array(
+						'titre' => interdire_scripts(typo($titre)),
+						'email_auteur' => $email_auteur,
+						'auteur' => interdire_scripts(typo($auteur)),
+						'texte' => propre($texte),
+						'url_site' => $url_site,
+						'nom_site_forum' =>
+							interdire_scripts(typo($nom_site_forum)),
+						'mots_forum' => $mots_forum,
+						'erreur' => $erreur,
+						'bouton' => $bouton
+					)
+				), false);
+
 			// supprimer les <form> de la previsualisation
 			// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
-			$previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism", "<\\1no-f\\2", $previsu);
+			$previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism",
+				"<\\1no-f\\2", $previsu);
 		}
 
 	// Une securite qui nous protege contre :
@@ -311,6 +335,8 @@ function afficher_petits_logos_mots($id_mot) {
 			class='spip_image' /> ";
 	}
 }
+
+
 
 /*******************************************************/
 /* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */

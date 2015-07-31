@@ -2,19 +2,18 @@
 <br />(#ENV*{mailko})<:form_prop_indiquer_email:><br /><br />
 ]<form action="[(#ENV{action})]" method='post'>
 <p><label><:form_pet_votre_email:>
-	<input type="text" class="forml" name="email_message_auteur"
-		 value="[(#ENV{mail})]" size="30" />
+<input type="text" class="forml" name="email_message_auteur[(#ENV{id})]"
+	value="[(#ENV{mail})]" size="30" />
 </label></p>
 <p><label><:form_prop_sujet:><br />
-	<input type="text" class="forml" name="sujet_message_auteur"
-		 value="[(#ENV{sujet})]" size="30" />
+<input type="text" class="forml" name="sujet_message_auteur[(#ENV{id})]"
+	value="[(#ENV{sujet})]" size="30" />
 </label></p>
 <p>
-<textarea name='texte_message_auteur' rows='10' class='forml' cols='40'>[(#ENV{texte})]</textarea>
+<textarea name="texte_message_auteur[(#ENV{id})]" rows='10' class='forml' cols='40'>[(#ENV{texte})]</textarea>
 </p>
-[<input type="hidden" name="id_auteur" value="(#ENV{id_auteur})" />]
 <div align="right">
-	<input type="submit"  class="spip_bouton" name="valide"
+	<input type="submit"  class="spip_bouton" name="valide[(#ENV{id})]"
 		 value="[(#ENV{valide})]" />
 </div>
 </form>

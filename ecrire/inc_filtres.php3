@@ -189,16 +189,6 @@ function taille_en_octets ($taille) {
 }
 
 
-// Transforme n'importe quel champ en une chaine utilisable
-// en PHP ou Javascript en toute securite
-// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
-function texte_script($texte) {
-	$texte = str_replace('\\', '\\\\', $texte);
-	$texte = str_replace('\'', '\\\'', $texte);
-	return $texte;
-}
-
-
 // Rend une chaine utilisable sans dommage comme attribut HTML
 function attribut_html($texte) {
 	$texte = ereg_replace('"', '&quot;', supprimer_tags($texte));
@@ -219,10 +209,10 @@ function vider_url($url) {
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
 function url_var_recherche($url) {
-	if ($GLOBALS['_GET']['recherche']
+	if (_request('recherche')
 	AND !ereg("var_recherche", $url)) {
 		$url .= strpos($url, '?') ? '&' : '?';
-		$url .= "var_recherche=".urlencode($GLOBALS['recherche']);
+		$url .= "var_recherche=".urlencode(_request('recherche'));
 	}
 	return $url;
 }
@@ -741,4 +731,18 @@ function http_script($script, $src='', $noscript='') {
 		. "</script>\n"
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
+
+
+// Un filtre ad hoc, qui retourne ce qu'il faut pour les tests de config
+// dans les squelettes : [(#URL_SITE_SPIP|tester_config{quoi})]
+function tester_config($ignore, $quoi) {
+	switch ($quoi) {
+		case 'mode_inscription':
+			return (lire_meta('accepter_inscriptions') == 'oui') ? 'redac' : '';
+		
+		default:
+			return '';
+	}
+}
+
 ?>

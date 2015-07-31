@@ -125,16 +125,50 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
+
+//
+// Balises dynamiques
+//
+
+// elles sont traitees comme des inclusions
+function synthetiser_balise_dynamique($nom, $args, $file, $lang) {
+	return
+		('<'.'?php 
+include_ecrire(\'inc_lang.php3\');
+lang_select("'.$lang.'");
+include_local("'
+		. $file
+		. '");
+inclure_balise_dynamique(balise_'
+		. $nom
+		. '_dyn(\''
+		. join("', '", array_map('texte_script', $args))
+		. '\'));
+	lang_dselect();
+?'
+		.">");
+}
+
+// verifier leurs arguments et filtres, et calculer le code a inclure
 function executer_balise_dynamique($nom, $args, $filtres, $lang) {
 	if ($file = find_in_path('inc-' . strtolower($nom) . _EXTENSION_PHP))
 		include_local($file);
 	else
 		die ("pas de balise dynamique pour #". strtolower($nom)." !");
 
+	// Y a-til une fonction de traitement filtres-arguments ?
 	$f = 'balise_' . $nom . '_stat';
-	$r = $f($args, $filtres);
-	return (!is_array($r)) ? $r : synthetiser_balise_dynamique($nom, $r, $file, $lang);
+	if (function_exists($f))
+		$r = $f($args, $filtres);
+	else
+		$r = $args;
+	
+	if (!is_array($r))
+		return $r;
+	else
+		return synthetiser_balise_dynamique($nom, $r, $file, $lang);
 }
+
 
 //
 // FONCTIONS FAISANT DES APPELS SQL
@@ -312,16 +346,16 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 	$retour = spip_abstract_fetsel(
-			array('texte'),
-			array('spip_petitions'),
-			array("id_article=".intval($id_article)),
-			'','','','',1, 
-			$table, $id_boucle, $serveur);
+		array('texte'),
+		array('spip_petitions'),
+		array("id_article=".intval($id_article)),
+		'','','','',1, 
+		$table, $id_boucle, $serveur);
 
 	if (!$retour) return '';
 	# cette page est invalidee par toute petition
-	if ($Cache) $Cache['petition']['petition'] = 1;
-	# ne pas retourner '' car le texte sert aussi de présence
+	$Cache['varia']['pet'.$id_article] = 1;
+	# ne pas retourner '' car le texte sert aussi de presence
 	return ($retour['texte'] ? $retour['texte'] : ' ');
 }
 

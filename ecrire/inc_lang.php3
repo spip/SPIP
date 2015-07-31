@@ -461,9 +461,12 @@ function verifier_lang_url() {
 
 	// quelle langue est demandee ?
 	$lang_demandee = lire_meta('langue_site');
-	if ($_COOKIE['spip_lang_ecrire']) $lang_demandee = $_COOKIE['spip_lang_ecrire'];
-	if ($_COOKIE['spip_lang']) $lang_demandee = $_COOKIE['spip_lang'];
-	if ($_GET['lang']) $lang_demandee = $_GET['lang'];
+	if ($_COOKIE['spip_lang_ecrire'])
+		$lang_demandee = $_COOKIE['spip_lang_ecrire'];
+	if ($_COOKIE['spip_lang'])
+		$lang_demandee = $_COOKIE['spip_lang'];
+	if ($_GET['lang'])
+		$lang_demandee = $_GET['lang'];
 
 	// Verifier que la langue demandee existe
 	include_ecrire('inc_lang.php3');
@@ -484,7 +487,7 @@ function verifier_lang_url() {
 	// Subtilite : si la langue demandee par cookie est la bonne
 	// alors on fait comme si $lang etait passee dans l'URL
 	// (pour criteres {lang}).
-	$GLOBALS['lang'] = $GLOBALS['_GET']['lang'] = $spip_lang;
+	$GLOBALS['lang'] = $_GET['lang'] = $spip_lang;
 }
 
 

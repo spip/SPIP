@@ -115,10 +115,9 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = urlencode(str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
-		redirige_par_entete("../spip_login.php3?url=$url&inscription=" .
-			     ((lire_meta("accepter_inscriptions") == "oui")?
-			      ('spip_inscription.php3') : ''));
+		$url = str_replace('/./', '/',  _DIR_RESTREINT_ABS
+			. $clean_link->getUrl());
+		redirige_par_entete("../spip_login.php3?url=".urlencode($url));
 		exit;
 	}
 
@@ -147,11 +146,6 @@ function auth() {
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.
 		// D'ou leger bug si on modifie la fiche de quelqu'un d'autre.
-		/*if ($GLOBALS['perso_activer_messagerie']) {
-			$connect_activer_messagerie = $GLOBALS['perso_activer_messagerie'];
-			$connect_activer_imessage = $GLOBALS['perso_activer_imessage'];
-		}*/
-		// (1.8: La messagerie est toujours active)
 
 		// regler les preferences de l'auteur
 		$prefs = unserialize($row['prefs']);
