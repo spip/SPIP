@@ -469,10 +469,7 @@ function creer_base() {
 		id_auteur bigint(21) NOT NULL,
 		titre_version text DEFAULT '' NOT NULL,
 		permanent char(3) NOT NULL,
-		chapo text NOT NULL,
-		texte text NOT NULL,
-		ps text NOT NULL,
-		extra text NOT NULL,
+		champs text NOT NULL,
 
 		PRIMARY KEY (id_article, id_version),
 		KEY date (id_article, date),
@@ -1501,6 +1498,14 @@ function maj_base() {
 	if ($version_installee < 1.732) {	// en correction d'un vieux truc qui avait fait sauter le champ inclus sur les bases version 1.415
 		spip_query ("ALTER TABLE spip_documents ADD inclus  VARCHAR(3) DEFAULT 'non'");
 		maj_version (1.732);
+	}
+
+	if ($version_installee < 1.733) {
+		// spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
+		spip_query("DROP TABLE spip_versions");
+		spip_query("DROP TABLE spip_versions_fragments");
+		creer_base();
+		maj_version(1.733);
 	}
 
 	return true;
