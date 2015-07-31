@@ -63,9 +63,29 @@ a.calendrier-annee:hover {
   	vertical-align: top;
  }
 
+.calendrier-jour { 
+	margin: 1px;
+	padding: 2px;
+	background-color: white;
+	text-align: center; 
+	-moz-border-radius: 5px;
+ }
+
+.calendrier-demijour { 
+	margin-left: 1px;
+	margin-top: 1px;
+	padding: 2px;
+	text-align: center; 
+	-moz-border-radius: 5px;
+ }
+
 .calendrier-opacity { 
 	-moz-opacity: 0.3;
 	filter: alpha(opacity=30);
+}
+
+.calendrier-arial9 { 
+	font-family: Arial, Sans, sans-serif; font-size: 9px;
 }
 
 .calendrier-arial10 { 
@@ -78,7 +98,12 @@ a.calendrier-annee:hover {
 
 .calendrier-verdana10 {
 	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
+}
 
+.calendrier-helvetica16 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 16px; 
+	color: black;
 }
 
 .calendrier-png { 
