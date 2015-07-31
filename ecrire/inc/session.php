@@ -249,28 +249,29 @@ function rejouer_session()
 //
 // http://doc.spip.org/@fichier_session
 function fichier_session($alea, $tantpis=false) {
+
 	if (!isset($GLOBALS['meta'][$alea])) {
 		include_spip('base/abstract_sql');
-		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
-		if (!$GLOBALS['meta'][$alea]){
-			spip_log("$alea indisponible");
-			if (!$tantpis) {
-				include_spip('inc/minipres');
-				echo minipres();
-				exit;
-			}
-		}
+
+		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea), '','','','','', $tantpis ? false : true);
+
 	}
 
-	$repertoire = _DIR_SESSIONS;
-	if(!@file_exists($repertoire)) {
-		if ($tantpis) return '';
-		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-		include_spip('inc/flock');
-		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	if (!$GLOBALS['meta'][$alea] AND !$tantpis) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
+
+		$repertoire = _DIR_SESSIONS;
+		if(!@file_exists($repertoire)) {
+			if ($tantpis) return '';
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			include_spip('inc/flock');
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		$c = $_COOKIE['spip_session'];
+		return $repertoire . intval($c) .'_' . md5($c.' '.$GLOBALS['meta'][$alea]). '.php';
 	}
-	$c = $_COOKIE['spip_session'];
-	return $repertoire . intval($c) .'_' . md5($c.' '.$GLOBALS['meta'][$alea]). '.php';
 }
 
 //
