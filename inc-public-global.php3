@@ -88,35 +88,37 @@ function calcule_header_et_page ($fond, $delais) {
 	// Envoyer les entetes appropries
 	// a condition d'etre sur de pouvoir le faire
 	//
-	if (!$flag_preserver
-	AND $flag_ob AND !headers_sent()) {
+	if (!headers_sent() AND !$flag_preserver) {
 
-		// Si la page est vide, gerer l'erreur 404
-		if (trim($page['texte']) === ''
-		AND $var_mode != 'debug') {
-			header("HTTP/1.0 404");
-			$contexte_inclus = array(
-				'erreur_aucun' => message_erreur_404()
-			);
-			$sauve_page = $page; # memoriser la page vide
-			include(find_in_path('404.php3'));
-			$page = $sauve_page; # pour la retablir ensuite
-		}
-		// Interdire au client de cacher un login, un admin ou un recalcul
-		else if ($flag_dynamique OR $var_mode
-		OR $GLOBALS['_COOKIE']['spip_admin']) {
-			header("Cache-Control: no-cache,must-revalidate");
-			header("Pragma: no-cache");
-		}
-		// Pour les autres donner l'heure de modif
-		else if ($lastmodified) {
-			header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+		// Content-type: par defaut html+charset (poss surcharge par la suite)
+		header("Content-Type: text/html; charset=".lire_meta('charset'));
+
+		if ($flag_ob) {
+			// Si la page est vide, gerer l'erreur 404
+			if (trim($page['texte']) === ''
+			AND $var_mode != 'debug') {
+				http_status(404);
+				$contexte_inclus = array(
+					'erreur_aucun' => message_erreur_404()
+				);
+				$page = array('texte' => '<'.'?php
+					$contexte_inclus = array();
+					include(\''.addslashes(find_in_path('404.php3')).'\');
+					?'.'>',
+				'process_ins' => 'php');
+			}
+			// Interdire au client de cacher un login, un admin ou un recalcul
+			else if ($flag_dynamique OR $var_mode
+			OR $GLOBALS['_COOKIE']['spip_admin']) {
+				header("Cache-Control: no-cache,must-revalidate");
+				header("Pragma: no-cache");
+			}
+			// Pour les autres donner l'heure de modif
+			else if ($lastmodified) {
+				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+			}
 		}
 	}
-
-	// Content-type: par defaut html+charset (poss surcharge par la suite)
-	if (!headers_sent() AND !$flag_preserver)
-		header("Content-Type: text/html; charset=".lire_meta('charset'));
 
 	return $page;
 }
