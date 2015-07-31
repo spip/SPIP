@@ -56,23 +56,22 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			# NB: dans les bonnes conditions (fichier autorise et pas trop gros)
 			# $a['fichier'] est une copie locale du fichier
 
-			$fichier = $source;
-			$taille = $a['taille'];
-			$titre = $a['titre'];
-			$largeur = $a['largeur'];
-			$hauteur = $a['hauteur'];
-			$ext = $a['extension'];
 			$type_image = $a['type_image'];
 
-			$distant = 'oui';
-			$mode = 'document';
+			unset($a['type_image']);
+			unset($a['body']);
+
+			$a['date'] = 'NOW()';
+			$a['distant'] = 'oui';
+			$a['mode'] = 'document';
+			$a['fichier'] = set_spip_doc($source);
 		}
 		else {
 			spip_log("Echec du lien vers le document $source, abandon");
 			return;
 		}
-	} else {
-		$distant = 'non';
+	} else { // pas distant
+
 		$type_image = ''; // au pire
 		// tester le type de document :
 		// - interdit a l'upload ?
@@ -86,25 +85,18 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		} else $titre = '';
 		$ext = corriger_extension(strtolower($ext));
 
-		// Si le fichier est de type inconnu, on va le stocker en .zip
-		$row = sql_fetsel("*", "spip_types_documents", "extension=" . sql_quote($ext) . " AND upload='oui'");
-		if (!$row) {
+		$row = sql_fetsel("inclus", "spip_types_documents", "extension=" . sql_quote($ext) . " AND upload='oui'");
 
-/* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
-/*			$ext = 'bin';
-			$nom_envoye .= '.bin';
-			spip_log("Extension $ext");
-			$row = sql_fetsel("*", "spip_types_documents", "extension='bin' AND upload='oui'");
-			if (!$row) {
-				spip_log("Extension $ext interdite a l'upload");
-				return;
-			}
-*/
+		if ($row) {
+			$type_inclus_image = ($row['inclus'] == 'image');
+			$fichier = copier_document($ext, $nom_envoye, $source);
+		} else {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
-			$row = sql_fetsel("*", "spip_types_documents", "extension='zip' AND upload='oui'");
-			if (!$row) {
+			$type_inclus_image = false;
+
+			if (!sql_countsel("spip_types_documents", "extension='zip' AND upload='oui'")) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}
@@ -126,19 +118,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			}
 			$fichier = copier_document($ext, $nom_envoye, $source);
 			spip_unlink($source);
-
-		} else {
-			$fichier = copier_document($ext, $nom_envoye, $source);
 		}
-
-		// Verifier que le fichier est a son emplacement definitif
-		
-		if (!$fichier) {
-			spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
-			return;
-		}
-		$extension = $row['extension'];
-		$type_inclus_image = ($row['inclus'] == 'image');
 
 		// Prevoir traitement specifique pour videos
 		// (http://www.getid3.org/ peut-etre
@@ -148,7 +128,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		} else 	if ($ext == "svg") {
 		  // recuperer les dimensions et supprimer les scripts
 				list($largeur,$hauteur)= traite_svg($fichier);
-		} else {
+		} else { // image ?
 		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
 			$size_image = @getimagesize($fichier);
 			$largeur = intval($size_image[0]);
@@ -157,8 +137,8 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		}
 
 		// Quelques infos sur le fichier
-		if (!@file_exists($fichier)
-		OR !$taille = @filesize($fichier)) {
+		if (!$fichier OR !@file_exists($fichier)
+		OR !$taille = @intval(filesize($fichier))) {
 			spip_log ("Echec copie du fichier $fichier");
 			return;
 		}
@@ -215,82 +195,73 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 				return;
 			}
 
-			if (!($largeur * $hauteur)) {
+			if (!($largeur OR $hauteur)) {
 				spip_log('erreur upload vignette '.$fichier);
 				spip_unlink($fichier);
 				return;
 			}
-		}
-	}
-
-	// Preparation vignette du document $id_document
-	$id_document_lie = $id_document=intval($id_document);
-	if ($mode == 'vignette' AND  $id_document) {
-		# on force le statut "document" de ce fichier (inutile ?)
-		sql_updateq("spip_documents", array("mode" => 'document'), "id_document=$id_document");
-		$id_document = 0;
-	}
-
-	$chemin = set_spip_doc($fichier);
-
-	// Installer le document dans la base
-	// attention piege semantique : les images s'installent en mode 'vignette'
-	// note : la fonction peut "mettre a jour un document" si on lui
-	// passe "mode=document" et "id_document=.." (pas utilise)
-	if (!$id_document) {
-		// par defaut (upload ZIP ou ftp) integrer
-		// les images en mode 'vignette' et le reste en mode document
-		if (!in_array($mode, array('vignette', 'distant', 'image', 'document')))
+		} elseif (!in_array($mode, array('distant', 'image', 'document'))) {
 			if ($type_image AND $type_inclus_image)
 				$mode = 'image';
 			else
 				$mode = 'document';
-
-		// Inserer le nouveau doc et recuperer son id_
-		$id_document = sql_insertq("spip_documents",
-					   array(
-			'extension'=> $ext, 
-			'titre'=> $titre,
+		}
+		$a =  array(
 			'date' => 'NOW()',
-			'distant' => $distant,
+			'distant' => 'non',
 			'mode' => $mode,
-			'taille' => intval($taille),
-			'largeur' => intval($largeur),
-			'hauteur' => intval($hauteur),
-			'fichier' => $chemin));
+			'titre'=> $titre,
+			'largeur' => $largeur,
+			'hauteur' => $hauteur,
+			'taille' => $taille,
+			'extension'=> $ext, 
+			'fichier' => set_spip_doc($fichier));
+	}
 
-		if ($id_lien AND $id_document
+	if (($id_document=intval($id_document)) AND $mode!='vignette') {
+
+		 // Mise a jour des descripteurs d'un vieux doc
+		unset($a['titre']);
+		unset($a['date']);
+		unset($a['distant']);
+		unset($a['mode']);
+
+		sql_updateq('spip_documents', $a, "id_document=$id_document");
+		$id = $id_document;
+
+	} else {
+	// Installer le document dans la base
+	// attention piege semantique : les images s'installent en mode 'vignette'
+	// note : la fonction peut "mettre a jour un document" si on lui
+	// passe "mode=document" et "id_document=.." (pas utilise)
+
+		$id = sql_insertq("spip_documents", $a);
+
+		spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id')");
+
+		if ($id_lien AND $id
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
 			sql_insertq("spip_documents_".$type_lien."s",
-				    array('id_document' => $id_document,
+				    array('id_document' => $id,
 					  'id_'.$type_lien => $id_lien));
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
-	} else 	// Mise a jour des descripteurs d'un vieux doc
-		sql_updateq('spip_documents', array(
-			'taille' => intval($taille),
-			'largeur' => intval($largeur),
-			'hauteur' => intval($hauteur),
-			'fichier' => $chemin),
-				"id_document=$id_document");
 
-	if ($id_document_lie) {
-		sql_updateq("spip_documents", array("id_vignette" => $id_document	), "id_document=$id_document_lie");
-		// hack pour que le retour vers ecrire/ active le bon doc.
-		$documents_actifs[$fichier] = $id_document_lie; 
+		if ($id_document) {
+			sql_updateq("spip_documents", array("id_vignette" => $id, "mode" => 'document'), "id_document=$id_document");
+
+		} else  $id_document = $id;
+
 	}
-	else
-		$documents_actifs[$fichier] = $id_document; 
-
-	spip_log ("ajout du document $source $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id_document')");
-
+	// pour que le retour vers ecrire/ active le bon doc.
+	$documents_actifs[$fichier] = $id_document;
 	// Notifications, gestion des revisions, reindexation...
 	pipeline('post_edition',
 		array(
 			'args' => array(
 				'operation' => 'ajouter_document',
 				'table' => 'spip_documents',
-				'id_objet' => $id_document
+				'id_objet' => $id
 			),
 			'data' => null
 		)
@@ -298,8 +269,6 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 	return $type_image;
 }
-
-
 
 // http://doc.spip.org/@verifier_compactes
 function verifier_compactes($zip) {

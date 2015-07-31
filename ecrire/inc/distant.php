@@ -325,6 +325,15 @@ function fichier_copie_locale($source) {
 
 
 // Recuperer les infos d'un document distant, sans trop le telecharger
+#$a['body'] = chaine
+#$a['type_image'] = booleen
+#$a['titre'] = chaine
+#$a['largeur'] = intval
+#$a['hauteur'] = intval
+#$a['taille'] = intval
+#$a['extension'] = chaine
+#$a['fichier'] = chaine
+
 // http://doc.spip.org/@recuperer_infos_distantes
 function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = true) {
 
