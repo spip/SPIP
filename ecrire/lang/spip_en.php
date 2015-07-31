@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 	'0_langue' => 'English [en]',
 	'0_liste' => 'spip-en@rezo.net',
-	'0_mainteneur' => 'George Kandalaft (george@diwanalarab.com)',
+	'0_mainteneur' => 'George Kandalaft (khodr1957@gmail.com)',
 
 	// A
 	'access_interface_graphique' => 'Back to the full graphic interface',
@@ -663,7 +663,7 @@ and log in to the site.
 	'titre_image_auteur_supprime' => 'Author deleted',
 	'titre_image_redacteur' => 'Editor without access',
 	'titre_image_redacteur_02' => 'Editor',
-	'titre_image_selecteur' => 'Afficher la liste', # NEW
+	'titre_image_selecteur' => 'Display list',
 	'titre_image_visiteur' => 'Visitor',
 	'titre_joindre_document' => 'ATTACH A DOCUMENT',
 	'titre_mots_cles' => 'KEYWORDS',
