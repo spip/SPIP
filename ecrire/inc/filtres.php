@@ -17,15 +17,18 @@ include_spip('inc/filtres_mini');
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
-		foreach (
-		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
-			if (function_exists($f)
-			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)
-				AND is_callable(array($regs[1], $regs[2]))
-			)) {
-				return $f;
-			}
-		return $default;
+	foreach (
+	array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f){
+		if (is_string($g = $GLOBALS['spip_matrice'][$f]))
+			find_in_path($g,'', true);
+		if (function_exists($f)
+		OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)
+			AND is_callable(array($regs[1], $regs[2]))
+		)) {
+			return $f;
+		}
+	}
+	return $default;
 }
 
 // http://doc.spip.org/@appliquer_filtre
@@ -37,7 +40,13 @@ function appliquer_filtre($arg, $filtre) {
 	// si filtre_text_plain pas defini, passe a filtre_text
 	if (!$f AND $nom!==$filtre) 
 		$f = chercher_filtre(preg_replace('/\W.*$/','', $filtre));
-	return !$f ? '' : $f($arg);
+	if (!$f)
+		return ''; // ou faut-il retourner $arg inchange == filtre_identite?
+	$args = func_get_args();
+	array_shift($args); // enlever $arg
+	array_shift($args); // enlever $filtre
+	array_unshift($args, $arg); // remettre $arg
+	return call_user_func_array($f,$args);
 }
 
 
@@ -91,6 +100,19 @@ $GLOBALS['spip_matrice']['image_passe_partout'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images_mini.php';
+
+// ou pour inclure un script au moment ou l'on cherche le filtre
+$GLOBALS['spip_matrice']['filtre_image_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_audio_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_video_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_application_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_message_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_multipart_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_text_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_text_csv_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_text_html_dist'] = 'inc/filtres_mime.php';
+$GLOBALS['spip_matrice']['filtre_audio_x_pn_realaudio'] = 'inc/filtres_mime.php';
+
 
 // charge les fonctions graphiques et applique celle demandee
 // http://doc.spip.org/@filtrer
