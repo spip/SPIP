@@ -282,8 +282,12 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		return "$baseaff$subdir/";
 	}
 
-	$f = @fopen("$base${subdir}.plat", "w");
-	if ($f)
+	// en cas d'echec c'est peut etre tout simplement que le disque est plein :
+	// l'inode du fichier dir_test existe, mais impossible d'y mettre du contenu
+	// => sauf besoin express (define dans mes_options), ne pas creer le .plat
+	define('_CREER_DIR_PLAT', false);
+	if (_CREER_DIR_PLAT
+	AND $f = @fopen("$base${subdir}.plat", "w"))
 		fclose($f);
 	else {
 		spip_log("echec creation $base${subdir}");
