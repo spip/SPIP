@@ -45,7 +45,7 @@ function gen_liste_rubriques() {
 		while ($row = spip_fetch_array($res)) {
 			$parent = $row['id_parent'];
 			$id = $row['id_rubrique'];
-			$GLOBALS['db_art_cache'][$parent][$id] = $row['titre'];
+			$GLOBALS['db_art_cache'][$parent][$id] = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 		}
 	}
 }

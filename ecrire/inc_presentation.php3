@@ -854,7 +854,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$id_article = $row['id_article'];
 			$tous_id[] = $id_article;
-			$titre = $row['titre'];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$id_rubrique = $row['id_rubrique'];
 			$date = $row['date'];
 			$statut = $row['statut'];
@@ -1077,7 +1077,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 			$id_article = $row['id_article'];
 			$tous_id[] = $id_article;
-			$titre = $row['titre'];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$id_rubrique = $row['id_rubrique'];
 			$date = $row['date'];
 			$statut = $row['statut'];
@@ -1224,7 +1224,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$id_breve = $row['id_breve'];
 			$tous_id[] = $id_breve;
 			$date_heure = $row['date_heure'];
-			$titre = $row['titre'];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$statut = $row['statut'];
 			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
@@ -1323,7 +1323,7 @@ function afficher_rubriques($titre_table, $requete) {
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
 			$tous_id[] = $id_rubrique;
-			$titre = $row['titre'];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$lang = traduire_nom_langue($row['lang']);
 			$langue_choisie = $row['langue_choisie'];
 			
@@ -1502,7 +1502,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			$id_message = $row['id_message'];
 			$date = $row["date_heure"];
 			$date_fin = $row["date_fin"];
-			$titre = $row["titre"];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$type = $row["type"];
 			$statut = $row["statut"];
 			$page = $row["page"];
@@ -2759,7 +2759,7 @@ else {
 			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
-				$titre = typo($row['titre']);
+				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
 				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>\n";
 			}
@@ -2776,7 +2776,7 @@ else {
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
-				$titre = typo($row['titre']);
+				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
 	
 				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
@@ -2794,7 +2794,7 @@ else {
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];
-				$titre = typo($row['titre']);
+				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
 	
 				$gadget .= "<a class='$statut' style='font-size: 10px;' href='breves_voir.php3?id_breve=$id_breve'>$titre</a>";
@@ -3341,7 +3341,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 		while ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
-			$titre = $row['titre'];
+			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			changer_typo($row['lang']);
 
 			if (acces_restreint_rubrique($id_rubrique))
