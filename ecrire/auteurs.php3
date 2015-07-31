@@ -84,7 +84,7 @@ case 'nombre':
 	break;
 
 case 'statut':
-	$sql_order = ' ORDER BY auteurs.statut, unom';
+	$sql_order = ' ORDER BY auteurs.statut, login = "", unom';
 	$type_requete = 'auteur';
 	break;
 
