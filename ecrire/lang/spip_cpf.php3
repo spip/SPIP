@@ -993,6 +993,10 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
 'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
 'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
+'info_tout_site5' => '<NEW> Article original.',
+'info_tout_site6' => '<NEW> <b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
+Les traductions sont associ&eacute;es &agrave; l\'original,
+dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_travail_colaboratif' => 'M&egrave;t ansamn travay si bann zartik',
 'info_travaux_texte' => 'Si lo sit-la l&eacute; pa konfigir&eacute;, arvyin inn p&eacute; pli tar...',
 'info_travaux_titre' => 'Sit-la l&eacute; apr&eacute; travay b&egrave;rlok  ou p&egrave;t&egrave;t travay santy&eacute;...l&eacute; pa finn ankor ast&egrave;r... ',
@@ -1071,6 +1075,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'item_non_utiliser_breves' => 'Anp&egrave;s ans&egrave;rv bann tit-nouv&egrave;l',
 'item_non_utiliser_config_groupe_mots_cles' => 'Anserv pa lakonfigirasyon pr&eacute;siz pou bann group molakl&eacute;',
 'item_non_utiliser_moteur_recherche' => 'Anp&egrave;s ans&egrave;rv lo rod&egrave;r',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
 'item_non_utiliser_mots_cles' => 'Anp&egrave;s ans&egrave;rv bann molakl&eacute;',
 'item_non_utiliser_syndication' => 'Anp&egrave;s ans&egrave;rv lasindikasyon otomatik',
 'item_nouvel_auteur' => 'Nouvo lot&egrave;r',
@@ -1084,6 +1089,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'item_utiliser_breves' => 'Ans&egrave;rv bann tit-nouv&egrave;l',
 'item_utiliser_config_groupe_mots_cles' => 'Anserv lakonfigirasyon pr&eacute;siz pour bann group molakl&eacute;.',
 'item_utiliser_moteur_recherche' => 'Ans&egrave;rv lo rod&egrave;r',
+'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
 'item_utiliser_mots_cles' => 'Ans&egrave;rv bann molakl&eacute;',
 'item_utiliser_syndication' => 'Ans&egrave;rv lasindikasyon otomatik',
 'item_visiteur' => 'vizit&egrave;r',
@@ -1256,6 +1262,10 @@ dann out navigat&egrave;r &eacute;',
 'module_texte_explicatif' => 'Ou p&eacute; m&egrave;t bann r&eacute;diyon-la anadan out bann sk&eacute;l&egrave;t pou sit piblik. Banna i sava &egrave;t dir&eacute;kman tradwui  andan dif&eacute;rant lang si n&eacute;na byin in fisy&eacute; lang pou zot. ',
 'module_texte_traduction' => 'Lo fisy&eacute; lang  &laquo;&nbsp;@module@&nbsp;&raquo; , zot i va trouv ali po&nbsp;:',
 'mois_non_connu' => 'l&eacute; pa konu',
+
+
+// N
+'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 
 
 // O
@@ -1552,7 +1562,7 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'titre_breve_refusee' => 'Tit-nouv&egrave;l arfiz&eacute;',
 'titre_breves' => 'Bann tit-nouv&egrave;l',
 'titre_cadre_afficher_article' => 'Afis bann zartik',
-'titre_cadre_afficher_traductions' => 'Afis l&eacute;ta bann tradiksyon pou lalang-la.',
+'titre_cadre_afficher_traductions' => '<MODIF> Afis l&eacute;ta bann tradiksyon pou lalang-la.',
 'titre_cadre_ajouter_auteur' => 'AZOUT INN LOT&Egrave;R :',
 'titre_cadre_forum_administrateur' => 'Forom priv&eacute; bann komand&egrave;r',
 'titre_cadre_forum_interne' => 'Forom dodan',

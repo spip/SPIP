@@ -369,10 +369,13 @@ Bedankt voor je deelname
 'ical_texte_js' => 'Met een javascriptregel kan je op eenvoudige wijze de meest recente artikels van deze site weergeven op een andere site die je beheert.',
 'ical_texte_prive' => 'Deze kalender is voor persoonlijk gebruik en houdt je op de hoogte van je eigen editoriale activiteit (taken en persoonlijke afspraken, voorgestelde artikels en nieuwsberichten...).',
 'ical_texte_public' => 'Via deze kalender kan je de publieke activiteit van de site volgen (gepubliceerde artikels en berichten).',
-'ical_texte_rss' => 'Je kan de nieuwe berichten van de site overnemen (syndiceren) op een andere site in eender welke bestandslezer via het formaat XML/RSS (Rich Site Summary). Dit is hetzelfde formaat dat SPIP toelaat nieuws over te nemen van andere sites die een uitwisselbaar formaat hanteren.',
+'ical_texte_rss' => '<MODIF> Je kan de nieuwe berichten van de site overnemen (syndiceren) op een andere site in eender welke bestandslezer via het formaat XML/RSS (Rich Site Summary). Dit is hetzelfde formaat dat SPIP toelaat nieuws over te nemen van andere sites die een uitwisselbaar formaat hanteren.',
+'ical_texte_rss_articles' => '<NEW> Le fichier &laquo;backend&raquo; des articles de ce site se trouve &agrave; l\'adresse:',
+'ical_texte_rss_articles2' => '<NEW> Vous pouvez &eacute;galement obtenir des fichiers &laquo;backend&raquo; pour les articles de chaque rubrique du site:',
+'ical_texte_rss_breves' => '<NEW> Il existe de plus un fichier contenant les br&egrave;ves du site. En pr&eacute;cisant un num&eacute;ro de rubrique, vous obtiendrez uniquement les br&egrave;ves de cette rubrique.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailinglijst',
-'ical_titre_rss' => '&laquo; backend &raquo; bestand',
+'ical_titre_rss' => '<MODIF> &laquo; backend &raquo; bestand',
 'icone_a_suivre' => 'Taken',
 'icone_activer_cookie' => 'De toegangskoekie activeren',
 'icone_admin_site' => 'Beheer van de site',
@@ -968,6 +971,14 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_tous_resultats_enregistres' => '[alle resultaten zijn opgenomen]',
 'info_tout_afficher' => 'Alles tonen',
 'info_tout_site' => 'Alle website',
+'info_tout_site1' => '<NEW> Langue de l\'article.',
+'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
+'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
+'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
+'info_tout_site5' => '<NEW> Article original.',
+'info_tout_site6' => '<NEW> <b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
+Les traductions sont associ&eacute;es &agrave; l\'original,
+dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_travail_colaboratif' => 'Samenwerking voor de artikels',
 'info_travaux_texte' => 'Deze site is nog niet geconfigureerd...Kom later eens terug...',
 'info_travaux_titre' => 'Site in opbouw',
@@ -1046,6 +1057,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'item_non_utiliser_breves' => 'Geen gebruik maken van nieuwsberichten',
 'item_non_utiliser_config_groupe_mots_cles' => 'Geavanceerde configuratie van groepen trefwoorden niet gebruiken',
 'item_non_utiliser_moteur_recherche' => 'Zoekmachine niet gebruiken',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
 'item_non_utiliser_mots_cles' => 'Trefwoorden niet gebruiken',
 'item_non_utiliser_syndication' => 'Automatische syndicatie niet gebruiken',
 'item_nouvel_auteur' => 'Nieuwe auteur',
@@ -1059,6 +1071,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'item_utiliser_breves' => 'Nieuwsberichten gebruiken',
 'item_utiliser_config_groupe_mots_cles' => 'Geavanceerde configuratie van groepen trefwoordne gebruiken',
 'item_utiliser_moteur_recherche' => 'De zoekmachine gebruiken',
+'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
 'item_utiliser_mots_cles' => 'Gebruiken slautenwoord',
 'item_utiliser_syndication' => 'Automatische syndicatie gebruiken',
 'item_visiteur' => 'bezoeker',
@@ -1234,6 +1247,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'module_texte_explicatif' => 'Je kan de volgende snelkoppelingen invoegen in de sjablonen van je publieke site. Ze worden automatisch vertaald in de verschillende talen waarvoor een taalbestand is aangemaakt.',
 'module_texte_traduction' => 'Het taalbestand &laquo;&nbsp;@module@&nbsp;&raquo; is beschikbaar in het&nbsp;:',
 'mois_non_connu' => 'Onbekend',
+
+
+// N
+'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 
 
 // O
@@ -1585,7 +1602,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_breve_refusee' => 'Geweigerd bericht',
 'titre_breves' => 'Berichten',
 'titre_cadre_afficher_article' => 'Artikels tonen',
-'titre_cadre_afficher_traductions' => 'Status van de vertalingen voor deze taal tonen',
+'titre_cadre_afficher_traductions' => '<MODIF> Status van de vertalingen voor deze taal tonen',
 'titre_cadre_ajouter_auteur' => 'EEN AUTEUR TOEVOEGEN :',
 'titre_cadre_forum_administrateur' => 'Priv&eacute;-forum voor de beheerders',
 'titre_cadre_forum_interne' => 'Intern forum',

@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'poprzednia strona',
+'page_suivante' => 'nast&#281;pna strona',
 'par_auteur' => 'przez',
 'participer_site' => 'Mo&#380;esz wzi&#261;&#263; udzia&#322; w tworzeniu tego serwisu i proponowa&#263; w&#322;asne artyku&#322;y. Aby mie&#263; tak&#261; mo&#380;liwo&#347;&#263;, musisz si&#281; zapisa&#263; poni&#380;ej. Na podany adres e-mail otrzymasz has&#322;o dost&#281;pu do strefy prywatnej serwisu.',
 'plan_site' => 'Mapa strony',

@@ -961,6 +961,10 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_tout_site2' => 'L\'article no ha estat tradu&iuml;t a aquesta llengua. ',
 'info_tout_site3' => 'L\'article ha estat tradu&iuml;t a aquesta llengua, per&ograve; s\'han fet modificacions a l\'article de refer&egrave;ncia. La traducci&oacute; s\'ha de posar al dia.',
 'info_tout_site4' => 'L\'article ha estat tradu&iuml;t a aquesta llengua i la traducci&oacute; posada al dia. ',
+'info_tout_site5' => 'Article original.',
+'info_tout_site6' => '<b>Atenci&oacute;:</b> nom&eacute;s es mostren els articles originals.
+Les traduccions estan associades a l\'original,
+amb un color que indica el seu estat:',
 'info_travail_colaboratif' => 'Treball col&middot;lectiu en els articles',
 'info_travaux_texte' => 'Aquest lloc encara no est&aacute; configurat. Torneu m&eacute;s endavant...',
 'info_travaux_titre' => 'Lloc en construcci&oacute;',
@@ -1039,6 +1043,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'item_non_utiliser_breves' => 'No utilitzar les breus',
 'item_non_utiliser_config_groupe_mots_cles' => 'No utilitzar la configuraci&oacute; avan&ccedil;ada dels grup de paraules clau',
 'item_non_utiliser_moteur_recherche' => 'No utilitzar el motor',
+'item_non_utiliser_moteur_recherche_forum' => 'No indexar els f&ograve;rums',
 'item_non_utiliser_mots_cles' => 'No utilitzar les paraules clau',
 'item_non_utiliser_syndication' => 'No utilitzar la sindicaci&oacute; autom&agrave;tica',
 'item_nouvel_auteur' => 'Nou autor',
@@ -1052,6 +1057,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'item_utiliser_breves' => 'Utilitzar les breus',
 'item_utiliser_config_groupe_mots_cles' => 'Utilitzar la configuraci&oacute; avan&ccedil;ada dels grups de paraules clau',
 'item_utiliser_moteur_recherche' => 'Utilitzar el motor de cerca',
+'item_utiliser_moteur_recherche_forum' => 'Indexar els f&ograve;rums',
 'item_utiliser_mots_cles' => 'Utilitzar les paraules clau',
 'item_utiliser_syndication' => 'Utilitzar la sindicaci&oacute; autom&agrave;tica',
 'item_visiteur' => 'visitant',
@@ -1221,6 +1227,10 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'module_texte_explicatif' => 'Podeu inserir els recursos seg&uuml;ents a les plantilles del vostre lloc p&uacute;blic. Es traduiran autom&agrave;ticament a les diferents lleng&uuml;es per les que existeix un fitxer de llengua.',
 'module_texte_traduction' => 'El fitxer de llengua &laquo;&nbsp;@module@&nbsp;&raquo; es troba disponible a:',
 'mois_non_connu' => 'desconegut',
+
+
+// N
+'navigateur_pas_redirige' => 'Si el vostre navegador no &eacute;s redirigit, cliqueu aqu&iacute; per continuar.',
 
 
 // O
@@ -1515,7 +1525,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_breve_refusee' => 'Breu refusat',
 'titre_breves' => 'Les breus',
 'titre_cadre_afficher_article' => 'Afegir els articles',
-'titre_cadre_afficher_traductions' => 'Mostrar l\'estat de les traduccions per aquesta llengua ',
+'titre_cadre_afficher_traductions' => '<MODIF> Mostrar l\'estat de les traduccions per aquesta llengua ',
 'titre_cadre_ajouter_auteur' => 'AFEGIR UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'F&ograve;rum privat dels administradors',
 'titre_cadre_forum_interne' => 'F&ograve;rum intern',

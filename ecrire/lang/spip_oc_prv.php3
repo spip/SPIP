@@ -166,10 +166,6 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => '<MODIF> S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat dau sit.',
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfachs et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -580,7 +576,9 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de publicacion:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENT D\'AQUEU SIT:',
-'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau <B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es ligat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
+'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
+ <B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es ligat a
+ <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
 'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_deplier' => 'Desplegar',
 'info_derniere_etape' => 'Darriera estapa: <B>Es acabat!',
@@ -948,6 +946,14 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_tous_resultats_enregistres' => '[totei lei resultats son registrats]',
 'info_tout_afficher' => 'Afichar tot',
 'info_tout_site' => 'Tot lo sit',
+'info_tout_site1' => 'Lenga de l\'article.',
+'info_tout_site2' => 'An pas revirat l\'article dins aquela lenga.',
+'info_tout_site3' => 'An revirat l\'article dins aquela lenga, mai an portat puei de modificacions a l\'article de refer&eacute;ncia. Cau actualizar la revirada.',
+'info_tout_site4' => 'An revirat l\'article dins aquela lenga, e la revirada es actualizada.',
+'info_tout_site5' => 'Article originau.',
+'info_tout_site6' => '<b>Atencion:</b> ren que leis articles originaus s\'afichan.
+Lei reviradas s\'ass&ograve;cian a l\'originau,
+una color indica lor estat:',
 'info_travail_colaboratif' => 'Trabalh collaboratiu subre leis articles',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz mai tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1026,6 +1032,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'item_non_utiliser_breves' => 'Pas utilizar lei br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Pas utilizar la configuracion avan&ccedil;ada dei grops de mots claus',
 'item_non_utiliser_moteur_recherche' => 'Pas utilizar lo motor',
+'item_non_utiliser_moteur_recherche_forum' => 'Pas indexar lei forums',
 'item_non_utiliser_mots_cles' => 'Pas utilizar lei mots claus',
 'item_non_utiliser_syndication' => 'Pas utilizar la sindicacion automatica',
 'item_nouvel_auteur' => 'Autor n&ograve;u',
@@ -1039,6 +1046,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'item_utiliser_breves' => 'Utilizar lei br&egrave;vas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar la configuracion avan&ccedil;ada dei grops de mots claus',
 'item_utiliser_moteur_recherche' => 'Utilizar lo motor de rec&egrave;rca',
+'item_utiliser_moteur_recherche_forum' => 'Indexar lei forums',
 'item_utiliser_mots_cles' => 'Utilizar lei mots claus',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
@@ -1211,6 +1219,10 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'module_texte_explicatif' => 'Pod&egrave;tz inserir leis acorchas seguentas dins leis esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins lei diferentei lengas per lei qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
+
+
+// N
+'navigateur_pas_redirige' => 'Se v&ograve;stre navigador es pas redirigit, clicatz aic&iacute; per contunhar.',
 
 
 // O
@@ -1656,8 +1668,14 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Cessar de liar aquest article a sei reviradas ',
 'trad_lier' => 'Aquest article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
 
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfachs et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 
