@@ -66,6 +66,7 @@ function action_editer_auteur_dist() {
 function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_auteur, $url_site, $new_login, $new_pass, $new_pass2, $perso_activer_imessage, $pgp, $lier_id_article=0, $id_parent=0, $restreintes= NULL, $id_auteur=0) {
 	global $visiteur_session;
 	include_spip('inc/filtres');
+	include_spip('inc/autoriser');
 
 	$echec = array();
 
