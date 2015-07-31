@@ -123,8 +123,8 @@ function effacer_low_sec($id_auteur) {
 // http://doc.spip.org/@initialiser_sel
 function initialiser_sel() {
 	global $htsalt;
-
-	$htsalt = '$1$'.creer_pass_aleatoire();
+	if (CRYPT_MD5) $htsalt = '$1$'.creer_pass_aleatoire();
+	else return "";
 }
 
 
