@@ -12,6 +12,16 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Definir les niveaux de log
+if (!defined('_LOG_HS')) define('_LOG_HS', 0);
+if (!defined('_LOG_ALERTE_ROUGE')) define('_LOG_ALERTE_ROUGE', 1);
+if (!defined('_LOG_CRITIQUE')) define('_LOG_CRITIQUE', 2);
+if (!defined('_LOG_ERREUR')) define('_LOG_ERREUR', 3);
+if (!defined('_LOG_AVERTISSEMENT')) define('_LOG_AVERTISSEMENT', 4);
+if (!defined('_LOG_INFO_IMPORTANTE')) define ('_LOG_INFO_IMPORTANTE', 5);
+if (!defined('_LOG_INFO')) define('_LOG_INFO', 6);
+if (!defined('_LOG_DEBUG')) define('_LOG_DEBUG', 7);
+
 //
 // Utilitaires indispensables autour du serveur Http.
 //
@@ -148,35 +158,43 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
 
 /**
  * Enregistrement des evenements
- * Pour compatibilite arriere, la syntaxe sans premier argument
- * est egalement supportee
- * spip_log($message,$logname,..)
- * le niveau par defaut est dans ce cas _LOG_GRAVITE_INFO
- *  
+ * spip_log($message)
+ * spip_log($message,'recherche')
+ * spip_log($message,_LOG_DEBUG)
+ * spip_log($message,'recherche.'._LOG_DEBUG)
+    # cette derniere notation est controversee mais le 3eme
+    # parametre est plante pour cause de compat ascendante.
+ * le niveau par defaut est _LOG_INFO
+ * 
  * http://doc.spip.org/@spip_log
  *
- * @param int $niveau
  * @param string $message
- * @param string $logname
- * @param string $logdir
- * @param string $logsuf
+ * @param string|int $name
+ * @param string $logdir  ## inutile !! a supprimer ?
+ * @param string $logsuf  ## inutile !! a supprimer ?
  */
-function spip_log($niveau, $message=NULL, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
+function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
-	$args = func_get_args();
-	// compat ancien format d'appel spip_log('message',..)
-	if (!is_numeric($niveau) OR is_null($message)){
-		$niveau = _LOG_GRAVITE_INFO;
-	  list($message,$logname,$logdir,$logsuf) = $args;
-	}
-	if ($niveau<=(defined('_LOG_FILTRE_GRAVITE')?_LOG_FILTRE_GRAVITE:_LOG_GRAVITE_DEBUG)){
+	preg_match('/^([a-z]*)\.?(\d)?$/S', (string) $name, $regs);
+	if (!$logname = $regs[1])
+		$logname = null;
+	if (!$niveau = $regs[2])
+		$niveau = _LOG_INFO;
+
+	if ($niveau <= 
+	(defined('_LOG_FILTRE_GRAVITE')?_LOG_FILTRE_GRAVITE:_LOG_DEBUG)) {
 		if (!$pre)
 			$pre = array(
-				_LOG_GRAVITE_HS=>'HS',_LOG_GRAVITE_ALERTE_ROUGE=>'ALERTEROUGE',_LOG_GRAVITE_CRITIQUE=>'CRITIQUE',
-				_LOG_GRAVITE_ERREUR=>'ERREUR',_LOG_GRAVITE_AVERTISSEMENT=>'WARNING',_LOG_GRAVITE_INFO_IMPORTANTE=>'!INFO',
-				_LOG_GRAVITE_INFO=>'INFO',_LOG_GRAVITE_DEBUG=>'DEBUG');
+				_LOG_HS=>'HS:',
+				_LOG_ALERTE_ROUGE=>'ALERTE:',
+				_LOG_CRITIQUE=>'CRITIQUE:',
+				_LOG_ERREUR=>'ERREUR:',
+				_LOG_AVERTISSEMENT=>'WARNING:',
+				_LOG_INFO_IMPORTANTE=>'!INFO:',
+				_LOG_INFO=>'info:',
+				_LOG_DEBUG=>'debug:');
 		$log = charger_fonction('log', 'inc');
-		$log($pre[$niveau].":".$message, $logname, $logdir, $logsuf);
+		$log($pre[$niveau].' '.$message, $logname);
 	}
 }
 
@@ -1292,15 +1310,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// La taille des Log
 	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
-	// Les niveaux de log
-	if (!defined('_LOG_GRAVITE_HS')) define('_LOG_GRAVITE_HS', 0);
-	if (!defined('_LOG_GRAVITE_ALERTE_ROUGE')) define('_LOG_GRAVITE_ALERTE_ROUGE', 1);
-	if (!defined('_LOG_GRAVITE_CRITIQUE')) define('_LOG_GRAVITE_CRITIQUE', 2);
-	if (!defined('_LOG_GRAVITE_ERREUR')) define('_LOG_GRAVITE_ERREUR', 3);
-	if (!defined('_LOG_GRAVITE_AVERTISSEMENT')) define('_LOG_GRAVITE_AVERTISSEMENT', 4);
-	if (!defined('_LOG_GRAVITE_INFO_IMPORTANTE')) define ('_LOG_GRAVITE_INFO_IMPORTANTE', 5);
-	if (!defined('_LOG_GRAVITE_INFO')) define('_LOG_GRAVITE_INFO', 6);
-	if (!defined('_LOG_GRAVITE_DEBUG')) define('_LOG_GRAVITE_DEBUG', 7);
+
+	// niveau maxi d'enregistrement des logs
+	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
@@ -1438,8 +1450,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_suite() {
 	static $too_late = 0;
 	if ($too_late++) return;
-	// niveau maxi d'enregistrement des logs
-	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// taille mini des login
 	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);

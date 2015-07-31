@@ -20,7 +20,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if ($port > 0) $host = "$host:$port";
 	$link = @mysql_connect($host, $login, $pass, true);
 	if (!$link) {
-		spip_log(_LOG_GRAVITE_HS,'Echec mysql_connect. Erreur : ' . mysql_error(),'mysql');
+		spip_log('Echec mysql_connect. Erreur : ' . mysql_error(),'mysql.'._LOG_HS);
 		return false;
 	}
 	$last = '';
@@ -34,7 +34,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		  )
 			mysql_query($last = "set sql_mode=''");
 	}
-	spip_log(_LOG_GRAVITE_DEBUG,"Connexion vers $host, base $db, prefixe $prefixe " . ($ok ? "operationnelle sur $link" : 'impossible'));
+	spip_log("Connexion vers $host, base $db, prefixe $prefixe " . ($ok ? "operationnelle sur $link" : 'impossible'), _LOG_DEBUG);
 
 	return !$ok ? false : array(
 		'db' => $db,
@@ -98,7 +98,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 // http://doc.spip.org/@spip_mysql_set_charset
 function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	spip_log(_LOG_GRAVITE_DEBUG,"changement de charset sql : "."SET NAMES "._q($charset));
+	spip_log("changement de charset sql : "."SET NAMES "._q($charset), _LOG_DEBUG);
 	return mysql_query($connexion['last'] = "SET NAMES "._q($charset));
 }
 
@@ -295,7 +295,7 @@ function traite_query($query, $db='', $prefixe='') {
 		}
 	}
 	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
-	#spip_log(_LOG_GRAVITE_DEBUG,"traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
+	#spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe", _LOG_DEBUG);
 	return $r;
 }
 
@@ -303,7 +303,7 @@ function traite_query($query, $db='', $prefixe='') {
 function spip_mysql_selectdb($db) {
 	$ok = mysql_select_db($db);
 	if (!$ok)
-		spip_log(_LOG_GRAVITE_CRITIQUE,'Echec mysql_selectdb. Erreur : ' . mysql_error(),'mysql');
+		spip_log('Echec mysql_selectdb. Erreur : ' . mysql_error(),'mysql.'._LOG_CRITIQUE);
 	return $ok;
 }
 
@@ -383,7 +383,7 @@ function spip_mysql_create_view($nom, $query_select, $serveur='',$requeter=true)
 	if (!$query_select) return false;
 	// vue deja presente
 	if (sql_showtable($nom, false, $serveur)) {
-		spip_log(_LOG_GRAVITE_ERREUR,"Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)");
+		spip_log("Echec creation d'une vue sql ($nom) car celle-ci existe deja (serveur:$serveur)", _LOG_ERREUR);
 		return false;
 	}
 	
@@ -524,7 +524,7 @@ function spip_mysql_countsel($from = array(), $where = array(),
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 	$s = $link ? mysql_error($link) : mysql_error();
-	if ($s) spip_log(_LOG_GRAVITE_ERREUR,"$s - $query", 'mysql');
+	if ($s) spip_log("$s - $query", 'mysql.'._LOG_ERREUR);
 	return $s;
 }
 
@@ -537,7 +537,7 @@ function spip_mysql_errno($serveur='',$requeter=true) {
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
 		define('spip_interdire_cache', true);
-	if ($s) spip_log(_LOG_GRAVITE_ERREUR,"Erreur mysql $s");
+	if ($s) spip_log("Erreur mysql $s", _LOG_ERREUR);
 	return $s;
 }
 
@@ -572,7 +572,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 	} else $t = 0 ;
 
 	$connexion['last'] = $query;
-	spip_log(_LOG_GRAVITE_DEBUG,$query);
+	spip_log($query, 'mysql.'._LOG_DEBUG);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
 	else {
@@ -823,7 +823,7 @@ function spip_get_lock($nom, $timeout = 0) {
 
 	$connexion['last'] = $q = "SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n";
 	$q = @sql_fetch(mysql_query($q));
-	if (!$q) spip_log(_LOG_GRAVITE_ERREUR,"pas de lock sql pour $nom");
+	if (!$q) spip_log("pas de lock sql pour $nom", _LOG_ERREUR);
 	return $q['n'];
 }
 

@@ -20,7 +20,7 @@ function base_repair_dist($titre='', $reprise='') {
 		$res = admin_repair_tables();
 	} else {
 		if ($titre)
-		  spip_log(_LOG_GRAVITE_ERREUR, "Pas d'instruction REPAIR dans ce serveur SQL");
+		  spip_log( "Pas d'instruction REPAIR dans ce serveur SQL", _LOG_ERREUR);
 		$res = '     ';
 	}
 
@@ -39,7 +39,7 @@ function base_repair_dist($titre='', $reprise='') {
 
 // http://doc.spip.org/@admin_repair_plat
 function admin_repair_plat(){
-	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "verification des documents joints");
+	spip_log( "verification des documents joints", _LOG_INFO_IMPORTANTE);
 	$out = "";
 	$repertoire = array();
 	include_spip('inc/getdocument');
@@ -48,7 +48,7 @@ function admin_repair_plat(){
 	while ($row=sql_fetch($res)){
 		$ext = $row['extension'];
 		if (!$ext) {
-			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"document sans extension: " . $row['id_document']);
+			spip_log("document sans extension: " . $row['id_document'], _LOG_INFO_IMPORTANTE);
 			continue;
 		}
 		if (!isset($repertoire[$ext])){
@@ -86,7 +86,7 @@ function admin_repair_tables() {
 			$tab = array_shift($r);
 	
 			$res .= "<br /><b>$tab</b> ";
-			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"Repare $tab");
+			spip_log("Repare $tab", _LOG_INFO_IMPORTANTE);
 			// supprimer la meta avant de lancer la reparation
 			// car le repair peut etre long ; on ne veut pas boucler
 			effacer_meta('admin_repair');
