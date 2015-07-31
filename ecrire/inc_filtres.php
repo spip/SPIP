@@ -664,13 +664,14 @@ function date_ical($date, $addminutes = 0) {
 		    mktime($heures, $minutes+$addminutes,$secondes,$mois,$jour,$annee));
 }
 
+// date_iso retourne la date au format "RFC 3339" / "ISO 8601"
+// voir http://www.php.net/manual/fr/ref.datetime.php#datetime.constants
 function date_iso($date_heure) {
 	list($annee, $mois, $jour) = recup_date($date_heure);
 	list($heures, $minutes, $secondes) = recup_heure($date_heure);
 	$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
-	return gmdate("Y-m-d\TH:i:s\Z", $time);
+	return gmdate('Y-m-d\TH:i:s\Z', $time);
 }
-
 
 function date_anneemoisjour($d)  {
 	if (!$d) $d = date("Y-m-d");

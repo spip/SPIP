@@ -26,16 +26,17 @@
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
-		<dc:date>[(#DATE|date_iso)]</dc:date>
+		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
 
-		[(#REM)
-			On diffuse la rubrique et les mots-cles a la mode RSS
-		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}><category[ domain="(#URL_RUBRIQUE|url_absolue)"]>[(#TITRE|supprimer_numero|texte_backend)]</category></BOUCLE_rubrique_rss>
+[(#REM)
+	Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS
+
+]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
 <BOUCLE_mots_rss(MOTS){id_article}>
-		<dc:subject>[(#TITRE|texte_backend)]</dc:subject></BOUCLE_mots_rss>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
 
 		<description>[(#INTRODUCTION|texte_backend)]
 
@@ -44,17 +45,17 @@
 	sous forme de "microformats"
 
 ]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
-&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="category"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="category"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
 </BOUCLE_rubrique_mf><B_mots_mf>
 / <BOUCLE_mots_mf(MOTS){id_article}{", "}>
-&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;</BOUCLE_mots_mf>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
 
 		</description>
 
 [(#REM)
 	Le bloc qui suit diffuse aussi le texte integral de l'article,
 	ce qui permet une syndication plus riche (mais plus "lourde").
-	Fonction desactivable depuis les reglages du site
+	Fonction desactivable depuis les reglages du site.
 ][
 (#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ARTICLE|right||texte_backend)
 		][&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
@@ -68,9 +69,9 @@
 [(#REM)
 	Le bloc qui suit diffuse l'adresse des documents associes aux articles ;
 	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
-]		<BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}{doublons}>[
+]		<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{doublons}>[
 		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
-		</BOUCLE_podcast>
+		</BOUCLE_documents>
 
 	</item>
 </BOUCLE_un_article>

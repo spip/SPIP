@@ -43,7 +43,7 @@ function affiche_rss_rss($rss, $intro = '') {
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
 	$u .= '
-<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
 	<title>'.texte_backend($intro['title']).'</title>
 	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
@@ -61,15 +61,11 @@ function affiche_rss_rss($rss, $intro = '') {
 	<item>
 		<title>'.texte_backend($article['title']).'</title>
 		<link>'.texte_backend(url_absolue($article['url'])).'</link>
-		<date>'.texte_backend($article['date']).'</date>
-		<description>'.
-			texte_backend(liens_absolus($article['description']))
-		.'</description>
-		<author>'.texte_backend($article['author']).'</author>
 		<dc:date>'.date_iso($article['date']).'</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>'.texte_backend($article['lang']).'</dc:language>
 		<dc:creator>'.texte_backend($article['author']).'</dc:creator>
+		<description>'.texte_backend(liens_absolus($article['description'])).'</description>
 	</item>
 ';
 		}
@@ -80,6 +76,48 @@ function affiche_rss_rss($rss, $intro = '') {
 	</channel>
 </rss>
 ';
+
+	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
+}
+
+function affiche_rss_atom($rss, $intro = '') {
+	// entetes
+	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
+
+	$u .= '
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.$intro['language'].'">
+	<title>'.texte_backend($intro['title']).'</title>
+	<id>'.texte_backend(url_absolue($intro['url'])).'</id>
+	<link href="'.texte_backend(url_absolue($intro['url'])).'"/>';
+	if ($intro['description']) $u .= '<subtitle>'.texte_backend($intro['description']).'</subtitle>';
+	$u .= '<link rel="self" type="application/atom+xml" href="'.texte_backend(url_absolue($_SERVER['REQUEST_URI'])).'"/>
+	<updated>'.gmdate("Y-m-d\TH:i:s\Z").'<updated>'; // probleme, <updated> pourrait etre plus precis
+
+	// elements
+	if (is_array($rss)) {
+		usort($rss, 'trier_par_date');
+		foreach ($rss as $article) {
+			$u .= '
+	<entry xml:lang="'.texte_backend($article['lang']).'">
+		<title>'.texte_backend($article['title']).'</title>
+		<id>'.texte_backend(url_absolue($article['url'])).'</id>
+		<link rel="alternate" type="text/html" href="'.texte_backend(url_absolue($article['url'])).'"/>
+		<published>'.date_iso($article['date']).'</published>
+		<updated>'.date_iso($article['date']).'</updated>
+		<author><name>'.texte_backend($article['author']).'</name>';
+			if ($article['email'])
+				$u .= '<email>'.texte_backend($article['email']).'</email>';
+			$u .= '</author>
+		<summary type="html">'.texte_backend(liens_absolus($article['description'])).'</summary>
+	</entry>
+';
+		}
+	}
+
+	// pied
+	$u .= '
+</feed>
+ ';
 
 	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
 }
