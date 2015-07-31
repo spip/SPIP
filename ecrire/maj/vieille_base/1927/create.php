@@ -31,20 +31,20 @@ function maj_vieille_base_1927_create() {
 		spip_create_vieille_table($k, $v['field'], $v['key'], false);
 
 	foreach($tables_images as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
+		sql_query("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
 			      (is_numeric($v) ?
 			       (strtoupper($k) . "', $v") :
 			       "$v', 0") .
 			      ")");
 
 	foreach($tables_sequences as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");
+		sql_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");
 
 	foreach($tables_documents as $k => $v)
-		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'non')");
+		sql_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'non')");
 
 	foreach ($tables_mime as $extension => $type_mime)
-	  spip_query_db("UPDATE spip_types_documents
+	  sql_query("UPDATE spip_types_documents
 		SET mime_type='$type_mime' WHERE extension='$extension'");
 }
 

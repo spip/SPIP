@@ -140,15 +140,14 @@ function maj_12008 () {
 				$t['id_objet'] = $t["id_$l"];
 				$t['objet'] = $l;
 				unset($t["id_$l"]);
-				$keys = '('.join(',',array_keys($t)).')';
-				$tampon[] = '('.join(',', array_map('sql_quote', $t)).')';
-				if (count($tampon)>100) {
-					sql_insert('spip_documents_liens', $keys, join(',', $tampon));
+				$tampon[] = $t;
+				if (count($tampon)>10000) {
+					sql_insertq_multi('spip_documents_liens',$tampon);
 					$tampon = array();
 				}
 			}
 			if (count($tampon)) {
-				sql_insert('spip_documents_liens', $keys, join(',', $tampon));
+				sql_insertq_multi('spip_documents_liens', $tampon);
 			}
 		}
 	}
