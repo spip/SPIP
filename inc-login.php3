@@ -37,45 +37,50 @@ function auth_http($cible, $essai_auth_http) {
 }
 
 function ouvre_login($titre) {
-	//$retour .= debut_cadre_enfonce("redacteurs-24.gif");
 	
 	$retour .= "<div class='spip_encadrer'>";
 	
-	//if ($titre) $retour .= gros_titre($titre);
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
 	
-	$retour .= '<font size="2" face="arial,helvetica,sans-serif">';
+	$retour .= '<font size="2" face="Verdana,arial,helvetica,sans-serif">';
 	return $retour;
 }
 
 function ferme_login() {
 	$retour =  "</font>";
-	//$retour .= fin_cadre_enfonce();
 	$retour .= "<div>";
 	return $retour;
 }
 
-function login($cible, $prive = 'prive', $message_login='') {
+function login($cible = '', $prive = 'prive', $message_login='') {
 	$login = $GLOBALS['var_login'];
 	$erreur = $GLOBALS['var_erreur'];
 	$echec_cookie = $GLOBALS['var_echec_cookie'];
 	$essai_auth_http = $GLOBALS['var_essai_auth_http'];
 	$logout = $GLOBALS['var_logout'];
-	global $spip_admin;
-	global $php_module;
-	global $clean_link;
-		$clean_link->delVar('var_erreur');
-		$clean_link->delVar('var_login');
 
 	global $auteur_session;
 	global $spip_session, $PHP_AUTH_USER;
+	global $spip_admin;
+	global $php_module;
+	global $clean_link;
+
+	if (!$cible) {
+		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
+		else if ($prive) $cible = new Link('ecrire');
+		else $cible = $clean_link;
+	}
+	$cible->delVar('var_erreur');
+	$cible->delVar('var_url');
+	$clean_link->delVar('var_erreur');
+	$clean_link->delVar('var_login');
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
-	if ($auteur_session AND ! $logout) {
+	if ($auteur_session AND !$logout) {
 		$url = $cible->getUrl();
 		@Header("Location: $url");
-		echo "<a href='$url'>Vous &ecirc;tes en registr&eacute;... par ici...</a>\n";
+		echo "<a href='$url'>Vous &ecirc;tes enregistr&eacute;... par ici...</a>\n";
 		return;
 	}
 
@@ -134,7 +139,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
         	vous devez entrer les codes qui vous ont &eacute;t&eacute;
         	fournis lors de votre inscription.";
 
-		echo "<br><font size='2'>$message_login</font><br>\n";
+		echo "<br>$message_login<br>\n";
 	}
 
 
@@ -180,7 +185,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 	}
 	else { // demander seulement le login
 
-		$url = $cible->getUrl();
+		$url = urlencode($cible->getUrl());
 		$action = $clean_link->getUrl();
 
 		echo "<form name='form_login' action='$action' method='post' class='spip_encadrer'>\n";
@@ -188,7 +193,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
 		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40'>\n";
 
-		echo "<input type='hidden' name='url' value='$url'>\n";
+		echo "<input type='hidden' name='var_url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
 	}
@@ -203,16 +208,14 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		echo "de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;: \n";
 		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 		$url = $cible->getUrl();
-		echo "<input type='hidden' name='url' value='$url'>\n";
+		echo "<input type='hidden' name='var_url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' name='submit' class='spip_bouton' value='Identification sans cookie'></div>\n";
 		echo "</fieldset></form>\n";
 	}
 
-
 	if ($prive) echo "[<a href='$url_site'>retour au site public</a>]";
 
 	echo ferme_login();
-
 }
 
 ?>

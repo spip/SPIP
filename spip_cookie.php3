@@ -5,8 +5,8 @@ include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
-if ($url)
-	$cible = new Link(urldecode($url));
+if ($url = $HTTP_POST_VARS['url'])
+	$cible = new Link($url);
 else
 	$cible = new Link('ecrire/');
 
@@ -20,7 +20,6 @@ if ($change_session == 'oui') {
 		@header('Expires: 0');
 		@header("Cache-Control: no-store, no-cache, must-revalidate");
 		@header('Pragma: no-cache');
-		@header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 		@readfile('ecrire/img_pack/rien.gif');
 		exit;
@@ -83,6 +82,7 @@ if ($essai_login == "oui") {
 	}
 
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass' AND statut<>'5poubelle'";
+	echo "$query<p>";
 
 	$result = spip_query($query);
 
@@ -111,11 +111,11 @@ if ($essai_login == "oui") {
 	else {
 		if (ereg("ecrire/", $cible->getUrl())) {
 			$cible = new Link("./spip_login.php3");
-			$cible->addVar('var_login', $login);
-			if ($session_password || $session_password_md5)
-				$cible->addVar('var_erreur', 'pass');
-			$cible->addVar('url', urldecode($url));
 		}
+		$cible->addVar('var_login', $login);
+		if ($session_password || $session_password_md5)
+			$cible->addVar('var_erreur', 'pass');
+		$cible->addVar('var_url', urldecode($url));
 	}
 }
 

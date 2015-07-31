@@ -101,7 +101,6 @@ function forum_abonnement($retour) {
 		return true;	// autoriser le formulaire
 	else {
 		include_local("inc-login.php3");
-		$cible = new Link($retour);
 
 		$message_login = propre("Pour participer &agrave;
 		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
@@ -110,8 +109,9 @@ function forum_abonnement($retour) {
 		vous n'en avez pas encore, vous pouvez").
 ' <script language="JavaScript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander de nouveaux identifiants</a>.';
-		login($cible, false, $message_login);
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander un nouvel identifiant</a>.<br>';
+		login('', false, $message_login);
+		return false;
 	} 
 }
 
@@ -381,7 +381,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 function ajout_forum() {
 	global $texte, $titre, $nom_site_forum, $url_site, $auteur, $email_auteur, $retour_forum, $id_message, $confirmer;
 	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_auteur, $forum_id_syndic, $alea, $hash;
-	global $hash_email, $email_forum_abo, $pass_forum_abo, $ajouter_mot, $new;
+//	global $hash_email, $email_forum_abo, $pass_forum_abo;
+	global $auteur_session;
+	global $ajouter_mot, $new;
 	global $HTTP_HOST, $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
 	$afficher_texte = $GLOBALS['afficher_texte'];
 	
@@ -473,8 +475,6 @@ function ajout_forum() {
 
 	}
 
-
-
 	$query_forum = "UPDATE spip_forum
 		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\", 
 			date_heure = NOW(), titre = \"$titre\", texte = \"$texte\", nom_site = \"$nom_site_forum\", url_site = \"$url_site\", auteur = \"$auteur\",
@@ -485,7 +485,7 @@ function ajout_forum() {
 
 
 	if ($forums_publics == 'abo') {
-	
+/*	
 		$cookie_email = $HTTP_COOKIE_VARS['spip_forum_email'];
 		if ($hash_email && $forum_id_auteur) {
 			if (verifier_action_auteur("email $cookie_email", $hash_email, $forum_id_auteur)) {
@@ -516,13 +516,11 @@ function ajout_forum() {
 				die ("<h4>Vous devez indiquer votre adresse et votre mot de passe.</h4>
 				Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
 			}
-		}
-
-		if ($ok) {
-			$id_auteur = $row[0];
-			$statut = $row[8];
+		}*/
+		if ($auteur_session) {
+			$statut = $auteur_session['statut'];
 			
-			if ($statut == '5poubelle') {
+			if (!$statut OR $statut == '5poubelle') {
 				die ("<h4>Vous n'avez plus acc&egrave;s &agrave; ces forums.</h4>Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
 			}
 		}
@@ -532,12 +530,9 @@ function ajout_forum() {
 		}
 	}
 
-
-	
 	if (strlen($confirmer) > 0 OR ($afficher_texte=='non' AND $ajouter_mot)) {
 		spip_query("UPDATE spip_forum SET statut=\"$etat\" WHERE id_forum='$id_message'");
 	
-
 		$texte = stripslashes($texte);
 		$titre = stripslashes($titre);
 		$auteur = stripslashes($auteur);
