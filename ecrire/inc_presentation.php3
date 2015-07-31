@@ -93,6 +93,7 @@ function fin_cadre($style) {
 		$retour_aff .= "\n<tr><td class='$style-bg'></td>";
 		$retour_aff .= "\n<td class='$style-b'></td>";
 		$retour_aff .= "\n<td class='$style-bd'></td></tr>";
+		$retour_aff .= "\n<tr><td><img src='img_pack/rien.gif' alt='' width='1' height='5'></td></tr>";
 		$retour_aff .= "\n</table>\n";
 	}
 	return $retour_aff;

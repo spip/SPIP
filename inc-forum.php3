@@ -256,7 +256,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	if ($new != "oui" AND $redac != "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 	if ($new == "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='redac' VALUE=\"oui\">";
 
-
 	
 	if ($afficher_texte !="non"){
 		$ret .= "\n<p><div class='spip_encadrer'><B>Texte de votre message :</B><BR>";

@@ -150,7 +150,7 @@ debut_gauche();
 	if (spip_num_rows($result) > 0) {
 	creer_colonne_droite();
 
-		echo "<div class='iconeoff' style='padding: 5px;'>";
+		echo "<p></p><div class='iconeoff' style='padding: 5px;'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo typo("Afficher les visites pour <b>les articles les plus visit&eacute;s depuis le d&eacute;but&nbsp;:</b>");
 		echo "<ol style='padding-left:25 px;'>";
