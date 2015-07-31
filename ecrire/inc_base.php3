@@ -505,9 +505,11 @@ function remplir_type_documents() {
 		"('ram', 'RealAudio', 'embed'), ".
 		"('rm', 'RealAudio', 'embed'), ".
 		"('rtf', 'RTF', 'non'), ".
-		"('sdd', 'OpenOffice', 'non'), ".
-		"('sdw', 'OpenOffice Impress', 'non'), ".
+		"('sdd', 'StarOffice', 'non'), ".
+		"('sdw', 'StarOffice', 'non'), ".
 		"('sit', 'Stuffit', 'non'), ".
+		"('sxi', 'OpenOffice Impress', 'non'), ".
+		"('sxw', 'OpenOffice', 'non'), ".
 		"('swf', 'Flash', 'embed'), ".
 		"('tgz', 'TGZ', 'non'), ".
 		"('txt', 'texte', 'non'), ".
