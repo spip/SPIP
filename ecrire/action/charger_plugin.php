@@ -237,7 +237,7 @@ function action_charger_plugin_dist() {
 	}
 
 
-	include_spip('exec/install'); // pour bouton_suivant()
+	include_spip('inc/install'); // pour bouton_suivant()
 
 	$texte = "<div style='text-align:".$spip_lang_left.";'>$texte</div>\n";
 
