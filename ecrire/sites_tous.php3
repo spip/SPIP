@@ -48,6 +48,8 @@ if ($options == 'avancees' AND $connect_statut == '0minirezo') {
 	afficher_sites("Les sites refus&eacute;s", "SELECT * FROM spip_syndic WHERE statut='refuse' ORDER BY nom_site");
 }
 
+afficher_syndic_articles("Derniers articles syndiqu&eacute;s",
+                "SELECT * FROM spip_syndic_articles ORDER BY date DESC LIMIT 0,50", 'afficher site');
 
 fin_page();
 
