@@ -645,6 +645,10 @@ function maj_v019_50()
 	include_spip('base/auxiliaires');
 	$v = $tables_auxiliaires[$k='spip_urls'];
 	sql_create($k, $v['field'], $v['key'], false, false);
+
+	// assurer date et pas maj avant la recopie
+	sql_alter("TABLE spip_urls CHANGE maj date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
+
 	foreach(array('article'=>'id_article',
 		      'rubrique'=>'id_rubrique',
 		      'breve'=>'id_breve',
@@ -655,7 +659,7 @@ function maj_v019_50()
 		$date = ($type == 'breve') ? 'date_heure' : 
 		  (($type == 'auteur') ? 'maj' : 
 		   (($type == 'mot') ? 'maj' : 'date'));
-		$q = sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as maj", "spip_$table", "url_propre<>''");
+		$q = sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as date", "spip_$table", "url_propre<>''");
 		while ($r = sql_fetch($q)) sql_replace('spip_urls', $r);
 		spip_log("table $table : " . sql_count($q) . " urls propres copiees");
 		sql_alter("TABLE `spip_$table` DROP INDEX `url_propre`");
