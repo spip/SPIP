@@ -436,6 +436,7 @@ ecrire/exec/virtualiser.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text
 ecrire/inc/article_select.php -text
+ecrire/inc/autoriser.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
