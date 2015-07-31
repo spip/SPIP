@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Không nối vào LDAP server được.',
 'avis_connexion_ldap_echec_2' => 'Trở lại trang trước và xem lại các dữ kiện đã cung cấp.',
 'avis_connexion_ldap_echec_3' => 'Một cách khác, đừng dùng LDAP support để đem tên người dùng vào.',
-'avis_conseil_selection_mot_cle' => '<b>Nhóm quan trọng</b>: đề nghị bạn nên chọn một từ then chốt trong nhóm này.',
 'avis_deplacement_rubrique' => 'LƯU Ý! Đề mục này chứa @contient_breves@ các tin ngắn @scb@: nếu bạn dời nó đi, xin đánh dấu vào ô này để xác nhận.',
 'avis_destinataire_obligatoire' => 'Phải chọn một người nhận trước khi gửi thư tín này đi.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Có Lỗi-không nối với SQL',
 'avis_erreur_version_archive' => '<b>Báo động! Hồ sơ @archive@ thuộc dạng SPIP khác với dạng mà bạn có.</b>
  Bạn sẽ gặp rất nhiều rắc rối: có thể database bị tiêu hủy, website bị trắc trở, v.v...
@@ -57,8 +55,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_annuler' => 'Cancel', # NEW
 'bouton_checkbox_envoi_message' => 'Có thể viết vài chữ ',
 'bouton_checkbox_indiquer_site' => 'Qúy vị phải ghi tên một trang Web',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'quản trị viên',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'tác giả',
 'bouton_checkbox_signature_unique_email' => 'Chỉ một chữ ký cho một địa chỉ email ',
 'bouton_checkbox_signature_unique_site' => 'Chỉ một chữ ký cho một địa chỉ Web',
 'bouton_demande_publication' => 'Đề nghị bài này cho ban biên tập',
@@ -203,8 +199,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_arret_discussion' => 'Không tham gia vào cuộc thảo luận này nữa',
 'icone_calendrier' => 'Lịch',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Thêm NHÓM từ mới  ',
-'icone_creation_mots_cles' => 'Thêm từ then chốt mới ',
 'icone_creer_auteur' => 'Thêm tên một tác giả mới và ghi vào bài này',
 'icone_creer_mot_cle' => 'Thêm một từ then chốt mới và ghi vào bài này',
 'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
@@ -216,10 +210,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Sửa NHÓM từ này',
 'icone_modifier_article' => 'Sửa bài này',
 'icone_modifier_message' => 'Sửa thư tín này',
-'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Sửa đề mục này',
 'icone_modifier_site' => 'Sửa liên kết này',
 'icone_publication' => 'Publication', # NEW
@@ -230,12 +222,10 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'xóa bỏ cookie',
-'icone_supprimer_groupe_mots' => 'Xóa NHÓM từ này ',
 'icone_supprimer_rubrique' => 'Xoá đề mục này',
 'icone_supprimer_signature' => 'Xoá chữ ký này',
 'icone_valider_signature' => 'Chấp thuận',
 'icone_voir_sites_references' => 'Xem những liên kết',
-'icone_voir_tous_mots_cles' => 'Xem những từ then chốt',
 'image_administrer_rubrique' => 'Bạn có thể quản trị đề mục này',
 'info_1_article' => '1 bài',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -276,7 +266,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_articles_02' => ' bài',
 'info_articles_2' => 'Bài',
 'info_articles_auteur' => 'Bài của tác giả này',
-'info_articles_lies_mot' => 'Những bài liên hệ đến từ then chốt này',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Những bài tìm thấy',
@@ -286,7 +275,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -300,7 +288,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
 'info_bloquer' => 'ngăn chận',
-'info_changer_nom_groupe' => 'Đổi tên của nhóm này:',
 'info_chapeau' => 'Dẫn nhập',
 'info_chapeau_2' => 'Dẫn nhập:',
 'info_chemin_acces_1' => ' Chọn lựa: <b>ngõ vào trong thư mục</b>',
@@ -329,18 +316,13 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_contact' => 'Liên lạc',
 'info_contenu_articles' => 'Nội dung bài',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Thêm bớt, sửa đổi, sắp xếp các từ then chốt của website',
 'info_creation_paragraphe' => '(Để bắt đầu đoạn văn mới, bạn chỉ cần chừa hàng trống)',
 'info_creation_rubrique' => 'Trước khi được phép viết một bài mới, bạn phải lập ra ít nhất một đề mục.',
 'info_creation_tables' => 'Bước thứ tư: <b>Tạo lập ra các bảng trong database</b>',
 'info_creer_base' => '<b>Tạo lập</b> ra một database mới:',
-'info_dans_groupe' => 'Trong nhóm:',
 'info_dans_rubrique' => 'Trong đề mục:',
 'info_date_publication_anterieure' => 'Ngày tháng của bài đã đăng:',
 'info_date_referencement' => 'NGÀY NỐI KẾT WEBSITE NÀY:',
-'info_delet_mots_cles' => 'Bạn yêu cầu xóa từ then chốt
-<b>@titre_mot@</b> (@type_mot@). Từ then chốt này có nối qua
-<b>@texte_lie@</b> bạn phải xác nhận quyết định này:',
 'info_derniere_etape' => 'Bước chót: <b>Hoàn tất!</b>',
 'info_derniere_syndication' => 'Xuất bản song hành chót của website này xảy ra vào ',
 'info_derniers_articles_publies' => 'Những bài phát hành mới nhất của bạn',
@@ -376,7 +358,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_generation_miniatures_images' => 'Hình mẫu xem trước (thumbnail)',
 'info_gerer_trad' => 'Quản trị phần nối dịch thuật?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Nhóm quan trọng',
 'info_hebergeur_desactiver_envoi_email' => 'Một số máy chủ không cho phép gửi email tự động từ server. Trong trường hợp này, những đặc điểm sau đây của SPIP không thể thiết lập được.',
 'info_hier' => 'hôm qua: ',
 'info_historique' => 'Sửa đổi:',
@@ -416,14 +397,11 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_mise_a_niveau_base_2' => '{{Cảnh báo!}}Bạn vừa thiết trí một ấn bản SPIP cũ hơn ấn bản thiết trí trước đây: database của bạn có thể gặp rủi ro mất mát và webiste không hoạt động đúng nữa.{{Tái thiết trí các hồ sơ SPIP.}} ',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Sửa đổi đề mục:',
 'info_modifier_titre' => 'Sửa đổi: @titre@',
 'info_mon_site_spip' => 'Website SPIP của tôi',
 'info_mot_sans_groupe' => '(Từ then chốt không thuộc một nhóm...)',
 'info_moteur_recherche' => 'Cơ phận tìm kiếm',
-'info_mots_cles' => 'Các từ then chốt',
-'info_mots_cles_association' => 'Các từ then chốt trong nhóm này có thể được dùng cho:',
 'info_moyenne' => 'trung bình: ',
 'info_multi_articles' => 'Cho phép dụng nhiều thứ tiếng trong những bài ?',
 'info_multi_cet_article' => 'Bài tiếng:',
@@ -467,7 +445,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_ortho_activer' => 'Mở lên cơ phận xét lỗi chính tả',
 'info_ortho_desactiver' => 'Tắt cơ phận xét lỗi chính tả',
 'info_ou' => 'hoặc... ',
-'info_oui_suppression_mot_cle' => 'Tôi muốn xóa luôn từ then chốt này.',
 'info_page_interdite' => 'Trang cấm vào',
 'info_par_nom' => 'by name', # NEW
 'info_par_nombre_article' => '(theo số lượng bài) ',
@@ -501,13 +478,11 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_question_accepter_visiteurs' => 'Nếu trang web cho phép khách ghi danh mà không cần phải vào vùng riêng, thì xin hãy mở lên những chọn lựa sau:',
 'info_question_gerer_statistiques' => 'Có muốn quản trị các con số thống kê?',
 'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
-'info_question_mots_cles' => 'Bạn có muốn dùng từ then chốt trong website? ',
 'info_question_proposer_site' => 'Ai có quyền đề nghị các website nối kết?',
 'info_question_utilisation_moteur_recherche' => 'Bạn có muốn dùng cơ phận tìm kiếm có sẵn của SPIP? (<i>Nếu tắt nó đi sẽ làm hệ thống chạy lẹ hơn</i>) ',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'Những người có quyền ấn định các từ then chốt này:',
 'info_racine_site' => 'Gốc của website',
 'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
 'info_recherche_auteur_a_affiner' => 'Quá nhiều kết quả cho "@cherche_auteur@"; Xin lọc lựa lại việc tìm kiếm.',
@@ -521,19 +496,16 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_redirection' => 'Chuyển hướng',
 'info_refuses' => 'Bài của bạn bị từ chối',
 'info_reglage_ldap' => 'Chọn lựa: <b>Điều chỉnh việc nhập LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Chuyển hướng.</b> Bài này nối đến trang: ',
 'info_reserve_admin' => 'Chỉ có quản trị viên mới có thể sửa đổi địa chỉ này.',
 'info_restreindre_rubrique' => 'Giới hạn việc quản trị trong đề mục:',
 'info_resultat_recherche' => 'Kết quả tìm kiếm:',
 'info_rubriques' => 'Đề mục',
 'info_rubriques_02' => 'đề mục',
-'info_rubriques_liees_mot' => 'Đề mục có liên hệ với từ then chốt này',
 'info_rubriques_trouvees' => 'Tìm thấy đề mục',
 'info_rubriques_trouvees_dans_texte' => 'Tìm thấy đề mục (trong văn tư)',
 'info_sans_titre' => 'Không tựa đề',
 'info_selection_chemin_acces' => '<b>Chọn</b> dưới đây đường vào trong thư mục:',
-'info_selection_un_seul_mot_cle' => 'Bạn có thể chọn <b>một từ then chốt duy nhất</b> mỗi lần trong nhóm này.',
 'info_signatures' => 'chữ ký',
 'info_site' => 'Website',
 'info_site_2' => 'website: ',
@@ -563,7 +535,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_statut_utilisateurs_1' => 'Trạng thái định sẵn của người dùng được đưa vào',
 'info_statut_utilisateurs_2' => 'Chọn trạng thái cho những người liệt kê trong thư mục LDAP khi họ nối vào lần đầu. Về sau, bạn có thể sửa đổi trị giá này cho từng tác giả theo từng trường hợp một.',
 'info_suivi_activite' => 'Thông tin cho Ban Biên Tập',
-'info_supprimer_mot' => 'xóa từ then chốt này',
 'info_surtitre' => 'Đầu đề:',
 'info_syndication_integrale_1' => 'Your site offers syndication files (see <a href="@url@">@titre@</a>).', # NEW
 'info_syndication_integrale_2' => 'Do you wish to send whole articles or only a summary of a few hundred characters?', # NEW
@@ -577,7 +548,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_texte_message' => 'Thân bài:',
 'info_texte_message_02' => 'Thân bài',
 'info_titre' => 'Tựa đề:',
-'info_titre_mot_cle' => 'Tên hay tựa của từ then chốt này',
 'info_total' => 'tổng cộng: ',
 'info_tous_articles_en_redaction' => 'Tất cả bài vở đang được soạn',
 'info_tous_articles_presents' => 'Tất cả bài vở đã phát hành trong đề mục này',
@@ -595,7 +565,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Sửa đổi/Soạn bài chung với nhau',
 'info_un_article' => 'một bài, ',
-'info_un_mot' => 'Mỗi lần một từ then chốt thôi',
 'info_un_site' => 'một website, ',
 'info_une_rubrique' => 'một đề mục, ',
 'info_une_rubrique_02' => '1 đề mục',
@@ -640,7 +609,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_activer_messages_avertissement' => 'Cho phép cảnh báo',
 'item_administrateur_2' => 'quản lý',
 'item_afficher_calendrier' => 'Hiện ra trong lịch',
-'item_ajout_mots_cles' => 'Cho phép thêm các từ then chốt vào diễn đàn',
 'item_autoriser_documents_joints' => 'Cho phép đính kèm tài liệu vào bài vở',
 'item_autoriser_documents_joints_rubriques' => 'Cho phép đính kèm tài liệu trong đề mục',
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
@@ -663,7 +631,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_accepter_inscriptions' => 'Không cho phép ghi danh',
 'item_non_activer_messages_avertissement' => 'Không cần cảnh báo',
 'item_non_afficher_calendrier' => 'Không hiện ra trong lịch',
-'item_non_ajout_mots_cles' => 'Không cho phép thêm các từ then chốt vào diễn đàn',
 'item_non_autoriser_documents_joints' => 'Không cho phép đính kèm tài liệu vào bài vở',
 'item_non_autoriser_documents_joints_rubriques' => 'Không cho phép đính kèm tài liệu trong đề mục',
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
@@ -675,18 +642,14 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_non_limiter_recherche' => 'Nới rộng việc tìm kiếm qua đến nội dung của các website nối kết',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Không đăng tải bài trước ngày được phép đăng.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Không dùng cấu hình cao cấp của nhóm từ then chốt',
 'item_non_utiliser_moteur_recherche' => 'Đừng dùng',
-'item_non_utiliser_mots_cles' => 'Không dùng từ then chốt',
 'item_non_utiliser_syndication' => 'Đừng dùng syndication tự động',
 'item_nouvel_auteur' => 'Tác giả mới',
 'item_nouvelle_rubrique' => 'Đề mục mới',
 'item_oui' => 'Dùng',
 'item_publier_articles' => 'Cứ đăng tải bài bất kể ngày ghi.',
 'item_reponse_article' => 'Hồi đáp bài ',
-'item_utiliser_config_groupe_mots_cles' => 'Dùng cấu hình cao cấp của nhóm từ then chốt',
 'item_utiliser_moteur_recherche' => 'Dùng cơ phận tìm kiếm',
-'item_utiliser_mots_cles' => 'Dùng từ then chốt',
 'item_utiliser_syndication' => 'Dùng syndication tự động',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -710,7 +673,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Thêm người nhận này',
 'lien_ajouter_auteur' => 'Thêm tác giả này',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Thêm một tham dự viên',
 'lien_email' => 'email',
 'lien_mise_a_jour_syndication' => 'Cập nhật bây giờ',
@@ -730,8 +692,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_voir_en_ligne' => 'XEM ONLINE :',
 'logo_article' => 'LOGO CỦA BÀI',
 'logo_auteur' => 'LOGO CỦA TÁC GIẢ',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO CỦA TỪ THEN CHỐT',
 'logo_rubrique' => 'LOGO CỦA ĐỀ MỤC',
 'logo_site' => 'LOGO CỦA WEBSITE NÀY',
 'logo_standard_rubrique' => 'LOGO CỦA ĐỀ MỤC',
@@ -876,7 +836,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_compresse_ou_non' => '(có thể trong dạng nén hoặc dạng thường) ',
 'texte_compte_element' => '@count@ món',
 'texte_compte_elements' => '@count@ món',
-'texte_config_groupe_mots_cles' => 'Bạn có muốn mở đặc điểm cấu hình cao cấp của nhóm từ then chốt, bằng cách, lấy thí dụ như một chữ đặc thù cho mỗi nhóm có thể được chọn, nhóm quan trọng...? ',
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Xem lại tài liệu cung cấp bởi máy chủ: nếu dùng SQL, máy chủ cho bạn mã số ra vào server SQL. ', # MODIF
 'texte_contenu_article' => '(Mô tả ngắn gọn nội dung của bài) ',
@@ -915,14 +874,11 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_modifier_article' => 'Sửa bài:',
 'texte_moteur_recherche_active' => '<b>Cơ phận tìm kiếm được chạy.</b> Dùng mệnh lệnh này nếu bạn muốn re-indexing cho lẹ (sau khi phục hồi các hồ sơ dự trữ chẳng hạn). Lưu ý là trong trường hợp bài được sửa đổi một cách bình thường (dùng giao diện SPIP) thì bài đó được tự động đánh chỉ số (index) lần nữa: do đó mệnh lệnh này chỉ hữu dụng trong trường hợp rất ư đặc biệt. ',
 'texte_moteur_recherche_non_active' => 'Cơ phận tìm kiếm đã bị tắt, không được phép chạy.',
-'texte_mots_cles' => 'Từ then chốt cho phép bạn lập mối liên hệ theo đề tài giữa các bài với nhau, bất kể chúng ở trong đề mục nào. Như thế việc di chuyển trong webiste phong phú hơn hoặc bạn dùng những đặc tính này để thay đổi bài vở trong khuôn mẫu.',
-'texte_mots_cles_dans_forum' => 'Bạn có muốn cho phép dùng các từ then chốt để khách chọn, trong các diễn đàn công cộng? (Cảnh báo: đặc tính này khá phức tạp để sử dụng cho đúng.)',
 'texte_multilinguisme' => 'Nếu bạn muốn quản trị các bài vỡ này trong nhiều ngôn ngữ, bạn có thể thêm vào bài/đề mục một mục lục chọn ngôn ngữ.',
 'texte_multilinguisme_trad' => 'Đồng thời, bạn có thể mở lên một hệ thống quản trị cho các bản dịch của một bài.',
 'texte_non_compresse' => '<i>Giản ra</i> (server của bạn không dùng đặc tính này)',
 'texte_non_fonction_referencement' => 'Bạn có thể chọn không dùng đặc điểm tự động này, và tự tay cho vào dữ kiện... ',
 'texte_nouveau_message' => 'Thư tín mới',
-'texte_nouveau_mot' => 'Từ then chốt mới',
 'texte_nouvelle_version_spip_1' => 'Bạn vừa thiết trí ấn bản mới của SPIP.',
 'texte_nouvelle_version_spip_2' => 'Ấn bản mới này cần cập nhật
  kỹ lưởng hơn bình thường.
@@ -1001,7 +957,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Cấu hình của website',
-'titre_config_groupe_mots_cles' => 'Cấu hình các nhóm từ then chốt',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Cấu hình của website',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1009,7 +964,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_connexion_ldap' => 'Tùy chọn: <b>Kết nối vào LDAP</b>',
 'titre_dernier_article_syndique' => 'Những bài vừa được liên kết',
 'titre_evolution_visite' => 'Thống Kê',
-'titre_gauche_mots_edit' => 'SỐ THỨ TỰ CỦA TỪ THEN CHỐT:',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'NGÔN NGỮ CỦA BÀI',
@@ -1017,10 +971,7 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_langue_trad_article' => 'NGÔN NGỮ VÀ DỊCH THUẬT CỦA BÀI',
 'titre_les_articles' => 'BÀI VỞ',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Những từ then chốt trong diễn đàn công cộng',
-'titre_mots_tous' => 'Từ then chốt',
 'titre_naviguer_dans_le_site' => 'Xem trang web...',
-'titre_nouveau_groupe' => 'Nhóm mới',
 'titre_nouvelle_rubrique' => 'Đề mục mới',
 'titre_numero_rubrique' => 'SỐ THỨ TỰ ĐỀ MỤC:',
 'titre_page_admin_effacer' => 'Bảo trì kỹ thuật: xóa database',
@@ -1038,7 +989,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_index' => 'Vùng riêng của bạn',
 'titre_page_message_edit' => 'Viết thư tín',
 'titre_page_messagerie' => 'Thư tín của bạn',
-'titre_page_mots_tous' => 'Từ then chốt',
 'titre_page_recherche' => 'Kết quả tìm kiếm @recherche@',
 'titre_page_sites_tous' => 'Trang nối kết',
 'titre_page_statistiques' => 'Thống kê theo từng đề mục',

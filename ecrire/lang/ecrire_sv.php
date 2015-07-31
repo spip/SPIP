@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Anslutning till LDAP-server misslyckades.',
 'avis_connexion_ldap_echec_2' => 'Återgå till den föregående sidan och kontrollera informationen du angivit.',
 'avis_connexion_ldap_echec_3' => 'Alternativt kan du välja att inte använda LDAP stöd för att importera användare.',
-'avis_conseil_selection_mot_cle' => '<b>Viktig grupp:</b> Det är verkligen rekomenderat att välja ett nyckelord ur den här gruppen.',
 'avis_deplacement_rubrique' => 'Varning! Den här avdelningen innehåller @contient_breves@ notiser@scb@: om du flyttar den, markera i kryssrutan för att bekräfta.',
 'avis_destinataire_obligatoire' => 'Du måste ange en mottagare innan du skickar meddelandet.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fel på SQL-förbindelsen',
 'avis_erreur_version_archive' => '<b>Varning! Filen @archive@ motsvarar en
  annan SPIP-version än den du instellerad</b>
@@ -60,8 +58,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_annuler' => 'Avbryt',
 'bouton_checkbox_envoi_message' => 'möjlighet att skicka ett meddelande',
 'bouton_checkbox_indiquer_site' => 'Du måste ange ett namn på en webbplats',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'Webbplats administratörer',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktörer',
 'bouton_checkbox_signature_unique_email' => 'endast en signatur per e-postadress',
 'bouton_checkbox_signature_unique_site' => 'endast en signatur per webbplats',
 'bouton_demande_publication' => 'Begär att den här artikeln ska publiceras',
@@ -206,8 +202,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_arret_discussion' => 'Avsluta diskussionen',
 'icone_calendrier' => 'Kalender',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Skapa en ny nyckleordsgrupp',
-'icone_creation_mots_cles' => 'Skapa ett nytt nyckelord',
 'icone_creer_auteur' => 'Skapa en ny redaktör och koppla honom (henne) till den här artikeln',
 'icone_creer_mot_cle' => 'Skapa ett nytt nyckelord och länka det till artikeln',
 'icone_creer_mot_cle_rubrique' => 'Skapa ett nytt nyckelord och koppla det till den här avdelningen',
@@ -219,10 +213,8 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Editera nyckelordsgruppen',
 'icone_modifier_article' => 'Editera artikeln',
 'icone_modifier_message' => 'Editera meddelandet',
-'icone_modifier_mot' => 'Editera detta nyckelord',
 'icone_modifier_rubrique' => 'Editera avdelningen',
 'icone_modifier_site' => 'Editera sajten',
 'icone_publication' => 'Publication', # NEW
@@ -233,12 +225,10 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Radera cookien',
-'icone_supprimer_groupe_mots' => 'Radera den här gruppen',
 'icone_supprimer_rubrique' => 'Radera den här avdelningen',
 'icone_supprimer_signature' => 'Radera den här signaturen',
 'icone_valider_signature' => 'Validera signaturen',
 'icone_voir_sites_references' => 'Visa länkade sajter',
-'icone_voir_tous_mots_cles' => 'Visa alla nyckelord',
 'image_administrer_rubrique' => 'Du kan hantera den här avdelningen',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -283,7 +273,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_articles_02' => 'artiklar',
 'info_articles_2' => 'Artiklar',
 'info_articles_auteur' => 'Den här redaktörens artiklar',
-'info_articles_lies_mot' => 'Artiklar kopplade till det här nyckelordet',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artiklar hittade',
@@ -293,7 +282,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -307,7 +295,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_barre_outils' => 'med dess verktygsfält?',
 'info_base_installee' => 'Databasen är skapad',
 'info_bloquer' => 'Block',
-'info_changer_nom_groupe' => 'Byt namn på den här gruppen:',
 'info_chapeau' => 'Ingress',
 'info_chapeau_2' => 'Introduktion:',
 'info_chemin_acces_1' => 'inställningar: <b>sökväg i katalogen</b>',
@@ -336,18 +323,13 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Innehåll i artiklarna',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Skapa och hantera sajtens nyckelord här.',
 'info_creation_paragraphe' => '(För att skapa stycken, räcker det att lämna tomma rader.)',
 'info_creation_rubrique' => 'Innan du kan skriva artiklar,<br /> måste du skapa åtminstone en avdelning.<br />',
 'info_creation_tables' => 'Skapar databastabeller',
 'info_creer_base' => '<b>Skapa</b> en ny databas:',
-'info_dans_groupe' => 'I gruppen:',
 'info_dans_rubrique' => 'I avdelningen:',
 'info_date_publication_anterieure' => 'Datum för tidigare publicering:',
 'info_date_referencement' => 'DATUM DÅ SAJTEN LÄNKADES:',
-'info_delet_mots_cles' => 'Du har försökt radera nyckelordet
-<b>@titre_mot@</b> (@type_mot@). Nyckleordet är länkat till
-<b>@texte_lie@</b> du måste bekräfta handlingen:',
 'info_derniere_etape' => 'Klart!',
 'info_derniere_syndication' => 'Den sista syndikeringen av den här sajten skedde den',
 'info_derniers_articles_publies' => 'Dina senaste publicerade artiklar',
@@ -391,7 +373,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_generation_miniatures_images' => 'Skapande av tumnagelbilder.',
 'info_gerer_trad' => 'Aktivera översättningslänkar?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Viktig grupp',
 'info_hebergeur_desactiver_envoi_email' => 'Vissa webhotell avaktiverar automatisk mejl
 på deras servrar. Om så är fallet kan följande
 funktioner hos SPIP inte användas.',
@@ -437,14 +418,11 @@ funktioner hos SPIP inte användas.',
   SPIP filerna.}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Editera detaljer för redaktören:',
-'info_modifier_mot' => 'Editera nyckelordet:',
 'info_modifier_rubrique' => 'Editera avdelningen:',
 'info_modifier_titre' => 'Editera: @titre@',
 'info_mon_site_spip' => 'Min SPIP-sajt',
 'info_mot_sans_groupe' => '(Nyckelord utan en grupp...)',
 'info_moteur_recherche' => 'Integrerad sökmotor',
-'info_mots_cles' => 'Nyckelord',
-'info_mots_cles_association' => 'Nyckelord i den här gruppen kan associeras med:',
 'info_moyenne' => 'genomsnitt:',
 'info_multi_articles' => 'Aktivera språkmenyen för artiklar?',
 'info_multi_cet_article' => 'Den här artikelns språk:',
@@ -489,7 +467,6 @@ funktioner hos SPIP inte användas.',
 'info_ortho_activer' => 'Aktivera stavningskontrollen.',
 'info_ortho_desactiver' => 'Avaktivera stavningskontrollen.',
 'info_ou' => 'eller...',
-'info_oui_suppression_mot_cle' => 'Jag vill radera det här nyckelordet permanent.',
 'info_page_interdite' => 'Förbjuden sida',
 'info_par_nom' => 'efter namn',
 'info_par_nombre_article' => 'efter antal artiklar',
@@ -532,14 +509,12 @@ funktioner hos SPIP inte användas.',
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
   impossible.', # MODIF
-'info_question_mots_cles' => 'Vill du använsda nyckelord i din sajt?',
 'info_question_proposer_site' => 'Vem kan föreslå länkar till sajter?',
 'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Visa skärmbilder av länkande sajter',
-'info_qui_attribue_mot_cle' => 'Nyckelord i den här gruppen kan tilldelas av:',
 'info_racine_site' => 'Sajtens bas',
 'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
 'info_recherche_auteur_a_affiner' => 'För många resultat för "@cherche_auteur@"; Var vänlig och avgränsa sökningen mer.',
@@ -553,19 +528,16 @@ funktioner hos SPIP inte användas.',
 'info_redirection' => 'Ompekning',
 'info_refuses' => 'Refuserade artiklar',
 'info_reglage_ldap' => 'inställningar: <b>anpassar LDAP import</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Ompekning.</b> Den här artikeln pekar om till:',
 'info_reserve_admin' => 'Enbart administratörer kan förändra adressen.',
 'info_restreindre_rubrique' => 'Begränsa administrationen till avdelningen:',
 'info_resultat_recherche' => 'Sökresultat:',
 'info_rubriques' => 'Avdelningar',
 'info_rubriques_02' => 'avdelningar',
-'info_rubriques_liees_mot' => 'Avdelningar förknippade med detta nyckelord',
 'info_rubriques_trouvees' => 'Hittade avdelningar',
 'info_rubriques_trouvees_dans_texte' => 'Avdelningar funna (i texten)',
 'info_sans_titre' => 'Utan titel',
 'info_selection_chemin_acces' => '<b>Välj</b> åtkomstväg i katalogen:',
-'info_selection_un_seul_mot_cle' => 'Du kan välja <b>endast ett nyckelord</b> samtidigt i den här gruppen.',
 'info_signatures' => 'underskrifter',
 'info_site' => 'Sajt',
 'info_site_2' => 'sajt:',
@@ -595,7 +567,6 @@ funktioner hos SPIP inte användas.',
 'info_statut_utilisateurs_1' => 'Startinställningar för importerade användare',
 'info_statut_utilisateurs_2' => 'Choisissez le statut qui est attribué aux personnes présentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la première fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.', # NEW
 'info_suivi_activite' => 'Följ upp aktiviteten på sajten',
-'info_supprimer_mot' => 'Radera nyckelordet',
 'info_surtitre' => 'Övertitel:',
 'info_syndication_integrale_1' => 'Din sajt publiceras RSS-filer för syndikering (Se <a href="@url@">@titre@</a>).',
 'info_syndication_integrale_2' => 'Vill du skicka hela artiklar eller bara en sammanfattning på ett par hundra tecken?',
@@ -609,7 +580,6 @@ funktioner hos SPIP inte användas.',
 'info_texte_message' => 'Texten i ditt meddelande:',
 'info_texte_message_02' => 'Texten i ditt meddelande',
 'info_titre' => 'Titel:',
-'info_titre_mot_cle' => 'Namen eller titel för det här nyckelordet',
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Alla artiklar under arbete',
 'info_tous_articles_presents' => 'Alla artiklar som publicerats i den här avdelningen',
@@ -627,7 +597,6 @@ med en färg som visar deras status:',
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Gemensamt arbete på artiklar',
 'info_un_article' => 'en artikel,',
-'info_un_mot' => 'Ett nyckelord åt gången',
 'info_un_site' => 'En sajt,',
 'info_une_rubrique' => 'en avdelning,',
 'info_une_rubrique_02' => '1 avdelning',
@@ -672,7 +641,6 @@ med en färg som visar deras status:',
 'item_activer_messages_avertissement' => 'Aktivera varningsmeddelanden',
 'item_administrateur_2' => 'administratör',
 'item_afficher_calendrier' => 'Visa i kalendern',
-'item_ajout_mots_cles' => 'Tillåt nya nyckelord till forumen',
 'item_autoriser_documents_joints' => 'Tillåt dokument bifogade till artiklarna',
 'item_autoriser_documents_joints_rubriques' => 'Tillåt dokument i avdelningarna',
 'item_autoriser_syndication_integrale' => 'Inkludera hela artiklar i syndikeringsfilerna',
@@ -695,7 +663,6 @@ med en färg som visar deras status:',
 'item_non_accepter_inscriptions' => 'Tillåt inte registreringar',
 'item_non_activer_messages_avertissement' => 'Inga varningsmeddelanden',
 'item_non_afficher_calendrier' => 'Visa inte i kalendern',
-'item_non_ajout_mots_cles' => 'Tillåt inte tillägg av nyckelord till forumen',
 'item_non_autoriser_documents_joints' => 'Tillåt inte dokument i artiklarna',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillåt inte dokument i avdelningarna',
 'item_non_autoriser_syndication_integrale' => 'Skicka bara en sammanfattning',
@@ -707,18 +674,14 @@ med en färg som visar deras status:',
 'item_non_limiter_recherche' => 'Utöka indexeringen till att omfatta innehåll på länkade sajter',
 'item_non_messagerie_agenda' => 'Avaktivera meddelandesystemet och kalendern',
 'item_non_publier_articles' => 'Publicera inte artiklar innan deras publiceringsdatum.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Använd inte avancerad konfiguration av nyckelord.',
 'item_non_utiliser_moteur_recherche' => 'Använd inte sökmotorn',
-'item_non_utiliser_mots_cles' => 'Använd inte nyckelord',
 'item_non_utiliser_syndication' => 'Använd inte automatisk syndikering',
 'item_nouvel_auteur' => 'Ny redaktör',
 'item_nouvelle_rubrique' => 'Ny avdelning',
 'item_oui' => 'Ja',
 'item_publier_articles' => 'Publicera artiklarna utan att ta hänsyn till publiceringsdatum.',
 'item_reponse_article' => 'Svara på artikeln',
-'item_utiliser_config_groupe_mots_cles' => 'Använd avancerad konfiguration för nyckelordsgrupper',
 'item_utiliser_moteur_recherche' => 'Använd sökmotorn',
-'item_utiliser_mots_cles' => 'Använd nyckelord',
 'item_utiliser_syndication' => 'Använd automatisk syndikering',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -742,7 +705,6 @@ med en färg som visar deras status:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Lägg till som mottagare',
 'lien_ajouter_auteur' => 'Lätt till redaktören',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Lägg till en deltagare',
 'lien_email' => 'e-post',
 'lien_mise_a_jour_syndication' => 'Uppdatera nu',
@@ -762,8 +724,6 @@ med en färg som visar deras status:',
 'lien_voir_en_ligne' => 'SE ONLINE:',
 'logo_article' => 'ARTIKELNS LOGOTYPE',
 'logo_auteur' => 'REDAKTÖRENS LOGOTYPE',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'NYCKELORDETS LOGOTYPE',
 'logo_rubrique' => 'Avdelningens logotype',
 'logo_site' => 'SAJTENS LOGOTYPE',
 'logo_standard_rubrique' => 'STANDARDLOGOTYPE FÖR AVDELNINGAR',
@@ -918,9 +878,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
 'texte_compte_element' => '@count@ objekt',
 'texte_compte_elements' => '@count@ element',
-'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avancée des mots-clés,
-   en indiquant par exemple qu\'on peut sélectionner un mot unique
-   par groupe, qu\'un groupe est important... ?', # NEW
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Consult the information provided by your service provider. It should contain the connection codes for the SQL server.', # MODIF
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)', # NEW
@@ -982,17 +939,11 @@ installera om SPIP för att skapa en ny databas och den första administratören
   det normala sättet (från gränssnittet i SPIP ) automatiskt
   indexeras igen: därför är kommandot bara användbart i speciella omständigheter.',
 'texte_moteur_recherche_non_active' => 'Sökfunktionen är inte aktiverad.',
-'texte_mots_cles' => 'Les mots-clés permettent de créer des liens thématiques entre vos articles
-		indépendamment de leur placement dans des rubriques. Vous pouvez ainsi
-		enrichir la navigation de votre site, voire utiliser ces propriétés
-		pour personnaliser la présentation des articles dans vos squelettes.', # NEW
-'texte_mots_cles_dans_forum' => 'Vill du tillåta besökare att välja nyckelord i de publika forumen? (Varning: Detta kan vara svårt att använda på rätt sätt.)',
 'texte_multilinguisme' => 'Om du vill hantera artiklar på flera språk, med en avancerad navigering, kan du lägga till en option för språkval i artiklar och avdelningar, i enlighet med sajtens struktur.',
 'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.',
 'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
 'texte_non_fonction_referencement' => 'Du kan välja att inte använda den automatiska funktionen och i stället mata in information om sajetn manuellt...',
 'texte_nouveau_message' => 'Nytt meddelande',
-'texte_nouveau_mot' => 'Nytt nyckelord',
 'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
 'texte_operation_echec' => 'Retournez à la page précédente, sélectionnez une autre base ou créez-en une nouvelle. Vérifiez les informations fournies par votre hébergeur.', # NEW
@@ -1097,7 +1048,6 @@ you can perform searches on sites and
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Sajtens konfiguration',
-'titre_config_groupe_mots_cles' => 'Konfigurera nyckelordsgrupper',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Sajtens konfiguration',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1105,7 +1055,6 @@ you can perform searches on sites and
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
 'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
 'titre_evolution_visite' => 'Besöksnivå',
-'titre_gauche_mots_edit' => 'NYCKELORDSNUMMER:',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ARTIKELNS SPRÅK',
@@ -1113,10 +1062,7 @@ you can perform searches on sites and
 'titre_langue_trad_article' => 'ARTIKESPRÅK OCH ÖVERSÄTTNINGAR',
 'titre_les_articles' => 'ARTIKLAR',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Nyckelord i de publika forumen',
-'titre_mots_tous' => 'Nyckelord',
 'titre_naviguer_dans_le_site' => 'Navigera i sajten...',
-'titre_nouveau_groupe' => 'Ny grupp',
 'titre_nouvelle_rubrique' => 'Ny avdelning',
 'titre_numero_rubrique' => 'AVDELNING NUMMER:',
 'titre_page_admin_effacer' => 'Tekniskt underhåll: raderar databasen',
@@ -1134,7 +1080,6 @@ you can perform searches on sites and
 'titre_page_index' => 'Din privata del',
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
-'titre_page_mots_tous' => 'Mots-clés', # NEW
 'titre_page_recherche' => 'Sökresultat @recherche@',
 'titre_page_sites_tous' => 'Refererade webbplatser',
 'titre_page_statistiques' => 'Statistik uppdelat på avdelning',

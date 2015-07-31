@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Koneksi ke server LDAP gagal.',
 'avis_connexion_ldap_echec_2' => 'Kembali ke halaman sebelumnya, dan verifikasi informasi yang anda telah berikan.',
 'avis_connexion_ldap_echec_3' => 'Alternatif lainnya, jangan gunakan dukungan LDAP untuk mengimpor pengguna.',
-'avis_conseil_selection_mot_cle' => '<b>Kelompok penting:</b> Sangat dianjurkan untuk memilih sebuah kata kunci untuk kelompok ini.',
 'avis_deplacement_rubrique' => 'Peringatan! Bagian ini mengandung @contient_breves@ berita@scb@: jika anda memindahkannya, silakan cek kotak ini untuk konfirmasi.',
 'avis_destinataire_obligatoire' => 'Anda harus memilih satu orang penerima sebelum mengirimkan pesan ini.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Kesalahan koneksi SQL',
 'avis_erreur_version_archive' => '<b>Peringatan! Berkas @archive@ berkaitan dengan
     sebuah versi SPIP yang lain dengan yang anda
@@ -62,8 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Batal',
 'bouton_checkbox_envoi_message' => 'kemungkinan untuk mengirimkan sebuah pesan',
 'bouton_checkbox_indiquer_site' => 'Anda harus mengisi nama untuk sebuah situs web',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administrator situs',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'editor',
 'bouton_checkbox_signature_unique_email' => 'hanya satu tanda tangan per alamat e-mail',
 'bouton_checkbox_signature_unique_site' => 'hanya satu tanda tangan per situs web',
 'bouton_demande_publication' => 'Permohonan publikasi artikel ini',
@@ -208,8 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'Berhenti berpartisipasi dalam diskusi ini',
 'icone_calendrier' => 'Kalender',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Buat sebuah kelompok kata kunci baru',
-'icone_creation_mots_cles' => 'Buat sebuah kata kunci baru',
 'icone_creer_auteur' => 'Buat seorang penulis baru dan asosiasikan dia dengan artikel ini',
 'icone_creer_mot_cle' => 'Buat sebuah kata kunci baru dan tautkan ia ke artikel ini',
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
@@ -221,10 +215,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Modifikasi kelompok kata kunci ini',
 'icone_modifier_article' => 'Modifikasi artikel ini',
 'icone_modifier_message' => 'Modifikasi pesan ini',
-'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modifikasi bagian ini',
 'icone_modifier_site' => 'Modifikasi situs ini',
 'icone_publication' => 'Publication', # NEW
@@ -235,12 +227,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Hapus cookie',
-'icone_supprimer_groupe_mots' => 'Hapus kelompok ini',
 'icone_supprimer_rubrique' => 'Hapus bagian ini',
 'icone_supprimer_signature' => 'Hapus tanda tangan ini',
 'icone_valider_signature' => 'Validasi tanda tangan ini',
 'icone_voir_sites_references' => 'Tampilkan situs-situs referensi',
-'icone_voir_tous_mots_cles' => 'Tampilkan semua kata kunci',
 'image_administrer_rubrique' => 'Anda dapat mengelola bagian ini',
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -285,7 +275,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'Artikel',
 'info_articles_2' => 'Artikel',
 'info_articles_auteur' => 'Artikel-artikel penulis ini',
-'info_articles_lies_mot' => 'Artikel-artikel yang terasosiasi dengan kata kunci ini',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Artikel ditemukan',
@@ -295,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -309,7 +297,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Struktur database anda telah diinstal.',
 'info_bloquer' => 'blok',
-'info_changer_nom_groupe' => 'Ganti nama kelompok ini:',
 'info_chapeau' => 'Dek',
 'info_chapeau_2' => 'Introduksi:',
 'info_chemin_acces_1' => 'Pilihan: <b>Path akses dalam direktori</b>',
@@ -338,18 +325,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Isi artikel',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Buat dan konfigurasi kata-kata kunci situs di sini',
 'info_creation_paragraphe' => '(Untuk membuat paragraf, anda cukup meninggalkan baris-baris kosong.)',
 'info_creation_rubrique' => 'Sebelum bisa menulis artikel,<BR> anda harus membuat paling tidak satu bagian.<BR>',
 'info_creation_tables' => 'Langkah keempat: <b>Pembuatan tabel-tabel database</b>',
 'info_creer_base' => '<b>Buat</b> sebuah database baru:',
-'info_dans_groupe' => 'Dalam kelompok:',
 'info_dans_rubrique' => 'Dalam bagian:',
 'info_date_publication_anterieure' => 'Tanggal publikasi sebelumnya:',
 'info_date_referencement' => 'TANGGAL REFERENSI SITUS INI:',
-'info_delet_mots_cles' => 'Anda memohon penghapusan kata kunci
-<b>@titre_mot@</b> (@type_mot@). Kata kunci ini ditautkan ke
-<b>@texte_lie@</b>Anda harus mengkonfirmasi keputusan ini:',
 'info_derniere_etape' => 'Langkah terakhir: <b>Selesai!',
 'info_derniere_syndication' => 'Sindikasi terakhir situs ini dijalankan pada',
 'info_derniers_articles_publies' => 'Artikel-artikel terakhir anda yang dipublikasi',
@@ -389,7 +371,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
 'info_gerer_trad' => 'Aktifkan tautan penerjemahan?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Kelompok penting',
 'info_hebergeur_desactiver_envoi_email' => 'Sejumlah hosting menonaktifkan pengiriman e-mail
   otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
   dapat diimplementasikan.',
@@ -435,14 +416,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   berkas-berkas SPIP}}',
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_mot' => 'Modifier le mot-clé :', # NEW
 'info_modifier_rubrique' => 'Modifikasi bagian:',
 'info_modifier_titre' => 'Modifikasi: @titre@',
 'info_mon_site_spip' => 'Situs SPIP saya',
 'info_mot_sans_groupe' => '(Kata-kata kunci tanpa kelompok...)',
 'info_moteur_recherche' => 'Mesin pencari terintegrasi',
-'info_mots_cles' => 'Kata-kata kunci',
-'info_mots_cles_association' => 'Kata-kata kunci dalam kelompok ini dapat diasosiasikan dengan:',
 'info_moyenne' => 'rata-rata:',
 'info_multi_articles' => 'Aktifkan menu bahasa untuk artikel?',
 'info_multi_cet_article' => 'Bahasa artikel ini:',
@@ -487,7 +465,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ortho_activer' => 'Aktifkan pemeriksa ejaan.',
 'info_ortho_desactiver' => 'Non aktifkan pemeriksa ejaan.',
 'info_ou' => 'atau...',
-'info_oui_suppression_mot_cle' => 'Saya ingin menghapus kata kunci ini selamanya.',
 'info_page_interdite' => 'Halaman terlarang',
 'info_par_nom' => 'berdasarkan nama',
 'info_par_nombre_article' => '(berdasarkan jumlah artikel)',
@@ -530,14 +507,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   hosting menonaktifkan pengiriman e-mail di server mereka:
   dalam hal ini ini registrasi terotomasi tidak dapat
   diimplementasikan.', # MODIF
-'info_question_mots_cles' => 'Apakah anda ingin menggunakan kata-kata kunci di situs anda?',
 'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
 	(Menonaktifkannya akan meningkatkan kinerja sistem.)',
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'Kata-kata kunci dalam kelompok ini dapat ditunjuk oleh:',
 'info_racine_site' => 'Root situs',
 'info_recharger_page' => 'Silakan buka kembali halaman ini beberapa saat lagi.',
 'info_recherche_auteur_a_affiner' => 'Terlalu banyaj hasil untuk "@cherche_auteur@"; silakan perbaiki pencarian anda.',
@@ -551,19 +526,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redirection' => 'Pengalihan tujuan',
 'info_refuses' => 'Artikel anda ditolak',
 'info_reglage_ldap' => 'Pilihan: <b>Menyesuaikan impor LDAP</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Pengalihan tujuan.</B> Artikel ini mengarah pada halaman:',
 'info_reserve_admin' => 'Hanya administrator yang dapat memodifikasi alamat ini.',
 'info_restreindre_rubrique' => 'Batasi manajemen ke bagian:',
 'info_resultat_recherche' => 'Hasil-hasil pencarian:',
 'info_rubriques' => 'Bagian',
 'info_rubriques_02' => 'bagian',
-'info_rubriques_liees_mot' => 'Bagian-bagian yang terasosiasi dengan kata kunci ini',
 'info_rubriques_trouvees' => 'Bagian ditemukan',
 'info_rubriques_trouvees_dans_texte' => 'Bagian ditemukan (dalam teks)',
 'info_sans_titre' => 'Tidak berjudul',
 'info_selection_chemin_acces' => '<b>Pilih</b> di bawah path akses dalam direktori:',
-'info_selection_un_seul_mot_cle' => 'Anda hanya dapat memilih <b>satu kata kunci</b> dalam kelompok ini.',
 'info_signatures' => 'tanda tangan',
 'info_site' => 'Situs',
 'info_site_2' => 'situs:',
@@ -593,7 +565,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_statut_utilisateurs_1' => 'Status standar para pengguna yang diimpor',
 'info_statut_utilisateurs_2' => 'Pilih status yang diberikan kepada orang-orang yang terdapat di direktori LDAP ketika terkoneksi pertama kali. Nanti anda dapat memodifikasi status tersebut untuk setiap penulis berdasarkan kasus per kasus.',
 'info_suivi_activite' => 'Tindak lanjut aktivitas editorial',
-'info_supprimer_mot' => 'hapus kata kunci ini',
 'info_surtitre' => 'Judul atas:',
 'info_syndication_integrale_1' => 'Situs anda menyediakan berkas-berkas sindikasi (lihat <a href="@url@">@titre@</a>).',
 'info_syndication_integrale_2' => 'Apakah anda ingin mengirim seluruh artikel atau ringkasannya saja yang terdiri dari beberapa ratus karakter?',
@@ -607,7 +578,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_texte_message' => 'Teks pesan anda:',
 'info_texte_message_02' => 'Teks pesan',
 'info_titre' => 'Judul:',
-'info_titre_mot_cle' => 'Nama atau judul kata kunci ini',
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Semua artikel dalam proses',
 'info_tous_articles_presents' => 'Semua artikel yang dipublikasi dalam bagian ini',
@@ -625,7 +595,6 @@ dalam warna yang menunjukkan statusnya:',
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Kolaborasi kerja pada artikel',
 'info_un_article' => 'sebuah artikel,',
-'info_un_mot' => 'Satu kata kunci pada waktu yang bersamaan',
 'info_un_site' => 'sebuah situs,',
 'info_une_rubrique' => 'sebuah bagian,',
 'info_une_rubrique_02' => '1 bagian',
@@ -670,7 +639,6 @@ dalam warna yang menunjukkan statusnya:',
 'item_activer_messages_avertissement' => 'Aktifkan pesan-pesan peringatan',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Tampilkan dalam kalender',
-'item_ajout_mots_cles' => 'Otorisasi penambahan kata-kata kunci ke forum',
 'item_autoriser_documents_joints' => 'Otorisasi dokumen yang terlampir di artikel',
 'item_autoriser_documents_joints_rubriques' => 'Otorisasi dokumen dalam bagian',
 'item_autoriser_syndication_integrale' => 'Ikut sertakan semua artikel dalam berkas sindikasi',
@@ -693,7 +661,6 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_accepter_inscriptions' => 'Jangan izinkan pendaftaran',
 'item_non_activer_messages_avertissement' => 'Tidak ada pesan-pesan kesalahan',
 'item_non_afficher_calendrier' => 'Jangan tampilkan dalam kalender',
-'item_non_ajout_mots_cles' => 'Jangan otorisasi penambahan kata-kata kunci ke forum',
 'item_non_autoriser_documents_joints' => 'Jangan otorisasi dokumen dalam artikel',
 'item_non_autoriser_documents_joints_rubriques' => 'Jangan otorisasi dokumen dalam bagian',
 'item_non_autoriser_syndication_integrale' => 'Kirim ringkasan saja',
@@ -705,18 +672,14 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_limiter_recherche' => 'Perluas pencarian isi dari situs-situs referensi',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Jangan publikasi artikel sebelum tanggal publikasinya.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Jangan gunakan konfigurasi lanjutan kelompok kata kunci',
 'item_non_utiliser_moteur_recherche' => 'Jangan gunakan sistem',
-'item_non_utiliser_mots_cles' => 'Jangan gunakan kata-kata kunci',
 'item_non_utiliser_syndication' => 'Jangan gunakan sindikasi terotomasi',
 'item_nouvel_auteur' => 'Penulis baru',
 'item_nouvelle_rubrique' => 'Bagian baru',
 'item_oui' => 'Ya',
 'item_publier_articles' => 'Publikasi artikel tanpa menghiraukan tanggal publikasinya.',
 'item_reponse_article' => 'Balasan pada artikel',
-'item_utiliser_config_groupe_mots_cles' => 'Gunakan konfigurasi lanjutan kelompok kata kunci',
 'item_utiliser_moteur_recherche' => 'Gunakan mesin pencari',
-'item_utiliser_mots_cles' => 'Gunakan kata-kata kunci',
 'item_utiliser_syndication' => 'Gunakan sindikasi terotomasi',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -740,7 +703,6 @@ dalam warna yang menunjukkan statusnya:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Tambahkan penerima ini',
 'lien_ajouter_auteur' => 'Tambahkan penulis ini',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Tambahkan seorang peserta',
 'lien_email' => 'e-mail',
 'lien_mise_a_jour_syndication' => 'Perbaharui sekarang',
@@ -760,8 +722,6 @@ dalam warna yang menunjukkan statusnya:',
 'lien_voir_en_ligne' => 'LIHAT ONLINE:',
 'logo_article' => 'LOGO ARTIKEL',
 'logo_auteur' => 'LOGO PENULIS',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO KATA KUNCI',
 'logo_rubrique' => 'LOGO BAGIAN',
 'logo_site' => 'LOGO SITUS INI',
 'logo_standard_rubrique' => 'LOGO STANDAR UNTUK BAGIAN',
@@ -915,9 +875,6 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_compresse_ou_non' => '(yang ini dapat dikompres atau tidak)',
 'texte_compte_element' => '@count@ elemen',
 'texte_compte_elements' => '@count@ elemen',
-'texte_config_groupe_mots_cles' => 'Apakah anda ingin menaktifkan konfigurasi lanjutan kelompok kata kunci,
-			dengan menspesifikasi, sebagai contoh sebuah kata unik per kelompok
-			dapat dipilih, yang menurut kelompok tersebut penting...?',
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Merujuk kepada informasi yang diberikan hosting anda kepada anda: mereka seharusnya memberikan anda, jika hosting anda mendukung SQL, kode koneksi ke server SQL.', # MODIF
 'texte_contenu_article' => '(Isi artikel dalam beberapa kata.)',
@@ -980,17 +937,11 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 		kembali secara otomatis: oleh karenanya perintah ini hanya berlaku dalam
 		situasi tertentu saja.',
 'texte_moteur_recherche_non_active' => 'Mesin pencari tidak diaktifkan.',
-'texte_mots_cles' => 'Kata-kata kunci mengizinkan anda untuk membuat tautan bertopik di antara artikel-artikel anda
-  tanpa memperhatikan lokasi bagiannya. Dengan cara itu anda dapat
-  memperkaya navigasi situs anda atau menggunakan properti ini
-  untuk mengkustomisasi artikel di templat anda.',
-'texte_mots_cles_dans_forum' => 'Apakah anda hendak mengizinkan penggunaan kata-kata kunci yang dapat dipilih oleh pengunjung, di forum situs umum? (Peringatan: opsi ini jarang dipakai sebagaimana mestinya.)',
 'texte_multilinguisme' => 'Jika anda ingin mengelola artikel-artikel dalam beberapa bahasa, dengan navigasi yang kompleks, anda dapat menambah sebuah menu pemilih bahasa di artikel dan/atau bagian, sesuai dengan organisasi dari situs anda.',
 'texte_multilinguisme_trad' => 'Selain itu, anda juga dapat mengaktifkan sistem manajemen tautan di antara terjemahan yang berbeda dari sebuah artikel.',
 'texte_non_compresse' => '<i>tidak dikompresi</i> (server anda tidak mendukung fitur ini)',
 'texte_non_fonction_referencement' => 'Anda dapat memilih untuk tidak menggunakan fitur terotomasi ini, dan masukkan elemen-elemen yang berkaitan dengan situs secara manual...',
 'texte_nouveau_message' => 'Pesan baru',
-'texte_nouveau_mot' => 'Kata kunci baru',
 'texte_nouvelle_version_spip_1' => 'Anda baru saja menginstal versi terbaru SPIP.',
 'texte_nouvelle_version_spip_2' => 'Versi terbaru ini membutuhkan pembaharuan secara menyeluruh daripada biasanya. Jika anda adalah webmaster situs ini, silakan hapus berkas @connect@ dan jalankan kembali instalasi untuk memperbaharui paramater-parameter koneksi database anda. <p>(Catatan: Jika anda lupa paramater-parameter koneksi database anda, silakan lihat berkas @connect@ sebelum menghapusnya!)</p>', # MODIF
 'texte_operation_echec' => 'Kembali ke halaman sebelumnya, pilih database lain atau buat yang baru. Verifikasi informasi yang diberikan oleh hosting anda.',
@@ -1084,7 +1035,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfigurasi situs',
-'titre_config_groupe_mots_cles' => 'Konfigurasi kelompok kata kunci',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Konfigurasi situs',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1092,7 +1042,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_connexion_ldap' => 'Opsi: <b>Koneksi LDAP anda</b>',
 'titre_dernier_article_syndique' => 'Artikel-artikel sindikasi terbaru',
 'titre_evolution_visite' => 'Tingkat kunjungan',
-'titre_gauche_mots_edit' => 'NOMOR KATA KUNCI:',
 'titre_groupe_mots' => 'KELOMPOK KATA KUNCI:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'BAHASA ARTIKEL',
@@ -1100,10 +1049,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_langue_trad_article' => 'BAHASA ARTIKEL DAN TERJEMAHAN',
 'titre_les_articles' => 'ARTIKEL',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Kata-kata kunci di forum situs umum',
-'titre_mots_tous' => 'Kata kunci',
 'titre_naviguer_dans_le_site' => 'Jelajah situs...',
-'titre_nouveau_groupe' => 'Kelompok baru',
 'titre_nouvelle_rubrique' => 'Bagian baru',
 'titre_numero_rubrique' => 'NOMOR BAGIAN:',
 'titre_page_admin_effacer' => 'Pemeliharaan teknis: mengahpus database',
@@ -1121,7 +1067,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_page_index' => 'Area pribadi anda',
 'titre_page_message_edit' => 'Tulis sebuah pesan',
 'titre_page_messagerie' => 'Sistem pesan anda',
-'titre_page_mots_tous' => 'Kata kunci',
 'titre_page_recherche' => 'Hasil pencarian @recherche@',
 'titre_page_sites_tous' => 'Situs-situs referensi',
 'titre_page_statistiques' => 'Statistik berdasarkan bagian',

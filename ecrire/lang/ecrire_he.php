@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'התקשרות לשרת אל.די.איי.פי נכשלה',
 'avis_connexion_ldap_echec_2' => 'חזור אל הדף הקודם וודא את האינפורמציה שסיפקת',
 'avis_connexion_ldap_echec_3' => 'לחלופין, אל תשתמש בתמיכת אל.די.איי.פי  לייבא משתמשים ',
-'avis_conseil_selection_mot_cle' => ' <b>Important group:</b> מאוד מומלץ לסמן מילת מפתח בקבוצה הזאת.',
 'avis_deplacement_rubrique' => ' אזהרה ! המדור הזה כולל @contient_breves@ brève@scb@ : אם הנך מזיז אותו, וודא שהנך מסמן את התיבה הזאת לאישור.',
 'avis_destinataire_obligatoire' => 'הנך חייב לבחור נמען לפני שליחת הודעה זאת ',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'שגיאת התחברות לאס.קיו.אל',
 'avis_erreur_version_archive' => 'חשוב! הקובץ @archive@ מתאים ל גרסה אחרת של SPIP מאשר זאת שאתה התקנת.</b> אתה עומד בפני קשיים גדולים: סיכון להריסת בסיס הנתונים שלך, חוסר תפקודים שונים של האתר וכו. לא ללחוץ על הביקוש היבוא. לפרטים נוספים, אנא פנה אל <a href="@spipnet@"> המסמכים של SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>Forbidden area</b><p>אס.פי.אי.פי כבר מותקן',
@@ -55,8 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'בטל',
 'bouton_checkbox_envoi_message' => 'אפשרות לשליחת הודעה',
 'bouton_checkbox_indiquer_site' => 'אתה חייב לרשום שם של אתר אינטרנט',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'מנהלי האתר',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'עורכים',
 'bouton_checkbox_signature_unique_email' => 'רק חתימה אחת לדוא"ל אחד',
 'bouton_checkbox_signature_unique_site' => 'רק חתימה אחת לאתר אינטרנט אחד',
 'bouton_demande_publication' => 'בקשה להופיע את המאמר',
@@ -201,8 +197,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'הפסק השתתפות בשיחה זו',
 'icone_calendrier' => 'לוח שנה',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'צור קבוצה חדשה של מילות מפתח',
-'icone_creation_mots_cles' => 'צור מילת מפתח חדשה',
 'icone_creer_auteur' => 'צור מחבר חדש ושתף אותו עם המאמר הזה',
 'icone_creer_mot_cle' => 'צור מילת מפתח חדשה וצור לה קישור עם המאמר הזה',
 'icone_creer_mot_cle_rubrique' => 'צור מילת מפתח חדשה וקשר אותה לרובריקה הזאת',
@@ -214,10 +208,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'שנה את קבוצת מילות המפתח האלו',
 'icone_modifier_article' => 'שנה את המאמר הזה',
 'icone_modifier_message' => 'שנה את ההודעה הזאת',
-'icone_modifier_mot' => 'שנה מילת מפתח זאת',
 'icone_modifier_rubrique' => 'תיקון מדור',
 'icone_modifier_site' => 'שנה את האתר הזה',
 'icone_publication' => 'Publication', # NEW
@@ -228,12 +220,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => '"מחק "קוקיי',
-'icone_supprimer_groupe_mots' => 'מחק קבוצה זו',
 'icone_supprimer_rubrique' => 'מחיקת המדור',
 'icone_supprimer_signature' => 'מחק חתימה זו',
 'icone_valider_signature' => 'תן תוקף לחתימה זו',
 'icone_voir_sites_references' => 'הצג אתרים עם מראי מקום',
-'icone_voir_tous_mots_cles' => 'הצג את כל מילות המפתח',
 'image_administrer_rubrique' => 'אתה יכול לנהל את המדור',
 'info_1_article' => 'מאמר 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -278,7 +268,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'מאמרים',
 'info_articles_2' => 'מאמרים',
 'info_articles_auteur' => 'המאמרים של המחבר הזה',
-'info_articles_lies_mot' => 'מאמרים מקושרים עם מילת המפתח הזו',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'מאמרים נמצאו',
@@ -288,7 +277,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -302,7 +290,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'עם סרגל הכלים שלי?',
 'info_base_installee' => '.המבנה של בסיס הנתונים שלך מותקן',
 'info_bloquer' => 'חסום',
-'info_changer_nom_groupe' => ':שנה את שם הקבוצה הזאת',
 'info_chapeau' => 'סיפון',
 'info_chapeau_2' => ':הקדמה',
 'info_chemin_acces_1' => 'אפשרויות: <b>Access path in directory</b>',
@@ -331,18 +318,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'התקשר',
 'info_contenu_articles' => 'תוכן המאמרים',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'צור ועצב את מילות המפתח של האתר פה',
 'info_creation_paragraphe' => '(בשביל ליצור פסקאות, אתה פשוט עוזב שורות ריקות.)',
 'info_creation_rubrique' => 'לפני שתוכל לכתוב מאמרים,<br />אתה חייב ליצור לפחות פדור אחד<br />',
 'info_creation_tables' => 'שלב רביעי: <b>Creation of the database tables</b>',
 'info_creer_base' => '<b>Create</b> בסיס נתונים חדש :',
-'info_dans_groupe' => ':בקבוצה',
 'info_dans_rubrique' => 'במדור:',
 'info_date_publication_anterieure' => 'תאריך של הוצאה לאור מוקדמת:',
 'info_date_referencement' => ':תאריך של הוספת מראי מקום באתר זה',
-'info_delet_mots_cles' => 'Vous avez	demandé à supprimer le mot-clé
-<b>@titre_mot@</b> (@type_mot@). Ce mot-clé étant lié à
-<b>@texte_lie@</b> vous devez confirmer cette décision :', # NEW
 'info_derniere_etape' => 'זהו הסתיים!',
 'info_derniere_syndication' => 'הסינדיקציה האחרונה של האתר הזה בוצעה',
 'info_derniers_articles_publies' => 'המאמרים המפורסמים המאוחרים ביותר שלך',
@@ -387,7 +369,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_generation_miniatures_images' => 'יוצר תמונות ממוזערות',
 'info_gerer_trad' => '?מנהל קישורי תרגום',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'קבוצה חשובה',
 'info_hebergeur_desactiver_envoi_email' => 'Certains hébergeurs désactivent l\'envoi automatique de
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalités suivantes
 		de SPIP ne fonctionneront pas.', # NEW
@@ -433,14 +414,11 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 		fichiers de SPIP.}}', # NEW
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
-'info_modifier_mot' => 'ערוך את מילה המפתח :',
 'info_modifier_rubrique' => 'תיקון המדור הזה:',
 'info_modifier_titre' => 'שנה: @titre@',
 'info_mon_site_spip' => 'אתר ה-אס.פי.איי.פי שלי',
 'info_mot_sans_groupe' => '(...מילות מפתח ללא קבוצה)',
 'info_moteur_recherche' => 'מנוע חיפוש משולב',
-'info_mots_cles' => 'מילות מפתח',
-'info_mots_cles_association' => ':מילות מפתח בקבוצה זו יכולות להתחבר עם',
 'info_moyenne' => ':ממוצע',
 'info_multi_articles' => '?לאפשר את תפריט השפות למאמרים',
 'info_multi_cet_article' => ':שפת המאמר הזה',
@@ -485,7 +463,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_ortho_activer' => 'Activer le vérificateur d\'orthographe', # NEW
 'info_ortho_desactiver' => 'Désactiver le vérificateur d\'orthographe', # NEW
 'info_ou' => '...או',
-'info_oui_suppression_mot_cle' => '.אני רוצה למחוק את מילת המפתח הזו לתמיד',
 'info_page_interdite' => 'דף אסור',
 'info_par_nom' => 'לפי שם',
 'info_par_nombre_article' => '(על ידי מספר מאמרים)',
@@ -528,14 +505,12 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
   hébergeurs désactivent l\'envoi de mails depuis leurs
   serveurs : dans ce cas, l\'inscription automatique est
   impossible.', # MODIF
-'info_question_mots_cles' => '?האם אתה רוצה להשתמש המילות מפתח באתרך',
 'info_question_proposer_site' => '?מי יכול להציע אתרים עם מראי מקום',
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
 'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
-'info_qui_attribue_mot_cle' => 'מילות המפתח בקבוצה זו יכולים להיות מוקצים על ידי:',
 'info_racine_site' => 'בסיס האתר',
 'info_recharger_page' => '.אנא טען מחדש דף זה בעוד כמה רגעים',
 'info_recherche_auteur_a_affiner' => 'יותר מדי תוצאות ל"@cherche_auteur@"; אנא עדן את החיפוש שלך.',
@@ -549,19 +524,16 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_redirection' => 'הכוונה מחודשת',
 'info_refuses' => 'המאמרים שלך נדחו',
 'info_reglage_ldap' => 'Options : <b>Réglage de l\'importation LDAP</b>', # NEW
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirection.</b> Cet article renvoie à la page:', # NEW
 'info_reserve_admin' => 'Seuls les administrateurs peuvent modifier cette adresse.', # NEW
 'info_restreindre_rubrique' => 'Restreindre la gestion à la rubrique :', # NEW
 'info_resultat_recherche' => 'Résultats de la recherche :', # NEW
 'info_rubriques' => 'נושאים',
 'info_rubriques_02' => 'rubriques', # NEW
-'info_rubriques_liees_mot' => 'Les rubriques liées à ce mot-clé', # NEW
 'info_rubriques_trouvees' => 'Rubriques trouvées', # NEW
 'info_rubriques_trouvees_dans_texte' => 'Rubriques trouvées (dans le texte)', # NEW
 'info_sans_titre' => 'בלי כותר',
 'info_selection_chemin_acces' => '<b>Sélectionnez</b> ci-après le chemin d\'accès dans l\'annuaire :', # NEW
-'info_selection_un_seul_mot_cle' => 'On ne peut sélectionner qu\'<b>un seul mot-clé à</b> la fois dans ce groupe.', # NEW
 'info_signatures' => 'signatures', # NEW
 'info_site' => 'אתר אינטרנט',
 'info_site_2' => 'אתר אינטרנט :',
@@ -591,7 +563,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_statut_utilisateurs_1' => 'Statut par défaut des utilisateurs importés', # NEW
 'info_statut_utilisateurs_2' => 'Choisissez le statut qui est attribué aux personnes présentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la première fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.', # NEW
 'info_suivi_activite' => 'Suivi de l\'activité éditoriale', # NEW
-'info_supprimer_mot' => 'למחוק את המילה',
 'info_surtitre' => 'הכותרת למעלה:',
 'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir « <a href="@url@">@titre@</a> »).', # NEW
 'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur intégralité, ou ne diffuser qu\'un résumé de quelques centaines de caractères ?', # NEW
@@ -605,7 +576,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_texte_message' => 'הטקסט של ההודעה שלך :',
 'info_texte_message_02' => 'Texte du message', # NEW
 'info_titre' => 'כותר :',
-'info_titre_mot_cle' => 'Nom ou titre du mot-clé', # NEW
 'info_total' => 'הכל :',
 'info_tous_articles_en_redaction' => 'Tous les articles en cours de rédaction', # NEW
 'info_tous_articles_presents' => 'Tous les articles publiés dans cette rubrique', # NEW
@@ -623,7 +593,6 @@ dans une couleur qui indique leur état :', # NEW
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travail collaboratif sur les articles', # NEW
 'info_un_article' => 'פריט,',
-'info_un_mot' => 'Un seul mot à la fois', # NEW
 'info_un_site' => 'האתר,',
 'info_une_rubrique' => 'קטגוריה,',
 'info_une_rubrique_02' => '1 rubrique', # NEW
@@ -668,7 +637,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement', # NEW
 'item_administrateur_2' => 'מנהל',
 'item_afficher_calendrier' => 'Afficher dans le calendrier', # NEW
-'item_ajout_mots_cles' => 'Autoriser l\'ajout de mots-clés aux forums', # NEW
 'item_autoriser_documents_joints' => 'Autoriser les documents joints aux articles', # NEW
 'item_autoriser_documents_joints_rubriques' => 'Autoriser les documents dans les rubriques', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
@@ -691,7 +659,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_accepter_inscriptions' => 'Ne pas accepter les inscriptions', # NEW
 'item_non_activer_messages_avertissement' => 'Pas de messages d\'avertissement', # NEW
 'item_non_afficher_calendrier' => 'Ne pas afficher dans le calendrier', # NEW
-'item_non_ajout_mots_cles' => 'Interdire l\'utilisation des mots-clés dans les forums', # NEW
 'item_non_autoriser_documents_joints' => 'Ne pas autoriser les documents dans les articles', # NEW
 'item_non_autoriser_documents_joints_rubriques' => 'Ne pas autoriser les documents dans les rubriques', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
@@ -703,18 +670,14 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_limiter_recherche' => 'Etendre la recherche au contenu des sites référencés', # NEW
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Ne pas publier les articles avant la date de publication fixée.', # NEW
-'item_non_utiliser_config_groupe_mots_cles' => 'Ne pas utiliser la configuration avancée des groupes de mots-clés', # NEW
 'item_non_utiliser_moteur_recherche' => 'Ne pas utiliser le moteur', # NEW
-'item_non_utiliser_mots_cles' => 'Ne pas utiliser les mots-clés', # NEW
 'item_non_utiliser_syndication' => 'Ne pas utiliser la syndication automatique', # NEW
 'item_nouvel_auteur' => 'מחבר חדש',
 'item_nouvelle_rubrique' => 'נושא חדש',
 'item_oui' => 'כן',
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.', # NEW
 'item_reponse_article' => 'Réponse à l\'article', # NEW
-'item_utiliser_config_groupe_mots_cles' => 'Utiliser la configuration avancée des groupes de mots-clés', # NEW
 'item_utiliser_moteur_recherche' => 'Utiliser le moteur de recherche', # NEW
-'item_utiliser_mots_cles' => 'Utiliser les mots-clés', # NEW
 'item_utiliser_syndication' => 'Utiliser la syndication automatique', # NEW
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -738,7 +701,6 @@ dans une couleur qui indique leur état :', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ajouter ce destinataire', # NEW
 'lien_ajouter_auteur' => 'Ajouter cet auteur', # NEW
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Ajouter un participant', # NEW
 'lien_email' => 'דואר אלקטרוני',
 'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
@@ -758,8 +720,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
 'logo_article' => 'למס מאמר',
 'logo_auteur' => 'למס מחבר',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'למס מילה מפתח',
 'logo_rubrique' => 'למס של כותרת',
 'logo_site' => 'למס של אתר זה',
 'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # NEW
@@ -914,9 +874,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_compresse_ou_non' => '(celui-ci peut être compressé ou non)', # NEW
 'texte_compte_element' => '@count@ אלמנט',
 'texte_compte_elements' => '@count@ אלמנטים',
-'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avancée des mots-clés,
-   en indiquant par exemple qu\'on peut sélectionner un mot unique
-   par groupe, qu\'un groupe est important... ?', # NEW
 'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
 'texte_connexion_mysql' => 'Consultez les informations fournies par votre hébergeur : vous devez y trouver, si votre hébergeur supporte SQL, les codes de connexion au serveur SQL.', # MODIF
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)', # NEW
@@ -979,17 +936,11 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 		façon normale (depuis l\'interface SPIP) sont automatiquement
 		réindexés : cette commande n\'est donc utile que de façon exceptionnelle.', # NEW
 'texte_moteur_recherche_non_active' => 'Le moteur de recherche n\'est pas activé.', # NEW
-'texte_mots_cles' => 'Les mots-clés permettent de créer des liens thématiques entre vos articles
-		indépendamment de leur placement dans des rubriques. Vous pouvez ainsi
-		enrichir la navigation de votre site, voire utiliser ces propriétés
-		pour personnaliser la présentation des articles dans vos squelettes.', # NEW
-'texte_mots_cles_dans_forum' => 'Souhaitez-vous permettre l\'utilisation de mots-clés sélectionnables par les visiteurs dans les forums du site public ? (Attention : cette option est relativement complexe à utiliser correctement.)', # NEW
 'texte_multilinguisme' => 'Si vous souhaitez gérer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de sélection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.', # NEW
 'texte_multilinguisme_trad' => 'Vous pouvez également activer un système de gestion de liens entre les différentes traductions d\'un article.', # NEW
 'texte_non_compresse' => '<i>non compressé</i> (votre serveur ne supportant pas cette fonctionnalité)', # NEW
 'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique, et indiquer vous-même les éléments concernant ce site...', # NEW
 'texte_nouveau_message' => 'הודעה חדשה',
-'texte_nouveau_mot' => 'מילה חדשה',
 'texte_nouvelle_version_spip_1' => 'Vous avez installé une nouvelle version de SPIP.', # NEW
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
 'texte_operation_echec' => 'Retournez à la page précédente, sélectionnez une autre base ou créez-en une nouvelle. Vérifiez les informations fournies par votre hébergeur.', # NEW
@@ -1095,7 +1046,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuration du site', # NEW
-'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-clés', # NEW
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuration du site', # NEW
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1103,7 +1053,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
 'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
-'titre_gauche_mots_edit' => 'MOT NUMÉRO :', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LANGUE DE L\'ARTICLE', # NEW
@@ -1111,10 +1060,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_langue_trad_article' => 'LANGUE ET TRADUCTIONS DE L\'ARTICLE', # NEW
 'titre_les_articles' => 'LES ARTICLES', # NEW
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
-'titre_mots_cles_dans_forum' => 'Mots-clés dans les forums du site public', # NEW
-'titre_mots_tous' => 'מילות מפתח',
 'titre_naviguer_dans_le_site' => 'Naviguer dans le site...', # NEW
-'titre_nouveau_groupe' => 'Nouveau groupe', # NEW
 'titre_nouvelle_rubrique' => 'Nouvelle rubrique', # NEW
 'titre_numero_rubrique' => 'RUBRIQUE NUMÉRO :', # NEW
 'titre_page_admin_effacer' => 'Maintenance technique : effacer la base', # NEW
@@ -1132,7 +1078,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_page_index' => 'Votre espace privé', # NEW
 'titre_page_message_edit' => 'Rédiger un message', # NEW
 'titre_page_messagerie' => 'Votre messagerie', # NEW
-'titre_page_mots_tous' => 'מילות מפתח',
 'titre_page_recherche' => 'Résultats de la recherche @recherche@', # NEW
 'titre_page_sites_tous' => 'Les sites référencés', # NEW
 'titre_page_statistiques' => 'Statistiques par rubriques', # NEW

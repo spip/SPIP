@@ -24,10 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_1' => 'Selhalo připojení k serveru LDAP.',
 'avis_connexion_ldap_echec_2' => 'Vraťte se na předchozí stránku a zkontrolujte zadané údaje.',
 'avis_connexion_ldap_echec_3' => 'Případně při importu uživatelů nepoužívejte podporu LDAP.',
-'avis_conseil_selection_mot_cle' => '<b>Důležitá skupina:</b> Doporučujeme, abyste k této skupině vybrali klíčové slovo.',
 'avis_deplacement_rubrique' => 'Upozornění! V této sekci je celkem @contient_breves@ vložených novinek: potvrďte jejich přesun zaškrtnutím tohoto políčka.',
 'avis_destinataire_obligatoire' => 'Před odesláním zprávy musíte vybrat adresáta.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. Êtes vous sûr de vouloir créer le même ?', # NEW
 'avis_erreur_connexion_mysql' => 'Chyba připojení SQL', # MODIF
 'avis_erreur_version_archive' => '<b>Varování! Soubor @archive@ odpovídá jiné verzi
     systému SPIP, než je ta, kterou máte
@@ -61,8 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_annuler' => 'Cancel', # NEW
 'bouton_checkbox_envoi_message' => 'možnost odeslat zprávu',
 'bouton_checkbox_indiquer_site' => 'Musíte zadat název webu',
-'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'správci webu',
-'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'redaktoři',
 'bouton_checkbox_signature_unique_email' => 'pouze jeden podpis na jednu elektronickou adresu',
 'bouton_checkbox_signature_unique_site' => 'pouze jeden podpis na jeden web',
 'bouton_demande_publication' => 'Požádat o zveřejnění článku',
@@ -208,8 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_arret_discussion' => 'Ukončit účast v diskusi',
 'icone_calendrier' => 'Kalendář',
 'icone_configuration' => 'Configuration', # NEW
-'icone_creation_groupe_mots' => 'Vytvořit novou skupinu slov',
-'icone_creation_mots_cles' => 'Vytvořit nové klíčové slovo',
 'icone_creer_auteur' => 'Vytvořit nového autora a spojit ho s tímto článkem',
 'icone_creer_mot_cle' => 'Zadejte nové klíčové slovo a spojte jej s tímto článkem',
 'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
@@ -221,10 +215,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
-'icone_modif_groupe_mots' => 'Změnit skupinu slov',
 'icone_modifier_article' => 'Změnit článek',
 'icone_modifier_message' => 'Změnit zprávu',
-'icone_modifier_mot' => 'Edit this keyword', # NEW
 'icone_modifier_rubrique' => 'Změnit sekci',
 'icone_modifier_site' => 'Změnit web',
 'icone_publication' => 'Publication', # NEW
@@ -235,12 +227,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Smazat cookie',
-'icone_supprimer_groupe_mots' => 'Odstranit skupinu',
 'icone_supprimer_rubrique' => 'Odstranit sekci',
 'icone_supprimer_signature' => 'Odstranit podpis',
 'icone_valider_signature' => 'Potvrdit podpis',
 'icone_voir_sites_references' => 'Zobrazit odkazovaný web',
-'icone_voir_tous_mots_cles' => 'Zobrazit všechna klíčová slova',
 'image_administrer_rubrique' => 'Máte právo správy této sekce',
 'info_1_article' => '1 článek',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
@@ -285,7 +275,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_02' => 'články',
 'info_articles_2' => 'Články',
 'info_articles_auteur' => 'Články tohoto autora',
-'info_articles_lies_mot' => 'Články spojené s tímto klíčovým slovem',
 'info_articles_miens' => 'Mes articles', # NEW
 'info_articles_tous' => 'Tous les articles', # NEW
 'info_articles_trouves' => 'Nalezené články',
@@ -295,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
@@ -309,7 +297,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_barre_outils' => 'with its toolbar?', # NEW
 'info_base_installee' => 'Struktura vaší databáze byla nainstalována.',
 'info_bloquer' => 'zablokovat',
-'info_changer_nom_groupe' => 'Změnit název skupiny:',
 'info_chapeau' => 'Stříška',
 'info_chapeau_2' => 'Stříška:',
 'info_chemin_acces_1' => 'Volitelný údaj: <b>Přístup k adresáři</b>', # MODIF
@@ -338,18 +325,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Obsah článků',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_mots_cles' => 'Vytvořte a nastavte klíčová slova webu',
 'info_creation_paragraphe' => '(Odstavce vytvoříte ponecháním volných řádků.)',
 'info_creation_rubrique' => 'Články můžete psát teprve,<br /> když vytvoříte alespoň jednu sekci.<br />', # MODIF
 'info_creation_tables' => 'Čtvrtý krok: <b>Vytvoření databázových tabulek</b>', # MODIF
 'info_creer_base' => '<b>Vytvořit</b> novou databázi:', # MODIF
-'info_dans_groupe' => 'Ve skupině:',
 'info_dans_rubrique' => 'V sekci:',
 'info_date_publication_anterieure' => 'Datum poslední úpravy:',
 'info_date_referencement' => 'Datum vytvoření odkazu na tento web:',
-'info_delet_mots_cles' => 'Zadali jste odstranění klíčového slova
-<b>@titre_mot@</b> (@type_mot@). Protože je spojeno s
-<b>@texte_lie@</b>, musíte to potvrdit:', # MODIF
 'info_derniere_etape' => 'Poslední krok: <b>byl dokončen!', # MODIF
 'info_derniere_syndication' => 'Poslední syndikace tohoto webu byla pro vedena ',
 'info_derniers_articles_publies' => 'Vaše poslední publikované články.',
@@ -393,7 +375,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_generation_miniatures_images' => 'Generování náhledů',
 'info_gerer_trad' => 'Správa odkazů na překlad?',
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
-'info_groupe_important' => 'Důležitá skupina',
 'info_hebergeur_desactiver_envoi_email' => 'Někteří poskytovatelé prostoru pro web (hostitelé)
   mají vypnuté automatické zasílání emailů ze svých serverů.
   Níže uvedené funkce systému SPIP pak nelze používat.',
@@ -439,14 +420,11 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   soubor systému SPIP.}}', # MODIF
 'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 'info_modifier_auteur' => 'Edit author details:', # NEW
-'info_modifier_mot' => 'Edit the keyword:', # NEW
 'info_modifier_rubrique' => 'Změnit sekci:',
 'info_modifier_titre' => 'Změnit: @titre@',
 'info_mon_site_spip' => 'Můj web SPIP',
 'info_mot_sans_groupe' => '(Slova mimo skupinu...)',
 'info_moteur_recherche' => 'Vestavěný vyhledávač',
-'info_mots_cles' => 'Klíčová slova',
-'info_mots_cles_association' => 'Klíčová slova této skupiny lze spojit:',
 'info_moyenne' => 'střed / průměr:',
 'info_multi_articles' => 'Zapnout u článků nabídku jazyků?',
 'info_multi_cet_article' => 'Jazyk článku:',
@@ -490,7 +468,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_ortho_activer' => 'Zapnout kontrolu překlepů',
 'info_ortho_desactiver' => 'Vypnout kontrolu překlepů',
 'info_ou' => 'nebo...',
-'info_oui_suppression_mot_cle' => 'určitě chci toto klíčové slovo odstanit.',
 'info_page_interdite' => 'Zakázaná stránka',
 'info_par_nom' => 'podle jména',
 'info_par_nombre_article' => 'podle počtu článků',
@@ -533,14 +510,12 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   Někteří poskytovatelé prostoru pro web odesílání emailů ze svých serverů
   vypínají. Automatické přihlášení je v takovém případě
   nemožné.', # MODIF
-'info_question_mots_cles' => 'Chcete na vašem webu používat klíčová slova?',
 'info_question_proposer_site' => 'Kdo může navrhovat odkazy na weby?',
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of the originating sites of the visits. ', # NEW
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
 'info_question_vignettes_referer_oui' => 'Show the screenshots of the originating sites', # NEW
-'info_qui_attribue_mot_cle' => 'Slova z této skupiny smí přiřazovat:',
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
 'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',
@@ -554,19 +529,16 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_redirection' => 'Přesměrování',
 'info_refuses' => 'Vaše odmítnuté články',
 'info_reglage_ldap' => 'Možnost: <b>Nastavení importu LDAP</b>', # MODIF
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Přesměrování.</b> Tento článek odkazuje na stránku:', # MODIF
 'info_reserve_admin' => 'Pouze administrátoři smějí modifikovat tuto adresu.',
 'info_restreindre_rubrique' => 'Omezit správu sekce :',
 'info_resultat_recherche' => 'Výsledky vyhledávání:',
 'info_rubriques' => 'Sekce',
 'info_rubriques_02' => 'sekce',
-'info_rubriques_liees_mot' => 'Sekce spojené s tímto klíčovým slovem',
 'info_rubriques_trouvees' => 'Nalezené sekce',
 'info_rubriques_trouvees_dans_texte' => 'Nalezené sekce(v textu)',
 'info_sans_titre' => 'Bez názvu',
 'info_selection_chemin_acces' => '<b>Zadejte</b> cestu k adresáři:',
-'info_selection_un_seul_mot_cle' => 'V této skupině může být najednou vybráno <b>pouze jedno klíčové slovo à</b>.',
 'info_signatures' => 'podpisy',
 'info_site' => 'Web',
 'info_site_2' => 'web:',
@@ -596,7 +568,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_statut_utilisateurs_1' => 'Standardní statut importovaných uživatelů',
 'info_statut_utilisateurs_2' => 'Zadejte statut, který mají osoby uvedené v adresáři LDAP, když se poprvé připojí. Tuto hodnotu můžete u každého jednotlivého autora následně změnit.',
 'info_suivi_activite' => 'Sledování redaktorské činnosti',
-'info_supprimer_mot' => 'odstranit slovo',
 'info_surtitre' => 'Nadřízený nadpis:',
 'info_syndication_integrale_1' => 'V&aacute;&#353; web nab&iacute;z&iacute; soubory pro syndikaci (viz &#147;<a href="@url@">@titre@</a>”).',
 'info_syndication_integrale_2' => 'Chcete poslat celé články, nebo jen prvních pár set znaků jako shrnutí?',
@@ -610,7 +581,6 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_texte_message' => 'Text zprávy:',
 'info_texte_message_02' => 'Text zprávy',
 'info_titre' => 'Nadpis:',
-'info_titre_mot_cle' => 'Název klíčového slova',
 'info_total' => 'celkem:',
 'info_tous_articles_en_redaction' => 'Všechny rozpracované články',
 'info_tous_articles_presents' => 'Všechny články publikované v této rubrice.',
@@ -628,7 +598,6 @@ ukazuje jejich stav:',
 'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Spolupráce na článku',
 'info_un_article' => 'článek, ',
-'info_un_mot' => 'Najednou pouze jedno slovo',
 'info_un_site' => 'jeden web, ',
 'info_une_rubrique' => 'jedna sekce, ',
 'info_une_rubrique_02' => '1 sekce',
@@ -673,7 +642,6 @@ ukazuje jejich stav:',
 'item_activer_messages_avertissement' => 'Zapnout upozornění',
 'item_administrateur_2' => 'správce',
 'item_afficher_calendrier' => 'Zobrazit v kalendáři',
-'item_ajout_mots_cles' => 'Povolit přidání klíčového slova k diskusní skupině',
 'item_autoriser_documents_joints' => 'Povolit dokumenty přiložené k článku',
 'item_autoriser_documents_joints_rubriques' => 'Povolit dokumenty v sekcích',
 'item_autoriser_syndication_integrale' => 'Vložit kompletní články do syndikačních souborů',
@@ -696,7 +664,6 @@ ukazuje jejich stav:',
 'item_non_accepter_inscriptions' => 'Odmítnout přihlášky',
 'item_non_activer_messages_avertissement' => 'Bez upozornění',
 'item_non_afficher_calendrier' => 'Nezobrazovat v kalendáři',
-'item_non_ajout_mots_cles' => 'Zakázat používání klíčových slov v diskusních skupinách',
 'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v článcích',
 'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekcích',
 'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnutí',
@@ -708,18 +675,14 @@ ukazuje jejich stav:',
 'item_non_limiter_recherche' => 'Rozšířit hledání na obsah webů, na něž vedou odkazy',
 'item_non_messagerie_agenda' => 'Deactivate the messaging system and the calendar', # NEW
 'item_non_publier_articles' => 'Nezveřejňovat články před stanoveným datem.',
-'item_non_utiliser_config_groupe_mots_cles' => 'Nepoužívat rozšířené nastavení klíčových slov',
 'item_non_utiliser_moteur_recherche' => 'Nepoužívat vyhledávač',
-'item_non_utiliser_mots_cles' => 'Nepoužívat klíčová slova',
 'item_non_utiliser_syndication' => 'Nepoužívat automatickou syndikaci',
 'item_nouvel_auteur' => 'Nový autor',
 'item_nouvelle_rubrique' => 'Nová sekce',
 'item_oui' => 'Ano',
 'item_publier_articles' => 'Zveřejnit články bez ohledu na datum.',
 'item_reponse_article' => 'Odpověď na článek',
-'item_utiliser_config_groupe_mots_cles' => 'Používat rozšířené nastavení klíčových slov',
 'item_utiliser_moteur_recherche' => 'Používat vyhledávač',
-'item_utiliser_mots_cles' => 'Používat klíčová slova',
 'item_utiliser_syndication' => 'Používat automatickou syndikaci',
 'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
 'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
@@ -743,7 +706,6 @@ ukazuje jejich stav:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Přidat příjemce',
 'lien_ajouter_auteur' => 'Přidat autora',
-'lien_ajouter_mot' => 'Ajouter ce mot-clé', # NEW
 'lien_ajouter_participant' => 'Přidat účastníka',
 'lien_email' => 'email',
 'lien_mise_a_jour_syndication' => 'Aktualizovat',
@@ -763,8 +725,6 @@ ukazuje jejich stav:',
 'lien_voir_en_ligne' => 'ZOBRAZIT ONLINE:',
 'logo_article' => 'LOGO ČLÁNKU',
 'logo_auteur' => 'LOGO AUTORA',
-'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
-'logo_mot_cle' => 'LOGO KLÍČOVÉHO SLOVA',
 'logo_rubrique' => 'LOGO SEKCE',
 'logo_site' => 'LOGO WEBU',
 'logo_standard_rubrique' => 'STANDARDNÍ LOGO SEKCE',
@@ -919,9 +879,6 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
 'texte_compresse_ou_non' => '(může ale nemusí být komprimováno)',
 'texte_compte_element' => '@count@ prvek',
 'texte_compte_elements' => '@count@ prvky',
-'texte_config_groupe_mots_cles' => 'Chcete zapnout rozšířené nastavení klíčových slov,
-   např. tím, že umožníte výběr jediného slova ve skupině,
-   případně zobrazení toho, že skupina je důležitá... ?', # MODIF
 'texte_conflit_edition_correction' => 'Please check check below the differences between the two versions. You can thus copy your changes and re-begin.', # NEW
 'texte_connexion_mysql' => 'Zkontrolujte informace od vašeho poskytovatele webového prostoru: mělo by tam být uvedeno, zda podporuje databázi SQL a přístupové kódy pro připojení k serveru SQL.', # MODIF
 'texte_contenu_article' => '(Obsah článku v několika slovech.)',
@@ -978,17 +935,11 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
   (pomocí rozhraní systému SPIP) jsou reindexovány automaticky:
   Příkaz je tedy vhodné používat pouze výjimečně.',
 'texte_moteur_recherche_non_active' => 'Vyhledávač je vypnut.',
-'texte_mots_cles' => 'Klíčová slova umožňují vytvářet tematické odkazy mezi články,
-  a to nezávisle na jejich umístění v rámci jednotlivých sekcí.
-  Můžete tak obohatit způsob procházení vaším webem, resp. použít tyto možnosti
-  k vlastnímu způsobu zobrazení článků v rámci šablon.',
-'texte_mots_cles_dans_forum' => 'Chcete v rámci diskusních skupin veřejného webu povolit používání klíčových slov, jež mohou volit návštěvníci? (Pozor! Správné používání této možnosti je dost komplikované.)', # MODIF
 'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.',
 'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.',
 'texte_non_compresse' => '<i>nekomprimováno</i> (váš server tuto funkci nepodporuje)',
 'texte_non_fonction_referencement' => 'Tuto automatickou funkci nemusíte použít a parametry webu můžete zadat sami...',
 'texte_nouveau_message' => 'Nová zpráva',
-'texte_nouveau_mot' => 'Nové slovo',
 'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi systému SPIP.',
 'texte_nouvelle_version_spip_2' => 'Tato verze vyžaduje rozsáhlejší aktualizaci než je obvyklé. Jste-li správcem tohoto webu, odstraňte soubor @connect@ a spusťte instalaci. Tím dojde k aktualizaci parametrů pro připojení k databázi.<p> (Pozn.: Pokud jste parametry pro připojení zapomněli, podívejte se nejprve do souboru @connect@, a teprve poté jej odstraňte...)</p>', # MODIF
 'texte_operation_echec' => 'Vraťte se na předchozí stránku a zvolte jinou databázi nebo vytvořte novou. Zkontrolujte informace od svého poskytovatele prostoru pro web.',
@@ -1086,7 +1037,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_config_contenu_prive' => 'In the editing area', # NEW
 'titre_config_contenu_public' => 'On the public site', # NEW
 'titre_config_fonctions' => 'Nastavení webu',
-'titre_config_groupe_mots_cles' => 'Nastavení skupin klíčových slov',
 'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Nastavení webu',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
@@ -1094,7 +1044,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_connexion_ldap' => 'Možnost: <b>Vaše připojení LDAP</b>',
 'titre_dernier_article_syndique' => 'Poslední syndikované články',
 'titre_evolution_visite' => 'Vývoj návštěvnosti',
-'titre_gauche_mots_edit' => 'ČÍSLO SLOVA:',
 'titre_groupe_mots' => 'SKUPINA SLOV:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'JAZYK ČLÁNKU',
@@ -1102,10 +1051,7 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_langue_trad_article' => 'JAZYK ČLÁNKU A JEHO PŘEKLADŮ',
 'titre_les_articles' => 'ČLÁNKY',
 'titre_messagerie_agenda' => 'Messaging system and calendar', # NEW
-'titre_mots_cles_dans_forum' => 'Klíčová slova diskusních skupin veřejného webu',
-'titre_mots_tous' => 'Klíčová slova',
 'titre_naviguer_dans_le_site' => 'Procházet webem...',
-'titre_nouveau_groupe' => 'Nová skupina',
 'titre_nouvelle_rubrique' => 'Nová sekce',
 'titre_numero_rubrique' => 'SEKCE ČÍSLO:',
 'titre_page_admin_effacer' => 'Technická údržba: odstranění databáze',
@@ -1123,7 +1069,6 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'titre_page_index' => 'Váš privátní prostor',
 'titre_page_message_edit' => 'Upravit zprávu',
 'titre_page_messagerie' => 'Váš systém zpráv',
-'titre_page_mots_tous' => 'Klíčová slova',
 'titre_page_recherche' => 'Výsledky vyhledávání @recherche@',
 'titre_page_sites_tous' => 'Odkazované weby',
 'titre_page_statistiques' => 'Statistiky podle sekcí',
