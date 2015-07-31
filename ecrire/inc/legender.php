@@ -75,7 +75,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 
 	$corps =
 	  (!$contenu ? '' :
-	   "<div class='verdana1' style='text-align: center;'>$contenu</div>") .
+	   "<br /><div class='verdana1' style='text-align: center;'>$contenu</div>") .
 	  "<b>$label</b><br />\n" .
 
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
@@ -105,27 +105,15 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre)
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
 	}
 
-	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre");
+	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+	.  $vignette
+	. "\n\n\n\n"
+	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
-	$corps .=  $vignette . "\n\n\n\n"
-	  .  icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
-
-	$bloc = "legender-aff-$id_document";
-
-	$corps = "<div style='text-align:center;height:1%'>"
-		. "<div style='float:".$GLOBALS['spip_lang_left']."'>"
-		. ($flag_deplie ?
-			bouton_block_visible($bloc) : bouton_block_invisible($bloc))
-		. "</div>\n"
-		. $entete
-		. "</div>\n"
-		. ($flag_deplie ?
-			debut_block_visible($bloc) : debut_block_invisible($bloc))
-		. $corps
-		. fin_block();
+	$corps = block_parfois_visible("legender-aff-$id_document", $entete, $corps, "text-align:center;", $flag_deplie);
 
 	return ($flag_deplie === 'ajax') ? $corps :
-	   "<div id='legender-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] ."; padding: 5px; margin-top: 3px; background-color: white'>" .
+	   "<div id='legender-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] .";  padding: 5px; margin: 3px; background-color: white;'>" .
 	   $corps .
 	  '</div>';
 }
