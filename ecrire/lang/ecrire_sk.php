@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_et_associer_une_rubrique' => 'Vytvoriť a priradiť rubriku',
 
 	// D
-	'date_mot_heures' => '.',
+	'date_mot_heures' => 'hodín/hodiny',
 
 	// E
 	'ecran_securite' => '+ bezpečnostná obrazovka @version@',

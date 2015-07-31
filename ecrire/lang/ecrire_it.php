@@ -11,18 +11,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Attiva l\'estensione',
 	'affichage' => 'Visualizzazione',
 	'aide_non_disponible' => 'Questa parte della guida in linea non è ancora disponibile in italiano.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Annullare la ricerca',
 	'auteur' => 'Autore:',
 	'avis_acces_interdit' => 'Accesso vietato.',
 	'avis_article_modifie' => 'Attenzione, @nom_auteur_modif@ ha lavorato su quest\'articolo @date_diff@ minuti fa',
 	'avis_aucun_resultat' => 'Nessun risultato.',
-	'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+	'avis_base_inaccessible' => 'Impossibile connettersi al database @base@.',
 	'avis_chemin_invalide_1' => 'il percorso che hai scelto',
 	'avis_chemin_invalide_2' => 'non sembra valido. Torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_1' => 'Il collegamento alla base di dati  è fallito.',
 	'avis_connexion_echec_2' => 'torna alla pagina precedente e verifica le informazioni fornite.',
 	'avis_connexion_echec_3' => '<b>N.B.</b> Su molti server si deve <b>chiedere</b> l\'attivazione dell\'accesso alla base di dati prima di poterlo utilizzare. Se è impossibile collegarsi, verificare che questo passo sia stato fatto.',
-	'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
+	'avis_connexion_erreur_nom_base' => 'Il nome del database può contenere solo lettere, numeri e tratti.',
 	'avis_connexion_ldap_echec_1' => 'La connessione al server LDAP è fallita.',
 	'avis_connexion_ldap_echec_2' => 'Torna alla pagina precedente e verifica le informazioni fornite. ',
 	'avis_connexion_ldap_echec_3' => 'In alternativa, non utilizzare il supporto LDAP per importare utenti.',
@@ -67,7 +67,7 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 	'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',
 	'bouton_envoyer_message' => 'Messaggio definitivo: Invia',
 	'bouton_fermer' => 'Chiudi',
-	'bouton_mettre_a_jour_base' => 'Mettre à jour la base de données', # NEW
+	'bouton_mettre_a_jour_base' => 'Aggiorna il database',
 	'bouton_modifier' => 'Modifica',
 	'bouton_pense_bete' => 'PROMEMORIA AD USO PERSONALE',
 	'bouton_radio_activer_messagerie' => 'Attiva la messaggistica interna',
@@ -113,33 +113,33 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 	'config_titre_base_sup_choix' => 'Scegliere un database supplementare',
 	'connexion_ldap' => 'Connessione:',
 	'copier_en_local' => 'Copia in locale',
-	'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
-	'creer_et_associer_une_rubrique' => 'Créer et associer une rubrique', # NEW
+	'creer_et_associer_un_auteur' => 'Crea e associa un\'autore',
+	'creer_et_associer_une_rubrique' => 'Crea e collega una rubrica',
 
 	// D
 	'date_mot_heures' => 'ore',
 
 	// E
-	'ecran_securite' => ' + écran de sécurité @version@', # NEW
+	'ecran_securite' => ' + sicurezza dello schermo @version@',
 	'email' => 'email',
 	'email_2' => 'email:',
 	'en_savoir_plus' => 'Per saperne di più',
 	'entree_adresse_annuaire' => 'Indirizzo della rubrica',
 	'entree_adresse_email' => 'Il tuo indirizzo email',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
+	'entree_adresse_email_2' => 'Indirizzo e-mail',
 	'entree_base_donnee_1' => 'Indirizzo del database',
 	'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non è necessario specificarlo.)',
 	'entree_biographie' => 'La tua biografia in breve.',
 	'entree_chemin_acces' => '<b>Inserire</b> il percorso d\'accesso:',
 	'entree_cle_pgp' => 'Chiave PGP',
-	'entree_cle_pgp_2' => 'Clé PGP', # NEW
+	'entree_cle_pgp_2' => 'Chiave PGP',
 	'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
 	'entree_identifiants_connexion' => 'Identificativo di connessione...',
-	'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
+	'entree_identifiants_connexion_2' => 'Indentificativo di connessione',
 	'entree_informations_connexion_ldap' => 'Inserisci in questo form gli estremi per la connessione alla tua rubrica LDAP.
 Se non conosci queste informazioni, richiedile all\'amministratore del sistema o della rete.',
 	'entree_infos_perso' => 'Chi sei?',
-	'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
+	'entree_infos_perso_2' => 'Chi è l\'autore?',
 	'entree_interieur_rubrique' => 'All\'interno della rubrica:',
 	'entree_liens_sites' => '<b>Link ipertestuale</b> (riferimento, sito da visitare...)',
 	'entree_login' => 'Login',
@@ -152,18 +152,18 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 	'entree_nom_fichier' => 'Inserire il nome del file @texte_compresse@:',
 	'entree_nom_pseudo' => 'Nome o pseudonimo',
 	'entree_nom_pseudo_1' => '(Nome o pseudonimo)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+	'entree_nom_pseudo_2' => 'Nome o alias',
 	'entree_nom_site' => 'Nome del tuo sito',
-	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
+	'entree_nom_site_2' => 'Nome del sito dell\'autore',
 	'entree_nouveau_passe' => 'Nuova password',
 	'entree_passe_ldap' => 'Password',
 	'entree_port_annuaire' => 'Il numero di porta della rubrica',
 	'entree_signature' => 'Firma',
 	'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 	'entree_url' => 'Indirizzo (URL) del sito',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
-	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
+	'entree_url_2' => 'Indirizzo del sito',
+	'erreur_connect_deja_existant' => 'Esista già un server con quel nome',
+	'erreur_nom_connect_incorrect' => 'Nome del server non consentito',
 	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.',
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
@@ -174,7 +174,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 	'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
 	// H
-	'htaccess_a_simuler' => 'Attenzione: la configurazione del tuo HTTP server ignora il file @htaccess@. Per garantire un buon livello di sicurezza devi modificare la configurazione del server per questa impostazione, oppure devi assicurarti che la costante @constantes@ (che potrebbe essere definita nel file mes_options.php) sia valorizzata con una valore di directory al di fuori di @document_root@.', # MODIF
+	'htaccess_a_simuler' => 'Attenzione: la configurazione del tuo HTTP server ignora il file @htaccess@. Per garantire un buon livello di sicurezza devi modificare la configurazione del server per questa impostazione, oppure devi assicurarti che la costante @constantes@ (definibile nel file mes_options.php) sia valorizzata con una perocorso di directory posta al di fuori di @document_root@.',
 	'htaccess_inoperant' => 'htaccess non attivo',
 
 	// I
@@ -224,8 +224,8 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 	'icone_supprimer_signature' => 'Cancella l\'adesione',
 	'icone_valider_signature' => 'Conferma l\'adesione',
 	'image_administrer_rubrique' => 'Puoi amministrare questa rubrica',
-	'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
-	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
+	'impossible_modifier_login_auteur' => 'Impossibile modificare le credenziali d\'accesso',
+	'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # Impossibile modificare la password
 	'info_1_article' => '1 articolo',
 	'info_1_article_syndique' => '1 articolo in syndication',
 	'info_1_auteur' => '1 autore',
@@ -238,8 +238,8 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
 	'info_admin_etre_webmestre' => 'Concedimi i privilegi di webmaster',
 	'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
-	'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.', # MODIF
-	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
+	'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
+	'info_admin_gere_toutes_rubriques_2' => 'Io modifico <b>tutte le rubriche</b>',
 	'info_admin_je_suis_webmestre' => 'Sono <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Dai a questo amministratore i privilegi di webmaster',
 	'info_admin_webmestre' => 'Questo amministratore è un <b>webmaster</b>',
@@ -252,7 +252,7 @@ di passare facilmente dal sito pubblico all\'interfaccia privata.',
 	'info_administrer_rubrique' => 'Puoi amministrare questa rubrica',
 	'info_adresse' => 'all\'indirizzo:',
 	'info_adresse_url' => 'Indirizzo (URL) del sito pubblico',
-	'info_afficher_par_nb' => 'Afficher par', # NEW
+	'info_afficher_par_nb' => 'Mostra',
 	'info_afficher_visites' => 'Visualizzare le visite per:',
 	'info_aide_en_ligne' => 'Guida in linea SPIP',
 	'info_ajout_image' => 'Quando aggiungi delle immagini come documenti allegati ad un articolo,
@@ -268,8 +268,8 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_articles_02' => 'articoli',
 	'info_articles_2' => 'Articoli',
 	'info_articles_auteur' => 'Articoli di questo autore',
-	'info_articles_miens' => 'Mes articles', # NEW
-	'info_articles_tous' => 'Tous les articles', # NEW
+	'info_articles_miens' => 'I miei articoli',
+	'info_articles_tous' => 'Tutti gli articoli',
 	'info_articles_trouves' => 'Articoli trovati',
 	'info_articles_trouves_dans_texte' => 'Articoli trovati (ricerca nel testo)',
 	'info_attente_validation' => 'I tuoi articoli in attesa di convalida',
@@ -277,7 +277,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_aucun_article_syndique' => 'Nessun articolo in syndication',
 	'info_aucun_auteur' => 'Nessun autore',
 	'info_aucun_message' => 'Nessun messaggio',
-	'info_aucun_rubrique' => 'Nessuna rubrica', # MODIF
+	'info_aucun_rubrique' => 'Nessuna rubrica',
 	'info_aucun_site' => 'Nessun sito',
 	'info_aucun_visiteur' => 'Nessun visitatore',
 	'info_aujourdhui' => 'oggi: ',
@@ -289,7 +289,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_avertissement' => 'Avvertimento',
 	'info_barre_outils' => 'con la barra degli strumenti?',
 	'info_base_installee' => 'La struttura del vostro database è installata.',
-	'info_bio' => 'Biographie', # NEW
+	'info_bio' => 'Biografia',
 	'info_chapeau' => 'Introduzione',
 	'info_chapeau_2' => 'Introduzione:',
 	'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
@@ -300,7 +300,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_classement_2' => '<sup>o</sup> su @liste@',
 	'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
 	'info_compatibilite_html' => 'Schema HTML da seguire',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Si raccomanda di verificare preventivamente se il provider comprime già in maniera sistematica gli script php; a tal fine è possibile utilizzare, per esempio,  il seguente servizio: @testgzip@', # MODIF
+	'info_compresseur_gzip' => 'Si raccomanda di verificare se il provider comprime già in maniera sistematica gli script PHP. A tal fine è possibile utilizzare, per esempio, il seguente servizio: @testgzip@',
 	'info_compresseur_texte' => 'Se il proprio server non comprime automaticamente le pagine HTML per inviarle ai visitatori, è possibile tentare di forzare la compressione per diminuire il peso delle pagine da scaricare. <b>Attenzione</b>: ciò può rallentare notevolmente alcuni server.',
 	'info_config_suivi' => 'Se questo indirizzo corrisponde a una mailing-list, è possibile indicare qui sotto l\'indirizzo al quale i partecipanti del sito possono iscriversi. Questo indirizzo può essere una URL (per esempio la pagina di iscrizione via Web alla lista), oppure un indirizzo email che contiene un Oggetto specifico (per esempio: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'È possibile abbonarsi alla mailing-list di questo sito. Verranno spedite per email le notifiche degli articoli e delle brevi proposte per la pubblicazione.',
@@ -317,7 +317,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_contact' => 'Contatti',
 	'info_contenu_articles' => 'Contentuto degli articoli',
 	'info_contributions' => 'Contributi',
-	'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)', # MODIF
+	'info_creation_paragraphe' => 'Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.',
 	'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
 	'info_creation_tables' => 'Creazione delle tabelle nel database',
 	'info_creer_base' => '<b>Creare</b> un nuovo database:',
@@ -333,7 +333,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_ecrire_article' => 'Prima di poter scrivere degli articoli, devi creare almeno una rubrica.',
 	'info_email_envoi' => 'Indirizzo email del mittente (opzionale)',
 	'info_email_envoi_txt' => 'Indicare qui l\'indirizzo da utilizzare per l\'invio degli email (come impostazione predefinita l\'indirizzo del destinatario sarà utilizzato come indirizzo del mittente):',
-	'info_email_webmestre' => 'Indirizzo email del webmaster (opzionale)', # MODIF
+	'info_email_webmestre' => 'Indirizzo email del webmaster',
 	'info_entrer_code_alphabet' => 'Inserisci il codice dell\'alfabeto da utilizzare:',
 	'info_envoi_email_automatique' => 'Invio di email automatico',
 	'info_envoyer_maintenant' => 'Invia adesso',
@@ -365,7 +365,7 @@ gli autori eliminati, invece, da un cestino.',
 pubblico del sito (forum su abbonamento).',
 	'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
 	'info_gerer_trad' => 'Gestire i link di traduzione?',
-	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
+	'info_gerer_trad_objets' => '@objets@ : gestire i collegamenti alle traduzioni',
 	'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano  l\'invio automatico di email
 dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate non funzioneranno.',
 	'info_hier' => 'ieri:',
@@ -376,7 +376,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_historique_texte' => 'La gestione delle revisioni permette di conservare traccia di tutte le modifiche effettuate su un articolo, mostrando le differenze fra le sue versioni successive.',
 	'info_identification_publique' => 'La tua identità pubblica...',
 	'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>', # MODIF
+	'info_image_process2' => 'Se non appare alcuna immagine, significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni «GD» o «Imagick».',
 	'info_images_auto' => 'Immagini elaborate automaticamente',
 	'info_informations_personnelles' => 'Informazioni personali',
 	'info_inscription_automatique' => 'Iscrizione automatica di nuovi redattori',
@@ -389,7 +389,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_liste_redacteurs_connectes' => 'Elenco dei redattori collegati',
 	'info_login_existant' => 'Questo login esiste già.',
 	'info_login_trop_court' => 'Login troppo corto.',
-	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
+	'info_login_trop_court_car_pluriel' => 'La login deve contenere almeno @nb@ caratteri.',
 	'info_logos' => 'I logo',
 	'info_maximum' => 'massimo:',
 	'info_meme_rubrique' => 'Nella stessa rubrica',
@@ -402,7 +402,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_mise_a_niveau_base_2' => '{{Attenzione!}} È stata installata una versione
 dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
 le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
-	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+	'info_modification_enregistree' => 'Le modifiche sono state salvate',
 	'info_modifier_auteur' => 'Modifica l\'autore:',
 	'info_modifier_rubrique' => 'Modifica la rubrica:',
 	'info_modifier_titre' => 'Modifica: @titre@',
@@ -414,7 +414,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_multi_cet_article' => 'Lingua di questo articolo:',
 	'info_multi_langues_choisies' => 'Selezionare di seguito le lingue disponibili per i redattori del sito.
   Le lingue già utilizzate nel sito (visualizzate per prime) non possono essere disattivate.',
-	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
+	'info_multi_objets' => '@objets@ : attiva il menù delle lingue',
 	'info_multi_rubriques' => 'Attivare il menu della lingua nelle rubriche?',
 	'info_multi_secteurs' => '... solo per le rubriche collocate nella {root} del sito?',
 	'info_nb_articles' => '@nb@ articoli',
@@ -444,7 +444,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_nouvel_article' => 'Nuovo articolo',
 	'info_nouvelle_traduction' => 'Nuova traduzione:',
 	'info_numero_article' => 'ARTICOLO NUMERO:',
-	'info_obligatoire_02' => '(Obbligatorio)', # MODIF
+	'info_obligatoire_02' => '(Obbligatorio)',
 	'info_option_accepter_visiteurs' => 'Accetta l\'iscrizione di utenti del sito pubblico',
 	'info_option_faire_suivre' => 'Segnala i nuovi messaggi',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rifiuta l\'iscrizione di utenti',
@@ -458,7 +458,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_par_statut' => 'per status',
 	'info_par_tri' => '\'(per @tri@)\'',
 	'info_passe_trop_court' => 'Password troppo corta.',
-	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
+	'info_passe_trop_court_car_pluriel' => 'La password deve contenere almeno @nb@ caratteri.',
 	'info_passes_identiques' => 'Le due password non sono uguali.',
 	'info_pense_bete_ancien' => 'I tuoi vecchi memo',
 	'info_plus_cinq_car' => 'più di 5 caratteri',
@@ -482,18 +482,13 @@ il database alla nuova versione di SPIP.',
 	'info_publier' => 'pubblicare',
 	'info_publies' => 'I tuoi articoli pubblicati',
 	'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalità:',
-	'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuovi redattori
-direttamente  dal sito pubblico? In caso affermativo, i visitatori potranno iscriversi
-grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
-i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
-gli utenti ricevono automaticamente un email
-che fornisce loro i codici d\'accesso al sito privato. Alcuni
-servizi di hostiong disattivano l\'invio di email dai propri server: in questo caso l\'iscrizione automatica è
-impossibile.</i></blockquote>', # MODIF
+	'info_question_inscription_nouveaux_redacteurs' => 'Vuoi accettare le iscrizioni di nuovi redattori direttamente dal sito pubblico? 
+In caso affermativo, i visitatori potranno iscriversi grazie ad un modulo automatizzato e accedere all\'area riservata per proporre i propri articoli. 
+<div class="notice">Durante il processo d\'iscrizione, gli utenti riceveranno un email che fornisce loro i codici d\'accesso all\'area privata. Alcuni servizi di hosting disattivano l\'invio di email dai propri server: in questo caso l\'iscrizione automatica non può essere attivata.</div>',
 	'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
 	'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ ha lavorato su questo contenuto @date_diff@ minuti fa',
 	'info_racine_site' => 'Root del sito',
 	'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 	'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
@@ -505,8 +500,8 @@ impossibile.</i></blockquote>', # MODIF
 	'info_redacteurs' => 'Redattori',
 	'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 	'info_redirection' => 'Reindirizzamento',
-	'info_redirection_activee' => 'La redirection est activée.', # NEW
-	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
+	'info_redirection_activee' => 'Il reindirizzamento è attivato.',
+	'info_redirection_desactivee' => 'Il reindirizzamento è stato cancellato.',
 	'info_refuses' => 'I tuoi articoli rifiutati',
 	'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
 	'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
@@ -524,7 +519,7 @@ impossibile.</i></blockquote>', # MODIF
 	'info_site_2' => 'sito: ',
 	'info_site_min' => 'sito',
 	'info_site_reference_2' => 'Sito repertoriato',
-	'info_site_web' => 'SITO WEB:', # MODIF
+	'info_site_web' => 'Sito Web:',
 	'info_sites' => 'siti',
 	'info_sites_lies_mot' => 'I siti in repertorio legati a questa parola chiave',
 	'info_sites_proxy' => 'Utilizza un proxy',
@@ -533,7 +528,7 @@ impossibile.</i></blockquote>', # MODIF
 	'info_sous_titre' => 'Sottotitolo:',
 	'info_statut_administrateur' => 'Amministratore',
 	'info_statut_auteur' => 'Status di questo autore:',
-	'info_statut_auteur_2' => 'Je suis', # NEW
+	'info_statut_auteur_2' => 'Io sono',
 	'info_statut_auteur_a_confirmer' => 'Iscrizione da confermare',
 	'info_statut_auteur_autre' => 'Altro stato:',
 	'info_statut_efface' => 'Cancellato',
@@ -551,7 +546,7 @@ impossibile.</i></blockquote>', # MODIF
 	'info_texte' => 'Testo',
 	'info_texte_explicatif' => 'Testo esplicativo',
 	'info_texte_long' => '(il testo è lungo: è quindi visualizzato in più sezioni che verranno riunificate dopo la convalida)',
-	'info_texte_message' => 'Testo del messaggio:', # MODIF
+	'info_texte_message' => 'Testo del tuo messaggio:',
 	'info_texte_message_02' => 'Testo del messaggio',
 	'info_titre' => 'Titolo:',
 	'info_total' => 'totale: ',
@@ -568,7 +563,7 @@ impossibile.</i></blockquote>', # MODIF
 	'info_tout_site6' => '<b>Attenzione:</b> solo gli articoli originali vengono visualizzati.
 Le traduzioni sono associate all\'originale,
  in un colore che indica il loro stato:',
-	'info_traductions' => 'Traductions', # NEW
+	'info_traductions' => 'Traduzioni',
 	'info_travail_colaboratif' => 'Lavoro di collaborazione sugli articoli',
 	'info_un_article' => 'un articolo, ',
 	'info_un_site' => 'un sito, ',
@@ -588,7 +583,7 @@ Le traduzioni sono associate all\'originale,
 	'info_webmestre_forces' => 'I webmaster sono attualmente definiti in <tt>@file_options@</tt>.',
 	'install_adresse_base_hebergeur' => 'Indirizzo del database attribuito dal provider',
 	'install_base_ok' => 'Il database @base@ è stato riconosciuto',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+	'install_connect_ok' => 'Il nuovo database è stato definito sul server @connect@.',
 	'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalità al sito...',
 	'install_extension_mbstring' => 'SPIP non funziona con:',
 	'install_extension_php_obligatoire' => 'SPIP esige l\'estensione php:',
@@ -608,8 +603,8 @@ Le traduzioni sono associate all\'originale,
 	'install_tables_base' => 'Tabelle del database',
 	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.',
 	'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL',
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+	'instituer_erreur_statut_a_change' => 'Lo status è già stato modificato',
+	'instituer_erreur_statut_non_autorise' => 'Non puoi selezionare questo stato',
 	'intem_redacteur' => 'redattore',
 	'intitule_licence' => 'Licenza',
 	'item_accepter_inscriptions' => 'Accetta le iscrizioni',
@@ -659,11 +654,11 @@ Le traduzioni sono associate all\'originale,
 	'jour_non_connu_nc' => 'n.c.',
 
 	// L
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_bando_outils' => 'Barra degli strumenti',
+	'label_bando_outils_afficher' => 'Mostra gli strumenti',
+	'label_bando_outils_masquer' => 'Nascondi gli strumenti',
 	'label_choix_langue' => 'Seleziona la tua lingua',
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+	'label_nom_fichier_connect' => 'Indica il nome per questo server',
 	'label_slogan_site' => 'Slogan del sito',
 	'label_taille_ecran' => 'Larghezza dello schermo',
 	'label_texte_et_icones_navigation' => 'Menù di naviagazione',
@@ -674,13 +669,13 @@ Le traduzioni sono associate all\'originale,
 	'lien_ajout_destinataire' => 'Aggiungi il destinatario',
 	'lien_ajouter_auteur' => 'Aggiungi questo autore',
 	'lien_ajouter_participant' => 'Aggiungi un partecipante',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Aggiungi questa rubrica',
 	'lien_email' => 'email',
 	'lien_nom_site' => 'NOME DEL SITO:',
 	'lien_retirer_auteur' => 'Rimuovere l\'autore',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
+	'lien_retirer_rubrique' => 'Elimina la rubrica',
 	'lien_retirer_tous_auteurs' => 'Elimina tutti gli autori',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_toutes_rubriques' => 'Rimuovi tutte le rubriche',
 	'lien_retrait_particpant' => 'rimuovere questo partecipante',
 	'lien_site' => 'sito',
 	'lien_supprimer_rubrique' => 'elimina la rubrica',
@@ -691,12 +686,12 @@ Le traduzioni sono associate all\'originale,
 	'lien_trier_nombre_articles' => 'Ordina per numero di articoli',
 	'lien_trier_statut' => 'Ordina per status',
 	'lien_voir_en_ligne' => 'VEDI ON LINE:',
-	'logo_article' => 'LOGO DELL\'ARTICOLO', # MODIF
-	'logo_auteur' => 'LOGO DELL\'AUTORE', # MODIF
-	'logo_rubrique' => 'LOGO DELLA RUBRICA', # MODIF
-	'logo_site' => 'LOGO DI QUESTO SITO ', # MODIF
-	'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE', # MODIF
-	'logo_survol' => 'LOGO ROLLOVER', # MODIF
+	'logo_article' => 'Logo dell\'articolo',
+	'logo_auteur' => 'Logo dell\'autore',
+	'logo_rubrique' => 'Logo della rubrica',
+	'logo_site' => 'Logo di questo sito',
+	'logo_standard_rubrique' => 'Logo standard delle rubriche',
+	'logo_survol' => 'Logo per il rollover',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Scegliere il database',
@@ -747,13 +742,13 @@ Le traduzioni sono associate all\'originale,
 	'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 	'plugin_info_automatique_ou' => 'oppure...',
 	'plugin_info_automatique_select' => 'Selezionata un\'estensione qui sotto: SPIP la scaricherà e la installerà nella cartella <code>@rep@</code>; se questo estensione è già presente verrà aggiornata.',
-	'plugin_info_credit' => 'Crédits', # NEW
-	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
+	'plugin_info_credit' => 'Crediti',
+	'plugin_info_erreur_xml' => 'La dichiarazione del plugin è sbagliata',
 	'plugin_info_extension_1' => 'Le estensioni sottostanti sono caricate e attivate nella directory @extensions@.',
 	'plugin_info_extension_2' => 'Questo non pu&ugrave; essere disinstallato.',
-	'plugin_info_install_ok' => 'Installation réussie', # NEW
-	'plugin_info_necessite' => 'Necessite :', # NEW
-	'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
+	'plugin_info_install_ok' => 'Installazione completata con successo',
+	'plugin_info_necessite' => 'Richiesto :',
+	'plugin_info_non_compatible_spip' => 'Questo plugin è incompatibile con questa versione di SPIP',
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questa estensione richiede la libreria @lib@',
@@ -763,7 +758,7 @@ Le traduzioni sono associate all\'originale,
 	'plugin_titre_automatique' => 'Installazione automatica',
 	'plugin_titre_automatique_ajouter' => 'Aggiungere dei plugin',
 	'plugin_titre_installation' => 'Installazione del plugin @plugin@',
-	'plugin_titre_modifier' => 'Mes plugins', # NEW
+	'plugin_titre_modifier' => 'I miei plugin',
 	'plugin_zip_active' => 'Continuare per attivarlo',
 	'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
 	'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco ',
@@ -775,7 +770,7 @@ Le traduzioni sono associate all\'originale,
 	'plugins_actif_aucun' => 'Nessun plugin attivo',
 	'plugins_actif_un' => 'Un plugin attivo',
 	'plugins_actifs' => '@count@ plug-in attivati.',
-	'plugins_actifs_liste' => 'Plugin attivi', # MODIF
+	'plugins_actifs_liste' => 'Attivo',
 	'plugins_compte' => '@count@ plug-in',
 	'plugins_disponible_un' => 'Un plugin disponibile',
 	'plugins_disponibles' => '@count@ plug-in disponibili.',
@@ -783,19 +778,19 @@ Le traduzioni sono associate all\'originale,
 	'plugins_liste' => 'Elenco dei plugin',
 	'plugins_liste_extensions' => 'Estensioni',
 	'plugins_recents' => 'Plugin aggiunti recentemente',
-	'plugins_tous_liste' => 'Tous', # NEW
+	'plugins_tous_liste' => 'Tutto',
 	'plugins_vue_hierarchie' => 'Struttura gerarchica',
 	'plugins_vue_liste' => 'Elenco',
 	'protocole_ldap' => 'Versione del protocollo:',
 
 	// Q
-	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
-	'queue_one_job_in_queue' => '1 travail en attente', # NEW
-	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
+	'queue_executer_maintenant' => 'Esegui adesso',
+	'queue_nb_jobs_in_queue' => '@nb@ processi in coda',
+	'queue_next_job_in_nb_sec' => 'Prossimo processo in @nb@ s',
+	'queue_no_job_in_queue' => 'Nessun processo appeso',
+	'queue_one_job_in_queue' => '1 processo in coda',
+	'queue_purger_queue' => 'Pulisci la coda dei processi',
+	'queue_titre' => 'Lista dei processi',
 
 	// R
 	'repertoire_plugins' => 'Cartella:',
@@ -805,8 +800,8 @@ Le traduzioni sono associate all\'originale,
 	'statut_admin_restreint' => '(ammin. parziale)',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+	'tache_cron_asap' => 'Task CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Task CRON @function@ (ogni @nb@ s)',
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
@@ -848,17 +843,17 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 	'texte_crash_base' => 'Se il database è stato danneggiato, puoi tentare un ripristino automatico.',
 	'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<br /> devi creare una rubrica.',
 	'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Data di creazione :', # on ajoute le &quot;:&quot;
 	'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
 	'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
 	'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Pubblicato il :',
 	'texte_descriptif_petition' => 'Descrizione della petizione',
 	'texte_descriptif_rapide' => 'Descrizione rapida',
 	'texte_effacer_base' => 'Cancella il database SPIP',
 	'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
 	'texte_effacer_statistiques' => 'Cancellare le statistiche',
-	'texte_en_cours_validation' => 'Gli articoli e le brevi elencati qui sotto sono proposti per la pubblicazione. ', # MODIF
+	'texte_en_cours_validation' => 'Gli articoli e le brevi elencati qui sotto sono stati proposti per la pubblicazione. ',
 	'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le «scorciatoie tipografiche»',
 	'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
 e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
@@ -966,13 +961,13 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 	'titre_admin_vider' => 'Manutenzione tecnica',
 	'titre_ajouter_un_auteur' => 'Aggiungi un autore',
 	'titre_ajouter_un_mot' => 'Aggiungi una parola chiave',
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
+	'titre_ajouter_une_rubrique' => 'Aggiungi una rubrica',
 	'titre_cadre_afficher_article' => 'Visualizza gli articoli',
 	'titre_cadre_afficher_traductions' => 'Visualizzare lo stato delle traduzioni per le seguenti lingue:',
 	'titre_cadre_ajouter_auteur' => 'AGGIUNGI UN AUTORE: ',
 	'titre_cadre_interieur_rubrique' => 'All\'interno della rubrica',
 	'titre_cadre_numero_auteur' => 'AUTORE NUMERO',
-	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
+	'titre_cadre_numero_objet' => '@objet@ NUMERO :',
 	'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
 	'titre_config_contenu_notifications' => 'Notifiche',
 	'titre_config_contenu_prive' => 'Nell\'area riservata',
@@ -985,8 +980,8 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 	'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 	'titre_groupe_mots' => 'GRUPPO DI PAROLE CHIAVE:',
 	'titre_identite_site' => 'Identità del sito',
-	'titre_langue_article' => 'LINGUA DELL\'ARTICOLO', # MODIF
-	'titre_langue_rubrique' => 'LINGUA DELLA RUBRICA', # MODIF
+	'titre_langue_article' => 'Lingua dell\'articolo',
+	'titre_langue_rubrique' => 'Lingua della rubrica',
 	'titre_langue_trad_article' => 'LINGUA E TRADUZIONI DELL\'ARTICOLO',
 	'titre_les_articles' => 'GLI ARTICOLI',
 	'titre_messagerie_agenda' => 'Messagistica e agenda',
@@ -1022,9 +1017,9 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 	'trad_article_inexistant' => 'Non esiste un articolo con questo numero.',
 	'trad_article_traduction' => 'Tutte le versioni di questo articolo:',
 	'trad_deja_traduit' => 'Errore: non è possibile collegare questo articolo al numero richiesto.',
-	'trad_delier' => 'Non collegare più questo articolo alle sue traduzioni', # MODIF
+	'trad_delier' => 'Non collegare più questo articolo alle sue traduzioni',
 	'trad_lier' => 'Questo articolo è una traduzione dell\'articolo numero:',
-	'trad_new' => 'Scrivere una nuova traduzione dell\'articolo', # MODIF
+	'trad_new' => 'Scrivere una nuova traduzione dell\'articolo',
 
 	// U
 	'upload_info_mode_document' => 'Mettere questa immagine nel portfolio',
