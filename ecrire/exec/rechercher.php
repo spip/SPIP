@@ -37,7 +37,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 	$where = split("[[:space:]]+", $type);
 	if ($where) {
 		foreach ($where as $k => $v) 
-			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";
+			$where[$k] = "'%" . substr(str_replace("%","\%", sql_quote($v)),1,-1) . "%'";
 		$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
 		$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
 		$where_id = ("(id_rubrique = " . join(" AND id_rubrique = ", $where) . ")");

@@ -115,7 +115,7 @@ function inc_auth_dist() {
 
 	$where = (is_numeric($connect_id_auteur)) ?
 	  "id_auteur=$connect_id_auteur" :
-	  (!$connect_login ? '' : "login=" . _q($connect_login));
+	  (!$connect_login ? '' : "login=" . sql_quote($connect_login));
 
 	// pas authentifie par cookie ni http_auth:
 

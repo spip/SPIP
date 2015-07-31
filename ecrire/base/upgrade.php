@@ -129,7 +129,7 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
 	if ($row = sql_fetch($res)){
 		if (strtolower($row['Type'])!=strtolower($type)) {
-			$default = $row['Default']?(" DEFAULT "._q($row['Default'])):"";
+			$default = $row['Default']?(" DEFAULT ".sql_quote($row['Default'])):"";
 			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
 			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
 		}
@@ -156,7 +156,7 @@ function maj_version ($version, $test = true) {
 		else {
 			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
 			$GLOBALS['meta']['version_installee'] = $version;
-			sql_updateq('spip_meta',  array('valeur' => $version), "nom=" . _q('version_installee') );
+			sql_updateq('spip_meta',  array('valeur' => $version), "nom=" . sql_quote('version_installee') );
 		}
 		spip_log("mise a jour de la base en $version");
 	} else {

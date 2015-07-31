@@ -129,14 +129,14 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	if (preg_quote($recherche, '/') == $recherche) {
 		$methode = 'LIKE';
-		$q = _q(
+		$q = sql_quote(
 			"%"
 			. str_replace(array('%','_'), array('\%', '\_'), $recherche)
 			. "%"
 		);
 	} else {
 		$methode = 'REGEXP';
-		$q = _q($recherche);
+		$q = sql_quote($recherche);
 	}
 
 	$preg = '/'.$recherche.'/' . $options['preg_flags'];

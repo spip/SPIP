@@ -130,7 +130,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 					$where = "";
 					break;
 				}
-				$where .= " AND $key="._q($values[$key]);
+				$where .= " AND $key=".sql_quote($values[$key]);
 			}
 			if ($where) {
 				$where = substr($where,4);

@@ -48,7 +48,7 @@ function get_spip_doc($fichier) {
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 	if (intval($id_document) <= 0)
 		return '';
-	$row = sql_fetsel("fichier,distant", "spip_documents", "id_document="._q($id_document));
+	$row = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
 	if (!$row) return '';
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
@@ -158,7 +158,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if (!$url)
 		return $image;
 	else {
-		$t = sql_fetsel("mime_type", "spip_types_documents", "extension="._q($document['extension']));
+		$t = sql_fetsel("mime_type", "spip_types_documents", "extension=".sql_quote($document['extension']));
 		return "<a href='$url'\n\ttype='".$t['mime_type']."'>$image</a>";
 	}
 }
@@ -206,14 +206,14 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. '</div><br />';
 
 	//// Documents associes
-	$res = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_".$type."=" ._q($id) . " AND l.id_document=docs.id_document AND docs.mode='document'", "", "docs.id_document");
+	$res = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_".$type."=" .sql_quote($id) . " AND l.id_document=docs.id_document AND docs.mode='document'", "", "docs.id_document");
 
 	$documents_lies = array();
 	while ($row = sql_fetch($res))
 		$documents_lies[]= $row['id_document'];
 
 	//// Images sans documents
-	$images_liees = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l "."", "l.id_".$type."=" . _q($id) . " AND l.id_document=docs.id_document AND docs.mode='image'", "", "docs.id_document");
+	$images_liees = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l "."", "l.id_".$type."=" . sql_quote($id) . " AND l.id_document=docs.id_document AND docs.mode='image'", "", "docs.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
 	while ($doc = sql_fetch($images_liees)) {
@@ -303,7 +303,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$prim = 'id_' . $type;
 
 	charger_generer_url();
-	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim="._q($id)." AND L.id_document="._q($id_document));
+	$res = sql_select("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim=".sql_quote($id)." AND L.id_document=".sql_quote($id_document));
 
 	if (!$document = sql_fetch($res)) return "";
 	//$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
@@ -325,7 +325,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$cadre = strlen($titre) ? $titre : basename($fichier);
 
-	$result = sql_select("titre,inclus", "spip_types_documents", "extension="._q($extension));
+	$result = sql_select("titre,inclus", "spip_types_documents", "extension=".sql_quote($extension));
 	if ($letype = sql_fetch($result)) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];

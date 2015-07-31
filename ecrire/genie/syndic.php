@@ -87,7 +87,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	sql_update('spip_syndic', array('syndication'=>_q($statut), 'date_syndic'=>'NOW()'), "id_syndic=$now_id_syndic");
+	sql_update('spip_syndic', array('syndication'=>sql_quote($statut), 'date_syndic'=>'NOW()'), "id_syndic=$now_id_syndic");
 
 	// Aller chercher les donnees du RSS et les analyser
 	include_spip('inc/distant');
@@ -138,7 +138,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	$le_lien = substr($data['url'], 0,255);
 
 	// Chercher les liens de meme cle
-	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic", "", "maj DESC");
+	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . sql_quote($le_lien) . " AND id_syndic=$now_id_syndic", "", "maj DESC");
 
 	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
 	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres

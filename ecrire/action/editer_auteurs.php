@@ -64,7 +64,7 @@ function supprimer_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
 	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
-		sql_delete("spip_{$jointure}", "id_auteur="._q($id_auteur)." AND id_{$type}="._q($id));
+		sql_delete("spip_{$jointure}", "id_auteur=".sql_quote($id_auteur)." AND id_{$type}=".sql_quote($id));
 
 		// Notifications, gestion des revisions, reindexation...
 		pipeline('post_edition',
@@ -87,7 +87,7 @@ function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
 {
 	$jointure = table_jointure('auteur', $type);
 	if (preg_match(',^[a-z]*$,',$type)){
-		$res = sql_select("id_$type", "spip_{$jointure}", "id_auteur=" . _q($id_auteur) . " AND id_{$type}=" . $id);
+		$res = sql_select("id_$type", "spip_{$jointure}", "id_auteur=" . sql_quote($id_auteur) . " AND id_{$type}=" . $id);
 		if (!sql_count($res))
 			sql_insert("spip_{$jointure}", "(id_auteur,id_{$type})", "($id_auteur,$id)");
 

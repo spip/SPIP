@@ -390,7 +390,7 @@ function accueil_liste_participants()
 {
 	global $spip_lang_left;
 
-	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', "statut IN (".  _q($GLOBALS['liste_des_statuts']) . ")", 'statut', '','', "COUNT(*)<>0");
+	$q = sql_select("COUNT(*) AS cnt, statut", 'spip_auteurs', "statut IN (".  sql_quote($GLOBALS['liste_des_statuts']) . ")", 'statut', '','', "COUNT(*)<>0");
 
 	$cpt = array();
 	while($row=sql_fetch($q)) $cpt[$row['statut']] = $row['cnt']; 

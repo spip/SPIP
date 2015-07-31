@@ -268,7 +268,7 @@ function legender_auteur_voir($auteur) {
 		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
 
 		$res .= "<script type='text/javascript'><!--
-		var intitule_bouton = "._q($retour).";
+		var intitule_bouton = ".sql_quote($retour).";
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
 			jQuery('#auteur_infos_edit')

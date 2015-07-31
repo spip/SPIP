@@ -206,7 +206,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 // http://doc.spip.org/@puce_statut_site
 function puce_statut_site($id_site, $statut, $id_rubrique, $type, $ajax=''){
 
-	$s = sql_select("syndication", "spip_syndic", "id_syndic="._q($id_site));
+	$s = sql_select("syndication", "spip_syndic", "id_syndic=".sql_quote($id_site));
 	$t = sql_fetch($s);
 	if ($t['syndication'] == 'off' OR $t['syndication'] == 'sus')
 		$anim = 'anim';

@@ -46,6 +46,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) 
 	AND lire_fichier ($phpfile, $contenu,
 	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
+#	spip_log($contenu, 'comp')
 	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
 	OR @file_exists($fonc = $squelette . '_fonctions'.'.php3')) {
 		include_once $fonc;
@@ -426,7 +427,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		$logo = inserer_attribut($logo, 'align', $align);
 
 	if ($lien) {
-		$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . _q($extension));
+		$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
 		$logo = "<a href='$lien' type='$mime'>$logo</a>";
 	}
 	return $logo;

@@ -102,7 +102,7 @@ function convert_sql_utf8($titre){
 						echo "On ignore le champ blob $nom.$champ <hr />\n";
 					} else {
 
-						$default = $row2['Default']?(" DEFAULT "._q($row2['Default'])):"";
+						$default = $row2['Default']?(" DEFAULT ".sql_quote($row2['Default'])):"";
 						$notnull = ($row2['Null']=='YES')?"":" NOT NULL";
 						$q = "ALTER TABLE spip_$nom CHANGE $champ $champ $type_blob $default $notnull";
 						if (!_DEBUG_CONVERT)

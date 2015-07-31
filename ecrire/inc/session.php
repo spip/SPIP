@@ -79,7 +79,7 @@ function ecrire_fichier_session($fichier, $auteur) {
 	$texte = "<"."?php\n";
 	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne') AS $var) {
 		$texte .= '$GLOBALS[\'auteur_session\'][\''.$var.'\'] = '
-			. _q($auteur[$var]).";\n";
+			. sql_quote($auteur[$var]).";\n";
 	}
 	$texte .= "?".">\n";
 

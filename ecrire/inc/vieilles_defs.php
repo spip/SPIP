@@ -127,7 +127,7 @@ return $GLOBALS[\'browser_layer\'];}
 'spip_abstract_quote' => '($arg_sql) {
 	vieilles_log(\'spip_abstract_quote()\');
 
-	return _q($arg_sql);
+	return sql_quote($arg_sql);
 }
 
 ',

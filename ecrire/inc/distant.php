@@ -287,7 +287,7 @@ function fichier_copie_locale($source) {
 	}
 
 	// Chercher d'abord le doc dans la table des documents, pour se baser sur son type reel
-	$s = sql_select("extension", "spip_documents", "fichier=" . _q($source) . " AND distant='oui' AND extension>''");
+	$s = sql_select("extension", "spip_documents", "fichier=" . sql_quote($source) . " AND distant='oui' AND extension>''");
 	if ($t = sql_fetch($s)) {
 		$extension = $t['extension'];
 
@@ -306,7 +306,7 @@ function fichier_copie_locale($source) {
 		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
 		) {
 			// verifier que c'est un type autorise
-			$t = sql_fetsel("extension", "spip_types_documents", "extension="._q($ext));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=".sql_quote($ext));
 			if ($t)
 				$extension = $t['extension'];
 		}
@@ -347,19 +347,19 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		$t = null;
 		if (($mime_type == 'text/plain' OR $mime_type == '')
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . _q($rext[1]));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
 		}
 
 		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
 		if (!$t)
-			$t = sql_fetsel("extension", "spip_types_documents", "mime_type=" . _q($mime_type));
+			$t = sql_fetsel("extension", "spip_types_documents", "mime_type=" . sql_quote($mime_type));
 
 		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
 		// On essaie de nouveau avec l'extension
 		if (!$t
 		AND $mime_type != 'text/plain'
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . _q($rext[1]));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
 		}
 
 

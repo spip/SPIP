@@ -123,7 +123,7 @@ function balise_LOGO__dist ($p) {
 			'\', $doublons, '. intval($flag_fichier).", $code_lien, '".
 			// #LOGO_DOCUMENT{x,y} donne la taille maxi
 			texte_script($params)
-			."'," . _q($connect) .")";
+			."'," . sql_quote($connect) .")";
 	}
 	elseif ($connect) {
 		$p->code = "''";

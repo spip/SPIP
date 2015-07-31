@@ -23,7 +23,7 @@ function inc_auth_spip_dist ($login, $pass) {
 
 	  // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {
-			$result = sql_select("alea_actuel, alea_futur", "spip_auteurs", "login=" . _q($login));
+			$result = sql_select("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
 
 			if ($row = sql_fetch($result)) {
 				$md5pass = md5($row['alea_actuel'] . $pass);
@@ -33,7 +33,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	// login inexistant ou mot de passe vide
 	if (!$md5pass) return array();
 
-	$result = sql_select("*", "spip_auteurs", "login=" . _q($login) . " AND pass=" . _q($md5pass) . " AND statut<>'5poubelle'");
+	$result = sql_select("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'");
 	$row = sql_fetch($result);
 
 	// login/mot de passe incorrect
@@ -47,7 +47,7 @@ function inc_auth_spip_dist ($login, $pass) {
 	// fait tourner le codage du pass dans la base
 	if ($md5next) {
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => _q($md5next), 'alea_futur' => _q(creer_uniqid())), "id_auteur=" . $row['id_auteur']);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($md5next), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur']);
 		// En profiter pour verifier la securite de tmp/
 		verifier_htaccess(_DIR_TMP);
 	}

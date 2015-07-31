@@ -65,7 +65,7 @@ function install_etape_4_dist()
 		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 		$alea = creer_uniqid();
-		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . _q($login));
+		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
 		if ($id_auteur !== NULL) {
 			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo'), "id_auteur=$id_auteur");
 		}

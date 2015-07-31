@@ -153,7 +153,7 @@ function notifier_proposition_article($id_article) {
 function email_notification_forum ($t, $email) {
 
 	// Rechercher eventuellement la langue du destinataire
-	if (NULL !== ($l = sql_getfetsel('lang', 'spip_auteurs', "email=" . _q($email))))
+	if (NULL !== ($l = sql_getfetsel('lang', 'spip_auteurs', "email=" . sql_quote($email))))
 		$l = lang_select($l);
 
 
@@ -191,11 +191,11 @@ function email_notification_forum ($t, $email) {
 	}
 
 	if ($t['id_article']) {
-		$article = sql_fetsel("titre", "spip_articles", "id_article="._q($t['id_article']));
+		$article = sql_fetsel("titre", "spip_articles", "id_article=".sql_quote($t['id_article']));
 		$titre = textebrut(typo($article['titre']));
 	}
 	if ($t['id_message']) {
-		$message = sql_fetsel("titre", "spip_messages", "id_message="._q($t['id_message']));
+		$message = sql_fetsel("titre", "spip_messages", "id_message=".sql_quote($t['id_message']));
 		$titre = textebrut(typo($message['titre']));
 	}
 
@@ -236,7 +236,7 @@ function email_notification_forum ($t, $email) {
 // suivre si le forum est valide directement ('pos' ou 'abo')
 // http://doc.spip.org/@notifications_forumvalide_dist
 function notifications_forumvalide_dist($quoi, $id_forum) {
-	$s = sql_select("*", "spip_forum", "id_forum="._q($id_forum));
+	$s = sql_select("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t = sql_fetch($s))
 		return;
 
@@ -257,7 +257,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	// pas le droit de le moderer (les autres l'ont recu plus tot)
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=".sql_quote($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = sql_fetch($result)) {
 			if (!autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))
@@ -293,7 +293,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 
 // http://doc.spip.org/@notifications_forumposte_dist
 function notifications_forumposte_dist($quoi, $id_forum) {
-	$s = sql_select("*", "spip_forum", "id_forum="._q($id_forum));
+	$s = sql_select("*", "spip_forum", "id_forum=".sql_quote($id_forum));
 	if (!$t = sql_fetch($s))
 		return;
 
@@ -310,7 +310,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	// avertis par la notifications_forumvalide).
 	if ($t['id_article']
 	AND $GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
-		$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+		$result = sql_select("auteurs.id_auteur, auteurs.email", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=".sql_quote($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
 
 		while ($qui = sql_fetch($result)) {
 			if (autoriser('modererforum', 'article', $t['id_article'], $qui['id_auteur']))

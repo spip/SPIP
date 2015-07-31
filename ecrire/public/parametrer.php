@@ -201,7 +201,7 @@ function quete_accepter_forum($id_article) {
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
-	return sql_getfetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
+	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom), '','','','','','','',$serveur);
 }
 
 

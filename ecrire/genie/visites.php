@@ -163,7 +163,7 @@ function calculer_visites($t) {
 
 	// appliquer les increments sur les anciens
 	// attention on appelle sql_in en mode texte et pas array
-	// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
+	// pour ne pas passer sql_quote() sur les '0x1234' de referer_md5, cf #849
 		foreach ($ar as $num => $liste) {
 			sql_update('spip_referers', array('visites' => "visites+$num", 'visites_jour' => "visites_jour+$num"), sql_in('referer_md5',join(', ', $liste)));
 		}

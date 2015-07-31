@@ -36,7 +36,7 @@ function action_poster_forum_prive_post($r)
 		$titre_message = corriger_caracteres(_request('titre_message'));
 		$texte = corriger_caracteres(_request('texte'));
 
-		$id_forum = sql_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . _q($titre_message) . ", " . _q($texte) . ", NOW(), " . _q(_request('nom_site')) . ", " . _q(_request('url_site')) . ", " . _q($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . _q($GLOBALS['auteur_session']['nom']) . ", " . _q($GLOBALS['auteur_session']['email']) . ", $id_parent)");
+		$id_forum = sql_insert('spip_forum', "($objet, titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_parent)", "($id, " . sql_quote($titre_message) . ", " . sql_quote($texte) . ", NOW(), " . sql_quote(_request('nom_site')) . ", " . sql_quote(_request('url_site')) . ", " . sql_quote($statut) . ", " . $GLOBALS['auteur_session']['id_auteur'] . ", " . sql_quote($GLOBALS['auteur_session']['nom']) . ", " . sql_quote($GLOBALS['auteur_session']['email']) . ", $id_parent)");
 
 		calculer_threads();
 
