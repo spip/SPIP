@@ -499,10 +499,12 @@ function code_boucle($boucle, $id, $nom, $sourcefile)
 	  $s = $c->apres ;
 	  if ($s)
 	    $s = ($s . $c->texte . $s);
-	  else 
+	  else {
 	    // faudrait decompiler aussi les balises...
-	    foreach ($param[1] as $c)
-	      $s .= ($c->type == 'texte') ? $c->texte : '#...';
+	    if (is_array($t = $param[1]))
+	      foreach ($t as $c)
+		$s .= ($c->type == 'texte') ? $c->texte : '#...';
+	  }
 	  $pretty .= ' {' . $s . '}';
 	}
 
