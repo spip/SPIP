@@ -754,7 +754,7 @@ and their status is colour-coded:',
 	'plugin_info_plugins_dist_1' => 'The following plugins are loaded and activated in the @plugins_dist@ directory.',
 	'plugin_info_plugins_dist_2' => 'They cannot be disabled.',
 	'plugin_info_telecharger' => 'load from @url@ and install to @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
+	'plugin_info_upgrade_ok' => 'Successful update',
 	'plugin_librairies_installees' => 'Libraries installed',
 	'plugin_necessite_lib' => 'This plugin requires the library @lib@',
 	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.',
