@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@supprimer_document
 function action_supprimer_document_dist($id_document) {
+	include_spip('inc/autoriser');
 	if (!autoriser('supprimer','document',$id_document))
 		return false;
 
