@@ -20,9 +20,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@public_styliser_dist
 function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
-	
+
+	// trouver un squelette du nom demande
+	$base = find_in_path("$fond.$ext");
+
+	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
+	$squelette = substr($base, 0, - strlen(".$ext"));
+
+	// pipeline styliser
+	$squelette = pipeline('styliser', array(
+		'args' => array(
+			'id_rubrique' => $id_rubrique,
+			'ext' => $ext,
+			'fond' => $fond,
+			'lang' => $lang,
+			'contexte' => $GLOBALS['contexte'], // le style d'un objet peut dependre de lui meme
+			'connect' => $connect
+		),
+		'data' => $squelette,
+	));
+
 	// Trouver un squelette de base dans le chemin
-	if (!$base = find_in_path("$fond.$ext")) {
+	if (!$squelette) {
 		// Si pas de squelette regarder si c'est une table
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		if (preg_match('/^table:(.*)$/', $fond, $r)
@@ -47,21 +66,6 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 			return array(null, $ext, $ext, null);
 		}
 	}
-
-	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
-	$squelette = substr($base, 0, - strlen(".$ext"));
-
-	// pipeline styliser
-	$squelette = pipeline('styliser', array(
-		'args' => array(
-			'id_rubrique' => $id_rubrique,
-			'ext' => $ext,
-			'fond' => $fond,
-			'lang' => $lang,
-			'connect' => $connect
-		),
-		'data' => $squelette,
-	));
 
 	// On selectionne, dans l'ordre :
 	// fond=10
