@@ -356,6 +356,12 @@ function autoriser_groupemots_creer_dist($faire, $type, $id, $qui, $opt) {
 		AND !$qui['restreint'];
 }
 
+function autoriser_auteur_creer_dist($faire, $type, $id, $qui, $opt) {
+	return
+		$qui['statut'] == '0minirezo'
+		AND !$qui['restreint'];
+}
+
 // Autoriser a modifier un groupe de mots $id
 // y compris en ajoutant/modifiant les mots lui appartenant
 // http://doc.spip.org/@autoriser_groupemots_modifier_dist

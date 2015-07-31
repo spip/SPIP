@@ -56,7 +56,11 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 		  lettres_d_auteurs(requete_auteurs($tri, $statut, $recherche), $debut, MAX_AUTEURS_PAR_PAGE, $tri);
 
 
-		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs,$cherche);
+
+		$arg = ($statut ? ("&statut=" .urlencode($statut)) : '')
+		  .  ($cherche ? ("&recherche=" . urlencode($cherche)) : '');
+
+		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs, $arg);
 
 		if ($cherche){
 			$cherche = htmlspecialchars($cherche);
@@ -80,7 +84,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 			$visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'),
 				     "auteurs","redacteurs");
 
-		echo bandeau_auteurs($tri, $visiteurs);
+		echo bandeau_auteurs($visiteurs);
 		
 		echo  $trouve, "<div class='nettoyeur'></div>";
 
@@ -91,9 +95,9 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 }
 
 // http://doc.spip.org/@bandeau_auteurs
-function bandeau_auteurs($tri, $visiteurs)
+function bandeau_auteurs($visiteurs)
 {
-	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
+	global $connect_id_auteur;
 
 	$ret = debut_gauche("auteurs",true) . debut_boite_info(true);
 
@@ -102,16 +106,16 @@ function bandeau_auteurs($tri, $visiteurs)
 	else 
 		$ret .= "\n<p class='arial1'>"._T('info_gauche_auteurs'). '</p>';
 
-	if ($connect_statut == '0minirezo')
+	if (autoriser('voir', 'auteur'))
 		$ret .= "\n<p class='arial1'>". _T('info_gauche_auteurs_exterieurs') . '</p>';
 
 	$ret .= fin_boite_info(true);
 
 	$ret .= pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
-	if ($connect_statut == '0minirezo') {
+	if (autoriser('voir', 'auteur')) {
 
-		if ($connect_toutes_rubriques) 
+		if (autoriser('creer', 'auteur'))
 			$res = icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos", 'new=oui'), "auteur-24.gif", "creer.gif", false);
 		else $res = '';
 
@@ -174,12 +178,9 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 }
 
 // http://doc.spip.org/@auteurs_tranches
-function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs, $cherche='')
+function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_page, $nombre_auteurs, $arg='')
 {
 	global $spip_lang_right;
-
-	$arg = ($statut ? ("&statut=" .urlencode($statut)) : '')
-	   .  ($cherche ? ("&recherche=" . urlencode($cherche)) : '');
 
 	$res ="\n<tr class='titrem'>"
 	. "\n<th style='width: 20px'>";
