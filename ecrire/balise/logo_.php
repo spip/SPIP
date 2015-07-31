@@ -42,6 +42,7 @@ function balise_LOGO__dist ($p) {
 	$lien = ($p->etoile === '*') ? ' ' : '';
 	$coord = array();
 	$align = $params = '';
+	$mode_logo = '';
 
 	if ($p->param AND !$p->param[0][0]) {
 		$params = array_shift($p->param);
@@ -51,8 +52,13 @@ function balise_LOGO__dist ($p) {
 				$n = $a[0]->texte;
 				if (is_numeric($n))
 					$coord[]= $n;
-				else $align = $n;
-			} else $lien = $a[0];
+				elseif (in_array($n,array('top','left','right','center','bottom')))
+					$align = $n;
+				elseif (in_array($n,array('auto','icone','apercu','vignette')))
+					$mode_logo = $n;
+			}
+			else
+				$lien = $a[0];
 		}
 	}
 
@@ -116,7 +122,7 @@ function balise_LOGO__dist ($p) {
 		$doc = "quete_document($_id_objet, $qconnect)";
 		if ($fichier)
 			$code = "quete_logo_file($doc, $qconnect)";
-		else $code = "quete_logo_document($doc, " . ($lien ? $lien : "''") . ", '$align', $coord_x, $coord_y, $qconnect)";
+		else $code = "quete_logo_document($doc, " . ($lien ? $lien : "''") . ", '$align', '$mode_logo', $coord_x, $coord_y, $qconnect)";
 		// (x=non-faux ? y : '') pour affecter x en retournant y
 		if ($p->descr['documents'])
 		  $code = '(($doublons["documents"] .= ",". '
