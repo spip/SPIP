@@ -17,12 +17,12 @@ include_spip('inc/filtres'); // par precaution
 // http://doc.spip.org/@cherche_image_nommee
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
-	if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG))==0) {
-		$nom = substr($nom,strlen(_DIR_IMG));
-	} else 	if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG_PACK))==0) {
-		$nom = substr($nom,strlen(_DIR_IMG_PACK));
-	} else if (strncmp(_DIR_IMG, $nom,strlen(_DIR_IMG_ICONES_DIST))==0) {
-		$nom = substr($nom,strlen(_DIR_IMG_ICONES_DIST));
+	if (strncmp(_DIR_IMG, $nom,$n=strlen(_DIR_IMG))==0) {
+		$nom = substr($nom,$n);
+	} else 	if (strncmp(_DIR_IMG_PACK, $nom,$n=strlen(_DIR_IMG_PACK))==0) {
+		$nom = substr($nom,$n);
+	} else if (strncmp(_DIR_IMG_ICONE_DIST, $nom,$nstrlen(_DIR_IMG_ICONES_DIST))==0) {
+		$nom = substr($nom,$n);
 	}
 	$pos = strrpos($nom, "/");
 	if ($pos > 0) {
