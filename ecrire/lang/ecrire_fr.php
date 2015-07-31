@@ -359,7 +359,7 @@ exige d\'avoir un accès FTP au site Web.</p>',
 	'info_gauche_auteurs' => 'Vous trouverez ici tous les auteurs du site.
  Leur statut est indiqué par la couleur de leur icone (administrateur = vert; rédacteur = jaune).',
 	'info_gauche_auteurs_exterieurs' => 'Les auteurs extérieurs, sans accès au site, sont indiqués par une icone bleue ;
-		les auteurs effacés par une poubelle.',
+		les auteurs effacés par une icone grise.',
 	'info_gauche_messagerie' => 'La messagerie vous permet d\'échanger des messages entre rédacteurs, de conserver des pense-bêtes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace privé (si vous êtes administrateur).',
 	'info_gauche_numero_auteur' => 'AUTEUR NUMÉRO',
 	'info_gauche_statistiques_referers' => 'Cette page présente la liste des <i>referers</i>, c\'est-à-dire des sites contenant des liens menant vers votre propre site, uniquement pour hier et aujourd\'hui ; cette liste est remise à zéro toutes les 24 heures.',
