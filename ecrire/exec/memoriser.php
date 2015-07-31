@@ -24,13 +24,9 @@ function exec_memoriser_dist()
 
 	if ($res) {
 		
-	  foreach(unserialize($res["variables"]) as $i => $k){ $$i = $k; }
-
-	  include_spip('inc/presentation');		
-
-	  $formater_article = _request('trad') ? '' : charger_fonction('formater_article', 'inc');
-
-	  ajax_retour(afficher_articles_trad($titre_table, $requete, $formater_article, $param, $id_ajax, $res['id_auteur']));
+		include_spip('inc/presentation');
+		list($t,$r,$p,$f) = unserialize($res["variables"]);
+		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $id_ajax, $res['id_auteur'], _request('trad')));
 
 	} else spip_log("memoriser $q vide");
 }
