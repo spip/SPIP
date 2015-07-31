@@ -332,8 +332,8 @@ function plugin_get_infos($plug){
 		}
 		if (!count($ret)){
 		  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
-				if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
-					$arbre = spip_xml_load($f = _DIR_PLUGINS."$plug/plugin.xml");
+				if (@file_exists($f = _DIR_PLUGINS."$plug/plugin.xml")) {
+					$arbre = spip_xml_load($f);
 					if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
 						$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
 				}
@@ -365,11 +365,12 @@ function plugin_get_infos($plug){
 					$ret['pipeline'] = $arbre['pipeline'];
 				if (isset($arbre['erreur']))
 					$ret['erreur'] = $arbre['erreur'];
-			}
-			if ($t=filemtime($f)){
-				$ret['filemtime'] = $t;
-				$plugin_xml_cache[$plug]=$ret;
-				ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
+				
+				if ($t=filemtime($f)){
+					$ret['filemtime'] = $t;
+					$plugin_xml_cache[$plug]=$ret;
+					ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
+				}
 			}
 		}
 		$infos[$plug] = $ret;
