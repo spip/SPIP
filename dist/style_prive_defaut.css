@@ -1,6 +1,6 @@
 body { 
 	font-family: Verdana,Arial,Sans,sans-serif; 
-	border: 0px;
+	border: 0;
 }
 
 /*
@@ -9,23 +9,23 @@ body {
 
 #bandeau-principal {
 	background-color: white;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	border-bottom: 1px solid black;
 }
 
 .bandeau-icones {
 	background-color: white;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	padding-bottom: 2px; 
 	padding-top: 4px;
 }
 
 .bandeau_sec .gauche {
-	margin-top: 0px;
+	margin-top: 0;
 	padding: 2px;
-	padding-top: 0px;
+	padding-top: 0;
 	background-color: white;
 	border-bottom: 1px solid black;
 	border-left: 1px solid black;
@@ -39,8 +39,8 @@ body {
 	vertical-align: middle;
 	height: 100%;
 	width: 11px;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -57,7 +57,7 @@ body {
 .bandeau_couleur_sous {
 	position: absolute; 
 	visibility: hidden;
-	top: 0px; 
+	top: 0; 
 	color: black;
 	padding: 5px;
 	padding-top: 2px;
@@ -100,7 +100,7 @@ div.bandeau_rub {
 	position: absolute;
 	top: 4px;
 	background-color: #eeeeee;
-	padding: 0px;
+	padding: 0;
 	border: 1px solid #555555;
 	visibility: hidden;
 }
