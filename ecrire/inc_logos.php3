@@ -476,27 +476,19 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 				list ($destWidth,$destHeight, $ratio) = image_ratio(
 					$taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
-				// Si la taille n'est pas tres differente, laisser le browser
-				// faire la reduction
-				if ($ratio >= 2
-				AND max($taille_origine[0], $taille_origine[1]) > 50) {
-					$suffixe = '-'.$destWidth.'x'.$destHeight;
-					$preview = creer_vignette($logo, $taille, $taille_y,
-						$format, ('cache'.$suffixe), $nom.$suffixe);
+				// Creer effectivement la vignette reduite
+				$suffixe = '-'.$destWidth.'x'.$destHeight;
+				$preview = creer_vignette($logo, $taille, $taille_y,
+					$format, ('cache'.$suffixe), $nom.$suffixe);
+				if ($preview) {
+					$logo = $preview['fichier'];
+					$destWidth = $preview['width'];
+					$destHeight = $preview['height'];
 				}
 
-				if (!$preview) {
-					if (!_DIR_RESTREINT)
-						$date = '?date='.filemtime($logo);
-					return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
-				} else {
-					$vignette = $preview['fichier'];
-					$width = $preview['width'];
-					$height = $preview['height'];
-					if (!_DIR_RESTREINT)
-						$date = '?date='.$preview['date'];
-					return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
-				}
+				if (!_DIR_RESTREINT)
+					$date = '?date='.filemtime($logo);
+				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 			}
 		}
 	}
