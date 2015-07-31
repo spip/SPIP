@@ -356,7 +356,7 @@ function spip_pg_groupby($groupby, $from, $select)
 	if (!$groupby) return '';
 
 	$groupby = spip_pg_frommysql($groupby);
-	$groupby = preg_replace('/\s+AS\s+\w+\s*/','', $groupby);
+	$groupby = preg_replace('/\s+AS\s+\w+\s*/i','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
 }
