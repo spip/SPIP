@@ -259,6 +259,13 @@ function balise_NOTES_dist($p) {
 	return $p;
 }
 
+// Qu'afficher en cas d'erreur 404 ?
+function balise_ERREUR_AUCUN_dist($p) {
+	$p->code = '$Pile[0]["erreur_aucun"]';
+	$p->statut = 'php';
+	return $p;
+}
+
 function balise_RECHERCHE_dist($p) {
 	$p->code = 'htmlspecialchars($GLOBALS["recherche"])';
 	$p->statut = 'php';

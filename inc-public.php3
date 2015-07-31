@@ -14,7 +14,10 @@ else {
 	echo $page;
 
 	// Si le 404 a ete renvoye (page vide), donner un message approprie
-	if ($http_status == 404) include(find_in_path('404.php3'));
+	if ($http_status == 404) {
+		$contexte_inclus = array('erreur_aucun' => message_erreur_404());
+		include(find_in_path('404.php3'));
+	}
 
 	terminer_public_global();
 }
