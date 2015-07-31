@@ -45,7 +45,7 @@ function afficher_debug_contexte($env) {
 // et en mode validation (fausse erreur "double occurrence insert_head")
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
 // http://doc.spip.org/@affiche_erreurs_page
-function affiche_erreurs_page($tableau_des_erreurs) {
+function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 
 	if ($GLOBALS['exec']=='valider_xml') return '';
 	$GLOBALS['bouton_admin_debug'] = true;
@@ -54,16 +54,27 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 		$res .= "<li>" .$err[0] . ", <small>".$err[1]."</small><br /></li>\n";
 	}
 	return "\n<div id='spip-debug' style='"
-	. "position: absolute; top: 20px; left: 20px; z-index: 1000;"
-	. "filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;"
+	. "position: absolute; top: 90px; left: 10px; z-index: 1000;"
+	. "filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;"
 	. "'><ul><li>"
-	. _T('zbug_erreur_squelette')
+	  . ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
 	. "<br /></li>"
 	. "<ul>"
 	. $res
 	. "</ul></ul></div>";
+}
+
+function chrono_requete($tableau_des_temps)
+{
+	foreach ($tableau_des_temps as $key => $row) {
+		  $t[$key]  = $row[0];
+		  $q[$key] = $row[1];
+		}
+	array_multisort($t, SORT_DESC, $q, $tableau_des_temps);
+	echo affiche_erreurs_page($tableau_des_temps,
+				  _T('zbug_profile', array('time'=>'')));
 }
 
 //
