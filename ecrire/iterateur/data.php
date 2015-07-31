@@ -382,15 +382,6 @@ function inc_csv_to_array_dist($u) {
 
 	return $tableau;
 }
-function inc_yaml_to_array_dist($u) {
-	include_spip('inc/yaml');
-	if (is_array($yaml = yaml_decode($u)))
-		$tableau = $yaml;
-	else if (is_object($yaml))
-		$tableau = (array) $yaml;
-
-	return $tableau;
-}
 function inc_rss_to_array_dist($u) {
 	include_spip('inc/syndic');
 	if (is_array($rss = analyser_backend($u)))
