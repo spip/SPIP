@@ -1122,6 +1122,8 @@ entered important modifications on the graphics or the structure of the site.',
   This option is disabled by default to avoid displaying unnecessary warnings.
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
+'texte_type_urls' => 'You can choose, below, the calculation mode of the pages URLs.',
+'texte_type_urls_attention' => 'Warning, this setting will only work if the file @htaccess@ is correctly installed at the site\'s root.',
 'texte_unpack' => 'downloading the latest version',
 'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
@@ -1221,6 +1223,7 @@ you can perform searches on sites and
 'titre_sites_tous' => 'Referenced sites',
 'titre_suivi_petition' => 'Petitions follow-up',
 'titre_syndication' => 'Sites syndication',
+'titre_type_urls' => 'Type of URL addresses',
 'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'The whole @upload@ directory',
 'trad_article_inexistant' => 'There is no article with this number',
