@@ -29,7 +29,7 @@ function exec_documents_colonne_dist()
 
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
-	spip_log("edcd $show");
+
 	$script = $type."s_edit";
 	$res = "";
 	foreach(explode(",",$show) as $doc) {

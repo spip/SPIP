@@ -112,6 +112,7 @@ class Champ {
 	var $type_requete;
 	var $code;	// code du calcul
 	var $interdire_scripts = true; // false si on est sur de cette balise
+	var $ramasser_miettes = false;
 	// tableau pour la production de code dependant du contexte
 	// id_mere;  pour TOTAL_BOUCLE hors du corps
 	// document; pour embed et img dans les textes
