@@ -725,6 +725,9 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	else if (!is_string($rel))
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
+	// Les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
+	if (strstr($_SERVER['SERVER_SOFTWARE'], 'IIS')) $rel .= 'index.php';
+
 	if ($script AND $script<>'accueil') 
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)
