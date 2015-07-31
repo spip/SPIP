@@ -142,6 +142,7 @@ function supprimer_numero($texte) {
 function supprimer_tags($texte, $rempl = "") {
 	$texte = preg_replace(",<[^>]*>,U", $rempl, $texte);
 	// ne pas oublier un < final non ferme
+	// mais qui peut aussi etre un simple signe plus petit que
 	$texte = str_replace('<', ' ', $texte);
 	return $texte;
 }
