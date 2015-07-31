@@ -23,9 +23,8 @@ include_spip('inc/meta');
 function liste_plugin_files(){
 	$plugin_files=array();
 	foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
-		$infos = plugin_get_infos($file);
-		if (isset($infos['nom']) && isset($infos['version'])
-		&& isset($infos['prefix']))
+		$infos = plugin_get_infos(dirname($plugin));
+		if (!isset($infos['erreur']))
 			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
 	}
 	sort($plugin_files);
