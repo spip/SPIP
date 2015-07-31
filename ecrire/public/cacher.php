@@ -279,8 +279,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
-		if ($page)
+		if (isset($page['texte'])) {
+			gunzip_page($page);
 			$use_cache = 0;
+		}
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
 			include_spip('inc/minipres');
