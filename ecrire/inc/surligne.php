@@ -99,7 +99,7 @@ function surligner_mots($page, $mots) {
 	$mots = preg_split(',\s+,ms', $mots);
 
 	foreach ($mots as $mot) {
-		if (strlen($mot) >= 2) {
+		if (strlen($mot) >= 3) {
 			$mot = surligner_regexp_accents(preg_quote(str_replace('/', '', $mot)));
 			$mots_surligne[] = $mot;
 		}
