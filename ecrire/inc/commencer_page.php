@@ -110,7 +110,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 			$res .= "<style>a.icone26 { color: white; }</style>";
 		} else  $style = "background-color: $couleur_claire";
 
-		$res .= "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
+		$res .= "\n<div align='center' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
 	. "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
 		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite');\">"
