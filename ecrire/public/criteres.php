@@ -459,7 +459,7 @@ function calculer_criteres ($idb, &$boucles) {
 
 function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 {
-	list($fct, $col, $op, $val, $table) =
+	list($fct, $col, $op, $val, $table, $args_sql) =
 	  calculer_critere_infixe($idb, $boucles, $crit);
 
 	// ajout pour le cas special d'une condition sur le champ statut:
@@ -485,7 +485,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	} else $ct = $col;
 
 	// inserer la fonction SQL
-	if ($fct) $ct = "$fct($ct)";
+	if ($fct) $ct = "$fct($ct$args_sql)";
 
 	// inserer la negation (cf !...)
 	if (strtoupper($op) == 'IN') {
@@ -524,7 +524,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	$type = $boucle->type_requete;
 	$col_table = $boucle->id_table;
 
-	list($fct, $col, $op, $val) =
+	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
 
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
@@ -565,7 +565,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  } // else: champ dans la table, c'est ok.
 	}
 
-	return array($fct, $col, $op, $val, $col_table);
+	return array($fct, $col, $op, $val, $col_table, $args_sql);
 }
 
 // deduction automatique des jointures 
@@ -740,14 +740,16 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    }
 	}
 
-	$fct = '';
+	$fct = $args = '';
 	// fonction SQL ?
-	if (ereg("([A-Za-z_]+)\(([^)]+)\)", $col,$match3)) {
-	  $col = $match3[2];
-	  $fct = $match3[1];
+	if (preg_match('/^(.*)' . SQL_ARGS . '$/', $col, $m)) {
+	  $fct = $m[1];
+	  preg_match('/^\(([^,]*)(.*)\)$/', $m[2], $a);
+	  $col = $a[1];
+	  $args_sql = $a[2];
 	}
 
-	return array($fct, $col, $op, $val);
+	return array($fct, $col, $op, $val, $args_sql);
 }
 
 // compatibilite ancienne version
