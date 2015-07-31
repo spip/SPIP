@@ -1666,7 +1666,7 @@ function _sqlite_remplacements_definitions_table($query, $autoinc = false){
 	$enum = "(\s*\([^\)]*\))?";
 
 	$remplace = array(
-		'/enum'.$enum.'/is' => 'VARCHAR',
+		'/enum'.$enum.'/is' => 'VARCHAR(255)',
 		'/binary/is' => '',
 		'/COLLATE \w+_bin/is' => '',
 		'/auto_increment/is' => '',
