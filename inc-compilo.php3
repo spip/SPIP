@@ -15,9 +15,7 @@
 // Fichier principal du compilateur de squelettes
 //
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_COMPILO")) return;
-define("_INC_COMPILO", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // reperer un code ne calculant rien, meme avec commentaire
 define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");

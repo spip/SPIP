@@ -15,9 +15,7 @@
 // Definition des {criteres} d'une boucle
 //
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CRITERES")) return;
-define("_INC_CRITERES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // {racine}

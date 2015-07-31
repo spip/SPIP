@@ -20,9 +20,7 @@
 // Cette classe est definie dans inc-compilo-index.php3
 //
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_BALISES")) return;
-define("_INC_BALISES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 //

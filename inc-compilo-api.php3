@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_COMPILO_API")) return;
-define("_INC_COMPILO_API", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Definition des noeuds de l'arbre de syntaxe abstraite

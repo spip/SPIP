@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CHERCHER")) return;
-define("_INC_CHERCHER", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement contenir la fonction chercher-squelette
 // (cf commentaires dans inc-calcul)

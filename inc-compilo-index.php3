@@ -15,9 +15,7 @@
 // fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_COMPILO_INDEX")) return;
-define("_INC_COMPILO_INDEX", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // index_pile retourne la position dans la pile du champ SQL $nom_champ 
 // en prenant la boucle la plus proche du sommet de pile (indique par $idb).

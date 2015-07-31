@@ -22,9 +22,7 @@
 // ON TROUVERA EN QUEUE DE FICHIER LES FONCTIONS FAISANT DES APPELS SQL
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CALCUL_OUTILS")) return;
-define("_INC_CALCUL_OUTILS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire('inc_rubriques.php3'); # pour calcul_branche()
 
