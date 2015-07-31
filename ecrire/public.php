@@ -13,6 +13,7 @@
 
 // Distinguer une inclusion d'un appel initial
 if (defined('_INC_PUBLIC')) {
+
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
 		$fond = $contexte_inclus['fond'];

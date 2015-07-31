@@ -548,7 +548,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$fragment = $p->fragment;
 				$fragment .= $nombre_fragments[$p->fragment]++;
 				$code = "\n((\$f = ($code))?
-				'<div id=\"$fragment\" class=\"fragment\">'.\$f.'<!-- /$fragment --></div>':'')\n";
+				'<div id=\"$fragment\" class=\"fragment\">'.\$f.'<!-- /$fragment --></div><"."?php stop_inclure(\"$fragment\"); ?".">':'')\n";
 			}
 
 		}
