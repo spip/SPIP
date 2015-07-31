@@ -626,8 +626,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			if ($GLOBALS['var_mode'] == 'debug') {
 				boucle_debug_compile ($id, $nom, $pretty,
 					$sourcefile, $codeboucle.$fincode);
-				$codedebug = "\n	boucle_debug_resultat
-					('$nom$id', \$t0);";
+				$codedebug = "
+	boucle_debug_resultat('$id', '$nom', \$t0);";
 			}
 
 			$code .= $codeboucle.$codedebug.$fincode;

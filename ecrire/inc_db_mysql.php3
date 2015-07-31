@@ -53,6 +53,7 @@ function spip_query_db($query) {
 // specifiquement pour les select des squelettes
 // c'est une instance de spip_abstract_select, voir ses specs dans inc_calcul
 // a noter qu'on pourrait y réaliser traite_query à moindre cout
+// les \n et \t sont utiles au debusqueur
 
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
@@ -60,9 +61,9 @@ function spip_mysql_select($select, $from, $where,
 			   $table, $id, $serveur) {
 
 	$DB = 'spip_';
-	$q = " FROM $DB" . join(", $DB", $from)
-	. ($where ? ' WHERE ' . join(' AND ', $where) : '')
-	. ($groupby ? " GROUP BY $groupby" : '')
+	$q = "\nFROM $DB" . join(",\n\t$DB", $from)
+	. ($where ? "\nWHERE " . join("\n\tAND ", $where) : '')
+	. ($groupby ? "\nGROUP BY $groupby" : '')
 	. ($orderby ? "\nORDER BY $orderby" : '')
 	. ($limit ? "\nLIMIT $limit" : '');
 
@@ -76,13 +77,16 @@ function spip_mysql_select($select, $from, $where,
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
+	if ($GLOBALS['var_mode'] == 'debug') {
+	  boucle_debug_resultat($id, '', $q);
+	}
+
 	if (!($res = @spip_query($q))) {
 		include_ecrire('inc_debug_sql.php3');
 		echo erreur_requete_boucle($q, $id, $table);
 	}
 
-	//
-#	 spip_log($serveur . spip_num_rows($result) . $q);
+#	 spip_log($serveur . spip_num_rows($res) . $q);
 	return $res;
 }
 
