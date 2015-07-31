@@ -61,44 +61,42 @@ function exec_export_all_dist()
 	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
 
 	if (!isset($GLOBALS['meta'][$meta]))
-		exec_export_all_args($rub, _request('gz'));
+		echo exec_export_all_args($rub, _request('gz'));
 	else {
 		$export = charger_fonction('export', 'inc');
 		$export($meta);
 	} 	
 }
 
-// creer l'en tete du fichier a partir de l'espace public
-// creer aussi la meta
+// L'en tete du fichier doit etre cree a partir de l'espace public
+// Ici on construit la liste des tables pour confirmation.
+// Envoi automatique en cas d'inaction (sauf si appel incorrect $nom=NULL)
 
 function exec_export_all_args($rub, $gz)
 {
 	$gz = $gz ? '.gz' : '';
-	$archive = $gz 
+	$nom = $gz 
 	?  _request('znom_sauvegarde') 
 	:  _request('nom_sauvegarde');
-	if ($archive === '') $archive = 'dump';
-	if ($archive) {
-		$archive .= '.xml' . $gz;
-		include_spip('inc/headers');
-		list($tables,) = export_all_list_tables();
-		$res = liste_tables_en_base('export', $tables);
-		$clic =  _T('bouton_valider');
-		$res = "\n<ol style='text-align:left'><li>\n" .
+	if ($nom === '') $nom = 'dump';
+	$archive = $nom . '.xml' . $gz;
+	list($tables,) = export_all_list_tables();
+	$res = controle_tables_en_base('export', $tables);
+	$clic =  _T('bouton_valider');
+	$res = "\n<ol style='text-align:left'><li>\n" .
 			join("</li>\n<li>", $res) .
 			"</li></ol>\n<input type='submit' value='$clic' />";
 
-		$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
-		$timeout = 'document.getElementById("form_export").submit()';
-		$corps =  http_script("window.setTimeout('$timeout', 60000)")
-		. generer_action_auteur('export_all', $arg, '', $res,  " method='post' id='form_export'", true);
-		include_spip('inc/minipres');
-		echo minipres(_T('info_sauvegarde'), $corps);
-
-	} else { // appel direct sans passer par le formulaire !
-		$f = charger_fonction('accueil');
-		$f();
-	}
+	$arg = "start,$gz,$archive,$rub," .  _VERSION_ARCHIVE;
+	$id = 'form_export';
+	$att = " method='post' id='$id'";
+	$timeout = 'if (manuel) document.getElementById(manuel).submit()';
+	$corps = (($nom !== NULL)
+	? http_script("manuel= '$id'; window.setTimeout('$timeout', 60000);")
+	: '')
+	. generer_action_auteur('export_all', $arg, '', $res,  $att, true);
+	include_spip('inc/minipres');
+	return minipres(_T('info_sauvegarde'), $corps);
 }
 
 // construction de la liste des tables pour le dump :
@@ -164,7 +162,7 @@ function export_all_list_tables()
 
 // Fabrique la liste a cocher des tables presentes
 
-function liste_tables_en_base($name, $check)
+function controle_tables_en_base($name, $check)
 {
 	$p = '/^' . $GLOBALS['table_prefix'] . '/';
 	$res = $check;
@@ -176,7 +174,8 @@ function liste_tables_en_base($name, $check)
 	foreach ($res as $k => $t) {
 
 		$c = "type='checkbox'"
-		. (in_array($t, $check) ? " checked='checked'" : '');
+		. (in_array($t, $check) ? " checked='checked'" : '')
+		. " onclick='manuel=false'";
 
 		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
 			. "[]' />\n"
