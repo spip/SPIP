@@ -1140,7 +1140,9 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	$h = generer_url_entite($id, $type, "var_mode=$en_ligne", '', true);
 
 	$h = str_replace('&', '&amp;', $h);
-	if (!preg_match(',^(mailto|javascript):,iS', $h))
+
+	// Forcer l'URL absolue si ce n'est fait.
+	if (!preg_match(',^\w+:,', $h))
 		$h = url_absolue(_DIR_RACINE . $h);
 
 	return $inline  
