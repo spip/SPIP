@@ -211,9 +211,9 @@ if ($connect_statut =="0minirezo"){
 	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">";
 	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>";
 
-	$titre = htmlspecialchars($titre);
-	$descriptif = htmlspecialchars($descriptif);
-	$texte = htmlspecialchars($texte);
+	$titre = entites_html($titre);
+	$descriptif = entites_html($descriptif);
+	$texte = entites_html($texte);
 
 	echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
 	echo aide ("mots");
@@ -230,7 +230,7 @@ if ($connect_statut =="0minirezo"){
 		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
 		while ($row_groupes = mysql_fetch_array($result)){
 			$groupe = $row_groupes['id_groupe'];
-			$titre_groupe = htmlspecialchars($row_groupes['titre']);
+			$titre_groupe = entites_html($row_groupes['titre']);
 			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
 		}			
 		echo  "</SELECT>";

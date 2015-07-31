@@ -115,8 +115,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo "<INPUT TYPE='Hidden' NAME='statut_old' VALUE=\"$statut\">";
 	if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
-	$titre = htmlspecialchars($titre);
-	$lien_titre = htmlspecialchars($lien_titre);
+	$titre = entites_html($titre);
+	$lien_titre = entites_html($lien_titre);
 
 	echo "<B>Titre</B> [Obligatoire]<BR>";
 	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";

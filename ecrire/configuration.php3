@@ -83,9 +83,9 @@ echo "<form action='configuration.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 debut_cadre_relief("racine-24.gif");
 
-	$nom_site = htmlspecialchars(lire_meta("nom_site"));
-	$adresse_site = htmlspecialchars(lire_meta("adresse_site"));
-	$email_webmaster = htmlspecialchars(lire_meta("email_webmaster"));
+	$nom_site = entites_html(lire_meta("nom_site"));
+	$adresse_site = entites_html(lire_meta("adresse_site"));
+	$email_webmaster = entites_html(lire_meta("email_webmaster"));
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Nom de votre site</FONT></B> ".aide ("confnom")."</TD></TR>";

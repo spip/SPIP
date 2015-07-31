@@ -168,9 +168,9 @@ $link->addVar('modifier_site', 'oui');
 $link->addVar('syndication_old', $syndication);
 echo $link->getForm('POST');
 
-$nom_site = htmlspecialchars($nom_site);
-$url_site = htmlspecialchars($url_site);
-$url_syndic = htmlspecialchars($url_syndic);
+$nom_site = entites_html($nom_site);
+$url_site = entites_html($url_site);
+$url_syndic = entites_html($url_syndic);
 
 echo "<b>Nom du site</b> [Obligatoire]<br>";
 echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'><p>";

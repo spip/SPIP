@@ -231,7 +231,7 @@ debut_cadre_relief("fiche-perso-24.gif");
 
 echo "<B>Signature</B> [Obligatoire]<BR>";
 echo "(Votre nom ou votre pseudo)<BR>";
-echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".htmlspecialchars($auteur['nom'])."\" SIZE='40'><P>";
+echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
 
 echo "<B>Qui &ecirc;tes-vous ?</B><BR>";
 echo "(Courte biographie en quelques mots.)<BR>";
@@ -245,7 +245,7 @@ debut_cadre_relief();
 echo "<B>Votre adresse email</B> <BR>";
 
 if ($connect_statut == "0minirezo") {
-	echo "<INPUT TYPE='text' NAME='email' CLASS='forml' VALUE=\"".htmlspecialchars($auteur['email'])."\" SIZE='40'><P>\n";
+	echo "<INPUT TYPE='text' NAME='email' CLASS='forml' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
 } else {
 	echo "<B>".$auteur['email']."</B><P>";
 }
@@ -259,10 +259,10 @@ fin_cadre_relief();
 debut_cadre_relief("site-24.gif");
 
 echo "<B>Le nom de votre site</B><BR>";
-echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".htmlspecialchars($auteur['nom_site'])."\" SIZE='40'><P>\n";
+echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".entites_html($auteur['nom_site'])."\" SIZE='40'><P>\n";
 
 echo "<B>L'adresse (URL) de votre site</B><BR>";
-echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".htmlspecialchars($auteur['url_site'])."\" SIZE='40'>\n";
+echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($auteur['url_site'])."\" SIZE='40'>\n";
 fin_cadre_relief();
 
 
@@ -283,7 +283,7 @@ if (($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_i
 
 	echo "<B>Login</B> ";
 	echo "<font color='red'>(plus de 3 caract&egrave;res)</font> :<BR>";
-	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"".htmlspecialchars($auteur['login'])."\" SIZE='40'><P>\n";
+	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"".entites_html($auteur['login'])."\" SIZE='40'><P>\n";
 	echo "<B>Nouveau mot de passe</B> ";
 	echo "<font color='red'>(plus de 5 caract&egrave;res)</font> :<BR>";
 	echo "<INPUT TYPE='password' NAME='new_pass' CLASS='formo' VALUE=\"\" SIZE='40'><BR>\n";

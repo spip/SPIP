@@ -11,7 +11,7 @@ define("_INC_DEBUG", "1");
 
 function affval($val) {
 
-	echo htmlspecialchars($val);
+	echo entites_html($val);
 
 }
 
@@ -24,11 +24,11 @@ function afftable($table) {
 		echo "<LI>";
 		switch ($val->type) {
 		case 'boucle':
-			echo "<font color='red'><b>Boucle".$val->id_boucle."</b>: ".htmlspecialchars($val->commande);
-			echo "<br><i><small>".htmlspecialchars($val->requete)."</small></i></font>";
+			echo "<font color='red'><b>Boucle".$val->id_boucle."</b>: ".entites_html($val->commande);
+			echo "<br><i><small>".entites_html($val->requete)."</small></i></font>";
 			break;
 		case 'texte':
-			echo htmlspecialchars($val->texte);
+			echo entites_html($val->texte);
 			break;
 		case 'champ':
 			echo "<font color='blue'><i>#".$val->nom_champ;

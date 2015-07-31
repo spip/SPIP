@@ -5,7 +5,7 @@ include ("inc.php3");
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
-	$type = htmlspecialchars("Nouveau groupe");
+	$type = entites_html("Nouveau groupe");
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
@@ -21,7 +21,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$result_groupes = spip_query($query_groupes);
 	while($row = mysql_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
-		$type = htmlspecialchars($row['titre']);
+		$type = entites_html($row['titre']);
 		$ancien_type = $type;
 		$unseul = $row['unseul'];
 		$obligatoire = $row['obligatoire'];
@@ -62,7 +62,7 @@ gros_titre($type);
 echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){
-	$type=htmlspecialchars(urldecode($type));
+	$type=entites_html(urldecode($type));
 	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<FORM ACTION='mots_tous.php3' METHOD='post'>\n";
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
