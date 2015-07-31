@@ -203,6 +203,15 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		else {
 			echo "<B>"._T('info_trop_resultat', array('cherche_mot' => $cherche_mot))."<BR>";
 		}
+
+		if ($GLOBALS['connect_statut'] == '0minirezo') {
+			echo "<div style='width: 200px;'>";
+			$retour = urlencode($GLOBALS['clean_link']->getUrl());
+			$titre = urlencode($cherche_mot);
+			icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_objet&titre=$titre&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+			echo "</div> ";
+		}
+
 		fin_boite_info();
 		echo "<P>";
 
@@ -487,7 +496,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($table == 'articles' AND $connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees") {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
-			icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+			$retour = urlencode($GLOBALS['clean_link']->getUrl());
+			icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_objet&redirect=$retour", "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";
 		}
