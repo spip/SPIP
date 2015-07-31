@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_config.php3");
 
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
@@ -19,7 +19,7 @@ debut_page("Configuration du site", "administration", "configuration");
 
 echo "<br><br><br>";
 gros_titre("Configuration du site");
-barre_onglets("configuration", "contenu");
+barre_onglets("configuration", "interactivite");
 
 
 debut_gauche();
@@ -32,40 +32,9 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	exit;
 }
 
+init_config();
 if ($changer_config == 'oui') {
-
-	// purger les squelettes si un changement de meta les affecte
-	if ($post_dates AND ($post_dates != lire_meta("post_dates")))
-		$purger_skel = true;
-
-	$liste_meta = array(
-		'activer_breves',
-		'config_precise_groupes',
-		'mots_cles_forums',
-		'articles_surtitre',
-		'articles_soustitre',
-		'articles_descriptif',
-		'articles_chapeau',
-		'articles_ps',
-		'articles_redac',
-		'articles_mots',
-		'post_dates',
-		'creer_preview',
-		'taille_preview',
-		'activer_sites',
-		'proposer_sites',
-		'activer_syndic',
-		'visiter_sites',
-		'moderation_sites'
-	);
-	while (list(,$i) = each($liste_meta))
-		if ($$i) ecrire_meta($i, $$i);
-	ecrire_metas();	
-
-	if ($purger_skel) {
-		$hash = calculer_action_auteur("purger_squelettes");
-		@header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=config-contenu.php3");
-	}
+	appliquer_modifs_config();
 }
 
 lire_metas();
@@ -75,564 +44,179 @@ echo "<form action='config-contenu.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
-debut_boite_info();
 
-?>
-<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>
-<P align="center"><FONT COLOR='red'><B>ATTENTION !</B></FONT>
+//
+// Mode de fonctionnement des forums publics
+//
+debut_cadre_relief("forum-interne-24.gif");
 
-<P align="justify">
-<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">
-Les modifications effectu&eacute;es ci-dessous influent notablement sur le
-fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas parfaitement
-familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&eacute;n&eacute;ralement, il est <I>fortement conseill&eacute;</I>
-de laisser la charge de cette page au webmestre principal de votre site.</B>
-</FONT>
+$forums_publics=lire_meta("forums_publics");
 
-<?php
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement par d&eacute;faut des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
 
-fin_boite_info();
-echo "<P>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+if ($forums_publics=="non") {
+	$checked = ' CHECKED';
+	$gras = '<b>'; $fingras = '</b>';
+} else {
+	$checked = '';
+	$gras = ''; $fingras = '';
+}
+echo "<INPUT$checked TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non'>";
+echo $gras."<label for='forums_non'>D&eacute;sactiver l'utilisation des forums
+	publics. Les forums publics pourront &ecirc;tre autoris&eacute;s au cas par cas
+	sur les articles ; ils seront interdits sur les rubriques, br&egrave;ves, etc.
+	</label>.".$fingras;
+echo "</TD></TR>";
+
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+echo "<i>Pour activer les forums publics, veuillez choisir leur mode
+	de mod&eacute;ration par d&eacute;faut :</i>";
+echo "</TD></TR>";
+
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 
 
+if ($forums_publics=="posteriori") {
+	$checked = ' CHECKED';
+	$gras = '<b>'; $fingras = '</b>';
+} else {
+	$checked = '';
+	$gras = ''; $fingras = '';
+}
+echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='posteriori' id='forums_posteriori'>";
+echo " $gras<label for='forums_posteriori'>Publication imm&eacute;diate des messages
+	(les contributions s'affichent d&egrave;s leur envoi, les administrateurs peuvent
+	les supprimer ensuite).</label>$fingras\n<br>";
 
-debut_cadre_enfonce("article-24.gif");
+if ($forums_publics=="priori") {
+	$checked = ' CHECKED';
+	$gras = '<b>'; $fingras = '</b>';
+} else {
+	$checked = '';
+	$gras = ''; $fingras = '';
+}
+echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='priori'
+id='forums_priori'>";
+echo " $gras<label for='forums_priori'>Mod&eacute;ration &agrave; priori (les
+	contributions ne s'affichent publiquement qu'apr&egrave;s validation par les
+	administrateurs).</label>$fingras ";
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>LES ARTICLES</FONT></B></TD></TR>";
-	echo "</table>";
-
-
-//// Contenu des articles
-debut_cadre_relief();
-
-	$articles_surtitre = lire_meta("articles_surtitre");
-	$articles_soustitre = lire_meta("articles_soustitre");
-	$articles_descriptif = lire_meta("articles_descriptif");
-	$articles_chapeau = lire_meta("articles_chapeau");
-	$articles_ps = lire_meta("articles_ps");
-	$articles_redac = lire_meta("articles_redac");
-	$articles_mots = lire_meta("articles_mots");
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_claire' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>Contenu des articles</FONT></B>".aide ("confart")."</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN=2>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s. Utilisez la liste ci-dessous pour indiquer quels &eacute;l&eacute;ments sont disponibles.</FONT>";
-	echo "</TD></TR>";
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Surtitre :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_surtitre == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_surtitre' VALUE='oui' id='articles_surtitre_on'>";
-		echo " <label for='articles_surtitre_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_surtitre' VALUE='non' CHECKED id='articles_surtitre_off'>";
-		echo " <B><label for='articles_surtitre_off'>Non</label></B> ";
+if (tester_mail()){
+	echo "\n<BR>";
+	if ($forums_publics=="abonnement") {
+		$checked = ' CHECKED';
+		$gras = '<b>'; $fingras = '</b>';
+	} else {
+		$checked = '';
+		$gras = ''; $fingras = '';
 	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_surtitre' VALUE='oui' CHECKED id='articles_surtitre_on'>";
-		echo " <B><label for='articles_surtitre_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_surtitre' VALUE='non' id='articles_surtitre_off'>";
-		echo " <label for='articles_surtitre_off'>Non</label> ";
-	}
+	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
+	echo " $gras<label for='forums_abonnement'>Enregistrement obligatoire (les
+		utilisateurs doivent s'abonner en fournissant leur adresse e-mail avant de
+		pouvoir poster des contributions).</label>$fingras ";
+}
+
+echo "</FONT>";
+echo "</TD></TR>\n";
+
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+
+if ($options == 'avancees') {
+	echo "<ul><table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
+	echo "<tr><td width='100%' bgcolor='#FFCC66'>\n";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+	echo bouton_block_invisible('forum');
+	echo "OPTIONS AVANC&Eacute;ES";
+	echo "</b></font></td></tr></table>";
+	echo debut_block_invisible('forum');
+	echo "<table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
+	echo "<tr><td><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "Appliquer ce choix de mod&eacute;ration :<br>";
+
+	echo "<INPUT TYPE='radio' CHECKED NAME='forums_publics_appliquer' VALUE='futur' id='forums_appliquer_futur'>";
+	echo " <b><label for='forums_appliquer_futur'>aux articles futurs uniquement (pas d'action sur la base de donn&eacute;es).</label></b><br>";
+	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='saufnon' id='forums_appliquer_saufnon'>";
+	echo " <label for='forums_appliquer_saufnon'>&agrave; tous les articles, sauf ceux dont le forum est d&eacute;sactiv&eacute;.</label><br>";
+	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='tous' id='forums_appliquer_tous'>";
+	echo " <label for='forums_appliquer_tous'>&agrave; tous les articles sans exception.</label><br>";
 	echo "</FONT>";
-	echo "</TD></TR>";
-
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Soustitre :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_soustitre == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_soustitre' VALUE='oui' id='articles_soustitre_on'>";
-		echo " <label for='articles_soustitre_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_soustitre' VALUE='non' CHECKED id='articles_soustitre_off'>";
-		echo " <B><label for='articles_soustitre_off'>Non</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_soustitre' VALUE='oui' CHECKED id='articles_soustitre_on'>";
-		echo " <B><label for='articles_soustitre_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_soustitre' VALUE='non' id='articles_soustitre_off'>";
-		echo " <label for='articles_soustitre_off'>Non</label> ";
-	}
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Descriptif :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_descriptif == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_descriptif' VALUE='oui' id='articles_descriptif_on'>";
-		echo " <label for='articles_descriptif_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_descriptif' VALUE='non' CHECKED id='articles_descriptif_off'>";
-		echo " <B><label for='articles_descriptif_off'>Non</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_descriptif' VALUE='oui' CHECKED id='articles_descriptif_on'>";
-		echo " <B><label for='articles_descriptif_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_descriptif' VALUE='non' id='articles_descriptif_off'>";
-		echo " <label for='articles_descriptif_off'>Non</label> ";
-	}
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Chapeau :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_chapeau == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_chapeau' VALUE='oui' id='articles_chapeau_on'>";
-		echo " <label for='articles_chapeau_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_chapeau' VALUE='non' CHECKED id='articles_chapeau_off'>";
-		echo " <B><label for='articles_chapeau_off'>Non</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_chapeau' VALUE='oui' CHECKED id='articles_chapeau_on'>";
-		echo " <B><label for='articles_chapeau_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_chapeau' VALUE='non' id='articles_chapeau_off'>";
-		echo " <label for='articles_chapeau_off'>Non</label> ";
-	}
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Post-scriptum :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_ps == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_ps' VALUE='oui' id='articles_ps_on'>";
-		echo " <label for='articles_ps_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_ps' VALUE='non' CHECKED id='articles_ps_off'>";
-		echo " <B><label for='articles_ps_off'>Non</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_ps' VALUE='oui' CHECKED id='articles_ps_on'>";
-		echo " <B><label for='articles_ps_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_ps' VALUE='non' id='articles_ps_off'>";
-		echo " <label for='articles_ps_off'>Non</label> ";
-	}
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-
-
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	echo "Date de publication ant&eacute;rieure :";
-	echo "</FONT></TD>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_redac == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_redac' VALUE='oui' id='articles_redac_on'>";
-		echo " <label for='articles_redac_on'>Oui</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_redac' VALUE='non' CHECKED id='articles_redac_off'>";
-		echo " <B><label for='articles_redac_off'>Non</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_redac' VALUE='oui' CHECKED id='articles_redac_on'>";
-		echo " <B><label for='articles_redac_on'>Oui</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='articles_redac' VALUE='non' id='articles_redac_off'>";
-		echo " <label for='articles_redac_off'>Non</label> ";
-	}
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-	echo "<TR><TD ALIGN='right' COLSPAN=2>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>";
-
-fin_cadre_relief();
-
-//// Articles post-dates
-debut_cadre_relief();
-
-	$post_dates=lire_meta("post_dates");
-
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_claire' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>Publication des articles post-dat&eacute;s</FONT></B> ".aide ("confdates")."</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Quel comportement SPIP doit-il adopter face aux articles dont la date de publication a &eacute;t&eacute; fix&eacute;e &agrave; une &eacute;ch&eacute;ance future&nbsp;?</FONT>";
-	echo "</TD></TR>";
-
-
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($post_dates == "non"){
-		echo "<INPUT TYPE='radio' NAME='post_dates' VALUE='oui' id='post_dates_on'>";
-		echo " <label for='post_dates_on'>Publier les articles, quelle que soit leur date de publication.</label> ";
-		echo "<BR><INPUT TYPE='radio' NAME='post_dates' VALUE='non' CHECKED id='post_dates_off'>";
-		echo " <B><label for='post_dates_off'>Ne pas publier les articles avant la date de publication fix&eacute;e.</label></B> ";
-	}else{
-		echo "<INPUT TYPE='radio' NAME='post_dates' VALUE='oui' id='post_dates_on' CHECKED>";
-		echo " <B><label for='post_dates_on'>Publier les articles, quelle que soit leur date de publication.</label></B> ";
-		echo "<BR><INPUT TYPE='radio' NAME='post_dates' VALUE='non' id='post_dates_off'>";
-		echo " <label for='post_dates_off'>Ne pas publier les articles avant la date de publication fix&eacute;e.</label> ";
-	}
-
-	echo "</FONT>";
-	echo "</TD></TR>\n";
-
-
-
-
-	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
-
-fin_cadre_relief();
-
-
-if (function_exists("imagejpeg")){
-//// Activer/desactiver creation automatique de vignettes
-	debut_cadre_relief("image-24.gif");
-
-	$gd_formats=lire_meta("gd_formats");
-
-	$creer_preview=lire_meta("creer_preview");
-	$taille_preview=lire_meta("taille_preview");
-	if ($taille_preview < 15) $taille_preview = 120;
-
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_claire' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>Cr&eacute;ation automatique de vignettes de pr&eacute;visualisation</FONT></B></TD></TR>";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Lorsque vous installez des images en tant que document joint, SPIP peut cr&eacute;er pour vous, automatiquement, des vignettes de pr&eacute;visualisation. Cette option facilite, par exemple, la cr&eacute;ation d'un portfolio.</FONT>";
-	echo "</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if (strlen($gd_formats)>0){
-		if ($creer_preview!="oui"){
-			echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' id='creer_preview_on'>";
-			echo " <label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label> ";
-				echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
-				echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-				echo " pixels";
-			
-			echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' CHECKED id='creer_preview_off'>";
-			echo " <B><label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label></B> ";
-		}else{
-			echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' CHECKED id='creer_preview_on'>";
-			echo " <b><label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label></b> ";
-				echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
-				echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-				echo " pixels";
-			echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' id='creer_preview_off'>";
-			echo " <label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label> ";
-		}
-		
-	echo "<p>Formats d'images pouvant &ecirc;tre utilis&eacute;es pour cr&eacute;er des vignettes&nbsp;: $gd_formats.<p>";	
-	}
-
-	
-
-		//Tester les formats acceptes par GD
-		echo "<a href='../spip_image.php3?test_formats=oui&redirect=config-contenu.php3'>Tester les formats d'image que ce site peut utiliser pour cr&eacute;er des vignettes</a>";
-		
-	echo "</FONT>";
-	echo "</TD></TR>\n";
-	echo "<TR><TD ALIGN='right' COLSPAN=2>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-
-	echo "</table>";
-
-	fin_cadre_relief();
+	echo "</TD></TR></table>\n";
+	echo fin_block();
+	echo "</ul>";
 }
 else {
-	echo "<INPUT TYPE='hidden' NAME='creer_preview' VALUE='non'>";
-	
+	echo "<input type='hidden' name='forums_publics_appliquer' value='tous'>";
 }
-fin_cadre_enfonce();
 
 
-
-
-//// Actives/desactiver systeme de breves
-debut_cadre_relief("breve-24.gif");
-
-	$activer_breves=lire_meta("activer_breves");
-
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Syst&egrave;me de br&egrave;ves</FONT></B> ".aide ("confbreves")."</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Votre site utilise-t-il le syst&egrave;me de br&egrave;ves&nbsp;?</FONT>";
-	echo "</TD></TR>";
-
-
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($activer_breves=="non"){
-		echo "<INPUT TYPE='radio' NAME='activer_breves' VALUE='oui' id='breves_on'>";
-		echo " <label for='breves_on'>Utiliser les br&egrave;ves</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='activer_breves' VALUE='non' CHECKED id='breves_off'>";
-		echo " <B><label for='breves_off'>Ne pas utiliser les br&egrave;ves</label></B> ";
-	}else{
-		echo "<INPUT TYPE='radio' NAME='activer_breves' VALUE='oui' id='breves_on' CHECKED>";
-		echo " <B><label for='breves_on'>Utiliser les br&egrave;ves</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='activer_breves' VALUE='non' id='breves_off'>";
-		echo " <label for='breves_off'>Ne pas utiliser les br&egrave;ves</label> ";
-	}
-
-	echo "</FONT>";
-	echo "</TD></TR>\n";
-
-
-
-
-	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
+echo "<TR><TD ALIGN='right'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+echo "</TD></TR>";
+echo "</TABLE>\n";
 
 fin_cadre_relief();
 
+echo "<p>";
 
-//// Gestion des mots-cles
-debut_cadre_relief("mot-cle-24.gif");
 
-	$config_precise_groupes=lire_meta("config_precise_groupes");
-	$mots_cles_forums=lire_meta("mots_cles_forums");
+//
+// Fonctionnement de la messagerie interne
+//
 
+if ($options == "avancees") {
+	debut_cadre_relief("messagerie-24.gif");
+
+	$activer_messagerie = lire_meta("activer_messagerie");
+	$activer_imessage = lire_meta("activer_imessage");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Les mots-cl&eacute;s</FONT></B> </TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?</font></FONT>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo "Messagerie interne</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "SPIP permet l'&eacute;change de messages et la constitution de forums de discussion
+		priv&eacute;s entre les participants du site. Vous pouvez activer ou
+		d&eacute;sactiver cette fonctionnalit&eacute;.";
 	echo "</TD></TR>";
 
-	echo "<TR>";
-	echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($articles_mots == "non") {
-		echo "<INPUT TYPE='radio' NAME='articles_mots' VALUE='oui' id='articles_mots_on'>";
-		echo " <label for='articles_mots_on'>Utiliser les mots-cl&eacute;s</label> ";
-		echo "<br><INPUT TYPE='radio' NAME='articles_mots' VALUE='non' CHECKED id='articles_mots_off'>";
-		echo " <B><label for='articles_mots_off'>Ne pas utiliser les mots-cl&eacute;s</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='articles_mots' VALUE='oui' CHECKED id='articles_mots_on'>";
-		echo " <B><label for='articles_mots_on'>Utiliser les mots-cl&eacute;s</label></B> ";
-		echo "<br><INPUT TYPE='radio' NAME='articles_mots' VALUE='non' id='articles_mots_off'>";
-		echo " <label for='articles_mots_off'>Ne pas utiliser les mots-cl&eacute;s</label> ";
-	}
-	echo "</FONT>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>
+		Messagerie interne</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "Vous pouvez activer ou d&eacute;sactiver l'int&eacute;gralit&eacute; du syst&egrave;me de messagerie.";
 	echo "</TD></TR>";
 
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	afficher_choix('activer_messagerie', $activer_messagerie,
+		array('oui' => 'Activer la messagerie interne',
+			'non' => 'D&eacute;sactiver la messagerie interne'));
+	echo "</TD></TR>\n";
 
-	if ($articles_mots != "non"){
-
+	//
+	// Activer la liste des redacteurs connectes
+	//
+	if ($activer_messagerie != "non") {
 		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Configuration des groupes de mots-cl&eacute;s</FONT></B></TD></TR>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT
+			FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Liste des r&eacute;dacteurs
+			connect&eacute;s</FONT></B></TD></TR>";
 
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Souhaitez-vous configurer pr&eacute;cis&eacute;ment les mots-cl&eacute;s, en indiquant par exemple qu'on ne peut s&eacute;lectionner un unique mot-unique par groupe, qu'un groupe est important...&nbsp?</font></FONT>";
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo "Lorsque le syst&egrave;me de messagerie est activ&eacute;, SPIP peut
+			indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce
+			qui vous permet d'&eacute;changer des messages en direct. Cette
+			fonctionnalit&eacute; favorise l'apparition de discussions en temps r&eacute;el
+			entre r&eacute;dacteurs <i>(et peut charger votre serveur)</i>.";
 		echo "</TD></TR>";
 
-		echo "<TR>";
-		echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-		if ($config_precise_groupes != "oui") {
-			echo "<INPUT TYPE='radio' NAME='config_precise_groupes' VALUE='oui' id='config_precise_groupes_on'>";
-			echo " <label for='config_precise_groupes_on'>Configurer pr&eacute;cis&eacute;ment</label> ";
-			echo "<br><INPUT TYPE='radio' NAME='config_precise_groupes' VALUE='non' CHECKED id='config_precise_groupes_off'>";
-			echo " <B><label for='config_precise_groupes_off'>Ne pas configurer pr&eacute;cis&eacute;ment</label></B> ";
-		}
-		else {
-			echo "<INPUT TYPE='radio' NAME='config_precise_groupes' VALUE='oui' CHECKED id='config_precise_groupes_on'>";
-			echo " <B><label for='config_precise_groupes_on'>Configurer pr&eacute;cis&eacute;ment</label></B> ";
-			echo "<br><INPUT TYPE='radio' NAME='config_precise_groupes' VALUE='non' id='config_precise_groupes_off'>";
-			echo " <label for='config_precise_groupes_off'>Ne pas configurer pr&eacute;cis&eacute;ment</label> ";
-		}
-		echo "</FONT>";
-		echo "</TD></TR>";
-
-
-		if ($forums_publics != "non"){
-			echo "<TR><TD>&nbsp;</TD></TR>";
-			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Mots-cl&eacute;s dans les forums du site public</FONT></B></TD></TR>";
-
-			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Souhaitez-vous permettre d'utilisation des mots-cl&eacute;s, s&eacute;lectionnables par les visiteurs, dans les forums du site public&nbsp;? (Attention&nbsp;: cette option est relativement complexe &agrave; utiliser correctement sur son site.)</font></FONT>";
-			echo "</TD></TR>";
-
-			echo "<TR>";
-			echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-			if ($mots_cles_forums != "oui") {
-				echo "<INPUT TYPE='radio' NAME='mots_cles_forums' VALUE='oui' id='mots_cles_forums_on'>";
-				echo " <label for='mots_cles_forums_on'>Permettre l'utilisation des mots-cl&eacute;s dans les forums publics</label> ";
-				echo "<br><INPUT TYPE='radio' NAME='mots_cles_forums' VALUE='non' CHECKED id='mots_cles_forums_off'>";
-				echo " <B><label for='mots_cles_forums_off'>Interdire l'utilisation des mots-cl&eacute;s dans les forums publics</label></B> ";
-			}
-			else {
-				echo "<INPUT TYPE='radio' NAME='mots_cles_forums' VALUE='oui' CHECKED id='mots_cles_forums_on'>";
-				echo " <B><label for='mots_cles_forums_on'>Permettre l'utilisation des mots-cl&eacute;s dans les forums publics</label></B> ";
-				echo "<br><INPUT TYPE='radio' NAME='mots_cles_forums' VALUE='non' id='mots_cles_forums_off'>";
-				echo " <label for='mots_cles_forums_off'>Interdire l'utilisation des mots-cl&eacute;s dans les forums publics</label> ";
-			}
-			echo "</FONT>";
-			echo "</TD></TR>";
-		}
-
-	}
-
-
-
-
-	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
-
-fin_cadre_relief();
-
-
-//// Actives/desactiver systeme de syndication
-debut_cadre_relief("site-24.gif");
-
-	$activer_syndic=lire_meta("activer_syndic");
-	$proposer_sites=lire_meta("proposer_sites");
-	$visiter_sites=lire_meta("visiter_sites");
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Listes de sites r&eacute;f&eacute;renc&eacute;s et syndication</FONT></B> ".aide ("reference")."</TD></TR>";
-
-	$activer_sites = lire_meta('activer_sites');
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>SPIP vous permet de cr&eacute;er des listes de sites r&eacute;f&eacute;renc&eacute;s (annuaires de liens).<p>";
-	if ($activer_sites=="non"){
-		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on'>";
-		echo " <label for='sites_on'>G&eacute;rer un annuaire de sites</label> ";
-		echo " <br><INPUT TYPE='radio' NAME='activer_sites' VALUE='non' CHECKED id='sites_off'>";
-		echo " <B><label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label></B> ";
-	}else{
-		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on' CHECKED>";
-		echo " <B><label for='sites_on'>G&eacute;rer un annuaire de sites</label></B> ";
-		echo " <br><INPUT TYPE='radio' NAME='activer_sites' VALUE='non' id='sites_off'>";
-		echo " <label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label> ";
-	}
-
-	echo "</FONT>";
-	echo "</TD></TR>\n";
-
-	if ($activer_sites <> 'non') {
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-		echo "<hr><p>Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?";
-			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
-				echo "<OPTION".mySel('0',$proposer_sites).">les administrateurs\n";
-				echo "<OPTION".mySel('1',$proposer_sites).">les r&eacute;dacteurs\n";
-				echo "<OPTION".mySel('2',$proposer_sites).">les visiteurs du site public\n";
-			echo "</SELECT></center><P>\n";
-		echo "</FONT>";
-		echo "</TD></TR>";
-
-		echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Syndication de sites</FONT></B> ".aide ("rubsyn")."</TD></TR>";
-
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Il est possible de r&eacute;cup&eacute;rer, pour chaque site r&eacute;f&eacute;renc&eacute; (lorsque ce site le permet), la liste de ses derni&egrave;res publications. Pour cela, vous devez activer la syndication de SPIP. <font color='red'>Certains h&eacute;bergeurs interdisent la consultation de sites externes depuis leurs machines&nbsp;; dans ce cas, vous ne pourrez pas utiliser la syndication de contenu depuis votre site.</font> <p>Votre site utilise-t-il le syst&egrave;me de syndication de sites&nbsp;?</FONT>";
-		echo "</TD></TR>";
-
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-		if ($activer_syndic == "non") {
-			echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on'>";
-			echo " <label for='syndic_on'>Utiliser la syndication</label> ";
-			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' CHECKED id='syndic_off'>";
-			echo " <B><label for='syndic_off'>Ne pas utiliser la syndication</label></B> ";
-		}
-		else {
-			echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on' CHECKED>";
-			echo " <B><label for='syndic_on'>Utiliser la syndication</label></B> ";
-			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' id='syndic_off'>";
-			echo " <label for='syndic_off'>Ne pas utiliser la syndication</label> ";
-
-			// Moderation par defaut des sites syndiques
-			echo "<p><hr><p align='left'>";
-			echo propre("Les liens issus des sites syndiqu&eacute;s peuvent
-				&ecirc;tre bloqu&eacute;s a priori ; le r&eacute;glage
-				ci-dessous indique le r&eacute;glage par d&eacute;faut des
-				sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
-				est ensuite possible, de toutes fa&ccedil;ons, de
-				d&eacute;bloquer chaque lien individuellement, ou de
-				choisir, site par site, de bloquer les liens &agrave; venir
-				de tel ou tel site.");
-			if (lire_meta("moderation_sites") == 'oui') {
-				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='mod_syndic_on' CHECKED>";
-				echo " <B><label for='mod_syndic_on'>Bloquer les liens a priori</label></B> ";
-				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='mod_syndic_off'>";
-				echo " <label for='mod_syndic_off'>Ne pas bloquer</label> ";
-			} else {
-				echo "<p align='center'><INPUT TYPE='radio' NAME='moderation_sites' VALUE='oui' id='mod_syndic_on'>";
-				echo " <label for='mod_syndic_on'>Bloquer les liens a priori</label> ";
-				echo " &nbsp; <INPUT TYPE='radio' NAME='moderation_sites' VALUE='non' id='mod_syndic_off' CHECKED>";
-				echo " <B><label for='mod_syndic_off'>Ne pas bloquer</label></B> ";
-			}
-
-			// Si indexation, activer/desactiver pages recuperees
-
-			$activer_moteur = lire_meta("activer_moteur");
-			if ($activer_moteur == "oui") {
-				echo "<p><hr><p align='left'>"; 
-				echo "Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP, vous pouvez effectuer les recherches ".
-					"sur les sites et les articles syndiqu&eacute;s de deux mani&egrave;res diff&eacute;rentes. <br><img src='puce.gif'> La plus ".
-					"simple consiste &agrave; rechercher uniquement dans les titres et les descriptifs des articles. <br><img src='puce.gif'> Une seconde ".
-					"m&eacute;thode, beaucoup plus puissante, permet &agrave; SPIP de rechercher &eacute;galement dans le texte des sites r&eacute;f&eacute;renc&eacute;s&nbsp;. ".
-					"Si vous r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la recherche dans le texte du site lui-m&ecirc;me. ";
-				echo "<font color='red'>Cette m&eacute;thode oblige SPIP &agrave; visiter r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
-					ce qui peut provoquer un l&eacute;ger ralentissement de votre propre site.</font>";
-
-				if ($visiter_sites == "oui") {
-					echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off'>";
-					echo " <label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label> ";
-					echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on' CHECKED>";
-					echo " <B><label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label></B> ";
-				}
-				else {
-					echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off' CHECKED>";
-					echo " <b><label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label></b> ";
-					echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on'>";
-					echo " <label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label> ";
-				}
-			}
-			else {
-				echo "<INPUT TYPE='hidden' NAME='visiter_sites' VALUE='$visiter_sites'>";
-			}
-		}
-
-		echo "</FONT>";
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		afficher_choix('activer_imessage', $activer_imessage,
+			array('oui' => 'Afficher la liste des r&eacute;dacteurs connect&eacute;s',
+				'non' => 'Ne pas afficher la liste des r&eacute;dacteurs connect&eacute;s'));
 		echo "</TD></TR>\n";
 	}
 
@@ -641,7 +225,177 @@ debut_cadre_relief("site-24.gif");
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 
-fin_cadre_relief();
+	fin_cadre_relief();
+	echo "<p>";
+}
+
+
+//
+// Accepter les inscriptions de redacteurs depuis le site public
+//
+
+if ($options == "avancees") {
+	debut_cadre_relief("redacteurs-24.gif");
+
+	$accepter_inscriptions=lire_meta("accepter_inscriptions");
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo "Inscription automatique de nouveaux r&eacute;dacteurs</FONT></B> </TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
+		partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s'inscrire
+		depuis un formulaire automatis&eacute,, et acc&eacute;deront alors &agrave; l'espace priv&eacute; pour
+		proposer leurs propres articles. <blockquote><i>Lors de la phase d'inscription,
+		les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
+		leur fournissant leurs codes d'acc&egrave;s au site priv&eacute;. Certains
+		h&eacute;bergeurs d&eacute;sactivent l'envoi de mails depuis leurs
+		serveurs&nbsp;: dans ce cas, l'inscription automatique est
+		impossible.</i></blockquote>";
+	echo "</TD></TR>";
+
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
+	afficher_choix('accepter_inscriptions', $accepter_inscriptions,
+		array('oui' => 'Accepter les inscriptions',
+			'non' => 'Ne pas accepter les inscriptions'), " &nbsp; ");
+	echo "</TD></TR>\n";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+	echo "<p>";
+}
+
+
+//
+// Activer/desactiver mails automatiques
+//
+if (tester_mail()) {
+	debut_cadre_relief();
+
+	$prevenir_auteurs=lire_meta("prevenir_auteurs");
+
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Envoi de mails automatique</FONT></B> ".aide ("confmails")."</TD></TR>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<blockquote><i>Certains h&eacute;bergeurs d&eacute;sactivent l'envoi automatique de
+		mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes
+		de SPIP ne fonctionneront pas.</i></blockquote>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD>&nbsp;</TD></TR>";
+
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "Envoi des forums aux auteurs des articles</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "Lorsqu'un visiteur du site poste un nouveau message dans le forum
+		associ&eacute; &agrave; un article, les auteurs de l'article peuvent &ecirc;tre
+		pr&eacute;venus de ce message par e-mail. Souhaitez-vous utiliser cette option&nbsp;?";
+	echo "</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	afficher_choix('prevenir_auteurs', $prevenir_auteurs,
+		array('oui' => 'Faire suivre les messages des forums aux auteurs des articles',
+			'non' => 'Ne pas faire suivre les messages des forums'));
+	echo "</TD></TR>\n";
+
+	//
+	// Suivi editorial (articles proposes & publies)
+	//
+
+	$suivi_edito=lire_meta("suivi_edito");
+	$adresse_suivi=lire_meta("adresse_suivi");
+
+	echo "<TR><TD>&nbsp;</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "Suivi de l'activit&eacute; &eacute;ditoriale</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "Afin de faciliter le suivi de l'activit&eacute;
+		&eacute;ditoriale du site, SPIP peut faire parvenir par mail, par exemple
+		&agrave; une mailing-list des r&eacute;dacteurs, l'annonce des demandes de
+		publication et des validations d'articles.</FONT>";
+	echo "</TD></TR>";
+
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+	if ($suivi_edito!="oui"){
+		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on'>";
+		echo " <label for='suivi_edito_on'>Envoyer les annonces &eacute;ditoriales</label> ";
+		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' CHECKED id='suivi_edito_off'>";
+		echo " <B><label for='suivi_edito_off'>Ne pas envoyer d'annonces</label></B>";
+	}else{
+		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on' CHECKED>";
+		echo " <B><label for='suivi_edito_on'>Envoyer les annonces &agrave; l'adresse :</label></B> ";
+		echo "<input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' CLASS='fondl'>";
+		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' id='suivi_edito_off'>";
+		echo " <label for='suivi_edito_off'>Ne pas envoyer d'annonces &eacute;ditoriales </label> ";
+	}
+
+	echo "</FONT>";
+	echo "</TD></TR>\n";
+
+	//
+	// Annonce des nouveautes
+	//
+	$quoi_de_neuf=lire_meta("quoi_de_neuf");
+	$adresse_neuf=lire_meta("adresse_neuf");
+	$jours_neuf=lire_meta("jours_neuf");
+
+	if ($envoi_now) {
+		effacer_meta('majnouv');
+		ecrire_metas();
+	}
+
+	echo "<TR><TD>&nbsp;</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "Annonce des nouveaut&eacute;s</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "SPIP peut envoyer, r&eacute;guli&egrave;rement, l'annonce des derni&egrave;res nouveaut&eacute;s du site
+		(articles et br&egrave;ves r&eacute;cemment publi&eacute;s).";
+	echo "</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+	if ($quoi_de_neuf != "oui") {
+		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on'>";
+		echo " <label for='quoi_de_neuf_on'>Envoyer la liste des nouveaut&eacute;s</label> ";
+		echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' CHECKED id='quoi_de_neuf_off'>";
+		echo " <B><label for='quoi_de_neuf_off'>Ne pas envoyer  la liste des nouveaut&eacute;s</label></B> ";
+	}
+	else {
+		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on' CHECKED>";
+		echo " <B><label for='quoi_de_neuf_on'>Envoyer la liste des nouveaut&eacute;s</label></B> ";
+
+		echo "<UL>";
+		echo "<LI>&agrave; l'adresse : <input type='text' name='adresse_neuf' value='$adresse_neuf' size='30' CLASS='fondl'>";
+		echo "<LI>tous les : <input type='text' name='jours_neuf' value='$jours_neuf' size='4' CLASS='fondl'> jours";
+		echo " &nbsp;  &nbsp;  &nbsp; <INPUT TYPE='submit' NAME='envoi_now' VALUE='Envoyer maintenant' CLASS='fondl'>";
+		echo "</UL>";
+		echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' id='quoi_de_neuf_off'>";
+		echo " <label for='quoi_de_neuf_off'>Ne pas envoyer  la liste des nouveaut&eacute;s</label> ";
+	}
+
+	echo "</FONT>";
+	echo "</TD></TR>\n";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+}
+
 
 echo "</form>";
 

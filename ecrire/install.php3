@@ -55,6 +55,9 @@ if ($etape == 6) {
 
 	ecrire_acces();
 
+	include_ecrire("inc_config.php3");
+	init_config();
+
 	$protec = "deny from all\n";
 	$myFile = fopen("data/.htaccess", "w");
 	fputs($myFile, $protec);
