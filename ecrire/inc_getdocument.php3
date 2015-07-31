@@ -280,7 +280,8 @@ function recuperer_infos_distantes($source, $max=0) {
 	}
 
 	// Echec avec HEAD, on tente avec GET
-	if (!$a) {
+	if (!$a AND !$max) {
+	spip_log("tente $source");
 		$a = recuperer_infos_distantes($source, 1024*1024);
 	}
 
