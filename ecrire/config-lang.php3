@@ -35,6 +35,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 init_config();
 if ($changer_config == 'oui') {
 	appliquer_modifs_config();
+	calculer_langues_rubriques();
 }
 
 lire_metas();
@@ -198,23 +199,48 @@ debut_cadre_enfonce();
 		while (list(,$l) = each ($langues_authorisees)) {
 				$langues_auth[$l] = true;
 		}
+		
+		
+		$query = "SELECT lang, COUNT(*) AS nombre FROM spip_articles WHERE statut = 'publie' GROUP BY lang";
+		$result = spip_query($query);
+		while ($row = spip_fetch_array($result)) {
+			$lang = $row['lang'];
+			$nombre = $row['nombre'];
+			$nombre_langue[$lang] = $nombre;
+		}
+		
+		$query = "SELECT lang, COUNT(*) AS nombre FROM spip_rubriques WHERE statut='publie' GROUP BY lang";
+		$result = spip_query($query);
+		while ($row = spip_fetch_array($result)) {
+			$lang = $row['lang'];
+			$nombre = $row['nombre'];
+			$nombre_langue[$lang] = $nombre_langue[$lang] + $nombre;
+		}
+		
 	
 		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top'><font size='2' face='Verdana,Arial,Helvetica,sans-serif'>";
 	
 		while (list($code_langue,$nom_langue) = each ($langues)) {
 				if ($langues_trad[$code_langue]) $nom_langue = "<font color='$couleur_foncee'>$nom_langue</font>";
-
+					
+				if ($code_langue == $langue_site OR $nombre_langue[$code_langue] > 0) $bloquer = true;
+				else $bloquer = false;
 
 				$i++;
 				
 				echo "<div>";
 				
+				if ($bloquer) {
+					echo "<input type='checkbox' checked disabled>";
+					echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
+				}
+				
 				if ($langues_auth[$code_langue]) {
-					echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked>";
+					if (!$bloquer) echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked>";
 					echo  " <b><label for='langue_auth_$code_langue'>$nom_langue</label></b> <font color='#777777'>[$code_langue]</font>";
 				}
 				else {
-					echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
+					if (!$bloquer) echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue'>";
 					echo  " <label for='langue_auth_$code_langue'>$nom_langue</label> <font color='#777777'>[$code_langue]</font>";
 				}
 				echo "</div>\n";
