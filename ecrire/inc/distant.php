@@ -347,6 +347,17 @@ function fichier_copie_locale($source) {
 			$source = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $source);
 		return $source;
 	}
+	
+	// optimisation : on regarde si on peut deviner l'extension dans l'url et si le fichier
+	// a deja ete copie en local avec cette extension
+	// dans ce cas elle est fiable, pas la peine de requeter en base
+	$path_parts = pathinfo($source);
+	$ext = $path_parts ? $path_parts['extension'] : '';
+	if ($ext
+	  AND $f=nom_fichier_copie_locale($source, $ext)
+	  AND file_exists(_DIR_RACINE . $f))
+	  return $f;
+	
 
 	// Si c'est deja dans la table des documents,
 	// ramener le nom de sa copie potentielle
@@ -359,7 +370,6 @@ function fichier_copie_locale($source) {
 	// voir si l'extension indiquee dans le nom du fichier est ok
 	// et si il n'aurait pas deja ete rapatrie
 
-	$path_parts = pathinfo($source);
 	$ext = $path_parts ? $path_parts['extension'] : '';
 
 	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {

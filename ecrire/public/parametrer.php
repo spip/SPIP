@@ -135,14 +135,14 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_rubrique'])
 	AND $id = intval($contexte['id_rubrique'])
-	AND $row = sql_fetsel('lang', 'spip_rubriques',"id_rubrique=$id")) {
+	AND $row = sql_fetsel_cache('id_parent, lang', 'spip_rubriques',"id_rubrique=$id")) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
 	if (isset($contexte['id_breve'])
 	AND $id = intval($contexte['id_breve'])
-	AND $row = sql_fetsel('id_rubrique, lang', 'spip_breves', "id_breve=$id")
+	AND $row = sql_fetsel_cache('id_rubrique, lang', 'spip_breves', "id_breve=$id")
 	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
@@ -150,16 +150,16 @@ function quete_rubrique_fond($contexte) {
 
 	if (isset($contexte['id_syndic'])
 	AND $id = intval($contexte['id_syndic'])
-	AND $row = sql_fetsel('id_rubrique', 'spip_syndic', "id_syndic=$id")
+	AND $row = sql_fetsel_cache('id_rubrique', 'spip_syndic', "id_syndic=$id")
 	AND $id_rubrique_fond = $row['id_rubrique']
-	AND $row = sql_fetsel('lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond")) {
+	AND $row = sql_fetsel_cache('id_parent, lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond")) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if (isset($contexte['id_article'])
 	AND $id = intval($contexte['id_article'])
-	AND $row = sql_fetsel('id_rubrique, lang', 'spip_articles', "id_article=$id")
+	AND $row = sql_fetsel_cache('id_rubrique, lang', 'spip_articles', "id_article=$id")
 	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
@@ -181,7 +181,7 @@ function quete_parent($id_rubrique) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
 
-	$id_parent = sql_fetsel('id_parent','spip_rubriques',"id_rubrique=" . $id_rubrique);
+	$id_parent = sql_fetsel_cache('id_parent, lang','spip_rubriques',"id_rubrique=" . $id_rubrique);
 
 	if ($id_parent['id_parent']!=$id_rubrique)
 		return intval($id_parent['id_parent']);

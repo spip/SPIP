@@ -350,6 +350,24 @@ function sql_fetsel(
 	return $r2;
 }
 
+# une composition tellement frequente...
+# avec un cache en plus pour les requetes repetitives sur un meme hit
+function sql_fetsel_cache(
+	$select = array(), $from = array(), $where = array(),
+	$groupby = array(), $orderby = array(), $limit = '',
+	$having = array(), $serveur='', $option=true) {
+	static $cache_fetsel=array();
+	$req = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, false);
+	if ($option==false) return $req;
+	$k = md5($req);
+	if (isset($cache_fetsel[$k])) return $cache_fetsel[$k];
+	$r = sql_query($req, $serveur, $option!==false);
+	if (!$r) return $cache_fetsel[$k]=NULL;
+	$r2 = sql_fetch($r, $serveur, $option!==false);
+	sql_free($r, $serveur, $option!==false);
+	return $cache_fetsel[$k]=$r2;
+}
+
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
 function sql_getfetsel(
@@ -358,7 +376,7 @@ function sql_getfetsel(
 	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
 	elseif (!preg_match('/\W/', $select)) $id = $select;
 	else {$id = 'n'; $select .= ' AS n';}
-	$r = sql_fetsel($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
+	$r = sql_fetsel_cache($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
 	if (!$r) return NULL;
 	return $r[$id]; 
 }
