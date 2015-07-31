@@ -40,7 +40,9 @@ function sql_error_backtrace($compil_info = false){
 		$contexte_compil = array(
 			$trace[0]['file'],// sourcefile
 			'', //nom
-			$trace[1]['function']."(){\n".$trace[0]['function']."();\n}", //id_boucle
+			(isset($trace[1]) ? $trace[1]['function']."(){\n" : '')
+				. $trace[0]['function']."();"
+				. (isset($trace[1]) ? "\n}" : ''), //id_boucle
 			$trace[0]['line'], // ligne
 			$GLOBALS['spip_lang'], // lang
 		);
