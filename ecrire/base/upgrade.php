@@ -30,7 +30,11 @@ function base_upgrade_dist($titre='', $reprise='')
 	spip_unlink(_DIR_TMP.'menu-rubriques-cache.txt');
 	spip_unlink(_DIR_TMP.'plugin_xml.cache');
 	spip_unlink(_DIR_SESSIONS.'ajax_fonctions.txt');
-	
+	spip_unlink(_DIR_TMP.'charger_pipelines.php');
+	spip_unlink(_DIR_TMP.'charger_plugins_fonctions.php');
+	spip_unlink(_DIR_TMP.'charger_plugins_options.php');
+	spip_unlink(_DIR_TMP.'verifier_plugins.txt');
+
 	include_spip('inc/acces');
 	ecrire_acces();
 	$config = charger_fonction('config', 'inc');
