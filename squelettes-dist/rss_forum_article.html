@@ -7,7 +7,7 @@
 	<link>[(#URL_ARTICLE|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>[(#ENV{lang}|texte_backend)]</language>
-	<BOUCLE_RSS(FORUMS?){id_article}{statut="publie"}{tout}>
+	<BOUCLE_RSS(FORUMS?){id_article}{statut="publie"}{!par date}{0,100}>
 	<item>
 		<title>[(#TITRE|texte_backend)][ ((#ENV{page}|=={publie}|?{#STATUT, "publie"}|=={publie}|?{'', #STATUT}))]</title>
 		<link>[(#URL_FORUM|url_absolue|texte_backend)]</link>
@@ -19,7 +19,7 @@
 			ref="(#ID_FORUM|generer_url_forum_parent|url_absolue)"
 			href="(#ID_FORUM|generer_url_forum_parent|url_absolue)" />';
 		<dc:creator>[(#AUTEUR|texte_backend)][ &lt;(#EMAIL_AUTEUR|texte_backend)&gt;]</dc:creator>
-		<description>[ (#TEXTE|liens_absolus|texte_backend)]#NOTES</description>
+		<description>[(#TEXTE|liens_absolus|texte_backend)][(#NOTES|texte_backend)]</description>
 	</item></BOUCLE_RSS>
 </BOUCLE_RSS_A>
 </channel>
