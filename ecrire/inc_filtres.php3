@@ -212,26 +212,22 @@ function PtoBR($texte){
 
 // Majuscules y compris accents, en HTML
 function majuscules($texte) {
-	if (lire_meta('charset') != 'iso-8859-1')
-		return "<span style='text-transform: uppercase'>$texte</span>";
+	// Cas du turc
+	if ($GLOBALS['spip_lang'] == 'tr') {
+		# remplacer hors des tags
+		if (preg_match_all(',<[^<>]+>,', $texte, $regs, PREG_SET_ORDER))
+			foreach ($regs as $n => $match)
+				$texte = str_replace($match[0], "@@SPIP_TURC$n@@", $texte);
 
-	$suite = htmlentities($texte);
-	$suite = ereg_replace('&amp;', '&', $suite);
-	$suite = ereg_replace('&lt;', '<', $suite);
-	$suite = ereg_replace('&gt;', '>', $suite);
-	$texte = '';
-	if (ereg('^(.*)&([A-Za-z])([a-zA-Z]*);(.*)$', $suite, $regs)) {
-		$texte .= majuscules($regs[1]); // quelle horrible recursion
-		$suite = $regs[4];
-		$carspe = $regs[2];
-		$accent = $regs[3];
-		if (ereg('^(acute|grave|circ|uml|cedil|slash|caron|ring|tilde|elig)$', $accent))
-			$carspe = strtoupper($carspe);
-		if ($accent == 'elig') $accent = 'Elig';
-		$texte .= '&'.$carspe.$accent.';';
+		$texte = str_replace('i', '&#304;', $texte);
+
+		if ($regs)
+			foreach ($regs as $n => $match)
+				$texte = str_replace("@@SPIP_TURC$n@@", $match[0], $texte);
 	}
-	$texte .= strtoupper($suite);
-	return $texte;
+
+	// Cas general
+	return "<span style='text-transform: uppercase'>$texte</span>";
 }
 
 // "127.4 ko" ou "3.1 Mo"
