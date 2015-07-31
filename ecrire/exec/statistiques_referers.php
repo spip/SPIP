@@ -71,16 +71,15 @@ barre_onglets("stat_referers", $jour);
 
 
 // afficher quels referers ?
-$where = "visites_$jour>0";
-$vis = "visites_$jour";
 
+ $result = spip_query("SELECT referer, visites_$jour AS vis FROM spip_referers WHERE visites_$jour>0 ORDER BY vis DESC LIMIT $limit");
 
-echo "<br /><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
-echo aff_referers ($vis, 'spip_referers', $where, $limit, generer_url_ecrire('statistiques_referers', ('limit=' . strval($limit+200))));
+ echo "<br /><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+ echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ('limit=' . strval($limit+200))));
 
-echo "</div><br />";
+ echo "</div><br />";
 
-fin_page();
+ fin_page();
 }
 
 ?>

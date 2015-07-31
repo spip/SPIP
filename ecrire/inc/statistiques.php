@@ -143,13 +143,12 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // Afficher les referers d'un article (ou du site)
 //
-function aff_referers ($vis, $table, $where, $limit, $plus) {
+function aff_referers ($result, $limit, $plus) {
 	global $spip_lang_right, $source_vignettes;
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
-
-	$result = spip_query("SELECT referer, $vis AS vis FROM $table WHERE $where ORDER BY $vis DESC LIMIT $limit");
-	
+	$nbvisites = array();
+	$aff = '';
 	while ($row = spip_fetch_array($result)) {
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
@@ -236,7 +235,6 @@ function aff_referers ($vis, $table, $where, $limit, $plus) {
 			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 		}
 	}
-
 
 	return $aff;
 }
