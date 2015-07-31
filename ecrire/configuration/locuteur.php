@@ -43,7 +43,8 @@ function configuration_locuteur_dist()
 	. _T('info_multi_langues_choisies')
 	. '</p>'
 	. "\n<table width='100%' cellspacing='10'><tr><td style='width: 50%'  class='verdana1'>";
-
+	
+	$i=0;
 	while (list($code_langue) = each($langues_bloquees)) {
 		$i++;
 		$nom_langue = $langues[$code_langue];
