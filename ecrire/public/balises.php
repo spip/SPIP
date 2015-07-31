@@ -965,7 +965,7 @@ function balise_INCLUDE_dist($p) {
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$id_boucle = $p->id_boucle;
-	$_contexte = argumenter_inclure($p->param, 'all', $p->descr, $p->boucles, $id_boucle, false, false);
+	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
 
@@ -994,17 +994,12 @@ function balise_INCLURE_dist($p) {
 		
 		$p->code = "recuperer_fond('',\$l =  $_l, $_options, $_connect)";
 
-	} else {
-		$n = interprete_argument_balise(1,$p);
-		if (!$n) {
+	} elseif (!isset($_contexte[1])) {
 			erreur_squelette(_T('zbug_balise_sans_argument', 
 					array('balise' => ' INCLURE')),
 			$p->id_boucle);
 			$p->code = "''";
-		} else 
-		
-			$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
-	}
+	} else 		$p->code = '(($c = find_in_path(' . $_contexte[1] . ')) ? spip_file_get_contents($c) : "")';
 
 	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
 	return $p;
