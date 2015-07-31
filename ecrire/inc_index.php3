@@ -313,7 +313,7 @@ function requete_dico ($val) {
 	if (strlen($val) > $min_long)
 		return "dico LIKE '$val%'"; 
 	else if (strlen($val) == $min_long) {
-		$dico[] = "dico = '".$val."_'";
+		return "dico = '".$val."_'";
 	}
 }
 
@@ -322,7 +322,8 @@ function requete_dico ($val) {
 function requete_hash ($rech) {
 	// recupere les mots de la recherche
 	$regs = separateurs_indexation(true)." "; 
-	$s = split("[$regs]+", supprimer_tags($rech)); 
+	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
+	$s = spip_split(" +", $rech);
 	unset($dico);
 	unset($h);
 
