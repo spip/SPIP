@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'nedensigita registra&#309;o en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Forigi la subskribliston',
 'bouton_radio_syndication' => 'Kunligado:',
-'bouton_radio_universel' => 'Universala alfabeto (utf-8): ebligas afi&#349;on de &#265;iuj lingvoj, sed ankora&#365; ne estas tolerata de &#265;iuj TTT-legiloj kiam vi modifas viajn skeletojn, kaj de ciuj retpo&#349;tmesa&#285;iloj.',
+'bouton_radio_universel' => 'Universala alfabeto (utf-8): ebligas afi&#349;adon de &#265;iuj lingvoj, sed ankora&#365; ne estas tolerata de &#265;iuj TTT-legiloj kiam vi modifas viajn skeletojn, kaj de ciuj retpo&#349;tiloj.',
 'bouton_recharger_page' => '&#285;isdatigi tiun pa&#285;on',
 'bouton_redirection' => 'ALIDIREKTO',
 'bouton_relancer_installation' => 'Restartigi la instaladon',
@@ -162,11 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => 'Se vi uzas agend-programon kongruantan la <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
-'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
-'calendrier_synchro_sync' => '<NEW> Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro' => 'Se vi uzas agend-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
 
 
 // D
@@ -356,15 +352,15 @@ Dankon pro via partopreno
 
 
 // I
-'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por informigi&#285;i pri evoluadoj &#265;e tiu teksejo.',
+'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por informi&#285;i pri evoluadoj &#265;e tiu teksejo.',
 'ical_info2' => 'Por pli da informoj pri tiuj teknikoj, konsultu <a href="http://www.spip.net/fr_suivi">la documentaron de SPIP</a>.',
-'ical_info_calendrier' => 'Du kalendaroj disponigas al vi. La unua estas plano de teksejo, anoncanta &#265;iujn la publikigitajn artikolojn. La dua enhavantas la &#265;efartikolojn, kaj &#265;iujn viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pro persona &#349;losilo, kiun vi &#265;iam povas modifii &#285;isdatigante vian pasvorton.',
+'ical_info_calendrier' => 'Du kalendaroj disponi&#285;as al vi. La unua estas plano de teksejo, anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iam povas modifi &#349;an&#285;ante vian pasvorton.',
 'ical_methode_http' => 'De&#349;utado',
 'ical_methode_webcal' => '&#284;isdatigo (webcal://)',
-'ical_texte_js' => 'Por nur unu linio de javascript, vi povas simplege afi&#349;i en iu ajn teksejo kiun vi havas, la lastajn artikolojn publikigitajn &#265;e tiu teksejo.',
-'ical_texte_prive' => 'Tiu kalendro, rezervita al vi, informas vin pri la privata &#265;efartikola funkciado de la teksejo (personaj taskoj kaj rendevuoj, publikigitaj artikoloj kaj informetoj...).',
-'ical_texte_public' => 'Pri tiu kalendaro, vi povas da&#365;rigi la publikan funkciadon &#265;e tiu teksejo (publikigitaj informetoj kaj artikoloj).',
-'ical_texte_rss' => 'Vi povas sindikati la nova&#309;ojn de tiu teksejo &#265;e iu ajn dosier-legilo de XML/RSS formato (Rich Site Summary). Tiu formato anka&#365; ebligas SPIPon de legi la nova&#309;ojn publikigitajn en aliaj teksejoj kiuj uzas iun kongruan formaton.',
+'ical_texte_js' => 'Per linio de javascript, vi povas simplege afi&#349;i en iu ajn teksejo kiun vi havas, la lastajn artikolojn publikigitajn &#265;e tiu teksejo.',
+'ical_texte_prive' => 'Tiu kalendro, rezervita al vi, informas vin pri la privata eldon-agado de la teksejo (personaj taskoj kaj rendevuoj, proponitaj artikoloj kaj informetoj...).',
+'ical_texte_public' => 'Per tiu kalendaro, vi povas observi la publikan funkciadon de tiu teksejo (publikigitaj informetoj kaj artikoloj).',
+'ical_texte_rss' => 'Vi povas asociigi la nova&#309;ojn de tiu teksejo &#265;e iu ajn dosier-legilo de XML/RSS formato (Rich Site Summary). Tiu formato anka&#365; ebligas SPIPon legi la nova&#309;ojn publikigitajn en aliaj teksejoj kiuj uzas kongruan formaton.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Dissendolisto',
 'ical_titre_rss' => 'Dosiero &laquo; backend &raquo;',
@@ -436,8 +432,8 @@ Dankon pro via partopreno
 'icone_sites_references' => 'Referencitaj teksejoj',
 'icone_statistiques' => 'Statistikoj de la teksejo',
 'icone_statistiques_visites' => 'Statistikoj de la vizitoj',
-'icone_suivi_activite' => 'Da&#365;rigi teksej- funkciadon',
-'icone_suivi_actualite' => 'Evoluado de&nbsp;teksejo',
+'icone_suivi_activite' => 'Observi la funkciadon de la teksejo',
+'icone_suivi_actualite' => 'Evoluado de la&nbsp;teksejo',
 'icone_suivi_forum' => 'Supervido de la publica forumo: @nb_forums@ kontribua&#309;o(j)',
 'icone_suivi_forums' => 'Supervidi/administri la forumojn',
 'icone_suivi_pettions' => 'Supervidi/administri la subskribliston',
@@ -481,7 +477,7 @@ Dankon pro via partopreno
 'info_adresse_email' => 'RETPO&#348;TADRESO:',
 'info_adresse_non_indiquee' => 'Vi indikis neniun test-adreson!',
 'info_adresse_url' => 'Adreso (URL) de la publika teksejo',
-'info_afficher_visites' => 'Afi&#349;i vizitojn de&nbsp;:',
+'info_afficher_visites' => 'Afi&#349;i la vizitojn de&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Afi&#349;i la vizitojn de la <b>plej vizitataj artikoloj</b> ekde la komenco:',
 'info_aide' => 'HELPO:',
 'info_aide_en_ligne' => 'Konektita SPIP-helpo',
@@ -544,8 +540,8 @@ Dankon pro via partopreno
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn&nbsp;!',
 'info_comment_lire_tableau' => 'Kiel legi tiun tabelon',
-'info_config_suivi' => 'Se tiu adreso estas adreso de dissendolisto, vi indiku &#265;i-sube la adreson kie la partoprenantoj de la tekesejo povos registrigi&#285;i. Tiu adreso povas esti ret-ligon (ekz. la pa&#285;o de registrado &#265;e la listo en la reto), a&#365; retpost-adreson kun specifa subjekto (ekz. <tt>@adresse_suivi@?subject=registrigi</tt>):',
-'info_config_suivi_explication' => 'Vi povas registri&#285;i &#265;e la dissendoliston de tiu teksejo. Vi tiam ricevos per ret-mesa&#285;oj la anoncojn de artikoloj kaj informetoj proponitaj por publikado.',
+'info_config_suivi' => 'Se tiu adreso estas adreso de dissendolisto, vi indiku &#265;i-sube la adreson kie la partoprenantoj de la tekesejo povos registrigi&#285;i. Tiu adreso povas esti ret-ligo (ekz. la pa&#285;o de registrado &#265;e la listo en la reto), a&#365; retpost-adreso kun specifa temo (ekz. <tt>@adresse_suivi@?subject=registrigi</tt>):',
+'info_config_suivi_explication' => 'Vi povas registri&#285;i &#265;e la dissendolisto de tiu teksejo. Vi tiam ricevos per retmesa&#285;oj la anoncojn de artikoloj kaj informetoj proponitaj por publikado.',
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
 'info_connexion_base' => 'Dua etapo: <b>Konekt-provo al la datenbazo</b>',
 'info_connexion_ldap_ok' => 'La konekto al LDAP sukcesis.</b><P> Vi povas iri al la sekvanta etapo',
@@ -559,7 +555,7 @@ Dankon pro via partopreno
 'info_contribution' => 'kontribua&#309;oj por la forumo',
 'info_copyright' => 'estas libera programo distribuata <a href=\'copyright_fr.html\'>sub GPL licenco.</a>',
 'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
-'info_cours_edition' => 'Viaj nun eldonataj artikoloj',
+'info_cours_edition' => 'Viaj nun redaktaj artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, bonvolu starigi kaj konfiguri la &#349;losilvortojn de la teksejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
 'info_creation_rubrique' => 'Anta&#365; ol skribi artikolojn,<br> vi nepre starigu almena&#365; unu rubrikon.<br>',
@@ -589,7 +585,6 @@ Dankon pro via partopreno
 'info_dimension' => 'Dimensioj:',
 'info_discussion_cours' => 'Nunaj diskutoj',
 'info_document' => 'Dokumento ',
-'info_donner_rendez_vous' => 'Tiu butono ebligas al vi doni rendevuon al alia partoprenanto.',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj inter la partoprenantoj de la teksejo. Vi povas aktivigi a&#365; malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_ecrire_article' => 'Anta&#365; ol havi la eblecon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
@@ -718,7 +713,7 @@ Dankon pro via partopreno
 'info_multi_herit' => 'Defa&#365;lta lingvo',
 'info_multi_langues_choisies' => 'Bonvolu elkti &#265;i-sube la lingvojn kiel disponigos la redatistojn de via teksejo.
   La lingvojn jam uzitaj en la teksejo (&#265;ef-afi&#349;itaj) vi ne povas malaktivigi.',
-'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, la tutaj tekstoj de interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de publika teksejo (datoj, formularoj) estas a&#365;tomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afi&#349;i&#285;os en la &#265;efa lingvo de teksejo.',
+'info_multi_langues_soulignees' => 'Por la <u>substrekitaj lingvoj</u>, la tutaj tekstoj de interfaco estas tradukitaj. Kiam vi elektas tiujn lingvojn, multaj elementoj de publika teksejo (datoj, formularoj) estas a&#365;tomate tradukitaj. Por la nesubstrekitaj lingvoj, tiuj elementoj afi&#349;i&#285;os en la &#265;efa lingvo de la teksejo.',
 'info_multi_rubriques' => '&#264;u aktivigi la lingvomenuon en la rubrikioj&nbsp;?',
 'info_multi_secteurs' => '... nur por la rubrikoj situantaj en la radiko&nbsp;?',
 'info_multilinguisme' => 'Plurlingvismo',
@@ -748,11 +743,10 @@ Dankon pro via partopreno
 'info_notes' => 'Notoj',
 'info_nouveau' => '(Nova)',
 'info_nouveau_message' => 'VI HAVAS NOVAN MESA&#284;ON',
-'info_nouveau_pense_bete' => 'Tiu butono ebligas al vi krei novan propran memorigilon.',
 'info_nouveaux_message' => 'Novaj mesa&#285;oj',
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESA&#284;O(J)N',
 'info_nouvel_article' => 'Nova artikolo',
-'info_nouvelle_traduction' => 'Nova tradukado&nbsp;:',
+'info_nouvelle_traduction' => 'Nova traduko&nbsp;:',
 'info_numero_article' => 'ARTIKOLO NUMERO&nbsp;:',
 'info_obligatoire_02' => '[Deviga]',
 'info_option_email' => 'Kiam vizitanto de la teksejo sendas novan mesa&#285;on en la forumo ligita kun artikolo, eblas retpo&#349;te anonci pri tiu mesa&#285;o al la a&#365;toroj de la artikolo. &#264;u vi deziras uzi tiun opcion&nbsp;?',
@@ -1185,7 +1179,7 @@ Dankon pro via partopreno
 'menu_aide_sites_syndiquer' => 'Kunligitaj teksejoj',
 'menu_aide_suivi_forum' => 'Superrigardo de la forumoj',
 'menu_aide_suivi_forum_articles_postes' => 'Postdatitaj artikoloj',
-'menu_aide_suivi_forum_configuration' => 'Konfigurado de teksejo',
+'menu_aide_suivi_forum_configuration' => 'Konfigurado de la teksejo',
 'menu_aide_suivi_forum_contenu_articles' => 'Enhavo de la artikoloj',
 'menu_aide_suivi_forum_envoi_emails' => 'A&#365;tomata sendado de retmesa&#285;oj',
 'menu_aide_suivi_forum_fonctionnement' => 'Funkciado de la forumoj',
@@ -1199,8 +1193,8 @@ Dankon pro via partopreno
 'module_fichiers_langues' => 'Dosieroj de lingvo',
 'module_raccourci' => '&#348;parvojo',
 'module_texte_affiche' => 'Afi&#349;ita teksto',
-'module_texte_explicatif' => 'Vi povas ingi la jenajn &#349;parvojojn en la skeletoj de via publika teksejo. Tiuj estos a&#365;tomate tradukotaj en lingvoj kies ekzistas specifan dosieron de lingvo.',
-'module_texte_traduction' => 'Dosiero de lingvo &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
+'module_texte_explicatif' => 'Vi povas enigi la jenajn &#349;parvojojn en la skeletoj de via publika teksejo. Tiuj estos a&#365;tomate tradukotaj en lingvoj kiuj havas specifan dosieron de lingvo.',
+'module_texte_traduction' => 'La dosiero de lingvo &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
 'mois_non_connu' => 'nekonata',
 
 
@@ -1312,7 +1306,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_auteur_messagerie' => 'Tiu teksejo povas permanente indiki la liston de la konektitaj redaktistoj, kio ebligas al vi rekte inter&#349;an&#285;i mesa&#285;ojn (kiam la po&#349;to estas &#265;i-supre neaktiva, la listo de la redaktistoj estas anka&#365; neaktiva). Vi povas decidi ne aperi en tiu listo (vi estas &laquo;nevidebla&raquo; por la aliaj uzantoj).',
 'texte_auteur_messagerie_1' => 'Tiu teksejo ebligas la inter&#349;an&#285;on de mesa&#285;oj kaj la estigon de privataj forumoj inter la partoprenantoj de la retejo. Vi povas decidi ne partopreni en tiuj inter&#349;an&#285;oj.',
 'texte_auteurs' => 'LA A&#364;TOROJ',
-'texte_bilan_traductions' => 'En tiu grafika&#309;o, verdoj strekoj prezentas tradukitajn kaj &#285;isdatigitajn artikolojn, kaj ru&#285;aj strekoj prezentas la &#285;isdatigotajn tradukojn.',
+'texte_bilan_traductions' => 'En tiu grafika&#309;o, verdaj strekoj reprezentas tradukitajn kaj &#285;isdatigitajn artikolojn, kaj ru&#285;aj strekoj la &#285;isdatigotajn tradukojn.',
 'texte_breves' => 'La informetoj estas mallongaj kaj simplaj tekstoj ebligantaj
 	rapide enretigi koncizajn informojn, mastrumi
 	gazetarkribradon, kalendaron de eventoj...',
@@ -1447,11 +1441,11 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_nouvelle_version_spip_2' => 'Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas teksestro de la teksejo, bonvolu forigi la dosieron <tt>inc_connect.php3</tt> de la dosierujo <tt>ecrire</tt> kaj rekomenci la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron <tt>inc_connect.php3</tt> anta&#365; ol forigi &#285;in...)',
 'texte_operation_echec' => 'Reiru al la anta&#365;a pa&#285;o, elektu alian bazon a&#365; kreu novan. Kontrolu la informojn donitajn de via gastiganto.',
 'texte_plan_trad' => 'Tiu pa&#285;o prezentas la staton de tradukoj por elektita lingvo.
-  La pa&#285;o afi&#349;as la artikolojn kiuj estas tradukataj, tiujn kies traduko necesas &#285;isdatigo, kaj tiujn estas tradukotaj.',
-'texte_plan_trad_en_cours' => 'Tiu simbolo indikas ke iu artikolo estas tradukata&nbsp;: tio signifas ke la traduko 
+  La pa&#285;o afi&#349;as la artikolojn kiuj estas tradukataj, tiujn kies traduko necesas &#285;isdatigon, kaj tiujn kiujn estas tradukotaj.',
+'texte_plan_trad_en_cours' => 'Tiu simbolo indikas ke artikolo estas tradukata&nbsp;: tio signifas ke la traduko 
   ekis sed ne estas jam publikigita. Alklaku tiun simbolon por iri
-  &#265;e la traduko.',
-'texte_plan_trad_modif' => 'Tiu simbolo indikas ke devena artikolo de tradukita artikolo estis modifita. En tiu kazo, vi devas &#285;isdatigi la tradukon rilate de la &#349;an&#285;oj en la devena artikolo.',
+  al la traduko.',
+'texte_plan_trad_modif' => 'Tiu simbolo indikas ke origina artikolo de tradukita artikolo estis modifita. En tiu kazo, vi devas &#285;isdatigi la tradukon rilate alla &#349;an&#285;oj en la origina artikolo.',
 'texte_plan_trad_note' => 'Noto&nbsp;: nur la publikigitaj artikoloj estas afi&#349;itaj en tiu pa&#285;o.',
 'texte_plus_trois_car' => 'pli ol 3 signoj',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
@@ -1597,7 +1591,6 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 'titre_les_articles' => 'LA ARTIKOLOJ',
 'titre_liens_entrants' => 'La enantaj ligojn de la tago',
-'titre_liens_entrants_total' => '<NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => '&#348;LOSILVORTOJ',
 'titre_mots_cles_dans_forum' => '&#348;losilvortoj en la forumoj de la publikejo',
 'titre_mots_tous' => 'La &#349;losilvortoj',
@@ -1657,7 +1650,17 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'trad_delier' => 'Ne plu ligi tiun artikolon kun &#285;iaj tradukoj',
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numerita&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
-'trad_reference' => '(artikolo referenca)'
+'trad_reference' => '(artikolo referenca)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'calendrier_synchro_sync' => '<NEW> Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'info_donner_rendez_vous' => 'Tiu butono ebligas al vi doni rendevuon al alia partoprenanto.',
+'info_nouveau_pense_bete' => 'Tiu butono ebligas al vi krei novan propran memorigilon.',
+'titre_liens_entrants_total' => '<NEW> Les liens entrants depuis le d&eacute;but'
 
 );
 
