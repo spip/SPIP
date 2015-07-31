@@ -261,6 +261,7 @@ function id_table_objet($type) {
 	}
 }
 
+// http://doc.spip.org/@objet_type
 function objet_type($table_objet){
 	$type = preg_replace(',^spip_|s$,', '', $table_objet);
 	return $type;	

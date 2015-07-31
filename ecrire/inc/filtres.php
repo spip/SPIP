@@ -2434,6 +2434,7 @@ function compacte_head($flux){
 	return $flux;
 }
 
+// http://doc.spip.org/@f_extra_editer_contenu_objet
 function f_extra_editer_contenu_objet($flux){
 	if ($GLOBALS['champs_extra']){
 		$args = $flux['args'];
@@ -2449,6 +2450,7 @@ function f_extra_editer_contenu_objet($flux){
 }
 
 
+// http://doc.spip.org/@chercher_rubrique
 function chercher_rubrique($msg, $id_rubrique, $type, $id_secteur, $restreint){
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$opt = $chercher_rubrique($id_rubrique, $type, $restreint);

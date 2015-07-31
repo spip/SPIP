@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@formulaires_editer_objet_traiter
 function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 
 	$message = "";
@@ -28,6 +29,7 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	return $message;
 }
 
+// http://doc.spip.org/@formulaires_editer_objet_charger
 function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);
@@ -122,6 +124,7 @@ function coupe_trop_long($texte){
 		return (array($texte,''));
 }
 
+// http://doc.spip.org/@editer_texte_recolle
 function editer_texte_recolle($texte, $att_text)
 {
 	if ((strlen($texte)<29*1024)
