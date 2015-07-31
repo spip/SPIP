@@ -237,7 +237,7 @@ function enregistre_forum() {
 		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	// Poser un cookie pour ne pas retaper le nom / email
-
+	include_ecrire('inc_cookie.php');
 	spip_setcookie('spip_forum_user',
 		       serialize(array('nom' => $auteur, 'email' => $email_auteur)));
 

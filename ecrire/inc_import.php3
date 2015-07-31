@@ -357,7 +357,9 @@ function import_all($f, $gz=false) {
 	include_ecrire('inc_meta.php3');
 	lire_metas();
 
-	$my_date = lire_meta_maj("debut_restauration");
+	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d
+		FROM spip_meta WHERE nom='debut_restauration'");
+	list($my_date) = spip_fetch_array($s);
 	if (!$my_date) return false;
 
 	$my_pos = lire_meta("status_restauration");

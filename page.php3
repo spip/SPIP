@@ -18,6 +18,8 @@ else
 if (isset($contexte_inclus['delais']))
 	$delais = $contexte_inclus['delais'];
 
+var_dump($contexte_inclus);
+
 // Securite 
 if (strstr($fond, '/')) {
 	die ("Faut pas se gener");

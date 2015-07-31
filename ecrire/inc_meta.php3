@@ -17,16 +17,14 @@ if (defined("_ECRIRE_INC_META")) return;
 define("_ECRIRE_INC_META", "1");
 
 function lire_metas() {
-	global $meta, $meta_maj;
+	global $meta;
 
 	$meta = '';
-	$meta_maj = '';
-	$query = 'SELECT nom,valeur,UNIX_TIMESTAMP(maj) AS d FROM spip_meta';
+	$query = 'SELECT nom,valeur FROM spip_meta';
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$nom = $row['nom'];
 		$meta[$nom] = $row['valeur'];
-		$meta_maj[$nom] = $row['d'];
 	}
 }
 
@@ -45,40 +43,33 @@ function effacer_meta($nom) {
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
 function ecrire_metas() {
-	global $meta, $meta_maj;
+	global $meta;
+	include_ecrire('inc_filtres.php3'); # pour texte_script
 
 	lire_metas();
 
-	$s = '';
+	$s = array();
 
 	if ($meta) {
-		reset($meta);
-		while (list($key, $val) = each($meta)) {
-			$key = addslashes($key);
-			$val = ereg_replace("([\\\\'])", "\\\\1", $val);
-			$s .= "\$GLOBALS['meta']['$key'] = '$val';\n";
-		}
-		$s .= "\n";
-	}
-	if ($meta_maj) {
-		reset($meta_maj);
-		while (list($key, $val) = each($meta_maj)) {
-			$key = addslashes($key);
-			$s .= "\$GLOBALS['meta_maj']['$key'] = '$val';\n";
-		}
-		$s .= "\n";
-	}
+		foreach ($meta as $key => $val)
+			$s[] = "\t'".addslashes($key)."' => '".texte_script($val)."'";
 
-	if ($s) {
 		$ok = ecrire_fichier (_DIR_SESSIONS . 'meta_cache.php3',
-				      '<'.'?php
+			'<'.'?php
 
 if (defined("_DATA_META_CACHE")) return;
 define("_DATA_META_CACHE", "1");
+
+$GLOBALS[\'meta\'] = array(
 ' 
-				      . $s . '?'.'>');
+		. join (",\n", $s) . '
+);
+
+?'.'>');
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
-		  echo "<h4 font color=red>"._T('texte_inc_meta_1')." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
+			echo "<h4 font color=red>"._T('texte_inc_meta_1')
+			." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')
+			."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
 	}
 }
 

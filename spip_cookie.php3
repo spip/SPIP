@@ -13,6 +13,7 @@
 
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session.php3");
+include_ecrire('inc_cookie.php');
 
 
 // gerer l'auth http
@@ -22,10 +23,9 @@ function auth_http($url, $essai_auth_http) {
 		if (verifier_php_auth())
 			redirige_par_entete($url);
 		else {
-			$url = quote_amp(urlencode($url));
 			ask_php_auth(_T('login_connexion_refusee'),
 			_T('login_login_pass_incorrect'), _T('login_retour_site'),
-			"url=$url", _T('login_nouvelle_tentative'),
+			"url=".urlencode($url), _T('login_nouvelle_tentative'),
 			(ereg(_DIR_RESTREINT_ABS, $url)));
 			exit;
 		}
@@ -236,6 +236,7 @@ if (ereg("^Apache", $SERVER_SOFTWARE)) {
 	redirige_par_entete($redirect);
 }
 else {
+	include_ecrire('inc_headers.php');
 	spip_header("Refresh: 0; url=" . $redirect);
 	echo "<html><head>";
 	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";

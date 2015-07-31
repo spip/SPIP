@@ -288,9 +288,9 @@ function ecrire_acces() {
 
 
 function generer_htpass($pass) {
-	global $htsalt, $flag_crypt;
-	if ($flag_crypt) return crypt($pass, $htsalt);
-	else return '';
+	global $htsalt;
+	if (function_exists('crypt'))
+		return crypt($pass, $htsalt);
 }
 
 //

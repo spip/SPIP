@@ -58,7 +58,7 @@ function ecrire_stats() {
 	if ($log_referer) {
 		$referer_md5 = '0x'.substr(md5($log_referer), 0, 15);
 		$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
-			"VALUES ($log_ip, '".texte_script($log_referer)."', $referer_md5, '$log_type', $log_id_num)";
+			"VALUES ($log_ip, '".addslashes($log_referer)."', $referer_md5, '$log_type', $log_id_num)";
 		spip_query($query);
 	}
 }
