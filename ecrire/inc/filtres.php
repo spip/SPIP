@@ -378,7 +378,12 @@ function filtrer_entites($texte) {
 	// filtrer
 	$texte = html2unicode($texte);
 	// remettre le tout dans le charset cible
-	return unicode2charset($texte);
+	$texte = unicode2charset($texte);
+	// cas particulier des " et ' qu'il faut filtrer aussi
+	// (on le faisait deja avec un &quot;)
+	if (strpos($texte,"&#")!==false)
+		$texte = str_replace(array("&#039;","&#39;","&#034;","&#34;"), array("'","'",'"','"'), $texte);
+	return $texte;
 }
 
 // caracteres de controle - http://www.w3.org/TR/REC-xml/#charsets
