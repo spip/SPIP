@@ -87,7 +87,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	$file = sous_repertoire(_DIR_CACHE_XML);
 	// si DTD locale, ignorer ce repertoire pour le moment
 	if ($avail == 'SYSTEM')
-	  $file = $loc;
+	  $file = find_in_path($loc);
 	else {
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
@@ -105,7 +105,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 
 	$dtd = ltrim($dtd);
 	if (!$dtd) {
-		spip_log("DTD '$loc' inaccessible");
+		spip_log("DTD '$loc' ($file) inaccessible");
 		return false;
 	} else 	spip_log("analyse de la DTD $loc ");
 
@@ -253,7 +253,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ELEMENT\s+([^>%\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match('/^<!ELEMENT\s+([^>\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
 	list(,$nom, $contenu, $dtd) = $m;
@@ -339,7 +339,6 @@ function expanserEntite($val, $macros=array())
 			@$vu[$ent]++;
 			$val = str_replace($m[0], $macros[$ent], $val);
 		}
-
 	  }
 	}
 
