@@ -31,7 +31,7 @@ function action_auth_dist() {
 
 		if (is_string($res)){ // Erreur
 			$redirect = _request('redirect');
-			$redirect = parametre_url($redirect,'var_erreur',$res);
+			$redirect = parametre_url($redirect,'var_erreur',$res,'&');
 			include_spip('inc/headers');
 			redirige_par_entete($redirect);
 		}

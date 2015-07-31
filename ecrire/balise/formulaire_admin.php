@@ -12,9 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/autoriser');
-include_spip('base/abstract_sql');
-
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN
 function balise_FORMULAIRE_ADMIN ($p) {
 	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
@@ -56,6 +53,10 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			return '';
 		}
 	}
+
+	include_spip('inc/autoriser');
+	include_spip('base/abstract_sql');
+
 
 	$dejafait = true;
 
