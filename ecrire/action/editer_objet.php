@@ -26,7 +26,7 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
 	// appel direct depuis une url interdit
 	if (is_null($id) OR is_null($objet)){
 		include_spip('inc/minipres');
-		echo minipres(_T('acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 		die();
 	}
 
