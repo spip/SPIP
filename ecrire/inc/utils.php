@@ -2024,6 +2024,9 @@ function tester_url_ecrire($nom){
 	// compat skels orthogonaux version precedente
 	elseif (trouver_fond($nom, 'prive/exec/'))
 		return 'fond_monobloc';
+	// echaffaudage d'un fond !
+	elseif(include_spip('public/styliser_par_z') AND z_echaffaudable($nom))
+		return 'fond';
 	// attention, il ne faut pas inclure l'exec ici
 	// car sinon #URL_ECRIRE provoque des inclusions
 	// et des define intrusifs potentiels

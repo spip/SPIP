@@ -36,7 +36,7 @@ function public_styliser_par_z_dist($flux){
 			$prefix_length = strlen($prefix_path);
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
-			$echaffauder = ""; // pas d'echaffaudage dans ecrire/ pour le moment
+			$echaffauder = charger_fonction('echaffauder','prive',true);
 			define('_ZCORE_EXCLURE_PATH','');
 		}
 		else {
@@ -239,21 +239,87 @@ function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
  * @return bool
  */
 function z_echaffaudable($type){
+	static $pages = null;
 	static $echaffaudable = array();
 	if (isset($echaffaudable[$type]))
 		return $echaffaudable[$type];
 	if (preg_match(',[^\w],',$type))
 		return $echaffaudable[$type] = false;
-	if ($table = table_objet($type)
-	  AND $type == objet_type($table)
-	  AND $trouver_table = charger_fonction('trouver_table','base')
-	  AND
-		($desc = $trouver_table($table)
-		OR $desc = $trouver_table($table_sql = "spip_$table"))
-		)
-		return $echaffaudable[$type] = array($table,$desc['table'],$desc);
-	else
-		return $echaffaudable[$type] = false;
+
+	if (test_espace_prive()){
+		include_spip('inc/pipelines_ecrire');
+		if ($e=trouver_objet_exec($type)){
+			return $echaffaudable[$type] = array($e['table'],$e['table_objet_sql'],$e);
+		}
+		else {
+			// peut etre c'est un exec=types qui liste tous les objets "type"
+			if (($t=objet_type($type,false))!==$type
+			  AND $e=trouver_objet_exec($t)){
+				return $echaffaudable[$type] = array($e['table'],$e['table_objet_sql'],$t);
+			}
+		}
+	}
+	else {
+		if (is_null($pages)) {
+			$pages = array();
+			$liste = lister_tables_objets_sql();
+			foreach($liste as $t=>$d)
+				if ($d['page']) $pages[$d['page']] = array($d['table_objet'],$t);
+		}
+		if (!isset($pages[$type]))
+			return $echaffaudable[$type] = false;
+		if (count($pages[$type])==2){
+			$trouver_table = charger_fonction('trouver_table','base');
+			$pages[$type][] = $trouver_table(reset($pages[$type]));
+		}
+		return $echaffaudable[$type] = $pages[$type];
+	}
+	return $echaffaudable[$type] = false;
+}
+
+
+/**
+ * Generer a la volee un fond a partir d'un contenu connu
+ * tous les squelettes d'echafaudage du prive sont en fait explicites dans prive/echaffaudage
+ * on ne fait qu'un mini squelette d'inclusion pour reecrire les variables d'env
+ *
+ * @param string $type
+ * @param string $table
+ * @param string $table_sql
+ * @param array $desc
+ * @param string $ext
+ * @return string
+ */
+function prive_echaffauder_dist($exec,$table,$table_sql,$desc_exec,$ext){
+	$scaffold = "";
+
+	// page objet ou objet_edit
+	if (is_array($desc_exec)) {
+		$type = $desc_exec['type'];
+		$primary = $desc_exec['id_table_objet'];
+
+		if ($desc_exec['edition']===false)
+			$fond = "objet";
+		else {
+			$trouver_table = charger_fonction('trouver_table','base');
+			$desc = $trouver_table($table_sql);
+			if (isset($desc['field']['id_rubrique']))
+				$fond = 'objet_edit';
+			else
+				$fond = 'objet_edit.sans_rubrique';
+		}
+		$scaffold = "<INCLURE{fond=prive/echafaudage/contenu/".$fond.",objet=".$type.",id_objet=#".strtoupper($primary).",env}>";
+	}
+	// page objets
+	elseif($type = $desc_exec){
+		$scaffold = "<INCLURE{fond=prive/echafaudage/contenu/objets,objet=".$type."} />";
+	}
+	
+	$dir = sous_repertoire(_DIR_CACHE,"scaffold",false);
+	$dir = sous_repertoire($dir,"contenu",false);
+	$f = $dir."$exec";
+	ecrire_fichier("$f.$ext",$scaffold);
+	return $f;
 }
 
 ?>
