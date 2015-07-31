@@ -150,11 +150,12 @@ function article_modifier($id_article, $set=null) {
  * 
  * @param int $id_rubrique
  *     Identifiant de la rubrique parente
+ * @param array|null $set
  * @return int
  *     Identifiant du nouvel article
  * 
  */
-function article_inserer($id_rubrique) {
+function article_inserer($id_rubrique, $set=null) {
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -196,6 +197,9 @@ function article_inserer($id_rubrique) {
 		'date' => date('Y-m-d H:i:s'),
 		'lang' => $lang,
 		'langue_choisie' =>$choisie);
+
+	if ($set)
+		$champs = array_merge($champs, $set);
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',

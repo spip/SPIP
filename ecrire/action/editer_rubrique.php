@@ -70,15 +70,19 @@ function action_editer_rubrique_dist($arg=null) {
  * @param int $id_parent
  *     Identifiant de la rubrique parente.
  *     0 pour la racine.
+ * @param array|null $set
  * @return int
  *     Identifiant de la rubrique crée
  */
-function rubrique_inserer($id_parent) {
+function rubrique_inserer($id_parent, $set=null) {
 	$champs = array(
 		'titre' => _T('item_nouvelle_rubrique'),
 		'id_parent' => intval($id_parent),
 		'statut' => 'new');
-	
+
+	if ($set)
+		$champs = array_merge($champs, $set);
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(

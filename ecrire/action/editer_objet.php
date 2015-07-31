@@ -145,7 +145,7 @@ function objet_modifier($objet, $id, $set=null) {
 function objet_inserer($objet, $id_parent=null, $set=null) {
 	if (include_spip('action/editer_'.$objet)
 	  AND function_exists($inserer = $objet."_inserer"))
-		return $inserer($id_parent);
+		return $inserer($id_parent, $set);
 
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
