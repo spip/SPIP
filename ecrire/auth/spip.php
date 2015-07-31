@@ -19,9 +19,19 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	$login = auth_spip_retrouver_login($login);
 
 	$md5pass = $md5next = "";
-	if (preg_match(",^\{([0-9a-f]{32});([0-9a-f]{32})\}$,i",$pass,$regs)){
-		$md5pass = $regs[1];
-		$md5next = $regs[2];
+	$shapass = $shanext = "";
+
+	if (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64})\}$,i",$pass,$regs)){
+		$shapass = $regs[1];
+		$shanext = $regs[2];
+		$pass="";
+	}
+	// compat avec une base mixte md5/sha256 : le js a envoye les 2 hash
+	elseif (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$,i",$pass,$regs)){
+		$shapass = $regs[1];
+		$shanext = $regs[2];
+		$md5pass = $regs[3];
+		$md5next = $regs[4];
 		$pass="";
 	}
   // si envoi non crypte, crypter maintenant
@@ -29,22 +39,30 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login),'','','','',$serveur);
 
 		if ($row) {
-			$md5pass = md5($row['alea_actuel'] . $pass);
-			$md5next = md5($row['alea_futur'] . $pass);
+			//var_dump('pas la !');
+			include_spip('auth/sha256.inc');
+			$shapass = sha256($row['alea_actuel'] . $pass);
+			$shanext = sha256($row['alea_futur'] . $pass);
 		}
 	}
-	// login inexistant ou mot de passe vide
-	if (!$md5pass) return array();
 
-	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'",'','','','',$serveur);
+	// login inexistant ou mot de passe vide
+	if (!$shapass AND !$md5pass) return array();
+
+	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($shapass) . " AND statut<>'5poubelle'",'','','','',$serveur);
+
+	// compat avec les anciennes bases en md5
+	if (!$row AND $md5pass)
+		$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'",'','','','',$serveur);
 
 	// login/mot de passe incorrect
 	if (!$row) return array();
 
 	// fait tourner le codage du pass dans la base
-	if ($md5next) {
+	if ($shanext) {
+
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($md5next), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'],'',$serveur);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'],'',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		verifier_htaccess(_DIR_TMP);
 	}
@@ -52,9 +70,15 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 }
 
 function auth_spip_formulaire_login($flux){
+	// faut il encore envoyer md5 ?
+	// on regarde si il reste des pass md5 en base pour des auteurs en statut pas poubelle
+	// les hash md5 ont une longueur 32, les sha 64
+	$compat_md5 = sql_countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
+
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
 	$flux['data'].=
-		'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>'
+	  ($compat_md5?'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'md5.js"></script>':'')
+		. '<script type="text/javascript" src="'._DIR_JAVASCRIPT.'sha256.js"></script>'
 		.'<script type="text/javascript" src="'._DIR_JAVASCRIPT.'login.js"></script>'
 		.'<script type="text/javascript">/*<![CDATA[*/'
 		."var alea_actuel='".$flux['args']['contexte']['_alea_actuel']."';"
@@ -63,6 +87,7 @@ function auth_spip_formulaire_login($flux){
 		."var page_auteur = '".generer_url_public('informer_auteur')."';"
 		."var informe_auteur_en_cours = false;"
 		."var attente_informe = 0;"
+		."var compat_md5 = ".($compat_md5?"true;":"false;")
 		."(function($){
 		$('#password')
 			.after(\"<em id='pass_securise'><img src='"._DIR_IMG_PACK."securise.gif' width='16' height='16' alt='<:login_securise:>' title='<:login_securise:>' \/><\/em>\");
@@ -89,7 +114,7 @@ function auth_spip_autoriser_modifier_login($serveur=''){
 
 /**
  * Verification de la validite d'un login pour le mode d'auth concerne
- * 
+ *
  * @param string $new_login
  * @param int $id_auteur
  *	si auteur existant deja
@@ -218,7 +243,7 @@ function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
 	// login et mot de passe
 	if (strlen($new_pass) < 6)
 		return _T('info_passe_trop_court');
-	
+
 	return '';
 }
 
@@ -232,10 +257,11 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 
 	$c = array();
 	include_spip('inc/acces');
+	include_spip('auth/sha256.inc.php');
 	$htpass = generer_htpass($new_pass);
 	$alea_actuel = creer_uniqid();
 	$alea_futur = creer_uniqid();
-	$pass = md5($alea_actuel.$new_pass);
+	$pass = sha256($alea_actuel.$new_pass);
 	$c['pass'] = $pass;
 	$c['htpass'] = $htpass;
 	$c['alea_actuel'] = $alea_actuel;
@@ -249,12 +275,12 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 
 /**
  * Synchroniser les fichiers htpasswd
- * 
+ *
  * @param int $id_auteur
  * @param array $champs
  * @param array $options
  *	all=>true permet de demander la regeneration complete des acces apres operation en base (import, upgrade)
- * @return void 
+ * @return void
  */
 function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur=''){
 	// ne rien faire pour une base distante : on ne sait pas regenerer les htaccess
