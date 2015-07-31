@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * et présélectionne celle la globale `$lang`
  * ou de l'arguemnt fourni: `#MENU_LANG_ECRIRE{#ENV{malangue}}`
  * 
- * @balise MENU_LANG_ECRIRE
+ * @balise
  * @link http://www.spip.net/4626
  * 
  * @param Champ $p

@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Racourci pour ouvrir une boîte (info, simple, pour noisette ...)
  *
  * @package SPIP\Core\Compilateur\Balises
- * @balise BOITE_OUVRIR
+ * @balise
  * @see balise_BOITE_PIED_dist() Pour passer au pied de boîte
  * @see balise_BOITE_FERMER_dist() Pour fermer une boîte
  * @example
@@ -63,7 +63,7 @@ function balise_BOITE_OUVRIR_dist($p) {
  * lui transmettre une classe CSS avec `#BOITE_PIED{class}`
  *
  * @package SPIP\Core\Compilateur\Balises
- * @balise BOITE_PIED
+ * @balise
  * @see balise_BOITE_OUVRIR_dist() Pour ouvrir une boîte
  * @see balise_BOITE_FERMER_dist() Pour fermer une boîte
  * 
@@ -89,7 +89,7 @@ function balise_BOITE_PIED_dist($p) {
  * Racourci pour fermer une boîte ouverte
  *
  * @package SPIP\Core\Compilateur\Balises
- * @balise BOITE_FERMER
+ * @balise
  * @see balise_BOITE_OUVRIR_dist() Pour ouvrir une boîte
  * @see balise_BOITE_PIED_dist() Pour passer au pied de boîte
  *
@@ -110,7 +110,7 @@ function balise_BOITE_FERMER_dist($p) {
  * 
  * Peut-être surchargé par `filtre_boite_ouvrir_dist` ou `filtre_boite_ouvrir`
  *
- * @filtre boite_ouvrir
+ * @filtre
  * @see balise_BOITE_OUVRIR_dist() qui utilise ce filtre
  * @param string $titre
  *     Titre de la boîte
@@ -142,7 +142,7 @@ function boite_ouvrir($titre, $class='', $head_class='', $id=""){
  * 
  * Peut-être surchargé par `filtre_boite_pied_dist` ou `filtre_boite_pied`
  *
- * @filtre boite_pied
+ * @filtre
  * @see balise_BOITE_PIED_dist() qui utilise ce filtre
  * @param string $class
  *     Classes CSS de la boîte
@@ -161,7 +161,7 @@ function boite_pied($class='act'){
  * 
  * Peut-être surchargé par `filtre_boite_fermer_dist` ou `filtre_boite_fermer`
  *
- * @filtre boite_fermer
+ * @filtre
  * @see balise_BOITE_FERMER_dist() qui utilise ce filtre
  * @return string
  *     HTML de fin de la boîte

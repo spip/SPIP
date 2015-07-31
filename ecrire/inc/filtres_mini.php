@@ -101,7 +101,7 @@ function suivre_lien($url, $lien) {
  *
  * S'applique sur une balise SPIP d'URL.
  * 
- * @filtre url_absolue
+ * @filtre
  * @link http://www.spip.net/4127
  * @uses suivre_lien()
  * @example
@@ -137,7 +137,7 @@ function protocole_implicite($url_absolue){
  *
  * Ne s'applique qu'aux textes contenant des liens
  *
- * @filtre liens_absolus
+ * @filtre
  * @uses url_absolue()
  * @link http://www.spip.net/4126
  * 
@@ -169,7 +169,7 @@ function liens_absolus($texte, $base='') {
 /**
  * Transforme une URL ou des liens en URL ou liens absolus
  *
- * @filtre abs_url
+ * @filtre
  * @link http://www.spip.net/4128
  * @global mode_abs_url Pour connaître le mode (url ou texte)
  * 

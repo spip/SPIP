@@ -228,7 +228,7 @@ function critere_debut_dist($idb, &$boucles, $crit){
  * rarement utilisé permet de définir le nom de la variable désignant la
  * page demandée (`debut_xx`), qui par défaut utilise l'identifiant de la boucle.
  *
- * @critere pagination
+ * @critere
  * @see balise_PAGINATION_dist()
  * @link http://www.spip.net/3367 Le système de pagination
  * @link http://www.spip.net/4867 Le critère pagination
@@ -297,7 +297,7 @@ function critere_pagination_dist($idb, &$boucles, $crit){
  * Le texte cherché est pris dans le premier paramètre `{recherche xx}`
  * ou à défaut dans la clé `recherche` de l'environnement du squelette.
  *
- * @critere recherche
+ * @critere
  * @link http://www.spip.net/3878
  * @see inc_prepare_recherche_dist()
  * 
@@ -525,7 +525,7 @@ function critere_logo_dist($idb, &$boucles, $crit){
  *
  * C'est la commande SQL «GROUP BY»
  *
- * @critere fusion
+ * @critere
  * @link http://www.spip.net/5166
  * @example
  *     ```

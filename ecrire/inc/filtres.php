@@ -399,7 +399,7 @@ function taille_image($img) {
 /**
  * Retourne la largeur d'une image
  *
- * @filtre largeur
+ * @filtre
  * @link http://www.spip.net/4296
  * @uses taille_image()
  * @see hauteur()
@@ -418,7 +418,7 @@ function largeur($img) {
 /**
  * Retourne la hauteur d'une image
  *
- * @filtre hauteur
+ * @filtre
  * @link http://www.spip.net/4291
  * @uses taille_image()
  * @see largeur()
@@ -486,7 +486,7 @@ function proteger_amp($texte){
  * Ceci permet d’insérer le texte d’une balise dans un `<textarea> </textarea>`
  * sans dommages.
  *
- * @filtre entites_html
+ * @filtre
  * @link http://www.spip.net/4280
  * 
  * @uses echappe_html()
@@ -522,7 +522,7 @@ function entites_html($texte, $tout=false, $quote=true) {
  *     Si le charset de votre site est `utf-8`, `&eacute;` ou `&#233;`
  *     sera transformé en `é`
  *
- * @filtre filtrer_entites
+ * @filtre
  * @link http://www.spip.net/5513
  * 
  * @param string $texte
@@ -565,7 +565,7 @@ function corriger_caracteres ($texte) {
  *
  * Ce filtre transforme les liens en liens absolus, importe les entitées html et échappe les tags html.
  *
- * @filtre texte_backend
+ * @filtre
  * @link http://www.spip.net/4287
  * 
  * @param string $texte
@@ -615,7 +615,7 @@ function texte_backend($texte) {
  * Comme texte_backend(), mais avec addslashes final pour squelettes avec PHP (rss)
  * 
  * @uses texte_backend()
- * @filtre texte_backendq
+ * @filtre
  * 
  * @param string $texte
  *     Texte à transformer
@@ -632,7 +632,7 @@ function texte_backendq($texte) {
  *
  * Supprime `10. ` dans la chaine `10. Titre`
  *
- * @filtre supprimer_numero
+ * @filtre
  * @link http://www.spip.net/4314
  * @see recuperer_numero() Pour obtenir le numéro
  * @example
@@ -656,7 +656,7 @@ function supprimer_numero($texte) {
  *
  * Récupère le numéro `10` dans la chaine `10. Titre`
  *
- * @filtre recuperer_numero
+ * @filtre
  * @link http://www.spip.net/5514
  * @see supprimer_numero() Pour supprimer le numéro
  * @see balise_RANG_dist() Pour obtenir un numéro de titre
@@ -685,7 +685,7 @@ function recuperer_numero($texte) {
  * Supprime tous les tags `<...>`.
  * Utilisé fréquemment pour écrire des RSS.
  * 
- * @filtre supprimer_tags
+ * @filtre
  * @link http://www.spip.net/4315
  * @example
  *     ```
@@ -716,7 +716,7 @@ function supprimer_tags($texte, $rempl = "") {
  *
  * Transforme les chevrons de tag `<...>` en entité HTML.
  *
- * @filtre echapper_tags
+ * @filtre
  * @link http://www.spip.net/5515
  * @example
  *     ```
@@ -740,7 +740,7 @@ function echapper_tags($texte, $rempl = "") {
  *
  * Enlève les tags d'un code HTML, élimine les doubles espaces.
  *
- * @filtre textebrut
+ * @filtre
  * @link http://www.spip.net/4317
  * @example
  *     ```
@@ -770,7 +770,7 @@ function textebrut($texte) {
 /**
  * Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
  *
- * @filtre liens_ouvrants
+ * @filtre
  * @link http://www.spip.net/4297
  * 
  * @param string $texte
@@ -809,7 +809,7 @@ function liens_nofollow($texte) {
 /**
  * Transforme les sauts de paragraphe HTML `p` en simples passages à la ligne `br`
  *
- * @filtre PtoBR
+ * @filtre
  * @link http://www.spip.net/4308
  * @example
  *     ```
@@ -841,7 +841,7 @@ function PtoBR($texte){
  *   Pour assurer la compatibilité du filtre, on encapsule le contenu par
  *   un `div` ou `span` portant ce style CSS inline.
  * 
- * @filtre lignes_longues
+ * @filtre
  * @link http://www.spip.net/4298
  * @link http://www.alsacreations.com/tuto/lire/1038-gerer-debordement-contenu-css.html
  * @deprecated Utiliser le style CSS `word-wrap:break-word;`
@@ -864,7 +864,7 @@ function lignes_longues($texte) {
  * Encadre le texte du style CSS `text-transform: uppercase;`.
  * Le cas spécifique du i turc est géré.
  * 
- * @filtre majuscules
+ * @filtre
  * @example
  *     ```
  *     [(#EXTENSION|majuscules)]
@@ -913,7 +913,7 @@ function taille_en_octets ($taille) {
 /**
  * Rend une chaine utilisable sans dommage comme attribut HTML
  *
- * @filtre attribut_html
+ * @filtre
  * @link http://www.spip.net/4282
  * @uses textebrut()
  * @uses texte_backend()
@@ -1008,7 +1008,7 @@ function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
  * En php `sinon($a, 'rien')` retourne `$a`, ou `'rien'` si `$a` est vide.
  * En filtre SPIP `|sinon{#TEXTE, rien}` : affiche `#TEXTE` ou `rien` si `#TEXTE` est vide,
  *
- * @filtre sinon
+ * @filtre
  * @see filtre_logique() pour la compilation du filtre dans un squelette
  * @link http://www.spip.net/4313
  * @note
@@ -1430,7 +1430,7 @@ function saison($numdate) {
 /**
  * Formate une date
  *
- * @filtre affdate
+ * @filtre
  * @link http://www.spip.net/4129
  * @uses affdate_base()
  * @example
@@ -1470,7 +1470,7 @@ function affdate_jourcourt($numdate, $annee_courante=null) {
  *
  * Ne retourne pas le jour donc.
  * 
- * @filtre affdate_mois_annee
+ * @filtre
  * @link http://www.spip.net/4132
  * @uses affdate_base()
  *
@@ -1896,7 +1896,7 @@ function filtre_initiale($nom){
  * Il est possible de gérer différentes "familles" de données avec
  * le second paramètre.
  * 
- * @filtre unique
+ * @filtre
  * @link http://www.spip.net/4320
  * @example
  *     ```
@@ -2056,7 +2056,7 @@ function inserer_attribut($balise, $attribut, $val, $proteger=true, $vider=false
 /**
  * Supprime un attribut HTML 
  *
- * @filtre vider_attribut
+ * @filtre
  * @link http://www.spip.net/4142
  * @uses inserer_attribut()
  * @see extraire_attribut()
@@ -2089,7 +2089,7 @@ function tester_config($id, $mode='') {
 /**
  * Additionne 2 nombres
  * 
- * @filtre plus
+ * @filtre
  * @link http://www.spip.net/4307
  * @see moins()
  * @example
@@ -2108,7 +2108,7 @@ function plus($a,$b) {
 /**
  * Soustrait 2 nombres
  * 
- * @filtre moins
+ * @filtre
  * @link http://www.spip.net/4302
  * @see plus()
  * @example
@@ -2127,7 +2127,7 @@ function moins($a,$b) {
 /**
  * Multiplie 2 nombres
  * 
- * @filtre mult
+ * @filtre
  * @link http://www.spip.net/4304
  * @see div()
  * @see modulo()
@@ -2147,7 +2147,7 @@ function mult($a,$b) {
 /**
  * Divise 2 nombres
  *
- * @filtre div
+ * @filtre
  * @link http://www.spip.net/4279
  * @see mult()
  * @see modulo()
@@ -2167,7 +2167,7 @@ function div($a,$b) {
 /**
  * Retourne le modulo 2 nombres
  *
- * @filtre modulo
+ * @filtre
  * @link http://www.spip.net/4301
  * @see mult()
  * @see div()
@@ -2239,7 +2239,7 @@ function email_valide($adresses) {
  * Permet d'afficher un symbole à côté des liens pointant vers les
  * documents attachés d'un article (liens ayant `rel=enclosure`).
  *
- * @filtre afficher_enclosures
+ * @filtre
  * @link http://www.spip.net/4134
  * 
  * @param string $tags Texte
@@ -2264,7 +2264,7 @@ function afficher_enclosures($tags) {
  * Filtre des liens HTML `<a>` selon la valeur de leur attribut `rel`
  * et ne retourne que ceux là.
  *
- * @filtre afficher_tags
+ * @filtre
  * @link http://www.spip.net/4187
  * 
  * @param string $tags Texte
@@ -2293,7 +2293,7 @@ function afficher_tags($tags, $rels='tag,directory') {
  * 
  * Attention : `length="zz"` devient `title="zz"`, pour rester conforme.
  * 
- * @filtre enclosure2microformat
+ * @filtre
  * @see microformat2enclosure() Pour l'inverse
  * 
  * @param string $e Tag RSS `<enclosure>`
@@ -2323,7 +2323,7 @@ function enclosure2microformat($e) {
  * `<a rel="enclosure" href="fichier" ...>fichier</a>`
  * au format RSS `<enclosure url="fichier" ... />`.
  * 
- * @filtre microformat2enclosure
+ * @filtre
  * @see enclosure2microformat() Pour l'inverse
  * 
  * @param string $tags Texte HTML ayant des tag `<a>` avec microformat
@@ -2354,7 +2354,7 @@ function microformat2enclosure($tags) {
  * Convertit les liens avec attribut `rel="tag"`
  * en balise `<dc:subject></dc:subject>` pour les flux RSS au format Atom.
  *
- * @filtre tags2dcsubject
+ * @filtre
  * 
  * @param string $tags Texte 
  * @return string Tags RSS Atom `<dc:subject>`.
@@ -2439,7 +2439,7 @@ function in_any($val, $vals, $def='') {
  *
  * N'accepte que les *, + et - (à ameliorer si on l'utilise vraiment).
  * 
- * @filtre valeur_numerique
+ * @filtre
  * @example
  *      ```
  *      valeur_numerique("3*2") retourne 6
@@ -2460,7 +2460,7 @@ function valeur_numerique($expr) {
 /**
  * Retourne un calcul de règle de trois
  *
- * @filtre regledetrois
+ * @filtre
  * @example
  *     ```
  *     [(#VAL{6}|regledetrois{4,3})] retourne 8
@@ -2484,7 +2484,7 @@ function regledetrois($a,$b,$c)
  * Fournit la suite de Input-Hidden correspondant aux paramètres de
  * l'URL donnée en argument, compatible avec les types_urls
  * 
- * @filtre form_hidden
+ * @filtre
  * @link http://www.spip.net/4286
  * @see balise_ACTION_FORMULAIRE()
  *     Également pour transmettre les actions à un formulaire
@@ -2562,7 +2562,7 @@ function form_hidden($action) {
 /**
  * Calcule les bornes d'une pagination
  * 
- * @filtre bornes_pagination
+ * @filtre
  *
  * @param int $courante
  *     Page courante
@@ -2622,7 +2622,7 @@ function filtre_find($array, $val) {
  * chercher un modèle de pagination particulier avec l'argument `$modele`.
  * S'il `$modele='prive'`, le filtre cherchera le modèle `pagination_prive.html`.
  * 
- * @filtre pagination
+ * @filtre
  * @see balise_PAGINATION_dist()
  * 
  * @param int $total
@@ -2705,7 +2705,7 @@ function urls_absolues_css($contenu, $source) {
  *
  * Si on lui donne à manger une feuille nommée `*_rtl.css` il va faire l'inverse.
  *
- * @filtre direction_css
+ * @filtre
  * @example
  *     ```
  *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
@@ -2858,7 +2858,7 @@ function url_absolue_css ($css) {
  * Récupère la valeur d'une clé donnée
  * dans un tableau (ou un objet).
  *
- * @filtre table_valeur
+ * @filtre
  * @link http://www.spip.net/4572
  * @example
  *     ```
@@ -2921,7 +2921,7 @@ function match($texte, $expression, $modif="UimsS",$capte=0) {
 /**
  * Remplacement de texte à base d'expression régulière
  *
- * @filtre replace
+ * @filtre
  * @link http://www.spip.net/4309
  * @see match()
  * @example
@@ -3006,7 +3006,7 @@ function env_to_attributs ($texte, $ignore_params=array()) {
 /**
  * Concatène des chaînes
  * 
- * @filtre concat
+ * @filtre
  * @link http://www.spip.net/4150
  * @example
  *     ```
@@ -3119,7 +3119,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 /**
  * Obtient des informations sur les plugins actifs
  *
- * @filtre info_plugin
+ * @filtre
  * @uses liste_plugin_actifs() Voir liste_plugin_actifs() pour connaître les informations affichables
  * 
  * @param string $plugin
@@ -3170,7 +3170,7 @@ function filtre_info_plugin_dist($plugin, $type_info) {
  *
  * @see inc_puce_statut_dist()
  *
- * @filtre puce_changement_statut
+ * @filtre
  * 
  * @param int $id_objet
  *     Identifiant de l'objet
@@ -3204,7 +3204,7 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
  *
  * @see inc_puce_statut_dist()
  *
- * @filtre puce_statut
+ * @filtre
  * 
  * @param string $statut
  *     Statut actuel de l'objet
@@ -3364,7 +3364,7 @@ function url_rss_forum($texte){return $texte;}
  * Génère des menus avec liens ou `<strong class='on'>` non clicable lorsque
  * l'item est sélectionné
  *
- * @filtre lien_ou_expose
+ * @filtre
  * @link http://www.spip.net/4004
  * @example
  *   ```
@@ -3531,7 +3531,7 @@ function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""
  * @uses icone_base()
  * @see icone_verticale() Pour un usage dans un code PHP.
  *
- * @filtre icone_verticale
+ * @filtre
  * @example
  *     ```
  *     [(#AUTORISER{voir,groupemots,#ID_GROUPE})
@@ -3566,7 +3566,7 @@ function filtre_icone_verticale_dist($lien, $texte, $fond, $fonction="", $class=
  * @uses icone_base()
  * @see icone_horizontale() Pour un usage dans un code PHP.
  * 
- * @filtre icone_horizontale
+ * @filtre
  * @example
  *     En tant que filtre dans un squelettes :
  *     ```
@@ -3610,7 +3610,7 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction="", $clas
  *
  * @uses prepare_icone_base()
  * 
- * @filtre bouton_action_horizontal
+ * @filtre
  * @example
  *     ```
  *     [(#URL_ACTION_AUTEUR{supprimer_mot, #ID_MOT, #URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}}
@@ -3642,7 +3642,7 @@ function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction=""
  * @uses icone_base()
  * @see filtre_icone_verticale_dist()
  * 
- * @filtre icone
+ * @filtre
  * @deprecated Utiliser le filtre `icone_verticale`
  *
  * @param string $lien
@@ -3674,7 +3674,7 @@ function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class
  *     Inverse l'écriture de la fonction PHP de même nom
  *     pour que le filtre soit plus pratique dans les squelettes
  * 
- * @filtre explode
+ * @filtre
  * @example
  *     ```
  *     [(#GET{truc}|explode{-})]
@@ -3693,7 +3693,7 @@ function filtre_explode_dist($a,$b){return explode($b,$a);}
  *     Inverse l'écriture de la fonction PHP de même nom
  *     pour que le filtre soit plus pratique dans les squelettes
  * 
- * @filtre implode
+ * @filtre
  * @example
  *     ```
  *     [(#GET{truc}|implode{-})]
@@ -4150,7 +4150,7 @@ function timestamp($fichier){
  * 
  * Éviter une erreur lorsqu'on utilise `|nettoyer_titre_email` dans un squelette de mail
  *
- * @filtre nettoyer_titre_email
+ * @filtre
  * @uses nettoyer_titre_email()
  * 
  * @param string $titre
@@ -4197,7 +4197,7 @@ function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id
  *     [(#AUTORISER{non}|sinon_interdire_acces{#URL_PAGE{login}, 401})]
  *     ```
  *
- * @filtre sinon_interdire_acces
+ * @filtre
  * @param bool $ok
  *     Indique si l'on doit rediriger ou pas
  * @param string $url

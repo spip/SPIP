@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * seront automatiquement ajoutés par SPIP si l'auteur a activé le
  * cookie de correspondance.
  * 
- * @balise FORMULAIRE_ADMIN
+ * @balise
  * @see f_admin()
  * @example
  *     ```
