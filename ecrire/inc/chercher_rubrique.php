@@ -24,6 +24,9 @@ define('_SPIP_SELECT_RUBRIQUES', 20); /* mettre 100000 pour desactiver ajax */
 // $idem : en mode rubrique = la rubrique soi-meme
 // http://doc.spip.org/@inc_chercher_rubrique_dist
 function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0, $do='aff') {
+	if (sql_countsel('spip_rubriques')<1)
+		return '';
+
 	// Mode sans Ajax :
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
