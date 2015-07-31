@@ -284,7 +284,6 @@ function afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_b
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
 
-			$groupes_vus[$id_groupe] = true;
 			$id_groupes_vus[] = $id_groupe;
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 			$vals= array("<A href='$url'>$cle</A>");
@@ -408,7 +407,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 
 	$res .=  "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 	while ($row_groupes = spip_fetch_array($result_groupes)) {
-		$g = menu_mots($row_groupes, $groupes_vus, $les_mots);
+		$g = menu_mots($row_groupes, $id_groupes_vus, $les_mots);
 		if ($g) {
 			$res .= "$form_mot\n<tr><td>$message</td>\n<td>$g</td></tr></form>\n";
 			$message = "";
@@ -426,7 +425,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	return $res . "</table>" . fin_block();
 }
 
-function menu_mots($row, $groupes_vus, $les_mots)
+function menu_mots($row, $id_groupes_vus, $les_mots)
 {
 	$id_groupe = $row['id_groupe'];
 
@@ -438,7 +437,7 @@ function menu_mots($row, $groupes_vus, $les_mots)
 	$titre = textebrut(typo($row['titre']));
 	$titre_groupe = entites_html($titre_groupe);
 	$unseul = $row['unseul'] == 'oui';
-	$obligatoire = $row['obligatoire']=='oui' AND !$groupes_vus[$id_groupe];
+	$obligatoire = $row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus);
 
 	// faudrait rendre ca validable quand meme
 
