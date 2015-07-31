@@ -118,16 +118,14 @@ function inc_auth_dist() {
 	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($auth_login) . " AND statut!='5poubelle'");
 
 	if (!$row = spip_fetch_array($result)) {
-	  auth_areconnecter($auth_login);
+		auth_areconnecter($auth_login);
 		exit;
-	}
-	elseif ($row['statut']=='6forum') 
-		return auth_arefaire();
-	else {
+	} else {
 		$connect_id_auteur = $row['id_auteur'];
 		$connect_login = $row['login'];
 		$connect_pass = $row['pass'];
 		$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
+		if ($row['statut']=='6forum') return auth_arefaire();
 
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.

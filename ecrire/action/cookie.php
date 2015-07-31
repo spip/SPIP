@@ -49,7 +49,6 @@ function action_spip_cookie_dist()
     $essai_login,
     $id_auteur,
     $ignore_auth_http,
-    $ldap_present,
     $logout,
     $logout_public,
     $next_session_password_md5,
@@ -130,70 +129,46 @@ if ($test_echec_cookie == 'oui') {
 
 // Tentative de login
 unset ($cookie_session);
+
 $redirect = ($url ? $url : _DIR_RESTREINT_ABS);
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
 		$session_login = $session_login_hidden;
 
-	$login = $session_login;
+	$row_auteur = array();
+	spip_connect();
 
-	// Essayer differentes methodes d'authentification
-	$auths = array('spip');
-	spip_connect(); // pour savoir si ldap est present 
-	if ($ldap_present) $auths[] = 'ldap';
-	$ok = false;
-	foreach ($auths as $nom_auth) {
-		include_spip('inc/auth_'.$nom_auth);
-		$classe_auth = "Auth_".$nom_auth;
-		$auth = new $classe_auth;
-		if ($auth->init()) {
-			// Essayer les mots de passe md5
-			$ok = $auth->verifier_challenge_md5($login, $session_password_md5, $next_session_password_md5);
-			// Sinon essayer avec le mot de passe en clair
-			if (!$ok && $session_password) $ok = $auth->verifier($login, $session_password);
-			if ($ok)  { $auth->lire(); break; }
-		}
+	// Essayer l'authentification par MySQL
+	$f = charger_fonction('auth_spip', 'inc', true);
+	if ($f) $row_auteur = $f($session_login, $session_password);		
+	// Marche pas: essayer l'authentification par LDAP si present
+	if (!$row_auteur AND $GLOBALS['ldap_present']) {
+		$f = charger_fonction('auth_ldap', 'inc', true);
+		if ($f) $row_auteur = $f($session_login, $session_password);
 	}
 
-	// Si la connexion a reussi
-	if ($ok) {
-		// Nouveau redacteur ou visiteur inscrit par mail :
-		// 'nouveau' -> '1comite' ou  '6forum'
-		// Si LDAP : importer l'utilisateur vers la base SPIP
-		$auth->activer();
-
-		if ($auth->login AND $auth->statut == '0minirezo') // force le cookie pour les admins
-			$cookie_admin = "@".$auth->login;
-
-		// On est connecte : recuperer les donnees auteurs
-		// poser le cookie session, puis le cas echeant
-		// verifier que le statut correspond au minimum requis,
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($auth->login));
-
-		if ($row_auteur = spip_fetch_array($result)) {
-			$cookie_session = creer_cookie_session($row_auteur);
-		} else
-			$ok = false;
-
-		// Si on se connecte dans l'espace prive, ajouter "bonjour" (inutilise)
-		if ($ok AND ereg(_DIR_RESTREINT_ABS, $redirect)) {
-			$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
-			. 'bonjour=oui';
-		}
-	}
-
-	if (!$ok) {
+	// Marche pas, renvoyer le formulaire avec message d'erreur si 2e fois
+	if (!$row_auteur) {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect))
 			$redirect = generer_url_public('login',
-				"var_login=$login", true);
+				"var_login=$session_login", true);
 		if ($session_password || $session_password_md5)
 			$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
 		$redirect .= '&url=' . rawurlencode($url);
-		spip_log("echec login: $login");
+		spip_log("echec login: $session_login");
+	} else {
+		spip_log("login de $session_login vers $redirect");
+		// Si on se connecte dans l'espace prive, 
+		// ajouter "bonjour" (inutilise)
+		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
+			$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
+				. 'bonjour=oui';
+		}
+		if ($row_auteur['statut'] == '0minirezo')
+			$cookie_admin = "@".$session_login;
+		$cookie_session = creer_cookie_session($row_auteur);
 	}
-	else
-		spip_log("login: $login");
 }
 
 // cookie d'admin ?
