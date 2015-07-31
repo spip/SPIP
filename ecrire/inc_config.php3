@@ -53,7 +53,11 @@ function init_config() {
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1',
 
-		'creer_htpasswd' => 'non'
+		'creer_htpasswd' => 'non',
+		
+		'langue_site' => 'fr',
+		'langues_proposees' => $GLOBALS['langues_ok']
+		
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
@@ -207,7 +211,11 @@ function appliquer_modifs_config() {
 
 		'documents_article',
 		'documents_rubrique',
-		'charset'	);
+		'charset',
+
+		'langue_site',
+		'langues_proposees'
+	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
 	ecrire_metas();

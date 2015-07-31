@@ -8,8 +8,10 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 //
 // Aide
 //
-function aide ($aide) {
+function aide ($aide='') {
 	global $couleur_foncee;
+
+	if (!$aide) return;
 
 	if (!ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
 		$dir_ecrire = 'ecrire/';
@@ -1525,10 +1527,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	echo "</td>";
 
+	//
 	// choix de la langue
-	if (strpos($GLOBALS['all_langs'], ',')) {
+	//
+	if (strpos(lire_meta('langues_proposees'), ',')) {
 		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
-		$langues = explode(',', $GLOBALS['all_langs']);
+		$langues = explode(',', lire_meta('langues_proposees'));
 		while (list(,$langue) = each ($langues)) {
 			$lien = $clean_link;
 			$lien->addVar('set_lang', $langue);
@@ -1536,6 +1540,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 		echo "</font></td>";
 	}
+	// fin langue [a placer ailleurs]
+
 
 	// choix de la couleur
 	echo "<td align='right'>";

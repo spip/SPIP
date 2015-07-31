@@ -743,8 +743,9 @@ function email_valide($adresse) {
 	return false;
 }
 
-
+//
 // Traduction des textes de SPIP
+//
 function _T($text, $args = '') {
 	include_ecrire('inc_lang.php3');
 	return traduire_chaine($text, $args);
@@ -754,6 +755,14 @@ function _T($text, $args = '') {
 function _L($text) {
 	return "<div style='font-color:red;'>$text</div>";
 }
+
+// initialisation
+$i18n = lire_meta('langue_site');
+$langues_ok = 'fr';
+$langues_tests = 'zg';
+
+$all_langs = ",$langues_ok,$langues_tests,";
+
 
 //
 // Enregistrement des evenements
