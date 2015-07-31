@@ -1,13 +1,14 @@
 <plugin>
 	<nom>SPIP</nom>
 	<prefix>spip</prefix>
+	<categorie>outil</categorie>
 
 	<auteur>Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James</auteur>
 	<licence>GNU/GPL</licence>
-	<version>3.0.0-dev</version>
-	<version_base>17743</version_base>
+	<version>3.0.0-rc</version>
+	<version_base>19268</version_base>
 	<icon></icon>
-	<etat>dev</etat>
+	<etat>test</etat>
     <slogan>Syst&egrave;me de publication pour l'Internet</slogan>
     <description>
 SPIP est un syst&egrave;me de publication pour l'Internet qui s'attache particuli&egrave;rement au fonctionnement collectif, au multilinguisme et &agrave; la facilit&eacute; d'emploi. 
@@ -24,9 +25,9 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<traduire gestionnaire="salvatore" module="ecrire" reference="fr" />
 	<traduire gestionnaire="salvatore" module="public" reference="fr" />
 
-	<procure id="iterateurs" version="0.3.0" />
-	<procure id="queue" version="0.6.4" />
-	<procure id="jqueryui" version="1.8.9" />
+	<procure id="iterateurs" version="0.6.1" />
+	<procure id="queue" version="0.6.6" />
+	<procure id="jqueryui" version="1.8.19" />
 
 	<bouton id="menu_accueil">
 		<icone>images/accueil-48.png</icone>
@@ -147,11 +148,11 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	</bouton>
 
 	<bouton id="outils_collaboratifs">
-		<titre></titre>
+		<titre>icone_outils_collaboratifs</titre>
 	</bouton>
 
 	<bouton id="outils_rapides">
-		<titre></titre>
+		<titre>icone_outil_rapides</titre>
 	</bouton>
 	<bouton id='rubrique_creer' parent="outils_rapides">
 		<icone>images/rubrique-new-16.png</icone>
