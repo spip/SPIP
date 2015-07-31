@@ -150,7 +150,7 @@ Aqueli informacioun vi devon poudé estre prouvedi per l’aministratour dóu si
 	'htaccess_inoperant' => 'htaccess inouperant',
 
 	// I
-	'ical_info1' => 'Esta pàgina presenta de metoda diferenti da restà en countat embé la vida d’estou sit.',
+	'ical_info1' => 'Esta pàgina presenta de metoda diferenti per restà en countat embé la vida d’estou sit.',
 	'ical_info2' => 'Per avé mai d’informacioun soubre aqueli tècnica, noun esitàs de counsultà <a href="@spipnet@">la doucumentacioun de SPIP</a>.',
 	'ical_info_calendrier' => 'Li a doui calendari a la vouòstra dispousicioun. Lou premié es un plan dóu sit qu’anounça toui lu article publicat. Lou segount counten li anounça editoriali en mai dei vouòstre darrié message privat : v’es reservat graça a una clau persounala, que la poudès moudificà a cada moumen en renouvelant lou vouòstre mot de passa.',
 	'ical_methode_http' => 'Telecargamen',
@@ -784,7 +784,7 @@ reinstalà SPIP per recreà una basa nouvèla couma pura un premié achès amini
 	'texte_nouvelle_version_spip_2' => 'Aquela versioun nouvèla demanda una metuda a jou mai coumpleta qu’a l’acoustumada. Se siès webmèstre dóu sit, vourguès escassà lou fichié @connect@ e repilhà l’instalacioun per fin d’atualisà lu vouòstre parametre de counessioun a la basa de dounada.<p> (NB: s’avès denembrat lu vouòstre parametre de counessioun, regarjàs lou fichié @connect@ denant de lou suprimà...)</p>',
 	'texte_operation_echec' => 'Tournàs a la pàgina prechedenta, chausissès una autra basa o creàs nen una nouvèla. Verificàs li infourmacioun que lou vouòstre aubergadour v’a fournidi.',
 	'texte_plus_trois_car' => 'mai de 3 caracter',
-	'texte_plusieurs_articles' => 'Plusiur autour troubat da « @cherche_auteur@ »:',
+	'texte_plusieurs_articles' => 'Plusiur autour troubat per « @cherche_auteur@ »:',
 	'texte_port_annuaire' => '(La valour predefinida counven generalamen.)',
 	'texte_presente_plugin' => 'Aquela pàgina lista lu plugin dispounible sus lou sit. Poudès ativà lu plugin necessari en entacant la casa courrespoundenta.',
 	'texte_proposer_publication' => 'Quoura lou vouòstre article sera acabat,<br /> pourès proupausà la siéu publicacioun.',
@@ -816,14 +816,14 @@ recarculà soulamen una pàgina, passàs pulèu per l’espaci public et utilis�
 	'texte_statut_attente_validation' => 'en aspèra de validacioun',
 	'texte_statut_publies' => 'publicat en ligna',
 	'texte_statut_refuses' => 'refudat',
-	'texte_suppression_fichiers' => 'Utilisàs aquela coumanda da suprimà toui lu fichié que si trouvon
+	'texte_suppression_fichiers' => 'Utilisàs aquela coumanda per fin de suprimà toui lu fichié que si trouvon
 en l’amagadou SPIP. Acò permete per isemple de fourçà un nouvèu carcul de touti li pàgina
 s’avès fach dei moudificacioun empourtanti de grafisme o d’estrutura dóu sit.',
 	'texte_sur_titre' => 'Soubre-titre',
 	'texte_table_ok' => ': aquela taula va ben.',
 	'texte_tentative_recuperation' => 'Tentativa de reparacioun',
 	'texte_tenter_reparation' => 'Prouvà de reparà la basa de dounada',
-	'texte_test_proxy' => 'Da prouvà aqueu proxy, endicàs aquì l’adressa d’un sit web
+	'texte_test_proxy' => 'Per prouvà aqueu proxy, endicàs aquì l’adressa d’un sit web
     que lou vourias prouvà.',
 	'texte_titre_02' => 'Titre :',
 	'texte_titre_obligatoire' => '<b>Titre</b> [Oubligatori]',
@@ -831,9 +831,9 @@ s’avès fach dei moudificacioun empourtanti de grafisme o d’estrutura dóu s
 	'texte_travail_collaboratif' => 'Coura es frequent que mai d’un redatour 
   travalhe sus lou meme article, lou sistema
   pòu afichà lu article darieramen « dubèrt »
-  da evità li moudificacioun fachi ensen.
+  per fin d’evità li moudificacioun fachi ensen.
   Aquela oupcioun es desativada de maniera predefinida
-  da evità d’afichà de message d’avertimen
+  per fin d’evità d’afichà de message d’avertimen
   intempestiéu.',
 	'texte_vide' => 'vuèi',
 	'texte_vider_cache' => 'Vuà l’amagadou',
