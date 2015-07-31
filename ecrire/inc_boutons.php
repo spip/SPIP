@@ -64,7 +64,7 @@ function definir_barre_boutons() {
 	);
 
 	if ($GLOBALS['connect_statut'] == "0minirezo"
-		AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
+	AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
 		$boutons_admin['statistiques_visites']=
 		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
 	}
@@ -147,22 +147,23 @@ function definir_barre_boutons() {
 	);
 
 	// sous menu statistiques
+	if (isset($boutons_admin['statistiques_visites'])) {
+		$sousmenu=array(
+			'espacement' => null,
+			'statistiques_repartition' =>
+				new Bouton("rubrique-24.gif", "icone_repartition_visites")
+		);
 
-	$sousmenu=array(
-		'espacement' => null,
-		'statistiques_repartition' =>
-			new Bouton("rubrique-24.gif", "icone_repartition_visites")
-	);
-
-	if ($GLOBALS['meta']['multi_articles'] == 'oui'
+		if ($GLOBALS['meta']['multi_articles'] == 'oui'
 		OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
-		$sousmenu['statistiques_lang']=
-			new Bouton("langues-24.gif", "onglet_repartition_lang");
+			$sousmenu['statistiques_lang']=
+				new Bouton("langues-24.gif", "onglet_repartition_lang");
 
-	$sousmenu['statistiques_referers']=
-	  new Bouton("referers-24.gif", "titre_liens_entrants");
+		$sousmenu['statistiques_referers']=
+		  new Bouton("referers-24.gif", "titre_liens_entrants");
 
-	$boutons_admin['statistiques_visites']->sousmenu= $sousmenu;
+		$boutons_admin['statistiques_visites']->sousmenu= $sousmenu;
+	}
 	
 	// sous menu configuration
 
