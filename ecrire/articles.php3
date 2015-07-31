@@ -899,12 +899,12 @@ if ($cherche_auteur) {
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
-	
+
 				echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
-			
+
 				if ($email_auteur) echo " ($email_auteur)";
 				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur\">"._T('lien_ajouter_auteur')."</A>";
-			
+
 				if (trim($bio_auteur)) {
 					echo "<BR><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n";
 				}
@@ -944,7 +944,7 @@ if ($supp_auteur && $flag_editable) {
 
 
 //
-// Afficher les auteurs 
+// Afficher les auteurs
 //
 
 unset($les_auteurs);
@@ -1036,14 +1036,13 @@ if (spip_num_rows($result)) {
 
 if ($flag_editable AND $options == 'avancees') {
 	echo debut_block_invisible("auteursarticle");
-	
+
 	$query = "SELECT * FROM spip_auteurs WHERE ";
 	if ($les_auteurs) $query .= "id_auteur NOT IN ($les_auteurs) AND ";
-	$query .= "statut<>'5poubelle' AND statut<>'nouveau' ORDER BY statut, nom";
+	$query .= "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
-
 		echo "<FORM ACTION='articles.php3' METHOD='post'>";
 		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
@@ -1057,48 +1056,47 @@ if ($flag_editable AND $options == 'avancees') {
 			echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='WIDTH=150' CLASS='fondl'>";
 			$group = false;
 			$group2 = false;
-	
-			while($row=spip_fetch_array($result)) {
+
+			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row["id_auteur"];
 				$nom = $row["nom"];
 				$email = $row["email"];
 				$statut = $row["statut"];
-	
+
 				$statut=ereg_replace("0minirezo", _T('info_administrateurs'), $statut);
 				$statut=ereg_replace("1comite", _T('info_redacteurs'), $statut);
 				$statut=ereg_replace("2redac", _T('info_redacteurs'), $statut);
-				$statut=ereg_replace("5poubelle", _T('item_efface'), $statut);
-	
+
 				$premiere = strtoupper(substr(trim($nom), 0, 1));
-	
+
 				if ($connect_statut != '0minirezo')
 					if ($p = strpos($email, '@'))
 						$email = substr($email, 0, $p).'@...';
 				if ($email)
 					$email = " ($email)";
-	
+
 				if ($statut != $statut_old) {
 					echo "\n<OPTION VALUE=\"x\">";
 					echo "\n<OPTION VALUE=\"x\"> $statut";
 				}
-			
-				if ($premiere != $premiere_old AND ($statut != _T('item_administrateur') OR !$premiere_old)) {
+
+				if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old)) {
 					echo "\n<OPTION VALUE=\"x\">";
 				}
-	
+
 				$texte_option = couper("$nom$email", 40);
 				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
 				$statut_old = $statut;
 				$premiere_old = $premiere;
 			}
-			
+
 			echo "</SELECT>";
 			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE="._T('bouton_ajouter')." CLASS='fondo'>";
 		}
 		echo "</div></FORM>";
 	}
-	
-		
+
+
 	echo fin_block();
 }
 
