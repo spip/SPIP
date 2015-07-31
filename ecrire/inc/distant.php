@@ -286,41 +286,36 @@ function nom_fichier_copie_locale($source, $extension) {
 //
 // http://doc.spip.org/@fichier_copie_locale
 function fichier_copie_locale($source) {
-	// Si c'est une image locale pas de souci
+	// Si c'est deja local pas de souci
 	if (!preg_match(',^\w+://,', $source)) {
 		if (_DIR_RACINE)
 			$source = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $source);
 		return $source;
 	}
 
-	// Chercher d'abord le doc dans la table des documents, pour se baser sur son type reel
-	$s = sql_select("extension", "spip_documents", "fichier=" . sql_quote($source) . " AND distant='oui' AND extension>''");
-	if ($t = sql_fetch($s)) {
-		$extension = $t['extension'];
+	// Si c'est deja dans la table des documents,
+	// ramener le nom de sa copie potentielle
+	$ext = sql_getfetsel("extension", "spip_documents", "fichier=" . sql_quote($source) . " AND distant='oui' AND extension <> ''");
 
+	if ($ext) return nom_fichier_copie_locale($source, $ext);
 
-	// si la source n'est pas dans la table des documents, 
-	// on determine son extension et on verifie que c'est ok
-	} else {
-		if (
-		// voir si l'extension est pas indiquee dans le nom du fichier et si il aurait pas deja ete rapatrie, auquel cas c'est ok
-		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'] AND $f = _DIR_RACINE . nom_fichier_copie_locale($source, $ext) AND file_exists($f))
-		OR
-		// on la ping et on regarde si son extension est connue et autorisee
-		($a = recuperer_infos_distantes($source,0,false) AND $ext = $a['extension'])
-		OR
-		// a defaut on fait confiance a l'extension
-		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
-		) {
-			// verifier que c'est un type autorise
-			$t = sql_fetsel("extension", "spip_types_documents", "extension=".sql_quote($ext));
-			if ($t)
-				$extension = $t['extension'];
-		}
+	// voir si l'extension indiquee dans le nom du fichier est ok
+	// et si il n'aurait pas deja ete rapatrie
+
+	$path_parts = pathinfo($source);
+	$ext = $path_part ? $path_parts['extension'] : '';
+
+	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
+		$f = nom_fichier_copie_locale($source, $ext);
+		if (file_exists(_DIR_RACINE  . $f))
+		  return $f;
 	}
-
-	if (isset($extension))
-		return nom_fichier_copie_locale($source, $extension);
+	// Ping  pour voir si son extension est connue et autorisee
+	$path_parts = recuperer_infos_distantes($source,0,false) ;
+	$ext = $path_part ? $path_parts['extension'] : '';
+	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
+		return nom_fichier_copie_locale($source, $ext);
+	}
 }
 
 
