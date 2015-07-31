@@ -33,55 +33,89 @@ $INDEX_tables_interdites=array('spip_ajax_fonc');
 // Indexation des elements de l'objet principal
 // 'champ'=>poids, ou 'champ'=>array(poids,min_long)
 global $INDEX_elements_objet;
-$INDEX_elements_objet['spip_articles'] = array('titre'=>8,'soustitre'=>5,'surtitre'=>5,'descriptif'=>4,'chapo'=>3,'texte'=>1,'ps'=>1,'nom_site'=>1,'extra|unserialize_join'=>1);
-$INDEX_elements_objet['spip_breves'] = array('titre'=>8,'texte'=>2,'extra|unserialize_join'=>1);
-$INDEX_elements_objet['spip_rubriques'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
-$INDEX_elements_objet['spip_auteurs'] = array('nom'=>array(5,2),'bio'=>1,'extra|unserialize_join'=>1);
-$INDEX_elements_objet['spip_mots'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
-$INDEX_elements_objet['spip_signatures'] = array('nom_email'=>array(2,2),'ad_email'=>2,'nom_site'=>2,'url_site'=>1,'message'=>1);
-$INDEX_elements_objet['spip_syndic'] = array('nom_site'=>50,'descriptif'=>30,'url_site|contenu_page_accueil'=>1);
-$INDEX_elements_objet['spip_syndic_articles'] = array('titre'=>5);
-$INDEX_elements_objet['spip_forum'] = array('titre'=>3,'texte'=>2,'auteur'=>array(2,2),'email_auteur'=>2,'nom_site'=>2,'url_site'=>1);
-$INDEX_elements_objet['spip_documents'] = array('titre'=>20,'descriptif'=>10,'fichier|nettoie_nom_fichier'=>1);
-
+if (isset($GLOBALS['meta']['INDEX_elements_objet']))
+	$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
+else{
+	$INDEX_elements_objet['spip_articles'] = array('titre'=>8,'soustitre'=>5,'surtitre'=>5,'descriptif'=>4,'chapo'=>3,'texte'=>1,'ps'=>1,'nom_site'=>1,'extra|unserialize_join'=>1);
+	$INDEX_elements_objet['spip_breves'] = array('titre'=>8,'texte'=>2,'extra|unserialize_join'=>1);
+	$INDEX_elements_objet['spip_rubriques'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
+	$INDEX_elements_objet['spip_auteurs'] = array('nom'=>array(5,2),'bio'=>1,'extra|unserialize_join'=>1);
+	$INDEX_elements_objet['spip_mots'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
+	$INDEX_elements_objet['spip_signatures'] = array('nom_email'=>array(2,2),'ad_email'=>2,'nom_site'=>2,'url_site'=>1,'message'=>1);
+	$INDEX_elements_objet['spip_syndic'] = array('nom_site'=>50,'descriptif'=>30,'url_site|contenu_page_accueil'=>1);
+	$INDEX_elements_objet['spip_syndic_articles'] = array('titre'=>5);
+	$INDEX_elements_objet['spip_forum'] = array('titre'=>3,'texte'=>2,'auteur'=>array(2,2),'email_auteur'=>2,'nom_site'=>2,'url_site'=>1);
+	$INDEX_elements_objet['spip_documents'] = array('titre'=>20,'descriptif'=>10,'fichier|nettoie_nom_fichier'=>1);
+	ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
+	ecrire_metas();
+}
 
 // Indexation des objets associes
 // 'objet'=>poids
 global $INDEX_objet_associes;
-$INDEX_objet_associes['spip_articles'] = array('spip_documents'=>1,'spip_auteurs'=>10,'mot'=>3);
-$INDEX_objet_associes['spip_breves'] = array('spip_documents'=>1,'spip_mots'=>3);
-$INDEX_objet_associes['spip_rubriques'] = array('spip_documents'=>1,'spip_mots'=>3);
-$INDEX_objet_associes['spip_documents'] = array('spip_mots'=>3);
+if (isset($GLOBALS['meta']['INDEX_objet_associes']))
+	$INDEX_objet_associes = unserialize($GLOBALS['meta']['INDEX_objet_associes']);
+else {
+	$INDEX_objet_associes['spip_articles'] = array('spip_documents'=>1,'spip_auteurs'=>10,'spip_mots'=>3);
+	$INDEX_objet_associes['spip_breves'] = array('spip_documents'=>1,'spip_mots'=>3);
+	$INDEX_objet_associes['spip_rubriques'] = array('spip_documents'=>1,'spip_mots'=>3);
+	$INDEX_objet_associes['spip_documents'] = array('spip_mots'=>3);
+	ecrire_meta('INDEX_objet_associes',serialize($INDEX_objet_associes));
+	ecrire_metas();
+}
 
 // Indexation des elements des objets associes
 // 'champ'=>poids, ou 'champ'=>array(poids,min_long)
 global $INDEX_elements_associes;
-$INDEX_elements_associes['spip_documents'] = array('titre'=>2,'descriptif'=>1);
-$INDEX_elements_associes['spip_auteurs'] = array('nom'=>1);
-$INDEX_elements_associes['spip_mots'] = array('titre'=>4,'descriptif'=>1);
-
+if (isset($GLOBALS['meta']['INDEX_elements_associes']))
+	$INDEX_elements_associes = unserialize($GLOBALS['meta']['INDEX_elements_associes']);
+else {
+	$INDEX_elements_associes['spip_documents'] = array('titre'=>2,'descriptif'=>1);
+	$INDEX_elements_associes['spip_auteurs'] = array('nom'=>1);
+	$INDEX_elements_associes['spip_mots'] = array('titre'=>4,'descriptif'=>1);
+	ecrire_meta('INDEX_elements_associes',serialize($INDEX_elements_associes));
+	ecrire_metas();
+}
 // Criteres d'indexation
 global $INDEX_critere_indexation;
-$INDEX_critere_indexation['spip_articles']="statut='publie'";
-$INDEX_critere_indexation['spip_breves']="statut='publie'";
-$INDEX_critere_indexation['spip_rubriques']="statut='publie'";
-$INDEX_critere_indexation['spip_syndic']="statut='publie'";
-$INDEX_critere_indexation['spip_forum']="statut='publie'";
-$INDEX_critere_indexation['spip_signatures']="statut='publie'";
+if (isset($GLOBALS['meta']['INDEX_critere_indexation']))
+	$INDEX_critere_indexation = unserialize($GLOBALS['meta']['INDEX_critere_indexation']);
+else {
+	$INDEX_critere_indexation['spip_articles']="statut='publie'";
+	$INDEX_critere_indexation['spip_breves']="statut='publie'";
+	$INDEX_critere_indexation['spip_rubriques']="statut='publie'";
+	$INDEX_critere_indexation['spip_syndic']="statut='publie'";
+	$INDEX_critere_indexation['spip_forum']="statut='publie'";
+	$INDEX_critere_indexation['spip_signatures']="statut='publie'";
+	ecrire_meta('INDEX_critere_indexation',serialize($INDEX_critere_indexation));
+	ecrire_metas();
+}
 
 // Criteres de des-indexation (optimisation dans base/optimiser)
 global $INDEX_critere_optimisation;
-$INDEX_critere_optimisation['spip_articles']="statut<>'publie'";
-$INDEX_critere_optimisation['spip_breves']="statut<>'publie'";
-$INDEX_critere_optimisation['spip_rubriques']="statut<>'publie'";
-$INDEX_critere_optimisation['spip_syndic']="statut<>'publie'";
-$INDEX_critere_optimisation['spip_forum']="statut<>'publie'";
-$INDEX_critere_optimisation['spip_signatures']="statut<>'publie'";
+if (isset($GLOBALS['meta']['INDEX_critere_optimisation']))
+	$INDEX_critere_optimisation = unserialize($GLOBALS['meta']['INDEX_critere_optimisation']);
+else {
+	$INDEX_critere_optimisation['spip_articles']="statut<>'publie'";
+	$INDEX_critere_optimisation['spip_breves']="statut<>'publie'";
+	$INDEX_critere_optimisation['spip_rubriques']="statut<>'publie'";
+	$INDEX_critere_optimisation['spip_syndic']="statut<>'publie'";
+	$INDEX_critere_optimisation['spip_forum']="statut<>'publie'";
+	$INDEX_critere_optimisation['spip_signatures']="statut<>'publie'";
+	ecrire_meta('INDEX_critere_optimisation',serialize($INDEX_critere_optimisation));
+	ecrire_metas();
+}
 
 // Nombre d'elements maxi a indexer a chaque iteration
 global $INDEX_iteration_nb_maxi;
-$INDEX_iteration_nb_maxi['spip_documents']=10;
-$INDEX_iteration_nb_maxi['spip_syndic']=1;
+if (isset($GLOBALS['meta']['INDEX_iteration_nb_maxi']))
+	$INDEX_iteration_nb_maxi = unserialize($GLOBALS['meta']['INDEX_iteration_nb_maxi']);
+else {
+	$INDEX_iteration_nb_maxi['spip_documents']=10;
+	$INDEX_iteration_nb_maxi['spip_syndic']=1;
+	ecrire_meta('INDEX_iteration_nb_maxi',serialize($INDEX_iteration_nb_maxi));
+	ecrire_metas();
+}
 
 
 // Filtres d'indexation
