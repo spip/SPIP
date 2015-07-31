@@ -1,5 +1,17 @@
 <?php
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2008                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
+include_spip('inc/filtres');
 
 /* prendre en charge par defaut les balises formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dist
@@ -67,7 +79,8 @@ function balise_FORMULAIRE__dyn($form)
 	}
 	
 	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
-		array_merge($valeurs,
+		array_merge(
+		array_map('entites_html',$valeurs), // proteger les ' et les " dans les champs que l'on va injecter dans les input
 		array(
 			'form' => $form,
 			'action' => $action,
