@@ -149,11 +149,8 @@ function creer_repertoire($base, $subdir) {
 		include("$path/.test");
 		@unlink("$path/.test");
 	}
-	if (!$ok) {
-		redirige_par_entete(generer_url_ecrire("spip_test_dirs",""));
-	}
-	return ($ok? "$subdir/" : '');
+	if ($ok) return "$subdir/";
+	redirige_par_entete(generer_url_public('spip_test_dirs'));
 }
-
 
 ?>

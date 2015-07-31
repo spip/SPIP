@@ -167,7 +167,7 @@ function extrait_article($row) {
 	include_ecrire("inc_texte");
 
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
-
+	
 	$id_article = $row[0];
 	$titre = $row[2];
 	$chapo = $row[6];
@@ -192,7 +192,7 @@ function extrait_article($row) {
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') 
 		$extrait .= "-> ".
-		  generer_url_ecrire($adresse_site."/spip_redirect", "id_article=$id_article") .
+		  generer_url_public('spip_redirect', "id_article=$id_article") .
 		  "\n\n";
 	return $extrait;
 }
