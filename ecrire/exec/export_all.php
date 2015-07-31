@@ -33,7 +33,7 @@ function exec_export_all_dist()
 		// creer l'en tete du fichier a partir de l'espace public
 		// creer aussi la meta
 			include_spip('inc/headers');
-			redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true));
+			redirige_par_entete(generer_action_auteur("export_all", "start,$gz,$archive,$rub", '', true, true));
 		} else {
 			$f = charger_fonction('accueil');
 			$f();
