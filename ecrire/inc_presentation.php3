@@ -493,8 +493,9 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
 		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
+		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
+		else $langue_defaut = lire_meta('langue_site');
 	}
-
 
 	$tranches = afficher_tranches_requete($requete, 2);
 
@@ -548,7 +549,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'>";
 			$s .= typo($titre);
 			$s .= "</a>";
-			if ($afficher_langue) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+			if ($afficher_langue AND $lang != $langue_defaut) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
 
 			$vals[] = $s;
 
