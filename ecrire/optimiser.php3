@@ -287,7 +287,7 @@ function optimiser_base() {
 		spip_query("UPDATE $table_objet SET idx='' WHERE idx<>'non' $critere");
 
 		$suppr = '';
-		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx=''");
+		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx='' $critere");
 		while ($t = spip_fetch_array($s))
 			$suppr .= ','.$t[0];
 		if ($suppr)
