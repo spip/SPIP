@@ -1,3 +1,88 @@
+SPIP-Core spip-3.0.13 -> spip-3.0.14  19 janvier 2014
+-------------------------------------------------------------
+r20964 | eric      |  (lun. 11 nov. 2013) | Aligner la version dans inc_version.php avec celle de son paquet.xml
+r20971 | guytarr   |  (ven. 15 nov. 2013) | report de 20970 : Le jeton pour un mot de passe oublie ou une inscription peut etre mal lu s'il est compose que de chiffres et l'action n'aboutie donc pas (Guillaume Barral)ferme #3093 (puisque résoudre ne suffit pas)
+r20973 | cedric    |  (ven. 15 nov. 2013) | ne pas essayer de transformer une DATA URI en url absolue dans suivre_lien (nicolas)
+r20975 | guytarr   |  (sam. 16 nov. 2013) | ecrire/index.php, ecrire/inc/log.php, ecrire/inc/config.php : report de r20928, r20929, r20930-2 petits mots en plus pour avoir un log plus explicite. (non, un auteur n'est pas qu'un numero)-Evite une notice lors d'une action en cours interrompue qui doit reprendre, par exemple pour une restauration de dump qui demande de se reconnecter.-Evite une notice pour slogan_site sur la dist
+r20980 | cedric    |  (lun. 18 nov. 2013) | bug dans r20791 reporté par 20793 : le second appel de la boucle HIERARCHIE ne renvoyait plus rien si pas de critere {tout}
+r20982 | kent1     |  (lun. 18 nov. 2013) | Report de r20981Un filtre |saison_annee pour afficher des "Printemps 2014" ou "Été 2015", associé à une chaîne de langue pour gérer les cas spécifiques entre les langues
+r20986 | cedric    |  (ven. 22 nov. 2013) | lors de l'appel ajax du picker, on entre directement par picker-ajax.html et il faut alors inclure les filtres pour ne pas provoquer une erreur de compilation
+r20988 | denisb    |  (ven. 22 nov. 2013) | ecrire/action/calculer_taille_cache.php : afficher quelque chose (quand même) quand c'est vide de chez vide (report de r20987).
+r20990 | denisb    |  (ven. 22 nov. 2013) | ecrire/action/calculer_taille_cache.php : zéro pointé !
+r20992 | denisb    |  (ven. 22 nov. 2013) | ecrire/action/calculer_taille_cache.php : oupss (décidemment...)
+r21003 | cedric    |  (lun. 25 nov. 2013) | Accelerer le critere {age} de 50% environ sous SQLite :- on factorise les appels aux fonctions de date strtotime et date() qui sont appelés successivement pour la même date par le critère {age}- on memoize les 2 conversions dans une pile des 100 derniers appels (avoir une pile plus grosse n'accelère pas le calcul)
+r21005 | cedric    |  (lun. 25 nov. 2013) | Perf issue sur le lancement du CRON :sur certains serveurs le firewall est réglé pour DROP silencieusement toute requete http sortante : fsockopen attends alors 30s pour lancer la requete à chaque hit avant de rendre la main. cURL lui n'attends pas mais ne sait pas que sa requete echoue. Résultat le CRON ne tourne jamais et le site a un temps de réponse catastrophique.Fix :- limiter le timeout de fsockopen à 1s au lieu de 30s : si on a pas pu initialiser la connexion http en 1s c'est qu'il y a un soucis- lorsque fsockopen echoue, rien ne sert de lancer cURL qui n'aura pas plus de chance ; cURL est utilisé en fallback uniquement si fsockopen n'est pas disponible (cas rare)- du coup si fsockopen echoue on passe au lancement old-style avec HTML background (mais ça nous a couté 1s d'attente inutile) - si on sait qu'on est sur une telle configuration (et qu'on ne peut pas la changer) on peut inhiber le lancement du cron par fsockopen/cURL avec un    define('_HTML_BG_CRON_FORCE',true);    dans mes_options.php. Cela economisera l'attente inutile.
+r21008 | cedric    |  (mer. 27 nov. 2013) | reparer le test expliquer_config : si $cfg est vide ne rien faire
+r21009 | cedric    |  (mer. 27 nov. 2013) | bugfix : Lorsque recuperer_fond est appelée avec tableau de fond en argument, on passait par erreur le tableau à chaque appel du pipeline recuperer_fond et non le seul fond concerné
+r21010 | suske     |  (mer. 27 nov. 2013) | rétablir le tri sur la clé (christophe ld)
+r21012 | cedric    |  (mer. 27 nov. 2013) | le header qui donne la liste des plugins est de plus en plus souvent incomplet car tronqué à 900 caractères.On en met une version complète dans local/config.txt (sauf si la globale spip_header_silencieux specifie qu'on en veut pas)Pour le moment on ne touche pas au header, mais sans doute pourrait-on le diminuer la longueur maxi et referencer le chemin vers ce fichier si il dépasse la longueur maxi, ça eviterait de trimbaler 1ko pour rien à chaque hit.
+r21013 | cedric    |  (mer. 27 nov. 2013) | coquille dans r21012 : il manquait la version affichée de SPIP et tant qu'a faire on prefixe par _HEADER_COMPOSED_BY pour être homogène au header
+r21017 | denisb    |  (mer. 27 nov. 2013) | ecrire/inc/filtres.php : modification de la fonction de filtrage du nom/signature. on introduit la constante _TAGS_LOGIN (vide par défaut, définissable dans mes_options.php) qui liste les tags html acceptables en plus de <multi&gt; .
+r21019 | cedric    |  (mer. 27 nov. 2013) | Lorsqu'on upload un logo par le formulaire de l'interface privee et qu'une erreur se produit, la requete ajax part en vrille car l'erreur etait affichee en minipres au lieu de revenir par le canal normal du CVTOn corrige en introduisant un $return optionnel dans action/iconifier et dans check_upload_error qui permet de faire remonter l'erreur par le CVTle comportement par defaut des fonctions reste identique
+r21023 | b_b       |  (dim. 01 déc. 2013) | Report de r21022 / Fix #3042 : afficher l'icône auteur pour le lien Afficher les auteurs depuis exec=visiteurs
+r21028 | b_b       |  (mar. 03 déc. 2013) | Report de r21026 : Certaines des pages d'installation de la connexion Ldap avaient le focus sur le bouton de soumission et d'autes non. On unifie.
+r21030 | b_b       |  (mar. 03 déc. 2013) | Report de r21021 / Dans le code PostGres, une utilisation de strpos sans vérifier que son 2e arg est non vide. Résoud le 2e pb de #3100.
+r21033 | denisb    |  (sam. 07 déc. 2013) | ecrire/inc/filtres.php : _TAGS_LOGIN la mal nommée est rebaptisée _TAGS_NOM_AUTEUR (RastaPopoulos.)
+r21040 | marcimat  |  (ven. 13 déc. 2013) | report de r21039 : Le bloc affiche_gauche n'était pas rechargé en «grand écran» lorsqu'on clique le bouton 'retour' ou 'enregistrer' (en ajax) d'un objet éditorial en édition. (merci peetdu)
+r21048 | b_b       |  (ven. 13 déc. 2013) | Report de r21047 / Fix #3090 : pas de lien sur l'article en cours d'affichage dans la liste des traductions (fab_b)
+r21052 | suske     |  (ven. 13 déc. 2013) | Report de r21050 + oups21051 - Déporter les rss de 'A suivre' vers les plugins d'objets (Breves et Sites) - Les autres objets peuvent s'insérer avec un prive/rss/a_suivre-objets.html calqué sur celui des brèves - Ferme #2978
+r21054 | ben       |  (sam. 14 déc. 2013) | Ne pas autoriser d'avoir deux auteurs avec le même email , piloté par _INTERDIRE_AUTEUR_MEME_EMAIL ... #3113
+r21060 | suske     |  (sam. 14 déc. 2013) | tant qu'à faire, trions sur la clé "date" (Double oups piqué) - report de r21058
+r21062 | ben       |  (sam. 14 déc. 2013) | père programming ... sécuriser avec sql_quote, eviter un test sur existance request email, un test plutôt que 2 .... fil,cedric,kent1
+r21080 | cedric    |  (mer. 18 déc. 2013) | utiliser autoriser(chargerftp) pour les scripts d'admin de base pose problème, car c'est la même autorisation que celle utilisée pour permettre l'upload de document par tmp/upload, alors qu'on peut interdire cette dernière sans vouloir interdire les scripts d'admin de base.Il faudrait ici une autorisation spécifique donc (TODO branche dev), en attendant on laisse quand même passer les webmestres qui n'ont pas besoin d'accès FTP pour faire ces operations.
+r21092 | denisb    |  (mar. 31 déc. 2013) | ecrire/inc/documents.php : compatibilité pcre 8.34 (php 5.5). le tiret pour ne pas être considéré comme marque d'intervalle dans une classe de caractères doit être placé soit au début, soit à la fin de l'énumération. report de r21091.
+r21096 | denisb    |  (mer. 01 janv. 2014) | bonne année 2014 !
+r21099 | b_b       |  (lun. 06 janv. 2014) | retour sur r21062 : AND au lieu de & pour éviter toute confusion, un parenthèse manquante pour sql_countsel + indentation, présentation
+r21101 | Severo    |                       | Prendre en compte HTTPS pour le CRONSi la page appelante est en HTTPS, utiliser un socket avec ssl.Sans ça, un site tout https (et refusant les connexions http) ne lance jamais les tâches.Code venant de http://jp1.php.net/manual/es/function.fsockopen.php#75388
+r21102 | cedric    |  (jeu. 09 janv. 2014) | un fichier fonctions avec inclusion manquante pour afficher le menu de navigation
+r21111 | cedric    |  (sam. 11 janv. 2014) | Report de r21038 : Fix de la fonction htmlspecialchars en ISO sous PHP 5.4+ : on utilise un wrapper spip_htmlspecialchars qui retablit l'ancien comportement.+ rechercher/remplacer sur tous les usages (mais je n'ai pas verifie que les inclusions necessaires etaient toujours ok)
+r21112 | cedric    |  (sam. 11 janv. 2014) | Report de r21049 : Inclusion manquante lors de l'utilisation de #SELF il semblerait.
+r21113 | cedric    |  (sam. 11 janv. 2014) | Report de r21065 : Fix de la fonction htmlentities en ISO sous PHP 5.4+ : on utilise un wrapper spip_htmlentities qui retablit l'ancien comportement.+ rechercher/remplacer sur tous les usages (mais je n'ai pas verifie que les inclusions necessaires etaient toujours ok)
+r21114 | cedric    |  (sam. 11 janv. 2014) | Report de r21066 : inclusion manquante pour spip_htmlspecialchars
+r21115 | cedric    |  (sam. 11 janv. 2014) | Attention l'echappement de HTML en retour peut être imbriqué : un modele echappé dans un contenu échappé.On remplace le if par un while avec un compteur de securité limité à 5 niveaux de profondeur
+r21121 | cedric    |  (lun. 13 janv. 2014) | On a beau être aussi générique que possible il reste des cas particuliers non prévus ici, comme le cas où la table liens contient un champ de plus en clé primaire qu'il faut gerer sur les liens.On rend donc possible la définition de 3 fonctions personaliseesediter_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}qui prennent en charge les 3 actions ajouter/supprimer/oups pour ces cas particuliers
+r21122 | cedric    |  (mar. 14 janv. 2014) | Quand le nom d'un auteur/visiteur est constitué d'un espace (ce que permet le formulaire de saisie), la liste n'affiche aucun moyen d'accèder à l'auteur puisque le lien sur l'email est un mailto.Dans ce cas on utilise le début de la bio en guise de nom ou sinon le Numero de l'auteur en dernier recours(l'easter egg est de ne pas mettre de nom sur id_auteur=6)
+r21123 | cedric    |  (mar. 14 janv. 2014) | complement a r21122 : ne pas exposer le premier auteur sans nom en croyant que son initiale est celle demandee
+r21124 | cedric    |  (mar. 14 janv. 2014) | ne pas generer une erreur SQL si on passe un id_xx en tableau dans l'URL
+r21130 | denisb    |  (dim. 19 janv. 2014) | ecrire/install/etape_3b.php : _LOGIN_TROP_COURT ; à l'install, on aligne le test sur la constante (report de r21126).
+r21136 | denisb    |  (dim. 19 janv. 2014) | ecrire/inc/filtres.php, ecrire/inc/filtres_mini.php, ecrire/inc/plugin.php, prive/formulaires/login.php : éviter des notice php (report de r21127, r21128 et r21129).
+r21138 | ben       |  (dim. 19 janv. 2014) | report de langues
+
+SPIP-plugins-dist spip-3.0.13 -> spip-3.0.14  19 janvier 2014
+-------------------------------------------------------------
+
+r78359 | real3t    |  (lun. 11 nov. 2013) | Un nouveau moteur de recherche reconnu : Qone8
+r78509 | cedric    |  (ven. 15 nov. 2013) | filtre_embarque_fichier provoque un acces SQL pour le mime_type. Eviter cela si la globale tables_mime est peuplee, ce qui permet de s'en servir a chaque hit sans provoquer d'acces SQL fait un include_spip("base/typedoc") avant.
+r78585 | cedric    |  (lun. 18 nov. 2013) | reparer l'upgrade depuis un SPIP 1.9 si on commence par supprimer connect.php et lancer l'install
+r79138 | cedric    |  (mer. 04 déc. 2013) | Affichage par défaut des raccourcis ressource <http://...>Attention : propre génère par défaut un <p> autour de son contenu même si celui-ci ne contient qu'une ligne. Du coup les <http://...> se retrouvaient tout seul dans un <p></p> qui cassait le paragraphe dans lequel ils étaient insérés.On corrige pour avoir un affichage par défaut le plus neutre possible
+r79139 | cedric    |  (mer. 04 déc. 2013) | traiter_ressources() delegue a une eventuelle fonction inc_ressource_dist() l'affichage du raccourci <http://...>Si celle-ci existe et ne veut prendre en charge qu'une partie des cas, elle peut faire un return null; sur les cas qu'elle ne veut pas gérer, et dans ce cas traiter_ressources() appliquera le rendu par défaut.Evite de dupliquer du code.
+r79234 | b_b       |  (dim. 08 déc. 2013) | report plus que tardif de r67704 qui ferme vraiment http://core.spip.org/issues/2790
+r79236 | b_b       |  (dim. 08 déc. 2013) | Report de r79235 / Afficher aussi les documents en statut prop dans l'onglet "Non publiés" de la médiathèque, ferme  http://core.spip.org/issues/3066
+r79288 | cedric    |  (jeu. 12 déc. 2013) | Fournir la liste des documents joints dans $res['ids'] (Beurt et al)
+r79304 | b_b       |  (ven. 13 déc. 2013) | Report de r79303 / Fix  http://core.spip.org/issues/3112 : history true sur le rechargement ajax du formulaire des révisions afin de pouvoir partager l'url d'une révision avec les copaings et les copines...
+r79333 | b_b       |  (ven. 13 déc. 2013) | Report de r79332 / Fix http://core.spip.org/issues/3116 accepter les domaines comme .i2 (intranet) dans _EXTRAIRE_DOMAINE (denisb)
+r79341 | maieul    |  (ven. 13 déc. 2013) | r79340
+r79347 | suske     |  (ven. 13 déc. 2013) | report de z79345 - prive/rss/a_suivre-breves.html et prive/rss/a_suivre-sites.html pour le fil rss "A suivre" de l'accueil de SPIP + increment de version - complément à 21050 à 21052
+r79357 | b_b       |  (sam. 14 déc. 2013) | Report de r79356 / Fix  http://core.spip.org/issues/3117 : ne pas toucher aux attributs des balises a
+r79367 | b_b       |  (sam. 14 déc. 2013) | Report de r79366 / Réparer le lien Tout afficher de la page exec=stats_referers (jennyfer29)
+r79368 | b_b       |  (sam. 14 déc. 2013) | et oups
+r79785 | denisb    |  (mer. 01 janv. 2014) |  feliĉan novan jaron 2014 !
+r79799 | b_b       |  (jeu. 02 janv. 2014) | Report de r79798 / Fermeture de boucle inutile certainement présente par erreur
+r79824 | b_b       |  (ven. 03 janv. 2014) | Version 1.7.12 : report de r79820 r79821 et r79822 pour réparer la syndication des flux ATOM dont la balise link est vide
+r79961 | cedric    |  (sam. 11 janv. 2014) | 2sReport de r78874 : Un jeu de test combinatoires pour une fonction wrapper spip_htmlspecialchars(), généré à partir du résultat de la fonction htmlspecialchars() en PHP 5.2.13 sur un jeu d'entrée type pour les 3 premiers arguments.La fonction wrapper candidate suivante passe le test en PHP 5.2.13, à verifier en PHP >=5.4/** * htmlspecialchars wrapper (PHP >= 5.4 compat issue) * * @param string $string * @param int $flags * @param string $encoding * @param bool $double_encode * @return string */function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){	if (is_null($flags)) $flags = ENT_COMPAT|ENT_HTML401;	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)		return htmlspecialchars($string,$flags,$encoding);	else		return htmlspecialchars($string,$flags,$encoding,$double_encode);}
+r79962 | cedric    |  (sam. 11 janv. 2014) | Report de r79282 : mourrrrrir si la fonction n'existe pas encore
+r79963 | cedric    |  (sam. 11 janv. 2014) | Report de r79329 : Jeu de test unitaire pour la fonction spip_htmlentities candidate suivante, à tester en PHP 5.4<pre>/** * htmlentities wrapper (PHP >= 5.4 compat issue) * * @param string $string * @param int $flags * @param string $encoding * @param bool $double_encode * @return string*/function spip_htmlentities($string,$flags=null,$encoding = 'ISO-8859-1',$double_encode = true){	if (is_null($flags)) $flags = ENT_COMPAT|ENT_HTML401;	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)		return htmlentities($string,$flags,$encoding);	else		return htmlentities($string,$flags,$encoding,$double_encode);}</pre>
+r79964 | cedric    |  (sam. 11 janv. 2014) | Report de r79297 : Fix de la fonction htmlspecialchars en ISO sous PHP 5.4+ : on utilise le wrapper spip_htmlspecialchars
+r79965 | cedric    |  (sam. 11 janv. 2014) | Report de r79298 : increment
+r79966 | cedric    |  (sam. 11 janv. 2014) | Report de r79299 : Fix de la fonction htmlspecialchars en ISO sous PHP 5.4+ : on utilise le wrapper spip_htmlspecialchars
+r79967 | cedric    |  (sam. 11 janv. 2014) | Report de r79300 : Fix de la fonction htmlspecialchars en ISO sous PHP 5.4+ : on utilise le wrapper spip_htmlspecialchars
+r80001 | bmarne    |  (lun. 13 janv. 2014) | Pétouille (retourner directement des id_document dans le flux, plutôt que des "#docXXX" moins pratiques à manipuler)
+r80059 | b_b       |  (mer. 15 janv. 2014) | Report de r80040 et r80058 : ajout de la prise en charge des documents .json
+r80060 | b_b       |  (mer. 15 janv. 2014) | maj commentaire
+r80105 | b_b       |  (sam. 18 janv. 2014) | Report de r80104 : Éviter une erreur comme celle signalée ici  http://forum.spip.net/fr_256177.html
+r80130 | ben       |  (dim. 19 janv. 2014) | report de langues
+
+
 SPIP-Core spip-3.0.12 -> spip-3.0.13  10 novembre 2013
 -------------------------------------------------------------
 
