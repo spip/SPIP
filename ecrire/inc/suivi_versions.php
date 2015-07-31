@@ -57,7 +57,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 
 		// Afficher l'entete de la boite
 		if (!$rss) {
-			$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
+			$titre_table =  '<b>' . _T('icone_suivi_revisions').aide('suivimodif')  . '</b>';
 			if ($court)
 				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 				. $titre_table;
