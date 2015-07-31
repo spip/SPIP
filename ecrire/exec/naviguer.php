@@ -36,7 +36,7 @@ function exec_naviguer_dist()
 		exit;
 	      }
 
-	else $statut = $titre = $descriptif = $texte = $extra = '';
+	else $statut = $titre = $descriptif = $texte = $extra = $id_parent='';
 
 	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
 	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
