@@ -5,9 +5,12 @@
 if (defined("_ECRIRE_INC_MAJBASE")) return;
 define("_ECRIRE_INC_MAJBASE", "1");
 
+include_ecrire('inc_meta.php3');
+
 function maj_version ($version, $test = true) {
 	if ($test) {
-		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
+		ecrire_meta('version_installee', $version);
+		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
 	} else {
 		include_ecrire ('inc_lang.php3');
@@ -15,8 +18,8 @@ function maj_version ($version, $test = true) {
 		exit;
 	}
 }
-function maj_base() {
 
+function maj_base() {
 	global $spip_version;
 
 	//
@@ -33,7 +36,8 @@ function maj_base() {
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 	if (!$version_installee) {
-		spip_query_db("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$spip_version')");
+		ecrire_meta('version_installee', $spip_version);
+		ecrire_metas();
 		return true;
 	}
 
@@ -912,10 +916,25 @@ function maj_base() {
 		ADD visites_veille INT UNSIGNED NOT NULL");
 		maj_version(1.808);
 	}
-	
 
-	#	A remettre pour la 1.8 finale (cf. ci-dessus)
-	#	spip_query("DROP TABLE spip_forum_cache");
+
+	// corrections diverses
+	if ($version_installee < 1.809) {
+		// plus de retour possible vers 1.7.2
+		spip_query("DROP TABLE spip_forum_cache");
+
+		// les requetes ci-dessous ne s'appliqueront que si on est passe
+		// par une certaine version de developpement - oublie de le faire
+		// plus tot, car le code d'alors recreait purement et simplement
+		// cette table
+		spip_query("ALTER TABLE spip_versions DROP chapo");
+		spip_query("ALTER TABLE spip_versions DROP texte");
+		spip_query("ALTER TABLE spip_versions DROP ps");
+		spip_query("ALTER TABLE spip_versions DROP extra");
+		spip_query("ALTER TABLE spip_versions ADD champs text NOT NULL");
+
+		maj_version(1.809);
+	}
 
 	return true;
 }

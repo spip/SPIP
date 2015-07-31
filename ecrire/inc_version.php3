@@ -353,7 +353,7 @@ $dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.808;
+$spip_version = 1.809;
 
 // version de spip
 $spip_version_affichee = "1.8 beta 2 CVS";
