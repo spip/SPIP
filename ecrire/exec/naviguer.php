@@ -322,7 +322,7 @@ if ($relief) {
 //////////  Les articles publies
 /////////////////////////
 
-	  echo afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"), true);
+	  echo afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
 
 
 

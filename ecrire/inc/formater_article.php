@@ -14,11 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
 
-function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_langue, $langue_defaut)
+function inc_formater_article($row )
 {
 	global $dir_lang, $options, $spip_lang_right, $spip_display;
 	static $pret = false;
-	static $chercher_logo, $img_admin, $formater_auteur, $nb;
+	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue;
 
 	if (!$pret) {
 		$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
@@ -29,8 +29,16 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 		$nb = ($options != "avancees")
 		  ? ''
 		  : _T('info_numero_abbreviation');
+		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
+			$afficher_langue = true;
+			$langue_defaut = isset($GLOBALS['langue_rubrique'])
+			  ? $GLOBALS['meta']['langue_site']
+			  : $GLOBALS['langue_rubrique'];
+		}
 		$pret = true;
 	}
+
+	$id_article = $row['id_article'];
 
 	if ($chercher_logo) {
 		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
@@ -62,22 +70,19 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 	. (!$logo ? '' :
 	   ("<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</div>"))
 	. typo($titre)
-	. (!($afficher_langue AND $lang != $langue_defaut) ? '' :
+	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site']) ? '' :
 	   (" <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>"))
 	. (!$row['petition'] ? '' : (" <font size=1 color='red'>"._T('lien_petitions')."</font>"))
 	. "</a>"
 	. "</div>";
 	
-	if ($afficher_auteurs) {
-
-		$result = auteurs_article($id_article);
-		$les_auteurs = "";
-		while ($r = spip_fetch_array($result)) {
-			list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
-			$les_auteurs .= "$mail&nbsp;$nom, ";
-		}
-		$vals[] = substr($les_auteurs, 0, -2);
-	} else $vals[]= '&nbsp;';
+	$result = auteurs_article($id_article);
+	$les_auteurs = "";
+	while ($r = spip_fetch_array($result)) {
+		list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
+		$les_auteurs .= "$mail&nbsp;$nom, ";
+	}
+	$vals[] = substr($les_auteurs, 0, -2);
 
 	$s = affdate_jourcourt($date);
 	$vals[] = $s ? $s : '&nbsp;';
