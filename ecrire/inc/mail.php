@@ -18,105 +18,10 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	return $f($email,$sujet,$texte,$from,$headers);
 }
 
-// http://doc.spip.org/@extrait_article
-function extrait_article($row) {
-	include_spip('inc/texte');
-	
-	$id_article = $row['id_article'];
-	$titre = nettoyer_titre_email($row['titre']);
-	$chapo = $row['chapo'];
-	$texte = $row['texte'];
-	$date = $row['date'];
-	$statut = $row['statut'];
-
-	$les_auteurs = "";
-	$result_auteurs = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
-
-	while ($row = spip_fetch_array($result_auteurs)) {
-		if ($les_auteurs) $les_auteurs .= ', ';
-		$les_auteurs .= trim(supprimer_tags(typo($row['nom'])));
-	}
-
-	$extrait = "** $titre **\n";
-	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
-	if ($statut == 'publie') $extrait .= " "._T('date_fmt_nomjour_date', array('nomjour'=>nom_jour($date), 'date'=>affdate($date)));
-	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
-	if ($statut == 'publie') 
-		$extrait .= "-> ".
-		  generer_url_action("redirect", "id_article=$id_article", true) .
-		  "\n\n";
-	return $extrait;
-}
 
 // http://doc.spip.org/@nettoyer_titre_email
 function nettoyer_titre_email($titre) {
-	return ereg_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
-}
-
-// http://doc.spip.org/@envoyer_mail_publication
-function envoyer_mail_publication($id_article) {
-	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
-
-	if ($suivi_edito == "oui") {
-		$result = spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article");
-
-		if ($row = spip_fetch_array($result)) {
-
-			// selectionne langue
-			$lang_utilisateur = $GLOBALS['spip_lang'];
-			changer_langue($row['lang']);
-
-			$titre = nettoyer_titre_email($row['titre']);
-
-			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			$courr = _T('info_publie_2')."\n\n";
-
-			$nom = $GLOBALS['auteur_session']['nom'];
-			$nom = trim(supprimer_tags(typo($nom)));
-			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))."\n\n\n";
-			$courr = $courr . extrait_article($row);
-			envoyer_mail($adresse_suivi, $sujet, $courr);
-
-			// reinstalle la langue utilisateur (au cas ou)
-			changer_langue($lang_utilisateur);
-		}
-	}
-}
-
-// http://doc.spip.org/@envoyer_mail_proposition
-function envoyer_mail_proposition($id_article) {
-	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
-
-	if ($suivi_edito == "oui") {
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"));
-		if ($row) {
-
-			$lang_utilisateur = $GLOBALS['spip_lang'];
-			changer_langue($row['lang']);
-
-			$titre = nettoyer_titre_email($row['titre']);
-
-			$sujet = _T('info_propose_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
-			envoyer_mail($adresse_suivi,
-				     $sujet,
-				     _T('info_propose_2')
-				     ."\n\n" 
-				     . _T('info_propose_3', array('titre' => $titre))
-				     ."\n" 
-				     . _T('info_propose_4')
-				     ."\n" 
-				     . _T('info_propose_5')
-				     ."\n" 
-				     . generer_url_ecrire("articles", "id_article=$id_article", true)
-				     . "\n\n\n" 
-				     . extrait_article($row));
-			changer_langue($lang_utilisateur);
-		}
-	}
+	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
 }
 
 

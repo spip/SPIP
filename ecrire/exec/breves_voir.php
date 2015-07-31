@@ -41,9 +41,23 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	}
 
 	$flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
-	
-	pipeline('exec_init',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
-	
+
+	// Est-ce que quelqu'un a deja ouvert la breve en edition ?
+	if ($flag_editable
+	AND $GLOBALS['meta']['articles_modif'] != 'non') {
+		include_spip('inc/drapeau_edition');
+		$modif = mention_qui_edite($id_breve, 'breve');
+	} else
+		$modif = array();
+
+
+	pipeline('exec_init',
+		array(
+			'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
+			'data'=>''
+		)
+	);
+
 	debut_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", $id_rubrique);
 	
 	debut_grand_cadre();
@@ -78,9 +92,21 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", false));
 
 	
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
+	echo pipeline('affiche_gauche',
+		array(
+		'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
+		'data'=>''
+		)
+	);
+
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
+
+	echo pipeline('affiche_droite',
+		array(
+		'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),
+		'data'=>''
+		)
+	);
 
 	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
@@ -89,9 +115,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	debut_cadre_relief("breve-24.gif");
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><td class='serif'>";
-	
-	
-	
+
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'><td width='100%' valign='top'>";
 	gros_titre($titre);
@@ -100,7 +124,14 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	if ($flag_editable) {
 		echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 		echo "<td  align='right'>";
-		icone(_T('icone_modifier_breve'), generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"), "breve-24.gif", "edit.gif");
+		icone(
+			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
+			!$modif ? _T('icone_modifier_breve')
+				: _T('texte_travail_article', $modif),
+			generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"),
+			!$modif ? "breve-24.gif" : "warning-24.gif",
+			!$modif ? "edit.gif" : ''
+		);
 		echo "</td>";
 	}
 	echo "</tr></table>\n";
@@ -192,13 +223,13 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		echo "<table>";
 		echo "<td  align='right'>";
 		icone(_T('icone_publier_breve'), 
-		      redirige_action_auteur('instituer_breve',"$id_breve-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif");
+		      redirige_action_auteur('editer_breve',"$id_breve-statut-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif");
 		echo "</td>";
 		
 		echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 		echo "<td  align='right'>";
 		icone(_T('icone_refuser_breve'), 
-		      redirige_action_auteur('instituer_breve', "$id_breve-refuse", "breves_voir","id_breve=$id_breve"), "breve-24.gif", "supprimer.gif");
+		      redirige_action_auteur('editer_breve', "$id_breve-statut-refuse", "breves_voir","id_breve=$id_breve"), "breve-24.gif", "supprimer.gif");
 		echo "</td>";
 		echo "</table>";	
 		
@@ -233,87 +264,13 @@ function exec_breves_voir_dist()
 	global $connect_statut;
 
 	$id_breve = intval(_request('id_breve'));
-	$id_rubrique_old = 0;
 
-	if (($id_breve == 0) AND (_request('new') == "oui")) {
-		$id_rubrique_old = $id_rubrique = intval(_request('id_parent'));
-		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$langue_new = $row ? $row["lang"] : "";
-		if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
-		
-		$id_breve = spip_abstract_insert("spip_breves",
-			"(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
-			"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
-	}
+	if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve=$id_breve")))
+		$id_rubrique = $row['id_rubrique'];
 	else
-		if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve=$id_breve")))
-			$id_rubrique_old = $row['id_rubrique'];
+		die ('breve inexistante');
 
-
- $calculer_rubriques = false;
-
-	if (($connect_statut=="0minirezo" OR _request('statut')=="prop" OR _request('new') == "oui") AND
-     strval(_request('titre'))) {
-	
-		foreach (array(
-		 'titre', 'texte', 'lien_titre', 'lien_url',
-		 'statut', 'id_parent'=>'id_rubrique') as $req=>$champ) {
-			if (($val = _request(is_numeric($req)?$champ:$req)) !== NULL)
-				$champs[$champ] = corriger_caracteres($val);
-		}
-		// recuperer les extras
-		if ($GLOBALS['champs_extra']) {
-			include_spip('inc/extra');
-			$champs['extra'] = extra_recup_saisie("breves");
-		}
-		$id_rubrique = $champs['id_rubrique'];
-	
-		// Envoyer aux plugins
-		$champs = pipeline('pre_enregistre_contenu',
-			array(
-				'args' => array(
-					'table' => 'spip_breves',
-					'id_objet' => $id_breve
-				),
-				'data' => $champs
-			)
-		);
-		
-		$update = '';
-		foreach ($champs as $champ => $val)
-			$update .= $champ . '=' . _q($val).', ';
-		$update = substr($update,0,strlen($update)-2);
-	
-		spip_query("UPDATE spip_breves SET $update WHERE id_breve=$id_breve");
-	
-		// invalider et reindexer
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_breve/$id_breve'");
-	
-		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_spip("inc/indexation");
-			marquer_indexer('spip_breves', $id_breve);
-		}
-		$calculer_rubriques = true;
-		
-		
-		// Changer la langue heritee
-		if ($id_rubrique != $id_rubrique_old) {
-			$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
-			$langue_old = $row['lang'];
-			$langue_choisie_old = $row['langue_choisie'];
-			
-			if ($langue_choisie_old != "oui") {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-				$langue_new = $row['lang'];
-		
-				if ($langue_new != $langue_old) {
-					spip_query("UPDATE spip_breves SET lang = '$langue_new' WHERE id_breve = $id_breve");
-				}
-			}
-		}
-	}
-
+	// TODO: passer ce qui reste de l'update dans action/editer_breve.php
 	if (_request('jour') AND $connect_statut == '0minirezo') {
 		$annee = _request('annee');
 		$mois = _request('mois');
@@ -321,14 +278,8 @@ function exec_breves_voir_dist()
 		if ($annee == "0000") $mois = "00";
 		if ($mois == "00") $jour = "00";
 		spip_query("UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve");
-		$calculer_rubriques = true;
 	}
 
-	if ($calculer_rubriques) calculer_rubriques();
-
-	if (_request('new') == 'oui')
-		redirige_par_entete(
-			generer_url_ecrire('breves_voir', 'id_breve='.$id_breve, '&'));
 	afficher_breves_voir($id_breve, _request('changer_lang'), _request('cherche_mot'), _request('select_groupe'));
 }
 ?>

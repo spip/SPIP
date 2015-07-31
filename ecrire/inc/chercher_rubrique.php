@@ -31,6 +31,7 @@ function inc_chercher_rubrique_dist ($id_rubrique, $type, $restreint, $idem=0) {
 	// - soit parce que le cookie ajax n'est pas la
 	// - soit parce qu'il y a peu de rubriques
 	if ($_COOKIE['spip_accepte_ajax'] < 1
+	OR $type == 'breve'
 	OR spip_num_rows(
 	spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT ".intval(_SPIP_SELECT_RUBRIQUES+1))) < _SPIP_SELECT_RUBRIQUES)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);

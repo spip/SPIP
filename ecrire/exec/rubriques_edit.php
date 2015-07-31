@@ -133,12 +133,10 @@ function exec_rubriques_edit_dist()
 	if ($options == "avancees" OR $descriptif) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 		. _T('entree_contenu_rubrique')."<br />"
-		. "<textarea name='descriptif' class='forml' rows='4' cols='40' wrap=soft>"
+		. "<textarea name='descriptif' class='forml' rows='4' cols='40' wrap='soft'>"
 		. entites_html($descriptif)
 		. "</textarea><p>\n";
-	} else {
-		$form .= "<input type='hidden' name='descriptif' value=\"".entites_html($descriptif)."\" />";
-}
+	}
 
 	$form .= "<B>"._T('info_texte_explicatif')."</B>"
 	. aide ("raccourcis")
@@ -151,15 +149,13 @@ function exec_rubriques_edit_dist()
 		$form .= extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-	$form .= "<input type='hidden' name='new' value='"
-	.  (($new == "oui") ? 'oui' : 'non')
-	.  "' />"
-	. "\n<p align='right'><input type='submit' value='"
+	$form .= "\n<p align='right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' class='fondo' />\n</p>";
 
 	$retour = generer_url_ecrire("naviguer");
-	$arg = intval($id_parent) . ",$new," . intval($id_rubrique);
+
+	if (!$arg = intval($id_rubrique)) $arg='oui';
 
 	echo generer_action_auteur("editer_rubrique", $arg, $retour, $form, " method='post'");
 

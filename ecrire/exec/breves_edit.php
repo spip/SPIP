@@ -103,19 +103,16 @@ if ($new != "oui") {
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($id_breve) $lien = "id_breve=$id_breve";
-	echo generer_url_post_ecrire('breves_voir',$lien, 'formulaire');
-
-	if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 	$titre = entites_html($titre);
 	$lien_titre = entites_html($lien_titre);
 
-	echo _T('entree_titre_obligatoire');
-	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus>";
+	$form = _T('entree_titre_obligatoire')
+	. "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus>"
 
 
 	/// Dans la rubrique....
-	echo "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\"><p />";
+	. "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\"><p />";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -129,7 +126,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	}
 
 
-	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
+	$form .= debut_cadre_couleur("$logo_parent", true, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
 
 	// appel du script a la racine, faut choisir 
 	// on prend le dernier secteur cree
@@ -144,55 +141,60 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	echo $selecteur_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
+	$form .= $selecteur_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 
-	fin_cadre_couleur();
+	$form .= fin_cadre_couleur(true);
 	
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
-	echo "<p /><B>"._T('entree_texte_breve')."</B><BR>";
-	echo afficher_barre('document.formulaire.texte');
-	echo "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
-	echo entites_html($texte);
-	echo "</TEXTAREA><P>\n";
+	$form .= "<p /><B>"._T('entree_texte_breve')."</B><BR>"
+	. afficher_barre('document.formulaire.texte')
+	. "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='$rows' CLASS='formo' COLS='40' wrap='soft'>"
+	. entites_html($texte)
+	. "</TEXTAREA><P>\n"
 
 
-	echo _T('entree_liens_sites').aide ("breveslien")."<BR>";
-	echo _T('info_titre')."<BR>";
-	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_titre' VALUE=\"$lien_titre\" SIZE='40'><BR>";
+	. _T('entree_liens_sites').aide ("breveslien")."<BR>"
+	. _T('info_titre')."<BR>"
+	. "<INPUT TYPE='text' CLASS='forml' NAME='lien_titre' VALUE=\"$lien_titre\" SIZE='40'><BR>"
 
-	echo _T('info_url')."<BR>";
-	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
+	. _T('info_url')."<BR>"
+	. "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		echo extra_saisie($extra, 'breves', $id_rubrique);
+		$form .= extra_saisie($extra, 'breves', $id_rubrique);
 	}
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
-		debut_cadre_relief();
-		echo "<B>"._T('entree_breve_publiee')."</B>\n";
+		$form .= debut_cadre_relief('', true)
+		. "<B>"._T('entree_breve_publiee')."</B>\n"
 
-		echo "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n";
-		
-		echo "<OPTION".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."\n";		
-		echo "<OPTION".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."\n";		
-		echo "<OPTION".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."\n";		
+		. "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n"
+		. "<OPTION".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."\n"
+		. "<OPTION".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."\n"
+		. "<OPTION".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."\n"
 
-		echo "</SELECT>".aide ("brevesstatut")."<P>\n";
-		fin_cadre_relief();
+		. "</SELECT>".aide ("brevesstatut")."<P>\n"
+		. fin_cadre_relief(true);
 	}
-	else {
-		echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">";
-	}
-	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'  >";
-	echo "</FORM>";
+	$form .= "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>";
+
+	echo generer_action_auteur('editer_breve',
+		$new ? $new : $id_breve,
+		$redirect = generer_url_ecrire('breves_voir'),
+		$form,
+		" method='post' name='formulaire'"
+	);
+
 }
-else echo "<H2>"._T('info_page_interdite')."</H2>";
+else
+	echo "<H2>"._T('info_page_interdite')."</H2>";
 
 fin_cadre_formulaire();
 echo fin_page();
+
 }
 
 ?>

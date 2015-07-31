@@ -227,9 +227,13 @@ function _q($arg_sql) {
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
-//
+// ou pioche dans $c si c'est un array()
 // http://doc.spip.org/@_request
-function _request($var) {
+function _request($var, $c=false) {
+
+	if (is_array($c))
+		return isset($c[$var]) ? $c[$var] : NULL;
+
 	if (isset($_GET[$var])) $a = $_GET[$var];
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
 	else return NULL;
@@ -250,14 +254,24 @@ function _request($var) {
 
 	return $a;
 }
+
 // Methode set de la fonction _request()
-//
+// Attention au cas ou l'on fait set_request('truc', NULL);
 // http://doc.spip.org/@set_request
-function set_request($var, $val = NULL) {
-	unset($_GET[$var]); // au cas ou l'on fait set_request('truc', NULL);
+function set_request($var, $val = NULL, $c=false) {
+	if (is_array($c)) {
+		unset($c[$var]);
+		if ($val !== NULL)
+			$c[$var] = $val;
+		return $c;
+	}
+
+	unset($_GET[$var]);
 	unset($_POST[$var]);
 	if ($val !== NULL)
 		$_GET[$var] = $val;
+	
+	return false; # n'affecte pas $c
 }
 
 //
@@ -1190,6 +1204,13 @@ function lang_dselect ($rien='') {
 		include_spip('inc/lang');
 		changer_langue($lang);
 	}
+}
+
+// pipeline appelant la fonction de notification
+// avant chaque modification du contenu
+function notif_pre_enregistre_contenu($x) {
+	include_spip('inc/notifications');
+	return notifications('pre_enregistre_contenu', $x);
 }
 
 ?>

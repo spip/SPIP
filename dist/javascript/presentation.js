@@ -56,20 +56,25 @@ function decalerCouche(id_couche) {
 
 }
 
-var accepter_change_statut;
+var accepter_change_statut = false;
 
 function selec_statut(id, type, decal, puce, script) {
 
-	if (!accepter_change_statut) {
-		accepter_change_statut = confirm(confirm_changer_statut)
-	}
+	if (!accepter_change_statut)
+		accepter_change_statut = confirm(confirm_changer_statut);
 
 	if (accepter_change_statut) {
 		changestyle ('statutdecal'+type+id, 'marginLeft', decal+'px');
 		cacher ('statutdecal'+type+id);
 
-		findObj('imgstatut'+type+id).src = puce;
-		frames['iframe_action'].location.href = script;
+		$.get(script,
+			function (c) {
+				if (!c)
+					findObj('imgstatut'+type+id).src = puce;
+				else
+					alert(c); // eventuel message d'erreur (TODO)
+			}
+		);
 	}
 }
 
@@ -183,22 +188,7 @@ function puce_statut(selection){
 	}
 }
 
-// lorsqu'on touche a un formulaire, desactiver les autres
-// (a voir : onchange=... fonctionne sous FF, mais pas Safari)
-function disable_other_forms(me) {
-	var items = document.getElementsByTagName('form');
-	for (var j = 0; j < items.length; j++) {
-		if (items[j] != me) {
-			var fields = items[j].getElementsByTagName('input');
-			for (var k = 0; k < fields.length; k++) {
-				fields[k].disabled=true;
-			}
-		}
-	}
-}
-
-// Pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
-
+// Pour ne pas fermer le formulaire de recherche pendant qu'on l'edite
 function recherche_desesperement()
 {
 	if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') 

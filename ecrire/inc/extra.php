@@ -142,12 +142,14 @@ function extra_form($extra, $type, $ensemble='') {
 
 		switch($form) {
 
+			// complique car la valeur n'esst pas envoyee ar le nav si unchecked
 			case "case":
 			case "checkbox":
 				$affiche = ereg_replace("<br />$", "&nbsp;", $affiche);
-				$affiche .= "<INPUT TYPE='checkbox' NAME='suppl_$champ'";
+				$affiche .= "<input type='hidden' name='suppl_$champ' value='1' /><input type='checkbox' name='suppl_{$champ}_check'";
 				if ($extra[$champ] == 'true')
-					$affiche .= " CHECKED ";
+					$affiche .= " checked";
+					$affiche .= " />";
 				break;
 
 			case "list":
@@ -165,18 +167,18 @@ function extra_form($extra, $type, $ensemble='') {
 				if($valeurs == explode(",",""))
 					$valeurs = $choix ;
 
-				$affiche .= "<SELECT NAME='suppl_$champ' ";
-				$affiche .= "CLASS='forml'>\n";
+				$affiche .= "<select name='suppl_$champ' ";
+				$affiche .= "class='forml'>\n";
 				$i = 0 ;
 				while (list(, $choix_) = each($choix)) {
 					$val = $valeurs[$i] ;
-					$affiche .= "<OPTION VALUE=\"$val\"";
+					$affiche .= "<option value=\"$val\"";
 					if ($val == entites_html($extra[$champ]))
-						$affiche .= " SELECTED";
-					$affiche .= ">$choix_</OPTION>\n";
+						$affiche .= " selected";
+					$affiche .= ">$choix_</option>\n";
 					$i++;
 				}
-				$affiche .= "</SELECT>";
+				$affiche .= "</select>";
 				break;
 
 			case "radio":
@@ -191,16 +193,16 @@ function extra_form($extra, $type, $ensemble='') {
 
 				$i=0;
 				while (list(, $choix_) = each($choix)) {
-					$affiche .= "<INPUT TYPE='radio' NAME='suppl_$champ' ";
+					$affiche .= "<input type='radio' name='suppl_$champ' ";
 					$val = $valeurs[$i] ;
-					if (entites_html($extra["$champ"])== $val)
-						$affiche .= " CHECKED";
+					if (entites_html($extra[$champ])== $val)
+						$affiche .= " checked";
 
 					// premiere valeur par defaut
-					if (!$extra["$champ"] AND $i == 0)
-						$affiche .= " CHECKED";
+					if (!$extra[$champ] AND $i == 0)
+						$affiche .= " checked";
 
-					$affiche .= " VALUE='$val'>$choix_</INPUT>\n";
+					$affiche .= " value='$val'>$choix_</input>\n";
 					$i++;
 				}
 				break;
@@ -211,20 +213,22 @@ function extra_form($extra, $type, $ensemble='') {
 				$choix = explode(",",$choix);
 				if (!is_array($choix)) {
 					$affiche .= "Pas de choix d&eacute;finis.\n";
-					break; }
+					break;
+				}
+				$affiche .= "<input type='hidden' name='suppl_{$champ}' value='1' />";
 				for ($i=0; $i < count($choix); $i++) {
-					$affiche .= "<INPUT TYPE='checkbox' NAME='suppl_$champ$i'";
-					if (entites_html($extra["$champ"][$i])=="on")
-						$affiche .= " CHECKED";
+					$affiche .= "<input type='checkbox' name='suppl_$champ$i'";
+					if (entites_html($extra[$champ][$i])=="on")
+						$affiche .= " checked";
 					$affiche .= ">\n";
 					$affiche .= $choix[$i];
-					$affiche .= "</INPUT>\n";
+					$affiche .= "</input>\n";
 				}
 				break;
 
 			case "bloc":
 			case "block":
-				$affiche .= "<TEXTAREA NAME='suppl_$champ' CLASS='forml' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
+				$affiche .= "<textarea name='suppl_$champ' class='forml' rows='5' cols='40'>".entites_html($extra[$champ])."</textarea>\n";
 				break;
 
 			case "masque":
@@ -234,12 +238,12 @@ function extra_form($extra, $type, $ensemble='') {
 			case "ligne":
 			case "line":
 			default:
-				$affiche .= "<INPUT TYPE='text' NAME='suppl_$champ' CLASS='forml'\n";
-				$affiche .= " VALUE=\"".entites_html($extra[$champ])."\" SIZE='40'>\n";
+				$affiche .= "<input type='text' name='suppl_$champ' class='forml'\n";
+				$affiche .= " value=\"".entites_html($extra[$champ])."\" size='40'>\n";
 				break;
 		}
 
-		$affiche .= "<p>\n";
+		$affiche .= "<p />\n";
 	}
 
 	return $affiche;
@@ -247,43 +251,47 @@ function extra_form($extra, $type, $ensemble='') {
 
 // recupere les valeurs postees pour reconstituer l'extra
 // http://doc.spip.org/@extra_recup_saisie
-function extra_recup_saisie($type) {
+function extra_recup_saisie($type, $c=false) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
 		$extra = Array();
-		while(list($champ,)=each($champs)) {
-			list($style, $filtre, , $choix,) = explode("|", $GLOBALS['champs_extra'][$type][$champ]);
+		foreach($champs as $champ => $config)
+		if (($val = _request("suppl_$champ",$c)) !== NULL) {
+			list($style, $filtre, , $choix,) = explode("|", $config);
 			list(, $filtre) = explode(",", $filtre);
 			switch ($style) {
 			case "multiple":
 				$choix =  explode(",", $choix);
-				$extra["$champ"] = array();
+				$multiple = array();
 				for ($i=0; $i < count($choix); $i++) {
+					$val2 = _request("suppl_$champ$i",$c);
 					if ($filtre && function_exists($filtre))
-						 $extra["$champ"][$i] =
-						 	$filtre($GLOBALS["suppl_$champ$i"]);
+						 $multiple[$i] = $filtre($val2);
 					else
-						$extra["$champ"][$i] = $GLOBALS["suppl_$champ$i"];
+						$multiple[$i] = $val2;
 				}
+				$extra[$champ] = $multiple;
 				break;
 
 			case 'case':
 			case 'checkbox':
-				if ($GLOBALS["suppl_$champ"] == 'on')
-					$GLOBALS["suppl_$champ"] = 'true';
+				if (_request("suppl_{$champ}_check") == 'on')
+					$val = 'true';
 				else
-					$GLOBALS["suppl_$champ"] = 'false';
+					$val = 'false';
+				// pas de break; on continue
 
 			default:
 				if ($filtre && function_exists($filtre))
-				$extra["$champ"]=$filtre($GLOBALS["suppl_$champ"]);
-				else $extra["$champ"]=$GLOBALS["suppl_$champ"];
+					$extra[$champ] = $filtre($val);
+				else
+					$extra[$champ] = $val;
 				break;
 			}
 		}
 		return serialize($extra);
 	} else
-		return '';
+		return false;
 }
 
 // Retourne la liste des filtres a appliquer pour un champ extra particulier
@@ -361,6 +369,29 @@ function extra_affichage($extra, $type) {
 		return debut_cadre_enfonce('',true)
 			. $affiche
 			. fin_cadre_enfonce(true);
+}
+
+// s'il y a mise a jour des extras, mixer les champs modifies
+// avec les champs existants (car la mise a jour peut etre partielle)
+function extra_update($type, $id, $c = false) {
+	$extra = @unserialize(extra_recup_saisie($type, $c));
+
+	// pas de mise a jour, ou erreur
+	if (!is_array($extra) OR !count($extra))
+		return false;
+
+	// passer de 'articles' a 'article' :-(
+	$t = preg_replace(',s$,', '', $type);
+
+	$orig = spip_query("SELECT extra FROM spip_".table_objet($t)." WHERE ".id_table_objet($t)."=".intval($id));
+	$orig = spip_fetch_array($orig);
+
+	if (isset($orig['extra'])
+	AND is_array($orig = @unserialize($orig['extra']))) {
+		$extra = array_merge($orig, $extra);
+	}
+
+	return serialize($extra);
 }
 
 ?>

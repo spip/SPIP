@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+// ON PEUT SUPPRIMER CE FICHIER
+
 // http://doc.spip.org/@action_instituer_breve_dist
 function action_instituer_breve_dist() {
 
@@ -24,17 +27,9 @@ function action_instituer_breve_dist() {
 	list($id_breve, $statut) = preg_split('/\W/', $arg);
 
 	$id_breve = intval($id_breve);
-	$result = spip_query("SELECT statut FROM spip_breves WHERE id_breve=$id_breve");
 
-	if ($row = spip_fetch_array($result)) {
-		$statut_ancien = $row['statut'];
-		}
-
-	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve");
-
-		include_spip('inc/rubriques');
-		calculer_rubriques();
-	}
+	include_spip('action/editer_breve');
+	revisions_breves($id_breve, false, array('statut' => $statut));
 }
+
 ?>
