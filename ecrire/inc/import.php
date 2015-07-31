@@ -164,6 +164,9 @@ function import_tables($f, $gz=false) {
 	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
 		$GLOBALS['meta']["status_restauration"];
 	if ($my_pos==0) {
+		// par defaut pour les anciens sites
+		// il est contenu dans le xml d'import et sera reecrit dans import_debut
+		ecrire_meta('charset_restauration', 'iso-8859-1'); 
 		// Debut de l'importation
 		$fimport = false;
 		if ($r = import_debut($f, $gz)) {
@@ -178,7 +181,6 @@ function import_tables($f, $gz=false) {
 			return _T('avis_archive_incorrect');
 		}
 
-		ecrire_meta('charset_restauration', 'iso-8859-1');
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag_archive);
 		ecrire_metas();
