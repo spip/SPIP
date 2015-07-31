@@ -178,11 +178,12 @@ function import_translate_std($values, $table, $desc, $request, $atts) {
 
 	foreach ($values as $k => $v) {
 		if ($k=='id_parent' OR $k=='id_secteur')
-				$k = 'id_rubrique';
-		else  if (($k=='chapo') AND ($v[0]=='=') AND preg_match(_RACCOURCI_CHAPO, substr($v,1), $m))
+				$type = 'id_rubrique';
+		else $type = $k;
+		if (($k=='chapo') AND ($v[0]=='=') AND preg_match(_RACCOURCI_CHAPO, substr($v,1), $m))
 			$v = '=[->' . substr($v,1) . ']';
 
-		$values[$k]= importe_raccourci($k,importe_translate_maj($k, $v));
+		$values[$k]= importe_raccourci(importe_translate_maj($type, $v));
 	}
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
@@ -199,7 +200,7 @@ function import_translate_spip_documents($values, $table, $desc, $request, $atts
 	foreach ($values as $k => $v) {
 	  if ($k=='fichier')
 	    $v = $url .$v;
-	  else $v = importe_raccourci($k,importe_translate_maj($k, $v));
+	  else $v = importe_raccourci(importe_translate_maj($k, $v));
 	  $values[]= $v;
 	}
 	import_inserer_translate($values, $table, $desc, $request, $atts);
@@ -236,7 +237,7 @@ function importe_translate_maj($k, $v)
 define('_RACCOURCI_MODELE_ALL', '@' . _RACCOURCI_MODELE .'@isS');
 
 // http://doc.spip.org/@importe_raccourci
-function importe_raccourci($k, $v)
+function importe_raccourci($v)
 {
 	if (preg_match_all(_RACCOURCI_LIEN, $v, $m, PREG_SET_ORDER)) {
 		foreach ($m as $regs) {
