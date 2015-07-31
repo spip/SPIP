@@ -49,7 +49,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$titre = $document['titre'];
 	$date = $document['date'];
 
-	if ($document['mode'] == 'vignette') {
+	if ($document['mode'] == 'image') {
 		$supp = 'image-24.gif';
 		$label = _T('entree_titre_image');
 		$taille = $vignette = '';
@@ -221,7 +221,7 @@ function formulaire_taille($document) {
 	)) {
 		return "\n<br /><label for='largeur_document$id_document'><b>"._T('entree_dimensions')."</b></label><br />\n" .
 		  "<input type='text' name='largeur_document' id='largeur_document$id_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
-		  " &#215; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
+		  " &times; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
 }
 

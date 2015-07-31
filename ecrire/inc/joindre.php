@@ -36,7 +36,7 @@ function inc_joindre_dist($v) {
 			// quels sont les docs accessibles en ftp ?
 			$l = texte_upload_manuel($dir, '', $v['mode']);
 			// s'il n'y en a pas, on affiche un message d'aide
-			// en mode document, mais pas en mode vignette
+			// en mode document, mais pas en mode image
 			if ($l OR ($v['mode'] == 'document'))
 				$dir_ftp = afficher_transferer_upload($l, $dir);
 		}

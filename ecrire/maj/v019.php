@@ -471,6 +471,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_51();
 	  maj_version('1.951');
 	}
+	if (upgrade_vers(1.952, $version_installee, $version_cible)) {
+	  maj_v019_52() || exit('echec sur maj_v019_52()'); // tentative de mieux controler les cas d'echec
+	  maj_version('1.952');
+	}
 
 }
 
@@ -641,4 +645,30 @@ function maj_v019_51()
 {
 	sql_alter("TABLE spip_versions CHANGE id_version id_version bigint(21) DEFAULT 0 NOT NULL");
 }
+
+
+// Transformation des documents :
+// - image => mode=image
+// - vignette => mode=vignette
+function maj_v019_52()
+{
+	$ok = true;
+
+	$ok &=
+		sql_alter("TABLE spip_documents CHANGE `mode` `mode` enum('vignette','image','document') DEFAULT NULL");
+
+	if(!$ok) return $false;
+
+	$s = sql_select("v.id_document as id_document", "spip_documents as d join spip_documents as v ON d.id_vignette=v.id_document");
+
+	$vignettes = array();
+	while ($t = sql_fetch($s))
+		$vignettes[] = intval($t['id_document']);
+
+	$ok &= spip_query("UPDATE spip_documents SET mode='image' WHERE mode='vignette'");
+	$ok &= spip_query("UPDATE spip_documents SET mode='vignette' WHERE mode='image' AND ".calcul_mysql_in('id_document', $vignettes));
+
+	return $ok;
+}
+
 ?>
