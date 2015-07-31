@@ -55,7 +55,7 @@ function suivre_lien($url, $lien) {
 		$debut = $regs[1];
 		$dir = !strlen($regs[2]) ? '/' : $regs[2];
 		$mot = $regs[3];
-		$hash = $regs[4];
+		$hash = isset($regs[4])?$regs[4]:"";
 	}
 	switch (substr($lien,0,1)) {
 		case '/':

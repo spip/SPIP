@@ -102,7 +102,7 @@ function cache_valide(&$page, $date) {
 
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
-	if ($page['entetes']['X-Spip-Statique'] !== 'oui') {
+	if (!isset($page['entetes']['X-Spip-Statique']) OR $page['entetes']['X-Spip-Statique'] !== 'oui') {
 
 		// Cache invalide par la meta 'derniere_modif'
 		if ($GLOBALS['derniere_modif_invalide']

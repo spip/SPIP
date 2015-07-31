@@ -150,7 +150,7 @@ if ($GLOBALS['var_mode'] == 'debug') {
 	$var_mode_objet = _request('var_mode_objet');
 	debug_dumpfile("",$var_mode_objet,$var_mode_affiche);
 }
-if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
+if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin)
 	echo affiche_erreurs_page($tableau_des_erreurs);
 
 ?>

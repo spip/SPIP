@@ -945,7 +945,7 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 '
 	// reporter de maniere securisee les doublons inclus
 .'
-	if (is_array($Pile[0]["doublons"]))
+	if (isset($Pile[0]["doublons"]) AND is_array($Pile[0]["doublons"]))
 		$doublons = nettoyer_env_doublons($Pile[0]["doublons"]);
 
 	$connect = ' .

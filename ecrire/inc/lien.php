@@ -156,6 +156,7 @@ define('_EXTRAIRE_DOMAINE', '/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_,])?\.)+[a-z]{2,
 // callback pour la fonction traiter_raccourci_liens()
 // http://doc.spip.org/@autoliens_callback
 function traiter_autoliens($r) {
+	if (count($r)<2) return reset($r);
 	list($tout, $l) = $r;
 	if (!$l) return $tout;
 	// reperer le protocole
