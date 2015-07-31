@@ -176,24 +176,41 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			$i++;
 		}
 		if (is_array($item)) {
+			$now = time();
 			for ($i = 0 ; $i < count($item) ; $i++) {
+				// Titre (obligatoire)
 				if (ereg("<title>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>",$item[$i],$match))
 					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[1])));
 				else continue;
+				// URL (obligatoire)
 				if (ereg("<link>([^<]*)</link>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
 				else if (ereg("<guid>([^<]*)</guid>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
 				else continue;
+				// Date
 				$la_date = "";
 				if (ereg("<([[:alpha:]]+:)?date>([^<]*)</([[:alpha:]]+:)?date>",$item[$i],$match))
-					$la_date = strtotime($match[2]);
+					$la_date = $match[2];
 				else if (ereg("<pubDate>([^<]*)</pubDate>",$item[$i],$match))
-					$la_date = strtotime($match[1]);
-				if (!$la_date) $la_date = time();
+					$la_date = $match[1];
+				if ($la_date) {
+					// http://www.w3.org/TR/NOTE-datetime
+					if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
+						$la_date = str_replace("T", " ", $match[1])." GMT";
+						$la_date = strtotime($la_date) - intval($match[5]) * 3600;
+					}
+					else $la_date = strtotime($la_date);
+				}
+				if ($la_date < $now - 365 * 24 * 3600 OR $la_date > $now + 48 * 3600)
+					$la_date = $time;
+				// Auteur
 				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
 					$les_auteurs = addslashes(filtrer_entites($match[1]));
+				else if (ereg("<([[:alpha:]]+:)?creator>([^<]*)</([[:alpha:]]+:)?creator>",$item[$i],$match))
+					$les_auteurs = addslashes(filtrer_entites($match[2]));
 				else $les_auteurs = "";
+				// Description
 				if (ereg("<description[^>]*>(.*)</description>",$item[$i],$match))
 					$la_description = supprimer_tags(addslashes(filtrer_entites($match[1])));
 				else $la_description = "";
