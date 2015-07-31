@@ -86,6 +86,7 @@ jQuery.fn.positionner = function() {
 
 	// positionner le curseur dans la premiere zone de saisie
 	jQuery(jQuery('*', this).filter('input[@type=text],textarea')[0]).focus();
+	return this; // don't break the chain
 }
 
 // rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
@@ -114,7 +115,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(cible)
 					.removeClass('loading')
 					.html(c)
-					.positionner();
+					.positionner()
+					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
+					.formulaire_dyn_ajax(); 
 				}
 			},
 			iframe: jQuery.browser.msie
@@ -133,7 +136,7 @@ jQuery.fn.ajaxbloc = function() {
   return this.each(function() {
   jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 	var blocfrag = jQuery(this);
-
+	
 	var on_pagination = function(c) {
 		jQuery(blocfrag)
 		.html(c)
@@ -175,16 +178,19 @@ jQuery.fn.ajaxbloc = function() {
 };
 
 // Ajaxer les formulaires qui le demandent, au demarrage
+
 jQuery(function() {
 	jQuery('form').parents('div.ajax')
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
 });
+
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	jQuery('form', this).parents('div.ajax')
-	.formulaire_dyn_ajax();
-	jQuery('div.ajaxbloc', this)
-	.ajaxbloc();
+	if (jQuery){
+		jQuery('form', this).parents('div.ajax')
+		.formulaire_dyn_ajax();
+		jQuery('div.ajaxbloc', this)
+		.ajaxbloc();
+	}
 });
-
