@@ -978,7 +978,6 @@ function http_last_modified($lastmodified, $expire = 0) {
 function redirige_par_entete($url) {
 	spip_log("redirige $url");
 	include_ecrire('inc_headers.php');
-	http_status(302);
 	spip_header("Location: $url");
 	exit;
 }
