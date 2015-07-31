@@ -19,9 +19,8 @@ function exec_virtualiser_dist()
 	$id_article = intval($id_article);
 
 	if (!acces_article($id_article)) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 

@@ -131,7 +131,9 @@ function defautElement($parser, $data)
 function xml_parsefile($xml_parser, $file)
 {
   if (!($fp = fopen($file, "r"))) {
-   die("Impossible d'ouvrir le fichier XML");
+		include_spip('inc/minipres');
+		echo minipres("Impossible d'ouvrir le fichier XML");
+		exit;
   }
   while ($data = fread($fp, 4096)) {
     if (!xml_parse($xml_parser, str_replace('&#8217;',"'",$data), feof($fp))) {

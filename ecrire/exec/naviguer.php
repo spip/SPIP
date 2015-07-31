@@ -32,7 +32,7 @@ function exec_naviguer_dist()
 		$extra = $row["extra"];
 	} elseif ($id_rubrique)
 	      {include_spip('minipres');
-		minipres();
+		echo minipres();
 		exit;
 	      }
 

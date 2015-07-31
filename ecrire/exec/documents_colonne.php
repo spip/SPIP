@@ -21,9 +21,8 @@ function exec_documents_colonne_dist()
 	if (!($type == 'article' 
 		? acces_article($id)
 		: acces_rubrique($id))) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres();
+		echo minipres();
 		exit;
 	}
 

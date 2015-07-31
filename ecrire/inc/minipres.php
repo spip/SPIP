@@ -129,18 +129,15 @@ function bouton_suivant($code = 'suivant') {
 // http://doc.spip.org/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
-	if ($titre)
-		return install_debut_html($titre, $onload)
-		. $corps
-		. install_fin_html();
+	if (!$titre) {
+		$titre = _T('info_acces_interdit');
+		$corps = _request(_DIR_RESTREINT ? 'action' : 'exec');
+		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
+	}
 
-	$titre = _T('info_acces_interdit');
-	$corps = _DIR_RESTREINT ? _request('action') : _request('exec');
-
-	echo install_debut_html($titre), '<h2>', $corps, '</h2>', 
-	  install_fin_html();
-	spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
-	exit;
+	return install_debut_html($titre, $onload)
+	. $corps
+	. install_fin_html();
 }
 
 //
