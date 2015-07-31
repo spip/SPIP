@@ -1,321 +1,158 @@
 #CACHE{86400}
-<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[(#TITRE|textebrut)]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<title>[(#TITRE|supprimer_numero|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+	<meta name="generator" content="SPIP" />
 
-<!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
+	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
 
-<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
-<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
-<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
-[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
-]</head>
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" />
+
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
+
+	<!-- Lien vers le backend pour navigateurs eclaires -->
+	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="#URL_PAGE{backend}" />
+
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+</head>
 
 <body>
-<div id="navigation">
+<div id="page">
 
-<h1 class="structure"><:navigation:></h1>
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}{lang}>
 
-<!-- Menu de navigation general -->
-
-<div class="menu">
-<ul class="general">
-	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{plan}"><:plan_site:></a>
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{resume}" title="<:articles_populaires:>"><:en_resume:></a>
-	</li>
-	<li class="menu-item">
-	<a href="ecrire/"><:espace_prive:></a>
-	</li>
-</ul>
-</div>
-
-<!-- Formulaire de recherche -->
-
-[(#FORMULAIRE_RECHERCHE)]
-
-<!-- Menu de navigation rubriques -->
-
-<B_rubriques>
-<div class="menu">
-<ol class="rubriques">
-<BOUCLE_rubriques(HIERARCHIE) {id_article}>
-<li>
-<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
-<B_sous_rubriques>
-	<ul class="menu-liste">
-<BOUCLE_sous_rubriques(RUBRIQUES) {meme_parent} {exclus} {par date} {inverse} {0,3}>
-	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
-</BOUCLE_sous_rubriques>
-	</ul>
-</B_sous_rubriques>
-</li>
-</BOUCLE_rubriques>
-</ol>
-</div>
-</B_rubriques>
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
 
-<!-- Menu de navigation mots-cles -->
-
-<B_mots>
-<div class="menu">
-
-<h1 class="structure"><:mots_clefs:></h1>
-
-<ul class="divers" title="<:mots_clefs:>">
-<BOUCLE_mots(MOTS) {id_article} {par titre}>
-<li>
-<div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
-<B_articles_mots>
-	<ul class="menu-liste">
-<BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,4}>
-	<li class="menu-item"><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
-</BOUCLE_articles_mots>
-	</ul>
-</B_articles_mots>
-</li>
-</BOUCLE_mots>
-</ul>
-</div>
-</B_mots>
+    <div id="conteneur">
 
 
-<!-- Liens des forums -->
-<B_forums_liens>
+        [(#REM) Contenu principal : contenu de l'article ]
 
-<div class="menu" title="<:derniers_commentaires:>">
+        <div id="contenu">
 
-<h1 class="structure"><:derniers_commentaires:></h1>
+            <div class="cartouche">
+                [(#LOGO_ARTICLE||reduire_image{200,200})]
+                [<p class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</p>]
+                <h2 class="titre">#DEBUT_SURLIGNE[(#TITRE|supprimer_numero)]#FIN_SURLIGNE</h2>
+                [<p class="soustitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</p>]
 
-<ul class="forums">
-<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
-	<li class="menu-titre"><:messages_forum:>: #TOTAL_BOUCLE</li>
-<//B_forums_decompte>
+                <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero)]</a></BOUCLE_auteurs></small></p>
 
-<BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
-	<li class="menu-item">[<em>(#DATE|affdate_court)</em>:]
-	<a href="#forum#ID_FORUM">#TITRE</a>
-	</li>
-</BOUCLE_forums_liens>
-</ul>
-</div>
-</B_forums_liens>
+                [(#REM) Traductions de l'article ]
+                <B_traductions>
+                    <div class="traductions">
+                        <p><:trad_article_traduction:></p>
+                        <ul>
+	                        <li>[(#LANG|traduire_nom_langue)]</li>
+                            <BOUCLE_traductions(ARTICLES){traduction}{exclus}>
+	                        <li><a[ href="(#URL_ARTICLE|url_absolue)"] rel="alternate" hreflang="#LANG"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]><span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)]</span></a></li>
+                            </BOUCLE_traductions>
+                        </ul>
+                    </div>
+                </B_traductions>
+            </div>
 
+            <br class="nettoyeur" />
 
-</div>
+            [<div class="chapo">#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE</div>]
+            [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+            [<div class="texte">#DEBUT_SURLIGNE(#TEXTE|lignes_longues|reduire_image{520,0})#FIN_SURLIGNE</div>]
 
+            [(#REM) Portfolio : album d'images ]
+            <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
+            <div id="document_actif">
+                [<h3 class="spip">(#TITRE)</h3>]
+                [(#EMBED_DOCUMENT||inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})]
+                [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+            </div>
+            </BOUCLE_afficher_document>
+            <B_documents_portfolio>
+            <div id="documents_portfolio">
+                <h3 class="invisible"><:info_portfolio:></h3>
+                <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$}>
+                [<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT#document_actif"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
+                </BOUCLE_documents_portfolio>
+            </div>
+            </B_documents_portfolio>
 
-<!-- Une : derniers articles publies -->
+            [<div class="ps"><h3><:info_ps:></h3>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
 
-<div class="contenu" id="principal">
+            [(#REM) Autres documents joints a l'article ]
+            <B_documents_joints>
+            <div id="documents_joints">
+                <h3><:titre_documents_joints:></h3>
+                <ul>
+                    <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
+                    <li>[(#LOGO_DOCUMENT|#URL_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{60}|texte_backend)]})]
+                    [<div class="spip_doc_titre">(#TITRE)</div>]
+                    [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
+                    <br class="nettoyeur" />
+                    </BOUCLE_documents_joints>
+                </ul>
+            </div>
+            </B_documents_joints>
 
-<div class="cartouche">
-[
-(#LOGO_ARTICLE|left||reduire_image{120,120})][
-<div class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</div>
-]<h1 class="titre-texte">#DEBUT_SURLIGNE#TITRE#FIN_SURLIGNE</h1>[
-<div class="surtitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</div>
-]
-[(#DATE|nom_jour)] [(#DATE|affdate).]
-</div>
+            [(#REM) Petition ]
+            <INCLURE{fond=inc-petition}{id_article} {debut_signatures}>
 
-<div style="line-height: 0em">&nbsp;</div><!-- Bug Mozilla http://bugzilla.mozilla.org/show_bug.cgi?id=200510 -->
+            [<div class="notes"><h3><:info_notes:></h3>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
-	<div class="encart">
-
-	<!-- Auteurs de l'article -->
-
-	<B_auteurs>
-
-	<div class="menu">
-	<h2 class="structure"><:memes_auteurs:></h2>
-	<ul class="divers">
-	<BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
-		<li>
-		<div class="menu-titre"><a href="#URL_AUTEUR">#NOM</a></div>
-		<ul>
-		[<li class="menu-item" style="text-align: center"><a href="(#URL_SITE)">#NOM_SITE</a></li>]
-		[<li class="menu-item" style="text-align: center">(#BIO)</li>]
-	<B_articles_auteur>
-	<BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par popularite} {inverse} {0,5}>
-		<li class="menu-item"><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
-	</BOUCLE_articles_auteur>
-		</ul>
-		</li>
-	</BOUCLE_auteurs>
-	</ul>
-	</div>
-
-	</B_auteurs>
-
-	<!-- Articles dans la meme rubrique -->
-
-	<B_articles_rubrique>
-
-	<div class="menu">
-	<div class="breves">
-		<h2 class="structure"><:meme_rubrique:></h2>
-		<div class="menu-titre">
-		<:meme_rubrique:>
-		</div>
-		<ul>
-	<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {exclus} {0,8}>
-		<li class="menu-item">
-		<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
-		</li>
-	</BOUCLE_articles_rubrique>
-		</ul>
-	</div>
-	</div>
-
-	</B_articles_rubrique>
-  [<div class='reponse_formulaire'>
-	<a name='sp#ID_ARTICLE' id='sp#ID_ARTICLE'></a>
-    (#FORMULAIRE_SIGNATURE)
-  </div>]
-	</div>
-
-[
-<div class="chapo">#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE</div>
-][<div class="texte">#DEBUT_SURLIGNE(#TEXTE)#FIN_SURLIGNE</div>
-][<div class="ps">#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>][
-<div class="notes">#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>
-]
+            [(#REM) Forums ]
+            [<h3 class="invisible"><:Forum:></h3>
+            <p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
+            <INCLURE{fond=inc-forum}{id_article}>
 
 
-<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
-<hr />
-[<h3 class="spip">(#TITRE)</h3>]
-[<div>(#DESCRIPTIF)</div>]
-
-[<div>(#EMBED_DOCUMENT)</div>]
-</BOUCLE_afficher_document>
-
-<B_documents_portfolio>
-<div><hr />
-<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
-	<div style="float: left;">
-	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{0,60})</a>]
-[<div style="clear: both;"><strong>(#TITRE)</strong></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
-	</div>
-</BOUCLE_documents_portfolio>
-</div>
-<div style="clear: both;"></div>
-</B_documents_portfolio>
-
-<B_documents_joints>
-<div><hr />
-<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
-	<div style="float: left;">
-	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><strong>(#TITRE)</strong></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
-	</div>
-</BOUCLE_documents_joints>
-</div>
-<div style="clear: both;"></div>
-</B_documents_joints>
+        </div><!-- fin contenu -->
 
 
-<!-- Signatures petition -->
+        [(#REM) Menu de navigation laterale ]
+        <div id="navigation">
+            <h2 class="invisible"><:navigation:></h2>
 
-<B_signatures>
-<BOUCLE_signatures_decompte(SIGNATURES){id_article}></BOUCLE_signatures_decompte>
-<div class="signatures-titre"><:signatures_petition:>: #TOTAL_BOUCLE</div>
-<//B_signatures_decompte>
+            [(#REM) Menu de navigation par rubriques ]
+            <INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-<table class="signatures">
-<thead class="structure">
-<tr>
-	<th><:date:></th>
-	<th><:nom:></th>
-	<th><:message:></th>
-</tr>
-</thead>
-<tbody>
-<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {debut_signatures,30}>
-<tr>
-	<td class="signature-date">[(#DATE|affdate_court)]</td>
-	<td class="signature-nom">#NOM[ <a href="#URL_SITE">(#NOM_SITE)</a>]</td>
-	[<td class="signature-message">(#MESSAGE)</td>]
-</tr>
-</BOUCLE_signatures>
-</tbody>
-</table>
-</B_signatures>
+            [(#REM) Articles dans la meme rubrique ]
+            <B_articles_rubrique>
+            <div class="breves">
+                <h3 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h3>
+                <ul>
+                    <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}>
+                    <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                    </BOUCLE_articles_rubrique>
+                </ul>
+            </div>
+            </B_articles_rubrique>
 
+            [(#REM) Menu de navigation mots-cles ]
+            <B_mots>
+            <div class="divers">
+            <h3 class="titre"><:mots_clefs:></h3>
+            <ul>
+                <BOUCLE_mots(MOTS) {id_article} {par titre}>
+                <li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                </BOUCLE_mots>
+            </ul>
+            </div>
+            </B_mots>
+        </div><!-- fin navigation -->
 
-<!-- Forums -->
+    </div><!-- fin conteneur -->
 
-[<div class="forum-repondre"><strong><a  href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></strong></div>]
-<br />
+    [(#REM) Pied de page ]
+    <INCLURE{fond=inc-pied}{lang}>
 
-<B_forums>
-<h1 class="structure"><:Forum:></h1>
-
-<ul class="forum-total">
-
-<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
-
-<li>
-<div class="forum-fil">
-
-<div class="forum">
-<div class="forum-chapo">
-<div class="forum-titre"><a name="forum#ID_FORUM" id="forum#ID_FORUM"></a>#TITRE</div>
-[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:[(#EMAIL|entites_html)]">(#NOM)</a>]
-</div>
-<div class="forum-item">
-#TEXTE
-[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
-</div>
-</div>
-
-<B_forums_fils>
-	<ul>
-	<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
-
-	<li>
-	<div class="forum">
-	<div class="forum-chapo">
-	<div class="forum-titre"><a name="forum#ID_FORUM"></a>#TITRE</div>
-	[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]
-	</div>
-	<div class="forum-item">
-	#TEXTE
-	[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-	[<div class="forum-repondre-message"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_message:></a></div>]
-	</div>
-
-	</div>
-
-	<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
-	</li>
-
-	</BOUCLE_forums_fils>
-	</ul>
-</B_forums_fils>
-
-</div>
-</li>
-</BOUCLE_forums>
-
-</ul>
-</B_forums>
-
-</div>
-
+</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_article_principal>

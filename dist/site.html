@@ -1,101 +1,107 @@
 #CACHE{7200}
-<BOUCLE_site(SITES){id_syndic}
->[(#REM)
-	Les sites n'ont pas de "lang" a proprement parler ; on va donc se
-	baser sur la langue de la rubrique qui les contient. Les articles
-	syndiques, eux, ont une lang.
-]<BOUCLE_lang(RUBRIQUES){id_rubrique}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
+<BOUCLE_site(SITES){id_syndic}>
+[(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
 <head>
-<title>[(#NOM_SITE|textebrut)]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<title>[(#NOM_SITE|supprimer_numero|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#DESCRIPTIF|couper{150}|attribut_html)" />]
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
 
-<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
 
-<!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<BOUCLE_lang2(RUBRIQUES){id_rubrique}><link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" /></BOUCLE_lang2>
 
-<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
-<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
-<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
-[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
-]</head>
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
+
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+</head>
 
 <body>
+	<div id="page">
 
-<div id="navigation">
+		[(#REM) Entete de la page + titre du site ]
+		<INCLURE{fond=inc-entete}{lang}>
 
-<h1 class="structure"><:navigation:></h1>
+		[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|supprimer_numero|couper{80})]</div>
 
-<!-- Menu de navigation general -->
+		<div id="conteneur">
 
-<div class="menu">
-<ul class="general">
-	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{plan}"><:plan_site:></a>
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{resume}" title="<:articles_populaires:>"><:en_resume:></a>
-	</li>
-	<li class="menu-item">
-	<a href="ecrire/"><:espace_prive:></a>
-	</li>
-</ul>
-</div>
+			[(#REM) Contenu principal : affichage du site ]
 
+			<div id="contenu">
 
-<!-- Formulaire de recherche -->
+				<div class="cartouche">
+					<a href="#URL_SITE">[(#LOGO_SITE||reduire_image{150,100}|inserer_attribut{alt,[(#NOM_SITE|supprimer_numero|couper{80})]})]</a>
+					<h2 class="titre">[(#NOM_SITE|supprimer_numero)]</h2>
+					[<div class="soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></div>]
+				</div>
 
-[(#FORMULAIRE_RECHERCHE)]
+				[<div class="chapo">(#DESCRIPTIF)</div>]
 
+				[(#REM) Articles issus de la syndication ]
+				<h3 class="invisible"><:articles:></h3>
 
-</div>
+				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,10}>
+				<div class="extrait">
+					<h4 class="titre"><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></h4>
+					[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+					<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>
+					[<small>&mdash; <em>(#TAGS|afficher_tags{'directory'})</em></small>]
+					[<small>&mdash; <em>(#TAGS|afficher_tags{'tag'})</em></small>]
+					[<div class="texte">(#DESCRIPTIF)</div>]
+				</div>
+				</BOUCLE_articles>
 
-<!-- Une : affichage du site -->
+				[<div class="notes"><h3><:info_notes:></h3>(#NOTES)</div>]
 
-<div class="contenu" id="principal">
+			</div><!-- fin contenu -->
 
-<div class="cartouche">
-[(#LOGO_SITE|right||sinon{<img src="http://open.thumbshots.org/image.pxf?url=[(#URL_SITE|rawurlencode)]" style="float: right;" alt="[(#NOM_SITE|entites_html)]" />})]
+			[(#REM) Menu de navigation laterale ]
+			<div id="navigation">
+				<h2 class="invisible"><:navigation:></h2>
 
-<h1 class="titre-texte"><a href="#URL_SITE">#NOM_SITE</a></h1>
+				[(#REM) Menu de navigation par rubriques ]
+				<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-[<div class="chapo">(#DESCRIPTIF)</div>]
-[<div class="notes">(#NOTES)</div>]
-</div>
+				[(#REM) Autres sites Web ]
+				<B_sites>
+				<div class="syndic">
+					<h3 class="titre"><:sites_web:></h3>
+					<ul>
+						<BOUCLE_sites(SITES) {par nom_site} {doublons}>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_sites>
+					</ul>
+				</div>
+				</B_sites>
 
+				[(#REM) Menu de navigation mots-cles ]
+				<B_mots>
+				<div class="divers">
+					<h3 class="titre"><:mots_clefs:></h3>
+					<ul>
+						<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
+						<li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_mots>
+					</ul>
+				</div>
+				</B_mots>
 
-<!-- Articles du site -->
+			</div><!-- fin navigation -->
 
-<h1 class="structure"><:articles:></h1>
+		</div><!-- fin conteneur -->
 
-<div class="liste-articles">
+		[(#REM) Pied de page ]
+		<INCLURE{fond=inc-pied}{lang}>
 
-<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {par date}{inverse}{0,10}>
-	<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
-	<div class="detail">
-	[<div style='float:#LANG_RIGHT;'>(#TAGS|afficher_enclosures)</div>]
-	[(#DATE|nom_jour)] [(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]
-	[: (#DESCRIPTIF)]
-	[&mdash; <em>(#TAGS|afficher_tags{'directory'})</em>]
-	[&mdash; <em>(#TAGS|afficher_tags{'tag'})</em>]
-
-	</div>
-	<br />
-</BOUCLE_articles>
-
-</div>
-
-</div>
-
+	</div><!-- fin page -->
 </body>
 </html>
-
-
 </BOUCLE_site>

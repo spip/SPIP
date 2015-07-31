@@ -1,179 +1,141 @@
 #CACHE{0}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title><:resultats_recherche:></title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<title><:resultats_recherche:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
 
-<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
 
-<!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" />
 
-<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
-<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
-<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
-[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
-]</head>
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
+
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+</head>
 
 <body>
+<div id="page">
 
-<div id="navigation">
+    [(#REM) Entete de la page + titre du site ]
+    <INCLURE{fond=inc-entete}{lang}>
 
-<!-- Menu de navigation general -->
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
 
-<div class="menu">
-<ul class="general">
-	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{plan}"><:plan_site:></a>
-	</li>
-	<li class="menu-item">
-	<a href="#URL_PAGE{resume}" title="<:articles_populaires:>"><:en_resume:></a>
-	</li>
-	<li class="menu-item">
-	<a href="ecrire/"><:espace_prive:></a>
-	</li>
-</ul>
-</div>
+	
+    <div id="conteneur">
 
+        [(#REM) Contenu principal : Resultats de la recherche ]
 
-<!-- Formulaire de recherche -->
+        <div id="contenu">
 
-[(#FORMULAIRE_RECHERCHE)]
+            [<div class="cartouche">
+                <h2 class="surtitre"><:resultats_recherche:></h2>
+                <p class="titre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+            </div>]
 
+            <div class="contre-encart">
 
-<!-- Rubriques trouvees -->
+                [(#REM) Articles trouves ]
+                <B_articles><ul>
+                    <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {0,10}>
+                    <li class="extrait">
+                    <h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+                    <small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
+                    </li>
+                    </BOUCLE_articles>
+                </ul></B_articles>
 
-<B_rubriques>
-<div class="menu">
-<ul class="rubriques" title="<:rubriques:>">
-<li class="menu-titre"><:rubriques:></li>
-<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points} {inverse} {0,8}>
-<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
-</BOUCLE_rubriques>
-</ul>
-</div>
-</B_rubriques>
+            </div><!-- fin contre-encart -->
 
+            <div class="encart">
 
-<!-- Mots-cles trouves et articles associes-->
+                [(#REM) Rubriques trouvees ]
+                <B_rubriques>
+                <div class="rubriques">
+                    <h3 class="titre"><:rubriques:></h3>
+                    <ul>
+                        <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {0,5}>
+                        <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                        </BOUCLE_rubriques>
+                    </ul>
+                </div>
+                </B_rubriques>
 
-<B_mots>
-<div class="menu">
-<ul class="divers" title="<:mots_clefs:>">
-<BOUCLE_mots(MOTS) {recherche} {par points} {inverse} {0,5}>
-<li>
-<div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
-<B_articles_mots>
-	<ul class="menu-liste">
-<BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,8}>
-	<li class="menu-item"><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
-</BOUCLE_articles_mots>
-	</ul>
-</B_articles_mots>
-</li>
-</BOUCLE_mots>
-</ul>
-</div>
-</B_mots>
+                [(#REM) Mots-cles trouves et articles associes ]
+                <B_mots>
+                <div class="divers">
+                    <h3 class="titre"><:mots_clefs:></h3>
+                    <ul>
+                        <BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {0,5}>
+                        <li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                        </BOUCLE_mots>
+                    </ul>
+                </div>
+                </B_mots>
 
-</div>
+                [(#REM) Breves trouvees ]
+                <B_breves>
+                <div class="breves">
+                    <h3 class="titre"><:breves:></h3>
+                    <ul>
+                        <BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {0,5}>
+                        <li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                        </BOUCLE_breves>
+                    </ul>
+                </div>
+                </B_breves>
 
-<!-- Une : articles trouves -->
+                [(#REM) Messages trouves ]
+                <B_messages>
+                <div class="forums">
+                    <h3 class="titre"><:messages_forum:></h3>
+                    <ul>
+                        <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {0,5}>
+                        <li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
+                        </BOUCLE_messages>
+                    </ul>
+                </div>
+                </B_messages>
 
-<div class="contenu" id="principal">
+                [(#REM) Sites Web trouves ]
+                <B_sites>
+                <div class="syndic">
+                    <h3 class="titre"><:sites_web:></h3>
+                    <ul>
+                        <BOUCLE_sites(SITES) {recherche} {par points}{inverse} {0,5}>
+                        <li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
+                        </BOUCLE_sites>
+                    </ul>
+                </div>
+                </B_sites>
 
-<div class="cartouche">
-<h1 class="surtitre"><:resultats_recherche:></h1>
-[<h2 class="titre-texte">(#RECHERCHE)</h2>]
-</div>
+            </div>
 
-	<div class="encart">
+        </div><!-- fin contenu -->
 
-	<!-- Breves trouvees -->
+        [(#REM) Menu de navigation laterale ]
+        <div id="navigation">
+            <h2 class="invisible"><:navigation:></h2>
 
-	<B_breves>
+            [(#REM) Menu de navigation par rubriques ]
+            <INCLURE{fond=inc-rubriques}{lang}>
 
-	<div class="menu">
-	<div class="breves" title="Br&egrave;ves trouv&eacute;es">
-		<div class="menu-titre">
-		<:breves:>
-		</div>
-		<ul>
-	<BOUCLE_breves(BREVES) {recherche} {par points} {inverse} {0,8}>
-		<li class="menu-item">
-		<em>[(#DATE|affdate_court)]</em>:
-		<a href="#URL_BREVE">#TITRE</a>
-		</li>
-	</BOUCLE_breves>
-		</ul>
-	</div>
-	</div>
+        </div><!-- fin navigation -->        
 
-	</B_breves>
+    </div><!-- fin conteneur -->
+	
 
-	<!-- Sites Web trouves -->
+[(#REM) Pied de page ]
+<INCLURE{fond=inc-pied}{lang}>
 
-	<B_sites>
-	<div class="menu">
-	<div class="divers" title="Sites Web trouv&eacute;s">
-		<div class="menu-titre">
-		<:sites_web:>
-		</div>
-		<ul>
-	<BOUCLE_sites(SITES) {recherche} {par points} {inverse} {0,8}>
-		<li class="menu-item">
-		<a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#NOM_SITE</a>
-		</li>
-	</BOUCLE_sites>
-		</ul>
-	</div>
-	</div>
-	</B_sites>
-
-	<!-- Messages trouves -->
-
-	<B_messages>
-	<div class="menu">
-	<div class="divers" title="<:messages_forum:>">
-		<div class="menu-titre">
-		<:messages_forum:>
-		</div>
-		<ul>
-	<BOUCLE_messages(FORUMS) {recherche} {par points} {inverse} {0,8}>
-		<li class="menu-item">
-		<a href="#URL_FORUM">#TITRE</a>
-		</li>
-	</BOUCLE_messages>
-		</ul>
-	</div>
-	</div>
-	</B_messages>
-
-	</div>
-
-
-<div class="liste-articles">
-
-<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {0,10}>
-	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
-	<div class="detail">
-	[(#DATE|nom_jour)] [(#DATE|affdate)]
-	<B_auteurs_articles><:par_auteur:> <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles>
-	</div>
-	<br />
-</BOUCLE_articles>
-
-</div>
-
-</div>
-
+</div><!-- fin page -->
 </body>
 </html>
-

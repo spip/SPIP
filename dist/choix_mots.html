@@ -1,19 +1,17 @@
-<B_M>
- 	<table cellpadding='0' cellspacing='0' border='0' width='100%'>
-	<BOUCLE_M(MOTS){id_groupe}>[
-(#COMPTEUR_BOUCLE|alterner{'<tr>',''})]
-<td  style='width: 47%'>
-		<input	type='[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]'
-			name='ajouter_mot[]'
-		    	value='#ID_MOT'
-		    	id='mot#ID_MOT' 
-			[(#ID_MOT|in_any{#ENV**{ajouter_mot}, ''}|?
-				{'checked="checked"',''})] />[
-		(#LOGO_MOT|lien)
-		<br />]
-		<strong><label for='mot#ID_MOT'>#TITRE</label></strong>
-</td>[
-(#COMPTEUR_BOUCLE|alterner{'',</tr>})]</BOUCLE_M>
-		  </table>
-</B_M>
-<br />
+<B_mots>
+<div class="choix_mots">
+	<BOUCLE_mots(MOTS){id_groupe} {par titre} {1/2}><div>
+		<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" class="spip_checkbox" name="ajouter_mot[]" id="mot#ID_MOT" value="#ID_MOT" [(#ID_MOT|in_any{#ENV**{ajouter_mot}, ''}|?{'checked="checked"',''})] />
+		[<label for="mot#ID_MOT">(#TITRE|supprimer_numero)</label>]</div>
+    </BOUCLE_mots>
+</div>
+</B_mots>
+<B_mots_suite>
+<div class="choix_mots">
+	<BOUCLE_mots_suite(MOTS){id_groupe} {par titre} {2/2}><div>
+		<input type="[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]" class="spip_checkbox" name="ajouter_mot[]" id="mot#ID_MOT" value="#ID_MOT" [(#ID_MOT|in_any{#ENV**{ajouter_mot}, ''}|?{'checked="checked"',''})] />
+		[<label for="mot#ID_MOT">(#TITRE|supprimer_numero)</label>]</div>
+    </BOUCLE_mots_suite>
+</div>
+</B_mots_suite>
+<br class="nettoyeur" />
