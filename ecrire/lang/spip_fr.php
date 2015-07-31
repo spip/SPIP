@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modifier ce mot-cl&eacute;',
 'admin_modifier_rubrique' => 'Modifier cette rubrique',
 'admin_recalculer' => 'Recalculer cette page',
+'afficher_trad' => 'afficher les traductions',
 'alerte_maj_impossible' => '<b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'analyse_xml' => 'Analyse XML',
 'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:',
@@ -78,6 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendrier par jour',
 'cal_par_mois' => 'calendrier par mois',
 'cal_par_semaine' => 'calendrier par semaine',
+'choix_couleur_interface' => 'couleur ',
+'choix_interface' => 'choix  de l\'interface',
 'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 'correcte' => 'correcte',
 
@@ -188,7 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
   ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.</p>
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
-'dirs_repertoires_suivants' => '<p><b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;:</b></p><ul>@bad_dirs@</ul>
+'dirs_repertoires_suivants' => '<p><b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;:</b></p> <ul>@bad_dirs@.</ul>
   <p>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
   de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.</p>
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
@@ -581,6 +584,7 @@ Merci de votre participation
 
 
 // M
+'masquer_trad' => 'masquer les traductions',
 'module_fichiers_langues' => 'Fichiers de langue',
 
 
