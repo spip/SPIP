@@ -28,8 +28,8 @@ function nettoyer_chaine_indexation($texte) {
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
 function separateurs_indexation() {
-	return "]_.,;`:*'\"«»?!\r\n\t\\/\~(){}[|&@<>$%#".
-		chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
+	return "]_.,;`:*'\"?!\r\n\t\\/\~(){}[|&@<>$%#".
+		chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
 }
 
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
