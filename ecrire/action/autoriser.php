@@ -27,26 +27,27 @@ function action_autoriser_dist()
 
   $file = rawurldecode($file);
 
-  $refus = false;
+  $refus = $dcc = false;
   if (strpos($file,'../') !== false)
     $refus = 1;
   else
   {
     if (!$arg) {
-      $arg = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents AS documents WHERE documents.fichier=" . spip_abstract_quote($file)));
-
+      $arg =spip_query("SELECT id_document, descriptif FROM spip_documents AS documents WHERE documents.fichier=" . spip_abstract_quote($file));
+      $arg = spip_fetch_array($arg);
       if (!$arg) $refus = 2;
+      $dcc = $arg['descriptif'];
       $arg = $arg['id_document'];
     } else {
       $arg = intval($arg);
-      $file = spip_fetch_array(spip_query("SELECT fichier FROM spip_documents AS documents WHERE id_document='". $arg ."'"));
-
+      $file = spip_query("SELECT fichier, descriptif FROM spip_documents AS documents WHERE id_document='". $arg ."'");
+      $file = spip_fetch_array($file);
       if (!$file) $refus = 3;
+      $dcc = $file['descriptif'];
       $file = $file['fichier'];
     }
   }
-  spip_log("arg $arg $auth_login");
-if (!$auth_login && !$refus) { 
+if (!$refus) { 
   $n = spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $arg  LIMIT 1"));
   if (!$n) {
     $n = spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document =  $arg  LIMIT 1"));
@@ -57,22 +58,19 @@ if (!$auth_login && !$refus) {
 
   if (is_int($refus)) {
     spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);
-    global $fond;
-    $fond = 404;
-    include _DIR_RESTREINT . 'public.php';
+    redirige_par_entete('./?page=404');
   }
   else
     {
       if (!function_exists('mime_content_type')) {
 	function mime_content_type($f) {preg_match("/\.(\w+)/",$f,$r); return $r[1];}
  }
-      spip_log("envoi $file");
       $ct = mime_content_type($file);
       $cl = filesize($file);
       $filename = basename($file);
       header("Content-Type: ". $ct);
       header("Content-Disposition: attachment; filename=\"". $filename ."\";");
-      if ($file) header("Content-Description: " . $dcc);
+      if ($dcc) header("Content-Description: " . $dcc);
       if ($cl) header("Content-Length: ". $cl);
 
       header("Content-Transfer-Encoding: binary");
