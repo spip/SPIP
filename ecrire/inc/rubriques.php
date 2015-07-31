@@ -508,7 +508,10 @@ function calculer_langues_utilisees ($serveur='') {
 				$boucles = array(
 					'calculer_langues_utilisees' => $boucle,
 				);
-				$functionname = 'f_calculer_langues_utilisees_'.$boucle->id_table.'_'.time();
+				// generer un nom de fonction "anonyme" unique
+				do {
+					$functionname = 'f_calculer_langues_utilisees_' . $boucle->id_table . '_' . time() . '_' . rand();
+				} while (function_exists($functionname));
 				$code = calculer_boucle('calculer_langues_utilisees',$boucles);
 				$code = '$command=array();$Pile=array(0=>array());'."\n".$code;
 				$code = 'function '.$functionname.'(){'.$code.'};$res='.$functionname.'();';
