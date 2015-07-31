@@ -47,11 +47,7 @@ else {
 //
 // Variables globales : a virer pour une gestion intelligente de la langue
 //
-if (!$GLOBALS['lang']
-	|| $GLOBALS['HTTP_GET_VARS']['lang']
-	|| $GLOBALS['HTTP_POST_VARS']['lang']
-	|| $GLOBALS['HTTP_COOKIE_VARS']['lang'])
-	$GLOBALS['lang'] = 'fr';
+tester_variable('lang', 'fr');
 
 //
 // Trouver une locale qui marche

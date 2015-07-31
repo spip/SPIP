@@ -205,6 +205,11 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
+
+	// marquer l'article (important pour les articles nouvellement crees)
+	$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article";
+	$result = spip_query($query);
+	$id_article_bloque = $id_article;   // message pour inc_presentation
 }
 
 

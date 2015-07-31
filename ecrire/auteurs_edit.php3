@@ -60,9 +60,9 @@ if ($row = mysql_fetch_array($result)) {
 	$imessage=$row["imessage"];
 
 
-if ($connect_id_auteur == $id_auteur) debut_page($nom_auteur, "redacteurs", "perso");
-else if (ereg("5poubelle",$statut)) debut_page("$nom_auteur","redacteurs","redac-poubelle");
-else if (ereg("0minirezo",$statut)) debut_page("$nom_auteur","redacteurs","administrateurs");
+if ($connect_id_auteur == $id_auteur) debut_page($nom, "redacteurs", "perso");
+else if (ereg("5poubelle",$statut)) debut_page("$nom","redacteurs","redac-poubelle");
+else if (ereg("0minirezo",$statut)) debut_page("$nom","redacteurs","administrateurs");
 else debut_page("$nom_auteur","redacteurs","redacteurs");
 
 
