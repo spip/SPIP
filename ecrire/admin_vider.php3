@@ -62,7 +62,7 @@ echo "<TR><TD BACKGROUND=''>";
 
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
-echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."<p align='justifty'>"._T('texte_recalcul_page');
+echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."<p align='justify'>"._T('texte_recalcul_page');
 
 echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
 

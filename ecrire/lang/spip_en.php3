@@ -18,10 +18,9 @@ $GLOBALS['i18n_en'] = array(
 'avis_archive_invalide' => 'archive file is not valid',
 'avis_article_modifie' => 'Warning, @nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
 'avis_aucun_resultat' => 'No results found.',
-'avis_champ_incorrect_type_objet' => 'Invalid field name @name@ for object of type ',
+'avis_champ_incorrect_type_objet' => 'Invalid field name @name@ for object of type @type@',
 'avis_chemin_invalide_1' => 'The path you have selected',
-'avis_chemin_invalide_2' => 'does not seem valid. Please return to the previous page ',
-'avis_chemin_invalide_3' => 'and verify the information provided.',
+'avis_chemin_invalide_2' => 'does not seem valid. Please return to the previous page and verify the information provided.',
 'avis_colonne_inexistante' => 'Column @col@ does not exist',
 'avis_connexion_echec_1' => 'Connection to MySQL server failed.',
 'avis_connexion_echec_2' => 'Go back to the previous page, and verify the information you have provided.',
@@ -38,9 +37,8 @@ $GLOBALS['i18n_en'] = array(
 'avis_erreur_connexion' => 'Connection error',
 'avis_erreur_connexion_mysql' => 'MySQL connection error',
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
-'avis_erreur_mysql' => 'MySQL error  ',
-'avis_erreur_mysql_2' => 'MySQL error! ',
-'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)! ',
+'avis_erreur_mysql' => 'MySQL error',
+'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
 'avis_erreur_version_archive' => '<B>Warning! The file @archive@ corresponds to
 				a version of SPIP other than the one you have
 				installed.</B> You are facing great
@@ -59,10 +57,7 @@ $GLOBALS['i18n_en'] = array(
 'avis_operation_echec' => 'The operation failed.',
 'avis_probleme_archive' => 'Reading error in file @archive@',
 'avis_site_introuvable' => 'Site not found',
-'avis_site_syndique_probleme_1' => 'Warning: the syndication of this site encountered a problem; ',
-'avis_site_syndique_probleme_2' => 'consequently the system is temporarily interrupted. Please verify ',
-'avis_site_syndique_probleme_3' => 'the address of this site\'s syndication file (<b>@url_syndic@</b>), and try again to perform a new ',
-'avis_site_syndique_probleme_4' => 'recovery of information.',
+'avis_site_syndique_probleme' => 'Warning: the syndication of this site encountered a problem; consequently the system is temporarily interrupted. Please verify the address of this site\'s syndication file (<b>@url_syndic@</b>), and try again to perform a new recovery of information.',
 'avis_sites_probleme_syndication' => 'These sites encountered a syndication problem',
 'avis_sites_syndiques_probleme' => 'These syndicated sites generated a problem',
 'avis_suppression_base' => 'WARNING, data deletion is irreversible',
@@ -117,13 +112,15 @@ $GLOBALS['i18n_en'] = array(
 'bouton_radio_modere_priori' => 'beforehand moderation',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Do not appear in the list of connected editors',
 'bouton_radio_non_envoi_annonces' => 'Do not send any announcements',
-'bouton_radio_non_envoi_annonces_editoriales' => 'Do not send any editorial announcements ',
+'bouton_radio_non_envoi_annonces_editoriales' => 'Do not send any editorial announcements',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Do not send latest news list',
 'bouton_radio_non_syndication' => 'No syndication',
 'bouton_radio_occidental' => 'Western alphabet (<tt>iso-8859-1</tt>): supported by all browsers, but only
+
 		displays West European languages (English, French, German...).',
 'bouton_radio_pas_petition' => 'No petition',
 'bouton_radio_personnalise' => 'Custom character set: choose this option if you want
+
 		to use a specific character set',
 'bouton_radio_petition_activee' => 'Petition activated',
 'bouton_radio_publication_immediate' => 'Immediate publication of messages
@@ -274,13 +271,13 @@ $GLOBALS['i18n_en'] = array(
 'info_1_article' => '1 article',
 'info_1_breve' => '1 news item',
 'info_1_site' => '1 site',
-'info_a_grave' => ' At ',
 'info_a_suivre' => 'LAUNCH PAD&raquo;',
 'info_a_valider' => '[to be validated]',
 'info_acces_interdit' => 'Access forbidden',
 'info_acces_refuse' => 'Access denied',
 'info_action' => 'Action: @action@',
 'info_activer_cookie' => 'You can activate an <b>administration cookie</b>, which allows you
+
  to switch easily between the public site and the private area.',
 'info_activer_forum_public' => '<I>To enable public forums, please choose their default mode of moderation:</I>',
 'info_admin_gere_rubriques' => 'This administrator manages the following sections:',
@@ -288,7 +285,7 @@ $GLOBALS['i18n_en'] = array(
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'of the site (<i>use with caution</i>)',
-'info_administrateur_site_01' => 'If you are a site administrator, please ',
+'info_administrateur_site_01' => 'If you are a site administrator, please',
 'info_administrateur_site_02' => 'click on this link',
 'info_administrateurs' => 'Administrators',
 'info_administrer_rubrique' => 'You can manage this section',
@@ -308,7 +305,7 @@ $GLOBALS['i18n_en'] = array(
 'info_ajout_participant' => 'The following participant has been added:',
 'info_ajouter_mot' => 'Add this keyword',
 'info_ajouter_rubrique' => 'Add another section to manage:',
-'info_aller_a' => 'Go to ',
+'info_aller_a' => 'Go to',
 'info_annonce' => 'ANNOUNCEMENT',
 'info_annonce_nouveautes' => 'Latest news announcements',
 'info_annonces_generales' => 'General announcements:',
@@ -334,7 +331,7 @@ $GLOBALS['i18n_en'] = array(
 'info_articles_trouves' => 'Articles found',
 'info_articles_trouves_dans_texte' => 'Articles found (in the text)',
 'info_attente_validation' => 'Your articles pending validation',
-'info_aujourdhui' => 'today: ',
+'info_aujourdhui' => 'today:',
 'info_auteur_message' => 'MESSAGE SENDER:',
 'info_auteurs' => 'Authors',
 'info_auteurs_nombre' => 'author(s):',
@@ -361,7 +358,7 @@ $GLOBALS['i18n_en'] = array(
 'info_chemin_acces_2' => 'From now on, you have to configure the access path to the directory information. ',
 'info_chemin_acces_3' => 'This information is essential to read the users profiles stored in the directory. ',
 'info_chemin_acces_annuaire' => 'Options: <B>Access path in directory</B>',
-'info_choix_base' => 'Third step: ',
+'info_choix_base' => 'Third step:',
 'info_classement_1' => '<sup>st</sup> out of @liste@',
 'info_classement_2' => '<sup>th</sup> out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
@@ -392,7 +389,9 @@ $GLOBALS['i18n_en'] = array(
 'info_date_publication_anterieure' => 'Date of earlier publication:',
 'info_date_referencement' => 'DATE OF REFERENCING THIS SITE:',
 'info_delet_mots_cles' => 'You requested the deletion of keyword
+
 <B>@titre_mot@</b> (@type_mot@). This keyword being linked to
+
 <b>@texte_lie@</b>you must confirm this decision:',
 'info_demander_blocage_priori' => 'Request
 				a blocking beforehand',
@@ -401,7 +400,9 @@ $GLOBALS['i18n_en'] = array(
 'info_derniere_syndication' => 'The last syndication of this site was carried out on ',
 'info_derniers_articles_publies' => 'Your latest published articles',
 'info_desactiver_forum_public' => 'Disable the use of public
+
 	forums. Public forums could be allowed on a case by case
+
 	basis for the articles; they will be forbidden for the sections, news, etc.',
 'info_desactiver_messagerie_personnelle' => 'You can enable or disable your personal messaging on this site.',
 'info_descriptif' => 'Description:',
@@ -410,14 +411,13 @@ $GLOBALS['i18n_en'] = array(
 'info_description_2' => 'Description:',
 'info_dimension' => 'Size:',
 'info_discussion_cours' => 'Discussions in progress',
-'info_document' => 'Document ',
+'info_document' => 'Document',
 'info_donner_rendez_vous' => 'This button allows you to fix an appointment with another participant.',
 'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
 		discussion forums between participants to the site. You can enable or
 		disable this feature.',
 'info_ecire_message_prive' => 'Write a private message',
-'info_ecrire_article_1' => 'Before being able to write articles, ',
-'info_ecrire_article_2' => 'you must create at least one section.',
+'info_ecrire_article' => 'Before being able to write articles, you must create at least one section.',
 'info_email_invalide' => 'Invalid e-mail address.',
 'info_email_webmestre' => 'Webmaster\'s e-mail address (optional)',
 'info_en_cours_validation' => 'Your articles in progress',
@@ -460,6 +460,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_auteurs' => 'You will find here all the site\'s authors.
 	The status of each one is indicated by the colour of his icon (editor = green; administrator = yellow). ',
 'info_gauche_auteurs_exterieurs' => 'External authors, without any access to the site, are indicated by a blue icon;
+
 		deleted authors by a dustbin.',
 'info_gauche_messagerie' => 'Messaging allows you to exchange messages amongst editors, to preserve memos (for your personal use) or to display announcements on the homepage of the private area (if you are an administrator).',
 'info_gauche_numero_auteur' => 'AUTHOR NUMBER:',
@@ -563,6 +564,7 @@ requiring an FTP access to the Web site.',
 'info_nombre_sites' => '@nb_sites@ sites, ',
 'info_non_deplacer' => 'Do not move...',
 'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP can send the site\'s latest news announcements regularly.
+
 		(recently published articles and news).',
 'info_non_envoi_liste_nouveautes' => 'Do not send latest news list',
 'info_non_modifiable' => 'cannot be modified',
@@ -579,7 +581,9 @@ requiring an FTP access to the Web site.',
 'info_numero_article' => 'ARTICLE NUMBER:',
 'info_obligatoire_02' => '[Compulsory]',
 'info_option_email' => 'When a site visitor posts a message to the forum
+
 		associated with an article, the article\'s authors can be
+
 		informed of this message by e-mail. Do you wish to use this option?',
 'info_option_faire_suivre' => 'Forward forums messages to articles authors',
 'info_option_ne_pas_faire_suivre' => 'Do not forward forums messages',
@@ -630,19 +634,28 @@ requiring an FTP access to the Web site.',
 'info_publies' => 'Your articles published online',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you allow the registration of new editors from
+
 		the published site? If you agree, visitors could register
+
 		through an automated form, and will access then the private area to
+
 		tender their own articles. <blockquote><i>During the registration process,
+
 		users receive an automated e-mail
+
 		providing them with their access code to the private site. Some
+
 		hosts disable mail sending on their
+
 		servers: in that case, automated registration cannot be
+
 		implemented.',
 'info_question_mots_cles' => 'Do you wish to use keywords in your site?',
 'info_question_proposer_site' => 'Who can propose referenced sites?',
 'info_question_referers' => 'Should your site preserve <i>referrers</i>
 		(addresses of external links directing to your site)?',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use the search engine integrated to SPIP?
+
 	(Disabling it speeds up the performance of the system.)',
 'info_qui_attribue_mot_cle' => 'The keywords in this group can be assigned by:',
 'info_racine_site' => 'Site root',
@@ -1075,7 +1088,9 @@ the images used in the articles and sections.',
 'texte_auteur_messagerie_1' => 'This site allows the exchange of messages and the creation of private discussion forums between participants to the site. You can decide not to participate to this exchange.',
 'texte_auteurs' => 'THE AUTHORS',
 'texte_breves' => 'News are short and simple texts which allow
+
 	the publication online of concise information, the management of
+
 	a press review, a calendar of events...',
 'texte_choix_base_1' => 'Select your database:',
 'texte_choix_base_2' => 'MySQL server contains several databases.',
@@ -1085,17 +1100,25 @@ the images used in the articles and sections.',
 			by the search engine integrated to SPIP. It will allow you
 			to save some disk space.',
 'texte_comment_lire_tableau' => 'The rank of the article,
+
 		in the popularity classification, is indicated in the
+
 		margin; the article popularity (an estimate of
+
 		the number of daily visits it will have if the actual pace of
+
 		traffic is maintained) and the number of visits recorded
+
 		since the beginning are displayed in the balloon that
+
 		appears as the mouse hovers over the title.',
 'texte_compresse_ou_non' => '(this one could be compressed or not)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Do you wish to activate the advanced configuration keyword groups,
+
 			by specifying, for instance that a unique word per group
+
 			could be selected, that a group is important...?',
 'texte_connexion_mysql' => 'Refer to the information provided to you by your host: it should give you, if your host supports MySQL, the connection codes to MySQL server.',
 'texte_contenu_article' => '(Content of the article in a few words.)',
@@ -1134,12 +1157,19 @@ the images used in the articles and sections.',
 						and finally make sure that the images still appear
 						in the articles.',
 'texte_fichier_authent' => '<b>Should SPIP create special <tt>.htpasswd</tt>
+
 		and <tt>.htpasswd-admin</tt> files in the directory <tt>ecrire/data/</tt>?</b><p>
+
 		These files can be used to restrict access to authors
+
 		and administrators in other parts of your site
+
 		(for instance, external statistical programme).<p>
+
 		If you have not used such files before you can leave this option
+
 		with its default value (no creation 
+
 		of files).',
 'texte_inc_auth_1' => 'You identified yourself with the login
 		<B>@auth_login@</B>, but it does not exist in the database (anymore). 
@@ -1148,9 +1178,13 @@ the images used in the articles and sections.',
 'texte_inc_auth_3' => 'having quit then
 		restarted your browser if necessary.',
 'texte_inc_config' => 'The modifications entered below influence notably
+
 	 the functioning of the site. You are advised not to deal with them unless you are
+
 	familiar with the functioning of the SPIP system. <P align=\\"justify\\"><B>More
+
 	generally, you are strongly advised
+
 	to let the main webmaster of your site deal with this page.</b>',
 'texte_inc_meta_1' => 'As a site administrator, please ',
 'texte_inc_meta_2' => 'verify write permissions',
@@ -1159,9 +1193,13 @@ the images used in the articles and sections.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can ',
 'texte_introductif_article' => '(Introductory Text to the article.)',
 'texte_jeu_caractere' => 'This option is useful if your site displays alphabets
+
 	different from the roman alphabet (that is &laquo;western&raquo;) and its derivatives.
+
 	In this case, the default setting must be changed in order to use
+
 	a suitable character set. Also, remember to adapt
+
 	the site accordingly (<tt>#CHARSET</tt> tag).',
 'texte_jeu_caractere_2' => 'This setting is not retroactive.
 	Consequently, text already entered might be wrongly
@@ -1181,6 +1219,7 @@ the images used in the articles and sections.',
 'texte_login_ldap_1' => '(Keep empty for anonymous access or enter complete path, ',
 'texte_login_ldap_2' => 'for instance &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Warning! This is the login with which you are connected now.
+
 	Use this form with caution...',
 'texte_message_edit' => 'Warning: this message can be modified by all the site administrators, and it appears to all editors. Use the announcements only to stress important events in the site\'s life.',
 'texte_messages_publics' => 'Public Messages of the article:',
@@ -1189,9 +1228,13 @@ the images used in the articles and sections.',
 	database.',
 'texte_modifier_article' => 'Modify the article:',
 'texte_moteur_recherche_active' => '<b>The search engine is enabled.</b> use this command
+
 		if you wish to execute a quick re-indexing (after restoring
+
 		a backup for instance). You should note that the documents modified in
+
 		a normal way (from the SPIP interface) are automatically
+
 		indexed again: therefore this command is only useful in exceptional circumstances.',
 'texte_moteur_recherche_non_active' => 'The search engine is not enabled.',
 'texte_mots_cles' => 'Keywords allow you to create topical links between your articles
@@ -1204,27 +1247,25 @@ the images used in the articles and sections.',
 'texte_nouveau_message' => 'New message',
 'texte_nouveau_mot' => 'New keyword',
 'texte_nouvelle_version_spip_1' => 'You have just installed a new version of SPIP.',
-'texte_nouvelle_version_spip_10' => 'before deleting it...)',
-'texte_nouvelle_version_spip_2' => 'This new version requires an update more ',
-'texte_nouvelle_version_spip_3' => 'thorough than usual. ',
-'texte_nouvelle_version_spip_4' => 'If you are the webmaster of this site, please delete the file ',
-'texte_nouvelle_version_spip_5' => '<tt>inc_connect.php3</tt> of the directory <tt>ecrire</tt> ',
-'texte_nouvelle_version_spip_6' => 'and restart installation in order to update your ',
-'texte_nouvelle_version_spip_7' => 'database connection parameters.',
-'texte_nouvelle_version_spip_8' => '(NB.: if you forgot your connection ',
-'texte_nouvelle_version_spip_9' => 'parameters, have a look at the file <tt>inc_connect.php3</tt> ',
+'texte_nouvelle_version_spip_2' => 'This new version requires an update more thorough than usual. If you are the webmaster of this site, please delete the file <tt>inc_connect.php3</tt> of the directory <tt>ecrire</tt> and restart installation in order to update your database connection parameters. <p>(NB.: if you forgot your connection parameters, have a look at the file <tt>inc_connect.php3</tt> before deleting it...)',
 'texte_operation_echec' => 'Go back to the previous page, select another database or create a new one. Verify the information provided by your host.',
 'texte_plus_trois_car' => 'more than 3 characters',
 'texte_plusieurs_articles' => 'Several authors were found for "@cherche_auteur@":',
 'texte_port_annuaire' => '(Default value is generally suitable.)',
 'texte_proposer_publication' => 'When your article is finished,<br> you can submitted it for publication.',
 'texte_proxy' => 'In some cases (intranet, protected networks...),
+
 		it is necessary to use a <I>proxy HTTP</i> to reach the syndicated sites.
+
 		Should there be a proxy, enter its address below, thus
+
 		<tt><html>http://proxy:8080</html></tt>. Generally,
+
 		you will leave this box empty.',
 'texte_publication_articles_post_dates' => 'Which behaviour should SPIP adopt concerning articles which
+
 		publication have been set to
+
 		a future date?',
 'texte_rappel_selection_champs' => '[Remember to select this field correctly.]',
 'texte_recalcul_page' => 'If you want
@@ -1234,15 +1275,25 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
 'texte_referencement_automatique' => '<b>Automated site referencing</b><br>You can reference a Web site quickly by indicating below the desired URL, or the address of its backend file. SPIP will automatically pick up the information concerning that site (title, description...).',
 'texte_requetes_echouent' => '<B>When some MySQL queries fail
+
 		systematically and without any apparent reason, it is possible
+
 		that the database itself
+
 		is the culprit.</b>
+
 		<p>MySQL has at its disposal a repair feature of its tables
+
 		when they have been accidentally corrupted.
+
 		Here, you can try to execute this repair; in
+
 		case of failure, you should keep a copy of the display, which might contain
+
 		clues on what went wrong...
+
 		<p>If the problem remains, contact your 
+
 		host.',
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => ' This option allows you to restore a previous
@@ -1269,9 +1320,13 @@ in the SPIP cache. This allows you, amongst other things, to force the refreshin
 entered important modifications on the graphics or the structure of the site. ',
 'texte_sur_titre' => 'Top title',
 'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
+
 		the list of its latest material. To achieve this, you must activate the syndication. 
+
 		<blockquote><i>Some hosts disable this function; 
+
 		in this case, you cannot use the content syndication
+
 		from your site.</i></blockquote>',
 'texte_table_ok' => ': this table is OK.',
 'texte_tables_indexation_vides' => ' Indexing tables of the engine are empty.',
@@ -1283,20 +1338,32 @@ entered important modifications on the graphics or the structure of the site. ',
 'texte_titre_obligatoire' => '<B>Title</b> [Compulsory]',
 'texte_travail_article' => '@nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
 'texte_travail_collaboratif' => 'If it is frequent that several editors
+
 		work on the same article, the system
+
 		can show the recently &laquo;opened&raquo; articles
+
 		in order to avoid simultaneous modifications.
+
 		This option is disabled by default
+
 		to avoid displaying untimely warning
+
 		messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
 'texte_utilisation_moteur_syndiques' => 'When you use the search engine integrated to SPIP, you can perform searches on sites and articles syndicated in different manners. <br><img src=\'puce.gif\'>The most simple one is to search only in the titles and descriptions of the articles. <br><img src=\'puce.gif\'> A second method, much more powerful, allows SPIP to search also in the text of the referenced sites. If you reference a site, SPIP will perform the search in the site\'s text itself. ',
 'texte_utilisation_moteur_syndiques_2' => 'This method forces SPIP to visit
 
+
+
 the referenced sites regularly,
 
+
+
 which could cause a drop in the performance of your own
+
+
 
 site.',
 'texte_vide' => 'empty',

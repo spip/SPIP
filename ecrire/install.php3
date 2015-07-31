@@ -205,7 +205,7 @@ else if ($etape == 3) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_choix_base')."<B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
 	echo aide ("install2");
 	echo "<P>";
@@ -396,7 +396,6 @@ else if ($etape == 'ldap4') {
 
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
 		echo "</tt>) "._T('avis_chemin_invalide_2');
-		echo _T('avis_chemin_invalide_3');
 	}
 	else {
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
@@ -447,7 +446,6 @@ else if ($etape == 'ldap3') {
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
 
 	echo "<P>"._T('info_chemin_acces_2');
-	echo _T('info_chemin_acces_3');
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");

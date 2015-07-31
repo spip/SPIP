@@ -44,7 +44,7 @@ debut_droite();
 			$titre_rub=$row['titre_rub'];
 			$fichier = $row['fichier'];
 
-			if (!$titre) $titre = _T('info_document').$id_document";
+			if (!$titre) $titre = _T('info_document').' '.$id_document";
 			
 			debut_cadre_relief("doc-24.gif");
 			echo "<b>$titre</b> (" . $types[$row['type']]['titre'] . ', ' . affdate($date) . ")";

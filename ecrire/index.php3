@@ -150,8 +150,7 @@ if (spip_num_rows($result) > 0) {
 }
 else {
 	if ($connect_statut == '0minirezo') {
-		echo "<font size='2'>"._T('info_ecrire_article_1');
-		echo _T('info_ecrire_article_2')."</font><p>";
+		echo "<font size='2'>"._T('info_ecrire_article')."</font><p>";
 	}
 }
 if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {

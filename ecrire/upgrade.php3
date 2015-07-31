@@ -16,14 +16,6 @@ if ($reinstall == 'oui') {
 	install_debut_html(_T('titre_page_upgrade'));
 	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
 	echo _T('texte_nouvelle_version_spip_2');
-	echo _T('texte_nouvelle_version_spip_3');
-	echo _T('texte_nouvelle_version_spip_4');
-	echo _T('texte_nouvelle_version_spip_5');
-	echo _T('texte_nouvelle_version_spip_6');
-	echo _T('texte_nouvelle_version_spip_7');
-	echo "<p>"._T('texte_nouvelle_version_spip_8');
-	echo _T('texte_nouvelle_version_spip_9');
-	echo _T('texte_nouvelle_version_spip_10');
 
 	$link = new Link();
 	echo "<p><div align='right'>";

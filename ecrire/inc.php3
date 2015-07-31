@@ -174,7 +174,7 @@ if ($version_installee <> $spip_version) {
 	debut_page();
 	if (!$version_installee) $version_installee = _T('info_anterieur');
 	echo "<blockquote><blockquote><h4><font color='red'>"._T('info_message_technique')."</font><br> "._T('info_procedure_maj_version')."</h4>
-	"._T('info_administrateur_site_01')."<a href='upgrade.php3'>"._T('info_administrateur_site_02')."</a></blockquote></blockquote><p>";
+	"._T('info_administrateur_site_01')." <a href='upgrade.php3'>"._T('info_administrateur_site_02')."</a></blockquote></blockquote><p>";
 	fin_page();
 	exit;
 }

@@ -979,7 +979,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if ($type_titre){
 				echo "$type_titre";
 			} else {
-				echo _T('info_document').majuscules($type_extension);
+				echo _T('info_document').' '.majuscules($type_extension);
 			}
 			echo " : <a href='$fichier'>".taille_en_octets($taille)."</a>";
 		}
