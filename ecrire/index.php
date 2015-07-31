@@ -24,7 +24,7 @@ include_spip('inc/cookie');
 // Determiner l'action demandee
 //
 
-$exec = _request('exec');
+$exec = (string)_request('exec');
 $reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
 //
 // Les scripts d'insallation n'authentifient pas, forcement,
