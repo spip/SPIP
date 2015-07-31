@@ -104,8 +104,10 @@ else if ($ajout_doc == 'oui') {
 	// Upload d'un ZIP
 	//
 
-	// traiter la reponse de l'utilisateur
-	if (preg_match('@^IMG/zip/[^. ]+\.zip$@i', $_POST['source_zip'])) {
+	// traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
+	if ($_POST['source_zip']
+	AND !strstr($_POST['source_zip'], '..')) # securite
+	{
 		$_FILES = array(
 			array('name' => basename($_POST['source_zip']),
 				'tmp_name' => $_POST['source_zip'])
