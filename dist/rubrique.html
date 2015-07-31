@@ -118,9 +118,13 @@
 
             </div>
 
-            
-            <br class="nettoyeur" />
             [<div class="notes"><h3><:info_notes:></h3>(#NOTES)</div>]
+
+			[(#REM) Forum de la rubrique
+			NB : pour desactiver les forums de rubrique, supprimez simplement les lignes ci-dessous ]
+			[<h3 class="invisible"><:Forum:></h3>
+			<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:form_pet_message_commentaire:></a></p>]
+			<INCLURE{fond=inc-forum}{id_rubrique}>
 
         </div><!-- fin contenu -->
 
