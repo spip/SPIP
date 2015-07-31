@@ -148,9 +148,6 @@ $champs_extra_proposes = false;
 $ignore_auth_http = false;
 $ignore_remote_user = false;
 
-// Faut-il afficher les boutons d'admin 'debug cache' et 'debug squelette' ?
-$bouton_admin_debug = false;
-
 // Faut-il "invalider" les caches quand on depublie ou modifie un article ?
 # en faire une option dans l'interface de configuration ?
 # NB: cette option ne concerne que articles,breves,rubriques et site
@@ -164,6 +161,11 @@ $invalider_caches = true;
 // Si la variable vaut 0 aucun quota ne s'applique
 $quota_cache = 5;
 
+// code a fournir pour obtenir le debuggueur (par defaut : &debug=oui)
+// on peut mettre $code_activation_debug='' pour l'interdire carrement,
+// ou $code_activation_debug='x5g8jk9' pour mettre un mot de passe.
+$code_activation_debug = 'oui';
+
 // Serveurs externes
 $spip_server = array (
 	'tex' => 'http://math.spip.org/tex.php',
@@ -171,7 +173,7 @@ $spip_server = array (
 	'ortho' => 'http://ortho.spip.net/ortho_serveur.php'
 );
 
-// Produire du TeX ou de MathML ?
+// Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
 
 // Masquer les warning
@@ -833,7 +835,7 @@ if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 		eval('?'.'>'.$contenu);
 
 	// en cas d'echec refaire le fichier
-	if (!is_array($meta)) {
+	if (!is_array($meta) AND @file_exists($dir_ecrire.'inc_connect.php3')) {
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		ecrire_metas();

@@ -257,10 +257,12 @@ function balise_TOTAL_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
 		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $p->id_boucle);
+		$p->code = "''";
+	} else {
+		$p->code = "\$Numrows['$p->id_mere']";
+		$p->boucles[$p->id_mere]->numrows = true;
+		$p->type = 'php';
 	}
-	$p->code = "\$Numrows['$p->id_mere']";
-	$p->boucles[$p->id_mere]->numrows = true;
-	$p->type = 'php';
 	return $p;
 }
 

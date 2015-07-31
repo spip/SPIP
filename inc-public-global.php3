@@ -101,7 +101,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 // Appeler cette fonction pour obtenir la page principale
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $recalcul, $lastmodified;
+	global $flag_preserver, $flag_dynamique, $recalcul, $lastmodified;
 	global $var_preview;
 	include_local ("inc-cache.php3");
 
@@ -140,7 +140,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	// eventuels fichiers inclus modifies depuis la date
 	// HTTP_IF_MODIFIED_SINCE du client)
 	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND $recalcul != oui
-	AND $chemin_cache) {
+	AND $chemin_cache AND !$flag_dynamique) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
 	}
@@ -278,16 +278,6 @@ function admin_page($cached, $texte) {
 		return calcul_admin_page($cached, $texte);
 	}
 	return false; // pas de boutons admin
-}
-
-// Si l'admin a demande un affichage
-function afficher_page_si_demande_admin ($type, $texte, $fichier) {
-	if ($GLOBALS['var_afficher_debug'] == $type
-	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
-		include_local('inc-admin.php3');
-		page_debug($type,$texte,$fichier);
-		exit;
-	}
 }
 
 function cherche_image_nommee($nom) {

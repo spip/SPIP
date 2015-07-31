@@ -83,8 +83,11 @@ function charger_squelette ($squelette) {
 		$skel_compile = "<"."?php\n"
 		. calculer_squelette($skel, $nom, $ext, $sourcefile)."\n?".">";
 
-		// Envoyer le debugguer
-		afficher_page_si_demande_admin ('skel', $skel_compile, _L('Fond : ').$sourcefile." ; fichier produit : ".$phpfile);
+		// Parler au debugguer
+		if ($GLOBALS['var_debug'] AND $GLOBALS['debug_objet'] == $nom
+		AND $GLOBALS['debug_affiche'] == 'code')
+			debug_dumpfile ($skel_compile);
+
 		// Evaluer le squelette
 		eval('?'.'>'.$skel_compile);
 
@@ -97,8 +100,7 @@ function charger_squelette ($squelette) {
 			echo "<hr /><h2>".
 			_L("Erreur dans la compilation du squelette")." $sourcefile</h2>";
 			$GLOBALS['bouton_admin_debug'] = true;
-			$GLOBALS['var_afficher_debug'] = 'skel';
-			afficher_page_si_demande_admin ('skel', $skel_compile, _L('Fond : ').$sourcefile." ; fichier produit : ".$phpfile);
+			debug_dumpfile ($skel_compile);
 		}
 	}
 }
@@ -154,7 +156,13 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	// Calculer la page a partir du main() du skel compile
 	$page =  $fonc(array('cache' => $cache), array($contexte));
 
-	// Memoriser le nom du squelette utilise (pour le debuggueur)
+	// Passer la main au debuggueur)
+	if ($GLOBALS['var_debug'] AND $GLOBALS['debug_objet'] == $fonc
+	AND $GLOBALS['debug_affiche'] == 'resultat') {
+		debug_dumpfile ($page['texte']);
+	}
+
+	# flag pour spip_error_handler(), cf inc-admin ??
 	$page['squelette'] = $skel;
 
 	// Nettoyer le resultat si on est fou de XML
@@ -283,7 +291,8 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
-	if ($delais > 0 AND empty($GLOBALS['HTTP_POST_VARS']))
+	if ($delais > 0 AND !$GLOBALS['var_debug']
+	AND empty($GLOBALS['HTTP_POST_VARS']))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
