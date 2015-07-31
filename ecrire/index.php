@@ -113,24 +113,6 @@ elseif (!preg_match(',^[a-z4_][0-9a-z_-]*$,i', $exec)) {
 	set_request('exec', $exec);
 }
 
-// Verification des plugins
-// (ne pas interrompre une restauration ou un upgrade)
-elseif ($exec!='upgrade'
-AND !$var_auth
-AND !_DIR_RESTREINT
-AND autoriser('configurer')
-AND lire_fichier(_CACHE_PLUGINS_VERIF,$l)
-AND $l = @unserialize($l)) {
-	foreach ($l as $fichier) {
-		if (!@is_readable($fichier)) {
-			spip_log("Verification plugin: echec sur $fichier !");
-			include_spip('inc/plugin');
-			verifie_include_plugins();
-			break; // sortir de la boucle, on a fait un verif
-		}
-	}
-}
-
 // compatibilite ascendante
 $GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 	? $GLOBALS['visiteur_session']['prefs']['display']

@@ -367,17 +367,17 @@ function alertes_auteur($id_auteur) {
 	}
 
 	if (isset($GLOBALS['meta']['message_crash_plugins'])
-	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
-		include_spip('inc/plugin');
-		if ($msg = message_crash_plugins())
-			$alertes[] = $msg;
+	  AND $GLOBALS['meta']['message_crash_plugins']
+	  AND autoriser('configurer', 'plugins', null, $id_auteur)
+	  AND is_array($msg = unserialize($GLOBALS['meta']['message_crash_plugins']))) {
+			$msg = implode(', ',array_map('joli_repertoire',array_keys($msg)));
+			$alertes[] = _T('plugins_erreur', array('plugins' => $msg));
 	}
 
-
 	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
-	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
-		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
-		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
+	  AND autoriser('configurer', 'plugins', null, $id_auteur)) {
+		include_spip('inc/plugin');
+		$alertes[] = plugin_donne_erreurs();
 	}
 
 	$alertes = pipeline(
