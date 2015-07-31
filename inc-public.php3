@@ -50,13 +50,14 @@ $chemin_cache = "CACHE/$fichier_cache";
 $use_cache = true;
 
 if (file_exists($chemin_cache)) {
-	$lastmodified = filemtime($chemin_cache);
-	$ledelais = time() - $lastmodified;
-	$use_cache &= ($ledelais < $delais AND $ledelais > 0);
-
-	// eviter de recalculer pour les moteurs de recherche
+	// Eviter de recalculer pour les moteurs de recherche, proxies...
 	if ($REQUEST_METHOD == 'HEAD') {
 		$use_cache = true;
+	}
+	else {
+		$lastmodified = filemtime($chemin_cache);
+		$ledelais = time() - $lastmodified;
+		$use_cache &= ($ledelais < $delais AND $ledelais > 0);
 	}
 }
 else {
@@ -144,15 +145,15 @@ else {
 
 
 //
-// si $var_s est positionnee, on met en rouge les mots cherches (php4 uniquement)
+// si $var_recherche est positionnee, on met en rouge les mots cherches (php4 uniquement)
 //
 
-if ($var_s) {
-	if ($flag_ob AND $flag_preg_replace AND $var_s AND !$flag_preserver) {
+if ($var_recherche) {
+	if ($flag_ob AND $flag_preg_replace AND !$flag_preserver) {
 		include_ecrire("inc_filtres.php3");
 		ob_start();
-	} else
-		$var_s = false;
+	}
+	else unset($var_recherche);
 }
 
 
@@ -173,10 +174,10 @@ if (file_exists($chemin_cache)) {
 // suite et fin mots en rouge
 //
 
-if ($var_s) {
-	$la_page = ob_get_contents();
+if ($var_recherche) {
+	$page_tmp = ob_get_contents();
 	ob_end_clean();
-	echo mots_surligne($la_page);
+	echo surligner_mots($page_tmp, $var_recherche);
 }
 
 

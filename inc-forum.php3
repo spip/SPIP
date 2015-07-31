@@ -110,7 +110,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	
 	if ($forums_publics == "priori") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
-	}	
+	}
 	
 	if ($forums_publics == "abonnement") {
 		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
