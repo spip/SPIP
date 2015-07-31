@@ -27,6 +27,7 @@ function iterateur_DATA_dist($b) {
 			'valeur' => 'STRING',
 		)
 	);
+	$b->select[] = '.valeur';
 	return $b;
 }
 
