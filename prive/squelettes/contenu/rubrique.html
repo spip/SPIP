@@ -7,7 +7,7 @@
 			[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}|icone_verticale{<:icone_modifier_rubrique:>,rubrique,edit,right ajax preload})]
 		]
 		[(#ID_RUBRIQUE|afficher_qui_edite{rubrique}|oui)
-			[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}|icone_verticale{#ID_RUBRIQUE|afficher_qui_edite{rubrique},warning-24,'',right ajax preload})]
+			[(#URL_ECRIRE{rubrique_edit,id_rubrique=#ID_RUBRIQUE}|icone_verticale{#ID_RUBRIQUE|afficher_qui_edite{rubrique},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{#ID_PARENT|?{rubrique-24.png,secteur-24.png}}|balise_img{rubrique,cadre-icone})]</h1>

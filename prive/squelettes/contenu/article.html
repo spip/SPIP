@@ -7,7 +7,7 @@
 			[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{<:icone_modifier_article:>,article,edit,right ajax preload})]
 		]
 		[(#ID_ARTICLE|afficher_qui_edite{article}|oui)
-			[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{#ID_ARTICLE|afficher_qui_edite{article},warning-24,'',right ajax preload})]
+			[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{#ID_ARTICLE|afficher_qui_edite{article},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
 	[<h4 class='surtitre'>(#SURTITRE)</h4>]
@@ -53,7 +53,7 @@
 		[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{<:icone_modifier_article:>,article,edit,right ajax preload})]
 	]
 	[(#ID_ARTICLE|afficher_qui_edite{article}|oui)
-		[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{#ID_ARTICLE|afficher_qui_edite{article},warning-24,'',right ajax preload})]
+		[(#URL_ECRIRE{article_edit,id_article=#ID_ARTICLE}|icone_verticale{#ID_ARTICLE|afficher_qui_edite{article},warning-24,'',right edition_deja ajax preload})]
 	]
 ]
 
