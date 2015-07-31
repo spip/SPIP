@@ -478,7 +478,8 @@ function spip_plugin_install($action,$prefix,$version_cible){
 	$nom_meta_base_version = $prefix."_base_version";
 	switch ($action){
 		case 'test':
-			return (isset($GLOBALS['meta'][$nom_meta_base_version]) AND ($GLOBALS['meta'][$nom_meta_base_version]>=$version_cible));
+			return (isset($GLOBALS['meta'][$nom_meta_base_version]) 
+			  AND version_compare($GLOBALS['meta'][$nom_meta_base_version],$version_cible,'>='));
 			break;
 		case 'install':
 			if (function_exists($upgrade = $prefix."_upgrade"))
