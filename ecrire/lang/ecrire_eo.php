@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Vi ne havas alir-rajton al tiu mesa&#285;o.',
 'avis_non_acces_page' => 'Vi ne havas alir-rajton al tiu pa&#285;o.',
 'avis_operation_echec' => 'La ago malsukcesis.',
-'avis_operation_impossible' => '<NEW>Op&eacute;ration impossible',
+'avis_operation_impossible' => 'Faro ne ebla',
 'avis_probleme_archive' => 'Problemo por legi la dosieron @archive@',
 'avis_site_introuvable' => 'Netrovebla retejo',
 'avis_site_syndique_probleme' => 'Atentu, okazis problemo pri abonrilato de tiu retejo&nbsp;; la sistemo estas portempe haltigita. Kontrolu la abonrilatigan adreson de tiu retejo (@url_syndic@), kaj provu novan reakiron de la informoj.',
@@ -50,11 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => '<MODIF>Aldoni aliron al LDAP >>',
+'bouton_acces_ldap' => 'Aldoni aliron al LDAP',
 'bouton_ajouter' => 'Aldoni',
 'bouton_ajouter_participant' => 'ALDONI PARTOPRENONTON&nbsp;:',
 'bouton_annonce' => 'ANONCO',
-'bouton_annuler' => '<NEW>Annuler',
+'bouton_annuler' => 'Nuligi',
 'bouton_checkbox_envoi_message' => 'eblas sendi mesa&#285;on',
 'bouton_checkbox_indiquer_site' => 'devige indiku retejon',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'la retejaj mastrumantoj',
@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_site' => 'po unu subskribo por retejo',
 'bouton_demande_publication' => 'Peti publikigon de tiu artikolo',
 'bouton_desactive_tout' => '&#264;ion malaktivigi',
+'bouton_desinstaller' => 'Malinstali',
 'bouton_effacer_index' => 'Forigi indicojn',
 'bouton_effacer_tout' => 'Forigi &#264;ION',
 'bouton_envoi_message_02' => 'SENDI MESA&#284;ON',
@@ -113,7 +114,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'La dosieroj de staplo estas registritaj la&#365; ne-densigita modo.',
 'cache_modifiable_webmestre' => 'Tiun parametron povas modifi la retejestro.',
 'calendrier_synchro' => 'Se vi uzas agendo-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi &#285;in la&#365; la datenoj de tiu retejo.',
+'config_activer_champs' => '<NEW>Activer les champs suivants',
+'config_info_logos' => '<NEW>Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;',
+'config_info_logos_utiliser' => '<NEW>Utiliser les logos',
+'config_info_logos_utiliser_non' => '<NEW>Ne pas utiliser les logos',
+'config_info_logos_utiliser_survol' => '<NEW>Utiliser les logos de survol',
+'config_info_logos_utiliser_survol_non' => '<NEW>Ne pas utiliser les logos de survol',
+'config_info_redirection' => '<NEW>En activant cette option, vous pourrez cr&eacute;er des articles virtuels, simples r&eacute;f&eacute;rences d\'articles publi&eacute;s sur d\'autres sites ou hors de SPIP.',
+'config_redirection' => '<NEW>Articles virtuels',
 'connexion_ldap' => '<NEW>Connexion :',
+'copier_en_local' => '<NEW>Copier en local',
 
 
 // D
@@ -163,7 +173,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => 'Numero de la dosierujila pordo',
 'entree_signature' => 'Subskribo',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
-'entree_titre_obligatoire' => '<MODIF><b>Titolo</b> [Deviga]<br />',
+'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
 'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
@@ -175,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'forum_info_original' => '<NEW>original',
+'forum_info_original' => 'originala',
 
 
 // I
@@ -312,7 +322,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => '<MODIF>Vi petis forigon de la &#349;losilvorto
  <b>@titre_mot@</b> (@type_mot@). &#264;ar la &#349;losilvorto estas ligita al
  <b>@texte_lie@</b>, vi devas konfirmi tiun decidon&nbsp;:',
-'info_derniere_etape' => 'Lasta etapo: <b>Finite!',
+'info_derniere_etape' => '<MODIF>Lasta etapo: <b>Finite!',
 'info_derniere_syndication' => 'La lasta abonrilato-&#285;isdatigo de tiu retejo estis farita la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste rete publikigitaj',
 'info_desactiver_forum_public' => 'Malaktivigi la uzon de la publikaj forumoj.
@@ -320,6 +330,7 @@ La publikaj forumoj estos la&#365;kaze unu post la alia permesitaj
  la&#365; la artikoloj; ili estos malpermesataj koncerne rubrikojn, fulm-informojn, ktp.',
 'info_desactiver_messagerie_personnelle' => 'Vi povas aktivigi a&#365; malaktivigi vian personan mesa&#285;ilon &#265;e tiu retejo.',
 'info_descriptif' => 'Priskribo:',
+'info_desinstaller_plugin' => '<NEW>supprime les donn&eacute;es et d&eacute;sactive le plugin',
 'info_discussion_cours' => 'Nunaj diskutoj',
 'info_ecrire_article' => 'Anta&#365; ol ekhavi la eblon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
 'info_email_envoi' => 'retpo&#349;tadreso por sendo (nedeviga)',
@@ -395,6 +406,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_liste_redacteurs_connectes' => 'Listo de la konektitaj redaktantoj',
 'info_login_existant' => 'Tiu salutnomo jam ekzistas.',
 'info_login_trop_court' => 'Tro mallonga salutnomo.',
+'info_logos' => '<NEW>Les logos',
 'info_maximum' => 'maksimumo&nbsp;:',
 'info_meme_rubrique' => 'En la sama rubriko',
 'info_message' => 'Mesa&#285;o de la',
@@ -580,6 +592,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_surtitre' => 'Surtitolo:',
 'info_syndication_integrale_1' => 'Via retejo proponas abonrilatigajn dosierojn (vidu &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => '&#264;u vi deziras transdoni tutajn artikolojn, a&#365; nur afi&#349;i kelkcent-literan resumon&nbsp;?',
+'info_table_prefix' => '<NEW>Vous pouvez modifier le pr&eacute;fixe du nom des tables de donn&eacute;es (ceci est indispensable lorsque l\'on souhaite installer plusieurs sites dans la m&ecirc;me base de donn&eacute;es). Ce pr&eacute;fixe s\'&eacute;crit en lettres minuscules, non accentu&eacute;es, et sans espace.',
 'info_taille_maximale_vignette' => 'Maksimuma grandeco de la vinjetoj generataj de la sistemo&nbsp;:',
 'info_terminer_installation' => 'Vi povas nun fini la&#365;norman instalproceduron.',
 'info_texte' => 'Teksto',
@@ -618,11 +631,16 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'info_visiteur_2' => 'de la publika spaco',
 'info_visiteurs' => 'Vizitantoj',
 'info_visiteurs_02' => 'Vizitantoj de la publika spaco',
+'install_adresse_base_hebergeur' => '<NEW>Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur',
 'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, a&#365; naskos ne funkciivan retejon...',
 'install_extension_mbstring' => 'SPIP ne funkcias per&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP postulas la php-kromprogramon&nbsp;:',
+'install_login_base_hebergeur' => '<NEW>Login de connexion attribu&eacute; par l\'h&eacute;bergeur',
+'install_nom_base_hebergeur' => '<NEW>Nom de la base attribu&eacute; par l\'h&eacute;bergeur&nbsp;:',
+'install_pass_base_hebergeur' => '<NEW>Mot de passe de connexion attribu&eacute; par l\'h&eacute;bergeur',
 'install_php_version' => '<NEW>PHP version @version@ insuffisant (minimum = @minimum@)',
 'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon &laquo;&nbsp;sekvanta&nbsp;&raquo; por lan&#265;i la instal-proceduron.',
+'install_table_prefix_hebergeur' => '<NEW>Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:',
 'intem_redacteur' => 'redaktanto',
 'item_accepter_inscriptions' => 'Akcepti la registropetojn',
 'item_activer_forum_administrateur' => 'Aktivigi la forumon de la mastrumantoj',
@@ -752,10 +770,14 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 
 // P
+'pas_de_proxy_pour' => '<NEW>Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)',
 'plugin_etat_developpement' => 'disvolvata',
 'plugin_etat_experimental' => 'eksperimenta',
 'plugin_etat_stable' => 'stabila',
 'plugin_etat_test' => 'testata',
+'plugin_impossible_activer' => '<NEW>Impossible d\'activer le plugin @plugin@',
+'plugin_necessite_plugin' => '<NEW>N&eacute;cessite le plugin @plugin@ en version @version@ minimum.',
+'plugin_necessite_spip' => '<NEW>N&eacute;cessite SPIP en version @version@ minimum.',
 'plugins_liste' => 'Listo de kromprogramoj',
 'protocole_ldap' => '<NEW>Version du protocole :',
 
@@ -812,6 +834,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_choix_base_1' => 'Elektu vian datenbazon:',
 'texte_choix_base_2' => 'La MySQL-servilo enhavas plurajn datenbazojn.',
 'texte_choix_base_3' => '<MODIF><b>Elektu</b> &#265;i-poste tiun, kiun atribuis al vi via retgastiganto:',
+'texte_choix_table_prefix' => '<NEW>Pr&eacute;fixe des tables&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
    de la SPIP-integrita ser&#265;ilo. Tio ebligos al vi
    gajni diskospacon.',
@@ -894,7 +917,7 @@ ligilojn al jena a&#365; alia retejo.',
   sendepende de ties situo en la rubrikoj. Vi povas tiel
   pliri&#265;igi la retumadon &#265;e via retejo, e&#265; uzi tiujn trajtojn
   por la&#365;vole aspektigi artikolojn en viaj skeletoj.',
-'texte_mots_cles_dans_forum' => '&#264;u vi deziras permesi uzadon de &#349;losilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
+'texte_mots_cles_dans_forum' => '<MODIF>&#264;u vi deziras permesi uzadon de &#349;losilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
 'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/a&#365; en la rubrikoj, konforme al la organizo de via retejo.',
 'texte_multilinguisme_trad' => 'Vi povas anka&#365; aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (&#265;ar via servilo ne eltenas tiun funkcion)',

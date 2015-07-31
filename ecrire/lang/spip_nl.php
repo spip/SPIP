@@ -22,10 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Trefwoord wijzigen',
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
-'afficher_trad' => '<NEW>afficher les traductions',
+'afficher_trad' => 'Vertalingen weergeven',
 'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de MySQL-gegevensbank naar versie @version@ is niet mogelijk. Mogelijk is dit te wijten aan onvoldoende schrijfrechten op de gegevensbank. Contacteer hiervoor je provider.',
 'analyse_xml' => 'XML Analyse',
-'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'annuler' => 'Annuleren',
+'antispam_champ_vide' => 'Gelieve dit veld leeg te laten&nbsp;:',
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
 'avis_attention' => 'OPGELET!',
@@ -39,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
 'avis_erreur_mysql' => 'MySQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
-'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
+'avis_erreur_visiteur' => 'Probleem met toegang tot het private gedeelden.',
 
 
 // B
@@ -80,9 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'kalender per dag',
 'cal_par_mois' => 'kalender per maand',
 'cal_par_semaine' => 'kalender per week',
-'choix_couleur_interface' => '<NEW>couleur ',
-'choix_interface' => '<NEW>choix  de l\'interface',
-'colonne' => '<NEW>Colonne',
+'choix_couleur_interface' => 'kleur',
+'choix_interface' => 'keuze van de interface',
+'colonne' => 'Kolom',
 'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
 'correcte' => 'juist',
 
@@ -145,26 +146,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'zondag',
-'date_jour_1_abbr' => '<NEW>dim.',
-'date_jour_1_initiale' => '<NEW>d.',
+'date_jour_1_abbr' => 'zon.',
+'date_jour_1_initiale' => 'z.',
 'date_jour_2' => 'maandag',
-'date_jour_2_abbr' => '<NEW>lun.',
-'date_jour_2_initiale' => '<NEW>l.',
+'date_jour_2_abbr' => 'maa.',
+'date_jour_2_initiale' => 'm.',
 'date_jour_3' => 'dinsdag',
-'date_jour_3_abbr' => '<NEW>mar.',
-'date_jour_3_initiale' => '<NEW>m.',
+'date_jour_3_abbr' => 'din.',
+'date_jour_3_initiale' => 'd.',
 'date_jour_4' => 'woensdag',
-'date_jour_4_abbr' => '<NEW>mer.',
-'date_jour_4_initiale' => '<NEW>m.',
+'date_jour_4_abbr' => 'woe.',
+'date_jour_4_initiale' => 'w.',
 'date_jour_5' => 'donderdag',
-'date_jour_5_abbr' => '<NEW>jeu.',
-'date_jour_5_initiale' => '<NEW>j.',
+'date_jour_5_abbr' => 'don.',
+'date_jour_5_initiale' => 'd.',
 'date_jour_6' => 'vrijdag',
-'date_jour_6_abbr' => '<NEW>ven.',
-'date_jour_6_initiale' => '<NEW>v.',
+'date_jour_6_abbr' => 'vrij.',
+'date_jour_6_initiale' => 'v.',
 'date_jour_7' => 'zaterdag',
-'date_jour_7_abbr' => '<NEW>sam.',
-'date_jour_7_initiale' => '<NEW>s.',
+'date_jour_7_abbr' => 'zat.',
+'date_jour_7_initiale' => 'z.',
 'date_jours' => 'dagen',
 'date_minutes' => 'minuten',
 'date_mois' => 'maanden',
@@ -188,16 +189,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf: <b>Toegangsrechten regelen</b>',
 'dirs_probleme_droits' => 'Probleem met toegangsrechten',
-'dirs_repertoires_absents' => '<MODIF><b>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
-  <p />Waarschijnlijk is dit te wijten aan het door elkaar halen van grote en kleine letters.
+'dirs_repertoires_absents' => '<p><b>De volgende mappen werden niet gevonden&nbsp;:</b></p><ul>@bad_dirs@.</ul>
+  <p>Waarschijnlijk is dit te wijten aan het door elkaar halen van hoofd- en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
- is dit niet het geval, hernoem dan de mappen met je FTP-programma om de fout zo te herstellen.
-  <p />Eenmaal deze bewerking uitgevoerd is, kan je',
-'dirs_repertoires_suivants' => '<MODIF><b>Je hebt geen schrijfrechten op de volgende mappen: <ul>@bad_dirs@.</ul> </b>
-  <p />Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
- De procedure is gedetailleerd uitgelegd in de installatiehandleiding
-  <p />Eenmaal deze wijziging doorgevoerd, kan je ',
-'double_occurrence' => '<NEW>Double occurrence',
+ is dit niet het geval, hernoem dan de mappen met je FTP-programma om de fout zo te herstellen.</p>
+  <p>Eenmaal deze bewerking uitgevoerd is, kan je',
+'dirs_repertoires_suivants' => '<p><b>Je hebt geen schrijfrechten op de volgende mappen&nbsp;:</b></p> <ul>@bad_dirs@.</ul>
+  <p>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
+ De procedure is gedetailleerd uitgelegd in de installatiehandleiding.</p>
+  <p>Eenmaal deze wijziging doorgevoerd, kan je ',
+'double_occurrence' => 'Dubbel gebruik',
 
 
 // E
@@ -205,9 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Documenttitel:',
 'entree_titre_image' => 'Afbeeldingstitel:',
 'envoi_via_le_site' => 'Verzending via de site',
-'erreur' => '<NEW>Erreur',
+'erreur' => 'Fout',
 'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
-'erreur_texte' => '<NEW>erreur(s)',
+'erreur_texte' => 'Fout(en)',
 
 
 // F
@@ -258,6 +259,7 @@ Bedankt voor je deelname
 ',
 'form_pet_message_commentaire' => 'Een bericht, een commentaar?',
 'form_pet_nom_site2' => 'Naam van je website',
+'form_pet_probleme_liens' => 'Gelieve uw bericht te herbeginnen zonder internet links.',
 'form_pet_probleme_technique' => 'Technisch probleem. Inloggen is momenteel niet mogelijk.',
 'form_pet_signature_pasprise' => 'Met je naam wordt geen rekening gehouden.',
 'form_pet_signature_validee' => 'Je naam is goedgekeurd. Bedankt!',
@@ -281,7 +283,7 @@ Bedankt voor je deelname
 'forum_acces_refuse' => 'Je hebt geen toegang meer tot deze forums.',
 'forum_attention_dix_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 10 tekens bevatten.',
 'forum_attention_trois_caracteres' => '<b>Opgelet!</b> : je bericht moet minstens 3 tekens bevatten.',
-'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
+'forum_attention_trop_caracteres' => '<b>Opgelet&nbsp;!</b> uw bericht is te lang (@compte@ caract&egrave;res)&nbsp;: om registratie mogelijk te maken, mag het niet meer dan @max@ karakters tellen.',
 'forum_avez_selectionne' => 'Je hebt gekozen:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>hier</a> om door te gaan.',
 'forum_forum' => 'forum',
@@ -293,7 +295,7 @@ Bedankt voor je deelname
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_page_url' => '(Als je bericht naar een artikel op het web verwijst of naar een pagina die meer informatie bevat, kunt u hier de titel en de URL van deze webverwijzing invoeren.)',
 'forum_par_auteur' => 'door @auteur@',
-'forum_poste_par' => '<MODIF>Bericht poste@parauteur@ als vervolg op je artikel.',
+'forum_poste_par' => 'Bericht poste@parauteur@ als vervolg op je artikel &laquo; @titre@ &raquo; .',
 'forum_probleme_database' => 'Probleem met databank, je bericht is niet geregistreerd.',
 'forum_qui_etes_vous' => '<b>Wie ben je ?</b> (optioneel)',
 'forum_texte' => 'Tekst van je bericht :',
@@ -413,6 +415,7 @@ Bedankt voor je deelname
 'info_description_2' => 'Beschrijving:',
 'info_dimension' => 'Afmetingen:',
 'info_document' => 'Document',
+'info_document_indisponible' => 'Dit document is niet beschikbaar',
 'info_documents' => 'documenten',
 'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
@@ -424,7 +427,7 @@ Bedankt voor je deelname
 'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Misschien is de harde schijf vol of de gegevensbank beschadigd. <br />
+'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br />
  <font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>,
  of neem contact op met je provider.</font>',
 'info_fini' => 'Het is gedaan !',
@@ -433,7 +436,7 @@ Bedankt voor je deelname
 'info_grand_ecran' => 'Groot scherm',
 'info_image_aide' => 'HELP',
 'info_image_process_titre' => 'Methode voor aanmaak van miniatuurafbeeldingen',
-'info_impossible_lire_page' => '<MODIF><b>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy<tt>',
+'info_impossible_lire_page' => '<b>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy',
 'info_inclusion_directe' => 'Directe insluiting:',
 'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 'info_installation_systeme_publication' => 'Installatie van het publicatiesysteem...',
@@ -505,14 +508,16 @@ Bedankt voor je deelname
 'info_sans_titre_2' => 'zonder titel',
 'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
+'info_signature_supprimee' => 'Handtekening verwijderd',
+'info_signature_supprimee_erreur' => 'Fout&nbsp;: de verwijderde code komt met geen enkele handtekening overeen.',
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
 'info_site_refuse' => 'Website weigerd',
 'info_sites_referencer' => 'Een site koppelen',
 'info_supprimer_vignette' => 'De mini-afbeelding verwijderen',
-'info_symbole_bleu' => '<MODIF>Het <b>blauwe</b> symbool wijst op een <b>memo</b>: t.t.z een bericht ten persoonlijke titel.',
-'info_symbole_jaune' => '<MODIF>Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
-'info_symbole_vert' => '<MODIF>Het <b>groene</b> symbool wijst op <b>uitgewisselde berichten met andere gebruikers</b> van deze site.',
+'info_symbole_bleu' => '<MODIF>Het <b>blauwe</b> symbool wijst op een <b>memo</b>: ttz een bericht voor persoonlijk gebruik.',
+'info_symbole_jaune' => 'Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
+'info_symbole_vert' => 'Het <b>groene</b> symbool wijst op <b>uitgewisselde berichten met andere gebruikers</b> van deze site.',
 'info_syndication' => 'nieuwsovername (syndicatie)&nbsp;:',
 'info_syndication_articles' => 'artikel(s)',
 'info_telecharger' => 'Opladen vanf je computer:',
@@ -556,7 +561,7 @@ Bedankt voor je deelname
 'lien_visite_site' => 'Bezoek de site',
 'lien_visites' => '@visites@ bezoeken',
 'lien_voir_auteur' => 'Auteur nakijken',
-'ligne' => '<NEW>Ligne',
+'ligne' => 'Lijn',
 'login_acces_prive' => 'Toegang tot het private deel',
 'login_autre_identifiant' => 'Verbinden met een andere inlognaam',
 'login_connexion_refusee' => 'Verbinding geweigerd.',
@@ -593,17 +598,17 @@ Bedankt voor je deelname
 
 
 // M
-'masquer_trad' => '<NEW>masquer les traductions',
+'masquer_trad' => 'Vertalingen verbergen',
 'module_fichiers_langues' => 'Taalbestanden',
 
 
 // N
 'navigateur_pas_redirige' => 'Wanneer je bladerprogramma niet doorverwijst, klik dan hier om verder te gaan.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => 'Nummer',
 
 
 // O
-'occurence' => '<NEW>Occurence',
+'occurence' => '<NEW>Occurrence',
 'onglet_affacer_base' => 'Database verwijderen',
 'onglet_auteur' => 'Auteur',
 'onglet_contenu_site' => 'Inhoud van de site',
@@ -668,8 +673,12 @@ opnieuw verbinding maken met de site
 'previsualiser' => 'Vooraf tonen',
 
 
+// R
+'retour' => 'Terugkeren',
+
+
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
+'spip_conforme_dtd' => 'SPIP beschouwt dit document als conform met zijn DOCTYPE :',
 'squelette' => 'sjabloon',
 'squelette_inclus_ligne' => 'sjabloon inbegrepen, lijn',
 'squelette_ligne' => 'sjabloon, lijn',
@@ -689,20 +698,19 @@ opnieuw verbinding maken met de site
     maar zijn niet rechtstreeks in de tekst opgenomen.
     Naargelang de opmaak van de publieke website
     zullen ze als bijlage verschijnen.',
-'texte_erreur_mise_niveau_base' => '<MODIF>Fout met de databank bij het opladen.
- De afbeelding <b>@fichier@</b> is niet goed opgeladen
- (artikel @id_article@).
+'texte_erreur_mise_niveau_base' => 'Fout met de databank bij het updaten.
+ De afbeelding <b>@fichier@</b> werd niet opgeladen (artikel @id_article@).
  Noteer deze referentie en probeer andermaal het opladen
  van de afbeelding. Kijk vervolgens na of de afbeeldingen
  correct verschijnen in het artikel.',
-'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
-'texte_inc_auth_1' => '<MODIF>Je bent ingelogd als
-  <b>@auth_login@</b>, maar deze aanmeldingsnaam komt niet (meer) voor in de databank. 
+'texte_erreur_visiteur' => 'U probeerde toegang te krijgen tot het priv&eacute;-gedeelte met een login die hiervoor geen machtiging heeft.',
+'texte_inc_auth_1' => 'U bent aangemeld als
+  <b>@auth_login@</b>, maar deze naam komt niet (meer) voor in de databank. 
   Probeer je',
 'texte_inc_auth_2' => 'Opnieuw verbinden',
 'texte_inc_auth_3' => ', nadat je je bladerprogramma eventueel gesloten en opnieuw herstart hebt.',
 'texte_inc_config' => '<MODIF>De wijzigingen die op deze pagina worden aangebracht,
- be&iuml;nvloeden de werking van de volledige website. We raden
+ be&iuml;nvloeden grondig de werking van de volledige website. We raden
  je aan hier niets aan te wijzigen tot je voldoende bekend
  bent met het functioneren van het SPIP systeem.
  <br /><br /><b>Algemeen gesproken laat je het
@@ -762,32 +770,33 @@ opnieuw verbinding maken met de site
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
 'zbug_erreur_boucle_syntaxe' => 'Onjuiste syntaxis van de lus',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
+'zbug_erreur_compilation' => 'Compilatiefout',
 'zbug_erreur_execution_page' => 'uitvoeringsfout van deze pagina',
 'zbug_erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
 'zbug_erreur_meme_parent' => '{meme_parent} is enkel van toepassing op de lussen (FORUMS) en (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Fout(en) in het sjabloon',
 'zbug_info_erreur_squelette' => 'Fout op de site',
 'zbug_inversion_ordre_inexistant' => 'Omkering van een ongekende orde',
-'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
+'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Parameters voor insluiting niet correct',
+'zbug_profile' => 'Berekeningstijd&nbsp;: @time@',
 'zbug_resultat' => 'resultaat',
 'zbug_serveur_indefini' => 'SQL server niet gedefinieerd',
 'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend',
-'zxml_connus_attributs' => '<NEW>attributs connus',
-'zxml_de' => '<NEW>de',
-'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_connus_attributs' => 'onbekende eigenschappen',
+'zxml_de' => 'van',
+'zxml_inconnu_attribut' => 'onbekende eigenschap',
 'zxml_inconnu_balise' => '<NEW>balise inconnue',
-'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
-'zxml_inconnu_id' => '<NEW>ID inconnu',
-'zxml_mais_de' => '<NEW>mais de',
+'zxml_inconnu_entite' => 'onbekende entiteit',
+'zxml_inconnu_id' => 'onbekende ID',
+'zxml_mais_de' => 'maar van',
 'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
-'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_non_fils' => 'is geen zoon van ',
 'zxml_nonvide_balise' => '<NEW>balise non vide',
-'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_obligatoire_attribut' => 'verplichte eigenschap maar afwezig in',
 'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
 'zxml_survoler' => '<NEW>survoler pour voir les corrects',
-'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_valeur_attribut' => 'waarde van de eigenschap',
 'zxml_vide_balise' => '<NEW>balise vide',
 'zxml_vu' => '<NEW>vu auparavant'
 
