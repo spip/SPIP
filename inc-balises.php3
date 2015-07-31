@@ -41,6 +41,7 @@ function champs_traitements ($p) {
 		'LIEN_URL' => 'htmlspecialchars(vider_url(%s))',
 		'MESSAGE' => 'traiter_raccourcis(%s)',
 		'NOM_SITE_SPIP' => 'typo(%s)',
+		'NOM_SITE' => 'typo(%s)',
 		'NOM' => 'typo(%s)',
 		'PARAMETRES_FORUM' => 'htmlspecialchars(%s)',
 		'PS' => 'traiter_raccourcis(%s)',
@@ -62,27 +63,26 @@ function champs_traitements ($p) {
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
-	if ($p->documents)
-	  {$ps = str_replace('traiter_raccourcis(', 
-			     'traiter_raccourcis_doublon($doublons,',
-			     str_replace('typo(', 
-					 'typo_doublon($doublons,',
-					 $ps));
-	  }
+	if ($p->documents) {
+		$ps = str_replace('traiter_raccourcis(', 
+			'traiter_raccourcis_doublon($doublons,',
+			str_replace('typo(', 'typo_doublon($doublons,', $ps));
+	}
+
 	// on supprime les < IMGnnn > tant qu'on ne rapatrie pas
 	// les documents distants joints..
 	// il faudrait aussi corriger les raccourcis d'URL locales
 	return str_replace('%s',
-			   (!$p->boucles[$p->id_boucle]->sql_serveur ?
-			    $p->code :
-			    ('supprime_img(' . $p->code . ')')),
-			   $ps);				
+		(!$p->boucles[$p->id_boucle]->sql_serveur ?
+		$p->code :
+		('supprime_img(' . $p->code . ')')),
+		$ps);
 }
 
 // il faudrait savoir traiter les formulaires en local 
 // tout en appelant le serveur SQL distant.
 // En attendant, cette fonction permet de refuser une authentification 
-// sur qqch qui n'a rien à voir.
+// sur qqch qui n'a rien a voir.
 
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
