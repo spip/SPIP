@@ -22,7 +22,16 @@
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
-		<description>[(#LOGO_ARTICLE|right||liens_absolus|texte_backend)][(#TEXTE|liens_absolus|texte_backend)]</description>
+		
+
+[(#REM)
+	Il est possible de mettre le texte integral de l'article dans le backend
+	en remplacant *INTRODUCTION par *CHAPO et *TEXTE etc., a filtrer avec
+	"liens_absolus".
+]
+
+<description>[(#LOGO_ARTICLE|right||liens_absolus|texte_backend)
+][(#INTRODUCTION|texte_backend)]</description>
 		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
