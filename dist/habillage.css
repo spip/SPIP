@@ -235,6 +235,7 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 	padding-top: 2px;
 	border-top: 2px solid #CCC; }
 #documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
+#documents_joints ul { margin: 0; padding: 0; list-style: none; }
 #documents_joints li { margin-bottom: 0.4em; }
 #documents_joints li .spip_doc_titre {}
 #documents_joints li .spip_doc_titre small { font-weight: normal; }
