@@ -1,7 +1,26 @@
 body { margin-bottom:1em; background-color: #f8f7f3; margin: 0; border: 0; color: #000;}
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+.clear { clear: both; }
+br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
+
+/* clearfix : http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+	overflow: hidden;
+}
+.clearfix { display: inline-table; }
+
+/* Hides from IE-mac \*/
+.clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
 
 /* Non visible a l'ecran */
 .none,.js .none-js,.no-js .none-nojs { display: none; }
