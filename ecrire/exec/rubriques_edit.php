@@ -60,7 +60,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new, $lier_trad)
 	else $ze_logo = "rubrique-24.png";
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_parent,'',$id_rubrique,'rubrique');
+	echo afficher_hierarchie($id_parent,'',$id_rubrique,'rubrique',$id_secteur,(!$GLOBALS['connect_toutes_rubriques']));
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche('', true);

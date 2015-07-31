@@ -57,7 +57,7 @@ function exec_sites_edit_dist()
 
 	echo debut_grand_cadre(true);
 
-	echo afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique,'',$id_syndic,'site',$row['id_secteur'],($row['statut'] == 'publie'));
 
 	echo fin_grand_cadre(true);
 

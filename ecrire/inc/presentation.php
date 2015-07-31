@@ -476,66 +476,15 @@ function fin_cadre_formulaire($return=false){
 
 // http://doc.spip.org/@afficher_hierarchie
 function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_secteur=0,$restreint='') {
-	global $spip_lang_left,$spip_lang_right;
-
-	$out = "";
-	$nav = "";
- 	if ($id_objet) {
- 		# desactiver le selecteur de rubrique sur le chemin
- 		# $nav = chercher_rubrique($message,$id_objet, $id_parent, $type, $id_secteur, $restreint,true);
- 		$nav = $nav ?"<div class='none'>$nav</div>":"";
- 	}
-
-	$parents = '';
-	$style1 = "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px";
-	$style2 = "margin-$spip_lang_left: 15px;";
-	$tag = "a";
-	$on = ' on';
-
-	$id_rubrique = $id_parent;
-	while ($id_rubrique) {
-
-		$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
-
-		if (!$res){  // rubrique inexistante
-			$id_rubrique = 0;
-			break;
-		}
-
-		changer_typo($res['lang']);
-
-		$class = (!$res['id_parent']) ? "secteur"
-		: (acces_restreint_rubrique($id_rubrique)
-		? "admin" : "rubrique");
-
-		$parents = "<ul><li><span class='bloc'><em> &gt; </em><$tag class='$class$on'"
-		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
-		. ">"
-		. textebrut(supprimer_numero(typo(sinon($res['titre'], _T('ecrire:info_sans_titre')))))
-		. "</$tag></span>"
-		. $parents
-		. "</li></ul>";
-
-		$id_rubrique = $res['id_parent'];
-		$tag = 'a';
-		$on = '';
-	}
-
-	$out .=  $nav
-		. "\n<ul id='chemin' class='verdana3' dir='".lang_dir()."'"
-	  //. http_style_background("racine-site-12.gif", $style1)
-	  . "><li><span class='bloc'><$tag class='racine$on'"
-		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
-	  . ">"._T('info_racine_site')."</$tag>"
- 	  . "</span>"
-	  . $parents
- 	  . aide ("rubhier")
- 	  . "</li></ul>"
- 	  . ($nav?
- 	    "&nbsp;<a href='#' onclick=\"$(this).prev().prev().toggle('fast');return false;\" class='verdana2'>"
- 	    . _T('bouton_changer') ."</a>"
- 	    :"");
-
+	$out = recuperer_fond('prive/squelettes/hierarchie/dist',
+					array(
+						'id_parent'=>$id_parent,
+						'objet'=>$type,
+						'id_objet'=>$id_objet,
+						'deplacer'=>_request('deplacer')?'oui':'',
+						'id_secteur'=>$id_secteur,
+						'restreint'=>$restreint,
+					),array('ajax'=>true));
 	$out = pipeline('affiche_hierarchie',array('args'=>array(
 			'id_parent'=>$id_parent,
 			'message'=>$message,
@@ -545,7 +494,7 @@ function afficher_hierarchie($id_parent, $message='',$id_objet=0,$type='',$id_se
 			'restreint'=>$restreint),
 			'data'=>$out));
 
- 	return $out;//."<hr />".recuperer_fond('prive/squelettes/hierarchie/dist',array('id_rubrique'=>$id_parent,'objet'=>$type,'id_objet'=>$id_objet));
+ 	return $out;
 }
 
 // Pour construire des menu avec SELECTED
