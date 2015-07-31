@@ -149,7 +149,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			// on ne sait pas lire la structure de la table :
 			// on retombe sur la description donnee dans les fichiers spip
 			$desc = $fdesc;
-			$desc['exist'] = false;
 		}
 		else {
 			$desc['exist'] = true;
