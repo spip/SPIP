@@ -623,9 +623,11 @@ function enregistrer_premiere_revision($x) {
 		$id_article = $x['args']['id_objet'];
 
 		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
-			$select = join(", ", $champs);
-			$champs_originaux = sql_fetsel("$select, date, date_modif", "spip_articles", "id_article=$id_article");
-			
+			$originaux = sql_fetsel("*", 'spip_articles', "$id_table_objet=$id_objet");
+			foreach($champs as $v)
+				if (isset($originaux[$v]))
+					$champs_originaux[$v] = $originaux[$v];
+
 			// Si le titre est vide, c'est qu'on vient de creer l'article
 			if ($champs_originaux['titre'] != '') {
 				$date_modif = $champs_originaux['date_modif'];
