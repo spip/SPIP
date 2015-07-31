@@ -699,6 +699,28 @@ function date_fin_semaine($annee, $mois, $jour) {
   return date("Ymd", mktime(0,0,0,$mois,$debut+6,$annee));
 }
 
+function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $type='')
+{
+  static $agenda = array();
+  if ($type)
+    {
+      include('ecrire/inc_calendrier.php');
+      echo http_calendrier_init('', $type, '', '', '', 
+				  array($agenda[$cal]));
+    }
+  else {
+    // rajouter une dimension dans le tableau afin d'autoriser plusieurs
+    // calendriers dans une même page
+    $agenda[$cal][(date_anneemoisjour($date))][] =  array(
+                        'CATEGORIES' => 'info_articles',
+                        'DESCRIPTION' => texte_script($descriptif),
+                        'SUMMARY' => texte_script($titre),
+                        'URL' => $url);
+    // signifier qu'il y a qqch
+    return " ";
+  }
+}
+
 //
 // Fonctions graphiques
 //

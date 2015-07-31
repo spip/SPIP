@@ -1,13 +1,8 @@
-<?php
-include('ecrire/inc_calendrier.php');
-$articles = array();
-<BOUCLE_evenements(ARTICLES)
-    {agenda date, #ENV{annee}, #ENV{mois}, #ENV{jour}, mois }>
-     $articles[[(#DATE|date_anneemoisjour)]][] =  array(
-                        'CATEGORIES' => 'info_articles',
-                        'DESCRIPTION' => '[(#DESCRIPTIF|texte_script)]',
-                        'SUMMARY' => '[(#TITRE|texte_script)]',
-                        'URL' => '#URL_ARTICLE');
-</BOUCLE_evenements>
-echo http_calendrier_init('', 'mois', '', '', '', array($articles));
-?>
+<BOUCLE_mois(ARTICLES)
+    {agenda date, #ENV{annee}, #ENV{mois}, #ENV{jour}, mois}>[
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'mois'})
+]</BOUCLE_mois>
+[(#DATE|agenda_memo{'', '', '', 'mois', 'mois'})]
+</B_mois>
+<:aucun_article:>
+<//B_mois>

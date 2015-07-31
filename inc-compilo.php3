@@ -597,11 +597,11 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 		foreach($boucles as $id => $boucle) {
 
-			// Reproduire la boucle en commentaire
-			$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete).")";
+			// Indiquer la boucle en commentaire
+			$pretty = "BOUCLE$id ".strtoupper($boucle->type_requete);
 			// anachronique. A refaire.
 			/*    if ($boucle->param && is_array($boucle->param)) 
-			 $pretty .= " {".join("} {", $boucle->param)."}";*/
+			 $pretty .= " {".join("} {", $boucle->param)."}";
 			// sans oublier les parametres traites en amont
 		    if ($boucle->separateur)
 		      foreach($boucle->separateur as $v)
@@ -609,11 +609,11 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		    if ($boucle->tout)
 			  $pretty .= '{tout}';
 			if ($boucle->plat)
-			  $pretty .= '{plat}';
+			  $pretty .= '{plat}'; */
 			$pretty = ereg_replace("[\r\n]", " ", $pretty);
 
 			// Puis envoyer son code
-			$codeboucle = "\n//\n// <$pretty>\n//\n"
+			$codeboucle = "\n//\n// $pretty\n//\n"
 			."function BOUCLE" . ereg_replace("-","_",$id) . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$boucle->return;
