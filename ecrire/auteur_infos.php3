@@ -193,7 +193,7 @@ if ($nom) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 }
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($auteur);
+modifier_statut_auteur($auteur, $_POST['statut'], $_POST['add_rub'], $_GET['supp_rub']);
 
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd

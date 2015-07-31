@@ -198,24 +198,24 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	}
 }
 
-function modifier_statut_auteur (&$auteur) {
-	global $connect_statut, $connect_toutes_rubriques, $_GET, $_POST;
+function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {
+	global $connect_statut, $connect_toutes_rubriques;
 	// changer le statut ?
-	if ($connect_statut == '0minirezo' AND $_POST['statut']) {
-		if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$_POST['statut'])) {
-			$auteur['statut'] = $_POST['statut'];
-			spip_query("UPDATE spip_auteurs SET statut='".$_POST['statut']."'
+	if ($connect_statut == '0minirezo' AND $statut) {
+		if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
+			$auteur['statut'] = $statut;
+			spip_query("UPDATE spip_auteurs SET statut='".$statut."'
 			WHERE id_auteur=".$auteur['id_auteur']);
 		}
 	}
 	// modif auteur restreint, seulement pour les admins
 	if ($connect_toutes_rubriques) {
-		if ($add_rub=intval($_POST['add_rub']))
+		if ($add_rub=intval($add_rub))
 			spip_query("INSERT INTO spip_auteurs_rubriques
 			(id_auteur,id_rubrique)
 			VALUES(".$auteur['id_auteur'].", $add_rub)");
 
-		if ($supp_rub=intval($_GET['supp_rub']))
+		if ($supp_rub=intval($supp_rub))
 			spip_query("DELETE FROM spip_auteurs_rubriques
 			WHERE id_auteur=".$auteur['id_auteur']."
 			AND id_rubrique=$supp_rub");
