@@ -330,7 +330,8 @@ function est_inclus($id_document) {
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
-
+	$documents_date = $GLOBALS['meta']["documents_date"];
+		
 	$table = 'spip_documents_' . $type . 's';
 	$prim = id_table_objet($table);
 	if (!$prim) return '';

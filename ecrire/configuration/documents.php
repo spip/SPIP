@@ -24,6 +24,7 @@ function configuration_documents_dist(){
 	
 	$documents_rubrique = $GLOBALS['meta']["documents_rubrique"];
 	$documents_article = $GLOBALS['meta']["documents_article"];
+	$documents_date = $GLOBALS['meta']["documents_date"];
 	
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 	$res .= "<tr><td class='verdana2'>";
@@ -40,6 +41,10 @@ function configuration_documents_dist(){
 	$res .= afficher_choix('documents_rubrique', $documents_rubrique,
 		array('oui' => _T('item_autoriser_documents_joints_rubriques'),
 			'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />\n");
+	$res .= "<br /><br />\n";
+	$res .= afficher_choix('documents_date', $documents_date,
+		array('oui' => _L('Pouvoir s&eacute;lectionner la date de mise en ligne de chaque document'),
+			'non' => _L('Ne pas pouvoir changer manuellement la date des documents')), "<br />\n");
 	$res .= "</td></tr>";
 	$res .= "</table>\n";
 
@@ -50,3 +55,5 @@ function configuration_documents_dist(){
 	return ajax_action_greffe('configurer-documents', '', $res);
 }
 ?>
+
+
