@@ -378,13 +378,29 @@ function analyser_backend($rss, $url_syndic='') {
 //
 // http://doc.spip.org/@inserer_article_syndique
 function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents) {
-
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
+	// On coupe a 255 caracteres pour eviter tout doublon sur une URL de plus de 255 qui
+	// exloserait la base de donnees
 	$le_lien = substr($data['url'], 0,255);
-	$n = spip_num_rows(spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic"));
-	if ($n == 0 and !spip_sql_error()) {
-		spip_query("INSERT INTO spip_syndic_articles (id_syndic, url, date, statut) VALUES ('$now_id_syndic', " . _q($le_lien) . ", FROM_UNIXTIME(".$data['date']."), '$statut')");
-		$ajout = true;
+
+	// Si le site a des liens vides, il faut ruser : essayer de mettre a jour les liens
+	// vides existants, puis supprimer ceux qui restent
+	if (!strlen($le_lien)) {
+		$nettoyage_vides[$now_id_syndic]++;
+		$le_lien = '#'.$compteur[$now_id_syndic];
+	}
+
+	$s = spip_query("SELECT * FROM spip_syndic_articles WHERE url=" . _q($le_lien) . " AND id_syndic=$now_id_syndic ORDER BY maj LIMIT 0,1");
+	if ($a = spip_fetch_array($s)) {
+		$id_syndic_article = $a['id_syndic_article'];
+	} else {
+		if (spip_sql_error()) {
+			return;
+		} else {
+			include_spip('base/abstract_sql');
+			$id_syndic_article = spip_abstract_insert('spip_syndic_articles', '(id_syndic, url, date, statut)', '('._q($now_id_syndic).', '._q($le_lien). ', FROM_UNIXTIME('.$data['date'].'), '._q($statut).')');
+			$ajout = true;
+		}
 	}
 
 	// Descriptif, en mode resume ou mode 'full text'
@@ -421,7 +437,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
-	spip_query("UPDATE spip_syndic_articles SET				titre=" . _q($data['titre']) .			 ",	".$update_date."								lesauteurs=" . _q($data['lesauteurs']) . ",			descriptif=" . _q($desc) . ",					lang="._q(substr($data['lang'],0,10)).",			source="._q(substr($data['source'],0,255)).",			url_source="._q(substr($data['url_source'],0,255)).",		tags=" . _q($tags) .					 "	WHERE id_syndic='$now_id_syndic' AND url=" . _q($le_lien));
+	spip_query("UPDATE spip_syndic_articles SET				titre=" . _q($data['titre']) .			 ",	".$update_date."								lesauteurs=" . _q($data['lesauteurs']) . ",			descriptif=" . _q($desc) . ",					lang="._q(substr($data['lang'],0,10)).",			source="._q(substr($data['source'],0,255)).",			url_source="._q(substr($data['url_source'],0,255)).",		tags=" . _q($tags) .					 "	WHERE id_syndic_article=$id_syndic_article");
 
 	// Point d'entree post_syndication
 	pipeline('post_syndication',

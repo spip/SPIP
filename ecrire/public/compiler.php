@@ -288,10 +288,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 // http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql(&$boucle)
 {
-	if (!$order = $boucle->order
-	AND !$order = $boucle->default_order)
-		$order = array();
-
 	return   ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 		. $boucle->in 
 		. $boucle->hash . 
@@ -360,7 +356,10 @@ function calculer_from(&$boucle)
 // http://doc.spip.org/@calculer_order
 function calculer_order(&$boucle)
 {
-	$order = $boucle->order;
+	if (!$order = $boucle->order
+	AND !$order = $boucle->default_order)
+		$order = array();
+
 	/*if (isset($boucle->modificateur['collate'])){
 		$col = "." . $boucle->modificateur['collate'];
 		foreach($order as $k=>$o)
