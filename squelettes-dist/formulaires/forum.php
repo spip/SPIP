@@ -304,6 +304,9 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 
 
 function formulaires_forum_traiter_dist() {
+	// le formulaire forum n'est jamais traite en ajax car il s'acheve par une redirection vers
+	// la bonne page qui doit etre reaffichee dans son ensemble
+	refuser_traiter_formulaire_ajax();
 
 	$forum_insert = charger_fonction('forum_insert', 'inc');
 
