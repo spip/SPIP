@@ -86,17 +86,18 @@ function export_all_fin($file, $meta, $rub)
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n";
-			
-			$corps .= "<div style='text-align: $spip_lang_right'>"
-				. bouton_action(_T("retour"), generer_url_ecrire())
-			  . "</div>";
-						
-			// afficher la liste des tables qu'on a sauvegarde
-			sort($tables_sauvegardees);
-			$n = floor(count($tables_sauvegardees)/2);
-			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
-			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
-			. "<br class='nettoyeur' />";
+		
+		include_spip('inc/filtres');
+		$corps .= "<div style='text-align: $spip_lang_right'>"
+			. bouton_action(_T("retour"), generer_url_ecrire())
+			. "</div>";
+
+		// afficher la liste des tables qu'on a sauvegarde
+		sort($tables_sauvegardees);
+		$n = floor(count($tables_sauvegardees)/2);
+		$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
+		  . "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
+		  . "<div class='nettoyeur'></div>";
 	}
 	include_spip('inc/minipres');
 	echo minipres(_T('info_sauvegarde'), $corps);

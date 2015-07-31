@@ -15,6 +15,7 @@ a:active.spip-admin-boutons,.spip-admin-boutons a:active { background-color: #cc
 #spip-debug fieldset fieldset legend { border: solid 1px #00F; font-weight: normal; }
 #spip-debug a { text-decoration: none; }
 #spip-debug a:hover { text-decoration: underline; }
+#spip-debug fieldset table {font-size: inherit;}
 
 #debug_boucle fieldset { background-color: #ccf; }
 #debug_boucle fieldset fieldset { background-color: #fff; font-family: Verdana, Geneva, Helvetica, sans-serif; padding: 0.5em 1.5em; }
