@@ -455,7 +455,7 @@ echo "<P><HR><P>";
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'article', $id_secteur);
+		extra_saisie($extra, 'articles', $id_secteur);
 	}
 
 	if ($date)

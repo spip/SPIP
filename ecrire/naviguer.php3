@@ -159,7 +159,7 @@ if ($titre) {
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("rubrique"))."'";
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
 	} else
 		$add_extra = '';
 
@@ -378,7 +378,7 @@ echo "</table>\n";
 
 	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, "rubrique");
+		extra_affichage($extra, "rubriques");
 	}
 
 

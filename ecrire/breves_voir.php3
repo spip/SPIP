@@ -83,7 +83,7 @@ if ($titre AND $modifier_breve) {
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breve"))."'";
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breves"))."'";
 	} else
 		$add_extra = '';
 
@@ -343,7 +343,7 @@ if ($les_notes) {
 	// afficher les extra
 	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, "breve");
+		extra_affichage($extra, "breves");
 	}
 
 if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){

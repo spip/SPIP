@@ -118,6 +118,11 @@ function init_champs_squel() {
 		$champs_pretraitement[$val][] = 'trim';
 		$champs_posttraitement[$val][] = 'interdire_scripts';
 	}
+	$c = array('EXTRA');
+	reset($c);
+	while (list(, $val) = each($c)) {
+		$champs_posttraitement[$val][] = 'interdire_scripts';
+	}
 
 	// Textes courts : ajouter le traitement typographique
 	$c = array('NOM_SITE_SPIP', 'SURTITRE', 'TITRE', 'SOUSTITRE', 'NOM_SITE', 'LIEN_TITRE', 'NOM');

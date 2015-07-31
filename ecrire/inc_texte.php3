@@ -390,12 +390,8 @@ function typo($letexte) {
 	else
 		$letexte = typo_en($letexte);
 
+	$letexte = corriger_caracteres($letexte);
 	$letexte = str_replace("'", "&#8217;", $letexte);
-
-	// "pas encore mur!"
-	// $letexte = ereg_replace('"([^" &;]([^"]*[^" &;])?)"', "&#8220;\\1&#8221;", $letexte);
-
-	//$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
 
 	return $letexte;

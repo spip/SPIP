@@ -16,13 +16,13 @@
 //
 
 $GLOBALS['champs_extra'] = Array (
-	'auteur' => Array (
+	'auteurs' => Array (
 			"sexe" => "ligne|brut",
 			"age" => "ligne|propre|&Acirc;ge du capitaine",
 			"biblio" => "bloc|propre|Bibliographie"
 		),
 
-	'article' => Array (
+	'articles' => Array (
 			"isbn" => "ligne|typo|ISBN"
 		)
 	);
@@ -37,14 +37,14 @@ $GLOBALS['champs_extra'] = Array (
 // - pour les mots-cles en fonction du groupe de mots
 
 $GLOBALS['champs_extra_proposes'] = Array (
-	'auteur' => Array (
+	'auteurs' => Array (
 		// tous : par defaut
 		'tous' =>  'age|sexe',
 		// une biblio pour les admin (statut='0minirezo')
 		'0minirezo' => 'age|sexe|biblio'
 		),
 
-	'article' => Array (
+	'articles' => Array (
 		// tous : par defaut
 		'tous' => '',
 		// 1 : id_secteur=1;
@@ -62,7 +62,7 @@ if (defined("_ECRIRE_INC_EXTRA")) return;
 define("_ECRIRE_INC_EXTRA", "1");
 
 // a partir de la liste des champs, generer la liste des input
-function extra_saisie($extra, $type='article', $ensemble='') {
+function extra_saisie($extra, $type, $ensemble='') {
 	$extra = unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
@@ -131,7 +131,7 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 }
 
 // recupere les valeurs postees pour reconstituer l'extra
-function extra_recup_saisie($type='article') {
+function extra_recup_saisie($type) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
 		$extra = Array();
@@ -140,6 +140,20 @@ function extra_recup_saisie($type='article') {
 		return serialize($extra);
 	} else
 		return '';
+}
+
+// Retourne la liste des filtres a appliquer pour un champ extra particulier
+function extra_filtres($type, $nom_champ) {
+	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
+	if (!$champ) return array();;
+	list(, $filtre, ) = explode("|", $champ);
+	if ($filtre && $filtre != 'brut' && function_exists($filtre))
+		return array($filtre);
+	return array();
+}
+
+function extra_champ_valide($type, $nom_champ) {
+	return isset($GLOBALS['champs_extra'][$type][$nom_champ]);
 }
 
 // a partir de la liste des champs, generer l'affichage

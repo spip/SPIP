@@ -709,17 +709,16 @@ function parser_champs_etendus($texte) {
 						$champ->fonctions[] = $f;
 					}
 				}
+				if ($fonctions) {
+					$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
+					reset($fonctions);
+					while (list(, $f) = each($fonctions)) $champ->fonctions[] = $f;
+				}
 				if ($champs_posttraitement[$nom_champ]) {
 					reset($champs_posttraitement[$nom_champ]);
 					while (list(, $f) = each($champs_posttraitement[$nom_champ])) {
 						$champ->fonctions[] = $f;
 					}
-				}
-
-				if ($fonctions) {
-					$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
-					reset($fonctions);
-					while (list(, $f) = each($fonctions)) $champ->fonctions[] = $f;
 				}
 				$champs_count++;
 				$champ->id_champ = $champs_count;
@@ -1033,8 +1032,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Liste des auteurs d'un article
 	//
-
-
+	
 	case 'LESAUTEURS':
 		$milieu = '
 		if ($i = $contexte["id_article"]) {
@@ -1182,24 +1180,24 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'EXTRA':
-		// cas particulier : on ne peut pas appliquer interdire_scripts directement
-		// sur la balise, sinon on casse le unserialize(). Donc on ne l'applique qu'en
-		// absence de filtres (et aussi dans le filtre extra{"xxx"})
-		if (!$fonctions) {
-			$fonctions[] = 'interdire_scripts';
-		} /* else {
-			// gerer la notation [(#EXTRA{toto})]
-			$filtres = Array();
-			reset ($fonctions);
-			while (list(,$filtre) = each($fonctions)) {
-				if (ereg("^{(.*)\}$", trim($filtre), $regs))
-					$filtres[] = 'extra{"'.$regs[1].'"}';
-				else
-					$filtres[] = $filtre;
-			}
-			$fonctions = $filtres;
-		} */
 		$code = 'trim($pile_boucles[$id_instance]->row[\'extra\'])';
+		if ($fonctions) {
+			// Gerer la notation [(#EXTRA|isbn)]
+			include_ecrire("inc_extra.php3");
+			reset($fonctions);
+			list($key, $champ_extra) = each($fonctions);
+			$type_extra = $boucles[$id_boucle]->type_requete;
+			if (extra_champ_valide($type_extra, $champ_extra)) {
+				unset($fonctions[$key]);
+				$code = "extra($code, '".addslashes($champ_extra)."')";
+			}
+			// Appliquer les filtres definis par le webmestre
+			$filtres = extra_filtres($type_extra, $champ_extra);
+			if ($filtres) {
+				reset($filtres);
+				while (list(, $f) = each($filtres)) $code = "$f($code)";
+			}
+		}
 		break;
 
 	//
@@ -1355,35 +1353,34 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
 		$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\'); lang_select(\'$spip_lang\'); ";
-		switch ($pile_boucles[$id_instance]->type_requete) {
+		$'.$nom_var.' .= "';
+		switch ($boucles[$id_boucle]->type_requete) {
+		default:
 		case "articles":
-			$'.$nom_var.' .= "echo retour_forum(0, 0, $contexte[id_article], 0, 0); ";
+			$milieu .= 'echo retour_forum(0, 0, $contexte[id_article], 0, 0); ';
 			break;
 
 		case "breves":
-			$'.$nom_var.' .= "echo retour_forum(0, 0, 0, $contexte[id_breve], 0); ";
+			$milieu .= 'echo retour_forum(0, 0, 0, $contexte[id_breve], 0); ';
 			break;
 
 		case "forums":
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum(0, $contexte[id_forum], 0, 0, 0); ?".">";
+			$milieu .= 'echo retour_forum(0, $contexte[id_forum], 0, 0, 0); ';
 			break;
 
 		case "rubriques":
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum($contexte[id_rubrique], 0, 0, 0, 0); ?".">";
+			$milieu .= 'echo retour_forum($contexte[id_rubrique], 0, 0, 0, 0); ';
 			break;
 
 		case "syndication":
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum(0, 0, 0, 0, $contexte[id_syndic]); ?".">";
+			$milieu .= 'echo retour_forum(0, 0, 0, 0, $contexte[id_syndic]); ';
 			break;
 
 		default:
-			$'.$nom_var.' .= "echo retour_forum(\'$contexte[id_rubrique]\', \'$contexte[id_forum]\', \'$contexte[id_article]\', \'$contexte[id_breve]\', \'$contexte[id_syndic]\'); ";
+			$milieu .= 'echo retour_forum(\'$contexte[id_rubrique]\', \'$contexte[id_forum]\', \'$contexte[id_article]\', \'$contexte[id_breve]\', \'$contexte[id_syndic]\'); ';
 			break;
 		}
-		$'.$nom_var.' .= "lang_dselect(); ?".">";
+		$milieu .= '"; $'.$nom_var.' .= "lang_dselect(); ?".">";
 		';
 		break;
 
