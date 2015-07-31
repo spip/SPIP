@@ -160,13 +160,17 @@ function spip_register_globals() {
 					AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
 					) // On ne sait pas si c'est un hack
 					{
-						# REMOTE_USER, c'est grave si on lui fait confiance ;
+						# REMOTE_USER ou fond, c'est grave ;
 						# pour le reste (cookie 'lang', par exemple), simplement
 						# interdire la mise en cache de la page produite
-						if ($var == 'REMOTE_USER')
-							die ("$var interdite");
-						else
-							define ('spip_interdire_cache', true);
+						switch ($var) {
+							case 'REMOTE_USER':
+							case 'fond':
+								die ("$var interdite");
+								break;
+							default:
+								define ('spip_interdire_cache', true);
+						}
 					}
 				}
 			}
