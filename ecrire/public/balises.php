@@ -1346,6 +1346,33 @@ function balise_ARRAY_dist($p) {
 	return $p;
 }
 
+//#FOREACH
+//
+function balise_FOREACH_dist($p) {
+        $_tableau = interprete_argument_balise(1,$p);
+        if($_tableau == "''" OR $_tableau == NULL) $_tableau = "'ENV'";
+        $_code = interprete_argument_balise(2,$p);
+        if($_code == "''" OR $_code == NULL) $_code = "'foreach'";
+       
+        $_tableau = str_replace("'", "", strtoupper($_tableau));
+        $balise = function_exists($f ='balise_'.$_tableau) ? $f :
+                function_exists($g = $f.'_dist') ? $g : '';
+
+
+        if($balise) {
+                $p->param = @array_shift(@array_shift($p->param));
+                $p = $balise($p);
+                //retirer le serialize
+                $p->code = preg_replace(',^serialize\((.*)\)$,', '\1', $p->code);
+                $filtre = chercher_filtre('foreach');
+                $p->code = $filtre . "(" . $p->code . ", " . $_code . ")";
+        }
+        //On a pas trouve la balise correspondant au tableau a traiter
+        else {
+                $p->code = "''";
+        }
+        return $p;
+}
 
 // Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
 // A noter : la priorite des operateurs exige && plutot que AND

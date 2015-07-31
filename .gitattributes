@@ -244,6 +244,7 @@ dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text
 dist/modeles/emb.html -text
+dist/modeles/foreach.html -text
 dist/modeles/img.html -text
 dist/modeles/lesauteurs.html -text
 dist/modeles/pagination.html -text
