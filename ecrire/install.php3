@@ -75,7 +75,7 @@ if ($etape == 6) {
 		fclose($myFile);
 	}
 
-	@unlink("inc_meta_cache.php3");
+	@unlink("data/inc_meta_cache.php3");
 	if (!@rename("inc_connect_install.php3", "inc_connect.php3")) {
 		copy("inc_connect_install.php3", "inc_connect.php3");
 		@unlink("inc_connect_install.php3");

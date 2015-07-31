@@ -13,7 +13,7 @@ function stats_load_engines() {
 	// le moteur de recherche interne
 	$arr_engines = Array();
 
-	$file_name = 'data/engines-list.ini';
+	$file_name = 'engines-list.txt';
 	if ($fp = @fopen($file_name, 'r'))
 	{
 		while ($data = fgets($fp, 256))

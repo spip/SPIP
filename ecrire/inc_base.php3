@@ -1236,6 +1236,13 @@ function maj_base() {
 		// juste des types de documents en plus (creer_base())
 		maj_version (1.602);
 	}
+
+	if ($version_installee < 1.603) {
+		// supprimer les fichiers deplaces
+		@unlink('inc_meta_cache.php3');
+		@unlink('data/engines-list.ini');
+		maj_version (1.603);
+	}
 }
 
 ?>

@@ -72,7 +72,7 @@ function lire_meta_maj($nom) {
 	}
 	$s .= '?'.'>';
 
-	$f = @fopen(($flag_ecrire ? "" : "ecrire/") . "inc_meta_cache.php3", "wb");
+	$f = @fopen(($flag_ecrire ? "" : "ecrire/") . "data/inc_meta_cache.php3", "wb");
 	if ($f) {
 		fputs($f, $s);
 		fclose($f);

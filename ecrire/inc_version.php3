@@ -139,7 +139,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.602;
+$spip_version = 1.603;
 
 // version de spip
 $spip_version_affichee = "1.6pr1 CVS";
@@ -707,12 +707,9 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 //
 // Lire les meta cachees
 //
-$inc_meta_cache = ($flag_ecrire ? '' : 'ecrire/').'inc_meta_cache.php3';
+$inc_meta_cache = ($flag_ecrire ? '' : 'ecrire/').'data/inc_meta_cache.php3';
 if (file_exists($inc_meta_cache) AND !defined('_ECRIRE_INC_META_CACHE')  AND !defined('_ECRIRE_INC_META')) {
-	include_ecrire('inc_meta_cache.php3');
-	if (defined('_ECRIRE_INC_META')) {	// vieille version du meta-cache
-		unlink ($inc_meta_cache);
-	}
+	include_ecrire('data/inc_meta_cache.php3');
 }
 if (!defined("_ECRIRE_INC_META_CACHE")) {
 	function lire_meta($nom) {
