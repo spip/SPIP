@@ -14,13 +14,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rechercher');
+@define('_DELAI_CACHE_RECHERCHES',600);
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
 // http://doc.spip.org/@inc_prepare_recherche_dist
 function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='') {
 	static $cache = array();
-	static $fcache = array();
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
@@ -31,20 +31,22 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 	if ($cond AND !strlen($recherche))
 		return array("''" /* as points */, /* where */ '1');
 
+
+	$rechercher = false;
 	// Premier passage : chercher eventuel un cache des donnees sur le disque
-	if (!$cache[$recherche]['hash']) {
-		$dircache = sous_repertoire(_DIR_CACHE,'rech');
-		$fcache[$recherche] =
-			$dircache . substr(md5($recherche),0,10).'.txt';
-		if (lire_fichier($fcache[$recherche], $contenu))
-			$cache[$recherche] = @unserialize($contenu);
+	if (!isset($cache[$recherche][$table])){
+		$hash = md5($recherche . $table);
+		$res = sql_select('NOW()-maj AS fraicheur','spip_recherches',"recherche=0x$hash OR HEX(recherche)='$hash'",'','fraicheur DESC','0,1','',$serveur);
+		if ((!$row = sql_fetch($res))
+		 OR ($row['fraicheur']>_DELAI_CACHE_RECHERCHES)){
+		 	$rechercher = true;
+		}
+		$cache[$recherche][$table] = array("points","(recherche=0x$hash OR HEX(recherche)='$hash')");
 	}
 
-
 	// si on n'a pas encore traite les donnees dans une boucle precedente
-	if (!$cache[$recherche][$table]) {
-
-		$tables = liste_des_champs();
+	if ($rechercher) {
+		//$tables = liste_des_champs();
 		$x = preg_replace(',s$,', '', $table); // eurk
 		if ($x == 'syndic') $x = 'site';
 		$points = recherche_en_base($recherche,
@@ -67,31 +69,19 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 			$points = $p2;
 		}
 
-		# calculer le {id_article IN()} et le {... as points}
-		if (!count($points)) {
-			$cache[$recherche][$table] = array("''", '0');
-		} else {
-			$listes_ids = array();
-			$primary = id_table_objet($table);
-			foreach ($points as $id => $p)
-				$listes_ids[$p['score']] .= ','.$id;
-			$select = '';
-			foreach ($listes_ids as $p => $liste_ids)
-				$select .= "+ (case when (".
-			  sql_in("$table.$primary", substr($liste_ids, 1),'',$serveur)
-					.") then $p else 0 end) ";
+		// supprimer les anciens resultats de cette recherche et les resultats trop vieux avec une marge
+		// hash=0x$hash OR HEX(hash)='$hash' permet d'avoir une requete qui marche qu'on soit en mysql <4.1 ou >4.1
+		// il y a des versions ou install de mysql ou il faut l'un ou l'autre selon le hash ... !
+		sql_delete('spip_recherches','(maj<NOW()-'.(_DELAI_CACHE_RECHERCHES+100).") OR (recherche=0x$hash OR HEX(recherche)='$hash')",$serveur);
 
-			$select = $select ? substr($select,1) : '0';
-			$cache[$recherche][$table] = array($select,
-				'('.sql_in("$table.$primary",
-					   array_keys($points),'',$serveur).')'
-				);
+		// inserer les resultats dans la table de cache des recherches
+		if (count($points)){
+			$values = "";
+			foreach ($points as $id => $p){
+				$values.= ",(0x$hash,".intval($id).",".intval($p['score']).")";
+			}
+			sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
 		}
-
-		// ecrire le cache de la recherche sur le disque
-		ecrire_fichier($fcache[$recherche], serialize($cache[$recherche]));
-		// purger le petit cache
-		nettoyer_petit_cache('rech', 300);
 	}
 
 	return $cache[$recherche][$table];

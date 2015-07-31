@@ -23,4 +23,13 @@ $GLOBALS['maj'][10990] = array(array('upgrade_types_documents'));
 // Aller plus vite pour les vieilles versions en redeclarant une seule les doc
 unset($GLOBALS['maj'][10990]);
 $GLOBALS['maj'][11042] = array(array('upgrade_types_documents'));
+
+function maj_11172() {
+	global $tables_auxiliaires;
+	include_spip('base/auxiliaires');
+	$v = $tables_auxiliaires[$k='spip_recherches'];
+	sql_create($k, $v['field'], $v['key'], false, false);
+}
+$GLOBALS['maj'][11172] = array(array('maj_11172'));
+
 ?>
