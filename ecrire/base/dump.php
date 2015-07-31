@@ -38,7 +38,7 @@ if (@is_readable(_CACHE_PLUGINS_FCT)){
 }
 
 function base_dump_meta_name($rub){
-	return $meta = "status_dump_{$rub}_"  . $GLOBALS['visiteur_session']['id_auteur'];
+	return $meta = "status_dump_{$rub}_"  . abs($GLOBALS['visiteur_session']['id_auteur']);
 }
 function base_dump_dir($meta){
 	include_spip('inc/documents');
@@ -495,8 +495,6 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		ecrire_fichier($status_file,serialize($status));
 	}
 
-	spip_log( "Tables a copier :".implode(", ",$tables),'dump.'._LOG_INFO);
-
 	// les tables auteurs et meta doivent etre copiees en dernier !
 	if (in_array('spip_auteurs',$tables)){
 		$tables = array_diff($tables,array('spip_auteurs'));
@@ -506,6 +504,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		$tables = array_diff($tables,array('spip_meta'));
 		$tables[] = 'spip_meta';
 	}
+	spip_log( "Tables a copier :".implode(", ",$tables),'dump.'._LOG_INFO);
 
 	$trouver_table = charger_fonction('trouver_table','base');
 
@@ -577,6 +576,8 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					$callback_progression($status['tables_copiees'][$table],$status['tables_copiees'][$table],$table);
 			}
 			else {
+				if ($status['tables_copiees'][$table]<0)
+					spip_log("Table $table deja copiee : ".$status['tables_copiees'][$table],"dump."._LOG_INFO);
 				if ($callback_progression)
 					$callback_progression(0,$status['tables_copiees'][$table],"$table".((is_numeric($status['tables_copiees'][$table]) AND $status['tables_copiees'][$table]>=0)?"[Echec]":""));
 			}
