@@ -1370,6 +1370,7 @@ et vous reconnecter au site.
 'taille_ko' => '@taille@&nbsp;ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
+'test' => '',
 'text_article_propose_publication' => 'Article propos&eacute; pour la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
 'texte_actualite_site_1' => 'Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
