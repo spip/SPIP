@@ -756,11 +756,12 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 
 function agenda_affiche($i)
 {
+  include('ecrire/inc_calendrier.php');
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);
-  if (!$nb) return $sinon;
   $type = array_shift($args);
+  if (!$nb) return http_calendrier_init('', $type, '', '', '', $sinon);
   $agenda = agenda_memo(0);
   $evt = array();
   foreach (($args ? $args : array_keys($agenda)) as $k) {  
@@ -781,7 +782,6 @@ function agenda_affiche($i)
 	$evt = array('', $evt, $min, $max);
 	$type = 'mois';
       }
-    include('ecrire/inc_calendrier.php');
     return http_calendrier_init('', $type, '', '', '', $evt);
 }
 
