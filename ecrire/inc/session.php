@@ -22,14 +22,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
 $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
-//
-// 3 actions sur les sessions, selon le type de l'argument:
-//
-// - numerique: efface toutes les sessions de l'auteur (retour quelconque)
-// - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
-// - autre: predicat de validite de la session indiquee par le cookie
-
-// http://doc.spip.org/@inc_session_dist
+/**
+ * 3 actions sur les sessions, selon le type de l'argument:
+ * - numerique: efface toutes les sessions de l'auteur (retour quelconque)
+ * - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
+ * - autre: predicat de validite de la session indiquee par le cookie
+ *
+ * http://doc.spip.org/@inc_session_dist
+ *
+ * @param int|array|bool $auteur
+ * @return bool|null|void
+ */
 function inc_session_dist($auteur=false)
 {
 	if (is_numeric($auteur))
@@ -40,11 +43,14 @@ function inc_session_dist($auteur=false)
 		return verifier_session($auteur);
 }
 
-//
-// Ajoute une session pour l'auteur decrit par un tableau issu d'un SELECT-SQL
-//
-
-// http://doc.spip.org/@ajouter_session
+/**
+ * Ajoute une session pour l'auteur decrit par un tableau issu d'un SELECT-SQL
+ *
+ * http://doc.spip.org/@ajouter_session
+ *
+ * @param array $auteur
+ * @return bool|string
+ */
 function ajouter_session($auteur) {
 	// Si le client a deja une session valide pour son id_auteur
 	// on conserve le meme fichier
@@ -84,6 +90,7 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['date_session'])) $auteur['date_session'] = time();
 
 	if (!ecrire_fichier_session($fichier_session, $auteur)) {
+		spip_log('Echec ecriture fichier session '.$fichier_session,_LOG_HS);
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
@@ -103,8 +110,14 @@ function ajouter_session($auteur) {
 	}
 }
 
-// Ajouter une donnee dans la session SPIP
-// http://doc.spip.org/@session_set
+/**
+ * Ajouter une donnee dans la session SPIP
+ * http://doc.spip.org/@session_set
+ *
+ * @param string $nom
+ * @param null $val
+ * @return void
+ */
 function session_set($nom, $val=null) {
 	// On ajoute que si la valeur n'est pas nulle
 	if ($val != null)
@@ -117,16 +130,28 @@ function session_set($nom, $val=null) {
 	actualiser_sessions($GLOBALS['visiteur_session']);
 }
 
-// Lire une valeur dans la session SPIP
-// http://doc.spip.org/@session_get
+/**
+ * Lire une valeur dans la session SPIP
+ *
+ * http://doc.spip.org/@session_get
+ *
+ * @param string $nom
+ * @return mixed
+ */
 function session_get($nom) {
 	return $GLOBALS['visiteur_session'][$nom];
 }
 
-// Quand on modifie une fiche auteur on appelle cette fonction qui va
-// mettre a jour les fichiers de session de l'auteur en question.
-// (auteurs identifies seulement)
-// http://doc.spip.org/@actualiser_sessions
+/**
+ * Mettre a jour les sessions existantes pour un auteur
+ * Quand on modifie une fiche auteur on appelle cette fonction qui va
+ * mettre a jour les fichiers de session de l'auteur en question.
+ * (auteurs identifies seulement)
+ *
+ * http://doc.spip.org/@actualiser_sessions
+ *
+ * @param array $auteur
+ */
 function actualiser_sessions($auteur) {
 	if (!$id_auteur = intval($auteur['id_auteur']))
 		return;
@@ -151,7 +176,15 @@ function actualiser_sessions($auteur) {
 		verifier_session();
 }
 
-// http://doc.spip.org/@ecrire_fichier_session
+/**
+ * Ecrire le fichier d'une session
+ *
+ * http://doc.spip.org/@ecrire_fichier_session
+ *
+ * @param string $fichier
+ * @param array $auteur
+ * @return bool
+ */
 function ecrire_fichier_session($fichier, $auteur) {
 
 	// ne pas enregistrer ces elements de securite
@@ -172,14 +205,20 @@ function ecrire_fichier_session($fichier, $auteur) {
 	return ecrire_fichier($fichier, $texte);
 }
 
-//
-// Cette fonction efface toutes les sessions appartenant a l'auteur
-// On en profite pour effacer toutes les sessions
-// creees il y a plus de 4*_RENOUVELLE_ALEA
-// Tenir compte de l'ancien format ou les noms commencaient par "session_"
-// et du meme coup des repertoires plats
-
-// http://doc.spip.org/@supprimer_sessions
+/**
+ * Supprimer toutes les vieilles sessions d'un auteur
+ *
+ * Cette fonction efface toutes les sessions appartenant a l'auteur
+ * On en profite pour effacer toutes les sessions
+ * creees il y a plus de 4*_RENOUVELLE_ALEA
+ * Tenir compte de l'ancien format ou les noms commencaient par "session_"
+ * et du meme coup des repertoires plats
+ *
+ * http://doc.spip.org/@supprimer_sessions
+ *
+ * @param int $id_auteur
+ * @param bool $toutes
+ */
 function supprimer_sessions($id_auteur, $toutes=true) {
 
 	if ($toutes) {
@@ -202,13 +241,18 @@ function supprimer_sessions($id_auteur, $toutes=true) {
 	spip_session(true);
 }
 
-//
-// Verifie si le cookie spip_session indique une session valide.
-// Si oui, la decrit dans le tableau $visiteur_session et retourne id_auteur
-// La rejoue si IP change puis accepte le changement si $change=true
-//
-
-// http://doc.spip.org/@verifier_session
+/**
+ * Verifie si le cookie spip_session indique une session valide.
+ * Si oui, la decrit dans le tableau $visiteur_session et retourne id_auteur
+ * La rejoue si IP change puis accepte le changement si $change=true
+ *
+ * Retourne false en cas d'echec, l'id_auteur de la session si defini, null sinon
+ * 
+ * http://doc.spip.org/@verifier_session
+ *
+ * @param bool $change
+ * @return bool|int|null
+ */
 function verifier_session($change=false) {
 	// si pas de cookie, c'est fichu
 
@@ -274,10 +318,14 @@ function verifier_session($change=false) {
 		: null;
 }
 
-// Code a inserer par inc/presentation pour rejouer la session
-// Voir action/cookie qui sera appele.
-
-// http://doc.spip.org/@rejouer_session
+/**
+ * Code a inserer par inc/presentation pour rejouer la session
+ * Voir action/cookie qui sera appele.
+ *
+ * http://doc.spip.org/@rejouer_session
+ *
+ * @return string
+ */
 function rejouer_session()
 {
 	include_spip('inc/filtres');
@@ -285,10 +333,15 @@ function rejouer_session()
 		  http_script("\ndocument.img_session.src='" . generer_url_action('cookie','change_session=oui', true) .  "'");
 }
 
-//
-// Calcule le nom du fichier session
-//
-// http://doc.spip.org/@fichier_session
+/**
+ * Calculer le nom du fichier session
+ *
+ * http://doc.spip.org/@fichier_session
+ *
+ * @param string $alea
+ * @param bool $tantpis
+ * @return string
+ */
 function fichier_session($alea, $tantpis=false) {
 
 	if (!isset($GLOBALS['meta'][$alea])) {
@@ -311,11 +364,13 @@ function fichier_session($alea, $tantpis=false) {
 	}
 }
 
-//
-// On verifie l'IP et le nom du navigateur
-//
-
-// http://doc.spip.org/@hash_env
+/**
+ * On verifie l'IP et le nom du navigateur
+ *
+ * http://doc.spip.org/@hash_env
+ *
+ * @return string
+ */
 function hash_env() {
   static $res ='';
   if ($res) return $res;
