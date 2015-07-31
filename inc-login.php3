@@ -166,7 +166,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 		  (!$message_login ? '' :
 		   ("<br>" . 
 		    _T("forum_vous_enregistrer") . 
-		    "<a $pass_popup>" .
+		    " <a $pass_popup>" .
 		    _T("forum_vous_inscrire") .
 		    "</a><br><br>\n")) ;
 		   
