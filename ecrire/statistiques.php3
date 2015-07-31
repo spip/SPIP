@@ -76,9 +76,11 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 	global $nombre_abs;
 	global $couleur_claire, $spip_lang_right;
 	global $abs_total;
+
 	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
 	$result=spip_query($query);
 	
+
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
@@ -88,22 +90,23 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 			$largeur_vert = floor($nombre_abs[$id_rubrique] * 100 / $abs_total);
 			
 			if ($largeur_rouge+$largeur_vert>0){
-				if ($niveau==0) {
-					$couleur="$couleur_claire";
-					$titre = majuscules($titre);
-				}
-				else if ($niveau == 1) {
+					
+				if ($niveau == 0) {
 					$couleur="#cccccc";
 				}
 
-				else if ($niveau == 2) {
+				else if ($niveau == 1) {
 					$couleur="#eeeeee";
 				}
 				else {
 					$couleur="white";
 				}
-				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif'><TD WIDTH=\"100%\" style='border-bottom: 1px solid #cccccc;'>";
+				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 width='100%'>";
+				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif' width='100%'><TD style='border-bottom: 1px solid #cccccc;'>";
 				echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
+				
+				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
+				
 				echo "<span class='verdana1'>";	
 				echo "<A HREF='naviguer.php3?coll=$id_rubrique' style='color: black;'>$titre</A>";
 				
@@ -113,7 +116,7 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				}
 				
 				echo "</span>";
-				echo "</TD><TD ALIGN='right' style='border-bottom: 1px solid #cccccc;'>";
+				echo "</TD><TD ALIGN='right' width='105' style='border-bottom: 1px solid #cccccc;'>";
 				
 				
 				echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=".($decalage+1+$gauche)." HEIGHT=8>";
@@ -126,15 +129,19 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				echo "<IMG SRC='img_pack/rien.gif' HEIGHT=8 WIDTH=1 BORDER=0>";
 				
 				echo "</TD></TR></TABLE>\n";
-				echo "</TD></TR>";
+				echo "</TD></TR></table>";
 			}	
-		}	
-		$niveau++;
-		enfants_aff($id_rubrique,$largeur_rouge, $visites_abs+$gauche);
-		$niveau--;
+		}
+		
+		if ($largeur_rouge > 0) {
+			$niveau++;
+			echo debut_block_invisible("stats$id_rubrique");
+			enfants_aff($id_rubrique,$largeur_rouge, $visites_abs+$gauche);
+			echo fin_block();
+			$niveau--;
+		}
 		$visites_abs = $visites_abs + round($nombre_vis[$id_rubrique]/$abs_total*100);
 	}
-	
 }
 
 
@@ -172,12 +179,12 @@ while($row = spip_fetch_array($result)) {
 if ($total_vis<1) $total_vis=1;
 
 debut_cadre_relief("statistiques-24.gif");
-echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 style='border: 1px solid #aaaaaa;'>";
+//echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 style='border: 1px solid #aaaaaa;'>";
 enfants_aff(0,100);
-echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0></TD>";
+//echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0></TD>";
 
 
-echo "</TABLE>";
+//echo "</TABLE>";
 
 echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
 
