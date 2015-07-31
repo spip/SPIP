@@ -81,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_desactiver_messagerie' => 'ביטול התכתבות ',
 'bouton_radio_envoi_annonces_adresse' => ':שליחת הודעות לכתובת',
 'bouton_radio_envoi_liste_nouveautes' => 'שלח את רשימת החדשות האחרונה',
-'bouton_radio_modere_priori' => 'צמצום מראש',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'אל תופיע ברשימת העורכים המחוברים',
 'bouton_radio_non_envoi_annonces_editoriales' => 'אל תשלח הודעות עורך ',
 'bouton_radio_non_syndication' => 'אין סינדיקציה',
@@ -762,9 +761,6 @@ dans une couleur qui indique leur état :', # NEW
 'lien_mise_a_jour_syndication' => 'Mettre à jour maintenant', # NEW
 'lien_nom_site' => 'NOM DU SITE :', # NEW
 'lien_nouvelle_recuperation' => 'Tenter une nouvelle récupération des données', # NEW
-'lien_reponse_article' => 'Réponse à l\'article', # NEW
-'lien_reponse_rubrique' => 'Réponse à la rubrique', # NEW
-'lien_reponse_site_reference' => 'Réponse au site référencé :', # NEW
 'lien_retirer_auteur' => 'Retirer l\'auteur', # NEW
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'retirer ce participant', # NEW

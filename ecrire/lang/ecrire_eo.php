@@ -87,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_desactiver_messagerie' => 'Malŝalti la mesaĝilon',
 'bouton_radio_envoi_annonces_adresse' => 'Sendi la anoncojn al jena adreso:',
 'bouton_radio_envoi_liste_nouveautes' => 'Sendi la novaĵoj-liston',
-'bouton_radio_modere_priori' => 'apriore moderigata',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne aperi en la listo de redaktantoj',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne sendi anoncojn pri ĉefartikoloj',
 'bouton_radio_non_syndication' => 'Neniu abonrilato',
@@ -753,9 +752,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_mise_a_jour_syndication' => 'Ĝisdatigi nun',
 'lien_nom_site' => 'NOMO DE LA RETEJO:',
 'lien_nouvelle_recuperation' => 'Provi novan reakiron de la datenoj',
-'lien_reponse_article' => 'Respondo al la artikolo',
-'lien_reponse_rubrique' => 'Respondo al la rubriko',
-'lien_reponse_site_reference' => 'Respondo al la referencigita retejo:',
 'lien_retirer_auteur' => 'Forviŝi la aŭtoron',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Forviŝi tiun ĉi partoprenanton',

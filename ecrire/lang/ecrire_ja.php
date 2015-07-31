@@ -87,7 +87,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_radio_desactiver_messagerie' => 'メッセージ交換を不能にする',
 'bouton_radio_envoi_annonces_adresse' => 'アナウンスを送信するアドレス:',
 'bouton_radio_envoi_liste_nouveautes' => '最新のニュースリストを送る',
-'bouton_radio_modere_priori' => '検査したコメントのみ表示',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => '接続中のエディターズのリストに表示しない',
 'bouton_radio_non_envoi_annonces_editoriales' => '編集の発表を送らない',
 'bouton_radio_non_syndication' => '供給（シンジケート）しない',
@@ -747,9 +746,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_mise_a_jour_syndication' => '今アップデート',
 'lien_nom_site' => 'サイトの名前:',
 'lien_nouvelle_recuperation' => 'データの新しい検索を開始',
-'lien_reponse_article' => '記事へ返信',
-'lien_reponse_rubrique' => 'セクションに返信',
-'lien_reponse_site_reference' => '参照されたサイトに返信:',
 'lien_retirer_auteur' => '著者を削除',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'この関係者を削除',

@@ -86,7 +86,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_radio_desactiver_messagerie' => 'Stäng av meddelandefunktionen',
 'bouton_radio_envoi_annonces_adresse' => 'Skicka meddelanden till adressen:',
 'bouton_radio_envoi_liste_nouveautes' => 'Skicka lista över senaste notiser',
-'bouton_radio_modere_priori' => 'moderering i förhand',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Inte synas i listan över anslutna redaktörere',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Skicka inga redaktionella meddelanden',
 'bouton_radio_non_syndication' => 'Ingen syndikering',
@@ -766,9 +765,6 @@ med en färg som visar deras status:',
 'lien_mise_a_jour_syndication' => 'Uppdatera nu',
 'lien_nom_site' => 'SAJTENS NAMN:',
 'lien_nouvelle_recuperation' => 'Försök att hämta datum igen',
-'lien_reponse_article' => 'Svara på artikeln',
-'lien_reponse_rubrique' => 'Skriv ett svar till avdelningen',
-'lien_reponse_site_reference' => 'Réponse au site référencé :', # NEW
 'lien_retirer_auteur' => 'Ta bort redaktören',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'ta bort deltagaren',

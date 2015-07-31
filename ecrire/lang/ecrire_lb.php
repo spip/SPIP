@@ -83,7 +83,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_radio_desactiver_messagerie' => 'D\'Messagerie ausschalten',
 'bouton_radio_envoi_annonces_adresse' => 'D\'Annoncen schécken op d\'Adress:',
 'bouton_radio_envoi_liste_nouveautes' => 'D\'Lëscht mat den Neiegkeeten schécken',
-'bouton_radio_modere_priori' => 'modéréiert "à priori"',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nët op d\'Lëscht vun de Redakteren kommen',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Keng editorial Neiegkeeten schécken',
 'bouton_radio_non_syndication' => 'Keng Syndicatioun',
@@ -732,9 +731,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'lien_mise_a_jour_syndication' => 'Elo updaten',
 'lien_nom_site' => 'NUMM VUM SITE:',
 'lien_nouvelle_recuperation' => 'Eng nei Restauratioun vun den Daten probéieren',
-'lien_reponse_article' => 'Äntwert op den Artikel',
-'lien_reponse_rubrique' => 'Äntwert op d\'Rubrik',
-'lien_reponse_site_reference' => 'Äntwert op de referenzéierten Site:',
 'lien_retirer_auteur' => 'Auteur läschen',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Mataarbechter läschen',

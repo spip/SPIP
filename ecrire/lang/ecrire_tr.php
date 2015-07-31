@@ -85,7 +85,6 @@ Bu ithal istemini onaylamayın.
 'bouton_radio_desactiver_messagerie' => 'İleti sistemini kapat',
 'bouton_radio_envoi_annonces_adresse' => 'Duyuruları bu adrese yolla :',
 'bouton_radio_envoi_liste_nouveautes' => 'Yenilikler listesini yolla ',
-'bouton_radio_modere_priori' => 'önceden onayla yönetim',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Yazarlar listesinde görünme',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Editör duyurularını gönderme',
 'bouton_radio_non_syndication' => 'Paylaşım (syndication) yok',
@@ -757,9 +756,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_mise_a_jour_syndication' => 'Şimdi güncelle',
 'lien_nom_site' => 'SİTENİN ADI : ',
 'lien_nouvelle_recuperation' => 'Verilerin yeniden alınmasını dene',
-'lien_reponse_article' => 'Bu makaleye yanıt ',
-'lien_reponse_rubrique' => 'Bu bölüme yanıt ',
-'lien_reponse_site_reference' => 'Atıfta bulunan siteye yanıt : ',
 'lien_retirer_auteur' => 'Yazarı sil',
 'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'bu katılımcıyı sil',
