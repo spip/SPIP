@@ -66,7 +66,9 @@ function install_etape_3b_dist()
 		$email = (importer_charset($email, _DEFAULT_CHARSET));
 		# pour le passwd, bizarrement il faut le convertir comme s'il avait
 		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
-		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');		$mdpass = md5($pass);
+		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
+		include_spip('auth/sha256.inc');
+		$mdpass = sha256($pass);
 		$htpass = generer_htpass($pass);
 		$alea = creer_uniqid();
 		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
@@ -82,7 +84,7 @@ function install_etape_3b_dist()
 				'htpass' => $htpass,
 				'alea_futur' => $alea,
 				'statut' =>'0minirezo',
-				'webmestre' => 'oui'));
+			'webmestre' => 'oui'));
 		}
 
 		// inserer email comme email webmaster principal
