@@ -51,7 +51,7 @@ function public_debusquer_dist($message='', $lieu='', $quoi='') {
 		? debusquer_requete($message, $lieu, $quoi)
 		: array($message, $lieu);
 		if (is_array($quoi[0]))
-		  $quoi[0] = _T($quoi[0][0], $quoi[0][1], 'font-weight: bold');
+		  $quoi[0] = _T($quoi[0][0], $quoi[0][1], 'spip-debug-arg');
 		$tableau_des_erreurs[] = $quoi;
 		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
@@ -128,7 +128,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 		. $msg
 		. "</td><td style='text-align: left'>"
 		. $skel
-		. "</td><td style='text-align: left'>"
+		. "</td><td class='spip-debug-arg' style='text-align: left'>"
 		. $boucle
 		. "</td><td style='text-align: right'>"
 		. $ligne
