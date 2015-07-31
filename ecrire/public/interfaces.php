@@ -147,6 +147,10 @@ class Polyglotte {
 	var $traductions = array(); // les textes ou choisir
 	var $ligne = 0; 
 }
+
+global $table_criteres_infixes;
+$table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>',  '?');
+
 //
 // Globales de description de la base
 

@@ -1050,6 +1050,7 @@ function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 // http://doc.spip.org/@calculer_critere_infixe_ops
 function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 {
+	global $table_criteres_infixes;
 	// cas d'une valeur comparee a elle-meme ou son referent
 	if (count($crit->param) == 0)
 	  { $op = '=';
@@ -1114,6 +1115,18 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	  }
 	  $args_sql .= $a[2];;
 	}
+
+	if ($op == '=' OR in_array($op, $table_criteres_infixes)) {
+		list($nom, $desc) = trouver_def_table($boucles[$idb]->id_table, $boucles[$idb]);
+		$type = $desc['field'][$col];
+		if (strpos($val[0], '_q(') === 0
+		  AND (strpos($type, 'bigint') === 0
+		       OR strpos($type, 'int') === 0
+		       OR strpos($type, 'tinyint') === 0))
+
+		  $val[0] = 'intval' . substr($val[0],2);
+	}
+
 	return array($fct, $col, $op, $val, $args_sql);
 }
 
