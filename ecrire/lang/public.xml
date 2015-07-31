@@ -23,18 +23,18 @@
 	</langue>
 	<langue code="el" />
 	<langue code="en" url="http://trad.spip.net/tradlang_module/public?lang_cible=en">
-		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
-		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
-		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="sQuonk" lien="http://trad.spip.net/auteur/squonk" />
 	</langue>
 	<langue code="en_hx" />
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/public?lang_cible=eo">
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/public?lang_cible=es">
-		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="jotacese" lien="http://trad.spip.net/auteur/jotacese" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="es_co" />
@@ -49,9 +49,9 @@
 	<langue code="fon" />
 	<langue code="fr" />
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/public?lang_cible=fr_tu">
+		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 		<traducteur nom="PatV" lien="http://trad.spip.net/auteur/pat" />
 		<traducteur nom="RealET" lien="http://trad.spip.net/auteur/realet" />
-		<traducteur nom="orlammd" lien="http://trad.spip.net/auteur/orlammd" />
 	</langue>
 	<langue code="gl" />
 	<langue code="hac" url="http://trad.spip.net/tradlang_module/public?lang_cible=hac">
@@ -76,9 +76,9 @@
 	<langue code="my" />
 	<langue code="ne" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/public?lang_cible=nl">
-		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
 	<langue code="oc_auv" />
 	<langue code="oc_gsc" />
