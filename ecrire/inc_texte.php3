@@ -194,7 +194,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		}
 
 		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."<@@SPIP_$source$num_echap@@>"
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
 
@@ -214,7 +214,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$rempl = embed_document($id_document, $align);
 		else
 			$rempl = integre_image($id_document, $align, $match[1]);
-		$letexte = ereg_replace($letout, "<@@SPIP_$source$num_echap@@>", $letexte);
+		$letexte = ereg_replace($letout, "@@SPIP_$source$num_echap@@", $letexte);
 		$les_echap[$num_echap] = $rempl;
 	}
 
@@ -229,7 +229,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 				$les_echap[$num_echap] = $reg[0];
 				//echo htmlspecialchars($reg[0])."<p>";
 				$pos = strpos($letexte, $les_echap[$num_echap]);
-				$letexte = substr($letexte,0,$pos)."<@@SPIP_$source$num_echap@@>"
+				$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 					.substr($letexte,$pos+strlen($les_echap[$num_echap]));
 			}
 	} else {
@@ -237,7 +237,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$num_echap++;
 			$les_echap[$num_echap] = $reg[0];
 			$pos = strpos($letexte, $les_echap[$num_echap]);
-			$letexte = substr($letexte,0,$pos)."<@@SPIP_$source$num_echap@@>"
+			$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 				.substr($letexte,$pos+strlen($les_echap[$num_echap]));
 		}
 	}
@@ -247,7 +247,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 
 // Traitement final des echappements
 function echappe_retour($letexte, $les_echap, $source) {
-	while (ereg("<@@SPIP_$source([0-9]+)@@>", $letexte, $match)) {
+	while (ereg("@@SPIP_$source([0-9]+)@@", $letexte, $match)) {
 		$lenum = $match[1];
 		$cherche = $match[0];
 		$pos = strpos($letexte, $cherche);
@@ -837,13 +837,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   sans pcre ; toutefois les elements ci-dessous sont un peu optimises (str_replace
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
-		$letexte = ereg_replace("\n(-{4,}|_{4,})", "<@@SPIP_ligne_horizontale@@>", $letexte);
+		$letexte = ereg_replace("\n(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
 		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
 		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}(<br[[:space:]]*\/?".">)?", "<p>", $letexte);
-		$letexte = str_replace("{{{", "<@@SPIP_debut_intertitre@@>", $letexte);
-		$letexte = str_replace("}}}", "<@@SPIP_fin_intertitre@@>", $letexte);
+		$letexte = str_replace("{{{", "@@SPIP_debut_intertitre@@", $letexte);
+		$letexte = str_replace("}}}", "@@SPIP_fin_intertitre@@", $letexte);
 		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
 		$letexte = str_replace("}}", "</b>", $letexte);
 		$letexte = str_replace("{", "<i class=\"spip\">", $letexte);
@@ -876,13 +876,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 16 */	"/<\/quote>/"
 		);
 		$remplace1 = array(
-			/* 0 */ 	"<@@SPIP_ligne_horizontale@@>",
+			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
 			/* 1 */ 	"\n<br />&mdash;&nbsp;",
 			/* 2 */ 	"\n<br />$puce&nbsp;",
 			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"<p>",
-			/* 5 */ 	"<@@SPIP_debut_intertitre@@>",
-			/* 6 */ 	"<@@SPIP_fin_intertitre@@>",
+			/* 5 */ 	"@@SPIP_debut_intertitre@@",
+			/* 6 */ 	"@@SPIP_fin_intertitre@@",
 			/* 7 */ 	"<b class=\"spip\">",
 			/* 8 */ 	"</b>",
 			/* 9 */ 	"<i class=\"spip\">",
@@ -903,9 +903,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = '<p class="spip">'.str_replace('<p class="spip">', "</p>\n".'<p class="spip">', $letexte).'</p>';
 
 	// intertitres & hr compliants
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<@@SPIP_debut_intertitre@@>', $debut_intertitre, $letexte);
-	$letexte = ereg_replace('<@@SPIP_fin_intertitre@@>[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<@@SPIP_ligne_horizontale@@>[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
+	$letexte = ereg_replace('@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
 
 	// Appeler la fonction de post-traitement
 	$letexte = spip_apres_propre ($letexte);
