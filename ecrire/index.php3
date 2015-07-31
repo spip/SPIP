@@ -403,8 +403,8 @@ if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 		echo "</td></tr></table>";
 	}
 }
-		echo fin_cadre_trait_couleur();
-
+echo fin_cadre_trait_couleur();
+echo "<div>&nbsp;</div>";
 
 
 //
