@@ -1358,7 +1358,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre);
 
-	$ctitre = entites_html(_T('titre_changer_couleur_interface'));
+	$ctitre = _T('titre_changer_couleur_interface');
 	echo "\n<map name='map_couleur'>";
 	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
 	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
