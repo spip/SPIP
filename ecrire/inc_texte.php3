@@ -567,6 +567,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	if (!$les_echap)
 		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 
+//		echo htmlspecialchars($letexte)."<p>";
 	// Corriger HTML
 	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
 
@@ -580,24 +581,26 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		crochet-fermant entoure de pas-crochets-fermants (c'est-a-dire
 		tout sauf deux crochets fermants), puis deux fermants */
 	while (ereg($regexp, $texte_a_voir, $regs)) {
+		$note_source = $regs[0];
 		$note_texte = $regs[1];
 		$num_note = false;
 
 		// note auto ou pas ?
-		if (ereg("^ *<([^>]*)>",$note_texte,$regs)){
-			$num_note=$regs[1];
-			$note_texte = ereg_replace ("^ *<([^>]*)>","",$note_texte);
+		if (ereg("^ *<([^>]*)>", $note_texte, $regs)){
+			$num_note = $regs[1];
+			$note_texte = ereg_replace ("^ *<([^>]*)>", "", $note_texte);
 		} else {
 			$compt_note++;
-			$num_note=$compt_note;
+			$num_note = $compt_note;
 		}
 
 		// preparer la note
 		if ($num_note) {
 			if ($marqueur_notes)
 				$mn = $marqueur_notes.'-';
-			$insert = "$ouvre_ref<a href='#nb$mn$num_note' name='nh$mn$num_note' class='spip_note'>$num_note</a>$ferme_ref";
-			$appel = "<html>$ouvre_note<a href='#nh$mn$num_note' name='nb$mn$num_note' class='spip_note'>$num_note</a>$ferme_note</html>";
+			$ancre = $mn.urlencode($num_note);
+			$insert = "$ouvre_ref<a href='#nb$ancre' name='nh$ancre' class='spip_note'>$num_note</a>$ferme_ref";
+			$appel = "<html>$ouvre_note<a href='#nh$ancre' name='nb$ancre' class='spip_note'>$num_note</a>$ferme_note</html>";
 		} else {
 			$insert = '';
 			$appel = '';
@@ -611,9 +614,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		}
 
 		// dans le texte, mettre l'appel de note a la place de la note
-		$pos = strpos($texte_a_voir, $regs[0]);
+		$pos = strpos($texte_a_voir, $note_source);
 		$texte_vu .= substr($texte_a_voir, 0, $pos) . $insert;
-		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
+		$texte_a_voir = substr($texte_a_voir, $pos + strlen($note_source));
 	}
 	$letexte = $texte_vu . $texte_a_voir;
 
