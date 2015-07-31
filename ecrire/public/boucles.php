@@ -58,7 +58,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		if (!$GLOBALS['var_preview']) {
 			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 			if ($GLOBALS['meta']["post_dates"] == 'non')
@@ -80,7 +80,7 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		// Si pas de lien avec un article, selectionner
 		// uniquement les auteurs d'un article publie
 		if (!$GLOBALS['var_preview'])
@@ -110,7 +110,7 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		if (!$GLOBALS['var_preview'])
 			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 		else
@@ -137,7 +137,7 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 		$boucle->where[]= array("'='", "'$id_table." ."id_parent'", 0);
 	}
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		if ($GLOBALS['var_preview'])
 			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prive\")'");		
 		else
@@ -160,7 +160,7 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$boucle->from[$id_table] =  "spip_signatures";
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 	}
 	return calculer_boucle($id_boucle, $boucles); 
@@ -193,7 +193,7 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		if (!$GLOBALS['var_preview'])
 			if (!isset($boucle->modificateur['tout']))
 				$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
@@ -244,7 +244,7 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 
 	// Restreindre aux elements publies
 
-	if (!$boucle->statut) {
+	if (!$boucle->modificateur['criteres']['statut']) {
 		if (!$GLOBALS['var_preview']) {
 			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 		} else
@@ -264,7 +264,7 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	// Restreindre aux elements publies, sauf critere contraire
-	if ($boucle->statut) {}
+	if ($boucle->modificateur['criteres']['statut']) {}
 	else if ($GLOBALS['var_preview'])
 		$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
 	else {

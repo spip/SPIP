@@ -690,11 +690,14 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 	  }
 	}
+	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
+	$boucles[$idb]->modificateur['criteres'][$col] = true;
+	
 	// ajout pour le cas special d'une condition sur le champ statut:
 	// il faut alors interdire a la fonction de boucle
 	// de mettre ses propres criteres de statut
 	// http://www.spip.net/@statut (a documenter)
-
+	// garde pour compatibilite avec code des plugins anterieurs, mais redondant avec la ligne precedente
 	if ($col == 'statut') $boucles[$idb]->statut = true;
 
 	// ajout pour le cas spécial des forums
