@@ -57,6 +57,7 @@ while ($row = mysql_fetch_array($result)) {
 	        $annee_redac = $regs[1];
 	        if ($annee_redac > 4000) $annee_redac -= 9000;
 	}
+	$pour_doublons = propre ("$titre.$surtitre.$soustitre.$descriptif.$chapo.$texte");
 
 	$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 	$result_auteur = spip_query($query);

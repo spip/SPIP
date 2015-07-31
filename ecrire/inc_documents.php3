@@ -846,7 +846,7 @@ function afficher_documents_colonne($id_article) {
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
 	global $flag_editable;
-
+	
 	if ($flag_editable){
 		$image_link = new Link('../spip_image.php3');
 		if ($id_article) $image_link->addVar('id_article', $id_article);
@@ -985,6 +985,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
 	global $options;
+	global $id_doublons;
+	
+ 	$doublons = $id_doublons['documents'].",";
 
 	if (!$redirect_url) $redirect_url = $this_link->getUrl();
 
@@ -1000,7 +1003,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 	if (!$titre) {
-		$titre = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
+		$titre_fichier = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
@@ -1017,7 +1020,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		//echo "<div style='border: 1px dashed #aaaaaa; padding: 0px; background-color: #e4e4e4;'>\n";
 			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
 			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
-			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre)."</font></b>";
+			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre).propre($titre_fichier)."</font></b>";
 			echo "</div>\n";
 
 
@@ -1088,13 +1091,21 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		}
 		echo "</div>";
 			
+			
+		if (!ereg(",$id_document,", "$doublons")) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
 			echo "</font></div>";
+		}
 
 		$block = "document $id_document";
 
 		echo debut_block_invisible($block);
+		if (ereg(",$id_document,", "$doublons")) {
+			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
+			echo "<div align=center>&lt;doc$id_document&gt;</div>\n";
+			echo "</font></div>";
+		}
 		echo "<div style='border: 1px dashed #666666; padding: 0px; background-color: #f0f0f0;'>";	
 			
 			
@@ -1160,7 +1171,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		$block = "image $id_document";
 		echo "<div style='padding: 2px; background-color: #e4e4e4; text-align: left; color: black;'>";	
 		echo bouton_block_invisible("$block");
-		echo "<font size=1 face='arial,helvetica,sans-serif'>Image : </font> <b><font size=2>".propre($titre)."</font></b>";
+		echo "<font size=1 face='arial,helvetica,sans-serif'>Image : </font> <b><font size=2>".propre($titre).propre($titre_fichier)."</font></b>";
 		echo "</div>\n";
 
 
@@ -1168,13 +1179,26 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		//
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 		//
-	
-		$raccourci_doc = "<div><font size='1' color='#666666' face='arial,helvetica,sans-serif'>";
-		$raccourci_doc .= "<div align='left'>&lt;img$id_document|left&gt;</div>\n".
-			"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
-			"<div align='right'>&lt;img$id_document|right&gt;</div>\n";
-		$raccourci_doc .= "</font></div>\n";
-	
+		
+		if (!ereg(",$id_document,", "$doublons")) {
+			$raccourci_doc = "<div><font size='1' color='#666666' face='arial,helvetica,sans-serif'>";
+			if (strlen($descriptif) > 0 OR strlen($titre) > 0) {
+				$raccourci_doc .= "<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
+					"<div align='center'>&lt;doc$id_document|center&gt;</div>\n".
+					"<div align='right'>&lt;doc$id_document|right&gt;</div>\n";
+			} else {
+				$raccourci_doc .= "<div align='left'>&lt;img$id_document|left&gt;</div>\n".
+					"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
+					"<div align='right'>&lt;img$id_document|right&gt;</div>\n";
+			}
+			$raccourci_doc .= "</font></div>\n";
+		} else {
+			$raccourci_doc = "<div><font size='1' color='#666666' face='arial,helvetica,sans-serif'>";
+			$raccourci_doc .= "<div align='center'>&lt;img$id_document&gt;</div>\n";
+			$raccourci_doc .= "</font></div>\n";
+			
+		}
+
 		//
 		// Afficher un apercu (pour les images)
 		//
@@ -1187,12 +1211,12 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>";
 			if (strlen($descriptif)>0)
 				echo propre($descriptif);
-	
-			echo $raccourci_doc;
-	
+			
+			if (!ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
 		}
 	
 		echo debut_block_invisible($block);
+			if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
 			echo "\n<div align='center'><font face='verdana, arial, helvetica, sans-serif' size='1'>$largeur x $hauteur pixels<br></font></div>\n";
 
 			$link = new Link($redirect_url);

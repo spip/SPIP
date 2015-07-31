@@ -311,7 +311,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$titre = ereg_replace("ecrire/|upload/", "", $titre);
 		$titre = strtr($titre, "_", " ");
 		if (!$titre_automatique) $titre = "";
-		$update = "mode='$mode', titre='".addslashes($titre)."', ";
+		//$update = "mode='$mode', titre='".addslashes($titre)."', ";
+		$update = "mode='$mode', ";
 	}
 
 	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
@@ -381,7 +382,6 @@ if ($ajout_doc == 'oui') {
 // joindre un document
 if ($joindre_doc == 'oui'){
 	$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document, $doc_vignette, $titre_vignette, $descriptif_vignette);
-	
 }
 
 
