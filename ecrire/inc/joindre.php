@@ -25,11 +25,13 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	$vignette_de_doc = ($mode == 'vignette' AND $id_document>0);
 	$distant = ($mode == 'document' AND $type);
 
+	# indiquer un choix d'upload FTP
 	$dir_ftp = '';
 	if (test_espace_prive()
-	AND !$vignette_de_doc
+	AND !($mode == 'vignette')	# si c'est pour un document
+	AND !$vignette_de_doc		# pas pour une vignette (NB: la ligne precedente suffit, mais si on la supprime il faut conserver ce test-ci)
 	AND $GLOBALS['flag_upload']) {
-		if($dir = determine_upload()) {
+		if($dir = determine_upload('documents')) {
 			// quels sont les docs accessibles en ftp ?
 			$l = texte_upload_manuel($dir, '', $mode);
 			// s'il n'y en a pas, on affiche un message d'aide

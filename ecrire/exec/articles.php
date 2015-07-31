@@ -364,12 +364,14 @@ global $id_article;
 			. "</div>";
 		}
 
-		$res .= "\n<div  dir='$lang_dir' class='crayon article-texte-$id_article'>"
-		.  propre($texte)
-		.  "<br style='clear: both;' />"
-		.  "</div>";
+		if (strlen($texte) > 0) {
+			$res .= "\n<div  dir='$lang_dir' class='crayon article-texte-$id_article'>"
+			.  propre($texte)
+			.  "<br style='clear: both;' />"
+			.  "</div>";
+		}
 
-		if ($ps) {
+		if (strlen($ps)) {
 			$res .= debut_cadre_enfonce('',true)
 			. "\n<div  dir='$lang_dir' style='font-size: small;' class='verdana1 crayon article-ps-$id_article'>"
 			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))

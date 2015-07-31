@@ -26,6 +26,7 @@ function configuration_articles_dist(){
 	$articles_soustitre = $GLOBALS['meta']["articles_soustitre"];
 	$articles_descriptif = $GLOBALS['meta']["articles_descriptif"];
 	$articles_chapeau = $GLOBALS['meta']["articles_chapeau"];
+	$articles_texte = $GLOBALS['meta']["articles_texte"];
 	$articles_ps = $GLOBALS['meta']["articles_ps"];
 	$articles_redac = $GLOBALS['meta']["articles_redac"];
 	$articles_urlref = $GLOBALS['meta']["articles_urlref"];
@@ -69,6 +70,15 @@ function configuration_articles_dist(){
 	. "</td>"
 	. "<td align='$spip_lang_left' class='verdana2'>"
 	. afficher_choix('articles_chapeau', $articles_chapeau,
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+	. "</td></tr>\n"
+
+	. "<tr>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. typo(_T('info_texte').':')
+	. "</td>"
+	. "<td align='$spip_lang_left' class='verdana2'>"
+	. afficher_choix('articles_texte', $articles_texte,
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
 	. "</td></tr>\n"
 
