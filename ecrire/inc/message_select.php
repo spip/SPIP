@@ -30,7 +30,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	// cette variable est passe par reference et recevra les valeurs du champ indique 
 	$les_messages = 'id_message'; 
-	$res = 	$presenter_liste($requete, 'afficher_message_boucles', $les_messages, $afficher_auteur, $important, $styles, $tmp_var, $titre,  "messagerie-24.gif");
+	$res = 	$presenter_liste($requete, 'presenter_message_boucles', $les_messages, $afficher_auteur, $important, $styles, $tmp_var, $titre,  "messagerie-24.gif");
 	$messages_vus =  array_merge($messages_vus, $les_messages);
 
 	if (!$res) return '';
@@ -42,7 +42,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 }
 
 // http://doc.spip.org/@afficher_message_boucles
-function afficher_message_boucles($row, $afficher_auteurs)
+function presenter_message_boucles($row, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
 
