@@ -38,7 +38,7 @@ define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_racine_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
@@ -63,7 +63,7 @@ function critere_racine_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_exclus_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
@@ -90,7 +90,7 @@ function critere_exclus_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_doublons_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -176,7 +176,7 @@ function critere_doublons_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_lang_select_dist($idb, &$boucles, $crit){
 	if (!isset($crit->param[1][0]) OR !($param = $crit->param[1][0]->texte)) $param = 'oui';
@@ -201,7 +201,7 @@ function critere_lang_select_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_debut_dist($idb, &$boucles, $crit){
 	list($un, $deux) = $crit->param;
@@ -237,7 +237,7 @@ function critere_debut_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_pagination_dist($idb, &$boucles, $crit){
 
@@ -295,7 +295,7 @@ function critere_pagination_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_recherche_dist($idb, &$boucles, $crit){
 
@@ -347,7 +347,7 @@ function critere_recherche_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_traduction_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -381,7 +381,7 @@ function critere_traduction_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_origine_traduction_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -406,7 +406,7 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_meme_parent_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
@@ -447,7 +447,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_branche_dist($idb, &$boucles, $crit){
 
@@ -491,7 +491,7 @@ function critere_branche_dist($idb, &$boucles, $crit){
  * @param string $idb     Identifiant de la boucle
  * @param array $boucles  AST du squelette
  * @param Critere $crit   Paramètres du critère dans cette boucle
- * @return array          AST complété des contraintes du critère
+ * @return void
 **/
 function critere_logo_dist($idb, &$boucles, $crit){
 
@@ -820,7 +820,27 @@ function critere_agenda_dist($idb, &$boucles, $crit){
 	// sinon on prend tout
 }
 
-// http://doc.spip.org/@calculer_critere_parties
+
+/**
+ * Compile les critères {i,j} et {i/j}
+ *
+ * Le critère {i,j} limite l'affiche de la boucle en commançant l'itération
+ * au i-ème élément, et pour j nombre d'éléments.
+ * Le critère {n-i,j} limite en commençant au n moins i-ème élément de boucle
+ * Le critère {i,n-j} limite en terminant au n moins j-ème élément de boucle.
+ *
+ * Le critère {i/j} affiche une part d'éléments de la boucle.
+ * Commence à i*n/j élément et boucle n/j éléments. {2/4} affiche le second
+ * quart des éléments d'une boucle.
+ * 
+ * Traduit si possible (absence de n dans {i,j}) la demande en une
+ * expression LIMIT du gestionnaire SQL
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void 
+**/
 function calculer_critere_parties($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$a1 = $crit->param[0];
@@ -834,7 +854,9 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 		$boucle->limit = $a11.','.$a21;
 	}
 	else {
+		// 3 dans {1/3}, {2,3} ou {1,n-3}
 		$boucle->total_parties = ($a21!='n') ? $a21 : $a22;
+		// 2 dans {2/3}, {2,5}, {n-2,1}
 		$partie = ($a11!='n') ? $a11 : $a12;
 		$mode = (($op=='/') ? '/' :
 			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
@@ -850,10 +872,30 @@ function calculer_critere_parties($idb, &$boucles, $crit){
 	}
 }
 
-//
-// Code specifique aux criteres {pagination}, {1,n} {n/m} etc
-//
-
+/**
+ * Compile certains critères {i,j} et {i/j}
+ *
+ * Calcule une expression déterminant $debut_boucle et $fin_boucle (le
+ * début et la fin des éléments de la boucle qui doivent être affichés)
+ * et les déclare dans la propriété «mode_partie» de la boucle, qui se
+ * charge également de déplacer le pointeur de boucle sur le premier
+ * élément à afficher.
+ *
+ * Place dans la propriété partie un test vérifiant que l'élément de
+ * boucle en cours de lecture appartient bien à la plage autorisée.
+ * Trop tôt, passe à l'élément suivant, trop tard, sort de l'itération de boucle.
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param string $debut   Valeur ou code pour trouver le début (i dans {i,j})
+ * @param string $mode
+ *     Mode (++, p+, +- ...) : 2 signes début & fin
+ *     - le signe - indique
+ *       -- qu'il faut soustraire debut du total {n-3,x}. 3 étant $debut
+ *       -- qu'il faut raccourcir la fin {x,n-3} de 3 elements. 3 étant $total_parties
+ *     - le signe p indique une pagination
+ * @return void 
+**/
 function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	$total_parties = $boucles[$id_boucle]->total_parties;
 
@@ -899,18 +941,31 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 	// Utiliser min pour rabattre $fin_boucle sur total_boucle.
 
 	$boucles[$id_boucle]->mode_partie = "\n\t"
-	                                    .'$debut_boucle = '.$debut.";\n	"
-	                                    .'$fin_boucle = min('.$fin.", \$Numrows['$id_boucle']['total'] - 1);\n	"
-	                                    .'$Numrows[\''.$id_boucle."']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
-	                                    .'$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
-	                                    ."\n\tif (\$debut_boucle>0 AND \$debut_boucle < \$Numrows['$id_boucle']['grand_total'] AND \$iter->seek(\$debut_boucle,'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
+		.'$debut_boucle = '.$debut.";\n	"
+		.'$fin_boucle = min('.$fin.", \$Numrows['$id_boucle']['total'] - 1);\n	"
+		.'$Numrows[\''.$id_boucle."']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
+		.'$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
+		."\n\tif (\$debut_boucle>0"
+		." AND \$debut_boucle < \$Numrows['$id_boucle']['grand_total']"
+		." AND \$iter->seek(\$debut_boucle,'continue'))"
+			."\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
 
 	$boucles[$id_boucle]->partie = "
 		if (\$Numrows['$id_boucle']['compteur_boucle'] <= \$debut_boucle) continue;
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;";
 }
 
-// http://doc.spip.org/@calculer_critere_parties_aux
+/**
+ * Analyse un des éléments des critères {a,b} ou {a/b}
+ *
+ * Pour l'élément demandé (a ou b) retrouve la valeur de l'élément,
+ * et de combien il est soustrait si c'est le cas comme dans {a-3,b}
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param array $param    Paramètre à analyser (soit a, soit b dans {a,b} ou {a/b})
+ * @return array          Valeur de l'élément (peut être une expression PHP), Nombre soustrait 
+**/
 function calculer_critere_parties_aux($idb, &$boucles, $param){
 	if ($param[0]->type!='texte'){
 		$a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
@@ -939,7 +994,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param){
  * - critere_{serveur}_{critere}, sinon avec _dist
  * - critere_{table}_{critere}, sinon avec _dist
  * - critere_{critere}, sinon avec _dist
- * - critere_defaut, sinon avec _dist
+ * - calculer_critere_defaut, sinon avec _dist
  *
  * Émet une erreur de squelette si un critère retourne une erreur.
  * 
@@ -1081,12 +1136,16 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 }
 
 /**
- * {where}
- * tout simplement, pour faire le pont entre php et squelettes
+ * Compile le critère {where}
+ * 
+ * Ajoute une contrainte sql WHERE, tout simplement pour faire le pont
+ * entre php et squelettes, en utilisant la syntaxe attendue par
+ * la propriété $where d'une Boucle.
  *
- * @param <type> $idb
- * @param <type> $boucles
- * @param <type> $crit
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
  */
 function critere_where_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1106,8 +1165,9 @@ function critere_where_dist($idb, &$boucles, $crit){
 
 
 /**
- * Un critere pour gerer un champ de tri qui peut etre modifie dynamiquement
- * par la balise #TRI
+ * Compile le critère {tri}
+ * 
+ * Gère un champ de tri qui peut etre modifie dynamiquement par la balise #TRI
  *
  * {tri [champ_par_defaut][,sens_par_defaut][,nom_variable]}
  * champ_par_defaut : un champ de la table sql
@@ -1146,9 +1206,10 @@ function critere_where_dist($idb, &$boucles, $crit){
  * {tri num titre}{par titre} permet de faire un tri sur le rang (modifiable dynamiquement)
  * avec un second critere sur le titre en cas d'egalite des rang
  *
- * @param unknown_type $idb
- * @param unknown_type $boucles
- * @param unknown_type $crit
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
  */
 function critere_tri_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1185,7 +1246,17 @@ function critere_tri_dist($idb, &$boucles, $crit){
 
 # Criteres de comparaison
 
-// http://doc.spip.org/@calculer_critere_DEFAUT
+/**
+ * Compile un critère non déclaré explicitement
+ *
+ * Compile les critères non déclarés, ainsi que les parties de boucles
+ * avec les critères {0,1} ou {1/2} 
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
+**/
 function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit){
 	// double cas particulier {0,1} et {1/2} repere a l'analyse lexicale
 	if (($crit->op==",") OR ($crit->op=='/'))

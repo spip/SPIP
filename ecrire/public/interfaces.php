@@ -254,8 +254,41 @@ class Boucle {
 	 * @var string|null */
 	public $doublons;
 
-	var $partie, $total_parties,$mode_partie='';
-	var $externe = ''; # appel a partir d'une autre boucle (recursion)
+	/**
+	 * Code PHP ajouté au début de chaque itération de boucle.
+	 *
+	 * Utilisé entre autre par les critères {pagination}, {n-a,b}, {a/b}...
+	 * @var string */
+	public $partie="";
+
+	/**
+	 * Nombre de divisions de la boucle, d'éléments à afficher,
+	 * ou de soustractions d'éléments à faire
+	 *
+	 * Dans les critères limitant le nombre d'éléments affichés
+	 * {a,b}, {a,n-b}, {a/b}, {pagination b}, b est affecté à total_parties.
+	 * 
+	 * @var string */
+	public $total_parties = "";
+
+	/**
+	 * Code PHP ajouté avant l'itération de boucle.
+	 *
+	 * Utilisé entre autre par les critères {pagination}, {a,b}, {a/b}
+	 * pour initialiser les variables de début et de fin d'itération.
+	 * 
+	 * @var string */
+	public $mode_partie='';
+
+	/**
+	 * Identifiant d'une boucle qui appelle celle-ci de manière récursive
+	 *
+	 * Si une boucle est appelée de manière récursive quelque part par
+	 * une autre boucle comme <BOUCLE_rec(boucle_identifiant) />, cette
+	 * boucle (identifiant) reçoit dans cette propriété l'identifiant
+	 * de l'appelant (rec)
+	 */
+	var $externe = '';
 	// champs pour la construction de la requete SQL
 	var $select = array();
 	var $from = array();

@@ -10,21 +10,33 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Phraseur d'un squelette ayant une syntaxe SPIP/HTML 
+ *
+ * Ce fichier transforme un squelette en un tableau d'objets de classe Boucle
+ * il est chargé par un include calculé pour permettre différentes syntaxes en entrée
+ * 
+ * @package SPIP\Compilateur\Phraseur
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-# Ce fichier transforme un squelette en un tableau d'objets de classe Boucle
-# il est charge par un include calcule 
-# pour permettre differentes syntaxes en entree
-
+/** Début de la partie principale d'une boucle */
 define('BALISE_BOUCLE', '<BOUCLE');
+/** Fin de la partie principale d'une boucle */
 define('BALISE_FIN_BOUCLE', '</BOUCLE');
+/** Début de la partie optionnelle avant d'une boucle */
 define('BALISE_PRE_BOUCLE', '<B');
+/** Fin de la partie optionnelle après d'une boucle */
 define('BALISE_POST_BOUCLE', '</B');
+/** Fin de la partie alternative après d'une boucle */
 define('BALISE_ALT_BOUCLE', '<//B');
 
+/** Indique un début de boucle récursive */
 define('TYPE_RECURSIF', 'boucle');
+/** Expression pour trouver le type de boucle (TABLE autre_table ?) */
 define('SPEC_BOUCLE','/\s*\(\s*([^\s?)]+)(\s*[^)?]*)([?]?)\)/');
+/** Expression pour trouver un identifiant de boucle */
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
