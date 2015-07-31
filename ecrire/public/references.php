@@ -233,6 +233,12 @@ function calculer_balise_DEFAUT_dist($nom, $p) {
 // ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
 // mais on traite le vrai parametre si present.
 
+define('CODE_EXECUTER_BALISE', "executer_balise_dynamique('%s',
+	array(%s%s),
+	array(%s),
+	\$GLOBALS['spip_lang'],
+	%s)");
+
 // http://doc.spip.org/@calculer_balise_dynamique
 function calculer_balise_dynamique($p, $nom, $l) {
 
@@ -250,14 +256,12 @@ function calculer_balise_dynamique($p, $nom, $l) {
 		}
 	}
 	$collecte = join(',',collecter_balise_dynamique($l, $p, $nom));
-	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
-	  . $collecte
-	  . ($collecte ? $param : substr($param,1)) # virer la virgule
-	  . "),\n\tarray("
-	  . argumenter_balise($p->param, "', '")
-	  . "), \$GLOBALS['spip_lang'],"
-	  . $p->ligne
-	  . ')';
+	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
+		$collecte,
+		($collecte ? $param : substr($param,1)), # virer la virgule
+		argumenter_balise($p->param, "', '"),
+		$p->ligne);
+
 	$p->interdire_scripts = false;
 	$p->fonctions = array();
 	$p->param = array();
