@@ -321,8 +321,10 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	
 	// Si on est inclus en POST, il faut ajouter les variables _POST dans
 	// le contexte inclus, sinon les formulaires ne marchent pas...
-	if ($_SERVER['REQUEST_METHOD'] == 'POST')
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		include_local('inc-calcul.php3');
 		$contexte_inclus = array_merge(calculer_contexte(), $contexte_inclus);
+	}
 
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
