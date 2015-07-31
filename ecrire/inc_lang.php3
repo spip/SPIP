@@ -48,14 +48,14 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
 
 	if (_DIR_RESTREINT AND _FILE_CONNECT AND $fichier_lang_exists) {
-	  $ficher_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
-	  $fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($ficher_cache) : false;
+	  $fichier_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
+	  $fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($fichier_cache) : false;
 
-	  if (!$forcer AND $ficher_cache_time
-		AND ($ficher_cache_time > @filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
-		AND ($ficher_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
+	  if (!$forcer AND $fichier_cache_time
+		AND ($fichier_cache_time > @filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
+		AND ($fichier_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			if (lire_fichier($ficher_cache,	$contenu, array('phpcheck' => 'oui'))) {
+			if (lire_fichier($fichier_cache,	$contenu, array('phpcheck' => 'oui'))) {
 				eval ('?'.'>'.$contenu);
 				return;
 			}
