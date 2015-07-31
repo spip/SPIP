@@ -279,7 +279,7 @@ include(_DIR_INCLUDE . 'inc_utils.php');
 $spip_version = 1.906;
 
 // version de spip
-$spip_version_affichee = "1.9 alpha";
+$spip_version_affichee = "1.9 alpha 2";
 
 // appliquer le cookie_prefix
 if ($cookie_prefix != 'spip') {

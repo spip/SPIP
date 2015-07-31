@@ -62,24 +62,10 @@ function include_fonction($nom) {
 		return $f;
 	else {
 	  spip_log("fonction $nom indisponible" .
-		   ($inc ? "" : "(aucun fichier inc_$f disponible)"));
+		   ($inc ? "" : "(aucun fichier exec_$f disponible)"));
 	  exit;
 	}
 }
-
-// a supprimer apres renommage php / php3
-
-function include_rustine($inc)
- {
-	$f = _DIR_INCLUDE . ($inc . _EXTENSION_PHP);
-	if (is_readable($f)) {
-	  if (!$GLOBALS['included_files'][$inc]++)
-	    {include($f); return true;}
-	}
-	return;
-}
-
-
 
 // un pipeline est lie a une action et une valeur
 // chaque element du pipeline est autorise a modifier la valeur
@@ -704,12 +690,11 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
 function generer_url_public($script, $args="", $no_entities=false) {
 	
-	$site = url_de_base();
-
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
-	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
 
-	return $site . $script . $ext . $args;
+	$ext = (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+
+	return url_de_base() . $script . $ext . $args;
 }
 
 function generer_url_action($script, $args="", $no_entities=false) {
