@@ -438,6 +438,10 @@ function spip_mysql_delete($table, $where='') {
 	spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''));
 }
 
+function spip_mysql_replace($table, $values, $keys=array()) {
+	return spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')');
+}
+
 // http://doc.spip.org/@spip_mysql_multi
 function spip_mysql_multi ($objet, $lang) {
 	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".

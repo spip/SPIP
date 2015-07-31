@@ -108,11 +108,9 @@ function import_collecte($desc)
 // http://doc.spip.org/@import_replace
 function import_replace($values, $table, $desc, $request, $atts='') {
 	if (!isset($desc['field']['impt'])) {// pas de champ de gestion d'import
-		if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
+		if (!spip_abstract_replace($table, $values, $desc))
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
-	  }
-	}
-	else {
+	} else {
 		// la table contient un champ 'impt' qui permet de gerer des interdiction d'overwrite par import
 		// impt=oui : la ligne est surchargeable par import
 		// impt=non : la ligne ne doit pas etre ecrasee par un import
@@ -146,7 +144,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 				}
 			}
 			else{
-				spip_query("INSERT $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')');
+			  spip_abstract_insert($table, join(',',array_keys($values)), join(',',array_map('_q', $values)));
 			}
 		}
 	}
