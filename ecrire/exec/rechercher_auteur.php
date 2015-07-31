@@ -32,7 +32,7 @@ function exec_rechercher_auteur_dist()
 		$where= ("(nom LIKE " . join(" AND nom LIKE ", $where) . ")");
 	}
 
-	$q = spip_query("SELECT * FROM spip_auteurs WHERE $where ORDER BY nom");
+	$q = sql_select("*", "spip_auteurs", "$where", "", "nom");
 	include_spip('inc/selectionner_auteur');
 	ajax_retour(selectionner_auteur_boucle($q, $idom));
 }

@@ -206,14 +206,14 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. '</div><br />';
 
 	//// Documents associes
-	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
+	$res = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document'", "", "docs.id_document");
 
 	$documents_lies = array();
 	while ($row = sql_fetch($res))
 		$documents_lies[]= $row['id_document'];
 
 	//// Images sans documents
-	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='image' ORDER BY docs.id_document");
+	$images_liees = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l "."", "l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='image'", "", "docs.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
 	while ($doc = sql_fetch($images_liees)) {

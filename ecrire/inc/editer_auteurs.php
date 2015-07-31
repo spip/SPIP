@@ -160,7 +160,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 	else {
 		$ids = preg_replace('/[^0-9,]/','',$ids); // securite
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($ids) ORDER BY nom");
+		$result = sql_select("*", "spip_auteurs", "id_auteur IN ($ids)", "", "nom");
 
 		$res = "<b>"
 		. _T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))

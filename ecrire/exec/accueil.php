@@ -234,7 +234,7 @@ function personnel_accueil($coockcookie)
 
 	if (count($connect_id_rubrique)) {
 
-		$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
+		$q = sql_select("R.id_rubrique, R.titre, R.descriptif", "spip_rubriques AS R, spip_auteurs_rubriques AS A", "A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique", "", "titre");
 
 		$rubs = array();
 		while ($r = sql_fetch($q)) {

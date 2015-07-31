@@ -84,7 +84,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   }
   else if (count($resultat) < 16) {
     $res = '';
-    $query = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (" . join(',', $resultat) . ") ORDER BY nom");
+    $query = sql_select("*", "spip_auteurs", "id_auteur IN (" . join(',', $resultat) . ")", "", "nom");
 
     while ($row = sql_fetch($query)) {
       $id_auteur = $row['id_auteur'];

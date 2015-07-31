@@ -592,7 +592,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 			 OR ($statut=="publie" AND $id_parent > 0))) {
 		  $res .= afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg);
 
-		  $res .= afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . " ORDER BY date_heure"), $retour, $arg, $controle_id_article);
+		  $res .= afficher_forum(sql_select("*", "spip_forum", "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . "", "", "date_heure"), $retour, $arg, $controle_id_article);
 		}
 		$thread[$compteur_forum]++;
 	}

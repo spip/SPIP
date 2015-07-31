@@ -131,7 +131,7 @@ function choix_rubriques_admin_restreint($auteur) {
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	$result = spip_query("SELECT rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
+	$result = sql_select("rubriques.id_rubrique, " . sql_multi ("titre", $spip_lang) . "", "spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques", "lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique", "", "multi");
 
 	$restreint = (sql_count($result) > 0);
 
