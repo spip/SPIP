@@ -40,6 +40,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		base_serial(&$GLOBALS['tables_principales']);
 		$infos_tables = pipeline('declarer_tables_objets_sql',array(
 			'spip_articles'=> array(
+				'page'=>'article',
 				'texte_retour' => 'icone_retour_article',
 				'texte_modifier' => 'icone_modifier_article',
 				'texte_objets' => 'info_articles_2',
@@ -57,6 +58,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				),
 			),
 			'spip_auteurs' => array(
+				'page'=>'auteur',
 				'texte_retour' => 'icone_retour',
 				'texte_modifier' => 'admin_modifier_auteur',
 				'texte_objets' => 'icone_auteurs',
@@ -69,6 +71,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				),
 			),
 			'spip_rubriques' => array(
+				'page'=>'rubrique',
 				'url_voir' => 'naviguer',
 				'url_edit' => 'rubriques_edit',
 				'texte_retour' => 'icone_retour',
@@ -181,6 +184,11 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	// et dans une boucle {editable=oui}
 	if (!isset($infos['editable'])) $infos['editable'] = 'oui';
 	$infos['editable'] = (($infos['editable'] AND $infos['editable']!='non')?'oui':false);
+
+	// les urls publiques sont par defaut page=type pour les tables principales, et rien pour les autres
+	// seules les exceptions sont donc a declarer
+	if (!isset($infos['page']))
+		$infos['page'] = ($infos['principale']?$infos['type']:'');
 
 	if (!isset($infos['url_voir']))
 		$infos['url_voir'] = $infos['type'];

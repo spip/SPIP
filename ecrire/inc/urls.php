@@ -115,10 +115,22 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
  * @return string/array
  */
 function urls_liste_objets($preg = true){
-	$url_objets = pipeline('declarer_url_objets',array('article','rubrique','auteur'));
+	static $url_objets = null;
+	if (is_null($url_objets)){
+		$url_objets = array();
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach($tables_objets as $t=>$infos){
+			if ($infos['page']) {
+				$tables_objets[] = $infos['type'];
+				$tables_objets = array_merge($tables_objets,$infos['type_surnoms']);
+			}
+		}
+		$url_objets = pipeline('declarer_url_objets',$url_objets);
+	}
 	if (!$preg) return $url_objets;
-	$url_objets = implode('|',array_map('preg_quote',$url_objets));
-	return $url_objets;
+	return implode('|',array_map('preg_quote',$url_objets));
 }
 
 /**
