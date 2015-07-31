@@ -503,7 +503,7 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $url='', $nb_a
 				. "&"
 				. $tmp_var
 				. '='
-				. $deb
+				. ($deb-1)
 				. "','"
 				. $tmp_var
 				. '\');"';
@@ -816,7 +816,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	} else 	$tranches = '';
 
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 
 			if ($afficher_trad) echo "<div id='$div_trad'>";
 			echo "<div style='height: 12px;'></div>";
@@ -872,7 +872,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	echo afficher_liste_fin_tableau();
 	echo "</div>";
 		
-	if (!$deb_aff) {
+	if (!_request("var_ajaxcharset")) {
 			echo "</div>";
 			if ($afficher_trad) echo "</div>";
 			
