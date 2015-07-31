@@ -163,10 +163,6 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 
 	$form = afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 
-	// n'envoyer que le formulaire (et sa reponse) si on est appele par ajax
-	if ($flag_editable === 'ajax')
-		return '<div>' . $reponse . $form . '</div>';
-
 	// Envoyer titre + div-id + formulaire + fin
 	if ($flag_editable){
 		if ($visible)
@@ -175,10 +171,17 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 			$bouton =  bouton_block_invisible("lesmots");
 	} else $bouton = '';
 
-	return debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton._T('titre_mots_cles').aide ("artmots"))
-		. "\n<div id='editer_mot-$id_objet'>".$reponse.$form."</div>"
-		. fin_cadre_enfonce(true);
+	$bouton .= _T('titre_mots_cles').aide ("artmots");
 
+	$res =  '<div>&nbsp;</div>' // place pour l'animation pendant Ajax
+	. debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
+	  . $reponse
+	  . $form
+	  . fin_cadre_enfonce(true);
+
+	return ($flag_editable === 'ajax') 
+	  ? $res
+	  : "\n<div id='editer_mot-$id_objet'>$res</div>";
 }
 
 // http://doc.spip.org/@inserer_mot

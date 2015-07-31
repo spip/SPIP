@@ -46,22 +46,22 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 
  if ($cherche_auteur) {
 
-	$res ="<p align='$spip_lang_left'>"
+	$reponse ="<p align='$spip_lang_left'>"
 	. debut_boite_info(true)
 	. rechercher_auteurs_articles($cherche_auteur, $ids,  $id_article);
 
 	if ($bouton_creer_auteur) {
 
-		$res .="<div style='width: 200px;'>"
+		$reponse .="<div style='width: 200px;'>"
 		. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=" . rawurlencode($cherche_auteur). "&redirect=" . generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
 		. "</div> ";
 
 		$bouton_creer_auteur = false;
 	}
 
-	$res .= fin_boite_info(true)
+	$reponse .= fin_boite_info(true)
 	. '</p>';
- } else $res ='';
+ } else $reponse ='';
 
 //
 // Afficher les auteurs
@@ -74,43 +74,46 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 		$les_auteurs[]= $row['id_auteur'];
 
 	if ($les_auteurs = join(',', $les_auteurs)) 
-		$res .= afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs);
+		$reponse .= afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs);
 
 //
 // Ajouter un auteur
 //
 
+ $res = '';
  if ($flag_editable AND $options == 'avancees') {
-	if ($flag_editable!=='ajax')
-		$res .= debut_block_invisible("auteursarticle");
 
-	$ajouter = "";
 	if ($bouton_creer_auteur) {
 
-		$ajouter = "<div style='width:170px;'><span class='verdana1'><b>"
+		$res = "<div style='width:170px;'><span class='verdana1'><b>"
 		. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
 		. "</b></span></div>\n";
 	}
 
-	$res .= "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
+	$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
 	. ajouter_auteurs_articles($id_article, $les_auteurs, $bouton_creer_auteur)
 	."</div>\n"
-	. $ajouter;
-	if ($flag_editable!=='ajax')
-		$res .= fin_block();
+	. $res;
+
  }
- 
- if ($flag_editable === 'ajax') return $res;
 
- $bouton = (($flag_editable AND $options == 'avancees')
-	    ? bouton_block_invisible("auteursarticle")
-	    : '')
+ $bouton = (!$flag_editable
+	    ? ''
+	    : bouton_block_invisible("auteursarticle"))
  . _T('texte_auteurs')
- . aide("artauteurs");
+. aide("artauteurs");
 
- return  debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
- . "\n<div id='editer_auteurs-$id_article'>$res</div>"
+ $res =  '<div>&nbsp;</div>' // place pour l'animation pendant Ajax
+ . debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
+ . $reponse
+ . debut_block_invisible("auteursarticle")
+ . $res
+ . fin_block()
  . fin_cadre_enfonce(true);
+
+ return ($flag_editable === 'ajax') 
+ ? $res
+ : "\n<div id='editer_auteurs-$id_article'>$res</div>";
 }
 
 // http://doc.spip.org/@rechercher_auteurs_articles

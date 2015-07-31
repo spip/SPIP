@@ -167,7 +167,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
-	langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad,  $trad_err);
+	echo formulaire_traductions($id_article, $flag_editable, $id_rubrique, $id_trad,  $trad_err);
   }
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -604,11 +604,8 @@ function formulaire_dater($id_article, $flag_editable, $statut_article, $date, $
     : "<div id='dater-$id_article'>$res</div>";
 }
 
-
-// http://doc.spip.org/@langues_articles
-function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err)
+function formulaire_traductions($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err)
 {
-
 	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
 
 	$langue_article = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
@@ -622,12 +619,10 @@ function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $
 	if ($langue_article)
 		$titre_barre .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
-	debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
-
+	$res = debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
 
 	// Choix langue article
 	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $flag_editable) {
-		echo debut_block_invisible('languesarticle');
 
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
@@ -637,17 +632,17 @@ function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $
 		if (!$langue_article)
 			$langue_article = $langue_parent;
 
-		debut_cadre_couleur();
-		echo "<div style='text-align: center;' id='instituer_langue_article-$id_article'>",
-			menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer_langue_article', "$id_article-$id_rubrique","articles","id_article=$id_article")),
-			"</div>\n";
-		fin_cadre_couleur();
-
-		echo fin_block();
+		$res .= debut_block_invisible('languesarticle')
+		. debut_cadre_couleur('',true)
+		. "<div style='text-align: center;' id='instituer_langue_article-$id_article'>"
+		.  menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer_langue_article', "$id_article-$id_rubrique","articles","id_article=$id_article"))
+		. "</div>\n"
+		. fin_cadre_couleur(true)
+		. fin_block();
 	}
 
 	if ($trad_err)
-		echo "<div><font color='red' size='2' face='verdana,arial,helvetica,sans-serif'>"._T('trad_deja_traduit'). "</font></div>";
+		$res .= "<div><font color='red' size='2' face='verdana,arial,helvetica,sans-serif'>"._T('trad_deja_traduit'). "</font></div>";
 
 		// Afficher la liste des traductions
 	$table = !$id_trad ? array() : articles_traduction($id_article, $id_trad);
@@ -655,59 +650,55 @@ function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $
 		// bloc traductions
 	if (count($table) > 0) {
 
-			echo "<div class='liste'>";
-			bandeau_titre_boite2(_T('trad_article_traduction'),'');
-			echo "<table width='100%' cellspacing='0' border='0' cellpadding='2'>";
+		$largeurs = array(7, 12, '', 100);
+		$styles = array('', '', 'arial2', 'arial2');
 
-			$largeurs = array(7, 12, '', 100);
-			$styles = array('', '', 'arial2', 'arial2');
-			echo afficher_liste ($largeurs, $table, $styles);
-			echo "</table>";
-			echo "</div>";
+		$res .= "<div class='liste'>"
+		. bandeau_titre_boite2(_T('trad_article_traduction'),'', 'white', 'black', false)
+		. "<table width='100%' cellspacing='0' border='0' cellpadding='2'>"
+		. afficher_liste ($largeurs, $table, $styles)
+		. "</table>"
+		. "</div>";
 	}
 
 	// changer les globales $dir_lang etc
 	changer_typo($langue_article);
 
-	echo debut_block_invisible('lier_traductions');
-
-	echo "<table width='100%'><tr>";
+	$res .= debut_block_invisible('lier_traductions')
+	. "<table width='100%'><tr>";
 
 	if ($flag_editable AND $options == "avancees" AND !$table) {
 			// Formulaire pour lier a un article
-			echo "<td class='arial2' width='60%'>";
-
-			echo redirige_action_auteur("editer_article",
+		$res .= "<td class='arial2' width='60%'>"
+		. redirige_action_auteur("editer_article",
 				$id_article,
 				'articles',
 				"id_article=$id_article",
 				(_T('trad_lier') .
 					 "<div align='$spip_lang_right'>\n<input type='text' class='fondl' name='lier_trad' size='5' />\n<input type='submit' VALUE='"._T('bouton_valider')."' CLASS='fondl' /></div>"),
-				" method='post' style='margin:0px; padding:0px;'");
-
-			echo "</td>\n";
-			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
-			echo "<td background='' width='10'> &nbsp; </td>";
+				" method='post' style='margin:0px; padding:0px;'")
+		. "</td>\n"
+		. "<td background='' width='10'> &nbsp; </td>"
+		. "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td background='' width='10'> &nbsp; </td>";
 	}
 
-	echo "<td>";
-	icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif");
-	echo "</td>";
+	$res .= "<td>"
+	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
+	. "</td>";
 	if ($flag_editable AND $options == "avancees" AND $table) {
-			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
-			echo "<td background='' width='10'> &nbsp; </td>";
-			echo "<td>";
-			icone_horizontale(_T('trad_delier'), redirige_action_auteur("supprimer_traduction","$id_article-$id_trad",'articles',	"id_article=$id_article"), "traductions-24.gif", "supprimer.gif");
-			echo "</td>\n";
+			$res .= "<td background='' width='10'> &nbsp; </td>";
+			$res .= "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
+			$res .= "<td background='' width='10'> &nbsp; </td>";
+			$res .= "<td>";
+			$res .= icone_horizontale(_T('trad_delier'), redirige_action_auteur("supprimer_traduction","$id_article-$id_trad",'articles',	"id_article=$id_article"), "traductions-24.gif", "supprimer.gif", false);
+			$res .= "</td>\n";
 	}
 
-	echo "</tr></table>";
-
-	echo fin_block();
-
-	fin_cadre_enfonce();
+	$res .= "</tr></table>"
+	. fin_block()
+	. fin_cadre_enfonce(true);
+	return $res;
 }
 
 
