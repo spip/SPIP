@@ -225,21 +225,7 @@ function articles_documents($type, $id)
 function boites_de_config_articles($id_article)
 {
 
-  $masque = pipeline('afficher_config_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>$masque));
- 
-	if (!$masque) return '';
-
-	$invite = "<b>"
-	. _T('bouton_forum_petition')
-	. aide('confforums')
-	. "</b>";
-
-	return
-		cadre_depliable("forum-interne-24.png",
-		  $invite,
-		  true,//$visible = strstr($masque, '<!-- visible -->')
-		  $masque,
-		  'forumpetition');
+  return pipeline('afficher_config_objet',array('args'=>array('type'=>'article','id'=>$id_article),'data'=>''));
 }
 
 // http://doc.spip.org/@boite_article_virtuel
