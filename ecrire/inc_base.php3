@@ -455,6 +455,17 @@ function creer_base() {
 	// Pre-remplissage de la base
 	//
 	remplir_type_documents();
+
+	//
+	// reglages par defaut
+	//
+
+	include_ecrire("inc_meta.php3");
+
+	if (! lire_meta('post_dates'))
+		ecrire_meta('post_dates', 'non');	// ne pas publier les post-dates
+
+	ecrire_metas();
 }
 
 

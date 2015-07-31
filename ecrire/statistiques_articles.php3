@@ -33,7 +33,7 @@ if ($row = mysql_fetch_array($result)) {
 }
 
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-if ($activer_statistiques_ref == "oui"){
+if ($activer_statistiques_ref != "non"){
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	if ($critere == "visites" OR !$critere) echo "[<b>par nombre de visites</b>] " ;
 		else  echo "[<a href='statistiques_articles.php3'>par nombre de visites</a>] ";
