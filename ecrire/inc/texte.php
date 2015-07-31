@@ -506,6 +506,11 @@ function typo($letexte, $echapper=true, $connect=null) {
 
 // Correcteur typographique
 
+define('_TYPO_PROTEGER', "!':;?~%-");
+define('_TYPO_PROTECTEUR', "\x1\x2\x3\x4\x5\x6\x7\x8");
+
+define('_TYPO_BALISE', ",</?[a-z!][^<>]*[".preg_quote(_TYPO_PROTEGER)."][^<>]*>,imsS");
+
 // http://doc.spip.org/@corriger_typo
 function corriger_typo($letexte, $lang='') {
 
@@ -521,53 +526,56 @@ function corriger_typo($letexte, $lang='') {
 
 	if (!$lang) $lang = lang_typo();
 	$typo2 = '';
+	$typographie = charger_fonction($lang, 'typographie');
 
-	if ($typographie = charger_fonction($lang, 'typographie')) {
-
-		// Proteger les caracteres typographiques a l'interieur des tags html
-		$protege = "!':;?~%-";
-		$illegal = "\x1\x2\x3\x4\x5\x6\x7\x8";
-		if (preg_match_all(',</?[a-z!][^<>]*['.preg_quote($protege).'][^<>]*>,imsS',
-		$letexte, $regs, PREG_SET_ORDER)) {
-			foreach ($regs as $reg) {
-				$insert = $reg[0];
-				// hack: on transforme les caracteres a proteger en les remplacant
-				// par des caracteres "illegaux". (cf corriger_caracteres())
-				$insert = strtr($insert, $protege, $illegal);
-				$letexte = str_replace($reg[0], $insert, $letexte);
-			}
+	// Proteger les caracteres typographiques a l'interieur des tags html
+	if ($typographie AND preg_match_all(_TYPO_BALISE, $letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, $protege, $illegal);
+			$letexte = str_replace($reg[0], $insert, $letexte);
 		}
-
-		// trouver les blocs multi
-		if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
-			foreach ($regs as $reg) {
-				// chercher la version de la langue courante
-				$trads = extraire_trads($reg[1]);
-				$l = multi_trads($trads, $lang);
-				if ($l)
-					$trad = $trads[$l];
-				else {
-				  // langue absente, prendre la premiere dispo
-				  // mais typographier le texte 
-				  // selon les regles de celle-ci si definies
-					$l = key($trads);
-					$trad = $trads[$l];
-					if ($typo2 = charger_fonction($l, 'typographie', true)) {
-						$trad = $typo2($trad);
-						$trad = code_echappement($trad, 'multi');
-					}
-				}
-				$letexte = str_replace($reg[0], $trad, $letexte);
-			}
-		}
-
-		$letexte = $typographie($letexte);
-
-		// Retablir les caracteres proteges
-		$letexte = strtr($letexte, $illegal, $protege);
-		// et les citations en un autre langue
-		if ($typo2!=='') $letexte = echappe_retour($letexte, 'multi');
 	}
+
+	// simplifier les blocs multi,
+	// et si la selection est differente de la langue de l'objet, 
+	// (langue de l'objet absente du multi ou langue imposee par forcer_lang)
+	// la typographier selon les regles de celle trouvee si definies
+
+	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			// chercher la version de la langue du contexte
+			// (= lang_typo() sauf parfois avec forcer_lang = true)
+			$trads = extraire_trads($reg[1]);
+			$l = multi_trads($trads, $GLOBALS['spip_lang']);
+			if ($l) {
+				$trad = $trads[$l];
+				if ($lang != $GLOBALS['spip_lang']
+				AND $typo2 = charger_fonction($GLOBALS['spip_lang'], 'typographie', true)) {
+					$trad = $typo2($trad);
+					$trad = code_echappement($trad, 'multi');
+				}  
+			} else {
+				// langue absente, prendre la premiere dispo
+				$l = key($trads);
+				$trad = $trads[$l];
+				if ($typo2 = charger_fonction($l, 'typographie', true)) {
+					$trad = $typo2($trad);
+					$trad = code_echappement($trad, 'multi');
+				}
+			}
+			$letexte = str_replace($reg[0], $trad, $letexte);
+		}
+	}
+
+	if ($typographie) $letexte = $typographie($letexte);
+
+	// Retablir les caracteres proteges
+	$letexte = strtr($letexte, $illegal, $protege);
+	// et les citations en d'autres langues
+	if ($typo2!=='') $letexte = echappe_retour($letexte, 'multi');
 
 	$letexte = pipeline('post_typo', $letexte);
 
@@ -576,7 +584,6 @@ function corriger_typo($letexte, $lang='') {
 
 	return $letexte;
 }
-
 
 
 //
