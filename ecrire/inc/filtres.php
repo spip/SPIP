@@ -2377,6 +2377,8 @@ function f_compacte_head($flux){
 		if (extraire_attribut($s, 'rel') === 'stylesheet'
 		AND (!($type = extraire_attribut($s, 'type'))
 			OR $type == 'text/css')
+		AND is_null(extraire_attribut($s, 'name')) # css nommee : pas touche
+		AND is_null(extraire_attribut($s, 'id'))   # idem
 		AND !strlen(strip_tags($s))
 		AND $src = extraire_attribut($s, 'href')
 		AND (
