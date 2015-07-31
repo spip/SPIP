@@ -32,7 +32,7 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $focus, $id) = $args;
 	include_spip('inc/autoriser');
-	return autoriser('inscrire', $mode, $id) ? $args : false;
+	return autoriser('inscrireauteur', $mode, $id) ? $args : false;
 }
 
 ?>
