@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuler',
 	'antispam_champ_vide' => 'Veuillez laisser ce champ vide :',
 	'articles_recents' => 'Articles les plus récents',
+	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans dans votre saisie, veuillez vérifier les informations.',
 	'avis_archive_incorrect' => 'le fichier archive n’est pas un fichier SPIP',
 	'avis_archive_invalide' => 'le fichier archive n’est pas valide',
 	'avis_attention' => 'ATTENTION !',
@@ -41,7 +42,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Erreur SQL',
 	'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d’accès à l’espace privé',
-	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans dans votre saisie, veuillez vérifier les informations.',
 	'avis_nb_erreurs_saisie' => 'Il y a @nb@ erreurs dans votre saisie, veuillez vérifier les informations.',
 
 	// B
