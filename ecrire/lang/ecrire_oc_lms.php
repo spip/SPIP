@@ -200,7 +200,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -320,7 +320,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'uei:',
@@ -430,6 +430,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
  dins l\'espaci public dau sit (forums emb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas daus imatges',
 'info_gerer_trad' => 'Gerir los liams de revirada?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grop important',
 'info_hebergeur_desactiver_envoi_email' => 'Quauques auberjadors desactivan l\'enviament automatic
  d\'e-mails dempuei lors servidors. En queu cas, las foncionalitats seguentas
@@ -495,6 +496,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_multi_cet_article' => 'Lenga de queste article:',
 'info_multi_langues_choisies' => 'Volhatz seleccionar &ccedil;ai sos las lengas que son a posita daus redactors de v&ograve;stre sit.
   Las lengas ja emplejadas dins v&ograve;stre sit (afichadas primieras) se p&ograve;den pas desactivar.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... nonm&agrave;s per las rubricas a la rai&ccedil; dau sit?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -702,6 +704,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_tout_site6' => '<b>Atencion:</b> sonque los articles originaus s\'afichan.
 Las reviradas s\'ass&ograve;cian a l\'originau,
 una color indica lor estat:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabalh collaboratiu subre los articles',
 'info_un_article' => 'un article, ',
 'info_un_mot' => 'Nonm&agrave;s un mot au c&ograve;p',
@@ -1307,9 +1310,9 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_article_inexistant' => 'I a brisa d\'article que p&ograve;rte queu numero.',
 'trad_article_traduction' => 'Totas las versions de quel article:',
 'trad_deja_traduit' => 'Quel article ja es una revirada de l\'article present.',
-'trad_delier' => 'Pas mai liar queste article a sas reviradas ',
+'trad_delier' => 'Pas mai liar queste article a sas reviradas ', # MODIF
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
-'trad_new' => 'Escriure una revirada novela de queste article',
+'trad_new' => 'Escriure una revirada novela de queste article', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichier ZIP',

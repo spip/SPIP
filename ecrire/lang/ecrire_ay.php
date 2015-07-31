@@ -207,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'nayriri',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -335,7 +335,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'jichh&uuml;ru:',
@@ -448,6 +448,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
 'info_gauche_visiteurs_enregistres' => 'Akanxa jach\'a qamaw utan qillqatanakakiw jikxatasi (aruskipa&ntilde;awinak qillqayasiyampi)',
 'info_generation_miniatures_images' => 'G&eacute;n&eacute;ration de miniatures des images', # NEW
 'info_gerer_trad' => '&iquest;Jaqukiptaw chinunak apnaqa&ntilde;a?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Wakiskir qutu',
 'info_hebergeur_desactiver_envoi_email' => 'Certains h&eacute;bergeurs d&eacute;sactivent l\'envoi automatique de
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes
@@ -513,6 +514,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
 'info_multi_cet_article' => 'Langue de cet article&nbsp;:', # NEW
 'info_multi_langues_choisies' => 'Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.', # NEW
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activer le menu de langue sur les rubriques&nbsp;?', # NEW
 'info_multi_secteurs' => '... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?', # NEW
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -721,6 +723,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.</p>', # NEW
 'info_tout_site6' => '<b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
 Les traductions sont associ&eacute;es &agrave; l\'original,
 dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travail collaboratif sur les articles', # NEW
 'info_un_article' => 'un article,', # NEW
 'info_un_mot' => 'Un seul mot &agrave; la fois', # NEW
@@ -1320,9 +1323,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce num&eacute;ro.', # NEW
 'trad_article_traduction' => 'Toutes les versions de cet article&nbsp;:', # NEW
 'trad_deja_traduit' => 'Erreur : impossible de relier cet article au num&eacute;ro demand&eacute;. ', # NEW
-'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions', # NEW
+'trad_delier' => 'Ne plus lier &agrave; ces traductions', # NEW
 'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:', # NEW
-'trad_new' => '&Eacute;crire une nouvelle traduction de cet article', # NEW
+'trad_new' => '&Eacute;crire une nouvelle traduction', # NEW
 
 // U
 'upload_fichier_zip' => 'Fichier ZIP', # NEW

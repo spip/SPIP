@@ -231,7 +231,7 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -354,7 +354,7 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Zordi&nbsp;:',
@@ -466,6 +466,7 @@ n&eacute;s&eacute;ser pou sanz inn siz&eacute; sir lo sit.', # MODIF
 'info_gauche_visiteurs_enregistres' => 'Ou va trouv t&egrave;rla bann vizit&egrave;r anroziztr&eacute; sir figirw&egrave;b piblik (bann forom sir labonman).',
 'info_generation_miniatures_images' => 'La kr&eacute;asyon bann miniatyr pou bann zimaz',
 'info_gerer_trad' => 'Zot i v&eacute; z&egrave;r bann gatir pou bann tradiksyon ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Group larz',
 'info_hebergeur_desactiver_envoi_email' => 'Nana d&eacute;sertin l&eacute;b&egrave;rz&egrave;r sak i d&eacute;falk lanvwa otomatik do bann lim&egrave;l, dopwi
 zot bann serv&egrave;r. Dann ka-la, bann  fonksyonalit&eacute;
@@ -532,6 +533,7 @@ fisy&eacute; SPIP.}}',
 'info_multi_langues_choisies' => 'Swazi anba-t&egrave;rla bann lang ou v&eacute; p&egrave;rm&egrave;t out bann zitilizat&egrave;r i ans&egrave;rv sir out sitw&egrave;b.
   Zot i p&eacute; pa d&eacute;gr&egrave;n bann lang sak l&eacute; d&eacute;za pr&eacute;zan sir out sitw&egrave;b (ni afis azot dabor).
  ',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'F&eacute; zw&eacute; lo m&eacute;ni-d&eacute;roul&egrave;r pou bann lang si bann ribrik&nbsp;?',
 'info_multi_secteurs' => '...s&egrave;lman pou bann ribrik ou la plas dann rasine&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -738,6 +740,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'info_tout_site6' => '<b>Tansyon pangar&nbsp;:</b> bann zartik lorizin s&egrave;lman l&eacute; afis&eacute;.
 Bann tradiksyon l&eacute; pr&eacute;zant&eacute; an gatiraz,
 sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'M&egrave;t ansamn travay si bann zartik',
 'info_un_article' => 'inn lartik,',
 'info_un_mot' => 'En sel mo a lafwa',
@@ -1290,9 +1293,9 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_article_inexistant' => 'Ni la pa trouv okin lartik i port zot nim&eacute;ro-la.',
 'trad_article_traduction' => 'Tout bann versyon lartik-la&nbsp;:',
 'trad_deja_traduit' => 'Lartik-la l&eacute; d&eacute;za inn tradiksyon li-minm.',
-'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
+'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon', # MODIF
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
-'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
+'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fisy&eacute; ZIP',

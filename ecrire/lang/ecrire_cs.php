@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -329,7 +329,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'dnes:',
@@ -450,6 +450,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
  ve ve&#345;ejn&eacute; &#269;&aacute;sti webu (diskusn&iacute; skupiny, do kter&yacute;ch je nutno se p&#345;ihl&aacute;sit).',
 'info_generation_miniatures_images' => 'Generov&aacute;n&iacute; n&aacute;hled&#367;',
 'info_gerer_trad' => 'Spr&aacute;va odkaz&#367; na p&#345;eklad?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'D&#367;le&#382;it&aacute; skupina',
 'info_hebergeur_desactiver_envoi_email' => 'N&#283;kte&#345;&iacute; poskytovatel&eacute; prostoru pro web (hostitel&eacute;)
   maj&iacute; vypnut&eacute; automatick&eacute; zas&iacute;l&aacute;n&iacute; email&#367; ze sv&yacute;ch server&#367;.
@@ -515,6 +516,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_multi_cet_article' => 'Jazyk &#269;l&aacute;nku:',
 'info_multi_langues_choisies' => 'D&aacute;le zvolte jazyk, kter&yacute; bude k dispozici redaktor&#367;m tohoto webu.
   Jazyky, kter&eacute; se ji&#382; v r&aacute;mci webu pou&#382;&iacute;vaj&iacute; (zobrazen&eacute; na po&#269;&aacute;tku), nelze vypnout.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Zapnout nab&iacute;dku nazyk&#367; v sekc&iacute;ch?',
 'info_multi_secteurs' => '... pouze u sekc&iacute; v ko&#345;enov&eacute;m adres&aacute;&#345;i?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -724,6 +726,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_tout_site6' => '<b>Pozor:</b> zobrazeny jsou pouze p&#367;vodn&iacute; &#269;l&aacute;nky.
 P&#345;eklady jsou spojeny s origin&aacute;lem a barva
 ukazuje jejich stav:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Spolupr&aacute;ce na &#269;l&aacute;nku',
 'info_un_article' => '&#269;l&aacute;nek, ',
 'info_un_mot' => 'Najednou pouze jedno slovo',
@@ -1303,9 +1306,9 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'trad_article_inexistant' => '&#268;l&aacute;nek tohoto &#269;&iacute;sla neexistuje.',
 'trad_article_traduction' => 'Dostupn&eacute; p&#345;eklady tohoto &#269;l&aacute;nku:',
 'trad_deja_traduit' => 'Chyba: tento &#269;l&aacute;nek nen&iacute; mo&#382;n&eacute; propojit s po&#382;adovan&yacute;m &#269;&iacute;slem',
-'trad_delier' => 'Tento &#269;l&aacute;nek nad&aacute;le s p&#345;eklady nespojovat',
+'trad_delier' => 'Tento &#269;l&aacute;nek nad&aacute;le s p&#345;eklady nespojovat', # MODIF
 'trad_lier' => 'Toto je p&#345;eklad &#269;l&aacute;nku &#269;&iacute;slo:',
-'trad_new' => 'Nov&#283; p&#345;elo&#382;it &#269;l&aacute;nek',
+'trad_new' => 'Nov&#283; p&#345;elo&#382;it &#269;l&aacute;nek', # MODIF
 
 // U
 'upload_fichier_zip' => 'Komprimovan&yacute; soubor ZIP',

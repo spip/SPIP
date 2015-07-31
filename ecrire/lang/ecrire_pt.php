@@ -206,7 +206,7 @@ ou da rede',
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -331,7 +331,7 @@ ou da rede',
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hoje&nbsp;:',
@@ -450,6 +450,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
  no espa&ccedil;o p&uacute;blico do s&iacute;tio (f&oacute;runs por assinatura).',
 'info_generation_miniatures_images' => 'Gera&ccedil;&atilde;o de miniaturas das imagens',
 'info_gerer_trad' => 'Gerir os v&iacute;nculos de tradu&ccedil;&atilde;o?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns servi&ccedil;os de hospedagem desactivam o envio autom&aacute;tico de
  mails a partir dos seus  servidores. Nesse caso, as seguintes
@@ -515,6 +516,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_multi_cet_article' => 'L&iacute;ngua deste artigo&nbsp;:',
 'info_multi_langues_choisies' => 'Favor seleccionar a seguir as l&iacute;nguas &agrave; disposi&ccedil;&atilde;o dos redactores do seu s&iacute;tio.
  As l&iacute;nguas j&aacute; utilizadas no seu s&iacute;tio (exibidas em primeiro lugar) n&atilde;o podem ser desactivadas.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar o menu de l&iacute;ngua sobre as rubricas&nbsp;? ',
 'info_multi_secteurs' => '... s&oacute; para as rubricas situadas na ra&iacute;z&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -725,6 +727,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_tout_site6' => '<b>Aten&ccedil;&atilde;o:</b> s&oacute; os artigos originais s&atilde;o mostrados.
 As tradu&ccedil;&otilde;es est&atilde;o associadas ao original,
 numa cor que indica o seu estado:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabalho colaborativo sobre os artigos',
 'info_un_article' => 'um artigo',
 'info_un_mot' => 'Uma &uacute;nica palavra de cada vez',
@@ -1323,9 +1326,9 @@ ao SPIP pesquisar igualmente no texto dos
 'trad_article_inexistant' => 'N&atilde;o h&aacute; artigo com este n&uacute;mero',
 'trad_article_traduction' => 'Todas as vers&otilde;es deste artigo&nbsp;:',
 'trad_deja_traduit' => 'Este artigo &eacute; j&aacute; uma tradu&ccedil;&atilde;o do presente artigo.', # MODIF
-'trad_delier' => 'N&atilde;o voltar a ligar este artigo a estas tradu&ccedil;&otilde;es',
+'trad_delier' => 'N&atilde;o voltar a ligar este artigo a estas tradu&ccedil;&otilde;es', # MODIF
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
-'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
+'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo', # MODIF
 
 // U
 'upload_fichier_zip' => 'Ficheiro ZIP',

@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Warning: your HTTP server\'s configuration ignores the @htaccess@ files. In order to guarantee a good security, you must modify the server\'s configuration concerning this matter, or you have to make sure that the constants @constantes@ (which could be defined in the file mes_options.php) have as their values directories outside @document_root@.',
+'htaccess_a_simuler' => 'Warning: your HTTP server\'s configuration ignores the @htaccess@ files. In order to guarantee a good security, you must modify the server\'s configuration concerning this matter, or you have to make sure that the constants @constantes@ (which could be defined in the file mes_options.php) have as their values directories outside @document_root@.', # MODIF
 'htaccess_inoperant' => 'inoperative htaccess',
 
 // I
@@ -328,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'There aren\'t any news items',
 'info_aucun_message' => 'There aren\'t any messages',
 'info_aucun_mot_cle' => 'There aren\'t any keywords',
-'info_aucun_rubrique' => 'There aren\'t any sections',
+'info_aucun_rubrique' => 'There aren\'t any sections', # MODIF
 'info_aucun_site' => 'There aren\'t any sites',
 'info_aucun_visiteur' => 'There aren\'t any visitors',
 'info_aujourdhui' => 'today:',
@@ -449,6 +449,7 @@ through an FTP access to the Web site.</p>',
 	in the public area of the site (forums by subscription).',
 'info_generation_miniatures_images' => 'Generation of thumbnail images',
 'info_gerer_trad' => 'Enable translation links?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Important group',
 'info_hebergeur_desactiver_envoi_email' => 'Some hosts disable automated mail sending
 		on their servers. In this case the following features
@@ -514,6 +515,7 @@ through an FTP access to the Web site.</p>',
 'info_multi_cet_article' => 'Language of this article:',
 'info_multi_langues_choisies' => 'Please select below the languages to be available to the editors of your site.
   Languages already used by your site (on top of the list) cannot be disabled.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Enable the language menu for the sections?',
 'info_multi_secteurs' => '... only for the sections located at the root?',
 'info_nb_articles' => '@nb@ articles',
@@ -722,6 +724,7 @@ through an FTP access to the Web site.</p>',
 'info_tout_site6' => '<b>Warning:</b> only original articles are displayed.
 The translations are associated with the original,
 in a colour indicating their status:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Collaborative work on articles',
 'info_un_article' => 'an article,',
 'info_un_mot' => 'One keyword at a time',
@@ -840,9 +843,9 @@ in a colour indicating their status:',
 'jour_non_connu_nc' => 'unknown',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Toolbar',
+'label_bando_outils_afficher' => 'Show the tools',
+'label_bando_outils_masquer' => 'Hide the tools',
 'label_choix_langue' => 'Choose your language',
 'label_slogan_site' => 'Website slogan',
 'label_taille_ecran' => 'Screen width',
@@ -1311,9 +1314,9 @@ you can perform searches on sites and
 'trad_article_inexistant' => 'There is no article with this number',
 'trad_article_traduction' => 'All the versions of this article:',
 'trad_deja_traduit' => 'Error: impossible to link this article to the requested number.',
-'trad_delier' => 'Stop linking this article to its translations',
+'trad_delier' => 'Stop linking this article to its translations', # MODIF
 'trad_lier' => 'This article is a translation of article number:',
-'trad_new' => 'Write a new translation of this article',
+'trad_new' => 'Write a new translation of this article', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP file',

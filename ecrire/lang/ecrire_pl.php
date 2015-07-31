@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'oryginalny',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -328,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'dzi&#347;:',
@@ -449,6 +449,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  w strefie publicznej strony (abonament forum).',
 'info_generation_miniatures_images' => 'Generowanie miniaturek obrazk&oacute;w',
 'info_gerer_trad' => 'Zarz&#261;dza&#263; linkami do przek&#322;adu?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Wa&#380;na grupa',
 'info_hebergeur_desactiver_envoi_email' => 'Niekt&oacute;re serwisy hostingowe wy&#322;&#261;czaj&#261; mo&#380;liwo&#347;&#263; automatycznego wywy&#322;ania
   emaili za po&#347;rednictwem ich serwer&oacute;w. W tym przypadku te funkcje
@@ -514,6 +515,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'J&#281;zyk tego artyku&#322;u:',
 'info_multi_langues_choisies' => 'Wybierz j&#281;zyki do dyspozycji redaktor&oacute;w twojej strony.
   J&#281;zyki ju&#380; u&#380;ywane na twojej stronie(wy&#347;wietlane na pocz&#261;tku) nie mog&#261; by&#263; wy&#322;&#261;czone.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'W&#322;&#261;cz menu j&#281;zykowe w dzia&#322;ach&nbsp;?',
 'info_multi_secteurs' => ' ... tylko dla dzia&#322;&oacute;w podstawowych&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -723,6 +725,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site5' => 'Artyku&#322; oryginalny.',
 'info_tout_site6' => '<b>Uwaga&nbsp;:</b> wy&#347;wietlone zosta&#322;y jedynie artyku&#322;y oryginalne.
 Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; koloru wskazuj&#261;cego na ich status&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Praca zespo&#322;owa nad artyku&#322;em',
 'info_un_article' => 'artyku&#322;,',
 'info_un_mot' => 'Jedno s&#322;owo kluczowe naraz',
@@ -1311,9 +1314,9 @@ wyszukiwania w do&#322;&#261;czonej stronie.', # MODIF
 'trad_article_inexistant' => 'Nie ma artyku&#322;u o tym numerze.',
 'trad_article_traduction' => 'Wszystkie wersje tego artyku&#322;u:',
 'trad_deja_traduit' => 'B&#322;&#261;d: nie mo&#380;na po&#322;&#261;czy&#263; tego artyku&#322;u z wybranym numerem.',
-'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
+'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem', # MODIF
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
-'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
+'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u', # MODIF
 
 // U
 'upload_fichier_zip' => 'Plik ZIP',

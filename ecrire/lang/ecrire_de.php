@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'ALLES l&ouml;schen',
 'bouton_envoi_message_02' => 'NACHRICHT SENDEN',
 'bouton_envoyer_message' => 'Nachricht fertig: Senden',
-'bouton_fermer' => 'Fermer', # NEW
+'bouton_fermer' => 'Schlie&szlig;en',
 'bouton_forum_petition' => 'FORUM + PETITION',
 'bouton_modifier' => '&Auml;ndern',
 'bouton_pense_bete' => 'PERS&Ouml;NLICHER MERKZETTEL',
@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'Original',
 
 // H
-'htaccess_a_simuler' => 'Achtung: Ihr HTTP-Server ist so konfiguriert, da&szlig; er @htaccess@ Dateien ignoriert. Eine sichere Konfiguration des Servers erzielen sie, indem sie diese Einstellung &auml;ndern, oder indem sie die @Konstanten@ in der Datei mes_options.php so setzen, da&szlig; die Verzeichnisse au&szlig;erhalb des @document_root@ liegen.',
+'htaccess_a_simuler' => 'Achtung: Ihr HTTP-Server ist so konfiguriert, da&szlig; er @htaccess@ Dateien ignoriert. Eine sichere Konfiguration des Servers erzielen sie, indem sie diese Einstellung &auml;ndern, oder indem sie die @Konstanten@ in der Datei mes_options.php so setzen, da&szlig; die Verzeichnisse au&szlig;erhalb des @document_root@ liegen.', # MODIF
 'htaccess_inoperant' => 'htaccess unwirksam',
 
 // I
@@ -305,15 +305,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_articles_trouves' => 'Gefundene Artikel',
 'info_articles_trouves_dans_texte' => 'Gefundene Artikel (im Text)',
 'info_attente_validation' => 'Ihre zur Ver&ouml;ffentlichung vorgeschlagenen Artikel',
-'info_aucun_article' => 'Aucun article', # NEW
-'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
-'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
-'info_aucun_message' => 'Aucun message', # NEW
-'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
-'info_aucun_site' => 'Aucun site', # NEW
-'info_aucun_visiteur' => 'Aucun visiteur', # NEW
+'info_aucun_article' => 'Kein Artikel',
+'info_aucun_article_syndique' => 'Kein syndizierter Artikel',
+'info_aucun_auteur' => 'Kein Autor',
+'info_aucun_breve' => 'Keine Meldung',
+'info_aucun_message' => 'Keine Nachricht',
+'info_aucun_mot_cle' => 'Kein Schlagwort',
+'info_aucun_rubrique' => 'Keine Rubrik', # MODIF
+'info_aucun_site' => 'Keine Website',
+'info_aucun_visiteur' => 'Kein Besucher',
 'info_aujourdhui' => 'heute: ',
 'info_auteur_message' => 'AUTOR DES BEITRAGS:',
 'info_auteurs' => 'Autoren',
@@ -419,6 +419,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_gauche_visiteurs_enregistres' => 'Hier sehen Sie die im &ouml;ffentlichen Bereich der Website angemeldeten Besucher (Teilnahme an Foren nur mit g&uuml;ltiger E-Mail Adresse).',
 'info_generation_miniatures_images' => 'Anlegen der Vorschaubilder',
 'info_gerer_trad' => '&Uuml;bersetzungslinks verwalten?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Wichtige Kategorie',
 'info_hebergeur_desactiver_envoi_email' => 'Manche ISPs verhindern den Versand von Mails mit PHP. Die Mailfunktionen von SPIP funktionieren dann nicht.',
 'info_hier' => 'Gestern:',
@@ -477,6 +478,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_multi_articles' => 'Sprachauswahl f&uuml;r Artikel aktivieren?',
 'info_multi_cet_article' => 'Dieser Artikel ist auf:&nbsp;',
 'info_multi_langues_choisies' => 'Bitte w&auml;hlen Sie hier die Sprachen aus, die den Redakteuren Ihrer Website zur Verf&uuml;gung stehen sollen. Die Sprachen, welche bereits in Ihrer Website verwendet werden (oben auf der Liste), k&ouml;nnen nicht abgeschaltet werden.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Sprachauswahl f&uuml;r Rubriken aktivieren?',
 'info_multi_secteurs' => '... nur f&uuml;r Rubriken der obersten Ebene?',
 'info_nb_articles' => '@nb@ Artikel',
@@ -584,7 +586,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_referencer_doc_distant' => 'Dokument im Internet verlinken:',
 'info_refuses' => 'Ihre abgelehnten Artikel',
 'info_reglage_ldap' => 'Optionen: <b>LDAP-Import Einstellungen</b>',
-'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
+'info_remplacer_mot' => '"@titre@" ersetzen',
 'info_renvoi_article' => '<b>Umleitung.</b> Dieser Artikel zeigt auf die Seite: ',
 'info_reserve_admin' => 'Nur Administratoren k&ouml;nnen diese Seite &auml;ndern.',
 'info_restauration_sauvegarde' => 'Wiederherstellung der Sicherung @archive@',
@@ -680,6 +682,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_tout_site6' => '<b>Achtung:</b> Nur die Originalartikel werden aufgelistet..
 Die &Uuml;bersetzungen entsprechen dem Original,
 in einer Farbe, die den Status anzeigt&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Gemeinsame Arbeit an den Artikeln',
 'info_un_article' => ' ein Artikel, ',
 'info_un_mot' => 'Nur ein Wort auf einmal',
@@ -798,9 +801,9 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'jour_non_connu_nc' => 'unbekannt',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Werkzeugleiste',
+'label_bando_outils_afficher' => 'Werkzeuge anzeigen',
+'label_bando_outils_masquer' => 'Werkzeuge ausblenden',
 'label_choix_langue' => 'Ihre Sprache w&auml;hlen',
 'label_slogan_site' => 'Slogan der Website',
 'label_taille_ecran' => 'Bildschirmbreite',
@@ -811,7 +814,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'ldap_correspondance_2' => 'Geben sie bitte f&uuml;r jedes der folgenden SPIP-Felder das entsprechende LDAP-Feld an. Leere Felder werden nicht genutzt, LDAP-Felder mit Leerzeichen oder Kommata trennen, um mehrere zu probieren. ',
 'lien_ajout_destinataire' => 'Empf&auml;nger hinzuf&uuml;gen',
 'lien_ajouter_auteur' => 'Autor hinzuf&uuml;gen',
-'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
+'lien_ajouter_mot' => 'Dieses Schlagwort hinzuf&uuml;gen',
 'lien_ajouter_participant' => 'Teilnehmer hinzuf&uuml;gen',
 'lien_email' => 'E-Mail',
 'lien_forum_public' => '&Ouml;ffentliches Forum f&uuml;r diesen Artikel verwalten',
@@ -824,7 +827,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'lien_reponse_rubrique' => 'Antwort auf Rubrik',
 'lien_reponse_site_reference' => 'Antwort auf verlinkte Website:',
 'lien_retirer_auteur' => 'Autor entfernen',
-'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+'lien_retirer_tous_auteurs' => 'Alle Autoren entfernen',
 'lien_retrait_particpant' => 'Teilnehmer entfernen',
 'lien_site' => 'Website',
 'lien_supprimer_rubrique' => 'Rubrik l&ouml;schen',
@@ -1110,8 +1113,8 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_admin_effacer' => 'Wartung',
 'titre_admin_tech' => 'Wartung',
 'titre_admin_vider' => 'Wartung',
-'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
+'titre_ajouter_un_auteur' => 'Autor hinzuf&uuml;gen',
+'titre_ajouter_un_mot' => 'Schlagwort hinzuf&uuml;gen',
 'titre_articles_syndiques' => 'Syndizierte Artikel dieser Website',
 'titre_breves' => 'Meldungen',
 'titre_cadre_afficher_article' => 'Artikel anzeigen',
@@ -1203,9 +1206,9 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_article_inexistant' => 'Es gibt keinen Artikel mit dieser Nummer.',
 'trad_article_traduction' => 'Alle Fassungen dieses Artikels:',
 'trad_deja_traduit' => 'Fehler: Dieser Artikel kann nicht mit der gew&uuml;nschten Nummer verkn&uuml;pft werden.',
-'trad_delier' => 'Artikel nicht mehr mit diesen &Uuml;bersetzungen verbinden',
+'trad_delier' => 'Artikel nicht mehr mit diesen &Uuml;bersetzungen verbinden', # MODIF
 'trad_lier' => 'Dieser Artikel ist eine &Uuml;bersetzung des Artikels Nummer&nbsp;',
-'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
+'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP-Datei',

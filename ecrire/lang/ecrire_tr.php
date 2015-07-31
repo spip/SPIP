@@ -197,7 +197,7 @@ sonradan yok edebilir).',
 'forum_info_original' => 'orijinal',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -321,7 +321,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Bug&uuml;n :',
@@ -436,6 +436,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
                                         ziyaret&ccedil;ileri bulacaks&#305;n&#305;z (abonelik y&ouml;ntemiyle y&ouml;netilen forumlar).',
 'info_generation_miniatures_images' => 'Mevcut resimlerin minyat&uuml;rlerinin &uuml;retilmesi',
 'info_gerer_trad' => '&Ccedil;eviri ba&#287;lant&#305;lar&#305; y&ouml;netilsin mi ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => '&Ouml;nemli gurup',
 'info_hebergeur_desactiver_envoi_email' => 'Baz&#305; Hizmet bilgisayarlar&#305; kendi sunucular&#305;ndan 
                                            otomatik e-posta g&ouml;nderisini durduruyorlar. 
@@ -501,6 +502,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_multi_cet_article' => 'Bu makalenin dili&nbsp;:',
 'info_multi_langues_choisies' => 'L&uuml;tfen a&#351;a&#287;&#305;da sitenizdeki yazarlar&#305;n kullanabilece&#287;i dilleri se&ccedil;iniz.
     Sitenizde daha &ouml;nce kullan&#305;lan (ve g&ouml;r&uuml;nt&uuml;lenen) diller iptal edilemez. ',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'B&ouml;l&uuml;mlerde dil m&ouml;n&uuml;s&uuml; &ccedil;al&#305;&#351;s&#305;n m&#305; ?',
 'info_multi_secteurs' => 'Sadece k&ouml;k dizinde yer alan b&ouml;l&uuml;mler i&ccedil;in mi&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -709,6 +711,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_tout_site6' => '<b>Dikkat&nbsp;:</b>
       sadece orijinal makaleler g&ouml;r&uuml;nt&uuml;leniyor.
  Orijinale ba&#287;l&#305; &ccedil;eviriler durumlar&#305;n&#305; belirten bir renkle belirtilmi&#351;tir&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Makalelerde i&#351;birli&#287;i',
 'info_un_article' => 'bir makale,',
 'info_un_mot' => 'Her defas&#305;nda tek bir anahtar s&ouml;zc&uuml;k',
@@ -1239,9 +1242,9 @@ SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i var
 'trad_article_inexistant' => 'Bu numaral&#305; bir makale yok.',
 'trad_article_traduction' => 'Bu makalenin t&uuml;m s&uuml;r&uuml;mleri&nbsp;:',
 'trad_deja_traduit' => 'Bu makalenin istenen numaraya ba&#287;lanmas&#305; olanaks&#305;z.',
-'trad_delier' => 'Bu makaleyi art&#305;k &#351;u &ccedil;evirilere ba&#287;lama',
+'trad_delier' => 'Bu makaleyi art&#305;k &#351;u &ccedil;evirilere ba&#287;lama', # MODIF
 'trad_lier' => 'Bu makale &#351;u nolu makalenin &ccedil;evirisidir&nbsp;:',
-'trad_new' => 'Bu makalenin yeni bir &ccedil;evirisini yaz',
+'trad_new' => 'Bu makalenin yeni bir &ccedil;evirisini yaz', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP dosya',

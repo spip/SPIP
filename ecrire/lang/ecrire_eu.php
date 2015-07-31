@@ -195,7 +195,7 @@ Ez balidatu inportazio galdera hau.
 'forum_info_original' => 'jatorrizkoa',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -315,7 +315,7 @@ Ez balidatu inportazio galdera hau.
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Gaur :',
@@ -425,6 +425,7 @@ Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; 
 'info_gauche_visiteurs_enregistres' => 'Hemen guneko eremu publikoan erregistratutako bisitariak aurkituko dituzu (foroak aurretiko harpidetzaz).',
 'info_generation_miniatures_images' => 'Irudien miniatura-sorkuntza',
 'info_gerer_trad' => 'Itzulpen-estekak kudeatu?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Talde garrantzitsua',
 'info_hebergeur_desactiver_envoi_email' => 'Ostapen zuzkitzaile batzuek mail-bidalketa automatikoa desaktibatzen dute bere zerbitzarietatik.
 Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
@@ -484,6 +485,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_multi_articles' => 'Artikuluetan hizkuntza menu-a aktibatu?',
 'info_multi_cet_article' => 'Artikuluhonen hizkuntza:',
 'info_multi_langues_choisies' => 'Jarraian aukeratu zure tokiarenidazleek erabiltzeko baimena izango dituzten hizkuntzak. Tokian dagoeneko erabiltzendiren hizkuntzak (zerrendaren hasieran) ezin dira desaktibatu. ',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Ataletan hizkuntza menu-a aktibatu?',
 'info_multi_secteurs' => '>... erroan dauden atalentzat bakarrik ?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -686,6 +688,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_tout_site5' => 'Artikulu originala.',
 'info_tout_site6' => '<b>Erne :</b> bakarrik artikulu originalak bistaratzen dira.
 Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore batean :',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Artikuluei buruzko lan kolaboratiboa',
 'info_un_article' => 'artikulu bat,',
 'info_un_mot' => 'Hitz bakar bat aldi berean',
@@ -1206,9 +1209,9 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'trad_article_inexistant' => 'Zenbaki horrekin ez dago artikulurik',
 'trad_article_traduction' => 'Artikulu honen bertsio guztiak:',
 'trad_deja_traduit' => 'Errorea : Artikulu hau ezin da eskatutako zenbakiari lotu.',
-'trad_delier' => 'Jada ez lotuartikulu hau bere itzulpenekin ',
+'trad_delier' => 'Jada ez lotuartikulu hau bere itzulpenekin ', # MODIF
 'trad_lier' => 'Artikulu hau artikuluaren itzulpena da',
-'trad_new' => 'Artikulu honen itzulpen berria idatzi',
+'trad_new' => 'Artikulu honen itzulpen berria idatzi', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP fitxategia',

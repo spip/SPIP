@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -310,7 +310,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'danas:',
@@ -417,6 +417,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gauche_visiteurs_enregistres' => 'Ovdje mozete pronaci posjetioce koji su registrovani na javnoj stranici (forumi za clanove).',
 'info_generation_miniatures_images' => 'Obradjivanje minijaturnih slika',
 'info_gerer_trad' => 'Zelite li ukljuciti linkove za prevod?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Vazna grupa',
 'info_hebergeur_desactiver_envoi_email' => 'Neki kompjuteri dezaktiviraju automatsko slanje mailova njihovim serverima. U tom slucaju sljedece funkcije SPIP-a nece biti u uptrebi.',
 'info_hier' => 'Jucer:',
@@ -475,6 +476,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_articles' => 'Aktivirati jezicki meni za clanke?',
 'info_multi_cet_article' => 'Jezik ovog clanka:',
 'info_multi_langues_choisies' => 'Izaberite jezike koji ce biti na raspolaganju urednicima vase stranice. Jezici koji se vec koriste na vasoj stranici, ne mogu se iskluciti.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Aktivirati jezicki meni za rubrike?',
 'info_multi_secteurs' => '... samo za rubrike koje se nalaze na root-u?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -671,6 +673,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site5' => 'Originalni clanak.',
 'info_tout_site6' => '<b>Paznja:</b> prikazani su samo originalni clanci.
 Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim clankom:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Saradnicki rad na clancima',
 'info_un_article' => 'clanak,',
 'info_un_mot' => 'Samo po jedna rijec',
@@ -1181,9 +1184,9 @@ demande plus de puissance au serveur.', # NEW
 'trad_article_inexistant' => 'Ne postoji clanak koji nosi ovaj broj.',
 'trad_article_traduction' => 'Sve verzije ovog clanka:',
 'trad_deja_traduit' => 'Ovaj clanak je vec prevod prethodnog clanka.', # MODIF
-'trad_delier' => 'Ne vezati vise ovaj clanak za ove prevode',
+'trad_delier' => 'Ne vezati vise ovaj clanak za ove prevode', # MODIF
 'trad_lier' => 'Ovaj clanak je prevod clanka broj:',
-'trad_new' => 'Napisati novi prevod ovog clanka',
+'trad_new' => 'Napisati novi prevod ovog clanka', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP dokument',

@@ -195,7 +195,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'forum_info_original' => 'orin',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -318,7 +318,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hiziv&nbsp;:',
@@ -432,6 +432,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_gauche_visiteurs_enregistres' => 'Ama&ntilde; ema&ntilde; ar weladennerien enrollet evit gallout kemer perzh e foromo&ugrave; dre goumanant lodenn foran al lec\'hienn.',
 'info_generation_miniatures_images' => 'Kroui&ntilde; skeudenno&ugrave;igo&ugrave;',
 'info_gerer_trad' => 'Mera&ntilde; al liammo&ugrave; trei&ntilde; ?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Strollad pouezus',
 'info_hebergeur_desactiver_envoi_email' => 'Herberc\'herien zo a nac\'h ma vefe kaset postelio&ugrave; emgedre adal o servijerio&ugrave;. En deoguezh-se, ne\'z aio ket ar servijo&ugrave;-se en-dro.',
 'info_hier' => 'dec\'h&nbsp;:',
@@ -492,6 +493,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_multi_cet_article' => 'Yezh ar pennad-ma&ntilde;&nbsp;:',
 'info_multi_langues_choisies' => 'Dibabit ama&ntilde; dindan ar yezho&ugrave; a c\'hell skridaozerien ho lec\'hienn skriva&ntilde; enno.
   Ar yezho&ugrave; bet implijet betek-henn (diskouezet da genta&ntilde;) n\'hallont ket beza&ntilde; lamet kuit.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Ober gant ar la&ntilde;ser yezho&ugrave; war ar rubrikenno&ugrave;&nbsp;?',
 'info_multi_secteurs' => '...evit rubrikenno&ugrave; ar wrizienn hepken&nbsp;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -700,6 +702,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_tout_site6' => '<b>Diwallit&nbsp;:</b>Ne vez diskouezet nemet ar pennado&ugrave; orin.
 Stag eo an troidigezhio&ugrave; outo,
 diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Labour a-stroll war ar pennado&ugrave;',
 'info_un_article' => 'ur pennad,',
 'info_un_mot' => 'Ur ger war an dro hepken',
@@ -1250,9 +1253,9 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'trad_article_inexistant' => 'N\'eus pennad ebet gant an niverenn-ma&ntilde;.',
 'trad_article_traduction' => 'Holl stummo&ugrave; ar pennad-ma&ntilde; :',
 'trad_deja_traduit' => 'Fazi : Dibosupl eo liamma&ntilde; ar pennad-ma&ntilde; ouzh an niverenn bet goulennet.',
-'trad_delier' => 'Paouez da liamma&ntilde; ar pennad-ma&ntilde; ouzh an troidigezhio&ugrave; anezha&ntilde;',
+'trad_delier' => 'Paouez da liamma&ntilde; ar pennad-ma&ntilde; ouzh an troidigezhio&ugrave; anezha&ntilde;', # MODIF
 'trad_lier' => 'Un droidigezh eo ar pennad-ma&ntilde;. Setu niverenn ar pennad orin&nbsp;:',
-'trad_new' => 'Skriva&ntilde; un droidigezh nevez evit ar pennad-ma&ntilde;',
+'trad_new' => 'Skriva&ntilde; un droidigezh nevez evit ar pennad-ma&ntilde;', # MODIF
 
 // U
 'upload_fichier_zip' => 'Restr ZIP',

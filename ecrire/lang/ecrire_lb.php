@@ -194,7 +194,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'forum_info_original' => 'Original',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -314,7 +314,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Haut:',
@@ -423,6 +423,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Reda
 'info_gauche_visiteurs_enregistres' => 'Hei sinn d&eacute;i ageschriwen Visiteuren vum &ouml;ffentl&euml;chen Deel (Forum\'en op Abonnement).',
 'info_generation_miniatures_images' => 'Miniaturen vun de Biller maachen',
 'info_gerer_trad' => 'Iwwersetzungs-Linken aschalten?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Wichtege Grupp',
 'info_hebergeur_desactiver_envoi_email' => 'Verschidden Provider\'en erlaaben n&euml;t automat&euml;sch Email\'en ze sch&eacute;cken. An deem Fall fonktionn&eacute;iert dat hei n&euml;t.',
 'info_hier' => 'g&euml;schter:',
@@ -482,6 +483,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Reda
 'info_multi_cet_article' => 'Sprooch vun d&euml;sem Artikel:',
 'info_multi_langues_choisies' => 'Wielt hei d\'Sproochen aus d&eacute;i d\'Redakteren vun &auml;rem Site k&euml;nnen benotzen.
 D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen n&euml;t ausgeschalt ginn.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Sprooche-Menu bei de Rubriken aschalten?',
 'info_multi_secteurs' => '... n&euml;mmen fir d\'Haapt-Rubriken?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -678,6 +680,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_tout_site4' => 'Den Artikel ass an d&eacute;i Sprooch iwwersaat, an d\'Iwwersetzung ass &agrave; jour.',
 'info_tout_site5' => 'Original-Artikel.',
 'info_tout_site6' => '<b>Opgepasst:</b> n&euml;mmen d\'Original-Artikelen si gewisen. D\'Iwwersetzungen geh&eacute;ieren zum Original, mat enger Faarw d&eacute;i hieren Zoustand weist:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Zesummenaarbecht bei den Artikelen',
 'info_un_article' => 'en Artikel,',
 'info_un_mot' => 'Wuert fir Wuert',
@@ -1193,9 +1196,9 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'trad_article_inexistant' => '&Euml;t g&euml;t keen Artikel mat d&auml;r Nummer.',
 'trad_article_traduction' => 'All d\'Versiounen vun d&euml;sem Artikel:',
 'trad_deja_traduit' => 'Fehler: Onm&eacute;iglech d&euml;sen Artikel un d&eacute;i gefrote Nummer ze bannen.',
-'trad_delier' => 'D&euml;sen Artikel n&euml;t m&eacute;i un seng Iwwersetzungen bannen',
+'trad_delier' => 'D&euml;sen Artikel n&euml;t m&eacute;i un seng Iwwersetzungen bannen', # MODIF
 'trad_lier' => 'D&euml;sen Artikel ass eng Iwwersetzung vum Artikel Nummer:',
-'trad_new' => 'Eng nei Iwwersetzung vun d&euml;sem Artikel schreiwen',
+'trad_new' => 'Eng nei Iwwersetzung vun d&euml;sem Artikel schreiwen', # MODIF
 
 // U
 'upload_fichier_zip' => 'ZIP-Fichier',

@@ -206,7 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'orixinal',
 
 // H
-'htaccess_a_simuler' => 'Avisu: la configuraci&oacute;n del to sirvidor HTTP nun tien en cuenta los ficheros @htaccess@. Pa poder asegurar una bona segurid&aacute;, fai falta que camudes esa configuraci&oacute;n nesti puntu, o bien que les constantes @constantes@ (definibles nel ficheru mes_options.php) tengan como valor direutorios nel esterior de @document_root@.',
+'htaccess_a_simuler' => 'Avisu: la configuraci&oacute;n del to sirvidor HTTP nun tien en cuenta los ficheros @htaccess@. Pa poder asegurar una bona segurid&aacute;, fai falta que camudes esa configuraci&oacute;n nesti puntu, o bien que les constantes @constantes@ (definibles nel ficheru mes_options.php) tengan como valor direutorios nel esterior de @document_root@.', # MODIF
 'htaccess_inoperant' => 'htaccess non operativu',
 
 // I
@@ -331,7 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Denguna breve',
 'info_aucun_message' => 'Deng&uacute;n mensaxe',
 'info_aucun_mot_cle' => 'Denguna pallabra-clave',
-'info_aucun_rubrique' => 'Denguna seici&oacute;n',
+'info_aucun_rubrique' => 'Denguna seici&oacute;n', # MODIF
 'info_aucun_site' => 'Deng&uacute;n sitiu',
 'info_aucun_visiteur' => 'Deng&uacute;n visitante',
 'info_aujourdhui' => 'g&uuml;ei:',
@@ -454,6 +454,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
  nel espaciu p&uacute;blicu del sitiu (foros pa abonaos).',
 'info_generation_miniatures_images' => 'Xeneraci&oacute;n d\'imaxes amenorg&aacute;es',
 'info_gerer_trad' => '&iquest;Xestionar los enllaces de traducci&oacute;n?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grupu importante',
 'info_hebergeur_desactiver_envoi_email' => 'Dellos agospiamientos encaboxen l\'unv&iacute;u autom&aacute;ticu de
   correos dende los sos sirvidores. Nesti casu, les siguientes
@@ -519,6 +520,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_multi_cet_article' => 'Llingua d\'esti art&iacute;culu:',
 'info_multi_langues_choisies' => 'Seleiciona de sigu&iacute;o les lling&uuml;es disponibles pa los redactores del sitiu Web.
   Les lling&uuml;es que ya tan us&aacute;ndose nel sitiu (amosaes en primer llugar) nun puen desactivase.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => '&iquest;Activar el men&uacute; de lling&uuml;es pa les estayes?',
 'info_multi_secteurs' => '... &iquest;s&oacute;lamente pa les estayes allug&aacute;es na raiz?',
 'info_nb_articles' => '@nb@ art&iacute;culos',
@@ -727,6 +729,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_tout_site6' => '<b>Atenci&oacute;n&nbsp;:</b> s&oacute;lo se amuesen los art&iacute;culos orixinales.
 Les traducciones asociense col orixinal,
 con una color que indica el est&aacute;u:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Trabayu en comu&ntilde;a nos art&iacute;culos',
 'info_un_article' => 'un art&iacute;culu,',
 'info_un_mot' => 'Una sola pallabra a la vez',
@@ -845,9 +848,9 @@ con una color que indica el est&aacute;u:',
 'jour_non_connu_nc' => 'n.c.',
 
 // L
-'label_bando_outils' => 'Barre d\'outils', # NEW
-'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+'label_bando_outils' => 'Barra de ferramientes',
+'label_bando_outils_afficher' => 'Amosar les ferramientes',
+'label_bando_outils_masquer' => 'Anubrir les ferramientes',
 'label_choix_langue' => 'Escueye la to llingua',
 'label_slogan_site' => 'Eslogan del sitiu',
 'label_taille_ecran' => 'Tama&ntilde;u de la pantalla',
@@ -1326,9 +1329,9 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'trad_article_inexistant' => 'Nun hay deng&uacute;n art&iacute;culu con esi n&uacute;mberu.',
 'trad_article_traduction' => 'Toles versiones d\'esti art&iacute;culu:',
 'trad_deja_traduit' => 'Fallu: nun ye posible rellacionar esti art&iacute;culu col n&uacute;mberu pid&iacute;u. ',
-'trad_delier' => 'Ya nun enllazar esti art&iacute;culu coles sos traduciones ',
+'trad_delier' => 'Ya nun enllazar esti art&iacute;culu coles sos traduciones ', # MODIF
 'trad_lier' => 'Esti art&iacute;culu ye una traduci&oacute;n del art&iacute;culu n&uacute;mberu:',
-'trad_new' => 'Escribir una nueva torna d\'esti art&iacute;culu',
+'trad_new' => 'Escribir una nueva torna d\'esti art&iacute;culu', # MODIF
 
 // U
 'upload_fichier_zip' => 'Archivu ZIP',

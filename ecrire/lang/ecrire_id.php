@@ -204,7 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'asli',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -328,7 +328,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hari ini:',
@@ -445,6 +445,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	terdaftar di area umum situs (forum-forum berlangganan).',
 'info_generation_miniatures_images' => 'Membuat gambar-gambar kecil',
 'info_gerer_trad' => 'Aktifkan tautan penerjemahan?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Kelompok penting',
 'info_hebergeur_desactiver_envoi_email' => 'Sejumlah hosting menonaktifkan pengiriman e-mail
   otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
@@ -510,6 +511,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => 'Bahasa artikel ini:',
 'info_multi_langues_choisies' => 'Silakan pilih di bawah bahasa yang tersedia untuk editor situs anda.
   Bahasa-bahasa yang telah digunakan oleh situs anda (di daftar paling atas) tidak dapat dinonaktifkan.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Aktifkan menu bahasa untuk bagian?',
 'info_multi_secteurs' => '... hanya untuk bagian-bagian yang berlokasi di root?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -720,6 +722,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site6' => '<b>Peringatan:</b> hanya artikel-artikel asli yang ditampilkan.
 Terjemahan diasosiasikan dengan yang asli,
 dalam warna yang menunjukkan statusnya:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Kolaborasi kerja pada artikel',
 'info_un_article' => 'sebuah artikel,',
 'info_un_mot' => 'Satu kata kunci pada waktu yang bersamaan',
@@ -1304,9 +1307,9 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'trad_article_inexistant' => 'Tidak ada artikel dengan nomor ini',
 'trad_article_traduction' => 'Semua versi artikel ini:',
 'trad_deja_traduit' => 'Artikel ini adalah terjemahan dari artikel yang sekarang.',
-'trad_delier' => 'Berhenti menautkan artikel ini ke terjemahannya',
+'trad_delier' => 'Berhenti menautkan artikel ini ke terjemahannya', # MODIF
 'trad_lier' => 'Artikel ini adalah terjemahan dari artikel nomor:',
-'trad_new' => 'Tulis terjemahan baru untuk artikel ini',
+'trad_new' => 'Tulis terjemahan baru untuk artikel ini', # MODIF
 
 // U
 'upload_fichier_zip' => 'berkas ZIP',

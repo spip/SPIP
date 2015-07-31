@@ -193,7 +193,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'forum_info_original' => 'originau',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -314,7 +314,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'encu&egrave;i&nbsp;:',
@@ -424,6 +424,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aqu&iacute; lu visitaires registrats dins l\'espaci public dau sit (f&ograve;ros sus abonament).',
 'info_generation_miniatures_images' => 'Generacion de miniaturas dei imatges',
 'info_gerer_trad' => 'Gerar lu estacs de revirada?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Grop important',
 'info_hebergeur_desactiver_envoi_email' => 'I son d\'aubergadors que desactivan lo mandad&iacute;s automatic d\'e-mails despi lu sieus servidors. En aqueu cas, li foncionalitats seguenti de SPIP foncionar&agrave;n pas.',
 'info_hier' => 'i&egrave;r&nbsp;:',
@@ -487,6 +488,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_multi_cet_article' => 'Lenga d\'aquest article:',
 'info_multi_langues_choisies' => 'Vorgatz seleccionar &ccedil;ai sota li lengas que son &agrave; posita dei redactors dau voastre sit.
   Li lengas ja emplegadi dins lo voastre sit (afichadas en promier) non si poadon desactivar.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Activar lo menut de lenga per li rubricas?',
 'info_multi_secteurs' => '... solament per li rubricas &agrave; la rai&ccedil; dau sit?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -692,6 +694,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_tout_site6' => '<b>Atencion:</b> solament lu articles originaus s\'afichon.
 Li reviradas s\'ass&ograve;cion &agrave; l\'originau,
 una color indica lo sieu estat&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Travalh collaboratiu sus lu articles',
 'info_un_article' => 'un article, ',
 'info_un_mot' => 'Un sol m&ograve;t &agrave; l\'enc&ograve;up',
@@ -1286,9 +1289,9 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_article_inexistant' => 'li a minga d\'article que poarton aqueu n&uacute;mero.',
 'trad_article_traduction' => 'Toti li versions d\'aquel article&nbsp;:',
 'trad_deja_traduit' => 'Impossible de legar aquel article au numer&ograve; demandat.',
-'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
+'trad_delier' => 'Ligar plus aquest article ai reviradas sieui', # MODIF
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
-'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
+'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article', # MODIF
 
 // U
 'upload_fichier_zip' => 'Fichier ZIP',

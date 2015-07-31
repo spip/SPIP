@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original', # NEW
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -324,7 +324,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => '&#20170;&#22825;:',
@@ -446,6 +446,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  &#27880;&#20876;&#30340;&#35775;&#38382;&#32773;(&#35746;&#38405;&#35770;&#22363;).',
 'info_generation_miniatures_images' => '&#20135;&#29983;&#20687;&#20876;',
 'info_gerer_trad' => '&#31649;&#29702;&#32763;&#35793;&#36830;&#25509;?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => '&#37325;&#35201;&#32452;',
 'info_hebergeur_desactiver_envoi_email' => '&#19968;&#20123;&#20027;&#26426;&#31105;&#27490;&#33258;&#21160;&#37038;&#20214;&#21457;&#36865;
  . &#36825;&#31181;&#24773;&#20917;&#19979;SPIP&#30340;
@@ -511,6 +512,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_multi_cet_article' => '&#25991;&#31456;&#30340;&#35821;&#35328;:',
 'info_multi_langues_choisies' => '&#35831;&#22312;&#31449;&#28857;&#20013;&#36873;&#25321;&#20197;&#19979;&#35821;&#35328;&#20351;&#23427;&#20204;&#23545;&#32534;&#36753;&#32773;&#21487;&#29992;.
  &#20320;&#30340;&#31449;&#28857;&#24050;&#32463;&#29992;&#20102;&#22914;&#19979;&#35821;&#35328;(&#22312;&#39030;&#31471;&#21015;&#34920;),&#23427;&#20204;&#19981;&#33021;&#35774;&#20026;&#26410;&#28608;&#27963;.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => '&#28608;&#27963;&#19987;&#26639;&#20013;&#30340;&#35821;&#35328;&#33756;&#21333;?',
 'info_multi_secteurs' => '... &#21482;&#20026;&#31449;&#28857;&#26681;&#30446;&#24405;&#19979;&#30340;&#19987;&#26639;?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -721,6 +723,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_tout_site6' => '<b>&#27880;&#24847;&nbsp;:</b> &#36825;&#37324;&#21482;&#26174;&#31034;&#28304;&#25991;&#20214;.
 &#21508;&#32763;&#35793;&#29256;&#26412;&#24050;&#19982;&#28304;&#25991;&#20214;&#30456;&#20851;&#32852;,
 &#24182;&#20197;&#19981;&#21516;&#30340;&#39068;&#33394;&#26631;&#35782;&#24403;&#21069;&#29366;&#24577;&nbsp;:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => '&#21512;&#21147;&#24037;&#20316;&#25991;&#31456;',
 'info_un_article' => '&#19968;&#20010;&#25991;&#31456;,',
 'info_un_mot' => '&#19968;&#27425;&#19968;&#20010;&#20851;&#38190;&#35789;',
@@ -1322,9 +1325,9 @@ demande plus de puissance au serveur.', # NEW
 'trad_article_inexistant' => '&#27809;&#26377;&#25991;&#31456;&#20026;&#35813;&#21495;',
 'trad_article_traduction' => '&#36825;&#31687;&#25991;&#31456;&#30340;&#25152;&#26377;&#29256;&#26412;:',
 'trad_deja_traduit' => '&#35813;&#25991;&#26159;&#19968;&#31687;&#35793;&#25991;', # MODIF
-'trad_delier' => '&#21462;&#28040;&#36825;&#31687;&#25991;&#31456;&#21040;&#23427;&#30340;&#35793;&#25991;&#30340;&#38142;&#25509;',
+'trad_delier' => '&#21462;&#28040;&#36825;&#31687;&#25991;&#31456;&#21040;&#23427;&#30340;&#35793;&#25991;&#30340;&#38142;&#25509;', # MODIF
 'trad_lier' => '&#35813;&#31687;&#25991;&#31456;&#35793;&#33258;&#25991;&#31456;No.',
-'trad_new' => '&#20026;&#35813;&#31687;&#25991;&#31456;&#20889;&#19968;&#31687;&#26032;&#35793;&#25991;',
+'trad_new' => '&#20026;&#35813;&#31687;&#25991;&#31456;&#20889;&#19968;&#31687;&#26032;&#35793;&#25991;', # MODIF
 
 // U
 'upload_fichier_zip' => '&#21387;&#32553;&#25991;&#20214;ZIP',

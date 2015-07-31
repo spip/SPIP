@@ -204,7 +204,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'forum_info_original' => 'originale',
 
 // H
-'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
+'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne s&eacute;curit&eacute;, il faut que vous modifiiez cette configuration sur ce point, ou bien que les constantes @constantes@ (d&eacute;finissables dans le fichier mes_options.php) aient comme valeur des r&eacute;pertoires en dehors de @document_root@.', # NEW
 'htaccess_inoperant' => 'htaccess inop&eacute;rant', # NEW
 
 // I
@@ -328,7 +328,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
-'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 'info_aucun_site' => 'Aucun site', # NEW
 'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'oggi: ',
@@ -448,6 +448,7 @@ le autrici eliminate, invece, da un cestino.',
 pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
 'info_gerer_trad' => 'Gestire i link di traduzione?',
+'info_gerer_trad_objets' => '@objets@&nbsp;: g&eacute;rer les liens de traduction', # NEW
 'info_groupe_important' => 'Gruppo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alcuni hoster disattivano l\'invio automatico di email
 dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito riportate non funzioneranno.',
@@ -510,6 +511,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_multi_cet_article' => 'Lingua di questo articolo:',
 'info_multi_langues_choisies' => 'Selezionare di seguito le lingue disponibili per le redattrici del sito.
   Le lingue gi&agrave; utilizzate nel sito (visualizzate per prime) non possono essere disattivate.',
+'info_multi_objets' => '@objets@&nbsp;: activer le menu de langue', # NEW
 'info_multi_rubriques' => 'Attivare il menu della lingua nelle rubriche?',
 'info_multi_secteurs' => '... solo per le rubriche collocate nella {root} del sito?',
 'info_nb_articles' => '@nb@ articles', # NEW
@@ -719,6 +721,7 @@ impossibile.', # MODIF
 'info_tout_site6' => '<b>Attenzione:</b> solo gli articoli originali vengono visualizzati.
 Le traduzioni sono associate all\'originale,
  in un colore che indica il loro stato:',
+'info_traductions' => 'Traductions', # NEW
 'info_travail_colaboratif' => 'Lavoro di collaborazione sugli articoli',
 'info_un_article' => 'un articolo, ',
 'info_un_mot' => 'Una parola sola alla volta',
@@ -1296,9 +1299,9 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'trad_article_inexistant' => 'Non esiste un articolo con questo numero.',
 'trad_article_traduction' => 'Tutte le versioni di questo articolo:',
 'trad_deja_traduit' => 'Errore: non &egrave; possibile collegare questo articolo al numero richiesto.',
-'trad_delier' => 'Non collegare pi&ugrave; questo articolo alle sue traduzioni',
+'trad_delier' => 'Non collegare pi&ugrave; questo articolo alle sue traduzioni', # MODIF
 'trad_lier' => 'Questo articolo &egrave; una traduzione dell\'articolo numero:',
-'trad_new' => 'Scrivere una nuova traduzione dell\'articolo',
+'trad_new' => 'Scrivere una nuova traduzione dell\'articolo', # MODIF
 
 // U
 'upload_fichier_zip' => 'File ZIP',
