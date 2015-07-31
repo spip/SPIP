@@ -236,7 +236,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		foreach (preg_files("$dircache$prefix") as $f) {
-			if (time() - @filemtime($f) > $duree)
+			if (time() - (@file_exists($f)?@filemtime($f):0) > $duree)
 				@unlink($f);
 		}
 	}
@@ -275,7 +275,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
 		$page = array();
-		$lastmodified = @filemtime(_DIR_CACHE . $chemin_cache);
+		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
+			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 		return;
 	}
 
@@ -305,7 +306,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 	
 	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
-	$lastmodified = @filemtime(_DIR_CACHE . $chemin_cache);
+	$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
+		@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 	$page = restaurer_meta_donnees ($page);
 	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
 
