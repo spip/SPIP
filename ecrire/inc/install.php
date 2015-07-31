@@ -275,7 +275,9 @@ function install_select_serveur()
 			$v = 'spip_versions_' . $s;
 			if (function_exists($v) AND $v()) {
 			  $titre = _T("install_select_type_$s");
-			  $options[$s] =  "<option value='$s'>"
+				// proposer sqlite3 par defaut si dispo
+				$selected = ($s=='sqlite3'?" selected='selected'":"");
+			  $options[$s] =  "<option value='$s'$selected>"
 			    . ($titre ? $titre : $s)
 			    ."</option>";
 			} else spip_log("$s: portage indisponible");
@@ -303,22 +305,21 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		$(document).ready(function() {
 			$("input[type=hidden][name=server_db]").each(function(){
 				if ($(this).attr("value").match("sqlite*")){
-					$("#install_adresse_base_hebergeur").hide();
-					$("#install_login_base_hebergeur").hide();
-					$("#install_pass_base_hebergeur").hide();
+					$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
 				}
 			});
-			$("#sql_serveur_db").change(function(){
-				if ($(this).find("option:selected").attr("value").match("sqlite*")){
-					$("#install_adresse_base_hebergeur").hide();
-					$("#install_login_base_hebergeur").hide();
-					$("#install_pass_base_hebergeur").hide();
-				} else {
-					$("#install_adresse_base_hebergeur").show();
-					$("#install_login_base_hebergeur").show();
-					$("#install_pass_base_hebergeur").show();
-				}
-			});
+			if ($("#sql_serveur_db").length) {
+				if ($("#sql_serveur_db").attr("value").match("sqlite*"))
+						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
+					else
+						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
+				$("#sql_serveur_db").change(function(){
+					if ($(this).find("option:selected").attr("value").match("sqlite*"))
+						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
+					else
+						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
+				});
+			}
 		});')
 
 	. ($server_db
