@@ -865,11 +865,11 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 	// si c'est une image, qu'on sait la faire tourner, qu'elle
 	// n'est pas distante, et qu'elle n'a pas de vignette perso 
 	// et qu'on a la bibli !
-	/*	if ($document['distant']!='oui' AND !$id_vignette
+	if ($document['distant']!='oui' AND !$id_vignette
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
 	AND ($process == 'imagick' OR $process == 'gd2'
-	OR $process == 'convert' OR $process == 'netpbm') ) */ {
+	OR $process == 'convert' OR $process == 'netpbm') ) {
 
 		echo "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
