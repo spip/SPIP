@@ -172,6 +172,7 @@ function gadget_messagerie() {
 	     icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif",'',false));
 }
 
+// http://doc.spip.org/@installer_gadgets
 function installer_gadgets($id_rubrique)
 {
 	return "<a id='boutonbandeautoutsite' href='"
