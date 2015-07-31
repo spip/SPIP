@@ -130,7 +130,7 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				echo "<TR BGCOLOR='$couleur' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' width='100%'>";
 				echo "<TD style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
 				if ($niveau==0 OR 1==1){
-					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*100);
+					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*1000)/10;
 					echo "<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
