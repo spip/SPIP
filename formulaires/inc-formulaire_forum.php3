@@ -213,29 +213,33 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	else
 		$table = '';
 
+	// preparer les parametres du forum en input hidden
+	$parametres_forum = '';
+	foreach (array('alea', 'hash', 'retour_forum') as $var)
+		if ($val = entites_html($$var))
+			$parametres_forum .=
+			"<input type='hidden' name='$var' value=\"$val\" />\n";
+	foreach (array(
+	'id_article', 'id_breve', 'id_syndic', 'id_rubrique', 'id_forum')
+	as $var)
+		if ($val = $$var)
+			$parametres_forum .=
+			"<input type='hidden' name='forum_$var' value='$val' />\n";
+
 	return array('formulaire_forum', 0,
 	array(
-		'alea' => $alea,
 		'auteur' => $auteur,
 		'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
 		'email_auteur' => $email_auteur,
-		'hash' => $hash,
 		'modere' => (($forums_publics != 'pri') ? '' : _T('forum_info_modere')),
 		'nom_site_forum' => $nom_site_forum,
 		'previsu' => $previsu,
-		'retour_forum' => $retour_forum,
 		'table' => $table,
 		'texte' => $texte,
 		'titre' => $titre,
 		'url' =>  $url,
 		'url_site' => ($url_site ? $url_site : "http://"),
-
-		# id de reference
-		'id_article' => $id_article,
-		'id_breve' => $id_breve,
-		'id_syndic' => $id_syndic,
-		'id_rubrique' => $id_rubrique,
-		'id_forum' => $id_forum,
+		'parametres_forum' => $parametres_forum,
 
 		## gestion des la variable de personnalisation $afficher_texte
 		# mode normal : afficher le texte en < input text >, cf. squelette
