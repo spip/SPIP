@@ -59,7 +59,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		$debugverb = "$fi:L$l:$fu"."():";
 	}
 
-	$m = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
+	$m = date("Y-m-d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 	  //distinguer les logs prives et publics dans les grep
 		. $debugverb
 		. (test_espace_prive()?':Pri:':':Pub:')
