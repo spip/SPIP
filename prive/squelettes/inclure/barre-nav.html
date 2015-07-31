@@ -39,7 +39,7 @@
 				<BOUCLE_boutons(POUR)
 					{tableau #GET{boutons}}
 					{cle!=outils_rapides}
-					{cle!=outils_collaboratifs}>[<li (#CLE|=={bando_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
+					{cle!=outils_collaboratifs}>[<li (#CLE|=={menu_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
 						[class="(#VAL{first}|unique)"]><a
 						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 						id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a>]<B_sous><ul><BOUCLE_sous(POUR)
