@@ -308,12 +308,13 @@ prive/formulaires/configurer_visiteurs.html -text
 prive/formulaires/configurer_visiteurs.php -text
 prive/formulaires/dater.html -text
 prive/formulaires/dater.php -text
-prive/formulaires/dateur/datePicker.css -text
+prive/formulaires/dateur/date_picker.css -text
 prive/formulaires/dateur/dates.js -text
 prive/formulaires/dateur/inc-dateur.html -text
 prive/formulaires/dateur/jquery.datePicker.js -text
-prive/formulaires/dateur/jquery.timePicker.js -text
-prive/formulaires/dateur/timePicker.css -text
+prive/formulaires/dateur/jquery.date_picker.js -text
+prive/formulaires/dateur/jquery.time_picker.js -text
+prive/formulaires/dateur/time_picker.css -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
