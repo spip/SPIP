@@ -173,13 +173,13 @@ function calculer_visites($t) {
 			$ar[$num][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
 		}
 		spip_query("INSERT IGNORE INTO spip_referers_articles
-			(date, referer, referer_md5) VALUES "
+			(date, referer, referer_md5, id_article) VALUES "
 			. join(', ', $insert));
 		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
 			spip_query("UPDATE spip_referers_articles
-			SET visites = visites+$num, visites_jour = visites_jour+$num
+			SET visites = visites+$num
 			WHERE ".join(" OR ", $liste));
 			## Ajouter un JOIN sur le statut de l'article ?
 		}
