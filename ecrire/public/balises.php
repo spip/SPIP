@@ -902,9 +902,17 @@ function balise_INCLURE_dist($p) {
 	// la lang n'est pas passe de facon automatique par argumenter
 	// mais le sera pas recuperer_fond, sauf si etoile=>true est passe
 	// en option
+
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
+
+		$f = $_contexte['fond'];
+		// toujours vrai :
+		if (preg_match('/^.fond.\s*=>(.*)$/s', $f, $r)) {
+			$f = $r[1];
+			unset($_contexte['fond']);
+		} else spip_log("compilation de #INCLURE a revoir");
 
 		// #INCLURE{doublons}
 		if (isset($_contexte['doublons'])) {
@@ -928,7 +936,7 @@ function balise_INCLURE_dist($p) {
 		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
 		$_options = "array(" . join(',',$_options) . ")";
 		
-		$p->code = "recuperer_fond('', $_l, $_options)";
+		$p->code = "recuperer_fond($f, $_l, $_options)";
 
 	} elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
