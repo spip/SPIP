@@ -563,7 +563,7 @@ function find_in_path ($filename, $path='AUTO') {
 		// - les absolus (/) ; - les locaux (./) ; les remontees (../)
 		$racine = preg_match('@^([.]{0,2}/)@', $dir) ?  '' : _DIR_RACINE;
 		// ajouter un / eventuellement manquant
-		if (substr($dir,_1) <> '/')
+		if (substr($dir,-1) <> '/')
 			$dir .= "/";
 #spip_log("find_in_path: essai $racine $dir $filename");
 		if (@is_readable($f = "$racine$dir$filename")) {
