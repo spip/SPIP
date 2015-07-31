@@ -916,6 +916,8 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	if (ereg("\.(gif|jpg|png)$", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		$terminaison_dest = $terminaison;
+		
+		if ($terminaison == "gif") $terminaison_dest = "png";
 	}
 	if ($forcer_format) $terminaison_dest = $forcer_format;
 	
@@ -953,42 +955,6 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 }
 
 
-function image_flip_vertical($im)
-{
-	include_ecrire('inc_logos.php3');
-	
-	$image = valeurs_image_trans($im, "flip_v");
-	if (!$image) return("");
-	
-	$x_i = $image["largeur"];
-	$y_i = $image["hauteur"];
-	
-	$im = $image["fichier"];
-	$dest = $image["fichier_dest"];
-	
-	$creer = $image["creer"];
-	
-	if ($creer) {
-		$im = $image["fonction_imagecreatefrom"]($im);
-		$im_ = imagecreatetruecolor($x_i, $y_i);
-	
-		for ($x = 0; $x < $x_i; $x++) {
-			for ($y = 0; $y < $y_i; $y++) {
-				imagecopy($im_, $im, $x_i - $x - 1, $y, $x, $y, 1, 1);
-			}
-		}
-		$image["fonction_image"]($im_, "$dest");
-	}
-	
-	$class = $image["class"];
-	if (strlen($class) > 1) $tags=" class='$class'";
-	$tags = "$tags alt='".$image["alt"]."'";
-	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	
-	return "<img src='$dest'$tags />";
-}
-
 // Transforme l'image en PNG transparent
 // alpha = 0: aucune transparence
 // alpha = 127: completement transparent
@@ -1008,20 +974,35 @@ function image_alpha($im, $alpha = 63)
 	$creer = $image["creer"];
 	
 	if ($creer) {
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
+		$im2 = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im2, false);
+		@imagesavealpha($im2,true);
+		$color_t = ImageColorAllocateAlpha( $im2, 255, 255, 255 , 127 );
+		imagefill ($im2, 0, 0, $color_t);
+		imagecopy($im2, $im, 0, 0, 0, 0, $x_i, $y_i);
+
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		imagealphablending ($im_, FALSE );
 		imagesavealpha ( $im_, TRUE );
 
+
+
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y = 0; $y < $y_i; $y++) {
-				$rgb = ImageColorAt($im, $x, $y);
+				$rgb = ImageColorAt($im2, $x, $y);
 				
 				if (function_exists(imagecolorallocatealpha)) {
+					$a = ($rgb >> 24) & 0xFF;
 					$r = ($rgb >> 16) & 0xFF;
 					$g = ($rgb >> 8) & 0xFF;
 					$b = $rgb & 0xFF;
-					$rgb = imagecolorallocatealpha($im_, $r, $g, $b, $alpha);
+					
+					
+					$a_ = $alpha + $a - round($a*$alpha/127);
+					$rgb = imagecolorallocatealpha($im_, $r, $g, $b, $a_);
 				}
 				imagesetpixel ( $im_, $x, $y, $rgb );
 			}
@@ -1038,6 +1019,47 @@ function image_alpha($im, $alpha = 63)
 	return "<img src='$dest'$tags />";
 }
 
+function image_flip_vertical($im)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "flip_v");
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+	
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y = 0; $y < $y_i; $y++) {
+				imagecopy($im_, $im, $x_i - $x - 1, $y, $x, $y, 1, 1);
+			}
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+	}
+	
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
 
 function image_flip_horizontal($im)
 {
@@ -1057,10 +1079,15 @@ function image_flip_horizontal($im)
 	if ($creer) {
 		$im = $image["fonction_imagecreatefrom"]($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
 	
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y = 0; $y < $y_i; $y++) {
-   		imagecopy($im_, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
+   				imagecopy($im_, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
@@ -1092,31 +1119,45 @@ function image_nb($im)
 	
 	// Methode precise
 	// resultat plus beau, mais tres lourd
-	/*
+	// Et: indispensable pour preserver transparence!
+
 	if ($creer) {
-		$im_ = $image["fonction_imagecreatefrom"]($im);
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+		imagecopy($im_, $im, 0, 0, 0, 0, $x_i, $y_i);
 		
 		for ($x = 0; $x < $x_i; $x++) {
 			for ($y=0; $y < $y_i; $y++) {
 				$rgb = ImageColorAt($im_, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
 				$r = ($rgb >> 16) & 0xFF;
 				$g = ($rgb >> 8) & 0xFF;
 				$b = $rgb & 0xFF;
 
+				//echo "[$a]";
+
 				$c = round(.299 * $r+ .587 * $g + .114 * $b);
 
-				$color = ImageColorAllocate( $im_, $c, $c, $c );
+				$color = ImageColorAllocateAlpha( $im_, $c, $c, $c , $a );
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
 		
 	}
-	*/
+	
 	// Methode avec reduction de couleurs
 	// moins precise, mais infiniment plus rapide!
-	if ($creer) {
+/*	if ($creer) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
 		imagetruecolortopalette($im_, true, 256);
 
 		for($a=0; $a<imagecolorstotal ($im_); $a++)
@@ -1129,7 +1170,7 @@ function image_nb($im)
 
 		$image["fonction_image"]($im_, "$dest");
 	}
-
+*/
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
@@ -1152,7 +1193,6 @@ function decal_couleur($coul, $gamma) {
 // Permet de rendre une image
 // plus claire (gamma > 0)
 // ou plus foncee (gamma < 0)
-// attention: passe l'image en 256 couleurs!
 function image_gamma($im, $gamma = 0)
 {
 	include_ecrire('inc_logos.php3');
@@ -1169,19 +1209,32 @@ function image_gamma($im, $gamma = 0)
 	$creer = $image["creer"];
 	
 	if ($creer) {
-		$im_ = $image["fonction_imagecreatefrom"]($im);
-		imagetruecolortopalette($im_, true, 256);
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+		imagecopy($im_, $im, 0, 0, 0, 0, $x_i, $y_i);
+	
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {
+				$rgb = ImageColorAt($im_, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
 
-		for($a=0; $a<imagecolorstotal ($im_); $a++)
-		{
-			$color = ImageColorsForIndex($im_,$a);
-			$R= decal_couleur($color['red'], $gamma);
-			$G= decal_couleur($color['green'], $gamma);
-			$B= decal_couleur($color['blue'], $gamma);
-						
-			ImageColorSet($im_, $a, $R, $G, $B);
+				$r = decal_couleur($r, $gamma);
+				$g = decal_couleur($g, $gamma);
+				$b = decal_couleur($b, $gamma);
+
+				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
+				imagesetpixel ($im_, $x, $y, $color);			
+			}
 		}
-
 		$image["fonction_image"]($im_, "$dest");
 	}
 	$class = $image["class"];
@@ -1198,9 +1251,9 @@ function image_gamma($im, $gamma = 0)
 // On peut fixer les valeurs RVB 
 // de la couleur "complementaire" pour forcer une dominante
 
-function decal_couleur_122 ($coul, $val) {
-	if ($coul < 122) $y = round((($coul - 122) / 122) * $val) + $val;
-	else if ($coul >= 122) $y = round((($coul - 122) / 123) * (255-$val)) + $val;
+function decal_couleur_127 ($coul, $val) {
+	if ($coul < 127) $y = round((($coul - 127) / 127) * $val) + $val;
+	else if ($coul >= 127) $y = round((($coul - 127) / 128) * (255-$val)) + $val;
 	else $y= $coul;
 	
 	if ($y < 0) $y = 0;
@@ -1229,25 +1282,39 @@ function image_sepia($im, $rgb = "896f5e")
 	$creer = $image["creer"];
 	
 	if ($creer) {
-		$im_ = $image["fonction_imagecreatefrom"]($im);
-		imagetruecolortopalette($im_, true, 256);
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+		imagecopy($im_, $im, 0, 0, 0, 0, $x_i, $y_i);
+	
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {
+				$rgb = ImageColorAt($im_, $x, $y);
+				$a = ($rgb >> 24) & 0xFF;
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
 
-		for($a=0; $a<imagecolorstotal ($im_); $a++)
-		{
-			$color = ImageColorsForIndex($im_,$a);
+				$r = round(.299 * $r + .587 * $g + .114 * $b);
+				$g = $r;
+				$b = $r;
 
-			$R= round(.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']));
-			$G = $R;
-			$B = $R;
 
-			$R= decal_couleur_122($R, $dr);
-			$G= decal_couleur_122($G, $dv);
-			$B= decal_couleur_122($B, $db);
-						
-			ImageColorSet($im_, $a, $R, $G, $B);
+				$r = decal_couleur_127($r, $dr);
+				$g = decal_couleur_127($g, $dv);
+				$b = decal_couleur_127($b, $db);
+
+				$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
+				imagesetpixel ($im_, $x, $y, $color);			
+			}
 		}
-
 		$image["fonction_image"]($im_, "$dest");
+
 	}
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
