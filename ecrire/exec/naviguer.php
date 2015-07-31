@@ -23,7 +23,7 @@ charger_generer_url();
 
 function exec_naviguer_dist()
 {
-	global $new, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
+	global $new, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre;
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
@@ -38,8 +38,7 @@ function exec_naviguer_dist()
 					     $id_parent,
 					     $titre,
 					     $texte,
-					     $descriptif,
-					     $changer_lang
+					     $descriptif
 					     );
 
 		calculer_rubriques();
@@ -481,7 +480,7 @@ function enregistre_creer_naviguer($id_parent)
 			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 }
 
-function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
+function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif)
 {
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
