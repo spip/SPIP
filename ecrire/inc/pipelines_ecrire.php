@@ -182,7 +182,7 @@ function f_queue_affiche_milieu($flux){
 	$args = $flux['args'];
 	$res = "";
 	foreach($args as $key=>$arg){
-		if (preg_match(",^id_,",$key)){
+		if (preg_match(",^id_,",$key) AND is_numeric($arg) AND $arg=intval($arg)){
 			$objet = preg_replace(',^id_,', '', $key);
 			$res .= recuperer_fond('modeles/object_jobs_list',array('id_objet'=>$arg,'objet'=>$objet),array('ajax'=>true));
 		}
