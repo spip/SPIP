@@ -4,7 +4,7 @@ X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
 X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
 <BOUCLE_articles(ARTICLES)>
 BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
+SUMMARY:[(#TITRE|supprimer_numero|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
 UID:article#ID_ARTICLE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
@@ -16,7 +16,7 @@ END:VEVENT
 </BOUCLE_articles>
 <BOUCLE_breves(BREVES)>
 BEGIN:VEVENT
-SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
+SUMMARY:[(#TITRE|supprimer_numero|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
 UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]
 DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
