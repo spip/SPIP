@@ -67,23 +67,25 @@ blockquote.spip {
 	margin-right: 0px;
 	border : solid 1px #aaaaaa;
 	background-color: #ffffff;
-	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .forml { width: 100% ; background-color: #FFDDAA;}
 
 .spip_encadrer {
 	font-family: helvetica, arial, sans-serif;
-	width : 100%;
+	width : 95%;
 	background-color: #FFFFFF;
 	padding: 5px;
 	border: 1px #666666 solid;
 }
 
 .spip_cadre {
-	width : 100%;
+	width : 95%;
 	background-color: #FFFFFF;
 	padding: 5px;
+	margin-top: 10px;
 }
 
 div.spip_poesie {
@@ -96,7 +98,6 @@ div.spip_poesie div {
 	text-indent: -60px;
 	margin-left: 60px;
 }
-
 
 .spip_bouton { background-color: #FFCC00;}
 

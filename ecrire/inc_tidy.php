@@ -21,9 +21,23 @@ function version_tidy() {
 
 function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 	$regexp_echap_math = "/<math((.*?))<\/math>/si";
-	$source = "mathml";
+	$source = "xhtml";
 
 	while (preg_match($regexp_echap_math, $letexte, $regs)) {
+		$num_echap++;
+		
+		$les_echap[$num_echap] = $regs[0];
+
+		$pos = strpos($letexte, $regs[0]);
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+			.substr($letexte,$pos+strlen($regs[0]));
+	}
+	
+	// et les textarea
+	$regexp_echap_cadre = "/<textarea((.*?))<\/textarea>/si";
+	$source = "xhtml";
+
+	while (preg_match($regexp_echap_cadre, $letexte, $regs)) {
 		$num_echap++;
 		
 		$les_echap[$num_echap] = $regs[0];
@@ -57,7 +71,7 @@ function xhtml ($buffer) {
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
 	    $tidy = tidy_get_output();
-	    $tidy = echappe_retour($tidy, $les_echap, "mathml");
+	    $tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {
@@ -93,7 +107,7 @@ function xhtml_nettoyer_chaine ($buffer) {
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
 	    $tidy = tidy_get_output();
-	    $tidy = echappe_retour($tidy, $les_echap, "mathml");
+	    $tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {

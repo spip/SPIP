@@ -1083,6 +1083,7 @@ a.spip_glossaire:hover {text-decoration: underline overline;}
 .spip_cadre {
 	width : 100%;
 	background-color: #eeeeee;
+	margin-top: 10px;
 	padding: 5px;
 	border: 1px solid #666666;
 	behavior: url("win_width.htc");
@@ -1094,7 +1095,8 @@ blockquote.spip {
 	margin-bottom : 10px;
 	border : solid 1px #aaaaaa;
 	background-color: #ffffff;
-	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 div.spip_poesie {
