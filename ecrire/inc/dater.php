@@ -83,7 +83,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
-	$possedeDateRedac= ($annee_redac OR $mois_redac OR ($jour_redac != '0000-00-00'));
+	$possedeDateRedac= ($annee_redac + $mois_redac + $jour_redac);
 	if (($type == 'article')
 	AND (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
 		OR $possedeDateRedac)) {
