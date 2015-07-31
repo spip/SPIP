@@ -2363,7 +2363,7 @@ function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
 	static $puce_statut = null;
 	if (!$puce_statut)
 		$puce_statut = charger_fonction('puce_statut','inc');
-	return $puce_statut($id_objet, $statut, $id_parent, $objet);
+	return $puce_statut($id_objet, $statut, $id_parent, $objet, false, objet_info($objet,'editable')?_ACTIVER_PUCE_RAPIDE:false);
 }
 
 
