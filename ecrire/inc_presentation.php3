@@ -1950,7 +1950,7 @@ function afficher_parents($id_rubrique) {
 			$id_parent = $row['id_parent'];
 			$titre = $row['titre'];
 
-			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n".$parents;
+			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></a></FONT><BR>\n".$parents;
 			if (acces_restreint_rubrique($id_rubrique))
 				$parents = " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ".$parents;
 			if (!$id_parent)
