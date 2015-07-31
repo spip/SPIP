@@ -325,7 +325,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
 		$long = spip_substr($long, 0, max($taille,1));
-		$nbcharutf = preg_match_all('/(&#[0-9]{3,5};)/S', $long, $matches);
+		$nbcharutf = preg_match_all('/(&#[0-9]{3,6};)/S', $long, $matches);
 		$taille += $nbcharutf;
 	}
 
