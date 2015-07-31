@@ -144,8 +144,13 @@ function sql_multi($sel, $lang, $serveur='')
 	return $f($sel, $lang);
 }
 
-function sql_error($serveur='') {
+function sql_error($query, $serveur='') {
   	$f = sql_serveur('error', $serveur);
+	return $f($query);
+}
+
+function sql_errno($serveur='') {
+  	$f = sql_serveur('errno', $serveur);
 	return $f();
 }
 

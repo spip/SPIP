@@ -45,14 +45,11 @@ function spip_pg_query($query)
 	} else $suite ='';
 	$query = preg_replace('/([,\s])spip_/', '\1'.$table_prefix.'_', $query) . $suite;
 
+	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$r = pg_query($spip_pg_link, $query);
-	if (!$r) {
-#	  echo $query, '<br>';
-	  $n = spip_pg_errno();
-	  $m = spip_pg_error();
-	  spip_log("erreur spip_pg_query $n $m $query", 'pg');
-	}
-	return $r;
+	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle
+		$e .= spip_pg_error($query); // et du fautif
+	return $t ? trace_query_end($query, $t, $r, $e) : $r;
 }
 
 
@@ -110,10 +107,6 @@ function spip_pg_select($select, $from, $where,
 	}
 
 	if (!($res = spip_pg_query($q))) {
-#	  echo $query, '<br>';
-	  $n = spip_pg_errno();
-	  $m = spip_pg_error();
-	  spip_log("erreur $n $m $query", 'pg');
 	  include_spip('public/debug');
 	  erreur_requete_boucle($q, $id, $table, $n, $m);
 	}
@@ -312,10 +305,8 @@ function spip_pg_replace($table, $values, $desc) {
 	if ($set) {
 	  $r = pg_query($spip_pg_link, $q = "UPDATE $table SET $set WHERE $where");
 	  if (!$r) {
-#	    echo $q, '<br>';
 	    $n = spip_pg_errno();
-	    $m = spip_pg_error();
-	    spip_log("erreur $n $m $q", 'pg');
+	    $m = spip_pg_error($q);
 	  } else {
 	    $r = pg_affected_rows($r);
 	  }
@@ -323,23 +314,25 @@ function spip_pg_replace($table, $values, $desc) {
 	if (!$r) {
 	    $r = pg_query($spip_pg_link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
 	    if (!$r) {
-#	      echo $q, '<br>';
 	      $n = spip_pg_errno();
-	      $m = spip_pg_error();
-	      spip_log("erreur $n $m $q", 'pg');
+	      $m = spip_pg_error($q);
 	    }
 	}
 	return $r;
 }
 
 // http://doc.spip.org/@spip_pg_error
-function spip_pg_error() {
-	return str_replace('ERROR', 'errcode: 1000 ', pg_last_error());
+function spip_pg_error($query) {
+	$s = str_replace('ERROR', 'errcode: 1000 ', pg_last_error());
+	if ($s) spip_log("$s - $query", 'pg');
+	return $s;
 }
 
 // http://doc.spip.org/@spip_pg_errno
 function spip_pg_errno() {
-	return pg_last_error() ? 1 : 0;
+	$s = pg_last_error(); 
+	if ($s) spip_log("Erreur PG $s");
+	return $s ? 1 : 0;
 }
 
 // http://doc.spip.org/@spip_pg_showtable
