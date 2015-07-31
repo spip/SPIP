@@ -11,18 +11,13 @@
 ]
 <fieldset><legend><:forum_qui_etes_vous:></legend>
 [(#SESSION{auth}|?{' '})
-	<div style="float:#LANG_RIGHT;"><small>
-	(<a href="#URL_LOGOUT"><:icone_deconnecter:></a>)
-	</small></div>
-	<p class='explication'>
-	[<:forum_votre_nom:> (#SESSION{nom}|typo)]
-	</p>
+	<div style="float: #LANG_RIGHT;">(<a href="#URL_LOGOUT"><:icone_deconnecter:></a>)</div>
+	[<p class='explication'><:forum_votre_nom:> (#SESSION{nom}|typo)</p>]
+	
 ]
 
 [(#SESSION{auth}|?{'',' '})
-	<div style="float:#LANG_RIGHT;"><small>
-	(<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>)
-	</small></div>
+	<div style="float: #LANG_RIGHT;">(<a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]"><:login:></a>)</div>
 	<ul>
 		<li class='saisie_session_nom'>
 			<label for="session_nom"><:forum_votre_nom:></label>
