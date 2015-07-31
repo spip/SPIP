@@ -171,10 +171,6 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 
 // C
 'calendrier_synchro' => '<MODIF> Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>  (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), pode sincroniz&aacute;-lo com a actualidade deste s&iacute;tio.',
-'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
-'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
-'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -449,7 +445,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_sites_references' => 'S&iacute;tios referenciados',
 'icone_statistiques' => 'Estat&iacute;sticas do s&iacute;tio',
 'icone_statistiques_visites' => 'Estat&iacute;sticas das visitas',
-'icone_suivi_activite' => '<MODIF> Acompanhar a actividade editorial ',
+'icone_suivi_activite' => 'Acompanhar a vida do s&iacute;tio',
 'icone_suivi_actualite' => 'Evolu&ccedil;&atilde;o do&nbsp;s&iacute;tio',
 'icone_suivi_forum' => 'Seguimento do f&oacute;rum p&uacute;blico&nbsp;: @nb_forums@&nbsp;contribui&ccedil;&atilde;o(&otilde;es)',
 'icone_suivi_forums' => 'Seguir/gerir os f&oacute;runs',
@@ -1340,7 +1336,7 @@ encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de 
 'texte_adresse_annuaire_1' => '(Se o seu anu&aacute;rio est&aacute; instalado na mesma m&aacute;quina que este s&iacute;tio Web, trata-se de &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'O seguinte autor foi acrescentado ao artigo :',
 'texte_annuaire_ldap_1' => 'Se tiver acesso a um anu&aacute;rio (LDAP), pode utiliz&aacute;-lo para importar automaticamente utilizadores sob SPIP.',
-'texte_article_statut' => 'Este artigo &eacute; :',
+'texte_article_statut' => 'Este artigo est&aacute; :',
 'texte_article_virtuel' => 'Artigo virtual',
 'texte_article_virtuel_reference' => '<b>Artigo virtual&nbsp;:</b> artigo referenciado no seu s&iacute;tio SPIP, mas redirigido para uma outra URL. Para suprimir a redirec&ccedil;&atilde;o, apaga a URL acima.',
 'texte_aucun_resultat_auteur' => 'Nenhum resultado para "@cherche_auteur@"',
@@ -1683,7 +1679,14 @@ a SPIP pesquisar igualmente no texto dos
 'trad_delier' => 'N&atilde;o mais ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
-'trad_reference' => '(artigo de refer&ecirc;ncia)'
+'trad_reference' => '(artigo de refer&ecirc;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
+'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
+'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 
