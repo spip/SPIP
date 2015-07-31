@@ -40,7 +40,6 @@ ecrire/action/supprimer_traduction.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
 ecrire/action/tourner.php -text
-ecrire/action/virtualiser.php -text
 ecrire/auth/sha256.inc.php -text
 ecrire/balise/configurer_metas.php -text
 ecrire/balise/formulaire_.php -text
@@ -131,7 +130,6 @@ ecrire/exec/synchro.php -text
 ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
-ecrire/exec/virtualiser.php -text
 ecrire/genie/maintenance.php -text
 ecrire/genie/mise_a_jour.php -text
 ecrire/inc/actions.php -text
@@ -212,7 +210,6 @@ ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
 ecrire/inc/vieilles_defs.php -text
 ecrire/inc/vignette.php -text
-ecrire/inc/virtualiser.php -text
 ecrire/inc/xml.php -text
 ecrire/install/etape_.php -text
 ecrire/install/etape_1.php -text
@@ -336,6 +333,7 @@ prive/editer/auteur.html -text
 prive/editer/dater.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
+prive/editer/virtualiser.html -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
@@ -393,6 +391,8 @@ prive/formulaires/recherche_ecrire.html -text
 prive/formulaires/recherche_ecrire.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
+prive/formulaires/virtualiser_article.html -text
+prive/formulaires/virtualiser_article.php -text
 prive/ical_prive.html -text
 prive/images/admin-12.gif -text
 prive/images/administration-24.gif -text
