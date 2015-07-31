@@ -1538,7 +1538,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
 
 			echo "<form action='".$lien->getUrl()."' method='get' style='margin:0px; padding:0px;'>";
-			echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
+			echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
 			$langues = explode(',', lire_meta('langues_proposees'));
 			while (list(,$l) = each ($langues)) {
 				if ($l == $GLOBALS['spip_lang']) $selected = "selected";
