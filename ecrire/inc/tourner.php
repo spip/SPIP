@@ -55,8 +55,8 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		if (!@file_exists(get_spip_doc($document['fichier']))){
 			$c = _T('fichier_introuvable',
 					array('fichier'=>basename($document['fichier'])));
-			$res = "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
-				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
+			$res = "<img src='" . chemin_image('warning-24.gif')
+				."'\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
 		} else {
 			if ($flag AND !$id_vignette) 
 				$res = boutons_rotateurs($document, $type, $id, $id_document,$script);
@@ -65,7 +65,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		$res = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 		
 		// Signaler les documents distants par une icone de trombone
-		$res .= "<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t \n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+		$res .= "<img src='" . chemin_image('attachment.gif') . "'\n\t \n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
 		// Bouton permettant de copier en local le fichier
 		$res .= bouton_copier_local($document, $type, $id, $id_document, $script);
 		

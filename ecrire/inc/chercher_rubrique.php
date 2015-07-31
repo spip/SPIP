@@ -201,11 +201,10 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. "return charger_node_url_si_vide('"
 	. $url
 	. "', this.parentNode.nextSibling, this.nextSibling,'',event)\"><img src='"
-	. _DIR_IMG_PACK
-	. $icone
+	. chemin_image($icone)
 	. "'\nstyle='vertical-align: middle;' alt=' ' /></a><img src='"
-	. _DIR_IMG_PACK
-	. "searching.gif' id='img_"
+	. chemin_image('searching.gif') 
+	. "' id='img_"
 	.  $idom
 	. "'\nstyle='visibility: hidden;' alt='*' />"
 	. "<input id='titreparent' name='titreparent'"

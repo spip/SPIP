@@ -99,7 +99,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 				" class='fondl'")
 		. "</td>\n"
 		. "<td style='width: 10px'> &nbsp; </td>"
-		. "<td style='width: 2px; background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td style='width: 2px; background: url(" . chemin_image("tirets-separation.gif") . ")'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
 		. "<td style='width: 10px'> &nbsp; </td>";
 	}
 
@@ -110,7 +110,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($flag AND $table) {
 		$clic = _T('trad_delier');
 		$form .= "<td style='width: 10px'> &nbsp; </td>"
-		. "<td style='width: 2px; background: url(" . _DIR_IMG_PACK . "tirets-separation.gif)'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
+		. "<td style='width: 2px; background: url(" . chemin_image("tirets-separation.gif") . ")'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
 		. "<td style='width: 10px'> &nbsp; </td>"
 		. "<td>"
 		  // la 1ere occurrence de clic ne sert pas en Ajax

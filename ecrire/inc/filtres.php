@@ -2220,8 +2220,8 @@ function http_wrapper($img){
 	static $wrapper_state=NULL;
 	static $wrapper_table = array();
 	
-	if (strpos($img,'/')===FALSE) // on ne prefixe par _DIR_IMG_PACK que si c'est un nom de fichier sans chemin
-		$f = _DIR_IMG_PACK . $img;
+	if (strpos($img,'/')===FALSE) // on ne prefixe par _NOM_IMG_PACK que si c'est un nom de fichier sans chemin
+		$f = chemin_image($img);
 	else { // sinon, le path a ete fourni
 		$f = $img;
 		// gerer quand meme le cas des hacks pre 1.9.2 ou l'on faisait un path relatif depuis img_pack

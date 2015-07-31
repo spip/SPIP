@@ -237,8 +237,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 		. "<tr>"
 		. (!$parent ? "<td colsan='2'"
 			: (" <td style='width: 10px; background-image: url("
-			   . _DIR_IMG_PACK
-			   . "forum-vert.gif" 
+			   . chemin_image('forum-vert.gif')
 			   . ");'>"
 			   . http_img_pack('rien.gif', ' ', " style='width: 0px; height: 0px; border: 0px;'")
 			   . "</td>\n<td "))
@@ -254,8 +253,8 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 		. "</tr>\n"
 		. (!$parent ? ''
 			: ("<tr><td valign='top' style='width: 10px; background-image: url("
-			  . _DIR_IMG_PACK
-			  . "rien.gif);'>"
+			  . chemin_image('rien.gif')
+			  . ");'>"
 			  .  http_img_pack("forum-droite$spip_lang_rtl.gif",
 					    '&nbsp;', 
 					   " style='width: 10px; height: 13px'")

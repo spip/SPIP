@@ -117,8 +117,8 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 		$clic =  '<small>'
 		._T('info_supprimer_mot')
 		. "&nbsp;<img style='vertical-align: bottom;' src='"
-		. _DIR_IMG_PACK
-		. "croix-rouge.gif' alt='X' width='7' height='7' />"
+		. chemin_image('croix-rouge.gif')
+		. "' alt='X' width='7' height='7' />"
 		. '</small>';
 
 		if ($nr OR $na OR $ns OR $nb)

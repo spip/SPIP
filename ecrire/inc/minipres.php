@@ -34,7 +34,6 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	# lors de l'installation
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
-	$dir_img_pack = _DIR_IMG_PACK;
 	
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().

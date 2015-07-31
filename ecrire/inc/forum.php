@@ -561,8 +561,8 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 	global $spip_lang_rtl;
 	$fleche2="forum-droite$spip_lang_rtl.gif";
 	$fleche='rien.gif';
-	$vertical = _DIR_IMG_PACK . 'forum-vert.gif';
-	$rien = _DIR_IMG_PACK . 'rien.gif';
+	$vertical = chemin_image('forum-vert.gif');
+	$rien = chemin_image('rien.gif');
 	$res = '';
 	for ($j=2;$j<=$compteur_forum AND $j<20;$j++){
 		$res .= "<td style='width: 10px; vertical-align: top; background-image: url("

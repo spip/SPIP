@@ -66,7 +66,7 @@ function exec_test_ajax_dist() {
 		case -1:
 			spip_setcookie('spip_accepte_ajax', -1);
 			include_spip('inc/headers');
-			redirige_par_entete(_DIR_IMG_PACK.'puce-orange-anim.gif');
+			redirige_par_entete(chemin_image('puce-orange-anim.gif'));
 			break;
 
 		// ou par ajax

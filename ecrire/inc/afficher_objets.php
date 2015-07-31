@@ -436,7 +436,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 		$url = generer_url_ecrire('memoriser',"hash=$hash&trad=" . (1-$trad));
 		$texte .=
 		 "\n<span style='float: $spip_lang_right;'><a href=\"#\"\nonclick=\"return charger_id_url('$url','$tmp_var');\">"
-		. "<img\nsrc='". _DIR_IMG_PACK . $icone ."' alt='$alt' /></a></span>";
+		. "<img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
