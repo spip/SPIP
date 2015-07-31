@@ -92,8 +92,24 @@ jQuery.fn.positionner = function() {
 	return this; // don't break the chain
 }
 
+// deux fonctions pour rendre l'ajax compatible Jaws
+var virtualbuffer_id='spip_virtualbufferupdate';
+function initReaderBuffer(){
+	if (jQuery('#'+virtualbuffer_id).length) return;
+	jQuery('body').append('<p style="float:left;width:0;height:0;position:absolute;left:-5000;top:-5000;"><input type="hidden" name="'+virtualbuffer_id+'" id="'+virtualbuffer_id+'" value="0" /></p>');
+}
+function updateReaderBuffer(){
+	var i = jQuery('#'+virtualbuffer_id);
+	if (!i.length) return;
+	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du 
+	// buffer du lecteur d'ecran (au moins dans Jaws)
+	i.attr('value',parseInt(i.attr('value'))+1);
+}
+
 // rechargement ajax d'un formulaire dynamique implemente par formulaires/xxx.html
 jQuery.fn.formulaire_dyn_ajax = function(target) {
+	if (this.length)
+		initReaderBuffer();
   return this.each(function() {
 	var cible = target || this;
 		jQuery('form:not(.noajax)', this).each(function(){
@@ -120,7 +136,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					.html(c)
 					.positionner()
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					.formulaire_dyn_ajax(); 
+					.formulaire_dyn_ajax();
+					updateReaderBuffer();
 				}
 			},
 			iframe: jQuery.browser.msie
@@ -150,6 +167,8 @@ window.confirm = _confirm;
 var preloaded_urls = {};
 var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
+	if (this.length)
+		initReaderBuffer();
   return this.each(function() {
   jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 	var blocfrag = jQuery(this);
@@ -159,6 +178,7 @@ jQuery.fn.ajaxbloc = function() {
 		.html(c)
 		.removeClass('loading')
 		.positionner();
+		updateReaderBuffer();
 	}
 
 	var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
