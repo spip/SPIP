@@ -125,13 +125,18 @@ function afficher_barre($champ, $forum=false, $lang='') {
 // expliciter les 3 arguments pour avoir xhtml strict
 
 // http://doc.spip.org/@afficher_textarea_barre
-function afficher_textarea_barre($texte, $forum=false, $form='document.formulaire')
+function afficher_textarea_barre($texte, $forum=false, $form='')
 {
 	global $spip_display, $spip_ecran;
 
+	// par defaut champ avec classe .barre_inserer
+	if (!$form) $form = "$('.barre_inserer')[0]";
+	// sinon id parent passe, il faut selectionner le champ 'texte'
+	else $form .= ".texte";
+	
 	$rows = ($spip_ecran == "large") ? 28 : 15;
 
-	return (($spip_display == 4) ? '' : afficher_barre($form . '.texte', $forum))
+	return (($spip_display == 4) ? '' : afficher_barre($form, $forum))
 	. "<textarea name='texte' id='texte' "
 	. $GLOBALS['browser_caret']
 	. " rows='$rows' class='formo barre_inserer' cols='40'>"
