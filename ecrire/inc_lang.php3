@@ -36,6 +36,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	// surcharge perso
 	if ($f = (find_in_path('lang_perso.php3')))  include($f);
+	if ($f = (find_in_path('lang_perso_'.$lang.'.php3')))  include($f);
 }
 
 //
