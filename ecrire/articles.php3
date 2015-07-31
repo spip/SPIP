@@ -22,9 +22,8 @@ $id_doublons['documents'] = "0";
 
 
 //////////////////////////////////////////////////////
-// Determiner les droits d'edition
+// Determiner les droits d'edition de l'article
 //
-
 
 $query = "SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article";
 $result = spip_query($query);
@@ -53,8 +52,6 @@ if ($modif_document == 'oui' AND $flag_editable) {
 	$descriptif = addslashes(corriger_caracteres($descriptif));
 	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
 }
-
-
 
 
 //
