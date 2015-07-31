@@ -171,28 +171,24 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 //
 
 // http://doc.spip.org/@http_calendrier_init
-function http_calendrier_init($time='', $type='mois', $lechelle='', $lpartie_cal='', $script='', $evt=null)
+function http_calendrier_init($time='', $type='mois', $echelle='', $partie_cal='', $script='', $evt=null)
 {
-	if (!$time) 
-	  {
-		$mindate = ($j=_request('jour')) + ($m=_request('mois')) + ($a=_request('annee'));  
-  		if ($mindate)
-			$time = mktime(0,0,0, $m, $j, $a);
-  		else $time = time();
-	  }
+	if (is_array($time)) {
+		list($j,$m,$a) = $time;
+		if ($j+$m+$a) $time = @mktime(0,0,0, $m, $j, $a);
+	}
+	if (!is_numeric($time)) $time = time();
 
-	if (!$type) $type ='mois'; // ca suffit pas, l'entete
 	$jour = date("d",$time);
 	$mois = date("m",$time);
 	$annee = date("Y",$time);
-	if (!$lechelle) $lechelle = _request('echelle');
-
-	if (!$lpartie_cal) 
-		if (!($lpartie_cal = _request('partie_cal')))
-			$partie_cal = DEFAUT_PARTIE;
+        if (!$echelle = intval($echelle)) $echelle = DEFAUT_D_ECHELLE;
+        if (!is_string($type) OR !preg_match('/^\w+$/', $type)) $type ='mois';
+        if (!is_string($partie_cal) OR !preg_match('/^\w+$/', $partie_cal)) 
+                $partie_cal =  DEFAUT_PARTIE;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
-  if (is_null($evt)) {
+	if (is_null($evt)) {
 	  $g = 'quete_calendrier_' . $type;
 	  $evt = quete_calendrier_interval($g($annee,$mois, $jour));
 	  quete_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
@@ -201,7 +197,7 @@ function http_calendrier_init($time='', $type='mois', $lechelle='', $lpartie_cal
 	}
 	$f = 'http_calendrier_' . $type;
 	if (!function_exists($f)) $f = 'http_calendrier_mois';
-	return $f($annee, $mois, $jour, $lechelle, $lpartie_cal, $script, $ancre, $evt);
+	return $f($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt);
 }
 
 # affichage d'un calendrier de plusieurs semaines
