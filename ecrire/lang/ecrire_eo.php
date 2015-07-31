@@ -643,7 +643,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'item_reponse_article' => 'Respondo al la artikolo',
 	'item_utiliser_moteur_recherche' => 'Uzi la serĉilon',
 	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
-	'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
+	'item_version_html_max_html5' => 'Permesi HTML5',
 	'item_visiteur' => 'vizitanto',
 
 	// J
@@ -653,11 +653,11 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'label_bando_outils' => 'Ilobreto',
 	'label_bando_outils_afficher' => 'Afiŝi la ilojn',
 	'label_bando_outils_masquer' => 'Kaŝi la ilojn',
-	'label_choix_langue' => 'Selectionnez votre langue', # NEW
+	'label_choix_langue' => 'Elektu vian lingvon',
 	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
-	'label_slogan_site' => 'Slogan du site', # NEW
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
-	'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+	'label_slogan_site' => 'Devizo de la retejo',
+	'label_taille_ecran' => 'Larĝo de la ekrano',
+	'label_texte_et_icones_navigation' => 'Naviga menuo',
 	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
 	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
