@@ -198,13 +198,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => '春',
 'date_saison_3' => '夏',
 'date_saison_4' => '秋',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => '秒',
 'date_semaines' => '週',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
-'date_une_minute' => 'minute', # NEW
+'date_un_mois' => '月',
+'date_une_heure' => '時間',
+'date_une_minute' => '分',
 'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_une_semaine' => '週間',
 'dirs_commencer' => ' 本当にインストールを始めるために',
 'dirs_preliminaire' => '下準備: <b>アクセス権限を設定</b>',
 'dirs_probleme_droits' => '????????',
@@ -359,7 +359,7 @@ sera ignorée) :
 'info_copyright' => '@spip@ は、@lien_gpl@ で配布されているフリーソフトです。',
 'info_copyright_doc' => '更なる情報を得るには、<a href="@spipnet@">http://www.spip.net/ja</a>を見てください。', # MODIF
 'info_copyright_gpl' => 'GPLライセンスのもと',
-'info_cours_edition' => '進行中のあなたの記事',
+'info_cours_edition' => '進行中のあなたの記事', # MODIF
 'info_creer_repertoire' => '呼び出されたファイルかディレクトリを作って下さい:',
 'info_creer_repertoire_2' => 'サブディレクトリ <b>@repertoire@</b>内、それから', # MODIF
 'info_creer_vignette' => '自動的に作成されたサムネイル',
