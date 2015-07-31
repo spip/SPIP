@@ -19,6 +19,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	if ($type == "abo") {
 		if (!$GLOBALS["visiteur_session"]['statut']) {
 			return array(
+				'action' => '', #ne sert pas dans ce cas, on la vide pour mutualiser le cache
 				'editable'=>false,
 				'login_forum_abo'=>' ',
 				'inscription' => generer_url_public('identifiants', 'lang='.$GLOBALS['spip_lang']),
@@ -69,10 +70,16 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		$hash = calculer_action_auteur("ajout_forum-$arg");
 	}
 
-	// pour la chaine de hidden
-	$script_hidden = $script = str_replace('&amp;', '&', $script);
+	// pour les hidden
+	$script_hidden = "";
 	foreach ($ids as $id => $v)
-		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
+		$script_hidden .= "<input type='hidden' name='$id' value='$v' />";
+		
+	$script_hidden .= "<input type='hidden' name='arg' value='$arg' />";
+	$script_hidden .= "<input type='hidden' name='hash' value='$hash' />";
+	$script_hidden .= "<input type='hidden' name='verif_$hash' value='ok' />";
+	$script_hidden .= "<input type='hidden' name='afficher_texte' value='$afficher_texte' />";
+	$script_hidden .= "<input type='hidden' name='retour_forum' value='$retour_forum' />";
 
 	// l'ajout de documents est-il autorise ?
 	// cf. verifier.php
@@ -84,20 +91,16 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	return array(
 		'modere' => (($type != 'pri') ? '' : ' '),
 		'nom_site' => '',
-		'retour_forum' => $retour_forum,
-		'afficher_texte' => $afficher_texte,
 		'table' => $table,
 		'texte' => '',
 		'config' => array('afficher_barre' => ($GLOBALS['meta']['forums_afficher_barre']!='non'?' ':'')),
 		'titre' => str_replace('~', ' ', extraire_multi($titre)),
-		'url' => $script, # ce sur quoi on fait le action='...'
-		'url_post' => $script_hidden, # pour les variables hidden
+		'action' => $script, # ce sur quoi on fait le action='...'
+		'_hidden' => $script_hidden, # pour les variables hidden
 		'url_site' => "http://",
-		'arg' => $arg,
 		'cle_ajouter_document' => $cle_ajouter_document,
 		'formats_documents_forum' => $formats_documents_forum,
 		'ajouter_document' => $_FILES['ajouter_document']['name'],
-		'hash' => $hash,
 		'nobot' => _request('nobot'),
 		'ajouter_groupe' => $ajouter_groupe,
 		'ajouter_mot' => (is_array($ajouter_mot) ? $ajouter_mot : array($ajouter_mot)),

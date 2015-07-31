@@ -95,7 +95,10 @@ function balise_FORMULAIRE__dyn($form)
 		}
 	}
 	
-	$action = self();
+	// charger peut passer une action si le formulaire ne tourne pas sur self()
+	// ou une action vide si elle ne sert pas
+	$action = isset($valeurs['action'])?$valeurs['action']:self();
+	
 	// recuperer la saisie en cours si erreurs
 	// seulement si c'est ce formulaire qui est poste
 	// ou si on le demande explicitement par le parametre _forcer_request = true
@@ -105,16 +108,19 @@ function balise_FORMULAIRE__dyn($form)
 						if (($v = _request($champ))!==NULL)
 							$valeurs[$champ] = $v;
 			}
-			$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
+			if ($action)
+				$action = parametre_url($action,$champ,''); // nettoyer l'url des champs qui vont etre saisis
 			// proteger les ' et les " dans les champs que l'on va injecter
 			if (is_string($valeurs[$champ]))
 				$valeurs[$champ] = entites_html($valeurs[$champ]);
 		}
 	}
 
-	// nettoyer l'url
-	$action = parametre_url($action,'formulaire_action','');
-	$action = parametre_url($action,'formulaire_action_args','');
+	if ($action) {
+		// nettoyer l'url
+		$action = parametre_url($action,'formulaire_action','');
+		$action = parametre_url($action,'formulaire_action_args','');
+	}
 
 	if (isset($valeurs['_action'])){
 		$securiser_action = charger_fonction('securiser_action','inc');
