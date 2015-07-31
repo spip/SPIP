@@ -80,17 +80,24 @@ function sql_select (
 
 	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' );
 	if (($option !== false) AND !$debug) {
-		return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option);
+		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option);
+	} else {
+		$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
+		if (!$option) return $query;
+		// le debug, c'est pour ce qui a ete produit par le compilateur
+		if (isset($GLOBALS['debug']['aucasou'])) {
+			list($table, $id,) = $GLOBALS['debug']['aucasou'];
+			$nom = $GLOBALS['debug_objets']['courant'] . $id;
+			$GLOBALS['debug_objets']['requete'][$nom] = $query;
+		}
+		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
-	$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
-	if (!$option) return $query;
-	// le debug, c'est pour ce qui a ete produit par le compilateur
-	if (isset($GLOBALS['debug']['aucasou'])) {
-		list($table, $id,) = $GLOBALS['debug']['aucasou'];
-		$nom = $GLOBALS['debug_objets']['courant'] . $id;
-		$GLOBALS['debug_objets']['requete'][$nom] = $query;
-	}
-	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
+
+	if (!is_array($res)) return $res;
+	list($query, $num, $msg) = $res;
+	include_spip('public/debug');
+	erreur_squelette($msg, $num, $query);
+	return false;
 }
 
 // Recupere la syntaxe de la requete select sans l'executer

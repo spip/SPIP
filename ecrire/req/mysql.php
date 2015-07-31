@@ -177,14 +177,11 @@ function spip_mysql_select($select, $from, $where='',
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	// renvoyer la requete inerte si demandee
-	spip_log("select $requeter " . strlen($query));
 	if ($requeter === false) return $query;
-
 	if (!($res = spip_mysql_query($query, $serveur, $requeter))) {
-		include_spip('public/debug');
-		erreur_requete_boucle(substr($query, 7),
-				      spip_mysql_errno(),
-				      spip_mysql_error($query) );
+		$res = array(substr($query, 7),
+			spip_mysql_errno(),
+			spip_mysql_error($query) );
 	}
 
 	return $res;
