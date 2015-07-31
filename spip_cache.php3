@@ -36,7 +36,7 @@ if ($afficher_cache_images == "oui") {
 if ($purger_cache_images == "oui") {
 	if (verifier_action_auteur("purger_cache_images", $hash, $id_auteur))
 	purger_cache_images();
-
+	purger_cache();
 }
 
 
