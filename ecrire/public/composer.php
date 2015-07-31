@@ -616,9 +616,10 @@ function trouver_sous_requetes($where){
 
 
 /**
- * La fonction presente dans les squelettes compiles
- *
- * http://doc.spip.org/@calculer_select
+ * Calcule une requête et l’exécute
+ * 
+ * Cette fonction est présente dans les squelettes compilés.
+ * Elle peut permettre de générer des requêtes avec jointure.
  *
  * @param array $select
  * @param array $from

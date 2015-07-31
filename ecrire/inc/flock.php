@@ -31,7 +31,24 @@ if (_SPIP_LOCK_MODE==2)
 	include_spip('inc/nfslock');
 
 $GLOBALS['liste_verrous'] = array();
-// http://doc.spip.org/@spip_fopen_lock
+
+/**
+ * Ouvre un fichier et le vérrouille
+ *
+ * @link http://php.net/manual/fr/function.flock.php pour le type de verrou.
+ * @see _SPIP_LOCK_MODE
+ * @see spip_fopen_unlock()
+ * @uses spip_nfslock() si _SPIP_LOCK_MODE = 2.
+ * 
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param string $mode
+ *     Mode d'ouverture du fichier (r,w,...)
+ * @param string $verrou
+ *     Type de verrou (avec _SPIP_LOCK_MODE = 1)
+ * @return Resource
+ *     Ressource sur le fichier ouvert, sinon false.
+**/
 function spip_fopen_lock($fichier,$mode,$verrou){
 	if (_SPIP_LOCK_MODE==1){
 		if ($fl = @fopen($fichier,$mode))
@@ -48,7 +65,18 @@ function spip_fopen_lock($fichier,$mode,$verrou){
 	}
 	return @fopen($fichier,$mode);
 }
-// http://doc.spip.org/@spip_fclose_unlock
+
+/**
+ * Dévérrouille et ferme un fichier
+ *
+ * @see _SPIP_LOCK_MODE
+ * @see spip_fopen_lock()
+ * 
+ * @param string $handle
+ *     Chemin du fichier
+ * @return bool
+ *     true si succès, false sinon.
+**/
 function spip_fclose_unlock($handle){
 	if (_SPIP_LOCK_MODE==1){
 		@flock($handle, LOCK_UN);
