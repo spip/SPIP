@@ -1368,7 +1368,7 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 
 // Une fonction pour charger dynamiquement une extension php
 // adaptee de phpMyAdmin ; c'est mieux si on n'en a pas besoin...
-// http://doc.spip.org/@load_extension
+// http://doc.spip.org/@charger_php_extension
 function charger_php_extension($module) {
 	if (extension_loaded($module)) {
 		return true;
