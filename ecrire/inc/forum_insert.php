@@ -109,7 +109,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// En cas de retour sur (par exemple) {#SELF}, on ajoute quand
 	// meme #forum12 a la fin de l'url, sauf si un #ancre est explicite
 	if ($reqret !== '!')
-		return array(strstr('#', $retour) ?
+	  return array(strpos($retour, '#') ?
 			$retour
 			: $retour.'#forum'.$id_message,$id_message);
 
