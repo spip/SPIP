@@ -40,8 +40,10 @@ if ($_GET['rss']) {
 	@header('Content-Type: text/xml; charset='.lire_meta('charset'));
 
 	$intro = array(
-		'title' => _T("icone_suivi_revisions"),
-		'url' => lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS.'suivi_revisions.php3'
+		'title' => "[".lire_meta('nom_site')."] "
+			._T("icone_suivi_revisions"),
+		'url' => lire_meta('adresse_site').'/'
+			._DIR_RESTREINT_ABS .'suivi_revisions.php3'
 	);
 
 	echo affiche_rss($rss, $intro);
