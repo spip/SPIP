@@ -82,17 +82,25 @@ function exec_admin_tech_args($tables)
 		      )) .
 	"</p>";
 	
+	$file = nom_fichier_dump();
+
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = $chercher_rubrique(0, $GLOBALS['connect_id_rubrique'] ? 'breve' : 'rubrique', $GLOBALS['connect_id_rubrique'], 0, 'admin_tech');
 
 	if ($form) {
+		if (preg_match('@^<select([^>]*)>(\s*<option[^>]*)>([^[<]+)(.*)$@s', $form, $r)) {
+			$form = "<select onchange='x=this.options[this.options.selectedIndex].firstChild.data.match(/\w+/); findObj_forcer(\"znom_sauvegarde\").value=x[0]; findObj_forcer(\"nom_sauvegarde\").value=x[0];'" . $r[1] . '>' . $r[2] . " selected='selected'>" . $r[3] . $r[4];
+			$file = trim($r[3]);
+		} elseif (preg_match('@^<input[^>]*>([^[<]+)@', $form, $r))
+			$file = trim($r[1]);
+
 		$res .= "\n<label for='id_parent'>" .
 			  _T('texte_admin_tech_04') .
-			  "</label><br /><br />" .
+			  "</label><br /><br />\n" .
 			  $form . '<br /><br />';
 	}
-	$file = nom_fichier_dump();
+
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
 	$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
 	
