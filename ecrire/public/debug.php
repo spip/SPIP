@@ -450,7 +450,7 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	  . '" title="'
 	  . _T('masquer_colonne')
 	  . '" >'
-	  . _T('info_numero_abbreviation')
+	  . ($nocpt ? '' : _T('info_numero_abbreviation'))
 	  . "</div>
 	".$res."</div>\n";
 }
