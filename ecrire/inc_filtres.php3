@@ -743,7 +743,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 
 function agenda_affiche($i)
 {
-  include_ecrire('inc_calendrier');
+  include_ecrire('inc_agenda');
   include_ecrire('inc_minipres');
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
@@ -1748,7 +1748,7 @@ function url_rss_forum($param) {
 		$regs[1] = str_replace('id_forum', 'id_thread', $regs[1]);
 		$arg = $regs[1].'-'.$regs[2];
 		$cle = afficher_low_sec(0, "rss forum $arg");
-		return "spip_rss.php?op=forum&amp;args=$arg&amp;cle=$cle";
+		return generer_url_action('rss', "op=forum&args=$arg&cle=$cle");
 	}
 }
 

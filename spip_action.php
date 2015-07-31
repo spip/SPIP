@@ -15,7 +15,10 @@ include ("ecrire/inc_version.php3");
 if (isset($hash)) {
 	include_ecrire("inc_session");
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-	  die ($action . '!!!');
+		$texte = _T('info_acces_interdit');
+		include_ecrire('inc_minipres');
+		minipres($texte);
+		exit;
 	}
  }
 

@@ -59,7 +59,7 @@ function install_fin_html() {
 	echo '</td></tr></table></body></html>';
 }
 
-function install_tout_html($titre, $corps)
+function minipres($titre, $corps="")
 {
 	install_debut_html($titre);
 	echo $corps;
