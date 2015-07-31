@@ -134,7 +134,7 @@ function creer_chaine_url($x) {
 
 // http://doc.spip.org/@_generer_url_propre
 function _generer_url_propre($type, $id_objet) {
-	$table = "spip_".table_objet($type);
+	$table = table_objet_sql($type);
 	$col_id = id_table_objet($type);
 
 	// Auteurs : on prend le nom

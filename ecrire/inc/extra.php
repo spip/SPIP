@@ -384,7 +384,7 @@ function extra_update($type, $id, $c = false) {
 	// passer de 'articles' a 'article' :-(
 	$t = preg_replace(',s$,', '', $type);
 
-	$orig = spip_query("SELECT extra FROM spip_".table_objet($t)." WHERE ".id_table_objet($t)."=".intval($id));
+	$orig = spip_query("SELECT extra FROM " . table_objet_sql($t)." WHERE ".id_table_objet($t)."=".intval($id));
 	$orig = sql_fetch($orig);
 
 	if (isset($orig['extra'])

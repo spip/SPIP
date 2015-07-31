@@ -66,7 +66,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		$_id_type = id_table_objet($type);
 		if (isset($$_id_type)) {
 			$$_id_type = intval($$_id_type);
-			if (sql_countsel("spip_".table_objet($type),
+			if (sql_countsel(table_objet_sql($type),
 					 "$_id_type=".$$_id_type)) {
 				$objet_affiche = $type;
 				break;
@@ -131,7 +131,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			OR $objet_affiche == 'breve'
 			OR $objet_affiche == 'rubrique'
 			OR $objet_affiche == 'syndic')
-			  $preview = sql_countsel("spip_".table_objet($objet_affiche), id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")");
+			  $preview = sql_countsel(table_objet_sql($objet_affiche), id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")");
 		}
 	}
 

@@ -560,6 +560,10 @@ function table_objet($type) {
 	return isset($surnoms[$type]) ? $surnoms[$type] : $type."s";
 }
 
+function table_objet_sql($type) {
+	return 'spip_' . table_objet($type);
+}
+
 // http://doc.spip.org/@id_table_objet
 function id_table_objet($type) {
 	if ($type == 'site' OR $type == 'syndic')
@@ -573,7 +577,7 @@ function id_table_objet($type) {
 	else if ($type == 'type')
 		return 'extension';
 	else {
-		$t = "spip_".table_objet($type);
+		$t = table_objet_sql($type);
 		global $tables_principales;
 		if (isset($tables_principales[$t]['key']["PRIMARY KEY"]))
 			return $tables_principales[$t]['key']["PRIMARY KEY"];
