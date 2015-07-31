@@ -58,7 +58,7 @@ function redirige_action_post($action, $arg, $ret, $gra, $corps, $att = ''){
  * @param string $corps
  * @param string $content_type
  *   permet de definir le type de contenu renvoye.
- *   Si rien de précisé, ou si true c'est "text/html" avec un entete xml en plus.
+ *   Si rien de prÃ©cisÃ©, ou si true c'est "text/html" avec un entete xml en plus.
  *   La valeur speciale false fournit text/html sans entete xml. Elle equivaut a
  *   passer "text/html" comme $content_type
  */
