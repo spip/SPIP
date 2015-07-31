@@ -243,12 +243,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
  	// Gestion des statistiques du site public
 	if (($GLOBALS['meta']["activer_statistiques"] != "non")
-	AND $spip_compter_visites!='non') {
-		$stats = charger_fonction('stats', 'public');
+	AND $spip_compter_visites!='non'
+	AND $stats = charger_fonction('stats', 'public', true))
 		$stats();
- 	}
-
-
 }
 
 ?>
