@@ -472,6 +472,7 @@ function import_init()
 		if (ereg("\.gz$", $archive)) {
 			$affiche_progression_pourcent = false;
 			$taille = taille_en_octets($my_pos);
+			$gz = true;
 		}
 		else {
 			$affiche_progression_pourcent = filesize($archive);
@@ -493,7 +494,7 @@ function import_init()
 	@flush();
 
 	if ($ok) {
-		$_fopen = ($flag_gz) ? gzopen : fopen;
+		$_fopen = ($gz) ? gzopen : fopen;
 		$f = $_fopen($archive, "rb");
 		$pos = 0;
 		$buf = "";
