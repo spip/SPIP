@@ -231,7 +231,7 @@ function calculer_langues_rubriques() {
 
 function enfant_rub($collection){
 	global $les_enfants, $couleur_foncee, $lang_dir;
-	global $spip_display, $spip_lang_left, $spip_lang_right;
+	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
 	global $connect_id_auteur;
 	
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre";
@@ -260,7 +260,9 @@ function enfant_rub($collection){
 		
 		$les_enfants .= debut_cadre_sous_rub($logo_rub, true);
 		
-		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+		if ($spip_display != 1
+		AND $spip_display!=4
+		AND lire_meta('image_process') != "non") {
 			include_ecrire("inc_logos.php3");
 			$logo = decrire_logo("rubon$id_rubrique");
 			if ($logo) {
@@ -299,7 +301,8 @@ function enfant_rub($collection){
 		if ($spip_display == 4) $les_enfants .= "</li>";
 	}
 	if ($spip_display == 4) $les_enfants .= "</ul>";
-	
+
+	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
 }
 
 function sous_enfant_rub($collection2){
