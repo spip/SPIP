@@ -173,9 +173,10 @@ function validerAttribut($parser, $name, $val, $bal)
 		      . _L(" vu auparavant ligne ")
 		      . $l
 		      . _L(" colonne ")
-			. $c;
-		  }
-		      else $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		      . $c;
+		  } else $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		} elseif ($type == 'IDREF') {
+			$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
 		}
 	}
 }
