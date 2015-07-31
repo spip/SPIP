@@ -305,7 +305,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$couleur_texte = "black";
 		$couleur_fond = "";
 
-		if ($jour_semaine == 0) $couleur_fond = $couleur_claire;
+		if ($jour_semaine == 0) $couleur_fond = ' toile_claire';
 		else if ($jour_semaine==1)
 			  { 
 			    if ($ligne||$init)
@@ -315,7 +315,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		
 		if ($amj == $today) {
 			$couleur_texte = "red";
-			$couleur_fond = "white";
+			$couleur_fond = " toile_blanche";
 		}
 		$res = '';
 		if ($evts = $evenements[$amj]) {
@@ -327,9 +327,8 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		}
 
-		$ligne .= "\n\t\t<td\tclass='calendrier-td'
+		$ligne .= "\n\t\t<td\tclass='calendrier-td$couleur_fond'
 			style='height: 100px; border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;" .
-		  ($couleur_fond ? " background-color: $couleur_fond;" : "") .
 		  ($ligne ? "" :
 		   " border-$spip_lang_left: 1px solid $couleur_claire;") .
 		  "'>" .
@@ -936,10 +935,11 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 
 	$id = 'nav-agenda' .preg_replace('/[^\w\d]/', '', $ancre);
 
+	// 2 div pour que toile_foncee s'applique bien qu'issue d'une CSS
+	// anterieure a celle de navigation-calendrier
 	return 
-	  "\n<div class='navigation-calendrier calendrier-moztop8'" 
-	  . (!isset($couleur_foncee) ? "" : "\nstyle='background-color: $couleur_foncee;'")
-	  . ">\n<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
+	  "\n<div class='navigation-calendrier calendrier-moztop8'><div class='toile_foncee'>\n" 
+	  . "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_R, $ancre,
 				 "sans-heure.gif",
@@ -998,7 +998,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . "&nbsp;&nbsp;"
 	  . $nom
 	  . (_DIR_RESTREINT ? '' :  aide("messcalen"))
-	  . "</div>"
+	  . "</div></div>"
 	  . http_calendrier_invisible($annee, $mois, $jour, $script, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal", $ancre, $id);
 }
 
