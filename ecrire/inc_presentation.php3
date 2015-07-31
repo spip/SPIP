@@ -1515,18 +1515,19 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	
 
-	if ($options == "avancees" AND ($rubrique == "asuivre" OR $spip_ecran == "large")) {
+	if ($options == "avancees" AND !($spip_display != 3 AND $rubrique == "documents" AND $spip_ecran == "etroit")) {
 		global $recherche;
-		if ($recherche == '' AND $spip_display != 2)
+		if ($recherche == '' AND $spip_display != 2) {
 			$recherche_aff = _T('info_rechercher');
-		else
+			$onfocus = "onfocus=this.value='';";
+		} else
 			$recherche_aff = $recherche;
 		bandeau_barre_verticale();
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2")
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size=1 color='#505050'><b>"._T('info_rechercher_02')."</b></font><br>";
-		echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" style="width: 70px" accesskey="r">';
+		echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" style="width: 70px" accesskey="r" '.$onfocus.'>';
 		echo "</form>";
 		echo "</td>";
 	}
