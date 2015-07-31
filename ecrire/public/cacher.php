@@ -67,12 +67,25 @@ function generer_nom_fichier_cache($contexte) {
 }
 
 // Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
-// http://doc.spip.org/@cache_gz
-function cache_gz($page) {
-	if ($GLOBALS['flag_gz'] AND strlen($page['texte']) > 16*1024)
-		return '.gz';
-	else
-		return '';
+// (pas de passage par reference car on veut conserver la version non compressee
+// pour l'afficher)
+// http://doc.spip.org/@gzip_page
+function gzip_page($page) {
+	if ($GLOBALS['flag_gz'] AND strlen($page['texte']) > 16*1024) {
+		$page['gz'] = true;
+		$page['texte'] = gzcompress($page['texte']);
+	} else {
+		$page['gz'] = false;
+	}
+	return $page;
+}
+
+// Faut-il decompresser ce cache ?
+// (passage par reference pour alleger)
+// http://doc.spip.org/@gunzip_page
+function gunzip_page(&$page) {
+	if ($page['gz'])
+		$page['texte'] = gzuncompress($page['texte']);
 }
 
 // gestion des delais d'expiration du cache
@@ -98,15 +111,6 @@ function cache_valide(&$page, $date) {
 		return 1;
 	}
 
-	// Si la page a un invalideur de session 'zz', on ignore le cache
-	// si le visiteur n'a pas la meme session 'zz'
-	if (isset($page['invalideurs'])
-	AND isset($page['invalideurs']['session'])
-	AND $page['invalideurs']['session'] !== spip_session()) {
-		#spip_log('Session: \''.$page['invalideurs']['session'] . '\' != \''.spip_session().'\'');
-		return 1;
-	}
-
 	// Sinon comparer l'age du fichier a sa duree de cache
 	$duree = intval($page['entetes']['X-Spip-Cache']);
 	if ($duree == 0)  #CACHE{0}
@@ -123,14 +127,19 @@ function cache_valide(&$page, $date) {
 // http://doc.spip.org/@creer_cache
 function creer_cache(&$page, &$chemin_cache) {
 
-	// Normaliser le chemin et supprimer l'eventuelle contrepartie -gz du cache
-	$chemin_cache = str_replace('.gz', '', $chemin_cache);
-	$gz = cache_gz($page);
-	supprimer_fichier(_DIR_CACHE . $chemin_cache . ($gz ? '' : '.gz'));
+	// Si la page c1234 a un invalideur de session 'zz', sauver dans
+	// 'tmp/cache/a/c1234-zz.gz'
+	// en prenant soin de supprimer un eventuel cache non-sessionne
+	// si l'ajout de #SESSION dans le squelette est recent
+	if (isset($page['invalideurs'])
+	AND isset($page['invalideurs']['session'])) {
+		supprimer_fichier(_DIR_CACHE . $chemin_cache);
+		$chemin_cache .= '-'.$page['invalideurs']['session'];
+	}
 
 	// l'enregistrer, compresse ou non...
-	$chemin_cache .= $gz;
-	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache, serialize($page));
+	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache,
+		serialize(gzip_page($page)));
 
 	spip_log("Creation du cache $chemin_cache pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
@@ -193,16 +202,21 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		return;
 	}
 
+	// Controler l'existence d'un cache nous correspondant, dans les
+	// quatre versions possibles : gzip ou non, session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte);
-	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
-		$chemin_cache .= '.gz';
+
+	if (@file_exists(_DIR_CACHE . ($f = $chemin_cache))
+	OR (@file_exists(_DIR_CACHE . ($f = $chemin_cache.'-'.spip_session())))
+	) {
+		$lastmodified = @filemtime(_DIR_CACHE . $f);
+	} else
+		$lastmodified = 0;
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
 		$page = array();
-		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
-			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
 		return;
 	}
 
@@ -211,7 +225,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		// ne le faire que si la base est disponible
 		if (spip_connect()) {
 			include_spip('inc/invalideur');
-			retire_caches($chemin_cache);
+			retire_caches($f);
 		}
 	}
 
@@ -220,7 +234,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))) {
-			supprimer_fichier(_DIR_CACHE . $chemin_cache);
+			supprimer_fichier(_DIR_CACHE . $f);
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
@@ -230,18 +244,21 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// Lire le fichier cache et determiner sa validite
-	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
-		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
-			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
+	if ($lastmodified
+	AND lire_fichier(_DIR_CACHE . $f, $page)) {
 		$page = @unserialize($page);
 		$use_cache = cache_valide($page, $lastmodified);
-		if (!$use_cache) return; // $page est un cache utilisable
+		if (!$use_cache) {
+			// $page est un cache utilisable
+			gunzip_page($page);
+			return;
+		}
 	} else
 		$use_cache = 1; // fichier cache absent : provoque le calcul
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
-		if (file_exists(_DIR_CACHE . $chemin_cache))
+		if ($lastmodified)
 			$use_cache = 0;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");

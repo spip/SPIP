@@ -1246,16 +1246,18 @@ function lang_select ($lang=NULL) {
 // utiliser un cache enregistre pour cette session.
 // Par convention cette chaine ne doit pas contenir de caracteres [^0-9A-Za-z]
 // Attention on ne peut *pas* inferer id_auteur a partir de la session, qui
-// pourrait etre une chaine arbitraire -- ce n'est pas le cas pour l'instant
+// est une chaine arbitraire
+// Cette chaine est courte (6 cars) pour pouvoir etre utilisee dans un nom
+// de fichier cache
 // http://doc.spip.org/@spip_session
 function spip_session() {
 	static $session;
 	if (!isset($session)) {
 		$session = $GLOBALS['auteur_session']
-			? 'session'
-				.$GLOBALS['auteur_session']['id_auteur']
+			? substr(md5(
+				$GLOBALS['auteur_session']['id_auteur']
 				.'_'
-				.$_COOKIE['spip_session']
+				.$_COOKIE['spip_session']), 0, 6)
 			: '';
 	}
 	#spip_log('session: '.$session);
