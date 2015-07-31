@@ -301,7 +301,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 		OR (
 			in_array($qui['statut'], array('0minirezo', '1comite'))
 			AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
-			AND sql_fetch(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
 
@@ -360,7 +360,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
 		in_array($r, array('prop', 'publie'))
-		OR sql_fetch(auteurs_article($id, "id_auteur=".$qui['id_auteur']));
+		OR auteurs_article($id, "id_auteur=".$qui['id_auteur']);
 }
 
 // Voir les revisions ?
