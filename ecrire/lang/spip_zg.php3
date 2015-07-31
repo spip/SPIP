@@ -233,7 +233,7 @@ $GLOBALS['i18n_zg'] = array(
 				compl&egrave;te',
 'icone_interface_simple' => 'Interface
 				simplifi&eacute;e',
-'icone_maintenace_site' => 'Maintenance du siteZORG',
+'icone_maintenance_site' => 'Maintenance du siteZORG',
 'icone_messagerie_peronnelle' => 'Messagerie personnelleZORG',
 'icone_messagerie_personnelle' => 'Messagerie personnelleZORG',
 'icone_modif_groupe_mots' => 'Modifier ce groupe de motsZORG',
