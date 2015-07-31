@@ -11,26 +11,6 @@
 \***************************************************************************/
 
 include ("inc.php3");
-
-$var_f = find_in_path("inc_config-fonctions.php");
-if ($var_f)
-  include($var_f);
- else
-   include_ecrire("inc_config-fonctions.php");
-
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo _T('avis_non_acces_page');
-	exit;
-}
-
-init_config();
-if ($changer_config == 'oui') appliquer_modifs_config();
-
-if (function_exists('affiche_config_fonctions'))
-  $var_nom = 'affiche_config_fonctions';
- else
-   $var_nom = 'affiche_config_fonctions_dist';
-
-$var_nom();
-
+$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
+$var_f($changer_config);
 ?>

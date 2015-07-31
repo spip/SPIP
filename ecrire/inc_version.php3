@@ -54,6 +54,9 @@ function include_ecrire($file) {
 	else spip_log($file . " illisble");
 }
 
+// charge un fichier perso ou, a defaut, standard
+// et retourne si elle existe le nom de la fonction homonyme, ou de prefixe _dist
+
 function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -73,16 +76,16 @@ function include_fonction($nom) {
 			else {
 			  spip_log($inc . " inconnu");
 			// esperons qu'elle est dans les fichiers deja lus
-			  return $nom;
 			}
 		}
 	}
-	if (function_exists($nom))
-		return $nom;
-	elseif (function_exists($nom .= "_dist"))
-		return $nom;
+	$f = str_replace('-','_',$nom); // pour config-fonc etc. A renommer
+	if (function_exists($f))
+		return $f;
+	elseif (function_exists($f .= "_dist"))
+		return $f;
 	else {
-		spip_log("fonction $var_nom indisponible");
+		spip_log("fonction $nom indisponible");
 		exit;
 	}
 }
@@ -575,6 +578,7 @@ if (!$REQUEST_URI) {
 	if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
 		$REQUEST_URI .= '?'.$QUERY_STRING;
 }
+
 
 // API d'appel a la base de donnees
 function spip_query($query) {
