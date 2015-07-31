@@ -6,10 +6,10 @@ $GLOBALS['i18n_de'] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
+'0_URL' => 'http://www.uzine.net/spip-de',
 '0_langue' => 'Deutsch [de]',
-'0_liste' => 'spip-dev@rezo.net',
-'0_mainteneur' => 'spip-dev@rezo.net',
+'0_liste' => 'spip-trad@rezo.net',
+'0_mainteneur' => 'Klaus at spip.de',
 
 
 // A
