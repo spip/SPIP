@@ -286,6 +286,12 @@ function image_filtrer($args){
 	return $texte;
 }
 
+// pour les feuilles de style
+function image_bg ($img, $couleur, $pos="") {
+	if (function_exists("imagecreatetruecolor")) return "background: url(".url_absolue(extraire_attribut(image_aplatir(image_sepia($img, $couleur),"gif","cccccc", 64, true), "src")).") $pos;";
+	else return "background-color: #$couleur;";
+}
+
 // Pour assurer la compatibilite avec les anciens nom des filtres image_xxx
 // commencent par "image_"
 // http://doc.spip.org/@reduire_image
