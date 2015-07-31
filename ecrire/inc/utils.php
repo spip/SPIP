@@ -587,7 +587,9 @@ function creer_chemin() {
 	// provisoire, a remplacer par un spip_unlink sur les fichiers compiles lors d'un prochain upgrade
 	if (isset($GLOBALS['plugins'])){
 		$c = '';
-		foreach($GLOBALS['plugins'] as $dir) $path_base = _chemin(_DIR_PLUGINS.$dir);
+		foreach($GLOBALS['plugins'] as $dir) {
+			$path_base = _chemin(_DIR_PLUGINS.$dir);
+		}
 		unset($GLOBALS['plugins']);
 	}
 	// on calcule le chemin si le dossier skel a change
@@ -628,7 +630,6 @@ function find_in_path ($filename) {
 		$dirname = substr($filename, 0, $a+1);
 		$basename = substr($filename, $a+1);
 	}
-#var_dump(creer_chemin());
 	foreach(creer_chemin() as $dir) {
 		$sous = $dir.$dirname;
 		if (!isset($ram[$sous]))

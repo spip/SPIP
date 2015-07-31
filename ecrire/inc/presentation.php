@@ -1442,7 +1442,7 @@ function afficher_hierarchie($id_rubrique) {
 
 	while ($id_rubrique) {
 
-		$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=$id_rubrique");
+		$res = sql_fetsel("id_parent, titre, lang", "spip_rubriques", "id_rubrique=".intval($id_rubrique));
 
 		if (!$res) break; // rubrique inexistante
 
