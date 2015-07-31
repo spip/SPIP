@@ -80,7 +80,10 @@ function liste_objets_bloques($exec,$contexte=array(),$auteur=null){
 function fin_page(){
 	include_spip('inc/pipelines');
 	// avec &var_profile=1 on a le tableau de mesures SQL
-	$debug = ((_request('exec') !== 'valider_xml')  AND ((_request('var_mode') == 'debug') OR $GLOBALS['tableau_des_temps'] AND isset($_COOKIE['spip_admin'])));
+	$debug = ((_request('exec') !== 'valider_xml')
+		AND ((_request('var_mode') == 'debug')
+			OR (isset($GLOBALS['tableau_des_temps']) AND $GLOBALS['tableau_des_temps'])
+			AND isset($_COOKIE['spip_admin'])));
 	$t = '</div><div id="pied"><div class="largeur">'
 	. recuperer_fond('prive/squelettes/inclure/pied')
 	. "</div>"
