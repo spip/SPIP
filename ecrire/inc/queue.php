@@ -130,20 +130,21 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 }
 
 /**
- * Purger la file de tâche et reprgrammer les tâches périodiques
+ * Purger la file de tâche et reprogrammer les tâches périodiques
  * 
  * @return void
  */
 function queue_purger(){
 	include_spip('base/abstract_sql');
 	sql_delete('spip_jobs');
-  sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
-  include_spip('inc/genie');
-  genie_queue_watch_dist();
+	sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
+	include_spip('inc/genie');
+	genie_queue_watch_dist();
 }
 
 /**
  * Retirer une tache de la file d'attente
+ * 
  * @param int $id_job
  *  id de la tache a retirer
  * @return bool
@@ -170,10 +171,10 @@ function queue_remove_job($id_job){
  * Associer une tache avec un objet
  *
  * @param int $id_job
- *	id of job to link
+ *	id de la tache a lier
  * @param array $objets
- *  can be a simple array('objet'=>'article','id_objet'=>23)
- *  or an array of simple array to link multiples objet in one time
+ *  peut être un simple tableau array('objet'=>'article','id_objet'=>23)
+ *  ou un tableau composé de tableaux simples pour lieur plusieurs objets en une fois
  */
 function queue_link_job($id_job,$objets){
 	include_spip('base/abstract_sql');
@@ -194,9 +195,9 @@ function queue_link_job($id_job,$objets){
  * Dissocier une tache d'un objet
  *
  * @param int $id_job
- *	id of job to unlink ibject with
+ *	id de la tache à dissocier
  * @return int/bool
- *	result of sql_delete
+ *	resultat du sql_delete
  */
 function queue_unlink_job($id_job){
 	return sql_delete("spip_jobs_liens","id_job=".intval($id_job));
@@ -204,6 +205,7 @@ function queue_unlink_job($id_job){
 
 /**
  * Lancer une tache decrite par sa ligne SQL
+ * 
  * @param array $row
  *	describe the job, with field of table spip_jobs
  * @return mixed
@@ -449,16 +451,16 @@ function queue_update_next_job_time($next_time=null){
 			$next = $next_time;
 	}
 
-		if ($next){
-			if (is_null($nb_jobs_scheduled))
-				$nb_jobs_scheduled = sql_countsel('spip_jobs',"status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
-			elseif ($next<=$time)
-				$nb_jobs_scheduled++;
-			// si trop de jobs en attente, on force la purge en fin de hit
-			// pour assurer le coup
-			if ($nb_jobs_scheduled> (defined('_JQ_NB_JOBS_OVERFLOW')?_JQ_NB_JOBS_OVERFLOW:10000))
-				define('_DIRECT_CRON_FORCE',true);
-		}
+	if ($next){
+		if (is_null($nb_jobs_scheduled))
+			$nb_jobs_scheduled = sql_countsel('spip_jobs',"status=".intval(_JQ_SCHEDULED)." AND date<".sql_quote(date('Y-m-d H:i:s',$time)));
+		elseif ($next<=$time)
+			$nb_jobs_scheduled++;
+		// si trop de jobs en attente, on force la purge en fin de hit
+		// pour assurer le coup
+		if ($nb_jobs_scheduled> (defined('_JQ_NB_JOBS_OVERFLOW')?_JQ_NB_JOBS_OVERFLOW:10000))
+			define('_DIRECT_CRON_FORCE',true);
+	}
 
 	queue_set_next_job_time($next);
 	$deja_la = false;
