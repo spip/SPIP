@@ -18,7 +18,7 @@ function enfant($leparent){
 	global $id_rubrique;
 	global $connect_toutes_rubriques;
 	global $i;
-	global $couleur_claire;
+	global $couleur_claire, $spip_lang_left;
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -33,16 +33,17 @@ function enfant($leparent){
 
 		if ($my_rubrique != $id_rubrique){
 
-			$espace="";
-			for ($count=1;$count<$i;$count++){
-				$espace.="&nbsp;&nbsp;&nbsp; ";
-			}
+			$style .= "padding-left: 16px; ";
+			$style .= "margin-left: ".($i*16)."px;";
 			if ($i > 3) $style .= "color: #666666;";
 			if ($i > 4) $style .= "font-style: italic;";
 			if ($i < 3) $style .= "font-weight:bold; ";
 			if ($i==1) {
-				$espace= "";
+				$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
 				$style .= "background-color: $couleur_claire;";
+			}
+			else {
+				$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 			}
 
 			if ($statut_rubrique!='publie') $titre = "($titre)";
@@ -50,7 +51,7 @@ function enfant($leparent){
 
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">&nbsp;&nbsp;&nbsp; $espace".supprimer_tags($titre)."\n";
+				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">".supprimer_tags($titre)."\n";
 			}
 			enfant($my_rubrique);
 		}
@@ -156,11 +157,11 @@ echo _T('entree_titre_obligatoire');
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
 
-debut_cadre_relief("$logo_parent");
-echo "<B>"._T('entree_interieur_rubrique')."</B> ".aide ("rubrub")."<BR>\n";
-echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif;' class='forml' SIZE='1'>\n";
+debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
+//echo "<B>"._T('entree_interieur_rubrique')."</B> ".aide ("rubrub")."<BR>\n";
+echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' class='forml' SIZE='1'>\n";
 if ($connect_toutes_rubriques) {
-	echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>"._T('info_racine_site')."\n";
+	echo "<OPTION".mySel("0",$id_parent)." style='background: url(img_pack/racine-site-12.gif) $spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white;'>"._T('info_racine_site')."\n";
 } else {
 	echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
 }
@@ -179,9 +180,9 @@ $row = spip_fetch_array(spip_query($query));
 $contient_breves = $row['cnt'];
 if ($contient_breves > 0) {
         $scb = ($contient_breves>1? 's':'');
-	echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;"._T('avis_deplacement_rubrique', array('contient_breves' => $contient_breves, 'scb' => $scb))."</font></label>\n";
+	echo "<div><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;"._T('avis_deplacement_rubrique', array('contient_breves' => $contient_breves, 'scb' => $scb))."</font></label></div>\n";
 }
-fin_cadre_relief();
+fin_cadre_couleur();
 
 echo "<P>";
 

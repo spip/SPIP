@@ -265,7 +265,8 @@ function enfant($leparent){
 	global $statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
-	global $couleur_claire;
+	global $couleur_claire, $spip_lang_left;
+
 
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -287,10 +288,8 @@ function enfant($leparent){
 			$rubrique_acceptable = false;
 		}
 
-		$espace="";
-		for ($count=1;$count<$i;$count++){
-			$espace.="&nbsp;&nbsp;&nbsp; ";
-		}
+		$style .= "padding-left: 16px; ";
+		$style .= "margin-left: ".(($i-1)*16)."px;";
 
 		switch ($i) {
 		case 1:
@@ -312,6 +311,13 @@ function enfant($leparent){
 		default;
 			$style .= "color: #A0A0A0;";
 			break;
+		}
+		if ($i==1) {
+			$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
+			$style .= "background-color: $couleur_claire;";
+		}
+		else {
+			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 		}
 
 		if ($rubrique_acceptable) {
@@ -404,14 +410,12 @@ echo "<P><HR><P>";
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-	debut_cadre_relief("$logo_parent");
-	echo "<B>"._T('titre_cadre_interieur_rubrique')."&nbsp;:</B>\n";
-	echo aide ("artrub");
-	echo "<BR><SELECT NAME='id_rubrique' style='background-color: $couleur_claire; font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
+	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
+	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
 	echo _T('texte_rappel_selection_champs');
-	fin_cadre_relief();
+	fin_cadre_couleur();
 	
 	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\" >";
 

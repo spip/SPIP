@@ -699,6 +699,7 @@ td.icone a img {
 	-moz-border-radius: 8px;
 }
 
+
 .cadre-trait-couleur {
 	background-color: white;
 	border: 2px solid <? echo $couleur_foncee; ?>;
