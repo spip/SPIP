@@ -155,16 +155,17 @@ function parser_champs_interieurs($texte, $sep, $result) {
 function parser_param($params, &$result) {
 	$params2 = Array();
 	$type = $result->type_requete;
-	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', $params, $m)) {
-	  $params = $m[3];
-	  // cas d'un critere avec {...}
-	  if ($m[2])
-	    $params2[] = $m[1];
-	  else {
-	    if (strlen($m[1]) < 2 )
-	      $params2[] = $m[1];
+	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
+		$params = $m[3];
+		$m[1] = trim($m[1]);
+		// cas d'un critere avec {...}
+		if ($m[2])
+			$params2[] = $m[1];
+		else {
+			if (strlen($m[1]) < 2)
+				$params2[] = $m[1];
 	    else {
-	      ereg('(.)([^"}]*)(.)', $m[1], $args);
+	      ereg('^(.)([^"}]*)(.)$', $m[1], $args);
 	      // cas syntaxique general, 
 	      // traiter qq lexemes particuliers pour faciliter la suite
 	      if ($args[3] != '"') {

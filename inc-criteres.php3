@@ -316,10 +316,12 @@ function calculer_criteres ($idb, &$boucles) {
 	}
 }
 
-# Criteres numériques et de comparaison
+# Criteres numeriques et de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
-  global $tables_relations, $table_des_tables, $table_date, $tables_des_serveurs_sql;
+	global $tables_relations, $table_des_tables, $table_date;
+	global $tables_des_serveurs_sql;
+
 	$boucle = &$boucles[$idb];				# nom de la boucle
 	$type = $boucle->type_requete;			# articles
 	$id_table = $boucle->id_table;	# articles ->   'table';
@@ -335,11 +337,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			// Variable comparee
 			$col = $match[1];
 			$fct = '';
-			if (ereg("([a-z_]+)\(([a-z_]+)\)", $col,$match3))
-			  {
+			if (ereg("([a-z_]+)\(([a-z_]+)\)", $col,$match3)) {
 				$col = $match3[2];
 				$fct = $match3[1];
-			  }
+			}
 			$col_table = $id_table;
 			// Valeur de comparaison
 			if ($match[3]) {
