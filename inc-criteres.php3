@@ -196,7 +196,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      $order = 
 		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
 	      $order =
-		"((\$x = $order) ? ('$boucle->id_table.' . \$x$sens) : '')";
+		"((\$x = preg_replace(\"/\\W/\",'',$order)) ? ('$boucle->id_table.' . \$x$sens) : '')";
 	  }
 	    else {
 	      $par = array_shift($tri);
