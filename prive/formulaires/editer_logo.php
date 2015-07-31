@@ -186,20 +186,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 	if (!$objet) $objet = 'site';
 
 	$objet = objet_type($objet);
-	$_id_objet = id_table_objet($objet);
 
-	// supprimer l'ancien logo puis copier le nouveau
-	include_spip('inc/chercher_logo');
-	include_spip('inc/flock');
-	$type = type_du_logo($_id_objet);
-	$chercher_logo = charger_fonction('chercher_logo','inc');
-	
 	// effectuer la suppression si demandee d'un logo
 	$on = _request('supprimer_logo_on');
 	if ($on OR _request('supprimer_logo_off')){
-		$logo = $chercher_logo($id_objet, $_id_objet, $on ? 'on' : 'off');
-		if ($logo)
-			spip_unlink($logo[0]);
+		logo_supprimer($objet, $id_objet, $on ? 'on' : 'off');
 		$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
 		set_request('logo_up',' ');
 	}
@@ -209,10 +200,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 		$sources = formulaire_editer_logo_get_sources();
 		foreach($sources as $etat=>$file) {
 			if ($file and $file['error']==0) {
-				$logo = $chercher_logo($id_objet, $_id_objet, $etat);
-				if ($logo)
-					spip_unlink($logo[0]);
-				if ($err = formulaire_editer_logo_importer_image($type.$etat.$id_objet,$file))
+				if ($err = logo_modifier($objet, $id_objet, $etat ,$file))
 					$res['message_erreur'] = $err;
 				else
 					$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
@@ -251,15 +239,46 @@ function formulaire_editer_logo_get_sources(){
 }
 
 /**
- * Recuperer l'image et l'importer pour le logo nomme par $nom
- * @param string $nom
- *   nom du logo
- * @param string|array $source
- *   source : array si vient de input file, string si fichier de upload
- * @return string
- *   erreur eventuelle
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $etat
+ *   on ou off
  */
-function formulaire_editer_logo_importer_image($nom, $source){
+function logo_supprimer($objet, $id_objet, $etat){
+	$chercher_logo = charger_fonction('chercher_logo','inc');
+	$objet = objet_type($objet);
+	$primary = id_table_objet($objet);
+	include_spip('inc/chercher_logo');
+
+	// existe-t-il deja un logo ?
+	$logo = $chercher_logo($id_objet, $primary, $etat);
+	if ($logo)
+		spip_unlink($logo[0]);
+}
+
+/**
+ * @param string $objet
+ * @param int $id_objet
+ * @param string $etat
+ *   on ou off
+ * @param string|array $source
+ *   array : sous tableau de $_FILE issu de l'upload
+ *   string : fichier source (chemin complet ou chemin relatif a tmp/upload)
+ * @return string
+ */
+function logo_modifier($objet, $id_objet, $etat, $source){
+	$chercher_logo = charger_fonction('chercher_logo','inc');
+	$objet = objet_type($objet);
+	$primary = id_table_objet($objet);
+	include_spip('inc/chercher_logo');
+	$type = type_du_logo($primary);
+
+	// nom du logo
+	$nom = $type.$etat.$id_objet;
+
+	// supprimer le logo eventueel existant
+	logo_supprimer($objet, $id_objet, $etat);
+
 	include_spip('inc/documents');
 	$erreur = "";
 
@@ -274,7 +293,12 @@ function formulaire_editer_logo_importer_image($nom, $source){
 	$ok = false;
 	// fichier dans upload/
 	if (is_string($source)){
-		$ok = @copy(determine_upload() . $source, $file_tmp);
+		if (file_exists($source)) {
+			$ok = @copy($source, $file_tmp);
+		}
+		elseif(file_exists($f=determine_upload() . $source)){
+			$ok = @copy($f, $file_tmp);
+		}
 	} // Intercepter une erreur a l'envoi
 	elseif (!$erreur = check_upload_error($source['error'], "", true)) {
 		// analyse le type de l'image (on ne fait pas confiance au nom de
