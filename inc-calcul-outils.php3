@@ -163,7 +163,6 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
-
 //
 // FONCTIONS FAISANT DES APPELS SQL
 //
@@ -184,21 +183,35 @@ function calcul_exposer ($id, $type, $reference) {
 		$exposer = array();
 		foreach ($reference as $element=>$id_element) {
 			if ($element == 'id_secteur') $element = 'id_rubrique';
-			if (ereg("id_(article|breve|rubrique|syndic)", $element, $regs)) {
+			if ($x = table_from_primary($element)) {
+				list($table,$hierarchie) = $x;
 				$exposer[$element][$id_element] = true;
-				list ($id_rubrique) = spip_abstract_fetsel(
+				if ($hierarchie) {
+					list ($id_rubrique) = spip_abstract_fetsel(
 array('id_rubrique'), 
-array(table_objet($regs[1])),
+array($table),
 array("$element=$id_element"));
 				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
+				}
 			}
 		}
 	}
 
 	// And the winner is...
 	return $exposer[$type][$id];
+}
+
+function table_from_primary($id)
+{
+	global $tables_principales;
+	include_ecrire('inc_serialbase.php3');
+	foreach ($tables_principales as $k => $v)
+	  { if ($v['key']['PRIMARY KEY'] == $id) 
+	      return array($k, array_key_exists('id_rubrique', $v['field']));
+	  }
+	return '';
 }
 
 function calcul_generation ($generation) {
