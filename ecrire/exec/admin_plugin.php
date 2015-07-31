@@ -20,8 +20,7 @@ include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
 // http://doc.spip.org/@exec_admin_plugin_dist
-function exec_admin_plugin_dist() {
-	global $spip_lang_right;
+function exec_admin_plugin_dist($retour='') {
 
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
@@ -36,7 +35,9 @@ function exec_admin_plugin_dist() {
 	echo "<br/><br/><br/>";
 	
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-	// barre_onglets("configuration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ?
+
+
+	// barre_onglets("configuration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ? // cfg
 	
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -52,31 +53,54 @@ function exec_admin_plugin_dist() {
 	// on fait l'installation ici, cela permet aux scripts d'install de faire des affichages ...
 	installe_plugins();
 
-	echo debut_droite('plugin',true);
-	if (isset($GLOBALS['meta']['plugin_erreur_activation'])){
-		echo $GLOBALS['meta']['plugin_erreur_activation'];
-		effacer_meta('plugin_erreur_activation');
-	}
+	echo debut_droite('plugin', true);
 
-	echo debut_cadre_trait_couleur('',true,'',_T('plugins_liste'),'liste_plugins');
+
+	echo debut_cadre_trait_couleur('',true,'',_T('plugins_liste'),
+		'liste_plugins');
 	echo _T('texte_presente_plugin');
 
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
 
-	$sub = "\n<div style='text-align:$spip_lang_right'>"
+
+	$sub = "\n<div style='text-align:".$GLOBALS['spip_lang_right']."'>"
 	.  "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />"
 	. "</div>";
 
-	$corps = $sub
-	. affiche_arbre_plugins($lpf, $lcpa)
-	. "\n<br />"
-	. $sub;
+
+	// S'il y a plus de 10 plugins pas installes, les signaler a part ;
+	// mais on affiche tous les plugins mis a la racine
+	if (count($lpf) - count($lcpa) > 9
+	AND _request('afficher_tous_plugins') != 'oui') {
+		$lcpaffiche = array();
+		foreach ($lpf as $f)
+			if (!strpos($f, '/') OR in_array($f, $lcpa))
+				$lcpaffiche[] = $f;
+		$corps = "<p>"._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
+			. "<p><a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
+			. affiche_arbre_plugins($lcpaffiche, $lcpa);
+
+	} else {
+		$corps = 
+			"<p>"._L(count($lcpa).' plugins activ&#233;s')."</p>\n"
+			. "<p>"._L(count($lpf).' plugins disponibles.')."</p>\n"
+			. (count($lpf)>20 ? $sub : '')
+			. affiche_arbre_plugins($lpf, $lcpa);
+	}
+
+
+	$corps .= "\n<br />" . $sub;
 
 	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
 
+	if (include_spip('inc/charger_plugin')) {
+		echo formulaire_charger_plugin($retour);
+	}
+
 	echo fin_cadre_trait_couleur(true);
 	echo fin_gauche(), fin_page();
+
 
 }
 
@@ -172,7 +196,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 			var prefix = jQuery(this).parent().prev().attr('name');
 			if (!jQuery(this).siblings('div.info').html()) {
 				jQuery(this).siblings('div.info').prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin/, 'info_plugin'), {},
+					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {},
 					function() {
 						document.location = '#' + prefix;
 					}

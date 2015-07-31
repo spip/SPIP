@@ -347,6 +347,7 @@ dist/vignettes/zip.png -text
 dist/win_width.htc -text
 ecrire/action/acceder_document.php -text
 ecrire/action/activer_plugins.php -text
+ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
 ecrire/action/configurer_relayeur.php -text
 ecrire/action/converser.php -text
@@ -541,6 +542,7 @@ ecrire/inc/article_select.php -text
 ecrire/inc/auteur_infos.php -text
 ecrire/inc/autoriser.php -text
 ecrire/inc/boutons.php -text
+ecrire/inc/charger_plugin.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/class.JavaScriptPacker.php -text
