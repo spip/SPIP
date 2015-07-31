@@ -13,8 +13,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres');
-include_spip('inc/acces');
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
 function xml_rss_dist($rss, $intro = '') {

@@ -194,17 +194,6 @@ function minipres($titre='', $corps="", $onload='')
 }
 
 //
-// Aide. Surchargeable, et pas d'ereur fatale si pas disponible.
-//
-
-// http://doc.spip.org/@aide
-function aide($aide='') {
-	$aider = charger_fonction('aider', 'inc', true);
-	return $aider ?  $aider($aide) : '';
-}
-
-
-//
 // Mention de la revision SVN courante de l'espace restreint standard
 // (numero non garanti pour l'espace public et en cas de mutualisation)
 // on est negatif si on est sur .svn, et positif si on utilise svn.revision
@@ -287,24 +276,6 @@ function exec_test_ajax_dist() {
 	}
 }
 
-// Afficher le bouton "preview" dans l'espace public
-// http://doc.spip.org/@afficher_bouton_preview
-function afficher_bouton_preview() {
-		$x = _T('previsualisation');
-		return '<div class="spip_large" style="
-		display: block;
-		color: #eeeeee;
-		background-color: #111111;
-		padding-right: 5px;
-		padding-top: 2px;
-		padding-bottom: 5px;
-		top: 0px;
-		left: 0px;
-		position: absolute;
-		">' 
-		. http_img_pack('naviguer-site.png', $x, '')
-		. '&nbsp;' . majuscules($x) . '</div>';
-}
 
 // Fabrique une balise A, avec tous les attributs possibles
 // attention au cas ou la href est du Javascript avec des "'"

@@ -1320,4 +1320,14 @@ function lang_select ($lang=NULL) {
 	changer_langue($lang);
 	return $lang;
 }
+//
+// Aide, aussi depuis l'espace prive a present.
+//  Surchargeable mais pas d'ereur fatale si indisponible.
+//
+
+// http://doc.spip.org/@aide
+function aide($aide='') {
+	$aider = charger_fonction('aider', 'inc', true);
+	return $aider ?  $aider($aide) : '';
+}
 ?>
