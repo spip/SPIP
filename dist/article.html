@@ -14,8 +14,8 @@
 	<INCLURE{fond=inc-entete}>
 
 	[(#REM) Contenu principal : contenu de l'article ]
-    <div id="conteneur">
-    <div id="contenu">
+    <div class="hfeed" id="conteneur">
+    <div class="hentry" id="contenu">
     
         [(#REM) Fil d'Ariane ]
         <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
@@ -24,11 +24,11 @@
             <div class="surlignable">
             [(#LOGO_ARTICLE||image_reduire{200,200})]
             [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-            <h1 class="#EDIT{titre}">#TITRE</h1>
+            <h1 class="#EDIT{titre} entry-title">#TITRE</h1>
             [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
             </div>
 
-            <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+            <p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
             [(#REM) Inclure le modele des liens de traductions ]
             #MODELE{article_traductions}
@@ -39,7 +39,7 @@
         [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
         
         [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-        [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+        [<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
         </div>
 
         [(#REM) Portfolio : album d'images ]
