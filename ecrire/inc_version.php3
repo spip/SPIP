@@ -13,7 +13,7 @@ define("_ECRIRE_INC_VERSION", "1");
 $table_prefix = "spip";
 
 // faut-il loger les infos de debug dans data/spip.log ?
-$debug = false; 
+$debug = false;
 
 ///////////////////////////////////////////////////////
 
