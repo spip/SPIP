@@ -184,7 +184,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	// s'il y a une extension .php, ce n'est pas un squelette
 	if (preg_match('/^.+[.]php$/s', $fichier)) {
-		$code = sandbox_composer_inclure_php($fichier, $p);
+		$code = sandbox_composer_inclure_php($fichier, $p, $contexte);
 	} else 	{
 		$_options[] = "\"compil\"=>array($compil)";
 		if ($ajax)
