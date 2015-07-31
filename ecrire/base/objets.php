@@ -35,9 +35,12 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		include_spip('public/interfaces');
 		# recuperer les tables_principales si besoin
 		include_spip('base/serial');
+		# recuperer les tables_auxiliaires si besoin
+		include_spip('base/auxiliaires');
 		// recuperer les declarations explicites ancienne mode
 		// qui servent a completer declarer_tables_objets_sql
 		base_serial($GLOBALS['tables_principales']);
+		base_auxiliaires($GLOBALS['tables_auxiliaires']);
 		$infos_tables = pipeline('declarer_tables_objets_sql',array(
 			'spip_articles'=> array(
 				'page'=>'article',
@@ -144,19 +147,20 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		foreach($infos_tables as $t=>$infos)
 			$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
 
-		// completer les tables principales
+		// completer les tables principales et auxiliaires
 		// avec celles declarees uniquement dans declarer_table_objets_sql
+		// pour assurer la compat en transition
 		foreach($infos_tables as $table=>$infos) {
-			if (!isset($GLOBALS['tables_principales'][$table])
-			  AND isset($infos['principale']) AND $infos['principale']){
+			$principale_ou_auxiliaire = ($infos['principale']?'tables_principales':'tables_auxiliaires');
+			if (!isset($GLOBALS[$principale_ou_auxiliaire][$table])){
 				// l'ajouter au tableau
-				$GLOBALS['tables_principales'][$table] = array();
+				$GLOBALS[$principale_ou_auxiliaire][$table] = array();
 				if (isset($infos['field']) AND isset($infos['key']))
-					$GLOBALS['tables_principales'][$table] = &$infos_tables[$table];
+					$GLOBALS[$principale_ou_auxiliaire][$table] = &$infos_tables[$table];
 				else {
 					// lire sa definition en base
 					$trouver_table = charger_fonction('trouver_table','base');
-					$GLOBALS['tables_principales'][$table] = $trouver_table($table);
+					$GLOBALS[$principale_ou_auxiliaire][$table] = $trouver_table($table);
 				}
 			}
 		}
@@ -300,6 +304,13 @@ function lister_tables_principales(){
 		lister_tables_objets_sql();
 	}
 	return $GLOBALS['tables_principales'];
+}
+
+function lister_tables_auxiliaires(){
+	if (!count($GLOBALS['tables_auxiliaires'])){
+		lister_tables_objets_sql();
+	}
+	return $GLOBALS['tables_auxiliaires'];
 }
 
 /**

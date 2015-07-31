@@ -13,8 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/acces');
-include_spip('base/serial');
-include_spip('base/auxiliaires');
+include_spip('base/objets');
 include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
@@ -37,9 +36,9 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false,$serveur='
 	$sql_desc = $upgrade ? sql_showtable($table,true,$serveur) : false;
 	if (!$sql_desc) {
 		if ($autoinc==='auto') {
-			if (isset($GLOBALS['tables_principales'][$table]))
+			if ($t=lister_tables_principales() AND isset($t[$table]))
 				$autoinc = true;
-			elseif (isset($GLOBALS['tables_auxiliaires'][$table]))
+			elseif ($t=lister_tables_auxiliaires() AND isset($t[$table]))
 				$autoinc = false;
 			else {
 				// essayer de faire au mieux !
@@ -112,8 +111,8 @@ function creer_base($serveur='') {
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	alterer_base($GLOBALS['tables_principales'],
-		     $GLOBALS['tables_auxiliaires'],
+	alterer_base(lister_tables_principales(),
+		     lister_tables_auxiliaires(),
 		     false,
 		     $serveur);
 }
@@ -128,8 +127,8 @@ function creer_base($serveur='') {
  * @return void
  */
 function maj_tables($upgrade_tables=array(),$serveur=''){
-	alterer_base($GLOBALS['tables_principales'],
-		     $GLOBALS['tables_auxiliaires'],
+	alterer_base(lister_tables_principales(),
+		     lister_tables_auxiliaires(),
 		     $upgrade_tables,
 		     $serveur);
 }

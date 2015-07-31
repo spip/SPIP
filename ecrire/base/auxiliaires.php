@@ -58,6 +58,7 @@ $tables_auxiliaires['spip_resultats'] = array(
 	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
 }
 
-global $tables_auxiliaires;
-base_auxiliaires($tables_auxiliaires);
+include_spip('base/objets');
+$GLOBALS['tables_auxiliaires'] = lister_tables_auxiliaires();
+
 ?>
