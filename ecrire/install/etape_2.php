@@ -102,7 +102,7 @@ function install_etape_2_dist()
 // http://doc.spip.org/@install_etape_2_bases
 function install_etape_2_bases($login_db, $server_db)
 {
-	$res =  install_etape_liste_bases($server_db);
+	$res =  install_etape_liste_bases($server_db, $login_db);
 	if ($res) {
 		list($checked, $bases) = $res;
 		return array($checked, 
