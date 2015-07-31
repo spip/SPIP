@@ -386,7 +386,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'icone_tous_articles' => 'Wszystkie Twoje artyku&#322;y',
 'icone_tous_auteur' => 'Wszyscy autorzy',
 'icone_valider_message' => 'Zatwierd&#378; t&#281; wiadomo&#347;&#263;',
-'icone_visiter_site' => 'Odwied&#378;',
+'icone_visiter_site' => 'Odwied&#378;', # MODIF
 'icone_voir_en_ligne' => 'Obejrzyj online',
 'image_tourner_180' => 'Obr&oacute;t o 180&deg;',
 'image_tourner_droite' => 'Obr&oacute;t o 90&deg; w prawo',

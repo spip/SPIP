@@ -379,7 +379,7 @@ sera ignor&eacute;e) :
 'icone_tous_articles' => '&#24744;&#25152;&#26377;&#30340;&#25991;&#31456;',
 'icone_tous_auteur' => '&#25152;&#26377;&#20316;&#32773;',
 'icone_valider_message' => '&#20351;&#28040;&#24687;&#26377;&#25928;',
-'icone_visiter_site' => '<MODIF>&#35775;&#38382;',
+'icone_visiter_site' => '<MODIF>&#35775;&#38382;', # MODIF
 'icone_voir_en_ligne' => '&#22312;&#32447;&#39044;&#35272;',
 'image_tourner_180' => '&#26059;&#36716;180&deg;',
 'image_tourner_droite' => '&#21521;&#21491;&#26059;&#36716;90&deg; ',

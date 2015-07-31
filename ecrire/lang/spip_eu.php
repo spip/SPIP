@@ -378,7 +378,7 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'icone_tous_articles' => 'Zure artikulu guztiak',
 'icone_tous_auteur' => 'Egile guztiak',
 'icone_valider_message' => 'Mezu hau onartu',
-'icone_visiter_site' => 'Gunea bisitatu',
+'icone_visiter_site' => 'Gunea bisitatu', # MODIF
 'icone_voir_en_ligne' => 'Linean ikusi',
 'image_tourner_180' => '180 graduko errotazioa',
 'image_tourner_droite' => '90 graduko errotazioa eskuinera',

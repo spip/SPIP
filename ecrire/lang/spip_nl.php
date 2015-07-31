@@ -384,7 +384,7 @@ Bedankt voor je deelname
 'icone_tous_articles' => 'Al je artikels',
 'icone_tous_auteur' => 'Alle auteurs',
 'icone_valider_message' => 'Bericht goedkeuren',
-'icone_visiter_site' => 'Bekijken',
+'icone_visiter_site' => 'Bekijken', # MODIF
 'icone_voir_en_ligne' => 'Online bekijken',
 'image_tourner_180' => '180&deg; draaien',
 'image_tourner_droite' => '90&deg; naar rechts draaien',

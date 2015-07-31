@@ -384,7 +384,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_tous_articles' => 'Todos os seus artigos',
 'icone_tous_auteur' => 'Todos os autores',
 'icone_valider_message' => 'Validar esta mensagem',
-'icone_visiter_site' => 'Visitar',
+'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Ver em linha',
 'image_tourner_180' => 'Rodar 180&deg;',
 'image_tourner_droite' => 'Rodar 90&deg; &agrave; direita',

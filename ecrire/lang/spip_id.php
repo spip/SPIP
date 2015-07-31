@@ -386,7 +386,7 @@ Terima kasih atas partisipasi anda!
 'icone_tous_articles' => 'Semua artikel anda',
 'icone_tous_auteur' => 'Semua penulis',
 'icone_valider_message' => 'Validasi pesan ini',
-'icone_visiter_site' => 'Kunjungi situs',
+'icone_visiter_site' => 'Kunjungi situs', # MODIF
 'icone_voir_en_ligne' => 'Lihat online',
 'image_tourner_180' => 'Putar 180&deg;',
 'image_tourner_droite' => 'Putar 90&deg; kanan',

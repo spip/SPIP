@@ -207,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Pentru a remedia aceast&#259; problem&#259;, utiliza&#355;i clientul dumneavoastr&#259; favorit de FTP pentru a modifica drepturile de acces ale fiec&#259;rui
   dintre aceste directoare. Procedura este explicat&#259; &icirc;n detaliu &icirc;n manualul de instalare.</p>
   <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
-'double_occurrence' => 'Ocuren&#355;&#259; dubl&#259;', # MODIF
+'double_occurrence' => 'Ocuren&#355;&#259; dubl&#259; a @balise@',
 
 // E
 'en_cours' => '&icirc;n curs',
@@ -222,18 +222,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Fi&#351;ier @fichier@ de neg&#259;sit',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Confirma&#355;i adresa dumneavoastr&#259; de email',
+'form_auteur_email_modifie' => 'Adresa dumneavoastr&#259; de email a fost modificat&#259;.',
+'form_auteur_envoi_mail_confirmation' => 'Un email de confirmare a fost trimis la @email@. Trebuie s&#259; vizita&#355;i adresa de web men&#355;ionat&#259; &icirc;n email pentru a valida adresa de email.',
+'form_auteur_mail_confirmation' => 'Bun&#259; ziua,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+A&#355;i cerut modificarea dresei dumneavoastr&#259; de email.
+Pentru a confirma noua adres&#259;, e suficient s&#259; v&#259; conecta&#355;i la
+adresa de mai jos (&icirc;n caz contrat cererea dumneavoastr&#259; va fi ignorat&#259;) :
 
     @url@
-', # NEW
+',
 'form_deja_inscrit' => 'Sunte&#355;i deja &icirc;nscris.',
 'form_email_non_valide' => 'Adresa dumneavoastr&#259; de email nu este valabil&#259;.',
 'form_forum_access_refuse' => 'Nu mai ave&#355;i dreptul de acces la acest site.',
@@ -384,7 +383,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'icone_tous_articles' => 'Toate articolele dvs.',
 'icone_tous_auteur' => 'To&#355;i autorii',
 'icone_valider_message' => 'Valida&#355;i acest mesaj',
-'icone_visiter_site' => 'Vizita&#355;i',
+'icone_visiter_site' => 'Vizita&#355;i', # MODIF
 'icone_voir_en_ligne' => 'Vede&#355;i &icirc;n direct',
 'image_tourner_180' => 'Rota&#355;ie 180&deg;',
 'image_tourner_droite' => 'Rota&#355;ie 90&deg; la dreapta',
@@ -409,16 +408,16 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_article_supprime' => 'Articol suprimat',
 'info_articles' => 'Articole',
 'info_articles_a_valider' => 'Articole pentru validare',
-'info_articles_nb' => '@nb@ articles', # NEW
+'info_articles_nb' => '@nb@ articole',
 'info_articles_proposes' => 'Articole propuse',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => '1 articol',
 'info_auteurs_nombre' => 'autor(i)&nbsp;:',
 'info_authentification_ftp' => 'Autentificare (prin FTP).',
 'info_bloquer_lien' => 'bloca&#355;i aceast&#259; leg&#259;tur&#259;',
 'info_breves_02' => '&#350;tiri',
 'info_breves_2' => '&#351;tiri',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ &#351;tiri',
+'info_breves_un' => '1 &#351;tire',
 'info_breves_valider' => '&#350;tiri de validat',
 'info_connexion_refusee' => 'Conexiune refuzat&#259;',
 'info_contact_developpeur' => 'V&#259; rug&#259;m s&#259; contacta&#355;i un dezvoltator.',
@@ -439,8 +438,8 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_document' => 'Document',
 'info_document_indisponible' => 'Acest document nu este disponibil',
 'info_documents' => 'Documente',
-'info_documents_nb' => '@nb@ documents', # NEW
-'info_documents_un' => '1 document', # NEW
+'info_documents_nb' => '@nb@ documente',
+'info_documents_un' => '1 document',
 'info_echange_message' => 'SPIP permite schimbul de mesaje &#351;i constituirea de forumuri de discu&#355;ie
  private &icirc;ntre participan&#355;ii site-ului. Pute&#355;i activa sau
  dezactiva aceast&#259; func&#355;ionalitate.',
@@ -487,8 +486,8 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_mail_fournisseur' => 'dumneavoastr&#259;@furnizor.ro',
 'info_message_2' => 'MESAJ',
 'info_message_supprime' => 'MESAJ &#350;TERS',
-'info_messages_nb' => '@nb@ messages', # NEW
-'info_messages_un' => '1 message', # NEW
+'info_messages_nb' => '@nb@ messages',
+'info_messages_un' => '1 mesaj',
 'info_mise_en_ligne' => 'Data public&#259;rii&nbsp;:',
 'info_modification_parametres_securite' => 'modific&#259;ri ale parametrilor de securitate',
 'info_mois_courant' => '&Icirc;n timpul lunii :',
@@ -533,8 +532,8 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_retablir_lien' => 'restabili&#355;i aceast&#259; legatur&#259;',
 'info_retirer_mot' => 'Retrage&#355;i acest cuv&acirc;nt',
 'info_retirer_mots' => 'Retrage&#355;i toate cuvintele',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ rubrici',
+'info_rubriques_un' => '1 rubric&#259;',
 'info_sans_titre_2' => 'f&#259;r&#259; titlu',
 'info_selectionner_fichier' => 'Pute&#355;i selec&#355;iona un fi&#351;ier din directorul @upload@',
 'info_selectionner_fichier_2' => 'Selec&#355;iona&#355;i un fi&#351;ier&nbsp;:',
@@ -543,9 +542,9 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_site_attente' => 'Site Web &icirc;n a&#351;teptarea valid&#259;rii',
 'info_site_reference' => 'Site referen&#355;iat &icirc;n direct',
 'info_site_refuse' => 'Site Web refuzat',
-'info_sites_nb' => '@nb@ sites', # NEW
+'info_sites_nb' => '@nb@ site-uri',
 'info_sites_referencer' => 'Referen&#355;iere site',
-'info_sites_un' => '1 site', # NEW
+'info_sites_un' => '1 site',
 'info_supprimer_vignette' => '&nbsp;suprima&#355;i vinieta',
 'info_symbole_bleu' => 'Simbolul <b>albastru</b> indic&#259; o <b>ciorn&#259;</b>: adic&#259; un mesaj pentru folosin&#355;a dumneavoastr&#259; personal&#259;.',
 'info_symbole_jaune' => 'Simbolul <b>galben</b> indic&#259; un <b>anun&#355; c&#259;tre to&#355;i redactorii</b>&nbsp;: modificabil de c&#259;tre to&#355;i administratorii &#351;i vizibil pentru to&#355;i redactorii.',
@@ -569,7 +568,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_visites' => 'vizite :',
 'info_vos_rendez_vous' => 'Urm&#259;toarele dumneavoastr&#259; &icirc;nt&acirc;lniri',
 'info_zoom' => 'm&#259;rire',
-'infos_vos_pense_bete' => 'Ciornele dumneavoastr&#259;', # MODIF
+'infos_vos_pense_bete' => 'Ciornele dumneavoastr&#259;',
 'item_breve_proposee' => '&#350;tire propus&#259;',
 
 // L
@@ -618,7 +617,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'login_retour_site' => '&Icirc;napoi la site-ul public',
 'login_retoursitepublic' => '&icirc;napoi&nbsp;la&nbsp;site-ul&nbsp;public',
 'login_sans_cookiie' => 'Identificare f&#259;r&#259; cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login securizat',
 'login_sinscrire' => '&icirc;nscrie&#355;i-v&#259;',
 'login_test_navigateur' => 'test de navigator/reconectare',
 'login_verifiez_navigateur' => '(Verifica&#355;i totu&#351;i c&#259; navigatorul de web nu a memorat parola dumneavoastr&#259;...)',
@@ -764,7 +763,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',
-'zbug_balise_inexistante' => 'eroare @from@: baliza #@balise@ nu exist&#259;', # MODIF
+'zbug_balise_inexistante' => 'Baliza @balise@ nu este bine declarat&#259; pentru @from@',
 'zbug_balise_sans_argument' => 'Argument lips&#259; &icirc;n baliza @balise@',
 'zbug_boucle' => 'bucl&#259;',
 'zbug_boucle_recursive_undef' => 'Bucl&#259; recursiv&#259; nedefinit&#259;: @nom@',
@@ -788,7 +787,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'zbug_info_erreur_squelette' => 'Eroare pe site',
 'zbug_inversion_ordre_inexistant' => 'Inversie de ordin necunoscut',
 'zbug_pagination_sans_critere' => 'Baliza #PAGINATION f&#259;r criteriu {pagination} sau folosit &icirc;ntr-o bucl&#259; recursiv&#259;',
-'zbug_parametres_inclus_incorrects' => 'Parametru de includere incorect: @param@', # MODIF
+'zbug_parametres_inclus_incorrects' => 'Parametru de includere incorect: @param@',
 'zbug_profile' => 'Timp de calcul&nbsp;: @time@',
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'Server SQL nedefinit',

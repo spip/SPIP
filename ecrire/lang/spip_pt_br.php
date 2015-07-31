@@ -377,7 +377,7 @@ Obrigado por participar
 'icone_tous_articles' => 'Todas as suas mat&eacute;rias',
 'icone_tous_auteur' => 'Todos os autores',
 'icone_valider_message' => 'Validar esta mensagem',
-'icone_visiter_site' => 'Visitar',
+'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Ver online',
 'image_tourner_180' => 'Rodar 180&deg;',
 'image_tourner_droite' => 'Rodar 90&deg; &agrave; direita',

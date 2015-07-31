@@ -389,7 +389,7 @@ Mersi aou m&egrave;t ansanm isi
 'icone_tous_articles' => 'Tout bann zartik aou',
 'icone_tous_auteur' => 'Tout bann lot&egrave;r',
 'icone_valider_message' => 'Konfirm mod&eacute;kri-la',
-'icone_visiter_site' => 'Bat-kar&eacute; ',
+'icone_visiter_site' => 'Bat-kar&eacute; ', # MODIF
 'icone_voir_en_ligne' => 'Vwar an liyn',
 'image_tourner_180' => 'Toun&eacute; 180&deg;',
 'image_tourner_droite' => 'toun&eacute; drwat 90&deg; ',

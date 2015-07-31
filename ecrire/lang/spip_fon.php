@@ -355,7 +355,7 @@ sera ignor&eacute;e) :
 'icone_tous_articles' => 'we&#780;kp&aacute; l&#603; b&iacute;',
 'icone_tous_auteur' => 'ny&#596;wl&aacute;nt&#596; l&#603; b&iacute;',
 'icone_valider_message' => 's&#596; k&#603;n n&uacute; w&#603;n &eacute; l&#596;',
-'icone_visiter_site' => 'J&oacute;n&#596;',
+'icone_visiter_site' => 'J&oacute;n&#596;', # MODIF
 'icone_voir_en_ligne' => 'Mi kp&#596;n &#598;&ograve; &agrave;t&#603; &#596; j&iacute; ',
 'image_tourner_180' => 'l&igrave;l&#603;l&iacute;l&#603; 180&deg;',
 'image_tourner_droite' => 'l&igrave;l&#603;l&iacute;l&#603; 90&deg; y&igrave; &agrave;&#598;&ugrave;s&iacute;m&#603; ',

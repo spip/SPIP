@@ -378,7 +378,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'icone_tous_articles' => 'Alle Ihre Artikel',
 'icone_tous_auteur' => 'Alle Autoren',
 'icone_valider_message' => 'Beitrag freigeben',
-'icone_visiter_site' => 'Website ansehen',
+'icone_visiter_site' => 'Website ansehen', # MODIF
 'icone_voir_en_ligne' => 'Online ansehen',
 'image_tourner_180' => 'Um 180&deg; drehen',
 'image_tourner_droite' => 'Um 90&deg; nach rechts drehen',

@@ -378,7 +378,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'icone_tous_articles' => 'Tots els seus articles',
 'icone_tous_auteur' => 'Tots els autors i autores',
 'icone_valider_message' => 'Validar aquest missatge',
-'icone_visiter_site' => 'Visitar',
+'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Visualitzar en l&iacute;nia',
 'image_tourner_180' => 'Girar 180&deg;',
 'image_tourner_droite' => 'Girar 90&deg; cap a la dreta',

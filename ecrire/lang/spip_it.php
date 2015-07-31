@@ -382,7 +382,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_tous_articles' => 'Tutti i tuoi articoli',
 'icone_tous_auteur' => 'Tutti gli autori',
 'icone_valider_message' => 'Convalida il messaggio',
-'icone_visiter_site' => 'Visita il sito',
+'icone_visiter_site' => 'Visita il sito', # MODIF
 'icone_voir_en_ligne' => 'Vedi on line',
 'image_tourner_180' => 'Ruota 180&deg;',
 'image_tourner_droite' => 'Ruota 90&deg; a destra',

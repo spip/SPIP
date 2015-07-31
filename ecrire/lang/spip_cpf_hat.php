@@ -382,7 +382,7 @@ M&egrave;si  w soutni petisyon-nan
 'icone_tous_articles' => 'Tout atik ou',
 'icone_tous_auteur' => 'Tout lot&egrave; yo',
 'icone_valider_message' => 'Konfime mesaj la',
-'icone_visiter_site' => 'F&egrave; yon vire',
+'icone_visiter_site' => 'F&egrave; yon vire', # MODIF
 'icone_voir_en_ligne' => 'Gad an liy',
 'image_tourner_180' => 'Toun&eacute; 180&deg;',
 'image_tourner_droite' => 'Toun&eacute; 90&deg; drwat ',

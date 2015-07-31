@@ -376,7 +376,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'icone_tous_articles' => 'T&#7845;t c&#7843; b&agrave;i v&#7903; c&#7911;a b&#7841;n',
 'icone_tous_auteur' => 'C&aacute;c t&aacute;c gi&#7843;',
 'icone_valider_message' => 'Ch&#7845;p thu&#7853;n',
-'icone_visiter_site' => 'Tr&#7903; v&#7873; trang nh&agrave;',
+'icone_visiter_site' => 'Tr&#7903; v&#7873; trang nh&agrave;', # MODIF
 'icone_voir_en_ligne' => 'Xem online',
 'image_tourner_180' => 'Xoay 180&deg;',
 'image_tourner_droite' => 'Xoay qua ph&#7843;i 90&deg;',

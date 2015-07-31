@@ -385,7 +385,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'icone_tous_articles' => 'V&#353;echny va&#353;e &#269;l&aacute;nky',
 'icone_tous_auteur' => 'V&#353;ichni auto&#345;i',
 'icone_valider_message' => 'Schv&aacute;lit zpr&aacute;vu',
-'icone_visiter_site' => 'Zobrazit web',
+'icone_visiter_site' => 'Zobrazit web', # MODIF
 'icone_voir_en_ligne' => 'Prohl&iacute;&#382;et online',
 'image_tourner_180' => 'Oto&#269;it o 180&deg;',
 'image_tourner_droite' => 'Oto&#269;it o 90&deg; doprava',

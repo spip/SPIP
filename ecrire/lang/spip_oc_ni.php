@@ -386,7 +386,7 @@ Merc&eacute; de la voastra participacion
 'icone_tous_articles' => 'Toi lu voastres articles',
 'icone_tous_auteur' => 'Toi lu autors',
 'icone_valider_message' => 'Validar aqueu messatge',
-'icone_visiter_site' => 'Visitar',
+'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Veire en linha',
 'image_tourner_180' => 'Rotacion 180&deg;',
 'image_tourner_droite' => 'Rotacion 90&deg; &agrave; drecha',
