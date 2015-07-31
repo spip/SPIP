@@ -151,14 +151,9 @@ AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
  }
 
 // Trouver la fonction eventuellement surchagee
-if (!strncmp($exec,"accueil",7)==0
-	OR !isset($GLOBALS['meta']['nouvelle_install']) 
-	OR !($e = $GLOBALS['meta']['nouvelle_install'])
-	OR !($var_f = charger_fonction("pas_$e",'premiers_pas',true))
-	)
-	$var_f = charger_fonction($exec);
+$var_f = charger_fonction($exec);
 
-// Feu !
-
+// Z'y va
 $var_f();
+
 ?>
