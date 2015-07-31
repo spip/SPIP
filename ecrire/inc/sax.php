@@ -188,6 +188,7 @@ function xml_parsestring($phraseur, $data)
  var $ouvrant = array();
  var $reperes = array();
  var $elements = array();
+ var $peres = array();
  var $entites = array();
  var $attributs = array();
  var $ids = array();

@@ -50,8 +50,9 @@ function inc_validateur_dist($data)
 	} 
 	$phraseur_xml->entites = $res;
 
-	// reperer pour chaque noeud ses fils potentiels, sans repetitions,
-	// pour faire une analyse syntaxique sommaire
+	// reperer pour chaque noeud ses fils potentiels.
+	// mais tant pis pour leur eventuel ordre de succession (, * +):
+	// les cas sont rares et si aberrants que interet/temps-de-calcul -> 0
 	$res = array();
 	if (preg_match_all('/<!ELEMENT\s+(\w+)([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
@@ -59,8 +60,13 @@ function inc_validateur_dist($data)
 	    $val = expanserEntite($val, $phraseur_xml->entites);
 	    $val = array_values(preg_split('/\W+/', $val,-1,PREG_SPLIT_NO_EMPTY));
 	    $res[$nom]= $val;
+	    foreach ($val as $k) {
+		if (!isset($phraseur_xml->peres[$k])
+		OR !in_array($nom, $phraseur_xml->peres[$k]))
+		  $phraseur_xml->peres[$k][]= $nom;
+	    }
 	  }
-	}
+	} 
 	$phraseur_xml->elements = $res;
 
 	$res = array();
@@ -113,13 +119,18 @@ function validerElement($parser, $name, $attrs)
 	  if (isset($ouvrant[$depth])) {
 	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
 	      $pere = $r[1];
-	      if (!@in_array($name, $phraseur_xml->elements[$pere]))
-		$phraseur_xml->err[]= " <b>$name</b>" 
-		. _L(" n'est pas un fils de ")
-		. '<b>'
-		.  $pere
-		. '</b>'
-		.  coordonnees_erreur($parser);
+	      if (isset($phraseur_xml->elements[$pere]))
+		if (!@in_array($name, $phraseur_xml->elements[$pere])) {
+		  $bons_peres = @join ('</b>, <b>', $phraseur_xml->peres[$name]);
+		  $phraseur_xml->err[]= " <b>$name</b>" 
+		    . _L(" n'est pas un fils de ")
+		    . '<b>'
+		    .  $pere
+		    . '</b>'
+		    . (!$bons_peres ? '' 
+		       : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
+		    .  coordonnees_erreur($parser);
+		}
 	    }
 	  }
 	  foreach ($phraseur_xml->attributs[$name] as $n => $v)
