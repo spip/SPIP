@@ -205,7 +205,7 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 		}
 
 		// Invalider les caches
-		if ($options['invalideur']) {
+		if (isset($options['invalideur']) and $options['invalideur']) {
 			include_spip('inc/invalideur');
 			if (is_array($options['invalideur']))
 				array_map('suivre_invalideur',$options['invalideur']);
