@@ -1,0 +1,73 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:onglet_declarer_une_autre_base:>  (1/3)</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[<p><strong><:config_info_base_sup_disponibles:></strong><br />
+		(#ENV*{_bases_deja}|implode{', '})
+	</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:config_info_base_sup:></p>
+		<ul>
+			#SET{name,sql_serveur_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:install_select_type_db:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<select class="select" name="#GET{name}" id="#GET{name}">
+					<BOUCLE_serv(POUR){tableau #ENV*{_serveurs}}>
+						<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]>[(#VALEUR|_T)]</option>
+					</BOUCLE_serv>
+				</select>
+				<p><:install_types_db_connus:></p>
+				<p class="small"><:install_types_db_connus_avertissement:></p>
+			</li>
+			<li class="fieldset connexion_db">
+				<fieldset>
+					<legend><:install_adresse_base_hebergeur:></legend>
+					#SET{name,adresse_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<label for="#GET{name}"><:entree_base_donnee_1:></label>[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
+					</li>
+					#SET{name,login_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<label for="#GET{name}"><:entree_login_connexion_1:></label>[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
+					</li>
+					#SET{name,pass_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+					<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+						<label for="#GET{name}"><:entree_mot_passe_1:></label>[
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}" id="#GET{name}"/>
+					</li>
+				</fieldset>
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_suivant:>' /></p>
+	</div></form>
+
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	if ($("#sql_serveur_db").attr("value").match("sqlite*"))
+			$("#sql_serveur_db").parents('li').siblings("li.connexion_db").hide();
+		else
+			$("#sql_serveur_db").parents('li').siblings("li.connexion_db").show();
+	$("#sql_serveur_db").change(function(){
+		if ($(this).find("option:selected").attr("value").match("sqlite*"))
+			$("#sql_serveur_db").parents('li').siblings("li.connexion_db:visible").hide('fast');
+		else
+			$("#sql_serveur_db").parents('li').siblings("li.connexion_db:hidden").show('fast');
+	});
+});
+</script>

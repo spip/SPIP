@@ -1,0 +1,40 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:onglet_declarer_une_autre_base:>  (3/3)</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+	[<p><strong><:config_info_base_sup_disponibles:></strong><br />
+		(#ENV*{_bases_deja}|implode{', '})
+	</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,nom_connect}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:label_nom_fichier_connect:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" class="text" name="#GET{name}" value="#ENV*{#GET{name}}"/>
+				[(#ENV*{_tables}|non)
+				 <p class='notice'><:install_pas_table:></p>
+				]
+				[<h4><:install_tables_base:> "<strong>#ENV{choix_db}</strong>"</h4>
+				<ul class="spip">
+					<li>(#ENV*{_tables}|implode{'</li><li>'})</li>
+				</ul>
+				]
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit hidden' value='<:bouton_suivant:>' />
+			<input type='submit' class='submit' name="_retour_etape_2" value='<:icone_retour:>' />
+			<input type='submit' class='submit' value='<:bouton_suivant:>' /></p>
+	</div></form>
+	]
+</div>

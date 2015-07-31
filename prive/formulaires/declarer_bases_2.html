@@ -1,0 +1,49 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:onglet_declarer_une_autre_base:>  (2/3)</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,choix_db}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:config_titre_base_sup_choix:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{def,checked="checked"}
+				<BOUCLE_db(POUR){tableau #ENV*{_bases_prop}}>
+					<div class="choix">
+						<input type="radio" class="radio" name="choix_db" value="#VALEUR" id="choix_#VALEUR"
+						[(#VALEUR|=={#ENV{main_db}}|oui)disabled="disabled"]
+						[(#VALEUR|=={#ENV{choix_db}}|oui)checked="checked" #SET{def,''}]
+						/>
+						<label for="choix_#VALEUR" [(#CLE|=={#ENV{main_db}|oui})class="off"]>#VALEUR</label>
+					</div>
+				</BOUCLE_db>
+					<p><:config_erreur_base_sup:></p>
+				<//B_db>
+			</li>
+			<li>
+				<label><:info_ou:></label>
+				<div class="choix">
+					<input type="radio" class="radio" name="choix_db" value="-1" id='new' #GET{def}/>
+					<label for='new' class="on"><:config_choix_base_sup:></label>
+				</div>
+				<input type="text" class="text" name="table_new" value="#ENV*{table_new}"
+					onfocus="$(this).siblings('.choix').find('input').attr('checked','checked');"
+					/>
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit hidden' value='<:bouton_suivant:>' />
+			<input type='submit' class='submit' name="_retour_etape_1" value='<:icone_retour:>' />
+			<input type='submit' class='submit' value='<:bouton_suivant:>' /></p>
+	</div></form>
+
+</div>

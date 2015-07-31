@@ -11,7 +11,11 @@
 	#BOITE_FERMER
 ]
 
-<INCLURE{fond=prive/squelettes/inclure/admin_autres_bases}>
+[(#AUTORISER{detruire}|oui)
+	<div class="ajax">
+		#FORMULAIRE_DECLARER_BASES
+	</div>
+]
 
 #BOITE_OUVRIR{#VAL{texte_effacer_base}|_T|wrap{'<h3>'},'error','titrem'}
 	<p><:info_avertissement:></p>
