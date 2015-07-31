@@ -63,7 +63,7 @@ function generer_nom_fichier_cache($contexte, $fond) {
 // Securite : est sur que c'est un cache
 function retire_cache($cache) {
 
-	if (preg_match('|^' . _DIR_CACHE .
+	if (preg_match('|^' . preg_quote(_DIR_CACHE) .
 		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 		       $cache)) {
 		// supprimer le fichier (de facon propre)
@@ -140,8 +140,11 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
 
+var_dump($page['entetes']);
+echo " - $chemin_cache - ";
+
 	if (strlen($duree = $page['entetes']['X-Spip-Cache']))
-		return ($date + $duree > time()) ? 0 : $t;
+		return ($date + intval($duree) > time()) ? 0 : $t;
 
 	// squelette ancienne maniere, on se rabat sur le vieux modele
 	return cache_valide($chemin_cache, $contenu, $date);
@@ -218,12 +221,10 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
 
-  // arbitrage entre ancien et nouveau modele de delai:
-  // primaute a la duree de vie de la page donnee a l'interieur de la page 
-	if (preg_match('/max-age\s*=\s*(\d+)/', 
-		       $page['entetes']['Cache-Control'],
-		       $r)) 
-	  $duree = $r[1];
+	// arbitrage entre ancien et nouveau modele de delai:
+	// primaute a la duree de vie de la page donnee a l'interieur de la page 
+	if (strlen($t = $page['entetes']['X-Spip-Cache']))
+		$duree = intval($t);
 
 	include_ecrire('inc_invalideur');
 	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
