@@ -36,7 +36,7 @@ function exec_auteurs_dist()
 		include_spip('inc/rechercher');
 		$tables = liste_des_champs();
 		$tables = array('auteur'=>$tables['auteur']);
-		$recherche = recherche_en_base($recherche, $tables);
+		$recherche = recherche_en_base($recherche, $tables,array('toutvoir'=>true));
 		if ($recherche['auteur'])
 			$recherche =  sql_in('aut.id_auteur', array_keys($recherche['auteur']));
 		else $recherche = '';
@@ -334,7 +334,6 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		$sql_sel = sql_multi ("nom", $spip_lang);
 		$sql_order = "multi";
 	}
-	
 	//
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
