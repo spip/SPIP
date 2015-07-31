@@ -391,9 +391,9 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		. "; // doublons\n";
 
 	// La boucle doit-elle selectionner la langue ?
-	// -. par defaut, les boucles suivantes le font
+	// - par defaut, les boucles suivantes le font
 	//    (sauf si forcer_lang==true ou si le titre contient <multi>).
-	// - . a moins d'une demande explicite via {!lang_select}
+	// - a moins d'une demande explicite via {!lang_select}
 	if (!$constant && $boucle->lang_select != 'non' &&
 	    (($boucle->lang_select == 'oui')  ||
 		    in_array($type_boucle, array(

@@ -95,6 +95,16 @@ class IterateurDATA implements Iterator {
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
 		if (isset($this->command['source'])) {
+
+			// nettoyer les chaines qui restent entre guillemets "...."
+			if (is_string($this->command['source'])
+			AND preg_match(',^(["\'])(.*)\1$,', $this->command['source'])) {
+				unset($c);
+				eval('$c = '.$this->command['source'].';');
+				if (isset($c))
+					$this->command['source'] = $c;
+			}
+
 			if (isset($this->command['sourcemode'])
 			AND in_array($this->command['sourcemode'],
 				array('table', 'array', 'tableau'))
