@@ -55,17 +55,17 @@ function fin_block() {
 	return "<div class='nettoyeur' /></div></div>";
 }
 // $texte : texte du bouton
-// $deplie : true (deplie) ou false (plie) ou -1 (inactif)
+// $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page 
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
 // http://doc.spip.org/@bouton_block_depliable
 function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
-	$bouton_id = 'b'.substr(md5($texte.microtime()),8);
+	$bouton_id = 'b'.substr(md5($texte.microtime()),0,8);
 	$class= ($deplie===true)?" deplie":(($deplie==-1)?" impliable":" replie");
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
 		$cible = '#'.implode(",#",$cible);
-		$bouton_id = "";
+		$bouton_id = ($deplie=='incertain')?$bouton_id:"";
 	}
 	else{
 		$cible = "#$bouton_id + div.bloc_depliable";
@@ -77,7 +77,13 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  " onclick=\"toggleBouton(jQuery(this),jQuery('$cible'));\""
 	  ." onmouseover=\"jQuery(this).addClass('hover');\""
 	  ." onmouseout=\"jQuery(this).removeClass('hover');\"")
-	  .">$texte</div>";
+	  .">$texte</div>"
+	  . ($deplie=='incertain'?"<script><!--
+	  jQuery(document).ready(function(){
+	  if (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');
+	  });
+	  //--></script>":"")
+	  ;
 }
 
 //
