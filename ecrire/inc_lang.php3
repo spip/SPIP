@@ -9,8 +9,24 @@ define("_ECRIRE_INC_LANG", "1");
 //
 // Charger un fichier langue
 //
-function charger_langue($lang) {
-	include_ecrire ("lang/spip_$lang.php3");
+function charger_langue($lang, $module='spip') {
+	global $dir_ecrire;
+
+	$fichier_lang = "lang/".$module."_".$lang.".php3";
+	if (file_exists($dir_ecrire.$fichier_lang)) {
+		include_ecrire ($fichier_lang);
+	} else {
+		// si le fichier de langue du module n'existe pas, on se rabat sur
+		// le francais, qui *par definition* doit exister, et on copie le
+		// tableau 'fr' dans la var liee a la langue
+		include_ecrire ("lang/${module}_fr.php3");
+		$GLOBALS["i18n__".$module.'_'.$lang] = $GLOBALS["i18n__".$module.'_'.'fr'];
+	}
+
+	// surcharge perso
+	if (file_exists($dir_ecrire.'lang/perso.php3')) {
+		include_ecrire('lang/perso.php3');
+	}
 }
 
 //
@@ -65,8 +81,16 @@ function regler_langue_navigateur() {
 //
 function traduire_chaine($code, $args) {
 	global $spip_lang;
-	$var = "i18n_$spip_lang";
-	if (!$GLOBALS[$var]) charger_langue($spip_lang);
+
+	if (ereg("^([a-z]+):(.*)$", $code, $regs)) {
+		$module = $regs[1];
+		$code = $regs[2];
+		$var = "i18n__".$module."_".$spip_lang;
+	} else {
+		$module = 'spip';
+		$var = "i18n_".$spip_lang;
+	}
+	if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
 	$text = $GLOBALS[$var][$code];
 
 	if (!is_array($args)) return $text;
