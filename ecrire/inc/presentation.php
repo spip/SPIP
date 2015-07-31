@@ -562,7 +562,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
 			if ($script==NULL && _SPIP_AJAX){
 				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
-				$script = "<script type='text/javascript'>\n";
+				$script = "<script type='text/javascript'>//<!--\n";
 				$script .= "$(document).ready(function(){
 					$('div.puce_article').mouseover( function() {
 						if(this.puce_loaded) return;
@@ -576,7 +576,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
 						});
 					
 				})";
-				$script .= "</script>";
+				$script .= "//--></script>"; 
 				$inser_puce = $script . $inser_puce;
 			}
 		}
@@ -937,7 +937,6 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$vals[] = $s;
 			
 	if ($options == "avancees") {
-		include_spip("inc/autoriser");
 		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breve');
 	}
 			
@@ -1829,6 +1828,7 @@ function afficher_numero_edit($id, $key, $type)
 		$numero = _T('info_numero_abbreviation');
 	}
 
+	include_spip("inc/autoriser");
 	if (!autoriser('modifier',$type,$id)) {
 		$bal ='span';
 		$href = '';
