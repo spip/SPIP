@@ -77,11 +77,11 @@ function exec_mots_type_dist()
 
 	$type = entites_html(rawurldecode($type));
 
-	$res = debut_cadre_relief("groupe-mot-24.gif", true)
+	$res = debut_cadre_relief("", true)
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "<tr>"
 	. "<td  align='right' valign='top'><br />"
-	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif")
+	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif")
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
@@ -109,8 +109,6 @@ function exec_mots_type_dist()
 	. "' /></div>"
 	. fin_cadre_formulaire(true)
 	. "</div>"
-	. "</td></tr></table>"
-	. fin_cadre_relief(true)
 	. "<br />\n<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
 	. "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>"
@@ -178,7 +176,10 @@ function exec_mots_type_dist()
 	. _T('bouton_valider')
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
-	. "</div>";
+	. "</div>"
+	. "</td></tr></table>"
+	. fin_cadre_relief(true)
+	;
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
 	pipeline('affiche_milieu',
