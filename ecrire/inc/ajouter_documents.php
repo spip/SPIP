@@ -255,7 +255,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 // Traiter la liste des fichiers (action joindre3)
 //
 
-// http://doc.spip.org/@examiner_les_fichiers
+// http://doc.spip.org/@inc_ajouter_documents
 function inc_ajouter_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (function_exists('gzopen') 
