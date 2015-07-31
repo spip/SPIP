@@ -478,7 +478,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$erreur .= erreur(_T('form_prop_message_envoye'));
 			$affiche_formulaire = false;
 		} else { //preview
-			echo "<br /><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
+			echo "<br /><div class='spip_encadrer'>"._T('form_prop_sujet')." <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
 			if ($flag_wordwrap)
 				$GLOBALS['texte_message_auteur'.$id_auteur] = wordwrap($GLOBALS['texte_message_auteur'.$id_auteur]);
 			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
@@ -503,7 +503,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 		echo $link->getForm('post');
 		echo "<div class='spip_encadrer'><b>"._T('form_pet_votre_email')."</b><br />";
 		echo  "<input type=\"text\" class=\"forml\" name=\"email_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\" />\n";
-		echo  "<p><b>"._t('form_prop_sujet')."</b><br />";
+		echo  "<p><b>"._T('form_prop_sujet')."</b><br />";
 		echo  "<input type=\"text\" class=\"forml\" name=\"sujet_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\" /></p>\n";
 		echo  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
 		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" />";

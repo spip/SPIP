@@ -174,7 +174,33 @@
 	</ul>
 	</div>
 	</B_sous_rubriques>
-
+	
+	<!-- Sites syndiques -->
+	
+	<B_sites>
+	<div class="menu">
+	<div class="divers">
+		<div class="menu-titre">
+		<:sur_web:>
+		</div>
+		<ul>
+	<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+		<li class="menu-item">
+		<a href="#URL_SITE">#NOM_SITE</a>
+		<B_syndic>
+		<ul class="menu-liste">
+		<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {par date} {inverse} {0,3}>
+			<li class="menu-item"><small><a href="#URL_ARTICLE">#TITRE</a></small></li>
+		</BOUCLE_syndic>
+		</ul>
+		</B_syndic>
+		</li>
+	</BOUCLE_sites>
+		</ul>
+	</div>
+	</div>
+	</B_sites>
+	
 	</div>
 
 [<div class="chapo">(#TEXTE)</div>]
