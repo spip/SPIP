@@ -1072,11 +1072,17 @@ function traiter_modeles($texte, $doublons=false) {
 // des paragraphes indiques a la main dans le texte
 // (par ex: on ne modifie pas un <p align='center'>)
 //
+// deuxieme argument : forcer les <p> meme pour un seul paragraphe
+//
 // http://doc.spip.org/@paragrapher
-function paragrapher($letexte) {
-	if (!$letexte OR !strstr($letexte,'<')) return $letexte;
+function paragrapher($letexte, $forcer=true) {
+	$letexte = trim($letexte);
+	if (!strlen($letexte))
+		return '';
 
-	if (preg_match(',<p[>[:space:]],iS',$letexte)) {
+	if ($forcer OR (
+	strstr($letexte,'<') AND preg_match(',<p\b,iS',$letexte)
+	)) {
 
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
@@ -1185,6 +1191,7 @@ function traiter_raccourcis($letexte) {
 			"http://@lang@.wikipedia.org/wiki/");
 		tester_variable('les_notes', '');
 		tester_variable('compt_note', 0);
+		tester_variable('toujours_paragrapher', false);
 	}
 
 	// Gestion de la <poesie>
@@ -1420,8 +1427,8 @@ function traiter_raccourcis($letexte) {
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
 
-	// Fermer les paragraphes
-	$letexte = paragrapher($letexte);
+	// Fermer les paragraphes ; mais ne pas en creer si un seul
+	$letexte = paragrapher($letexte, $GLOBALS['toujours_paragrapher']);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
