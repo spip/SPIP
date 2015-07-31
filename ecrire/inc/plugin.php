@@ -352,7 +352,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// generer les fichier
 	// charger_plugins_options.php
 	// charger_plugins_fonctions.php
-	foreach(array('options','fonctions') as $charge){
+	foreach(array('chemins'=>_CACHE_PLUGINS_PATH,'options'=>_CACHE_PLUGINS_OPT,'fonctions'=>_CACHE_PLUGINS_FCT) as $charge=>$fileconf){
 		$s = "";
 		$splugs = "";
 		if (is_array($infos)){
@@ -366,7 +366,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				$info = $infos[$dir_type][$plug];
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_spip pour attraper un inc_ du plugin
-				if ($charge=='options'){
+				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir); ";
 					foreach($info['path'] as $chemin){
@@ -379,6 +379,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						}
 					}
 				}
+				// concerne uniquement options et fonctions
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
 						// on genere un if file_exists devant chaque include pour pouvoir garder le meme niveau d'erreur general
@@ -398,9 +399,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
 			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
-			$f = _CACHE_PLUGINS_OPT;
-		} else  $f = _CACHE_PLUGINS_FCT;
-		ecrire_fichier($f, $start_file . $splugs . $s . $end_file);
+		}
+		ecrire_fichier($fileconf, $start_file . $splugs . $s . $end_file);
 	}
 
 	if (is_array($infos)){
