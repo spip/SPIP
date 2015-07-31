@@ -348,10 +348,16 @@ function typo_fr($letexte) {
 		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
-	$remplace2 = array(
-		'\1:',
-		'&nbsp;'
-	);
+	if ($GLOBALS['flag_ecrire'])
+		$remplace2 = array(
+			'\1:',
+			'<font color=grey>~</font>'
+		);
+	else
+		$remplace2 = array(
+			'\1:',
+			'&nbsp;'
+		);
 	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
 
 	return $letexte;
