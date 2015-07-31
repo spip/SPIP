@@ -1803,7 +1803,7 @@ function direction_css ($css, $voulue='') {
 	}
 	else {
 		if ((@filemtime($f) > @filemtime($css))
-			AND ($GLOBALS['var_mode'] != 'recalcul'))
+			AND (_VAR_MODE != 'recalcul'))
 			return $f;
 		if (!lire_fichier($css, $contenu))
 			return $css;
@@ -1859,7 +1859,7 @@ function url_absolue_css ($css) {
 		. '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
-	AND ($GLOBALS['var_mode'] != 'recalcul'))
+	AND (_VAR_MODE != 'recalcul'))
 		return $f;
 
 	if ($url_absolue_css==$css){

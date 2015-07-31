@@ -79,7 +79,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	// on essaye de recharger le cache des decriptions de ce serveur
 	// dans le fichier cache
 	if (!isset($connexion['tables'][$nom])
-	  AND $GLOBALS['var_mode']!=='recalcul'
+	  AND _VAR_MODE!=='recalcul'
 	  AND (!isset($connexion['tables']) OR !$connexion['tables'])) {
 		if (lire_fichier($nom_cache_desc_sql[$serveur],$desc_cache)
 		  AND $desc_cache=unserialize($desc_cache))

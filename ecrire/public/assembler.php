@@ -49,7 +49,7 @@ function assembler($fond, $connect='') {
 	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
 	// pages sont dynamiques)
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !$GLOBALS['var_mode']
+	AND !_VAR_MODE
 	AND $chemin_cache
 	AND isset($page['entetes'])
 	AND isset($page['entetes']['Cache-Control'])
@@ -114,7 +114,7 @@ function assembler($fond, $connect='') {
 			if ($GLOBALS['flag_ob']) {
 				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
-				AND $GLOBALS['var_mode'] != 'debug'
+				AND _VAR_MODE != 'debug'
 				AND !isset($page['entetes']['Location']) // cette page realise une redirection, donc pas d'erreur
 				) {
 				  $code = ($page !== false) ?
@@ -122,7 +122,7 @@ function assembler($fond, $connect='') {
 				  $page = message_erreur_404('', $code);
 				}
 				// pas de cache client en mode 'observation'
-				if ($GLOBALS['var_mode']) {
+				if (defined('_VAR_MODE') AND _VAR_MODE) {
 					$page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
 					$page['entetes']["Pragma"] = "no-cache";
 				}
@@ -343,7 +343,7 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 		}
 	}
 
-	if ($GLOBALS['var_mode'] == 'debug') {
+	if (_VAR_MODE == 'debug') {
 		// compatibilite : avant on donnait le numero de ligne ou rien.
 		$ligne =  intval(isset($contexte_compil[3]) ? $contexte_compil[3] : $contexte_compil);
 		$GLOBALS['debug_objets']['resultat'][$ligne] = $texte;

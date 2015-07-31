@@ -38,7 +38,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 
 	if (function_exists($nom)) return array($nom);
 
-	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
+	if (defined('_VAR_MODE') AND _VAR_MODE == 'debug')
 		$GLOBALS['debug_objets']['courant'] = $nom;
 
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
@@ -46,9 +46,11 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $source)
 	AND lire_fichier ($phpfile, $skel_code,
-	array('critique' => 'oui', 'phpcheck' => 'oui')))
+	array('critique' => 'oui', 'phpcheck' => 'oui'))){
+		#print_r($skel_code);
 		eval('?'.'>'.$skel_code);
 #	spip_log($skel_code, 'comp')
+	}
 	if (@file_exists($lib = $squelette . '_fonctions'.'.php'))
 		include_once $lib;
 
@@ -93,7 +95,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		}
 	}
 
-	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
+	if (defined('_VAR_MODE') AND _VAR_MODE == 'debug') {
 
 		// Tracer ce qui vient d'etre compile
 		$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $code;
@@ -141,7 +143,7 @@ function squelette_obsolete($skel, $squelette) {
 			$date_change = max($date_change,@filemtime(_FILE_OPTIONS));
 	}
 	return (
-		(isset($GLOBALS['var_mode']) AND in_array($GLOBALS['var_mode'], array('recalcul','preview','debug')))
+		(defined('_VAR_MODE') AND in_array(_VAR_MODE, array('recalcul','preview','debug')))
 		OR !@file_exists($skel)
 		OR ((@file_exists($squelette)?@filemtime($squelette):0)
 			> ($date = @filemtime($skel)))

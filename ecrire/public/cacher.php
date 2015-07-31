@@ -283,7 +283,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
 	// on supprime le cache
-	if ($GLOBALS['var_mode'] &&
+	if (defined('_VAR_MODE') && _VAR_MODE &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))

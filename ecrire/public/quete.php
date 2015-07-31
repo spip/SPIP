@@ -111,7 +111,7 @@ function quete_condition_postdates($champ_date, $serveur='') {
  */
 function quete_condition_statut($mstatut,$previsu,$publie, $serveur=''){
 	$liste = $publie;
-	if (defined(_VAR_PREVIEW) AND _VAR_PREVIEW)
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
 		$liste = $previsu;
 	$not = false;
 	if (strncmp($liste,'!',1)==0){
