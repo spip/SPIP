@@ -1,5 +1,6 @@
 <?php
 	@header ("Content-Type: text/css");
+	@Header ("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600)." GMT");
 	include ("inc_version.php3");	// pour le register_globals
 	if (!isset($couleur_claire))
 		$couleur_claire = "#EDF3FE";
