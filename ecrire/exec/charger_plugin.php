@@ -45,7 +45,7 @@ function exec_charger_plugin_dist($retour='') {
 		echo pipeline('affiche_gauche',
 			array(
 			'args'=>array('exec'=>'charger_plugin'),
-			'data'=>afficher_librairies()
+			'data'=>''
 			)
 		);
 
