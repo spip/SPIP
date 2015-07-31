@@ -35,7 +35,7 @@ function exec_editer_auteurs_dist()
 
 function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_editable)
 {
-  global $spip_lang_left, $options;
+  global $spip_lang_left, $spip_lang_right, $options;
   spip_log("formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_editable");
 
 //
@@ -81,20 +81,23 @@ function formulaire_editer_auteurs($cherche_auteur, $ids, $id_article, $flag_edi
 //
 
  if ($flag_editable AND $options == 'avancees') {
-	$res .= debut_block_invisible("auteursarticle")
-	. "<table width='100%'><tr>";
+	if ($flag_editable!=='ajax')
+		$res .= debut_block_invisible("auteursarticle");
 
+	$ajouter = "";
 	if ($bouton_creer_auteur) {
 
-		$res .= "<td width='200'>"
+		$ajouter = "<div style='width:170px;'><span class='verdana1'><b>"
 		. icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=" .generer_url_retour("articles","id_article=$id_article")), "redacteurs-24.gif", "creer.gif", false)
-		. "</td><td width='20'>&nbsp;</td>";
+		. "</b></span></div>\n";
 	}
 
-	$res .="<td>"
+	$res .= "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
 	. ajouter_auteurs_articles($id_article, $les_auteurs, $bouton_creer_auteur)
-	. "</td></tr></table>"
-	. fin_block();
+	."</div>\n"
+	. $ajouter;
+	if ($flag_editable!='ajax')
+		$res .= fin_block();
  }
  
  if ($flag_editable === 'ajax') return $res;
