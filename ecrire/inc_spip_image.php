@@ -64,10 +64,12 @@ function spip_image_joindre_dist($doc)
 
      else spip_log("spip_image: action inconnue $action");
 
-     $link = new Link(_DIR_RESTREINT_ABS . $redirect);
+     $link = new Link(_DIR_RESTREINT . $redirect);
      if ($documents_actifs) {
 	$link->addVar('show_docs',join('-',$documents_actifs));
      }
+     
+     ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
      redirige_par_entete($link->getUrl($ancre));
 }
 
