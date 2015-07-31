@@ -106,6 +106,12 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 				indexer_chaine($row['chapo'], 3);
 				indexer_chaine($row['texte'], 1);
 				indexer_chaine($row['ps'], 1);
+				indexer_chaine($row['nom_site'], 1);
+				$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
+				while ($row_doc = spip_fetch_array($r)) {
+					indexer_chaine($row_doc[0],2);
+					indexer_chaine($row_doc[1],1);
+				}
 			}
 		}
 	
@@ -142,6 +148,11 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 			indexer_chaine($row['descriptif'], 5);
 			if ($full) {
 				indexer_chaine($row['texte'], 1);
+				$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
+				while ($row_doc = spip_fetch_array($r)) {
+					indexer_chaine($row_doc[0],2);
+					indexer_chaine($row_doc[1],1);
+				}
 			}
 		}
 		break;
