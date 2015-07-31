@@ -299,9 +299,10 @@ function appliquer_modifs_config() {
 		fin_admin($admin);
 	}
 
-	if ($purger_skel)
-		redirige_par_entete(generer_action_auteur('purger', 'squelettes', _DIR_RESTREINT_ABS . self(), true));
-
+	if ($purger_skel) {
+		include_spip('inc/invalideur');
+		purger_repertoire(_DIR_SKELS);
+	}
 }
 
 // faudrait essayer d'etre plus malin

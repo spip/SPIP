@@ -254,6 +254,7 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_DOC', $dir1 ."IMG/");
 	define('_DIR_LOGOS', $dir1 ."IMG/");
 	define('_DIR_CACHE', $dir1 ."CACHE/");
+	define('_DIR_SKELS', $dir1 ."CACHE/skel/");
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
 
 	define('_DIR_TMP', $dir2 . "data/");
