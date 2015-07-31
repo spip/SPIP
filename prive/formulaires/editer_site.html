@@ -37,7 +37,7 @@
 	    </li>
 	    <li class="editer_url_site obligatoire[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
 	    	<label for="url_site"><:entree_adresse_site:></label>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
 	    	<input type='text' name='url_site' id='url_site' class='text' value="[(#ENV**{url_site})]" />
 	    </li>
 
@@ -48,6 +48,7 @@
 	    
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 	    	<label for="descriptif"><:entree_description_site:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
 	    	<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 	    </li>
