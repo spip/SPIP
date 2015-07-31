@@ -87,22 +87,15 @@ function ajax_page_test($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 
-	include_spip('inc/texte');
-	$where = split("[[:space:]]+", $recherche);
-	if ($where) {
-		foreach ($where as $k => $v) 
-		  $where[$k] = "'%" . substr(str_replace("%","\%", spip_abstract_quote($v)),1,-1) . "%'";
-		$where = ($testnum ? "OR " : '') .
-		  ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
-	}
-		$rech2 = split("[[:space:]]+", $recherche);
-		if ($rech2) {
-			$where_titre = " (titre LIKE ".join(" AND titre LIKE ", $where).") ";
-			$where_desc = " (descriptif LIKE ".join(" AND descriptif LIKE ", $where).") ";
-			// ?????
-			$where_id = " (id_rubrique = ".join(" AND id_rubrique = ", $where).") ";
-		}
-		else {
+		include_spip('inc/texte');
+		$where = split("[[:space:]]+", $type);
+		if ($where) {
+			foreach ($where as $k => $v) 
+				$where[$k] = "'%" . substr(str_replace("%","\%", spip_abstract_quote($v)),1,-1) . "%'";
+			$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
+			$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
+			$where_id = ("(id_rubrique = " . join(" AND id_rubrique = ", $where) . ")");
+		} else {
 			$where_titre = " 1=2";
 			$where_desc = " 1=2";
 			$where_id = " 1=2";
