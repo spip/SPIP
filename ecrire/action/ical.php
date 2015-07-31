@@ -12,17 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/minipres');
+
+include_spip('inc/lang');
+utiliser_langue_visiteur();
 include_spip('inc/texte');
 include_spip('inc/charsets');
 include_spip('inc/meta');
 include_spip('inc/acces');
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
-
-function ligne ($texte) {
-	echo filtrer_ical($texte)."\n";
-}
 
 function ligne_uid ($texte) {
 	echo filtrer_ical("UID:$texte @ " . $GLOBALS['meta']["adresse_site"])."\n";
@@ -60,10 +58,10 @@ function action_ical_dist()
 	  $adresse_site .= '/';
 
 	header("Content-Type: text/calendar; charset=utf-8");
-	ligne ("BEGIN:VCALENDAR");
-	ligne ("CALSCALE:GREGORIAN");
-	ligne ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur");
-	ligne ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site");
+	echo	filtrer_ical ("BEGIN:VCALENDAR"), "\n",
+		filtrer_ical ("CALSCALE:GREGORIAN"), "\n",
+		filtre_ical ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur"), "\n",
+		filtre_ical ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site"), "\n";
 	spip_ical_rendez_vous($id_utilisateur, $nom_site);
 	spip_ical_taches($id_utilisateur, $nom_site);
 
@@ -74,27 +72,27 @@ function action_ical_dist()
 		if ($nb_articles > 0) $titre_prop[] = _T('info_articles_proposes').": ".$nb_articles;
 		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
 		$titre = join($titre_prop," / ");
-		ligne ("BEGIN:VTODO");
-		ligne ("SUMMARY:[$nom_site] $titre");
+		echo	filtre_ical ("BEGIN:VTODO"), "\n",
+			filtre_ical ("SUMMARY:[$nom_site] $titre"), "\n";
 		ligne_uid ("prop");
 		$texte = join($titres," / ");
-		ligne ("DESCRIPTION:$texte");
+		echo filtre_ical ("DESCRIPTION:$texte"), "\n";
 	
 		$today=getdate(time());
 		$jour = $today["mday"];
 		$mois=$today["mon"];
 		$annee=$today["year"];
-		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
-		ligne ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
-		ligne ("CATEGORIES:"._T('icone_a_suivre'));
-		ligne ("URL:$adresse_site" . _DIR_RESTREINT_ABS);
-		ligne ("END:VTODO");
+		echo	filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee))), "\n",
+			filtre_ical ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee))), "\n",
+			filtre_ical ("CATEGORIES:"._T('icone_a_suivre')), "\n",
+			filtre_ical ("URL:$adresse_site" . _DIR_RESTREINT_ABS), "\n",
+			filtre_ical ("END:VTODO"), "\n";
 	}
 	spip_ical_messages($id_utilisateur, $nom_site);
 	if ($statut_utilisateur == "0minirezo") {
 		spip_ical_forums($id_utilisateur, $nom_site);
 	}
-	ligne ("END:VCALENDAR");
+	echo filtre_ical ("END:VCALENDAR"), "\n";
 }
 
 function spip_ical_rendez_vous($id_utilisateur, $nom_site)
@@ -119,8 +117,8 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 
 				if ($id_auteur != $id_utilisateur) $titre = $titre." - ".$nom_auteur;
 			
-				if ($id_auteur == $id_utilisateur) ligne ("ORGANIZER:$nom_auteur <$email>");
-				else  ligne ("ATTENDEE:$nom_auteur <$email>");
+				if ($id_auteur == $id_utilisateur) echo filtre_ical ("ORGANIZER:$nom_auteur <$email>"), "\n";
+				else  echo filtre_ical ("ATTENDEE:$nom_auteur <$email>"), "\n";
 			}
 		}
 		else if ($type == 'pb') {
@@ -131,18 +129,19 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 			$titre = "[$nom_site] $titre";
 		}
 
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:".$titre);
-		ligne ("DESCRIPTION:$texte");
+		echo	filtre_ical ("BEGIN:VEVENT"), "\n",
+			filtre_ical ("SUMMARY:".$titre), "\n",
+			filtre_ical ("DESCRIPTION:$texte"), "\n";
+
 		ligne_uid ("mess$id_message");
-		ligne ("DTSTAMP:".date_ical($date_heure));
-		ligne ("DTSTART:".date_ical($date_heure));
-		if ($date_heure_fin > $date_heure) ligne ("DTEND:".date_ical($date_heure_fin));
+
+		echo	filtre_ical ("DTSTAMP:".date_ical($date_heure)), "\n",
+			filtre_ical ("DTSTART:".date_ical($date_heure)), "\n";
+		if ($date_heure_fin > $date_heure) echo filtre_ical ("DTEND:".date_ical($date_heure_fin)), "\n";
 		
-		ligne ("CATEGORIES:$le_type");
-		ligne("URL:" . generer_url_ecrire("message","id_message=$id_message"));
-		
-		ligne ("END:VEVENT");
+		echo	filtre_ical ("CATEGORIES:$le_type"), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("message","id_message=$id_message")), "\n",
+			filtre_ical ("END:VEVENT"), "\n";
 	}
 }
 
@@ -166,8 +165,8 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 
 				if ($id_auteur != $id_utilisateur) $titre = $titre." - ".$nom_auteur;
 			
-				if ($id_auteur == $id_utilisateur) ligne ("ORGANIZER:$nom_auteur <$email>");
-				else  ligne ("ATTENDEE:$nom_auteur <$email>");
+				if ($id_auteur == $id_utilisateur) echo filtre_ical ("ORGANIZER:$nom_auteur <$email>"), "\n";
+				else  echo filtre_ical ("ATTENDEE:$nom_auteur <$email>"), "\n";
 			}
 		}
 		else if ($type == 'pb') {
@@ -178,15 +177,15 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 			$titre = "[$nom_site] $titre";
 		}
 	
-		ligne ("BEGIN:VTODO");
-		ligne ("SUMMARY:".$titre);
-		ligne ("DESCRIPTION:$texte");
+		echo	filtre_ical ("BEGIN:VTODO"), "\n",
+			filtre_ical ("SUMMARY:".$titre), "\n",
+			filtre_ical ("DESCRIPTION:$texte"), "\n";
 		ligne_uid ("mess$id_message");
-		ligne ("DTSTAMP:".date_ical($date_heure));
-		ligne ("DTSTART:".date_ical($date_heure));
-		ligne ("CATEGORIES:$le_type");
-		ligne ("URL:" . generer_url_ecrire("message","id_message=$id_message"));
-		ligne ("END:VTODO");
+		echo	filtre_ical ("DTSTAMP:".date_ical($date_heure)), "\n",
+			filtre_ical ("DTSTART:".date_ical($date_heure)), "\n",
+			filtre_ical ("CATEGORIES:$le_type"), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("message","id_message=$id_message")), "\n",
+			filtre_ical ("END:VTODO"), "\n";
 	}
 }
 
@@ -200,14 +199,14 @@ function spip_ical_articles($nom_site)
 		$titres[] = $titre;
 		$date_heure = $row['date'];
 		$nb_articles ++;
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:[$nom_site] $titre ("._T('info_article_propose').")");
+		echo filtre_ical ("BEGIN:VEVENT"), "\n",
+		filtre_ical ("SUMMARY:[$nom_site] $titre ("._T('info_article_propose').")"), "\n";
 		ligne_uid ("article$id_article");
-		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("CATEGORIES:"._T('info_article_propose'));
-		ligne("URL:" . generer_url_ecrire("articles","id_article=$id_article"));
-		ligne ("END:VEVENT");
+		echo filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("CATEGORIES:"._T('info_article_propose')), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("articles","id_article=$id_article")), "\n",
+			filtre_ical ("END:VEVENT"), "\n";
 	}
 	return $nb_articles;
 }
@@ -223,14 +222,14 @@ function spip_ical_breves($nom_site)
 		$titres[] = $titre;
 		$date_heure = $row['date_heure'];
 		$nb_breves++;
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:[$nom_site] $titre ("._T('item_breve_proposee').")");
+		echo filtre_ical ("BEGIN:VEVENT"), "\n",
+			filtre_ical ("SUMMARY:[$nom_site] $titre ("._T('item_breve_proposee').")"), "\n";
 		ligne_uid ("breve$id_breve");
-		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("CATEGORIES:"._T('item_breve_proposee'));
-		ligne ("URL:" . generer_url_ecrire("breves_voir","id_breve=$id_breve"));
-		ligne ("END:VEVENT");
+		echo	filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("CATEGORIES:"._T('item_breve_proposee')), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("breves_voir","id_breve=$id_breve")), "\n",
+			filtre_ical ("END:VEVENT"), "\n";
 	}
 	return $nb_breves;
 }
@@ -256,11 +255,11 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 
 				if ($id_auteur != $id_utilisateur) $titre = $nom_auteur." - ".$titre;
 			
-				if ($id_auteur == $id_utilisateur) ligne ("ORGANIZER:$nom_auteur <$email>");
-				else  ligne ("ATTENDEE:$nom_auteur <$email>");
+				if ($id_auteur == $id_utilisateur) echo filtre_ical ("ORGANIZER:$nom_auteur <$email>"), "\n";
+				else  echo filtre_ical ("ATTENDEE:$nom_auteur <$email>"), "\n";
 			}
-			$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 1";
-			$result_forum = spip_query($query_forum);
+			$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 1");
+
 			if ($row_forum = spip_fetch_array($result_forum)) {
 				$date_heure = $row_forum["date_heure"];
 				$texte = $row_forum["texte"];
@@ -284,22 +283,21 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 			$titre = "[$nom_site] $titre";
 		}
 	
-	ligne ("BEGIN:VTODO");
-	ligne ("SUMMARY:".$titre);
-	ligne ("DESCRIPTION:$texte");
+		echo	filtre_ical ("BEGIN:VTODO"), "\n",
+			filtre_ical ("SUMMARY:".$titre), "\n",
+			filtre_ical ("DESCRIPTION:$texte"), "\n";
 	ligne_uid ("nouv_mess$id_message");
-	ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-	ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-	ligne ("CATEGORIES:$le_type");
-	ligne("URL:" . generer_url_ecrire("message","id_message=$id_message"));
-	ligne ("END:VTODO");
+	echo	filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+		filtre_ical ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+		filtre_ical ("CATEGORIES:$le_type"), "\n",
+		filtre_ical ("URL:" . generer_url_ecrire("message","id_message=$id_message")), "\n",
+		filtre_ical ("END:VTODO"), "\n";
 	}	
 }
 
 function spip_ical_forums($id_utilisateur, $nom_site)
 {
-	$query_forum = "SELECT * FROM spip_forum WHERE statut = 'prop'";
-	$result_forum = spip_query($query_forum);
+	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");
 
 	while($row=spip_fetch_array($result_forum)){
 		$nb_forum ++;
@@ -312,32 +310,32 @@ function spip_ical_forums($id_utilisateur, $nom_site)
 		$email_auteur = $row['email_auteur'];
 		if ($email_auteur) $email_auteur = "<$email_auteur>";
 		
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:[$nom_site] $titre "._T('icone_forum_suivi'));
-		ligne ("DESCRIPTION:$texte\r$auteur $email_auteur");
+		echo	filtre_ical ("BEGIN:VEVENT"), "\n",
+			filtre_ical ("SUMMARY:[$nom_site] $titre "._T('icone_forum_suivi')), "\n",
+			filtre_ical ("DESCRIPTION:$texte\r$auteur $email_auteur"), "\n";
 		ligne_uid ("forum$id_forum");
-		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
-		ligne ("CATEGORIES:"._T('icone_forum_suivi'));
-		ligne("URL:" . generer_url_ecrire("controle_forum"));
-		ligne ("END:VEVENT");
+		echo	filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
+			filtre_ical ("CATEGORIES:"._T('icone_forum_suivi')), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("controle_forum")), "\n",
+			filtre_ical ("END:VEVENT"), "\n";
 	}
 
 	if ($nb_forum > 0) {
-		ligne ("BEGIN:VTODO");
-		ligne ("SUMMARY:[$nom_site] "._T('icone_forum_suivi').": $nb_forum");
+		echo filtre_ical ("BEGIN:VTODO"), "\n",
+			filtre_ical ("SUMMARY:[$nom_site] "._T('icone_forum_suivi').": $nb_forum"), "\n";
 		ligne_uid ("forum");
 		
 		$today=getdate(time());
 		$jour = $today["mday"];
 		$mois=$today["mon"];
 		$annee=$today["year"];
-		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
-		ligne ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
-		ligne ("CATEGORIES:"._T('icone_forum_suivi'));
-		ligne("URL:" . generer_url_ecrire("controle_forum"));
-		ligne ("END:VTODO");
+		echo	filtre_ical ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee))), "\n",
+			filtre_ical ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee))), "\n",
+			filtre_ical ("CATEGORIES:"._T('icone_forum_suivi')), "\n",
+			filtre_ical ("URL:" . generer_url_ecrire("controle_forum")), "\n",
+			filtre_ical ("END:VTODO"), "\n";
 	}
 }
 ?>

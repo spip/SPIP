@@ -16,29 +16,26 @@ include_spip('inc/presentation');
 
 function exec_articles_tous_dist()
 {
-  global $aff_art, $aff_statut, $sel_lang,
-    $article, $enfant, $text_article,  $first_couche,     $last_couche;
-  global $connect_id_auteur, $connect_statut, $spip_dir_lang, $spip_lang, $browser_layer;
+	global $aff_art, $sel_lang, $article, $enfant, $text_article;
+	global $connect_id_auteur, $connect_statut, $spip_dir_lang, $spip_lang, $browser_layer;
 
+	if (!is_array($aff_art)) $aff_art = array('prop','publie');
 
-if (!$aff_art) $aff_art = array('prop','publie');
+	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
+	debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
+	debut_gauche();
 
-arbo_articles_tous();
-debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
-debut_gauche();
+	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') 
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+	else	$langues = array();  
 
+	$sel_lang[$spip_lang] = $spip_lang;
 
-if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') 
-	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
- else
-	$langues = array();  
+if ($connect_statut == "0minirezo") 
+  $result = spip_query("SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles ORDER BY date DESC");
+else 
+  $result = spip_query("SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
 
-$sel_lang[$spip_lang] = $spip_lang;
-
-if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles ORDER BY date DESC";
-else $query = "SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
-
-$result = spip_query($query);
 while($row = spip_fetch_array($result)) {
 	$id_rubrique=$row['id_rubrique'];
 	$id_article = $row['id_article'];
@@ -48,7 +45,7 @@ while($row = spip_fetch_array($result)) {
 	$id_trad = $row['id_trad'];
 	$date_modif = $row['date_modif'];
 	
-	$aff_statut["$statut"] = true;
+	$aff_statut[$statut] = true; // signale qu'il existe de tels articles
 	$text_article[$id_article]["titre"] = $titre;
 	$text_article[$id_article]["statut"] = $statut;
 	$text_article[$id_article]["lang"] = $lang;
@@ -81,7 +78,7 @@ if ($text_article)
 			  $c = 'foncee';
 			else
 			  $c = 'claire';
-			$text_article[$id_trad]["trad"]["$lang"] =
+			$text_article[$id_trad]["trad"][$lang] =
  "<a class='$c' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$lang</a>";
 		}
 	}
@@ -90,35 +87,38 @@ formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
 debut_droite();
 
-if ($enfant AND $browser_layer) couche_formulaire_tous($first_couche, $last_couche);
+if ($enfant AND $browser_layer)
+	couche_formulaire_tous($first_couche, $last_couche);
 
 afficher_rubriques_filles(0);
 
 
 fin_page();
 }
-// Recuperer toutes les rubriques dans $enfant et leur niveau dans numero_block
+
+// Voir inc_layer pour les 2 globales utilisees
 
 function arbo_articles_tous()
 {
-global $enfant, $first_couche, $last_couche,  $numero_block, $compteur_block;
+	global $numero_block, $compteur_block;
 
-$enfant = array();
-$query = "SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY 0+titre,titre";
-$result = spip_query($query);
-while ($row = spip_fetch_array($result)) {
-	$id_rubrique = $row['id_rubrique'];
-	$id_parent = $row['id_parent'];
-	$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
-	$nom_block = "rubrique$id_rubrique";
-	if (!$numero_block[$nom_block] > 0){
-		$compteur_block++;
-		$numero_block[$nom_block] = $compteur_block;
+	$enfant = array();
+	$result = spip_query("SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY 0+titre,titre");
+	$first_couche = 0;
+	while ($row = spip_fetch_array($result)) {
+		$id_rubrique = $row['id_rubrique'];
+		$id_parent = $row['id_parent'];
+		$enfant[$id_parent][$id_rubrique] = typo($row['titre']);
+		$nom_block = "rubrique$id_rubrique";
+		if (!$numero_block[$nom_block]){
+			$compteur_block++;
+			$numero_block[$nom_block] = $compteur_block;
 
-		if (!$first_couche) $first_couche = $compteur_block;
-		$last_couche = $compteur_block;
+			if (!$first_couche) $first_couche = $compteur_block;
+		}
 	}
- }
+	$last_couche = $first_couche ? $compteur_block : 0;
+	return array($enfant, $first_couche, $last_couche);
 }
 
 
@@ -225,7 +225,8 @@ echo "</form>";
 
 function couche_formulaire_tous($first_couche, $last_couche)
 {
-  global $spip_lang_rtl;
+	global $spip_lang_rtl;
+
 	echo "<div>&nbsp;</div>";
 	echo "<b class='verdana3'>";
 	echo "<a href=\"javascript:";
@@ -247,13 +248,8 @@ function afficher_rubriques_filles($id_parent) {
 	global $enfant, $article;
 	global $spip_lang_left, $spip_lang_right, $spip_lang;
 	global $couleur_claire;
-	global $decal;
-	
-	
+	static $decal = 0;
 
-	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
-			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
-		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 	$decal = $decal + 1;
 	$droite = 500 - (10 * $decal);
 	
@@ -286,7 +282,7 @@ function afficher_rubriques_filles($id_parent) {
 				echo "<div class='plan-rubrique'>";
 				if ($lesarticles) {
 					echo "<div class='plan-articles'>";
-					article_tous_rubrique($lesarticles, $id_rubrique, $flag_trad);
+					article_tous_rubrique($lesarticles, $id_rubrique);
 					echo "</div>";
 				}
 
@@ -296,15 +292,19 @@ function afficher_rubriques_filles($id_parent) {
 			}
 			
 		if ($id_parent == 0) echo "<div>&nbsp;</div>";
-		}
+	  }
 	}
 	$decal = $decal-1;
 	
 }
 
-function article_tous_rubrique($tous, $id_rubrique, $flag_trad) 
+function article_tous_rubrique($tous, $id_rubrique) 
 {
 	global $text_article;
+
+	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
+			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
+		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
 	while(list(,$zarticle) = each($tous) ) {
 		$attarticle = &$text_article[$zarticle];

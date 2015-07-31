@@ -403,8 +403,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 // pour les filtres |largeur et |hauteur
 //
 function taille_image($img) {
-	global $largeur_img, $hauteur_img;
-	
+	static $largeur_img =array(), $hauteur_img= array();
+
 	if (eregi("width *= *['\"]?( *[0-9]+ *)", $img, $regs))
 		$srcWidth = intval(trim($regs[1]));
 	if (eregi("height *= *['\"]?( *[0-9]+ *)", $img, $regs))
@@ -414,7 +414,6 @@ function taille_image($img) {
 	if (eregi("src=[\"']([^'\"]+)[\"']", $img, $regs)) $logo = $regs[1];
 	if (!$logo) $logo = $img;
 	
-	
 	// pour essayer de limiter les lectures disque
 	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
 	$mem = $logo;
@@ -422,24 +421,23 @@ function taille_image($img) {
 	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
 	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
 
-	if ($largeur_img["$mem"] > 0) {
-		$srcWidth = $largeur_img["$mem"];
+	if ($largeur_img[$mem] > 0) {
+		$srcWidth = $largeur_img[$mem];
 	} else {
 		if (!$srcWidth AND $srcsize = @getimagesize($logo)) {
 			$srcWidth = $srcsize[0];
-		 	$largeur_img["$mem"] = $srcWidth;
+		 	$largeur_img[$mem] = $srcWidth;
 		 }
 	}
-	if ($hauteur_img["$mem"] > 0) {
-		$srcHeight = $hauteur_img["$mem"];
+	if ($hauteur_img[$mem] > 0) {
+		$srcHeight = $hauteur_img[$mem];
 	} else {
 		if (!$srcHeight AND $srcsize = @getimagesize($logo)) {
 			$srcHeight = $srcsize[1];
-			$hauteur_img["$mem"] = $srcHeight;
+			$hauteur_img[$mem] = $srcHeight;
 		}
 	}
 	return array($srcHeight, $srcWidth);
-	
 }
 
 
