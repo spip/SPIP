@@ -106,20 +106,15 @@ function afficher_raccourci_stats($id_article) {
 	$result = spip_query($query);
 	if ($row = @spip_fetch_array($result)) {
 		$visites = intval($row['visites']);
-		$popmax = lire_meta('popularite_max');
-		settype($popmax, 'double');
-		$popularite = ceil(min(100,100 * $row['popularite'] / max(1.0,$popmax)));
-
-		if ($visites > 0) bouton_admin("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
+		$popularite = ceil($row['popularite']);
 
 		$query = "SELECT COUNT(DISTINCT ip) AS c FROM spip_visites_temp WHERE type='article' AND id_objet=$id_article";
 		$result = spip_query($query);
 		if ($row = @spip_fetch_array($result)) {
 			$visites = $visites + $row['c'];
 		}
-		echo "[$visites visites";
-		echo "&nbsp;; popularit&eacute;&nbsp;: $popularite&nbsp;%";
-		echo "]";
+
+		bouton_admin("$visites visites&nbsp;; popularit&eacute;&nbsp;: $popularite", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 	}
 }
 
