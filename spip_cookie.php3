@@ -171,10 +171,11 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	if (!$retour)
-		$retour = 'spip_login.php3?var_url='.urlencode($url);
+		$retour = 'spip_login.php3?url='.urlencode($url);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
-	$redirect = ereg_replace("([?&])var_login=[^&]*", '\1', $retour);
+	$redirect = ereg_replace("([?&])var_login=[^&]*&?", '\1', $retour);
+	$redirect = ereg_replace("([?&])var_erreur=[^&]*&?", '\1', $redirect);
 	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
