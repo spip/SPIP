@@ -42,7 +42,7 @@ function bouton_imessage($destinataire, $row = '') {
 	global $couche_invisible;
 	$couche_invisible ++;
 
-	$url = new Link("message_edit.php3");
+	$url = new Link(http_php_scriptnq("message_edit",""));
 
 	// verifier que ce n'est pas un auto-message
 	if ($destinataire == $connect_id_auteur)
@@ -2749,7 +2749,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus("articles_page.php3")._T('info_en_cours_validation'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(http_php_scriptnq("articles_page",""))._T('info_en_cours_validation'), "article-24.gif", '', '', false);
 			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2784,7 +2784,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus("breves.php3")._T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(http_php_scriptnq("breves",""))._T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];

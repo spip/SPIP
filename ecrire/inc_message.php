@@ -238,7 +238,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
 function http_afficher_forum_perso($id_message, $titre)
 {
-	$forum_retour = urlencode("message.php3?id_message=$id_message");
+	$forum_retour = urlencode(http_php_scriptnq("message","id_message=$id_message"));
 
 	echo "<br /><br />\n<div align='center'>";
 	icone(_T('icone_poster_message'), "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
@@ -389,7 +389,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	    echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
 	  } else {
 	    echo "\n<p><center><table><tr><td>";
-	    icone (_T('icone_envoyer_message'), ("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.gif", "creer.gif");
+	    icone (_T('icone_envoyer_message'), (http_php_scriptnq("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
 	    echo "</td></tr></table></center></p>";
 	  }
 	}
@@ -406,7 +406,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_supprimer_message'), ("messagerie.php3?detruire_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_supprimer_message'), (http_php_scriptnq("messagerie","detruire_message=$id_message")), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 
@@ -422,7 +422,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 	  echo "\n<table align='right'><tr><td>";
-	  icone (_T('icone_modifier_message'), ("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
+	  icone (_T('icone_modifier_message'), (http_php_scriptnq("message_edit","id_message=$id_message")), "messagerie-24.gif", "edit.gif");
 	  echo "</td></tr></table>";
 	}
 	echo "</td></tr></table>";

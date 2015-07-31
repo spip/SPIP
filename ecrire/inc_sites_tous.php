@@ -103,7 +103,7 @@ function afficher_sites($titre_table, $requete) {
 			//echo "<tr bgcolor='$couleur'>";
 
 			//echo "<td class='arial2'>";
-			$link = new Link("sites.php3?id_syndic=$id_syndic");
+			$link = new Link(http_php_scriptnq("sites","id_syndic=$id_syndic"));
 			switch ($statut) {
 			case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
