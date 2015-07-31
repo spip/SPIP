@@ -432,16 +432,21 @@ padding-top:10px;
 
 
 /* Formulaire compact */
-.formulaire_spip_compact{
+.formulaire_spip_compact,
+#navigation .formulaire_spip,
+#extra .formulaire_spip {
 	font-size: 100%;
 }
-.formulaire_spip_compact ul li {
+.formulaire_spip_compact ul li,
+#navigation .formulaire_spip ul li,
+#extra .formulaire_spip ul li {
 	padding: 2px 5px !important;
 }
 
 .formulaire_spip_compact li label,
-.formulaire_spip_compact li.editer_descriptif label
- {
+.formulaire_spip_compact li.editer_descriptif label,
+#navigation .formulaire_spip li label,
+#extra .formulaire_spip li label {
 	text-transform: none;
 	color: #444444;
 	
@@ -457,9 +462,16 @@ padding-top:10px;
 	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-compact-,#ENV{ltr},.gif})]) bottom [(#GET{left})] no-repeat;
 }
 
-.formulaire_spip_compact select { width:auto;}
-.formulaire_spip_compact input, 
-.formulaire_spip_compact textarea {
+.formulaire_spip_compact select,
+#navigation .formulaire_spip select,
+#extra .formulaire_spip select { width:auto;}
+
+.formulaire_spip_compact input,
+.formulaire_spip_compact textarea,
+#navigation .formulaire_spip input,
+#extra .formulaire_spip input,
+#navigation .formulaire_spip textarea,
+#extra .formulaire_spip textarea {
 	padding: 3px;
 }
 
