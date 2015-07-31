@@ -1238,7 +1238,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_FILE_CONNECT')) define('_FILE_CONNECT',
 		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
-	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
+	:	(_EXTENSION_PHP AND @is_readable($f = _DIR_RESTREINT . 'inc_connect'._EXTENSION_PHP) ? $f
 	:	false))));
 
 	// Le fichier de reglages des droits
@@ -1315,8 +1315,8 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		// ne pas desinfecter les globales en profondeur car elle contient aussi les
 		// precedentes, qui seraient desinfectees 2 fois.
 		spip_desinfecte($GLOBALS,false);
-		include_spip('inc/php3');
-		spip_register_globals($x);
+		if (include_spip('inc/php3'))
+			spip_register_globals($x);
 	}
 
 	// appliquer le cookie_prefix

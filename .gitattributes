@@ -8,7 +8,6 @@ ecrire/action/ajouter_lien.php -text
 ecrire/action/auth.php -text
 ecrire/action/changer_mode_document.php -text
 ecrire/action/charger_plugin.php -text
-ecrire/action/configuration.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
 ecrire/action/copier_local.php -text
@@ -85,11 +84,6 @@ ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
 ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
-ecrire/exec/config_fonctions.php -text
-ecrire/exec/configuration.php -text
-ecrire/exec/configurer_moderniseur_html.php -text
-ecrire/exec/configurer_previsualiseur.php -text
-ecrire/exec/configurer_relayeur.php -text
 ecrire/exec/convert_sql_utf8.php -text
 ecrire/exec/convert_utf8.php -text
 ecrire/exec/copier_local.php -text
@@ -107,8 +101,6 @@ ecrire/exec/infos_perso.php -text
 ecrire/exec/install.php -text
 ecrire/exec/instituer_auteur.php -text
 ecrire/exec/legender.php -text
-ecrire/exec/memoriser.php -text
-ecrire/exec/menu_navigation.php -text
 ecrire/exec/menu_rubriques.php -text
 ecrire/exec/navigation.php -text
 ecrire/exec/naviguer.php -text
@@ -116,11 +108,9 @@ ecrire/exec/plonger.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text
-ecrire/exec/rechercher_auteur.php -text
 ecrire/exec/referencer_traduction.php -text
 ecrire/exec/rubriques_edit.php -text
 ecrire/exec/selectionner.php -text
-ecrire/exec/selectionner_auteur.php -text
 ecrire/exec/suivi_edito.php -text
 ecrire/exec/synchro.php -text
 ecrire/exec/tourner.php -text
@@ -129,7 +119,6 @@ ecrire/exec/valider_xml.php -text
 ecrire/genie/maintenance.php -text
 ecrire/genie/mise_a_jour.php -text
 ecrire/inc/actions.php -text
-ecrire/inc/afficher_objets.php -text
 ecrire/inc/aider.php -text
 ecrire/inc/ajouter_documents.php -text
 ecrire/inc/article_select.php -text
@@ -158,8 +147,6 @@ ecrire/inc/filtres_images_lib_mini.php -text
 ecrire/inc/filtres_images_mini.php -text
 ecrire/inc/filtres_mime.php -text
 ecrire/inc/filtres_mini.php -text
-ecrire/inc/formater_article.php -text
-ecrire/inc/formater_auteur.php -text
 ecrire/inc/gadgets.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
@@ -185,7 +172,6 @@ ecrire/inc/modifier.php -text
 ecrire/inc/nfslock.php -text
 ecrire/inc/notes.php -text
 ecrire/inc/notifications.php -text
-ecrire/inc/php3.php -text
 ecrire/inc/pipelines.php -text
 ecrire/inc/pipelines_ecrire.php -text
 ecrire/inc/plonger.php -text
@@ -193,18 +179,15 @@ ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
-ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/ressembler.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
-ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/tourner.php -text
 ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
-ecrire/inc/vieilles_defs.php -text
 ecrire/inc/vignette.php -text
 ecrire/inc/xml.php -text
 ecrire/install/etape_.php -text
