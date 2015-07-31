@@ -84,4 +84,14 @@ function verifier_sauvegarde ($archive) {
 	return _T('avis_erreur_version_archive', 
 		  array('archive' => str_replace('/', ' / ', $archive)));
 }
+
+// http://doc.spip.org/@import_charge_version
+function import_charge_version($version_archive)
+{
+	if (preg_match("{^phpmyadmin::}is",$version_archive)){
+		$fimport = 'import_1_3'; 
+	} else 	$fimport = 'import_' . str_replace('.','_',$version_archive);
+
+	return  charger_fonction($fimport, 'inc', true);
+}
 ?>
