@@ -38,6 +38,10 @@
 					else
 						if (@file_exists(_DIR_RESTREINT.'inc_'.$fichier.'3'))
 							include_ecrire('inc_'.$fichier.'3');
+					// mais peut-etre avons nous une version '.php' de la version stable
+					else
+						if (@file_exists(_DIR_RESTREINT.'inc_'.$fichier))
+							include_ecrire('inc_'.$fichier);
 					else
 						die ("Fichier SPIP-Lab \"$fichier\" manquant.");
 					break;

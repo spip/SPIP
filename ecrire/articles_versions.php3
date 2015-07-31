@@ -51,7 +51,7 @@ if (!$id_diff) {
 	$query = "SELECT id_version FROM spip_versions WHERE id_article=$id_article ".
 		"AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1";
 	if ($result = spip_query($query)) {
-		$row = mysql_fetch_array($result);
+		$row = spip_fetch_array($result);
 		$id_diff = $row['id_version'];
 	}
 }
