@@ -188,7 +188,7 @@ if ($essai_login == "oui") {
 			$redirect = generer_url_public('login',
 				"var_login=$login", true);
 		if ($session_password || $session_password_md5)
-			$redirect .= '&var_erreur=pass';
+			$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
 		$redirect .= '&url=' . rawurlencode($url);
 		spip_log("echec login: $login");
 	}
