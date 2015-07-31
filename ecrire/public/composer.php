@@ -29,9 +29,10 @@ include_spip('public/debug'); # toujours prevoir le pire
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // http://doc.spip.org/@public_composer_dist
-function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
+function public_composer_dist($squelette, $mime_type, $gram, $source) {
 
-	$nom = $mime_type . '_' . md5($squelette);
+	$connect = _request('connect');
+	$nom = $mime_type . ($connect ?  "_$connect" : '') . '_' . md5($squelette);
 
 	// si squelette est deja en memoire (INCLURE  a repetition)
 	if (function_exists($nom))
@@ -40,7 +41,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
 	// si squelette est deja compile et perenne, le charger
-	if (!squelette_obsolete($phpfile, $sourcefile)
+	if (!squelette_obsolete($phpfile, $source)
 	AND lire_fichier ($phpfile, $contenu,
 	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
@@ -55,9 +56,9 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	if (function_exists($nom)) return $nom;
 
 	// charger le source, si possible, et compiler 
-	if (lire_fichier ($sourcefile, $skel)) {
+	if (lire_fichier ($source, $skel)) {
 		$compiler = charger_fonction('compiler', 'public');
-		$skel_code = $compiler($skel, $nom, $gram, $sourcefile);
+		$skel_code = $compiler($skel, $nom, $gram, $source, $connect);
 	}
 
 	// Tester si le compilateur renvoie une erreur
@@ -72,7 +73,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 			ecrire_fichier ($phpfile, $skel_code);
 			return $nom;
 		} else {
-			erreur_squelette(_T('zbug_erreur_compilation'), $sourcefile);
+			erreur_squelette(_T('zbug_erreur_compilation'), $source);
 		}
 	}
 }

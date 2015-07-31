@@ -672,9 +672,8 @@ function code_boucle(&$boucles, $id, $nom)
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
 // http://doc.spip.org/@public_compiler_dist
-function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
-  global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales, $tables_auxiliaires,
-    $tables_jointures;
+function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
+	global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales, $tables_auxiliaires, $tables_jointures;
 
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
@@ -703,6 +702,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
+			if (!$boucles[$id]->sql_serveur AND $connect)
+				$boucles[$id]->sql_serveur = $connect;
 			$show = trouver_table($type, $boucles[$id]);
 			if ($show) {
 				$nom_table = $show['table'];
@@ -805,7 +806,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	  $code . '
 
 //
-// Fonction principale du squelette ' . $sourcefile ."
+// Fonction principale du squelette ' . $sourcefile . 
+	  ($connect ? " pour $connect" : '') . ".
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
 	$page = ' .
