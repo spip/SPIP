@@ -243,7 +243,7 @@ function extra_form($extra, $type, $ensemble='') {
 				break;
 		}
 
-		$affiche .= "<p />\n";
+		$affiche .= "<br />\n";
 	}
 
 	return $affiche;

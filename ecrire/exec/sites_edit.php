@@ -134,7 +134,7 @@ $form .= "<input type='text' class='formo' name='url_site' value=\"$url_site\" s
 
 	$form .= fin_cadre_couleur(true);
 
-$form .= "<p /><b>"._T('entree_description_site')."</b><br />\n";
+$form .= "<br /><b>"._T('entree_description_site')."</b><br />\n";
 $form .= "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap='soft'>";
 $form .= entites_html($descriptif);
 $form .= "</textarea>\n";

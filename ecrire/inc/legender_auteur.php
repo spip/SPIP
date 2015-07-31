@@ -215,7 +215,7 @@ function apparait_auteur_infos($id_auteur, $auteur)
 	. "</div>"
 	. $res
 	. fin_cadre_relief(true)
-	. "<p />"
+	. "<br />"
 	. fin_cadre_formulaire(true);
 }
 

@@ -148,7 +148,7 @@ EOF;
 
 	affiche_arbre_plugins(liste_plugin_files(),liste_chemin_plugin_actifs());
 
-	echo "\n<p />";
+	echo "\n<br />";
 
 	echo "<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
