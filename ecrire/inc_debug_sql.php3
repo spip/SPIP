@@ -67,7 +67,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
-function erreur_requete_boucle($query, $id_boucle, $type, $erreur, $errno) {
+function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
