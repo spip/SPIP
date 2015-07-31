@@ -170,8 +170,6 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 		return true;
 	case 'free':
 		return false;
-	case 'online':
-		return @email('webmaster', $email, $sujet, $texte);
 	default:
 		return @mail($email, $sujet, $texte, $headers);
 	}
