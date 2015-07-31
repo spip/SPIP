@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
+include_spip('base/abstract_sql');
+spip_connect();
+
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 	return calculer_balise_dynamique($p, $nom, array('url'));
 }
@@ -100,21 +103,15 @@ function login_pour_tous($login, $cible, $action) {
 
 	$erreur = '';
 	if ($login) {
-		$s = spip_query("SELECT * FROM spip_auteurs
-			WHERE login='" .addslashes($login) ."'");
-		$row =  spip_fetch_array($s);
+		$row =  spip_abstract_fetsel('*', 'spip_auteurs', "login='" .addslashes($login) ."'");
 		// Retrouver ceux qui signent de leur nom ou email
 		if (!$row AND !$GLOBALS['ldap_present']) {
-			if ($t = spip_fetch_array(
-			spip_query(
-				"SELECT * FROM spip_auteurs
-				WHERE (nom = '" .addslashes($login) ."'
+			if ($row = spip_abstract_fetsel('*', 'spip_auteurs',
+				"(nom = '" .addslashes($login) ."'
 				OR email = '" .addslashes($login) ."')
-				AND login<>'' AND statut<>'5poubelle'"
-			))) {
-				$row = $t;
+				AND login<>'' AND statut<>'5poubelle'")) {
 				$login_alt = $login; # afficher ce qu'on a tape
-				$login = $t['login'];
+				$login = $row['login'];
 			}
 		}
 
