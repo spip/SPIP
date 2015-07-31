@@ -23,8 +23,9 @@ if (!defined('_CONTEXTE_IGNORE_VARIABLES')) define('_CONTEXTE_IGNORE_VARIABLES',
 function assembler($fond, $connect='') {
 
 	// flag_preserver est modifie ici, et utilise en globale
+	// use_cache sert a informer le bouton d'admin pr savoir s'il met un *
 	// contexte est utilise en globale dans le formulaire d'admin
-	global $flag_preserver, $contexte;
+	global $flag_preserver, $use_cache, $contexte;
 
 	$contexte = calculer_contexte();
 	$page = array('contexte_implicite'=>calculer_contexte_implicite());
