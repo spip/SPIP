@@ -22,7 +22,7 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@inc_joindre_dist
 function inc_joindre_dist($v) {
 
-	// calculer le formulaire de base (et affecter $v si necessaire)
+	// calculer le formulaire de base
 
 	$res = joindre_formulaire($v);
 
@@ -34,14 +34,15 @@ function inc_joindre_dist($v) {
 			. $fin_cadre(true);
 	}
 
-	if (test_espace_prive())
-		$v['script'] = generer_url_ecrire($v['script'], $v['args'], true);
+	$res = "\n<div class='joindre'>".$res."</div>\n";
+	$att = " enctype='multipart/form-data' class='form_upload'";
+	$args = (intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']);
+	$script = $v['script'];
 
-	return generer_action_auteur('joindre',
-		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
-		$v['script'],
-		"\n<div class='joindre'>".$res."</div>\n",
-		" method='post' enctype='multipart/form-data' class='form_upload'");
+	// si espace prive, $v a une signification speciale (pas clair)
+	if (test_espace_prive())
+		return redirige_action_post('joindre', $args, $script, $v['args'], $res, $att);
+	else	return generer_action_auteur('joindre', $args, $script, $res, "$att method='post'");
 }
 
 // http://doc.spip.org/@joindre_formulaire
