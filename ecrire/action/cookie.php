@@ -92,7 +92,7 @@ if ($essai_login == "oui") {
 
 	// Essayer l'authentification par MySQL
 	$auth_spip = charger_fonction('auth_spip', 'inc', true);
-	if ($auth_spip) $row_auteur = $f($session_login, $session_password);		
+	if ($auth_spip) $row_auteur = $auth_spip($session_login, $session_password);		
 
 	// Marche pas: essayer l'authentification par LDAP si present
 	if (!$row_auteur AND $GLOBALS['ldap_present']) {
