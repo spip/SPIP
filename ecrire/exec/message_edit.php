@@ -41,7 +41,7 @@ function exec_message_edit_dist()
 	$expediteur = $row["id_auteur"];
 
 	if (!($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) {
-		echo minipres(_T('avis_non_acces_message'));
+		echo minipres();
 		exit;
 	}
 

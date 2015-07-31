@@ -89,10 +89,8 @@ function action_acceder_document_dist() {
 	switch($status) {
 
 	case 403:
-		http_status(403);
 		include_spip('inc/minipres');
-		echo minipres(_L('Status').' 403',
-			_T('ecrire:avis_acces_interdit'));
+		echo minipres();
 		break;
 
 	case 404:
