@@ -590,6 +590,7 @@ prive/objets/infos/article.html -text
 prive/objets/infos/auteur.html -text
 prive/objets/infos/objet.html -text
 prive/objets/infos/rubrique.html -text
+prive/objets/liste/articles-memerubrique.html -text
 prive/objets/liste/articles-trad.html -text
 prive/objets/liste/articles.html -text
 prive/objets/liste/auteurs.html -text
