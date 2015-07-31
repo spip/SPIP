@@ -43,6 +43,7 @@ function init_config() {
 
 		'forums_publics' => 'posteriori',
 		'accepter_inscriptions' => 'non',
+		'accepter_visiteurs' => 'non',
 		'prevenir_auteurs' => 'non',
 		'suivi_edito' => 'non',
 		'quoi_de_neuf' => 'non',
@@ -147,15 +148,16 @@ function appliquer_modifs_config() {
 
 	// Appliquer les changements de moderation forum
 	// forums_publics_appliquer : futur, saufnon, tous
-	$requete_appliquer = '';
 	$accepter_forum = substr($forums_publics,0,3);
-	if ($forums_publics_appliquer == 'saufnon') {
-		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
-	} else if ($forums_publics_appliquer == 'tous') {
-		ecrire_meta('accepter_visiteurs', 'oui');
-		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
-	}
+	$requete_appliquer = ($forums_publics_appliquer == 'saufnon') ?
+		"UPDATE spip_articles SET accepter_forum='$accepter_forum'
+		WHERE accepter_forum != 'non'" : 
+		(($forums_publics_appliquer == 'tous') ?
+			"UPDATE spip_articles SET accepter_forum='$accepter_forum'" : '');
 	if ($requete_appliquer) spip_query($requete_appliquer);
+
+	if ($accepter_forum == 'abo')
+		ecrire_meta('accepter_visiteurs', 'oui');
 
 	// Test du proxy : $tester_proxy est le bouton "submit"
 	if ($tester_proxy) {
@@ -218,6 +220,7 @@ function appliquer_modifs_config() {
 
 		'forums_publics',
 		'accepter_inscriptions',
+		'accepter_visiteurs',
 		'prevenir_auteurs',
 		'suivi_edito',
 		'adresse_suivi',
