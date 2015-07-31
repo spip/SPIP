@@ -284,40 +284,59 @@ function ordonne_plugin(){
 function plugin_get_infos($plug){
 	include_spip('inc/xml');
 	static $infos=array();
+	static $plugin_xml_cache=NULL;
+	if ($plugin_xml_cache==NULL){
+		$plugin_xml_cache = array();
+		if (is_file($f=_DIR_TMP."plugin_xml.cache")){
+			lire_fichier($f,$contenu);
+			$plugin_xml_cache = unserialize($contenu);
+		}
+	}
 	if (!isset($infos[$plug])){
-	  $ret = array();
-	  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
-			if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
-				$arbre = spip_xml_load(_DIR_PLUGINS."$plug/plugin.xml");
-				if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
-					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
+		$ret = array();
+		if (isset($plugin_xml_cache[$plug])){
+			$info = $plugin_xml_cache[$plug];
+			if (isset($info['filemtime']) && (@filemtime(_DIR_PLUGINS."$plug/plugin.xml")<=$info['filemtime']))
+				$ret = $info;
+		}
+		if (!count($ret)){
+		  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
+				if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
+					$arbre = spip_xml_load($f = _DIR_PLUGINS."$plug/plugin.xml");
+					if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
+						$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
+				}
+				else {
+					// pour arriver ici on l'a vraiment cherche...
+					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
+				}
+				plugin_verifie_conformite($plug,$arbre);
+				
+				$ret['nom'] = spip_xml_aplatit($arbre['nom']);
+				$ret['version'] = trim(end($arbre['version']));
+				if (isset($arbre['auteur']))
+					$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
+				if (isset($arbre['description']))
+					$ret['description'] = spip_xml_aplatit($arbre['description']);
+				if (isset($arbre['lien']))
+					$ret['lien'] = join(' ',$arbre['lien']);
+				if (isset($arbre['etat']))
+					$ret['etat'] = trim(end($arbre['etat']));
+				if (isset($arbre['options']))
+					$ret['options'] = $arbre['options'];
+				if (isset($arbre['fonctions']))
+					$ret['fonctions'] = $arbre['fonctions'];
+				$ret['prefix'] = trim(array_pop($arbre['prefix']));
+				if (isset($arbre['pipeline']))
+					$ret['pipeline'] = $arbre['pipeline'];
+				if (isset($arbre['erreur']))
+					$ret['erreur'] = $arbre['erreur'];
 			}
-			else {
-				// pour arriver ici on l'a vraiment cherche...
-				$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
+			if ($t=filemtime($f)){
+				$ret['filemtime'] = $t;
+				$plugin_xml_cache[$plug]=$ret;
+				ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
 			}
-	
-			plugin_verifie_conformite($plug,$arbre);
-			
-			$ret['nom'] = spip_xml_aplatit($arbre['nom']);
-			$ret['version'] = trim(end($arbre['version']));
-			if (isset($arbre['auteur']))
-				$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
-			if (isset($arbre['description']))
-				$ret['description'] = spip_xml_aplatit($arbre['description']);
-			if (isset($arbre['lien']))
-				$ret['lien'] = join(' ',$arbre['lien']);
-			if (isset($arbre['etat']))
-				$ret['etat'] = trim(end($arbre['etat']));
-			if (isset($arbre['options']))
-				$ret['options'] = $arbre['options'];
-			if (isset($arbre['fonctions']))
-				$ret['fonctions'] = $arbre['fonctions'];
-			$ret['prefix'] = trim(array_pop($arbre['prefix']));
-			if (isset($arbre['pipeline']))
-				$ret['pipeline'] = $arbre['pipeline'];
-			if (isset($arbre['erreur']))
-				$ret['erreur'] = $arbre['erreur'];
 		}
 		$infos[$plug] = $ret;
 	}
