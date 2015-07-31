@@ -78,7 +78,7 @@ else debut_page("$nom_auteur","redacteurs","redacteurs");
 
 
 echo "<br><br><br>";
-gros_titre("$nom");
+gros_titre($nom);
 
 if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
 	barre_onglets("auteur", "messagerie");
