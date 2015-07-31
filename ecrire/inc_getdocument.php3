@@ -245,7 +245,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		else if ($type_image)
 			$GLOBALS['ancre'] = 'portfolio';
 		else
-			$GLOBALS['ancre'] = 'docs';
+			$GLOBALS['ancre'] = 'documents';
 	}
 
 	// Preparation vignette du document $id_document

@@ -511,25 +511,27 @@ function afficher_portfolio (
 			// bloc vignette + rotation
 			echo "<div style='text-align:center;'>";
 			
+
+			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
 			switch ($id_type) {
 				case 1:
-					$format = "jpg";
+					$document['extension'] = "jpg";
 					break;
 				case 2:
-					$format = "png";
+					$document['extension'] = "png";
 					break;
 				case 3:
-					$format = "gif";
+					$document['extension'] = "gif";
 					break;
 			}
 
 			// bloc rotation de l'image
 			if ($flag_modif
-			AND strstr(lire_meta('formats_graphiques'), $format)) {
+			AND strstr(lire_meta('formats_graphiques'), $document['extension'])) {
 				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 				$process = lire_meta('image_process');
 				if ($process == 'imagick' OR $process == 'gd2'
-				OR $process == 'convert') {
+				OR $process == 'convert' OR $process == 'netpbm') {
 					// tourner a gauche
 					$link_rot = new Link ($image_url);
 					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
@@ -538,7 +540,7 @@ function afficher_portfolio (
 					$link_rot->addVar('var_rot', -90);
 					$link_rot->addVar('redirect',
 						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', 'portfolio');
+					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "border='0'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 					echo "<br />";
 
@@ -550,7 +552,7 @@ function afficher_portfolio (
 					$link_rot->addVar('var_rot', 90);
 					$link_rot->addVar('redirect',
 						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', 'portfolio');
+					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
 						'tourner-droite.gif', "border='0'",
 						_T('image_tourner_droite'), '', 'bouton_rotation');
@@ -564,14 +566,13 @@ function afficher_portfolio (
 					$link_rot->addVar('var_rot', 180);
 					$link_rot->addVar('redirect',
 						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', 'portfolio');
+					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
 						'tourner-180.gif', "border='0'",
 						_T('image_tourner_180'), '', 'bouton_rotation');
 				}
 				echo "</div>\n";
 			} // fin bloc rotation
-
 
 			//
 			// Recuperer la vignette et afficher le doc
@@ -637,9 +638,8 @@ function afficher_portfolio (
 				$link->addVar('modif_document', 'oui');
 				$link->addVar('id_document', $id_document);
 				$link->addVar('show_docs', $id_document);
-				$ancre = "portfolio";
 
-				echo $link->getForm('POST', $ancre);
+				echo $link->getForm('POST', $album);
 				echo "<b>"._T('titre_titre_document')."</b><br />\n";
 				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 
@@ -685,59 +685,14 @@ function afficher_portfolio (
 					calculer_action_auteur("supp_doc ".$id_document));
 				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
 				$link_supp->addVar('doc_supp', $id_document);
-				$link_supp->addVar('ancre', 'portfolio');
+				$link_supp->addVar('ancre', $album);
 				icone_horizontale(_T('icone_supprimer_document'),
 					$link_supp->getUrl(), "image-24.gif", "supprimer.gif");
 
 
 				// bloc mettre a jour la vignette
 				echo "<hr />";
-				echo bouton_block_invisible("gerer_vignette$id_document");
-				echo "<b>"._T('info_vignette_personnalisee')."</b>\n";
-				echo debut_block_invisible("gerer_vignette$id_document");
-
-				if ($id_vignette) {
-					$link = new Link ($image_url);
-					$link->addVar('redirect',
-						$redirect_url.'&show_docs='.$id_document);
-					$link->addVar('hash',
-						calculer_action_auteur("supp_doc ".$id_vignette));
-					$link->addVar('hash_id_auteur', $connect_id_auteur);
-					$link->addVar('doc_supp', $id_vignette);
-					$link->addVar('ancre', 'portfolio');
-					icone_horizontale (_T('info_supprimer_vignette'),
-						$link->getUrl(), "vignette-24.png", "supprimer.gif");
-				}
-				else {
-					// lien "creation automatique"
-					if ($format AND lire_meta("creer_preview") == 'oui') {
-						$link = new Link($image_url);
-						$link->addvar('creer_vignette', 'oui');
-						$link->addVar('redirect',
-							$redirect_url.'&show_docs='.$id_document);
-						$link->addvar('vignette', $document['fichier']);
-						$link->addVar('hash',
-						calculer_action_auteur("vign ".$document['fichier']));
-						$link->addVar('hash_id_auteur', $connect_id_auteur);
-						$link->addVar('id_document', $id_document);
-						$link->addVar('ancre', 'portfolio');
-						icone_horizontale(_T('info_creer_vignette'),
-						$link->getUrl(), "vignette-24.png", "creer.gif");
-					}
-
-					// lien "upload vignette"
-					$link = new Link ($image_url);
-					$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-					$link->addVar('hash_id_auteur', $connect_id_auteur);
-					$link->addVar('ajout_doc', 'oui');
-					$link->addVar('id_document', $id_document);
-					$link->addVar('mode', 'vignette');
-					afficher_upload($link,
-						$redirect_url.'&show_docs='.$id_document,
-						_T('info_remplacer_vignette'), 'image', false);
-				}
-				echo fin_block();
-
+				bloc_gerer_vignette($document, $image_url, $redirect_url, $album);
 
 				echo "</div>";
 			} // fin block modifs
@@ -766,19 +721,79 @@ function afficher_portfolio (
 }
 
 
+function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
+	global $connect_id_auteur;
+
+	$id_document = $document['id_document'];
+	$id_vignette = $document['id_vignette'];
+
+	echo bouton_block_invisible("gerer_vignette$id_document");
+	echo "<b>"._T('info_vignette_personnalisee')."</b>\n";
+	echo debut_block_invisible("gerer_vignette$id_document");
+
+	if ($id_vignette) {
+		$link = new Link ($image_url);
+		$link->addVar('redirect',
+		$redirect_url.'&show_docs='.$id_document);
+		$link->addVar('hash',
+			calculer_action_auteur("supp_doc ".$id_vignette));
+		$link->addVar('hash_id_auteur', $connect_id_auteur);
+		$link->addVar('doc_supp', $id_vignette);
+
+		$link->addVar('ancre', $album);
+
+		icone_horizontale (_T('info_supprimer_vignette'),
+		$link->getUrl(), "vignette-24.png", "supprimer.gif");
+	}
+	else {
+		// lien "creation automatique"
+		if (strstr(lire_meta('formats_graphiques'), $document['extension'])
+		AND lire_meta('creer_preview') == 'oui') {
+			$link = new Link($image_url);
+			$link->addvar('creer_vignette', 'oui');
+			$link->addVar('redirect',
+				$redirect_url.'&show_docs='.$id_document);
+			$link->addvar('vignette', $document['fichier']);
+			$link->addVar('hash',
+				calculer_action_auteur("vign ".$document['fichier']));
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
+			$link->addVar('id_document', $id_document);
+			$link->addVar('ancre', $album);
+			icone_horizontale(_T('info_creer_vignette'),
+			$link->getUrl(), "vignette-24.png", "creer.gif");
+		}
+
+		// lien "upload vignette"
+		$link = new Link ($image_url);
+		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+		$link->addVar('hash_id_auteur', $connect_id_auteur);
+		$link->addVar('ajout_doc', 'oui');
+		$link->addVar('id_document', $id_document);
+		$link->addVar('mode', 'vignette');
+		$link->addVar('ancre', $album);
+		afficher_upload($link,
+			$redirect_url.'&show_docs='.$id_document,
+			_T('info_remplacer_vignette'), 'portfolio', false);
+	}
+	echo fin_block();
+}
 
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
-	global $clean_link;
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $connect_statut;
 	global $id_doublons, $options;
 	global $spip_lang_left, $spip_lang_right;
 
 	$image_url = '../spip_image.php3?';
-	if ($id_article) $image_url .= '&id_article='.$id_article;
-	if ($type == "rubrique") $image_url .= '&modifier_rubrique=oui';
+	if ($id_article)
+		$image_url .= 'id_article='.$id_article;
+	else if ($id_rubrique)
+		$image_url .= 'id_article='.$id_rubrique;
 
-	$redirect_url = $clean_link->getUrl();
+	$redirect_url = new Link();
+	if ($type == "rubrique")
+		$redirect_url->addVar('modifier_rubrique', 'oui');
+	$redirect_url = $redirect_url->getUrl();
 
 	// Afficher portfolio
 	/////////
@@ -827,7 +842,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		$documents[] = $document;
 
 	if (count($documents)) {
-		echo "<a name='docs'></a>";
+		echo "<a name='documents'></a>";
 		echo "<div>&nbsp;</div>";
 		echo "<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>". majuscules(_T('info_documents')) ."</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='5'>";
@@ -938,12 +953,12 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 	/// Ajouter nouveau document
 	echo "<p>&nbsp;</p>\n";
-	echo "<a name='docs'></a>\n";
+	echo "<a name='documents'></a>\n";
 	echo "<a name='portfolio'></a>\n";
 	if ($type == "article" AND lire_meta("documents_$type") != 'non') {
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 
-		debut_cadre_couleur("doc-24.gif", false, "creer.gif", $titre_cadre);
+		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
 			$link = new Link ($image_url);
 			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
@@ -952,7 +967,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			$link->addVar('type', $type);
 		afficher_upload($link, $redirect_url,
 			_T('info_telecharger_ordinateur'));
-		fin_cadre_couleur();
+		fin_cadre_enfonce();
 	}
 
 	// Afficher les documents lies
@@ -1024,9 +1039,10 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		if ($flag_deplie) echo bouton_block_visible("$block");
 		else echo bouton_block_invisible("$block");
 		echo "</div>";
-		
+
+
 		//
-		// Edition de la vignette
+		// Affichage de la vignette
 		//
 
 		if ($id_vignette) $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
@@ -1054,6 +1070,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			echo "</div>\n";
 		}
 
+		// Affichage du raccourci <doc...> correspondant
 		if (!ereg(",$id_document,", $doublons)) {
 			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
@@ -1072,8 +1089,10 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 
 		$block = "document $id_document";
 
-		if ($flag_deplie) echo debut_block_visible($block);
-		else  echo debut_block_invisible($block);
+		if ($flag_deplie)
+			echo debut_block_visible($block);
+		else
+			echo debut_block_invisible($block);
 		if (ereg(",$id_document,", $doublons)) {
 			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
 			echo "<div align='center'>&lt;doc$id_document&gt;</div>\n";
@@ -1094,7 +1113,13 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			} else {
 				echo _T('info_document').' '.majuscules($type_extension);
 			}
-			echo " : <a href='$url'>".taille_en_octets($taille)."</a>";
+
+			if ($largeur * $hauteur)
+				echo ", "._T('info_largeur_vignette',
+					array('largeur_vignette' => $largeur,
+					'hauteur_vignette' => $hauteur));
+
+			echo ', '.taille_en_octets($taille);
 		}
 		echo "</div>";
 
@@ -1134,14 +1159,34 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 		$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
 		$link_supp->addVar('doc_supp', $id_document);
-		$link_supp->addVar('ancre', 'docs');
+		$link_supp->addVar('ancre', 'documents');
 
 		echo "</div>";
 
 		echo "<p></p><div align='center'>";
 		icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
-	
+
+
+		// Bloc edition de la vignette
+		if ($options == 'avancees') {
+			echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
+			# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
+			switch ($id_type) {
+				case 1:
+					$document['extension'] = "jpg";
+					break;
+				case 2:
+					$document['extension'] = "png";
+					break;
+				case 3:
+					$document['extension'] = "gif";
+					break;
+			}
+			bloc_gerer_vignette($document, $image_url, $redirect_url, 'documents');
+			echo "</div\n";
+		}
+
 		echo "</div>\n";
 		fin_cadre_enfonce();
 	}
