@@ -40,8 +40,8 @@ function entites_unicode($texte) {
 function texte_backend($texte) {
 
 	// " -> &quot; et tout ce genre de choses
-	$texte = entites_html($texte);
 	$texte = str_replace("&nbsp;", " ", $texte);
+	$texte = entites_html($texte);
 
 	// verifier le charset
 	$texte = entites_unicode($texte);
