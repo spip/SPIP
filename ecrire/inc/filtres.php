@@ -644,6 +644,7 @@ function heures_minutes($numdate) {
 // http://doc.spip.org/@recup_date
 function recup_date($numdate){
 	if (!$numdate) return '';
+	$heures = $minutes = $secondes = 0;
 	if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}|[0-9]{1,2})#', $numdate, $regs)) {
 		$jour = $regs[1];
 		$mois = $regs[2];
@@ -663,11 +664,19 @@ function recup_date($numdate){
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour ='';
+	}
+	elseif (preg_match('#([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})#', $numdate, $regs)){
+		$annee = $regs[1];
+		$mois = $regs[2];
+		$jour = $regs[3];
+		$heures = $regs[4];
+		$minutes = $regs[5];
+		$secondes = $regs[6];
 	} else $annee = $mois =  $jour =''; 
 	if ($annee > 4000) $annee -= 9000;
 	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
 
-	return array($annee, $mois, $jour);
+	return array($annee, $mois, $jour, $heures, $minutes, $secondes);
 }
 
 // une date pour l'interface : utilise date_relative si le decalage
@@ -730,10 +739,8 @@ function date_relative($date, $decalage_maxi=0) {
 function affdate_base($numdate, $vue, $param = '') { 
 	global $spip_lang;
 	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee, $mois, $jour) = $date_array;
-	else
-		return '';
+	if (!$date_array) return;
+	list($annee, $mois, $jour, $heures, $minutes, $secondes)= $date_array;
 
 	// 1er, 21st, etc.
 	$journum = $jour;
@@ -881,8 +888,10 @@ function affdate_mois_annee($numdate) {
 
 // http://doc.spip.org/@affdate_heure
 function affdate_heure($numdate) {
-	if (!$numdate) return '';
-	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes($numdate)));
+	$date_array = recup_date($numdate);
+	if (!$date_array) return;
+	list($annee, $mois, $jour, $heures, $minutes, $secondes)= $date_array;
+	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes("$heures:$minutes:$secondes")));
 }
 
 
