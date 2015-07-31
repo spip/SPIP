@@ -162,8 +162,15 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
 	return array($article,$text_article,$aff_statut);
 }
 
-//  checkbox avec image
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
+// http://doc.spip.org/@boutonne
+function boutonne($t, $n, $v, $a='') {
+	return "\n<input type='$t'"
+	. (!$n ? '' : " name='$n'")
+	. " value=\"$v\" $a />";
+}
 
+//  checkbox avec image
 // http://doc.spip.org/@http_label_img
 function http_label_img($statut, $etat, $var, $img, $texte) {
 	return  
