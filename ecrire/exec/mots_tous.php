@@ -29,19 +29,19 @@ function exec_mots_tous_dist()
 		$titre_mot = typo($row['titre']);
 		$type_mot = typo($row['type']);
 
-		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
-		else $aff_articles="prop,publie";
+		if ($connect_statut=="0minirezo") $aff_articles="'prepa','prop','publie','refuse'";
+		else $aff_articles="'prop','publie'";
 
-		$nb_articles = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"));
+		$nb_articles = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article AND (article.statut IN ($aff_articles))>0 AND article.statut!='refuse'"));
 		$nb_articles = $nb_articles['n'];
 
 		$nb_rubriques = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"));
 		$nb_rubriques = $nb_rubriques['n'];
 
-		$nb_breves = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_breves AS lien, spip_breves AS breve WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
+		$nb_breves = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_breves AS lien, spip_breves AS breve WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve AND (breve.statut IN ($aff_articles))>0 AND breve.statut!='refuse'"));
 		$nb_breves = $nb_breves['n'];
 
-		$nb_sites = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_syndic AS lien, spip_syndic AS syndic WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic	AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));
+		$nb_sites = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_syndic AS lien, spip_syndic AS syndic WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic	AND (syndic.statut IN ($aff_articles))>0 AND syndic.statut!='refuse'"));
 		$nb_sites = $nb_sites['n'];
 
 		$nb_forum = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots_forum AS lien, spip_forum AS forum WHERE lien.id_mot=$conf_mot AND forum.id_forum=lien.id_forum AND forum.statut='publie'"));
