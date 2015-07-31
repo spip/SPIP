@@ -97,13 +97,6 @@ function calcule_header_et_page ($fond, $delais) {
 			header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 			header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
-
-		// Inserer au besoin les boutons admins
-		if ($affiche_boutons_admin) {
-			include_local("inc-admin.php3");
-			$page['process_ins'] = 'php';
-			$page['texte'] = affiche_boutons_admin($page['texte']);
-		}
 	}
 
 	return $page;

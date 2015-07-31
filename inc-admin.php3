@@ -4,7 +4,25 @@
 // puis les boutons
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 
-function affiche_boutons_admin(&$contenu) {
+function affiche_boutons_admin($contenu) {
+	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
+	if ($f = find_in_path('spip_admin_perso.css'))
+		$css2 = "<link rel='stylesheet' href='$f' type='text/css' />\n";
+
+	if (preg_match('@<(/head|body)@i', $contenu, $regs)) {
+		$contenu = explode($regs[0], $contenu, 2);
+		$contenu = $contenu[0] . $css. $css2 . $regs[0] . $contenu[1];
+	} else
+		$contenu = $css . $css2 . $contenu;
+
+	if (preg_match('@<(/body|/html)@i', $contenu, $regs)) {
+		$split = explode($regs[0], $contenu, 2);
+		$contenu = $split[0];
+		$suite = $regs[0].$split[1];
+	}
+
+	echo $contenu;
+
 	//
 	// Regler les boutons dans la langue de l'admin (sinon tant pis)
 	//
@@ -14,36 +32,19 @@ function affiche_boutons_admin(&$contenu) {
 	if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'"))) {
 		$lang = $row['lang'];
 	}
+	lang_select($lang);
 
-	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
-	if ($f = find_in_path('spip_admin_perso.css'))
-		$css .= "<link rel='stylesheet' href='$f' type='text/css' />\n";
-
-#	$n = stripos($contenu, '</head>'); #PHP5
-	preg_match('@</head>@i',$contenu,$regs);
-	$n = strpos($contenu, $regs[0]);
-	if ($n)
-	  $contenu = substr($contenu,0,$n) . $css . substr($contenu,$n);
-	else 
-	  // squelette pourri: on force
-	  $contenu = "<html><head>$css</head>$contenu";
-	$insere = synthetiser_balise_dynamique('formulaire_admin',
-					       array(
+	// Afficher la balise #FORMULAIRE_ADMIN mais en float
+	inclure_balise_dynamique(
+		balise_formulaire_admin_dyn(
 		$GLOBALS['id_article'], $GLOBALS['id_breve'],
 		$GLOBALS['id_rubrique'], $GLOBALS['id_mot'],
-		$GLOBALS['id_auteur'], 'div'),
-					       find_in_path('inc-formulaire_admin' . _EXTENSION_PHP),
-					       $lang);
+		$GLOBALS['id_auteur'], 'div'
+	));
 
-	preg_match('@<body[^>]*>@i',$contenu,$regs);
-	$n = strpos($contenu, $regs[0]) + strlen($regs[0]);
-	if ($n) 
-	  $contenu = substr($contenu,0,$n) . $insere . substr($contenu,$n);
-	else 
-	  // squelette pourri: on force
-	  $contenu .=  $insere;
+	lang_dselect();
 
-	return $contenu;
+	return $suite;
 }
 
 ?>
