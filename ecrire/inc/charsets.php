@@ -105,7 +105,7 @@ function test_pcre_unicode() {
 
 	if (!$pcre_ok) {
 		$s = " ".chr(195).chr(169)."t".chr(195).chr(169)." ";
-		if (preg_match(',\W\w\w\w\W,uS', $s)) $pcre_ok = 1;
+		if (preg_match(',\W...\W,u', $s)) $pcre_ok = 1;
 		else $pcre_ok = -1;
 	}
 	return $pcre_ok == 1;
@@ -776,5 +776,18 @@ function spip_strlen($c) {
 
 // Initialisation
 $GLOBALS['CHARSET'] = Array();
+
+// noter a l'occasion dans la meta pcre_u notre capacite a utiliser le flag /u
+// dans les preg_replace pour ne pas casser certaines lettres accentuees :
+// en utf-8 chr(195).chr(160) = a` alors qu'en iso-latin chr(160) = nbsp
+if (!isset($GLOBALS['meta']['pcre_u'])
+OR isset($_GET['var_mode'])) {
+	include_spip('inc/meta');
+	ecrire_meta('pcre_u',
+		$u = ($GLOBALS['meta']['charset'] == 'utf-8'
+		AND test_pcre_unicode())
+			? 'u' :''
+	);
+}
 
 ?>

@@ -20,7 +20,7 @@ function chercher_filtre($fonc, $default=NULL) {
 		foreach (
 		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
 			if (function_exists($f)
-			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
+			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)
 				AND is_callable(array($regs[1], $regs[2]))
 			)) {
 				return $f;
@@ -437,10 +437,9 @@ function texte_backend($texte) {
 	$texte = filtrer_entites($texte);
 
 	// " -> &quot; et tout ce genre de choses
-	// contourner bug windows ou char(160) fait partie de la regexp \s
-	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
+	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = str_replace("&nbsp;", " ", $texte);
-	$texte = preg_replace('/\s{2,}/'.$u.'S', " ", $texte);
+	$texte = preg_replace('/\s{2,}/S'.$u, " ", $texte);
 	$texte = entites_html($texte);
 
 	// verifier le charset
@@ -498,8 +497,8 @@ function echapper_tags($texte, $rempl = "") {
 // Convertit un texte HTML en texte brut
 // http://doc.spip.org/@textebrut
 function textebrut($texte) {
-	$u = (@$GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'';
-	$texte = preg_replace('/\s+/'.$u.'S', " ", $texte);
+	$u = $GLOBALS['meta']['pcre_u'];
+	$texte = preg_replace('/\s+/S'.$u, " ", $texte);
 	$texte = preg_replace("/<(p|br)( [^>]*)?".">/iS", "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", "", $texte);
 	$texte = preg_replace("/\n+$/", "", $texte);
@@ -521,9 +520,10 @@ function liens_ouvrants ($texte) {
 // Transformer les sauts de paragraphe en simples passages a la ligne
 // http://doc.spip.org/@PtoBR
 function PtoBR($texte){
-	$texte = preg_replace("@</p>@i", "\n", $texte);
-	$texte = preg_replace("@<p([\s][^>]*)?".">@i", "<br />", $texte);
-	$texte = preg_replace("@^[\s]*<br />@", "", $texte);
+	$u = $GLOBALS['meta']['pcre_u'];
+	$texte = preg_replace("@</p>@iS", "\n", $texte);
+	$texte = preg_replace("@<p\b.*>@UiS", "<br />", $texte);
+	$texte = preg_replace("@^\s*<br />@S".$u, "", $texte);
 	return $texte;
 }
 
@@ -599,7 +599,8 @@ function taille_en_octets ($taille) {
 // Rend une chaine utilisable sans dommage comme attribut HTML
 // http://doc.spip.org/@attribut_html
 function attribut_html($texte) {
-	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),ms"),array(" ",""),textebrut($texte)));
+	$u = $GLOBALS['meta']['pcre_u'];
+	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),textebrut($texte)));
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 	
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
@@ -1976,7 +1977,8 @@ function direction_css ($css, $voulue='') {
 	$contenu = str_replace($src,$src_direction_css,$contenu);
 	
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
+	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),UimsS",
+		"url($path\\1)",$contenu);
 	// virer les fausses url absolues que l'on a mis dans les import
 	if (count($src_faux_abs))
 		$contenu = str_replace(array_keys($src_faux_abs),$src_faux_abs,$contenu);
@@ -2017,7 +2019,8 @@ function url_absolue_css ($css) {
 		return $css;
 
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
+	$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),UimsS",
+		"url($path\\1)",$contenu);
 
 	// ecrire la css
 	if (!ecrire_fichier($f, $contenu))
@@ -2351,7 +2354,8 @@ function filtre_cache_static($scripts,$type='js'){
 						$path = $path = pathinfo($self);
 						$path = $path['dirname'].'/';
 						// passer les url relatives a la css d'origine en url absolues
-						$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
+						$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
+							"url($path\\1)",$contenu);
 		  			}
 		  		}
 				$f = 'compacte_'.$type;

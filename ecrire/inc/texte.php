@@ -376,14 +376,15 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
-	$court = preg_replace("/([^\s][\s]+)[^\s]*\n?$/", "\\1", $long);
+	$u = $GLOBALS['meta']['pcre_u'];
+	$court = preg_replace("/([^\s][\s]+)[^\s]*\n?$/".$u, "\\1", $long);
 	$points = $suite;
 
 	// trop court ? ne pas faire de (...)
 	if (spip_strlen($court) < max(0.75 * $taille,2)) {
 		$points = '';
 		$long = spip_substr($texte, 0, $taille);
-		$texte = preg_replace("/([^\s][\s]+)[^\s]*\n?$/", "\\1", $long);
+		$texte = preg_replace("/([^\s][\s]+)[^\s]*\n?$/".$u, "\\1", $long);
 		// encore trop court ? couper au caractere
 		if (spip_strlen($texte) < 0.75 * $taille)
 			$texte = $long;
@@ -480,7 +481,7 @@ function interdire_scripts($t, $protege_espace_prive = false) {
 		}
 	
 		// pas de <base href /> svp !
-		$t = preg_replace(',<(base\s),iS', '&lt;\1', $t);
+		$t = preg_replace(',<(base\b),iS', '&lt;\1', $t);
 	}
 	// Reinserer les echappements des modeles 
 	if (defined('_PROTEGE_JS_MODELES'))
@@ -982,7 +983,7 @@ function paragrapher($letexte, $forcer=true) {
 
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
-		$letexte = preg_replace(',</?p(\s([^>]*))?'.'>,iS', '<STOP P><p \2>',
+		$letexte = preg_replace(',</?p\b.*>,UiS', '<STOP P><p \2>',
 			'<p>'.$letexte.'<STOP P>');
 
 		// Fermer les paragraphes (y compris sur "STOP P")
@@ -994,14 +995,12 @@ function paragrapher($letexte, $forcer=true) {
 		$letexte = str_replace('<STOP P>', '', $letexte);
 
 		// Reduire les blancs dans les <p>
-		// Do not delete multibyte utf character just before </p> having last byte equal to whitespace  
-		$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'S';
-		$letexte = preg_replace(
-		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),'.$u.'i', '\1\3',
-			$letexte);
+		$u = @$GLOBALS['meta']['pcre_u'];
+		$letexte = preg_replace(',(<p\b.*>)\s*,UiS'.$u, '\1',$letexte);
+		$letexte = preg_replace(',\s*(</p\b.*>),UiS'.$u, '\1',$letexte);
 
 		// Supprimer les <p xx></p> vides
-		$letexte = preg_replace(',<p\s[^>]*></p>\s*,iS', '',
+		$letexte = preg_replace(',<p\b.*></p>\s*,iS'.$u, '',
 			$letexte);
 
 		// Renommer les paragraphes normaux
@@ -1055,7 +1054,8 @@ function traiter_raccourci_glossaire($letexte)
 		// Eviter les cas particulier genre "[?!?]"
 		if (preg_match(',^(.*\w\S*)\s*$,', $terme, $r)) {
 			$terme = $r[1];
-			$_terme = preg_replace(',\s+,', '_', $terme);
+			$u = $GLOBALS['meta']['pcre_u'];
+			$_terme = preg_replace(',\s+,'.$u, '_', $terme);
 // faire sauter l'eventuelle partie "|bulle d'aide" du lien
 // cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
 			$_terme = preg_replace(',[|].*,', '', $_terme);
@@ -1199,10 +1199,13 @@ function traiter_poesie($letexte)
 {
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
+		$u = $GLOBALS['meta']['pcre_u'];
 		foreach ($regs as $reg) {
 			$lecode = preg_replace(",\r\n?,S", "\n", $reg[2]);
-			$lecode = preg_replace("/\n[\s]*\n/", "\n&nbsp;\n",$lecode);
-			$lecode = "<blockquote class=\"spip_poesie\">\n<div>".preg_replace("/\n+/", "</div>\n<div>", trim($lecode))."</div>\n</blockquote>\n\n";
+			$lecode = preg_replace("/\n[\s]*\n/S".$u, "\n&nbsp;\n",$lecode);
+			$lecode = "<blockquote class=\"spip_poesie\">\n<div>"
+				.preg_replace("/\n+/", "</div>\n<div>", trim($lecode))
+				."</div>\n</blockquote>\n\n";
 			$letexte = str_replace($reg[0], $lecode, $letexte);
 		}
 	}
