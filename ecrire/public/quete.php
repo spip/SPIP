@@ -177,6 +177,8 @@ function quete_logo_file($row, $connect=NULL) {
 		$f = charger_fonction('vignette','inc');
 		$logo = $f($row['extension'], false);
 	}
+	if (preg_match(',^'._DIR_IMG_ICONES_DIST.',', $logo))
+		return $logo;
 	return get_spip_doc($logo);
 }
 
