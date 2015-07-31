@@ -789,6 +789,7 @@ prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/infos_perso.html -text
 prive/squelettes/contenu/job_queue.html -text
+prive/squelettes/contenu/job_queue_fonctions.php -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/plan.html -text
 prive/squelettes/contenu/recherche.html -text
