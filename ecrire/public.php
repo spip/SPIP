@@ -182,7 +182,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// Passer la main au debuggueur le cas echeant
 	if ($var_mode == 'debug') {
-		include_spip('inc/debug');
+		include_spip('public/debug');
 		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
