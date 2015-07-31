@@ -868,7 +868,7 @@ Se ciò non è necessario, lasciare quest\'opzione
 al suo valore predefinito (nessuna creazione 
 di file).</p>',
 	'texte_informations_personnelles_1' => 'Il sistema creerà un tuo accesso personalizzato al sito.',
-	'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ', # MODIF
+	'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 	'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
 	'texte_jeu_caractere' => 'Si consiglia di utilizzare sul proprio sito l\'alfabeto universale (<tt>utf-8</tt>): esso permette di visualizzare i testi in tutte le lingue e non pone problemi di compatibilità con i browser moderni.',
 	'texte_jeu_caractere_2' => 'Attenzione: questa impostazione non causa la conversione dei testi già registrati nel database.',
