@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/export');
-include_spip('inc/minipres');
+include_spip('inc/lang');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
@@ -21,14 +21,20 @@ function action_export_all_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	@list($quoi, $gz, $archive, $rub) = split(',', $arg);
-	$meta = 'status_dump_'  . $GLOBALS['visiteur_session']['id_auteur'];
-	$file =  export_subdir($rub) . $archive;
+	@list($quoi, $gz, $archive, $rub, $version) = split(',', $arg);
+	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
+
+	// determine upload va aussi initialiser l'index "restreint"
+	$maindir = determine_upload();
+	if (!$GLOBALS['visiteur_session']['restreint'])
+		$maindir = _DIR_DUMP;
+	$dir = sous_repertoire($maindir, $meta);
+	$file = $dir . $archive;
 
 	utiliser_langue_visiteur();
 	if ($quoi =='start'){
 		// creer l'en tete du fichier et retourner dans l'espace prive
-		ecrire_fichier($file, export_entete(),false);
+		ecrire_fichier($file, export_entete($version),false);
 		ecrire_meta($meta, "$gz::$archive::$rub::1::0",'non');
 		include_spip('inc/headers');
 		  // rub=$rub sert AUSSI a distinguer cette redirection
@@ -54,6 +60,7 @@ function export_all_fin($file, $meta, $rub)
 		$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	
 	} else {
+		ecrire_fichier($file, export_enpied(),false,false);
 		$subdir = dirname($file);
 		$dir = dirname($subdir);
 		$nom = basename($file);
@@ -107,7 +114,29 @@ function export_all_fin($file, $meta, $rub)
 			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
 			. "<br class='nettoyeur' />";
 	}
+	include_spip('inc/minipres');
 	echo minipres(_T('info_sauvegarde'), $corps);
 	exit;
 }
+
+// http://doc.spip.org/@export_entete
+function export_entete($version_archive)
+{
+	return
+"<" . "?xml version=\"1.0\" encoding=\"".
+$GLOBALS['meta']['charset']."\"?".">\n" .
+"<SPIP 
+	version=\"" . $GLOBALS['spip_version_affichee'] . "\" 
+	version_base=\"" . $GLOBALS['spip_version_base'] . "\" 
+	version_archive=\"" . $version_archive . "\"
+	adresse_site=\"" .  $GLOBALS['meta']["adresse_site"] . "\"
+	dir_img=\"" . _DIR_IMG . "\"
+	dir_logos=\"" . _DIR_LOGOS . "\"
+>\n";
+}
+
+// production de l'entete du fichier d'archive
+// http://doc.spip.org/@export_enpied
+function export_enpied () { return  "</SPIP>\n";}
+
 ?>
