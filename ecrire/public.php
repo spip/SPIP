@@ -52,6 +52,7 @@ if (defined('_INC_PUBLIC')) {
 	// Est-ce une action ?
 	if ($action = _request('action')) {
 		define('_ESPACE_PRIVE', true);
+		include_spip('base/abstract_sql'); // chargement systematique pour les actions
 		include_spip('inc/autoriser'); // chargement systematique pour les actions
 		include_spip('inc/headers');
 		$var_f = charger_fonction($action, 'action');

@@ -52,7 +52,6 @@ function action_editer_breve_dist() {
 // http://doc.spip.org/@insert_breve
 function insert_breve($id_rubrique) {
 
-	include_spip('base/abstract_sql');
 	include_spip('inc/rubriques');
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer la breve

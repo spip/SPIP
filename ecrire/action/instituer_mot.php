@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
-include_spip('base/abstract_sql');
 
 // Modifier le reglage des forums publics de l'article x
 // http://doc.spip.org/@action_instituer_mot_dist

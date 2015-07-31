@@ -35,7 +35,6 @@ function action_tourner_post($r)
 
 	include_spip('inc/charsets');	# pour le nom de fichier
 	include_spip('inc/documents'); 
-	include_spip('base/abstract_sql');
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $r[2];
 	$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));

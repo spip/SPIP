@@ -37,7 +37,6 @@ function action_editer_rubrique_dist() {
 
 // http://doc.spip.org/@insert_rubrique
 function insert_rubrique($id_parent) {
-	include_spip('base/abstract_sql');
 	return sql_insert("spip_rubriques",
 		"(titre, id_parent, statut)",
 		"('"._T('item_nouvelle_rubrique')."', ".intval($id_parent).",'new')"
