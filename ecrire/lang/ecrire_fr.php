@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Effacer TOUT',
 'bouton_envoi_message_02' => 'ENVOYER UN MESSAGE',
 'bouton_envoyer_message' => 'Message d&eacute;finitif : envoyer',
-'bouton_forum_petition' => 'FORUM & P&Eacute;TITION',
+'bouton_forum_petition' => 'FORUM &amp; P&Eacute;TITION',
 'bouton_modifier' => 'Modifier',
 'bouton_pense_bete' => 'PENSE-B&Ecirc;TE &Agrave; USAGE PERSONNEL',
 'bouton_radio_activer_messagerie' => 'Activer la messagerie interne',
@@ -98,8 +98,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Publication imm&eacute;diate des messages
 	(les contributions s\'affichent d&egrave;s leur envoi, les administrateurs peuvent
 	les supprimer ensuite).',
-'bouton_radio_sauvegarde_compressee' => 'sauvegarde compress&eacute;e sous <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'sauvegarde non compress&eacute;e sous <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'sauvegarde compress&eacute;e sous @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'sauvegarde non compress&eacute;e sous @fichier@',
 'bouton_radio_supprimer_petition' => 'Supprimer la p&eacute;tition',
 'bouton_radio_syndication' => 'Syndication :',
 'bouton_redirection' => 'REDIRECTION',
@@ -492,7 +492,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_procedez_par_etape' => 'proc&eacute;dez &eacute;tape par &eacute;tape',
 'info_procedure_maj_version' => 'la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d\'adapter
 	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.',
-'info_ps' => 'P.S.',
+'info_ps' => 'P.-S.',
 'info_publier' => 'publier',
 'info_publies' => 'Vos articles publi&eacute;s en ligne',
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
@@ -550,7 +550,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_sauvegarde_petitions' => 'Sauvegarder les p&eacute;titions',
 'info_sauvegarde_refers' => 'Sauvegarder les referers',
 'info_sauvegarde_reussi_01' => 'Sauvegarde r&eacute;ussie.',
-'info_sauvegarde_reussi_02' => 'La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/@archive@</b>. Vous pouvez',
+'info_sauvegarde_reussi_02' => 'La base a &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez',
 'info_sauvegarde_reussi_03' => 'retourner &agrave; la gestion',
 'info_sauvegarde_reussi_04' => 'de votre site.',
 'info_sauvegarde_rubriques' => 'Sauvegarder les rubriques',
@@ -799,7 +799,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de donn&eacute;es,
 y compris <i>tous</i> les acc&egrave;s r&eacute;dacteurs et administrateurs. Apr&egrave;s l\'avoir ex&eacute;cut&eacute;e, vous devrez lancer la
 r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un premier acc&egrave;s administrateur.',
-'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
+'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire @dossier@. N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
 'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
@@ -860,7 +860,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_en_cours_validation' => 'Les articles et br&egrave;ves ci-dessous sont propos&eacute;s &agrave; la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.',
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.',
 'texte_fichier_authent' => '<b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
-  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p />
+  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire @dossier@ ?</b><p />
   Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
   et administrateurs en d\'autres endroits de votre site
   (programme externe de statistiques, par exemple).<p />
@@ -947,12 +947,12 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_restaurer_base' => 'Restaurer le contenu d\'une sauvegarde de la base',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
 		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
-		plac&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
+		plac&eacute; dans le r&eacute;pertoire @dossier@.
 		Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
 		irr&eacute;versibles.</b>',
 'texte_sauvegarde' => 'Sauvegarder le contenu de la base',
 'texte_sauvegarde_base' => 'Sauvegarder la base',
-'texte_sauvegarde_compressee' => 'La sauvegarde sera faite dans le fichier non compress&eacute; <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La sauvegarde sera faite dans le fichier non compress&eacute; @fichier@.',
 'texte_selection_langue_principale' => 'Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
 	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
