@@ -181,9 +181,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 				// permet de faire des include_ecrire pour attraper un inc_ du plugin
 				if ($charge=='options'){
 					$prefix = strtoupper($info['prefix']);
-					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
-					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');";
-					$splugs .= "\n";
+					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
+					foreach($info['path'] as $chemin){
+						if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_code'])){
+							if (isset($chemin['type']))
+								$splugs .= "if (".(($chemin['type']=='public')?"":"!")."_DIR_RESTREINT) ";
+							$dir = $chemin['dir'];
+							if (strlen($dir) AND $dir{0}=="/") $dir = substr($dir,1);
+							$splugs .= "_chemin(_DIR_PLUGIN_$prefix".(strlen($dir)?".'$dir'":"").");\n";
+						}
+					}
+					//$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
+					//$splugs .= "\n";
 				}
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
@@ -482,6 +491,7 @@ function plugin_get_infos($plug, $force_reload=false){
 					$ret['version_base'] = trim(end($arbre['version_base']));
 				$ret['necessite'] = $arbre['necessite'];
 				$ret['utilise'] = $arbre['utilise'];
+				$ret['path'] = $arbre['path'];
 				
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
@@ -573,7 +583,6 @@ function plugin_verifie_conformite($plug,&$arbre){
 			foreach(array_keys($needs) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
 				$necessite[] = $att;
-				unset($arbre[$tag]);
 			}
 		}
 		$arbre['necessite'] = $necessite;
@@ -582,10 +591,17 @@ function plugin_verifie_conformite($plug,&$arbre){
 			foreach(array_keys($uses) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
 				$utilise[] = $att;
-				unset($arbre[$tag]);
 			}
 		}
 		$arbre['utilise'] = $utilise;
+		$path = array(array('dir'=>'')); // initialiser par defaut (provisoire)
+		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
+			foreach(array_keys($paths) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				$path[] = $att;
+			}
+		}
+		$arbre['path'] = $path;
 	}
 }
 // http://doc.spip.org/@plugin_pipeline_props
