@@ -40,7 +40,7 @@ function inc_iconifier_dist($id_objet, $id,  $script, $flag_modif=true) {
 
 		if ($logo = $chercher_logo($id, $id_objet, 'off')) {
 
-			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
+			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script, $flag_modif);
 
 			$masque = block_parfois_visible('off', "<b>$texteoff</b><br />$img", $clic, 'margin-bottom: -2px');
 
