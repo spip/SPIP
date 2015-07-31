@@ -71,7 +71,7 @@ function charger_squelette ($squelette) {
 	if (function_exists($nom))
 		return $nom;
 
-	$phpfile = _DIR_CACHE . 'skel_' . $nom . '.php';
+	$phpfile = sous_repertoire(_DIR_CACHE, 'skel') . $nom . '.php';
 
 	// le squelette est-il deja compile et perenne ?
 	if (!squelette_obsolete($phpfile, $sourcefile)
