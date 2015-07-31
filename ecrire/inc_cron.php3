@@ -52,7 +52,7 @@ function spip_cron($taches=array()) {
 
 	include(_FILE_CONNECT);
 	if (!$GLOBALS['db_ok']) {
-		@touch(_FILE_MYSQL_OUT);
+		spip_touch(_FILE_MYSQL_OUT);
 		spip_log('pas de connexion DB pour taches de fond (cron)');
 		return;
 	}
@@ -65,13 +65,9 @@ function spip_cron($taches=array()) {
 	foreach ($taches as $tache) {
 		$lock = _DIR_SESSIONS . $tache . '.lock';
 		clearstatcache();
-		$last = (@file_exists($lock) ? filemtime($lock) : 0);
+		$last = @filemtime($lock);
 
-		if (($t - $frequence_taches[$tache]) > $last) {
-
-			# touch peut echouer si les droits sont mauvais
-			if (!@touch($lock)) { @unlink($lock); @touch($lock); }
-
+		if (spip_touch($lock, $frequence_taches[$tache])) {
 			spip_timer('tache');
 			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
 			$fonction = 'cron_' . $tache;
@@ -79,6 +75,7 @@ function spip_cron($taches=array()) {
 			if ($code_de_retour) {
 				$msg = "cron: $tache";
 				if ($code_de_retour < 0) {
+					# modifier la date du fichier
 					@touch($lock, (0 - $code_de_retour));
 					spip_log($msg . " (en cours, " . spip_timer('tache') .")");
 					spip_timer('tache');

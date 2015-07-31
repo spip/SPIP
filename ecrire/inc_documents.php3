@@ -13,6 +13,9 @@ include_ecrire ("inc_admin.php3");
 
 function vignette_par_defaut($type_extension, $size=true) {
 
+	if (!$type_extension)
+		$type_extension = 'txt';
+
 	$filename = _DIR_IMG_ICONES . "$type_extension";
 
 	// Glurps !
@@ -38,23 +41,10 @@ function vignette_par_defaut($type_extension, $size=true) {
 }
 
 
-function vignette_previsu_ou_par_defaut($fichier, $extension) {
-	// si pas de vignette, utiliser la vignette par defaut
-	// ou essayer de creer une previsu si permis
-
-	$formats = ','.lire_meta('formats_graphiques').',';
-
-	if ((strpos($formats, ",$extension,") === false) || (lire_meta("creer_preview") != 'oui')) {
-		return vignette_par_defaut($extension ? $extension : 'txt', true);
-	} else {
-		return array(_DIR_PREFIX1 . 'spip_image.php3?vignette='.rawurlencode($fichier), 0, 0);
-	}
-}
-
 function document_et_vignette($url, $document) {
 	eregi('\.([a-z0-9]+)$', $document, $regs);
-	list($fichier, $largeur, $hauteur) = 
-		vignette_previsu_ou_par_defaut($document, $regs[1]);
+	list($fichier, $largeur, $hauteur) =
+		vignette_par_defaut($extension, true);
 	$doc = "<a href='$url'><img src='$fichier' border='0' /></a>";
 	return $doc;
 }
@@ -250,7 +240,7 @@ function integre_image($id_document, $align, $type_aff) {
 
 		if (!$url_fichier_vignette) 
 			list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette)
-			= vignette_previsu_ou_par_defaut($fichier, $extension);
+			= vignette_par_defaut($extension, true);
 
 		if ($url_fichier_vignette) {
 			$vignette = "<img src='$url_fichier_vignette' border='0'";

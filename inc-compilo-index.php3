@@ -45,7 +45,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		if (!$t) {$nom_table = $t = $r; }
 		else $nom_table = 'spip_' . $t;
 
-		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
+		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
 		$desc = $tables_des_serveurs_sql[$s][$nom_table];
 		if (!$desc) {
 			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
