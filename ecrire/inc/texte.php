@@ -462,11 +462,11 @@ function typo_fr($letexte) {
 			"&nbsp;" => "~",
 			"&raquo;" => "&#187;",
 			"&laquo;" => "&#171;",
-			"&rdquo;" => "&#148;",
-			"&ldquo;" => "&#147;",
+			"&rdquo;" => "&#8221;",
+			"&ldquo;" => "&#8220;",
 			"&deg;" => "&#176;"
 		);
-		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
+		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#8221;', 147 => '&#8220;', 176 => '&#176;');
 		$chars_trans = array_keys($chars);
 		$chars = array_values($chars);
 		$chars_trans = implode(' ',array_map('chr',$chars_trans));
