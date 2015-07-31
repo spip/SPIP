@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
-
+include_ecrire ("inc_sites.php3");
 
 function mySel($varaut, $variable) {
 	$retour = " VALUE=\"$varaut\"";
