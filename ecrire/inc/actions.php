@@ -135,25 +135,25 @@ function ajax_retour($corps)
 	header('Content-Type: text/html; charset='. $c);
 	$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
 	if (isset($GLOBALS['ajax_debug']))
-	  ajax_debug_retour($corps, $c);
+		ajax_debug_retour($corps, $c);
 	echo $c, $corps;
 	exit;
 }
 
 // http://doc.spip.org/@ajax_debug_retour
-function ajax_debug_retour($c, $corps)
+function ajax_debug_retour($corps, $c)
 {
 	$sax = charger_fonction('sax', 'inc');
 	$corps = $sax($corps);
 	if ($GLOBALS['xhtml_error']) {
-	  spip_log("ajax_retour " .  $GLOBALS['xhtml_error']);
+	  spip_log("ajax_retour " .  $GLOBALS['REQUEST_URI'] . $GLOBALS['xhtml_error']);
 	  $debut = "<script type='text/javascript'>console.log('";
 	  $fin = "')</script>\n";
-	  $corps = $GLOBALS['xhtml_error']
+	  echo $GLOBALS['xhtml_error']
 	  . $debut
 	  . join("$fin$debut", split("\n", addslashes($corps)))
 	  . $fin;
-	  $c ='';
+	  exit;
 	}
 }
 

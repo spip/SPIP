@@ -173,10 +173,14 @@ AND (!isset($var_ajaxcharset))
 AND ($GLOBALS['spip_version'] <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))))
 	$exec = 'demande_mise_a_jour';
 
-// Controle d'interruption d'une longue restauration
+// Si interruption d'une longue restauration
+// detourner le script demande pour qu'il reprenne le boulot
+// mais virer les Ajax pour eviter plusieurs restaurations en parallele
 elseif ($_COOKIE['spip_admin']
-AND isset($GLOBALS['meta']["debut_restauration"]))
+AND isset($GLOBALS['meta']["debut_restauration"])) {
+	if (isset($var_ajaxcharset)) exit;
 	$exec = 'import_all';
+}
 
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
