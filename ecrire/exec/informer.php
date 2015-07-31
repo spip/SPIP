@@ -24,12 +24,12 @@ function exec_informer_dist()
 	$exclus = intval(_request('exclus'));
 	$do = _request('do');
 
-	if (preg_match('/^\w+$/', $do)) {
+	if (preg_match('/^\w*$/', $do)) {
 		if (!$do) $do = 'aff';
 	
 		$informer = charger_fonction('informer', 'inc');
-		ajax_retour($informer($id, $col, $exclus, _request('rac'), _request('type'), $do));
-	}
+		$res = $informer($id, $col, $exclus, _request('rac'), _request('type'), $do);
+	} else $res = '';
+	ajax_retour($res);
 }
-
 ?>

@@ -47,7 +47,7 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 		. "</div></div>";
 	} else $onClick = '';
 
-	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1&do=$do", true);
+	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1&do=$do");
 
 	$plonger = charger_fonction('plonger', 'inc');
 	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus, $do);

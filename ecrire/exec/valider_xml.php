@@ -95,11 +95,7 @@ function valider_resultats($res)
 			$regs,
 			PREG_SET_ORDER);
 		if ($n = intval($n)) {
-			$x.= count_occ($regs);
-			if (count($x) > 1)
-				$x = join('+',$x);
-			else $x = trim(substr(textebrut($l[0]),0,16)) .' ...';
-			$x = ' (' . $x  . ')';
+			$x = trim(substr(textebrut($l[0]),0,16)) .'  ...';
 		} else $x = '';
 		$res[$k][0] = $n;
 		$res[$k][4] = $x;
