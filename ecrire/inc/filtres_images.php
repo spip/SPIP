@@ -182,19 +182,25 @@ function image_ecrire_tag($valeurs,$surcharge){
 	$tag = image_tag_changer_taille($tag,$width,$height,$style);
 	// traiter specifiquement le src qui peut etre repris dans un onmouseout
 	// on remplace toute les ref a src dans le tag
+	$src = extraire_attribut($tag,'src');
 	if (isset($surcharge['src'])){
-		$src = extraire_attribut($tag,'src');
 		$tag = str_replace($src,$surcharge['src'],$tag);
+		$src = $surcharge['src'];
 		unset($surcharge['src']);
 	}
 	
 	// regarder la class pour gerer le 'format_png' en fonction du format de l'image
 	// (et le remettre sinon)
-	/*$class = $valeurs['class'];
+	$class = $valeurs['class'];
 	if (isset($surcharge['class'])){
 		$class = $surcharge['class'];
 		unset($surcharge['class']);
-	}*/
+	}
+	$is_png = preg_match(',[.]png($|\?),i',$src);
+	$p = strpos($class,'format_png');
+	if ($is_png && $p===FALSE) $class .= " format_png";
+	if (!$is_png && $p!==FALSE) $class = preg_replace(",\s*format_png,","",$class);
+	$tag = inserer_attribut($tag,'class',$class);
 	
 	if (count($surcharge))
 		foreach($surcharge as $attribut=>$valeur)
