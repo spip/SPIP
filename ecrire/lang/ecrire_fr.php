@@ -789,8 +789,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 // T
 'taille_cache_image' => 'Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
-'taille_cache_infinie' => 'Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
+'taille_cache_infinie' => 'Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire du cache.',
+'taille_cache_maxi' => 'SPIP essaie de limiter la taille du r&eacute;pertoire du cache de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
 'taille_cache_octets' => 'La taille du cache est actuellement de @octets@.',
 'taille_cache_vide' => 'Le cache est vide.',
 'taille_repertoire_cache' => 'Taille du r&eacute;pertoire cache',
