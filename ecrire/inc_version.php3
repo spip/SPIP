@@ -445,11 +445,6 @@ $flag_strtotime = function_exists("strtotime");
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 $flag_revisions = ($flag_pcre AND function_exists("gzcompress"));
 
-// deux constantes pour le surlignage (cf inc_surligne et inc-balise)
-
-define("MARQUEUR_SURLIGNE",  'span class="spip_surligneconditionnel">');
-define("MARQUEUR_FSURLIGNE", '/span                                 >'); 
-
 //
 // Appliquer le prefixe cookie
 //

@@ -16,6 +16,9 @@
 if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
+define("MARQUEUR_SURLIGNE",  'span class="spip_surligneconditionnel">');
+define("MARQUEUR_FSURLIGNE", '/span                                 >');    
+
 // Balises qui ne font rien en mode normal
 // mais  vont etre substitue'es en mode recherche
 // voir les champs SURLIGNE dans inc-index-squel
