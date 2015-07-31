@@ -230,8 +230,7 @@ function afficher_qui_edite($id_objet,$objet){
 	if (isset($infos['texte_signale_edition']))
 		return $qui[$objet][$id_objet] = _T($infos['texte_signale_edition'], $modif);
 	
-	// TODO -- _L("Fil a travaille sur cet objet il y a x minutes")
-	return $qui[$objet][$id_objet] = _L('@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', $modif);
+	return $qui[$objet][$id_objet] = _T('info_qui_edite', $modif);
 }
 
 /**
