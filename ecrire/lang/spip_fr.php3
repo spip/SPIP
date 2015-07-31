@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Retour &agrave; l\'interface graphique compl&egrave;te',
 'access_mode_texte' => 'Afficher l\'interface textuelle simplifi&eacute;e',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Modifier cet article',
 'admin_modifier_auteur' => 'Modifier cet auteur',
 'admin_modifier_breve' => 'Modifier cette br&egrave;ve',
@@ -176,6 +177,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
 'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
 'cache_modifiable_webmestre' => 'Ces param&egrave;tres sont modifiables par le webmestre du site.',
+'cal_apresmidi' => 'apr&egrave;s-midi',
+'cal_jour_entier' => 'jour entier',
+'cal_matin' => 'matin',
+'cal_par_jour' => 'calendrier par jour',
+'cal_par_mois' => 'calendrier par mois',
+'cal_par_semaine' => 'calendrier par semaine',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
@@ -329,11 +336,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_obligatoire' => '<B>Titre</B> [Obligatoire]<BR>',
 'entree_url' => 'L\'adresse (URL) de votre site',
 'envoi_via_le_site' => 'Envoi via le site',
-'erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => 'BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => 'La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
@@ -536,6 +538,7 @@ Merci de votre participation
 'icone_voir_sites_references' => 'Voir les sites r&eacute;f&eacute;renc&eacute;s',
 'icone_voir_tous_mots_cles' => 'Voir tous les mots-cl&eacute;s',
 'image_administrer_rubrique' => 'Vous pouvez administrer cette rubrique',
+'img_indisponible' => 'image indisponible',
 'info_1_article' => '1 article',
 'info_1_breve' => '1 br&egrave;ve',
 'info_1_site' => '1 site',
@@ -652,6 +655,7 @@ Merci de votre participation
 'info_creer_base' => '<B>Cr&eacute;er</B> une nouvelle base de donn&eacute;es&nbsp;:',
 'info_creer_repertoire' => 'Veuillez cr&eacute;er un fichier ou un r&eacute;pertoire nomm&eacute;&nbsp;:',
 'info_creer_repertoire_2' => '&agrave; l\'int&eacute;rieur du sous-r&eacute;pertoire <b>ecrire/data/</b>, puis&nbsp;:',
+'info_creer_vignette' => 'cr&eacute;ation automatique de la vignette',
 'info_dans_groupe' => 'Dans le groupe :',
 'info_dans_rubrique' => 'Dans la rubrique :',
 'info_date_publication_anterieure' => 'Date de publication ant&eacute;rieure :',
@@ -694,7 +698,6 @@ Merci de votre participation
 'info_envoyer_message_prive' => 'Envoyer un message priv&eacute; &agrave; cet auteur',
 'info_erreur_requete' => 'Erreur dans la requ&ecirc;te :',
 'info_erreur_restauration' => 'Erreur de restauration : fichier inexistant.',
-'info_erreur_squelette' => 'Erreur sur le site',
 'info_erreur_squelette2' => 'Aucun squelette <b>@fichier@</b> n\'est disponible...',
 'info_erreur_systeme' => 'Erreur syst&egrave;me (errno @errsys@)',
 'info_erreur_systeme2' => '<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
@@ -1092,6 +1095,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_visiteurs' => 'Visiteurs',
 'info_visiteurs_02' => 'Visiteurs du site public',
 'info_vos_rendez_vous' => 'Vos rendez-vous &agrave; venir',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Vos pense-b&ecirc;te',
 'install_select_langue' => 'S&eacute;lectionnez une langue puis cliquez sur le bouton &laquo;&nbsp;suivant&nbsp;&raquo; pour lancer la proc&eacute;dure d\'installation.',
 'intem_redacteur' => 'r&eacute;dacteur',
@@ -1332,6 +1336,7 @@ et vous reconnecter au site.
 'pass_retour_public' => 'Retour sur le site public',
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
+'precedent' => 'pr&eacute;c&eacute;dent',
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 
@@ -1339,6 +1344,7 @@ et vous reconnecter au site.
 // S
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'statut_admin_restreint' => '(admin restreint)',
+'suivant' => 'suivant',
 
 
 // T
@@ -1718,7 +1724,29 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 
 // V
-'version_initiale' => 'Version initiale'
+'version_initiale' => 'Version initiale',
+
+
+// Z
+'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
+'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_argument_manquant' => 'Champ @champ@&nbsp;: argument manquant',
+'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => 'distant interdit',
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag fermant manquant',
+'zbug_erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
+'zbug_erreur_execution_page' => 'erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'Erreur sur le site',
+'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects',
+'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 
