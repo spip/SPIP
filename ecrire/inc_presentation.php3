@@ -864,6 +864,7 @@ function bouton($titre,$lien) {
 function debut_html($titre = "") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	global $flag_ecrire;
+	global $spip_lang;
 
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
@@ -890,8 +891,11 @@ function changeclass(objet, myClass)
 }
 //--></script>
 </head>
-<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
-<?php
+<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php
+
+	if ($spip_lang == 'ar')
+		echo " dir='rtl'";
+	echo ">";
 }
 
 // Fonctions onglets
