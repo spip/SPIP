@@ -127,7 +127,7 @@ function exec_recherche_dist()
 	}
 	
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
-		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</font><p>";
 	}
 	}
 echo fin_page();

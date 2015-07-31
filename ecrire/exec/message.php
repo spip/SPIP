@@ -159,7 +159,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 	 ("<br /><font size='1'>".propre(couper($bio_auteur, 100))."</font>\n")) .
 	"</font></li>\n";
     }
-    return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br /><UL>$res</UL>";
+    return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br /><ul>$res</ul>";
   }
   else {
     return "<b>"._T('info_recherche_auteur_a_affiner', array('cherche_auteur' => $cherche_auteur))."</b><br />";
@@ -235,7 +235,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 	}
 	
 	echo "</select>";
-	echo "<input TYPE='submit' name='Ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
+	echo "<input type='submit' name='Ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
       }
       echo "</form></div>";
     }

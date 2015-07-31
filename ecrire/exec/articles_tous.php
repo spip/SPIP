@@ -236,7 +236,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 				    'puce-poubelle-breve.gif',
 				    _T('texte_statut_poubelle'));
 	
-	$out .= "\n<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+	$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
 	
 	
 	// GERER LE MULTILINGUISME
@@ -257,7 +257,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 		if (count($langues) > 1) {
 			sort($langues);
 			$out .= "<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
-			$out .= "<select style='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
+			$out .= "<select style='width:100%' name='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
 			while (list(, $l) = each ($langues)) {
 			  $out .= "<option value='$l'" .
 			    (in_array($l,$sel_lang) ? " selected='selected'" : "") .
@@ -267,7 +267,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 			}
 			$out .= "</select></div>\n";
 	
-			$out .= "\n<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+			$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."'></div>";
 		}
 	
 	}

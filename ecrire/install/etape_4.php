@@ -110,7 +110,7 @@ function install_etape_4_dist()
 		echo _T('alerte_maj_impossible', array('version' => $spip_version));
 	}
 	else {
-		echo "<B>"._T('avis_operation_echec')."</B> "._T('texte_operation_echec');
+		echo "<b>"._T('avis_operation_echec')."</b> "._T('texte_operation_echec');
 	}
 
 	echo install_fin_html();

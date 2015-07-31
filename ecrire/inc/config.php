@@ -102,7 +102,7 @@ function avertissement_config() {
 	$texte = debut_boite_info(true);
 
 	$texte .= "<div class='verdana2' align='justify'>
-	<p align='center'><B>"._T('avis_attention')."</B></p>";
+	<p align='center'><b>"._T('avis_attention')."</b></p>";
 	$texte .= http_img_pack("warning.gif", (_T('avis_attention')),
 		"width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
 	$texte .= _T('texte_inc_config');

@@ -167,7 +167,7 @@ function controle_un_forum($row) {
 	<a href='$url'>$titre</a></b>" . justifier(propre($forum_texte));
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$suite .= "\n<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
+		$suite .= "\n<div align='left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
 	$controle .= safehtml($suite);
 
@@ -256,15 +256,15 @@ function exec_controle_forum_dist()
 		echo fin_onglet();
 
 		if ($droit) {
-		  echo "<B>"._T('avis_non_acces_page')."</B>";
+		  echo "<b>"._T('avis_non_acces_page')."</b>";
 		} else {
 
 			debut_gauche();
 			debut_boite_info();
-			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' size='2'>";
+			echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 			echo _T('info_gauche_suivi_forum_2');
 			echo aide("suiviforum");
-			echo "</FONT>";
+			echo "</font>";
 
 			// Afficher le lien RSS
 

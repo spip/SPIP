@@ -117,7 +117,7 @@ function exec_rubriques_edit_dist()
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = _T('entree_titre_obligatoire')
-	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus><P>"
+	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus><p>"
 	. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
 	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
 
@@ -149,7 +149,7 @@ function exec_rubriques_edit_dist()
 		. "</textarea><p>\n";
 	}
 
-	$form .= "<B>"._T('info_texte_explicatif')."</B>"
+	$form .= "<b>"._T('info_texte_explicatif')."</b>"
 	. aide ("raccourcis")
 	. "<br /><textarea name='texte' rows='15' class='formo' cols='40' wrap=soft>"
 	. entites_html($texte)

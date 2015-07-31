@@ -77,7 +77,7 @@ while (list(,$l) = each ($langues_prop)) {
 		echo "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 }
 echo "</select>\n";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 
 
 fin_cadre_couleur();
@@ -109,7 +109,7 @@ $charset = $GLOBALS['meta']["charset"];
 			array('url' => generer_url_ecrire('convert_utf8'))
 		);
 
-	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
 
 	fin_cadre_relief();
 
