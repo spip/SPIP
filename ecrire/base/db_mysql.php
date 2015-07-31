@@ -371,13 +371,16 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-	if (mysql_query("INSERT INTO $table $champs VALUES $valeurs", $link))
+	$query="INSERT INTO $table $champs VALUES $valeurs";
+	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
 	else {
 	  if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
 	}
 	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+
+//code mort ???
 
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
@@ -469,7 +472,7 @@ function spip_mysql_multi ($objet, $lang) {
 	return $retour;
 }
 
-// Ces deux fonctions n'ont pas d'équivalent exact PostGres
+// Ces deux fonctions n'ont pas d'ï¿½quivalent exact PostGres
 // et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
 
 //
