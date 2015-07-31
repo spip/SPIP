@@ -314,7 +314,7 @@ function balise_distante_interdite($p) {
 
 //
 // Traitements standard de divers champs
-// definis par $table_des_traitements, cf. inc-compilo-api.php3
+// definis par $table_des_traitements, cf. ecrire/public/interfaces
 //
 // http://doc.spip.org/@champs_traitements
 function champs_traitements ($p) {
@@ -335,20 +335,14 @@ function champs_traitements ($p) {
 
 	if (!$ps) return $p->code;
 
-	// Si une boucle sous-jacente (?) traite les documents, on insere ici
-	// une fonction de remplissage du tableau des doublons -- mais seulement
-	// si on rencontre le filtre propre (qui traite les
-	// raccourcis <docXX> qui nous interessent)
+	// Si une boucle documents est presente dans le squelette, 
+	// on insere une fonction de remplissage du tableau des doublons 
+	// dans les filtres propre() ou typo()
+	// (qui traitent les raccourcis <docXX> referencant les docs)
 	if (isset($p->descr['documents'])
-	AND preg_match(',propre,', $ps))
+	AND ((strpos($ps,'propre') !== false)
+		OR (strpos($ps,'typo') !== false)))
 		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
-
-	// De meme, en cas de sql_serveur, on supprime les < IMGnnn > tant
-	// qu'on ne rapatrie pas les documents distants joints..
-	// il faudrait aussi corriger les raccourcis d'URL locales
-	if ($p->id_boucle  AND $p->boucles[$p->id_boucle]->sql_serveur)
-		$p->code = 'supprime_img(' . $p->code . ')';
-
 
 	// Passer |safehtml sur les boucles "sensibles"
 	// sauf sur les champs dont on est surs

@@ -289,6 +289,24 @@ function echappe_retour($letexte, $source='', $filtre = "") {
 	return $letexte;
 }
 
+// Reinserer le javascript de confiance (venant des modeles)
+
+function echappe_retour_modeles($letexte)
+{
+	$letexte = echappe_retour($letexte);
+
+	// Dans l'espace prive, securiser ici
+	if (!_DIR_RESTREINT)
+		$letexte = interdire_scripts($letexte);
+
+	// Reinserer les echappements des modeles 
+
+	if (defined('_PROTEGE_JS_MODELES'))
+		$letexte = echappe_retour($letexte,"javascript"._PROTEGE_JS_MODELES);
+
+	return trim($letexte);
+}
+
 // http://doc.spip.org/@nettoyer_raccourcis_typo
 function nettoyer_raccourcis_typo($texte){
 	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
@@ -297,7 +315,7 @@ function nettoyer_raccourcis_typo($texte){
 		foreach ($regs as $reg) {
 			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
 			$titre = calculer_url($reg[3], $titre, 'titre');
-			$titre = typo(supprimer_tags($titre));
+			$titre = corriger_typo(supprimer_tags($titre));
 			$texte = str_replace($reg[0], $titre, $texte);
 		}
 
@@ -500,7 +518,7 @@ function safehtml($t) {
 // avec protection prealable des balises HTML et SPIP
 
 // http://doc.spip.org/@typo
-function typo($letexte, $echapper=true) {
+function typo($letexte, $echapper=true, $connect='') {
 
 	// Plus vite !
 	if (!$letexte) return $letexte;
@@ -512,9 +530,10 @@ function typo($letexte, $echapper=true) {
 	//
 	// Installer les modeles, notamment images et documents ;
 	//
-	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
-	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
-	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '');
+	// NOTE : propre() l'a deja fait
+	// sauf pour les textes renvoyes par calculer_url()
+
+	$letexte = traiter_modeles($mem = $letexte, false, $echapper ? 'TYPO' : '', $connect);
 	if ($letexte != $mem) $echapper = true;
 	unset($mem);
 
@@ -524,8 +543,9 @@ function typo($letexte, $echapper=true) {
 	if ($echapper)
 		$letexte = echappe_retour($letexte, 'TYPO');
 
-	// l'espace prive securise ici
-	$letexte = interdire_scripts($letexte);
+	// Dans l'espace prive, securiser ici
+	if (!_DIR_RESTREINT)
+		$letexte = interdire_scripts($letexte);
 
 	return $letexte;
 }
@@ -1025,7 +1045,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='') {
 				$texte .= preg_replace(',[|][^|=]*,s',' ',$regs[4]);
 			# version normale
 			else {
-			  $modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien, $connect);
+				$modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien, $connect);
 
 				// le remplacer dans le texte
 				if ($modele !== false) {
@@ -1167,21 +1187,19 @@ function traiter_raccourci_glossaire($letexte)
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
 define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
-// http://doc.spip.org/@traiter_raccourcis_propre
-function traiter_raccourcis_propre($letexte)
+function expanser_liens($letexte, $connect='')
 {
 	$inserts = array();
 	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			$inserts[++$i] = traiter_raccourci_lien($regs);
+			$inserts[++$i] = traiter_raccourci_lien($regs, $connect);
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
 				$letexte);
 		}
 	}
 
-	$letexte = typo($letexte, /* echap deja fait, accelerer */ false);
-
+	$letexte = corriger_typo(traiter_modeles($letexte, false, false, $connect));
 	foreach ($inserts as $i => $insert) {
 		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
 	}
@@ -1195,9 +1213,9 @@ function traiter_raccourcis_propre($letexte)
 // 1=>texte (ou texte|hreflang ou texte|bulle ou texte|bulle{hreflang})
 // 2=>double fleche (historiquement, liens ouvrants)
 // 3=>url
-//
+// A terme, il faudrait tenir compte de $connect
 // http://doc.spip.org/@traiter_raccourci_lien
-function traiter_raccourci_lien($regs) {
+function traiter_raccourci_lien($regs, $connect='') {
 
 	list(,$texte, ,$url) = $regs;
 	list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($texte);
@@ -1209,8 +1227,14 @@ function traiter_raccourci_lien($regs) {
 		$hlang = $lang;
 	$lang = ($hlang ? ' hreflang="'.$hlang.'"' : '') . $bulle;
 
-	# ici bien passer le lien pour traiter [<doc3>->url]
-	return typo("<a href=\"$lien\" class=\"$class\"$lang>$texte</a>");
+	# Penser au cas [<imgXX|right>->URL]
+	# ceci s'execute heureusement avant les tableaux et leur "|".
+	# Attention, le texte initial est deja echappe mais pas forcement
+	# celui retourne par calculer_url.
+
+	$texte = typo($texte, true, $connect);
+
+	return "<a href=\"$lien\" class=\"$class\"$lang>$texte</a>";
 }
 
 // Repere dans la partie texte d'un raccourci [texte->...]
@@ -1288,7 +1312,7 @@ function traiter_poesie($letexte)
 	return $letexte;
 }
 
-// Nettoie un texte, traite les raccourcis spip, la typo, etc.
+// Nettoie un texte, traite les raccourcis autre qu'URL, la typo, etc.
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 
@@ -1296,23 +1320,18 @@ function traiter_raccourcis($letexte) {
 
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
-	// old style
-	if (function_exists('avant_propre'))
-		$letexte = avant_propre($letexte);
 
-	$letexte = traiter_raccourcis_propre($letexte);
 	$letexte = traiter_poesie($letexte);
 
 	// Harmoniser les retours chariot
 	$letexte = preg_replace(",\r\n?,S", "\n", $letexte);
 
 	// Recuperer les paragraphes HTML
-	$letexte = preg_replace(",<p[>[:space:]],iS", "\n\n\\0", $letexte);
-	$letexte = preg_replace(",</p[>[:space:]],iS", "\\0\n\n", $letexte);
+	$letexte = preg_replace(',<p[>]\s,iS', "\n\n\\0", $letexte);
+	$letexte = preg_replace(',</p[>]\s,iS', "\\0\n\n", $letexte);
 
 	$letexte = traiter_raccourci_glossaire($letexte);
 	$letexte = traiter_raccourci_ancre($letexte);
-
 
 	list($letexte, $mes_notes) = traite_raccourci_notes($letexte);
 
@@ -1372,9 +1391,6 @@ function traiter_raccourcis($letexte) {
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
-	// old style
-	if (function_exists('apres_propre'))
-		$letexte = apres_propre($letexte);
 
 	if ($mes_notes) traiter_les_notes($mes_notes);
 
@@ -1411,7 +1427,7 @@ function traite_raccourci_notes($letexte)
 		$num_note = false;
 
 		// note auto ou pas ?
-		if (preg_match(",^ *<([^>]*)>,", $note_texte, $regs)){
+		if (preg_match(",^<([^>]*)>,", $note_texte, $regs)){
 			$num_note = $regs[1];
 			$note_texte = str_replace($regs[0], "", $note_texte);
 		} else {
@@ -1481,30 +1497,11 @@ function traiter_les_notes($mes_notes) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 // http://doc.spip.org/@propre
-function propre($letexte) {
-	if (!$letexte) return $letexte;
+function propre($t, $connect='') {
 
-	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
-	$letexte = echappe_html($letexte);
-
-	// Traiter le texte
-	$letexte = traiter_raccourcis($letexte);
-
-	// Reinserer les echappements
-	$letexte = echappe_retour($letexte);
-
-	// Vider les espaces superflus
-	$letexte = trim($letexte);
-
-	// Dans l'espace prive, securiser ici
-	if (!_DIR_RESTREINT)
-		$letexte = interdire_scripts($letexte);
-
-	// Reinserer le javascript de confiance (venant des modeles)
-	if (defined('_PROTEGE_JS_MODELES'))
-		$letexte = echappe_retour($letexte,"javascript"._PROTEGE_JS_MODELES);
-
-	return $letexte;
+	return !$t ? '' :
+		echappe_retour_modeles(
+			traiter_raccourcis(
+				expanser_liens(echappe_html($t),$connect)));
 }
-
 ?>

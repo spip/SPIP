@@ -422,7 +422,15 @@ function balise_LANG_dist ($p) {
 	return $p;
 }
 
-
+function balise_CHAPO_dist ($p) {
+	$_chapo = champ_sql('chapo', $p);
+	if ((!$p->etoile) OR (strpos($_chapo, '$Pile[$SP') === false))
+		$p->code = $_chapo;
+	else
+		$p->code = "nettoyer_chapo($_chapo)";
+	$p->interdire_scripts = false;
+	return $p;
+}
 // #LESAUTEURS
 // les auteurs d'un article (ou d'un article syndique)
 // http://www.spip.net/fr_article902.html

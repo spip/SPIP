@@ -116,20 +116,19 @@ function balise_LOGO__dist ($p) {
 			$code_lien = "''";
 		$code_lien .= ", '". $align . "'";
 	}
-
-	if ($p->id_boucle AND $p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = "''";
-		spip_log("Logo distant indisponible");
-	// cas des documents
-	} elseif ($type_objet == 'DOCUMENT') {
+	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
+	if ($type_objet == 'DOCUMENT') {
 		$p->code = "calcule_logo_document($_id_objet, '" .
 			$p->descr['documents'] .
 			'\', $doublons, '. intval($flag_fichier).", $code_lien, '".
 			// #LOGO_DOCUMENT{x,y} donne la taille maxi
 			texte_script($params)
-			."')";
+			."'," . _q($connect) .")";
 	}
-	else {
+	elseif ($connect) {
+		$p->code = "''";
+		spip_log("Les logos distants ne sont pas prevus");
+	} else {
 		$p->code = "affiche_logos(calcule_logo('$id_objet', '" .
 			(($suite_logo == '_SURVOL') ? 'off' : 
 			(($suite_logo == '_NORMAL') ? 'on' : 'ON')) .

@@ -272,36 +272,40 @@ $exceptions_des_jointures['petition'] = array('spip_petitions', 'texte');
 $exceptions_des_jointures['id_signature']= array('spip_signatures', 'id_signature');
 
 global  $table_des_traitements;
-$table_des_traitements['BIO'][]= 'propre(%s)';
-$table_des_traitements['CHAPO'][]= 'propre(nettoyer_chapo(%s))';
+
+define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
+define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
+
+$table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
+$table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['DATE'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_MODIF'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_NOUVEAUTES'][]= 'vider_date(%s)';
 $table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
-$table_des_traitements['DESCRIPTIF'][]= 'propre(%s)';
+$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
-$table_des_traitements['LIEN_TITRE'][]= 'typo(%s)';
+$table_des_traitements['LIEN_TITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['LIEN_URL'][]= 'vider_url(%s)';
-$table_des_traitements['MESSAGE'][]= 'propre(%s)';
-$table_des_traitements['NOM_SITE_SPIP'][]= 'typo(%s)';
+$table_des_traitements['MESSAGE'][]= _TRAITEMENT_RACCOURCIS;
+$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['NOM_SITE'][]= '%s'; # construire_titre_lien -> typo
-$table_des_traitements['NOM'][]= 'typo(%s)';
+$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['PARAMETRES_FORUM'][]= 'htmlspecialchars(%s)';
-$table_des_traitements['PS'][]= 'propre(%s)';
-$table_des_traitements['SOURCE'][]= 'typo(%s)';
-$table_des_traitements['SOUSTITRE'][]= 'typo(%s)';
-$table_des_traitements['SURTITRE'][]= 'typo(%s)';
+$table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
+$table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
+$table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
+$table_des_traitements['SURTITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['TAGS'][]= '%s';
-$table_des_traitements['TEXTE'][]= 'propre(%s)';
-$table_des_traitements['TITRE'][]= 'typo(%s)';
-$table_des_traitements['TYPE'][]= 'typo(%s)';
+$table_des_traitements['TEXTE'][]= _TRAITEMENT_RACCOURCIS;
+$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO;
+$table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['URL_ARTICLE'][]= 'vider_url(%s)';
 $table_des_traitements['URL_BREVE'][]= 'vider_url(%s)';
 $table_des_traitements['URL_DOCUMENT'][]= 'vider_url(%s)';
 $table_des_traitements['URL_FORUM'][]= 'vider_url(%s)';
 $table_des_traitements['URL_MOT'][]= 'vider_url(%s)';
 $table_des_traitements['URL_RUBRIQUE'][]= 'vider_url(%s)';
-$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= 'propre(%s)';
+$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['URL_SITE'][]= 'calculer_url(%s)';
 $table_des_traitements['URL_SOURCE'][]= 'vider_url(%s)';
 $table_des_traitements['URL_SYNDIC'][]= 'vider_url(%s)';
@@ -309,7 +313,7 @@ $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 
 // Articles syndiques : passage des donnees telles quelles, sans traitement typo
-// A noter, dans applique_filtres la securite et compliance XHTML de ces champs
+// A noter, dans applique_filtres la securite et conformite XHTML de ces champs
 // est assuree par safehtml()
 foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 	if (!isset($table_des_traitements[$balise]['syndic_articles']))
