@@ -224,7 +224,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 			if (lire_meta("visiter_sites") == "oui") {
 				include_ecrire ("inc_sites.php3");
 				spip_log ("indexation contenu syndic ".$row['url_site']);
-				indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
+				indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site'], true), 0, 50000)), 1);
 			}
 		}
 		break;

@@ -178,7 +178,7 @@ function appliquer_modifs_config() {
 			exit;
 		} else {
 			include_ecrire("inc_sites.php3");
-			$page = recuperer_page($test_proxy);
+			$page = recuperer_page($test_proxy, true);
 			if ($page)
 				echo "<pre>".entites_html($page)."</pre>";
 			else

@@ -25,8 +25,11 @@ if ($ajouter_lien = $GLOBALS["ajouter_lien"]) {
 	spip_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
 }
 
-
-function recuperer_page($url) {
+//
+// Recupere une page sur le net
+// et au besoin l'encode dans le charset local
+//
+function recuperer_page($url, $munge_charset=false) {
 	$http_proxy = lire_meta("http_proxy");
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
@@ -68,6 +71,7 @@ function recuperer_page($url) {
 			}
 			else return;
 			while ($s = trim(fgets($f, 16384))) {
+				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
 					$location = $r[1];
 				}
@@ -94,24 +98,15 @@ function recuperer_page($url) {
 		fclose($f);
 	}
 
+	// Faut-il l'importer dans notre charset local ?
+	if ($munge_charset) {
+		include_ecrire('inc_charsets.php3');
+		$result = transcoder_page ($result, $headers);
+	}
+
 	return $result;
 }
 
-
-function transcoder_page($texte) {
-	include_ecrire('inc_charsets.php3');
-
-	// Si le backend precise son charset et que celui-ci est connu de SPIP,
-	// decoder puis recoder
-	if (ereg('<\\?xml[[:space:]]([^>]*[[:space:]])?encoding[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9]+)[\'"]', $texte, $regs)) {
-		$charset_page = strtolower($regs[2]);
-		$texte = importer_charset($texte, $charset_page);
-	}
-	// Si le backend ne precise pas, on considere qu'il est iso-8859-1
-	else $texte = importer_charset($texte, 'iso-8859-1');
-
-	return $texte;
-}
 
 function trouver_format($texte) {
 	$syndic_version = '';
@@ -130,7 +125,7 @@ function trouver_format($texte) {
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3");
 
-	$texte = transcoder_page(recuperer_page($url));
+	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 	$result = '';
 	
@@ -223,7 +218,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
-	$le_retour = transcoder_page(recuperer_page($url_syndic));
+	$le_retour = recuperer_page($url_syndic, true);
 	$erreur = "";
 	$les_auteurs_du_site = "";
 
