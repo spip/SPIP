@@ -175,7 +175,7 @@ function spip_mysql_showtable($nom_table)
     return "";
   else {
     $dec = $r[1];
-    if (preg_match("/^(.*),(.*KEY.*)$/s", $dec, $r)) {
+    if (preg_match("/^(.*?),([^,]*KEY.*)$/s", $dec, $r)) {
       $namedkeys = $r[2];
       $dec = $r[1];
     }
@@ -189,7 +189,7 @@ function spip_mysql_showtable($nom_table)
     }
     $keys = array();
 
-    foreach(split(")",$namedkeys) as $v) {
+    foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
 	      if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
 		$k = str_replace("`", '', trim($r[1]));
 		$t = strtolower(str_replace("`", '', $r[2]));
