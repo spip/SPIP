@@ -124,16 +124,22 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($type == "abo") {
-		if (!$GLOBALS["auteur_session"]) {
-			return array('formulaires/login_forum', 0,
-					array('inscription' => generer_url_public('identifiants'),
-						'oubli' => generer_url_public('', 'action=pass')));
-		} else {
-		// forcer ces valeurs
-			$auteur = $GLOBALS['auteur_session']['nom'];
-			$email_auteur = $GLOBALS['auteur_session']['email'];
+		if (!$GLOBALS["auteur_session"]['statut']) {
+			return array('formulaires/login_forum_abo',
+				3600,
+				array(
+					'inscription' => generer_url_public('identifiants', 'lang='.$GLOBALS['spip_lang']),
+					'oubli' => generer_url_public('',
+						'action=pass&lang='.$GLOBALS['spip_lang'])
+				)
+			);
 		}
 	}
+
+	// Indiquer le nom du visiteur
+	$auteur = $GLOBALS['auteur_session']['nom'];
+	$email_auteur = $GLOBALS['auteur_session']['email'];
+
 	// Tableau des valeurs servant au calcul d'une signature de securite.
 	// Elles seront placees en Input Hidden pour que inc/forum_insert
 	// recalcule la meme chose et verifie l'identite des resultats.
@@ -168,22 +174,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			if ($url_param_retour)
 				$retour_forum = str_replace('&amp;', '&', $url_param_retour);
 		}
-		if (isset($_COOKIE['spip_forum_user'])
-		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
-			$auteur = $cookie_user['nom'];
-			$email_auteur = $cookie_user['email'];
-		} else {
-			$auteur = $GLOBALS['auteur_session']['nom'];
-			$email_auteur = $GLOBALS['auteur_session']['email'];
-		}
 
 	} else { // appels ulterieurs
 
 		// Recuperer le message a previsualiser
 		$titre = _request('titre');
 		$texte = _request('texte');
-		$auteur = _request('auteur');
-		$email_auteur = _request('email_auteur');
 		$nom_site = _request('nom_site');
 		$url_site = _request('url_site');
 		$ajouter_mot = _request('ajouter_mot');
@@ -197,12 +193,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		// on sait que cette fonction est dans le fichier associe
 		$hash = calculer_action_auteur("ajout_forum-$arg");
-
-		// Poser un cookie pour ne pas retaper les infos invariables
-		include_spip('inc/cookie');
-		spip_setcookie('spip_forum_user',
-			serialize(array('nom' => $auteur,
-				'email' => $email_auteur)));
 	}
 
 	// pour la chaine de hidden
@@ -212,9 +202,6 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 	return array('formulaires/forum', 0,
 	array(
-		'auteur' => $auteur,
-		'readonly' => ($type == "abo")? "readonly" : '',
-		'email_auteur' => $email_auteur,
 		'modere' => (($type != 'pri') ? '' : ' '),
 		'nom_site' => $nom_site,
 		'retour_forum' => $retour_forum,

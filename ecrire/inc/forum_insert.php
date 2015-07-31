@@ -136,7 +136,8 @@ function inc_forum_insert_dist($force_statut = NULL) {
 		// simuler une action venant de l'espace public
 		// pour se conformer au a general.
 		set_request('action', 'ajout_forum');
-	        $securiser_action = charger_fonction('securiser_action', 'inc');
+		// Creer une session s'il n'y en a pas (cas du postage sans cookie)
+		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 
 		$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $arg) .".lck";
@@ -161,11 +162,9 @@ function inc_forum_insert_dist($force_statut = NULL) {
 
 	$statut = controler_forum($id_article);
 
-	// Ne pas autoriser de changement de nom si forum sur abonnement
+	// Ne pas autoriser d'envoi hacke si forum sur abonnement
 	if ($statut == 'abo') {
-		controler_forum_abo($retour_forum);
-		set_request('auteur', $GLOBALS['auteur_session']['nom']);
-		set_request('email_auteur', $GLOBALS['auteur_session']['email']);
+		controler_forum_abo($retour_forum); // demandera une auth http
 	}
 
 	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
@@ -193,6 +192,9 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// Entree du contenu et invalidation des caches
 	//
 	include_spip('inc/modifier');
+	// Injecter les bonnes valeurs dans le contexte $c
+	set_request('auteur', $GLOBALS['auteur_session']['nom']);
+	set_request('email_auteur', $GLOBALS['auteur_session']['email']);
 	revision_forum($id_message);
 
 	// Notification

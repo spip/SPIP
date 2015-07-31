@@ -52,22 +52,32 @@ function action_cookie_dist() {
 		// Recuperer le login en champ hidden
 		if (!$session_login = _request('session_login'))
 			$session_login = _request('session_login_hidden');
-	
-		$row_auteur = array();
-		spip_connect();
-	
-		// Essayer l'authentification par MySQL
-		$auth_spip = charger_fonction('auth_spip', 'inc', true);
-		if ($auth_spip) $row_auteur = $auth_spip($session_login, _request('session_password'));
-	
-		// Marche pas: essayer l'authentification par LDAP si present
-		if (!$row_auteur AND spip_connect_ldap()) {
-			$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
-			if ($auth_ldap) $row_auteur = $auth_ldap($session_login, _request('session_password'));
+
+		if (!spip_connect()) {
+			include_spip('inc/minipres');
+			echo minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
+			exit;
 		}
-	
-		// Marche pas, renvoyer le formulaire avec message d'erreur si 2e fois
-		if (!$row_auteur) {
+
+		$auteur = array();
+
+		// Essayer tour a tour les differentes sources d'authenfication
+		// on s'en souviendra dans auteur_session['auth']
+		$sources_auth = array('spip', 'ldap');
+		while (!$auteur
+		AND list(,$methode) = each($sources_auth)) {
+			if ($auth = charger_fonction('auth_'.$methode, 'inc', true)
+			AND $auteur = $auth(
+				$session_login, _request('session_password')
+			)) {
+				$auteur['auth'] = $methode;
+			} else {
+				spip_log("pas de connexion avec $methode");
+			}
+		}
+
+		// Sinon, renvoyer le formulaire avec message d'erreur si 2e fois
+		if (!$auteur) {
 			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
 				$redirect = generer_url_public('login',
 					"var_login=$session_login", true);
@@ -76,19 +86,22 @@ function action_cookie_dist() {
 				$redirect = parametre_url($redirect, 'var_erreur', 'pass', '&');
 			$redirect .= '&url=' . rawurlencode($url);
 			spip_log("echec login: $session_login");
-		} else {
-			spip_log("login de $session_login vers $redirect");
+		}
+
+		// OK on a ete authentifie, on se connecte
+		if ($auteur) {
+			spip_log("login de $session_login vers $redirect (".$auteur['auth']);
 			// Si on se connecte dans l'espace prive, 
 			// ajouter "bonjour" (repere a peu pres les cookies desactives)
 			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
 				$redirect = parametre_url($redirect, 'bonjour', 'oui', '&');
 
 			// Prevoir de demander un cookie de correspondance
-			if ($row_auteur['statut'] == '0minirezo')
+			if ($auteur['statut'] == '0minirezo')
 				$set_cookie_admin = "@".$session_login;
 
 			$session = charger_fonction('session', 'inc');
-			$cookie_session = $session($row_auteur);
+			$cookie_session = $session($auteur);
 	
 			// La case "rester connecte quelques jours"
 			$session_remember = (_request('session_remember') == 'oui') ? 'perma' : '';
@@ -97,10 +110,10 @@ function action_cookie_dist() {
 			else
 				spip_setcookie('spip_session', $cookie_session);
 	
-			$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
+			$prefs = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
 			$prefs['cnx'] = $session_remember;
 	
-			sql_updateq('spip_auteurs', array('prefs' => serialize($prefs)), "id_auteur = " . $row_auteur['id_auteur']);
+			sql_updateq('spip_auteurs', array('prefs' => serialize($prefs)), "id_auteur = " . $auteur['id_auteur']);
 		}
 	}
 

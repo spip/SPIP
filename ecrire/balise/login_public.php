@@ -63,7 +63,7 @@ function login_explicite($login, $cible) {
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
 	} else {
-		$loge = ($auteur_session != '');
+		$loge = ($auteur_session['auth'] != '');
 	}
 
 	if ($loge) {

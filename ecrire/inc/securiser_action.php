@@ -61,27 +61,31 @@ function caracteriser_auteur() {
 	if ($caracterisation) return $caracterisation;
 
 	if (!isset($auteur_session['id_auteur'])) {
-  // si l'auteur courant n'est pas connu alors qu'il peut demander une action
-  // c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
-  // S'il n'avait pas le droit de realiser cette action, le hash sera faux.
+	// si l'auteur courant n'est pas connu alors qu'il peut demander une action
+	// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
+	// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
 		if (isset($_COOKIE['spip_session'])
 		AND (preg_match('/^(\d+)/',$_COOKIE['spip_session'],$r))) {
 			  return array($r[1], '');
 			  // Necessaire aux forums anonymes.
 			  // Pour le reste, ca echouera.
-		} else return array('',''); 	  
+		} else return array('','');
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
 	$id_auteur = $auteur_session['id_auteur'];
 	if (isset($auteur_session['pass']) AND $auteur_session['pass'])
 		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
-	else {
+	else if ($id_auteur>0) {
 		$t = sql_select("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t = sql_fetch($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
+	}
+	// Visiteur anonyme, pour ls forums par exemple
+	else {
+		return array('','');
 	}
 }
 
