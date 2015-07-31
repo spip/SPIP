@@ -91,6 +91,7 @@ function presenter_groupe_mots_boucle($row, $own)
 	else if ($nr > 1)
 		$texte_lie[] = $nr." "._T('info_rubriques_02');
 
+	$texte_lie = pipeline('afficher_nombre_objets_associes_a',array('args'=>array('objet'=>'mot','id_objet'=>$id_mot),'data'=>$texte_lie));
 	$texte_lie = join($texte_lie,", ");
 
 	$vals[] = $texte_lie;
