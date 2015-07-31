@@ -48,6 +48,7 @@ function auth() {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
 	global $auteur_session, $prefs;
+	global $this_link;
 
 	//
 	// Si pas MySQL, fini
@@ -118,7 +119,7 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = urlencode($GLOBALS['REQUEST_URI']);
+		$url = 'ecrire/'.$this_link->getUrl();
 		@header("Location: ../spip_login.php3?var_url=$url");
 		exit;
 	}
