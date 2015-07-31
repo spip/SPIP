@@ -1435,7 +1435,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
-	$result=spip_query("SELECT messages.id_message, messages.titre, messages.texte, messages.date_heure, messages.date_fin, messages.type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE	((lien.id_auteur='$connect_id_auteur' AND	lien.id_message=messages.id_message) OR messages.type='affich') AND	messages.rv='oui'  AND	((messages.date_fin >= $avant OR messages.date_heure >= $avant) AND messages.date_heure <= $apres) AND	messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result=spip_query("SELECT messages.id_message, messages.titre, messages.texte, messages.date_heure, messages.date_fin, messages.type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE	((lien.id_auteur=$connect_id_auteur AND	lien.id_message=messages.id_message) OR messages.type='affich') AND	messages.rv='oui'  AND	((messages.date_fin >= $avant OR messages.date_heure >= $avant) AND messages.date_heure <= $apres) AND	messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
@@ -1453,7 +1453,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 		    else {
 		      $cat = 'calendrier-couleur9';
 		      $auteurs = array();
-		      $result_aut=spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE	(lien.id_message='$id_message'  AND	(auteurs.id_auteur!='$connect_id_auteur'  AND	lien.id_auteur=auteurs.id_auteur))");
+		      $result_aut=spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE	(lien.id_message=$id_message  AND	(auteurs.id_auteur!=$connect_id_auteur  AND	lien.id_auteur=auteurs.id_auteur))");
 			while($row_auteur=spip_fetch_array($result_aut)){
 				$auteurs[] = $row_auteur['nom'];
 			}
@@ -1546,7 +1546,7 @@ function sql_calendrier_taches_rv () {
 	$r = array();
 	if (!$connect_id_auteur) return $r;
 
-	$result = spip_query("SELECT messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure AS DTSTART, messages.date_fin AS DTEND, messages.titre AS SUMMARY, messages.type AS CATEGORY, messages.rv AS LOCATION FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result = spip_query("SELECT messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure AS DTSTART, messages.date_fin AS DTEND, messages.titre AS SUMMARY, messages.type AS CATEGORY, messages.rv AS LOCATION FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE ((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 		$row['URL'] = tache_redirige($row);
 		$r[] = $row;
@@ -1566,7 +1566,7 @@ function sql_calendrier_agenda ($annee, $mois) {
 	$annee = annee($date);
 
 	// rendez-vous personnels dans le mois
-	$result_messages=spip_query("SELECT messages.titre AS SUMMARY, messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
+	$result_messages=spip_query("SELECT messages.titre AS SUMMARY, messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
 	while($row=spip_fetch_array($result_messages, SPIP_ASSOC)){
 		$rv[journum($row['date_heure'])] = $row;
 	}

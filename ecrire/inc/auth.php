@@ -124,7 +124,7 @@ function inc_auth_dist() {
 
 	// Trouver les autres infos dans la table auteurs.
 	// le champ 'quand' est utilise par l'agenda
-	$result = @spip_query("SELECT *, UNIX_TIMESTAMP(en_ligne) AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
+	$result = spip_query("SELECT *, en_ligne AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
 	if (!$row = spip_fetch_array($result)) {
 		// il n'est PLUS connu. c'est SQL qui est desyncrho
 		auth_areconnecter($connect_login);
@@ -189,9 +189,11 @@ function inc_auth_dist() {
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
 
 	// Indiquer la connexion. A la minute pres ca suffit.
-	$connect_quand = $row['quand'];
+	if (!is_numeric($connect_quand = $row['quand']))
+		$connect_quand = strtotime($connect_quand);
+
 	if ((time() - $connect_quand)  >= 60) {
-		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
+		spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur=$connect_id_auteur");
 	}
 
 	return ''; // i.e. pas de pb.
