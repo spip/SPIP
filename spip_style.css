@@ -30,7 +30,6 @@ h3.spip {
 	list-style-position: inside;
 	border-width: 0px;
 }
-
 .spip_documents{
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size : 70%;
@@ -38,19 +37,20 @@ h3.spip {
 
 .spip_documents_center{
 	margin: auto; 
-	text-align: center;:
+	text-align: center;
+	width: 80%;
 }
 
 .spip_documents_left{
 	float: left;
-	margin: 4px; 
-	text-align: center;:
+	margin-right: 15px; 
+	text-align: center;
 }
 
 .spip_documents_right{
 	float: right;
-	margin: 4px; 
-	text-align: center;:
+	margin-left: 15px; 
+	text-align: center;
 }
 
 table.spip {
