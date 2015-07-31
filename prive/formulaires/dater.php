@@ -189,18 +189,8 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 				$set['date_redac'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
 			}
 		}
-
-		include_spip('action/editer_'.$objet);
-		include_spip('inc/modifier');
-		if (function_exists($f=$objet."s_set")
-			OR function_exists($f="instituer_".$objet)
-			OR function_exists($f="revision_".$objet)
-		){
-			$f($id_objet,$set);
-		}
-		else {
-			objet_modifier_champs($objet, $id_objet, array(), $set);
-		}
+		include_spip('action/editer_objet');
+		objet_modifier($objet, $id_objet, $set);
 	}
 
 	if ($retour)
