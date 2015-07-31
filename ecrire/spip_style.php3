@@ -883,22 +883,17 @@ a.bouton_rotation:hover img {
 }
  
 .plan-articles {
-	border-bottom: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
 	border-left: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
 }
 .plan-articles a {
 	display: block;
 	padding: 2px;
-/*	margin-<?php echo $left; ?>: 2px; */
 	padding-<?php echo $left; ?>: 18px;
-	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
 	 background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
 	background-color: #e0e0e0;
-	/* border-top: 1px solid white;
-	border-left: 1px solid white;
-	border-right: 1px solid #aaaaaa;
-	border-bottom: 1px solid #aaaaaa; */
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size: 11px;
 	text-decoration: none;
