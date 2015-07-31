@@ -79,8 +79,10 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 
 		$options['titre'] = $img . $libelle;
 	}
-	if (!isset ($options['editable']))
+	if (!isset ($options['editable'])){
+		include_spip('inc/autoriser');
 		$options['editable'] = autoriser('iconifier',$objet,$id_objet);
+	}
 
 	$res = array(
 		'editable'=>($GLOBALS['meta']['activer_logos'] == 'oui' ? ' ' : '')&&(!isset($options['editable']) OR $options['editable']),
