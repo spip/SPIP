@@ -22,132 +22,132 @@
 <body id="page_article">
 <div id="page">
 
-    [(#REM) Entete de la page + titre du site ]
-    <INCLURE{fond=inc-entete}{lang}>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
 
-    [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
-
-
-    <div id="conteneur">
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
 
-        [(#REM) Contenu principal : contenu de l'article ]
-
-        <div id="contenu">
-
-            <div class="cartouche">
-                [(#LOGO_ARTICLE||reduire_image{200,200})]
-                [<p class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</p>]
-                <h1 class="titre">#DEBUT_SURLIGNE[(#TITRE|supprimer_numero)]#FIN_SURLIGNE</h1>
-                [<p class="soustitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</p>]
-
-                <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero)]</a></BOUCLE_auteurs></small></p>
-
-                [(#REM) Traductions de l'article ]
-                <B_traductions>
-                    <div class="traductions">
-                        <p><:trad_article_traduction:></p>
-                        <ul>
-	                        <li>[(#LANG|traduire_nom_langue)]</li>
-                            <BOUCLE_traductions(ARTICLES){traduction}{exclus}>
-	                        <li><a[ href="(#URL_ARTICLE|url_absolue)"] rel="alternate" hreflang="#LANG"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]><span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)]</span></a></li>
-                            </BOUCLE_traductions>
-                        </ul>
-                    </div>
-                </B_traductions>
-            </div>
-
-            <br class="nettoyeur" />
-
-            [<div class="chapo">#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE</div>]
-            [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-            [<div class="texte">#DEBUT_SURLIGNE(#TEXTE|lignes_longues|reduire_image{520,0})#FIN_SURLIGNE</div>]
-
-            [(#REM) Portfolio : album d'images ]
-            <B_documents_portfolio>
-            <div id="documents_portfolio">
-                <h2><:info_portfolio:></h2>
-                <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {doublons}>
-                [<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT#documents_portfolio"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
-                </BOUCLE_documents_portfolio>
-            </div>
-            </B_documents_portfolio>
-            <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
-            <div class="spip_documents" id="document_actif">
-                #EMBED_DOCUMENT
-                [<div class="spip_doc_titre">(#TITRE)</div>]
-                [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
-            </div>
-            </BOUCLE_afficher_document>
-
-            [<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
-
-            [(#REM) Autres documents joints a l'article ]
-            <B_documents_joints>
-            <div id="documents_joints">
-                <h2><:titre_documents_joints:></h2>
-                <ul>
-                    <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par date} {doublons}>
-                    <li>
-                    <div class="spip_doc_titre">[<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">(#TITRE|sinon{<:info_document:>})</a> ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-                    [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
-                    <br class="nettoyeur" />
-                    </BOUCLE_documents_joints>
-                </ul>
-            </div>
-            </B_documents_joints>
-
-            [(#REM) Petition ]
-            [ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
-            <INCLURE{fond=inc-petition}{id_article}{debut_signatures}>
-
-            [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
-
-            [(#REM) Forum de l'article ]
-            [<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
-            <INCLURE{fond=inc-forum}{id_article}>
+	<div id="conteneur">
 
 
-        </div><!-- fin contenu -->
+		[(#REM) Contenu principal : contenu de l'article ]
+
+		<div id="contenu">
+
+			<div class="cartouche">
+				[(#LOGO_ARTICLE||reduire_image{200,200})]
+				[<p class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</p>]
+				<h1 class="titre">#DEBUT_SURLIGNE[(#TITRE|supprimer_numero)]#FIN_SURLIGNE</h1>
+				[<p class="soustitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</p>]
+
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero)]</a></BOUCLE_auteurs></small></p>
+
+				[(#REM) Traductions de l'article ]
+				<B_traductions>
+					<div class="traductions">
+						<p><:trad_article_traduction:></p>
+						<ul>
+							<li>[(#LANG|traduire_nom_langue)]</li>
+							<BOUCLE_traductions(ARTICLES){traduction}{exclus}>
+							<li><a[ href="(#URL_ARTICLE|url_absolue)"] rel="alternate" hreflang="#LANG"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]><span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR">[(#LANG|traduire_nom_langue)]</span></a></li>
+							</BOUCLE_traductions>
+						</ul>
+					</div>
+				</B_traductions>
+			</div>
+
+			<br class="nettoyeur" />
+
+			[<div class="chapo">#DEBUT_SURLIGNE(#CHAPO)#FIN_SURLIGNE</div>]
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="texte">#DEBUT_SURLIGNE(#TEXTE|lignes_longues|reduire_image{520,0})#FIN_SURLIGNE</div>]
+
+			[(#REM) Portfolio : album d'images ]
+			<B_documents_portfolio>
+			<div id="documents_portfolio">
+				<h2><:info_portfolio:></h2>
+				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document}{extension==(png|jpg|gif)$} {doublons}>
+				[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT#documents_portfolio"[ title="(#TITRE|supprimer_numero|couper{80}|texte_backend)"]>(#LOGO_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})</a>]
+				</BOUCLE_documents_portfolio>
+			</div>
+			</B_documents_portfolio>
+			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
+			<div class="spip_documents" id="document_actif">
+				#EMBED_DOCUMENT
+				[<div class="spip_doc_titre">(#TITRE)</div>]
+				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+			</div>
+			</BOUCLE_afficher_document>
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+
+			[(#REM) Autres documents joints a l'article ]
+			<B_documents_joints>
+			<div id="documents_joints">
+				<h2><:titre_documents_joints:></h2>
+				<ul>
+					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par date} {doublons}>
+					<li>
+					<div class="spip_doc_titre">[<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">(#TITRE|sinon{<:info_document:>})</a> ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+					[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
+					<br class="nettoyeur" />
+					</BOUCLE_documents_joints>
+				</ul>
+			</div>
+			</B_documents_joints>
+
+			[(#REM) Petition ]
+			[ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
+			<INCLURE{fond=inc-petition}{id_article}{debut_signatures}>
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+
+			[(#REM) Forum de l'article ]
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
+			<INCLURE{fond=inc-forum}{id_article}>
 
 
-        [(#REM) Menu de navigation laterale ]
-        <div id="navigation">
-            <h1 class="invisible"><:navigation:></h1>
+		</div><!-- fin contenu -->
 
-            [(#REM) Menu de navigation par rubriques ]
-            <INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-            [(#REM) Articles dans la meme rubrique ]
-            <B_articles_rubrique>
-            <div class="breves">
-                <h2 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h2>
-                <ul>
-                    <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}>
-                    <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
-                    </BOUCLE_articles_rubrique>
-                </ul>
-            </div>
-            </B_articles_rubrique>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
 
-            [(#REM) Menu de navigation mots-cles ]
-            <B_mots>
-            <div class="divers">
-            <h2 class="titre"><:mots_clefs:></h2>
-            <ul>
-                <BOUCLE_mots(MOTS) {id_article} {par titre}>
-                <li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
-                </BOUCLE_mots>
-            </ul>
-            </div>
-            </B_mots>
-        </div><!-- fin navigation -->
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-    </div><!-- fin conteneur -->
+			[(#REM) Articles dans la meme rubrique ]
+			<B_articles_rubrique>
+			<div class="breves">
+				<h2 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h2>
+				<ul>
+					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}>
+					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
+					</BOUCLE_articles_rubrique>
+				</ul>
+			</div>
+			</B_articles_rubrique>
 
-    [(#REM) Pied de page ]
-    <INCLURE{fond=inc-pied}{lang}>
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="divers">
+			<h2 class="titre"><:mots_clefs:></h2>
+			<ul>
+				<BOUCLE_mots(MOTS) {id_article} {par titre}>
+				<li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+				</BOUCLE_mots>
+			</ul>
+			</div>
+			</B_mots>
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
 
 </div><!-- fin page -->
 </body>

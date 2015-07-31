@@ -1,51 +1,51 @@
 <BOUCLE_jour(ARTICLES)
-    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}
+	{agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}
 >[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 
-  calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})]</BOUCLE_jour>[(#TOTAL_BOUCLE|agenda_affiche{<:aucun_article:>, 'jour', 
-  calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})][(#TOTAL_BOUCLE|?{' ',''})
+	calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})]</BOUCLE_jour>[(#TOTAL_BOUCLE|agenda_affiche{<:aucun_article:>, 'jour', 
+	calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})][(#TOTAL_BOUCLE|?{' ',''})
 <div style='position: fixed; top:50px; left: 20px'>
 <table style='width: 10px'><tr>
 <td class='calendrier-couleur1'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,0})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur2'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,1})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur3'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,2})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur4'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,3})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur5'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,4})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur6'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,5})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur7'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,6})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur8'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,7})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur9'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,8})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur10'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,9})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur11'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,10})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur12'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,11})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur13'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,12})]'>&nbsp;&nbsp;</a></td></tr>
 <tr><td class='calendrier-couleur14'
-    ><a style='text-decoration: none;'
+	><a style='text-decoration: none;'
 	href='[(#SELF|parametre_url{theme,13})]'>&nbsp;&nbsp;</a></td></tr>
 </table>
 </div>

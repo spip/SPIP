@@ -1,7 +1,7 @@
 <BOUCLE_semaine(ARTICLES)
-    {agenda date, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}
+	{agenda date, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}
 >[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE,
-  [(#COMPTEUR_BOUCLE|
-	alterner{'calendrier-couleur2', 'calendrier-couleur4'})]})]</BOUCLE_semaine>[(#TOTAL_BOUCLE|
-	agenda_affiche{<:aucun_article:>, 'semaine', 'calendrier-couleur2','calendrier-couleur4'}
+	[(#COMPTEUR_BOUCLE|
+		alterner{'calendrier-couleur2', 'calendrier-couleur4'})]})]</BOUCLE_semaine>[(#TOTAL_BOUCLE|
+		agenda_affiche{<:aucun_article:>, 'semaine', 'calendrier-couleur2','calendrier-couleur4'}
 )]<//B_semaine>
