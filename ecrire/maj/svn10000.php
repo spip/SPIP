@@ -10,11 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des mises à jour de SPIP, version >= 10000
+ *
+ * Gestion des mises à jour du cœur de SPIP par un tableau global `maj`
+ * indexé par le numero SVN du changement
+ * 
+ * @package SPIP\Core\SQL\Upgrade
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*--------------------------------------------------------------------- */
-/*	Gestion des MAJ par tableau indexe par le numero SVN du chgt	*/
-/*--------------------------------------------------------------------- */
 
 // Type cls et sty pour LaTeX
 $GLOBALS['maj'][10990] = array(array('upgrade_types_documents'));
@@ -32,6 +37,9 @@ $GLOBALS['maj'][11171] = array(
 	array('spip_query', "UPDATE spip_types_documents SET upload='oui' WHERE upload IS NULL OR upload!='non'")
 );
 
+/**
+ * Mise à jour 11268 : renommer spip_recherches la mal nommée en spip_resultats
+**/
 function maj_11268() {
 	global $tables_auxiliaires;
 	include_spip('base/auxiliaires');
@@ -40,14 +48,20 @@ function maj_11268() {
 }
 $GLOBALS['maj'][11268] = array(array('maj_11268'));
 
-
+/**
+ * Mise à jour 11276 : réparer les éventuelles tables spip_documents
+ * en se fondant sur l'extension de la colonne fichier
+ * @use maj_1_938()
+**/
 function maj_11276 () {
 	include_spip('maj/v019');
 	maj_1_938();
 }
 $GLOBALS['maj'][11276] = array(array('maj_11276'));
 
-// reparer les referers d'article, qui sont vides depuis [10572]
+/**
+ * Mise à jour 11388 : réparer les referers d'article, qui sont vides depuis r10572
+ */
 function maj_11388 () {
 	$s = sql_select('referer_md5', 'spip_referers_articles', "referer='' OR referer IS NULL");
 	while ($t = sql_fetch($s)) {
@@ -63,7 +77,9 @@ function maj_11388 () {
 }
 $GLOBALS['maj'][11388] = array(array('maj_11388'));
 
-// reparer spip_mots.type = titre du groupe
+/**
+ * Mise à jour 11431 : réparer spip_mots.type = titre du groupe
+ */
 function maj_11431 () {
 	// mysql only
 	// spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
@@ -82,8 +98,9 @@ function maj_11431 () {
 }
 $GLOBALS['maj'][11431] = array(array('maj_11431'));
 
-// reparer spip_types_documents.id_type
-// qui est parfois encore present
+/**
+ * Mise à jour 11778 : réparer spip_types_documents.id_type qui est parfois encore présent
+ */
 function maj_11778 () {
 	// si presence id_type
 	$s = sql_showtable('spip_types_documents');
@@ -95,7 +112,9 @@ function maj_11778 () {
 }
 $GLOBALS['maj'][11778] = array(array('maj_11778'));
 
-// Optimisation des forums
+/**
+ * Mise à jour 11790 : Optimisation des forums
+ */
 function maj_11790 () {
 #	sql_alter('TABLE spip_forum DROP INDEX id_message id_message');
 	sql_alter('TABLE spip_forum ADD INDEX id_parent (id_parent)');
@@ -120,9 +139,10 @@ array('sql_update','spip_groupes_mots',array('tables_liees'=>"concat(tables_liee
 );
 
 
-
-// Reunir en une seule table les liens de documents
-//  spip_documents_articles et spip_documents_forum
+/**
+ * Mise à jour 12008 : Réunir en une seule table les liens de documents
+ * spip_documents_articles et spip_documents_forum
+ */
 function maj_12008 () {
 	// Creer spip_documents_liens
 	global $tables_auxiliaires;
@@ -191,6 +211,9 @@ array('sql_alter',"TABLE spip_groupes_mots DROP rubriques"),
 array('sql_alter',"TABLE spip_groupes_mots DROP syndic"),
 );
 
+/**
+ * Mise à jour 13135 : réparer le calcul des rubriques ayant des articles postdatés
+ */
 function maj_13135 () {
 	include_spip('inc/rubriques');
 	calculer_prochain_postdate();
@@ -269,9 +292,28 @@ $GLOBALS['maj'][16428] = array(
 	array('sql_drop_table',"spip_auteurs_messages"),
 );
 
-// Reunir en une seule table les liens de documents
-//  spip_documents_articles et spip_documents_forum
-function maj_liens($pivot,$l='') {
+/**
+ * Mise à jour des tables de liens
+ *
+ * Crée la table de lien au nouveau format (spip_xx_liens) ou insère
+ * les données d'ancien format dans la nouveau format.
+ *
+ * Par exemple pour réunir en une seule table les liens de documents,
+ * spip_documents_articles et spip_documents_forum
+ *
+ * Supprime la table au vieux format une fois les données transférées.
+ * 
+ * @use creer_ou_upgrader_table()
+ * @use maj_liens_insertq_multi_check()
+ * 
+ * @param string $pivot
+ *     Nom de la table pivot, tel que `auteur`
+ * @param string $l
+ *     Vide : crée la table de lien pivot.
+ *     Sinon, nom de la table à lier, tel que `article`, et dans ce cas là,
+ *     remplit spip_auteurs_liens à partir de spip_auteurs_articles.
+ */
+function maj_liens($pivot, $l='') {
 
 	@define('_LOG_FILTRE_GRAVITE',8);
 
@@ -337,6 +379,17 @@ function maj_liens($pivot,$l='') {
 		}
 	}
 }
+
+/**
+ * Insère des données dans une table de liaison de façon un peu sécurisée
+ *
+ * Si une insertion multiple échoue, on réinsère ligne par ligne.
+ * 
+ * @param string $table Table de liaison
+ * @param array $couples Tableau de couples de données à insérer
+ * @param array $desc Description de la table de liaison
+ * @return void
+**/
 function maj_liens_insertq_multi_check($table,$couples,$desc=array()){
 	$n_before = sql_countsel($table);
 	sql_insertq_multi($table,$couples,$desc);
@@ -398,13 +451,22 @@ $GLOBALS['maj'][18955] = array(
 	array('sql_alter',"TABLE spip_auteurs_liens ADD INDEX objet (objet)"),
 );
 
-
+/**
+ * Mise à jour pour recalculer les secteurs des rubriques
+ * @use propager_les_secteurs()
+**/
 function maj_propager_les_secteurs(){
 	include_spip('inc/rubriques');
 	propager_les_secteurs();
 }
 
-
+/**
+ * Mise à jour des bdd SQLite pour réparer les collation des champs texte
+ * pour les passer en NOCASE
+ * 
+ * @use base_lister_toutes_tables()
+ * @use _sqlite_remplacements_definitions_table()
+**/
 function maj_collation_sqlite(){
 
 
@@ -483,7 +545,11 @@ $GLOBALS['maj'][19268] = array(
 	array('supprimer_toutes_sessions'),
 );
 
-
+/**
+ * Supprime toutes les sessions des auteurs
+ *
+ * Obligera tous les auteurs à se reconnecter !
+**/
 function supprimer_toutes_sessions() {
 	spip_log("supprimer sessions auteur");
 	$dir = opendir(_DIR_SESSIONS);

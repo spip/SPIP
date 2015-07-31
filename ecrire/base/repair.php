@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Réparation de la base de donnée
+ * Réparation de la base de données
  *
  * @package SPIP\Core\SQL\Reparation
  */

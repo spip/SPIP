@@ -594,7 +594,7 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serve
 
 /**
  * Synchroniser un compte sur une base distante pour la methode
- * donnee lorsque des modifications sont faites dans la base auteur
+ * donnée lorsque des modifications sont faites dans la base auteur
  *
  * @param string|bool $auth_methode
  *   ici true permet de forcer la synchronisation de tous les acces pour toutes les methodes
