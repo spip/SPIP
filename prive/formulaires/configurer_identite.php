@@ -47,7 +47,8 @@ function formulaires_configurer_identite_traiter_dist(){
 		ecrire_meta($k,_request($k));
 	
 	include_spip('inc/texte_mini');
-	$reload .= "<script type='text/javascript'>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('". couper(_request('nom_site'),35) ." ');</script>";
+	$reload = texte_script(couper(_request('nom_site'),35));
+	$reload = "<script type='text/javascript'>if (window.jQuery) jQuery('#bando_identite .nom_site_spip .nom').html('$reload');</script>";
 	
 	return array('message_ok'=>_T('config_info_enregistree').$reload,'editable'=>true);
 }
