@@ -1228,6 +1228,8 @@ define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
+	global $debut_italiques, $fin_italiques;
+	global $debut_gras, $fin_gras;
 	global $compt_note;
 	global $marqueur_notes;
 	global $ouvre_ref;
@@ -1248,6 +1250,10 @@ function traiter_raccourcis($letexte) {
 	if (!$tester_variables++) {
 		tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
 		tester_variable('fin_intertitre', "</h3>\n");
+		tester_variable('debut_italique', '<i class="spip">');
+		tester_variable('fin_italique', '</i>');
+		tester_variable('debut_gras', '<strong class="spip">');
+		tester_variable('fin_gras', '</strong>');
 		tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
 		tester_variable('ouvre_ref', '&nbsp;[');
 		tester_variable('ferme_ref', ']');
@@ -1478,10 +1484,10 @@ function traiter_raccourcis($letexte) {
 		/* 4 */ 	"\$1\n\n$debut_intertitre",
 		/* 5 */ 	"$fin_intertitre\n\n\$1",
 		/* 6 */ 	"<p>",
-		/* 7 */ 	"<strong class=\"spip\">",
-		/* 8 */ 	"</strong>",
-		/* 9 */ 	"<i class=\"spip\">",
-		/* 10 */	"</i>",
+		/* 7 */ 	$debut_gras,
+		/* 8 */ 	$fin_gras,
+		/* 9 */ 	$debut_italique,
+		/* 10 */	$fin_italique,
 		/* 11 */	"<p>",
 		/* 12 */	"<p>",
 		/* 13 */	"<blockquote class=\"spip\"><p>",
