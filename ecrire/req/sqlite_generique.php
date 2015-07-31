@@ -15,7 +15,6 @@
 // idem, il ne faut pas de $obj->toto()->toto sinon php4 se tue !
 
 # todo : get/set_caracteres ?
-# todo : REPAIR TABLE ?
 
 
 /*
@@ -844,12 +843,6 @@ function spip_sqlite_quote($v, $type=''){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_repair
-function spip_sqlite_repair($table, $serveur='',$requeter=true){
-	return spip_sqlite_query("REPAIR TABLE $table", $serveur, $requeter); // <- ca m'ettonerait aussi ca !
-}
-
-
 // http://doc.spip.org/@spip_sqlite_replace
 function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	if (!$desc) $desc = description_table($table);
@@ -1432,7 +1425,6 @@ function _sqlite_ref_fonctions(){
 		'quote' => 'spip_sqlite_quote',
 		'replace' => 'spip_sqlite_replace',
 		'replace_multi' => 'spip_sqlite_replace_multi',
-		'repair' => 'spip_sqlite_repair',
 		'select' => 'spip_sqlite_select',
 		'selectdb' => 'spip_sqlite_selectdb',
 		'set_charset' => 'spip_sqlite_set_charset',
