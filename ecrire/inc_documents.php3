@@ -297,10 +297,14 @@ function integre_image($id_document, $align, $type_aff) {
 			}
 			else $type = 'fichier';
 			
+			$largeur_aff = $largeur_vignette;
+			if ($largeur_aff < 120) $largeur_aff = 120;
+			
+			
 			if ($align == 'center') 
 				$retour = "<div class='spip_documents' style='margin: auto; text-align: center;'>\n";
 			else 
-				$retour = "<div class='spip_documents' style='float: $align; text-align: center;'>\n";
+				$retour = "<div class='spip_documents' style='float: $align; text-align: center; width: ".$largeur_aff."px;'>\n";
 
 			//$retour .= "<tr><td align='center' style='text-align: center;'>";
 			$retour .= $vignette;
