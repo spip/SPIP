@@ -43,8 +43,9 @@ function generer_url_document_dist($id_document) {
 		return '';
 	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document = $id_document"));
 	if ($row) {
+var_dump($GLOBALS['meta']["creer_htaccess"]);
 		if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
-		AND $row['distant'] == 'oui')
+		AND $row['distant'] != 'oui')
 			return generer_url_action('acceder_document', "arg=$id_document", true);
 		else
 			return get_spip_doc($row['fichier']);
