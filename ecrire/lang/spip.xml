@@ -1,10 +1,9 @@
 <traduction module="spip" gestionnaire="salvatore" url="http://trad.spip.org" source="svn://trac.rezo.net/spip/spip/ecrire/lang/" reference="fr">
 	<langue code="ar">
-		<traducteur nom="kandalaft" />
 		<traducteur nom="George" />
 	</langue>
 	<langue code="ast">
-		<traducteur nom="xuacu" />
+		<traducteur nom="Xuacu" />
 	</langue>
 	<langue code="ay">
 		<traducteur nom="gaspard" />
@@ -21,16 +20,16 @@
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de">
-		<traducteur nom="klaus" />
+		<traducteur nom="klaus++" />
 	</langue>
 	<langue code="el">
-		<traducteur nom="yann7" />
+		<traducteur nom="Yannick Bailly" />
 	</langue>
 	<langue code="en">
-		<traducteur nom="squonk" />
-		<traducteur nom="paolo2" />
-		<traducteur nom="filou" />
-		<traducteur nom="kandalaft" />
+		<traducteur nom="sQuonk" />
+		<traducteur nom="Paolo" />
+		<traducteur nom="Fil" />
+		<traducteur nom="George" />
 		<traducteur nom="jaro" />
 	</langue>
 	<langue code="en_hx" />
@@ -42,7 +41,7 @@
 		<traducteur nom="otalazt" />
 	</langue>
 	<langue code="fa">
-		<traducteur nom="davood" />
+		<traducteur nom="Davood Hossein" />
 	</langue>
 	<langue code="fi" />
 	<langue code="fon" />
@@ -52,26 +51,22 @@
 		<traducteur nom="orlammd" />
 	</langue>
 	<langue code="gl">
-		<traducteur nom="webmaster3" />
-		<traducteur nom="berio" />
+		<traducteur nom="Antón Méixome" />
 	</langue>
 	<langue code="hac">
 		<traducteur nom="akomarani" />
 	</langue>
 	<langue code="he" />
-	<langue code="hr">
-		<traducteur nom="alex6" />
-	</langue>
+	<langue code="hr" />
 	<langue code="hu" />
 	<langue code="id" />
 	<langue code="is" />
 	<langue code="it">
-		<traducteur nom="renatoformato" />
+		<traducteur nom="Cap" />
 	</langue>
 	<langue code="it_fem" />
 	<langue code="ja">
-		<traducteur nom="renatoformato" />
-		<traducteur nom="jtt777" />
+		<traducteur nom="Cap" />
 	</langue>
 	<langue code="km" />
 	<langue code="la" />
@@ -82,7 +77,7 @@
 	<langue code="nb" />
 	<langue code="ne" />
 	<langue code="nl">
-		<traducteur nom="michelpossoz" />
+		<traducteur nom="mpossoz" />
 	</langue>
 	<langue code="no" />
 	<langue code="oc_auv" />
@@ -94,13 +89,13 @@
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
 	<langue code="pl">
-		<traducteur nom="dpaszkiewicz" />
+		<traducteur nom="Dominik [Pologne]" />
 	</langue>
 	<langue code="pt">
-		<traducteur nom="fernando" />
+		<traducteur nom="Fernando Ferreira" />
 	</langue>
 	<langue code="pt_br">
-		<traducteur nom="rporto" />
+		<traducteur nom="Ricardo Porto" />
 		<traducteur nom="joao1315" />
 	</langue>
 	<langue code="ro">
@@ -108,7 +103,7 @@
 	</langue>
 	<langue code="roa" />
 	<langue code="ru">
-		<traducteur nom="papa_troll" />
+		<traducteur nom="Serge Markitanenko" />
 	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
@@ -120,9 +115,7 @@
 	<langue code="tr" />
 	<langue code="vi" />
 	<langue code="wo">
-		<traducteur nom="usmaanfaati" />
+		<traducteur nom="usufaati" />
 	</langue>
-	<langue code="zh">
-		<traducteur nom="jing_yan" />
-	</langue>
+	<langue code="zh" />
 </traduction>
