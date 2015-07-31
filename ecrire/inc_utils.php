@@ -440,9 +440,9 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // et pour l'espace public (cf #SPIP_CRON dans inc_balise)
 
 function generer_spip_cron() {
-  return '<div align="right" class="verdana2" style="background-image: url(\'' . 
+  return '<div style="background-image: url(\'' . 
 	generer_url_public('spip_action.php', 'action=cron') .
-	'\');">';
+	'\');"></div>';
 }
 
 // envoi de l'image demandee dans le code ci-dessus
