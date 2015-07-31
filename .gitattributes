@@ -668,6 +668,7 @@ ecrire/inc/editer_mots.php -text
 ecrire/inc/envoyer_mail.php -text
 ecrire/inc/export.php -text
 ecrire/inc/filtres_images.php -text
+ecrire/inc/filtres_mini.php -text
 ecrire/inc/formater_article.php -text
 ecrire/inc/formater_auteur.php -text
 ecrire/inc/forum_envoi.php -text

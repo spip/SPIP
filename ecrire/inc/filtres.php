@@ -14,6 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
+include_spip('inc/filtres_mini');
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
@@ -1484,102 +1485,6 @@ function url_rss_forum($param) {
 function url_reponse_forum($parametres) {
 	if (!$parametres) return '';
 	return generer_url_public('forum', $parametres);
-}
-
-//
-// Filtres d'URLs
-//
-
-// Nettoyer une URL contenant des ../
-//
-// resolve_url('/.././/truc/chose/machin/./.././.././hopla/..');
-// inspire (de loin) par PEAR:NetURL:resolvePath
-//
-// http://doc.spip.org/@resolve_path
-function resolve_path($url) {
-	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
-	OR preg_match(',/[^/]*/\.\./,S', $url, $regs)	# supprime /toto/../
-	OR preg_match(',^/\.\./,S', $url, $regs))		# supprime les /../ du haut
-		$url = str_replace($regs[0], '/', $url);
-
-	return '/'.preg_replace(',^/,S', '', $url);
-}
-
-// 
-// Suivre un lien depuis une adresse donnee -> nouvelle adresse
-//
-// suivre_lien('http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
-// 'a/../../titi.coco.html/tata#titi');
-// http://doc.spip.org/@suivre_lien
-function suivre_lien($url, $lien) {
-	# lien absolu ? ok
-	if (preg_match(',^(mailto|javascript):,iS', $lien))
-		return $lien;
-	if (preg_match(',^([a-z0-9]+://.*?)(/.*),iS', $lien, $r))
-		return $r[1].resolve_path($r[2]);
-
-	# lien relatif, il faut verifier l'url de base
-	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#]*)(#.*)?$,S', $url, $regs)) {
-		$debut = $regs[1];
-		$dir = !strlen($regs[2]) ? '/' : $regs[2];
-		$mot = $regs[3];
-		$hash = $regs[4];
-	}
-	switch (substr($lien,0,1)) {
-		case '/':
-			return $debut . resolve_path($lien);
-		case '#':
-			return $debut . resolve_path($dir.$mot.$lien);
-		case '':
-			return $debut . resolve_path($dir.$mot.$hash);
-		default:
-			return $debut . resolve_path($dir.$lien);
-	}
-}
-
-// un filtre pour transformer les URLs relatives en URLs absolues ;
-// ne s'applique qu'aux #URL_XXXX
-// http://doc.spip.org/@url_absolue
-function url_absolue($url, $base='') {
-	if (strlen($url = trim($url)) == 0)
-		return '';
-	if (!$base)
-		$base = url_de_base() . (_DIR_RACINE ? _DIR_RESTREINT_ABS : '');
-	return suivre_lien($base, $url);
-}
-
-// un filtre pour transformer les URLs relatives en URLs absolues ;
-// ne s'applique qu'aux textes contenant des liens
-// http://doc.spip.org/@liens_absolus
-function liens_absolus($texte, $base='') {
-	if (preg_match_all(',(<(a|link)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
-	$texte, $liens, PREG_SET_ORDER)) {
-		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[3], $base);
-			if ($abs <> $lien[3])
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
-		}
-	}
-	if (preg_match_all(',(<(img|script)[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
-	$texte, $liens, PREG_SET_ORDER)) {
-		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[3], $base);
-			if ($abs <> $lien[3])
-				$texte = str_replace($lien[0], $lien[1].$abs.$lien[4], $texte);
-		}
-	}
-	return $texte;
-}
-
-//
-// Ce filtre public va traiter les URL ou les <a href>
-//
-// http://doc.spip.org/@abs_url
-function abs_url($texte, $base='') {
-	if ($GLOBALS['mode_abs_url'] == 'url')
-		return url_absolue($texte, $base);
-	else
-		return liens_absolus($texte, $base);
 }
 
 //
