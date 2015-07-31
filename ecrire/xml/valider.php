@@ -330,7 +330,7 @@ function emboite_texte($res, $fonc='',$self='')
 		$err = '<tr><th>'
 		.  _T('numero')
 		. "</th><th>"
-		. _T('occurrence')
+		. _T('occurence')
 		. "</th><th>"
 		. _T('ligne')
 		. "</th><th>"
