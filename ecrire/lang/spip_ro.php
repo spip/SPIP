@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Pentru a remedia aceast&#259; problem&#259;, utiliza&#355;i clientul dumneavoastr&#259; favorit de FTP pentru a modifica drepturile de acces ale fiec&#259;rui
   dintre aceste directoare. Procedura este explicat&#259; &icirc;n detaliu &icirc;n manualul de instalare.</p>
   <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
-'double_occurrence' => 'Ocuren&#355;&#259; dubl&#259;',
+'double_occurrence' => '<MODIF>Ocuren&#355;&#259; dubl&#259;',
 
 // E
 'en_cours' => '&icirc;n curs',
@@ -734,7 +734,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',
-'zbug_balise_inexistante' => 'eroare @from@: baliza #@balise@ nu exist&#259;',
+'zbug_balise_inexistante' => '<MODIF>eroare @from@: baliza #@balise@ nu exist&#259;',
 'zbug_balise_sans_argument' => 'Argument lips&#259; &icirc;n baliza @balise@',
 'zbug_boucle' => 'bucl&#259;',
 'zbug_boucle_recursive_undef' => 'Bucl&#259; recursiv&#259; nedefinit&#259;: @nom@',
@@ -758,7 +758,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'zbug_info_erreur_squelette' => 'Eroare pe site',
 'zbug_inversion_ordre_inexistant' => 'Inversie de ordin necunoscut',
 'zbug_pagination_sans_critere' => 'Baliza #PAGINATION f&#259;r criteriu {pagination} sau folosit &icirc;ntr-o bucl&#259; recursiv&#259;',
-'zbug_parametres_inclus_incorrects' => 'Parametru de includere incorect: @param@',
+'zbug_parametres_inclus_incorrects' => '<MODIF>Parametru de includere incorect: @param@',
 'zbug_profile' => 'Timp de calcul&nbsp;: @time@',
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'Server SQL nedefinit',

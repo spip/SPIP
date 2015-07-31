@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 <p/>&#272;&#7875; thay &#273;&#7893;i, d&ugrave;ng FTP v&agrave;o thay &#273;&#7893;i quy&#7873;n h&#7841;n ra/v&ocirc; c&#7911;a t&#7915;ng ng&#259;n. Th&#7875; th&#7913;c n&agrave;y c&oacute; ghi trong c&#7849;m nang s&#7917; d&#7909;ng.
 <p/>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;',
-'double_occurrence' => 'Hai l&#7847;n',
+'double_occurrence' => '<MODIF>Hai l&#7847;n',
 
 // E
 'en_cours' => '<NEW>en cours',

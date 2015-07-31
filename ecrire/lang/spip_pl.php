@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
   <p>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
-'double_occurrence' => 'Podw&oacute;jne wyst&#261;pienie',
+'double_occurrence' => '<MODIF>Podw&oacute;jne wyst&#261;pienie',
 
 // E
 'en_cours' => '<NEW>en cours',

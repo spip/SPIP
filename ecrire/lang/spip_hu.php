@@ -199,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p />Annak jav&iacute;t&aacute;s&aacute;ra, haszn&aacute;lja az FTP kliens&eacute;t ahhoz, hogy be&aacute;ll&iacute;tsa minden mapp&aacute; hozz&aacute;f&eacute;r&eacute;si jogait
   Az elj&aacute;r&aacute;s r&eacute;szletesen van magyar&aacute;zva a telep&iacute;t&eacute;si k&eacute;zik&ouml;nyvben.
   <p />A megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fogja',
-'double_occurrence' => 'K&eacute;t el&#337;fordul&aacute;s',
+'double_occurrence' => '<MODIF>K&eacute;t el&#337;fordul&aacute;s',
 
 // E
 'en_cours' => '<NEW>en cours',

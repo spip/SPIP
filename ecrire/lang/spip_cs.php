@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p>Zm&#283;&#328;te tato pr&aacute;va pomoc&iacute; klienta FTP a nastavte pr&aacute;va p&#345;&iacute;stupu jednotliv&yacute;ch adres&aacute;&#345;&#367;
   Podrobn&yacute; popis je v n&aacute;vodu k instalaci.</p>
   <p>Pot&eacute; m&#367;&#382;ete ',
-'double_occurrence' => 'Dv&#283; instance',
+'double_occurrence' => '<MODIF>Dv&#283; instance',
 
 // E
 'en_cours' => 'prob&iacute;h&aacute; zpracov&aacute;n&iacute;',

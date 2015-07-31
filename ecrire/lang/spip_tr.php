@@ -199,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_repertoires_suivants' => '<p><b>A&#351;a&#287;&#305;daki dizinlere yazma izni yoktur&nbsp;: </b></p><ul>@bad_dirs@.</ul> 
   <p>Bu sorunu &ccedil;&ouml;zmek i&ccedil;in FTP program&#305;n&#305;zla her bir dizine eri&#351;im haklar&#305;n&#305; d&uuml;zenleyin. Bu yordam, kurulum kitap&ccedil;&#305;&#287;&#305;nda detayl&#305; bi&ccedil;imde a&ccedil;&#305;klanm&#305;&#351;t&#305;r./p> 
   <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
-'double_occurrence' => '&Ccedil;ift tekrar ',
+'double_occurrence' => '<MODIF>&Ccedil;ift tekrar ',
 
 // E
 'en_cours' => 'i&#351;lenmekte',

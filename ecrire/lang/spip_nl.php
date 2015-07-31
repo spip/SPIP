@@ -201,7 +201,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding.</p>
   <p>Eenmaal deze wijziging doorgevoerd, kan je ',
-'double_occurrence' => 'Dubbel gebruik',
+'double_occurrence' => '<MODIF>Dubbel gebruik',
 
 // E
 'en_cours' => 'in koers',
