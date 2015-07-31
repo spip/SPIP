@@ -2207,7 +2207,7 @@ function calculer_texte($texte)
 
 		ereg('^\\{(.*)\\}$', trim($match[2]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
-		$code .= "	\$retour .= 'include_ecrire(\'inc_filtres.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
+		$code .= "	\$retour .= 'include_ecrire(\'inc_lang.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
 		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
 		if ($params) {
