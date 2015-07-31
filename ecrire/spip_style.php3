@@ -879,8 +879,8 @@ a.bouton_rotation:hover img {
 .cadre-r {
 	background-color: white;
 	border: 1px solid #666666;
-	-moz-border-radius: 8px;
 	margin-bottom: 5px;
+	-moz-border-radius: 8px;
 }
 
 
@@ -897,7 +897,6 @@ a.bouton_rotation:hover img {
 	border-bottom: 1px solid white;
 	border-right: 1px solid white;
 	-moz-border-radius: 8px;
-	margin-bottom: 5px;
 }
 
 .cadre-e div.cadre-titre {
@@ -909,6 +908,7 @@ a.bouton_rotation:hover img {
 .cadre-e-noir {
 	border: 1px solid #666666;
 	-moz-border-radius: 8px;
+	margin-bottom: 5px;
 }
 
 .cadre-forum {
