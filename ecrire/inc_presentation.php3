@@ -1098,7 +1098,11 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
-		//onglet(_T('onglet_langues'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
+	}
+
+	if ($rubrique == "config_lang") {
+		onglet(_T('info_langue_principale'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
+		onglet(_T('info_multilinguisme'), "config-multilang.php3", "multi", $onglet, "traductions-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
