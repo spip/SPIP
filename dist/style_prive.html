@@ -1645,7 +1645,6 @@ a.ical {
 
 /* Titre d'une boite */
 .titrem { 
-	background-color: #eee;
 	font-weight: bold;
 }
 div.titrem{	
@@ -1660,7 +1659,7 @@ div.titrem{
 .cadre-couleur-foncee .cadre_padding .titrem {color:#000;}
 
 .cadre-trait-couleur .titrem {background-color:#GET{foncee};color:#fff;}
-.cadre-trait-couleur .cadre_padding .titrem {background-color: #eee;color:#000;}
+.cadre-trait-couleur .cadre_padding .titrem {background-color:#fff;color:#000;}
 
 .ajax-action {padding-top:1px;clear:both;position:relative;}
 
@@ -1863,8 +1862,6 @@ div.navigation-calendrier { background-color:#GET{foncee}; }
 	text-align: #GET{left};
 	vertical-align:top;
 }
-#contenu .cadre-portfolio table td.document .titrem {background-color:#eee;}
-.cadre-portfolio table td.vu {background:#cccccc;}
 
 .cadre-documents .titrem {background-color:#999;}
 .cadre-documents .cadre_padding {padding:0;}
@@ -1875,8 +1872,10 @@ div.navigation-calendrier { background-color:#GET{foncee}; }
 	text-align: #GET{left};
 	vertical-align:top;
 }
-#contenu .cadre-documents table td.document .titrem {background-color:#eee;}
-.cadre-documents table td.vu {background:#cccccc;}
+
+#contenu td.document .titrem {background-color:#fff;}
+td.vu {background:#cccccc;}
+
 
 /* config/reducteur */
 .vignette_reducteur {
