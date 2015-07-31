@@ -27,15 +27,6 @@ RewriteEngine On
 #RewriteBase /sous/repertoire/
 
 
-### Version PHP 3
-# Si vous utilisez une distribution 'PHP 3' de SPIP, et si votre
-# hebergement execute encore les .php[3] avec un moteur PHP 3
-# au lieu de PHP 4, vous pouvez decommenter la ligne ci-dessous
-# pour faire fonctionner les fichiers sous php4 (sans garantie)
-
-#AddType x-mapp-php4 .php3
-
-
 # SPIP version 'php' - si vous avez d'anciennes adresses en '.php[3]',
 # supprimez le '#' sur les lignes qui suivent pour rediriger les acces
 # errones vers le .php correspondant
@@ -68,7 +59,7 @@ RewriteRule "." - [skip=100]
 
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
-# voir fichier inc-urls-html.php3
+# voir fichier ecrire/urls/html.php3
 RewriteRule rubrique([0-9]+)\.html$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
 RewriteRule article([0-9]+)\.html$	spip.php?page=article&id_article=$1 [QSA,L]
 RewriteRule breve([0-9]+)\.html$	spip.php?page=breve&id_breve=$1 [QSA,L]
@@ -86,8 +77,8 @@ RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
 ###
 # URLs "propres" et "propres2"
 # pensez a regler $type_urls='propres' ou 'propres2'
-# dans ecrire/mes_options.php3
-# (fichier associe : inc-urls-propres.php3)
+# dans ecrire/mes_options.php
+# (fichier associe : ecrire/urls/propres.php)
 
 # Les mots-cles
 RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$	spip.php?page=mot [QSA,E=url_propre:$0,L]
