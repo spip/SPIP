@@ -778,6 +778,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_mots_cles' => 'Utiliser les mots-cl&eacute;s',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
+'intitule_licence' => 'Licence',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
