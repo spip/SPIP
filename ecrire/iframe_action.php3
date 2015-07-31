@@ -1,17 +1,18 @@
 <?php
-
 include ("inc.php3");
+@header("Cache-Control: no-store, no-cache, must-revalidate");
 echo "";
 
-if ($connect_statut == "0minirezo") {
+if (($id > 0) && ($connect_statut == "0minirezo")) {
 
 
 	#### OUH LA, il faudrait passer ca et les modifs des articles.php3 etc
 	#### dans un seul fichier, sinon toute modif faite ici doit etre reportee
 	#### la, et inversement : l'enfer
 
-	if ($action == 'statut_article' AND $id_article > 0) {
+	if ($action == 'statut_article') {
 
+		$id_article = $id;
 		$query = "SELECT statut FROM spip_articles WHERE id_article=$id_article";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
@@ -45,8 +46,9 @@ if ($connect_statut == "0minirezo") {
 		}
 	}
 
-	if ($action == 'statut_breve' AND $id_breve > 0) {
+	elseif ($action == 'statut_breve') {
 
+		$id_breve = $id;
 		$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
@@ -61,9 +63,5 @@ if ($connect_statut == "0minirezo") {
 			calculer_rubriques();
 		}
 	}
-
-}
-
-
-
+ }
 ?>
