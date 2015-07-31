@@ -184,7 +184,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 
 		spip_timer('rech');
 
-		# TODO : ici plutot charger un iterateur via l'API iterateurs
+		// TODO: ici plutot charger un iterateur via l'API iterateurs
 		include_spip('inc/recherche_to_array');
 		$to_array = charger_fonction('recherche_to_array', 'inc');
 		$results[$table] = $to_array($recherche,

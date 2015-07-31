@@ -29,8 +29,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @example
  *     install_fichier_connexion(_FILE_CONNECT_TMP, $contenu);
  * 
- * @internal
- *     [todo] Renommer cette fonction qui peut servir à d'autres utilisations ?
+ * @todo
+ *     Renommer cette fonction qui peut servir à d'autres utilisations ?
  * 
  * @param string $nom
  *     Chemin du fichier à créer

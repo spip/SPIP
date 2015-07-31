@@ -253,7 +253,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			reconstruire_image_intermediaire($fichier);
 		}
 	}
-	// todo: si une image png est nommee .jpg, le reconnaitre avec le bon $f
+	// TODO: si une image png est nommee .jpg, le reconnaitre avec le bon $f
 	$ret["fonction_imagecreatefrom"] = "_imagecreatefrom".$term_fonction;
 	$ret["fichier"] = $fichier;
 	$ret["fonction_image"] = "_image_image".$terminaison_dest;

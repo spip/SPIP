@@ -158,7 +158,7 @@ function rubrique_modifier($id_rubrique, $set=null) {
  * que si $confirme_deplace == 'oui', et change alors l'id_rubrique des
  * brèves en question
  * 
- * [todo] À déporter dans le plugin brèves via un pipeline ?
+ * @todo À déporter dans le plugin brèves via un pipeline ?
  *
  * @param int $id_rubrique
  *     Identifiant de la rubrique déplacée
