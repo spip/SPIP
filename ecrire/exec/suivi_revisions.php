@@ -62,18 +62,15 @@ else echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_auteur=$con
 
 echo "<p>";
 
-$query = "SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre");
 
 while ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	$titre = propre($row['titre']);
 	
-	$query_rub = "
-SELECT versions.*, articles.statut, articles.titre
+	$result_rub = spip_query("SELECT versions.*, articles.statut, articles.titre
 FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1";
-	$result_rub = spip_query($query_rub);
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 1");
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
 	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a>";
@@ -86,12 +83,10 @@ if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_a
 	foreach ($langues as $lang) {
 		$titre = traduire_nom_langue($lang);
 	
-		$query_lang = "
-SELECT versions.*
+		$result_lang = spip_query("SELECT versions.*
 FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 1";
-		$result_lang = spip_query($query_lang);
-		
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 1");
+
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
 		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a>";
 	}

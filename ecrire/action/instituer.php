@@ -69,13 +69,10 @@ function instituer_forum($arg) {
 	$id_messages = array($id_forum);
 	while ($id_messages) {
 		$id_messages = join(',', $id_messages);
-		$query_forum = "UPDATE spip_forum SET statut='$statut'
-		WHERE id_forum IN ($id_messages)";
-		$result_forum = spip_query($query_forum);
-		$query_forum = "SELECT id_forum FROM spip_forum
-		WHERE id_parent IN ($id_messages)";
-		$result_forum = spip_query($query_forum);
-		unset($id_messages);
+		spip_query("UPDATE spip_forum SET statut='$statut' WHERE id_forum IN ($id_messages)");
+
+		$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($id_messages)");
+		$id_messages = array();
 		while ($row = spip_fetch_array($result_forum))
 			$id_messages[] = $row['id_forum'];
 	}
@@ -94,8 +91,7 @@ function instituer_article($arg) {
 		}
 
 	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_articles SET statut='$statut',
-		date=NOW() WHERE id_article=$id_article");
+		spip_query("UPDATE spip_articles SET statut='$statut',	date=NOW() WHERE id_article=$id_article");
 
 		include_spip('inc/rubriques');
 		calculer_rubriques();
@@ -129,15 +125,14 @@ function instituer_breve($arg) {
 	list($id_breve, $statut) = split(' ', $arg);
 
 	$id_breve = intval($id_breve);
-	$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
-	$result = spip_query($query);
+	$result = spip_query("SELECT statut FROM spip_breves WHERE id_breve=$id_breve");
+
 	if ($row = spip_fetch_array($result)) {
 		$statut_ancien = $row['statut'];
 		}
 
 	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_breves SET date_heure=NOW(),
-		statut='$statut' WHERE id_breve=$id_breve");
+		spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve");
 
 		include_spip('inc/rubriques');
 		calculer_rubriques();

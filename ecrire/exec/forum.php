@@ -81,8 +81,7 @@ function exec_forum_dist()
 
   echo "<p align='left'>";
   $limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
-  $query_forum="SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit";
-  $result_forum = spip_query($query_forum);
+  $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit");
  
   afficher_forum($result_forum,$urlforum);
  

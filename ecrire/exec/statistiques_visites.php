@@ -49,8 +49,8 @@ function exec_statistiques_visites_dist()
 
 
 if ($id_article = intval($id_article)){
-	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article";
-	$result = spip_query($query);
+	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
+
 
 	if ($row = spip_fetch_array($result)) {
 		$titre = typo($row['titre']);
@@ -59,8 +59,8 @@ if ($id_article = intval($id_article)){
 	}
 } 
 else {
-	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites";
-	$result = spip_query($query);
+	$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
+
 
 	if ($row = spip_fetch_array($result)) {
 		$total_absolu = $row['total_absolu'];
@@ -113,16 +113,16 @@ else {
 	
 	// Par popularite
 	$articles_recents[] = "0";
-	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 10";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 10");
+
 	while ($row = spip_fetch_array($result)) {
 		$articles_recents[] = $row['id_article'];
 	}
 	$articles_recents = join($articles_recents, ",");
 		
 	// Par popularite
-	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC");
+
 
 	$nombre_articles = spip_num_rows($result);
 	if ($nombre_articles > 0) {
@@ -153,8 +153,8 @@ else {
 		$articles_vus = join($articles_vus, ",");
 			
 		// Par popularite
-		$query_suite = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC";
-		$result_suite = spip_query($query_suite);
+		$result_suite = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC");
+
 		
 		if (spip_num_rows($result_suite) > 0) {
 			echo "<br><br>[...]<br><br>";
@@ -184,8 +184,8 @@ else {
 
 
 	// Par visites depuis le debut
-	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30");
+
 		
 	if (spip_num_rows($result) > 0) {
 		creer_colonne_droite();
@@ -263,16 +263,13 @@ if (!$origine) {
 		$where = "0=0";
 	}
 	
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"WHERE $where ORDER BY date LIMIT 1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
+
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date";
-	$result=spip_query($query);
+	$result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
 
 	while ($row = spip_fetch_array($result)) {
 		$date = $row['date_unix'];
@@ -600,9 +597,9 @@ if (flag_svg()) {
 
 		echo "<div align='left'>";
 		///////// Affichage par mois
-		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table ".
-			"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date";
-		$result=spip_query($query);
+		$result=spip_query("SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table ".
+				   "WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date");
+
 		
 		$i = 0;
 		while ($row = spip_fetch_array($result)) {
