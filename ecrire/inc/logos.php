@@ -105,7 +105,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 		// imagemagick en ligne de commande
 		else if ($process == 'convert') {
-			define ('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y %src %dest');
+			define ('_CONVERT_COMMAND', 'convert -quality 85 -resize %xx%y! %src %dest');
 			$format = $formats_sortie[0];
 			$vignette = $destination.".".$format;
 			$commande = str_replace('%x', $destWidth, _CONVERT_COMMAND);
