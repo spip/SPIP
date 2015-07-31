@@ -37,6 +37,7 @@ $GLOBALS['spip_matrice']['image_decal_couleur_127'] = '';
 $GLOBALS['spip_matrice']['image_sepia'] = '';
 $GLOBALS['spip_matrice']['image_aplatir'] = '';
 $GLOBALS['spip_matrice']['image_couleur_extraire'] = '';
+$GLOBALS['spip_matrice']['image_select'] = '';
 
 
 $inc_filtres_images = _DIR_RESTREINT."inc/filtres_images.php"; # find_in_path('inc/filtres_images');

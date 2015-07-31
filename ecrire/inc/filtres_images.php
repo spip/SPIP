@@ -13,6 +13,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// selectionner les images qui vont subir une transformation sur un critere de taille
+// ls images exclues sont marquees d'une class no_image_filtrer qui bloque les filtres suivants
+// dans la fonction image_filtrer
+function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $height_max=1000){
+	if (!$img) return $img;
+	include_spip('inc/logos');
+	$src = extraire_attribut($img,'src');
+	list ($h,$l) = taille_image($src);
+	if ($l<$width_min OR $l>$width_max OR $h<$height_min OR $h>$height_max){
+		$class = extraire_attribut($img,'class');
+		if (strpos($class,'no_image_filtrer')===FALSE)
+			$class .= " no_image_filtrer";
+		$img = inserer_attribut($img,'class',$class);
+	}
+	return $img;
+}
+
 // Fonctions de traitement d'image
 // uniquement pour GD2
 // http://doc.spip.org/@image_valeurs_trans
