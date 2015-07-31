@@ -239,6 +239,10 @@ function interdire_scripts($source) {
 
 // Integration des images et documents
 function integre_image($id_document, $align, $type_aff = 'IMG') {
+	global $id_doublons;
+	
+	$id_doublons['documents'] .= ",$id_document";
+	
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
