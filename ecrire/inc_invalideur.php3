@@ -62,7 +62,7 @@ function retire_cache($cache) {
 	if (preg_match(
 	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 	$cache)) {
-		// supprimer le fichier (avec spip_flock)
+		// supprimer le fichier (de facon propre)
 		supprimer_fichier($cache);
 		// et le fichier compagnon s'il existe
 		@unlink($cache.'.NEW');

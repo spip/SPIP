@@ -127,29 +127,24 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 		// Le fichier cache est-il valide ?
 		$use_cache = utiliser_cache($chemin_cache, $delais);
 
-		// S'il faut calculer, poser un lock SQL
+		// Sinon, tester qu'on a la connexion a la base
 		if (!$use_cache) {
-			// Attendre 20 secondes maxi, que le copain ait
-			// calcule le meme fichier cache ou que
-			// l'invalideur ait fini de supprimer le fichier
-			$ok = spip_get_lock($chemin_cache, 20);
-			# ici mettre plutot du spip_flock ?
-			# avec le meme dans la partie invalideur ?
-
-			if (!$ok)
-				$use_cache = @file_exists($chemin_cache);
-
-			// Toujours rien ? La base est morte :-(
-			if (!$use_cache AND !$GLOBALS['db_ok']) {
-				spip_log("Erreur base de donnees &
-				impossible utiliser $chemin_cache");
-				if (!$GLOBALS['flag_preserver']) {
-					include_ecrire('inc_presentation.php3');
-					install_debut_html(_T('info_travaux_titre'));
-					echo "<p>"._T('titre_probleme_technique')."</p>\n";
-					install_fin_html();
+			include_ecrire('inc_connect.php3');
+			if (!$GLOBALS['db_ok']) {
+				if (@file_exists($chemin_cache)) {
+					$use_cache = true;
 				}
-				exit;
+				else {
+					spip_log("Erreur base de donnees & "
+						. "impossible utiliser $chemin_cache");
+					if (!$GLOBALS['flag_preserver']) {
+						include_ecrire('inc_presentation.php3');
+						install_debut_html(_T('info_travaux_titre'));
+						echo "<p>"._T('titre_probleme_technique')."</p>\n";
+						install_fin_html();
+					}
+					exit;
+				}
 			}
 		}
 	}

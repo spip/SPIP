@@ -5,88 +5,7 @@
 if (defined("_ECRIRE_INC_FLOCK")) return;
 define("_ECRIRE_INC_FLOCK", "1");
 
-// flock() marche dans ce repertoire <=> j'ai le droit de flock() sur ce fichier
-if (LOCK_UN!=3) {
-	define ('LOCK_SH', 1);
-	define ('LOCK_EX', 2);
-	define ('LOCK_UN', 3);
-	define ('LOCK_NB', 4);
-}
-
-function test_flock ($fichier, $ecriture = false) {
-	static $flock = array();
-	global $flag_flock;
-	if (!$flag_flock)
-		return false;
-
-	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
-	$dir = $match[1];
-	if ($dir == '')
-		return false;	// a la racine on ne fait que lire
-
-	// premier appel pour ce $dir ?
-	if (!isset($flock[$dir])) {
-		// si un fichier d'etat flock est la et pas trop vieux -- id est:
-		// pas recopie depuis une autre installation ! -- c'est ok.
-		if (@file_exists("$dir/.flock_ok")
-		AND (filemtime("$dir/.flock_ok") > time() - 3600))
-			$flock[$dir] = true;
-		else if (@file_exists("$dir/.flock_naze")
-		AND (filemtime("$dir/.flock_naze") > time() - 3600))
-			$flock[$dir] = false;
-
-		// pas d'infos de flock, on va tester
-		// MAIS attention on ne veut effectivement
-		// tester que les repertoires dans lesquels on ecrit
-		// Si on ne fait qu'y lire, pas necessaire (et pas
-		// forcement autorise)
-		else if ($ecrire) {
-			$fichiertest = $dir.'/'
-			.substr(uniqid(@getmypid(), true),-6).".tmp";
-			if ($fp = @fopen($fichiertest, 'w')) {
-				if (@flock($fp, LOCK_SH)) {
-					@flock($fp, LOCK_UN);
-					$flock[$dir] = true;
-					@touch("$dir/.flock_ok");
-					@unlink("$dir/.flock_naze");
-					@fclose($fp);
-					spip_log("test $dir: flock ok");
-				} else {
-					$flock[$dir] = false;
-					@touch("$dir/.flock_naze");
-					@unlink("$dir/.flock_ok");
-					spip_log("test $dir: flock naze");
-				}
-				@unlink($fichiertest);
-			} else {
-				spip_log("test $dir: echec du test sur $fichiertest !");
-				@touch("$dir/.flock_naze");
-				@unlink("$dir/.flock_ok");
-			}
-		} else
-			$flock[$dir] = false;
-	}
-
-	return $flock[$dir];
-}
-
-// Si flock ne marche pas dans ce repertoire ou chez cet hebergeur,
-// on renvoie OK pour ne pas bloquer
-function spip_flock($filehandle, $mode, $fichier, $ecriture = false) {
-	if (!test_flock($fichier, $ecriture))
-		return true;
-
-	$r = flock($filehandle, $mode);
-
-	// demande de verrou ==> risque de sleep ==> forcer la relecture de l'etat
-	if ($mode == LOCK_EX)
-		clearstatcache();
-
-	return $r;
-}
-
 function spip_file_get_contents ($fichier) {
-
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
 		AND $GLOBALS['os_serveur'] !='windows') # windows retourne ''
@@ -95,7 +14,6 @@ function spip_file_get_contents ($fichier) {
 			return join('', @file($fichier));
 	} else
 			return join('', @gzfile($fichier));
-	
 }
 
 // options = array(
@@ -111,7 +29,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 	if ($fl = @fopen($fichier, 'r')) {
 
 		// verrou lecture
-		while (!spip_flock($fl, LOCK_SH, $fichier));
+		@flock($fl, LOCK_SH);
 
 		// a-t-il ete supprime par le locker ?
 		if (!@file_exists($fichier)) {
@@ -123,7 +41,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 		$contenu = spip_file_get_contents($fichier);
 
 		// liberer le verrou
-		spip_flock($fl, LOCK_UN, $fichier);
+		@flock($fl, LOCK_UN);
 		@fclose($fl);
 
 		// Verifications
@@ -158,7 +76,7 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	// verrouiller le fichier destination
 	if ($fp = @fopen($fichier, 'a'))
-		while (!spip_flock($fp, LOCK_EX, $fichier, 'ecriture'));
+		@flock($fp, LOCK_EX);
 	else
 		return false;
 
@@ -176,7 +94,7 @@ function ecrire_fichier ($fichier, $contenu) {
 	#spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
 
 	// liberer le verrou et fermer le fichier
-	spip_flock($fp, LOCK_UN, $fichier);
+	@flock($fp, LOCK_UN);
 	@fclose($fp);
 
 	return $ok;
@@ -190,22 +108,17 @@ function supprimer_fichier($fichier) {
 		return;
 
 	// verrouiller le fichier destination
-	if ($flock = test_flock($fichier, 'ecriture')) {
-		if ($fp = @fopen($fichier, 'a'))
-			while (!spip_flock($fp, LOCK_EX, $fichier));
-		else
-			return;
-	}
+	if ($fp = @fopen($fichier, 'a'))
+		@flock($fp, LOCK_EX);
+	else
+		return;
 
 	// supprimer
 	@unlink($fichier);
-	
-	// liberer le verrou
-	if ($flock) {
-		spip_flock($fp, LOCK_UN, $fichier);
-		@fclose($fp);
-	}
 
+	// liberer le verrou
+	@flock($fp, LOCK_UN);
+	@fclose($fp);
 }
 
 ?>
