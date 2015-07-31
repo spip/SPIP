@@ -693,49 +693,34 @@ function spip_substr($c, $start=0, $length = NULL) {
 }
 
 // version manuelle de substr utf8, pour php vieux et/ou mal installe
-function spip_substr_manuelle($c, $start, $length) {
+function spip_substr_manuelle($c, $start, $length = NULL) {
 
-	// Cas vide
+	// Cas pathologique
 	if ($length === 0)
 		return '';
 
 	// S'il y a un demarrage, on se positionne
-	if ($start > 0) {
-		$d = spip_substr($c, 0, $start);
-		$c = substr($c, strlen($d));
-	}
-	if ($start < 0) {
-		$d = spip_substr($c, 0, $start);
-		$c = substr($c, -strlen($d));
-	}
+	if ($start > 0)
+		$c = substr($c, strlen(spip_substr_manuelle($c, 0, $start)));
+	elseif ($start < 0)
+		return spip_substr_manuelle($c, spip_strlen($c)+$start, $length);
 
-	// Pas de parametre length
 	if (!$length)
 		return $c;
 
 	if ($length > 0) {
-		// on prend 5 fois la longueur desiree, pour etre surs d'avoir tout
-		// (un caractere utf-8 prenant au maximum 5 bytes)
-		$c = substr($c, 0, 5*$length);
+		// on prend n fois la longueur desiree, pour etre surs d'avoir tout
+		// (un caractere utf-8 prenant au maximum n bytes)
+		$n = 0; while (preg_match(',[\x80-\xBF]{'.(++$n).'},', $c));
+		$c = substr($c, 0, $n*$length);
 		// puis, tant qu'on est trop long, on coupe...
 		while (($l = spip_strlen($c)) > $length)
 			$c = substr($c, 0, $length - $l);
 		return $c;
 	}
 
-	if ($length < 0) {
-		// on se prepare a enlever 5 fois la longueur desiree
-		$fin = substr($c, 5*$length);
-		// puis, tant qu'on est trop long, on reduit cette longueur...
-		while (($l = spip_strlen($fin)) > -$length) {
-			$fin = substr($fin, $length+$l);
-			// le premier car, s'il est tronque, ne doit pas compter
-			// pour 0 dans la spip_strlen()
-			$fin = preg_replace(',^[\x80-\xBF],S', 'x', $fin);
-		}
-		return substr($c, -strlen($fin));
-	}
-
+	// $length < 0
+	return spip_substr_manuelle($c, 0, spip_strlen($c)+$length);
 }
 
 // http://doc.spip.org/@spip_strlen
