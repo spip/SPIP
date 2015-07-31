@@ -11,15 +11,16 @@
 \***************************************************************************/
 
 
-	include("inc_version.php3");
+include("inc_version.php3");
 
-	// En-tetes
-	$lastmodified = @filemtime("spip_style.php3");
-	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-	if ($headers_only) exit;
+// En-tetes
 
+if (http_last_modified(@filemtime("spip_style.php3"), time() + 24 * 3600)) 
+	exit;
 
-	@Header ("Content-Type: text/css");
+// mettre absolument le charset :
+// Apache-AdvancedExtranetServer & FireFox s'entendent mal sinon
+	@Header ("Content-Type: text/css; charset=iso-8859-1");
 
 	// parano XSS
 	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
