@@ -117,9 +117,8 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	  . "<a href='$url_site' class='url_site'>$url_affichee</a>";
 
 	$type = 'site';
-	include_spip('public/assembler');
 	$contexte = array('id'=>$id_syndic,'id_rubrique'=>$id_rubrique);
-	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	$fond = evaluer_fond("prive/contenu/$type",$contexte);
 	// permettre aux plugin de faire des modifs ou des ajouts
 	$fond = pipeline('afficher_contenu_objet',
 			array(
@@ -127,7 +126,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 				'type'=>$type,
 				'id_objet'=>$id_syndic,
 				'contexte'=>$contexte),
-			'data'=> $fond));
+			'data'=> rtrim($fond['texte'])));
 	
 	$fond = "<div id='wysiwyg'>$fond</div>";
 

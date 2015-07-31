@@ -122,9 +122,8 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		. gros_titre($titre,'', false);
 
 	$type = 'breve';
-	include_spip('public/assembler');
 	$contexte = array('id'=>$id_breve,'id_rubrique'=>$id_rubrique);
-	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	$fond = evaluer_fond("prive/contenu/$type",$contexte);
 	// permettre aux plugin de faire des modifs ou des ajouts
 	$fond = pipeline('afficher_contenu_objet',
 			array(
@@ -132,7 +131,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 				'type'=>$type,
 				'id_objet'=>$id_breve,
 				'contexte'=>$contexte),
-			'data'=> $fond));
+			'data'=> rtrim($fond['texte'])));
 	
 	$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 

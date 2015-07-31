@@ -41,14 +41,24 @@ function exec_statistiques_visites_dist()
 		if (_request('format') != 'csv')
 			exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit);
 		else {
-			include_spip('public/assembler');
 			$t = str_replace('spip_', '', _request('table'));
 			$fond = 'prive/transmettre/'
 			  .  (strstr($t, 'visites') ? 'statistiques' : $t);
-			if (!$id_article)
-				$page = envoyer_page($fond, array());
-			else envoyer_page($fond . "_article", 
-				array('id_article' => $id_article));
+			$contexte = array();
+			if (!$id_article) {
+				$fond .= "_article"; 
+				$contexte['id_article'] = $id_article;
+			}
+			$parametrer = charger_fonction('parametrer', 'public');
+			$page = $parametrer($fond, $contexte);
+			if (!is_array($page['entetes'])) {
+			  include_spip('inc/headers');
+			  redirige_par_entete(generer_url_public('404'));
+			} else {
+				foreach ($page['entetes'] as $k => $v)
+				  header("$k: $v");
+				echo $page['texte'];
+			}
 		} 
 	}
 }

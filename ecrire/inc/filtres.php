@@ -1821,7 +1821,8 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		return $bloc_ancre;
 
 	if ($modele) $modele = '_'.$modele;
-	return recuperer_fond("modeles/pagination$modele", $pagination, true, $connect);
+	$res = evaluer_fond("modeles/pagination$modele", $pagination, $connect);
+	return rtrim($res['texte']);
 }
 
 // passer les url relatives a la css d'origine en url absolues
@@ -2236,11 +2237,13 @@ function http_style_background($img, $att='')
 function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	$texte = '';
 	if(is_array($balise_deserializee))
-		foreach($balise_deserializee as $k => $v)
-			$texte .= recuperer_fond(
+		foreach($balise_deserializee as $k => $v) {
+			$res = evaluer_fond(
 				'modeles/'.$modele,
 				array_merge(array('cle' => $k), (is_array($v) ? $v : array('valeur' => $v)))
 			);
+			$texte .= rtrim($res['texte']);
+		}
 	return $texte;
 }
 

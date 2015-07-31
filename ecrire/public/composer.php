@@ -103,6 +103,21 @@ function invalideur_session(&$Cache, $code=NULL) {
 // definissant leur balise ???
 //
 
+// fonction permettant de recuperer le resultat du calcul d'un squelette
+// pour une inclusion dans un flux, un modele etc
+// http://doc.spip.org/@recuperer_fond
+
+function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
+
+	$texte = "";
+	foreach(is_array($fond) ? $fond : array($fond) as $f){
+		$page = evaluer_fond($f, $contexte, $connect);
+		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
+	}
+
+	return $trim ? ltrim($texte) : $texte;
+}
+
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
 // remarquable, mais a conserver pour compatibilite ascendante.

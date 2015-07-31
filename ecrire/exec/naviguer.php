@@ -115,9 +115,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 	;
 
 	$type = 'rubrique';
-	include_spip('public/assembler');
 	$contexte = array('id'=>$id_rubrique,'id_rubrique'=>$id_rubrique);
-	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	$fond = evaluer_fond("prive/contenu/$type",$contexte);
 	// permettre aux plugin de faire des modifs ou des ajouts
 	$fond = pipeline('afficher_contenu_objet',
 			array(
@@ -125,7 +124,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 				'type'=>$type,
 				'id_objet'=>$id_rubrique,
 				'contexte'=>$contexte),
-			'data'=> $fond));
+			'data'=> rtrim($fond['texte'])));
 	
 	$onglet_contenu = "<div id='wysiwyg'>$fond</div>"
 		. (_INTERFACE_ONGLETS? $boucles:"");
