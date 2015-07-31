@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'C&#7853;p nh&#7853;t trang n&agrave;y',
 'alerte_maj_impossible' => '<b>B&aacute;o &#272;&#7897;ng!</b> Kh&ocirc;ng c&#7853;p nh&#7853;t database MySQL l&ecirc;n &#7845;n b&#7843;n @version@ &#273;&#432;&#7907;c, c&oacute; th&#7875; l&agrave;  v&igrave; kh&ocirc;ng &#273;&#7911; quy&#7873;n h&#7841;n. Xin li&ecirc;n l&#7841;c v&#7899;i ISP.',
 'analyse_xml' => 'Ph&acirc;n t&aacute;ch XML',
+'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng ph&#7843;i l&agrave; m&#7897;t h&#7891; s&#417; SPIP',
 'avis_archive_invalide' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng c&oacute; h&#7907;p l&yacute;',
 'avis_attention' => 'L&#431;U &Yacute;!',
