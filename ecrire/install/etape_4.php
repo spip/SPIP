@@ -43,6 +43,12 @@ function install_etape_4_dist()
 			_T('info_utilisation_spip')
 	);
 
+	// mettre a jour si necessaire l'adresse du site
+	// securite si on arrive plus a se loger
+	include_spip('inc/config');
+	set_request('adresse_site','');
+	appliquer_modifs_config();
+
 	// aller a la derniere etape qui clos l'install et redirige
 	$suite =  "\n<input type='hidden' name='etape' value='fin' />"
 	  . bouton_suivant(_T('login_espace_prive'));
