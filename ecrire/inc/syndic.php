@@ -62,9 +62,11 @@ function analyser_backend($rss, $url_syndic='') {
 	} else
 		$les_auteurs_du_site = '';
 
-	if (preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
-	$header, $match))
+	if (preg_match(',<([^>]*xml[:])?lang(uage)?'.'>([^<>]+)<,i', $header, $match))
 		$langue_du_site = $match[3];
+	// atom
+	elseif (preg_match(',<feed\s[^>]*xml:lang=[\'"]([^<>\'"]+)[\'"],i', $header, $match))
+		$langue_du_site = $match[1];
 
 	// Attention en PCRE 6.7 preg_match_all casse sur un backend avec de gros <content:encoded>
 	$items = preg_split(',<(item|entry)\b.*>,Uims', $rss);
@@ -361,10 +363,12 @@ function ajouter_tags($matches, $item) {
 		}
 		else if (
 			// cas atom1, a faire apres flickr
-			$scheme = extraire_attribut($match[0], 'scheme')
-			AND $term = extraire_attribut($match[0], 'term')
+			$term = extraire_attribut($match[0], 'term')
 		) {
+			if ($scheme = extraire_attribut($match[0], 'scheme'))
 				$url = suivre_lien($scheme,$term);
+			else
+				$url = $term;
 		}
 		else {
 			# type delicious.com
