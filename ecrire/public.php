@@ -48,10 +48,12 @@ if (defined("_INC_PUBLIC")) {
 	}
 
 	// est-on admin ?
-	if ($affiche_boutons_admin = ($_COOKIE['spip_admin'] 
-				      AND ($html OR ($var_mode == 'debug'))))
+	if ($affiche_boutons_admin = (
+	$_COOKIE['spip_admin'] 
+	AND ($html OR ($var_mode == 'debug'))
+	))
+		include_spip('inc-formulaire_admin');
 
-		include_local(find_in_path('inc-formulaire_admin'. _EXTENSION_PHP));
 	// Execution de la page calculee
 
 	// 1. Cas d'une page contenant uniquement du HTML :

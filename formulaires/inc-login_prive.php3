@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_local(find_in_path("inc-login_public" .  _EXTENSION_PHP));
+include_spip('inc-login_public');
 
 global $balise_LOGIN_PRIVE_collecte;
 $balise_LOGIN_PRIVE_collecte = array('url');

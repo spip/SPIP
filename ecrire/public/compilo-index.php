@@ -165,9 +165,8 @@ function calculer_balise($nom, $p) {
 
 	// regarder s'il existe un fichier d'inclusion au nom de la balise
 	// contenant une fonction balise_NOM_collecte
-	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
-	if ($file = find_in_path($file)) {
-		include_local($file);
+	$file = 'inc-' . strtolower($nom);
+	if (include_spip($file)) {
 		# une globale ?? defined ou function_exists(..._dyn) serait mieux ?
 		$f = $GLOBALS['balise_' . $nom . '_collecte'];
 		if (is_array($f)) {

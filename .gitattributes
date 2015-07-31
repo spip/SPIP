@@ -1,6 +1,7 @@
 * text=auto !eol
 IMG/logo_spip.jpg -text
 /INSTALL.txt -text
+/UPGRADE.txt -text
 dist/choix_mots.html -text
 dist/style_prive.html -text
 ecrire/action/autoriser.php -text
