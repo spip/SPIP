@@ -2024,20 +2024,16 @@ function calculer_texte($texte)
 		$fichier = $match[1];
 		ereg("^\{(.*)\}$", trim($match[2]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
-
-//		echo "<b>Inclusion fichier</b> <pre>$fichier</pre><p>";
-//		echo "<b>Param</b> <pre>$match[2]</pre><p>";
+		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
 		if ($params) {
 			// Traiter chaque parametre de contexte
 			$params = split("\}[[:space:]]*\{", $params[1]);
 			reset($params);
 			while (list(, $param) = each($params)) {
-//				echo "<b>Param</b> <pre>$param</pre><p>";
 				if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
 					$var = $args[1];
 					$val = $args[3];
-//					echo "<b>Var</b> <pre>$var</pre><p>";
 					if ($val) 
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
 					else
