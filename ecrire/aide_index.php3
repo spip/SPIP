@@ -1,5 +1,6 @@
 <?php
 
+define('_ECRIRE_AIDE', 1);
 include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
@@ -12,6 +13,7 @@ if ($headers_only) exit;
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_layer.php3");
 include_ecrire ("inc_texte.php3");
+
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (_FILE_CONNECT) {
