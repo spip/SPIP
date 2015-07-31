@@ -26,8 +26,8 @@ function assembler($fond, $connect='') {
 	$contexte = calculer_contexte();
 
 	$page = $fond .
-		preg_replace('/[?].*$/', '', 
-		preg_replace(',\.[a-zA-Z0-9]*$,', '', $GLOBALS['REQUEST_URI']));
+		preg_replace(',\.[a-zA-Z0-9]*$,', '', 
+		preg_replace('/[?].*$/', '', $GLOBALS['REQUEST_URI']));
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
@@ -560,8 +560,7 @@ function page_base_href(&$texte){
 		define('_SET_HTML_BASE',
 			$GLOBALS['profondeur_url'] >= (_DIR_RESTREINT?1:2)
 			AND _request(_SPIP_PAGE) !== 'login'
-			AND !_request('action')
-			AND !(preg_match(',^/~[^/]*/,',$_SERVER['REQUEST_URI']) AND $GLOBALS['profondeur_url']==1));
+			AND !_request('action'));
 
 	if (_SET_HTML_BASE
 	AND $GLOBALS['html']

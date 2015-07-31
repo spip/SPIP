@@ -248,6 +248,14 @@ function sql_showbase($spip=NULL, $serveur='', $option=true)
 	return $f($spip, $serveur, $option!==false);
 }
 
+function sql_alltable($spip=NULL, $serveur='', $option=true)
+{
+	$q = sql_showbase($spip, $serveur, $option);
+	$r = array();
+	if ($q) while ($t = sql_fetch($q)) { $r[] = array_shift($t);}
+	return $r;
+}
+
 // http://doc.spip.org/@sql_showtable
 function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 {
