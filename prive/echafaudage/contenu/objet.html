@@ -33,16 +33,16 @@
 		]
 	]
 
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,#OBJET,id,#ID_OBJET},data,'<div class="nettoyeur"></div>'}}
+
+	#BOITE_FERMER
+
 	#SET{enfants,''}
 	[(#OBJET|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
 		[(#SET{enfants,[(#INCLURE{fond=[prive/objets/contenu/(#OBJET)-enfants],id_objet,env})]})]
 	]
 	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET},data,#GET{enfants}})]})]
 
-
-	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,#OBJET,id,#ID_OBJET},data,'<div class="nettoyeur"></div>'}}
-
-	#BOITE_FERMER
 	[(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>
 	]
