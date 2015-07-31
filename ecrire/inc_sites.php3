@@ -232,47 +232,47 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		case "0.92" :
 		case "2.0" :
 			$syndic_regexp = array(
-				'item'           => '<item[>[:space:]]',
+				'item'           => ',<item[>[:space:]],i',
 				'itemfin'        => '</item>',
 				'link1'          => '<link[^>]*>([^<]*)</link>',
 				'link2'          => '(.*)',
-				'date1'          => '<pubDate>([^<]*)</pubDate>',
-				'date2'          => '<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>',
+				'date1'          => ',<pubDate>([^<]*)</pubDate>,Uims',
+				'date2'          => ',<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>,Uims',
 				'author1'        => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
 				'author2'        => '(.*)',
 				'authorbis'      => '<author>([^<]*)</author>',
-				'description'    => '<description[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</description[^>]*>',
-				'descriptionbis' =>     '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</content[^>]*>'
+				'description'    => ',<description[^>]*>(.*?)</description[^>]*>,ims',
+				'descriptionbis' =>     '<content[^>]*>(.*?)</content[^>]*>'
 			);
 			break;
 		case "1.0" :
 			$syndic_regexp = array(
-				'item'           => '<item[>[:space:]]',
+				'item'           => ',<item[>[:space:]],i',
 				'itemfin'        => '</item>',
 				'link1'          => '<link[^>]*>([^<]*)</link>',
 				'link2'          => '(.*)',
-				'date1'          => '<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>',
-				'date2'          => '<pubDate>([^<]*)</pubDate>',
+				'date1'          => ',<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>,Uims',
+				'date2'          => ',<pubDate>([^<]*)</pubDate>,Uims',
 				'author1'        => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
 				'author2'        => '(.*)',
 				'authorbis'      => '<author>([^<]*)</author>',
-				'description'    => '<description[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</description[^>]*>',
-				'descriptionbis' =>     '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</content[^>]*>'
+				'description'    => ',<description[^>]*>(.*?)</description[^>]*>,ims',
+				'descriptionbis' =>     ',<content[^>]*>(.*?)</content[^>]*>,ims'
 			);
 			break;
 		case "0.3" :
 			$syndic_regexp = array('channel'=>'<feed[^>]*>(.*)</feed>',
-				'item'           => '<entry[>[:space:]]',
+				'item'           => ',<entry[>[:space:]],i',
 				'itemfin'        => '</entry>',
 				'link1'          => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)/>',
 				'link2'          => 'href[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',
-				'date1'          => '<modified>([^<]*)</modified>',
-				'date2'          => '<issued>([^<]*)</issued>',
+				'date1'          => ',<modified>([^<]*)</modified>,Uims',
+				'date2'          => ',<issued>([^<]*)</issued>,Uims',
 				'author1'        => '<author>(.*<name>.*</name>.*)</author>',
 				'author2'        => '<name>([^<]*)</name>',
 				'authorbis'      => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
-				'description'    => '<summary[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(\]{2}>)?[[:space:]]*</summary[^>]*>',
-				'descriptionbis' => '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(\]{2}>)?[[:space:]]*</content[^>]*>'
+				'description'    => ',<summary[^>]*>(.*?)</summary[^>]*>,ims',
+				'descriptionbis' => ',<content[^>]*>(.*?)</content[^>]*>,ims'
 			);
 			break;
 		default :
@@ -282,56 +282,67 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			break;
 	}
 
-	// chercher un auteur dans le fil au cas ou les entry n'en auraient pas
-
 	if ($le_retour) {
-		list($channel_head,$drop) = split($syndic_regexp['item'], $le_retour, 2);
+		// Echapper les CDATA
+		if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $le_retour, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $n => $reg) {
+				$echappe_cdata[$n] = $reg[1];
+				$le_retour = str_replace($reg[0], "@@@SPIP_CDATA$n@@@",
+					$le_retour);
+			}
+		}
+
+		// chercher un auteur dans le fil au cas ou les entry n'en auraient pas
+		list($channel_head) = preg_split($syndic_regexp['item'], $le_retour, 2);
 		if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
 			if (ereg($syndic_regexp['author2'],$mat[1],$match))
 				$les_auteurs_du_site = $match[1];
-	}
-		$i = 0;
-		while (ereg($syndic_regexp['item'],$le_retour,$regs)) {
+		}
+
+
+		$items = array();
+		while (preg_match($syndic_regexp['item'],$le_retour,$regs)) {
 			$debut_item=strpos($le_retour,$regs[0]);
 			$fin_item=strpos($le_retour,$syndic_regexp['itemfin'])+strlen($syndic_regexp['itemfin']);
-			$item[$i]=substr($le_retour,$debut_item,$fin_item-$debut_item);
+			$items[]=substr($le_retour,$debut_item,$fin_item-$debut_item);
 
 			$debut_texte=substr($le_retour,"0",$debut_item);
 			$fin_texte=substr($le_retour,$fin_item,strlen($le_retour));
 			$le_retour=$debut_texte.$fin_texte;
-			$i++;
 		}
-		if (is_array($item)) {
+		if (count($items)) {
 			$now = time();
-			for ($i = 0 ; $i < count($item) ; $i++) {
+			foreach ($items as $item) {
+
+				$data = array();
 
 				// URL (obligatoire)
-				if (ereg($syndic_regexp['link1'],$item[$i],$match)) {
+				if (ereg($syndic_regexp['link1'],$item,$match)) {
 					$link_match = $match[1].$match[2];
 					if (ereg($syndic_regexp['link2'], $link_match, $mat))
-						$le_lien = addslashes(filtrer_entites($mat[1]));
+						$data['url'] = addslashes(filtrer_entites($mat[1]));
 				}
 				// guid n'est un URL que si marque de <guid permalink="true">
-				else if (eregi("<guid.*>([^<]*)</guid>",$item[$i],$match))
-					$le_lien = addslashes(filtrer_entites($match[1]));
+				else if (eregi("<guid.*>[[:space:]]*(https?:[^<]*)</guid>",$item,$match))
+					$data['url'] = addslashes(filtrer_entites($match[1]));
 				else continue;
 
 				// Titre (obligatoire)
 				if
-(ereg("<title>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</title>",$item[$i],$match))
-					$le_titre = addslashes(trim(supprimer_tags(filtrer_entites($match[2]))));
+(preg_match(",<title>(.*?)</title>,ims",$item,$match))
+					$data['titre'] = $match[1];
 				else if (($syndic_version==0.3) AND (strlen($letitre)==0))
 					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',$link_match,$mat))
-						$le_titre=$mat[1]; 
+						$data['titre']=$mat[1]; 
 				else continue;
 
 				// Date
 				$la_date = "";
-				if (ereg("<date>([^<]*)</date>",$item[$i],$match))
+				if (preg_match(",<date>([^<]*)</date>,Uims",$item,$match))
 					$la_date = $match[1];
-				if (ereg($syndic_regexp['date1'],$item[$i],$match))
+				if (preg_match($syndic_regexp['date1'],$item,$match))
 					$la_date = $match[1];
-				else if (ereg($syndic_regexp['date2'],$item[$i],$match))
+				else if (preg_match($syndic_regexp['date2'],$item,$match))
 					$la_date = $match[1];
 				if ($la_date) {
 					// http://www.w3.org/TR/NOTE-datetime
@@ -346,43 +357,56 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					$la_date = $now;
 
 				// Auteur
-				if (ereg($syndic_regexp['author1'],$item[$i],$mat)) {
+				if (ereg($syndic_regexp['author1'],$item,$mat)) {
 					if (ereg($syndic_regexp['author2'],$mat[1],$match))
-						$les_auteurs = $match[1];
+						$data['lesauteurs'] = $match[1];
 				}
-				else if (ereg($syndic_regexp['authorbis'],$item[$i],$match))
-					$les_auteurs = $match[1];
-				else $les_auteurs = $les_auteurs_du_site;
+				else if (ereg($syndic_regexp['authorbis'],$item,$match))
+					$data['lesauteurs'] = $match[1];
+				else $data['lesauteurs'] = $les_auteurs_du_site;
 
 				// Description
-				if (ereg($syndic_regexp['description'],$item[$i],$match)) {
-					$la_description = addslashes(couper(supprimer_tags(filtrer_entites($match[2])),300));
+				if (preg_match($syndic_regexp['description'],$item,$match)) {
+					$data['descriptif'] = $match[1];
 				}
-				else if (ereg($syndic_regexp['descriptionbis'],$item[$i],$match)) {
-					$la_description = addslashes(couper(supprimer_tags(filtrer_entites($match[2])),300));
-				} else $la_description = "";
+				else if (preg_match($syndic_regexp['descriptionbis'],$item,$match)) {
+					$data['descriptif'] = $match[1];
+				} else $data['descriptif'] = "";
+
+				// Nettoyer les donnees et remettre les CDATA en place
+				foreach ($data as $var => $val) {
+					$data[$var] = filtrer_entites($data[$var]);
+					foreach ($echappe_cdata as $n => $e)
+						$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
+					$data[$var] = trim(textebrut($data[$var]));
+					if ($var == 'descriptif')
+						$data[$var] = couper($data[$var], 300);
+				}
 
 				// Creer le lien s'il est nouveau - cle=(id_syndic,url)
-				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url='$le_lien' AND id_syndic=$now_id_syndic";
-				$result_deja = spip_query($query_deja);
-				if (spip_num_rows($result_deja) == 0 and !spip_sql_error()) {
+				$le_lien = addslashes($data['url']);
+				if (spip_num_rows(spip_query(
+					"SELECT * FROM spip_syndic_articles
+					WHERE url='".addslashes($data['url'])."'
+					AND id_syndic=$now_id_syndic"
+				)) == 0 and !spip_sql_error()) {
 					spip_query("INSERT INTO spip_syndic_articles
 					(id_syndic, url, date, statut) VALUES
-					('$now_id_syndic', '$le_lien', FROM_UNIXTIME($la_date), '$moderation')");
+					('$now_id_syndic', '$le_lien',
+					FROM_UNIXTIME($la_date), '$moderation')");
 					$flag_ajout_lien = true;
 				}
 
 				// Mise a jour du contenu (titre,auteurs,description)
-				$les_auteurs = addslashes(trim(supprimer_tags(filtrer_entites($les_auteurs))));
 				spip_query ("UPDATE spip_syndic_articles SET
-				titre='$le_titre',
-				lesauteurs='$les_auteurs',
-				descriptif='$la_description'
+				titre='".addslashes($data['titre'])."',
+				lesauteurs='".addslashes($data['lesauteurs'])."',
+				descriptif='".addslashes($data['descriptif'])."'
 				WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
 
 				// Honorer le <lastbuilddate> en forcant la date
 				if (preg_match(',<(lastbuilddate|modified)>([^<>]+)</\1>,i',
-				$item[$i], $regs)
+				$item, $regs)
 				AND $lastbuilddate = strtotime(trim($regs[2]))
 				// pas dans le futur
 				AND $lastbuilddate < time()) {
@@ -390,41 +414,9 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					SET date = FROM_UNIXTIME($lastbuilddate)
 					WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
 				}
+				
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
-		}
-		// syndication javascript : y a-t-il quelqu'un qui se sert de ce truc ??
-		// la question est posee
-		else if (ereg("document\.write", $le_retour)) {
-			$i = 0;
-			while ($i < 50 AND eregi("<a[[:space:]]+href[[:space:]]*=[[:space:]]*\"?([^\">]+)\"?[^>]*>(.*)",$le_retour,$reg)){ //"
-				$le_lien = addslashes(stripslashes($reg[1]));
-				$la_suite = $reg[2];
-
-				$pos_fin = strpos($la_suite, "</a");
-				$pos_fin2 = strpos($la_suite, "</A");
-				if ($pos_fin2 > $pos_fin) $pos_fin = $pos_fin2;
-
-				$le_titre = substr($la_suite, 0, $pos_fin);
-				$le_titre = addslashes(stripslashes($le_titre));
-				$le_titre = ereg_replace("<[^>]*>","",$le_titre);
-				$le_retour = substr($la_suite, $pos_fin + 4, strlen($le_retour));
-
-				echo "<li> $le_titre / $le_lien";
-
-				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
-
-				$query_deja="SELECT * FROM spip_syndic_articles WHERE url='$le_lien' AND id_syndic=$now_id_syndic";
-				$result_deja=spip_query($query_deja);
-				if (spip_num_rows($result_deja)==0){
-					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
-						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', '$la_date', '$les_auteurs', '$moderation', '$la_description')";
-					$result_syndic=spip_query($query_syndic);
-					$flag_ajout_lien = true;
-				}
-				$i++;
-			}
-			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 		}
 		else $erreur = _T('avis_echec_syndication_01');
 	}

@@ -123,7 +123,10 @@ function supprimer_numero($texte) {
 
 // Suppression basique et brutale de tous les <...>
 function supprimer_tags($texte, $rempl = "") {
-	return preg_replace(",<([^>\"']*|\"[^>\"]*\"|'[^>']*')*>,", $rempl, $texte);
+	$texte = preg_replace(",<([^>\"']*|\"[^>\"]*\"|'[^>']*')*>,", $rempl, $texte);
+	// ne pas oublier un < final non ferme
+	$texte = str_replace('<', ' ', $texte);
+	return $texte;
 }
 
 // Convertit les <...> en la version lisible en HTML
