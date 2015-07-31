@@ -1,0 +1,25 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_art(ARTICLES){id_article}{statut?}{tout}>
+#SET{auteurs,#LESAUTEURS}
+[(#VAL{info_propose_1}|_T{#ARRAY{nom_site_spip,#NOM_SITE_SPIP,titre,#TITRE}}|nettoyer_titre_email)]
+
+<:info_propose_2:>
+
+[(#VAL{info_propose_3}|_T{#ARRAY{titre,#TITRE}})]
+<:info_propose_4:>
+<:info_propose_5:>
+[(#ID_ARTICLE|generer_url_entite{article,'','',0})]
+
+[** (#TITRE) **][(#GET{auteurs}|oui)
+[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#GET{auteurs}}})]][
+(#VAL{date_fmt_nomjour_date}|_T{[(#ARRAY{'nomjour',[(#DATE|nom_jour)],'date',[(#DATE|affdate)]})]})]
+
+[(#CHAPO|concat{#TEXTE}|couper{700}|textebrut)]
+</BOUCLE_art>
+#FILTRE{supprimer_tags|filtrer_entites|trim}

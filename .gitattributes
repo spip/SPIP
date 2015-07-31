@@ -396,6 +396,13 @@ ecrire/maj/vieille_base/1927/serial.php -text
 ecrire/maj/vieille_base/1927/typedoc.php -text
 ecrire/maj/vieille_base/charger.php -text
 ecrire/maj/vieille_base/create.php -text
+ecrire/notifications/article_propose.html -text
+ecrire/notifications/article_publie.html -text
+ecrire/notifications/article_valide.html -text
+ecrire/notifications/forum_poste.html -text
+ecrire/notifications/forumposte.php -text
+ecrire/notifications/forumvalide.php -text
+ecrire/notifications/instituerarticle.php -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_nom_plugin.php -text
 ecrire/plugins/afficher_plugin.php -text
