@@ -258,7 +258,7 @@ function legender_auteur_voir($auteur, $redirect)
 		$ancre = "legender_auteur-$id_auteur";
 		$clic = _T("admin_modifier_auteur");
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&initial=0");
-		if ((_SPIP_AJAX == 1 ) AND !$redirect) {
+		if ((_SPIP_AJAX === 1 ) AND !$redirect) {
 		  $evt = "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		  $h = "<a\nhref='$h#$ancre'$evt>$clic</a>";
 		}

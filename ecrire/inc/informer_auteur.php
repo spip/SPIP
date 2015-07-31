@@ -26,7 +26,7 @@ function inc_informer_auteur_dist($id)
 	if ($row = spip_fetch_array($res)) {
 			$nom = typo(extraire_multi($row["nom"]));
 			$bio = propre($row["bio"]);
-			$mail = formater_auteur_mail($row['email']);
+			$mail = formater_auteur_mail($row['email'], $id);
 			$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_articles WHERE id_auteur=$id"));
 			if ($nb['n'] > 1)
 			$nb = $nb['n']."&nbsp;"._T('info_article_2');

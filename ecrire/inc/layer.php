@@ -32,7 +32,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 	$nom = 'Layer' . renomme_block($nom);
 
 	// initialement invisible, seulement si on sait rendre visible
-	if (!$visible AND (_SPIP_AJAX != -1))
+	if (!$visible AND (_SPIP_AJAX !== -1))
 		$visible = 'display:none;';
 	else 	$visible = 'display:block;';
 
@@ -72,7 +72,7 @@ function debut_block_invisible($nom_block){
 	if (!$browser_layer) return '';
 
 	// si on n'accepte pas js, ne pas fermer
-	if (_SPIP_AJAX == -1)
+	if (_SPIP_AJAX === -1)
 		return debut_block_visible($nom_block);
 
 	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
@@ -135,7 +135,7 @@ function produire_acceder_couche($couches, $nom, $icone) {
 
 	global $spip_lang_rtl;
 	// ne rien afficher si js desactive
-	if (_SPIP_AJAX == -1)
+	if (_SPIP_AJAX === -1)
 		return '';
 
 	$onclick = array();

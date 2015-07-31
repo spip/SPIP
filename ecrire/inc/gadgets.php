@@ -44,6 +44,7 @@ function extraire_article($id_p) {
 
 // http://doc.spip.org/@gen_liste_rubriques
 function gen_liste_rubriques() {
+
 	// ici, un petit fichier cache ne fait pas de mal
 	if (lire_fichier(_DIR_TMP.'cache-menu-rubriques.txt', $cache)
 	AND list($date,$GLOBALS['db_art_cache']) = @unserialize($cache)
@@ -478,7 +479,8 @@ function gadget_messagerie() {
 
 // http://doc.spip.org/@repercuter_gadgets
 function repercuter_gadgets($id_rubrique) {
-	if (_SPIP_AJAX == -1) return '';
+
+	if (_SPIP_AJAX === -1) return '';
 
 	$rub = $id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '';
 

@@ -39,7 +39,7 @@ function inc_formater_auteur_dist($id_auteur) {
 
 	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
 		$vals[]= '&nbsp;';
-	else	$vals[]= formater_auteur_mail($row['email']);
+	else	$vals[]= formater_auteur_mail($row['email'], $id_auteur);
 
 	if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
 		$bio_auteur = " title=\"$bio_auteur\"";
@@ -66,7 +66,7 @@ function inc_formater_auteur_dist($id_auteur) {
 }
 
 // http://doc.spip.org/@formater_auteur_mail
-function formater_auteur_mail($email)
+function formater_auteur_mail($email, $id_auteur)
 {
 	global $spip_lang_rtl;
 
