@@ -29,7 +29,7 @@ function inc_meta_dist()
 	// renouveller l'alea au besoin
 	if (test_espace_prive()
 	AND $GLOBALS['meta']
-	    AND (time() >/* _RENOUVELLE_ALEA + */ @$GLOBALS['meta']['alea_ephemere_date'])) {
+	    AND (time() > _RENOUVELLE_ALEA + @$GLOBALS['meta']['alea_ephemere_date'])) {
 	  // si on n'a pas l'acces en ecriture sur le cache,
 	  // ne pas renouveller l'alea sinon le cache devient faux
 		if (supprimer_fichier(_FILE_META)) {
