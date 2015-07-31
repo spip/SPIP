@@ -14,7 +14,7 @@ function bouton_admin($titre, $lien) {
 	$link = new Link($lien);
 	$link->delVar('submit');
 	echo $link->getForm('GET');
-	echo "<input type='submit' name='submit' value=\"".attribut_html($titre)."\" class='spip_bouton'>\n";
+	echo "<input type='submit' name='submit' value=\"".attribut_html($titre)."\" class='spip_bouton' />\n";
 	echo "</form>";
 }
 
@@ -53,7 +53,7 @@ function afficher_boutons_admin() {
 	echo $link->getForm('GET');
 	if ($GLOBALS['use_cache']) $pop = " *";
 	else $pop = "";
-	echo "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\">";
+	echo "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\"></input>";
 	echo "</form>\n";
 
 	if (lire_meta("activer_statistiques") != "non" AND $id_article AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
@@ -64,6 +64,7 @@ function afficher_boutons_admin() {
 	echo "</div>";
 
 	lang_dselect();
+	
 }
 
 
