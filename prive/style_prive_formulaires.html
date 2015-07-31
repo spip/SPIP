@@ -408,8 +408,31 @@ li.extra label,
 .formulaire_spip table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
 
+/* Formulaire compact */
 
+.formulaire_spip_compact ul li {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+}
 
+.formulaire_spip_compact label {
+	text-transform: none;
+	font-size: 90%;
+	color: #444444;
+	
+	padding-top: 2px;
+	padding-bottom: 7px;
+	padding-#GET{left}: 0px;
+	padding-#GET{right}: 0px;
+
+	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-compact-,#ENV{ltr},.gif})]) bottom [(#GET{left})] no-repeat;
+}
+.formulaire_spip_compact input, 
+.formulaire_spip_compact textarea {
+	font-size: 90%;
+	padding: 3px;
+}
 
 /* Bouton de validation */
 input[type="submit"] {
