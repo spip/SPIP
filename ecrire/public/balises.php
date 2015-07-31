@@ -1263,4 +1263,20 @@ function balise_PIPELINE_dist($p) {
 	return $p;
 }
 
+//
+// #TOTAL_UNIQUE
+// pour recuperer le nombre d'elements affiches par l'intermediaire du filtre
+// |unique
+// usage:
+// #TOTAL_UNIQUE afiche le nombre de #BALISE|unique
+// #TOTAL_UNIQUE{famille} afiche le nombre de #BALISE|unique{famille}
+//
+// http://doc.spip.org/@balise_TOTAL_UNIQUE_dist
+function balise_TOTAL_UNIQUE_dist($p) {
+	$_famille = interprete_argument_balise(1,$p);
+	$_famille = $_famille ? $_famille : "''";
+	$p->code = "unique('', $_famille, true)";
+	return $p;
+}
+
 ?>
