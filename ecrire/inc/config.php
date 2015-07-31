@@ -274,16 +274,19 @@ function effacer_config($cfg){
 
 function lister_configurer($exclure = array()){
 	return array();
+	
 	// lister les pages de config deja dans les menus
 	$deja = array();
 	foreach($exclure as $id=>$b) {
-		if ($b['url']!==$id AND !isset($exclure[$b['url']])) {
-			if(strncmp($b['url'],'configurer_',11)==0)
-				$deja[$b['url']] = $b;
-			elseif($b['url']=='configurer' AND preg_match(',cfg=([a-z0-9_]+),i',$b['args'],$match)) {
+		$url = ($b['url'] ? $b['url'] : $id);
+		if (!$b['url'] or !isset($exclure[$url])) {
+			if (strncmp($url,'configurer_',11)==0) {
+				$deja[$url] = $b;
+			} elseif($b['url']=='configurer' AND preg_match(',cfg=([a-z0-9_]+),i',$b['args'],$match)) {
 				$deja["configurer_".$match[1]] = $b;
 			}
 		}
+		
 	}
 	$exclure = $exclure + $deja;
 
@@ -295,38 +298,23 @@ function lister_configurer($exclure = array()){
 	// trouver toutes les pages configurer_xxx de l'espace prive
 	// et construire un tableau des entrees qui ne sont pas dans $deja
 	$pages = find_all_in_path("prive/squelettes/contenu/", "configurer_.*[.]"._EXTENSION_SQUELETTES.'$');
-	
+
 	foreach($pages as $page) {
 		$configurer = basename($page,"."._EXTENSION_SQUELETTES);
-		if (!isset($exclure[$configurer]))
+		if (!isset($exclure[$configurer])) {
 			$liste[$configurer] = array(
 					'parent' => 'bando_configuration',
 					'url' => $configurer,
 					'titre' => _T("configurer:{$configurer}_titre"),
 					'icone' => find_in_theme($i="images/{$configurer}-16.png")?$i:$icone_defaut,
 			);
+		}
 		$skels[$configurer] = $page;
 	}
 
 	// analyser la liste des $skels pour voir les #FORMULAIRE_CONFIGURER_ inclus
 	foreach($skels as $file) {
-		lire_fichier($file, $skel);
-		if (preg_match_all(",#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),", $skel, $matches,PREG_SET_ORDER)) {
-			$matches = array_map('end',$matches);
-			$matches = array_map('strtolower',$matches);
-			$forms = array_merge($forms,$matches);
-		}
-
-		// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
-		// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
-		$config = basename(substr($file,0,-strlen("."._EXTENSION_SQUELETTES)));
-		spip_log('Calcul de '."prive/squelettes/contenu/$config");
-		$fond = recuperer_fond("prive/squelettes/contenu/$config",array("exec"=>$config));
-		if (is_array($inputs = extraire_balises($fond,"input")))
-			foreach($inputs as $i)
-				if (extraire_attribut($i,'name')=='formulaire_action') {
-					$forms[] = ($c=extraire_attribut($i,'value'));
-				}
+		$forms = array_merge($forms, lister_formulaires_configurer($file));
 	}
 	$forms = array_flip($forms);
 
@@ -347,9 +335,48 @@ function lister_configurer($exclure = array()){
 			);
 	}
 
-
 	return $liste;
 }
+
+
+/**
+ * Retourne la liste des formulaires de configuration
+ * presents dans le fichier dont l'adresse est donnee 
+ *
+ * @param string $file adresse du fichier
+ * @return array liste des formulaires trouves
+**/
+function lister_formulaires_configurer($file) {
+	$forms = array();
+	
+	lire_fichier($file, $skel);
+	if (preg_match_all(",#FORMULAIRE_(CONFIGURER_[A-Z0-9_]*),", $skel, $matches,PREG_SET_ORDER)) {
+		$matches = array_map('end',$matches);
+		$matches = array_map('strtolower',$matches);
+		$forms = array_merge($forms,$matches);
+	}
+
+	// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
+	// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
+	$config = basename(substr($file,0,-strlen("."._EXTENSION_SQUELETTES)));
+	spip_log('Calcul de '."prive/squelettes/contenu/$config");
+	$fond = recuperer_fond("prive/squelettes/contenu/$config", array("exec" => $config));
+	
+	// passer dans le pipeline affiche_milieu pour que les plugins puissent ajouter leur formulaires...
+	// et donc que l'on puisse les referencer aussi !
+	$fond = pipeline('affiche_milieu', array('args'=>array("exec" => $config),'data'=>$fond));
+
+	// recuperer les noms des formulaires presents.
+	if (is_array($inputs = extraire_balises($fond,"input"))) {
+		foreach($inputs as $i) {
+			if (extraire_attribut($i,'name')=='formulaire_action') {
+				$forms[] = ($c=extraire_attribut($i,'value'));
+			}
+		}
+	}
+	return $forms;
+}
+
 
 // http://doc.spip.org/@liste_metas
 function liste_metas()
