@@ -90,7 +90,11 @@ function cvtmulti_recuperer_post_precedents($form){
 			if (!isset($store[$k]))
 				$_REQUEST[$k] = $store[$k] = $v;
 			// mais si tableau des deux cotes, on merge avec priorite a la derniere saisie
-			elseif(is_array($store[$k]) AND is_array($v))
+			elseif(is_array($store[$k])
+			  AND is_array($v)
+				AND !is_numeric(reset(array_keys($v)))
+				AND !is_numeric(reset(array_keys($store[$k])))
+				)
 				$_REQUEST[$k] = $store[$k] = array_merge($v,$store[$k]);
 
 		// vider pour eviter un second appel a verifier_n
