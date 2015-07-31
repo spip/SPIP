@@ -17,10 +17,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @staticvar string $filecache
  * @staticvar array $cache
- * @param string|array|false $plug
+ * @param string|array|bool $plug
  * @param bool $reload
  * @param string $dir
- * @return array 
+ * @return array
  */
 function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS){
 	static $cache='';
@@ -33,14 +33,19 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS)
 			$cache = unserialize($contenu);
 		}
 		if (!is_array($cache)) $cache = array();
-	} 
+	}
+
+	if (_VAR_MODE=='recalcul')
+		$reload = true;
 
 	if ($plug===false) {
 		ecrire_fichier($filecache, serialize($cache));
 		return $cache;
-	} elseif (is_string($plug)) {
+	}
+	elseif (is_string($plug)) {
 		$res = plugins_get_infos_un($plug, $reload, $dir, $cache);
-	} else  {
+	}
+	elseif (is_array($plug)) {
 		$res = false;
 		if (!$reload) $reload = -1;
 		foreach($plug as $nom)
