@@ -458,7 +458,7 @@ function unicode2charset($texte, $charset='AUTO') {
 /**
  * Importer un texte depuis un charset externe vers le charset du site
  *
- * Les caracteres non resolus sont transformes en &#123;
+ * Les caractères non resolus sont transformés en `&#123`;
  * 
  * @param string $texte
  *     Texte unicode à importer
@@ -850,9 +850,20 @@ function is_ascii($string) {
 	'', $string));
 }
 
-// Transcode une page (attrapee sur le web, ou un squelette) en essayant
-// par tous les moyens de deviner son charset (y compris headers HTTP)
-// http://doc.spip.org/@transcoder_page
+/**
+ * Transcode une page vers le charset du site
+ *
+ * Transcode une page (attrapée sur le web, ou un squelette) vers le
+ * charset du site en essayant par tous les moyens de deviner son charset
+ * (y compris dans les headers HTTP)
+ *
+ * @param string $texte
+ *     Page à transcoder, dont on souhaite découvrir son charset
+ * @param string $headers
+ *     Éventuels headers HTTP liés à cette page
+ * @return string
+ *     Texte transcodé dans le charset du site
+**/
 function transcoder_page($texte, $headers='') {
 
 	// Si tout est < 128 pas la peine d'aller plus loin
