@@ -35,19 +35,16 @@ function verifier_base() {
 			return false;
 
 		list($count) = mysql_fetch_row($result);
-		echo "($count &eacute;l&eacute;ment(s))\n";
+		if ($count)
+			echo "($count &eacute;l&eacute;ment".($count>1 ? 's':'').")\n";
+		else
+			echo "(vide)\n";
 
-		$ok = true;
-		$repare = false;
-		while ($row = mysql_fetch_row($result_repair)) {
-			if ($row[2] == 'error') $ok = false;
-			else if ($row[2] != 'status') $repare = true;
-		}
+		$row = mysql_fetch_row($result_repair);
+		$ok = ($row[3] == 'OK');
 
 		if (!$ok)
 			echo "<pre><font color='red'><b>".htmlentities(join("\n", $row))."</b></font></pre>\n";
-		else if ($repare)
-			echo " : <font color='green'><b>la table a &eacute;t&eacute; r&eacute;par&eacute;e</b></font>.<br>\n";
 		else
 			echo " : cette table est OK.<br>\n";
 
