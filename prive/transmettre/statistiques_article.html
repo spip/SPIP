@@ -1,9 +1,0 @@
-<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
-if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
-?><BOUCLE1(visites_articles){id_article ?}{par date}>[(#DATE|affdate{Y-m-d})],#VISITES
-</BOUCLE1>
-<?php
-} else {
-include_spip('inc/minipres'); 
-echo minipres();
-}?></BOUCLE0>

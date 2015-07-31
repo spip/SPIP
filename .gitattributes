@@ -1031,8 +1031,6 @@ prive/themes/spip/vieilles_def.css.html -text
 prive/transmettre.html -text
 prive/transmettre/forum_article.html -text
 prive/transmettre/signatures_article.html -text
-prive/transmettre/statistiques.html -text
-prive/transmettre/statistiques_article.html -text
 prive/vignettes/abw.png -text
 prive/vignettes/ai.png -text
 prive/vignettes/aiff.png -text
