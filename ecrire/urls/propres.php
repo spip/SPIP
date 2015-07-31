@@ -284,7 +284,7 @@ function _generer_url_complete($type, $id, $args='', $ancre='') {
 			$id_type = 'id_syndic';
 		else
 			$id_type = 'id_'.$type;
-		$url = get_spip_script('./')."?page=$type&$id_type=$id";
+		$url = get_spip_script('./')."?"._SPIP_PAGE."=$type&$id_type=$id";
 	}
 
 	// Ajouter les args

@@ -61,8 +61,8 @@ else {
 	else if (isset($fond)) { }
 
 	// page=xxxx demandee par l'url
-	else if (isset($_GET['page'])) {
-		$fond = $_GET['page'];
+	else if (isset($_GET[_SPIP_PAGE])) {
+		$fond = $_GET[_SPIP_PAGE];
 		// Securite
 		if (strstr($fond, '/')) {
 			include_spip('inc/minipres');

@@ -40,7 +40,7 @@ function generer_generer_url($type, $p)
 	} else {
 		$s = addslashes($s);
 		if ($type != 'document')
-			return "'./?page=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
+			return "'./?"._SPIP_PAGE."=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
 		else {
 			$u = "quete_meta('adresse_site', '$s')";
 			$d = "quete_meta('dir_img', '$s')";

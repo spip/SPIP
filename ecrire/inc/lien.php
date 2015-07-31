@@ -17,7 +17,7 @@ function inc_lien_dist($type,$id,$args,$ancre,$texte='',$pour='url',$connect='')
 	if ($connect) {
 		$id_type = ($type != 'site') ? "id_$type" : 'id_syndic';
 		$res = get_spip_script('./')
-		. "?page=$type&$id_type=$id&connect=$connect"
+		. "?"._SPIP_PAGE."=$type&$id_type=$id&connect=$connect"
 		. (!$args ? '' : "&$args");
 	} else {
 		charger_generer_url();

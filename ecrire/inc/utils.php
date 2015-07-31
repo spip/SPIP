@@ -858,7 +858,7 @@ function generer_url_public($script='', $args="", $no_entities=false, $rel=false
 
 	$action = get_spip_script();
 	if ($script)
-		$action = parametre_url($action, 'page', $script, '&');
+		$action = parametre_url($action, _SPIP_PAGE, $script, '&');
 
 	if ($args)
 		$action .=
@@ -875,7 +875,7 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 
 	$action = 'prive.php';
 	if ($script)
-		$action = parametre_url($action, 'page', $script, '&');
+		$action = parametre_url($action, _SPIP_PAGE, $script, '&');
 
 	if ($args)
 		$action .=
@@ -1129,6 +1129,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
 	// le script de l'espace public, alias  index.php
 	define('_SPIP_SCRIPT', 'spip.php');
+	// argument page, personalisable en cas de conflit avec un autre script
+	define('_SPIP_PAGE', 'page');
 
 	// le script de l'espace prive
 	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
