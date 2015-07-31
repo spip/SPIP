@@ -1,16 +1,15 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://trac.rezo.net/spip/spip/ecrire/lang/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Fran&ccedil;ais [fr]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
-
 
 // A
 'access_interface_graphique' => 'Retour &agrave; l\'interface graphique compl&egrave;te',
@@ -27,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analyse XML',
 'annuler' => 'Annuler',
 'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:',
+'articles_recents' => 'Articles les plus r&eacute;cents',
 'avis_archive_incorrect' => 'le fichier archive n\'est pas un fichier SPIP',
 'avis_archive_invalide' => 'le fichier archive n\'est pas valide',
 'avis_attention' => 'ATTENTION&nbsp;!',
@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Erreur SQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
@@ -73,7 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'T&eacute;l&eacute;charger',
 'bouton_valider' => 'Valider',
 
-
 // C
 'cal_apresmidi' => 'apr&egrave;s-midi',
 'cal_jour_entier' => 'jour entier',
@@ -85,8 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choix_interface' => 'choix  de l\'interface',
 'colonne' => 'Colonne',
 'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
-'correcte' => 'correcte',
-
+'correcte' => 'correcte', # chaine utilis&eacute;e dans le debugueur : "validation .. impossible" ou "validation .. correcte"
 
 // D
 'date_aujourdhui' => 'aujourd\'hui',
@@ -200,7 +197,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'double_occurrence' => 'Double occurrence',
 
-
 // E
 'entree_dimensions' => 'Dimensions&nbsp;:',
 'entree_titre_document' => 'Titre du document&nbsp;:',
@@ -209,7 +205,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Erreur',
 'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => 'erreur(s)',
-
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
@@ -259,7 +254,7 @@ sera rejet&eacute;e) :
 Merci de votre participation
 ',
 'form_pet_message_commentaire' => 'Un message, un commentaire&nbsp;?',
-'form_pet_nom_site2' => 'Nom de votre site Web',
+'form_pet_nom_site2' => 'Nom de votre site Web', # enlever le gras
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.',
 'form_pet_probleme_technique' => 'Probl&egrave;me technique, les signatures sont temporairement suspendues.',
 'form_pet_signature_pasprise' => 'Votre signature n\'est pas prise en compte.',
@@ -312,7 +307,6 @@ Merci de votre participation
 		d\'indiquer ci-dessous l\'identifiant personnel qui vous a
 		&eacute;t&eacute; fourni. Si vous n\'&ecirc;tes pas enregistr&eacute;, vous devez',
 'forum_vous_inscrire' => 'vous inscrire.',
-
 
 // I
 'ical_texte_rss_articles' => 'Le fichier &laquo;backend&raquo; des articles de ce site se trouve &agrave; l\'adresse:',
@@ -541,7 +535,6 @@ Merci de votre participation
 'infos_vos_pense_bete' => 'Vos pense-b&ecirc;te',
 'item_breve_proposee' => 'Br&egrave;ve propos&eacute;e',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
 'lien_afficher_texte_icones' => 'Afficher les icones et le texte',
@@ -594,17 +587,14 @@ Merci de votre participation
 'login_test_navigateur' => 'test navigateur/reconnexion',
 'login_verifiez_navigateur' => '(V&eacute;rifiez toutefois que votre navigateur n\'a pas m&eacute;moris&eacute; votre mot de passe...)',
 
-
 // M
-'masquer_trad' => 'masquer les traductions',
 'masquer_colonne' => 'Masquer cette colonne',
+'masquer_trad' => 'masquer les traductions',
 'module_fichiers_langues' => 'Fichiers de langue',
-
 
 // N
 'navigateur_pas_redirige' => 'Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 'numero' => 'Num&eacute;ro',
-
 
 // O
 'occurence' => 'Occurrence',
@@ -626,7 +616,6 @@ Merci de votre participation
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
 'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
-
 
 // P
 'pass_choix_pass' => 'Veuillez choisir votre nouveau mot de passe :',
@@ -673,10 +662,8 @@ et vous reconnecter au site.
 'previsualisation' => 'Pr&eacute;visualisation',
 'previsualiser' => 'Pr&eacute;visualiser',
 
-
 // R
 'retour' => 'Retour',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
@@ -685,7 +672,6 @@ et vous reconnecter au site.
 'squelette_ligne' => 'squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'suivant' => 'suivant',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
@@ -749,7 +735,6 @@ et vous reconnecter au site.
 'titre_titre_document' => 'Titre du document&nbsp;:',
 'trad_reference' => '(article de r&eacute;f&eacute;rence)',
 
-
 // U
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
@@ -759,11 +744,10 @@ et vous reconnecter au site.
 'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
 'upload_zip_titrer' => 'Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.',
 
-
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
-'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas',
+'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@',
 'zbug_boucle' => 'boucle',
 'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie',
 'zbug_calcul' => 'calcul',
@@ -771,9 +755,9 @@ et vous reconnecter au site.
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => 'externe interdit',
-'zbug_doublon_table_sans_index' => 'doublons sur une table sans index',
+'zbug_distant_interdit' => 'externe interdit', # Contexte : une base de donn&eacute;es "externe", pas g&eacute;r&eacute;e par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul probl&egrave;mes certaines manipulations sont interdites sur ces bases-l&agrave;.
 'zbug_doublon_table_sans_cle_primaire' => 'doublons sur une table sans clef primaire atomique',
+'zbug_doublon_table_sans_index' => 'doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag fermant manquant',
 'zbug_erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
@@ -808,8 +792,6 @@ et vous reconnecter au site.
 'zxml_valeur_attribut' => 'valeur de l\'attribut',
 'zxml_vide_balise' => 'balise vide',
 'zxml_vu' => 'vu auparavant'
-
 );
-
 
 ?>

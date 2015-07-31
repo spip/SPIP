@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-ro',
 '0_langue' => 'Rom&acirc;n&#259; [ro]',
 '0_liste' => 'spip-ro@rezo.net',
 '0_mainteneur' => 'vmurariu@gmail.com',
-
 
 // A
 'access_interface_graphique' => '&Icirc;ntoarcere la interfa&#355;a grafic&#259; complet&#259;',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analiz&#259; XML',
 'annuler' => 'Anula&#355;i',
 'antispam_champ_vide' => 'V&#259; rug&#259;m s&#259; l&#259;sa&#355;i acest c&acirc;mp gol&nbsp;:',
+'articles_recents' => 'Cele mai recente articole',
 'avis_archive_incorrect' => 'fi&#351;ierul arhiv&#259; nu este de tip SPIP',
 'avis_archive_invalide' => 'fi&#351;ierul arhiv&#259; nu este valid',
 'avis_attention' => 'Aten&#355;ie!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Eroare SQL',
 'avis_erreur_sauvegarde' => 'Eroare &icirc;n timpul salv&#259;rii (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Problem&#259; de acces &icirc;n sec&#355;iunea privat&#259;',
-
 
 // B
 'barre_a_accent_grave' => 'Insera&#355;i un A majuscul cu accent grav',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Desc&#259;rca&#355;i',
 'bouton_valider' => 'Valida&#355;i',
 
-
 // C
 'cal_apresmidi' => 'Dup&#259;-amiaz&#259;',
 'cal_jour_entier' => 'toat&#259; ziua',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Coloan&#259;',
 'confirm_changer_statut' => 'Aten&#355;ie, a&#355;i cerut schimbarea st&#259;rii acestui element. Dori&#355;i s&#259; continua&#355;i ?',
 'correcte' => 'corect&#259;',
-
 
 // D
 'date_aujourdhui' => 'ast&#259;zi',
@@ -200,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
 'double_occurrence' => 'Ocuren&#355;&#259; dubl&#259;',
 
-
 // E
 'entree_dimensions' => 'Dimensiuni&nbsp;:',
 'entree_titre_document' => 'Titlul documentului&nbsp;:',
@@ -209,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Eroare',
 'erreur_balise_non_fermee' => 'ultima baliz&#259; (tag) ne-&icirc;nchis&#259;:',
 'erreur_texte' => 'eroare(i)',
-
 
 // F
 'fichier_introuvable' => 'Fi&#351;ier @fichier@ de neg&#259;sit',
@@ -310,7 +307,6 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
   la acest forum, trebuie s&#259; v&#259; &icirc;nregistra&#355;i &icirc;n prealabil. V&#259; rug&#259;m s&#259; furniza&#355;i identificatorul personal care v-a fost furnizat.
   Dac&#259; nu sunte&#355;i deja &icirc;nregistrat, va trebui',
 'forum_vous_inscrire' => '&nbsp;s&#259; v&#259; &icirc;nscrie&#355;i.',
-
 
 // I
 'ical_texte_rss_articles' => 'Fi&#351;ierul &laquo;backend&raquo; al articolelor acestui site se g&#259;se&#351;te la adresa:',
@@ -538,7 +534,6 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'infos_vos_pense_bete' => 'Ciornele dumneavoastr&#259;',
 'item_breve_proposee' => '&#350;tire propus&#259;',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Afi&#351;a&#355;i doar iconi&#355;e',
 'lien_afficher_texte_icones' => 'Afi&#351;a&#355;i iconi&#355;e &#351;i text',
@@ -590,16 +585,13 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'login_test_navigateur' => 'test de navigator/reconectare',
 'login_verifiez_navigateur' => '(Verifica&#355;i totu&#351;i c&#259; navigatorul de web nu a memorat parola dumneavoastr&#259;...)',
 
-
 // M
 'masquer_trad' => 'masca&#355;i traducerile',
 'module_fichiers_langues' => 'Fi&#351;iere de limb&#259;',
 
-
 // N
 'navigateur_pas_redirige' => 'Dac&#259; navigatorul dumneavoastr&#259; nu este redirijat &icirc;n mod automatic, face&#355;i click aici pentru a continua.',
 'numero' => 'Num&#259;r',
-
 
 // O
 'occurence' => 'Ocuren&#355;&#259;',
@@ -621,7 +613,6 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'onglet_save_restaur_base' => 'Salva&#355;i/restaura&#355;i baza de date',
 'onglet_vider_cache' => 'Goli&#355;i memoria tampon',
 'ortho_trop_de_fautes2' => '&Icirc;ncepe&#355;i prin a corecta erorile cele mai evidente &#351;i re-&icirc;ncerca&#355;i dup&#259; aceea.',
-
 
 // P
 'pass_choix_pass' => 'V&#259; rug&#259;m s&#259; alege&#355;i noua dumneavoastr&#259; parol&#259; :',
@@ -665,10 +656,8 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'previsualisation' => 'pre-vizualizare',
 'previsualiser' => 'Pre-vizualizare',
 
-
 // R
 'retour' => 'Retur',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP consider&#259; acest document ca fiind conform cu DOCTYPE-ul s&#259;u: ',
@@ -677,7 +666,6 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'squelette_ligne' => 'schelet, linia',
 'stats_visites_et_popularite' => '@visites@ vizite&nbsp;; popularitate&nbsp;: @popularite@',
 'suivant' => 'urm&#259;torul',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
@@ -733,7 +721,6 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'titre_titre_document' => 'Titlul documentului:',
 'trad_reference' => '(articol de referin&#355;&#259;)',
 
-
 // U
 'upload_fichier_zip' => 'Fi&#351;ier ZIP',
 'upload_fichier_zip_texte' => 'Fi&#351;ierul pe care propune&#355;i spre instalare este un fi&#351;ier ZIP.',
@@ -741,7 +728,6 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'upload_limit' => 'Acest fi&#351;ier este prea mare pentru server&nbsp;; talia maximal&#259; autorizat&#259; &icirc;n directorul <i>upload</i> este de @max@.',
 'upload_zip_decompacter' => 'decomprimat &#351;i fiecare element con&#355;inut instalat pe site. Fi&#351;ierele care vor fi instalate pe site sunt&nbsp;:',
 'upload_zip_telquel' => 'instalat ca atare, ca arhiv&#259; comprimat&#259; ZIP&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: element B &icirc;nainte',
@@ -785,8 +771,6 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'zxml_valeur_attribut' => 'valoarea atributului',
 'zxml_vide_balise' => 'baliz&#259; (tag) vid&#259;',
 'zxml_vu' => 'v&#259;zut &icirc;nainte'
-
 );
-
 
 ?>

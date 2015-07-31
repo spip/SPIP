@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-it',
 '0_langue' => 'Italiana [it_fem]',
 '0_liste' => 'spip-it@rezo.net',
 '0_mainteneur' => 'fausto@nosmet.com',
-
 
 // A
 'access_interface_graphique' => 'Ritorna all\'interfaccia grafica completa',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analisi XML',
 'annuler' => 'Annulla',
 'antispam_champ_vide' => 'Si prega di lasciare vuoto questo campo:',
+'articles_recents' => 'Articoli pi&ugrave; recenti',
 'avis_archive_incorrect' => 'il file archivio non &egrave; un file SPIP',
 'avis_archive_invalide' => 'il file archivio non &egrave; valido',
 'avis_attention' => 'ATTENZIONE!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Errore SQL ',
 'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
 'avis_erreur_visiteur' => 'Problema di accesso all\'area riservata',
-
 
 // B
 'barre_a_accent_grave' => 'Inserire una A maiscola con accento grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Upload',
 'bouton_valider' => 'Invia',
 
-
 // C
 'cal_apresmidi' => 'pomeriggio',
 'cal_jour_entier' => 'giorno intero',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Colonna',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 'correcte' => 'corretto',
-
 
 // D
 'date_aujourdhui' => 'oggi',
@@ -200,7 +199,6 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 <p>Una volta attribuiti i permessi, si potr&agrave; ',
 'double_occurrence' => 'Doppia occorrenza',
 
-
 // E
 'entree_dimensions' => 'Dimensioni:',
 'entree_titre_document' => 'Titolo del documento:',
@@ -209,7 +207,6 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'erreur' => 'Errore',
 'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
 'erreur_texte' => 'errore/i',
-
 
 // F
 'fichier_introuvable' => 'File @fichier@ non trovato',
@@ -309,7 +306,6 @@ Grazie per la partecipazione',
 per partecipare a questo forum.  Indica qui sotto l\'ID personale
 che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'forum_vous_inscrire' => 'prima iscriverti.',
-
 
 // I
 'ical_texte_rss_articles' => 'Il file di "backend" degli articoli di questo sito si trova al seguente indirizzo:',
@@ -538,7 +534,6 @@ o contatta il tuo hoster.</font>',
 'infos_vos_pense_bete' => 'I tuoi memo',
 'item_breve_proposee' => 'Breve proposta',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Mostra solo le icone',
 'lien_afficher_texte_icones' => 'Mostra le icone e il testo',
@@ -590,16 +585,13 @@ devi attivare Javascript nel tuo browser e',
 'login_test_navigateur' => 'test browser/riconnessione',
 'login_verifiez_navigateur' => '(Verifica comunque se il tuo browser ha memorizzato la password...)',
 
-
 // M
 'masquer_trad' => 'nascondere le traduzioni',
 'module_fichiers_langues' => 'File lingua',
 
-
 // N
 'navigateur_pas_redirige' => 'Se la pagina non cambia automaticamente, cliccare qui per continuare.',
 'numero' => 'Numero',
-
 
 // O
 'occurence' => 'Occorrenza',
@@ -621,7 +613,6 @@ devi attivare Javascript nel tuo browser e',
 'onglet_save_restaur_base' => 'Salva/ripristina il database',
 'onglet_vider_cache' => 'Svuota la cache',
 'ortho_trop_de_fautes2' => 'Correggere gli errori pi&ugrave; evidenti e ricontrollare il testo in un secondo tempo.',
-
 
 // P
 'pass_choix_pass' => 'Inserisci una nuova password:',
@@ -665,10 +656,8 @@ e riconnetterti all\'area riservata.
 'previsualisation' => 'Anteprima',
 'previsualiser' => 'Visualizzare l\'anteprima',
 
-
 // R
 'retour' => 'Indietro',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP ritiene che questo documento &egrave; conforme al proprio DOCTYPE:',
@@ -677,7 +666,6 @@ e riconnetterti all\'area riservata.
 'squelette_ligne' => 'modello, linea',
 'stats_visites_et_popularite' => '@visites@ visite; popolarit&agrave;: @popularite@',
 'suivant' => 'successivo',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;Kb',
@@ -736,7 +724,6 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'titre_titre_document' => 'Titolo del documento:',
 'trad_reference' => '(articolo di riferimento)',
 
-
 // U
 'upload_fichier_zip' => 'File ZIP',
 'upload_fichier_zip_texte' => 'Il file proposto &egrave; un file ZIP.',
@@ -744,7 +731,6 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'upload_limit' => 'Questo file &egrave; troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> &egrave; di @max@.',
 'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',
 'upload_zip_telquel' => 'installato cos&igrave; com\'&egrave; in quanto archivio compresso Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',
@@ -788,8 +774,6 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'zxml_valeur_attribut' => 'valore dell\'attributo',
 'zxml_vide_balise' => 'tag vuoto',
 'zxml_vu' => 'visto in precedenza'
-
 );
-
 
 ?>

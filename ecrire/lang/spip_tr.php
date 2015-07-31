@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'T&uuml;rk&ccedil;e [tr]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'ender.ustungel@sj.k12.tr',
-
 
 // A
 'access_interface_graphique' => 'Tam grafik aray&uuml;ze geri d&ouml;n',
@@ -23,10 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; de&#287;i&#351;tir',
 'admin_recalculer' => 'Bu sayfay&#305; yeniden olu&#351;tur',
 'afficher_trad' => '&ccedil;evirileri listele',
-'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> MySQL veri taban&#305;n&#305;n @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkans&#305;z. Sorun veritaban&#305; de&#287;i&#351;tirme haklar&#305;ndan kaynaklan&#305;yor olabilir, l&uuml;tfen sitenizi bar&#305;nd&#305;ran &#351;irkete ba&#351;vurunuz.',
+'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> SQL veri taban&#305;n&#305;n @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkans&#305;z. Sorun veritaban&#305; de&#287;i&#351;tirme haklar&#305;ndan kaynaklan&#305;yor olabilir, l&uuml;tfen sitenizi bar&#305;nd&#305;ran &#351;irkete ba&#351;vurunuz.',
 'analyse_xml' => 'XML analizi',
 'annuler' => '&#304;ptal et',
 'antispam_champ_vide' => 'L&uuml;tfen bu alan&#305; bo&#351; b&#305;rak&#305;n&#305;z&nbsp;:',
+'articles_recents' => 'En yeni makaleler',
 'avis_archive_incorrect' => 'ar&#351;iv dosyas&#305; SPIP dosyas&#305; de&#287;il',
 'avis_archive_invalide' => 'bu ar&#351;iv dosyas&#305; ge&ccedil;erli de&#287;il',
 'avis_attention' => 'D&#304;KKAT&nbsp;!',
@@ -38,15 +40,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Ba&#287;lant&#305; hatas&#305;',
 'avis_erreur_cookie' => '&ccedil;erez sorunu',
 'avis_erreur_fonction_contexte' => 'Yaz&#305;l&#305;m hatas&#305;. Bu i&#351;lev bu bi&ccedil;imde kullan&#305;lmamal&#305;.',
-'avis_erreur_mysql' => 'MySQL hatas&#305;',
+'avis_erreur_mysql' => 'SQL hatas&#305;',
 'avis_erreur_sauvegarde' => 'Yedeklemede hata (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => '&Ouml;zel alana eri&#351;im sorunu',
-
 
 // B
 'barre_a_accent_grave' => 'A harfinin &uuml;st&uuml;ne aksan ekle (T&uuml;rk&ccedil;ede anlams&#305;z)',
 'barre_aide' => 'Sayfa d&uuml;zenini zenginle&#351;tirmek i&ccedil;in tipografik k&#305;sayollar&#305; kullan&#305;n&#305;z',
-'barre_aide_rac' => '-vide-',
 'barre_e_accent_aigu' => 'E harfinin &uuml;st&uuml;ne aksan ekle (T&uuml;rk&ccedil;e\'de anlams&#305;z)',
 'barre_eo' => 'T&uuml;rk&ccedil;e\'de anlams&#305;z',
 'barre_eo_maj' => 'T&uuml;rk&ccedil;e\'de anlams&#305;z',
@@ -74,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => '&#304;ndir',
 'bouton_valider' => 'Onayla',
 
-
 // C
 'cal_apresmidi' => '&ouml;&#287;leden sonra',
 'cal_jour_entier' => 'tam g&uuml;n',
@@ -87,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'S&uuml;tun',
 'confirm_changer_statut' => 'Dikkat, bu eleman&#305;n durumunu de&#287;i&#351;tirmek istediniz. Devam etmek istiyor musunuz ?',
 'correcte' => 'do&#287;ru',
-
 
 // D
 'date_aujourdhui' => 'bug&uuml;n',
@@ -199,7 +197,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Bu i&#351;lemi yapt&#305;&#287;&#305;n&#305;zda ',
 'double_occurrence' => '&Ccedil;ift tekrar ',
 
-
 // E
 'entree_dimensions' => 'Boyutlar&nbsp;:',
 'entree_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
@@ -208,7 +205,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Hata',
 'erreur_balise_non_fermee' => 'son etiket kapat&#305;lmam&#305;&#351; :',
 'erreur_texte' => 'hata(lar)',
-
 
 // F
 'fichier_introuvable' => '@fichier@ dosyas&#305; bulunamad&#305;',
@@ -311,7 +307,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
  E&#287;er kaydolmam&#305;&#351;san&#305;z, yapman&#305;z gereken',
 'forum_vous_inscrire' => '&ouml;nce kaydolmakt&#305;r.</a>',
 
-
 // I
 'ical_texte_rss_articles' => 'Makalelerin &laquo;backend&raquo; dosyas&#305; &#351;u adrestedir:',
 'ical_texte_rss_articles2' => 'Sitenin her bir b&ouml;l&uuml;m&uuml;n&uuml;n makaleleri i&ccedil;in &laquo;backend&raquo; dosyalar&#305; edinebilirsiniz :',
@@ -324,7 +319,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_auteurs' => 'Yazarlar',
 'icone_breves' => 'K&#305;sa haberler',
 'icone_brouteur' => 'H&#305;zl&#305; gezinti',
-'icone_calendrier_messagerie' => '-vide-',
 'icone_configuration_site' => 'Yap&#305;land&#305;rma',
 'icone_configurer_site' => 'Sitenizi yap&#305;land&#305;r&#305;n',
 'icone_creer_nouvel_auteur' => 'Yeni bir yazar olu&#351;tur',
@@ -335,19 +329,14 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'icone_doc_rubrique' => 'B&ouml;l&uuml;m belgeleri',
 'icone_ecrire_article' => 'Yeni bir makale yaz',
 'icone_edition_site' => 'Yay&#305;n',
-'icone_etat_traductions' => '-vide-',
-'icone_evolution_visites_2' => '-vide-',
 'icone_forum_administrateur' => 'Y&ouml;neticiler forumu',
-'icone_forum_interne' => '-vide-',
 'icone_forum_suivi' => 'Forum takibi',
-'icone_forums_petitions' => '-vide-',
 'icone_gestion_langues' => 'Dillerin y&ouml;netimi',
 'icone_informations_personnelles' => 'Ki&#351;isel bilgiler',
 'icone_interface_complet' => 'T&uuml;m aray&uuml;z',
 'icone_interface_simple' => 'Basit aray&uuml;z',
 'icone_maintenance_site' => 'Site bak&#305;m&#305;',
 'icone_messagerie_personnelle' => 'Ki&#351;isel iletiler',
-'icone_modifier_informations_personnelles' => '-vide-',
 'icone_mots_cles' => 'Anahtar s&ouml;zc&uuml;kler',
 'icone_nouvelle_breve' => 'Yeni bir k&#305;sa haber yaz',
 'icone_repartition_actuelle' => 'Mevcut da&#287;&#305;l&#305;m&#305; g&ouml;ster',
@@ -413,7 +402,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_creer_repertoire' => '&#350;u isimde bir dosya veya dizin olu&#351;turunuz&nbsp;:',
 'info_creer_repertoire_2' => '<b>@repertoire@</b> alt-dizini i&ccedil;erisinde, daha sonra&nbsp;:',
 'info_creer_vignette' => 'otomatik ikon olu&#351;turma',
-'info_dans_espace_prive' => '-vide-',
 'info_deplier' => 'A&ccedil;&#305;l&#305;p sergilenmesi',
 'info_descriptif_nombre' => 'tan&#305;mlay&#305;c&#305;(lar) :',
 'info_description' => 'Tan&#305;mlama&nbsp;:',
@@ -429,8 +417,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_email_invalide' => 'Ge&ccedil;ersiz e-posta adresi.',
 'info_en_cours_validation' => 'Yaz&#305;lmakta olan makaleleriniz',
 'info_en_ligne' => '&#350;u anda &ccedil;evrimi&ccedil;i&nbsp;:',
-'info_en_test_1' => '-vide-',
-'info_en_test_2' => '-vide-',
 'info_envoyer_message_prive' => 'Bu yazara &ouml;zel bir ileti g&ouml;nder',
 'info_erreur_requete' => 'Aramada hata :',
 'info_erreur_squelette2' => 'Hi&ccedil;bir @fichier@ iskeleti m&uuml;sait de&#287;il...',
@@ -461,14 +447,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_l_article' => 'makale',
 'info_la_breve' => 'k&#305;sa haber',
 'info_la_rubrique' => 'b&ouml;l&uuml;m',
-'info_langue_defaut' => '-vide-',
-'info_langue_interface' => '-vide-',
 'info_langue_principale' => 'Sitenin ana dili',
-'info_langues_proposees' => '-vide-',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ piksel',
 'info_les_auteurs_1' => 'yazan @les_auteurs@ ',
-'info_lettre_heures' => '-vide-',
-'info_lien' => '-vide-',
 'info_logo_format_interdit' => 'Sadece @formats@ format&#305;ndaki logolar kullan&#305;labilir.',
 'info_logo_max_poids' => 'Logolar @maxi@ dan daha k&uuml;&ccedil;&uuml;k olmal&#305;d&#305;r (bu dosyan&#305;n boyutu  @actuel@).',
 'info_logo_max_taille' => 'Logolar @maxi@ dan daha k&uuml;&ccedil;&uuml;k olmal&#305;d&#305;r (bu dosyan&#305;n boyutu  @actuel@).',
@@ -480,14 +461,13 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_mois_courant' => 'Ay i&ccedil;inde :',
 'info_mot_cle_ajoute' => '&#350;u anahtar s&ouml;zc&uuml;k eklendi > ',
 'info_multi_herit' => 'Varsay&#305;lan dil :',
-'info_multi_langues_soulignees' => '<u>Alt&#305; &ccedil;izili dillerin</u> aray&uuml;zdeki t&uuml;m metinlerin &ccedil;evirileri mevcuttur. Bu dilleri se&ccedil;erseniz, kamu sitesinin bir &ccedil;ok eleman&#305; (tarihler, formlar) otomatik olarak &ccedil;evrilecektir. Alt&#305; &ccedil;izili olmayan diller i&ccedil;in ise bu elemanlar sitenin ba&#351;l&#305;ca dilinde g&ouml;r&uuml;nt&uuml;lenecektir.',
+'info_multi_langues_soulignees' => '<u>Alt&#305; &ccedil;izili dillerin</u> aray&uuml;zde t&uuml;m metinlerin &ccedil;evirileri bulunmaktad&#305;r. Bu dilleri se&ccedil;erseniz, kamu sitesinin bir &ccedil;ok eleman&#305; (tarihler, formlar) otomatik olarak &ccedil;evrilecektir. Alt&#305; &ccedil;izili olmayan diller i&ccedil;in ise bu elemanlar sitenin ba&#351;l&#305;ca dilinde g&ouml;r&uuml;nt&uuml;lenecektir.',
 'info_multilinguisme' => '&Ccedil;ok dillilik',
 'info_nom_non_utilisateurs_connectes' => 'Ba&#287;l&#305; kullan&#305;c&#305;lar listesinde isminiz g&ouml;r&uuml;nm&uuml;yor.',
 'info_nom_utilisateurs_connectes' => 'Ba&#287;l&#305; kullan&#305;c&#305;lar listesinde isminiz g&ouml;r&uuml;n&uuml;yor.',
 'info_nombre_en_ligne' => '&#350;u anda &ccedil;evrimi&ccedil;i :',
 'info_non_resultat' => '"@cherche_mot@" i&ccedil;in hi&ccedil; sonu&ccedil; yok',
 'info_non_utilisation_messagerie' => 'Bu sitenin i&ccedil; ileti sistemini kullanm&#305;yorsunuz.',
-'info_nouveau' => '-vide-',
 'info_nouveau_message' => 'YEN&#304; B&#304;R &#304;LET&#304;N&#304;Z VAR',
 'info_nouveaux_messages' => '@total_messages@ YEN&#304; MESAJINIZ VAR',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
@@ -512,11 +492,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_publie_1' => '[@nom_site_spip@] YAYINLANDI : @titre@',
 'info_publie_2' => 'Yay&#305;nlanan makale
 -----------------',
-'info_question_referers' => '-vide-',
 'info_rechercher' => 'Ara',
 'info_rechercher_02' => 'Ara&nbsp;:',
 'info_remplacer_vignette' => 'Varsay&#305;lan etiketi ki&#351;iselle&#351;tirilmi&#351; bir logo ile de&#287;i&#351;tir&nbsp;:',
-'info_remplacer_vignette_defaut' => '-vide-',
 'info_retablir_lien' => 'Bu ba&#287;lant&#305;y&#305; tekrar kur',
 'info_retirer_mot' => 'Bu anahtar s&ouml;zc&uuml;&#287;&uuml; geri al',
 'info_retirer_mots' => 'T&uuml;m anahtar s&ouml;zc&uuml;kleri geri al',
@@ -530,7 +508,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_site_refuse' => 'Web sitesi reddedildi',
 'info_sites_referencer' => 'Bir siteye at&#305;fta bulun',
 'info_supprimer_vignette' => 'Bu etiketi sil',
-'info_sur_site_public' => '-vide-',
 'info_symbole_bleu' => '<b>Mavi</b> sembol bir <b>hat&#305;rlatmay&#305;</b> g&ouml;sterir : yani, ki&#351;isel kullan&#305;m&#305;n&#305;z i&ccedil;in bir iletidir.',
 'info_symbole_jaune' => '<b>Sar&#305;</b> sembol <b>t&uuml;m edit&ouml;rlere y&ouml;nelik</b> bir duyuruyu g&ouml;sterir&nbsp;: t&uuml;m y&ouml;neticiler taraf&#305;ndan de&#287;i&#351;tirilebilir ve t&uuml;m edit&ouml;rler taraf&#305;ndan g&ouml;r&uuml;lebilir. ',
 'info_symbole_vert' => 'Sar&#305; sembol sitenin ba&#351;ka kullan&#305;c&#305;lar&#305;yla yap&#305;lan ileti al&#305;&#351;veri&#351;lerini g&ouml;sterir.',
@@ -539,10 +516,8 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_telecharger' => 'Bilgisayar&#305;n&#305;zdan indiriniz :',
 'info_telecharger_nouveau_logo' => 'Yeni bir logo y&uuml;kle&nbsp;:',
 'info_telecharger_ordinateur' => 'Bilgisayar&#305;n&#305;zdan indiriniz&nbsp;:',
-'info_tous_redacteur' => '-vide-',
 'info_tous_resultats_enregistres' => '[t&uuml;m sonu&ccedil;lar kaydedildi]',
 'info_tout_afficher' => 'T&uuml;m&uuml;n&uuml; g&ouml;r&uuml;nt&uuml;le',
-'info_tout_site1' => '-vide-',
 'info_travaux_texte' => 'Bu site hen&uuml;z konfig&uuml;re edilmedi. L&uuml;tfen daha sonra u&#287;ray&#305;n&#305;z.',
 'info_travaux_titre' => 'Site yap&#305;m a&#351;amas&#305;nda.',
 'info_trop_resultat' => ' "@cherche_mot@" i&ccedil;in &ccedil;ok fazla sonu&ccedil; &ccedil;&#305;kt&#305;; l&uuml;tfen aramay&#305; netle&#351;tirin.',
@@ -556,16 +531,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_vos_rendez_vous' => '&#304;lerideki randevular&#305;n&#305;z',
 'info_zoom' => 'yak&#305;nla&#351;t&#305;r',
 'infos_vos_pense_bete' => 'Hat&#305;rlatmalar&#305;n&#305;z',
-'item_administrateur' => '-vide-',
 'item_breve_proposee' => '&Ouml;nerilen k&#305;sa haber',
-'item_efface' => '-vide-',
-'item_gerer_referers' => '-vide-',
-'item_non_gerer_referers' => '-vide-',
-'item_non_utiliser_moteur_recherche_forum' => '-vide-',
-'item_premier' => '-vide-',
-'item_redacteur' => '-vide-',
-'item_utiliser_moteur_recherche_forum' => '-vide-',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Sadece ikonlar&#305; g&ouml;r&uuml;nt&uuml;le',
@@ -574,7 +540,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'lien_icones_interface' => 'Aray&uuml;z ikonlar&#305; <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a> adresinden al&#305;nm&#305;&#351;t&#305;r.',
 'lien_liberer' => 'Serbest b&#305;rak',
 'lien_liberer_tous' => 'Bu makaleleri serbest b&#305;rak',
-'lien_modifer_date' => '-vide-',
 'lien_nouvea_pense_bete' => 'YEN&#304; HATIRLATMA',
 'lien_nouveau_message' => 'YEN&#304; &#304;LET&#304;',
 'lien_nouvelle_annonce' => 'YEN&#304; DUYURU',
@@ -582,27 +547,22 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'lien_popularite' => 'Pop&uuml;lerlik : @popularite@%',
 'lien_racine_site' => 'S&#304;TEN&#304;N K&Ouml;K D&#304;Z&#304;N&#304;',
 'lien_reessayer' => 'Tekrar dene',
-'lien_rendez_vous' => '-vide-',
-'lien_rendez_vous_02' => '-vide-',
 'lien_repondre_message' => 'Bu iletiye yan&#305;t ver',
 'lien_supprimer' => 'Sil',
-'lien_test_format_image' => '-vide-',
 'lien_tout_afficher' => 'T&uuml;m&uuml;n&uuml; g&ouml;r&uuml;nt&uuml;le',
 'lien_visite_site' => 'Bu siteyi ziyaret et',
 'lien_visites' => '@visites@&nbsp;ziyaret',
 'lien_voir_auteur' => 'Bu yazar&#305; g&ouml;r&uuml;nt&uuml;le',
 'ligne' => 'Sat&#305;r',
-'lnfo_liens' => '-vide-',
+'login' => 'Ba&#287;lant&#305;',
 'login_acces_prive' => '&Ouml;zel alana eri&#351;im',
 'login_autre_identifiant' => 'Ba&#351;ka bir kullan&#305;c&#305; ismi ile ba&#287;lan',
-'login_connexion_refusee' => 'Ba&#287;lant&#305; reddedildi',
 'login_cookie_accepte' => 'L&uuml;tfen gezgininizi (en az&#305;ndan bu site i&ccedil;in) bunlar&#305; kabul edecek bi&ccedil;imde ayarlay&#305;n&#305;z.',
 'login_cookie_oblige' => 'Kendinizi g&uuml;venli bir &#351;ekilde tan&#305;mlamak i&ccedil;in &ccedil;erezleri kabul etmelisiniz.',
 'login_deconnexion_ok' => 'Ba&#287;lant&#305;ya son verildi.',
 'login_erreur_pass' => '&#350;ifre hatas&#305;.',
 'login_espace_prive' => '&Ouml;zel alan',
 'login_identifiant_inconnu' => '"@login@" kullan&#305;c&#305; ismi tan&#305;nm&#305;yor.',
-'login_identification' => '-vide-',
 'login_login' => 'Kullan&#305;c&#305; ismi :',
 'login_login2' => 'Kullan&#305;c&#305; ismi&nbsp;:',
 'login_login_pass_incorrect' => '(Kullan&#305;c&#305; ismi veya &#351;ifre hatal&#305;.)',
@@ -624,33 +584,24 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'login_test_navigateur' => 'Gezgini dene / Tekrar ba&#287;lan',
 'login_verifiez_navigateur' => '(Ancak gezginin &#351;ifrenizi belle&#287;e almad&#305;&#287;&#305;ndan emin olunuz...)',
 
-
 // M
 'masquer_trad' => '&ccedil;evirileri gizle',
 'module_fichiers_langues' => 'Dil dosyalar&#305;',
-
 
 // N
 'navigateur_pas_redirige' => 'Gezgininiz yeniden y&ouml;nlenmiyorsa, devam etmek i&ccedil;in buraya t&#305;klay&#305;n&#305;z.',
 'numero' => 'Numara',
 
-
 // O
 'occurence' => 'Tekrarlan&#305;&#351;',
 'onglet_affacer_base' => 'Veritaban&#305;n&#305; sil',
-'onglet_agenda' => '-vide-',
 'onglet_auteur' => 'Yazar',
-'onglet_bilan_traductions' => '-vide-',
-'onglet_calendrier' => '-vide-',
 'onglet_contenu_site' => 'Sitenin i&ccedil;eri&#287;i',
-'onglet_detail_traductions' => '-vide-',
 'onglet_evolution_visite_mod' => 'Ziyaretlerin geli&#351;imi',
 'onglet_fonctions_avances' => 'Geli&#351;mi&#351; i&#351;levler',
 'onglet_informations_personnelles' => 'Ki&#351;isel bilgi',
 'onglet_interactivite' => 'Etkile&#351;im &ouml;zelli&#287;i',
-'onglet_langues' => '-vide-',
 'onglet_messagerie' => '&#304;leti sistemi',
-'onglet_messagerie_personnelle' => '-vide-',
 'onglet_messages_internes' => '&#304;&ccedil; iletiler',
 'onglet_messages_publics' => 'Kamu iletileri',
 'onglet_messages_vide' => 'Metinsiz iletiler',
@@ -661,7 +612,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'onglet_save_restaur_base' => 'Veritaban&#305;n&#305; yedekle / Geri y&uuml;kle',
 'onglet_vider_cache' => '&Ouml;nbelle&#287;i bo&#351;alt',
 'ortho_trop_de_fautes2' => '&Ouml;nce bariz hatalar&#305; d&uuml;zeltiniz sonra tekrar deneyiniz. ',
-
 
 // P
 'pass_choix_pass' => 'L&uuml;tfen yeni &#351;ifrenizi se&ccedil;iniz :',
@@ -706,10 +656,8 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'previsualisation' => '&Ouml;ng&ouml;r&uuml;nt&uuml;le',
 'previsualiser' => '&Ouml;ng&ouml;r&uuml;nt&uuml;le',
 
-
 // R
 'retour' => 'Geri d&ouml;n',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP bu belgeyi DOCTYPE\'e uygun buluyor :',
@@ -719,7 +667,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'stats_visites_et_popularite' => '@visites@ ziyaret; pop&uuml;lerlik : @popularite@',
 'suivant' => 'sonraki',
 
-
 // T
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
@@ -727,8 +674,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'texte_actualite_site_1' => 'Aray&uuml;ze al&#305;&#351;&#305;nca &laquo;',
 'texte_actualite_site_2' => 'T&uuml;m aray&uuml;z',
 'texte_actualite_site_3' => '&raquo;\'e t&#305;klayarak daha fazla se&ccedil;ene&#287;e ula&#351;abilirsiniz.',
-'texte_bilan_traductions' => '-vide-',
-'texte_choix_langue_defaut' => '-vide-',
 'texte_creation_automatique_vignette' => 'Bu sitede &ouml;ng&ouml;r&uuml;nt&uuml;leme ikonlar&#305;n&#305;n otomatik olarak yarat&#305;lmas&#305; &ccedil;al&#305;&#351;&#305;r durumdad&#305;r. E&#287;er bu formdan hareket ederek @gd_formats@, formatl&#305; resimler y&uuml;klerseniz, bunlara, en fazla @taille_preview@&nbsp;piksel boyutunda bir ikon e&#351;lik edecektir.',
 'texte_documents_associes' => 'A&#351;a&#287;&#305;daki belgeler makale ile ba&#287;lant&#305;l&#305; olup,
     do&#287;rudan makalenin i&ccedil;ine dahil edilmemi&#351;tir. Kamu sitesinin sayfa d&uuml;zenine g&ouml;re,
@@ -742,18 +687,12 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'texte_inc_meta_1' => 'Sistem <code>@fichier@</code> dosyas&#305;n&#305;n yaz&#305;lmas&#305; s&#305;ras&#305;nda bir hata ile kar&#351;&#305;la&#351;t&#305;. L&uuml;tfen, site y&ouml;neticisi olarak ',
 'texte_inc_meta_2' => '(<code>ecrire/data/</code> dizinindeki) ',
 'texte_inc_meta_3' => '<code>@repertoire@</code> dizinindeki yazma haklar&#305;n&#305; kontrol ediniz. ',
-'texte_plan_trad' => '-vide-',
-'texte_plan_trad_en_cours' => '-vide-',
-'texte_plan_trad_modif' => '-vide-',
-'texte_plan_trad_note' => '-vide-',
 'texte_statut_en_cours_redaction' => 'Yaz&#305;lmakta',
 'texte_statut_poubelle' => '&Ccedil;&ouml;pe',
 'texte_statut_propose_evaluation' => 'De&#287;erlendirmeye al&#305;nd&#305;',
 'texte_statut_publie' => '&Ccedil;evrimi&ccedil;i yay&#305;nland&#305;',
 'texte_statut_refuse' => 'Reddedildi',
 'titre_ajouter_mot_cle' => 'B&#304;R ANAHTAR S&Ouml;ZC&Uuml;K EKLE :',
-'titre_articles_populaires' => '-vide-',
-'titre_articles_visites' => '-vide-',
 'titre_breve_proposee' => '&Ouml;nerilen k&#305;sa haber',
 'titre_breve_publiee' => 'Yay&#305;nlanan k&#305;sa haber',
 'titre_breve_refusee' => 'Reddedilen k&#305;sa haber',
@@ -770,14 +709,11 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'titre_joindre_document' => 'B&#304;R BELGE EKLE',
 'titre_liens_entrants' => 'Giren ba&#287;lant&#305;lar',
 'titre_mots_cles' => 'ANAHTAR S&Ouml;ZC&Uuml;KLER',
-'titre_page_admin_vider' => '-vide-',
-'titre_page_etat_traductions' => '-vide-',
-'titre_probleme_technique' => 'Dikkat&nbsp;: teknik bir problem (MySQL hizmet birimi) sitenin bu b&ouml;l&uuml;m&uuml;ne eri&#351;imi engelliyor. Anlay&#305;&#351;&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler.',
+'titre_probleme_technique' => 'Dikkat&nbsp;: teknik bir sorun (SQL hizmet birimi) sitenin bu b&ouml;l&uuml;m&uuml;ne eri&#351;imi engelliyor. Anlay&#305;&#351;&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler.',
 'titre_publier_document' => 'BU B&Ouml;L&Uuml;M ALTINDA B&#304;R BELGE YAYINLA',
 'titre_statistiques' => 'Site istatistikleri',
 'titre_titre_document' => 'Belge ba&#351;l&#305;&#287;&#305;&nbsp;:',
 'trad_reference' => '(referans makale)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP dosya',
@@ -786,7 +722,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'upload_limit' => 'Bu dosya sunucuya g&ouml;re fazla b&uuml;y&uuml;k&nbsp;; y&uuml;klenmesine izin verilen en b&uuml;y&uuml;k dosya : <i>@max@</i>.',
 'upload_zip_decompacter' => 'A&ccedil;&#305;ld&#305; ve i&ccedil;erdi&#287;i t&uuml;m elemanlar siteye kuruldu. Siteye kurulacak dosyalar &#351;unlar&nbsp;:',
 'upload_zip_telquel' => 'S&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; ZIP ar&#351;ivi olarak, oldu&#287;u gibi kurulmu&#351;&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B etiketinde sorun var',
@@ -830,8 +765,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'zxml_valeur_attribut' => '&ouml;zniteli&#287;in de&#287;eri',
 'zxml_vide_balise' => 'bo&#351; etiket',
 'zxml_vu' => '&ouml;nceden g&ouml;r&uuml;len'
-
 );
-
 
 ?>

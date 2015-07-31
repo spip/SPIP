@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'English [en]',
 '0_liste' => 'spip-en@rezo.net',
 '0_mainteneur' => 'George Kandalaft (george@diwanalarab.com)',
-
 
 // A
 'access_interface_graphique' => 'Back to the complete graphical interface',
@@ -22,11 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modify this keyword',
 'admin_modifier_rubrique' => 'Modify this section',
 'admin_recalculer' => 'Refresh this page',
-'afficher_trad' => 'show tranlsations',
+'afficher_trad' => 'show translations',
 'alerte_maj_impossible' => '<b>Warning!</b> Failed to update the SQL database to version @version@. This may be due to a permissions problem on the database. Please contact your ISP.',
 'analyse_xml' => 'XML parsing',
 'annuler' => 'Cancel',
 'antispam_champ_vide' => 'Please leave this field empty:',
+'articles_recents' => 'The most recent articles',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',
 'avis_attention' => 'CAUTION!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'SQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Problem entering the private area',
-
 
 // B
 'barre_a_accent_grave' => 'Insert a capital A with grave accent',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Upload',
 'bouton_valider' => 'Submit',
 
-
 // C
 'cal_apresmidi' => 'afternoon (p.m.)',
 'cal_jour_entier' => 'entire day',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Column',
 'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
 'correcte' => 'correct',
-
 
 // D
 'date_aujourdhui' => 'today',
@@ -200,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Once you have done this, you can ',
 'double_occurrence' => 'Two instances',
 
-
 // E
 'entree_dimensions' => 'Size:',
 'entree_titre_document' => 'Document title:',
@@ -209,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'last tag not closed:',
 'erreur_texte' => 'error(s)',
-
 
 // F
 'fichier_introuvable' => 'File not found: @fichier@',
@@ -310,7 +307,6 @@ Thank you for your participation!
 		for entering the personal identifier
 		supplied to you. If you are not already registered, you must',
 'forum_vous_inscrire' => 'register.',
-
 
 // I
 'ical_texte_rss_articles' => 'The address of the backend file of the site\'s articles is:',
@@ -511,7 +507,7 @@ Thank you for your participation!
 'info_site_attente' => 'Web site pending validation',
 'info_site_reference' => 'Referenced sites online',
 'info_site_refuse' => 'Web site rejected',
-'info_sites_referencer' => 'Referencing a site',
+'info_sites_referencer' => 'Reference a site',
 'info_supprimer_vignette' => 'delete the vignette',
 'info_symbole_bleu' => 'A <b>blue</b> symbol indicates a <b>memo</b>: i.e. a message for your personal use.',
 'info_symbole_jaune' => 'A <b>yellow</b> symbol indicates an <b>announcement to all editors</b>: it can be edited by all administrators, and is visible to all editors.',
@@ -537,7 +533,6 @@ Thank you for your participation!
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Your memos',
 'item_breve_proposee' => 'News item submitted',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Show icons only',
@@ -591,16 +586,13 @@ Thank you for your participation!
 'login_test_navigateur' => 'testing browser/reconnection',
 'login_verifiez_navigateur' => '(However, verify that your browser did not memorize your password...)',
 
-
 // M
 'masquer_trad' => 'hide translations',
 'module_fichiers_langues' => 'Language files',
 
-
 // N
 'navigateur_pas_redirige' => 'If your browser is not redirected, click here to continue.',
 'numero' => 'Number',
-
 
 // O
 'occurence' => 'Instance',
@@ -622,7 +614,6 @@ Thank you for your participation!
 'onglet_save_restaur_base' => 'Backup/restore the database',
 'onglet_vider_cache' => 'Empty the cache',
 'ortho_trop_de_fautes2' => 'Start by correcting the most obvious mistakes, then try again.',
-
 
 // P
 'pass_choix_pass' => 'Please choose your new password:',
@@ -668,10 +659,8 @@ and connect again to the site.
 'previsualisation' => 'Preview',
 'previsualiser' => 'Show preview',
 
-
 // R
 'retour' => 'Return',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:',
@@ -680,7 +669,6 @@ and connect again to the site.
 'squelette_ligne' => 'template, line',
 'stats_visites_et_popularite' => '@visites@ visits; popularity: @popularite@',
 'suivant' => 'next',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -742,7 +730,6 @@ and connect again to the site.
 'titre_titre_document' => 'Document title:',
 'trad_reference' => '(reference article)',
 
-
 // U
 'upload_fichier_zip' => 'ZIP file',
 'upload_fichier_zip_texte' => 'The file you are intending to install is a ZIP file.',
@@ -750,7 +737,6 @@ and connect again to the site.
 'upload_limit' => 'This file is too big for the server; the maximum size allowed for <i>upload</i> is @max@.',
 'upload_zip_decompacter' => 'decompressed and each file it contains will be installed on the site. The files which will be installed are:',
 'upload_zip_telquel' => 'installed as is, as a ZIP file;',
-
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
@@ -794,8 +780,6 @@ and connect again to the site.
 'zxml_valeur_attribut' => 'attribute value',
 'zxml_vide_balise' => 'empty tag',
 'zxml_vu' => 'seen before'
-
 );
-
 
 ?>

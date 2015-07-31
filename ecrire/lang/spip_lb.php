@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-lb',
 '0_langue' => 'L&euml;tzebuergesch [lb]',
 '0_liste' => 'spip-lb@rezo.net',
 '0_mainteneur' => 'jim.wanderscheid bei gmail Punkt com',
-
 
 // A
 'access_interface_graphique' => 'Zer&euml;ck bei de kompletten graph&euml;schen Interface',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'XML-Analyse',
 'annuler' => 'Ofbriechen',
 'antispam_champ_vide' => 'Loosst d&euml;st Feld eidel:',
+'articles_recents' => 'D&eacute;i rezent Artikelen',
 'avis_archive_incorrect' => 'de Backup-Fichier ass kee SPIP-Fichier',
 'avis_archive_invalide' => 'de Backup-Fichier ass ong&uuml;lteg',
 'avis_attention' => 'OPGEPASST!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'SQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler am Backup (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Zougangs-Problem zum privaten Deel',
-
 
 // B
 'barre_a_accent_grave' => 'E groussen A accent grave af&uuml;gen',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Eroplueden',
 'bouton_valider' => 'Valid&eacute;ieren',
 
-
 // C
 'cal_apresmidi' => 'Nom&euml;tteg',
 'cal_jour_entier' => 'Ganzen Dag',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Kolonn',
 'confirm_changer_statut' => 'Opgepasst, dir w&euml;llt de Status vun d&euml;sem Element &auml;nneren. W&euml;llt dir weiderfueren?',
 'correcte' => 'richteg',
-
 
 // D
 'date_aujourdhui' => 'haut',
@@ -200,7 +199,6 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 <p>Wann dat gemaach ass, da k&euml;nnt dier ',
 'double_occurrence' => 'K&euml;nnt duebel fir',
 
-
 // E
 'entree_dimensions' => 'Gr&eacute;issten:',
 'entree_titre_document' => 'Titel vum Dokument:',
@@ -209,7 +207,6 @@ D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'L&auml;schten Tag deen n&euml;t zou ass:',
 'erreur_texte' => 'Fehler(en)',
-
 
 // F
 'fichier_introuvable' => 'De Fichier @fichier@ kann n&euml;t font ginn',
@@ -306,7 +303,6 @@ Merci fir &auml;r Participatioun
 'forum_votre_nom' => '&Auml;re Numm (oder Pseudo):',
 'forum_vous_enregistrer' => 'Fir bei d&euml;sem Forum matzemaachen, muss dir Iech fir d\'&eacute;ischt umelden. Gidd hei &auml;r pers&eacute;inlech Identifikatioun un d&eacute;i der krut. Wann dir n&euml;t ugemelt sidd, da musst dir',
 'forum_vous_inscrire' => 'Iech aschreiwen.',
-
 
 // I
 'ical_texte_rss_articles' => 'De "Backend"-Fichier vun den Artikelen vun d&euml;sem Site ass op d&euml;r Adress:',
@@ -532,7 +528,6 @@ oder kontakt&eacute;iert &auml;re Provider.</span>',
 'infos_vos_pense_bete' => '&Auml;r Notizen',
 'item_breve_proposee' => 'Propos&eacute;iert Kuerzmeldung',
 
-
 // L
 'lien_afficher_icones_seuls' => 'N&euml;mmen d\'Ikonen weisen',
 'lien_afficher_texte_icones' => 'D\'Ikonen an d\'Texter weisen',
@@ -583,16 +578,13 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'login_test_navigateur' => 'Browser/Login-Test',
 'login_verifiez_navigateur' => '(Kontroll&eacute;iert op &auml;re Browser d\'Passwuert n&euml;t gesp&auml;ichert huet...)',
 
-
 // M
 'masquer_trad' => 'Iwersetzungen verstoppen',
 'module_fichiers_langues' => 'Sprooche-Fichier\'en',
 
-
 // N
 'navigateur_pas_redirige' => 'Wann &auml;re Browser n&euml;t weider geleed g&euml;tt, da klickt hei.',
 'numero' => 'Nummer',
-
 
 // O
 'occurence' => 'K&euml;nnt fir',
@@ -614,7 +606,6 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'onglet_save_restaur_base' => 'Datebank sp&auml;icheren/restaur&eacute;ieren',
 'onglet_vider_cache' => 'Cache l&auml;schen',
 'ortho_trop_de_fautes2' => 'Verbessert d&eacute;i einfachst Fehler a prob&eacute;iert nach eng K&eacute;ier.',
-
 
 // P
 'pass_choix_pass' => 'Wielt &auml;rt neit Passwuert:',
@@ -652,10 +643,8 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 'previsualisation' => 'Pr&eacute;visualisatioun',
 'previsualiser' => 'Pr&eacute;visualis&eacute;ieren',
 
-
 // R
 'retour' => 'Zer&euml;ck',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP h&euml;lt d&euml;st Dokument als konform zu s&euml;ngem DOCTYPE un:',
@@ -664,7 +653,6 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 'squelette_ligne' => 'Skelett, Zeil',
 'stats_visites_et_popularite' => '@visites@ Visiten; Popularit&eacute;it: @popularite@',
 'suivant' => 'Weider',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kB',
@@ -715,7 +703,6 @@ Versicht',
 'titre_titre_document' => 'Titel vum Dokument:',
 'trad_reference' => '(Referenz-Artikel)',
 
-
 // U
 'upload_fichier_zip' => 'ZIP-Fichier',
 'upload_fichier_zip_texte' => 'De Fichier deen d&euml;r install&eacute;ieren w&euml;llt ass en Zip-Fichier.',
@@ -723,7 +710,6 @@ Versicht',
 'upload_limit' => 'D&euml;se Fichier ass ze grouss fir de Server; d&eacute;i maximal Gr&eacute;isst fir <i>eropzelueden</i> ass @max@.',
 'upload_zip_decompacter' => 'de-komprim&eacute;iert an all Element um Site install&eacute;iert. D\'Fichier\'en d&eacute;i dann um Site install&eacute;iert ginn sinn:',
 'upload_zip_telquel' => 'esou w&eacute;i en ass, als komprim&eacute;ierten Zip-Archiv install&eacute;iert;',
-
 
 // Z
 'zbug_balise_b_aval' => ': B-Tag dr&euml;nner',
@@ -767,8 +753,6 @@ Versicht',
 'zxml_valeur_attribut' => 'Valeur vum Attribut',
 'zxml_vide_balise' => 'Eidelen Tag',
 'zxml_vu' => 'virdru gesinn'
-
 );
-
 
 ?>

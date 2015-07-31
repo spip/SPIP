@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Vi&#7879;t Nam [vi]',
 '0_liste' => 'spip-vi@rezo.net',
 '0_mainteneur' => 'daoduyp@libertysurf.fr',
-
 
 // A
 'access_interface_graphique' => 'Tr&#7903; l&#7841;i giao di&#7879;n &#7843;nh ',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Ph&acirc;n t&aacute;ch XML',
 'annuler' => 'Xo&aacute;',
 'antispam_champ_vide' => '&#272;&#7875; tr&#7889;ng &ocirc; n&agrave;y:',
+'articles_recents' => 'Nh&#7919;ng b&agrave;i m&#7899;i nh&#7845;t',
 'avis_archive_incorrect' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng ph&#7843;i l&agrave; m&#7897;t h&#7891; s&#417; SPIP',
 'avis_archive_invalide' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng c&oacute; h&#7907;p l&yacute;',
 'avis_attention' => 'L&#431;U &Yacute;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'C&oacute; L&#7895;i-SQL',
 'avis_erreur_sauvegarde' => 'L&#7895;i trong backup (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => '<NEW>Problem entering the private area',
-
 
 // B
 'barre_a_accent_grave' => '&#272;&aacute;nh v&agrave;o ch&#7919; &Agrave;',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => '&#272;em l&ecirc;n',
 'bouton_valider' => 'C&#7853;p nh&#7853;t',
 
-
 // C
 'cal_apresmidi' => 'bu&#7893;i chi&#7873;u',
 'cal_jour_entier' => 'nguy&ecirc;n ng&agrave;y',
@@ -81,15 +81,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'l&#7883;ch tr&igrave;nh h&agrave;ng ng&agrave;y',
 'cal_par_mois' => 'l&#7883;ch tr&igrave;nh h&agrave;ng th&aacute;ng',
 'cal_par_semaine' => 'l&#7883;ch tr&igrave;nh h&agrave;ng tu&#7847;n',
-'calendrier_synchro_prive' => '<NEW><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
-'calendrier_synchro_public' => '<NEW><NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'm&agrave;u',
 'choix_interface' => 'ch&#7885;n l&#7921;a dao di&#7879;n',
 'colonne' => 'C&#7897;t',
 'confirm_changer_statut' => 'C&#7847;n x&aacute;c nh&#7853;n: b&#7841;n y&ecirc;u c&#7847;u thay &#273;&#7893;i t&igrave;nh tr&#7841;ng c&#7911;a b&agrave;i n&agrave;y. B&#7841;n c&oacute; mu&#7889;n ti&#7871;p t&#7909;c kh&ocirc;ng?',
 'correcte' => '&#273;&uacute;ng',
-
 
 // D
 'date_aujourdhui' => 'h&ocirc;m nay',
@@ -203,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <p/>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;',
 'double_occurrence' => 'Hai l&#7847;n',
 
-
 // E
 'entree_dimensions' => 'Kh&#7893;:',
 'entree_titre_document' => 'T&#7921;a b&agrave;i h&#7891; s&#417;:',
@@ -212,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'L&#7895;i',
 'erreur_balise_non_fermee' => 'tag cu&#7889;i c&ugrave;ng ch&#432;a &#273;&oacute;ng:',
 'erreur_texte' => 'l&#7895;i',
-
 
 // F
 'fichier_introuvable' => 'Kh&ocirc;ng t&igrave;m r&agrave; h&#7891; s&#417; @fichier@',
@@ -305,7 +299,6 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'forum_votre_nom' => 'T&ecirc;n (hay b&iacute; danh):',
 'forum_vous_enregistrer' => 'Tr&#432;&#7899;c khi tham gia v&agrave;o di&#7877;n &#273;&agrave;n n&agrave;y, b&#7841;n ph&#7843;i ghi danh. N&#7871;u ch&#432;a ghi danh, b&#7841;n ph&#7843;i',
 'forum_vous_inscrire' => 'ghi danh.',
-
 
 // I
 'ical_texte_rss_articles' => 'H&#7891; s&#417; &laquo;backend&raquo; c&#7911;a c&aacute;c b&agrave;i tr&ecirc;n trang web n&agrave;y &#7903; &#273;&#7883;a ch&#7881;:',
@@ -531,7 +524,6 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'infos_vos_pense_bete' => 'B&#7843;n ghi nh&#7899; c&#7911;a b&#7841;n',
 'item_breve_proposee' => 'N&#7897;p v&agrave;o',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Xem icon m&agrave; th&ocirc;i',
 'lien_afficher_texte_icones' => 'Xem icon v&agrave; ch&#7919;',
@@ -583,16 +575,13 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'login_test_navigateur' => 'th&#7917; browser/n&#7889;i l&#7841;i',
 'login_verifiez_navigateur' => '(Tuy nhi&ecirc;n, ki&#7875;m l&#7841;i &#273;&#7875; bi&#7871;t l&agrave; browser kh&ocirc;ng c&oacute; nh&#7899; m&#7853;t m&atilde; c&#7911;a b&#7841;n...)',
 
-
 // M
 'masquer_trad' => 'd&#7845;u c&aacute;c b&#7843;n d&#7883;ch',
 'module_fichiers_langues' => 'H&#7891; s&#417; ng&ocirc;n ng&#7919;',
 
-
 // N
 'navigateur_pas_redirige' => 'N&#7871;u browser c&#7911;a b&#7841;n kh&ocirc;ng &#273;&#432;&#7907;c h&#432;&#7899;ng qua m&#7897;t &#273;&#7883;a ch&#7881; URL m&#7899;i, xin b&#7845;m v&ocirc; &#273;&acirc;y &#273;&#7875; ti&#7871;p t&#7909;c.',
 'numero' => 'S&#7889;',
-
 
 // O
 'occurence' => 'L&#7847;n',
@@ -614,7 +603,6 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'onglet_save_restaur_base' => 'L&#432;u tr&#7919;/ph&#7909;c h&#7891;i database',
 'onglet_vider_cache' => 'D&#7885;n s&#7841;ch cache',
 'ortho_trop_de_fautes2' => 'H&atilde;y &#273;i&#7873;u ch&#7881;nh nh&#7919;ng l&#7895;i hi&#7875;n nhi&ecirc;n tr&#432;&#7899;c, r&#7891;i th&#7917; l&#7841;i.',
-
 
 // P
 'pass_choix_pass' => 'Xin ch&#7885;n m&#7853;t m&atilde; m&#7899;i:',
@@ -651,10 +639,8 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 'previsualisation' => 'Xem tr&#432;&#7899;c',
 'previsualiser' => 'Cho xem tr&#432;&#7899;c',
 
-
 // R
 'retour' => 'Tr&#7903; l&#7841;i',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP x&aacute;c nh&#7853;n trang n&agrave;y theo &#273;&uacute;ng ti&ecirc;u chu&#7849;n v&#7899;i DOCTYPE c&#7911;a SPIP:',
@@ -663,7 +649,6 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 'squelette_ligne' => 'b&#7843;n m&#7851;u, d&ograve;ng',
 'stats_visites_et_popularite' => '@visites@ l&#7847;n vi&#7871;ng; m&#7913;c ph&#7893; th&ocirc;ng: @popularite@',
 'suivant' => 'k&#7871; ti&#7871;p',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -712,7 +697,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'titre_titre_document' => 'T&#7921;a b&agrave;i:',
 'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
 
-
 // U
 'upload_fichier_zip' => 'H&#7891; s&#417; ZIP',
 'upload_fichier_zip_texte' => 'H&#7891; s&#417; b&#7841;n t&iacute;nh thi&#7871;t tr&iacute; l&agrave; h&#7891; s&#417; ZIP.',
@@ -720,7 +704,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'upload_limit' => 'H&#7891; s&#417; n&agrave;y qu&aacute; to cho server; kh&#7893; l&#7899;n nh&#7845;t cho ph&eacute;p <i>&#273;em l&ecirc;n</i> l&agrave; @max@.',
 'upload_zip_decompacter' => '&#273;&#432;&#7907;c m&#7903; ra v&agrave; h&#7891; s&#417; trong &#273;&oacute; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; v&agrave;o trang web. C&aacute;c h&#7891; s&#417; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; l&agrave;:',
 'upload_zip_telquel' => 'thi&#7871;t tr&iacute; y nguy&ecirc;n, h&#7891; s&#417; ZIP;',
-
 
 // Z
 'zbug_balise_b_aval' => ': B tag too late in loop',
@@ -764,8 +747,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'zxml_valeur_attribut' => '<NEW>attribute value',
 'zxml_vide_balise' => '<NEW>empty tag',
 'zxml_vu' => '&#273;&atilde; th&#7845;y tr&#432;&#7899;c &#273;&acirc;y'
-
 );
-
 
 ?>

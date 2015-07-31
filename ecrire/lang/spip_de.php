@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://www.spip.net/de',
 '0_langue' => 'Deutsch [de]',
 '0_liste' => 'spip-de@rezo.net',
 '0_mainteneur' => 'klaus@spip.de',
-
 
 // A
 'access_interface_graphique' => 'Zur&uuml;ck zur vollst&auml;ndigen grafischen Oberfl&auml;che',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'XML-Analyse',
 'annuler' => 'Abbrechen',
 'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
+'articles_recents' => 'Die neuesten Artikel',
 'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_attention' => 'ACHTUNG!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'SQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
 'avis_erreur_visiteur' => 'Ein Problem beim Zugang zum Redaktionssystem ist aufgetreten.',
-
 
 // B
 'barre_a_accent_grave' => 'Grosses A mit accent grave einf&uuml;gen',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'hochladen',
 'bouton_valider' => 'Best&auml;tigen',
 
-
 // C
 'cal_apresmidi' => 'nachmittags',
 'cal_jour_entier' => 'ganzt&auml;gig',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Spalte',
 'confirm_changer_statut' => 'Achtung, Sie werden den Status dieses Elementes &auml;ndern. Wollen Sie fortfahren?',
 'correcte' => 'korrekt',
-
 
 // D
 'date_aujourdhui' => 'heute',
@@ -200,7 +199,6 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 <p>Wenn Sie diesen Vorgang abgeschlossen haben, k&ouml;nnen Sie',
 'double_occurrence' => 'Dublette',
 
-
 // E
 'entree_dimensions' => 'Gr&ouml;ssenangaben:',
 'entree_titre_document' => 'Titel des Dokuments:',
@@ -209,7 +207,6 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
 'erreur_texte' => 'Fehler',
-
 
 // F
 'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
@@ -305,7 +302,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'forum_votre_nom' => 'Ihr Name (oder Pseudonym) :',
 'forum_vous_enregistrer' => 'Um an diesem Forum teilnehmen zu k&ouml;nnen, m&uuml;ssen Sie sich anmelden. Bitte tragen Sie weiter unten die Zugangsdaten ein, die Sie per Mail erhalten haben. Wenn Sie noch nicht angemeldet sind, k&ouml;nnen Sie sich',
 'forum_vous_inscrire' => 'online anmelden.',
-
 
 // I
 'ical_texte_rss_articles' => 'Die &laquo;backend&raquo; Datei mit den Artikeln der Website finden Sie unter dieser Adresse:',
@@ -531,7 +527,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'infos_vos_pense_bete' => 'Ihre Merkzettel',
 'item_breve_proposee' => 'Vorgeschlagene Meldung',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Nur Piktogramme anzeigen',
 'lien_afficher_texte_icones' => 'Piktogramme und Beschriftung anzeigen',
@@ -581,16 +576,13 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'login_test_navigateur' => 'Test Webbrowser/Verbindung',
 'login_verifiez_navigateur' => '(&Uuml;berpr&uuml;fen Sie, dass Ihr Webbrowser Ihr Passwort nicht gespeichert hat ...)',
 
-
 // M
 'masquer_trad' => '&Uuml;bersetzungen ausblenden',
 'module_fichiers_langues' => 'Sprachdateien',
 
-
 // N
 'navigateur_pas_redirige' => 'Wenn Ihr Browser keine automatische Weiterleitung unterst&uuml;tzt, klicken Sie hier.',
 'numero' => 'Nummer',
-
 
 // O
 'occurence' => 'Vorkommen',
@@ -612,7 +604,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'onglet_save_restaur_base' => 'Datenbank sichern/wieder herstellen',
 'onglet_vider_cache' => 'Sitecache l&ouml;schen',
 'ortho_trop_de_fautes2' => 'Korrigieren sie zun&auml;chst die offensichtlichen Fehler und starten dann einen neuen Versuch.',
-
 
 // P
 'pass_choix_pass' => 'Bitte geben Sie Ihr neues Passwort ein:',
@@ -650,10 +641,8 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'previsualisation' => 'Vorschau',
 'previsualiser' => 'Vorschau anzeigen',
 
-
 // R
 'retour' => 'Zur&uuml;ck',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP erkennt dieses Dokument als dem DOCTYPE entsprechend:',
@@ -662,7 +651,6 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'squelette_ligne' => 'Skelett, Zeile',
 'stats_visites_et_popularite' => '@visites@ Besuche; Beliebtheit: @popularite@',
 'suivant' => 'weiter',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kB',
@@ -713,7 +701,6 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_titre_document' => 'Titel des Dokuments:',
 'trad_reference' => '(Referenzartikel)',
 
-
 // U
 'upload_fichier_zip' => 'ZIP-Datei',
 'upload_fichier_zip_texte' => 'Sie m&ouml;chsten eine ZIP-Datei installieren.',
@@ -721,7 +708,6 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'upload_limit' => 'Datei zu gross zum Hochladen. Maximale <i>upload</i>-Gr&ouml;sse: @max@.',
 'upload_zip_decompacter' => 'Das ZIP-Archiv auspacken. Diese Dateien werden dann auf dem Server installiert:',
 'upload_zip_telquel' => 'Das ZIP-Archiv als eine Archivdatei installieren.',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: Tag B muss vor der Schleife stehen',
@@ -765,8 +751,6 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'zxml_valeur_attribut' => 'Attributwert',
 'zxml_vide_balise' => 'leerer Tag',
 'zxml_vu' => 'bereits gesehen'
-
 );
-
 
 ?>

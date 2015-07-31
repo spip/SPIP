@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://www.spip.net/oc',
 '0_langue' => 'occitan (auvernhat) [oc_auv]',
 '0_liste' => 'spip-oc@rezo.net',
 '0_mainteneur' => 'Domergue Sumien: lenga.occitana@aprene.org ',
-
 
 // A
 'access_interface_graphique' => 'Tornar a l\'interf&agrave;cia grafica completa',
@@ -22,8 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar aquel mot clau',
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
-'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Quo es impossible d\'actualizar la basa MySQL v&egrave;rs la version @version@; benl&egrave;u i a un probl&egrave;ma relatiu au dreit de modificar la basa de donadas. Volhatz contactar v&ograve;stre auberjador.',
+'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Quo es impossible d\'actualizar la basa SQL v&egrave;rs la version @version@; benl&egrave;u i a un probl&egrave;ma relatiu au dreit de modificar la basa de donadas. Volhatz contactar v&ograve;stre auberjador.',
 'analyse_xml' => 'Analisi XML',
+'articles_recents' => 'Los articles mai recents',
 'avis_archive_incorrect' => 'lo fich&egrave;ir archiu z-es pas un fich&egrave;ir SPIP',
 'avis_archive_invalide' => 'lo fich&egrave;ir archiu z-es pas valid',
 'avis_attention' => 'ATENCION!',
@@ -35,9 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Error de connexion',
 'avis_erreur_cookie' => 'probl&egrave;ma de cookie',
 'avis_erreur_fonction_contexte' => 'Error de programacion. Chau pas cridar aquela foncion dins aquel cont&egrave;xt.',
-'avis_erreur_mysql' => 'Error MySQL ',
+'avis_erreur_mysql' => 'Error SQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@)! ',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir una A accent gr&egrave;u majuscula',
@@ -69,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Telecharjar',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'tant&ograve;st',
 'cal_jour_entier' => 'jorn enti&egrave;r',
@@ -77,12 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'chalend&egrave;ir per jorn',
 'cal_par_mois' => 'chalend&egrave;ir per mes',
 'cal_par_semaine' => 'chalend&egrave;ir per setmana',
-'calendrier_synchro_lien' => '',
-'calendrier_synchro_prive' => '',
-'calendrier_synchro_public' => '',
-'calendrier_synchro_sync' => '',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de chamjar l\'estatut d\'aquel element. Desiratz de contunhar? ',
-
 
 // D
 'date_aujourdhui' => 'anu&egrave;i lo jorn',
@@ -181,13 +176,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coss&iacute; chau procedir.
   <p />Entre qu\'auretz faita aquela manipulacion, poiretz ',
 
-
 // E
 'entree_dimensions' => 'Dimensions:',
 'entree_titre_document' => 'T&iacute;tol dau document:',
 'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
 'envoi_via_le_site' => 'Mandad&iacute;s amb lo biais dau sit web',
-
 
 // F
 'fichier_introuvable' => 'S\'es pas pogut trobar lo fich&egrave;ir @fichier@.',
@@ -288,7 +281,6 @@ Merc&eacute;s per v&ograve;stra participacion
  Se s&egrave;tz pas registrat/ada, av&egrave;tz de',
 'forum_vous_inscrire' => 'vos inscriure ',
 
-
 // I
 'ical_texte_rss_articles' => 'Lo fich&egrave;ir "backend" daus articles d\'aqueste sit se tr&ograve;ba a l\'adrei&ccedil;a:',
 'ical_texte_rss_articles2' => 'Aitanben pod&egrave;tz obt&eacute;ner de fich&egrave;irs "backend" per los articles de chasca rubrica dau sit:',
@@ -303,7 +295,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_brouteur' => 'Navigacion rapida',
 'icone_configuration_site' => 'Configuracion',
 'icone_configurer_site' => 'Configurar v&ograve;stre sit',
-'icone_creer_mot_cle' => 'Crear un mot clau nu&ograve;u e lo liar a aquel article',
 'icone_creer_nouvel_auteur' => 'Crear un autor nu&ograve;u',
 'icone_creer_rubrique' => 'Crear una rubrica',
 'icone_creer_sous_rubrique' => 'Crear una sosrubrica',
@@ -510,7 +501,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'infos_vos_pense_bete' => 'V&ograve;stres mementos',
 'item_breve_proposee' => 'Br&egrave;va prepausada',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Afichar mas las ic&ograve;nas',
 'lien_afficher_texte_icones' => 'Afichar las ic&ograve;nas e lo t&egrave;xt',
@@ -533,7 +523,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'lien_voir_auteur' => 'Veire aquel autor',
 'login_acces_prive' => 'acc&egrave;s a l\'espaci privat',
 'login_autre_identifiant' => 'se connectar amb un autre identificant',
-'login_connexion_refusee' => 'Connexion refusada.',
 'login_cookie_accepte' => 'Volhatz configurar v&ograve;stre navigador per que los acc&egrave;pte (per lo mens amb aquel sit).',
 'login_cookie_oblige' => 'Per vos identificar d\'una man&egrave;ira segura sus aqueste sit, vos chau acceptar los cookies.',
 'login_deconnexion_ok' => 'S&egrave;tz desconnectat/ada.',
@@ -562,14 +551,11 @@ Merc&eacute;s per v&ograve;stra participacion
 'login_test_navigateur' => 'Assai navigador/tornar&nbsp;connectar',
 'login_verifiez_navigateur' => '(pasmens verificatz que v&ograve;stre navigador aja pas servat v&ograve;stre mot de santa Clara en mem&ograve;ria...)',
 
-
 // M
 'module_fichiers_langues' => 'Fich&egrave;irs de lenga',
 
-
 // N
 'navigateur_pas_redirige' => 'Se v&ograve;stre navigador z-es pas redirigit, clicatz aic&iacute; per contunhar.',
-
 
 // O
 'onglet_affacer_base' => 'Esfa&ccedil;ar la basa',
@@ -590,7 +576,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Voidar l\'escondedor',
 'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir las errors mai evidentas e tornatz assajar pu&egrave;i.',
-
 
 // P
 'pass_choix_pass' => 'Volhatz chausir v&ograve;stre mot de santa Clara nov&egrave;l:',
@@ -637,11 +622,9 @@ e vos tornar connectar au sit.
 'previsualisation' => 'Previsualizacion',
 'previsualiser' => 'Previsualizar',
 
-
 // S
 'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
 'suivant' => 'seguent',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;Ko',
@@ -673,9 +656,6 @@ e vos tornar connectar au sit.
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fich&egrave;ir <code>@fichier@</code>.Volgatz, coma administrator/tritz dau sit,',
 'texte_inc_meta_2' => 'verificar los dreits d\'escritura',
 'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>@repertoire@<code>.',
-'texte_plan_trad_en_cours' => '',
-'texte_plan_trad_modif' => '',
-'texte_plan_trad_note' => '',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'au bordilh&egrave;ir',
 'texte_statut_propose_evaluation' => 'prepausat per avaloracion',
@@ -698,12 +678,11 @@ e vos tornar connectar au sit.
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Liams entrants ',
 'titre_mots_cles' => 'MOTS CLAUS',
-'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor MySQL) empacha d\'accedir v&egrave;rs aquela part dau sit. Merc&eacute; de v&ograve;stra indulg&eacute;ncia.',
+'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor SQL) empacha d\'accedir v&egrave;rs aquela part dau sit. Merc&eacute; de v&ograve;stra indulg&eacute;ncia.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DINS AQUELA RUBRICA',
 'titre_statistiques' => 'Estadisticas dau sit',
 'titre_titre_document' => 'T&iacute;tol dau document:',
 'trad_reference' => '(article de refer&eacute;ncia)',
-
 
 // U
 'upload_fichier_zip' => 'Fich&egrave;ir ZIP',
@@ -712,7 +691,6 @@ e vos tornar connectar au sit.
 'upload_limit' => 'Aquel fich&egrave;ir z-es tr&ograve;p gr&ograve;s per lo servidor; la talha maxima autorizada en <i>upload</i> z-es de @max@.',
 'upload_zip_decompacter' => 'descomprimit e chasque element que conten installat sus lo sit. Lendonc los fich&egrave;irs que ser&aacute;n installats sus lo sit son:',
 'upload_zip_telquel' => 'installat tau coma z-es, coma archiu comprimit Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
@@ -736,8 +714,6 @@ e vos tornar connectar au sit.
 'zbug_resultat' => 'resultat',
 'zbug_serveur_indefini' => 'servidor SQL indefinit',
 'zbug_table_inconnue' => 'Taula SQL &laquo;@table@&raquo; desconeguda'
-
 );
-
 
 ?>

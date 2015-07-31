@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-zh',
@@ -11,7 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_liste' => 'spip-zh@rezo.net',
 '0_mainteneur' => 'Lily Zou (lily.zou@terra.com.cn)
 Zhen QIN (zhen_q@21cn.com)',
-
 
 // A
 'access_interface_graphique' => '&#36820;&#22238;&#23436;&#25972;&#26174;&#31034;&#27169;&#24335;',
@@ -28,6 +29,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'analyse_xml' => 'XML&#20998;&#26512;',
 'annuler' => '&#21462;&#28040;',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'articles_recents' => '&#26368;&#26032;&#25991;&#31456;',
 'avis_archive_incorrect' => '&#25171;&#21253;&#25991;&#20214;&#19981;&#26159;&#26377;&#25928;&#30340;SPIP&#25991;&#20214;',
 'avis_archive_invalide' => '&#25171;&#21253;&#25991;&#20214;&#26080;&#25928;',
 'avis_attention' => '&#27880;&#24847;!',
@@ -42,7 +44,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'avis_erreur_mysql' => '<MODIF>SQL&#38169;&#35823;',
 'avis_erreur_sauvegarde' => '@type@ @id_objet@&#22791;&#20221;&#22833;&#36133;!',
 'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
-
 
 // B
 'barre_a_accent_grave' => '&#25554;&#20837;&#21152;&#37325;&#30340;&#23383;&#31526;',
@@ -74,7 +75,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'bouton_telecharger' => '&#19978;&#20256;',
 'bouton_valider' => '&#25552;&#20132;',
 
-
 // C
 'cal_apresmidi' => '&#19979;&#21320;',
 'cal_jour_entier' => '&#25972;&#26085;',
@@ -87,7 +87,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => '&#27880;&#24847;&#65292;&#24744;&#35201;&#27714;&#25913;&#21464;&#36825;&#19968;&#39033;&#30446;&#30340;&#29366;&#24577;&#12290;&#35831;&#30830;&#35748;&#32487;&#32493;&#12290;',
 'correcte' => '<NEW>correcte',
-
 
 // D
 'date_aujourdhui' => '&#20170;&#22825;',
@@ -201,7 +200,6 @@ Zhen QIN (zhen_q@21cn.com)',
   <p>&#19968;&#26086;&#23436;&#25104;,&#24744;&#21487;&#20197;',
 'double_occurrence' => '<NEW>Double occurrence',
 
-
 // E
 'entree_dimensions' => '&#22823;&#23567;:',
 'entree_titre_document' => '&#25991;&#20214;&#26631;&#39064;:',
@@ -210,7 +208,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'erreur' => '<NEW>Erreur',
 'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => '<NEW>erreur(s)',
-
 
 // F
 'fichier_introuvable' => '&#25214;&#19981;&#21040;@fichier@&#25991;&#20214;',
@@ -305,7 +302,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'forum_vous_enregistrer' => '&#22312;&#21442;&#19982;&#35770;&#22363;&#21069;,&#24744;&#24517;&#39035;&#27880;&#20876;. &#35874;&#35874;&#24744;&#22635;&#20889;&#24050;&#32463;&#36882;&#20132;&#36807;&#30340;&#20010;&#20154;&#20449;&#24687;.
 &#22914;&#26524;&#20320;&#24744;&#23578;&#26410;&#27880;&#20876;, &#24744;&#24517;&#39035;',
 'forum_vous_inscrire' => '&#35831;&#27880;&#20876;&#12290;',
-
 
 // I
 'ical_texte_rss_articles' => '&#26412;&#31449;&#28857;&#25991;&#31456;&#30340;&laquo;&#24341;&#29992;&raquo;&#25991;&#20214;&#22320;&#22336;:',
@@ -533,7 +529,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'infos_vos_pense_bete' => '&#22791;&#27880;',
 'item_breve_proposee' => '&#26032;&#38395;&#25552;&#20132;',
 
-
 // L
 'lien_afficher_icones_seuls' => '&#21482;&#26174;&#31034;&#22270;&#29255;',
 'lien_afficher_texte_icones' => '&#26174;&#31034;&#25991;&#26412;&#21644;&#22270;&#29255;',
@@ -586,16 +581,13 @@ Zhen QIN (zhen_q@21cn.com)',
 'login_test_navigateur' => '&#27979;&#35797;&#27983;&#35272;/&#37325;&#26032;&#36830;&#25509;',
 'login_verifiez_navigateur' => '(&#26080;&#35770;&#22914;&#20309;, &#35831;&#30830;&#35748;&#20320;&#30340;&#27983;&#35272;&#22120;&#19981;&#20250;&#35760;&#20303;&#20320;&#30340;&#23494;&#30721;...)',
 
-
 // M
 'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => '&#35821;&#35328;&#25991;&#20214;',
 
-
 // N
 'navigateur_pas_redirige' => '&#22914;&#26524;&#24744;&#30340;&#27983;&#35272;&#22120;&#27809;&#26377;&#36339;&#36716;,&#35831;&#25353;&#36825;&#37324;&#32487;&#32493;.',
 'numero' => '<NEW>Num&eacute;ro',
-
 
 // O
 'occurence' => '<NEW>Occurrence',
@@ -617,7 +609,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'onglet_save_restaur_base' => '&#22791;&#20221;/&#24674;&#22797;&#25968;&#25454;&#24211;',
 'onglet_vider_cache' => '&#28165;&#31354;&#32531;&#23384;',
 'ortho_trop_de_fautes2' => '&#35831;&#20462;&#25913;&#26368;&#26126;&#26174;&#30340;&#38169;&#35823;&#65292;&#28982;&#21518;&#20877;&#35797;&#12290;',
-
 
 // P
 'pass_choix_pass' => '&#35831;&#36873;&#25321;&#26032;&#23494;&#30721;:',
@@ -664,10 +655,8 @@ Zhen QIN (zhen_q@21cn.com)',
 'previsualisation' => '&#39044;&#35272;',
 'previsualiser' => '&#39044;&#35272;',
 
-
 // R
 'retour' => '<NEW>Retour',
-
 
 // S
 'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
@@ -676,7 +665,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ &#35775;&#38382;&#32773;; &#27969;&#34892;: @popularite@',
 'suivant' => '&#21518;&#19968;&#20010;',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;kb',
@@ -738,7 +726,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'titre_titre_document' => '&#25991;&#31456;&#26631;&#39064;:',
 'trad_reference' => '(&#21442;&#32771;&#25991;&#31456;)',
 
-
 // U
 'upload_fichier_zip' => '&#21387;&#32553;&#25991;&#20214;ZIP',
 'upload_fichier_zip_texte' => '&#24744;&#24314;&#35758;&#23433;&#35013;&#30340;&#25991;&#20214;&#26159;ZIP&#26684;&#24335;&#21387;&#32553;&#25991;&#20214;&#12290;',
@@ -746,7 +733,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'upload_limit' => '&#35813;&#25991;&#20214;&#30340;&#22823;&#23567;&#36229;&#36807;&#20102;&#26381;&#21153;&#22120;&#20801;&#35768;&#30340;&#33539;&#22260;&#65292;&#26381;&#21153;&#22120;&#20801;&#35768;<i>upload</i>&#30340;&#26368;&#22823;&#25991;&#20214;&#26159; @max@.',
 'upload_zip_decompacter' => '&#24050;&#34987;&#35299;&#21387;&#65292;&#24182;&#19988;&#20854;&#20013;&#30340;&#25152;&#26377;&#25991;&#20214;&#22343;&#34987;&#23433;&#35013;&#21040;&#32593;&#31449;&#12290;&#23558;&#34987;&#23433;&#35013;&#21040;&#32593;&#31449;&#30340;&#25991;&#20214;&#22914;&#19979;&#65306;',
 'upload_zip_telquel' => '&#29031;&#21407;&#26679;&#23433;&#35013;&#65292;&#20173;&#20197; Zip&#21387;&#32553;&#25991;&#26723;&#26684;&#24335;;',
-
 
 // Z
 'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
@@ -790,8 +776,6 @@ Zhen QIN (zhen_q@21cn.com)',
 'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
 'zxml_vide_balise' => '<NEW>balise vide',
 'zxml_vu' => '<NEW>vu auparavant'
-
 );
-
 
 ?>

@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://www.spip.net/gl',
 '0_langue' => 'Galego [gl]',
 '0_liste' => 'spip-gl@rezo.net',
 '0_mainteneur' => 'webmaster@avogacia.org',
-
 
 // A
 'access_interface_graphique' => 'Voltar &aacute; interface gr&aacute;fica completa',
@@ -23,10 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar este tema',
 'admin_recalculer' => 'Recargar a p&aacute;xina',
 'afficher_trad' => 'mostrar as traduci&oacute;ns',
-'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualizaci&oacute;n da base MySQL sobre a versi&oacute;n @version@ &eacute; imposible, poder&iacute;a ser por causa dun problema de permisos de modificaci&oacute;n da base de datos. Contacte co seu aloxador.',
+'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualizaci&oacute;n da base SQL sobre a versi&oacute;n @version@ &eacute; imposible, poder&iacute;a ser por causa dun problema de permisos de modificaci&oacute;n da base de datos. Contacte co seu aloxador.',
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Anular',
 'antispam_champ_vide' => 'Deixe este campo baleiro, por favor&nbsp;:',
+'articles_recents' => 'Artigos m&aacute;is recentes',
 'avis_archive_incorrect' => 'o ficheiro arquivado non &eacute; un ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivado non &eacute; v&aacute;lido',
 'avis_attention' => 'ATENCI&Oacute;N!',
@@ -38,10 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Erro de conexi&oacute;n',
 'avis_erreur_cookie' => 'problema de cookie',
 'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non debe ser chamada neste contexto.',
-'avis_erreur_mysql' => 'Erro MySQL',
+'avis_erreur_mysql' => 'Erro SQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
 'avis_erreur_visiteur' => 'Problema de acceso ao espazo privado',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir un A acentuado grave mai&uacute;scula',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Subir',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'mediod&iacute;a',
 'cal_jour_entier' => 'd&iacute;a enteiro',
@@ -81,13 +81,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendario por d&iacute;a',
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
-'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'escolla de interface',
 'colonne' => 'Columna',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
 'correcte' => 'correcto',
-
 
 // D
 'date_aujourdhui' => 'hoxe',
@@ -201,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Unha vez feito isto, poder&aacute; ',
 'double_occurrence' => 'Dobre ocorrencia',
 
-
 // E
 'entree_dimensions' => 'Dimensi&oacute;ns:',
 'entree_titre_document' => 'T&iacute;tulo do documento:',
@@ -210,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => 'a &amp;uacute;ltima baliza non est&amp;aacute; pechada :',
 'erreur_texte' => 'erro(s)',
-
 
 // F
 'fichier_introuvable' => 'O ficheiro @fichier@ non foi atopado',
@@ -312,7 +308,6 @@ Grazas pola s&uacute;a participaci&oacute;n
   na p&aacute;xina anterior. Escriba aqu&iacute; embaixo o identificador persoal
   que recibiu. Se a&iacute;nda non se rexistrou, d&eacute;beo facer',
 'forum_vous_inscrire' => 'inscribirse.',
-
 
 // I
 'ical_texte_rss_articles' => 'O ficheiro &laquo;backend&raquo; dos artigos deste web enc&oacute;ntrase no enderezo:',
@@ -455,7 +450,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_la_breve' => 'a breve',
 'info_la_rubrique' => 'o tema',
 'info_langue_principale' => 'Idioma principal do web',
-'info_langues_proposees' => '-baleiro-',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'por @les_auteurs@',
 'info_logo_format_interdit' => 'S&oacute; est&aacute;n permitidos os logos nos seguintes formatos @formats@.',
@@ -541,7 +535,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'infos_vos_pense_bete' => 'As t&uacute;as notas',
 'item_breve_proposee' => 'Breve proposta',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Amosar s&oacute; as iconas',
 'lien_afficher_texte_icones' => 'Amosar as iconas e o texto',
@@ -563,9 +556,9 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
 'ligne' => 'Li&amp;nacute;a',
+'login' => 'Conexi&oacute;n',
 'login_acces_prive' => 'acceso &oacute; espazo privado',
 'login_autre_identifiant' => 'conectarse con outro identificador',
-'login_connexion_refusee' => 'Conexi&oacute;n rexeitada.',
 'login_cookie_accepte' => 'Axuste o seu navegador para que as acepte (cando menos para este web).',
 'login_cookie_oblige' => 'Para indentificarse dun xeito seguro neste webr, ten que aceptar as cookies.',
 'login_deconnexion_ok' => 'Desconexi&oacute;n realizada.',
@@ -593,16 +586,13 @@ Grazas pola s&uacute;a participaci&oacute;n
 'login_test_navigateur' => 'proba navegador/reconexi&oacute;n',
 'login_verifiez_navigateur' => '(De todos os xeitos, comprobe que o seu navegador non memorizou a s&uacute;a chave...)',
 
-
 // M
 'masquer_trad' => 'ocultar as traduci&oacute;ns',
 'module_fichiers_langues' => 'Ficheiros de lingua',
 
-
 // N
 'navigateur_pas_redirige' => 'Se o seu navegador non &eacute; redirixido, prema aqu&iacute; para continuar.',
 'numero' => 'N&amp;uacute;mero',
-
 
 // O
 'occurence' => 'Ocorrencia',
@@ -624,7 +614,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'onglet_save_restaur_base' => 'Gardar/restaurar a base',
 'onglet_vider_cache' => 'Baleirar a memoria cach&eacute;',
 'ortho_trop_de_fautes2' => 'Comece por corrixir as faltas m&aacute;is evidentes e probe logo.',
-
 
 // P
 'pass_choix_pass' => 'Elixa s&uacute;a nova chave:',
@@ -670,10 +659,8 @@ e reconectar co web.
 'previsualisation' => 'Previsualizaci&oacute;n',
 'previsualiser' => 'Previsualizar',
 
-
 // R
 'retour' => 'Volver',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP considera este documento conforme co seu DOCTYPE :',
@@ -683,7 +670,6 @@ e reconectar co web.
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
 'suivant' => 'seguinte',
 
-
 // T
 'taille_ko' => '@taille@ KB',
 'taille_mo' => '@taille@ MB',
@@ -691,7 +677,6 @@ e reconectar co web.
 'texte_actualite_site_1' => 'Cando xa estea familiarizado/a coa interface, poder&aacute; premer sobre &laquo;',
 'texte_actualite_site_2' => 'interface completa',
 'texte_actualite_site_3' => '&raquo; para obter m&aacute;is posibilidades.',
-'texte_choix_langue_defaut' => '-baleiro-',
 'texte_creation_automatique_vignette' => 'A creaci&oacute;n autom&aacute;tica de vi&ntilde;etas de previsualizaci&oacute;n est&aacute; activada. Se empregas este formul&aacute;rio para subir &oacute; servidor imaxes no(s) formato(s) @gd_formats@, &eacute;stas ir&aacute;n acompa&ntilde;adas dunha vi&ntilde;eta cun tama&ntilde;o m&aacute;ximo de @taille_preview@ pixels.',
 'texte_documents_associes' => 'Os seguintes documentos est&aacute;n vencellados &oacute; artigo,
   mais non foron inseridos directamente. Dependendo do formato da p&aacute;xina no web p&uacute;blico,
@@ -707,11 +692,11 @@ e reconectar co web.
   Probe',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', despois de reiniciar o teu navegador.',
-'texte_inc_config' => 'As modificaci&amp;oacute;ns que faga nestas p&amp;aacute;xinas influir&amp;aacute;n notablemente no
-  funcionamento do web. Recom&amp;eeacute;ndaselle non as modificar namentres que non estea 
+'texte_inc_config' => 'As modificaci&oacute;ns que faga nestas p&aacute;xinas influir&aacute;n not&aacute;belmente no
+  funcionamento do web. Recom&eacute;ndaselle non as modificar namentres que non estea 
   un pouco ao tanto do funcionamento do sistema SPIP.
-  <br /><br /><b>En xeral, &amp;eacute; moi recomend&amp;aacute;bel que estas p&amp;aacute;xinas sexan
-  xestionadas polo/a webm&amp;aacute;ster principal do web.</b>',
+  <br /><br /><b>En xeral, &eacute; moi recomend&aacute;bel que estas p&aacute;xinas sexan
+  xestionadas polo/a webm&aacute;ster principal do web.</b>',
 'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>. Rev&iacute;seo co perfil de administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
 'texte_inc_meta_3' => 'no cartafol <code>@repertoire@</code>.',
@@ -737,12 +722,11 @@ e reconectar co web.
 'titre_joindre_document' => 'ANEXAR UN DOCUMENTO',
 'titre_liens_entrants' => 'As ligaz&oacute;ns entrantes do d&iacute;a',
 'titre_mots_cles' => 'PALABRAS CHAVE',
-'titre_probleme_technique' => 'Atenci&oacute;n: un problema t&eacute;cnico (servidor MySQL) impide o acceso a esta parte do web. Gracias pola s&uacute;a comprensi&oacute;n.',
+'titre_probleme_technique' => 'Atenci&oacute;n: un problema t&eacute;cnico (servidor SQL) impide o acceso a esta parte do web. Grazas pola s&uacute;a comprensi&oacute;n.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENTO NESTE TEMA',
 'titre_statistiques' => 'Estat&iacute;sticas do web',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'trad_reference' => '(artigo de referencia)',
-
 
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',
@@ -751,7 +735,6 @@ e reconectar co web.
 'upload_limit' => 'Este ficheiro &eacute; demasiado grande para o servidor&nbsp;; o tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> &eacute; de @max@.',
 'upload_zip_decompacter' => 'descompr&iacute;mase e cada elemento que conte&ntilde;a que sexa instalado no web. Os ficheiros que ser&aacute;n instalados son&nbsp;:',
 'upload_zip_telquel' => 'instalado tal cal, dado que &eacute; un arquivo comprimido Zip&nbsp;;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: baliza B en aval',
@@ -795,8 +778,6 @@ e reconectar co web.
 'zxml_valeur_attribut' => 'valor do atributo',
 'zxml_vide_balise' => 'baliza baleira',
 'zxml_vu' => 'vista previa'
-
 );
-
 
 ?>

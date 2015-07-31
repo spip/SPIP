@@ -1,9 +1,11 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
@@ -11,10 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_liste' => 'spip-oc@rezo.net',
 '0_mainteneur' => 'S&eacute;bastien Donato&nbsp;: seb@ogcn.net',
 
-
 // A
 'access_interface_graphique' => 'Tornar &agrave; l\'interfa&ccedil;a grafica completa',
-'access_mode_texte' => 'Affichar l\'interfa&ccedil;a textuala simplificada',
+'access_mode_texte' => 'Affichar l\'interfa&ccedil;a textuala simplificada', # essai commentaire
 'admin_debug' => 'debug',
 'admin_modifier_article' => 'Modificar aquel article',
 'admin_modifier_auteur' => 'Modificar aquel autor',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analisa XML',
 'annuler' => 'Anular',
 'antispam_champ_vide' => 'Vorgatz laissar aquel camp vu&egrave;i:',
+'articles_recents' => 'Lu articles mai recents',
 'avis_archive_incorrect' => 'lo fichier arquiu es pas un fichier SPIP',
 'avis_archive_invalide' => 'lo fichier arquiu es pas valid',
 'avis_attention' => 'DAIDA&nbsp;!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Error SQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@) ! ',
 'avis_erreur_visiteur' => 'Probl&egrave;ma per acc&egrave;dre &agrave; l\'espaci privat',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir una A accent gr&egrave;u majuscula',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Descargar',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'apr&egrave;s-miegjorn',
 'cal_jour_entier' => 'jorn enti&eacute;',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Colomna',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz continuar? ',
 'correcte' => 'corr&egrave;cte',
-
 
 // D
 'date_aujourdhui' => 'encu&egrave;i',
@@ -200,7 +199,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Un c&ograve;up aquesta manipulacion facha, podretz ',
 'double_occurrence' => 'Dobla ocurr&eacute;n&ccedil;a',
 
-
 // E
 'entree_dimensions' => 'Dimensions:',
 'entree_titre_document' => 'Titre dau document:',
@@ -209,7 +207,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'darri&egrave;ra balisa non tapada :',
 'erreur_texte' => 'error(s)',
-
 
 // F
 'fichier_introuvable' => 'Fichier @fichier@ introuvable',
@@ -312,7 +309,6 @@ Merc&eacute; de la voastra participacion
   d\'indicar &ccedil;ai sota l\'identificant personau que vos es
   estat fornit. Se si&egrave;tz pas registrat, dev&egrave;tz',
 'forum_vous_inscrire' => 'vos marcar.',
-
 
 // I
 'ical_texte_rss_articles' => 'Lo fichier "backend" dei articles d\'aqu&egrave;u sit si tr&ograve;ba &agrave; l\'adre&ccedil;a&nbsp;:',
@@ -538,7 +534,6 @@ Merc&eacute; de la voastra participacion
 'infos_vos_pense_bete' => 'Li voastri n&ograve;tas de renembran&ccedil;a ',
 'item_breve_proposee' => 'Br&egrave;va prepauada',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Far par&eacute;isser li ic&ograve;nas unicament',
 'lien_afficher_texte_icones' => 'Far par&eacute;isser li ic&ograve;nas e lo t&egrave;xt',
@@ -560,12 +555,12 @@ Merc&eacute; de la voastra participacion
 'lien_visites' => '@visites@&nbsp;visitas',
 'lien_voir_auteur' => 'Veire aquel autor',
 'ligne' => 'Linha',
+'login' => 'Connexion',
 'login_acces_prive' => 'acc&egrave;s &agrave; l\'espaci privat',
 'login_autre_identifiant' => 'si connectar emb\'un autre identificant',
-'login_connexion_refusee' => 'Connexion refudada.',
 'login_cookie_accepte' => 'Vorgatz configurar lo voastre navigador per que lu acc&egrave;pte (aumens per aqueu sit).',
 'login_cookie_oblige' => 'Per vos identificar d\'una maniera segura sus aquest sit, vos cau acceptar lu cookies.',
-'login_deconnexion_ok' => 'Si&egrave;tz desconnectat.',
+'login_deconnexion_ok' => 'Si&egrave;tz desconnectat/ada.',
 'login_erreur_pass' => 'Error de m&ograve;t de santa Clara.',
 'login_espace_prive' => 'espaci privat',
 'login_identifiant_inconnu' => 'L\'identificant &laquo; @login@ &raquo; es desconoissut.',
@@ -580,7 +575,7 @@ Merc&eacute; de la voastra participacion
 'login_nouvelle_tentative' => 'nov&egrave;la temptativa',
 'login_par_ici' => 'Si&egrave;tz registrat... per aqu&iacute;...',
 'login_pass2' => 'M&ograve;t de santa Clara&nbsp;:',
-'login_preferez_refuser' => '<b>Se preferiss&egrave;tz refudar lu cookies</b>, un autre met&ograve;de de connexion (mens securisat) es &agrave; la voastra disposicion&nbsp;:',
+'login_preferez_refuser' => '<b>Se preferiss&egrave;tz refudar lu cookies</b>, un autre met&ograve;de de connexion (mens securisat) es &agrave; la voastra disposicion:',
 'login_recharger' => 'Tornar cargar aquela p&agrave;gina',
 'login_rester_identifie' => 'Demorar identificat quaucu jorns',
 'login_retour_public' => 'Tornar au sit public',
@@ -591,16 +586,13 @@ Merc&eacute; de la voastra participacion
 'login_test_navigateur' => 'test navigador/tornar&nbsp;connectar',
 'login_verifiez_navigateur' => '(verificatz pura que lo voastre navigador a pas conservat lo m&ograve;t de santa Clara en mem&ograve;ria...)',
 
-
 // M
 'masquer_trad' => 'Escondre li reviradas',
 'module_fichiers_langues' => 'Fichiers de langa',
 
-
 // N
 'navigateur_pas_redirige' => 'Se lo voastre navigador es pas redirigit, clicatz aqu&iacute; per continuar.',
 'numero' => 'Numer&ograve;',
-
 
 // O
 'occurence' => 'Ocurr&eacute;n&ccedil;a',
@@ -622,7 +614,6 @@ Merc&eacute; de la voastra participacion
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vuar l\'amagador',
 'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir li errors mai evidenti e tornatz assajar pu&egrave;i.',
-
 
 // P
 'pass_choix_pass' => 'Vorgatz chausir lo voastre nov&egrave;u m&ograve;t de santa Clara&nbsp;:',
@@ -669,10 +660,8 @@ e vos tornar connectar au sit.
 'previsualisation' => 'Previsualisacion',
 'previsualiser' => 'Previsualisar',
 
-
 // R
 'retour' => 'Tornar',
-
 
 // S
 'spip_conforme_dtd' => 'SPIP consid&egrave;ra aqueu document coma conf&ograve;rm au sieu DOCTYPE :',
@@ -681,7 +670,6 @@ e vos tornar connectar au sit.
 'squelette_ligne' => 'esqueleta, linha',
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularitat&nbsp;: @popularite@',
 'suivant' => 'seguent',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;Ko',
@@ -737,7 +725,6 @@ e vos tornar connectar au sit.
 'titre_titre_document' => 'Titre dau document&nbsp;:',
 'trad_reference' => '(article de referen&ccedil;a)',
 
-
 // U
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Lo fichier que prepausatz d\'installar es un fichier ZIP.',
@@ -745,7 +732,6 @@ e vos tornar connectar au sit.
 'upload_limit' => 'Aqu&egrave;u fichier es tr&ograve;p gr&ograve;s per lo servidor; la talha maximala autorisada en <i>upload</i> es de @max@.',
 'upload_zip_decompacter' => 'descomprimit e cada element que conten installat sus lo sit. Alora lu fichiers que ser&agrave;n installats sus lo sit son&nbsp;:',
 'upload_zip_telquel' => 'installat tau quau, coma archiu comprimit Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
@@ -789,8 +775,6 @@ e vos tornar connectar au sit.
 'zxml_valeur_attribut' => 'valor de l\'atribut',
 'zxml_vide_balise' => 'balise vu&egrave;ia',
 'zxml_vu' => 'vist ad&eacute;s'
-
 );
-
 
 ?>

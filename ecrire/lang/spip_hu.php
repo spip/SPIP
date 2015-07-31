@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-hu',
 '0_langue' => 'Magyar [hu]',
 '0_liste' => 'spip-hu@rezo.net',
 '0_mainteneur' => 'trucy@freemail.hu',
-
 
 // A
 'access_interface_graphique' => 'Vissza a teljes grafikus fel&uuml;letre',
@@ -22,8 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'A kulcssz&oacute; m&oacute;dos&iacute;t&aacute;sa',
 'admin_modifier_rubrique' => 'Rovat m&oacute;dos&iacute;t&aacute;sa',
 'admin_recalculer' => 'Oldal friss&iacute;t&eacute;se',
-'alerte_maj_impossible' => '<b>Hiba&nbsp;!</b> A MySQL adatb&aacute;zis friss&iacute;t&eacute;se a @version@ verzi&oacute; fel&eacute; nem lehts&eacute;ges, tal&aacute;n adatb&aacute;zishoz val&oacute; m&oacute;dos&iacute;t&aacute;si jogosults&aacute;g miatt.Ilyenkor a t&aacute;rhely adminisztr&aacute;tor&aacute;hoz kell fordulni.',
+'alerte_maj_impossible' => '<b>Hiba&nbsp;!</b> A SQL adatb&aacute;zis friss&iacute;t&eacute;se a @version@ verzi&oacute; fel&eacute; nem lehts&eacute;ges, tal&aacute;n adatb&aacute;zishoz val&oacute; m&oacute;dos&iacute;t&aacute;si jogosults&aacute;g miatt.Ilyenkor a t&aacute;rhely adminisztr&aacute;tor&aacute;hoz kell fordulni.',
 'analyse_xml' => 'XML elemz&eacute;s',
+'articles_recents' => 'Leg&uacute;jabb cikkek',
 'avis_archive_incorrect' => 'Az archiv&aacute;l&aacute;si f&aacute;jl nem SPIP t&iacute;pus&uacute; f&aacute;jl',
 'avis_archive_invalide' => 'Az archv&aacute;l&aacute;si f&aacute;jl &eacute;rv&eacute;nytelen',
 'avis_attention' => 'Vigy&aacute;zat&nbsp;!',
@@ -35,9 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Csatlakoz&aacute;si hiba',
 'avis_erreur_cookie' => 'S&uuml;tis hiba',
 'avis_erreur_fonction_contexte' => 'Progr&aacute;moz&aacute;si hiba. Ezt a f&uuml;ggv&eacute;nyt nem lehet h&iacute;vni e k&ouml;r&uuml;lm&eacute;nyek k&ouml;z&ouml;tt.',
-'avis_erreur_mysql' => 'MySQL-es hiba',
+'avis_erreur_mysql' => 'SQL-es hiba',
 'avis_erreur_sauvegarde' => 'Hiba a ment&eacute;s sor&aacute;n (@type@ @id_objet@) !',
-
 
 // B
 'barre_a_accent_grave' => 'Francia &eacute;kezetes A nagybet&#369; besz&uacute;r&aacute;sa',
@@ -69,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Let&ouml;lt&eacute;s',
 'bouton_valider' => 'Rendben',
 
-
 // C
 'cal_apresmidi' => 'd&eacute;lut&aacute;n',
 'cal_jour_entier' => 'eg&eacute;sz nap',
@@ -79,7 +79,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'heti napt&aacute;r',
 'confirm_changer_statut' => 'Vigy&aacute;zat, az elem st&aacute;tusz&aacute;nak v&aacute;ltoztat&aacute;s&aacute;t k&eacute;rte. Kiv&aacute;n-e folytatni?',
 'correcte' => 'helyes',
-
 
 // D
 'date_aujourdhui' => 'ma',
@@ -178,13 +177,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Az elj&aacute;r&aacute;s r&eacute;szletesen van magyar&aacute;zva a telep&iacute;t&eacute;si k&eacute;zik&ouml;nyvben.
   <p />A megt&ouml;rt&eacute;nt ez a m&#369;velet, tudni fogja',
 
-
 // E
 'entree_dimensions' => 'M&eacute;retek&nbsp;:',
 'entree_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'entree_titre_image' => 'K&eacute;p c&iacute;me&nbsp;:',
 'envoi_via_le_site' => 'K&uuml;ld&eacute;s a honlapon kereszt&uuml;l',
-
 
 // F
 'fichier_introuvable' => '@fichier@ nev&#369; f&aacute;jl nem tal&aacute;lhat&oacute;',
@@ -284,7 +281,6 @@ K&ouml;sz&ouml;nj&uuml;k a r&eacute;szv&eacute;tel&eacute;t
 amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'forum_vous_inscrire' => 'be&iacute;ratkozni el&#337;sz&ouml;r.',
 
-
 // I
 'ical_texte_rss_articles' => 'A honlap cikkeinek &laquo;backend&raquo; f&aacute;jl tal&aacute;lhat&oacute; ezen a c&iacute;men:',
 'ical_texte_rss_articles2' => 'Egyar&aacute;nt lehet szerezni &laquo;backend&raquo; f&aacute;jlokat a honlap minden egyes rubrik&aacute;nak cikkeir&#337;l:',
@@ -299,7 +295,6 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'icone_brouteur' => 'Gyors b&ouml;ng&eacute;sz&eacute;s',
 'icone_configuration_site' => 'Konfigur&aacute;l&aacute;s',
 'icone_configurer_site' => 'A honlap konfigur&aacute;l&aacute;sa',
-'icone_creer_mot_cle' => '&Uacute;j kulcssz&oacute; l&eacute;trehoz&aacute;sa &eacute;s hozz&aacute;rendel&eacute;se ehhez a cikkhez',
 'icone_creer_nouvel_auteur' => '&Uacute;j szerz&#337; l&eacute;trehoz&aacute;sa',
 'icone_creer_rubrique' => 'Rovat l&eacute;trehoz&aacute;sa',
 'icone_creer_sous_rubrique' => 'Als&oacute;bb rovat l&eacute;trehoz&aacute;sa',
@@ -508,7 +503,6 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'infos_vos_pense_bete' => 'Az &Ouml;n eml&eacute;keztet&#337;i',
 'item_breve_proposee' => 'Javasolt h&iacute;r',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Csak az ikonok megjelen&iacute;t&eacute;se',
 'lien_afficher_texte_icones' => 'Ikonok &eacute;s sz&ouml;veg megjelen&iacute;t&eacute;se',
@@ -531,7 +525,6 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'lien_voir_auteur' => 'L&aacute;sd a szerz&#337;t',
 'login_acces_prive' => 'Bel&eacute;p&eacute;s a priv&aacute;t r&eacute;szbe',
 'login_autre_identifiant' => 'Csatlakoz&aacute;s m&aacute;sik azonos&iacute;t&oacute;val',
-'login_connexion_refusee' => 'Csatlakoz&aacute;s tagadva.',
 'login_cookie_accepte' => '&Aacute;ll&iacute;tsa be a b&ouml;ng&eacute;sz&#337;j&eacute;t &uacute;gy, hogy elfogadja &#337;ket(legal&aacute;bb ezen a honlapon).',
 'login_cookie_oblige' => 'A honlaphoz val&oacute; biztons&aacute;gos azonos&iacute;t&aacute;s &eacute;rdek&eacute;ben a s&uuml;tiket (cookies) el kell fogadni.',
 'login_deconnexion_ok' => 'Kijelentkez&eacute;s megt&ouml;rt&eacute;nt.',
@@ -559,14 +552,11 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'login_test_navigateur' => 'b&ouml;ng&eacute;sz&#337; teszt/&uacute;jracsatlakoz&aacute;s',
 'login_verifiez_navigateur' => '(Azonban ellen&#337;rizze, hogy a bong&eacute;sz&oacute; nem memoriz&aacute;lta-e a jelsz&oacute;t...)',
 
-
 // M
 'module_fichiers_langues' => 'Nyelvi f&aacute;jlok',
 
-
 // N
 'navigateur_pas_redirige' => 'Ha a b&ouml;ng&eacute;sz&oacute; nincsen &aacute;tir&aacute;ny&iacute;tva, akkor ide kattintson.',
-
 
 // O
 'onglet_affacer_base' => 'Adatb&aacute;zis t&ouml;rl&eacute;se',
@@ -587,7 +577,6 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'onglet_save_restaur_base' => 'Adatb&aacute;zis ment&eacute;se/resztaur&aacute;l&aacute;sa',
 'onglet_vider_cache' => 'Cache &uuml;r&iacute;t&eacute;se',
 'ortho_trop_de_fautes2' => 'El&ouml;sz&#337;r jav&iacute;tsa a legegy&eacute;rtelm&#369;bb hib&aacute;kat, majd prob&aacute;lkozzon &uacute;jra.',
-
 
 // P
 'pass_choix_pass' => 'Legyen sz&iacute;ves v&aacute;lasztani az &uacute;j jelszav&aacute;t :',
@@ -630,14 +619,12 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
 'previsualisation' => 'El&#337;n&eacute;zet',
 'previsualiser' => 'El&#337;n&eacute;zet',
 
-
 // S
 'squelette' => 'v&aacute;zlat',
 'squelette_inclus_ligne' => 'v&aacute;zlatot bele&eacute;rtve, sor',
 'squelette_ligne' => 'v&aacute;zlat, sor',
 'stats_visites_et_popularite' => '@visites@ l&aacute;togat&aacute;s&nbsp;; n&eacute;pszer&#369;s&eacute;g&nbsp;: @popularite@',
 'suivant' => 'k&ouml;vetkez&#337;',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
@@ -689,12 +676,11 @@ Pr&oacute;b&aacute;ljon',
 'titre_joindre_document' => 'DOKUMENTUM CSATOL&Aacute;SA',
 'titre_liens_entrants' => 'Bej&ouml;v&#337; linkek',
 'titre_mots_cles' => 'KULCSSZAVAK',
-'titre_probleme_technique' => 'Vigy&aacute;zat&nbsp;: m&#369;szaki hiba (MySQL szerver) miatt nincs hozz&aacute;f&eacute;r&eacute;s erre a r&eacute;szre. Meg&eacute;rt&eacute;s&eacute;t k&ouml;sz&ouml;nj&uuml;k.',
+'titre_probleme_technique' => 'Vigy&aacute;zat&nbsp;: m&#369;szaki hiba (SQL szerver) miatt nincs hozz&aacute;f&eacute;r&eacute;s erre a r&eacute;szre. Meg&eacute;rt&eacute;s&eacute;t k&ouml;sz&ouml;nj&uuml;k.',
 'titre_publier_document' => 'DOKUMENTUM PUBLIK&Aacute;L&Aacute;SA ABBAN A ROVATBAN',
 'titre_statistiques' => 'A honlap statisztikai',
 'titre_titre_document' => 'Dokumentum c&iacute;me&nbsp;:',
 'trad_reference' => '(eredeti cikk)',
-
 
 // U
 'upload_fichier_zip' => 'ZIP tipus&uacute; f&aacute;jl',
@@ -703,7 +689,6 @@ Pr&oacute;b&aacute;ljon',
 'upload_limit' => 'Ez a f&aacute;jl t&uacute;l nagy a szervernek; a m&aacute;ximalis <i>felt&ouml;lt&eacute;si</i> m&eacute;ret @max@.',
 'upload_zip_decompacter' => 'kit&ouml;m&ouml;ritve, &eacute;s az &ouml;sszes eleme a honlapra telep&iacute;tve. A honlapra telep&iacute;tett f&aacute;jlok a k&ouml;vetkez&#337;k lesznek :',
 'upload_zip_telquel' => 'Egymag&aacute;ban telep&iacute;tve, mint ZIP t&ouml;m&ouml;r&iacute;tett &aacute;ll&oacute;m&aacute;ny;',
-
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: B jelz&#337; ut&aacute;n',
@@ -727,8 +712,6 @@ Pr&oacute;b&aacute;ljon',
 'zbug_resultat' => 'eredm&eacute;ny',
 'zbug_serveur_indefini' => 'hat&aacute;rozatlan SQL szerver',
 'zbug_table_inconnue' => 'A &laquo; @table@ &raquo; nev&#369; SQL t&aacute;bla ismeretlen'
-
 );
-
 
 ?>

@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'Portugu&ecirc;s do Brasil [pt_br]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'ricardo@calepino.com',
-
 
 // A
 'access_interface_graphique' => 'Voltar para a interface gr&aacute;fica completa',
@@ -27,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'analyse_xml' => 'Analisar XML',
 'annuler' => 'Cancelar',
 'antispam_champ_vide' => 'Deixe, por favor, este campo vazio:',
+'articles_recents' => 'Mat&eacute;rias mais recentes',
 'avis_archive_incorrect' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; um arquivo do SPIP',
 'avis_archive_invalide' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; v&aacute;lida',
 'avis_attention' => 'ATEN&Ccedil;&Atilde;O!',
@@ -41,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Erro SQL',
 'avis_erreur_sauvegarde' => 'Erro na c&oacute;pia de seguran&ccedil;a (@type@ @id_objet@) !',
 'avis_erreur_visiteur' => 'Problema de acesso ao espa&ccedil;o privado',
-
 
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
@@ -73,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_telecharger' => 'Transferir',
 'bouton_valider' => 'Validar',
 
-
 // C
 'cal_apresmidi' => 'tarde',
 'cal_jour_entier' => 'dia todo',
@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'colonne' => 'Coluna',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, voc&ecirc; solicitou a altera&ccedil;&atilde;o de status deste elemento. Deseja continuar?',
 'correcte' => 'correta',
-
 
 // D
 'date_aujourdhui' => 'hoje',
@@ -198,7 +197,6 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 <p>Uma v&ecirc;z feita esta altera&ccedil;&atilde;o, voc&ecirc; poder&aacute; ',
 'double_occurrence' => 'Duplica&ccedil;&atilde;o',
 
-
 // E
 'entree_dimensions' => 'Dimens&otilde;es:',
 'entree_titre_document' => 'T&iacute;tulo do documento:',
@@ -207,7 +205,6 @@ Verifique se as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios 
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => '&Uacute;ltima tag em aberto:',
 'erreur_texte' => 'erro(s)',
-
 
 // F
 'fichier_introuvable' => 'Arquivo @fichier@ n&atilde;o encontrado',
@@ -305,7 +302,6 @@ Obrigado por participar
 'forum_votre_nom' => 'Seu nome (ou apelido):',
 'forum_vous_enregistrer' => 'Para participar deste f&oacute;rum, voc&ecirc; precisa se cadastrar previamente. Por favor, informe abaixo o identificador pessoal que lhe foi fornecido. Se voc&ecirc; n&atilde;o est&aacute; cadastrado, voc&ecirc; precisa',
 'forum_vous_inscrire' => 'cadastrar-se.',
-
 
 // I
 'ical_texte_rss_articles' => 'O arquivo &laquo;backend&raquo; das mat&eacute;rias deste site encontra-se no endere&ccedil;o:',
@@ -531,7 +527,6 @@ Obrigado por participar
 'infos_vos_pense_bete' => 'Seus lembretes',
 'item_breve_proposee' => 'Nota proposta',
 
-
 // L
 'lien_afficher_icones_seuls' => 'Exibir apenas os &iacute;cones',
 'lien_afficher_texte_icones' => 'Exibir &iacute;cones e texto',
@@ -582,16 +577,13 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 'login_test_navigateur' => 'testar navegador/reconex&atilde;o',
 'login_verifiez_navigateur' => '(Verifique sempre se o seu navegador n&atilde;o est&aacute; memorizando a sua senha...)',
 
-
 // M
 'masquer_trad' => 'esconder as tradu&ccedil;&otilde;es',
 'module_fichiers_langues' => 'Arquivos de idioma',
 
-
 // N
 'navigateur_pas_redirige' => 'Se o seu navegador n&atilde;o o redirecionar, clique aqui para continuar.',
 'numero' => 'N&uacute;mero',
-
 
 // O
 'occurence' => 'Ocorr&ecirc;ncia',
@@ -613,7 +605,6 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 'onglet_save_restaur_base' => 'Fazer c&oacute;pia de seguran&ccedil;a/restaurar a base',
 'onglet_vider_cache' => 'Esvaziar o cache',
 'ortho_trop_de_fautes2' => 'Comece corrigindo os erros mais &oacute;bvios e tente novamente.',
-
 
 // P
 'pass_choix_pass' => 'Por favor, escolha a sua nova senha:',
@@ -653,10 +644,8 @@ e reconectar-se com o site.
 'previsualisation' => 'Visualiza&ccedil;&atilde;o',
 'previsualiser' => 'Visualizar',
 
-
 // R
 'retour' => 'Voltar',
-
 
 // S
 'spip_conforme_dtd' => 'O SPIP considera este documento de acordo com o seu DOCTYPE:',
@@ -665,7 +654,6 @@ e reconectar-se com o site.
 'squelette_ligne' => 'esqueleto, linha',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
 'suivant' => 'seguinte',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;KB',
@@ -717,7 +705,6 @@ Tente se',
 'titre_titre_document' => 'T&iacute;tulo do documento:',
 'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)',
 
-
 // U
 'upload_fichier_zip' => 'Arquivo ZIP',
 'upload_fichier_zip_texte' => 'O arquivo que voc&ecirc; prop&ocirc;s instalar &eacute; um arquivo Zip.',
@@ -725,7 +712,6 @@ Tente se',
 'upload_limit' => 'Este arquivo &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
 'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os arquivos que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
 'upload_zip_telquel' => 'instalado; como arquivo compactado Zip;',
-
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
@@ -769,8 +755,6 @@ Tente se',
 'zxml_valeur_attribut' => 'valor do atributo',
 'zxml_vide_balise' => 'tag vazia',
 'zxml_vu' => 'previsualiza&ccedil;&atilde;o'
-
 );
-
 
 ?>
