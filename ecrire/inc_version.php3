@@ -668,7 +668,7 @@ function test_obgz () {
 }
 
 // si un buffer est deja ouvert, stop
-if ($flag_ob AND !headers_sent()) {
+if ($flag_ob AND ob_get_contents()===false AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
 	if (test_obgz()) {
 		ob_start('ob_gzhandler');
