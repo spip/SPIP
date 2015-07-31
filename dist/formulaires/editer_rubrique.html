@@ -1,5 +1,5 @@
-<div class='formfx editer_rubrique'>
-	<br class='spacer' />
+<div class='formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{new}'>
+	<!-- <br class='spacer' /> -->
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -8,39 +8,42 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_article' value='#ENV{id_article}' />
-	  <fieldset>
-	  <ol class="formfx">
-	    <li class="gauche obligatoire">
-	      <label for="titre"><em>#AIDER{arttitre}</em><:info_titre:></label>
-	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
-				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+	  <ul>
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+			<label for="titre"><:info_titre:></label>
+			<em class="aide">#AIDER{arttitre}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
+			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
 	
-	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{rubrub}}
-	    |chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
-	
+	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+			<label for="titreparent"><:titre_cadre_interieur_rubrique:></label>
+			<em class="aide">#AIDER{rubrub}</em>
+			(#VAL|chercher_rubrique{[(#ENV{id_rubrique}|intval)],#ENV{id_parent},'rubrique',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
+	    </li>]
+	    
 	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
-	    <li class="gauche">
-	      <label for="descriptif"><:texte_descriptif_rapide:></label>
-	      <div class='commentaire'><:entree_contenu_rubrique:></div>
-	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+			<label for="descriptif"><:texte_descriptif_rapide:></label>
+			<div class='commentaire'><:entree_contenu_rubrique:></div>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
-	    <li class="gauche">
-	      <label for="text_area"><em>#AIDER{raccourcis}</em><:info_texte_explicatif:></label>
-	    	[(#ENV**{_texte_trop_long,''})]
-	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
-	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+			<label for="text_area"><:info_texte_explicatif:></label>
+			<em class="aide">#AIDER{raccourcis}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[(#ENV**{_texte_trop_long,''})]
+			<div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>]
-	  </ol>
-	  </fieldset>
+	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
 	</form>
 	]
 </div>

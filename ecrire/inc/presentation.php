@@ -766,8 +766,13 @@ function fin_grand_cadre($return=false){
 // Cadre formulaires
 
 // http://doc.spip.org/@debut_cadre_formulaire
-function debut_cadre_formulaire($style='', $return=false){
-	$x = "\n<div class='cadre-formulaire'" .
+function debut_cadre_formulaire($style='', $return=false, $frm_editer=false){
+	// pour les formulaires d'edition cvt,
+	// pour ne pas changer l'historique classe
+	// cadre-formulaire presente dans de nombreux plugins
+	$editer = ($frm_editer ? '-editer':''); 
+	
+	$x = "\n<div class='cadre-formulaire$editer'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
 	if ($return) return  $x; else echo_log('debut_cadre_formulaire',$x);

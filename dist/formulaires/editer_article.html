@@ -1,5 +1,5 @@
-<div class='formfx editer_article'>
-	<br class='spacer' />
+<div class="formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{new}">
+	<!-- br class='spacer' / -->
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -8,93 +8,108 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_article' value='#ENV{id_article}' />
-	  <fieldset>
-	  <ol class="formfx">
-	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
-	    <li class="gauche">
-	      <label for="surtitre"><em>#AIDER{arttitre}</em><:texte_sur_titre:></label>
-	      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
+	  <ul>
+	  
+	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|oui)
+	    <li class="editer_surtitre[ (#ENV**{erreurs}|table_valeur{surtitre}|oui)erreur]">
+			<label for="surtitre"><:texte_sur_titre:></label>
+			<em class="aide">#AIDER{arttitre}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
+			<input type='text' name='surtitre' id='surtitre' class='text' value="[(#ENV**{surtitre})]" />
 	    </li>]
-	    <li class="gauche obligatoire">
-	      <label for="titre"><em>#AIDER{arttitre}</em><:info_titre:></label>
-	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
-				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+	    	<label for="titre"><:info_titre:></label>
+	    	<em class="aide">#AIDER{arttitre}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
+			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
-	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
-	    <li class="gauche">
-	      <label for="soustitre"><em>#AIDER{arttitre}</em><:texte_sous_titre:></label>
-	      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV**{soustitre})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
+	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|oui)
+	    <li class="editer_soustitre[ (#ENV**{erreurs}|table_valeur{soustitre}|oui)erreur]">
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
+			<label for="soustitre"><:texte_sous_titre:></label>
+			<em class="aide">#AIDER{arttitre}</em>
+			<input type='text' name='soustitre' class='text' id='soustitre' value="[(#ENV**{soustitre})]" />
 	    </li>]
-	
-	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T|concat{' ',#AIDER{artrub}}
-	    |chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
-	
-	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
-	    <li class="haut">
-	      <label for="descriptif"><em>#AIDER{artdesc}</em><:texte_descriptif_rapide:></label>
-	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+
+	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
+			<label for="titreparent"><:titre_cadre_interieur_rubrique:></label>
+			<em class="aide">#AIDER{artrub}</em>
+			(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
-	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
-	    [<li class='haut redirection'>(#ENV**{chapo}|match{^=}|?{' '})
+		
+	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{desctiptif}|oui)erreur]">
+			<label for="descriptif"><:texte_descriptif_rapide:></label>
+			<em class="aide">#AIDER{artdesc}</em>
+			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+	    </li>]
+	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
+	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=}|oui)
 				<label for='virtuel'><:info_redirection:></label>
-				<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''})]" />
+				<em class="aide">#AIDER{artvirt}</em>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{virtuel})</span>]
+				<input type='text' name='virtuel' id='virtuel' class='text' value="[(#ENV**{chapo}|replace{^=,''})]" />
 				<input type='hidden' name='changer_virtuel' value='oui' />
-				<div class='commentaire_bas'><em>#AIDER{artvirt}</em><:texte_article_virtuel_reference:></div>
-			</li>]
-			[<li class="haut">(#ENV**{chapo}|match{^=}|?{'',' '})
-				<label for="chapo"><em>#AIDER{arttitre}</em><:info_chapeau:></label>
-				<textarea name='chapo' id='chapo' class='forml'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
-			</li>]
+				<p class='commentaire'><:texte_article_virtuel_reference:></p>
+		</li>]
+		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=}|non)
+			<label for="chapo"><:info_chapeau:></label>
+			<em class="aide">#AIDER{arttitre}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
+			<textarea name='chapo' id='chapo'>[(#ENV**{chapo})]</textarea>
+		</li>]
 			]
-	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|?{' '})
-	  	<li>
-	    <fieldset>
-	      <legend><:entree_liens_sites:></legend><ol>
-	    <li class="gauche">
-	      <label for="nom_site"><:info_titre:></label>
-	      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
-	    </li>
-	    <li class="gauche">
-	      <label for="url_site"><:info_url:></label>
-	      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
-	    </li></ol>
-	    </fieldset></li>]
-	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
-	    <li class="haut">
-	      <label for="text_area"><em>#AIDER{arttexte}</em><:info_texte:></label>
-	    	[(#ENV**{_texte_trop_long,''})]
-	      <div class="commentaire"><em>#AIDER{raccourcis}</em><:texte_enrichir_mise_a_jour:></div>
-	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
-	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
-	
-		<script type='text/javascript'><!--
+
+	  	[(#ENV**{config}|table_valeur{articles_texte}|=={non}|?{#ENV**{texte,''},' '}|oui)
+	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+			<label for="text_area"><:info_texte:></label>
+			<em class="aide">#AIDER{arttexte}</em>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[(#ENV**{_texte_trop_long,''})]
+			<div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
+			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
+			<textarea name='texte' id='text_area' class='barre_inserer'[
+			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+			
+			<script type='text/javascript'><!--
 			jQuery(function(){
-				jQuery('#text_area')
-				.height((jQuery(window).height()-80)+'px');
+			jQuery('#text_area')
+			.height((jQuery(window).height()-80)+'px');
 			});
-		//--></script>
-	
+			//--></script>
 	    </li>]
-	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
-	    <li class="haut">
-	      <label for="ps"><:info_post_scriptum:></label>
-	      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{ps})</span>]
+	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
+	    <li class="editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
+			<label for="ps"><:info_post_scriptum:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{ps})</span>]
+			<textarea name='ps' id='ps' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 	    </li>]
-	  </ol>
-	  </fieldset>
+
+	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
+	  	<li class="editer_liens_sites">
+	    <fieldset>
+	      <legend><:entree_liens_sites:></legend>
+	      <ul>
+			<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+				<label for="nom_site"><:info_titre:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
+				<input type='text' name='nom_site' id='nom_site' class='text' value="[(#ENV**{nom_site})]" />
+			</li>
+			<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+				<label for="url_site"><:info_url:></label>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+				<input type='text' name='url_site' id='url_site' class='text' value="[(#ENV**{url_site})]" />
+			</li>
+		  </ul>
+	    </fieldset></li>]
+	    
+	  </ul>
+
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	  <p class='boutons'><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
 	</form>
 	]
 </div>

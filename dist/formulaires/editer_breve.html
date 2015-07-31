@@ -1,5 +1,5 @@
-<div class='formfx editer_breve'>
-	<br class='spacer' />
+<div class='formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{new}'>
+	<!-- <br class='spacer' /> -->
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -8,51 +8,59 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_breve' value='#ENV{id_breve}' />
-	  <fieldset>
-	  <ol class="formfx">
-	    <li class="gauche obligatoire champ_titre">
-	      <label for="titre"><:info_titre:></label>
-	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_breve}|_T})]"
+	  <ul>
+	    <li class="editer_titre obligatoire">
+	    	<label for="titre"><:info_titre:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_breve}|_T})]"
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 	    </li>
-	    [<li>(#VAL{entree_interieur_rubrique}|_T|concat{' ',#AIDER{brevesrub}}
-	    |chercher_rubrique{#ENV{id_breve},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'breve',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
-	
-	    <li class="haut champ_texte">
-	      <label for="text_area"><:entree_texte_breve:></label>
-	    	[(#ENV**{_texte_trop_long,''})]
-	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
-	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>	
+
+	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
+			<label for="titreparent"><:entree_interieur_rubrique:> très longue et puissante</label>
+			<em class='aide'>#AIDER{brevesrub}</em>
+			(#VAL|chercher_rubrique{#ENV{id_breve},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'breve',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
-	  	<li>
-	    <fieldset>
-	      <legend><:entree_liens_sites:>#AIDER{breveslien}</legend><ol>
-	    <li class="gauche champ_lien_titre">
-	      <label for="lien_titre"><:info_titre:></label>
-	      <input type='text' name='lien_titre' id='lien_titre' class='forml' value="[(#ENV**{lien_titre})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>]
+	    
+	    <li class="editer_texte">
+	      	<label for="text_area"><:entree_texte_breve:></label>
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[(#ENV**{_texte_trop_long,''})]
+			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
+			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+				(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
-	    <li class="gauche champ_lien_url">
-	      <label for="lien_url"><:info_url:></label>
-	      <input type='text' name='lien_url' id='lien_url' class='forml' value="[(#ENV**{lien_url})]" />
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_url})</span>]
-	    </li></ol>
-	    </fieldset></li>
-	    <li class="gauche champ_statut"><label for='statut'><:entree_breve_publiee:></label>
-			<select name='statut' id='statut' size='1' class='fondl'>
+	  	<li class="editer_liens_sites">
+			<fieldset>
+			<legend><:entree_liens_sites:></legend>
+			<ul>
+				<li class="editer_lien_titre">
+					<label for="lien_titre"><:info_titre:></label>
+					<em class='aide'>#AIDER{breveslien}</em>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>]
+					<input type='text' name='lien_titre' id='lien_titre' class='text' value="[(#ENV**{lien_titre})]" />
+				</li>
+				<li class="editer_lien_url">
+					<label for="lien_url"><:info_url:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_url})</span>]
+					<input type='text' name='lien_url' id='lien_url' class='text' value="[(#ENV**{lien_url})]" />
+				</li>
+			</ul>
+	    	</fieldset>
+	    </li>
+	    <li class="editer_statut">
+	    	<label for='statut'><:entree_breve_publiee:></label>
+	    	<em class='aide'>#AIDER{brevesstatut}</em>
+			<select name='statut' id='statut' size='1'>
 				<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:item_breve_proposee:></option>
 				<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:item_breve_refusee:></option>
 				<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:item_breve_validee:></option>
-			</select>#AIDER{brevesstatut}
+			</select>
 	    </li>
-	  </ol>
-	  </fieldset>
+	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
 	</form>
 	]
 </div>
