@@ -46,4 +46,16 @@ function action_editer_mot_dist($arg=null)
 	} else
 		return array($id_mot,'');
 }
+
+function supprimer_mot($id_mot) {
+	sql_delete("spip_mots", "id_mot=".intval($id_mot));
+	sql_delete("spip_mots_articles", "id_mot=".intval($id_mot));
+	sql_delete("spip_mots_rubriques", "id_mot=".intval($id_mot));
+	sql_delete("spip_mots_syndic", "id_mot=".intval($id_mot));
+	pipeline('trig_supprimer_objets_lies',
+		array(
+			array('type'=>'mot','id'=>$id_mot)
+		)
+	);
+}
 ?>

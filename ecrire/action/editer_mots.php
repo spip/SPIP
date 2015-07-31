@@ -37,15 +37,9 @@ function action_editer_mots_post($r)
 				sql_delete("spip_mots_$table", "$table_id=$id_objet" . (($id_mot <= 0) ? "" : " AND id_mot=$id_mot"));
 			else {
 				// disparition complete d'un mot
-				sql_delete("spip_mots", "id_mot=$id_mot");
-				sql_delete("spip_mots_articles", "id_mot=$id_mot");
-				sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
-				sql_delete("spip_mots_syndic", "id_mot=$id_mot");
-				pipeline('trig_supprimer_objets_lies',
-					array(
-						array('type'=>'mot','id'=>$id_mot)
-					)
-				);
+				// on ne doit plus passer ici mais dans action/supprimer_mot
+				include_spip('action/editer_mot');
+				supprimer_mot($id_mot);
 			}
 	}
 	if ($nouv_mot ? $nouv_mot : ($nouv_mot = _request('nouv_mot'))) {
@@ -70,17 +64,6 @@ function action_editer_mots_post($r)
 		);
 
 	$redirect = rawurldecode($redirect);
-
-	// hack du retour croise editer/grouper 
-
-	if (preg_match('/^(.*exec=)editer_mots(&.*)script=(grouper_mots)(.*)$/', $redirect, $r))
-	    $redirect = $r[1] . $r[3] . $r[2] . $r[4];
-	if (preg_match(',exec=grouper_mots,',$redirect)){
-		// mettre a jour le total de mots dans la liste pour eviter les pb de cache navigateur avec ajax
-		$id_groupe = parametre_url($redirect,'id_groupe'); // recuperer l'id_groupe dans l'url
-		$groupe = sql_countsel("spip_mots", "id_groupe=".sql_quote($id_groupe));
-		$redirect = parametre_url($redirect,'total',$groupe,'&');
-	}
 	    
 	if ($cherche_mot) {
 		if ($p = strpos($redirect, '#')) {

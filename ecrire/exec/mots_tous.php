@@ -113,21 +113,13 @@ function exec_mots_tous_dist()
 			//
 			// Afficher les mots-cles du groupe
 			//
+			echo "<div id='editer_mots-$id_groupe'>";
 
-			$groupe = sql_countsel("spip_mots", "id_groupe=$id_groupe");
-
-			echo "<div\nid='editer_mots-$id_groupe' style='position: relative;'>";
-
-			// Preliminaire: confirmation de suppression d'un mot lie a qqch
-			// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
-			if ($conf_mot  AND $son_groupe==$id_groupe) {
-				include_spip('inc/grouper_mots');
-				echo confirmer_mot($conf_mot, $id_groupe, $groupe);
-			}
-			if ($groupe) {
-					$grouper_mots = charger_fonction('grouper_mots', 'inc');
-				echo $grouper_mots($id_groupe, $groupe);
-			}
+			$lister_objets = charger_fonction('lister_objets','inc');
+			echo $lister_objets('mots-admin',array(
+					'id_groupe'=>$id_groupe,
+					'retour'=> ancre_url(generer_url_ecrire('mots_tous','',false,true),"editer_mots-$id_groupe")
+					));
 
 			echo "</div>";
 
@@ -158,59 +150,4 @@ function exec_mots_tous_dist()
 	echo fin_gauche(), fin_page();
 }
 
-// http://doc.spip.org/@confirmer_mot
-function confirmer_mot ($id_mot, $row_groupe, $total)
-{
-	$row = sql_fetsel("titre", "spip_mots", "id_mot=$id_mot");
-	if (!$row) return ""; // deja detruit (acces concurrent etc)
-
-	if (!autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $row_groupe['id_groupe'])))
-		return ''; // usurpateur
-
-	include_spip('inc/grouper_mots');
-	$titre_mot = typo($row['titre']);
-	$type_mot = typo($row_groupe['titre']);
-	$son_groupe = $row_groupe['id_groupe'];
-
-	if (($na = intval(_request('na'))) == 1) {
-		$texte_lie = _T('info_un_article')." ";
-	} else if ($na > 1) {
-		$texte_lie = _T('info_nombre_articles', array('nb_articles' => $na)) ." ";
-	}
-	if (($nb = intval(_request('nb'))) == 1) {
-		$texte_lie .= _T('info_une_breve')." ";
-	} else if ($nb > 1) {
-		$texte_lie .= _T('info_nombre_breves', array('nb_breves' => $nb))." ";
-	}
-	if (($ns = intval(_request('ns'))) == 1) {
-		$texte_lie .= _T('info_un_site')." ";
-	} else if ($ns > 1) {
-		$texte_lie .= _T('info_nombre_sites', array('nb_sites' => $ns))." ";
-	}
-	if (($nr = intval(_request('nr'))) == 1) {
-		$texte_lie .= _T('info_une_rubrique')." ";
-	} else if ($nr > 1) {
-		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nr))." ";
-	}
-
-	return debut_boite_info(true)
-	. "<div class='serif'>"
-	. _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie))
-	. "<p style='text-align: right'>"
-	. generer_supprimer_mot($id_mot, $son_groupe, ("<b>" . _T('item_oui') . "</b>"), $total)
-	. "<br />\n"
-	.  _T('info_oui_suppression_mot_cle')
-	. '</p>'
-	  /* troublant. A refaire avec une visibility
-	 . "<li><b><a href='" 
-	. generer_url_ecrire("mots_tous")
-	. "#editer_mots-$son_groupe"
-	. "'>"
-	. _T('item_non')
-	. "</a>,</b> "
-	. _T('info_non_suppression_mot_cle')
-	. "</ul>" */
-	. "</div>"
-	. fin_boite_info(true);
-}
 ?>
