@@ -30,8 +30,11 @@ if ($action = _request('action')) {
 
 // Sinon, reglage du $fond
 
-# passe par INCLURE()
-if (isset($contexte_inclus['fond']))
+# cas normal (securise anti injection par inc_utils)
+if (isset($fond)) { }
+
+# passe par INCLURE(){fond=...}
+else if (isset($contexte_inclus['fond']))
 	$fond = $contexte_inclus['fond'];
 
 # passe par l'url
@@ -41,10 +44,9 @@ else if (isset($_GET['page'])) {
 	if (strstr($fond, '/'))
 		die (_L("Faut pas se gener"));
 
-# par defaut
+# par defaut, la globale
 } else
 	tester_variable('fond', 'sommaire');
-
 
 // Particularites de certains squelettes
 if ($fond == 'login')
