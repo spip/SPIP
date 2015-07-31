@@ -23,7 +23,7 @@ function exec_informer_dist()
 	$col = intval(_request('col'));
 	$exclus = intval(_request('exclus'));
 	$do = _request('do');
-	spip_log("informer($id, $col, $exclus, _request('rac'), _request('type'), $do");
+
 	if (!preg_match('/^\w+$/', $do)) die();
 	if (!$do) $do = 'aff_selection_titre';
 	
