@@ -50,17 +50,7 @@
 	</div></form>
 	]
 </div>
-<script type="text/javascript">
-	jQuery('.formulaire_#FORM .action .delete').click(function(){
-		jQuery(this).parents('tr').addClass('remove').animate({opacity: "0.0"}, 'fast');
-	});
-	/* devrait necessiter le plugin jquery.color.js ?*/
-	jQuery('.formulaire_#FORM .append').each(function(){
-		jQuery(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000, function(){
-			jQuery('td',this).animate({backgroundColor: '#ffffff'}, 3000,function(){
-				jQuery(this).parents('tr').removeClass('append');
-			})
-		});
-	});
-
-</script>
+<script type="text/javascript">/*<![CDATA[*/
+jQuery('.formulaire_#FORM .action .delete').click(function(){jQuery(this).parents('tr').eq(0).animateRemove();});
+jQuery('.formulaire_#FORM .append').animateAppend();
+/*]]>*/</script>
