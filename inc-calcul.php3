@@ -17,13 +17,20 @@ include_ecrire("inc_documents.php3");
 include_local("inc-calcul_mysql3.php");
 include_local("inc-calcul_html4.php");
 
-# Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
-# le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
+
+// Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
+// le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
 
 if (file_exists("mes_fonctions.php3")) 
     include_local ("mes_fonctions.php3");
 
 
+// Gestionnaire d'URLs
+if (@file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
+else { include_local ("inc-urls-dist.php3"); }
+
+
+// Charge un squelette (en demande au besoin la compilation)
 function charger_squelette ($squelette) {
 	$ext = $GLOBALS['extension_squelette'];
 	$nom = $ext . '_' . md5($squelette);
@@ -156,11 +163,7 @@ function calculer_contexte() {
 function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
 	global $spip_lang;
 
-	// Mise au point des URLs personnalisees
-	if (@file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
-	else { include_local ("inc-urls-dist.php3"); }
-
-	// C'est sale mais historique
+	// Gestion des URLs personnalises - sale mais historique
 	if (function_exists("recuperer_parametres_url")) {
 		global $contexte;
 		$contexte = $contexte_local;
