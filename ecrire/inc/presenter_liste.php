@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Elle renvoie une enumeration HTML de ces lignes formatees, 
 // avec une pagination appelable en Ajax si $idom et $url sont fournis
 
+// http://doc.spip.org/@inc_presenter_liste_dist
 function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $styles, $idom='', $title='', $icone='', $url='', $cpt=NULL)
 {
 	global $spip_display, $spip_lang_left;
