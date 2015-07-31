@@ -58,23 +58,83 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	exit;
 }
 
+$GLOBALS['prefetch']['inc/autoriser']['fetch']='service_mini';
+$GLOBALS['prefetch']['inc/auth']['fetch']='service_mini';
+$GLOBALS['prefetch']['inc/charsets']['fetch']='service_mini';
+$GLOBALS['prefetch']['inc/filtres']['fetch']='service_mini';
+$GLOBALS['prefetch']['inc/meta']['fetch']='service_mini';
+$GLOBALS['prefetch']['inc/session']['fetch']='service_mini';
+$GLOBALS['prefetch']['public/assembler']['fetch']='service_mini';
+$GLOBALS['prefetch']['public/cacher']['fetch']='service_mini';
+
+$GLOBALS['prefetch']['base/abstract_sql']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['base/auxiliaires']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['base/db_mysql']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['base/serial']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['base/typedoc']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/actions']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/acces']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/date']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/invalideur']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/forum']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/texte']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['public/parametrer']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['public/styliser']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['public/composer']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel'; // ne passe pas dans le compacteur a cause des <<<
+
+// inclusion anticipee par bloc pour optimisation des find_in_path
+function include_prefetch($f){
+	static $encours=false;
+	if (($fetch=$GLOBALS['prefetch'][$f]['fetch'])==false) return false; // le chargement anticipe est deja fait, ne plus rien inclure
+	if ($encours) return true;// la construction du chargeur est en cours, inclure normalement pour ne pas boucler
+	if (@is_readable(($nom_fetch = _DIR_TMP."prefetch-noyau-$fetch.php"))){
+		include_once($nom_fetch);
+		return $GLOBALS['prefetch'][$f]['fetch']; // false si le fichier est bien dans le prefetch
+	}
+	$encours = true; // ne plus fetcher ce hit la
+	$prologue = "";
+	$source = "";
+	foreach($GLOBALS['prefetch'] as $fichier=>$pre)
+		if ($pre['fetch']==$fetch){
+			$s = include_spip($fichier,false);
+			lire_fichier($s,$contenu);
+			if (strlen($contenu)){
+				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fichier']='$s';\n";
+				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fetch']=false;\n";
+				$source .= $contenu;
+			}
+		}
+	$source = "<"."?php\n$prologue?".">".$source;
+	$source = preg_replace(',\?'.'>\s*<'.'\?php,ms','',$source); // remplacer les successions fermeture/ouverture des balises php
+	include_spip('inc/filtres');
+	ecrire_fichier($nom_fetch,$source); #compacte_php($source) si on a un compacteur qui marche ...
+	return true;
+}
 //
 // une fonction cherchant un fichier dans une liste de repertoires
 //
 // http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
-
-	// Dans le noyau ?
-	if (isset($GLOBALS['noyau'][$f])) {
-		$s = $GLOBALS['noyau'][$f];
+	$s = "";
+	if (isset($GLOBALS['prefetch'][$f])){
+		$include = ($include AND include_prefetch($f));
+		if (isset($GLOBALS['prefetch'][$f]['fichier']))
+			$s = $GLOBALS['prefetch'][$f]['fichier'];
 	}
-	// Sinon le chercher et mettre a jour le noyau
-	else {
-		if (!$s = find_in_path($f . '.php')
-		AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
-			return $GLOBALS['noyau'][$f] = false;
-		} else
-			$GLOBALS['noyau'][$f] = $s;
+	if(!$s) {
+		// Dans le noyau ?
+		if (isset($GLOBALS['noyau'][$f])) {
+			$s = $GLOBALS['noyau'][$f];
+		}
+		// Sinon le chercher et mettre a jour le noyau
+		else {
+			if (!$s = find_in_path($f . '.php')
+			AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
+				return $GLOBALS['noyau'][$f] = false;
+			} else
+				$GLOBALS['noyau'][$f] = $s;
+		}
 	}
 
 	// On charge le fichier (sauf si on ne voulait que son chemin)

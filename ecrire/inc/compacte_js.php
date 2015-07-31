@@ -313,16 +313,26 @@ class JavaScriptCompressor {
          * 	creates a new BaseConvert class variable (base 36)
 	 */
 // http://doc.spip.org/@JavaScriptCompressor
-	function JavaScriptCompressor() {
+	function JavaScriptCompressor($langage='js') {
 		$this->__SourceMap = new SourceMap();
 		$this->__BC = new BaseConvert('0123456789abcdefghijklmnopqrstuvwxyz');
-		$this->__delimeter = array(
-			array('name'=>'doublequote', 'start'=>'"', 'end'=>'"', 'noslash'=>true),
-			array('name'=>'singlequote', 'start'=>"'", 'end'=>"'", 'noslash'=>true),
-			array('name'=>'singlelinecomment', 'start'=>'//', 'end'=>array("\n", "\r")),
-			array('name'=>'multilinecomment', 'start'=>'/*', 'end'=>'*/'),
-			array('name'=>'regexp', 'start'=>'/', 'end'=>'/', 'match'=>"/^\/[^\n\r]+\/$/", 'noslash'=>true)
-		);
+		if ($langage=='php')
+			$this->__delimeter = array(
+				array('name'=>'eof', 'start'=>'<<<', 'end'=>array(';\n',';\r')),
+				array('name'=>'doublequote', 'start'=>'"', 'end'=>'"', 'noslash'=>true),
+				array('name'=>'singlequote', 'start'=>"'", 'end'=>"'", 'noslash'=>true),
+				array('name'=>'singlelinecomment', 'start'=>'//', 'end'=>array("\n", "\r")),
+				array('name'=>'singlelinecommentdiese', 'start'=>'#', 'end'=>array("\n", "\r")),
+				array('name'=>'multilinecomment', 'start'=>'/*', 'end'=>'*/')
+			);
+		else
+			$this->__delimeter = array(
+				array('name'=>'doublequote', 'start'=>'"', 'end'=>'"', 'noslash'=>true),
+				array('name'=>'singlequote', 'start'=>"'", 'end'=>"'", 'noslash'=>true),
+				array('name'=>'singlelinecomment', 'start'=>'//', 'end'=>array("\n", "\r")),
+				array('name'=>'multilinecomment', 'start'=>'/*', 'end'=>'*/'),
+				array('name'=>'regexp', 'start'=>'/', 'end'=>'/', 'match'=>"/^\/[^\n\r]+\/$/", 'noslash'=>true)
+			);
 	}
 
 	/**
@@ -388,7 +398,7 @@ class JavaScriptCompressor {
 		$this->__sourceManager($jsSource);
 		for($a = 0, $b = $this->__totalSources; $a < $b; $a++)
 			$this->__sources[$a]['code'] = $this->__clean($this->__sources[$a]['code']);
-		$header = $this->__getHeader();
+		//$header = $this->__getHeader();
 		for($a = 0, $b = $this->__totalSources; $a < $b; $a++){
 			$tmp = &$this->__sources[$a]['code'];
 			$this->__sources[$a] = &$tmp;
