@@ -65,7 +65,8 @@ function surligner_regexp_accents ($mot) {
 		"i" => "[i".chr(236).chr(237).chr(238).chr(239). chr(204).chr(205).chr(206).chr(207)."]",
 		"u" => "[u".chr(249).chr(250).chr(251).chr(252). chr(217).chr(218).chr(219).chr(220)."]",
 		"y" => "[y".chr(255)."]",
-		"n" => "[n".chr(209).chr(241)."]"
+		"n" => "[n".chr(209).chr(241)."]",
+		"-" => " -"
 	);
 
 	$mot = surligner_sans_accents ($mot);
@@ -81,13 +82,17 @@ function surligner_regexp_accents ($mot) {
 	return $mot;
 }
 
-
 // mettre en rouge les mots passes dans $var_recherche
 // http://doc.spip.org/@surligner_mots
 function surligner_mots($page, $mots) {
 	global $nombre_surligne;
 	include_spip('inc/texte'); // pour le reglage de $nombre_surligne
 	tester_variable('nombre_surligne', 4);
+
+	// mots colles ?
+	$mots = preg_replace_callback(',"(.+?)",ms',
+		create_function('$x','return preg_replace("/\s+/", "-", $x[1]);'),
+		$mots);
 
 	// Remplacer les caracteres potentiellement accentues dans la chaine
 	// de recherche par les choix correspondants en syntaxe regexp (!)
@@ -99,12 +104,8 @@ function surligner_mots($page, $mots) {
 			$mots_surligne[] = $mot;
 		}
 	}
-
+var_dump($mots_surligne);
 	if (!$mots_surligne) return $page;
-
-	$regexp = '/((^|>)([^<]*[^[:alnum:]_<\x80-\xFF])?)(('
-	. join('|', $mots_surligne)
-	. ')[[:alnum:]_\x80-\xFF]*?)/Uis';
 
 	// en cas de surlignement limite' (champs #SURLIGNE), 
 	// le compilateur a inse're' les balises de surlignement
@@ -119,7 +120,7 @@ function surligner_mots($page, $mots) {
 			$page = substr($page, $p+strlen(MARQUEUR_SURLIGNE));
 			if (!$q = strpos($page,MARQUEUR_FSURLIGNE))
 				$q = 1+strlen($page);
-			$debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
+			$debut .= trouve_surligne(substr($page, 0, $q-1), $mots_surligne);
 			$page = substr($page, $q+strlen(MARQUEUR_FSURLIGNE));
 			$p = strpos($page,MARQUEUR_SURLIGNE);
 		}
@@ -132,20 +133,28 @@ function surligner_mots($page, $mots) {
 			$page = substr($page, strlen($debut));
 		} else
 			$debut = '';
-		return $debut . trouve_surligne($page, $regexp);
+		return $debut . trouve_surligne($page, $mots_surligne);
 	}
 }
 
 // http://doc.spip.org/@trouve_surligne
-function trouve_surligne($page, $regexp) {
+function trouve_surligne($page, $mots_surligne) {
 	// Remplacer une occurrence de mot maxi par espace inter-tag
 	// (max 1 par paragraphe, sauf italiques etc.)
 	// se limiter a 4 remplacements pour ne pas bouffer le CPU ;
 	// traiter <textarea...>....</textarea> comme un tag.
 	global $nombre_surligne;
-	$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
-	$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
-	$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
+
+	foreach ($mots_surligne as $m) {
+		$regexp = '/((^|>)([^<]*[^[:alnum:]_<\x80-\xFF])?)('
+		. $m
+		. '[[:alnum:]_\x80-\xFF]*?)/Uis';
+
+		$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
+		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
+		$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
+	}
+
 	return $page ;
 }
 
