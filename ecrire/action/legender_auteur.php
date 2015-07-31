@@ -30,16 +30,16 @@ function action_legender_auteur_dist()
         if (!preg_match(",^(\d+)\D(\d*)(\D(\w*)\D(.*))?$,", $arg, $r)) {
 		$r = "action_legender_auteur_dist $arg pas compris";
 		spip_log($r);
-        } else 	redirige_par_entete(action_legender_post($r));
+        } else 	redirige_par_entete(action_legender_auteur_post($r));
 }
 
 // http://doc.spip.org/@action_legender_post
-function action_legender_post($r)
+function action_legender_auteur_post($r)
 {
-	$auteur_session = _request('auteur_session');
+	global $auteur_session;
+
 	$bio = _request('bio');
 	$champs_extra = _request('champs_extra');
-	$auteur_session = _request('auteur_session');
 	$email = _request('email');
 	$id_auteur = _request('id_auteur');
 	$new_login = _request('new_login');
@@ -130,7 +130,7 @@ function action_legender_post($r)
 	// seuls les admins peuvent modifier le mail
 	// les admins restreints ne peuvent modifier celui des autres admins
 
-	if (isset($email) AND $auteur_session['statut'] == '0minirezo') {
+	if (_request('email') AND $auteur_session['statut'] == '0minirezo') {
 		if (!($ok = ($statut <> '0minirezo'))) {
 			if (is_string($acces))
 				$acces = admin_general($auteur_session['id_auteur']);
