@@ -810,15 +810,13 @@ function post_autobr($texte, $delim="\n_ ") {
 }
 
 
-
-// les ci-devant blocs multi sont maintenant traites en amont.
-// garder cette fonction pour de vielles contrib qui l'appelleraient
-
-function extraire_multi ($letexte) {return $letexte;}
+//
+// Gestion des blocs multilingues
+//
 
 //
 // Selection dans un tableau dont les index sont des noms de langues
-// de la valeur associee a la langue en cours (ci-devant bloc multi)
+// de la valeur associee a la langue en cours
 //
 
 function multi_trad ($trads) {
@@ -836,6 +834,55 @@ function multi_trad ($trads) {
 	// ou permettre de choisir une langue "plus proche",
 	// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
 	else  return array_shift($trads);
+}
+
+// analyse un bloc multi
+function extraire_trad ($bloc) {
+	$lang = '';
+
+	while (preg_match("/^(.*?)[\{\[]([a-z_]+)[\}\]]/si", $bloc, $regs)) {
+		$texte = trim($regs[1]);
+		if ($texte OR $lang)
+			$trads[$lang] = $texte;
+		$bloc = substr($bloc, strlen($regs[0]));
+		$lang = $regs[2];
+	}
+	$trads[$lang] = $bloc;
+
+	// faire la traduction avec ces donnees
+	return multi_trad($trads);
+}
+
+// repere les blocs multi dans un texte et extrait le bon
+function extraire_multi ($letexte) {
+	global $flag_pcre;
+
+	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
+	if ($flag_pcre AND preg_match_all("@<multi>(.*?)</multi>@s", $letexte, $regs, PREG_SET_ORDER)) {
+		while (list(,$reg) = each ($regs)) {
+			$letexte = str_replace($reg[0], extraire_trad($reg[1]), $letexte);
+		}
+	}
+	return $letexte;
+}
+
+// popup des blocs multi dans l'espace prive (a ameliorer)
+function ajoute_popup_multi($langue_demandee, $trads, $texte) {
+	static $num_multi=0;
+	global $multi_popup;
+	while (list($lang,$bloc) = each($trads)) {
+		if ($lang != $langue_demandee)
+			$survol .= "[$lang] ".supprimer_tags(couper($bloc,20))."\n";
+		$texte_popup .= "<br /><b>".traduire_nom_langue($lang)."</b> ".ereg_replace("\n+","<br />", supprimer_tags(couper(propre($bloc),200)));
+	}
+
+	if ($survol) {
+		$num_multi ++;
+		$texte .= " <img src=\"" . _DIR_IMG_PACK . "langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"return openmulti($num_multi)\" />";
+		$multi_popup .= "textes_multi[$num_multi] = '".addslashes($texte_popup)."';\n";
+	}
+
+	return $texte;
 }
 
 // Raccourci ancre [#ancre<-]
