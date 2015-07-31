@@ -79,7 +79,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// passer par objet_type pour avoir les alias
 	// et supprimer les _
-	$type = str_replace('_','',  objet_type($type));
+	$type = str_replace('_','',  $faire=='bouton'?$type:objet_type($type));
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
@@ -541,5 +541,9 @@ function autoriser_base_reparer_dist($faire, $type, $id, $qui, $opts) {
 		return false;
 
 	return true;
+}
+
+function autoriser_mesarticles_bouton_dist($faire, $type, $id, $qui, $opts){
+	return sql_countsel('spip_auteurs_liens',"objet='article' AND id_auteur=".intval($qui['id_auteur']));
 }
 ?>
