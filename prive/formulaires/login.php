@@ -161,7 +161,7 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	$session($auteur);
 	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
 	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-	$p = array('prefs' => serialize($prefs));
+	$p = array('prefs' => serialize($p));
 	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
 	//  bloquer ici le visiteur qui tente d'abuser de ses droits
 	verifier_visiteur();
