@@ -130,7 +130,11 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 
 		echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
 
-		if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
+		if (($statut == '6forum')
+		OR (lire_meta('accepter_visiteurs') == 'oui')
+		OR (lire_meta('forums_publics') == 'abo')
+		OR spip_num_rows(spip_query("SELECT statut
+		FROM spip_auteurs WHERE statut='6forum'")))
 			echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
 		echo "<OPTION".mySel("5poubelle",$statut).
 		  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
