@@ -61,20 +61,24 @@ function insert_article($id_rubrique) {
 			$choisie = 'oui';
 		}
 	}
+
+	$row = spip_fetch_array(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+
+	$id_secteur = $row['id_secteur'];
+
 	if (!$lang) {
 		$lang = $GLOBALS['meta']['langue_site'];
 		$choisie = 'non';
-		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
-			$lang = $row['lang'];
+		$lang = $row['lang'];
 	}
 
 	$id_article = spip_abstract_insert("spip_articles",
-		"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)",
-		"($id_rubrique, 'prepa', NOW(), '"
+		"(id_rubrique, id_secteur, statut, date, accepter_forum, lang, langue_choisie)",
+		"($id_rubrique, $id_secteur, 'prepa', NOW(), '"
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
 	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
-	propager_les_secteurs();
+
 	return $id_article;
 }
 
