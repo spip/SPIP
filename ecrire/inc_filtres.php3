@@ -538,13 +538,15 @@ function affdate_base($numdate, $vue) {
 	switch ($spip_lang) {
 		case 'en':
 			switch($jour) {
-			case '1': $jour = '1st';
-			case '2': $jour = '2nd';
-			case '3': $jour = '3rd';
-			case '21': $jour = '21st';
-			case '22': $jour = '22nd';
-			case '23': $jour = '23rd';
-			case '31': $jour = '31st';
+			case 0: $jour = ''; break;
+			case 1: $jour = '1st'; break;
+			case 2: $jour = '2nd'; break;
+			case 3: $jour = '3rd'; break;
+			case 21: $jour = '21st'; break;
+			case 22: $jour = '22nd'; break;
+			case 23: $jour = '23rd'; break;
+			case 31: $jour = '31st'; break;
+			default: $jour .= 'th';
 			}
 		case 'fr':
 			if ($jour == '1') $jour = '1er';
