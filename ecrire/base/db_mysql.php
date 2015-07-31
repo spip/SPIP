@@ -378,8 +378,12 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 // http://doc.spip.org/@spip_mysql_insertq
 function spip_mysql_insertq($table, $couples, $desc=array(), $serveur='') {
 
+	if (!$desc) $desc = description_table($table);
+	if (!$desc) die("$table insertion sans description");
+	$fields =  $desc['field'];
+
 	foreach ($couples as $champ => $val) {
-		$couples[$champ]= _q($val);
+		$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
 	}
 
 	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur);
@@ -487,5 +491,11 @@ function spip_release_lock($nom) {
 	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
 
 	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+}
+
+function spip_mysql_cite($val, $type) {
+	if ((strpos($type, 'datetime')===0) OR (strpos($type, 'TIMESTAMP')===0))
+	  return $val;
+	else return _q($val);
 }
 ?>
