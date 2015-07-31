@@ -124,9 +124,10 @@ function calculer_boucle($id_boucle, &$boucles)
 		 (($flag_parties) ? 
 		  calculer_parties($boucle->partie,
 				   $boucle->mode_partie,
-				   $boucle->total_parties) :
-		  ((!$boucle->numrows) ? '' : '
-	$PileNum[$SP] = @spip_num_rows($result);')) .
+				   $boucle->total_parties,
+				   $id_boucle) :
+		  ((!$boucle->numrows) ? '' : "
+	\$PileNum['$id_boucle'] = @spip_num_rows(\$result);")) .
 		 ((!$flag_cpt) ? '' : "\n\t\$compteur_boucle = 0;") .
 		 ((!$corps) ? "" :
 		  (
@@ -152,7 +153,7 @@ function calculer_boucle($id_boucle, &$boucles)
 
 // une grosse fonction pour un petit cas
 
-function calculer_parties($partie, $mode_partie, $total_parties)
+function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle)
 {
      return ('
 	$fin_boucle = @spip_num_rows($result);' .
@@ -195,7 +196,7 @@ function calculer_parties($partie, $mode_partie, $total_parties)
 # ce qui doit re'duire la me'moire ne'cessaire au processus
 # En de'coule une combinatoire laborieuse mais sans difficulte'
 
-function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $id_mere)
+function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere)
 {
 	if ((!$tableau)) return array("''",'');
 	$texte = '';
@@ -226,11 +227,11 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 	    if ($objet->type ==  'boucle') {
 		$nom = $objet->id_boucle;
 		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix,
-					       $objet->id_boucle, $niv+2,$rec, $boucles, $id_mere);
+					       $id_boucle, $niv+2, $boucles, $nom);
 		list($ac,$am) = calculer_liste($objet->cond_apres, $prefix,
-					       $objet->id_boucle, $niv+2,$rec, $boucles, $id_mere);
+					       $id_boucle, $niv+2, $boucles, $nom);
 		list($oc,$om) = calculer_liste($objet->cond_altern, $prefix,
-					       $objet->id_boucle, $niv+1,$rec, $boucles, $id_mere);
+					       $id_boucle, $niv+1,$boucles, $nom);
 
 	      
 	      $c = $prefix .
@@ -238,14 +239,14 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 		'($Cache, $PileRow, $doublons, $PileNum, $SP)';
 	      $m = "";
 	    } else {
-		list($c,$m) = 
+	      list($c,$m) = 
 		  calculer_champ($objet->fonctions, 
 				 $objet->nom_champ,
 				 $id_boucle,
 				 $boucles,
 				 $id_mere);
-		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,false, $boucles, $id_mere); 
-	      	list($ac,$am) = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,false, $boucles, $id_mere);
+		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,$boucles, $id_mere); 
+	      	list($ac,$am) = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,$boucles, $id_mere);
 		$oc = "''";
 		$om = "";
 	    }
@@ -343,7 +344,6 @@ function calculer_squelette($squelette, $nom, $gram) {
 			       $nom,
 			       $boucle->param,
 			       1,
-			       true,
 			       $boucles,
 			       $id);
 	    }
@@ -352,15 +352,12 @@ function calculer_squelette($squelette, $nom, $gram) {
 	{ 
 	  if ($boucle->type_requete != 'boucle') 
 	    {
-#	  spip_log("calcul_liste $id de type" . $boucle->type_requete);
 	  calculer_params($boucle->type_requete, $boucle->param, $id, $boucles);
-
 	  $boucles[$id]->return =
 	    calculer_liste($boucle->milieu,
 			   $nom,
 			   $id,
 			   1,
-			   false,
 			   $boucles,
 			   $id);
 	    }
@@ -370,7 +367,7 @@ function calculer_squelette($squelette, $nom, $gram) {
   // idem pour la racine
 
   list($return,$corps) =
-    calculer_liste($racine, $nom, '',0, false, $boucles, '');
+    calculer_liste($racine, $nom, '',0, $boucles, '');
 
   // Corps de toutes les fonctions PHP,
   // en particulier les requetes SQL et TOTAL_BOUCLE

@@ -123,21 +123,13 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		break;
 
   case 'TOTAL_BOUCLE':
-	  $n = 0;
-	  $b = $id_boucle;
-	  // si $id_boucle est vide, c'est la racine 
-	  // il faudrait dire a` l'auteur du squelette que ca n'a pas de sens
-	  while ($b != $id_mere)
+	if (!$id_mere)
 	    {
-	      $n++;
-	      $b = $boucles[$b]->id_parent;
-	      // c~a ne devrait pas arriver si id_mere != '',
-	      // mais je ne prends pas le risque
-	      if (!$b) break;
+	      include_local("inc-debug-squel.php3");
+	      erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $id_boucle);
 	    }
-	$code = '$PileNum[$SP' . (($n==0) ? "" : "+$n") . ']';
-	$boucles[$id_boucle]->numrows = true;
-#	spip_log("TOTAL_BOUCLE: $id_boucle dans $id_mere");
+	$code = "\$PileNum[$id_mere]";
+	$boucles[$id_mere]->numrows = true;
 		break;
 
   case 'POINTS':
