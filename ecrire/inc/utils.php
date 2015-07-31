@@ -1568,7 +1568,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 	$texte = "";
 	$pages = array();
-	if (isset($contexte['fond']))
+	if (isset($contexte['fond'])
+	 // securite anti injection pour permettre aux plugins de faire 
+	 // des interfaces avec simplement recuperer_fond($fond,$_GET);
+	 AND $contexte['fond']!==_request('fond'))
 		$fond = $contexte['fond'];
 
 	$lang_select = '';

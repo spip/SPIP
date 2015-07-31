@@ -474,7 +474,7 @@ function phraser_criteres($params, &$result) {
 			    }
 			  elseif ($param == 'recherche')
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
-			      $result->hash = true;
+			      $result->hash = ' ';
 			  if (preg_match(',^ *([0-9-]+) *(/) *(.+) *$,', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
 			  } elseif (preg_match(',^([!]?)(' . CHAMP_SQL_PLUS_FONC . 
