@@ -83,17 +83,89 @@ select.fondl {
 }
 .maj-debut:first-letter { text-transform: uppercase; }
 
+/*style for horizontal list <div class='h-list'><ul ><li><tag class='menu-item'></tag></li></ul></div>*/
+/*for IE item list must be specified in .menu-item*/
+/*possible added classes lefted centered righted vcentered*/  
+
+.h-list {display:table}
+.h-list ul {
+	display:table-row;
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+.h-list li {display:table-cell;padding:0;margin:0}
+
+.h-list ul>li .menu-item {width:auto !important}
+
+.vcentered li {vertical-align:middle}
+.lefted {margin:0 auto 0 0;}
+.centered {margin:0 auto;}
+.righted {margin:0 0 0 auto;}
+
+/*style for bandeau-principal*/
+#bandeau-principal {padding-top:5px;border-bottom: 1px solid #000;position:relative;z-index:90;background:#fff}
+#bandeau-principal .h-list .menu-item {margin:0 auto}
+
+#bandeau-principal a .icon_fond {
+	background:##ENV{couleur_claire,edf3fe};
+	height:48px;
+	width:48px;
+	margin:auto;
+}
+#bandeau-principal a.selection .icon_fond {
+	width:48px;
+	margin:auto
+}
+#bandeau-principal a:hover span.icon_fond {
+	background:url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
+	height:48px;
+	width:48px;
+	margin:auto;
+}
+#bandeau-principal li.boutons_admin:hover .bandeau_sec,
+#bandeau-principal li.boutons_admin.sfhover .bandeau_sec
+ {
+	display:block;
+}
+#bandeau-principal span.icon_fond span {
+	behavior: url(../win_back_png.htc);
+	background:center top no-repeat;
+	height:48px;
+	display:block;
+	width:48px;
+	margin:0
+}
+
+/*style for submenus*/
+.bandeau_sec {
+	margin-top: 0;
+	padding: 2px;
+	padding-top: 0;
+	background-color: #fff;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	z-index: 100;
+	display:none;
+	position:absolute;
+}
 
 /*
  * Icones et bandeaux
  */
 
+/* Da cancellare
 #bandeau-principal {
 	background-color: #fff;
 	margin: 0;
 	padding: 0;
 	border-bottom: 1px solid #000;
 }
+
 
 .bandeau-icones {
 	background-color: #fff;
@@ -102,7 +174,8 @@ select.fondl {
 	padding-bottom: 2px; 
 	padding-top: 4px;
 }
-
+*/
+/*
 .bandeau_sec .gauche {
 	margin-top: 0;
 	padding: 2px;
@@ -115,7 +188,8 @@ select.fondl {
 	-moz-border-radius-bottomright: 5px;
 	z-index: 100;
 }
-
+*/
+/*
 .bandeau-icones.separateur {
 	vertical-align: middle;
 	height: 100%;
@@ -125,6 +199,8 @@ select.fondl {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=tirets-separation.gif);
 	background-position: 5px 0px;
 }
+*/
+
 .bandeau_couleur {
 	padding-right: 4px;
 	padding-left: 4px;

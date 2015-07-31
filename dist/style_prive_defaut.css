@@ -6,7 +6,7 @@ body {
 /*
  * Icones et bandeaux
  */
-
+/* Da cenacellare
 #bandeau-principal {
 	background-color: white;
 	margin: 0;
@@ -21,7 +21,8 @@ body {
 	padding-bottom: 2px; 
 	padding-top: 4px;
 }
-
+*/
+/*
 .bandeau_sec .gauche {
 	margin-top: 0;
 	padding: 2px;
@@ -34,7 +35,8 @@ body {
 	-moz-border-radius-bottomright: 5px;
 	z-index: 100;
 }
-
+*/
+/*
 .bandeau-icones .separateur {
 	vertical-align: middle;
 	height: 100%;
@@ -43,6 +45,8 @@ body {
 	margin: 0;
 	background-position: 5px 0px;
 }
+*/
+
 .bandeau_couleur {
 	padding-right: 4px;
 	padding-left: 4px;

@@ -1,24 +1,33 @@
 var bandeau_elements = false;
 
+function decaleSousMenu() {
+  var sousMenu = $("div.bandeau_sec",this).css({visibility:'hidden',display:'block'});
+  if(!sousMenu.length) return;
+  var left;
+  if($.browser.msie) {
+    var version = navigator.appVersion.match(/MSIE ([^;]+)/);
+    version = parseInt(version[1]);
+    left = parseInt(sousMenu[0].parentNode.offsetLeft);
+    if(version>6) {
+      left += parseInt($("#bandeau-principal div")[0].offsetLeft);
+    }
+  } else left = parseInt(sousMenu[0].offsetLeft);
+  if (left > 0) {
+		var demilargeur = Math.floor( sousMenu[0].offsetWidth / 2 );
+		var gauche = left
+			- demilargeur
+			+ Math.floor(largeur_icone / 2);
+		if (gauche < 0) gauche = 0;
+    sousMenu.css("left",gauche+"px");
+	}
+	sousMenu.css({display:'',visibility:''});
+}
+
 function changestyle(id_couche, element, style) {
 
 	// La premiere fois, regler l'emplacement des sous-menus
 	if (!bandeau_elements) {
 		bandeau_elements = $('#haut-page div.bandeau');
-		if (bug_offsetwidth) {
-			$('#bandeau-principal div.bandeau').each(function(){
-				var left = parseInt(this.style.left);
-				if (left > 0) {
-					demilargeur = Math.floor( this.offsetWidth / 2 );
-					if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
-					gauche = left
-						- demilargeur
-						+ Math.floor(largeur_icone / 2);
-					if (gauche < 0) gauche = 0;
-					this.style.left = gauche+"px";
-				}
-			});
-		}
 	}
 
 	// Masquer les elements du bandeau

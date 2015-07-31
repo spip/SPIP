@@ -1284,7 +1284,11 @@ function envoi_link($nom_site_spip) {
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $args) .'" />' . "\n"
-
+  . "<!-- [if IE lt 8] -->\n"
+  . '<link rel="stylesheet" type="text/css" href="'
+  . generer_url_public('style_prive_ie', $args) .'" />' . "\n"
+  . "<!-- [endif] -->"
+  
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('agenda.css') .'" />' . "\n"
