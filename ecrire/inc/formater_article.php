@@ -32,7 +32,7 @@ function inc_formater_article_dist($row)
 		  : _T('info_numero_abbreviation');
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
-			$langue_defaut = isset($GLOBALS['langue_rubrique'])
+			$langue_defaut = !isset($GLOBALS['langue_rubrique'])
 			  ? $GLOBALS['meta']['langue_site']
 			  : $GLOBALS['langue_rubrique'];
 		}

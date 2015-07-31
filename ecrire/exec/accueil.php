@@ -17,95 +17,75 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-  global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur, $flag_ob;
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 
-
-//
-// On utilise ob_start pour ne pas afficher de bloc vide (sinon tant pis)
-//
-
-if ($flag_ob)
-	ob_start();
-else
-	debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
+	$res = '';
 
 	//
 	// Les articles a valider
 	//
 
- echo  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
+	$res .=  afficher_articles(_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider
 	//
- echo afficher_breves(afficher_plus(generer_url_ecrire('breves'))._T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "statut='prepa' OR statut='prop'", 'ORDER BY' => "date_heure DESC"), true);
+	$res .= afficher_breves(afficher_plus(generer_url_ecrire('breves'))._T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "statut='prepa' OR statut='prop'", 'ORDER BY' => "date_heure DESC"), true);
 
 	//
 	// Les sites references a valider
 	//
-if ($GLOBALS['meta']['activer_sites'] != 'non') {
+	if ($GLOBALS['meta']['activer_sites'] != 'non') {
 		include_spip('inc/sites_voir');
-		echo afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
+		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
 	}
 
 	//
 	// Les sites a probleme
 	//
-if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_spip('inc/sites_voir');
-		echo afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
+		$res .= afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('avis_sites_syndiques_probleme'), array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
 	}
 
 	// Les articles syndiques en attente de validation
-if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
-	if ($cpt = $cpt['n'])
-		echo "<br /><small><a href='" ,
-			generer_url_ecrire("sites_tous","") ,
-			"' style='color: black;'>",
-			$cpt,
-			" ",
-			_T('info_liens_syndiques_1'),
-			" ",
-			_T('info_liens_syndiques_2'),
-			"</a></small>";
+	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
+		if ($cpt = $cpt['n'])
+			$res .= "<br /><small><a href='"
+			. generer_url_ecrire("sites_tous","")
+			. "' style='color: black;'>"
+			. $cpt
+			. " "
+			. _T('info_liens_syndiques_1')
+			. " "
+			. _T('info_liens_syndiques_2')
+			. "</a></small>";
 	}
 
 	// Les forums en attente de moderation
-if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
-	if ($cpt = $cpt['n']) {
-		echo "<br><small> <a href='" , generer_url_ecrire("controle_forum","") , "' style='color: black;'>",$cpt;
+	if ($connect_toutes_rubriques) {
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
+		if ($cpt = $cpt['n']) {
+		$res .= "<br><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$cpt;
 		if ($cpt>1)
-			echo " ",_T('info_liens_syndiques_3')," ",_T('info_liens_syndiques_4');
+			$res .= " "._T('info_liens_syndiques_3')." "._T('info_liens_syndiques_4');
 		else
-			echo " ",_T('info_liens_syndiques_5')," ",_T('info_liens_syndiques_6');
-		echo " ",_T('info_liens_syndiques_7'),",</a></small>";
+			$res .= " "._T('info_liens_syndiques_5')." "._T('info_liens_syndiques_6');
+		$res .= " "._T('info_liens_syndiques_7').".</a></small>";
 		}
  }
- $non_affiche = false;
- if ($flag_ob) {
-	$a = ob_get_contents();
-	ob_end_clean();
-	if ($a) {
-		debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
-		echo $a;
-	} else
-		$non_affiche = true;
- }
 
+	if (!$res) return '';
 
- if (!$non_affiche) {
-	// Afficher le lien RSS
-	$op = 'a-suivre';
-	$args = array();
-	echo "<div style='text-align: "
-		. $GLOBALS['spip_lang_right']
-		. ";'>"
-		. bouton_spip_rss($op, $args)
-		."</div>";
-	fin_cadre_couleur_foncee();
- }
+	return debut_cadre_couleur_foncee("",true, "", _T('texte_en_cours_validation'))
+	. $res
+	. "<div style='text-align: "
+	. $GLOBALS['spip_lang_right']
+	. ";'>"
+	. bouton_spip_rss('a-suivre',array())
+	. "</div>"
+	. fin_cadre_couleur_foncee(true);
 }
 
 // http://doc.spip.org/@colonne_gauche_accueil
@@ -424,7 +404,7 @@ if ($spip_display != 4) {
 function exec_accueil_dist()
 {
 
-	global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;
+	global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur;
 
 	$id_rubrique =  intval($id_rubrique);
  	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
@@ -463,7 +443,7 @@ function exec_accueil_dist()
 			 $GLOBALS['meta']["activer_sites"],
 			 $GLOBALS['meta']['articles_mots']);
 
-	encours_accueil();
+	echo encours_accueil();
 
 	echo afficher_enfant_rub(0, false, true);
 
