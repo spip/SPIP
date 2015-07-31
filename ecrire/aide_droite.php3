@@ -1,6 +1,8 @@
 <?php
 
 include ("inc_version.php3");
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (file_exists("inc_connect.php3")) {
@@ -9,9 +11,14 @@ if (file_exists("inc_connect.php3")) {
 
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
-include_ecrire ("inc_lang.php3");
 
-utiliser_langue_visiteur();
+// Selection du fichier d'aide correspondant a la langue
+$lang_aide = $GLOBALS['spip_lang'];
+if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
+	$fichier_aide = "AIDE/fr/aide";
+	$lang_aide = 'fr';
+	changer_langue('fr');
+}
 
 ?>
 <HTML>
@@ -67,18 +74,9 @@ if ($spip_lang_rtl)
 echo ">";
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
-if (strlen($aide) < 2) $aide = "spip";
-
-// Selection du fichier d'aide correspondant a la langue
-$lang_aide = $GLOBALS['spip_lang'];
-
-if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-	$fichier_aide = "AIDE/fr/aide";
-	$lang_aide = 'fr';
-}
-
+// Analyser le fichier d'aide
 $html = join('', file($fichier_aide));
-
+if (strlen($aide) < 2) $aide = "spip";
 $html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
 $html = substr($html, 0, strpos($html, "</$aide>"));
 
@@ -94,6 +92,9 @@ while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 	$suite = substr($suite, $p + strlen($r[0]));
 }
 $html .= $suite;
+
+// hack pour que la langue de typo() soit celle de l'aide en ligne
+$langue_site = $lang_aide;
 
 echo justifier(propre($html)."<p>");
 echo "<font size=2>$les_notes</font><p>";
