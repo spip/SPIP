@@ -9,7 +9,7 @@
 	<form	id="login[_(#ENV{login})]"
 		action="[(#ENV{action2})]"
 		method="post"[(#ENV{source}|=={spip}|?{' ',''})
-		onSubmit='if (this.session_password.value) {
+		onsubmit='if (this.session_password.value) {
 			this.session_password_md5.value = calcMD5("[(#ENV{alea_actuel})]" + this.session_password.value);
 			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
 			this.session_password.value = "";
@@ -17,8 +17,9 @@
 		<div class="spip_encadrer" style="[(#URL_SITE_SPIP|style_align)]">[
 			<div class="reponse_formulaire">(#ENV*{erreur})<br /><br /></div>
 ][
-			<label><b><:login_login2:></b><br /></label>(#ENV{login}|?{'',' '})
+			<label><b><:login_login2:></b><br />(#ENV{login}|?{'',' '})
 			<input type="text" id='var_login' name="var_login" class="forml" value="" size="40" />
+			</label>
 ][
 <div>
 [<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|silogoauteur)"
@@ -26,21 +27,23 @@
 	alt="[(#ENV{login_alt})]" /></div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<b>[(#ENV{login_alt})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
+document.write("<:login_login:>&nbsp;<b>[(#ENV{login_alt})]<" + "/b><br />&#91;<a style='color: #e86519' href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
 <noscript>
-	<p><font face="Georgia, Garamond, Times, serif" size="3">
+	<p class='notes' style='font-size: 130%'>
 		<:login_non_securise:>
 		<a href="[(#ENV{action})]"><:login_recharger:></a>.
-	</font></p>
-	<label><b><:login_login2:></b><br /></label>
+	</p>
+	<label><b><:login_login2:></b><br />
 	<input type='text' name='session_login' class='forml' [value="(#ENV{login})" ]size='40' />
+	</label>
 </noscript>
 
 </div>
 <p>
-		<label><b><:login_pass2:></b></label>&nbsp;
+		<label><b><:login_pass2:></b>&nbsp;
 		<input type="password" name="session_password"[ id="var_login_(#ENV{login})]" class="forml" style="width: 140px;" value="" size="20" />
+		</label>	
 		<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
 			 name="session_remember"
 			 id="session[_(#ENV{login})]"
@@ -51,7 +54,7 @@ document.write("<:login_login:>&nbsp;<b>[(#ENV{login_alt})]<" + "/b><br />&#91;<
 		<input type="hidden" name="next_session_password_md5" value="" />
 		<input type="hidden" name="essai_login" value="oui" />
 ]		<input type="hidden" name="url" value="[(#ENV{url})]" />
-		<div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div>
+		<div style="text-align: right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div>
 		</div>
 	</form>
 <script type="text/javascript"><!--
@@ -59,11 +62,12 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 --></script>[
 	<form action="(#ENV{auth_http})" method="get">
 		<fieldset>
-		<p>
+		<div>
 		<:login_preferez_refuser:>
 		<input type="hidden" name="essai_auth_http" value="oui"/>
 		[<input type="hidden" name="url" value="(#ENV{url})"/>]
-		<div align="right"><input type="submit" class="spip_bouton" value="<:login_sans_cookiie:>"/></div>
+		</div>
+		<div style="text-align: right"><input type="submit" class="spip_bouton" value="<:login_sans_cookiie:>"/></div>
 		</fieldset>
 	</form>
 ]
