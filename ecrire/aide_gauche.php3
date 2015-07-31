@@ -199,6 +199,7 @@ for ($i=0; $i<=count($texte); $i++) {
 
 echo '</TABLE>';
 
+$couleur_foncee = '#044476';
 echo "<br><div align='center'>". menu_langues()."</div>";
 
 ?>

@@ -617,7 +617,7 @@ if ($activer_statistiques_ref != "non"){
 		echo "\n<li>";
 	
 	
-		if ($visites > 5) echo "<font color='red'>$visites liens : </font>";
+		if ($visites > 5) echo "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
 		else if ($visites > 1) echo "$visites "._T('lnfo_liens')."&nbsp;";
 		else echo "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
 	
