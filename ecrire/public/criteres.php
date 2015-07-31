@@ -860,7 +860,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	     OR ($date AND strpos($date[0], '_relatif')))) {
 		if (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
 			$val[0] = $r[1];
-		elseif (preg_match('/^sql_quote[(](.*?)(,.*)?[)]\s*$/', $val[0], $r)) {
+		elseif (preg_match('/^sql_quote[(](.*?)(,[^)]*)?[)]\s*$/', $val[0], $r)) {
 		  $r = $r[1] . ($r[2] ? $r[2] : ",''") . ",'int'";
 		  $val[0] = "sql_quote($r)";
 		}
