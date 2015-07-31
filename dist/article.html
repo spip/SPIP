@@ -120,7 +120,7 @@
 
 <div class="cartouche">
 #DEBUT_SURLIGNE[
-(#LOGO_ARTICLE|left)][
+(#LOGO_ARTICLE|left||reduire_image{120,120})][
 <div class="surtitre">(#SURTITRE)</div>
 ]<h1 class="titre-texte">#TITRE</h1>[
 <div class="surtitre">(#SOUSTITRE)</div>
@@ -202,7 +202,7 @@
 <div><hr>
 <BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
-	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT||reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#FICHIER|reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
 </div>

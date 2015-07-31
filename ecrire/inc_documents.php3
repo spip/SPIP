@@ -605,18 +605,27 @@ entites_html($document['fichier'])."\" />\n";
 			//
 			// Recuperer la vignette et afficher le doc
 			//
-			if ($id_vignette AND
-			$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
-				$fichier_vignette = generer_url_document($id_vignette);
-				$largeur_vignette = $vignette['largeur'];
-				$hauteur_vignette = $vignette['hauteur'];
-				$taille_vignette = $vignette['taille'];
 			
-				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
+			if ($album == 'portfolio') {
+				// En mode portfolio, on ne travaille pas avec les vignettes
+				// (sinon, pas de squelette possible)
+				echo reduire_image_logo(_DIR_PREFIX1."$fichier", 120);
+			} else {
+				if ($id_vignette AND
+					$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
+					$fichier_vignette = generer_url_document($id_vignette);
+					$largeur_vignette = $vignette['largeur'];
+					$hauteur_vignette = $vignette['hauteur'];
+					$taille_vignette = $vignette['taille'];
+				
+					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
+				}
+				else {
+					echo document_et_vignette($url, $document['id_type']); 
+				}
 			}
-			else {
-				echo document_et_vignette($url, $document['id_type']); 
-			}
+			
+			
 
 			echo "</div>"; // fin du bloc vignette + rotation
 
@@ -712,6 +721,15 @@ entites_html($document['fichier'])."\" />\n";
 				echo "</form>";
 
 
+				if ($album != 'portfolio') {
+					// bloc mettre a jour la vignette
+					// (pas de vignette en portfolio)
+					echo "<hr />";
+					bloc_gerer_vignette($document, $image_url, $redirect_url, $album);
+				}
+				
+				echo "</div>";
+				
 				// bouton "supprimer le doc"
 				$link_supp = new Link ($image_url);
 				$link_supp->addVar('redirect', $redirect_url);
@@ -723,12 +741,6 @@ entites_html($document['fichier'])."\" />\n";
 				icone_horizontale(_T('icone_supprimer_document'),
 					$link_supp->getUrl(), "image-24.gif", "supprimer.gif");
 
-
-				// bloc mettre a jour la vignette
-				echo "<hr />";
-				bloc_gerer_vignette($document, $image_url, $redirect_url, $album);
-
-				echo "</div>";
 			} // fin block modifs
 
 

@@ -816,8 +816,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("arton$id_article");
-				if ($logo) {
+				if ($logo) {	
 					$fichier = $logo[0];
+					$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>";
+					$s .= reduire_image_logo(_DIR_IMG.$fichier, 26, 20);
+					$s .= "</div>";
+					/*
 					$taille = $logo[1];
 					$taille_x = $logo[3];
 					$taille_y = $logo[4];
@@ -829,7 +833,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>
 <img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
-					
+					*/
 				}
 			}
 			
@@ -949,6 +953,11 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 				$logo = decrire_logo("breveon$id_breve");
 				if ($logo) {
 					$fichier = $logo[0];
+					$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>";
+					$s .= reduire_image_logo(_DIR_IMG.$fichier, 26, 20);
+					$s .= "</div>";
+	
+/*
 					$taille = $logo[1];
 					$taille_x = $logo[3];
 					$taille_y = $logo[4];
@@ -960,7 +969,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>
 <img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
-					
+*/				
 				}
 			}
 

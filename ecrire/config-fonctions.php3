@@ -157,6 +157,17 @@ else {
 
 
 	//
+	// Pour test pendant devel, possibilite de desactiver
+	//
+
+	if ($image_process == "non") {
+		ecrire_meta("formats_graphiques", "");
+		ecrire_metas();
+	}
+	echo "<p>[$image_process / $formats_graphiques]<a href='config-fonctions.php3?image_process=non'>Aucune m&eacute;thode</a></p>";
+
+
+	//
 	// Une fois le process choisi, proposer vignettes
 	//
 	
