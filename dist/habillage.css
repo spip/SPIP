@@ -7,7 +7,7 @@
 /* 	Typographie generale (style transversaux)
 /*  ------------------------------------------ */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
-body { font-size: 0.8125em; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
+body { font-size: 0.8125em; font-family: Verdana, Helvetica, sans-serif; color: #333; }
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
