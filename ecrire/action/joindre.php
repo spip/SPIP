@@ -145,7 +145,11 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 // http://doc.spip.org/@spip_action_joindre5
 function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
-	return ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
+	$pos = strpos($path, '/zip/');
+	if (!$pos) {
+		$pos = strpos($path, '/zip_');
+	}
+	return ajouter_un_document($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
 }
 
 // Zip a deballer.
