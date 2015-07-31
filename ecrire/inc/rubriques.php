@@ -491,17 +491,33 @@ function calculer_langues_utilisees ($serveur='') {
 			$boucle->sql_serveur = $serveur;
 			$boucle->select[] = "DISTINCT lang";
 			$boucle->from[$desc['table_objet']] = $t;
+			$boucle->separateur[] = ',';
+			$boucle->return = '$Pile[$SP][\'lang\']';
+			$boucle->iterateur = 'sql';
+
 			$boucle = pipeline('pre_boucle', $boucle);
-			
+
 			if (isset($desc['statut'])
 		    AND $desc['statut']){
-				instituer_boucle($boucle, false);
-				$res = calculer_select($boucle->select,$boucle->from,$boucle->from_type,$boucle->where,$boucle->join,$boucle->group,$boucle->order,$boucle->limit,$boucle->having,$desc['table_objet'],$desc['table_objet'],$serveur);
+				$boucles = array(
+					'calculer_langues_utilisees' => $boucle,
+				);
+				$functionname = 'f_calculer_langues_utilisees_'.$boucle->id_table.'_'.time();
+				$code = calculer_boucle('calculer_langues_utilisees',$boucles);
+				$code = '$command=array();$Pile=array(0=>array());'."\n".$code;
+				$code = 'function '.$functionname.'(){'.$code.'};$res='.$functionname.'();';
+				$res = '';
+				eval($code);
+				$res = explode(',',$res);
+				foreach($res as $lang){
+					$langues[$lang] = 1;
+				}
 			}
-			else
+			else {
 				$res = sql_select(implode(',',$boucle->select),$boucle->from);
-			while ($row = sql_fetch($res)) {
-				$langues[$row['lang']] = 1;
+				while ($row = sql_fetch($res)) {
+					$langues[$row['lang']] = 1;
+				}
 			}
 		}
 	}
