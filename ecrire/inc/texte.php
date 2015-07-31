@@ -756,10 +756,10 @@ function calculer_url_rubrique($id, $texte='')
 function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
-	$row = @spip_fetch_array(spip_query("SELECT titre,lang FROM spip_mots WHERE id_mot=$id"));
+	$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
 	if ($texte=='')
 		$texte = supprimer_numero($row['titre']);
-	return array($lien, 'spip_in', $texte, $row['lang']);
+	return array($lien, 'spip_in', $texte);
 }
 
 // http://doc.spip.org/@calculer_url_breve
@@ -809,6 +809,19 @@ function calculer_url_site($id, $texte='')
 	}
 	return array($lien, 'spip_out', $texte, $row['lang']);
 }
+
+// http://doc.spip.org/@calculer_url_site
+function calculer_url_forum($id, $texte='')
+{
+	$lien = generer_url_forum($id);
+	if ($texte=='') {
+		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_forum WHERE id_forum=$id AND statut='publie'"));
+		if ($texte=='')
+			$texte = $row['titre'];
+	}
+	return array($lien, 'spip_in', $texte); # pas de hreflang
+}
+
 
 //
 // Tableaux
