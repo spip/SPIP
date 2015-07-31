@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()
