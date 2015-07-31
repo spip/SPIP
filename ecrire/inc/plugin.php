@@ -276,7 +276,8 @@ function plugin_trier($infos, $liste_non_classee)
 			// on ne peut inserer qu'apres eux
 			foreach($info1['necessite'] as $need){
 			  $nom = strtoupper($need['nom']);
-			  if (!isset($liste[$nom]) OR !plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
+			  $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
+			  if (!isset($liste[$nom]) OR !plugin_version_compatible($compat,$liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			  }
@@ -286,9 +287,10 @@ function plugin_trier($infos, $liste_non_classee)
 			// sauf si ils sont de toute facon absents de la liste
 			foreach($info1['utilise'] as $need){
 			  $nom = strtoupper($need['nom']);
+			  $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
 			  if (isset($toute_la_liste[$nom])) {
 			    if (!isset($liste[$nom]) OR 
-				!plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
+				!plugin_version_compatible($compat,$liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			    }
