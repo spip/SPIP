@@ -372,7 +372,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		}
 		$fond .= $ligne ? "bordure_$spip_lang_right" :'bordure_double';
-		$ligne .= "\n<td class='$fond'>$res</td>";
+		$ligne .= "\n<td id='D$annee-$mois-$jour' class='$fond'>$res</td>";
 	}
 	return  $total . ($ligne ? "\n<tr>$ligne</tr>" : '');
 }
@@ -433,7 +433,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 			      $evenements[$d] = !$evenements[$d] ? $r : array_merge($evenements[$d], $r);
 			$evt = http_calendrier_mois_sept($annee, $mois, $init, $init+ 6, $evenements, $script, $finurl, $ancre);
 	  	}
-	} else $evt = "<tr><td>$evt</td></tr>";
+	} else $evt = "<tr><td id='D$annee-$mois-$jour'>$evt</td></tr>";
 
 	$id = ($ancre ? $ancre : 'agenda') . "-nav";
 
@@ -513,13 +513,13 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 	$total = '';
 
 	for ($j=$jour; $j<$jour+7;$j++){
-		$v = mktime(0,0,0,$mois, $j, $annee);
-		$v = http_calendrier_ics($annee, $mois, $j, $echelle, $partie_cal, $largeur, $evt, '', ( (date("w",$v)==0 && test_espace_prive()) ? 
+		$d = mktime(0,0,0,$mois, $j, $annee);
+		$v = http_calendrier_ics($annee, $mois, $j, $echelle, $partie_cal, $largeur, $evt, '', ( (date("w",$d)==0 && test_espace_prive()) ? 
 			  " jour_dimanche" :
-			  ((date("Ymd", $v) == $today) ? 
+			  ((date("Ymd", $d) == $today) ? 
 			   " jour_encours" :
 			   " jour_gris") ) ) ;
-		$total .= "\n<td>$v</td>";
+		$total .= "\n<td id='D$annee-$mois-$jour'>$v</td>";
 	}
 	return "\n<tr class='heure'>$total</tr>";
 }
@@ -1208,7 +1208,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic,
 		  $type = ($semaine ? 'semaine' : 'jour') ;
 		}
 		$corps = $fclic($script, $annee, $mois, $j,$type, '', $ancre,'', $title ,'','', $j);
-		$ligne .= "\n<td class='$class'>$corps</td>";
+		$ligne .= "\n<td id='D$annee-$mois-$j' class='$class'>$corps</td>";
 		if ($jour_semaine==7) 
 		    {
 		      if ($ligne) $total .= "\n<tr>$ligne</tr>";
