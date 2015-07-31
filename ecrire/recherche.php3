@@ -4,11 +4,13 @@ include ("inc.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_sites.php3");
 
+$recherche = addslashes(entites_html($recherche));
+
+
 debut_page(_T('titre_page_recherche', array('recherche' => $recherche)));
 
 debut_gauche();
 
-		global $recherche;
 				$recherche_aff = _T('info_rechercher');
 				$onfocus = "onfocus=this.value='';";
 			echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
@@ -22,10 +24,8 @@ debut_droite();
 if (strlen($recherche) > 0) {
 
 	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
-	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>".typo($recherche)."</B></FONT><p>";
+	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche</B></FONT><p>";
 
-	$recherche = addslashes($recherche);
-	
 	$query_articles = "SELECT * FROM spip_articles WHERE";
 	$query_breves = "SELECT * FROM spip_breves WHERE ";
 	$query_rubriques = "SELECT * FROM spip_rubriques WHERE ";
