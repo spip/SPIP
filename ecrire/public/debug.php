@@ -232,8 +232,9 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	global $debug_objets;
 
 	$id = $nom . $boucle;
-	if (!is_array($debug_objets['sequence'][$id])) return array();
-	foreach($debug_objets['sequence'][$id] as $v) {
+	if (is_array($debug_objets['sequence'][$id])) {
+	 foreach($debug_objets['sequence'][$id] as $v) {
+
 	  if (!preg_match('/^(.*)(<\?.*\?>)(.*)$/s', $v[2],$r))
 	    $y = substr_count($v[2], "\n");
 	  else {
@@ -250,13 +251,14 @@ function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
 	  if ($n <= ($y + $debut)) {
 	    if ($v[1][0] == '?')
 	      return trouve_boucle_debug($n, $nom, $debut, substr($v[1],1));
-	    elseif ($v[1][0] == '!') {
+ 	    elseif ($v[1][0] == '!') {
 	      if ($incl = trouve_squelette_inclus($v[1]))
 		return trouve_boucle_debug($n, $incl, $debut);
 	    }
-	    return array($nom, $boucle, $v[0]);
+	    return array($nom, $boucle, $v[0] -1 + $n - $debut );
 	  }
 	  $debut += $y;
+	 }
 	}
 	return array($nom, $boucle, $n-$debut);
 }	  
@@ -446,7 +448,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			$titre = 'zbug_' . $titre;
 			$texte = ancre_texte($texte, array('',''));
 		} else {
-		  list($texte, $err) = emboite_texte($texte, $self);
+		  list($texte, $err) = emboite_texte($texte, $fonc, $self);
 			if ($err === false)
 				$err = _T('impossible');
 			elseif ($err === true)
@@ -470,7 +472,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	exit;
 }
 
-function emboite_texte($texte,$self='')
+function emboite_texte($texte,$fonc='',$self='')
 {
 	if (!($sax = charger_fonction('sax', 'inc') AND $res = $sax($texte)))
 		return array(ancre_texte($texte, array('','')), false);
