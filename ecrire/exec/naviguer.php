@@ -238,7 +238,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 	if ($id_parent) {
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$langue_parent = $row['lang'];
-	}
+	} 
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
 	if (!$langue_rubrique)

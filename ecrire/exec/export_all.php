@@ -197,7 +197,7 @@ function exec_export_all_dist()
 
 	if ($etape >= count($tables_for_dump)){
 		foreach($tables_for_dump as $i=>$table){
-			// appel simplement pour l'affichage. Rien n'est fait puisqu'on a fini
+			// appel simplement pour l'affichage. Rien n'est fait puisqu'on a fini 
 			export_objets($table, primary_index_table($table), $tables_for_link[$table], 0, false, $i, _T("info_sauvegarde").", $table");
 		}
 
@@ -290,7 +290,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 			if ($limit<$total) echo "<br/>";
 		}
 		if ($pos_in_table!=0)
-			echo "| $pos_in_table ";
+			echo "| ", $pos_in_table;
 		ob_flush();flush();
 
 		if ($limit == 0) $limit=$total;
@@ -305,40 +305,8 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		else
 			$nfields = count($table_fields[$table]);
 
-		if (!$file) {
-			while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
-				$string .= build_begin_tag($table) . "\n";
-				// Exporter les champs de la table
-				for ($i = 0; $i < $nfields; ++$i) {
-					$string .= '<'.$table_fields[$table][$i].'>' . text_to_xml($row[$table_fields[$table][$i]]) . '</'.$table_fields[$table][$i].'>' . "\n";
-				}
-					
-				$string .= build_end_tag($table) . "\n\n";
-				$status_dump[3] = $pos_in_table = $pos_in_table +1;
-			}
-		}
-		else {
-			$_fputs = ($gz) ? gzputs : fputs;
-			while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
-				$string .= build_begin_tag($table) . "\n";
-				// Exporter les champs de la table
-				for ($i = 0; $i < $nfields; ++$i) {
-					$string .= '<'.$table_fields[$table][$i].'>' . text_to_xml($row[$table_fields[$table][$i]]) . '</'.$table_fields[$table][$i].'>' . "\n";
-				}
-					
-				$string .= build_end_tag($table) . "\n\n";
-				$status_dump[3] = $pos_in_table = $pos_in_table +1;
-	
-				$_fputs($file, $string);
-				fflush($file);
-				// on se contente d'une ecriture en base pour aller plus vite
-				// a la relecture on en profitera pour mettre le cache a jour
-				ecrire_meta("status_dump", implode("::",$status_dump));
-				#lire_metas();
-				#ecrire_metas(); 
-				$string = '';
-			}
-		}
+		$string = build_while($file,$gz, $nfields, $pos_in_table, $result, $status_dump, $table, $table_fields[$table]);
+
 		if ($pos_in_table>=$total){
 			// etape suivante : 
 			echo " ok";
@@ -357,23 +325,53 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 	}
 	else if ($etape_actuelle < $etape_en_cours) {
 		if (!isset($etape_affichee[$etape_actuelle]))
-			echo "<li> $etape_actuelle-$nom_etape";
+			echo "<li>", $etape_actuelle,'-',$nom_etape,"</li>";
 		ob_flush();flush();
 	} else {
 		if (!isset($etape_affichee[$etape_actuelle]))
-			echo "<li> <font color='#999999'>$etape_actuelle-$nom_etape</font>";
+			echo "<li> <font color='#999999'>",$etape_actuelle,'-',$nom_etape,'</font></li>';
 		ob_flush();flush();
 	}
 	return array($string,$status_dump);
 }
 
+// Exporter les champs de la table
+
+function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump, $table, $fields) {
+	global $connect_toutes_rubriques ;
+	$string = '';
+	$begin = build_begin_tag($table);
+	$end = build_end_tag($table);
+	$all = $connect_toutes_rubriques || (!in_array('id_rubrique',$fields));
+	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
+		$item = '';
+		for ($i = 0; $i < $nfields; ++$i) {
+			$k = $fields[$i];
+			$item .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
+		}
+		$status_dump[3] = $pos_in_table = $pos_in_table +1;
+		if ($all OR acces_rubrique($row['id_rubrique']))
+			$string .= "$begin$item$end";
+	}
+
+	if ($file) {
+		$_fputs = ($gz) ? gzputs : fputs;
+		$_fputs($file, $string);
+		fflush($file);
+		// on se contente d'une ecriture en base pour aller plus vite
+		// a la relecture on en profitera pour mettre le cache a jour
+		ecrire_meta("status_dump", implode("::",$status_dump));
+		$string = '';
+	}
+	return $string;
+}
 
 function build_begin_tag($tag) {
-	return "<$tag>";
+	return "<$tag>\n";
 }
 
 function build_end_tag($tag) {
-	return "</$tag>";
+	return "</$tag>\n\n";
 }
 
 // Conversion texte -> xml (ajout d'entites)
