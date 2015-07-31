@@ -155,13 +155,13 @@ function reponse_confirmation($var_confirm = '') {
 
 	if ($email_unique) {
 
-		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND ad_email=" . sql_quote($adresse_email) . " AND statut='publie'","","date_time desc");
+		$r = "id_article=$id_article AND ad_email=" . sql_quote($adresse_email);
 		if (signature_entrop($r))
 			  $confirm =  _T('form_pet_deja_signe');
 	} 
 
 	if ($site_unique) {
-		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND url_site=" . sql_quote($url_site) . " AND (statut='publie' OR statut='poubelle')",'',"date_time desc");
+		$r = "id_article=$id_article AND url_site=" . sql_quote($url_site);
 		if (signature_entrop($r))
 			$confirm = _T('form_pet_site_deja_enregistre');
 	}
@@ -179,18 +179,16 @@ function reponse_confirmation($var_confirm = '') {
 //
 
 // http://doc.spip.org/@inc_controler_signature_dist
-function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
+function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site, $url_site, $url_page) {
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-
-	if (strlen($nom_email) < 2)
+	if (strlen($nom) < 2)
 		return _T('form_indiquer_nom');
-	elseif ($adresse_email == _T('info_mail_fournisseur'))
-		return _T('form_indiquer_email');
-	elseif (!email_valide($adresse_email)) 
+	elseif ($mail == _T('info_mail_fournisseur'))
+		return _T('form_indiquer');
+	elseif (!email_valide($mail)) 
 		return _T('form_email_non_valide');
 	elseif (strlen(_request('nobot'))
 		OR (@preg_match_all(',\bhref=[\'"]?http,i', // bug PHP
@@ -198,16 +196,12 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 				    # ,  PREG_PATTERN_ORDER
 				   )
 		    >2)) {
+		#$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		#envoyer_mail('email_moderateur@example.tld', 'spam intercepte', var_export($_POST,1));
 		return _T('form_pet_probleme_liens');
 	}
 
 	// tout le monde est la.
-
-	$row = sql_fetch(sql_select('titre,lang', 'spip_articles', "id_article=$id_article"));
-	$lang = lang_select($row['lang']);
-	$titre = textebrut(typo($row['titre']));
-	if ($lang) lang_select();
 
 	$result_petition = sql_select('*', 'spip_petitions', "id_article=$id_article");
 
@@ -215,7 +209,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		return _T('form_pet_probleme_technique');
 
 	if ($row['site_obli'] == "oui") {
-		if (!strlen($nom_site)
+		if (!strlen($site)
 		OR !vider_url($url_site)) {
 			return  _T('form_indiquer_nom_site');
 		}
@@ -233,7 +227,7 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	// On traite donc le probleme a la confirmation.
 
 	if ($email_unique) {
-		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . sql_quote($adresse_email) . " AND statut='publie'");
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . sql_quote($mail) . " AND statut='publie'");
 
 		if ($r)	return _T('form_pet_deja_signe');
 	}
@@ -244,35 +238,54 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 		if ($r)	return _T('form_pet_site_deja_enregistre');
 	}
 	
-	// preparer l'url de confirmation
 	$passw = test_pass();
-	$url = parametre_url($url_page,	'var_confirm',$passw,'&');
-	if ($lang != $GLOBALS['meta']['langue_site'])
-		  $url = parametre_url($url, "lang", $row['lang'],'&');
-	$url .= "#sp$id_article";
-
-	$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
-
-	if (!$envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) 
+	if (!signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url_site, $message, $lang, $passw))
 		return _T('form_pet_probleme_technique');
 
 	$id_signature = sql_insertq('spip_signatures', array(
 		'id_article' => $id_article,
 		'date_time' => 'NOW()',
 		'statut' => $passw,
-		'ad_email' => $adresse_email,
+		'ad_email' => $mail,
 		'url_site' => $url_site));
 
 	if (!$id_signature) return _T('form_pet_probleme_technique');
 	include_spip('inc/modifier');
 	revision_signature($id_signature, array(
-				'nom_email' => $nom_email,
-				'ad_email' => $adresse_email,
+				'nom_email' => $nom,
+				'ad_email' => $mail,
 				'message' => $message,
-				'nom_site' => $nom_site,
+				'nom_site' => $site,
 				'url_site' => $url_site
 				));
 	return _T('form_pet_envoi_mail_confirmation');
+}
+
+function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url, $msg, $lang, $passw)
+{
+	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id_article");
+	$lang = lang_select($row['lang']);
+	$titre = textebrut(typo($row['titre']));
+	if ($lang) lang_select();
+
+	if ($lang != $GLOBALS['meta']['langue_site'])
+		  $url_page = parametre_url($url_page, "lang", $lang,'&');
+
+	$url_page = parametre_url($url_page, 'var_confirm', $passw, '&')
+	. "#sp$id_article";
+
+	$r = _T('form_pet_mail_confirmation',
+		 array('titre' => $titre,
+		       'nom_email' => $nom,
+		       'nom_site' => $site,
+		       'url_site' => $url, 
+		       'url' => $url_page,
+		       'message' => $msg));
+
+	$titre = _T('form_pet_confirmation')." ". $titre;
+	$envoyer_mail = charger_fonction('envoyer_mail','inc');
+	return $envoyer_mail($mail,$titre, $r); 
+
 }
 
 // Pour eviter le recours a un verrou (qui bloque l'acces a la base),
@@ -283,8 +296,10 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 // deja detruits. Bizarre ?  C'est mieux que de bloquer!
 
 // http://doc.spip.org/@signature_entrop
-function signature_entrop($query)
+function signature_entrop($where)
 {
+	$query = sql_select('id_signature', 'spip_signatures', $where . " AND statut='publie'",'',"date_time desc");
+	$entrop = '';
 	$n = sql_count($query);
 	if ($n>1) {
 		$entrop = array();
@@ -292,10 +307,11 @@ function signature_entrop($query)
 			$r = sql_fetch($query);
 			$entrop[]=$r['id_signature'];
 		}
-		if ($entrop)
-			sql_delete('spip_signatures',
-				"id_signature IN (" . join(',',$entrop) .')');
+		$entrop = " OR (id_signature IN (" . join(',',$entrop) .'))';
 	}
+	
+	sql_delete('spip_signatures', "($where AND statut<>'publie')$entrop");
+
 	return $entrop;
 }
 

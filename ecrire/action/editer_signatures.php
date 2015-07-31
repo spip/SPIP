@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-// Modifier le reglage des forums publics de l'article x
 // http://doc.spip.org/@action_editer_signatures_dist
 function action_editer_signatures_dist()
 {
@@ -25,6 +23,10 @@ function action_editer_signatures_dist()
 	} else action_editer_signatures_post($r);
 }
 
+// mettre un signature a la poubelle
+// ou l'en sortir
+// ou relancer le signataire.
+
 // http://doc.spip.org/@action_editer_signatures_post
 function action_editer_signatures_post($r)
 {
@@ -32,10 +34,23 @@ function action_editer_signatures_post($r)
 
 	if ($id < 0){
 		$id = 0 - $id;
-		$result_forum = sql_updateq("spip_signatures", array("statut" => 'poubelle'), "id_signature=$id");
+		sql_updateq("spip_signatures", array("statut" => 'poubelle'), "id_signature=$id");
 
 	} elseif ($id > 0){
-		$result_forum = sql_updateq("spip_signatures", array("statut" => 'publie'), "id_signature=$id");
+		$row = sql_fetsel('*', 'spip_signatures', "id_signature=$id"); 
+		if ($row['statut']=='poubelle')
+			sql_updateq("spip_signatures", array("statut" => 'publie'), "id_signature=$id");
+		else {
+			include_spip('balise/formulaire_signature');
+			include_spip('inc/texte');
+			
+			charger_generer_url();
+			$id_article = $row['id_article'];
+			$url = $GLOBALS['meta']['adresse_site'] . '/' . generer_url_article($id_article);
+			if (signature_a_confirmer($id_article, $url, $row['nom_email'], $row['ad_email'], $row['nom_site'], $row['url_site'], $row['message'], $row['lang'], $row['statut']))
+				sql_update("spip_signatures", array("date_time" => 'NOW()'), "id_signature=$id");
+			$id = 0;
+		}
 
 	}
 

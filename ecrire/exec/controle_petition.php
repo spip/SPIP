@@ -15,9 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
+	exec_controle_petition_args(intval(_request('id_article')),
+				    _request('type'),
+				    intval(_request('debut')));
+}
+
+function exec_controle_petition_args($id_article, $type, $debut)
+{
 	include_spip('inc/presentation');
 
-	$id_article = intval(_request('id_article'));
 	$titre =' ';
 	$statut='new';
 	if ($id_article) {
@@ -37,38 +43,48 @@ function exec_controle_petition_dist()
 			AND autoriser('modererpetition', 'article', $id_article)
 			)
 		)) {
-	  include_spip('inc/minipres'); 
-	  echo minipres();}
+		include_spip('inc/minipres'); 
+		echo minipres();}
 	else {
-
-		$debut = intval(_request('debut'));
-
 		$signatures = charger_fonction('signatures', 'inc');
-
 		$r = $signatures('controle_petition',
 			$id_article,
 			$debut, 
 			"(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
-			10);
+			 10,
+			 $type);
 
 		if (_request('var_ajaxcharset'))
 			ajax_retour($r);
-		else {
+		else controle_petition_page($id_article, $debut, $type, $titre, $statut, $r);
+	}
+}
 
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
-		echo debut_gauche('', true);
+function controle_petition_page($id_article, $debut, $type, $titre, $statut, $r)
+{
+	$args = ($id_article ? "id_article=$id_article" :'')
+		. ($debut ? "debut=$debut" : '')
+		. '&type=';
 
-		echo debut_droite('', true);
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
+	echo debut_gauche('', true);
+
+	echo debut_droite('', true);
   
-		echo gros_titre(_T('titre_suivi_petition'),'', false);
+	echo gros_titre(_T('titre_suivi_petition'),'', false);
 
-		if (!$titre)
-		  echo _T('trad_article_inexistant');
-		else {
-		  if ($id_article) {
-			  echo  "<a href='",
+	echo debut_onglet();
+	echo onglet(_L('Signatures confirm&eacute;es'), generer_url_ecrire('controle_petition', $args . "public"), "public", $type=='public', "forum-public-24.gif");
+	echo onglet(_L('Signatures en attente de validation'), generer_url_ecrire('controle_petition', $args . "interne"), "interne", $type=='interne', "forum-interne-24.gif");
+	echo fin_onglet(), '<br /><br />';
+
+	if (!$titre)
+			echo _T('trad_article_inexistant');
+	else {
+		if ($id_article) {
+			echo  "<a href='",
 			  (($statut == 'publie') ? 
 			   generer_url_action('redirect', "id_article=$id_article") :
 			   generer_url_ecrire('articles', "id_article=$id_article")),
@@ -79,14 +95,11 @@ function exec_controle_petition_dist()
 			  _T('info_numero_abbreviation'),
 			  $id_article,
 			  ")</span>";
-		  }
-		  $a = "editer_signature-" . $id_article;
+		}
+		$a = "editer_signature-" . $id_article;
 
-		  echo  "<div id='", $a, "' class='serif2'>", $r, "</div>";
-		}
-		echo fin_gauche(), fin_page();
-		}
+		echo  "<div id='", $a, "' class='serif2'>", $r, "</div>";
 	}
+	echo fin_gauche(), fin_page();
 }
-
 ?>
