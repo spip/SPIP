@@ -69,7 +69,7 @@ function spip_action_ical_dist()
 		$titre = join($titre_prop," / ");
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:[$nom_site] $titre");
-		ligne ("prop");
+		ligne_uid ("prop");
 		$texte = join($titres," / ");
 		ligne ("DESCRIPTION:$texte");
 	
@@ -127,7 +127,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:".$titre);
 		ligne ("DESCRIPTION:$texte");
-		ligne ("mess$id_message");
+		ligne_uid ("mess$id_message");
 		ligne ("DTSTAMP:".date_ical($date_heure));
 		ligne ("DTSTART:".date_ical($date_heure));
 		if ($date_heure_fin > $date_heure) ligne ("DTEND:".date_ical($date_heure_fin));
@@ -174,7 +174,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:".$titre);
 		ligne ("DESCRIPTION:$texte");
-		ligne ("mess$id_message");
+		ligne_uid ("mess$id_message");
 		ligne ("DTSTAMP:".date_ical($date_heure));
 		ligne ("DTSTART:".date_ical($date_heure));
 		ligne ("CATEGORIES:$le_type");
@@ -195,7 +195,7 @@ function spip_ical_articles($nom_site)
 		$nb_articles ++;
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre ("._T('info_article_propose').")");
-		ligne ("article$id_article");
+		ligne_uid ("article$id_article");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('info_article_propose'));
@@ -218,7 +218,7 @@ function spip_ical_breves($nom_site)
 		$nb_breves++;
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre ("._T('item_breve_proposee').")");
-		ligne ("breve$id_breve");
+		ligne_uid ("breve$id_breve");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('item_breve_proposee'));
@@ -280,7 +280,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 	ligne ("BEGIN:VTODO");
 	ligne ("SUMMARY:".$titre);
 	ligne ("DESCRIPTION:$texte");
-	ligne ("nouv_mess$id_message");
+	ligne_uid ("nouv_mess$id_message");
 	ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("CATEGORIES:$le_type");
@@ -308,7 +308,7 @@ function spip_ical_forums($id_utilisateur, $nom_site)
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre "._T('icone_forum_suivi'));
 		ligne ("DESCRIPTION:$texte\r$auteur $email_auteur");
-		ligne ("forum$id_forum");
+		ligne_uid ("forum$id_forum");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
@@ -320,7 +320,7 @@ function spip_ical_forums($id_utilisateur, $nom_site)
 	if ($nb_forum > 0) {
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:[$nom_site] "._T('icone_forum_suivi').": $nb_forum");
-		ligne ("forum");
+		ligne_uid ("forum");
 		
 		$today=getdate(time());
 		$jour = $today["mday"];
