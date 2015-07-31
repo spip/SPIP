@@ -13,8 +13,12 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// Cette action permet de confirmer un changement d'email
 
+/**
+ * Calculer la taille du cache ou du cache image pour l'afficher en ajax sur la page d'admin de SPIP
+ *
+ * @param string|null $arg
+ */
 function action_calculer_taille_cache_dist($arg=null){
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
@@ -46,8 +50,14 @@ function action_calculer_taille_cache_dist($arg=null){
 }
 
 
-
-// http://doc.spip.org/@calculer_taille_dossier
+/**
+ * Calculer la taille d'un dossier, sous dossiers inclus
+ *
+ * http://doc.spip.org/@calculer_taille_dossier
+ *
+ * @param $dir
+ * @return int
+ */
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return 0;
