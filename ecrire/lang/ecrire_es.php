@@ -367,6 +367,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_image_process2' => 'Si no aparece ninguna imagen, es que el servidor que alberga su sitio web no está configurado para usar estas herramientas. Si quiere utilizarlas, contacte al responsable técnico y solicite las extensiones «GD» o «Imagick».',
 	'info_images_auto' => 'Imágenes calculadas automáticamente',
 	'info_informations_personnelles' => 'Información personal',
+	'info_inscription' => 'Inscripción el',
 	'info_inscription_automatique' => 'Inscripcción automática de nuevos redactores',
 	'info_jeu_caractere' => 'Juego de caracteres del sitio',
 	'info_jours' => 'días',
