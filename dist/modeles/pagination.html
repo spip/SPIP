@@ -1,5 +1,5 @@
-#ENV*{bloc_ancre}
-#SET{bornes,#ENV{page_courante}|calcul_bornes_pagination{#ENV{nombre_pages},10}}
+#ENV*{bloc_ancrebornes_pagination}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
 #SET{separateur,'|'}

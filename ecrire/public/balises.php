@@ -472,7 +472,8 @@ function balise_INTRODUCTION_dist ($p) {
 	  $_chapo = "''";
 	  $_descriptif =  "''";
 	}
-	$p->code = "calcul_introduction('$type', $_texte, $_chapo, $_descriptif)";
+	$f = chercher_filtre('introduction');
+	$p->code = $f."('$type', $_texte, $_chapo, $_descriptif)";
 
 	#$p->interdire_scripts = true;
 	return $p;
@@ -605,7 +606,8 @@ function balise_PAGINATION_dist($p, $liste='true') {
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
-	$p->code = "calcul_pagination(
+	$f_pagination = chercher_filtre('pagination');
+	$p->code = $f_pagination."(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), ".$p->boucles[$b]->modificateur['debut_nom'].",
@@ -1433,7 +1435,8 @@ function balise_PLUGIN_dist($p) {
 	$type_info = interprete_argument_balise(2,$p);
 	$type_info = isset($type_info) ? str_replace('\'', '"', $type_info) : '"est_actif"';
 
-	$p->code = 'calcul_info_plugin('.$plugin.', '.$type_info.')';
+	$f = chercher_filtre('info_plugin');
+	$p->code = $f.'('.$plugin.', '.$type_info.')';
 	return $p;
 }
 

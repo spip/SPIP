@@ -180,11 +180,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 // on peut la surcharger en definissant dans mes_fonctions :
 // function introduction($type,$texte,$chapo,$descriptif) {...}
 //
-// http://doc.spip.org/@calcul_introduction
-function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
-	if (function_exists("introduction"))
-		return introduction ($type, $texte, $chapo, $descriptif);
-
+function filtre_introduction_dist($type, $texte, $chapo='', $descriptif='') {
 	define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 
 	switch ($type) {
