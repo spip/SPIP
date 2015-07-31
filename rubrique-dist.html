@@ -195,7 +195,7 @@
 	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
 	<div class="detail">
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
-	<B_auteurs_recents><:par_auteur:><BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents>
+	<B_auteurs_recents><:par_auteur:> <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents>
 	</div>
 	<br>
 </BOUCLE_articles_recents>

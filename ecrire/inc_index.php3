@@ -189,15 +189,6 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		}
 		break;
 
-	case 'forum':
-		indexer_chaine($row['titre'], 3);
-		indexer_chaine($row['texte'], 1);
-		indexer_chaine($row['auteur'], 2);
-		indexer_chaine($row['email_auteur'], 2);
-		indexer_chaine($row['nom_site'], 2);
-		indexer_chaine($row['url_site'], 1);
-		break;
-
 	case 'signature':
 		indexer_chaine($row['nom_email'], 2);
 		indexer_chaine($row['ad_email'], 2);
@@ -212,7 +203,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		if ($full) {
 			// Ajouter les titres des articles syndiques de ce site, le cas echeant
 			if ($row['syndication'] = "oui") {
-				$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet ORDER BY date DESC LIMIT 0,100";
+				$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 0,100";
 				$result_syndic = spip_query($query_syndic);
 				while ($row_syndic = spip_fetch_array($result_syndic)) {
 					indexer_chaine($row_syndic['titre'], 5);
@@ -225,6 +216,56 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 				indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
 			}
 		}
+		break;
+
+	//
+	// Cas tres particulier du forum :
+	// on indexe le thread comme un tout
+	case 'forum':
+		// 1. chercher la racine du thread
+		$id_forum = $id_objet;
+		while ($row['id_parent']) {
+			$id_forum = $row['id_parent'];
+			$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
+			$row = spip_fetch_array($s);
+		}
+
+		// 2. chercher tous les forums du thread
+		// (attention le forum de depart $id_objet n'appartient pas forcement
+		// a son propre thread car il peut etre le fils d'un forum non 'publie')
+		$thread="$id_forum";
+		$fini = false;
+		while (!$fini) {
+			$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
+			if (spip_num_rows($s) == 0) $fini = true;
+			while ($t = spip_fetch_array($s))
+				$thread.=','.$t['id_forum'];
+		}
+		
+		// 3. marquer le thread comme "en cours d'indexation"
+		spip_log("-> indexation thread $thread");
+		spip_query("UPDATE spip_forum SET idx='idx'
+			WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+
+		// 4. Indexer le thread
+		$s = spip_query("SELECT * FROM spip_forum
+			WHERE id_forum IN ($thread) AND idx!='non'");
+		while ($row = spip_fetch_array($s)) {
+			indexer_chaine($row['titre'], 3);
+			indexer_chaine($row['texte'], 1);
+			indexer_chaine($row['auteur'], 2);
+			indexer_chaine($row['email_auteur'], 2);
+			indexer_chaine($row['nom_site'], 2);
+			indexer_chaine($row['url_site'], 1);
+		}
+
+		// 5. marquer le thread comme "indexe"
+		spip_query("UPDATE spip_forum SET idx='oui'
+			WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+
+		// 6. Changer l'id_objet en id_forum de la racine du thread
+		$id_objet = $id_forum;
+
 		break;
 
 	} // switch
@@ -260,7 +301,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 function marquer_indexer ($objet, $id_objet) {
 	spip_log ("demande indexation $objet $id_objet");
 	$table = 'spip_'.table_objet($objet);
-	spip_query ("UPDATE $table SET idx='1' WHERE id_$objet=$id_objet");
+	spip_query ("UPDATE $table SET idx='1' WHERE id_$objet=$id_objet AND idx!='non'");
 }
 function indexer_article($id_article) {
 	marquer_indexer('article', $id_article);

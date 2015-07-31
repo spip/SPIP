@@ -286,6 +286,13 @@ function changer_statut_forum($id_forum, $statut) {
 			spip_query($query);
 		}
 	}
+
+	// signaler au moteur de recherche qu'il faut reindexer le thread
+	// (en fait on se contente de demander une reindexation du parent)
+	include_ecrire('inc_index.php3');
+	marquer_indexer ('forum', $id_parent);
+
+	// changer le statut de toute l'arborescence dependant de ce message
 	$id_messages = array($id_forum);
 	while ($id_messages) {
 		$id_messages = join(',', $id_messages);
