@@ -120,11 +120,10 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 
 //
 // Ecrire un fichier de maniere un peu sure
-// $ecrire_quand_meme ne sert plus mais est conservee dans l'appel pour compatibilite
-// 
+//
 // zippe les fichiers .gz
 // http://doc.spip.org/@ecrire_fichier
-function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
+function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=true) {
 
 	#spip_timer('ecrire_fichier');
 
@@ -183,10 +182,13 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 		if ($ok) return $ok;
 	}
 
-	include_spip('inc/autoriser');
-	if (autoriser('chargerftp'))
-		raler_fichier($fichier);
-	spip_unlink($fichier);
+	if (!$ignorer_echec){
+		include_spip('inc/autoriser');
+		if (autoriser('chargerftp'))
+			raler_fichier($fichier);
+		spip_unlink($fichier);
+	}
+	spip_log("Ecriture fichier $fichier impossible",_LOG_INFO_IMPORTANTE);
 	return false;
 }
 
