@@ -36,23 +36,19 @@ function auteurs_autorises($cond='', $order='')
   return spip_query("SELECT * FROM spip_auteurs WHERE statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
 }
 
-
-
-
-// Un nouvel inscrit prend son statut definitif a la 1ere connexion
-// Le statut a ete memorise dans bio (cf formulaire_inscription)
-// Si vide se rabattre sur le mode d'inscription 
-// (compatibilite vieille version ou redac/forum etait mutuellement exclusif)
+// Un nouvel inscrit prend son statut definitif a la 1ere connexion.
+// Le statut a ete memorise dans bio (cf formulaire_inscription).
+// On le verifie, car la config a peut-etre change depuis,
+// et pour compatibilite avec les anciennes versions n'utilisait pas "bio".
 
 // http://doc.spip.org/@acces_statut
 function acces_statut($id_auteur, $statut, $bio)
 {
-	if ($statut == 'nouveau') {
-		$statut = $bio ? $bio :
-		  (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum');
-		spip_query("UPDATE spip_auteurs SET bio='', statut=" . _q($statut) . " WHERE id_auteur=$id_auteur");
-	}
-	return $statut;
+	if ($statut != 'nouveau') return $statut;
+	include_spip('inc/filtres');
+	if (!($s = tester_config('', $bio))) return $statut;
+	spip_query("UPDATE spip_auteurs SET bio='', statut=" . _q($s) . " WHERE id_auteur=$id_auteur");
+	return $s;
 }
 
 // Fonction d'authentification
