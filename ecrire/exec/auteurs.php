@@ -319,7 +319,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	
 	case 'nom':
 	default:
-		$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
+		$sql_sel = ", ".spip_abstract_multi ("nom", $spip_lang);
 		$sql_order = " multi";
 	}
 	

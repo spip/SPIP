@@ -131,9 +131,9 @@ function choix_rubriques_admin_restreint($auteur) {
 
 	$id_auteur = intval($auteur['id_auteur']);
 
-	$result_admin = spip_query("SELECT rubriques.id_rubrique, " . creer_objet_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
+	$result = spip_query("SELECT rubriques.id_rubrique, " . spip_abstract_multi ("titre", $spip_lang) . " FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique ORDER BY multi");
 
-	$restreint = (spip_num_rows($result_admin) > 0);
+	$restreint = (spip_num_rows($result) > 0);
 
 	if (!$restreint) {
 		$phrase = _T('info_admin_gere_toutes_rubriques')."\n";
@@ -149,7 +149,7 @@ function choix_rubriques_admin_restreint($auteur) {
 			? "<input type='hidden' name='restreintes[]' value='0' />\n"
 			: '';
 
-		while ($row_admin = spip_fetch_array($result_admin)) {
+		while ($row_admin = spip_fetch_array($result)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 
 			$menu .= "\n<li id='rubrest_$id_rubrique'>"

@@ -275,11 +275,11 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 		. "</div><br />\n";
 	}
 
-	$result_groupes = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".creer_objet_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+	$result = editer_mot_droits("id_groupe,unseul,obligatoire,titre, ".spip_abstract_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots
 	$ajouter ='';
-	while ($row = spip_fetch_array($result_groupes)) {
+	while ($row = spip_fetch_array($result)) {
 		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;

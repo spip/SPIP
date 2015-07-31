@@ -122,6 +122,12 @@ function spip_abstract_create($nom, $champs, $cles, $autoinc=false, $temporary=f
 	return $f($nom, $champs, $cles, $autoinc, $temporary);
 }
 
+function spip_abstract_multi($sel, $lang, $serveur='')
+{
+  	$f = spip_abstract_serveur('multi', $serveur);
+	return $f($sel, $lang);
+}
+
 # une composition tellement frequente...
 // http://doc.spip.org/@spip_abstract_fetsel
 function spip_abstract_fetsel(
@@ -134,7 +140,6 @@ $select, $from, $where,	$groupby, $orderby, $limit,
 $sousrequete, $having, $table, $id, $serveur),
 				   $serveur);
 }
-
 
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
@@ -235,32 +240,4 @@ function spip_sql_version($nom) {
 	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }
-
-
-// http://doc.spip.org/@creer_objet_multi
-function creer_objet_multi ($objet, $lang) {
-	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
-		"     TRIM(".$objet."), ".
-		"     CONCAT( ".
-		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
-		"          IF( ".
-		"               INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
-		"               IF( ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
-		"                     INSERT( ".
-		"                          TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
-		"                          1, ".
-		"                          INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
-		"                          '' ".
-		"                     ), ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
-		"                ), ".
-		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
-		"          ) ".
-		"     ) ".
-		"))) AS multi ";
-
-	return $retour;
-}
-
 ?>

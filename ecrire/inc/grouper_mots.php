@@ -37,7 +37,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	$deb_aff = _request($tmp_var);
 	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
 	$select = 'id_mot, id_groupe, titre, descriptif,'
-	. creer_objet_multi ("titre", $spip_lang);
+	. spip_abstract_multi ("titre", $spip_lang);
 
 	$result = spip_query($q="SELECT $select FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY multi" . (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff"));
 

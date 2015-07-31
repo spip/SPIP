@@ -372,7 +372,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
     // par multi champ
 	      if (preg_match(",^multi[\s]*(.*)$,",$par, $m)) {
 		  $texte = $boucle->id_table . '.' . trim($m[1]);
-		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
+		  $boucle->select[] =  "\".spip_abstract_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
 		  $order = "multi";
 	// par num champ(, suite)
 	      }	else if (preg_match(",^num[\s]*(.*)$,",$par, $m)) {

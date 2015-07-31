@@ -318,6 +318,13 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 	foreach($keys as $index)  {pg_query($spip_pg_link, $index);}
 }
 
+// Fonction PG a ecrire: selectionner la sous-chaine dans $objet
+// correspondant a $lang. Cf balise Multi de Spip
+
+function spip_pg_multi ($objet, $lang) {
+	return "$objet AS multi";
+}
+
 // Palanquee d'idiosyncrasies MySQL dans les creations de table
 // A completer par les autres, mais essayer de reduire en amont.
 
