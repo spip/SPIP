@@ -19,6 +19,7 @@ function exec_editer_mot_dist()
 	exec_editer_mot_args(intval(_request('id_objet')), _request('objet'));
 }
 
+// http://doc.spip.org/@exec_editer_mot_args
 function exec_editer_mot_args($id_objet, $objet)
 {
 	if (!$id_objet OR !$objet)

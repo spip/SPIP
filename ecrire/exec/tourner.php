@@ -18,6 +18,7 @@ function exec_tourner_dist()
 	exec_tourner_args(intval(_request('id_document')), _request('type'), intval(_request('id')));
 }
 
+// http://doc.spip.org/@exec_tourner_args
 function exec_tourner_args($id_document, $type, $id)
 {
 	if (!$id_document OR !($type == 'article' 
