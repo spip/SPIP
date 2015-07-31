@@ -117,8 +117,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		http_status($page['status']);
 	}
 
-	// Content-Type ?
-	if (!isset($page['entetes']['Content-Type'])) {
+	// Tester si on est admin et il y a des choses supplementaires a dire
+	// type tableau pour y mettre des choses au besoin.
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
+
+	// Mettre le Content-Type Html si manquant ou debug
+
+	if ($debug OR !isset($page['entetes']['Content-Type'])) {
 		$page['entetes']['Content-Type'] = 
 			"text/html; charset=" . $GLOBALS['meta']['charset'];
 		$html = true;
@@ -146,10 +151,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
 	}
 
-	// Tester si on est admin et il y a des choses supplementaires a dire
-	// type tableau pour y mettre des choses au besoin.
-	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
-
 	$affiche_boutons_admin = ($html AND ((
 		isset($_COOKIE['spip_admin'])
 		AND !$flag_preserver
@@ -160,7 +161,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 
 
- 	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
+ 	// decompte des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
  	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
  	$spip_compter_visites = $html?'oui':'non';
  	if (isset($page['entetes']['X-Spip-Visites'])){
@@ -218,7 +219,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
-	echo pipeline('affichage_final', $page['texte']);
+	$res = pipeline('affichage_final', $page['texte']);
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
@@ -233,7 +234,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			echo erreur_squelette(false);
 		}
 	} else {
-
+		echo $res;
 		if (isset($GLOBALS['meta']['date_prochain_postdate'])
 		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
 			include_spip('inc/rubriques');
