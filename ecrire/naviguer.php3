@@ -7,7 +7,7 @@ include_local ("inc_meta.php3");
 include_local ("inc_mots.php3");
 
 
-if (!$coll) $coll=0;
+$coll = intval($coll);
 $flag_mots = lire_meta("articles_mots");
 
 
@@ -74,26 +74,37 @@ function sous_enfant($collection2){
 //
 // Gerer les modifications...
 //
-if ($titre){
+
+if ($titre) {
+	$id_parent = intval($id_parent);
+
+	// creation, le cas echeant
+	if ($new == 'oui' AND !$coll) {
+		$query = "INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
+		$result = spip_query($query);
+		$coll = mysql_insert_id();
+	}
+
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
-	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
+	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$coll\"";
 	$row = mysql_fetch_array(spip_query($query));
 	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
 	}
 
-	// verifier qu'on envoit bien dans une rubrique autorisee
+	// verifier qu'on envoie bien dans une rubrique autorisee
 	if (acces_rubrique($id_parent)) {
 		$change_parent = "id_parent=\"$id_parent\",";
-	} else {
+	}
+	else {
 		$change_parent = "";
 	}
 
 	$titre = addslashes($titre);
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
-	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$id_rubrique";
+	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$coll";
 	$result = spip_query($query);
 	
 	calculer_rubriques();
@@ -103,9 +114,11 @@ if ($titre){
 	}
 }
 
+
 //
 // infos sur cette rubrique
 //
+
 $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$coll'";
 $result=spip_query($query);
 
