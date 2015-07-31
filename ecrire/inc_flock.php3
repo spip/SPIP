@@ -147,33 +147,20 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	$gzip = (substr($fichier, -3) == '.gz');
 
-	if ($gzip) {
-		$fopen = gzopen;
-		$fputs = gzputs;
-		$fclose = gzclose;
-	} else {
-		$fopen = fopen;
-		$fputs = fputs;
-		$fclose = fclose;
-	}
-
 	#spip_timer('ecrire_fichier');
 
 	// verrouiller le fichier destination
-	if ($flock = test_flock($fichier)) {
-		if ($fp = @fopen($fichier, 'a'))
-			while (!spip_flock($fp, LOCK_EX, $fichier));
-		else
-			return false;
-	}
+	if ($fp = @fopen($fichier, 'a'))
+		while (!spip_flock($fp, LOCK_EX, $fichier));
+	else
+		return false;
 
 	// ecrire les donnees, compressees le cas echeant
 	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
 	// de le recreer si le locker qui nous precede l'avait supprime...)
-	if ($fo = @$fopen($fichier, 'w'))
-		$s = @$fputs($fo, $contenu, $a = strlen($contenu));
-	else
-		return false;
+	if ($gzip) $contenu = gzencode($contenu);
+	@ftruncate($fp,0);
+	$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
 	$ok = ($s == $a);
 	if (!$ok)
@@ -181,14 +168,9 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	#spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
 
-	// fermer le fichier
-	@fclose($fo);
-
-	// liberer le verrou
-	if ($flock) {
-		spip_flock($fp, LOCK_UN, $fichier);
-		@fclose($fp);
-	}
+	// liberer le verrou et fermer le fichier
+	spip_flock($fp, LOCK_UN, $fichier);
+	@fclose($fp);
 
 	return $ok;
 }
