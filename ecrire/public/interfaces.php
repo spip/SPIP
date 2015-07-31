@@ -253,8 +253,8 @@ $tables_jointures['spip_rubriques'][]= 'mots';
 $tables_jointures['spip_syndic'][]= 'mots_syndic';
 $tables_jointures['spip_syndic'][]= 'mots';
 
-$tables_jointures['spip_syndic_articles']['id_syndic']= 'syndic';
-$tables_jointures['spip_syndic_articles']['id_syndic']= 'mots_syndic';
+$tables_jointures['spip_syndic_articles'][]= 'syndic';
+$tables_jointures['spip_syndic_articles'][]= 'mots_syndic';
 $tables_jointures['spip_syndic_articles'][]= 'mots';
 
 $tables_jointures['spip_mots'][]= 'mots_articles';
