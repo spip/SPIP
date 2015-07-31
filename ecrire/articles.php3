@@ -348,70 +348,43 @@ echo "</div>\n";
 fin_boite_info();
 
 
-//
-// Afficher les raccourcis
-//
+// Logos de l'article
 
-debut_raccourcis();
+$arton = "arton$id_article";
+$artoff = "artoff$id_article";
 
-icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
-	$retour = urlencode($clean_link->getUrl());
-	icone_horizontale("Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
-	$articles_mots = lire_meta('articles_mots');
-	if ($articles_mots != "non")
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
-}
-
-fin_raccourcis();
-
+if ($id_article>0 AND $flag_editable)
+	afficher_boite_logo($arton, $artoff, "LOGO DE L'ARTICLE".aide ("logoart"), "LOGO POUR SURVOL");
 
 
 //
 // Boites de configuration avancee
 //
 
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+if ($options == "avancees") {
 
 	echo "<p>";
+	debut_cadre_relief("forum-interne-24.gif");
+	$visible = $change_accepter_forum || $change_petition;
 
-	debut_cadre_relief("administration-24.gif");
-
-	$visible = $change_accepter_forum || $change_petition || $changer_virtuel;
-
+	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
 	if ($visible)
-		echo bouton_block_visible("config_avancee");
+		echo bouton_block_visible("forumpetition");
 	else
-		echo bouton_block_invisible("config_avancee");
-	echo "<font face='Verdana, Arial, Helvetica, sans-serif' size='1' color='black'><b>OPTIONS AVANC&Eacute;ES</b></font>";
+		echo bouton_block_invisible("forumpetition");
+	echo "FORUM & P&Eacute;TITION";
+	echo "</b></center></font>";
 	if ($visible)
-		echo debut_block_visible("config_avancee");
+		echo debut_block_visible("forumpetition");
 	else
-		echo debut_block_invisible("config_avancee");
+		echo debut_block_invisible("forumpetition");
 
 
-	// Logos de l'article
-
-	$arton = "arton$id_article";
-	$artoff = "artoff$id_article";
-	$arton_ok = get_image($arton);
-	if ($arton_ok) $artoff_ok = get_image($artoff);
-
-	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
-		echo "<p>";
-		afficher_boite_logo($arton, "LOGO DE L'ARTICLE".aide ("logoart"));
-		echo "<br>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-
-	echo "<br>";
-
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>\n";
 
 	// Forums et petitions
 
 	$forums_publics = get_forums_publics($id_article);
-
-	debut_cadre_enfonce("forum-interne-24.gif");
 
 	if ($change_accepter_forum) {
 		$query_forum = "UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
@@ -422,10 +395,6 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 			ecrire_metas();
 		}
 	}
-
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
-	echo "FORUM PUBLIC";
-	echo "</b></center></font>";
 
 	echo "\n<form action='articles.php3' method='get'>";
 
@@ -500,11 +469,6 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$texte_petition=$row["texte"];
 	}
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
-
-	echo "P&Eacute;TITION";
-	echo "</b></center></font>";
-
 	echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
@@ -560,23 +524,37 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
 	echo "</FORM>";
 
-	fin_cadre_enfonce();
+	echo "</font>";
+	echo fin_block();
+
+	fin_cadre_relief();
 
 	echo "<br>";
 
 
 	// Redirection (article virtuel)
 
-	debut_cadre_enfonce("site-24.gif");
+	debut_cadre_relief("site-24.gif");
 
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1, strlen($chapo));
 	}
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
+	$visible = ($changer_virtuel || $virtuel);
+
+	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	if ($visible)
+		echo bouton_block_visible("redirection");
+	else
+		echo bouton_block_invisible("redirection");
 	echo "REDIRECTION";
 	echo aide ("artvirt");
 	echo "</b></center></font>";
+	if ($visible)
+		echo debut_block_visible("redirection");
+	else
+		echo debut_block_invisible("redirection");
+
 	echo "<form action='articles.php3' method='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
@@ -591,12 +569,28 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
 	echo "</form>";
 
-	fin_cadre_enfonce();
-
 	echo fin_block();
+
 	fin_cadre_relief();
 }
 
+
+//
+// Afficher les raccourcis
+//
+
+debut_raccourcis();
+
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
+if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+	$retour = urlencode($clean_link->getUrl());
+	icone_horizontale("Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+	$articles_mots = lire_meta('articles_mots');
+	if ($articles_mots != "non")
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+}
+
+fin_raccourcis();
 
 
 //////////////////////////////////////////////////////
@@ -1242,32 +1236,31 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 echo "\n\n<DIV align=justify>";
 
-if (substr($chapo, 0, 1) == '=') {
-	$adresse = substr($chapo, 1, strlen($chapo));
+if ($virtuel) {
 	debut_boite_info();
 	echo propre("{{Redirection.}} Cet article renvoie &agrave;
-	la page: <center>[->$adresse]</center>");
+	la page: <center>[->$virtuel]</center>");
 	fin_boite_info();
 }
 else {
 	echo "<B>";
 	echo justifier(propre($chapo));
 	echo "</B>\n\n";
-}
 
-echo justifier(propre($texte));
+	echo justifier(propre($texte));
 
-if ($ps) {
-	echo "\n\n<FONT SIZE=2><P align=justify><B>P.S.</B> ";
-	echo justifier(propre($ps));
-	echo "</FONT>";
-}
+	if ($ps) {
+		echo "\n\n<FONT SIZE=2><P align=justify><B>P.S.</B> ";
+		echo justifier(propre($ps));
+		echo "</FONT>";
+	}
 
 
-if ($les_notes) {
-	echo "\n\n<FONT SIZE=2>";
-	echo justifier($les_notes);
-	echo "</FONT>";
+	if ($les_notes) {
+		echo "\n\n<FONT SIZE=2>";
+		echo justifier($les_notes);
+		echo "</FONT>";
+	}
 }
 
 

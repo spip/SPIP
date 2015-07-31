@@ -152,25 +152,9 @@ echo "</center>";
 
 $arton = "breveon$id_breve";
 $artoff = "breveoff$id_breve";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
 
-if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($options == 'avancees' OR $arton_ok)) {
-
-	debut_cadre_relief();
-
-	afficher_boite_logo($arton, "LOGO DE LA BREVE".aide ("breveslogo"));
-
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<P>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-
-	fin_cadre_relief();
-}
-
-
-
+if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
+	afficher_boite_logo($arton, $artoff, "LOGO DE LA BREVE".aide ("breveslogo"), "LOGO POUR SURVOL");
 
 debut_droite();
 

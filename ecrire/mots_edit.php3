@@ -112,20 +112,9 @@ echo "</center>";
 
 $arton = "moton$id_mot";
 $artoff = "motoff$id_mot";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
 
-if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
-
-	debut_cadre_relief();
-	afficher_boite_logo($arton, "LOGO DU MOT-CL&Eacute;".aide ("breveslogo"));
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<P>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-	fin_cadre_relief();
-}
-
+if ($id_mot > 0 AND $connect_statut == '0minirezo')
+	afficher_boite_logo($arton, $artoff, "LOGO DU MOT-CL&Eacute;".aide("breveslogo"), "LOGO POUR SURVOL");
 
 
 //

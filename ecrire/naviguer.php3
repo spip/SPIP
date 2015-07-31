@@ -293,24 +293,13 @@ fin_raccourcis();
 
 $rubon = "rubon$coll";
 $ruboff = "ruboff$coll";
-$rubon_ok = get_image($rubon);
-if ($rubon_ok) $ruboff_ok = get_image($ruboff);
 
-if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'avancees' OR $rubon_ok)) {
-	debut_cadre_relief();
+if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 	if ($coll > 0)
-		afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
+		afficher_boite_logo($rubon, $ruboff, "LOGO DE LA RUBRIQUE ".aide ("rublogo"), "LOGO POUR SURVOL");
 	else
-		afficher_boite_logo($rubon, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"));
-
-	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
-		echo "<P>";
-		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
-	}
-	fin_cadre_relief();
+		afficher_boite_logo($rubon, $ruboff, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"), "LOGO POUR SURVOL");
 }
-
-
 
 
 
