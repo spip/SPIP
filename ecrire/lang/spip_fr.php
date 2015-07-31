@@ -234,7 +234,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 'form_pet_confirmation' => 'Veuillez confirmer votre signature :',
 'form_pet_deja_enregistre' => 'Ce site est d&eacute;j&agrave; enregistr&eacute;',
 'form_pet_deja_signe' => 'Vous avez d&eacute;j&agrave; sign&eacute; ce texte.',
-'form_pet_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient de vous &ecirc;tre envoy&eacute;. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.',
+'form_pet_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.',
 'form_pet_mail_confirmation' => 'Bonjour,
 
 Vous avez demand&eacute; &agrave; signer la p&eacute;tition :
