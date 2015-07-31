@@ -43,7 +43,6 @@ function exec_brouteur_frame_dist() {
 			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
-				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
 				echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
@@ -59,7 +58,6 @@ function exec_brouteur_frame_dist() {
 			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
-				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
 				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
@@ -124,7 +122,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 				    ($frame+1),
 				    "'>$titre</a></div>";
 				else  echo "<div style='",
-				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
+				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
 			}
 			echo "</div>\n";
 		}
