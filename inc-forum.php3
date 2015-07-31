@@ -185,7 +185,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$titre_select = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
 
 			$res = spip_fetch_object(spip_query($titre_select));
-			$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
+			$titre = '> ' . supprimer_numero(ereg_replace ('^[>[:space:]]*', '', $res->titre));
 		}
 		if ($spip_forum_user && is_array($cookie_user = unserialize($spip_forum_user))) {
 			$auteur = $cookie_user['nom'];
