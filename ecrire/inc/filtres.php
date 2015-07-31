@@ -338,8 +338,6 @@ function taille_image($img) {
 		$srcWidth = extraire_attribut($img,'width');
 		$srcHeight = extraire_attribut($img,'height');
 	}
-	if (($p=strpos($logo,'?'))!==FALSE)
-		$logo=substr($logo,0,$p);
 
 	// ne jamais operer directement sur une image distante pour des raisons de perfo
 	// la copie locale a toutes les chances d'etre la ou de resservir
@@ -348,6 +346,8 @@ function taille_image($img) {
 		$fichier = copie_locale($logo);
 		$logo = $fichier ? _DIR_RACINE . $fichier : $logo;
 	}
+	if (($p=strpos($logo,'?'))!==FALSE)
+		$logo=substr($logo,0,$p);
 
 	$srcsize = false;
 	if (isset($largeur_img[$logo]))
