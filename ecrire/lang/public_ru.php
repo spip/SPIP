@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil_site' => 'Главная', # MODIF
+	'accueil_site' => 'Главная',
 	'article' => 'Статья',
 	'articles' => 'Статьи',
 	'articles_auteur' => 'Авторы статей',
@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Автор',
 	'autres' => 'Прочие',
 	'autres_breves' => 'Другие новости',
-	'autres_groupes_mots_clefs' => 'Группы ключей', # MODIF
+	'autres_groupes_mots_clefs' => 'Группы ключей',
 	'autres_sites' => 'Другие сайты',
 
 	// B
@@ -67,9 +67,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message' => 'Сообщение',
 	'messages_forum' => 'Сообщения форума',
 	'messages_recents' => 'Новые сообщения форума',
-	'mots_clef' => 'Ключ', # MODIF
-	'mots_clefs' => 'Ключи', # MODIF
-	'mots_clefs_meme_groupe' => 'Ключи из этой группы', # MODIF
+	'mots_clef' => 'Ключ',
+	'mots_clefs' => 'Ключи',
+	'mots_clefs_meme_groupe' => 'Ключи из этой группы',
 
 	// N
 	'navigation' => 'Просмотр',
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'repondre_article' => 'Оставить комментарий ',
 	'repondre_breve' => 'Оставить комментарий ',
 	'resultats_recherche' => 'Результаты поиска',
-	'retour_debut_forums' => 'Все форумы', # MODIF
+	'retour_debut_forums' => 'Все форумы',
 	'rubrique' => 'Раздел',
 	'rubriques' => 'Разделы',
 
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'syndiquer_site' => 'RSS всего сайта',
 
 	// T
-	'texte_lettre_information' => 'Информационный бюллетень сайта', # MODIF
+	'texte_lettre_information' => 'Информационный бюллетень сайта',
 	'texte_lettre_information_2' => 'Материалы на сайте размещаются с',
 
 	// V

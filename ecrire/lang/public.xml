@@ -51,6 +51,9 @@
 	</langue>
 	<langue code="ft_tu" />
 	<langue code="gl" />
+	<langue code="hac" url="http://trad.spip.org/tradlang_module/public?lang_cible=hac">
+		<traducteur nom="akomarani" lien="http://trad.spip.org/auteur/akomarani" />
+	</langue>
 	<langue code="he" />
 	<langue code="hr" />
 	<langue code="hu" />
