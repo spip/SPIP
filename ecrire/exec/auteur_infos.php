@@ -40,6 +40,7 @@ global $ajouter_id_article,
 
 
  $id_auteur = intval($id_auteur);
+ $ajouter_id_article = intval($ajouter_id_article);
 
 //
 // Recuperer id_auteur ou se preparer a l'inventer
@@ -156,8 +157,8 @@ if (strval($nom)!='') {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
 			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom)", "('temp')");
 
-			if ($ajouter_id_article = intval($ajouter_id_article))
-				spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur, $ajouter_id_article)");
+			if ($ajouter_id_article)
+				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
 
 		$query = "UPDATE spip_auteurs SET $query_pass
@@ -172,7 +173,7 @@ if (strval($nom)!='') {
 			WHERE id_auteur=".$auteur['id_auteur'];
 		spip_query($query) OR die($query);
 	}
-}
+ }
 
 // Appliquer des modifications de statut
 modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['supp_rub']);
