@@ -208,15 +208,15 @@ function http_calendrier_sans_date($evenements)
 
 function http_calendrier_aide_mess()
 {
-  global $bleu, $vert, $jaune;
+  global $bleu, $vert, $jaune, $spip_lang_left;
   if (_DIR_RESTREINT) return "";
   return
-   "\n<br /><br /><br />\n<table width='700'>\n<tr><td><font face='arial,helvetica,sans-serif' size='2'>" .
+   "\n<br /><br /><br />\n<font face='arial,helvetica,sans-serif' size='2'><table width='700'>\n<tr><th style='text-align: $spip_lang_left'> " .
     "<b>"._T('info_aide')."</b>" .
-    "<br />$bleu\n"._T('info_symbole_bleu')."\n" .
-    "<br />$vert\n"._T('info_symbole_vert')."\n" .
-    "<br />$jaune\n"._T('info_symbole_jaune')."\n" .
-    "</font></td></tr>\n</table>";
+    "</th></tr><tr><td>$bleu\n"._T('info_symbole_bleu')."\n" .
+    "</td></tr><tr><td>$vert\n"._T('info_symbole_vert')."\n" .
+    "</th></tr><tr><td>$jaune\n"._T('info_symbole_jaune')."\n" .
+    "</td></tr>\n</table></font>";
  }
 
 # Bandeau superieur d'un calendrier selon son $type (jour/mois/annee):
@@ -389,7 +389,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	list($purscript, $ancre) = http_calendrier_script($script);
 
       return 
-	"<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
+	"<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
 	"\n<tr><td colspan='7'>" .
 	http_calendrier_navigation($j,
 				   $mois,
@@ -424,7 +424,7 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
   if (!$nb) return '';
   $r = '';
   $bo = "\n\tstyle='width: " .    round(100/$nb) .  "%'";
-  foreach($intitul as $j) $r .= "\n\t<td class='calendrier-titre calendrier-verdana10' $bo>$j</td>";
+  foreach($intitul as $j) $r .= "\n\t<th class='calendrier-titre calendrier-verdana10' $bo>$j</th>";
   return  "\n<tr style='background-color: $claire'>$r\n</tr>";
 }
 
@@ -588,7 +588,7 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $ev
 	foreach($intitul as $k => $v) {
 		$d = $v['date'];
 		$total .= "\n<td style='width: 14%; vertical-align: top'>" .
-		  "<div class='calendrier-verdana10' style='color: #999999; background-color: " .
+		  "<div style='color: #999999; background-color: " .
 					     (($v['index'] == 0) ? 
 					      $couleur_claire :
 					      (($v['jour'] == $jour_t AND 
@@ -607,7 +607,7 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $ev
 	$fin = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+7, $annee_today));
 
 	return 
-	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
+	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
 	  "\n<tr><td colspan='7'>" .
 	  http_calendrier_navigation($jour_today,
 				     $mois_today,
@@ -626,7 +626,7 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $ev
 				     $nav) .
 	  "</td></tr>\n" .
 	  http_calendrier_les_jours($liens, $couleur_claire, $couleur_foncee) .
-	  "\n<tr>$total</tr>" .
+	  "\n<tr class='calendrier-verdana10'>$total</tr>" .
 	  "</table>" .
 	  http_calendrier_sans_date($articles["0"]) .
 	  http_calendrier_aide_mess();

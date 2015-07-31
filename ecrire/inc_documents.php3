@@ -92,35 +92,30 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 	}
 
-	$query = "SELECT * FROM spip_documents WHERE id_document = " . intval($id_document);
-	$result = spip_query($query);
-	if ($row = spip_fetch_array($result)) {
-		$id_document = $row['id_document'];
-		$id_type = $row['id_type'];
-		$titre = propre($row ['titre']);
-		$descriptif = propre($row['descriptif']);
-		$fichier = generer_url_document($id_document);
-		$largeur = $row['largeur'];
-		$hauteur = $row['hauteur'];
-		$taille = $row['taille'];
-		$mode = $row['mode'];
+	if (!($row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document))))) 
+		return '';
+	$id_document = $row['id_document'];
+	$id_type = $row['id_type'];
+	$titre = propre($row ['titre']);
+	$descriptif = propre($row['descriptif']);
+	$fichier = generer_url_document($id_document);
+	$largeur = $row['largeur'];
+	$hauteur = $row['hauteur'];
+	$taille = $row['taille'];
+	$mode = $row['mode'];
 
+	$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type=" . intval($id_type));
+	if ($row_type = @spip_fetch_array($result_type)) {
+		$type = $row_type['titre'];
+		$inclus = $row_type['inclus'];
+		$extension = $row_type['extension'];
+	}
+	else $type = 'fichier';
 
-		$query_type = "SELECT * FROM spip_types_documents WHERE id_type=" . intval($id_type);
-		$result_type = spip_query($query_type);
-		if ($row_type = @spip_fetch_array($result_type)) {
-			$type = $row_type['titre'];
-			$inclus = $row_type['inclus'];
-			$extension = $row_type['extension'];
-		}
-		else $type = 'fichier';
+	// Pour RealVideo
+	$real = (!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension));
 
-		// Pour RealVideo
-		if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension))) {
-			$real = true;
-		}
-
-		if ($inclus == "embed" AND !$real) {
+	if ($inclus == "embed" AND !$real) {
 		
 				for ($i = 0; $i < count($params); $i++) {
 					if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
@@ -146,60 +141,52 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		
 				$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>";
 		
-		}
-		else if ($inclus == "embed" AND $real) {
+	}
+	else if ($inclus == "embed" AND $real) {
 			$vignette .= embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= "<br />";
 			$vignette .= embed_document ($id_document, "controls=PlayButton|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= embed_document ($id_document, "controls=PositionSlider|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 		}
-		else if ($inclus == "image") {
-			$fichier_vignette = $fichier;
-			$largeur_vignette = $largeur;
-			$hauteur_vignette = $hauteur;
-			if ($fichier_vignette) {
-				$vignette = "<img src='$fichier_vignette' style='border-width: 0px'";
-				if ($largeur_vignette && $hauteur_vignette)
-					$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-				if ($titre) {
-					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
-					$titre_ko = supprimer_tags(propre($titre_ko));
-					$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
-				}else{
-					$vignette .= " alt=\"\" title=\"\"";
-				}
-				$vignette .= " />";
-			}
+	else if ($inclus == "image") {
+		$fichier_vignette = $fichier;
+		$largeur_vignette = $largeur;
+		$hauteur_vignette = $hauteur;
+		if ($fichier_vignette) {
+			$vignette = "<img src='$fichier_vignette' style='border-width: 0px'";
+			if ($largeur_vignette && $hauteur_vignette)
+				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
+			if ($titre) {
+				$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+				$titre_ko = supprimer_tags(propre($titre_ko));
+				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
+			}else{  $vignette .= " alt=\"\" title=\"\""; }
+			$vignette .= " />";
 		}
-		
-		if ($afficher_titre) {
-			if ($largeur_vignette < 120) $largeur_vignette = 120;
-			$forcer_largeur = " width = '$largeur_vignette'";
-
-			$retour = "<table style='border-width: 0px; padding: 0px; margin: 0px; text-align: $align;'>\n";
-			$retour .= "<tr>";
-			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
-			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
-			$retour .= $vignette;
-
-			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
-			
-			if ($descriptif) {
-				$alignement = (strlen($descriptif)>200)? 'left':'center';
-				$retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
-			}
-
-			$retour .= "</div>\n</td>";
-			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
-			$retour .= "</tr>\n</table>\n";
-		}
-		else {
-			$retour = $vignette;
-		}
-
-		return $retour;
-
 	}
+		
+	if (!$afficher_titre) return $vignette;
+
+	if ($largeur_vignette < 120) $largeur_vignette = 120;
+	$forcer_largeur = " width = '$largeur_vignette'";
+
+	$retour = "<table style='border-width: 0px; padding: 0px; margin: 0px; text-align: $align;'>\n";
+	$retour .= "<tr>";
+	if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
+	$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
+	$retour .= $vignette;
+	
+	if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
+	
+	if ($descriptif) {
+	  $alignement = (strlen($descriptif)>200)? 'left':'center';
+	  $retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
+	}
+
+	$retour .= "</div>\n</td>";
+	if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
+	
+	return $retour . "</tr>\n</table>\n";
 }
 
 
@@ -212,31 +199,28 @@ function integre_image($id_document, $align, $type_aff) {
 
 	$id_doublons['documents'] .= ",$id_document";
 
-	$query = "SELECT * FROM spip_documents WHERE id_document = " . intval($id_document);
-	$result = spip_query($query);
-	if ($row = spip_fetch_array($result)) {
-		$id_document = $row['id_document'];
-		$id_type = $row['id_type'];
-		$titre = typo($row['titre']);
-		$descriptif = propre($row['descriptif']);
-		$fichier = $row['fichier'];
-		$url_fichier = generer_url_document($id_document);
-		$largeur = $row['largeur'];
-		$hauteur = $row['hauteur'];
-		$taille = $row['taille'];
-		$mode = $row['mode'];
-		$id_vignette = $row['id_vignette'];
+	if (!($row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document))))) return "";
+	$id_document = $row['id_document'];
+	$id_type = $row['id_type'];
+	$titre = typo($row['titre']);
+	$descriptif = propre($row['descriptif']);
+	$fichier = $row['fichier'];
+	$url_fichier = generer_url_document($id_document);
+	$largeur = $row['largeur'];
+	$hauteur = $row['hauteur'];
+	$taille = $row['taille'];
+	$mode = $row['mode'];
+	$id_vignette = $row['id_vignette'];
 
-		// on construira le lien en fonction du type de doc
-		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
-		if ($type = @spip_fetch_array($result_type)) {
-			$extension = $type['extension'];
-		}
+	// on construira le lien en fonction du type de doc
+	if ($extension = @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = $id_type"))) {
 
-		// recuperer la vignette pour affichage inline
-		if ($id_vignette) {
-			if ($row_vignette = @spip_fetch_array(spip_query(
-									 "SELECT largeur,hauteur,fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
+			$extension = $extension['extension'];
+	}
+
+	// recuperer la vignette pour affichage inline
+	if ($id_vignette) {
+		if ($row_vignette = @spip_fetch_array(spip_query("SELECT largeur,hauteur,fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
 				$path = _DIR_PREFIX1 . $row_vignette['fichier'];
@@ -250,84 +234,50 @@ function integre_image($id_document, $align, $type_aff) {
 				else 
 				  $url_fichier_vignette = generer_url_document($id_vignette);
 			}
-		}
-		else if ($mode == 'vignette') {
+	}
+	else if ($mode == 'vignette') {
 			$url_fichier_vignette = $url_fichier;
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
-		}
+	}
 
-		if (!$url_fichier_vignette) 
-			list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette)
+	if (!$url_fichier_vignette) 
+		list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette)
 			= vignette_par_defaut($extension);
 
-		if ($url_fichier_vignette) {
-			$vignette = "<img src='$url_fichier_vignette'";
-			$vignette_style = "border-width: 0px;";
-			if ($largeur_vignette && $hauteur_vignette) {
-				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			}
-			if ($titre) {
-				if ($mode == 'document')
-					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
-				else
-					$titre_ko = $titre;
-				$titre_ko = supprimer_tags(propre($titre_ko));
-				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
-			}
-			else
-				$vignette .= ' alt=""';
+	if (!$url_fichier_vignette) return ""; // ne devrait pas arriver
 
-			if ($type_aff == 'DOC')
-				$vignette .= " style='$vignette_style' />";
-			else {
-				if ($align && $align != 'center') {
-					$vignette_style .= " float: $align; margin: 4px;";
-				}
-				else {
-					$vignette_style .= " vertical-align: middle; ";
-				}
-				$vignette .= " style=\"$vignette_style\" />";
-				if ($align == 'center') $vignette = "\n<div style='text-align: center;'>$vignette</div>\n";
-			}
-		}
-
+	if ($titre) {
 		if ($mode == 'document')
-			$vignette = "<a href='$url_fichier'>$vignette</a>";
-
-		// si affichage detaille ('DOC'), ajouter une legende
-		if ($type_aff == 'DOC') {
-			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
-			$result_type = spip_query($query_type);
-			if ($row_type = @spip_fetch_array($result_type)) {
-				$type = $row_type['titre'];
-			}
-			else $type = 'fichier';
-			
-			$largeur_aff = $largeur_vignette;
-			if ($largeur_aff < 120) $largeur_aff = 120;
-			
-			
-			if ($align == 'center') 
-				$retour = "<div class='spip_documents' style='margin: auto; text-align: center;'>\n";
-			else 
-				$retour = "<div class='spip_documents' style='float: $align; text-align: center; width: ".$largeur_aff."px;'>\n";
-
-			//$retour .= "<tr><td align='center' style='text-align: center;'>";
-			$retour .= $vignette;
-
-			if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
-			if ($descriptif) $retour .= "<div class='spip_doc_descriptif'>$descriptif</div>";
-
-			if ($mode == 'document')
-				$retour .= "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
-
-			//$retour .= "</td></tr></table>\n";
-			$retour .= "</div>\n";
-		}
-		else $retour = $vignette;
+			$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+		else $titre_ko = $titre;
+		$titre_ko = supprimer_tags(propre($titre_ko));
+		$alt = " alt=\"$titre_ko\" title=\"$titre_ko\"";
 	}
-	return $retour;
+	else $alt = " alt='document $id_document'";
+
+	$vignette = "<img src='$url_fichier_vignette' style='border-width: 0px;'" .
+	  (($largeur_vignette && $hauteur_vignette) ?
+		" width='$largeur_vignette' height='$hauteur_vignette'" :
+	   "")
+	  . "$alt />" 
+	  . (($type_aff != 'DOC') ? "" :
+	     ((!$titre ? "" : "<div class='spip_doc_titre'><strong>$titre</strong></div>") .
+	      (!$descriptif ? "" : "<div class='spip_doc_descriptif'>$descriptif</div>")));
+
+	if (($type_aff == 'DOC') && ($mode == 'document')) { 
+		if ($type = @spip_fetch_array(spip_query("SELECT titre FROM spip_types_documents WHERE id_type=$id_type")))
+		  $type = $type['titre'];
+		else	$type = 'fichier';
+		$vignette = "<a href='$url_fichier'>$vignette</a>"
+		  . "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
+	}
+
+	return 
+	  ("<span class='spip_documents spip_documents_$align'" .
+	   ((($align == 'center') ||  ($type_aff != 'DOC'))  ?  "" :
+	    (" style='width: " . (($largeur_vignette > 120) ? $largeur_vignette : 120) . "px;'")) .
+	   ">" . $vignette . "</span>\n");
 }
 
 //
@@ -927,7 +877,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		$documents[] = $document;
 
 	if (count($documents)) {
-		echo "<a name='documents'></a>";
+		echo "<a id='documents'></a>";
 		echo "<div>&nbsp;</div>";
 		echo "<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>". majuscules(_T('info_documents')) ."</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='5'>";
@@ -988,7 +938,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 
 	/// Ajouter nouvelle image
-	echo "<a name='images'></a>\n";
+	echo "<a id='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 		$link = new Link ($image_url);
