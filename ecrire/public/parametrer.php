@@ -240,6 +240,8 @@ function sql_accepter_forum($id_article) {
 
 // http://doc.spip.org/@public_parametrer_dist
 function public_parametrer_dist($fond, $local='', $cache='')  {
+	// verifier que la fonction assembler est bien chargee (cf. #608)
+	$assembler = charger_fonction('assembler', 'public');
 
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) {
