@@ -485,10 +485,10 @@ function phraser_criteres($params, &$result) {
 	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
 	// forcer {tout} pour avoir la rubrique mere...
 
-			elseif (($type == 'hierarchie') &&
+			elseif (!strcasecmp($type, 'hierarchie') AND
 				($param == 'id_article' OR $param == 'id_syndic'))
 				$result->modificateur['tout'] = true;
-			elseif (($type == 'hierarchie') && ($param == 'id_rubrique'))
+			elseif (!strcasecmp($type, 'hierarchie') AND ($param == 'id_rubrique'))
 				{;}
 			else {
 			  // pas d'emplacement statique, faut un dynamique
@@ -693,20 +693,20 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		  boucle_debug ($nom, $result, substr($texte, $pos_boucle, strlen($texte) - strlen($suite) -$pos_boucle));
 		}
 
-		if ($p = strpos($type, ':'))
-		  {
-		    $result->sql_serveur = substr($type,0,$p);
-		    $soustype = strtolower(substr($type,$p+1));
-		  }
-		else
-		  $soustype = strtolower($type);
-
+		if ($p = strpos($type, ':')) {
+			$result->sql_serveur = substr($type,0,$p);
+			$type = substr($type,$p+1);
+		}
+		$soustype = strtolower($type);
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
+
+		if (!isset($GLOBALS["table_des_tables"][$soustype]))
+			$soustype = $type;
 
 		$result->type_requete = $soustype;
 		phraser_criteres($result->param, $result);
 
-		if (strncmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
+		if (strncasecmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
 			$result->type_requete = TYPE_RECURSIF;
 			$args = $result->param;
 			array_unshift($args,
