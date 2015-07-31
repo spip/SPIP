@@ -19,8 +19,14 @@ include_spip('inc/meta');
 // par defaut tout est importe sauf les tables ci-dessous
 // possibiliter de definir cela tables via la meta
 global $IMPORT_tables_noimport;
-if (isset($GLOBALS['meta']['IMPORT_tables_noimport']))
+if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
 	$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
+	if (!is_array($IMPORT_tables_noimport)){
+		ecrire_meta('IMPORT_tables_noimport',serialize(array()),'non');
+		ecrire_metas();
+		$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
+	}
+}
 else{
 	include_spip('inc/meta');
 	ecrire_meta('IMPORT_tables_noimport',
