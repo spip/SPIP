@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
-'barre_aide' => 'utilize os recursos tipogr&aacute;ficos para enriquecer o seu layout',
+'barre_aide' => 'utilize os atalhos tipogr&aacute;ficos para enriquecer o seu layout',
 'barre_e_accent_aigu' => 'Inserir um E mai&uacute;sculo com acento agudo',
 'barre_eo' => 'Inserir um OE contra&iacute;do',
 'barre_eo_maj' => 'Inserir um OE contra&iacute;do mai&uacute;sculo',
@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar em [link hipertexto->http://...]',
 'barre_lien_input' => 'Informe o endere&ccedil;o do seu link (voc&ecirc; pode informar um endere&ccedil;o web do tipo http://www.monsite/com ou simplesmente informar o n&uacute;mero de uma mat&eacute;ria deste site.',
 'barre_note' => 'Transformar em [[Nota de p&eacute; de p&aacute;gina]]',
+'barre_paragraphe' => 'Criar um par&aacute;grafo',
 'barre_quote' => '<quote>Citar uma mensagem</quote>',
 'bouton_ajouter_document' => 'INCLUIR UM DOCUMENTO',
 'bouton_ajouter_image' => 'INCLUIR UMA IMAGEM',
