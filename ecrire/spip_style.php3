@@ -1325,6 +1325,7 @@ h3.spip {
 	font-weight: bold;
 	font-size: 120%;
 	text-align: center;
+	clear: both;
 }
 .spip_documents{
 	font-family: Verdana,Arial,Sans,sans-serif;
