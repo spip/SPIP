@@ -79,6 +79,9 @@ function surligner_regexp_accents ($mot) {
 	} else
 		$mot = strtr(strtolower($mot), $accents_regexp);
 
+	// l'apostrophe curly
+	$mot = str_replace("'", "('|&#8217;)", $mot);
+
 	return $mot;
 }
 
