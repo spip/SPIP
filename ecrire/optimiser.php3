@@ -171,20 +171,50 @@ function optimiser_base() {
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $mots[] = $row['id_mot'];
 
-	if ($mots) {
-		$mots = join(",", $mots);
+	
+	// 
+	// Documents
+	//
 
-		$query = "DELETE FROM spip_mots_articles WHERE id_mot NOT IN ($mots)";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_breves WHERE id_mot NOT IN ($mots)";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_forum WHERE id_mot NOT IN ($mots)";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot NOT IN ($mots)";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_syndic WHERE id_mot NOT IN ($mots)";
-		spip_query($query);
+	$query = "SELECT id_document FROM spip_documents_articles";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
+	$query = "SELECT id_document FROM spip_documents_rubriques";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
+	$query = "SELECT id_document FROM spip_documents_breves";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
+	
+	if ($documents) {
+		$documents = join(",", $documents);
+
+		$query = "SELECT id_document, fichier FROM spip_documents WHERE id_document NOT IN ($documents)";
+		$result = spip_query($query);
+		while ($row = spip_fetch_array($result)) {
+			$documents_poubelle[] = $row['id_document'];
+			$fichiers_poubelle[] = $row['fichier'];
+		}
+
+		if ($documents_poubelle) {
+			$documents_poubelle = join(",", $documents_poubelle);
+
+			$fichier = $GLOBALS['dir_ecrire'].'data/.poubelle';
+			if (!$f = @fopen($fichier, 'a')) {
+				spip_log("impossible d'ecrire dans $fichier !");
+				@unlink($fichier);	// on essaie de forcer
+				$f = @fopen($fichier, 'a');
+			}
+			spip_log("mise a la poubelle : ".join(", ", $fichiers_poubelle));
+			$ok = fputs($f, join("\n", $fichiers_poubelle)."\n");
+			fclose($f);
+			if ($ok) {
+				$query = "DELETE FROM spip_documents WHERE id_document IN ($documents_poubelle)";
+				spip_query($query);
+			}
+		}
 	}
+
 
 	//
 	// Forums
