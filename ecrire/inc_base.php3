@@ -757,6 +757,7 @@ function maj_base() {
 	if ($version_installee < 1.414) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
+		include_local ("inc_meta.php3");
 		$accepter_forum = substr(lire_meta("forums_publics"),0,3) ;
 		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
 		$result = spip_query($query);
