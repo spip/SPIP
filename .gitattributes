@@ -10,6 +10,7 @@ ecrire/action/charger_plugin.php -text
 ecrire/action/configurer.php -text
 ecrire/action/configurer_previsualiseur.php -text
 ecrire/action/configurer_relayeur.php -text
+ecrire/action/confirmer_email.php -text
 ecrire/action/converser.php -text
 ecrire/action/copier_local.php -text
 ecrire/action/dater.php -text
