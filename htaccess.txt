@@ -44,6 +44,13 @@ RewriteBase /
 
 ################ GESTIONS DES URLS SPIP #######################
 
+# Deux pseudo-actions a present evacuees
+# N'y at-il pas moyen de REMPLACER un nom dans la QueryString ?
+RewriteCond %{QUERY_STRING} action=rss
+RewriteRule spip.php	spip.php?page=rss [QSA,L]
+RewriteCond %{QUERY_STRING} action=ical
+RewriteRule spip.php	spip.php?page=ical_prive [QSA,L]
+
 ###
 # Si le fichier ou repertoire demande existe
 # ignorer toutes les regles qui suivent
@@ -68,8 +75,10 @@ RewriteRule ^site([0-9]+)(\.html)?$	spip.php?page=site&id_syndic=$1 [QSA,L]
 RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
 RewriteRule ^resume.php[3]?	spip.php?page=sommaire [QSA,L]
 RewriteRule ^page.php[3]?	spip.php [QSA,L]
-RewriteRule ^spip_cal\.php3?$	spip.php?action=ical [QSA,L]
-RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
+RewriteRule ^spip_cal\.php3?$	spip.php?page=ical_prive [QSA,L]
+RewriteRule ^spip_rss\.php3?$	spip.php?page=rss [QSA,L]
+
+
 # Fin compatibilite
 ###
 

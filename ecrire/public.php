@@ -69,7 +69,11 @@ else {
 			echo minipres();
 			exit;
 		}
-
+		// l'argument Page a priorite sur l'argument action
+		// le cas se presente a cause des RewriteRule d'Apache
+		// qui permettent d'ajouter un argument dans la QueryString
+		// mais pas d'en retirer un en conservant les autres.
+		unset($_GET['action']);
 	# par defaut
 	} else {
 		// traiter le cas pathologique d'un upload de document ayant echoue
