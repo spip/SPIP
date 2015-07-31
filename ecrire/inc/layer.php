@@ -82,8 +82,8 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  .($bouton_id?"id='$bouton_id' ":"")
 	  ."class='titrem$class'"
 	  . (($deplie===-1)?"":
-	  " onclick=\"toggleBouton(jQuery(this),jQuery('$cible'));\""
-	  ." onmouseover=\"jQuery(this).addClass('hover');\""
+	  " onclick=\"jQuery(this).toggleother('$cible');\""
+	  ." onmouseover=\"jQuery(this).addClass('hover').showonhover('$cible');\""
 	  ." onmouseout=\"jQuery(this).removeClass('hover');\""
 	  )
 	  .">$texte</div>"

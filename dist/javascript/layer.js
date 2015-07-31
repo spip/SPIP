@@ -44,17 +44,43 @@ function hide_obj(obj) {
 	}
 }
 
-function toggleBouton(bouton,cible){
-	//alert(jQuery(bouton));
-	if (jQuery(bouton).is('.deplie')){
-		jQuery(bouton).addClass('replie').removeClass('deplie');
-		jQuery(cible).slideUp('fast').addClass('blocreplie').removeClass('blocdeplie');
+// deplier un ou plusieurs blocs
+jQuery.fn.showother = function(cible) {
+	if (this.is('.replie')) {
+		this.addClass('deplie').removeClass('replie');
+		jQuery(cible).show()/*.slideDown('fast')*/.addClass('blocdeplie').removeClass('blocreplie');
 	}
-	else if (jQuery(bouton).is('.replie')){
-		jQuery(bouton).addClass('deplie').removeClass('replie');
-		jQuery(cible).slideDown('fast').addClass('blocdeplie').removeClass('blocreplie');
-	}
+	return this;
 }
+
+// replier un ou plusieurs blocs
+jQuery.fn.hideother = function(cible) {
+	if (!this.is('.replie')){
+		this.addClass('replie').removeClass('deplie');
+		jQuery(cible).hide()/*.slideUp('fast')*/.removeClass('blocdeplie').addClass('blocreplie');
+	}
+	return this;
+}
+
+// pour le bouton qui deplie/replie un ou plusieurs blocs
+jQuery.fn.toggleother = function(cible) {
+	if (this.is('.deplie'))
+		return this.hideother(cible);
+	else
+		return this.showother(cible);
+}
+
+// deplier un ou plusieurs blocs au premier hover
+jQuery.fn.showonhover = function(cible) {
+// decommenter pour ne rien faire au hover
+//	return this;
+	if (!this.is('.dejahover'))
+	return this
+		.addClass('dejahover')
+		.showother(cible);
+}
+
+
 
 //
 // Fonctions pour mini_nav
