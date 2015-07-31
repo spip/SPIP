@@ -339,6 +339,7 @@ function afficher_portfolio(
 	// la derniere case d'une rangee
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
 	$case = 0;
+	$res = '';
 
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
@@ -352,32 +353,33 @@ function afficher_portfolio(
 		$style = est_inclus($id_document) ? ' background-color: #cccccc;':'';
 
 		if (!$case)
-			echo "<tr style='border-top: 1px solid black;'>";
+			$res .= "<tr style='border-top: 1px solid black;'>";
 		else if ($case == $bord_droit)
 			$style .= " border-$spip_lang_right: 1px solid $couleur;";
-		echo "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>";
+		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>";
 
-		echo formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
+		$res .= formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif)
-		  echo formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
+		  $res .= formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
-			echo "<div class='verdana1'>".$document['info']."</div>";
-		echo "</td>\n";
+			$res .= "<div class='verdana1'>".$document['info']."</div>";
+		$res .= "</td>\n";
 		$case++;
 				
 		if ($case > $bord_droit) {
 			  $case = 0;
-			  echo "</tr>\n";
+			  $res .= "</tr>\n";
 		}
 
 	}
 	// fermer la derniere ligne
 	if ($case) {
-		echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
-		echo "</tr>";
+		$res .= "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
+		$res .= "</tr>";
 	}
+	return $res;
 }
 
 
@@ -490,9 +492,8 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 // les documents et images inclus dans le texte.
 //
 // http://doc.spip.org/@afficher_documents_et_portfolio
-function afficher_documents_et_portfolio($id_article, $type = "article", $flag_modif) {
-	global $couleur_claire, $connect_id_auteur, $connect_statut;
-	global $options, $spip_lang_left, $spip_lang_right;
+function afficher_documents_et_portfolio($id, $type = "article", $flag_modif) {
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 
 	if ($type == "rubrique")
 			$script = 'naviguer'; // exception
@@ -502,7 +503,7 @@ function afficher_documents_et_portfolio($id_article, $type = "article", $flag_m
 	// Afficher portfolio
 	/////////
 
-	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
 
 	//
 	// recuperer tout le tableau des images du portfolio
@@ -513,31 +514,53 @@ function afficher_documents_et_portfolio($id_article, $type = "article", $flag_m
 		$images[$image['id_document']] = $image;
 	}
 
-	if (count($images)) {
+	$n = count($images);
+	if ($n) {
 		echo "<a name='portfolio'></a>";
 		echo "\n<div>&nbsp;</div>";
 		echo "\n<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T('info_portfolio'))."</b></div>";
+
+		if ($n > 3) {
+		$res = "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'><a href='"
+		  . redirige_action_auteur('supprimer', "portfolio/$id/$type", $GLOBALS['exec'], "id_$type=$id")
+		. "'>" 
+		  . _L('Supprimer_le_portfolio')
+		  . "</a></div>\n";
+		echo $res;
+		}
+
 		echo "\n<table width='100%' cellspacing='0' cellpadding='3'>";
 
-		afficher_portfolio ($images, $type, 'portfolio', $flag_modif, $couleur_claire);
+		echo afficher_portfolio ($images, $type, 'portfolio', $flag_modif, $couleur_claire);
 
 		echo "\n</table>\n";
 	}
 
 	//// Documents associes
-	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document'" . (!$images ? '' : " AND docs.id_document NOT IN (".join(',', array_keys($images)).") ") . " ORDER BY 0+docs.titre, docs.date");
+	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'" . (!$images ? '' : " AND docs.id_document NOT IN (".join(',', array_keys($images)).") ") . " ORDER BY 0+docs.titre, docs.date");
 
 	$documents = array();
 	while ($document = spip_fetch_array($documents_lies))
 		$documents[] = $document;
 
-	if (count($documents)) {
+	$n = count($documents);
+	if ($n) {
 		echo "<a id='documents'></a>";
 		echo "\n<div>&nbsp;</div>";
 		echo "\n<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>". majuscules(_T('info_documents')) ."</b></div>";
+	
+		if ($n > 3) {
+		$res = "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'><a href='"
+		. redirige_action_auteur('supprimer', "fonds/$id/$type", $GLOBALS['exec'], "id_$type=$id")
+		. "'>"
+		. _L('Supprimer_tous_ces_documents')
+		. "</a></div>\n";
+		echo $res;
+		}
+
 		echo "\n<table width='100%' cellspacing='0' cellpadding='5'>";
 
-		afficher_portfolio ($documents, $type, 'documents', $flag_modif, '#aaaaaa');
+		echo afficher_portfolio ($documents, $type, 'documents', $flag_modif, '#aaaaaa');
 		echo "\n</table>";
 	}
 
@@ -553,8 +576,8 @@ function afficher_documents_et_portfolio($id_article, $type = "article", $flag_m
 			echo "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n";
 		}
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
-		echo formulaire_upload(generer_url_ecrire($script, "id_$type=$id_article"),
-				       $id_article,
+		echo formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),
+				       $id,
 				       _T('info_telecharger_ordinateur'),
 				       '',
 				       'document',
