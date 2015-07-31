@@ -681,6 +681,12 @@ Merci de votre participation
 'info_envoyer_message_prive' => 'Envoyer un message priv&eacute; &agrave; cet auteur',
 'info_erreur_requete' => 'Erreur dans la requ&ecirc;te :',
 'info_erreur_restauration' => 'Erreur de restauration : fichier inexistant.',
+'info_erreur_squelette' => 'Erreur sur le site',
+'info_erreur_squelette2' => 'Aucun squelette <b>@fichier@</b> n\'est disponible...',
+'info_erreur_systeme' => 'Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
+	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Passer &agrave; l\'&eacute;tape suivante',
 'info_etape_suivante_1' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_etape_suivante_2' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',

@@ -405,8 +405,8 @@ function chercher_squelette_hierarchie($fond, $id_rubrique, $dossier='') {
 		} else {
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
-			install_debut_html("Erreur sur le site");
-			echo "<P>Aucun squelette <b>$dossier$fond</b> n'est disponible...</P>";
+			install_debut_html(_T('info_erreur_squelette'));
+			echo "<P>"._T('info_erreur_squelette2', array('fichier'=>"$dossier$fond"))."</P>";
 			install_fin_html();
 			spip_log ("ERREUR: aucun squelette $dossier$fond n'est disponible...");
 			exit;
