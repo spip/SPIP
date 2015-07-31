@@ -27,16 +27,16 @@
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3" title="Tout le site sur une page"><:public:plan_du_site:></a>
+	<a href="plan.php3"><:plan_du_site:></a>
 	</li>
 	<li class="menu-item">
-	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum"><:en_resume:></a>
 	</li>
 	<li class="menu-item">
-	<a href="ecrire/" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">R&eacute;daction</a>
+	<a href="ecrire/" title="<:articles_populaires:>">R&eacute;daction</a>
 	</li>
 </ul>
 </div>
@@ -51,8 +51,8 @@
 
 <B_rubriques>
 <div class="menu">
-<ul class="rubriques" title="Rubriques trouv&eacute;es">
-<li class="menu-titre">Rubriques</li>
+<ul class="rubriques" title="<:rubriques:>">
+<li class="menu-titre"><:rubriques:></li>
 <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points} {inverse} {0,8}>
 <li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
 </BOUCLE_rubriques>
@@ -65,7 +65,7 @@
 
 <B_mots>
 <div class="menu">
-<ul class="divers" title="Mots-cl&eacute;s trouv&eacute;s">
+<ul class="divers" title="<:mots_clefs:>">
 <BOUCLE_mots(MOTS) {recherche} {par points} {inverse} {0,5}>
 <li>
 <div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
@@ -84,9 +84,7 @@
 
 <!-- Logo SPIP -->
 
-<a href="http://www.uzine.net/spip">
-<img src="NAVPICS/petit-logo-spip.gif" width="88" height="31" border="0" alt="Site r&eacute;alis&eacute; avec SPIP">
-</a>
+<a href="http://www.spip.net"><img src="NAVPICS/petit-logo-spip.gif" width="88" height="31" border="0" alt="<:site_realise_avec_spip:>"></a>
 
 <!-- Formulaire administrateur -->
 
@@ -102,8 +100,8 @@
 <div class="contenu" id="principal">
 
 <div class="cartouche">
-<h1 class="surtitre">R&eacute;sultats de la recherche...</h1>
-[<h2 class="titre-texte">&laquo;&nbsp;(#RECHERCHE)&nbsp;&raquo;</h2>]
+<h1 class="surtitre"><:resultats_recherche:></h1>
+[<h2 class="titre-texte">(#RECHERCHE)</h2>]
 </div>
 
 	<div class="encart">
@@ -115,7 +113,7 @@
 	<div class="menu">
 	<div class="breves" title="Br&egrave;ves trouv&eacute;es">
 		<div class="menu-titre">
-		Br&egrave;ves
+		<:breves:>
 		</div>
 		<ul>
 	<BOUCLE_breves(BREVES) {recherche} {par points} {inverse} {0,8}>
@@ -136,7 +134,7 @@
 	<div class="menu">
 	<div class="divers" title="Sites Web trouv&eacute;s">
 		<div class="menu-titre">
-		Sites Web
+		<:sites_web:>
 		</div>
 		<ul>
 	<BOUCLE_sites(SITES) {recherche} {par points} {inverse} {0,8}>
@@ -158,7 +156,7 @@
 	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
 	<div class="detail">
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
-	<B_auteurs_articles>par <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles>
+	<B_auteurs_articles><:par_auteur:> <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles>
 	</div>
 	<br>
 </BOUCLE_articles>
