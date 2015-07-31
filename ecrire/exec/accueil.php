@@ -199,12 +199,12 @@ if (/* $connect_statut == "0minirezo" AND */ $spip_display != 4) {
 	if (!$_COOKIE['spip_admin']) {
 		$cookie = rawurlencode("@$connect_login");
 		$gadget .= "<div>&nbsp;</div>".
-			"<table width=95%><tr>".
-			"<td width=100%>".
+			"<table width='95%'><tr>".
+			"<td width='100%'>".
 			_T('info_activer_cookie').
 			aide ("cookie").
 			"</td>".
-			"<td width=10>".
+			"<td width='10'>".
 			http_img_pack("rien.gif", ' ', "width='10'") .
 			"</td>".
 			"<td width='250'>".

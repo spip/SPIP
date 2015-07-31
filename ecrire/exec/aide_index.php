@@ -183,7 +183,7 @@ function help_body($aide, $html, $lang_aide='') {
 	echo " lang='$lang_aide'>";
 
 	if ($aide == 'spip') {
-		echo '<table border=0 width=100% height=60%>
+		echo '<table border="0" width="100%" height="60%">
 <tr width=100% height=60%>
 <td width=100% height=60% align="center" valign="middle">
 <center>

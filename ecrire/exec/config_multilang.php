@@ -177,7 +177,7 @@ fin_cadre_couleur();
 		}
 
 		echo "</td></tr>";
-		echo "<tr><td style='text-align:$spip_lang_right;' colspan=2>";
+		echo "<tr><td style='text-align:$spip_lang_right;' colspan='2'>";
 		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 		echo "</td></tr></table>";
 		

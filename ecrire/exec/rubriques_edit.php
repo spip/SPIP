@@ -98,7 +98,7 @@ function exec_rubriques_edit_dist()
 
 	debut_cadre_formulaire();
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr width='100%'>";
 	echo "<td>";
 
@@ -151,7 +151,7 @@ function exec_rubriques_edit_dist()
 
 	$form .= "<b>"._T('info_texte_explicatif')."</b>"
 	. aide ("raccourcis")
-	. "<br /><textarea name='texte' rows='15' class='formo' cols='40' wrap=soft>"
+	. "<br /><textarea name='texte' rows='15' class='formo' cols='40' wrap='soft'>"
 	. entites_html($texte)
 	. "</textarea>\n";
 

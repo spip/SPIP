@@ -77,7 +77,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				else {
 					$couleur="white";
 				}
-				echo "<table cellpadding=2 cellspacing=0 border=0 width='100%'>";
+				echo "<table cellpadding='2' cellspacing='0' border='0' width='100%'>";
 				echo "\n<tr bgcolor='$couleur' background='" . _DIR_IMG_PACK . "rien.gif' width='100%'>";
 				echo "\n<td style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
 				if ($niveau==0 OR 1==1){
@@ -98,11 +98,11 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				echo "</td>\n<td align='right' width='".($taille+5)."' style='border-bottom: 1px solid #aaaaaa;'>";
 				
 				
-				echo "\n<table cellpadding=0 cellspacing=0 border=0 width=".($decalage+1+$gauche)." height=8>";
+				echo "\n<table cellpadding='0' cellspacing='0' border='0' width=".($decalage+1+$gauche)." height=8>";
 				echo "\n<tr>";
 				if ($gauche > 0) echo "<td width='".$gauche."'></td>";
 				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height=8 border=0>";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height='8' border='0'>";
 				if ($largeur_rouge>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width=$largeur_rouge height=8 border=0>";
 				if ($largeur_vert>0) echo "<IMG src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire;' width=$largeur_vert height=8 border=0>";
 				

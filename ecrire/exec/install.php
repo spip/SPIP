@@ -71,7 +71,7 @@ function tester_compatibilite_hebergement() {
 		. "mbstring.func_overload=$a - <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>";
 
 	if ($err) {
-			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=4><b>"._T('avis_attention').'</b> <p>'._T('install_echec_annonce')."</p></font>";
+			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='4'><b>"._T('avis_attention').'</b> <p>'._T('install_echec_annonce')."</p></font>";
 		while (list(,$e) = each ($err))
 			echo "<li>$e</li>\n";
 

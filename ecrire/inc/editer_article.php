@@ -263,20 +263,20 @@ function editer_article_chapo($chapo, $config, $aider)
 		$virtuel = substr($chapo, 1);
 
 		return "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
-			"<table width=100% cellspacing=0 cellpadding=0 border=0>" .
+			"<table width='100%' cellspacing='0' cellpadding='0' border='0'>" .
 			"<tr><td valign='top'>" .
-			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
+			"<font face='Verdana,Arial,Sans,sans-serif' size='2'>" .
 			"<b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .
 			$aider ("artvirt") .
 			"</font>" .
 			"</td>" .
-			"<td width=10>&nbsp;</td>" .
+			"<td width='10'>&nbsp;</td>" .
 			"<td valign='top' width='50%'>" .
 			"<input type='text' name='virtuel' class='forml'
 		style='font-size:9px;' value=\"$virtuel\" size='40' />" .
 			"<input type='hidden' name='changer_virtuel' value='oui' />" .
 			"</td></tr></table>\n" .
-			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
+			"<font face='Verdana,Arial,Sans,sans-serif' size='2'>" .
 			_T('texte_article_virtuel_reference') .
 			"</font>" .
 			"</div>\n";

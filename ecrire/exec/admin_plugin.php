@@ -137,7 +137,7 @@ EOF;
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#ffffff'>";
 	echo _T('plugins_liste')."</font></b></td></tr>";
 
-	echo "<tr><td class='serif' colspan=4>";
+	echo "<tr><td class='serif' colspan='4'>";
 	echo _T('texte_presente_plugin');
 
 	echo generer_url_post_ecrire("admin_plugin");
