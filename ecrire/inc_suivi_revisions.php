@@ -56,7 +56,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req
 			for ($i = 0; $i < $nb_tranches; $i++) {
 				if ($i > 0) echo " | ";
 				if ($i*$nb_aff == $debut) echo "<b>";
-				else echo "<a href='suivi_versions.php?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
+				else echo "<a href='suivi_revisions.php3?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
 				echo (($i * $nb_aff) + 1);
 				if ($i*$nb_aff == $debut) echo "</b>";
 				else echo "</a>";

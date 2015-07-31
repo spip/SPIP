@@ -33,14 +33,14 @@ echo "<div class='arial11'><ul>";
 echo "<p>";
 
 if (!$uniq_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
-else echo "<li><a href='suivi_versions.php'>"._T('info_tout_site')."</a>";
+else echo "<li><a href='suivi_revisions.php3'>"._T('info_tout_site')."</a>";
 
 echo "<p>";
 
 $nom_auteur = $GLOBALS['auteur_session']['nom'];
 
 if ($uniq_auteur) echo "<li><b>$nom_auteur</b>";
-else echo "<li><a href='suivi_versions.php?uniq_auteur=true'>$nom_auteur</a>";
+else echo "<li><a href='suivi_revisions.php3?uniq_auteur=true'>$nom_auteur</a>";
 
 echo "<p>";
 
@@ -58,7 +58,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 	$result_rub = spip_query($query_rub);
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
-	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='suivi_versions.php?id_secteur=$id_rubrique'>$titre</a>";
+	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='suivi_revisions.php3?id_secteur=$id_rubrique'>$titre</a>";
 }
 
 if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
@@ -75,7 +75,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 		$result_lang = spip_query($query_lang);
 		
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
-		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='suivi_versions.php?lang_choisie=$lang'>$titre</a>";
+		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='suivi_revisions.php3?lang_choisie=$lang'>$titre</a>";
 	}
 }
 

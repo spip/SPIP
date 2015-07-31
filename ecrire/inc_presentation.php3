@@ -2056,7 +2056,7 @@ SELECT versions.*, articles.statut, articles.titre
 FROM spip_versions AS versions, spip_articles AS articles 
 WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 0,1"));
 			if ($nombre_versions > 0 OR 1==1) {
-				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_versions.php", "historique-24.gif", "revisions", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif", "revisions", $sous_rubrique);
 			}
 		}
 
