@@ -1,3 +1,78 @@
+SPIP-Core spip-3.0.10 -> spip-3.0.11  09 août 2013
+-------------------------------------------------------------
+
+r20605 | ben       |  (lun 27 mai 2013) | prenons de bonnes habitudes : dès qu'une release est faite, on passe en dev pour ceux/celles qui utilisent svn (eric) 
+r20606 | cedric    |  (lun 27 mai 2013) | Ferme #2860 : appliquer les règles typographiques de la langue de l'article sur son texte (et son titre) dans l'espace privé.Pour cela, on reforme changer_typo() qui ne renvoit plus rien, et annule la dérogation de lang_typo quand on lui passe une chaine vide.
+r20613 | cedric    |  (jeu 30 mai 2013) | Report adapté de r20611, et retour sur r20576 : tester_statut_inscription() revient a son role initial qui est de tester le mode fourni ou de retourner le meilleur mode possible si aucun mode n'est fourni lors de l'inscription. Il accepte aussi un id en second argument, comme c'était le cas en 2.1, non usité par défaut, mais qui peut l'être si passé au #FORMULAIRE_INSCRIPTIONtester_config() est rebranché sur la fonction tester_statut_inscription()
+r20640 | cedric    |  (lun 10 jun 2013) | un filtre liens_nofollow qui ajoute un rel="nofollow" à tous les liens du texte passé en argument
+r20641 | cedric    |  (lun 10 jun 2013) | ne pas faire echouer la migration des liens quand la table source a des champs en plus non prévus au plan (mais on les perd quand même, ce serait encore à améliorer)
+r20652 | cedric    |  (lun 17 jun 2013) | Ferme #2883 : le retour ajax en html ne necessite pas d'en tete <?xml> (on s'en passait deja dans toutes les autres occurences de ajax_retour() du fichier)
+r20660 | fil       |  (mer 19 jun 2013) | report de http://core.spip.org/projects/spip/repository/revisions/20162 :si on met une etoile dans un mot de recherche, surligner les mots trouves sans etoile
+r20663 | cedric    |  (ven 21 jun 2013) | un point d'entree pour une fonction de gestion de dependance qui ajoute les plugins manquants (non implementee pour le moment)
+r20680 | denisb    |  (dim 30 jun 2013) | req/pg.php : report de r20678 (esj) ; un indefini PHP rendait incorrecte la production postgresql.
+r20683 | eric      |  (dim 30 jun 2013) | Report du var_mode=traduction
+r20684 | cedric    |  (dim 30 jun 2013) | Ergo : quand on vient d'upload le logo ou de supprimer le logo survol, afficher par défaut le champ d'upload du logo survol car on enchaine possiblement les deux actions (Arno)
+r20685 | kent1     |  (dim 30 jun 2013) | Correction sur la fonction timestampL'argument $fichier est obligatoire donc pas réellement besoin de !$fichier De toute manière on teste l'existance dudit fichier  avec file_exists($fichier) pour éviter une erreur sur filemtime Utile si on met timestamp sur des #FICHIER et que ces fichiers sont distants (documents distants)
+r20687 | kent1     |  (dim 30 jun 2013) | éviter de passer par file_exists si chaine vide (cerdic)
+r20689 | denisb    |  (lun 01 jui 2013) | balise/formulaire_.php : report de r20624. ne pas reformater les entitées numériques des saisies des formulaires cvt.
+r20690 | denisb    |  (lun 01 jui 2013) | lang/spip_fr.php : ajout de quelques féminisations : é(e)
+r20691 | cedric    |  (lun 01 jui 2013) | Quand on active _DEBUG_SLOW_QUERIES loger le nom de la boucle qui genere la requete et le squelette d'ou elle vient quand c'est possible (en plus de l'url de la page et de l'IP du visiteur)
+r20693 | cedric    |  (mar 02 jui 2013) | @ au lieu de "dans" (fil)
+r20699 | cedric    |  (jeu 04 jui 2013) | Reparer inc_simplexml_to_array qui reçoit de (DATA) une string et non un ObjectLa fonction se charge donc de charger le xml via simplexml et le passe a xmlObjToArr qui fait la decomposition en tableau+ PHPDoc
+r20701 | cedric    |  (ven 05 jui 2013) | puisqu'on embarque Textwheel (en général), et son decodeur Yaml, autant proposer par defaut un yaml_to_array, quitte a lancer une Exception si finalement on ne touve pas le decodeur (cas rare)
+r20702 | cedric    |  (ven 05 jui 2013) | allegeons le tableau de retour du XML en ne peuplant text, attributes et children que quand il y a du contenu (#VALEUR{../children} ne retournera rien de toute façon si le noeud n'existe pas)
+r20703 | cedric    |  (ven 05 jui 2013) | Amelioration de |print utilise pour afficher proprement n'importe quoi : * On affiche in fine un pseudo-yaml qui premet de lire humainement les tableaux et de s'y reperer * * Les textes sont retournes avec simplement mise en forme typo * * le $join sert a separer les items d'un tableau, c'est en general un \n ou <br /> selon si on fait du html ou du texte * les tableaux-listes (qui n'ont que des cles numeriques), sont affiches sous forme de liste separee par des virgules : * c'est VOULU ! * * @param $u * @param string $join * @param int $indent * @return array|mixed|string */
+r20704 | rasta     |  (ven 05 jui 2013) | Légère amélioration de l'échafaudage pour les nouveaux objets qui n'ont pas surchargé leur bloc d'info : on affiche désormais "voir en ligne" ou "prévisualiser" suivant le cas. Ceci en testant évidement les infos de la déclaration de l'objet : seulement s'il a un squelette public, seulement s'il est publié, ou seulement si y a un champ de statut listé pour la prévisu.
+r20706 | cedric    |  (ven 05 jui 2013) | une constante _DATA_SOURCE_MAX_SIZE pour fixer la taille maxi des data qui sont recuperees par la boucle DATA (initialisee a 2Mo)
+r20707 | cedric    |  (ven 05 jui 2013) | une constante _INC_DISTANT_MAX_SIZE pour fixer la taille maxi des donnes récupérees par recuperer_page() (initialisee a 2Mo, et non plus 1Mo, inflation oblige)
+r20708 | cedric    |  (ven 05 jui 2013) | debug des namespace : il faut transmettre le namespace quand on decode les noeuds enfants, car il n'y a qu'a la racine qu'on peut les determinerPour activer le namespace, il faut l'ajouter en argument de la source :<BOUCLE_flux(DATA){source simplexml,http://opendata71.cloudapp.net/v1/dataviz/CG71DTIPointsArret/,namespace}>
+r20709 | cedric    |  (ven 05 jui 2013) | on peut appeller inc_simplexml_to_array en lui fournissant directement l'objet SimpleXML au lieu de la chaine (usage externe par des plugins en appel direct - Eric)
+r20723 | denisb    |  (lun 08 jui 2013) | debusquer.php : correction js pour retour du toggle-bug.
+r20733 | b_b       |  (mer 31 jui 2013) | Report de r20731 : Le changement de couleur depuis le formulaire des préférences persos était cassé suite à r20624 (les & des urls passées dans la valeur couleurs_url étaient remplacés par &amp). On préfixe donc cette valeur par un _ pour corriger le problème.
+r20736 | suske     |  (jeu 08 aoû 2013) | supprimer un warning "Strict Standards" (Pierre Kuhn)
+r20739 | suske     |  (jeu 08 aoû 2013) | du franssai et des espaces (les réacs en choeur)
+r20740 | cedric    |  (jeu 08 aoû 2013) | xxx_select renvoie la requete en cas d'erreur (une chaine donc) et non pas false : du coup on appelait fetch() avec une chaine au lieu d'une ressource ce qui provoquait des erreurs fatales a l'ouverture de la connexion sql dans certains scenarios
+r20741 | cedric    |  (ven 09 aoû 2013) | Quand un cron se finissait dans la meme seconde qu'il avait commencé, il ne reprogrammait pas la date de prochaine occurence.Du coup il se relançait rapidement, n'avait rien a faire, et ne se reprogrammait pas la date non plus. Et ainsi de suite, provoquant des appels inutiles en surnombre.
+r20744 | denisb    |  (ven 09 aoû 2013) | ecrire/inc/utils.php : éviter d'avoir la globale profondeur_url faussée selon l'emplacement du htaccess qui appelle une redirection. report de r20729 (esj).
+r20746 | denisb    |  (ven 09 aoû 2013) | revert de r20744 qui ne fonctionne pas avec touts les schémas d'url (propres et propres2 entr'autres).
+r20748 | suske     |  (ven 09 aoû 2013) | préparons 3.0.11 - report des langues
+r20749 | suske     |  (ven 09 aoû 2013) | préparons 3.0.11 - le n° de version
+
+SPIP-plugins-dist spip-3.0.10 -> spip-3.0.11  09 août 2013
+-------------------------------------------------------------
+
+r73063 | cedric    |  (jeu 30 mai 2013) | Type email et url sur le login forum quand html5 est possible (+argument focus inutile)
+r73064 | cedric    |  (jeu 30 mai 2013) | (oups melange de pinceaux sur copie-colle)
+r73073 | cedric    |  (jeu 30 mai 2013) | une coquille empechait la prise en charge des svg à l'upload (lecture des dimensions, protection des js inclus) (Sebastien)
+r73118 | denisb    |  (ven 31 mai 2013) | squelettes-dist/formulaires/ecrire_auteur.php : correction de 2 item de langue. ferme #3011
+r73279 | cedric    |  (mer 05 jun 2013) | Quand on copie un document dans le site, les credits sont modifies, unset de ce qui a été posté pour que cela s'affiche dans le formulaire après copie.
+r73444 | cedric    |  (lun 10 jun 2013) | ajouter liens_nofollow() sur l'affichage des balises de la table forum, et passer le statut et le statut_ancien au pipeline post_edition quand on modere un forum
+r73445 | cedric    |  (lun 10 jun 2013) | ajouter liens_nofollow() sur l'affichage des balises de la table petitions
+r73468 | b_b       |  (lun 10 jun 2013) | report de r73464 : report de la booz feature r50220 : le bloc d'actions par lots suit le scroll
+r73543 | b_b       |  (mer 12 jun 2013) | report de r73542 : réparer les ancres des liens dans les mails de notification des forums
+r73562 | kent1     |  (jeu 13 jun 2013) | Une tâche CRON pour optimiser les tables spip_versions et spip_versions_fragments, notamment en supprimant les entrées des objets disparus (supprimé après un temps avec le statut poubelle comme les articles, les documents qui se suppriment automatiquement tout seul, intervention manuelle dans la base de donnée...)
+r73563 | kent1     |  (jeu 13 jun 2013) | Tous les labels sont visibles sur la page des révisions pour savoir ce que cela représente
+r73564 | kent1     |  (jeu 13 jun 2013) | Un label utilisable sur les logins des auteurs Petite amélioration du pipeline qui ne sert pas à grand chose mais bon
+r73566 | kent1     |  (ven 14 jun 2013) | Pouvoir définir une fonction de diff spécifique pour un champ en particulier
+r73655 | cedric    |  (lun 17 jun 2013) | attention au cas où les filtres images generent un timestamp systematique sur les images produites !
+r73695 | cedric    |  (mar 18 jun 2013) | Icones du PP :Quand un plugin fournit un chemin complet vers une image, l'utiliser telle quelle.Si le find_in_path ne donne pas de resultat, ne pas inserer la regle CSS background:url() car cela provoque des chargements de page parasite dans certains navigateurs
+r73728 | fil       |  (mer 19 jun 2013) | report de http://zone.spip.org/trac/spip-zone/changeset/65551 http://zone.spip.org/trac/spip-zone/changeset/65552 et http://zone.spip.org/trac/spip-zone/changeset/65555 (debug de textwheel)
+r73766 | eric      |  (jeu 20 jun 2013) | Manque un i dans le texte de l'item de langue label_compatibilite_spip (Gildas)
+r73771 | eric      |  (ven 21 jun 2013) | Correction le retour : le s suspect apparu subitement est supprimé. Personne n'a encore compris comment il a pu se glisser dans la correction précédente….
+r73931 | cedric    |  (jeu 27 jun 2013) | Plusieurs bugs autour des urls propres et des collisions en urls propres :- quand l'objet a une url suffixee en -xxx ne pas essayer de la reconstruire si le reste est bon (regexp ne tenait pas compte du seperateur defini par une constante et prenait toujours la virgule en dur)- quand on veut creer une url sans preciser l'id_parent, il faut s'assurer que l'url n'existe pas deja, y compris avec un id_parent non nul- sous SQLite url='xxx' est sensible a la casse, mais pas url LIKE 'xxx' il faut donc utiliser une condition de ce type quand on cree l'url pour eviter les collisions de casse. A noter que du coup, en SQLite, le decodage des URLs reste dépendant de la casse. Ce n'est pas forcément problématique mais c'est à savoir.
+r73962 | real3t    |  (ven 28 jun 2013) | Report sur la branche 3.0
+r74062 | b_b       |  (mar 02 jui 2013) | report de r74061 : tite boulette dans r57821
+r74095 | chankalan |  (ven 05 jui 2013) | prendre en compte le champ nobot
+r74096 | b_b       |  (ven 05 jui 2013) | report de r74088 : Ajout du pipeline afficher_contenu_objet sur la page exec=document_edit pour palie au fait que les documents n'ont pas de page "vue" cf  http://article.gmane.org/gmane.comp.web.spip.devel/64011
+r74099 | chankalan |  (ven 05 jui 2013) | prendre en compte le champ nobot
+r74143 | cedric    |  (sam 06 jui 2013) | coquille : parenthese manquante dans le PHP, l'icone n'etait plus lue
+r74413 | kent1     |  (dim 21 jui 2013) | un petit _dist ici pour pouvoir surcharger cette fonction dans un plugin x ou y
+r74443 | gilles    |  (mer 24 jui 2013) | Ne plus utiliser preg_replace pour une expression reguliere utilisant l'option /e dans l'expression reguliere(l'evaluation au niveau de l'expression reguliere pourrait etre l'origine d'injection de code)Le code est aussi plus compatible avec PHP5.5 dans lequel le modifieur /e est declare comme obsolete.
+r74521 | kent1     |  (mar 30 jui 2013) | Report de r74520On ajoute un pipeline renseigner_document, pendant de renseigner_document_distant pour les fichiers locaux car :- On peut avoir plusieurs plugins récupérant des infos pour la même extension de fichier et on peut alors les combiner;- Evite pour des plugins qui récupèrent les infos de x extentions diverses (pas un type en particulier) de créer x fichiers pour chaque extension de fichier (exemple xmp_php => http://zone.spip.org/trac/spip-zone/browser/_plugins_/xmp_php/trunk)
+r74554 | eric      |  (sam 03 aoû 2013) | Eviter d'avoir 2013-2013 dans le pied.
+r74666 | suske     |  (ven 09 aoû 2013) | préparons 3.0.11 - report des langues des plugins-dist
+
+
 SPIP-Core spip-3.0.9 -> spip-3.0.10  27 mai 2013
 -------------------------------------------------------------
 r20572 | cedric    |  (ven. 24 mai 2013) | Version 1.1.7 (Identifiants)
