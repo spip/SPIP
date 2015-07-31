@@ -66,6 +66,8 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
+			if ($GLOBALS['var_profile'])
+				$args_ajax .= '&var_profile=1';
 			return redirige_action_auteur($action,
 				$id,
 				$action,
@@ -86,6 +88,8 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			false);
 
 		if ($args AND !$args_ajax) $args_ajax = "&$args";
+		if ($GLOBALS['var_profile'])
+			$args_ajax .= '&var_profile=1';
 
 		$ajax = redirige_action_auteur($action,
 			$id,
@@ -146,6 +150,8 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 	} else { 
 
 		if ($gra AND !$args_ajax) $args_ajax = "&$gra";
+		if ($GLOBALS['var_profile'])
+			$args_ajax .= '&var_profile=1';
 
 		return redirige_action_auteur($action,
 			$arg,
@@ -201,10 +207,15 @@ function ajax_retour($corps,$xml = true)
 		return;
 	}
 
+	if (count($GLOBALS['tableau_des_temps'])) {
+		include_spip('public/debug');
+		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
+	} else $chrono = '';
+
 	$c = $GLOBALS['meta']["charset"];
 	header('Content-Type: text/html; charset='. $c);
 	$c = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
-	echo $c, $corps;
+	echo $c, $corps, $chrono;
 	exit;
 }
 
