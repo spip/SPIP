@@ -203,8 +203,6 @@ function verifier_htaccess($rep, $force=false) {
 	$htaccess = rtrim($rep,"/") . "/" . _ACCESS_FILE_NAME;
 	if (((@file_exists($htaccess)) OR defined('_TEST_DIRS')) AND !$force)
 		return true;
-	if ($_SERVER['SERVER_ADMIN'] == 'www@nexenservices.com')
-		return nexen($rep);
 	if ($ht = @fopen($htaccess, "w")) {
 		fputs($ht, "deny from all\n");
 		fclose($ht);
@@ -225,19 +223,6 @@ function verifier_htaccess($rep, $force=false) {
 	return $ht;
 }	
 
-function nexen($rep)
-{
-	echo "<span style='color: #FF0000'>IMPORTANT : </span>";
-	echo "Votre h&eacute;bergeur est Nexen Services.<br />";
-	echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
-			par l'interm&eacute;diaire de ";
-	echo "<a href=\"http://www.nexenservices.com/Webmestres/index.php\"
-			target=\"_blank\">l'espace webmestres</a>.";
-	echo "Veuillez cr&eacute;er manuellement la protection pour
-			ce r&eacute;pertoire (un couple login/mot de passe est
-			n&eacute;cessaire).<br />";
-	return false;
-}
 
 
 // http://doc.spip.org/@gerer_htaccess
