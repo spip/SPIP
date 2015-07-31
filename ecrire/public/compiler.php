@@ -345,7 +345,7 @@ function calculer_requete_sql(&$boucle)
 		# En absence de champ c'est un decompte : 
 	  . calculer_dec('$from',  calculer_from($boucle))
 	  . calculer_dec('$type', calculer_from_type($boucle))
-	  . calculer_dec('$groupby', "array(" . join(',',array_map('_q', $boucle->group)) . ")")
+	  . calculer_dec('$groupby', 'array(' . (($g=join("\",\n\t\t\"",$boucle->group))?'"'.$g.'"':'') . ")")
 	  . calculer_dec('$select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")")
 	  . calculer_dec('$orderby', 'array(' . calculer_order($boucle) .	")")
 	  . calculer_dec('$where', calculer_dump_array($boucle->where))
