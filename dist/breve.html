@@ -32,7 +32,10 @@
 				<h1 class="titre">#TITRE</h1>
 				<small>[(#DATE|nom_jour) ][(#DATE|affdate)]</small>
 			</div>
-			#BREVE
+			
+			[<div class="texte">(#TEXTE)</div>]
+			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 			
 			[(#REM) Forum de la breve
 			NB : pour desactiver les forums de breve, supprimez simplement les lignes ci-dessous ]
