@@ -157,6 +157,8 @@ r15661 permettre les guillemets dans les mots de passe
 r15665 on intègre width et height dans le tag img des puces.
 r15667 Pour appliquer le validateur XML en boucle sur un répertoire de plugin, il faut faire {{{basename}}} dessus avant d'appeler {{{charger_fonction}}}. Mais avant SPIP savait que le script {{{export_all}}} ne devait pas être soumis à la validation, il y a qqch de changé qq part.
 r15670 gestion des caches gzip lorsqu'on roule sans conneexion a la base de donnees
+r15685 detection des arguments entiers dans le validateur xml
+r15687 genericite de afficher_objet et meme_rubrique pour les nouveaux objets editoriaux
 
 2.0.9 -> 2.0.10 
 Revision: 14695 report de [14694]
