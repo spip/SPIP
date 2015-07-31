@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $spip_petitions = array(
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"email_unique"	=> "CHAR (3)",
 		"site_obli"	=> "CHAR (3)",
 		"site_unique"	=> "CHAR (3)",
@@ -27,7 +27,7 @@ $spip_petitions_key = array(
 
 $spip_visites = array(
 		"date"	=> "DATE NOT NULL",
-		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"visites"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_key = array(
@@ -35,31 +35,31 @@ $spip_visites_key = array(
 
 $spip_visites_articles = array(
 		"date"	=> "DATE NOT NULL",
-		"id_article"	=> "INT UNSIGNED NOT NULL",
-		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"id_article"	=> "int UNSIGNED NOT NULL",
+		"visites"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_articles_key = array(
 		"PRIMARY KEY"	=> "date, id_article");
 
 $spip_referers = array(
-		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
+		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
 		"date"		=> "DATE NOT NULL",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED NOT NULL",
-		"visites_jour"	=> "INT UNSIGNED NOT NULL",
-		"visites_veille"=> "INT UNSIGNED NOT NULL",
+		"visites"	=> "int UNSIGNED NOT NULL",
+		"visites_jour"	=> "int UNSIGNED NOT NULL",
+		"visites_veille"=> "int UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_key = array(
 		"PRIMARY KEY"	=> "referer_md5");
 
 $spip_referers_articles = array(
-		"id_article"	=> "INT UNSIGNED NOT NULL",
-		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
+		"id_article"	=> "int UNSIGNED NOT NULL",
+		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
 		"date"		=> "DATE NOT NULL",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED NOT NULL",
+		"visites"	=> "int UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_articles_key = array(
@@ -67,24 +67,24 @@ $spip_referers_articles_key = array(
 		"KEY referer_md5"	=> "referer_md5");
 
 $spip_auteurs_articles = array(
-		"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_auteurs_articles_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_article",
 		"KEY id_article"	=> "id_article");
 
 $spip_auteurs_rubriques = array(
-		"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_auteurs_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_rubrique",
 		"KEY id_rubrique"	=> "id_rubrique");
 
 $spip_auteurs_messages = array(
-		"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_message"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_message"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"vu"		=> "CHAR (3)");
 
 $spip_auteurs_messages_key = array(
@@ -93,8 +93,8 @@ $spip_auteurs_messages_key = array(
 
 
 $spip_documents_articles = array(
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_articles_key = array(
@@ -102,8 +102,8 @@ $spip_documents_articles_key = array(
 		"KEY id_document"	=> "id_document");
 
 $spip_documents_rubriques = array(
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_rubriques_key = array(
@@ -111,8 +111,8 @@ $spip_documents_rubriques_key = array(
 		"KEY id_document"	=> "id_document");
 
 $spip_documents_breves = array(
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_breves_key = array(
@@ -120,48 +120,48 @@ $spip_documents_breves_key = array(
 		"KEY id_document"	=> "id_document");
 
 $spip_mots_articles = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_articles_key = array(
 		"PRIMARY KEY"	=> "id_article, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_breves = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_breves_key = array(
 		"PRIMARY KEY"	=> "id_breve, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_rubriques = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_rubrique, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_syndic = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_syndic"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_syndic"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_syndic_key = array(
 		"PRIMARY KEY"	=> "id_syndic, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_forum = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_forum"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_forum"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_forum_key = array(
 		"PRIMARY KEY"	=> "id_forum, id_mot",
 		"KEY id_mot"	=> "id_mot");
 
 $spip_mots_documents = array(
-		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL");
 
 $spip_mots_documents_key = array(
 		"PRIMARY KEY"	=> "id_document, id_mot",
@@ -177,10 +177,10 @@ $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
 
 $spip_index = array(
- 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
- 		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_objet"	=> "INT UNSIGNED NOT NULL",
-		"id_table"	=> "TINYINT UNSIGNED NOT NULL"	);
+ 		"`hash`"	=> "bigint UNSIGNED NOT NULL",
+ 		"points"	=> "int UNSIGNED DEFAULT '0' NOT NULL",
+		"id_objet"	=> "int UNSIGNED NOT NULL",
+		"id_table"	=> "tinyint UNSIGNED NOT NULL"	);
 
 $spip_index_key = array(
  		"KEY `hash`"	=> "`hash`",
@@ -188,7 +188,7 @@ $spip_index_key = array(
 		"KEY id_table"	=> "id_table");
 
 $spip_index_dico = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
+		"`hash`"	=> "bigint UNSIGNED NOT NULL",
 		"dico"		=> "VARCHAR (30)");
 
 $spip_index_dico_key = array(
