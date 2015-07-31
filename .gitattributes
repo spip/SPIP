@@ -455,14 +455,17 @@ ecrire/inc/utils.php -text
 ecrire/lang/ecrire_br.php -text
 ecrire/lang/ecrire_bs.php -text
 ecrire/lang/ecrire_cs.php -text
+ecrire/lang/ecrire_it_fem.php -text
 ecrire/lang/ecrire_ru.php -text
 ecrire/lang/public_br.php -text
 ecrire/lang/public_bs.php -text
 ecrire/lang/public_cs.php -text
+ecrire/lang/public_it_fem.php -text
 ecrire/lang/public_ru.php -text
 ecrire/lang/spip_br.php -text
 ecrire/lang/spip_bs.php -text
 ecrire/lang/spip_cs.php -text
+ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_ru.php -text
 ecrire/prive.php -text
 ecrire/rien.gif -text
