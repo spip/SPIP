@@ -25,7 +25,7 @@ include_spip('inc/cookie');
 //
 
 $exec = (string)_request('exec');
-$reinstall = _request('reinstall')?_request('reinstall'):($exec=='install'?'oui':NULL);
+$reinstall = (!is_null(_request('reinstall')))?_request('reinstall'):($exec=='install'?'oui':NULL);
 //
 // Les scripts d'insallation n'authentifient pas, forcement,
 // alors il faut blinder les variables d'URL
