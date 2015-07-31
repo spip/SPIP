@@ -45,7 +45,7 @@ $flag_editable = (acces_rubrique($rubrique_article)
 
 
 
-/// En double avec articles_edit.php3, mais nécessite le flag_editable
+/// En double avec articles_edit.php3, mais necessite le flag_editable
 $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_editable) {
 	$titre = addslashes(corriger_caracteres($titre));
