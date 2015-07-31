@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.2'); // 29 mars 2011
+define('_ECRAN_SECURITE', '1.0.3'); // 31 mars 2011
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -201,7 +201,7 @@ AND $_REQUEST['op'] !== preg_replace('/[^\-\w]/', '', $_REQUEST['op']))
 if (count($_FILES)){
 	foreach($_FILES as $k=>$v){
 		 if (preg_match(',^fichier_\d+$,',$k)
-		 AND preg_match(',[.]php3?($|[.]),i',$v['name']))
+		 AND preg_match(',\.php,i',$v['name']))
 		 	unset($_FILES[$k]);
 	}
 }
