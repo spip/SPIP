@@ -69,9 +69,9 @@ echo "<tr><td class='serif'>";
 if ($flag_gz) {
 	echo "\n<p align='justify'>"._T('texte_admin_tech_03')."<p>";
 	echo "\n<INPUT TYPE='radio' NAME='gz' VALUE='1' id='gz_on' CHECKED><label for='gz_on'> "._T('bouton_radio_sauvegarde_compressee',
-	array('fichier'=>'<b>'._DIR_SESSIONS.'dump.xml.gz</b>'))." </label><BR>\n";
+	array('fichier'=>'<b>'.joli_repertoire(_DIR_SESSIONS.'dump.xml.gz').'</b>'))." </label><BR>\n";
 	echo "\n<INPUT TYPE='radio' NAME='gz' VALUE='0' id='gz_off'><label for='gz_off'> "._T('bouton_radio_sauvegarde_non_compressee',
-	array('fichier'=>'<b>'._DIR_SESSIONS.'dump.xml</b>'))." </label><BR>\n";
+	array('fichier'=>'<b>'.joli_repertoire(_DIR_SESSIONS.'dump.xml').'</b>'))." </label><BR>\n";
 }
 else {
 	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.joli_repertoire(_DIR_SESSIONS).'dump.xml</b>'));
