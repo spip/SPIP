@@ -361,6 +361,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
     ecrire_meta('plugin', $plugin_s);
     ecrire_meta('plugin_header', $plugin_header);
     ecrire_plugin_actifs2($plugin_valides, $ordre, $infos, $pipe_recherche);
+
+    // attendre eventuellement l'invalidation du cache opcode
+    spip_attend_invalidation_opcode_cache();
+
     return $plugin_s;
 }
 
