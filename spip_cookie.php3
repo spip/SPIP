@@ -196,11 +196,13 @@ if ($var_lang_ecrire) {
 		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-		include_ecrire('inc_admin.php3');
-		if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
-			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
-			$auteur_session['lang'] = $var_lang_ecrire;
-			ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
+		if (@file_exists('ecrire/inc_connect.php3')) {
+			include_ecrire('inc_admin.php3');
+			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
+				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
+				$auteur_session['lang'] = $var_lang_ecrire;
+				ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
+			}
 		}
 	}
 }
