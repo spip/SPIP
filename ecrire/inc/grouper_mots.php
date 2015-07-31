@@ -57,7 +57,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	}
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . "<div class='liste'>"
+	  . "<div class='cadre-liste'>"
 	  . $tranches
 	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
 	  . afficher_liste($largeurs, $table, $styles)

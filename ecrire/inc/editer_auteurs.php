@@ -239,7 +239,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 	  	. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 	    . $t
 	    . "</table>";
-	return "<div class='liste'>$t</div>\n";
+	return "<div class='cadre-liste'>$t</div>\n";
 }
 
 

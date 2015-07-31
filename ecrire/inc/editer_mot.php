@@ -222,7 +222,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
-		$res = "\n<div class='liste'>"
+		$res = "\n<div class='cadre-liste'>"
 		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 		. afficher_liste($largeurs, $tableau, $styles)
 		. "</table></div>";
