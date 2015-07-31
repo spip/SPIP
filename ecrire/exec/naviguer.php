@@ -13,9 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
-include_spip('inc/rubriques');
-include_spip('inc/actions');
 include_spip('inc/forum');
 
 // http://doc.spip.org/@exec_naviguer_dist

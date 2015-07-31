@@ -46,9 +46,7 @@ else {
 //	gros_titre(_T('onglet_repartition_actuelle'));	
 }
 
-if ($critere == "popularite") barre_onglets("rep_depuis", "popularite");
-else barre_onglets("rep_depuis", "debut");
-
+ echo ($critere == "popularite") ? barre_onglets("rep_depuis", "popularite"): barre_onglets("rep_depuis", "debut");
 
 
 if ($connect_statut != '0minirezo') {

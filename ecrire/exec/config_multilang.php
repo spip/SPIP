@@ -44,7 +44,7 @@ if ($changer_config == 'oui') {
 }
 
 
-barre_onglets("config_lang", "multi");
+echo barre_onglets("config_lang", "multi");
 
 
 debut_gauche();

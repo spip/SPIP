@@ -13,9 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/texte');
-charger_generer_url();
-include_spip('inc/rubriques');
 
 // http://doc.spip.org/@enfants
 function enfants($id_parent, $critere){
@@ -153,11 +150,11 @@ function exec_statistiques_repartition_dist()
 
 	if ($critere == "debut") {
 		$critere = "visites";
-		barre_onglets("stat_depuis", "debut");
+		echo barre_onglets("stat_depuis", "debut");
 	}
 	else {
 		$critere = "popularite";
-		barre_onglets("stat_depuis", "popularite");
+		echo barre_onglets("stat_depuis", "popularite");
 	}
 
 	$abs_total=enfants(0, $critere);

@@ -34,7 +34,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 	}
 
-barre_onglets("config_lang", "langues");
+echo barre_onglets("config_lang", "langues");
 
 
 debut_gauche();

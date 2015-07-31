@@ -1839,6 +1839,136 @@ function afficher_hierarchie($id_rubrique) {
 		  "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='$style2'>".$parents."</div>";
 }
 
+
+// http://doc.spip.org/@enfant_rub
+function enfant_rub($collection){
+	global $couleur_foncee, $lang_dir;
+	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
+	
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+	if ($voir_logo) {
+		$voir_logo = "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;";
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+	} else $logo ='';
+
+	$les_enfants = "";
+
+	$res = spip_query("SELECT id_rubrique, id_parent, titre, descriptif, lang FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre");
+
+	while($row=spip_fetch_array($res)){
+		$id_rubrique=$row['id_rubrique'];
+		$id_parent=$row['id_parent'];
+		$titre=$row['titre'];
+
+		$les_sous_enfants = sous_enfant_rub($id_rubrique);
+
+		changer_typo($row['lang']);
+
+		$descriptif=propre($row['descriptif']);
+
+		if ($spip_display == 4) $les_enfants .= "<li>";
+
+
+		if ($voir_logo) {
+			if ($logo = $logo_f($id_rubrique, 'id_rubrique', 'on')) {
+				list($fid, $dir, $nom, $format) = $logo;
+				$logo = ratio_image($fid, $nom, $format, 48, 36, "alt=''");
+				if ($logo)
+					$logo =  "<div style='$voir_logo'>$logo</div>";
+			}
+		}
+		$les_enfants .= "<div class='enfants'>" .
+			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
+		  (is_string($logo) ? $logo : '') .
+		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
+		  (!acces_restreint_rubrique($id_rubrique) ? "" :
+		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
+		  " <span dir='$lang_dir'><B><A href='" . 
+		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
+		  "'><font color='$couleur_foncee'>".
+		  typo($titre) .
+		  "</font></A></B></span>" .
+		  (!$descriptif ? '' : "<div class='verdana1'>$descriptif</div>");
+
+		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;
+		
+		$les_enfants .= "<div style='clear:both;'></div>"  .
+		  fin_cadre_sous_rub(true) .
+		  "</div>";
+
+		if ($spip_display == 4) $les_enfants .= "</li>";
+	}
+
+	changer_typo($spip_lang); # remettre la typo de l'interface pour la suite
+	return (($spip_display == 4) ? "<ul> $les_enfants</ul>" :  $les_enfants);
+
+}
+
+// http://doc.spip.org/@sous_enfant_rub
+function sous_enfant_rub($collection2){
+	global $lang_dir, $spip_lang_dir, $spip_lang_left;
+
+	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
+
+	if (!spip_num_rows($result3)) return '';
+	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+	while($row=spip_fetch_array($result3)){
+			$id_rubrique2=$row['id_rubrique'];
+			$id_parent2=$row['id_parent'];
+			$titre2=$row['titre'];
+			changer_typo($row['lang']);
+
+			$retour.="<div class='arial11' " .
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+	}
+	$retour .= "</ul>\n\n".fin_block()."\n\n";
+	
+	return $retour;
+}
+
+// http://doc.spip.org/@afficher_enfant_rub
+function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
+	global  $spip_lang_right;
+	
+	$les_enfants = enfant_rub($id_rubrique);
+	$n = strlen($les_enfants);
+
+	$les_enfants2=substr($les_enfants,round($n/2));
+
+	if (strpos($les_enfants2,"<div class='enfants'>")){
+		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<div class='enfants'>"));
+		$n2 = strlen($les_enfants2);
+		$les_enfants=substr($les_enfants,0,$n-$n2);
+	}else{
+		$les_enfants2="";
+	}
+	
+	$res = "<div>&nbsp;</div>"
+	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
+	. "\n<tr><td valign='top' width=50% rowspan=2>"
+	. $les_enfants
+	. "</td>"
+	. "\n<td width='20' rowspan='2'>"
+	. http_img_pack("rien.gif", ' ', "width='20'")
+	. "</td>\n"
+	. "\n<td valign='top' width='50%'>"
+	. $les_enfants2
+	. "&nbsp;"
+	. "</td></tr>"
+	. "\n<tr><td style='text-align: "
+	. $spip_lang_right
+	. ";' valign='bottom'><div align='"
+	. $spip_lang_right
+	. "'>"
+	. (!$bouton ? ''
+		 : (!$id_rubrique
+		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",'', false)
+		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",'',false)))
+	. "</div></td></tr></table>";
+	if ($return) return $res; else echo $res;
+}
+
 // Pour construire des menu avec SELECTED
 // http://doc.spip.org/@mySel
 function mySel($varaut,$variable, $option = NULL) {
