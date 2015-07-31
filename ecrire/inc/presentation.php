@@ -910,21 +910,20 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 
 	$s = "\n<div>";
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
-
 	if ($voir_logo) {
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
 			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
 			if ($logo)
-				$s .= "\n<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</div>";
+				$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
 	}
-
 	$s .= typo($titre);
 	if ($afficher_langue AND $lang != $langue_defaut)
 		$s .= " <span style='font-size: 10px; color: #666666'$dir_lang>(".traduire_nom_langue($lang).")</span>";
 	$s .= "</a>";
+
 
 	$s .= "</div>";
 	$vals[] = $s;
@@ -1824,7 +1823,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax
 	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
 	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
-	. (($limit >= 0) ? ''
+	. (($limit <= 0) ? ''
 	 : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
 	. "</table>";
 
