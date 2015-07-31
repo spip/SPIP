@@ -212,7 +212,7 @@ function appliquer_modifs_config() {
 			ecrire_meta($i, _request($i));
 
 	// langue_site : la globale est mangee par inc_version
-	if ($lang = $GLOBALS['changer_langue_site']) {
+	if ($lang = _request('changer_langue_site')) {
 		include_spip('inc/lang');
 		if (changer_langue($lang)) {
 			ecrire_meta('langue_site', $lang);
