@@ -16,8 +16,8 @@ include_spip('inc/presentation');
 include_spip('inc/actions');
 
 // L'ajout d'un auteur se fait par mini-navigateur dans la fourchette:
-define('_SPIP_SELECT_MIN_AUTEURS', 10); // en dessous: balise Select
-define('_SPIP_SELECT_MAX_AUTEURS', 100); // au-dessus: saisie + return
+define('_SPIP_SELECT_MIN_AUTEURS', 30); // en dessous: balise Select
+define('_SPIP_SELECT_MAX_AUTEURS', 30); // au-dessus: saisie + return
 
 // http://doc.spip.org/@inc_editer_auteurs_dist
 function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titre_boite = NULL, $script_edit_objet = NULL) {
@@ -271,7 +271,7 @@ function objet_auteur_select($result)
 		$nom = $row["nom"];
 		$email = $row["email"];
 		$statut = array_search($row["statut"], $GLOBALS['liste_des_statuts']);
-		$premiere = strtoupper(substr(trim($nom), 0, 1));
+#		$premiere = strtoupper(substr(trim($nom), 0, 1));
 
 		if (!autoriser('voir', 'auteur'))
 			if ($p = strpos($email, '@'))
