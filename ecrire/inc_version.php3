@@ -7,7 +7,16 @@ define("_ECRIRE_INC_VERSION", "1");
 
 
 //
-// 	*** Parametrage de SPIP ***
+// 	*** Parametrage par defaut de SPIP ***
+//
+// Ces parametres d'ordre technique doivent etre modifies
+// dans ecrire/mes_options.php3. Les valeurs specifiees
+// dans ce dernier fichier remplaceront automatiquement
+// les valeurs ci-dessous.
+//
+// Pour creer ecrire/mes_options.php3 : recopier simplement
+// les lignes ci-dessous, et ajouter le marquage de debut et
+// de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 //
 
 // Prefixe des tables dans la base de donnees
@@ -39,17 +48,16 @@ $mysql_rappel_connexion = false;
 // 	*** Fin du parametrage ***
 //
 
+
 $flag_ecrire = !file_exists('ecrire/inc_version.php3');
 
-// on peut eventuellement stocker le parametrage dans ecrire/options.php3
-// pour eviter tout ecrasement
-if($flag_ecrire) {
-	if (file_exists('options.php3')) {
-		include('options.php3');
+if ($flag_ecrire) {
+	if (file_exists('mes_options.php3')) {
+		include('mes_options.php3');
 	}
 } else {
-	if (file_exists('ecrire/options.php3')) {
-		include('ecrire/options.php3');
+	if (file_exists('ecrire/mes_options.php3')) {
+		include('ecrire/mes_options.php3');
 	}
 }
 
