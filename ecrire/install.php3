@@ -207,7 +207,7 @@ elseif ($etape3) {
 	echo "<fieldset><label><B>Choisissez votre base :</B><BR></label>";
 
 	if ($result AND (@mysql_num_rows($result) > 0)) {
-		echo "<B>Le serveur mySQL contient plusieurs bases de donn&eacute;es.</B><P> <B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:";
+		echo "<B>Le serveur MySQL contient plusieurs bases de donn&eacute;es.</B><P> <B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:";
 		echo "<UL>";	
 		$i=0;
 		$bases = "";
@@ -280,9 +280,9 @@ elseif($etape2) {
 		echo "</FORM>";
 	}
 	else {
-		echo "<B>La connexion au serveur mySQL a &eacute;chou&eacute;.</B>";
+		echo "<B>La connexion au serveur MySQL a &eacute;chou&eacute;.</B>";
 		echo "<P>Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.";
-		echo "<P><FONT SIZE=2><B>N.B.</B> Sur de nombreux serveurs, vous devez <B>demander</B> l'activation de votre acc&egrave;s &agrave; la base mySQL avant de pouvoir l'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.</FONT>";
+		echo "<P><FONT SIZE=2><B>N.B.</B> Sur de nombreux serveurs, vous devez <B>demander</B> l'activation de votre acc&egrave;s &agrave; la base MySQL avant de pouvoir l'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.</FONT>";
 	}
 
 	install_fin_html();
@@ -291,9 +291,9 @@ elseif($etape2) {
 elseif ($etape1) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Premi&egrave;re &eacute;tape : <B>Votre connexion mySQL</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Premi&egrave;re &eacute;tape : <B>Votre connexion MySQL</B></FONT>";
 
-	echo "<P>Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte mySQL, les codes de connexion au serveur mySQL.";
+	echo "<P>Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte MySQL, les codes de connexion au serveur MySQL.";
 
 	echo aide ("install1");
 
