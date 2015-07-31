@@ -71,7 +71,6 @@ function lister_tables_noexport(){
 		$EXPORT_tables_noexport[]='spip_auteurs_messages';
 	}
 
-	//var_dump($EXPORT_tables_noexport);
 	$EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexport);
 
 	return $EXPORT_tables_noexport;

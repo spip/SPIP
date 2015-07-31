@@ -342,7 +342,7 @@ function import_tables($request, $archive) {
 		else
 			// la liste des tables a recopier
 			$tables = import_table_choix($request);
-		#		var_dump($tables);die();
+
 		spip_log("tables a copier :".implode(", ",$tables),'dbdump');
 		if (in_array('spip_auteurs',$tables)){
 			$tables = array_diff($tables,array('spip_auteurs'));

@@ -223,7 +223,6 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='lis
 	$res = $afficher(self(), $liste_plugins,$liste_plugins_actifs);
 
 	if (!$res) return "";
-#	var_dump(spip_timer('cachexml'));
 
 
 	return	$res;

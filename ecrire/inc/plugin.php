@@ -77,13 +77,11 @@ function liste_plugin_files($dir_plugins = null){
 function plugin_version_compatible($intervalle,$version){
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,',$intervalle,$regs)) return false;
-	#var_dump("$version::$intervalle");
 	$minimum = $regs[1];
 	$maximum = $regs[2];
 	$minimum_inc = $intervalle{0}=="[";
 	$maximum_inc = substr($intervalle,-1)=="]";
-	#var_dump("$version::$minimum_inc::$minimum::$maximum::$maximum_inc");
-	#var_dump(spip_version_compare($version,$minimum,'<'));
+
 	if (strlen($minimum)){
 		if ($minimum_inc AND spip_version_compare($version,$minimum,'<')) return false;
 		if (!$minimum_inc AND spip_version_compare($version,$minimum,'<=')) return false;
@@ -229,7 +227,6 @@ function liste_plugin_valides($liste_plug, $force = false){
 		// construire une liste ordonnee des plugins
 		$count = 0;
 		while ($c=count($liste_non_classee) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
-			#echo "tour::";var_dump($liste_non_classee);
 			$count = $c;
 			foreach($liste_non_classee as $p=>$resume) {
 				$plug = $resume['dir'];

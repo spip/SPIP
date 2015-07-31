@@ -59,7 +59,6 @@ function suivre_lien($url, $lien) {
 		$get = isset($regs[4])?$regs[4]:"";
 		$hash = isset($regs[5])?$regs[5]:"";
 	}
-	#var_dump(array('url'=>$url,'debut'=>$debut,'dir'=>$dir,'mot'=>$mot,'get'=>$get,'hash'=>$hash));
 	switch (substr($lien,0,1)) {
 		case '/':
 			return $debut . resolve_path($lien);
