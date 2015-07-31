@@ -1,71 +1,252 @@
+/* Habillage des formulaires
+---------------------------------------------- */
+input.text, input.password, textarea, select { font-style: inherit;}
+
+/* Reponse du formulaire */
+.reponse_formulaire { font-weight: bold; }
+.reponse_formulaire, .reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
+fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
+.spip_surligne {} /*Cf.: spip_style.css*/
+
+/* Formulaire de login au forum */
+.formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
+
+/* Formulaire de recherche */
+.formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
+.formulaire_recherche label { display: inline; font-size: 1em; }
+.formulaire_recherche input.forml { width: 12em; }
+.formulaire_recherche input.bouton { vertical-align: middle; }
+
+/* Menu langues */
+.menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
+.formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
+
+/* Style des formulaires spip
+----------------------------------------------- */
+.formulaire_spip {
+	font-size:1em;
+	clear:both;
+	border: none;
+	background: #EEC; 
+	margin-bottom: 2em; 
+	padding: 1em; 
+	text-align: left; 
+	color: #330; 
+}
+
+
 /*
- *
- * Style des formulaires .formfx
- * Inspire de http://www.alistapart.com/articles/prettyaccessibleforms
- * "Prettier Accessible Forms", by Nick Rigby
- *
+.cadre-formulaire{background:white;padding:0;}
+.entete-formulaire{padding:0.5em;}
+*/
+
+/* ul li */
+.formulaire_spip ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.formulaire_spip li {
+	margin: 0;
+	padding: 10px 10px 10px 10px;
+	padding-left:130px;
+	clear:both;
+	overflow:auto;
+	border-top: 1px solid #[(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)];
+}
+.formulaire_spip li fieldset li {border:0; padding:5px 10px;}
+.formulaire_spip li fieldset li {display:block;float:none;margin-left:0;}
+
+/* elements du formulaire */
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select {
+	width: 96%;
+	margin:0;
+}
+.formulaire_spip input.submit, 
+.formulaire_spip input.reset, 
+.formulaire_spip input.button {
+	width: auto;
+}
+
+
+/* intitules (label) */
+.formulaire_spip label {
+	width: 120px;
+	float:left;
+	margin-left:-125px; 
+	text-align: left;
+	vertical-align: top;
+	color:#555;
+	font-weight:bold;
+	/* for IE */
+	position:relative;
+	display:inline;
+}
+
+.formulaire_spip li p {
+	margin-top:0;
+	margin-bottom:0;
+}
+
+/* fieldset */
+.formulaire_spip fieldset {
+	margin:0;
+	padding:0 0 5px 0;
+	border:0;
+}
+.formulaire_spip li fieldset {
+	border:1px #aaa dashed;
+	background:transparent;
+	margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */
+}
+.formulaire_spip fieldset legend {
+	padding:0.5em;
+	font-weight:bold;
+	font-style:italic;
+	font-size:1.2em;
+	color:#330; /* preciser la couleur des legend pour IE/Win */
+}
+.formulaire_spip li fieldset legend {
+	font-style:normal;
+	font-size:1em;
+	margin-left:0px;
+	background:#GET{claire};
+	line-height:0.6em;
+}
+.formulaire_spip li fieldset .legend {
+	display:block;
+	font-size:1.1em;
+	color:#330; /* preciser la couleur des legend pour IE/Win */
+	margin-top:0;
+	background:#GET{claire};
+	padding:2px 5px;
+}
+
+/* champ des radio/checkbox
+*  on annule les decalages de label/champs
+*  lorsqu'ils sont inclus dans une class .champ
+*
+*  La liste par defaut est verticale
+*  pour l'avoir horizontale, il faut specifier :
+*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
+*/
+.formulaire_spip .choix label{float:none; margin-left:5px; display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;}
+
+/* icone d'aide */
+.formulaire_spip li em.aide { float:right;margin-right:-10px;}
+
+/* boutons */
+.formulaire_spip .boutons {
+	margin:0; clear:both;
+	text-align: right;
+	font-size: 1.2em;
+	margin: 7px 1em;
+}
+.formulaire_spip .boutons input.submit {
+	margin-right: 1em;
+	padding: 0 1em;
+	font-weight:normal;
+}
+
+
+/* obligatoire */
+.formulaire_spip li.obligatoire {
+	background-color: #CDDF3F;
+	background-color: #GET{claire};
+}
+.formulaire_spip li.obligatoire label {
+	font-weight: bold;
+	color:#000;
+}
+
+
+/* erreur */
+.formulaire_spip li.erreur input.text,
+.formulaire_spip li.erreur textarea {
+	background-color: #FFCCCC;
+	border-style: solid;
+	border-color: #C30;
+}
+.formulaire_spip li.erreur .erreur,
+.formulaire_spip em.attention,
+.formulaire_spip .formulaire_erreur{
+	color: #C30;
+	font-weight: bold;
+}
+.formulaire_spip .formulaire_erreur{
+	display:block;
+	margin-left:0.5em;
+}
+
+/* message reussite ? */
+.formulaire_spip .formulaire_message{
+	color: #53AD20;
+	font-weight: bold;
+}
+
+/* commentaires */
+.formulaire_spip .explication{
+	font-size:0.95em;
+	padding:0 5px;
+}
+.formulaire_spip li .explication{
+	font-size:0.9em;
+	padding:0px;
+}
+/* remarques importantes */
+.formulaire_spip em.attention{
+	display:block;
+	margin:0.5em;
+	font-weight:normal;
+}
+
+
+/* barre d'outil */
+.formulaire_spip table.spip_barre{
+	background:#aaa;
+	border: 1px solid #666;
+	width:96%; /* pour mettre a la meme taille que les champs de formulaire */
+	background:none; border:0; margin:0; padding:0;/**/
+}
+.formulaire_spip table.spip_barre a img { 
+	background-color:#ccc;
+	padding: 2px;
+	border: 1px solid #666;
+	margin-right:1px;
+}
+.formulaire_spip table.spip_barre a:hover img{
+	background:white;
+}
+
+
+
+/*
+ * Cas particuliers
  */
-.formfx form fieldset {
-  margin-bottom: 10px;
-}
-.formfx form legend {
-  padding: 0 2px;
-  font-weight: bold;
-}
-.formfx form label {
-  display: inline-block;
-  line-height: 1.8;
-  vertical-align: top;
-}
-.formfx form fieldset ol {
-  margin: 0;
-  padding: 0;
-}
-.formfx form fieldset li {
-  list-style: none;
-  padding: 5px;
-  margin: 0;
-}
-.formfx form fieldset fieldset {
-  border: none;
-  margin: 3px 0 0;
-}
-.formfx form fieldset fieldset legend {
-  padding: 0 0 5px;
-  font-weight: normal;
-}
-.formfx form fieldset fieldset ul li {
-  width: 180px;
-  float:left;
-  padding:0;
-}
-.formfx form fieldset fieldset ul label {
-  display: inline;
-  width:auto;
-}
-.formfx form fieldset fieldset ul {
-  margin:0;
-  margin-left:123px;/* Width plus 3 (html space) */
-  padding:0;}
-.formfx form em {
-  font-weight: bold;
-  font-style: normal;
-  color: #f00;
-}
-.formfx form label {
-  width: 120px; /* Width of labels */
-}
+/* forum */
+.formulaire_forum li.saisie_mot .choix {float:left;width:30%;}
+
+/* Previsualisation du message */
+fieldset.previsu li { padding: 3px;}
+fieldset.previsu legend { padding: 0 .4em; color: #F57900; font-weight: bold; }
+fieldset.previsu .boutons input { background: #F57900; border-color: #F57900; color: #FFF; }
 
 
-/* messages d'erreur */
-.formulaire_erreur {
-  color: red;
-}
-.formfx li .erreur {color:red;display:block;}
+/* barre typo */
 
-/* messages de retour */
-.formulaire_message {
-  color: green;
+table.spip_barre {
+	background-color: #GET{foncee};
+	border-left: 1px solid #GET{claire};
+	border-right: 1px solid #GET{claire};
+	padding: 3px;
+	padding-bottom: 0px;
 }
 
-.formfx .spip_bouton {text-align:right;}
+table.spip_barre a img {padding: 3px; border: 1px outset #GET{claire}; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
