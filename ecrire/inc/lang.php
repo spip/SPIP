@@ -110,7 +110,7 @@ function traduire_nom_langue($lang) {
 // C'est utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT.
 // http://doc.spip.org/@lang_dir
 function lang_dir($lang='', $droitier='ltr', $gaucher='rtl') {
-	static $lang_rtl = array('ar', 'fa', 'ku', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
+	static $lang_rtl = array('ar', 'fa', 'ku', 'prs', 'ps', 'ur', 'he', 'heb', 'hbo', 'yi');
 
 	return in_array(($lang ? $lang : $GLOBALS['spip_lang']), $lang_rtl) ?
 		$gaucher : $droitier;
