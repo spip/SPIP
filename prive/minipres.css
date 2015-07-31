@@ -4,8 +4,8 @@ html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-d
 body { font: .9em sans-serif; color: #2e3436; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
-h1 { margin: 1em auto; font-size: 1.2em; font-weigth: bold; color: #5c3566; text-align: center; }
-h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weigth: normal; }
+h1 { margin: 1em auto; font-size: 1.2em; font-weight: bold; color: #5c3566; text-align: center; }
+h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weight: normal; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
 ul,ol,li { list-style: none; }
