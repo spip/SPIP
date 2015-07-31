@@ -10,7 +10,7 @@ dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
 dist/modeles/lesauteurs.html -text
-dist/modeles/pagination_dist.html -text
+dist/modeles/pagination.html -text
 dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
