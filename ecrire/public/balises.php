@@ -475,6 +475,7 @@ function balise_RANG_dist($p) {
 			$boucle = &$p->boucles[$b];
 			$trouver_table = charger_fonction('trouver_table','base');
 			$desc = $trouver_table($boucle->id_table);
+			$_titre = ''; # champ dont on extrait le numero
 			if (isset($desc['titre'])){
 				$t=$desc['titre'];
 			  if (preg_match(';(^|,)([^,]*titre)(,|$);',$t,$m)){
