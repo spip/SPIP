@@ -18,7 +18,6 @@ if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 // une adresse existante
 define('CONFIRMER_MODIFIER_URL', false);
 
-
 include_spip('base/abstract_sql');
 
 /*
@@ -82,7 +81,8 @@ function creer_chaine_url($x) {
 	$url_old = $x['data'];
 	$objet = $x['objet'];
 	include_spip('inc/filtres');
-
+	@define('_URLS_PROPRES_MAX', 35);
+	@define('_URLS_PROPRES_MIN', 3);
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($objet['titre'])));
 	$url = translitteration(corriger_caracteres($titre));
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
@@ -97,7 +97,7 @@ function creer_chaine_url($x) {
 	}
 
 	// S'il reste trop peu, on retombe sur article12
-	if (strlen($url) < 3) {
+	if (strlen($url) < _URL_PROPRES_MIN) {
 		$url = $objet['type'].$objet['id_objet'];
 	}
 
@@ -111,7 +111,6 @@ function creer_chaine_url($x) {
 
 			// Si on depasse _URLS_PROPRES_MAX caracteres, s'arreter
 			// ne pas compter 3 caracteres pour %E9 mais un seul
-			define('_URLS_PROPRES_MAX', 35);
 			$long = preg_replace(',%.,', '', $url2);
 			if (strlen($long) > _URLS_PROPRES_MAX) {
 				break;
@@ -124,7 +123,7 @@ function creer_chaine_url($x) {
 		// On enregistre en utf-8 dans la base
 		$url = rawurldecode($url);
 
-		if (strlen($url) < 2)
+		if (strlen($url) < _URLS_PROPRES_MIN) # pourquoi  "-1" avant ?
 			$url = $objet['type'].$objet['id_objet']; // 'article12'
 	}
 
