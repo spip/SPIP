@@ -63,7 +63,7 @@ while ($row = mysql_fetch_array($result)) {
 	$query_rub = "
 SELECT versions.*, articles.statut, articles.titre
 FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 0,1";
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=".intval($id_rubrique)."$req_where LIMIT 0,1";
 	$result_rub = spip_query($query_rub);
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
@@ -80,7 +80,7 @@ if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == '
 		$query_lang = "
 SELECT versions.*
 FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 0,1";
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='".addslashes($lang)."' $req_where LIMIT 0,1";
 		$result_lang = spip_query($query_lang);
 		
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
