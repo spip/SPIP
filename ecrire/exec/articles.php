@@ -109,8 +109,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles'))
 
-	.	(!($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) ? '' : ( boites_de_config_articles($id_article) . boite_article_virtuel($id_article, $virtuel))) 
-
+	.	boites_de_config_articles($id_article, $flag_editable)
+	.	boite_article_virtuel($id_article, $virtuel, $flag_editable) 
 	.	meme_rubrique($id_rubrique, $id_article, 'article')
 
 	.	 pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
@@ -226,30 +226,30 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 //
 
 // http://doc.spip.org/@boites_de_config_articles
-function boites_de_config_articles($id_article)
+function boites_de_config_articles($id_article, $modifiable)
 {
-	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+	$poster = charger_fonction('poster', 'inc');
+	$petitionner = charger_fonction('petitionner', 'inc');
+	$poster = $poster($id_article,"articles","id_article=$id_article", $modifiable);
+	$petitionner = $petitionner($id_article,"articles","id_article=$id_article",$modifiable);
+	$masque = $poster . $petitionner;
 
-	$nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
+	if (!$masque) return '';
 
-	$nb_forums = $nb_forums['count'];
-	$nb_signatures = $nb_signatures['count'];
-	$visible = $nb_forums || $nb_signatures;
+	$forums = spip_query("SELECT id_article FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop') LIMIT 1");
+
+	$visible = spip_fetch_array($forums);
+
+	if (!$visible) {
+
+		$signatures = spip_query("SELECT id_article FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle') LIMIT 1");
+		$visible = spip_fetch_array($signatures);
+	}
 
 	$invite = "<span class='verdana1'><b>"
 	. _T('bouton_forum_petition')
 	. aide('confforums')
 	. "</b></span>";
-
-	$f = charger_fonction('poster', 'inc');
-	$g = charger_fonction('petitionner', 'inc');
-
-	if ($nb_forums) {
-		$masque = icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
-	} else 	$masque = '';
-
-	$masque .= $f($id_article,"articles","id_article=$id_article")
-	. $g($id_article,"articles","id_article=$id_article");
 
 	return debut_cadre_relief("forum-interne-24.gif", true)
 	. block_parfois_visible('forumpetition', $invite, $masque, 'text-align: center;', $visible)
@@ -257,12 +257,14 @@ function boites_de_config_articles($id_article)
 }
 
 // http://doc.spip.org/@boite_article_virtuel
-function boite_article_virtuel($id_article, $virtuel)
+function boite_article_virtuel($id_article, $virtuel, $flag)
 {
 
 	$f = charger_fonction('virtualiser', 'inc');
 
-	$masque = $f($id_article, false, $virtuel, "articles", "id_article=$id_article");
+	$masque = $f($id_article, $flag, $virtuel, "articles", "id_article=$id_article");
+
+	if (!$masque) return '';
 
 	$invite = "<span class='verdana1'>"
 	. '<b>'
