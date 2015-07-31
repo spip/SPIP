@@ -93,25 +93,32 @@ function generer_url_ecrire_statistiques($id_article) {
 if (!function_exists('generer_url_article')) {
 	function generer_url_article($id, $stat='')
 		{ return generer_url_ecrire_article($id, $stat);}
-
+ }
+if (!function_exists('generer_url_rubrique')) {
 	function generer_url_rubrique($id, $stat='')
 		{ return generer_url_ecrire_rubrique($id, $stat);}
-
+ }
+if (!function_exists('generer_url_breve')) {
 	function generer_url_breve($id, $stat='')
 		{ return generer_url_ecrire_breve($id, $stat);}
-
+ }
+if (!function_exists('generer_url_mot')) {
 	function generer_url_mot($id, $stat='')
 		{ return generer_url_ecrire_mot($id, $stat);}
-
+ }
+if (!function_exists('generer_url_site')) {
 	function generer_url_site($id, $stat='')
 		{ return generer_url_ecrire_site($id, $stat);}
-
+ }
+if (!function_exists('generer_url_auteur')) {
 	function generer_url_auteur($id, $stat='')
 		{ return generer_url_ecrire_auteur($id, $stat);}
-
+ }
+if (!function_exists('generer_url_forum')) {
 	function generer_url_forum($id, $stat='')
 		{ return generer_url_ecrire_forum($id, $stat);}
-
+ }
+if (!function_exists('generer_url_document')) {
 	function generer_url_document($id, $stat='')
 		{ return generer_url_ecrire_document($id, $stat);}
  }
