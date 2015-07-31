@@ -50,7 +50,7 @@ function definir_puce() {
 			$img = find_in_path($p.'.gif');
 			list(,,,$size) = @getimagesize($img);
 			$img = '<img src="'.$img.'" '
-				.$size.' alt="-" border="0" />';
+				.$size.' alt="-" />';
 		} else
 			$img = $GLOBALS[$p];
 

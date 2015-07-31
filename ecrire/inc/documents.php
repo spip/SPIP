@@ -78,8 +78,7 @@ function image_pattern($vignette) {
 			. _DIR_RACINE
 			. $vignette['fichier']."'
 			width='".$vignette['largeur']."'
-			height='".$vignette['hauteur']."'
-			style='border-width: 0px;' />";
+			height='".$vignette['hauteur']."' />";
 }
 
 function document_et_vignette($document, $url, $portfolio=false) {
@@ -111,7 +110,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<img src='$fichier' style='border-width: 0px;'  height='$hauteur' width='$largeur' />";
+		$image = "<img src='$fichier' height='$hauteur' width='$largeur' />";
 	}
 
 	if (!$url)
@@ -215,7 +214,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		$largeur_vignette = $largeur;
 		$hauteur_vignette = $hauteur;
 		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette' style='border-width: 0px;'";
+			$vignette = "<img src='$fichier_vignette'";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
@@ -361,7 +360,7 @@ function integre_image($id_document, $align, $type_aff) {
 
 	# mode <span ...> : ne pas mettre d'attributs de type block sinon MSIE Windows refuse de faire des liens dessus
 	if ($span == 'span') {
-		$vignette = inserer_attribut($vignette, 'style', $float.'border-width: 0px; width:'.$width.'px;');
+		$vignette = inserer_attribut($vignette, 'style', $float.'width:'.$width.'px;');
 		$vignette = inserer_attribut($vignette, 'class', "spip_document_$id_document spip_documents$class_align");
 		return $vignette;
 	}
@@ -853,18 +852,18 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 		echo "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
 		  // tourner a gauche
-		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90, $type), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
+		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90, $type), 'tourner-gauche.gif', "", _T('image_tourner_gauche'), '', 'bouton_rotation');
 		echo "<br />";
 
 		// tourner a droite
 		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 90, $type),
-					   'tourner-droite.gif', "style='border-width: 0px;'",
+					   'tourner-droite.gif', "",
 					   _T('image_tourner_droite'), '', 'bouton_rotation');
 		echo "<br />";
 
 		// tourner 180
 		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 180, $type),
-				   'tourner-180.gif', "style='border-width: 0px;'",
+				   'tourner-180.gif', "",
 				   _T('image_tourner_180'), '', 'bouton_rotation');
 		
 		echo "</div>\n";
@@ -959,7 +958,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 		echo "<p>&nbsp;</p>";
 		echo "<div align='right'>";
-		echo "<table width='50%' cellpadding=0 cellspacing=0 border=0><tr><td style='text-align: $spip_lang_left;'>";
+		echo "<table width='50%' cellpadding='0' cellspacing='0' border='0'><tr><td style='text-align: $spip_lang_left;'>";
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		echo afficher_upload($id_article, _T('info_telecharger_ordinateur'), '', 'document', $type);
 		echo fin_cadre_relief();

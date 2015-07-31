@@ -325,7 +325,7 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	}
 	
 	echo "<div>&nbsp;</div>",
-		"\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>",
+		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>",
 		"\n<tr><td valign='top' width=50% rowspan=2>",
 		$les_enfants,
 		"</td>",
@@ -568,7 +568,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	  generer_url_ecrire('ajax_page', "fonction=aff_rubrique&id_rubrique=$id_rubrique$exclus", true) ."',
 				'selection_rubrique');}
 			else {findObj('selection_rubrique').style.display='none';}\"
-	><img src='". _DIR_IMG_PACK . "loupe.png' style='border: 0px; vertical-align: middle;'
+	><img src='". _DIR_IMG_PACK . "loupe.png' style='vertical-align: middle;'
 	/></a><img src='". _DIR_IMG_PACK . "searching.gif'
 		id='img_selection_rubrique' style='visibility: hidden;'>
 	</td><td>

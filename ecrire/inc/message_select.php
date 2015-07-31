@@ -97,7 +97,7 @@ function afficher_message_boucles($row, &$messages_vus, $afficher_auteurs)
 				break;
 	}
 				
-	$s .= http_img_pack("$puce", "", "width='14' height='7' border='0'");
+	$s .= http_img_pack("$puce", "", "width='14' height='7'");
 	$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
 	$vals[] = $s;
 

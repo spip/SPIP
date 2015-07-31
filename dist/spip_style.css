@@ -12,6 +12,10 @@ a.spip_in { }
 a.spip_out { }
 a.spip_glossaire { }
 
+img {
+	border: 0px;
+}
+
 .spip_code {
 	font-family: monospace;
 }
@@ -190,3 +194,4 @@ a.spip_barre:hover img {
 	padding: 3px;
 	background-color: #f8f8f4;
 }
+

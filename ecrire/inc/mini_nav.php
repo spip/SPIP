@@ -25,7 +25,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 	
 	
 	$ret = "<div id = '".$rac."_col_".$col."' class='arial1'>"; 
-	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_left: ".(($col*150)-30)."px; top: 2px; z-index: 2;' id = 'img_".$rac."_col_".($col+1)."'");
+	$ret .= http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_left: ".(($col*150)-30)."px; top: 2px; z-index: 2;' id = 'img_".$rac."_col_".($col+1)."'");
 
 	$ret .= "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: ".(($col-1)*150)."px;'>";
 
@@ -185,7 +185,7 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 	$ret .= "</td>";
 
 	$ret .= "<td>";
-	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden;' id='img_".$rac."_col_1'");
+	$ret .= http_img_pack("searching.gif", "*", "style='visibility: hidden;' id='img_".$rac."_col_1'");
 	$ret .= "</td>";
 
 	$ret .= "<td style='text-align: $spip_lang_right'>";
