@@ -64,10 +64,23 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 			$message = $f($message, $nom, $mode, $id_rubrique);
 		}
 	}
+
+	// #ENV*{message} est le message d'erreur
+	// #ENV*{commentaire} explique si on s'inscrit a l'espce public ou prive
+	// il disparait s'il y a un message d'erreur (pour faire moins verbeux)
+	$commentaire = '';
+	if (!$message) {
+		if ($mode=='redac') $commentaire = _T('pass_espace_prive_bla');
+		if ($mode=='forum') $commentaire = _T('pass_forum_bla');
+	}
+
 	return array("formulaire_inscription", $GLOBALS['delais'],
 			array('focus' => $focus,
 				'message' => $message,
 				'mode' => $mode,
+				'commentaire' => $commentaire,
+				'nom_inscription' => _request('nom_inscription'),
+				'mail_inscription' => _request('mail_inscription'),
 				'self' => str_replace('&amp;','&',(self()))));
 }
 
