@@ -319,6 +319,7 @@ ecrire/inc_statistiques_lang.php -text
 ecrire/inc_statistiques_referers.php -text
 ecrire/inc_statistiques_repartition.php -text
 ecrire/inc_synchro.php -text
+ecrire/inc_upgrade.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text

@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_ecrire('inc_admin.php3');
+
 function delete_all_dist()
 {
 $action = _T('titre_page_delete_all');

@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_ecrire('inc_admin.php3');
+
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz;
