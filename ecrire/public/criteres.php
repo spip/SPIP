@@ -126,7 +126,7 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 		  '"]) . ",' .
 		  $deux .
 		  '"' ;
-	} else calculer_critere_DEFAUT_dist($idb, $boucls, $crit);
+	} else calculer_critere_DEFAUT_dist($idb, $boucles, $crit);
 }
 
 // {pagination}
