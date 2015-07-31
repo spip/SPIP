@@ -1478,6 +1478,7 @@ function _sqlite_remplacements_definitions_table($query){
 		'/enum'.$enum.'/is' => 'VARCHAR',
 		'/binary/is' => '',
 		'/auto_increment/is' => '',
+		'/(timestamp .* )ON .*$/is' => '\\1',
 	);
 
 	return preg_replace(array_keys($remplace), $remplace, $query);
