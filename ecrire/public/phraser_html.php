@@ -251,8 +251,8 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		  if (!strlen($regs[2]))
 		    {
 		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
-		      $args = '';
-		      exit;
+		      $champ->apres = $champ->avant = $args = "";
+		      break;
 		      }   
 		}
 		$arg = $regs[2];
@@ -591,7 +591,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 		      
 		phraser_args($milieu,">","",$all_res,$result);
-		$params = substr($milieu,0,strpos($milieu,$result->apres));
+		$params = substr($milieu,0,@strpos($milieu,$result->apres));
 		$milieu = substr($result->apres,1);
 		$result->apres = "";
 
