@@ -247,7 +247,7 @@ if ($options == "avancees") {
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Travail collaboratif sur les articles</FONT></B></TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
-	echo "S'il est fréquent que plusieurs r&eacute;dacteurs travaillent sur le m&ecirc;me articles,
+	echo "S'il est fréquent que plusieurs r&eacute;dacteurs travaillent sur le m&ecirc;me article,
 		activer la fonctionnalit&eacute; suivante permettra de conserver l'heure de derni&egrave;re
 		ouverture d'un article afin d'en informer les autres r&eacute;dacteurs.
 		Par d&eacute;faut, cette option est d&eacute;sactiv&eacute;e afin d'&eacute;viter
