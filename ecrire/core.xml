@@ -243,11 +243,18 @@
 		<action>cvtmulti_formulaire_charger</action>
 		<inclure>inc/cvt_multietapes.php</inclure>
 	</pipeline>
+	<pipeline><nom>formulaire_charger</nom>
+		<action>cvtconf_formulaire_charger</action>
+		<inclure>inc/cvt_configurer.php</inclure>
+	</pipeline>
 	<pipeline><nom>formulaire_verifier</nom>
 		<action>cvtmulti_formulaire_verifier</action>
 		<inclure>inc/cvt_multietapes.php</inclure>
 	</pipeline>
-	<pipeline><nom>formulaire_traiter</nom><action></action></pipeline>
+	<pipeline><nom>formulaire_traiter</nom>
+		<action>cvtconf_formulaire_traiter</action>
+		<inclure>inc/cvt_configurer.php</inclure>
+	</pipeline>
 	<pipeline><nom>formulaire_admin</nom><action></action></pipeline>
 	<pipeline><nom>header_prive</nom>
 		<action>f_jQuery_prive</action>
