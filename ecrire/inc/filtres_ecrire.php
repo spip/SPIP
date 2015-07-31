@@ -437,7 +437,7 @@ function alertes_auteur($id_auteur) {
 		);
 
 	if ($alertes = array_filter($alertes))
-		return "<div class='wrap-messages'><div class='messages'>".
+		return "<div class='wrap-messages-alertes'><div class='messages-alertes'>".
 			join('<hr />', $alertes)
 			."</div></div>";
 }
