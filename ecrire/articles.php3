@@ -1121,8 +1121,8 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 
 
 ?>
-<SCRIPT LANGUAGE="JavaScript">
-<!-- Beginning of JavaScript -
+<script type='text/javascript'>
+<!--
 function change_bouton(selObj){
 
 	var selection=selObj.options[selObj.selectedIndex].value;
@@ -1143,9 +1143,8 @@ function change_bouton(selObj){
 		document.statut.src="img_pack/puce-poubelle.gif";
 	}
 }
-
-// - End of JavaScript - -->
-</SCRIPT>
+// -->
+</script>
 <?php
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {

@@ -219,14 +219,14 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire))
-		echo ' [<script language="JavaScript"><!--
+		echo ' [<script type="text/javascript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>'._T('login_sinscrire').'</a>]';
 
 	// bouton oubli de mot de passe
 	include_ecrire ("inc_mail.php3");
 	if (tester_mail()) {
-		echo ' [<script language="JavaScript"><!--
+		echo ' [<script type="text/javascript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>'._T('login_motpasseoublie').'</a>]';
 	}

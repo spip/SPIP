@@ -25,8 +25,9 @@ function tester_variable($nom_var, $val){
 		$GLOBALS[$nom_var] = $val;
 }
 
-tester_variable('debut_intertitre', "\n&nbsp;<h3 class=\"spip\">\n");   // sale mais historique
-tester_variable('fin_intertitre', "\n</h3><br>\n");
+tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
+tester_variable('fin_intertitre', "</h3>\n");
+tester_variable('ligne_horizontale', "\n<hr class=\"spip\">\n");
 tester_variable('ouvre_ref', '&nbsp;[');
 tester_variable('ferme_ref', ']');
 tester_variable('ouvre_note', '[');
@@ -531,7 +532,7 @@ function traiter_listes ($texte) {
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = 'oui') {
 	global $puce;
-	global $debut_intertitre, $fin_intertitre;
+	global $debut_intertitre, $fin_intertitre, $ligne_horizontale;
 	global $compt_note;
 	global $les_notes;
 	global $marqueur_notes;
@@ -680,18 +681,22 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	// autres raccourcis
 	if (!$flag_pcre) {
-		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
+		/* note : on pourrait se passer de cette branche, car ereg_remplace() fonctionne
+		   sans pcre ; toutefois les elements ci-dessous sont un peu optimises (str_replace
+		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
+		   permet de gagner un peu de temps chez les hergeurs nazes */
+		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "___SPIP_ligne_horizontale___", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
-		$letexte = ereg_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
-		$letexte = ereg_replace("\n_ +", "\n<br>",$letexte);
+		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
+		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
-		$letexte = str_replace("{{{", $debut_intertitre, $letexte);
-		$letexte = str_replace("}}}", $fin_intertitre, $letexte);
+		$letexte = str_replace("{{{", "___SPIP_debut_intertitre___", $letexte);
+		$letexte = str_replace("}}}", "___SPIP_fin_intertitre___", $letexte);
 		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
 		$letexte = str_replace("}}", "</b>", $letexte);
 		$letexte = str_replace("{", "<i class=\"spip\">", $letexte);
 		$letexte = str_replace("}", "</i>", $letexte);
-		$letexte = eregi_replace("(<br>)+(<p>|<br>)", "\n<p class=\"spip\">", $letexte);
+		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "\n<p class=\"spip\">", $letexte);
 		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
 		$letexte = str_replace("\n", " ", $letexte);
 	}
@@ -708,19 +713,19 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 8 */ 	"/\}\}/",
 			/* 9 */ 	"/\{/",
 			/* 10 */	"/\}/",
-			/* 11 */	"/(<br>){2,}/",
-			/* 12 */	"/<p>([\n]*)(<br>)+/",
+			/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
+			/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 			/* 13 */	"/<p>/",
 			/* 14 */	"/\n/"
 		);
 		$remplace1 = array(
-			/* 0 */ 	"\n<hr class=\"spip\">\n",
+			/* 0 */ 	"___SPIP_ligne_horizontale___",
 			/* 1 */ 	"$puce&nbsp;",
-			/* 2 */ 	"\n<br>$puce&nbsp;",
-			/* 3 */ 	"\n<br>",
+			/* 2 */ 	"\n<br />$puce&nbsp;",
+			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"\n<p>",
-			/* 5 */ 	"$debut_intertitre",
-			/* 6 */ 	"$fin_intertitre",
+			/* 5 */ 	"___SPIP_debut_intertitre___",
+			/* 6 */ 	"___SPIP_fin_intertitre___",
 			/* 7 */ 	"<b class=\"spip\">",
 			/* 8 */ 	"</b>",
 			/* 9 */ 	"<i class=\"spip\">",
@@ -733,39 +738,22 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
 
-	if (ereg('<p class="spip">',$letexte)){
-		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
-	}
+	// paragrapher
+	$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
+
+	// intertitres & hr compliants
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*___SPIP_debut_intertitre___', $debut_intertitre, $letexte);
+	$letexte = ereg_replace('___SPIP_fin_intertitre___[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*___SPIP_ligne_horizontale___[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
 
 	if ($mes_notes) {
-		$fin_notes = '';
-
-		// "paragrapher" les anciennes notes
-		if ($les_notes) {
-			if (!ereg('<p class="spip_note">', $les_notes)) {
-				$les_notes = '<p class="spip_note">' . $les_notes . '</p>';
-			}
-			$les_notes .= "\n".'<p class="spip_note">';
-			$fin_notes = '</p>';
-		}
-
-		// "paragrapher" les nouvelles notes
 		$mes_notes = traiter_raccourcis($mes_notes, $les_echap, 'non');
-		if (ereg('<p class="spip">', $mes_notes)) {
-			$mes_notes = ereg_replace('^<p class="spip">', '', $mes_notes);
-			$mes_notes = ereg_replace('</p>$', '', $mes_notes);
-			$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
-			$fin_notes = '</p>';
-		}
-
-		// nettoyer
+		$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
 		$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
-
-		// ajouter
-		$les_notes .= interdire_scripts($mes_notes) . $fin_notes;
+		$les_notes .= interdire_scripts($mes_notes);
 	}
 
 	return $letexte;

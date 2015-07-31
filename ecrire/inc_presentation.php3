@@ -912,7 +912,7 @@ function debut_html($titre = "") {
 
 	afficher_script_layer();
 ?>
-<script language="JavaScript"><!--
+<script type='text/javascript'><!--
 function changeclass(objet, myClass)
 { 
   objet.className = myClass;
@@ -1101,10 +1101,10 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	if (eregi("^javascript:",$lien)) {
 		$java_lien = substr($lien, 11, strlen($lien));
 		$onClick = "";
-		$a_href_icone = '<script language="JavaScript"><!--' . "\n"
+		$a_href_icone = '<script type="text/javascript"><!--' . "\n"
 			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
 			. "<noscript><a$accesskey_icone href='$lien_noscript' target='_blank'></noscript>\n";
-		$a_href = '<script language="JavaScript"><!--' . "\n"
+		$a_href = '<script type="text/javascript"><!--' . "\n"
 			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
 			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
 	}

@@ -78,7 +78,7 @@ function forum_abonnement($retour) {
 		include_local("inc-login.php3");
 
 		$message_login = _T('forum_vous_enregistrer').
-' <script language="JavaScript"><!--
+' <script type="text/javascript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>'._T('forum_vous_inscrire').'<br>';
 		login('', false, $message_login);
