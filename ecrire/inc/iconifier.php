@@ -53,23 +53,25 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 		}
 	}
 
-	$res = debut_cadre_relief("image-24.gif", true,'',$bouton)
-	. "<div class='verdana1' style='text-align: center;'>"
-	. $res
-	. "</div>"
-	. fin_cadre_relief(true);
+	if ($res) {
+		$res = debut_cadre_relief("image-24.gif", true,'',$bouton)
+		. "<div class='verdana1' style='text-align: center;'>"
+		. $res
+		. "</div>"
+		. fin_cadre_relief(true);
 
-  $js = "";
-  if(_request("exec")!="iconifier") {
-      $js .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
-  		$js .= <<<EOF
+		$js = "";
+		if(_request("exec")!="iconifier") {
+			$js .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";
+			$js .= <<<EOF
       <script type='text/javascript'>
       $("form.form_upload_icon").async_upload(async_upload_icon);
       </script>
 EOF;
-    }
+		}
+	}
 
-  	return ajax_action_greffe("iconifier-$id", $res).$js;
+	return ajax_action_greffe("iconifier-$id", $res).$js;
 
 }
 
