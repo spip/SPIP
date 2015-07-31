@@ -72,13 +72,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'email' => 'e-mail',
 	'email_2' => 'e-mail:',
+	'en_savoir_plus' => 'N’en saupre de mai', # RELIRE
 	'entree_adresse_annuaire' => 'Adreça de l’annuari',
 	'entree_adresse_email' => 'La voastra adreça e-mail',
+	'entree_adresse_email_2' => 'Adreça e-mail',
 	'entree_base_donnee_1' => 'Adreça de la basa de donadas',
 	'entree_base_donnee_2' => '(Soventi fès, aquela adreça correspoande à-n-aquela dau voastre sit, de còups que li a, correspoande à la mencion "localhost", d’autres còups, es laissada vuèia completament.)',
 	'entree_biographie' => 'Biografia brèva, en quauqui paraulas.',
 	'entree_chemin_acces' => '<b>Ficar</b> lo camin d’accès:',
 	'entree_cle_pgp' => 'La voastra clau PGP',
+	'entree_cle_pgp_2' => 'Clau PGP',
 	'entree_contenu_rubrique' => '(Contengut de la rubrica en quauqui paraulas.)',
 	'entree_identifiants_connexion' => 'Voastri identificants de connexion...',
 	'entree_informations_connexion_ldap' => 'Vorgatz intrar dins aqueu formulari li informacions de connexion au voastre annuari LDAD.
@@ -124,6 +127,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'ical_titre_mailing' => 'Mailing_list',
 	'ical_titre_rss' => 'Fichiers de sindicacion',
 	'icone_activer_cookie' => 'Activar lo cookie de correspondença',
+	'icone_activite' => 'Activitat',
 	'icone_admin_plugin' => 'Gestion dei plugins',
 	'icone_afficher_auteurs' => 'Faire aparèisser lu autors',
 	'icone_afficher_visiteurs' => 'Faire aparèisser lu visitaires',
@@ -335,7 +339,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_site_2' => 'sit : ',
 	'info_site_min' => 'sit',
 	'info_site_reference_2' => 'Sit referençat',
-	'info_site_web' => 'SIT WEB :', # MODIF
+	'info_site_web' => 'Sit Web :',
 	'info_sites' => ' sits',
 	'info_sites_lies_mot' => 'Lu sits referençats ligats à-n-aqueu mòt clau',
 	'info_sites_proxy' => 'Utilisar un proxy',
@@ -358,7 +362,7 @@ Aqueli informacions vos devon poder èstre provesidi per l’administrator dau s
 	'info_texte' => 'Tèxt',
 	'info_texte_explicatif' => 'Tèxt explicatiu',
 	'info_texte_long' => '(lo tèxt es lòng: apareisse doncas en tròç distints que si tornaràn empegar un còup validats.)',
-	'info_texte_message' => 'Tèxt dau voastre messatge:', # MODIF
+	'info_texte_message' => 'Tèxt dau voastre messatge',
 	'info_texte_message_02' => 'Tèxt dau messatge',
 	'info_titre' => 'Titre :',
 	'info_total' => 'totau : ',
@@ -437,12 +441,12 @@ una color indica lo sieu estat :',
 	'lien_trier_nombre_articles' => 'Triar per nombre d’articles',
 	'lien_trier_statut' => 'Triar per estatut',
 	'lien_voir_en_ligne' => 'VEIRE EN LINHA:',
-	'logo_article' => 'LÒGO DE L’ARTICLE', # MODIF
-	'logo_auteur' => 'LÒGO DE L’AUTOR', # MODIF
-	'logo_rubrique' => 'LÒGO DE LA RUBRICA', # MODIF
-	'logo_site' => 'LÒGO D’AQUEU SIT', # MODIF
-	'logo_standard_rubrique' => 'LÒGO ESTANDARD DEI RUBRICAS', # MODIF
-	'logo_survol' => 'LÒGO PER LO SUBREVÒL', # MODIF
+	'logo_article' => 'Lògo de l’article',
+	'logo_auteur' => 'Lògo de l’’autor',
+	'logo_rubrique' => 'Lògo de la rubrica',
+	'logo_site' => 'Lògo d’aqueu sit',
+	'logo_standard_rubrique' => 'Lògo estandard dei rubricas',
+	'logo_survol' => 'Lògo per lo subrevòl',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Chausida de la voastra basa',
@@ -466,10 +470,10 @@ una color indica lo sieu estat :',
 
 	// R
 	'repertoire_plugins' => 'Repertòri:',
-	'required' => '[Obligatòri]', # MODIF
+	'required' => '(Obligatòri)',
 
 	// S
-	'statut_admin_restreint' => '(admin limitat)', # MODIF
+	'statut_admin_restreint' => 'admin limitat',
 
 	// T
 	'taille_cache_image' => 'Lu imatges que SPIP a calculat automaticament (vinhetas dei documents, títols presentats en forma gràfica, foncions matematiqui en format TeX...) ocupon dins lo repertòri @dir@ un totau de @taille@.',
@@ -523,7 +527,7 @@ una color indica lo sieu estat :',
   à la sieu valor predefinida (minga de creacion
   de fichiers).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Aüra lo sistema vos va crear un accès personalisat au sit.',
-	'texte_informations_personnelles_2' => '(Nòta: se s’agisse d’una reïnstalacion, e se lo voastre accès fonciona encara, podètz', # MODIF
+	'texte_informations_personnelles_2' => '(Nòta: s’agisse d’una reïnstalacion, se lo voastre accès fonciona encara, podètz',
 	'texte_introductif_article' => '(Tèxt introductiu de l’article.)',
 	'texte_jeu_caractere' => 'Es conselhat d’emplegar, sus lo voastre site, l’alfabet universau (<tt>utf-8</tt>) : permete d’afichar de tèxtes dins toti li lengas sensa problema de compatibilitat emb lu navigators modernes.',
 	'texte_jeu_caractere_3' => 'Lo voastre site es actualament instalat dins lo juèc de caractèrs:',
@@ -611,8 +615,8 @@ s’avètz bravament modificat lo grafisme ò l’estructura dau sit.',
 	'titre_configuration' => 'Configuracion dau sit',
 	'titre_connexion_ldap' => 'Opcions : <b>La voastra connexion LDAP</b>',
 	'titre_groupe_mots' => 'GROP DE MÒTS :',
-	'titre_langue_article' => 'LENGA DE L’ARTICLE', # MODIF
-	'titre_langue_rubrique' => 'LENGA DE LA RUBRICA', # MODIF
+	'titre_langue_article' => 'Lenga de l’article',
+	'titre_langue_rubrique' => 'Lenga de la rubrica',
 	'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L’ARTICLE',
 	'titre_les_articles' => 'LU ARTICLES',
 	'titre_naviguer_dans_le_site' => 'Navigar dins lo sit...',
@@ -632,9 +636,9 @@ s’avètz bravament modificat lo grafisme ò l’estructura dau sit.',
 	'titre_suivi_petition' => 'Seguit dei peticions',
 	'tls_ldap' => 'Transport Layer Security :',
 	'trad_article_traduction' => 'Toti li versions d’aquel article :',
-	'trad_delier' => 'Ligar plus aquest article ai reviradas sieui', # MODIF
+	'trad_delier' => 'Ligar plus ai reviradas sieui', # RELIRE
 	'trad_lier' => 'Aquel article es una revirada de l’article número :',
-	'trad_new' => 'Escriure una novèla revirada d’aquel article', # MODIF
+	'trad_new' => 'Escriure una novèla revirada',
 
 	// U
 	'utf8_convert_erreur_orig' => 'Error: lo juèc de caractèrs @charset@ es pas suportat.',
