@@ -31,6 +31,11 @@ function generer_generer_url($type, $p)
 
 	if (!$_id) $_id = champ_sql('id_' . $type, $p);
 
+	return generer_generer_url_arg($type, $p, $_id);
+}
+	
+function generer_generer_url_arg($type, $p, $_id)
+{
 	$s = $p->id_boucle;
 
 	if ($s !== '' AND $s = $p->boucles[$s]->sql_serveur) {
@@ -58,12 +63,18 @@ function generer_generer_url($type, $p)
 // http://doc.spip.org/@balise_URL__dist
 function balise_URL__dist($p) {
 
-	if ($f = charger_fonction($p->nom_champ, 'balise', true))
+	$nom = $p->nom_champ;
+	if ($nom === 'URL_') {
+		erreur_squelette(_T('zbug_info_erreur_squelette'), $nom);
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
+	} elseif ($f = charger_fonction($nom, 'balise', true)) {
 		return $f($p);
-	else {
-		$code = champ_sql($p->nom_champ, $p);
+	}else {
+		$code = champ_sql($nom, $p);
 		if (strpos($code, '@$Pile[0]') !== false) {
-			$nom = strtolower(substr($p->nom_champ,4));
+			$nom = strtolower(substr($nom,4));
 			$code = generer_generer_url($nom, $p);
 			if ($code === NULL) return NULL;
 		}
