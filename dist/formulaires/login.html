@@ -58,7 +58,7 @@
 </div>
 [(#REM) javascript qui gere la securite du login en evitant de faire circuler le pass en clair]
 <script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}md5.js"></script>
-<script type='text/javascript'>
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 var alea_actuel='#ENV{_alea_actuel}';
 var alea_futur='#ENV{_alea_futur}';
 var login='#ENV{var_login,''}';
@@ -126,4 +126,4 @@ jQuery('form#formulaire_login').submit(function(){
 		// OU qu'il sera accepte par LDAP ou autre auth
 	}
 });
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>

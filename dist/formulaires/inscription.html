@@ -30,11 +30,11 @@ document.getElementById('(#ENV{focus})').focus();
 </div>
 [(#ENV{focus,''}|?{' '})
 <div style="text-align: #LANG_RIGHT;">
-<script type="text/javascript"><!--
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 document.write("<a style='color: #e86519' href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
-//--></script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 <noscript>
 	&#91;<a href='./'><:pass_retour_public:></a>&#93;
 </noscript>
