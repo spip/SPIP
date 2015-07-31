@@ -439,6 +439,11 @@ function tester_rubrique_vide($id_rubrique) {
 	if (sql_countsel('spip_documents_liens', "id_objet=".intval($id_rubrique)." AND objet='rubrique'"))
 		return false;
 
+	$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_rubrique),'data'=>array()));
+	foreach($compte as $objet => $n)
+		if ($n)
+			return false;
+
 	return true;
 }
 
