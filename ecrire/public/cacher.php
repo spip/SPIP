@@ -158,7 +158,11 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
-	OR substr($contexte['fond'],0,8)=='modeles/') {
+	OR (substr($contexte['fond'],0,8)=='modeles/') 
+// Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
+// et n'y ecrire que la compilation des squelettes (pas les pages produites)
+// car les references aux repertoires ne sont pas relatifs a l'espace public
+	OR !_DIR_RESTREINT) {
 		$use_cache = -1;
 		$lastmodified = 0;
 		$chemin_cache = "";

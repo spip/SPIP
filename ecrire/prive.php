@@ -10,37 +10,34 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-# ou est l'espace prive : on y est deja !
+  // Script pour appeler un squelette apres s'etre authentifie
+
 include_once 'inc_version.php';
 
 include_spip('inc/cookie');
 
-//
-// Determiner l'action demandee
-//
+$auth = charger_fonction('auth', 'inc');
+$auth = $auth();
 
-$exec = _request('exec');
-if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
+if ($auth) {
+	if ($auth===-1) exit();
+	include_spip('inc/headers');
+	if ($auth == '6forum') {
+		$auth = '../?' . $_SERVER['QUERY_STRING'];
+		preg_match(',^[^/]*//[^/]*(.*)/.*/$,',
+				   url_de_base(),
+				   $r);
+		spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
+	} else
+	  $auth = generer_url_public('login',
+			"url=" . 
+			rawurlencode(str_replace('/./', '/',
+				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
+						 . str_replace('&amp;', '&', self()))), true);
+	redirige_par_entete($auth);
+ }
 
-//
-// Authentification, redefinissable
-//
+// En somme, est prive' ce qui est publiquement nomme'...
 
-if (autoriser_sans_cookie($exec)) {
-	if (!isset($reinstall)) $reinstall = 'non';
-	$var_auth = true;
-} else {
-	$auth = charger_fonction('auth', 'inc');
-	$auth = $auth();
-	if ($auth!=="") {
-		if ($auth===-1) exit();
-	  include_spip('inc/headers');
-	  redirige_par_entete($auth);
-	}
-}
-
-
-# au travail...
 include_once 'public.php';
-
 ?>

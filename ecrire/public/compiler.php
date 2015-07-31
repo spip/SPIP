@@ -18,7 +18,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // reperer un code ne calculant rien, meme avec commentaire
-define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
+define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
@@ -69,36 +69,35 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 //
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
-	$fichier = $struct->texte;
 
-	# raccourci <INCLURE{fond=xxx}> sans fichier .php
-	if (!strlen($fichier))
-		$path = _DIR_RESTREINT.'public.php';
-
-	# sinon chercher le fichier, eventuellement en changeant.php3 => .php
+	# Si pas raccourci <INCLURE{fond=xxx}> 
+	# chercher le fichier, eventuellement en changeant.php3 => .php
 	# et en gardant la compatibilite <INCLURE(page.php3)>
-	else if (!($path = find_in_path($fichier))
-	AND !(
-		preg_match(',^(.*[.]php)3$,', $fichier, $r)
-		AND (
-			($path = find_in_path($r[1]))
-			OR ($path = ($r[1] == 'page.php') ? _DIR_RESTREINT.'public.php':'')
-		)
-	)) {
-		spip_log("ERREUR: <INCLURE($fichier)> impossible");
-		erreur_squelette(_T('zbug_info_erreur_squelette'),
+	if ($fichier = $struct->texte) {
+		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
+			$fichier = $r[1];
+		}
+		if ($fichier == 'page.php') {
+			$fichier = '';
+		} else {
+			$path = find_in_path($fichier);
+			if (!$path) {
+			spip_log("ERREUR: <INCLURE($fichier)> impossible");
+			erreur_squelette(_T('zbug_info_erreur_squelette'),
 				 "&lt;INCLURE($fichier)&gt; - "
 				 ._T('fichier_introuvable', array('fichier' => $fichier)));
-		return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
+			return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
+			}
+		}
 	}
-
-	$l = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
-		join(",\n\t",$l) .
+		join(",\n\t", argumenter_inclure($struct, $descr, $boucles, $id_boucle)) .
 		");" .
-		"\n\tinclude(\\'$path\\');" .
+		"\n\tinclude(" .
+		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
+		");" .
 		"\n?'." . "'>'";
  }
 
@@ -152,7 +151,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$return = $boucle->return;
 	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
-	$constant = ereg(CODE_MONOTONE,$return);
+	$constant = preg_match(CODE_MONOTONE,$return);
 
 	// Cas {1/3} {1,4} {n-2,1}...
 
@@ -185,7 +184,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 
 	if (count($boucle->separateur))
-	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
+	  $code_sep = ("'" . str_replace("'","\'",join('',$boucle->separateur)) . "'");
 
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
@@ -233,7 +232,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
-	if (ereg(CODE_MONOTONE,$corps, $r)) {
+	if (preg_match(CODE_MONOTONE,$corps, $r)) {
 		if (!$r[2]) {
 			if (!$boucle->numrows)
 				return 'return "";';
@@ -371,7 +370,7 @@ function calculer_parties($boucles, $id_boucle) {
 		$boucle->sql_serveur .
 		'");';
 
-	ereg("([+-/p])([+-/])?", $mode_partie, $regs);
+	preg_match(",([+-/p])([+-/])?,", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
 
 	// {1/3}
@@ -471,7 +470,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = "'".ereg_replace("([\\\\'])", "\\\\1", $p->texte)."'";
+			$code = "'".str_replace(array("\\","'"),array("\\\\","\\'"), $p->texte)."'";
 
 			$commentaire= strlen($p->texte) . " signes";
 			$avant='';
@@ -483,9 +482,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$code = "";
 			foreach($p->traductions as $k => $v) {
 			  $code .= ",'" .
-			    ereg_replace("([\\\\'])", "\\\\1", $k) .
+			    str_replace(array("\\","'"),array("\\\\","\\'"), $k) .
 			    "' => '" .
-			    ereg_replace("([\\\\'])", "\\\\1", $v) .
+			    str_replace(array("\\","'"),array("\\\\","\\'"), $v) .
 			    "'";
 			}
 			$code = "multi_trad(array(" .
@@ -630,7 +629,7 @@ function code_boucle(&$boucles, $id, $nom)
 	  }
 
 	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
-		ereg_replace("[\r\n]", " ", $pretty);
+		strtr($pretty,"\r\n", "  ");
 
 	return $pretty;
 }
@@ -751,7 +750,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		if (!function_exists($f)) $f = 'boucle_DEFAUT';
 		if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 		$boucles[$id]->return = 
-			"function BOUCLE" . ereg_replace("-","_",$id) . $nom .
+			"function BOUCLE" . strtr($id,"-","_") . $nom .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$f($id, $boucles) .
 			"\n}\n\n";

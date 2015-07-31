@@ -78,10 +78,17 @@ function acces_statut($id_auteur, $statut, $bio)
 	return $statut;
 }
 
+// Fonction d'authentification
+// retourne -1 si authentification impossible a cause du serveur SQL 
+// retourne une chaine vide si authentification reussie
+// retourne une chaine non vide expliquant l'echec sinon:
+//	"rien" ==> nouvel arrivant, envoyer le formulaire
+//	autre  ==> statut incompatible
+
 // http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
-	global $prefs, $connect_id_auteur, $connect_login, $connect_quand;
+	global $connect_id_auteur, $connect_login, $connect_quand;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -110,9 +117,9 @@ function inc_auth_dist() {
 		AND isset($_SERVER['PHP_AUTH_PW'])) {
 			include_spip('inc/actions');
 			if (verifier_php_auth()) {
-				$connect_login = $_SERVER['PHP_AUTH_USER'];
-				$auth_can_disconnect = true;
+				$connect_login = $GLOBALS['auteur_session']['login'];
 				$_SERVER['PHP_AUTH_PW'] = '';
+				$auth_can_disconnect = true;
 			}
 		} else if (isset($_SERVER['REMOTE_USER']))
 
@@ -126,9 +133,9 @@ function inc_auth_dist() {
 	  "id_auteur=$connect_id_auteur" :
 	  (!$connect_login ? '' : "login=" . _q($connect_login));
 
-	// pas authentifie par cookie ni rien: demander login / mdp
+	// pas authentifie par cookie ni http_auth:
 
-	if (!$where) return auth_arefaire();
+	if (!$where) return "inconnu";
 
 	// Trouver les autres infos dans la table auteurs.
 
@@ -136,35 +143,19 @@ function inc_auth_dist() {
 
 	if (!$row = spip_fetch_array($result)) {
 
-		return auth_areconnecter($connect_login);
+	  // il n'est PLUS connu. c'est SQL qui est desyncrho
+		auth_areconnecter($connect_login);
+		return -1;
 	}
 
-	// Indiquer la connexion. A la minute pres ca suffit.
-	if ((time() - $row['quand']) >= 60) {
-		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
-	}
-
-	$connect_id_auteur = $row['id_auteur'];
+	// connu. Mais avec quels droits ?
 	$connect_quand = $row['quand'];
+	$connect_id_auteur = $row['id_auteur'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
-	$r = auth_rubrique($connect_id_auteur, $connect_statut);
-
-	if (is_string($r)) {
-		if ($r != '1comite') return auth_arefaire($r);
-	} elseif (is_array($r))
-		$connect_id_rubrique = $r;
-	else $connect_toutes_rubriques = true;
-
-	$prefs = unserialize($row['prefs']);
-	$connect_login = $row['login'];
-
-	// Le tableau global auteur_session contient toutes les infos.
-	// Les plus utiles sont aussi dans les variables simples ci-dessus
-
-	$GLOBALS['auteur_session'] = $row;
+	$droits = auth_rubrique($connect_id_auteur, $connect_statut);
 
 	// rajouter les sessions meme en mode auth_http
-	// pour permettre les connexions multiples
+	// pour permettre les connexions multiples et identifier les visiteurs
 	if (!$_COOKIE['spip_session']) {
 		$session = charger_fonction('session', 'inc');
 		if ($spip_session = $session($row)) {
@@ -175,6 +166,24 @@ function inc_auth_dist() {
 		}
 	}
 
+	// Indiquer la connexion. A la minute pres ca suffit.
+	if ((time() - 	$connect_quand)  >= 60) {
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
+	}
+
+	// Le tableau global auteur_session contient toutes les infos.
+	// Les plus utiles sont aussi dans les variables simples ci-dessus
+
+	$GLOBALS['auteur_session'] = $row;
+
+	if (is_string($droits)) {
+	  // ordres mineurs: redac, visiteur ou indefini
+		if ($droits != '1comite') return $droits;
+	} elseif (is_array($droits))
+		$connect_id_rubrique = $droits;
+	else $connect_toutes_rubriques = true;
+
+	$connect_login = $row['login'];
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";
 }
@@ -195,18 +204,5 @@ function auth_areconnecter($auth_login)
 	} else {
 		echo minipres(_T('avis_erreur_connexion'), "<br /><br /><p>" . _T('texte_inc_auth_1', array('auth_login' => $auth_login)). " <a href='".  generer_url_action('logout', "logout=prive"). "'>". _T('texte_inc_auth_2'). "</a>"._T('texte_inc_auth_3'));
 	}
-	return -1;
-}
-
-// redemande login, avec nettoyage
-
-// http://doc.spip.org/@auth_arefaire
-function auth_arefaire($statut='')
-{
-	// hack grossier pour changer le message en cas d'echec d'un visiteur(6forum) sur ecrire/
-	$var_echec = $statut?'&var_echec_visiteur=true':'&var_echec_cookie=true';
-	$url = rawurlencode(str_replace('/./', '/',
-			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS) . str_replace('&amp;', '&', self()))); 
-	return generer_url_public('login', "url=$url" . (isset($_GET['bonjour']) ? $var_echec : ''),true);
 }
 ?>

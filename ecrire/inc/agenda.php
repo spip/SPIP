@@ -47,7 +47,7 @@ function calendrier_retire_args_ancre($script)
 {
 	$script = str_replace('&amp;', '&', $script);
   $script = str_replace('?bonjour=oui&?','?',$script);
-  if (ereg('^(.*)#([^=&]*)$',$script, $m)) {
+  if (preg_match(',^(.*)#([^=&]*)$,',$script, $m)) {
 	  $script = $m[1];
 	  $ancre = $m[2];
   } else { $ancre = ''; }
@@ -56,7 +56,7 @@ function calendrier_retire_args_ancre($script)
 		$script = preg_replace("/([?&])$arg=[^&]*&/",'\1', $script);
 		$script = preg_replace("/([?&])$arg=[^&]*$/",'\1', $script);
 	}
-  if (ereg('[?&]$', $script)) $script =   substr($script,0,-1);
+  if (in_array(substr($script,-1),array('&','?'))) $script =   substr($script,0,-1);
   return array(quote_amp($script), $ancre);
 }
 
@@ -701,7 +701,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 			$lieu = isset($evenement['LOCATION']) ?
 				$evenement['LOCATION'] : '';
-			$sum = ereg_replace(' +','&nbsp;', typo($evenement['SUMMARY']));
+			$sum = preg_replace('/ \+/','&nbsp;', typo($evenement['SUMMARY']));
 			if (!$sum) { $sum = $desc; $desc = '';}
 			if (!$sum) { $sum = $lieu; $lieu = '';}
 			if (!$sum) { $sum = $perso; $perso = '';}
@@ -866,7 +866,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
-	$sum = ereg_replace(' +','&nbsp;', typo($sum));
+	$sum = preg_replace('/ \+/','&nbsp;', typo($sum));
 	if (!$sum) $sum = $desc;
 	if ($lieu = $evenement['LOCATION'])
 	  $sum .= '<br />' . $lieu;
@@ -941,7 +941,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	$mois_today = $today["mon"];
 	$annee_today = $today["year"];
 
-	$id = 'nav-agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
+	$id = 'nav-agenda' .preg_replace('/[^\w\d]/', '', $ancre);
 
 	return 
 	  "\n<div class='navigation-calendrier calendrier-moztop8'" 
@@ -1281,6 +1281,57 @@ function calendrier_categories($table, $num, $objet)
   }
 }
 
+
+// icones standards, fonction de la direction de la langue
+
+global $bleu, $vert, $jaune, $spip_lang_rtl;
+$bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-icone'");
+$vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
+$jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "class='calendrier-icone'");
+
+// http://doc.spip.org/@http_calendrier_ics_message
+function http_calendrier_ics_message($annee, $mois, $jour, $large)
+{	
+  global $bleu, $vert,$jaune, $connect_login;
+  $b = _T("lien_nouvea_pense_bete");
+  $v = _T("lien_nouveau_message");
+  $j=  _T("lien_nouvelle_annonce");
+
+  if (!$connect_login) return '';
+  return 
+    http_href(generer_action_auteur("editer_message","pb/$annee-$mois-$jour"), 
+	      $bleu . ($large ? $b : ''), 
+	      $b,
+	      'color: blue;',
+	      'calendrier-arial10') .
+    "\n" .
+    http_href(generer_action_auteur("editer_message","normal/$annee-$mois-$jour"), 
+	      $vert . ($large ? $v : ''), 
+	      $v,
+	      'color: green;',
+	      'calendrier-arial10') .
+    (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
+     ("\n" .
+    http_href(generer_action_auteur("editer_message","affich/$annee-$mois-$jour"), 
+		$jaune . ($large ? $j : ''), 
+		$j,
+		'color: #ff9900;',
+		'calendrier-arial10')));
+}
+
+// http://doc.spip.org/@http_calendrier_aide_mess
+function http_calendrier_aide_mess()
+{
+  global $bleu, $vert, $jaune, $spip_lang_left, $connect_login;
+  if (!$connect_login) return '';
+  return
+   "\n<br /><br /><br />\n<table width='700' class='arial1 spip_xx-small'>\n<tr><th style='text-align: $spip_lang_left; font-weight: bold;'> " . _T('info_aide').
+    "</th></tr><tr><td>$bleu\n"._T('info_symbole_bleu')."\n" .
+    "</td></tr><tr><td>$vert\n"._T('info_symbole_vert')."\n" .
+    "</td></tr><tr><td>$jaune\n"._T('info_symbole_jaune')."\n" .
+    "</td></tr>\n</table>\n";
+ }
+
 //------- fonctions d'appel MySQL. 
 // au dela cette limite, pas de production HTML
 
@@ -1442,7 +1493,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 		$amj = date_anneemoisjour("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
 
 		while ($amj <= $ical_apres) {
-		if (!($amj == date_anneemoisjour($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
+		if (!($amj == date_anneemoisjour($date_fin) AND preg_match(",00:00:00,", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
 				'URL' => generer_url_ecrire("message","id_message=$id_message"),

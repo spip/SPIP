@@ -218,7 +218,7 @@ function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
 		('<'.'?php 
 include_spip(\'inc/lang\');
 lang_select("'.$lang.'");
-include_once("'
+include_once(_DIR_RESTREINT  . "'
 		. $file
 		. '");
 inclure_balise_dynamique(balise_'
@@ -252,8 +252,10 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 		$r = $args;
 	if (!is_array($r))
 		return $r;
-	else
+	else {
+		$file = substr($file, strlen(_DIR_RESTREINT));
 		return synthetiser_balise_dynamique($nom, $r, $file, $lang, $ligne);
+	}
 }
 
 
@@ -407,7 +409,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 	else {
 		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)) {
+		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
 		  if ($img = _DIR_RACINE.copie_locale($fichier)
 			AND @file_exists($img)) {
 				if (!$x AND !$y) {

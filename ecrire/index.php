@@ -72,8 +72,6 @@ include_spip('inc/cookie');
 
 $exec = _request('exec');
 
-if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
-
 //
 // Authentification, redefinissable
 //
@@ -87,7 +85,17 @@ if (autoriser_sans_cookie($exec)) {
 	if ($var_auth!=="") {
 		if ($var_auth===-1) exit();
 		include_spip('inc/headers');
-		redirige_par_entete($var_auth);
+		redirige_par_entete(generer_url_public('login',
+			"url=" . 
+			rawurlencode(str_replace('/./', '/',
+				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
+				. str_replace('&amp;', '&', self())))
+		// $var_auth indique si c'est le statut qui est insuffisant
+			. ((!isset($_GET['bonjour'])) ? ''
+			    : (($var_auth == '6forum') ?
+				 '&var_echec_visiteur=true'
+			       : '&var_echec_cookie=true')),
+						       true));
 	}
  }
 
@@ -95,9 +103,12 @@ if (autoriser_sans_cookie($exec)) {
 // Preferences de presentation
 //
 
-if (!isset($GLOBALS['prefs']))
+
+if (!isset($GLOBALS['auteur_session']['prefs']))
 	$GLOBALS['prefs'] = array('couleur' =>1, 'display'=>0, 
 			  'options'=> $var_auth ? 'avancees' : 'basiques');
+else $GLOBALS['prefs'] = unserialize($GLOBALS['auteur_session']['prefs']);
+
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
@@ -198,6 +209,9 @@ AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
 	set_request('var_url', $exec);
 	$exec = $GLOBALS['transformer_xml'];
  }
+
+// si nom pas plausible, prendre le script par defaut
+if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 // Trouver la fonction eventuellement surchagee
 
