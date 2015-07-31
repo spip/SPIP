@@ -316,7 +316,7 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 
 	echo debut_block_invisible('languesbreve');
 	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	echo menu_langues('changer_lang', $langue_breve, _T('info_multi_cet_breve').' ', $langue_parent);
+	echo menu_langues('changer_lang', $langue_breve, '', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();
 

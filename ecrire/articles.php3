@@ -1067,7 +1067,7 @@ if (spip_num_rows($result)) {
 
 		echo "<TD CLASS='arial1' align='right'>";
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-			echo "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur'>"._T('lien_retirer_auteur')."</A>";
+			echo "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur'>"._T('lien_retirer_auteur')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
 		}
 		else echo "&nbsp;";
 		echo "</TD>\n";
@@ -1196,11 +1196,11 @@ if ((lire_meta('multi_articles') == 'oui')
 		if ($langue_choisie_article == 'oui') $herit = false;
 		else $herit = true;
 
-		debut_cadre_enfonce();
-		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+		//debut_cadre_enfonce();
+		echo "<div style='padding: 5px; text-align: center;'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
-		echo "</font></center>\n";
-		fin_cadre_enfonce();
+		echo "</font></div>\n";
+		//fin_cadre_enfonce();
 
 		echo fin_block();
 	}
@@ -1315,23 +1315,37 @@ if ((lire_meta('multi_articles') == 'oui')
 			changer_typo($langue_article);
 
 			if ($ret) {
-				debut_cadre_enfonce("traductions-24.gif");
+				//debut_cadre_enfonce("traductions-24.gif");
+				echo "<div align='left' style='margin-top: 5px; padding: 0px; border: 1px dashed #999999; background-color: #f0f0f0;' $dir_lang>";
 				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
 				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'><b>"._T('trad_article_traduction')."</b></font></td></tr>";
 				echo $ret;
-				echo "<tr><td><img src='img_pack/rien.gif' height='3'></td></tr>";
 				echo "</table>";
 
+				if ($flag_editable) {
+					echo debut_block_invisible('ne_plus_lier');
+					echo "<div style='width: 100%; padding-top: 1px; padding-bottom: 3px; padding-right: 3px; text-align=right;'>";
+					//echo "<table width='100%'><tr width='100%'><td> &nbsp; </td><td align='right' width='180'>";
+					$lien = $GLOBALS['clean_link'];
+					$lien->delVar($nom_select);
+					$lien = $lien->getUrl();
+					echo "<a href='articles.php3?id_article=$id_article&supp_trad=oui' class='verdana1'>"._T('trad_delier')." <img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
+					//icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
+					//echo "</td></tr></table>";
+					echo "</div>";
+					echo fin_block();
+				}
+				echo "</div>";
 
 
-				fin_cadre_enfonce();
+				//fin_cadre_enfonce();
 			}
 		}
 
 		echo debut_block_invisible('lier_traductions');
 
 		echo "<table width='100%'><tr>";
-		echo "<td valign='top' width='40%' class='arial2'>";
+		echo "<td valign='top' class='arial2'>";
 		if ($flag_editable AND $options == "avancees") { // Formulaire pour lier a un article
 
 			$lien = $GLOBALS['clean_link'];
@@ -1340,25 +1354,25 @@ if ((lire_meta('multi_articles') == 'oui')
 
 			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
-			echo " <input type='text' class='fondl' name='lier_trad' size='5'>";
-			echo "<div align='right'><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
+			echo "<div align='right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
 			echo "</form>";
 
 		}
 		echo "  </td>";
-
-		echo "<td><img src='img_pack/rien.gif' width=10></td>";
-		echo "<td valign='top' width='40%'>";
+		echo "<td background='' width='10'> &nbsp; </td>";
+		echo "<td background='img_pack/tirets-separation.gif' width='2'><img src='img_pack/rien.gif' alt='' width=2 height=2></td>";
+		echo "<td background='' width='10'> &nbsp; </td>";
+		echo "<td valign='top' width='150'>";
 		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
 
-		if ($ret) {
+		/*if ($ret) {
 			if ($flag_editable) {
 				$lien = $GLOBALS['clean_link'];
 				$lien->delVar($nom_select);
 				$lien = $lien->getUrl();
 				icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
 			}
-		}
+		}*/
 
 		echo "</td>";
 
