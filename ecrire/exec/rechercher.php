@@ -18,8 +18,6 @@ include_spip('inc/texte');
 // http://doc.spip.org/@exec_rechercher_dist
 function exec_rechercher_dist()
 {
-	global $id, $exclus, $type, $rac;
-
 	$id = intval(_request('id'));
 	$exclus = intval(_request('exclus'));
 	$rac = htmlentities(_request('rac'));
