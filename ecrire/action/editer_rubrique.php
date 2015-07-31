@@ -50,82 +50,29 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
-	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
-	$champs_normaux = array('titre', 'texte', 'descriptif');
-
-	// ne pas accepter de titre vide
-	if (_request('titre', $c) === '')
-		$c = set_request('titre', _T('ecrire:info_sans_titre'), $c);
-
-	$champs = array();
-	foreach ($champs_normaux as $champ) {
-		$val = _request($champ, $c);
-		if ($val !== NULL)
-			$champs[$champ] = corriger_caracteres($val);
+	// champs normaux
+	if ($c === false) {
+		$c = array();
+		foreach (array(
+			'titre', 'texte', 'descriptif', 'extra',
+			'id_parent', 'confirme_deplace'
+		) as $champ)
+			if (($a = _request($champ)) !== null)
+				$c[$champ] = $a;
 	}
 
-	// traitement de la rubrique parente
-	// interdiction de deplacer vers ou a partir d'une rubrique
-	// qu'on n'administre pas.
-	$statut_ancien = $parent = '';
-	if (NULL !== ($id_parent = _request('id_parent', $c))) {
-
-		$id_parent = intval($id_parent);
-		$filles = calcul_branche($id_rubrique);
-		if (strpos(",$id_parent',", "$,filles,") != false)
-			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
-		else {
-			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
-			$old_parent = $s['id_parent'];
-
-			if (!($id_parent != $old_parent
-			AND autoriser('publierdans', 'rubrique', $id_parent)
-			AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
-			AND autoriser('publierdans', 'rubrique', $old_parent)
-			      )) {
-				if ($s['statut'] != 'new') {
-					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
-				}
-			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
-				$champs['id_parent'] = $id_parent;
-				$statut_ancien = $s['statut'];
-			}
-		}
-	}
-
-
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
-		include_spip('inc/extra');
-		if ($extra = extra_update('rubriques', $id_rubrique, $c))
-			$champs['extra'] = $extra;
-	}
-
-	// Envoyer aux plugins
-	include_spip('inc/modifier'); # temporaire pour eviter un bug
-	$champs = pipeline('pre_edition',
+	include_spip('inc/modifier');
+	modifier_contenu('rubrique', $id_rubrique,
 		array(
-			'args' => array(
-				'table' => 'spip_rubriques',
-				'id_objet' => $id_rubrique
-			),
-			'data' => $champs
-		)
-	);
+			'nonvide' => array('titre' => _T('info_sans_titre'))
+		),
+		$c);
 
-	sql_updateq('spip_rubriques', $champs, "id_rubrique=$id_rubrique");
-
-	propager_les_secteurs(); 
-
-	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
-	if ($statut_ancien == 'publie')
-		calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
- 	// Creation ou deplacement d'une rubrique non publiee
-	// invalider le cache de leur menu
-	elseif (!$statut_ancien || $old_parent!=$id_parent)
-		effacer_meta("date_calcul_rubriques");
-
-	calculer_langues_rubriques();
+	// Deplacer la rubrique
+	if (isset($c['id_parent'])) {
+		$c['confirme_deplace'] = _request('confirme_deplace', $c);
+		instituer_rubrique($id_rubrique, $c);
+	}
 
 	// invalider les caches marques de cette rubrique
 	include_spip('inc/invalideur');
@@ -151,13 +98,62 @@ function revisions_rubriques($id_rubrique, $c=false) {
 // http://doc.spip.org/@editer_rubrique_breves
 function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 {
-	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique");
-	if (!$t) return true;
-	$t = (_request('confirme_deplace', $c) <> 'oui');
-	if ($t) return false;
-	$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_parent");
-	if ($id_secteur)
+	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique"))
+		return true;
+
+	if ($c['confirme_deplace'] != 'oui')
+		return false;
+
+	if ($id_secteur = sql_getfetsel("id_secteur",
+	"spip_rubriques", "id_rubrique=$id_parent"))
 		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
+
 	return true;
 }
 
+
+function instituer_rubrique($id_rubrique, $c) {
+	// traitement de la rubrique parente
+	// interdiction de deplacer vers ou a partir d'une rubrique
+	// qu'on n'administre pas.
+
+	$statut_ancien = $parent = '';
+	if (NULL !== ($id_parent = $c['id_parent'])) {
+		$id_parent = intval($id_parent);
+		$filles = calcul_branche($id_rubrique);
+		if (strpos(",$id_parent,", ",$filles,") !== false)
+			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
+		else {
+			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
+			$old_parent = $s['id_parent'];
+
+			if (!($id_parent != $old_parent
+			AND autoriser('publierdans', 'rubrique', $id_parent)
+			AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
+			AND autoriser('publierdans', 'rubrique', $old_parent)
+			      )) {
+				if ($s['statut'] != 'new') {
+					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
+				}
+			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
+				$statut_ancien = $s['statut'];
+				sql_updateq('spip_rubriques', array('id_parent' => $id_parent), "id_rubrique=$id_rubrique");
+
+
+				propager_les_secteurs();
+
+				// Deplacement d'une rubrique publiee ==> chgt general de leur statut
+				if ($statut_ancien == 'publie')
+					calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
+				// Creation ou deplacement d'une rubrique non publiee
+				// invalider le cache de leur menu
+				elseif (!$statut_ancien || $old_parent!=$id_parent)
+					effacer_meta("date_calcul_rubriques");
+
+				calculer_langues_rubriques();
+
+				return true;
+			}
+		}
+	}
+}

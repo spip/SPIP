@@ -98,7 +98,7 @@ function extra_saisie($extra, $type, $ensemble='') {
 
 // http://doc.spip.org/@extra_form
 function extra_form($extra, $type, $ensemble='') {
-	$extra = unserialize($extra);
+	$extra = @unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
 	if (!$champs = $GLOBALS['champs_extra'][$type])
@@ -107,7 +107,7 @@ function extra_form($extra, $type, $ensemble='') {
 	// prendre en compte, eventuellement, les champs presents dans la base
 	// mais oublies dans mes_options.
 	if (is_array($extra))
-		while (list($key,) = each($extra))
+		foreach($extra as $key=>$ignore)
 			if (!$champs[$key])
 				$champs[$key] = "masque||($key?)";
 
@@ -132,7 +132,6 @@ function extra_form($extra, $type, $ensemble='') {
 
 	// maintenant, on affiche les formulaires pour les champs renseignes dans $extra
 	// et pour les champs proposes
-	$affiche = "<input type='hidden' name='extra' value='1' />\n";
 	reset($champs_proposes);
 	while (list(, $champ) = each($champs_proposes)) {
 		$desc = $champs[$champ];
@@ -244,6 +243,7 @@ function extra_form($extra, $type, $ensemble='') {
 				break;
 		}
 
+		$affiche .= "<input type='hidden' name='extra' value='1' />\n";
 		$affiche .= "<br />\n";
 	}
 

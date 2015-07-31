@@ -312,6 +312,20 @@ function legender_auteur_voir($auteur) {
 		$res .= propre("PGP: <cadre>".$auteur['pgp']."</cadre>");
 	}
 
+	// Ajouter le controles md5
+	if ($id_auteur) {
+		include_spip('inc/editer');
+		// ici je prefere construire la liste des champs a controler md5
+		// eviter de balancer des choses privees et sensibles comme md5(passw)
+		$ctr = array();
+		foreach (array('nom','bio','pgp','email','nom_site','url_site')
+		as $k)
+			$ctr[$k] = $auteur[$k];
+		$res .= controles_md5($ctr);
+		// le redirect est necessaire pour le controle d'erreur
+		$res .= "<input type='hidden' name='redirect' value='".rawurlencode(_DIR_RESTREINT_ABS.self('&'))."' />\n";
+	}
+
 	if ($GLOBALS['champs_extra'] AND $auteur['extra']) {
 		include_spip('inc/extra');
 		$res .= extra_affichage($auteur['extra'], 'auteurs');

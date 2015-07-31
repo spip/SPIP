@@ -128,8 +128,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else {
 		$result=sql_select("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
 
-		while($row=sql_fetch($result)){
-			$parent_parent=$row['id_parent'];
+		while($t=sql_fetch($result)){
+			$parent_parent=$t['id_parent'];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
 		else $logo_parent = "rubrique-24.gif";
@@ -160,6 +160,12 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
 		$form .= extra_saisie($extra, 'breves', $id_rubrique);
+	}
+
+	// Ajouter le controles md5
+	if ($new != 'oui') {
+		include_spip('inc/editer');
+		$form .= controles_md5($row);
 	}
 
 	if (autoriser('publierdans','rubrique',$id_rubrique)) {

@@ -44,8 +44,8 @@ function exec_sites_edit_dist()
 		if (!autoriser('creersitedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
-			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $row_rub = sql_fetch($res)){
-				$id_rubrique = $row_rub['id_rubrique'];
+			while (!autoriser('creersitedans','rubrique',$id_rubrique ) && $t = sql_fetch($res)){
+				$id_rubrique = $t['id_rubrique'];
 			}
 		}
 	}
@@ -92,8 +92,8 @@ function exec_sites_edit_dist()
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	else {
-		$row = sql_fetsel('id_parent', 'spip_rubriques', "id_rubrique=$id_rubrique");
-		$parent_parent=$row['id_parent'];
+		$t = sql_fetsel('id_parent', 'spip_rubriques', "id_rubrique=$id_rubrique");
+		$parent_parent=$t['id_parent'];
 		if ($parent_parent == 0) $logo = "secteur-24.gif";
 		else $logo = "rubrique-24.gif";
 	}
@@ -172,6 +172,13 @@ function exec_sites_edit_dist()
 		include_spip('inc/extra');
 		$form .= extra_saisie($extra, 'sites', intval($id_rubrique));
 	}
+
+	// Ajouter le controles md5
+	if ($row) {
+		include_spip('inc/editer');
+		$form .= controles_md5($row);
+	}
+
 
 	if ($new == 'oui'
 	AND ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0)){

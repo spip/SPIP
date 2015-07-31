@@ -97,52 +97,53 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		signale_edition ($id, $GLOBALS['visiteur_session'], $type);
 	}
 
+	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
+	include_spip('inc/editer');
+	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur);
 
-	$champs = array_map('sql_quote', $champs);
+	if ($champs) {
 
-	// On veut savoir si notre modif va avoir un impact ; en mysql
-	// on pourrait employer mysql_affected_rows() mais pas en multi-base
-	// donc on fait autrement, avec verification prealable
-	// On utilise md5 pour eviter la casse (en SQL: 'SPIP'='spip')
-	$verifier = array();
-	foreach ($champs as $ch => $val)
-		$verifier[] = "($ch IS NULL OR MD5($ch)!=".sql_quote(md5($val)).")";
-	if (!sql_countsel($spip_table_objet, "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
-	null,null,null,$serveur))
-		return false;
+		// la modif peut avoir lieu
+		$champs = array_map('sql_quote', $champs);
 
-	// la modif peut avoir lieu
+		// faut-il ajouter date_modif ?
+		if ($options['date_modif']
+		AND !isset($champs[$options['date_modif']]))
+			$champs[$options['date_modif']] = 'NOW()';
 
-	// faut-il ajouter date_modif ?
-	if ($options['date_modif']
-	AND !isset($champs[$options['date_modif']]))
-		$champs[$options['date_modif']] = 'NOW()';
+		// allez on commit la modif
+		sql_update($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
-	// allez on commit la modif
-	sql_update($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
+		// Invalider les caches
+		if ($options['invalideur']) {
+			include_spip('inc/invalideur');
+			suivre_invalideur($options['invalideur']);
+		}
 
-	// Invalider les caches
-	if ($options['invalideur']) {
-		include_spip('inc/invalideur');
-		suivre_invalideur($options['invalideur']);
+		// marquer les documents vus dans le texte si il y a lieu
+		include_spip('base/auxiliaires');
+		if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
+			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet);
+
+		// Notifications, gestion des revisions...
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'table' => $spip_table_objet,
+					'id_objet' => $id,
+					'champs' => $options['champs']
+				),
+				'data' => $champs
+			)
+		);
 	}
 
-	// marquer les documents vus dans le texte si il y a lieu
-	include_spip('base/auxiliaires');
-	if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
-		marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet);
-
-	// Notifications, gestion des revisions...
-	pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => $spip_table_objet,
-				'id_objet' => $id,
-				'champs' => $options['champs']
-			),
-			'data' => $champs
-		)
-	);
+	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
+	if ($conflits) {
+		$redirect = parametre_url(rawurldecode(_request('redirect')), $id_table_objet, $id);
+		signaler_conflits_edition($conflits, $redirect);
+		exit;
+	}
 
 	return true;
 }

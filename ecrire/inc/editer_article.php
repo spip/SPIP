@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-include_spip('inc/extra');
+include_spip('inc/editer');
 
 // http://doc.spip.org/@inc_editer_article_dist
 function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden='')
@@ -55,6 +55,12 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	$contexte['browser_caret']=$GLOBALS['browser_caret'];
 	include_spip('public/assembler');
 	$form .= recuperer_fond("prive/editer/article", $contexte);
+
+	// Ajouter le controles md5
+	if (intval($id_article)) {
+		include_spip('inc/editer');
+		$form .= controles_md5($row);
+	}
 
 	$form .= $hidden
 	. ("<div style='text-align: right'><input class='fondo' type='submit' value='"

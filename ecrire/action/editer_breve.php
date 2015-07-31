@@ -78,23 +78,34 @@ function insert_breve($id_rubrique) {
 // $c est un contenu (par defaut on prend le contenu via _request())
 // http://doc.spip.org/@revisions_breves
 function revisions_breves ($id_breve, $c=false) {
-	include_spip('inc/filtres');
-	include_spip('inc/rubriques');
-	include_spip('inc/autoriser');
 
-	// Ces champs seront pris nom pour nom (_POST[x] => spip_breves.x)
-	$champs_normaux = array('titre', 'texte', 'lien_titre', 'lien_url');
-
-	// ne pas accepter de titre vide
-	if (_request('titre', $c) === '')
-		$c = set_request('titre', _T('ecrire:info_sans_titre'), $c);
-
-	$champs = array();
-	foreach ($champs_normaux as $champ) {
-		$val = _request($champ, $c);
-		if ($val !== NULL)
-			$champs[$champ] = corriger_caracteres($val);
+	// champs normaux
+	if ($c === false) {
+		$c = array();
+		foreach (array(
+			'titre', 'texte', 'lien_titre', 'lien_url',
+			'id_parent', 'statut'
+		) as $champ)
+			if (($a = _request($champ)) !== null)
+				$c[$champ] = $a;
 	}
+
+	// Si la breve est publiee, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_breves", "id_breve=$id_breve");
+	if ($t == 'publie') {
+		$invalideur = "id='id_breve/$id_breve'";
+		$indexation = true;
+	}
+
+	include_spip('inc/modifier');
+	modifier_contenu('breve', $id_breve,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation
+		),
+		$c);
+
 
 	// Changer le statut de la breve ?
 	$row = sql_fetsel("statut, id_rubrique,lang, langue_choisie", "spip_breves", "id_breve=$id_breve");
@@ -131,60 +142,22 @@ function revisions_breves ($id_breve, $c=false) {
 		}
 	}
 
-	// recuperer les extras
-	if ($GLOBALS['champs_extra']) {
-		include_spip('inc/extra');
-		if ($extra = extra_update('breves', $id_breve, $c))
-			$champs['extra'] = $extra;
-	}
-
-	// Envoyer aux plugins
-	include_spip('inc/modifier'); # temporaire pour eviter un bug
-	$champs = pipeline('pre_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_breves',
-				'id_objet' => $id_breve
-			),
-			'data' => $champs
-		)
-	);
-
 	if (!$champs) return;
 
 	sql_updateq('spip_breves', $champs, "id_breve=$id_breve");
-
-	// marquer le fait que la breve est travaillee par toto a telle date
-	// une alerte sera donnee aux autres redacteurs sur exec=breves_voir
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		signale_edition ($id_breve, $GLOBALS['visiteur_session'], 'breve');
-	}
 
 	//
 	// Post-modifications
 	//
 
 	// Invalider les caches
-	if ($statut == 'publie') {
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_breve/$id_breve'");
-	}
-
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_breve/$id_breve'");
 
 	// Au besoin, changer le statut des rubriques concernees 
+	include_spip('inc/rubriques');
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
-	// Notifications, revisions, reindexation...
-	pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_breves',
-				'id_objet' => $id_breve
-			),
-			'data' => $champs
-		)
-	);
 }
 
 // http://doc.spip.org/@revisions_breves_langue
