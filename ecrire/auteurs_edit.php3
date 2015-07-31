@@ -84,8 +84,8 @@ debut_boite_info();
 
 echo "<CENTER>";
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('info_gauche_numero_auteur')."&nbsp;:</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_numero_auteur')."&nbsp;:</B></FONT>";
+echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
 echo "</CENTER>";
 
 fin_boite_info();
@@ -121,7 +121,7 @@ else $logo = "redacteurs-24.gif";
 
 if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($champs_extra AND $extra)) {
 	debut_cadre_relief("$logo");
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
 	if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
 	if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
 	echo "<P>".propre($bio)."</P>";

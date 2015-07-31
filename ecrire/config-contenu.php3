@@ -53,7 +53,7 @@ debut_cadre_relief("forum-interne-24.gif");
 $forums_publics=lire_meta("forums_publics");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mode_fonctionnement_defaut_forum_public')."</FONT></B> ".aide ("confforums")."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mode_fonctionnement_defaut_forum_public')."</FONT></B> ".aide ("confforums")."</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 if ($forums_publics=="non") {
@@ -115,7 +115,7 @@ echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verd
 if ($options == 'avancees') {
 	echo "<ul><table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
 	echo "<tr><td width='100%' bgcolor='#FFCC66'>\n";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='#333333'><b>\n";
 	echo bouton_block_invisible('forum');
 	echo _T('info_options_avancees');
 	echo "</b></font></td></tr></table>";
@@ -160,7 +160,7 @@ if ($options == "avancees") {
 	$activer_imessage = lire_meta("activer_imessage");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 	echo _T('info_messagerie_interne')."</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('info_echange_message');
@@ -203,7 +203,7 @@ if ($options == "avancees") {
 	$accepter_inscriptions=lire_meta("accepter_inscriptions");
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 	echo _T('info_inscription_automatique')."</FONT></B> </TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -237,14 +237,14 @@ if (tester_mail()) {
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_envoi_email_automatique')."</FONT></B> ".aide ("confmails")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_envoi_email_automatique')."</FONT></B> ".aide ("confmails")."</TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
 	echo "</TD></TR>";
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
 
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
 	echo _T('info_envoi_forum')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -265,7 +265,7 @@ if (tester_mail()) {
 	$adresse_suivi=lire_meta("adresse_suivi");
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
 	echo _T('info_suivi_activite')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -301,7 +301,7 @@ if (tester_mail()) {
 	}
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
 	echo _T('info_annonce_nouveautes')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -332,7 +332,7 @@ if (tester_mail()) {
 	if($options == "avancees") {
 		$email_envoi = entites_html(lire_meta("email_envoi"));
 		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 		echo _T('info_email_envoi')."</FONT></B></TD></TR>";
 
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";

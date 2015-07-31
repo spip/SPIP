@@ -262,8 +262,8 @@ debut_gauche();
 
 debut_boite_info();
 	echo "<center>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('titre_site_numero')."</b></font>";
-	echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=6><b>$id_syndic</b></font>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1><b>"._T('titre_site_numero')."</b></font>";
+	echo "<br><font face='Verdana,Arial,Sans,sans-serif' size=6><b>$id_syndic</b></font>";
 	echo "</center>";
 fin_boite_info();
 
@@ -310,7 +310,7 @@ echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
-	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -369,7 +369,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_site_propose')." <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_site_propose')." <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
 	}
 }
 
@@ -400,7 +400,7 @@ if ($flag_administrable) {
 }
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><b>"._T('info_site_syndique')."</b></font>";
+	echo "<p><font size=3 face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_site_syndique')."</b></font>";
 
 	if ($erreur_syndic)
 		echo "<p><font color=red><b>$erreur_syndic</b></font>";

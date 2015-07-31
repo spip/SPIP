@@ -50,7 +50,7 @@ function rubrique($titre, $statut = "redac") {
 
 		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR>"
 			."<TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A> "
-			."<B><A HREF='#LIEN' NAME='$ancre'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B>"
+			."<B><A HREF='#LIEN' NAME='$ancre'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B>"
 			."</TD></TR>";
 		$rubrique[$ligne]=$larubrique;
 
@@ -86,12 +86,12 @@ function article($titre, $lien, $statut = "redac") {
 		if ($aide==$lien) {
 			$afficher[$larubrique]=1;
 			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2>"
-				."<FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> "
+				."<FONT FACE='Arial,Sans,sans-serif' SIZE=2>$titre</font> "
 				."<IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0 ALIGN='middle'></TD></TR>";
 		}
 		else {
 			$texte[$ligne]= "<TR><TD><A HREF='$url' TARGET='_top'><IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0></A></TD>"
-				."<TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='$url' TARGET='_top'>$titre</A></font>"
+				."<TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Sans,sans-serif' SIZE=2><A HREF='$url' TARGET='_top'>$titre</A></font>"
 				."</TD></TR>";
 		}
 	}

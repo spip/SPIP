@@ -188,7 +188,7 @@ debut_cadre_enfonce("langues-24.gif");
 
 
 
-//echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
+//echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
 
 
 fin_cadre_enfonce();

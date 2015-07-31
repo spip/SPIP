@@ -148,7 +148,7 @@ if ($new == 'oui'){
 		$link->addVar('analyser_site', 'oui');
 		echo $link->getForm();
 		
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>"._T('texte_referencement_automatique')."</font>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>"._T('texte_referencement_automatique')."</font>";
 		echo "<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\">";
 		echo "<input type=\"submit\" name=\"submit\" value=\""._T('bouton_ajouter')."\" class='fondo'>";
 		

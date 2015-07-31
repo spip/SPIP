@@ -172,13 +172,13 @@ while($row = spip_fetch_array($result_message)) {
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><TD>";
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='$la_couleur'><b>$le_type</b></font><br>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=5><b>$titre</b></font>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='$la_couleur'><b>$le_type</b></font><br>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=5><b>$titre</b></font>";
 	if ($statut == 'redac') {
-		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='red'><b>"._T('info_redaction_en_cours')."</b></font>";
+		echo "<br><font face='Verdana,Arial,Sans,sans-serif' size=2 color='red'><b>"._T('info_redaction_en_cours')."</b></font>";
 	}
 	else if ($rv != 'oui') {
-		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></font>";
+		echo "<br><font face='Verdana,Arial,Sans,sans-serif' size=2 color='#666666'><b>".nom_jour($date_heure).' '.affdate_heure($date_heure)."</b></font>";
 	}
 	echo "<p>";
 
@@ -222,7 +222,7 @@ while($row = spip_fetch_array($result_message)) {
 					$email_auteur = $row['email'];
 					$bio_auteur = $row['bio'];
 
-					echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 					echo "</FONT>\n";
 				}
 				echo "</UL>";
@@ -243,7 +243,7 @@ while($row = spip_fetch_array($result_message)) {
 						$email_auteur = $row['email'];
 						$bio_auteur = $row['bio'];
 			
-						echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+						echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 					
 						if ($email_auteur) echo " ($email_auteur)";
 						echo " | <A HREF=\"message.php3?id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur\">"._T('lien_ajout_destinataire')."</A>";
@@ -315,13 +315,13 @@ while($row = spip_fetch_array($result_message)) {
 					$couleur = "$couleur_claire";
 				}
 
-				echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+				echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 				echo "&nbsp;".bonhomme_statut($row)."&nbsp;";
 				if ($id_auteur == $expediteur) echo "<font class='arial0'>"._T('info_auteur_message')."</font>";
 				echo " $nom_auteur";
 				echo "</font></td>";
 				
-				echo "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+				echo "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Sans,sans-serif' size=1>";
 				if ($id_auteur != $connect_id_auteur) {
 					echo "[<a href='message.php3?id_message=$id_message&supp_dest=$id_auteur'>"._T('lien_retrait_particpant')."</a>]";
 				}
@@ -353,7 +353,7 @@ while($row = spip_fetch_array($result_message)) {
 				if (spip_num_rows($result_ajout_auteurs) > 0) {
 
 					echo "<FORM ACTION='message.php3' METHOD='post'>";
-					echo "<DIV align=left><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('bouton_ajouter_participant')." &nbsp; </B></FONT>\n";
+					echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B>"._T('bouton_ajouter_participant')." &nbsp; </B></FONT>\n";
 					echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
 					if (spip_num_rows($result_ajout_auteurs) > 50 AND $flag_mots_ressemblants) {
@@ -405,7 +405,7 @@ while($row = spip_fetch_array($result_message)) {
 			}
 			else {
 				echo debut_block_invisible("ajouter_auteur");
-				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>"._T('lien_ajouter_participant')."</a></font></div>";
+				echo "<br><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>"._T('lien_ajouter_participant')."</a></font></div>";
 				echo fin_block();
 			}
 		}
@@ -444,7 +444,7 @@ while($row = spip_fetch_array($result_message)) {
 
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 			if ($type == 'normal' AND $total_dest < 2){
-				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
+				echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
 			}
 			else {
 				echo "\n<p><center><table><tr><td>";

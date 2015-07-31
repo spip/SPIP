@@ -27,7 +27,7 @@ function enfant($collection){
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\">";
+		$les_enfants.= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
@@ -74,7 +74,7 @@ function sous_enfant($collection2){
 
 echo "<p align='left'>";
 debut_cadre_relief("fiche-perso-24.gif");
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 if ($bonjour == "oui" OR $spip_ecran == "large") echo bouton_block_visible("info_perso");
 else echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
@@ -115,7 +115,7 @@ $result = spip_query($query);
 
 if (spip_num_rows($result) > 0){
 	echo "<div style='border: 1px solid #999999; background-color: #ffffee; -moz-border-radius: 5px;'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
 	echo "<div style='background-color: yellow; padding: 3px;'>";
 	echo "<b>"._T('info_annonces_generales')."</b>";
 	echo "</div>";
@@ -261,7 +261,7 @@ if ($meta["debut_restauration"]) {
 	}
 
 	debut_boite_alerte();
-	echo "<font FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
+	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
 	fin_page("jimmac");
 	echo "</HTML><font color='white'>\n<!--";

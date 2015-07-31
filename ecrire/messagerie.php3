@@ -122,7 +122,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				}
 
 				if ($auteurs AND $type == 'normal') {
-					$s = "<FONT FACE='Arial,Helvetica,sans-serif' SIZE=1>";
+					$s = "<FONT FACE='Arial,Sans,sans-serif' SIZE=1>";
 					$s .= join(', ', $auteurs);
 					$s .= "</FONT>";
 				}

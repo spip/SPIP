@@ -166,8 +166,8 @@ debut_gauche();
 debut_boite_info();
 
 echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
+echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
 echo "</CENTER>";
 if ($statut == 'publie') {
 	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
@@ -271,7 +271,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
 	}
 }
 
@@ -315,7 +315,7 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 	echo "</TD></TR></TABLE>";
 
 	echo debut_block_invisible('languesbreve');
-	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "<center><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	echo menu_langues('changer_lang', $langue_breve, '', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();

@@ -97,8 +97,8 @@ debut_gauche();
 
 debut_boite_info();
 echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
+echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
 echo "</CENTER>";
 
 	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
@@ -151,7 +151,7 @@ gros_titre($titre_mot);
 
 if ($descriptif) {
 	echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
-	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
@@ -163,7 +163,7 @@ echo "</tr></table>\n";
 
 
 if (strlen($texte)>0){
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
 	echo "<P>".propre($texte);
 	echo "</FONT>";
 }

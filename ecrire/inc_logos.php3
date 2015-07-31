@@ -65,7 +65,7 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 
 	echo "<p>";
 	debut_cadre_relief("image-24.gif");
-	echo "<center><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
 	echo "<b>";
 	echo bouton_block_invisible(md5($texteon));
 	echo $texteon;

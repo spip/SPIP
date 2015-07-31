@@ -175,7 +175,7 @@ echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0>
 
 echo "</TABLE>";
 
-echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
+echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
 
 
 fin_cadre_relief();

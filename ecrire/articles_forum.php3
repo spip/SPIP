@@ -38,7 +38,7 @@ debut_gauche();
 
 debut_boite_info();
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 echo "<P align=left>"._T('info_gauche_suivi_forum');
 
 echo aide ("suiviforum");

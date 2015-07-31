@@ -29,7 +29,7 @@ function enfant($collection){
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<span dir='$lang_dir'><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\">";
+		$les_enfants.= "<span dir='$lang_dir'><FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
@@ -278,8 +278,8 @@ debut_gauche();
 if ($coll > 0) {
 	debut_boite_info();
 	echo "<CENTER>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('titre_numero_rubrique')."</B></FONT>";
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$coll</B></FONT>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_numero_rubrique')."</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$coll</B></FONT>";
 	echo "</CENTER>";
 
 	if ($coll > 0 AND $statut == 'publie') {
@@ -368,7 +368,7 @@ echo "</tr>\n";
 if (strlen($descriptif) > 1) {
 	echo "<tr><td>\n";
 	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
-	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	echo propre($descriptif."~");
 	echo "</font>";
 	echo "</div></td></tr>\n";
@@ -390,7 +390,7 @@ if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $coll >
 
 
 if (strlen($texte) > 1) {
-	echo "\n<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><div align='justify'>";
+	echo "\n<p><font size=3 face='Verdana,Arial,Sans,sans-serif'><div align='justify'>";
 	echo justifier(propre($texte));
 	echo "&nbsp;</font></div>";
 }
@@ -420,7 +420,7 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 	echo "</TD></TR></TABLE>";
 
 	echo debut_block_invisible('languesrubrique');
-	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "<center><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();

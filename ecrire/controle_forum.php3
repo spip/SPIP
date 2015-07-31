@@ -19,7 +19,7 @@ debut_gauche();
 
 debut_boite_info();
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 echo _T('info_gauche_suivi_forum_2');
 
 echo aide ("suiviforum");
@@ -173,7 +173,7 @@ function controle_forum($row) {
 	$controle .= "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR>";
 	$controle .= "<TD WIDTH=100% VALIGN='top'>";
 
-	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
+	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
 	$controle .= "<TR><TD>";
 	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
@@ -204,7 +204,7 @@ function controle_forum($row) {
 	$controle .= "<P align='justify'>".propre($forum_texte);
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$controle .= "<P align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
+		$controle .= "<P align='left'><FONT FACE='Verdana,Arial,Sans,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
 
 	if ($mots_cles_forums == "oui") {
 		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";

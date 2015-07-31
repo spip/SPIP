@@ -38,7 +38,7 @@ function enfant($leparent){
 		if (acces_restreint_rubrique($id_rubrique))
 			echo " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."' border='0' align='middle'>";
 
-		echo " <FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+		echo " <FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
 		echo "<B>$titre</B></FONT>\n";
 		echo aide ("breves");
 

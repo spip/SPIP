@@ -41,7 +41,7 @@ debut_cadre_relief();
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_sauvegarde')."</FONT></B></TD></TR>";
 
 echo "<TR><TD BACKGROUND=''>";
@@ -79,7 +79,7 @@ echo "</TABLE>";
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 echo _T('texte_restaurer_base')."</FONT></B></TD></TR>";
 
 echo "<TR><TD BACKGROUND=''>";
@@ -118,7 +118,7 @@ if ($options == "avancees") {
 	if (($row = spip_fetch_array($res)) AND ($row[0] >= '3.23.14')) {
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 		echo _T('texte_recuperer_base')."</FONT></B></TD></TR>";
 
 		echo "<TR><TD BACKGROUND=''>";

@@ -47,7 +47,7 @@ debut_cadre_relief();
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_vider_cache')."</FONT></B></TD></TR>";
 
 echo "<TR><TD BACKGROUND=''>";
@@ -78,7 +78,7 @@ echo "</TABLE>";
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 echo _T('texte_effacer_donnees_indexation')."</FONT></B></TD></TR>";
 
 echo "<TR><TD BACKGROUND=''>";

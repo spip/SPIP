@@ -350,8 +350,8 @@ if ($statut_article == "publie") {
 	}
 }
 
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
-echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
+echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
+echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
 
 if ($voir_en_ligne) {
 	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
@@ -399,7 +399,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	debut_cadre_relief("forum-interne-24.gif");
 	$visible = $change_accepter_forum || $change_petition;
 
-	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	echo "<font size='2' FACE='Verdana,Arial,Sans,sans-serif'><center><b>";
 	if ($visible)
 		echo bouton_block_visible("forumpetition");
 	else
@@ -412,7 +412,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		echo debut_block_invisible("forumpetition");
 
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>\n";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
 
 	// Forums et petitions
 
@@ -568,7 +568,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	debut_cadre_relief("site-24.gif");
 	$visible = ($changer_virtuel || $virtuel);
 
-	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	echo "<font size='2' FACE='Verdana,Arial,Sans,sans-serif'><center><b>";
 	if ($visible)
 		echo bouton_block_visible("redirection");
 	else
@@ -587,7 +587,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
 	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuelhttp$virtuel\" SIZE='40'><br>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 	echo "(<b>"._T('texte_article_virtuel')."&nbsp;:</b> "._T('texte_reference_mais_redirige').")";
 	echo "</font>";
 	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'></div>";
@@ -727,7 +727,7 @@ if ($soustitre) {
 
 if ($descriptif OR $url_site OR $nom_site) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
-	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 	echo propre($texte_case);
@@ -737,7 +737,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 
 
 if ($statut_article == 'prop') {
-	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
+	echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
 }
 
 
@@ -822,14 +822,14 @@ if ($flag_editable AND $options == 'avancees') {
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'><b>"._T('texte_date_creation_article')." : ";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article')." : ";
 		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
 
 	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
 		echo '<p><table cellpadding="5" cellspacing="0" border="0" width="100%">';
-		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="1" color="#000000" face="Verdana,Arial,Helvetica,sans-serif">';
+		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="1" color="#000000" face="Verdana,Arial,Sans,sans-serif">';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = ' : '.majuscules(affdate($date_redac));
 		echo bouton_block_invisible('dateredac');
 		echo "<b>"._T('texte_date_publication_anterieure').$date_affichee."</b></font></td></tr></table>";
@@ -933,7 +933,7 @@ if ($cherche_auteur) {
 			$email_auteur = $row['email'];
 			$bio_auteur = $row['bio'];
 
-			echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+			echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 			echo "</FONT>\n";
 		}
 		echo "</UL>";
@@ -954,7 +954,7 @@ if ($cherche_auteur) {
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
 
-				echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 
 				if ($email_auteur) echo " ($email_auteur)";
 				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</A>";
@@ -1098,7 +1098,7 @@ if ($flag_editable AND $options == 'avancees') {
 
 	if (spip_num_rows($result) > 0) {
 		echo "<FORM ACTION='articles.php3?id_article=$id_article#auteurs' METHOD='post'>";
-		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
+		echo "<DIV align=right><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
 		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
@@ -1201,7 +1201,7 @@ if ((lire_meta('multi_articles') == 'oui')
 		else $herit = true;
 
 		//debut_cadre_enfonce();
-		echo "<div style='padding: 5px; text-align: center;'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+		echo "<div style='padding: 5px; text-align: center;'><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
 		echo "</font></div>\n";
 		//fin_cadre_enfonce();
@@ -1477,7 +1477,7 @@ else {
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang><font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<div $dir_lang><font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 		echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
 		echo "</font></div>";
 		echo fin_cadre_enfonce();

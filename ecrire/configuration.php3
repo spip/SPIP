@@ -66,14 +66,14 @@ debut_cadre_relief("racine-24.gif");
 	$email_webmaster = entites_html(lire_meta("email_webmaster"));
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 	echo _T('info_nom_site')."</FONT></B> ".aide ("confnom")."</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='formo'>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 	echo _T('info_adresse_url')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -81,7 +81,7 @@ debut_cadre_relief("racine-24.gif");
 	echo "</TD></TR>";
 
 	if ($options == "avancees") {
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 		echo _T('info_email_webmestre')."</FONT></B></TD></TR>";
 
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
@@ -107,7 +107,7 @@ if ($options == 'avancees') {
 	debut_cadre_enfonce("article-24.gif");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_les_articles')."</FONT></B></TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_les_articles')."</FONT></B></TD></TR>";
 	echo "</table>";
 
 	//
@@ -125,7 +125,7 @@ if ($options == 'avancees') {
 	$articles_urlref = lire_meta("articles_urlref");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>"._T('info_contenu_articles')."</FONT></B>".aide ("confart")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('info_contenu_articles')."</FONT></B>".aide ("confart")."</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
 	echo _T('texte_contenu_articles');
@@ -210,7 +210,7 @@ if ($options == 'avancees') {
 	$post_dates = lire_meta("post_dates");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>"._T('titre_publication_articles_post_dates')."</FONT></B> ".aide ("confdates")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('titre_publication_articles_post_dates')."</FONT></B> ".aide ("confdates")."</TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_publication_articles_post_dates');
@@ -245,7 +245,7 @@ debut_cadre_relief("breve-24.gif");
 $activer_breves = lire_meta("activer_breves");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('titre_breves')."</FONT></B> ".aide ("confbreves")."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
@@ -284,7 +284,7 @@ if ($options == "avancees") {
 	$forums_publics = lire_meta("forums_publics");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mots_cles')."</FONT></B> </TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mots_cles')."</FONT></B> </TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_mots_cles')."<p>";
@@ -302,7 +302,7 @@ if ($options == "avancees") {
 	if ($articles_mots != "non") {
 
 		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_config_groupe_mots_cles')."</FONT></B></TD></TR>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_config_groupe_mots_cles')."</FONT></B></TD></TR>";
 
 		echo "<TR><TD class='verdana2'>";
 		echo _T('texte_config_groupe_mots_cles');
@@ -317,7 +317,7 @@ if ($options == "avancees") {
 
 		if ($forums_publics != "non"){
 			echo "<TR><TD>&nbsp;</TD></TR>";
-			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_mots_cles_dans_forum')."</FONT></B></TD></TR>";
+			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_mots_cles_dans_forum')."</FONT></B></TD></TR>";
 
 			echo "<TR><TD class='verdana2'>";
 			echo _T('texte_mots_cles_dans_forum');
@@ -357,7 +357,7 @@ $visiter_sites = lire_meta("visiter_sites");
 $moderation_sites = lire_meta("moderation_sites");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_referencement_sites')."</FONT></B>".aide ("reference")."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_referencement_sites')."</FONT></B>".aide ("reference")."</TD></TR>";
 
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
@@ -374,7 +374,7 @@ if ($activer_sites != 'non') {
 	//
 	if ($options == "avancees") {
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
 		echo "<hr><p>"._T('info_question_proposer_site');
 			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
 				echo "<OPTION".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."\n";
@@ -391,7 +391,7 @@ if ($activer_sites != 'non') {
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_syndication')."</FONT></B> ".aide ("rubsyn")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>"._T('titre_syndication')."</FONT></B> ".aide ("rubsyn")."</TD></TR>";
 
 	//
 	// Reglage de la syndication
@@ -456,7 +456,7 @@ $documents_rubrique = lire_meta("documents_rubrique");
 $documents_article = lire_meta("documents_article");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_documents_joints')."</FONT></B> </TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('titre_documents_joints')."</FONT></B> </TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_documents_joints');
