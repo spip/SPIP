@@ -18,7 +18,7 @@ function creer_base() {
 
 	spip_log("creation des tables d'objets");
 	$query = "CREATE TABLE spip_articles (
-		id_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_article bigint(21) NOT NULL auto_increment,
 		surtitre text NOT NULL,
 		titre text NOT NULL,
 		soustitre text NOT NULL,
@@ -47,7 +47,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs (
-		id_auteur bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_auteur bigint(21) NOT NULL auto_increment,
 		nom text NOT NULL,
 		bio text NOT NULL,
 		email tinytext NOT NULL,
@@ -76,7 +76,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_breves (
-		id_breve bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_breve bigint(21) NOT NULL auto_increment,
 		date_heure datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		titre text NOT NULL,
 		texte longblob NOT NULL,
@@ -91,7 +91,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_messages (
-		id_message bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_message bigint(21) NOT NULL auto_increment,
 		titre text NOT NULL,
 		texte longblob NOT NULL,
 		type varchar(6) NOT NULL,
@@ -105,7 +105,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots (
-		id_mot bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_mot bigint(21) NOT NULL auto_increment,
 		type VARCHAR(100) NOT NULL,
 		titre text NOT NULL,
 		descriptif text NOT NULL,
@@ -118,7 +118,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_groupes_mots (
-		id_groupe bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_groupe bigint(21) NOT NULL auto_increment,
 		titre text NOT NULL,
 		unseul varchar(3) NOT NULL,
 		obligatoire varchar(3) NOT NULL,
@@ -134,7 +134,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_rubriques (
-		id_rubrique bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_rubrique bigint(21) NOT NULL auto_increment,
 		id_parent bigint(21) DEFAULT '0' NOT NULL,
 		titre text NOT NULL,
 		descriptif text NOT NULL,
@@ -151,7 +151,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_documents (
-		id_document bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_document bigint(21) NOT NULL auto_increment,
 		id_vignette bigint(21) DEFAULT '0' NOT NULL,
 		id_type bigint(21) DEFAULT '0' NOT NULL,
 		titre text NOT NULL,
@@ -171,7 +171,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_types_documents (
-		id_type bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_type bigint(21) NOT NULL auto_increment,
 		titre text NOT NULL,
 		descriptif text NOT NULL,
 		extension varchar(10) NOT NULL,
@@ -185,7 +185,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_syndic (
-		id_syndic bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_syndic bigint(21) NOT NULL auto_increment,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		id_secteur bigint(21) DEFAULT '0' NOT NULL,
 		nom_site blob NOT NULL,
@@ -206,7 +206,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_syndic_articles (
-		id_syndic_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_syndic_article bigint(21) NOT NULL auto_increment,
 		id_syndic bigint(21) DEFAULT '0' NOT NULL,
 		titre text NOT NULL,
 		url VARCHAR(255) NOT NULL,
@@ -228,7 +228,7 @@ function creer_base() {
 
 	spip_log("creation des tables interactions");
 	$query = "CREATE TABLE spip_forum (
-		id_forum bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_forum bigint(21) NOT NULL auto_increment,
 		id_parent bigint(21) DEFAULT '0' NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -268,7 +268,7 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_signatures (
-		id_signature bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		id_signature bigint(21) NOT NULL auto_increment,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
 		date_time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		nom_email text NOT NULL,
