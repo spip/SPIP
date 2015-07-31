@@ -265,9 +265,9 @@ function calculer_requete_sql(&$boucle)
 		'"), # SELECT
 		' . calculer_from($boucle) .
 		', # FROM
-		array(' . join(",\n\t\t", array_map('calculer_where', $boucle->where)) .
-		'), # WHERE
-		' . calculer_dump_array($boucle->join)
+		' . calculer_dump_array($boucle->where) .
+		', # WHERE
+		' . calculer_dump_join($boucle->join)
 		. ', # WHERE pour jointure
 		' . (!$boucle->group ? "''" : 
 		     ('"' . join(", ", $boucle->group)) . '"') .
@@ -288,6 +288,21 @@ function calculer_requete_sql(&$boucle)
 
 function calculer_dump_array($a)
 {
+  if (!is_array($a)) return $a ;
+  $res = "";
+  if ($a[0] == "'?'") 
+    return ("(" . calculer_dump_array($a[1]) .
+	    " ? " . calculer_dump_array($a[2]) .
+	    " : " . calculer_dump_array($a[3]) .
+	    ")");
+  else {
+    foreach($a as $k => $v) $res .= ", " . calculer_dump_array($v);
+    return "\n\t\t\tarray(" . substr($res,2) . ')';
+  }
+}
+
+function calculer_dump_join($a)
+{
   $res = "";
   foreach($a as $k => $v) $res .= ", $k => array('$v[0]', '$v[1]')";
   return 'array(' . substr($res,2) . ')';
@@ -298,34 +313,6 @@ function calculer_from(&$boucle)
   $res = "";
   foreach($boucle->from as $k => $v) $res .= ",'$k' => '$v'";
   return 'array(' . substr($res,1) . ')';
-}
-
-// Cette fonction est destinee a migrer dans base/db_mysql
-// afin d'etre clonee pour des portages autre que Mysql.
-// Auparavant il faudra traiter a part les criteres conditionnels.
-
-function calculer_where($v)
-{
-	if (!is_array($v)) return ($v);
-	$op = array_shift($v);
-	if (!($n=count($v)))
-		return $op;
-	else {
-		$arg = calculer_where(array_shift($v));
-		if ($n==1) {
-			if (preg_match(",^'(.*)'$,",$arg,$r))
-			  return "'$op($r[1])'";
-			else
-			  return "'$op(' . " . $arg . ". ')'";
-		} else {
-			$arg2 = calculer_where(array_shift($v));
-			if ($n==2) {
-				$arg = (substr($arg,-1)!="'") ? ("$arg . '") : (substr($arg,0,-1));
-				$arg2 = ($arg2[0]=="'") ? (' '. substr($arg2,1)) : (is_numeric($arg2) ? "$arg2'" : "' . $arg2");
-				return "$arg $op $arg2";
-			} else return "($arg ? ($arg2) : $v[0])";
-		}
-	}
 }
 
 //

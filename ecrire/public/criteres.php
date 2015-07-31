@@ -26,7 +26,7 @@ function critere_racine_dist($idb, &$boucles, $crit) {
 	if ($not)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $crit->op);
 
-	$boucle->where[]= array('=', "'$boucle->id_table." . "id_parent'", 0);
+	$boucle->where[]= array("'='", "'$boucle->id_table." . "id_parent'", 0);
 }
 
 // {exclus}
@@ -41,7 +41,7 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
 
 	$arg = kwote(calculer_argument_precedent($idb, $id, $boucles));
-	$boucle->where[]= array('!=', "'$boucle->id_table." . "$id'", $arg);
+	$boucle->where[]= array("'!='", "'$boucle->id_table." . "$id'", $arg);
 }
 
 // {doublons} ou {unique}
@@ -52,7 +52,8 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	if (!$boucle->primary)
 		erreur_squelette(_L('doublons sur une table sans index'), $param);
 	$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	$boucle->where[]= "calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
+	// mettre un tableau pour que ce ne soit pas vu comme une constante
+	$boucle->where[]= array("calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
 	  '"0".$doublons[' . 
 	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
@@ -62,7 +63,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  ($nom == "''" ? '' : " . $nom") .
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
-	  "')";
+				"')");
 # la ligne suivante avait l'intention d'éviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
@@ -127,13 +128,13 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$prim = $boucle->primary;
 	$table = $boucle->id_table;
-	$arg = calculer_argument_precedent($idb, 'id_trad', $boucles);
-	$dprim = calculer_argument_precedent($idb, $prim, $boucles);
-	$boucle->where[]= array('AND',
-		array('>', "'$table.". "id_trad'", 0),
-		array('OR',
-			array('=', "'$table." . "id_trad'", kwote($arg)),
-			array('=', "'$table.$prim'", kwote($dprim))));
+	$arg = kwote(calculer_argument_precedent($idb, 'id_trad', $boucles));
+	$dprim = kwote(calculer_argument_precedent($idb, $prim, $boucles));
+	$boucle->where[]= array("'AND'",
+		array("'>'", "'$table.". "id_trad'", 0),
+		array("'OR'",
+			array("'='", "'$table." . "id_trad'", $arg),
+			array("'='", "'$table.$prim'", $dprim)));
 }
 
 // {origine_traduction}
@@ -143,8 +144,8 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$prim = $boucle->primary;
 	$table = $boucle->id_table;
 
-	$c= array('=', "'$table." . "id_trad'", "'$table.$prim'");
-	$boucle->where[]= ($crit->not ? array('NOT', $c) : $c);
+	$c= array("'='", "'$table." . "id_trad'", "'$table.$prim'");
+	$boucle->where[]= ($crit->not ? array("'NOT'", $c) : $c);
 }
 
 
@@ -156,13 +157,13 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	$mparent = $boucle->id_table . '.id_parent';
 
 	if ($boucle->type_requete == 'rubriques') {
-		$boucle->where[]= array('=', "'$mparent'", $arg);
+		$boucle->where[]= array("'='", "'$mparent'", $arg);
 
 	} else if ($boucle->type_requete == 'forums') {
-			$boucle->where[]= array('=', "'$mparent'", $arg);
-			$boucle->where[]= array('>', "'$mparent'", 0);
+			$boucle->where[]= array("'='", "'$mparent'", $arg);
+			$boucle->where[]= array("'>'", "'$mparent'", 0);
 			$boucle->plat =  true;
-	}
+	} else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
 }
 
 // {branche ?}
@@ -179,7 +180,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 	if ($crit->cond) $c = "($arg ? $c : 1)";
 			
 	if ($not)
-		$boucle->where[]= array("NOT", $c);
+		$boucle->where[]= array("'NOT'", $c);
 	else
 		$boucle->where[]= $c;
 }
@@ -370,25 +371,25 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 	$date = $boucle->id_table . ".$date";
 
 	if ($type == 'jour')
-		$boucle->where[]= array('=', "'DATE_FORMAT($date, \'%Y%m%d\')'",
+		$boucle->where[]= array("'='", "'DATE_FORMAT($date, \'%Y%m%d\')'",
 					("$annee . $mois . $jour"));
 	elseif ($type == 'mois')
-		$boucle->where[]= array('=', "'DATE_FORMAT($date, \'%Y%m\')'",
+		$boucle->where[]= array("'='", "'DATE_FORMAT($date, \'%Y%m\')'",
 					("$annee . $mois"));
 	elseif ($type == 'semaine')
-		$boucle->where[]= array('AND', 
-					array('>=',
+		$boucle->where[]= array("'AND'", 
+					array("'>='",
 					     "'DATE_FORMAT($date, \'%Y%m%d\')'", 
 					      ("date_debut_semaine($annee, $mois, $jour)")),
-					array('<=',
+					array("'<='",
 					      "'DATE_FORMAT($date, \'%Y%m%d\')'",
 					      ("date_fin_semaine($annee, $mois, $jour)")));
 	elseif (count($crit->param) > 2) 
-		$boucle->where[]= array('AND',
-					array('>=',
+		$boucle->where[]= array("'AND'",
+					array("'>='",
 					      "'DATE_FORMAT($date, \'%Y%m%d\')'",
 					      ("$annee . $mois . $jour")),
-					array('<=', "'DATE_FORMAT($date, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
+					array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
 	// sinon on prend tout
 }
 
@@ -492,22 +493,22 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	if (strtoupper($op) == 'IN') {
 	  
 		$kval = "'(\'' . " . join(" .\n\"','\" . ", $val) . " . '\')'";
-		$where = array("IN", "\"$ct\"", $kval);
+		$where = array("'IN'", "\"$ct\"", $kval);
 		if ($crit->not) {
-			$where = array("NOT", $where);
+			$where = array("'NOT'", $where);
 		} else {
 			$boucles[$idb]->default_order[] = "'cpt'";
 			$boucles[$idb]->select[]=  "FIND_IN_SET($ct, '\" ." .
 			  join(" .','.", $val) . " .\"') AS cpt";
 		}
 	} else {
-		$where = array($op, "'$ct'", $val[0]);
-		if ($crit->not) $where = array("NOT", $where);
+		$where = array("'$op'", "'$ct'", $val[0]);
+		if ($crit->not) $where = array("'NOT'", $where);
 	}
 	 // inserer la condition (cf {lang?}) et c'est fini
 
 	$boucles[$idb]->where[]= (!$crit->cond ? $where :
-	  array('?',
+	  array("'?'",
 		calculer_argument_precedent($idb, $col, $boucles),
 		$where,
 		"''"));
@@ -570,13 +571,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
-		if ($t) {
-			$tc = '/\b' . $t  . ".$col" . '\b/';
-			foreach ($boucle->where as $v) {
-				if (preg_match($tc,$v)) {$t = false; break;}
-			}
-			if ($t)	return $t;
-		}
+		if ($t) if (!trouver_champ('/\b' . $t  . ".$col" . '\b/', $boucle->where)) return $t;
 		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $crit->cond);
 		if ($cle) return "L$cle";
 	}
@@ -586,6 +581,18 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 			" $idb " .
 			_T('zbug_critere_inconnu', 
 			    array('critere' => $col)));
+}
+
+function trouver_champ($champ, $where)
+{
+  if (!is_array($where))
+ 	return preg_match($champ,$where);
+  else {
+   	 foreach ($where as $clause) {
+	   if (trouver_champ($champ, $clause)) return true;
+	 }
+	 return false;
+  }
 }
 
 // deduction automatique des jointures 
