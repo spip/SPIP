@@ -277,18 +277,18 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 				array_merge($options, array('jointures' => false))
 			)
 		) {
-			foreach ($joints as $jtable => $jj) {
-				$it = id_table_objet($table);
-				$ij =  id_table_objet($jtable);
+			foreach ($joints as $table_liee => $ids_trouves) {
+				$cle_depart = id_table_objet($table);
+				$cle_arrivee =  id_table_objet($table_liee);
 				$table_sql = preg_replace('/^spip_/', '', table_objet_sql($table));
-				$jtable_sql = preg_replace('/^spip_/', '', table_objet_sql($jtable));				
-				if ($jtable == 'document')
-					$s = sql_select("id_objet as $it, $ij", "spip_documents_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
+				$table_liee_sql = preg_replace('/^spip_/', '', table_objet_sql($table_liee));
+				if ($table_liee == 'document')
+					$s = sql_select("id_objet as $cle_depart, $cle_arrivee", "spip_documents_liens", array("objet='$table'",sql_in('id_'.${table_liee}, array_keys($ids_trouves))), '','','','',$serveur);
 				else
-					$s = sql_select("$it,$ij", "spip_${jtable_sql}_${table_sql}", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
+					$s = sql_select("$cle_depart,$cle_arrivee", "spip_${table_liee_sql}_${table_sql}", sql_in('id_'.${table_liee}, array_keys($ids_trouves)), '','','','',$serveur);
 				while ($t = sql_fetch($s)) {
-					$id = $t[$it];
-					$joint = $jj[$t[$ij]];
+					$id = $t[$cle_depart];
+					$joint = $ids_trouves[$t[$cle_arrivee]];
 					if (!isset($results[$table]))
 						$results[$table] = array();
 					if (!isset($results[$table][$id]))
@@ -297,10 +297,10 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 						$results[$table][$id]['score'] += $joint['score'];
 					if ($joint['champs'])
 					foreach($joint['champs'] as $c => $val)
-						$results[$table][$id]['champs'][$jtable.'.'.$c] = $val;
+						$results[$table][$id]['champs'][$table_liee.'.'.$c] = $val;
 					if ($joint['matches'])
 					foreach($joint['matches'] as $c => $val)
-						$results[$table][$id]['matches'][$jtable.'.'.$c] = $val;
+						$results[$table][$id]['matches'][$table_liee.'.'.$c] = $val;
 				}
 			}
 		}
