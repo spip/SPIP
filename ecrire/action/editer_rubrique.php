@@ -69,34 +69,31 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
 	$statut_ancien = $parent = '';
-	if (NULL !== ($id_parent = _request('id_parent', $c))
-	AND $id_parent != $id_rubrique // au fou
-	) {
+	if (NULL !== ($id_parent = _request('id_parent', $c))) {
+		include_spip('inc_rubrique');
 		$id_parent = intval($id_parent);
-		$s = sql_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$old_parent = $s['id_parent'];
+		$filles = calcul_branche($id_rubrique);
+		if (strpos(",$id_parent',", "$,filles,") != false)
+			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
+		else {
+			$s = sql_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$old_parent = $s['id_parent'];
 
-		if ($id_parent != $old_parent
-		AND autoriser('publierdans', 'rubrique', $id_parent)
-		AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
-		AND autoriser('publierdans', 'rubrique', $old_parent)
-		) {
-			$champs['id_parent'] = $id_parent;
-			$statut_ancien = $s['statut'];
-		} elseif ($s['statut'] != 'new') {
-			spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
+			if (!($id_parent != $old_parent
+			AND autoriser('publierdans', 'rubrique', $id_parent)
+			AND autoriser('creerrubriquedans', 'rubrique', $id_parent)
+			AND autoriser('publierdans', 'rubrique', $old_parent)
+			      )) {
+				if ($s['statut'] != 'new') {
+					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
+				}
+			} elseif (editer_rubrique_breves($id_rubrique, $id_parent)) {
+				$champs['id_parent'] = $id_parent;
+				$statut_ancien = $s['statut'];
+			}
 		}
 	}
 
-	// si c'est une rubrique-secteur contenant des breves, ne deplacer
-	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
-	// breves en question
-	if ($champs['id_parent']
-	AND _request('confirme_deplace', $c) == 'oui') {
-		$id_secteur = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-		if ($id_secteur= $id_secteur['id_secteur'])
-			spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
-	}
 
 	// recuperer les extras
 	if ($GLOBALS['champs_extra']) {
@@ -117,15 +114,9 @@ function revisions_rubriques($id_rubrique, $c=false) {
 		)
 	);
 
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	sql_updateq('spip_rubriques', $champs, "id_rubrique=$id_rubrique");
 
-	if (!count($update)) return;
-
-	spip_query("UPDATE spip_rubriques SET ".join(', ', $update)." WHERE id_rubrique=$id_rubrique");
-
-	propager_les_secteurs();
+	propager_les_secteurs(); 
 
 	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
 	if ($statut_ancien == 'publie')
@@ -150,4 +141,18 @@ function revisions_rubriques($id_rubrique, $c=false) {
 
 }
 
-?>
+// si c'est une rubrique-secteur contenant des breves, ne deplacer
+// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
+// breves en question
+
+function editer_rubrique_breves($id_rubrique, $id_parent)
+{
+	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',1);
+	if (!$t) return true;
+	$t = (_request('confirme_deplace', $c) <> 'oui');
+	if ($t) return false;
+	$id_secteur = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+	if ($id_secteur= $id_secteur['id_secteur'])
+		spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
+}
+
