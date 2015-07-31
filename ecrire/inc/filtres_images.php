@@ -342,6 +342,17 @@ function image_ecrire_tag($valeurs,$surcharge){
 		$class = $surcharge['class'];
 		unset($surcharge['class']);
 	}
+
+	// regarder la class pour gerer le 'format_png' en fonction du format de l'image
+	// (et le remettre sinon)
+	$is_png = preg_match(',[.]png($|\?),i',$src);
+	$p = strpos($class,'format_png');
+	if ($is_png && $p===FALSE)
+		$class .= " format_png";
+	if (!$is_png && $p!==FALSE)
+		$class = preg_replace(",\s*format_png,","",$class);
+
+
 	if(strlen($class))
 		$tag = inserer_attribut($tag,'class',$class);
 
