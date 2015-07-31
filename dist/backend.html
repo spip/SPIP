@@ -40,8 +40,8 @@
 ]<B_rubrique>- <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 &lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="category"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;
 </BOUCLE_rubrique><B_mots>
-- <BOUCLE_mots2(MOTS){id_article}{", "}>
-&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;</BOUCLE_mots2>
+- <BOUCLE_mots(MOTS){id_article}{", "}>
+&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;</BOUCLE_mots>
 
 		</description>
 
