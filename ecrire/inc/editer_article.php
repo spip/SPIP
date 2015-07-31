@@ -58,7 +58,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. _T('bouton_enregistrer')
 	. "' /></div>");
 
-	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post' name='formulaire'");
+	return generer_action_auteur("editer_article", $id_article, $retour, $form, " method='post'");
 }
 
 // http://doc.spip.org/@editer_article_texte
@@ -251,9 +251,8 @@ function editer_article_recolle($texte, $att_text)
 	while (strlen($texte)>29*1024) {
 		$nombre ++;
 		list($texte1,$texte) = coupe_trop_long($texte);
-
-		$textes_supplement .= "<br />" .
-			afficher_barre('document.formulaire.texte'.$nombre)  .
+		$id = "document.getElementById('texte$nombre')";
+		$textes_supplement .= "<br />" . afficher_barre($id) .
 			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
 		}
 	return array($texte,$textes_supplement);

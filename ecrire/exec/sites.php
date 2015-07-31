@@ -338,7 +338,7 @@ function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 	$msg = _T('titre_cadre_interieur_rubrique');
 	  
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
-	$form = generer_action_auteur("editer_site", $id_syndic, generer_url_ecrire('sites'), $form, " method='post' name='formulaire' class='submit_plongeur'");
+	$form = generer_action_auteur("editer_site", $id_syndic, generer_url_ecrire('sites'), $form, " method='post' class='submit_plongeur'");
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";

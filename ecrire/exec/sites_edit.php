@@ -205,7 +205,7 @@ function exec_sites_edit_dist()
 				      ($new == 'oui') ? $new : $id_syndic,
 				      generer_url_ecrire('sites'),
 				      $form,
-				      " method='post' name='formulaire'"
+				      " method='post'"
 				      );
 	
 	echo fin_cadre_formulaire(true);
