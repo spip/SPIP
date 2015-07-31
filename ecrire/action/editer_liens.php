@@ -58,12 +58,12 @@ function objet_associable($objet){
  * @return string
  */
 function objet_associer($objets_source, $objets_lies, $qualif = null){
-	objet_traiter_laisons('lien_insert', $objets_source, $objets_lies);
+	$modifs = objet_traiter_laisons('lien_insert', $objets_source, $objets_lies);
 
 	if ($qualif)
 		objet_qualifier($objets_source, $objets, $qualif);
 
-	return ''; // pas d'erreur
+	return $modifs; // pas d'erreur
 }
 
 
@@ -86,9 +86,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
  * @return string
  */
 function objet_dissocier($objets_source,$objets_lies){
-	objet_traiter_laisons('lien_delete',$objets_source,$objets_lies);
-
-	return ''; // pas d'erreur
+	return objet_traiter_laisons('lien_delete',$objets_source,$objets_lies);
 }
 
 
@@ -111,7 +109,7 @@ function objet_dissocier($objets_source,$objets_lies){
  * @param array $qualif
  */
 function objet_qualifier($objets_source,$objets_lies,$qualif){
-	objet_traiter_laisons('lien_set',$objets_source,$objets_lies,$qualif);
+	return objet_traiter_laisons('lien_set',$objets_source,$objets_lies,$qualif);
 }
 
 
@@ -149,20 +147,27 @@ function objet_qualifier($objets_source,$objets_lies,$qualif){
 function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = null){
 	// accepter une syntaxe minimale pour supprimer tous les liens
 	if ($objets_lies=='*') $objets_lies = array('*'=>'*');
-	
+	$modifs = 0; // compter le nombre de modifications
+	$echec = null;
 	foreach($objets_source as $objet=>$ids){
 		if ($a = objet_associable($objet)) {
 			list($primary,$l) = $a;
 			if (!is_array($ids)) $ids = array($ids);
 			foreach($ids as $id) {
 				$res = $operation($objet,$primary,$l,$id,$objets_lies,$set);
-				if ($res===false)
+				if ($res===false) {
 					spip_log("objet_traiter_laisons [Echec] : $operation sur $objet/$primary/$l/$id");
+					$echec = true;
+				}
+				else
+					$modifs+=$res;
 			}
 		}
+		else
+			$echec = true;
 	}
 
-	return ''; // pas d'erreur
+	return ($echec?false:$modifs); // pas d'erreur
 }
 
 
@@ -185,21 +190,26 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
  */
 function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	$ins = 0;
+	$echec = null;
 	foreach($objets as $objet => $id_objets){
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
+			$objet = objet_type($objet); # securite
 			if ($id_objet=intval($id_objet)
 				AND !sql_getfetsel(
 								$primary,
 								$table_lien,
 								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), $primary.'='.intval($id))))
 			{
-					if (sql_insertq($table_lien, array('id_objet' => $id_objet, 'objet'=>$objet, $primary=>$id))!==false);
+					$e = sql_insertq($table_lien, array('id_objet' => $id_objet, 'objet'=>$objet, $primary=>$id));
+					if ($e!==false)
 						$ins++;
+					else
+						$echec = true;
 			}
 		}
 	}
-	return $ins;
+	return ($echec?false:$ins);
 }
 
 function lien_where($primary, $id_source, $objet, $id_objet){
@@ -237,17 +247,24 @@ function lien_where($primary, $id_source, $objet, $id_objet){
  */
 function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 	$retire = array();
+	$dels = 0;
+	$echec = false;
 	foreach($objets as $objet => $id_objets){
+		$objet = objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
-			sql_delete($table_lien, $where);
+			$e = sql_delete($table_lien, $where);
+			if ($e!==false)
+				$dels+=$e;
+			else
+				$echec = true;
 			$retire[] = array('source'=>array($objet_source=>$id),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
 		}
 	}
 	pipeline('trig_supprimer_objets_lies',$retire);
 
-	return ''; // pas d'erreur
+	return ($echec?false:$dels);
 }
 
 /**
@@ -270,14 +287,20 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
  * @param array $qualif
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
+	$echec = null;
+	if (!$qualif)
+		return false;
 	foreach($objets as $objet => $id_objets){
+		$objet = objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
-			$where = lien_where($objet_source, $id, $objet, $id_objet);
-			if ($c)
-				sql_updateq($table_lien,$qualif,$where);
+			$where = lien_where($primary, $id, $objet, $id_objet);
+			$e = sql_updateq($table_lien,$qualif,$where);
+			if ($e===false)
+				$echec = true;
 		}
 	}
+	return ($echec?false:true);
 }
 
 
