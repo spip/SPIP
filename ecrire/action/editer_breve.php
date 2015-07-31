@@ -98,10 +98,12 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Changer le statut de la breve ?
-	$s = spip_query("SELECT statut, id_rubrique FROM spip_breves WHERE id_breve=$id_breve");
-	$row = sql_fetch($s);
+	$row = sql_fetch(spip_query("SELECT statut, id_rubrique,lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
+
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $statut = $row['statut'];
+	$langue_old = $row['lang'];
+	$langue_choisie_old = $row['langue_choisie'];
 
 	if (_request('statut', $c)
 	AND _request('statut', $c) != $statut
@@ -114,9 +116,13 @@ function revisions_breves ($id_breve, $c=false) {
 	// de la rubrique actuelle
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND (sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 AND id_rubrique=$id_parent")))) {
+	AND ($r=sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_parent=0 AND id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
-
+		// - changer sa langue (si heritee)
+		if ($langue_choisie_old != "oui") {
+			if ($r['lang'] != $langue_old)
+				$champs['lang'] = $r['lang'];
+		}
 		// si la breve est publiee
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser la breve en statut 'prop'.
@@ -145,37 +151,15 @@ function revisions_breves ($id_breve, $c=false) {
 		)
 	);
 
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	if (!$champs) return;
 
-	if (!count($update)) return;
-
-	spip_query("UPDATE spip_breves SET ".join(', ',$update)." WHERE id_breve=$id_breve");
+	sql_updateq('spip_breves', $champs, "id_breve=$id_breve");
 
 	// marquer le fait que la breve est travaillee par toto a telle date
 	// une alerte sera donnee aux autres redacteurs sur exec=breves_voir
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		signale_edition ($id_breve, $GLOBALS['auteur_session'], 'breve');
-	}
-
-	// Si on deplace la breve
-	// - propager les secteurs
-	// - changer sa langue (si heritee)
-	if (isset($champs['id_rubrique'])) {
-		propager_les_secteurs();
-
-		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-
-		if ($langue_choisie_old != "oui") {
-			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_breves SET lang = '$langue_new' WHERE id_breve = $id_breve");
-		}
 	}
 
 	//
