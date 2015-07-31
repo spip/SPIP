@@ -111,7 +111,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle->mode_partie = 'p+';
 	$boucle->partie = 'intval(_request("debut'.$idb.'"))';
 	$boucle->total_parties = $pas;
-	$boucle->fragment = 'fragment_'.$boucle->descr['nom'].$idb;
+	$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
 }
 
 // {fragment}
@@ -123,7 +123,7 @@ function critere_fragment_dist($idb, &$boucles, $crit) {
 	if ($crit->not)
 		$param = false;
 	$boucle = &$boucles[$idb];
-	$boucle->fragment = $param;
+	$boucle->modificateur['fragment'] = $param;
 }
 
 
@@ -202,7 +202,7 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 	} else if ($boucle->type_requete == 'forums') {
 			$boucle->where[]= array("'='", "'$mparent'", $arg);
 			$boucle->where[]= array("'>'", "'$mparent'", 0);
-			$boucle->plat =  true;
+			$boucle->plat = $boucle->modificateur['plat'] = true; // $boucle->plat conserve pour compatibilite
 	} else erreur_squelette(_T('zbug_info_erreur_squelette'), "{meme_parent} BOUCLE$idb");
 }
 
@@ -327,7 +327,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 				.") AS date_thread";
 			$boucle->group[] = $t . ".id_thread";
 			$order = "'date_thread'";
-			$boucle->plat = true;
+			$boucle->plat = $boucle->modificateur['plat'] = true; // $boucle->plat conserve pour compatibilite
 		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
@@ -691,8 +691,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	elseif ($boucles[$idb]->type_requete == 'forums' AND
 		($col == 'id_parent' OR $col == 'id_forum'))
-	  $boucles[$idb]->plat = true;
-
+		$boucles[$idb]->plat = $boucles[$idb]->modificateur['plat'] = true; // $boucles[$idb]->plat conserve pour compatibilite
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
@@ -814,7 +813,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 		}
 	}
 
-  $boucle->lien = true;
+  $boucle->lien = $boucle->modificateur['lien'] = true; // $boucle->lien conserve provisoirement pour compatibilite
   return $n;
 }
 

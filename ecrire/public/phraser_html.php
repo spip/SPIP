@@ -435,9 +435,9 @@ function phraser_criteres($params, &$result) {
 			if ($var->apres)
 				$result->separateur[] = $param;
 			elseif (($param == 'tout') OR ($param == 'tous'))
-				$result->tout = true;
+				$result->tout = $result->modificateur['tout'] = true; // $result->tout conserve pour compatibilite
 			elseif ($param == 'plat') 
-				$result->plat = true;
+				$result->plat = $result->modificateur['plat'] = true; // $result->plat conserve pour compatibilite
 
 	// Boucle hierarchie, analyser le critere id_article - id_rubrique
 	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
@@ -445,7 +445,7 @@ function phraser_criteres($params, &$result) {
 
 			elseif (($type == 'hierarchie') &&
 				($param == 'id_article' OR $param == 'id_syndic'))
-				$result->tout = true;
+				$result->tout = $result->modificateur['tout'] = true; // $result->tout conserve pour compatibilite
 			elseif (($type == 'hierarchie') && ($param == 'id_rubrique'))
 				{;}
 			else { 

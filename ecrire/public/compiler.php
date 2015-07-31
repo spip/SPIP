@@ -575,10 +575,10 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			}
 
 			// gestion d'une boucle-fragment (ahah)
-			if (strlen($p->fragment)) {
+			if (isset($p->modificateur['fragment'])) {
 				static $nombre_fragments = array();
-				$fragment = $p->fragment;
-				$fragment .= $nombre_fragments[$p->fragment]++;
+				$fragment = $p->modificateur['fragment'];
+				$fragment .= $nombre_fragments[$p->modificateur['fragment']]++;
 				$code = "\n((\$f = ($code))?
 				'<div id=\"$fragment\" class=\"fragment\">'.\$f.'<!-- /$fragment --></div><"."?php stop_inclure(\"$fragment\"); ?".">':'')\n";
 			}
