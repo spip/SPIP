@@ -150,8 +150,16 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 			}
 		}
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
-		if (!isset($page['entetes']['X-Spip-Cache']))
-			$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
+		if (!isset($page['entetes']['X-Spip-Cache'])){
+			// Dans l'espace prive ou dans un modeles/ on pose un cache 0 par defaut
+			// si aucun #CACHE{} spécifié
+			// le contexte implicite qui conditionne le cache assure qu'on retombe pas sur le meme
+			// entre public et prive
+			if (test_espace_prive() OR strncmp($fond,'modeles/',8)==0)
+				$page['entetes']['X-Spip-Cache'] = 0;
+			else
+				$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
+		}
 
 		$page['contexte'] = $contexte;
 	  
