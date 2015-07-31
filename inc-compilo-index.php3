@@ -140,28 +140,29 @@ function index_pile($idb, $nom_champ, &$boucles) {
 			// entite SPIP alias d'un champ SQL
 			if (!is_array($excep)) {
 				$e = $excep;
+				$c = $excep;
 			} 
-			// entite SPIP alias d'un champ dans une autre table SQL 
+			// entite SPIP alias d'un champ dans une autre table SQL
 			else {
 				$t = $excep[0];
-				$e = $excep[1];
+				$e = $excep[1].' AS '.$c;
 			}
 		}
 		else {
-			// $e est le type SQL de l'entree (ici utile comme booleen)
+			// $e est le type SQL de l'entree
 			// entite SPIP homonyme au champ SQL
 			if ($desc['field'][$c])
 				$e = $c;
 			else
-				$e = '';
+				unset($c);
 		}
 
 		#spip_log("Dans $idb ($t $e): $desc");
 
 		// On l'a trouve
-		if ($e) {
+		if ($c) {
 			$boucles[$idb]->select[] = $t . "." . $e;
-			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $e . '\']';
+			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 		}
 
 		// Sinon on remonte d'un cran
