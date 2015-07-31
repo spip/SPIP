@@ -382,6 +382,7 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
  * - %s8: code de trace eventuel avant le retour
 **/
 define('CODE_CORPS_BOUCLE', '%s
+	if (defined("_BOUCLE_PROFILER")) $timer = time()+microtime();
 	$t0 = "";
 	// REQUETE
 	$iter = IterFactory::create(
@@ -395,6 +396,9 @@ define('CODE_CORPS_BOUCLE', '%s
 	%s
 	%s$iter->free();
 	}%s
+	if (defined("_BOUCLE_PROFILER")
+	AND 1000*($timer = (time()+microtime())-$timer) > _BOUCLE_PROFILER)
+		spip_log(intval(1000*$timer)."ms %s","profiler");
 	return $t0;'
 );
 
@@ -551,7 +555,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		$init_lang,
 		$corps,
 		$fin_lang,
-		$trace
+		$trace,
+		'BOUCLE'.$id_boucle .' @ '.($boucle->descr['sourcefile'])
 	);
 
 #	var_dump($a);exit;
