@@ -76,6 +76,7 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
+				$m = array_pad($m, 3, null);
 				$var = $m[1];
 				$auto = false;;
 				if ($m[2]) {
