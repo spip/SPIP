@@ -490,8 +490,9 @@ function propre_diff($texte) {
 
 	// [ ...<span diff> -> lien ]
 	// < tag <span diff> >
-	$texte = preg_replace(',<([^>]*@@@SPIP_DIFF[0-9]+@@@),',
+	$texte = preg_replace(',<([^>]*?@@@SPIP_DIFF[0-9]+@@@),',
 		'&lt;\1', $texte);
+		var_dump($texte);
 	# attention ici astuce seulement deux @@ finals car on doit eviter
 	# deux patterns a suivre, afin de pouvoir prendre [ mais eviter [[
 	$texte = preg_replace(',(^|[^[])[[]([^[\]]*@@@SPIP_DIFF[0-9]+@@),',
@@ -528,6 +529,9 @@ function propre_diff($texte) {
 		$texte = str_replace('@@@SPIP_DIFF'.$c.'@@@', $bal, $texte);
 		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $$bal, $GLOBALS['les_notes']);
 	}
+	// quand le dernier tag est ouvrant le refermer ...
+	$reg = end($regs);
+	if (!$reg[1]) $texte.="</$reg[2]>";
 
 	return $texte;
 }
