@@ -125,5 +125,7 @@
 	<langue code="zh" url="http://trad.spip.net/tradlang_module/public?lang_cible=zh">
 		<traducteur nom="Chia Kiah Yeen" lien="http://trad.spip.net/auteur/chia-kiah-yeen" />
 	</langue>
-	<langue code="zh_tw" />
+	<langue code="zh_tw" url="http://trad.spip.net/tradlang_module/public?lang_cible=zh_tw">
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 </traduction>
