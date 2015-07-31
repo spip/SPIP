@@ -1054,48 +1054,60 @@ function traiter_raccourci_ancre($letexte)
 
 //
 // Raccourcis automatiques [?SPIP] vers un glossaire
-//
+// Wikipedia par defaut, avec ses contraintes techniques
+// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
 
 define('_RACCOURCI_GLOSSAIRE', "|\[\?+\s*([^][<>]+)\]|S");
 
 // http://doc.spip.org/@traiter_raccourci_glossaire
 function traiter_raccourci_glossaire($letexte)
 {
-	static $glosateur = NULL, $subst = NULL;
-	if ($glosateur === NULL) {
-		$glosateur = tester_variable('url_glossaire_externe',
-					 "http://@lang@.wikipedia.org/wiki/");
-		$subst = strpos($glosateur,"%s") !== false;
-	}
-
-	if (empty($glosateur) 
-	OR !preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $m, PREG_SET_ORDER))
+	if (!preg_match_all(_RACCOURCI_GLOSSAIRE, $letexte, $m, PREG_SET_ORDER))
 		return $letexte;
 
-	$glosateur = str_replace("@lang@", $GLOBALS['spip_lang'], $glosateur);
-	foreach ($m as $regs) {
-		list($tout, $terme) = $regs;
-		// Eviter les cas particulier genre "[?!?]"
-		if (preg_match(',^(.*\w\S*)\s*$,', $terme, $r)) {
-			$terme = $r[1];
-			$u = $GLOBALS['meta']['pcre_u'];
-			$_terme = preg_replace(',\s+,'.$u, '_', $terme);
-// faire sauter l'eventuelle partie "|bulle d'aide" du lien
-// cf. http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conventions_sur_les_titres
-			$_terme = preg_replace(',[|].*,', '', $_terme);
-			include_spip('inc/charsets');
-			$_terme = rawurlencode(unicode2charset(charset2unicode($_terme), 'utf-8'));
+	include_spip('inc/charsets');
 
-			if ($subst)
-				$url = str_replace("%s", $_terme, $glosateur);
-			else
-				$url = $glosateur. $_terme;
-			list($terme, $bulle, $hlang) = traiter_raccourci_lien_atts($terme);
-			$url = traiter_raccourci_lien_lang($url, 'spip_glossaire', $terme, $hlang, '', $bulle);
-			$letexte = str_replace($tout, $url, $letexte);
+	foreach ($m as $regs) {
+		// Eviter les cas particulier genre "[?!?]"
+		// et isoler le lexeme a gloser de ses accessoires
+		// (#:url du glossaire, | bulle d'aide, {} lang)
+
+		if (preg_match(',^([^|#{]*\w[^|#{]*)([^#]*)(#([^|{}]*))?(.*)$,', $regs[1], $r)) {
+
+			list($terme, $bulle, $hlang) = traiter_raccourci_lien_atts($r[1] . $r[2] . $r[5]);
+
+			$terme = unicode2charset(charset2unicode($terme), 'utf-8');
+			
+			if ($r[4] AND function_exists($f = 'glossaire_' . $r[4]))
+				$glose = $f($terme);
+			else $glose  = glossaire_std($terme);
+			$ref = traiter_raccourci_lien_lang($glose, 'spip_glossaire', $terme, $hlang, '', $bulle);
+			$letexte = str_replace($regs[0], $ref, $letexte);
 		}
 	}
 	return $letexte;
+}
+
+function glossaire_std($terme)
+{
+	global $url_glossaire_externe;
+	static $pcre = NULL;
+
+	if ($pcre === NULL) {
+		$pcre = isset($GLOBALS['meta']['pcre_u']) 
+		? $GLOBALS['meta']['pcre_u']
+		  : '';
+		if (strpos($url_glossaire_externe, "%s") === false)
+			$url_glossaire_externe .= '%s';
+	}
+
+	$glosateur = str_replace("@lang@",
+				$GLOBALS['spip_lang'],
+				$GLOBALS['url_glossaire_externe']);
+
+	$terme = rawurlencode(preg_replace(',\s+,'.$pcre, '_', $terme));
+	
+	return  str_replace("%s", $terme, $glosateur);
 }
 
 //
