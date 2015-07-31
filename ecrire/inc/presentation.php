@@ -1030,7 +1030,7 @@ function afficher_hierarchie($id_rubrique) {
 		: (acces_restreint_rubrique($id_rubrique)
 		? "admin" : "rubrique");
 
-		$parents = "<ul><li><span><em> &gt; </em><$tag class='$class$on'"
+		$parents = "<ul><li><span class='bloc'><em> &gt; </em><$tag class='$class$on'"
 		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
 		. ">"
 		. supprimer_numero(typo(sinon($res['titre'], _T('ecrire:info_sans_titre'))))
@@ -1045,7 +1045,7 @@ function afficher_hierarchie($id_rubrique) {
 
 	return "\n<ul id='chemin' class='verdana3' dir='".lang_dir()."'" 
 	  //. http_style_background("racine-site-12.gif", $style1)
-	  . "><li><span><$tag class='racine$on'" 
+	  . "><li><span class='bloc'><$tag class='racine$on'" 
 		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
 	  . ">"._T('info_racine_site')."</$tag>"
  	  . "</span>"
