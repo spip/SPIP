@@ -358,6 +358,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$id_vignette = $row['id_vignette'];
 	$fichier = get_spip_doc($row['fichier']);
 	$mode = $row['mode'];
+	$logo = '';
 
 	// Y a t il une vignette personnalisee ?
 	// Ca va echouer si c'est en mode distant. A revoir.
@@ -377,13 +378,6 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		$x = intval($r[1]);
 		$y = intval($r[2]);
 	}
-
-	// Retrouver le type mime
-	$ex = sql_fetch(sql_select(
-		array('mime_type'),
-		array('spip_types_documents'),
-		array("extension = " . _q($extension))));
-	$mime = $ex['mime_type'];
 
 	if ($logo AND @file_exists($logo)) {
 		if ($x OR $y)
@@ -405,8 +399,9 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 					$size = @getimagesize($img);
 					$logo = "<img src='$img' ".$size[3]." />";
 				}
-			}
-		}
+		  }
+		  // cas de la vignette derriere un htaccess
+		} elseif ($logo) $logo = "<img src='$logo'>";
 
 		// Document sans vignette ni image : vignette par defaut
 		if (!$logo) {
@@ -430,9 +425,10 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	if ($align)
 		$logo = inserer_attribut($logo, 'align', $align);
 
-	if ($lien)
+	if ($lien) {
+		$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . _q($extension));
 		$logo = "<a href='$lien' type='$mime'>$logo</a>";
-
+	}
 	return $logo;
 }
 
