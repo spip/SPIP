@@ -132,41 +132,27 @@ function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff='')
 // http://doc.spip.org/@calculer_liens_mots
 function calculer_liens_mots($id_groupe)
 {
+	$aff_articles = sql_in('O.statut',  ($GLOBALS['connect_statut'] =="0minirezo")  ? array('prepa','prop','publie') : array('prop','publie'));
 
-if ($GLOBALS['connect_statut'] =="0minirezo") $aff_articles = "'prepa','prop','publie'";
-else $aff_articles = "'prop','publie'";
+	$res = sql_allfetsel("COUNT(*) as cnt, L.id_mot", "spip_mots_articles AS L LEFT JOIN spip_mots AS M ON L.id_mot=M.id_mot LEFT JOIN spip_articles AS O ON L.id_article=O.id_article", "M.id_groupe=$id_groupe AND $aff_articles", "L.id_mot");
+	$articles = array();
+	foreach($res as $row) $articles[$row['id_mot']] = $row['cnt'];
 
- $articles = array();
- $result_articles = sql_select("COUNT(*) as cnt, lien.id_mot", "spip_mots_articles AS lien, spip_articles AS article, spip_mots AS M", "lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND article.id_article=lien.id_article AND article.statut IN ($aff_articles) ", "lien.id_mot");
- while ($row =  sql_fetch($result_articles)){
-	$articles[$row['id_mot']] = $row['cnt'];
-}
+	$rubriques = array();
+	$res = sql_allfetsel("COUNT(*) as cnt, L.id_mot", "spip_mots_rubriques AS L LEFT JOIN spip_mots AS M ON L.id_mot=M.id_mot", "M.id_groupe=$id_groupe", "L.id_mot");
+	foreach($res as $row) $rubriques[$row['id_mot']] = $row['cnt'];
+  
+	$breves = array();
+	$res = sql_allfetsel("COUNT(*) as cnt, L.id_mot", "spip_mots_breves AS L LEFT JOIN spip_mots AS M ON L.id_mot=M.id_mot LEFT JOIN spip_breves AS O ON L.id_breve=O.id_breve", "M.id_groupe=$id_groupe AND $aff_articles", "L.id_mot");
+	foreach($res as $row) $breves[$row['id_mot']] = $row['cnt'];
 
+	$syndic = array(); 
+	$res = sql_allfetsel("COUNT(*) as cnt, L.id_mot", "spip_mots_syndic AS L LEFT JOIN spip_mots AS M ON L.id_mot=M.id_mot LEFT JOIN spip_syndic AS O ON L.id_syndic=O.id_syndic", "M.id_groupe=$id_groupe AND $aff_articles", "L.id_mot");
+	foreach($res as $row) $syndic[$row['id_mot']] = $row['cnt'];
 
- $rubriques = array();
- $result_rubriques = sql_select("COUNT(*) AS cnt, lien.id_mot", "spip_mots_rubriques AS lien, spip_mots AS M", "lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe  ", "lien.id_mot");
-
- while ($row = sql_fetch($result_rubriques)){
-	$rubriques[$row['id_mot']] = $row['cnt'];
-}
-
- $breves = array();
- $result_breves = sql_select("COUNT(*) AS cnt, lien.id_mot", "spip_mots_breves AS lien, spip_breves AS breve, spip_mots AS M", "lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) ", "lien.id_mot");
-
- while ($row = sql_fetch($result_breves)){
-	$breves[$row['id_mot']] = $row['cnt'];
-}
-
- $syndic = array(); 
- $result_syndic = sql_select("COUNT(*) AS cnt, lien.id_mot", "spip_mots_syndic AS lien, spip_syndic AS syndic, spip_mots AS M", "lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) ", "lien.id_mot");
- while ($row = sql_fetch($result_syndic)){
-	$syndic[$row['id_mot']] = $row['cnt'];
-
- }
-
- return array('articles' => $articles, 
-	      'breves' => $breves, 
-	      'rubriques' => $rubriques, 
-	      'syndic' => $syndic);
+	return array('articles' => $articles, 
+		'breves' => $breves, 
+		'rubriques' => $rubriques, 
+		'syndic' => $syndic);
 }
 ?>
