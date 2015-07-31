@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@spip_xml_load
 function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas='', $profondeur = -1){
@@ -27,7 +27,7 @@ function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 104857
 	return count($arbre)?$arbre:false;
 }
 
-if (!defined("_SPIP_XML_TAG_SPLIT")) define ('_SPIP_XML_TAG_SPLIT', "{<([^:>][^>]*?)>}sS");
+if (!defined('_SPIP_XML_TAG_SPLIT')) define ('_SPIP_XML_TAG_SPLIT', "{<([^:>][^>]*?)>}sS");
 // http://doc.spip.org/@spip_xml_parse
 function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 	$out = array();

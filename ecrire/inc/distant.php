@@ -3,18 +3,18 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-if (!defined("_INC_DISTANT_VERSION_HTTP")) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
-if (!defined("_INC_DISTANT_CONTENT_ENCODING")) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
-if (!defined("_INC_DISTANT_USER_AGENT")) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
+if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "HTTP/1.0");
+if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
+if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
 //

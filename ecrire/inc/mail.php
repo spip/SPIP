@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,7 +14,7 @@
 ## Module de compatibilite ascendante : desormais inc/envoyer_mail
 ##
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!function_exists('envoyer_mail')) {
 	define('_FUNCTION_ENVOYER_MAIL', charger_fonction('envoyer_mail', 'inc'));

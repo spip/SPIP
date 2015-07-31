@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -20,7 +20,7 @@
 // - critere conditionnel donnant l'extrait correspondant a la colonne en URL
 // 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // nomme chaque colonne par le nom du champ, 
 // qui sert de lien vers la meme page, avec la table triee selon ce champ

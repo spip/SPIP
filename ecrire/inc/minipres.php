@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/headers');
 include_spip('inc/texte'); //inclue inc/lang et inc/filtres
@@ -36,7 +36,7 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		header('Content-Type: text/html; charset=utf-8');
 
 	// au cas ou minipres() est appele avant spip_initialisation_suite()
-	if (!defined("_DOCTYPE_ECRIRE")) define('_DOCTYPE_ECRIRE', '');
+	if (!defined('_DOCTYPE_ECRIRE')) define('_DOCTYPE_ECRIRE', '');
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().
 		"<head>\n".
@@ -64,7 +64,7 @@ function install_fin_html() {
 // http://doc.spip.org/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
-	if (!defined("_AJAX")) define('_AJAX', false); // par securite
+	if (!defined('_AJAX')) define('_AJAX', false);
 	if (!$titre) {
 		if (!_AJAX)
 			http_status(403);

@@ -3,14 +3,14 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 include_spip('inc/acces');
@@ -249,7 +249,7 @@ function import_tables($request, $archive) {
 	if (isset($GLOBALS['meta']['restauration_charset_sql_connexion']))
 		sql_set_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
 
-	if (!defined("_DEBUG_IMPORT")) define('_DEBUG_IMPORT', false);
+	if (!defined('_DEBUG_IMPORT')) define('_DEBUG_IMPORT', false);
 	if (_DEBUG_IMPORT)
 		ecrire_fichier(_DIR_TMP."debug_import.log","#####".date('Y-m-d H:i:s')."\n",false,false);
 	$fimport = import_charge_version($version_archive);

@@ -3,24 +3,24 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation');
 
 // Constante pour le nombre d'auteurs par page.
-if (!defined("MAX_AUTEURS_PAR_PAGE")) define('MAX_AUTEURS_PAR_PAGE', 30);
-if (!defined("AUTEURS_MIN_REDAC")) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
-if (!defined("AUTEURS_DEFAUT")) define('AUTEURS_DEFAUT', '');
+if (!defined('MAX_AUTEURS_PAR_PAGE')) define('MAX_AUTEURS_PAR_PAGE', 30);
+if (!defined('AUTEURS_MIN_REDAC')) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+if (!defined('AUTEURS_DEFAUT')) define('AUTEURS_DEFAUT', '');
 // decommenter cette ligne et commenter la precedente 
 // pour que l'affichage par defaut soit les visiteurs
-#if (!defined("AUTEURS_DEFAUT")) define('AUTEURS_DEFAUT', '!');
+#if (!defined('AUTEURS_DEFAUT')) define('AUTEURS_DEFAUT', '!');
 
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()

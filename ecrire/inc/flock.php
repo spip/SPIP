@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2010                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,11 +11,11 @@
 \***************************************************************************/
 
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 // ajouter define('_CREER_DIR_PLAT', true); dans mes_options pour restaurer
 // le fonctionnement des faux repertoires en .plat
 define('_CREER_DIR_PLAT', false);
-if (!defined("_TEST_FILE_EXISTS")) define('_TEST_FILE_EXISTS', preg_match(',(online|free)[.]fr$,', $_ENV["HTTP_HOST"]));
+if (!defined('_TEST_FILE_EXISTS')) define('_TEST_FILE_EXISTS', preg_match(',(online|free)[.]fr$,', $_ENV["HTTP_HOST"]));
 
 #define('_SPIP_LOCK_MODE',0); // ne pas utiliser de lock (deconseille)
 #define('_SPIP_LOCK_MODE',1); // utiliser le flock php
