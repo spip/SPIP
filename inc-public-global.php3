@@ -50,6 +50,7 @@ $chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
 $ecraser_cache = false;
+$cache_supprimes = Array();
 
 if (!$use_cache OR !defined("_ECRIRE_INC_META_CACHE")) {
 	include_ecrire("inc_meta.php3");
@@ -172,7 +173,8 @@ if ($var_recherche) {
 
 // nettoie
 if ($effacer_cache) @unlink($chemin_cache);
-
+while (list(,$chemin_cache_supprime) = each ($cache_supprimes))
+	@unlink($chemin_cache_supprime);
 
 //
 // Verifier la presence du .htaccess dans le cache, sinon le generer

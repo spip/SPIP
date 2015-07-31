@@ -5,7 +5,10 @@ if (!defined("_INC_PUBLIC")) {
 	include("inc-public-global.php3");
 }
 else {
-	include(inclure_fichier($fond, $delais, $contexte_inclus));
+	$cache_inclus = inclure_fichier($fond, $delais, $contexte_inclus);
+	if (!$delais)
+		$cache_supprimes[]=$cache_inclus; // message pour suppression
+	include($cache_inclus);
 }
 
 ?>
