@@ -10,9 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'activation des plugins
+ *
+ * @package SPIP\Core\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// l'adresse du repertoire de telechargement et de decompactage des plugins
+/** l'adresse du repertoire de telechargement et de decompactage des plugins */
 define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
 
 #include_spip('inc/texte'); // ????? Appelle public/parametrer trop tot avant la reconstruction du chemin des plugins.
@@ -33,7 +39,7 @@ function liste_plugin_files($dir_plugins = null){
 		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
 			$plugin_files[$dir_plugins][] = substr($plugin,strlen($dir_plugins));
 		}
-		
+
 		sort($plugin_files[$dir_plugins]);
 		// et on lit le XML de tous les plugins pour le mettre en cache
 		// et en profiter pour nettoyer ceux qui n'existent plus du cache
@@ -87,7 +93,7 @@ function is_plugin_dir($dir,$dir_plugins = null){
 	if (is_null($dir_plugins))
 		$dir_plugins = _DIR_PLUGINS;
 	$search = array("$dir_plugins$dir/plugin.xml","$dir_plugins$dir/paquet.xml");
-	
+
 	foreach($search as $s){
 		if (file_exists($s)){
 			return $dir;
@@ -185,7 +191,7 @@ function liste_plugin_valides($liste_plug, $force = false)
 	  if (isset($infos['_DIR_PLUGINS'][$plug]))
 	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
 	}
-	
+
 	if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
 		$infos['_DIR_PLUGINS_SUPPL'] = $get_infos($liste_plug, false, _DIR_PLUGINS_SUPPL);
 		foreach($liste_plug as $plug) {
@@ -193,7 +199,7 @@ function liste_plugin_valides($liste_plug, $force = false)
 				plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_SUPPL');
 		}
 	}
-	
+
 	// les procure de core.xml sont consideres comme des plugins proposes,
 	// mais surchargeables (on peut activer un plugin qui procure ca pour l'ameliorer,
 	// donc avec le meme prefixe)
@@ -222,7 +228,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
 	if (!plugin_version_compatible($i['compatibilite'], $GLOBALS['spip_version_branche'],'spip'))
 		return;
 	$p = strtoupper($i['prefix']);
-	if (!isset($liste[$p]) 
+	if (!isset($liste[$p])
 	OR spip_version_compare($i['version'],$liste[$p]['version'],'>')) {
 		$liste[$p] = array(
 			'nom' => $i['nom'],
@@ -238,7 +244,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
  * extrait les chemins d'une liste de plugin
  * selectionne au passage ceux qui sont dans $dir_plugins uniquement
  * si valeur non vide
- * 
+ *
  * @param array $liste
  * @param string $dir_plugins
  * @return array
@@ -269,11 +275,11 @@ function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	return liste_chemin_plugin(liste_plugin_actifs(), $dir_plugins);
 }
 
-// Pour tester utilise, il faut connaitre tous les plugins 
+// Pour tester utilise, il faut connaitre tous les plugins
 // qui seront forcement pas la a la fin,
 // car absent de la liste des plugins actifs.
 // Il faut donc construire une liste ordonnee
-// Cette fonction detecte des dependances circulaires, 
+// Cette fonction detecte des dependances circulaires,
 // avec un doute sur un "utilise" qu'on peut ignorer.
 // Mais ne pas inserer silencieusement et risquer un bug sournois latent
 
@@ -306,7 +312,7 @@ function plugin_trier($infos, $liste_non_classee)
 			  $nom = strtoupper($need['nom']);
 			  $compat = isset($need['compatibilite']) ? $need['compatibilite'] : '';
 			  if (isset($toute_la_liste[$nom])) {
-			    if (!isset($liste[$nom]) OR 
+			    if (!isset($liste[$nom]) OR
 				!plugin_version_compatible($compat, $liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
@@ -323,7 +329,7 @@ function plugin_trier($infos, $liste_non_classee)
 	return array($liste, $ordre, $liste_non_classee);
 }
 
-// Collecte les erreurs dans la meta 
+// Collecte les erreurs dans la meta
 
 function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
 {
@@ -373,7 +379,7 @@ function plugin_donne_erreurs($raw=false, $raz=true) {
  * 		Tableau des plugins presents
  * @return array
  * 		Tableau des messages d'erreurs recus. Il sera vide si tout va bien.
- * 
+ *
 **/
 function plugin_necessite($n, $liste) {
 	$msg = array();
@@ -387,7 +393,7 @@ function plugin_necessite($n, $liste) {
 }
 
 /**
- * Verifie qu'une dependance (plugin) est bien presente. 
+ * Verifie qu'une dependance (plugin) est bien presente.
  *
  * @param $liste
  * 		Liste de description des plugins
@@ -426,20 +432,31 @@ function plugin_controler_lib($lib, $url)
 	return _T('plugin_necessite_lib', array('lib'=>$lib)) . " <a href='$url'>$url</a>";
 }
 
-// Pour compatibilite et lisibilite du code
+
+/**
+ * Calcule la liste des plugins actifs et recompile les fichiers caches
+ * qui leurs sont relatifs
+ *
+ * @uses ecrire_plugin_actifs()
+ *
+ * @param bool $pipe_recherche ?
+ * @return bool
+ *     true si il y a eu des modifications sur la liste des plugins actifs, false sinon
+**/
 function actualise_plugins_actifs($pipe_recherche = false){
 	return ecrire_plugin_actifs('', $pipe_recherche, 'force');
 }
 
 
 /**
- * Modifie la liste des plugins actifs et recompile les fichiers caches
+ * Calcule ou modifie la liste des plugins actifs et recompile les fichiers caches
  * qui leurs sont relatifs
  *
  * @note
  *   Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
  *   si elle n'existe pas risque de pb en php5 a cause du typage ou de null
  *   (verifier dans la doc php)
+ *
  * @param string|string[] $plugin
  *     Plugin ou plugins concernés (leur chemin depuis le répertoire plugins)
  * @param bool $pipe_recherche
@@ -448,19 +465,20 @@ function actualise_plugins_actifs($pipe_recherche = false){
  *     - raz : recalcule tout
  *     - ajoute : ajoute le plugin indiqué à la liste des plugins actifs
  *     - enleve : enleve le plugin indiqué de la liste des plugins actifs
+ *     - force  : ?
  * @return bool
- *     true|false si il y a du nouveau
+ *     true si il y a eu des modifications sur la liste des plugins actifs, false sinon
 **/
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
 	sous_repertoire(_DIR_CACHE, '', false,true);
-	
+
 	if (!spip_connect()) return false;
 	if ($operation!='raz') {
 		$plugin_valides = liste_chemin_plugin_actifs();
 		$plugin_valides = is_plugin_dir($plugin_valides);
-		if(defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL){
+		if (defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL){
 			$plugin_valides_supp = liste_chemin_plugin_actifs(_DIR_PLUGINS_SUPPL);
 			$plugin_valides_supp = is_plugin_dir($plugin_valides_supp,_DIR_PLUGINS_SUPPL);
 			$plugin_valides = array_merge($plugin_valides,$plugin_valides_supp);
@@ -470,7 +488,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if (isset($GLOBALS['meta']['plugin_attente'])
 		  AND $a = unserialize($GLOBALS['meta']['plugin_attente']))
 		$plugin_valides = $plugin_valides + liste_chemin_plugin($a);
-		
+
 		if ($operation=='ajoute')
 			$plugin = array_merge($plugin_valides,$plugin);
 		elseif ($operation=='enleve')
@@ -498,7 +516,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	$err = $msg = $header = array();
 	foreach($plugin_valides as $p => $resume) {
 		$header[]= $p.($resume['version']?"(".$resume['version'].")":"");
-		if ($resume['dir']){ 
+		if ($resume['dir']){
 			foreach($infos[$resume['dir_type']][$resume['dir']]['lib'] as $l) {
 				if (!find_in_path($l['nom'], 'lib/')) {
 					$err[$p] = $resume;
@@ -553,7 +571,7 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			// permet de faire des include_spip pour attraper un inc_ du plugin
 
 			$dir = $dir_type.".'" . $plug ."/'";
-			
+
 			$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 			if ($prefix!=="SPIP"){
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
@@ -640,11 +658,32 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 	ecrire_fichier_php(_CACHE_PLUGINS_FCT, $contenu['fonctions']);
 }
 
+/**
+ * Compile les entrées d'un menu et retourne le code php d'exécution
+ *
+ * Génère et retourne un code php (pour enregistrement dans un fichier de cache)
+ * permettant d'obtenir la liste des entrées de menus, ou des onglets
+ * de l'espace privé.
+ *
+ * Définit également une constante (_UPDATED_$nom et _UPDATED_md5_$nom),
+ * signalant une modification de ces menus
+ *
+ * @param string $nom Nom du type de menu
+ *     Exemple: boutons_plugins, onglets_plugins
+ * @param array $val Liste des entrées de ce menu
+ * @return string Code php
+ */
 function plugin_ongletbouton($nom, $val)
 {
 	if (!$val) $val = array();
-	define("_UPDATED_$nom",$val = serialize($val));
-	define("_UPDATED_md5_$nom",$md5=md5($val));
+
+	$val = serialize($val);
+	$md5 = md5($val);
+
+	if (!defined("_UPDATED_$nom")) {
+		define("_UPDATED_$nom", $val);
+		define("_UPDATED_md5_$nom", $md5);
+	}
 	$val = "unserialize('".str_replace("'","\'",$val)."')";
 	return
 		"if (!function_exists('$nom')) {\n"
@@ -700,17 +739,17 @@ function pipeline_matrice_precompile($plugin_valides, $ordre, $pipe_recherche)
 			}
 		}
 	}
-	
-	// on charge les fichiers d'options qui peuvent completer 
+
+	// on charge les fichiers d'options qui peuvent completer
 	// la globale spip_pipeline egalement
 	if (@is_readable(_CACHE_PLUGINS_PATH))
-		include_once(_CACHE_PLUGINS_PATH); // securite : a priori n'a pu etre fait plus tot 
+		include_once(_CACHE_PLUGINS_PATH); // securite : a priori n'a pu etre fait plus tot
 	if (@is_readable(_CACHE_PLUGINS_OPT)) {
 		include_once(_CACHE_PLUGINS_OPT);
 	} else {
 		spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT);
 	}
-	
+
 	// on ajoute les pipe qui ont ete recenses manquants
 	foreach($liste_pipe_manquants as $add_pipe)
 		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
@@ -806,7 +845,7 @@ function plugin_installes_meta()
 
 function ecrire_fichier_php($nom, $contenu, $comment='')
 {
-	ecrire_fichier($nom, 
+	ecrire_fichier($nom,
 		       '<'.'?php' . "\n" . $comment ."\nif (defined('_ECRIRE_INC_VERSION')) {\n". $contenu . "}\n?".'>');
 }
 ?>
