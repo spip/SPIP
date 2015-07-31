@@ -14,17 +14,24 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/presentation');
 include_spip('public/debusquer');
 
-// Script de validation XML selon une DTD
-// l'argument var_url peut indiquer un fichier ou un repertoire
-// l'argument ext peut valoir "php" ou "html"
-// Si "php", le script est execute et la page valide
-// Si "html", on suppose que c'est un squelette dont on devine les args
-// en cherchant les occurrences de Pile[0].
-// Exemples:
-// ecrire?exec=valider_xml&var_url=exec&ext=php pour tester l'espace prive
-// ecrire?exec=valider_xml&var_url=../squelettes-dist&ext=html pour le public
 
-// http://doc.spip.org/@exec_valider_xml_dist
+/**
+ * Page d'affichage des résultats de validation XML selon une DTD
+ *
+ * - l'argument var_url peut indiquer un fichier ou un repertoire
+ * - l'argument ext peut valoir "php" ou "html"
+ * -- Si "php", le script est execute et la page valide
+ * -- Si "html", on suppose que c'est un squelette dont on devine les args
+ *    en cherchant les occurrences de Pile[0].
+ *
+ * @example
+ *     ```
+ *     ecrire?exec=valider_xml&var_url=exec&ext=php pour tester l'espace prive
+ *     ecrire?exec=valider_xml&var_url=../squelettes-dist&ext=html pour le public
+ *     ```
+ *
+ * @uses valider_xml_ok()
+**/
 function exec_valider_xml_dist()
 {
 	if (!autoriser('sauvegarder')) {
@@ -35,16 +42,16 @@ function exec_valider_xml_dist()
 
 /**
  * Vérifie le formatage d'un xml
- * 
+ *
  * @see valider_resultats()
  * @see valider_dir()
  * @see valider_pseudo_url()
- * 
+ *
  * @param string $url
  * @param string $req_ext
  * @param int $limit
  * @param array|bool $rec
- * 
+ *
 **/
 function valider_xml_ok($url, $req_ext, $limit, $rec)
 {
@@ -79,11 +86,11 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 		} else {
 			if (preg_match('@^((?:[.]/)?[^?]*)[?]([0-9a-z_]+)=([^&]*)(.*)$@', $url, $r)) {
 			  list(,$server, $dir, $script, $args) = $r;
-				if (((!$server) OR ($server == './') 
+				if (((!$server) OR ($server == './')
 				    OR strpos($server, url_de_base()) === 0)
 				    AND is_dir($dir)) {
 				  $url = $script;
-				  // Pour quand le validateur saura simuler 
+				  // Pour quand le validateur saura simuler
 				  // une query-string...
 				  // $args = preg_split('/&(amp;)?[a-z0-9_]+=/', $args);
 				  $args = true;
@@ -114,7 +121,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	$debut = $commencer_page($titre);
 	$jq = http_script("", 'jquery.js');
-	
+
 	echo str_replace('<head>', "<head>$jq", $debut);
 	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" id="var_url" onfocus="'.$onfocus . '" />';
 	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
@@ -126,9 +133,9 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 }
 
 /**
- * 
+ *
  * Vérifie la conformité du xml, élément par élément.
- *  
+ *
  * @param array $res
  * @param string $mode
  * @return array
@@ -147,14 +154,14 @@ function valider_resultats($res, $mode)
 			$color = ";color: red";
 		} else  {$color = '';}
 
-		$err = (!intval($nb)) ? '' : 
+		$err = (!intval($nb)) ? '' :
 		  ($erreurs[0][0] . ' ' . _T('ligne') . ' ' .
 		   $erreurs[0][1] .($nb==1? '': '  ...'));
 		if ($err) $j++;
 		$h = $mode
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
-		
+
 		$table .= "<tr class='$class'>"
 		. "<td style='text-align: right'>$nb</td>"
 		. "<td style='text-align: right$color'>$texte</td>"
@@ -164,9 +171,9 @@ function valider_resultats($res, $mode)
 		. "<td><a href='$h'>$appel</a></td>";
 	}
 	return array($j, "<table class='spip'>"
-	  . "<tr><th>" 
+	  . "<tr><th>"
 	  . _T('erreur_texte')
-	  . "</th><th>" 
+	  . "</th><th>"
 	  . _T('taille_octets', array('taille' => ' '))
 	  . "</th><th>"
 	  . _T('zbug_profile', array('time' =>''))
@@ -180,14 +187,9 @@ function valider_resultats($res, $mode)
 
 /**
  * Valide l'existence d'un script ou d'une fonction
- * 
- * S'il y a l'attribut minipres, le test est non significatif
- * Le script nécessite peut-être des arguments, on lui en donne,
- * en appelant la fonction _args associée si elle existe.
- * Si ça ne marche toujours pas, les arguments n'étaient pas bons
- * ou c'est une authentification pour action d'administration;
- * Tant pis, on signale le cas par un résultat négatif.
- * 
+ *
+ * @uses valider_pseudo_url()
+ *
  * @param string $transformer_xml
  * @param string $script
  *  Nom de la fonction à charger
@@ -202,13 +204,14 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 	$script = basename($script, '.php');
 	$dir = basename($dir);
 	$f = charger_fonction($script, $dir, true);
-// ne pas se controler soi-meme ni l'index du repertoire ni un fichier annexe
+
+    // ne pas se controler soi-meme ni l'index du repertoire ni un fichier annexe
 	if ($script == _request('exec') OR $script=='index' OR !$f)
-		return array('/', 0, '', $script,''); 
+		return array('/', 0, '', $script,'');
 
 	$val = $transformer_xml($f, true);
 	$appel = '';
-	
+
 	// s'il y a l'attribut minipres, le test est non significatif
 	// le script necessite peut-etre des arguments, on lui en donne,
 	// en appelant la fonction _args associee si elle existe
@@ -236,7 +239,7 @@ function valider_script($transformer_xml, $script, $dir, $ext)
 
 /**
  * Construire la bonne URL selon l'endroit où on se trouve.
- * 
+ *
  * @param string $dir
  *     Par défaut, on vérifie si on est sur une page `?exec=XX`
  * @param string $script
@@ -253,7 +256,7 @@ function valider_pseudo_url($dir, $script, $args='')
 /**
  * Essayer de valider un texte même sans Doctype
  * à moins qu'un Content-Type dise clairement que ce n'est pas du XML
- * 
+ *
  * @param string $transformer_xml
  * @param string $file
  * @param string $dir
@@ -262,7 +265,7 @@ function valider_pseudo_url($dir, $script, $args='')
  */
 function valider_skel($transformer_xml, $file, $dir, $ext)
 {
-	if (!lire_fichier ($file, $text)) return array('/', '/', $file,''); 
+	if (!lire_fichier ($file, $text)) return array('/', '/', $file,'');
 	if (!strpos($text, 'DOCTYPE')) {
 		preg_match(",Content[-]Type: *\w+/(\S)+,", $text, $r);
 		if ($r[1] === 'css' OR $r[1] === 'plain')
@@ -284,7 +287,7 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 		list($skel_nom, $skel_code) = $composer($text, 'html', 'html', $file);
 
 		spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
-		if (!$skel_nom) return array('/', '/', $file,''); 
+		if (!$skel_nom) return array('/', '/', $file,'');
 		$contexte = valider_contexte($skel_code, $file);
 		$page = $skel_nom(array('cache'=>''), array($contexte));
 	}
@@ -294,13 +297,13 @@ function valider_skel($transformer_xml, $file, $dir, $ext)
 
 /**
  * Analyser le code pour construire un contexte plausible complet
- * 
+ *
  * i.e. ce qui est fourni par `$Pile[0]`
  * en éliminant les exceptions venant surtout des Inclure
  *
  * Il faudrait trouver une typologie pour générer un contexte parfait:
  * actuellement ça produit parfois des erreurs SQL à l'appel de $skel_nom
- * 
+ *
  * @see valider_skel()
  * @param string $code
  * @param string $file
@@ -334,15 +337,25 @@ function valider_contexte($code, $file)
 		  $table = $trouver_table(table_objet_sql($type));
 		  if ($table)
 		    $val = @sql_getfetsel($nom, $table['table'], '', '','',"0,1");
-		    // porte de sortie si ca marche pas, 
-		  if (!$val) $val = 1; 
+		    // porte de sortie si ca marche pas,
+		  if (!$val) $val = 1;
 		}
 		$contexte[$nom] =  $val;
 	}
 	return $contexte;
 }
 
-// http://doc.spip.org/@valider_dir
+/**
+ * Valide la conformité XML d'une liste de fichiers dans un répertoire
+ *
+ * @param array $files
+ *     Liste des fichiers
+ * @param string $ext
+ *     Extension des fichiers
+ * @param string $dir
+ *     Chemin du répertoire
+ * @return array
+**/
 function valider_dir($files, $ext, $dir)
 {
 	$res = array();
@@ -351,7 +364,7 @@ function valider_dir($files, $ext, $dir)
 	foreach($files as $f) {
 		spip_timer($f);
 		$val = $valideur($transformer_xml, $f, $dir, $ext);
-		$n = spip_timer($f); 
+		$n = spip_timer($f);
 		$val[]= $n;
 		spip_log("validation de $f en $n secondes");
 		$res[]= $val;
