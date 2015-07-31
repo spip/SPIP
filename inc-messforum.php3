@@ -41,35 +41,37 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 	}
 
 	$adresse_site = lire_meta("adresse_site");
-	$nom_site_spip = lire_meta("nom_site");
 	$url = $adresse_site .'/' .  ereg_replace('^/', '', $url);
-	$corps = "\n"
+
+	$sujet = "[" .
+	  entites_html(textebrut(typo(lire_meta("nom_site")))) .
+	  "] ["._T('forum_forum')."] $titre";
+
+	$parauteur = (strlen($auteur) <= 2) ? '' :
+	  (" " ._T('forum_par_auteur', array('auteur' => $auteur)) . 
+	   ($email_auteur ? "" : (' <' . $email_auteur . '>')));
+
+	$corps = _T('form_forum_message_auto') .
+		"\n\n" .
+		_T('forum_poste_par', array('parauteur' => $parauteur)).
+		"\n"
+	  	. _T('forum_ne_repondez_pas')
+	  	. "\n"
 		. $url
 		. "\n\n\n".$titre."\n\n".textebrut(propre($texte))
 		. "\n\n$nom_site_forum\n$url_site\n";
-	if ($email_auteur) 
-		$email_auteur = ' <' . $email_auteur . '>';
+
+	$old_lang = $GLOBALS['spip_lang'];
+
 	$result = spip_query("SELECT auteurs.email, auteurs.lang FROM spip_auteurs AS auteurs,
 				spip_auteurs_articles AS lien
 				WHERE lien.id_article='$id_article'
 				AND auteurs.id_auteur=lien.id_auteur");
-
-	$old_lang = $GLOBALS['spip_lang'];
 	while (list($email, $salangue) = spip_fetch_array($result)) {
 		$email = trim($email);
 		if (strlen($email) < 3) continue;
 		$GLOBALS['spip_lang'] = ($salangue ? $salangue : $old_lang);
-		$parauteur = (strlen($auteur) <= 2) ? '' :
-		  (" "
-		   ._T('forum_par_auteur',
-		       array('auteur' => $auteur))
-		   . $email_auteur);
-		$courr =  _T('form_forum_message_auto')."\n\n"
-		  . _T('forum_poste_par', array('parauteur' => $parauteur))."\n"
-		  . _T('forum_ne_repondez_pas')
-		  . $corps ;
-		$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-		envoyer_mail($email, $sujet, $courr);
+		envoyer_mail($email, $sujet, $corps) ;
 	}
 	$GLOBALS['spip_lang'] = $old_lang;	
 }
