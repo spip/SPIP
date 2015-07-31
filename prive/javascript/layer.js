@@ -318,7 +318,7 @@ function verifForm(racine) {
 // a du anticiper la situation.
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
-
+// cf grenier
 function AjaxSqueeze(trig, id, callback, event)
 {
 	var target = jQuery('#'+id);
@@ -404,7 +404,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 // Les Submit avec attribut name ne sont pas transmis par JQuery
 // Cette fonction clone le bouton de soumission en hidden
 // Voir l'utilisation dans ajax_action_post dans inc/actions
-
+// cf grenier
 function AjaxNamedSubmit(input) {
 	jQuery('<input type="hidden" />')
 	.attr('name', input.name)
@@ -490,7 +490,7 @@ function charger_node_url_si_vide(url, noeud, gifanime, jjscript,event) {
 	}
   return false;
 }
-
+/*
 function charger_id_url_si_vide (myUrl, myField, jjscript, event) {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
@@ -503,4 +503,4 @@ function charger_id_url_si_vide (myUrl, myField, jjscript, event) {
 		Field.style.display = "block";
 	}
 }
-
+*/
