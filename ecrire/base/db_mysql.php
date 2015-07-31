@@ -81,7 +81,7 @@ function spip_mysql_query($query, $serveur='mysql') {
 	$query = traite_query($query); // traitement du prefixe de table
 
 	$r = !$GLOBALS['mysql_rappel_connexion'] ?  false
-	  : $GLOBALS['spip_' . $serveur . 'mysql_link'];
+	  : $GLOBALS['spip_' . $serveur . '_link'];
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$r = $r ? mysql_query($query, $r) : mysql_query($query);
