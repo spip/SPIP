@@ -358,6 +358,7 @@ ecrire/lang/public_ru.php3 -text
 ecrire/lang/spip_br.php3 -text
 ecrire/lang/spip_cs.php3 -text
 ecrire/lang/spip_ru.php3 -text
+ecrire/page.php -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
 ecrire/polices/dustismo_bold.ttf -text
