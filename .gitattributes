@@ -329,8 +329,6 @@ prive/formulaires/configurer_articles.html -text
 prive/formulaires/configurer_articles.php -text
 prive/formulaires/configurer_avertisseur.html -text
 prive/formulaires/configurer_avertisseur.php -text
-prive/formulaires/configurer_documents.html -text
-prive/formulaires/configurer_documents.php -text
 prive/formulaires/configurer_flux.html -text
 prive/formulaires/configurer_flux.php -text
 prive/formulaires/configurer_identite.html -text
