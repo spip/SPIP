@@ -55,16 +55,15 @@ function vertebrer_sanstri($sauf='')
 
 function vertebrer_form($fields)
 {
-	$res = "\t\t<td></td>";
+	$res = '';
 	$url = join('|', array_keys($fields));
 	$url = "#SELF|parametre_url{'$url',''}";
 	foreach($fields as $n => $t) {
-
 		$s = test_sql_int($t) ? 11
 		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
-	  spip_log("$t $s");
-		$res .= "\n\t\t<td><form action='[($url)]' method='get'><div>"
-		 . "\n\t\t\t<input name='$n'[ value='(#ENV{" . $n ."})']"
+
+		$res .= "\n\t\t<td><form action='./' method='get'><div>"
+		 . "\n\t\t\t<input name='$n'"
 		 . ($s ? " size='$s'" : '')
 		 . " />\n\t\t\t[($url|form_hidden)]"
 		 . "\n\t\t</div></form></td>";
@@ -90,7 +89,7 @@ function vertebrer_crit($v)
 // http://doc.spip.org/@vertebrer_cell
 function vertebrer_cell($fields)
 {
-  $res = "\n\t<tr class='[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]'>\n\t\t<td>#COMPTEUR_BOUCLE</td>";
+  $res = "";
   foreach($fields as $n => $t) {
  {
       $texte = "#" . strtoupper($n);
@@ -138,18 +137,22 @@ function public_vertebrer_dist($desc)
 <B1>
 <p class='pagination'>#ANCRE_PAGINATION#PAGINATION</p>
 <table class='spip' border='1' width='90%'>
-\t<tr>
-\t\t<th><:info_numero_abbreviation:></th>$sort
-\t</tr>
-\t<tr>
-$form
-\t</tr>\n<BOUCLE1($surnom){pagination} 
-\t\t{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}$crit>$cell
-\t</tr>
+	<tr>
+		<th><:info_numero_abbreviation:></th>$sort
+	</tr>
+	<tr>
+		<td></td>$form
+	</tr>
+<BOUCLE1($surnom){pagination} 
+		{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}$crit>
+	<tr class='[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]'>
+		<td>#COMPTEUR_BOUCLE</td>$cell
+	</tr>
 </BOUCLE1>
-\t<tr>\n\t\t<th><:info_numero_abbreviation:></th>
-$tros
-\t</tr>\n</table>
+	<tr>
+		<th><:info_numero_abbreviation:></th>$tros
+	</tr>
+</table>
 </B1>\n<h2 style='text-align:center'><:texte_vide:></h2>
 <//B1></div>
 <INCLURE{fond=inc-pied}{skel='$skel'}>
