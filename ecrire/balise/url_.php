@@ -154,11 +154,11 @@ function balise_URL_PAGE_dist($p) {
 		}
 	}
 	if ($args != "''" && $args!==NULL) {
-		if (defined($connect)) {
+		if (isset($connect)) {
 			$args .= " . '&connect=$connect'";
 		} // sinon $args reste tel quel
 	} else { // si pas d'arguments
-		if (defined($connect)) {
+		if (isset($connect)) {
 			$args = ($connect ? "'connect=$connect'" : "''");
 		}
 	}
