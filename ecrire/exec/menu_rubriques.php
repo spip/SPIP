@@ -84,10 +84,13 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 
 	// Limiter volontairement le nombre de sous-menus 
 	if (!(--$zmax)) return "\n<div>$nav</div>";
-
+	
 	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
-	if (!$i) return "\n<div>$nav</div>";
+	if (!$i) {
+		$zmax++;
+		return "\n<div>$nav</div>";
+	}
 
 	$pxdecal = max(15, ceil($largeur/5)) . 'px';
 	$idom = 'b_' . $id_rubrique;
