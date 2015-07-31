@@ -128,12 +128,12 @@ function menu_langues($nom_select) {
 }
 
 // http://doc.spip.org/@select_langues
-function select_langues($nom_select, $change, $options)
+function select_langues($nom_select, $change, $options, $label="")
 {
 	static $cpt = 0;
 	$id = "menu_langues" . $cpt++;
 	return
-		#"<label for='$id'>"._T('info_langues')."</label> ".
+		"<label for='$id'>".($label?$label:_T('info_langues'))."</label> ".
 		"<select name='$nom_select' id='$id' "
 	  . ((!test_espace_prive()) ?
 	     ("class='forml menu_langues'") :

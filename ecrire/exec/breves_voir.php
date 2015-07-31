@@ -196,20 +196,20 @@ function langue_breve($id_breve, $row){
 	$langue_breve = $row['lang'];
 
 	$res = "";
-	$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
-	$res .= debut_cadre_enfonce('langues-24.gif',true,'',$bouton);
+	#$bouton = bouton_block_depliable(_T('titre_langue_breve')."&nbsp; (".traduire_nom_langue($langue_breve).")",false,'languesbreve');
+	$res .= debut_cadre_enfonce('langues-24.gif',true/*,'',$bouton*/);
 
-	$res .= debut_block_depliable(false,'languesbreve');
+	#$res .= debut_block_depliable(false,'languesbreve');
 	$res .= "<div class='langue'>";
 
 	if ($menu = liste_options_langues('changer_lang', $langue_breve, $langue_parent)) {
 		$lien = "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\"";
-		$menu = select_langues('changer_lang', $lien, $menu)
+		$menu = select_langues('changer_lang', $lien, $menu, _T('titre_langue_breve'))
 	. "<span><input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' /></span>";
 	}
 	$res .= redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);
 	$res .= "</div>\n";
-	$res .= fin_block();
+	#$res .= fin_block();
 
 	$res .= fin_cadre_enfonce(true);
 	return $res;
