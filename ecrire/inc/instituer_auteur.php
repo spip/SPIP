@@ -131,7 +131,7 @@ function choix_statut_auteur($statut, $ancre) {
 	global $connect_toutes_rubriques;
 
 	$menu = "<select name='statut' size='1' class='fondl'
-		onChange=\"findObj_forcer('$ancre').style.visibility = (this.selectedIndex ? 'hidden' : 'visible');\">";
+		onchange=\"findObj_forcer('$ancre').style.visibility = (this.selectedIndex ? 'hidden' : 'visible');\">";
 
 	// Si on est admin restreint, on n'a pas le droit de modifier un admin
 	if ($connect_toutes_rubriques)
