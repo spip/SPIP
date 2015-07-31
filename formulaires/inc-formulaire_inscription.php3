@@ -44,11 +44,13 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 					       'form_forum_voici1' :
 					       'form_forum_voici2');
 
-	return array("formulaire_inscription", 0,
+	return array("formulaire_inscription", $GLOBALS['delais'],
 			array('focus' => $focus,
 				'target' => _request('target'),
 				'message' => $message,
-				'mode' => $mode));
+				'mode' => $mode,
+				'self' => $GLOBALS["clean_link"]->getUrl()
+				));
 }
 
 // fonction qu'on peut redefinir pour filtrer selon l'adresse mail

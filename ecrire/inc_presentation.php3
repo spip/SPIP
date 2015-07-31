@@ -2041,7 +2041,7 @@ if ($spip_display == "4") {
 	echo "<li><a href=\"naviguer.php3\">"._T('icone_edition_site')."</a>";
 	echo "<li><a href=\"forum.php3\">"._T('titre_forum')."</a>";
 	echo "<li><a href=\"auteurs.php3\">"._T('icone_auteurs')."</a>";
-	echo "<li><a href=\"$adresse_site\">"._T('icone_visiter_site')."</a>";
+	echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
 	echo "</ul>";
 }
 else {
@@ -2077,7 +2077,7 @@ else {
 
 
 	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.png", "vide", "", "aide_index.php3?var_lang=$spip_lang", "aide-en-ligne", $sous_rubrique);
-	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site/", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
 
 	echo "</tr></table>\n";
 

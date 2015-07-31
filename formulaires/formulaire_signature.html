@@ -1,4 +1,4 @@
-<form method='post' action='#SELF#sp[(#ENV{id_article})]'>
+<form method='post' action="[(#ENV{self})][#sp(#ENV{id_article})]">
 <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
 <div class='spip_encadrer' style='color: black; font-size: 80%; font-weight: normal;'>
 [(#ENV*{texte}|propre)]

@@ -65,7 +65,8 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 			'petition' => $petition,
 			'texte' => $texte,
 			'site_obli' => $site_obli,
-			'message' => $message
+			'message' => $message,
+			'self' => $GLOBALS["clean_link"]->getUrl()
 		));
 	}
 }

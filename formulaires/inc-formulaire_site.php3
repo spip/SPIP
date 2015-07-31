@@ -21,7 +21,10 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
-	if (!_request('nom_site')) return array('formulaire_site', 0);
+	if (!_request('nom_site'))
+		return array('formulaire_site', $GLOBALS['delais'],
+			array('self' => $GLOBALS["clean_link"]->getUrl()
+		));
 
 	// Tester le nom du site
 	if (strlen (_request('nom_site')) < 2){

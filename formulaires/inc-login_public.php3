@@ -128,7 +128,7 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
-	return array('formulaire_login', 0, 
+	return array('formulaire_login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(
@@ -139,7 +139,8 @@ function login_pour_tous($login, $cible, $action) {
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
 					'login' => $login,
-					'login_alt' => ($login_alt ? $login_alt : $login)
+					'login_alt' => ($login_alt ? $login_alt : $login),
+					'self' => $GLOBALS["clean_link"]->getUrl()
 					)
 				)
 			);

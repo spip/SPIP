@@ -773,8 +773,10 @@ function code_invalideur_forums($p, $code) {
 	return ajouter_invalideur($type, $valeur, $code);
 }
 
-// reference a l'URL de la page courante
-
+// Reference a l'URL de la page courante
+// Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de
+// mettre en cache #SELF car il peut correspondre a une autre page (attaque XSS)
+// http://www.spip.net/@self
 function balise_SELF_dist($p) {
 	$p->code = 'quote_amp($GLOBALS["clean_link"]->getUrl())';
 	$p->statut = 'php';
