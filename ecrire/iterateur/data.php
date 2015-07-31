@@ -125,7 +125,7 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Srtocker en cache si possible
+	 * Stocker en cache si possible
 	 * @param  $cle
 	 * @param  $ttl
 	 * @return
@@ -145,8 +145,8 @@ class IterateurDATA implements Iterator {
 				'ttl' => $ttl
 			),
 			3600 + $ttl);
-			# conserver le cache 1h deplus que la validite demandee,
-			# pour le cas ou le serveur distant ne repond plus
+			# conserver le cache 1h de plus que la validite demandee,
+			# pour le cas ou le serveur distant ne reponde plus
 	}
 
 	/**
@@ -168,7 +168,7 @@ class IterateurDATA implements Iterator {
 			$this->command['sourcemode'] = $this->command['from'][0];
 		}
 
-		// cherchons defferents moyens de creer le tableau de donnees
+		// cherchons differents moyens de creer le tableau de donnees
 		// les commandes connues pour l'iterateur DATA
 		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
 		
@@ -426,7 +426,7 @@ class IterateurDATA implements Iterator {
 
 
 	/**
-	 * Grouper les resurltats
+	 * Grouper les resultats
 	 * {fusion /x/y/z}
 	 * 
 	**/
