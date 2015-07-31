@@ -28,6 +28,10 @@ else {
 
 
 
+//
+// Bidouille pour parametrer les liens (peu utilisee)
+//
+
 function transformer_lien_logo($contexte, $lien) {
 	$lien = ereg_replace("#ID_RUBRIQUE", $contexte['id_rubrique'], $lien);
 	$lien = ereg_replace("#ID_ARTICLE", $contexte['id_article'], $lien);
@@ -48,10 +52,9 @@ function transformer_lien_logo($contexte, $lien) {
 
 
 //
-// Retrouver l'image d'un objet (et son survol)
+// Retrouver le logo d'un objet (et son survol)
 //
 
-// chercher une image nommee dans tous les formats
 function cherche_image_nommee($nom) {
 	$formats = array ('gif', 'jpg', 'png');
 	while (list(, $format) = each($formats))
@@ -113,7 +116,7 @@ function image_document($id_document){
 			}
 			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
 		}
-		
+
 		// ajuster chemin d'acces au fichier
 		if ($GLOBALS['flag_ecrire']) {
 			if ($fichier) $fichier = "../$fichier";
@@ -121,7 +124,7 @@ function image_document($id_document){
 		}
 
 		$fichier_vignette = ereg_replace("^IMG", "", $fichier_vignette);
-		
+
 		$image[0] = $fichier_vignette;
 		return $image;
 	}
@@ -148,23 +151,23 @@ function image_mot($id_mot){
 	return cherche_image($id_mot,'mot');
 }
 
-// recursif vers les rubriques parents
 function image_rubrique($id_rubrique) {
-	while ($id_rubrique) {
+	// Recherche recursive vers les rubriques parentes (y compris racine)
+	for (;;) {
 		$image = cherche_image($id_rubrique, 'rub');
 		if ($image[0]) break;
 		$result = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
 		if ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_parent'];
 		}
+		else break;
 	}
 
-	// idee : si on n'a toujours rien -> image de rubrique par defaut
 	return $image;
 }
 
 
-// renvoie le html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
+// Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
 function affiche_logos($arton, $artoff, $lien, $align) {
 	global $num_survol;
 	global $espace_logos;
@@ -172,7 +175,7 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 	$num_survol++;
 	if ($arton) {
 		$imgsize = @getimagesize("IMG/$arton");
-		$taille_image = ereg_replace("\"","'",$imgsize[3]);
+		//$taille_image = ereg_replace("\"","'",$imgsize[3]);
 		$milieu = "<IMG SRC='IMG/$arton' ALIGN='$align' ".
 			" NAME='image$num_survol' ".$taille_image." BORDER='0' ALT=''".
 			" HSPACE='$espace_logos' VSPACE='$espace_logos' class='spip_logos'>";
@@ -200,6 +203,7 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 }
 
 
+// Retourne la hierarchie d'une rubrique
 function construire_hierarchie($id_rubrique) {
 	$hierarchie = "";
 	$id_rubrique = intval($id_rubrique);
@@ -221,12 +225,11 @@ function construire_hierarchie($id_rubrique) {
 
 
 //
-// Critere {branche} : les descendants d'une rubrique
-// On procede par generation - tous les fils, puis tous les petits-fils, etc.
+// Critere {branche} : recuperer les descendants d'une rubrique
 //
 function calcul_generation ($generation) {
 	$lesfils = array();
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($generation)"); 
+	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($generation)");
 	while ($row = spip_fetch_array($result))
 		$lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
