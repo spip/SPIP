@@ -552,43 +552,70 @@ function typo($letexte) {
 }
 
 
-// Les listes a puce
-function traiter_listes_a_puce ($texte) {
+
+//
+// Traitement des listes
+//
+function traiter_listes ($texte) {
 	$parags = split ("\n[[:space:]]*\n", $texte);
 	unset($texte);
 
 	// chaque paragraphe est traite a part
 	while (list(,$para) = each($parags)) {
 		$niveau = 0;
-		$lignes = split("\n-\*", "\n" . $para);
+		$lignes = explode("\n-", "\n" . $para);
 
 		// ne pas toucher a la premiere ligne
 		list(,$debut) = each($lignes);
 		$texte .= $debut;
 
-		// chaque item a sa profondeur = nb d'etoiles (dont une a ete mangee par le split)
+		// chaque item a sa profondeur = nb d'etoiles
+		unset ($type);
 		while (list(,$item) = each($lignes)) {
-			ereg("^(\**)[[:space:]]*(.*)", $item, $regs);
-			$profond = 1+strlen($regs[1]);
-			unset ($ajout);
-			while ($profond > $niveau) {
-				$niveau ++;
-				$ajout .= "<ul>";
+			ereg("^(\**|#*)[[:space:]]*(.*)", $item, $regs);
+			$profond = strlen($regs[1]);
+
+			if ($profond > 0) {
+				unset ($ajout);
+
+				// changement de type de liste : il faut descendre un
+				// niveau plus bas, fermer ce niveau, et remonter
+				$nouv_type = (substr($item,0,1) == '*') ? 'ul' : 'ol';
+				$change_type = ($type AND ($type <> $nouv_type)) ? 1 : 0;
+				$type = $nouv_type;
+
+				if ($niveau == $profond && !$change_type) {
+					$ajout = "</li>";
+				}
+				while ($niveau > $profond - $change_type) {
+					$ajout .= $pile_li[$niveau];
+					$ajout .= $pile_type[$niveau];
+					$niveau --;
+					unset ($pile_li[$niveau]);
+				}
+				while ($niveau < $profond) {
+					$niveau ++;
+					$ajout .= "<$type class=\"spip\">";
+					$pile_type[$niveau] = "</$type>";
+				}
+				$ajout .= "<li class=\"spip\">";
+				$pile_li[$profond] = "</li>";
 			}
-			while ($profond < $niveau) {
-				$niveau --;
-				$ajout .= "</ul>";
+			else { 
+				$ajout = "\n- ";	// puce normale
 			}
 
-			if ($ajout)
-				$texte .= $ajout ."<li>". $regs[2];
-			else
-				$texte .= "</li><li>" . $regs[2];
+			$texte .= $ajout . $regs[2];
 		}
 
 		// retour sur terre
-		while ($niveau -- > 0)
-			$texte .= "</li></ul>";
+		unset ($ajout);
+		while ($niveau > 0) {
+			$ajout .= $pile_li[$niveau];
+			$ajout .= $pile_type[$niveau];
+			$niveau --;
+		}
+		$texte .= $ajout;
 
 		// paragraphe
 		$texte .= "\n\n";
@@ -814,9 +841,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	$letexte = trim($letexte);
 
-	// les listes a puce
-	if (ereg("\n-\*", "\n".$letexte))
-		$letexte = traiter_listes_a_puce($letexte);
+	// les listes
+	if (ereg("\n-[*#]", "\n".$letexte))
+		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
 	if ($flag_str_replace && !$flag_preg_replace) {
