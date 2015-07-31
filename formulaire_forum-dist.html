@@ -18,12 +18,12 @@
       <fieldset class='spip_encadrer'>
 	<legend><b><:forum_texte:></b></legend>
 	<p><:info_creation_paragraphe:></p>
-	[(#HTTP_VARS{afficher_barre})]
+	[(#HTTP_VARS*{afficher_barre})]
 	<textarea name='texte' rows='12' class='forml' cols='40'
 	  [(#HTTP_VARS{afficher_claret})] >[(#HTTP_VARS{texte})]</textarea>
       </fieldset>
       <br />
-      [(#HTTP_VARS{table})]
+      [(#HTTP_VARS*{table})]
       <fieldset class='spip_encadrer'>
 	<legend><:forum_lien_hyper:></legend>
 	<p><:forum_page_url:></p>

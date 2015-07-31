@@ -93,14 +93,14 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 
 		if ($afficher_texte != 'non') {
 			$previsu = 
-			"<div style='font-size: 120%; font-weigth: bold;'>"
-			. typo($titre)
-			. "</div><p /><b><a href=\"mailto:"
-			. entites_html($email_auteur) . "\">"
-			. typo($auteur) . "</a></b><p />"
-			. propre($texte) . "<p /><a href=\""
-			. entites_html($url_site) . "\">"
-			. typo($nom_site_forum) . "</a>";
+			  "<div style='font-size: 120%; font-weigth: bold;'>"
+			  . htmlspecialchars($titre)
+			  . "</div><p /><b><a href=\"mailto:"
+			  . htmlspecialchars($email_auteur) . "\">"
+			  . htmlspecialchars($auteur) . "</a></b><p />"
+			  . htmlspecialchars($texte) . "<p /><a href=\""
+			  . htmlspecialchars($url_site) . "\">"
+			  . htmlspecialchars($nom_site_forum) . "</a>";
 
 			// Verifier mots associes au message
 			$result_mots = spip_query("SELECT mots.id_mot, mots.titre, mots.type
@@ -176,27 +176,27 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 		     'afficher_barre' => afficher_barre('formulaire', 'texte', true),
 		     'afficher_non' => 
 		     ($afficher_texte != 'non' ? '' :
-		      (boutonne('hidden', 'titre', $titre) .
+		      (boutonne('hidden', 'titre', htmlspecialchars($titre)) .
 		       $table .
 		       "\n<br /><div align='right'>" .
 		       boutonne('submit', '', _T('forum_valider'), "class='spip_bouton'") .
-		       "</div>")),
+		       "</div>")), 
 		     'alea' => $alea,
-		     'auteur' => entites_html($auteur),
+		     'auteur' => $auteur,
 		     'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
-		     'email_auteur' => entites_html($email_auteur),
+		     'email_auteur' => $email_auteur,
 		     'hash' => $hash,
 		     'id_message' => $id_message,
 		     'modere' => (($forums_publics != 'pri') ? '' :
-				  (_T('forum_info_modere'). '<p>')),
-		     'nom_site_forum' => entites_html($nom_site_forum),
+				  _T('forum_info_modere')),
+		     'nom_site_forum' => $nom_site_forum,
 		     'previsu' => $previsu,
 		     'retour' => $retour,
 		     'table' => $table,
-		     'texte' =>   entites_html($texte),
+		     'texte' =>   $texte,
 		     'titre' => $titre,
-		     'url' =>  quote_amp($url),
-		     'url_site' => ($url_site ? entites_html($url_site) : "http://")
+		     'url' =>  $url,
+		     'url_site' => ($url_site ? $url_site : "http://")
 		     ));
 }
 
@@ -395,7 +395,6 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 function supprimer_prefixe($texte, $prefixe)
 {
-  spip_log("'$prefixe' '$texte'" );
   return ereg_replace("^[$prefixe" . '[:space:]]*', '', $texte);
 }
 ?>
