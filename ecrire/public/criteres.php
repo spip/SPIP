@@ -645,7 +645,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 		
 		// {pagination}, gerer le debut_xx=-1 pour tout voir
 		if ($op1 == 'p') {
-			$debut = "((\$tout=($debut == -1))?0:($debut))";
+			$debut .= ";\n	\$debut_boucle = ((\$tout=(\$debut_boucle == -1))?0:(\$debut_boucle))";
 			$fin = "(\$tout ? \$Numrows['$id_boucle']['total'] : $fin)";
 		}
 	}
