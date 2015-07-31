@@ -55,14 +55,11 @@ function base_import_all_dist($titre, $reprise=false)
 
 	debut_droite();
 	
-	// precaution inutile I think (esj)
-	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='import_all'"), SPIP_NUM);
+	import_all_milieu($request);
 
-	$res = $my_date ? import_all_milieu($request) : '';
+	echo "</body></html>\n";
 
-	echo $res, "</body></html>\n";
-
-	if ($request['insertion'] == 'on' AND !$res) {
+	if ($request['insertion'] == 'on') {
 			$request['insertion'] = 'passe2';
 			if ($request['url_site']
 			AND substr($request['url_site'],-1) != '/')
