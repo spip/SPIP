@@ -39,12 +39,18 @@ function base_admin_repair_dist($titre='', $reprise='') {
 
 // http://doc.spip.org/@admin_repair_plat
 function admin_repair_plat(){
+	spip_log("verification des documents joints");
 	$out = "";
 	$repertoire = array();
 	include_spip('inc/getdocument');
 	$res = sql_select('*','spip_documents',"fichier REGEXP CONCAT('^',extension,'[^/\]')");
+
 	while ($row=sql_fetch($res)){
 		$ext = $row['extension'];
+		if (!$ext) {
+			spip_log("document sans extension: " . $row['id_document']);
+			continue;
+		}
 		if (!isset($repertoire[$ext])){
 			if (@file_exists($plat = _DIR_IMG. $ext .".plat"))
 				spip_unlink($plat);
@@ -63,6 +69,7 @@ function admin_repair_plat(){
 			}
 		}
 	}
+
 	return $out;
 }
 

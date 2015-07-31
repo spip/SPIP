@@ -20,7 +20,7 @@ function creer_repertoire_documents($ext) {
 	$rep = sous_repertoire(_DIR_IMG, $ext);
 
 	if (!$ext OR !$rep) {
-		spip_log("creer_repertoire_documents interdit");
+		spip_log("creer_repertoire_documents '$rep' interdit");
 		exit;
 	}
 
