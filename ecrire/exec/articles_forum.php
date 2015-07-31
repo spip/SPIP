@@ -47,7 +47,7 @@ function exec_articles_forum_dist()
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 
-	$droit= $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique);
+	$droit= ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique));
 
 	if (_request('var_ajaxcharset') AND $droit) return $mess;
 

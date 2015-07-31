@@ -306,8 +306,11 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 
 			$row_groupe = spip_fetch_array(spip_query("SELECT titre, unseul, obligatoire, minirezo, comite FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+
 			$type_mot = typo($row_groupe['titre']);
-			$flag_groupe = $flag_editable AND (($connect_statut == '1comite' AND $row_groupe['comite'] == 'oui') OR ($connect_statut == '0minirezo' AND $row_groupe['minirezo'] == 'oui'));
+			$flag_groupe = ($flag_editable AND
+					((($connect_statut === '1comite') AND $row_groupe['comite'] === 'oui') OR (($connect_statut === '0minirezo') AND $row_groupe['minirezo'] === 'oui')));
+
 			// Changer
 			if (($row_groupe['unseul'] == "oui") AND $flag_groupe) {
 				$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
