@@ -183,6 +183,10 @@ Array
 //petite fonction qui prend en charge les problemes de double slash
 //qunad on concatene les lien 
 function concat_url($url1, $path){
+	# methode spip
+	if(function_exists('suivre_lien')) {
+		return suivre_lien($url1,$path);
+	}
         $url = $url1 . "/" . $path;
         //cette opération peut très facilement avoir généré // ou /// 
         $url = str_replace("///", "/", $url);
