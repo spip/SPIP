@@ -25,7 +25,9 @@ function filtre_multipart_dist($t) {return '';}
 
 // http://doc.spip.org/@filtre_text_txt_dist
 function filtre_text_dist($t) {
-	return '<pre>' . echapper_tags($t) . '</pre>';
+	static $t1 = array('<', '>', '&');
+	static $t2 = array('&lt;', '&gt;', '&amp;');
+	return '<pre>' . str_replace($t1, $t2, $t) . '</pre>';
 }
 
 // http://doc.spip.org/@filtre_text_csv_dist
