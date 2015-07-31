@@ -71,7 +71,7 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 			$id_article > 0
 			AND autoriser('modererpetition', 'article', $id_article)
 			))
-			$ong = controle_petition_onglet($id_article, $debut, $type, $id_signature ? "id_signature=$id_signature&" : '');
+			$ong = controle_petition_onglet($id_article, $debut, $type, '');
 		else {
 			$type = 'public';
 			$ong = '';
