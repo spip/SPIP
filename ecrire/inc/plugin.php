@@ -429,7 +429,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		}
 		$fonctions = array();
 		if (isset($arbre['fonctions']))
-			$fonctions = $arbres['fonctions'];
+			$fonctions = $arbre['fonctions'];
 	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
 		if (is_array($arbre['pipeline'])){
 			foreach($arbre['pipeline'] as $pipe){
