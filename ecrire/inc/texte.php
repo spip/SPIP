@@ -534,7 +534,7 @@ function corriger_typo($letexte, $lang='') {
 			$insert = $reg[0];
 			// hack: on transforme les caracteres a proteger en les remplacant
 			// par des caracteres "illegaux". (cf corriger_caracteres())
-			$insert = strtr($insert, $protege, $illegal);
+			$insert = strtr($insert, _TYPO_PROTEGER, _TYPO_PROTECTEUR);
 			$letexte = str_replace($reg[0], $insert, $letexte);
 		}
 	}
@@ -573,7 +573,7 @@ function corriger_typo($letexte, $lang='') {
 	if ($typographie) $letexte = $typographie($letexte);
 
 	// Retablir les caracteres proteges
-	$letexte = strtr($letexte, $illegal, $protege);
+	$letexte = strtr($letexte, _TYPO_PROTECTEUR, _TYPO_PROTEGER);
 	// et les citations en d'autres langues
 	if ($typo2!=='') $letexte = echappe_retour($letexte, 'multi');
 
