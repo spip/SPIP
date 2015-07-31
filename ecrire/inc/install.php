@@ -347,7 +347,7 @@ function install_select_serveur()
 	$dir = _DIR_RESTREINT . 'req/';
 	$d = @opendir($dir);
 	if (!$d) return array();
-	while ($f = readdir($d)) {
+	while (($f = readdir($d))!==false) {
 		if ((preg_match('/^(.*)[.]php$/', $f, $s))
 		AND is_readable($f = $dir . $f)) {
 			require_once($f);
