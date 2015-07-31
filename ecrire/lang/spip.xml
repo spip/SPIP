@@ -16,15 +16,19 @@
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bs" total="636" traduits="466" relire="0" modifs="42" nouveaux="128" pourcent="73.27">
 	</langue>
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ca" total="636" traduits="618" relire="0" modifs="1" nouveaux="17" pourcent="97.17">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ca" total="636" traduits="632" relire="1" modifs="0" nouveaux="3" pourcent="99.37">
+		<traducteur nom="laura" lien="http://trad.spip.net/auteur/laura" />
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="co" url="http://trad.spip.net/tradlang_module/spip?lang_cible=co" total="636" traduits="601" relire="0" modifs="13" nouveaux="22" pourcent="94.50">
+	<langue code="co" url="http://trad.spip.net/tradlang_module/spip?lang_cible=co" total="636" traduits="605" relire="0" modifs="11" nouveaux="20" pourcent="95.13">
+		<traducteur nom="laura" lien="http://trad.spip.net/auteur/laura" />
 		<traducteur nom="tavamig" lien="http://trad.spip.net/auteur/tavamig" />
 	</langue>
-	<langue code="cpf" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cpf" total="636" traduits="492" relire="0" modifs="44" nouveaux="100" pourcent="77.36">
+	<langue code="cpf" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cpf" total="636" traduits="494" relire="0" modifs="44" nouveaux="98" pourcent="77.67">
+		<traducteur nom="laura" lien="http://trad.spip.net/auteur/laura" />
 	</langue>
-	<langue code="cpf_hat" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cpf_hat" total="636" traduits="477" relire="0" modifs="53" nouveaux="106" pourcent="75.00">
+	<langue code="cpf_hat" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cpf_hat" total="636" traduits="483" relire="0" modifs="53" nouveaux="100" pourcent="75.94">
+		<traducteur nom="laura" lien="http://trad.spip.net/auteur/laura" />
 	</langue>
 	<langue code="cs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=cs" total="636" traduits="497" relire="0" modifs="38" nouveaux="101" pourcent="78.14">
 	</langue>
