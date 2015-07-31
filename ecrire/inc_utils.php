@@ -55,6 +55,9 @@ function include_ecrire($file, $silence=false) {
 	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
 		return include_local($f, $silence);
 
+	# cas special inc/index => indexation
+	if ($r[3] == 'index') return include_spip('inc/indexation');
+
 	# new style, surchargeable
 	return include_spip('inc/'.$r[3]);
 }
