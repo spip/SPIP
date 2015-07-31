@@ -135,7 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Pa más información tocante a toes estes técniques, pues consultar <a href="@spipnet@">la documentación de SPIP</a>.',
 	'ical_info_calendrier' => 'Tienes dos axendes a la to disposición. La primera ye el plan del sitiu que anuncia tolos artículos espublizaos. La segunda contién los anuncios editoriales y también los tos caberos mensaxes privaos: esta ye una axenda privada gracies a una clave personal, que pues modificar en tou momentu anovando la to contraseña.',
 	'ical_methode_http' => 'Descarga',
-	'ical_methode_webcal' => 'Sincronización (webcal://)',
+	'ical_methode_webcal' => 'Sincronización (webcal://)', # MODIF
 	'ical_texte_js' => 'Una llinia de javascript va permitite amosar de mou bien fácil, en cualquier otru sitiu tuyu, los artículos recientes espublizaos nesti sitiu.',
 	'ical_texte_prive' => 'Esta axenda, de usu esclusivamente personal, te informa de l’actividá editorial privada d’esti sitiu (xeres y conceyos personales, artículos y breves propuestos...).',
 	'ical_texte_public' => 'Esta axenda te permite siguir l’actividá pública d’esti sitiu (artículos y breves espublizáos).',

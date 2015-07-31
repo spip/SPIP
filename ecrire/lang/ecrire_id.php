@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Untuk informasi lebih lanjut, jangan segan-segan untuk mengunjungi <a href="@spipnet@">dokumentasi SPIP</a>.', # MODIF
 	'ical_info_calendrier' => 'Dua kalender berada di tangan anda siap untuk dipakai. Yang pertama adalah peta situs yang menampilkan semua artikel yang dipublikasi. Yang kedua berisikan pengumuman editorial sekaligus pesan-pesan pribadi terbaru anda: semuanya dapat disimpan berkat kunci pribadi yang bisa anda modifikasi setiap saat dengan jalan memperbaharui kata sandi.',
 	'ical_methode_http' => 'Mengunduh',
-	'ical_methode_webcal' => 'Sinkronisasi (webcal://)',
+	'ical_methode_webcal' => 'Sinkronisasi (webcal://)', # MODIF
 	'ical_texte_js' => 'Sebuah kode javascript mengizinkan anda untuk menampilkan secara mudah dan di setiap situs yang anda miliki, semua artikel terbaru yang dipublikasikan di situs ini.',
 	'ical_texte_prive' => 'Kalender ini, yang sifatnya pribadi sekali, menginformasikan anda seluruh aktivitas editorial pribadi situs ini (tugas-tugas, janji-janji pribadi, artikel-artikel dan berita-berita yang dikirimkan...).',
 	'ical_texte_public' => 'Kalender ini memperbolehkan anda mengikuti aktivitas umum situs ini (artikel-artikel dan berita-berita yang dipublikasi).',

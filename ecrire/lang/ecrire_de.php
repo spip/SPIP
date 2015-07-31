@@ -150,7 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Um mehr über diese Techniken zu erfahren, lesen Sie bitte die <a href="@spipnet@">SPIP Dokumentation</a>.',
 	'ical_info_calendrier' => 'Sie verfügen über zwei Kalender. Einer gibt Ihnen eine Übersicht über die Website und alle dort veröffentlichten Artikel. Der zweite enthält editorische Ankündigungen und Ihre persönlichen Nachrichten. Sie allein haben Zugriff auf ihn indem Sie Ihr Passwort eingeben. Sie könne es ändern, indem Sie Ihr Zugangspasswort für diese Website ändern.',
 	'ical_methode_http' => 'Download',
-	'ical_methode_webcal' => 'Synchronisieren (webcal://)',
+	'ical_methode_webcal' => 'Synchronisieren (webcal://)', # MODIF
 	'ical_texte_js' => 'Mit nur einer Zeile Javascript können Sie auf Ihrer Website die neuesten Artikel dieser Website anzeigen.',
 	'ical_texte_prive' => 'Dieser nur für Sie selbst zugängliche Kalender hält Sie auf dem Laufenden über die internen redaktionellen Vorgänge dieser Website (Aufgaben und persönliche Termine, vorgeschlagene Artikel und Meldungen ...).',
 	'ical_texte_public' => 'Dieser Kalender gibt Ihnen einen Überblick über die Ereignisse im öffentlichen Bereich der Website.',

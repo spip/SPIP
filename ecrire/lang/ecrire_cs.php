@@ -108,7 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_info2' => 'Bližší informace naleznete v <a href="@spipnet@">dokumentaci k systému SPIP</a>.', # MODIF
 	'ical_info_calendrier' => 'Máte k dispozici dva kalendáře. První obsahuje seznam webů s uvedením všech publikovaných článků. Druhý obsahuje redaktorská oznámení a vaše poslední soukromá sdělení: k němu máte přístup pomocí osobního klíče. Tento klíč můžete kdykoli změnit obnovením svého hesla.',
 	'ical_methode_http' => 'Odeslání / stažení',
-	'ical_methode_webcal' => 'Synchronizace (webcal://)',
+	'ical_methode_webcal' => 'Synchronizace (webcal://)', # MODIF
 	'ical_texte_js' => 'Jeden příkaz JavaScriptu jednoduše umožní na všech vašich webech zobrazit nejnovější články z tohoto webu.',
 	'ical_texte_prive' => 'Tento kalendář je určen výhradně k vašemu osobnímu použití a informuje vás o soukromé činnosti redaktorů tohoto webu (osobní úkoly a schůzky, navrhované články a novinky ...).',
 	'ical_texte_public' => 'Tento kalendář vám umožní sledovat aktivitu veřejné části webu (publikované články a novinky).',

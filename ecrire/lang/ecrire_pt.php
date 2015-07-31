@@ -151,7 +151,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'ical_info2' => 'Para mais informações sobre estas técnicas, consultar  <a href="@spipnet@">a documentação de SPIP</a>.',
 	'ical_info_calendrier' => 'Estão disponíveis dois calendários. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo é pessoal e contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
 	'ical_methode_http' => 'Download',
-	'ical_methode_webcal' => 'Sincronização (webcal://)',
+	'ical_methode_webcal' => 'Sincronização (webcal://)', # MODIF
 	'ical_texte_js' => 'Uma linha de javascript permite-lhe facilmente exibir, em qualquer sítio que lhe pertença, os artigos recentes publicados neste sítio.',
 	'ical_texte_prive' => 'Este calendário, de uso estritamente pessoal, informa sobre a actividade editorial privada deste sítio (tarefas e encontros pessoais, artigos e notícias propostos...).',
 	'ical_texte_public' => 'Este calendário permite acompanhar a actividade pública deste sítio (artigos e notícias publicados).',
