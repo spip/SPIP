@@ -86,6 +86,18 @@ function cache_valide(&$page, $date) {
 	AND $date < $GLOBALS['meta']['derniere_modif'])
 		return 1;
 
+	// Apparition d'un nouvel article post-date ?
+	if ($GLOBALS['meta']['post_dates'] == 'non'
+	AND $GLOBALS['meta']['date_prochain_postdate']
+	AND time() > $GLOBALS['meta']['date_prochain_postdate']) {
+		spip_log('Un article post-date invalide le cache');
+		include_spip('inc/meta');
+		include_spip('inc/rubriques');
+		ecrire_meta('derniere_modif', time());
+		calculer_prochain_postdate(); // fera le ecrire_metas()
+		return 1;
+	}
+
 	// Sinon comparer l'age du fichier a sa duree de cache
 	$duree = intval($page['entetes']['X-Spip-Cache']);
 	if ($duree == 0)  #CACHE{0}

@@ -117,6 +117,9 @@ function calculer_rubriques() {
 	// pour recalculer les langues utilisees sur le site
 	include_spip('inc/lang');
 	calculer_langues_utilisees();
+
+	// on calcule la date du prochain article post-date
+	calculer_prochain_postdate();
 }
 
 // http://doc.spip.org/@propager_les_secteurs
@@ -252,6 +255,16 @@ function calcul_branche ($generation) {
 			$branche[] = $generation;
 		return join(",",$branche);
 	}
+}
+
+function calculer_prochain_postdate() {
+	include_spip('inc/meta');
+	$s = spip_query("SELECT UNIX_TIMESTAMP(date) AS ts FROM spip_articles WHERE statut='publie' AND date>"._q(date('Y-m-d H:i:s'))." ORDER BY date LIMIT 0,1");
+	if ($t = spip_fetch_array($s))
+		ecrire_meta('date_prochain_postdate', $t['ts']);
+	else
+		effacer_meta('date_prochain_postdate');
+	ecrire_metas();
 }
 
 // http://doc.spip.org/@cron_rubriques
