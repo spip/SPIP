@@ -13,19 +13,19 @@
 	  	[(#ENV**{config}|table_valeur{articles_surtitre}|=={non}|?{#ENV**{surtitre,''},' '}|?{' '})
 	    <li class="gauche">
 	      <label for="surtitre"><:texte_sur_titre:><em>#AIDER{arttitre}</em></label>
-	      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre}|entites_html)]" />
+	      <input type='text' name='surtitre' id='surtitre' class='forml' value="[(#ENV**{surtitre})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{surtitre})</span>]
 	    </li>]
 	    <li class="gauche gauche_obligatoire">
 	      <label for="titre"><:info_titre:><em>#AIDER{arttitre}</em></label>
-	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T}|entites_html)]"
+	      <input type='text' name='titre' id='titre' class='formo' value="[(#ENV**{titre,#REM|concat{info_nouvel_article}|_T})]"
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 	    </li>
 	  	[(#ENV**{config}|table_valeur{articles_soustitre}|=={non}|?{#ENV**{soustitre,''},' '}|?{' '})
 	    <li class="gauche">
 	      <label for="soustitre"><:texte_sous_titre:><em>#AIDER{arttitre}</em></label>
-	      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV**{soustitre}|entites_html)]" />
+	      <input type='text' name='soustitre' id='soustitre' class='forml' value="[(#ENV**{soustitre})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{soustitre})</span>]
 	    </li>]
 	
@@ -35,19 +35,19 @@
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="haut">
 	      <label for="descriptif"><:texte_descriptif_rapide:><em>#AIDER{artdesc}</em></label>
-	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif}|entites_html)]</textarea>
+	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptid})</span>]
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|?{' '})
 	    [<li class='haut redirection'>(#ENV**{chapo}|match{^=}|?{' '})
 				<label for='virtuel'><:info_redirection:></label>
-				<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''}|entites_html)]" />
+				<input type='text' name='virtuel' id='virtuel' class='forml' value="[(#ENV**{chapo}|replace{^=,''})]" />
 				<input type='hidden' name='changer_virtuel' value='oui' />
 				<div class='commentaire_bas'><:texte_article_virtuel_reference:>#AIDER{artvirt}</div>
 			</li>]
 			[<li class="haut">(#ENV**{chapo}|match{^=}|?{'',' '})
 				<label for="chapo"><:info_chapeau:><em>#AIDER{arttitre}</em></label>
-				<textarea name='chapo' id='chapo' class='forml'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo}|entites_html)]</textarea>
+				<textarea name='chapo' id='chapo' class='forml'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
 			</li>]
 			]
@@ -56,12 +56,12 @@
 	      <legend><:entree_liens_sites:></legend><ol>
 	    <li class="gauche">
 	      <label for="nom_site"><:info_titre:></label>
-	      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site}|entites_html)]" />
+	      <input type='text' name='nom_site' id='nom_site' class='forml' value="[(#ENV**{nom_site})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
 	    </li>
 	    <li class="gauche">
 	      <label for="url_site"><:info_url:></label>
-	      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site}|entites_html)]" />
+	      <input type='text' name='url_site' id='url_site' class='forml' value="[(#ENV**{url_site})]" />
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
 	    </li></ol>
 	    </fieldset>]
@@ -71,7 +71,7 @@
 	      <div class="commentaire"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 	      [(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 	      <textarea name='texte' id='text_area' class='formo barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-	      (#ENV**{browser_caret,''})]>[(#ENV**{texte}|entites_html)]</textarea>
+	      (#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 	
 		<script type='text/javascript'><!--
@@ -85,7 +85,7 @@
 	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|?{' '})
 	    <li class="haut">
 	      <label for="ps"><:info_post_scriptum:></label>
-	      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV**{ps}|entites_html)]</textarea>
+	      <textarea name='ps' id='ps' class='forml' rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{ps})</span>]
 	    </li>]
 	  </ol>
