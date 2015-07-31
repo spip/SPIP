@@ -205,6 +205,11 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 
 	echo "<td width='100%' align='left' valign='top'>\n";
 
+	// Si pas image, lien vers le document
+	if ($type_inclus != "image") {
+		afficher_icone("../$fichier", 'Voir le document', 'IMG2/voir.gif', 40, 28, 'right');
+	}
+
 	if ($descriptif) {
 		echo debut_cadre_relief();
 		echo "<font face='Georgia, Garamond, Times, sans-serif' size='3'>\n";

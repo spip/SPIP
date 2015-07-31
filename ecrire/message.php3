@@ -4,6 +4,7 @@ include ("inc.php3");
 include_local ("inc_mots.php3");
 
 
+
 $query = "SELECT COUNT(*) FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message";
 $result = mysql_query($query);
 list($n) = mysql_fetch_array($result);
@@ -221,7 +222,7 @@ while($row = mysql_fetch_array($result_message)) {
 
 		if ($cherche_auteur) {
 			echo "<P ALIGN='left'>";
-			$query = "SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)";
+			$query = "SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur'";
 			$result = mysql_query($query);
 			unset($table_auteurs);
 			unset($table_ids);
@@ -375,7 +376,7 @@ while($row = mysql_fetch_array($result_message)) {
 			if ($statut == 'redac' OR $forcer_dest) {
 				$query_ajout_auteurs = "SELECT * FROM spip_auteurs WHERE ";
 				if ($les_auteurs) $query_ajout_auteurs .= "id_auteur NOT IN ($ze_auteurs) AND ";
-				$query_ajout_auteurs .= " messagerie<>'non' AND statut<>'5poubelle' AND statut<>'nouveau' AND statut<>'6forum' AND nom<>'Nouvel auteur' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY) ORDER BY statut, nom";
+				$query_ajout_auteurs .= " messagerie<>'non' AND statut<>'5poubelle' AND statut<>'nouveau' AND statut<>'6forum' AND nom<>'Nouvel auteur' ORDER BY statut, nom";
 				$result_ajout_auteurs = mysql_query($query_ajout_auteurs);
 
 				if (mysql_num_rows($result_ajout_auteurs) > 0) {
@@ -507,7 +508,8 @@ while($row = mysql_fetch_array($result_message)) {
 	echo "<br><font face='Georgia,Garamond,Times,serif' size=3>";
 	
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
-		echo "<table align='right' cellpadding=5><tr><td width=90 align='right'><a href='message_edit.php3?id_message=$id_message'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><img src='IMG2/message-modif.gif' border=0 width=32 height=32><br><b>Modifier ce message</b></font></a></td></tr></table>";
+		afficher_icone_texte(newLinkUrl("message_edit.php3?id_message=$id_message"),
+			"Modifier ce message", 'IMG2/message-modif.gif', 32, 32, 'right');
 	}
 
 	echo "<p>$texte";
@@ -519,22 +521,19 @@ while($row = mysql_fetch_array($result_message)) {
 
 		echo "<hr noshade size=1>";
 
-
-		echo "<table align='right' cellpadding=5 width='100%'><tr width='100%'>";
-
 		if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
-			echo "<td width=90 align='left'><a href='messagerie.php3?detruire_message=$id_message'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><img src='IMG2/message-efface.gif' border=0 width=32 height=32><br><b>Supprimer ce message</b></font></a></td>";
+			afficher_icone_texte(newLinkUrl("messagerie.php3?detruire_message=$id_message"),
+				"Supprimer ce message", 'IMG2/message-efface.gif', 32, 32, 'left');
 		}
-		echo "<td> &nbsp; </td>";
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 			if ($type == 'normal' AND $total_dest < 2){
-				echo "<td width=180 align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><b>Vous devez indiquer un destinataire avant d'envoyer ce message.</b></font></td>";
+				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>Vous devez indiquer un destinataire avant d'envoyer ce message.</b></font></p>";
 			}
 			else {
-				echo "<td width=90 align='right'><a href='message.php3?id_message=$id_message&change_statut=publie'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><img src='IMG2/message-valide.gif' border=0 width=32 height=32><br><b>Envoyer ce message</b></font></a></td>";
+				afficher_icone_texte(newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"),
+					"Envoyer ce message", 'IMG2/message-efface.gif', 32, 32, 'right');
 			}
 		}
-		echo "</tr></table>";
 		
 	}
 
