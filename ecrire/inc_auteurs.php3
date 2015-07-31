@@ -23,7 +23,8 @@ function auteurs_dist()
 {
   global  $debut, $tri, $visiteurs;
 
-if (!$tri) $tri='nom'; else $tri = str_replace('"\'?=&', '', $tri);
+if (!$tri) $tri='nom'; else $tri = preg_replace('/["\'?=&<>]/', '', $tri);
+$debut = intval($debut);
 $result = requete_auteurs($tri, $visiteurs);
 $nombre_auteurs = spip_num_rows($result);
 $max_par_page = 30;
@@ -63,11 +64,8 @@ affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs);
 function affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs)
 {
   global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut;
-//
-// Affichage
-//
 
-$retour = "auteurs.php3?tri=$tri"; 
+
 if ($tri=='nom' OR $tri=='statut')
 	$partri = " "._T('info_par_tri', array('tri' => $tri));
 else if ($tri=='nombre')
@@ -75,14 +73,15 @@ else if ($tri=='nombre')
 
 if ($visiteurs == "oui") {
 	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
-	$retour .= '&visiteurs=oui';
-} else
+	$visiteurs .= '&visiteurs=oui';
+ } else {
 	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"auteurs","redacteurs");
-
+	$visiteurs = "";
+ }
 debut_gauche();
 
 debut_boite_info();
-if ($visiteurs == "oui")
+if ($visiteurs)
 	echo "<p class='arial1'>"._T('info_gauche_visiteurs_enregistres');
 else {
 	echo "<p class='arial1'>"._T('info_gauche_auteurs');
@@ -100,7 +99,7 @@ if ($connect_statut == '0minirezo') {
 	icone_horizontale(_T('icone_informations_personnelles'), http_php_scriptnq("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
 
 	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"))) {
-		if ($visiteurs == "oui")
+		if ($visiteurs)
 			icone_horizontale (_T('icone_afficher_auteurs'), http_php_scriptnq("auteurs",""), "auteur-24.gif", "");
 		else
 			icone_horizontale (_T('icone_afficher_visiteurs'), http_php_scriptnq("auteurs","visiteurs=oui"), "auteur-24.gif", "");
@@ -110,7 +109,7 @@ if ($connect_statut == '0minirezo') {
 debut_droite();
 
 echo "<br>";
-if ($visiteurs=='oui')
+if ($visiteurs)
 	gros_titre(_T('info_visiteurs'));
 else
 	gros_titre(_T('info_auteurs'));
@@ -134,7 +133,7 @@ echo "</td><td>";
 
 if ($options == 'avancees') echo "</td><td colspan='2'>"._T('info_contact');
 echo "</td><td>";
-	if ($visiteurs != 'oui') {
+	if (!$visiteurs) {
 		if ($tri=='nombre')
 			echo '<b>'._T('info_articles').'</b>';
 		else
@@ -151,9 +150,13 @@ if ($nombre_auteurs > $max_par_page) {
 		if ($j == $debut)
 			echo "<b>$j</b>";
 		else if ($j > 0)
-			echo "<a href=$retour&debut=$j>$j</a>";
+		  echo "<a href=",
+		    http_php_script('auteurs',"tri=$tri$visiteurs&debut=$j"),
+		    ">$j</a>";
 		else
-			echo " <a href=$retour>0</a>";
+		  echo " <a href=",
+		    http_php_script('auteurs',"tri=$tri$visiteurs"),
+		    ">0</a>";
 
 		if ($debut > $j  AND $debut < $j+$max_par_page){
 			echo " | <b>$debut</b>";
@@ -170,7 +173,9 @@ if ($nombre_auteurs > $max_par_page) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
-				echo "<a href=$retour&debut=$val>$key</a> ";
+			  echo "<a href=",
+			    http_php_script('auteurs',"tri=$tri$visiteurs&debut=$val"),
+			    ">$key</a> ";
 		}
 		echo "</td></tr>\n";
 	}
