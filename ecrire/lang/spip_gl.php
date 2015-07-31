@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar en [ligaz&oacute;n de hipertexto->http://...]',
 'barre_lien_input' => 'Indicar o enderezo de seu web (pode indicar un enderezo de web coa forma http://www.monsite/com ou simplemente indicar o n&uacute;mero dun artigo deste web.',
 'barre_note' => 'Transformar en [[Nota a rodap&eacute;]]',
+'barre_paragraphe' => 'Crear un par&aacute;grafo',
 'barre_quote' => '<quote>Citar unha mensaxe</quote>',
 'bouton_ajouter_document' => 'ENGADIR UN DOCUMENTO',
 'bouton_ajouter_image' => 'ENGADIR UNHA IMAXE',

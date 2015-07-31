@@ -59,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Turn into a [hyperlink->http://...]',
 'barre_lien_input' => 'Please enter the target of your hyperlink (you may give an internet URL in the form http://www.mysite.com or else simply the number of an article on this site).',
 'barre_note' => 'Turn into a [[Footnote]]',
+'barre_paragraphe' => 'Create a paragraph',
 'barre_quote' => '<quote>Quote a message</quote>',
 'bouton_ajouter_document' => 'ADD A DOCUMENT',
 'bouton_ajouter_image' => 'ADD AN IMAGE',
