@@ -179,37 +179,6 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 	return $ret;
 }
 
-// Cette fonction calcule la liste des langues reellement utilisees dans le
-// site public
-// http://doc.spip.org/@calculer_langues_utilisees
-function calculer_langues_utilisees () {
-	$langues_utilisees = array();
-
-	$langues_utilisees[$GLOBALS['meta']['langue_site']] = 1;
-
-	$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
-	while ($row = spip_fetch_array($result)) {
-		$langues_utilisees[$row['lang']] = 1;
-	}
-
-	$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
-	while ($row = spip_fetch_array($result)) {
-		$langues_utilisees[$row['lang']] = 1;
-	}
-
-	$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
-	while ($row = spip_fetch_array($result)) {
-		$langues_utilisees[$row['lang']] = 1;
-	}
-
-	$langues_utilisees = array_filter(array_keys($langues_utilisees));
-	sort($langues_utilisees);
-	$langues_utilisees = join(',',$langues_utilisees);
-
-	include_spip('inc/meta');
-	ecrire_meta('langues_utilisees', $langues_utilisees);
-	ecrire_metas();
-}
 
 //
 // Cette fonction est appelee depuis public/global si on a installe
