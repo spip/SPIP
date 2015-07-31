@@ -235,11 +235,11 @@ function table_des_mots($table, $les_mots) {
 		$total_rows = spip_num_rows($result);
 
 		if ($total_rows > 0) {
-			$ret .= "\n<p />";
-			$ret .= "<div class='spip_encadrer' style='font-size: 80%;'>";
-			$ret.= "<b>$titre_groupe&nbsp;:</b>";
-			$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n";
-			$ret .= "<tr><td width='47%' valign='top'>";
+			$ret .= "\n<p />"
+			  . "<div class='spip_encadrer' style='font-size: 80%;'>"
+			  . "<b>$titre_groupe&nbsp;:</b>"
+			  . "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
+			  ."<tr><td width='47%' valign='top'>";
 			$i = 0;
       
 		while ($row = spip_fetch_array($result)) {

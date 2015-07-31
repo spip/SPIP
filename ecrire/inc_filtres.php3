@@ -747,6 +747,15 @@ function http_script($script, $src='', $noscript='') {
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
 
+function http_script_window_close() {
+  return http_script('
+document.write("<br /><div align=\'right\'><a href=\'")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("\'>' . _T('pass_quitter_fenetre') . '<" + "/a></div>")',
+	      '',
+	      "&#91;<a href='./'><:pass_retour_public:></a>&#93");
+}
+
 function inscriptionok($site, $mode)
 {
   return ((lire_meta("accepter_inscriptions") == "oui") OR

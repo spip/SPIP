@@ -7,6 +7,7 @@ include_ecrire("inc_lang.php3");
 utiliser_langue_site();
 utiliser_langue_visiteur();
 install_debut_html(_T('pass_vousinscrire'));
-inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode, $mail_inscription, $nom_inscription, $focus));
+inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode, $mail_inscription, $nom_inscription, $focus, $target));
+echo http_script_window_close();
 install_fin_html();
 ?>

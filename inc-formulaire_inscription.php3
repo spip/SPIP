@@ -5,16 +5,19 @@ include_ecrire('inc_abstract_sql.php3');
 global $balise_FORMULAIRE_INSCRIPTION_collecte ;
 $balise_FORMULAIRE_INSCRIPTION_collecte = array('mail_inscription', 'nom_inscription');
 
-// args 0 et 1 sont mail et nom ci-dessus, args2 le parametre de la balise
+// args 0 et 1 sont mail et nom ci-dessus,
+// arg2 le parametre de la balise
+// arg3 toujours vide au premier appel (fenetre cible)
 
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres)
 {
   return ((lire_meta('accepter_inscriptions') != 'oui') ? '' :
 	  array('redac', $args[0], $args[1], 
-		($args[2] == 'focus' ? 'nom_inscription' : '')));
+		($args[2] == 'focus' ? 'nom_inscription' : ''),
+		''));
 }
 
-function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscription, $focus) {
+function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscription, $focus, $target) {
 	if (($mode == 'redac') AND (lire_meta("accepter_inscriptions") == "oui"))
 		$statut = "nouveau";
 	else if (($mode == 'forum') AND ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')))
@@ -58,6 +61,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscri
 		  {
 		    return array("formulaire_inscription",0,
 				 array('focus' => $focus,
+				       'target' => $target,
 				       'mode' => $mode));
 		  }
 		else {

@@ -6,8 +6,9 @@
 (#HTTP_VARS{message})
 	<br />
 	 <:forum_vous_enregistrer:>
-	[<a href='(#URL_SITE_SPIP|inscriptionok{forum})spip_inscription.php3?mode=forum&focus=nom_inscription' target="spip_pass"
-onclick="javascript:window.open(this.href, 'spip_inscription', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:forum_vous_inscrire:></a>]&nbsp;&nbsp;&#91;<a
+	[<a href='(#URL_SITE_SPIP|inscriptionok{forum})spip_inscription.php3?mode=forum&amp;focus=nom_inscription&amp;target=spip_pass'
+	target="spip_pass"
+	onclick="javascript:window.open(this.href, 'spip_inscription', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:forum_vous_inscrire:></a>]&nbsp;&nbsp;&#91;<a
 		href="spip_pass.php3"
 		target="spip_pass" 
 		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;<br /><br />
@@ -40,7 +41,11 @@ document.write("<:login_login:>&nbsp;<b>[(#HTTP_VARS{login})]<" + "/b><br />&#91
 	<label><b><:login_login2:></b><br /></label>
 	<input type='text' name='session_login' class='forml' [value="(#HTTP_VARS{login})" ]size='40' />
 </noscript>
-[<img src="(#HTTP_VARS{id_auteur}|silogoauteur)" width="75" align="right" alt="[(#HTTP_VARS{login})]">]
+[<img	src="(#HTTP_VARS{id_auteur}|silogoauteur)"
+	width="75"
+	valign="top"
+	align="right"
+	alt="[(#HTTP_VARS{login})]"><br /><br /><br />]
 </div>
 <p>
 		<label><b><:login_pass2:></b></label>&nbsp;<input type="password" name="session_password"[ id="var_login_(#HTTP_VARS{login})]" class="forml" value="" size="40" />
