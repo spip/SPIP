@@ -1795,10 +1795,6 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	// du code experimental qu'on peut activer via un switch
 	define('_MODE_MEME_RUBRIQUE', 'non');
 
-	global $options;
-
-	if ($options != "avancees") return '';
-
 	if (!$limit) $limit = 10;
 
 	$table = $type . 's';
