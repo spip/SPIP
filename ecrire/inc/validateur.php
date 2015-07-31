@@ -89,6 +89,10 @@ function inc_validateur_dist($data)
 		  $phraseur_xml->peres[$k][]= $nom;
 	    }
 	  }
+	  foreach ($phraseur_xml->peres as $k => $v) {
+	    asort($v);
+	    $phraseur_xml->peres[$k] = $v;
+	  } 
 	} 
 	$phraseur_xml->elements = $res;
 
