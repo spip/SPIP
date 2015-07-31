@@ -99,7 +99,6 @@
 	<langue code="oc_prv" />
 	<langue code="oc_va" />
 	<langue code="pl" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pl">
-		<traducteur nom="keycheck" lien="http://trad.spip.net/auteur/keycheck" />
 		<traducteur nom="Karolina Anna" lien="http://trad.spip.net/auteur/karolina-anna" />
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=pt">
