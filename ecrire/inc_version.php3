@@ -782,6 +782,22 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 }
 
 
+// URLs avec passage & -> &amp;
+
+function quote_amp ($url) {
+/*	$debut = substr($url, 0, strpos($url, "?"));
+	$fin = substr($url, strpos($url, "?")+1, strlen($url));
+	if (strlen($fin) > 0) $fin = "?".htmlentities(urlencode($fin));
+	return $debut.$fin;
+	*/
+/*	$url = urlencode($url);*/
+	$url = ereg_replace("&amp;", "&", $url);
+	$url = ereg_replace("&", "&amp;", $url);
+	
+	return $url;
+}
+
+
 
 //
 // Lire les meta cachees
@@ -825,7 +841,12 @@ function email_valide($adresse) {
 //
 function _T($text, $args = '') {
 	include_ecrire('inc_lang.php3');
-	return traduire_chaine($text, $args);
+	$chaine = traduire_chaine($text, $args);
+	
+		include_ecrire("inc_charsets.php3");
+		$chaine = html2unicode($chaine);
+
+	return $chaine;
 }
 
 // chaines en cours de traduction

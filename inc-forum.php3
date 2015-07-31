@@ -133,7 +133,7 @@ VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")
 	else $table = '';
 
 
-	$url = ereg_replace("\&", "&amp;", $url);
+	$url = quote_amp($url);
 	return ("<form action='$url' method='post' name='formulaire'>\n$hidden" .
 		boutonne("type='hidden'", 'id_message', $id_message) .
 		boutonne("type='hidden'", 'alea', $alea) .

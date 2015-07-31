@@ -16,8 +16,8 @@ function auth_http($cible, $essai_auth_http) {
 	if ($essai_auth_http == 'oui') {
 		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
-			$url = urlencode($cible->getUrl());
-			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p>"._T('login_login_pass_incorrect')."<p>[<a href='./'>"._T('login_retour_site')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&url=$url'>"._T('login_nouvelle_tentative')."</a>]";
+			$url = quote_amp(urlencode($cible->getUrl()));
+			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
 			if (ereg("ecrire/", $url))
 				$page_erreur .= " [<a href='ecrire/'>"._T('login_espace_prive')."</a>]";
 			ask_php_auth($page_erreur);
@@ -29,7 +29,7 @@ function auth_http($cible, $essai_auth_http) {
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
 		include_ecrire('inc_session.php3');
-		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p>"._T('login_verifiez_navigateur')."<p>[<a href='./'>"._T('login_retour_public')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&redirect=ecrire'>"._T('login_test_navigateur')."</a>] [<a href='ecrire/'>"._T('login_espace_prive')."</a>]");
+		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p />"._T('login_verifiez_navigateur')."<p />[<a href='./'>"._T('login_retour_public')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&amp;redirect=ecrire'>"._T('login_test_navigateur')."</a>] [<a href='ecrire/'>"._T('login_espace_prive')."</a>]");
 		exit;
 	}
 }
@@ -157,18 +157,18 @@ function login($cible, $prive = 'prive', $message_login='') {
 
 	if ($echec_cookie == "oui") {
 		echo ouvre_login (_T('erreur_probleme_cookie'));
-		echo "<p><b>"._T('login_cookie_oblige')."</b> ";
+		echo "<p /><b>"._T('login_cookie_oblige')."</b> ";
 		echo _T('login_cookie_accepte')."\n";
 	}
 	else {
 		echo ouvre_login ();
 		echo 
 		  (!$message_login ? '' :
-		   ("<br>" . 
+		   ("<br />" . 
 		    _T("forum_vous_enregistrer") . 
 		    " <a $pass_popup>" .
 		    _T("forum_vous_inscrire") .
-		    "</a><br><br>\n")) ;
+		    "</a><p />\n")) ;
 		   
 	}
 
@@ -196,39 +196,39 @@ function login($cible, $prive = 'prive', $message_login='') {
 		if ($flag_challenge_md5) {
 			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 			echo "<script type=\"text/javascript\"><!--\n" .
-			  "document.write('".addslashes(_T('login_login'))." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($action)."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
+			  "document.write('".addslashes(_T('login_login'))." <b>$login</b> <br .><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
 				"//--></script>\n";
-			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
+			echo "<input type='hidden' name='session_login_hidden' value='$login' />";
 
 			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
 			echo "<noscript>";
 			echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
-			echo _T('login_non_securise')." <a href=\"".$clean_link->getUrl()."\">"._T('login_recharger')."</a>.<p></font>\n";
+			echo _T('login_non_securise')." <a href=\"".quote_amp($clean_link->getUrl())."\">"._T('login_recharger')."</a>.<p /></font>\n";
 		}
-		echo "<label><b>"._T('login_login2')."</b><br></label>";
-		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'>\n";
+		echo "<label><b>"._T('login_login2')."</b><br /></label>";
+		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />\n";
 		if ($flag_challenge_md5) echo "</noscript>\n";
 
-		echo "<br><br>\n<label><b>"._T('login_pass2')."</b><br></label>";
-		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";
-		echo "<input type='hidden' name='essai_login' value='oui'>\n";
+		echo "<p />\n<label><b>"._T('login_pass2')."</b><br /></label>";
+		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40' />\n";
+		echo "<input type='hidden' name='essai_login' value='oui' />\n";
 
-		echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked> ";
+		echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked /> ";
 		echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
 
-		echo "<input type='hidden' name='url' value='$url'>\n";
-		echo "<input type='hidden' name='session_password_md5' value=''>\n";
-		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'></div>\n";
+		echo "<input type='hidden' name='url' value='$url' />\n";
+		echo "<input type='hidden' name='session_password_md5' value='' />\n";
+		echo "<input type='hidden' name='next_session_password_md5' value='' />\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."' /></div>\n";
 		echo "</div>";
 		echo "</form>";
 	}
 	else { // demander seulement le login
-
+		$action = quote_amp($action);
 		echo "<form name='form_login' action='$action' method='post'>\n";
 		echo "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
 		if ($erreur) echo "<span style='color:red;'><b>$erreur</b></span><p />";
-		echo "<label><b>"._T('login_login2')."</b><br></label>";
+		echo "<label><b>"._T('login_login2')."</b><br /></label>";
 		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n";
 
 		echo "<input type='hidden' name='var_url' value='$url' />\n";
