@@ -615,11 +615,10 @@ function calculer_url ($lien, $texte='', $pour='url', $connect='') {
 		@list($f,,$id,,$param,,$ancre) = $match;
 		$res = '';
 		if ($connect) {
-			include_spip('inc/urls');
-			$g = 'generer_url_ecrire_' . $f;
-			$param .= ($param ? '&' : '') . "connect=" . $connect;
-			if (function_exists($g))
-				$res = $g($id, $param, $ancre, 'publie', $connect);
+			$id_type = ($f != 'site') ? "id_$f" : 'id_syndic';
+			$res = get_spip_script('./')
+			. "?page=$f&$id_type=$id&connect=$connect"
+			. (!$params ? '' : "&$param");
 		} else {
 			charger_generer_url();
 			$g = 'generer_url_' . $f;

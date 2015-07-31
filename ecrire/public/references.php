@@ -260,7 +260,7 @@ print $p->code."\n<hr/>\n";
 // http://doc.spip.org/@calculer_balise_dynamique
 function calculer_balise_dynamique($p, $nom, $l) {
 
-	balise_distante_interdite($p);
+	if (!balise_distante_interdite($p)) return $p;
 	$param = "";
 	if ($a = $p->param) {
 		$c = array_shift($a);
@@ -307,8 +307,10 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 	if ($nom AND $p->boucles[$nom]->sql_serveur) {
-		erreur_squelette($p->nom_champ .' '._T('zbug_distant_interdit'), $nom);
+		spip__log( $nom .':' . $p->nom_champ .' '._T('zbug_distant_interdit'));
+		return false;
 	}
+	return true;
 }
 
 
