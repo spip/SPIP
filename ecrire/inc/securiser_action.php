@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des actions sécurisées
+ *
+ * @package SPIP\Core\Actions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

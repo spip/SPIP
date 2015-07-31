@@ -10,25 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des authentifications
+ *
+ * @package SPIP\Core\Authentification
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
 
 
-
 /**
- * Fonction d'authentification. Retourne:
- *  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
- *  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
+ * Teste l'authentification d'un visiteur
+ *
+ * Cette fonction ne fait pas l'authentification en soit ;
+ * elle vérifie simplement qu'une personne est connectée ou non.
+ * 
+ * @return array|int|string
+ *  - URL de connexion si on ne sait rien (pas de cookie, pas Auth_user);
  *  - un tableau si visiteur sans droit (tableau = sa ligne SQL)
  *  - code numerique d'erreur SQL
- *  - une chaine vide si autorisation a penetrer dans l'espace prive.
- *
- * 
- * http://doc.spip.org/@inc_auth_dist
- *
- * @return array|int|string
+ *  - une chaîne vide si autorisation à pénétrer dans l'espace privé.
  */
 function inc_auth_dist() {
 
