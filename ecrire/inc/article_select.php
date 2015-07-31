@@ -54,7 +54,7 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 	// id_article non numerique, c'est une demande de creation.
 	// Si c'est une demande de nouvelle traduction, init specifique
 	if ($lier_trad)
-		$row = article_select_trad($lier_trad);
+		$row = article_select_trad($lier_trad, $id_rubrique);
 	else {
 		$row['titre'] = '';//filtrer_entites(_T('info_nouvel_article'));
 		//$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
@@ -94,14 +94,18 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 // on initialise les donnees de maniere specifique
 //
 // http://doc.spip.org/@article_select_trad
-function article_select_trad($lier_trad) {
+function article_select_trad($lier_trad, $id_rubrique=0) {
 	// Recuperer les donnees de l'article original
 	$row = sql_fetsel("*", "spip_articles", "id_article=$lier_trad");
 	if ($row) {
 		$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
-		$id_rubrique = $row['id_rubrique'];
-	}
 
+	} else $row = array();
+	if ($id_rubrique) {
+		$row['id_rubrique'] = $id_rubrique;
+		return $row;
+	}
+	$id_rubrique = $row['id_rubrique'];
 	// Regler la langue, si possible, sur celle du redacteur
 	// Cela implique souvent de choisir une rubrique ou un secteur
 	if (in_array($GLOBALS['spip_lang'],
