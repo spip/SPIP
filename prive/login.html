@@ -13,43 +13,16 @@
 [<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
 <link rel="stylesheet" href="[(#CHEMIN{spip_style.css}|direction_css)]" type="text/css" />
 <link rel="stylesheet" href="[(#CHEMIN{minipres.css}|direction_css)]" type="text/css" />
-<style type="text/css">
-<!--
-	body.page_login { text-align: center; font: 1em Verdana, Tahoma, Geneva, Helvetica, sans-serif; }
-	#minipres { width: 30em; }
-	.formulaire_login { text-align: #LANG_LEFT; font-size: 0.8em; }
-	.formulaire_login fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
-	.formulaire_menu_lang { float: #LANG_RIGHT; }
-	.formulaire_menu_lang label { display: none; }
-	.formulaire_login { clear: both; }
-	.formulaire_login fieldset ol { list-style: none; }
-	.formulaire_login fieldset li label,
-	.formulaire_login fieldset li .erreur,
-	.formulaire_login fieldset li .details {display:block;width:auto;}
-	.formulaire_login fieldset li label.nofx {display:inline;}
-	.formulaire_login fieldset li input.text,
-	.formulaire_login fieldset li input.password {width:20em;}
-	.spip_logos { float: right; padding-left: 10px; }
-	.forml,input { font-size: 1.0em; }
-	#var_lang_ecrire {font-size:0.8em;}
-	p .forml { width: 20em; font-family: inherit; }
-	.boutons input { float: #LANG_RIGHT; }
-	.reponse_formulaire { font-weight: bold; color: red; }
-	a { color: #e86519; text-decoration: none; }
-	.retour { clear: both; text-align: center; font-size: 0.8em; }
-	formulaire_login.retour { font-size: 1em; }
--->
-</style>
 [(#REM|f_jQuery)]
 <script type='text/javascript'><!--
 jQuery(function(){ jQuery('input#var_login').focus(); });
 // --></script>
 </head>
-<body class='page_login' >
+<body class="page_login" >
 
-<div id='minipres'>
+<div id="minipres">
 
-	<h1 class="spip">#NOM_SITE_SPIP</h1>
+	<h1>#NOM_SITE_SPIP</h1>
 	
 	[(#REM)
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
