@@ -1072,6 +1072,68 @@ div.liste {
 	margin-bottom: 3px;
 }
 
+	
+ul#articles_tous,ul#articles_tous ul {
+	list-style: none;
+}
+ul {
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #888;
+}
+ul,li {clear:both;}
+li.sec, li.rub {display:inline;}
+ul>li.sec,ul>li.rub {display:block;}
+li.sec a.titre,  li.rub a.titre {
+	display:block;
+	font-weight:bold;
+	margin:0px;
+	padding: 0px; 
+	padding-top: 4px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 5px; 
+	margin-bottom:5px;
+	height:20px;
+}
+li.art {display:block; height:24px;}
+li.sec a.titre {background-color: ##ENV{couleur_claire};}
+li.rub a.titre {background-color: transparent;}
+li.art a.titre {
+	display:inline;
+	background-color: transparent;
+	font-weight:normal;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 5px; 
+	padding-top: 4px;
+	height:20px;
+}
+span.icone {
+	float:[(#ENV{ltr}|choixsiegal{left,left,right})];
+	position:relative;
+	display:block;
+	width:28px;
+	height:24px;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:-14px;	
+}
+li.art span.icone {	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]:0px;}
+
+span.holder {}
+li.sec span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=secteur-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] bottom no-repeat;}
+li.rub span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=rubrique-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
+li.art span.icone {	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=article-24.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] top no-repeat;}
+li.sec ul{display:none;}
+li.rub ul{display:none;}
+
+li .puce_statut{float:[(#ENV{ltr}|choixsiegal{left,left,right})];	padding-top: 5px;}
+li .puce_article_popup {padding:0px;}
+li img.expandImage{
+	display:block;
+	float:[(#ENV{ltr}|choixsiegal{left,left,right})];
+	position:relative;
+	[(#ENV{ltr}|choixsiegal{left,left,right})]:-20px;
+	width:16px;
+	height:16px;
+}
+li.selected {background-color: ##ENV{couleur_claire}}
+
 a.liste-mot {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;

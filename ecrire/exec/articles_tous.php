@@ -17,95 +17,66 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
-	global $aff_art, $sel_lang, $article, $enfant, $text_article;
-	global $connect_id_auteur, $connect_statut, $spip_dir_lang, $spip_lang, $browser_layer;
+	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
+	global $spip_dir_lang, $spip_lang, $browser_layer,$spip_lang_right,$spip_lang_left;
+	
+	$aff_art = _request('aff_art');
+	$sel_lang = _request('sel_lang');
 
 	changer_typo(); // pour definir $dir_lang
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
+	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
+
+	$flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
+		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
+		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
+
+	list($article,$text_article) = texte_articles_tous($sel_lang, $flag_trad, $aff_art);
+	if (_request('var_ajaxcharset')&&_request('id_rubrique')) ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
-	debut_gauche();
-
-	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') 
-		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
-	else	$langues = array();  
-
-	$sel_lang[$spip_lang] = $spip_lang;
-
-if ($connect_statut == "0minirezo") 
-  $result = spip_query("SELECT id_article, titre, statut, id_rubrique, lang, id_trad, date_modif FROM spip_articles ORDER BY date DESC");
-else 
-  $result = spip_query("SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
-
-while($row = spip_fetch_array($result)) {
-	$id_rubrique=$row['id_rubrique'];
-	$id_article = $row['id_article'];
-	$titre = typo($row['titre']);
-	$statut = $row['statut'];
-	$lang = $row['lang'];
-	$id_trad = $row['id_trad'];
-	$date_modif = $row['date_modif'];
+	debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site");
+	$flux = "";
+	$flux.='<script type="text/javascript"><!--
+var img_deplierhaut = "'._DIR_IMG_PACK.'noeud_plus.gif";
+var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
+//--></script>';
+	$flux .= '<script src="'._DIR_JAVASCRIPT .'dragdrop_interface.js" type="text/javascript"></script>';
+	$flux .= '<script src="'._DIR_JAVASCRIPT .'articles_tous_edite.js" type="text/javascript"></script>';
+	$flux .= '<script src="'._DIR_JAVASCRIPT .'pause.js" type="text/javascript"></script>';
+	echo $flux;
 	
-	$aff_statut[$statut] = true; // signale qu'il existe de tels articles
-	$text_article[$id_article]["titre"] = $titre;
-	$text_article[$id_article]["statut"] = $statut;
-	$text_article[$id_article]["lang"] = $lang;
-	$text_article[$id_article]["id_trad"] = $id_trad;
-	$text_article[$id_article]["date_modif"] = $date_modif;
-	$GLOBALS['langues_utilisees'][$lang] = true;
-
-	if (count($langues) > 1) {
-		while (list(, $l) = each ($langues)) {
-			if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
-		}
-	}
-		
-	if ($id_trad == $id_article OR $id_trad == 0) {
-		$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
-	}
-		
-	if (in_array($statut, $aff_art))
-		$article[$id_rubrique][] = $id_article;
- }
-
-if ($text_article)
-	foreach ($text_article as $id_article => $v) {
-		$id_trad = $v["id_trad"];
-		$lang = $v['lang'];
-				
-			
-		if ($id_trad > 0 AND $id_trad != $id_article AND in_array($lang, $sel_lang)) {
-			if ($text_article[$id_trad]["date_modif"] < $v["date_modif"]) 
-			  $c = 'foncee';
-			else
-			  $c = 'claire';
-			$text_article[$id_trad]["trad"][$lang] =
- "<a class='$c' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$lang</a>";
-		}
-	}
-
-formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
+	debut_gauche();
+	echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-debut_droite();
+	debut_droite();
 
-if ($enfant AND $browser_layer)
-	couche_formulaire_tous($first_couche, $last_couche);
+	if ($enfant AND $browser_layer)
+		echo couche_formulaire_tous($first_couche, $last_couche);
 
- $flag_trad = (($GLOBALS['meta']['multi_rubriques'] == 'oui' 
-			OR $GLOBALS['meta']['multi_articles'] == 'oui') 
-		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
+	$out = "";
+	$action = generer_action_auteur("reorganiser","",generer_url_ecrire('articles_tous'));
+	$out .= "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>";
+	$out .= "<a href='javascript:annuler_deplacement();'>"._L("Annuler")."</a></div>";
+	$out .= "<form action='$action' method='post'>";
+	$out .= form_hidden($action);
+	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements'></textarea>";
+	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
+	$out .= "</form>";
+	echo $out;
 
- 
-afficher_rubriques_filles(0, $flag_trad);
+	$titre = _L("Racine");
+	$arbre .= "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>" .
+	"<span class='holder icone'>&nbsp;</span>$titre" .
+	"\n<ul class=''>\n";
+	$arbre .= afficher_rubriques_filles($article, $enfant, $text_article, 0, $flag_trad, 2);
+	$arbre .= "</ul></li></ul>\n";
+	echo $arbre;
 
- 
- echo fin_page();
+	echo fin_page();
 }
 
 // Voir inc_layer pour les 2 globales utilisees
@@ -134,182 +105,250 @@ function arbo_articles_tous()
 	return array($enfant, $first_couche, $last_couche);
 }
 
+function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
+	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
+	global $spip_dir_lang, $spip_lang, $browser_layer;
+
+	if ($flag_trad)
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+	else	$langues = array();
+
+	$sel_lang[$spip_lang] = $spip_lang;
+
+	if ($connect_statut == "0minirezo")
+		$result = spip_query("SELECT id_article, titre, statut, id_rubrique, lang, id_trad, date_modif FROM spip_articles ORDER BY date DESC");
+	else 
+		$result = spip_query("SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
+
+	while($row = spip_fetch_array($result)) {
+		$id_rubrique=$row['id_rubrique'];
+		$id_article = $row['id_article'];
+		$titre = typo($row['titre']);
+		$statut = $row['statut'];
+		$lang = $row['lang'];
+		$id_trad = $row['id_trad'];
+		$date_modif = $row['date_modif'];
+		
+		$aff_statut[$statut] = true; // signale qu'il existe de tels articles
+		$text_article[$id_article]["titre"] = $titre;
+		$text_article[$id_article]["statut"] = $statut;
+		$text_article[$id_article]["lang"] = $lang;
+		$text_article[$id_article]["id_trad"] = $id_trad;
+		$text_article[$id_article]["date_modif"] = $date_modif;
+		$GLOBALS['langues_utilisees'][$lang] = true;
+		
+		if (count($langues) > 1) {
+			while (list(, $l) = each ($langues)) {
+				if (in_array($l, $sel_lang)) $text_article[$id_article]["trad"]["$l"] =  "<span class='creer'>$l</span>";
+			}
+		}
+		
+		if ($id_trad == $id_article OR $id_trad == 0) {
+			$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
+		}
+		
+		if (in_array($statut, $aff_art))
+			$article[$id_rubrique][] = $id_article;
+	}
+
+	if ($text_article)
+		foreach ($text_article as $id_article => $v) {
+			$id_trad = $v["id_trad"];
+			$lang = $v['lang'];
+				
+			
+			if ($id_trad > 0 AND $id_trad != $id_article AND in_array($lang, $sel_lang)) {
+				if ($text_article[$id_trad]["date_modif"] < $v["date_modif"]) 
+					$c = 'foncee';
+				else
+					$c = 'claire';
+				$text_article[$id_trad]["trad"][$lang] =
+					"<a class='$c' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$lang</a>";
+			}
+		}
+	return array($article,$text_article);
+}
 
 //  checkbox avec image
 
 // http://doc.spip.org/@http_label_img
 function http_label_img($statut, $etat, $var, $img, $texte) {
-  return "<label for='$statut'>". 
-    boutonne('checkbox',
-	     $var . '[]',
-	     $statut,
-	     (($etat !== false) ? ' checked="checked"' : '') .
-	     "id='$statut'") .
-    "&nbsp;" .
-    http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
-    " " .
-    $texte .
-    "</label><br />";
+	return "<label for='$statut'>". 
+		boutonne('checkbox',
+			$var . '[]',
+			$statut,
+			(($etat !== false) ? ' checked="checked"' : '') .
+			"id='$statut'") .
+		"&nbsp;" .
+		http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
+		" " .
+		$texte .
+		"</label><br />";
 }
 
 // http://doc.spip.org/@formulaire_affiche_tous
 function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
-global $spip_lang_right;
-echo generer_url_post_ecrire("articles_tous"), 
-	"<input type='hidden' name='aff_art[]' value='x'>";
-
-debut_boite_info();
-
- echo "<b>",_T('titre_cadre_afficher_article'),"&nbsp;:</b><br />";
-
-if ($aff_statut['prepa'])
-	echo http_label_img('prepa',
-			    in_array('prepa', $aff_art),
-			    'aff_art',
-			    'puce-blanche-breve.gif',
-			    _T('texte_statut_en_cours_redaction'));
-
-if ($aff_statut['prop'])
-	echo http_label_img('prop',
-			    in_array('prop', $aff_art),
-			    'aff_art',
-			    'puce-orange-breve.gif',
-			    _T('texte_statut_attente_validation'));
+	global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
 	
-if ($aff_statut['publie'])
-	echo http_label_img('publie',
-			    in_array('publie', $aff_art),
-			    'aff_art',
-			    'puce-verte-breve.gif',
-			    _T('texte_statut_publies'));
+	$out = "";
+	global $spip_lang_right;
+	$out .= generer_url_post_ecrire("articles_tous"). 
+		"<input type='hidden' name='aff_art[]' value='x'>";
+	
+	$out .= debut_boite_info(true);
+	
+	$out .= "<b>"._T('titre_cadre_afficher_article')."&nbsp;:</b><br />";
+	
+	if ($aff_statut['prepa'])
+		$out .= http_label_img('prepa',
+				    in_array('prepa', $aff_art),
+				    'aff_art',
+				    'puce-blanche-breve.gif',
+				    _T('texte_statut_en_cours_redaction'));
+	
+	if ($aff_statut['prop'])
+		$out .= http_label_img('prop',
+				    in_array('prop', $aff_art),
+				    'aff_art',
+				    'puce-orange-breve.gif',
+				    _T('texte_statut_attente_validation'));
+		
+	if ($aff_statut['publie'])
+		$out .= http_label_img('publie',
+				    in_array('publie', $aff_art),
+				    'aff_art',
+				    'puce-verte-breve.gif',
+				    _T('texte_statut_publies'));
+	
+	if ($aff_statut['refuse'])
+		$out .= http_label_img('refuse',
+				    in_array('refuse', $aff_art),
+				    'aff_art',
+				    'puce-rouge-breve.gif',
+				    _T('texte_statut_refuses'));
+	
+	if ($aff_statut['poubelle'])
+		$out .= http_label_img('poubelle',
+				    in_array('poubelle', $aff_art),
+				    'aff_art',
+				    'puce-poubelle-breve.gif',
+				    _T('texte_statut_poubelle'));
+	
+	$out .= "\n<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+	
+	
+	// GERER LE MULTILINGUISME
+	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') {
 
-if ($aff_statut['refuse'])
-	echo http_label_img('refuse',
-			    in_array('refuse', $aff_art),
-			    'aff_art',
-			    'puce-rouge-breve.gif',
-			    _T('texte_statut_refuses'));
-
-if ($aff_statut['poubelle'])
-	echo http_label_img('poubelle',
-			    in_array('poubelle', $aff_art),
-			    'aff_art',
-			    'puce-poubelle-breve.gif',
-			    _T('texte_statut_poubelle'));
-
-echo "\n<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
-
-
-// GERER LE MULTILINGUISME
-if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') {
-
-	// bloc legende
-	$lf = $GLOBALS['meta']['langue_site'];
-	echo "<hr />\n<div class='verdana2'>";
-	echo _T('info_tout_site6');
-	echo "\n<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
-	echo "\n<div><span class='creer'>$lf</span> ". _T('info_tout_site2') ." </div>";
-	echo "\n<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
-	echo "\n<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
-	echo "</div>\n";
-
-	// bloc choix de langue
-	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
-	if (count($langues) > 1) {
-		sort($langues);
-		echo "<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
-		echo "<select style='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
-		while (list(, $l) = each ($langues)) {
-		  echo "<option value='$l'",
-		    (in_array($l,$sel_lang) ? " selected='selected'" : ""),
-		    ">",
-		    traduire_nom_langue($l),
-		    "</option>\n"; 
+		// bloc legende
+		$lf = $GLOBALS['meta']['langue_site'];
+		$out .= "<hr />\n<div class='verdana2'>";
+		$out .= _T('info_tout_site6');
+		$out .= "\n<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
+		$out .= "\n<div><span class='creer'>$lf</span> ". _T('info_tout_site2') ." </div>";
+		$out .= "\n<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
+		$out .= "\n<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
+		$out .= "</div>\n";
+	
+		// bloc choix de langue
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+		if (count($langues) > 1) {
+			sort($langues);
+			$out .= "<br />\n<div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
+			$out .= "<select style='width:100%' NAME='sel_lang[]' size='".count($langues)."' multiple='multiple'>";
+			while (list(, $l) = each ($langues)) {
+			  $out .= "<option value='$l'" .
+			    (in_array($l,$sel_lang) ? " selected='selected'" : "") .
+			    ">" .
+			    traduire_nom_langue($l) .
+			    "</option>\n"; 
+			}
+			$out .= "</select></div>\n";
+	
+			$out .= "\n<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 		}
-		echo "</select></div>\n";
-
-		echo "\n<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+	
 	}
 
-}
-
-fin_boite_info();
-echo "</form>";
+	$out .= fin_boite_info(true);
+	$out .= "</form>";
+	
+	return $out;
 }
 
 // http://doc.spip.org/@couche_formulaire_tous
 function couche_formulaire_tous($first_couche, $last_couche)
 {
 	global $spip_lang_rtl;
-
-	echo "<div>&nbsp;</div>";
-	echo "<b class='verdana3'>";
-	echo "<a href=\"javascript:";
-	echo "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')\">";
-	echo _T('lien_tout_deplier');
-	echo "</a>";
-	echo "</b>";
-	echo " | ";
-	echo "<b class='verdana3'>";
-	echo "<a href=\"javascript:";
-	echo "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')\">";
-	echo _T('lien_tout_replier');
-	echo "</a>";
-	echo "</b>";
-	echo "<div>&nbsp;</div>";
+	$out = "";
+	
+	$out .= "<div>&nbsp;</div>";
+	$out .= "<b class='verdana3'>";
+	$out .= "<a href=\"javascript:deplie_arbre()\">";
+	$out .= _T('lien_tout_deplier');
+	$out .= "</a>";
+	$out .= "</b>";
+	$out .= " | ";
+	$out .= "<b class='verdana3'>";
+	$out .= "<a href=\"javascript:plie_arbre()\">";
+	$out .= _T('lien_tout_replier');
+	$out .= "</a>";
+	$out .= "</b>";
+	$out .= "<div>&nbsp;</div>";
+	return $out;
 }
 
-global $spip_lang_left, $spip_lang_right, $spip_lang, $couleur_claire;
-
-define('STYLE_SECTEUR', "padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . http_wrapper("secteur-24.gif") . ") $spip_lang_left center no-repeat; background-color: $couleur_claire;");
-
-define('STYLE_NONSECTEUR', "padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . http_wrapper("rubrique-24.gif") . ") $spip_lang_left center no-repeat;");
-
+function afficher_contenu_rubrique(&$article, &$enfant, &$text_article, $id_rubrique, $flag_trad, $profondeur){
+	static $ajax_args=NULL;
+	$out = "";
+	if ($profondeur!=0){
+		if (isset($article[$id_rubrique]))
+			$out .= afficher_article_tous_rubrique($text_article, $article[$id_rubrique], $id_rubrique, $flag_trad);
+		if (isset($enfant[$id_rubrique]))
+			$out .= afficher_rubriques_filles($article, $enfant, $text_article, $id_rubrique, $flag_trad, $profondeur);
+	}
+	else{
+		if ($ajax_args==NULL){
+			$ajax_args = "";
+			if (is_array($aff_art = _request('aff_art')))
+				foreach($aff_art as $aff)
+					$ajax_args.="&aff_art[]=$aff";
+			if (is_array($sel_lang = _request('sel_lang')))
+				foreach($sel_lang as $sel)
+					$ajax_args.="&sel_lang[]=$sel";
+		}
+		$out = "<a href='".generer_url_ecrire('articles_tous',"id_rubrique=$id_rubrique&$ajax_args")."' class='ajax' rel='ul$id_rubrique'>"._T('info_tout_site')."</a>";
+	}
+	return $out;
+}
 // http://doc.spip.org/@afficher_rubriques_filles
-function afficher_rubriques_filles($id_parent, $flag_trad) {
-	global $enfant, $article;
-	static $decal = 0;
+function afficher_rubriques_filles(&$article, &$enfant, &$text_article, $id_parent, $flag_trad, $profondeur=-1) {
+	$out = "";
 
 	if (!$enfant[$id_parent]) return;
-
-	$decal = $decal + 1;
+	$profondeur--;
 
 	while (list($id_rubrique, $titre) = each($enfant[$id_parent]) ) {
-			
-		$lesarticles = isset($article[$id_rubrique]);
-		$lesenfants = ($lesarticles OR isset($enfant[$id_rubrique]));
-
-		echo "\n<div style='",
-		  ($id_parent ? STYLE_NONSECTEUR : STYLE_SECTEUR),
-		  "'>",
-		  (!$lesenfants ? '' : bouton_block_invisible("rubrique$id_rubrique")),
-		   "<b class='verdana2'><a href='",
-		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"),
-		   "'>",
-		   $titre,
-		   "</a></b></div>\n";
-
-		if ($lesenfants) {
-			echo debut_block_invisible("rubrique$id_rubrique");
-			echo "\n<div class='plan-rubrique'>";
-			if ($lesarticles) 
-				echo article_tous_rubrique($article[$id_rubrique], $id_rubrique, $flag_trad);
-			afficher_rubriques_filles($id_rubrique,$flag_trad);
-			echo "</div>";
-			echo fin_block();
-		}
-			
-		if (!$id_parent) echo "<div>&nbsp;</div>";
+		$out .= "<li id='rubrique-$id_rubrique' class='treeItem " .
+			(($id_parent==0)?"sec":"rub") .
+			"'>" .
+			//$lesenfants?'<img src="'._DIR_IMG_PACK.'deplierhaut.gif" class="expandImage" />':'' .
+		  "<span class='holder icone'> </span><a href='" .
+		   generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
+		   "' class='titre'>$titre</a>";
+		
+		$lesenfants = afficher_contenu_rubrique($article, $enfant, $text_article, $id_rubrique, $flag_trad, $profondeur);
+		if ($lesenfants)
+			$out .= "\n<ul id='ul$id_rubrique'>\n$lesenfants</ul>\n";
+		$out .= "</li>\n";
 	}
-	$decal = $decal-1;
+	return $out;
 }
 
-// http://doc.spip.org/@article_tous_rubrique
-function article_tous_rubrique($tous, $id_rubrique, $flag_trad) 
+// http://doc.spip.org/@afficher_article_tous_rubrique
+function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $flag_trad) 
 {
-	global $text_article;
-
 	$res = '';
 	while(list(,$zarticle) = each($tous) ) {
 		$attarticle = &$text_article[$zarticle];
@@ -319,30 +358,30 @@ function article_tous_rubrique($tous, $id_rubrique, $flag_trad)
 		OR $attarticle["id_trad"] == $zarticle) {
 			$auteurs = trouve_auteurs_articles($zarticle);
 
-			$res .= "\n<tr class='tr_liste'>";
+			$res .= "\n<li id='article-$zarticle' class='treeItem art tr_liste'>";
 			if (count($attarticle["trad"]) > 0) {
 				ksort($attarticle["trad"]);
-				$res .= "\n<td><span class='trad_float'>" 
+				$res .= "\n<span class='trad_float'>" 
 				.  join('',$attarticle["trad"])
-				.  "</span></td>";
+				.  "</span>";
 			}
-			$res .= "\n<td width='11'>"
-			  . puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)
-			  . '</td>'
-			  . "\n<td  class='plan-articles'><a"
+			$res .= "\n"
+				. "<span class='icone'> </span>"
+			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
+			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
+			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
 			  . "\nhref='"
 			  . generer_url_ecrire("articles","id_article=$zarticle")
-			  . "'>"
+			  . "' class='titre'>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span>"
 			  . $attarticle["titre"]
 			  . "</span></a>"
-			  . "</td></tr>";
+			  . "</li>";
 		}
 	}
-
-	return (!$res ? '' : "\n<table cellpadding='2' cellspacing='0' border='0'>$res</table>");
+	return (!$res ? '' : $res);
 }
 
 // http://doc.spip.org/@trouve_auteurs_articles
