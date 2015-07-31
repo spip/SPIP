@@ -689,7 +689,7 @@ function calculer_url_spip($id, $texte, $ancre)
 	if (is_numeric($tableau_raccourcis['spip'][$id]))
 		$p= "spip.php?page=article&amp;id_article=" . $tableau_raccourcis['spip'][$id];
 	else $p = '';
-	return array("http://www.spip.net/$p$ancre", 'spip_in', "SPIP $id");
+	return array("http://www.spip.net/$p$ancre", 'spip', "SPIP $id");
 }
 
 //
