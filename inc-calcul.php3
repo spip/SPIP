@@ -45,8 +45,7 @@ else
 // Le squelette compile est-il trop vieux ?
 function squelette_obsolete($skel, $squelette) {
 	return (
-		$GLOBALS['var_mode'] == 'recalcul'
-		OR $GLOBALS['var_mode'] == 'preview'
+		isset($GLOBALS['var_mode'])
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php3') > $date)
@@ -99,9 +98,11 @@ function charger_squelette ($squelette) {
 
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
 	// Tester si le compilateur renvoie une erreur
+
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
+
 		if ($GLOBALS['var_mode'] == 'debug') {
 			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($skel_code, $nom, 'code');
