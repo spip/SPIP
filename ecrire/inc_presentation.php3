@@ -1949,31 +1949,27 @@ fin_grand_cadre();
 //
 // Afficher la hierarchie des rubriques
 //
-function afficher_parents($collection){
+function afficher_parents($id_rubrique) {
 	global $parents, $couleur_foncee;
-	global $coll;
-	$parents=ereg_replace("(~+)","\\1~",$parents);
-	if ($collection!=0){	
-		$query2="SELECT * FROM spip_rubriques WHERE id_rubrique=\"$collection\"";
-		$result2=spip_query($query2);
+	$parents = ereg_replace("(~+)","\\1~",$parents);
+	if ($id_rubrique) {
+		$query = "SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
+		$result = spip_query($query);
 
-		while($row=spip_fetch_array($result2)){
+		while ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
 			$titre = $row['titre'];
-			
-			if (acces_restreint_rubrique($id_rubrique)) {
-				$parents="~ <IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
-			}
-			else {
-				if ($id_parent == "0"){
-					$parents="~ <IMG SRC='img_pack/secteur-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
-				} else {
-					$parents="~ <IMG SRC='img_pack/rubrique-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
-				}
-			}
+
+			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n".$parents;
+			if (acces_restreint_rubrique($id_rubrique))
+				$parents = " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques'> ".$parents;
+			if (!$id_parent)
+				$parents = "~ <IMG SRC='img_pack/secteur-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ".$parents;
+			else
+				$parents = "~ <IMG SRC='img_pack/rubrique-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ".$parents;
 		}
-	afficher_parents($id_parent);
+		afficher_parents($id_parent);
 	}
 }
 

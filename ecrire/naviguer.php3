@@ -32,9 +32,9 @@ function enfant($collection){
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
 		}
-		if  (acces_restreint_rubrique($id_rubrique))
+		if (acces_restreint_rubrique($id_rubrique))
 			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques'> ";
-		
+
 		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
@@ -151,7 +151,7 @@ if ($titre) {
 	$texte = addslashes($texte);
 	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$coll";
 	$result = spip_query($query);
-	
+
 	calculer_rubriques();
 
 	if (lire_meta('activer_moteur') == 'oui') {
