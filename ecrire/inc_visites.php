@@ -69,7 +69,7 @@ function calculer_visites($t) {
 	$compteur = 100;
 	$date_init = time()-30*60;
 
-	while ($compteur -- > 0
+	while (--$compteur > 0
 	AND list(,$item) = each($sessions)) {
 		if (@filemtime($item) < $date_init) {
 			spip_log("traite la session $item");
@@ -184,7 +184,10 @@ function calculer_visites($t) {
 	}
 
 	// S'il reste des fichiers a manger, le signaler pour reexecution rapide
-	return $pasfini;
+	if ($compteur==0) {
+		spip_log("il reste des visites a traiter...");
+		return -$t;
+	}
 }
 
 ?>
