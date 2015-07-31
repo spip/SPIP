@@ -36,6 +36,10 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
+if ($set_lang AND ereg(",$set_lang,", ",$all_langs,")) {
+	$prefs['lang'] = $set_lang;
+	$prefs_mod = true;
+}
 if ($securite == 'normal' || $securite == 'strict') {
 	$prefs['securite'] = $securite;
 	$secu = 'oui';
@@ -64,6 +68,13 @@ if ($debloquer_article) {
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 
+// fixer la langue
+if ($prefs['lang'])
+	$i18nlang = $prefs['lang'];
+/*
+else if ... Nicolas, quel est l'entete http a verifier contre $all_langs ?
+
+*/
 
 switch ($prefs['couleur']) {
 	case 1:

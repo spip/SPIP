@@ -433,7 +433,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 // Afficher tableau de breves
 //
 
-function afficher_breves($titre_table, $requete) {
+function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_id_auteur;
 
 	$tranches = afficher_tranches_requete($requete, 2);
@@ -466,6 +466,7 @@ function afficher_breves($titre_table, $requete) {
 			$date_heure = $row['date_heure'];
 			$titre = $row['titre'];
 			$statut = $row['statut'];
+			$id_rubrique = $row['id_rubrique'];
 			if ($statut == 'prop') $puce = "puce-blanche";
 			else if ($statut == 'publie') $puce = "puce-verte";
 			else if ($statut == 'refuse') $puce = "puce-rouge";
@@ -478,8 +479,13 @@ function afficher_breves($titre_table, $requete) {
 			$vals[] = $s;
 
 			$s = "<div align=\"right\">";
-			if ($statut == "prop") $s .= "[<font color=\"red\">&agrave; valider</font>]";
-			else $s .= affdate($date_heure);
+			if ($affrub) {
+				$rub = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+				$s .= typo($rub['titre']);
+			} else if ($statut != "prop")
+				$s .= affdate($date_heure);
+			else
+				$s .= "[&agrave; valider]";
 			$s .= "</div>";
 			$vals[] = $s;
 			$table[] = $vals;
@@ -1249,6 +1255,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else $largeur = 750;
 	
 	// nettoyer le lien global
+	$clean_link->delVar('set_lang');
 	$clean_link->delVar('set_options');
 	$clean_link->delVar('set_couleur');
 	$clean_link->delVar('set_disp');
@@ -1286,9 +1293,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 		icone_bandeau_principal ("&Eacute;dition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 		if ($options == "avancees") {
-			icone_bandeau_principal ("Auteurs", "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal (_T('Auteurs'), "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
-			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal (_T('Informations personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
 		if ($options == "avancees") {
 			if ($connect_statut == "0minirezo") 
@@ -1429,10 +1436,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>VOUS AVEZ UN NOUVEAU MESSAGE</b></font></a>";
+					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>"._T('1 nouveau message')."</b></font></a>";
 				}
 			}
-			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>VOUS AVEZ $total_messages NOUVEAUX MESSAGES</font></a>";
+			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('@n@ nouveaux messages', array('n' => $total_messages))."</font></a>";
 			$result_messages = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			
@@ -1474,7 +1481,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	echo "</font>";
 	echo "</td>";
-	echo "<td align='center' align='right'>";
+
+	// grand ecran
+	echo "<td align='center'>";
 	$lien = $clean_link;
 			
 	if ($spip_ecran == "large") {
@@ -1487,6 +1496,19 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	echo "</td>";
 
+	// choix de la langue
+	if (strpos($GLOBALS['all_langs'], ',')) {
+		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
+		$langues = explode(',', $GLOBALS['all_langs']);
+		while (list(,$langue) = each ($langues)) {
+			$lien = $clean_link;
+			$lien->addVar('set_lang', $langue);
+			echo " <a href='". $lien->getUrl() ."'><font color='#ffffff'>$langue</font></a>";
+		}
+		echo "</font></td>";
+	}
+
+	// choix de la couleur
 	echo "<td align='right'>";
 	echo "<img src='img_pack/barre-couleurs.gif' alt='couleurs' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
