@@ -406,7 +406,7 @@ function interdire_scripts($t) {
 	$t = str_replace('<'.'?', '&lt;?', $t);
 
 	// echapper le < script language=php >
-	$t = preg_replace(',<(script\b[^>]+\bphp\b),UimsS', '&lt;\1', $t);
+	$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
 
 	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
 	switch($GLOBALS['filtrer_javascript']) {
