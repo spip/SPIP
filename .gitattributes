@@ -440,6 +440,7 @@ ecrire/inc/iconifier.php -text
 ecrire/inc/import_0_0.php -text
 ecrire/inc/import_1_2.php -text
 ecrire/inc/import_1_3.php -text
+ecrire/inc/informer.php -text
 ecrire/inc/install_.php -text
 ecrire/inc/install_0.php -text
 ecrire/inc/install_1.php -text
