@@ -1184,7 +1184,7 @@ function balise_INCLURE_dist($p) {
 	$champ = phraser_arguments_inclure($p, true);
 	$l = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
-	if (true||isset($l['fond'])) {
+	if (isset($l['fond'])) {
 		$code = "recuperer_fond('',array(".implode(',',$l)."))";
 	} else {
 		$n = interprete_argument_balise(1,$p);
