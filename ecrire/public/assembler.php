@@ -426,7 +426,7 @@ function inclure_modele($type, $id, $params, $lien) {
 			$soustype = strtolower($soustype);
 		}
 
-		if ($soustype) {
+		if (preg_match(',^[a-z0-9_]+$,', $soustype)) {
 			$fond = 'modeles/'.$type.'_'.$soustype;
 			if (!find_in_path($fond.'.html')) {
 				$fond = 'modeles/'.$type;
