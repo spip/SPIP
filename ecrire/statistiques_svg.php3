@@ -2,6 +2,20 @@
 include ("inc.php3");
 include_ecrire("inc_charsets.php3");
 
+// Gestion d'expiration de ce jaja
+$date = date("U");
+$expire = $date + 2 * 3600;
+$headers_only = http_last_modified($expire);
+
+$date = gmdate("D, d M Y H:i:s", $date);
+$expire = gmdate("D, d M Y H:i:s", $expire);
+@Header ("Content-Type: text/javascript");
+if ($headers_only) exit;
+@Header ("Last-Modified: ".$date." GMT");
+@Header ("Expires: ".$expire." GMT");
+
+
+
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
@@ -21,10 +35,8 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 
 <defs>
 <linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">
-<stop offset="0%" style="stop-color:rgb(255,255,0);
-stop-opacity:1"/>
-<stop offset="100%" style="stop-color:rgb(255,0,0);
-stop-opacity:1"/>
+<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1"/>
+<stop offset="100%" style="stop-color:rgb(255,0,0); stop-opacity:1"/>
 </linearGradient>
 </defs>
 <?php
