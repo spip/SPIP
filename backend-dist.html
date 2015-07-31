@@ -1,4 +1,3 @@
-<?php echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.'>'; ?>
 <rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
 
 <channel>
@@ -14,71 +13,32 @@
 		<description></description>
 	</image>
 
-<!-- d'abord les articles specifiques a une langue - syntaxe backend.php3?lang=xx -->
-
-	<BOUCLE_langue(ARTICLES){lang}{par date}{inverse}{0,10}>
-		<item>
-		<title>[(#TITRE|texte_backend)]</title>
-		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-		<date>#DATE</date>
-			<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
-			<author><BOUCLE_aut_lang(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut_lang></author>
-			<dc:date>[(#DATE|date_iso)]</dc:date>
-			<dc:format>text/html</dc:format>
-			<dc:language>#LANG</dc:language>
-			<dc:creator><BOUCLE_aut_langb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut_langb></dc:creator>
-		</item>
-	</BOUCLE_langue>
-
-<!-- sinon, les articles specifiques a une rubrique - syntaxe backend.php3?id_rubrique=123 -->
-
-<BOUCLE_rub(RUBRIQUES){id_rubrique}>
-	<BOUCLE1(ARTICLES){branche}{par date}{inverse}{0,10}>
-		<item>
-			<title>[(#TITRE|texte_backend)]</title>
-			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-			<date>#DATE</date>
-			<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
-			<author><BOUCLE_aut1(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut1></author>
-			<dc:date>[(#DATE|date_iso)]</dc:date>
-			<dc:format>text/html</dc:format>
-			<dc:language>#LANG</dc:language>
-			<dc:creator><BOUCLE_aut1b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut1b></dc:creator>
-		</item>
-	</BOUCLE1>
-</BOUCLE_rub>
-
-<!-- en dernier recours, tous les articles du site - syntaxe backend.php3 -->
-
-	<BOUCLE2(ARTICLES){tout}{par date}{inverse}{0,10}{unique}>
+	<BOUCLE_10recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{0,10}{unique}>
 		<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
 		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
-		<author><BOUCLE_aut2(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2></author>
+		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
-		<dc:creator><BOUCLE_aut2b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2b></dc:creator>
+		<dc:creator><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></dc:creator>
 		</item>
-	</BOUCLE2>
-	<BOUCLE3(ARTICLES){tout}{par date}{inverse}{age<3}{unique}>
+	</BOUCLE_10recents>
+	<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{age<3}{unique}>
 		<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
 		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
-		<author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_aut3></author>
+		<author><BOUCLE_auteurs_t(AUTEURS){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_auteurs_t></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
-		<dc:creator><BOUCLE_aut3b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut3b></dc:creator>
+		<dc:creator><BOUCLE_auteurs_tb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs_tb></dc:creator>
 		</item>
-	</BOUCLE3>
-
-<//B_rub>
-<//B_langue>
+	</BOUCLE_tres_recents>
 
 </channel>
 

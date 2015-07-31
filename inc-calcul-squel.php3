@@ -339,19 +339,22 @@ function parser_boucle($texte, $id_parent) {
 					else if ($param == 'racine') {
 						$req_where[] = "$table.id_parent=0";
 					}
-					else if ($param == 'branche') {
-						$req_where[] = "$table.id_rubrique IN (\".calcul_branche(\$id_rubrique).\")";
+					else if (ereg("^branche *(\??)", $param, $regs)) {
+						if (!$regs[1])
+							$req_where[] = "$table.id_rubrique IN (\".calcul_branche(\$id_rubrique).\")";
+						else
+							$req_where[] = "('\$id_rubrique'='' OR $table.id_rubrique IN (\".calcul_branche(\$id_rubrique).\"))";
  					}
 
 					// Restriction de valeurs (implicite ou explicite)
-					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
+					else if (ereg('^([a-zA-Z_]+) *(\??) *((!?)(<=?|>=?|==?|\?) *"?([^<>=!"?]*))?"?$', $param, $match)) {
 						// Variable comparee
 						$col = $match[1];
 						$col_table = $table;
 
 						// Valeur de comparaison
-						if ($match[2])
-							$val = $match[5];
+						if ($match[3])
+							$val = $match[6];
 						else {
 							$val = $match[1];
 							// Si id_parent, comparer l'id_parent avec l'id_objet de la boucle superieure
@@ -362,6 +365,9 @@ function parser_boucle($texte, $id_parent) {
 								$val = 'id_parent';
 							$val = '$'.$val;
 						}
+
+						// operateur optionnel {lang?}
+						$ou_rien = ($match[2]) ? "'$val'='' OR " : '';
 
 						// Traitement general des relations externes
 						if ($s = $tables_relations[$type][$col]) {
@@ -463,8 +469,8 @@ function parser_boucle($texte, $id_parent) {
 							$plat = true;
 
 						// Operateur de comparaison
-						if ($match[4]) {
-							$op = $match[4];
+						if ($match[5]) {
+							$op = $match[5];
 							if ($op == '==') $op = ' REGEXP ';
 						}
 						else {
@@ -472,8 +478,9 @@ function parser_boucle($texte, $id_parent) {
 						}
 
 						if ($col_table) $col_table .= '.';
-						$where = "$col_table$col$op'".addslashes($val)."'";
-						if ($match[3] == '!') $where = "NOT ($where)";
+						$where = "($ou_rien$col_table$col$op'".addslashes($val)."')";
+
+						if ($match[4] == '!') $where = "NOT ($where)";
 						$req_where[] = $where;
 					}
 
@@ -586,11 +593,11 @@ function parser_boucle($texte, $id_parent) {
 		if ($type == 'hierarchie')
 			$requete = $req_limit;
 		else if ($req_select) {
-			$requete = 'SELECT '.join(',', $req_select).' FROM '.join(',', $req_from);
-			if ($req_where) $requete .= ' WHERE '.join(' AND ', $req_where);
+			$requete = 'SELECT '.join(',', $req_select)." FROM ".join(',', $req_from);
+			if ($req_where) $requete .= " WHERE ".join(" AND ", $req_where);
 			$requete .= $req_group;
 			$requete .= $req_order;
-			if ($req_limit) $requete .= ' LIMIT '.$req_limit;
+			if ($req_limit) $requete .= " LIMIT ".$req_limit;
 		}
 		$result->type_requete = $type;
 		$result->requete = $requete;
@@ -1243,7 +1250,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		$id_on_off = $GLOBALS['tables_doublons'][$boucles[$id_boucle]->type_requete];
 		if ($id_on_off) 
-			$code = "(\$GLOBALS['$id_on_off'] == \$contexte['$id_on_off']) ? '$on' : '$off'";
+			$code = "(\$GLOBALS[contexte_inclus]['$id_on_off'] == \$contexte['$id_on_off']) ? '$on' : '$off'";
 		else 
 			$code = "'$off'";
 		break;
@@ -1320,7 +1327,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	//
 	// Formulaire de changement de langue
-	case 'FORMULAIRE_LANG':
+	case 'MENU_LANG':
 		$milieu = '
 		$'.$nom_var.' = "<"."?php
 			include_ecrire(\"inc_lang.php3\");
@@ -1333,7 +1340,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	//
 	// Formulaire de changement de langue / page de login
-	case 'FORMULAIRE_LANG_ECRIRE':
+	case 'MENU_LANG_ECRIRE':
 		$milieu = '
 		$'.$nom_var.' = "<"."?php
 			include_ecrire(\"inc_lang.php3\");

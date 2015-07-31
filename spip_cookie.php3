@@ -204,6 +204,9 @@ if ($var_lang_ecrire) {
 				ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
 			}
 		}
+
+		$cible->delvar('lang');
+		$cible->addvar('lang', $var_lang_ecrire);
 	}
 }
 

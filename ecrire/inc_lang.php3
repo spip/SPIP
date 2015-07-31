@@ -398,9 +398,7 @@ function lang_dselect ($rien='') {
 // - 'changer_lang' = langue de l'article, espace prive
 // 
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
-	global $couleur_foncee, $couleur_claire, $flag_ecrire, $connect_id_auteur, $multilang;
-
-	if (!$flag_ecrire AND !$multilang AND ($nom_select == 'var_lang' OR $nom_select == 'var_lang_ecrire')) return;
+	global $couleur_foncee, $couleur_claire, $flag_ecrire, $connect_id_auteur;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
@@ -468,6 +466,38 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='&gt;&gt;' class='spip_bouton' $style></noscript>";
 	$ret .= "</form>";
 	return $ret;
+}
+
+
+
+//
+// Cette fonction est appelee depuis inc-public-global si on a installe
+// la variable de personnalisation $forcer_lang ; elle renvoie le brouteur
+// si necessaire vers l'URL xxxx?lang=ll
+//
+function verifier_lang_url() {
+	global $HTTP_GET_VARS, $HTTP_COOKIE_VARS, $spip_lang, $clean_link;
+
+	// quelle langue est demandee ?
+	$lang_demandee = lire_meta('langue_site');
+	if ($HTTP_COOKIE_VARS['spip_lang_ecrire']) $lang_demandee = $HTTP_COOKIE_VARS['spip_lang_ecrire'];
+	if ($HTTP_COOKIE_VARS['spip_lang']) $lang_demandee = $HTTP_COOKIE_VARS['spip_lang'];
+	if ($HTTP_GET_VARS['lang']) $lang_demandee = $HTTP_GET_VARS['lang'];
+
+	// Verifier que la langue demandee existe
+	include_ecrire('inc_lang.php3');
+	lang_select($lang_demandee);
+	$lang_demandee = $spip_lang;
+
+	// Renvoyer si besoin
+	if (!($HTTP_GET_VARS['lang']<>'' AND $lang_demandee == $HTTP_GET_VARS['lang'])
+	AND !($HTTP_GET_VARS['lang']=='' AND $lang_demandee == lire_meta('langue_site')))
+	{
+		$destination = $clean_link;
+		$destination->addvar('lang', $lang_demandee);
+		@header("Location: ".$destination->getUrl());
+		exit;
+	}
 }
 
 
