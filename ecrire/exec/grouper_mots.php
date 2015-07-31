@@ -31,7 +31,6 @@ function afficher_groupe_mots($id_groupe) {
 	// - a donner un ID a la balise ou greffer le retour d'Ajax
 	// tant pour la prochaine tranche que pour le retrait de mot
 	$tmp_var = "editer_mot-$id_groupe";
-	$deb_aff = _request('t_' .$tmp_var);
 
 	$select = 'id_mot, id_groupe, titre, '
 	. creer_objet_multi ("titre", $spip_lang);
@@ -44,7 +43,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	$occurrences = calculer_liens_mots();
 
-	$nb_aff = 1.5 * _TRANCHES;
+	$nb_aff = floor(1.5 * _TRANCHES);
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
@@ -53,8 +52,9 @@ function afficher_groupe_mots($id_groupe) {
 
 
 	$table = array();
-	$n = ($deb_aff !== NULL ? intval($deb_aff) : 0);
-	$result = spip_query($q="SELECT $select FROM $from WHERE $where ORDER BY multi" . (($n < 0) ? '' : " LIMIT $n, $nb_aff"));
+	$deb_aff = _request($tmp_var);
+	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
+	$result = spip_query($q="SELECT $select FROM $from WHERE $where ORDER BY multi" . (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff"));
 
 	while ($row = spip_fetch_array($result)) {
 		$table[] = afficher_groupe_mots_boucle($row, $occurrences);
