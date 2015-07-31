@@ -154,6 +154,7 @@ AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
 		if (!@is_readable($fichier)) {
+			spip_log("Verification plugin: echec sur $fichier !");
 			include_spip('inc/plugin');
 			verifie_include_plugins();
 			break; // sortir de la boucle, on a fait un verif
