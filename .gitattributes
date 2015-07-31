@@ -702,6 +702,7 @@ ecrire/lang/ecrire_it_fem.php -text
 ecrire/lang/ecrire_km.php -text
 ecrire/lang/ecrire_my.php -text
 ecrire/lang/ecrire_ru.php -text
+ecrire/lang/ecrire_sv.php -text
 ecrire/lang/index.php -text
 ecrire/lang/public_br.php -text
 ecrire/lang/public_bs.php -text
@@ -711,6 +712,7 @@ ecrire/lang/public_it_fem.php -text
 ecrire/lang/public_km.php -text
 ecrire/lang/public_my.php -text
 ecrire/lang/public_ru.php -text
+ecrire/lang/public_sv.php -text
 ecrire/lang/spip_br.php -text
 ecrire/lang/spip_bs.php -text
 ecrire/lang/spip_cs.php -text
@@ -719,6 +721,7 @@ ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_km.php -text
 ecrire/lang/spip_my.php -text
 ecrire/lang/spip_ru.php -text
+ecrire/lang/spip_sv.php -text
 ecrire/lib/JavaScriptPacker/class.JavaScriptPacker.php -text
 ecrire/lib/safehtml/classes/HTMLSax3.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/Decorators.php -text
