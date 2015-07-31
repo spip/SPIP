@@ -19,14 +19,14 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 }
 
 # retourner:
-# 1. l'url collectee ci-dessus (args0) ou donnee en filtre (filtre0)
-# 2. l'eventuel parametre de la balise (args1) fournie par
-#    calculer_balise_dynamique, en l'occurence le #LOGIN courant si l'on
-#    programme une <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#LOGIN})]
+# 1. l'url collectee ci-dessus (args0) ou donnee en premier parametre (args1) 
+#    #LOGIN_PUBLIC{#SELF}
+# 2. un eventuel parametre (args2) indiquent le login, et permettant une ecriture
+#    <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#SELF, #LOGIN})]
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
-	return array($filtres[0] ? $filtres[0] : $args[0], (isset($args[1]) ? $args[1] : ''));
+	return array(isset($args[1]) ? $args[1] : $args[0], (isset($args[2]) ? $args[2] : ''));
 }
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
