@@ -39,7 +39,9 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	$force_reload |= !isset($cache[$dir_plugins][$plug]['filemtime']);
  
 	$desc = "$dir_plugins$plug/$filename";
-	$time = @(!file_exists($desc) ? -1 : intval(@filemtime($desc)));
+	if (!file_exists($desc))
+		return false;
+	$time = intval(@filemtime($desc));
 
 	if (!$force_reload
 	AND ($time > 0)
