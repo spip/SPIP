@@ -304,7 +304,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  * @param string $serveur_source
  * @param string $serveur_dest
  * @param string $callback_progression
- *   fonction a appeler pour afficher la progression
+ *   fonction a appeler pour afficher la progression, avec les arguments (compteur,total,table)
  * @param int $max_time
  *   limite de temps au dela de laquelle sortir de la fonction proprement (de la forme time()+15)
  * @param bool $drop_source
