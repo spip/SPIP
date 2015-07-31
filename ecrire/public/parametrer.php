@@ -52,7 +52,7 @@ function calculer_contexte() {
 			$contexte[$var] = $val;
 	}
 
-	if ($GLOBALS['date'])
+	if (isset($GLOBALS['date']))
 		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
@@ -94,7 +94,7 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 		'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
 		'invalideurs' => $cache,
 		'entetes' => $headers,
-		'duree' => $headers['X-Spip-Cache']
+		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0 
 	);
 }
 
@@ -103,7 +103,8 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 
 function sql_rubrique_fond($contexte) {
 
-	if ($id = intval($contexte['id_rubrique'])) {
+	if (isset($contexte['id_rubrique'])) {
+		$id = intval($contexte['id_rubrique']);
 		$row = spip_abstract_fetsel(array('lang'),
 					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
@@ -112,7 +113,8 @@ function sql_rubrique_fond($contexte) {
 		return array ($id, $lang);
 	}
 
-	if ($id  = intval($contexte['id_breve'])) {
+	if (isset($contexte['id_breve'])) {
+		$id = intval($contexte['id_breve']);
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
 			array('spip_breves'), 
 			array("id_breve=$id"));
@@ -122,7 +124,8 @@ function sql_rubrique_fond($contexte) {
 		return array($id_rubrique_fond, $lang);
 	}
 
-	if ($id = intval($contexte['id_syndic'])) {
+	if (isset($contexte['id_syndic'])) {
+		$id = intval($contexte['id_syndic']);
 		$row = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_syndic'),
 			array("id_syndic=$id"));
@@ -135,7 +138,8 @@ function sql_rubrique_fond($contexte) {
 		return array($id_rubrique_fond, $lang);
 	}
 
-	if ($id = intval($contexte['id_article'])) {
+	if (isset($contexte['id_article'])) {
+		$id = intval($contexte['id_article']);
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
 			array('spip_articles'),
 			array("id_article=$id"));
@@ -244,11 +248,15 @@ function sql_accepter_forum($id_article) {
 # Determine les parametres d'URL (hors réécriture) et consorts
 # En deduit un contexte disant si la page est une redirection ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
-# Aplique alors le squelette sur le contexte et le nom du cache.
-# Retourne un tableau de 3 elements:
+# Applique alors le squelette sur le contexte et le nom du cache.
+# Retourne un tableau ainsi construit
 # 'texte' => la page calculee
 # 'process_ins' => 'html' ou 'php' si presence d'un '< ?php'
 # 'invalideurs' => les invalideurs de ce cache
+# 'entetes' => headers http
+# 'duree' => duree de vie du cache
+# 'signal' => contexte (les id_* globales)
+
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 function public_parametrer_dist($fond, $local='', $cache='')  {
@@ -302,7 +310,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (isset($local['lang']))
 		$lang = $local['lang'];
 
-	if (!$lang)
+	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
 	if (!$GLOBALS['forcer_lang'])

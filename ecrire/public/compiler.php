@@ -101,8 +101,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 			("\n\t$init = array();") : '') .
 		calculer_requete_sql($boucles[$id_boucle]);
     }
+  $notrace = isset($GLOBALS['var_mode_affiche']) ? ($GLOBALS['var_mode_affiche'] != 'resultat') : true;
   return $req . $corps 
-	. (($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
+	. ($notrace ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
 	.  "\n	return \$t0;";
 }

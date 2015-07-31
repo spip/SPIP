@@ -330,11 +330,11 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	else
 	  {
 	  	$order = "' DESC'";
-			// Classement par ordre inverse fonction eventuelle de #ENV{...}
-			if ($crit->param[0]){
-				$critere = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-				$order = "(($critere)?' DESC':'')";
-			}
+	// Classement par ordre inverse fonction eventuelle de #ENV{...}
+		if (isset($crit->param[0])){
+			$critere = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+			$order = "(($critere)?' DESC':'')";
+		}
 	  	
 	    $n = count($boucle->order);
 	    if ($n)
@@ -482,6 +482,15 @@ function calculer_criteres ($idb, &$boucles) {
 	}
 }
 
+// Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
+
+function kwote($lisp)
+{
+	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
+		($r[1] . "'\\'" . addslashes($r[2]) . "\\''") :
+		("'\\'' . addslashes(" . $lisp . ") . '\\''");
+}
+
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	static $cpt = 0;
@@ -587,7 +596,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  $nom = $table_des_tables[$type];
 	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
 	  if (@!array_key_exists($col, $desc['field'])) {
-		if ($exceptions_des_jointures[$col])
+		if (isset($exceptions_des_jointures[$col]))
 		  // on ignore la table, quel luxe!
 			list($t, $col) = $exceptions_des_jointures[$col];
 		$table = calculer_critere_externe_init($boucle, $col, $desc, $crit, $t);
@@ -778,10 +787,10 @@ function trouver_def_table($nom, &$boucle)
 		   $nom_table = 'spip_' . $nom;
 	}
 
-	$desc = $tables_des_serveurs_sql[$s][$nom_table];
+	$desc = $tables_des_serveurs_sql[$s];
 
-	if ($desc)
-		return array($nom_table, $desc);
+	if (isset($desc[$nom_table]))
+		return array($nom_table, $desc[$nom_table]);
 
 	include_spip('base/auxiliaires');
 	$nom_table = 'spip_' . $nom;

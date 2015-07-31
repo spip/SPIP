@@ -92,12 +92,7 @@ function retire_caches($chemin = '') {
 
 	// En priorite le cache qu'on appelle maintenant
 	if ($chemin) {
-		$f = spip_abstract_fetsel(array("fichier"),
-				    array("spip_caches"),
-				    array("fichier = '".addslashes($chemin)."' ",  "type='x'"),
-				    "",
-				    array(),
-				    1);
+		$f = spip_abstract_fetsel(array("fichier"),  array("spip_caches"), array("fichier = '".addslashes($chemin)."' ",  "type='x'"), "", array(), 1);
 		if ($f['fichier']) $suppr[$f['fichier']] = true;
 	}
 
@@ -156,10 +151,10 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 	if (!$page) return 1;
 
 	if (isset($page['entetes']['X-Spip-Cache'])) {
-		$duree = $page['entetes']['X-Spip-Cache'];
+		$duree = intval($page['entetes']['X-Spip-Cache']);
 		if ($duree == 0)  #CACHE{0}
 			return -1;
-		else if ($date + intval($duree) < time())
+		else if ($date + $duree < time())
 			return $duree;
 		else
 			return 0;
@@ -178,8 +173,8 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 
 	// arbitrage entre ancien et nouveau modele de delai:
 	// primaute a la duree de vie de la page donnee a l'interieur de la page 
-	if (strlen($t = $page['entetes']['X-Spip-Cache']))
-		$duree = intval($t);
+	if (isset($page['entetes']['X-Spip-Cache']))
+		$duree = intval($page['entetes']['X-Spip-Cache']);
 
 	// Enregistrer le fichier cache qui contient
 	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
@@ -288,9 +283,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// cas sans jamais de cache pour raison interne
-	if ($GLOBALS['var_mode'] &&
-		($GLOBALS['_COOKIE']['spip_session']
-		 || $GLOBALS['_COOKIE']['spip_admin']
+	if (isset($GLOBALS['var_mode']) &&
+	    (isset($GLOBALS['_COOKIE']['spip_session'])
+	    || isset($GLOBALS['_COOKIE']['spip_admin'])
 		 || @file_exists(_ACCESS_FILE_NAME))) {
 			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}

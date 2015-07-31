@@ -523,8 +523,7 @@ function calculer_balise_logo ($p) {
 	}
 
 	// analyser les faux filtres
-	$flag_fichier = 0;
-	$filtres = '';
+	$flag_fichier = $flag_stop = $flag_lien_auto = $code_lien = $filtres = $align = $lien = '';
 
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
@@ -594,7 +593,7 @@ function calculer_balise_logo ($p) {
 	else {
 		if (!$code_lien)
 			$code_lien = "''";
-		$code_lien .= ", '". addslashes($align) . "'";
+		$code_lien .= ", '". $align . "'";
 	}
 
 	// cas des documents
