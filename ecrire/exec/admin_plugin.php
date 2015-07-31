@@ -85,11 +85,11 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		$s = "";
 		if ('O' == $plugok){
 			if ($id_input>0)
-				$s = "<a href='".generer_url_ecrire('admin_plugin',"monter=$plug_file")."'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0'></a>";
+				$s = "<a href='".generer_url_ecrire('admin_plugin',"monter=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0'></a>";
 			$vals[] = $s;
 			$s = "";
 			if (!$last_actif)
-				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=$plug_file")."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";
+				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";
 		}
 		else{
 			$vals[] = $s;
