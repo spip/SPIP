@@ -55,9 +55,6 @@ function traite_query($query) {
 	}
 	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 
-	// supprimer les INSERT DELAYED
-	$query = ereg_replace('^INSERT DELAYED ', 'INSERT ', $query);
-
 	return $query;
 }
 

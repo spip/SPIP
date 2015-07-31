@@ -165,7 +165,7 @@ function calculer_n_referers($nb_referers) {
 		}
 	}
 	if (is_array($referer_insert)) {
-		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers ".
+		$query_insert = "INSERT IGNORE INTO spip_referers ".
 			"(date, referer, referer_md5, visites) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
@@ -198,7 +198,7 @@ function calculer_n_referers($nb_referers) {
 		}
 	}
 	if (is_array($referer_insert)) {
-		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers_articles ".
+		$query_insert = "INSERT IGNORE INTO spip_referers_articles ".
 			"(date, referer, referer_md5, id_article, visites) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
@@ -278,7 +278,7 @@ function calculer_visites($date = "") {
 		}
 	}
 	if (is_array($visites_insert)) {
-		$query_insert = "INSERT DELAYED IGNORE INTO spip_visites_articles (date, id_article, visites) ".
+		$query_insert = "INSERT IGNORE INTO spip_visites_articles (date, id_article, visites) ".
 				"VALUES ".join(', ', $visites_insert);
 		$result_insert = spip_query($query_insert);
 	}

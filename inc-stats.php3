@@ -61,7 +61,7 @@ function ecrire_stats() {
 
 	// Log simple des visites
 	if ($log_type != "autre") {
-		$query = "INSERT DELAYED IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
+		$query = "INSERT IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
 			"VALUES ($log_ip, '$log_type', $log_id_num)";
 		spip_query($query);
 	}
@@ -74,7 +74,7 @@ function ecrire_stats() {
 		if (eregi($url_site_spip, $log_referer) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
 			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
-			$query = "INSERT DELAYED IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
+			$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
 				"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
 			spip_query($query);
 		}
