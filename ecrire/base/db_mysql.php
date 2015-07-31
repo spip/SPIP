@@ -53,7 +53,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 	if (!$ok
 	AND !defined('_ECRIRE_INSTALL')) {
 		@touch(_DIR_TMP.'mysql_out');
-		$err = 'Echec connexion MySQL '.spip_sql_errno().' '.spip_mysql_error();
+		$err = 'Echec connexion MySQL '.spip_mysql_errno().' '.spip_mysql_error();
 		spip_log($err);
 		spip_log($err, 'mysql');
 	} 
@@ -107,7 +107,7 @@ function spip_sql_trace_start()
 function spip_sql_trace_end($query, $start, $result)
 {
 	global $tableau_des_erreurs;
-	$s = spip_sql_errno();
+	$s = spip_mysql_errno();
 	if ($start) spip_sql_timing($start, microtime(), $query, $result);
 
 	if ($s) {
@@ -181,7 +181,7 @@ function spip_mysql_select($select, $from, $where,
 	if (!($res = spip_mysql_query("SELECT ". $query, $server))) {
 		include_spip('public/debug');
 		erreur_requete_boucle($query, $id, $table,
-				      spip_sql_errno(),
+				      spip_mysql_errno(),
 				      spip_mysql_error());
 	}
 
@@ -385,8 +385,7 @@ function spip_mysql_error() {
 	return mysql_error();
 }
 
-// http://doc.spip.org/@spip_sql_errno
-function spip_sql_errno() {
+function spip_mysql_errno() {
 	return mysql_errno();
 }
 
