@@ -61,8 +61,8 @@ function balise_FORMULAIRE__dyn($form)
 	// pour ne pas confondre 2 #FORMULAIRES_XX identiques sur une meme page
 	$je_suis_poste = false;
 	if ($post_form = _request('formulaire_action')
-	AND $post_args = _request('formulaire_action_args')) {
-		$post_args = decoder_contexte_ajax($post_args,$post_form);
+	AND ($post_args = _request('formulaire_action_args'))
+	AND is_array($post_args = decoder_contexte_ajax($post_args,$post_form))) {
 		// enlever le faux attribut de langue masque
 		array_shift($post_args);
 		if ($args === $post_args){
