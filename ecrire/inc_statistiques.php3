@@ -59,16 +59,16 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$url_site = lire_meta('adresse_site');
 		$url_site = strtolower(eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site));
 	}
- 
+
 	$url   = parse_url( $kw_referer );
 	$query = $url['query'];
 	$host  = $url['host'];
-	
+
 	parse_str($query);
-  
+
 	$keywords = '';
 	$found = false;
-  
+
 	if (strpos('-'.$kw_referer, $url_site)) {
 		if (eregi("recherche=([^=]+)", $kw_referer, $regs)) {
 			$keywords = $regs[1];
@@ -83,7 +83,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			$kw_referer_host = $arr_engines[$cnt][0];
 			$keywords = ereg('=', $arr_engines[$cnt][1])
 				? ${str_replace('=', '', $arr_engines[$cnt][1])}
-				: $lvm_directory;
+				: $lvm_directory; // c'est quoi ce truc ??
 			if ((($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
