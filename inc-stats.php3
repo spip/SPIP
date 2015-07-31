@@ -27,8 +27,8 @@ function ecrire_stats() {
 	}
 
 	// Conversion IP 4 octets -> entier 32 bits
-	if (ereg("^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$", $log_ip, $r)) {
-		$log_ip = sprintf("0x%02x%02x%02x%02x", $r[1], $r[2], $r[3], $r[4]);
+	if (ereg("^(::ffff:)?([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$", $log_ip, $r)) {
+		$log_ip = sprintf("0x%02x%02x%02x%02x", $r[2], $r[3], $r[4], $r[5]);
 	}
 	else return;
 
