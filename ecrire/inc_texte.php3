@@ -115,7 +115,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		if ($regs[7]) {
 			// Echapper les <cadre>...</cadre>
 			$lecode = trim(entites_html($regs[9]));
-			$total_lignes = substr_count($lecode, "\n");
+			$total_lignes = substr_count($lecode, "\n") + 1;
 
 			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><div><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></div></form>";
 			// Les marques ci-dessous indiquent qu'on ne veut pas paragrapher
