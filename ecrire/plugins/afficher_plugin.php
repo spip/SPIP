@@ -158,6 +158,9 @@ function plugin_etat_en_clair($etat){
 
 // http://doc.spip.org/@plugin_propre
 function plugin_propre($texte, $module='') {
+	// retirer le retour a la racine du module, car le find_in_path se fait depuis la racine
+	if (_DIR_RACINE AND strncmp($module,_DIR_RACINE,strlen(_DIR_RACINE))==0)
+		$module = substr($module,strlen(_DIR_RACINE));
 	if (preg_match("|^\w+_[\w_]+$|", $texte)) {
 		$texte = _T(($module ? "$module:" : '') . $texte);
 	}
