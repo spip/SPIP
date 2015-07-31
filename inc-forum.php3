@@ -172,20 +172,22 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		// Si premiere edition, initialiser le titre et l'auteur
 		if (!$titre) {
 			if ($id_parent)
-				$titre_select = "SELECT titre FROM spip_forum WHERE id_forum = $id_parent";
+				$titre_select = "SELECT titre FROM spip_forum WHERE id_forum = $id_parent AND statut='publie'";
 			else if ($id_rubrique)
-				$titre_select = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $id_rubrique";
+				$titre_select = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $id_rubrique AND statut='publie'";
 			else if ($id_article)
-				$titre_select = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
+				$titre_select = "SELECT titre FROM spip_articles WHERE id_article = $id_article AND statut='publie'";
 			else if ($id_breve)
-				$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve";
+				$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve AND statut='publie'";
 			else if ($id_syndic)
-				$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
+				$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic AND statut='publie'";
 			else
 				$titre_select = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
 
-			$res = spip_fetch_object(spip_query($titre_select));
-			$titre = '> ' . supprimer_numero(ereg_replace ('^[>[:space:]]*', '', $res->titre));
+			if ($res = spip_fetch_object(spip_query($titre_select)))
+				$titre = '> ' . supprimer_numero(ereg_replace ('^[>[:space:]]*', '', $res->titre));
+			else
+				$titre = _T('forum_titre_erreur');
 		}
 		if ($spip_forum_user && is_array($cookie_user = unserialize($spip_forum_user))) {
 			$auteur = $cookie_user['nom'];
