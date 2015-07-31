@@ -333,10 +333,10 @@ function ValidateurXML($process=array()) {
 // ayant comme entrees des sous-tableaux [message, ligne, colonne]
 
 // http://doc.spip.org/@xml_valider_dist
-function xml_valider_dist($page, $apply=false, $process=false, $doctype='')
+function xml_valider_dist($page, $apply=false, $process=false, $doctype='', $charset=null)
 {
 	$f = new ValidateurXML($process);
 	$sax = charger_fonction('sax', 'xml');
-	return $sax($page, $apply, $f, $doctype);
+	return $sax($page, $apply, $f, $doctype, $charset);
 }
 ?>
