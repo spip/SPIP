@@ -398,7 +398,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1, $cherche_image=t
 		return inserer_attribut($img, 'style',
 			"max-width: ${taille}px; max-height: ${taille_y}px");
 	}
-	$logo = $local;
+	$logo = _DIR_RACINE.$local;
 
 	$attributs = '';
 

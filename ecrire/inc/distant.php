@@ -24,7 +24,7 @@ function copie_locale($source, $mode='auto') {
 
 	// test d'existence du fichier
 	if ($mode == 'test')
-		return @file_exists(_DIR_RACINE.$local) ? $local : '';
+		return @file_exists(_DIR_RACINE.$local) ? _DIR_RACINE.$local : '';
 
 	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
 	// par exemple un fichier qui ne figure pas dans nos documents ;
@@ -32,12 +32,13 @@ function copie_locale($source, $mode='auto') {
 	if (!$local) return false;
 
 	// sinon voir si on doit le telecharger
-	if (($source != $local) AND (preg_match(',^\w+://,', $source))) {
-		if (($mode=='auto' AND !@file_exists($local))
+	if ($local != $source
+	AND preg_match(',^\w+://,', $source)) {
+		if (($mode=='auto' AND !@file_exists(_DIR_RACINE.$local))
 		OR $mode=='force') {
 			$contenu = recuperer_page($source);
 			if ($contenu) {
-				ecrire_fichier($local, $contenu);
+				ecrire_fichier(_DIR_RACINE.$local, $contenu);
 
 				// signaler au moteur de recherche qu'il peut reindexer ce doc
 				$id_document = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
@@ -230,8 +231,14 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 function nom_fichier_copie_locale($source, $extension) {
 	$dir = sous_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
 	$dir2 = sous_repertoire($dir, $extension); 		# IMG/distant/pdf/
-	return $dir2 . substr(basename($source).'-'.md5($source),0,12).
+	$chemin = $dir2 . substr(basename($source).'-'.md5($source),0,12).
 		substr(md5($source),0,4).'.'.$extension;
+
+	// on se place tout le temps comme si on etait a la racine
+	if (_DIR_RACINE)
+		$chemin = preg_replace(',^'.preg_quote(_DIR_RACINE).',', '', $chemin);
+
+	return $chemin;
 }
 
 //
