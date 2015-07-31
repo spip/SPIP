@@ -24,8 +24,6 @@ define('_ADMINS_RESTREINTS', true);
 define('_STATUT_AUTEUR_CREATION', '1comite');
 // statuts associables a des rubriques (separes par des virgules)
 define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
-// id du ou des webmestres, '1:5:90' a regler dans mes_options
-if (!defined ('_ID_WEBMESTRES')) define ('_ID_WEBMESTRES', '1');
 
 // surcharge possible de autoriser(), sinon autoriser_dist()
 if (!function_exists('autoriser')) {
@@ -59,7 +57,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	// Qui ? visiteur_session ?
 	// si null ou '' (appel depuis #AUTORISER) on prend l'auteur loge
 	if ($qui === NULL OR $qui==='')
-	  $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0);
+	  $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0, 'webmestre' => 'non');
 	elseif (is_numeric($qui)) {
 		$qui = sql_fetsel("*", "spip_auteurs", "id_auteur=".$qui);
 	}
@@ -388,8 +386,7 @@ function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_webmestre_dist
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 	return
-		defined('_ID_WEBMESTRES')
-		AND in_array($qui['id_auteur'], explode(':', _ID_WEBMESTRES))
+		$qui['webmestre']=='oui'
 		AND $qui['statut'] == '0minirezo'
 		AND !$qui['restreint']
 		;
@@ -448,9 +445,11 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Un redacteur peut modifier ses propres donnees mais ni son login/email
 	// ni son statut (qui sont le cas echeant passes comme option)
 	if ($qui['statut'] == '1comite') {
-		if ($opt['statut'] OR $opt['restreintes'] OR $opt['email'])
+		if ($opt['webmestre'])
 			return false;
-		else if ($id == $qui['id_auteur'])
+		elseif ($opt['statut'] OR $opt['restreintes'] OR $opt['email'])
+			return false;
+		elseif ($id == $qui['id_auteur'])
 			return true;
 		else
 			return false;
@@ -459,10 +458,11 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Un admin restreint peut modifier/creer un auteur non-admin mais il
 	// n'a le droit ni de le promouvoir admin, ni de changer les rubriques
 	if ($qui['restreint']) {
-		if ($opt['statut'] == '0minirezo'
-		OR $opt['restreintes']) {
+		if ($opt['webmestre'])
 			return false;
-		} else {
+		elseif ($opt['statut'] == '0minirezo' OR $opt['restreintes'])
+			return false;
+		else {
 			if ($id == $qui['id_auteur']) {
 				if ($opt['statut'])
 					return false;
@@ -485,6 +485,12 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Un admin complet fait ce qu'elle veut
 	// sauf se degrader
 	if ($id == $qui['id_auteur'] && $opt['statut'])
+		return false;
+	// et toucher au statut webmestre si il ne l'est pas lui meme
+	elseif ($opt['webmestre'] AND !autoriser('webmestre'))
+		return false;
+	// et toucher au statut d'un webmestre si il ne l'est pas lui meme
+	elseif ($opt['statut'] AND autoriser('webmestre','',0,$id) AND !autoriser('webmestre'))
 		return false;
 	else
 		return true;

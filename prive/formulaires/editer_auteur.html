@@ -41,15 +41,18 @@
 	    [(#REM)
 	    	Cle PGP
 		]		  
-	    <li class="editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
-				<label for="pgp"><:entree_cle_pgp:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>
-				]<textarea name='pgp' id='pgp' rows='4' cols='40'>[(#ENV**{pgp})]</textarea>
-	    </li>
-	    [(#REM)
-	    	Site ouaib : nom et url
-		]		
+		<li class="editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
+			<label for="pgp"><:entree_cle_pgp:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>
+			]<textarea name='pgp' id='pgp' rows='4' cols='40'>[(#ENV**{pgp})]</textarea>
+		</li>
+		[(#REM)
+				statut
+		]
 		[<li class='editer_statut'>(#ENV**{config}|table_valeur{auteur}|instituer_auteur_ici)</li>]
+		[(#REM)
+				Site ouaib : nom et url
+		]
 	  	<li class='editer_liens_sites fieldset'>
 			<fieldset>
 			<h3 class="legend"><:info_site_web:></h3>
