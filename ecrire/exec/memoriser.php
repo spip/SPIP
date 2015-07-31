@@ -20,19 +20,21 @@ function exec_memoriser_dist()
 	$hash = _request('hash');
 	$order = _request('order');
 	$by = _request('by');
+	$trad = _request('trad');
 	lire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt', $ajax_fonctions);
 	$ajax_fonctions = @unserialize($ajax_fonctions);
 
 	if ($res = $ajax_fonctions[$hash]) {
-		list(,$t,$r,$p,$f) = $res;
+		include_spip('inc/afficher_objets');
+		list(,$t,$r,$f) = $res;
 		if (preg_match('/^[a-z0-9+.,]+$/', $by)
-		AND preg_match('/^\w*$/', $order)) 
+		AND preg_match('/^\w*$/', $order)) {
 			$r['ORDER BY'] = str_replace(',', " $order, ", $by) .  " $order";
+			sauver_requete($t, $r, $f);
+		}
 		$cpt = sql_countsel($r['FROM'], $r['WHERE'], $r['GROUP BY']);
 		include_spip('inc/presentation');
-		include_spip('inc/afficher_objets');
-		$res = afficher_articles_trad($t, $r, $f, $p, $hash, $cpt, _request('trad'));
-
+		$res = afficher_articles_trad($t, $r, $f, $hash, $cpt, $trad);
 	} else spip_log("memoriser $q vide");
 	ajax_retour($res);
 }
