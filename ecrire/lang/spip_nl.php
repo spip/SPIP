@@ -312,7 +312,7 @@ Bedankt voor je deelname
 'forum_lien_hyper' => '<b>webverwijzing</b> (optioneel)',
 'forum_message_definitif' => 'Definitief bericht : versturen',
 'forum_message_trop_long' => 'Je bericht is te lang. De maximale lengte is 20.000 tekens.',
-'forum_ne_repondez_pas' => 'Beantwoord deze mail niet maar bezoek het forum op het volgende adres :',
+'forum_ne_repondez_pas' => 'Beantwoord deze mail niet maar bezoek het forum op het volgende adres :', # MODIF
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_page_url' => '(Als je bericht naar een artikel op het web verwijst of naar een pagina die meer informatie bevat, kunt u hier de titel en de URL van deze webverwijzing invoeren.)',
 'forum_par_auteur' => 'door @auteur@',

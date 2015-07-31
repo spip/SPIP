@@ -310,7 +310,7 @@ Tak for din deltagelse
 'forum_lien_hyper' => '<b>Hypertekst link</b> (valgfrit)',
 'forum_message_definitif' => 'Endeligt indl&aelig;g: send til webstedet',
 'forum_message_trop_long' => 'Dit indl&aelig;g er for langt. Maksimal l&aelig;ngde er 20.000 tegn.',
-'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men g&aring; i stedet til forummet p&aring; denne adresse:',
+'forum_ne_repondez_pas' => 'Undlad at besvare denne e-mail, men g&aring; i stedet til forummet p&aring; denne adresse:', # MODIF
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
 'forum_page_url' => '(Hvis dit indl&aelig;g henviser til en artikel, der er offentliggjort p&aring; Internettet, eller til en side der indeholder yderligere oplysninger, s&aring; angiv venligst sidens titel og dens adresse eller URL nedenfor).',
 'forum_par_auteur' => 'af @auteur@',

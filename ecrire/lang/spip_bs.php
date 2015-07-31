@@ -291,7 +291,7 @@ sera ignor&eacute;e) :
 'forum_lien_hyper' => '<b>Hipertekstualni link</b> (optionnel)',
 'forum_message_definitif' => 'Definitivna poruka: posalji na stranicu',
 'forum_message_trop_long' => 'Vasa poruka je preduga. Maksimalna velicina je 20000 karaktera.',
-'forum_ne_repondez_pas' => 'Ne odgovarajte na ovu poruku osim u forumu na sljedecu adresu:',
+'forum_ne_repondez_pas' => 'Ne odgovarajte na ovu poruku osim u forumu na sljedecu adresu:', # MODIF
 'forum_non_inscrit' => 'Niste registrovani ili adresa i lozinka nisu ispravni.',
 'forum_page_url' => '(Ako se vasa poruka odnosi na clanak objavljen na web-u, ili na stranicu koja pruza dodatne informacije, mozete na kraju naznaciti naziv i URL adresu stranice.)',
 'forum_par_auteur' => 'od @auteur@',

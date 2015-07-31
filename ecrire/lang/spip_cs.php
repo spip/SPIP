@@ -313,7 +313,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'forum_lien_hyper' => '<b>Hypertextov&yacute; odkaz</b> (voliteln&eacute;)',
 'forum_message_definitif' => 'Z&aacute;v&#283;re&#269;n&aacute; zpr&aacute;va: odesl&aacute;no na web',
 'forum_message_trop_long' => 'Zpr&aacute;va je p&#345;&iacute;li&#353; dlouh&aacute;. Maximum je 20.000 znak&#367;.',
-'forum_ne_repondez_pas' => 'Neodpov&iacute;dejte na tuto zpr&aacute;vu. Odpov&#283;&#271; zve&#345;ejn&#283;te v r&aacute;mci skupiny na adrese:',
+'forum_ne_repondez_pas' => 'Neodpov&iacute;dejte na tuto zpr&aacute;vu. Odpov&#283;&#271; zve&#345;ejn&#283;te v r&aacute;mci skupiny na adrese:', # MODIF
 'forum_non_inscrit' => 'Bu&#271; nejste zaregistrov&aacute;ni nebo jste zadali nespr&aacute;vnou adresu &#269;i heslo.',
 'forum_page_url' => '(T&yacute;k&aacute;-li se zpr&aacute;va &#269;l&aacute;nku zve&#345;ejn&#283;n&eacute;ho na webu nebo str&aacute;nky s dopl&#328;uj&iacute;c&iacute;mi informacemi, zadejte d&aacute;le n&aacute;zev str&aacute;nky a jej&iacute; adresu).',
 'forum_par_auteur' => 'Autor: @auteur@',

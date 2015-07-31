@@ -302,7 +302,7 @@ Tack f&ouml;r ditt deltagande
 'forum_lien_hyper' => '<b>L&auml;nk</b> (valfritt)',
 'forum_message_definitif' => 'Slutligt meddelande: skicka till sajten',
 'forum_message_trop_long' => 'Ditt meddelande &auml;r f&ouml;r l&aring;ngt. Det f&aring;r inte vara mer &auml;n 2000 tecken.',
-'forum_ne_repondez_pas' => 'Svara inte p&aring; detta brev utan i forumet p&aring; denna adress:',
+'forum_ne_repondez_pas' => 'Svara inte p&aring; detta brev utan i forumet p&aring; denna adress:', # MODIF
 'forum_non_inscrit' => 'Antingen &auml;r du inte registrerad eller s&aring; &auml;r adressen eller l&ouml;senordet felaktigt.',
 'forum_page_url' => '(Om ditt meddelande refererar till en artikel publicerad p&aring; webben eller till en sida med mer information, ange namnet p&aring; sidan och dess adress nedan).',
 'forum_par_auteur' => 'av @auteur@',

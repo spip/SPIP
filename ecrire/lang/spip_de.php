@@ -309,7 +309,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'forum_lien_hyper' => '<b>Hyperlink</b> (optional)',
 'forum_message_definitif' => 'Beitrag fertiggestellt: Endg&uuml;ltig eintragen.',
 'forum_message_trop_long' => 'Ihr Beitrag ist zu lang. Sie k&ouml;nnen maximal 20.000 Zeichen schreiben.',
-'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:',
+'forum_ne_repondez_pas' => 'Antworten Sie nicht auf diese Mail, sondern im Forum mit dieser Adresse:', # MODIF
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_page_url' => '(Wenn sich Ihr Beitrag auf einen Artikel im Internet oder auf eine Seite mit Zusatzinformationen bezieht, geben Sie hier bitte den Titel der Seite und ihre Adresse bzw. URL an.)',
 'forum_par_auteur' => 'Nach @auteur@',

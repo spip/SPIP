@@ -311,7 +311,7 @@ K&ouml;sz&ouml;nj&uuml;k r&eacute;szv&eacute;tel&eacute;t!
 'forum_lien_hyper' => '<b>Hiperhivatkoz&aacute;s</b> (v&aacute;laszthat&oacute;)',
 'forum_message_definitif' => 'V&eacute;gleges &uuml;zenet: k&uuml;ld&eacute;s a honlapra',
 'forum_message_trop_long' => 'Az &Ouml;n &uuml;zenete t&uacute;l hossz&uacute;. A maxim&aacute;lis m&eacute;ret 20 000 karakter.',
-'forum_ne_repondez_pas' => 'Ne erre az emailre v&aacute;laszoljon, hanem a f&oacute;rumon a k&ouml;vetkez&#337; c&iacute;men:',
+'forum_ne_repondez_pas' => 'Ne erre az emailre v&aacute;laszoljon, hanem a f&oacute;rumon a k&ouml;vetkez&#337; c&iacute;men:', # MODIF
 'forum_non_inscrit' => 'Nincs regisztr&aacute;lva, vagy a c&iacute;m vagy a jelsz&oacute; hib&aacute;s.',
 'forum_page_url' => '(Amennyiben az &Ouml;n &uuml;zenete egy interneten publik&aacute;lt, vagy tov&aacute;bbi inform&aacute;ci&oacute;t tartalmaz&oacute; oldalra vonatkozik, akkor adja meg az oldal nev&eacute;t, illetve URL c&iacute;m&eacute;t.)',
 'forum_par_auteur' => '&Iacute;rta: @auteur@',

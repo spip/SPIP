@@ -320,7 +320,7 @@ Mersi aou m&egrave;t ansanm isi
 'forum_lien_hyper' => '<b>Gatiraz</b> (l&eacute; pa obligatwar)',
 'forum_message_definitif' => 'Mod&eacute;kri-la l&eacute; fini : anvwa ali si lo sitw&egrave;b',
 'forum_message_trop_long' => 'Out mod&eacute;kri l&eacute; tro lon. Li dwa pa d&eacute;pas plid 20000 karakt&egrave;r-linprimri.',
-'forum_ne_repondez_pas' => 'Pou r&eacute;ponn lim&eacute;l-la, anserv lo forom kozman ou sava trouv t&egrave;rla (r&eacute;ponn pa &egrave;k inn ot lim&egrave;l m&eacute; zizt inn mod&eacute;kri sir lo sitw&egrave;b):',
+'forum_ne_repondez_pas' => 'Pou r&eacute;ponn lim&eacute;l-la, anserv lo forom kozman ou sava trouv t&egrave;rla (r&eacute;ponn pa &egrave;k inn ot lim&egrave;l m&eacute; zizt inn mod&eacute;kri sir lo sitw&egrave;b):', # MODIF
 'forum_non_inscrit' => 'Ou l&eacute; pa inskri, kiswa out ladr&egrave;s, kiswa out modpas nana kanard&eacute;.',
 'forum_page_url' => '(Si out mod&eacute;kri li ranvwa si inn lartik si lo W&egrave;b o inn ot paz pli konpl&eacute; d&eacute;or, m&egrave;rsi m&egrave;t anba lo non lapazw&egrave;b &egrave;k son ladr&egrave;s URL.)',
 'forum_par_auteur' => 'sanm @auteur@',

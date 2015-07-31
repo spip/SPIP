@@ -310,7 +310,7 @@ M&egrave;si  w soutni petisyon-nan
 'forum_lien_hyper' => '<b>Lyen ip&egrave;rt&egrave;ks</b> (w pa oblij&eacute;)',
 'forum_message_definitif' => 'Mesaj fin fini : anvway anndan sit la',
 'forum_message_trop_long' => 'Mesaj ou se tro lon. Pli gran tay se 20000 kawakt&egrave;.',
-'forum_ne_repondez_pas' => 'Reponn pa lim&egrave;l la. Reponn anndan fowom-an sou ladr&egrave;s la :',
+'forum_ne_repondez_pas' => 'Reponn pa lim&egrave;l la. Reponn anndan fowom-an sou ladr&egrave;s la :', # MODIF
 'forum_non_inscrit' => 'W ap pa enskri ank&ograve;, oubyen ladr&egrave;s osinon modpas ou se pa kor&egrave;k.',
 'forum_page_url' => '(Si mesaj ou ka voye sou yon tik sou W&egrave;b d&eacute;&ograve; ou yon l&ograve;t paj pli konpl&eacute;, m&egrave;si m&egrave;t anba kouman paj la  ka rele &egrave;k ladr&egrave;s URL.)',
 'forum_par_auteur' => 'se @auteur@ te ekri',

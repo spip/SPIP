@@ -311,7 +311,7 @@ Thank you for your participation!
 'forum_lien_hyper' => '<b>Hypertext link</b> (optional)',
 'forum_message_definitif' => 'Final message: send to the site',
 'forum_message_trop_long' => 'Your message is too long. Maximum length should be 20000 characters.',
-'forum_ne_repondez_pas' => 'Do not reply to this mail but in the forum at the following address:',
+'forum_ne_repondez_pas' => 'Do not reply to this mail but in the forum at the following address:', # MODIF
 'forum_non_inscrit' => 'Either you are not registered or the address or password are wrong.',
 'forum_page_url' => '(If your message refers to an article published on the web or to a page providing further information, please enter the title of the page and its URL below).',
 'forum_par_auteur' => 'by @auteur@',

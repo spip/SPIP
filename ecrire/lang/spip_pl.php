@@ -314,7 +314,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'forum_lien_hyper' => '<b>Link</b> (opcjonalny)',
 'forum_message_definitif' => 'Wiadomo&#347;&#263; ko&#324;cowa: wy&#347;lij na stron&#281;',
 'forum_message_trop_long' => 'Twoja wiadomo&#347;&#263; jest za d&#322;uga. Maksymalna d&#322;ugo&#347;&#263; to 20000 znak&oacute;w.',
-'forum_ne_repondez_pas' => 'Nie odpowiadaj na tego maila, lecz na forum, pod nast&#281;puj&#261;cym adresem:',
+'forum_ne_repondez_pas' => 'Nie odpowiadaj na tego maila, lecz na forum, pod nast&#281;puj&#261;cym adresem:', # MODIF
 'forum_non_inscrit' => 'Nie jeste&#347; zarejestrowany, lub adres b&#261;d&#378; has&#322;o s&#261; nieprawid&#322;owe.',
 'forum_page_url' => '(Je&#347;li twoja wiadomo&#347;&#263; odnosi si&#281; jakiego&#347; artyku&#322;y opublikowanego w internecie, wpisz poni&#380;ej tytu&#322; tej strony oraz jej adres).',
 'forum_par_auteur' => 'wg @auteur@',

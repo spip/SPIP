@@ -314,7 +314,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'forum_lien_hyper' => '<b>Ligaz&oacute;n de hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensaxe definitiva: enviala ao web',
 'forum_message_trop_long' => 'A mensaxe &eacute; longa de m&aacute;is. O tama&ntilde;o m&aacute;ximo permitido &eacute; de 20000 caract&eacute;res.',
-'forum_ne_repondez_pas' => 'Resposta este correo no foro do enderezo seguinte:',
+'forum_ne_repondez_pas' => 'Resposta este correo no foro do enderezo seguinte:', # MODIF
 'forum_non_inscrit' => 'A&iacute;nda non se rexistrou, ou o enderezo ou a chave son incorrectos.',
 'forum_page_url' => '(Se a s&uacute;a mensaxe se refire a un artigo publicado en Internet, ou a unha p&aacute;xina que cont&eacute;n m&aacute;is informaci&oacute;ns, indique a continuaci&oacute;n o t&iacute;tulo da p&aacute;xina e o seu enderezo URL)',
 'forum_par_auteur' => 'por @auteur@',

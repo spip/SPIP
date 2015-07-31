@@ -313,7 +313,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'forum_lien_hyper' => '<b>Ligam ipert&egrave;xt</b> (opcionau)',
 'forum_message_definitif' => 'Messatge definitiu : mandar au sit',
 'forum_message_trop_long' => 'Lo v&ograve;ste messatge qu\'ei tr&ograve;p long. La longor maximau qu\'ei de 20&nbsp;000 caract&egrave;rs.',
-'forum_ne_repondez_pas' => 'Non responiatz pas a aqueth e-mail mes peu forum a l\'adrei&ccedil;a seguenta: ',
+'forum_ne_repondez_pas' => 'Non responiatz pas a aqueth e-mail mes peu forum a l\'adrei&ccedil;a seguenta: ', # MODIF
 'forum_non_inscrit' => 'Sia n\'&egrave;tz pas inscriut(a), sia avetz h&egrave;it ua error d\'adrei&ccedil;a o de mot de santa Clara. ',
 'forum_page_url' => '(se lo v&ograve;ste messatge e\'s refereish a un article publicat peu web, o a ua pagina qui baile mei informacions, que podetz marcar &ccedil;a devath lo t&iacute;tol de la pagina e la soa adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',

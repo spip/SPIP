@@ -307,7 +307,7 @@ Zure ekarpena gunearen administratzaileak onartu ondoren soilik agerian izango d
 'forum_lien_hyper' => 'Hipertestu lotura (aukeratzekoa)',
 'forum_message_definitif' => 'Behin-betiko mezua : gunera igorri',
 'forum_message_trop_long' => 'Zure mezua luzeegia da. Gehienez ere 20000 karaktere onartzen dira.',
-'forum_ne_repondez_pas' => 'Ez erantzun mezu elektroniko honi, baizik eta hurrengo helbidean dagoen foroan:',
+'forum_ne_repondez_pas' => 'Ez erantzun mezu elektroniko honi, baizik eta hurrengo helbidean dagoen foroan:', # MODIF
 'forum_non_inscrit' => 'Ez zaude inskribaturik, edota emandako helbidea edo pasahitza ez dira zuzenak.',
 'forum_page_url' => '(Zure mezua interneten argitaratutako artikulu bati buruzkoa baldin bada, edo informazio gehiago duen orrialde bati buruzkoa, adieraz itzazu jarraian orrialdearen izena bai eta URL helbidea ere).',
 'forum_par_auteur' => '@auteur@-k',

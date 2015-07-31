@@ -314,7 +314,7 @@ Gracies por participar
 'forum_lien_hyper' => '<b>Enllace d\'hipertestu</b> (opcional)',
 'forum_message_definitif' => 'Mensaxe definitivu: unviar al sitiu',
 'forum_message_trop_long' => 'El to mensaxe ye enforma llargu. El tama&ntilde;u m&aacute;simu ye de 20000 carauteres.',
-'forum_ne_repondez_pas' => 'Nun responder a esti corr&eacute;u, sinon nel foru de les siguientes se&ntilde;es:',
+'forum_ne_repondez_pas' => 'Nun responder a esti corr&eacute;u, sinon nel foru de les siguientes se&ntilde;es:', # MODIF
 'forum_non_inscrit' => 'Nun tas apunt&aacute;u, o les tos se&ntilde;es o contrase&ntilde;a tan equivoc&aacute;os.',
 'forum_page_url' => '(Si el to mensaxe refierse a un art&iacute;culu espubliz&aacute;u na Rede, o a una p&aacute;xina que tenga m&aacute;s informaci&oacute;n, equ&iacute; embaxo vas poder indicar el t&iacute;tulu de la p&aacute;xina y les sos se&ntilde;es.)',
 'forum_par_auteur' => 'por @auteur@',

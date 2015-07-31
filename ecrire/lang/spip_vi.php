@@ -307,7 +307,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'forum_lien_hyper' => '<b>&#272;i&#7875;m n&#7889;i hypertext</b> (kh&ocirc;ng b&#7855;t bu&#7897;c)',
 'forum_message_definitif' => 'Th&#432; t&iacute;n &#273;&atilde; xong: g&#7917;i &#273;i',
 'forum_message_trop_long' => 'Th&#432; t&iacute;n d&agrave;i qu&aacute;. &#272;&#7897; d&agrave;i t&#7889;i &#273;a 20000 m&#7851;u t&#7921;.',
-'forum_ne_repondez_pas' => '&#272;&#7915;ng h&#7891;i &acirc;m email n&agrave;y, h&#7891;i &acirc;m trong di&#7877;n &#273;&agrave;n &#7903; &#273;&#7883;a ch&#7881; sau &#273;&acirc;y:',
+'forum_ne_repondez_pas' => '&#272;&#7915;ng h&#7891;i &acirc;m email n&agrave;y, h&#7891;i &acirc;m trong di&#7877;n &#273;&agrave;n &#7903; &#273;&#7883;a ch&#7881; sau &#273;&acirc;y:', # MODIF
 'forum_non_inscrit' => 'Ho&#7863;c l&agrave; b&#7841;n ch&#432;a ghi danh, ho&#7863;c &#273;&#7883;a ch&#7881; hay m&#7853;t m&atilde; kh&ocirc;ng &#273;&uacute;ng.',
 'forum_page_url' => '(N&#7871;u th&#432; t&iacute;n c&#7911;a b&#7841;n c&oacute; &#273;&#7873; c&#7853;p &#273;&#7871;n m&#7897;t b&agrave;i kh&aacute;c tr&ecirc;n web, xin &#273;i&#7873;n v&agrave;o t&#7921;a &#273;&#7873; v&agrave; &#273;&#7883;a ch&#7881; URL c&#7911;a n&oacute; d&#432;&#7899;i &#273;&acirc;y).',
 'forum_par_auteur' => 'b&#7903;i @auteur@',
