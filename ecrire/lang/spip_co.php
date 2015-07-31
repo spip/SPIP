@@ -89,7 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_interface' => 'scelta di l\'interfaccia',
 	'colonne' => 'Culonna',
 	'confirm_changer_statut' => 'Attenti, avete dumandate di scambià u statu di st\'elementu. Vulete cuntinuà ?',
-	'correcte' => 'curretta', # chaine utilis&eacute;e dans le debugueur : "validation .. impossible" ou "validation .. correcte"
+	'correcte' => 'curretta', # chaine utilisée dans le debugueur : "validation .. impossible" ou "validation .. correcte"
 
 	// D
 	'date_aujourdhui' => 'oghje',
@@ -683,7 +683,7 @@ Puderete tandu inserisce un nuvellu password
 	'zbug_champ_hors_motif' => 'Campu @champ@ hors d\'une boucle de motif @motif@',
 	'zbug_code' => 'còdice',
 	'zbug_critere_inconnu' => 'criteriu scunnisciutu @critere@',
-	'zbug_distant_interdit' => 'esternu interdettu', # Contexte : une base de donn&eacute;es "externe", pas g&eacute;r&eacute;e par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul probl&egrave;mes certaines manipulations sont interdites sur ces bases-l&agrave;.
+	'zbug_distant_interdit' => 'esternu interdettu', # Contexte : une base de données "externe", pas gérée par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul problèmes certaines manipulations sont interdites sur ces bases-là.
 	'zbug_doublon_table_sans_cle_primaire' => 'duppioni in una tàvula senza chjave primaria atòmica',
 	'zbug_doublon_table_sans_index' => 'duppioni in un tàvula senza ìndice',
 	'zbug_erreur_boucle_double' => 'CìCULU@id@: doppia definizione',
