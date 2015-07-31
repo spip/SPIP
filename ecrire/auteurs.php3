@@ -39,7 +39,7 @@ debut_boite_info();
 		dans l'espace public du site (forums sur abonnement).");
 	else {
 		echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur=jaune). ");
+		Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur = jaune). ");
 
 		if ($connect_statut == '0minirezo')
 			echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;

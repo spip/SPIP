@@ -7,42 +7,15 @@ include ("inc.php3");
 debut_page("Suivi des p&eacute;titions", "messagerie", "suivi-petition");
 debut_gauche();
 
-debut_boite_info();
-
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo propre("La page de {suivi des p&eacute;titions} vous permet de suivre les signatures de vos p&eacute;titions.");
-
-echo aide ("suiviforum");
-echo "</FONT>";
-
-fin_boite_info();
-
-
 
 //
-// Afficher les boutons de creation d'article et de breve
+// Raccourcis
 //
-if ($connect_statut == '0minirezo') {
+/*
 	debut_raccourcis();
-	
-	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
-	if (lire_meta('forum_prive_admin') == 'oui')
-		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
-
-	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
-	$result_petition = spip_query($query_petition);
-	if ($row = spip_fetch_array($result_petition)) {
-		$nombre_petition = $row['cnt'];
-	}
-	if ($nombre_petition > 0) {
-		echo "<p>";
-		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
-	}
-
+	// rien
 	fin_raccourcis();
-}
-
-
+*/
 
 debut_droite();
 
