@@ -64,15 +64,15 @@ function parametres_css_prive(){
 
 /**
  * Afficher le sélecteur de rubrique
- * 
+ *
  * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
  *
- * @param $titre
- * @param $id_objet
- * @param $id_parent
- * @param $objet
- * @param $id_secteur
- * @param $restreint
+ * @param string $titre
+ * @param int $id_objet
+ * @param int $id_parent
+ * @param string $objet
+ * @param int $id_secteur
+ * @param bool $restreint
  * @param bool $actionable
  *   true : fournit le selecteur dans un form directement postable
  * @param bool $retour_sans_cadre
