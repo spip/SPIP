@@ -25,30 +25,27 @@ function configuration_compresseur_dist()
 	if (!function_exists('ob_gzhandler')) {
 		$GLOBALS['meta']['auto_compress_http'] = 'non';
 	} else {
-		$test_zlib = @ini_get('zlib.output_compression');
-
 		$res .= debut_cadre_relief("", true, "", _L('Compression du flux HTTP'))
 			.  "<p class='verdana2'>"
 			. _L("SPIP peut compresser automatiquement chaque page qu'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d'optimiser la bande passante (le
 site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
-demande plus de puissance au serveur. (Pour plus de d&#233;tails, cf.
-[->http://www.php.net/ob_gzhandler].)")
+demande plus de puissance au serveur.")
+			. "</p>"
+			. "<p class='verdana2'>"
+			. _L("<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@", array('testgzip' => propre('[->http://www.whatsmyip.org/mod_gzip_test/]'))
+			)
 			. "</p>"
 
 			. "<div class='verdana2'>"
-			. ($test_zlib
-				? _L('Votre serveur web &#233;tablit lui-m&#234;me la compression du flux HTTP.')
-				:
-				"<p class='verdana2'>"
-				. _L('Voulez-vous activer la compression du flux HTTP ?')
-				. "</p>"
-				. afficher_choix('auto_compress_http',
-					($GLOBALS['meta']['auto_compress_http'] != 'non') ? 'oui' : 'non',
-					array(
-						'oui' => _T('info_compresseur_activer'),
-						'non' => _T('info_compresseur_desactiver')
-					)
+			. "<p class='verdana2'>"
+			. _L('Voulez-vous activer la compression du flux HTTP ?')
+			. "</p>"
+			. afficher_choix('auto_compress_http',
+				($GLOBALS['meta']['auto_compress_http'] != 'non') ? 'oui' : 'non',
+				array(
+					'oui' => _T('info_compresseur_activer'),
+					'non' => _T('info_compresseur_desactiver')
 				)
 			)
 			. "</div>"
