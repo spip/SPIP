@@ -143,4 +143,42 @@ function picker_identifie_id_rapide($ref, $rubriques_ou_objets=false, $articles=
 	return json_export(array('type' => $type, 'id' => "$type|$id", 'titre' => $titre));
 }
 
+/**
+ * Determiner si une rubrique a des enfants a afficher ou non
+ * on test d'abord si la rubrique a des sous rubriques, et sinon on regarde les autrs types selectionnables
+ * et on regarde la rubrique contient certains de ces objets
+ *
+ * Pour optimiser, la fonction calcule sa valeur sur toute la fratrie d'un coup, puisqu'elle est appellee N fois
+ * pour toutes les rubriques d'un meme niveau
+ *
+ * @param $id_rubrique
+ * @param array $types
+ * @return string
+ */
+function test_enfants_rubrique($id_rubrique,$types=array()){
+	static $has_child = array();
+	if (!isset($has_child[$id_rubrique])){
+		$types = array_filter($types);
+		// recuperer tous les freres et soeurs de la rubrique visee
+		$id_parent = sql_getfetsel('id_parent','spip_rubriques','id_rubrique='.intval($id_rubrique));
+		$fratrie = sql_allfetsel('id_rubrique','spip_rubriques','id_parent='.intval($id_parent));
+		$fratrie = array_map('reset',$fratrie);
+		$has = sql_allfetsel("DISTINCT id_parent","spip_rubriques",sql_in('id_parent',$fratrie));
+		$has = array_map('reset',$has);
+		$fratrie = array_diff($fratrie,$has);
+		while (count($fratrie) AND is_array($types) AND count($types)){
+			$type = array_shift($types);
+			$h = sql_allfetsel("DISTINCT id_rubrique",table_objet_sql($type),sql_in('id_rubrique',$fratrie));
+			$has = array_merge($has,array_map('reset',$h));
+			$fratrie = array_diff($fratrie,$h);
+		}
+		if (count($has))
+			$has_child = $has_child + array_combine($has,array_pad(array(),count($has),true));
+		if (count($fratrie))
+			$has_child = $has_child + array_combine($fratrie,array_pad(array(),count($fratrie),false));
+	}
+
+	return $has_child[$id_rubrique]?' ':'';
+}
+
 ?>
