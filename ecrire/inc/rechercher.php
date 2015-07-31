@@ -319,6 +319,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 
 // Preparer les listes id_article IN (...) pour les parties WHERE
 // et points =  des requetes du moteur de recherche
+// http://doc.spip.org/@prepare_recherche_api
 function prepare_recherche_api($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();

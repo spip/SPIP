@@ -117,6 +117,7 @@ function spip_abstract_delete($table, $where, $serveur='')
 	return $f($table, $where);
 }
 
+// http://doc.spip.org/@spip_abstract_replace
 function spip_abstract_replace($table, $values, $keys, $serveur='')
 {
 	$f = spip_abstract_serveur('replace', $serveur);
