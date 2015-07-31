@@ -147,7 +147,10 @@ function inc_auth_dist() {
 	// et a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
 	// s'il est pris dans le fichier de session)
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
-	$GLOBALS['visiteur_session'] = array_merge($GLOBALS['visiteur_session'], $row);
+	
+    //si la globale est vide ce n'est pas un tableau, on la force pour empecher une warning
+	
+	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
 	$GLOBALS['visiteur_session']['prefs'] =
 	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
