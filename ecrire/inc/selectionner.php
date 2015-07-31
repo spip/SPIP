@@ -88,7 +88,6 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
  * @param int $racine
  * @param string $url
  * @param string $name
- * @param string $name
  * @param string $url_init
  * @return string
  *     Code HTML
