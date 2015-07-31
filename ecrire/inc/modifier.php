@@ -149,7 +149,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	}
 
 	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
-	if ($conflits) {
+	if ($conflit AND count($conflits)) {
 		$redirect = url_absolue(
 			parametre_url(rawurldecode(_request('redirect')), $id_table_objet, $id)
 		);

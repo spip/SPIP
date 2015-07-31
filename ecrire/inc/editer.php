@@ -276,7 +276,7 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 		)
 	);
 
-	if (!$champs) return false;
+	if (!$champs) return array();
 
 	// Verifier si les mises a jour sont pertinentes, datees, en conflit etc
 	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur, $options['prefix']?$options['prefix']:'ctr_');
@@ -301,7 +301,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 				unset ($champs[$key]);
 		}
 	}
-	if (!$champs) return;
+	if (!$champs) return array();
 
 	// On veut savoir si notre modif va avoir un impact
 	// par rapport aux donnees contenues dans la base
@@ -310,7 +310,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur, $prefix = 'ctr_') {
 	$intact = true;
 	foreach ($champs as $ch => $val)
 		$intact &= ($s[$ch] == $val);
-	if ($intact) return;
+	if ($intact) return array();
 
 	// Detection de conflits :
 	// On verifie si notre modif ne provient pas d'un formulaire
