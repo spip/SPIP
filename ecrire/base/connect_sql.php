@@ -281,10 +281,16 @@ function objet_type($table_objet){
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
 // http://doc.spip.org/@table_jointure
 function table_jointure($x, $y) {
-	include_spip('public/interfaces');
-	if ($table = $GLOBALS['tables_jointures'][table_objet_sql($y)][id_table_objet($x)]
-	OR $table = $GLOBALS['tables_jointures'][table_objet_sql($x)][id_table_objet($y)])
-		return $table;
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$xdesc = $trouver_table(table_objet($x));
+	$ydesc = $trouver_table(table_objet($y));
+	$tx = $xdesc['table'];
+	$ty = $ydesc['table'];
+	$ix = @$xdesc['key']["PRIMARY KEY"];
+	$iy = @$ydesc['key']["PRIMARY KEY"];
+	if ($table = $GLOBALS['tables_jointures'][$ty][$ix]) return $table;
+	if ($table = $GLOBALS['tables_jointures'][$tx][$iy]) return $table;
+	return '';
 }
 
 // Pour compatibilite. Ne plus utiliser.
