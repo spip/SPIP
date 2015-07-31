@@ -26,7 +26,7 @@ function action_session_dist()
 	}
 
 	# TODO: mode lecture de session ; n'afficher que ce qu'il faut
-	# json_encode($GLOBALS['visiteur_session']);
+	#echo json_encode($GLOBALS['visiteur_session']);
 }
 
 
