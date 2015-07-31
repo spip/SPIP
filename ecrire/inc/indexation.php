@@ -526,7 +526,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 		// Cas tres particulier du forum :
 		// on indexe le thread comme un tout
-		if ($table=='spip_forum') {
+		if ($table=='spip_forum' AND (!defined('_INDEXER_MESSAGES_SEULS') || !_INDEXER_MESSAGES_SEULS)) {
 
 			// 1. prendre le thread
 			$id_forum = $id_objet;
