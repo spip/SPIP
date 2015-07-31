@@ -55,12 +55,13 @@ function generer_nom_fichier_cache($contexte) {
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
-	$repertoire = _DIR_CACHE;
-	if(!@file_exists($repertoire)) {
-		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	$rep = _DIR_CACHE;
+
+	if(!@file_exists($rep)) {
+		$rep = preg_replace(','._DIR_TMP.',', '', $rep);
+		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
-	$subdir = sous_repertoire($repertoire, substr($md_cache, 0, 1), true);
+	$subdir = sous_repertoire($rep, substr($md_cache, 0, 1), true,true);
 
 	return $subdir.$fichier_cache;
 }

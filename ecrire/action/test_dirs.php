@@ -73,33 +73,33 @@ function test_ecrire($my_dir) {
 // http://doc.spip.org/@action_test_dirs_dist
 function action_test_dirs_dist()
 {
-  global $test_dir, $test_dirs;
-  $chmod = 0;
+	global $test_dirs;
+	$test_dir = _request('test_dir');
+	$chmod = 0;
 
-if ($test_dir) {
-  if (substr($test_dir,-1)!=='/') $test_dir .= '/';
-  if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
- }
-else {
-	if (!_FILE_CONNECT)
-	  $test_dirs[] = dirname(_FILE_CONNECT_INS).'/';
-}
-
-$bad_dirs = array();
-$absent_dirs  = array();;
-
-while (list(, $my_dir) = each($test_dirs)) {
-	$test = test_ecrire($my_dir);
-	if (!test_ecrire($my_dir)) {
-		if (@file_exists($my_dir)) {
-				$bad_dirs[] = "<li>".$my_dir."</li>";
-		} else
-			$absent_dirs[] = "<li>".$my_dir."</li>";
+	if ($test_dir) {
+		if (substr($test_dir,-1)!=='/') $test_dir .= '/';
+		if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
+	} else {
+		if (!_FILE_CONNECT)
+			$test_dirs[] = dirname(_FILE_CONNECT_INS).'/';
 	}
-	$chmod = max($chmod, $test);
-}
 
-if ($bad_dirs OR $absent_dirs) {
+	$bad_dirs = array();
+	$absent_dirs  = array();;
+
+	while (list(, $my_dir) = each($test_dirs)) {
+		$test = test_ecrire($my_dir);
+		if (!test_ecrire($my_dir)) {
+			if (@file_exists($my_dir)) {
+				$bad_dirs[] = "<li>".$my_dir."</li>";
+			} else
+				$absent_dirs[] = "<li>".$my_dir."</li>";
+		}
+		$chmod = max($chmod, $test);
+	}
+
+	if ($bad_dirs OR $absent_dirs) {
 
 	if (!_FILE_CONNECT) {
 		$titre = _T('dirs_preliminaire');
@@ -123,15 +123,12 @@ if ($bad_dirs OR $absent_dirs) {
 			   array('bad_dirs' => join(" ", $absent_dirs))) .
 			"<b>". _T('login_recharger')."</b>.";
 	}
-
+	$t = _T('login_recharger');
 	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
-	  "<form action='" . generer_url_action('test_dirs') . "'>" .
-	   "<input type='hidden' name='action' value='test_dirs' />" .
-	  (!$test_dir ? "" : 
-	   "<input type='hidden' name='test_dir' value='$test_dir' />") .
-	  "<div align='right'><input type='submit' class='fondl' value='". 
-	  _T('login_recharger')."' /></div>" .
-	  "</form>";
+	  generer_test_dirs('',
+		(!$test_dir ? "" : 
+		 "<input type='hidden' name='test_dir' value='$test_dir' />")
+		 . "<div style='text-align: right'><input type='submit' class='fondl' value='$t' /></div>"); 
 	echo minipres($titre, $res);
 
  } else {

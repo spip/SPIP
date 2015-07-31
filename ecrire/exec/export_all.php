@@ -34,7 +34,7 @@ function exec_export_all_dist()
 	if (!is_writable($dir)) {
 		include_spip('inc/headers');
 		$dir = preg_replace(",^" . _DIR_RACINE .",", '', $dir);
-		redirige_par_entete(generer_url_action("test_dirs", "test_dir=$dir", true));
+		redirige_par_entete(generer_test_dirs($dir, true));
 	}
 
 	// utiliser une version fraiche des metas (ie pas le cache)

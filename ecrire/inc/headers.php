@@ -110,4 +110,15 @@ function envoie_image_vide() {
 	flush();
 }
 
+function generer_test_dirs($arg='', $redirect=false)
+{
+	if (!is_string($redirect))
+		return  generer_url_public('', "action=test_dirs" . ($arg ? "&test_dir=$arg" : ''),  $redirect);
+	else return "<form action='"
+	  . generer_url_public('')
+	  ."'><div>"
+	  .'<input type="hidden" name="action" value="test_dirs" />'
+	  . $redirect
+	  . "</div></form>";
+}
 ?>
