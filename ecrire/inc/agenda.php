@@ -949,10 +949,9 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 
 	$id = 'nav-agenda' .preg_replace('/[^\w\d]/', '', $ancre);
 
-	// 2 div pour que toile_foncee s'applique bien qu'issue d'une CSS
 	// anterieure a celle de navigation-calendrier
 	return 
-	  "\n<div class='navigation-calendrier calendrier-moztop8'><div class='toile_foncee'>\n" 
+	  "\n<div class='navigation-calendrier calendrier-moztop8'>"
 	  . "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=" . DEFAUT_PARTIE_R, $ancre,
@@ -1012,7 +1011,7 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . "&nbsp;&nbsp;"
 	  . $nom
 	  . (!test_espace_prive() ? '' :  aide("messcalen"))
-	  . "</div></div>"
+	  . "</div>"
 	  . http_calendrier_invisible($annee, $mois, $jour, $script, "&amp;echelle=$echelle&amp;partie_cal=$partie_cal", $ancre, $id);
 }
 

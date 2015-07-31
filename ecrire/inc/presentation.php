@@ -447,7 +447,7 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 	return $texte;
 }
 
-
+// $fg et $bg ne sont plus utilisees
 // http://doc.spip.org/@affiche_tranche_bandeau
 function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, $force, $largeurs, $styles, $skel, $own='')
 {

@@ -410,4 +410,12 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  Couleurs des liens
 /*  ------------------------------------------ */
 a { text-decoration: none; color: #333; }
-a:hover { text-decoration: underline; }
+a:hover { text-decoration: underline;}
+
+/* menu langues */
+#menu_langues {
+	vertical-align: top;
+	max-height: 24px; 
+	margin-bottom: 5px; 
+	width: 120px;
+}
