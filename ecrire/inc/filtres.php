@@ -324,7 +324,7 @@ function entites_html($texte, $tout=false) {
 	OR !preg_match(",[&\"'<>],S", $texte) # strpbrk($texte, "&\"'<>")!==false
 	) return $texte;
 	include_spip('inc/texte');
-	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'));
+	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),ENT_QUOTES);
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
 	else
