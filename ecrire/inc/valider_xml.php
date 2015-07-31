@@ -13,32 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/sax');
-include_spip('xml/interfaces');
-
-// http://doc.spip.org/@analyser_doctype
-function analyser_doctype($data)
-{
-	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
-		return array();
-
-	list(,,$topelement, $avail,$suite) = $r;
-
-	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
-		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
-			return  array();
-	list(,$rotlvl, $suite) = $r;
-
-	if (!$suite) {
-		$grammaire = $rotlvl;
-		$rotlvl = '';
-	} else {
-		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r))
-			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r))
-				return array();
-		$grammaire = $r[1];
-	}
-	return array($topelement, $avail, $grammaire, $rotlvl);
-}
 
 // http://doc.spip.org/@validerElement
 function validerElement($phraseur, $name, $attrs)
@@ -307,24 +281,6 @@ function defautElement($phraseur, $data)
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
-	$r = analyser_doctype($data);
-	if ($r) {
-		list ($topelement, $avail, $grammaire, $rotlvl) = $r;
-		$file = _DIR_DTD . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
-		if (lire_fichier($file, $r))
-		  $this->dtc = unserialize($r);
-		else {
-		  include_spip('xml/analyser_dtd');
-		  $this->dtc = charger_dtd($grammaire, $avail);
-		  ecrire_fichier($file, serialize($this->dtc));
-		}
-	}
-
-  // bug de SAX qui ne dit pas si une Entite est dans un attribut ou non
-  // ==> eliminer toutes les entites
-
-	$data = unicode2charset(html2unicode($data, true));
-
 	xml_parsestring($phraseur, $data);
 
 	$valider_passe2 = charger_fonction('valider_passe2', 'inc');
