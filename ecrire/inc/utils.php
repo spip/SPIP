@@ -942,6 +942,11 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 	return url_de_base() . _DIR_RESTREINT_ABS . $action;
 }
 
+// Pour les formulaires en methode POST,
+// mettre les arguments a la fois en input-hidden et dans le champ action:
+// 1) on peut ainsi memoriser le signet comme si c'etait un GET
+// 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
+
 // http://doc.spip.org/@generer_post_ecrire
 function generer_post_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
