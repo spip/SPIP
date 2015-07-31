@@ -335,9 +335,10 @@ function nom_mois($numdate) {
 
 function justif($letexte,$justif) {
 	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte)
+	if ($letexte) {
 		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='$justif'>", $letexte);
-	return "<p class='spip' align='$justif'>".$letexte;
+		return "<p class='spip' align='$justif'>".$letexte;
+	}
 }
 
 function justifier($letexte) {
