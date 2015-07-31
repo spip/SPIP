@@ -182,18 +182,9 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 
 //	$aff_etapes = "<span id='etapes'>";
 
-	$aff_etapes = "<ol id='infos_etapes'>";
+	$aff_etapes = "<ul id='infos_etapes'>";
 
 	foreach($liste as $etape=>$fichier){
-/*		if ($etape=="$phase$en_cours.php"){
-			$etat = "encours";
-		}
-		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><span>"._T('etape')." </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
-			: '';
-		if ($etat == "encours")
-			$etat = 'todo';
-*/
 		if ($debut < $last) {
 			if ($debut == $en_cours && $erreur) $class = "on erreur";
 			else if ($debut == $en_cours) $class = "on";
@@ -201,12 +192,15 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 			else $class = "valides";
 
 			$aff_etapes .= "<li class='$class'><div class='fond'>";
-			$aff_etapes .= "<span class='numero_etape'>$debut</span>".$intitule_etat["$phase"][$debut];
+			$aff_etapes .= ($debut == $en_cours)?"<strong>":'';
+			$aff_etapes .= "<em>"._T('etape')." </em><span class='numero_etape'>$debut</span><em>&nbsp;: </em>";
+			$aff_etapes .= $intitule_etat["$phase"][$debut];
+			$aff_etapes .= ($debut == $en_cours)?"</strong>":'';
 			$aff_etapes .= "</div></li>";
 		}
 		$debut++;
 	}
-	$aff_etapes .= "</ol>";
+	$aff_etapes .= "</ul>";
 	$aff_etapes .= "<br class='nettoyeur' /\n";
 	return $aff_etapes;
 }
@@ -325,7 +319,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			// Passer l'avertissement SQLIte en  commentaire, on pourra facilement le supprimer par la suite sans changer les traductions.
 			. "<br /><small>(". _T('install_types_db_connus_avertissement') .')</small>'
 			.'</label>'		
-		. "\n<div><select name='server_db' id='sql_serveur_db' >"
+		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
 			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
 			: '')

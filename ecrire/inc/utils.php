@@ -1393,7 +1393,6 @@ function verifier_visiteur() {
 		#@spip_initialisation_suite();
 
 		$session = charger_fonction('session', 'inc');
-//var_dump($GLOBALS['visiteur_session']['id_auteur']);
 		if ($session()) {
 			return $GLOBALS['visiteur_session']['statut'];
 		}
