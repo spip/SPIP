@@ -1521,8 +1521,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 	// Bandeau
-	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
-	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
+	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' style='text-align:center;'>";
+	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			echo "<font face='arial,helvetica,sans-serif' size=1><b>";
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
@@ -1564,7 +1564,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 
 	// grand ecran
-	echo "<td align='center'>";
+	echo "<td style:'text-align:center;'>";
 	$lien = $clean_link;
 
 	if ($spip_ecran == "large") {
@@ -1590,7 +1590,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 
 	// choix de la couleur
-	echo "<td align='right'>";
+	echo "<td style='text-align:center;'>";
 	echo "<img src='img_pack/barre-couleurs.gif' alt=\"".entites_html(_T('titre_changer_couleur_interface'))."\" width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
 	echo "</tr></table>";
