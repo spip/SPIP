@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'Inicio del sitio',
+'accueil_site' => 'Portada del sitio',
 'articles' => 'Art&iacute;culos',
 'articles_auteur' => 'Art&iacute;culos de esta autora o autor',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
@@ -62,12 +62,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Del mismo autor',
-'meme_rubrique' => 'De la misma secci&oacute;n',
+'meme_rubrique' => 'En la misma secci&oacute;n',
 'memes_auteurs' => 'De los mismos autores',
 'message' => 'Mensaje',
-'messages_forum' => 'Mensajes del f&oacute;rum',
-'messages_recents' => 'Mensajes recientes del f&oacute;rum',
-'mots_clefs' => 'Palabras-clave',
+'messages_forum' => 'Mensajes del foro',
+'messages_recents' => 'Los mensajes m&aacute;s recientes del foro',
+'mots_clefs' => 'Palabras clave',
 'mots_clefs_meme_groupe' => 'Palabras claves en el mismo grupo',
 
 
@@ -76,25 +76,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Nombre',
 'nouveautes' => 'Las novedades',
 'nouveautes_web' => 'Novedades en la web',
-'nouveaux_articles' => 'Nuevos art&amp;iacute;culos',
-'nouvelles_breves' => 'Nuevas notas',
+'nouveaux_articles' => 'Nuevos art&iacute;culos',
+'nouvelles_breves' => 'Nuevas breves',
 
 
 // P
-'par_auteur' => 'por',
-'participer_site' => 'Puedes participar en la vida de este sitio y proponer art&iacute;culos inscribi&eacute;ndote. De inmediato recibir&aacute;s un correo electr&oacute;nico que les indicar&aacute; tus claves de acceso al espacio privado del sitio.',
+'par_auteur' => 'por ',
+'participer_site' => 'Puedes participar en la vida de este sitio y proponer art&iacute;culos inscribi&eacute;ndote aqui. De inmediato recibir&aacute;s un correo electr&oacute;nico con tus claves de acceso al espacio privado del sitio.',
 'plan_site' => 'Mapa del sitio',
 'popularite' => 'Popularidad',
 'poster_message' => 'Publicar un mensaje',
 
 
 // R
-'repondre_article' => 'Comentar este art&amp;iacute;culo',
-'repondre_breve' => 'Comentar esta nota',
+'repondre_article' => 'Comentar este art&iacute;culo',
+'repondre_breve' => 'Comentar esta breve',
 'repondre_message' => 'Responder este mensaje',
-'resultats_recherche' => 'Resultados de la b&amp;uacute;squeda',
-'retour_debut_forums' => 'Volver al comienzo del foro',
-'rubrique' => 'Secci&amp;ocuate;n',
+'resultats_recherche' => 'Resultados de la b&uacute;squeda',
+'retour_debut_forums' => 'Volver al inicio del foro',
+'rubrique' => 'Secci&oacute;n',
 'rubriques' => 'Secciones',
 
 
@@ -102,20 +102,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'signatures_petition' => 'Firmas',
 'site_realise_avec_spip' => 'Sitio desarrollado con SPIP',
 'sites_web' => 'Sitios Web',
-'sous_rubriques' => 'Subsecci&amp;oacute;n',
+'sous_rubriques' => 'Subsecci&oacute;n',
 'suite' => 'continuar',
 'sur_web' => 'Del web',
-'syndiquer_rubrique' => 'Sindicar esta secci&amp;oacute;n',
+'syndiquer_rubrique' => 'Sindicar esta secci&oacute;n',
 'syndiquer_site' => 'Sindicar el sitio completo',
 
 
 // T
-'texte_lettre_information' => 'Este es el bolet&amp;iacute; de informaci&oacute;n del sitio',
-'texte_lettre_information_2' => 'Este bolet&amp;iacute;n rese&amp;ntilde;a los art&iacute;culos y notas publicados desde ',
+'texte_lettre_information' => 'Este es el bolet&iacute;n de informaci&oacute;n del sitio',
+'texte_lettre_information_2' => 'Este bolet&iacute;n rese&ntilde;a los art&iacute;culos y breves publicados desde ',
 
 
 // V
-'voir_en_ligne' => 'Ver en l&amp;iacute;nea'
+'voir_en_ligne' => 'Ver en l&iacute;nea'
 
 );
 
