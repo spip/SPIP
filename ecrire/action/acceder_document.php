@@ -86,25 +86,34 @@ function action_acceder_document_dist() {
 	default:
 		header("Content-Type: ". $doc['mime_type']);
 
-		// pour les images ne pas passer en attachment
-		// sinon, lorsqu'on pointe directement sur leur adresse,
-		// le navigateur les downloade au lieu de les afficher
+		// Si le fichier a un titre avec extension,
+		// ou si c'est un nom bien connu d'Unix, le prendre
+		// sinon l'ignorer car certains navigateurs pataugent
 
-		if ($doc['inclus']=='non') {
-
-		  // Si le fichier a un titre avec extension,
-		  // ou si c'est un nom bien connu d'Unix, le prendre
-		  // sinon l'ignorer car certains navigateurs pataugent
-
-			$f = basename($file);
-			if (isset($doc['titre'])
-				AND (preg_match('/^\w+[.]\w+$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
+		$f = basename($file);
+		if (isset($doc['titre'])
+		AND (preg_match('/^\w+[.]\w+$/', $doc['titre']) OR $doc['titre'] == 'Makefile'))
 				$f = $doc['titre'];
 
-			// ce content-type est necessaire pour eviter des corruptions de zip dans ie6
-			header('Content-Type: application/octet-stream');
+		$f = "filename=\"$f\"";
 
-			header("Content-Disposition: attachment; filename=\"$f\";");
+		// Pour les document affichables par les navigateurs,
+		// ne pas envoyer "Content-Disposition: attachment" sinon 
+		// le navigateur cree un fichier au lieu de l'afficher.
+		// Mais la propriete "affichable" n'est pas toujours devinable,
+		// il faut quand meme donner un nom au fichier eventuel. 
+		// Celui-ci est malheureusement souvent ignore, cf
+		// http://greenbytes.de/tech/tc2231/
+
+		if ($doc['inclus']!=='non') {
+			header("Content-Disposition: inline; $f");
+		} else {
+
+			header("Content-Disposition: attachment; $f;");
+
+			// ce content-type est necessaire
+			// pour eviter des corruptions de zip dans ie6
+			header('Content-Type: application/octet-stream');
 			header("Content-Transfer-Encoding: binary");
 
 			// fix for IE catching or PHP bug issue
