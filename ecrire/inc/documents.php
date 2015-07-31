@@ -42,11 +42,13 @@ function get_spip_doc($fichier) {
 function generer_url_document_dist($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
-	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document = $id_document"));
+	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
 	if ($row) {
 		if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
 		AND $row['distant'] != 'oui')
-			return generer_url_action('acceder_document', "arg=$id_document", true);
+			return parametre_url(
+				generer_url_action('acceder_document', "arg=$id_document"),
+				'file', $row['fichier'], '&');
 		else
 			return get_spip_doc($row['fichier']);
 	}
