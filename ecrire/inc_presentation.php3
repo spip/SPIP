@@ -1224,14 +1224,14 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	$compteur_survol ++;
 	
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton24gris');\">";
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36gris');\">";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\">";
 			echo "<tr><td background='' align='center'>";
 		}
 		if ($spip_display != 1){
 		//	echo "<div>";
-			echo "<div class='bouton24gris' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
+			echo "<div class='bouton36gris' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
 			//if (strlen($aide)>0) echo aide($aide);
 		//	echo "</div>";
 		}
@@ -1246,14 +1246,14 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td>";
 	}
 	else {
-		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton24off');\">";
+		echo "\n<td background='' align='center' valign='top' width='$largeur' onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','bouton36off');\">";
 		if ($spip_display == 1) {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
 			echo "<tr><td background='' align='center'>";
 		}
 		if ($spip_display != 1){
 			//echo "<div>";
-			echo "<div class='bouton24off' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
+			echo "<div class='bouton36off' id='survol$compteur_survol'><a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a></div>";
 			//echo "</div>";
 		}
 		echo "<div><img src='img_pack/rien.gif' width=$largeur height=1></div>";
@@ -1295,10 +1295,10 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	}
 	
 	$style = 'iconeoff';
-	$classe_image = 'bouton24gris';
+	$classe_image = 'bouton36gris';
 	if ($fonction == "supprimer.gif") {
 		$style = 'iconedanger';
-		$classe_image = 'bouton24rouge';	
+		$classe_image = 'bouton36rouge';	
 	}
 
 	$compteur_survol ++;
@@ -1306,7 +1306,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 		$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
 	}
-	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton24blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
+	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
 	if ($spip_display != 1){	
 		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
@@ -1494,7 +1494,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 	// Icones secondaires
-	echo "<table cellpadding='0' bgcolor='white' style='border-bottom: solid 1px black; border-top: solid 1px #333333;' width='100%'><tr width='100%'><td width='100%' align='center'>";
+	echo "<table cellpadding='0' bgcolor='#eeeeee' style='border-bottom: solid 1px black; border-top: solid 1px #333333;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 
 	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 

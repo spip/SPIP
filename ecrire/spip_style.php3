@@ -74,6 +74,29 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	width: 24px; 
 	height: 24px;
 }
+.bouton36gris {
+	background:url(img_pack/pave-gris-36.png); 
+	padding: 6px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton36blanc {
+	background:url(img_pack/pave-blanc-36.png); 
+	padding: 6px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton36rouge {
+	background:url(img_pack/pave-rouge-36.png); 
+	padding: 6px; 
+	width: 24px; 
+	height: 24px;
+}
+.bouton36off {
+	padding: 6px; 
+	width: 24px; 
+	height: 24px;
+}
 
 
 .reliefblanc { background-image: url(img_pack/barre-blanc.gif) }
