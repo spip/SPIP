@@ -35,6 +35,7 @@ der Dokumentatioun vu SPIP</a>.',
 'avis_non_acces_message' => 'Dir hutt keen Zougang zu d&euml;sem Message.',
 'avis_non_acces_page' => 'Dir hutt keen Zougang zu d&euml;ser S&auml;it.',
 'avis_operation_echec' => 'D&eacute;i Operatioun huet n&euml;t fonktionn&eacute;iert.',
+'avis_operation_impossible' => 'Operatioun onm&eacute;iglech',
 'avis_probleme_archive' => 'Problem beim Liesen vum Fichier @archive@',
 'avis_site_introuvable' => 'De Site ass n&euml;t ze fannen',
 'avis_site_syndique_probleme' => 'Opgepasst: d\'Syndicatioun vun d&euml;sem Site huet n&euml;t fonktionn&eacute;iert; de System ass also elo z&auml;itweis &euml;nnerbrach. Kontroll&eacute;iert d\'Adress vum Syndicatiouns-Fichier vun d&euml;sem Site (<b>@url_syndic@</b>) a prob&eacute;iert nach eng K&eacute;ier d\'Informatiounen ze kr&eacute;ien.',
@@ -49,6 +50,7 @@ der Dokumentatioun vu SPIP</a>.',
 'bouton_ajouter' => 'Derb&auml;i setzen',
 'bouton_ajouter_participant' => 'MATAARBECHTER DERB&Auml;I SETZEN:',
 'bouton_annonce' => 'ANNONCE',
+'bouton_annuler' => 'Ofbriechen',
 'bouton_checkbox_envoi_message' => '&euml;t kann e Message gesch&eacute;ckt ginn',
 'bouton_checkbox_indiquer_site' => 'dir musst en Internet-Site uginn',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'd\'Administrateuren vum Site',
@@ -106,6 +108,7 @@ der Dokumentatioun vu SPIP</a>.',
 'cache_mode_non_compresse' => 'D\'Fichier\'en am Cache si n&euml;t komprim&eacute;iert gesp&auml;ichert.',
 'cache_modifiable_webmestre' => 'D&euml;sen Parameter kann vum Webmaster vum Site ge&auml;nnert ginn.',
 'calendrier_synchro' => 'Wann dir en <b>iCal</b>-kompatiblen Agenda benotzt, da k&euml;nnt der d\'Informatiounen mat d&euml;sem Site synchronis&eacute;ieren.',
+'connexion_ldap' => 'Verbindung:',
 
 
 // D
@@ -167,10 +170,15 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'erreur_plugin_version_manquant' => 'Versioun vum Plugin fehlt',
 
 
+// F
+'forum_info_original' => 'Original',
+
+
 // I
 'ical_info1' => 'D&euml;s S&auml;it bitt verschidde M&eacute;igl&euml;chkeeten fir mam Liewen vun d&euml;sem Site a Kontakt ze bleiwen.',
 'ical_info2' => 'Fir m&eacute;i Informatiounen iwwer d&euml;s Technik, kuckt an <a href="http://www.spip.net/fr_suivi">der SPIP-Dokumentatioun</a>.',
 'ical_info_calendrier' => '&Euml;t ginn zwee Kalenneren. Deen &eacute;ischten ass e Plang vum Site mat all den Annoncen vun den publiz&eacute;ierten Artikelen. Deen zweeten huet all editorial Annoncen an &auml;r l&auml;schten privat Messagen: hien ass mat engem pers&eacute;inlechen Schl&euml;ssel fir Iech reserv&eacute;iert, deen dir zu all Moment &auml;nnere k&euml;nnt wann d&euml;r &auml;rt Passwuert &auml;nnert.',
+'ical_lien_rss_breves' => 'Syndicatioun vun de Kurzmeldungen vum Site',
 'ical_methode_http' => 'Downlueden',
 'ical_methode_webcal' => 'Synchronisatioun (webcal://)',
 'ical_texte_js' => 'Eng Javascript-Zeil erlaabt ganz einfach op egal wat fir engem vun &auml;re Siten d&eacute;i l&auml;schten Artikelen vun d&euml;sem Site ze weisen.',
@@ -453,12 +461,13 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_principaux_correspondants' => '&Auml;r wichtegst Korrespondenten',
 'info_procedez_par_etape' => 'gidd Schr&euml;tt fir Schr&euml;tt fir',
 'info_procedure_maj_version' => 'D\'Update-Prozedur muss ausgef&eacute;iert ginn fir &auml;r Datebank un d&eacute;i nei SPIP-Versioun unzepassen.',
+'info_proxy_ok' => 'Test vum Proxy OK.',
 'info_ps' => 'P.S.',
 'info_publier' => 'fr&auml;ischalten',
 'info_publies' => '&Auml;r publiz&eacute;iert Artikelen',
 'info_question_accepter_visiteurs' => 'Wann &auml;r Skeletter d\'Aschreiwung vu Visiteuren ouni Zougang op de privaten Deel virgesinn, da schalt d\'Optioun hei dr&euml;nner an:',
 'info_question_gerer_statistiques' => 'Soll &auml;re Site d\'Statistik vun de Visiten g&eacute;r&eacute;ieren?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwen vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren: an deem Fall ass d\'automat&euml;sch Aschreiwen onm&eacute;iglech.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.',
 'info_question_mots_cles' => 'W&euml;llt dir Schl&euml;sselwierder op &auml;rem Site benotzen?',
 'info_question_proposer_site' => 'Wie kann e Site propos&eacute;ieren?',
 'info_question_utilisation_moteur_recherche' => 'W&euml;llt dir de Sich-Motor vu SPIP benotzen?
@@ -586,6 +595,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'install_echec_annonce' => 'D\'Installatioun w&auml;rt warscheinlech n&euml;t fonktionn&eacute;ieren oder zu engem fehlerhaften Site f&eacute;ieren...',
 'install_extension_mbstring' => 'SPIP fonktionn&eacute;iert n&euml;t mat:',
 'install_extension_php_obligatoire' => 'SPIP brauch d\'PHP-Extensioun:',
+'install_php_version' => 'PHP-Version @version@ geet n&euml;t duer (Minimum = @minimum@)',
 'install_select_langue' => 'Wielt eng Sprooch a klickt op de Kn&auml;ppchen "Weider" fir d\'Installatioun ze starten.',
 'intem_redacteur' => 'Redakter',
 'item_accepter_inscriptions' => 'Aschreiwungen unhuelen',
@@ -673,6 +683,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'lien_supprimer_rubrique' => 'd&euml;s Rubrik l&auml;schen',
 'lien_tout_deplier' => 'Alles opklappen',
 'lien_tout_replier' => 'Alles zouklappen',
+'lien_tout_supprimer' => 'Alles l&auml;schen',
 'lien_trier_nom' => 'No Numm sort&eacute;ieren',
 'lien_trier_nombre_articles' => 'No Zuel vun den Artikelen sort&eacute;iren',
 'lien_trier_statut' => 'No Status sort&eacute;ieren',
@@ -720,6 +731,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_etat_stable' => 'stabil',
 'plugin_etat_test' => 'am Test',
 'plugins_liste' => 'L&euml;scht vun de Plugin\'en',
+'protocole_ldap' => 'Versioun vum Protokol:',
 
 
 // R
@@ -727,6 +739,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 
 
 // S
+'sauvegarde_fusionner' => 'D&eacute;i aktuell Datebank mam Backup fusionn&eacute;ieren',
+'sauvegarde_url_origine' => 'Eventuell d\'Url vum Ausgangs-Site:',
 'statut_admin_restreint' => '(restriktiven Admin)',
 'syndic_choix_moderation' => 'Wat soll mat de n&auml;chste Linken vun d&euml;sem Site gesch&eacute;ien?',
 'syndic_choix_oublier' => 'Wat soll mat de Linken gesch&eacute;ien d&eacute;i n&euml;t m&eacute;i am Syndicatiouns-Fichier sinn?',
@@ -955,6 +969,7 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_sites_tous' => 'D&eacute;i referenz&eacute;iert Siten',
 'titre_suivi_petition' => 'Suivi vun de Petitiounen',
 'titre_syndication' => 'Syndicatioun vun de Siten',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'De ganzen Dossier @upload@',
 'trad_article_inexistant' => '&Euml;t g&euml;t keen Artikel mat d&auml;r Nummer.',
 'trad_article_traduction' => 'All d\'Versiounen vun d&euml;sem Artikel:',
