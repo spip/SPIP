@@ -132,6 +132,7 @@ function creer_chaine_url($x) {
 	return $x;
 }
 
+// http://doc.spip.org/@_generer_url_arbo
 function _generer_url_arbo($url,$type,$parent){
 	if (is_null($parent)){
 		return $url;
@@ -353,7 +354,7 @@ function generer_url_document($id_document, $args='', $ancre='') {
 }
 
 // retrouve le fond et les parametres d'une URL propre
-// http://doc.spip.org/@urls_propres_dist
+// http://doc.spip.org/@urls_arbo_dist
 function urls_arbo_dist(&$fond, $url) {
 	global $contexte;
 	$id_objet = $type = 0;

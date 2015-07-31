@@ -352,6 +352,7 @@ function sql_fetsel(
 
 # une composition tellement frequente...
 # avec un cache en plus pour les requetes repetitives sur un meme hit
+// http://doc.spip.org/@sql_fetsel_cache
 function sql_fetsel_cache(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
