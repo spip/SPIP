@@ -156,7 +156,7 @@ function generer_select_where_explicites($table, $primary, $rows, $serveur){
 			           sql_in("$table.$primary", $ids,'',$serveur)
 			           .") ";
 
-		return array("$select AS points ",calcul_mysql_in("$table.$primary",array_map('reset',$rows),'',$serveur));
+		return array("$select AS points ",sql_in("$table.$primary",array_map('reset',$rows),'',$serveur));
 	}
 }
 

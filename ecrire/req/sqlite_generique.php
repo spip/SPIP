@@ -619,7 +619,18 @@ function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', 
 }
 
 
-// http://doc.spip.org/@spip_sqlite_delete
+/**
+ * Supprime des enregistrements d'une table
+ *
+ * @param string $table         Nom de la table SQL
+ * @param string|array $where   Conditions à vérifier
+ * @param string $serveur       Nom du connecteur
+ * @param bool $requeter        Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - int : nombre de suppressions réalisées,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true){
 	$res = spip_sqlite_query(
 		_sqlite_calculer_expression('DELETE FROM', $table, ',')
@@ -916,13 +927,40 @@ function spip_sqlite_get_charset($charset = array(), $serveur = '', $requeter = 
 }
 
 
-// http://doc.spip.org/@spip_sqlite_hex
+/**
+ * Prépare une chaîne hexadécimale
+ * 
+ * Par exemple : FF ==> 255 en SQLite
+ * 
+ * @param string $v
+ *     Chaine hexadecimale
+ * @return string
+ *     Valeur hexadécimale pour SQLite
+**/
 function spip_sqlite_hex($v){
 	return hexdec($v);
 }
 
 
-// http://doc.spip.org/@spip_sqlite_in
+/**
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * IN (...) est limité à 255 éléments, d'où cette fonction assistante
+ *
+ * @param string $val
+ *     Colonne SQL sur laquelle appliquer le test
+ * @param string|array $valeurs
+ *     Liste des valeurs possibles (séparés par des virgules si string)
+ * @param string $not
+ *     - '' sélectionne les éléments correspondant aux valeurs
+ *     - 'NOT' inverse en sélectionnant les éléments ne correspondant pas aux valeurs
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Inutilisé
+ * @return string
+ *     Expression de requête SQL
+**/
 function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = true){
 	$n = $i = 0;
 	$in_sql = "";
@@ -1184,7 +1222,16 @@ function spip_sqlite_listdbs($serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_multi
+/**
+ * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
+ * une balise `<multi>` dans la langue indiquée
+ *
+ * Cette sélection est mise dans l'alias `multi` (instruction AS multi).
+ *
+ * @param string $objet Colonne ayant le texte
+ * @param string $lang  Langue à extraire
+ * @return string       Texte de sélection pour la requête
+ */
 function spip_sqlite_multi($objet, $lang){
 	$r = "EXTRAIRE_MULTI(" . $objet . ", '" . $lang . "') AS multi";
 	return $r;
@@ -1215,14 +1262,18 @@ function spip_sqlite_optimize($table, $serveur = '', $requeter = true){
 }
 
 
-//
+
 /**
- * echapper une valeur selon son type ou au mieux
- * comme le fait _q() mais pour sqlite avec ses specificites
+ * Échapper une valeur selon son type
+ * mais pour SQLite avec ses spécificités
  *
  * @param string|array|number $v
+ *     Texte, nombre ou tableau à échapper
  * @param string $type
+ *     Description du type attendu
+ *    (par exemple description SQL de la colonne recevant la donnée)
  * @return string|number
+ *    Donnée prête à être utilisée par le gestionnaire SQL
  */
 function spip_sqlite_quote($v, $type = ''){
 		if (!is_array($v))
@@ -1237,10 +1288,14 @@ function spip_sqlite_quote($v, $type = ''){
 /**
  * Tester si une date est proche de la valeur d'un champ
  *
- * @param string $champ le nom du champ a tester
- * @param int $interval valeur de l'interval : -1, 4, ...
- * @param string $unite utite utilisee (DAY, MONTH, YEAR, ...)
- * @return string expression SQL
+ * @param string $champ
+ *     Nom du champ a tester
+ * @param int $interval
+ *     Valeur de l'intervalle : -1, 4, ...
+ * @param string $unite
+ *     Utité utilisée (DAY, MONTH, YEAR, ...)
+ * @return string
+ *     Expression SQL
  **/
 function spip_sqlite_date_proche($champ, $interval, $unite){
 	$op = (($interval <= 0) ? '>' : '<');
@@ -1302,7 +1357,30 @@ function spip_sqlite_repair($table, $serveur='',$requeter=true)
 
 
 
-// http://doc.spip.org/@spip_sqlite_replace
+/**
+ * Insère où met à jour une entrée d’une table SQL
+ *
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ *
+ * Préférer à cette fonction updateq ou insertq.
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $couples
+ *     Couples colonne / valeur à modifier,
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_sqlite_replace($table, $couples, $desc = array(), $serveur = '', $requeter = true){
 	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
@@ -1319,7 +1397,30 @@ function spip_sqlite_replace($table, $couples, $desc = array(), $serveur = '', $
 }
 
 
-// http://doc.spip.org/@spip_sqlite_replace_multi
+/**
+ * Insère où met à jour des entrées d’une table SQL
+ *
+ * La clé ou les cles primaires doivent être présentes dans les données insérés.
+ * La fonction effectue une protection automatique des données.
+ * 
+ * Préférez insertq_multi et sql_updateq
+ * 
+ * @param string $table
+ *     Nom de la table SQL
+ * @param array $tab_couples
+ *     Tableau de tableau (colonne / valeur à modifier),
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - true si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_sqlite_replace_multi($table, $tab_couples, $desc = array(), $serveur = '', $requeter = true){
 
 	// boucler pour trainter chaque requete independemment
