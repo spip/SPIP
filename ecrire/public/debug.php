@@ -307,25 +307,23 @@ function ancre_texte($texte, $fautifs=array())
 {
 	global $var_mode_ligne;
 	if ($var_mode_ligne) $fautifs[]=$var_mode_ligne;
-	ob_start();
-	highlight_string($texte);
-	$s = ob_get_contents();
-	ob_end_clean();
+	$s = highlight_string($texte,true);
 	if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
 	$tableau = explode("<br />", $s);
-	$format = "<span style='color: black'>%0".
-	  strlen(count($tableau)).
-	  "d </span>";
+
+	$n = strlen(count($tableau));
+	$format = "<span id='L%d' style='text-align: right;color: black;'>%0"
+	. strval($n)
+	. "d&nbsp;&nbsp;</span>\n";
+
 	$format10=str_replace('black','pink',$format);
 	$formaterr="<span style='background-color: pink'>%s</span>";
 	$i=1;
 
 	foreach ($tableau as $ligne) {
-		echo "<br />\n<a id='L$i' href='#debug_boucle'>",
-		  sprintf((($i%10) ? $format :$format10), $i),
-		  "</a>",
-		  sprintf(in_array($i, $fautifs) ? $formaterr : '%s',
-			  $ligne) ;
+		echo "<br />\n",
+		  sprintf((($i%10) ? $format :$format10), $i, $i),
+		  sprintf(in_array($i, $fautifs) ? $formaterr : '%s', $ligne);
 		$i++;
 	}
 }
@@ -419,7 +417,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    echo "<div id=\"debug_boucle\"><fieldset>";
 	    if ($var_mode_affiche == 'resultat') {
 		echo "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		ancre_texte($debug_objets['requete'][$var_mode_objet]);
+		ancre_texte(traite_query($debug_objets['requete'][$var_mode_objet]));
 		foreach ($res as $view) 
 			if ($view) echo "\n<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 
