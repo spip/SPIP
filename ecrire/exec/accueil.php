@@ -445,10 +445,10 @@ function exec_accueil_dist()
 	
 	echo encours_accueil();
 
+	echo afficher_enfant_rub(0, false, true);
+
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 
-
-	echo afficher_enfant_rub(0, false, true);
 
 	// Dernieres modifications d'articles
 	if ($options == 'avancees'
