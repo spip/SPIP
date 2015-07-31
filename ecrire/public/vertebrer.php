@@ -34,8 +34,8 @@ function vertebrer_sort($fields, $direction)
 		$tri = $direction
 		. ((test_sql_int($t) OR test_sql_date($r)) ? 'tri_n' : 'tri');
 
-		$url = "|parametre_url{" . $tri . ",'" . $n . "'}"
-		  . vertebrer_sanstri($tri);
+		$url = vertebrer_sanstri($tri)
+		.  "|parametre_url{" . $tri . ",'" . $n . "'}";
 
 		$res .= "\n\t\t<th><a href='[(#SELF$url)]'>$n</a></th>";
 	}
@@ -55,7 +55,7 @@ function vertebrer_sanstri($sauf='')
 
 function vertebrer_form($fields)
 {
-	$res = '<td></td>';
+	$res = "\t\t<td></td>";
 	$url = join('|', array_keys($fields));
 	$url = "#SELF|parametre_url{'$url',''}";
 	foreach($fields as $n => $t) {
@@ -77,10 +77,8 @@ function vertebrer_form($fields)
 // http://doc.spip.org/@vertebrer_crit
 function vertebrer_crit($v)
 {
-	 $res = "{pagination}" 
-	  . "\n\t{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}";
-
-	 foreach($v as $n => $t) {  $res .= "\n\t{" . $n .  " ?}"; }
+	 $res = "";
+	 foreach($v as $n => $t) {  $res .= "\n\t\t{" . $n .  " ?}"; }
 	 return $res;
 }
 
@@ -111,40 +109,50 @@ function public_vertebrer_dist($desc)
 {
 	$nom = $desc['table'];
 	$surnom = $desc['id_table'];
+	$connexion = $desc['connexion'];
 	$field = $desc['field'];
 	$key = $desc['key'];
+
 	ksort($field);
+
+	$form = vertebrer_form($field);
+	$crit = vertebrer_crit($field);
+	$cell = vertebrer_cell($field);
+	$sort = vertebrer_sort($field,'');
+	$tros = vertebrer_sort($field,'_');
+	$titre =  "SPIPAdmin $connexion $surnom";
+	$skel = "./?page=$surnom&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle";
+	  
 	return
+
 "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='#LANG' lang='#LANG' dir='#LANG_DIR'>
 <head>
-<title>SPIPAdmin $surnom [(#NOM_SITE_SPIP|textebrut)]</title>
+<title>[(#NOM_SITE_SPIP|textebrut)] $titre</title>
 <INCLURE{fond=inc-head}>
 </head>
 <body class='page_rubrique'><div id='page'>
-<h1 style='text-align:center'>SPIPAdmin $surnom</h1><br />\n" .
-	  // au minimum: "<BOUCLE1($fond)></BOUCLE1>#TOTAL_BOUCLE<//B1>")
-	  // au maximum:
-	"<B1>#ANCRE_PAGINATION" .
-	"\n<p class='pagination'>" .
-	"\n<a style='float:left;' " .
-	"href='./?page=$surnom&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle'>squelette" .
-	"</a>" .
-	"\n#PAGINATION" .
-	"\n</p><br class='nettoyeur' />\n<table class='spip' border='1' width='90%'>" .
-	"\n\t<tr>\n\t\t<th>Nb</th>" .
-	vertebrer_sort($field,'') .
-	"\n\t</tr>\n\t\t<tr>" .
-	vertebrer_form($field) .
-	"\n\t</tr>\n<BOUCLE1($surnom)" .
-	vertebrer_crit($field) .
-	'>' .
-	vertebrer_cell($field) .
-	"\n\t</tr>\n</BOUCLE1>" .
-	"\n\t<tr>\n\t\t<th>Nb</th>" .
-	vertebrer_sort($field,'_') .
-	"\n\t</tr>\n</table>" .
-"\n</B1>\n<h2 style='text-align:center'><:texte_vide:></h2>" .
-"\n<//B1></div></body></html>";
+<INCLURE{fond=inc-entete}>
+<div id='contenu'>
+<h1 style='text-align:center'>$titre</h1><br />
+<B1>
+<p class='pagination'>#ANCRE_PAGINATION#PAGINATION</p>
+<table class='spip' border='1' width='90%'>
+\t<tr>
+\t\t<th><:info_numero_abbreviation:></th>$sort
+\t</tr>
+\t<tr>
+$form
+\t</tr>\n<BOUCLE1($surnom){pagination} 
+\t\t{par #ENV{tri}}{!par #ENV{_tri}}{par num #ENV{tri_n}}{!par num #ENV{_tri_n}}$crit>$cell
+\t</tr>
+</BOUCLE1>
+\t<tr>\n\t\t<th><:info_numero_abbreviation:></th>
+$tros
+\t</tr>\n</table>
+</B1>\n<h2 style='text-align:center'><:texte_vide:></h2>
+<//B1></div>
+<INCLURE{fond=inc-pied}{skel='$skel'}>
+</div></body></html>";
 }
 ?>

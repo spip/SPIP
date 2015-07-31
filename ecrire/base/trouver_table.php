@@ -45,36 +45,38 @@ function base_trouver_table_dist($nom, $serveur='')
 		  // indirection (table principale avec nom!=type)
 			$t = $table_des_tables[$nom];
 			$nom_sql = 'spip_' . $t;
-			if (!isset($connexions[$s]['tables'][$nom_sql])) {
+			if (isset($connexions[$s]['tables'][$nom_sql])) 
+				return $connexions[$s]['tables'][$nom_sql];
+			else {
 				include_spip('base/serial');
-				$connexions[$s]['tables'][$nom_sql] = $tables_principales[$nom_sql];
-				$connexions[$s]['tables'][$nom_sql]['table']= $nom_sql;
-				$connexions[$s]['tables'][$nom_sql]['id_table']= $t;
-			} # table principale deja vue, ok.
+				$desc = $tables_principales[$nom_sql];
+				$nom = $t;
+			}
 		} else {
 			include_spip('base/auxiliaires');
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
-				if (!isset($connexions[$s]['tables'][$nom_sql])) {
-					$connexions[$s]['tables'][$nom_sql] = $tables_auxiliaires[$nom_sql];
-					$connexions[$s]['tables'][$nom_sql]['table']= $nom_sql;
-					$connexions[$s]['tables'][$nom_sql]['id_table']= $nom;
-				} # table locale a cote de SPIP: noms egaux
-			} # auxiliaire deja vue, ok.
+				if (isset($connexions[$s]['tables'][$nom_sql])) 
+					return $connexions[$s]['tables'][$nom_sql];
+				else {
+				  $desc = $tables_auxiliaires[$nom_sql];
+				}
+			}  # table locale a cote de SPIP, comme non SPIP:
 		}
 	}
-
-	if (isset($connexions[$s]['tables'][$nom_sql]))
-		return $connexions[$s]['tables'][$nom_sql];
-
-	$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
-	if (!$desc OR !$desc['field']) {
-		  spip_log("table inconnue $serveur $nom");
-		  return null;
-	} else {
-		$desc['table']= $nom_sql;
-		$desc['id_table']= $nom;
+	if (!isset($connexions[$s]['tables'][$nom_sql])) {
+		
+		$desc = sql_showtable($nom_sql, $serveur, ($nom_sql != $nom));
+		if (!$desc OR !$desc['field']) {
+			spip_log("table inconnue $serveur $nom");
+			return null;
+		}
 	}
-	return	$connexions[$s]['tables'][$nom_sql] = $desc;
+	$desc['table']= $nom_sql;
+	$desc['id_table']= $nom;
+	$desc['connexion']= $serveur;
+	$connexions[$s]['tables'][$nom_sql] = $desc;
+
+	return $connexions[$s]['tables'][$nom_sql];
 }
 ?>
