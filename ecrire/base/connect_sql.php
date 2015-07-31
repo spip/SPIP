@@ -279,7 +279,30 @@ function id_table_objet($type) {
 
 // http://doc.spip.org/@objet_type
 function objet_type($table_objet){
+	// scenario de base
+	// le type est decline a partir du nom de la table en enlevant le prefixe eventuel
+	// et la marque du pluriel
 	$type = preg_replace(',^spip_|s$,', '', $table_objet);
+	// si le type redonne bien la table c'est bon
+	if ( (table_objet($type)==$table_objet) 
+	  OR (table_objet_sql($type)==$table_objet))
+	  return $type;
+	
+	// sinon on passe par la cle primaire id_xx pour trouver le type
+	// car le s a la fin est incertain 
+	// notamment en cas de pluriel derogatoire
+	// id_jeu/spip_jeux id_journal/spip_journaux qui necessitent tout deux
+	// une declaration jeu => jeux, journal => journaux
+	// dans le pipeline declarer_tables_objets_surnoms
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	if ($desc = $trouver_table($table_objet)
+	  AND isset($desc['key']["PRIMARY KEY"])){
+		$primary = $desc['key']["PRIMARY KEY"];
+		$primary = explode(',',$primary);
+		$primary = reset($primary);
+		$type = preg_replace(',^id_,', '', $primary);
+	}
+	// on a fait ce qu'on a pu
 	return $type;	
 }
 
