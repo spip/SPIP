@@ -286,7 +286,14 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	AND count($args)==2)
 		return $v;
 	elseif ($v) {
-		foreach($ajouts as $k => $n) $url[] = $k .'=' . $u;
+		foreach($ajouts as $k => $n) {
+		  if (!is_array($v))
+		    $url[] = $k .'=' . $u;
+		  else {
+		    $id = (substr($k,-2) != '[]') ? $k : ($k ."[]");
+		    foreach ($v as $w) $url[]= $id .'=' . $w;
+		  }
+		}
 	}
 
 	// eliminer les vides
