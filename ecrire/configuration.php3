@@ -564,7 +564,7 @@ if ($options == "avancees") {
 
 
 	echo "<TR>";
-	echo "<TD align='left' class='verdana2' colspan=2>";
+	echo "<TD align='left' class='verdana2' colspan='2'>";
 	echo "<p><hr><p>";
 	echo "Le raccourci de mise en page <tt>[...->>...]</tt> permet, s'il est activ&eacute;, de cr&eacute;er des liens hypertextes qui provoquent l'ouverture d'une nouvelle fen&ecirc;tre, selon le choix du r&eacute;dacteur. Vous pouvez accepter ou interdire l'utilisation de ce raccourci par les r&eacute;dacteurs du site.<p>";
 	echo "<blockquote><i>Une telle pratique est d&eacute;conseill&eacute;e: vous devriez alors v&eacute;rifier le comportement de chaque lien hypertexte dans chaque article, sauf &agrave; perdre la coh&eacute;rence de votre interface de navigation. Si vous conservez l'option &laquo;Interdire la s&eacute;lection manuelle&raquo;, ce raccourci fonctionnera normalement, mais sans provoquer l'ouverture d'une fen&ecirc;tre.</i></blockquote>";
@@ -574,7 +574,7 @@ if ($options == "avancees") {
 		'non' => 'Interdire les liens ouvrants &laquo;&nbsp;manuels&nbsp;&raquo;'), "<br>");
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='right'>";
+	echo "<TR><TD ALIGN='right' colspan='2'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
