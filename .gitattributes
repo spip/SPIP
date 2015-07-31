@@ -80,7 +80,6 @@ ecrire/exec/articles_edit.php -text
 ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/auteur_infos.php -text
-ecrire/exec/auteurs.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
 ecrire/exec/brouteur.php -text
@@ -135,7 +134,6 @@ ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
 ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
-ecrire/exec/visiteurs.php -text
 ecrire/genie/maintenance.php -text
 ecrire/genie/mise_a_jour.php -text
 ecrire/inc/actions.php -text
@@ -684,6 +682,8 @@ prive/spip_style.css -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
+prive/squelettes/contenu/auteurs.html -text
+prive/squelettes/contenu/auteurs_fonctions.php -text
 prive/squelettes/contenu/charte.html -text
 prive/squelettes/contenu/configurer.html -text
 prive/squelettes/contenu/configurer_avancees.html -text
@@ -694,6 +694,8 @@ prive/squelettes/contenu/configurer_langage.html -text
 prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
+prive/squelettes/contenu/visiteurs.html -text
+prive/squelettes/contenu/visiteurs_fonctions.php -text
 prive/squelettes/extra/dist.html -text
 prive/squelettes/head/dist.html -text
 prive/squelettes/hierarchie/dist.html -text
@@ -710,8 +712,10 @@ prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/admin_tech.html -text
+prive/squelettes/navigation/auteurs.html -text
 prive/squelettes/navigation/configurer.html -text
 prive/squelettes/navigation/dist.html -text
+prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text

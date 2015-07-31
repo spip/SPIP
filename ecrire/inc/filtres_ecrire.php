@@ -171,4 +171,14 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 
 }
 
+
+// http://doc.spip.org/@avoir_visiteurs
+function avoir_visiteurs($past=false, $accepter=true) {
+	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
+	if ($accepter AND $GLOBALS['meta']["accepter_visiteurs"] <> 'non') return true;
+	if (sql_countsel('spip_articles', "accepter_forum='abo'"))return true;
+	if (!$past) return false;
+	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
+}
+
 ?>
