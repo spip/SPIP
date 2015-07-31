@@ -18,7 +18,7 @@ blockquote.spip_poesie { margin: 2em 0; margin-left: 1em; padding-left: 1em;  bo
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 
 .spip_code, .spip_cadre { font-family: Courier, "Courier New", monospace; color: #036; }
-.spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; }
+.spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; font-size:inherit; }
 div.spip_code, .spip_cadre { margin-bottom: 1em;  }
 
 .spip_surligne { background: #FF6; }
@@ -58,6 +58,3 @@ a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }
 .on { font-weight: bold; } /* liens exposes */
 
-/* Couleurs et design de la previsu */
-.spip-previsu { background-color: #111111; color: #eeeeee; font-size: 18px; position: absolute; padding-right: 5px; padding-top: 2px; padding-bottom: 5px;top: 0px; left: 0px;
-}
