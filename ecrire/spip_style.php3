@@ -872,7 +872,7 @@ a.bouton_rotation:hover img {
 	font-family: verdana, arial, helvetica, sans;
 	font-size: 12px;
 	padding: 6px;
-	zoom: 1.0;
+	position: relative;
 }
 
 .cadre-titre {
