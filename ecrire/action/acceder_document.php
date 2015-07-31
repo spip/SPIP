@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/headers');
-include_spip('inc/autoriser');
 
 // acces aux documents joints securise
 // verifie soit que le demandeur est authentifie
