@@ -65,6 +65,7 @@ function auth_ldap_search($login, $pass)
 		// Si echec, essayer de deviner le DN
 		reset($atts);
 		while (list(, $att) = each($atts)) {
+			$dn = "$att=$login_search, $ldap_base";
 			if (@ldap_bind($ldap_link, $dn, $pass))
 				return "$att=$login_search, $ldap_base";
 		}
