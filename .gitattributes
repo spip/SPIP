@@ -470,6 +470,7 @@ prive/javascript/pause.js -text
 prive/javascript/sha256.js -text
 prive/modeles/formulaire.html -text
 prive/modeles/mail_inscription.html -text
+prive/modeles/mail_oubli.html -text
 prive/modeles/object_jobs_list.html -text
 prive/modeles/pagination.html -text
 prive/modeles/pagination_page.html -text
