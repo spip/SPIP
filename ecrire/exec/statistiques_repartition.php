@@ -136,7 +136,7 @@ function exec_statistiques_repartition_dist()
 	
 	echo debut_grand_cadre(true);
 	echo gros_titre(_T('titre_page_statistiques'),'',false);
-	if (_ecran == "large") { 
+	if ($spip_ecran == "large") { 
 	 	                $largeur_table = 974; 
 	 	                $taille = 550; 
 	 	        } else { 
