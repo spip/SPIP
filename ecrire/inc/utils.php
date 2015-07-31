@@ -780,7 +780,7 @@ function _chemin($dir_path=NULL){
 			_DIR_RACINE.':'.
 			_DIR_RACINE.'squelettes-dist/:'.
 			_DIR_RACINE.'prive/:'.
-			_DIR_RESTREINT.':';
+			_DIR_RESTREINT;
 		// Ajouter squelettes/
 		if (@is_dir(_DIR_RACINE.'squelettes'))
 			$path = _DIR_RACINE.'squelettes/:' . $path;
