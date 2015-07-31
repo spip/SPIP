@@ -46,385 +46,11 @@ setlocale('LC_CTYPE', $lang2.'_'.$GLOBALS['lang']) ||
 setlocale('LC_CTYPE', $GLOBALS['lang'].'_'.$lang2);
 
 
-// Securite : empecher l'execution de code PHP
-function interdire_scripts($source) {
-	$source = eregi_replace("<(\%|\?|([[:space:]]*)script)", "&lt;\\1", $source);
-	return $source;
-}
+//
+// diverses fonctions essentielles
+//
 
-function supprimer_numero($texte) {
-	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)°][[:space:]]+", "", $texte);
-	return $texte;
-}
-
-function supprimer_tags($texte, $rempl = "") {
-	// super gavant : la regexp ci-dessous plante sous php3, genre boucle infinie !
-	// $texte = ereg_replace("<([^>\"']*|\"[^\"]*\"|'[^']*')*>", $rempl, $texte);
-	$texte = ereg_replace("<[^>]*>", $rempl, $texte);
-	return $texte;
-}
-
-function corriger_caracteres($texte) {
-	// corrige les caracteres degoutants
-	// 145,146,180 = simple quote ; 147,148 = double quote ; 150 = tiret long
-	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150), "'''".'""-');
-}
-
-function PtoBR($texte){
-	$texte = eregi_replace("</p>", "\n", $texte);
-	$texte = eregi_replace("<p([[:space:]][^>]*)?".">", "<br>", $texte);
-	return $texte;
-}
-
-function vider_date($letexte) {
-	if (ereg("^0000-00-00", $letexte)) return '';
-	return $letexte;
-}
-
-function recup_heure($numdate){
-	if (!$numdate) return '';
-
-	if (ereg('([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})', $numdate, $regs)) {
-		$heures = $regs[1];
-		$minutes = $regs[2];
-		$secondes = $regs[3];
-	}
-	return array($heures, $minutes, $secondes);
-}
-
-function heures($numdate) {
-	$date_array = recup_heure($numdate);
-	if ($date_array)
-		list($heures, $minutes, $secondes) = $date_array;
-	return $heures;
-}
-
-function minutes($numdate) {
-	$date_array = recup_heure($numdate);
-	if ($date_array)
-		list($heures, $minutes, $secondes) = $date_array;
-	return $minutes;
-}
-
-function secondes($numdate) {
-	$date_array = recup_heure($numdate);
-	if ($date_array)
-		list($heures,$minutes,$secondes) = $date_array;
-	return $secondes;
-}
-
-function recup_date($numdate){
-	if (!$numdate) return '';
-	if (ereg('([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2})', $numdate, $regs)) {
-		$jour = $regs[1];
-		$mois = $regs[2];
-		$annee = $regs[3];
-		if ($annee < 90){
-			$annee = 2000 + $annee;
-		} else {
-			$annee = 1900 + $annee ;
-		}
-	}
-	elseif (ereg('([0-9]{4})-([0-9]{2})-([0-9]{2})',$numdate, $regs)) {
-		$annee = $regs[1];
-		$mois = $regs[2];
-		$jour = $regs[3];
-	}
-	elseif (ereg('([0-9]{4})-([0-9]{2})', $numdate, $regs)){
-		$annee = $regs[1];
-		$mois = $regs[2];
-	}
-	if ($annee > 4000) $annee -= 9000;
-	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
-
-	return array($annee, $mois, $jour);
-}
-
-
-function affdate_base($numdate, $vue) {
-	global $lang;
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee, $mois, $jour) = $date_array;
-	else
-		return '';
-
-	if ($mois > 0){
-		$saison = "hiver";
-		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = "printemps";
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = "été";
-		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = "automne";
-		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = "hiver";
-	}
-	
-	if ($lang == "fr") {
-		if ($jour == '1') $jour = '1er';
-		$tab_mois = array('',
-			'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-			'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
-		$avjc = ' av. J.C.';
-	}
-	elseif ($lang == "en"){
-		switch($jour) {
-		case '1':
-			$jour = '1st';
-			break;
-		case '2':
-			$jour = '2nd';
-			break;
-		case '3':
-			$jour = '3rd';
-			break;
-		case '21':
-			$jour = '21st';
-			break;
-		case '22':
-			$jour = '22nd';
-			break;
-		case '23':
-			$jour = '23rd';
-			break;
-		case '31':
-			$jour = '31st';
-			break;
-		}
-		$tab_mois = array('',
-			'January', 'February', 'March', 'April', 'May', 'June',
-			'July', 'August', 'September', 'October', 'November', 'December');
-		$avjc = ' B.C.';
-	}
-	if ($jour == 0) $jour = "";
-	if ($jour) $jour .= ' ';
-	$mois = $tab_mois[(int) $mois];
-	if ($annee < 0) {
-		$annee = -$annee.$avjc;
-		$avjc = true;
-	}
-	else $avjc = false;
-
-	switch ($vue) {
-	case 'saison':
-		return $saison;
-
-	case 'court':
-		if ($avjc) return $annee;
-		$a = date('Y');
-		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return ucfirst($mois)." $annee";
-		return $jour.$mois;
-
-	case 'entier':
-		if ($avjc) return $annee;
-		return "$jour$mois $annee";
-
-	case 'mois':
-		return "$mois";
-
-	case 'mois_annee':
-		if ($avjc) return $annee;
-		return "$mois $annee";
-	}
-
-	return '<blink>format non d&eacute;fini</blink>';
-}
-
-
-function nom_jour($numdate) {
-	global $lang;
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-
-	if (!$mois OR !$jour) return;
-	
-	$nom = mktime(1,1,1,$mois,$jour,$annee);
-	$nom = date("D",$nom);
-
-	if ($lang == "fr") {
-		switch($nom) {
-			case 'Sun': $nom='dimanche'; break;
-			case 'Mon': $nom='lundi'; break;
-			case 'Tue': $nom='mardi'; break;
-			case 'Wed': $nom='mercredi'; break;
-			case 'Thu': $nom='jeudi'; break;
-			case 'Fri': $nom='vendredi'; break;
-			case 'Sat': $nom='samedi'; break;
-		}
-	}
-	elseif ($lang == "en") {
-		switch($nom) {
-			case 'Sun': $nom='Sunday'; break;
-			case 'Mon': $nom='Monday'; break;
-			case 'Tue': $nom='Tuesday'; break;
-			case 'Wed': $nom='Wednesday'; break;
-			case 'Thu': $nom='Thursday'; break;
-			case 'Fri': $nom='Friday'; break;
-			case 'Sat': $nom='Saturday'; break;
-		}
-	}
-	return $nom;
-}
-
-
-function jour($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	if ($jour=="1") $jour="1er";
-	return $jour;
-}
-
-
-function mois($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	return $mois;
-}
-
-
-function annee($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	return $annee;
-}
-
-function saison($numdate) {
-	return affdate_base($numdate, 'saison');
-}
-
-function affdate($numdate) {
-	return affdate_base($numdate, 'entier');
-}
-
-function affdate_court($numdate) {
-	return affdate_base($numdate, 'court');
-}
-
-function affdate_mois_annee($numdate) {
-	return affdate_base($numdate, 'mois_annee');
-}
-
-function nom_mois($numdate) {
-	return affdate_base($numdate, 'mois');
-}
-
-function majuscules($texte) {
-	$suite = htmlentities($texte);
-	$suite = ereg_replace('&amp;', '&', $suite);
-	$suite = ereg_replace('&lt;', '<', $suite); 
-	$suite = ereg_replace('&gt;', '>', $suite); 
-	$texte = '';
-	if (ereg('^(.*)&([A-Za-z])([a-zA-Z]*);(.*)$', $suite, $regs)) {
-		$texte .= majuscules($regs[1]);
-		$suite = $regs[4];
-		$carspe = $regs[2];
-		$accent = $regs[3];
-		if (ereg('^(acute|grave|circ|uml|cedil|slash|caron|ring|tilde|elig)$', $accent))
-			$carspe = strtoupper($carspe); 
-		if ($accent == 'elig') $accent = 'Elig';
-		$texte .= '&'.$carspe.$accent.';';
-	}
-	$texte .= strtoupper($suite);
-	return $texte;
-}
-
-function justifier($letexte) {
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='justify'>", $letexte);
-	return $letexte;
-}
-
-function aligner_droite($letexte) {
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='right'>",$letexte);
-	return $letexte;
-}
-
-function aligner_gauche($letexte) {
-	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='left'>",$letexte);
-	return $letexte;
-}
-
-function centrer($letexte) {
-	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='center'>",$letexte);
-	return $letexte;
-}
-
-function textebrut($texte) {
-	$texte = ereg_replace("[\n\r]+", " ", $texte);
-	$texte = eregi_replace("<(p|br)([[:space:]][^>]*)?".">", "\n\n", $texte);
-	$texte = ereg_replace("^\n+", "", $texte);
-	$texte = ereg_replace("\n+$", "", $texte);
-	$texte = ereg_replace("\n +", "\n", $texte);
-	$texte = supprimer_tags($texte);
-	$texte = ereg_replace("(&nbsp;| )+", " ", $texte);
-	return $texte;
-}
-
-
-// une fonction bien pratique pour ceux qui aiment les liens qui ouvrent
-// une nouvelle fenêtre : utiliser (#TEXTE|liens_ouvrants)
-function liens_ouvrants ($texte) {
-	return ereg_replace("<a ([^>]*class=\"spip_out\")>",
-		"<a \\1 target=\"_blank\">", $texte);
-}
-
-// si le texte contient <intro>...</intro>, prendre CES bouts-la
-// sinon couper automatiquement à la longueur demandee
-function couper_intro($texte, $long) {
-	$texte = eregi_replace("(</?)intro>", "\\1intro>", $texte); // minuscules
-	while ($fin = strpos($texte, "</intro>")) {
-		$zone = substr($texte, 0, $fin);
-		$texte = substr($texte, $fin + strlen("</intro>"));
-		if ($deb = strpos($zone, "<intro>") OR substr($zone, 0, 7) == "<intro>")
-			$zone = substr($zone, $deb + 7);
-		$intro .= $zone;
-	}
-
-	if ($intro)
-		$intro = $intro.' (...)';
-	else
-		$intro = couper($texte, $long);
-
-	// supprimer un eventuel chapo redirecteur =http:/.....
-	$intro = ereg_replace("^=http://[^[:space:]]+","",$intro);
-
-	return $intro;
-}
-
-function couper($texte, $long) {
-	$texte2 = substr($texte, 0, $long * 2); /* heuristique pour prendre seulement le necessaire */
-	if (strlen($texte2) < strlen($texte)) $plus_petit = true;
-	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte2);
-
-	// supprimer les notes
-	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
-
-	// supprimer les codes typos
-	$texte = strtr($texte,"{}","  ");
-
-	$texte2 = substr($texte." ", 0, $long);
-	$texte2 = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $texte2);
-	if ((strlen($texte2) + 3) < strlen($texte)) $plus_petit = true;
-	if ($plus_petit) $texte2 .= ' (...)';
-	return $texte2;
-}
-
-
+// ereg_ ou preg_ ?
 function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 	global $flag_preg_replace;
 
@@ -439,70 +65,7 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 }
 
 
-function taille_en_octets ($taille) {
-	if ($taille < 1024) {$taille .= "&nbsp;octets";}
-	else if ($taille < 1024*1024) {
-		$taille = ((floor($taille / 102.4))/10)."&nbsp;ko";
-	} else {
-		$taille = ((floor(($taille / 1024) / 102.4))/10)."&nbsp;Mo";
-	}
-	return $taille;
-}
-
-
-// correction typographique francaise
-function typo_fr($letexte) {
-	global $flag_preg_replace;
-	global $flag_str_replace;
-
-	// les "blancs durs" et les guillemets
-	if ($flag_str_replace){
-		$letexte = str_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
-		$letexte = str_replace("&raquo;",chr(187),$letexte);
-		$letexte = str_replace("&#187;", chr(187),$letexte);
-		$letexte = str_replace("&laquo;",chr(171),$letexte);
-		$letexte = str_replace("&#171;", chr(171),$letexte);
-	} else {
-		$letexte = ereg_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
-		$letexte = ereg_replace("&(raquo|#187);",chr(187), $letexte);
-		$letexte = ereg_replace("&(laquo|#171);",chr(171), $letexte);
-	}
-
-	$cherche1 = array(
-		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
-		/* 3 */		'/([:!?'.chr(187).'])/',
-		/* 4 */		'/('.chr(171).'|(M(M?\.|mes?|r\.?)|[MnN]'.chr(176).') )/',
-		/* 6 */		'/ +-,/'
-	);
-	$remplace1 = array(
-		/* 2 */		'\1~;',
-		/* 3 */		'~\1',
-		/* 4 */		'\1~',
-		/* 6 */		'~-,'
-	);
-
-	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
-	$letexte = ereg_replace(" *~+ *", "~", $letexte);
-
-	$cherche2 = array(
-		'/(http|ftp|mailto)~:/',
-		'/~/'
-	);
-	$remplace2 = array(
-		'\1:',
-		'&nbsp;'
-	);
-
-	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
-
-	return ($letexte);
-}
-
-
-//
 // Mise de cote des echappements
-//
-
 function echappe_html($letexte,$source) {
 	//
 	// Echapper les <code>...</ code>
@@ -567,10 +130,7 @@ function echappe_html($letexte,$source) {
 	return array($letexte, $les_echap);
 }
 
-//
 // Traitement final des echappements
-//
-
 function echappe_retour($letexte, $les_echap, $source) {
 	while(ereg("___SPIP_$source([0-9]+) ___", $letexte, $match)) {
 		$lenum = $match[1];
@@ -581,6 +141,106 @@ function echappe_retour($letexte, $les_echap, $source) {
 	return $letexte;
 }
 
+function couper($texte, $long) {
+	$texte2 = substr($texte, 0, $long * 2); /* heuristique pour prendre seulement le necessaire */
+	if (strlen($texte2) < strlen($texte)) $plus_petit = true;
+	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte2);
+
+	// supprimer les notes
+	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
+
+	// supprimer les codes typos
+	$texte = strtr($texte,"{}","  ");
+
+	$texte2 = substr($texte." ", 0, $long);
+	$texte2 = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $texte2);
+	if ((strlen($texte2) + 3) < strlen($texte)) $plus_petit = true;
+	if ($plus_petit) $texte2 .= ' (...)';
+	return $texte2;
+}
+
+// prendre <intro>...</intro> sinon couper a la longueur demandee
+function couper_intro($texte, $long) {
+	$texte = eregi_replace("(</?)intro>", "\\1intro>", $texte); // minuscules
+	while ($fin = strpos($texte, "</intro>")) {
+		$zone = substr($texte, 0, $fin);
+		$texte = substr($texte, $fin + strlen("</intro>"));
+		if ($deb = strpos($zone, "<intro>") OR substr($zone, 0, 7) == "<intro>")
+			$zone = substr($zone, $deb + 7);
+		$intro .= $zone;
+	}
+
+	if ($intro)
+		$intro = $intro.' (...)';
+	else
+		$intro = couper($texte, $long);
+
+	// supprimer un eventuel chapo redirecteur =http:/.....
+	$intro = ereg_replace("^=http://[^[:space:]]+","",$intro);
+
+	return $intro;
+}
+
+
+//
+// les elements de propre()
+//
+
+// Securite : empecher l'execution de code PHP
+function interdire_scripts($source) {
+	$source = eregi_replace("<(\%|\?|([[:space:]]*)script)", "&lt;\\1", $source);
+	return $source;
+}
+
+// correction typographique francaise
+function typo_fr($letexte) {
+	global $flag_preg_replace;
+	global $flag_str_replace;
+
+	// les "blancs durs" et les guillemets
+	if ($flag_str_replace){
+		$letexte = str_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
+		$letexte = str_replace("&raquo;",chr(187),$letexte);
+		$letexte = str_replace("&#187;", chr(187),$letexte);
+		$letexte = str_replace("&laquo;",chr(171),$letexte);
+		$letexte = str_replace("&#171;", chr(171),$letexte);
+	} else {
+		$letexte = ereg_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
+		$letexte = ereg_replace("&(raquo|#187);",chr(187), $letexte);
+		$letexte = ereg_replace("&(laquo|#171);",chr(171), $letexte);
+	}
+
+	$cherche1 = array(
+		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
+		/* 3 */		'/([:!?'.chr(187).'])/',
+		/* 4 */		'/('.chr(171).'|(M(M?\.|mes?|r\.?)|[MnN]'.chr(176).') )/',
+		/* 6 */		'/ +-,/'
+	);
+	$remplace1 = array(
+		/* 2 */		'\1~;',
+		/* 3 */		'~\1',
+		/* 4 */		'\1~',
+		/* 6 */		'~-,'
+	);
+
+	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
+	$letexte = ereg_replace(" *~+ *", "~", $letexte);
+
+	$cherche2 = array(
+		'/(http|ftp|mailto)~:/',
+		'/~/'
+	);
+	$remplace2 = array(
+		'\1:',
+		'&nbsp;'
+	);
+
+	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
+
+	return ($letexte);
+}
+
+// typo : francaise sinon rien (pour l'instant)
 function typo($letexte) {
 	global $lang;
 
@@ -595,9 +255,7 @@ function typo($letexte) {
 	return $letexte;
 }
 
-//
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
-//
 function traiter_raccourcis($letexte, $les_echap = false) {
 	global $puce;
 	global $debut_intertitre, $fin_intertitre;
@@ -608,14 +266,6 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	global $ouvre_note;
 	global $ferme_note;
 	global $flag_strpos_3, $flag_preg_replace, $flag_str_replace;
-
-	// regle l'id_article pour recuperation d'images
-/*	global $id_article;
-	global $id_article_img;
-	$my_id_article_img = (int) $id_article_img;
-	if ($my_id_article_img == 0) {
-		$my_id_article_img = (int) $id_article;
-	}*/
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
@@ -805,7 +455,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	// en forme (paragraphes, raccourcis...)
 	//
 	// ATTENTION : si vous modifiez cette partie, modifiez les DEUX
-	// alternatives (if/else) de façon similaire. Merci.
+	// alternatives (if/else) de facon similaire. Merci.
 	//
 
 	$letexte = trim($letexte);
@@ -868,7 +518,7 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	return $letexte;
 }
 
-
+// filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte) {
 	return interdire_scripts(traiter_raccourcis(trim($letexte)));
 }

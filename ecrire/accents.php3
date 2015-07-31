@@ -14,6 +14,7 @@ function changer_accents($dir) {
 		if (ereg('\.', $nomfich) && !ereg('(\.php3|\.html)$', $nomfich)) continue;
 		if ($nomfich == 'accents.php3') continue;
 		if ($nomfich == 'inc_texte.php3') continue;
+		if ($nomfich == 'inc_filtres.php3') continue;
 		if ($nomfich == 'inc_index.php3') continue;
 		if ($nomfich == 'inc_mail.php3') continue;
 		$nomfich = "$dir/$nomfich";

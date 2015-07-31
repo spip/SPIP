@@ -172,8 +172,9 @@ if (!file_exists("CACHE/.htaccess")) {
 if (lire_meta('activer_moteur') == 'oui') {
 	$fichier_index = 'CACHE/.index';
 	if ($db_ok) {
-		include_local("ecrire/inc_texte.php3");
-		include_local("ecrire/inc_index.php3");
+		include_local ("ecrire/inc_texte.php3");
+		include_local ("ecrire/inc_filtres.php3");
+		include_local ("ecrire/inc_index.php3");
 		$s = '';
 		if ($id_article AND !deja_indexe('article', $id_article))
 			$s .= "article $id_article\n";
@@ -194,8 +195,9 @@ if (lire_meta('activer_moteur') == 'oui') {
 	if ($use_cache AND file_exists($fichier_index) AND $size = filesize($fichier_index)) {
 		include_local ("ecrire/inc_connect.php3");
 		if ($db_ok) {
-			include_local("ecrire/inc_texte.php3");
-			include_local("ecrire/inc_index.php3");
+			include_local ("ecrire/inc_texte.php3");
+			include_local ("ecrire/inc_filtres.php3");
+			include_local ("ecrire/inc_index.php3");
 			$f = fopen($fichier_index, 'r');
 			$s = fgets($f, 100);
 			$suite = fread($f, $size);
@@ -322,6 +324,7 @@ if ($id_article AND lire_meta("activer_statistiques") != "non" AND !$flag_preser
 
 if ($db_ok AND lire_meta("activer_syndic") != "non") {
 	include_local ("ecrire/inc_texte.php3");
+	include_local ("ecrire/inc_filtres.php3");
 	include_local ("ecrire/inc_sites.php3");
 	include_local ("ecrire/inc_index.php3");
 	executer_une_syndication();

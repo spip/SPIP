@@ -11,6 +11,7 @@ include_local ("ecrire/inc_meta.php3");
 include_local ("ecrire/inc_admin.php3");
 include_local ("ecrire/inc_acces.php3");
 include_local ("ecrire/inc_texte.php3");
+include_local ("ecrire/inc_filtres.php3");
 include_local ("ecrire/inc_mail.php3");
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
