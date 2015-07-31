@@ -38,7 +38,7 @@ function auth_dist() {
 
 	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
 	global $connect_nom_site, $connect_url_site, $connect_login, $connect_pass;
-	global $connect_activer_imessage, $connect_activer_messagerie;
+	global $connect_activer_imessage;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
 	global $auteur_session, $prefs;
@@ -126,7 +126,6 @@ function auth_dist() {
 		$connect_login = $row['login'];
 		$connect_pass = $row['pass'];
 		$connect_statut = $row['statut'];
-		$connect_activer_messagerie = "oui"; //$row["messagerie"];
 		$connect_activer_imessage = "oui "; //$row["imessage"];
 
 		// Special : si dans la fiche auteur on modifie les valeurs
@@ -147,9 +146,8 @@ function auth_dist() {
 		}
 
 		// Indiquer connexion
-		if ($connect_activer_messagerie != "non") {
-			@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
-		}
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW()
+		WHERE id_auteur='$connect_id_auteur'");
 
 		// Si administrateur, recuperer les rubriques gerees par l'admin
 		if ($connect_statut == '0minirezo') {

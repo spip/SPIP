@@ -18,8 +18,7 @@ include_ecrire("inc_boutons");
 
 // Choix dynamique de la couleur
 
-function choix_couleur()
-{
+function choix_couleur() {
 	global $couleurs_spip;
 	$link = new Link;
 	if ($couleurs_spip) {
@@ -721,7 +720,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		}
 	}
 
-	$activer_messagerie = "oui";
 	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
@@ -951,7 +949,6 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		}
 
 
-	$activer_messagerie = "oui";
 	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
@@ -1558,11 +1555,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	static $nb_forum;
 	static $i;
 	global $couleur_foncee;
-	global $connect_id_auteur, $connect_activer_messagerie;
+	global $connect_id_auteur;
 	global $mots_cles_forums;
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
-
-	$activer_messagerie = "oui";
 
 	$compteur_forum++;
 
@@ -1661,7 +1656,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			else
 				echo typo($auteur);
 
-			if ($id_auteur AND $connect_activer_messagerie != "non") {
+			if ($id_auteur) {
 				$bouton = bouton_imessage($id_auteur,$row_auteur);
 				if ($bouton) echo "&nbsp;".$bouton;
 			}
@@ -1730,31 +1725,6 @@ function afficher_thread_forum($le_forum, $adresse_retour, $controle = 0) {
 	
 }
 
-
-
-// point d'entree/hack pour spip-lab (duplication de debut_page)
-
-function debut_html($titre = "", $rubrique="") {
-	include_ecrire('inc_headers');
-
-	global $browser_verifForm;
-	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
-	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
-	$titre = textebrut(typo($titre));
-
-	http_no_cache();
-	echo _DOCTYPE_ECRIRE .
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n" .
-	  "<title>[$nom_site_spip] $titre</title>\n";
-	if (strpos($rubrique, 'script>'))
-	  echo  $rubrique, "\n";
-	echo envoi_link($nom_site_spip, $rubrique);
-	// Fin des entetes
-	echo "\n</head>\n";
-	echo "<body ",  _ATTRIBUTES_BODY, "
-	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm\">";
-}
 
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
@@ -2190,51 +2160,57 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="") {
 
-	init_entete($titre, $rubrique, $onLoad, $css);
+	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
-	init_body($rubrique, $sous_rubrique);
+	init_body($rubrique, $sous_rubrique, $onLoad);
 	debut_corps_page();
 }
  
-function init_entete($titre, $rubrique, $onLoad="", $css="") {
-	global $browser_verifForm;
-	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
-	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
+function init_entete($titre, $rubrique, $css='') {
+
+	if (!$nom_site_spip =
+	entites_html(textebrut(typo($GLOBALS['meta']["nom_site"]))))
+		$nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
 	include_ecrire('inc_headers');
 	http_no_cache();
-	echo _DOCTYPE_ECRIRE .
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n",
-	  "<title>",
-	  "[$nom_site_spip] ",
-	  textebrut(typo($titre)),
-	  "</title>\n" ,
-	  envoi_link($nom_site_spip, $rubrique),
-	  (!$css ? "" :
-	   ('<link rel="stylesheet" href="' . entites_html($css) . '" type="text/css" />'. "\n")),
-	  "\n</head>\n",
-	  "<body ", _ATTRIBUTES_BODY, "
-	onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
+	$head = _DOCTYPE_ECRIRE
+		. "<html lang='".$GLOBALS['spip_lang']."' dir='"
+		. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
+		. "'>\n<head>\n<title>["
+		. $nom_site_spip
+		. "] " . textebrut(typo($titre)) . "</title>\n"
+		. envoi_link($nom_site_spip, $rubrique)
+		. (!$css ? "" : (
+			'<link rel="stylesheet" href="' . entites_html($css)
+			. '" type="text/css" />'. "\n"
+		) ) ."\n";
+
+	echo pipeline('header_prive', $head)
+		. "</head>\n";
 }
 
 // fonction envoyant la double serie d'icones de redac
-function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
+function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='') {
 	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
 	global $connect_statut;
-	global $connect_activer_messagerie;
 	global $connect_toutes_rubriques;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-	$activer_messagerie = "oui";
+	global $browser_verifForm;
+
+	echo "<body ". _ATTRIBUTES_BODY
+		. 'onLoad="'
+		. "setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
+		. '">';
 
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
-	$link = new Link;
+	$link = new Link();
 	echo "\n<map name='map_layout'>";
 	echo lien_change_var ($link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo lien_change_var ($link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
@@ -2304,8 +2280,6 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	// Icones secondaires
 
 	$decal=0;
-	$activer_messagerie = "oui";
-	$connect_activer_messagerie = "oui";
 
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if ($rubrique == $page) {
@@ -2779,15 +2753,12 @@ function debut_corps_page() {
 	// Afficher les auteurs recemment connectes
 	
 	global $changer_config;
-	global $activer_messagerie;
 	global $activer_imessage;
-	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
 
-		if ($changer_config!="oui"){
-			$activer_messagerie = "oui";
-			$activer_imessage = "oui";
-		}
+	if ($changer_config!="oui"){
+		$activer_imessage = "oui";
+	}
 	
 			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
 				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)";
@@ -2909,9 +2880,7 @@ function debut_gauche($rubrique = "asuivre") {
 function creer_colonne_droite($rubrique=""){
 	global $deja_colonne_droite;
 	global $changer_config;
-	global $activer_messagerie;
 	global $activer_imessage;
-	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
 	global $connect_statut;
 	global $options;
