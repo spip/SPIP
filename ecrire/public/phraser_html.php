@@ -462,10 +462,11 @@ function phraser_criteres($params, &$result) {
 		  if ($var->type != 'texte') {
 		    // cas 1 seul arg ne commencant pas par du texte brut: 
 		    // erreur ou critere infixe "/"
-		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/'))
-		    	erreur_squelette(_T('zbug_critere_inconnu', 
-					  array('critere' => $var->nom_champ)));
-		    else {
+		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/')) {
+			$msg = _T('zbug_critere_inconnu', 
+					array('critere' => $var->nom_champ));
+			erreur_squelette($msg, $result);
+		    } else {
 		      $crit = new Critere;
 		      $crit->op = '/';
 		      $crit->not = "";
