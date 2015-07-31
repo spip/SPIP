@@ -108,8 +108,8 @@ function texte_backend($texte) {
 	// si on a des liens ou des images, les passer en absolu
 	$texte = liens_absolus($texte);
 
-	// echapper les tags &gt; &lt; et &amp;
-	$texte = preg_replace(',&(gt|lt|amp);,', '&amp;\1;', $texte);
+	// echapper les tags &gt; &lt;
+	$texte = preg_replace(',&(gt|lt);,', '&amp;\1;', $texte);
 
 	// importer les &eacute;
 	$texte = filtrer_entites($texte);
@@ -907,8 +907,7 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	if (ereg("\/", $fichier_dest)) {
 		$fichier_dest = substr($fichier_dest, strrpos($fichier_dest,"/")+1, strlen($fichier_dest));
 	}
-	$destdir = creer_repertoire(_DIR_IMG, "cache-gd2");
-	$fichier_dest = _DIR_IMG . $destdir . $fichier_dest;
+	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest;
 	
 	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
 	$fonction_image = "image".$term_fonction_dest;

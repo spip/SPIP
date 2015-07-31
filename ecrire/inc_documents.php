@@ -377,7 +377,7 @@ function integre_image($id_document, $align, $type_aff) {
 			"<div class='spip_document_$id_document spip_documents$class_align'$style>"
 			. $vignette
 			. $txt
-			. "</div>\n";
+			. '</div>';
 	}
 }
 
@@ -415,14 +415,14 @@ function inserer_documents($letexte) {
 					.'\'"'
 ##					.' href="'.$url.'"' # note: href deviendrait legal en XHTML2
 					.'>'
-					.$m[0] # $m[1] si on veut eliminer le <a> (tidy le fait)
-					."</div>\n";
+					.$rempl # on pourrait eliminer le <a> (tidy le fait)
+					.'</div>';
 				$letexte = str_replace($m[0], $re, $letexte);
 			}
 		}
 
 		// Installer le document
-		$letexte = str_replace($match[0], $rempl, $letexte);
+		$letexte = str_replace($match[0], $rempl."\n\n", $letexte);
 	}
 
 	$pile--;
