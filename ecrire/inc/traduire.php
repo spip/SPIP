@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@chercher_module_lang
 function chercher_module_lang($module, $lang = '') {
-	if ($lang)
+	if ($lang OR $module=='spip')
 		$lang = '_'.$lang;
 
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
