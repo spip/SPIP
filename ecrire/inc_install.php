@@ -27,6 +27,7 @@ function install_dist()
 		install_fin_html();
 		exit;
 	}
+	@unlink(_FILE_META);
 	$fonc = 'install_' . $etape;
 	if (function_exists($fonc))
 		$fonc();
@@ -149,8 +150,6 @@ function install_6()
 	include_ecrire ("inc_acces");
 	ecrire_acces();
 
-	@unlink(_DIR_SESSIONS . 'inc_meta_cache' .  _EXTENSION_PHP);
-	@unlink(_DIR_SESSIONS . 'meta_cache.txt');
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
 		    _FILE_CONNECT_INS . _EXTENSION_PHP)) {
 		copy(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, 

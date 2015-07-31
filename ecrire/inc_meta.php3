@@ -46,11 +46,11 @@ function ecrire_metas() {
 	lire_metas();
 
 	if (is_array($meta)) {
-		$file = _DIR_SESSIONS .'meta_cache.txt';
-		$ok = ecrire_fichier ($file, serialize($meta));
+
+		$ok = ecrire_fichier (_FILE_META, serialize($meta));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
 		  echo "<h4 font color=red>",
-		    _T('texte_inc_meta_1', array('fichier' => $file)),
+		    _T('texte_inc_meta_1', array('fichier' => _FILE_META)),
 		    " <a href='",
 		    generer_url_public('spip_action.php', 'action=test_dirs'),
 		    "'>",

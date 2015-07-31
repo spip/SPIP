@@ -1134,6 +1134,7 @@ function maj_base() {
 
 		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_syndic as id_objet,'9' as id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
+		include_ecrire('inc_meta');
 		lire_metas();
 		ecrire_metas();
 
