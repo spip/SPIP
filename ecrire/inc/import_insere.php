@@ -140,6 +140,7 @@ function import_translate($values, $table, $desc, $request, &$trans) {
 
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
+// http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request, $trans)  {
 	$r = spip_fetch_array(spip_query($q = "SELECT id_groupe, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])), SPIP_NUM);
 	return $r;
@@ -147,12 +148,14 @@ function import_identifie_id_groupe($values, $table, $desc, $request, $trans)  {
 
 // pour un mot le titre est insuffisant, il faut aussi l'identite du groupe.
 // Memoriser ces 2 infos et le signaler a import_translate grace a 1 negatif
+// http://doc.spip.org/@import_identifie_id_mot
 function import_identifie_id_mot($values, $table, $desc, $request, $trans) {
 	return array((0 - $values['id_groupe']), $values['titre']);
 }
 
 // mot de meme titre et de meme groupe ==> identification
 // mot de meme titre et de meme groupe ==> identification
+// http://doc.spip.org/@import_identifie_parent_id_mot
 function import_identifie_parent_id_mot($id_groupe, $titre, $trans, $v)
 {
 	$titre = _q($titre);
