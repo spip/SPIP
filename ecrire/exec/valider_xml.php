@@ -55,7 +55,7 @@ function valider_xml_ok($url, $req_ext, $limit, $rec)
 				if ($files) $ext = 'html';
 			}
 			if ($files) {
-				valider_dir($files, $ext, $url);
+				$res = valider_dir($files, $ext, $url);
 				list($err, $res) = valider_resultats($res, $ext === 'html');
 				$err = ' (' . $err . '/' . count($files) .')';
 			} else {
