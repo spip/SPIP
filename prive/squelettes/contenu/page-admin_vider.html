@@ -5,48 +5,6 @@
 <p><:texte_suppression_fichiers:></p>
 <p><:texte_recalcul_page:></p>
 
+<INCLURE{fond=prive/squelettes/inclure/admin_vider_cache,ajax,env}>
 
-#BOITE_OUVRIR{#CHEMIN_IMAGE{cache-24.png}|balise_img{'',cadre-icone}|concat{#VAL{taille_repertoire_cache}|_T}|wrap{'<h3>'},'simple','titrem'}
-#SET{taille,#REM|taille_du_cache}
-
-<p><b>
-	[(#GET{taille}|intval|>{250000}|non) <:taille_cache_vide:>]
-	[(#GET{taille}|intval|>{250000}|oui)
-		#SET{taille,#GET{taille}|taille_en_octets}
-		<:taille_cache_octets{octets=#GET{taille}}:>
-	]
-</b></p>
-
-#SET{quota,#EVAL{$GLOBALS}|table_valeur{quota_cache}}
-<p>
-	[(#GET{quota}|non) <:taille_cache_infinie:>]
-	[(#GET{quota}|oui)
-		#SET{quota,#GET{quota}|mult{1024}|mult{1024}|taille_en_octets}
-		<:taille_cache_maxi{octets=#GET{quota}}:>
-	]
-	(<:cache_modifiable_webmestre:>)
-</p>
-
-#SET{cache_inhib,#CONFIG{cache_inhib}|sinon{0}|>{#REM|time}|oui}
-
-[(#GET{cache_inhib}|oui)
-<div><strong>Le cache est temporairement desactivé.</strong> [(#BOUTON_ACTION{Reactiver le cache,#URL_ACTION_AUTEUR{purger,reactive_cache,#SELF},ajax link})]
-</div>
-]
-[(#GET{cache_inhib}|non)
-<div>[(#BOUTON_ACTION{Desactiver temporairement le cache,#URL_ACTION_AUTEUR{purger,inhibe_cache,#SELF},ajax link})]
-</div>
-]
-
-#BOITE_PIED
-	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,cache,#SELF},ajax})]
-#BOITE_FERMER
-
-
-#BOITE_OUVRIR{#CHEMIN_IMAGE{image-24.png}|balise_img{'',cadre-icone}|concat{#VAL{info_images_auto}|_T}|wrap{'<h3>'},'simple','titrem'}
-
-[<p>(#REM|afficher_taille_cache_vignettes{})</p>]
-
-#BOITE_PIED
-	[(#BOUTON_ACTION{<:bouton_vider_cache:>,#URL_ACTION_AUTEUR{purger,vignettes,#SELF},ajax})]
-#BOITE_FERMER
+<INCLURE{fond=prive/squelettes/inclure/admin_vider_images,ajax,env}>
