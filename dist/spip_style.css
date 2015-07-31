@@ -78,6 +78,9 @@ span.spip_documents_center { display:block; margin-top:1em; }
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(win_png.htc); }
 
+/* modeles par defaut */
+.spip_modele {float:right; display:block; border:1px dotted grey; width:180px;}
+
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
 

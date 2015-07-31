@@ -429,21 +429,31 @@ function inclure_modele($squelette, $type, $id) {
 		}
 	}
 
-	// special img, doc, emb
-	if (in_array($type, array('img', 'doc', 'emb')))
-		$id_type = 'id_document';
-	else
-		$id_type = 'id_'.$type;
+	// en cas d'echec, si l'objet demande a une url, on cree un petit encadre
+	// avec un lien vers l'objet ; sinon on passe la main au suivant
+	if (!find_in_path($fond.'.html')) {
+		$lien = calculer_url("$type$id", '', 'tout');
+		if ($lien[1] == 'spip_url')
+			return false;
+		else
+			return '<a href="'.$lien[0].'" class="spip_modele'
+				. ($class ? " $class" : '')
+				. '">'.sinon($lien[2], _T('ecrire:info_sans_titre'))."</a>";
+	}
 
-	// en cas d'echec on passe la main au suivant
-	if (!find_in_path($fond.'.html'))
-		return false;
 
+	// Creer le contexte
 	$contexte = array(
-		$id_type => $id,
 		'lang' => $GLOBALS['spip_lang'],
-		'fond' => $fond
+		'fond' => $fond,
+		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte
 	);
+	// Fixer l'identifiant qu'on passe dans #ENV ;
+	// pour le modele <site1> on veut id_syndic => 1
+	// par souci de systematisme on ajoute aussi
+	// id => 1.
+	$contexte[id_table_objet($type)] = $contexte['id'] = $id;
+
 	if ($align)
 		$contexte['align'] = $align;
 
@@ -452,10 +462,11 @@ function inclure_modele($squelette, $type, $id) {
 
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
-	$contexte = array_merge($contexte, 
+	$contexte = array_merge($contexte,
 		creer_contexte_de_modele(explode('|', $squelette))); 
 
-	// Un marqueur de notes unique lie a ce modele
+	// On cree un marqueur de notes unique lie a ce modele
+	$enregistre_marqueur_notes = $GLOBALS['marqueur_notes'];
 	$GLOBALS['marqueur_notes'] = substr(md5(serialize($contexte)),0,8);
 	$GLOBALS['compt_note'] = 0;
 
@@ -465,8 +476,9 @@ function inclure_modele($squelette, $type, $id) {
 	// Si le modele n'a pas affiche ses notes, les supprimer (elles *doivent*
 	// etre dans le cache du modele, autrement elles ne seraient pas prises en
 	// compte a chaque calcul d'un texte contenant un modele, mais seulement
-	// quand le modele serait calcule)
+	// quand le modele serait calcule, et on aurait des resultats incoherents)
 	$GLOBALS['les_notes'] = '';
+	$GLOBALS['marqueur_notes'] = $enregistre_marqueur_notes;
 
 	$compteur--;
 	return $retour;
