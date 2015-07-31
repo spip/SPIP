@@ -50,7 +50,21 @@ function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
-	
+		
+/*	// et les textarea
+	$regexp_echap_cadre = "/<\?((.*?))>/si";
+	$source = "php";
+
+	while (preg_match($regexp_echap_cadre, $letexte, $regs)) {
+		$num_echap++;
+		
+		$les_echap[$num_echap] = $regs[0];
+
+		$pos = strpos($letexte, $regs[0]);
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+			.substr($letexte,$pos+strlen($regs[0]));
+	}*/
+		
 	return array($letexte, $les_echap);
 }
 
@@ -74,7 +88,7 @@ function xhtml ($buffer) {
 		tidy_setopt('wrap', 0);
 		tidy_setopt('indent-spaces', 4);
 		tidy_setopt('output-xhtml', true);
-		tidy_setopt('add-xml-decl', true);
+		tidy_setopt('add-xml-decl', false);
 		tidy_setopt('indent', 5);
 		tidy_setopt('show-body-only', false);
 		tidy_setopt('quote-nbsp', false);
@@ -83,6 +97,9 @@ function xhtml ($buffer) {
 	    tidy_clean_repair();
 	    $tidy = tidy_get_output();
 	    $tidy = echappe_retour($tidy, $les_echap, "xhtml");
+	    // En Latin1, tidy ajoute une declaration XML (malgre add-xml-decl a false)
+	    // il faut le supprimer pour eviter interpretation PHP provoquant une erreur
+	    $tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {

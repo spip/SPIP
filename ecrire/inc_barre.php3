@@ -10,8 +10,6 @@ function test_barre() {
 	global $HTTP_UA_OS, $browser_name, $browser_version, $browser_description, $browser_rev;
 	global $xhtml;
 	
-	if ($xhtml) return false;
-
 	if ($browser_name == '') verif_butineur();
 
 	if (
