@@ -74,9 +74,9 @@ function calculer_boucle($id_boucle, &$boucles)
 	       ('calcul_index_forum(' . 
 # Retournera 4 [$SP] mais force la demande du champ au serveur SQL
 		index_pile($id_boucle, 'id_article', $boucles) . ',' .
-		index_pile($id_boucle, 'id_breve', $boucles) . ',' .
-		index_pile($id_boucle, 'id_syndic', $boucles) . ',' .
-		index_pile($id_boucle, 'id_rubrique', $boucles) . ')')) .
+		index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
+		index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
+		index_pile($id_boucle, 'id_syndic', $boucles) .  ')')) .
 	      '] = 1;';
 	  }
 	$debut =

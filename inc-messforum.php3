@@ -156,7 +156,7 @@ if ($validation_finale)
 	    if ($statut != 'publie')
 	      applique_invalideur(array($var_cache));
 	    else {
-	      include_local('inc-calcul_mysql3.php3');
+	      include_local('inc-calcul_mysql3.php');
 	      suivre_invalideur("id_forum='" .
 				calcul_index_forum($forum_id_article,
 						   $forum_id_breve,
