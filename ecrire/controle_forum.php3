@@ -257,7 +257,7 @@ $result_forum = spip_query("
 SELECT	*
 FROM	spip_forum
 WHERE " . $query_forum . "
-ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb"
+ORDER BY date_heure DESC LIMIT $limitdeb OFFSET  $limitnb"
 );
 
 while ($row = spip_fetch_array($result_forum)) {

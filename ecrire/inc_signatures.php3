@@ -25,7 +25,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 	$request = spip_query("SELECT * FROM spip_signatures " .
 			      ($where ? " WHERE $where" : "") .
 			      ($order ? " ORDER BY $order" : "") .
-			      " LIMIT " . ($debut ? "$debut," : "") . $limit);
+			      " LIMIT " . ($debut ? "$debut OFFSET " : "") . $limit);
 
  	while($row=spip_fetch_array($request)){
 		$id_signature = $row['id_signature'];

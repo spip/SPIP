@@ -1030,13 +1030,13 @@ function executer_une_syndication() {
 
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue
-	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication IN ('sus','off') AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
+	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication IN ('sus','off') AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0 OFFSET 1"))) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'off');
 	}
 
 	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
-	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
+	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0 OFFSET 1"))) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'sus');
 	}

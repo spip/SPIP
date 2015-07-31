@@ -238,7 +238,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	if ($articles_versions) {
 		include("lab_revisions.php");
 		if  ($new != 'oui') {
-			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
+			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0 OFFSET 1";
 			if (!spip_num_rows(spip_query($query))) {
 				spip_log("version initiale de l'article $id_article");
 				$select = join(", ", $champs);
@@ -622,7 +622,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 //
 
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.id_rubrique='$id_rubrique' AND (articles.statut = 'publie' OR articles.statut = 'prop') AND articles.id_article != '$id_article' ".
-			" ORDER BY articles.date DESC LIMIT 0,30");
+			" ORDER BY articles.date DESC LIMIT 0 OFFSET 30");
 		if (spip_num_rows($vos_articles) > 0) {
 			echo "<div>&nbsp;</div>";
 			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -1588,7 +1588,7 @@ if ($total > $total_afficher) {
 
 
 
-$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut,$total_afficher";
+$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut OFFSET $total_afficher";
 $result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 

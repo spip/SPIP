@@ -199,7 +199,7 @@ function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	SELECT	*
 	FROM	spip_forum
 	WHERE " . $query_forum . "
-	ORDER BY date_heure DESC LIMIT 0,20"
+	ORDER BY date_heure DESC LIMIT 0 OFFSET 20"
 	);
 
 	while ($t = spip_fetch_array($result_forum)) {
@@ -272,7 +272,7 @@ function rss_suivi_messagerie($a) {
 	if ($messages_vus) {
 		$s = spip_query("SELECT * FROM spip_forum WHERE id_message
 		IN (".join(',', $messages_vus).")
-		ORDER BY date_heure DESC LIMIT 0,10");
+		ORDER BY date_heure DESC LIMIT 0 OFFSET 10");
 
 		while ($t = spip_fetch_array($s)) {
 			$item = array(
@@ -303,7 +303,7 @@ function rss_a_suivre($a) {
 
 function rss_articles($critere) {
 	$s = spip_query("SELECT * FROM spip_articles WHERE $critere
-	ORDER BY date DESC LIMIT 0,10");
+	ORDER BY date DESC LIMIT 0 OFFSET 10");
 	while ($t = spip_fetch_array($s)) {
 		$auteur = spip_fetch_array(spip_query("SELECT
 			auteurs.nom AS nom, auteurs.email AS email
@@ -331,7 +331,7 @@ function rss_articles($critere) {
 
 function rss_breves($critere) {
 	$s = spip_query("SELECT * FROM spip_breves WHERE $critere
-	ORDER BY date_heure DESC LIMIT 0,10");
+	ORDER BY date_heure DESC LIMIT 0 OFFSET 10");
 	while ($t = spip_fetch_array($s)) {
 		$item = array(
 			'title' => typo($t['titre']),
@@ -351,7 +351,7 @@ function rss_breves($critere) {
 
 function rss_sites($critere) {
 	$s = spip_query("SELECT * FROM spip_syndic WHERE $critere
-	ORDER BY date DESC LIMIT 0,10");
+	ORDER BY date DESC LIMIT 0 OFFSET 10");
 	while ($t = spip_fetch_array($s)) {
 		$item = array(
 			'title' => typo($t['titre']." ".$t['url_site']),

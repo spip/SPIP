@@ -61,7 +61,7 @@ if ($options == 'avancees' AND $connect_statut == '0minirezo') {
 }
 
 afficher_syndic_articles(_T('titre_dernier_article_syndique'),
-                "SELECT * FROM spip_syndic_articles ORDER BY date DESC LIMIT 0,50", 'afficher site');
+			 "SELECT * FROM spip_syndic_articles ORDER BY date DESC LIMIT 0 OFFSET 50",  'afficher site');
 
 fin_page();
 

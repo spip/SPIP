@@ -176,23 +176,23 @@ if (!$adresse_site) {
 
 
 function tester_rubrique_vide($id_rubrique) {
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 0,1";
+	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 0 OFFSET 1";
 	list($n) = spip_fetch_array(spip_query($query));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 0,1";
+	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 0 OFFSET 1";
 	list($n) = spip_fetch_array(spip_query($query));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
+	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0 OFFSET 1";
 	list($n) = spip_fetch_array(spip_query($query));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0 OFFSET 1";
 	list($n) = spip_fetch_array(spip_query($query));
 	if ($n > 0) return false;
 
-	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 0,1";
+	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 0 OFFSET 1";
 	list($n) = spip_fetch_array(spip_query($query));
 	if ($n > 0) return false;
 

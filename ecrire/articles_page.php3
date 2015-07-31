@@ -21,7 +21,7 @@ debut_gauche();
 // Afficher le bouton de creation d'article
 //
 
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0 OFFSET 1";
 $result = spip_query($query);
 
 if (spip_num_rows($result) > 0) {

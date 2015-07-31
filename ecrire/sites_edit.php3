@@ -18,7 +18,7 @@ include_ecrire ("inc_sites.php3");
 $proposer_sites = lire_meta("proposer_sites");
 
 function premiere_rubrique(){
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 0,1";
+ 	$query="SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 0 OFFSET 1";
  	$result=spip_query($query);
 
 	while($row=spip_fetch_array($result)){

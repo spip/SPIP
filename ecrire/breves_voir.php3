@@ -308,7 +308,7 @@ echo "</div>";
 echo "<P align='left'>";
 
 
-$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
+$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0 OFFSET 20";
 $result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 

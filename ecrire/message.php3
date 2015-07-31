@@ -167,7 +167,7 @@ function http_afficher_forum_perso($id_message, $titre)
 	icone(_T('icone_poster_message'), "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 	echo "</div>\n<p align='left'>";
 
-	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
+	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0 OFFSET 20";
 	afficher_forum(spip_query($query_forum), $forum_retour);
 	echo "\n</p>";
 }
