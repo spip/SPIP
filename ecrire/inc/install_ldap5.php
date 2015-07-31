@@ -20,7 +20,11 @@ function inc_install_ldap5()
 	// simuler ecrire_meta/s pour pouvoir sauver le statut
 	// car _FILE_CONNECT est defa a False a ce moment.
 
-	include_spip('inc/meta');
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+	else
+		redirige_par_entete(generer_url_ecrire('install'));
+
 	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('ldap_statut_import', " . spip_abstract_quote($statut_ldap) . " )");
 	@unlink(_FILE_META);
 
