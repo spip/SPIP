@@ -343,7 +343,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_gauche_auteurs' => 'Aqui, você encontra todos os autores do site.
 Os status dos autores é indicado pela côr dos ícones (administrador = verde; redator = amarelo).',
 	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao site, são indicados por um ícone azul;
-os autores excluídos por uma lixeira.', # MODIF
+os autores excluídos por um ícone cinza.',
 	'info_gauche_messagerie' => 'O sistema interno de mensagens permite a troca de mensagens entre redatores, a criação de lembretes (para seu uso pessoal) ou de exibir anúncios na página de entrada da área privada (se você fôr administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é zerada a cada 24 horas.',
@@ -851,8 +851,8 @@ Agora é necessário atualizar a base de dados do site.',
 	'texte_modifier_article' => 'Editar a matéria:',
 	'texte_moteur_recherche_active' => '<b>O motor de busca foi ativado.</b> Use este comando se quiser proceder a uma reindexação rápida (após restauração de uma cópia de segurança, por exemplo). Note que os documentos modificados de modo normal (através da interface do SPIP) são automaticamente reindexados: este comando só tem utilidade pontual.',
 	'texte_moteur_recherche_non_active' => 'O motor de busca não está ativado.',
-	'texte_multilinguisme' => 'Se você deseja gerar matérias em diversos idiomas, com uma navegação complexa, você pode incluir um menu de seleção de idioma nas matérias e/ou nas seções, de acordo com a organização do seu site.', # MODIF
-	'texte_multilinguisme_trad' => 'Você pode, igualmente, ativar o sistema de gerenciamento de links entre as diferentes traduções de uma matéria.', # MODIF
+	'texte_multilinguisme' => 'Se você deseja gerar objetos em diversos idiomas, com uma navegação complexa, você pode incluir um menu de seleção de idioma nesses objetos, de acordo com a estrutura do seu site.',
+	'texte_multilinguisme_trad' => 'Você pode, igualmente, ativar um sistema de gerenciamento de links entre as diferentes traduções em certos objetos.',
 	'texte_non_compresse' => '<i>nã compactado</i> (seu servidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
 	'texte_nouvelle_version_spip_1' => 'Você instalou uma nova versão do SPIP.',
