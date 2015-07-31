@@ -1,23 +1,27 @@
 <div class="formulaire_spip formulaire_recherche">
-<form action="[(#ENV{action})]" method="post"><div>
-	#ACTION_FORMULAIRE
+<form action="[(#ENV{action})]" method="get"><div>
+	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<label for="#ENV{id,recherche}"><:info_rechercher_02:></label>
+	<label for="#ENV{id_champ,recherche}"><:info_rechercher_02:></label>
 	<input type="text"
 				 class="text[(#ENV{recherche}|oui) cancelable]"
 				 size="10"
 				 name="recherche"
-				 id="#ENV{id,recherche}"[ value="(#ENV{recherche}|sinon{<:info_rechercher:>})"]
+				 id="#ENV{id_champ,recherche}"[ value="(#ENV{recherche}|sinon{<:info_rechercher:>})"]
 	[(#ENV{recherche}|non) onfocus="if(!$(this).attr('data-done')){$(this).val('');$(this).attr('data-done','1');}"]
-	/><input type='image'
-					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
-					 name='submit'
-					 class="image"
-					 alt='<:info_rechercher|attribut_html:>' />[<a
+	/>[<a
 	(#ENV{recherche}|oui)
-		class="cancel"
-		href="#ENV{action}"
-		onclick="$(this).siblings('input.text').val('').siblings('input.image').click();return false;"
-		title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{alt,<:annuler_recherche:>})]</a>]
+		class="cancel[ (#ENV{class,''})]"
+		href="[(#ENV{action}|parametre_url{'recherche',''})]"
+		onclick="$(this).siblings('input.text').val('')"
+		title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN_IMAGE{fermer-16.png}
+	|balise_img
+	|inserer_attribut{alt,<:annuler_recherche:>})]</a>]<input type='image'
+					 src='[(#CHEMIN_IMAGE{rechercher-20.png})]'
+					 class="image"
+					 alt='<:info_rechercher|attribut_html:>'
+					 onclick="var a=$(this).siblings('a.refresh');a.attr('href',parametre_url(a.attr('href'),'recherche',$(this).siblings('input.text').val())).followLink();return false;"
+	/><a class="none[ (#ENV{class,''})] refresh" href="[(#ENV{action}|parametre_url{'recherche',''})]"><:info_rechercher:></a>
 </div></form>
+
 </div>
