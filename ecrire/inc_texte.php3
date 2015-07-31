@@ -930,7 +930,7 @@ function traiter_raccourcis($letexte) {
 	//
 	// Notes de bas de page
 	//
-	$regexp = ',\[\[(.*?)\]\],ms';
+	$regexp = ', *\[\[(.*?)\]\],ms';
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$note_source = $regs[0];
