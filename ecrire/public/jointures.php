@@ -93,12 +93,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
 	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
-		if ($pk = $a[1]['key']['PRIMARY KEY']) {
-			$id_primary = $desc['key']['PRIMARY KEY'];
-			if (is_array($col)) $col = implode(', *',$col); // cas id_objet, objet
-			$pk = (preg_match("/^$id_primary, *$col$/", $pk) OR
-			       preg_match("/^$col, *$id_primary$/", $pk));
-		}
+		$pk = nogroupby_if($desc, $a[1], $id_primary, $col);
 	}
 
   // la clause Group by est en conflit avec ORDER BY, a completer
@@ -117,6 +112,18 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	return "L$n";
   }
 
+// condition suffisante pour qu'un Group-By ne soit pas necessaire
+// A ameliorer, notamment voir si calculer_select ne pourrait pas la reutiliser
+// lorsqu'on sait si le critere conditionnel est finalement present
+function nogroupby_if($depart, $arrivee, $id_primary, $col)
+{
+	$pk = $arrivee['key']['PRIMARY KEY'];
+	if (!$pk) return false;
+	$id_primary = $depart['key']['PRIMARY KEY'];
+	if (is_array($col)) $col = implode(', *',$col); // cas id_objet, objet
+	return (preg_match("/^$id_primary, *$col$/", $pk) OR
+		preg_match("/^$col, *$id_primary$/", $pk));
+}
 
 // http://doc.spip.org/@liste_champs_jointures
 function liste_champs_jointures($nom,$desc,$primary=false){
@@ -180,16 +187,12 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 	// enlever les cles d'arrivee exclues par l'appel
 	$akeys = array_diff($akeys,$milieu_exclus);
 
-
 	// cles candidates au depart
 	$keys = liste_champs_jointures($dnom,$ddesc);
 	// enlever les cles dde depart exclues par l'appel
 	$keys = array_diff($keys,$milieu_exclus);
 	
-	$v = false;
-	if ($keys){
-		$v = array_intersect(array_values($keys), $akeys);
-	}
+	$v = !$keys ? false : array_intersect(array_values($keys), $akeys);
 
 	if ($v)
 		return array(array($dnom, array($adesc['table'],$adesc), array_shift($v)));
@@ -200,7 +203,8 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		// id_objet,objet
 		// si oui on la prend
 		foreach($akeys as $key){
-			if (is_array($v = decompose_champ_id_objet($key))){
+			$v = decompose_champ_id_objet($key);
+			if (is_array($v)){
 				$objet = array_shift($v);// objet,'article'
 				array_unshift($v,$key); // id_article,objet,'article'
 				array_unshift($v,$objet); // id_objet,id_article,objet,'article'

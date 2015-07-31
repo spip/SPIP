@@ -580,11 +580,11 @@ function calculer_select ($select = array(), $from = array(),
 	$menage = false;
 	foreach($where as $k => $v) { 
 		if (is_array($v)){
-			if ((count($v)>=2) && ($v[0]=='REGEXP') && ($v[2]=="'.*'")) $v= false;
-			elseif ((count($v)>=2) && ($v[0]=='LIKE') && ($v[2]=="'%'")) $v= false;
-			elseif ($v[0]) $v = $v[0];
-		}
-		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
+			if ((count($v)>=2) && ($v[0]=='REGEXP') && ($v[2]=="'.*'")) $op= false;
+			elseif ((count($v)>=2) && ($v[0]=='LIKE') && ($v[2]=="'%'")) $op= false;
+			else $op = $v[0] ? $v[0] : $v;
+		} else $op = $v;
+		if ((!$op) OR ($op==1) OR ($op=='0=0')) {
 			unset($where[$k]);
 			$menage = true;
 		}
@@ -636,7 +636,7 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
 			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
-			$afrom[$t][$cle] = array(
+			$afrom[$t][$cle] = array("\n" .
 				(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN",
 				$from[$cle],
 				"AS $cle",
@@ -701,18 +701,7 @@ function calculer_select ($select = array(), $from = array(),
 	    $groupby = remplacer_jointnul($t, $groupby, $e);
 	    $orderby = remplacer_jointnul($t, $orderby, $e);
 	  }
-  	
-	  // reinjecter les jointures dans le from, et dans l'ordre qui va bien
-	  $from_synth = array();
-	  foreach($from as $k=>$v){
-	  	$from_synth[$k]=$from[$k];
-	  	if (isset($afrom[$k])) {
-	  		foreach($afrom[$k] as $kk=>$vv) $afrom[$k][$kk] = implode(' ',$afrom[$k][$kk]);
-	  		$from_synth["$k@"]= implode(' ',$afrom[$k]);
-	  		unset($afrom[$k]);
-	  	}
-	  }
-	  $from = $from_synth;
+	  $from = reinjecte_joint($afrom, $from);
 	}
 
 	$GLOBALS['debug']['aucasou'] = array ($table, $id, $serveur);
@@ -736,6 +725,20 @@ function calculer_jointnul($cle, $exp, $equiv='')
 		}
 		return false;
 	}
+}
+
+function reinjecte_joint($afrom, $from)
+{
+	  $from_synth = array();
+	  foreach($from as $k=>$v){
+	  	$from_synth[$k]=$from[$k];
+	  	if (isset($afrom[$k])) {
+	  		foreach($afrom[$k] as $kk=>$vv) $afrom[$k][$kk] = implode(' ',$afrom[$k][$kk]);
+	  		$from_synth["$k@"]= implode(' ',$afrom[$k]);
+	  		unset($afrom[$k]);
+	  	}
+	  }
+	  return $from_synth;
 }
 
 // http://doc.spip.org/@remplacer_jointnul
