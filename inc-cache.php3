@@ -35,10 +35,7 @@ function nettoyer_uri() {
 // la fonction retire_cache()
 //
 function generer_nom_fichier_cache($contexte='', $fond='') {
-	global $delais;
 	global $flag_gz;
-
-	if ($delais == 0) return '';
 
 	if (!$contexte) {
 		$fichier_requete = nettoyer_uri();

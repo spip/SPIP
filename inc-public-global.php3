@@ -198,7 +198,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
 	global $flag_preserver, $flag_dynamique, $lastmodified;
-	global $var_preview, $var_mode;
+	global $var_preview, $var_mode, $delais;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
@@ -218,7 +218,10 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	}
 
 	// Calculer le chemin putatif du cache
-	$chemin_cache = generer_nom_fichier_cache('', $fond);
+	if ($delais > 0)
+		$chemin_cache = generer_nom_fichier_cache('', $fond);
+	else
+		$chemin_cache = '';
 
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
@@ -304,7 +307,10 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 
 	$contexte_inclus['fond'] = $fond;
 
-	$chemin_cache = generer_nom_fichier_cache($contexte_inclus, $fond);
+	if ($delais_inclus > 0)
+		$chemin_cache = generer_nom_fichier_cache($contexte_inclus, $fond);
+	else
+		$chemin_cache = '';
 
 	// Peut-on utiliser un fichier cache ?
 	determiner_cache($delais_inclus, $use_cache, $chemin_cache);
