@@ -44,6 +44,7 @@ function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_m
 	$login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']));
 	if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'"))) {
 		$lang = $row['lang'];
+		include_ecrire ("inc_lang.php3");
 		lang_select($lang);
 	}
 
