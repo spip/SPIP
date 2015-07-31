@@ -659,23 +659,23 @@ function chemin($file, $dirname='', $include=false){
 function find_in_path ($file, $dirname='', $include=false) {
 	static $files=array(), $dirs=array();
 
+	if (isset($files[$dirname][$file])) {
+		if ($include) include_once $files[$dirname][$file];
+		return  $files[$dirname][$file];
+	}
 	$a = strrpos($file,'/');
 	if ($a !== false) {
 		$dirname .= substr($file, 0, ++$a);
 		$file = substr($file, $a);
 	}
 
-	if (isset($files[$dirname][$file])) {
-		if ($include) include_once $files[$dirname][$file];
-		return  $files[$dirname][$file];
-	}
 	foreach(creer_chemin() as $dir) {
 		if (!isset($dirs[$a = $dir . $dirname]))
 			$dirs[$a] = (is_dir($a) || !$a) ;
 		if ($dirs[$a]) {
 			if (is_readable($a .= $file)) {
 				if ($include) include_once $a;
-				return $files[$dirname][$file] = $a;
+				return $files[$dirname][$file] = $files[''][$dirname . $file] = $a;
 			}
 		}
 	}
