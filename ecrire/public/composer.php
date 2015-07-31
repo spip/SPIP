@@ -504,6 +504,7 @@ function calculer_select ($select = array(), $from = array(),
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
+		OR strpos($sfrom, "$cle.")
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $where))
