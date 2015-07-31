@@ -48,7 +48,7 @@ if (defined('_INC_PUBLIC')) {
 	if ($action = _request('action')) {
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
-		if ($redirect) redirige_par_entete($redirect);
+		if ($redirect) redirige_par_entete(urldecode($redirect));
 		exit;
 	}
 

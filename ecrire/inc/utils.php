@@ -971,7 +971,9 @@ function spip_initialisation() {
 	define('_AUTH_USER_FILE', '.htpasswd');
 	define('_SPIP_DUMP', 'dump@stamp@.xml');
 
-	define('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
+	define('_DOCTYPE_ECRIRE', 
+	       // "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
+	       "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
 
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
 	// le script index.php

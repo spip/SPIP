@@ -103,24 +103,24 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 {
 	if (!$ids) {
-		return "<B>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</B><BR />";
+		return "<b>"._T('texte_aucun_resultat_auteur', array('cherche_auteur' => $cherche_auteur)).".</b><br />";
 	}
 	elseif ($ids == -1) {
-		return "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR />";
+		return "<b>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</b><br />";
 	}
 	elseif (preg_match('/^\d+$/',$ids)) {
 
 		$row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
-		return "<B>"._T('texte_ajout_auteur')."</B><BR /><UL><LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($row['nom'])."</FONT></B></UL>";
+		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><font face='Verdana,Arial,Sans,sans-serif' size='2'><b><font size='3'>".typo($row['nom'])."</font></b></ul>";
 	}
 	else {
 		$ids = preg_replace('/[^0-9,]/','',$ids); // securite
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($ids) ORDER BY nom");
 
-		$res = "<B>"
+		$res = "<b>"
 		. _T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))
-		. "</B><BR />"
-		.  "<UL class='verdana1'>";
+		. "</b><br />"
+		.  "<ul class='verdana1'>";
 		while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
@@ -139,7 +139,7 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 				}
 				$res .= "</li>\n";
 			}
-		$res .= "</UL>";
+		$res .= "</ul>";
 		return $res;
 	}
 }
@@ -170,10 +170,10 @@ function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 
 			$vals[] = bouton_imessage($id_auteur);
 		
-			if ($email_auteur) $vals[] =  "<A href='mailto:$email_auteur'>"._T('email')."</A>";
+			if ($email_auteur) $vals[] =  "<a href='mailto:$email_auteur'>"._T('email')."</a>";
 			else $vals[] =  "&nbsp;";
 
-			if ($url_site_auteur) $vals[] =  "<A href='$url_site_auteur'>"._T('info_site_min')."</A>";
+			if ($url_site_auteur) $vals[] =  "<a href='$url_site_auteur'>"._T('info_site_min')."</a>";
 			else $vals[] =  "&nbsp;";
 
 			$cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"));
@@ -213,12 +213,12 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 
 	return ajax_action_auteur('editer_auteurs', $id_article,'articles', "id_article=$id_article",
 				      (
-			"<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n" .
+			"<span class='verdana1'><b>"._T('titre_cadre_ajouter_auteur')."&nbsp; </b></span>\n" .
 
 			($num > 200 
-			? ("<input type='text' name='cherche_auteur' onClick=$js CLASS='fondl' VALUE='' SIZE='20' />" .
+			? ("<input type='text' name='cherche_auteur' onclick=$js CLASS='fondl' VALUE='' SIZE='20' />" .
 			  "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>\n<input type='submit' value='"._T('bouton_chercher')."' CLASS='fondo' /></span>")
-			: ("<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onChange=$js>" .
+			: ("<select name='nouv_auteur' size='1' style='width:150px;' CLASS='fondl' onchange=$js>" .
 			   articles_auteur_select($result) .
 			   "</select>" .
 			   "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>" .

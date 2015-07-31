@@ -101,16 +101,16 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 		$masque = 
  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
  '<table cellpadding="0" cellspacing="0" border="0" width="100%">' .
- '<tr><td align="$spip_lang_left">' .
+ "<tr><td align='$spip_lang_left'>" .
  '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
  ($possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=$js" .
+ " onclick=$js" .
  ' /> <label for="avec_redac_on">'.
  _T('texte_date_publication_anterieure_nonaffichee').
  '</label>' .
  '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"' .
  (!$possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=$js /> <label for='avec_redac_off'>" .
+ " onclick=$js /> <label for='avec_redac_off'>" .
  _T('bouton_radio_afficher').
  ' :</label> ' .
  afficher_jour($jour_redac, "name='jour_redac' class='fondl' onchange=$js", true) .
@@ -120,7 +120,7 @@ function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
  afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
  afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
  "</div>\n" .
- '</td><td align="$spip_lang_right">' .
+ "</td><td align='$spip_lang_right'>" .
  "<span class='visible_au_chargement' id='valider_date_redac'>" .
  '<input type="submit" class="fondo" value="'.
  _T('bouton_changer').'" />' .
