@@ -272,7 +272,7 @@ function init_codes_langues() {
 	'nl' => "Nederlands",
 	'no' => "norsk",
 	'nb' => "norsk bokm&aring;l",
-	'nn' => "Nynorsk",
+	'nn' => "norsk nynorsk",
 	'oc_lnc' => "&ograve;c lengadocian",
 	'oc_ni' => "&ograve;c ni&ccedil;ard",
 	'oc_prv' => "&ograve;c proven&ccedil;au",
