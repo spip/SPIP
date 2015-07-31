@@ -32,20 +32,12 @@ function liste_des_champs() {
 			'rubrique' => array(
 				'titre' => 8, 'descriptif' => 5, 'texte' => 1
 			),
-			'site' => array(
-				'nom_site' => 5, 'url_site' => 1, 'descriptif' => 3
-			),
 			'auteur' => array(
 				'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
 			),
 			'document' => array(
 				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
 			),
-			'signature' => array(
-				'nom_email' => 2, 'ad_email' => 4,
-				'nom_site' => 2, 'url_site' => 4,
-				'message' => 1
-			)
 
 		)
 	);
