@@ -439,6 +439,7 @@ function autoriser_detruire_dist($faire, $type, $id, $qui, $opt) {
 }
 
 //
+// http://doc.spip.org/@autoriser_auteur_previsualiser_dist
 function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// les admins peuvent "previsualiser" une page auteur
 	if ($qui['statut'] == '0minirezo'
