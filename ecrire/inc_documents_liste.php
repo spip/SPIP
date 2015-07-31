@@ -73,5 +73,4 @@ debut_droite();
 
 fin_page();
 }
-documents_liste_dist();
 ?>
