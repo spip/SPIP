@@ -17,7 +17,7 @@
  * 11px				0.71em
  * 10px				0.65em
  *  9px				0.59em
- * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur IE
+ * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE
  */
 
 /*  ------------------------------------------
@@ -59,8 +59,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	width: 12em;
 }
 
-/*  Blocs du contenu (c-a-d. la colonne principale)
----------------------------------------------- */
+/* Blocs du contenu (c-a-d. la colonne principale) */
 #contenu .contre-encart {
 	float: left;
 	width: 21em;
@@ -73,10 +72,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin-bottom: 1em;
 }
 
-/*  Entete et pied de page
----------------------------------------------- */
-
-/* * Entete */
+/* Entete */
 #entete { width: 100%; }
 #entete #nom_site_spip, #entete a .spip_logos {
 	display: block;
@@ -86,14 +82,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #entete a { text-decoration: none; }
 #entete .formulaire_recherche { float: right; }
 
-/* * Fil d'Ariane */
+/* Fil d'Ariane */
 #hierarchie {
 	clear: both;
 	margin-bottom: 16px;
 	border-top: 2px solid #333;
 	font-size: 0.77em; }
 
-/* * Pied de page */
+/* Pied de page */
 #pied {
 	clear: both;
 	width: 100%;
@@ -103,6 +99,13 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	text-align: center; }
 #pied small { font-size: 0.77em; }
 #pied img { vertical-align: bottom; }
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+
 
 /*  ------------------------------------------
 /*  Habillage des menus et de la navigation
@@ -152,12 +155,12 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Cartouche et titraille
 ---------------------------------------------- */
 .cartouche { margin-bottom: 2em; }
-.cartouche small { font-size: 0.71em; }
 
 .cartouche .titre {
 	font-size: 1.27em;
 	font-weight: bold;
 	color: #000; }
+#contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 
 .cartouche .spip_logos {
 	float: right;
@@ -165,12 +168,11 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin-bottom: 16px; }
 
 .cartouche p { margin: 0; padding: 0; clear: left; }
+.cartouche small { font-size: 0.71em; }
 
 .cartouche .traductions { font-size: 0.71em; }
 .cartouche .traductions p { float: left; }
 .cartouche .traductions li { float: left; margin-left: 1em; }
-
-#contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
 
 
 /*  Mise en forme des textes du contenu
@@ -263,8 +265,6 @@ q, blockquote { font-family: "Bitstream Vera Serif", Georgia, Times, serif; }
 /*  ------------------------------------------
 /*  Habillage specifique du plan du site
 /*  ------------------------------------------ */
-
-#page_plan #contenu {}
 
 #page_plan #contenu h2 {
 	clear: both;
@@ -415,12 +415,6 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 	background: #F4F8F8;
 	padding: 0.4em;
 	font-size: 0.96em; }
-
-/*  ------------------------------------------
-/*  Divers
-/*  ------------------------------------------ */
-.invisible { position: absolute; top: -3000em; height: 1%; }
-.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
 
 /*  ------------------------------------------
 /*  Couleurs des liens
