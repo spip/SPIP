@@ -243,7 +243,7 @@ $sousrequete, $having, $table, $id, $serveur),
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
-// http://doc.spip.org/@sql_fetsel
+// http://doc.spip.org/@sql_getfetsel
 function sql_getfetsel(
 	$select, $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',

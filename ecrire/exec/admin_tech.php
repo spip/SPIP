@@ -208,6 +208,7 @@ function exec_admin_tech_dist()
 	echo fin_gauche(), fin_page();
 }
 
+// http://doc.spip.org/@liste_sauvegardes
 function liste_sauvegardes($key, $fichier, $class, $selected)
 {
 	$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
