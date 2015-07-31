@@ -39,11 +39,13 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 	){
 		$url = str_replace('&amp;', '&', self()); 
 	}
-	return login_explicite($login, $url);
+	return login_explicite($login, $url, true);
 }
 
+// cette fonction est commune a la balise #LOGIN_PUBLIC et #LOGIN_PRIVE
+// elle doit accepter les visiteurs dans le premier cas, mais pas dans le second
 // http://doc.spip.org/@login_explicite
-function login_explicite($login, $cible) {
+function login_explicite($login, $cible, $accepter_visiteurs = false) {
 	global $auteur_session;
 
 	// passer $action dans parametre_url pour avoir une chance que $cible == $action
@@ -65,10 +67,12 @@ function login_explicite($login, $cible) {
 	// sauf si on y est deja
 	if ($auteur_session AND
 	($auteur_session['statut']=='0minirezo'
-	OR $auteur_session['statut']=='1comite')) {
+	OR $auteur_session['statut']=='1comite'
+	OR ($accepter_visiteurs && ($auteur_session['statut']=='6forum')))) {
 		$auth = charger_fonction('auth','inc');
 		$auth = $auth();
-		if ($auth==="") {
+		if (($auth==="")
+		  OR ($accepter_visiteurs && ($auth=='6forum'))) {
 			if ($cible != $action) {
 				if (!headers_sent() AND !$_GET['var_mode']) {
 					include_spip('inc/headers');
@@ -81,7 +85,7 @@ function login_explicite($login, $cible) {
 				return ''; # on est arrive on bon endroit, et logue'...
 		}
 	}
-	
+
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
