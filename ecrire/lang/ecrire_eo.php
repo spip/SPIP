@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_plugin' => 'Aktivigi la kromprogramon',
 	'affichage' => 'Affichage', # NEW
 	'aide_non_disponible' => 'Tiu ĉi parto de la rethelpilo ankoraŭ ne disponeblas en tiu ĉi lingvo.',
-	'annuler_recherche' => 'Annuler la recherche', # NEW
+	'annuler_recherche' => 'Nuligi serĉon',
 	'auteur' => 'Aŭtoro :',
 	'avis_acces_interdit' => 'Malpermesata aliro.',
 	'avis_article_modifie' => 'Atentu, @nom_auteur_modif@ laboris pri tiu artikolo antaŭ @date_diff@ minutoj',
@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     diversajn retejajn misfunkciojn, ktp.
     Ne validigu tiun peton pri importo.<p>Por pli
     da informoj, vidu <a href="@spipnet@">
-                                la dokumentaron pri SPIP</a>.</p>', # MODIF
+                                la dokumentaron pri SPIP</a>.</p>',
 	'avis_espace_interdit' => '<b>Malpermesata aliro</b><div>SPIP jam estas instalita.</div>',
 	'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de la instalitaj datenbazoj.',
 	'avis_lecture_noms_bases_2' => 'Aŭ neniu datenbazo disponeblas, aŭ la funkcio ebliganta listigi datenbazojn estis malaktivigita pro sekuraj kialoj (tio ja okazas ĉe multaj retejoj-gastigantoj).',
@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'en_savoir_plus' => 'En savoir plus', # NEW
 	'entree_adresse_annuaire' => 'Adreso al la dosierujilo',
 	'entree_adresse_email' => 'Via retpoŝtadreso',
-	'entree_adresse_email_2' => 'Adresse email', # NEW
+	'entree_adresse_email_2' => ' Retpoŝtadreso',
 	'entree_base_donnee_1' => 'Adreso de la datenbazo',
 	'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 	'entree_biographie' => 'Mallonga kelkvorta biografio.',
@@ -151,7 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nom_fichier' => 'Bonvolu entajpi la dosieran nomon @texte_compresse@:',
 	'entree_nom_pseudo' => 'Via nomo aŭ via kromnomo',
 	'entree_nom_pseudo_1' => '(Via nomo aŭ via kromnomo)',
-	'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+	'entree_nom_pseudo_2' => 'Nomo aŭ kromnomo',
 	'entree_nom_site' => 'La nomo de via retejo',
 	'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 	'entree_nouveau_passe' => 'Nova pasvorto',
@@ -160,7 +160,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_signature' => 'Subskribo',
 	'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 	'entree_url' => 'Retadreso de via retejo',
-	'entree_url_2' => 'Adresse (URL) du site', # NEW
+	'entree_url_2' => 'Retadreso de la retejo',
 	'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 	'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 	'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -173,12 +173,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_version_manquant' => 'Kromprogramo-versio mankas',
 
 	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
+	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # NEW
 	'htaccess_inoperant' => 'htaccess inopérant', # NEW
 
 	// I
 	'ical_info1' => 'Tiu paĝo prezentas plurajn metodojn por daŭre ricevi informojn pri la vivo de tiu retejo.',
-	'ical_info2' => 'Por pli da informoj pri ĉi ĉiuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.', # MODIF
+	'ical_info2' => 'Por pli da informoj pri ĉi ĉiuj teknikoj, senhezite konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.',
 	'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta ĉiujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesaĝojn : ĝi estas rezervita al vi, pere de persona ŝlosilo, kiun vi ĉiumomente povas modifi ŝanĝante vian pasvorton.',
 	'ical_methode_http' => 'Elŝuti',
 	'ical_methode_webcal' => 'Sinkroniga ĝisdatigo (webcal://)',
@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ical_titre_js' => 'Ĝavaskripto',
 	'ical_titre_mailing' => 'Dissendlisto',
 	'ical_titre_rss' => 'Abonligoj',
-	'icone_accueil' => 'Accueil', # NEW
+	'icone_accueil' => 'Hejmpaĝo',
 	'icone_activer_cookie' => 'Aktivigi la korespond-kuketon',
 	'icone_activite' => 'Activité', # NEW
 	'icone_admin_plugin' => 'Mastrumado de kromprogramoj',
@@ -236,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_activer_cookie' => 'Vi povas aktivigi <b>por-korespondan kuketon</b>. Tio ebligos al vi facile iri de la publika spaco al la privata.',
 	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 	'info_admin_gere_rubriques' => 'Tiu mastrumanto mastrumas la jenajn rubrikojn:',
-	'info_admin_gere_toutes_rubriques' => 'Tiu mastrumanto mastrumas <b>ĉiujn rubrikojn</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Tiu mastrumanto mastrumas <b>ĉiujn rubrikojn</b>.',
 	'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 	'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
@@ -298,7 +298,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_2' => '<sup>a</sup> en @liste@',
 	'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn !',
 	'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
-	'info_compresseur_gzip' => '<b>N. B. :</b> Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@', # MODIF
+	'info_compresseur_gzip' => 'Estas rekomendate antaŭfare kontroli, ĉu via retgastiganto jam ĉiufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon : @testgzip@',
 	'info_compresseur_texte' => 'Se via servilo ne aŭtomate densigas la html-paĝojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la elŝutitaj paĝoj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
 	'info_config_suivi' => 'Se tiu ĉi adreso estas tiu de dissendlisto, indiku ĉi-sube la adreson ĉe kiu la partoprenantoj de la retejo povos registriĝi. Tiu adreso povas esti retligilo (ekz. la paĝo por rete registriĝi en la listo), aŭ retpoŝtadreso kun specifa temo (ekz. <tt>@adresse_suivi@?subject=registrigxi</tt>):',
 	'info_config_suivi_explication' => 'Vi povas aboni la dissendliston de tiu ĉi retejo. Aboninta, vi ricevos per retmesaĝoj la anoncojn pri artikoloj kaj pri fulm-informoj proponitaj por publikigo.',
@@ -309,13 +309,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Via versio :',
 	'info_connexion_base' => 'Dua etapo: <b>Konektiĝo-provo al la datenbazo</b>',
 	'info_connexion_base_donnee' => 'Konektiĝo al via datumbazo',
-	'info_connexion_ldap_ok' => 'La konektiĝo al LDAP sukcesis.</b><p> Vi povas iri al la sekvanta etapo</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>La konektiĝo al LDAP sukcesis.</b><p>Vi povas iri al la sekvanta etapo</p>',
 	'info_connexion_mysql' => 'Via SQL-konektiĝo',
 	'info_connexion_ok' => 'La konektiĝo sukcesis.',
 	'info_contact' => 'Kontakt-adreso',
 	'info_contenu_articles' => 'Enhavo de la artikoloj',
 	'info_contributions' => 'Contributions', # NEW
-	'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)', # MODIF
+	'info_creation_paragraphe' => 'Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.',
 	'info_creation_rubrique' => 'Antaŭ ol skribi artikolojn,<br /> vi kreu almenaŭ po unu rubrikon.<br />',
 	'info_creation_tables' => 'Kreo de la datentabeloj',
 	'info_creer_base' => '<b>Krei</b> novan datenbazon :',
@@ -331,7 +331,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ecrire_article' => 'Antaŭ ol ekhavi la eblon skribi artikolojn, vi devas krei almenaŭ unu rubrikon.',
 	'info_email_envoi' => 'retpoŝtadreso por sendo (nedeviga)',
 	'info_email_envoi_txt' => 'Indiku ĉi tie la adreson uzotan por sendi poŝtmesaĝojn (defaŭlte, la ricev-adreso estos uzata) :',
-	'info_email_webmestre' => 'Retpoŝtadreso de la retejestro (eventuale)', # MODIF
+	'info_email_webmestre' => 'Retpoŝtadreso de la retejestro',
 	'info_entrer_code_alphabet' => 'Entajpu la kodon de la uzenda alfabeto :',
 	'info_envoi_email_automatique' => 'Aŭtomata retleteroj-dissendado',
 	'info_envoyer_maintenant' => 'Sendu nun',
@@ -343,14 +343,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja ĉefartikola aktiveco, SPIP povas transdoni per retmesaĝoj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 	'info_fichiers_authent' => 'Aŭtentokontrolaj dosieroj « .htpasswd »',
 	'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono ; vizitantoj estas invititaj al registriĝo ĉe la publika retejo.',
-	'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
+	'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
+postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun paĝon.</b><p>Ĝi ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan aŭtentigan procezon, kiu
-postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
+postulas disponi je FTP-alirrajto al la retejo.</p>',
 	'info_gauche_auteurs' => 'Vi trovos ĉi tie ĉiujn aŭtorojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 	'info_gauche_auteurs_exterieurs' => 'La eksteraj aŭtoroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo ;
- la aŭtoroj forviŝitaj per bildo de rubujo.', # MODIF
+ la aŭtoroj forviŝitaj per griza piktogramo.',
 	'info_gauche_messagerie' => 'La mesaĝilo ebligas al vi interŝanĝi mesaĝojn inter aŭtoroj, konservi memorigilojn (por via propra uzado) aŭ afiŝi anoncojn ĉe la hejmpaĝo de la privata spaco (se vi estas mastrumanto).',
 	'info_gauche_numero_auteur' => 'AŬTORA NUMERO',
 	'info_gauche_statistiques_referers' => 'Tiu paĝo prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hieraŭ kaj hodiaŭ : tiu listo estas prastatigita ĉiujn 24 horojn.',
@@ -368,7 +368,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_historique_texte' => 'La superrigardo de revizioj ebligas konservi historion de ĉiuj modifoj al la enhavo de artikolo, kaj afiŝi la diferencojn inter la sinsekvaj versioj.',
 	'info_identification_publique' => 'Via publika identeco...',
 	'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante laŭcele bildon.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afiŝiĝas, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la «GD» aŭ «Imagick» modulojn al la teknika repondeculo.</i>', # MODIF
+	'info_image_process2' => 'Se neniu bildo afiŝiĝas, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la «GD» aŭ «Imagick» modulojn al la teknika repondeculo.',
 	'info_images_auto' => 'Bildoj aŭtomate komputitaj',
 	'info_informations_personnelles' => 'Personaj datenoj',
 	'info_inscription_automatique' => 'Aŭtomata registriĝado de novaj redaktantoj',
@@ -435,7 +435,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_nouvel_article' => 'Nova artikolo',
 	'info_nouvelle_traduction' => 'Nova tradukaĵo :',
 	'info_numero_article' => 'ARTIKOLO NUMERO :',
-	'info_obligatoire_02' => '[Deviga]', # MODIF
+	'info_obligatoire_02' => '(deviga)',
 	'info_option_accepter_visiteurs' => 'Permesi registriĝojn de vizitantoj el la publika spaco',
 	'info_option_faire_suivre' => 'Plusendi la mesaĝojn de la forumoj al la aŭtoroj de la artikoloj',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rifuzi registriĝon de vizitantoj',
@@ -451,7 +451,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_passe_trop_court' => 'Pasvorto tro mallonga.',
 	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'Ambaŭ pasvortoj ne samas.',
-	'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj', # MODIF
+	'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj',
 	'info_plus_cinq_car' => 'pli ol 5 signoj',
 	'info_plus_cinq_car_2' => '(Pli ol 5 signoj)',
 	'info_plus_trois_car' => '(Pli ol 3 signoj)',
@@ -476,15 +476,15 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_question_inscription_nouveaux_redacteurs' => 'Ĉu vi akceptas la registriĝadon de novaj redaktantoj ekde
   la publika spaco ? Se vi akceptas tion, la vizitantoj povos registriĝi
   per aŭtomata aliĝilo kaj tiam aliros al la privata spaco por
-  proponi siajn proprajn artikolojn. <blockquote><i>Dum la aliĝo,
+  proponi siajn proprajn artikolojn. <div class="notice">Dum la aliĝo,
   la uzantoj ricevos aŭtomate senditan retmesaĝon kun siaj
   alir-kodoj al la privata spaco. Iuj
   retejgastigantoj malaktivigas la sendadon de retleteroj el siaj
-  serviloj : tiukaze la aŭtomata aliĝo ne eblos.', # MODIF
+  serviloj : tiukaze la aŭtomata aliĝo ne eblos.</div>',
 	'info_question_utilisation_moteur_recherche' => 'Ĉu vi deziras uzi la SPIP-internan serĉilon ?
  (malaktivigi ĝin rapidigas la funkciadon de la sistemo.)',
 	'info_question_vignettes_referer_non' => 'Ne vidigi de kiuj retejoj venas vizitantoj',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+	'info_qui_edite' => '@nom_auteur_modif@ laboris pri tiu ĉi enhavo antaŭ @date_diff@ minutoj',
 	'info_racine_site' => 'Radiko de la retejo',
 	'info_recharger_page' => 'Bonvolu refreŝigi tiun ĉi paĝon post momento.',
 	'info_recherche_auteur_a_affiner' => 'Tro da rezultoj por "@cherche_auteur@"; bonvolu fajnigi la serĉokriteriojn.',
@@ -515,7 +515,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_site_2' => 'retejo :',
 	'info_site_min' => 'retejo',
 	'info_site_reference_2' => 'Referencigita retejo',
-	'info_site_web' => 'RETEJO :', # MODIF
+	'info_site_web' => 'Retejo :',
 	'info_sites' => 'retejoj',
 	'info_sites_lies_mot' => 'La referencigitaj retejoj ligitaj al tiu ĉi ŝlosilvorto',
 	'info_sites_proxy' => 'Uzi prokuran servilon',
@@ -523,7 +523,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_sites_trouves_dans_texte' => 'Retejoj trovitaj (en la teksto)',
 	'info_sous_titre' => 'Subtitolo:',
 	'info_statut_administrateur' => 'Mastrumanto',
-	'info_statut_auteur' => 'Statuso de tiu ĉi aŭtoro :', # MODIF
+	'info_statut_auteur' => 'Statuso de tiu ĉi aŭtoro :',
 	'info_statut_auteur_2' => 'Je suis', # NEW
 	'info_statut_auteur_a_confirmer' => 'Konfirmenda registropeto',
 	'info_statut_auteur_autre' => 'Alia statuso :',
@@ -542,7 +542,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 	'info_texte' => 'Teksto',
 	'info_texte_explicatif' => 'Klariga teksto',
 	'info_texte_long' => '(la teksto estas longa : ĝi aperas do en pluraj partoj kiuj estos rekunigitaj post validigo.)',
-	'info_texte_message' => 'Teksto de via mesaĝo :', # MODIF
+	'info_texte_message' => 'Teksto de via mesaĝo',
 	'info_texte_message_02' => 'Teksto de la mesaĝo',
 	'info_titre' => 'Titolo :',
 	'info_total' => 'totalo :',
@@ -596,8 +596,8 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'install_serveur_hebergeur' => 'Servilo de datumbazo atribuita de la retgastiganto',
 	'install_table_prefix_hebergeur' => 'Prefikso de la tabelo atribuita de la retejgastiganto :',
 	'install_tables_base' => 'Tabeloj de la datumbazo',
-	'install_types_db_connus' => 'SPIP scipovas uzi <b>MySQL</b> (la plej kutime uzatan), <b>PostgreSQL</b> kaj <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Atentu : pluraj kromprogramoj funkcias nur per MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP scipovas uzi <b>MySQL</b> (la plej kutime uzatan) kaj <b>SQLite</b>.',
+	'install_types_db_connus_avertissement' => 'La uzado de <b>PostgreSQL</b> estas ankaŭ proponita kiel eksperimenta',
 	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
 	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 	'intem_redacteur' => 'redaktanto',
@@ -681,12 +681,13 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'lien_trier_nombre_articles' => 'Vicigi laŭ nombro de artikoloj',
 	'lien_trier_statut' => 'Vicigi laŭ statuso',
 	'lien_voir_en_ligne' => 'VIDI ĈERETIGITE :',
-	'logo_article' => 'VINJETO DE LA ARTIKOLO', # MODIF
-	'logo_auteur' => 'VINJETO DE LA AŬTORO', # MODIF
-	'logo_rubrique' => 'VINJETO DE LA RUBRIKO', # MODIF
-	'logo_site' => 'VINJETO DE LA RETEJO', # MODIF
-	'logo_standard_rubrique' => 'LAŬNORMA VINJETO DE RUBRIKOJ', # MODIF
-	'logo_survol' => 'VINJETO POR FLUGRIGARDO', # MODIF
+	'logo_article' => 'Vinjeto de la artikolo',
+	'logo_auteur' => 'Vinjeto de la aŭtoro',
+	'logo_rubrique' => 'Vinjeto de la rubriko',
+	'logo_site' => 'Vinjeto de la retejo
+',
+	'logo_standard_rubrique' => 'Laŭnorma vinjeto de rubrikoj',
+	'logo_survol' => 'Vinjeto por flugrigardo',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Elekto de via datenbazo',
@@ -766,7 +767,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 	'plugins_actif_un' => 'Un plugin activé.', # NEW
 	'plugins_actifs' => '@count@ plugins activés.', # NEW
-	'plugins_actifs_liste' => 'Plugins actifs', # MODIF
+	'plugins_actifs_liste' => 'Aktivaj',
 	'plugins_compte' => '@count@ plugins', # NEW
 	'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 	'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
@@ -803,10 +804,10 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapla dosierujo.',
 	'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapla dosierujo po cirkaŭ <b>@octets@</b> da datenoj.',
 	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.', # MODIF
+	'taille_cache_octets' => 'Memorspaco de la staplo estas nun proksimume @octets@.',
 	'taille_cache_vide' => 'La staplo estas malplena.',
 	'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
-	'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita kun tiu ĉi artikolo (malsupre de la paĝo).', # MODIF
+	'text_article_propose_publication' => 'Artikolo proponita por publikigo.',
 	'texte_acces_ldap_anonyme_1' => 'Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze, necesas difini identecnomon por serĉi informojn en dosierujilo. Plejofte tamen, la sekvantaj tajpujoj povas resti malplenaj.',
 	'texte_admin_effacer_01' => 'Tiu komando forviŝas <i>la tutan</i> enhavon de la datenbazo,
 inkluzive de <i>ĉiuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lanĉi la
@@ -834,7 +835,7 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 	'texte_compte_element' => '@count@ elemento',
 	'texte_compte_elements' => '@count@ elementoj',
 	'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
-	'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto : en ili, vi trovos la ensalutilojn necesajn por konektiĝi al la SQL-servilo.', # MODIF
+	'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto : en ili, vi trovos la ensalutilojn necesajn por konektiĝi al la servilo de datumbazo kiun li proponas.',
 	'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
 	'texte_contenu_articles' => 'Laŭ la modelo adoptita por via retejo, vi povas decidi
   ke certaj elementoj de la artikoloj ne estu uzataj.
@@ -854,17 +855,17 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 	'texte_effacer_base' => 'Forviŝi la SPIP-datenbazon',
 	'texte_effacer_donnees_indexation' => 'Forviŝi la indeksajn datenojn',
 	'texte_effacer_statistiques' => 'Forviŝi statistikojn',
-	'texte_en_cours_validation' => 'La artikoloj kaj fulm-informoj ĉi-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.', # MODIF
+	'texte_en_cours_validation' => 'La enhavoj ĉi-subaj estas proponitaj por publikigo.',
 	'texte_enrichir_mise_a_jour' => 'Vi povas pliriĉigi la enpaĝigon de via teksto uzante « tipografiajn rapidklavojn ».',
 	'texte_fichier_authent' => '<b>Ĉu SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>   kaj <tt>.htpasswd-admin</tt> en dosierujo @dossier@ ?</b><p>
   Tiuj dosieroj ebligas limigi la alirrajton de aŭtoroj
   kaj administrantoj en aliaj lokoj de via retejo
-  (ekzemple, ekstera statistik-programo).<p>
+  (ekzemple, ekstera statistik-programo).</p><p>
   Se tio ne utilas al vi, vi povas lasi tiun opcion
-  je ĝia defaŭlta valoro (neniu dosier-kreo).
-', # MODIF
+  je ĝia defaŭlta valoro (neniu dosier-kreo).</p>
+',
 	'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
-	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas', # MODIF
+	'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro daŭre funkcias, vi povas',
 	'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',
 	'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>) : tio ebligas afiŝadon de tekstoj en ĉiuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn retumilojn.',
 	'texte_jeu_caractere_2' => 'Atentu : tiu agordo ne konvertas tekstojn jam registritajn en la datenbazo.',
@@ -886,13 +887,13 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   de savkopio). Notu ke la dokumentoj normale modifitaj
   (ekde la SPIP-interfaco) estas aŭtomate reindeksitaj:
   tiu ĉi komando estas do nur escepte utila.',
-	'texte_moteur_recherche_non_active' => 'La serĉilo ne estas aktivgita.',
-	'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.', # MODIF
-	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.', # MODIF
+	'texte_moteur_recherche_non_active' => 'La serĉilo ne estas aktivigita.',
+	'texte_multilinguisme' => 'Se vi deziras mastrumi la objektojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la objektojn, konforme al la organizo de via retejo.',
+	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj sur iuj objektoj.',
 	'texte_non_compresse' => '<i>ne densigita</i> (ĉar via servilo ne eltenas tiun funkcion)',
 	'texte_nouveau_message' => 'Nova mesaĝo',
 	'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
-	'texte_nouvelle_version_spip_2' => 'Tiu ĉi nova versio bezonas pli kompletan ĝisdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forviŝi la dosieron @connect@ kaj restarigi la instalprocezon por ĝisdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu : se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ antaŭ ol forviŝi ĝin...)', # MODIF
+	'texte_nouvelle_version_spip_2' => 'Tiu ĉi nova versio bezonas pli kompletan ĝisdatigon ol kutime. Se vi estas retejestro de la retejo, bonvolu forviŝi la dosieron @connect@ kaj restarigi la instalprocezon por ĝisdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu : se vi forgesis viajn konektparametrojn, legu la dosieron @connect@ antaŭ ol forviŝi ĝin...)</p>',
 	'texte_operation_echec' => 'Reiru al antaŭa paĝo, selektu alian datenbazon aŭ kreu novan. Kontrolu la informojn donitajn de via retgastiganto.',
 	'texte_plus_trois_car' => 'pli ol 3 literoj',
 	'texte_plusieurs_articles' => 'Pluraj aŭtoroj trovitaj por"@cherche_auteur@":',
@@ -916,13 +917,13 @@ rekalkuli ununuran paĝon, pasu prefere tra la publika spaco kaj tie uzu la buto
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
 mem.</b><p>
-SQL disponas je ripar-kapablo de siaj
+Via SQL-servilo disponas je ripar-kapablo de siaj
 tabeloj kiam ili estas akcidente difektitaj.
 Vi povas ĉi tie provi riparon;
 en kazo de malsukceso, faru ekrankopion.
-Ĝi eble entenas indicojn pri la misfunkcio...<p>
+Ĝi eble entenas indicojn pri la misfunkcio...</p><p>
 Se la problemo daŭras, kontaktu
-vian retgastiganton.<p>', # MODIF
+vian retgastiganton.</p>',
 	'texte_selection_langue_principale' => 'Vi povas ĉi-sube elekti la « ĉefan lingvon » de la retejo. Tiu elekto ne devigas vin - bonŝance ! - verki viajn artikolojn en la elektita lingvo, sed ebligas determini :
  <ul><li> la defaŭltan formaton de la datenoj en la publika spaco ;</li>
  <li> kian tipografiilon SPIP devas uzi pri tekst-aspektigo ;</li>
@@ -956,14 +957,14 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	'texte_unpack' => 'Elŝuto de la lasta versio',
 	'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan serĉilon,
     vi povas fari serĉprocezojn ĉe retejoj abonligigitaj laŭ du malsamaj manieroj.
-    <br /><img src=\'puce.gif\'> Plej simple
+    <br />- Plej simple
     estas serĉi nur en la titoloj
-    kaj en la priskriboj de la artikoloj. <br /><img src=\'puce.gif\'>
+    kaj en la priskriboj de la artikoloj. <br />-
     La dua metodo, multe pli potenca, ebligas
     al SPIP serĉi ankaŭ en la teksto de la
     referencigitaj retejoj . Se vi referencigas
     retejon, SPIP tiam serĉos
-     en la teksto de la retejo mem.', # MODIF
+     en la teksto de la retejo mem.',
 	'texte_utilisation_moteur_syndiques_2' => 'Tiu metodo devigas SPIP-n regule viziti
     la referencigitajn retejojn.
     Tio povas okazigi iometan malrapidiĝon de
@@ -994,8 +995,8 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 	'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
 	'titre_identite_site' => 'Identité du site', # NEW
-	'titre_langue_article' => 'LINGVO DE LA ARTIKOLO', # MODIF
-	'titre_langue_rubrique' => 'LINGVO DE LA RUBRIKO', # MODIF
+	'titre_langue_article' => 'Lingvo de la artikolo',
+	'titre_langue_rubrique' => 'Lingvo de la rubriko',
 	'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 	'titre_les_articles' => 'LA ARTIKOLOJ',
 	'titre_messagerie_agenda' => 'Mesaĝilo kaj agendo',
@@ -1031,9 +1032,9 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 	'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 	'trad_article_traduction' => 'Ĉiuj versioj de tiu ĉi artikolo :',
 	'trad_deja_traduit' => 'Eraro: ne eblas ligi tiun artikolon al la petita numero.',
-	'trad_delier' => 'Ne plu ligi tiun artikolon al ties tradukoj', # MODIF
+	'trad_delier' => 'Ne plu ligi al ties tradukoj',
 	'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numero :',
-	'trad_new' => 'Skribi novan tradukon de tiu artikolo', # MODIF
+	'trad_new' => 'Skribi novan tradukon',
 
 	// U
 	'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW

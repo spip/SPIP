@@ -307,7 +307,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_conflit_edition_votre_version' => 'Ihre Fassung:',
 	'info_connexion_base' => 'Test der Verbindung zur Datenbank',
 	'info_connexion_base_donnee' => 'Verbindung mit Ihrer Datenbank',
-	'info_connexion_ldap_ok' => 'Die LDAP-Verbindung wurde hergestellt.</b><p> Sie können mit dem nächsten Schritt fortfahren.',
+	'info_connexion_ldap_ok' => 'Die LDAP-Verbindung wurde hergestellt.</b><p> Sie können mit dem nächsten Schritt fortfahren.', # MODIF
 	'info_connexion_mysql' => 'Verbindung zur SQL-Datenbank',
 	'info_connexion_ok' => 'Die Verbindung wurde hergestellt.',
 	'info_contact' => 'Kontakt',

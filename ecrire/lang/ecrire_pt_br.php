@@ -303,7 +303,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_conflit_edition_votre_version' => 'A sua versão:',
 	'info_connexion_base' => 'Teste de conexão com a base',
 	'info_connexion_base_donnee' => 'Conexão à sua base de dados',
-	'info_connexion_ldap_ok' => 'A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>',
+	'info_connexion_ldap_ok' => 'A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>', # MODIF
 	'info_connexion_mysql' => 'Sua conexão SQL',
 	'info_connexion_ok' => 'A conexão foi obtida.',
 	'info_contact' => 'Contato',
