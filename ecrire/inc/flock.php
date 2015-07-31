@@ -114,6 +114,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	return false;
 }
 
+// http://doc.spip.org/@raler_fichier
 function raler_fichier($fichier)
 {
 	include_spip('inc/minipres');
