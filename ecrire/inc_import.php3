@@ -219,7 +219,8 @@ function import_objet_1_2($f, $gz=false) {
 		reset($liens);
 		while (list($type_lien, $t) = each($liens)) {
 			if ($type == 'auteur' OR $type == 'mot' OR $type == 'document')
-				$table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
+				if ($type_lien == 'syndic' OR $type_lien == 'forum') $table_lien = 'spip_'.$type.'s_'.$type_lien;
+				else $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
 			else
 				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
 			$query = "INSERT $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
@@ -257,6 +258,15 @@ function import_objet_0_0($f, $gz=false) {
 		}
 		else if ($is_mot AND $col == 'id_breve') {
 			$breves[] = $value;
+		}
+		else if ($is_mot AND $col == 'id_forum') {
+			$forums[] = $value;
+		}
+		else if ($is_mot AND $col == 'id_rubrique') {
+			$rubriques[] = $value;
+		}
+		else if ($is_mot AND $col == 'id_syndic') {
+			$syndics[] = $value;
 		}
 		else if ($col != 'maj') {
 			$cols[] = $col;
@@ -311,6 +321,20 @@ function import_objet_0_0($f, $gz=false) {
 			reset ($forums);
 			while (list(, $forum) = each($forums)) {
 				$query = "INSERT spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
+				mysql_query($query);
+			}
+		}
+		if ($rubriques) {
+			reset ($rubriques);
+			while (list(, $rubrique) = each($rubriques)) {
+				$query = "INSERT spip_mots_rubriques (id_mot, id_rubrique) VALUES ($id_mot, $id_rubrique)";
+				mysql_query($query);
+			}
+		}
+		if ($syndics) {
+			reset ($syndics);
+			while (list(, $syndic) = each($syndics)) {
+				$query = "INSERT spip_mots_syndic (id_mot, id_syndic) VALUES ($id_mot, $syndic)";
 				mysql_query($query);
 			}
 		}
