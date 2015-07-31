@@ -203,17 +203,20 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       $fonc = trim($match[1]);
       if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
       $res = array($fonc);
-      $args = $suite ;
       // cas du filtre sans argument ou du critere /
-      if (($suite && ($suite[0] != '{'))  || ($fonc  && $fonc[0] == '/'))
-	{ 
+      if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
 	  // si pas d'argument, alors il faut une fonction ou un double |
 	  if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
-	} else {
-	$args = ltrim(substr($suite,1)); 
-	$collecte = array();
-	while ($args && $args[0] != '}') {
+	  $texte = $suite;
+	  if ($fonc) $pointeur_champ->param[] = $res;
+	  // pour les balises avec faux filtres qui boudent ce dur larbeur
+	  $pointeur_champ->fonctions[] = array($fonc, '');
+	  return $result;
+      }
+      $args = ltrim(substr($suite,1)); // virer le '(' initial
+      $collecte = array();
+      while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
 			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
@@ -228,7 +231,6 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		      }   
 		}
 		$arg = $regs[2];
-
 		if (trim($regs[1])) {
 			$champ = new Texte;
 			$champ->texte = $arg;
@@ -273,18 +275,16 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		}
 		if ($args[0] == ',') {
 		  $args = ltrim(substr($args,1));
-		  if ($collecte)
-		    {$res[] = $collecte; $collecte = array();}
+		  if ($collecte) {$res[] = $collecte; $collecte = array();}
 		}
-	}
-	if ($collecte) {$res[] = $collecte; $collecte = array();}
-	$args = substr($args,1);
       }
-      $n = strlen($suite) - strlen($args);
+      if ($collecte) {$res[] = $collecte; $collecte = array();}
+      $suite = substr($args,1);
+      $source = substr($suite, 0, strlen($suite) - strlen($args));
+      $texte = ltrim($suite);
       if ($fonc || count($res) > 1) $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
-      $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
-      $texte = ltrim($args);
+      $pointeur_champ->fonctions[] = array($fonc, $source);
       return $result;
 }
 
@@ -572,6 +572,8 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 		      
 		phraser_args($milieu,"/>","",$all_res,$result);
+		spip_log("boucle $id_boucle " . count($all_res));
+
 		$params = substr($milieu,0,@strpos($milieu,$result->apres));
 		$milieu = $result->apres;
 		$result->apres = "";
