@@ -238,8 +238,14 @@ function afficher_qui_edite($id_objet,$objet){
 	include_spip('inc/drapeau_edition');
 	$modif = mention_qui_edite($id_objet, $objet);
 	if (!$modif) return $qui[$objet][$id_objet] = '';
+
+	include_spip('base/objets');
+	$infos = lister_tables_objets_sql(table_objet_sql($objet));
+	if (isset($infos['texte_signale_edition']))
+		return $qui[$objet][$id_objet] = _T($infos['texte_signale_edition'], $modif);
+	
 	// TODO -- _L("Fil a travaille sur cet objet il y a x minutes")
-	return $qui[$objet][$id_objet] = _T('texte_travail_article', $modif);
+	return $qui[$objet][$id_objet] = _L('@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', $modif);
 }
 
 /**

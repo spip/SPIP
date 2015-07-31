@@ -45,6 +45,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_modifier' => 'icone_modifier_article',
 				'texte_objets' => 'articles',
 				'texte_objet' => 'article',
+				'texte_signale_edition' => 'texte_travail_article',
 				'info_aucun_objet'=> 'info_aucun_article',
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
