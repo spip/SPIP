@@ -24,8 +24,6 @@ function auth_ldap_dist ($login, $pass) {
 		return false;
 
 	#spip_log("ldap $login " . ($pass ? "mdp fourni" : "mdp absent"));
-	// Securite contre un serveur LDAP laxiste
-	if (!$login || !$pass) return array();
 
 	// Utilisateur connu ?
 	if (!($dn = auth_ldap_search($login, $pass))) return array();
@@ -44,9 +42,24 @@ function auth_ldap_dist ($login, $pass) {
 	return array();
 }
 
-// http://doc.spip.org/@auth_ldap_search
-function auth_ldap_search($login, $pass=''){
-	$ldap = spip_connect_ldap();
+/**
+ * Retrouver un login, et verifier son pass si demande par $checkpass
+ *
+ * @param string $login
+ * @param sring $pass
+ * @param bool $checkpass
+ * @return string
+ *	le login trouve ou chaine vide si non trouve
+ */
+function auth_ldap_search($login, $pass, $checkpass=true){
+	// Securite contre un serveur LDAP laxiste
+	if (!strlen($login) OR ($checkpass AND !strlen($pass)) )
+		return '';
+
+	// verifier la connexion
+	if (!$ldap = spip_connect_ldap())
+		return '';
+
 	$ldap_link = $ldap['link'];
 	$ldap_base = $ldap['base'];
 
@@ -62,13 +75,13 @@ function auth_ldap_search($login, $pass=''){
 			// (on veut un attribut unique)
 		spip_log("als $att " . @$info[0]['dn']);
 		if (is_array($info) AND $info['count'] == 1) {
-			if (!$pass) return $login;
+			if (!$checkpass) return $login;
 			$dn = $info[0]['dn'];
 			if (@ldap_bind($ldap_link, $dn, $pass)) return $dn;
 		}
 	}
 
-	if ($pass AND !isset($dn)) {
+	if ($checkpass AND !isset($dn)) {
 		// Si echec, essayer de deviner le DN
 		foreach($GLOBALS['ldap_login_names'] as $att) {
 			$dn = "$att=$login_search, $ldap_base";
@@ -134,10 +147,9 @@ function auth_ldap_inserer($dn, $statut, $login='', $desc='')
  * @param string $login
  * @return string
  */
-
 function auth_ldap_retrouver_login($login)
 {
-	return auth_ldap_search($login) ? $login : '';
+	return auth_ldap_search($login,'',false) ? $login : '';
 }
 
 ?>
