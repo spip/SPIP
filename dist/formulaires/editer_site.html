@@ -1,0 +1,59 @@
+<div class='formfx editer_site'>
+	<br class='spacer' />
+	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_syndic' value='#ENV{id_syndic}' />
+		<input type='hidden' name='syndication_old' value="#ENV**{syndication}" />
+	  <fieldset>
+	  <ol class="formfx">
+	  	[(#ENV{new}|=={oui}|?{' '})
+	  	[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|?{' '}})	  
+		  <li><fieldset><legend><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' /></legend><ol><li>
+			<label for='url_auto'><:texte_referencement_automatique:></label>
+			<input type="text" name="url_auto" id="url_auto" class='fondl' size='40' value="http://" />
+			</li></ol>
+		  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_ajouter:>' /></div>
+			</fieldset>
+			<b><:texte_non_fonction_referencement:></b></li>
+			]]
+	    <li class="gauche obligatoire">
+	      <label for="nom_site"><:info_nom_site_2:></label>
+	      <input type='text' name='nom_site' id='nom_site' class='formo' value="[(#ENV**{nom_site})]" />
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
+	    </li>
+	    <li class="gauche obligatoire">
+	      <label for="url_site"><:entree_adresse_site:></label>
+	      <input type='text' name='url_site' id='url_site' class='formo' value="[(#ENV**{url_site})]" />
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+	    </li>
+	    [<li>(#VAL{titre_cadre_interieur_rubrique}|_T
+	    |chercher_rubrique{#ENV{id_rubrique},'site',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint}})</li>]
+	    <li class="haut">
+	      <label for="descriptif"><:entree_description_site:></label>
+	      <textarea name='descriptif' id='descriptif' class='forml' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+	    </li>
+	    [(#ENV**{config}|table_valeur{activer_syndic}|=={non}|?{'',' '})
+	    <li><fieldset><legend><img src='#CHEMIN{feed.png}' /></legend><ol>
+	    <li><input type='radio' name='syndication' value='non' id='syndication_non'[ (#ENV{syndication}|=={non}|?{'checked="checked"'})] /><label for='syndication_non'><:bouton_radio_non_syndication:></label></li>
+	    <li><input type='radio' name='syndication' value='oui' id='syndication_oui'[ (#ENV{syndication}|=={oui}|?{'checked="checked"'})] /><label for='syndication_oui'><:bouton_radio_syndication:>#AIDER{rubsyn}</label></li>
+			<li><label for='url_syndic'><:entree_adresse_fichier_syndication:></label>
+			[(#ENV**{url_syndic}|saisie_url_syndic{url_syndic,url_syndic})]
+	    </li>
+	    </ol>
+	    </fieldset>
+	    </li>
+	    ]
+	  </ol>
+	  </fieldset>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_enregistrer:>' /></div>
+	</form>
+	]
+</div>
