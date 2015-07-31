@@ -138,7 +138,7 @@ function spip_pg_from($from)
 function spip_pg_orderby($order, $select)
 {
 	$res = array();
-	$arg = (is_array($order) ?  $order : preg_split('\s*,\s*',$order));
+	$arg = (is_array($order) ?  $order : preg_split('/\s*,\s*/',$order));
 
 	foreach($arg as $v) {
 		if (preg_match('/(case\s+.*?else\s+0\s+end)\s*AS\s+' . $v .'/', $select, $m)) {
