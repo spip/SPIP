@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles' => 'Статьи',
 	'articles_auteur' => 'Авторы статей',
 	'articles_populaires' => 'Самые читаемые статьи',
-	'articles_rubrique' => 'Статьи в этой рубрике',
+	'articles_rubrique' => 'Статьи в этом разделе',
 	'aucun_article' => 'Нет статьи по этому адресу',
 	'aucun_auteur' => 'Нет автора по этой ссылке',
 	'aucun_site' => 'Неправильно указан адрес сайта',
@@ -22,37 +22,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteur' => 'Автор',
 	'autres' => 'Прочие',
 	'autres_breves' => 'Другие новости',
-	'autres_groupes_mots_clefs' => 'Другие группы ключевых слов',
+	'autres_groupes_mots_clefs' => 'Группы ключей', # MODIF
 	'autres_sites' => 'Другие сайты',
 
 	// B
-	'bonjour' => 'Здравствуйте',
+	'bonjour' => 'Привет',
 
 	// C
 	'commenter_site' => 'Коментарии к этому сайту',
-	'contact' => 'Contact', # NEW
+	'contact' => 'Контакты',
 	'copie_document_impossible' => 'Невозможно скопировать документ',
 
 	// D
 	'date' => 'Дата',
 	'dernier_ajout' => 'Последнее обновление',
-	'dernieres_breves' => 'Последние новости',
-	'derniers_articles' => 'Последние статьи',
-	'derniers_commentaires' => 'Последние коментарии',
-	'derniers_messages_forum' => 'Последние сообщения в форумах',
+	'dernieres_breves' => 'Свежие новости',
+	'derniers_articles' => 'Новые статьи',
+	'derniers_commentaires' => 'Новые комментарии',
+	'derniers_messages_forum' => 'Новые сообщения на форуме',
 
 	// E
 	'edition_mode_texte' => 'Текстовый режим',
-	'en_reponse' => 'Ответ на:',
+	'en_reponse' => 'Комментарий к:',
 	'en_resume' => 'Резюме',
-	'envoyer_message' => 'Послать сообщение',
+	'envoyer_message' => 'Отправить сообщение',
 	'espace_prive' => 'Административная часть',
 
 	// F
 	'formats_acceptes' => 'Допустимые форматы: @formats@.',
 
 	// H
-	'hierarchie_site' => 'Иерархия сайта',
+	'hierarchie_site' => 'Карта сайта',
 
 	// J
 	'jours' => 'дни',
@@ -62,17 +62,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'meme_auteur' => 'Этого автора',
-	'meme_rubrique' => 'В той же рубрике',
+	'meme_rubrique' => 'Еще в разделе',
 	'memes_auteurs' => 'Теми же авторами',
 	'message' => 'Сообщение',
-	'messages_forum' => 'Сообщения форума', # MODIF
+	'messages_forum' => 'Сообщения форума',
 	'messages_recents' => 'Новые сообщения форума',
-	'mots_clef' => 'Кейворд',
-	'mots_clefs' => 'Ключевые слова',
-	'mots_clefs_meme_groupe' => 'Ключевые слова в той же самой группе',
+	'mots_clef' => 'Ключ', # MODIF
+	'mots_clefs' => 'Ключи', # MODIF
+	'mots_clefs_meme_groupe' => 'Ключи из этой группы', # MODIF
 
 	// N
-	'navigation' => 'Навигация',
+	'navigation' => 'Просмотр',
 	'nom' => 'Имя',
 	'nouveautes' => 'Что нового',
 	'nouveautes_web' => 'Что нового в сайтах',
@@ -90,12 +90,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'proposer_site' => 'Вы можете предложить добавить сайт к этому разделу:',
 
 	// R
-	'repondre_article' => 'Ответить на эту статью',
-	'repondre_breve' => 'Ответить на эту новость',
+	'repondre_article' => 'Оставить комментарий ',
+	'repondre_breve' => 'Оставить комментарий ',
 	'resultats_recherche' => 'Результаты поиска',
-	'retour_debut_forums' => 'К началу форумов',
-	'rubrique' => 'Рубрика',
-	'rubriques' => 'Рубрики',
+	'retour_debut_forums' => 'Все форумы', # MODIF
+	'rubrique' => 'Раздел',
+	'rubriques' => 'Разделы',
 
 	// S
 	'signatures_petition' => 'Подписи',
@@ -103,14 +103,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sites_web' => 'Сайты',
 	'sous_rubriques' => 'Подразделы',
 	'spam' => 'Спам',
-	'suite' => 'продолжение',
+	'suite' => 'далее',
 	'sur_web' => 'В интернете',
-	'syndiquer_rubrique' => 'RSS этой рубрики',
+	'syndiquer_rubrique' => 'RSS этого раздела',
 	'syndiquer_site' => 'RSS всего сайта',
 
 	// T
-	'texte_lettre_information' => 'Информационный бюллетень сайта',
-	'texte_lettre_information_2' => 'Cтатьи и новости, изданные с ', # MODIF
+	'texte_lettre_information' => 'Информационный бюллетень сайта', # MODIF
+	'texte_lettre_information_2' => 'Материалы на сайте размещаются с',
 
 	// V
 	'ver_imprimer' => 'Версия для печати',
