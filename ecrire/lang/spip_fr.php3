@@ -1252,10 +1252,7 @@ et vous reconnecter au site.
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de donn&eacute;es,
 y compris <i>tous</i> les acc&egrave;s r&eacute;dacteurs et administrateurs. Apr&egrave;s l\'avoir ex&eacute;cut&eacute;e, vous devrez lancer la
 r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un premier acc&egrave;s administrateur.',
-'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder
-le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
-N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient
-les images utilis&eacute;es dans les articles et les rubriques.',
+'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
 'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e
 	QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. L\'erreur
 	consistant &agrave; faire une sauvegarde avant de faire une mise &agrave; jour
