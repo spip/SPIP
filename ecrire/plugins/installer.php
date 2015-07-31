@@ -103,6 +103,26 @@ function spip_plugin_install($action, $infos, $version_cible){
 }
 
 
+/**
+ * Compare 2 numeros de version entre elles.
+ * 
+ * Cette fonction est identique (arguments et retours) a la fonction PHP
+ * version_compare() qu'elle appelle. Cependant, cette fonction reformate
+ * les numeros de versions pour ameliorer certains usages dans SPIP ou bugs
+ * dans PHP. On permet ainsi de comparer 3.0.4 à 3.0.* par exemple.
+ * 
+ * @param string $v1
+ * 		Numero de version servant de base a la comparaison.
+ * 		Ce numero ne peut pas comporter d'etoile.
+ * @param string $v2
+ * 		Numero de version a comparer.
+ * 		Il peut posseder des etoiles tel que 3.0.*
+ * @param string $op
+ * 		Un operateur eventuel (<, >, <=, >=, =, == ...)
+ * @return int|bool
+ * 		Sans operateur : int. -1 pour inferieur, 0 pour egal, 1 pour superieur
+ * 		Avec operateur : bool. 
+**/
 function spip_version_compare($v1,$v2,$op=null){
 	$v1 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v1));
 	$v2 = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1.\\2',$v2));
