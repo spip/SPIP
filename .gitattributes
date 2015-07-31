@@ -327,6 +327,7 @@ prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_rubrique.html -text
 prive/formulaires/editer_rubrique.php -text
+prive/formulaires/inc-choisir-objets.html -text
 prive/formulaires/inc-instituer_auteur.html -text
 prive/formulaires/inc-instituer_auteur_fonctions.php -text
 prive/formulaires/inc-logo_auteur.html -text
