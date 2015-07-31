@@ -122,13 +122,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'Más información',
 'entree_adresse_annuaire' => 'Dirección del anuario',
 'entree_adresse_email' => 'Tu correo electrónico',
-'entree_adresse_email_2' => 'Adresse email', # NEW
+'entree_adresse_email_2' => 'Dirección email',
 'entree_base_donnee_1' => 'Dirección de la base de datos',
 'entree_base_donnee_2' => '(A menudo esta dirección corresponde a la de tu sitio, a veces corresponde a la mención «localhost» y, en ocasiones, se deja totalmente vacía.)',
 'entree_biographie' => 'Una corta biografía, en pocas palabras...',
 'entree_chemin_acces' => '<b>Entrar</b> el camino de acceso:',
 'entree_cle_pgp' => 'Tu clave PGP',
-'entree_cle_pgp_2' => 'Clé PGP', # NEW
+'entree_cle_pgp_2' => 'Clave PGP',
 'entree_contenu_rubrique' => '(Contenido de la sección, en pocas palabras)',
 'entree_identifiants_connexion' => 'Tus identificadores de conexión...',
 'entree_identifiants_connexion_2' => 'Identificadores de conexión',
@@ -147,7 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_nom_fichier' => 'Introducir el nombre del archivo @texte_compresse@:',
 'entree_nom_pseudo' => 'Tu nombre o seudónimo',
 'entree_nom_pseudo_1' => '(Tu nombre o seudónimo)',
-'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
+'entree_nom_pseudo_2' => 'Nombre o seudónimo',
 'entree_nom_site' => 'El nombre de tu sitio',
 'entree_nom_site_2' => 'Nombre del sitio del/a autor/a',
 'entree_nouveau_passe' => 'Nueva contraseña',
@@ -232,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_cookie' => 'Puedes activar una <b>"cookie" de correspondencia</b>, que te permite actualizar páginas y pasar fácilmente de la parte pública a la redacción.',
 'info_admin_etre_webmestre' => 'Darme derechos de webmaster',
 'info_admin_gere_rubriques' => 'Esta persona administra las secciones siguientes :',
-'info_admin_gere_toutes_rubriques' => 'Este/a administrador/a maneja <b>todas las secciones</b>.', # MODIF
+'info_admin_gere_toutes_rubriques' => 'Este/a administrador/a maneja <b>todas las secciones</b>.',
 'info_admin_gere_toutes_rubriques_2' => 'Manejo <b>todas las secciones</b>',
 'info_admin_je_suis_webmestre' => 'Soy <b>webmaster</b>',
 'info_admin_statuer_webmestre' => 'Dar a este/a administrador/a derechos de webmestre. ',
@@ -292,7 +292,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>o</sup> sobre @liste@',
 'info_code_acces' => '¡No olvides tus códigos de acceso!',
 'info_compatibilite_html' => '¿Qué norma HTML seguir?',
-'info_compresseur_gzip' => '<b>N. B. :</b> Se recomienda verificar previamente si el proveedor comprime sistemáticamente los scripts php ; para ello, se puede, por ejemplo, utilizar el servicio siguiente : @testgzip@', # MODIF
+'info_compresseur_gzip' => 'Se recomienda verificar previamente si el proveedor ya comprime sistemáticamente los scripts php; para lo cual se puede utilizar, por ejemplo, el servicio siguiente: @testgzip@',
 'info_compresseur_texte' => 'Si tu servidor no comprime automáticamente las páginas html para enviarlas a los internautas, puedes intentar forzar la compresión para disminuir el tamaño de las páginas enviadas. <b>Atención:</b> esto puede ralentizar considerablemente ciertos servidores.',
 'info_config_suivi' => 'Si esta dirección corresponde a una lista de correo, puedes indicar aquí abajo la dirección en la cual los participantes al sitio pueden inscribirse. Esta dirección puede ser una URL (por ejemplo la página de inscripción a la lista por la web), o una dirección e-mail con un asunto específico (por ejemplo: <tt>@direccion_abonar@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Puedes suscribirte a la lista de correo de este sitio. Recibirás por correo electrónico los anuncios de artículos y de bereves propuestas a la publicación.',
@@ -309,7 +309,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Contenido de los artículos',
 'info_contributions' => 'Contribuciones',
-'info_creation_paragraphe' => '(Para crear párrafos, deja líneas vacías.)', # MODIF
+'info_creation_paragraphe' => 'Para crear párrafos, deja simplemente líneas vacías.',
 'info_creation_rubrique' => 'Antes de poder escribir artículos,<br /> debes crear al menos una sección.<br />',
 'info_creation_tables' => 'Creación de las tablas de la base',
 'info_creer_base' => '<b>Crear</b> una nueva base de datos:',
@@ -325,7 +325,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Antes de escribir artículos, debes crear una sección.',
 'info_email_envoi' => 'Dirección de correo de envío (opcional)',
 'info_email_envoi_txt' => 'Indica aqui la dirección que se utiliza como expeditor al mandar los correos electrónicos (por omisión, se utiliza la dirección del destinatario como dirección de envío) :',
-'info_email_webmestre' => 'Dirección de correo electrónico del/la webmaster (opcional)', # MODIF
+'info_email_webmestre' => 'Dirección email del/la webmestre',
 'info_entrer_code_alphabet' => 'Introduce el código del alfabeto a utilizar',
 'info_envoi_email_automatique' => 'Envío automático de correos electrónicos',
 'info_envoyer_maintenant' => 'Enviar ahora',
@@ -359,7 +359,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_historique_texte' => 'El seguimiento de revisiones permite conservar un historial de todas las modificaciones hechas en el contenido de un artículo, y mostrar las diferencias entre las sucesivas versiones.',
 'info_identification_publique' => 'Tu identidad pública...',
 'info_image_process' => 'Por favor selecciona el mejor método de fabricación de viñetas pinchando en la imágen correspondiente. ',
-'info_image_process2' => '<b>N.B.</b> <i>Si no aparece ninguna imagen, se debe a que el servidor que alberga su sitio web no está configurado para usar estas funciones. Si necesita utilizarlas, contacte con el responsable técnico y solicite las extensiones «GD» o «Imagick».</i>', # MODIF
+'info_image_process2' => 'Si no aparece ninguna imagen, es que el servidor que alberga tu sitio web no está configurado para usar estas herramientas. Si quieres utilizarlas, contacta al responsable técnico y solicita las extensiones «GD» o «Imagick».',
 'info_images_auto' => 'Imágenes calculadas automáticamente',
 'info_informations_personnelles' => 'Informaciones personales',
 'info_inscription_automatique' => 'Inscripcción automática de nuevas personas',
@@ -372,7 +372,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Lista de redactores y redactoras conectadas',
 'info_login_existant' => 'Ese login ya existe',
 'info_login_trop_court' => 'Login muy corto',
-'info_login_trop_court_car_pluriel' => 'Tu login debe contener @nb@ caracteres por lo menos.', # MODIF
+'info_login_trop_court_car_pluriel' => 'El login debe contener por lo menos @nb@ caracteres.',
 'info_logos' => 'Los logos',
 'info_maximum' => 'máximo:',
 'info_meme_rubrique' => 'En la misma sección',
@@ -425,7 +425,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_nouvel_article' => 'Nuevo artículo',
 'info_nouvelle_traduction' => 'Nueva traducción:',
 'info_numero_article' => 'Artículo:',
-'info_obligatoire_02' => '[Obligatorio]', # MODIF
+'info_obligatoire_02' => '(obligatorio)',
 'info_option_accepter_visiteurs' => 'Aceptar la inscripción de los visitantes del sitio público',
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros a los autores y autoras de artículos',
 'info_option_ne_pas_accepter_visiteurs' => 'Rehusar la inscripción de visitantes',
@@ -439,7 +439,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_par_statut' => 'por estatuto',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'Contraseña demasiado corta',
-'info_passe_trop_court_car_pluriel' => 'Tu contraseña debe contener @nb@ caracteres por lo menos.', # MODIF
+'info_passe_trop_court_car_pluriel' => 'La contraseña debe contener al menos @nb@ caracteres.',
 'info_passes_identiques' => 'Hay diferencias entre las dos contraseñas',
 'info_pense_bete_ancien' => 'Tus antiguos recordatorios',
 'info_plus_cinq_car' => 'más de 5 caracteres',
@@ -462,10 +462,17 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_publier' => 'publicar',
 'info_publies' => 'Tus artículos publicados',
 'info_question_accepter_visiteurs' => 'Si en los esqueletos de tu sitio está previsto el registro de visitantes sin acceso al espacio privado, tendrás que activar la opción siguiente:',
-'info_question_inscription_nouveaux_redacteurs' => '¿Se aceptan inscripciones de nuevas redactoras y redactores a partir del sitio público? Si se acepta, las personas que visitan el sitio podrán inscribirse desde un formulario automatizado y accederán entonces al espacio privado para proponer sus propios artículos. <blockquote><i>Durante la fase de inscripción, reciben un correo electrónico automático que les indica sus códigos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el envío de correos electrónicos desde sus servidores: en tal caso, se hace imposible la inscripción automática. ', # MODIF
+'info_question_inscription_nouveaux_redacteurs' => '¿Se aceptan inscripciones de nuevas redactoras y redactores
+  desde el sitio público? Si se aceptan, las personas que visitan el sitio
+  podrán inscribirse desde un formulario automatizado y accederán entonces
+  al espacio privado para proponer sus propios artículos. <div class="notice">Durante
+  la fase de inscripción, reciben un correo electrónico automático que les indica sus
+  códigos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan 
+  el envío de correos electrónicos desde sus servidores: en tal caso, se hace
+  imposible la inscripción automática.</div>',
 'info_question_utilisation_moteur_recherche' => '¿Deseas utilizar el motor de búsqueda integrado de SPIP? (desactivarlo agiliza el sitio)',
 'info_question_vignettes_referer_non' => 'No mostrar las capturas de los sitios de origen de las visitas',
-'info_qui_edite' => '@nom_auteur_modif@ trabajó sobre este contenido hace @date_diff@ minutos', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ trabajó en este contenido hace @date_diff@ minutos',
 'info_racine_site' => 'Raíz del sitio',
 'info_recharger_page' => 'Por favor recargue esta página dentro de un momento',
 'info_recherche_auteur_a_affiner' => 'Hay demasiados resultados para "@cherche_auteur@", por favor restrinja los criterios.',
@@ -505,7 +512,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_sous_titre' => 'Subtítulo',
 'info_statut_administrateur' => 'Administrador/a',
 'info_statut_auteur' => 'Papel de este autor o autora:',
-'info_statut_auteur_2' => 'Je suis', # NEW
+'info_statut_auteur_2' => 'Soy',
 'info_statut_auteur_a_confirmer' => 'Inscripción por confirmar',
 'info_statut_auteur_autre' => 'Otro papel:',
 'info_statut_efface' => 'Borrado',
@@ -523,7 +530,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_texte' => 'Texto',
 'info_texte_explicatif' => 'Texto explicativo',
 'info_texte_long' => '(El texto es largo y aparece en varias partes que se reunirán después de la validación)',
-'info_texte_message' => 'Texto del mensaje', # MODIF
+'info_texte_message' => 'Texto de tu mensaje',
 'info_texte_message_02' => 'Texto del mensaje',
 'info_titre' => 'Título',
 'info_total' => 'Total:',
@@ -579,8 +586,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'install_tables_base' => 'Tablas de la base',
 'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el más extendido), <b>PostgreSQL</b> y <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Atención: varios plugins sólo funcionan con MySQL',
-'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+'instituer_erreur_statut_a_change' => 'El estatuto ya fue modificado',
+'instituer_erreur_statut_non_autorise' => 'No puedes elegir este estatuto',
 'intem_redacteur' => 'redactor/a',
 'intitule_licence' => 'Licencia',
 'item_accepter_inscriptions' => 'Aceptar las inscripciones',
@@ -731,7 +738,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugin_titre_automatique' => 'Instalación automática',
 'plugin_titre_automatique_ajouter' => 'Añadir plugins',
 'plugin_titre_installation' => 'Instalación del plugin @plugin@',
-'plugin_titre_modifier' => 'Mes plugins', # NEW
+'plugin_titre_modifier' => 'Mis plugins',
 'plugin_zip_active' => 'Continúa para activarlo',
 'plugin_zip_adresse' => 'indica aquí la dirección de un archivo zip de plugin a descargar, o también la dirección de una lista de plugins.',
 'plugin_zip_adresse_champ' => 'Dirección del plugin o de la lista ',
@@ -743,7 +750,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugins_actif_aucun' => 'Ningún plugin activado.',
 'plugins_actif_un' => 'Un plugin activado.',
 'plugins_actifs' => '@count@ plugins activados.',
-'plugins_actifs_liste' => 'Plugins activos', # MODIF
+'plugins_actifs_liste' => 'Activos',
 'plugins_compte' => '@count@ plugins',
 'plugins_disponible_un' => 'Un plugin disponible.',
 'plugins_disponibles' => '@count@ plugins disponibles.',
@@ -751,7 +758,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'plugins_liste' => 'Lista de plugins',
 'plugins_liste_extensions' => 'Extensiones',
 'plugins_recents' => 'Plugins recientes.',
-'plugins_tous_liste' => 'Tous', # NEW
+'plugins_tous_liste' => 'Todos',
 'plugins_vue_hierarchie' => 'Jerarquía',
 'plugins_vue_liste' => 'Lista',
 'protocole_ldap' => 'Versión del protocolo:',
@@ -773,8 +780,8 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'statut_admin_restreint' => '(administrador restringido)',
 
 // T
-'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
-'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
+'tache_cron_asap' => 'Tarea CRON @function@ (ASAP)',
+'tache_cron_secondes' => 'Tarea CRON @function@ (cada @nb@ s)',
 'taille_cache_image' => 'Las imágenes calculadas automáticamente por SPIP (miniaturas de documentos, títulos presentados en forma gráfica, fórmulas matemáticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'En este sitio no se limita el tamaño de la carpeta de cache.',
 'taille_cache_maxi' => 'SPIP intenta limitar el tamaño de la carpeta de cache de este sitio a unos <b>@octets@</b> de datos.',
@@ -819,7 +826,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 'texte_effacer_base' => 'Borrar la base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar los datos de indexación',
 'texte_effacer_statistiques' => 'Borrar las estadísticas',
-'texte_en_cours_validation' => 'Los artículos y notas breves mostradas más adelante están propuestas para su publicación.', # MODIF
+'texte_en_cours_validation' => 'Los contenidos a continuación están a la espera de validación.',
 'texte_enrichir_mise_a_jour' => 'Puedes enriquecer el formato de tu texto utilizando "atajos tipográficos"',
 'texte_fichier_authent' => '<b>¿Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
  y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p>
@@ -922,8 +929,8 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'titre_connexion_ldap' => 'Opciones: <b>Tu conexión LDAP</b>',
 'titre_groupe_mots' => 'Grupo de palabras',
 'titre_identite_site' => 'Identidad del sitio',
-'titre_langue_article' => 'IDIOMA DEL ARTÍCULO', # MODIF
-'titre_langue_rubrique' => 'IDIOMA DE LA SECCIÓN', # MODIF
+'titre_langue_article' => 'Idioma del artículo',
+'titre_langue_rubrique' => 'Idioma de la sección',
 'titre_langue_trad_article' => 'IDIOMA Y TRADUCCIONES DEL ARTÍCULO',
 'titre_les_articles' => 'Los artículos',
 'titre_messagerie_agenda' => 'Mensajería y agenda',
