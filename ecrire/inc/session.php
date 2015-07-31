@@ -124,6 +124,8 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
 	if (!isset($auteur['date_session'])) $auteur['date_session'] = time();
+	if (is_string($auteur['prefs']))
+		$auteur['prefs'] = unserialize($auteur['prefs']);
 
 	if (!ecrire_fichier_session($fichier_session, $auteur)) {
 		spip_log('Echec ecriture fichier session '.$fichier_session,_LOG_HS);
@@ -366,9 +368,7 @@ function fichier_session($alea, $tantpis=false) {
  */
 function rejouer_session()
 {
-	include_spip('inc/filtres');
-	return	  http_img_pack('rien.gif', " ", "id='img_session' width='0' height='0'") .
-		  http_script("\ndocument.img_session.src='" . generer_url_action('cookie','change_session=oui', true) .  "'");
+	return '<img src="'.generer_url_action('cookie','change_session=oui', true).'" width="0" height="0" alt="" />';
 }
 
 
