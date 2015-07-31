@@ -72,6 +72,7 @@ function ajax_retour($corps, $content_type = null){
 		$c = $GLOBALS['meta']["charset"];
 		header('Content-Type: '.$content_type.'; charset='.$c);
 		$debut = (($xml AND strlen(trim($corps))) ? '<'."?xml version='1.0' encoding='".$c."'?".">\n" : '');
+		$fin = "";
 	}
 	echo $debut, $corps, $fin, $e;
 }
