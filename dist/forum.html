@@ -82,9 +82,8 @@
 					<h2 class="surtitre"><:en_reponse:></h2>
 					<p class="titre"><a href="#URL_FORUM">#TITRE</a></p>
 					<small>[(#DATE|affdate)][
-					(#DATE|heures)][:(#DATE|minutes)][,
-					<:par_auteur:> (#NOM)]</small>
-					[<div class="texte">(#INTRODUCTION)</div>]
+					(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
+					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
 				</div>
 				</BOUCLE_forum_parent>
 
@@ -93,8 +92,7 @@
 					<h2 class="surtitre"><:en_reponse:></h2>
 					[(#LOGO_ARTICLE||reduire_image{120,120})]
 					<p class="titre"><a href="#URL_ARTICLE">#TITRE</a></p>
-					<small>[(#DATE|affdate)][,
-					<:par_auteur:> (#LESAUTEURS)]</small>
+					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<div class="texte">(#INTRODUCTION)</div>]
 				</div>
 				</BOUCLE_article>
