@@ -586,23 +586,27 @@ function propre_diff($texte) {
 // liste les champs versionnes d'un objet
 // http://doc.spip.org/@liste_champs_versionnes
 function liste_champs_versionnes($table) {
-	if ($table == 'spip_articles')
-		return array('surtitre', 'titre', 'soustitre', 'descriptif',
+	switch ($table) {
+		case 'spip_articles':
+			return array('surtitre', 'titre', 'soustitre', 'descriptif',
 		'nom_site', 'url_site', 'chapo', 'texte', 'ps', 'id_rubrique');
-	else
-		return array();
+#		case 'spip_rubriques':
+#			return array('titre', 'descriptif', 'texte');
+		default:
+			return array();
+	}
 }
 
 // http://doc.spip.org/@enregistrer_premiere_revision
 function enregistrer_premiere_revision($x) {
 
 	if  ($GLOBALS['meta']["articles_versions"]=='oui'
-	AND $x['args']['table'] == 'spip_articles') {
+	AND $champs = liste_champs_versionnes($x['args']['table'])) {
 
 		$id_article = $x['args']['id_objet'];
 
 		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
-			$select = join(", ", liste_champs_versionnes($x['args']['table']));
+			$select = join(", ", $champs);
 			$query = sql_select("$select, date, date_modif", "spip_articles", "id_article=$id_article");
 			$champs_originaux = sql_fetch($query);
 			// Si le titre est vide, c'est qu'on vient de creer l'article
@@ -629,17 +633,16 @@ function enregistrer_premiere_revision($x) {
 
 // http://doc.spip.org/@enregistrer_nouvelle_revision
 function enregistrer_nouvelle_revision($x) {
-	if  ($GLOBALS['meta']["articles_versions"]=='oui'
-	AND $x['args']['table'] == 'spip_articles') {
+	if  ($GLOBALS['meta']["articles_versions"] != 'oui')
+		return $x;
 
-		$champs = array();
-		foreach (liste_champs_versionnes($x['args']['table']) as $key)
-			if (isset($x['data'][$key]))
-				$champs[$key] = $x['data'][$key];
-
-		if (count($champs))
-			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['visiteur_session']['id_auteur']);
-	}
+	// Regarder si au moins une des modifs est versionnable
+	$champs = array();
+	foreach (liste_champs_versionnes($x['args']['table']) as $key)
+		if (isset($x['data'][$key]))
+			$champs[$key] = $x['data'][$key];
+	if (count($champs))
+		ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['visiteur_session']['id_auteur']);
 
 	return $x;
 }
