@@ -421,7 +421,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	}
 	if ($err) plugins_erreurs($err, '', $infos, $msg);
 
-	effacer_meta('message_crash_plugins');
+	if (isset($GLOBALS['meta']['message_crash_plugins']))
+		effacer_meta('message_crash_plugins');
 	ecrire_meta('plugin',serialize($plugin_valides));
 	$liste = array_diff_assoc($liste,$plugin_valides);
 	ecrire_meta('plugin_attente',serialize($liste));
