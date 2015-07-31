@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'barre_a_accent_grave' => 'Hoofdletter A met accent grave toevoegen',
-'barre_aide' => 'Typografische snelkoppelingen gebruiken voor de pagina-opmaak',
+'barre_aide' => 'Gebruik de typografische snelkoppelingen voor de pagina-opmaak',
 'barre_e_accent_aigu' => 'Hoofdletter E met accent aigu toevoegen',
 'barre_eo' => 'O gekoppeld aan E (ligatuur) toevoegen',
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',

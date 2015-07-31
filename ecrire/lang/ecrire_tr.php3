@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'aide_non_disponible' => 'Yard&#305;m&#305;n bu k&#305;sm&#305; bu dilde daha mevcut de&#287;il.',
+'aide_non_disponible' => '&Ccedil;evrimi&ccedil;i yard&#305;m&#305;n bu k&#305;sm&#305; hen&uuml;z bu dilde mevcut de&#287;il.',
 'avis_acces_interdit' => 'Giri&#351; yasak.',
 'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin &uuml;zerinde @date_diff@ dakika &ouml;nce &ccedil;al&#305;&#351;t&#305;',
 'avis_aucun_resultat' => 'Hi&ccedil; sonu&ccedil; yok.',
@@ -226,12 +226,12 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_administrateur_site_02' => 'bu ba&#287;lant&#305;ya t&#305;kla',
 'info_administrateurs' => 'Y&ouml;neticiler',
 'info_administrer_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; y&ouml;netebilirsiniz',
-'info_adresse' => 'Adres :',
-'info_adresse_email' => 'E-POSTA ADRES&#304; :',
-'info_adresse_url' => 'Kamu sitesinin adresi (URL) ',
+'info_adresse' => '&#351;u adreste :',
+'info_adresse_email' => 'E-POSTA ADRES&#304;&nbsp;:',
+'info_adresse_url' => 'Sitenin adresi (URL) ',
 'info_afficher_visites' => 'Ziyaretlerin g&ouml;sterilece&#287;i yer :',
-'info_affichier_visites_articles_plus_visites' => 'Ba&#351;lang&#305;&ccedil;tan beri en &ccedil;ok ziyaret edilen makalelerin g&ouml;sterilmesi :',
-'info_aide_en_ligne' => 'SPIP &ccedil;evrimi&ccedil;i (online) yard&#305;m :',
+'info_affichier_visites_articles_plus_visites' => '<b>Ba&#351;lang&#305;&ccedil;tan beri en &ccedil;ok ziyaret edilen makaleleri<b> g&ouml;ster :',
+'info_aide_en_ligne' => 'SPIP &ccedil;evrimi&ccedil;i yard&#305;m',
 'info_ajout_image' => 'Bir makalenin eki olarak resim ekledi&#287;inizde,
                SPIP sizin i&ccedil;in otomatik olarak eklenen resimlerin minyat&uuml;r&uuml;n&uuml; etiket
                &#351;eklinde yaratabilir. Bu da otomatik olarak bir galeri

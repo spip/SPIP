@@ -309,7 +309,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <b>@texte_lie@</b>you must confirm this decision:',
 'info_demander_blocage_priori' => 'Request
 				a blocking beforehand',
-'info_derniere_etape' => 'Last step: <B>It is completed!',
+'info_derniere_etape' => 'Last step: <B>Done!',
 'info_derniere_syndication' => 'The last syndication of this site was carried out on',
 'info_derniers_articles_publies' => 'Your latest published articles',
 'info_desactiver_forum_public' => 'Disable the use of public

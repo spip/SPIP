@@ -74,6 +74,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendario por d&iacute;a',
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
+'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
+'calendrier_synchro_public' => 'El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
+'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 
 
@@ -210,10 +213,10 @@ en el sitio "@nom_site_spip@" (@adresse_site@/ecrire/):',
 'form_pet_envoi_mail_confirmation' => 'Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n. Tienes que visitar la direcci&oacute;n Web mencionada en este mensaje para validar tu firma.',
 'form_pet_mail_confirmation' => 'Hola,
 
-Haz solicitado firmar la petici&oacute;n:
+Has solicitado firmar la petici&oacute;n:
 @titre@.
 
-Haz facilitado las siguientes informaciones:
+Has facilitado las siguientes informaciones:
 
     Nombre: @nom_email@
     Sitio: @nom_site@ - @url_site@
@@ -243,7 +246,7 @@ Gracias por tu participaci&oacute;n
 'form_prop_enregistre' => 'Tu propuesta ha sido registrada, aparecer&aacute; en l&iacute;nea despu&eacute;s de la validaci&oacute;n por el equipo responsable de este sitio.',
 'form_prop_envoyer' => 'Enviar un mensaje',
 'form_prop_indiquer_email' => 'Indica una direcci&oacute;n de correo electr&oacute;nico v&aacute;lida',
-'form_prop_indiquer_nom_site' => 'Indicar el nombre del sitio.',
+'form_prop_indiquer_nom_site' => 'Indica el nombre del sitio.',
 'form_prop_indiquer_sujet' => 'Indicar un tema',
 'form_prop_message_envoye' => 'Mensaje enviado',
 'form_prop_nom_site' => 'Nombre del sitio',
@@ -253,14 +256,14 @@ Gracias por tu participaci&oacute;n
 'forum_acces_refuse' => 'Ya no tienes acceso a estos foros.',
 'forum_attention_dix_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> tu mensaje tiene menos de diez caracteres.',
 'forum_attention_trois_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> tu t&iacute;tulo tiene menos de tres caracteres.',
-'forum_avez_selectionne' => 'Haz seleccionado:',
+'forum_avez_selectionne' => 'Has seleccionado:',
 'forum_cliquer_retour' => 'Pinchar <a href=\'@retour_forum@\'>aqu&iacute;</a> para continuar.',
 'forum_forum' => 'foro',
 'forum_info_modere' => 'Este foro est&aacute; moderado a priori: tu contribuci&oacute;n no aparecer&aacute; hasta haber sido validada por la administraci&oacute;n del sitio.',
 'forum_lien_hyper' => '<b>Enlace hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensaje definitivo: enviar al sitio',
 'forum_message_trop_long' => 'Tu mensaje es demasiado largo. S&oacute;lo se admite un m&aacute;ximo de 20000 caracteres.',
-'forum_ne_repondez_pas' => 'No respondas a este correo electr&oacute;nico, si no en el foro en la siguiente direcci&oacute;n:',
+'forum_ne_repondez_pas' => 'No respondas a este correo electr&oacute;nico, sino en el foro en la siguiente direcci&oacute;n:',
 'forum_non_inscrit' => 'No est&aacute;s inscrita o inscrito, o bien la direcci&oacute;n o la contrase&ntilde;a son err&oacute;neas.',
 'forum_page_url' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en Internet, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
 'forum_par_auteur' => 'por @auteur@',
@@ -274,7 +277,7 @@ Gracias por tu participaci&oacute;n
 'forum_valider' => 'Validar la elecci&oacute;n',
 'forum_voir_avant' => 'Ver este mensaje antes de enviarlo',
 'forum_votre_email' => 'Tu direcci&oacute;n de correo electr&oacute;nico:',
-'forum_votre_nom' => 'Tu nombre (o pseud&oacute;nimo):',
+'forum_votre_nom' => 'Tu nombre (o seud&oacute;nimo):',
 'forum_vous_enregistrer' => 'Para participar en este foro, previamente debes registrarte.
 Gracias por indicar a continuaci&oacute;n el identificador personal que se te ha
 suministrado. Si no est&aacute;s inscrito/a, debes',
