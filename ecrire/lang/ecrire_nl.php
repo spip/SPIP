@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_compatibilite_html' => 'HTML-standaard te volgen',
-'info_compresseur_gzip' => '<b>N. B. :</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php  reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken : @testgzip@', # MODIF
+'info_compresseur_gzip' => 'Het is raadzaam om vooraf te controleren of de gastheer al systematisch te comprimeren php scripts, voor deze kunt u bijvoorbeeld gebruik maken van de volgende dienst : @testgzip@',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
 'info_config_suivi' => 'Wanneer dit adres van een rondzendlijst is, kan je hieronder het adres opgeven waarlangs deelnemers van de site zich kunnen inschrijven. Dit adres kan een URL zijn (bvb. het webadres voor het inschrijving op de mailinglist), of een e-mailadres met een onderwerp (bvb. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Je kan je op de mailinglijst van deze site inschrijven. Je zal dan via e-mail een aankondiging ontvangen van artikels en nieuwsberichten die voor publicatie werden voorgesteld.',
@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ecrire_article' => 'Alvorens een artikel te kunnen schrijven, dien je minimaal één rubriek aanmaken.',
 'info_email_envoi' => 'Verzendadres (optioneel)',
 'info_email_envoi_txt' => 'Geef hieronder het adres op dat gebruikt wordt voor het versturen van e-mails. (Standaard wordt het adres van de bestemmeling als verzendadres gebruikt.) :',
-'info_email_webmestre' => 'E-mailadres van de webmaster (optioneel)', # MODIF
+'info_email_webmestre' => 'Webmaster E-mail',
 'info_entrer_code_alphabet' => 'Vul de alfabetcode in die je wil gebruiken:',
 'info_envoi_email_automatique' => 'Automatisch verzenden van e-mails',
 'info_envoyer_maintenant' => 'Nu versturen',
@@ -495,7 +495,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
-'info_qui_edite' => '@nom_auteur_modif@ gewerkt aan de inhoud er @date_diff@ minuten ', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ gewerkt aan de inhoud er @date_diff@ minuten ',
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
@@ -906,16 +906,8 @@ Als u geen nut ervan hebt, kunt u deze keuze
 'texte_recapitiule_liste_documents' => 'Deze pagina herneemt de lijst met documenten die je bij de rubrieken hebt geplaatst. Om de informatie van een document te wijzigen, volg je de link naar de pagina van de rubriek.',
 'texte_recuperer_base' => 'De databank herstellen',
 'texte_reference_mais_redirige' => 'Gekoppeld artikel in je SPIP site, maar doorgestuurd naar een andere URL.',
-'texte_requetes_echouent' => 'b>Wanneer SQL verbindingen systematisch en zonder
- aanwijsbare redenen mislukken is het mogelijk dat het
- probleem bij de databank ligt. </b><p>
- SQL kan zelf een hersteloperatie uitvoeren op de
- tabellen in de databank die mogelijk beschadigd kunnen
- zijn. Je kan hier zo\'n hersteloperatie proberen. Als dit
- mislukt, kopieer dan het foutbericht wat aanwijzingen
- zal bevatten over de aard van het probleem...
- Is het probleem niet opgelost, wend je dan tot je
- hostingprovider.</p>', # MODIF
+'texte_requetes_echouent' => '<b>Wanneer bepaalde SQL-query\'s en systematisch niet zonder duidelijke reden, is het mogelijk dat dit te wijten is aan de database zelf.</b><p>
+ Uw SQL Server heeft een regresvordering van tabellen als ze zijn beschadigd door een ongeval. Hier kunt u proberen dit te repareren als dat niet lukt, een kopie van het scherm, die aanwijzingen van wat er mis bevatten ...</p><p> Als het probleem zich blijft voordoen, contact opnemen met uw gastheer.</p>',
 'texte_selection_langue_principale' => 'Hieronder kan je de «basistaal» van de site kiezen. Deze keuze verplicht je - gelukkig! - niet om artikels in deze taal te schrijven maar laat wel toe om het volgende te bepalen:
  <ul><li> het standaardformaat van de data op de publieke site;</li>
  <li> de aard van de typografische motor die SPIP dient te gebruiken om teksten te tonen;</li>

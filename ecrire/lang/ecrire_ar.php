@@ -495,11 +495,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 تزودهم ببيانات الدخول الى المجال الخاص. إلا ان بعض
  خدام المواقع يعطلون إرسال البريد الآلي في
 أجهزتهم: في هذه الحال، لا يمكن تفعيل
-التسجيل الآلي.</div>', # MODIF
+التسجيل الآلي.</div>',
 'info_question_utilisation_moteur_recherche' => 'هل ترغب في استخدام محرك البحث المدمج في SPIP؟
 (ايقافه يسرّع أداء النظام)',
 'info_question_vignettes_referer_non' => 'عدم عرض مصغرات عن مواقع مصدر الزيارات',
-'info_qui_edite' => '@nom_auteur_modif@ عمل على هذا المحتوى منذ @date_diff@ دقيقة ', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ عمل على هذا المحتوى منذ @date_diff@ دقيقة ',
 'info_racine_site' => 'أصل الموقع',
 'info_recharger_page' => 'الرجاء إعادة تحميل الصفحة بعد لحظات.',
 'info_recherche_auteur_a_affiner' => 'تم العثور على عدد كبير جداً من النتائج لـ "@cherche_auteur@" ، الرجاء زيادة دقة البحث.',
