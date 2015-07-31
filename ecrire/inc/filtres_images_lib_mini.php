@@ -42,6 +42,7 @@ function _couleur_dec_to_hex($red, $green, $blue) {
  * @return array
  */
 function _couleur_hex_to_dec($couleur) {
+	include_spip("inc/filtres_images_mini");
 	$couleur = couleur_html_to_hex($couleur);
 	$couleur = preg_replace(",^#,","",$couleur);
 	$retour["red"] = hexdec(substr($couleur, 0, 2));
@@ -185,7 +186,6 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	}
 	
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
-	
 	$GLOBALS["images_calculees"][] =  $fichier_dest;
 	
 	$creer = true;
@@ -229,6 +229,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$ret["alt"] = extraire_attribut($img, 'alt');
 	$ret["style"] = extraire_attribut($img, 'style');
 	$ret["tag"] = $img;
+		
 	if ($fonction_creation){
 		$ret["reconstruction"] = $fonction_creation;
 		# ecrire ici comment creer le fichier, car il est pas sur qu'on l'ecrira reelement 
