@@ -130,7 +130,7 @@
 	<bouton id='rubrique_creer' parent="outils_rapides">
 		<icone>images/rubrique-new-16.png</icone>
 		<titre>icone_creer_rubrique_2</titre>
-		<url>rubriques_edit</url>
+		<url>rubrique_edit</url>
 		<args>new=oui&amp;id_parent=@id_rubrique@</args>
 	</bouton>
 	<bouton id='article_creer' parent="outils_rapides">
