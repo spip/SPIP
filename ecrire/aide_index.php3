@@ -33,6 +33,7 @@ if (_FILE_CONNECT) {
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
+if ($lang) changer_langue($lang); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
 
 /////////////////////////////
 // La frame de base
@@ -109,6 +110,15 @@ function help_body($aide, $html) {
 
 	// Recuperation du contenu de l'aide demandee
 	$html = analyse_aide($html, $aide);
+
+	if (!$html) {
+		include_ecrire('inc_presentation.php3');
+		install_debut_html(_T('forum_titre_erreur'));
+		echo "<div>"._T('aide_non_disponible')."</div>";
+		echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
+		install_fin_html();
+		exit;
+	}
 
 	// Recherche des images de l'aide
 	$suite = $html;
@@ -445,6 +455,7 @@ else {
 			include_ecrire('inc_presentation.php3');
 			install_debut_html(_T('forum_titre_erreur'));
 			echo "<div>"._T('aide_non_disponible')."</div>";
+			echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
 			install_fin_html();
 			exit;
 		}
