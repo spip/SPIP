@@ -127,7 +127,10 @@ function taches_generales($taches_generales = array()) {
 		$taches_generales['syndic'] = 90;
 
 	// maintenance (ajax, verifications diverses)
-		$taches_generales['maintenance'] = 3600 * 2;
+	$taches_generales['maintenance'] = 3600 * 2;
+
+	// verifier si une mise a jour de spip est disponible (2 fois par semaine suffit largement)
+	$taches_generales['mise_a_jour'] = 3*24*3600;
 
 	return pipeline('taches_generales_cron',$taches_generales);
 }
