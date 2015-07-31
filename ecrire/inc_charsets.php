@@ -506,9 +506,11 @@ function bom_utf8($texte) {
 // Verifie qu'un document est en utf-8 valide
 // http://us2.php.net/manual/fr/function.mb-detect-encoding.php#50087
 // http://w3.org/International/questions/qa-forms-utf-8.html
+// note: preg_replace permet de contourner un "stack overflow" sur PCRE
 function is_utf8($string) {
-	return preg_match(',^(?:'
-	.  '[\x20-\x7E]'                        # ASCII
+	return !strlen(
+	preg_replace(
+	  ',[\x09\x0A\x0D\x20-\x7E]'            # ASCII
 	. '|[\xC2-\xDF][\x80-\xBF]'             # non-overlong 2-byte
 	. '|\xE0[\xA0-\xBF][\x80-\xBF]'         # excluding overlongs
 	. '|[\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}'  # straight 3-byte
@@ -516,14 +518,14 @@ function is_utf8($string) {
 	. '|\xF0[\x90-\xBF][\x80-\xBF]{2}'      # planes 1-3
 	. '|[\xF1-\xF3][\x80-\xBF]{3}'          # planes 4-15
 	. '|\xF4[\x80-\x8F][\x80-\xBF]{2}'      # plane 16
-	. ')*$,s',
-		strtr($string, "\t\r\n", "   ")     # contourner bug windows sur \r
-	);
+	. ',s',
+	'', $string));
 }
 function is_ascii($string) {
-	return preg_match(',^[\x20-\x7E]*$,s',
-		strtr($string, "\t\r\n", "   ")
-	);
+	return !strlen(
+	preg_replace(
+	',[\x20-\x7E],s',
+	'', $string));
 }
 
 // Transcode une page (attrapee sur le web, ou un squelette) en essayant
