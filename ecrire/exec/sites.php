@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('inc/sites_voir');
 include_spip('inc/syndic');
 include_spip('inc/mots');
 include_spip('inc/date');
@@ -205,7 +204,7 @@ function exec_sites_dist()
 						    );
 			fin_boite_info();
 		}
-		echo afficher_syndic_articles(_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
+		echo afficher_objets('syndic_article',_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
 
 
 	// afficher la date de dernier acces a la syndication

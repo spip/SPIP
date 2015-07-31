@@ -553,8 +553,13 @@ function id_table_objet($type) {
 		return 'id_document';
 	else if ($type == 'petition')
 		return 'id_article';
-	else
-		return 'id_'.$type;
+	else {
+		$t = table_objet($type);
+		global $tables_principales;
+		if (isset($tables_principales[$t]['key']["PRIMARY KEY"]))
+			return $tables_principales[$t]['key']["PRIMARY KEY"];
+	}
+	return 'id_'.$type;
 }
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy

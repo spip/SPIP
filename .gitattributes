@@ -529,6 +529,7 @@ ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
 ecrire/extract/index.php -text
 ecrire/inc/actions.php -text
+ecrire/inc/afficher_objets.php -text
 ecrire/inc/agenda.php -text
 ecrire/inc/aider.php -text
 ecrire/inc/ajouter_documents.php -text
@@ -589,7 +590,6 @@ ecrire/inc/safehtml.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
-ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text

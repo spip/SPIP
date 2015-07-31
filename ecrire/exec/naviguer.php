@@ -294,28 +294,26 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	//
 	// Les articles a valider
 	//
-	$res .= afficher_articles(_T('info_articles_proposes'),	array('WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "date DESC"));
+	$res .= afficher_objets('article',_T('info_articles_proposes'),	array('WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "date DESC"));
 
 	//
 	// Les breves a valider
 	//
-	$res .= afficher_breves('<b>' . _T('info_breves_valider') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop')", 'ORDER BY' => "date_heure DESC"), true);
+	$res .= afficher_objets('breve','<b>' . _T('info_breves_valider') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop')", 'ORDER BY' => "date_heure DESC"), true);
 
 
 	//
 	// Les sites references a valider
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		include_spip('inc/sites_voir');
-		$res .= afficher_sites('<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "nom_site"));
+		$res .= afficher_objets('site','<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut='prop'", 'ORDER BY' => "nom_site"));
 	}
 
 	//
 	// Les sites a probleme
 	//
 	if ($GLOBALS['meta']['activer_sites'] != 'non' AND $connect_toutes_rubriques) {
-		include_spip('inc/sites_voir');
-		$res .= afficher_sites('<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
+		$res .= afficher_objets('site','<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 	}
 
 	// Les articles syndiques en attente de validation
@@ -339,13 +337,13 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 //////////  Les articles en cours de redaction
 /////////////////////////
 
-	  $res .= afficher_articles(_T('info_tous_articles_en_redaction'), array("WHERE" => "statut='prepa' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
+	  $res .= afficher_objets('article',_T('info_tous_articles_en_redaction'), array("WHERE" => "statut='prepa' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
 
 
 //////////  Les articles publies
 /////////////////////////
 
-	  $res .= afficher_articles(_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
+	  $res .= afficher_objets('article',_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique='$id_rubrique'", 'ORDER BY' => "date DESC"));
 	  
 	if (autoriser('creerarticledans','rubrique',$id_rubrique)){
 	  $res .=  "<div style='float:$spip_lang_right'>" .
@@ -354,7 +352,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 //// Les breves
 
-	$res .= afficher_breves('<b>' . _T('icone_ecrire_nouvel_article') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
+	$res .= afficher_objets('breve','<b>' . _T('icone_ecrire_nouvel_article') . '</b>', array("FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa'", 'ORDER BY' => "date_heure DESC"));
 
 
 	if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))){
@@ -365,8 +363,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 //// Les sites references
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-		include_spip('inc/sites_voir');
-		$res .= '<br />' . afficher_sites('<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
+		$res .= '<br />' . afficher_objets('site','<b>' . _T('titre_sites_references_rubrique') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus')", 'ORDER BY' => 'nom_site'));
 
 		if ($id_rubrique > 0
 		AND (autoriser('creersitedans','rubrique',$id_rubrique))) {
