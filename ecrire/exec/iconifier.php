@@ -17,30 +17,33 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_iconifier_dist
 function exec_iconifier_dist()
 {
-	$type =_request("type");
-	exec_iconifier_args(intval(_request($type)), $type,_request("script"));
+	$script = _request('script');
+	$iframe = _request('iframe');
+	$type =_request('type');
+	$id = intval(_request($type));
+	exec_iconifier_args($id, $type, $script, $iframe);
 }
 
 // http://doc.spip.org/@exec_iconifier_args
-function exec_iconifier_args($id, $type, $script)
+function exec_iconifier_args($id, $type, $script, $iframe=false)
 {
 	global $connect_id_auteur, $connect_toutes_rubriques;;
 	if (!preg_match('/^\w+$/', "$type$script")) {
 		$droit = false;
 	} else {
 		if ($type == 'id_rubrique')
-		  $droit = autoriser('publierdans','rubrique',$id);
+			$droit = autoriser('publierdans','rubrique',$id);
 		elseif ($type == 'id_auteur')
-		  $droit = (($id == $connect_id_auteur) OR $connect_toutes_rubriques);
+			$droit = (($id == $connect_id_auteur) OR $connect_toutes_rubriques);
 		elseif ($type == 'id_mot')
-		  $droit = $connect_toutes_rubriques;
+			$droit = $connect_toutes_rubriques;
 		else {
 			$table=substr($type, 3) . (($type == 'id_syndic') ? '' : 's');
 			$row = sql_fetsel("id_rubrique, statut", "spip_$table", "$type=$id");
 			$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
 			if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
 			  $jointure = table_jointure('auteur', 'article');
-			  $droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur",'','', $limit);
+			  $droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur");
 			}
 		}
 	}
@@ -53,7 +56,7 @@ function exec_iconifier_args($id, $type, $script)
 		$iconifier = charger_fonction('iconifier', 'inc');
 		$ret = $iconifier($type, $id, $script, $visible=true);
 	
-		if (!_request("iframe")=="iframe") 
+		if ($iframe!=='iframe') 
 			ajax_retour($ret);
 		else {
 			echo "<div class='upload_answer upload_document_added'>$ret</div>";
