@@ -130,6 +130,7 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
 		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
 		$fonctions = $regs[6];
+
 		if ($fonctions) {
 			$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
 			foreach($fonctions as $f) $champ->fonctions[]= $f;
