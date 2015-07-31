@@ -268,7 +268,7 @@ function enfant($leparent){
 
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
-		$titre=typo($row['titre']);
+		$titre=$row['titre'];
 		$statut_rubrique=$row['statut'];
 		$lang_rub = $row['lang'];
 		$langue_choisie_rub = $row['langue_choisie'];
@@ -328,7 +328,7 @@ function enfant($leparent){
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
 			// largeur maxi a 50
-			$titre = couper(extraire_multi($titre)." ", 50);
+			$titre = couper(typo(extraire_multi($titre)." ", 50));
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 			echo "<option".mySel($my_rubrique,$id_rubrique)." class='selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."</option>\n";
 		}
