@@ -242,7 +242,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					else{
 						//jQuery(cible).positionner(false);
 						if (a.length && a.is('a[name=ajax_redirect]')){
-							a = a.attr('href');
+							a = a.get(0).href; // url absolue
 							setTimeout(function(){
 								var cur = window.location.href.split('#');
 								document.location.replace(a);
