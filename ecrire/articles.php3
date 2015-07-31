@@ -491,6 +491,11 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	if ($petition){
 		echo "<input type='radio' name='change_petition' value='on' id='petitionon' checked>";
 		echo "<B><label for='petitionon'>P&eacute;tition activ&eacute;e</label></B>";
+		$query_signatures = "SELECT COUNT(*) AS nb FROM spip_signatures WHERE id_article=$id_article";
+		$result = mysql_fetch_array(spip_query($query_signatures));
+		if ($result['nb'] > 0) {
+			echo "<p><font size=1><a href='controle_petition.php3?id_article=$id_article'>".$result['nb']." signatures</a></font>\n";
+		}
 
 		echo "<P><FONT SIZE=1>";
 		if ($email_unique=="oui")
