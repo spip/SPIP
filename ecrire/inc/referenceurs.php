@@ -45,7 +45,7 @@ function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupb
 			}
 
 			if ($tmp) {
-			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'><b>".quote_amp(urldecode($tmp))."</b></a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
+			  $lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":""). ($unseul ? '' : referes($referermd5));
 			} else {
 				if (!isset($lesliensracine[$numero])) $lesliensracine[$numero]=0;
 				$lesliensracine[$numero] += $visites;
