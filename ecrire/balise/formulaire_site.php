@@ -55,8 +55,17 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 		// Integrer a la base de donnees
 		if (!$message_erreur) {
-			sql_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "(" . sql_quote($nom) . ", " . sql_quote($url) . ", " . intval($id_rubrique) .", " . sql_quote($desc) . ", NOW(), NOW(), 'prop', 'non')");
-			$message_ok = _T('form_prop_enregistre');
+			if (sql_insertq('spip_syndic', array(
+				'nom_site' => $nom,
+				'url_site' => $url,
+				'id_rubrique' => $id_rubrique,
+				'descriptif' => $desc,
+				'date' => 'NOW()',
+				'date_syndic' => 'NOW()',
+				'statut' => 'prop',
+				'syndication' => 'non')))
+			  $message_ok = _T('form_prop_enregistre');
+			else $message_erreur = _T('titre_probleme_technique');
 		}
 	}
 
