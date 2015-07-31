@@ -184,8 +184,8 @@ $code_activation_debug = '';
 $help_server = 'http://www.spip.net/aide';
 # TeX
 $tex_server = 'http://math.spip.org/tex.php';
-# MathML
-$mathml_server = 'http://arno.rezo.net/tex2mathml/latex.php';
+# MathML (pas pour l'instant: manque un bon convertisseur)
+// $mathml_server = 'http://arno.rezo.net/tex2mathml/latex.php';
 # Orthographe (serveurs multiples) [pas utilise pour l'instant]
 $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 

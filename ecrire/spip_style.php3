@@ -487,7 +487,7 @@ a.cellule-h div.cell-i {
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
 	border: 1px solid <?php echo $couleur_foncee; ?>;
-	background-color: white;
+	background: url(img_pack/fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0px;
 	margin-<?php echo $right; ?>: 3px;
