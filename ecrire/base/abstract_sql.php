@@ -58,12 +58,12 @@ function sql_set_charset($charset,$serveur='', $option=true){
 
 // Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
 // Recoit en argument:
-// - le tableau (ou cha�ne) des champs a` ramener (Select)
-// - le tableau (ou cha�ne) des tables a` consulter (From)
-// - le tableau (ou cha�ne) des conditions a` remplir (Where)
-// - le crite`re de regroupement (Group by)
+// - le tableau (ou chaine) des champs a ramener (Select)
+// - le tableau (ou chaine) des tables a consulter (From)
+// - le tableau (ou chaine) des conditions a remplir (Where)
+// - le critere de regroupement (Group by)
 // - le tableau de classement (Order By)
-// - le crite`re de limite (Limit)
+// - le critere de limite (Limit)
 // - le tableau des des post-conditions a remplir (Having)
 // - le serveur sollicite (pour retrouver la connexion)
 // - option peut avoir 3 valeurs : 
