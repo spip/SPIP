@@ -277,7 +277,7 @@ sera ignorée) :
 'form_prop_message_envoye' => '消息发送',
 'form_prop_non_enregistre' => '您的提议未被记录.',
 'form_prop_sujet' => '标题',
-'form_prop_url_site' => '站点URL',
+'form_prop_url_site' => '站点URL', # MODIF
 'forum_non_inscrit' => '可能您还没有注册或者您输入的地址或密码错误.',
 'forum_par_auteur' => '按 @auteur@',
 'forum_titre_erreur' => '错误...',
@@ -477,6 +477,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => '备注', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => '只显示图片',
 'lien_afficher_texte_icones' => '显示文本和图片',
@@ -587,6 +588,7 @@ sera ignorée) :
 'pass_nouveau_pass' => '新密码',
 'pass_ok' => '好',
 'pass_oubli_mot' => '忘记密码',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => '退出窗口',
 'pass_rappel_login' => '记住: 你的标识符(登录) 是 "@login@".',
 'pass_recevoir_mail' => '你将收到电子邮件解释如何访问站点.',

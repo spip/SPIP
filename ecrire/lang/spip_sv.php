@@ -268,7 +268,7 @@ För att bekräfta din nya adress måste du gå till
 'form_prop_message_envoye' => 'Meddelandet skickat',
 'form_prop_non_enregistre' => 'Ditt förslag har inte sparats.',
 'form_prop_sujet' => 'Ämne',
-'form_prop_url_site' => 'Sajtens URL',
+'form_prop_url_site' => 'Sajtens URL', # MODIF
 'forum_non_inscrit' => 'Antingen är du inte registrerad eller så är adressen eller lösenordet felaktigt.',
 'forum_par_auteur' => 'av @auteur@',
 'forum_titre_erreur' => 'Fel...',
@@ -468,6 +468,7 @@ För att bekräfta din nya adress måste du gå till
 'infos_vos_pense_bete' => 'Din meddelanden', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Visa bara ikoner',
 'lien_afficher_texte_icones' => 'Visa ikoner och text',
@@ -577,6 +578,7 @@ och koppla upp dig mot sajten igen.
 'pass_nouveau_pass' => 'Nytt lösenord',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Glömma bort lösenord',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Stäng detta fönster',
 'pass_rappel_login' => 'Kom ihåg: ditt användarnamn (login) är "@login@".',
 'pass_recevoir_mail' => 'Du kommer att få ett mejl som förklarar hur du kan återfå tillgång till sajten.',

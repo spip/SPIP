@@ -270,7 +270,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'form_prop_message_envoye' => 'Mensagem enviada',
 'form_prop_non_enregistre' => 'Sua proposta não foi cadastrada.',
 'form_prop_sujet' => 'Assunto',
-'form_prop_url_site' => 'Endereço (URL) do site',
+'form_prop_url_site' => 'Endereço (URL) do site', # MODIF
 'forum_non_inscrit' => 'Você não está inscrito, ou o endereço ou a senha estão errados.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_titre_erreur' => 'Erro...',
@@ -470,6 +470,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'infos_vos_pense_bete' => 'Seus lembretes',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Exibir apenas os ícones',
 'lien_afficher_texte_icones' => 'Exibir ícones e texto',
@@ -571,6 +572,7 @@ e reconectar-se com o site.
 'pass_nouveau_pass' => 'Nova senha',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Esquecimento de senha',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Fechar esta janela',
 'pass_rappel_login' => 'Lembrete: seu login é «@login@».',
 'pass_recevoir_mail' => 'Você receberá um e-mail explicando como você pode recuperar o acesso ao site.',

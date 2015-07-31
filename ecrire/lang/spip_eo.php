@@ -275,7 +275,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Mesaĝo sendita',
 'form_prop_non_enregistre' => 'Via propono ne estis registrita.',
 'form_prop_sujet' => 'Temo',
-'form_prop_url_site' => 'Adreso (URL) de la retejo',
+'form_prop_url_site' => 'Adreso (URL) de la retejo', # MODIF
 'forum_non_inscrit' => 'Vi ne estas registrita, aŭ la adreso aŭ la pasvorto ne ĝustas.',
 'forum_par_auteur' => 'de @auteur@',
 'forum_titre_erreur' => 'Eraro...',
@@ -475,6 +475,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Viaj memorigiloj', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Afiŝi nur la piktogramojn',
 'lien_afficher_texte_icones' => 'Afiŝi la piktogramojn kaj la tekston',
@@ -585,6 +586,7 @@ kaj ensaluti.
 'pass_nouveau_pass' => 'Nova pasvorto',
 'pass_ok' => 'JES',
 'pass_oubli_mot' => 'Pasvorto-forgeso',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Forlasi tiun fenestron',
 'pass_rappel_login' => 'Memoru: via ensalutilo (salutnomo) estas « @login@ ».',
 'pass_recevoir_mail' => 'Vi ricevos retmesaĝon indikantan al vi kiel retrovi vian aliron al la retejo.',

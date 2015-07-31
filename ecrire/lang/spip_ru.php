@@ -277,7 +277,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_message_envoye' => 'сообщение послано',
 'form_prop_non_enregistre' => 'Ваше предложение не было записано.',
 'form_prop_sujet' => 'Тема',
-'form_prop_url_site' => 'URL сайта',
+'form_prop_url_site' => 'URL сайта', # MODIF
 'forum_non_inscrit' => 'Или Вы не регистрированы, или адрес или пароль неправильны.',
 'forum_par_auteur' => ' @auteur@',
 'forum_titre_erreur' => 'Ошибка...',
@@ -478,6 +478,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'infos_vos_pense_bete' => 'Ваши заметки',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Показывать только иконки',
 'lien_afficher_texte_icones' => 'Показывать иконки и текст',
@@ -597,6 +598,7 @@ and connect again to the site.
 'pass_nouveau_pass' => 'Новый пароль',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Забытый пароль',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Закрыть окно',
 'pass_rappel_login' => 'Напоминание, ваш  логин: "@login@".',
 'pass_recevoir_mail' => 'Вам будет выслано письмо с инструкциями по получению доступа к сайту.',

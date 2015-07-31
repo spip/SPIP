@@ -272,7 +272,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'İleti gönderildi',
 'form_prop_non_enregistre' => 'Öneriniz kaydedilmedi.',
 'form_prop_sujet' => 'Konu',
-'form_prop_url_site' => 'Sitenin Url adresi',
+'form_prop_url_site' => 'Sitenin Url adresi', # MODIF
 'forum_non_inscrit' => 'Kayıtlı değilsiniz veya adresiniz veya şifreniz hatalı.',
 'forum_par_auteur' => 'yazan @auteur@ ',
 'forum_titre_erreur' => 'Hata...',
@@ -472,6 +472,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Hatırlatmalarınız', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Sadece ikonları görüntüle',
 'lien_afficher_texte_icones' => 'ikonları ve metni görüntüle',
@@ -579,6 +580,7 @@ sera ignorée) :
 'pass_nouveau_pass' => 'Yeni şifre',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Şifremi unuttum',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Bu pencereyi terk et',
 'pass_rappel_login' => 'Hatırlatma : kullanıcı isminiz « @login@ » dır.',
 'pass_recevoir_mail' => 'Siteye erişiminizi yeniden nasıl kazanabileceğinizi belirten bir e-posta alacaksınız. ',

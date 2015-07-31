@@ -276,7 +276,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Mensaxe unviáu',
 'form_prop_non_enregistre' => 'La to propuesta nun quedó rexistrada.',
 'form_prop_sujet' => 'Asuntu',
-'form_prop_url_site' => 'Señes (URL) del sitiu',
+'form_prop_url_site' => 'Señes (URL) del sitiu', # MODIF
 'forum_non_inscrit' => 'Nun tas apuntáu, o les tos señes o contraseña tan equivocáos.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -476,6 +476,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Los tos recordatorios',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Amosar namái los iconos',
 'lien_afficher_texte_icones' => 'Amosar los iconos y el testu',
@@ -586,6 +587,7 @@ pa volver a coneutate al sitiu.
 'pass_nouveau_pass' => 'Contraseña nueva',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Contraseña escaecida',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Zarrar esta ventana',
 'pass_rappel_login' => 'Recuerda: la to identidá (login) ye « @login@ ».',
 'pass_recevoir_mail' => 'Vas recibir un email que te indica cómo volver a tener accesu al sitiu.',

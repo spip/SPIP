@@ -279,7 +279,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'ההודעה נשלחה',
 'form_prop_non_enregistre' => 'ההצעה שלך לא נרשמה',
 'form_prop_sujet' => 'נושא',
-'form_prop_url_site' => 'הכתובת הכללית של האתר',
+'form_prop_url_site' => 'הכתובת הכללית של האתר', # MODIF
 'forum_non_inscrit' => 'או שאינך רשום במערכת או שהכתובת או הסיסמה שגויים.',
 'forum_par_auteur' => 'מאת @auteur@',
 'forum_titre_erreur' => 'שגיאה...',
@@ -479,6 +479,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'התזכירים שלך', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'הצג צלמיות בלבד',
 'lien_afficher_texte_icones' => 'הצג צלמיות וטקסט',
@@ -589,6 +590,7 @@ sera ignorée) :
 'pass_nouveau_pass' => 'סיסמה חדשה',
 'pass_ok' => 'סיסמה נכונה',
 'pass_oubli_mot' => 'שכיחת הסיסמה',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'סגור את החלון',
 'pass_rappel_login' => 'לתשומת לבך : שם משתמש שלך הינו « @login@ ».',
 'pass_recevoir_mail' => 'תקבל בקרוב דוא"ל שמסביר לך איך לקבל שוב את כניסתך לאתר.',

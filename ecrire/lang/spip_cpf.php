@@ -284,7 +284,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Out modékri la finn dèt anvwayé',
 'form_prop_non_enregistre' => 'Out kontribusyion lé pa anrozistré',
 'form_prop_sujet' => 'Sizé',
-'form_prop_url_site' => 'Ladrès (URL) lo sitwèb',
+'form_prop_url_site' => 'Ladrès (URL) lo sitwèb', # MODIF
 'forum_non_inscrit' => 'Ou lé pa inskri, kiswa out ladrès, kiswa out modpas nana kanardé.',
 'forum_par_auteur' => 'sanm @auteur@',
 'forum_titre_erreur' => 'Kanard...',
@@ -484,6 +484,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Out bann gardantèt', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Afis sèlman bann zikon',
 'lien_afficher_texte_icones' => 'Afis bann zikon èk lo tèks',
@@ -590,6 +591,7 @@ Aprésa, ou i poura mèt in nouvo modpas
 'pass_nouveau_pass' => 'Nouvo modpas',
 'pass_ok' => 'Dakor',
 'pass_oubli_mot' => 'Modpas oublyé',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Défalk finèt-la',
 'pass_rappel_login' => 'Rapèl aou : out lidantifyan (nondkod) lé « @login@ ».',
 'pass_recevoir_mail' => 'Ou sava giny inn limèl sak i indik aou kouk sa i pé artrouv out laksé sir lo sit.',

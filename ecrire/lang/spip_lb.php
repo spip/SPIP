@@ -274,7 +274,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Message geschéckt',
 'form_prop_non_enregistre' => 'Är Propose ass nët enregistréiert ginn.',
 'form_prop_sujet' => 'Sujet',
-'form_prop_url_site' => 'Adress (URL) vum Site',
+'form_prop_url_site' => 'Adress (URL) vum Site', # MODIF
 'forum_non_inscrit' => 'Dir sidd nët ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 'forum_par_auteur' => 'No @auteur@',
 'forum_titre_erreur' => 'Fehler...',
@@ -474,6 +474,7 @@ oder kontaktéiert äre Provider.</span>',
 'infos_vos_pense_bete' => 'Är Notizen', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Nëmmen d\'Ikonen weisen',
 'lien_afficher_texte_icones' => 'D\'Ikonen an d\'Texter weisen',
@@ -573,6 +574,7 @@ Dir kënnt do e neit Passwuert agin an Iech um Site umelden.
 'pass_nouveau_pass' => 'Neit Passwuert',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Vergiessen vum Passwuert',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Dës Fënster zoumaachen',
 'pass_rappel_login' => 'Rappel: är Identifikatioun (Login) ass "@login@".',
 'pass_recevoir_mail' => 'Dir kritt e Message mat Instruktiounen fir den Zougang zum Site erëm ze kréien.',

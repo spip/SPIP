@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ @nommois@',
 'date_demain' => 'tomorrow',
 'date_fmt_heures_minutes' => '@h@:@m@',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@ at @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => 'on @nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'From',
+'date_fmt_periode_to' => 'to',
 'date_heures' => 'hours',
 'date_hier' => 'yesterday',
 'date_il_y_a' => '@delai@ ago',
@@ -275,7 +275,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Message sent',
 'form_prop_non_enregistre' => 'Your suggestion has not been recorded.',
 'form_prop_sujet' => 'Subject',
-'form_prop_url_site' => 'Site URL',
+'form_prop_url_site' => 'Site URL', # MODIF
 'forum_non_inscrit' => 'Either you are not registered, or the address or password are wrong.',
 'forum_par_auteur' => 'by @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -475,6 +475,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Your memos',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Size',
 'lien_afficher_icones_seuls' => 'Show only icons',
 'lien_afficher_texte_icones' => 'Show icons and text',
@@ -584,6 +585,7 @@ and log in to the site.
 'pass_nouveau_pass' => 'New password',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Forgotten password',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Close this window',
 'pass_rappel_login' => 'Reminder: your identifier (login) is "@login@".',
 'pass_recevoir_mail' => 'You will receive an email explaining how you can retrieve your access to the site.',

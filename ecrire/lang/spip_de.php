@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ @nommois@',
 'date_demain' => 'morgen',
 'date_fmt_heures_minutes' => '@h@ Uhr @m@ Minuten',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@:@m@',
 'date_fmt_jour_heure' => '@jour@ um @heure@',
 'date_fmt_jour_mois' => '@jour@. @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@. @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
 'date_fmt_nomjour_date' => 'am @nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'Von',
+'date_fmt_periode_to' => 'bis',
 'date_heures' => 'Stunden',
 'date_hier' => 'gestern',
 'date_il_y_a' => 'vor @delai@',
@@ -273,7 +273,7 @@ wird Ihre Adresse beibehalten):
 'form_prop_message_envoye' => 'Nachricht gesendet',
 'form_prop_non_enregistre' => 'Ihr Vorschlag wurde nicht gespeichert.',
 'form_prop_sujet' => 'Thema',
-'form_prop_url_site' => 'Adresse (URL) der Website',
+'form_prop_url_site' => 'Adresse (URL) der Website', # MODIF
 'forum_non_inscrit' => 'Sie sind nicht eingeschrieben oder Adresse bzw. Passwort waren falsch.',
 'forum_par_auteur' => 'Nach @auteur@',
 'forum_titre_erreur' => 'Fehler...',
@@ -473,6 +473,7 @@ wird Ihre Adresse beibehalten):
 'infos_vos_pense_bete' => 'Ihre Merkzettel',
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Größe',
 'lien_afficher_icones_seuls' => 'Nur Piktogramme anzeigen',
 'lien_afficher_texte_icones' => 'Piktogramme und Beschriftung anzeigen',
@@ -571,6 +572,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 'pass_nouveau_pass' => 'Neues Passwort',
 'pass_ok' => 'O.K.',
 'pass_oubli_mot' => 'Passwort vergessen',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Dieses Fenster verlassen',
 'pass_rappel_login' => 'Erinnerung: Ihr Login ist «@login@».',
 'pass_recevoir_mail' => 'Sie erhalten eine E-Mail mit allen Informationen um wieder Zugang zur Website zu erhalten.',

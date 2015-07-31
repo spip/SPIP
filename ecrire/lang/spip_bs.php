@@ -272,7 +272,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'Poruka poslana',
 'form_prop_non_enregistre' => 'Vas prijedlog nije registrovan.',
 'form_prop_sujet' => 'Tema',
-'form_prop_url_site' => 'URL adresa stranice',
+'form_prop_url_site' => 'URL adresa stranice', # MODIF
 'forum_non_inscrit' => 'Niste registrovani ili adresa i lozinka nisu ispravni.',
 'forum_par_auteur' => 'od @auteur@',
 'forum_titre_erreur' => 'Greska...',
@@ -471,6 +471,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'Vase biljeske', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Prikazi samo ikone',
 'lien_afficher_texte_icones' => 'Prikazi ikone i tekst',
@@ -572,6 +573,7 @@ Tamo mozete unijeti novu lozinku i ponovo se prijaviti na stranicu.
 'pass_nouveau_pass' => 'Nova lozinka',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Zaboravljena lozinka',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Napusti ovaj prozor',
 'pass_rappel_login' => 'Podsjetnik: vas identifikator (login) je « @login@ ».',
 'pass_recevoir_mail' => 'Primicete e-mai sa uputstvom za pronalazenje vaseg pristupa.',

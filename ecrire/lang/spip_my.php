@@ -268,7 +268,7 @@ sera ignorée) :
 'form_prop_message_envoye' => 'စာ​စောင်ပို့ပေးပြီ',
 'form_prop_non_enregistre' => 'သင့်အကြံပြုချက် သိမ်းဆည်းထားခြင်းမရှိသေးပါ',
 'form_prop_sujet' => 'အကြောင်းအရာ',
-'form_prop_url_site' => 'ဆိုက်လိပ်စာ',
+'form_prop_url_site' => 'ဆိုက်လိပ်စာ', # MODIF
 'forum_non_inscrit' => 'သင်မှတ်ပုံတင်ထားခြင်း မရှိ (သို့) စကားဝှက် မှားယွင်းနေတာဖြစ်ပါလိမ့်မည်',
 'forum_par_auteur' => 'မှ @auteur@',
 'forum_titre_erreur' => 'မှားယွင်းမှု',
@@ -467,6 +467,7 @@ sera ignorée) :
 'infos_vos_pense_bete' => 'သင့်မှတ်တမ်းများ', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'ရုပ်ပုံသက်သက်ကိုပြပေးပါ',
 'lien_afficher_texte_icones' => 'စာသားကိုပြပေးပါ',
@@ -556,6 +557,7 @@ sera ignorée) :
 'pass_nouveau_pass' => 'စကားဝှက်အသစ်',
 'pass_ok' => 'အိုကေတယ်',
 'pass_oubli_mot' => 'စကားဝှက်မေ့နေတယ်',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'ဤစာမျက်နှာကိုပိတ်ပါ',
 'pass_rappel_login' => 'နိုးဆော်ချက်၊ သင့်​အမှတ်အသားကတော့ \\"@login@\\"',
 'pass_recevoir_mail' => 'သင့်ဝက်ဘ်ဆိုက်ထဲကို ဘယ်လိုပြန်လည် ဝင်ရောက်လို့ရမလဲ ဆိုတာကို အီးမေးလ်ရောက်လာပါလိမ့်မယ်',

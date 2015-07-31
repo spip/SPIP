@@ -275,7 +275,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'form_prop_message_envoye' => 'Zpráva byla odeslána',
 'form_prop_non_enregistre' => 'Váš návrh byl zaznamenán.',
 'form_prop_sujet' => 'Předmět',
-'form_prop_url_site' => 'Adresa URL webu',
+'form_prop_url_site' => 'Adresa URL webu', # MODIF
 'forum_non_inscrit' => 'Buď nejste zaregistrováni nebo jste zadali nesprávnou adresu či heslo.',
 'forum_par_auteur' => 'Autor: @auteur@',
 'forum_titre_erreur' => 'Chyba...',
@@ -475,6 +475,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'infos_vos_pense_bete' => 'Vaše poznámky', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Zobrazit pouze ikony',
 'lien_afficher_texte_icones' => 'Zobrazit ikony a text',
@@ -585,6 +586,7 @@ a znovu se ke stránkám připojíte.
 'pass_nouveau_pass' => 'Nové heslo',
 'pass_ok' => 'V pořádku',
 'pass_oubli_mot' => 'Zapomenuté heslo',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Odejít z tohoto okna',
 'pass_rappel_login' => 'Připomenutí: Vaše uživatelské jméno (login) je "@login@".',
 'pass_recevoir_mail' => 'Obdržíte e-mail s vysvětlením, jak znovu získat přístup k těmto stránkám.',

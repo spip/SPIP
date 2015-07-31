@@ -279,7 +279,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'form_prop_message_envoye' => 'Yatiyaw apayata',
 'form_prop_non_enregistre' => 'Amuyt\'awimax janiw qillqatakiti.',
 'form_prop_sujet' => 'Yatsuwi',
-'form_prop_url_site' => 'Qamawin (URL) utjawipa',
+'form_prop_url_site' => 'Qamawin (URL) utjawipa', # MODIF
 'forum_non_inscrit' => 'Janiw qillqataktati, utjawich imt\'atach pantjatawa.',
 'forum_par_auteur' => 'lurata @auteur@',
 'forum_titre_erreur' => 'Pantjata...',
@@ -485,6 +485,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'infos_vos_pense_bete' => 'Amtatanakama', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Jisk\'a saltanakak uñachayaña',
 'lien_afficher_texte_icones' => 'Jisk\'a saltanakampi sawutanakampi uñachayaña',
@@ -576,6 +577,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'pass_nouveau_pass' => 'Machaq imt\'awi',
 'pass_ok' => 'Waliki',
 'pass_oubli_mot' => 'Imt\'aw armata',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Aka wintan jaytanukuña',
 'pass_rappel_login' => 'Amtam: apnaqirit sutimax (login) «@login@».',
 'pass_recevoir_mail' => 'Aruskipayirit mä yatiyaw qatuqata kunjams mantwj qamawir kutiqayata.',

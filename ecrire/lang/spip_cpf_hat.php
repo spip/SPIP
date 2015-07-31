@@ -276,7 +276,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'form_prop_message_envoye' => 'Mesaj te fin voye',
 'form_prop_non_enregistre' => 'Pwopozisyon ou te pa rojistré',
 'form_prop_sujet' => 'Sije',
-'form_prop_url_site' => 'Ladrès (URL) sitwèb',
+'form_prop_url_site' => 'Ladrès (URL) sitwèb', # MODIF
 'forum_non_inscrit' => 'W ap pa enskri ankò, oubyen ladrès osinon modpas ou se pa korèk.',
 'forum_par_auteur' => 'se @auteur@ te ekri',
 'forum_titre_erreur' => 'Erè ...',
@@ -476,6 +476,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'infos_vos_pense_bete' => 'Mesaj yo pou w raple-w', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Afiche ikòn yo sèlman',
 'lien_afficher_texte_icones' => 'Afiche ikòn ak tèks',
@@ -585,6 +586,7 @@ ak tounyen déyé konekte sou sit-la.
 'pass_nouveau_pass' => 'Nouvo modpas',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Modpas ki oublye ',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Lage finèt-la',
 'pass_rappel_login' => 'Raple : lidantifyan ou-a (nondkod) se « @login@ ».',
 'pass_recevoir_mail' => 'W ke genyen yon limèl ki di w kouman w kapab rekipè laksé ou sou sit sa-a.',

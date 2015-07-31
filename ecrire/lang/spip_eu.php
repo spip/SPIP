@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Gako-hitz hau aldatu',
 'admin_modifier_rubrique' => 'Atal hau aldatu',
 'admin_recalculer' => 'Orrialde hau gaurkotu',
-'afficher_calendrier' => 'Afficher le calendrier', # NEW
+'afficher_calendrier' => 'Egutegia erakutsi',
 'afficher_trad' => 'Itzulpenak afitxatu',
 'alerte_maj_impossible' => 'Erne! SQL basea ezin da gaurkotu @bertsio@ bertsioan, datu-basea aldatzeko eskubide arazo bat dago, agian. Arren, jarri harremanetan zure ostatu-administratzailearekin.',
 'alerte_modif_info_concourante' => 'KONTUZ : Informazio hau aldatua izan da bestalde. Gaurko balorea hau da :',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Bilatu',
 'bouton_choisir' => 'Aukeratu',
 'bouton_deplacer' => 'Lekuz aldatu',
-'bouton_download' => 'Telekargatu', # MODIF
+'bouton_download' => 'Deskargatu',
 'bouton_enregistrer' => 'Grabatu',
 'bouton_radio_desactiver_messagerie_interne' => 'Barne mezularitza desaktibatu',
 'bouton_radio_envoi_annonces' => 'Iragarki editorialak igorri ',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Berrikuntzen zerrenda ez igorri',
 'bouton_recharger_page' => 'Orrialde hau berriz kargatu',
 'bouton_telecharger' => 'Telekargatu',
-'bouton_upload' => 'Telekargatu', # MODIF
+'bouton_upload' => 'Kargatu',
 'bouton_valider' => 'Onartu',
 
 // C
@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@nommois@ren @j@a',
 'date_demain' => 'bihar',
 'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@@heure@-etan',
 'date_fmt_jour_mois' => '@nommois@ren @jour@a',
 'date_fmt_jour_mois_annee' => '@annee@-ko @nommois@ren @jour@a',
 'date_fmt_mois_annee' => '@annee@-ko @nommois@',
 'date_fmt_nomjour_date' => '@nomjour@ @date@-a',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'Noiztik',
+'date_fmt_periode_to' => 'Nora',
 'date_heures' => 'orduak',
 'date_hier' => 'atzo',
 'date_il_y_a' => 'orain dela @delai@',
@@ -175,28 +175,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mois' => 'hilabeteak',
 'date_mois_1' => 'urtarrila',
 'date_mois_10' => 'urria',
-'date_mois_10_abbr' => 'oct.', # NEW
+'date_mois_10_abbr' => 'urr.',
 'date_mois_11' => 'azaroa',
-'date_mois_11_abbr' => 'nov.', # NEW
+'date_mois_11_abbr' => 'aza.',
 'date_mois_12' => 'abendua',
-'date_mois_12_abbr' => 'déc.', # NEW
-'date_mois_1_abbr' => 'janv.', # NEW
+'date_mois_12_abbr' => 'abe.',
+'date_mois_1_abbr' => 'urt.',
 'date_mois_2' => 'otsaila',
-'date_mois_2_abbr' => 'févr.', # NEW
+'date_mois_2_abbr' => 'ots.',
 'date_mois_3' => 'martxoa',
-'date_mois_3_abbr' => 'mars', # NEW
+'date_mois_3_abbr' => 'mar.',
 'date_mois_4' => 'apirila',
-'date_mois_4_abbr' => 'avr.', # NEW
+'date_mois_4_abbr' => 'api.',
 'date_mois_5' => 'maiatza',
-'date_mois_5_abbr' => 'mai', # NEW
+'date_mois_5_abbr' => 'mai.',
 'date_mois_6' => 'ekaina',
-'date_mois_6_abbr' => 'juin', # NEW
+'date_mois_6_abbr' => 'eka.',
 'date_mois_7' => 'uztaila',
-'date_mois_7_abbr' => 'juil.', # NEW
+'date_mois_7_abbr' => 'uzt.',
 'date_mois_8' => 'abuztua',
-'date_mois_8_abbr' => 'août', # NEW
+'date_mois_8_abbr' => 'abu.',
 'date_mois_9' => 'iraila',
-'date_mois_9_abbr' => 'sept.', # NEW
+'date_mois_9_abbr' => 'ira.',
 'date_saison_1' => 'negua',
 'date_saison_2' => 'udaberria',
 'date_saison_3' => 'uda',
@@ -247,7 +247,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'form_email_non_valide' => 'Posta elektronikoaren helbideak ez du balio.',
 'form_forum_access_refuse' => 'Ezin zara gune honetan sartu dagoeneko.',
 'form_forum_bonjour' => 'Kaixo @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Zure helbide elektronikoa baieztatzeko, zoaz helbide noetara : @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Dagoeneko, posta elektronikoaren helbide hau erregistraturik dago, beraz ohizko pasahitza erabili dezakezu.',
 'form_forum_identifiant_mail' => 'Zure identifikadore berria posta elektonikoaren bidez igorri dugu.',
 'form_forum_identifiants' => 'Identifikadore pertsonalak',
@@ -273,7 +273,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'form_prop_message_envoye' => 'Mezua igorria',
 'form_prop_non_enregistre' => 'Zure proposamena ez zen erregistratu.',
 'form_prop_sujet' => 'Gai',
-'form_prop_url_site' => 'Gunearen (URL) helbidea',
+'form_prop_url_site' => 'Gunearen (URL) helbidea', # MODIF
 'forum_non_inscrit' => 'Ez zaude inskribaturik, edota emandako helbidea edo pasahitza ez dira zuzenak.',
 'forum_par_auteur' => '@auteur@-k',
 'forum_titre_erreur' => 'Errore...',
@@ -319,7 +319,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'icone_supprimer_image' => 'Irudi hau kendu',
 'icone_tous_articles' => 'Zure artikulu guztiak',
 'icone_tous_auteur' => 'Egile guztiak',
-'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
+'icone_tous_visiteur' => 'Bisitari guztiak',
 'icone_visiter_site' => 'Gune publikoa bisitatu',
 'icone_voir_en_ligne' => 'Linean ikusi',
 'img_indisponible' => 'irudi erabilezina',
@@ -352,9 +352,9 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'info_connexion_refusee' => 'Konexioa errefusatu da',
 'info_contact_developpeur' => 'Programatzaile batekin kontaktuan jarri behar duzu.',
 'info_contenance' => 'Gune honek duena :',
-'info_contribution' => 'foroko ekarpenak', # MODIF
+'info_contribution' => 'foroko ekarpenak',
 'info_copyright' => '@spip@ software librea da, @lien_gpl@ banatua.',
-'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.', # MODIF
+'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.',
 'info_copyright_gpl' => 'GPL lizentziarekin',
 'info_cours_edition' => 'Bukatu gabe utzi dituzun artikuluak',
 'info_creer_repertoire' => 'Fitxategi edo karpeta bat sortu behar duzu, eta hari izen hau jarri :',
@@ -474,12 +474,13 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'infos_vos_pense_bete' => 'Zure oroigarriak',
 
 // L
-'label_poids_fichier' => 'Taille', # NEW
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_poids_fichier' => 'Tamaina',
 'lien_afficher_icones_seuls' => 'Ikurrak soilik erakutsi',
 'lien_afficher_texte_icones' => 'Ikurrak eta testua erakutsi',
 'lien_afficher_texte_seul' => 'Testua soilik erakutsi',
 'lien_liberer' => 'Askatu',
-'lien_liberer_tous' => 'artikulu hauek askatu', # MODIF
+'lien_liberer_tous' => 'artikulu hauek askatu',
 'lien_nouvea_pense_bete' => 'Oroigarri berria',
 'lien_nouveau_message' => 'Mezu berria',
 'lien_nouvelle_annonce' => 'Iragarpen berria',
@@ -504,7 +505,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'login_espace_prive' => 'eremu pribatua',
 'login_identifiant_inconnu' => '«@login@» identifikatzailea ezezaguna da.',
 'login_login' => 'Identifikatzailea :',
-'login_login2' => 'Login (gunerako konexio-identifikatzailea):', # MODIF
+'login_login2' => 'Login edo helbide elektronikoa:',
 'login_login_pass_incorrect' => '(Identifikatzaile edo pasahitz okerra.)',
 'login_motpasseoublie' => 'Pasahitza ahaztuta?',
 'login_non_securise' => 'Kontuz, inprimaki hau ez da segurtatua.
@@ -571,6 +572,7 @@ Orduan pasahitza berri bat jarri eta gunera berriz konektatzen ahalko zara. ',
 'pass_nouveau_pass' => 'Pasahitz berria',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Pasahitza ahaztu dut',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Leiho honetatik irten',
 'pass_rappel_login' => 'Gogoan izan: zure identifikatzailea (logina) hau da : «@login@».',
 'pass_recevoir_mail' => 'Gunerako sarbidea nola berreskuratzen ahal duzun zehazten duen mezu bat jasoko duzu.',
@@ -639,7 +641,7 @@ Modu orokorrean, orrialde hauetako kudeaketa zure guneko web arduradun nagusiari
 'titre_statistiques' => 'Gunearen estatistikak',
 'titre_titre_document' => 'Dokumentuaren izenburua',
 'todo' => 'etortzekoak',
-'trad_reference' => '(erreferentziazko artikulua)', # MODIF
+'trad_reference' => '(erreferentziazko artikulua)',
 
 // Z
 'zbug_balise_b_aval' => ': B begiztako baliza aurrerago',

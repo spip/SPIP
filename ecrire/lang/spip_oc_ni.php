@@ -276,7 +276,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'form_prop_message_envoye' => 'Messatge mandat',
 'form_prop_non_enregistre' => 'La voastra proposicion es pas estada registrada.',
 'form_prop_sujet' => 'Subjècte',
-'form_prop_url_site' => 'Adreça (URL) dau sit',
+'form_prop_url_site' => 'Adreça (URL) dau sit', # MODIF
 'forum_non_inscrit' => 'Siètz pas inscrich(a), ò l\'adreça ò lo mòt de santa Clara son erronèus.',
 'forum_par_auteur' => 'da @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -476,6 +476,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'infos_vos_pense_bete' => 'Li voastri nòtas de renembrança ', # MODIF
 
 // L
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
 'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Far paréisser li icònas unicament',
 'lien_afficher_texte_icones' => 'Far paréisser li icònas e lo tèxt',
@@ -586,6 +587,7 @@ e vos tornar connectar au sit.
 'pass_nouveau_pass' => 'Mòt de santa Clara novèu',
 'pass_ok' => 'OK',
 'pass_oubli_mot' => 'Denembrança dau mòt de santa Clara',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Quitar aquesta fenèstra ',
 'pass_rappel_login' => 'Renembrança: lo voastre identificant (login) es « @login@ ».',
 'pass_recevoir_mail' => 'Receberetz un e-mail que vos explicarà coma tornar trobar lo voastre accès au sit.',

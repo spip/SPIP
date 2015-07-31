@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Escollir',
 'bouton_deplacer' => 'Desplaçar',
-'bouton_download' => 'Descarregar', # MODIF
+'bouton_download' => 'Descarregar',
 'bouton_enregistrer' => 'Enregistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la missatgeria interna',
 'bouton_radio_envoi_annonces' => 'Enviar els anuncis editorials',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la llista de novetats',
 'bouton_recharger_page' => 'recarregar aquesta pàgina',
 'bouton_telecharger' => 'Baixar',
-'bouton_upload' => 'Baixar', # MODIF
+'bouton_upload' => 'Baixar',
 'bouton_valider' => 'Validar',
 
 // C
@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_de_mois_9' => '@j@ de setembre',
 'date_demain' => 'demà',
 'date_fmt_heures_minutes' => '@h@h@m@min',
-'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+'date_fmt_heures_minutes_court' => '@h@h@m@',
 'date_fmt_jour_heure' => '@jour@ a les @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ de @annee@',
 'date_fmt_mois_annee' => '@nommois@ de @annee@',
 'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
-'date_fmt_periode_from' => 'Du', # NEW
-'date_fmt_periode_to' => 'au', # NEW
+'date_fmt_periode_from' => 'Del',
+'date_fmt_periode_to' => 'al',
 'date_heures' => 'hores',
 'date_hier' => 'ahir',
 'date_il_y_a' => 'fa @delai@',
@@ -243,7 +243,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'form_email_non_valide' => 'La seva adreça electrònica no ha estat validada.',
 'form_forum_access_refuse' => 'No teniu accés a aquest lloc.',
 'form_forum_bonjour' => 'Bon dia @nom@,',
-'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
+'form_forum_confirmer_email' => 'Per confirmar la vostra adreça de correu electrònic, dirigiu-vos a aquesta adreça: @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Aquesta adreça electrònica ja ha estat enregistrada, podeu utilitzar la vostra contrasenya habitual. ',
 'form_forum_identifiant_mail' => 'La identificació us ha estat enviada per correu electrònic. ',
 'form_forum_identifiants' => 'Identificadors personals',
@@ -270,7 +270,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'form_prop_message_envoye' => 'Missatge enviat',
 'form_prop_non_enregistre' => 'La seva proposta no ha estat registrada.',
 'form_prop_sujet' => 'Assumpte:',
-'form_prop_url_site' => 'Adreça (URL) del lloc',
+'form_prop_url_site' => 'Adreça (URL) del lloc', # MODIF
 'forum_non_inscrit' => 'No esteu inscrit o bé l\'adreça o la contrasenya són errònies. ',
 'forum_par_auteur' => 'per @auteur@',
 'forum_titre_erreur' => 'Error...',
@@ -349,9 +349,9 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'info_connexion_refusee' => 'Connexió denegada',
 'info_contact_developpeur' => 'Contacteu amb un desenvolupador.',
 'info_contenance' => 'Aquest lloc conté:',
-'info_contribution' => 'contribucions del fòrum', # MODIF
+'info_contribution' => 'contribucions',
 'info_copyright' => '@spip@ és programari lliure distribuït @lien_gpl@.',
-'info_copyright_doc' => 'Per a més informació, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.', # MODIF
+'info_copyright_doc' => 'Per a més informació, veure el lloc <a href="@spipnet@">@spipnet_affiche@</a>.',
 'info_copyright_gpl' => 'sota llicència GPL',
 'info_cours_edition' => 'Els vostres articles en procés de redacció',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
@@ -470,7 +470,8 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'infos_vos_pense_bete' => 'Els vostres recordatoris',
 
 // L
-'label_poids_fichier' => 'Taille', # NEW
+'label_ajout_id_rapide' => 'Ajout rapide', # NEW
+'label_poids_fichier' => 'Mida',
 'lien_afficher_icones_seuls' => 'Mostrar només les icones',
 'lien_afficher_texte_icones' => 'Mostrar les icones i el text',
 'lien_afficher_texte_seul' => 'Mostrar només el text',
@@ -500,7 +501,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'login_espace_prive' => 'espai privat',
 'login_identifiant_inconnu' => 'L\'usuari « @login@ » és desconegut',
 'login_login' => 'Login:',
-'login_login2' => 'Login (identificador de connexió al lloc):', # MODIF
+'login_login2' => 'Login (identificador de connexió) o adreça de correu electrònic:',
 'login_login_pass_incorrect' => '(Login ou contrasenya incorretecte.)',
 'login_motpasseoublie' => 'contrasenya oblidada?',
 'login_non_securise' => 'Atenció, aquest formulari no és segur. Si no voleu que la vostra contrasenya pugui ser interceptada a la xarxa, activeu Javascript al vostre navegador i ',
@@ -570,6 +571,7 @@ i tornar-vos a connectar al lloc.
 'pass_nouveau_pass' => 'Nova contrasenya',
 'pass_ok' => 'D\'acord',
 'pass_oubli_mot' => 'Oblit de la contrasenya',
+'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
 'pass_quitter_fenetre' => 'Tancar aquesta finestra',
 'pass_rappel_login' => 'Recordatori: la vostra identificació (usuari) és " @login@".',
 'pass_recevoir_mail' => 'Voleu rebre un correu electrònic indicant com recuperar l\'accés al lloc.',
