@@ -656,6 +656,7 @@ U so statutu hè signalatu da u culore di l’icona (scrittore = giallu; amminis
 
 	// R
 	'repertoire_plugins' => 'Cartulare :',
+	'required' => '[Ubbligatoriu]', # MODIF
 
 	// S
 	'sans_heure' => 'Senza l’ore',

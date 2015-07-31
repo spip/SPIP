@@ -410,6 +410,9 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 	// O
 	'onglet_repartition_actuelle' => 'hiện nay',
 
+	// R
+	'required' => '[Bắt buộc] ', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(Quản trị viên có giới hạn)', # MODIF
 

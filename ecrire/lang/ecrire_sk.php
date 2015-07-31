@@ -702,6 +702,7 @@ a stav ich spracovania je označený farbou:',
 
 	// R
 	'repertoire_plugins' => 'Priečinok:',
+	'required' => ' (povinné)',
 
 	// S
 	'sans_heure' => 'neurčený čas',

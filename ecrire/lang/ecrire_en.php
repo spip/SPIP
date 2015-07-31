@@ -708,6 +708,7 @@ and their status is colour-coded:',
 
 	// R
 	'repertoire_plugins' => 'Directory:',
+	'required' => '(Required)',
 
 	// S
 	'sans_heure' => 'time not specified',

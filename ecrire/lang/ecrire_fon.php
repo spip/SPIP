@@ -402,6 +402,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// O
 	'onglet_repartition_actuelle' => 'Hwé élɔ nú',
 
+	// R
+	'required' => '[dódó]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(tìto kléwún)', # MODIF
 

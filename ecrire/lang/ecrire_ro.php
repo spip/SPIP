@@ -607,6 +607,7 @@ cu o culoare care le indică starea :',
 
 	// R
 	'repertoire_plugins' => 'Director :',
+	'required' => '[Obligatorie]', # MODIF
 
 	// S
 	'sans_heure' => 'fără oră',

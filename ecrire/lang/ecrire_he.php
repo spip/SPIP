@@ -364,6 +364,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'ספריה :',
+	'required' => '[מהווה חובה]', # MODIF
 
 	// S
 	'sans_heure' => 'בלי זמן',

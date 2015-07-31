@@ -427,6 +427,9 @@ ua color qu’indica lo lor estat:',
 	// O
 	'onglet_repartition_actuelle' => 'uei lo dia',
 
+	// R
+	'required' => '[Obligatòri]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(admin. restrent)', # MODIF
 

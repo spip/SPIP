@@ -487,6 +487,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'បញ្ជី (directory)',
+	'required' => '[ចាំបាច់]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(​អ្នកគ្រប់គ្រង​ប្រព័ន្ធ​ដែល​ត្រូវ​ហាមឃាត់​)', # MODIF

@@ -693,6 +693,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'Папка:',
+	'required' => '(обязательно)',
 
 	// S
 	'sans_heure' => 'время неопределено',

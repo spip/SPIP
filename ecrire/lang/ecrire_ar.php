@@ -712,6 +712,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'دليل:',
+	'required' => '(إجباري)',
 
 	// S
 	'sans_heure' => 'بدون توقيت الساعات',

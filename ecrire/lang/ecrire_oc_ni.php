@@ -466,6 +466,7 @@ una color indica lo sieu estat :',
 
 	// R
 	'repertoire_plugins' => 'Repertòri:',
+	'required' => '[Obligatòri]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(admin limitat)', # MODIF

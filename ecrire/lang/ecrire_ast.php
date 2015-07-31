@@ -645,6 +645,7 @@ con una color que indica el estáu:',
 
 	// R
 	'repertoire_plugins' => 'Direutoriu:',
+	'required' => '[Obligatorio]', # MODIF
 
 	// S
 	'sans_heure' => 'ensin hora',

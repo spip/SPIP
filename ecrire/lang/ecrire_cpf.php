@@ -459,6 +459,7 @@ sanm in koulèr i présiz son léta :',
 
 	// R
 	'repertoire_plugins' => 'Répertwar :',
+	'required' => '[Obligatwar]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(komandèr ti-drwa)', # MODIF

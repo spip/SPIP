@@ -466,6 +466,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'repertoire_plugins' => 'Директория:',
+	'required' => '[Задължително]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(ограничен администратор)', # MODIF

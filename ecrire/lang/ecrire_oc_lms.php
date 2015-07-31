@@ -427,6 +427,9 @@ una color indica lor estat:',
 	// O
 	'onglet_repartition_actuelle' => 'per lo temps que vai',
 
+	// R
+	'required' => '[Obligatòri]', # MODIF
+
 	// S
 	'statut_admin_restreint' => '(admin. restrench)', # MODIF
 

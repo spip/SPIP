@@ -469,6 +469,7 @@ ukazuje jejich stav:',
 
 	// R
 	'repertoire_plugins' => 'Adresář:',
+	'required' => '[povinný údaj]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(admin - vyhrazeno)', # MODIF

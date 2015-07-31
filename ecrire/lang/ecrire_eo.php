@@ -685,6 +685,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 	// R
 	'repertoire_plugins' => 'Dosierujo :',
+	'required' => '(deviga)',
 
 	// S
 	'sans_heure' => 'sen horo',

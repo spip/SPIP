@@ -448,6 +448,7 @@ ami állapotát jelzi :',
 
 	// R
 	'repertoire_plugins' => 'Mappa :',
+	'required' => '[Kötelező]', # MODIF
 
 	// S
 	'statut_admin_restreint' => '(korlátolt admin)', # MODIF
