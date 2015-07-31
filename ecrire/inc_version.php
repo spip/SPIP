@@ -496,41 +496,12 @@ OR _request('action') == 'test_dirs')) {
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire
 }
 
-//
-// Reglage de l'output buffering : si possible, generer une sortie
-// compressee pour economiser de la bande passante ; sauf dans l'espace
-// prive car sinon ca rame a l'affichage (a revoir...)
-//
-
-@header("Vary: Cookie, Accept-Encoding");
-// si un buffer est deja ouvert, stop
-if (!test_espace_prive()
-AND $flag_ob
-AND strlen(ob_get_contents())==0
-AND !headers_sent()) {
-	if (
-	$GLOBALS['meta']['auto_compress_http'] == 'oui'
-	// special bug de proxy
-	AND !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))
-	// special bug Netscape Win 4.0x
-	AND (strpos($_SERVER['HTTP_USER_AGENT'], 'Mozilla/4.0') === false)
-	// special bug Apache2x
-	#&& !preg_match(",Apache(-[^ ]+)?/2,i", $_SERVER['SERVER_SOFTWARE'])
-	// test suspendu: http://article.gmane.org/gmane.comp.web.spip.devel/32038/
-	#&& !($GLOBALS['flag_sapi_name'] AND preg_match(",^apache2,", @php_sapi_name()))
-	// si la compression est deja commencee, stop
-	# && !@ini_get("zlib.output_compression")
-	AND !@ini_get("output_handler")
-	AND !isset($_GET['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
-	)
-		ob_start('ob_gzhandler');
-}
-
 // Vanter notre art de la composition typographique
 // La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
 define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
 
 if (!headers_sent())
+	@header("Vary: Cookie, Accept-Encoding");
 	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
 		@header(_HEADER_COMPOSED_BY . " $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
 	else // header minimal
