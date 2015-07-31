@@ -134,9 +134,12 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_pied',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		}
 		elseif (strncmp($fond,"prive/objets/contenu/",21)==0
-		  AND $objet=basename($fond)
-			AND $objet==substr($fond,21)){
-			$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$flux['args']['contexte']['id'],'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
+			AND $objet=basename($fond)
+			AND $objet==substr($fond,21)
+			AND isset($o[$objet]) 
+			AND $o[$objet]) {
+				$id = intval($flux['args']['contexte'][$o[$exec]['id_table_objet']]);
+				$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$id,'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
 		}
 	}
 
