@@ -14,13 +14,13 @@ else
 	$fond = '404';
 
 // Securite 
-if (strstr($fond, '/') ){
-#OR preg_match(',^formulaire_,i', $fond)) {
-	die ("Faut pas se gener");
-}
+if (strstr($fond, '/'))
+	die (_L("Faut pas se gener"));
+
 if (!find_in_path("$fond.html")) {
 	spip_log("page: find_in_path ne trouve pas le squelette $fond");
-	echo "Erreur ! squelette &laquo; ".htmlspecialchars($fond)."&raquo; absent.";
+	echo _T('info_erreur_squelette2',
+		array('fichier' => htmlspecialchars($fond)));
 	$fond = '404';
 }
 include ("inc-public.php3");
