@@ -90,6 +90,7 @@ function xhtml($buffer) {
 
 	}
 	// Ajouter un pseudo bouton d'admin
+	include_ecrire('inc_filtres.php3') ; # pour entites_html
 	$GLOBALS['xhtml_check'] = 'http://validator.w3.org/check?uri=' .
 	  stripslashes(preg_quote(entites_html("http://" .
 					       $_SERVER['HTTP_HOST'].
