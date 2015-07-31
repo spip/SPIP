@@ -162,7 +162,7 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	if (@file_exists("$path/.ok"))
 		return "$baseaff$subdir/";
 
-	@mkdir($path, 0777);
+	@mkdir($path, _DIR_CHMOD);
 	@chmod($path, _DIR_CHMOD);
 
 	$ok = false;

@@ -262,7 +262,7 @@ $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubr
 // mais ne touche pas a cette variable si elle est deja definie
 // afin que mes_options.php puisse en specifier d'autres.
 
-function spip_initialisation_parametree($dir1, $dir2) {
+function spip_initialisation_parametree($dir1) {
 
 	static $too_late = false;
 	if ($too_late) return;
@@ -279,9 +279,8 @@ function spip_initialisation_parametree($dir1, $dir2) {
 
 	define('_DIR_TMP', $dir1 . "tmp/");
 	define('_DIR_DUMP', $dir1 . "tmp/data/");
-	define('_DIR_SESSIONS', $dir1 . "tmp/data/");
-
-	define('_DIR_TRANSFERT', $dir2 . "upload/");
+	define('_DIR_SESSIONS', $dir1 . "tmp/sessions/");
+	define('_DIR_TRANSFERT', $dir1 . "tmp/upload/");
 
 	// les fichiers qu'on y met, entre autres
 	define('_FILE_CRON_LOCK', _DIR_TMP . 'cron.lock');
@@ -294,7 +293,7 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 
 	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS_191', ($dir2 . "inc_connect"));
+	define('_FILE_CONNECT_INS_191', (_DIR_RESTREINT . "inc_connect"));
 	define('_FILE_CONNECT_INS', (_DIR_CONFIG . "connect"));
 	define('_FILE_CONNECT',
 		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
@@ -336,7 +335,7 @@ if (defined('_FILE_OPTIONS')) {
 // 
 // mais cette fonction a peut-etre deja ete appelee par mes_options
 
-spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+spip_initialisation_parametree(_DIR_RACINE) ;
 
 //
 // Definitions standards (charge aussi inc/flock)
