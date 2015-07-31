@@ -90,9 +90,9 @@ function editer_article_texte($texte, $config, $aider)
 	. $aider ("arttexte") . "<br />\n" 
 	. _T('texte_enrichir_mise_a_jour')
 	. $aider("raccourcis")
-	. "<br />"
+	. "</p>"
 	. $sup
-	. "</p>\n"
+	. "<br />"
 	. $afficher_barre
 	.  "<textarea id='text_area' name='texte'$att_text>"
 	.  $texte
@@ -248,7 +248,7 @@ function editer_article_recolle($texte, $att_text)
 
 		$textes_supplement .= "<br />" .
 			afficher_barre('document.formulaire.texte'.$nombre)  .
-			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea></p><p>\n";
+			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea>\n";
 		}
 	return array($texte,$textes_supplement);
 }
