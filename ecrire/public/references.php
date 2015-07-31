@@ -424,11 +424,13 @@ function applique_filtres($p) {
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
 	global $table_criteres_infixes;
+	static $exceptions = array('image_typo');
+
 	$image_miette = false;
 	foreach($p->param as $filtre) {
 		$fonc = array_shift($filtre);
 		if ($fonc) {
-			$is_filtre_image = (substr($fonc,0,6)=='image_') AND ($fonc!='image_graver');
+			$is_filtre_image = ((substr($fonc,0,6)=='image_') AND $fonc!='image_graver');
 			if ($image_miette AND !$is_filtre_image){
 	// il faut graver maintenant car apres le filtre en cours
 	// on est pas sur d'avoir encore le nom du fichier dans le pipe
@@ -449,7 +451,7 @@ function compose_filtres(&$p, $code) {
 			if (in_array($fonc, $table_criteres_infixes))
 				$code = "($code $fonc " . substr($arglist,1) . ')';
 
-			elseif ((substr($fonc,0,6)=='image_') OR (substr($fonc,0,8)=='couleur_')){
+			elseif (((substr($fonc,0,6)=='image_') OR substr($fonc,0,8)=='couleur_') AND !in_array($fonc, $exceptions)) {
 				$code = "filtrer('$fonc',$code$arglist)";
 				if ($is_filtre_image) $image_miette = true;
 			}
