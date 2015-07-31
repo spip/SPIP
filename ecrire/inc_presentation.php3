@@ -2888,7 +2888,9 @@ function fin_html() {
 	}
 
 	echo "</body></html>\n";
-	flush();
+
+	if ($GLOBALS['flag_ob'])
+		@ob_end_flush();
 }
 
 
@@ -2898,22 +2900,6 @@ function fin_page($credits='') {
 	global $multi_popup;
 
 	echo "</td></tr></table>";
-
-	// ici le javascript des popup multilingues.
-	if ($multi_popup) {
-		echo "<script type='text/javascript'><!-- \n";
-		echo "function openmulti(i) {\n";
-
-		/*	// desactivation de ce truc pas fini ; il faudrait
-			// afficher le texte i dans une fenetre du type
-			// http://www.dynamicdrive.com/dynamicindex11/abox.htm
-		echo "textes_multi = new Array;\n";
-		echo $multi_popup;
-		echo "alert (textes_multi[i]);";
-		*/
-		echo "}\n";
-		echo "// --></script>\n";
-	}
 
 	debut_grand_cadre();
 
