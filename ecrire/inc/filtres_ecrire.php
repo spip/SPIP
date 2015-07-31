@@ -33,6 +33,42 @@ function sinon_interdire_acces($ok=false) {
 	exit;
 }
 
+
+// Retourne les parametres de personnalisation css de l'espace prive
+// (ltr et couleurs) ce qui permet une ecriture comme :
+// generer_url_public('style_prive', parametres_css_prive())
+// qu'il est alors possible de recuperer dans le squelette style_prive.html avec
+// #SET{claire,##ENV{couleur_claire,edf3fe}}
+// #SET{foncee,##ENV{couleur_foncee,3874b0}}
+// #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+// #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+// http://doc.spip.org/@parametres_css_prive
+function parametres_css_prive(){
+	global $visiteur_session;
+	global $browser_name, $browser_version;
+
+	$ie = "";
+	include_spip('inc/layer');
+	if ($browser_name=='MSIE')
+		$ie = "&ie=$browser_version";
+
+	$v = "&v=".$GLOBALS['spip_version_code'];
+
+	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
+
+	$theme = "&themes=".implode(',',lister_themes_prives());
+
+	$c = (is_array($visiteur_session)
+	AND is_array($visiteur_session['prefs']))
+		? $visiteur_session['prefs']['couleur']
+		: 1;
+
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$recalcul = _request('var_mode')=='recalcul' ? '&var_mode=recalcul':'';
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $theme . $v . $p . $ie . $recalcul ;
+}
+
+
 // http://doc.spip.org/@chercher_rubrique
 function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,$actionable = false, $retour_sans_cadre=false){
 	global $spip_lang_right;

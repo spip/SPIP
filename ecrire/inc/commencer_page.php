@@ -51,22 +51,7 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 }
 
 function init_head($titre='', $dummy=0, $minipres=false) {
-	include_spip('inc/gadgets');
-	include_spip('inc/presentation_mini');
-
-	$head = ($titre?"<title>$titre</title>\n":"")
-		. "<meta http-equiv='Content-Type' content='text/html"
-		. (($c = $GLOBALS['meta']['charset']) ?
-			"; charset=$c" : '')
-		. "' />\n";
-
-	$head .= "<script type='text/javascript'>/*<![CDATA[*/\n"
-	."var url_menu_rubrique='./?exec=menu_rubriques\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques']."';\n"
-	."(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);\n"
-	."/*]]>*/</script>\n";
-	$head .= envoi_link($nom_site_spip,$minipres);
-
-	return pipeline('header_prive', $head);
+	return recuperer_fond("prive/squelettes/head/dist",array('titre'=>$titre,'minipres'=>$minipres?' ':''));
 }
 
 // fonction envoyant la double serie d'icones de redac

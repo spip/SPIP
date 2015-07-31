@@ -1,4 +1,45 @@
 [(#REM)
 Appel au script php en attendant de reecrire le head ici
 ]
-[(#REM|init_head)]
+[<title>(#ENV{titre,''})</title>
+]
+<meta http-equiv="Content-Type" content="text/html[; charset=(#CONFIG{charset})]" />
+<script type='text/javascript'>/*<![CDATA[*/
+var url_menu_rubrique="./?exec=menu_rubriques\x26date=#CONFIG{date_calcul_rubriques}";
+(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
+[(#EVAL{$_COOKIE}|table_valeur{spip_accepte_ajax}|>={1}|non)
+function test_accepte_ajax(){jQuery.ajax({"url":"[(#URL_ECRIRE{test_ajax,js=1}|replace{'&amp;','\x26'})]"});}
+][(#EVAL{_OUTILS_DEVELOPPEURS}|oui)var _OUTILS_DEVELOPPEURS=true;
+]var ajax_image_searching = '<img src="#CHEMIN_IMAGE{searching.gif}" alt="" />';
+var stat = [(#CONFIG{activer_statistiques}|=={non}|?{0,1})];
+var confirm_changer_statut = '<:confirm_changer_statut|html2unicode|addslashes|unicode_to_javascript:>';
+/*]]>*/</script>
+[
+(#REM) CSS de secours en cas de non fonct de la suivante
+][<link rel="stylesheet" type="text/css" href="(#CHEMIN{style_prive_defaut.css}|url_absolue)" id="cssprivee" />]
+[
+(#REM) SPIP-style...
+][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_style.css}|url_absolue)" />]
+[
+(#REM) CSS imprimante (masque des trucs, a completer)
+][<link rel="stylesheet" type="text/css" href="(#CHEMIN{spip_style_print.css}|url_absolue)" media="print" />]
+[
+(#REM) CSS espace prive : la vraie
+]<link rel="stylesheet" type="text/css" href="#URL_PAGE{style_prive,#REM|parametres_css_prive}" />
+[
+(#REM) CSS optionelle minipres
+][(#ENV{minipres,''}|oui)
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{minipres.css}|url_absolue)" />]
+][
+(#REM) Favicon
+][<link rel="shortcut icon" href="(#CHEMIN{spip.ico}|url_absolue)" type="image/x-icon" />]
+
+<link rel="alternate" type="application/rss+xml" title="[(#NOM_SITE_SPIP|attribut_html)]" href="#URL_PAGE{bakend}" />
+<link rel="help" type="text/html" title="<:icone_aide_ligne|attribut_html:>" href="#URL_PAGE{aide_index,var_lang=#LANG}" />
+[(#CONFIG{activer_breves}|=={non}|non)
+<link rel="alternate" type="application/rss+xml" title="<:info_breves_03|attribut_html:>" href="#URL_PAGE{backend-breves}" />
+]
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/layer.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/presentation.js})"></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/gadgets.js})"></script>]

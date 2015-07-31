@@ -132,7 +132,6 @@ ecrire/inc/filtres_images_lib_mini.php -text
 ecrire/inc/filtres_images_mini.php -text
 ecrire/inc/filtres_mime.php -text
 ecrire/inc/filtres_mini.php -text
-ecrire/inc/gadgets.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
 ecrire/inc/iconifier.php -text

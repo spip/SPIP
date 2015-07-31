@@ -257,7 +257,7 @@ function help_frame_menu($titre, $contenu, $lang)
 	  "\"/>\n" .
 		http_script('', 'jquery.js') .
 		"\n" .
-		$GLOBALS['browser_layer'] .
+		http_script('', 'layer.js') .
 		http_script('var curr_article;
 function activer_article(id) {
 	if (curr_article)

@@ -7,4 +7,4 @@
 ]
 [(#REM) Si pas de title, celui ci sera mis automatiquement par f_title_auto
 en capturant le premier <h1> de la page]
-<INCLURE{fond=prive/squelettes/inclure/head}>
+#PIPELINE{header_prive,#INCLURE{fond=prive/squelettes/inclure/head}}

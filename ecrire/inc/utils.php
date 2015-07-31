@@ -1508,20 +1508,6 @@ function spip_initialisation_suite() {
 	       'index.php' : '');
 
 
-	// Gestion AJAX sauf pour le mode oo (et en espace prive)
-
-	if (isset($GLOBALS['visiteur_session']['prefs'])AND !_DIR_RESTREINT) {
-		$x = $GLOBALS['visiteur_session']['prefs'];
-		if (!is_array($x)) $x = unserialize($x); // prive.php l'a fait
-		if ($x['display'] == 4) {
-			if (!defined('_SPIP_AJAX')) define('_SPIP_AJAX', -1);
-			if (isset($_COOKIE['spip_accepte_ajax'])) {
-				include_spip("inc/cookie");
-				spip_setcookie('spip_accepte_ajax', -1, 0);
-			}
-		}
-	}
-
 	if (!defined('_SPIP_AJAX'))
 		define('_SPIP_AJAX', ((!isset($_COOKIE['spip_accepte_ajax']))
 			? 1

@@ -42,6 +42,14 @@ body { font-size:0.625em; font-family: Verdana, Geneva, Sans, sans-serif; }
 .invisible, /* compat */
 .over,.js .over-js,.no-js .over-nojs { position: absolute; left: -3000em; height: 1%; }
 
+/* oldies */
+.js .invisible_au_chargement { visibility: hidden; }
+.js .visible_au_chargement { visibility: hidden; }
+.js .display_au_chargement { display: none; }
+.no-js .invisible_au_chargement { visibility: hidden; }
+.no-js .visible_au_chargement { visibility: visible; }
+.no-js .display_au_chargement { display: block; }
+
 /* ajax */
 .image_loading {float:#GET{right};}
 
@@ -523,7 +531,7 @@ h3.titrem {position:relative;}
 .hover { background-color: #GET{claire}; }
 .deplie a.titremancre { background-image: url(#CHEMIN_IMAGE{deplierbas.gif}); }
 .impliable {}
-.blocreplie { display: none; }
+.js .blocreplie { display: none; }
 .blocdeplie { display: block; background: none; }
 
 td.pense-bete, a.pense-bete { background: url([(#CHEMIN_IMAGE{m_envoi_bleu[(#GET{rtl})].gif})]) center [(#GET{left})] no-repeat; padding-#GET{left}: 20px; }

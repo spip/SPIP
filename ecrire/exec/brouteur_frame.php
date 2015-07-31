@@ -25,6 +25,7 @@ function exec_brouteur_frame_dist() {
 	$peutpub = autoriser('publierdans','rubrique');
 
 	include_spip('inc/headers');
+	include_spip('inc/commencer_page');
 	http_no_cache();
 
 	$profile = _request('var_profile') ? "&var_profile=1" : '';
@@ -37,7 +38,7 @@ function exec_brouteur_frame_dist() {
 		. "<meta http-equiv='Content-Type' content='text/html"
 		. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
 		. "' />\n"
-		. envoi_link(_T('info_mon_site_spip'))	
+		. init_head(_T('info_mon_site_spip'))
 		. http_script('jQuery(function(){
 	jQuery("a.iframe").click(function(){
 		window.open(this.href,"iframe"+this.rel);
