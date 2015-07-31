@@ -375,9 +375,9 @@ function spip_sqlite_fetch($r, $t='', $serveur='') {
 		$retour = sqlite_fetch_array($r, $t);
 	}	
 	
-	// la version 2  parfois renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
+	// les version 2 et 3 parfois renvoie des 'table.titre' au lieu de 'titre' tout court ! pff !
 	// suppression de 'table.' pour toutes les cles (c'est un peu violent !)
-	if ($retour && _sqlite_is_version(2, $link)){
+	if ($retour){
 		$new = array();
 		foreach ($retour as $cle=>$val){
 			if (($pos = strpos($cle, '.'))!==false){
@@ -388,7 +388,7 @@ function spip_sqlite_fetch($r, $t='', $serveur='') {
 		$retour = &$new;
 	}
 
-	//print_r($retour);
+	//echo "<br />";print_r($retour);
 	return $retour;
 }
 
