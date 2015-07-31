@@ -92,7 +92,8 @@ function inc_envoyer_mail_dist($destinataire, $sujet, $corps, $from = "", $heade
 		$parts = "";
 		if ($corps['pieces_jointes'] AND function_exists('mail_embarquer_pieces_jointes'))
 			$parts = mail_embarquer_pieces_jointes($corps['pieces_jointes']);
-	}
+	} else
+		$texte = $corps;
 
 	if (!$from) $from = $email_envoi;
 
