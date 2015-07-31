@@ -51,15 +51,17 @@
 			<div class="contre-encart">
 
 				<div class="liste-articles">
+					#ANCRE_PAGINATION
 					<h2 class="invisible"><:articles_auteur:></h2>
 					<ul>
-						<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse}>
+						<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse} {pagination 10}>
 						<li>
 							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 							<small>[(#DATE|affdate)]</small>
 						</li>
 						</BOUCLE_articles>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 
 			</div><!-- fin contre-encart -->
