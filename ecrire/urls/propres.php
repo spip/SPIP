@@ -204,24 +204,36 @@ function recuperer_parametres_url(&$fond, $url) {
 	.'([?&].*)?$,', $url, $regs)
 	OR preg_match(
 	',(^|/)page\.php3?[?]fond=(article|breve|rubrique|mot|auteur|site)'
-	.'&id_(\2|syndic)=[0-9]+([&].*)?$,', $url, $regs))) {
+	.'&id_(\2|syndic)=[0-9]+([&].*)?$,', $url, $regs)
+	)) {
 		$type = $regs[3];
 		$id_objet = intval($GLOBALS[$id_table_objet = id_table_objet($type)]);
-		if ($id_objet) {
-			$func = "generer_url_$type";
-			$url_propre = $func($id_objet);
-			if ($url_propre
-			AND ($url_propre<>$regs[2])) {
-				include_ecrire('inc_headers');
-				http_status(301);
-				// recuperer les arguments supplementaires (&debut_xxx=...)
-				$reste = preg_replace('/^&/','?',
-					preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
-				redirige_par_entete("$url_propre$reste");
-			}
+	}
+
+	/* Compatibilite urls-page */
+	else if (preg_match(
+	',[?/&](article|breve|rubrique|mot|auteur|site)[=]([0-9]+),',
+	$url, $regs)) {
+		$type = $regs[1];
+		$id_objet = $regs[2];
+	}
+
+	if ($id_objet) {
+		$func = "generer_url_$type";
+		$url_propre = $func($id_objet);
+		if ($url_propre
+		AND ($url_propre<>$regs[2])) {
+			include_ecrire('inc_headers');
+			http_status(301);
+			// recuperer les arguments supplementaires (&debut_xxx=...)
+			$reste = preg_replace('/^&/','?',
+				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
+			redirige_par_entete("$url_propre$reste");
 		}
 		return;
 	}
+	/* Fin compatibilite anciennes urls */
+
 
 	// Chercher les valeurs d'environnement qui indiquent l'url-propre
 	$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];

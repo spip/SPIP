@@ -18,6 +18,8 @@ if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 # on peut indiquer '.html' pour faire joli
 define ('_terminaison_urls_page', '');
 # ici, ce qu'on veut ou presque (de preference pas de '/' ni de '.')
+# attention seul le '=' restera compatible avec les autres modes d'url
+# (sinon il faut aller y modifier le code de compatibilite)
 define ('_separateur_urls_page', '=');
 # on peut indiquer '' si on a installe le .htaccess
 define ('_debut_urls_page', get_spip_script('./').'?');
