@@ -824,6 +824,7 @@ function critere_IN_dist($idb, &$boucles, $crit){
 	list($arg, $op, $val, $col, $where_complement) = $r;
 
 	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : ($crit->exclus ? 'exclus' : ''), $arg, $op, $val, $col);
+
 	//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 	$where = $in;
 	if ($crit->cond){
@@ -1416,7 +1417,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 		} else
 			foreach ((($op!='IN') ? $params : calculer_vieux_in($params)) as $p){
 				$a = calculer_liste($p, $desc, $boucles, $parent);
-				if ($op=='IN') $val[] = $a;
+				if (strcasecmp($op,'IN')==0) $val[] = $a;
 				else $val[] = kwote($a, $boucles[$idb]->sql_serveur, 'char'); // toujours quoter en char ici
 			}
 	}
