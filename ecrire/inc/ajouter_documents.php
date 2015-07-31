@@ -44,6 +44,8 @@ function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_doc
 // http://doc.spip.org/@ajouter_un_document
 function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
+	include_spip('inc/modifier');
+
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
 // content-type est connu, et si possible recuperer la taille, voire plus.
@@ -70,14 +72,15 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			spip_log("Echec du lien vers le document $source, abandon");
 			return;
 		}
-	} else  {$distant = 'non';
+	} else {
+		$distant = 'non';
 		$type_image = $titre = ''; // au pire
 		// tester le type de document :
 		// - interdit a l'upload ?
-		// - quel numero dans spip_types_documents ?  =-(
+		// - quelle extension dans spip_types_documents ?
 		// - est-ce "inclus" comme une image ?
 		preg_match(",\.([^.]+)$,", $nom_envoye, $match);
-		$ext = (corriger_extension(strtolower($match[1])));
+		$ext = corriger_extension(strtolower($match[1]));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
 		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
