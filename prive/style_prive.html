@@ -72,8 +72,8 @@ div.table_page { margin-top: 1em; }
 #chemin ul, #chemin li, #chemin li .bloc {  
 	margin: 0; 
 	padding: 0; 
-	margin-top: 0px; 
-	padding-top: 0px; 
+	margin-top: 0; 
+	padding-top: 0; 
 	list-style-type: none;
 	display: inline; 
 }
@@ -604,11 +604,15 @@ td.message, a.message { background: url(#GET{chemin_img_pack}m_envoi[(#GET{rtl})
 .couleur_nombre { background: #GET{claire}; }
 .couleur_langue { background: #GET{foncee}; }
 
-.statistiques_visites ul.referers { margin-left: 0px; padding-left: 0px; list-style-type: none; font-family: arial, helvetica, sans; }
-.statistiques_visites ul.referers li {margin-bottom: 1em; clear: #GET{right}; }
+.statistiques_visites ul.referers { margin-left: 0; padding-left: 0; list-style: none; }
+.statistiques_visites ul.referers li { margin-bottom: 1em; clear: #GET{right}; }
 .statistiques_visites ul.referers li .titrem { font-weight: normal; }
+.statistiques_visites ul.referers li .visites { color: red; padding-left: 16px; }
+.statistiques_visites ul.referers li .titrem .visites { padding-left: 0; }
+.statistiques_visites ul.referers li a { font-weight: bold; }
 .statistiques_visites ul.referers li ul { font-size:x-small; list-style-type: disc;}
-.statistiques_visites ul.referers li li {clear: none; margin-bottom:0; }
+.statistiques_visites ul.referers li li { clear: none; margin-bottom:0; }
+.statistiques_visites ul.referers li li .visites { padding-left: 0; }
 
 /* agenda */
 .bandeau_agenda { background: #GET{claire}; }
