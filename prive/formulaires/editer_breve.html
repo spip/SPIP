@@ -27,7 +27,7 @@
 				][(#ENV**{_texte_trop_long,''})
 				][(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
 				<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
-					(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
+					(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
 	    </li>
 	  	<li class="editer_liens_sites fieldset">
 			<fieldset>
