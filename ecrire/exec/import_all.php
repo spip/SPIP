@@ -78,7 +78,7 @@ function verifier_sauvegarde ($archive) {
 
 	if (preg_match('/<SPIP\s+[^>]*version_base="([0-9.]+)"[^>]*version_archive="([^"]+)"/', $buf, $regs)
 	AND $regs[1] == $spip_version
-	AND import_charge_version($regs[2], 'inc', true))
+	AND import_charge_version($regs[2]) )
 		return ''; // c'est bon
 
 	return _T('avis_erreur_version_archive', 
