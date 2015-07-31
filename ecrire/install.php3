@@ -2,7 +2,7 @@
 
 include ("inc_version.php3");
 
-include_ecrire ("inc_db_mysql.php3");
+//include_ecrire ("inc_db_mysql.php3");
 include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
@@ -12,7 +12,6 @@ if (file_exists("inc_connect.php3")) {
 	exit;
 }
 
-include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_base.php3");
 
 
@@ -29,6 +28,8 @@ if ($etape == 6) {
 	echo "<P>Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;...";
 
 	include_ecrire ("inc_connect_install.php3");
+	include_ecrire ("inc_meta.php3");
+	include_ecrire ("inc_acces.php3");
 
 	if ($login) {
 		$nom = addslashes($nom);

@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_ACCES")) return;
 define("_ECRIRE_INC_ACCES", "1");
 
-include_ecrire('inc_meta.php3');
 
 $GLOBALS['htaccess'] = $GLOBALS['dir_ecrire'].'.htaccess';
 $GLOBALS['htpasswd'] = $GLOBALS['dir_ecrire'].'data/.htpasswd';
