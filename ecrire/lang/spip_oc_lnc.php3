@@ -165,6 +165,10 @@ la documentacion d\'SPIP</a>.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aquestes param&egrave;tres.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
+'calendrier_synchro_lien' => 'Recuperar lo fichi&egrave;r <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aqueste sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent permet de seguir l\'activitat de l\'espaci public d\'aqueste sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -305,6 +309,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
 'entree_url' => 'L\'adrei&ccedil;a (URL) del v&ograve;stre sit',
+'envoi_via_le_site' => 'Mandad&iacute;s amb lo biais del sit web',
 'erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
 'erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
@@ -325,7 +330,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'form_forum_message_auto' => '(aqu&ograve;\'s un messatge automatic)',
 'form_forum_pass' => 'mot de santa Clara :',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
-'form_forum_voici1' => 'Vaqu&iacute; v&ograve;stres identificants per poder participar als forums
+'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poder participar als forums
 del sit "@nom_site_spip@" (@adresse_site@/) :',
 'form_forum_voici2' => 'Vaqu&iacute; v&ograve;stres identificants per prepausar d\'articles 
  sul sit "@nom_site_spip@" (@adresse_site@/ecrire/) :',
@@ -677,6 +682,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_forum_interne' => 'forum int&egrave;rne',
 'info_forum_ouvert' => 'Dins l\'espaci privat del sit, un forum es dob&egrave;rt a totes los redactors registrats . Pod&egrave;tz, &ccedil;ai jos, activar un forum suplimentari, reservat als administrators sonque.',
 'info_forum_statistiques' => 'Estadisticas de las vesitas',
+'info_forums_abo_invites' => 'V&ograve;stre sit web porg&iacute;s de forums pels abonats; dins lo sit public los vesitaires son convidats a se registrar.',
 'info_gauche_admin_effacer' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
 'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
 'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><p /> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
@@ -821,10 +827,12 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
+'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dels vesitaires del sit public',
 'info_option_email' => 'Quora un vesitaire del sit manda un messatge n&ograve;u al forum
  associat a un article, se\'n p&ograve;t avisar los autors
  de l\'article per e-mail. Desiratz d\'utilizar aquela opcion?',
 'info_option_faire_suivre' => 'Far seguir los messatges dels forums als autors dels articles',
+'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de vesitaires',
 'info_option_ne_pas_faire_suivre' => 'Far pas seguir los messatges dels forums',
 'info_options_avancees' => 'OPCIONS AVAN&Ccedil;ADAS',
 'info_ortho_activer' => 'Activar lo verificador d\'ortografia',
@@ -878,6 +886,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_publie_2' => 'Article publicat
 --------------',
 'info_publies' => 'Los v&ograve;stres articles publicats en linha',
+'info_question_accepter_visiteurs' => 'S\'a las esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, volgatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, las estadisticas de las vesitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;ls s\'inscrigan
  a partir del sit public? Se o acceptatz, los vesitaires se poir&agrave;n inscriure
