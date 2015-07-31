@@ -34,18 +34,13 @@ function format_polyglotte_html($args, $prof)
 	$contenu = array(); 
 	foreach($args as $l=>$t)
 		$contenu[]= ($l ? "[$l]" : '') . $t;
-	return "<multi>" . join(" ", $args) . "</multi>";
+	return "<multi>" . join(" ", $contenu) . "</multi>";
 }
 
 function format_idiome_html($nom, $module, $args, $filtres, $next, $prof)
 {
 	foreach ($args as $k => $v) $args[$k] = "$k=$v";
 	$args = (!$args ? '' : ('{' . join(',', $args) . '}'));
-	$s = (!$args AND !$filtres
-		AND  $next
-		AND ($next->type == 'texte')
-		AND preg_match(',^[\w\d|{*],', $next->texte));
-
 	return "<:" . ($module ? "$module:" : "") . $nom . $args . $filtres . ":>";
 }
 
