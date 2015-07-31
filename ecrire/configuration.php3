@@ -79,12 +79,14 @@ debut_cadre_relief("racine-24.gif");
 	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='formo'><p>&nbsp;";
 	echo "</TD></TR>";
 
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
-	echo "Adresse e-mail du webmestre (optionnel)</FONT></B></TD></TR>";
+	if ($options == "avancees") {
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "Adresse e-mail du webmestre (optionnel)</FONT></B></TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='forml'>";
-	echo "</TD></TR>";
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='forml'>";
+		echo "</TD></TR>";
+	}
 
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
@@ -513,28 +515,29 @@ echo "<p>";
 
 
 //
-// Gestion des documents joints
+// Options des liens ouvrants
 //
 
-debut_cadre_relief("doc-24.gif");
+if ($options == "avancees") {
+	debut_cadre_relief("doc-24.gif");
 
-$lien_ouvrant_in = lire_meta("lien_ouvrant_in");
-$lien_ouvrant_out = lire_meta("lien_ouvrant_out");
-$lien_ouvrant_doc = lire_meta("lien_ouvrant_doc");
-$lien_ouvrant_manuel = lire_meta("lien_ouvrant_manuel");
+	$lien_ouvrant_in = lire_meta("lien_ouvrant_in");
+	$lien_ouvrant_out = lire_meta("lien_ouvrant_out");
+	$lien_ouvrant_doc = lire_meta("lien_ouvrant_doc");
+	$lien_ouvrant_manuel = lire_meta("lien_ouvrant_manuel");
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee'colspan=2 BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Liens hypertextes ouvrants</FONT></B> </TD></TR>";
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee'colspan=2 BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Liens hypertextes ouvrants</FONT></B> </TD></TR>";
 
-echo "<TR><TD class='verdana2' colspan=2>";
-echo "Vous pouvez d&eacute;cider de forcer l'ouverture d'une nouvelle fen&ecirc;tre &agrave; l'&eacute;cran lorsque les visiteurs de votre site suivent les liens hypertextes (ce qui correspond &agrave; effectuer syst&eacute;matiquement l'op&eacute;ration &laquo;Ouvrir dans une nouvelle fen&ecirc;tre...&raquo; pour tous les liens).<p>";
-echo "<i>N.B.</i> Une telle pratique est vivement d&eacute;conseill&eacute;e, car contraire &agrave; la n&eacute;tiquette&nbsp;: c'est aux visiteurs de d&eacute;cider quand et pourquoi ils veulent ouvrir des fen&ecirc;tre dans leur butineur, et non aux webmestres des sites. Nous recommandons donc de laisser les s&eacute;lections suivantes sur &laquo;Non&raquo;.<p>";
-echo "Ouvrir une nouvelle fen&ecirc;tre&nbsp;:";
-echo "</TD></TR>";
+	echo "<TR><TD class='verdana2' colspan=2>";
+	echo "Vous pouvez d&eacute;cider de forcer l'ouverture d'une nouvelle fen&ecirc;tre &agrave; l'&eacute;cran lorsque les visiteurs de votre site suivent les liens hypertextes (ce qui correspond &agrave; effectuer syst&eacute;matiquement l'op&eacute;ration &laquo;Ouvrir dans une nouvelle fen&ecirc;tre...&raquo; pour tous les liens).<p>";
+	echo "<blockquote><i>Une telle pratique est vivement d&eacute;conseill&eacute;e, car contraire &agrave; la n&eacute;tiquette&nbsp;: c'est aux visiteurs de d&eacute;cider quand et pourquoi ils veulent ouvrir des fen&ecirc;tres dans leur butineur, et non aux webmestres des sites. Nous recommandons donc de laisser les s&eacute;lections suivantes sur &laquo;Non&raquo;.</i></blockquote>";
+	echo "Ouvrir une nouvelle fen&ecirc;tre&nbsp;:";
+	echo "</TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='left' class='verdana2'>";
-	echo "pour les liens à l'intérieur du site :";
+	echo "<li>pour les liens &agrave; l'int&eacute;rieur du site&nbsp;:";
 	echo "</TD>";
 	echo "<TD ALIGN='left' class='verdana2'>";
 	afficher_choix('lien_ouvrant_in', $lien_ouvrant_in,
@@ -543,7 +546,7 @@ echo "</TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='left' class='verdana2'>";
-	echo "pour les liens vers l'extérieur du site :";
+	echo "<li>pour les liens vers l'ext&eacute;rieur du site&nbsp;:";
 	echo "</TD>";
 	echo "<TD ALIGN='left' class='verdana2'>";
 	afficher_choix('lien_ouvrant_out', $lien_ouvrant_out,
@@ -552,7 +555,7 @@ echo "</TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='left' class='verdana2'>";
-	echo "pour l'ouverture des documents joints :";
+	echo "<li>pour l'ouverture des documents joints&nbsp;:";
 	echo "</TD>";
 	echo "<TD ALIGN='left' class='verdana2'>";
 	afficher_choix('lien_ouvrant_doc', $lien_ouvrant_doc,
@@ -560,27 +563,26 @@ echo "</TD></TR>";
 	echo "</TD></TR>\n";
 
 
-
-echo "<TR>";
-echo "<TD align='left' class='verdana2' colspan=2>";
+	echo "<TR>";
+	echo "<TD align='left' class='verdana2' colspan=2>";
 	echo "<p><hr><p>";
-	echo "Le raccourci <tt>[...->>...]</tt> permet de cr&eacute;er des liens hypertextes qui provoquent l'ouverture d'une nouvelle fen&ecirc;tre, selon le choix du r&eacute;dacteur. Vous pouvez accepter ou interdire l'utilisation de ce raccourci par les r&eacute;dacteurs du site.<p>";
-	echo "<i>N.B.</i> Une telle pratique est d&eacute;conseill&eacute;e: vous devriez alors v&eacute;rifier le comportement de chaque lien hypertexte dans chaque article, sauf &agrave; perdre la coh&eacute;rence de votre interface de navigation. Si vous conservez l'option &laquo;Interdire la s&eacute;lection manuelle&raquo;, ce raccourci fonctionnera normalement, mais sans provoquer l'ouverture d'une fen&ecirc;tre.<p>";
+	echo "Le raccourci de mise en page <tt>[...->>...]</tt> permet, s'il est activ&eacute;, de cr&eacute;er des liens hypertextes qui provoquent l'ouverture d'une nouvelle fen&ecirc;tre, selon le choix du r&eacute;dacteur. Vous pouvez accepter ou interdire l'utilisation de ce raccourci par les r&eacute;dacteurs du site.<p>";
+	echo "<blockquote><i>Une telle pratique est d&eacute;conseill&eacute;e: vous devriez alors v&eacute;rifier le comportement de chaque lien hypertexte dans chaque article, sauf &agrave; perdre la coh&eacute;rence de votre interface de navigation. Si vous conservez l'option &laquo;Interdire la s&eacute;lection manuelle&raquo;, ce raccourci fonctionnera normalement, mais sans provoquer l'ouverture d'une fen&ecirc;tre.</i></blockquote>";
 
 	afficher_choix('lien_ouvrant_manuel', $lien_ouvrant_manuel,
-	array('oui' => 'Autoriser les liens ouvrants «manuels»',
-		'non' => 'Interdire les liens ouvrants «manuels»'), "<br>");
-echo "</TD></TR>";
+	array('oui' => 'Autoriser les liens ouvrants &laquo;&nbsp;manuels&nbsp;&raquo;',
+		'non' => 'Interdire les liens ouvrants &laquo;&nbsp;manuels&nbsp;&raquo;'), "<br>");
+	echo "</TD></TR>";
 
-echo "<TR><TD ALIGN='right'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>\n";
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
 
-fin_cadre_relief();
+	fin_cadre_relief();
 
-echo "<p>";
-
+	echo "<p>";
+}
 
 
 
