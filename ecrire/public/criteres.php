@@ -987,7 +987,7 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args)
 				 $where);
 		$where = array("'?'", "!(is_array($pred)?count($pred):strlen($pred))","''", $where);
 		if ($where_complement) // condition annexe du type "AND (objet='article')"
-			$where_complement = array("'?'", "!$pred","''", $where_complement);
+			$where_complement = array("'?'", "!(is_array($pred)?count($pred):strlen($pred))","''", $where_complement);
 	}
 
 	$boucles[$idb]->where[]= $where;
