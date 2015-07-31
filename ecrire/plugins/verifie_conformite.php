@@ -30,9 +30,11 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			list($tagname,$atts) = spip_xml_decompose_tag($tag);
 			if ($tagname=='plugin' AND is_array($sous)){
 				if (!isset($atts['spip'])
-					OR plugin_version_compatible($atts['spip'],$vspip))
+					OR plugin_version_compatible($atts['spip'],$vspip)) {
 					// on prend la derniere declaration avec ce nom
 					$p = end($sous);
+					$compat_spip = isset($atts['spip']) ? $atts['spip'] : '';
+				}
 			}
 		}
 	}
@@ -111,12 +113,17 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 			}
 		}
 		$necessite = array();
+		$spip_trouve = false;
 		if (spip_xml_match_nodes(',^necessite,',$arbre,$needs)){
 			foreach(array_keys($needs) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
 				$necessite[] = $att;
+				if (strtolower($att['id']) == 'spip')
+					$spip_trouve = true;
 			}
 		}
+		if ($compat_spip AND !$spip_trouve)
+				$necessite[] = array('id' => 'spip', 'version' => $compat_spip);
 		$arbre['necessite'] = $necessite;
 		$utilise = array();
 		if (spip_xml_match_nodes(',^utilise,',$arbre,$uses)){
