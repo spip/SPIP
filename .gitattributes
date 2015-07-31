@@ -267,6 +267,7 @@ ecrire/inc_auteur_infos.php -text
 ecrire/inc_auteurs_edit.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
+ecrire/inc_brouteur.php -text
 ecrire/inc_brouteur_frame.php -text
 ecrire/inc_config-fonctions.php -text
 ecrire/inc_controle_forum.php -text
