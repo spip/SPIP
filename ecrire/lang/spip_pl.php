@@ -295,7 +295,6 @@ zostanie odrzucona):
 
 Dziękujemy za wzięcie udziału.
 ',
-'form_pet_message_commentaire' => 'Jakieś wiadomości lub komentarze?',
 'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
 'form_pet_probleme_liens' => 'Spróbuj wysłać wiadomość po usunięciu linków.',
 'form_pet_probleme_technique' => 'Problem techniczny, podpisy są tymczasowo zawieszone.',
@@ -321,12 +320,7 @@ Dziękujemy za wzięcie udziału.
 'forum_non_inscrit' => 'Nie jesteś zarejestrowany, lub adres bądź hasło są nieprawidłowe.',
 'forum_par_auteur' => 'wg @auteur@',
 'forum_probleme_database' => 'Problem z bazą danych, Twoja wiadomość nie mogła być zapisana.',
-'forum_qui_etes_vous' => '<b>Kim jesteś?</b> (nieobowiązkowe)',
 'forum_titre_erreur' => 'Błąd...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Zatwierdź ten wybór',
-'forum_votre_email' => 'Twój adres e-mail:',
-'forum_votre_nom' => 'Twoje imię (lub alias):',
 
 // I
 'ical_texte_rss_articles' => 'Plik "backend" artykułów tej strony znajduje się pod adresem:',
@@ -370,7 +364,6 @@ Dziękujemy za wzięcie udziału.
 'icone_statistiques_visites' => 'Statystyki',
 'icone_suivi_activite' => 'Prace redakcyjne',
 'icone_suivi_actualite' => 'Rozwój strony',
-'icone_suivi_forums' => 'Zarządzanie forum',
 'icone_suivi_pettions' => 'Śledź/zarządzaj ogłoszeniami',
 'icone_suivi_revisions' => 'Zmiany artykułów',
 'icone_supprimer_document' => 'Usuń ten dokument',

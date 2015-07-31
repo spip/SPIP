@@ -295,7 +295,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 شكراً لمساهمتك
 
 ',
-'form_pet_message_commentaire' => 'أي رسالة أو تعليق؟',
 'form_pet_nom_site2' => 'اسم موقعك',
 'form_pet_probleme_liens' => 'الرجاء إعادة إدخال رسالتك بعد حذف كل روابط هايبرتكست.',
 'form_pet_probleme_technique' => 'مشكلة تقنية، التوقيعات معلقة مؤقتاً.',
@@ -321,12 +320,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_non_inscrit' => 'إما انك غير مسجل أو هناك خطأ في العنوان أو كلمة السر.',
 'forum_par_auteur' => 'من @auteur@',
 'forum_probleme_database' => 'مشكلة في قاعدة البيانات، لم يتم تسجيل مشاركتك.',
-'forum_qui_etes_vous' => '<b>من أنت؟</b>  (اختياري)',
 'forum_titre_erreur' => 'خطأ...',
-'forum_url' => 'عنوان URL:',
-'forum_valider' => 'التصديق على هذا الخيار',
-'forum_votre_email' => 'عنوانك الإلكتروني:',
-'forum_votre_nom' => 'اسمك (أو لقبك):',
 
 // I
 'ical_texte_rss_articles' => 'يوجد ملف «الترخيص الخلفي» لمقالات هذا الموقع على العنوان: ',
@@ -370,7 +364,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_statistiques_visites' => 'الإحصاءات',
 'icone_suivi_activite' => 'متابعة نشاط الموقع',
 'icone_suivi_actualite' => 'تطور الموقع',
-'icone_suivi_forums' => 'متابعة/إدارة المنتديات',
 'icone_suivi_pettions' => 'متابعة/إدارة العرائض',
 'icone_suivi_revisions' => 'تعديل المقالات',
 'icone_supprimer_document' => 'حذف هذا المستند',

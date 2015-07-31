@@ -295,7 +295,6 @@ sera ignorée) :
 
 תודה על השתתפותך
 ',
-'form_pet_message_commentaire' => 'יש לך תגובה או הודעה ?',
 'form_pet_nom_site2' => 'שם האתר שלך',
 'form_pet_probleme_liens' => 'נא לתקן את הודעתך בהסרת הקישורים.',
 'form_pet_probleme_technique' => 'בעיה טכנית, חתימות לא עובדות כרגע.',
@@ -321,12 +320,7 @@ sera ignorée) :
 'forum_non_inscrit' => 'או שאינך רשום במערכת או שהכתובת או הסיסמה שגויים.',
 'forum_par_auteur' => 'מאת @auteur@',
 'forum_probleme_database' => 'בעיית בסיס נתונים, הודעתך לא יכולה להירשם.',
-'forum_qui_etes_vous' => '<b>מי את / אתה?</b> (אופציונלי)',
 'forum_titre_erreur' => 'שגיאה...',
-'forum_url' => 'כתובת כללית:',
-'forum_valider' => 'תן תוקף לבחירה הזאת',
-'forum_votre_email' => 'כתובת הדוא"ל שלך:',
-'forum_votre_nom' => ':(השם שלך (או הכינוי',
 
 // I
 'ical_texte_rss_articles' => 'הקובץ backend של מאמרי האתר הזה נמצא בכתובת הבאה :',
@@ -370,7 +364,6 @@ sera ignorée) :
 'icone_statistiques_visites' => 'סטטיסטיקת ביקורים',
 'icone_suivi_activite' => 'מעקב אחר פעילות האתר',
 'icone_suivi_actualite' => 'התפתחות האתר',
-'icone_suivi_forums' => 'מעקב/ניהול פורומים',
 'icone_suivi_pettions' => 'מעקב/ניהול עצומות',
 'icone_suivi_revisions' => 'שינוים במאמרים',
 'icone_supprimer_document' => 'מחק מסמך זה',

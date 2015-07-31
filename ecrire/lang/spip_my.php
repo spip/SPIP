@@ -269,7 +269,6 @@ sera ignorée) :
 'form_pet_envoi_mail_confirmation' => 'အတည်ပြုချက် စာစောင်ကို​ အီးမေးလ်နှင့် ပို့ပြီးပါပြီ၊ ပေးထားသော လိပ်စာသို့သွားပြီး သင်လက်မှတ်ကို အတည်ပြုပါ။', # MODIF
 'form_pet_mail_confirmation' => '​ဟေလို၊ သင်သည် ဒီ@titre@ တောင်းဆိုချက်ကို လက်မှတ်ထိုးရန် အဆိုပြုခဲ့ပြီးပြီ၊ အောက်ပါ သတင်းအချက်အလက်များကို ပေးထားပြီးဖြစ်ပါသည်။ နာမည် @nom_email@ ဝက်ဘ်ဆိုက်လိပ်စာ @nom_site@ - @url_site@ စာစောင် @message@
 အရေးကြီးသည်၊ သင့်လက်မှတ်ကို အတည်ပြုရန် အောက်ပါ လိပ်စာကိုနှိပ်ခြင်းဖြင့်သွားပါ၊ သို့မဟုတ်လျှင် တောင်းဆိုချက်သည် ပယ်ဖျက်ခြင်းခံရမည်။ @url@ တက်ကြွစွာပါဝင်မှုအတွက် ကျေးဇူးအထူး သင်ပါသည်။',
-'form_pet_message_commentaire' => 'မှတ်ချက် တစ်စုံတစ်ရာ ပေးလိုပါသလား?',
 'form_pet_nom_site2' => 'သင့်ဝက်ဘ်ဆိုက် နာမည်ပေးပါအုံး',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'နည်းပညာပြသနာ၊ လက်မှတ်ဖော်လို့မရ ဖြစ်နေသည်၊ ခဏလောက်ဆောင့်ပါအုံး၊',
@@ -295,12 +294,7 @@ sera ignorée) :
 'forum_non_inscrit' => 'သင်မှတ်ပုံတင်ထားခြင်း မရှိ (သို့) စကားဝှက် မှားယွင်းနေတာဖြစ်ပါလိမ့်မည်',
 'forum_par_auteur' => 'မှ @auteur@',
 'forum_probleme_database' => 'သိုလောင်မှု ပြသနာ၊ သင့်စာစောင် သိမ်းဆည်း၍မရနိုင်ပါ',
-'forum_qui_etes_vous' => '<b>သင်ဘယ်သူလဲ?</b> (optional)',
 'forum_titre_erreur' => 'မှားယွင်းမှု',
-'forum_url' => 'ဝက်ဘ်လိပ်စာ',
-'forum_valider' => 'ဤရွေးချယ်မှုကို အတည်ပြုရန်',
-'forum_votre_email' => 'သင့်အီးမေးလ်လိပ်စာ',
-'forum_votre_nom' => 'သင့်နာမည်',
 
 // I
 'ical_texte_rss_articles' => 'ဆိုက်ဆောင်းပါးဖိုင်ရဲ့ လိပ်စာကတော့',
@@ -344,7 +338,6 @@ sera ignorée) :
 'icone_statistiques_visites' => 'အခြေပြဇယား',
 'icone_suivi_activite' => 'ဝက်ဘ်ဆိုက်လုပ်ဆောင်မှု နောက်ဆက်တွဲ',
 'icone_suivi_actualite' => 'ဝက်ဘ်ဆိုက်နှင့်သက်ဆိုင်သော အခြေပြဇယား',
-'icone_suivi_forums' => 'ဖိုရမ်ကို စီမံရန်',
 'icone_suivi_pettions' => 'လျှောက်လဲမှုကို စီမံရန်',
 'icone_suivi_revisions' => 'ဆောင်ပါးများ ပြန်လည်ကြည့်ရှုရန်',
 'icone_supprimer_document' => 'ဤစာရွက်ကို ပယ်ဖျက်ရန်',

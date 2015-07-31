@@ -289,7 +289,6 @@ rejeitado):
 
 Obrigado por participar
 ',
-'form_pet_message_commentaire' => 'Uma mensagem ou comentário?',
 'form_pet_nom_site2' => 'Nome do seu website',
 'form_pet_probleme_liens' => 'Por favor, retire os links hipertexto da sua mensagem.',
 'form_pet_probleme_technique' => 'Problema técnico: as assinaturas estão suspensas temporariamente.',
@@ -315,12 +314,7 @@ Obrigado por participar
 'forum_non_inscrit' => 'Você não está inscrito, ou o endereço ou a senha estão errados.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_probleme_database' => 'Problema de base da dados: sua mensagem não foi cadastrada.',
-'forum_qui_etes_vous' => '<b>Quem é você?</b> (opcional)',
 'forum_titre_erreur' => 'Erro...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar a seleção',
-'forum_votre_email' => 'Seu endereço de e-mail:',
-'forum_votre_nom' => 'Seu nome (ou apelido):',
 
 // I
 'ical_texte_rss_articles' => 'O arquivo «backend» das matérias deste site encontra-se no endereço:',
@@ -364,7 +358,6 @@ Obrigado por participar
 'icone_statistiques_visites' => 'Estatísticas',
 'icone_suivi_activite' => 'Acompanhar a vida do site',
 'icone_suivi_actualite' => 'Evolução do site',
-'icone_suivi_forums' => 'Acompanhar / gerenciar os fóruns',
 'icone_suivi_pettions' => 'Acompanhar / gerenciar as petições',
 'icone_suivi_revisions' => 'Modificações das matérias',
 'icone_supprimer_document' => 'Suprimir este documento',

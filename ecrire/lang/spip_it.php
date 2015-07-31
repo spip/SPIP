@@ -292,7 +292,6 @@ Per confermare la tua adesione è sufficiente visitare l\'indirizzo web qui sott
 
 
 Grazie per la partecipazione',
-'form_pet_message_commentaire' => 'Un messaggio, un commento?',
 'form_pet_nom_site2' => 'Nome del tuo sito Web',
 'form_pet_probleme_liens' => 'Per favore, riprenda il suo messaggio ed elimini i link ipertestuali.',
 'form_pet_probleme_technique' => 'Le adesioni sono temporaneamente sospese per il verificarsi di problemi tecnici.',
@@ -318,12 +317,7 @@ Grazie per la partecipazione',
 'forum_non_inscrit' => 'Non sei iscritto, oppure l\'indirizzo o la password inseriti non sono corretti.',
 'forum_par_auteur' => 'di @auteur@',
 'forum_probleme_database' => 'Problema nel database. Il tuo messaggio non è stato registrato.',
-'forum_qui_etes_vous' => '<b>Chi sei?</b> (opzionale)',
 'forum_titre_erreur' => 'Errore...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Conferma la scelta',
-'forum_votre_email' => 'Indirizzo email:',
-'forum_votre_nom' => 'Nome (o pseudonimo):',
 
 // I
 'ical_texte_rss_articles' => 'Il file di "backend" degli articoli di questo sito si trova al seguente indirizzo:',
@@ -367,7 +361,6 @@ Grazie per la partecipazione',
 'icone_statistiques_visites' => 'Statistiche delle visite',
 'icone_suivi_activite' => 'Monitorare l\'attività del sito',
 'icone_suivi_actualite' => 'Evoluzione del sito',
-'icone_suivi_forums' => 'Gestione dei forum',
 'icone_suivi_pettions' => 'Gestione delle petizioni',
 'icone_suivi_revisions' => 'Modifiche agli articoli',
 'icone_supprimer_document' => 'Elimina il documento',

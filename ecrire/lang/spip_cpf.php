@@ -299,7 +299,6 @@ Pou konfirm out sinyatir-la, i fo sèlman akost ladrès anba (si lé pa fé, sit
 
 Mersi aou mèt ansanm isi
 ',
-'form_pet_message_commentaire' => 'Inn modékri, inn ti lavi, inn komantèr ?',
 'form_pet_nom_site2' => '<b>Lo non out sitwèb ',
 'form_pet_probleme_liens' => 'Arpran out\' mèzaz pou siprim bann gatiraz.',
 'form_pet_probleme_technique' => 'Astèr, nana inn larlik èk latéknik : bann sinyatir lé baré pou inn moman.',
@@ -325,12 +324,7 @@ Mersi aou mèt ansanm isi
 'forum_non_inscrit' => 'Ou lé pa inskri, kiswa out ladrès, kiswa out modpas nana kanardé.',
 'forum_par_auteur' => 'sanm @auteur@',
 'forum_probleme_database' => 'Astèr néna inn larlik èk out bazdodné. Porézon sa minm, out modékri la pwinn finn dèt anrozistré.',
-'forum_qui_etes_vous' => '<b>Kisa ou lé ?</b> (réponn lé pa obligatwar)',
 'forum_titre_erreur' => 'Kanard...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Konfirm out swa',
-'forum_votre_email' => 'Out ladrès imèl  :',
-'forum_votre_nom' => 'Out vrénon (ou ti-non-gaté) :',
 
 // I
 'ical_texte_rss_articles' => 'Lo fisyé «backend» pou bann zartik lo sit-la, zot i va trouv ali si ladrès-la :',
@@ -374,7 +368,6 @@ Mersi aou mèt ansanm isi
 'icone_statistiques_visites' => 'Bann sifklé bann vizit',
 'icone_suivi_activite' => 'Po swiv lo vi lo sit',
 'icone_suivi_actualite' => 'Lévolisyon lo sit',
-'icone_suivi_forums' => 'Swiv/aranz bann forom',
 'icone_suivi_pettions' => 'Swiv/aranz filsinyatir',
 'icone_suivi_revisions' => 'Bann sanzman do bann zartik',
 'icone_supprimer_document' => 'Dégrèn dokiman-la',

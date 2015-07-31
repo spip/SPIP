@@ -294,7 +294,6 @@ sera ignorée) :
 
 参加してくれてありがとうございました。
 ', # MODIF
-'form_pet_message_commentaire' => 'よろしければメッセージをお寄せください。',
 'form_pet_nom_site2' => 'あなたのウェブサイトの名前',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => '技術的問題、署名はほんの短い間、中断されました。',
@@ -320,12 +319,7 @@ sera ignorée) :
 'forum_non_inscrit' => 'あなたが未登録なのか、アドレスかパスワードが間違っているのかどちらかです。',
 'forum_par_auteur' => 'by @auteur@',
 'forum_probleme_database' => 'データベースの問題、あなたのメッセージを記録することが出来ませんでした。',
-'forum_qui_etes_vous' => '<b>あなたはだれ?</b> (オプション)',
 'forum_titre_erreur' => 'エラー...',
-'forum_url' => 'URL:',
-'forum_valider' => 'この選択を確認',
-'forum_votre_email' => 'あなたのe-mailアドレス:',
-'forum_votre_nom' => 'あなたの名前（か仮名）:',
 
 // I
 'ical_texte_rss_articles' => 'サイトの記事のbackendファイルのアドレスは:',
@@ -369,7 +363,6 @@ sera ignorée) :
 'icone_statistiques_visites' => '統計',
 'icone_suivi_activite' => 'サイトの活動の手助け',
 'icone_suivi_actualite' => 'サイトの統計',
-'icone_suivi_forums' => '掲示板を管理する',
 'icone_suivi_pettions' => '署名の把握、管理',
 'icone_suivi_revisions' => '記事修正',
 'icone_supprimer_document' => 'このドキュメントを削除',

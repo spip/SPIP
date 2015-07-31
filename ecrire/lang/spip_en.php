@@ -292,7 +292,6 @@ will be rejected):
 
 Thank you for participating!
 ',
-'form_pet_message_commentaire' => 'Any message or comments?',
 'form_pet_nom_site2' => 'Name of your website',
 'form_pet_probleme_liens' => 'Please edit your message, removing all hyperlinks.',
 'form_pet_probleme_technique' => 'Technical problem: signatures are interrupted momentarily.',
@@ -318,12 +317,7 @@ Thank you for participating!
 'forum_non_inscrit' => 'Either you are not registered, or the address or password are wrong.',
 'forum_par_auteur' => 'by @auteur@',
 'forum_probleme_database' => 'Database problem, your message could not be recorded.',
-'forum_qui_etes_vous' => '<b>Who are you?</b> (optional)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validate your choice',
-'forum_votre_email' => 'Your email address:',
-'forum_votre_nom' => 'Your name (or alias):',
 
 // I
 'ical_texte_rss_articles' => 'The site\'s backend file for articles is:',
@@ -367,7 +361,6 @@ Thank you for participating!
 'icone_statistiques_visites' => 'Statistics',
 'icone_suivi_activite' => 'Follow site activity',
 'icone_suivi_actualite' => 'Site statistics',
-'icone_suivi_forums' => 'Manage forums',
 'icone_suivi_pettions' => 'Manage petitions',
 'icone_suivi_revisions' => 'Article revisions',
 'icone_supprimer_document' => 'Delete this document',

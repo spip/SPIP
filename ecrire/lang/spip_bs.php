@@ -272,7 +272,6 @@ sera ignorée) :
 'form_pet_deja_signe' => 'Vec ste potpisali ovaj tekst.',
 'form_pet_envoi_mail_confirmation' => 'Upravo vam je poslan e-mail sa potvrdom. Trebate posjetiti web stranicu naznacenu u tom e-mailu, da bi ste ovjerili vas potpis.', # MODIF
 'form_pet_mail_confirmation' => 'Dobar dan',
-'form_pet_message_commentaire' => 'Da li zelite napisati poruku ili komentar?',
 'form_pet_nom_site2' => 'Ime vase web stranice',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Tehnicki problem, potpisi su trenutno nedostupni.',
@@ -298,12 +297,7 @@ sera ignorée) :
 'forum_non_inscrit' => 'Niste registrovani ili adresa i lozinka nisu ispravni.',
 'forum_par_auteur' => 'od @auteur@',
 'forum_probleme_database' => 'Problem sa bazom podataka, Vasa poruka nije registrovana.',
-'forum_qui_etes_vous' => '<b>Ko ste?</b> (optionnel)',
 'forum_titre_erreur' => 'Greska...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Ptvrdite ovaj izbor',
-'forum_votre_email' => 'Vasa e-mail adresa:',
-'forum_votre_nom' => 'Vase ime (ili pseudonim):',
 
 // I
 'ical_texte_rss_articles' => 'Backend dokument clanaka ove stranice se nalazi na adresi:',
@@ -347,7 +341,6 @@ sera ignorée) :
 'icone_statistiques_visites' => 'Statistike',
 'icone_suivi_activite' => 'Prati aktivnost stranice',
 'icone_suivi_actualite' => 'Razvoj stranice',
-'icone_suivi_forums' => 'Prati/uredi foruma',
 'icone_suivi_pettions' => 'Prati/uredi peticija',
 'icone_suivi_revisions' => 'Izmjene clanaka',
 'icone_supprimer_document' => 'Izbrisi ovaj dokument',

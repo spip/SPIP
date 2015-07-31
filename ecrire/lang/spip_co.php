@@ -295,7 +295,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 
 À ringrazià vi
 ',
-'form_pet_message_commentaire' => 'Qualchì messagiu o cummentu ?',
 'form_pet_nom_site2' => 'Nome di u vostru situ Web',
 'form_pet_probleme_liens' => 'Ripigliate puru u vostru messagiu caccendu e lee ipertestu.',
 'form_pet_probleme_technique' => 'Problemu tècnicu, e zifre sò suspese per qualchì tempu.',
@@ -321,12 +320,7 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'forum_non_inscrit' => 'Ùn site micca iscrittu, o l\'indirizzu o u password sò sbagliati.',
 'forum_par_auteur' => 'da @auteur@',
 'forum_probleme_database' => 'Prublemu di basa di dati, ùn hè statu arregistratu u vostru messagiu.',
-'forum_qui_etes_vous' => '<b>Quale site ?</b> (micca ubbligatoriu)',
 'forum_titre_erreur' => 'Errore ...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Cunvalidà sta scelta',
-'forum_votre_email' => 'U vostru indirizzu email :',
-'forum_votre_nom' => 'U vostru nome (o pseudo) :',
 
 // I
 'ical_texte_rss_articles' => 'U schedariu «backend» di l\'artìculi di stu situ si trova à l\'indirizzu :',
@@ -371,7 +365,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'icone_statistiques_visites' => 'Statìstiche',
 'icone_suivi_activite' => 'Seguità a vita di u situ',
 'icone_suivi_actualite' => 'Evuluzione di u situ',
-'icone_suivi_forums' => 'Seguità/gestisce i fori',
 'icone_suivi_pettions' => 'Seguità/gestisce e petizioni',
 'icone_suivi_revisions' => 'Mudìfiche di l\'artìculi',
 'icone_supprimer_document' => 'Sguassà stu ducumentu',

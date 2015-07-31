@@ -294,7 +294,6 @@ zamítnut):
 
 Děkujeme vám za účast
 ',
-'form_pet_message_commentaire' => 'Chcete nám něco sdělit nebo máte nějaké připomínky?',
 'form_pet_nom_site2' => 'Název vašeho webu',
 'form_pet_probleme_liens' => 'Please edit your message, taking out all hyperlinks.', # NEW
 'form_pet_probleme_technique' => 'Z technických důvodů nelze momentálně podepisovat.',
@@ -320,12 +319,7 @@ Děkujeme vám za účast
 'forum_non_inscrit' => 'Buď nejste zaregistrováni nebo jste zadali nesprávnou adresu či heslo.',
 'forum_par_auteur' => 'Autor: @auteur@',
 'forum_probleme_database' => 'Kvůli problémům s databází nebylo možné vaši zprávu zaznamenat.',
-'forum_qui_etes_vous' => '<b>Kdo jste?</b> (volitelné)',
 'forum_titre_erreur' => 'Chyba...',
-'forum_url' => 'Adresa URL:',
-'forum_valider' => 'Potvrdit výběr',
-'forum_votre_email' => 'Váš e-mail:',
-'forum_votre_nom' => 'Vaše jméno (resp. přezdívka):',
 
 // I
 'ical_texte_rss_articles' => 'Adresa souboru na serveru (backend) článků na webu je:',
@@ -369,7 +363,6 @@ Děkujeme vám za účast
 'icone_statistiques_visites' => 'Statistiky',
 'icone_suivi_activite' => 'Sledování aktivity webu',
 'icone_suivi_actualite' => 'Statistiky stránek',
-'icone_suivi_forums' => 'Správa diskusních skupin',
 'icone_suivi_pettions' => 'Správa peticí',
 'icone_suivi_revisions' => 'Revize článků',
 'icone_supprimer_document' => 'Odstranit dokument',

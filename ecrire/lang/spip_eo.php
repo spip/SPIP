@@ -294,7 +294,6 @@ estos rifuzita):
 
 Dankon pro via partopreno
 ',
-'form_pet_message_commentaire' => 'Ĉu mesaĝon, ĉu komenton ?',
 'form_pet_nom_site2' => 'Nomo de via retejo',
 'form_pet_probleme_liens' => 'Bonvolu retrakti vian mesaĝon forigante hiperteskajn ligilojn.',
 'form_pet_probleme_technique' => 'Teknika problemo, la subskribeblo estas portempe ne ebla.',
@@ -320,12 +319,7 @@ Dankon pro via partopreno
 'forum_non_inscrit' => 'Vi ne estas registrita, aŭ la adreso aŭ la pasvorto ne ĝustas.',
 'forum_par_auteur' => 'de @auteur@',
 'forum_probleme_database' => 'Datenbazo-problemo, via mesaĝo ne estas registrita.',
-'forum_qui_etes_vous' => '<b>Kiu vi estas?</b> (nedeviga)',
 'forum_titre_erreur' => 'Eraro...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validigi tiun elekton',
-'forum_votre_email' => 'Via retpoŝtadreso:',
-'forum_votre_nom' => 'Via nomo (aŭ salutnomo):',
 
 // I
 'ical_texte_rss_articles' => 'La abondosiero (backend-dosiero) de la artikoloj de tiu retejo troveblas ĉe la retadreso :',
@@ -369,7 +363,6 @@ Dankon pro via partopreno
 'icone_statistiques_visites' => 'Statistikoj',
 'icone_suivi_activite' => 'Gvati vivon de la retejo',
 'icone_suivi_actualite' => 'Evoluado de la retejo',
-'icone_suivi_forums' => 'Superrigardi/mastrumi la forumojn',
 'icone_suivi_pettions' => 'Superrigardi/mastrumi la petskribon',
 'icone_suivi_revisions' => 'Modifoj de artikoloj',
 'icone_supprimer_document' => 'Forigi tiun dokumenton',

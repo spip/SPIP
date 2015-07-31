@@ -288,7 +288,6 @@ sera ignorée) :
 
 ​អរគុណ ចំពោះការ​ចូលរួម របស់អ្នក
 ',
-'form_pet_message_commentaire' => 'មួយសារ មួយវិចារ ឬ  ?',
 'form_pet_nom_site2' => 'ឈ្មោះ​វ៉ែបសៃថ៍ របស់​អ្នក',
 'form_pet_probleme_liens' => 'សូមកែប្រែ សាររបស់អ្នក, យកចេញ គ្រប់តំណភ្ជាប់។',
 'form_pet_probleme_technique' => 'បញ្ហា​បច្ចេកទេស, ហត្ថលេខាតាំងអស់ ​ត្រូវ​បាន​ពន្យួរ បណ្តោះអាសន្ន។',
@@ -314,12 +313,7 @@ sera ignorée) :
 'forum_non_inscrit' => '​អ្នកគ្មានបាន​ចុះ​ឈ្មោះ, ឬ ​អាសយដ្ឋាន ឬ ពាក្យសំងាត់ ខុស​។',
 'forum_par_auteur' => 'ដោយ @auteur@',
 'forum_probleme_database' => 'បញ្ហា​មូលដ្ឋានទិន្នន័យ, សារ​របស់​អ្នក ​មិនត្រូវបានរក្សា​ទុក។',
-'forum_qui_etes_vous' => 'អ្នកជា អ្នកណា? </b> (​ជា ជំរើស​)', # b
 'forum_titre_erreur' => 'កំហុស​...',
-'forum_url' => 'URL៖',
-'forum_valider' => 'ធ្វើ​អោយ​សុពលភាព ជំរើស នេះ',
-'forum_votre_email' => 'អាសយដ្ឋាន​អ៊ីមែវល៍ ​របស់​អ្នក៖',
-'forum_votre_nom' => 'ឈ្មោះ (​ឬ​ ឈ្មោះ​ហៅ​ក្រៅ​) របស់​អ្នក៖',
 
 // I
 'ical_texte_rss_articles' => 'ថតឯកសារ "ចុងទំព័រ" នៃអត្ថបទ របស់សៃថ៍នេះ ថិតនៅ អាសយដ្ឋាន៖',
@@ -363,7 +357,6 @@ sera ignorée) :
 'icone_statistiques_visites' => 'ស្ថិតិ',
 'icone_suivi_activite' => 'តាមដាន អាយុកាល ​នៃវ៉ែបសៃថ៍',
 'icone_suivi_actualite' => 'ការវិវត្ត នៃវ៉ែបសៃថ៍',
-'icone_suivi_forums' => 'តាមដាន/គ្រប់គ្រង ​វេទិកានានា',
 'icone_suivi_pettions' => 'តាមដាន/គ្រប់គ្រង ​បណ្តឹងជំទាស់',
 'icone_suivi_revisions' => 'កំណែប្រែ នៃអត្ថបទ',
 'icone_supprimer_document' => 'លុប​ចេញ ឯកសារ​នេះ',

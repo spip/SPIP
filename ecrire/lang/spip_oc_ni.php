@@ -295,7 +295,6 @@ serà refudada) :
 
 Mercé de la voastra participacion
 ',
-'form_pet_message_commentaire' => 'Un messatge, una remarca ?',
 'form_pet_nom_site2' => 'Nom dau voastre sit web',
 'form_pet_probleme_liens' => 'Vorgatz tornar escriure lo voastre messatge en supprimant lu ligams ipertèxt.',
 'form_pet_probleme_technique' => 'Problèma tecnic, li signaturas son temporàriament arrestadi.',
@@ -321,12 +320,7 @@ Mercé de la voastra participacion
 'forum_non_inscrit' => 'Siètz pas inscrich(a), ò l\'adreça ò lo mòt de santa Clara son erronèus.',
 'forum_par_auteur' => 'da @auteur@',
 'forum_probleme_database' => 'Problèma de basa de donadas, lo voastre messatge es pas estat registrat.',
-'forum_qui_etes_vous' => '<b>Cu siètz ?</b> (opcionau)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Validar aquesta chausida',
-'forum_votre_email' => 'La voastra adreça e-mail :',
-'forum_votre_nom' => 'Lo voastre nom (ò pseudonim) :',
 
 // I
 'ical_texte_rss_articles' => 'Lo fichier "backend" dei articles d\'aquèu sit si tròba à l\'adreça :',
@@ -370,7 +364,6 @@ Mercé de la voastra participacion
 'icone_statistiques_visites' => 'Estadisticas',
 'icone_suivi_activite' => 'Seguir la vida dau sit',
 'icone_suivi_actualite' => 'Evolucion dau sit',
-'icone_suivi_forums' => 'Sègre/gerar lu fòros',
 'icone_suivi_pettions' => 'Seguir/gerar li peticions',
 'icone_suivi_revisions' => 'Modificacions dei articles',
 'icone_supprimer_document' => 'Suprimir aqueu document',

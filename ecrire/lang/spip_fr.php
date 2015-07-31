@@ -293,7 +293,6 @@ sera rejetée) :
 
 Merci de votre participation
 ',
-'form_pet_message_commentaire' => 'Un message, un commentaire ?',
 'form_pet_nom_site2' => 'Nom de votre site Web', # enlever le gras
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.',
 'form_pet_probleme_technique' => 'Problème technique, les signatures sont temporairement suspendues.',
@@ -319,12 +318,7 @@ Merci de votre participation
 'forum_non_inscrit' => 'Vous n\'êtes pas inscrit, ou l\'adresse ou le mot de passe sont erronés.',
 'forum_par_auteur' => 'par @auteur@',
 'forum_probleme_database' => 'Problème de base de données, votre message n\'a pas été enregistré.',
-'forum_qui_etes_vous' => '<b>Qui êtes-vous ?</b> (optionnel)',
 'forum_titre_erreur' => 'Erreur...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Valider ce choix',
-'forum_votre_email' => 'Votre adresse email :',
-'forum_votre_nom' => 'Votre nom (ou pseudonyme) :',
 
 // I
 'ical_texte_rss_articles' => 'Le fichier «backend» des articles de ce site se trouve à l\'adresse:',
@@ -368,7 +362,6 @@ Merci de votre participation
 'icone_statistiques_visites' => 'Statistiques',
 'icone_suivi_activite' => 'Suivre la vie du site',
 'icone_suivi_actualite' => 'Évolution du site',
-'icone_suivi_forums' => 'Suivre/gérer les forums',
 'icone_suivi_pettions' => 'Suivre/gérer les pétitions',
 'icone_suivi_revisions' => 'Modifications des articles',
 'icone_supprimer_document' => 'Supprimer ce document',

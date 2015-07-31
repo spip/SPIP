@@ -288,7 +288,6 @@ QUAN TRỌNG...
     @url@
 
 Cám ơn sự tham gia của bạn.', # MODIF
-'form_pet_message_commentaire' => 'Có nhắn tin hay bình luận gì không?',
 'form_pet_nom_site2' => 'Tên trang web của bạn',
 'form_pet_probleme_liens' => 'Sửa đổi phần nội dung, xin lấy ra các hyperlink.',
 'form_pet_probleme_technique' => 'Trục trặc kỹ thuật, chữ ký bị đình trệ trong giây lát.',
@@ -314,12 +313,7 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'forum_non_inscrit' => 'Hoặc là bạn chưa ghi danh, hoặc địa chỉ hay mật mã không đúng.',
 'forum_par_auteur' => 'bởi @auteur@',
 'forum_probleme_database' => 'Có vấn đề với database, thư tín của bạn không lưu trữ được.',
-'forum_qui_etes_vous' => '<b>Chi tiết về bạn</b> (không bắt buộc)',
 'forum_titre_erreur' => 'Có lỗi...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Xác nhận lựa chọn này',
-'forum_votre_email' => 'Địa chỉ email của bạn:',
-'forum_votre_nom' => 'Tên (hay bí danh):',
 
 // I
 'ical_texte_rss_articles' => 'Hồ sơ «backend» của các bài trên trang web này ở địa chỉ:',
@@ -363,7 +357,6 @@ Cám ơn sự tham gia của bạn.', # MODIF
 'icone_statistiques_visites' => 'Thống kê',
 'icone_suivi_activite' => 'Những việc của Ban Biên Tập',
 'icone_suivi_actualite' => 'Tiến triển của trang web',
-'icone_suivi_forums' => 'Quản trị diễn đàn',
 'icone_suivi_pettions' => 'Quản trị thỉnh nguyện thư',
 'icone_suivi_revisions' => 'Cập nhật bài vở',
 'icone_supprimer_document' => 'Xóa tài liệu này',

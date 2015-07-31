@@ -292,7 +292,6 @@ reddedilecektir) :
 
 Katılımınız için teşekkürler
 ',
-'form_pet_message_commentaire' => 'Bir ileti, bir yorum ?',
 'form_pet_nom_site2' => 'Sitenizin ismi',
 'form_pet_probleme_liens' => 'Lütfen iletinizi hipermetin bağlarını silerek tekrar giriniz',
 'form_pet_probleme_technique' => 'Teknik bir sorun var, imzalar geçici olarak iptal edildi.',
@@ -318,12 +317,7 @@ Katılımınız için teşekkürler
 'forum_non_inscrit' => 'Kayıtlı değilsiniz veya adresiniz veya şifreniz hatalı.',
 'forum_par_auteur' => 'yazan @auteur@ ',
 'forum_probleme_database' => 'Veritabanı sorunu, mesajınız kaydedilemedi.',
-'forum_qui_etes_vous' => '<b>Sizi tanıyalım ?</b> (seçimlik)',
 'forum_titre_erreur' => 'Hata...',
-'forum_url' => 'URL :',
-'forum_valider' => 'Bu seçimi onayla',
-'forum_votre_email' => 'E-posta adresiniz :',
-'forum_votre_nom' => 'İsminiz (veya takma isminiz) :',
 
 // I
 'ical_texte_rss_articles' => 'Makalelerin «backend» dosyası şu adrestedir:',
@@ -367,7 +361,6 @@ Katılımınız için teşekkürler
 'icone_statistiques_visites' => 'İstatistikler',
 'icone_suivi_activite' => 'Site yaşamını izle',
 'icone_suivi_actualite' => 'Site gelişimi',
-'icone_suivi_forums' => 'Forumları izle / Yönet',
 'icone_suivi_pettions' => 'Dilekçeleri izle / Yönet',
 'icone_suivi_revisions' => 'Makale değişiklikleri',
 'icone_supprimer_document' => 'Bu belgeyi sil',

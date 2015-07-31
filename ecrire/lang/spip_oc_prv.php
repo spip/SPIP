@@ -294,7 +294,6 @@ Per validar vòstra signatura, basta de vos connectar a
 
 Grandmercé per vòstra participacion
 ',
-'form_pet_message_commentaire' => 'Un messatge, una remarca?',
 'form_pet_nom_site2' => 'Nom de vòstre sit Web',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Problèma tecnic, lei signaturas son temporàriament arrestadas.',
@@ -320,12 +319,7 @@ Grandmercé per vòstra participacion
 'forum_non_inscrit' => 'Siá siatz pas inscrich(a), siá avètz fach una error d\'adreiça o de mot de santa Clara. ',
 'forum_par_auteur' => 'per @auteur@',
 'forum_probleme_database' => 'Problèma de basa de donadas, vòstre messatge s\'es pas registrat.',
-'forum_qui_etes_vous' => '<b>Quau siatz?</b> (opcionau)',
 'forum_titre_erreur' => 'Error...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar aquela chausida',
-'forum_votre_email' => 'Vòstra adreiça e-mail:',
-'forum_votre_nom' => 'Vòstre nom (o pseudonim):',
 
 // I
 'ical_texte_rss_articles' => 'Lo fichier "backend" deis articles d\'aquest sit se tròba a l\'adreiça:',
@@ -369,7 +363,6 @@ Grandmercé per vòstra participacion
 'icone_statistiques_visites' => 'Estadisticas',
 'icone_suivi_activite' => 'Seguir la vida dau sit',
 'icone_suivi_actualite' => 'Evolucion dau sit',
-'icone_suivi_forums' => 'Seguir/gerir lei forums',
 'icone_suivi_pettions' => 'Seguir/gerir lei peticions',
 'icone_suivi_revisions' => 'Modificacions deis articles',
 'icone_supprimer_document' => 'Suprimir aqueu document',

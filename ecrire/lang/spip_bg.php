@@ -295,7 +295,6 @@ sera ignorée) :
 
 Благодаря за участието!
 ',
-'form_pet_message_commentaire' => 'Коментар?',
 'form_pet_nom_site2' => 'Име на Вашия сайт',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Техническа грешка: записите са прекъснати моментално.',
@@ -321,12 +320,7 @@ sera ignorée) :
 'forum_non_inscrit' => 'Или не сте регистрирани, или адресът/ паролата са погрешни.',
 'forum_par_auteur' => 'от @auteur@',
 'forum_probleme_database' => 'Проблем с базата данни: съобщението Ви не бе запаметено.',
-'forum_qui_etes_vous' => '<b>Кой сте Вие?</b> (по избор)',
 'forum_titre_erreur' => 'Грешка',
-'forum_url' => 'URL адрес:',
-'forum_valider' => 'Одобряване на избора',
-'forum_votre_email' => 'Вашият електронен адрес:',
-'forum_votre_nom' => 'Вашето име (или псевдоним):',
 
 // I
 'ical_texte_rss_articles' => 'Адресът на файла от крайната точка (backend) е следният:',
@@ -370,7 +364,6 @@ sera ignorée) :
 'icone_statistiques_visites' => 'Статистика',
 'icone_suivi_activite' => 'Дейности на сайта',
 'icone_suivi_actualite' => 'Развитие на сайта',
-'icone_suivi_forums' => 'Развитие на форумите',
 'icone_suivi_pettions' => 'Допълнения на молби',
 'icone_suivi_revisions' => 'Преглед на статии',
 'icone_supprimer_document' => 'Изтриване на документа',

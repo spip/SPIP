@@ -294,7 +294,6 @@ Para validar a sua assinatura, basta ligar-se ao
 
 Obrigado pela sua participação
 ', # MODIF
-'form_pet_message_commentaire' => 'Uma mensagem, um comentário ?',
 'form_pet_nom_site2' => 'Nome do seu sítio Web',
 'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
 'form_pet_probleme_technique' => 'Problema técnico, as assinaturas estão temporariamente suspensas.',
@@ -320,12 +319,7 @@ Obrigado pela sua participação
 'forum_non_inscrit' => 'Não está inscrito, ou o endereço ou a palavra-passe estão errados.',
 'forum_par_auteur' => 'por @auteur@',
 'forum_probleme_database' => 'Problema de base de dados, a sua mensagem não foi registada.',
-'forum_qui_etes_vous' => '<b>Quem é você?</b> (opcional)',
 'forum_titre_erreur' => 'Erro...',
-'forum_url' => 'URL:',
-'forum_valider' => 'Validar a sua escolha',
-'forum_votre_email' => 'O seu endereço email:',
-'forum_votre_nom' => 'O seu nome (pseudónimo):',
 
 // I
 'ical_texte_rss_articles' => 'O ficheiro «backend» dos artigos deste sítio encontra-se neste endereço:',
@@ -369,7 +363,6 @@ Obrigado pela sua participação
 'icone_statistiques_visites' => 'Estatísticas de visitas',
 'icone_suivi_activite' => 'Acompanhar a vida do sítio',
 'icone_suivi_actualite' => 'Evolução do sítio',
-'icone_suivi_forums' => 'Seguir/gerir os fóruns',
 'icone_suivi_pettions' => 'Seguir/gerir os abaixo-assinados',
 'icone_suivi_revisions' => 'Modificações dos artigos',
 'icone_supprimer_document' => 'Suprimir este documento',
