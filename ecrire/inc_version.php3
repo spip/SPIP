@@ -663,8 +663,8 @@ class Link {
 	// Recuperer l'attribut href="<URL>" correspondant au lien
 	//
 
-	function getHref() {
-		return 'href="'.$this->getUrl().'"';
+	function getHref($anchor = '') {
+		return 'href="'.$this->getUrl($anchor).'"';
 	}
 }
 
