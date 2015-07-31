@@ -76,10 +76,24 @@ function action_editer_site_dist() {
 		if (_request('syndication') == 'non')
 			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic="._q($id_syndic));
 
-		$s = spip_query("SELECT id_syndic FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
-		if (spip_num_rows($s)) {
+		$s = spip_query("SELECT id_syndic, descriptif FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
+		if ($t = spip_fetch_array($s)) {
 			include_spip('inc/syndic');
 			syndic_a_jour($id_syndic);
+
+			// Si on n'a pas de descriptif ou pas de logo, on va le chercher
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if (!$logo = $chercher_logo($id_syndic, 'id_syndic', 'on')
+			OR $t['descriptif'] == '') {
+				$auto = analyser_site(_request('url_syndic'));
+				revisions_sites($id_syndic,
+					array('descriptif' => $auto['descriptif'])
+				);
+				if (!$logo
+				AND $auto['logo'] AND $auto['format_logo'])
+					@rename($auto['logo'],
+					_DIR_IMG . 'siteon'.$id_syndic.'.'.$auto['format_logo']);
+			}
 		}
 	}
 
@@ -282,7 +296,7 @@ function analyser_site($url) {
 		list($header) = preg_split(
 		',<(entry|item)([:[:space:]][^>]*)?'.'>,Uims', $channel,2);
 		if (preg_match(',<title[^>]*>(.*)</title>,Uims', $header, $r))
-			$result['nom_site'] = supprimer_tags(filtrer_entites($r[1]));
+			$result['nom_site'] = supprimer_tags(filtrer_entites(trim($r[1])));
 		if (preg_match(
 		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
 		$header, $regs))
@@ -303,10 +317,14 @@ function analyser_site($url) {
 		if (preg_match(',<image.*<url.*>(.*)</url>.*</image>,Uims',
 		$header, $r)
 		AND preg_match(',(https?://.*/.*(gif|png|jpg)),ims', $r[1], $r)
-		AND $image = recuperer_infos_distantes($r[1])
-		AND in_array($image['extension'], array('gif', 'jpg', 'png'))) {
-			$result['format_logo'] = $image['extension'];
-			$result['logo'] = $image['fichier'];
+		AND $image = recuperer_infos_distantes($r[1])) {
+			if (in_array($image['extension'], array('gif', 'jpg', 'png'))) {
+				$result['format_logo'] = $image['extension'];
+				$result['logo'] = $image['fichier'];
+			}
+			else if ($image['fichier']) {
+				@unlink($image['fichier']);
+			}
 		}
 	}
 	else {
