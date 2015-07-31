@@ -142,9 +142,10 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 
 	// si une seule rubrique comme choix possible,
 	// inutile de mettre le selecteur sur un choix vide par defaut
+	// sauf si le selecteur s'adresse a une rubrique puisque on peut la mettre a la racine dans ce cas
 	if (count($data)==2
 	  AND isset($data[0])
-	  AND $type!='auteur'
+	  AND !in_array($type,array('auteur','rubrique'))
 	  AND !$id_rubrique)
 		unset($data[0]);
 
