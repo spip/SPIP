@@ -444,9 +444,9 @@ function analyse_aide($html, $aide=false) {
 //
 // Distribuer le travail
 //
-function aide_index($img, $frame, $aide, $var_lang, $lang)
+function aide_index_dist()
 {
-
+global $img, $frame, $aide, $var_lang, $lang;
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 
 if (http_last_modified(filemtime("aide_index.php3"), time() + 24 * 3600))

@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction('accueil');
-$var_f(intval($id_rubrique));
+$var_f();
 ?>

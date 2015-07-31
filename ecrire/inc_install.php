@@ -30,7 +30,10 @@ function install()
 	$fonc = 'install_' . $etape;
 	if (function_exists($fonc))
 		$fonc();
-	else spip_log("install: etape '$etape' inconnue");
+	else {
+		spip_log("install: etape '$etape' inconnue");
+		phpinfo();
+	}
 }
 
 

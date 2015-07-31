@@ -15,9 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 
-function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
+function brouteur_frame_dist()
 {
-	global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left;
+  global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left,$id_rubrique, $frame, $effacer_suivant, $special;
+	$id_rubrique = is_numeric($id_rubrique) ? intval($id_rubrique) : "";
+
 	init_entete("","","");
 
 	if ($spip_ecran == "large") {

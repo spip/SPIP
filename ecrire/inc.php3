@@ -114,13 +114,13 @@ if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
 $couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
 $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 
-$attributes_body = "
+define (_ATTRIBUTES_BODY,  "
 link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
 vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 bgcolor='#f8f7f3' text='#000000' 
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
-  ($spip_lang_rtl ? " dir='rtl'" : "");
+	($spip_lang_rtl ? " dir='rtl'" : ""));
 
 //
 // Controle de la version, sauf si on est deja en train de s'en occuper

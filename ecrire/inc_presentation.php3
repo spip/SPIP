@@ -1802,7 +1802,7 @@ function bouton($titre,$lien) {
 function debut_html($titre = "", $rubrique="") {
 	include_ecrire('inc_headers.php');
 
-	global $attributes_body, $browser_verifForm;
+	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	$titre = textebrut(typo($titre));
@@ -1817,7 +1817,7 @@ function debut_html($titre = "", $rubrique="") {
 	echo envoi_link($nom_site_spip, $rubrique);
 	// Fin des entetes
 	echo "\n</head>\n";
-	echo "<body $attributes_body
+	echo "<body ",  _ATTRIBUTES_BODY, "
 	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm\">";
 }
 
@@ -2305,7 +2305,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 }
  
 function init_entete($titre, $rubrique, $css) {
-	global $attributes_body, $browser_verifForm;
+	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 
@@ -2323,7 +2323,7 @@ function init_entete($titre, $rubrique, $css) {
 	  (!$css ? "" :
 	   ('<link rel="stylesheet" href="' . addslashes($css) . '" type="text/css" />'. "\n")),
 	  "\n</head>\n",
-	  "<body $attributes_body
+	  "<body ", _ATTRIBUTES_BODY, "
 	onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
 }
 

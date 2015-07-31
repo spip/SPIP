@@ -13,8 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_barre.php3");
@@ -320,11 +318,14 @@ fin_page();
 // Creation de l'objet article
 //
 
-function articles_edit_dist($id_article, $id_rubrique, $lier_trad, $new)
+function articles_edit_dist()
 {
-	global $connect_id_auteur, $spip_lang;
+  global $connect_id_auteur, $spip_lang, $id_article, $id_rubrique, $lier_trad, $new;
+  $id_article = intval($id_article);
+  $id_rubrique =  intval($id_rubrique);
+  $lier_trad =  intval($lier_trad);
 
-if ($id_article) {
+  if ($id_article) {
 	// Recuperer les donnees de l'article
 	$query = "SELECT * FROM spip_articles WHERE id_article=$id_article";
 	$result = spip_query($query);
