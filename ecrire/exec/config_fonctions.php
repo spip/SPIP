@@ -43,7 +43,7 @@ function exec_config_fonctions_dist()
 	lire_metas();
 
 	$reducteur = charger_fonction('reducteur', 'configuration');
-	$indexeur = charger_fonction('indexeur', 'configuration');
+#	$indexeur = charger_fonction('indexeur', 'configuration');
 	$compteur = charger_fonction('compteur', 'configuration');
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$versionneur = charger_fonction('versionneur', 'configuration');
@@ -54,7 +54,7 @@ function exec_config_fonctions_dist()
 
 	  $reducteur(), // Creation automatique de vignettes
 
-	  $indexeur(), // Indexation pour moteur de recherche
+#	  $indexeur(), // Indexation pour moteur de recherche
 
 	  $compteur(), // Gerant de statistique
 

@@ -212,11 +212,17 @@ function action_legender_auteur_post($r) {
 		spip_query("INSERT spip_auteurs_articles (id_article,id_auteur) VALUES ($id_article,$id_auteur)");
 	}
 
-	// Si on modifie la fiche auteur, reindexer
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_spip("inc/indexation");
-		marquer_indexer('spip_auteurs', $id_auteur);
-	}
+	// Notifications, gestion des revisions, reindexation...
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $auteur
+		)
+	);
+
 	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
 

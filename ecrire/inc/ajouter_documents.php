@@ -254,9 +254,17 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	else
 		$documents_actifs[$fichier] = $id_document; 
 
-	// Demander l'indexation du document
-	include_spip('inc/indexation');
-	marquer_indexer('spip_documents', $id_document);
+	// Notifications, gestion des revisions, reindexation...
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'operation' => 'ajouter_document',
+				'table' => 'spip_documents',
+				'id_objet' => $id_document
+			),
+			'data' => null
+		)
+	);
 
 	return $type_image;
 }
@@ -425,6 +433,6 @@ function liste_archive_taille($files)
 	. affdate_heure(date("Y-m-d H:i:s", $file['mtime']))
 	.")</tt></li>";
     }
-  return$res;
+  return $res;
 }
 ?>

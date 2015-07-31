@@ -577,14 +577,7 @@ function my_strtotime($la_date) {
 
 // http://doc.spip.org/@cron_syndic
 function cron_syndic($t) {
-	$r = executer_une_syndication();
-	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
-	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
-		include_spip("inc/indexation");
-		$r2 = executer_une_indexation_syndic();
-		$r = $r && $r2;
-	}
-	return $r;
+	return executer_une_syndication();
 }
 
 ?>

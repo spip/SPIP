@@ -26,7 +26,6 @@ function configuration_syndications_dist()
 	$activer_sites = $GLOBALS['meta']['activer_sites'];
 	$activer_syndic = $GLOBALS['meta']["activer_syndic"];
 	$proposer_sites = $GLOBALS['meta']["proposer_sites"];
-	$visiter_sites = $GLOBALS['meta']["visiter_sites"];
 	$moderation_sites = $GLOBALS['meta']["moderation_sites"];
 	
 	$res = "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
@@ -89,19 +88,7 @@ function configuration_syndications_dist()
 	$res .= afficher_choix('moderation_sites', $moderation_sites,
 		array('oui' => _T('item_bloquer_liens_syndiques'),
 		'non' => _T('item_non_bloquer_liens_syndiques')));
-	
-	// Si indexation, activer/desactiver pages recuperees
 
-	$activer_moteur = $GLOBALS['meta']["activer_moteur"];
-	if ($activer_moteur == "oui") {
-		$res .= "<hr /><p style='text-align: $spip_lang_left'>";
-		$res .= _T('texte_utilisation_moteur_syndiques')." ";
-		$res .= "</p><blockquote><p><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></p></blockquote>";
-
-		$res .= afficher_choix('visiter_sites', $visiter_sites,
-			array('non' => _T('item_limiter_recherche'),
-				'oui' => _T('item_non_limiter_recherche')));
-	}
 	$res .= "</div>";
 		
 	$res .= "</td></tr>\n";

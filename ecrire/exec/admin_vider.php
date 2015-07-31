@@ -130,31 +130,6 @@ fin_cadre_relief();
 
 fin_cadre_trait_couleur();
 
-//
-// Purger la base d'indexation
-//
-debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_donnees_indexation'));
-
-	echo "\n<p style='text-align: justify;'>";
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui')
-		echo _T('texte_moteur_recherche_active');
-	else {
-		echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
-		$cpt = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_index"));
-		if ($cpt['n'])
-			echo _T('texte_commande_vider_tables_indexation');
-		else
-			echo _T('texte_tables_indexation_vides');
-	
-	}
-	echo '</p>';
-	echo redirige_action_auteur('purger', 'index', "admin_vider",'',
-		"\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
-			 str_replace('"', '&quot;', _T('bouton_effacer_index')) .
-			 "\" /></div>",
-		" method='post'");
-
-fin_cadre_trait_couleur();
 
 echo "<br />";
 

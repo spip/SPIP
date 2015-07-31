@@ -268,7 +268,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		$tables = liste_des_champs();
 		$tables = array('auteur'=>$tables['auteur']);
 		$results = recherche_en_base($recherche, $tables);
-		$in_auteurs = calcul_mysql_in('aut.id_auteur',implode(',',array_keys($results['auteur'])));
+		$in_auteurs = calcul_mysql_in('aut.id_auteur',array_keys($results['auteur']));
   }
   
 	//

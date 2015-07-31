@@ -83,18 +83,10 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		suivre_invalideur($options['invalideur']);
 	}
 
-	// Demander une reindexation ?
-	if (!isset($options['indexation']))
-		$options['indexation'] = ($GLOBALS['meta']['activer_moteur'] == 'oui');
-	if ($options['indexation']) {
-		include_spip('inc/indexation');
-		marquer_indexer('spip_'.$table_objet, $id);
-	}
-
 	// marquer les documents vus dans le texte si il y a lieu
 	if (isset($GLOBALS['tables_auxiliaires']["spip_documents_$table_objet"]["field"]["vu"]))
 		marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet);
-	
+
 	// Notifications, gestion des revisions...
 	pipeline('post_edition',
 		array(
@@ -130,8 +122,10 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	spip_query("UPDATE spip_documents_$table_objet SET vu='non' WHERE $id_table_objet=$id");
 	if (count($GLOBALS['doublons_documents_inclus'])){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
-		$in_liste = implode(',',$GLOBALS['doublons_documents_inclus']);
-		$res = spip_query("SELECT id_document FROM spip_documents WHERE " . calcul_mysql_in('id_document', $in_liste));
+		$in_liste = calcul_mysql_in('id_document',
+			$GLOBALS['doublons_documents_inclus']);
+		$res = spip_query("SELECT id_document FROM spip_documents WHERE "
+			. $in_liste);
 		while ($row = spip_abstract_fetch($res)) {
 			spip_query("UPDATE spip_documents_$table_objet SET vu='oui' WHERE $id_table_objet=$id AND id_document=" . $row['id_document']);
 		}
@@ -143,7 +137,7 @@ function revision_document($id_document, $c=false) {
 
 	return modifier_contenu('document', $id_document,
 		array(
-			'champs' => array('titre', 'descriptif')
+			'champs' => array('titre', 'descriptif', 'date', 'largeur', 'hauteur')
 			//,'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);

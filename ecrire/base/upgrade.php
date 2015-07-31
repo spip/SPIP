@@ -1464,6 +1464,18 @@ function maj_base($version_cible = 0) {
 		maj_version('1.942');
 	}
 
+	// suppression de l'indexation dans la version standard
+	if (upgrade_vers(1.943, $version_installee, $version_cible)) {
+		foreach(array(
+		'articles', 'auteurs', 'breves', 'mots', 'rubriques', 'documents', 'syndic', 'forum', 'signatures'
+		) as $type) {
+			spip_query("ALTER TABLE spip_$type DROP KEY `idx`");
+			spip_query("ALTER TABLE spip_$type DROP `idx`");
+		}
+		spip_query("DROP TABLE spip_index");
+		spip_query("DROP TABLE spip_index_dico");
+		maj_version('1.943');
+	}
 }
 
 ?>

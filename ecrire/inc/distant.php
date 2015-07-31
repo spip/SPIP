@@ -43,13 +43,17 @@ function copie_locale($source, $mode='auto') {
 			if (!$contenu) return false;
 			ecrire_fichier(_DIR_RACINE.$local, $contenu);
 
-			// signaler au moteur de recherche qu'il peut reindexer ce doc
-			$id_document = spip_abstract_fetch(spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . _q($source)));
-			$id_document = $id_document['id_document'];
-			if ($id_document) {
-				include_spip('inc/indexation');
-				marquer_indexer('spip_documents', $id_document);
-			}
+			// pour une eventuelle indexation
+			pipeline('post_edition',
+				array(
+					'args' => array(
+						'operation' => 'copie_locale',
+						'source' => $source,
+						'fichier' => $local
+					),
+					'data' => null
+				)
+			);
 		}
 	}
 

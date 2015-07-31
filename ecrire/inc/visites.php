@@ -111,17 +111,17 @@ function calculer_visites($t) {
 			$ar[$num][] = $id_article;
 			$tous[] = $id_article;
 		}
-		$tous = calcul_mysql_in('id_article', join(',', $tous));
+		$tous = calcul_mysql_in('id_article', $tous);
 		$sum = '';
 		foreach ($ar as $num => $liste)
 			$sum .= ' + '.$num.'*'
-				. calcul_mysql_in('id_article', join(',',$liste));
+				. calcul_mysql_in('id_article', $liste);
 
 		# pour les popularites ajouter 1 point par referer
 		$sumref = '';
 		if ($referers_a)
 			$sumref = ' + '.calcul_mysql_in('id_article',
-			join(',',array_keys($referers_a)));
+			array_keys($referers_a));
 
 		spip_query("UPDATE spip_visites_articles SET visites = visites $sum WHERE date='$date' AND $tous");
 
@@ -143,7 +143,7 @@ function calculer_visites($t) {
 		
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
-			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',join(',',$liste)));
+			spip_query("UPDATE spip_referers SET visites = visites+$num, visites_jour = visites_jour+$num	WHERE ".calcul_mysql_in('referer_md5',$liste));
 		}
 	}
 	

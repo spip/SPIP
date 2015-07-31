@@ -61,7 +61,6 @@ function liste_metas()
 		'activer_sites' => 'non',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
-		'visiter_sites' => 'non',
 		'moderation_sites' => 'non',
 
 		'forums_publics' => 'posteriori',
@@ -76,7 +75,6 @@ function liste_metas()
 		'quoi_de_neuf' => 'non',
 		'forum_prive_admin' => 'non',
 
-		'activer_moteur' => 'non',
 		'articles_versions' => 'non',
 		'activer_statistiques' => 'non',
 
@@ -189,12 +187,6 @@ function appliquer_modifs_config() {
 
 	if ($accepter_forum == 'abo')
 		ecrire_meta('accepter_visiteurs', 'oui');
-
-	// Activer le moteur : dresser la liste des choses a indexer
-	if (($i = _request('activer_moteur')) == 'oui' AND ($i != $GLOBALS['meta']["activer_moteur"])) {
-		include_spip('inc/indexation');
-		creer_liste_indexation();
-	}
 
 	if ($i = _request('langues_auth') AND is_array($i)) {
 		set_request('langues_multilingue', join($i, ","));

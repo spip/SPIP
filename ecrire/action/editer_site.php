@@ -259,12 +259,6 @@ function revisions_sites ($id_syndic, $c=false) {
 		suivre_invalideur("id='id_syndic/$id_syndic'");
 	}
 
-	// Demander une reindexation du site
-	if ($statut == 'publie') {
-		include_spip('inc/indexation');
-		marquer_indexer('spip_syndic', $id_syndic);
-	}
-
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
 	// Notification ?

@@ -188,17 +188,11 @@ function revisions_breves ($id_breve, $c=false) {
 		suivre_invalideur("id='id_breve/$id_breve'");
 	}
 
-	// Demander une reindexation de la breve
-	if ($statut == 'publie') {
-		include_spip('inc/indexation');
-		marquer_indexer('spip_breves', $id_breve);
-	}
 
 	// Au besoin, changer le statut des rubriques concernees 
-
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
-	// Notification ?
+	// Notifications, revisions, reindexation...
 	pipeline('post_edition',
 		array(
 			'args' => array(
