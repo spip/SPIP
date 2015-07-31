@@ -142,7 +142,21 @@ function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
 
-define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
+/**
+ * Traiter les blocs <math></math> echappes par echappe_html
+ * @param $regs
+ * @return string
+ */
+function traiter_echap_math_dist($regs) {
+	// Gestion du TeX
+	if (!function_exists('traiter_math'))
+		include_spip('inc/math');
+
+	$t = traiter_math($regs[0], '');
+	return $t;
+}
+
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script|math)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc/filtres
@@ -163,7 +177,7 @@ $preg='') {
 	}
 
 	if (($preg OR strpos($letexte,"<")!==false)
-	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER))
+	  AND preg_match_all($preg ? $preg : _PROTEGE_BLOCS, $letexte, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $regs) {
 			// echappements tels quels ?
 			if ($no_transform) {
@@ -179,23 +193,34 @@ $preg='') {
 			$p = strpos($letexte,$regs[0]);
 			$letexte = substr_replace($letexte,code_echappement($echap, $source, $no_transform),$p,strlen($regs[0]));
 		}
+	}
 
 	if ($no_transform)
 		return $letexte;
 
 	// Gestion du TeX
-	if (strpos($letexte, "<math>") !== false) {
-		include_spip('inc/math');
-		$letexte = traiter_math($letexte, $source);
+	// code mort sauf si on a personalise _PROTEGE_BLOCS sans y mettre <math>
+	// eviter la rupture de compat en branche 3.0
+	// a supprimer en branche 3.1
+	if (strpos($preg ? $preg : _PROTEGE_BLOCS,'code')!==false){
+		if (strpos($letexte, "<math>") !== false) {
+			include_spip('inc/math');
+			$letexte = traiter_math($letexte, $source);
+		}
 	}
 
 	// Echapper le php pour faire joli (ici, c'est pas pour la securite)
-	if (strpos($letexte,"<"."?")!==false AND preg_match_all(',<[?].*($|[?]>),UisS',
-	$letexte, $matches, PREG_SET_ORDER))
-	foreach ($matches as $regs) {
-		$letexte = str_replace($regs[0],
-			code_echappement(highlight_string($regs[0],true), $source),
-			$letexte);
+	// seulement si on a echappe les <script>
+	// (derogatoire car on ne peut pas faire passer < ? ... ? >
+	// dans une callback autonommee
+	if (strpos($preg ? $preg : _PROTEGE_BLOCS,'script')!==false){
+		if (strpos($letexte,"<"."?")!==false AND preg_match_all(',<[?].*($|[?]>),UisS',
+		$letexte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs) {
+			$letexte = str_replace($regs[0],
+				code_echappement(highlight_string($regs[0],true), $source),
+				$letexte);
+		}
 	}
 
 	return $letexte;
