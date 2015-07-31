@@ -460,17 +460,16 @@ function spip_sqlite_count($r, $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_sqlite_countsel
 function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', $having = array(), $serveur='',$requeter=true) {
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
-	$r = spip_sqlite_select("COUNT($c)", $from, $where,'', '', $limit,
-			$having, $serveur, $requeter);
+	$r = spip_sqlite_select("COUNT($c)", $from, $where,'', '', '',$having, $serveur, $requeter);
 	if ((is_resource($r) or is_object($r)) && $requeter) { // ressource : sqlite2, object : sqlite3
 		if (_sqlite_is_version(3,'',$serveur)){
-			list($r) = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
+			list($n) = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
 		} else {
-			list($r) = spip_sqlite_fetch($r, SPIP_SQLITE2_NUM, $serveur);
+			list($n) = spip_sqlite_fetch($r, SPIP_SQLITE2_NUM, $serveur);
 		}
-		
+		spip_sqlite_free($r,$serveur);
 	}
-	return $r;
+	return $n;
 }
 
 
