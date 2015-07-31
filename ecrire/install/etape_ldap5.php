@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/headers');
+include_spip('auth/ldap');
 
 // http://doc.spip.org/@install_etape_ldap5_dist
 function install_etape_ldap5_dist()
@@ -20,6 +21,45 @@ function install_etape_ldap5_dist()
 		redirige_url_ecrire('install');
 
 	ecrire_meta('ldap_statut_import', _request('statut_ldap'));
+
+	lire_fichier(_FILE_CONNECT_TMP, $conn);
+
+	if ($p = strpos($conn, "'');")) {
+			ecrire_fichier(_FILE_CONNECT_TMP, 
+				       substr($conn, 0, $p+1) 
+				       . _FILE_LDAP
+				       . substr($conn, $p+1));
+	}
+
+	$adresse_ldap = _request('adresse_ldap');
+	$login_ldap = _request('login_ldap');
+	$pass_ldap = _request('pass_ldap');
+	$port_ldap = _request('port_ldap');
+	$tls_ldap = _request('tls_ldap');
+	$protocole_ldap = _request('protocole_ldap');
+	$base_ldap = _request('base_ldap');
+	$base_ldap_text = _request('base_ldap_text');
+
+	$conn = "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n"
+		. "\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n"
+		. "@ldap_set_option(\$GLOBALS['ldap_link'],LDAP_OPT_PROTOCOL_VERSION,\"$protocole_ldap\");\n"
+		. (($tls_ldap != 'oui') ? '' :
+		   "@ldap_start_tls(\$GLOBALS['ldap_link']);\n")
+		. "@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n";
+
+	$champs = is_array($GLOBALS['ldap_attributes']) ? $GLOBALS['ldap_attributes'] : array();
+	$res = '';
+	foreach ($champs as $champ => $v ) {
+		$nom = 'ldap_' . $champ;
+		$val = trim(_request($nom));
+		if (preg_match('/^\w*$/', $val)) {
+			if ($val) $val = _q($val);
+		} else $val = "array(" . _q(preg_split('/\W+/', $val)) . ')';;
+		if ($val) $res .= "'$champ' => " . $val . ",";
+	}
+	$conn .= "\$GLOBALS['ldap_champs'] = array($res);\n";
+	  
+	install_fichier_connexion(_DIR_CONNECT . _FILE_LDAP, $conn);
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
@@ -32,5 +72,6 @@ function install_etape_ldap5_dist()
 
 	echo install_fin_html();
 }
+
 
 ?>
