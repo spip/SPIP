@@ -21,7 +21,7 @@ include_spip('inc/cookie');
 function action_converser_dist()
 {
 
-	action_converser_changer_langue();
+	$lang = action_converser_changer_langue();
 	$redirect = rawurldecode(_request('redirect'));
 
 	if (!$redirect) $redirect = _DIR_RESTREINT_ABS;
@@ -50,7 +50,7 @@ function action_converser_changer_langue(){
 		}
 		action_converser_post($lang, 'spip_lang_ecrire');
 	}
-
+	return $lang;
 }
 
 // http://doc.spip.org/@action_converser_post
