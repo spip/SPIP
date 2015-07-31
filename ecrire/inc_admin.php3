@@ -17,6 +17,8 @@ function debut_admin($action, $commentaire='') {
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_ecrire ("inc_presentation.php3");
+		include_ecrire("inc_lang.php3");
+		utiliser_langue_visiteur();
 		install_debut_html(_T('info_acces_refuse'));
 		install_fin_html();
 		exit;

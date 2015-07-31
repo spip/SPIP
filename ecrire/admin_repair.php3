@@ -5,6 +5,8 @@ include ("inc_version.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_presentation.php3");
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
 
 
 /*
