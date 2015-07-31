@@ -92,13 +92,13 @@ function auth_spip_formulaire_login($flux){
 		."var informe_auteur_en_cours = false;"
 		."var attente_informe = 0;"
 		."var compat_md5 = ".($compat_md5?"true;":"false;")
-		."(function($){
-		$('#password')
+		."jQuery(function(){
+		jQuery('#password')
 			.after(\"<em id='pass_securise'><img src='"._DIR_IMG_PACK."securise.gif' width='16' height='16' alt='" . attribut_html(_T('login_securise')) . "' title='" . attribut_html(_T('login_securise')) . "' \/><\/em>\");
 		affiche_login_secure();
-		$('#var_login').change(actualise_auteur);
-		$('form#formulaire_login').submit(login_submit);
-	}(jQuery));"
+		jQuery('#var_login').change(actualise_auteur);
+		jQuery('form#formulaire_login').submit(login_submit);
+	});"
 		."/*]]>*/</script>";
 
 	return $flux;
