@@ -485,7 +485,7 @@ function ajout_forum() {
 
 		// Envoi d'un mail aux auteurs
 		$prevenir_auteurs = lire_meta("prevenir_auteurs");
-		if ($prevenir_auteurs == "oui") {
+		if ($prevenir_auteurs == "oui" AND $afficher_texte != "non") {
 			if ($id_article = $forum_id_article) {
 				$url = ereg_replace('^/', '', generer_url_article($id_article));
 				$adresse_site = lire_meta("adresse_site");
