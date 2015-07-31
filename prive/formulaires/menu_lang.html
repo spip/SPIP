@@ -1,15 +1,10 @@
 <div class="formulaire_spip formulaire_menu_lang" id="formulaire_menu_lang">
-
-<form method="post" action="#ENV{url}"><div>
-	[(#ENV{url}|form_hidden)]
-	<label for="#ENV{nom}"><:info_langues:></label>
-	<select class="forml" name="#ENV{nom}" id="#ENV{nom}"
-		onchange="this.parentNode.parentNode.submit()">
-	#ENV*{langues}
-	</select>
-	<noscript><div style="display: inline;">
-		<input type="submit" value="&gt;&gt;" />
-	</div></noscript>
-</div></form>
-
+<form method="post" action="#ENV{url}">
+	<div>
+		[(#ENV{url}|form_hidden)]
+		<label for="#ENV{nom}"><:info_langues:></label>
+		<select class="forml" name="#ENV{nom}" id="#ENV{nom}" onchange="this.parentNode.parentNode.submit()">#ENV*{langues}</select>
+		<noscript><div style="display: inline;"><input type="submit" class="submit" value="&gt;&gt;" /></div></noscript>
+	</div>
+</form>
 </div>

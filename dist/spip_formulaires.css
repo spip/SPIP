@@ -22,6 +22,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Champs de saisie */
 .formulaire_spip input.text { width: 15em; }
 .formulaire_spip textarea { width: 99%; }
+.formulaire_spip select { width: 99%; }
 
 /* Explications */
 .formulaire_spip .explication { margin: 0.5em 0; color: #444; }
@@ -71,6 +72,9 @@ table.spip_barre { width: 100%; }
 table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; }
 
 /* Formulaires de recherche (site / petitions) */
 .formulaire_recherche { margin: 0; padding: 0; background: none; }
