@@ -432,12 +432,41 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 	return false;
 }
 
+// Pour executer des taches de fond discretement, on utilise background-image
+// car contrairement a un iframe vide, les navigateurs ne diront pas qu'ils
+// n'ont pas fini de charger, c'est plus rassurant.
+// C'est aussi plus discret qu'un <img> sous un navigateur non graphique.
+// Cette fonction est utilisee pour l'espace prive (cf inc_presentation)
+// et pour l'espace public (cf #SPIP_CRON dans inc_balise)
+
+function generer_spip_cron() {
+  return '<div align="right" class="verdana2" style="background-image: url(\'' . 
+	generer_url_public('spip_action.php', 'action=cron') .
+	'\');">';
+}
+
+// envoi de l'image demandee dans le code ci-dessus
+
+function spip_action_cron() {
+  
+	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
+	header("Content-Type: image/gif");
+	header("Content-Length: ".strlen($image));
+	header("Cache-Control: no-cache,no-store");
+	header("Pragma: no-cache");
+	header("Connection: close");
+	echo $image;
+	flush();
+	cron (1);
+}
+
 //
 // cron() : execution des taches de fond
-// quand il est appele par spip_background, il est gourmand ;
-// quand il est appele par inc-public il n'est pas gourmand
-//
-function cron($gourmand = false) {
+// quand il est appele par inc-public.php il n'est pas gourmand;
+// quand il est appele par spip_action.php, il est gourmand 
+
+function cron ($gourmand=false) {
+
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// (ou est trop vieux -> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
@@ -452,7 +481,6 @@ function cron($gourmand = false) {
 		}
 	}
 }
-
 
 
 //
