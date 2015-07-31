@@ -32,8 +32,6 @@ body {
 }
 
 img, table { margin: 0; padding: 0; border: none; }
-ul, ol, li { margin: 0; padding: 0; }
-ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
 /*  ------------------------------------------
@@ -146,8 +144,8 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 }
 
 #navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
-#navigation ul, .encart ul { padding: 0.2em 0; text-align: left; }
-#navigation li, .encart li { padding: 0 0.7em; }
+#navigation ul, .encart ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
+#navigation li, .encart li { margin: 0; padding: 0 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
@@ -244,6 +242,7 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
+.liste-articles ul { margin: 0; padding: 0; list-style: none; }
 .liste-articles li { margin-bottom: 1em; clear: both; }
 
 .liste-articles li .titre {
@@ -296,10 +295,10 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 .page_plan #contenu .contre-encart ul {
 	display: block;
 	clear: left;
-	margin-left: 1em;
+	margin-top: 0;
 	margin-bottom: 1em;
-	list-style: square; }
-.page_plan #contenu .contre-encart li { list-style: inherit; }
+	padding-top: 0; }
+.page_plan #contenu .contre-encart li {}
 
 /*  ------------------------------------------
 /*  Habillage des formulaires
@@ -359,8 +358,8 @@ fieldset.previsu {
 .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
 /* Choix des mots-clefs */
-.choix_mots { width: 47%; float: left; } 
-.choix_mots label { display: inline; }
+ul.choix_mots { margin: 0; padding: 0; width: 47%; float: left; list-style: none; } 
+ul.choix_mots label { display: inline; }
 
 /* Formulaire de recherche */
 .formulaire_recherche { text-align: left; width: 12em; }
@@ -380,6 +379,7 @@ fieldset.previsu {
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
+ul.forum, ul.forum ul { list-style: none; }
 .forum-fil { margin-top: 1.5em; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
 .forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #333; }
