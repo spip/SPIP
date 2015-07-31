@@ -1737,7 +1737,7 @@ function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
  *   s'il accepte les requêtes imbriquées afin d'optimiser ca
  *
  * @api
- * @param string $val
+ * @param string $in
  *     Colonne SQL sur laquelle appliquer le test
  * @param array|string $select
  *     Liste des champs à récupérer (Select).
