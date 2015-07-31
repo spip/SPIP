@@ -270,19 +270,33 @@ class IterateurDATA implements Iterator {
 		// tri {par x}
 		if ($this->command['orderby']) {
 			$sortfunc = '';
+			$aleas = 0;
 			foreach($this->command['orderby'] as $tri) {
 				if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
-					if ($r[1] == 'valeur')
-						$tv = '%s';
-					else if ($r[1] == 'alea') # {par hasard}
-						$tv = 'rand(0,1)';
-					else
-						$tv = 'Iterateurs_table_valeur(%s, '.var_export($r[1],true).')';
-					$sortfunc .= '
-					$a = '.sprintf($tv,'$aa').';
-					$b = '.sprintf($tv,'$bb').';
-					if ($a <> $b)
-						return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+					// tri par cle
+					if ($r[1] == 'cle'){
+						ksort($this->tableau);
+					}
+					else {
+						# {par valeur}
+						if ($r[1] == 'valeur')
+							$tv = '%s';
+						# {par hasard}
+						else if ($r[1] == 'alea') {
+							if (!$aleas)
+							$sortfunc .= 'static $aleas = array();';
+							$aleas ++;
+							$tv = '(isset($aleas['.$aleas.'][$v=%s])?$aleas['.$aleas.'][$v]:($aleas['.$aleas.'][$v]=rand(0,1)))';
+						}
+						# {par valeur/xx/yy} ?? 
+						else
+							$tv = 'Iterateurs_table_valeur(%s, '.var_export($r[1],true).')';
+						$sortfunc .= '
+						$a = '.sprintf($tv,'$aa').';
+						$b = '.sprintf($tv,'$bb').';
+						if ($a <> $b)
+							return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
+					}
 				}
 			}
 
