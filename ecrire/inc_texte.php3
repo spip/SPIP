@@ -73,19 +73,32 @@ function vignette_par_defaut($type_extension, $align = '') {
 	else
 		$img = "IMG/icones";
 
-	$filename = "$img/type_$type_extension";
+	$filename = "$img/$type_extension";
 
+	// Glurps !
 	if (file_exists($filename.'.png')) {
 		$vig = "$filename.png";
+	}
+	else if (file_exists($filename.'.gif')) {
+		$vig = "$filename.gif";
 	}
 	else if (file_exists($filename.'-dist.png')) {
 		$vig = "$filename-dist.png";
 	}
-	else if (file_exists("$img/type_defaut.png")) {
-		$vig = "$img/type_defaut.png";
+	else if (file_exists($filename.'-dist.gif')) {
+		$vig = "$filename-dist.gif";
 	}
-	else if (file_exists("$img/type_defaut-dist.png")) {
-		$vig = "$img/type_defaut-dist.png";
+	else if (file_exists("$img/defaut.png")) {
+		$vig = "$img/defaut.png";
+	}
+	else if (file_exists("$img/defaut.gif")) {
+		$vig = "$img/defaut.gif";
+	}
+	else if (file_exists("$img/defaut-dist.png")) {
+		$vig = "$img/defaut-dist.png";
+	}
+	else if (file_exists("$img/defaut-dist.gif")) {
+		$vig = "$img/defaut-dist.gif";
 	}
 
 	$texte = "<img src='$vig' alt='$type_extension' border='0'";
