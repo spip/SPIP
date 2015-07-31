@@ -29,6 +29,7 @@ define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS);
 include_spip('inc/plugin');
 
 
+// http://doc.spip.org/@formulaire_charger_plugin
 function formulaire_charger_plugin($retour='') {
 	global $spip_lang_left, $spip_lang_right;
 
@@ -116,6 +117,7 @@ function formulaire_charger_plugin($retour='') {
 }
 
 
+// http://doc.spip.org/@chargeur_charger_zip
 function chargeur_charger_zip($quoi = array())
 {
 	if (!$quoi) {
@@ -234,6 +236,7 @@ function chargeur_charger_zip($quoi = array())
 }
 
 // pas de fichiers caches et preg_files() les ignore (*sigh*)
+// http://doc.spip.org/@chargeur_montre_tout
 function chargeur_montre_tout($quoi)
 {
 	# echo($quoi['dest']);
@@ -249,6 +252,7 @@ function chargeur_montre_tout($quoi)
 }
 
 // renommer des morceaux
+// http://doc.spip.org/@chargeur_edit
 function chargeur_edit($dir, $edit)
 {
 	if (!($d = @opendir($dir))) {
@@ -273,6 +277,7 @@ function chargeur_edit($dir, $edit)
 }
 
 // renommer des morceaux
+// http://doc.spip.org/@chargeur_rename
 function chargeur_rename($quoi)
 {
 /*
@@ -286,6 +291,7 @@ function chargeur_rename($quoi)
 }
 
 // juste activer le plugin du repertoire $plugin
+// http://doc.spip.org/@chargeur_activer_plugin
 function chargeur_activer_plugin($plugin)
 {
 	spip_log('charger_decompresser activer plugin: ' . $plugin);
@@ -295,6 +301,7 @@ function chargeur_activer_plugin($plugin)
 }
 
 
+// http://doc.spip.org/@liste_fichiers_pclzip
 function liste_fichiers_pclzip($status) {
 	$list = $status['files'];
 	$ret = '<b>'._L('Il contient les fichiers suivants ('
@@ -319,6 +326,7 @@ function liste_fichiers_pclzip($status) {
 }
 
 // Attention on ne sait pas ce que vaut cette URL
+// http://doc.spip.org/@essaie_ajouter_liste_plugins
 function essaie_ajouter_liste_plugins($url) {
 	if (!preg_match(',^https?://[^.]+\.[^.]+.*/.*[^/]$,', $url))
 		return;
@@ -343,6 +351,7 @@ function essaie_ajouter_liste_plugins($url) {
 
 // Recherche les enclosures de type zip dans un flux rss ou atom
 // les renvoie sous forme de tableau url => titre
+// http://doc.spip.org/@chercher_enclosures_zip
 function chercher_enclosures_zip($rss) {
 	$liste = array();
 	include_spip('inc/syndic');
@@ -359,6 +368,7 @@ function chercher_enclosures_zip($rss) {
 
 // Renvoie la liste des plugins distants (accessibles a travers
 // l'une des listes de plugins)
+// http://doc.spip.org/@liste_plugins_distants
 function liste_plugins_distants() {
 	// TODO une liste multilingue a telecharger
 	$liste = array(
@@ -380,6 +390,7 @@ function liste_plugins_distants() {
 	return $liste;
 }
 
+// http://doc.spip.org/@afficher_liste_listes_plugins
 function afficher_liste_listes_plugins() {
 	if (!is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug'])))
 		return '';
