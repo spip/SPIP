@@ -2670,11 +2670,8 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	if (function_exists("pagination"))
 		return pagination($total, $nom, $pas, $liste);
 
-	$pagination_separateur = '&nbsp;| ';
-
-	global $pagination_max;
-	tester_variable($pagination_max, 10);
-	$pagination_max = intval($pagination_max);
+	$separateur = '&nbsp;| ';
+	define(PAGINATION_MAX, 10);
 
 	$debut = 'debut'.$nom;
 
@@ -2699,7 +2696,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	if (!$liste)
 		return $bloc_ancre;
 
-	list($premiere, $derniere) = calcul_bornes_pagination($pagination_max, $pagination['nombre_pages'], $pagination['page_courante']);
+	list($premiere, $derniere) = calcul_bornes_pagination(PAGINATION_MAX, $pagination['nombre_pages'], $pagination['page_courante']);
 
 	// liste  = true : on retourne tout (ancre + bloc de navigation)
 	$texte = '';
@@ -2713,7 +2710,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 				$pagination['lien_pagination']) :
 			$_item;
 		$texte .= $item;
-		if($i<$pagination['nombre_pages']) $texte .= $pagination_separateur;
+		if($i<$pagination['nombre_pages']) $texte .= $separateur;
 	}
 	return $bloc_ancre.$texte;
 }
