@@ -510,9 +510,13 @@ function quote_amp($u) {
 // Production d'une balise Script valide
 // http://doc.spip.org/@http_script
 function http_script($script, $src='', $noscript='') {
+	static $done = array();
 
-	if ($src)
+	if ($src && !isset($done[$src])){
+		$done[$src] = true;
 		$src = " src='$src'";
+	}
+	else $src = '';
 	if ($script)
 		$script = ("<!--\n" . 
 		preg_replace(',</([^>]*)>,','<\/\1>', $script) .
@@ -520,7 +524,6 @@ function http_script($script, $src='', $noscript='') {
 	if ($noscript)
 		$noscript = "<noscript>\n\t$noscript\n</noscript>\n";
 
-	
 	return ($src OR $script OR $noscript)
 	? "<script type='text/javascript'$src>$script</script>$noscript"
 	: '';
