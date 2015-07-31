@@ -60,6 +60,11 @@ jQuery.fn.async_upload = function(add_function) {
   }
 }
 
+// Safari plante quand on utilise clone() -> on utilise html()
+// Mais FF a un bug sur les urls contenant ~ quand on utilise html() -> on utilise clone()
+jQuery.fn.clone2 = jQuery.browser.safari ? jQuery.fn.html : jQuery.fn.clone;
+
+
 function async_upload_article_edit(res,jForm){
       var cont;
       //verify if a new document or a customized vignette
@@ -79,7 +84,7 @@ function async_upload_article_edit(res,jForm){
 	      else
 	        cont = jQuery("#liste_documents");
 	      cont
-	      .prepend(res.clone());
+	      .prepend(res.clone2());
 	      //find added documents, remove label and show them nicely
 	      cont.
 	      find("div.documents_added")
@@ -113,7 +118,7 @@ function async_upload_portfolio_documents(res){
     var self = jQuery(this);
     if(!cont.size()) {
       cont = jQuery(this.id.search(/--/)!=-1 ? "#portfolio":"#documents")
-      .append(self.clone().get());
+      .append(self.clone2().get());
     }
     verifForm(cont.html(self.html()));
     jQuery("form.form_upload",cont).async_upload(async_upload_portfolio_documents);
