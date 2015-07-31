@@ -274,7 +274,7 @@ function formater_credits($infos, $sep=', ') {
 		// Si le credit en cours n'est pas un array c'est donc un copyright
 		$texte .=
 			(!is_array($_credit))
-			? $_credit
+			? PtoBR(propre($_credit)
 			: ($_credit['url'] ? '<a href="' . $_credit['url'] . '">' : '') .
 			  $_credit['nom'] .
 			  ($_credit['url'] ? '</a>' : '');
