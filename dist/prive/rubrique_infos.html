@@ -1,12 +1,30 @@
-<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
+<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}{!lang_select}>
 <div class='infos'>
 <div class='numero'><:titre_numero_rubrique:><p>#ID_RUBRIQUE</p></div>
+
+
+[(#REM)
+
+	Lister les elements qui justifient le statut de la rubrique
+
+]
 <p class='nb_elements'>
-<BOUCLE_arts(ARTICLES){id_rubrique}{statut!=poubelle}></BOUCLE_arts><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_articles:></div><//B_arts>
-<BOUCLE_breves(BREVES){id_rubrique}{statut!=poubelle}></BOUCLE_breves><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_breves_02:></div><//B_breves>
-<BOUCLE_sites(SITES){id_rubrique}{statut!=poubelle}></BOUCLE_sites><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_sites:></div><//B_sites>
+<BOUCLE_arts(ARTICLES){id_rubrique}></BOUCLE_arts><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_articles:></div><//B_arts>
+<BOUCLE_breves(BREVES){id_rubrique}></BOUCLE_breves><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_breves_02:></div><//B_breves>
+<BOUCLE_sites(SITES){id_rubrique}></BOUCLE_sites><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_sites:></div><//B_sites>
 <BOUCLE_docs(DOCUMENTS){id_rubrique}></BOUCLE_docs><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_documents:></div><//B_docs>
+<BOUCLE_rubs(RUBRIQUES){id_parent}></BOUCLE_rubs><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_rubriques:></div><//B_rubs>
 </p>
-[<p class='forums'>(#ENV{n_forums,''}|?{' '})[(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#ENV{n_forums}}})]</p>]
+
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{rubrique}|voir_en_ligne{#ID_RUBRIQUE,#STATUT,racine-24.gif,0,0})]
+
+
+
+
 </div>
 </BOUCLE_rub>

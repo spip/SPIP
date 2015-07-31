@@ -1,8 +1,15 @@
-<BOUCLE_site(SITES){id_syndic=#ENV{id}}{statut?}>
+<BOUCLE_site(SITES){id_syndic=#ENV{id}}{statut?}{!lang_select}>
 <div class='infos'>
 <div class='numero'><:titre_site_numero:><p>#ID_SYNDIC</p></div>
 [(#ID_SYNDIC|instituer_site{#ID_RUBRIQUE,#STATUT})]
-<BOUCLE_articles(SYNDIC_ARTICLES){id_syndic}></BOUCLE_articles><p class='forums[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>#TOTAL_BOUCLE <:info_syndication_articles:></p><//B_articles>
-<BOUCLE_forums(FORUMS){id_syndic}></BOUCLE_forums>[<p class='forums[(#TOTAL_BOUCLE|?{'',' noinfo'})]'>(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#TOTAL_BOUCLE}})</p>]<//B_forums>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+][(#VAL{site}|voir_en_ligne{#ID_SYNDIC,#STATUT,racine-24.gif,0,0})]
+
+
+
 </div>
 </BOUCLE_site>
