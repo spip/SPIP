@@ -43,30 +43,28 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 	. "spip_connect_db("
 	. "'$adr','$port','$login','$pass','$base'"
 	. ",'$type', '$pref','$ldap');\n";
-
 }
 
-function install_mode_appel($server_db, $tout=true)
-{
-	return ($server_db != 'mysql') ? ''
-	: (($tout  ? test_rappel_nom_base_mysql($server_db) : '')
-		. test_sql_mode_mysql($server_db)	);
-}
+// Analyse si un fichier contient le resultat de la fonction install_connexion
+// y compris ce qu'elle produisait dans les versions precedentes
 
 // http://doc.spip.org/@analyse_fichier_connection
 function analyse_fichier_connection($file)
 {
-
 	$s = @join('', file($file));
 	if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
 		array_shift($regs);
 		return $regs;
-	} else if (preg_match("#spip_connect_db\('([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)#", $s, $regs)) {
-		$regs[2] = $regs[1] . (!$regs[2] ? '' : ":$port_db;");
-		array_shift($regs);
-		array_shift($regs);
-		return $regs;
-	} else spip_log("$file n'est pas un fichier de connexion");
+	} else {
+		$arg = '\s*\'([^\']*)\'\s*,';
+		if (preg_match("#spip_connect_db\($arg$arg$arg$arg\s*'([^']*)'\s*(?:,\s*'([^']*))?#", $s, $regs)) {
+			$regs[2] = $regs[1] . (!$regs[2] ? '' : ":$port_db;");
+			array_shift($regs);
+			array_shift($regs);
+			return $regs;
+		}
+	}
+	spip_log("$file n'est pas un fichier de connexion");
 	return '';
 }
 
@@ -81,6 +79,13 @@ function bases_referencees($exclu='')
 	return $tables;
 }
 
+
+function install_mode_appel($server_db, $tout=true)
+{
+	return ($server_db != 'mysql') ? ''
+	: (($tout  ? test_rappel_nom_base_mysql($server_db) : '')
+		. test_sql_mode_mysql($server_db)	);
+}
 
 //
 // Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
