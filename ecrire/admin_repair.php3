@@ -65,13 +65,14 @@ else {
 		$message = "{{Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
 		syst&eacute;matiquement et sans raison apparente, il est possible
 		que ce soit &agrave; cause de la base de donn&eacute;es
-		elle-m&ecirc;me.}}\n\n MySQL 
-		dispose d'une facult&eacute; de r&eacute;paration de ses tables
-		lorsqu'elles ont &eacute;t&eacute; endommag&eacute;es par
-		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;;
-		en cas d'&eacute;chec, conservez une copie de l'affichage, qui
-		contient peut-&ecirc;tre des indices de ce qui ne va pas...\n\nSi le
-		problème persiste, prenez contact avec votre h&eacute;bergeur.\n";
+		elle-m&ecirc;me.}}\n\n
+		MySQL dispose d'une facult&eacute; de r&eacute;paration de ses
+		tables lorsqu'elles ont &eacute;t&eacute; endommag&eacute;es par
+		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
+		cas d'&eacute;chec, conservez une copie de l'affichage, qui contient
+		peut-&ecirc;tre des indices de ce qui ne va pas...\n\n
+		Si le probl&egrave;me persiste, prenez contact avec votre
+		h&eacute;bergeur.\n";
 		$ok = true;
 	}
 }
