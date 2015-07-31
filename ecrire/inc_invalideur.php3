@@ -99,7 +99,7 @@ function applique_invalideur($depart) {
 		spip_query("UPDATE spip_caches SET type='x'"
 		. ' WHERE ' . calcul_mysql_in('fichier', $tous));
 
-		// Demander a inc-public.php3 de retirer les caches
+		// Demander a inc-public de retirer les caches
 		// invalides ;
 		// - le signal (meta='invalider') indique
 		// qu'il faut faire attention ;

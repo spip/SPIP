@@ -190,7 +190,10 @@ function extrait_article($row) {
 	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
 	if ($statut == 'publie') $extrait .= " "._T('date_fmt_nomjour_date', array('nomjour'=>nom_jour($date), 'date'=>affdate($date)));
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
-	if ($statut == 'publie') $extrait .= "-> ".$adresse_site."/spip_redirect.php3?id_article=$id_article\n\n";
+	if ($statut == 'publie') 
+		$extrait .= "-> ".
+		  http_php_scriptnq($adresse_site."/spip_redirect", "id_article=$id_article") .
+		  "\n\n";
 	return $extrait;
 }
 
@@ -256,10 +259,12 @@ function envoyer_mail_proposition($id_article) {
 				     ."\n" 
 				     . _T('info_propose_5')
 				     ."\n" 
-				     . $adresse_site 
-				     . '/' 
-				     . _DIR_RESTREINT_ABS 
-				     . "articles.php3?id_article=$id_article\n\n\n" 
+				     . http_php_scriptnq($adresse_site 
+							 . '/' 
+							 . _DIR_RESTREINT_ABS 
+							 . "articles",
+							 "id_article=$id_article")
+				     . "\n\n\n" 
 				     . extrait_article($row));
 			changer_langue($lang_utilisateur);
 		}
