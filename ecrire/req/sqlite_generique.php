@@ -521,9 +521,13 @@ function spip_sqlite_count($r, $serveur = '', $requeter = true){
 		// (link,requete) a compter
 		if (is_array($r->spipSqliteRowCount)){
 			list($link,$query) = $r->spipSqliteRowCount;
+			// amelioration possible a tester intensivement : pas de order by pour compter !
+			// $query = preg_replace(",ORDER BY .+(LIMIT\s|HAVING\s|GROUP BY\s|$),Uims","\\1",$query);
+			$query = "SELECT count(*) as zzzzsqlitecount FROM ($query)";
 			$l = $link->query($query);
 			$i = 0;
-			while ($l->fetch()) $i++;
+			if ($l AND $z = $l->fetch())
+				$i = $z['zzzzsqlitecount'];
 			$r->spipSqliteRowCount = $i;
 		}
 		if (isset($r->spipSqliteRowCount)){
