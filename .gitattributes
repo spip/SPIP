@@ -319,6 +319,7 @@ ecrire/inc/petitionner.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
+ecrire/inc/presenter_enfants.php -text
 ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
 ecrire/inc/rechercher.php -text

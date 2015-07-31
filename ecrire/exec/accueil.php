@@ -472,6 +472,7 @@ function exec_accueil_dist()
 	  echo encours_accueil();
 	}
 
+	include_spip('inc/presenter_enfants');
 	if (!$connect_id_rubrique)
 		echo afficher_enfant_rub(0, false, true) . "<div class='nettoyeur'></div>";
 
