@@ -452,6 +452,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // insere un <div> avec un lien background-image vers les taches de fond.
 // Si cette balise est presente sur la page de sommaire, le site ne devrait
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
+// ATTENTION: cette balise efface parfois les boutons admin implicites
 function balise_SPIP_CRON_dist ($p) {
 	$p->code = "'<div style=\\'position: absolute; background-image: url(\"spip_background.php3\"); height: 1px; width: 1px;\\'></div>'";
 	$p->statut='php';

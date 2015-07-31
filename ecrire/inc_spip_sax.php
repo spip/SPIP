@@ -29,12 +29,14 @@ function debutElement($parser, $name, $attrs)
   $res = &$phraseur_xml->res;
 
   $t = $ouvrant[$depth];
-  if ($t[0] != ' ')
+  // espace initial signifie: deja integree au resultat
+  if ($t && $t[0] != ' ')
     {
       $res .= '<' . $t . '>';
       $ouvrant[$depth] = ' ' . $t;
     }
   $t = $contenu[$depth];
+  // n'indenter que s'il y a un separateur avant
   $res .= ereg_replace("[\n\t ]+$",  "\n$depth", $t);
   $contenu[$depth] = "";
   $att = '';
@@ -67,7 +69,8 @@ function finElement($parser, $name)
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
-  if ($t)
+  // fusion <balise></balise> en <balise /> sauf pour textarea qui hallucine!
+  if ($t || ($name == 'textarea'))
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
     $res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
@@ -138,7 +141,7 @@ function xml_parsestring($xml_parser, $data)
 	global $phraseur_xml;
 	$r = "";
 	if (!xml_parse($xml_parser, $data, true)) {
-	  // ne pas commencer le message par un "<" (cf inc_debug)
+	  // ne pas commencer le message par un "<" (cf spip_sax)
 	  $r = xml_error_string(xml_get_error_code($xml_parser)) .
 	    _L(" ligne ") .
 	    xml_get_current_line_number($xml_parser) .
@@ -169,7 +172,7 @@ var $reperes = array();
 global $phraseur_xml, $xml_parser;
 $phraseur_xml = new PhraseurXML();
 
-$xml_parser = xml_parser_create();
+$xml_parser = xml_parser_create(lire_meta('charset'));
 xml_set_element_handler($xml_parser,
 			array($phraseur_xml, "debutElement"),
 			array($phraseur_xml, "finElement"));
@@ -178,10 +181,18 @@ xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElem
 xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
 xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
-// exemple d'appels
-#$error = $phraseur_xml->xml_parsefile($xml_parser, $_SERVER['argv'][1]);
-#$error = $phraseur_xml->xml_parsestring($xml_parser, "<html></html>");
+function spip_sax($page)
+{
+	global $phraseur_xml, $xml_parser, $xhtml_error;
+	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
+	if ($res[0] != '<')
+	  $xhtml_error = $res;
+	else
+	  $page = $res;
+	return $page;
+}
 
-#echo $error ? $error : $phraseur_xml->res;
+// exemple d'appel en ligne de commande:
+#$error = $phraseur_xml->xml_parsefile($xml_parser, $_SERVER['argv'][1]);
 
 ?>

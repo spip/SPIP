@@ -3,25 +3,12 @@
 	top: 0px;
 	right: 20px;
 	position: absolute;
+	background-color: transparent;
 	z-index: 100;
 }
 
 
 /* Couleurs et design des boutons d'admin */
-.spip-admin-bloc {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	background-color: transparent;
-	font-size: 10px;
-}
-
-.spip-admin-bloc li {
-	padding: 0 2px;
-	display: inline;
-}
-
-.spip-admin-bloc ul {
-	display: inline;
-}
 
 a.spip-admin-boutons {
 	border-top: 1px solid #cecece;

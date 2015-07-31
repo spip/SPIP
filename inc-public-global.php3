@@ -340,46 +340,41 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 # Attention, un appel explicite a cette fonction suppose certains include
 # (voir l'exemple de spip_inscription et spip_pass)
 # $r = complexe (fond, delais, contexte) ; $echo = faut-il faire echo ou return
-function inclure_balise_dynamique($r, $echo=true) {
-	global $contexte_inclus;	# provisoire : c'est pour le debuggueur
+function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
+	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
-	if (is_string($r))
-		if ($echo)
-			echo $r;
-		else
-			return $r;
-	else {
-		list($fond, $delais, $contexte_inclus) = $r;
+	if (!is_string($texte))
+	  {
+		list($fond, $delais, $contexte_inclus) = $texte;
 
 		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
-
 		// Appeler la page
 		$page = inclure_page($fond, $delais, $contexte_inclus);
 
 		if ($page['process_ins'] == 'html') {
-			if ($echo)
-				echo $page['texte'];
-			else
 				$texte = $page['texte'];
 		} else {
-			if ($echo)
-				eval('?' . '>' . $page['texte']);
-			else {
 				ob_start();
 				eval('?' . '>' . $page['texte']);
 				$texte = ob_get_contents();
 				ob_end_clean();
-			}
 		}
 
 		if ($page['lang_select'])
 			lang_dselect();
 
-		return $texte;
-	}
+	  }
+
+	if ($GLOBALS['var_mode'] == 'debug')
+	    $GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
+
+	if ($echo)
+			echo $texte;
+	else
+			return $texte;
 }
 
 

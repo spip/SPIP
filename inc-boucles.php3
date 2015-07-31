@@ -35,7 +35,7 @@ function boucle_DEFAUT($id_boucle, &$boucles) {
 //
 function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 
-	    return "\n	\$t0 = " . $boucles[$id_boucle]->return . ";";
+	return calculer_boucle($id_boucle, $boucles); 
 }
 
 //

@@ -412,7 +412,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 $spip_version = 1.816;
 
 // version de spip
-$spip_version_affichee = "1.8.2 CVS alpha";
+$spip_version_affichee = "1.8.2 CVS beta 1";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -904,7 +904,10 @@ function _T($texte, $args = '') {
 		$text = html2unicode($text);
 	}
 
-	return $text ? $text : $texte;
+	return $text ? $text : 
+	  // pour les chaines non traduites
+	  (($n = strpos($texte,':')) === false ? $texte :
+	   substr($texte, $n+1));
 }
 
 // chaines en cours de traduction
@@ -1071,7 +1074,7 @@ function debut_entete($title, $entete='') {
 	  "<head>\n" .
 #	  "<base href='$base' />\n" .
 	  "<title>$title</title>\n" .
-	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
+	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset'>\n";
 }
 
 
