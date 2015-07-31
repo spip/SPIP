@@ -212,7 +212,7 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 
 	while ($param) {
 
-		preg_match('/(([^{,]*\{[^}]*\})|([^,]*))[[:space:]]*,?[[:space:]]*(.*)/ims',
+		preg_match('/(([^{,]*[{][^}]*[}])|([^,]*))[[:space:]]*,?[[:space:]]*(.*)/ims',
 			   $param, $regs);
 		$param = $regs[4];
 		$tri = $regs[1];
@@ -358,7 +358,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 	$primary = $boucle->primary;
 	$id_field = $id_table . '.' . $primary; 
 
-	if (ereg('^([0-9a-zA-Z#_\{\}-]+)([,/])([0-9a-zA-Z#_\{\}-]+)$', $param, $match))
+	if (ereg('^([0-9a-zA-Z#_{}-]+)([,/])([0-9a-zA-Z#_{}-]+)$', $param, $match))
 	  calculer_critere_parties($idb, $boucles, $param, $not, $match);
 
 		// Restriction de valeurs (implicite ou explicite)
@@ -625,7 +625,7 @@ function calculer_param_date($date_compare, $date_orig) {
 //   - dans le cas d'un parametre de boucle, la boucle parente
 function calculer_param_dynamique($val, &$boucles, $idb) {
 #	if (ereg('^ *\((.*)) *$', $val, $m)) $val = $m[1]; # si on veut (#...)
-	if (ereg(NOM_DE_CHAMP . "(\{[^}]*\})?", $val, $regs)) {
+	if (ereg(NOM_DE_CHAMP . "([{][^}]*[}])?", $val, $regs)) {
 #spip_log(serialize($regs)." ($idb)");
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];

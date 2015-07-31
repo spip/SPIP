@@ -281,7 +281,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 
 	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	list($x,$y) = split(',', ereg_replace("[\{\}]", "", $params)); 
+	list($x,$y) = split(',', ereg_replace("[{}]", "", $params)); 
 
 
 	if ($logo AND @file_exists($logo)) {

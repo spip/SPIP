@@ -23,7 +23,7 @@ define("_INC_HTML_SQUEL", "1");
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
-define('PARAM_DE_BOUCLE','[[:space:]]*\{[[:space:]]*([^{}]*(\{[^\}]*\}[^\}]*)*)[[:space:]]*\}');
+define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^{}]*([{][^}]*[}][^}]*)*)[[:space:]]*[}]');
 define('TYPE_DE_BOUCLE', "[^)]*");
 define('BALISE_DE_BOUCLE',
 	"^<BOUCLE(" .
@@ -33,7 +33,7 @@ define('BALISE_DE_BOUCLE',
 	')\)((' .
 	PARAM_DE_BOUCLE .
 	')*)[[:space:]]*>');
-define('PARAM_INCLURE','^[[:space:]]*\{[[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=)?');
+define('PARAM_INCLURE','^[[:space:]]*[{][[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=)?');
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
 define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
@@ -84,7 +84,7 @@ function phraser_polyglotte($texte,$result) {
 		$lang = '';
 		$bloc = $match[1];
 		$texte = substr($texte,$p+strlen($match[0]));
-		while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[\{\[]([a-z_]+)[\}\]](.*)$/si", $bloc, $regs)) {
+		while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[{\[]([a-z_]+)[}\]](.*)$/si", $bloc, $regs)) {
 		  $trad = $regs[1];
 		  if ($trad OR $lang) 
 			$champ->traductions[$lang] = $trad;
@@ -178,7 +178,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg("^( *)([^,{}]*({[^{}]*\}[^,{}]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
+			ereg("^( *)([^,{}]*({[^{}]*[}][^,{}]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
@@ -189,7 +189,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 		} else {   // valeur = ", ', ou vide
 		  if ((count($regs) > 3) &&
-		      ereg("^(.*)(#[A-Z0-9:_=]+\{.*\})(.*)$",$arg, $r))
+		      ereg("^(.*)(#[A-Z0-9:_=]+[{].*[}])(.*)$",$arg, $r))
 		    {
 		      // champ avec arg, sans les [( )]: on les rajoute
 		      $arg = $r[1] .  '[(' . $r[2] . ')' . $r[3] . ']';
@@ -293,7 +293,7 @@ function phraser_param($params, &$result) {
 		else { 
 		  $params2[] = ($param == 'unique') ? 'doublons' :$param;
 		  /* pour bientot
-		   if (ereg('^([0-9a-zA-Z#_\{\}-]+)([,/])([0-9a-zA-Z#_\{\}-]+)$', $param, $match))
+		   if (ereg('^([0-9a-zA-Z#_{}-]+)([,/])([0-9a-zA-Z#_{}-]+)$', $param, $match))
 			  $args['parties'] = $match;
 			else if (eregi('^(`?[a-z_]+\(?[a-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $match))
 			  $args['comparaison'] = $match;
