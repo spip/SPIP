@@ -711,7 +711,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
-
+	$afficher_langue = false;
+	$langue_defaut = $GLOBALS['meta']['langue_site'];
 	// Preciser la requete (alleger les requetes)
 	if (!isset($requete['SELECT'])) {
 		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
@@ -719,7 +720,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
 			if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
-			else $langue_defaut = $GLOBALS['meta']['langue_site'];
 			$requete['SELECT'] .= ", articles.lang";
 		}
 		if ($afficher_visites)
@@ -2559,12 +2559,12 @@ function debut_corps_page($rubrique='') {
 	global $connect_id_auteur;
   
 	// Ouverture de la partie "principale" de la page
-	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
-	echo "<center onmouseover=\"if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
 
-			$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
-			$total_messages = @spip_num_rows($result_messages);
-			if ($total_messages == 1) {
+	echo "<center onmouseover='recherche_desesperement()'>";
+
+	$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+	$total_messages = @spip_num_rows($result_messages);
+	if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
 					echo "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
@@ -2920,6 +2920,7 @@ function mySel($varaut,$variable, $option = NULL) {
 function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	global $connect_statut;
 
+	$en_ligne = $message = '';
 	switch ($type) {
 		case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {

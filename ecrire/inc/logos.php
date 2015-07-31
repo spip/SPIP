@@ -138,17 +138,18 @@ function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 		  _T('bouton_telecharger'),
 		  "' class='fondo' style='font-size:9px' /></div>";
 		$afficher = "";
-		if ($GLOBALS['flag_upload']
-		AND $fichiers = preg_files(_DIR_TRANSFERT, '[.](gif|jpg|png)$')) {
+		$dir_ftp = determine_upload();
+		if ($dir_ftp
+		AND $fichiers = preg_files($dir_ftp, '[.](gif|jpg|png)$')) {
 			foreach ($fichiers as $f) {
-				$f = substr($f, strlen(_DIR_TRANSFERT));
+				$f = substr($f, strlen($dir_ftp));
 				$afficher .= "\n<option value='$f'>$f</option>";
 			}
 		}
 
 		if (!$afficher) {
 		  echo _T('info_installer_images_dossier',
-			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'));
+			  array('upload' => '<b>' . $dir_ftp . '</b>'));
 		} else {
 		  echo "\n<div style='text-align: left'>",
 		    _T('info_selectionner_fichier',

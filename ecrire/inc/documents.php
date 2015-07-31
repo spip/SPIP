@@ -441,7 +441,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 		$f = preg_replace(",^$dir,",'',$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
-			if (!$exts[$ext]) {
+			if (!isset($exts[$ext])) {
 				if ($ext == 'jpeg') $ext = 'jpg';
 				if (spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
 					$exts[$ext] = 'oui';
@@ -516,7 +516,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 //
 
 function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='', $document=0) {
-  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
+  global   $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
 	$res = "\n<div>" . bouton_block_invisible("ftp$num_form") .
@@ -529,14 +529,13 @@ function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='
 		"' CLASS='fondo'></div>\n";
 
 	// Un menu depliant si on a une possibilite supplementaire
-	$test_ftp = ($connect_statut == '0minirezo' AND $GLOBALS['flag_upload']);
+	$dir_ftp = determine_upload();
 	$test_distant = ($mode == 'document' AND $type);
-	if ($test_ftp OR $test_distant)
+	if ($dir_ftp OR $test_distant)
 		$res .= "<div>" . debut_block_invisible("ftp$num_form");
 
-	if ($test_ftp)
-		$res .= afficher_transferer_upload($type, texte_upload_manuel(_DIR_TRANSFERT,$inclus));
-
+	if ($dir_ftp)
+		$res .= afficher_transferer_upload($type, texte_upload_manuel($dir_ftp,$inclus));
 
 	// Lien document distant, jamais en mode image
 	if ($test_distant) {
@@ -551,7 +550,7 @@ function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='
 			"</div>\n";
 	}
 
-	if ($test_ftp OR $test_distant)
+	if ($dir_ftp OR $test_distant)
 		$res .= "</div>\n";
 	// Fin menu depliant
 
@@ -592,17 +591,16 @@ function construire_upload($corps, $args, $enctype='')
 
 function afficher_transferer_upload($type, $texte_upload)
 {
+	$doc = array('upload' => '<b>' . determine_upload() . '</b>');
 	if (!$texte_upload) {
 		return "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
-		  _T('info_installer_ftp',
-			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>')).
+			_T('info_installer_ftp', $doc) .
 			aide("ins_upload") .
 			"</div>";
 		}
 	else {  return
 		"<p><div style='color: #505050;'>\n"
-		._T('info_selectionner_fichier',
-			array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'))
+		._T('info_selectionner_fichier', $doc)
 		."&nbsp;:<br />" .
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
@@ -635,6 +633,7 @@ function afficher_portfolio(
 
 	// la derniere case d'une rangee
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
+	$case = 0;
 
 	foreach ($documents as $document) {
 		$id_article = $document["id_$type"]; 		# numero de l'article ou de la rubrique

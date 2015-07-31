@@ -51,7 +51,7 @@ function action_spip_image_ajouter_dist() {
 
 		if (!is_array($source)) 
 		// fichier dans upload/
-	  		$source = @copy(_DIR_TRANSFERT . $source, $f);
+	  		$source = @copy(determine_upload() . $source, $f);
 		else {
 		// Intercepter une erreur a l'envoi
 			if (check_upload_error($source['error']))

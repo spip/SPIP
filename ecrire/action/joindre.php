@@ -26,7 +26,6 @@ function action_joindre_dist()
     $sousaction5,
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
-
 	include_spip('inc/session');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
@@ -100,7 +99,8 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 {
 	if (!$arg || strstr($arg, '..')) return;
 	    
-	$upload = (_DIR_TRANSFERT .$arg);
+	$upload = determine_upload();
+	if ($arg != '/' AND $arg != './') $upload .= $arg;
 
 	if (!is_dir($upload))
 	  // seul un fichier est demande
