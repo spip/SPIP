@@ -267,13 +267,13 @@ function interdire_scripts($source) {
 
 // Correction typographique francaise
 function typo_fr($letexte) {
+	include_ecrire('inc_charsets.php3');
 
 	// nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
-	if (lire_meta('charset') == 'iso-8859-1') {
-		$letexte = strtr($letexte,chr(160),"~");
-		$chars = array (187,171,176);
-		while (list(,$c) = each($chars))
-			$letexte = ereg_replace(chr($c),"&#$c;",$letexte);
+	$chars = array (160 => '~', 187 => '&#187;', 171 => '&#171;', 176 => '&#176;');
+	while (list($c,$r) = each($chars)) {
+		$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
+		$letexte = ereg_replace($c,$r,$letexte);
 	}
 
 	// unifier sur la representation unicode
