@@ -592,8 +592,9 @@ function calcul_balise_logo ($p) {
 
 	// cas des documents
 	if ($type_objet == 'DOCUMENT')
-		$code_logo =
-			"array(integre_image($_id_objet,'','fichier_vignette'), '')";
+		$code_logo = "calcule_document($_id_objet, '" .
+			$p->documents .
+			'\', $doublons)';
 	else
 		$code_logo = "cherche_logo_objet('$type_objet',
 			$_id_objet, $onoff)";
