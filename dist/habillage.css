@@ -62,7 +62,7 @@ h3, h3 a, h3 a:hover { color: #000; }
 h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; color: #333; }
 
 /* Divers */
-hr { width: 40%; height: 2px; margin: 4em auto; background-color: #999; color: #999; border: 0; }
+hr { height: 2px; margin: 2em auto; background-color: #999; color: #999; border: 0; }
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 small { font-size: 0.71em; color: #666; }
 /* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
@@ -73,10 +73,10 @@ ul.spip {}
 ol.spip {}
 
 /* Citations, code et poesie */
-blockquote { padding-left: 1em; border-left: 4px solid #DDD; }
-.spip_poesie { margin: 1em 3em; padding-left: 1em; border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
-.spip_poesie div { text-indent: -60px; margin-left: 60px; }
-code, .spip_cadre { font-family: "Courier New", Courier, mono; font-size: 1.10em; color: #009; }
+blockquote { margin: 1em 3em; padding-left: 1em; border-left: 4px solid #DDD; }
+blockquote.spip_poesie { border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
+blockquote.spip_poesie div { text-indent: -60px; margin-left: 60px; }
+code, .spip_cadre { font-family: "Courier New", Courier, mono; color: #009; }
 div.spip_code, .spip_cadre { margin-bottom: 1em; }
 
 /* Tableaux */
@@ -119,7 +119,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .chapo { margin-bottom: 1.50em; font-weight: bold; color: #669; line-height: 1.40em; }
 .texte { line-height: 1.60em; }
 .ps, .notes { margin-bottom: 2em; line-height: 1.40em; }
-.notes { clear: both; font-size: 0.82em; }
+.notes { clear: both; font-size: 0.90em; }
 
 .hyperlien { display: block; background: #EEE; padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
 
