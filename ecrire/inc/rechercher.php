@@ -18,26 +18,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // avec un poids pour le score
 // http://doc.spip.org/@liste_des_champs
 function liste_des_champs() {
-	return
-	pipeline('rechercher_liste_des_champs',
-		array(
-			'article' => array(
-				'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
-				'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
-				'descriptif' => 4
-			),
-			'rubrique' => array(
-				'titre' => 8, 'descriptif' => 5, 'texte' => 1
-			),
-			'auteur' => array(
-				'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
-			),
-			'document' => array(
-				'titre' => 3, 'descriptif' => 1, 'fichier' => 1
-			),
-
-		)
-	);
+	static $liste=null;
+	if (is_null($liste)) {
+		$liste = array();
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach($tables_objets as $t=>$infos){
+			if ($infos['rechercher_champs']){
+				$liste[$infos['type']] = $infos['rechercher_champs'];
+			}
+		}
+		// puis passer dans le pipeline
+		$liste = pipeline('rechercher_liste_des_champs', $liste);
+	}
+	return $liste;
 }
 
 
@@ -45,18 +40,21 @@ function liste_des_champs() {
 // en ne regardant que le titre ou le nom
 // http://doc.spip.org/@liste_des_jointures
 function liste_des_jointures() {
-	return
-	pipeline('rechercher_liste_des_jointures',
-			array(
-			'article' => array(
-				'auteur' => array('nom' => 10),
-				'document' => array('titre' => 2, 'descriptif' => 1)
-			),
-			'rubrique' => array(
-				'document' => array('titre' => 2, 'descriptif' => 1)
-			)
-		)
-	);
+	static $liste=null;
+	if (is_null($liste)) {
+		$liste = array();
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach($tables_objets as $t=>$infos){
+			if ($infos['rechercher_jointures']){
+				$liste[$infos['type']] = $infos['rechercher_jointures'];
+			}
+		}
+		// puis passer dans le pipeline
+		$liste = pipeline('rechercher_liste_des_jointures', $liste);
+	}
+	return $liste;
 }
 
 function expression_recherche($recherche, $options) {

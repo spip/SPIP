@@ -46,7 +46,15 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_article',
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
-				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'j_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps')
+				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'j_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
+				'rechercher_champs' => array(
+					'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
+					'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
+					'descriptif' => 4
+				),
+				'rechercher_jointures' => array(
+					'auteur' => array('nom' => 10),
+				),
 			),
 			'spip_auteurs' => array(
 				'texte_retour' => 'icone_retour',
@@ -55,7 +63,10 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_auteur',
 				'info_1_objet' => 'info_1_auteur',
 				'info_nb_objets' => 'info_nb_auteurs',
-				'champs_versionnes' => array('nom', 'bio', 'email', 'nom_site', 'url_site', 'login')
+				'champs_versionnes' => array('nom', 'bio', 'email', 'nom_site', 'url_site', 'login'),
+				'rechercher_champs' => array(
+					'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
+				),
 			),
 			'spip_rubriques' => array(
 				'url_voir' => 'naviguer',
@@ -66,7 +77,10 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
 				'info_nb_objets' => 'info_nb_rubriques',
-				'champs_versionnes' => array('titre', 'descriptif', 'texte')
+				'champs_versionnes' => array('titre', 'descriptif', 'texte'),
+				'rechercher_champs' => array(
+					'titre' => 8, 'descriptif' => 5, 'texte' => 1
+				),
 			)
 		));
 		// completer les informations manquantes ou implicites
@@ -198,8 +212,13 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
 	if (!isset($infos['date']))
 		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
+
 	if (!isset($infos['champs_versionnes']))
 		$infos['champs_versionnes'] = array();
+	if (!isset($infos['rechercher_champs']))
+		$infos['rechercher_champs'] = array();
+	if (!isset($infos['rechercher_jointures']))
+		$infos['rechercher_jointures'] = array();
 
 	return $infos;
 }
