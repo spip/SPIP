@@ -149,7 +149,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		  $config['langue'] .
 		  "' />"))
 		  . $hidden
-		  . $md5;
+		  . (isset($md5) ? $md5 : '');
 
 
 	if (isset($contexte['extra']))

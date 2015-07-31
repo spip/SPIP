@@ -177,9 +177,9 @@ function traiter_formulaires_dynamiques($get=false){
 			ajax_retour(json_encode($post["erreurs_$form"]),'text/plain');
 			return true; // on a fini le hit
 		}
+		$retour = "";
 		if ((count($post["erreurs_$form"])==0)){
 			$rev = "";
-			$retour = "";
 			if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
 				$rev = call_user_func_array($traiter,$args);
 
