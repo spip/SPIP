@@ -21,7 +21,7 @@ function action_documenter_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)$,", $arg, $r))
+	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d+)$,", $arg, $r))
 		spip_log("action_documenter $arg pas compris");
 	else action_documenter_post($r);
 }
