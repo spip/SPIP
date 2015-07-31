@@ -52,20 +52,9 @@ function public_debusquer_dist($message='', $lieu='') {
 
 	// Erreur ou appel final ?
 	if ($message) {
-	  // Message a composer ?
-		if (is_array($message)) {
-			if (!is_numeric($message[0]))
-			  // message avec argument: instancier
-			  $message = _T($message[0], $message[1], 'spip-debug-arg');
-			else {
-			  // message SQL: interpreter
-			  $message = debusquer_requete($message);
-			}
-		}
-
+		$message = debusquer_compose_message($message);
 		$tableau_des_erreurs[] = array($message, $lieu);
 		set_request('var_mode', 'debug');
-		spip_log("Debug: " . $message . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
 		if (is_object($lieu) AND !$lieu->code)
@@ -76,7 +65,6 @@ function public_debusquer_dist($message='', $lieu='') {
 	}
 	if (empty($debug_objets['principal'])) 
 		$debug_objets['principal'] = $GLOBALS['fond'];
-
 
 	include_spip('inc/autoriser');
 	if (!autoriser('debug')) return;
@@ -122,6 +110,20 @@ function public_debusquer_dist($message='', $lieu='') {
 	else
 		echo debusquer_entete($titre, $res);
 	exit;
+}
+
+function debusquer_compose_message($msg)
+{
+	if (is_array($msg)) {
+		if (!is_numeric($msg[0]))
+			// message avec argument: instancier
+			$msg = _T($msg[0], $msg[1], 'spip-debug-arg');
+		else
+			// message SQL: interpreter
+			$msg = debusquer_requete($msg);
+	}
+	spip_log("Debug: " . $msg . " (" . $GLOBALS['fond'] .")" );
+	return $msg;
 }
 
 function debusquer_bandeau($erreurs) {
