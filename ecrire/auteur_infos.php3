@@ -37,9 +37,7 @@ function afficher_auteur_rubriques($leparent){
 		$titre=typo($row['titre']);
 	
 		if (!ereg(",$my_rubrique,","$toutes_rubriques")){
-			$espace="";
-			for ($count=0;$count<$i;$count++){$espace.="&nbsp;&nbsp;";}
-			$espace .= "|";
+			$espace = str_repeat("&nbsp", $i*2) . "|";
 			if ($i==1)
 				$espace = "*";
 
