@@ -64,6 +64,7 @@ i.spip { }
 .forml { width: 100% ; background-color: #FFDDAA;}
 
 .spip_encadrer {
+	font-family: helvetica, arial, sans-serif;
 	width : 100%;
 	background-color: #FFFFFF;
 	padding: 5px;

@@ -154,9 +154,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$nouveau_document AND $afficher_texte != 'non'){
 			$ret .= "<div class='spip_encadrer'>";
 			if ($afficher_texte != "non"){
-				$ret .= "<font size=4 color='#aaaaaa'><b>".typo($titre)."</b></font>";
-				$ret .= "<p><b><a href='mailto:".entites_html($email_auteur)."'>".typo($auteur)."</a></b>";
-				$ret .= "<p>".propre($texte)."<p>";
+				$ret .= "<div style='font-size: 120%; font-weigth: bold;'>".typo($titre)."</div>";
+				$ret .= "<p /><b><a href='mailto:".entites_html($email_auteur)."'>".typo($auteur)."</a></b>";
+				$ret .= "<p />".propre($texte)."<p />";
 			}
 
 			$ret .= "<a href='".entites_html($url_site)."'>".typo($nom_site_forum)."</a>";
@@ -173,7 +173,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$les_mots[$id_mot] = true;
 				$presence_mots = true;
 
-				$ret.= "<li> $type_mot&nbsp;: <b>$titre_mot</b>";
+				$ret.= "<li class='font-size=80%'> $type_mot&nbsp;: <b>$titre_mot</b></li>";
 			}
 
 			if (strlen($texte) < 10 AND !$presence_mots) {
@@ -267,11 +267,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$total_rows = spip_num_rows($result);
 
 				if ($total_rows > 0){
-					$ret .= "\n<p><div class='spip_encadrer'>";
+					$ret .= "\n<p /><div class='spip_encadrer' style='font-size: 80%;'>";
 					$ret.= "<b>$titre_groupe&nbsp;:</b>";
 
 					$ret .= "<table cellpadding=0 cellspacing=0 border=0 width='100%'>\n";
-					$ret .= "<tr><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+					$ret .= "<tr><td width='47%' valign='top'>";
 					$i = 0;
 
 					while ($row = spip_fetch_array($result)) {
@@ -282,7 +282,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 						if ($i >= ($total_rows/2) AND $i < $total_rows){
 							$i = $total_rows + 1;
-							$ret .= "</font></td><td width='6%'>&nbsp;</td><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+							$ret .= "</font></td><td width='6%'>&nbsp;</td><td width='47%' valign='top'>";
 						}
 
 						if ($les_mots[$id_mot]) $checked = "checked";
