@@ -213,8 +213,13 @@ function appliquer_modifs_config() {
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
 
 	// langue_site : la globale est mangee par inc_version
-	if ($l = $GLOBALS['changer_langue_site'] AND changer_langue($l))
-		ecrire_meta('langue_site', $l);
+	if ($lang = $GLOBALS['changer_langue_site']) {
+		$lang2 = $GLOBALS['spip_lang'];
+		if (changer_langue($lang)) {
+			ecrire_meta('langue_site', $lang);
+			changer_langue($lang2);
+		}
+	}
 
 	ecrire_metas();
 
