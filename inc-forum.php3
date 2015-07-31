@@ -280,7 +280,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 		if ($afficher_groupe) {
 			$afficher_groupe = join($afficher_groupe, ",");
-			$selectionner_groupe = "AND id_groupe IN ('$afficher_groupe')";
+			$selectionner_groupe = "AND id_groupe IN ($afficher_groupe)";
 		}
 		if ($table){
 			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE 6forum = 'oui' AND $table = 'oui' $selectionner_groupe";
