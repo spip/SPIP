@@ -301,9 +301,17 @@ function echappe_retour($letexte, $les_echap, $source) {
 function couper($texte, $taille=50) {
 	$texte = substr($texte, 0, 400 + 2*$taille); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
 
+	// on utilise les \r pour passer entre les gouttes
+	$texte = str_replace("\n\r", "\n", $texte);
+	$texte = str_replace("\r", "\n", $texte);
+
+	// sauts de ligne et paragraphes
+	$texte = ereg_replace("\n\n+", "\r", $texte);
+	$texte = ereg_replace("<(p|br)( [^>]*)?>", "\r", $texte);
+
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
-	$texte = trim(ereg_replace("[\n\r]"," ", $texte));
+	$texte = trim(str_replace("\n"," ", $texte));
 	$texte .= "\n";	// marquer la fin
 
 	// travailler en accents charset
@@ -342,6 +350,9 @@ function couper($texte, $taille=50) {
 
 	if (strpos("\n", $texte))	// la fin est encore la : c'est qu'on n'a pas de texte de suite
 		$points = '';
+
+	// remettre les paragraphes
+	$texte = ereg_replace("\r+", "\n\n", $texte);
 
 	return trim($texte).$points;
 }
