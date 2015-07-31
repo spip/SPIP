@@ -649,7 +649,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$p->code = "calcul_pagination(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), '$b', "
+	), ".$p->boucles[$b]->modificateur['debut_nom'].", "
 	. $p->boucles[$b]->total_parties
 	. ", $liste $__modele)";
 
