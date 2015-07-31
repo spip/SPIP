@@ -25,7 +25,7 @@ function inc_documenter_dist(
 	$couleur='',		# IGNORE couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
-	if (is_int($doc)) {
+	if (is_numeric($doc)) {
 		$prim = 'id_' . $type;
 		$img = ($ancre == 'portfolio') ? '' : " NOT";
 		$select = "D.id_document, D.id_vignette, D.extension, D.titre,  D.date,  D.descriptif,  D.fichier,  D.taille, D.largeur,  D.hauteur,  D.mode,  D.distant, L.vu, L.id_objet, L.id_objet as $prim";
