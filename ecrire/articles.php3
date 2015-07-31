@@ -16,6 +16,8 @@ $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
 
 $requete_fichier = "articles.php3?id_article=$id_article";
+// Initialiser doublons pour documents (completes par "propre($texte)")
+$id_doublons['documents'] = "0";
 
 
 
@@ -41,6 +43,17 @@ $result_auteur = spip_query($query);
 $flag_auteur = (mysql_num_rows($result_auteur) > 0);
 $flag_editable = (acces_rubrique($rubrique_article)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+
+
+
+/// En double avec articles_edit.php3, mais nécessite le flag_editable
+$modif_document = $GLOBALS['modif_document'];
+if ($modif_document == 'oui' AND $flag_editable) {
+	$titre = addslashes(corriger_caracteres($titre));
+	$descriptif = addslashes(corriger_caracteres($descriptif));
+	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
+}
+
 
 
 
