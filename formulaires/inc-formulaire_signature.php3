@@ -30,13 +30,23 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 	else if (!$args[1])
 		return '';
 
-	else
+	else {
+		// aller chercher dans la base la petition associee
+		$s = spip_query("SELECT texte, site_obli, message
+			FROM spip_petitions WHERE id_article = ".intval($args[0]));
+		if ($r = spip_fetch_array($s)) {
+			$args[2] = $r['texte'];
+			// le signataire doit-il donner un site ?
+			$args[3] = ($r['site_obli'] == 'oui') ? ' ':'';
+			// le signataire peut-il proposer un commentaire
+			$args[4] = ($r['message'] == 'oui') ? ' ':'';
+		}
 		return $args;
+	}
 }
 
 // Executer la balise
-function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition) {
-	include_local(_FILE_CONNECT);
+function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_obli, $message) {
 
 	if (_request('var_confirm')) # _GET
 		return reponse_confirmation($id_article);
@@ -44,15 +54,19 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition) {
 	else if (_request('nom_email') AND _request('adresse_email')) # _POST
 		return  reponse_signature($id_article,
 			_request('nom_email'), _request('adresse_email'),
-			_request('message'), _request('nom_site'),
-			_request('url_site'), _request('url_page')
+			_request('message'), _request('signature_nom_site'),
+			_request('signature_url_site'), _request('url_page')
 		);
 
 	else {
-		$s = spip_query("SELECT * FROM spip_petitions
-			WHERE id_article='$id_article'");
-		if ($row = spip_fetch_array($s))
-			return array('formulaire_signature', 0, $row);
+		return array('formulaire_signature', $GLOBALS['delais'],
+		array(
+			'id_article' => $id_article,
+			'petition' => $petition,
+			'texte' => $texte,
+			'site_obli' => $site_obli,
+			'message' => $message
+		));
 	}
 }
 
