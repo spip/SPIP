@@ -33,31 +33,14 @@ function version_tidy() {
 
 
 function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
-	$regexp_echap_math = "/<math((.*?))<\/math>/si";
+	$regexp_echap_math = "/<(math|textarea)((.*?))<\/$1>/si";
 	$source = "xhtml";
 
-	while (preg_match($regexp_echap_math, $letexte, $regs)) {
+	if (preg_match_all($regexp_echap_math, $letexte, $regs, PREG_SET_ORDER))
+	foreach ($regs as $reg) {
 		$num_echap++;
-		
-		$les_echap[$num_echap] = $regs[0];
-
-		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-			.substr($letexte,$pos+strlen($regs[0]));
-	}
-	
-	// et les textarea
-	$regexp_echap_cadre = "/<textarea((.*?))<\/textarea>/si";
-	$source = "xhtml";
-
-	while (preg_match($regexp_echap_cadre, $letexte, $regs)) {
-		$num_echap++;
-		
-		$les_echap[$num_echap] = $regs[0];
-
-		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-			.substr($letexte,$pos+strlen($regs[0]));
+		$les_echap[$num_echap] = $reg[0];
+		$letexte = str_replace($reg[0],"@@SPIP_$source$num_echap@@", $letexte);
 	}
 
 	return array($letexte, $les_echap);
@@ -134,11 +117,8 @@ function traite_xhtml ($buffer) {
 		// Si l'on a defini un chemin pour tidyHTML 
 		// en ligne de commande 
 		// (pour les sites qui n'ont pas tidyPHP)
-		include_ecrire("inc_texte.php3");
 
-		$retour_echap = echappe_xhtml ($buffer);
-		$buffer = $retour_echap[0];
-		$les_echap = $retour_echap[1];
+		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
 		$cache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'tidy');
 		$nomfich = $cache.'tidy'.md5($buffer);
@@ -190,7 +170,6 @@ function traite_xhtml ($buffer) {
 				}
 			}
 
-			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 			$tidy = preg_replace (",<[?]xml.*>,U", "", $tidy);
 			if (@file_exists("$nomfich.err")) {
 				define ('_erreur_tidy', 1);
@@ -206,9 +185,7 @@ function traite_xhtml ($buffer) {
 	else if (version_tidy() == "1") {
 		include_ecrire("inc_texte.php3");
 
-		$retour_echap = echappe_xhtml ($buffer);
-		$buffer = $retour_echap[0];
-		$les_echap = $retour_echap[1];
+		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
 		tidy_set_encoding ($enc_char);
 		tidy_setopt('wrap', 0);
@@ -222,7 +199,12 @@ function traite_xhtml ($buffer) {
 		tidy_parse_string($buffer);
 		tidy_clean_repair();
 		$tidy = tidy_get_output();
-		$tidy = echappe_retour($tidy, $les_echap, "xhtml");
+
+		if ($les_echap) {
+			include_ecrire("inc_texte.php3");
+			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
+		}
+
 		// En Latin1, tidy ajoute une declaration XML
 		// (malgre add-xml-decl a false) ; il faut le supprimer
 		// pour eviter interpretation PHP provoquant une erreur
@@ -233,9 +215,7 @@ function traite_xhtml ($buffer) {
 	else if (version_tidy() == "2") {
 		include_ecrire("inc_texte.php3");
 	
-		$retour_echap = echappe_xhtml ($buffer);
-		$buffer = $retour_echap[0];
-		$les_echap = $retour_echap[1];
+		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
 		$config = array(
 			'wrap' => 0,
@@ -248,6 +228,12 @@ function traite_xhtml ($buffer) {
 			);
 		$tidy = tidy_parse_string($buffer, $config, $enc_char);
 		tidy_clean_repair($tidy);
+
+		if ($les_echap) {
+			include_ecrire("inc_texte.php3");
+			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
+		}
+
 		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
 		# pas de gestion d'erreur ?
 		return $tidy;
