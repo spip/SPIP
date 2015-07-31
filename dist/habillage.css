@@ -171,8 +171,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .cartouche small { font-size: 0.71em; }
 
 .cartouche .traductions { font-size: 0.71em; }
-.cartouche .traductions p { float: left; }
-.cartouche .traductions li { float: left; margin-left: 1em; }
+.cartouche .traductions * { display: inline; }
+.cartouche .traductions li { margin-left: 1em; }
 
 
 /*  Mise en forme des textes du contenu
