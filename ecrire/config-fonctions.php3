@@ -42,9 +42,6 @@ if ($changer_config == 'oui') {
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 
 	ecrire_meta("activer_moteur", $activer_moteur);
-	ecrire_meta("activer_syndic", $activer_syndic);
-	ecrire_meta("visiter_sites", $visiter_sites);
-	ecrire_meta("taille_index", $taille_index);
 	ecrire_meta("prevenir_auteurs", $prevenir_auteurs);
 	ecrire_meta("activer_messagerie", $activer_messagerie);
 	ecrire_meta("activer_imessage", $activer_imessage);

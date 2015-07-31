@@ -67,6 +67,8 @@ if ($changer_config == 'oui') {
 	ecrire_meta("post_dates", $post_dates);
 	ecrire_meta("creer_preview", $creer_preview);
 	ecrire_meta("taille_preview", $taille_preview);
+	ecrire_meta("activer_syndic", $activer_syndic);
+	ecrire_meta("visiter_sites", $visiter_sites);
 
 	ecrire_metas();	
 
