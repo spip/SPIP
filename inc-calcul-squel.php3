@@ -1776,7 +1776,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 			$texte .= '	$GLOBALS["spip_lang"] = $old_lang;'."\n";
 	}
 	else {
-		$texte .= '	$pile_boucles[$id_instance]->compteur_boucle = $pile_boucles[$id_instance]->$total_boucle;'."\n";
+		$texte .= '	$pile_boucles[$id_instance]->compteur_boucle = $pile_boucles[$id_instance]->total_boucle;'."\n";
 	}
 	$texte .= $code_fin;
 	return $texte;
