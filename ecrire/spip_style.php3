@@ -1351,25 +1351,37 @@ h3.spip {
 }
 
 table.spip {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	border-collapse:collapse;
 }
 
 table.spip caption{
-	caption-side: top; /* bottom */
+	caption-side: bottom; /* top */
 	text-align:center;
-	background-color: #FCF4D0;
+	padding: 3px;
+	font-weight: bold;
+	font-family: Verdana,Arial,Sans,sans-serif;
+	font-size : 70%;
 }
+thead {
+padding-bottom: 0px;
+margin-bottom: 0px;
 
+}
 table.spip tr.row_first {
-	background-color: #FCF4D0;
+	background-color: <?php echo $couleur_claire; ?>;
 }
 table.spip tr.row_odd {
-	background-color: #C0C0C0;
+	background-color: #d0d0d0;
 }
 table.spip tr.row_even {
 	background-color: #F0F0F0;
 }
 table.spip td {
-	padding: 1px;
+	padding: 3px;
 	text-align: left;
 	vertical-align: center;
+	margin: 1px;
 }
