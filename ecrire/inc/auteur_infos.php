@@ -77,8 +77,8 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	// Installer la fiche "auteur_infos_voir"
 	// et masquer le formulaire si on n'en a pas besoin
 
-	if (!$new AND !$echec AND !$edit AND !_request('erreurs_editer_auteur')) {
-	  $corps .= http_script("jQuery('#auteur_infos_edit').hide();");
+	if (!$new AND !$echec AND !$edit) {
+	  $corps .= http_script("if (jQuery('#auteur_infos_edit span.erreur_message').length){jQuery('#auteur-voir').hide();}else{jQuery('#auteur_infos_edit').hide();}");
 	} else {
 	  $corps .= http_script("jQuery('#auteur-voir').hide();");
 	}
