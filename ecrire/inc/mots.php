@@ -572,7 +572,7 @@ else $aff_articles = "'prop','publie'";
 
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
-	global $spip_lang_right, $couleur_claire;
+	global $spip_lang_right, $couleur_claire, $spip_lang;
 
 
 	$jjscript = array("fonction" => "afficher_groupe_mots",
@@ -583,14 +583,14 @@ function afficher_groupe_mots($id_groupe) {
 			
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
-	$select = 'id_mot, titre, ' . creer_objet_multi ("titre", "$spip_lang");
+	$select = 'id_mot, titre, ' . creer_objet_multi ("titre", $spip_lang);
 	$from = 'spip_mots';
 	$where = "id_groupe=$id_groupe" ;
 	$order = " ORDER BY multi";
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
 
-	if (! ($cpt = $cpt['n'])) return ;
+	if (! ($cpt = $cpt['n'])) return true ;
 
 	$nb_aff = 1.5 * _TRANCHES;
 
@@ -600,9 +600,7 @@ function afficher_groupe_mots($id_groupe) {
 		$nb_aff = (_TRANCHES); 
 	}
 
-	if (strlen($tranches)) {
-
-		$occurrences = calculer_liens_mots();
+	$occurrences = calculer_liens_mots();
 		$table = '';
 		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
@@ -623,8 +621,8 @@ function afficher_groupe_mots($id_groupe) {
 		echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
 
-		$result = spip_query("SELECT $select FROM $from WHERE $where $order LIMIT  " . intval(_request('t_' .$tmp_var)) . ", $nb_aff");
-
+		$result = spip_query($r = "SELECT $select FROM $from WHERE $where $order LIMIT  " . intval(_request('t_' .$tmp_var)) . ", $nb_aff");
+		if ($id_groupe == 7) spip_log($r);
 		while ($row = spip_fetch_array($result)) {
 		
 			$vals = '';
@@ -700,13 +698,8 @@ function afficher_groupe_mots($id_groupe) {
 		
 		if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
 
-		$supprimer_groupe = false;
-	}
-	else
-		if ($connect_statut =="0minirezo")
-			$supprimer_groupe = true;
 
-	return $supprimer_groupe;
+	return false;
 }
 
 ?>
