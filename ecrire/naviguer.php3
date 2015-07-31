@@ -14,7 +14,7 @@ function enfant($collection){
 	global $les_enfants, $couleur_foncee;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
-	
+
 	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -479,18 +479,16 @@ if (lire_meta("activer_syndic") != 'non') {
 	afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
 }
 
-if ($options == "avancees"){
-	$proposer_sites=lire_meta("proposer_sites");
-	if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
-		$link = new Link('sites_edit.php3');
-		$link->addVar('id_rubrique', $coll);
-		$link->addVar('target', 'sites.php3');
-		$link->addVar('redirect', $clean_link->getUrl());
-	
-		echo "<div align='right'>";
-		icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");
-		echo "</div><p>";
-	}
+$proposer_sites=lire_meta("proposer_sites");
+if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
+	$link = new Link('sites_edit.php3');
+	$link->addVar('id_rubrique', $coll);
+	$link->addVar('target', 'sites.php3');
+	$link->addVar('redirect', $clean_link->getUrl());
+
+	echo "<div align='right'>";
+	icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");
+	echo "</div><p>";
 }
 
 
