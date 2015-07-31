@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Aceste site-uri au avut probleme de sindicalizare a con&#355;inutului',
 'avis_sites_syndiques_probleme' => 'Aceste site-uri sindicalizate au avut o problem&#259;',
 'avis_suppression_base' => 'ATEN&#354;IE, suprimarea datelor este ireversibil&#259;',
-'avis_version_mysql' => 'Versiunea dumneavoastr&#259; de SQL (@version_mysql@) nu permite repararea automatic&#259; a tabelelor din baza de date.',
+'avis_version_mysql' => 'Server-ul dumneavoastr&#259; SQL (@version_mysql@) nu permite repararea automat&#259; a tabelelor din baza de date.',
 
 // B
 'bouton_acces_ldap' => 'Ad&#259;uga&#355;i accesul la LDAP',
@@ -115,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP nu are acces la lista bazelor de date disponibile',
 'config_info_base_sup' => 'Dac&#259; ave&#355;i alte baze de date pe care dori&#355;i s&#259; le interoga&#355;i cu ajutorul SPIP, prin server-ul s&#259;u SQL sau un altul, formularul de mai jos v&#259; permite s&#259; le declara&#355;i. Dac&#259; ve&#355;i l&#259;sa anumite c&acirc;mpuri goale, identificarea utilizat&#259; pentru baza de date principal&#259; vor fi folosi&#355;i &icirc;n mod automat.',
 'config_info_base_sup_disponibles' => 'Baze de date suplimentare care pot fi deja interogabile:',
+'config_info_enregistree' => 'Noua configura&#355;ie a fost &icirc;nregistrat&#259;',
 'config_info_logos' => 'Fiecare element al site-ului poate avea at&acirc;t un logo, c&acirc;t &#351;i un &laquo;&nbsp;logo de survol&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utiliza&#355;i logo-urile',
 'config_info_logos_utiliser_non' => 'Nu utiliza&#355;i logo-urile',
@@ -429,7 +430,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Mesajele dumneavoastr&#259; &icirc;n curs de redactare',
 'info_message_technique' => 'Mesaj tehnic :',
 'info_messagerie_interne' => 'Mesagerie intern&#259;',
-'info_mise_a_niveau_base' => 'aducerea la zi a bazei dumneavoastr&#259; de date SQL',
+'info_mise_a_niveau_base' => 'aducere la zi a bazei dumneavoastr&#259; de date SQL',
 'info_mise_a_niveau_base_2' => '{{Aten&#355;ie!}} A&#355;i instalat o versiune
   de fi&#351;iere SPIP {anterioar&#259;} celei care se g&#259;sea &icirc;nainte pe acest site:
   baza dumneavoastr&#259; de date risc&#259; s&#259; fie
@@ -521,7 +522,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Dori&#355;i s&#259; activa&#355;i compactarea scripturilor (javascript) ?',
 'info_question_activer_compresseur' => 'Dori&#355;i s&#259; activa&#355;i compresia fluxului HTTP ?',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastr&#259; trebuie s&#259; gestioneze statisticile vizitelor&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accepta&#355;i &icirc;nscrierea de noi redactori
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accepta&#355;i &icirc;nscrierea de noi redactori
   &icirc;n partea public&#259; a site-ului&nbsp;? Dac&#259; accepta&#355;i, vizitatorii vor putea s&#259; se &icirc;nscrie
   cu ajutorul unui formular automatizat &#351;i vor putea avea acces la spa&#355;iul privat pentru a propune
   propriile lor articole. <blockquote><i>Ca urmare a procesului de &icirc;nscriere,
@@ -679,7 +680,6 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'install_select_langue' => 'Selec&#355;iona&#355;i o limb&#259; &#351;i face&#355;i click pe butonul &laquo;&nbsp;urm&#259;torul&nbsp;&raquo; pentru a lansa procedura de instalare.',
 'install_select_type_db' => 'Indica&#355;i tipul bazei de date&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Server de baz&#259; de date atribuit de c&#259;tre provider',
@@ -881,6 +881,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'repertoire_plugins' => 'Director&nbsp;:',
 
 // S
+'sans_heure' => 'f&#259;r&#259; or&#259;',
 'sauvegarde_fusionner' => '&Icirc;mbina&#355;i baza curent&#259; cu cea salvat&#259;',
 'sauvegarde_fusionner_depublier' => 'De-publica&#355;i obiectele fuzionate',
 'sauvegarde_url_origine' => 'Eventual, URL-ul site-ului de origine :',
@@ -910,7 +911,7 @@ incluz&acirc;nd <i>toate</i> informa&#355;iile referitoare la redactori sau admi
 reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351;i un nou acces administrator.',
 'texte_admin_effacer_stats' => 'Aceast&#259; comand&#259; &#351;terge toate datele legate de statisticile vizitelor &icirc;n site, incluz&acirc;nd &#351;i datele de popularitate a articolelor.',
 'texte_admin_tech_01' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; salva&#355;i con&#355;inutul bazei de date intr-un fi&#351;ier care va fi pus &icirc;n directorul @dossier@. Nu uita&#355;i, de asemenea, s&#259; recupera&#355;i directorul @img@ &icirc;n integralitatea lui - acesta con&#355;ine imaginile &#351;i documentele folosite &icirc;n articole &#351;i rubrici.',
-'texte_admin_tech_02' => 'Aten&#355;ie: aceast&#259; salvare nu va putea fi restaurat&#259; DEC&Acirc;T pe un site folosing ACEEA&#350;I versiune de SPIP. Mai ales, nu trebuie sa &laquo;&nbsp;goli&#355;i baza de date&nbsp;&raquo; sper&acirc;nd c&#259;, dup&#259; o aducere la zi, ve&#355;i putea reinstala ceea ce a&#355;i salvat ... Consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
+'texte_admin_tech_02' => 'Aten&#355;ie: aceast&#259; salvare nu va putea fi restaurat&#259; DEC&Acirc;T pe un site instalat folosind aceea&#351;i versiune de SPIP. Mai ales, nu trebuie sa &laquo;&nbsp;goli&#355;i baza de date&nbsp;&raquo; sper&acirc;nd c&#259;, dup&#259; o aducere la zi... ve&#355;i putea reinstala ceea ce a&#355;i salvat ... Consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
 'texte_admin_tech_03' => 'Pute&#355;i s&#259; alege&#355;i s&#259; salva&#355;i fi&#351;ierul sub o form&#259; comprimat&#259;, at&acirc;t pentru
  a mic&#351;ora durata transferului c&#259;tre dumneavoastr&#259; sau spre un server de siguran&#355;&#259;, c&acirc;t &#351;i pentru a face economie de spa&#355;iu de disc.',
 'texte_admin_tech_04' => '&Icirc;n scopul de fuzionare cu o alt&#259; baz&#259; de date, pute&#355;i limita salvarea la rubrica:',
@@ -1035,13 +1036,10 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_reference_mais_redirige' => 'articol referen&#355;iat &icirc;n site-ul dumneavoastr&#259;, dar redirijat c&#259;tre un alt URL.',
 'texte_referencement_automatique' => '<b>Referen&#355;ierea automatic&#259; a unui site</b><br />Pute&#355;i s&#259; referen&#355;ia&#355;i rapid un site Web indic&acirc;nd mai jos adresa sa URL, sau adresa fi&#351;ierului s&#259;u de sindicalizare. SPIP va recupera &icirc;n mod automat informa&#355;iile referitoare la acest site (titlu, descriere, &#351;.a.m.d.).',
 'texte_referencement_automatique_verifier' => 'V&#259; rug&#259;m s&#259; verifica&#355;i informa&#355;iile furnizate de <tt>@url@</tt> &icirc;nainte de a &icirc;nregistra.',
-'texte_requetes_echouent' => '<b>Atunci c&acirc;nd cererile SQL e&#351;ueaz&#259;
- &icirc;n mod sistematic &#351;i f&#259;r&#259; un motiv evident, este posibil
- ca baza de date &icirc;ns&#259;&#351;i s&#259; fie cauza.</b>
-  SQL dispune de o capacitate de reparare a tabelelor sale atunci c&acirc;nd acestea s-au stricat &icirc;n mod accidental.
- Pute&#355;i &icirc;ncerca aici aceast&#259; reparare&nbsp;; &icirc;n
-  caz de e&#351;ec, conserva&#355;i o copie de ecran, care poate c&#259; con&#355;ine indicii referitor la ceea ce nu merge...
-  Dac&#259; problema persist&#259;, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe furnizorul dumneavoastr&#259; de hosting.',
+'texte_requetes_echouent' => '<b>Atunci c&acirc;nd anumite cereri SQL e&#351;ueaz&#259; &icirc;n mod sistematic &#351;i f&#259;r&#259; un motiv evident, este posibil ca baza de date &icirc;ns&#259;&#351;i s&#259; fie cauza.</b>
+Server-ul dumneavoastr&#259; SQL dispune de o capacitate de reparare a tabelelor sale atunci c&acirc;nd acestea s-au stricat &icirc;n mod accidental.
+Pute&#355;i &icirc;ncerca aici aceast&#259; reparare&nbsp;; &icirc;n caz de e&#351;ec, conserva&#355;i o copie de ecran, care poate c&#259; con&#355;ine indicii referitor la ceea ce nu merge...
+Dac&#259; problema persist&#259;, v&#259; rug&#259;m s&#259;-l contacta&#355;i pe furnizorul dumneavoastr&#259; de hosting.',
 'texte_restaurer_base' => 'Restaura&#355;i con&#355;inutul bazei de date plec&acirc;nd de la o salvare',
 'texte_restaurer_sauvegarde' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; restaura&#355;i o copie de siguran&#355;&#259; a bazei de date pe care a&#355;i f&#259;cut-o anterior. Pentru aceasta v&#259; rug&#259;m s&#259; v&#259; asigura&#355;i ca fi&#351;ierul de copie de siguran&#355;&#259;
   se afl&#259; &icirc;n directorul @dossier@.

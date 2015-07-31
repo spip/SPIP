@@ -113,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP kann nicht auf die Liste der verf&uuml;gbaren Datenbanken zugreifen.',
 'config_info_base_sup' => 'Wenn Sie andere Datenbanken auf dem selben Server oder auf einem anderen mit SPIP abfragen m&ouml;chten, k&ouml;nnen Sie sie mit dem Formular weiter unten deklarieren. Wenn Sie Felder leer lassen, werden die Verbindungsdaten der Hauptdatenbank verwendet.',
 'config_info_base_sup_disponibles' => 'Bereits abfragbare Datenbanken:',
+'config_info_enregistree' => 'Neue Einstellungen wurden gespeichert',
 'config_info_logos' => 'Jedes Element der Website kann ein Logo und ein &laquo;mouseover-Logo&raquo; erhalten.',
 'config_info_logos_utiliser' => 'Logos verwenden',
 'config_info_logos_utiliser_non' => 'Logos nicht verwenden',
@@ -503,7 +504,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_question_activer_compresseur' => 'M&ouml;chten sie die HTTP-&Uuml;bertragung komprimieren?',
 'info_question_gerer_statistiques' => 'Soll SPIP Besucherstatistiken anlegen?',
 'info_question_inscription_nouveaux_redacteurs' => 'M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich
- aus anmelden k&ouml;nnen?&nbsp; Wenn Sie das erm&ouml;glichen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch
+ aus anmelden k&ouml;nnen?&nbsp; Wenn Sie es wollen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
  <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
@@ -522,7 +523,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_recharger_page' => 'Bitte laden Sie diese Seite in ein paar Augenblicken erneut.',
 'info_recherche_auteur_a_affiner' => 'Zu viele Fundstellen f&uuml;r R20;@cherche_auteur@R21; - bitte grenzen Sie die Suche ein.',
 'info_recherche_auteur_ok' => 'Zu &bdquo;@cherche_auteur@&ldquo; wurde mehrere Autoren gefunden:',
-'info_recherche_auteur_zero' => 'Dem Kriterium “@cherche_auteur@” entspricht kein Autor.',
+'info_recherche_auteur_zero' => 'Dem Kriterium â€œ@cherche_auteur@â€ entspricht kein Autor.',
 'info_recommencer' => 'Bitte wiederholen.',
 'info_redacteur_1' => 'Redakteur',
 'info_redacteur_2' => 'mit Zugang zum Redaktionssystem (<i>empfohlen</i>)',
@@ -656,7 +657,6 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'install_select_langue' => 'W&auml;hlen Sie eine Sprache aus und klicken Sie auf &laquo;Weiter&raquo;, um die Installation zu starten.',
 'install_select_type_db' => 'Geben Sie den Typ der Datenbank an:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pgsql' => 'PostgreSQL',
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Vom Provider bereitgestellter Datenbankserver',
@@ -766,7 +766,6 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'logo_article' => 'ARTIKEL-LOGO',
 'logo_auteur' => 'AUTOREN-LOGO',
 'logo_breve' => 'MELDUNGS-LOGO',
-'logo_groupe' => 'LOGO DER GRUPPE',
 'logo_mot_cle' => 'SCHLAGWORT-LOGO',
 'logo_rubrique' => 'RUBRIK-LOGO',
 'logo_site' => 'WEBSITE-LOGO',
@@ -851,6 +850,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'plugins_disponibles' => '@count@ verf&uuml;gbare Plugins.',
 'plugins_erreur' => 'Fehler in den Plugins: @plugins@',
 'plugins_liste' => 'Liste der Plugins',
+'plugins_recents' => 'Neueste Plugins.',
 'plugins_vue_hierarchie' => 'Hierarchie',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version des Protokolls:',
@@ -887,11 +887,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_admin_effacer_01' => 'Dieser Befehl l&ouml;scht den <i>gesamten</i> Inhalt der Datenbank mit <i>allen</i> Redakteuren und Administratoren. Nach der Ausf&uuml;hrung dieses Befehls m&uuml;ssen Sie SPIP neu installieren und einen ersten Administrator anlegen.',
 'texte_admin_effacer_stats' => 'Dieser Befehl l&ouml;scht alle Daten der Besucherstatistiken, auch die zur Popularit&auml;t der Artikel.',
 'texte_admin_tech_01' => 'Diese Option erm&ouml;glicht es, den Inhalt der Datenbank in das Verzeichnis @dossier@ zu sichern. Vergessen Sie bitte nicht, ebenfalls den Inhalt des Verzeichnisses <i>img/</i> zu sichern, denn es enth&auml;lt die Bilder und Grafiken, welche f&uuml;r Rubriken und Artikel verwendet werden.',
-'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="@spipnet@">die SPIP Dokumentation</a>.
-
-
-
-',
+'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft.  So darf insbesondere die Datenbank vor einem Update nicht "geleert" werden. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="@spipnet@">die SPIP Dokumentation</a>.',
 'texte_admin_tech_03' => 'Sie k&ouml;nnen die Daten in komprimierter Form sichern und damit Speicherplatz auf dem Server und Downloadzeit sparen.',
 'texte_admin_tech_04' => 'Um das Zusammenf&uuml;hren mit einer anderen Datenbank vorzubereiten, k&ouml;nnen Sie die Datensicherung auf eine bestimmte Rubrik beschr&auml;nken: ',
 'texte_adresse_annuaire_1' => '(Wenn Ihr Verzeichnis auf dem selben Rechner installiert ist wie diese Website, m&uuml;ssen Sie wahrscheinlich &bdquo;localhost&ldquo; angeben.)',
@@ -942,7 +938,7 @@ jedoch zus&auml;tzliche Serverleistung.',
 'texte_effacer_statistiques' => 'Statistiken l&ouml;schen',
 'texte_en_cours_validation' => 'Die folgenden Artikel und Meldungen sind zur Ver&ouml;ffentlichung vorgeschlagen.',
 'texte_en_cours_validation_forum' => 'Bitte schreiben Sie Ihre Kommentare in die entsprechenden Foren.',
-'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &bdquo;typografischen Abk&uuml;rzungen&ldquo; verwenden.',
+'texte_enrichir_mise_a_jour' => 'Sie k&ouml;nnen Ihren Text ansprechend gestalten, indem Sie die &#132;typografischen Abk&uuml;rzungen&#147; verwenden.',
 'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p />
  Mit diesen Dateien k&ouml;nnen Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschr&auml;nken.<p />Wenn Sie diese M&ouml;glickeit nicht nutzen, k&ouml;nnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.',
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
