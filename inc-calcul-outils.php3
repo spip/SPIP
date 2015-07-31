@@ -125,7 +125,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
-function executer_balise_dynamique($nom, $args, $filtres) {
+function executer_balise_dynamique($nom, $args, $filtres, $lang) {
 	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
 	include_local($file);
 	$f = 'balise_' . $nom . '_stat';
@@ -136,7 +136,7 @@ function executer_balise_dynamique($nom, $args, $filtres) {
 		return
 		('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
-lang_select($GLOBALS["spip_lang"]);
+lang_select("'.$lang.'");
 include_local("'
 		. $file
 		. '");

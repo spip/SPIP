@@ -748,23 +748,12 @@ function http_script($script, $src='', $noscript='') {
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
 
-/* dans les squelettes a present.
-function http_script_window_close() {
-  return http_script('
-document.write("<br /><div align=\'right\'><a href=\'")
-document.write((window.opener) ? "javascript:close()" : "./")
-document.write("\'>' . _T('pass_quitter_fenetre') . '<" + "/a></div>")',
-	      '',
-	      "&#91;<a href='./'><:pass_retour_public:></a>&#93");
-}
-*/
-
-function inscriptionok($site, $mode)
-{
-  return ((lire_meta("accepter_inscriptions") == "oui") OR
-	  (($mode == 'forum') AND
-	   (lire_meta("accepter_visiteurs") == "oui"
-	    OR lire_meta('forums_publics') == 'abo'))) ? ($site . '/') : '';
+// retourne l'URL du site si les inscriptions sont autorisees... bof
+function inscriptionok($site, $mode) {
+	return ((lire_meta("accepter_inscriptions") == "oui") OR
+		(($mode == 'forum')
+		AND (lire_meta("accepter_visiteurs") == "oui"
+		OR lire_meta('forums_publics') == 'abo'))) ? $site : '';
 }
 
 
