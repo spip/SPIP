@@ -75,7 +75,7 @@ function forum_envoi(
 			$parent .= justifier(propre($texte_parent));
 
 			if (strlen($url_site_parent) > 10 AND $nom_site_parent) {
-				$parent .="<p align='left'><font face='Verdana,Arial,Sans,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font></p>";
+				$parent .="<p style='text-align: left; font-family: Verdana,Arial,Sans,sans-serif; font-weight: bold;'><a href='$url_site_parent'>$nom_site_parent</a></p>";
 			}
 			$parent .= fin_cadre_forum(true);
 		}

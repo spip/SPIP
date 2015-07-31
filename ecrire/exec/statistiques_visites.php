@@ -80,6 +80,7 @@ function exec_statistiques_visites_dist()
 
 
   $titre = $pourarticle = "";
+  $style = "style='font-family: arial,helvetica,sans-serif; font-size: 12px; color: #999999'";
 
 if ($id_article = intval($id_article)){
 	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
@@ -559,25 +560,25 @@ if ($GLOBALS['accepte_svg']) {
 			echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph)."</b></font>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(7*($maxgraph/8))."</font>";
+			echo "<span $style>",round(7*($maxgraph/8))."</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<font face='arial,helvetica,sans-serif' size='1'>".round(3*($maxgraph/4))."</font>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(5*($maxgraph/8))."</font>";
+			echo "<span $style>",round(5*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph/2)."</b></font>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(3*($maxgraph/8))."</font>";
+			echo "<span $style>",round(3*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
 			echo "<font face='arial,helvetica,sans-serif' size='1'>".round($maxgraph/4)."</font>";
 			echo "</td></tr>";
 			echo "<tr><td height='25' valign='middle'>";		
-			echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(1*($maxgraph/8))."</font>";
+			echo "<span $style>",round(1*($maxgraph/8)),"</span>";
 			echo "</td></tr>";
 			echo "<tr><td height='10' valign='bottom'>";		
 			echo "<font face='arial,helvetica,sans-serif' size='1'><b>0</b></font>";
@@ -756,26 +757,26 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<tr><td height='15' valign='top'>";		
 		echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph)."</b></font>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(7*($maxgraph/8))."</font>";
+		echo "<tr><td height='25' valign='middle' $style>";		
+		echo round(7*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
 		echo "<font face='arial,helvetica,sans-serif' size='1'>".round(3*($maxgraph/4))."</font>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(5*($maxgraph/8))."</font>";
+		echo "<tr><td height='25' valign='middle' $style>";		
+		echo round(5*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
 		echo "<font face='arial,helvetica,sans-serif' size='1'><b>".round($maxgraph/2)."</b></font>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(3*($maxgraph/8))."</font>";
+		echo "<tr><td height='25' valign='middle' $style>";		
+		echo round(3*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='25' valign='middle'>";		
 		echo "<font face='arial,helvetica,sans-serif' size='1'>".round($maxgraph/4)."</font>";
 		echo "</td></tr>";
-		echo "<tr><td height='25' valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size='1' color='#999999'>".round(1*($maxgraph/8))."</font>";
+		echo "<tr><td height='25' valign='middle' $style>";		
+		echo round(1*($maxgraph/8));
 		echo "</td></tr>";
 		echo "<tr><td height='10' valign='bottom'>";		
 		echo "<font face='arial,helvetica,sans-serif' size='1'><b>0</b></font>";

@@ -42,8 +42,8 @@ function exec_recherche_dist()
 
 	if (strlen($recherche) > 0) {
 
-	echo "<font face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b></font><br />";
-	echo "<font size='5' face='Verdana,Arial,Sans,sans-serif' color='$couleur_foncee'><b>$recherche_aff</b></font>";
+	echo "<span style='font-family: Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b></span><br />";
+	echo "<span style='font-size: 20px; font-family: Verdana,Arial,Sans,sans-serif; color: $couleur_foncee'><b>$recherche_aff</b></span>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';

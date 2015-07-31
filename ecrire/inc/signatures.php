@@ -111,7 +111,7 @@ function signatures_edit($script, $id, $debut, $row) {
 		
 		$res .= "<font size='2'>".date_interface($date_time)."</font><br />";
 		if ($statut=="poubelle"){
-			$res .= "<font size='1' color='red'>"._T('info_message_efface')."</font><br />";
+			$res .= "<span style='font-size: 12px; color: red;'>"._T('info_message_efface')."</span><br />";
 		}
 		if (strlen($url_site)>6 AND strlen($nom_site)>0){
 			$res .= "<font size='1'>"._T('info_site_web')."</font> <a href='$url_site'>$nom_site</a><br />";
