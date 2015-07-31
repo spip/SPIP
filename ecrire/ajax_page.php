@@ -35,8 +35,68 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 
 	}
 
+if ($GLOBALS["recherche_sugg"]) {
+	$recherche_sugg = $GLOBALS["recherche_sugg"];
+
+	include_ecrire("inc_charsets.php3");
+
+	// Eviter les symboles '%', caracteres SQL speciaux
+	$recherche_sugg = str_replace("%","\%",$recherche_sugg);
+	$recherche_sugg = translitteration($recherche_sugg);
+	$rech2 = split("[[:space:]]+", $recherche_sugg);
+	if ($rech2)
+		$where = " (spip_index_dico.dico LIKE '".join("%' AND spip_index_dico.dico LIKE '", $rech2)."%') ";
+	else
+		$where = " 1=2";
+
+	$result = spip_query("SELECT spip_index_dico.dico AS dico, spip_index_articles.points AS points FROM spip_index_dico, spip_index_articles WHERE ($where) AND spip_index_dico.hash = spip_index_articles.hash");
+	while ($row = spip_fetch_array($result)) {
+		$dico = $row["dico"]; 
+		$points = $row["points"];
+		$total["$dico"] = $total["dico"] + $points;
+	}
+
+	$result = spip_query("SELECT spip_index_dico.dico AS dico, spip_index_mots.points AS points FROM spip_index_dico, spip_index_mots WHERE ($where) AND spip_index_dico.hash = spip_index_mots.hash");
+	while ($row = spip_fetch_array($result)) {
+		$dico = $row["dico"]; 
+		$points = $row["points"];
+		$total["$dico"] = $total["dico"] + $points;
+	}
+	
+	$result = spip_query("SELECT spip_index_dico.dico AS dico, spip_index_rubriques.points AS points FROM spip_index_dico, spip_index_rubriques WHERE ($where) AND spip_index_dico.hash = spip_index_rubriques.hash");
+	while ($row = spip_fetch_array($result)) {
+		$dico = $row["dico"]; 
+		$points = $row["points"];
+		$total["$dico"] = $total["dico"] + $points;
+	}
+	
+	$result = spip_query("SELECT spip_index_dico.dico AS dico, spip_index_auteurs.points AS points FROM spip_index_dico, spip_index_auteurs WHERE ($where) AND spip_index_dico.hash = spip_index_auteurs.hash");
+	while ($row = spip_fetch_array($result)) {
+		$dico = $row["dico"]; 
+		$points = $row["points"];
+		$total["$dico"] = $total["dico"] + $points;
+	}
+	
+	$result = spip_query("SELECT spip_index_dico.dico AS dico, spip_index_breves.points AS points FROM spip_index_dico, spip_index_breves WHERE ($where) AND spip_index_dico.hash = spip_index_breves.hash");
+	while ($row = spip_fetch_array($result)) {
+		$dico = $row["dico"]; 
+		$points = $row["points"];
+		$total["$dico"] = $total["dico"] + $points;
+	}
+	
+	if (count($total)) arsort($total);
+	while (list($k, $i) = each ($total) AND $compt < 20) {
+		echo "<div><a href=\"recherche.php3?recherche=$k\" style='color: black;'>$k</a> ($i)</div>";
+		$compt ++;
+	}
+
+	
+	
+}
+
 if ($GLOBALS["recherche"]) {
 	$recherche = $GLOBALS["recherche"];
+
 
 	$query_articles = "SELECT * FROM spip_articles WHERE";
 	$query_breves = "SELECT * FROM spip_breves WHERE ";

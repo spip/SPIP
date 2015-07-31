@@ -95,37 +95,48 @@ function acceder_couche(couches, n, dir, icone, texte, sens) {
 
 
 var url_chargee = new Array();
+var xmlhttp = new Array();
 
 function charger_id_url(myUrl,myField) 
 {
 	var Field = findObj(myField); // selects the given element
 	if (!Field) return;
 	
+	
 	image = document.getElementById('img_'+myField);
 	
 	if (image) image.style.visibility = "visible";
+	
+	if (xmlhttp[myField]) xmlhttp[myField].abort();
 	
 	if (url_chargee['mem_'+myUrl]) {
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 	} else {
         if(window.XMLHttpRequest) {
-                xmlhttp = new XMLHttpRequest(); 
+                xmlhttp[myField] = new XMLHttpRequest(); 
         } else if(window.ActiveXObject) {
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                xmlhttp[myField] = new ActiveXObject("Microsoft.XMLHTTP");
         } else {
                 return false;
         }
-        xmlhttp.open("GET", myUrl, true);
+        xmlhttp[myField].open("GET", myUrl, true);
 
-        xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4) { 
-                        Field.innerHTML = xmlhttp.responseText; // puts the result into the element
+        xmlhttp[myField].onreadystatechange = function() {
+                if (xmlhttp[myField].readyState == 4) { 
+                        Field.innerHTML = xmlhttp[myField].responseText; // puts the result into the element
 					//	url_chargee['mem_'+myUrl] = Field.innerHTML;
+						Field.style.visibility = "visible";
 						if (image) image.style.visibility = "hidden";
                }
         }
-        xmlhttp.send(null); 
+        xmlhttp[myField].send(null); 
     }
 }
+
+
+
+
+
+
 
 

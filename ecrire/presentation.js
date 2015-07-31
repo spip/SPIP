@@ -217,6 +217,17 @@ function verifForm() {
 	}
 }
 
+// livesearchlike...
+
+
+function lancer_recherche(champ, cible) {
+	valeur = findObj(champ).value;
+	if (valeur.length > 3) {
+		charger_id_url('ajax_page.php?recherche_sugg='+valeur,'sugg_recherche');
+		charger_id_url('ajax_page.php?recherche='+valeur,'resultats_recherche');
+	}
+}
+
 
 // effacement titre quand new=oui
 var antifocus=false;
