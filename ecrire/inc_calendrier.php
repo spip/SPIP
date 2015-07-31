@@ -19,6 +19,14 @@ charger_generer_url();
 
 function calendrier_dist($type, $css="")
 {
+
+// icones standards, fonction de la direction de la langue
+
+  global $bleu, $vert, $jaune, $spip_lang_rtl;
+  $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-icone'");
+  $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
+  $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "class='calendrier-icone'");
+
   $date = date("Y-m-d", time()); 
   if ($type == 'semaine') {
 
@@ -48,13 +56,6 @@ function calendrier_dist($type, $css="")
 // ceux-ci apparaissent TOUJOURS dans cet ordre 
 
 define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
-
-// icones standards, fonction de la direction de la langue
-
-global $bleu, $vert, $jaune;
-$bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-icone'");
-$vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
-$jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "class='calendrier-icone'");
 
 // 
 // Utilitaires sans html ni sql
