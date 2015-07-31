@@ -1021,7 +1021,7 @@ function cron($gourmand = false) {
 // qq  fonctions service pour les 2 niveaux
 //
 function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
-	if (!$id_rubrique)
+	if (!$id_rubrique = intval($id_rubrique))
 		return '0';
 	if (!$exclure_feuille)
 		$hierarchie = ",$id_rubrique";
