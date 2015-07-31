@@ -66,7 +66,9 @@ function enfant_rub($collection,$debut=0,$limite=500){
 
 			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? "" :
 			   http_img_pack('auteur-0minirezo-16.png', '', " width='16' height='16'", _T('image_administrer_rubrique'))) .
-			  " <a dir='$lang_dir' href='" .
+			  " <a dir='$lang_dir'".
+				($row['lang']!==$GLOBALS['spip_lang']?" hreflang='".$row['lang']."'":'').
+				" href='" .
 			  generer_url_entite($id_rubrique,'rubrique') .
 			  "'>".
 				$rang . $titre .
