@@ -68,7 +68,10 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 
 	$lang = ($hlang ? " hreflang='$hlang'" : '');
 
-	if ($title) $title = ' title="'.texte_backend($title).'"';
+	if ($title)
+		$title = ' title="'.texte_backend($title).'"';
+	else
+		$title = ''; // $title peut etre 'false'
 
 	// rel=external pour les liens externes
 	if (preg_match(',^https?://,S', $lien)
