@@ -134,10 +134,8 @@ function traduire_chaine($code) {
 	global $spip_lang;
 
 	// modules par defaut
-	if (_DIR_RESTREINT)
-		$modules = array('spip');
-	else
-		$modules = array('spip', 'ecrire');
+
+	$modules = array('spip', 'ecrire');
 
 	// modules demandes explicitement
 	$code_ori = $code; # le garder pour le fallback plus tard

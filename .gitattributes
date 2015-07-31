@@ -306,6 +306,7 @@ ecrire/action/dater.php -text
 ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteurs.php -text
+ecrire/action/editer_forum.php -text
 ecrire/action/editer_mot.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/ical.php -text
