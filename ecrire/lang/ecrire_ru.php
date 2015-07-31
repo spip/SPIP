@@ -745,6 +745,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_plugins_dist_1' => 'Эти плагины загружены и установлены в папке @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Их нельзя отключить.',
 	'plugin_info_telecharger' => 'загрузите с @url@ и установить в @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Установленные библиотеки',
 	'plugin_necessite_lib' => 'Для этого плагина необходима библиотека  @lib@',
 	'plugin_necessite_plugin' => 'Для этого плагина необходим @plugin@  @version@ или новее.',

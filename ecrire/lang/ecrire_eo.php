@@ -748,6 +748,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 	'plugin_info_plugins_dist_1' => 'Kromprogramoj ĉi-sube estas ŝarĝitaj kaj aktivigitaj en la dosierujo @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Ili ne malaktivigas.',
 	'plugin_info_telecharger' => 'elŝutota de @url@ kaj instalota en @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Instalitaj bibliotekoj',
 	'plugin_necessite_lib' => 'Tiu ĉi kromprogramo bezonas la bibliotekon @lib@',
 	'plugin_necessite_plugin' => 'Postulas la kromprogramon @plugin@ minimume laŭ versio @version@.',

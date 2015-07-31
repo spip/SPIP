@@ -724,6 +724,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_plugins_dist_1' => 'پلاگين‌هاي زير در پوشه‌ي @plugins_dist@ بارگذاري و فعال‌ شده‌اند. ',
 	'plugin_info_plugins_dist_2' => 'غيرفعال نمي‌شوند',
 	'plugin_info_telecharger' => 'باربرداري از @url@ و نصب در @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'آرشيو‌هاي نصب‌ شده',
 	'plugin_necessite_lib' => 'اين پلاگين به آرشيو @lib@ نياز دارد',
 	'plugin_necessite_plugin' => 'به plugin @plugin@ نسخه ی @version@ نیاز دارید',

@@ -737,6 +737,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und werden dort aktiviert.',
 	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.',
 	'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
 	'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
 	'plugin_necessite_plugin' => 'Benötigt mindestens Version @version@ des Plugin @plugin@.',

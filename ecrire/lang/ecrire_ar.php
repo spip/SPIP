@@ -765,6 +765,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plugin_info_plugins_dist_1' => 'تم تحميل الإضافات أدناه وتفعيلها في مجلد @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'لا يمكن إيقافها.',
 	'plugin_info_telecharger' => 'للتحميل من @url@ والتثبيت في @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'المكتبات المثبتة',
 	'plugin_necessite_lib' => 'هذا الملحق يتطلب المكتبة @lib@',
 	'plugin_necessite_plugin' => 'يتطلب الملحق @plugin@ بالاصدار @version@ على الاقل.',

@@ -757,6 +757,7 @@ cunha cor que indica o seu estado :',
 	'plugin_info_plugins_dist_1' => 'As extensións seguintes cárganse e actívanse no cartafol @plugins_dist@.', # MODIF
 	'plugin_info_plugins_dist_2' => 'Non son desactivables', # MODIF
 	'plugin_info_telecharger' => 'descargar desde @url@ e instalalo no cartafol @rep@',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librarías instaladas',
 	'plugin_necessite_lib' => 'Este módulo necesita a libraría @lib@',
 	'plugin_necessite_plugin' => 'Necesita o plugin @plugin@ na súa version @version@ mínimo.',

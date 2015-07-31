@@ -751,6 +751,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
 	'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ sürümünü gerektirir.',
