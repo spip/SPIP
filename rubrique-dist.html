@@ -57,19 +57,7 @@
 
 <div class="menu">
 <ol class="rubriques" title="<:hierarchie_site:>">
-<BOUCLE_rubriques(HIERARCHIE) {id_rubrique}>
-<li>
-<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
-<B_rubriques_tantes>
-	<ul class="menu-liste">
-<BOUCLE_rubriques_tantes(RUBRIQUES) {meme_parent} {exclus} {par titre}>
-	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
-</BOUCLE_rubriques_tantes>
-	</ul>
-</B_rubriques_tantes>
-</li>
-</BOUCLE_rubriques>
-
+<BOUCLE_hierarchie(HIERARCHIE) {id_rubrique} {tout}>
 <li>
 <div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
 <B_rubriques_soeurs>
@@ -80,7 +68,7 @@
 	</ul>
 </B_rubriques_soeurs>
 </li>
-
+</BOUCLE_hierarchie>
 </ol>
 </div>
 

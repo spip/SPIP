@@ -183,14 +183,19 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "rubriques AS $id_table";
 
-	// $hierarchie sera calculee par une fonction de inc-calcul-mysql
-	// inc-criteres supprimera le parametre {id_article/id_rubrique/id_syndic}
+	// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
+	// sauf si le critere {tout} est present (cf. inc-html-squel)
+	$exclure_feuille = ($boucle->tout ? 'false' : 'true');
+
+	// $hierarchie sera calculee par une fonction de inc-calcul-outils
 	$boucle->where[] = 'id_rubrique IN ($hierarchie)';
 	$boucle->select[] = 'FIND_IN_SET(id_rubrique, \'$hierarchie\')-1 AS rang';
 	$boucle->order = 'rang';
 	$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
-	. ', false);';
+	. ', '
+	. $exclure_feuille
+	. ');';
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
