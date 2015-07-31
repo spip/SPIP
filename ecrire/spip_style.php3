@@ -928,8 +928,7 @@ a.bouton_rotation:hover img {
 .cadre-forum {
 	background-color: white;
 	border: 1px solid #aaaaaa;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
+	-moz-border-radius-top<? echo $left; ?>: 8px;
 }
 .cadre-forum div.cadre-titre {
 	background: <? echo $couleur_claire; ?>;
