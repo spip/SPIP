@@ -245,8 +245,12 @@ function corriger_toutes_entites_html($texte) {
 }
 
 // http://doc.spip.org/@entites_html
-function entites_html($texte) {
-	return corriger_entites_html(htmlspecialchars($texte));
+function entites_html($texte, $tout=false) {
+	$texte = htmlspecialchars($texte);
+	if ($tout)
+		return corriger_toutes_entites_html($texte);
+	else
+		return corriger_entites_html($texte);
 }
 
 // Transformer les &eacute; dans le charset local
