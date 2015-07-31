@@ -62,7 +62,7 @@
 			<h2><:derniers_commentaires:></h2>
 			<ul>
 				<BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
-				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_FORUM"[ title="(#TITRE|couper{60}|texte_backend)"]>[(#TEXTE|couper{80})]</a></li>
+				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
 				</BOUCLE_forums_liens>
 			</ul>
 		</div>
@@ -74,7 +74,7 @@
 			<h2><:nouveautes_web:></h2>
 			<ul>
 				<BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
-				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
+				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out">#TITRE</a></li>
 				</BOUCLE_syndic>
 			</ul>
 		</div>

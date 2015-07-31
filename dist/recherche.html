@@ -87,7 +87,7 @@
 			<h2><:messages_forum:> (#GRAND_TOTAL)</h2>
 			<ul>
 				<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
-				<li><a href="#URL_FORUM"[ title="(#TITRE|couper{60}|texte_backend)"]>[(#TEXTE|couper{80})]</a></li>
+				<li><a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
 				</BOUCLE_messages>
 			</ul>
 			[<p class="pagination">(#PAGINATION)</p>]
