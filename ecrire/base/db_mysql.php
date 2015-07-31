@@ -312,6 +312,7 @@ function spip_mysql_showbase($match, $serveur='')
 	return spip_mysql_query("SHOW TABLES LIKE '$match'", $serveur);
 }
 
+// http://doc.spip.org/@spip_mysql_repair
 function spip_mysql_repair($table, $serveur='')
 {
 	return spip_mysql_query("REPAIR TABLE $table", $serveur);
