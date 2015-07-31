@@ -512,7 +512,7 @@ function calculer_balise_logo ($p) {
 
 	// cas de #LOGO_SITE_SPIP
 	if (ereg("^_SPIP(.*)$", $suite_logo, $regs)) {
-		$type_objet = 'RUBRIQUE';
+		$type_objet = 'SITE';
 		$suite_logo = $regs[1];
 		$_id_objet = "\"'0'\"";
 	} else {

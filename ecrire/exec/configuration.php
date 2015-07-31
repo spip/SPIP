@@ -12,12 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/config');
-
 function exec_configuration_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config;
+
+include_spip('inc/presentation');
+include_spip('inc/config');
+include_spip('inc/logos');
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -53,6 +54,12 @@ barre_onglets("configuration", "contenu");
 
 
 debut_gauche();
+
+//
+// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
+//
+afficher_boite_logo('site', '', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
+
 
 debut_droite();
 

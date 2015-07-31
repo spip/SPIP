@@ -1148,6 +1148,19 @@ function maj_base() {
 		spip_query("ALTER IGNORE TABLE spip_caches DROP	INDEX fichier");
 		maj_version(1.911);
 	}
+
+	// Le logo du site n'est plus le logo par defaut des rubriques
+	// mais pour assurer la compatibilite ascendante, on le duplique
+	if ($version_installee < 1.912) {
+		@copy(_DIR_IMG.'rubon0.gif', _DIR_IMG.'siteon0.gif');
+		@copy(_DIR_IMG.'ruboff0.gif', _DIR_IMG.'siteoff0.gif');
+		@copy(_DIR_IMG.'rubon0.jpg', _DIR_IMG.'siteon0.jpg');
+		@copy(_DIR_IMG.'ruboff0.jpg', _DIR_IMG.'siteoff0.jpg');
+		@copy(_DIR_IMG.'rubon0.png', _DIR_IMG.'siteon0.png');
+		@copy(_DIR_IMG.'ruboff0.png', _DIR_IMG.'siteoff0.png');
+		maj_version(1.912);
+	}
+
 }
 
 ?>
