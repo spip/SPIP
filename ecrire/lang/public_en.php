@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Home page',
-'article' => 'Article', # NEW
+'article' => 'Article',
 'articles' => 'Articles',
 'articles_auteur' => 'This author\'s articles',
 'articles_populaires' => 'The most read articles',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'There is no site at this address',
 'aucune_breve' => 'There is no news item at this address',
 'aucune_rubrique' => 'There is no section at this address',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Author',
 'autres' => 'Others',
 'autres_breves' => 'Other news',
 'autres_groupes_mots_clefs' => 'Other groups of key words',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hello',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'News item',
 'breves' => 'News items',
 
 // C
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Message',
 'messages_forum' => 'Forum messages',
 'messages_recents' => 'Most recent forum messages',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Keyword',
 'mots_clefs' => 'Keywords',
 'mots_clefs_meme_groupe' => 'Keywords in the same group',
 
