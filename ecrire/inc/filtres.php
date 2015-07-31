@@ -115,21 +115,24 @@ function image_filtrer($args){
 			$inclure = false;
 		}
 		foreach ($tags as $tag) {
-			array_unshift($args,$tag[3]);
-			if ($reduit = call_user_func_array($filtre, $args)) {
-				// En cas de span spip_documents, modifier le style=...width:
-				if($tag[1]
-				AND $w = extraire_attribut($reduit, 'width')) {
-					$style = preg_replace(", width: *\d+px,S", " width: ${w}px",
-						extraire_attribut($tag[1], 'style'));
-					$replace = inserer_attribut($tag[1], 'style', $style);
-					$replace = str_replace(" style=''", '', $replace);
-					$texte = str_replace($tag[1], $replace, $texte);
+			$class = extraire_attribut($tag[3],'class');
+			if ((!strlen($class)) || (strpos($class,'no_image_filtrer')===FALSE)){
+				array_unshift($args,$tag[3]);
+				if ($reduit = call_user_func_array($filtre, $args)) {
+					// En cas de span spip_documents, modifier le style=...width:
+					if($tag[1]
+					AND $w = extraire_attribut($reduit, 'width')) {
+						$style = preg_replace(", width: *\d+px,S", " width: ${w}px",
+							extraire_attribut($tag[1], 'style'));
+						$replace = inserer_attribut($tag[1], 'style', $style);
+						$replace = str_replace(" style=''", '', $replace);
+						$texte = str_replace($tag[1], $replace, $texte);
+					}
+	
+					$texte = str_replace($tag[3], $reduit, $texte);
 				}
-
-				$texte = str_replace($tag[3], $reduit, $texte);
+				array_shift($args);
 			}
-			array_shift($args);
 		}
 	}
 
