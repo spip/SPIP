@@ -89,7 +89,7 @@ echo "\n<p align='justify'>";
 if (lire_meta('activer_moteur') == 'oui')
 	echo _T('texte_moteur_recherche_active');
 else {
-	echo "<b>"._T('texte_moteur_recherche_non_active')."</b>";
+	echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
 	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index_articles"));
 	if ($row['cnt'])
 		echo _T('texte_commande_vider_tables_indexation');
