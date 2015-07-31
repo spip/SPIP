@@ -174,9 +174,9 @@ $pile_langues = Array();
 //
 
 $php_version = explode('.', phpversion());
-$php_version_maj = (int) $php_version[0];
-$php_version_med = (int) $php_version[1];
-if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
+$php_version_maj = intval($php_version[0]);
+$php_version_med = intval($php_version[1]);
+if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = intval($match[1]);
 
 $dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 

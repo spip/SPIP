@@ -195,11 +195,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		srand($seed);
 		$alea = rand();
 	}
-	$id_rubrique = (int) $id_rubrique;
-	$id_parent = (int) $id_parent;
-	$id_article = (int) $id_article;
-	$id_breve = (int) $id_breve;
-	$id_syndic = (int) $id_syndic;
+	$id_rubrique = intval($id_rubrique);
+	$id_parent = intval($id_parent);
+	$id_article = intval($id_article);
+	$id_breve = intval($id_breve);
+	$id_syndic = intval($id_syndic);
 	$hash = calculer_action_auteur("ajout_forum $id_rubrique $id_parent $id_article $id_breve $id_syndic $alea");
 
 	$titre = entites_html($titre);
