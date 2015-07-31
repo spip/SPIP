@@ -233,11 +233,15 @@ if ($options == 'avancees') {
 		"Alphabet occidental&nbsp; (<tt>iso-8859-1</tt>): support&eacute; par tous les navigateurs, mais permet uniquement
 		l'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...).", $charset == 'iso-8859-1');
 	echo "<br>";
+	echo bouton_radio('charset', 'utf-8',
+		"Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l'affichage de toutes les langues, mais n'est pas reconnu
+		par tous les navigateurs &agrave; l'heure actuelle.", $charset == 'utf-8');
+	echo "<br>";
 	echo bouton_radio('charset', 'custom',
 		"Jeu de caract&egrave;res personnalis&eacute;&nbsp;: choisissez cette option si vous voulez
-		utiliser un jeu de caract&egrave;res sp&eacute;cifique", $charset != 'iso-8859-1');
+		utiliser un jeu de caract&egrave;res sp&eacute;cifique", $charset != 'utf-8' && $charset != 'iso-8859-1');
 	echo "<br>";
-	if ($charset != 'iso-8859-1') {
+	if ($charset != 'utf-8' && $charset != 'iso-8859-1') {
 		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entrez le code de l'alphabet &agrave; utiliser&nbsp;: ";
 		echo "<input type='text' name='charset_custom' class='fondl' value='$charset' size='15'>";
 	}
