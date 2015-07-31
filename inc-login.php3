@@ -223,7 +223,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	echo "\n<center>"; // debut du pied de login
 
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
-	if ((!$prive AND forums_sur_abo()) OR ($prive AND $inscriptions_ecrire))
+	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire))
 		echo ' [<script language="JavaScript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>s\'inscrire</a>]';
