@@ -8,6 +8,9 @@
 #SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 <input type="hidden" name="debutautl" value="#GET{debut}" />
 <B_liste_aut>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutautl,#EVAL{_request("debutautl");}}}
 #SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies auteurs">
@@ -19,7 +22,7 @@
 		<BOUCLE_lettre(AUTEURS){tout}{id_objet?}{objet}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutaut,@#ID_AUTEUR}|ancre_url{paginationaut}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutautl,@#ID_AUTEUR}|ancre_url{paginationautl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
