@@ -132,7 +132,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 	$page['contexte'] = $contexte;
 	// faire remonter le fichier source
-	if ($GLOBALS['var_noisettes'])
+	if ($GLOBALS['var_inclure'])
 		$page['sourcefile'] = $sourcefile;
 
 	if ($select) lang_select();
