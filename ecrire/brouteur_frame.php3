@@ -13,11 +13,10 @@
 
 include ("inc.php3");
 
-echo debut_entete("");
-envoi_link("","");
-// Fin des entetes
-echo "\n</head>\n";
-debut_body();
+echo debut_entete(""), envoi_link("",""), "\n</head>\n";
+
+echo "<body $attributes_body
+	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
 
 	if ($spip_ecran == "large") {
 		$nb_col = 4;

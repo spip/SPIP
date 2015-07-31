@@ -20,6 +20,7 @@ charger_generer_url();
 
 function calendrier_dist($type, $css="")
 {
+  global $attributes_body, $browser_verifForm;
   $date = date("Y-m-d", time()); 
   if ($type == 'semaine') {
 
@@ -40,12 +41,13 @@ function calendrier_dist($type, $css="")
   if (!$nom_site_spip) $nom_site_spip="SPIP";
   
   // envoi des en-tetes, du doctype et du <head><title...
-  echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre)));
-  envoi_link($nom_site_spip);
+  echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre))),
+    envoi_link($nom_site_spip);
   if ($css)
-    echo '<link rel="stylesheet" href="', addslashes($css), '" type="text/css">', "\n";
+    echo '<link rel="stylesheet" href="', addslashes($css), '" type="text/css" />', "\n";
   echo "\n</head>\n";
-  debut_body();
+  echo "<body $attributes_body
+	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
   init_body("redacteurs", "calendrier");
   echo "<div>&nbsp;</div>" ;
   echo http_calendrier_init('', $type);
@@ -308,7 +310,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$mois_en_cours = date("m",$nom);
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
-		$couleur_lien = "black";
+		$couleur_texte = "black";
 		$couleur_fond = "";
 
 		if ($jour_semaine == 0) $couleur_fond = $couleur_claire;
@@ -320,7 +322,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 			  }
 		
 		if ($amj == $today) {
-			$couleur_lien = "red";
+			$couleur_texte = "red";
 			$couleur_fond = "white";
 		}
 		$res = '';
@@ -342,7 +344,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		  (!_DIR_RESTREINT ? 
 		   (http_href(calendrier_args_date($script,$annee_en_cours, $mois_en_cours, $jour, "jour", $ancre), 
 			      $jour,
-			      $jour, "color: $couleur_lien",'calendrier-helvetica16') . 
+			      $jour, "color: $couleur_texte",'calendrier-helvetica16') . 
 		    http_calendrier_ics_message($annee_en_cours, $mois_en_cours, $jour, false)):
 		   http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre)) .
 		  $res .
