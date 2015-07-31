@@ -714,17 +714,28 @@ function calculer_criteres ($idb, &$boucles)
 {
 	$msg = '';
 	$boucle = $boucles[$idb];
-	$table = strtoupper($boucle->id_table);
+	$table = strtoupper($boucle->type_requete);
+	$serveur = strtolower($boucle->sql_serveur);
+
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
 	// s'il y avait une erreur de syntaxe, propager cette info
 	if (!is_array($boucle->criteres)) return array(); 
 	foreach($boucle->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
-		if ((!function_exists($f="critere_".$table."_".$critere))
+		if (
+				(!$serveur OR
+					((!function_exists($f="critere_".$serveur."_".$table."_".$critere))
+			AND (!function_exists($f=$f."_dist"))
+			AND (!function_exists($f="critere_".$serveur."_".$critere))
+			AND (!function_exists($f=$f."_dist"))
+					)
+				)
+		AND (!function_exists($f="critere_".$table."_".$critere))
 		AND (!function_exists($f=$f."_dist"))
 		AND (!function_exists($f="critere_".$critere))
-		AND (!function_exists($f=$f."_dist"))	) {
+		AND (!function_exists($f=$f."_dist"))
+			) {
 			// fonction critere standard 
 			$f = $defaut;
 		}
@@ -1456,8 +1467,13 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
-// {source mode, "xxxxxx", arg, arg, arg}
-function critere_source_dist($idb, &$boucles, $crit) {
+/**
+ * (DATA){source mode, "xxxxxx", arg, arg, arg}
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_DATA_source_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	$args = array();
@@ -1470,12 +1486,16 @@ function critere_source_dist($idb, &$boucles, $crit) {
 
 	$boucle->hash .= '
 	$command[\'source\'] = array('. join(', ', $args). ");\n";
-
 }
 
 
-// {datasource "xxxxxx", mode}  <= deprecated
-function critere_datasource_dist($idb, &$boucles, $crit) {
+/**
+ * (DATA){datasource "xxxxxx", mode}  <= deprecated
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_DATA_datasource_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'source\'] = array('.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).');
@@ -1483,18 +1503,28 @@ function critere_datasource_dist($idb, &$boucles, $crit) {
 }
 
 
-function critere_datacache_dist($idb, &$boucles, $crit) {
+/**
+ * (DATA){datacache}
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_DATA_datacache_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'datacache\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
 
-/*
+/**
  * Pour passer des arguments a un iterateur non-spip
  * (php:xxxIterator){args argument1, argument2, argument3}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
-function critere_args_dist($idb, &$boucles, $crit) {
+function critere_php_args_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '$command[\'args\']=array();';
 	foreach($crit->param as $param) {
@@ -1503,11 +1533,15 @@ function critere_args_dist($idb, &$boucles, $crit) {
 	}
 }
 
-/*
- * Passer une liste de donnees a l'iterateur DATA 
+/**
+ * Passer une liste de donnees a l'iterateur DATA
  * (DATA){liste X1, X2, X3}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
-function critere_liste_dist($idb, &$boucles, $crit) {
+function critere_DATA_liste_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= "\n\t".'$command[\'liste\'] = array();'."\n";
 	foreach($crit->param as $param) {
@@ -1515,11 +1549,15 @@ function critere_liste_dist($idb, &$boucles, $crit) {
 	}
 }
 
-/*
+/**
  * Extraire un chemin d'un tableau de donnees
  * (DATA){datapath query.results}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
  */
-function critere_datapath_dist($idb, &$boucles, $crit) {
+function critere_DATA_datapath_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	foreach($crit->param as $param) {
 		$boucle->hash .= '
@@ -1528,7 +1566,13 @@ function critere_datapath_dist($idb, &$boucles, $crit) {
 }
 
 
-/* le critere {si ...} applicable a toutes les boucles */
+/**
+ * le critere {si ...} applicable a toutes les boucles
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
 function critere_si_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '$command[\'si\'] = array();'."\n";
@@ -1543,9 +1587,15 @@ function critere_si_dist($idb, &$boucles, $crit) {
 	}
 }
 
-// {tableau #XX} pour compatibilite ascendante boucle POUR
-// ... preferer la notation {datasource #XX,table}
-function critere_tableau_dist($idb, &$boucles, $crit) {
+/**
+ * {tableau #XX} pour compatibilite ascendante boucle POUR
+ * ... preferer la notation {datasource #XX,table}
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_POUR_tableau_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'source\'] = array('.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).');
