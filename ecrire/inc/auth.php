@@ -497,15 +497,21 @@ function auth_synchroniser_distant($auth_methode, $id_auteur, $champs){
 }
 
 
-function lire_php_auth($login, $pw)
-{
+function lire_php_auth($login, $pw){
+	// en auth php, le login est forcement celui en base
+	// pas la peine de passer par la methode auth/xxx pour identifier le login
 	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login));
-	if (!$row) return false;
-	if (!$row['source'])
-                return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
-	$auth = charger_fonction($row['source'], 'auth', true);
-	if ($auth) return $auth($login, $pw);
-        return false;
+	if (!$row) return false; // n'existe pas
+
+	// su pas de source definie
+	// ou auth/xxx introuvable, utiliser 'spip'
+	if (!$auth_methode = $row['source']
+		OR !$auth = charger_fonction($auth_methode, 'auth', true))
+		$auth = charger_fonction('spip', 'auth', true);
+
+	if ($auth)
+		return $auth($login, $pw);
+	return false;
 }
 
 //
