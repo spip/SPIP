@@ -14,6 +14,11 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+//constantes spip pour spip_fetch_array()
+define('SPIP_BOTH', MYSQL_BOTH);
+define('SPIP_ASSOC', MYSQL_ASSOC);
+define('SPIP_NUM', MYSQL_NUM);
+
 //
 // Appel de requetes SQL
 //
@@ -196,9 +201,9 @@ function spip_mysql_showtable($nom_table)
 // Recuperation des resultats
 //
 
-function spip_fetch_array($r) {
-	if ($r)
-		return mysql_fetch_array($r);
+function spip_fetch_array($r, $t=SPIP_BOTH) {
+        if ($r)
+                return mysql_fetch_array($r, $t);
 }
 
 /* Appels obsoletes
