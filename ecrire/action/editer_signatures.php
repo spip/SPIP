@@ -48,7 +48,7 @@ function action_editer_signatures_post($r)
 			
 			$url = generer_url_entite_absolue($id_article, 'article','','',true);
 			if (signature_a_confirmer($id_article, $url, $row['nom_email'], $row['ad_email'], $row['nom_site'], $row['url_site'], $row['message'], $row['lang'], $row['statut']))
-				sql_update("spip_signatures", array("date_time" => 'NOW()'), "id_signature=$id");
+				sql_updateq("spip_signatures", array("date_time" => date('Y-m-d H:i:s')), "id_signature=$id");
 			$id = 0;
 		}
 

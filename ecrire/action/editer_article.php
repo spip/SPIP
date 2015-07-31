@@ -124,7 +124,7 @@ function insert_article($id_rubrique) {
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' =>  $id_secteur,
 		'statut' =>  'prepa',
-		'date' => 'NOW()',
+		'date' => date('Y-m-d H:i:s'),
 		'accepter_forum' => 
 			substr($GLOBALS['meta']['forums_publics'],0,3),
 		'lang' => $lang,

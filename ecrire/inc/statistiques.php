@@ -584,7 +584,7 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 
 	$order = 'date_time';
 	if ($duree)
-		$where .= " AND $order > DATE_SUB(NOW(),INTERVAL $duree $type)";
+		$where .= " AND $order > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL $duree $type)";
 
 	$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_signatures', $where, $serveur);
 
@@ -597,7 +597,7 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 	$mois = statistiques_collecte_date( "COUNT(*)",
 		"FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m')",
 		"spip_signatures",
-		"date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
+		"date_time > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL 2700 DAY)"
 		. (" AND id_article=$id_article"),
 		$serveur);
 

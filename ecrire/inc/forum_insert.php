@@ -155,7 +155,7 @@ function forum_insert_base($c, $id_forum, $id_article, $id_breve, $id_syndic, $i
 	}
 
 	// Entrer le message dans la base
-	$id_message = sql_insertq('spip_forum', array('date_heure'=> 'NOW()'));
+	$id_message = sql_insertq('spip_forum', array('date_heure'=> date('Y-m-d H:i:s')));
 
 	if ($id_forum>0) {
 		$id_thread = sql_getfetsel("id_thread", "spip_forum", "id_forum = $id_forum");

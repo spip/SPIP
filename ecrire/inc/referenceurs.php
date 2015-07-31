@@ -222,7 +222,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // http://doc.spip.org/@referes
 function referes($referermd5, $serveur='') {
-	$retarts = sql_allfetsel('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(NOW(), INTERVAL 2 DAY))", '', "titre",'','',$serveur);
+	$retarts = sql_allfetsel('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 2 DAY))", '', "titre",'','',$serveur);
 
 	foreach ($retarts as $k => $rowart) {
 		$titre = typo($rowart['titre']);

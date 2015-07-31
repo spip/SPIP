@@ -73,7 +73,7 @@ function insert_breve($id_rubrique) {
 	return sql_insertq("spip_breves", array(
 		'id_rubrique' => $id_rubrique,
 		'statut' => 'prop',
-		'date_heure' => 'NOW()',
+		'date_heure' => date('Y-m-d H:i:s'),
 		'lang' => $lang,
 		'langue_choisie' => 'non'));
 }
