@@ -340,6 +340,9 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/\b0[+]([^, ]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
 			    $res);
+	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
+			    'EXTRACT(\'epoch\' FROM NOW())', $res);
+
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
 			    'EXTRACT(\'epoch\' FROM \1)', $res);
 
@@ -627,7 +630,7 @@ function spip_pg_sequence($table)
 // http://doc.spip.org/@spip_pg_cite
 function spip_pg_cite($v, $t)
 {
-	if ((strpos($t, 'datetime')===0) OR (strpos($t, 'TIMESTAMP')===0)) {
+	if (test_sql_date($t)) {
 		if (strpos("0123456789", $v[0]) === false)
 			return spip_pg_frommysql($v);
 		else {

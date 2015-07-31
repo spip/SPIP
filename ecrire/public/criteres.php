@@ -344,12 +344,9 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	  if ($tri[0]->type != 'texte') {
 	  	// calculer le order dynamique qui verifie les champs
 			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
-	    // et ajouter un champ hasard dans le select pour supporter 'hasard' comme tri dynamique
-			if (sql_select(array("RAND()")))
-				$par = "RAND()";
-			else
-				$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
-			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
+			// et ajouter un champ hasard dans le select 
+			//pour supporter 'hasard' comme tri dynamique
+			$par = "UNIX_TIMESTAMP()";
 			$boucle->select[]= $par . " AS hasard";
 	  } else {
 	      $par = array_shift($tri);
@@ -375,13 +372,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		if (count($match)>2) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
-		// tester si cette version de MySQL accepte la commande RAND()
-		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
-		  if (sql_select(array("RAND()")))
-			$par = "RAND()";
-		  else
-			$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
-			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
+			$par = "UNIX_TIMESTAMP()";
 		  $boucle->select[]= $par . " AS alea";
 		  $order = "'alea'";
 		}
