@@ -61,7 +61,9 @@ if (!$spip_ecran) $spip_ecran = "etroit";
 
 // Debloquer articles
 if ($debloquer_article) {
-	$query = "UPDATE spip_articles SET auteur_modif='0' WHERE id_article='$debloquer_article'";
+	if ($debloquer_article <> 'tous')
+		$where_id = "AND id_article=".intval($debloquer_article);
+	$query = "UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$connect_id_auteur $where_id";
 	spip_query ($query);
 }
 
