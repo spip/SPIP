@@ -11,9 +11,8 @@
 \***************************************************************************/
 
 
-//
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function version_tidy() {
 	static $version = -1;
@@ -44,8 +43,9 @@ function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 	return array($letexte, $les_echap);
 }
 
+$GLOBALS['xhtml'] = 'tidy'; # se raccrocher aux brances de la nouvelle API
 
-function xhtml($buffer) {
+function tidy($buffer) {
 	$buffer = traite_xhtml($buffer);
 
 /** ici commence la petite usine a gaz des traitements d'erreurs de tidy **/
