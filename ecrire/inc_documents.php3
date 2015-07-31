@@ -414,7 +414,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 	// bouton permettant de telecharger 10 images ou docs a la fois
 	$envoi_multiple &= ($options == "avancees");
 	if ($envoi_multiple)
-		echo bouton_block_invisible("upload$num_form,ftp$num_form");
+		echo bouton_block_invisible("ftp$num_form");
 
 	if (tester_upload()) {
 		echo "$intitule</div>";
@@ -425,13 +425,15 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 		// afficher le premier
 		echo str_replace('*', '1', $upload);
 
-		// afficher les suivants, masques (DESACTIVE)
-		if (false /* $envoi_multiple */) {
+		/* (TESTS POUR ENVOI MULTIPLE ; DESACTIVE)
+		// afficher les suivants, masques
+		if ($envoi_multiple) {
 			echo debut_block_invisible ("upload$num_form");
 			for ($i=2; $i<=10; $i++)
 				echo str_replace('*', "$i", $upload);
 			echo fin_block();
 		}
+		*/
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok_post' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div>\n<div>";
 	}
@@ -440,9 +442,9 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques
 	AND $envoi_multiple) {
+		echo debut_block_invisible("ftp$num_form");
 		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
 		if ($texte_upload) {
-			echo debut_block_invisible("ftp$num_form");
 			echo "<p><div style='color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
 			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br />";
@@ -452,13 +454,13 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 			echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_ftp' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 
 			echo "</div>\n";
-			echo fin_block();
 		}
 		else {
 			echo "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
 			echo _T('info_installer_ftp').aide("ins_upload");
 			echo "</div>";
 		}
+		echo fin_block();
 	}
 	echo "</form>\n";
 }
