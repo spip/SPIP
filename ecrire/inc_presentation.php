@@ -1835,7 +1835,7 @@ function debut_javascript($admin, $stat)
 	a.send(null);
 }";
 	} else $ajax = "";
-	spip_log("Ajax $ajax " . $GLOBALS['_COOKIE']['spip_accepte_ajax']);
+
 	return 
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
