@@ -146,6 +146,21 @@ function tmp_lkojfghx2($a=0,$b=0,$c=0,$d=0){
 }
 if (isset($_POST['tmp_lkojfghx3'])){	die();}
 
+/*
+ * Outils XML mal securises < 2.0.9
+ */
+if (isset($_REQUEST['transformer_xml']))
+	die('transformer_xml interdit');
+
+/*
+ * Sauvegarde mal securisee < 2.0.9
+ */
+if (isset($_REQUEST['nom_sauvegarde'])
+AND strstr($_REQUEST['nom_sauvegarde'], '/'))
+	die('nom_sauvegarde manipulee');
+if (isset($_REQUEST['znom_sauvegarde'])
+AND strstr($_REQUEST['znom_sauvegarde'], '/'))
+	die('znom_sauvegarde manipulee');
 
 /*
  * Bloque les bots quand le load deborde
