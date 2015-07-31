@@ -23,7 +23,7 @@ function exec_statistiques_svg_dist()
 	$visites_today = intval(_request('visites_today'));
 
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
-	  include_spip('minipres');
+	  include_spip('inc/minipres');
 	  echo minipres();
 	  exit;
 	}

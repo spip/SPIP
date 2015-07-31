@@ -17,7 +17,13 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_statistiques_lang_dist
 function exec_statistiques_lang_dist()
 {
-	global $connect_statut, $critere, $spip_ecran, $spip_lang_right;
+	global $spip_ecran, $spip_lang_right;
+
+        if (!autoriser('voirstats')) {
+          include_spip('inc/minipres');
+          echo minipres();
+          exit;
+	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('onglet_repartition_lang'), "statistiques_visites", "repartition-langues");
@@ -35,7 +41,7 @@ function exec_statistiques_lang_dist()
 
 //barre_onglets("repartition", "langues");
 
-	if ($critere == "debut") {
+	if (_request('critere') == "debut") {
 		$critere = "visites";
 //	gros_titre(_T('onglet_repartition_debut'));	
 	} else {
@@ -45,12 +51,6 @@ function exec_statistiques_lang_dist()
 
 	echo ($critere == "popularite") ? barre_onglets("rep_depuis", "popularite"): barre_onglets("rep_depuis", "debut");
 
-
-	if ($connect_statut != '0minirezo') {
-		echo _T('avis_non_acces_page');
-		echo fin_gauche(), fin_page();
-		exit;
-	}
 
 //
 // Statistiques par langue
@@ -72,6 +72,7 @@ function exec_statistiques_lang_dist()
 	echo "\n<table cellpadding='2' cellspacing='0' border='0' width='100%' style='border: 1px solid #aaaaaa;'>";
 	$ifond = 1;
 		
+	$visites_abs = 0;
 	while ($row = spip_fetch_array($result)) {
 
 		$lang = $row['lang'];
