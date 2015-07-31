@@ -758,9 +758,12 @@ function http_calendrier_ics_titre($annee, $mois, $jour,$script)
 	$jour = date("d",$date);
 	$mois = date("m",$date);
 	$annee = date("Y",$date);
-	
+
+	$l = new Link($script);
+	$l->addvar("type","jour");
+
 	return "<div class='calendrier-arial10 calendrier-titre'>" .
-	  http_href("$script?type=jour&" .
+	  http_href($l->getUrl() . '&' .
 		    calendrier_args_date($annee, $mois, $jour),
 		    affdate_jourcourt("$annee-$mois-$jour"),
 		    '', '', 'calendrier-noir') .
