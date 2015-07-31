@@ -252,7 +252,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'dirs_commencer' => 'afim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => ' Preliminar : <B>Resolver os problemas de acesso</B>',
 'dirs_probleme_droits' => '<b>Problema de direitos de acesso</b>',
-'dirs_repertoires_absents' => ' <B>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_absents' => '<MODIF>  <B>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>&Ecirc; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
  acima; se n&atilde;o for o caso, renomear os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
@@ -678,6 +678,12 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_envoyer_message_prive' => 'Enviar uma mensagem privada a este autor',
 'info_erreur_requete' => 'Erro no pedido :',
 'info_erreur_restauration' => 'Erro de restaura&ccedil;&atilde;o : ficheiro inexistente',
+'info_erreur_squelette' => '<NEW> Erreur sur le site',
+'info_erreur_squelette2' => '<NEW> Aucun squelette <b>@fichier@</b> n\'est disponible...',
+'info_erreur_systeme' => '<NEW> Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
+	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Passar para a seguinte etapa',
 'info_etape_suivante_1' => 'Pode passar para a seguinte etapa',
 'info_etape_suivante_2' => 'Pode passar para a  seguinte etapa ',
@@ -726,6 +732,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_hier' => 'ontem&nbsp;:',
 'info_identification_publique' => 'A sua identidade p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
+'info_image_process' => '<NEW> Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
 'info_impossible_lire_page' => '<B>Erro !</B> Imposs&iacute;vel ler a p&aacute;gina<tt><html>@test_proxy@</html></tt> atrav&eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
@@ -1386,7 +1393,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 inclusive <i>todos</i> os acessos redactores e administradores. Depois de o ter executado, dever&aacute; lan&ccedil;ar a
 reinstala&ccedil;&atilde;o de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
 'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado nbo repert&oacute;rio <i>ecrire/data/</i>.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do repert&oacute;rio <i>IMG/</i>, que contem as imagens e os documentos utlizados nos artigos e rubricas.',
-'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
+'texte_admin_tech_02' => '<MODIF> Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
  num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. O erro
 que consiste em fazer uma salvaguarda antes de fazer uma actualiza&ccedil;&atilde;o
 de SPIP &eacute; frequente... Para mais pormenores, consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o de SPIP</a>.',
@@ -1434,7 +1441,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
  autom&aacute;tica.',
 'texte_creation_automatique_vignette' => 'A cria&ccedil;&atilde;o autom&aacute;tica de vinhetas de previsualiza&ccedil;&atilde;o est&aacute; activada neste s&iacute;tio. Se instalar a partir deste formul&aacute;rio imagens de formato(s) @gd_formats@, ser&atilde;o acompanhadas de uma vinheta de um tamanho m&aacute;ximo de @taille_preview@&nbsp;pixels.',
 'texte_creer_rubrique' => 'Antes de poder escrever artigos, <BR> deve criar uma rubrica.',
-'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO',
+'texte_date_creation_article' => '<MODIF> DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ANTERIOR',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir data de publica&ccedil;&atilde;o anterior',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O EM LINHA :',

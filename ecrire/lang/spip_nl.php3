@@ -249,9 +249,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Vooraf : <B>Toegangsrechten regelen</B>',
 'dirs_probleme_droits' => '<b>Probleem met toegangsrechten</b>',
 'dirs_repertoires_absents' => '<B>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
-  <P>Waarschijnlijk is te wijten aan het door elkaar halen van grote en kleine letters.
+  <P>Waarschijnlijk is dit te wijten aan het door elkaar halen van grote en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
- is dit niet het geval, hernoem dan mappen met je FTP-programma om de fout zo weg te nemen.
+ is dit niet het geval, hernoem dan de mappen met je FTP-programma om de fout zo te herstellen.
   <P>Eenmaal deze bewerking uitgevoerd is, kan je',
 'dirs_repertoires_suivants' => '<B>Je hebt geen schrijfrechten op de volgende mappen: <ul>@bad_dirs@.</ul> </B>
   <P>Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
@@ -303,8 +303,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_url' => 'Je website-adres (URL)',
 'erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
 'erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_boucle_syntaxe' => 'Onjuiste syntaxis van de lus',
+'erreur_boucle_syntaxe2' => 'De lus @milieu@ is onjuist.',
 'erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
 
 
@@ -675,9 +675,9 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_erreur_squelette' => 'Fout op de site',
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
-'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
-	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
-	ou contactez votre h&eacute;bergeur.</font><br></b>',
+'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br>
+ <font color=\'red\'>Probeer de <a href=\'ecrire/admin_repair.php3\'>de gegevensbank te herstellen</a>,
+ of neem contact op met je provider.</font><br></b>',
 'info_etape_suivante' => 'Naar de volgende stap ',
 'info_etape_suivante_1' => 'Je kan de volgende stap zetten.',
 'info_etape_suivante_2' => 'Je kan de volgende stap zetten.',
@@ -722,6 +722,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_hier' => 'gisteren:',
 'info_identification_publique' => 'Je publieke identiteit...',
 'info_image_aide' => 'HELP',
+'info_image_process' => 'Kies de beste methode om een miniatuurafbeelding te maken door op de bijhorende afbeelding te klikken.',
 'info_impossible_lire_page' => '<B>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy<tt>',
 'info_inclusion_directe' => 'Directe insluiting:',
 'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
@@ -1384,10 +1385,7 @@ verbinding maken met de site
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in de map <i>ecrire/data/</i>. Vergeet ook niet de map <i>IMG/</i>, die alle afbeeldingen en bijlagen bij de artikels en rubrieken bevat, integraal te bewaren.',
-'texte_admin_tech_02' => '<MODIF> Opgelet: deze reservekopie kan ENKEL worden teruggezet
- op een site met dezelfde SPIP-versie. Vaak wordt de
- fout gemaakt om een reservekopie te maken alvorens SPIP
- te updaten ... Voor meer info, kan je de <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
+'texte_admin_tech_02' => 'Opgelet: deze reservekopie kan ENKEL worden teruggezet op een site met dezelfde SPIP-versie. Maak vooral de databank niet leeg in de hoop dat je ze kan terugzetten na het upgraden van SPIP... Voor meer info, kan je de <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
 'texte_admin_tech_03' => 'Je kan de reservekopie ook als een gecomprimeerd bestand opslaan, dit om de overzettijd van de server naar je computer sterk in te korten en om schijfruimte te besparen.',
 'texte_adresse_annuaire_1' => '(Als de map is ge&iuml;nstalleerd is op dezelfde computer als je website, is het waarschijnlijk &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Deze auteuer is toegevoegd aan het artikel :',
@@ -1434,7 +1432,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 'texte_creation_automatique_vignette' => 'Op deze site is de automatische aanmaak van miniaturen (vignettes) geactiveerd. Als je vanop dit forumulier afbeeldingen oplaadt van het formaat @gd_formats@, zullen miniaturen aangemaakt worden met een maximale grootte van  @taille_preview@&nbsp;pixels.',
 'texte_creer_rubrique' => 'Voor je een artikel kan schrijven,<BR> dien je een rubriek aan te maken.',
-'texte_date_creation_article' => '<MODIF> DATUM VAN AANMAKEN VAN HET ATIKEL:',
+'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
 'texte_date_publication_anterieure' => 'EERDERE PUBLICATIEDATUM',
 'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van antidatering.',
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE:',

@@ -243,13 +243,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'por vere komenci la instaladon',
 'dirs_preliminaire' => 'Anta&#365;e: <B>&#284;ustigu la alirrajtojn</B>',
 'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
-'dirs_repertoires_absents' => '<B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_absents' => '<MODIF> <B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Kulpas ver&#349;ajne mal&#285;usta uskleco.
   Certigu ke la uskleco akordas kun la afi&#349;ado &#265;i-supre;
   se ili ne akordas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
   <P>Post tio, vi povos',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas alireblaj skribe : 
-<ul>@bad_dirs@.</ul><p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos',
+<ul>@bad_dirs@.</ul></b>
+<p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos',
 
 
 // E
@@ -293,11 +294,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Bildtitolo:',
 'entree_titre_obligatoire' => '<B>Titolo</b> [Deviga]<BR>',
 'entree_url' => 'Retadreso de via teksejo',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => '<NEW>BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW>BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW>Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW>La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW>Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
@@ -345,7 +346,7 @@ estos rifuzita):
 Dankon pro via partopreno
 ',
 'form_pet_message_commentaire' => '&#264;u mesa&#285;on, &#265;u komenton?',
-'form_pet_nom_site2' => '<B>Nomo de via teksejo',
+'form_pet_nom_site2' => 'Nomo de via teksejo',
 'form_pet_probleme_technique' => 'Teknika problemo, la subskriboj estas provizore interrompitaj.',
 'form_pet_signature_pasprise' => 'Via subskribo ne estas konsiderita.',
 'form_pet_signature_validee' => 'Via subskribo estas validigita. &#284;i aperos dum la venonta &#285;isdatigo de la teksejo. Dankon!',
@@ -653,10 +654,10 @@ Dankon pro via partopreno
 'info_envoyer_message_prive' => 'Sendi privatan mesa&#285;on al tiu a&#365;toro',
 'info_erreur_requete' => 'Eraro ene de la peto: ',
 'info_erreur_restauration' => 'Eraro de &#349;ar&#285;o: neekzistanta dosiero.',
-'info_erreur_squelette' => '<NEW> Erreur sur le site',
-'info_erreur_squelette2' => '<NEW> Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW> Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+'info_erreur_squelette' => '<NEW>Erreur sur le site',
+'info_erreur_squelette2' => '<NEW>Aucun squelette <b>@fichier@</b> n\'est disponible...',
+'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW><b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
 	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
 	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Transpasi al sekvanta etapo',
@@ -696,6 +697,7 @@ Dankon pro via partopreno
 'info_hier' => 'hiera&#365;:',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_aide' => 'HELPILO',
+'info_image_process' => '<NEW>Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
 'info_impossible_lire_page' => '<B>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto:',

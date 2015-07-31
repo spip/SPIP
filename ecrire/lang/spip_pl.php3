@@ -252,9 +252,9 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'dirs_probleme_droits' => '<b>Problem z pozwoleniami dost&#281;pu</b>',
 'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej w niew&#322;a&#347;ciwym miejscu wystepuj&#261; du&#380;e i ma&#322;e litery.
-  Sprawd&#378;cie nazwy pod wzgl&#281;dem ma&#322;ych i duzych liter.
-  je&#347;li tak nie jest, zmie&#324;cie nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
-  <P>Po wykonaniu tej operacji b&#281;dziecie mogli',
+  Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i duzych liter.
+  Je&#347;li rzeczywi&#347;cie wielko&#347;&#263; liter jest r&oacute;&#380;na, zmie&#324; nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
+  <P>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
 'dirs_repertoires_suivants' => '<B>Nast&#281;puj&#261;ce katalogi nie s&#261; udost&#281;pnione do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
@@ -726,6 +726,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_hier' => 'wczoraj:',
 'info_identification_publique' => 'Twoja nazwa publiczna',
 'info_image_aide' => 'POMOC',
+'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkaj&#261;c na odpowiednim obrazku.',
 'info_impossible_lire_page' => '<B>B&#322;&#261;d !</B> Nie mo&#380;na odczyta&#263; strony<tt><html>@test_proxy@</html></tt> za po&#347;rednictwem proxy<tt>',
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',

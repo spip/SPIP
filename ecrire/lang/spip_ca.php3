@@ -171,6 +171,10 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // C
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
+'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
+'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
+'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
+'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -253,9 +257,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'dirs_probleme_droits' => '<b>Problema de drets d\'acc&eacute;s</b>',
 'dirs_repertoires_absents' => '<B>No s\'han trobat els seg&uuml;ents directoris&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <P>&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
-  Verifiqueu si les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixen amb el que es mostra
-  m&eacute;s amunt; si no &eacute;s aix&iacute;, canvieu el nom dels directoris amb l\'ajuda del vostre programa d\'FTP per tal de corregir l\'error.
-  <P>Un cop feta aquesta manipulaci&oacute; podreu ',
+  Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixen exactament amb el que es mostra
+  m&eacute;s amunt; si aquest no &eacute;s el cas, canvieu el nom dels directoris amb l\'ajuda del vostre programa d\'FTP per tal de corregir l\'error.
+  <P>Un cop feta aquesta manipulaci&oacute;, podreu ',
 'dirs_repertoires_suivants' => '<B>Els seg&uuml;ents directoris no s&oacute;n accessibles a l\'escriptura&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Per solucionar el problema feu servir el vostre client FTP per tal de regular els drets d\'acc&eacute;s de cadascun d\'aquests directoris.
   El procediment s\'explica detalladament a la guia d\'instal&middot;laci&oacute;.
@@ -727,6 +731,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_hier' => 'ahir:',
 'info_identification_publique' => 'La vostra identitat p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
+'info_image_process' => 'Vulgueu seleccionar el millor m&egrave;tode de fabricaci&oacute; de vinyetes fent un clic damunt de la imatge corresponent. ',
 'info_impossible_lire_page' => '<B>Error!</B> Impossible llegir la p&agrave;gina <tt><html>@test_proxy@</html></tt> per mitj&agrave; del proxy <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute; directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute; de la icona:',
@@ -1665,14 +1670,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
-'trad_reference' => '(article de refer&egrave;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
-'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
-'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
-'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de refer&egrave;ncia)'
 
 );
 

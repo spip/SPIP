@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
 
+
 // A
 'admin_modifier_article' => 'Modifier cet article',
 'admin_modifier_auteur' => 'Modifier cet auteur',
@@ -70,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_syndiques_probleme' => 'Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me',
 'avis_suppression_base' => 'ATTENTION, la suppression des donn&eacute;es est irr&eacute;versible',
 'avis_version_mysql' => 'Votre version de MySQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
+
 
 // B
 'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
@@ -167,8 +169,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Vider le cache',
 'bouton_voir_message' => 'Voir ce message avant de le valider',
 
+
 // C
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
+
 
 // D
 'date_avant_jc' => 'av. J.C.',
@@ -258,6 +262,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
 		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 
+
 // E
 'email' => 'email',
 'email_2' => 'email :',
@@ -306,6 +311,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
 'erreur_boucle_syntaxe2' => 'La boucle @milieu@ est incorrecte.',
 'erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+
 
 // F
 'form_deja_inscrit' => 'Vous &ecirc;tes d&eacute;j&agrave; inscrit.',
@@ -406,6 +412,7 @@ Merci de votre participation
 		d\'indiquer ci-dessous l\'identifiant personnel qui vous a
 		&eacute;t&eacute; fourni. Si vous n\'&ecirc;tes pas enregistr&eacute;, vous devez',
 'forum_vous_inscrire' => 'vous inscrire </a> au pr&eacute;alable.',
+
 
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
@@ -1105,8 +1112,10 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
 
+
 // J
 'jour_non_connu_nc' => 'n.c.',
+
 
 // L
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
@@ -1190,6 +1199,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES',
 'logo_survol' => 'LOGO POUR SURVOL',
 
+
 // M
 'menu_aide_articles' => 'Les articles',
 'menu_aide_articles_auteurs' => 'Les auteurs',
@@ -1265,8 +1275,10 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'module_texte_traduction' => 'Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'non connu',
 
+
 // N
 'navigateur_pas_redirige' => 'Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+
 
 // O
 'onglet_affacer_base' => 'Effacer la base',
@@ -1287,6 +1299,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
+
 
 // P
 'pass_choix_pass' => 'Veuillez choisir votre nouveau mot de passe :',
@@ -1330,9 +1343,11 @@ et vous reconnecter au site.
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
 
+
 // S
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'statut_admin_restreint' => '(admin restreint)',
+
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
