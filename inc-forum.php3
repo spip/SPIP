@@ -251,8 +251,9 @@ function table_des_mots($table, $les_mots) {
 
 
 function afficher_petits_logos_mots($id_mot) {
-	$image = cherche_image_nommee("moton$id_mot");
-	if ($image) {
+	$on = cherche_image_nommee("moton$id_mot");
+	if ($on) {
+	  $image = ("$on[0]$on[1].$on[2]");
 		$taille = @getimagesize($image);
 		$largeur = $taille[0];
 		$hauteur = $taille[1];

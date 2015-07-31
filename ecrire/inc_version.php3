@@ -195,7 +195,9 @@ $traiter_math = 'tex';
 // Masquer les warning
 error_reporting(E_ALL ^ E_NOTICE);
 
-/* ATTENTION CES VARIABLES NE FONCTIONNENT PAS ENCORE */
+// le repértoire des images
+
+/* ATTENTION CETTE VARIABLE NE FONCTIONNE PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
 /* / MERCI DE VOTRE ATTENTION */
@@ -217,6 +219,11 @@ if ($flag_ecrire) {
 		include('ecrire/mes_options.php3');
 	}
 }
+
+// le repertoire des pieces rapportes
+
+define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
+
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -885,7 +892,7 @@ function spip_timer($t='rien') {
 
 
 //
-// Une fonction service pour tout le monde
+// qq  fonctions service pour les 2 niveaux
 //
 function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	if (!$id_rubrique)
@@ -900,6 +907,61 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	} while ($id_rubrique);
 
 	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'
+}
+
+//
+// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+//
+
+function creer_repertoire($base, $subdir) {
+	if (@file_exists("$base/.plat")) return '';
+	$path = $base.'/'.$subdir;
+	if (@file_exists($path)) return "$subdir/";
+
+	@mkdir($path, 0777);
+	@chmod($path, 0777);
+	$ok = false;
+	if ($f = @fopen("$path/.test", "w")) {
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
+		@fclose($f);
+		include("$path/.test");
+	}
+	if (!$ok) {
+		$f = @fopen("$base/.plat", "w");
+		if ($f)
+			fclose($f);
+		else {
+			@header("Location: spip_test_dirs.php3");
+			exit;
+		}
+	}
+	return ($ok? "$subdir/" : '');
+}
+
+function creer_repertoire_documents($ext) {
+# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
+	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
+}
+
+
+// Pour les documents comme pour les logos, le filtre |fichier donne
+// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+// remarquable, mais a conserver pour compatibilite ascendante.
+// -> http://www.spip.net/fr_article901.html
+
+function calcule_fichier_logo($on) {
+  $r= ereg_replace("^" . _DIR_IMG, "", $on);
+#  spip_log("calculer_fihchier_logo $on $r");
+  return $r;
+}
+
+function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
+	if (ereg("^../",$nom))	$nom = substr($nom,3);
+	if (ereg("^" . _DIR_IMG, $nom)) $nom = substr($nom,strlen(_DIR_IMG));
+	while (list(, $format) = each($formats)) {
+		$d = _DIR_IMG . "$nom.$format";
+		if (@file_exists($d)) return array(_DIR_IMG, $nom, $format);
+	}
 }
 
 ?>

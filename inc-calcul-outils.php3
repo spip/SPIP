@@ -41,12 +41,17 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
   while ($id) {
     $on = cherche_image_nommee($type . $onoff . $id);
     if ($on) 
-      return ($ff ? calcule_fichier_logo($on) :
-	      affiche_logos($on, 
-			    (($onoff == 'off') ? '' : 
-			     cherche_image_nommee($type . 'off' . $id)),
-			    $lien,
-			    $align));
+      { if ($ff)
+	  return  ("$on[1].$on[2]");
+	else
+	  {
+	    $off = ($onoff == 'off') ? '' : cherche_image_nommee($type . 'off' . $id);
+	    return affiche_logos(("$on[0]$on[1].$on[2]"),
+				 ($off ? ("$off[0]$off[1].$off[2]") : ''),
+				 $lien,
+				 $align);
+	  }
+      }
     else if ($id_rubrique)
       {$type = 'rub'; $id = $id_rubrique; $id_rubrique = 0;}
     else if ($type = 'rub') $id = sql_parent($id);
@@ -61,12 +66,10 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 
 	$num_survol++;
 	if ($arton) {
-		//$imgsize = @getimagesize("$arton");
-		//$taille_image = ereg_replace("\"","'",$imgsize[3]);
 		if ($align) $align="align='$align' ";
 
 		$milieu = "<img src='$arton' $align".
-			" name='image$num_survol' ".$taille_image." border='0' alt=''".
+			" name='image$num_survol' border='0' alt=''".
 			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
 
 		if ($artoff) {

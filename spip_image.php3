@@ -1,8 +1,6 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-include_local("inc-public-global.php3");
-# include_ecrire("inc_filtres.php3"); semble inutile au 2/10/2004
 include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
@@ -179,26 +177,16 @@ function ajout_image($source, $dest) {
 	// Securite
 	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
 
-		$loc = _DIR_IMG . $dest;
-		if (deplacer_fichier_upload($source, $loc)) {
-
 	// analyse le type de l'image (on ne fait pas confiance au nom de
 	// fichier envoye par le browser : pour les Macs c'est plus sur)
-			$size = @getimagesize($loc);
-			$type = decoder_type_image($size[2], true);
 
-			if ($type) {
-				rename($loc, "$loc.$type");
-				$dest = "$dest.$type";
-				$loc = "$loc.$type";
-			}
-			else {	
-				unlink($loc);
-			}
-		}
-	}	
+		$size = @getimagesize($source);
+		$type = decoder_type_image($size[2], true);
+
+		if ($type) deplacer_fichier_upload($source,
+						   _DIR_IMG . $dest . ".$type");
+	}
 }
-
 
 //
 // Ajouter un document

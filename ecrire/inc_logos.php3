@@ -11,29 +11,26 @@ define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 function decrire_logo($racine) {
 	global $connect_id_auteur;
 	
-	include_ecrire("inc_admin.php3");
-
-	foreach (array('gif','jpg','png') as $fmt) {
-		$fichier = "$racine.".$fmt;
-		$fid = _DIR_IMG . $fichier;
-		if (@file_exists($fid)) {
+	if ($img = cherche_image_nommee($racine)) {
+		list($dir, $racine, $fmt) = $img;
+		$fid = $dir . "$racine.".$fmt; 
 			// contrer le cache du navigateur
-			$contre = @filesize($fid) . @filemtime($fid);
-			if ($taille = @getimagesize($fid)) {
+		$contre = @filesize($fid) . @filemtime($fid);
+		if ($taille = @getimagesize($fid)) {
 				list($x, $y, $w, $h) = resize_logo($taille);
 				$xy = "$x &#215; $y "._T('info_pixels');
 				$taille = " width='$w' height='$h'";
 			} else { $xy =''; $w = 0; $h = 0;}
-			return array($fichier, 
-				     $xy, 
-				     "<img src='../spip_image_reduite.php3?img=" .
-				     $fid . "&taille_x=$w&taille_y=$h&hash=" .
-				     calculer_action_auteur ("reduire $w $h") .
-				     "&hash_id_auteur=$connect_id_auteur" .
-				     (!$contre ? '' : ("&".md5($contre))) .
-				     "'$taille border='0' alt='' />",
-				     $x, $y);
-			  }
+		include_ecrire("inc_admin.php3");
+		return array("$racine.".$fmt, 
+			     $xy, 
+			     "<img src='../spip_image_reduite.php3?img=" .
+			     $fid . "&taille_x=$w&taille_y=$h&hash=" .
+			     calculer_action_auteur ("reduire $w $h") .
+			     "&hash_id_auteur=$connect_id_auteur" .
+			     (!$contre ? '' : ("&".md5($contre))) .
+			     "'$taille border='0' alt='' />",
+			     $x, $y);
 	}
 	return '';
 }
@@ -103,7 +100,6 @@ function afficher_logo($racine, $titre, $logo) {
 
 	if ($logo) {
 		list($fichier, $taille, $img) =  $logo;
-		spip_log("$fichier, $taille, $img");
 		$hash = calculer_action_auteur("supp_image $fichier");
 
 		echo "<p><center><div>$img</div>";
@@ -380,31 +376,25 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
 	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
 	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
-	spip_log($img);
-	if (!$logo)
-		$logo = $img; // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
+	if (!$logo) $logo = $img;
 
-	if (ereg("^../",$logo))	$logo = substr($logo,3);
-	if (!ereg("^" . _DIR_IMG, $logo)) $logo = _DIR_IMG . $logo;
+	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
+		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
+			list(,$nom,) = $i;
+			$suffixe = '-'.$taille.'x'.$taille_y;
+			$cache_folder= creer_repertoire_documents('cache'.$suffixe);
+			$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
 
-	if (@file_exists($logo) AND
-	eregi("\.(jpg|gif|png)$", $logo, $regs)) {
-		include_local('inc-public-global.php3');
-		$nom = $regs[1];
-		$format = $regs[2];
-		$suffixe = '-'.$taille.'x'.$taille_y;
-		$cache_folder= creer_repertoire_documents('cache'.$suffixe);
-		$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
-
-		if ($preview) {
-			$vignette = $preview['fichier'];
-			$width = $preview['width'];
-			$height = $preview['height'];
-			return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
-		}
-		else if ($taille_origine = getimagesize($logo)) {
-			list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-			return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
+			if ($preview) {
+				$vignette = $preview['fichier'];
+				$width = $preview['width'];
+				$height = $preview['height'];
+				return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
+			}
+			else if ($taille_origine = getimagesize($logo)) {
+				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
+				return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
+			}
 		}
 	}
 }
