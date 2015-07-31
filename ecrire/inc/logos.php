@@ -215,6 +215,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	$destination = sous_repertoire(_DIR_IMG, $destdir) . $destfile;
 
 	// chercher un cache
+	$vignette = '';
 	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {
 			$vignette = $destination.'.'.$fmt;

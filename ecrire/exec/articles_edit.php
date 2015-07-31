@@ -307,7 +307,10 @@ function exec_articles_edit_dist()
 	# modifs de la description d'un des docs joints
 		maj_documents($id_article, 'article');
 
-	# affichage
+	# affichage sur le cote des pieces jointes, en reperant les inserees
+		if (isset($row['descriptif'])) document_a_voir($row['descriptif']);
+		if (isset($row['chapo'])) document_a_voir($row['chapo']);
+		if (isset($row['texte'])) document_a_voir($row['texte']);
 		afficher_documents_colonne($id_article, 'article', true);
 	}
 	$GLOBALS['id_article_bloque'] = $id_article;	// globale dans debut_droite
