@@ -363,7 +363,7 @@ function entites_html($texte, $tout=false, $quote=true) {
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 	include_spip('inc/texte');
-	$texte = htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),$quote?ENT_QUOTES:(ENT_COMPAT|ENT_HTML401));
+	$texte = spip_htmlspecialchars(echappe_retour(echappe_html($texte,'',true),'','proteger_amp'),$quote?ENT_QUOTES:(ENT_COMPAT|ENT_HTML401));
 	if ($tout)
 		return corriger_toutes_entites_html($texte);
 	else
@@ -1732,9 +1732,9 @@ function enclosure2microformat($e) {
 	}
 	$fichier = basename($url);
 	return '<a rel="enclosure"'
-		. ($url? ' href="'.htmlspecialchars($url).'"' : '')
-		. ($type? ' type="'.htmlspecialchars($type).'"' : '')
-		. ($length? ' title="'.htmlspecialchars($length).'"' : '')
+		. ($url? ' href="'.spip_htmlspecialchars($url).'"' : '')
+		. ($type? ' type="'.spip_htmlspecialchars($type).'"' : '')
+		. ($length? ' title="'.spip_htmlspecialchars($length).'"' : '')
 		. '>'.$fichier.'</a>';
 }
 // La fonction inverse
@@ -1749,8 +1749,8 @@ function microformat2enclosure($tags) {
 			$length = intval(extraire_attribut($e, 'length')); # vieux data
 		$fichier = basename($url);
 		$enclosures[] = '<enclosure'
-			. ($url? ' url="'.htmlspecialchars($url).'"' : '')
-			. ($type? ' type="'.htmlspecialchars($type).'"' : '')
+			. ($url? ' url="'.spip_htmlspecialchars($url).'"' : '')
+			. ($type? ' type="'.spip_htmlspecialchars($type).'"' : '')
 			. ($length? ' length="'.$length.'"' : '')
 			. ' />';
 	}

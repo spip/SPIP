@@ -114,7 +114,7 @@ function minipres($titre='', $corps="", $onload='', $all_inline = false)
 		AND !$titre = _request('page'))
 			$titre = '?';
 
-		$titre = htmlspecialchars($titre);
+		$titre = spip_htmlspecialchars($titre);
 
 		$titre = ($titre == 'install')
 		  ?  _T('avis_espace_interdit')
