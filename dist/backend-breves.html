@@ -1,8 +1,11 @@
 <?php
 	@header('Content-type: text/xml[; charset=(#CHARSET)]');
-	echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.">\n";
+	echo '<'.'?xml version="1.0"[ encoding="(#CHARSET)"]?'.">\n";
 ?>
-<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
 
 <channel>
 
@@ -10,25 +13,53 @@
 	<link>#URL_SITE_SPIP/</link>
 	<description></description>
 	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
 
-	<image>
+[	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-		<url>#URL_SITE_SPIP[/(#LOGO_SITE_SPIP||extraire_attribut{src})]</url>
+		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
 		<link>#URL_SITE_SPIP/</link>
-		<description></description>
+		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
 	</image>
+]
 
-	<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{par date}{inverse}{0,10}>
+<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{par date}{inverse}{0,10}>
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
-		<link>#URL_SITE_SPIP/#URL_BREVE</link>
-		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_BREVE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#TEXTE|texte_backend)]</description>
+		<link>[(#URL_BREVE|url_absolue)]</link>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
+		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+		<description>[(#INTRODUCTION|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="category"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_breve}{", "}>
+&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;[(#TITRE|texte_backend)]&lt;/a&gt;</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de la breve,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable en modifiant backend-breves.php3
+][
+(#ENV{texte_complet}|?{' ',''})<content:encoded>[(#LOGO_BREVE|right||texte_backend)
+		][&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
 	</item>
-	</BOUCLE_breves>
+</BOUCLE_breves>
 
 </channel>
 
