@@ -14,7 +14,7 @@
 	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
 >[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<div class='spip_encadrer' style='font-size: 80%;'>
-	<b>#TITRE</b>
+	<strong>#TITRE</strong>
 	    <INCLURE{fond=choix_mots}
 	      {id_groupe}
 	      {ajouter_mot}
@@ -28,14 +28,14 @@
 </div>][
 (#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 		<fieldset class="spip_encadrer">
-		<legend><b><:forum_titre:></b></legend>
+		<legend><strong><:forum_titre:></strong></legend>
 		<label><input type="text" name="titre" 
 			[value="(#ENV{titre})" ]class="forml" size="40" />
 		</label>
 		</fieldset>
 		<br />
 		<fieldset class="spip_encadrer">
-		<legend><b><:forum_texte:></b></legend>
+		<legend><strong><:forum_texte:></strong></legend>
 		<p><:info_creation_paragraphe:></p>
 		[(#ENV**{texte}|barre_textarea{12,40})]
 		</fieldset>
