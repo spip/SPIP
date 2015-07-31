@@ -104,9 +104,9 @@ function creer_chaine_url($x) {
 		}
 	}
 
-	// S'il reste trop peu, on retombe sur article12
+	// S'il reste trop peu, on retombe sur article,12
 	if (strlen($url) < _URLS_PROPRES_MIN) {
-		$url = $objet['type'].$objet['id_objet'];
+		$url = $objet['type'].','.$objet['id_objet'];
 	}
 
 	// Sinon couper les mots et les relier par des tirets
@@ -132,7 +132,7 @@ function creer_chaine_url($x) {
 		$url = rawurldecode($url);
 
 		if (strlen($url) < _URLS_PROPRES_MIN) # pourquoi  "-1" avant ?
-			$url = $objet['type'].$objet['id_objet']; // 'article12'
+			$url = $objet['type'].','.$objet['id_objet']; // 'article,12'
 	}
 
 	$x['data'] = $url;
