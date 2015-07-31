@@ -64,8 +64,8 @@ function phraser_inclure($texte, $result) {
 		      $champ->args[$k] = array($m[1]);
 		  }
 		}
-		$texte = $champ->cond_apres;
-		$champ->cond_apres = "";
+		$texte = $champ->apres;
+		$champ->apres = "";
 		$result[] = $champ;
 	}
 	return (($texte==="") ? $result : phraser_idiomes($texte, $result));
@@ -178,7 +178,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg("^( *)([^,{}]*(\{[^{}]*\}[^,{}]*)*[^,\}]*)([,}$fin].*)$", $args, $regs);
+			ereg("^( *)([^,{}]*({[^{}]*\}[^,{}]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
@@ -218,7 +218,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
       $texte = ltrim($args);
   }
   # virer la parenthese fermante ou le chevron fermant
-  $pointeur_champ->cond_apres = substr($texte,1);
+  $pointeur_champ->apres = substr($texte,1);
   return $result;
 }
 
@@ -241,10 +241,10 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$champ->nom_boucle = $regs[3];
 		$champ->nom_champ = $regs[4];
 		$champ->etoile = $regs[5];
-		// phraser_args indiquera ou commence cond_apres
+		// phraser_args indiquera ou commence apres
 		$result = phraser_args($regs[6], ")", $sep, $result, $champ);
-		$champ->cond_avant = phraser_champs_exterieurs($regs[1],$sep,$result);
-		$champ->cond_apres = phraser_champs_exterieurs($champ->cond_apres,$sep,$result);
+		$champ->avant = phraser_champs_exterieurs($regs[1],$sep,$result);
+		$champ->apres = phraser_champs_exterieurs($champ->apres,$sep,$result);
 
 
 		$p = strpos($texte, $regs[0]);
@@ -366,7 +366,7 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		$s = "<B$id_boucle>";
 		$p = strpos($debut, $s);
 		if ($p !== false) {
-			$result->cond_avant = substr($debut, $p + strlen($s));
+			$result->avant = substr($debut, $p + strlen($s));
 			$debut = substr($debut, 0, $p);
 		}
 		$milieu = substr($milieu, strlen($match[0]));
@@ -395,7 +395,7 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		$s = "</B$id_boucle>";
 		$p = strpos($texte, $s);
 		if ($p !== false) {
-			$result->cond_fin = substr($texte, 0, $p);
+			$result->apres = substr($texte, 0, $p);
 			$texte = substr($texte, $p + strlen($s));
 		}
 
@@ -405,13 +405,13 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		$s = "<//B$id_boucle>";
 		$p = strpos($texte, $s);
 		if ($p !== false) {
-			$result->cond_altern = substr($texte, 0, $p);
+			$result->altern = substr($texte, 0, $p);
 			$texte = substr($texte, $p + strlen($s));
 		}
 
-		$result->cond_avant = phraser($result->cond_avant, $id_parent,$boucles, $nom);
-		$result->cond_apres = phraser($result->cond_fin, $id_parent,$boucles, $nom);
-		$result->cond_altern = phraser($result->cond_altern,$id_parent,$boucles, $nom);
+		$result->avant = phraser($result->avant, $id_parent,$boucles, $nom);
+		$result->apres = phraser($result->apres, $id_parent,$boucles, $nom);
+		$result->altern = phraser($result->altern,$id_parent,$boucles, $nom);
 		$result->milieu = phraser($milieu, $id_boucle,$boucles, $nom);
 
 		$all_res = phraser_champs_etendus($debut, $all_res);
