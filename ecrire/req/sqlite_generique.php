@@ -46,13 +46,13 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqli
 
 	// determiner le dossier de la base : $addr ou _DIR_DB
 	$f = _DIR_DB;
-	if ($addr)
+	if ($addr AND strpos($addr,'/')!==false)
 		$f = rtrim($addr,'/').'/';
 
 	// un nom de base demande et impossible d'obtenir la base, on s'en va
 	if ($db AND !is_file($f .= $db . '.sqlite') AND !is_writable(dirname($f)))
 			return false;
-	
+
 	// charger les modules sqlite au besoin
 	if (!_sqlite_charger_version($sqlite_version)) {
 		spip_log("Impossible de trouver/charger le module SQLite ($sqlite_version)!");
@@ -734,7 +734,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
 	
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
-		if (!$requeter) return $r;	
+		if (!$requeter) return $r;
 		
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
@@ -1555,8 +1555,8 @@ function _sqlite_ajouter_champs_timestamp($table, $couples, $desc='', $serveur='
 	if (!isset($tables[$table])){
 		
 		if (!$desc){
-			$trouver_table = charger_fonction('trouver_table', 'base');
-			$desc = $trouver_table($table, $serveur);
+			$f = charger_fonction('trouver_table', 'base');
+			$desc = $f($table, $serveur);
 			// si pas de description, on ne fait rien, ou on die() ?
 			if (!$desc) return $couples;
 		}
