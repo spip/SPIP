@@ -2304,7 +2304,12 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 		return $plugins_actifs[$plugin][$type_info];
 	else {
 		$get_infos = charger_fonction('get_infos','plugins');
-		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir']))
+		// On prend en compte les extensions
+		if (!is_dir($plugins_actifs[$plugin]['dir_type']))
+			$dir_plugins = constant($plugins_actifs[$plugin]['dir_type']);
+		else
+			$dir_plugins = $plugins_actifs[$plugin]['dir_type'];
+		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], false, $dir_plugins))
 			return '';
 		if ($type_info == 'tout')
 			return $infos;
