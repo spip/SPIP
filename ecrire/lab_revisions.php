@@ -373,15 +373,14 @@ function supprimer_versions($id_article, $version_min, $version_max) {
 //
 // Ajouter une version a un article
 //
-function ajouter_version($id_article, $champs, $titre_version = "") {
-	global $connect_id_auteur;
+function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) {
 
 	// Eviter les validations entremelees
 	$lock = "ajout_version $id_article";
 	spip_get_lock($lock, 10);
 	
 	// Examiner la derniere version
-	$query = "SELECT id_version, (id_auteur=$connect_id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag ".
+	$query = "SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag ".
 		"FROM spip_versions WHERE id_article=$id_article ".
 		"ORDER BY id_version DESC LIMIT 0,1";
 	$result = spip_query($query);
@@ -442,11 +441,11 @@ function ajouter_version($id_article, $champs, $titre_version = "") {
 	$titre_version = addslashes($titre_version);
 	if ($nouveau) {
 		$query = "INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) ".
-			"VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$connect_id_auteur', '$codes')";
+			"VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$id_auteur', '$codes')";
 		spip_query($query);
 	}
 	else {
-		$query = "UPDATE spip_versions SET date=NOW(), id_auteur=$connect_id_auteur, champs='$codes', ".
+		$query = "UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='$codes', ".
 			"permanent='$permanent', titre_version='$titre_version' ".
 		 	"WHERE id_article=$id_article AND id_version=$id_version";
 		spip_query($query);

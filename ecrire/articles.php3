@@ -244,7 +244,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 				$select = join(", ", $champs);
 				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
 				$champs_originaux = spip_fetch_array(spip_query($query));
-				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'));
+				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
 
 				// Remettre une date un peu ancienne pour la version initiale 
 				if ($id_version == 1) // test inutile ?
@@ -273,7 +273,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 	// Stockage des versions
 	if ($articles_versions) {
-		ajouter_version($id_article, $champs_versions);
+		ajouter_version($id_article, $champs_versions, '', $connect_id_auteur);
 	}
 
 	// Changer la langue heritee

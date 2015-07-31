@@ -197,10 +197,10 @@ echo "</tr></table>";
 
 debut_cadre_relief();
 
-$query = "SELECT id_version, titre_version, date, v.id_auteur, a.nom ".
-	"FROM spip_versions AS v, spip_auteurs AS a ".
-	"WHERE id_article=$id_article AND v.id_auteur=a.id_auteur ORDER BY id_version DESC";
-$result = spip_query($query);
+$result = spip_query("SELECT id_version, titre_version, date, id_auteur
+	FROM spip_versions
+	WHERE id_article=$id_article
+	ORDER BY id_version DESC");
 
 echo "<ul class='verdana3'>";
 while ($row = spip_fetch_array($result)) {
@@ -218,24 +218,27 @@ while ($row = spip_fetch_array($result)) {
 	else {
 		echo "<b>$titre_aff</b>";
 	}
-	echo " (".typo($row['nom']).")";
-	#if ($options == 'avancees') {	// note : c'est redondant car on ne peut arriver sur cette page qu'en options avancees...
-		//echo " <span style='color:#989898; font-size: 80%; font-weight: bold;'><i>#".$row['id_version']."</i></span>";
-		if ($version_aff != $id_version) {
-			echo " <span class='verdana2'>";
-			if ($version_aff == $id_diff) {
-				echo "<b>("._T('info_historique_comparaison').")</b>";
-			}
-			else {
-				$link = new Link();
-				$link->addVar('id_version', $id_version);
-				$link->addVar('id_diff', $version_aff);
-				echo "(<a href='".$link->getUrl('diff').
-				"'>"._T('info_historique_comparaison')."</a>)";
-			}
-			echo "</span>";
+
+	if ($row['id_auteur']) {
+		$t = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".$row['id_auteur']);
+		list($nom) = spip_fetch_array($t);
+		echo " (".typo($nom).")";
+	}
+
+	if ($version_aff != $id_version) {
+		echo " <span class='verdana2'>";
+		if ($version_aff == $id_diff) {
+			echo "<b>("._T('info_historique_comparaison').")</b>";
 		}
-	#} // fin avancees
+		else {
+			$link = new Link();
+			$link->addVar('id_version', $id_version);
+			$link->addVar('id_diff', $version_aff);
+			echo "(<a href='".$link->getUrl('diff').
+			"'>"._T('info_historique_comparaison')."</a>)";
+		}
+		echo "</span>";
+	}
 	echo "</li>\n";
 }
 echo "</ul>\n";
