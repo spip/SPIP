@@ -96,13 +96,12 @@ function formulaire_referencer_traduction($id_article, $id_rubrique, $id_trad, $
 	if ($flag_editable AND $options == "avancees" AND !$table) {
 			// Formulaire pour lier a un article
 		$form .= "<td class='arial2' width='60%'>"
-		. redirige_action_auteur("editer_article",
+		. ajax_action_auteur("referencer_traduction",
 				$id_article,
 				'articles',
 				"id_article=$id_article",
 				(_T('trad_lier') .
-					 "\n<input type='text' class='fondl' name='lier_trad' size='5' />\n<input type='submit' value='"._T('bouton_valider')."' class='fondl' />"),
-				" method='post' align='$spip_lang_right' style='margin:0px; padding:0px;'")
+				 "\n<input type='text' class='fondl' name='lier_trad' size='5' />\n<input type='submit' value='"._T('bouton_valider')."' class='fondl' />"))
 		. "</td>\n"
 		. "<td background='' width='10'> &nbsp; </td>"
 		. "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
