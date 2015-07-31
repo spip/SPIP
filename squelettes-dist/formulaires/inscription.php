@@ -77,13 +77,21 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 	else 	$f = 'test_inscription_dist';
 	$desc = $f($mode, $mail, $nom, $id);
 
-	if (is_array($desc)) {
+	if (!is_array($desc)) {
+		$desc = _T($desc);
+	} else {
 		$mail = $desc['email'];
 		include_spip('base/abstract_sql');
-		$row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($mail));
-		// s'il n'existe pas deja, creer les identifiants  
-		$desc = $row ? $row : inscription_nouveau($desc);
-	} else $desc = _T($desc);
+		$res = sql_select("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($mail));
+		if (!$res) 
+			$desc = _T('titre_probleme_technique');
+		else {
+			$row = sql_fetch($res);
+			// s'il n'existe pas deja, creer les identifiants  
+			$desc = $row ? $row : inscription_nouveau($desc);
+		}
+	}
+
 	if (is_array($desc)) {
 	// generer le mot de passe (ou le refaire si compte inutilise)
 		$desc['pass'] = creer_pass_pour_auteur($desc['id_auteur']);
