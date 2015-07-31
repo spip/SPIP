@@ -28,7 +28,7 @@ function exec_admin_plugin_dist($retour='') {
 		exit;
 	}
 	
-	$format = 'arbre';
+	$format = '';
 	if (_request('format')!==NULL)
 		$format = _request('format');
 
@@ -92,9 +92,6 @@ function exec_admin_plugin_dist($retour='') {
 		."' class='fondo' />" . "</div>";
 
 
-		$lien_format = $format=='arbre' ?
-		  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
-		  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
 		// S'il y a plus de 10 plugins pas installes, les signaler a part ;
 		// mais on affiche tous les plugins mis a la racine ou dans auto/
 		if (count($lpf) - count($lcpa) > 9
@@ -107,14 +104,23 @@ function exec_admin_plugin_dist($retour='') {
 				OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
 				OR in_array($f, $lcpa))
 					$lcpaffiche[] = $f;
-			$corps = "<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
-				. "<p><a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
+			if (count($lcpaffiche)<10 && !$format) $format = 'liste';
+			$lien_format = $format!='liste' ?
+			  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
+			  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
+			$corps = "<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s.')."\n"
+				. " | <a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
 				. affiche_les_plugins($lcpaffiche, $lcpa, $format);
 
 		} else {
+			$lien_format = $format!='liste' ?
+			  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
+			  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
 			$corps = 
-				"<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s')."&nbsp;;\n"
-				. ""._L(count($lpf).' plugins disponibles.')."</p>\n"
+				"<p>$lien_format | "
+				."<a href='". parametre_url(self(),'afficher_tous_plugins', '') ."'>" . _L(count($lcpa).' plugins activ&#233;s')."</a> | \n"
+				. ""._L(count($lpf).' plugins disponibles.')
+				. "</p>\n"
 				. (count($lpf)>20 ? $sub : '')
 				. affiche_les_plugins($lpf, $lcpa, $format);
 		}
@@ -174,8 +180,21 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 	") . $res;
 }
 
+function affiche_block_initiale($initiale,$block,$block_actif){
+	if (strlen($block)){
+		return "<li>"
+		  . bouton_block_depliable($initiale,$block_actif?true:false)
+		  . debut_block_depliable($block_actif)
+		  . "<ul>$block</ul>"
+		  . fin_block()
+		  . "</li>";
+	}
+	return "";
+}
+
 // http://doc.spip.org/@affiche_liste_plugins
 function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
+	$block_par_lettre = count($liste_plugins)>10;
 	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
 	$maxiter=1000;
 	$res = '';
@@ -184,14 +203,7 @@ function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
 	$block_actif = false;
 	foreach($liste_plugins as $plug => $nom){
 		if (($i=substr($nom,0,1))!==$initiale){
-			if (strlen($block)){
-				$res .= "<li>"
-				  . bouton_block_depliable($initiale,$block_actif?true:false)
-				  . debut_block_depliable($block_actif)
-				  . "<ul>$block</ul>"
-				  . fin_block()
-				  . "</li>";
-			}
+			$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
 			$initiale = $i;
 			$block = '';
 			$block_actif = false;
@@ -204,6 +216,7 @@ function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
 			. ligne_plug($plug, $actif, $id)
 			. "</li>\n";
 	}
+	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
 	return "<ul>"
 	. $res
 	. "</ul>";
