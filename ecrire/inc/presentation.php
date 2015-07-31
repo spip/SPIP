@@ -1069,7 +1069,7 @@ function f_boite_infos($flux) {
 
 	unset($args['row']);
 	include_spip('public/assembler');
-	$boite .= recuperer_fond("prive/{$type}_infos",$args);
+	$boite .= recuperer_fond("prive/infos/$type",$args);
 
 	$flux['data'] = $boite;
 	return $flux;
