@@ -173,7 +173,7 @@
 		]
 	  </ul>
 	  	[(#REM) Et on met un hidden...]
-		[(#ENV{id_auteur}|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
+		[(#ENV{id_auteur}|intval|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
 
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
