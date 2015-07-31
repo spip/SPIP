@@ -1173,7 +1173,6 @@ function image_typo() {
 	
 	if ($variable["alt"]) $alt = $variable["alt"];
 	else $alt = $texte;
-	$alt = addslashes($alt);
 	
 	$ombre = $variable["ombre"];
 	$ombrex = $variable["ombrex"];
@@ -1249,7 +1248,7 @@ function image_typo() {
 	if ($retour == "fichier_seul")
 			return "$image";
 		else 
-			return "<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' alt='$alt' class='image_typo'>";
+			return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo'>", 'alt', $alt);
 	} else {
 		return $texte;
 	}
