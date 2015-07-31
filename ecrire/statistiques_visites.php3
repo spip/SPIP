@@ -4,7 +4,7 @@ include ("inc.php3");
 include ("inc_statistiques.php3");
 
 
-if ($id_article){
+if ($id_article = intval($id_article)){
 	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
 	$result = spip_query($query);
 
@@ -24,7 +24,7 @@ else {
 }
 
 
-if($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
+if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 if ($origine) {
 	debut_page(_T('titre_page_statistiques_referers'), "administration", "statistiques");
@@ -269,7 +269,7 @@ if (!$origine) {
 			$decal ++;
 			$tab_moyenne[$decal] = $value;
 		
-			//inserer des jours vides si pas d'entrees	
+			// Inserer des jours vides si pas d'entrees	
 			if ($jour_prec > 0) {
 				$ecart = floor(($key-$jour_prec)/(3600*24)-1);
 	
@@ -603,7 +603,7 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 	
 	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	while ($row = spip_fetch_array($result)) {
-		$referer = $row['referer'];
+		$referer = interdire_scripts($row['referer']);
 		$visites = $row[$vis];
 		$tmp = "";
 		$aff = "";
@@ -670,14 +670,14 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 				echo "</li>";
 			}
 		}
+		echo "</ul>";
 
-		// le lien pour en afficher "plus"
+		// Le lien pour en afficher "plus"
 		if (spip_num_rows($result) == $limit) {
 			$lien = $clean_link;
 			$lien->addVar('limit',$limit+200);
-			echo "<p /><li><a href='".$lien->getUrl()."'>+++</a></li>";
+			echo "<p><a href='".$lien->getUrl()."'>+++</a></p>";
 		}
-		echo "</ul>";
 	}
 
 }

@@ -64,8 +64,12 @@ function utiliser_cache($chemin_cache, $delais) {
 	// Date de creation du fichier
 	if ($use_cache) {
 		$t = filemtime($chemin_cache);
-		$ledelais = time() - $t;
-		$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
+		$age = time() - $t;
+		$age_ok = (($age < $delais) AND ($age >= 0));
+		if (!$age_ok) {		// fichier cache trop vieux
+			if (timeout())	// sauf lock hebergeur ou probleme base
+				$use_cache = false;
+		}
 		// Inclusions multiples : derniere modification
 		if ($lastmodified < $t) $lastmodified = $t;
 	}
@@ -78,12 +82,7 @@ function utiliser_cache($chemin_cache, $delais) {
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$use_cache = true;
 
-	// si pas de connexion, cache obligatoire
-	if (!$use_cache) {
-		include_ecrire("inc_connect.php3");
-		if (!$GLOBALS['db_ok']) $use_cache = true;
-	}
-
+	spip_debug (($use_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s":''));
 	return $use_cache;
 }
 
