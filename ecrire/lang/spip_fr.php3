@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendrier par mois',
 'cal_par_semaine' => 'calendrier par semaine',
 'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
+'correcte' => 'correcte',
 
 
 // D
@@ -345,6 +346,7 @@ Merci de votre participation
 'image_tourner_droite' => 'Rotation 90&deg; &agrave; droite',
 'image_tourner_gauche' => 'Rotation 90&deg; &agrave; gauche',
 'img_indisponible' => 'image indisponible',
+'impossible' => 'impossible',
 'info_a_suivre' => '&Agrave; SUIVRE&nbsp;&raquo;',
 'info_a_valider' => '[&agrave; valider]',
 'info_acces_interdit' => 'Acc&egrave;s interdit',
@@ -638,6 +640,9 @@ et vous reconnecter au site.
 
 
 // S
+'squelette' => 'squelette',
+'squelette_inclus_ligne' => 'squelette inclus, ligne',
+'squelette_ligne' => 'squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'suivant' => 'suivant',
 
