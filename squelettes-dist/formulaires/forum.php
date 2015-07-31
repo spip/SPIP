@@ -268,12 +268,12 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 
 	// appliquer les traitements de #TEXTE a la previsu
 	// comme on voit c'est complique... y a peut-etre plus simple ?
+	// recuperer les filtres eventuels de 'mes_fonctions.php' sur les balises
+	include_spip('public/parametrer');
 	$evaltexte = isset($table_des_traitements['TEXTE']['forums'])
 		? $table_des_traitements['TEXTE']['forums']
 		: $table_des_traitements['TEXTE'][0];
 	$evaltexte = '$tmptexte = '.str_replace('%s', '$texte', $evaltexte).';';
-	// recuperer les filtres eventuels de 'mes_fonctions.php' sur les balises
-	include_spip('public/parametrer');
 	// evaluer...
 	eval($evaltexte);
 
