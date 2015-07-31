@@ -1625,8 +1625,15 @@ function debut_gauche($rubrique = "asuivre") {
 	// Ecran panoramique ?
 	if ($spip_ecran == "large") {
 		$largeur_ecran = 974;
-		$flag_3_colonnes = true;
-		$rspan = " rowspan=2";
+		// Si edition de texte, formulaires larges
+		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $REQUEST_URI)) {
+			$largeur = 250;
+		}
+		// Sinon, trois colonnes
+		else {
+			$flag_3_colonnes = true;
+			$rspan = " rowspan=2";
+		}
 	}
 	else {
 		$largeur_ecran = 750;
@@ -1955,6 +1962,7 @@ if (ereg("index\.php3", $GLOBALS['REQUEST_URI']) || !ereg("\.php3", $GLOBALS['RE
 	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>.";
 }
 ?>
+<p>
 </font></div>
 <?php
 fin_grand_cadre();

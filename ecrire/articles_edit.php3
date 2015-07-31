@@ -369,7 +369,6 @@ echo "<P><HR><P>";
 	}
 	
 	else {
-
 		echo "<HR>";
 	
 		if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
@@ -388,7 +387,7 @@ echo "<P><HR><P>";
 	
 	}
 
-	if ($spip_ecran == "large") $rows = 35;
+	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 20;
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
