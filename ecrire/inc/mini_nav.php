@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@mini_afficher_rubrique
-function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1, $exclu=0) {
+function mini_afficher_rubrique($id_rubrique, $rac="", $list=array(), $col = 1, $exclu=0) {
 	global  $spip_lang_left;
 	
 	if ($list) $id_rubrique = $list[$col-1];
@@ -58,8 +58,9 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 			. (($id == $next) ? "highlight" : "pashighlight")
 			. "'"
 			. $url
-			. "\nonClick=\"changerhighlight(this);"
-			. "return aff_selection_provisoire($id,$args);"
+			.  "\nonClick=\"changerhighlight(this);return "
+			. (!is_array($list) ? ' false' 
+			   : "aff_selection_provisoire($id,$args)")
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 			. "\"\nondblclick=\""
@@ -96,42 +97,27 @@ function mini_hierarchie_rub ($id_rubrique) {
 
 
 // http://doc.spip.org/@mini_afficher_hierarchie
-function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
+function mini_hier ($id_rubrique) {
 	
 	$id_parent = $id_rubrique;
 	$liste = $id_rubrique;
 	while ($id_parent = mini_hierarchie_rub ($id_parent)) {
 		$liste = $id_parent.",".$liste;
 	}
-	
 	$liste = "0,".$liste;
-		
-	return  "<div id='"
-	. $rac
-	. "_col_1' class='arial1'>" 
-	. mini_afficher_rubrique($id_rubrique, $rac, explode(',',$liste), 1, $rub_exclus)
-	. "</div>";
-}
-
-// http://doc.spip.org/@mini_nav_principal
-function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
-	global $couleur_foncee;
-	$ret = "<div id='".$rac."_principal' style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'>";
-	$ret .= mini_afficher_hierarchie($id_rubrique, $rac, $rub_exclus);
-	$ret .= "</div>";
-	
-	return $ret;
+	return explode(',',$liste);
 }
 
 //
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
 // http://doc.spip.org/@mini_nav
-function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false) {
+function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false, $plonger=true) {
 
 	if (!$fonction)
-		$fonction = "document.location='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
-			"';";
+		$fonction = "document.location='"
+		. generer_url_ecrire('naviguer', "id_rubrique=::sel::")
+		. "';";
 
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
@@ -158,7 +144,8 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 		$ondbClick .= "findObj('selection_rubrique').style.display='none';";
 	}
 
-	$onClick .= "charger_id_url('" . generer_url_ecrire('plonger',"rac=$rac&exclus=$rub_exclus&id=0&col=1", true) . "', '".$rac."_col_1');";
+	if ($plonger)
+		$onClick .= "charger_id_url('" . generer_url_ecrire('plonger',"rac=$rac&exclus=$rub_exclus&id=0&col=1", true) . "', '".$rac."_col_1');";
 
 	$ret .= "\n<div class='arial11 petite-racine'\nonclick=\""
 	. $onClick
@@ -177,12 +164,17 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 	. "_champ_recherche'\nonkeypress=\"t=setTimeout('lancer_recherche_rub(\'"
 	  . $rac
 	  . "_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" />"
-	. "</td></tr></table>\n"
-	. mini_nav_principal($sel, $rac, $rub_exclus)
-	. "\n<div id='"
-	.$rac
-	."_selection'></div>"
-	. "</div>\n";
+	. "</td></tr></table>\n<div id='"
+	. $rac
+	. "_principal' style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'><div id='"
+	. $rac
+	. "_col_1' class='arial1'>" 
+	. ($plonger
+	   ? mini_afficher_rubrique($sel, $rac, mini_hier($sel), 1, $rub_exclus)
+	   : mini_afficher_rubrique(0, $rac, false, 1, $rub_exclus))
+	. "</div></div>\n<div id='"
+	. $rac
+	. "_selection'></div></div>\n";
 
 	return $ret;
 }
