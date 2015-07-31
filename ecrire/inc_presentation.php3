@@ -738,7 +738,7 @@ function debut_html($titre = "") {
 		.aveccadre {cursor: pointer; padding: 3px; margin: 0px;  border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
 		.fondgris {padding: 4px; margin: 1px;}
 		.fondgris2 {padding: 3px; margin: 1px; border-left: solid 1px #7A92BE; border-top: solid 1px #7A92BE; border-right: solid 1px #000000; border-bottom: solid 1px #000000; background-color: #2b539c;}
-		.fondgrison {cursor: pointer; padding: 3px; margin: 1px;  border-left: solid 1px white; border-top: solid 1px white; border-right: solid 1px #000000; border-bottom: solid 1px #000000; background-color: #dddddd;}
+		.fondgrison {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;}
 		.fondgrison2 {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #7A92BE;}
 	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
@@ -1108,6 +1108,7 @@ function bandeau_barre_verticale(){
 // Debut du corps de la page
 //
 
+
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $couleur_foncee;
 	global $couleur_claire;
@@ -1285,8 +1286,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
 		global $options;
-		if ($options == "avancees") echo "<a href='$lien&set_options=basiques'>Interface simplifi&eacute;e</a> / <b>Internet compl&egrave;te</b>";
-		else  echo "<b>Interface simplifi&eacute;e</b> / <a href='$lien&set_options=avancees'>Interface compl&egrave;te</a>";
+		if ($options == "avancees") echo "<a href='$lien&set_options=basiques'>Interface simplifi&eacute;e</a> / <b>interface compl&egrave;te</b>";
+		else  echo "<b>Interface simplifi&eacute;e</b> / <a href='$lien&set_options=avancees'>interface compl&egrave;te</a>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
