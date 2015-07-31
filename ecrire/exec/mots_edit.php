@@ -43,6 +43,7 @@ global
   $titre,
   $titre_groupe,
   $titre_mot,
+  $les_notes,
   $type;
 
  $id_groupe = intval($id_groupe);
@@ -199,6 +200,13 @@ if (strlen($texte)>0){
 	echo "</FONT>";
 }
 
+ if ($les_notes) {
+			echo debut_cadre_relief();
+			echo "<div $dir_lang class='arial11'>";
+			echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+			echo "</div>";
+			echo fin_cadre_relief();
+ }
 
 
 if ($id_mot) {
