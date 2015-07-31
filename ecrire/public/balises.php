@@ -462,14 +462,48 @@ function calculer_balise_expose($p, $on, $off)
 
 //
 // Inserer directement un document dans le squelette
-// devient un alias de #EMB
+// devient un alias de #MODELE{emb}
+//
+// On insere simplement un argument {emb} en debut de liste
+//
+// Attention la syntaxe est derogatoire : il faut donc attraper
+// tous les faux-filtres "|autostart=true" et les transformer
+// en arguments "{autostart=true}"
+//
+// On s'arrete au premier filtre ne contenant pas de =, afin de
+// pouvoir filtrer le resultat
+//
 // http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
 function balise_EMBED_DOCUMENT_dist($p) {
 	balise_distante_interdite($p);
-	if (!function_exists($f = 'calculer_balise_modele'))
-		$f = 'calculer_balise_modele_dist';
 
-	$p->nom_champ = 'emb';
+	if (!is_array($p->param))
+		$p->param=array();
+
+	// Produire le premier argument {emb}
+	$texte = new Texte;
+	$texte->type='texte';
+	$texte->texte='emb';
+	$param = array(0=>NULL, 1=>array(0=>$texte));
+	array_unshift($p->param, $param);
+
+	// Transformer les filtres en arguments
+	for ($i=1; $i<count($p->param); $i++) {
+		if ($p->param[$i][0]) {
+			if (!strstr($p->param[$i][0], '='))
+				break;# on a rencontre un vrai filtre, c'est fini
+			$texte = new Texte;
+			$texte->type='texte';
+			$texte->texte=$p->param[$i][0];
+			$param = array(0=>$texte);
+			$p->param[$i][1] = $param;
+			$p->param[$i][0] = NULL;
+		}
+	}
+
+	// Appeler la balise #MODELE{emb}{arguments}
+	if (!function_exists($f = 'balise_modele'))
+		$f = 'balise_modele_dist';
 	return $f($p);
 }
 
@@ -1231,6 +1265,53 @@ function balise_INCLURE_dist($p) {
 
 	$p->code = "\n//$commentaire.\n$code";
 	$p->interdire_scripts = false;
+	return $p;
+}
+
+// Inclure un modele : #MODELE{modele, params}
+function balise_MODELE_dist($p) {
+	$contexte = array();
+
+	// recupere le premier argument, qui est obligatoirement le nom du modele
+	if (!is_array($p->param))
+		die("erreur de compilation #MODELE{nom du modele}");
+	$modele = array_shift($p->param);
+	$nom = strtolower($modele[1][0]->texte);
+	if (!$nom)
+		die("erreur de compilation #MODELE{nom du modele}");
+
+	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
+	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
+	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
+	if ($p->param[0]) {
+		while (count($p->param[0])>2){
+			$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
+		}
+	}
+
+	$champ = phraser_arguments_inclure($p, true); 
+
+	// a priori true
+	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
+	// si true, les arguments simples (sans truc=chose) vont degager
+	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+
+	// Si le champ existe dans la pile, on le met dans le contexte
+	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
+	// le cas spip_syndic_articles)
+	#$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
+
+	// Reserver la cle primaire de la boucle courante
+	if ($primary = $p->boucles[$p->id_boucle]->primary) {
+		$id = champ_sql($primary, $p);
+		$code_contexte[] = "'$primary='.".$id;
+	}
+
+	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
+	recuperer_fond('modeles/".$nom."',
+		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']))):'')";
+	$p->interdire_scripts = false; // securite assuree par le squelette
+
 	return $p;
 }
 

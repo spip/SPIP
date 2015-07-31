@@ -205,6 +205,8 @@ function calculer_balise($nom, $p) {
 			return $res;
 	}
 
+/*
+	// appel direct des modeles, remplace par #MODELE{article_traductions}
 	// S'agit-t-il d'un modele ?
 	if (find_in_path('modeles/'.strtolower($nom).'.html')) {
 		if (!function_exists($f = 'calculer_balise_modele')) $f .= '_dist';
@@ -212,6 +214,7 @@ function calculer_balise($nom, $p) {
 		if ($res !== NULL)
 			return $res;
 	}
+*/
 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
@@ -251,6 +254,9 @@ function calculer_balise($nom, $p) {
 	return $p;
 }
 
+/*
+
+L'appel direct de #ARTICLE_TRADUCTIONS devient #MODELE{article_traductions}
 
 // fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
 // exemples : #TRADUCTIONS, #DOC, #IMG...
@@ -264,6 +270,7 @@ function calculer_balise_modele_dist($p){
 			$p->param[]=array($p->param[0][0],array_pop($p->param[0]));
 		}
 	}
+print_r($p->param);
 	$champ = phraser_arguments_inclure($p, true); 
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
@@ -288,8 +295,11 @@ function calculer_balise_modele_dist($p){
 		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.++\$recurs, \$GLOBALS['spip_lang']))):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
+print $p->code."\n<hr/>\n";
+
 	return $p;
 }
+*/
 
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
