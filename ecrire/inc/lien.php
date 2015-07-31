@@ -351,7 +351,7 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	// dans le cas d'un lien vers un doc, ajouter le type='mime/type'
 	if ($type == 'document'
 	AND $mime = sql_getfetsel('mime_type', 'spip_types_documents',
-			"extension IN (SELECT extension FROM spip_documents where id_document =".sql_quote($id).")",
+			"extension IN (".sql_get_select("extension","spip_documents", " id_document =".sql_quote($id), NULL, NULL, NULL, NULL, NULL, 'true').")",
 			'','','','',$connect)
 	)
 		$r['mime'] = $mime;
