@@ -288,7 +288,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 /**
  * Autoriser a creer un article :
- * Il faut qu'une rubrique existe et qu'on est le statut nécessaire pour creer
+ * Il faut qu'une rubrique existe et qu'on est le statut necessaire pour creer
  * 
  * @return bool
  */
