@@ -6,7 +6,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 h1 { margin: 0 auto 20px auto; font-size: 1.3em; font-weight: bold; color: #5c3566; text-align: center; }
 h2 { margin: 0 0 20px 0; font-size: 1.2em; font-weight: normal; }
-h3.spip { margin: 0 auto 20px auto; font-size: 1em; font-weight: bold; }
+h3 { margin: 0 auto 20px auto; font-size: 1em; font-weight: bold; }
 p,.p { display: block; margin: 0 0 20px 0; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
@@ -16,10 +16,11 @@ small,.small { font-size: .9em; }
 
 /* LAYOUT / Disposition a l'ecran
 ---------------------------------------------- */
-body { background: #F5F5F5 url(images/background.png) repeat fixed; }
+body { padding: 5%; background: #F5F5F5 url(images/background.png) repeat fixed; }
 
-#minipres { position: relative; margin: 5% auto 0; padding: 20px; background: #fff repeat; }
-.quitter_fenetre a { position: absolute; right: 20px; top: 20px; display: block; background: url(images/fermer-16.png) no-repeat right; text-indent: -999em; }
+#minipres { position: relative; margin: 0 auto; padding: 20px; background: #fff repeat; }
+.quitter_fenetre { position: absolute; right: 20px; top: 20px; }
+.quitter_fenetre a { display: block; width: 20px; height: 20px; background: url(images/fermer-16.png) no-repeat right center; color: #FFF; text-indent: -999em; }
 
 @media (min-width: 640px) {
 #minipres { width: 540px; border: 1px solid #EEE;
@@ -28,38 +29,49 @@ body { background: #F5F5F5 url(images/background.png) repeat fixed; }
 }
 
 @media (max-width: 640px) {
-body { background-color: #fff; background-image: url(images/background.gif); background-repeat: repeat-x; }
+body { padding: 5% 1%; background-color: #fff; background-image: url(images/background.gif); background-repeat: repeat-x; }
 #minipres { width: auto; background: transparent; }
 fieldset { border-radius: 10px; }
+#etapes, #infos_etapes { display: none; }
 }
 
 @media screen and (max-width:640px) and (orientation: landscape) {
 body { -webkit-text-size-adjust: 70%; }
 }
 
-/* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 0; font-size: 0; }
-.bugajaxie { display: none; } /* Bug IE/Win */
-.center { text-align: center; }
-
 /* Formulaires
 ---------------------------------------------- */
 .formulaire_spip { clear: both; margin-bottom: 20px; padding: 0; background: none; border: 0; text-align: left; }
 .formulaire_spip form { margin: 0; padding: 0; } /* Bug IE/Win */
 .boutons { margin: 20px 0; text-align: right; }
-.formulaire_spip fieldset, fieldset, .fieldset { margin: 0 0 20px; padding: 20px; padding-bottom: 1px; background: #fff; border: 1px solid #CCC; border-radius: 3px; text-align: left; }
+
+.formulaire_spip fieldset,
+fieldset,
+.fieldset { margin: 0 0 20px; padding: 20px; padding-bottom: 1px; background: #fff; border: 1px solid #CCC; border-radius: 3px; text-align: left; }
 legend { font-weight: bold; color: #333; } /* Preciser la couleur des legend pour IE/Win */
 label {}
+
 .formulaire_spip fieldset ul { margin: 0; padding: 0; list-style: none; }
-.formulaire_spip fieldset ul li { clear: both; margin: 0; padding: 0 0 20px; }
+.formulaire_spip fieldset ul li { clear: both; margin: 0 0 20px; padding: 0; }
 .formulaire_spip fieldset ul li label,
 .formulaire_spip fieldset ul li .erreur_message,
 .formulaire_spip fieldset ul li .details { display: block; width: auto; margin: 0; }
 
-.formulaire_spip .choix label{display:inline;font-weight:normal;}
-.formulaire_spip .choix input.radio,
-.formulaire_spip .choix input.checkbox {width:auto;}
+.formo,
+input.text,
+input.password { width: 50%; display: block; margin-bottom: 20px; background: #f8f8f9 center bottom; padding: 4px; border: 1px inset; border-radius: 3px; behavior: url(win_width.htc); }
+.formo,
+input.text,
+input.password,
+select { font-size: 120%; }
 
+.formulaire_spip .choix label { display: inline; font-weight: normal; }
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox { width: auto; }
+
+/* erreur */
+.formulaire_spip fieldset ul li.erreur {}
+.formulaire_spip fieldset ul li.erreur input { border-color: red; background-color: #FCC; }
 .reponse_formulaire,
 .erreur_message { font-weight: bold; color: red; }
 
@@ -70,11 +82,6 @@ label {}
 .petit-centre { width: 300px; margin: auto; margin-bottom: 20px; text-align: center; }
 
 .toile_foncee { background: #777; }
-
-#minipres label { color: #333; }
-.fondl { /*background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.90em;*/ }
-.formo, input.text, input.password { width: 50%; display: block; margin-bottom: 20px; background-color: #f8f8f9; background-position: center bottom; padding: 3px; border: 1px inset #333; behavior: url(win_width.htc); }
-.formo, input.text, input.password, select { font-size: 110%; }
 
 #etapes { display: block; position: absolute; top: 10px; left: 10px; }
 #etapes span { display: block; margin-top: -0.50em; padding: 12px 14px; margin-bottom: 5px; }
@@ -98,7 +105,9 @@ label {}
 #infos_etapes li.prochains .fond { background-color: #dbdbdb;background-image: url(images/degrade-etapes-clair-left.gif); }
 
 /* installation des plugins */
-.error,.success,.notice {border:2px solid; font-weight: normal;padding:10px;margin-bottom:20px;}
+.error,
+.success,
+.notice {border:2px solid; font-weight: normal;padding:10px;margin-bottom:20px;}
 .success {color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
 .error {color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
 .notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
@@ -113,20 +122,23 @@ label {}
 ---------------------------------------------- */
 .page_login { text-align: center; }
 .page_login #minipres { width: 30em; }
+.page_login #minipres h3 { margin: 0; }
 .page_login .formulaire_menu_lang { text-align: center; }
 .page_login .formulaire_menu_lang label { display: none; }
 .page_login .formulaire_menu_lang select { display: inline; }
 .page_login .formulaire_menu_lang .boutons,
 .page_login .formulaire_menu_lang input.submit { display: inline; }
 .page_login .formulaire_login { clear: both; text-align: left; }
-.page_login .formulaire_login fieldset { clear: both; margin: 0; padding: 0 0 0 50px; background: none; border: 0; }
+.page_login .formulaire_login fieldset { clear: both; margin: 0; padding: 0 50px; background: none; border: 0; }
 .page_login .formulaire_login fieldset legend { display: none; }
-.page_login .formulaire_login fieldset #spip_logo_auteur { float: left; margin-top: 1em; margin-left: -50px; }
+.page_login .formulaire_login fieldset #spip_logo_auteur { float: rigth; margin-right: -50px; }
+.page_login .formulaire_login fieldset #spip_logo_auteur img { margin-top: 1.5em; }
 .page_login .formulaire_login fieldset ul { float: left; }
+.page_login .formulaire_login fieldset ul li { margin: 0; padding-bottom: 10px; }
 .page_login .formulaire_login fieldset ul li input.text,
-.page_login .formulaire_login fieldset ul li input.password { display: inline; width: 14em; margin: 0; border-radius: 3px; font-size: 150%; }
-.page_login .boutons { margin: 0; padding-right: 50px; }
-.page_login .retour { clear: both; }
+.page_login .formulaire_login fieldset ul li input.password { display: inline; width: 90%; margin: 0; font-size: 140%; }
+.page_login .boutons { margin: 20px auto 30px; text-align: center; font-size: 130%; }
+.page_login .retour { clear: both; margin: 0 0 5px 0; }
 .page_login .generator { margin: 0; }
 
 /* Couleurs des liens

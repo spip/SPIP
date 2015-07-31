@@ -32,17 +32,17 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 	(#ENV**{url}|non
 	|ou{[(#ENV**{url}|match{^(/.*/)?#EVAL{_DIR_RESTREINT_ABS}})]})
 	<h3 class="spip"><:login_acces_prive:></h3>
-	]
 	#MENU_LANG_ECRIRE
+	]
 	
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	<p class="retour">
 		[<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})"><:login_sinscrire:></a> | ]
 		<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>
 	</p>
-	<p class="generator">
-		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>">[(#CHEMIN_IMAGE{spip.png}|balise_img)]</a>
-	</p>
+	[<p class="generator">
+		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>">(#CHEMIN_IMAGE{spip.png}|balise_img)</a>
+	</p>]
 	
 </div><!--#minipres-->
 

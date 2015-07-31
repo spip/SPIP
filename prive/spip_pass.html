@@ -32,12 +32,12 @@
 	<div class="quitter_fenetre">
 	<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 	document.write("<a href='")
-	document.write((window.opener) ? "javascript:close()" : "./")
+	document.write((window.opener) ? "javascript:close()" : "#URL_PAGE{login}")
 	document.write("' title='<:pass_quitter_fenetre:>'><:pass_quitter_fenetre:><" + "/a>");
 	document.getElementById('oubli').focus()
 	/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 	<noscript>
-		&#91;<a href='./' title='<:pass_retour_public:>'><:pass_retour_public:></a>&#93;
+		<a href='#URL_PAGE{login}' title='<:lien_connecter:>'><:lien_connecter:></a>
 	</noscript>
 	</div>
 	
