@@ -1,3 +1,9 @@
+2.0.13 -> 2.0.14 ( 25 mars 2011 ) 
+
+r17492 | fil@rezo.net | 2011-03-24 22:23:38 +0100 (jeu, 24 mar 2011) |orrectif
+XSS suite a r4837 (remerciements pour Arnault)
+
+
 2.0.12 -> 2.0.13 ( Janvier 2011 ) 
 
 r15897 | esj       | 2010-08-02 18:00:30 +0200 (lun, 02 aoû 2010) | La simplification du code autour du cookie de session dans [13435] reporté par [13436]  ne prenait plus en compte la saisie {{{session_remember}}} du formulaire de login géré par la fonction {{{formulaires_login_verifier_dist}}}. Ca c'était aggravé avec la 2.1 par l'introduction de la fonction {{{auth_loger}}}. Rétablissement de l'intention d'origine (mais est-elle toujours pertinente ?).
