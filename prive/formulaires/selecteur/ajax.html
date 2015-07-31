@@ -1,0 +1,67 @@
+#SET{bouton_modif,#ENV{select,''}|?{bouton_modifier,bouton_ajouter}|_T}
+
+[(#REM) Afficher un bouton ajax Modifier a la premiere fois ]
+[(#ENV{picker,''}|non)
+<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class='ajax'>#GET{bouton_modif}</a>&#93;</div>
+]
+
+[(#REM) Afficher un bouton Fermer/Modifier ensuite ]
+[(#ENV{picker,''}|oui)
+<div class='picker_bouton'>
+&#91;<a
+	class='close'
+	href='[(#SELF|parametre_url{picker,0})]'
+	onclick="jQuery(this).parent().picker_toggle();return false;"
+><:bouton_fermer:></a><a
+	class='edit'
+	href='[(#SELF|parametre_url{picker,1})]' 
+	onclick="jQuery(this).parent().picker_toggle();return false;"
+	style='display:none;'>#GET{bouton_modif}</a>&#93;
+</div>
+
+[(#REM) et enfin le navigateur ------]
+<div class='browser'>
+	<div class="choix choix_rapide">
+		<label for="picker_rapide_#ENV{name}"><:label_ajout_id_rapide:></label>
+		<input type="text" value="" id="picker_rapide_#ENV{name}" size="10" />
+		<a id="bouton_picker_rapide_#ENV{name}" href="#">#GET{bouton_modif}</a>
+		<script type="text/javascript" language="javascript" charset="utf-8">
+			jQuery(function(){
+				jQuery('#bouton_picker_rapide_#ENV{name}').click(function(){
+					jQuery.ajax({
+						dataType: 'json',
+						url: '[(#URL_PAGE{ajax_selecteur})]',
+						data: {
+							rubriques: '#ENV{rubriques}',
+							articles: '#ENV{articles}',
+							ref: jQuery('#picker_rapide_#ENV{name}').attr('value')
+						},
+						success: function(r, statut, xhr){
+							if (r){
+								jQuery('#picker_rapide_#ENV{name}').item_pick(r.id,'#ENV{name,id_item}',r.titre,r.type);
+							}
+							jQuery('#picker_rapide_#ENV{name}').attr('value','');
+						}
+					});
+					return false;
+				});
+				
+				// Ne pas valider le formulaire si on appuie sur Entrée.
+				jQuery('#picker_rapide_#ENV{name}').keypress(function(e){
+					if (e.which == 13) {
+						jQuery('a#bouton_picker_rapide_#ENV{name}').trigger("click");
+						return false;
+					}
+				});
+			});
+		</script>
+	</div>
+	[(#ENV{objet}|=={racine}|ou{#ENV{id_objet}|=={0}}|oui)
+		#SET{skel, racine}
+	]
+	[(#ENV{objet}|=={racine}|ou{#ENV{id_objet}|=={0}}|non)
+		[(#SET{skel, [(#ENV{objet}|table_objet)]})]
+	]
+	<INCLURE{fond=formulaires/selecteur/hierarchie-#GET{skel}, env}>
+</div>
+]

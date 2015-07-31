@@ -1,0 +1,20 @@
+#SET{p,pagination_racine_articles}
+<B_enfants>
+[<p class="pagination">(#PAGINATION)</p>]
+<ul class="items">
+<BOUCLE_enfants(ARTICLES){id_rubrique}{statut?}{pagination 100 #GET{p}}>
+	<li class="article">
+		[(#ENV{bouton_selectionner}|oui)<a
+			href="#"
+			onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','#TITRE','article');return false;"
+		><img
+		class="add"
+		src="#CHEMIN_IMAGE{ajouter-16.png}"
+		alt="ajouter"
+		width="16"
+		height="16"
+		/></a>]#TITRE
+	</li>
+</BOUCLE_enfants>
+</ul>
+</B_enfants>
