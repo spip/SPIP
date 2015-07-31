@@ -346,10 +346,9 @@ function inc_afficher_articles_dist($titre, $requete, $formater='') {
 	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	$cpt = sql_countsel($requete['FROM'], $requete['WHERE'], $requete['GROUP BY']);
 
-	if (!$cpt = $cpt['n']) return '' ;
-
+	if (!$cpt) return '' ;
 
 	$requete['FROM'] = preg_replace("/(spip_articles( AS \w*)?)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 
