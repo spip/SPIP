@@ -633,8 +633,9 @@ function plugin_pipeline_props(&$arbre){
 			}
 			else foreach($p as $pipe){
 				$att = array();
-				foreach($pipe as $k=>$t)
-					$att[$k] = trim(end($t));
+				if (is_array($pipe))
+					foreach($pipe as $k=>$t)
+						$att[$k] = trim(end($t));
 				$pipeline[] = $att;
 			}
 		}
