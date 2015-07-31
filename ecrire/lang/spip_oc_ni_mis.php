@@ -534,7 +534,7 @@ sera ignourada) :
 	'login_retour_public' => 'Retour au sit pùblicou',
 	'login_retour_site' => 'Retour au sit pùblicou',
 	'login_retoursitepublic' => 'retour au sit pùblicou',
-	'login_sans_cookiie' => 'Identificacioun sensa cookie',
+	'login_sans_cookie' => 'Identificacioun sensa cookie',
 	'login_securise' => 'Login securisat',
 	'login_sinscrire' => 's’inscriéure',
 	'login_test_navigateur' => 'prouva navigatour/recounessioun',

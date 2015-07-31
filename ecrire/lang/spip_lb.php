@@ -529,7 +529,7 @@ Wann dir net wëllt dat äert Passwuert ka um Internet ofgefaange ginn, aktivéi
 	'login_retour_public' => 'Zeréck op den ëffentleche Site',
 	'login_retour_site' => 'Zeréck op de Site',
 	'login_retoursitepublic' => 'zeréck op den ëffentleche Site',
-	'login_sans_cookiie' => 'Umeldung ouni Cookie',
+	'login_sans_cookie' => 'Umeldung ouni Cookie',
 	'login_securise' => 'Séchere Login',
 	'login_sinscrire' => 'sech aschreiwen',
 	'login_test_navigateur' => 'Browser/Login-Test',

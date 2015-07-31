@@ -493,7 +493,7 @@ För att bekräfta din nya adress måste du gå till
 	'login_retour_public' => 'Tillbaka till den publika delen',
 	'login_retour_site' => 'Tillbaka till den publika delen',
 	'login_retoursitepublic' => 'Tillbaka till den publika delen',
-	'login_sans_cookiie' => 'Logga in utan cookie',
+	'login_sans_cookie' => 'Logga in utan cookie',
 	'login_securise' => 'Säker inloggning',
 	'login_sinscrire' => 'registrera dig',
 	'login_test_navigateur' => 'testar webbläsare/återuppkoppling',
