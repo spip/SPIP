@@ -129,9 +129,13 @@ function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $t
 	$res .= "</ul>";
 
 	if (count($resultat) > 17)
-		$res2 .="<br /><b>" ._T('info_trop_resultat', array('cherche_mot' => $cherche_mot)) ."</b><br />\n";
+		$res2 .="<br /><strong>" ._T('info_trop_resultat', array('cherche_mot' => $cherche_mot)) ."</strong><br />\n";
 				
-	$res2 = "<b>$type_mot</b>&nbsp;:" ._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot)) ."<br />";
+	$res2 = (strlen($type_mot)
+		? "<strong>$type_mot</strong>&nbsp;: "
+		: '' )
+		. _T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))
+		."<br />";
 
 	return $res2 . $res;
 }
