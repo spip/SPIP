@@ -108,24 +108,6 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 
 }
 
-// {inverse}
-// http://www.spip.net/@inverse
-function critere_inverse_dist($idb, &$boucles, $crit) {
-	$param = $crit->op;
-	$not = $crit->not;
-	$boucle = &$boucles[$idb];
-	// Classement par ordre inverse
-
-	if (!$not) {
-		if ($boucle->order)
-			$boucle->order .= ".' DESC'";
-		else 
-			erreur_squelette(_T('zbug_inversion_ordre_inexistant'), 
-			"BOUCLE" . $idb);
-	} else
-		erreur_squelette(_T('zbug_info_erreur_squelette'), "{$param} BOUCLE$idb");
-}
-
 // {traduction}
 // http://www.spip.net/@traduction
 //   (id_trad>0 AND id_trad=id_trad(precedent))
@@ -196,52 +178,64 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 function critere_par_dist($idb, &$boucles, $crit) {
+  critere_parinverse($idb, &$boucles, $crit, '') ;
+}
 
-	$not = $crit->not;
+function critere_parinverse($idb, &$boucles, $crit, $sens) {
+
 	$boucle = &$boucles[$idb];
-	if ($not)
+	if ($crit->not)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
 
 	$params = $crit->param;
 
 	foreach ($params as $tri) {
+
 	// tris specifies dynamiquement
-	    if ($tri[0]->type != 'texte')
-	      $order = calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
+	  if ($tri[0]->type != 'texte') {
+	      $order = 
+		calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
+	      $order =
+		"((\$x = $order) ? ('$boucle->id_table.' . \$x$sens) : '')";
+	  }
 	    else {
-	      // on considere que {par   col#ENV{num}} est imposible
-	      $tri = $tri[0]->texte;
+	      $par = array_shift($tri);
+	      $par = $par->texte;
 	// par hasard
-		if ($tri == 'hasard') {
+		if ($par == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
 		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
 		  if (spip_query("SELECT RAND()"))
-			$tri = "RAND()";
+			$par = "RAND()";
 		  else
-			$tri = "MOD(".$boucle->id_table.'.'.$boucle->primary
+			$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
 			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
-		  $boucle->select[]= $tri . " AS alea";
+		  $boucle->select[]= $par . " AS alea";
 		  $order = "'alea'";
 		}
 
 	// par titre_mot
-		else if ($tri == 'titre_mot') {
+		else if ($par == 'titre_mot') {
 		  $order= "'mots.titre'";
 		}
 
 	// par type_mot
-		else if ($tri == 'type_mot'){
+		else if ($par == 'type_mot'){
 		  $order= "'mots.type'";
 		}
 	// par num champ(, suite)
-		else if (ereg("^num[[:space:]]+(.*)$",$tri, $match2)) {
-		  $boucle->select[] = "0+".$boucle->id_table.".".$match2[1]." AS num";
-		  $order = "'num'";
+		else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
+		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
+		  $suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
+		  if ($suite !== "''")
+		    $texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')" . " . \"";
+		  $as = 'num' .($boucle->order ? count($boucle->order) : "");
+		  $boucle->select[] = $texte . " AS $as";
+		  $order = "'$as'";
 	}
 	// par champ. Verifier qu'ils sont presents.
-		else
-		  if (ereg("^[a-z][a-z0-9_]*$", $tri)) {
-		    if ($tri == 'date')
+		elseif (ereg("^[a-z][a-z0-9_]*$", $par)) {
+		    if ($par == 'date')
 		      $order = "'".$boucle->id_table.".".
 			$GLOBALS['table_date'][$boucle->type_requete]
 			."'";
@@ -254,21 +248,38 @@ function critere_par_dist($idb, &$boucles, $crit) {
 			// pour les tables non Spip
 			if (!$t) $t = $r; else $t = "spip_$t";
 			$desc = $tables_des_serveurs_sql[$s][$t];
-			if ($desc['field'][$tri])
-				$order = "'".$boucle->id_table.".".$tri."'";
+			if ($desc['field'][$par])
+				$order = "'".$boucle->id_table.".".$par."'";
 			else {
 			  // tri sur les champs synthetises (cf points)
-				$order = "'".$tri."'";
+				$order = "'".$par."'";
 			}
-		  }
-		}
+		    }
+		} else
+		    erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	    }
-	// au final, gestion des tris multiples
-		if ($order) {
-		  if ($boucle->order) $boucle->order .= '.",".';
-		  $boucle->order .= $order;
-		}
+
+	    if ($order)
+	      $boucle->order[] = $order . (($order[0]=="'") ? $sens : "");
 	  }
+}
+
+
+// {inverse}
+// http://www.spip.net/@inverse
+// ancienne spec si pas d'argument, nouvelle sinon
+function critere_inverse_dist($idb, &$boucles, $crit) {
+
+	$boucle = &$boucles[$idb];
+	// Classement par ordre inverse
+
+	if (!$crit->not && !$crit->param)
+	  {
+	    $n = count($boucle->order) -1;
+	    $boucle->order[$n] .= " . ' DESC'";
+	  }
+	else
+	  critere_parinverse($idb, &$boucles, $crit, " . ' DESC'");
 }
 
 function critere_agenda($idb, &$boucles, $crit)

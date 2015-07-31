@@ -215,7 +215,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	if (!$order = $boucle->order
 	AND !$order = $boucle->default_order)
-		$order = "''";
+		$order = array();
 
 	$init .= $boucle->hash . 
 	  "\n\n	// REQUETE
@@ -237,7 +237,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 		"', $boucle->where) . '"')) .
 		"), # WHERE
 		'".addslashes($boucle->group)."', # GROUP
-		" . $order .", # ORDER
+		array(" .
+	  	join(', ', $order) .
+		"), # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'".$boucle->limit."'" :
 			$boucle->limit). ", # LIMIT

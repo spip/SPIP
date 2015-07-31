@@ -233,8 +233,7 @@ function calcul_generation ($generation) {
 				array('spip_rubriques AS rubriques'),
 				array(calcul_mysql_in('id_parent', 
 					$generation,
-					'')),
-				'','','','','','','');
+						      '')));
 	while ($row = spip_abstract_fetch($result))
 		$lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
@@ -407,7 +406,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 				'spip_auteurs_articles AS lien'), 
 			array("lien.id_article=$id_article",
 				"auteurs.id_auteur=lien.id_auteur"),
-			'','','','',1, 
+			'',array(),'','',1, 
 			$table, $id_boucle, $serveur);
 
 		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
@@ -428,7 +427,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 		array('texte'),
 		array('spip_petitions'),
 		array("id_article=".intval($id_article)),
-		'','','','',1, 
+		'',array(),'','',1, 
 		$table, $id_boucle, $serveur);
 
 	if (!$retour) return '';
