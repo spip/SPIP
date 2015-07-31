@@ -383,6 +383,8 @@ function corriger_extension($ext) {
 // http://doc.spip.org/@liste_archive_jointe
 function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, $hash, $redirect, $iframe_redirect)
 {
+	include_spip('inc/layer');
+
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
 
 	$texte = "<div style='text-align: left'>
@@ -391,22 +393,26 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 <input type='hidden' name='hash' value='$hash' />
 <input type='hidden' name='chemin' value='$zip' />
 <input type='hidden' name='arg' value='$arg' />
-<input type='radio' checked='checked' name='sousaction5' id='sousaction5_5' value='5' />" .
+<input type='radio' checked='checked' name='sousaction5' id='sousaction5_5' value='5' onchange='jQuery(\"#options_deballe_zip\").slideUp();' />" .
 	  "<label for='sousaction5_5'>" . _T('upload_zip_telquel'). "</label>" .
 		"<br />".
-		"<input type='radio' name='sousaction5' id='sousaction5_6' value='6' />".
+		"<input type='radio' name='sousaction5' id='sousaction5_6' value='6' onchange='jQuery(\"#options_deballe_zip\").slideDown();' />".
 		"<label for='sousaction5_6'>" . _T('upload_zip_decompacter') . "</label>" .
 		"<ol>" .
 		liste_archive_taille($valables) .
-		"</ol>".
-		"<input type='checkbox' name='sousaction4' id='sousaction4_4' value='4' />".
-		"<label for='sousaction4_4'>" . _T('les_deux') . "</label>" .
-		"<div style='border: 1px solid; padding: 5px; margin: 20px'>" .
-		"<label for='titrer'>" . 
-	  _T('upload_zip_titrer') .
-	  "</label><input style='float: right' type='checkbox' name='titrer' id='titrer' />".
-		"</div></div>".
-		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
+		"</ol>"
+
+		. debut_block_depliable(false,'options_deballe_zip') 
+		. "<input type='checkbox' name='sousaction4' id='sousaction4_4' value='4' />".
+			"<label for='sousaction4_4'>" . _T('upload_zip_conserver') . "</label>" .
+			"<br /><input type='checkbox' name='titrer' id='titrer' />"
+			. "<label for='titrer'>" . _T('upload_zip_titrer') .
+			"</label>".
+			"</div></div>"
+		. fin_block()
+
+
+		. "<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').
 		  "' />";
 
@@ -426,19 +432,14 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 }
 
 // http://doc.spip.org/@liste_archive_taille
-function liste_archive_taille($files)
-{
-  $res = '';
-  foreach ($files as $nom => $file)
-    {
-      $res .= "\n<li><tt>$nom ("
-	. _T('taille_octets', array("taille" => $file['size']))
-	. '; '
-	. _T('date')
-	. '&nbsp;: '
-	. affdate_heure(date("Y-m-d H:i:s", $file['mtime']))
-	.")</tt></li>";
-    }
-  return $res;
+function liste_archive_taille($files) {
+	$res = '';
+	foreach ($files as $nom => $file) {
+		$date = date_interface(date("Y-m-d H:i:s", $file['mtime']));
+
+		$taille = taille_en_octets($file['size']);
+		$res .= "<li title=\"".texte_backend($title)."\"><b>$nom</b> &ndash; $taille<br />&nbsp; $date</li>\n";
+	}
+	return $res;
 }
 ?>

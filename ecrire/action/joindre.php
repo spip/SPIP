@@ -45,7 +45,7 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	$sousaction2 = _request('sousaction2');
 	$sousaction3 = _request('sousaction3');
 	$sousaction4 = _request('sousaction4');
-	$sousaction5 = _request('sousaction5');
+	$sousaction5 = _request('sousaction5'); // decompacter un zip
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
 
@@ -178,9 +178,11 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 		if ($archive) {
 			$valables = verifier_compactes($archive);
 			if ($valables) {
-				echo $ajouter_documents($valables, $zip, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
+				if (rename($zip, $tmp = _DIR_TMP.basename($zip))) {
+					echo $ajouter_documents($valables, $tmp, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
 	// a tout de suite en joindre4, joindre5, ou joindre6
-				exit;
+					exit;
+				}
 			}
 		}
 	}
@@ -208,11 +210,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-	$pos = strpos($path, '/zip/');
-	if (!$pos) {
-		$pos = strpos($path, '/zip_');
-	}
-	return $ajouter_documents($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
+	return $ajouter_documents($path, basename($path), $type, $id, $mode, $id_document, $actifs);
 }
 
 // Zip a deballer. 
