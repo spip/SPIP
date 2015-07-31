@@ -68,9 +68,11 @@ function spip_file_get_contents ($fichier) {
 		)
 			return $contenu;
 		else
-			return join('', @file($fichier));
+			// un cast car si le fichier n'existe pas @file renvoie false
+			return join('', (string)@file($fichier));
 	} else
-			return join('', @gzfile($fichier));
+			// un cast car si le fichier n'existe pas @file renvoie false
+			return join('', (string)@gzfile($fichier));
 }
 
 // options = array(
