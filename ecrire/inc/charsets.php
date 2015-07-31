@@ -659,7 +659,14 @@ function caractere_utf_8($num) {
 	return '';
 }
 
-// http://doc.spip.org/@unicode_to_utf_8
+/**
+ * Convertit un texte unicode en utf-8
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function unicode_to_utf_8($texte) {
 
 	// 1. Entites &#128; et suivantes
@@ -684,8 +691,14 @@ function unicode_to_utf_8($texte) {
 
 }
 
-// convertit les &#264; en \u0108
-// http://doc.spip.org/@unicode_to_javascript
+/**
+ * Convertit les unicode &#264; en javascript \u0108
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function unicode_to_javascript($texte) {
 	$vu = array();
 	while (preg_match(',&#0*([0-9]+);,S', $texte, $regs) AND !isset($vu[$regs[1]])) {
@@ -697,15 +710,28 @@ function unicode_to_javascript($texte) {
 	return $texte;
 }
 
-// convertit les %uxxxx (envoyes par javascript)
-// http://doc.spip.org/@javascript_to_unicode
+/**
+ * Convertit les %uxxxx (envoyés par javascript) en &#yyy unicode
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function javascript_to_unicode ($texte) {
 	while (preg_match(",%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F]),", $texte, $regs))
 		$texte = str_replace($regs[0],"&#".hexdec($regs[1]).";", $texte);
 	return $texte;
 }
-// convertit les %E9 (envoyes par le browser) en chaine du charset du site (binaire)
-// http://doc.spip.org/@javascript_to_binary
+
+/**
+ * Convertit les %E9 (envoyés par le browser) en chaîne du charset du site (binaire)
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function javascript_to_binary ($texte) {
 	while (preg_match(",%([0-9A-F][0-9A-F]),", $texte, $regs))
 		$texte = str_replace($regs[0],chr(hexdec($regs[1])), $texte);
@@ -769,16 +795,31 @@ function translitteration_chiffree($car) {
 }
 
 
-// Reconnaitre le BOM utf-8 (0xEFBBBF)
-// http://doc.spip.org/@bom_utf8
+/**
+ * Reconnaitre le BOM utf-8 (0xEFBBBF)
+ *
+ * @param string $texte
+ *    Texte dont on vérifie la présence du BOM
+ * @return bool
+ *    true s'il a un BOM
+**/
 function bom_utf8($texte) {
 	return (substr($texte, 0,3) == chr(0xEF).chr(0xBB).chr(0xBF));
 }
-// Verifie qu'un document est en utf-8 valide
-// http://us2.php.net/manual/fr/function.mb-detect-encoding.php#50087
-// http://w3.org/International/questions/qa-forms-utf-8.html
-// note: preg_replace permet de contourner un "stack overflow" sur PCRE
-// http://doc.spip.org/@is_utf8
+
+/**
+ * Vérifie qu'une chaîne est en utf-8 valide
+ * 
+ * Note: preg_replace permet de contourner un "stack overflow" sur PCRE
+ * 
+ * @link http://us2.php.net/manual/fr/function.mb-detect-encoding.php#50087
+ * @link http://w3.org/International/questions/qa-forms-utf-8.html
+ * 
+ * @param string $string
+ *     Texte dont on vérifie qu'il est de l'utf-8
+ * @return bool
+ *     true si c'est le cas
+**/
 function is_utf8($string) {
 	return !strlen(
 	preg_replace(
@@ -793,7 +834,15 @@ function is_utf8($string) {
 	. ',sS',
 	'', $string));
 }
-// http://doc.spip.org/@is_ascii
+
+/**
+ * Vérifie qu'une chaîne est en ascii valide
+ * 
+ * @param string $string
+ *     Texte dont on vérifie qu'il est de l'ascii
+ * @return bool
+ *     true si c'est le cas
+**/
 function is_ascii($string) {
 	return !strlen(
 	preg_replace(
@@ -855,7 +904,21 @@ function transcoder_page($texte, $headers='') {
 //
 // Gerer les outils mb_string
 //
-// http://doc.spip.org/@spip_substr
+
+/**
+ * Coupe un texte selon substr()
+ *
+ * Coupe une chaîne en utilisant les outils mb* lorsque le site est en utf8
+ *
+ * @link http://fr.php.net/manual/fr/function.mb-substr.php
+ * @link http://www.php.net/manual/fr/function.substr.php
+ * 
+ * @param string $c         Le texte
+ * @param int $start        Début
+ * @param null|int $length  Longueur ou fin
+ * @return string
+ *     Le texte coupé
+**/
 function spip_substr($c, $start=0, $length = NULL) {
 	// Si ce n'est pas utf-8, utiliser substr
 	if ($GLOBALS['meta']['charset'] != 'utf-8') {
@@ -877,8 +940,21 @@ function spip_substr($c, $start=0, $length = NULL) {
 	return spip_substr_manuelle($c, $start, $length);
 }
 
-// version manuelle de substr utf8, pour php vieux et/ou mal installe
-// http://doc.spip.org/@spip_substr_manuelle
+
+/**
+ * Coupe un texte comme mb_substr()
+ *
+ * Version manuelle de substr utf8, pour php vieux et/ou mal installe
+ *
+ * @link http://fr.php.net/manual/fr/function.mb-substr.php
+ * @used-by spip_substr()
+ * 
+ * @param string $c         Le texte
+ * @param int $start        Début
+ * @param null|int $length  Longueur ou fin
+ * @return string
+ *     Le texte coupé
+**/
 function spip_substr_manuelle($c, $start, $length = NULL) {
 
 	// Cas pathologique
@@ -910,9 +986,14 @@ function spip_substr_manuelle($c, $start, $length = NULL) {
 }
 
 /**
- * version utf-8 d'ucfirst
+ * Rend majuscule le premier caractère d'une chaîne utf-8
+ * 
+ * Version utf-8 d'ucfirst
+ * 
  * @param string $c
- * @return string $c La chaine avec une majuscule sur le premier mot 
+ *     La chaîne à transformer
+ * @return string
+ *     La chaîne avec une majuscule sur le premier mot 
  */
 function spip_ucfirst($c){
 	// Si ce n'est pas utf-8, utiliser ucfirst 
@@ -926,7 +1007,16 @@ function spip_ucfirst($c){
 	return $lettre1.spip_substr($c,1);
 }
 
-// http://doc.spip.org/@spip_strlen
+/**
+ * Retourne la longueur d'une chaîne utf-8
+ * 
+ * Version utf-8 de strlen
+ * 
+ * @param string $c
+ *     La chaîne à compter
+ * @return int
+ *     Longueur de la chaîne
+ */
 function spip_strlen($c) {
 	// On transforme les sauts de ligne pour ne pas compter deux caractères
 	$c = str_replace("\r\n", "\n", $c);
