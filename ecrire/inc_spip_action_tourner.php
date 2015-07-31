@@ -203,7 +203,7 @@ function inserer_vignette_base($image, $vignette) {
 	else if ($type == "1") $format = 3;
 	else return;
 
-	$vignette = str_replace('../', '', $vignette);
+	$vignette = str_replace(_DIR_RACINE, '', $vignette);
 
 	spip_log("creation vignette($image) -> $vignette");
 

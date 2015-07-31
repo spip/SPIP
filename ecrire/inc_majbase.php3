@@ -368,7 +368,6 @@ function maj_base() {
 				$num_img = $match[1];
 				$fichier = _DIR_IMG . $fichier;
 				$taille = @filesize($fichier);
-				$fichier = substr('../', '', $fichier);
 				$id_document = spip_abstract_insert("spip_documents", 
 							   "(titre, id_type, fichier, mode, largeur, hauteur, taille)",
 							   "('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");

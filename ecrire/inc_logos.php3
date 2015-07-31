@@ -10,14 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
-	// _DIR_IMG contient deja le ../ dans ecrire (PREFIX1
-	//	if (ereg("^../",$nom))	$nom = substr($nom,3);
+
 	if (ereg("^" . _DIR_IMG, $nom)) {
 		$nom = substr($nom,strlen(_DIR_IMG));
 	}
@@ -31,13 +27,11 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
 	reset($formats);
 	while (list(, $format) = each($formats)) {
-		$d = _DIR_IMG . "$chemin$nom.$format";
-		if (@file_exists($d)){ 
-			return array(_DIR_IMG."$chemin", $nom, $format);
+		if (@file_exists(_DIR_IMG . "$chemin$nom.$format")){ 
+			return array((_DIR_IMG . $chemin), $nom, $format);
 		}
 	}
 }
-
 
 
 function decrire_logo($racine) {

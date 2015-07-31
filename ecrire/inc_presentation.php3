@@ -2314,7 +2314,7 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
-	if (strlen($adresse_site)<10) $adresse_site="../";
+	if (strlen($adresse_site)<10) _DIR_RACINE;
 
 	$link = new Link;
 	echo "\n<map name='map_layout'>";

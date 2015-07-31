@@ -58,13 +58,13 @@ function fichier_aide($lang_aide = '') {
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
 	// fichier local ?
-	if (@file_exists($fichier_aide = "../AIDE/aide-$lang_aide-aide.html")) {
+	if (@file_exists($fichier_aide = _DIR_RACINE . "AIDE/aide-$lang_aide-aide.html")) {
 		return array(spip_file_get_contents($fichier_aide), $lang_aide);
 	}
 
 	// fichier local ? si reduction ISO du code langue oc_prv_ni => oc
 	else if (ereg("(.*)_", $lang_aide, $regs)
-		AND (@file_exists($fichier_aide = "../AIDE/aide-".$regs[1]."-aide.html")))
+		AND (@file_exists($fichier_aide =  _DIR_RACINE . "AIDE/aide-".$regs[1]."-aide.html")))
 			return array(spip_file_get_contents($fichier_aide), $regs[1]);
 
 	// Aide internet
@@ -237,7 +237,7 @@ function help_img($regs) {
 	header("Content-Type: image/$ext");
 	if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
 		readfile($img);
-	} else if (@file_exists($img = '../AIDE/aide-'.$cache)) {
+	} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
 		readfile($img);
 	} else if ($help_server) {
 		include_ecrire('inc_distant');

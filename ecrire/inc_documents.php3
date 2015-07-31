@@ -75,7 +75,7 @@ function document_vu($id_document=0) {
 // de la vignette -> c'est a ca que sert la variable $portfolio
 function image_pattern($vignette) {
 	return "<img src='"
-			. (_DIR_RESTREINT ? '' : '../')
+			. _DIR_RACINE
 			. $vignette['fichier']."'
 			width='".$vignette['largeur']."'
 			height='".$vignette['hauteur']."'
@@ -93,8 +93,8 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 			$image = image_pattern($vignette);
 		} else {
-			$image = prive_lien_image_reduite ($vignette['largeur'],
-				$vignette['hauteur'], $vignette['fichier']);
+			include_ecrire("inc_logos");
+			$image = reduire_image_logo((_DIR_RACINE . $vignette['fichier']), 120, 110);
 		}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
@@ -507,16 +507,6 @@ function texte_upload_manuel($dir, $inclus = '') {
 	return $texte_upload;
 }
 
-
-//
-// Retourne le lien HTML vers l'image reduite (pour l'espace prive)
-//
-function prive_lien_image_reduite ($largeur_vignette, $hauteur_vignette, $fichier_vignette) {
-	global $connect_id_auteur;
-	include_ecrire("inc_logos");
-
-	return reduire_image_logo('../'.$fichier_vignette, 120, 110);
-}
 
 // Bloc d'edition de la taille du doc (pour embed)
 function afficher_formulaire_taille($document, $type_inclus='AUTO') {

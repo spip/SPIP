@@ -10,11 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define("_DIR_LOGIN", _DIR_RESTREINT ? "" : "../");
 define("_DIR_LOGGED_IN",   _DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS);
 
 //
