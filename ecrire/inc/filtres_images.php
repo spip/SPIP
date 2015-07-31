@@ -108,11 +108,10 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
-	if (_request('var_mode')!=='images') {
 	if (@file_exists($fichier_dest) AND 
 		(($date_src = @filemtime($fichier)) < @filemtime($fichier_dest))) {
 		$creer = false;
-	}}
+	}
 	
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
