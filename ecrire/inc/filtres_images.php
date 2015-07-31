@@ -2217,10 +2217,17 @@ function rtl_visuel($texte, $rtl_global) {
 		$mot = preg_replace(",٨,u", "^٨^", $mot);
 		$mot = preg_replace(",٩,u", "^٩^", $mot);
 
+		
+		// symboles speciaux
+				
+		$mot = preg_replace(",\^ّ,u", "ّ^", $mot);
+		$mot = preg_replace(",\^ْ,u", "ْ^", $mot);
+	
 
 		// Ligatures
 		$mot = preg_replace(",لا,u", "ﻻ", $mot);
 		$mot = preg_replace(",لأ,u", "ﻷ", $mot);
+		
 		
 		
 		foreach ($arabic_letters as $a_l) {
