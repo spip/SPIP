@@ -22,7 +22,7 @@
 			</label>
 ][
 <div>
-[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|silogoauteur)"
+[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|cherche_logo{aut,on}|array_shift)"
 	width="75"
 	alt="[(#ENV{login_alt})]" /></div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />

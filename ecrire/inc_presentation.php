@@ -798,6 +798,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 		}
 		
+		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+		if ($voir_logo) include_ecrire("inc_logos");
 
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
@@ -856,17 +859,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'$descriptif$dir_lang style=\"display:block;\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos");
-				$logo = decrire_logo("arton$id_article");
-				if ($logo) {	
-					$fichier = $logo[0];
-					$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>";
-					$s .= reduire_image_logo(_DIR_IMG.$fichier, 26, 20);
-					$s .= "</div>";
-				}
-			}
-			
+			if ($voir_logo)	$s .= baliser_logo("art", $id_article, 26, 20);
 			$s .= typo($titre);
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
@@ -1165,6 +1158,10 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 		$table = '';
 		$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
+		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+		if ($voir_logo) include_ecrire("inc_logos");
+
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
 
@@ -1181,17 +1178,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$s = "<div>";
 			$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos");
-				$logo = decrire_logo("breveon$id_breve");
-				if ($logo) {
-					$fichier = $logo[0];
-					$s .= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>";
-					$s .= reduire_image_logo(_DIR_IMG.$fichier, 26, 20);
-					$s .= "</div>";
-				}
-			}
-
+			if ($voir_logo) $s .= baliser_logo("breve", $id_breve, 26, 20);
 			$s .= typo($titre);
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
@@ -1584,6 +1571,10 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	
 	if ($spip_display == 4) echo "<ul>";
  
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+	if ($voir_logo) include_ecrire("inc_logos");
+
  	while($row = spip_fetch_array($request)) {
 		$id_forum=$row['id_forum'];
 		$id_parent=$row['id_parent'];
@@ -1632,19 +1623,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if ($spip_display != 4) echo "\n<td width=100% valign='top'>";
 
-			$titre_boite = $titre;
-			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos");
-				$logo_auteur = decrire_logo("auton$id_auteur");
-				if ($logo_auteur) {
-					$fichier = $logo_auteur[0];
-	
-					$s = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;'>";
-					$s .= reduire_image_logo(_DIR_IMG.$fichier, 48, 48);
-					$s .= "</div>";
-					$titre_boite = $s.typo($titre_boite);
-				}
-			}
+			if ($id_auteur AND $voir_logo) {
+				$titre_boite = baliser_logo("aut", $id_auteur, 48, 48,"position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;") .typo($titre);
+			} else $titre_boite = $titre;
 		
 			if ($spip_display == 4) {
 				echo "<li>".typo($titre)."<br>";

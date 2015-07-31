@@ -300,13 +300,15 @@ if ($spip_display != 4) {
 	
 	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
 
-
 	if ($spip_display != 1) {
 		include_ecrire('inc_logos');
-		if ($logo = decrire_logo("rubon0")) {
-			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='" . generer_url_ecrire("naviguer","") . "'>";
-			echo reduire_image_logo(_DIR_IMG.$logo[0], 170);
-			echo "</a></div>";
+		if ($logo = baliser_logo("rub", 0, 170, 170,
+					 "text-align:center; margin-bottom: 5px;")) {
+		  echo "<a href='",
+		    generer_url_ecrire("naviguer",""),
+		    "'>",
+		    $logo,
+		    "</a>";
 		}
 	}
 	echo "<div class='verdana1'>";

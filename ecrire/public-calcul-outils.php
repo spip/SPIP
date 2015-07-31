@@ -82,17 +82,16 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
 	);
 	$type = $table_logos[$type];
 	$nom = strtolower($onoff);
-	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+
 	while (1) {
-		$on = cherche_image_nommee($type . $nom . intval($id));
+	  $on = cherche_logo($id, $type, $nom);
 		if ($on) {
 			if ($ff)
-			  return  (array('', "$on[1].$on[2]"));
+			  return  (array('', "$on[2].$on[3]"));
 			else {
 				$off = ($onoff != 'ON') ? '' :
-					cherche_image_nommee($type . 'off' . $id);
-				return array ("$on[0]$on[1].$on[2]",
-					      ($off ? ("$off[0]$off[1].$off[2]") : ''));
+				  cherche_logo($id, $type, 'off');
+				return array ($on[0], ($off ? $off[0] : ''));
 			}
 		}
 		else if ($id_rubrique) {

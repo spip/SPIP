@@ -16,6 +16,7 @@ include_local(_FILE_CONNECT);
 include_ecrire("inc_meta");
 include_ecrire("inc_session");
 include_ecrire("inc_filtres");
+include_ecrire("inc_logos");
 
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');
@@ -165,17 +166,6 @@ function login_pour_tous($login, $cible, $action) {
 function filtre_rester_connecte($prefs) {
 	$prefs = unserialize(stripslashes($prefs));
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
-}
-
-// made in cherche_image_nommee. A partager.
-
-function silogoauteur($id_auteur, $formats = array ('gif', 'jpg', 'png')) {
-	reset($formats);
-	while (list(, $format) = each($formats)) {
-		$d = _DIR_IMG . "auton$id_auteur.$format";
-		if (@file_exists($d)) return $d;
-	}
-	return  '';
 }
 
 ?>
