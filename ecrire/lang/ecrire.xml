@@ -175,7 +175,7 @@
 		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="792" traduits="791" relire="0" modifs="1" nouveaux="0" pourcent="99.87">
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_ni_mis" total="792" traduits="792" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_prv" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=oc_prv" total="792" traduits="471" relire="0" modifs="39" nouveaux="282" pourcent="59.47">
