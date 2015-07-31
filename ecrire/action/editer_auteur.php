@@ -151,23 +151,8 @@ function auteurs_set($id_auteur, $set = null) {
  * @return string
  */
 function auteur_associer($id_auteur,$objets, $qualif = null){
-	foreach($objets as $objet => $id_objets){
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
-		foreach($id_objets as $id_objet) {
-			if ($id_objet=intval($id_objet)
-				AND !sql_getfetsel(
-								'id_auteur',
-								"spip_auteurs_liens",
-								array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur))))
-			{
-					sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
-			}
-		}
-	}
-	if ($qualif)
-		auteur_qualifier($id_auteur, $objets, $qualif);
-
-	return ''; // pas d'erreur
+	include_spip('action/editer_liens');
+	return objet_associer(array('auteur'=>$id_auteur), $objets, $qualif);
 }
 
 
@@ -193,24 +178,8 @@ function auteur_referent($id_auteur,$c){
  * @return string
  */
 function auteur_dissocier($id_auteur,$objets){
-	$retire = array();
-	foreach($objets as $objet => $id_objets){
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
-		foreach($id_objets as $id_objet) {
-			$where = array();
-			if ($id_auteur AND $id_auteur!=='*')
-				$where[] = "id_auteur=".intval($id_auteur);
-			if ($objet AND $objet!=='*')
-				$where[] = "objet=".sql_quote($objet);
-			if ($id_objet AND $id_objet!=='*')
-				$where[] = "id_objet=".intval($id_objet);
-			sql_delete("spip_auteurs_liens", $where);
-			$retire[] = array('source'=>array('auteur'=>$id_auteur),'lien'=>array($objet=>$id_objet),'type'=>$objet,'id'=>$id_objet);
-		}
-	}
-	pipeline('trig_supprimer_objets_lies',$retire);
-
-	return ''; // pas d'erreur
+	include_spip('action/editer_liens');
+	return objet_dissocier(array('auteur'=>$id_auteur), $objets);
 }
 
 /**
@@ -226,20 +195,8 @@ function auteur_dissocier($id_auteur,$objets){
  * @param array $qualif
  */
 function auteur_qualifier($id_auteur,$objets,$qualif){
-	foreach($objets as $objet => $id_objets){
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
-		foreach($id_objets as $id_objet) {
-			$where = array();
-			if ($id_auteur AND $id_auteur!=='*')
-				$where[] = "id_auteur=".intval($id_auteur);
-			if ($objet AND $objet!=='*')
-				$where[] = "objet=".sql_quote($objet);
-			if ($id_objet AND $id_objet!=='*')
-				$where[] = "id_objet=".intval($id_objet);
-			if ($c)
-				sql_updateq("spip_auteurs_liens",$qualif,$where);
-		}
-	}
+	include_spip('action/editer_liens');
+	return objet_dissocier(array('auteur'=>$id_auteur), $objets, $qualif);
 }
 
 
