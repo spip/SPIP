@@ -686,14 +686,14 @@ function maj_1_956()
 {
 	## repasser la fin de la mise a jour vers 1.938 qui contenait une erreur'
 	## supprimer l'autoincrement avant de supprimer la PRIMARY KEY
-	spip_query("ALTER TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL "); 
-	spip_query("ALTER TABLE spip_types_documents DROP PRIMARY KEY");
+	sql_alter("TABLE spip_types_documents CHANGE `id_type` `id_type` BIGINT( 21 ) NOT NULL "); 
+	sql_alter("TABLE spip_types_documents DROP PRIMARY KEY");
 
-	spip_query("ALTER TABLE spip_types_documents DROP `id_type`");
-	spip_query("ALTER TABLE spip_types_documents DROP INDEX `extension`");
+	sql_alter("TABLE spip_types_documents DROP `id_type`");
+	sql_alter("TABLE spip_types_documents DROP INDEX `extension`");
 
 	## recreer la PRIMARY KEY sur spip_types_documents.extension
-	spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (`extension`)");
+	sql_alter("TABLE spip_types_documents ADD PRIMARY KEY (`extension`)");
 }
 
 // PG veut une valeur par defaut a l'insertion

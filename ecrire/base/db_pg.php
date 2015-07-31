@@ -112,16 +112,70 @@ function spip_pg_query($query, $serveur='')
 // http://doc.spip.org/@spip_pg_alter
 function spip_pg_alter($query, $serveur='') {
 
-	if (!preg_match('/^\s*TABLE\s+(\w+)\s+(ADD|DROP)\s+(UNIQUE\s*|\s+)(INDEX|\w*\s*KEY)\s*(\w+)(.*)$/', $query, $r))
-		return spip_pg_query("ALTER $query", $serveur);
-
-	if ($r[2]=='DROP')
-		return spip_pg_query("DROP INDEX " . $r[1] .'_' . $r[6], $serveur);
-	else {
-		$q = "CREATE INDEX " . $r[3] . $r[5] . ' ON ' . $r[1] . $r[6];
-		return spip_pg_query($q,  $serveur);
+	if (!preg_match('/^\s*(IGNORE\s*)?TABLE\s+(\w+)\s+(ADD|DROP|CHANGE)\s*(.*)$/i', $query, $r)) {
+	  spip_log("$query incompris", 'pg');
+	} else {
+	  if ($r[1]) spip_log("j'ignore IGNORE dans $query", 'pg');
+	  $f = 'spip_pg_alter_' . strtolower($r[3]);
+	  if (function_exists($f))
+	    $f($r[2], $r[4], $serveur);
+	  else spip_log("$query non prevu", 'pg');
 	}
 }
+	      
+function spip_pg_alter_change($table, $arg, $serveur='')
+{
+  spip_log("spip_pg_alter_change($table, $arg, $serveur");
+	if (!preg_match('/^`?(\w+)`?\s+`?(\w+)`?\s+(.*?)\s*(DEFAULT .*?)?(NOT\s+NULL)?$/i',$arg, $r)) {
+	  spip_log("alter change: $arg  incompris", 'pg');
+	} else {
+	  list(,$old, $new, $type, $default, $null) = $r;
+	  $actions = array("ALTER $old TYPE " . mysql2pg_type($type));
+	  if ($null)
+	    $actions[]= "ALTER $old SET NOT NULL";
+	  else
+	    $actions[]= "ALTER $old DROP NOT NULL";
+
+	  if ($default)
+	    $actions[]= "ALTER $old SET $default";
+	  else
+	    $actions[]= "ALTER $old DROP DEFAULT";
+
+	  spip_pg_query("ALTER TABLE $table " . join(', ', $actions));
+
+	  if ($old != $new)
+	    spip_pg_query("ALTER TABLE $table RENAME $old TO $new", $serveur);
+	}
+}
+
+function spip_pg_alter_add($table, $arg, $serveur='') {
+	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?(.*)$/', $arg, $r))
+	  spip_log("drop $arg  incompris", 'pg');
+	else {
+	    if (!$r[1])
+	      return spip_pg_query("ALTER TABLE $table ADD " . $r[2] . ' ' . mysql2pg_type($r[3]),  $serveur);
+	    elseif ($r[1][0] = 'P')
+	      return spip_pg_query("ALTER TABLE $table ADD PRIMARY KEY " . $r[2], $serveur);
+	    else {
+		return spip_pg_query("CREATE INDEX " . $table . '_' . $r[2] . "ON $table",  $serveur);
+	    }
+	}
+}
+
+function spip_pg_alter_drop($table, $arg, $serveur='') {
+	if (!preg_match('/^(INDEX|KEY|PRIMARY\s+KEY|)\s*`?(\w+)`?/', $arg, $r))
+	  spip_log("alter drop: $arg  incompris", 'pg');
+	else {
+	    if (!$r[1])
+	      return spip_pg_query("ALTER TABLE $table DROP " . $r[2],  $serveur);
+	    elseif ($r[1][0] = 'P')
+	      return spip_pg_query("ALTER TABLE $table DROP CONSTRAINT PRIMARY", $serveur);
+	    else {
+		return spip_pg_query("DROP INDEX " . $table . '_' . $r[2],  $serveur);
+	    }
+	}
+}
+
 
 // http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur=''){
@@ -662,7 +716,7 @@ function calcul_pg_in($val, $valeurs, $not='') {
 // champs: champ => type
 // cles: type-de-cle => champ(s)
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// Le nom des caches doit etre inferieur a 64 caracteres
+// Le nom des index est prefixe par celui de la table pour eviter les conflits
 // http://doc.spip.org/@spip_pg_create
 function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
 
@@ -756,7 +810,7 @@ function spip_pg_multi ($objet, $lang) {
 // http://doc.spip.org/@mysql2pg_type
 function mysql2pg_type($v)
 {
-  return     preg_replace('/bigint\s*[(]\d+[)]/i', 'bigint', 
+  return     preg_replace('/bigint\s*[(]\s*\d+\s*[)]/i', 'bigint', 
 	preg_replace("/longtext/i", 'text',
 		str_replace("mediumtext", 'text',
 		preg_replace("/tinytext/i", 'text',
