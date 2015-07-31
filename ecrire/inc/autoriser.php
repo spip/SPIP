@@ -13,7 +13,18 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+# faut-il tracer les autorisations dans tmp/spip.log ?
 define ('_DEBUG_AUTORISER', false);
+
+
+// Constantes surchargeables, cf. plugin autorite
+// false pour ignorer la notion d'admin restreint # todo: une option a activer
+define('_ADMINS_RESTREINTS', true);
+// statut par defaut a la creation
+define('_STATUT_AUTEUR_CREATION', '1comite');
+// statuts associables a des rubriques (separes par des virgules)
+define('_STATUT_AUTEUR_RUBRIQUE', _ADMINS_RESTREINTS ? '0minirezo' : '');
+
 
 // surcharge possible de autoriser(), sinon autoriser_dist()
 if (!function_exists('autoriser')) {
@@ -50,7 +61,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Admins restreints, on construit ici (pas generique mais...)
 	// le tableau de toutes leurs rubriques (y compris les sous-rubriques)
-	if (is_array($qui))
+	if (_ADMINS_RESTREINTS AND is_array($qui))
 		$qui['restreint'] = liste_rubriques_auteur($qui['id_auteur']);
 
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
