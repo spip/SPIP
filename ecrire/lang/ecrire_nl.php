@@ -49,8 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'EEN DEELNEMER TOEVOEGEN:',
 	'bouton_annonce' => 'AANKONDIGING',
 	'bouton_annuler' => 'Annuleren',
-	'bouton_cache_activer' => 'Réactiver le cache', # NEW
-	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
+	'bouton_cache_activer' => 'Buffer (cache) reactiveren',
+	'bouton_cache_desactiver' => 'Buffer (cache) tijdelijk uitschakelen',
 	'bouton_checkbox_envoi_message' => 'mogelijkheid om een bericht te versturen',
 	'bouton_checkbox_indiquer_site' => 'verplicht een website opgeven',
 	'bouton_checkbox_signature_unique_email' => 'een enkele handtekening per e-mail adres',
@@ -159,7 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_url_2' => 'Adres van de site (URL)',
 	'erreur_connect_deja_existant' => 'Een server met die naam bestaat al',
 	'erreur_nom_connect_incorrect' => 'Deze server naam is niet toegestaan',
-	'erreur_plugin_desinstalation_echouee' => 'Het verwijderen van de plugin is mislukt. Echter, kunt u deze uitschakelen.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'Het verwijderen van de plugin is mislukt. Echter, kunt u deze uitschakelen.',
 	'erreur_plugin_fichier_absent' => 'Bestand ontbreekt',
 	'erreur_plugin_fichier_def_absent' => 'Definitiebestand ontbreekt',
 	'erreur_plugin_nom_fonction_interdit' => 'Functienaam verboden',
@@ -283,7 +283,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_barre_outils' => 'met zijn werktuigen staaf ?',
 	'info_base_installee' => 'De structuur van je databank is geïnstalleerd.',
 	'info_bio' => 'biografie',
-	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
+	'info_cache_desactive' => 'De buffer (cache) is tijdelijk uitgeschakeld.',
 	'info_chapeau' => 'Kop',
 	'info_chapeau_2' => 'Kop :',
 	'info_chemin_acces_1' => 'Opties : <b>Toegang tot het adresboek</b>',
@@ -305,7 +305,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_conflit_edition_votre_version' => 'Uw versie :',
 	'info_connexion_base' => 'Proef van aansluiten aan de basis',
 	'info_connexion_base_donnee' => 'Aansluiten aan uw database',
-	'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt. </b><p> U kunt doorgaan naar de volgende stap.</p>', # MODIF
+	'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt. </b><p> U kunt doorgaan naar de volgende stap.</p>',
 	'info_connexion_mysql' => 'Uw aansluiten SQL',
 	'info_connexion_ok' => 'De verbinding is geslaagd.',
 	'info_contact' => 'Contact',
@@ -416,7 +416,7 @@ gewiste auteurs met een grijze.',
 	'info_nb_visiteurs' => '@nb@ bezoekers',
 	'info_nom' => 'Naam',
 	'info_nom_destinataire' => 'Naam van de bestemmeling',
-	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
+	'info_nom_pas_conforme' => 'html bakens zijn niet toegelaten',
 	'info_nom_site' => 'naam van je site',
 	'info_nombre_articles' => '@nb_articles@ artikels,',
 	'info_nombre_partcipants' => 'DEELNEMERS AAN DE DISCUSSIE :',
@@ -592,7 +592,7 @@ een kleur geeft hun status aan :',
 	'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  «volgende» om de installatie te beginnen.',
 	'install_select_type_db' => 'Het basissoort gegevens aangeven:',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi', # NEW
+	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
@@ -748,7 +748,7 @@ een kleur geeft hun status aan :',
 	'plugin_info_plugins_dist_1' => 'De onderstaande plugins zijn geladen en geactiveerd in de directory @plugins_dist@.', # extensies zijn speciaale plugins geleeverd met spip-core om een gebruikbare SPIP pakket te bouwen
 	'plugin_info_plugins_dist_2' => 'Ze zijn niet te deactiveren.',
 	'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
-	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
+	'plugin_info_upgrade_ok' => ' Geslaagde update',
 	'plugin_librairies_installees' => 'Geplaatste boekhandels',
 	'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
 	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.',
@@ -785,7 +785,7 @@ een kleur geeft hun status aan :',
 
 	// Q
 	'queue_executer_maintenant' => 'Nu uitvoeren',
-	'queue_info_purger' => 'U kunt alle werken in afwachting verwijderen en het lijst van periodieke werken herstarten', # MODIF
+	'queue_info_purger' => 'U kunt alle werken in afwachting verwijderen en het lijst van periodieke werken herstarten',
 	'queue_nb_jobs_in_queue' => '@nb@ wachtrij',
 	'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
 	'queue_no_job_in_queue' => 'Geen werk in de wacht',
@@ -798,12 +798,12 @@ een kleur geeft hun status aan :',
 
 	// S
 	'sans_heure' => 'zonder huur',
-	'statut_admin_restreint' => '(beperkte toegang)', # MODIF
-	'statut_webmestre' => 'webmestre', # NEW
+	'statut_admin_restreint' => 'beperkte beheerder',
+	'statut_webmestre' => 'webmaster',
 
 	// T
-	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Taak CRON @function@ (alle @nb@ s)', # MODIF
+	'tache_cron_asap' => 'CRON taak @function@ (ASAP)',
+	'tache_cron_secondes' => 'CRON taak @function@ (alle @nb@ s)',
 	'taille_cache_image' => 'De beelden door SPIP automatisch aangemaakt (icoontjes van documenten, grafisch weergegeven titels, wiskundige functies in TeX formaat...) nemen in de map @dir@ een totale plaats in van  @taille@.',
 	'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 	'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
