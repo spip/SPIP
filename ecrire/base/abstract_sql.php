@@ -596,6 +596,12 @@ function description_table($nom){
 	 qui renverra la description theorique sinon
 	 car sinon on va se comporter differement selon que la table est declaree
 	 ou non
+	 */
+	if (!$trouver_table) $trouver_table = charger_fonction('trouver_table', 'base');
+	if ($desc = $trouver_table($nom))
+		return $desc;
+
+	// sauf a l'installation :
 	include_spip('base/serial');
 	if (isset($tables_principales[$nom]))
 		return $tables_principales[$nom];
@@ -604,10 +610,7 @@ function description_table($nom){
 	if (isset($tables_auxiliaires[$nom]))
 		return $tables_auxiliaires[$nom];
 
-	*/
-
-	if (!$trouver_table) $trouver_table = charger_fonction('trouver_table', 'base');
-	return $trouver_table($nom);
+	return false;
 }
 
 
