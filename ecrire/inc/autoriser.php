@@ -130,7 +130,7 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 		);
 }
 
-// Autoriser a creer un article dans la rubrique $id
+// Autoriser a creer une rubrique dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_creerrubriquedans_dist
 function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt) {
 	return
