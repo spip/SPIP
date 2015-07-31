@@ -14,6 +14,7 @@
 <BOUCLE_sites(SITES){id_rubrique}></BOUCLE_sites><div>#TOTAL_BOUCLE <:info_sites:></div></B_sites>
 <BOUCLE_docs(DOCUMENTS){id_rubrique}> </BOUCLE_docs><div>#TOTAL_BOUCLE <:info_documents:></div></B_docs>
 <BOUCLE_rubs(RUBRIQUES){id_parent}> </BOUCLE_rubs><div>#TOTAL_BOUCLE <:info_rubriques:></div></B_rubs>
+[<p class='forums'>(#ENV{n_forums,''}|?{' '})[(#VAL{icone_suivi_forum}|_T{#ARRAY{nb_forums,#ENV{n_forums}}})]</p>]
 </div>
 
 
