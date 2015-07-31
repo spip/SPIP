@@ -14,6 +14,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/objets');
-$GLOBALS['tables_auxiliaires'] = lister_tables_auxiliaires();
+lister_tables_objets_sql();
 
 ?>

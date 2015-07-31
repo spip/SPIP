@@ -303,6 +303,12 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			array('tables_jointures'=>array('id_auteur'=>'auteurs_liens'))
 		);
 
+		// avant d'appeller les pipeline qui peuvent generer une reentrance a l'install
+		// initialiser la signature
+		$md5 = md5(serialize($infos_tables));
+
+		$GLOBALS['tables_principales'] = pipeline('declarer_tables_principales',$GLOBALS['tables_principales']);
+		$GLOBALS['tables_auxiliaires'] = pipeline('declarer_tables_auxiliaires',$GLOBALS['tables_auxiliaires']);
 		$infos_tables =	pipeline('declarer_tables_objets_sql',$infos_tables);
 
 		// completer les informations manquantes ou implicites
@@ -406,7 +412,6 @@ function base_serial(&$tables_principales){
 	/// Attention: mes_fonctions peut avoir deja defini cette variable
 	/// il faut donc rajouter, mais pas reinitialiser
 	$tables_principales['spip_jobs'] = array('field' => &$spip_jobs, 'key' => &$spip_jobs_key);
-	$tables_principales = pipeline('declarer_tables_principales',$tables_principales);
 }
 
 
@@ -467,7 +472,6 @@ $tables_auxiliaires['spip_jobs_liens'] = array(
 	'field' => &$spip_jobs_liens,
 	'key' => &$spip_jobs_liens_key);
 
-	$tables_auxiliaires = pipeline('declarer_tables_auxiliaires',$tables_auxiliaires);
 }
 
 
