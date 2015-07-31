@@ -64,13 +64,6 @@ function traiter_raccourci_lien_atts($texte) {
 }
 
 
-// Les URLs brutes sont converties en <a href='url'>url</a>
-// http://doc.spip.org/@traiter_raccourci_liens
-function traiter_raccourci_liens($t) {
-	return $t;
-}
-
-
 define('_RACCOURCI_CHAPO', '/^(\W*)(\W*)(\w*\d+([?#].*)?)$/');
 /**
  * Fonction pour les champs virtuels de redirection qui peut etre:
