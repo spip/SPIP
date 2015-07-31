@@ -1429,7 +1429,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_DIR_PLUGINS')) define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 	// le nom du repertoire des extensions/ permanentes du core, toujours actives
-	if (!defined('_DIR_EXTENSIONS')) define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
+	if (!defined('_DIR_EXTENSIONS')) define('_DIR_EXTENSIONS', _DIR_RACINE . "plugins-dist/");
 
 	// le nom du repertoire des librairies
 	if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . "lib/");
@@ -1503,7 +1503,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Le charset par defaut lors de l'installation
 	if (!defined('_DEFAULT_CHARSET')) define('_DEFAULT_CHARSET', 'utf-8');
 	if (!defined('_ROOT_PLUGINS')) define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
-	if (!defined('_ROOT_EXTENSIONS')) define('_ROOT_EXTENSIONS', _ROOT_RACINE . "extensions/");
+	if (!defined('_ROOT_EXTENSIONS')) define('_ROOT_EXTENSIONS', _ROOT_RACINE . "plugins-dist/");
 
 	// La taille des Log
 	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
