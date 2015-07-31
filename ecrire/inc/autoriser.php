@@ -258,21 +258,14 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 		$vu = false;
 		$interdit = false;
 
-		$s = sql_select("*", "spip_documents_liens", "id_document=".sql_quote($id));
+		$s = sql_select("id_objet,objet", "spip_documents_liens", "id_document=".sql_quote($id));
 		while ($t = sql_fetch($s)) {
-			// chercher la cle non vide
-			foreach ($t as $k=>$val) {
-				if ($val
-				AND $k != 'id_document'
-				AND substr($k,0,3) == 'id_') {
-					if (autoriser('modifier', substr($k,3), $val, $qui, $opt)) {
-						$vu = true;
-					}
-					else {
-						$interdit = true;
-						break 2;
-					}
-				}
+			if (autoriser('modifier', $row['objet'], $row['id_objet'], $qui, $opt)) {
+				$vu = true;
+			}
+			else {
+				$interdit = true;
+				break;
 			}
 		}
 		$m[$id] = ($vu && !$interdit);
@@ -550,11 +543,13 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (in_array($qui['statut'], array('0minirezo', '1comite')))
 		return 'htaccess';
 
-	if (sql_countsel('spip_documents_liens AS rel_articles, spip_articles AS articles', "rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id") > 0
-	OR sql_countsel('spip_documents_liens AS rel_rubriques, spip_rubriques AS rubriques', "rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id") > 0
-	OR sql_countsel('spip_documents_liens AS rel_breves, spip_breves AS breves', "rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id") > 0)
-		return 'htaccess';
-	else return false;
+	foreach(array('article','rubrique','breve') as $objet){
+		$table_sql = table_objet_sql($objet);
+		$id_table = id_table_objet($objet);
+		if (sql_countsel('spip_documents_liens AS rel, $table_sql AS o', "rel.id_objet = articles.$id_table AND rel.objet='$objet' AND o.statut = 'publie' AND rel.id_document = $id") > 0)
+			return 'htaccess';
+	}
+	return false;
 }
 
 // Qui peut activer le debugueur ?

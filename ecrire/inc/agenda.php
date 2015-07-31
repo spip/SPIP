@@ -1405,7 +1405,7 @@ function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 // http://doc.spip.org/@quete_calendrier_interval_rubriques
 function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	
-  $result=sql_select('DISTINCT R.id_rubrique, titre, descriptif, date', 'spip_rubriques AS R, spip_documents_liens AS L', "statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_rubrique",'', "date");
+  $result=sql_select('DISTINCT R.id_rubrique, titre, descriptif, date', 'spip_rubriques AS R, spip_documents_liens AS L', "statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_objet AND L.objet='rubrique'",'', "date");
 	while($row=sql_fetch($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_rubrique'];

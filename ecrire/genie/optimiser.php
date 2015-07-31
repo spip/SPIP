@@ -296,9 +296,27 @@ function optimiser_base_disparus($attente = 86400) {
 	//
 	// Documents
 	//
-	# liens de documents avec des objets inexistants
-	# TODO
-
+	
+	# les liens des documents qui sont lies a un objet inexistant
+	$r = sql_select("DISTINCT objet","spip_documents_liens");
+	while ($t = sql_fetch($r)){
+		$type = $t['objet'];
+		$spip_table_objet = table_objet_sql($type);
+		$id_table_objet = id_table_objet($type);
+		$res = sql_select("L.id_document AS id,id_objet",
+			      "spip_documents_liens AS L
+			        LEFT JOIN $spip_table_objet AS O
+			          ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
+				"O.$id_table_objet IS NULL");
+		// sur une cle primaire composee, pas d'autres solutions que de virer un a un
+		while ($row = sql_fetch($sel)){
+			sql_delete("spip_documents_liens", array("id_document=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
+			spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table spip_documents_liens");
+		}
+	}
+	
+	// on ne nettoie volontairement pas automatiquement les documents orphelins
+	
 	//
 	// Messages prives
 	//

@@ -173,11 +173,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	// ces complications (et tant pis si la boucle n'a pas prevu de
 	// verification du statut de l'article)
 	if (!$boucle->modificateur['tout']
-	AND !$boucle->modificateur['criteres']['id_article']
-	AND !$boucle->modificateur['criteres']['id_breve']
-	AND !$boucle->modificateur['criteres']['id_rubrique']
-	AND !$boucle->modificateur['criteres']['id_forum']
-	AND !$boucle->modificateur['criteres']['id_document']
+	AND !$boucle->modificateur['criteres']['id_objet']
 	) {
 		# Espace avant LEFT JOIN indispensable pour insertion de AS
 		# a refaire plus proprement
@@ -186,13 +182,14 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_liens AS l
 			ON $id_table.id_document=l.id_document
 			LEFT JOIN spip_articles AS aa
-				ON l.id_article=aa.id_article
+				ON (l.id_objet=aa.id_article AND l.objet=\'article\')
 			LEFT JOIN spip_breves AS bb
-				ON l.id_breve=bb.id_breve
+				ON (l.id_objet=bb.id_breve AND l.objet=\'breve\')
 			LEFT JOIN spip_rubriques AS rr
-				ON l.id_rubrique=rr.id_rubrique
+				ON (l.id_objet=rr.id_rubrique AND l.objet=\'rubrique\')
 		";
-
+		$boucle->group[] = "$id_table.id_document";
+		
 		if ($GLOBALS['var_preview']) {
 			array_unshift($boucle->where,"\"(aa.statut IN ('publie','prop') OR bb.statut  IN ('publie','prop') OR rr.statut IN ('publie','prive'))\"");
 		} else {

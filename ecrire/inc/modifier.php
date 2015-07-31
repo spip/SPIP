@@ -121,8 +121,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 
 		// marquer les documents vus dans le texte si il y a lieu
 		include_spip('base/auxiliaires');
-		if (isset($GLOBALS['tables_auxiliaires']["spip_documents_liens"]["field"][$id_table_objet]))
-			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
+		marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
 
 		// Notifications, gestion des revisions...
 		// en standard, appelle |nouvelle_revision ci-dessous
@@ -155,7 +154,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 }
 
 // http://doc.spip.org/@marquer_doublons_documents
-function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
+function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
 	if (!isset($champs['texte']) AND !isset($champs['chapo'])) return;
 	if (!$desc) $desc = $trouver_table($table_objet, $serveur);
 	$load = "";
@@ -174,14 +173,14 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$sp
 	include_spip('base/abstract_sql');
 	$GLOBALS['doublons_documents_inclus'] = array();
 	traiter_modeles($champs['chapo'].$champs['texte'],true); // detecter les doublons
-	sql_updateq("spip_documents_liens", array("vu" => 'non'), "$id_table_objet=$id");
+	sql_updateq("spip_documents_liens", array("vu" => 'non'), "id_objet=$id AND objet=".sql_quote($type));
 	if (count($GLOBALS['doublons_documents_inclus'])){
 		// on repasse par une requete sur spip_documents pour verifier que les documents existent bien !
 		$in_liste = sql_in('id_document',
 			$GLOBALS['doublons_documents_inclus']);
 		$res = sql_select("id_document", "spip_documents", $in_liste);
 		while ($row = sql_fetch($res)) {
-			sql_updateq("spip_documents_liens", array("vu" => 'oui'), "$id_table_objet=$id AND id_document=" . $row['id_document']);
+			sql_updateq("spip_documents_liens", array("vu" => 'oui'), "id_objet=$id AND objet=".sql_quote($type)." AND id_document=" . $row['id_document']);
 		}
 	}
 }

@@ -130,7 +130,7 @@ function definir_barre_boutons() {
 			$sousmenu['sites_tous']=
 			  new Bouton('site-24.gif', 'icone_sites_references');
 
-	$n = sql_countsel('spip_documents_liens', 'id_rubrique>0');
+	$n = sql_countsel('spip_documents_liens', 'id_objet>0 AND objet=\'rubrique\'');
 	if ($n) {
 			$sousmenu['documents_liste']=
 			  new Bouton('doc-24.gif', 'icone_doc_rubrique');

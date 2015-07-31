@@ -239,7 +239,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. '</div><br />';
 
 	//// Documents associes
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='document'", "", "D.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='document'", "", "D.id_document");
 
 
 	$documents_lies = array();
@@ -247,7 +247,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$documents_lies[]= $row['id_document'];
 
 	//// Images sans documents
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='image'", "", "D.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='image'", "", "D.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
 
@@ -331,13 +331,8 @@ function est_inclus($id_document) {
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
 
-	$table = 'spip_documents_liens';
-	$prim = id_table_objet($table);
-	if (!$prim) return '';
-	$prim = 'id_' . $type;
-
 	charger_generer_url();
-	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN $table AS L ON L.id_document=docs.id_document", "L.$prim=".sql_quote($id)." AND L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, L.vu", "spip_documents AS docs JOIN spip_documents_liens AS L ON L.id_document=docs.id_document", "L.id_objet=".intval($id)." AND objet=".sql_quote($type)." AND L.id_document=".sql_quote($id_document));
 
 	if (!$document) return "";
 
@@ -481,27 +476,17 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 }
 
 // Etablit la liste des documents orphelins, c'est-a-dire qui ne sont lies
-// a aucun article ni breve ni rubrique ; renvoie un tableau (id_document)
+// a rien ; renvoie un tableau (id_document)
+// ici on ne join pas avec la table objet pour voir si l'objet existe vraiment
+// on considere que c'est le role d'optimiser que de nettoyer les liens morts
+// sinon eventuellement appeler avant une fonction nettoyer_liens_documents
 // http://doc.spip.org/@lister_les_documents_orphelins
 function lister_les_documents_orphelins() {
 	$s = sql_select("d.id_document, d.id_vignette",
 	"spip_documents AS d
 	LEFT JOIN spip_documents_liens AS l
-		ON d.id_document=l.id_document
-	LEFT JOIN spip_articles AS aa
-		ON aa.id_article=l.id_article
-	LEFT JOIN spip_breves AS bb
-		ON bb.id_breve=l.id_breve
-	LEFT JOIN spip_rubriques AS rr
-		ON rr.id_rubrique=l.id_rubrique
-	LEFT JOIN spip_forum AS ff
-		ON ff.id_forum=l.id_forum
 	",
-	"(aa.id_article IS NULL)
-	AND (bb.id_breve IS NULL)
-	AND (rr.id_rubrique IS NULL)
-	AND (ff.id_forum IS NULL)
-	");
+	"(l.id_objet IS NULL)");
 
 	$orphelins = array();
 	while ($t = sql_fetch($s)) {
@@ -552,6 +537,7 @@ function supprimer_documents($liste = array()) {
 
 	// Supprimer les entrees dans spip_documents et associees
 	sql_delete('spip_documents', $in);
+	// en principe il ne devrait rien y avoir ici si les documents sont bien orphelins
 	sql_delete('spip_documents_liens', $in);
 }
 
