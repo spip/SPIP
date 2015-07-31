@@ -536,7 +536,9 @@ function f_admin ($texte) {
 		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
 	}
-
+	if (_request('var_mode')=='noajax'){
+		$texte = preg_replace(',(class=[\'"][^\'"]*)ajax([^\'"]*[\'"]),Uims',"\\1\\2",$texte);
+	}
 	return $texte;
 }
 
