@@ -667,9 +667,9 @@ s’avetz modificat de bèth pro lo grafisme o l’estructura deu sit.',
 	'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercader integrat 
     a SPIP, que podetz har las cèrcas suus sits e
     articles sindicats de duas manèras
-    diferentas. <br /><img src=’puce.gif’> La mei
+    diferentas. <br /><img src=\'puce.gif\' /> La mei
     simpla que consisteish a cercar sonque dens los
-    títols e descriptius deus articles. <br /><img src=’puce.gif’>
+    títols e descriptius deus articles. <br /><img src=\'puce.gif\' />
     La dusau manèra, plan mei potenta, que permet
     a SPIP de cercar tanben dens lo tèxt deus
     sits referenciats. 

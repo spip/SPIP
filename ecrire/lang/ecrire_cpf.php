@@ -703,7 +703,7 @@ Si lo larlik-la i rest touzour, ifo koz do sa èk out léberzèr.<p>', # MODIF
 Mé vèy byin, lopsyon-la, li lé pa aktivé otomatikman pou anpès lafisaz inn lavizman abizif.',
 	'texte_trop_resultats_auteurs' => 'Néna trod rézilta pou "@cherche_auteur@" ; mersi kadr myé lo rodaz.',
 	'texte_unpack' => 'télézarzman dla dernyèr versyon',
-	'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rodèr SPIP, ou pé fèr bann rodaz sir tout bann sit èk out bann zartik sindiké. Néna plisyèr manyir diféran. <br /><img src=’puce.gif’> Pli sinp lé rod sélman dann lo titr ou dann ladéskrisyon out bann zartik. <br />-
+	'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rodèr SPIP, ou pé fèr bann rodaz sir tout bann sit èk out bann zartik sindiké. Néna plisyèr manyir diféran. <br /><img src=\'puce.gif\' /> Pli sinp lé rod sélman dann lo titr ou dann ladéskrisyon out bann zartik. <br />-
 Inn dézièm métod, pli pwisan, li permè a SPIP rod osi dann kor lo tèks tout out bann sit référansé . Si ou
  la référans inn sitwèb, SPIP i sava rod dann tèks sa-minm.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Èk métod-la, SPIP lé oblizé d-vizité

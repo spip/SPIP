@@ -617,8 +617,8 @@ i en farve, der angiver deres status:',
 	'texte_trop_resultats_auteurs' => 'For mange resultater til "@cherche_auteur@"; vær venlig at afgrænse søgningen yderligere.',
 	'texte_unpack' => 'download af seneste version',
 	'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP’s indbyggede søgefunktion, kan du på forskellig vis foretage
-		søgninger på websteder og i syndikerede artikler. <br /><img src=’puce.gif’> Den enkleste består i kun at 
-		søge i artiklernes overskrifter og beskrivelser. <br /><img src=’puce.gif’> 
+		søgninger på websteder og i syndikerede artikler. <br /><img src=\'puce.gif\' /> Den enkleste består i kun at 
+		søge i artiklernes overskrifter og beskrivelser. <br /><img src=\'puce.gif\' /> 
 		En anden metode, som er stærkere, lader SPIP søge i teksten på de websteder, der henvises til. 
 		Hvis du henviser til et websted, vil SPIP selv søge i dens tekst.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Denne metode tvinger SPIP til jævnligt at besøge webstedet, hvilket kan koste 
