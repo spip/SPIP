@@ -149,6 +149,7 @@ $GLOBALS['i18n_en'] = array(
 // D
 'date_avant_jc' => 'B.C.',
 'date_fmt_heures_minutes' => '@h@h@m@min',
+'date_fmt_jour_heure' => '@jour@ at @heure@',
 'date_fmt_jour_mois' => '@nommois@ @jour@',
 'date_fmt_jour_mois_annee' => '@nommois@ @jour@, @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -1298,9 +1299,13 @@ irreversible.</b>',
 'texte_sauvegarde_base' => 'Backup the database',
 'texte_sauvegarde_compressee' => 'Backup will be done in the uncompressed file <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => '<NEW> Vous pouvez sélectionner ci-dessous la «&nbsp;langue principale&nbsp;» du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas à écrire vos articles dans la langue sélectionnée, mais permet de déterminer&nbsp;:
+
 	<ul><li> le format par défaut des dates sur le site public&nbsp;;</li>
+
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
+
 	<li> la langue utilisée dans les formulaires du site public&nbsp;;</li>
+
 	<li> la langue présentée par défaut dans l\'espace privé.</li></ul>',
 'texte_signification' => 'Red bars represent cumulative entries (total of sub-sections), green bars represent the number of visits for each section.',
 'texte_sous_titre' => 'Subtitle',

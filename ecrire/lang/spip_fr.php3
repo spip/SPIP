@@ -147,6 +147,7 @@ $GLOBALS['i18n_fr'] = array(
 // D
 'date_avant_jc' => 'av. J.C.',
 'date_fmt_heures_minutes' => '@h@h@m@min',
+'date_fmt_jour_heure' => '@jour@ &agrave; @heure@',
 'date_fmt_jour_mois' => '@jour@ @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',

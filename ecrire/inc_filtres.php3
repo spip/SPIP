@@ -649,19 +649,7 @@ function affdate_mois_annee($numdate) {
 }
 
 function affdate_heure($numdate) {
-	global $spip_lang;
-	switch ($spip_lang) {
-		case 'en':
-			$ta = 'at';
-			break;
-		case 'es':
-			$ta = 'a';
-			break;
-		case 'fr':
-		default:
-			$ta = '&agrave;';
-	} 
-	return affdate($numdate).' '.$ta.' '.heures_minutes($numdate);
+	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes($numdate)));
 }
 
 
