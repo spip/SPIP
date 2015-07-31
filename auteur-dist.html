@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<TITLE><BOUCLE0(AUTEURS){id_auteur}>#NOM</BOUCLE0>Pas d'auteur<//B0></TITLE>
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY BGCOLOR="#FFFFDD">
+
+
+<CENTER>
+<BOUCLE1(AUTEURS){id_auteur}{unique}>
+
+
+
+
+<TABLE WIDTH=750>
+<TR><TD WIDTH=750 COLSPAN=3>
+<font face=Arial,Helvetica SIZE=4>
+
+
+
+
+[<BR><FONT SIZE=6><B>(#NOM)</B></FONT>]
+
+[<BR>((#BIO))]
+
+
+
+<BR><BR>
+</FONT>
+</TD></TR>
+<TR><TD WIDTH=250 VALIGN="top">
+
+</TD><TD WIDTH=10>&nbsp;</TD>
+<TD WIDTH=490 VALIGN="top">
+
+
+<font face=Arial,Helvetica SIZE=3>
+[<B>(#PGP)</B>]
+
+
+<BOUCLE4(ARTICLES){id_auteur}{par date}{inverse}>
+
+<P>
+<B><A HREF="#URL_ARTICLE">[(#SURTITRE)<BR>][(#TITRE|majuscules)][<BR>(#SOUSTITRE)]</A></B>
+<FONT SIZE=2><B>[<BR>(#DATE_REDAC|affdate)][, par (#LESAUTEURS)]</B>
+[<BR>(#DESCRIPTIF)]</FONT>
+</BOUCLE4>
+
+
+[<P><b>Envoyer un message</b><br>(#FORMULAIRE_ECRIRE_AUTEUR)</P>]
+
+
+</FONT>
+
+</TD></TR>
+</TABLE>
+
+
+
+</BOUCLE1>
+<H2>Il n'y a pas d'auteur a cette adresse</H2><//B1>
+</CENTER>
+</BODY>
+</HTML>

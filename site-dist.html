@@ -1,0 +1,197 @@
+<HTML>
+<HEAD>
+<TITLE><BOUCLE0(SITES){id_syndic}>#NOM_SITE</BOUCLE0>Pas de site<//B0></TITLE>
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+
+
+<CENTER>
+<BOUCLE1(SITES){id_syndic}{unique}>
+
+
+
+
+<TABLE WIDTH=750>
+<TR><TD WIDTH=750 COLSPAN=3>
+<font face=Arial,Helvetica SIZE=4>
+
+
+
+
+[<BR><FONT SIZE=6><B>(#NOM_SITE)</B></FONT>]
+
+
+
+<BR><BR>
+</FONT>
+</TD></TR>
+<TR><TD WIDTH=250 VALIGN="top">
+
+
+
+<B12>
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR="#000000" WIDTH=250>
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#444444' WIDTH="100%">
+<font face=Arial,Helvetica COLOR="#FFFFFF">
+<B>D'autres sites</B>
+</font>
+</TD></TR></TABLE>
+
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
+<font face=Arial,Helvetica SIZE=2><UL>
+<BOUCLE12(SITES){par hasard}{doublons}{0,20}>
+<LI><A HREF="#URL_SITE">#NOM_SITE</A>
+</BOUCLE12>
+</UL>
+</font>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+</B12>
+
+<P>
+
+
+
+
+
+
+
+</TD><TD WIDTH=10>&nbsp;</TD>
+<TD WIDTH=490 VALIGN="top">
+
+
+<font face=Arial,Helvetica SIZE=3>
+[<B>(#DESCRIPTIF|justifier)</B>]
+
+<P>
+<B4><B>Rubrique :</B>
+<ul>
+<BOUCLE4(RUBRIQUES){id_rubrique}>
+
+<li>
+<B><A HREF="#URL_RUBRIQUE">[(#TITRE|majuscules)]</A></B>
+</BOUCLE4>
+</ul></B4>
+
+
+<B_articles_syndic><b>Articles :</b>
+<ul>
+<BOUCLE_articles_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}>
+<li> <a href="#URL_ARTICLE">[(#TITRE)]</a>
+</BOUCLE_articles_syndic>
+</ul></B_articles_syndic>
+
+
+
+
+	[<P align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">Commenter ce site</A></B></font>]
+
+
+</FONT>
+
+</TD></TR>
+</TABLE>
+
+
+
+
+
+<B_forums_liens>
+
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR>
+</TABLE>
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=674>
+<TR WIDTH=674>
+<TD WIDTH=200 ALIGN="left" VALIGN="top">
+	<BR><BR>
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+	<A NAME='liens_forums'>
+	<BOUCLE_forums_liens(FORUMS){id_syndic}{par date}{inverse}>
+		<A HREF="#forum#ID_FORUM"><IMG SRC="puce.gif" BORDER=0>#TITRE</A>
+		<BR>[(#DATE|affdate)][, par (#NOM)]
+		<BR>
+	</BOUCLE_forums_liens>
+	</FONT>
+	<BR><BR>
+</TD>
+
+<TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
+<TD WIDTH=462 VALIGN="top">
+
+	<BR><BR>
+
+	<BOUCLE_Forums(FORUMS){id_syndic}{par date}{inverse}>
+	<A NAME="forum#ID_FORUM">
+	<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=462 BGCOLOR="#000000">
+	<TR><TD BGCOLOR='#444444' WIDTH="100%">
+	<font face=Arial,Helvetica SIZE=2>
+	<B>[<FONT COLOR="#FFFFFF">(#TITRE)</FONT>]</B> 
+	</font>
+	</TD></TR>
+	<TR><TD BGCOLOR='#FFFFFF' WIDTH=100%>
+	<font face=Arial,Helvetica SIZE=1>
+	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+	 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
+	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
+	</font>
+	</TD></TR>
+	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
+	<font face=Arial,Helvetica SIZE=2>
+	<P>#TEXTE
+	<P align='right'>[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
+	</font>
+	</TD></TR></TABLE>
+
+
+	<B_fils>
+	<UL>
+		<font face=Arial,Helvetica SIZE=2>
+		<BOUCLE_fils(FORUMS){id_parent}{par date}>
+		<P>
+		<A NAME="forum#ID_FORUM">
+		<B>[(#TITRE)]</B>
+		<BR><font SIZE=1>
+		[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+		 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
+		[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
+		</font>
+		<HR NOSHADE SIZE=1>
+		#TEXTE
+		<P align="right">[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]
+			
+
+			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
+	
+		</BOUCLE_fils>
+		</font>
+	</UL>
+	</B_fils>
+
+
+
+	<P>
+
+	</BOUCLE_Forums>
+</TD>
+</TR>
+</TABLE>
+<P>
+</B_forums_liens>
+
+
+
+
+
+
+
+</BOUCLE1>
+<H2>Il n'y a pas de site à cette adresse</H2><//B1>
+</CENTER>
+</BODY>
+</HTML>
