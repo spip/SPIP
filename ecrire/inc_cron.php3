@@ -246,10 +246,8 @@ function cron_mail($t) {
 				$mail_nouveautes = substr($page,$p+2);
 	}
 
-	$n = strlen($mail_nouveautes);
-	if ($n > 10)
-	  envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
-	spip_log("$n nouveautes depuis $jours_neuf jours");
+	if (strlen($mail_nouveautes) > 10)
+		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
 	return 1;
 }
 
