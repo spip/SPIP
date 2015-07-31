@@ -28,7 +28,7 @@ function creer_base($server='') {
 
 	$fcreate = sql_serveur('create', $server);
 	$freplace = sql_serveur('replace', $server);
-	$fupdate = sql_serveur('update', $server);
+
 	foreach($tables_principales as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], true);
 
@@ -38,6 +38,16 @@ function creer_base($server='') {
 
 	// Init ou Re-init ==> replace pas insert
 	$desc = $tables_principales['spip_types_documents'];
+
+	// commencer par cette table qui ne s'occupe pas du champ 'inclus'
+	// les suivantes le changeront comme il faut
+	foreach ($tables_mime as $extension => $type_mime)
+		$freplace('spip_types_documents',
+			  array('mime_type' => $type_mime,
+				'extension' => $extension),
+			  $desc
+		);
+
 	foreach($tables_images as $k => $v) {
 		$freplace('spip_types_documents',
 			 array('extension' => $k,
@@ -60,11 +70,7 @@ function creer_base($server='') {
 			       'inclus' => 'non'),
 			 $desc);
 
-	foreach ($tables_mime as $extension => $type_mime)
-		$fupdate('spip_types_documents',
-			 'mime_type = '._q($type_mime),
-			 'extension='._q($extension)
-		);
+
 }
 
 // http://doc.spip.org/@stripslashes_base
