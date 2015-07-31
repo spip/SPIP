@@ -5,10 +5,6 @@
 if (defined("_ECRIRE_INC_PRESENTATION")) return;
 define("_ECRIRE_INC_PRESENTATION", "1");
 
-//
-// initialisations globales de presentation (beurk!)
-//
-
 
 //
 // Aide
@@ -22,7 +18,7 @@ function aide ($aide) {
 	return " <script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); ".
+	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=80%'); ".
 	'void(0);\">");'.
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
