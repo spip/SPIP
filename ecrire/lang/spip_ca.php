@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Canviar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Escollir',
-'bouton_deplacer' => '<NEW>Moure',
+'bouton_deplacer' => 'Despla&ccedil;ar',
 'bouton_download' => 'Descarregar',
 'bouton_enregistrer' => 'Enregistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la missatgeria interna',
@@ -308,7 +308,7 @@ Gr&agrave;cies per la participaci&oacute;
 'forum_lien_hyper' => '<b>Enlla&ccedil; hipertext</b> (opcional)',
 'forum_message_definitif' => 'Missatge definitiu: enviar al lloc',
 'forum_message_trop_long' => 'El vostre missatge &eacute;s massa llarg. La mida m&agrave;xima s&oacute;n 20000 car&agrave;cters.',
-'forum_ne_repondez_pas' => 'No respongueu a aquest correu electr&ograve;nic, feu-ho al f&ograve;rum que trobareu a la seg&uuml;ent adre&ccedil;a: ', # MODIF
+'forum_ne_repondez_pas' => 'No respongueu a aquest correu electr&ograve;nic, feu-ho al f&ograve;rum a la seg&uuml;ent adre&ccedil;a: ',
 'forum_non_inscrit' => 'No esteu inscrit o b&eacute; l\'adre&ccedil;a o la contrasenya s&oacute;n err&ograve;nies. ',
 'forum_page_url' => '(Si el vostre missatge fa refer&egrave;ncia a un article publicat a la Web, o a una p&agrave;gina que cont&eacute; m&eacute;s informacions, podeu indicar a continuaci&oacute; el t&iacute;tol de la p&agrave;gina i la seva adre&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',

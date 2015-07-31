@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Aldatu',
 'bouton_chercher' => 'Bilatu',
 'bouton_choisir' => 'Aukeratu',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Lekuz aldatu',
 'bouton_download' => 'Telekargatu',
 'bouton_enregistrer' => 'Grabatu',
 'bouton_radio_desactiver_messagerie_interne' => 'Barne mezularitza desaktibatu',
@@ -189,13 +189,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'udaberria',
 'date_saison_3' => 'uda',
 'date_saison_4' => 'udazkena',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'zegundu',
 'date_semaines' => 'asteak',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
-'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_un_mois' => 'hilabete',
+'date_une_heure' => 'oren',
+'date_une_minute' => 'minutu',
+'date_une_seconde' => 'segundu',
+'date_une_semaine' => 'aste',
 'dirs_commencer' => 'Atariko instalazioa hasi ',
 'dirs_preliminaire' => 'Aurretik: <b>sarbide eskubideak arautu </b>',
 'dirs_probleme_droits' => 'Sarbide eskubidearekiko arazoak',
@@ -223,18 +223,17 @@ Eragiketa hori egin eta gero, gauza izango zara',
 
 // F
 'fichier_introuvable' => '@fichier@ aurkitzeko moduan ez dagoen artxiboa',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Zure helbide elektronikoa baiezta ezazu',
+'form_auteur_email_modifie' => 'Zure helbide elektronikoa aldatu da.',
+'form_auteur_envoi_mail_confirmation' => 'Baieztapen e-maila bat bidalia izan da  @email@ helbidera. Mezu hartan idatzitako helbidea bisitatu beharku duzu zure helbidea baieztatzeko.',
+'form_auteur_mail_confirmation' => 'Agur,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+Zure helbide elektronikoa aldatzea eskatu duzu.
+Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
+(bestela zure galdea ez da kontutatan hartua izanen.) :
 
     @url@
-', # NEW
+',
 'form_deja_inscrit' => 'Inskribaturik zaude jadanik.',
 'form_email_non_valide' => 'Posta elektronikoaren helbideak ez du balio.',
 'form_forum_access_refuse' => 'Ezin zara gune honetan sartu dagoeneko.',
@@ -307,7 +306,7 @@ Zure ekarpena gunearen administratzaileak onartu ondoren soilik agerian izango d
 'forum_lien_hyper' => 'Hipertestu lotura (aukeratzekoa)',
 'forum_message_definitif' => 'Behin-betiko mezua : gunera igorri',
 'forum_message_trop_long' => 'Zure mezua luzeegia da. Gehienez ere 20000 karaktere onartzen dira.',
-'forum_ne_repondez_pas' => 'Ez erantzun mezu elektroniko honi, baizik eta hurrengo helbidean dagoen foroan:', # MODIF
+'forum_ne_repondez_pas' => 'Ez erantzun mezu elektroniko honi, baizik eta hurrengo helbidean dagoen foroan:',
 'forum_non_inscrit' => 'Ez zaude inskribaturik, edota emandako helbidea edo pasahitza ez dira zuzenak.',
 'forum_page_url' => '(Zure mezua interneten argitaratutako artikulu bati buruzkoa baldin bada, edo informazio gehiago duen orrialde bati buruzkoa, adieraz itzazu jarraian orrialdearen izena bai eta URL helbidea ere).',
 'forum_par_auteur' => '@auteur@-k',
@@ -379,7 +378,7 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'icone_tous_articles' => 'Zure artikulu guztiak',
 'icone_tous_auteur' => 'Egile guztiak',
 'icone_valider_message' => 'Mezu hau onartu',
-'icone_visiter_site' => 'Gunea bisitatu', # MODIF
+'icone_visiter_site' => 'Gune publikoa bisitatu',
 'icone_voir_en_ligne' => 'Linean ikusi',
 'image_tourner_180' => '180 graduko errotazioa',
 'image_tourner_droite' => '90 graduko errotazioa eskuinera',
@@ -404,16 +403,16 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'info_article_supprime' => 'Artikulu ezabatua',
 'info_articles' => 'Artikuluak',
 'info_articles_a_valider' => 'Egiaztatuak izan behar diren artikuluak',
-'info_articles_nb' => '@nb@ articles', # NEW
+'info_articles_nb' => '@nb@ artikulu',
 'info_articles_proposes' => 'Proposatutako artikuluak',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => 'Artikulu 1',
 'info_auteurs_nombre' => 'Egileak :',
 'info_authentification_ftp' => 'Baimena (FTP-aren bidez).',
 'info_bloquer_lien' => 'Lotura hau blokatu',
 'info_breves_02' => 'Laburrak',
 'info_breves_2' => 'laburrak',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ berri-labur',
+'info_breves_un' => 'Berri-labur 1',
 'info_breves_valider' => 'Egiaztatzeko laburrak',
 'info_connexion_refusee' => 'Konexioa errefusatu da',
 'info_contact_developpeur' => 'Programatzaile batekin kontaktuan jarri behar duzu.',
@@ -434,8 +433,8 @@ Inskribaturik ez bazaude, aurretik inskribatu behar duzu.',
 'info_document' => 'Dokumentua',
 'info_document_indisponible' => 'Dokumentu hau ez da erabilgarria',
 'info_documents' => 'Dokumentuak',
-'info_documents_nb' => '@nb@ documents', # NEW
-'info_documents_un' => '1 document', # NEW
+'info_documents_nb' => '@nb@ dokumentu',
+'info_documents_un' => 'Dokumentu 1',
 'info_echange_message' => 'SPIPek guneko partehartzaileen arteko mezuen trukaketa eta foro pribatuak ahalbidetzen ditu.
 Funtzionalitate hau aktiba edo desaktibatzen ahal duzu.',
 'info_ecire_message_prive' => 'Mezu pribatu bat idatzi',
@@ -480,8 +479,8 @@ Basea konpontzen saiatu, edo zure ostalaitzea kontaktatu.',
 'info_mail_fournisseur' => 'zure@hornitzailea.com',
 'info_message_2' => 'MEZUA',
 'info_message_supprime' => 'Mezua ezabatu da',
-'info_messages_nb' => '@nb@ messages', # NEW
-'info_messages_un' => '1 message', # NEW
+'info_messages_nb' => '@nb@ mezu',
+'info_messages_un' => 'Mezu 1',
 'info_mise_en_ligne' => 'Argitarapen data :',
 'info_modification_parametres_securite' => 'segurtasun-parametroen aldaketa.',
 'info_mois_courant' => 'Hilabete honetan:',
@@ -528,8 +527,8 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_retablir_lien' => 'esteka berrezarri',
 'info_retirer_mot' => 'Hitz hau kendu',
 'info_retirer_mots' => 'Hitz guztiak kendu',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ atal',
+'info_rubriques_un' => 'Atal 1',
 'info_sans_titre_2' => 'izenbururik gabe',
 'info_selectionner_fichier' => '<i>Upload</i> direktorioko dokumentu bat hauta dezakezu',
 'info_selectionner_fichier_2' => 'Dokumentu bat hautatu&nbsp;:',
@@ -538,9 +537,9 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_site_attente' => 'Balioztatua izateko zain dagoen Webgunea',
 'info_site_reference' => 'Linean erreferentziatutako gunea',
 'info_site_refuse' => 'Web Gune errefusatua',
-'info_sites_nb' => '@nb@ sites', # NEW
+'info_sites_nb' => '@nb@ gune',
 'info_sites_referencer' => 'Gune bat erreferentziatu',
-'info_sites_un' => '1 site', # NEW
+'info_sites_un' => 'Gune 1',
 'info_supprimer_vignette' => 'miniatura hau kendu',
 'info_symbole_bleu' => 'Sinbolo <b>URDIN</b>ak oroigarri pertsonal bat adierazten du, hau da zerbait gogoratzeko modu bat.',
 'info_symbole_jaune' => 'Sinbolo <b>hori</b>ak denentzako iragarpen bat adierazten du: gunearen administratzaileek bakarrik alda dezakete, eta idazle guztiek ikus dezakete.',
@@ -564,7 +563,7 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_visites' => 'bisitak :',
 'info_vos_rendez_vous' => 'Zure hitzorduak',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'Zure oroigarriak', # MODIF
+'infos_vos_pense_bete' => 'Zure oroigarriak',
 'item_breve_proposee' => 'Proposaturiko berri laburra',
 
 // L
@@ -612,7 +611,7 @@ Zure pasahitza sarean atzeman ahal izatea nahi ez baduzu, JavaScript-a aktibatu 
 'login_retour_site' => 'Eremu publikora itzuli',
 'login_retoursitepublic' => 'eremu publikora itzuli',
 'login_sans_cookiie' => 'Identifikazioa "cookie" barik',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Login segurua',
 'login_sinscrire' => 'inskribatu',
 'login_test_navigateur' => 'nabigatzaile proba/berkonexioa',
 'login_verifiez_navigateur' => '(Hala ere,zure nabigatzaileak zure pasahitza memorizatu ez duela egiaztatu...)',
