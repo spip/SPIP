@@ -190,7 +190,9 @@ function calculer_balise($nom, $p) {
 
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
+#	$x = $p->filtres[0][1][0]; ca devrait etre = filtre_arglist.
 	$param = param_balise($p); # attention: ca affecte $p
+
 	$param = filtres_arglist($param, $p, ','); 
 	$collecte = join(',',collecter_balise_dynamique($l, $p));
 	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
@@ -201,6 +203,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = array();
+	$p->filtres = array();
 
 	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
 	if ($nom == 'FORMULAIRE_FORUM')
@@ -214,6 +217,7 @@ function param_balise(&$p) {
   $c = array_shift($a);
   if  ($c[0]) return "";
   $p->fonctions = $a;
+  array_shift( $p->filtres );
   return $c[1];
 }
 
@@ -225,14 +229,9 @@ function collecter_balise_dynamique($l, $p) {
 	return $args;
 }
 
-// Genere l'application d'une liste de filtres
 function applique_filtres($p) {
 
-	$statut = $p->statut;
-	$fonctions = $p->fonctions;
-	$p->fonctions = array(); # pour reutilisation si recursion
-
-	// pretraitements standards
+	// pretraitements standards (explication dans inc-compilo-index)
 	switch ($statut) {
 		case 'num':
 			$code = "intval($code)";
@@ -248,30 +247,34 @@ function applique_filtres($p) {
 //  processeurs standards (cf inc-balises.php3)
 	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
-	if ($fonctions) {
-		foreach($fonctions as $couple) {
-		  if ($couple) {
-		  $fonc = $couple[0];
-		  $arglist = filtres_arglist($couple[1],$p, ($fonc == '?' ? ':' : ','));
-
-		  if (function_exists($fonc))
-				  $code = "$fonc($code$arglist)";
-		  else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
-				  $code = "($code $fonc "
-				    . substr($arglist,1)
-				    . ')';
-		  else 
-				  $code = "erreur_squelette('".
-					  texte_script(
-						_T('zbug_erreur_filtre', array('filtre' => $fonc))
-					)."','" . $p->id_boucle . "')";
-		  }
-		}
-	}
+	if ($p->filtres) $code = compose_filtres($p, $code);
 	// post-traitement securite
-	if ($statut == 'html')
-		$code = "interdire_scripts($code)";
+	if ($p->statut == 'html') $code = "interdire_scripts($code)";
 	return $code;
+}
+
+function compose_filtres($p, $code)
+{
+  foreach($p->filtres as $filtre) {
+    $fonc = array_shift($filtre);
+    if ($fonc) {
+      $sep = ($fonc == '?' ? ':' : ',');
+      $arglist = "";
+      foreach ($filtre as $arg) {
+	$arglist .= $sep . calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
+
+      }
+      if (function_exists($fonc))
+	$code = "$fonc($code$arglist)";
+      else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
+	$code = "($code $fonc " . substr($arglist,1) . ')';
+      else 
+	$code = "erreur_squelette('"
+	  . texte_script(_T('zbug_erreur_filtre', array('filtre' => $fonc)))
+	  ."','" . $p->id_boucle . "')";
+    }
+  }
+  return $code;
 }
 
 // analyse des parametres d'un champ etendu

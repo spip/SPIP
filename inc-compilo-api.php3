@@ -73,8 +73,9 @@ class Champ {
 	var $nom_champ;
 	var $nom_boucle= ''; // seulement si boucle explicite
 	var $cond_avant, $cond_apres; // tableaux d'objets
-	var $fonctions = array();  // filtre explicites
 	var $etoile;
+	var $filtres = array();  // filtre explicites
+	var $fonctions = array();  // source des filtres (compatibilite)
 	// champs pour la production de code
 	var $id_boucle;
 	var $boucles;
@@ -92,9 +93,10 @@ class Champ {
 
 class Idiome {
 	var $type = 'idiome';
-	var $chaine = ""; // la chaine a traduire
+	var $nom_champ = ""; // la chaine a traduire
 	var $module = ""; // son module de definition
-	var $fonctions = array(); // les filtres a appliquer au resultat
+	var $filtres = array(); // les filtres a appliquer au resultat
+	var $fonctions = array(); // source des filtres
 	// champs pour la production de code, cf ci-dessus
 	var $id_boucle;
 	var $boucles;
