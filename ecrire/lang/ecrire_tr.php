@@ -887,6 +887,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'repertoire_plugins' => 'Dizin&nbsp;:',
 
 // S
+'sans_heure' => 'saatsiz',
 'sauvegarde_fusionner' => 'Mevcut veritaban&#305; ile yede&#287;i birle&#351;tir',
 'sauvegarde_fusionner_depublier' => 'Birle&#351;tirilmi&#351; nesneleri yay&#305;nlama',
 'sauvegarde_url_origine' => 'Kaynak sitenin URL\'si :',

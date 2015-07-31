@@ -874,6 +874,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'repertoire_plugins' => 'Teul&nbsp;:',
 
 // S
+'sans_heure' => 'hep eur',
 'sauvegarde_fusionner' => 'Kendeuzi&ntilde; an diaz a zo brema&ntilde; gant ar savete',
 'sauvegarde_fusionner_depublier' => 'Dizembann ar pezh a zo bet strollet',
 'sauvegarde_url_origine' => 'Marteze, URL al lec\'hienn-orin',
