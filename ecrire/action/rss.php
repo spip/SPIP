@@ -211,7 +211,7 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 		)
 			$item['title'] .= ' ('.$t['statut'].')';
 		$item['date'] = $t['date_heure'];
-		$item['author'] = $t['auteur'];
+		$item['author'] = typo($t['auteur']);
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
