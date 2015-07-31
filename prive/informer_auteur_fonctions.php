@@ -25,16 +25,19 @@ function informer_auteur($bof)
 	if ($row AND is_array($row))
 		unset($row['id_auteur']);
 	else {
-		// piocher les infos sur un autre login
-		if ($n = sql_countsel('spip_auteurs',"login<>''")){
-			$n = (abs(crc32($login))%$n);
-			$row = auth_informer_login(sql_getfetsel('login','spip_auteurs',"login<>''",'','',"$n,1"));
-			if ($row AND is_array($row)){
-				unset($row['id_auteur']);
-				$row['login'] = $login;
-			}
-		}
-		else $row = array();
+		// generer de fausses infos, mais credibles, pour eviter une attaque
+		// http://core.spip.org/issues/1758
+
+		include_spip('inc/securiser_action');
+		$fauxalea1 = md5('fauxalea'.secret_du_site().$login.floor(date('U')/86400));
+		$fauxalea2 = md5('fauxalea'.secret_du_site().$login.ceil(date('U')/86400));
+
+		$row = array('login' => $login,
+		 'cnx' => 0,
+		 'logo' => "",
+		 'alea_actuel' => substr_replace($fauxalea1,'.',24,0),
+		 'alea_futur' => substr_replace($fauxalea2,'.',24,0)
+		);
 	}
 
 	return json_export($row);
