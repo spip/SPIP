@@ -27,8 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hej',
-'breve' => 'Brève', # NEW
-'breves' => 'Nyheter',
 
 // C
 'commenter_site' => 'Kommentera sajten',
