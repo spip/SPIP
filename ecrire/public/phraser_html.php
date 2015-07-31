@@ -421,6 +421,7 @@ function phraser_vieux(&$champ)
 // http://doc.spip.org/@phraser_criteres
 function phraser_criteres($params, &$result) {
 
+	$msg = ''; // indiquera s'il y a eu une erreur
 	$args = array();
 	$type = $result->type_requete;
 	$doublons = array();
@@ -556,7 +557,8 @@ function phraser_criteres($params, &$result) {
 	// pour que la variable $doublon_index ait la bonne valeur
 	// cf critere_doublon
 	if ($doublons) $args= array_merge($args, $doublons);
-	$result->criteres = $args;
+	// Si erreur, laisser la chaine dans ce champ pour le HTTP 503
+	if (!$msg) $result->criteres = $args;
 }
 
 // http://doc.spip.org/@phraser_critere_infixe
