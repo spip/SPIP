@@ -78,6 +78,9 @@ function spip_mysql_trace($query, $start, $result)
 	if ($start) spip_mysql_timing($start, microtime(), $query, $result);
 
 	if ($s) {
+		// 2006 MySQL server has gone away
+		if ($s == 2006)
+			define('spip_interdire_cache', true);
 		$s .= ' '.mysql_error();
 		if ($GLOBALS['mysql_debug']
 		AND (isset($GLOBALS['auteur_session']['statut']))
