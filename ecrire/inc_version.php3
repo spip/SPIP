@@ -291,7 +291,7 @@ define_once('_SPIP_PATH', './:squelettes/:dist/:formulaires/');
 
 // charge les fonctions indispensables, 
 
-include('inc_utils.php');
+include(_DIR_INCLUDE . 'inc_utils.php');
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
