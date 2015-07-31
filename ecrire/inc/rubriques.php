@@ -299,6 +299,7 @@ function cron_rubriques($t) {
 // a partir de id_rubrique (par defaut, a partir de la racine)
 // NB: cette fonction est tres pratique, mais pas utilisee dans le core
 // pour rester legere elle n'appelle pas calculer_rubriques()
+// http://doc.spip.org/@creer_rubrique_nommee
 function creer_rubrique_nommee($titre, $id_parent=0) {
 
 	// eclater l'arborescence demandee
