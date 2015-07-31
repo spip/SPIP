@@ -50,9 +50,10 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 	// la liste d'arguments d'inclusion peut se terminer par un filtre
 		$filtre = array_shift($couple);
 		if ($filtre) break;
-		foreach($couple as $val) {
+		foreach($couple as $n => $val) {
 			$var = $val[0];
 			if ($var->type != 'texte') {
+			  if ($n OR $k)
 				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), '');
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
