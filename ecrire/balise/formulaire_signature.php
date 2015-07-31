@@ -145,32 +145,27 @@ function reponse_confirmation($var_confirm = '') {
 	$adresse_email = $row['ad_email'];
 	$url_site = $row['url_site'];
 
-	$r = sql_select('*', 'spip_petitions', "id_article=$id_article");
+	$r = sql_select('email_unique, site_unique', 'spip_petitions', "id_article=$id_article");
 	$row = sql_fetch($r);
 
 	$email_unique = $row['email_unique']  == "oui";
 	$site_unique = $row['site_unique']  == "oui";
-	$lock = false;
 
-	if ($email_unique OR $site_unique) {
+	spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature=$id_signature");
 
-		$lock = "petition $id_article $adresse_email";
-		if (!spip_get_lock($lock, 5))
-			return  _T('form_pet_probleme_technique');
- 
-		if ($email_unique) {
-			$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","","1");
-			if ($r)  $confirm =  _T('form_pet_deja_signe');
-		} 
+	if ($email_unique) {
 
-		if ($site_unique) {
-			$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'','1');
-			if ($r) $confirm = _T('form_pet_site_deja_enregistre');
-		}
+		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","","date_time desc");
+		if (signature_entrop($r))
+			  $confirm =  _T('form_pet_deja_signe');
+	} 
+
+	if ($site_unique) {
+		$r = sql_select('id_signature', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'',"date_time desc");
+		if (signature_entrop($r))
+			$confirm = _T('form_pet_site_deja_enregistre');
 	}
 
-	if (!$confirm) spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature=$id_signature");
-	if ($lock) spip_release_lock($lock);
 	if (!$confirm) {
 		$confirm = _T('form_pet_signature_validee');
 		// invalider les pages ayant des boucles signatures
@@ -232,34 +227,26 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 
 	$email_unique = $row['email_unique']  == "oui";
 	$site_unique = $row['site_unique']  == "oui";
-	$lock = $msg = false;
 
-	if ($email_unique OR $site_unique) {
+	// Refuser si deja signe par le mail ou le site quand demande
+	// Il y a un acces concurrent potentiel,
+	// mais ca n'est qu'un cas particulier de qq n'ayant jamais confirme'.
+	// On traite donc le probleme a la confirmation.
 
-		$lock = "petition $id_article $adresse_email";
-		if (!spip_get_lock($lock, 5))
-			return  _T('form_pet_probleme_technique');
- 
-		if ($email_unique) {
-			$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","","1");
-			if ($r)  $msg =  _T('form_pet_deja_signe');
-		} 
+	if ($email_unique) {
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND ad_email=" . _q($adresse_email) . " AND statut='publie'","", 1);
 
-		if ($site_unique) {
-			$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'','1');
-			if ($r) $msg = _T('form_pet_site_deja_enregistre');
-		}
+		if ($r)	return _T('form_pet_deja_signe');
+	}
+
+	if ($site_unique) {
+		$r = sql_countsel('spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')",'',1);
+
+		if ($r)	return _T('form_pet_site_deja_enregistre');
 	}
 	
-	$passw = test_pass();
-	if (!$msg)
-		$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut)", "($id_article, NOW(), '$passw')");
- 
-	if ($lock) spip_release_lock($lock);
-	if ($msg) return $msg;
-	if (!$id_signature) return _T('form_pet_probleme_technique');
-
 	// preparer l'url de confirmation
+	$passw = test_pass();
 	$url = parametre_url($url_page,	'var_confirm',$passw,'&');
 	if ($lang != $GLOBALS['meta']['langue_site'])
 		  $url = parametre_url($url, "lang", $row['lang'],'&');
@@ -270,6 +257,9 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	if (!$envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) 
 		return _T('form_pet_probleme_technique');
 
+	$id_signature = sql_insert('spip_signatures', "(id_article, date_time, statut, ad_email, url_site)", "($id_article, NOW(), '$passw', " .  _q($adresse_email) . "," . _q($url_site) .")");
+ 
+	if (!$id_signature) return _T('form_pet_probleme_technique');
 	include_spip('inc/modifier');
 	revision_signature($id_signature, array(
 				'nom_email' => $nom_email,
@@ -281,6 +271,30 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 	return _T('form_pet_envoi_mail_confirmation');
 }
 
+// Pour eviter le recours a un verrou (qui bloque l'acces a la base),
+// on commence par inserer systematiquement la signature 
+// puis on demande toutes celles ayant la propriete devant etre unique
+// (mail ou site). S'il y en a plus qu'une on les retire sauf la premiere
+// En cas d'acces concurrents il y aura des requetes de retraits d'elements
+// deja detruits. Bizarre ?  C'est mieux que de bloquer!
+
+function signature_entrop($query)
+{
+	$n = sql_count($query);
+	spip_log("entrop $n");
+	if ($n>1) {
+		$entrop = array();
+		for ($i=$n-1;$i;$i--) {
+			$r = sql_fetch($query);
+			$entrop[]=$r['id_signature'];
+		}
+		spip_log("delete " . join(',', $entrop));
+		if ($entrop)
+			sql_delete('spip_signatures',
+				"id_signature IN (" . join(',',$entrop) .')');
+	}
+	return $entrop;
+}
 
 // http://doc.spip.org/@test_pass
 function test_pass() {
