@@ -28,6 +28,9 @@ define("_ECRIRE_INC_VERSION", "1");
 # ou inversement ?
 @define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
+# le nom du repertoire config/
+define('_DIR_CONFIG', _DIR_RACINE . "config/");
+
 // nombre de repertoires depuis la racine
 
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
@@ -36,11 +39,11 @@ $profondeur_url = _DIR_RESTREINT ? 0 : 1;
 // *** Parametrage par defaut de SPIP ***
 //
 // Ces parametres d'ordre technique peuvent etre modifies
-// dans ecrire/mes_options (_FILE_OPTIONS) Les valeurs
+// dans config/mes_options (_FILE_OPTIONS) Les valeurs
 // specifiees dans ce dernier fichier remplaceront automatiquement
 // les valeurs ci-dessous.
 //
-// Pour creer ecrire/mes_options : recopier simplement
+// Pour creer config/mes_options : recopier simplement
 // les lignes ci-dessous, et ajouter le marquage de debut et
 // de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 //
@@ -83,7 +86,7 @@ $type_urls = 'page';
 ($ip = @$_SERVER['HTTP_X_FORWARDED_FOR']) OR $ip = @$_SERVER['REMOTE_ADDR'];
 
 // Pour renforcer la privacy, decommentez la ligne ci-dessous (ou recopiez-la
-// dans le fichier ecrire/mes_options : SPIP ne pourra alors conserver aucun
+// dans le fichier config/mes_options : SPIP ne pourra alors conserver aucun
 // numero IP, ni temporairement lors des visites (pour gerer les statistiques
 // ou dans spip.log), ni dans les forums (responsabilite)
 # $ip = substr(md5($ip),0,16);
@@ -274,11 +277,10 @@ function spip_initialisation_parametree($dir1, $dir2) {
 	define('_DIR_SKELS', $dir1 ."tmp/CACHE/skel/");
 	define('_DIR_PLUGINS', $dir1 . "plugins/");
 
-	define('_DIR_CONFIG', $dir1 . "config/");
-
 	define('_DIR_TMP', $dir1 . "tmp/");
 	define('_DIR_DUMP', $dir1 . "tmp/data/");
 	define('_DIR_SESSIONS', $dir1 . "tmp/data/");
+
 	define('_DIR_TRANSFERT', $dir2 . "upload/");
 
 	// les fichiers qu'on y met, entre autres
@@ -305,7 +307,7 @@ function spip_initialisation_parametree($dir1, $dir2) {
 }
 
 //
-// Inclure le fichier ecrire/mes_options (ou equivalent)
+// Inclure le fichier config/mes_options (ou equivalent)
 //
 
 if (defined('_FILE_OPTIONS')) {
@@ -313,7 +315,11 @@ if (defined('_FILE_OPTIONS')) {
 		include_once(_FILE_OPTIONS);
 	}
 } else {
-	if (@file_exists(_DIR_RESTREINT . 'mes_options.php')) {
+	if (@file_exists(_DIR_CONFIG . 'mes_options.php')) {
+		define('_FILE_OPTIONS',_DIR_CONFIG . 'mes_options.php');
+		include_once(_FILE_OPTIONS);
+	}
+	else if (@file_exists(_DIR_RESTREINT . 'mes_options.php')) {
 		define('_FILE_OPTIONS',_DIR_RESTREINT . 'mes_options.php');
 		include_once(_FILE_OPTIONS);
 	}
