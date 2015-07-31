@@ -20,7 +20,7 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 });
 // --></script>
 </head>
-<body class="page_login" >
+<body class="page_login">
 
 <div id="minipres">
 
@@ -36,7 +36,7 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 	
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	<p class="retour">
-		[<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onClick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a> | ]
+		[<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})"><:login_sinscrire:></a> | ]
 		<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>
 	</p>
 	<p class="generator">
