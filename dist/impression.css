@@ -19,19 +19,15 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Pour les liens, on desactive les couleurs et
 /*  on affiche l'URL cible a la suite des liens sortants (!)
 ---------------------------------------------- */
-a, a:visited, a.spip_in, a.spip_out, a.spip_url, a.spip_glossaire { color: #520; text-decoration: underline; }
+a { color: #520; text-decoration: underline; }
 a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(href) "]"; }
 
 
 /*  Disposition : on choisit un affichage de base
 ---------------------------------------------- */
-
 #page {}
 #contenu {}
-
 .nettoyeur { clear: both; }
-
-.spip_logos { float: right; margin-left: 0.8em; }
 
 /*  Un peu de coquetterie
 ---------------------------------------------- */
@@ -42,6 +38,8 @@ a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(h
 .cartouche p { margin: 0; padding: 0; clear: left; }
 .cartouche .traductions { display: none; }
 .cartouche .surtitre, .cartouche .soustitre { font-size: 0.82em; font-variant: small-caps; }
+
+.spip_logos { float: right; margin-left: 0.8em; }
 
 .chapo {
 	margin-bottom: 1.5em; 
@@ -65,10 +63,11 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */
-q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
+q, blockquote.spip, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .spip_code, .spip_cadre { font-family: monospace; }
 
-.lien, blockquote, .spip_poesie, .spip_cadre, .liste-articles li .texte {
+.lien, blockquote.spip, .spip_poesie, .spip_cadre, .liste-articles li .texte {
+	background: #FFF;
 	margin: 1em;
 	padding: 1em;
 	border: 1pt dotted #CCC; }
@@ -80,7 +79,7 @@ q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .forum-chapo .forum-titre { display: block; font-weight: bold; }
 ul .forum-message { background: #EEE; border: 1pt solid #CCC; padding: 1em; margin-bottom: 1em; }
 
-/* Listes d'articles et extraits introductifs
+/* Listes d'articles
 ----------------------------------------------- */
 .liste-articles li { margin-bottom: 1em; padding-top: 0.3em; }
 .liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
