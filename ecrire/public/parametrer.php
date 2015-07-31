@@ -297,6 +297,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (!isset($lang))
 		$lang = $GLOBALS['meta']['langue_site'];
 
+	$lang_select = false;
 	if (!$GLOBALS['forcer_lang']
 	AND $lang <> $GLOBALS['spip_lang']
 	) {
