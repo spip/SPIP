@@ -198,7 +198,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page)) {
 		$lastmodified = @file_exists(_DIR_CACHE . $chemin_cache) ?
 			@filemtime(_DIR_CACHE . $chemin_cache) : 0;
-		$page = unserialize ($page);
+		$page = @unserialize($page);
 		$use_cache = cache_valide($page, $lastmodified);
 		if (!$use_cache) return; // cache utilisable
 	} else
