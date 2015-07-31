@@ -24,8 +24,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array|bool
  */
 function lister_tables_objets_sql($table_sql=null, $desc=array()){
+	static $deja_la = false;
 	static $infos_tables = null;
+	// prealablement recuperer les tables_principales
 	if (is_null($infos_tables)){
+		// pas de reentrance (cas base/serial)
+		if ($deja_la) return;
+		$deja_la = true;
+		# recuperer les interfaces (table_titre, table_date)
+		include_spip('public/interfaces');
+		# recuperer les tables_principales si besoin
+		include_spip('base/serial');
+		// recuperer les declarations explicites ancienne mode
+		// qui servent a completer declarer_tables_objets_sql
+		base_serial(&$GLOBALS['tables_principales']);
 		$infos_tables = pipeline('declarer_tables_objets_sql',array(
 			'spip_articles'=> array(
 				'texte_retour' => 'icone_retour_article',
@@ -60,6 +72,24 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		// completer les informations manquantes ou implicites
 		foreach($infos_tables as $t=>$infos)
 			$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
+
+		// completer les tables principales
+		// avec celles declarees uniquement dans declarer_table_objets_sql
+		foreach($infos_tables as $table=>$infos) {
+			if (!isset($GLOBALS['tables_principales'][$table])
+			  AND isset($infos['principale']) AND $infos['principale']){
+				// l'ajouter au tableau
+				$GLOBALS['tables_principales'][$table] = array();
+				if (isset($infos['field']) AND isset($infos['key']))
+					$GLOBALS['tables_principales'][$table] = &$infos;
+				else {
+					// lire sa definition en base
+					$trouver_table = charger_fonction('trouver_table','base');
+					$GLOBALS['tables_principales'][$table] = $trouver_table($table);
+				}
+			}
+		}
+		$deja_la = false;
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
 	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
@@ -91,6 +121,9 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * info_1_objet
  * info_nb_objets
  *
+ * principale
+ * editable
+ * 
  * titre
  * date
  * champs_versionnes
@@ -122,6 +155,18 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['table_objet'] = preg_replace(',^spip_,', '', $table_sql);
 	if (!isset($infos['table_objet_surnoms']))
 		$infos['table_objet_surnoms'] = array();
+
+	if (!isset($infos['principale']))
+		$infos['principale'] = (isset($GLOBALS['tables_principales'][$table_sql])?'oui':false);
+
+	// normaliser pour pouvoir tester en php $infos['principale']?
+	// et dans une boucle {principale=oui}
+	$infos['principale'] = (($infos['principale'] AND $infos['principale']!='non')?'oui':false);
+
+	// declarer et normaliser pour pouvoir tester en php $infos['editable']?
+	// et dans une boucle {editable=oui}
+	if (!isset($infos['editable'])) $infos['editable'] = 'oui';
+	$infos['editable'] = (($infos['editable'] AND $infos['editable']!='non')?'oui':false);
 
 	if (!isset($infos['url_voir']))
 		$infos['url_voir'] = $infos['type'];
@@ -159,6 +204,12 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	return $infos;
 }
 
+function lister_tables_principales(){
+	if (!count($GLOBALS['tables_principales'])){
+		lister_tables_objets_sql();
+	}
+	return $GLOBALS['tables_principales'];
+}
 
 /**
  * Recenser les surnoms de table_objet
