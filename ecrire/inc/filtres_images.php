@@ -146,7 +146,9 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			reconstruire_image_intermediaire($fichier);
 		}
 	}
-	
+	$f = "imagecreatefrom".$term_fonction;
+	if (!function_exists($f)) return false;
+	$ret["fonction_imagecreatefrom"] = $f;
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fonction_image"] = "image_image".$terminaison_dest;
