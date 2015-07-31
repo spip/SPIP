@@ -379,6 +379,7 @@ if (!function_exists('str_split'))
      */
     function str_split($string, $split_length = 1)
     {
+	      $result = array();
         $sign = ($split_length < 0) ? -1 : 1;
         $strlen = strlen($string);
         $split_length = abs($split_length);

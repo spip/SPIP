@@ -42,26 +42,10 @@ function action_editer_auteur_dist($arg=null) {
 	if ($id_auteur > 0)
 		$err = auteurs_set($id_auteur);
 
-	if ($redirect = _request('redirect')) {
-		if ($err){
-			$ret = ('&redirect=' . $redirect);
-			spip_log("echec editeur auteur: " . join(' ',$echec));
-			$echec = '&echec=' . join('@@@', $echec);
-			$redirect = generer_url_ecrire('auteur',"id_auteur=$id_auteur$echec$ret",'&');
-		}
-		else
-			$redirect = urldecode($redirect);
+	if ($err)
+		spip_log("echec editeur auteur: $err",_LOG_ERREUR);
 
-		$redirect = parametre_url($redirect,'id_auteur', $id_auteur, '&');
-
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
-	}
-	else
-		return array($id_auteur,$err);
-
-	$redirect = _request('redirect');
-
+	return array($id_auteur,$err);
 }
 
 function insert_auteur($source=null) {

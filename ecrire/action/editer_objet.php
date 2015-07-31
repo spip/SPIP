@@ -91,6 +91,10 @@ function objets_set($objet, $id, $set=null) {
 		$invalideur = "id='$objet/$id'";
 		$indexation = true;
 	}
+	else {
+		$invalideur = "";
+		$indexation = false;
+	}
 
 	modifier_contenu($objet, $id,
 		array(
@@ -123,6 +127,7 @@ function insert_objet($objet, $id_parent=null) {
 	if (!$desc OR !isset($desc['field']))
 		return 0;
 
+	$lang_rub = "";
 	$champs = array();
 	if (isset($desc['field']['id_rubrique'])){
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer l'objet

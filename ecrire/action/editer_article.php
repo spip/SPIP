@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@action_editer_article_dist
 function action_editer_article_dist($arg=null) {
-
+	$err="";
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -91,6 +91,8 @@ function insert_article($id_rubrique) {
 	$id_secteur = $row['id_secteur'];
 	$lang_rub = $row['lang'];
 
+	$lang = "";
+	$choisie = 'non';
 	// La langue a la creation : si les liens de traduction sont autorises
 	// dans les rubriques, on essaie avec la langue de l'auteur,
 	// ou a defaut celle de la rubrique

@@ -103,6 +103,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal) {
 	}
 
 
+	$nb_col = 1;
 	if ($nb_rub = count($arr_rub)) {
 		$nb_col = min(10,max(1,ceil($nb_rub / 10)));
 	}

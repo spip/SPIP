@@ -27,13 +27,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function objet_associable($objet){
 	$trouver_table = charger_fonction('trouver_table','base');
 	$table_sql = table_objet_sql($objet);
-	
+
+	$l="";
 	if ($primary = id_table_objet($objet)
 	  AND $trouver_table($l = $table_sql."_liens")
 		AND !preg_match(',[^\w],',$primary)
 		AND !preg_match(',[^\w],',$l))
 		return array($primary,$l);
-	
+
 	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l",_LOG_ERREUR);
 	return false;
 }

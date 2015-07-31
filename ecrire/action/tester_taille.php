@@ -16,7 +16,7 @@ include_spip('inc/headers');
 function action_tester_taille_error_handler($output)
 {
 	// on est ici, donc echec lors de la creation de l'image
-	if ($error = error_get_last()){
+	if (error_get_last()){
 		return redirige_formulaire($GLOBALS['redirect']);
 	}
 	return $output;
@@ -26,12 +26,6 @@ function action_tester_taille_error_handler($output)
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
 // http://doc.spip.org/@action_tester_taille_dist
 function action_tester_taille_dist() {
-
-	//$securiser_action = charger_fonction('securiser_action', 'inc');
-	//$arg = $securiser_action();
-	$max_size = isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0;
-	$max_size_echec = isset($GLOBALS['meta']['max_taille_vignettes_echec'])?$GLOBALS['meta']['max_taille_vignettes_echec']:0;
-	$max_size_test = isset($GLOBALS['meta']['max_taille_vignettes_test'])?$GLOBALS['meta']['max_taille_vignettes_test']:0;
 
 	$taille = _request('arg');
 	$taille = explode('-',$taille);
@@ -68,18 +62,18 @@ function action_tester_taille_dist() {
 	include_spip('inc/charsets');
 	include_spip('inc/documents');
 	include_spip('inc/header');
-	$dummy = propre("<doc1>");
+	propre("<doc1>"); // charger propre avec le trairement d'un modele
 
 	$i = _request('i')+1;
 	$image_source = chemin_image("test.png");
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=".$GLOBALS['taille_min']."-".$GLOBALS['taille_test']);
 
 	ob_start('action_tester_taille_error_handler');
-	$result = filtrer('image_recadre',$image_source,$taille,$taille);
+	filtrer('image_recadre',$image_source,$taille,$taille);
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
 	// si la valeur intermediaire a reussi, on teste la valeur maxi qui est peut etre sous estimee
 	$taille = $GLOBALS['taille_max'];
-	$result = filtrer('image_recadre',$image_source,$taille,$taille);
+	filtrer('image_recadre',$image_source,$taille,$taille);
 	$GLOBALS['redirect'] = generer_url_action("tester_taille", "i=$i&arg=$taille-".$GLOBALS['taille_max']);
 	ob_end_clean();
 

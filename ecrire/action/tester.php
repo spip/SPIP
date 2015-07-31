@@ -17,6 +17,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_tester_dist() {
 	$arg = _request('arg');
 
+	$gd_formats_read_gif = "";
 	// verifier les formats acceptes par GD
 	if ($arg == "gd1") {
 		// Si GD est installe et php >= 4.0.2

@@ -116,8 +116,8 @@ function inscription_nouveau($desc)
 
 	if (!$id_auteur) return _T('titre_probleme_technique');
 
-	include_spip('inc/modifier');
-	revision_auteur($id_auteur, $desc);
+	include_spip('action/editer_auteur');
+	auteurs_set($id_auteur, $desc);
 
 	instituer_auteur($id_auteur, $desc);
 

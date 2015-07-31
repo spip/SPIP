@@ -73,7 +73,7 @@ function auth_ldap_connect($serveur='') {
 		if ($connexion['authentification']['ldap']) {
 			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
 			unset($GLOBALS['ldap_link']);
-			if (is_readable($f)) include_once($f);
+			if (is_readable($f)) { include_once($f); };
 			if (isset($GLOBALS['ldap_link']))
 				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
 					'base' => $GLOBALS['ldap_base']);
@@ -89,7 +89,7 @@ function auth_ldap_connect($serveur='') {
  * Retrouver un login, et verifier son pass si demande par $checkpass
  *
  * @param string $login
- * @param sring $pass
+ * @param string $pass
  * @param bool $checkpass
  * @return string
  *	le login trouve ou chaine vide si non trouve

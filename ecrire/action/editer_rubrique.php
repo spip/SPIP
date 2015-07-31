@@ -80,7 +80,7 @@ function insert_rubrique($id_parent) {
 // Enregistrer certaines modifications d'une rubrique
 // $c est un tableau qu'on peut proposer en lieu et place de _request()
 // http://doc.spip.org/@revisions_rubriques
-function revisions_rubriques($id_rubrique, $set=false) {
+function revisions_rubriques($id_rubrique, $set=null) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 

@@ -19,21 +19,19 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	// retrouver le login
 	$login = auth_spip_retrouver_login($login);
 
-	$md5pass = $md5next = "";
+	$md5pass = "";
 	$shapass = $shanext = "";
 
 	if (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64})\}$,i",$pass,$regs)){
 		$shapass = $regs[1];
 		$shanext = $regs[2];
-		$pass="";
 	}
 	// compat avec une base mixte md5/sha256 : le js a envoye les 2 hash
 	elseif (preg_match(",^\{([0-9a-f]{64});([0-9a-f]{64});([0-9a-f]{32});([0-9a-f]{32})\}$,i",$pass,$regs)){
 		$shapass = $regs[1];
 		$shanext = $regs[2];
 		$md5pass = $regs[3];
-		$md5next = $regs[4];
-		$pass="";
+		//$md5next = $regs[4];
 	}
   // si envoi non crypte, crypter maintenant
 	elseif ($pass) {
@@ -255,7 +253,7 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 		return false;
 
 	if (!$id_auteur = intval($id_auteur)
-		OR !$auteur = sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
+		OR !sql_fetsel('login','spip_auteurs','id_auteur='.intval($id_auteur),'','','','',$serveur))
 		return false;
 
 	$c = array();
