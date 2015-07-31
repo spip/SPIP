@@ -591,7 +591,8 @@ function traiter_listes ($texte) {
 					$ajout .= $pile_li[$niveau];
 					$ajout .= $pile_type[$niveau];
 					$niveau --;
-					unset ($pile_li[$niveau]);
+					if (!$change_type)
+						unset ($pile_li[$niveau]);
 				}
 				while ($niveau < $profond) {
 					$niveau ++;
