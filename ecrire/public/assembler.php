@@ -707,7 +707,7 @@ function public_previsualisation_dist($page)
 function envoyer_entetes($entetes) {
 	foreach ($entetes as $k => $v)
 	#	if (strncmp($k, 'X-Spip-', 7))
-			@header($v?"$k: $v":$k);
+			@header(strlen($v)?"$k: $v":$k);
 }
 
 ?>
