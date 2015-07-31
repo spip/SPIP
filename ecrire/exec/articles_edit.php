@@ -100,6 +100,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	'titre'=>$titre,
 	'new'=>$new?$new:$row['id_article'],
 	'id_rubrique'=>$row['id_rubrique'],
+	'id_secteur'=>$row['id_secteur'],
 	'lier_trad'=>$lier_trad,
 	'config_fonc'=>$config_fonc,
 	// passer row si c'est le retablissement d'une version anterieure
