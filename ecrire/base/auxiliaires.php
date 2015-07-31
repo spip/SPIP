@@ -43,13 +43,14 @@ $spip_visites_articles_key = array(
 		"PRIMARY KEY"	=> "date, id_article");
 
 $spip_recherches = array(
- 		"recherche"	=> "BIGINT UNSIGNED NOT NULL",
+ 		"recherche"	=> "char(16) not null default ''",
 		"id"	=> "INT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP" );
 
 $spip_recherches_key = array(
- 		"PRIMARY KEY"	=> "recherche,id");
+// pas de cle ni index, ca fait des insertions plus rapides et les requetes jointes utilisees en recheche ne sont pas plus lentes ...
+);
 
 $spip_referers = array(
 		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
