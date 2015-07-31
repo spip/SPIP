@@ -263,7 +263,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		    {
 			$err_f = array('zbug_erreur_filtre', array('filtre' => $args));
 			erreur_squelette($err_f, $pointeur_champ);
-			$champ->apres = $champ->avant = $args = "";
+			$args = "";
 			break;
 		      }   
 		}
