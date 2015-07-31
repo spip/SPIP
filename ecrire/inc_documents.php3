@@ -1297,7 +1297,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			reset($documents_lies);
 			while (list(, $id_document) = each($documents_lies)) {
 				afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
-				echo "<p>\n";
+				echo "<p />\n";
 			}
 		}
 
@@ -1494,7 +1494,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 	
-		//echo "</div>\n";
+		echo "</div>\n";
 		fin_cadre_enfonce();
 	}
 
