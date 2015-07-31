@@ -407,7 +407,7 @@ Mercé per la vòstra participacion
 'image_tourner_gauche' => 'Rotacion 90° vèrs la senèca',
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible', # NEW
-'info_a_suivre' => 'DE SÈGRE>>',
+'info_a_suivre' => 'DE SÈGRE&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Accès proïbit',
 'info_acces_refuse' => 'Accès refusat',

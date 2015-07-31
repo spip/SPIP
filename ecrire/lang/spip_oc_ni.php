@@ -408,7 +408,7 @@ Mercé de la voastra participacion
 'image_tourner_gauche' => 'Rotacion 90° à senèca',
 'img_indisponible' => 'imatge indisponible',
 'impossible' => 'impossible',
-'info_a_suivre' => 'DA SEGRE >>',
+'info_a_suivre' => 'DA SEGRE &gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Accès proïbit',
 'info_acces_refuse' => 'Accès refudat',
