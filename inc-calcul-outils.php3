@@ -38,8 +38,9 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 	'SITE' => 'site'
 );
   $type = $table_logos[$type];
+  # attention au cas $id = '0' pour LOGO_SITE_SPIP ==> intval
   while ($id) {
-    $on = cherche_image_nommee($type . $onoff . $id);
+    $on = cherche_image_nommee($type . $onoff . intval($id));
     if ($on) 
       { if ($ff)
 	  return  ("$on[1].$on[2]");

@@ -9,7 +9,7 @@
 
 	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-		<url>#URL_SITE_SPIP/IMG/ruboff0.gif</url>
+		<url>#URL_SITE_SPIP[/(#LOGO_SITE_SPIP||extraire_attribut{src})]</url>
 		<link>#URL_SITE_SPIP/</link>
 		<description></description>
 	</image>
@@ -19,7 +19,7 @@
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
 		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
@@ -32,7 +32,7 @@
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
 		<author><BOUCLE_auteurs_t(AUTEURS){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_auteurs_t></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>

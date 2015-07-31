@@ -531,17 +531,21 @@ function balise_POPULARITE_dist ($p) {
 //
 function calcul_balise_logo ($p) {
 
-	// analyser la balise LOGO_xxx
-	eregi("^LOGO_(([A-Z]+)(_.*)?)", $p->nom_champ, $regs);
-	$type_logo = $regs[1];	// ARTICLE_RUBRIQUE
-	$type_objet = $regs[2];	// ARTICLE
-	$suite_logo = $regs[3];	// _RUBRIQUE
+	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
+	$type_objet = $regs[1];
+	$suite_logo = $regs[2];	
+	spip_log($suite_logo);
+	if (ereg("^_SPIP(.*)$", $suite_logo, $regs)) {
+		$type_objet = 'RUBRIQUE';
+		$suite_logo = $regs[1];
+		$_id_objet = "\"'0'\"";
+	} else {
 
-	if ($type_objet == 'SITE')
-		$_id_objet = champ_sql("id_syndic", $p);
-	else
-		$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
-
+		if ($type_objet == 'SITE')
+			$_id_objet = champ_sql("id_syndic", $p);
+		else
+			$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
+	}
 	// analyser les filtres
 	$flag_fichier = false;
 	$filtres = '';
