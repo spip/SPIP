@@ -195,16 +195,10 @@ function abs_url($texte, $base='') {
 */
 function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){
 	if (is_null($flags)) {
-		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
-			$flags = ENT_COMPAT;
-		else
-			$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT|ENT_HTML401;
 	}
 
-	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
-		return htmlspecialchars($string,$flags,$encoding);
-	else
-		return htmlspecialchars($string,$flags,$encoding,$double_encode);
+	return htmlspecialchars($string,$flags,$encoding,$double_encode);
 }
 
 /**
@@ -218,15 +212,9 @@ function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $do
 */
 function spip_htmlentities($string,$flags=null,$encoding = 'ISO-8859-1',$double_encode = true){
 	if (is_null($flags)) {
-		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
-			$flags = ENT_COMPAT;
-		else
-			$flags = ENT_COMPAT|ENT_HTML401;
+		$flags = ENT_COMPAT|ENT_HTML401;
 	}
 
-	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
-		return htmlentities($string,$flags,$encoding);
-	else
-		return htmlentities($string,$flags,$encoding,$double_encode);
+	return htmlentities($string,$flags,$encoding,$double_encode);
 }
 ?>
