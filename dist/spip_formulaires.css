@@ -6,7 +6,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #333300; }
+.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #333300; }
 .formulaire_spip form { margin: 0; padding: 0; } /* Bug IE/Win */
 
 /* Fieldset */
