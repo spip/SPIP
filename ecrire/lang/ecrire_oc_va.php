@@ -102,13 +102,10 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_radio_publication_immediate' => 'Publicar los messatges sus lo còp
  (las contribucions apareisson tre mandaas, los administrators las pòon
  suprimir puei).',
-'bouton_radio_sauvegarde_compressee' => 'Sauvagarda comprimia sos @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimia sos @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lançar l\'installacion',
-'bouton_restaurer_base' => 'Restaurar la basa',
 'bouton_suivant' => 'Seguent',
 'bouton_tenter_recuperation' => 'Assajar de reparar',
 'bouton_test_proxy' => 'Assajar lo proxy',
@@ -338,7 +335,6 @@ L\'administrator dau sistèma o de la ret vos deu poer fornir
 'info_avertissement' => 'Avís',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de vòstra basa de donaas es installaa.',
-'info_base_restauration' => 'La basa es en cors de restauracion.',
 'info_bloquer' => 'blocar',
 'info_breves' => 'Vòstre sit utiliza lo sistèma de brèvas?',
 'info_breves_03' => 'brèvas',
@@ -407,7 +403,6 @@ L\'administrator dau sistèma o de la ret vos deu poer fornir
 'info_envoi_email_automatique' => 'Enviament d\'e-mails automatics',
 'info_envoi_forum' => 'Mandaís dels forums als autors dels articles',
 'info_envoyer_maintenant' => 'Mandar aüra',
-'info_erreur_restauration' => 'Error de restauracion: fichier inexistent.',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Poètz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Poètz passar a l\'estapa seguenta.',
@@ -619,8 +614,6 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Mas los administrators pòon modificar aquela adreiça.',
-'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Restrénher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la cèrcha:',
 'info_rubriques' => 'Rubricas',
@@ -629,29 +622,6 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'info_rubriques_trouvees' => 'Rubricas trobaas',
 'info_rubriques_trouvees_dans_texte' => 'Rubricas trobaas (dins lo tèxt)',
 'info_sans_titre' => 'Sens títol',
-'info_sauvegarde' => 'Sauvagarda',
-'info_sauvegarde_articles' => 'Sauvagardar los articles',
-'info_sauvegarde_articles_sites_ref' => 'Sauvagardar los articles dels sits referenciats',
-'info_sauvegarde_auteurs' => 'Sauvagardar los autors',
-'info_sauvegarde_breves' => 'Sauvagardar las brèvas',
-'info_sauvegarde_documents' => 'Sauvagardar los documents',
-'info_sauvegarde_echouee' => 'Se la sauvagarda a mal capitat («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Sauvagardar los forums',
-'info_sauvegarde_groupe_mots' => 'Sauvagardar los grops de mots',
-'info_sauvegarde_messages' => 'Sauvagardar los messatges',
-'info_sauvegarde_mots_cles' => 'Sauvagardar los mots clau',
-'info_sauvegarde_petitions' => 'Sauvagardar las peticions',
-'info_sauvegarde_refers' => 'Sauvagardar los referiors',
-'info_sauvegarde_reussi_01' => 'Sauvagarda abotia.',
-'info_sauvegarde_reussi_02' => 'La basa es estaa sauvagardaa dins @archive@. Poètz',
-'info_sauvegarde_reussi_03' => 'tornar a la gestion',
-'info_sauvegarde_reussi_04' => 'de vòstre sit.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sauvagardar las rubricas',
-'info_sauvegarde_signatures' => 'Sauvagardar las signaturas de peticions',
-'info_sauvegarde_sites_references' => 'Sauvagardar los sits referenciats',
-'info_sauvegarde_type_documents' => 'Sauvagardar los tipes de documents',
-'info_sauvegarde_visites' => 'Sauvagardar las vesitas',
 'info_selection_chemin_acces' => '<b>Seleccionatz</b> çai sos lo chamin d\'accès dins l\'annuari:',
 'info_selection_un_seul_mot_cle' => 'Se pòt seleccionar mas qu\'<b>un mot clau</b> au còp dins aqueu grop.',
 'info_signatures' => 'signaturas',
@@ -976,9 +946,6 @@ una color indica lor estat:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin. restrench)',
 'syndic_choix_moderation' => 'Que se pòt far amb los liams venents que provenon d\'aquel sit?',
 'syndic_choix_oublier' => 'Que se pòt far amb los liams que figuran pas pus dins lo fichier de sindicacion?',
@@ -1003,12 +970,6 @@ una color indica lor estat:',
 'texte_admin_effacer_01' => 'Aquela comanda esfaça <i>tot</i> lo contengut de la basa de donaas,
  incluses <i>tots</i> los accèsses redactors e administrators. Un còp que l\'auretz executaa, auretz de tornar lançar l\'installacion d\'SPIP per tornar crear una basa novèla e mai un primier accès administrator.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Aquela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que serà servat dins lo repertòri @dossier@.
-Eissublietz pas tanpauc de recuperar l\'integralitat dau repertòri <i>IMG/</i>, que conten los imatges e los documents utilizats dins los articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se poirà restaurar SOLAMENT dins un sit installat amb la mesma version d\'SPIP. Donc sobretot chau pas "voidar la basa" en esperar de reïnstallar la sauvagarda après una actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Poètz chausir de sauvagardar lo fichier sos forma comprimia, a fin
- d\'abrivar son transferiment vèrs vos o en cò d\'un servior de sauvagardas, e a fin d\'esparnhar d\'espaci disc.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Se vòstre annuari es installat sobre la mesma maquina qu\'aqueu sit web, s\'agís probable de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seguent es estat apondut a l\'article:',
 'texte_annuaire_ldap_1' => 'S\'accedissètz a un annuari (LDAP), lo poètz utilizar per importar automaticament d\'utilizaires sos SPIP.',
@@ -1166,15 +1127,6 @@ tornar calcular mas qu\'una pagina, passatz puslèu per l\'espaci public e utili
  benlèu d\'indicis de çò que vai pas...<p>
   Se lo problèma persistís, contactatz vòstre
   auberjaor.<p>', # MODIF
-'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
-'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una sauvagarda 
- de la basa que l\'aviatz facha avans. Per aquò faire, chau aver botat lo fichier que conten la sauvagarda 
-dins lo repertòri @dossier@.
-  Pasmens, siatz prudent(a) amb aquela foncionalitat: <b>las modificacions e pèrdas eventualas son
-  irreversiblas.</b>',
-'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
-'texte_sauvegarde_base' => 'Sauvagardar la basa',
-'texte_sauvegarde_compressee' => 'La sauvagarda se farà dins lo fichier non comprimit @fichier@.',
 'texte_selection_langue_principale' => 'Poètz seleccionar çai sos la "lenga principala" dau sit. Aquela chausia vos obliga pas -per fortuna- d\'escriure vòstres articles dins la lenga seleccionaa, mas permet de determinar:
  <ul><li> lo format predefinit de las datas sobre lo sit public;</li>
  <li> la natura dau motor tipografic que SPIP deu utilizar per lo rendut dels tèxtes;</li>

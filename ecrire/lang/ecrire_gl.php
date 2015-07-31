@@ -104,13 +104,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_petition_activee' => 'Petición activada',
 'bouton_radio_publication_immediate' => 'Publicación inmediata das mensaxes
 		(as contribucións amósanse dende o seu envío, o equipo de xestión pódeas borrar).',
-'bouton_radio_sauvegarde_compressee' => 'copia de seguridade comprimida en @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'copia de seguridade sen comprimir en @fichier@',
 'bouton_radio_supprimer_petition' => 'Eliminar a petición',
 'bouton_radio_syndication' => 'Afiliación:',
 'bouton_redirection' => 'REDIRECCIÓN',
 'bouton_relancer_installation' => 'Relanzar a instalación',
-'bouton_restaurer_base' => 'Restaurar a base',
 'bouton_suivant' => 'Seguinte',
 'bouton_tenter_recuperation' => 'Tentar unha reparación',
 'bouton_test_proxy' => 'Probar o proxy',
@@ -343,7 +340,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Aviso',
 'info_barre_outils' => 'coa barra de utilidades?',
 'info_base_installee' => 'A estrutura da base de datos foi instalada.',
-'info_base_restauration' => 'A base está en proceso de restauración.',
 'info_bloquer' => 'bloquear',
 'info_breves' => 'O seu web empregará o sistema de breves?',
 'info_breves_03' => 'breves',
@@ -414,7 +410,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Envío automático de correos-e.',
 'info_envoi_forum' => 'Envío de foros ás/ós autoras/es dos artigos',
 'info_envoyer_maintenant' => 'Enviar agora',
-'info_erreur_restauration' => 'Erro de restauración: o ficheiro non existe.',
 'info_etape_suivante' => 'Pasar á etapa seguinte',
 'info_etape_suivante_1' => 'Podes pasar á etapa seguinte.',
 'info_etape_suivante_2' => 'Podes pasar á etapa seguinte.',
@@ -636,8 +631,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Substituír "@titre@"',
 'info_renvoi_article' => '<b>Redirecci&amp;oacute;n.</b> Este artigo reenv&amp;iacute; &amp;aacute; p&amp;aacute;xina:',
 'info_reserve_admin' => 'Só o equipo de xestión pode modificar este enderezo.',
-'info_restauration_sauvegarde' => 'Restauración da copia de seguridade @archive@',
-'info_restauration_sauvegarde_insert' => 'Inserción de @archive@ na base de datos',
 'info_restreindre_rubrique' => 'Restrinxir a xestión ó tema:',
 'info_resultat_recherche' => 'Resultados da procura:',
 'info_rubriques' => 'temas',
@@ -646,29 +639,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Temas atopados',
 'info_rubriques_trouvees_dans_texte' => 'Temas atopados (no texto)',
 'info_sans_titre' => 'Sen título',
-'info_sauvegarde' => 'Copia de seguridade',
-'info_sauvegarde_articles' => 'Gardar os artigos',
-'info_sauvegarde_articles_sites_ref' => 'Gardar os artigos dos webs referidos',
-'info_sauvegarde_auteurs' => 'Gardar os autores',
-'info_sauvegarde_breves' => 'Gardar as breves',
-'info_sauvegarde_documents' => 'Gardar os documentos',
-'info_sauvegarde_echouee' => 'Se a copia de seguridade fallou («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Gardar os foros',
-'info_sauvegarde_groupe_mots' => 'Gardar os grupos de palabras',
-'info_sauvegarde_messages' => 'Gardar as mensaxes',
-'info_sauvegarde_mots_cles' => 'Gardar as palabras chave',
-'info_sauvegarde_petitions' => 'Gardar as peticións',
-'info_sauvegarde_refers' => 'Gardar os referentes',
-'info_sauvegarde_reussi_01' => 'Feita a copia de seguridade.',
-'info_sauvegarde_reussi_02' => 'A base foi gardada en @archive@. Pode ',
-'info_sauvegarde_reussi_03' => 'volver á xestión',
-'info_sauvegarde_reussi_04' => 'do seu web.',
-'info_sauvegarde_rubrique_reussi' => 'As táboas da sección @titre@ foron gardadas en @archive@. Pode',
-'info_sauvegarde_rubriques' => 'Gardar os temas',
-'info_sauvegarde_signatures' => 'Gardar as sinaturas de peticións',
-'info_sauvegarde_sites_references' => 'Gardar os webs referidos',
-'info_sauvegarde_type_documents' => 'Gardar os tipos de documentos',
-'info_sauvegarde_visites' => 'Gardar as visitas',
 'info_selection_chemin_acces' => '<b>Selecciona</b> aquí a vía de acceso á guía:',
 'info_selection_un_seul_mot_cle' => 'Neste grupo pódese seleccionar <b>só unha palabra chave</b> ao mesmo tempo.',
 'info_signatures' => 'sinaturas',
@@ -993,9 +963,6 @@ cunha cor que indica o seu estado :',
 
 // S
 'sans_heure' => 'sen hora',
-'sauvegarde_fusionner' => 'Fusionar a base de datos actual e a copia de seguridade',
-'sauvegarde_fusionner_depublier' => 'Despublicar os obxectos fusionados',
-'sauvegarde_url_origine' => 'Eventualemente, URL do web de orixe :',
 'statut_admin_restreint' => '(admin restrinxido)',
 'syndic_choix_moderation' => 'Que facer das vindeiras ligazóns que proveñan deste web ?',
 'syndic_choix_oublier' => 'Que facer das ligazóns que xa non figuran no ficheiro de subscrición ?',
@@ -1022,12 +989,6 @@ cunha cor que indica o seu estado :',
 		Logo de executa.lo, terás que lanzar de novo a instalación do SPIP para crear unha
 		nova base e un novo acceso de administración.',
 'texte_admin_effacer_stats' => 'Este comando borra todos os datos ligados ás estatísticas de visita do web, e inclúe a popularidade dos artigos.',
-'texte_admin_tech_01' => 'Esta opción permite gardar o contido da base nun ficheiro que será almaceado no directorio @dossier@. Non esqueza tamén gardar o directorio @img@ íntegro, que é o que contén as imaxes e os documentos anexos empregados nos artigos e nas seccións.',
-'texte_admin_tech_02' => 'Atención!: esta copia de seguridade SÓ poderá ser restaurada  nun web que teña instalada a MESMA versión de SPIP. Daquela de ningunha maneira é conveniente « baleirar a base » coa esperanza de reinstalar a copia de seguridade logo da actualización...Consulte
-  <a href="@spipnet@">a documentación de SPIP</a>.',
-'texte_admin_tech_03' => 'Pode escoller gardar o ficheiro en formato comprimido, para optimizar
-  a transferencia ou a copia nun servidor de copias de seguridade, e para aforrar espazo no disco.',
-'texte_admin_tech_04' => 'Nun intento de fusión con outra base, pode limitar a copia de seguridade á sección:',
 'texte_adresse_annuaire_1' => '(Se a súa guía/directorio foi aloxada na mesma máquina ca este
   web, seguramente será «localhost».)',
 'texte_ajout_auteur' => '@ seguinte autor/a foi engadido ao artigo:',
@@ -1174,15 +1135,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
  táboas cando estas foron danadas por accidente.
   Aí pode tentar esta reparación; en caso de fallo, garde unha copia do resultado, que pode que conteña indicios do que non vai ben...<p>
   Se o problema persiste, póñase en contacto co seu provedor de aloxamento.<p>',
-'texte_restaurer_base' => 'Restaurar o contido dunha copia de seguridade da base',
-'texte_restaurer_sauvegarde' => 'Esta opción permite restaurar unha copia de seguridade precedente
-  feita da base. Para isto, o ficheiro da copia de seguridade ten que
-  estar no cartafol @dossier@.
-  Sexa prudente con esta funcionalidade : <b>as modificacións e perdas eventuais, son
-  irreversíbeis.</b>',
-'texte_sauvegarde' => 'Gardar o contido da base',
-'texte_sauvegarde_base' => 'Gardar a base',
-'texte_sauvegarde_compressee' => 'A copia de seguridade será feita no ficheiro sen comprimir @fichier@.',
 'texte_selection_langue_principale' => 'Pode seleccionar aquí embaixo a «lingua principal» do web. Esta elección non obriga (malo sería!) a escribir os artigos no idioma seleccionado, mais permite determinar:
   <ul><li>o formato por defecto das datas no web público;</li>
   <li>a natureza do motor tipográfico que SPIP ten que empregar para a reprodución dos textos;</li>

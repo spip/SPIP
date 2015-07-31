@@ -101,13 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'פרסום מיידי של הודעות
  (התרומות מופיעות מרגע שליחתן, האדמיניסטרטורים יכולים
  למחקן לאחר מכן).',
-'bouton_radio_sauvegarde_compressee' => 'שמור כדחוס ב@fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'שמור כ-לא דחוס ב @fichier@',
 'bouton_radio_supprimer_petition' => 'מחק את העצומה',
 'bouton_radio_syndication' => ':סינדיקציה',
 'bouton_redirection' => 'כוון שנית',
 'bouton_relancer_installation' => 'התחל בשנית התקנה',
-'bouton_restaurer_base' => 'שחזר את בסיס הנתונים',
 'bouton_suivant' => 'הבא',
 'bouton_tenter_recuperation' => 'ניסיון תיקון',
 'bouton_test_proxy' => 'בחן את ייפוי הכוח',
@@ -340,7 +337,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'אזהרה',
 'info_barre_outils' => 'עם סרגל הכלים שלי?',
 'info_base_installee' => '.המבנה של בסיס הנתונים שלך מותקן',
-'info_base_restauration' => '.השיקום של בסיס הנתונים נמצא בהתקדמות',
 'info_bloquer' => 'חסום',
 'info_breves' => 'האם אתרך משתמש במערכת המבזקים ?',
 'info_breves_03' => 'מבזקים',
@@ -411,7 +407,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'דיוור אוטומטי',
 'info_envoi_forum' => 'שלח פורומים למחברי המאמרים',
 'info_envoyer_maintenant' => 'שלח עכשיו',
-'info_erreur_restauration' => '.שגיאת שיקום: קובץ לא נמצא',
 'info_etape_suivante' => 'לך אל השלב הבא',
 'info_etape_suivante_1' => '.הינך יכול לעבור לשלב הבא',
 'info_etape_suivante_2' => '.הינך יכול לעבור לשלב הבא',
@@ -636,8 +631,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirection.</b> Cet article renvoie à la page:', # NEW
 'info_reserve_admin' => 'Seuls les administrateurs peuvent modifier cette adresse.', # NEW
-'info_restauration_sauvegarde' => 'restauration de la sauvegarde @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Restreindre la gestion à la rubrique :', # NEW
 'info_resultat_recherche' => 'Résultats de la recherche :', # NEW
 'info_rubriques' => 'נושאים',
@@ -646,29 +639,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_rubriques_trouvees' => 'Rubriques trouvées', # NEW
 'info_rubriques_trouvees_dans_texte' => 'Rubriques trouvées (dans le texte)', # NEW
 'info_sans_titre' => 'בלי כותר',
-'info_sauvegarde' => 'גיבוי',
-'info_sauvegarde_articles' => 'Sauvegarder les articles', # NEW
-'info_sauvegarde_articles_sites_ref' => 'Sauvegarder les articles des sites référencés', # NEW
-'info_sauvegarde_auteurs' => 'Sauvegarder les auteurs', # NEW
-'info_sauvegarde_breves' => 'גיבוי המבזקים',
-'info_sauvegarde_documents' => 'Sauvegarder les documents', # NEW
-'info_sauvegarde_echouee' => 'Si la sauvegarde a échoué («Maximum execution time exceeded»),', # NEW
-'info_sauvegarde_forums' => 'Sauvegarder les forums', # NEW
-'info_sauvegarde_groupe_mots' => 'Sauvegarder les groupes de mots', # NEW
-'info_sauvegarde_messages' => 'Sauvegarder les messages', # NEW
-'info_sauvegarde_mots_cles' => 'Sauvegarder les mots-clés', # NEW
-'info_sauvegarde_petitions' => 'Sauvegarder les pétitions', # NEW
-'info_sauvegarde_refers' => 'Sauvegarder les referers', # NEW
-'info_sauvegarde_reussi_01' => 'הגיבוי הצליח.',
-'info_sauvegarde_reussi_02' => 'La base a été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_reussi_03' => 'retourner à la gestion', # NEW
-'info_sauvegarde_reussi_04' => 'de votre site.', # NEW
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sauvegarder les rubriques', # NEW
-'info_sauvegarde_signatures' => 'Sauvegarder les signatures de pétitions', # NEW
-'info_sauvegarde_sites_references' => 'Sauvegarder les sites référencés', # NEW
-'info_sauvegarde_type_documents' => 'Sauvegarder les types de documents', # NEW
-'info_sauvegarde_visites' => 'Sauvegarder les visites', # NEW
 'info_selection_chemin_acces' => '<b>Sélectionnez</b> ci-après le chemin d\'accès dans l\'annuaire :', # NEW
 'info_selection_un_seul_mot_cle' => 'On ne peut sélectionner qu\'<b>un seul mot-clé à</b> la fois dans ce groupe.', # NEW
 'info_signatures' => 'signatures', # NEW
@@ -993,9 +963,6 @@ dans une couleur qui indique leur état :', # NEW
 
 // S
 'sans_heure' => 'בלי זמן',
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin restreint)', # NEW
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
@@ -1021,11 +988,6 @@ dans une couleur qui indique leur état :', # NEW
 y compris <i>tous</i> les accès rédacteurs et administrateurs. Après l\'avoir exécutée, vous devrez lancer la
 réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier accès administrateur.', # NEW
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stocké dans le répertoire @dossier@. N\'oubliez pas également de récupérer l\'intégralité du répertoire @img@, qui contient les images et les documents utilisés dans les articles et les rubriques.', # NEW
-'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra être restaurée QUE dans un site installé sous la même version de SPIP. Il ne faut donc surtout pas « vider la base » en espérant réinstaller la sauvegarde après une mise à jour... Consultez <a href="@spipnet@">la documentation de SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compressée, afin
-	d\'écourter son transfert chez vous ou sur un serveur de sauvegardes, et d\'économiser de l\'espace disque.', # NEW
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Si votre annuaire est installé sur la même machine que ce site Web, il s\'agit probablement de «localhost».)', # NEW
 'texte_ajout_auteur' => 'L\'auteur suivant a été ajouté à l\'article :', # NEW
 'texte_annuaire_ldap_1' => 'Si vous avez accès à un annuaire (LDAP), vous pouvez l\'utiliser pour importer automatiquement des utilisateurs sous SPIP.', # NEW
@@ -1177,15 +1139,6 @@ recalculer une seule page, passez plutôt par l\'espace public et utilisez-y le 
   peut-être des indices de ce qui ne va pas...</p><p>
   Si le problème persiste, prenez contact avec votre
   hébergeur.</p>', # MODIF
-'texte_restaurer_base' => 'Restaurer le contenu d\'une sauvegarde de la base', # NEW
-'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde précédemment
-		effectuée de la base. A cet effet, le fichier contenant la sauvegarde doit avoir été
-		placé dans le répertoire @dossier@.
-		Soyez prudent avec cette fonctionnalité : <b>les modifications, pertes éventuelles, sont
-		irréversibles.</b>', # NEW
-'texte_sauvegarde' => 'Sauvegarder le contenu de la base', # NEW
-'texte_sauvegarde_base' => 'Sauvegarder la base', # NEW
-'texte_sauvegarde_compressee' => 'La sauvegarde sera faite dans le fichier non compressé @fichier@.', # NEW
 'texte_selection_langue_principale' => 'Vous pouvez sélectionner ci-dessous la « langue principale » du site. Ce choix ne vous oblige - heureusement ! - pas à écrire vos articles dans la langue sélectionnée, mais permet de déterminer :
 	<ul><li> le format par défaut des dates sur le site public ;</li>
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes ;</li>

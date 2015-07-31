@@ -100,13 +100,10 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'bouton_radio_pas_petition' => 'Inga namninsamlingar',
 'bouton_radio_petition_activee' => 'Namninsamling aktiverad',
 'bouton_radio_publication_immediate' => 'Omedelbar publicering av meddelanden (bidrag visas direkt efter att de skickas, administratörer kan radera dom senare):',
-'bouton_radio_sauvegarde_compressee' => 'spara komprimerat i @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'spara utan att komprimera i @fichier@',
 'bouton_radio_supprimer_petition' => 'Radera namninsamlingen',
 'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'OMPEKA',
 'bouton_relancer_installation' => 'Kör installationen igen',
-'bouton_restaurer_base' => 'Återställ databasen',
 'bouton_suivant' => 'Nästa',
 'bouton_tenter_recuperation' => 'Försök till reparation',
 'bouton_test_proxy' => 'Testa proxyn',
@@ -338,7 +335,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_avertissement' => 'Varning',
 'info_barre_outils' => 'med dess verktygsfält?',
 'info_base_installee' => 'Databasen är skapad',
-'info_base_restauration' => 'Återskapande av databasen pågår.',
 'info_bloquer' => 'Block',
 'info_breves' => 'Använder din sajt nyhetssystemet?',
 'info_breves_03' => 'Nyheter',
@@ -409,7 +405,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_envoi_email_automatique' => 'Automatisk e-post',
 'info_envoi_forum' => 'Skicka foruminlägg till artikelredaktörerna',
 'info_envoyer_maintenant' => 'Skicka nu',
-'info_erreur_restauration' => 'Fel vid återskapande: filen finns inte.',
 'info_etape_suivante' => 'Gå till nästa steg',
 'info_etape_suivante_1' => 'Du kan fortsätta till nästa steg.',
 'info_etape_suivante_2' => 'Du kan fortsätta till nästa steg.',
@@ -633,8 +628,6 @@ funktioner hos SPIP inte användas.',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Ompekning.</b> Den här artikeln pekar om till:',
 'info_reserve_admin' => 'Enbart administratörer kan förändra adressen.',
-'info_restauration_sauvegarde' => 'Lägger tillbaka backupen @archive@',
-'info_restauration_sauvegarde_insert' => 'Läser in @archive@ i databasen',
 'info_restreindre_rubrique' => 'Begränsa administrationen till avdelningen:',
 'info_resultat_recherche' => 'Sökresultat:',
 'info_rubriques' => 'Avdelningar',
@@ -643,29 +636,6 @@ funktioner hos SPIP inte användas.',
 'info_rubriques_trouvees' => 'Hittade avdelningar',
 'info_rubriques_trouvees_dans_texte' => 'Avdelningar funna (i texten)',
 'info_sans_titre' => 'Utan titel',
-'info_sauvegarde' => 'Backup',
-'info_sauvegarde_articles' => 'Backa upp artiklarna',
-'info_sauvegarde_articles_sites_ref' => 'Säkerhetskopiera artiklar från länkade sajter',
-'info_sauvegarde_auteurs' => 'Säkerhetskopiera redaktörerna',
-'info_sauvegarde_breves' => 'Ta en säkerhetskopia av nyheterna',
-'info_sauvegarde_documents' => 'Säkerhetskopiera dokumenten',
-'info_sauvegarde_echouee' => 'Om säkerhetskopieringen misslyckas («Maximal utförandetid överskreds»),',
-'info_sauvegarde_forums' => 'Säkerhetskopiera forumen',
-'info_sauvegarde_groupe_mots' => 'Säkerhetskopiera nyckelordsgrupperna',
-'info_sauvegarde_messages' => 'Säkerhetskopiera meddelanden',
-'info_sauvegarde_mots_cles' => 'Säkerhetskopiera nyckelorden',
-'info_sauvegarde_petitions' => 'Säkerhetskopiera namninsamlingarna',
-'info_sauvegarde_refers' => 'Säkerhetskopiera länkarna',
-'info_sauvegarde_reussi_01' => 'Säkerhetskopieringen lyckades.',
-'info_sauvegarde_reussi_02' => 'Databasen har sparats i @archive@. Du kan',
-'info_sauvegarde_reussi_03' => 'Återvänd till administrationen',
-'info_sauvegarde_reussi_04' => 'på din sajt.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Säkerhetskopiera avdelningarna',
-'info_sauvegarde_signatures' => 'Säkerhetskopiera namininsamlingarnas underskrifter',
-'info_sauvegarde_sites_references' => 'säkerhetskopiera länkade sajter',
-'info_sauvegarde_type_documents' => 'Säkerhetskopiera dokumenttyper',
-'info_sauvegarde_visites' => 'Säkerhetskopiera besök',
 'info_selection_chemin_acces' => '<b>Välj</b> åtkomstväg i katalogen:',
 'info_selection_un_seul_mot_cle' => 'Du kan välja <b>endast ett nyckelord</b> samtidigt i den här gruppen.',
 'info_signatures' => 'underskrifter',
@@ -990,9 +960,6 @@ med en färg som visar deras status:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin restreint)', # NEW
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
@@ -1018,11 +985,6 @@ med en färg som visar deras status:',
 inklusive <i>alla</i> uppgifter om användare. Efter att du använt det, måste du 
 installera om SPIP för att skapa en ny databas och den första administratören.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stocké dans le répertoire @dossier@. N\'oubliez pas également de récupérer l\'intégralité du répertoire @img@, qui contient les images et les documents utilisés dans les articles et les rubriques.', # NEW
-'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra être restaurée QUE dans un site installé sous la même version de SPIP. Il ne faut donc surtout pas « vider la base » en espérant réinstaller la sauvegarde après une mise à jour... Consultez <a href="@spipnet@">la documentation de SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Du kan välja att spara filen i komprimerad form för att 
- snabba upp överföringen till din dator eller till en backupserver och spara lite diskutrymme.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '( Om din katalog är installerad på samma dator som din websajt, är det troligen «localhost».)',
 'texte_ajout_auteur' => 'Följande redaktör lades till artikeln:',
 'texte_annuaire_ldap_1' => 'Om du har tillgång till en LDAP-katalog kan du använda den för att importera användare till SPIP.',
@@ -1173,15 +1135,6 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
   peut-être des indices de ce qui ne va pas...</p><p>
   Si le problème persiste, prenez contact avec votre
   hébergeur.</p>', # MODIF
-'texte_restaurer_base' => 'Återställ innehållet i databasens backup',
-'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde précédemment
-		effectuée de la base. A cet effet, le fichier contenant la sauvegarde doit avoir été
-		placé dans le répertoire @dossier@.
-		Soyez prudent avec cette fonctionnalité : <b>les modifications, pertes éventuelles, sont
-		irréversibles.</b>', # NEW
-'texte_sauvegarde' => 'Säkerhetskopiera innehållet i databasen',
-'texte_sauvegarde_base' => 'Säkerhetskopiera databasen',
-'texte_sauvegarde_compressee' => 'Säkerhetskopian kommer att sparas okomprimerad i filen @fichier@.',
 'texte_selection_langue_principale' => 'Vous pouvez sélectionner ci-dessous la « langue principale » du site. Ce choix ne vous oblige - heureusement ! - pas à écrire vos articles dans la langue sélectionnée, mais permet de déterminer :
 	<ul><li> le format par défaut des dates sur le site public ;</li>
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes ;</li>

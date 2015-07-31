@@ -108,13 +108,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Незабавно публикуване на съобщения
  (приносите от съобщения ще бъдат показани в момента, в който бъдат изпратени; след това
  администраторите могат да ги изтриват).',
-'bouton_radio_sauvegarde_compressee' => 'Запазване в компресиран вид в @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'Запазване в некомпресиран вид в @fichier@',
 'bouton_radio_supprimer_petition' => 'Изтриване на молбата',
 'bouton_radio_syndication' => 'Обединеняване на сайтове:',
 'bouton_redirection' => 'ПРЕНАСОЧВАНЕ',
 'bouton_relancer_installation' => 'Подновяване на инсталацията',
-'bouton_restaurer_base' => 'Възстановяване на базата данни',
 'bouton_suivant' => 'По-нататък',
 'bouton_tenter_recuperation' => 'Опит за възстановяване',
 'bouton_test_proxy' => 'Тестване на прокси',
@@ -346,7 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Предупреждение',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Структурата на Вашата база данни е инсталирана.',
-'info_base_restauration' => 'Базата данни е в процес на възстановяване.',
 'info_bloquer' => 'блокиране',
 'info_breves' => 'Вашият сайт използва ли системата за новини?',
 'info_breves_03' => 'Нови публикации',
@@ -417,7 +413,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Автоматично изпращане на съобщение',
 'info_envoi_forum' => 'Изпращане на форумите до авторите на статии',
 'info_envoyer_maintenant' => 'Изпращане',
-'info_erreur_restauration' => 'Грешка при възстановяване: файлът не беше намерен.',
 'info_etape_suivante' => 'Преминете към следващата стъпка',
 'info_etape_suivante_1' => 'Можете да преминете към следващата стъпка.',
 'info_etape_suivante_2' => 'Можете да преминете към следващата стъпка.',
@@ -643,8 +638,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Пренасочване.</b> Статията се отнася към страница:',
 'info_reserve_admin' => 'Този адрес може да се променя само от администратори.',
-'info_restauration_sauvegarde' => 'възстановяване на архива @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Забрана за управление на рубриката:',
 'info_resultat_recherche' => 'Намерени резултати:',
 'info_rubriques' => 'Рубрики',
@@ -653,29 +646,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Намерени рубрики',
 'info_rubriques_trouvees_dans_texte' => 'Намерени рубрики (в текста)',
 'info_sans_titre' => 'Без заглавие',
-'info_sauvegarde' => 'Архивиране (backup)',
-'info_sauvegarde_articles' => 'Архивиране на статиите',
-'info_sauvegarde_articles_sites_ref' => 'Архивиране на статии от сайтове с препратки',
-'info_sauvegarde_auteurs' => 'Архив на авторите',
-'info_sauvegarde_breves' => 'Архив на новините',
-'info_sauvegarde_documents' => 'Архив на документите',
-'info_sauvegarde_echouee' => 'Ако архивирането пропадне («Времето за изпълнение изтече»),',
-'info_sauvegarde_forums' => 'Архив на форумите',
-'info_sauvegarde_groupe_mots' => 'Архив на групите ключови думи',
-'info_sauvegarde_messages' => 'Архив на съобщенията',
-'info_sauvegarde_mots_cles' => 'Архив на ключовите думи',
-'info_sauvegarde_petitions' => 'Архив на молбите',
-'info_sauvegarde_refers' => 'Архивиране на референтите',
-'info_sauvegarde_reussi_01' => 'Архивирането завърши успешно.',
-'info_sauvegarde_reussi_02' => 'Базата данни беше запазена в @archive@. Можете да',
-'info_sauvegarde_reussi_03' => 'се върнете към управлението ',
-'info_sauvegarde_reussi_04' => 'на сайта.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Архив на рубриките',
-'info_sauvegarde_signatures' => 'Архив на заявените молби',
-'info_sauvegarde_sites_references' => 'Архивиране на свързани сайтове',
-'info_sauvegarde_type_documents' => 'Архив на видовете документи',
-'info_sauvegarde_visites' => 'Архив на посещенията',
 'info_selection_chemin_acces' => '<b>Изберете</b> по-долу път за достъп в директорията:',
 'info_selection_un_seul_mot_cle' => 'Можете да изберете <b>само една ключова дума</b> наведнъж в тази група.',
 'info_signatures' => 'подписи',
@@ -999,9 +969,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(ограничен администратор)',
 'syndic_choix_moderation' => 'Какво да се направи със следващите препратки от сайта?',
 'syndic_choix_oublier' => 'Какво да се направи с препратките, които вече не присъстват във файла за обединение?',
@@ -1027,11 +994,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 включително <i>всички</i> параметри за достъп за редактори и администратори. След нейното изпълнение, трябва
 да се преинсталира СПИП, за да се създаде нова база данни и първи администраторски достъп.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Тази опция позволява запазване насъдържанието от базата данни във файл от директорията @dossier@.Не забравяйте да обновите и цялата @img@ директория, която съдържаизображенията и документите, използвани в статиите и рубриките.',
-'texte_admin_tech_02' => 'Предупреждение: този архив може да бъде  възстановяван САМО в сайт, който има същата версия на СПИП. Не изпразвайте базата данни, защото при актуализация на версията, архивът няма да се преинсталира. За повече информация, посетете <a href="@spipnet@">документацията на СПИП</a>.', # MODIF
-'texte_admin_tech_03' => 'За да спестите дисково пространство можете да изберете или
- да съхраните файла в компресиран вид, или да засилите трансфера му до Вашата машина или до архивен сървър.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '( Ако директорията Ви е инсталирана на същата машина, на която и Интернет сайта, вероятно е «localhost».)',
 'texte_ajout_auteur' => 'Следният автор бе добавен към статията:',
 'texte_annuaire_ldap_1' => 'Ако разполагате с достъп до (LDAP) директория, можете да я използвате, за да вписвате автоматично потребители в СПИП.',
@@ -1187,15 +1149,6 @@ demande plus de puissance au serveur.', # NEW
   указания за това, което е развалено.
   <p>Ако проблемът все още е налице, обадете се
   на Вашия хост.', # MODIF
-'texte_restaurer_base' => 'Възстановяване съдържанието на архива на базата данни',
-'texte_restaurer_sauvegarde' => 'Тази опция позволява да се възстанови предишния
-архив на базата данни. За да се направи това, файлът, който съдържа този архив е съхранен в
-директория @dossier@.
-Внимавайте с това свойство: <b>Всички потенциални промени или загуби ще бъдат
-необратими.</b>',
-'texte_sauvegarde' => 'Архивиране съдържанието на базата данни',
-'texte_sauvegarde_base' => 'Архивиране на базата данни',
-'texte_sauvegarde_compressee' => 'Архивът ще бъде запазен в некомресираният файл @fichier@.',
 'texte_selection_langue_principale' => 'Посочете по-долу основният език на сайта. За щастие, този избор не ограничава статиите Ви да бъдат написани на избран от Вас езит. Той позволявя да определите
 
 <ul><li> формата по подразбиране на данните в публичния сайт</li>

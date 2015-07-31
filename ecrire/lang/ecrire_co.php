@@ -104,13 +104,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_petition_activee' => 'Petizione attivata',
 'bouton_radio_publication_immediate' => 'Pubblicazione à l\'istante di i messagi
 (e cuntribuzioni sò pubblicate subbitu dopu mandate, l\'amministradori i ponu sguassà dopu).',
-'bouton_radio_sauvegarde_compressee' => 'backup cumpressu in @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'backup micca cumpressu in @fichier@',
 'bouton_radio_supprimer_petition' => 'Toglie a petizione',
 'bouton_radio_syndication' => 'Sindicazione :',
 'bouton_redirection' => 'RINDIRIZZAMENTU',
 'bouton_relancer_installation' => 'Rilancià a stallazione',
-'bouton_restaurer_base' => 'Riparà a basa di dati',
 'bouton_suivant' => 'In avanti',
 'bouton_tenter_recuperation' => 'Pruvà una riparazione',
 'bouton_test_proxy' => 'Fà una prova di proxy',
@@ -349,7 +346,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertimentu',
 'info_barre_outils' => 'cù a tàvula di strumenti?',
 'info_base_installee' => 'Hè stallata a struttura di a vostra basa di dati.',
-'info_base_restauration' => 'A basa di dati hè in corsu di ricuperazione.',
 'info_bloquer' => 'bluccà',
 'info_breves' => 'U vostru situ aduprerà u sistema di dispacci ?',
 'info_breves_03' => 'dispacci',
@@ -427,7 +423,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Inviu autumàticu d\'email',
 'info_envoi_forum' => 'Nutìfiche da i fori à l\'autori di l\'artìculi',
 'info_envoyer_maintenant' => 'Mandà avà',
-'info_erreur_restauration' => 'Errore di ricuperazione : schedariu inesistente.',
 'info_etape_suivante' => 'Passà à a prùssima tappa',
 'info_etape_suivante_1' => 'Pudete passà à a prùssima tappa.',
 'info_etape_suivante_2' => 'Pudete passà à a prùssima tappa.',
@@ -654,8 +649,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Rindirizzamentu.</b> St\'artìculu rimanda à a pàgina :',
 'info_reserve_admin' => 'Solu l\'amministratori ponu mudificà st\'indirizzu.',
-'info_restauration_sauvegarde' => 'Ricuperazione di a copia @archive@',
-'info_restauration_sauvegarde_insert' => 'Inserimentu di @archive@ in a basa di dati',
 'info_restreindre_rubrique' => 'Limità a gestione à a rùbbrica :',
 'info_resultat_recherche' => 'Risultati di a ricerca :',
 'info_rubriques' => 'Rùbbriche',
@@ -664,29 +657,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_rubriques_trouvees' => 'Rùbbriche trove',
 'info_rubriques_trouvees_dans_texte' => 'Rùbbriche trove (ricerca in u testu)',
 'info_sans_titre' => 'Senza tìtulu',
-'info_sauvegarde' => 'Salvamentu',
-'info_sauvegarde_articles' => 'Salvà l\'artìculi',
-'info_sauvegarde_articles_sites_ref' => 'Salvà l\'artìculi di i siti riferiti',
-'info_sauvegarde_auteurs' => 'Salvà l\'autori',
-'info_sauvegarde_breves' => 'Salvà i dispacci',
-'info_sauvegarde_documents' => 'Salvà i ducumenti',
-'info_sauvegarde_echouee' => 'S\'ellu hà fiascatu u salvamentu («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Salvà i fori',
-'info_sauvegarde_groupe_mots' => 'Salvà i gruppi di parulle',
-'info_sauvegarde_messages' => 'Salvà i messagi',
-'info_sauvegarde_mots_cles' => 'Salvà i segni',
-'info_sauvegarde_petitions' => 'Salvà e petizioni  ',
-'info_sauvegarde_refers' => 'Salvà i <em>referers</em> (siti chì facenu riferenza à u vostru)',
-'info_sauvegarde_reussi_01' => 'Salvamentu riesciutu.',
-'info_sauvegarde_reussi_02' => 'A basa di dati hè stata salva in @archive@. Pudete ',
-'info_sauvegarde_reussi_03' => 'turnà à a gestione',
-'info_sauvegarde_reussi_04' => 'di u vostru situ.',
-'info_sauvegarde_rubrique_reussi' => 'E tàvule di a rùbbrica @titre@ sò state salve in @archive@. Pudete puru',
-'info_sauvegarde_rubriques' => 'Salvà e rùbbriche',
-'info_sauvegarde_signatures' => 'Salvà e zifre di petizioni',
-'info_sauvegarde_sites_references' => 'Salvà i siti riferiti',
-'info_sauvegarde_type_documents' => 'Salvà i tippi di ducumentu',
-'info_sauvegarde_visites' => 'Salvà e vìsite',
 'info_selection_chemin_acces' => '<b>Sceglite</b> quì sottu u percorsu d\'accessu in l\'annuariu :',
 'info_selection_un_seul_mot_cle' => 'Si pò sceglie <b>un solu segnu</b> à a volta in stu gruppu.',
 'info_signatures' => 'zifre',
@@ -1017,9 +987,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 
 // S
 'sans_heure' => 'Senza l\'ore',
-'sauvegarde_fusionner' => 'Mischjà a basa di dati attuale cù a copia di salvezza',
-'sauvegarde_fusionner_depublier' => 'Spubblicà l\'oggetti mischjati',
-'sauvegarde_url_origine' => 'In casu mai, URL di u situ d\'urìgine:',
 'statut_admin_restreint' => '(ammin parziale)',
 'syndic_choix_moderation' => 'Cumu cumpurtà si cù e pròssime lee venendu da stu situ ?',
 'syndic_choix_oublier' => 'Cumu cumpurtà si cù e lee chì ùn ci sò più in u schedariu di sindicazione ?',
@@ -1048,14 +1015,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	compresi <i>tutti</i> i login di i scrittori è amministratori. Dopu avè la eseguita, vi tuccherà à rilancià a prucedura di stallazione 
 	per turnà à creà una nova basa di dati è un primu ID amministrativu.',
 'texte_admin_effacer_stats' => 'Sta cumanda sguassa tutti i dati leati à e statìstiche di vìsite di u situ, cumpresa a pupularità di l\'artìculi.',
-'texte_admin_tech_01' => 'St\'opzione vi permette di salvà u cuntenutu di a basa di dati in un schedariu chì serà tenutu in u cartulare @dossier@.
-		Ùn vi scurdate dinò di ricuarà u cartulare @img@ sanu sanu, chì cuntene l\'imàgini è i ducumenti usati in l\'artìculi è in e rùbbriche.',
-'texte_admin_tech_02' => 'Attenti : sta copia di salvezza puderà esse ricuperata SOLU in un situ stallatu cù listessa versione di SPIP.
-		In partìculare ùn ci vole mancu appena sguassà a basa di dati pensendu di ricuperà sta copia di salvezza dopu qualchì aghjurnumentu di SPIP ...
-		Per sapè ne di più, cunsultate puru <a href="http://www.spip.net/fr_article1489.html">a ducumentazione di SPIP</a>.',
-'texte_admin_tech_03' => 'Pudete sceglie di salvà u schedariu in furmatu cumpressu, da accurtà cusì u so tempu di trasferimentu 
-		pè a rete versu ind\'è voi o qualchì servore di salvezza, è da risparmià spaziu nant\'a u discu.',
-'texte_admin_tech_04' => 'S\'ellu hè in u scopu di mischjà cù un\'altra basa di dati, pudete puru limità u salvamentu à a rùbbrica : ',
 'texte_adresse_annuaire_1' => '(S\'ellu hè stallatu l\'annuariu nant\'à listessa màcchina chè stu situ web, à colpu sicuru deve esse "localhost".)',
 'texte_ajout_auteur' => 'Hè statu aghjuntu à l\'artìculu u seguente autore :',
 'texte_annuaire_ldap_1' => 'Sè vo avete accessu à un annuariu (LDAP), u pudete puru aduprà da impurtà in autumàticu utilizatori sottu SPIP.',
@@ -1190,12 +1149,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	U vostru servore SQL hè capace di riparà e so tàvule scundisate pè sfurtuna. Pudete tandu pruvà sta riparazione; in casu ch\'ella fiaschi,
 	tenite vi puru una copia di u messagiu chì si vede, è chì cuntene forse preziose infurmazioni...</p><p>
 	S\'ellu ferma u prublemu, cuntattate puru u webmaestru.</p>', # MODIF
-'texte_restaurer_base' => 'Ricuperà una copia di salvezza di a basa di dati',
-'texte_restaurer_sauvegarde' => 'Sta scelta vi permette di ricuperà una copia di a basa di dati fatta in passatu. Per quessa, u schedariu chì cuntene sta copia
-		deve esse statu piazzatu in u cartulare @dossier@. Ma fate puru casu : <b>e mudìfiche o pussìbule pèrdite ùn si ponu più ricuarà.</b>',
-'texte_sauvegarde' => 'Salvà u cuntenutu di a basa di dati',
-'texte_sauvegarde_base' => 'Salvà a basa di dati',
-'texte_sauvegarde_compressee' => 'U salvamentu si ferà in u schedariu micca cumpressu @fichier@.',
 'texte_selection_langue_principale' => 'Pudete puru sceglie quì sottu a «lingua predefinita» di u situ. Sta scelta ùn vi forza - ancu di grazia ! - 
 	à scrive l\'artìculi in sta lingua, ma permette di definisce :
 		<ul><li> u furmatu predefinitu di e date nant\'à u situ pùbblicu;</li>

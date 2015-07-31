@@ -108,13 +108,10 @@ utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes d
 'bouton_radio_petition_activee' => 'Abaixo-assinado activado',
 'bouton_radio_publication_immediate' => 'Publicação imediata das mensagens
  (as contribuições afixam-se logo que são enviadas, os administradores podem suprimi-las depois).',
-'bouton_radio_sauvegarde_compressee' => 'Salvaguarda comprimida como @fichier@', # MODIF
-'bouton_radio_sauvegarde_non_compressee' => 'salvaguarda não comprimida como   @fichier@', # MODIF
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo-assinado',
 'bouton_radio_syndication' => 'Vinculação',
 'bouton_redirection' => 'REDIRIGIR',
 'bouton_relancer_installation' => 'Lançar de novo a instalação',
-'bouton_restaurer_base' => 'Restaurar a base',
 'bouton_suivant' => 'Seguinte',
 'bouton_tenter_recuperation' => 'Tentar uma reparação',
 'bouton_test_proxy' => 'Testar o proxy',
@@ -349,7 +346,6 @@ ou da rede',
 'info_avertissement' => 'Aviso',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'A estrutura da sua base de dados está instalada',
-'info_base_restauration' => 'A base está em curso de restauro',
 'info_bloquer' => 'bloquear',
 'info_breves' => 'O seu sítio utiliza o sistema de notícias',
 'info_breves_03' => 'notícias',
@@ -420,7 +416,6 @@ ou da rede',
 'info_envoi_email_automatique' => 'Envio automático de mails',
 'info_envoi_forum' => 'Envio dos fóruns aos autores dos artigos',
 'info_envoyer_maintenant' => 'Enviar agora',
-'info_erreur_restauration' => 'Erro de restauro : ficheiro inexistente',
 'info_etape_suivante' => 'Passar para a seguinte etapa',
 'info_etape_suivante_1' => 'Pode passar para a etapa seguinte',
 'info_etape_suivante_2' => 'Pode passar para a etapa seguinte',
@@ -642,8 +637,6 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirigir.</b> Este artigo remete para a página:', # MODIF
 'info_reserve_admin' => 'Só os administradores podem modificar este endereço.',
-'info_restauration_sauvegarde' => 'restauro da salvaguarda @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Limitar a gestão à rubrica : ',
 'info_resultat_recherche' => 'Resultados da pesquisa ;',
 'info_rubriques' => 'Rubricas',
@@ -652,29 +645,6 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_rubriques_trouvees' => 'Rubricas encontradas',
 'info_rubriques_trouvees_dans_texte' => 'Rubricas encontradas (no texto)',
 'info_sans_titre' => 'Sem título',
-'info_sauvegarde' => 'Salvaguarda',
-'info_sauvegarde_articles' => 'Salvaguardar os artigos',
-'info_sauvegarde_articles_sites_ref' => 'Salvaguardar os artigos dos sítios referenciados',
-'info_sauvegarde_auteurs' => 'Salvaguardar os autores',
-'info_sauvegarde_breves' => 'Salvaguardar as notícias',
-'info_sauvegarde_documents' => 'Salvaguardar os documentos',
-'info_sauvegarde_echouee' => 'Se a salvaguarda falhar («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Salvaguardar os fóruns',
-'info_sauvegarde_groupe_mots' => 'Salvaguardar os grupos de palavras',
-'info_sauvegarde_messages' => 'Salvaguardar as mensagens',
-'info_sauvegarde_mots_cles' => 'Salvaguardar as palavras-chave',
-'info_sauvegarde_petitions' => 'Salvaguardar os abaixo-assinados',
-'info_sauvegarde_refers' => 'Salvaguardar os referers',
-'info_sauvegarde_reussi_01' => 'Salvaguarda bem sucedida',
-'info_sauvegarde_reussi_02' => 'A base foi salvaguardada em @archive@. Pode', # MODIF
-'info_sauvegarde_reussi_03' => 'voltar à gestão',
-'info_sauvegarde_reussi_04' => 'do seu sítio',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Salvaguardar as rubricas',
-'info_sauvegarde_signatures' => 'Salvaguardar as assinaturas de abaixo-assinados',
-'info_sauvegarde_sites_references' => 'Salvaguardar os sítios referenciados',
-'info_sauvegarde_type_documents' => 'Salvaguardar os tipos de documentos',
-'info_sauvegarde_visites' => 'Salvaguardar as visitas',
 'info_selection_chemin_acces' => '<b>Seleccione</b> a seguir o caminho de acesso no anuário :',
 'info_selection_un_seul_mot_cle' => 'Só se pode seleccionar <b>uma única palavra-chave ao</b> mesmo tempo neste grupo',
 'info_signatures' => 'assinaturas',
@@ -999,9 +969,6 @@ numa cor que indica o seu estado:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin restrito)',
 'syndic_choix_moderation' => 'Que fazer com as novas ligações provenientes deste sítio ?',
 'syndic_choix_oublier' => 'Que fazer com as ligações que não aparecem mais no ficheiro de sindicação  ?',
@@ -1027,12 +994,6 @@ numa cor que indica o seu estado:',
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, deverá lançar a
 reinstalação de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Esta opção permite-lhe salvaguardar o conteúdo da base num ficheiro que será armazenado no directório @dossier@.Não esquecer também recuperar a totalidade do directório <i>IMG/</i>, que contém as imagens e os documentos utlizados nos artigos e rubricas.', # MODIF
-'texte_admin_tech_02' => 'Atenção: esta salvaguarda só poderá ser restaurada
- num sítio instalado sob a mesma versão de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada após a actualização. Consulte <a href="@spipnet@">a documentação de SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Pode escolher a salvaguarda do ficheiro sob a forma comprimida, para
-encurtar a sua transferência para o seu computador ou para um servidor de salvaguarda e poupar o espaço do disco.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Se o seu anuário está instalado na mesma máquina que este sítio Web, trata-se de «localhost».)',
 'texte_ajout_auteur' => 'O seguinte autor foi acrescentado ao artigo :',
 'texte_annuaire_ldap_1' => 'Se tiver acesso a um anuário (LDAP), pode utilizá-lo para importar automaticamente utilizadores sob SPIP.',
@@ -1184,14 +1145,6 @@ recompor uma única página, passe pelo espaço público e utilize o botão «re
  danificadas. Pode tentar aqui essa reparação : se falhar, conserve uma cópia da exibição que talvez contenha
  indícios daquilo que não funciona...<p>
  Se o problema persistir, contacte com o seu serviço de hospedagem.', # MODIF
-'texte_restaurer_base' => 'Restaurar o conteúdo de uma salvaguarda da base',
-'texte_restaurer_sauvegarde' => 'Esta opção permite restaurar uma salvaguarda da base anteriormente
-  efectuada. Para esse efeito, o ficheiro que contém a salvaguarda deve ter sido
- posto no directório @dossier@.
- Seja prudente com esta funcionalidade : <b>as eventuais modificações, e/ou perdas são irreversíveis.</b>  ', # MODIF
-'texte_sauvegarde' => 'Salvaguardar o conteúdo da base',
-'texte_sauvegarde_base' => 'Salvaguardar a base',
-'texte_sauvegarde_compressee' => 'A salvaguarda far-se-á no ficheiro não comprimido @fichier@.', # MODIF
 'texte_selection_langue_principale' => 'Pode seleccionar a seguir a  « língua principal » do sítio. Esta opção não o obriga - felizmente ! - a escrever os seus artigos na língua seleccionada, mas permite determinar :
  <u><li> o formato por defeito das datas no sítio público ;</li>
  <li> a natureza do motor tipográfico que SPIP deve utilizar para a restituição dos textos ;</li>

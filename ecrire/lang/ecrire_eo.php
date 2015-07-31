@@ -103,13 +103,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Tujpublikigo de mesaĝoj
  (la kontribuaĵoj afiŝiĝas tuj post ties sendo, la mastrumantoj povas
 forviŝi ilin poste).',
-'bouton_radio_sauvegarde_compressee' => 'savkopio kompaktita en @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'savkopio nekompaktita en @fichier@',
 'bouton_radio_supprimer_petition' => 'Forviŝi la petskribon',
 'bouton_radio_syndication' => 'Abonrilato:',
 'bouton_redirection' => 'ALIDIREKTIGO',
 'bouton_relancer_installation' => 'Relanĉi la instaladon',
-'bouton_restaurer_base' => 'Restaŭri la datenbazon',
 'bouton_suivant' => 'Sekvanta',
 'bouton_tenter_recuperation' => 'Provi riparon',
 'bouton_test_proxy' => 'Provi la prokuran servilon',
@@ -340,7 +337,6 @@ forviŝi ilin poste).',
 'info_avertissement' => 'Averto',
 'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
-'info_base_restauration' => 'La datenbazo estas restaŭriĝanta.',
 'info_bloquer' => 'bloki',
 'info_breves' => 'Ĉu via retejo uzas la fulm-informilon ?',
 'info_breves_03' => 'fulm-informoj',
@@ -411,7 +407,6 @@ La publikaj forumoj estos laŭkaze unu post la alia permesitaj
 'info_envoi_email_automatique' => 'Aŭtomata retleteroj-dissendado',
 'info_envoi_forum' => 'Sendo de la forumoj al aŭtoroj de la artikoloj',
 'info_envoyer_maintenant' => 'Sendu nun',
-'info_erreur_restauration' => 'Restaŭro-eraro: neekzistanta dosiero.',
 'info_etape_suivante' => 'Ek al posta etapo',
 'info_etape_suivante_1' => 'Vi povas paŝi al posta etapo.',
 'info_etape_suivante_2' => 'Vi povas paŝi al posta etapo.',
@@ -623,8 +618,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la paĝo:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun ĉi adreson.',
-'info_restauration_sauvegarde' => 'Restaŭro de la savkopio @archive@',
-'info_restauration_sauvegarde_insert' => 'Enigo de @archive@ en la datumbazon',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
 'info_resultat_recherche' => 'Serĉo-rezultoj:',
 'info_rubriques' => 'Rubrikoj',
@@ -633,29 +626,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_rubriques_trouvees' => 'Trovitaj rubrikoj',
 'info_rubriques_trouvees_dans_texte' => 'Rubrikoj trovitaj (en la teksto)',
 'info_sans_titre' => 'Sen titolo',
-'info_sauvegarde' => 'Savkopio',
-'info_sauvegarde_articles' => 'Konservi la artikolojn',
-'info_sauvegarde_articles_sites_ref' => 'Konservi la artikolojn de la referencigitaj retejoj',
-'info_sauvegarde_auteurs' => 'Konservi la aŭtorojn',
-'info_sauvegarde_breves' => 'Konservi la fulm-informojn',
-'info_sauvegarde_documents' => 'Konservi la dokumentojn',
-'info_sauvegarde_echouee' => 'Se la konservo malsukcesis («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Konservi la forumojn',
-'info_sauvegarde_groupe_mots' => 'Konservi la vortogrupojn',
-'info_sauvegarde_messages' => 'Konservi la mesaĝojn',
-'info_sauvegarde_mots_cles' => 'Konservi la ŝlosilvortojn',
-'info_sauvegarde_petitions' => 'Savkopii la petskribojn',
-'info_sauvegarde_refers' => 'Savkopii referencojn',
-'info_sauvegarde_reussi_01' => 'Savkopio sukcesis.',
-'info_sauvegarde_reussi_02' => 'Datenbazo estas konservita en @archive@. Vi povas',
-'info_sauvegarde_reussi_03' => 'reen al paĝo pri mastrumado',
-'info_sauvegarde_reussi_04' => 'de via retejo.',
-'info_sauvegarde_rubrique_reussi' => 'La tabeloj de la rubriko @titre@ estis savkopiitaj en @archive@. Vi povas',
-'info_sauvegarde_rubriques' => 'Konservi la rubrikojn',
-'info_sauvegarde_signatures' => 'Konservi la subskribojn de petskriboj',
-'info_sauvegarde_sites_references' => 'Konservi la referencigitajn retejojn',
-'info_sauvegarde_type_documents' => 'Konservi la dokumentotipojn',
-'info_sauvegarde_visites' => 'Konservi la vizitojn',
 'info_selection_chemin_acces' => '<b>Selektu</b> ĉi-sube alirvojon en la dosierujilo:',
 'info_selection_un_seul_mot_cle' => 'Oni povas elekti nur<b>po unu ŝlosilvorto</b> samtempe por tiu grupo.',
 'info_signatures' => 'subskriboj',
@@ -979,9 +949,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 // S
 'sans_heure' => 'sen horo',
-'sauvegarde_fusionner' => 'Kunfandi la nunan bazon kaj la savkopion',
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuale, la retadreso de la origina retejo :',
 'statut_admin_restreint' => '(etrajta mastrumanto)',
 'syndic_choix_moderation' => 'Kion fari el la ligiloj venontaj el tiu retejo ?',
 'syndic_choix_oublier' => 'Kion fari el la ligiloj, kiuj ne plu aperas en la abondosiero ?',
@@ -1007,12 +974,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 inkluzive de <i>ĉiuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lanĉi la
 SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi enhavon de bazo en dosiero stokota en dosierujo @dossier@. Ne forgesu ankaŭ reakiri la tuton de la dosierujo @img@, kiu enhavas bildojn kaj dokumentojn uzatajn en artikoloj kaj rubrikoj.',
-'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti restaŭrita
-NUR por retejo starigita per la sama versio de SPIP. Nepre ne " malplenigu la datenbazon " esperante poste reinstali savkopion post ĝisdatigo... Konsultu <a href="@spipnet@">la dokumentaron de SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron laŭ densigita formo, por
- rapidigi ties ŝuton hejmen aŭ al konservo-servilo, kaj por ŝpari diskospacon.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Se via adresaro estas instalita ĉe la sama maŝino kiel la retejo, temas verŝajne pri «localhost».)',
 'texte_ajout_auteur' => 'La jena aŭtoro estis aldonita al la artikolo:',
 'texte_annuaire_ldap_1' => 'Se vi havas aliron al dosierujilo (LDAP), vi povas uzi ĝin por aŭtomate importi uzantojn sub SPIP.',
@@ -1165,15 +1126,6 @@ en kazo de malsukceso, faru ekrankopion.
 Ĝi eble entenas indicojn pri la misfunkcio...<p>
 Se la problemo daŭras, kontaktu
 vian retgastiganton.<p>', # MODIF
-'texte_restaurer_base' => 'Restaŭri la enhavon de datenbaza savkopio',
-'texte_restaurer_sauvegarde' => 'Tiu opcio ebligas al vi restarigi antaŭe faritan savkopion de la bazo.
-  Por tio, la dosiero entenanta la savkopion devas esti lokita
-  en la dosierujon @dossier@.
-  Estu singardema pri tiu ĉi funkcio : <b>la modifoj, eventualaj perdoj, estas
-  neinversigeblaj.</b>',
-'texte_sauvegarde' => 'Konservi la enhavon de la datenbazo',
-'texte_sauvegarde_base' => 'Konservi la datenbazon',
-'texte_sauvegarde_compressee' => 'La savkopio estos farita en la nedensigita dosiero @fichier@.',
 'texte_selection_langue_principale' => 'Vi povas ĉi-sube elekti la « ĉefan lingvon » de la retejo. Tiu elekto ne devigas vin - bonŝance ! - verki viajn artikolojn en la elektita lingvo, sed ebligas determini :
  <ul><li> la defaŭltan formaton de la datenoj en la publika spaco ;</li>
  <li> kian tipografiilon SPIP devas uzi pri tekst-aspektigo ;</li>

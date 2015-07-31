@@ -132,13 +132,10 @@ Ni konsèy aou kofirm pa ladomann linportasyon-la<p> Si ou néna bezwin inn pé 
 'bouton_radio_pas_petition' => 'Anpès néna filsinyatir',
 'bouton_radio_petition_activee' => 'Astèr, filsinyatir i mars',
 'bouton_radio_publication_immediate' => 'Modékri lé publyé sir losan (bann komisyon lé visib toutswit apré zot la anvway ali ; bann komander sitwèb i pé dégrèn ali aprè).',
-'bouton_radio_sauvegarde_compressee' => 'Sovgard lé koprésé èk @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'sovgard lé pa koprésé èk @fichier@',
 'bouton_radio_supprimer_petition' => 'Dégrèn filsinyatir',
 'bouton_radio_syndication' => 'Lasindikasyon :',
 'bouton_redirection' => 'TOURNÉVIRÉ LADRÈSWÈB',
 'bouton_relancer_installation' => 'Rosarz linstalasyon',
-'bouton_restaurer_base' => 'Rosarz léta labazwèb',
 'bouton_suivant' => 'Answit',
 'bouton_tenter_recuperation' => 'Eséy inn aranzman',
 'bouton_test_proxy' => 'Eséy lo proksi-la',
@@ -372,7 +369,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_avertissement' => 'Lavi',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Lastriktir out bazdodné lé instalé.',
-'info_base_restauration' => 'Labaz lé antrin drosarz son promyé léta.',
 'info_bloquer' => 'blok ali',
 'info_breves' => 'Kouk sitwèb aou i anserv lo sistèm bann tit-nouvèl ?',
 'info_breves_03' => 'Bann tit-nouvèl',
@@ -442,7 +438,6 @@ domann dégrèn molaklé-la
 'info_envoi_email_automatique' => 'Anvwa inn limèl otomatikman',
 'info_envoi_forum' => 'Anvwa tout bann modékri sak i sort dann bann forom , pou tout bann lotèr lartik lyé ',
 'info_envoyer_maintenant' => 'Anvwa astèr',
-'info_erreur_restauration' => 'Kanard dann rotour-sovgard labaz : lo fisyé-la i ékzist pa.',
 'info_etape_suivante' => 'Pas létap answit',
 'info_etape_suivante_1' => 'I pé pas létap answit.',
 'info_etape_suivante_2' => 'I pé pas létap answit.',
@@ -655,8 +650,6 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Tourné-viré.</b> Lartik-la i batavan sir pazwèb-la :',
 'info_reserve_admin' => 'Bann komandèr sélman i pé sanz ladrès-la.',
-'info_restauration_sauvegarde' => 'rosarz léta lasovgard @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Mèt inn limit pou lazéstyon la rubrik-la :',
 'info_resultat_recherche' => 'Bann rézilta rodaz :',
 'info_rubriques' => 'Bann rubrik',
@@ -665,29 +658,6 @@ sak i dégrèn lanvwa bann limèl sir zot bann servèr : dann kala, linskrisyon
 'info_rubriques_trouvees' => 'Bann rubrik la finn dèt trouvé',
 'info_rubriques_trouvees_dans_texte' => 'Bann rubrik la fin dèt trouvé(dann tèks)',
 'info_sans_titre' => 'Néna pwinn titr',
-'info_sauvegarde' => 'Sovgard',
-'info_sauvegarde_articles' => 'Sovgard bann zartik',
-'info_sauvegarde_articles_sites_ref' => 'Sovgard bann zartik bann sit référansé',
-'info_sauvegarde_auteurs' => 'Sovgard bann lotèr',
-'info_sauvegarde_breves' => 'Sovgard bann tit-nouvèl',
-'info_sauvegarde_documents' => 'Sovgard bann dokiman',
-'info_sauvegarde_echouee' => 'Si sovgard-la la pa finn marsé(«Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Sovgard bann forom',
-'info_sauvegarde_groupe_mots' => 'Sovgard bann group bann molaklé',
-'info_sauvegarde_messages' => 'Sovgard bann modékri',
-'info_sauvegarde_mots_cles' => 'Sovgard bann molaklé',
-'info_sauvegarde_petitions' => 'Sovgard bann fil bann sinyatir',
-'info_sauvegarde_refers' => 'Sovgard bann référèr',
-'info_sauvegarde_reussi_01' => 'Sovgard la finn marsé.',
-'info_sauvegarde_reussi_02' => 'Labazdodné la finn dèt sovgardé dann @archive@. Ou pé',
-'info_sauvegarde_reussi_03' => 'Artourn si lo kolonaz',
-'info_sauvegarde_reussi_04' => 'out sitwèb.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sovgard bann rubrik',
-'info_sauvegarde_signatures' => 'Sovgard bann fil bann sinyatir',
-'info_sauvegarde_sites_references' => 'Sovgard bann sit référansé',
-'info_sauvegarde_type_documents' => 'Sovgard bann lespès-dokiman',
-'info_sauvegarde_visites' => 'Sovgard bann vizit',
 'info_selection_chemin_acces' => '<b>Swazi</b> tèrla lo somin-laksé dann karné :',
 'info_selection_un_seul_mot_cle' => 'Lé posib swazi <b>selman inn molaklé</b> an inn fwa dann group-la.',
 'info_signatures' => 'bann sinyatir',
@@ -1012,9 +982,6 @@ sanm in koulèr i présiz son léta :',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(komandèr ti-drwa)',
 'syndic_choix_moderation' => 'Kosa ou vé SPIP i fé èk bann gatiraj sat i pè sort sit-la plitar  ?',
 'syndic_choix_oublier' => 'Kosa ou vé SPIP i fé èk bann gatiraj sat lé pli dann out fisyé-sindikasyon ?',
@@ -1040,14 +1007,6 @@ sanm in koulèr i présiz son léta :',
 <i>tout</i> minm bann laksè lotèr èk komandèr. Si ou i anserv ali, i sra nésésèr fé zwé inn nouvèl 
 linstalasyon do SPIP pou kré inn nouvèl labaz èk inn promyé laksé komandèr.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Lopsyon-la li rand aou kav sovgard lo kontnu
-la bazdodné. Pou sa minm, oubli pa mèt ali andann  fisyé prési dann répèrtwar   @dossier@.
-Oubli pa rékupèr osi tout sak nana dann répertwar <i>IMG/</i>, sé dir
-tout bann zimaz èk tout bann dokiman knéna dann bann zartik èk bann rubrik.',
-'texte_admin_tech_02' => 'Tansyon pangar : sovgard-la li sra posib réstoré 
-SÈLMAN sir inn sitwèb ki néna inn minm versyon do SPIP. Pangar sirtou pa  « dégrené labaz-la »  èk lidé install in in sovgar apré larnouvèlman.Pour plid détay anon vwar isi lapaz <a href="@spipnet@">la documentation de SPIP</a>.', # MODIF
-'texte_admin_tech_03' => 'Ou pé swazi sovgard lo fisyé dann manyir-konpersé. Manyir-la i permé rand pli takini lo transfèr d-fisyé sir out lordinatèr oubyin sa lo servèr pou bann sovgard. Lé itil aou pour konsèrv out léspas-diks.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Si out karné lé instalé sir lamasin paréy minm sitwèb-la, néna grannsans i sra pour èt «localhost».)',
 'texte_ajout_auteur' => 'Lotèr answit la fin dèt azouté pou lartik-la :',
 'texte_annuaire_ldap_1' => 'Si ou nana laksé sir inn karné(LDAP), i pé inport otomatikman bann zitilizatèr pou mèt tout zot ansanm sir out sit SPIP.',
@@ -1170,12 +1129,6 @@ arkalkil inn sèl paz, ni konsèy aou pas dann léspas piblik èk anserv lo bout
 SQL néna inn kalité pou aranz tout son bann tab 
 kank zot lé abimé sanm inn aksidan. Ou pé eséy isi inn aranzman ; dan ka li mars pa,  konsèrv inn kopi lafisaz, akoz néna petèt bann zindikasyon kosa i mars pa...<p>
 Si lo larlik-la i rest touzour, ifo koz do sa èk out léberzèr.<p>', # MODIF
-'texte_restaurer_base' => 'Rosarz lo kontnu lasovgard labaz',
-'texte_restaurer_sauvegarde' => 'Lopsyon-la i permé rosarz inn sovgard sak ou néna déza fé sir labaz. Pour sa, ifo mèt lo fisyé la sovgard dann répertwar@dossier@.
-Inn ti péd prékosyon lé nésésèr èk lafonksyon-la : porézon <b>bann sanzman ou bann pèrt sak ou pé konèt, zot i pé pa bataryèr.</b>',
-'texte_sauvegarde' => 'Sovgard lo kontnu labaz',
-'texte_sauvegarde_base' => 'Sovgard labaz dodné',
-'texte_sauvegarde_compressee' => 'Sovgard-la i sra pou fé sir lo fisyé konpèrsé @fichier@.',
 'texte_selection_langue_principale' => 'Ou pé swazi anba-tèrla lo« kozé prinsipal » pou out sitwèb. Swa-la, li obliz pa aou ékri out bann zartik dann lang swazi sa-minm- rezman ankor ! Li permé sirtou kadré byin :
 <ul><li> lo forma otomatik pou tout bann dat sak lé afisé sir lintèrfas out sit piblik ;</li>
 <li> bann karaktèr-limprimri sak SPIP i dwa anserv pou afisé bann tèks ;</li>

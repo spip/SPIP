@@ -104,13 +104,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_pas_petition' => 'Ingen appeller',
 'bouton_radio_petition_activee' => 'Appelfunktion slået til',
 'bouton_radio_publication_immediate' => 'Indlæg offentliggøres straks (bidrag vises straks efter at de er sendt, administratorer kan slette dem senere).',
-'bouton_radio_sauvegarde_compressee' => 'gem komprimeret i @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'gem ukomprimeret i @fichier@',
 'bouton_radio_supprimer_petition' => 'Slet appellen',
 'bouton_radio_syndication' => 'Syndikering:',
 'bouton_redirection' => 'VIDERESTIL',
 'bouton_relancer_installation' => 'Gentag installationen',
-'bouton_restaurer_base' => 'Genetabler databasen',
 'bouton_suivant' => 'Næste',
 'bouton_tenter_recuperation' => 'Reparationsforsøg',
 'bouton_test_proxy' => 'Test proxy',
@@ -341,7 +338,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Advarsel',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Din databasestruktur er installeret.',
-'info_base_restauration' => 'Genoprettelse af databasen er i gang.',
 'info_bloquer' => 'bloquer', # NEW
 'info_breves' => 'Bruger dit websted nyhedssystemet?',
 'info_breves_03' => 'nyheder',
@@ -411,7 +407,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_envoi_email_automatique' => 'Automatisk e-mail-forsendelse',
 'info_envoi_forum' => 'Send indlæg i forummer til artiklernes forfattere',
 'info_envoyer_maintenant' => 'Send nu',
-'info_erreur_restauration' => 'Fejl under genopretning: fil findes ikke.',
 'info_etape_suivante' => 'Gå til næste trin',
 'info_etape_suivante_1' => 'Du kan gå til næste trin.',
 'info_etape_suivante_2' => 'Du kan gå til næste trin.',
@@ -615,8 +610,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Viderestilling.</b> Denne artikel henviser til siden:',
 'info_reserve_admin' => 'Kun administratorer kan ændre denne adresse.',
-'info_restauration_sauvegarde' => 'Genindlæsning af sikkerhedskopi @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Begræns administrationsrettigheder til dette afsnit:',
 'info_resultat_recherche' => 'Søgeresultater:',
 'info_rubriques' => 'Afsnit',
@@ -625,29 +618,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_rubriques_trouvees' => 'Afsnit fundet',
 'info_rubriques_trouvees_dans_texte' => 'Afsnit fundet (i teksten)',
 'info_sans_titre' => 'Uden overskrift',
-'info_sauvegarde' => 'Sikkerhedskopi',
-'info_sauvegarde_articles' => 'Sikkerhedskopi af artikler',
-'info_sauvegarde_articles_sites_ref' => 'Sikkerhedskopi af henvisninger til websteder',
-'info_sauvegarde_auteurs' => 'Sikkerhedskopi af forfattere',
-'info_sauvegarde_breves' => 'Sikkerhedskopi af nyheder',
-'info_sauvegarde_documents' => 'Sikkerhedskopi af dokumenter',
-'info_sauvegarde_echouee' => 'Hvis sikkerhedskopiering mislykkes («Max. eksekveringstid overskredet»),',
-'info_sauvegarde_forums' => 'Sikkerhedskopi af forummer',
-'info_sauvegarde_groupe_mots' => 'Sikkerhedskopi af nøgleordsgrupper',
-'info_sauvegarde_messages' => 'Sikkerhedskopi af meddelelser',
-'info_sauvegarde_mots_cles' => 'Sikkerhedskopi af nøgleord',
-'info_sauvegarde_petitions' => 'Sikkerhedskopi af appeller',
-'info_sauvegarde_refers' => 'Sikkerhedskopi af henvisende sider',
-'info_sauvegarde_reussi_01' => 'Sikkerhedskopiering gennemført.',
-'info_sauvegarde_reussi_02' => 'Databasen er gemt i @archive@. Du kan',
-'info_sauvegarde_reussi_03' => 'returnere til administration',
-'info_sauvegarde_reussi_04' => 'af webstedet.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Sikkerhedskopi af afsnit',
-'info_sauvegarde_signatures' => 'Sikkerhedskopi af underskrifter',
-'info_sauvegarde_sites_references' => 'Sikkerhedskopi af links til websteder',
-'info_sauvegarde_type_documents' => 'Sikkerhedskopi af dokumenttyper',
-'info_sauvegarde_visites' => 'Sikkerhedskopi af besøg',
 'info_selection_chemin_acces' => '<b>Vælg</b> nedenfor stien til kataloget:',
 'info_selection_un_seul_mot_cle' => 'Du kan <b>kun vælge et nøgleord</b> ad gangen i denne gruppe.',
 'info_signatures' => 'underskrifter',
@@ -972,9 +942,6 @@ i en farve, der angiver deres status:',
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(begrænset admin)',
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site ?', # NEW
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication ?', # NEW
@@ -1000,14 +967,6 @@ i en farve, der angiver deres status:',
 	herunder <i>hele</i> opsætningen for redaktører og administratorer. Når du har udført den, bør du 
 	geninstallere SPIP for at danne en ny database og åbne op for den første administratoradgang.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
- @dossier@.
- Husk også at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
-'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindlæses på et websted, der har installeret samme version af SPIP.
- Det er en almindelig misforståelse at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
- For mere information henvises til <a href="@spipnet@">SPIP dokumentation</a>.', # MODIF
-'texte_admin_tech_03' => 'Du kan vælge at gemme filen i komprimeret form for hurtigere at kunne overføre den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Hvis dit katalog findes på samme server som webstedet, er det formentlig «localhost».)',
 'texte_ajout_auteur' => 'Følgende forfatter har bidraget til artiklen:',
 'texte_annuaire_ldap_1' => 'Hvis du har adgang til et LDAP-katalog, kan du anvende det til automatisk at importere brugere i SPIP.',
@@ -1135,14 +1094,6 @@ demande plus de puissance au serveur.', # NEW
 		hvis den går galt, bør du beholde en kopi af skærmbilledet, 
 		som måske kan indeholde antydninger af, hvad der er galt....
 		<p>Hvis problemet fortsat består, så kontakt dit webhotel.', # MODIF
-'texte_restaurer_base' => 'Genindlæs indholdet af sikkerhedskopien af databasen',
-'texte_restaurer_sauvegarde' => 'Denne valgmulighed giver dig adgang til at genindlæse en tidligere 
-		sikkerhedskopi af databasen. For at gøre det, skal filen, der indeholder sikkerhedskopien af databasen, 
-		på forhånd kopieres til kataloget @dossier@.
-		Vær forsigtig med denne funktion: <b>Alle eventuelle ændringer og tab er uoprettelige.</b>',
-'texte_sauvegarde' => 'Sikkerhedskopier indholdet af databasen',
-'texte_sauvegarde_base' => 'Sikkerhedskopier databasen',
-'texte_sauvegarde_compressee' => 'Sikkerhedskopien vil blive lagt i den ukomprimerede fil @fichier@.',
 'texte_selection_langue_principale' => 'Du kan nedenfor vælge webstedets «hovedsprog». 
 		Heldigvis begrænser dette valg ikke dine artikler til at skulle skrives på det valgte sprog 
 		men gør det muligt at fastsætte, 

@@ -96,13 +96,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Publicarea imediată a mesajelor
  (contribuţiile sunt afişate imediat, un administrator poate
  să le şteargă ulterior).',
-'bouton_radio_sauvegarde_compressee' => 'salvare comprimată în @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'salvare necomprimată în @fichier@',
 'bouton_radio_supprimer_petition' => 'Ştergeţi petiţia',
 'bouton_radio_syndication' => 'Sindicalizare :',
 'bouton_redirection' => 'REDIRIJARE',
 'bouton_relancer_installation' => 'Relansaţi instalarea',
-'bouton_restaurer_base' => 'Restauraţi baza de date',
 'bouton_suivant' => 'Următorul',
 'bouton_tenter_recuperation' => 'Încercaţi o reparare',
 'bouton_test_proxy' => 'Încercaţi proxy-ul',
@@ -333,7 +330,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertisment',
 'info_barre_outils' => 'cu toolbar-ul său ?',
 'info_base_installee' => 'Structura bazei dumneavoastră de date a fost instalată.',
-'info_base_restauration' => 'Baza de date este pe cale să fie restaurată.',
 'info_bloquer' => 'blocaţi',
 'info_breves' => 'Site-ul dumneavoastră utilizează sistemul de ştiri?',
 'info_breves_03' => 'ştiri',
@@ -402,7 +398,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Trimitere automată de email-uri',
 'info_envoi_forum' => 'Trimitere forum-urile la autorii articolelor',
 'info_envoyer_maintenant' => 'Trimiteţi acum',
-'info_erreur_restauration' => 'Eroare de restaurare: fişier inexistent.',
 'info_etape_suivante' => 'Treceţi la etapa următoare',
 'info_etape_suivante_1' => 'Nu puteţi trece la etapa următoare.',
 'info_etape_suivante_2' => 'Puteţi trece la etapa următoare.',
@@ -619,8 +614,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirijare.</b> Acest articol trimite la pagina:',
 'info_reserve_admin' => 'Doar administratorii pot modifica această adresă.',
-'info_restauration_sauvegarde' => 'Restaurarea salvării @archive@',
-'info_restauration_sauvegarde_insert' => 'Inserţia @archive@ în bază',
 'info_restreindre_rubrique' => 'Restrângeţi gestiunea la rubrica:',
 'info_resultat_recherche' => 'Rezultatele căutării :',
 'info_rubriques' => 'Rubrici',
@@ -629,29 +622,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Rubrici găsite',
 'info_rubriques_trouvees_dans_texte' => 'Rubrici găsite (în text)',
 'info_sans_titre' => 'Fără titlu',
-'info_sauvegarde' => 'Salvare',
-'info_sauvegarde_articles' => 'Salvaţi articolele',
-'info_sauvegarde_articles_sites_ref' => 'Salvaţi articolele site-urilor referenţiate',
-'info_sauvegarde_auteurs' => 'Salvaţi autorii',
-'info_sauvegarde_breves' => 'Salvaţi ştirea',
-'info_sauvegarde_documents' => 'Salvaţi documentele',
-'info_sauvegarde_echouee' => 'Dacă salvarea a eşuat («Maximum execution time exceeded»),',
-'info_sauvegarde_forums' => 'Salvaţi forum-urile',
-'info_sauvegarde_groupe_mots' => 'Salvaţi grupurile de cuvinte-cheie',
-'info_sauvegarde_messages' => 'Salvaţi mesajele',
-'info_sauvegarde_mots_cles' => 'Salvaţi cuvintele-cheie',
-'info_sauvegarde_petitions' => 'Salvaţi petiţiile',
-'info_sauvegarde_refers' => 'Salvaţi referers',
-'info_sauvegarde_reussi_01' => 'Salvare reuşită.',
-'info_sauvegarde_reussi_02' => 'Baza de date a fost salvată în @archive@. Puteţi',
-'info_sauvegarde_reussi_03' => ' să vă întoarceţi la gestionarea',
-'info_sauvegarde_reussi_04' => ' site-ului dumneavoastră.',
-'info_sauvegarde_rubrique_reussi' => 'Tabelele din rubrica @titre@ au fost salvate în @archive@. Puteţi',
-'info_sauvegarde_rubriques' => 'Salvaţi rubricile',
-'info_sauvegarde_signatures' => 'Salvaţi semnăturile petiţiilor',
-'info_sauvegarde_sites_references' => 'Salvaţi site-urile referenţiate',
-'info_sauvegarde_type_documents' => 'Salvaţi tipurile de documente',
-'info_sauvegarde_visites' => 'Salvaţi vizitele',
 'info_selection_chemin_acces' => '<b>Selecţionaţi</b> aici calea de acces în anuar :',
 'info_selection_un_seul_mot_cle' => 'Doar <b>un singur cuvânt-cheie</b> poate fi selecţionat pe moment din acest grup.',
 'info_signatures' => 'semnături',
@@ -977,9 +947,6 @@ cu o culoare care le indică starea :',
 
 // S
 'sans_heure' => 'fără oră',
-'sauvegarde_fusionner' => 'Îmbinaţi baza curentă cu cea salvată',
-'sauvegarde_fusionner_depublier' => 'De-publicaţi obiectele fuzionate',
-'sauvegarde_url_origine' => 'Eventual, URL-ul site-ului de origine :',
 'statut_admin_restreint' => '(administrator cu drepturi restrânse)',
 'syndic_choix_moderation' => 'Ce să fac cu următoarele legături provenind de la acest site ?',
 'syndic_choix_oublier' => 'Ce să fac cu legăturile care nu mai figurează în fişierul de sindicalizare ?',
@@ -1005,11 +972,6 @@ cu o culoare care le indică starea :',
 incluzând <i>toate</i> informaţiile referitoare la redactori sau administratori. După execuţia acestei comenzi va trebui să relansaţi procedura de
 reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces administrator.',
 'texte_admin_effacer_stats' => 'Această comandă şterge toate datele legate de statisticile vizitelor în site, incluzând şi datele de popularitate a articolelor.',
-'texte_admin_tech_01' => 'Această opţiune vă permite să salvaţi conţinutul bazei de date intr-un fişier care va fi pus în directorul @dossier@. Nu uitaţi, de asemenea, să recuperaţi directorul @img@ în integralitatea lui - acesta conţine imaginile şi documentele folosite în articole şi rubrici.',
-'texte_admin_tech_02' => 'Atenţie: această salvare nu va putea fi restaurată DECÂT pe un site instalat folosind aceeaşi versiune de SPIP. Mai ales, nu trebuie sa « goliţi baza de date » sperând că, după o aducere la zi... veţi putea reinstala ceea ce aţi salvat ... Consultaţi <a href="@spipnet@">documentaţia SPIP</a>.',
-'texte_admin_tech_03' => 'Puteţi să alegeţi să salvaţi fişierul sub o formă comprimată, atât pentru
- a micşora durata transferului către dumneavoastră sau spre un server de siguranţă, cât şi pentru a face economie de spaţiu de disc.',
-'texte_admin_tech_04' => 'În scopul de fuzionare cu o altă bază de date, puteţi limita salvarea la rubrica:',
 'texte_adresse_annuaire_1' => '(Dacă anuarul este instalat pe aceeaşi maşină ca şi site-ul Web, este vorba probabil de «localhost».)',
 'texte_ajout_auteur' => 'Autorul următor a fost adăugat la articol :',
 'texte_annuaire_ldap_1' => 'Dacă avezi un acces la un anuar LDAP, puteţi să îl folosiţi pentru a importa în mod automat utilizatorii SPIP.',
@@ -1137,14 +1099,6 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
 Server-ul dumneavoastră SQL dispune de o capacitate de reparare a tabelelor sale atunci când acestea s-au stricat în mod accidental.
 Puteţi încerca aici această reparare ; în caz de eşec, conservaţi o copie de ecran, care poate că conţine indicii referitor la ceea ce nu merge...
 Dacă problema persistă, vă rugăm să-l contactaţi pe furnizorul dumneavoastră de hosting.', # MODIF
-'texte_restaurer_base' => 'Restauraţi conţinutul bazei de date plecând de la o salvare',
-'texte_restaurer_sauvegarde' => 'Această opţiune vă permite să restauraţi o copie de siguranţă a bazei de date pe care aţi făcut-o anterior. Pentru aceasta vă rugăm să vă asiguraţi ca fişierul de copie de siguranţă
-  se află în directorul @dossier@.
-  Fiţi prudent cu această funcţionalitate : <b>modificările, pierderile eventuale, sunt
-  ireversibile.</b>',
-'texte_sauvegarde' => 'Salvaţi conţinutul bazei de date',
-'texte_sauvegarde_base' => 'Salvaţi baza de date',
-'texte_sauvegarde_compressee' => 'Salvarea va fi făcută într-un fişier necomprimat @fichier@.',
 'texte_selection_langue_principale' => 'Puteţi să selecţionaţi aici « limba principală » a site-ului. Această alegere nu vă obligă - din fericire ! - să scrieţi articolele în limba selecţionată, dar permite determinarea :
  <ul><li> formatul implicit al afişării datelor pe site-ul public;</li>
  <li> natura motorului tipografic pe care SPIP îl foloseşte pentru afişarea site-ului public;</li>

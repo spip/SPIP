@@ -97,15 +97,10 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_radio_pas_petition' => 'Không dùng',
 'bouton_radio_petition_activee' => 'Thỉnh nguyện thư được mở lên',
 'bouton_radio_publication_immediate' => 'Phát hành thư tín ngay lập tức (thư gửi đi sẽ hiện lên ngay, quản trị viên có thể xóa chúng sau đó).',
-'bouton_radio_sauvegarde_compressee' => 'lưu trữ lại dưới dạng nén trong
-@fichier@', # MODIF
-'bouton_radio_sauvegarde_non_compressee' => 'lưu trữ lại dưới dạng thường trong
-@fichier@', # MODIF
 'bouton_radio_supprimer_petition' => 'Xóa thỉnh nguyện thư',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'CHUYỂN TỚI',
 'bouton_relancer_installation' => 'Thiết trí lại',
-'bouton_restaurer_base' => 'Phục hồi database',
 'bouton_suivant' => 'Kế tiếp',
 'bouton_tenter_recuperation' => 'Tìm cách sửa chữa',
 'bouton_test_proxy' => 'Thử nghiệm proxy',
@@ -333,7 +328,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_avertissement' => 'Báo động',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Cấu trúc database của bạn đã được thiết trí.',
-'info_base_restauration' => 'Đang hồi phục lại database.',
 'info_bloquer' => 'ngăn chận',
 'info_breves' => 'Trang web của bạn có sử dụng hệ thống tin ngắn không?',
 'info_breves_03' => ' tin ngắn',
@@ -402,7 +396,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_envoi_email_automatique' => 'Gửi email tự động',
 'info_envoi_forum' => 'Gửi thư tín diễn đàn đến tác giả bài viết',
 'info_envoyer_maintenant' => 'Gửi bây giờ',
-'info_erreur_restauration' => 'Lỗi phục hồi: không tìm thấy hồ sơ.',
 'info_etape_suivante' => 'Qua bước kế',
 'info_etape_suivante_1' => 'Bạn có thể qua bước kế tiếp.',
 'info_etape_suivante_2' => ' Bạn có thể qua bước kế tiếp.',
@@ -597,8 +590,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Chuyển hướng.</b> Bài này nối đến trang: ',
 'info_reserve_admin' => 'Chỉ có quản trị viên mới có thể sửa đổi địa chỉ này.',
-'info_restauration_sauvegarde' => 'Phục hồi hồ sơ dự trữ @archive@', # MODIF
-'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Giới hạn việc quản trị trong đề mục:',
 'info_resultat_recherche' => 'Kết quả tìm kiếm:',
 'info_rubriques' => 'Đề mục',
@@ -607,29 +598,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_rubriques_trouvees' => 'Tìm thấy đề mục',
 'info_rubriques_trouvees_dans_texte' => 'Tìm thấy đề mục (trong văn tư)',
 'info_sans_titre' => 'Không tựa đề',
-'info_sauvegarde' => 'Dự trữ',
-'info_sauvegarde_articles' => 'Dự trữ các bài vở',
-'info_sauvegarde_articles_sites_ref' => 'Dự trữ bài vở của các website nối kết',
-'info_sauvegarde_auteurs' => 'Dự trữ các tác giả',
-'info_sauvegarde_breves' => 'Dự trữ các tin ngắn',
-'info_sauvegarde_documents' => 'Dự trữ tài liệu',
-'info_sauvegarde_echouee' => 'Nếu dự trữ thất bại (&laquo;quá tối đa thời gian thực hiện&raquo;),',
-'info_sauvegarde_forums' => 'Dự trữ các diễn đàn',
-'info_sauvegarde_groupe_mots' => 'Dự trữ nhóm từ then chốt',
-'info_sauvegarde_messages' => 'Dự trữ nhắn tin',
-'info_sauvegarde_mots_cles' => 'Dự trữ các từ then chốt',
-'info_sauvegarde_petitions' => 'Dự trữ các thỉnh nguyện thư',
-'info_sauvegarde_refers' => 'Dự trữ referrers',
-'info_sauvegarde_reussi_01' => 'Dự trữ thành công.',
-'info_sauvegarde_reussi_02' => 'Database được lưu trữ trong @archive@. Bạn có thể ', # MODIF
-'info_sauvegarde_reussi_03' => 'trở lại việc quản trị',
-'info_sauvegarde_reussi_04' => 'website của bạn.',
-'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont été sauvegardée dans @archive@. Vous pouvez', # NEW
-'info_sauvegarde_rubriques' => 'Dự trữ các đề mục',
-'info_sauvegarde_signatures' => 'Dự trữ các chữ ký thỉnh nguyện thư',
-'info_sauvegarde_sites_references' => 'Dự trữ các website nối kết',
-'info_sauvegarde_type_documents' => 'Dự trữ tên loại tài liệu',
-'info_sauvegarde_visites' => 'Dự trữ các viếng thăm',
 'info_selection_chemin_acces' => '<b>Chọn</b> dưới đây đường vào trong thư mục:',
 'info_selection_un_seul_mot_cle' => 'Bạn có thể chọn <b>một từ then chốt duy nhất</b> mỗi lần trong nhóm này.',
 'info_signatures' => 'chữ ký',
@@ -954,9 +922,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 
 // S
 'sans_heure' => 'sans heure', # NEW
-'sauvegarde_fusionner' => 'Merge the current database with the backup', # NEW
-'sauvegarde_fusionner_depublier' => 'Dépublier les objets fusionnés', # NEW
-'sauvegarde_url_origine' => 'If necessary, the URL of the source site:', # NEW
 'statut_admin_restreint' => '(Quản trị viên có giới hạn)',
 'syndic_choix_moderation' => 'Các nối kết sắp tới từ trang web này được giải quyết ra sao?',
 'syndic_choix_oublier' => 'Giải quyết ra sao với các nối kết không còn nằm trong tập hồ sơ syndication?',
@@ -980,12 +945,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_acces_ldap_anonyme_1' => 'Một số server LDAP không cho phép vào ẩn danh. Trong trường hợp này bạn phải dùng một ký danh đầu tiên để có thể đi tìm tòi dữ kiện trong danh bạ sau đó. Tuy nhiên, trong hầu hết trường hợp, những khoảng sau đây có thể để trống.',
 'texte_admin_effacer_01' => 'Mệnh lệnh này xóa <i>tất cả</i> nội dung của database, luôn cả login/mật mã của các chủ bút và quản lý. Sau khi chạy mệnh lệnh này xong, bạn nên thiết trí lại SPIP để tái lập lại một database mới cùng với login/mật mã của quản trị viên đầu tiên.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
-'texte_admin_tech_01' => 'Chọn lựa này cho phép bạn giữ lại nội dung của database vào trong một hồ sơ đựng trong ngăn @dossier@. Và cũng đừng quên cất giữ lại lại toàn bộ ngăn <i>IMG/</i>, chứa đựng các hình ảnh dùng trong các bài vở và đề mục.', # MODIF
-'texte_admin_tech_02' => '<b>Cảnh báo</b>: CHỈ CÓ THỂ phục hồi bản dự trữ này trong một website có cùng ấn bản SPIP.
- Lỗi lầm thường hay vấp phải là thực hiện việc dự trữ database trước khi nâng cấp SPIP...
- Để biết thêm, xin đọc [tài liệu SPIP->http://www.spip.net/fr_article1489.html].', # MODIF
-'texte_admin_tech_03' => 'Bạn có thể chọn giữ hồ sơ trong dạng nén để sao chép, chuyển tải cho lẹ, cũng như tiết kiệm được chỗ trong dĩa.',
-'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde à la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Nếu ngăn của bạn được thiết trí trên cùng máy với website của bạn, tên nó thường là &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Tác giả sau đây được thêm vào cho bài: ',
 'texte_annuaire_ldap_1' => 'Nếu bạn vào được một danh bạ (LDAP), bạn có thể dùng nó để nhập vào tự động những người sử dụng trong SPIP.',
@@ -1091,11 +1050,6 @@ demande plus de puissance au serveur.', # NEW
 'texte_referencement_automatique' => '<b>Nối kết website tự động</b> Bạn có thể nối kết một website nhanh chóng bằng cách cho vào dưới đây địa chỉ URL, hay địa chỉ của hồ sơ backend. SPIP sẽ tự động thu thập lấy các dữ kiện liên hệ đến website đó (tựa đề, mô tả ...).', # MODIF
 'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Khi một số hỏi-đáp SQL trượt hàng loạt và có vẻ như không có lý do gì cả, điều đó cho thấy có thể chính database là thủ phạm. </b><p>SQL có một đặc điểm sửa chữa các bản của nó khi chúng bị hư hại. Bạn có thể thử dùng đặc điểm sửa chữa này, trong trường hợp thất bại, bạn nên giữ lại một bản sao của màn ảnh để giúp soi sáng vấn đề ... <p> Nếu vấn đề vẫn tiếp tục xảy ra, liên lạc với chủ nhân của máy.', # MODIF
-'texte_restaurer_base' => 'Phục hồi nội dung của kho dự trữ database',
-'texte_restaurer_sauvegarde' => 'Chọn lựa này cho phép bạn phục hồi một hồ sơ dự trữ trước đó của database. Để thực hiện điều này, hồ sơ chứa phần dự trữ phải được nên giữ ở thư mục @dossier@. Cẩn thận với đặc điểm này: <b>Bất cứ sửa đổi hay thất thoát nào xảy ra là không làm ngược lại được.</b>', # MODIF
-'texte_sauvegarde' => 'Dự trữ nội dung của database',
-'texte_sauvegarde_base' => 'Dự trữ database',
-'texte_sauvegarde_compressee' => 'Dự trữ sẽ chứa trong hồ sơ không nén @fichier@.', # MODIF
 'texte_selection_langue_principale' => 'Bạn chọn một "ngôn ngữ chính" sau đây cho website. Điều này không có nghĩa là bạn chỉ có thể dùng ngôn ngữ đó cho các bài vở, mà bạn muốn dùng ngôn ngữ nào trong bài cũng được. Chọn ngôn ngữ chính cho web site chỉ để
 <ul>
 <li> chọn cách ghi ngày tháng cho phù hợp với ngôn ngữ đã chọn</li>

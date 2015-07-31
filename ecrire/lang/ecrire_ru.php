@@ -105,13 +105,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Немедленная публикация сообщений 
 (статьи будут показываться, как только они будут отправлены. Администраторы могут 
  потом удалить их).',
-'bouton_radio_sauvegarde_compressee' => 'сохранить сжатым в @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => 'сохранить распакованным в @fichier@',
 'bouton_radio_supprimer_petition' => 'Удалить комментарии',
 'bouton_radio_syndication' => 'Объединение:',
 'bouton_redirection' => 'ПЕРЕАДРЕСОВЫВАТЬ',
 'bouton_relancer_installation' => 'перезапуск установки',
-'bouton_restaurer_base' => 'Восстановление базы данных',
 'bouton_suivant' => 'Следующий',
 'bouton_tenter_recuperation' => 'Повторная попытка',
 'bouton_test_proxy' => 'Тест прокси',
@@ -343,7 +340,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Предупреждение',
 'info_barre_outils' => 'с панелью инструментов?',
 'info_base_installee' => 'Структура Вашей базы данных установлена.',
-'info_base_restauration' => 'Восстановление базы данных в ходе работы.',
 'info_bloquer' => 'блок',
 'info_breves' => 'Использовать систему новостей?',
 'info_breves_03' => 'новости',
@@ -414,7 +410,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_envoi_email_automatique' => 'Автоматическая рассылка',
 'info_envoi_forum' => 'Отправлять сообщения форумов авторам статей',
 'info_envoyer_maintenant' => 'Отправить сейчас',
-'info_erreur_restauration' => 'Ошибка восстановления: файл не найден.',
 'info_etape_suivante' => 'Перейти к следующему этапу',
 'info_etape_suivante_1' => 'Вы можете перейти к следующему этапу.',
 'info_etape_suivante_2' => 'Вы можете перейти к следующему этапу.',
@@ -638,8 +633,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Перенаправление</b> Статья  перенаправлена к странице:',
 'info_reserve_admin' => 'Только администраторы могут изменить этот адрес.',
-'info_restauration_sauvegarde' => 'Восстановление резервной копии  @archive@',
-'info_restauration_sauvegarde_insert' => 'Вставка @архива@ в базу данных',
 'info_restreindre_rubrique' => 'Ограничить управление разделом:',
 'info_resultat_recherche' => 'Результаты поиска:',
 'info_rubriques' => 'Разделы',
@@ -648,29 +641,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rubriques_trouvees' => 'Найденные разделы',
 'info_rubriques_trouvees_dans_texte' => 'Найденные разделы(в тексте)',
 'info_sans_titre' => 'Неназванный',
-'info_sauvegarde' => 'Резервная копия',
-'info_sauvegarde_articles' => 'Резервная копия статей',
-'info_sauvegarde_articles_sites_ref' => 'Резервная копия статей связанных сайтов',
-'info_sauvegarde_auteurs' => 'Резервная копия авторов',
-'info_sauvegarde_breves' => 'Резервная копия новостей',
-'info_sauvegarde_documents' => 'Резервная копия документов',
-'info_sauvegarde_echouee' => 'Если резервная копия повреждена («Максимальный  лимит времени превышен»),',
-'info_sauvegarde_forums' => 'Резервная копия форумов',
-'info_sauvegarde_groupe_mots' => 'Резервная копия групп ключевых слов',
-'info_sauvegarde_messages' => 'Резервная копия сообщений',
-'info_sauvegarde_mots_cles' => 'Резервная копия ключевых слов',
-'info_sauvegarde_petitions' => 'Резервную копия комментариев',
-'info_sauvegarde_refers' => 'Резервная копия ссылок',
-'info_sauvegarde_reussi_01' => 'Резервная копия создана успешно',
-'info_sauvegarde_reussi_02' => 'База данных была сохранена в @archive@. Вы можете',
-'info_sauvegarde_reussi_03' => 'вернуться к управлению',
-'info_sauvegarde_reussi_04' => 'из Вашего сайта.',
-'info_sauvegarde_rubrique_reussi' => 'Таблицы @titre@ раздела были сохранены в @archive@. Вы можете',
-'info_sauvegarde_rubriques' => 'Резервная копия разделов',
-'info_sauvegarde_signatures' => 'Резервная копия подтверждений подписей',
-'info_sauvegarde_sites_references' => 'Резервная копия ссылок на сайты',
-'info_sauvegarde_type_documents' => 'Резервная копия типов документов',
-'info_sauvegarde_visites' => 'Резервная копия посещений',
 'info_selection_chemin_acces' => '<b>Выбрать</b> ниже путь доступа к каталогу:',
 'info_selection_un_seul_mot_cle' => 'Вы можете выбрать <b> только одно ключевое слово </b> к этой группе.',
 'info_signatures' => 'подписи',
@@ -995,9 +965,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'sans_heure' => 'время неопределено',
-'sauvegarde_fusionner' => 'Объединить текущую базу данных с резервной копией',
-'sauvegarde_fusionner_depublier' => 'Не опубликовывать объединенные объекты',
-'sauvegarde_url_origine' => 'Если необходимо, адрес источника сайта:',
 'statut_admin_restreint' => '(ограниченный администратор)',
 'syndic_choix_moderation' => 'Что должно быть сделано со следующими ссылками с этого сайта?',
 'syndic_choix_oublier' => 'Что должно быть сделано с ссылками, которые больше не присутствуют при получении статей и новостей с других сайтов по RSS?',
@@ -1023,10 +990,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 включая <i> все </i> параметры доступа для редакторов и администраторов. После выполнения этого, Вы должны 
 переустановить SPIP, чтобы восстановить новую базу данных и доступ первого администратора.',
 'texte_admin_effacer_stats' => '<MODIF>Это команда удаляет все данные, которые связаны со статистикой посещений сайта,включая сравнительную популярность статей. ',
-'texte_admin_tech_01' => 'Вы можете сделать резервную копию базы данных.Файл будет сохранен в каталоге @dossier@.<br />Также не забудьте сделать копию папки @img@, которая содержит изображения и документы, используемые в статьях и разделах.',
-'texte_admin_tech_02' => '<br /><b>Предупреждение:</b> эта резервная копия может быть восстановлена только той же версией SPIP, которой была создана. Для получения подробной  информации смотрите <a href="@spipnet@">документацию</a>.',
-'texte_admin_tech_03' => 'Вы можете архивировать файл с резервной копией для экономии времени копирования.',
-'texte_admin_tech_04' => 'Вы можете сделать как полную резервную копию сайта, так и копию только одного раздела:',
 'texte_adresse_annuaire_1' => '( Если Ваш каталог установлен на том же компьютере, что Ваш вебсайт, это вероятно «локальный хост».)',
 'texte_ajout_auteur' => 'Следующий автор был добавлен к статье:',
 'texte_annuaire_ldap_1' => 'Если Вы имеете доступ к каталогу(LDAP), Вы можете использовать его, для автоматического импорта пользователей под SPIP.',
@@ -1177,13 +1140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   ключи о том, где находится проблема ... </p><p> 
   Если проблема остается, свяжитесь с Вашим 
   поставщиком услуг.</p>', # MODIF
-'texte_restaurer_base' => 'Восстановление из резервной копии',
-'texte_restaurer_sauvegarde' => 'Эта опция позволяет восстановить сайт из резервной копии базы данных. Для восстановления перепишите файл с резервной копией в папку @dossier@.
-
-<b>Внимание:</b>  вся текущая информация будет заменена информацией с резервной копии. Эта операция необратима, если вы не уверены в том, что вы делаете - сделайте резервную копию перед началом восстановления. ',
-'texte_sauvegarde' => 'Резервное копирование базы данных',
-'texte_sauvegarde_base' => 'Резервное копирование базы данных',
-'texte_sauvegarde_compressee' => 'Резервная копия будет сохранена в файле @fichier@.',
 'texte_selection_langue_principale' => 'Вы можете задать "основной язык" сайта. Основной язык сайта определяет: 
 
 <ul> <li>формат вывода даты по умолчанию </li> 
