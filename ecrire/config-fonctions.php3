@@ -98,7 +98,7 @@ if ($flag_gd OR $flag_imagick OR $convert_command) {
 			echo "</tr></table>\n";
 
 			if ($nb_process>1) {
-				echo "<div>"._L("Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l'image correspondante");
+				echo "<div>"._T('info_image_process');
 			} else if ($nb == 1 AND $process == '') {
 				ecrire_meta('image_process', $p);
 				ecrire_metas();
