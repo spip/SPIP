@@ -47,7 +47,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 // Fonctions de traitement d'image
 // uniquement pour GD2
 // http://doc.spip.org/@image_valeurs_trans
-function image_valeurs_trans($img, $effet, $forcer_format = false) {
+function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL) {
 	if (strlen($img)==0) return false;
 	
 	$source = extraire_attribut($img, 'src');
@@ -64,22 +64,18 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$fichier = fichier_copie_locale($source);
 	}
 	
-	if (!file_exists($fichier)) return false;
-	
+	$terminaison_dest = "";
 	if (preg_match(",^(?>.*)(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		$terminaison_dest = $terminaison;
 		
 		if ($terminaison == "gif") $terminaison_dest = "png";
-	} else return false;
-	
-	if ($forcer_format) $terminaison_dest = $forcer_format;
+	}
+	if ($forcer_format!==false) $terminaison_dest = $forcer_format;
+	if (!$terminaison_dest) return false;
 	
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
-	$term_fonction_dest = $terminaison_dest;
-	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
-	
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
@@ -101,6 +97,11 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 			$terminaison_dest = $terminaison; // on garde la terminaison initiale car image simplement copiee
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
+		# cherche un cache existant
+		/*foreach (array('gif','jpg','png') as $fmt)
+			if (@file_exists($cache . $fichier_dest . '.' . $fmt)) {
+				$terminaison_dest = $fmt;
+			}*/
 	}
 	else 	{
 		$fichier_dest = md5("$fichier_dest-$effet");
@@ -110,13 +111,25 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
-	if (($date_src = @filemtime($fichier)) < @filemtime($fichier_dest)) {
+	if (!($date_src = @filemtime($fichier))) 
+		$date_src = @filemtime("$fichier.src");
+	if (!($date_dest = @filemtime($fichier_dest))) 
+		$date_dest = @filemtime("$fichier_dest.src");
+	# il peut y avoir egalite de date si l'on compare deux .src crees dans la foulee
+	if ( $date_src <= $date_dest ){
 		$creer = false;
+	}
+	else {
+		if (!file_exists($fichier)) {
+			if (!file_exists("$fichier.src")) return false;
+			# on reconstruit l'image source absente a partir de la chaine des .src
+			reconstruire_image_intermediaire($fichier);
+		}
 	}
 	
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
-	$ret["fonction_image"] = "image_image".$term_fonction_dest;
+	$ret["fonction_image"] = "image_image".$terminaison_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;
 	$ret["format_dest"] = $terminaison_dest;
@@ -126,32 +139,103 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$ret["alt"] = extraire_attribut($img, 'alt');
 	$ret["style"] = extraire_attribut($img, 'style');
 	$ret["tag"] = $img;
+	if ($fonction_creation){
+		$ret["reconstruction"] = $fonction_creation;
+		# ecrire ici comment creer le fichier, car il est pas sur qu'on l'ecrira reelement 
+		# cas de image_reduire qui finalement ne reduit pas l'image source
+		# ca evite d'essayer de le creer au prochain hit si il n'est pas la
+		#ecrire_fichier($ret['fichier_dest'].'.src',serialize($ret),true);
+	}
 	return $ret;
 }
 
 // http://doc.spip.org/@image_imagepng
 function image_imagepng($img,$fichier) {
-	$tmp = $fichier."tmp";
+	$tmp = $fichier.".tmp";
 	$ret = imagepng($img,$tmp);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
 
 // http://doc.spip.org/@image_imagegif
 function image_imagegif($img,$fichier) {
-	$tmp = $fichier."tmp";
+	$tmp = $fichier.".tmp";
 	$ret = imagegif($img,$tmp);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
 // http://doc.spip.org/@image_imagejpeg
-function image_imagejpeg($img,$fichier) {
-	$tmp = $fichier."tmp";
-	$ret = imagejpeg($img,$tmp);
+function image_imagejpg($img,$fichier) {
+	$tmp = $fichier.".tmp";
+	$ret = imagejpeg($img,$tmp, 85);
+	@unlink($fichier); // le fichier peut deja exister
 	rename($tmp, $fichier);
 	return $ret;
 }
 
+function image_gd_output($img,$valeurs){
+	$fonction = "image_image".$valeurs['format_dest'];
+	$ret = false;
+	if (
+	     function_exists($fonction) 
+	  && ($ret = $fonction($img,$valeurs['fichier_dest'])) # on a reussi a creer l'image
+	  && isset($valeurs['reconstruction']) # et on sait comment la resonctruire le cas echeant
+	  )
+		ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
+	return $ret;
+}
+
+function reconstruire_image_intermediaire($fichier_manquant){
+	$reconstruire = array();
+	$fichier = $fichier_manquant;
+	while (
+		!file_exists($fichier)
+		AND lire_fichier($src = "$fichier.src",$source)
+		AND $valeurs=unserialize($source)
+    AND ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
+    ) {
+			@unlink($src); // si jamais on a un timeout pendant la reconstruction, elle se fera naturellement au hit suivant
+			$reconstruire[] = $valeurs['reconstruction'];
+   }
+	while (count($reconstruire)){
+		$r = array_pop($reconstruire);
+		$fonction = $r[0];
+		$args = $r[1];
+		call_user_func_array($fonction, $args);
+	}
+	// cette image intermediaire est commune a plusieurs series de filtre, il faut la conserver
+	// mais l'on peut nettoyer les miettes de sa creation
+	ramasse_miettes($fichier_manquant);
+}
+
+function ramasse_miettes($fichier){
+	if (!lire_fichier($src = "$fichier.src",$source) 
+		OR !$valeurs=unserialize($source)) return;
+	@unlink($src); # on supprime la reference a sa source pour marquer cette image comme non intermediaire
+	while (
+	     ($fichier = $valeurs['fichier']) # l'origine est connue (on ne verifie pas son existence, qu'importe ...)
+		AND (substr($fichier,0,strlen(_DIR_VAR))==_DIR_VAR) # et est dans local
+		AND (lire_fichier($src = "$fichier.src",$source)) # le fichier a une source connue (c'est donc une image calculee intermediaire)
+		AND ($valeurs=unserialize($source))  # et valide
+		) {
+		# on efface le fichier
+		@unlink($fichier);
+		# mais laisse le .src qui permet de savoir comment reconstruire l'image si besoin
+		#@unlink($src);
+	}
+}
+
+function image_graver($img){
+	$fichier = extraire_attribut($img, 'src');
+	if (($p=strpos($fichier,'?'))!==FALSE)
+		$fichier=substr($fichier,0,$p);
+	if (strlen($fichier) < 1)
+		$fichier = $img;
+	ramasse_miettes($fichier);
+	return $img; // on ne change rien
+}
 
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
 // http://doc.spip.org/@imagepalettetotruecolor
@@ -274,14 +358,9 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 	$format = $valeurs['format_source'];
 	$destdir = dirname($valeurs['fichier_dest']);
 	$destfile = basename($valeurs['fichier_dest'],".".$valeurs["format_dest"]);
-	if ($format == 'jpg')
-		$formats_sortie = array('jpg','png','gif');
-	else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
-		$formats_sortie = array('png','jpg','gif');
-
-	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
-		$process = $GLOBALS['meta']['image_process'];
-
+	
+	$format_sortie = $valeurs['format_dest'];
+	
 	// liste des formats qu'on sait lire
 	$img = isset($GLOBALS['meta']['formats_graphiques'])
 	  ? in_array($format,explode(',',$GLOBALS['meta']['formats_graphiques']))
@@ -293,12 +372,6 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 
 	// chercher un cache
 	$vignette = '';
-	foreach (array('gif','jpg','png') as $fmt)
-		if (@file_exists($destination.'.'.$fmt)) {
-			$vignette = $destination.'.'.$fmt;
-			if ($force) @unlink($vignette);
-		}
-
 	if ($test_cache_only AND !$vignette) return;
 
 	// utiliser le cache ?
@@ -330,8 +403,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 		else if ($process == 'convert') {
 			define('_CONVERT_COMMAND', 'convert');
 			define ('_RESIZE_COMMAND', _CONVERT_COMMAND.' -quality 85 -resize %xx%y! %src %dest');
-			$format = $formats_sortie[0];
-			$vignette = $destination.".".$format;
+			$vignette = $destination.".".$format_sortie;
 			$commande = str_replace(
 				array('%x', '%y', '%src', '%dest'),
 				array(
@@ -351,8 +423,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 		else
 		// imagick (php4-imagemagick)
 		if ($process == 'imagick') {
-			$format = $formats_sortie[0];
-			$vignette = "$destination.".$format;
+			$vignette = "$destination.".$format_sortie;
 			$handle = imagick_readimage($image);
 			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 			imagick_write($handle, $vignette);
@@ -366,7 +437,6 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 		if ($process == "netpbm") {
 			define('_PNMSCALE_COMMAND', 'pnmscale'); // chemin a changer dans mes_options
 			if (_PNMSCALE_COMMAND == '') return;
-			$format_sortie = "jpg";
 			$vignette = $destination.".".$format_sortie;
 			$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);
 			if ($format == "jpg") {
@@ -405,21 +475,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
 				return;
 			}
-
-			// Choisir le format destination
-			// - on sauve de preference en JPEG (meilleure compression)
-			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
-			# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
-			# pas *ecrire*
-			$gd_formats = $GLOBALS['meta']["gd_formats"];
-			foreach ($formats_sortie as $fmt) {
-				if (ereg($fmt, $gd_formats)) {
-					if ($format <> "gif" OR function_exists('ImageGif'))
-						$destFormat = $fmt;
-					break;
-				}
-			}
-
+			$destFormat = $format_sortie;
 			if (!$destFormat) {
 				spip_log("pas de format pour $image");
 				return;
@@ -472,14 +528,9 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			}
 
 			// Sauvegarde de l'image destination
-			$vignette = "$destination.$destFormat";
-			$format = $destFormat;
-			if ($destFormat == "jpg")
-				ImageJPEG($destImage, $vignette, 85);
-			else if ($destFormat == "gif")
-				ImageGIF($destImage, $vignette);
-			else if ($destFormat == "png")
-				ImagePNG($destImage, $vignette);
+			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
+			$valeurs['format_dest'] = $format = $destFormat;
+			image_gd_output($destImage,$valeurs);
 
 			if ($srcImage)
 				ImageDestroy($srcImage);
@@ -540,7 +591,34 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	elseif ($taille == 0 AND $taille_y == 0)
 		return '';
 
-	$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",'png');
+	if (($process == 'AUTO') AND isset($GLOBALS['meta']['image_process']))
+		$process = $GLOBALS['meta']['image_process'];
+	# determiner le format de sortie
+	$format_sortie = false; // le choix par defaut sera bon
+	if ($process == "netpbm") $format_sortie = "jpg";
+	else if ($process == 'gd1' OR $process == 'gd2') {
+		if ($format == 'jpg')
+			$formats_sortie = array('jpg','png','gif');
+		else // les gif sont passes en png preferentiellement pour etre homogene aux autres filtres images
+			$formats_sortie = array('png','jpg','gif');
+		// Choisir le format destination
+		// - on sauve de preference en JPEG (meilleure compression)
+		// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+		# bug : gd_formats contient la liste des fichiers qu'on sait *lire*,
+		# pas *ecrire*
+		$gd_formats = $GLOBALS['meta']["gd_formats"];
+		$format_sortie = "";
+		foreach ($formats_sortie as $fmt) {
+			if (ereg($fmt, $gd_formats)) {
+				if ($format <> "gif" OR function_exists('ImageGif'))
+					$format_sortie = $fmt;
+				break;
+			}
+		}
+	}
+	
+	$fonction = array('image_reduire', func_get_args());
+	$image = image_valeurs_trans($img, "reduire-{$taille}-{$taille_y}",$format_sortie,$fonction);
 
 	if (!$image){
 		spip_log("image_reduire_src:pas de version locale de $img");
@@ -618,7 +696,8 @@ function image_reduire_par ($img, $val=1, $force=false) {
 // http://doc.spip.org/@image_alpha
 function image_alpha($im, $alpha = 63)
 {
-	$image = image_valeurs_trans($im, "alpha-$alpha", "png");
+	$fonction = array('image_alpha', func_get_args());
+	$image = image_valeurs_trans($im, "alpha-$alpha", "png",$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -664,7 +743,7 @@ function image_alpha($im, $alpha = 63)
 				imagesetpixel ( $im_, $x, $y, $rgb );
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 		imagedestroy($im2);
@@ -682,7 +761,8 @@ function image_alpha($im, $alpha = 63)
 // http://doc.spip.org/@image_recadre
 function image_recadre($im,$width,$height,$position='center', $background_color='white')
 {
-	$image = image_valeurs_trans($im, "recadre-$width-$height-$position-$background_color");
+	$fonction = array('image_recadre', func_get_args());
+	$image = image_valeurs_trans($im, "recadre-$width-$height-$position-$background_color",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -729,7 +809,7 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 		imagefill ($im_, 0, 0, $color_t);
 		imagecopy($im_, $im, max(0,-$offset_width), max(0,-$offset_height), max(0,$offset_width), max(0,$offset_height), min($width,$x_i), min($height,$y_i));
 
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
@@ -740,7 +820,8 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 // http://doc.spip.org/@image_flip_vertical
 function image_flip_vertical($im)
 {
-	$image = image_valeurs_trans($im, "flip_v");
+	$fonction = array('image_flip_vertical', func_get_args());
+	$image = image_valeurs_trans($im, "flip_v", false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -767,7 +848,7 @@ function image_flip_vertical($im)
 			}
 		}
 
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
@@ -778,7 +859,8 @@ function image_flip_vertical($im)
 // http://doc.spip.org/@image_flip_horizontal
 function image_flip_horizontal($im)
 {
-	$image = image_valeurs_trans($im, "flip_h");
+	$fonction = array('image_flip_horizontal', func_get_args());
+	$image = image_valeurs_trans($im, "flip_h",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -804,7 +886,7 @@ function image_flip_horizontal($im)
    				imagecopy($im_, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
@@ -857,7 +939,8 @@ function image_masque($im, $masque, $pos="") {
 
 	$pos = md5(serialize($variable));
 
-	$image = image_valeurs_trans($im, "masque-$masque-$pos", "png");
+	$fonction = array('image_masque', func_get_args());
+	$image = image_valeurs_trans($im, "masque-$masque-$pos", "png",$fonction);
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -1138,7 +1221,7 @@ function image_masque($im, $masque, $pos="") {
 			}
 		}
 
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 		imagedestroy($im2);
@@ -1156,7 +1239,8 @@ function image_masque($im, $masque, $pos="") {
 // http://doc.spip.org/@image_nb
 function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 {
-	$image = image_valeurs_trans($im, "nb-$val_r-$val_g-$val_b");
+	$fonction = array('image_nb', func_get_args());
+	$image = image_valeurs_trans($im, "nb-$val_r-$val_g-$val_b",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1200,7 +1284,7 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
@@ -1229,7 +1313,8 @@ function image_flou($im,$niveau=3)
 				array ( 1, 11, 55, 165, 330, 462, 462, 330, 165, 55, 11, 1)
 				);
 	
-	$image = image_valeurs_trans($im, "flou-$niveau");
+	$fonction = array('image_flou', func_get_args());
+	$image = image_valeurs_trans($im, "flou-$niveau", false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1324,8 +1409,9 @@ function image_flou($im,$niveau=3)
 			}
 		}
 	
-		$image["fonction_image"]($temp2, "$dest");
+		image_gd_output($temp2,$image);
 		imagedestroy($temp1);	
+		imagedestroy($temp2);	
 	}
 	
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
@@ -1509,7 +1595,8 @@ function image_RotateBicubic($src_img, $angle, $bicubic=0) {
 // http://doc.spip.org/@image_rotation
 function image_rotation($im, $angle, $crop=false)
 {
-	$image = image_valeurs_trans($im, "rot-$angle-$crop", "png");
+	$fonction = array('image_rotation', func_get_args());
+	$image = image_valeurs_trans($im, "rot-$angle-$crop", "png", $fonction);
 	if (!$image) return("");
 	
 	$im = $image["fichier"];
@@ -1520,7 +1607,7 @@ function image_rotation($im, $angle, $crop=false)
 	if ($creer) {
 		$effectuer_gd = true;
 
-		if (function_exists(imagick_rotate)) {
+		if (function_exists('imagick_rotate')) {
 			$mask = imagick_getcanvas( "#ff0000", $x, $y );
 			$handle = imagick_readimage ($im);
 			if (imagick_isopaqueimage( $handle )) {
@@ -1535,7 +1622,7 @@ function image_rotation($im, $angle, $crop=false)
 			$im = $image["fonction_imagecreatefrom"]($im);
 			imagepalettetotruecolor($im);
 			$im = image_RotateBicubic($im, $angle, true);
-			$image["fonction_image"]($im, "$dest");
+			image_gd_output($im,$image);
 			imagedestroy($im);
 		}
 	}
@@ -1554,7 +1641,8 @@ function image_imagick () {
 	$tous[0]="";
 	$tous_var = join($tous, "-");
 
-	$image = image_valeurs_trans($img, "$tous_var", "png");
+	$fonction = array('image_imagick', func_get_args());
+	$image = image_valeurs_trans($img, "$tous_var", "png",$fonction);
 	if (!$image) return("");
 	
 	$im = $image["fichier"];
@@ -1571,9 +1659,10 @@ function image_imagick () {
 			call_user_func_array($fonc, $arr);
 			// Creer image dans fichier temporaire, puis renommer vers "bon" fichier
 			// de facon a eviter time_out pendant creation de l'image definitive
-			$tmp = ereg_replace("\.png$", "-tmp.png", $dest);
+			$tmp = preg_replace(",[.]png$,i", "-tmp.png", $dest);
 			imagick_writeimage( $handle, $tmp);
 			rename($tmp, $dest);
+			ecrire_fichier($dest.".src",serialize($image));
 		} 
 	}
 	list ($src_y,$src_x) = taille_image($dest);
@@ -1611,7 +1700,8 @@ function image_decal_couleur($coul, $gamma) {
 // http://doc.spip.org/@image_gamma
 function image_gamma($im, $gamma = 0)
 {
-	$image = image_valeurs_trans($im, "gamma-$gamma");
+	$fonction = array('image_gamma', func_get_args());
+	$image = image_valeurs_trans($im, "gamma-$gamma",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1650,7 +1740,7 @@ function image_gamma($im, $gamma = 0)
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 	}
 	return image_ecrire_tag($image,array('src'=>$dest));
 }
@@ -1679,7 +1769,8 @@ function image_sepia($im, $rgb = "896f5e")
 	$dv= $couleurs["green"];
 	$db= $couleurs["blue"];
 		
-	$image = image_valeurs_trans($im, "sepia-$dr-$dv-$db");
+	$fonction = array('image_sepia', func_get_args());
+	$image = image_valeurs_trans($im, "sepia-$dr-$dv-$db",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1723,7 +1814,7 @@ function image_sepia($im, $rgb = "896f5e")
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 		imagedestroy($im_);
 		imagedestroy($im);
 	}
@@ -1736,7 +1827,8 @@ function image_sepia($im, $rgb = "896f5e")
 // http://doc.spip.org/@image_renforcement
 function image_renforcement($im, $k=0.5)
 {
-	$image = image_valeurs_trans($im, "renforcement-$k");
+	$fonction = array('image_flou', func_get_args());
+	$image = image_valeurs_trans($im, "renforcement-$k",false,$fonction);
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1797,7 +1889,7 @@ function image_renforcement($im, $k=0.5)
 		imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}		
-		$image["fonction_image"]($im_, "$dest");		
+		image_gd_output($im_,$image);
 	}
 
 	return image_ecrire_tag($image,array('src'=>$dest));
@@ -1810,7 +1902,8 @@ function image_renforcement($im, $k=0.5)
 // http://doc.spip.org/@image_aplatir
 function image_aplatir($im, $format='jpg', $coul='000000')
 {
-	$image = image_valeurs_trans($im, "aplatir-$coul", $format);
+	$fonction = array('image_aplatir', func_get_args());
+	$image = image_valeurs_trans($im, "aplatir-$coul", $format,$fonction);
 
 	if (!$image) return("");
 
@@ -1875,7 +1968,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 				imagesetpixel ($im_, $x, $y, $color);	
 			}
 		}
-		$image["fonction_image"]($im_, "$dest");
+		image_gd_output($im_,$image);
 	}
 
 	return image_ecrire_tag($image,array('src'=>$dest));
