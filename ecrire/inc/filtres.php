@@ -2416,8 +2416,11 @@ function bando_style_prive_theme() {
  * @param string $url
  * @param string $class
  * @param string $confirm
+ *   message de confirmation oui/non avant l'action
  * @param string $title
  * @param string $callback
+ *   callback js a appeler lors de l'evenement action (apres confirmation eventuelle si $confirm est non vide)
+ *   et avant execution de l'action. Si la callback renvoie false, elle annule le declenchement de l'action
  * @return string
  */
 function bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
