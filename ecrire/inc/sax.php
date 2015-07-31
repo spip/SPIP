@@ -200,11 +200,15 @@ function inc_sax_dist($page, $apply=false)
 
 	xml_parser_free($xml_parser);
 
-	if ($res[0] == '<') return trim($doctype). "\n" . $res;
+	if ($res[0] == '<'){
+		if (!preg_match(_REGEXP_DOCTYPE, substr($res,0,strlen($doctype))))
+			$res = $doctype . $res;
+		return $res;
+	}
 
 	$GLOBALS['xhtml_error'] = $res;
 
-	return $doctype . $page;
+	return $page;
 }
 
 // SAX ne dit pas si une Entite est dans un attribut ou non.
@@ -225,7 +229,7 @@ function sax_bug($data)
 		$data = html2unicode($data, true);
 	else  {
 		list ($doctype, $topelement, $avail, $grammaire, $rotlvl) = $r;
-		$data = substr($data,strlen($doctype));
+		//$data = str_replace('DOCTYPE','doctype',$doctype).substr($data,strlen($doctype));
 		$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 		if (lire_fichier($file, $r))
 			$phraseur_xml->dtc = unserialize($r);
