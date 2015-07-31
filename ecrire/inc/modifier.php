@@ -140,9 +140,11 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 			suivre_invalideur($options['invalideur']);
 		}
 
-		// marquer les documents vus dans le texte si il y a lieu
-		include_spip('base/auxiliaires');
-		marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
+		if (!in_array($type,array('forum','signature'))) {
+			// marquer les documents vus dans le texte si il y a lieu
+			include_spip('base/auxiliaires');
+			marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
+		}
 
 		// Notifications, gestion des revisions...
 		// appelle |enregistrer_nouvelle_revision @inc/revisions
