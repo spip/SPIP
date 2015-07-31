@@ -178,7 +178,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg("^( *)([^,}{]*({[^}{]*[}][^,}{]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
+			ereg("^( *)([^,}{]*([{][^}{]*[}][^,}{]*)*[^,}]*)([,}$fin].*)$", $args, $regs);
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
