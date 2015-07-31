@@ -201,13 +201,6 @@ function auth_init_droits($row)
 
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 
-	$r = @unserialize($row['prefs']);
-	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : array());
-	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])){
-		$GLOBALS['visiteur_session']['prefs']['couleur'] = 1;
-		$GLOBALS['visiteur_session']['prefs']['display'] = 0;
-	}
-
 	// au cas ou : ne pas memoriser les champs sensibles
 	unset($GLOBALS['visiteur_session']['pass']);
 	unset($GLOBALS['visiteur_session']['htpass']);
@@ -226,6 +219,14 @@ function auth_init_droits($row)
 				time() + 3600 * 24 * 14
 			);
 		}
+	}
+
+	// reinjecter les preferences_auteur apres le reset de spip_session
+	$r = @unserialize($row['prefs']);
+	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : array());
+	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])){
+		$GLOBALS['visiteur_session']['prefs']['couleur'] = 1;
+		$GLOBALS['visiteur_session']['prefs']['display'] = 0;
 	}
 
 	// Etablir les droits selon le codage attendu
