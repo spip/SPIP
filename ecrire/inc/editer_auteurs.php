@@ -27,6 +27,7 @@ function inc_editer_auteurs_dist($id_article, $flag, $cherche_auteur, $ids)
 		$futurs = ajouter_auteurs_articles($id_article, $les_auteurs);
 	} else $futurs = '';
 
+	$les_auteurs = afficher_auteurs_articles($id_article, $flag, $les_auteurs);
 	return editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs);
 }
 
@@ -62,8 +63,7 @@ function editer_auteurs_article($id_article, $flag, $cherche_auteur, $ids, $les_
 		. '</p>';
 	} else $reponse ='';
 
-	if ($les_auteurs)
-		$reponse .= afficher_auteurs_articles($id_article, $flag, $les_auteurs);
+	$reponse .= $les_auteurs;
 
 //
 // Ajouter un auteur
@@ -172,6 +172,8 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 {
 	global $connect_statut, $options,$connect_id_auteur;
+
+	if (!$les_auteurs) return '';
 
 	$table = array();
 

@@ -69,28 +69,28 @@ function inc_petitionner_dist($id_article, $script, $args, $modifiable)
 		$res .= "<br />\n";
 
 		if ($email_unique=="oui")
-			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked'>";
+			$res .= "<input type='checkbox' name='email_unique' id='emailunique' checked='checked' />";
 		else
-			$res .="<input type='checkbox' name='email_unique'  id='emailunique'>";
+			$res .="<input type='checkbox' name='email_unique'  id='emailunique' />";
 		$res .=" <label for='emailunique'>"._T('bouton_checkbox_signature_unique_email')."</label><br />";
 		if ($site_obli=="oui")
-			$res .="<input type='checkbox' name='site_obli' id='siteobli' checked='checked'>";
+			$res .="<input type='checkbox' name='site_obli' id='siteobli' checked='checked' />";
 		else
-			$res .="<input type='checkbox' name='site_obli'  id='siteobli'>";
+			$res .="<input type='checkbox' name='site_obli'  id='siteobli' />";
 		$res .=" <label for='siteobli'>"._T('bouton_checkbox_indiquer_site')."</label><br />";
 		if ($site_unique=="oui")
-			$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked'>";
+			$res .="<input type='checkbox' name='site_unique' id='siteunique' checked='checked' />";
 		else
-			$res .="<input type='checkbox' name='site_unique'  id='siteunique'>";
+			$res .="<input type='checkbox' name='site_unique'  id='siteunique' />";
 		$res .=" <label for='siteunique'>"._T('bouton_checkbox_signature_unique_site')."</label><br />";
 		if ($message=="oui")
-			$res .="<input type='checkbox' name='message' id='message' checked='checked'>";
+			$res .="<input type='checkbox' name='message' id='message' checked='checked' />";
 		else
 			$res .="<input type='checkbox' name='message'  id='message' />";
 		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
 		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<br />";
-		$res .="<textarea name='texte_petition' class='forml' rows='4' COLS='10' wrap='soft'>";
+		$res .="<textarea name='texte_petition' class='forml' rows='4' cols='10'>";
 		$res .=entites_html($texte_petition);
 		$res .="</textarea>\n";
 
