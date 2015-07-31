@@ -128,13 +128,19 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		include_spip('inc/distant');
 		include_spip('inc/filtres');
 
-		if ($document['distant'] != 'oui')
-			$image = get_spip_doc($document['fichier']);
-
-		if ($portfolio) {
-			$image = filtrer('image_reduire',	$image,	110, 120, false, true);
+		// Si le document distant a une copie locale, on peut l'exploiter
+		if ($document['distant'] == 'oui') {
+			$image = _DIR_RACINE.copie_locale($document['fichier'], 'test');
 		} else {
-			$image = filtrer('image_reduire',	$image,	-1,-1,false, true);
+			$image = get_spip_doc($document['fichier']);
+		}
+
+		if ($image) {
+			if ($portfolio) {
+				$image = filtrer('image_reduire',	$image,	110, 120, false, true);
+			} else {
+				$image = filtrer('image_reduire',	$image,	-1,-1,false, true);
+			}
 		}
 	} else {
 		$image = '';
