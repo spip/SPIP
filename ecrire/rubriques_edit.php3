@@ -56,11 +56,17 @@ function enfant($leparent){
 
 
 if ($new == "oui") {
-	$id_parent = intval($id_parent);
-	$id_rubrique = 0;
-	$titre = "Nouvelle rubrique";
-	$descriptif = "";
-	$texte = "";
+	if (($connect_statut=='0minirezo') AND acces_rubrique($supp_rubrique)) {
+		$id_parent = intval($id_parent);
+		$id_rubrique = 0;
+		$titre = "Nouvelle rubrique";
+		$descriptif = "";
+		$texte = "";
+	}
+	else {
+		echo "Acc&egrave;s interdit.";
+		exit;
+	}
 }
 else {
 	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
