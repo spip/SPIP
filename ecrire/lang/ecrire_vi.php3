@@ -272,7 +272,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_config_suivi_explication' => 'B&#7841;n c&oacute; th&#7875; ghi danh v&agrave;o mailing list d&#432;&#7899;i &#273;&acirc;y, n&#7871;u b&#7841;n mu&#7889;n nh&#7853;n th&ocirc;ng tin c&aacute;c b&agrave;i &#273;&#432;&#7907;c n&#7897;p v&agrave;o trang web n&agrave;y.',
 'info_confirmer_passe' => 'X&#225;c nh&#7853;n l&#7841;i m&#7853;t m&#227; m&#7899;i:',
 'info_connexion_base' => 'B&#432;&#7899;c th&#7913; nh&igrave;: <b>th&#7917; n&#7889;i v&agrave;o database</b>',
-'info_connexion_ldap_ok' => '<MODIF><B>N&#7889;i v&agrave;o LDAP t&#7889;t &#273;&#7865;p.</b><p> B&#7841;n c&oacute; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
+'info_connexion_ldap_ok' => 'N&#7889;i v&agrave;o LDAP t&#7889;t &#273;&#7865;p.</b><p /> B&#7841;n c&oacute; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
 'info_connexion_mysql' => 'B&#432;&#7899;c th&#7913; nh&#7845;t: <B>N&#7889;i v&agrave;o MySQL c&#7911;a b&#7841;n</B>',
 'info_connexion_ok' => 'N&#7889;i v&agrave;o t&#7889;t &#273;&#7865;p.',
 'info_contact' => 'Li&ecirc;n l&#7841;c',
@@ -317,10 +317,10 @@ H&#7891; s&#417; SPIP</a>.',
 'info_forum_interne' => 'Di&#7877;n &#273;&agrave;n n&#7897;i b&#7897;',
 'info_forum_ouvert' => 'Trong v&ugrave;ng ri&ecirc;ng, m&#7897;t di&#7877;n &#273;&agrave;n &#273;&#432;&#7907;c m&#7903; ra cho m&#7885;i ch&#7911; b&uacute;t &#273;&atilde; c&oacute; ghi danh. B&#7841;n c&oacute; th&#7875; t&#7855;t/m&#7903; m&#7897;t di&#7877;n &#273;&agrave;n ph&#7909; tr&#7897;i d&agrave;nh ri&ecirc;ng cho c&aacute;c qu&#7843;n tr&#7883; vi&ecirc;n.',
 'info_forum_statistiques' => 'Th&#7889;ng k&#234; th&#259;m vi&#7871;ng',
-'info_forums_abo_invites' => '<NEW>Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
-'info_gauche_admin_effacer' => '<MODIF><B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; vi&#7879;c qu&#7843;n tr&#7883; k&#7929; thu&#7853;t. M&#7897;t s&#7889; vi&#7879;c &#273;&ograve;i h&#7887;i ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, v&agrave; c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
-'info_gauche_admin_tech' => '<MODIF><B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; c&ocirc;ng vi&#7879;c b&#7843;o tr&igrave;. M&#7897;t s&#7889; vi&#7879;c c&#7847;n ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
-'info_gauche_admin_vider' => '<MODIF><B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; c&ocirc;ng vi&#7879;c b&#7843;o tr&igrave;. M&#7897;t s&#7889; vi&#7879;c c&#7847;n ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, v&agrave; c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
+'info_forums_abo_invites' => 'Trang web c&oacute; c&aacute;c di&#7877;n &#273;&agrave;n c&#7847;n ghi danh; kh&aacute;ch c&oacute; th&#7875; v&agrave;o ghi danh &#7903; trang c&ocirc;ng c&#7897;ng.',
+'info_gauche_admin_effacer' => '<B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P /> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; vi&#7879;c qu&#7843;n tr&#7883; k&#7929; thu&#7853;t. M&#7897;t s&#7889; vi&#7879;c &#273;&ograve;i h&#7887;i ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, v&agrave; c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
+'info_gauche_admin_tech' => '<B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P /> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; c&ocirc;ng vi&#7879;c b&#7843;o tr&igrave;. M&#7897;t s&#7889; vi&#7879;c c&#7847;n ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
+'info_gauche_admin_vider' => '<B>Ch&#7881; c&oacute; qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang n&agrave;y.</B><P /> N&#417;i &#273;&acirc;y cho ph&eacute;p b&#7841;n th&#7921;c hi&#7879;n m&#7897;t s&#7889; c&ocirc;ng vi&#7879;c b&#7843;o tr&igrave;. M&#7897;t s&#7889; vi&#7879;c c&#7847;n ph&#7843;i c&oacute; ch&#7913;ng nh&#7853;n &#273;&#7863;c bi&#7879;t, v&agrave; c&#7847;n ph&#7843;i d&ugrave;ng FTP &#273;&#7875; v&agrave;o trang web.',
 'info_gauche_auteurs' => '<MODIF>Danh s&aacute;ch t&#7845;t c&#7843; t&aacute;c gi&#7843; &#273;&#432;&#7907;c li&#7879;t k&ecirc; n&#417;i &#273;&acirc;y. Tr&aacute;ch nhi&#7879;m c&#7911;a m&#7895;i ng&#432;&#7901;i &#273;&#432;&#7907;c bi&#7875;u hi&#7879;n qua m&agrave;u c&#7911;a icon (ch&#7911; b&uacute;t=m&agrave;u xanh l&aacute; c&acirc;y; qu&#7843;n l&yacute;=m&agrave;u v&agrave;ng).',
 'info_gauche_auteurs_exterieurs' => 'C&aacute;c t&aacute;c gi&#7843; b&ecirc;n ngo&agrave;i (kh&ocirc;ng &#273;&#432;&#7907;c ph&eacute;p v&agrave;o trang web) &#273;&#432;&#7907;c bi&#7875;u hi&#7879;n b&#7857;ng icon m&agrave;u xanh d&#432;&#417;ng; T&aacute;c gi&#7843; n&agrave;o b&#7883; x&oacute;a t&ecirc;n &#273;&#432;&#7907;c bi&#7875;u hi&#7879;n b&#7857;ng icon th&ugrave;ng r&aacute;c.',
 'info_gauche_messagerie' => 'Ph&#432;&#417;ng ti&#7879;n th&#432; t&iacute;n cho ph&eacute;p b&#7841;n trao &#273;&#7893;i th&#432; t&iacute;n gi&#7919;a c&aacute;c ch&#7911; b&uacute;t v&#7899;i nhau, l&#432;u tr&#7919; b&#7843;n ghi nh&#7899; (&#273;&#7875; s&#7917; d&#7909;ng ri&ecirc;ng) ho&#7863;c hi&#7875;n th&#7883; th&ocirc;ng b&aacute;o tr&ecirc;n trang nh&agrave; c&#7911;a v&ugrave;ng ri&ecirc;ng (n&#7871;u b&#7841;n l&agrave; ng&#432;&#7901;i qu&#7843;n tr&#7883;).',
@@ -920,7 +920,7 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 
 
 // V
-'version_initiale' => '<NEW>Version initiale'
+'version_initiale' => '&#7844;n b&#7843;n &#273;&#7847;u ti&ecirc;n'
 
 );
 
