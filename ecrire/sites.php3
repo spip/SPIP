@@ -165,7 +165,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	if ($syndication_old != $syndication AND $syndication == "non") {
 		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 	}
-	calculer_rubriques_publiques();
+	calculer_rubriques();
 	if ($statut == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
@@ -185,7 +185,7 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_syndic SET date='$annee-$mois-$jour' WHERE id_syndic=".intval($id_syndic);
 	$result = spip_query($query);
-	calculer_dates_rubriques();
+	calculer_rubriques();
 }
 
 

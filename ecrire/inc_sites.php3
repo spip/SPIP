@@ -220,6 +220,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
 						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', FROM_UNIXTIME($la_date), '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
+					$flag_ajout_lien = true;
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
@@ -251,6 +252,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
 						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', '$la_date', '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
+					$flag_ajout_lien = true;
 				}
 				$i++;
 			}
@@ -262,6 +264,12 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	// Ne pas oublier de liberer le verrou
 	spip_release_lock($url_syndic);
+
+	if ($flag_ajout_lien) {
+		include_ecrire('inc_rubriques.php3');
+		calculer_rubriques();
+	}
+
 	return $erreur;
 }
 

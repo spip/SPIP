@@ -93,7 +93,7 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve";
 	$result = spip_query($query);
-	calculer_dates_rubriques();
+	calculer_rubriques();
 }
 
 

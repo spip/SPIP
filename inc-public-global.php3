@@ -150,9 +150,16 @@ $effacer_cache = !$delais;
 $effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est pas publie
 
 // envoyer les entetes
+$headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
 	if ($lastmodified) {
-		@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastmodified)." GMT");
+		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+		@Header ("Last-Modified: ".$gmoddate." GMT");
+		$if_modified_since = ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE);
+		if ($if_modified_since == $gmoddate) {
+			@Header("HTTP/1.0 304 Not Modified");
+			$headers_only = true;
+		}
 		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
 	}
 }
@@ -163,7 +170,7 @@ else {
 }
 
 // envoyer la page
-if (file_exists($chemin_cache) && ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'HEAD')) {
+if (file_exists($chemin_cache) && !$headers_only) {
 	include($chemin_cache);
 } else if (!$flag_preserver) {
 	// message d'erreur base de donnees
@@ -240,31 +247,39 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 		lire_metas();	// on force la relecture dans la base pour eviter des acces concurrence
 		if ($majnouv != lire_meta('majnouv')) {
 			spip_log("envoi mail nouveautes: acces concurrent");
-			exit;
+		} else {
+
+			ecrire_meta('majnouv', time());
+			ecrire_metas();
+
+			// preparation mail
+			unset ($mail_nouveautes);
+			unset ($sujet_nouveautes);
+			$fond = 'nouveautes';
+			$delais = 0;
+			$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
+			include(inclure_fichier($fond, $delais, $contexte_inclus));
+
+			// envoi
+			if ($mail_nouveautes) {
+				spip_log("envoi mail nouveautes");
+				include_ecrire('inc_mail.php3');
+				envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
+			} else
+				spip_log("envoi mail nouveautes : pas de nouveautes");
 		}
-
-		ecrire_meta('majnouv', time());
-		ecrire_metas();
-
-		// preparation mail
-		unset ($mail_nouveautes);
-		unset ($sujet_nouveautes);
-		$fond = 'nouveautes';
-		$delais = 0;
-		$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
-		include(inclure_fichier($fond, $delais, $contexte_inclus));
-
-		// envoi
-		if ($mail_nouveautes) {
-			spip_log("envoi mail nouveautes");
-			include_ecrire('inc_mail.php3');
-			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
-		} else
-			spip_log("envoi mail nouveautes : pas de nouveautes");
 	}
 	$timeout = true;
 }
 
+// recalcul des rubriques publiques (cas de la publication post-datee)
+if (!$timeout AND $db_ok AND (time()-lire_meta('calcul_rubriques') > 3600)) {
+	include_ecrire('inc_meta.php3');
+	ecrire_meta('calcul_rubriques', time());
+	ecrire_metas();
+	include_ecrire('inc_rubriques.php3');
+	calculer_rubriques();
+}
 
 //
 // Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
