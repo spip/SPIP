@@ -1393,7 +1393,7 @@ function critere_datasource($idb, &$boucles, $crit) {
 
 /*
  * Pour passer des arguments a un iterateur non-spip
- * (iter:xxxIterator){args argument1, argument2, argument3}
+ * (php:xxxIterator){args argument1, argument2, argument3}
  */
 function critere_args_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
