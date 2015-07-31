@@ -141,6 +141,7 @@ function creer_chaine_url($x) {
 function declarer_url_propre($type, $id_objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
+	spip_log("dup $type " . @join(',', $desc));
 	$table = $desc['table'];
 	$champ_titre = $desc['titre'];
 	$col_id =  @$desc['key']["PRIMARY KEY"];
