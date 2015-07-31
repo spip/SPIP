@@ -530,11 +530,11 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($img, 'hspace'))
 		$style .= "margin:${espace}px;";
-	else
-		if ($class = extraire_attribut($img, 'class'))
-			$attributs .=  " class='$class'";
-		else
-			$attributs .=  " class='spip_logos'";
+
+	// Conserver la class
+	if ($class = extraire_attribut($img, 'class'))
+		$attributs .=  " class='$class'";
+
 	// attribut deprecie mais equivalent CSS pas clair
 	if ($align = extraire_attribut($img, 'align'))
 		$attributs .= " align='$align'";
