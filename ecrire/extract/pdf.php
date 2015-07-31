@@ -234,7 +234,7 @@ class Format_PDF {
 			if ($in_stream) {
 				if (!($p = strpos($t, "endstream")) && !($q = strpos($t, "endobj"))) {
 					$stream .= $t;
-#					echo "<font color='red'>Stream continué</font><p>";
+#					echo "<span style='color: red'>Stream continué</span><p>";
 					continue;
 				}
 				$in_stream = false;

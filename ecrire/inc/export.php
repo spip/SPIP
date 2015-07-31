@@ -109,7 +109,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		flush();
 	} else {
 		if (!isset($etape_affichee[$etape_actuelle]))
-			echo "<li> <font color='#999999'>",$etape_actuelle,'-',$nom_etape,'</font></li>';
+			echo "<li> <span style='color: #999999'>",$etape_actuelle,'-',$nom_etape,'</span></li>';
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
 		flush();
 	}

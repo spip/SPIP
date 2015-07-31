@@ -143,10 +143,10 @@ fin_cadre_couleur();
 			echo "\n<div>";
 			$nom_langue = $langues[$code_langue];
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
-			$nom_langue = "<b><font color='$couleur_foncee'>$nom_langue</font></b>";
+			$nom_langue = "<span style='color: $couleur_foncee; font-weight: bold'>$nom_langue</span>";
 			echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
 			echo "<input type='checkbox' checked='checked' disabled='disabled' />";
-			echo  "\n$nom_langue\n&nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
+			echo  "\n$nom_langue\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
 			echo "</div>";
 
 			if ($i == $cesure) echo "\n</td><td style='width: 50%' class='verdana1'>";
@@ -167,7 +167,7 @@ fin_cadre_couleur();
 			else {
 				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
 			}
-			echo  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
+			echo  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
 
 			echo "</div>";
 

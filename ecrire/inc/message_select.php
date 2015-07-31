@@ -133,7 +133,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 			http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
 			"><a href='" . generer_url_ecrire("calendrier","type=jour&jour=$jour&mois=$mois&annee=$annee") . "'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
 	} else {
-		$s = "<font color='#999999'>$s</font>";
+		$s = "<span style='color: #999999'>$s</span>";
 	}
 			
 	$vals[] = $s;

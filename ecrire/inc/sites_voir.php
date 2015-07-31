@@ -225,7 +225,7 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 		. (!$id ? '' : "&id_syndic=$id");
 
 		if ($statut == "publie"){
-		  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
+		  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><span style='color: black'>"._T('info_bloquer_lien')."</span></a>]";
 		
 		}
 		else if ($statut == "refuse"){

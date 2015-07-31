@@ -205,7 +205,7 @@ function verifier_htaccess($rep) {
 				fclose($f);
 			}
 		} else {
-			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
+			echo "<span style='color: #FF0000'>IMPORTANT : </span>";
 			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
 			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
 			par l'interm&eacute;diaire de ";

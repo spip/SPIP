@@ -52,7 +52,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	}
 
 	if ($trad_err)
-		$reponse .= "<div><font color='red' size='2' face='verdana,arial,helvetica,sans-serif'>"._T('trad_deja_traduit'). "</font></div>";
+		$reponse .= "<div><span style='color: red' size='2' face='verdana,arial,helvetica,sans-serif'>"._T('trad_deja_traduit'). "</span></div>";
 
 		// Afficher la liste des traductions
 	$table = !$id_trad ? array() : articles_traduction($id_article, $id_trad);
