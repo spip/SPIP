@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+$GLOBALS['version_archive'] = '1.3';
+
 // http://doc.spip.org/@export_nom_fichier_dump
 function export_nom_fichier_dump($dir,$gz=true){
 	$archive = _SPIP_DUMP;
@@ -29,6 +31,7 @@ function ramasse_parties($archive, $gz, $partfile){
 	// a ameliorer par un preg_file
 	// si le rammassage est interrompu par un timeout, on perd des morceaux
 	$cpt=0;
+	$files = array();
 	while(file_exists($f = $partfile.".$cpt")){
 		$contenu = "";
 		if (lire_fichier ($f, $contenu))
@@ -38,8 +41,10 @@ function ramasse_parties($archive, $gz, $partfile){
 				exit;
 			}
 		unlink($f);
+		$files[]=$f;
 		$cpt++;
 	}
+	return $files;
 }
 
 //
@@ -61,13 +66,12 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		$row = spip_fetch_array($result,SPIP_NUM);
 		$total = $row[0];
 		$debut = $pos_in_table;
-		if (!isset($etape_affichee[$etape_actuelle])){
-			echo "<li><strong>$etape_actuelle-$nom_etape</strong>";
+		if (!isset($etape_affichee[$etape_actuelle]) AND $total){
+			echo "<br /><strong>$etape_actuelle-$nom_etape</strong>";
 			echo " : $total";
 			$etape_affichee[$etape_actuelle] = 1;
-			if ($limit<$total) echo "</li>";
 		}
-		if ($pos_in_table!=0)
+		if ($pos_in_table!=0 AND $total)
 			echo "| ", $pos_in_table;
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
 		flush();
@@ -88,7 +92,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 
 		if ($pos_in_table>=$total){
 			// etape suivante : 
-			echo " ok";
+			if ($total) echo " ok";
 			$status_dump[2] = $status_dump[2]+1;
 			$status_dump[3] = 0;
 		}
@@ -101,8 +105,8 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		}
 		spip_free_result($result);
 		return array($string,$status_dump);
-	}
-	else if ($etape_actuelle < $etape_en_cours) {
+	} else {
+	if ($etape_actuelle < $etape_en_cours) {
 		if (!isset($etape_affichee[$etape_actuelle]))
 			echo "<li>", $etape_actuelle,'-',$nom_etape,"</li>";
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
@@ -112,6 +116,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 			echo "<li> <span style='color: #999999'>",$etape_actuelle,'-',$nom_etape,'</span></li>';
 		if ($GLOBALS['flag_ob_flush']) ob_flush();
 		flush();
+	}
 	}
 	return array($string,$status_dump);
 }
@@ -164,6 +169,23 @@ function build_end_tag($tag) {
 // http://doc.spip.org/@text_to_xml
 function text_to_xml($string) {
 	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
+}
+
+// production de l'entete du fichier d'archive
+
+function export_entete()
+{
+	return
+"<" . "?xml version=\"1.0\" encoding=\"".
+$GLOBALS['meta']['charset']."\"?".">\n" .
+"<SPIP 
+	version=\"" . $GLOBALS['spip_version_affichee'] . "\" 
+	version_base=\"" . $GLOBALS['spip_version'] . "\" 
+	version_archive=\"" . $GLOBALS['version_archive'] . "\"
+	adresse_site=\"" .  $GLOBALS['meta']["adresse_site"] . "\"
+	dir_img=\"" . _DIR_IMG . "\"
+	dir_logos=\"" . _DIR_LOGOS . "\"
+>\n";
 }
 
 ?>
