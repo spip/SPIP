@@ -2594,6 +2594,7 @@ function decoder_contexte_ajax($c,$form='') {
 
 	if ($cle == calculer_cle_action($form.(is_array($env)?serialize($env):$env)))
 		return $env;
+	return false;
 }
 
 // encrypter/decrypter un message
