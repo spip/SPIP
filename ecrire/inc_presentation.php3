@@ -847,7 +847,7 @@ function debut_html($titre = "") {
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
 
-	a { color:<?php echo $couleur_lien; ?> text-decoration: none; }
+	a { color:<?php echo $couleur_lien; ?>; text-decoration: none; }
 	a:hover { color:#FF9900; text-decoration: underline; }
 	a.icone { text-decoration: none; }
 	a.icone:hover { text-decoration: none; }
