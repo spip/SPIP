@@ -29,8 +29,7 @@ function acces_restreint_rubrique($id_rubrique) {
 
 
 function auth() {
-	global $_POST, $_GET, $_COOKIE;
-	global $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
+	global $_POST, $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
 	global $connect_id_auteur, $connect_nom, $connect_bio, $connect_email;
@@ -69,30 +68,11 @@ function auth() {
 	// Recuperer les donnees d'identification
 	//
 
-	// Peut-etre sommes-nous en auth http?
-	if ($PHP_AUTH_USER && $PHP_AUTH_PW && !$ignore_auth_http) {
-		if (verifier_php_auth()) {
-			$auth_login = $PHP_AUTH_USER;
-			$auth_pass_ok = true;
-			$auth_can_disconnect = true;
-		}
-
-		else // normalement on n'arrive pas la sauf changement de mot de passe dans la base...
-		if ($PHP_AUTH_USER != 'root') // ... mais quelques serveurs forcent cette valeur
-		{
-			$auth_login = '';
-			echo "<p><b>"._T('info_connexion_refusee')."</b></p>";
-			echo "[<a href='../spip_cookie.php3?essai_auth_http=oui'>"._T('lien_reessayer')."</a>]";
-			exit;
-		}
-		$PHP_AUTH_PW = '';
-		$_SERVER['PHP_AUTH_PW'] = '';
-	}
-
 	// Authentification session
-	else if ($cookie_session = $_COOKIE['spip_session']) {
+	if ($cookie_session = $_COOKIE['spip_session']) {
 		if (verifier_session($cookie_session)) {
-			if ($auteur_session['statut'] == '0minirezo' OR $auteur_session['statut'] == '1comite') {
+			if ($auteur_session['statut'] == '0minirezo'
+			OR $auteur_session['statut'] == '1comite') {
 				$auth_login = $auteur_session['login'];
 				$auth_pass_ok = true;
 				$auth_can_disconnect = true;
@@ -100,10 +80,25 @@ function auth() {
 		}
 	}
 
-	// Authentification .htaccess
-	else if ($REMOTE_USER && !is_insecure('REMOTE_USER')
+	// Peut-etre sommes-nous en auth http?
+	else if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
+	&& !$ignore_auth_http) {
+
+		// Si le login existe dans la base, se loger
+		if (verifier_php_auth()) {
+			$auth_login = $_SERVER['PHP_AUTH_USER'];
+			$auth_pass_ok = true;
+			$auth_can_disconnect = true;
+			$_SERVER['PHP_AUTH_PW'] = '';
+		}
+		// Sinon c'est un login d'intranet independant de spip, on ignore
+	}
+
+	// Authentification .htaccess old style, car .htaccess semble
+	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
+	else if ($GLOBALS['_SERVER']['REMOTE_USER']
 	&& !$ignore_remote_user) {
-		$auth_login = $REMOTE_USER;
+		$auth_login = $GLOBALS['_SERVER']['REMOTE_USER'];
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}

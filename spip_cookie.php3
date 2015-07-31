@@ -5,18 +5,24 @@ include_ecrire ("inc_session.php3");
 
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
+	global $_SERVER;
 	if ($essai_auth_http == 'oui') {
-		if (!verifier_php_auth()) {
-		  $url = quote_amp(urlencode($url));
-		  ask_php_auth(_T('login_connexion_refusee'),_T('login_login_pass_incorrect'),_T('login_retour_site'), "url=$url",_T('login_nouvelle_tentative'), (ereg(_DIR_RESTREINT_ABS, $url)));
-		  exit;
-		}
-		else
+		if (verifier_php_auth())
 			redirige_par_entete($url);
+		else {
+			$url = quote_amp(urlencode($url));
+			ask_php_auth(_T('login_connexion_refusee'),
+			_T('login_login_pass_incorrect'), _T('login_retour_site'),
+			"url=$url", _T('login_nouvelle_tentative'),
+			(ereg(_DIR_RESTREINT_ABS, $url)));
+			exit;
+		}
 	}
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
-		ask_php_auth(_T('login_deconnexion_ok'),_T('login_verifiez_navigateur'),_T('login_retour_public'),"redirect=ecrire",_T('login_test_navigateur'), true);
+		ask_php_auth(_T('login_deconnexion_ok'),
+		_T('login_verifiez_navigateur'), _T('login_retour_public'),
+		"redirect="._DIR_RESTREINT_ABS, _T('login_test_navigateur'), true);
 		exit;
 	}
 }
@@ -67,7 +73,10 @@ if ($logout) {
 			zap_sessions($auteur_session['id_auteur'], true);
 			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
-		if ($PHP_AUTH_USER AND !$ignore_auth_http) {
+		
+		if ($_SERVER['PHP_AUTH_USER']
+		AND !$ignore_auth_http
+		AND verifier_php_auth()) {
 			auth_http(($url ? $url : _DIR_RESTREINT_ABS), 'logout');
 		}
 		unset ($auteur_session);
