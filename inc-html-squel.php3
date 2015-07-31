@@ -22,7 +22,7 @@ define("_INC_HTML_SQUEL", "1");
 
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
-define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*)\)([^]\[]*)\]');
+define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 define('PARAM_DE_BOUCLE','[[:space:]]*\{[[:space:]]*([^{}]*(\{[^\}]*\}[^\}]*)*)[[:space:]]*\}');
 define('TYPE_DE_BOUCLE', "[^)]*");
 define('BALISE_DE_BOUCLE',
@@ -107,7 +107,7 @@ function phraser_polyglotte($texte,$result) {
 
 function phraser_idiomes($texte,$result) {
 	// Reperer les balises de traduction <:toto:>
-	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $texte, $match)) {
+	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)((\|[^:>]*)?:>)", $texte, $match)) {
 		$p = strpos($texte, $match[0]);
 		if ($p) $result = phraser_champs(substr($texte, 0, $p),$result);
 		$texte = substr($texte,$p+strlen($match[0]));
@@ -115,7 +115,7 @@ function phraser_idiomes($texte,$result) {
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
-		$result = phraser_filtres(substr($match[4],1), '', $result, $champ);
+		$result = phraser_filtres(substr($match[5],1), ":", '', $result, $champ);
 		$result[] = $champ;
 	}
 	if ($texte)  $result = phraser_champs($texte,$result);
@@ -162,29 +162,27 @@ function phraser_champs_etendus($texte, $result) {
 // renvoie la liste des lexemes d'origine augmentee
 // de ceux trouves dans les arguments des filtres (rare)
 
-function phraser_filtres($filtres, $sep, $result, &$pointeur_champ) {
-#	spip_log(" phraser_filtre " . $pointeur_champ->nom_champ . $filtres);
-	if ($filtres) {
-	  $filtres = explode('|', ereg_replace("^\|", "", $filtres));
-	  foreach($filtres as $f) {
-	    ereg("^([^{]*)(.*)$",$f,$match);
-	    $args = $match[2];
-	    $fonc = $match[1];
-	    if (ereg("^\{(.*)\} *$",$args,$m)) $args =$m[1];
-	    // pour les balises avec faux filtres
-	    $pointeur_champ->fonctions[] = array($fonc, $args);
-	    $res = array($fonc);
-	    while (strlen($args = trim($args))) {
+function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
+  $texte = trim($texte);
+  while ($texte && $texte[0] != $fin) {
+      ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
+      $suite = ltrim($match[2]);
+      $fonc = $match[1];
+      if ($fonc[0] == "|") $fonc = substr($fonc,1);
+      $res = array(trim($fonc));
+      $args = $suite;
+      if ($suite[0] == '{') {
+	$args = ltrim(substr($suite,1)); 
+	while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
-		  ereg ('^[[:space:]]*(")([^"]*)"[[:space:]]*,?(.*)$', $args, $regs);
+			ereg ('^(")([^"]*)(")(.*)$', $args, $regs);
 		else if ($args[0] == "'")
-			ereg ("^[[:space:]]*(')([^']*)'[[:space:]]*,?(.*)$", $args, $regs);
+			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg('^([[:space:]]*)([^,]*),?(.*)$', $args, $regs);
+			ereg("^( *)([^,{}]*(\{[^{}]*\}[^,{}]*)*[^,}])([,}].*)$", $args, $regs);
 
-		$arg = $regs[2];		// le premier argument
-		$args = $regs[3];		// ceux qui restent
-		//  difference {#ID_ARTICLE} et {'#ID_ARTICLE'}
+		$args = ltrim($regs[count($regs)-1]);
+		$arg = $regs[2];
 		if ($regs[1]) { // valeur = ", ', ou vide
 			$champ = new Texte;
 			$champ->texte = $arg;
@@ -196,11 +194,19 @@ function phraser_filtres($filtres, $sep, $result, &$pointeur_champ) {
 		  $res[] = $arg;
 		  $result = array_merge($result, $arg);
 		}
-	    }
-	    $pointeur_champ->filtres[] = $res;
-	  }
+		$args = ltrim(($args[0] == ',') ? substr($args,1) : $args);
 	}
-	return $result;
+	$args = substr($args,1);
+      }
+      $n = strlen($suite) - strlen($args);
+      $pointeur_champ->filtres[] = $res;
+      // pour les balises avec faux filtres qui boudent ce dur larbeur
+      $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
+      $texte = ltrim($args);
+  }
+  # virer la parenthese fermante ou le chevron fermant
+  $pointeur_champ->cond_apres = substr($texte,1);
+  return $result;
 }
 
 function phraser_champs_exterieurs($debut, $sep, $nested) {
@@ -208,7 +214,6 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 	while (($p=strpos($debut, "%$sep"))!==false) {
 	    if ($p) $res = phraser_inclure(substr($debut,0,$p), $res);
 	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
-#	    spip_log("nest " . $m[1] . "'$debut' '" . $nested[$m[1]] . "'"); 
 	    $res[]= $nested[$m[1]];
 	    $debut = $m[2];
 	}
@@ -218,29 +223,28 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 function phraser_champs_interieurs($texte, $sep, $result) {
   $i = 0; // en fait count($result)
 	while (true) {	  $j=$i;
-#	  spip_log("	  $j=$i");
 	  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
-
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[3];
 		$champ->nom_champ = $regs[4];
 		$champ->etoile = $regs[5];
+		// phraser_filtres indiquera ou commence cond_apres
+		$result = phraser_filtres($regs[6], ")", $sep, $result, &$champ);
 		$champ->cond_avant = phraser_champs_exterieurs($regs[1],$sep,$result);
-		$champ->cond_apres = phraser_champs_exterieurs($regs[7],$sep,$result);
-		$result = phraser_filtres($regs[6], $sep, $result, &$champ);
+		$champ->cond_apres = phraser_champs_exterieurs($champ->cond_apres,$sep,$result);
+
 
 		$p = strpos($texte, $regs[0]);
 		if ($p) {$result[$i] = substr($texte,0,$p);$i++; }
 		$result[$i] = $champ;
 		$i++;
-		$texte = $regs[8];
+		$texte = $regs[7];
 	  }
 	  if ($texte) {$result[$i] = $texte; $i++;}
 	  $x ='';
 
 	  while($j < $i) 
 	    { $z= $result[$j]; 
-#	      spip_log("res[$j] = $z");
 	      if (is_object($z)) $x .= "%$sep$j@" ; else $x.=$z ;
 	      $j++;}
 	  if (ereg(CHAMP_ETENDU, $x)) $texte = $x;
