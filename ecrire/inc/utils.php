@@ -18,9 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # fonction obsolete, assurant la compatilibite ascendante. cf include_spip
 function include_ecrire($file, $silence=false) {
-# Hack pour etre compatible avec les mes_options qui appellent cette fonction
-	if (!defined('_DIR_INCLUDE'))
-		define('_DIR_INCLUDE', _DIR_RESTREINT);
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
 	// Version new style, surchargeable
@@ -34,7 +31,7 @@ function include_ecrire($file, $silence=false) {
 		return $f;
 
 	// fichiers old-style, ecrire/inc_truc.php
-	if (is_readable($f = _DIR_INCLUDE . $r[1] . '.php'))
+	if (is_readable($f = _DIR_RESTREINT . $r[1] . '.php'))
 		return include_once($f);
 }
 
@@ -68,11 +65,8 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 		($inc ? "" : "(fichier $dossier/$nom absent)"));
 
 	include_spip('inc/minipres');
-	install_debut_html(_T('forum_titre_erreur'));
-	echo '<p>' . _T('fichier_introuvable',
-		array('fichier'=> '<b>'.htmlentities("$dossier/$nom").'</b>'));
-	install_fin_html();
-	exit;
+	minipres(_T('forum_titre_erreur'),
+		 _T('fichier_introuvable', array('fichier'=> '<b>'.htmlentities("$dossier/$nom").'</b>')));
 }
 
 //
@@ -88,11 +82,6 @@ function include_spip($f, $include = true) {
 		}
 		return $s;
 	}
-
-	// Hack pour pouvoir appeler cette fonction depuis mes_options.
-	if (!defined('_DIR_INCLUDE'))
-		define('_DIR_INCLUDE', _DIR_RESTREINT);
-
 	if (!$s = find_in_path($f . '.php')
 	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
 		return $GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = false;
@@ -116,8 +105,8 @@ function include_spip($f, $include = true) {
 // le pipeline execute les elements disponibles pour cette action,
 // les uns apres les autres, et retourne la valeur finale
 //
-// Cf. compose_filtres dans inc-compilo-index.php3, qui est le
-// pendant "compilŽ" de cette fonctionnalite
+// Cf. compose_filtres dans references.php, qui est la
+// version compilee de cette fonctionnalite
 
 // appel unitaire d'une fonction du pipeline
 // utilisee dans le script pipeline precompile
@@ -858,6 +847,7 @@ function spip_register_globals() {
 }
 
 function spip_initialisation() {
+
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
@@ -870,35 +860,8 @@ function spip_initialisation() {
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
 	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
-	
-	// Le fichier de connexion a la base de donnees
-	define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
-	define('_FILE_CONNECT',
-		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
-	:	(@is_readable($f = _FILE_CONNECT_INS . '.php3') ? $f
-	:	false)));
 
-	// les repertoires annexes
-	define('_DIR_IMG', _DIR_RACINE ."IMG/");
-	define('_DIR_DOC', _DIR_RACINE ."IMG/");
-	define('_DIR_CACHE', _DIR_RACINE ."CACHE/");
-	define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
-	define('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
-	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
-	define('_DIR_LOGOS', _DIR_RACINE ."IMG/");
-
-//	define('_DIR_POLICES', _DIR_RESTREINT ."polices/");
 	define('_DIR_POLICES', "polices/");
-
-	// les fichiers qu'on y met, entre autres
-	define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
-	define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
-	define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
-	define('_FILE_META', _DIR_SESSIONS . 'meta_cache.txt');
-
-	// sous-repertoires d'images 
-	define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
-
 	// Icones
 	# le chemin http (relatif) vers les images standard
 	define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
@@ -1017,7 +980,7 @@ function spip_initialisation() {
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
-	include_once _DIR_INCLUDE.'inc/flock.php';
+	include_once _DIR_RESTREINT . 'inc/flock.php';
 
 
 	// Lire les meta cachees
@@ -1077,10 +1040,5 @@ function verifier_visiteur() {
 		verifier_session_visiteur();
 	}
 }
-
-//
-// INITIALISER LES CONSTANTES ET LES VARIABLES SYSTEMES DE SPIP
-//
-spip_initialisation();
 
 ?>

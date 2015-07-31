@@ -431,7 +431,7 @@ function repertoire_lang($module='spip', $lang='fr') {
 		return dirname($f).'/';
 
 	# sinon, je ne sais trop pas quoi dire...
-	return _DIR_INCLUDE.'lang/';
+	return _DIR_RESTREINT . 'lang/';
 }
 
 //

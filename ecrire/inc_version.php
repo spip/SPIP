@@ -235,10 +235,41 @@ $hash_recherche = '';
 $hash_recherche_strict = '';
 $profondeur_url = 0;
 
+// Fonction definissant les repertoires et fichiers indispensables
+// et non mutualisables
+
+function spip_initialisation_parametree($dir1, $dir2) {
+
+	define('_DIR_IMG', $dir1 ."IMG/");
+	define('_DIR_DOC', $dir1 ."IMG/");
+	define('_DIR_LOGOS', $dir1 ."IMG/");
+	define('_DIR_CACHE', $dir1 ."CACHE/");
+	define('_DIR_PLUGINS', $dir1 . "plugins/");
+
+	define('_DIR_SESSIONS', $dir2 . "data/");
+	define('_DIR_TRANSFERT', $dir2 . "upload/");
+
+	// les fichiers qu'on y met, entre autres
+	define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
+	define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
+	define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
+	define('_FILE_META', _DIR_SESSIONS . 'meta_cache.txt');
+
+	// sous-repertoires d'images 
+	define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
+
+	// Le fichier de connexion a la base de donnees
+	define('_FILE_CONNECT_INS', ($dir2 . "inc_connect"));
+	define('_FILE_CONNECT',
+		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
+	:	(@is_readable($f = _FILE_CONNECT_INS . '.php3') ? $f
+	:	false)));
+}
 
 //
 // Inclure le fichier ecrire/mes_options (ou equivalent)
 //
+
 if (defined('_FILE_OPTIONS')) {
 	if (@file_exists(_FILE_OPTIONS)) {
 		include_once(_FILE_OPTIONS);
@@ -256,12 +287,23 @@ if (defined('_FILE_OPTIONS')) {
 }
 
 //
+// INITIALISER LES REPERTOIRES NON PARTAGEABLES
+//
+// 
+// mais cette fonction a peut-etre deja ete appelee par mes_options
+@spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+
+//
 // Definitions standards (charge aussi inc/flock)
 //
-# on peut mettre ces deux lignes dans mes_options si on veut beneficier
-# des definitions (notamment de $auteur_session)
-define('_DIR_INCLUDE', _DIR_RESTREINT);
-require_once(_DIR_INCLUDE . 'inc/utils.php');
+
+require_once(_DIR_RESTREINT . 'inc/utils.php');
+
+//
+// INITIALISER LES CONSTANTES ET LES VARIABLES SYSTEMES DE SPIP
+//
+
+spip_initialisation();
 
 // chargement des plugins : doit arriver en dernier
 // car dans les plugins on peut inclure inc-version

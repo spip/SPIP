@@ -59,7 +59,7 @@ if (!$auth_login && !$refus) {
     spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);
     global $fond;
     $fond = 404;
-    include _DIR_INCLUDE.'public.php';
+    include _DIR_RESTREINT . 'public.php';
   }
   else
     {
