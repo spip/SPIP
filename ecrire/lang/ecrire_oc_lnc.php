@@ -745,6 +745,7 @@ una color indica lor estat:',
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Demanda l\'ajuston @plugin@ en version @version@ al mens.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Demanda SPIP en version @version@ al mens.',
 	'plugin_source' => 'source: ', # NEW
 	'plugin_titre_automatique' => 'Installation automatique', # NEW

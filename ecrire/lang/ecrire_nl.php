@@ -745,6 +745,7 @@ een kleur geeft hun status aan :',
 	'plugin_librairies_installees' => 'Geplaatste boekhandels',
 	'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
 	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Vereist SPIP in versie minimale @version@.',
 	'plugin_source' => 'oorsprong: ',
 	'plugin_titre_automatique' => 'Automatische installatie',

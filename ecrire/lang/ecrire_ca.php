@@ -736,6 +736,7 @@ amb un color que indica el seu estat:',
 	'plugin_librairies_installees' => 'Llibreries instal·lades',
 	'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
 	'plugin_necessite_plugin' => 'Requereix el plugin @plugin@ com a mínim en la versió @version@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Requereix com a mínim la versió @version@ d\'SPIP.',
 	'plugin_source' => 'font: ',
 	'plugin_titre_automatique' => 'Instal·lació automàtica',

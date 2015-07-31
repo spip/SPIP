@@ -748,6 +748,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_librairies_installees' => 'Levraouegoù bet staliet',
 	'plugin_necessite_lib' => 'Ezhomm en deus an adveziant-mañ eus al levraoueg @lib@',
 	'plugin_necessite_plugin' => 'Ezhomm en deus eus an adveziant @plugin@ e stumm @version@ d\'an nebeutañ.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Ezhomm zo eus stumm @version@ SPIP da nebeutañ.',
 	'plugin_source' => 'orin: ',
 	'plugin_titre_automatique' => 'Staliadur emgefre',

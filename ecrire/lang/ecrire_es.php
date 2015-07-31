@@ -739,6 +739,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_librairies_installees' => 'Bibliotecas instaladas',
 	'plugin_necessite_lib' => 'Este plugin necesita la biblioteca @lib@',
 	'plugin_necessite_plugin' => 'Necesita el plugin @plugin@ con versión @version@ por lo menos.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Necesita como mínimo un SPIP de versión @version@.',
 	'plugin_source' => 'fuente: ',
 	'plugin_titre_automatique' => 'Instalación automática',

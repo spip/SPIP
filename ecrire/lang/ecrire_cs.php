@@ -762,6 +762,7 @@ ukazuje jejich stav:',
 	'plugin_librairies_installees' => 'Installed libraries', # NEW
 	'plugin_necessite_lib' => 'This plugin requires the library @lib@', # NEW
 	'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.', # NEW
 	'plugin_source' => 'source: ', # NEW
 	'plugin_titre_automatique' => 'Automatic installation', # NEW

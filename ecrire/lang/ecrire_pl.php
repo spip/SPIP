@@ -762,6 +762,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'Potrzeba co minimum wersji SPIP @version@ .',
 	'plugin_source' => 'source: ', # NEW
 	'plugin_titre_automatique' => 'Installation automatique', # NEW

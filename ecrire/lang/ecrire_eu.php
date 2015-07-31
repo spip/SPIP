@@ -740,6 +740,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 	'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
 	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.',
+	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
 	'plugin_necessite_spip' => 'SPIPen @version@ bertsio minimoa behar du.',
 	'plugin_source' => 'iturria: ',
 	'plugin_titre_automatique' => 'Instalazio automatikoa',
