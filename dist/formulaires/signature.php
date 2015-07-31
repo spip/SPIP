@@ -313,9 +313,9 @@ function signature_entrop($where)
 		}
 		sql_free($query);
 		$where .= " OR " . sql_in('id_signature', $entrop);
-	}
 	
-	sql_delete('spip_signatures', $where);
+		sql_delete('spip_signatures', $where);
+	}
 
 	return $entrop;
 }
