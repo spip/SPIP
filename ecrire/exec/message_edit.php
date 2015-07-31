@@ -63,6 +63,15 @@ function exec_message_edit_dist()
 
 
 	debut_gauche();
+	
+	if($type == 'normal' AND $dest) {
+		$nom = spip_fetch_array(spip_query("SELECT nom, email FROM spip_auteurs WHERE id_auteur=$dest"));
+		if (strlen($nom['email']) > 3) {
+			echo "<div align='center'>";
+			icone(_T('info_envoyer_message_prive'), "mailto:".$nom['email'], "envoi-message-24.gif");
+			echo "</div>";
+		}
+	}
 
 	debut_droite();
 
