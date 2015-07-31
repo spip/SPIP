@@ -414,7 +414,7 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		"</p><p>" .
 		_T('upload_fichier_zip_texte2') .
 		 "</p>" .
-		generer_form_public('joindre', $texte);
+		generer_form_public('joindre', $texte,' method="post"');
 
 	if(_request("iframe")=="iframe") {
 		return "<p>build form $iframe_redirect</p>" .
