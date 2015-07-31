@@ -343,6 +343,13 @@ function affdate_base($numdate, $vue) {
 		if ($annee != $a) return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee)));
 		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
 
+	case 'jourcourt':
+		if ($avjc) return $annee;
+		$a = date('Y');
+		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
+		if ($annee != $a) return d_apostrophe(_T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
+
 	case 'entier':
 		if ($avjc) return $annee;
 		if ($jour)
@@ -413,6 +420,10 @@ function affdate($numdate) {
 
 function affdate_court($numdate) {
 	return affdate_base($numdate, 'court');
+}
+
+function affdate_jourcourt($numdate) {
+	return affdate_base($numdate, 'jourcourt');
 }
 
 function affdate_mois_annee($numdate) {

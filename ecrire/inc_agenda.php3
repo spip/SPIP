@@ -150,7 +150,7 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	$jour_semaine = date("w",$nom);
 	if ($jour_semaine == 0) $bgcolor = $couleur_claire;
 
-	if ($large == "col" ) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate("$annee-$mois-$jour")."</a></b></div>";
+	if ($large == "col" ) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate_jourcourt("$annee-$mois-$jour")."</a></b></div>";
 	else if ($large == "large") echo "<div align='center' style='padding: 5px;'><b class='verdana1'>&nbsp;</b></div>";
 	
 	if ($large != "etroit") echo "<div style='background-color: $bgcolor; border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
@@ -337,7 +337,7 @@ function liste_rv($query, $type) {
 
 			echo "<div style='margin: 5px; padding-$spip_lang_left: 20px; background: url(img_pack/$bouton$spip_lang_rtl.gif) $spip_lang_left center no-repeat;'>";
 			if ($rv == "oui") {
-				echo "<b class='arial0'>".affdate_court($date)."</b><br />";
+				echo "<b class='arial0'>".affdate_jourcourt($date)."</b><br />";
 			}
 			echo "<b><a href='$url' class='arial1'>$titre</a></b>";
 			echo "</div>\n";
