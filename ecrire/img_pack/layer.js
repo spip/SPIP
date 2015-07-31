@@ -219,7 +219,7 @@ function AjaxSqueeze(trig, id, f)
 		}
 	}
 
-	s = trig.getAttribute('action');
+	s = trig.attributes.action.value;
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
