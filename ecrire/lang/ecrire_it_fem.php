@@ -119,6 +119,7 @@ cancellarli successivamente).',
 'cache_modifiable_webmestre' => 'Questo parametro pu&ograve; essere modificato dalla webmistress del sito.',
 'calendrier_synchro' => 'Se si utilizza un programma di agenda compatibile con <b>iCal</b>, &egrave; possibile sincronizzare i dati con le informazioni di questo sito',
 'connexion_ldap' => 'Connessione:',
+'copier_en_local' => 'Copia in locale',
 
 
 // D

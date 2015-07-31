@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => 'show tranlsations',
 'alerte_maj_impossible' => '<b>Warning!</b> Failed to update the MySQL database to version @version@, maybe due to a permissions problem on the database. Please contact your ISP.',
 'analyse_xml' => 'XML parsing',
+'annuler' => 'Cancel',
 'antispam_champ_vide' => 'Please leave this field empty:',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',
@@ -663,6 +664,10 @@ and connect again to the site.
 'precedent' => 'previous',
 'previsualisation' => 'Preview',
 'previsualiser' => 'Show preview',
+
+
+// R
+'retour' => 'Return',
 
 
 // S
