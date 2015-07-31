@@ -59,6 +59,7 @@ function enfant($leparent){
 			else {
 			}
 
+			$titre = couper(supprimer_tags(typo(extraire_multi($titre)))." ", 50);
 			if ($statut_rubrique!='publie') $titre = "($titre)";
 			if (lire_meta('multi_rubriques') == 'oui' AND $langue_choisie_rub == "oui") $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 
