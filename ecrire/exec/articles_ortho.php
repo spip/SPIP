@@ -196,7 +196,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", $t, "</font>";
+	echo "<span style='font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", $t, "</span>";
 	echo "</div>";
 }
 
@@ -221,7 +221,7 @@ else {
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>", "<b>"._T('info_ps')."</b>", $ps, "</font></div>";
+		echo "<div $dir_lang style='font-size 14px; font-family: Verdana,Arial,Sans,sans-serif'>", "<b>"._T('info_ps')."</b>", $ps, "</div>";
 		echo fin_cadre_enfonce();
 	}
 

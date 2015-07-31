@@ -101,7 +101,7 @@ function spip_mysql_timing($m1, $m2, $query, $result)
 	list($usec2, $sec2) = explode(" ", $m2);
  	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
-	echo "<small>", htmlentities($query), " -> <font color='blue'>", sprintf("%3f", $dt),"</font> (", $tt, ")</small> $result<p>\n";
+	echo "<small>", htmlentities($query), " -> <span style='color: blue'>", sprintf("%3f", $dt),"</span> (", $tt, ")</small> $result<p>\n";
 }
 
 // fonction appelant la precedente  specifiquement pour l'espace public

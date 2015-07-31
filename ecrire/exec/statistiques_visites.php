@@ -617,14 +617,14 @@ if ($GLOBALS['accepte_svg']) {
 
 		echo "<span style='font-family: arial,helvetica,sans-serif; font-size: 12px;'>"._T('texte_statistiques_visites')."</span>";
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</font></td>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>", _T('info_maximum')." ".$max, "<br />"._T('info_moyenne')." ".round($moyenne), "</td>";
+		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>";
 		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
 		if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
 		if ($id_article) echo "<br />"._T('info_popularite_5').' '.$val_popularite;
 
-		echo "</font></td>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
+		echo "</td>";
+		echo "<td valign='top' style='width: 33%; font-family: Verdana,Arial,Sans,sans-serif'>";
 		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
 		if ($id_article) {
@@ -636,9 +636,9 @@ if ($GLOBALS['accepte_svg']) {
 				echo "<br />".$classement[$id_article].$ch;
 			}
 		} else {
-		  echo "<span style='font-size: 12px;'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
+		  echo "<span style='font-size: 12px'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
 		}
-		echo "</font></td></tr></table>";	
+		echo "</td></tr></table>";	
 	}		
 	
 	if (count($log) > 60) {

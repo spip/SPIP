@@ -429,10 +429,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
   echo "</tr>\n";
 
   if (strlen($descriptif) > 1) {
-	echo "<tr><td>\n";
-	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
-	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", propre($descriptif."~"), "</font>";
-	echo "</div></td></tr>\n";
+	echo "<tr><td><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", propre($descriptif."~"), "</div></td></tr>\n";
   }
   echo "</table>\n";
 }

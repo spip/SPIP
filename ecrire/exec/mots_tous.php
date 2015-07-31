@@ -88,13 +88,11 @@ function exec_mots_tous_dist()
 
  		echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'>", $res, "</span>";
 		if ($descriptif) {
-			echo "<div style='border: 1px dashed #aaaaaa;'>";
-			echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; ", "</font>";
-			echo "</div>";
+			echo "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; </div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<font face='Verdana,Arial,Sans,sans-serif'>", propre($texte), "</font>";
+			echo "<span style='font-family: Verdana,Arial,Sans,sans-serif'>", propre($texte), "</span>";
 		}
 
 		//

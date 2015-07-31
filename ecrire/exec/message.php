@@ -294,7 +294,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				  generer_url_ecrire('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
 
 				$aut =  (($id_auteur != $expediteur) ? '' :
-					 ("<font class='arial0'>".  _T('info_auteur_message') ."</font> "));
+					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
 
 				$res .= "<tr><td bgcolor='$couleur'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
 				  "<td bgcolor='$couleur' align='right'><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
