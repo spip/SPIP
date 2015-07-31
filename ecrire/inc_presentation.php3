@@ -28,13 +28,16 @@ function aide($aide='') {
 
 	if (!$aide OR $spip_display == 4) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"". _DIR_RESTREINT .
-	  "aide_index.php3?aide=$aide&amp;var_lang=$spip_lang\" target=\"spip_aide\" ".
-		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
-		"resizable=yes, width=740, height=580'); return false;\">" .
-	  http_img_pack("aide.gif" ,_T('info_image_aide'),
-			"title=\""._T('titre_image_aide')."\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"") .
-	  "</a>";
+	return "&nbsp;&nbsp;<a class='aide' href=\"". _DIR_RESTREINT
+		. "aide_index.php3?aide=$aide&amp;"
+		. "var_lang=$spip_lang\" target=\"spip_aide\" "
+		. "onclick=\"javascript:window.open(this.href,"
+		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
+		. "height=580'); return false;\">"
+		. http_img_pack("aide".$spip_lang_rtl.".gif",
+			_T('info_image_aide'), "title=\""._T('titre_image_aide')
+			. "\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"")
+		. "</a>";
 }
 
 

@@ -749,7 +749,7 @@ if ($soustitre) {
 
 
 if ($descriptif OR $url_site OR $nom_site) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
+	echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
@@ -809,7 +809,7 @@ echo "</tr></table>\n";
 
 
 echo "<div>&nbsp;</div>";
-echo "<div class='serif' align='left'>";
+echo "<div class='serif' align='$spip_lang_left'>";
 
 //
 // Affichage date redac et date publi
@@ -862,7 +862,7 @@ if ($flag_editable AND $options == 'avancees') {
 		echo debut_block_invisible('dateredac');
 		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
 		echo '<table cellpadding="0" cellspacing="0" border="0" width="100%">';
-		echo '<tr><td align="left">';
+		echo '<tr><td align="$spip_lang_left">';
 		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
 		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
@@ -948,7 +948,7 @@ if ($creer_auteur AND $connect_statut=='0minirezo'){
 //
 
 if ($cherche_auteur) {
-	echo "<P ALIGN='left'>";
+	echo "<P ALIGN='$spip_lang_left'>";
 	$query = "SELECT id_auteur, nom FROM spip_auteurs";
 	$result = spip_query($query);
 	unset($table_auteurs);
@@ -1621,7 +1621,7 @@ echo "\n<div align='center'>";
 	icone(_T('icone_poster_message'), "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
-echo "<P align='left'>";
+echo "<P align='$spip_lang_left'>";
 
 
 $query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";

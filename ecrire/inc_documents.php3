@@ -876,7 +876,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<p>&nbsp;</p>";
 
 		echo "<div align='right'>";
-		echo "<table width='50%' cellpadding=0 cellspacing=0 border=0><tr><td style='text-align:left;'>";
+		echo "<table width='50%' cellpadding=0 cellspacing=0 border=0><tr><td style='text-align: $spip_lang_left;'>";
 		
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		
