@@ -492,7 +492,7 @@ function proteger_amp($texte){
  * @uses echappe_html()
  * @uses echappe_retour()
  * @uses proteger_amp()
- * @uses corriger_toutes_html()
+ * @uses corriger_entites_html()
  * @uses corriger_toutes_entites_html()
  * 
  * @param string $texte
