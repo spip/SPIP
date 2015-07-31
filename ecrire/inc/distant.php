@@ -61,17 +61,16 @@ function copie_locale($source, $mode='auto', $local = null) {
 		}
 	}
 
+	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
+	// par exemple un fichier qui ne figure pas dans nos documents ;
+	// dans ce cas on n'essaie pas de le telecharger pour ensuite echouer
+	if (!$local) return false;
 
 	$localrac = _DIR_RACINE.$local;
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
 	if ($mode=='test') return $t ? $local : '';
-
-	// si $local = '' c'est un fichier refuse par fichier_copie_locale(),
-	// par exemple un fichier qui ne figure pas dans nos documents ;
-	// dans ce cas on n'essaie pas de le telecharger pour ensuite echouer
-	if (!$local) return false;
 
 	// sinon voir si on doit/peut le telecharger
 	if ($local==$source OR !preg_match(',^\w+://,', $source))
@@ -83,8 +82,9 @@ function copie_locale($source, $mode='auto', $local = null) {
 		include_spip("inc/acces");
 		$res = recuperer_page($source, $localrac, false, _COPIE_LOCALE_MAX_SIZE, '', '', false, $t ? filemtime($localrac) : '');
 		if (!$res) {
-			spip_log("copie_locale : Echec recuperation $source sur $localrac",_LOG_INFO_IMPORTANTE);
-			return false;
+			if (!$t) // si $t c'est sans doute juste un not-modified-since qui fait renvoyer false
+				spip_log("copie_locale : Echec recuperation $source sur $localrac",_LOG_INFO_IMPORTANTE);
+			return $t ? $local : false;
 		}
 		spip_log("copie_locale : recuperation $source sur $localrac taille $res OK");
 
@@ -390,10 +390,8 @@ function recuperer_entetes($f, $date_verif = ''){
 // des filesystems
 // http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension){
-	if (version_compare($spip_version_branche,"3.0.0") < 0)
-		include_spip('inc/getdocument');
-	else
-		include_spip('inc/documents');
+	include_spip('inc/documents');
+
 	$d = creer_repertoire_documents('distant'); # IMG/distant/
 	$d = sous_repertoire($d, $extension); # IMG/distant/pdf/
 
