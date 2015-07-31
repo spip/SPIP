@@ -74,7 +74,7 @@ if ($id_auteur) {
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	$new = false;	// eviter hack
 } else {
-	$auteur['nom'] = _T('item_nouvel_auteur');
+	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
 	$auteur['statut'] = '1comite';
 	$auteur['source'] = 'spip';
 }
