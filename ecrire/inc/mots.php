@@ -106,7 +106,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	global $spip_lang_rtl, $spip_lang_right;
 
 	$retour = rawurlencode($retour);
-	$select_groupe = $GLOBALS['select_groupe'];
+	$select_groupe = intval($GLOBALS['select_groupe']);
 
 	if ($table == 'articles') {
 		$table_id = 'id_article';
@@ -572,7 +572,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	$jjscript = array("fonction" => "afficher_groupe_mots",
 			  "id_groupe" => $id_groupe);
-	$jjscript = addslashes(serialize($jjscript));
+	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);
 			
@@ -601,7 +601,7 @@ function afficher_groupe_mots($id_groupe) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
 	}
 
 	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
