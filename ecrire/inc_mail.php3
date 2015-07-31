@@ -118,8 +118,8 @@ function envoyer_mail_publication($id_article) {
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = "[$nom_site_spip] PUBLIE : $titre";
-			$courr = "Article publi".chr(233)."\n--------------\n\n";
-			$courr .= "L'article \"$titre\" a ".chr(233)."t".chr(233)." valid".chr(233)." par $connect_nom.\n\n\n";
+			$courr = "Article publi\xe9\n--------------\n\n";
+			$courr .= "L'article \"$titre\" a \xe9t\xe9 valid\xe9 par $connect_nom.\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 		}
@@ -140,10 +140,10 @@ function envoyer_mail_proposition($id_article) {
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = "[$nom_site_spip] Propose : $titre";
-			$courr = "Article propos".chr(233)."\n---------------\n\n";
-			$courr .= "L'article \"$titre\" est propos".chr(233)." ".chr(224)." la publication.\n";
-			$courr .= "Vous ".chr(234)."tes invit".chr(233)." ".chr(224)." venir le consulter et ".chr(224)." donner votre opinion\n";
-			$courr .= "dans le forum qui lui est attach".chr(233).". Il est disponible ".chr(224)." l'adresse :\n";
+			$courr = "Article propos\xe9\n---------------\n\n";
+			$courr .= "L'article \"$titre\" est propos\xe9 \xe0 la publication.\n";
+			$courr .= "Vous \xeates invit\xe9 \xe0 venir le consulter et \xe0 donner votre opinion\n";
+			$courr .= "dans le forum qui lui est attach\xe9. Il est disponible \xe0 l'adresse :\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
@@ -160,7 +160,7 @@ function envoyer_mail_nouveautes() {
 
 	$courr .= "Bonjour,\n\n";
 	$courr .= "Voici la lettre d'information du site \"$nom_site_spip\" ($adresse_site),\n";
-	$courr .= "qui recense les articles et les breves publi".chr(233)."s depuis $jours_neuf jours.\n\n";
+	$courr .= "qui recense les articles et les breves publi\xe9s depuis $jours_neuf jours.\n\n";
 
 	if ($post_dates == 'non')
 		$query_post_dates = 'AND date < NOW()';

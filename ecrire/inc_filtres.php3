@@ -210,7 +210,7 @@ function affdate_base($numdate, $vue) {
 	if ($mois > 0){
 		$saison = "hiver";
 		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = "printemps";
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = chr(233)."t".chr(233);
+		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = "\xe9t\xe9";
 		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = "automne";
 		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = "hiver";
 	}
@@ -218,8 +218,8 @@ function affdate_base($numdate, $vue) {
 	if ($lang == "fr") {
 		if ($jour == '1') $jour = '1er';
 		$tab_mois = array('',
-			'janvier', 'f'.chr(233).'vrier', 'mars', 'avril', 'mai', 'juin',
-			'juillet', 'ao'.chr(251).'t', 'septembre', 'octobre', 'novembre', 'd'.chr(233).'cembre');
+			'janvier', "f\xe9vrier", 'mars', 'avril', 'mai', 'juin',
+			'juillet', "ao\xfbt", 'septembre', 'octobre', 'novembre', "d\xe9cembre");
 		$avjc = ' av. J.C.';
 	}
 	elseif ($lang == "en"){

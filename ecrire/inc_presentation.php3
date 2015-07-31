@@ -1750,12 +1750,15 @@ if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statist
 ?>
 </div></blockquote>
 <?php 
-if ($GLOBALS['spip_session']) {
+/* // rejouer le cookie de session
+if ($session = $GLOBALS['spip_session']) {
 	echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
 	echo "<script type='text/javascript'><!-- \n";
-	echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
+	echo "document.img_session.src='../spip_cookie.php3?change_session=$session';\n";
 	echo "// --></script>\n";
-} ?>
+}
+*/
+?>
 </body></html>
 <?php
 	flush();
@@ -1763,11 +1766,7 @@ if ($GLOBALS['spip_session']) {
 
 
 function fin_page() {
-
-?>
-</td></tr>
-</table></center>
-<?php
+	echo "</td></tr></table></center>\n";
 	fin_html();
 }
 
