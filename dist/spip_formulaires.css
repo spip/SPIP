@@ -6,13 +6,13 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #330; }
+.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; border: 0; text-align: left; font-size: 1em; }
 .formulaire_spip form { margin: 0; padding: 0; } /* Bug IE/Win */
 
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
-.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.10em; font-weight: bold; }
-* html .formulaire_spip fieldset legend { background-color: #EEC; color: #330; } /* Preciser la couleur des legend et du fond pour IE6/Win */
+.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.05em; font-weight: bold; }
+* html .formulaire_spip fieldset legend { background-color: #fff; color: #333; } /* Preciser la couleur des legend et du fond pour IE6/Win */
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
@@ -46,14 +46,14 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 .formulaire_spip li.obligatoire label {}
 
 /* Previsualisation du message */
-fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
-fieldset.previsu legend { padding: 0 0.50em; color: #F57900; font-weight: bold; }
-fieldset.previsu li { padding: 3px; border: none; }
+.formulaire_spip fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
+.formulaire_spip fieldset.previsu legend { padding: 0 0.50em; font-weight: bold; color: #F57900; }
+.formulaire_spip fieldset.previsu li { padding: 3px; border: none; }
 
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.20em; }
 fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
-fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* Preciser la couleur des legend pour IE/Win */
+fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* Preciser la couleur des legend et du fond pour IE/Win */
 
 /* * Erreurs */
 .formulaire_spip li.erreur .erreur_message { display: block; color: #C30; font-weight: bold; }
@@ -71,10 +71,10 @@ fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* Pre
 table.spip_barre { width: 100%; }
 table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; }
 
 /* Formulaire de forum */
-.formulaire_forum .saisie_titre input.text { width: 99%; }
+.formulaire_forum .saisie_titre input.text, .formulaire_forum .saisie_titre textarea { width: 98%; }
 
 /* Selection des langues */
 .formulaire_menu_lang { margin: 0; padding: 0; background: none; }
