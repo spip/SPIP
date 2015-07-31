@@ -245,7 +245,7 @@ function optimiser_referers(){
 		$popularite[$id_article] = $visites * $referers;
 	}
 	if (count($popularite)>0){
-		$facteur_pop = 1000000/(max($popularite) + 1);
+		$facteur_pop = 1000000 / max(max($popularite),1);
 		while (list($id_article, $pop) = each($popularite)) {
 			$relatif = round($pop * $facteur_pop);
 			$query = "UPDATE spip_articles SET popularite = '$relatif' WHERE id_article = '$id_article'";
