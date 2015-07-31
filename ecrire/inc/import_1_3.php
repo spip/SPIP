@@ -127,21 +127,20 @@ function import_lire_champs($f, $fields, $gz, $phpmyadmin, $table)
 	$char = $GLOBALS['meta']['charset_insertion'];
 	if ($char == $GLOBALS['meta']['charset_restauration']) $char = '';
 
-	$b = false;
 	for (;;) {
+		$b = false;
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col[0] == '/') { 
 			if ($col != $table) {
-		    // autre tag fermant ici est une erreur de format
-			  spip_log("restauration de la table $table, tag fermant inattendu:");
-			  spip_log($col);
+				spip_log("restauration de la table $table, tag fermant inattendu:");
+				spip_log($col);
 		  }
 			break;
 		}
-		$value = true;
+		$value = $b = (($col != 'maj') AND (isset($fields[$col])));
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 
-		if ( ($col != 'maj') AND (isset($fields[$col])) ) {
+		if ($b) {
 			if ($phpmyadmin)
 				$value = str_replace($phpmyadmin[0],$phpmyadmin[1],$value);
 			if ($char) 
