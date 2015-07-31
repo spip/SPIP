@@ -1,3 +1,12 @@
+Core 2.1.8->2.1.9 (06/04/2011) 
+
+r17654 | b_b        | 2011-04-06 20:24:17 +0200 (mer, 06 avr 2011) | report de r17653 : un auteur ne doit pas pouvoir lancer la procédure de reinstall sans accès ftp (merci arnault)
+
+Extensions 2.1.9->2.1.10  (06/04/2011)
+
+r46236 | real3t     | 2011-04-01 11:57:08 +0200 (ven, 01 avr 2011) | 1sSuite à remarques sur l'accessibilité du PortePlume qui bloque la navigation au clavier en changeant le comportement par défaut de la touche Tab, empêchant de ressortir du champ.À noter :* Tab : champ ou lien suivant* Maj-Tab : précédent* ctrl-tab et crtl-maj-tab : onglet suivant ou précédent- Alt-tab et alt-maj-tab : passer d'une application ouverte à une autreDonc, pour mettre la possibilité de saisir une tab dans le greffon de PP "Code", c'est assez mal parti.Remarque : que fait un fork de PP dans _galaxie_/forum.spip.org/forum.spip.org_2009/barre_outils/edition.php ?
+r46374 | jluc       | 2011-04-05 17:23:24 +0200 (mar, 05 avr 2011) | Pas de backquotes autour des noms de tables avec l'API sql (sql_alter ici), sinon les préfixes de base ne sont pas mis à contribution et ya pas d'upgrade.Rq : ce plugin migre et utilise les forums breves articles etc en un unique formalisme objet / id_objet utilisable pour d'autres objets non spip aussi, et préfigure la future gestion des forums dans spip 2.3
+
 Core 2.1.8->2.1.9 (25/03/2011) 
 
 r16966 | ben      | 2011-01-14 14:40:30 +0100 (ven, 14 jan 2011) | SPIP 2.1.8
