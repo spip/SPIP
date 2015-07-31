@@ -25,9 +25,9 @@ function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
 	if ($annee == "0000") $mois = 0;
 	if ($mois == "00") $jour = 0;
 
-	return sprintf("%04s",$annee) . '-' . sprintf("%02s",$mois) . '-'
-		. sprintf("%02s",$jour) . ' ' . sprintf("%02s",$h) . ':'
-		. sprintf("%02s",$m) . ':' . sprintf("%02s",$s);
+	return sprintf("%04u",$annee) . '-' . sprintf("%02u",$mois) . '-'
+		. sprintf("%02u",$jour) . ' ' . sprintf("%02u",$h) . ':'
+		. sprintf("%02u",$m) . ':' . sprintf("%02u",$s);
 }
 
 

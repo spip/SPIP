@@ -598,29 +598,34 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo generer_url_post_ecrire("articles", "id_article=$id_article");
-
 	if ($statut_article == 'publie') {
 
-		echo "<div><b>";
-		echo bouton_block_invisible("datepub");
-		echo "<span class='verdana1'>"._T('texte_date_publication_article').'</span> ';
-		echo majuscules(affdate($date)),
-			"</b>".aide('artdate')."</div>";
-
-		echo debut_block_invisible("datepub"),
-		  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>",
-		  afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
-		  afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
-		  afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
-		  ' - ',
-		  afficher_heure($heure, "name='heure' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
-		  afficher_minute($minute, "name='minute' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
-		  "<span class='visible_au_chargement' id='valider_date'>",
-		  " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>",
-		  "</span>",
-		  "</div>",
-		  fin_block();
+		echo redirige_action_auteur("dater", 
+			"$id_article",
+			'articles',
+			"id_article=$id_article",
+			(bouton_block_invisible("datepub") .
+ "<b><span class='verdana1'>".
+ _T('texte_date_publication_article').
+ '</span> ' . 
+ majuscules(affdate($date)) .
+ "</b>".
+ aide('artdate') . 
+ debut_block_invisible("datepub") .
+ "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
+ afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true) .
+ afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true) .
+ afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
+ ' - ' .
+ afficher_heure($heure, "name='heure' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
+ afficher_minute($minute, "name='minute' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
+ "<span class='visible_au_chargement' id='valider_date'>" .
+ " &nbsp; <input type='submit' class='fondo' value='".
+ _T('bouton_changer')."' />" .
+ "</span>" .
+ "</div>" .
+ fin_block()) ,
+			"method='post'"); 
 	}
 	else {
 		echo "<div><b> <span class='verdana1'>"._T('texte_date_creation_article').'</span> ';
@@ -637,46 +642,59 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 		else
 			$date_affichee = majuscules(_T('jour_non_connu_nc'));
 
-		echo "<div><b>";
-		echo bouton_block_invisible('dateredac');
-		echo "<span class='verdana1'>"
-			. majuscules(_T('texte_date_publication_anterieure'))
-			.'</span> '. $date_affichee ." ".aide('artdate_redac')."</b></div>";
+		echo redirige_action_auteur("dater", 
+			"$id_article",
+			'articles',
+			"id_article=$id_article",
+			(bouton_block_invisible('dateredac') .
+ "<b>" .
+ "<span class='verdana1'>" .
+ majuscules(_T('texte_date_publication_anterieure')) .
+'</span> '.
+ $date_affichee .
+ " " .
+ aide('artdate_redac') .
+ "</b>" .
+ debut_block_invisible('dateredac') .
+ "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
+ '<table cellpadding="0" cellspacing="0" border="0" width="100%">' .
+ '<tr><td align="$spip_lang_left">' .
+ '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
+ ($possedeDateRedac ? '' : ' checked="checked"') .
+ " onClick=\"setvisibility('valider_date_prec', 'visible')\"" .
+ ' /> <label for="avec_redac_on">'.
+ _T('texte_date_publication_anterieure_nonaffichee').
+ '</label>' .
+ '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"' .
+ (!$possedeDateRedac ? '' : ' checked="checked"') .
+ " onClick=\"setvisibility('valider_date_prec', 'visible')\"" .
+ ' /> <label for="avec_redac_off">'.
+ _T('bouton_radio_afficher').
+ ' :</label> ' .
+ afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
+ afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
+ "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>" .
 
-		echo debut_block_invisible('dateredac');
-		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
-		echo '<table cellpadding="0" cellspacing="0" border="0" width="100%">';
-		echo '<tr><td align="$spip_lang_left">';
-		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
-		if (!$possedeDateRedac) echo ' checked="checked"';
-		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
-		echo ' /> <label for="avec_redac_on">'._T('texte_date_publication_anterieure_nonaffichee').'</label>';
-		echo '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"';
-		if ($possedeDateRedac) echo ' checked="checked"';
-		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
-		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ',
-		afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
-		afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true);
-		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
+ '<div align="center">' .
+ afficher_heure($heure_redac, "name='heure_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
+ afficher_minute($minute_redac, "name='minute_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
+ "</div>\n" .
 
-		echo '<div align="center">',
-		afficher_heure($heure_redac, "name='heure_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
-		afficher_minute($minute_redac, "name='minute_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
-		"</div>\n";
-
-		echo '</td><td align="$spip_lang_right">';
-		echo "<span class='visible_au_chargement' id='valider_date_prec'>";
-		echo '<input type="submit" name="Changer" class="fondo" value="'._T('bouton_changer').'" />';
-		echo "</span>";
-		echo '</td></tr>';
-		echo '</table>';
-		echo "</div>";
-		echo fin_block();
+ '</td><td align="$spip_lang_right">' .
+ "<span class='visible_au_chargement' id='valider_date_prec'>" .
+ '<input type="submit" name="Changer" class="fondo" value="'.
+ _T('bouton_changer').'" />' .
+ "</span>" .
+ '</td></tr>' .
+ '</table>' .
+ '</div>' .
+ fin_block()),
+					    " method='post'");
 	}
 
-	echo "</FORM>";
+
 	fin_cadre_couleur();
- }
+  }
 else {
 	if ($statut_article == 'publie') $texte_date = _T('texte_date_publication_article');
 	else $texte_date = _T('texte_date_creation_article');
@@ -1335,11 +1353,11 @@ function insert_article($id_parent)
 				. "', 'non')");
 	return $id_article;
 }
-// Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
+// Y a-t-il vraiment 24 variables determinant l'edition d'un article ?
 
 function exec_articles_dist()
 {
-  global $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_virtuel, $chapo, $cherche_auteur, $ids, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_mot, $supp_mot, $titre, $titre_article, $virtuel; 
+  global $change_accepter_forum, $change_petition, $changer_virtuel, $chapo, $cherche_auteur, $ids, $cherche_mot, $connect_id_auteur, $debut, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new,  $langue_article, $lier_trad, $new, $nom_select, $nouv_mot, $supp_mot, $titre, $titre_article, $virtuel; 
 
  $id_parent = intval($id_parent);
  $lier_trad = intval($lier_trad);
@@ -1375,25 +1393,10 @@ $flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_arti
 
  $flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
-if ($flag_editable) {
+ if ($flag_editable) {
+   maj_documents($id_article, 'article');
 
-if ($jour) {
-	spip_query("UPDATE spip_articles SET date='" . format_mysql_date($annee, $mois, $jour, $heure, $minute) ."'	WHERE id_article=$id_article");
-	calculer_rubriques();
-}
-
-if ($jour_redac) {
-	if ($annee_redac<>'' AND $annee_redac < 1001) $annee_redac += 9000;
-
-	if ($avec_redac == 'non')
-		$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
-
-	spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$id_article");
-}
-
-maj_documents($id_article, 'article');
-
-if ($changer_virtuel) {
+   if ($changer_virtuel) {
 	if ($virtuel = eregi_replace("^http://$", "", trim($virtuel)))
 		$chapo = corriger_caracteres("=$virtuel");
 	spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($chapo) . ", date_modif=NOW() WHERE id_article=$id_article");
@@ -1417,7 +1420,7 @@ if (isset($_POST['titre'])) {
 	$id_article_bloque = $id_article;   // message pour inc/presentation
  }
 
- }
+}
 
 
 	// renvoyer vers la page de l'article
