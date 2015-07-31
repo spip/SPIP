@@ -90,7 +90,7 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 		$nfields = mysql_num_fields($result);
 		// Recuperer les noms des champs
 		for ($i = 0; $i < $nfields; ++$i) $fields[$i] = mysql_field_name($result, $i);
-		while ($row = spip_fetch_row($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$string .= build_begin_tag($type) . "\n";
 			// Exporter les champs de la table
 			for ($i = 0; $i < $nfields; ++$i) {

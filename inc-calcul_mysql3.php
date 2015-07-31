@@ -57,12 +57,12 @@ function boutons_de_forum_table($idr, $idf, $ida, $idb, $ids, $titre, $table, $f
 {
   if (($table == 'forums') || !$table)
     {
-      $forum = spip_fetch_object(spip_query("
+      $forum = spip_fetch_array(spip_query("
 SELECT	accepter_forum
 FROM	spip_articles
 WHERE	id_article='" . ($ida ? $ida : substr(lire_meta("forums_publics"),0,3)) . "'
 ")); 
-      $forum = ($forum ? $forum->accepter_forum : substr(lire_meta("forums_publics"),0,3));
+      $forum = ($forum ? $forum['accepter_forum'] : substr(lire_meta("forums_publics"),0,3));
     }
   if ($forum=="non") return '';
   // si FORMULAIRE_FORUM a e'te' employe' hors d'une boucle,
@@ -98,8 +98,8 @@ WHERE	id_article='" . ($ida ? $ida : substr(lire_meta("forums_publics"),0,3)) . 
 	{
 	  $r = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
 	}
-      $r = spip_fetch_object(spip_query($r));
-      $titre = $r->titre;
+      $r = spip_fetch_array(spip_query($r));
+      $titre = $r['titre'];
     }
   return array($titre, $table, $forum);
 }

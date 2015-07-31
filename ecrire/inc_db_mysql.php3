@@ -100,6 +100,7 @@ function spip_fetch_array($r) {
 		return mysql_fetch_array($r);
 }
 
+/* Appels obsoletes
 function spip_fetch_object($r) {
 	if ($r)
 		return mysql_fetch_object($r);
@@ -109,6 +110,7 @@ function spip_fetch_row($r) {
 	if ($r)
 		return mysql_fetch_row($r);
 }
+*/
 
 function spip_sql_error() {
 	return mysql_error();

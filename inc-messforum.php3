@@ -31,8 +31,8 @@ if (!$id_auteur)
 if ($forum_id_article) {
 	if ($s = spip_query("SELECT accepter_forum FROM spip_articles
 	WHERE id_article=$forum_id_article") AND
-	$obj = spip_fetch_object($s))
-		$forums_publics = $obj->accepter_forum;
+	$obj = spip_fetch_array($s))
+		$forums_publics = $obj['accepter_forum'];
 	else
 		$forums_publics = lire_meta("forums_publics");
 } else {

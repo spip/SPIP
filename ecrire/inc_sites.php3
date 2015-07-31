@@ -374,7 +374,7 @@ function afficher_sites($titre_table, $requete) {
 			$s = "";
 			if ($syndication == "oui" OR $syndication == "off") {
 				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
-				list($total_art) = spip_fetch_row($result_art);
+				list($total_art) = spip_fetch_array($result_art);
 				$s .= " $total_art "._T('info_syndication_articles');
 			} else {
 				$s .= "&nbsp;";

@@ -345,7 +345,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 	$query = trim($query);
 	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
 
-	list($num_rows) = spip_fetch_row(spip_query($query_count));
+	list($num_rows) = spip_fetch_array(spip_query($query_count));
 	if (!$num_rows) return;
 
 	$nb_aff = 10;

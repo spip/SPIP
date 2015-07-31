@@ -1222,49 +1222,50 @@ function http_calendrier_ical($id) {
 }
 
 function http_calendrier_rv($messages, $type) {
-  global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-	
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+
 	$total = '';
 	if (!$messages) return $total;
 	foreach ($messages as $row) {
-	  if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
-	    $url = $match[1];
-	  else
-	    $url = "message.php3?id_message=".$row->id_message;
+		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
+			$url = $match[1];
+		else
+			$url = "message.php3?id_message=".$row['id_message'];
 
-	  $rv = ($row->rv == 'oui');
-	  $date = $row->date_heure;
-	  $date_fin = $row -> date_fin;
-	  
-	  if ($row->type=="pb") $bouton = "pense-bete";
-	  elseif ($row->type=="annonces") $bouton = "annonce";
-	  else $bouton = "message";
-	  
-	  if ($rv) {
-	    $date_jour = affdate_jourcourt($date);
-	    $total .= "<tr><td colspan='2'>" .
-	      (($date_jour == $date_rv) ? '' : "<div class='arial11'><b>$date_jour</b></div>") .
-	      "</td></tr>";
-	  }
-	  
-	  $total .= "<tr><td width='24' valign='middle'>" .
-	    http_calendrier_href($url,
-				 ($rv ? "<img src='img_pack/rv.gif' style='background: url(img_pack/$bouton.gif) no-repeat;' border='0' alt='' />" : "<img src='img_pack/$bouton.gif' border='0' alt='' />"),
-				 '', '') .
-	    "</td>" .
-	    "<td valign='middle'>" .
-	    ((!$rv) ? '' :
-	     ((affdate($date) == affdate($date_fin)) ?
-	      ("<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>") :
-	      ( "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat; text-align: center;'>".heures($date).":".minutes($date)."<br />...</div>" ))) .
-	    "<div><b>" .
-	    http_calendrier_href($url, typo($row->titre), '', 
+		$rv = ($row['rv'] == 'oui');
+		$date = $row['date_heure'];
+		$date_fin = $row['date_fin'];
+
+		if ($row['type']=="pb") $bouton = "pense-bete";
+		else if ($row['type']=="annonces") $bouton = "annonce";
+		else $bouton = "message";
+
+		if ($rv) {
+			$date_jour = affdate_jourcourt($date);
+			$total .= "<tr><td colspan='2'>" .
+				(($date_jour == $date_rv) ? '' :
+				"<div class='arial11'><b>$date_jour</b></div>") .
+				"</td></tr>";
+		}
+
+		$total .= "<tr><td width='24' valign='middle'>" .
+		http_calendrier_href($url,
+			 ($rv ? "<img src='img_pack/rv.gif' style='background: url(img_pack/$bouton.gif) no-repeat;' border='0' alt='' />" : "<img src='img_pack/$bouton.gif' border='0' alt='' />"),
+			 '', '') .
+		"</td>" .
+		"<td valign='middle'>" .
+		((!$rv) ? '' :
+		((affdate($date) == affdate($date_fin)) ?
+		("<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>") :
+		( "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat; text-align: center;'>".heures($date).":".minutes($date)."<br />...</div>" ))) .
+		"<div><b>" .
+		http_calendrier_href($url, typo($row['titre']), '', 
 'font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;') .
-	    "</b></div>" .
-	    "</td>" .
-	    "</tr>\n";
+		"</b></div>" .
+		"</td>" .
+		"</tr>\n";
 
-	  $date_rv = $date_jour;
+		$date_rv = $date_jour;
 	}
 
 	if ($type == 'annonces') {
@@ -1294,66 +1295,63 @@ function http_calendrier_rv($messages, $type) {
 	  fin_cadre_enfonce(true);
 }
 
-# fabrique une balise A, avec un href conforme au validateur W3C
-# et une classe uniquement destinee a retirer l'URL lors d'une impression
-# attention au cas ou la href est du Javascript avec des "'"
+// Fabrique une balise A, avec un href conforme au validateur W3C
+// et une classe uniquement destinee a retirer l'URL lors d'une impression
+// attention au cas ou la href est du Javascript avec des "'"
 
-function http_calendrier_href($href, $clic, $title='', $style='', $class='')
-{
-  return '<a href="' .
-    str_replace('&', '&amp;', $href) .
-    '"' . # class="forum-repondre-message"' .
-    (!$style ? '' : (" style=\"" . $style . "\"")) .
-    (!$title ? '' : (" title=\"" . $title . "\"")) .
-    (!$class ? '' : (" class=\"" . $class . "\"")) .
-    '>' .
-    $clic .
-    '</a>';
+function http_calendrier_href($href, $clic, $title='', $style='', $class='') {
+	return '<a href="' .
+		str_replace('&', '&amp;', $href) .
+		'"' . # class="forum-repondre-message"' .
+		(!$style ? '' : (" style=\"" . $style . "\"")) .
+		(!$title ? '' : (" title=\"" . $title . "\"")) .
+		(!$class ? '' : (" class=\"" . $class . "\"")) .
+		'>' .
+		$clic .
+		'</a>';
 }
 
 
-function sql_calendrier_interval_jour($annee,$mois,$jour)
-{
-  $avant = "'$annee-$mois-$jour'";
-  $apres = "'$annee-$mois-$jour 23:59:59'";
+function sql_calendrier_interval_jour($annee,$mois,$jour) {
+	$avant = "'$annee-$mois-$jour'";
+	$apres = "'$annee-$mois-$jour 23:59:59'";
 
-  return array(sql_calendrier_interval_articles($avant, $apres),
-	       sql_calendrier_interval_breves($avant, $apres),
-	       sql_calendrier_interval_rv($avant, $apres));
+	return array(sql_calendrier_interval_articles($avant, $apres),
+		sql_calendrier_interval_breves($avant, $apres),
+		sql_calendrier_interval_rv($avant, $apres));
 }
 
-function sql_calendrier_interval_semaine($annee,$mois,$jour)
-{
-  $w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
-  if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
-  $debut = $jour-$w_day;
-  $avant = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut,$annee)) . "'";
-  $apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut+7,$annee)) . " 23:59:59'";
+function sql_calendrier_interval_semaine($annee,$mois,$jour) {
+	$w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
+	if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
+	$debut = $jour-$w_day;
+	$avant = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut,$annee)) . "'";
+	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut+7,$annee)) .
+	" 23:59:59'";
 
-  return array(sql_calendrier_interval_articles($avant, $apres),
-	       sql_calendrier_interval_breves($avant, $apres),
-	       sql_calendrier_interval_rv($avant, $apres));
+	return array(sql_calendrier_interval_articles($avant, $apres),
+		sql_calendrier_interval_breves($avant, $apres),
+		sql_calendrier_interval_rv($avant, $apres));
 }
 
-function sql_calendrier_interval_mois($annee,$mois,$jour)
-{
-  $periode = $annee . '-' . sprintf("%02d", $mois) . '-01';
-  $avant = "'$periode'";
- // $apres = "DATE_ADD('$periode', INTERVAL 1 MONTH)";
-  $apres = "'" . date("Y-m-d", mktime(1,1,1,$mois+1,$debut,$annee)) . " 23:59:59'";
-  return array(sql_calendrier_interval_articles($avant, $apres),
-	       sql_calendrier_interval_breves($avant, $apres),
-	       sql_calendrier_interval_rv($avant, $apres));
+function sql_calendrier_interval_mois($annee,$mois,$jour) {
+	$periode = $annee . '-' . sprintf("%02d", $mois) . '-01';
+	$avant = "'$periode'";
+	// $apres = "DATE_ADD('$periode', INTERVAL 1 MONTH)";
+	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois+1,$debut,$annee)) .
+	" 23:59:59'";
+	return array(sql_calendrier_interval_articles($avant, $apres),
+		sql_calendrier_interval_breves($avant, $apres),
+		sql_calendrier_interval_rv($avant, $apres));
 }
 
-# 3 fonctions retournant les evenements d'une période
-# le tableau retourné est indexe par les balises du format ics
+# 3 fonctions retournant les evenements d'une periode
+# le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
 
-function sql_calendrier_interval_articles($avant, $apres)
-{
-  $evenements= array();
-  $result=spip_query("
+function sql_calendrier_interval_articles($avant, $apres) {
+	$evenements= array();
+	$result=spip_query("
 SELECT	id_article, titre, date
 FROM	spip_articles
 WHERE	statut='publie'
@@ -1361,21 +1359,20 @@ WHERE	statut='publie'
  AND	date < $apres
 ORDER BY date
 ");
-  while($row=spip_fetch_array($result)){
-	      $amj = sql_calendrier_jour_ical($row['date']);
-	      $evenements[$amj][]=
+	while($row=spip_fetch_array($result)){
+		$amj = sql_calendrier_jour_ical($row['date']);
+		$evenements[$amj][]=
 		array(
-		      'URL' => "articles.php3?id_article=" . $row['id_article'],
-		      'CATEGORIES' => 'a',
-		      'DESCRIPTION' => $row['titre']);
+			'URL' => "articles.php3?id_article=" . $row['id_article'],
+			'CATEGORIES' => 'a',
+			'DESCRIPTION' => $row['titre']);
 	}
-  return $evenements;
+	return $evenements;
 }
 
-function sql_calendrier_interval_breves($avant, $apres)
-{
-  $evenements= array();
-  $result=spip_query("
+function sql_calendrier_interval_breves($avant, $apres) {
+	$evenements= array();
+	$result=spip_query("
 SELECT	id_breve, titre, date_heure
 FROM	spip_breves
 WHERE	statut='publie'
@@ -1383,22 +1380,21 @@ WHERE	statut='publie'
  AND	date_heure < $apres
 ORDER BY date_heure
 ");
-  while($row=spip_fetch_array($result)){
-	      $amj = sql_calendrier_jour_ical($row['date_heure']);
-	      $evenements[$amj][]=
+	while($row=spip_fetch_array($result)){
+		$amj = sql_calendrier_jour_ical($row['date_heure']);
+		$evenements[$amj][]=
 		array(
-		      'URL' => "breves_voir.php3?id_breve=" . $row['id_breve'],
-		      'CATEGORIES' => 'b',
-		      'DESCRIPTION' => $row['titre']);
+			'URL' => "breves_voir.php3?id_breve=" . $row['id_breve'],
+			'CATEGORIES' => 'b',
+			'DESCRIPTION' => $row['titre']);
 	}
-  return $evenements;
+	return $evenements;
 }
 
-function sql_calendrier_interval_rv($avant, $apres)
-{
-  global $connect_id_auteur;
-  $evenements= array();
-  $result=spip_query("
+function sql_calendrier_interval_rv($avant, $apres) {
+	global $connect_id_auteur;
+	$evenements= array();
+	$result=spip_query("
 SELECT	messages.id_message, messages.titre, messages.texte,
 	messages.date_heure, messages.date_fin, messages.type
 FROM	spip_messages AS messages, 
@@ -1411,7 +1407,7 @@ WHERE	((lien.id_auteur='$connect_id_auteur'
 GROUP BY messages.id_message
 ORDER BY messages.date_heure
 ");
-  while($row=spip_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
 		$type=$row["type"];
@@ -1441,14 +1437,13 @@ WHERE	(lien.id_message='$id_message'
 		  }
 		}
 
- 		$jour_avant = substr($avant, 9,2);
- 		$mois_avant = substr($avant, 6,2);
- 		$annee_avant = substr($avant, 1,4);
- 		$jour_apres = substr($apres, 9,2);
-  		$mois_apres = substr($apres, 6,2);
- 		$annee_apres = substr($apres, 1,4);
- 	 		
- 		$ical_apres = sql_calendrier_jour_ical("$annee_apres-$mois_apres-".sprintf("%02d",$jour_apres));
+		$jour_avant = substr($avant, 9,2);
+		$mois_avant = substr($avant, 6,2);
+		$annee_avant = substr($avant, 1,4);
+		$jour_apres = substr($apres, 9,2);
+		$mois_apres = substr($apres, 6,2);
+		$annee_apres = substr($apres, 1,4);
+		$ical_apres = sql_calendrier_jour_ical("$annee_apres-$mois_apres-".sprintf("%02d",$jour_apres));
 
 		// Calcul pour les semaines a cheval sur deux mois 
  		$j = 0;
@@ -1465,7 +1460,7 @@ WHERE	(lien.id_message='$id_message'
 				'CATEGORIES' => $cat,
 				'ATTENDEE' => (count($auteurs) == 0) ? '' : join($auteurs,", "));
 			$j ++; 
-	   		$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));
+			$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));
 			
 			$amj = sql_calendrier_jour_ical($ladate);
 
@@ -1477,14 +1472,13 @@ WHERE	(lien.id_message='$id_message'
 
 
 function sql_calendrier_taches_annonces () {
-  $r = array();
-  $result = spip_query("
+	$r = array();
+	$result = spip_query("
 SELECT * FROM spip_messages 
 WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
-  if (spip_num_rows($result) > 0){
-    while ($x = spip_fetch_object($result)) $r[] = $x;
-  }
-  return $r;
+	if (spip_num_rows($result) > 0)
+		while ($x = spip_fetch_array($result)) $r[] = $x;
+	return $r;
 }
 
 function sql_calendrier_taches_pb () {
@@ -1495,7 +1489,7 @@ SELECT * FROM spip_messages AS messages
 WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 	if (spip_num_rows($result) > 0){
 	  $r = array();
-	  while ($x = spip_fetch_object($result)) $r[] = $x;
+	  while ($x = spip_fetch_array($result)) $r[] = $x;
 	}
 	return $r;
 }
@@ -1518,7 +1512,7 @@ GROUP BY messages.id_message
 ORDER BY messages.date_heure");
 	if (spip_num_rows($result) > 0){
 	  $r = array();
-	  while ($x = spip_fetch_object($result)) $r[] = $x;
+	  while ($x = spip_fetch_array($result)) $r[] = $x;
 	}
 	return  $r;
 }
@@ -1621,11 +1615,6 @@ function calendrier_div_style($evenement)
       return array($contrastes[$i][$b], $contrastes[$i][$f]);
     }
 }
-
-
-
-
-
 
 
 ?>
