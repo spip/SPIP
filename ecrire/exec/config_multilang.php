@@ -31,17 +31,18 @@ function exec_config_multilang_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
-	echo "<br /><br /><br />";
-	echo gros_titre(_T('info_langues'),'', false);
-
-	echo barre_onglets("config_lang", "multi");
-
 	echo debut_gauche('', true);
 	
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
-echo debut_droite('', true);
+	echo debut_droite('', true);
+
+	echo "<br /><div style='text-align: center'>", 
+	  gros_titre(_T('info_langues'),'', false),
+	  '</div><br />',
+	  barre_onglets("config_lang", "multi"),
+	  '<br />';
 
 	$referenceur = charger_fonction('referenceur', 'configuration');
 	echo $referenceur();
