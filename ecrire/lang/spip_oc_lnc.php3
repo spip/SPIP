@@ -136,8 +136,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anoncis editorials',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Mandar pas la ti&egrave;ra de las novetats',
 'bouton_radio_non_syndication' => 'Pas cap de sindicacion',
-'bouton_radio_occidental' => '<MODIF> Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>):totes los navigadors lo sup&ograve;rtan, mas permet pas que
- d\'afichar las lengas o&egrave;st-europ&egrave;as (occitan, catalan, angl&eacute;s, alemand...).  ',
+'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>): permet mai que mai d\'afichar de lengas o&egrave;st-europ&egrave;as (occitan, catalan, angl&eacute;s, alemand...); SPIP permet &ccedil;a que la de gerir pro plan las autras lengas.  ',
 'bouton_radio_pas_petition' => 'Pas cap de peticion',
 'bouton_radio_personnalise' => 'J&ograve;c de caract&egrave;rs personalizat: causiss&egrave;tz aquela opcion se vol&egrave;tz
  utilizar un j&ograve;c de caract&egrave;rs especific ',
@@ -149,8 +148,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_sauvegarde_non_compressee' => 'Salvagarda non comprimida jos <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => '<MODIF> Alfabet universal (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas per ara es
- pas reconegut per totes los navigadors.',
+'bouton_radio_universel' => 'Alfabet universal (<tt>utf-8</tt>: permet d\'afichar totas las lengas, mas p&ograve;t pausar de probl&egrave;mas de compatibilitat amb los logicials utilizats per modifcar v&ograve;stras esqueletas, e tanben amb d\'unes legidors de corri&egrave;r electronic.',
 'bouton_recharger_page' => 'tornar cargar aquela pagina',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lan&ccedil;ar l\'installacion',
@@ -165,7 +163,7 @@ la documentacion d\'SPIP</a>.',
 
 
 // C
-'calendrier_synchro' => '<MODIF> S\'utilizatz un logicial d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat del sit.',
+'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
 
 
 // D
@@ -411,13 +409,13 @@ Merc&eacute;s per v&ograve;stra participacion
 'ical_texte_js' => 'Los articles publicats en aquel sit se p&ograve;don afichar aisit, dins totes los sits v&ograve;stres, en far servir una linha javascript. ',
 'ical_texte_prive' => 'Aquel calendi&egrave;r, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aquel sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
 'ical_texte_public' => 'Aquel calendi&egrave;r vos permet de seguir l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
-'ical_texte_rss' => '<MODIF> Pod&egrave;tz sindicar las novetats d\'aquel sit dins tot legidor de fichi&egrave;rs en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir las novetats publicadas dins d\'autres sits en utilizar un format d\'escambi compatible. ',
+'ical_texte_rss' => 'Pod&egrave;tz sindicar las novetats d\'aqueste sit dins quin legidor de fichi&egrave;rs que si&aacute; en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir las novetats publicadas dins d\'autres sits en utilizar un format d\'escambi compatible (sit sindicats). ',
 'ical_texte_rss_articles' => 'Lo fichi&egrave;r "backend" dels articles d\'aqueste sit se tr&ograve;ba a l\'adrei&ccedil;a:',
 'ical_texte_rss_articles2' => 'Atanben pod&egrave;tz obt&eacute;ner de fichi&egrave;rs "backend" pels articles de cada rubrica del sit:',
 'ical_texte_rss_breves' => 'Existisson mai d\'un fichi&egrave;r contenent las br&egrave;vas del sit. En precisar un num&egrave;ro de rubrica,  obtendretz sonque las br&egrave;vas de la rubrica aquela.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de corri&egrave;r',
-'ical_titre_rss' => '<MODIF> Fichi&egrave;r &laquo;backend&raquo;',
+'ical_titre_rss' => 'Fichi&egrave;rs &laquo;backend&raquo;',
 'icone_a_suivre' => 'De seguir',
 'icone_activer_cookie' => 'Activar lo cookie de correspond&eacute;ncia',
 'icone_admin_site' => 'Administracion del sit',
@@ -485,7 +483,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_sites_references' => 'Sits referenciats',
 'icone_statistiques' => 'Estadisticas del sit',
 'icone_statistiques_visites' => 'Estadisticas de las vesitas',
-'icone_suivi_activite' => '<MODIF> Seguir l\'activitat editoriala',
+'icone_suivi_activite' => 'Seguir la vida del sit',
 'icone_suivi_actualite' => 'Evolucion del&nbsp;sit',
 'icone_suivi_forum' => 'Seguit del forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerir los forums',
@@ -594,7 +592,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris&nbsp;!',
 'info_comment_lire_tableau' => 'Coss&iacute; legir aquel tabl&egrave;u',
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una lista de corri&egrave;r, pod&egrave;tz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants al sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista pel web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<MODIF> Pod&egrave;tz recebre automaticament, per e-mail, los anoncis pertocant l\'activitat editoriala d\'aquel sit. Per aqu&ograve; faire, vos pod&egrave;tz abonar a la lista de corri&egrave;r seguenta:',
+'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la lista de difusion d\'aqueste sit. Alara recebretz per e-mail los anoncis d\'articles e de br&egrave;vas que se prepausa a la publicacion.',
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l&nbsp;:',
 'info_connexion_base' => 'Segonda estapa: <B>Ensag de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><P> Pod&egrave;tz passar a l\'estapa seguenta.',
@@ -608,7 +606,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'es un logicial liure distribuit <a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
 'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
-'info_cours_edition' => '<MODIF> V&ograve;stres articles en cors d\'edicion',
+'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots claus del sit',
 'info_creation_paragraphe' => '(Per crear de paragrafes, basta que daissetz de linhas vu&egrave;jas.)',
 'info_creation_rubrique' => 'Abans de poder escriure d\'articles,<BR> dev&egrave;tz crear almens una rubrica.<BR>',
@@ -1241,7 +1239,7 @@ una color indica lor estat:',
 'menu_aide_sites_syndiquer' => 'Sits sindicats',
 'menu_aide_suivi_forum' => 'Seguit dels forums',
 'menu_aide_suivi_forum_articles_postes' => 'Articles p&ograve;stdatats',
-'menu_aide_suivi_forum_configuration' => '<MODIF> Configuracion precisa',
+'menu_aide_suivi_forum_configuration' => 'Configuracion del sit',
 'menu_aide_suivi_forum_contenu_articles' => 'Contengut dels articles',
 'menu_aide_suivi_forum_envoi_emails' => 'Mandad&iacute;s automatic d\'e-mails',
 'menu_aide_suivi_forum_fonctionnement' => 'Foncionament dels forums',
@@ -1364,7 +1362,7 @@ Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri <i>IMG/</
 'texte_article_virtuel' => 'Article virtual',
 'texte_article_virtuel_reference' => '<b>Article virtual:</b> article referenciat dins v&ograve;stre sit SPIP, mas redirigit cap a una autra URL. Per suprimir la redireccion, escafatz l\'URL &ccedil;ai subre.',
 'texte_aucun_resultat_auteur' => 'Cap de resultat per "@cherche_auteur@"',
-'texte_auteur_messagerie' => '<MODIF> Aquel sit vos p&ograve;t indicar de contunh la ti&egrave;ra dels redactors connectats, &ccedil;&ograve; que vos permet d\'escambiar de messatges en dir&egrave;cte (quora la messatjari&aacute; es desactivada &ccedil;ai subre, la quita ti&egrave;ra dels redactors es desactivada). Pod&egrave;tz decidir d\'apar&eacute;isser pas dins aquela ti&egrave;ra (s&egrave;tz "invisible/a" pels autres utilizaires).',
+'texte_auteur_messagerie' => 'Aqueste sit vos p&ograve;t indicar de contunh la ti&egrave;ra dels redactors connectats, &ccedil;&ograve; que vos permet d\'escambiar de messatges en dir&egrave;cte (quora la messatjari&aacute; es desactivada &ccedil;ai subre, la quita ti&egrave;ra dels redactors es desactivada). Pod&egrave;tz decidir d\'apar&eacute;isser pas dins aquela ti&egrave;ra (s&egrave;tz "invisible/a" pels autres utilizaires).',
 'texte_auteur_messagerie_1' => 'Aquel sit permet d\'escambiar de messatges e de constituir de forums de discussion privats entre los participants del sit. Pod&egrave;tz decidir de participar pas a aqueles escambis.',
 'texte_auteurs' => 'LOS AUTORS',
 'texte_bilan_traductions' => 'Dins aquel grafic, las barras verdas representan los articles revirats e actualizats, las barras rojas las reviradas que son d\'actualizar.',
@@ -1447,10 +1445,11 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_informations_personnelles_1' => 'Ara lo sist&egrave;ma vos crear&agrave; un acc&egrave;s personalizat al sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
-'texte_jeu_caractere' => '<MODIF> Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
+'texte_jeu_caractere' => 'Aquesta opcion es utila se v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (o "occidental") e sos derivats.
- En aquel cas, cal cambiar lo reglatge predefinit per tal d\'utilizar
- un j&ograve;c de caract&egrave;rs apropriat. Oblidetz pas tanpauc d\'adaptar
+ En aquel cas, val mai cambiar lo reglatge predefinit per 
+ un j&ograve;c de caract&egrave;rs apropriat. De tot biais vos conselham de far d\'assages
+ per fin de trobar una solucion satisfasenta. Se modificatz aquel param&egrave;tre, oblidetz pas tanpauc d\'adaptar
  lo sit public en consequ&eacute;ncia (balisa <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Aqueste reglatge a pas cap d\'efi&egrave;ch retroactiu. Adoncas
  los t&egrave;xtes ja sasits se p&ograve;don afichar
@@ -1614,7 +1613,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'titre_breve_refusee' => 'Br&egrave;va refusada',
 'titre_breves' => 'Las br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
-'titre_cadre_afficher_traductions' => '<MODIF> Afichar l\'estat de las reviradas per aquela lenga',
+'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las reviradas per las lengas seguentas:',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'Forum privat dels administrators',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',
