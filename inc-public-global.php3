@@ -252,8 +252,9 @@ function inclure_balise_dynamique($r) {
 	else {
 		list($fond, $delais, $contexte_inclus) = $r;
 		if ((!$contexte_inclus['lang']) AND
+
 		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
-			$contexte_inclus['lang'] = $GLOBALS['spip_lang']; 
+			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 		$page = inclure_page($fond, $delais, $contexte_inclus);
 		if ($page['process_ins'] == 'html')
 			echo $page['texte'];
