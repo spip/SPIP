@@ -197,17 +197,15 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 
 	if (!$time) 
 	  {
-	    if (!$mois){
-	      $time = time();
-	    } else {
-	      if (!isset($jour))
-		{ 
-		  $today=getdate(time());
-		  $jour=$today["mday"];
-		  $type= 'mois';
-		}
-	      $time = mktime(0,0,0,$mois, $jour, $annee);
-	    }
+	    $today=getdate(time());
+	    if (!isset($annee))
+	      $annee = $today["year"];
+	    if (!isset($mois))
+	      $mois = $today["mon"];
+	    if (!isset($jour))
+	      $jour = $today["mday"];
+	    $time = mktime(0,0,0,$mois, $jour, $annee);
+	    $type= 'mois';
 	  }
 
 	$jour = date("d",$time);
