@@ -251,10 +251,6 @@ function propager_les_secteurs()
 	while ($row = sql_fetch($r)) {
 		sql_update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".$row['id']);
 	}
-	// reparer les sites
-	$r = sql_select("A.id_syndic AS id, R.id_secteur AS secteur", "spip_syndic AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
-	while ($row = sql_fetch($r))
-		sql_update("spip_syndic", array("id_secteur" => $row['secteur']), "id_syndic=".$row['id']);
 
 	// avertir les plugins qui peuvent faire leur mises a jour egalement
 	pipeline('trig_propager_les_secteurs','');
