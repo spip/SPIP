@@ -76,16 +76,17 @@ function login_explicite($login, $cible) {
 function login_pour_tous($login, $cible, $action) {
 	global $ignore_auth_http, $_SERVER, $_COOKIE;
 
-	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
-	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
+	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
+	// pose de cookie ; s'il n'est pas la, c'est echec cookie
 	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
 	// et pas un echec cookie.
 	if (_request('var_echec_cookie'))
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
+	$pose_cookie = generer_url_public('spip_cookie');
+	
 	if ($echec_cookie AND !$ignore_auth_http) {
 		include_ecrire('inc_headers');
-		if (php_module())
-			$auth_http = 'spip_cookie' . _EXTENSION_PHP;
+		if (php_module()) $auth_http = $pose_cookie;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
@@ -138,11 +139,12 @@ function login_pour_tous($login, $cible, $action) {
 	// afficher "erreur de mot de passe" si &var_erreur=pass
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
+
 	return array('formulaire_login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(
-				      'action2' => ($login ? ('spip_cookie' . _EXTENSION_PHP): $action),
+				      'action2' => ($login ? $pose_cookie: $action),
 					'erreur' => $erreur,
 					'action' => $action,
 					'url' => $cible,
