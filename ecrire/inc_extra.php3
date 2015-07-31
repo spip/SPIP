@@ -8,13 +8,13 @@
 // l'on veut ainsi etendre ; utiliser dans l'espace public avec
 // [(#EXTRA|extra{"nom_du_champ"})]
 
-/*
+
 
 //
 // Definition de tous les extras possibles
 //
 
-$GLOBALS['champs_extra'] = Array (
+/*$GLOBALS['champs_extra'] = Array (
 	'auteur' => Array (
 			"sexe" => "ligne|brut",
 			"age" => "ligne|propre|&Acirc;ge du capitaine",
@@ -22,10 +22,9 @@ $GLOBALS['champs_extra'] = Array (
 		),
 
 	'article' => Array (
-			"isbn" => "ligne|typo"
+			"isbn" => "ligne|typo|ISBN"
 		)
 	);
-
 */
 
 
@@ -38,16 +37,16 @@ $GLOBALS['champs_extra'] = Array (
 
 $GLOBALS['champs_extra_proposes'] = Array (
 	'auteur' => Array (
-		// 0 : par defaut
-		0 =>  'age|sexe',
+		// tous : par defaut
+		'tous' =>  'age|sexe',
 		// une biblio pour les admin (statut='0minirezo')
 		'0minirezo' => 'age|sexe|biblio'
 		),
 
 	'article' => Array (
-		// 0 : par defaut
-		0 => '',
-		// 1 : id_secteur=1; 
+		// tous : par defaut
+		'tous' => '',
+		// 1 : id_secteur=1;
 		1 => 'isbn'
 		)
 	);
@@ -68,7 +67,7 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 	// quels sont les extras de ce type d'objet
 	if (!$champs = $GLOBALS['champs_extra'][$type])
 		$champs = Array();
-	
+
 	// prendre en compte, eventuellement, les champs presents dans la base
 	// mais oublies dans mes_options.
 	if (is_array($extra))
@@ -79,48 +78,44 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 	// quels sont les extras proposes...
 	// ... si l'ensemble est connu
 	if ($ensemble && isset($GLOBALS['champs_extra_proposes'][$type][$ensemble]))
-		$champs_proposes = $GLOBALS['champs_extra_proposes'][$type][$ensemble];
-	else // ... sinon, les champs proposes par defaut
-	if (isset($GLOBALS['champs_extra_proposes'][$type][0]))
-		$champs_proposes = $GLOBALS['champs_extra_proposes'][$type][0];
-	else // sinon tous les champs extra du type
-	if (is_array($champs)) {
+		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type][$ensemble]);
+	// ... sinon, les champs proposes par defaut
+	else if (isset($GLOBALS['champs_extra_proposes'][$type][0])) {
+		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type]['tous']);
+	}
+	// sinon tous les champs extra du type
+	else {
 		$champs_proposes =  Array();
-		reset ($champs);
-		while (list($ch,) = each($champs))
-			$champs_proposes[] = $ch;
-		$champs_proposes = join('|', $champs_proposes);
+		reset($champs);
+		while (list($ch, ) = each($champs)) $champs_proposes[] = $ch;
 	}
 
 	// maintenant, on affiche les formulaires pour les champs renseignes dans $extra
 	// et pour les champs proposes
-	reset ($champs);
-	while(list($champ,$desc)=each($champs)) {
-		if ($extra[$champ] OR strpos(" |$champs_proposes|", "|$champ|")) {
-			list($form, $filtre, $prettyname) = explode("|", $desc);
+	reset($champs_proposes);
+	while (list(, $champ) = each($champs_proposes)) {
+		$desc = $champs[$champ];
+		list($form, $filtre, $prettyname) = explode("|", $desc);
 
-			if (!$prettyname)
-				$prettyname = ucfirst($champ);
-			$affiche .= "<div><b>$prettyname&nbsp;:</b><br />";
-
-			switch($form) {
-				case "bloc":
-				case "block":
-					$affiche .= "<TEXTAREA NAME='suppl_$champ' CLASS='forml' style='font-size:9px;' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
-					break;
-				case "masque":
-					$affiche .= "<font color='#555555'>".interdire_scripts($extra[$champ])."</font>\n";
-					break;
-				case "ligne":
-				case "line":
-				default:
-					$affiche .= "<INPUT TYPE='text' NAME='suppl_$champ' CLASS='forml' style='font-size:9px;'\n";
-					$affiche .= " VALUE=\"".entites_html($extra[$champ])."\" SIZE='40'>\n";
-					break;
-			}
-
-			$affiche .= "</div>\n";
+		if (!$prettyname) $prettyname = ucfirst($champ);
+		$affiche .= "<b>$prettyname&nbsp;:</b><br />";
+		switch($form) {
+			case "bloc":
+			case "block":
+				$affiche .= "<TEXTAREA NAME='suppl_$champ' CLASS='forml' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
+				break;
+			case "masque":
+				$affiche .= "<font color='#555555'>".interdire_scripts($extra[$champ])."</font>\n";
+				break;
+			case "ligne":
+			case "line":
+			default:
+				$affiche .= "<INPUT TYPE='text' NAME='suppl_$champ' CLASS='forml'\n";
+				$affiche .= " VALUE=\"".entites_html($extra[$champ])."\" SIZE='40'>\n";
+				break;
 		}
+
+		$affiche .= "<p>\n";
 	}
 
 	if ($affiche) {
@@ -148,17 +143,8 @@ function extra_affichage($extra, $type) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	while (list($nom,$contenu) = each($extra)) {
 		list($type, $filtre, $prettyname) = explode("|", $champs[$nom]);
-		switch($filtre) {
-			case "typo":
-				$contenu = typo($contenu);
-				break;
-			case "propre":
-				$contenu = propre($contenu);
-				break;
-			case "brut":
-			default:
-				break;
-		}
+		if ($filtre != 'brut' AND function_exists($filtre))
+			$contenu = $filtre($contenu);
 		if (!$prettyname)
 			$prettyname = ucfirst($nom);
 		if ($contenu)

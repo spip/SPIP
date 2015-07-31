@@ -237,35 +237,36 @@ function formulaire_signature($id_article) {
 
 			echo propre($texte_petition);
 
-			echo "<p><fieldset><B>"._T('form_pet_votre_nom')."</B><BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\">";
+			echo "<div><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
+			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\" /></p>";
 
-			echo "<p><B>"._T('form_pet_votre_email')."</B><BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\"></fieldset>";
+			echo "<p><b>"._T('form_pet_votre_email')."</b><br />";
+			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\" /></p></fieldset>";
 
-			echo "<P><fieldset>";
+			echo "<br /><fieldset><p>";
 			if ($site_obli != "oui") {
-				echo  "<B>"._T('form_pet_votre_site')."</B><p>";
+				echo  _T('form_pet_votre_site')."<br />";
 			}
-			echo _T('form_pet_nom_site2')."</B><BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\">";
+			echo "<b>"._T('form_pet_nom_site2')."</b><br />";
+			echo "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\" /></p>";
 
-			echo "<p><B>"._T('form_pet_adresse_site')."</B><BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\"></fieldset>";
+			echo "<p><b>"._T('form_pet_adresse_site')."</b><br />";
+			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\" /></p></fieldset>";
 
 			if ($message_petition == "oui") {
-				echo "<p><fieldset>";
+				echo "<fieldset>";
 
-				echo "<B>"._T('form_pet_message_commentaire')."</B><BR>";
+				echo "<b>"._T('form_pet_message_commentaire')."</b><br />";
 				echo "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
-				echo "</textarea></fieldset><p>\n";
+				echo "</textarea></fieldset>\n";
 			}
 			else {
-				echo "<input type=\"hidden\" name=\"message\" value=\"\">";
+				echo "<input type=\"hidden\" name=\"message\" value=\"\" />";
 			}
+			echo "</div>";
 
-			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
-			echo "</DIV></FORM>\n";
+			echo "<br /><div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" />";
+			echo "</div></form>\n";
 		}
 	}
 	echo "</div>\n";
