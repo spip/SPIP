@@ -27,7 +27,7 @@ $spip_petitions_key = array(
 
 $spip_visites = array(
 		"date"	=> "DATE NOT NULL",
-		"visites"	=> "INT UNSIGNED",
+		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_key = array(
@@ -36,7 +36,7 @@ $spip_visites_key = array(
 $spip_visites_articles = array(
 		"date"	=> "DATE NOT NULL",
 		"id_article"	=> "INT UNSIGNED",
-		"visites"	=> "INT UNSIGNED",
+		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_visites_articles_key = array(
@@ -46,9 +46,9 @@ $spip_referers = array(
 		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
 		"date"		=> "DATE",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED",
-		"visites_jour"	=> "INT UNSIGNED",
-		"visites_veille"=> "INT UNSIGNED",
+		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"visites_jour"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"visites_veille"=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_key = array(
@@ -59,7 +59,7 @@ $spip_referers_articles = array(
 		"referer_md5"	=> "BIGINT UNSIGNED",
 		"date"		=> "DATE",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED",
+		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_articles_key = array(
