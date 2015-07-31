@@ -2530,11 +2530,12 @@ function afficher_enclosures($tags) {
 	foreach (extraire_tags($tags) as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
-			include_spip('inc/minipres'); #pour http_href_img (quel bazar)
-			$s[] = http_href_img($t,
-				'attachment.gif',
-				'height="15" width="15"',
-				entites_html($t));
+			include_spip('inc/minipres'); #pour http_img_pack (quel bazar)
+			$s[] = preg_replace(',>[^<]+</a>,', 
+				'>'
+				.http_img_pack('attachment.gif', $t,
+					'height="15" width="15" title="'.attribut_html($t).'"')
+				.'</a>', $tag);
 		}
 	}
 	return join('&nbsp;', $s);
