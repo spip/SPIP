@@ -1,4 +1,7 @@
-<div><?php 
+[(#REM|test_espace_prive|oui)
+[(#VAL{FORMULAIRE_[(#ENV{class}|strtoupper|texte_script)]}|executer_balise_dynamique{#ENV{args},#LISTE{'','','','',#ENV{lang}}})]
+][(#REM|test_espace_prive|non)
+<div><?php
 /* une fonction qui produit du php qui ne sera execute qu'au service final de la page */
 echo executer_balise_dynamique('FORMULAIRE_[(#ENV{class}|strtoupper|texte_script)]',[(#ENV{args}|var_export{true})],array('','','','','[(#ENV{lang}|texte_script)]'));
-?></div>
+?></div>]
