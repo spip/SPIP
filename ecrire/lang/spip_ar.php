@@ -352,7 +352,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_refusee' => 'رفض الاتصال',
 'info_contact_developpeur' => 'الرجاء الاتصال بمطوّر.',
 'info_contenance' => 'هذا الموقع يحتوي على:',
-'info_contribution' => 'مشاركة منتديات',
+'info_contribution' => 'مشاركة منتديات', # MODIF
 'info_copyright' => '@spip@ برنامج حر موزع @lien_gpl@.',
 'info_copyright_doc' => 'لمزيد من المعلومات راجع الموقع<a href="@spipnet@">http://www.spip.net/ar</a>.',
 'info_copyright_gpl' => 'بموجب الترخيص العام GPL',

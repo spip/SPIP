@@ -351,7 +351,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'info_connexion_refusee' => 'Spojení bylo odepřeno',
 'info_contact_developpeur' => 'Kontaktujte vývojáře.',
 'info_contenance' => 'Tyto stránky obsahují:',
-'info_contribution' => 'příspěvky do diskusní skupiny',
+'info_contribution' => 'příspěvky do diskusní skupiny', # MODIF
 'info_copyright' => '@spip@ je freeware distribuovaný @lien_gpl@.',
 'info_copyright_doc' => 'Bližší informace viz <a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
 'info_copyright_gpl' => 'v rámci licence GPL',

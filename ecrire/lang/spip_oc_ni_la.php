@@ -352,7 +352,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 'info_connexion_refusee' => 'Connexion refusada',
 'info_contact_developpeur' => 'Vorgatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueu sit conten:',
-'info_contribution' => 'Contribucions de forum',
+'info_contribution' => 'Contribucions de forum', # MODIF
 'info_copyright' => '@spip@ es un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
 'info_copyright_gpl' => 'sota licéncia GPL',

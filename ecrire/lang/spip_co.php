@@ -353,7 +353,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Cunnessione rifiutata',
 'info_contact_developpeur' => 'Cuntattate puru un sviluppore.',
 'info_contenance' => 'Stu situ cuntene :',
-'info_contribution' => 'contributi di foru',
+'info_contribution' => 'contributi di foru', # MODIF
 'info_copyright' => '@spip@ hè un prugrammu lìberu distribuitu @lien_gpl@.',
 'info_copyright_doc' => 'Per sapè ne di più, visitate puru u situ <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'sottu licenza GPL',

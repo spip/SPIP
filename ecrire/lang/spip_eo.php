@@ -351,7 +351,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Konektiĝo rifuzata',
 'info_contact_developpeur' => 'Bonvolu kontakti programiston.',
 'info_contenance' => 'Tiu retejo enhavas :',
-'info_contribution' => 'forumaj kontribuaĵoj',
+'info_contribution' => 'forumaj kontribuaĵoj', # MODIF
 'info_copyright' => '@spip@ estas libera programo distribuata @lien_gpl@.',
 'info_copyright_doc' => 'Por pliaj informoj vidu la retpaĝon <a href="@spipnet@">http://www.spip.net/eo</a>.', # MODIF
 'info_copyright_gpl' => 'sub licenco GPL',

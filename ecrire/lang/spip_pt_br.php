@@ -346,7 +346,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'info_connexion_refusee' => 'Conexão recusada',
 'info_contact_developpeur' => 'Por favor, contate um desenvolvedor.',
 'info_contenance' => 'Este site contém:',
-'info_contribution' => 'contribuições de fórum',
+'info_contribution' => 'contribuições de fórum', # MODIF
 'info_copyright' => '@spip@ é um software livre distribuído @lien_gpl@.',
 'info_copyright_doc' => 'Para mais informações, veja o site <a href="@spipnet@">http://www.spip.net/</a>.',
 'info_copyright_gpl' => 'sob licença GPL',

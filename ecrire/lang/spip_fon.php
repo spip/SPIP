@@ -343,7 +343,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'cácáɖó ɔ sɔgbè á',
 'info_contact_developpeur' => 'mi sɔ àlɔ tìtòtɔ ɔ.',
 'info_contenance' => 'gblogblojí  élɔ ɖó:',
-'info_contribution' => 'àlɔɖó kplékplé ɔ tɔn ',
+'info_contribution' => 'àlɔɖó kplékplé ɔ tɔn ', # MODIF
 'info_copyright' => '@spip@ Azɔwànúmɛɖémákpàcɛná  @lien_gpl@',
 'info_copyright_doc' => 'nú mi ná lɛ ɖó mɔ xó dévó lɛ ɔ mi yì gblogblo é lɔ jí', # MODIF
 'info_copyright_gpl' => 'Ɖò Gbèníná GPL tɔn mɛ',

@@ -348,7 +348,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'បញ្ជាប់ ​ត្រូវ​បាន​បដិសេធ',
 'info_contact_developpeur' => '​ទាក់ទង​ អ្នក​អភិវឌ្ឍ។',
 'info_contenance' => 'វ៉ែបសៃថ៍ នេះ​មានផ្ទុក ៖',
-'info_contribution' => 'ការ​រួមចំណែក នៃ​វេទិកា',
+'info_contribution' => 'ការ​រួមចំណែក នៃ​វេទិកា', # MODIF
 'info_copyright' => '@spip@ ជា​ផ្នែកទន់សេរី ត្រូវបានបែងចែក ​ដោយ @lien_gpl@។',
 'info_copyright_doc' => 'សំរាប់ ពត៌មាន​បន្ថែម, ​មើលសៃថ៍ <a href="@spipnet@">http://www.spip.net/en</a>។',
 'info_copyright_gpl' => 'តាមអាជ្ញាបណ្ណ GPL',

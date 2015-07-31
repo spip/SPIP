@@ -360,7 +360,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Lakostaz lé arfizé',
 'info_contact_developpeur' => 'Mersi kontak inn dévlopèr.',
 'info_contenance' => 'Dann sit-la nana :',
-'info_contribution' => 'bann kontribusyon dann forom',
+'info_contribution' => 'bann kontribusyon dann forom', # MODIF
 'info_copyright' => '@spip@ lé inn lozisyel lib sak lé doné @lien_gpl@.',
 'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href="@spipnet@">http://www.spip.net/cpf</a>.', # MODIF
 'info_copyright_gpl' => 'sou lisans GPL',

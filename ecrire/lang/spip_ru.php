@@ -353,7 +353,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_refusee' => 'Подключение запрещенно',
 'info_contact_developpeur' => 'Пожалуйста свяжитесь с разработчиками.',
 'info_contenance' => 'Этот сайт содержит:',
-'info_contribution' => 'вложения в форум',
+'info_contribution' => 'вложения в форум', # MODIF
 'info_copyright' => '@spip@ - это свободно распространяемое программное обеспечение. @lien_gpl@.',
 'info_copyright_doc' => 'Подробная информация, см. <a href="@spipnet@">http://www.spip.net/ru</a>.',
 'info_copyright_gpl' => 'Лицензия GPL.',

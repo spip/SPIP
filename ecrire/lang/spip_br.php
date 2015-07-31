@@ -350,7 +350,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Kevreañ nac\'het',
 'info_contact_developpeur' => 'Kit e darempred gant un diorroer.',
 'info_contenance' => 'El lec\'hienn-mañ ez eus :',
-'info_contribution' => 'kemennadenn er forom',
+'info_contribution' => 'kemennadenn er forom', # MODIF
 'info_copyright' => 'Ur meziant dieub eo @spip@, dasparzhet @lien_gpl@.',
 'info_copyright_doc' => 'Evit titouroù ouzhpenn, gwelet al lec\'hienn <a href="@spipnet@">http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'dindan aotre implijout GPL',

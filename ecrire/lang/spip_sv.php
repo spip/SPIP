@@ -344,7 +344,7 @@ För att bekräfta din nya adress måste du gå till
 'info_connexion_refusee' => 'Anslutning nekad',
 'info_contact_developpeur' => 'Var god och ta kontakt med en utvecklare',
 'info_contenance' => 'Sajten innehåller:',
-'info_contribution' => 'bidrag till forumen',
+'info_contribution' => 'bidrag till forumen', # MODIF
 'info_copyright' => '@spip@ är fri programvara och distribueras @lien_gpl@.',
 'info_copyright_doc' => 'För mer information, se (på engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under GPL-licensen',

@@ -350,7 +350,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'D\'Verbindung gouf refuséiert.',
 'info_contact_developpeur' => 'Kontaktéiert w.e.g. en Développeur.',
 'info_contenance' => 'Dëse Site huet:',
-'info_contribution' => 'Beiträg an de Forum\'en',
+'info_contribution' => 'Beiträg an de Forum\'en', # MODIF
 'info_copyright' => '@spip@ ass eng fräi Software déi ënner @lien_gpl@ verdeelt gët.',
 'info_copyright_doc' => 'Fir méi Informatiounen, kuckt op <a href="@spipnet@">http://www.spip.net/lb</a>.',
 'info_copyright_gpl' => 'ënner GPL-Lizenz',

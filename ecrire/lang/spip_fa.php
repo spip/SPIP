@@ -343,7 +343,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_connexion_refusee' => 'ارتباط پذيرفته نشد',
 'info_contact_developpeur' => '.خواهشمند است كه با يك برنامه نويس تماس بگيريد',
 'info_contenance' => ': اين سايت حاوى',
-'info_contribution' => 'پيام سخنگاه',
+'info_contribution' => 'پيام سخنگاه', # MODIF
 'info_copyright' => '@spip@ يك نرم افزار آزاد است  كه @lien_gpl@ توزيع شده.',
 'info_copyright_doc' => ' براى اطلاعات بيشتر مراجعه كنيد به سايت <a href="@spipnet@">http://www.spip.net/fa</a>.',
 'info_copyright_gpl' => 'با مجوز GPL ',

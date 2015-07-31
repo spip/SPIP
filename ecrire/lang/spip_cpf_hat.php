@@ -352,7 +352,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'info_connexion_refusee' => 'Koneksyon te fin refize',
 'info_contact_developpeur' => 'Mèsi kotenouye yon devlopèr.',
 'info_contenance' => 'Kisa ap kontni nan sit-la :',
-'info_contribution' => 'mesaj andan fowom',
+'info_contribution' => 'mesaj andan fowom', # MODIF
 'info_copyright' => '@spip@ se yon logisyèl lib ki done @lien_gpl@.',
 'info_copyright_doc' => 'Si w vle plis enfòmasyon, ann gad sit sa-a <a href="@spipnet@">http://www.spip.net/cpf</a>.', # MODIF
 'info_copyright_gpl' => 'nan lisans GPL',

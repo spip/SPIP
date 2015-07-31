@@ -352,7 +352,7 @@ deu sit "@nom_site_spip@" (@adresse_site@):', # MODIF
 'info_connexion_refusee' => 'Connexion arrefusada',
 'info_contact_developpeur' => 'Volhatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueth sit que contien:',
-'info_contribution' => 'Contribucions de forum',
+'info_contribution' => 'Contribucions de forum', # MODIF
 'info_copyright' => '@spip@ qu\'ei un logiciau liure distribuit @lien_gpl@.',
 'info_copyright_doc' => 'Per mei informacions, véder lo sit <a href="@spipnet@">http://www.spip.net/oc</a>.', # MODIF
 'info_copyright_gpl' => 'devath licéncia GPL',

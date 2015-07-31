@@ -346,7 +346,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'info_connexion_refusee' => 'Connexió denegada',
 'info_contact_developpeur' => 'Contacteu amb un desenvolupador.',
 'info_contenance' => 'Aquest lloc conté:',
-'info_contribution' => 'contribucions del fòrum',
+'info_contribution' => 'contribucions del fòrum', # MODIF
 'info_copyright' => '@spip@ és programari lliure distribuït @lien_gpl@.',
 'info_copyright_doc' => 'Per a més informació, veure el lloc <a href="@spipnet@">http://www.spip.net/ca</a>.',
 'info_copyright_gpl' => 'sota llicència GPL',

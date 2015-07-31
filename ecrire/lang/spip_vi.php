@@ -352,7 +352,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Không nối vào được',
 'info_contact_developpeur' => 'Xin liên lạc với lập trình viên.',
 'info_contenance' => 'Website có:',
-'info_contribution' => 'thư tín của diễn đàn',
+'info_contribution' => 'thư tín của diễn đàn', # MODIF
 'info_copyright' => '@spip@ là nhu liệu miễn phí phổ biến @lien_gpl@.',
 'info_copyright_doc' => 'Để biết thêm, xin vào xem trang <a href="@spipnet@">http://www.spip.net/vi</a>.', # MODIF
 'info_copyright_gpl' => 'theo giấp phép GPL',

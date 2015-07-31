@@ -349,7 +349,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'info_connexion_refusee' => 'Konexioa errefusatu da',
 'info_contact_developpeur' => 'Programatzaile batekin kontaktuan jarri behar duzu.',
 'info_contenance' => 'Gune honek duena :',
-'info_contribution' => 'foroko ekarpenak',
+'info_contribution' => 'foroko ekarpenak', # MODIF
 'info_copyright' => '@spip@ software librea da, @lien_gpl@ banatua.',
 'info_copyright_doc' => 'Argibide gehiago izateko, jo helbide honetara: <a href="@spipnet@">http://www.spip.net/eu</a>.',
 'info_copyright_gpl' => 'GPL lizentziarekin',

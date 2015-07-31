@@ -351,7 +351,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'info_connexion_refusee' => 'Verbinding geweigerd',
 'info_contact_developpeur' => 'Gelieve een ontwikkelaar te contacteren.',
 'info_contenance' => 'Deze site bevat:',
-'info_contribution' => 'Bijdragen aan het forum',
+'info_contribution' => 'Bijdragen aan het forum', # MODIF
 'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href="@spipnet@">http://www.spip.net/nl</a>.',
 'info_copyright_gpl' => 'onder GPL licentie',

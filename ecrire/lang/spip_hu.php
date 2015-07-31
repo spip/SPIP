@@ -350,7 +350,7 @@ the address below. (Otherwise your request will be ignored.):
 'info_connexion_refusee' => 'Csatlakozás tagadva',
 'info_contact_developpeur' => 'Keressen egy fejlesztőt.',
 'info_contenance' => 'A honlap tartalmazza :',
-'info_contribution' => 'Fórumi hozzászólások',
+'info_contribution' => 'Fórumi hozzászólások', # MODIF
 'info_copyright' => '@spip@ egy szabad szoftver, letölthető: @lien_gpl@.',
 'info_copyright_doc' => 'Bővebb információkra, lásd a honlapot <a href="@spipnet@">http://www.spip.net/fr</a>.', # MODIF
 'info_copyright_gpl' => 'GPL licenzú',

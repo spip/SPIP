@@ -344,7 +344,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'ဆက်သွယ်ရန်ကြိုးစားမှု ငြင်းပယ်ခံရသည်',
 'info_contact_developpeur' => 'တီထွင်သူကိုဆက်သွယ်ပါ',
 'info_contenance' => 'ဆိုက်ထဲပါဝင်သည့် အရာများမှာ၊',
-'info_contribution' => 'ဖိုရမ်တွင် ထည့်ဝင်မှု',
+'info_contribution' => 'ဖိုရမ်တွင် ထည့်ဝင်မှု', # MODIF
 'info_copyright' => '@spip@ သည်အခမဲ့ရနိုင်သော @lien_gpl@ ဆောက်ဝဲလ်ဖြစ်သည်',
 'info_copyright_doc' => 'ပိုမိုသိရှိရန် <a href="@spipnet@">http://www.spip.net/en</a> သို့သွားပါ', # MODIF
 'info_copyright_gpl' => 'အများဆိုင် GPL လိုင်စင်ဖြင့်ထုတ်ဝေသည့်',

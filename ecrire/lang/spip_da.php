@@ -352,7 +352,7 @@ sera ignorée) :
 'info_connexion_refusee' => 'Opkobling afvist',
 'info_contact_developpeur' => 'Kontakt en udvikler.',
 'info_contenance' => 'Dette websted indeholder:',
-'info_contribution' => 'indlæg i fora',
+'info_contribution' => 'indlæg i fora', # MODIF
 'info_copyright' => '@spip@ er fri software der distribueres @lien_gpl@.',
 'info_copyright_doc' => 'For yderligere oplysninger besøg webstedet <a href="@spipnet@">http://www.spip.net/da</a>.', # MODIF
 'info_copyright_gpl' => 'under GPL licens',
