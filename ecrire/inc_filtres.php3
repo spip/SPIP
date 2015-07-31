@@ -41,9 +41,6 @@ function texte_backend($texte) {
 	// supprimer tags et sauts de ligne
 	//$texte = str_replace("\n"," ",textebrut($texte));
 
-	// Ajout Yann pour accents encodés 
- 	$texte = html_entity_decode($texte);
-
 	// " -> &quot; et tout ce genre de choses
 	$texte = entites_html($texte);
 	$texte = str_replace("&amp;", "&", $texte);
