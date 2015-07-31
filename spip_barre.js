@@ -70,8 +70,8 @@ function barre_inserer(text,champ) {
 }
 
 // Shows the help messages in the helpline window
-function helpline(help) {
-	document.formulaire.helpbox.value = help;
+function helpline(help, champ) {
+	champ.value = help;
 }
 
 
