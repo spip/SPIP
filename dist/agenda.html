@@ -13,22 +13,5 @@
 </head>
 
 <body id="page_agenda">
-<div id="page">
-
-	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
-
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:icone_agenda:></div>
-
-	<div id="conteneur">
-
-		[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
-
-	</div><!-- fin conteneur -->
-
-	[(#REM) Pied de page ]
-	<INCLURE{fond=inc-pied}>
-
-</div><!-- fin page -->
+[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
 </body></html>
