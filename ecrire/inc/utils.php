@@ -982,8 +982,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
-	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
-
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
 
@@ -1109,6 +1107,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		ecrire_metas();
 	}
 	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
+	
+	# nombre de pixels maxi pour calcul de la vignette avec gd
+	define('_IMG_GD_MAX_PIXELS', isset($GLOBALS['meta']['max_taille_vignettes'])?$GLOBALS['meta']['max_taille_vignettes']:0); 
 
 	// supprimer le noyau si on recalcule
 	if (isset($_REQUEST['var_mode']))

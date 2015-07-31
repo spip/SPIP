@@ -362,6 +362,7 @@ ecrire/action/supprimer.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/test_dirs.php -text
 ecrire/action/tester.php -text
+ecrire/action/tester_taille.php -text
 ecrire/action/tourner.php -text
 ecrire/action/virtualiser.php -text
 ecrire/charsets/cp1250.php -text
