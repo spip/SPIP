@@ -73,13 +73,9 @@
 .liste-objets.syndic_articles td .source {display:block;text-align:#GET{right};}
 .liste-objets.syndic_articles td .tags a {color:#666;}
 
-.liste-objets.mots .caption {background-image:url(#CHEMIN_IMAGE{mot-cle-24.gif});padding-#GET{left}:30px;}
-.liste-objets.rubriques .caption {background-image:url(#CHEMIN_IMAGE{rubrique-24.gif});padding-#GET{left}:30px;}
-.liste-objets.articles .caption {background-image:url(#CHEMIN_IMAGE{article-24.gif});padding-#GET{left}:30px;}
-.liste-objets.breves .caption {background-image:url(#CHEMIN_IMAGE{breve-24.gif});padding-#GET{left}:30px;}
-.liste-objets.sites .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
-.liste-objets.syndic_articles .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
-.liste-objets.auteurs .caption {background-image:url(#CHEMIN_IMAGE{auteur-24.gif});padding-#GET{left}:30px;}
+<BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>[
+.liste-objets.[(#VALEUR{table_objet})] .caption {background-image:url((#CHEMIN_IMAGE{#VALEUR{icone_objet}}));padding-#GET{left}:30px;}]</BOUCLE_objets>
+
 .liste-objets.traductions .trad {text-align:center;}
 
 /* dans une colonne laterale, ne visualiser que l'info principale, le statut et l'id */
