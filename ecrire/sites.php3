@@ -192,6 +192,16 @@ if ($redirect AND $redirect_ok == 'oui') {
 
 
 //
+// recalcul
+//
+if ($recalcul ==  "oui") {
+	$result = spip_query ("SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic' AND FIND_IN_SET(syndication, 'oui,off')");
+	if ($result AND mysql_num_rows($result)>0)
+		$erreur_syndic = syndic_a_jour ($id_syndic);
+}
+
+
+//
 // Afficher la page
 //
 
@@ -200,7 +210,7 @@ calculer_droits();
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
 
-while ($row = mysql_fetch_array($result)) {
+if ($row = mysql_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
 	$id_rubrique = $row["id_rubrique"];
 	$nom_site = stripslashes($row["nom_site"]);
@@ -210,6 +220,7 @@ while ($row = mysql_fetch_array($result)) {
 	$syndication = $row["syndication"];
 	$statut = $row["statut"];
 	$date_heure = $row["date"];
+	$date_syndic = $row['date_syndic'];
 	$mod = $row['moderation'];
 }
 
@@ -398,9 +409,10 @@ if ($flag_administrable) {
 
 if ($syndication == "oui" OR $syndication == "off") {
 	echo "<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><b>Ce site est syndiqu&eacute;...</b></font>";
-	if ($recalcul ==  "oui") {
-		syndic_a_jour($id_syndic, true);
-	}
+
+	if ($erreur_syndic)
+		echo "<p><font color=red><b>$erreur_syndic</b></font>";
+
 	if ($syndication == "off") {
 		debut_boite_info();
 		echo "Attention : la syndication de ce site a rencontr&eacute; un probl&egrave;me&nbsp;; ";
@@ -414,6 +426,11 @@ if ($syndication == "oui" OR $syndication == "off") {
 	}
 	afficher_syndic_articles("Articles syndiqu&eacute;s tir&eacute;s de ce site",
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
+
+	// afficher la date de dernier acces a la syndication
+	if ($date_syndic)
+		echo "<br><div align='right'><font size=2>La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le ".affdate($date_syndic)
+		." &agrave; ".heures($date_syndic)."h".minutes($date_syndic)."'".secondes($date_syndic)."\".<br><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>Mettre &agrave; jour maintenant</a>.</div>\n";
 
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {

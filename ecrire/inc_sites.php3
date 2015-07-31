@@ -113,7 +113,7 @@ function analyser_site($url) {
 }
 
 
-function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
+function syndic_a_jour($now_id_syndic, $statut = 'off'){
 
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 	
@@ -180,9 +180,6 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
-			if ($affichage) {
-				echo "<center><b>La syndication de ce site a fonctionn&eacute; correctement.</b></center>";
-			}
 		} 
 		else if (ereg("document\.write", $le_retour)) {
 
@@ -221,15 +218,11 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
-			if ($affichage) {
-				echo "<center><b>La syndication de ce site a fonctionn&eacute; correctement.</b></center>";
-			}
-
 		}
-		else if ($affichage) {
-			echo "<center><b>La syndication a &eacute;chou&eacute;.</b></center>";
-		}
-	}
+		else
+			return "La syndication a &eacute;chou&eacute; : impossible de d&eacute;chiffrer le backend de ce site.";
+	} else
+		return "La syndication a &eacute;chou&eacute; : impossible d'acc&eacute;der au backend de ce site.";
 }
 
 
@@ -509,7 +502,7 @@ function executer_une_syndication() {
 	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
 			$id_syndic = $row["id_syndic"];
-			syndic_a_jour($id_syndic, false, 'sus');
+			syndic_a_jour($id_syndic, 'sus');
 		}
 	}
 }
