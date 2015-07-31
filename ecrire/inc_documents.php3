@@ -122,8 +122,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		for ($i = 0; $i < count($parametres); $i++) {
 			$parametre = $parametres[$i];
 			
-			if (eregi("^left|right|center$", $parametre)) {
-				$align = $parametre;
+			if (eregi("^(left|right|center)$", $parametre)) {
+				$align = strtolower($parametre);
 			}
 			else {
 				$params[] = $parametre;
@@ -131,7 +131,9 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 	}
 
-	if (!($row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document))))) 
+	$s = spip_query("SELECT * FROM spip_documents
+		WHERE id_document = " . intval($id_document));
+	if (!($row = spip_fetch_array($s))) 
 		return '';
 	$id_document = $row['id_document'];
 	$id_type = $row['id_type'];
@@ -208,9 +210,13 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	if ($largeur_vignette < 120) $largeur_vignette = 120;
 	$forcer_largeur = " width = '$largeur_vignette'";
 
-	if ($align != 'center') $float = " style='float: $align;'";
+	if ($align) {
+		$class_align = " spip_documents_".$align;
+		if ($align <> 'center')
+			$float = " style='float: $align;'";
+	}
 
-	$retour .= "<div class='spip_documents spip_documents_$align'$float>\n";
+	$retour .= "<div class='spip_documents$class_align'$float>\n";
 	$retour .= $vignette;
 	
 	if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
@@ -234,7 +240,10 @@ function integre_image($id_document, $align, $type_aff) {
 
 	$id_doublons['documents'] .= ",$id_document";
 
-	if (!($row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document))))) return "";
+	$s = spip_query("SELECT * FROM spip_documents
+		WHERE id_document = " . intval($id_document));
+	if (!($row = spip_fetch_array($s)))
+		return '';
 	$id_document = $row['id_document'];
 	$id_type = $row['id_type'];
 	$titre = typo($row['titre']);
@@ -313,11 +322,23 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 
 	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>
+	if (preg_match(',^(left|center|right)$,i', $align))
+		$align = strtolower($align);
+	else
+		$align = '';
 	if ($align == 'center' OR $type_aff =='DOC') {
 		$span = "div";
 	} else {
 		$span = "span";
 	}
+
+	if ($align) {
+		$class_align = " spip_documents_".$align;
+		if ($align <> 'center')
+			$float = "float: $align; ";
+	}
+
+	$retour .= "<div class='spip_documents$class_align'$float>\n";
 
 	if ($align != 'center') {
 		// Largeur de la div = celle de l'image ; mais s'il y a une legende
@@ -326,11 +347,11 @@ function integre_image($id_document, $align, $type_aff) {
 		if (strlen($txt) AND $width < 120) $width = 120;
 		$width = 'width: '.$width.'px;';
 
-		$style = " style='float: $align; $width'";
+		$style = " style='$float$width'";
 	}
 
 	return
-		"<$span class='spip_documents spip_documents_$align' $style>"
+		"<$span class='spip_documents$class_align'$style>"
 		. $vignette
 		. $txt
 		. "</$span>\n";
