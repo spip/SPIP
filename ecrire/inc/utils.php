@@ -914,7 +914,7 @@ function queue_sleep_time_to_next_job($force=null) {
 		return null;
 	if (!$_SERVER['REQUEST_TIME'])
 		$_SERVER['REQUEST_TIME'] = time();
-	return max(0,$queue_next_job_time-$_SERVER['REQUEST_TIME']);
+	return $queue_next_job_time-$_SERVER['REQUEST_TIME'];
 }
 
 
