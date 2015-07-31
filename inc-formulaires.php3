@@ -43,14 +43,13 @@ function erreur($zetexte){
  	return "<br /><img src='puce$spip_lang_rtl.gif' border='0' alt='-' /> $zetexte";
 }
 
+
 //
 // Retour a l'ecran du lien de confirmation d'une signature de petition
 //
 
-function reponse_confirmation($id_article) {
-	global $val_confirm;
+function reponse_confirmation($id_article, $val_confirm) {
 
-	spip_log("validation petition $id_article ($val_confirm)");
 	include_ecrire("inc_connect.php3");
 	
 	if ($GLOBALS['db_ok']) {
@@ -116,11 +115,10 @@ function reponse_confirmation($id_article) {
 				else {
 					$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
-
 					// invalider les pages de l'article
 					include_ecrire('inc_invalideur.php3');
 					suivre_invalideur("id='id_article/$id_article'");
-
+	
 					$texte .= erreur(_T('form_pet_signature_validee'));
 				}
 			}
@@ -138,6 +136,7 @@ function reponse_confirmation($id_article) {
 
 	// message pour formulaire_signature()
 	define('_REPONSE_CONFIRMATION_SIGNATURE', $texte);
+
 }
 
 //
@@ -146,7 +145,6 @@ function reponse_confirmation($id_article) {
 
 function reponse_signature($id_article) {
 	global $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
-
 	spip_log("signature petition $id_article ($adresse_email)");
 	include_ecrire("inc_connect.php3");
 	
@@ -158,7 +156,7 @@ function reponse_signature($id_article) {
 		// Eviter les doublons
 		$lock = "petition $id_article $adresse_email";
 		if (!spip_get_lock($lock, 5)) {
-			$reponse_signature .= _T('form_pet_probleme_technique');
+			$reponse_signature = _T('form_pet_probleme_technique');
 		}
 		else {
 			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
@@ -259,9 +257,9 @@ function reponse_signature($id_article) {
 		}
 	}
 	else {
-		$reponse_signature .= _T('form_pet_probleme_technique');
+		$reponse_signature = _T('form_pet_probleme_technique');
 	}
-	echo "<div class='reponse_formulaire'><a name='sp$id_article'></a>$reponse_signature</div>";
+	return  "<div class='reponse_formulaire'><a name='sp$id_article'></a>$reponse_signature</div>";
 }
 
 //
@@ -270,6 +268,8 @@ function reponse_signature($id_article) {
 
 function formulaire_signature_normal($id_article, $row_petition) {
 	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_mail.php3");
+
 
 		$id_article = $row_petition['id_article'];
 		$email_unique = $row_petition['email_unique'];
@@ -319,22 +319,28 @@ function formulaire_signature_normal($id_article, $row_petition) {
 	return $retour;
 }
 
+// Aiguillage sur traitement de signature
 
-function formulaire_signature ($id_article, $petition_s) {
+function formulaire_signature($id_article,$petition_s) {
+	lang_select($GLOBALS['spip_lang']); 
 	if ($GLOBALS['val_confirm'])
-		return _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
+		$return= _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
 	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])
-		return reponse_signature($id_article);
+		$return= reponse_signature($id_article);
 	else
 		if ($petition = unserialize($petition_s))
-			return formulaire_signature_normal($id_article,$petition);
+			$return= formulaire_signature_normal($id_article,$petition);
+		else $return='';
+	lang_dselect();
+	return $return;
 }
 
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
 function formulaire_inscription($type) {
-	$request_uri = $GLOBALS["REQUEST_URI"];
-	global $mail_inscription;
-	global $nom_inscription;
+  include_ecrire("inc_mail.php3");
+  lang_select($GLOBALS['spip_lang']);
+
+  global $mail_inscription, $nom_inscription;
 
 	if ($type == 'redac') {
 		if (lire_meta("accepter_inscriptions") != "oui") return;
@@ -351,7 +357,7 @@ function formulaire_inscription($type) {
 		$query = "SELECT * FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'";
 		$result = spip_query($query);
 
-		echo "<div class='reponse_formulaire'>";
+		$res = "<div class='reponse_formulaire'>";
 
 		// l'abonne existe deja.
 	 	if ($row = spip_fetch_array($result)) {
@@ -360,26 +366,25 @@ function formulaire_inscription($type) {
 
 			unset ($continue);
 			if ($statut == '5poubelle')
-				echo "<b>"._T('form_forum_access_refuse')."</b>";
+				$res .= "<b>"._T('form_forum_access_refuse')."</b>";
 			else if ($statut == 'nouveau') {
 				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
 				$continue = true;
 			} else
-				echo "<b>"._T('form_forum_email_deja_enregistre')."</b>";
+				$res .= "<b>"._T('form_forum_email_deja_enregistre')."</b>";
 		} else
 			$continue = true;
 
 		// envoyer identifiants par mail
 		if ($continue) {
-			include_ecrire("inc_mail.php3");
 			include_ecrire("inc_acces.php3");
 			$pass = creer_pass_aleatoire(8, $mail_inscription);
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
-			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass) ".
-				"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')";
-			$result = spip_query($query);
+			spip_query(
+"INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass) ".
+"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();
 
 			$nom_site_spip = lire_meta("nom_site");
@@ -396,33 +401,37 @@ function formulaire_inscription($type) {
 			$message .= "- "._T('form_forum_pass')." $pass\n\n";
 
 			if (envoyer_mail($mail_inscription, "[$nom_site_spip] "._T('form_forum_identifiants'), $message)) {
-				echo _T('form_forum_identifiant_mail');
+			  $res .=  _T('form_forum_identifiant_mail');
 			}
 			else {
-				echo _T('form_forum_probleme_mail');
+				$res .= _T('form_forum_probleme_mail');
 			}
 		}
-		echo "</div>";
+		$res .= "</div>";
 	}
 	else {
-		echo _T('form_forum_indiquer_nom_email');
 
 		$link = new Link;
 		$url = $link->getUrl();
 		$url = quote_amp($url);
-		echo "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n";
-		echo  "<div><b>"._T('form_pet_votre_nom')."</b></div>";
-		echo  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>";
-		echo  "<div><b>"._T('form_pet_votre_email')."</b></div>";
-		echo  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>";
-		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>";
-		echo  "</form>";
+		$res = _T('form_forum_indiquer_nom_email') .
+		  "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n" .
+		  "<div><b>"._T('form_pet_votre_nom')."</b></div>" .
+		  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>" .
+		  "<div><b>"._T('form_pet_votre_email')."</b></div>" .
+		  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>" .
+		  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
+		  "</form>";
 	}
+	lang_dselect();
+	return $res;
 }
 
 
 function formulaire_site($la_rubrique) {
-	$request_uri = $GLOBALS["REQUEST_URI"];
+  include_ecrire("inc_mail.php3");
+  lang_select($GLOBALS['spip_lang']);
+
 	global $nom_site;
 	global $url_site;
 	global $description_site;
@@ -442,37 +451,37 @@ function formulaire_site($la_rubrique) {
 		}
 
 		// Integrer a la base de donnees
-		echo "<div class='reponse_formulaire'>";
 		
 		if ($refus !="oui"){
 			$nom_site = addslashes($nom_site);
 			$url_site = addslashes($url_site);
 			$description_site = addslashes($description_site);
 			
-			$query = "INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
-				"VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')";
-			$result = spip_query($query);
-			echo _T('form_prop_enregistre');
+			spip_query("INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
+				   "VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')");
+			$res =  _T('form_prop_enregistre');
 		}
 		else {
-			echo $reponse_signature;
-			echo "<p> "._T('form_prop_non_enregistre');
+			$res = $reponse_signature .
+			  "<p> "._T('form_prop_non_enregistre') . "</p>";
 		}
 		
-		echo "</div>";
+		$res = "<div class='reponse_formulaire'>$res</div>";
 	}
 	else {
 		$link = $GLOBALS['clean_link'];
-		echo $link->getForm('POST');
-		echo  "<P><div class='spip_encadrer'><B>"._T('form_prop_nom_site')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_site\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<P><B>"._T('form_prop_url_site')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"url_site\" VALUE=\"\" SIZE=\"30\"></div>";
-		echo  "<P><B>"._T('form_prop_description')."</B><BR>";
-		echo "<TEXTAREA NAME='description_site' ROWS='5' CLASS='forml' COLS='40' wrap=soft></textarea>";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
-		echo  "</DIV></FORM>";
+		$res = $link->getForm('POST') .
+		  "<p><div class='spip_encadrer'><b>"._T('form_prop_nom_site')."</b><br />" .
+		  "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"30\">" .
+		  "</p><p><b>"._T('form_prop_url_site')."</b></p><br />" .
+		  "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"\" size=\"30\"></div>" .
+		  "<p><b>"._T('form_prop_description')."</b></p><br />" .
+		  "<textarea name='description_site' rows='5' class='forml' cols='40' wrap=soft></textarea>" .
+		  "<div align=\"right\"><input type=\"submit\" name=\"valider\" class=\"spip_bouton\" value=\""._t('bouton_valider')."\">" .
+		  "</div></form>";
 		}
+	lang_dselect();
+	return $res;
 }
 
 function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
@@ -482,6 +491,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_mail.php3");
 
+	lang_select($GLOBALS['spip_lang']);
 	$affiche_formulaire = true;
 	if ($GLOBALS['texte_message_auteur'.$id_auteur]) {
 		if ($GLOBALS['sujet_message_auteur'.$id_auteur] == "")
@@ -497,37 +507,48 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$erreur .= erreur(_T('form_prop_message_envoye'));
 			$affiche_formulaire = false;
 		} else { //preview
-			echo "<br /><div class='spip_encadrer'>"._T('form_prop_sujet')." <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
+			$res = "<br /><div class='spip_encadrer'>"._T('form_prop_sujet')." <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
 			if ($flag_wordwrap)
 				$GLOBALS['texte_message_auteur'.$id_auteur] = wordwrap($GLOBALS['texte_message_auteur'.$id_auteur]);
-			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
+			$res .= "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
 			$affiche_formulaire = false;
 			$link = $GLOBALS['clean_link'];
 			$link->addVar('email_message_auteur'.$id_auteur, $GLOBALS['email_message_auteur'.$id_auteur]);
 			$link->addVar('sujet_message_auteur'.$id_auteur, $GLOBALS['sujet_message_auteur'.$id_auteur]);
 			$link->addVar('texte_message_auteur'.$id_auteur, $GLOBALS['texte_message_auteur'.$id_auteur]);
 			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');
-			echo $link->getForm('post');
-			echo "<div align=\"right\"><input type=\"submit\" name=\"Confirmer\" class=\"spip_bouton\" value=\""._T('form_prop_confirmer_envoi')."\" />";
-			echo "</div></form>";
+			$res .= $link->getForm('post') .
+			  "<div align=\"right\"><input type=\"submit\" name=\"Confirmer\" class=\"spip_bouton\" value=\""._T('form_prop_confirmer_envoi')."\" />" .
+			  "</div></form>";
 		}
 	}
 
 	if ($erreur)
-		echo "<div class='spip_encadrer'><b>$erreur<br />&nbsp;</b></div>\n";
+		$res = "<div class='spip_encadrer'><b>$erreur<br />&nbsp;</b></div>\n";
 
 	if ($affiche_formulaire) {
 		$retour = $GLOBALS['REQUEST_URI'];
 		$link = $GLOBALS['clean_link'];
-		echo $link->getForm('post');
-		echo "<div class='spip_encadrer'><b>"._T('form_pet_votre_email')."</b><br />";
-		echo  "<input type=\"text\" class=\"forml\" name=\"email_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\" />\n";
-		echo  "<p><b>"._T('form_prop_sujet')."</b><br />";
-		echo  "<input type=\"text\" class=\"forml\" name=\"sujet_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\" /></p>\n";
-		echo  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></p>\n";
-		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" /></div>";
-		echo  "</div></form>";
+		$res .= $link->getForm('post') .
+		  "<div class='spip_encadrer'><b>"._T('form_pet_votre_email')."</b><br />" .
+		  "<input type=\"text\" class=\"forml\" name=\"email_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\" />\n" .
+		  "<p><b>"._T('form_prop_sujet')."</b><br />" .
+		  "<input type=\"text\" class=\"forml\" name=\"sujet_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\" /></p>\n" .
+		  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></p>\n" .
+		  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" /></div>" .
+		  "</div></form>";
 	}
+	lang_dselect();
+	return $res;
+}
+
+function formulaire_admin() {
+  if (!$GLOBALS['flag_preserver'] && ($GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
+    include_local('inc-admin.php3');
+    global $page, $cle, $fraicheur;
+    return afficher_boutons_admin($page, $cle, $fraicheur);
+  }
+  return '';
 }
 
 ?>
