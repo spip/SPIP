@@ -59,6 +59,12 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	$texte = filtrer_entites($texte);
 	$sujet = filtrer_entites($sujet);
 
+	// fignoler ce qui peut l'etre...
+	if ($charset <> 'utf-8') {
+		$texte = str_replace("&#8217;", "'", $texte);
+		$sujet = str_replace("&#8217;", "'", $sujet);
+	}
+
 	// encoder le sujet si possible selon la RFC
 	if($GLOBALS['flag_multibyte'] AND @mb_internal_encoding($charset))
 		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
@@ -150,7 +156,7 @@ function envoyer_mail_publication($id_article) {
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $connect_nom))."\n\n\n";
-			$courr = filtrer_entites($courr) . extrait_article($row);
+			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
 			// reinstalle la langue utilisateur (au cas ou)
@@ -181,7 +187,7 @@ function envoyer_mail_proposition($id_article) {
 			$courr .= _T('info_propose_4')."\n";
 			$courr .= _T('info_propose_5')."\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
-			$courr = filtrer_entites($courr) . extrait_article($row);
+			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
 			changer_langue($lang_utilisateur);
