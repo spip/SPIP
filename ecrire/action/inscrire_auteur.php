@@ -264,8 +264,10 @@ function tester_statut_inscription($statut_tmp){
 	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $statut_tmp : '');
 
 	default:
-	  if ($statut_tmp AND $statut_tmp == addslashes($statut_tmp))
-	    return $statut_tmp;
+	  if ($statut_tmp AND $statut_tmp == addslashes($statut_tmp)){
+		  include_spip("inc/autoriser");
+		  return autoriser("inscrireauteur",$statut_tmp)?$statut_tmp:"";
+	  }
 	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
 	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
 	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
