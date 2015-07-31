@@ -26,6 +26,8 @@ if (@is_readable(_CACHE_PLUGINS_FCT)) {
 	// chargement optimise precompile
 	include_once(_CACHE_PLUGINS_FCT);
 }
+if (test_espace_prive ())
+	include_spip('inc/filtres_ecrire');
 
 # Determine le squelette associe a une requete 
 # et l'applique sur le contexte, le nom du cache et le serveur
