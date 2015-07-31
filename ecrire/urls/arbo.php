@@ -536,8 +536,12 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		if ($type)
 			$entite =  ($type == 'syndic') ?  'site' : $type;
 		else {
-			$entite = '404';
-			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
+			// Si ca ressemble a une URL d'objet, ce n'est pas la home
+			// et on provoque un 404
+			if (preg_match(',^[^\.]+(\.html)?$,', $url)) {
+				$entite = '404';
+				$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
+			}
 		}
 	}
 	define('_SET_HTML_BASE',1);
