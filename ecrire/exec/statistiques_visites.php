@@ -45,23 +45,6 @@ function http_img_rien($width, $height, $class='', $title='') {
 		. (!$title ? '' : (" title=\"$title\"")));
 }
 
-// pondre les stats sous forme d'un fichier csv tres basique
-// http://doc.spip.org/@statistiques_csv
-function statistiques_csv($id) {
-
-	$filename = 'stats_'.($id ? 'article'.$id : 'total').'.csv';
-	header('Content-Type: text/csv');
-	header('Content-Disposition: attachment; filename='.$filename);
-	
-	if ($id)
-		$s = sql_select("date, visites", "spip_visites_articles", "id_article=$id", "", "date");
-	else
-		$s = sql_select("date, visites", "spip_visites", "", "", "date");
-	while ($t = sql_fetch($s)) {
-		echo $t['date'].";".$t['visites']."\n";
-	}
-}
-
 // http://doc.spip.org/@exec_statistiques_visites_dist
 function exec_statistiques_visites_dist()
 {
@@ -74,12 +57,20 @@ function exec_statistiques_visites_dist()
 	if ($limit == 0) $limit = 100;
 
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
-	  include_spip('inc/minipres');
-	  echo minipres();
+		include_spip('inc/minipres');
+		echo minipres();
 	} else {
-		if (_request('format') == 'csv')
-			statistiques_csv($id_article);
-		else exec_statistiques_visites_args($id_article, $aff_jours, $limit);
+		if (_request('format') != 'csv')
+			exec_statistiques_visites_args($id_article, $aff_jours, $limit);
+		else {
+			include_spip('public/assembler');
+			$fond = 'prive/transmettre/'
+			 .  (_request('table')=='visites' ? 'statistiques' : 'signatures');
+			if (!$id_article)
+				$page = envoyer_page($fond, array());
+			else envoyer_page($fond . "_article", 
+				array('id_article' => $id_article));
+		} 
 	}
 }
 
@@ -226,7 +217,6 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 
 	echo debut_droite('', true);
 
-	$mode = statistiques_mode(self());
 	if ($id_article) {
 			$table = "spip_visites_articles";
 			$table_ref = "spip_referers_articles";
@@ -256,11 +246,11 @@ function exec_statistiques_visites_args($id_article, $aff_jours, $limit)
 
 			echo statistiques_par_mois(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date"), $last);
 		}
-		echo fin_cadre_relief(true), $mode;
+		echo fin_cadre_relief(true), statistiques_mode('visites');
 	}
 
 	if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article")) {
-		echo statistiques_signatures($aff_jours, $id_article, $mode, $n);
+		echo statistiques_signatures($aff_jours, $id_article, statistiques_mode('signatures'), $n);
 	}
 
 	$r = sql_select("referer, referer_md5, visites AS vis", $table_ref, $where, "", "vis DESC", $limit);
@@ -439,7 +429,7 @@ function statistiques_tous($log, $date_premier, $last, $total_absolu, $val_popul
 // Le bouton pour CSV et pour passer de svg a htm
 
 // http://doc.spip.org/@statistiques_mode
-function statistiques_mode($lui)
+function statistiques_mode($table)
 {
 	if (flag_svg()) {
 		$lien = 'non'; $alter = 'HTML';
@@ -447,10 +437,15 @@ function statistiques_mode($lui)
 		$lien = 'oui'; $alter = 'SVG';
 	}
 
+	$lui = self();
+	$csv = parametre_url(parametre_url($lui, 'table', $table), 'format', 'csv');
+
 	return "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . ";' class='verdana1 spip_x-small'>"
-		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>$alter</a>" 
-		. " | <a href='"
-	  	. parametre_url($lui, 'format', 'csv')."'>CSV</a>"
+		. "<a href='". parametre_url($lui, 'var_svg', $lien)."'>"
+		. $alter
+		. "</a> | <a href='"
+		. $csv
+	  	. "'>CSV</a>"
 		. "</div>\n";
 }
 

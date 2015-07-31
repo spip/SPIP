@@ -1,0 +1,9 @@
+#HTTP_HEADER{Content-Type: text/csv; charset=#CHARSET}
+#HTTP_HEADER{Content-Disposition: attachment; filename=signature#ID_ARTICLE.csv}
+<BOUCLE0(ARTICLES){id_article}><B1>#TOTAL_BOUCLE <:info_signatures:> <:info_pour:>  #TITRE;
+<:nom:>;<:email:>
+<BOUCLE1(SIGNATURES){id_article}{par nom_email}>#NOM_EMAIL;#AD_EMAIL
+</BOUCLE1></BOUCLE0>
+
+
+
