@@ -274,6 +274,7 @@ ecrire/inc_headers.php -text
 ecrire/inc_lang_liste.php -text
 ecrire/inc_magicquotes.php -text
 ecrire/inc_mini_nav.php -text
+ecrire/inc_minipres.php -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text

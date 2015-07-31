@@ -15,19 +15,17 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 	include ("inc_version.php3");
 }
 
-include_ecrire('inc_meta.php3');
-include_ecrire('inc_cookie.php');
-include_ecrire("inc_auth.php3");
+include_ecrire('inc_auth.php3');
+include_ecrire("inc_minipres.php"); // choisit la langue
+include_ecrire('inc_admin.php3');
 include_ecrire("inc_presentation.php3");
+include_ecrire('inc_cookie.php');
 include_ecrire("inc_calendrier.php");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
-include_ecrire("inc_forum.php3");
-include_ecrire('inc_admin.php3');
-
 
 //
 // Preferences de presentation
@@ -184,30 +182,6 @@ if (!$adresse_site) {
 	ecrire_metas();
 }
 
-
-function tester_rubrique_vide($id_rubrique) {
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
-	if ($n > 0) return false;
-
-	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
-	if ($n > 0) return false;
-
-	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
-	if ($n > 0) return false;
-
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
-	if ($n > 0) return false;
-
-	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 1";
-	list($n) = spip_fetch_array(spip_query($query));
-	if ($n > 0) return false;
-
-	return true;
-}
 
 
 //

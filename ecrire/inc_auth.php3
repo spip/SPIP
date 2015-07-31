@@ -60,11 +60,8 @@ function auth() {
 	//
 	if (!$GLOBALS['db_ok']) {
 		spip_log("Erreur base de donnees");
-		include_ecrire('inc_presentation.php3');
-		install_debut_html(_T('info_travaux_titre'));
-		echo _T('titre_probleme_technique');
-		echo "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";
-		install_fin_html();
+		include_ecrire('inc_minipres.php');
+		install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
 		exit;
 	}
 
@@ -215,15 +212,9 @@ function auth() {
 		// mais il n'existe pas dans la table auteur. Cause possible,
 		// notamment, une restauration de base de donnees dans laquelle
 		// il n'existe pas.
-		include_ecrire('inc_presentation.php3');
+		include_ecrire('inc_minipres.php');
 		include_ecrire('inc_texte.php3');
-		install_debut_html(_T('avis_erreur_connexion'));
-		echo "<br><br><p>".
-		  _T('texte_inc_auth_1', array('auth_login' => $auth_login)).
-		  " <a href='" .
-		  _DIR_LOGIN . "spip_cookie.php3?logout=$auth_login'>".
-                _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');
-		install_fin_html();
+		install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  _DIR_LOGIN . "spip_cookie.php3?logout=$auth_login'>", _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');install_fin_html();
 		exit;
 	}
 

@@ -97,9 +97,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. "</b></font><br />"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
-		include_ecrire('inc_presentation.php3');
-		include_ecrire('inc_lang.php3');
-		utiliser_langue_visiteur();
+		include_ecrire('inc_minipres.php');
 		$retour .= aide('erreur_mysql');
 		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
 	}

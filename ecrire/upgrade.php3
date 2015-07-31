@@ -18,27 +18,23 @@ if (!_FILE_CONNECT) {
 	exit;
  }
 
-include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_auth.php3");
 include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_minipres.php");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
-
-include_ecrire ("inc_lang.php3");
-utiliser_langue_visiteur();
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
 
 	@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
-	install_debut_html(_T('titre_page_upgrade'));
-	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
-	echo _T('texte_nouvelle_version_spip_2');
-
 	$link = new Link();
+
+	install_debut_html(_T('titre_page_upgrade')); echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
+	echo _T('texte_nouvelle_version_spip_2');
 	echo "<p><div align='right'>";
 	echo $link->getForm('GET');
 	echo "<input type='submit' name='submit' value=\""._T('bouton_relancer_installation')."\" class='fondl'>";

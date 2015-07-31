@@ -22,7 +22,6 @@ define("_ECRIRE_INC_SPIP_IMAGE", "1");
 
 // faudrait ne charger qu'a bon escient
 
-include_ecrire('inc_presentation.php3');# regler la langue en cas d'erreur
 include_ecrire('inc_getdocument.php3');	# diverses fonctions de ce fichier
 include_ecrire("inc_charsets.php3");	# pour le nom de fichier
 include_ecrire("inc_meta.php3");	# ne pas faire confiance au cache
@@ -543,7 +542,7 @@ function spip_image_autoriser_dist($id_document)
       $file = $file['fichier'];
     }
   }
-      spip_log("ici $file");
+
 if (!$auth_login && !$refus) { 
     if (!spip_num_rows(spip_query("select articles.id_article
 from spip_documents_articles as rel_articles, spip_articles as articles 

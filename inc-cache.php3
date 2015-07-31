@@ -216,7 +216,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 				if (!spip_interdire_cache) {
 					spip_log("Erreur base de donnees & "
 					. "impossible utiliser $chemin_cache");
-					include_ecrire('inc_presentation.php3');
+					include_ecrire('inc_minipres.php');
 					install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
 				}
 			}

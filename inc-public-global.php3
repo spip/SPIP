@@ -258,7 +258,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 	if ($var_preview AND !$flag_preserver) {
-		include_ecrire('inc_presentation.php3');
+		include_ecrire('inc_minipres.php');
 		$page['texte'] .= afficher_bouton_preview();
 	}
 

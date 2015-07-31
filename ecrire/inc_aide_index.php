@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 
-include_ecrire ("inc_presentation.php3");
+include_ecrire ("inc_minipres.php");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_layer.php3");
 include_ecrire ("inc_texte.php3");
@@ -48,11 +48,7 @@ function help_frame ($aide) {
 
 // Erreur aide non disponible
 function erreur_aide_indisponible() {
-	include_ecrire('inc_presentation.php3');
-	install_debut_html(_T('forum_titre_erreur'));
-	echo "<div>"._T('aide_non_disponible')."</div>";
-	echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
-	install_fin_html();
+	install_debut_html(_T('forum_titre_erreur')); echo "<div>"._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>";install_fin_html();
 	exit;
 }
 
