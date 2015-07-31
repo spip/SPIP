@@ -32,7 +32,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	display: block;
 	margin: 0px;
 	padding: 0px;
-	padding-top: 6px;
+	padding-top: 0px;
 	background: url(img_pack/rayures-fines.gif);
 	border-bottom: 1px solid #333333;
 }
@@ -40,9 +40,9 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	display: block;
 	margin: 0px;
 	padding: 0px;
-	padding-top: 3px;
 	background-color: #f1f1f1;
 	border-bottom: 1px solid black;
+	border-top: 1px solid #aaaaaa;
 }
 .bandeau-icones {
 	display: block;
@@ -63,13 +63,12 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 }
 .bandeau-icones .separateur {
 	vertical-align: center;
-	height: 90%;
-	width: 2px;
+	height: 100%;
+	width: 11px;
 	padding: 0px;
-	margin: 2px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 0px;
 	background: url(img_pack/tirets-separation.gif);
+	background-position: 5px 0px;
 }
 
 /* Icones 48 * 48 et 24 * 24 */
@@ -86,7 +85,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	text-decoration: none;
 }
 .cellule36 {
-	font-size: 11px;
+	font-size: 10px;
 }
 .cellule48 {
 	font-size: 12px;
@@ -145,7 +144,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
-	font-size: 12px;
+	font-size: 10px;
 }
 .cellule-texte a, .cellule-texte a:hover {
 	text-decoration: none;
