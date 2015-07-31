@@ -595,9 +595,9 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	return $p;
 }
 
-// N'afficher que les ancres de la pagination (au-dessus, par exemple, alors
+// N'afficher que l'ancre de la pagination (au-dessus, par exemple, alors
 // qu'on mettra les liens en-dessous de la liste paginee)
-function balise_ANCRES_PAGINATION_dist($p) {
+function balise_ANCRE_PAGINATION_dist($p) {
 	$p = balise_PAGINATION_dist($p, $liste='false');
 	return $p;
 }

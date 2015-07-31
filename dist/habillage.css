@@ -1,30 +1,31 @@
-/*  ---------------------------------------------------------------- */
-/*  Feuilles de styles des squelettes par defaut pour SPIP 1.9 beta  */
-/*  ---------------------------------------------------------------- */
+/*  ----------------------------------------------------------- */
+/*  Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
+/*  ----------------------------------------------------------- */
 
 /* taille typo
- * Base              100% 
+ * Base              100%
  * -------------------------------------
  * 20px             1.27em
  * 19px             1.21em
- * 18px             1.15em	
- * 17px             1.09em 
- * 16px             1.03em  
- * 15px              0.96em  
- * 14px              0.88em  
- * 13px              0.82em  
- * 12px              0.77em  
+ * 18px             1.15em
+ * 17px             1.09em
+ * 16px             1.03em
+ * 15px              0.96em
+ * 14px              0.88em
+ * 13px              0.82em
+ * 12px              0.77em
  * 11px              0.71em
  * 10px              0.65em
  *  9px              0.59em
- * attention en dessous de 0.71em le texte devient illisible en text smallest sur ie
+ * attention en dessous de 0.71em le texte devient illisible
+ * en text smallest sur ie
  */
 
 /*  ------------------------------------------
 /*  Correction des styles HTML par defaut
 /*  ------------------------------------------ */
-body { 
-	background: #FFF; 
+body {
+	background: #FFF;
 	margin: 1.5em;
 	text-align: center;
 	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
@@ -33,7 +34,8 @@ body {
 }
 
 img, table { margin: 0; padding: 0; border: 0; }
-ul, ol, li { margin: 0; padding: 0; list-style: none; }
+ul, ol, li { margin: 0; padding: 0; }
+ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
 /*  ------------------------------------------
@@ -47,13 +49,13 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 }
 
 #conteneur { width: 100%; } /* Particularisme IE/PC */
-	
-#conteneur #contenu { 
-	float: left; 
+
+#conteneur #contenu {
+	float: left;
 	width: 33em;
 }
 
-#conteneur #navigation { 
+#conteneur #navigation {
 	float: right;
 	width: 12em;
 	text-align: center;
@@ -61,13 +63,13 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /*  Blocs du contenu (c-a-d. la colonne principale)
 ---------------------------------------------- */
-#contenu .contre-encart { 
+#contenu .contre-encart {
 	float: left;
 	width: 21em;
 }
 
-#contenu .encart { 
-	float: right; 
+#contenu .encart {
+	float: right;
 	width: 11em;
 	margin: 0;
 	margin-bottom: 1em;
@@ -90,11 +92,11 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #hierarchie {
 	clear: both;
 	margin-bottom: 16px;
-	border-top: 2px solid #333333;	
+	border-top: 2px solid #333333;
 	font-size: 0.77em; }
 
 /* * Pied de page */
-#pied { 
+#pied {
 	clear: both;
 	width: 100%;
 	margin-top: 4em;
@@ -109,15 +111,15 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /*  Habillage general des menus de navigation
 ---------------------------------------------- */
-.rubriques, .breves, .syndic, .forums, .divers { 
-	text-align: left; 
-	border: 1px solid #CCCCCC; 
+.rubriques, .breves, .syndic, .forums, .divers {
+	text-align: left;
+	border: 1px solid #CCCCCC;
 	margin-bottom: 1em;
 	min-width: 10em;
 	font-size: 0.77em;
 }
-	
-.rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre { 
+
+.rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre {
 	padding: 3px 4px 2px 4px;
 	border-bottom: 1px dotted #CCCCCC;
 	text-align: center;
@@ -126,14 +128,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 }
 
 .rubriques p, .breves p, .syndic p, .forums p, .divers p { margin: 2px 4px; }
-	
-.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { 
+
+.rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul {
 	display: block;
 	padding: 2px 0;
 	padding-right: 0.7em;
 }
-	
-.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding-left: 0.7em; } 
+
+.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding-left: 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
@@ -161,9 +163,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .cartouche { margin-bottom: 2em; }
 .cartouche small { font-size: 0.71em; }
 
-.cartouche .titre { 
-	font-size: 1.27em; 
-	font-weight: bold; 
+.cartouche .titre {
+	font-size: 1.27em;
+	font-weight: bold;
 	color: #000; }
 
 .cartouche .spip_logos {
@@ -177,15 +179,15 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .cartouche .traductions p { float: left; }
 .cartouche .traductions li { float: left; margin-left: 1em; }
 
-#contenu .surtitre, #contenu .soustitre { 
-	font-size: 0.82em; 
-	font-variant: small-caps; 
+#contenu .surtitre, #contenu .soustitre {
+	font-size: 0.82em;
+	font-variant: small-caps;
 	font-family: Georgia, Garamond, Times, serif; }
 
 
 /*  Mise en forme des textes du contenu
 ---------------------------------------------- */
-.chapo { 
+.chapo {
 	margin-bottom: 1.5em;
 	font-weight: bold;
 	line-height: 1.4em; }
@@ -198,7 +200,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	border: 1px solid #CCCCCC;
 	font-size: 0.82em;
 	font-weight: bold; }
-	
+
 .texte { color: #000; font-size: 0.96em; }
 
 .ps, .notes {
@@ -236,10 +238,10 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ----------------------------------------------- */
 .extrait { margin-bottom: 1em; }
 
-.extrait .titre { 
-	font-size: 1.03em; 
+.extrait .titre {
+	font-size: 1.03em;
 	font-weight: bold; }
-	
+
 .extrait .spip_logos {
 	float: right;
 	margin-left: 16px;
@@ -247,23 +249,23 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: right; }
 
 .extrait p { margin: 0; padding: 0; }
-	
-.extrait .enclosures { 
+
+.extrait .enclosures {
 	float: right;
 	text-align: right;
-	max-width: 60%; 
+	max-width: 60%;
 	margin: 0; }
-	
-.extrait small { 
-	display: block; 
+
+.extrait small {
+	display: block;
 	font-size: 0.71em; }
-	
-.extrait .texte { 
+
+.extrait .texte {
 	margin-top: 5px;
-	margin-bottom: 2em; 
-	border: 1px solid #CCCCCC; 
-	padding: 0.9em; 
-	font-size: 0.82em; 
+	margin-bottom: 2em;
+	border: 1px solid #CCCCCC;
+	padding: 0.9em;
+	font-size: 0.82em;
 	line-height: 1.4em; }
 
 .pagination { font-size: 0.71em; margin-top: 0; padding-top: 0; }
@@ -279,14 +281,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	background: #e0ffe0;
 	border: 1px solid #CCCCCC;
 	padding: 0.5em;
-	margin-bottom: 1em; 
-	font-weight: bold; 
+	margin-bottom: 1em;
+	font-weight: bold;
 	text-align: center; }
-	
-#page_plan #contenu .contre-encart ul { 
-	display: block; 
-	clear: left; 
-	margin-left: 1em; 
+
+#page_plan #contenu .contre-encart ul {
+	display: block;
+	clear: left;
+	margin-left: 1em;
 	margin-bottom: 1em;
 	list-style: square; }
 #page_plan #contenu .contre-encart li { list-style: inherit; }
