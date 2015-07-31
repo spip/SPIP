@@ -504,8 +504,8 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 
 	if (($type_inclus == "embed"  #meme pour le MP3 : "l x h pixels"? 
 	OR $type_inclus == "image")
-	    AND $document['largeur']
-	    AND $document['hauteur']) {
+	    AND ($document['largeur'] * $document['hauteur']
+	    OR $document['distant'] == 'oui')) {
 		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5'>";
 		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5'> "._T('info_pixels');
