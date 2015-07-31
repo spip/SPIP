@@ -102,4 +102,16 @@ function creer_repertoire($base, $subdir) {
 	return sous_repertoire($base, $subdir, true);
 }
 
+// http://doc.spip.org/@parse_plugin_xml
+function parse_plugin_xml($texte, $clean=true){
+	include_spip('inc/xml');
+	return spip_xml_parse($texte,$clean);
+}
+
+// http://doc.spip.org/@applatit_arbre
+function applatit_arbre($arbre,$separateur = " "){
+	include_spip('inc/xml');
+	return spip_xml_aplatit($arbre,$separateur);
+}
+
 ?>
