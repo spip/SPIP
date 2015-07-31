@@ -106,7 +106,7 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
-		$id_message = spip_abstract_insert('spip_forum', 
+		$id_message = spip_abstract_insert('forum', 
 					  "(date_heure, titre, ip, statut)",
 					  "(NOW(), '".addslashes($titre)."', '$REMOTE_ADDR', 'redac')");
 
