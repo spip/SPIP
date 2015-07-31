@@ -193,6 +193,7 @@ function rss_suivi_versions($a) {
 
 // Suivi des forums
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
+	$rss = array();
 	include_ecrire("inc_forum.php3");
 
 	$result_forum = spip_query("
@@ -302,6 +303,7 @@ function rss_a_suivre($a) {
 }
 
 function rss_articles($critere) {
+	$rss = array();
 	$s = spip_query("SELECT * FROM spip_articles WHERE $critere
 	ORDER BY date DESC LIMIT 0,10");
 	while ($t = spip_fetch_array($s)) {
@@ -330,6 +332,7 @@ function rss_articles($critere) {
 
 
 function rss_breves($critere) {
+	$rss = array();
 	$s = spip_query("SELECT * FROM spip_breves WHERE $critere
 	ORDER BY date_heure DESC LIMIT 0,10");
 	while ($t = spip_fetch_array($s)) {
@@ -350,6 +353,7 @@ function rss_breves($critere) {
 
 
 function rss_sites($critere) {
+	$rss = array();
 	$s = spip_query("SELECT * FROM spip_syndic WHERE $critere
 	ORDER BY date DESC LIMIT 0,10");
 	while ($t = spip_fetch_array($s)) {

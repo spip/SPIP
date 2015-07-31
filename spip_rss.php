@@ -35,8 +35,7 @@ else
 spip_timer('rss');
 if (!verifier_low_sec ($id, $cle,
 "rss $op $args"
-)
-OR ($a['id_auteur']>0 AND $id<>$a['id_auteur'])) {
+)) {
 	$op = 'erreur securite';
 	unset($a);
 } else {

@@ -82,7 +82,12 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
 }
 
+//
+// Securite
+//
 
+// Ne pas se faire manger par un bug php qui laisse passer ?GLOBALS[truc]=toto
+if (isset($_REQUEST['GLOBALS'])) die();
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
 // la commande file_exists('chemin/vers/fichier/interdit%00truc_normal')
@@ -116,10 +121,8 @@ unset($_GET['spip_recursions']);
 unset($_POST['spip_recursions']);
 unset($_COOKIE['spip_recursions']);
 unset($GLOBALS['spip_recursions']);
-
 // Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 @set_magic_quotes_runtime(0);
-
 
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
 // A remplacer (un jour!) par une gestion propre des variables admissibles ;-)
