@@ -221,7 +221,7 @@ function _sqlite_func_regexp_match($cherche, $quoi) {
 
 // http://doc.spip.org/@_sqlite_func_strftime
 function _sqlite_func_strftime($date, $conv){
-	return strftime($conv, $date);	
+	return strftime($conv, is_int($date)?$date:strtotime($date));
 }
 
 // http://doc.spip.org/@_sqlite_func_to_days
