@@ -205,6 +205,9 @@ function import_objet_1_2($f, $gz=false) {
 	else if ($type == 'mot') {
 		mysql_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
 		mysql_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
+		mysql_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_objet");
+		mysql_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_objet");
+		mysql_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_objet");
 	}
 	else if ($type == 'auteur') {
 		mysql_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
@@ -284,6 +287,12 @@ function import_objet_0_0($f, $gz=false) {
 		mysql_query($query);
 		$query = "DELETE FROM spip_mots_breves WHERE id_mot=$id_mot";
 		mysql_query($query);
+		$query = "DELETE FROM spip_mots_forum WHERE id_mot=$id_mot";
+		mysql_query($query);
+		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot";
+		mysql_query($query);
+		$query = "DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot";
+		mysql_query($query);
 		if ($articles) {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {
@@ -295,6 +304,13 @@ function import_objet_0_0($f, $gz=false) {
 			reset ($breves);
 			while (list(, $breve) = each($breves)) {
 				$query = "INSERT spip_mots_breves (id_mot, id_breve) VALUES ($id_mot, $breve)";
+				mysql_query($query);
+			}
+		}
+		if ($forums) {
+			reset ($forums);
+			while (list(, $forum) = each($forums)) {
+				$query = "INSERT spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
 				mysql_query($query);
 			}
 		}

@@ -101,6 +101,24 @@ function export_objets($result, $type, $file = 0, $gz = false) {
 				$string .= '<lien:breve>' . $row2[0] . '</lien:breve>' . "\n";
 			}
 			mysql_free_result($res2);
+			$query = 'SELECT id_forum FROM spip_mots_forum WHERE id_mot='.$row['id_mot'];
+			$res3 = mysql_query($query);
+			while($row3 = mysql_fetch_array($res3)) {
+				$string .= '<lien:forum>' . $row3[0] . '</lien:forum>' . "\n";
+			}
+			mysql_free_result($res3);
+			$query = 'SELECT id_rubrique FROM spip_mots_rubriques WHERE id_mot='.$row['id_mot'];
+			$res4 = mysql_query($query);
+			while($row4 = mysql_fetch_array($res4)) {
+				$string .= '<lien:rubrique>' . $row4[0] . '</lien:rubrique>' . "\n";
+			}
+			mysql_free_result($res4);
+			$query = 'SELECT id_syndic FROM spip_mots_syndic WHERE id_mot='.$row['id_mot'];
+			$res4 = mysql_query($query);
+			while($row4 = mysql_fetch_array($res4)) {
+				$string .= '<lien:syndic>' . $row4[0] . '</lien:syndic>' . "\n";
+			}
+			mysql_free_result($res4);
 		}
 		$string .= build_end_tag($type) . "\n\n";
 		if ($file) {
