@@ -43,7 +43,9 @@ function balise_URL_ARTICLE_dist($p) {
 // http://doc.spip.org/@balise_URL_AUTEUR_dist
 function balise_URL_AUTEUR_dist($p) {
 
-	$p->code = generer_generer_url('auteur', $p);
+	$code = generer_generer_url('auteur', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -51,7 +53,9 @@ function balise_URL_AUTEUR_dist($p) {
 // http://doc.spip.org/@balise_URL_RUBRIQUE_dist
 function balise_URL_RUBRIQUE_dist($p) {
 
-	$p->code = generer_generer_url('rubrique', $p);
+	$code = generer_generer_url('rubrique', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -59,7 +63,9 @@ function balise_URL_RUBRIQUE_dist($p) {
 // http://doc.spip.org/@balise_URL_BREVE_dist
 function balise_URL_BREVE_dist($p) {
 
-	$p->code = generer_generer_url('breve', $p);
+	$code = generer_generer_url('breve', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -67,7 +73,9 @@ function balise_URL_BREVE_dist($p) {
 // http://doc.spip.org/@balise_URL_MOT_dist
 function balise_URL_MOT_dist($p) {
 
-	$p->code = generer_generer_url('mot', $p);
+	$code = generer_generer_url('mot', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -75,7 +83,9 @@ function balise_URL_MOT_dist($p) {
 // http://doc.spip.org/@balise_URL_FORUM_dist
 function balise_URL_FORUM_dist($p) {
 
-	$p->code = generer_generer_url('forum', $p);
+	$code = generer_generer_url('forum', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -83,16 +93,12 @@ function balise_URL_FORUM_dist($p) {
 // http://doc.spip.org/@balise_URL_DOCUMENT_dist
 function balise_URL_DOCUMENT_dist($p) {
 
-	$p->code = generer_generer_url('document', $p);
+	$code = generer_generer_url('document', $p);
+	if ($code === NULL) return NULL;
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
-
-# URL_SITE est une donnee "brute" tiree de la base de donnees
-# URL_SYNDIC correspond a l'adresse de son backend.
-# Il n'existe pas de balise pour afficher generer_url_site($id_syndic),
-# a part [(#ID_SYNDIC|generer_url_site)]
-
 
 //
 // #URL_PAGE{backend} -> backend.php3 ou ?page=backend selon les cas
