@@ -310,7 +310,7 @@ function calcul_exposer ($id, $type, $reference) {
 	}
 
 	// And the winner is...
-	return $exposer[$type][$id];
+	return isset($exposer[$type]) ? $exposer[$type][$id] : '';
 }
 
 function lister_objets_avec_logos ($type) {

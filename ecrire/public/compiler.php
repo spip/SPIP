@@ -395,17 +395,20 @@ function calculer_parties($boucles, $id_boucle) {
 
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
+	if (!isset($descr['niv'])) $descr['niv'] = 0;
 	$codes = compile_cas($tableau, $descr, $boucles, $id_boucle);
 	$n = count($codes);
 	if (!$n) return "''";
-	if ($GLOBALS['var_mode_affiche'] != 'validation')
+	$tab = str_repeat("\t", $descr['niv']);
+	if (!isset($GLOBALS['var_mode_affiche'])
+	OR $GLOBALS['var_mode_affiche'] != 'validation')
 	  return
 		(($n==1) ? $codes[0] : 
 			 "(" . join (" .\n$tab", $codes) . ")");
 	else return "debug_sequence('$id_boucle', '" .
 	  ($descr['nom']) .
 	  "', " .
-	  intval($descr['niv']) .
+	  $descr['niv'] .
 	  ",  array(" .
 	  join(" ,\n$tab", $codes) . "))";
 }
@@ -415,10 +418,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	// cas de la boucle recursive
 	if (is_array($id_boucle)) 
 	  $id_boucle = $id_boucle[0];
-	$type = $boucles[$id_boucle]->type_requete;
-	$descr['niv']++;
-	for ($i=0; $i<=$descr['niv']; $i++) $tab .= "\t";
-
+	$type = !$id_boucle ? '' : $boucles[$id_boucle]->type_requete;
+	$tab = str_repeat("\t", ++$descr['niv']);
+	$mode = isset($GLOBALS['var_mode_affiche']) ? $GLOBALS['var_mode_affiche'] : '';
 	// chaque commentaire introduit dans le code doit commencer
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
@@ -456,7 +458,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		case 'include':
 			$code = calculer_inclure($p, $descr, $boucles, $id_boucle);
 			
-			$commentaire = '<INCLURE ' . str_replace("\n", ' ', $p->code) . '>';
+			$commentaire = '<INCLURE ' . str_replace("\n", ' ', $code) . '>';
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -482,12 +484,13 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			break;
 
 		case 'idiome':
-			$p->code = "_T('" . $p->module . ":" .$p->nom_champ . "')";
-			$p->id_boucle = $id_boucle;
-			$p->boucles = &$boucles;
-			$p->interdire_scripts = false;
+			$code = "_T('" . $p->module . ":" .$p->nom_champ . "')";
+			if ($p->param) {
+			  $p->id_boucle = $id_boucle;
+			  $p->boucles = &$boucles;
+			  $code = compose_filtres($p, $code);
+			}
 			$commentaire = ":";
-			$code = applique_filtres($p);
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -530,9 +533,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			}
 		}
 		if ($code != "''")
-			$codes[]= (($GLOBALS['var_mode_affiche'] == 'validation') ?
+			$codes[]= (($mode == 'validation') ?
 				"array(" . $p->ligne . ", '$commentaire', $code)"
-				: (($GLOBALS['var_mode_affiche'] == 'code') ?
+				: (($mode == 'code') ?
 				"\n// $commentaire\n$code" :
 				$code));
 	} // foreach
@@ -723,7 +726,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
 	$page = ' .
-	// ATTENTION, le calcul du l'expression $corps affectera 
+	// ATTENTION, le calcul du l'expression $corps affectera $Cache
 	// c'est pourquoi on l'affecte a cette variable auxiliaire
 	// avant de referencer $Cache
 	$corps . ";

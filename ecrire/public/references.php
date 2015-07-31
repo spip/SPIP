@@ -42,7 +42,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	$nom_champ = strtolower($nom_champ);
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
 	// il y a incoherences qu'il vaut mieux eviter
-	while ($boucles[$idb]) {
+	while (isset($boucles[$idb])) {
 		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles);
 		if ($t) {
 		  if (!in_array($t, $boucles[$idb]->select))
@@ -108,7 +108,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 
 	$desc= description_type_requete($r, $s);
 
-	if(!desc) {
+	if(!$desc) {
 		erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
 				   "'$idb'");
 		# continuer pour chercher l'erreur suivante
@@ -205,7 +205,7 @@ function calculer_balise($nom, $p) {
 
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ((!$p->fonctions[0][0]) AND $p->fonctions[0][1])
+	if ($p->fonctions AND (!$p->fonctions[0][0]) AND $p->fonctions[0][1])
 
 	  {$p->code .= " . '" . addslashes($p->fonctions[0][1]) . "'";}
 	// ne pas passer le filtre securite sur les id_xxx
@@ -296,17 +296,15 @@ function balise_distante_interdite($p) {
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
-	if (!is_array($table_des_traitements[$p->nom_champ]))
-	  // old style
-		$ps = $table_des_traitements[$p->nom_champ];
-	else {
+	$ps = $table_des_traitements[$p->nom_champ];
+	if (is_array($ps)) {
+	  // new style
+
 		if ($p->nom_boucle)
 			$type = $p->boucles[$p->nom_boucle]->type_requete;
 		else
 			$type = $p->type_requete;
-		$ps = $table_des_traitements[$p->nom_champ][$type];
-		if (!$ps)
-			$ps = $table_des_traitements[$p->nom_champ][0];
+		$ps = $ps[isset($ps[$type]) ? $type : 0];
 	}
 
 	if (!$ps) return $p->code;

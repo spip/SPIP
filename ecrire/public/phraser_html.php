@@ -199,7 +199,7 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
       preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = trim($match[1]);
-      if ($fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
+      if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
       $res = array($fonc);
       $args = $suite ;
       // cas du filtre sans argument ou du critere /
@@ -625,7 +625,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$result->altern = public_phraser_html($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
 		$result->milieu = public_phraser_html($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
 
-		if ($boucles[$id_boucle]) {
+		if (isset($boucles[$id_boucle])) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 					 _T('zbug_erreur_boucle_double',
 					 	array('id'=>$id_boucle)));

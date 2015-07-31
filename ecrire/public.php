@@ -78,7 +78,7 @@ if (defined('_INC_PUBLIC')) {
 	$f = charger_fonction('assembler', 'public');
 	$page = $f($fond);
 
-	if ($page['status']) {
+	if (isset($page['status'])) {
 		include_spip('inc/headers');
 		http_status($page['status']);
 	}

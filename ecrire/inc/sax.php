@@ -24,9 +24,9 @@ function debutElement($parser, $name, $attrs)
   $reperes = &$phraseur_xml->reperes;
   $res = &$phraseur_xml->res;
 
-  $t = $ouvrant[$depth];
+  $t = isset($ouvrant[$depth]) ? $ouvrant[$depth] : ' ';
   // espace initial signifie: deja integree au resultat
-  if ($t && $t[0] != ' ')
+  if ($t[0] != ' ')
     {
       $res .= '<' . $t . '>';
       $ouvrant[$depth] = ' ' . $t;

@@ -1098,8 +1098,8 @@ function spip_desinfecte(&$t) {
 function verifier_visiteur() {
 	if (!defined('_DIR_SESSIONS'))
 		define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
-	if ($_COOKIE['spip_session'] OR
-	($_SERVER['PHP_AUTH_USER']  AND !$GLOBALS['ignore_auth_http'])) {
+	if (isset($_COOKIE['spip_session']) OR
+	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
 		include_spip('inc/session');
 		verifier_session_visiteur();
 	}
