@@ -66,7 +66,15 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
 		$texte = addslashes(corriger_caracteres($texte));
 		$descriptif = addslashes(corriger_caracteres($descriptif));
-
+		$unseul = addslashes($unseul);
+		$obligatoire = addslashes($obligatoire);
+		$articles = addslashes($articles);
+		$breves = addslashes($breves);
+		$rubriques = addslashes($rubriques);
+		$syndic = addslashes($syndic);
+		$acces_minirezo = addslashes($acces_minirezo);
+		$acces_comite = addslashes($acces_comite);
+		$acces_forum = addslashes($acces_forum);
 		if ($ancien_type) {	// modif groupe
 			$query = "UPDATE spip_mots SET type='$change_type' WHERE id_groupe='$id_groupe'";
 			spip_query($query);
@@ -77,7 +85,10 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 				WHERE id_groupe='$id_groupe'";
 			spip_query($query);
 		} else {	// creation groupe
-			spip_query("INSERT INTO spip_groupes_mots (titre, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum) VALUES ('$change_type', '$unseul', '$obligatoire', '$articles','$breves', '$rubriques', '$syndic', '$acces_minirezo',  '$acces_comite', '$acces_forum')");
+			spip_query("INSERT INTO spip_groupes_mots
+(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)
+VALUES 
+('$change_type', '$texte', '$descriptif', '$unseul', '$obligatoire', '$articles','$breves', '$rubriques', '$syndic', '$acces_minirezo',  '$acces_comite', '$acces_forum')");
 		}
 	}
 
