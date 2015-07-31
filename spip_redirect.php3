@@ -53,6 +53,9 @@ else {
 }
 if ($recalcul) $url .= $super."var_mode=recalcul";
 else if ($preview) $url .= $super."var_mode=preview";
-@header("Location: $url");
+
+// Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
+// dans inc-urls.php3 ou mes_fonctions/mes_options)
+header("Location: $url");
 
 ?>

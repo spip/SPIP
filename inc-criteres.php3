@@ -367,7 +367,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			// Valeur de comparaison
 			if ($match[3]) {
 				if (strtoupper($op) != 'IN') {
-					$val = calculer_param_dynamique($match[6], $boucles, $idb);
+					$val = calculer_param_dynamique($match[6], $boucles, $boucles[$idb]->id_parent);
 					// gestion d'erreur
 					if (is_array($val)) erreur_squelette($val);
 				}
@@ -603,16 +603,22 @@ function calculer_param_date($date_compare, $date_orig) {
 //
 // Calculer les parametres
 //
+
+// $val = le parametre (exemple : #_boucle:TITRE
+// $boucle = le tableau des boucles
+// $idb = la boucle de reference :
+//   - dans le cas d'un inclure, la boucle courante
+//   - dans le cas d'un parametre de boucle, la boucle parente
 function calculer_param_dynamique($val, &$boucles, $idb) {
 #	if (ereg('^ *\((.*)) *$', $val, $m)) $val = $m[1]; # si on veut (#...)
 	if (ereg(NOM_DE_CHAMP . "(\{[^}]*\})?", $val, $regs)) {
+#spip_log(serialize($regs)." ($idb)");
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
 		$champ->etoile = $regs[4];
 		$champ->fonctions = $regs[5] ? array($regs[5]) : '';
 		$champ->id_boucle = $idb;
-		$champ->id_mere = $boucles[$idb]->id_parent;
 		$champ->boucles = &$boucles;
 		$champ = calculer_champ($champ);
 		return '" . addslashes(' . $champ . ') . "';
@@ -632,7 +638,7 @@ function calculer_params_dynamiques($liste, &$boucles, $idb) {
 	ereg("^ *\(?(.*[^)])\)? *$",$liste, $reg);
 	$res = array();
 	foreach (split(" *, *", $reg[1]) as $v) {
-	  $v = calculer_param_dynamique($v, $boucles, $idb);
+	  $v = calculer_param_dynamique($v, $boucles, $boucles[$idb]->id_parent);
 	  if (is_array($v)) erreur_squelette($v);
 	  if (strpos('0123456789',$v[0]) !== false)
 	    $res[] = $v;
@@ -646,7 +652,7 @@ function calculer_params_dynamiques($liste, &$boucles, $idb) {
 
 function simplifie_param_dynamique($val, &$boucles, $idb)
 {
-	$a = calculer_param_dynamique($val, $boucles, $idb);
+	$a = calculer_param_dynamique($val, $boucles, $boucles[$idb]->id_parent);
 	if (!ereg('" \. *(.*)\. "', $a, $m)) return $a;
 	return $m[1];
 }	
