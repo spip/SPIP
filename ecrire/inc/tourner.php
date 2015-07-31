@@ -149,7 +149,7 @@ function bouton_copier_local($document, $type, $id, $id_document, $script) {
 
 		// Hack ?
 		// demander confirmation javascript
-		$u = str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('copier_en_local'))));
+		$u = str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('copier_en_local') . ' ' . $document['fichier'])));
 		$bouton_copier = str_replace('return AjaxSqueeze',
 			"return (!confirm('$u'))?false:AjaxSqueeze", $bouton_copier);
 	}
