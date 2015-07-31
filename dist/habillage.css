@@ -6,13 +6,13 @@
 /*  ------------------------------------------
 /* 	Typographie generale (style transversaux)
 /*  ------------------------------------------ */
-html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
-body { font-size: 0.8125em; font-family: Verdana, Helvetica, sans-serif; color: #333; }
+html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6 { margin: 0; padding: 0; font-weight: normal; font-size: 1em; font-family: Georgia, Times, serif; }
 h1 { font-size: 1.70em; color: #000; }
-h2 { font-size: 1.40em; font-weight: normal; font-family: Georgia, Times, serif; }
+h2 { font-size: 1.40em; font-weight: normal; }
 h2, h2 a, h2 a:hover { color: #000033; }
 h3 { font-size: 1.30em; font-weight: bold; }
 h3.spip {} /*Cf.: spip_style.css*/
