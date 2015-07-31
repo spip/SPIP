@@ -476,8 +476,8 @@ function spip_action_cron() {
 
 //
 // cron() : execution des taches de fond
-// quand il est appele par inc-public.php il n'est pas gourmand;
-// quand il est appele par spip_action.php, il est gourmand 
+// quand il est appele par public.php il n'est pas gourmand;
+// quand il est appele par ?action=cron, il est gourmand
 
 function cron ($gourmand=false) {
 
@@ -610,7 +610,7 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			return $f;
 		}
 	}
-#	spip_log("find_in_path n'a pas vu '$filename' dans $path");
+	spip_log("find_in_path n'a pas vu '$filename' dans $path");
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
@@ -701,20 +701,48 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 //
 // Adresse des scripts publics (a passer dans inc-urls...)
 //
+
+// Detecter le fichier de base, a la racine, comme etant spip.php ou ''
+// dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
+function get_spip_script($default='') {
+	if (!defined('_SPIP_SCRIPT')) {
+		if (lire_fichier(_DIR_RACINE.'index.php', $contenu)
+		AND preg_match(',spip\.php,', $contenu))
+			@define('_SPIP_SCRIPT', '');
+		else
+			@define('_SPIP_SCRIPT', 'spip.php');
+	}
+
+	if (_SPIP_SCRIPT)
+		return _SPIP_SCRIPT;
+	else
+		return $default;
+}
+
+
 function generer_url_public($script, $args="", $no_entities=false) {
 
-	// transition : s'agit-il d'un fichier existant ?
-	$fichier = $script . (ereg('[.]php[3]?$', $script) ? '' : _EXTENSION_PHP);
-	if (@file_exists(_DIR_RACINE . $fichier))
-		$action = $fichier;
-	// sinon utiliser _DIR_RACINE?page=script
-	else
-		$action = '?page=' . $script;
+	if (!$script) {
+		$action = get_spip_script();
 
-	// si le script est une action (spip_pass, spip_****),
-	// utiliser generer_url_action
-	if (preg_match(',^spip_(.*),', $script, $regs)
-	AND $script != 'spip_action.php')
+	} else {
+		// transition : s'agit-il d'un fichier existant ?
+		$fichier = $script . (ereg('[.]php[3]?$', $script) ? 
+		'' : _EXTENSION_PHP);
+		if (@file_exists(_DIR_RACINE . $fichier)) {
+			$action = $fichier;
+		}
+
+		// sinon utiliser _SPIP_SCRIPT?page=script
+		else {
+			$action = get_spip_script() . '?page=' . $script;
+		}
+	}
+
+	// si le script est une action (spip_pass, spip_inscription),
+	// utiliser generer_url_action [hack temporaire pour faire
+	// fonctionner #URL_PAGE{spip_pass} ]
+	if (preg_match(',^spip_(.*),', $script, $regs))
 		return generer_url_action($regs[1],$args,true);
 
 	if ($args)
@@ -729,7 +757,7 @@ function generer_url_public($script, $args="", $no_entities=false) {
 
 function generer_url_action($script, $args="", $no_entities=false) {
 
-	return  generer_url_public('spip_action.php',
+	return  generer_url_public('',
 				  "action=$script" .($args ? "&$args" : ''),
 				  $no_entities);
 	
