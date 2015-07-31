@@ -378,7 +378,7 @@ function applique_filtres($p) {
 	// S'il y a un lien avec la session, ajouter un code qui levera
 	// un drapeau dans la structure d'invalidation $Cache
 	if (isset($p->descr['session']))
-		$code = "$code . invalideur_session(\$Cache)";
+		$code = "invalideur_session(\$Cache, $code)";
 
 	// Securite
 	if ($p->interdire_scripts
