@@ -569,6 +569,7 @@ function javascript_to_binary ($texte) {
 }
 
 
+// http://doc.spip.org/@translitteration_rapide
 function translitteration_rapide($texte, $charset='AUTO', $complexe='') {
 	static $trans;
 	if ($charset == 'AUTO')

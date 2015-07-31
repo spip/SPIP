@@ -351,6 +351,7 @@ function sql_fetsel(
 }
 
 // Retourne le tableau de toutes les lignes d'une requete Select
+// http://doc.spip.org/@sql_allfetsel
 function sql_allfetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
