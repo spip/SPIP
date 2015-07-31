@@ -1862,6 +1862,44 @@ function direction_css ($css, $voulue='') {
 	return $f;
 }
 
+// recuperere le chemin d'une css existante et :
+// cree (ou recree) dans _DIR_VAR/cache_css/ une css dont les url relatives sont passees en url absolues
+// http://doc.spip.org/@url_absolue_css
+function url_absolue_css ($css) {
+	if (!preg_match(',\.css$,i', $css, $r)) return $css;
+
+	$url_absolue_css = url_absolue($css);
+
+	$f = basename($css,'.css');
+	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
+		. '.css';
+
+	if ((@filemtime($f) > @filemtime($css))
+	AND ($GLOBALS['var_mode'] != 'recalcul'))
+		return $f;
+
+	if ($url_absolue_css==$css){
+		if (strncmp($GLOBALS['meta']['adresse_site'],$css,$l=strlen($GLOBALS['meta']['adresse_site']))!=0
+		 OR !lire_fichier(_DIR_RACINE . substr($css,$l), $contenu)){
+		 		include_spip('inc/distant');
+		 		if (!$contenu = recuperer_page($css))
+					return $css;
+		}
+	}
+	elseif (!lire_fichier($css, $contenu))
+		return $css;
+
+	// passer les url relatives a la css d'origine en url absolues
+	$contenu = urls_absolues_css($contenu, $css);
+
+	// ecrire la css
+	if (!ecrire_fichier($f, $contenu))
+		return $css;
+
+	return $f;
+}
+
 // filtre table_valeur
 // permet de recuperer la valeur d'un tableau pour une cle donnee
 // prend en entree un tableau serialise ou non (ce qui permet d'enchainer le filtre)
