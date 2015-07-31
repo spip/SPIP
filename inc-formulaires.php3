@@ -365,6 +365,7 @@ function formulaire_inscription($type) {
 
 		// envoyer identifiants par mail
 		if ($continue) {
+			include_ecrire("inc_mail.php3");
 			include_ecrire("inc_acces.php3");
 			$pass = creer_pass_aleatoire(8, $mail_inscription);
 			$login = test_login($mail_inscription);
