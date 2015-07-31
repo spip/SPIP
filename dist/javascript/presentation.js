@@ -11,9 +11,9 @@ function getBiDiOffset(el) {
 function decaleSousMenu() {
   var sousMenu = $("div.bandeau_sec",this).css({visibility:'hidden',display:'block'});
   if(!sousMenu.length) return;
-  sousMenu.bgIframe();
   var left;
   if($.browser.msie) {
+    sousMenu.bgIframe();
     left = getBiDiOffset(sousMenu[0].parentNode) + getBiDiOffset($("#bandeau-principal div")[0]);
   } else left = getBiDiOffset(sousMenu[0]);
   if (left > 0) {
