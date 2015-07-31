@@ -86,10 +86,8 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 		// (url de suivi des notifications par exemple)
 		$envoi = pipeline('notifications_envoyer_mails',array('email'=>$email,'sujet'=>$sujet,'texte'=>$texte));
 		$email = $envoi['email'];
-		$sujet = $envoi['sujet'];
-		$texte = $envoi['texte'];
 
-		job_queue_add('envoyer_mail', ">$email : $sujet", array($email, $sujet, $texte, $from, $headers), 'inc/');
+		job_queue_add('envoyer_mail', ">$email : ".$envoi['sujet'], array($email, $envoi['sujet'], $envoi['texte'], $from, $headers), 'inc/');
 	}
 
 }
