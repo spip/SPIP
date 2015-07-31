@@ -357,10 +357,10 @@ function sql_allfetsel(
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false);
-	if (!$q) return array();
+	if (!$q OR $option!==true) return array();
 	$res = array();
-	while ($r = sql_fetch($q)) $res[] = $r;
-	sql_free($q, $serveur, $option!==false);
+	while ($r = sql_fetch($q, $serveur)) $res[] = $r;
+	sql_free($q, $serveur);
 	return $res;
 }
 
