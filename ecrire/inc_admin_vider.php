@@ -100,11 +100,11 @@ if ($quota_cache) {
 	echo _T('taille_cache_infinie');
 }
 echo ' ('._T('cache_modifiable_webmestre').')</p>', 
-  "\n<form action='" . http_php_scriptnq("../spip_cache","") . "' method='post'>", 
+  "\n<form action='" . generer_url_ecrire("../spip_cache","") . "' method='post'>", 
   "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur' />", 
   "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "' />", 
   "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui' />",
-  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", http_php_scriptnq(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
+  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
  "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
 
  fin_cadre_relief();
@@ -112,13 +112,13 @@ echo ' ('._T('cache_modifiable_webmestre').')</p>',
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
  echo "<div style='text-align: center;'>",
-   "<iframe width='530px' height='65px' src='", http_php_scriptnq("../spip_cache", "id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui&lang=$spip_lang"), "'></iframe>",
+   "<iframe width='530px' height='65px' src='", generer_url_ecrire("../spip_cache", "id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui&lang=$spip_lang"), "'></iframe>",
    "</div>";
 
-echo "\n<form action='" . http_php_scriptnq("../spip_cache","") . "' method='post'>", "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>",
+echo "\n<form action='" . generer_url_ecrire("../spip_cache","") . "' method='post'>", "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>",
    "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache_images") . "'>",
   "\n<INPUT TYPE='hidden' NAME='purger_cache_images' VALUE='oui'>",
-  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", http_php_scriptnq(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
+  "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='", generer_url_ecrire(_DIR_RESTREINT_ABS . "admin_vider") . "' />", 
   "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
 
 fin_cadre_relief();
@@ -143,7 +143,7 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	echo "\n<form action='" . http_php_scriptnq("admin_vider","") . "' method='post'>";
+	echo "\n<form action='" . generer_url_ecrire("admin_vider","") . "' method='post'>";
 	
 	$hash = calculer_action_auteur("purger_index");
 	

@@ -19,42 +19,42 @@ function generer_url_article($id_article) {
 	if (($row = spip_fetch_array(spip_query(
 	"SELECT statut FROM spip_articles WHERE id_article=$id_article"
 	))) AND ($row['statut'] == 'publie'))
-		return http_php_scriptnq('../spip_redirect',"id_article=$id_article");
-	else	return http_php_scriptnq('articles',"id_article=$id_article");
+		return generer_url_ecrire('../spip_redirect',"id_article=$id_article");
+	else	return generer_url_ecrire('articles',"id_article=$id_article");
 }
 
 function generer_url_rubrique($id_rubrique) {
 	if (($row = spip_fetch_array(spip_query(
 	"SELECT statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"
 	))) AND ($row['statut'] == 'publie'))
-		return http_php_scriptnq('../spip_redirect',"id_rubrique=$id_rubrique");
+		return generer_url_ecrire('../spip_redirect',"id_rubrique=$id_rubrique");
 	else
-	  return http_php_scriptnq('naviguer',"id_rubrique=$id_rubrique");
+	  return generer_url_ecrire('naviguer',"id_rubrique=$id_rubrique");
 }
 
 function generer_url_breve($id_breve) {
 	if (($row = spip_fetch_array(spip_query(
 	"SELECT statut FROM spip_breves WHERE id_breve=$id_breve"
 	))) AND ($row['statut'] == 'publie'))
-		return http_php_scriptnq('../spip_redirect',"id_breve=$id_breve");
+		return generer_url_ecrire('../spip_redirect',"id_breve=$id_breve");
 	else
-		return http_php_scriptnq('breves_voir',"id_breve=$id_breve");
+		return generer_url_ecrire('breves_voir',"id_breve=$id_breve");
 }
 
 function generer_url_forum($id_forum) {
-	return http_php_scriptnq('../spip_redirect',"id_forum=$id_forum");
+	return generer_url_ecrire('../spip_redirect',"id_forum=$id_forum");
 }
 
 function generer_url_mot($id_mot) {
-	return  http_php_scriptnq('../spip_redirect',"id_mot=$id_mot");
+	return  generer_url_ecrire('../spip_redirect',"id_mot=$id_mot");
 }
 
 function generer_url_site($id_syndic) {
-	return  http_php_scriptnq('../spip_redirect',"id_syndic=$id_syndic");
+	return  generer_url_ecrire('../spip_redirect',"id_syndic=$id_syndic");
 }
 
 function generer_url_auteur($id_auteur) {
-	return http_php_scriptnq('../spip_redirect',"id_auteur=$id_auteur");
+	return generer_url_ecrire('../spip_redirect',"id_auteur=$id_auteur");
 }
 
 function generer_url_document($id_document) {
@@ -67,7 +67,7 @@ function generer_url_document($id_document) {
 		} else {
 			if (($GLOBALS['meta']["creer_htaccess"]) != 'oui')
 				return '../' . ($row['fichier']);
-			else 	return http_php_scriptnq('../spip_image',"action=autoriser&doc=$id_document");
+			else 	return generer_url_ecrire('../spip_image',"action=autoriser&doc=$id_document");
 		}
 	}
 

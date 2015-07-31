@@ -774,20 +774,20 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
   $j=  _T("lien_nouvelle_annonce");
 
   return 
-    http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=pb"), 
+    http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=pb"), 
 	      $bleu . ($large ? $b : ''), 
 	      $b,
 	      'color: blue;',
 	      'calendrier-arial10') .
     "\n" .
-    http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=normal"),
+    http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=normal"),
 	      $vert . ($large ? $v : ''), 
 	      $v,
 	      'color: green;',
 	      'calendrier-arial10') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
-      http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=affich"),
+      http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=affich"),
 		$jaune . ($large ? $j : ''), 
 		$j,
 		'color: #ff9900;',
@@ -1148,7 +1148,7 @@ function http_calendrier_rv($messages, $type) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
 			$url = quote_amp($match[1]);
 		else
-			$url = http_php_scriptnq("message", "id_message=".$row['id_message']);
+			$url = generer_url_ecrire("message", "id_message=".$row['id_message']);
 
 		$rv = ($row['rv'] == 'oui');
 		$date = $row['date_heure'];
@@ -1431,7 +1431,7 @@ WHERE	(lien.id_message='$id_message'
 		if (!($amj == date_anneemoisjour($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
-				'URL' => http_php_scriptnq("message","id_message=$id_message"),
+				'URL' => generer_url_ecrire("message","id_message=$id_message"),
 				'DTSTART' => date_ical($date_heure),
 				'DTEND' => date_ical($date_fin),
 				'DESCRIPTION' => $row['texte'],

@@ -100,7 +100,7 @@ function auth_dist() {
 
 	// Tentative de login echec
 	if ($_GET['bonjour'] == 'oui' AND !$auth_login) {
-	  $link = new Link(http_php_scriptnq(_DIR_LOGIN . "spip_cookie","test_echec_cookie=oui"));
+	  $link = new Link(generer_url_ecrire(_DIR_LOGIN . "spip_cookie","test_echec_cookie=oui"));
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', _DIR_LOGGED_IN .$clean_link->getUrl());
 		$link->addVar('url', $url);
@@ -112,7 +112,7 @@ function auth_dist() {
 	if (!$auth_login) {
 		$url = str_replace('/./', '/',  _DIR_LOGGED_IN
 			. $clean_link->getUrl());
-		redirige_par_entete(http_php_scriptnq(_DIR_LOGIN . "spip_login"),"?url=".urlencode($url));
+		redirige_par_entete(generer_url_ecrire(_DIR_LOGIN . "spip_login"),"?url=".urlencode($url));
 		exit;
 	}
 
@@ -202,13 +202,13 @@ function auth_dist() {
 			install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
 		} else {
 
-			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  http_php_scriptnq(_DIR_LOGIN . "spip_cookie","logout=$auth_login"), "'>", _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
+			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  generer_url_ecrire(_DIR_LOGIN . "spip_cookie","logout=$auth_login"), "'>", _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
 		}
 		exit;
 	}
 
 	if (!$auth_pass_ok) {
-	  redirige_par_entete(http_php_scriptnq(_DIR_LOGIN . "spip_login"),"var_erreur=pass");
+	  redirige_par_entete(generer_url_ecrire(_DIR_LOGIN . "spip_login"),"var_erreur=pass");
 	}
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'

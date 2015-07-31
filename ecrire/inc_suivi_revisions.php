@@ -52,14 +52,14 @@ echo "<div class='arial11'><ul>";
 echo "<p>";
 
 if (!$id_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
-else echo "<li><a href='" . http_php_scriptnq("suivi_revisions","") . "'>"._T('info_tout_site')."</a>";
+else echo "<li><a href='" . generer_url_ecrire("suivi_revisions","") . "'>"._T('info_tout_site')."</a>";
 
 echo "<p>";
 
 $nom_auteur = $GLOBALS['auteur_session']['nom'];
 
 if ($id_auteur) echo "<li><b>$nom_auteur</b>";
-else echo "<li><a href='" . http_php_scriptnq("suivi_revisions","id_auteur=$connect_id_auteur") . "'>$nom_auteur</a>";
+else echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_auteur=$connect_id_auteur") . "'>$nom_auteur</a>";
 
 echo "<p>";
 
@@ -77,7 +77,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 	$result_rub = spip_query($query_rub);
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
-	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='" . http_php_scriptnq("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a>";
+	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","id_secteur=$id_rubrique") . "'>$titre</a>";
 }
 
 if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
@@ -94,7 +94,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 		$result_lang = spip_query($query_lang);
 		
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
-		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='" . http_php_scriptnq("suivi_revisions","lang_choisie=$lang") . "'>$titre</a>";
+		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='" . generer_url_ecrire("suivi_revisions","lang_choisie=$lang") . "'>$titre</a>";
 	}
 }
 
@@ -176,7 +176,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 		if (!$rss) {
 			$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
 			if ($court)
-				$titre_table = afficher_plus(http_php_scriptnq("suivi_revisions",""))
+				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions",""))
 				. $titre_table;
 
 			echo "<div style='height: 12px;'></div>";
@@ -193,7 +193,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 				for ($i = 0; $i < $nb_tranches; $i++) {
 					if ($i > 0) echo " | ";
 					if ($i*$nb_aff == $debut) echo "<b>";
-					else echo "<a href='", http_php_scriptnq('suivi_revisions', "debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
+					else echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
 					echo (($i * $nb_aff) + 1);
 					if ($i*$nb_aff == $debut) echo "</b>";
 					else echo "</a>";
@@ -227,7 +227,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 				echo "<span class='arial2'>";
 				if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
 				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
-				echo "<a class='$statut' style='font-weight: bold;' href='" . http_php_scriptnq("articles_versions","id_article=$id_article") . "'>$titre</a>";
+				echo "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 				echo "</span>";
 				echo "<span class='arial1'$dir_lang>";
 				echo " ".date_relative($date)." ";
@@ -236,7 +236,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			} else {
 				$item = array(
 					'title' => $titre,
-					'url' => http_php_scriptnq($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions","id_article=$id_article&id_version=$id_version"),
+					'url' => generer_url_ecrire($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions","id_article=$id_article&id_version=$id_version"),
 					'date' => $date,
 					'author' => $nom,
 					'email' => $email

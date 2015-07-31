@@ -162,7 +162,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		redirige_par_entete(http_php_scriptnq("upgrade","reinstall=oui"));
+		redirige_par_entete(generer_url_ecrire("upgrade","reinstall=oui"));
 		exit;
 	}
 
@@ -544,7 +544,7 @@ function charger_plugins($plugins) {
 // elle est destinees a assurer la transition
 // entre les scripts ecrire/*.php[3] et le script generique ecrire/index.php
 
-function http_php_scriptnq($script, $args="", $retour="", $retour_args="") {
+function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 	return $script .
 		_EXTENSION_PHP .
 		(!$args ? "" : ('?'  .str_replace('&', '&amp;', $args))) .

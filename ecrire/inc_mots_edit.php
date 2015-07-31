@@ -160,14 +160,14 @@ if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubrique
 debut_raccourcis();
 
 if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
-		icone_horizontale(_T('icone_modif_groupe_mots'), http_php_scriptnq("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
+		icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
 		icone_horizontale(_T('icone_creation_mots_cles'),
-				  http_php_scriptnq("mots_edit",
-						    "new=oui&id_groupe=$id_groupe&redirect=" . http_php_scriptnq('mots_tous')), 
+				  generer_url_ecrire("mots_edit",
+						    "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_ecrire('mots_tous')), 
 				  "mot-cle-24.gif",
 				  "creer.gif");
  }
-icone_horizontale(_T('icone_voir_tous_mots_cles'), http_php_scriptnq("mots_tous",""), "mot-cle-24.gif", "rien.gif");
+icone_horizontale(_T('icone_voir_tous_mots_cles'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif");
 
 fin_raccourcis();
 
@@ -238,7 +238,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<P>";
 	debut_cadre_formulaire();
 
-	echo "<form action='" . http_php_scriptnq("mots_edit","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("mots_edit","") . "' method='post'>";
 	echo "<div class='serif'>";
 	
 	if ($id_mot)

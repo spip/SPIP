@@ -90,8 +90,8 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
 
-if ($id_rubrique) icone(_T('icone_retour'), http_php_scriptnq("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
-else icone(_T('icone_retour'), http_php_scriptnq("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
+if ($id_rubrique) icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
+else icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_parent"), $ze_logo, "rien.gif");
 
 echo "</td>";
 echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
@@ -102,9 +102,9 @@ echo "</td></tr></table>";
 echo "<p>";
 
 if ($id_rubrique > 0)
-	echo "<form action='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' method='post'>";
 else
-	echo "<form action='" . http_php_scriptnq("naviguer","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("naviguer","") . "' method='post'>";
 
 $titre = entites_html($titre);
 

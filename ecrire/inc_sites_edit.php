@@ -54,7 +54,7 @@ echo "<tr width='100%'>";
 
 if ($new != 'oui') {
 	echo "<td>";
-	icone(_T('icone_retour'), http_php_scriptnq("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
+	icone(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
 	echo "</td>";
 	echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 }
@@ -71,7 +71,7 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		echo "<form action='", http_php_scriptnq('sites'), "'>\n",
+		echo "<form action='", generer_url_ecrire('sites'), "'>\n",
 		  "<input type='hidden' name='id_rubrique' value='$id_rubrique' />\n",
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",

@@ -276,7 +276,7 @@ function enfant_rub($collection){
 		if (acces_restreint_rubrique($id_rubrique))
 		  $les_enfants .= http_img_pack("admin-12.gif", '', "width='12' height='12'", _T('image_administrer_rubrique'));
 
-		$les_enfants.= "<span dir='$lang_dir'><B><A href='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique") . "'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
+		$les_enfants.= "<span dir='$lang_dir'><B><A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
 		if (strlen($descriptif)) {
 			$les_enfants .= "<div class='verdana1'>$descriptif</div>";
 		}
@@ -309,7 +309,7 @@ function sous_enfant_rub($collection2){
 			changer_typo($row['lang']);
 
 			$retour.="<div class='arial11' " .
-			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A href='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
 		}
 		$retour .= "</ul>\n\n".fin_block()."\n\n";
 	}
@@ -343,8 +343,8 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	
 	echo "<tr><td style='text-align: $spip_lang_right;' valign='bottom'><div align='$spip_lang_right'>";
 	if ($afficher_bouton_creer) {
-		if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), http_php_scriptnq("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif");
-		else  icone(_T('icone_creer_sous_rubrique'), http_php_scriptnq("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif");
+		if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif");
+		else  icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif");
 		echo "<p>";
 	}
 	echo "</div></td></tr>";

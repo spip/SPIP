@@ -209,7 +209,7 @@ function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-		  $item['url'] = http_php_scriptnq(_DIR_RESTREINT_ABS
+		  $item['url'] = generer_url_ecrire(_DIR_RESTREINT_ABS
 						   .'controle_forum', 'page='.$a['page']
 						   .'&debut_id_forum='.$t['id_forum']);
 		else
@@ -255,7 +255,7 @@ function rss_suivi_messagerie($a) {
 				'author' => typo($auteur['nom']),
 				'email' => $auteur['email'],
 				'description' => propre($t['texte']),
-				'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+				'url' => generer_url_ecrire(_DIR_RESTREINT_ABS
 							   .'message', 'id_message='.$t['id_message']
 							   ));
 			$rss[] = $item;
@@ -276,7 +276,7 @@ function rss_suivi_messagerie($a) {
 				'description' => propre($t['texte']),
 				'author' => typo($t['auteur']),
 				'email' => $t['email_auteur'],
-				'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+				'url' => generer_url_ecrire(_DIR_RESTREINT_ABS
 							   .'message', 'id_message='.$t['id_message']
 					.'#'.$t['id_forum']
 							   ));
@@ -313,7 +313,7 @@ function rss_articles($critere) {
 			'author' => typo($auteur['nom']),
 			'email' => $auteur['email'],
 			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
-			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+			'url' => generer_url_ecrire(_DIR_RESTREINT_ABS
 						   .'articles', 'id_article='.$t['id_article']
 						   ));
 		if ($t['statut'] == 'prop')
@@ -334,7 +334,7 @@ function rss_breves($critere) {
 			'title' => typo($t['titre']),
 			'date' => $t['date_heure'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+			'url' => generer_url_ecrire(_DIR_RESTREINT_ABS
 						   .'breves_voir', 'id_breve='.$t['id_breve']
 						   ));
 		if ($t['statut'] == 'prop')
@@ -355,7 +355,7 @@ function rss_sites($critere) {
 			'title' => typo($t['titre']." ".$t['url_site']),
 			'date' => $t['date'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+			'url' => generer_url_ecrire(_DIR_RESTREINT_ABS
 						   .'sites', 'id_syndic='.$t['id_syndic']
 						   ));
 		if ($t['statut'] == 'prop')

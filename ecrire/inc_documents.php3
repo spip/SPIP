@@ -930,7 +930,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $id_doublons, $options;
 	global $spip_lang_left, $spip_lang_right;
 
-	$image_url = http_php_scriptnq('../spip_image',
+	$image_url = generer_url_ecrire('../spip_image',
 					(!$id_article ? "" : ('id_article='.$id_article)));
 
 	$redirect_url = new Link();
@@ -1028,7 +1028,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $clean_link;
 	global $id_doc_actif;
 
-	$image_url = http_php_scriptnq('../spip_image',
+	$image_url = generer_url_ecrire('../spip_image',
 					(!$id_article ? "" : ('id_article='.$id_article)));
 
 	# HACK!!! simule une mise en page pour affecter la globale id_doublons

@@ -150,7 +150,7 @@ function creer_repertoire($base, $subdir) {
 		@unlink("$path/.test");
 	}
 	if (!$ok) {
-		redirige_par_entete(http_php_scriptnq("spip_test_dirs",""));
+		redirige_par_entete(generer_url_ecrire("spip_test_dirs",""));
 	}
 	return ($ok? "$subdir/" : '');
 }

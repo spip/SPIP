@@ -60,11 +60,11 @@ fin_boite_info();
 creer_colonne_droite();
 
 debut_cadre_relief("messagerie-24.gif");
- icone_horizontale(_T('lien_nouvea_pense_bete'),http_php_scriptnq("message_edit","new=oui&type=pb"), "pense-bete.gif");
- icone_horizontale(_T('lien_nouveau_message'),http_php_scriptnq("message_edit","new=oui&type=normal"), "message.gif");
+ icone_horizontale(_T('lien_nouvea_pense_bete'),generer_url_ecrire("message_edit","new=oui&type=pb"), "pense-bete.gif");
+ icone_horizontale(_T('lien_nouveau_message'),generer_url_ecrire("message_edit","new=oui&type=normal"), "message.gif");
 		
 		if ($connect_statut == "0minirezo") {
-		  icone_horizontale(_T('lien_nouvelle_annonce'),http_php_scriptnq("message_edit","new=oui&type=affich"), "annonce.gif");
+		  icone_horizontale(_T('lien_nouvelle_annonce'),generer_url_ecrire("message_edit","new=oui&type=affich"), "annonce.gif");
 		}
 fin_cadre_relief();
 
@@ -74,11 +74,11 @@ fin_cadre_relief();
 echo
     debut_cadre_enfonce('',true) .
     "<div class='verdana1'>"._T("calendrier_synchro") .
-    "<a href='" . http_php_scriptnq("synchro","") . "' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
-    "<td><a href='" . http_php_scriptnq("synchro","") . "'><div class='cell-i'>"
+    "<a href='" . generer_url_ecrire("synchro","") . "' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
+    "<td><a href='" . generer_url_ecrire("synchro","") . "'><div class='cell-i'>"
     . http_img_pack("rien.gif", ' ', http_style_background('synchro-24.gif', "; background-repeat: no-repeat; background-position: center center;"))
     . "</div></a></td>\n"
-    . "<td class='cellule-h-lien'><a href='" . http_php_scriptnq("synchro","") . "' class='cellule-h'>" 
+    . "<td class='cellule-h-lien'><a href='" . generer_url_ecrire("synchro","") . "' class='cellule-h'>" 
     . _T("icone_suivi_activite")
     . "</a></td>\n</tr></table></a>\n" ."</div>" .
     fin_cadre_enfonce(true);
@@ -153,7 +153,7 @@ if (spip_num_rows($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href='" . http_php_scriptnq("auteurs_edit","id_auteur=$id_auteur") . "'>$nom</a> ($total)</div></div>";
+		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>$nom</a> ($total)</div></div>";
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
 	}
 	echo "</td></tr></table>";

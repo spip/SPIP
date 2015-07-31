@@ -150,7 +150,7 @@ WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND log
       $res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b><FONT SIZE=3>$nom_auteur</FONT></b>" .
 	($email_auteur ? " ($email_auteur)" : '') .
 	" | <A href='" .
-	http_php_scriptnq('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
+	generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
 	"'>" .
 	_T('lien_ajout_destinataire').
 	"</A>" .
@@ -186,7 +186,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
-      echo "<FORM action='" . http_php_scriptnq("message") . "' method='POST'>";
+      echo "<FORM action='" . generer_url_ecrire("message") . "' method='POST'>";
       echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
       echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
@@ -240,10 +240,10 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
 function http_afficher_forum_perso($id_message, $titre)
 {
-	$forum_retour = urlencode(http_php_scriptnq("message","id_message=$id_message"));
+	$forum_retour = urlencode(generer_url_ecrire("message","id_message=$id_message"));
 
 	echo "<br /><br />\n<div align='center'>";
-	icone(_T('icone_poster_message'), http_php_scriptnq("forum_envoi","statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre)), "forum-interne-24.gif", "creer.gif");
+	icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre)), "forum-interne-24.gif", "creer.gif");
 	echo "</div>\n<p align='left'>";
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20";
@@ -290,7 +290,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$ifond = 1 - $ifond;
 
 				$auteurs_tmp[] = "<a href='" .
-				  http_php_scriptnq('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
+				  generer_url_ecrire('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
 
 				$res .= "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size=2>&nbsp;".
 				  bonhomme_statut($row)."&nbsp;" .
@@ -303,7 +303,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				  "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Sans,sans-serif' size='1'>" .
 				  (($id_auteur == $connect_id_auteur) ?
 				   "&nbsp;" :
-				   ("[<a href='" . http_php_scriptnq("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .
+				   ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .
 				  "</font></td></tr>\n";
 			}
 			echo
@@ -321,7 +321,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  else {
 		  echo
 		    debut_block_invisible("ajouter_auteur"),
-		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='" . http_php_scriptnq("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></font></div>",
+		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></font></div>",
 		    fin_block();
 		}
 	  fin_cadre_enfonce();
@@ -392,7 +392,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	    echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
 	  } else {
 	    echo "\n<p><center><table><tr><td>";
-	    icone (_T('icone_envoyer_message'), (http_php_scriptnq("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
+	    icone (_T('icone_envoyer_message'), (generer_url_ecrire("message","id_message=$id_message&change_statut=publie")), "messagerie-24.gif", "creer.gif");
 	    echo "</td></tr></table></center></p>";
 	  }
 	}
@@ -409,7 +409,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_supprimer_message'), (http_php_scriptnq("messagerie","detruire_message=$id_message")), "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_supprimer_message'), (generer_url_ecrire("messagerie","detruire_message=$id_message")), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 
@@ -417,7 +417,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($statut == 'publie' AND $type == 'normal') {
 	  echo "\n<table align='left'><tr><td>";
-	  icone (_T('icone_arret_discussion'), http_php_scriptnq("messagerie","id_message=$id_message&supp_dest=$connect_id_auteur"), "messagerie-24.gif", "supprimer.gif");
+	  icone (_T('icone_arret_discussion'), generer_url_ecrire("messagerie","id_message=$id_message&supp_dest=$connect_id_auteur"), "messagerie-24.gif", "supprimer.gif");
 	  echo "</td></tr></table>";
 	}
 
@@ -425,7 +425,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	if ($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 	  echo "\n<table align='right'><tr><td>";
-	  icone (_T('icone_modifier_message'), (http_php_scriptnq("message_edit","id_message=$id_message")), "messagerie-24.gif", "edit.gif");
+	  icone (_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.gif", "edit.gif");
 	  echo "</td></tr></table>";
 	}
 	echo "</td></tr></table>";
@@ -497,7 +497,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 	debut_gauche();
 	
 	if ($rv != 'non')
-	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, http_php_scriptnq('calendrier'));
+	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, generer_url_ecrire('calendrier'));
 	
 	echo "<br />";
 	
@@ -520,7 +520,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 		  }
 		creer_colonne_droite();	
 
-		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,http_php_scriptnq('calendrier'));
+		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,generer_url_ecrire('calendrier'));
 		echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
 	}
 

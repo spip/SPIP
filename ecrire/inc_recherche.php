@@ -28,7 +28,7 @@ function recherche_dist()
 
  $recherche_aff = _T('info_rechercher');
  $onfocus = "onfocus=this.value='';";
-			echo "<form method='get' style='margin: 0px;' action='" . http_php_scriptnq("recherche","") . "'>";
+			echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'>";
 			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" '.$onfocus.'>';
 			echo "</form>";
 

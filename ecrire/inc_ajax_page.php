@@ -201,7 +201,7 @@ function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $
 	include_ecrire("inc_mini_nav");
 	echo mini_nav ($id, "aff_nav_recherche", 
 			"document.location.href='" .
-			http_php_scriptnq('naviguer', "id_rubrique=::sel::") .
+			generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
 			"';", 0, true);
 }
 

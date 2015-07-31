@@ -62,7 +62,7 @@ avertissement_config();
 // Afficher les options de config
 //
 
-echo "<form action='" . http_php_scriptnq("configuration","") . "' method='post'>";
+echo "<form action='" . generer_url_ecrire("configuration","") . "' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 debut_cadre_couleur("racine-site-24.gif");
 

@@ -95,14 +95,14 @@ fin_boite_info();
 if ($connect_statut == '0minirezo') {
 
 	debut_raccourcis();
-	icone_horizontale(_T('icone_creer_nouvel_auteur'), http_php_scriptnq("auteur_infos","new=oui"), "auteur-24.gif", "creer.gif");
-	icone_horizontale(_T('icone_informations_personnelles'), http_php_scriptnq("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
+	icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos","new=oui"), "auteur-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
 
 	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"))) {
 		if ($visiteurs)
-			icone_horizontale (_T('icone_afficher_auteurs'), http_php_scriptnq("auteurs",""), "auteur-24.gif", "");
+			icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "");
 		else
-			icone_horizontale (_T('icone_afficher_visiteurs'), http_php_scriptnq("auteurs","visiteurs=oui"), "auteur-24.gif", "");
+			icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "");
 	}
 	fin_raccourcis();
 }
@@ -123,13 +123,13 @@ echo "<td width='20'>";
 if ($tri=='statut')
   echo http_img_pack('admin-12.gif','', "border='0'");
  else
-   echo http_href_img(http_php_scriptnq('auteurs','tri=statut'),'admin-12.gif', "border='0'", _T('lien_trier_statut'));
+   echo http_href_img(generer_url_ecrire('auteurs','tri=statut'),'admin-12.gif', "border='0'", _T('lien_trier_statut'));
 
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
 		echo '<b>'._T('info_nom').'</b>';
 	else
-		echo "<a href='" . http_php_scriptnq("auteurs","tri=nom") . "' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
+		echo "<a href='" . generer_url_ecrire("auteurs","tri=nom") . "' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
 
 if ($options == 'avancees') echo "</td><td colspan='2'>"._T('info_contact');
 echo "</td><td>";
@@ -137,7 +137,7 @@ echo "</td><td>";
 		if ($tri=='nombre')
 			echo '<b>'._T('info_articles').'</b>';
 		else
-			echo "<a href='" . http_php_scriptnq("auteurs","tri=nombre") . "' title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
+			echo "<a href='" . generer_url_ecrire("auteurs","tri=nombre") . "' title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
 	}
 echo "</td></tr>\n";
 
@@ -150,9 +150,9 @@ if ($nombre_auteurs > $max_par_page) {
 		if ($j == $debut)
 			echo "<b>$j</b>";
 		else if ($j > 0)
-		  echo "<a href='", http_php_scriptnq('auteurs',"tri=$tri$visiteurs&debut=$j"), "'>$j</a>";
+		  echo "<a href='", generer_url_ecrire('auteurs',"tri=$tri$visiteurs&debut=$j"), "'>$j</a>";
 		else
-		  echo " <a href='",  http_php_scriptnq('auteurs',"tri=$tri$visiteurs"), "'>0</a>";
+		  echo " <a href='",  generer_url_ecrire('auteurs',"tri=$tri$visiteurs"), "'>0</a>";
 
 		if ($debut > $j  AND $debut < $j+$max_par_page){
 			echo " | <b>$debut</b>";
@@ -169,7 +169,7 @@ if ($nombre_auteurs > $max_par_page) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
-			  echo "<a href='", http_php_scriptnq('auteurs',"tri=$tri$visiteurs&debut=$val"),"'>$key</a> ";
+			  echo "<a href='", generer_url_ecrire('auteurs',"tri=$tri$visiteurs&debut=$val"),"'>$key</a> ";
 		}
 		echo "</td></tr>\n";
 	}
@@ -189,7 +189,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	echo "<tr bgcolor='white'><td align='left'>";
 	if ($debut > 0) {
 		$debut_prec = max($debut - $max_par_page, 0);
-		echo "\n<form action='" . http_php_scriptnq("auteurs","") . "'>",
+		echo "\n<form action='" . generer_url_ecrire("auteurs","") . "'>",
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_prec' />",
 		  "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
@@ -197,7 +197,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	}
 	echo "</td><td style='text-align: $spip_lang_right'>";
 	if ($debut_suivant < $nombre_auteurs) {
-		echo "\n<form action='" . http_php_scriptnq("auteurs","") . "'>",
+		echo "\n<form action='" . generer_url_ecrire("auteurs","") . "'>",
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_suivant' />",
 		  "\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
@@ -300,7 +300,7 @@ global  $connect_statut, $options,
 
 	// nom
 	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
-	echo "<a href='", http_php_scriptnq('auteurs_edit',"id_auteur=".$row['id_auteur']), "'>",typo($row['nom']),'</a>';
+	echo "<a href='", generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur']), "'>",typo($row['nom']),'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";

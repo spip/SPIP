@@ -217,7 +217,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
 
 					if ($type_mot) echo " ($type_mot)";
-					echo " | <A href='", http_php_scriptnq($url_base, "$id_table=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
+					echo " | <A href='", generer_url_ecrire($url_base, "$id_table=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
 
 					if (strlen($descriptif_mot) > 1) {
 						echo "<BR><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
@@ -233,7 +233,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
 			$titre = urlencode($cherche_mot);
-			icone_horizontale(_T('icone_creer_mot_cle'), http_php_scriptnq("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 		}
 
@@ -324,7 +324,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$couleur="#EDF3FE";
 			}
 	
-			$url = "href='" . http_php_scriptnq('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(http_php_scriptnq($url_base, "$id_table=$id_objet#mots"))) . "'";
+			$url = "href='" . generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(generer_url_ecrire($url_base, "$id_table=$id_objet#mots"))) . "'";
 
 			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12' border='0'") ."</A>";
 			
@@ -332,7 +332,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
 			  $s = "<form action='" .
-			    http_php_scriptnq($url_base,"$id_table=$id_objet#mots") .
+			    generer_url_ecrire($url_base,"$id_table=$id_objet#mots") .
 			    "' method='POST'>" .
 			    "<input type='hidden' name='$id_table' VALUE='$id_objet' />";
 				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
@@ -364,7 +364,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			if ($flag_editable){
 				if ($flag_groupe)
-				  $s = "<A href='" . http_php_scriptnq($url_base, "$id_table=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
+				  $s = "<A href='" . generer_url_ecrire($url_base, "$id_table=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
 				else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -417,12 +417,12 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		if ($nombre_mots_associes > 3) {
 			echo "<div align='right' class='arial1'>";
-			echo "<a href='", http_php_scriptnq($url_base, "$id_table=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
+			echo "<a href='", generer_url_ecrire($url_base, "$id_table=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
 			echo "</div><br />\n";
 		}
 
 
-			  $form_mot = "<form action='" . http_php_scriptnq($url_base, "$id_table=$id_objet#mots") . "' method='POST' STYLE='margin:1px;'>"
+			  $form_mot = "<form action='" . generer_url_ecrire($url_base, "$id_table=$id_objet#mots") . "' method='POST' STYLE='margin:1px;'>"
 			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet' />";
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet' />";
@@ -523,7 +523,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
-			icone_horizontale(_T('icone_creer_mot_cle'), http_php_scriptnq("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";
 		}
@@ -658,7 +658,7 @@ function afficher_groupe_mots($id_groupe) {
 
 				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 				  $s = "<a href='" .
-				    http_php_scriptnq('mots_edit', "id_mot=$id_mot&redirect=" . http_php_scriptnq('mots_tous')) .
+				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_ecrire('mots_tous')) .
 				    "' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
 					$s = typo($titre_mot);
@@ -693,7 +693,7 @@ function afficher_groupe_mots($id_groupe) {
 
 
 				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-					$vals[] = "<div style='text-align:right;'><a href='" . http_php_scriptnq("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+					$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
 				} 
 
 				$table[] = $vals;			

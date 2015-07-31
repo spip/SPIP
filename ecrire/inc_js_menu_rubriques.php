@@ -118,7 +118,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	if ($i > 0 AND $zdecal < $zmax) {
 		$ret .= '<div class=\"pos_r\" style=\"z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
 		$ret .= '<div class=\"brt\"><a href=\\"'
-		  . http_php_scriptnq('naviguer', 'id_rubrique='.$id_rubrique)
+		  . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '\\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>'
 		  . '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
 		
@@ -145,7 +145,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret .= "</div></div>";
 	} else {
 		$ret .= '<div><a href=\"'
-		  . http_php_scriptnq('naviguer', 'id_rubrique='.$id_rubrique)
+		  . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
 		  . '\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
 	}
 	$zdecal = $zdecal - 1;

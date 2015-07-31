@@ -105,7 +105,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
-		echo "\n<br />[<a href='", http_php_scriptnq("../spip_image", "$id_objet=$id&action=effacer&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
+		echo "\n<br />[<a href='", generer_url_ecrire("../spip_image", "$id_objet=$id&action=effacer&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
@@ -113,7 +113,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 		$hash = calculer_action_auteur("ajouter $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "\n\n<form action='" . http_php_scriptnq("../spip_image","") . "' method='POST'
+		echo "\n\n<form action='" . generer_url_ecrire("../spip_image","") . "' method='POST'
 			ENCTYPE='multipart/form-data'>
 			<div>";
 		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect' />";

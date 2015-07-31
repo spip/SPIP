@@ -34,7 +34,7 @@ function install_debut_html($titre = 'AUTO') {
 	  $titre,
 	  "</title>\n" ,
 	  '<link rel="stylesheet" type="text/css" href=\'' ,
-	  http_php_scriptnq(_DIR_RESTREINT . 'spip_style', 
+	  generer_url_ecrire(_DIR_RESTREINT . 'spip_style', 
 			  "couleur_claire=" .
 			  urlencode('#FFCC66') .
 			  '&couleur_foncee=' .
@@ -76,7 +76,7 @@ function aide($aide='') {
 	if (!$aide OR $spip_display == 4) return;
 
 	return "&nbsp;&nbsp;<a class='aide' href='" 
-		. http_php_scriptnq(_DIR_RESTREINT . "aide_index", 
+		. generer_url_ecrire(_DIR_RESTREINT . "aide_index", 
 			"aide=$aide&var_lang=$spip_lang")
 		. "' target=\"spip_aide\" "
 		. "onclick=\"javascript:window.open(this.href,"
@@ -94,7 +94,7 @@ function info_copyright() {
 	echo _T('info_copyright', 
 		   array('spip' => "<b>SPIP $spip_version_affichee</b> ",
 			 'lien_gpl' => 
-			 "<a href='". http_php_scriptnq(_DIR_RESTREINT . "aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+			 "<a href='". generer_url_ecrire(_DIR_RESTREINT . "aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
 }
 
