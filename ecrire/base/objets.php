@@ -260,8 +260,6 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					"texte"	=> "longtext DEFAULT '' NOT NULL",
 					"id_secteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
 					"maj"	=> "TIMESTAMP",
-					"export"	=> "VARCHAR(10) DEFAULT 'oui'",
-					"id_import"	=> "bigint DEFAULT '0'",
 					"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 					"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 					"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
