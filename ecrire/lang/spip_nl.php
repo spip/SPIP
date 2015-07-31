@@ -679,6 +679,7 @@ opnieuw verbinding maken met de site
 	'titre_statistiques' => 'Statistieken van de site',
 	'titre_titre_document' => 'Titel van het document:',
 	'todo' => 'binnenkort beschikbaar',
+	'trad_definir_reference' => 'Kies "@titre@" als referentie voor vertalingen',
 	'trad_reference' => '(verwijzing naar vertalingen)',
 
 	// Z
