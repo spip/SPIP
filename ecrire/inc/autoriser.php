@@ -562,7 +562,7 @@ function autoriser_infosperso_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 function autoriser_configurerlangage_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 	return true;
 }
-function autoriser_configurerpreference_onglet_dist($faire,$quoi,$id,$qui,$opts) {
+function autoriser_configurerpreferences_onglet_dist($faire,$quoi,$id,$qui,$opts) {
 	return true;
 }
 function autoriser_auteurs_menu_dist($faire, $type, $id, $qui, $opts){return true;}
