@@ -1540,20 +1540,19 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	echo "</font>";
 	echo "</td>";
-	if ($options == 'avancees') {
-		echo "<td align='center' align='right'>";
-		$lien = $clean_link;
+	echo "<td align='center' align='right'>";
+	$lien = $clean_link;
 			
-		if ($spip_ecran == "large") {
-			$lien->addVar('set_ecran', 'etroit');
-			echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Petit &eacute;cran' alt='Petit &eacute;cran' width='23' height='19' border='0'></a>";
-		}
-		else {
-			$lien->addVar('set_ecran', 'large');
-			echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Grand &eacute;cran' alt='Grand &eacute;cran' width='23' height='19' border='0'></a>";
-		}
-		echo "</td>";
+	if ($spip_ecran == "large") {
+		$lien->addVar('set_ecran', 'etroit');
+		echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Petit &eacute;cran' alt='Petit &eacute;cran' width='23' height='19' border='0'></a>";
 	}
+	else {
+		$lien->addVar('set_ecran', 'large');
+		echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Grand &eacute;cran' alt='Grand &eacute;cran' width='23' height='19' border='0'></a>";
+	}
+	echo "</td>";
+
 	echo "<td align='right'>";
 	echo "<img src='img_pack/barre-couleurs.gif' alt='couleurs' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
@@ -1695,7 +1694,7 @@ function debut_gauche($rubrique = "asuivre") {
 				$nb_connectes = mysql_num_rows($result_auteurs);
 			}
 	
-			$flag_cadre = (($nb_connectes > 0 AND $options == "avancees") OR $rubrique == "messagerie");
+			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 			if ($rubrique == "messagerie") {
 				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='' width='14' height='7' border='0'>";
