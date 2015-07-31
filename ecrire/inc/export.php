@@ -16,11 +16,11 @@ define('_EXPORT_TRANCHES_LIMITE', 400);
 define('_EXTENSION_PARTIES', '.gz');
 
 // http://doc.spip.org/@exec_export_all_args
-function inc_export_dist($meta, $tables_for_dump)
+function inc_export_dist($meta)
 {
 	$start = false;
-	list($gz, $archive, $rub, $etape_actuelle, $sous_etape) = 
-		explode("::",$GLOBALS['meta'][$meta]);
+	list($gz, $archive, $rub, $tables_for_dump, $etape_actuelle, $sous_etape) = 
+		unserialize($GLOBALS['meta'][$meta]);
 	// determine upload va aussi initialiser l'index "restreint"
 	$maindir = determine_upload();
 	if (!$GLOBALS['visiteur_session']['restreint'])
@@ -44,9 +44,9 @@ function inc_export_dist($meta, $tables_for_dump)
 	// concatenation des fichiers crees a l'appel precedent
 	ramasse_parties($dir, $archive);
 	$all = count($tables_for_dump);
-	if ($etape_actuelle > $all){ 
+	if ($etape_actuelle > $all OR !$all){
 		include_spip('inc/headers');
-		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true));
+		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true, true));
 	}
 
 	include_spip('inc/minipres');
@@ -75,9 +75,10 @@ function inc_export_dist($meta, $tables_for_dump)
 	}
 
 	// script de rechargement auto sur timeout
-	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".$redirect."\";',$timeout);</script>\n");
+	echo http_script("window.setTimeout('location.href=\"".$redirect."\";',$timeout)");
 
-	echo ( "<div style='text-align: left'>\n");
+	echo "<div style='text-align: left'>\n";
+
 	foreach($tables_for_dump as $table){
 		if ($etape_actuelle <= $etape) {
 		  $r = sql_countsel($table);
@@ -91,12 +92,12 @@ function inc_export_dist($meta, $tables_for_dump)
 
 		  $sous_etape = 0;
 		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
-		  $tables_sauvegardees[$table] = 1;
+		  $tables_sauvegardees[$table] = "$table ($r)";
 		  ecrire_meta($metatable, serialize($tables_sauvegardees),'non');
 		}
 		$etape++;
-		$status_dump = "$gz::$archive::$rub::" . $etape . "::0";
-		ecrire_meta($meta, $status_dump,'non');
+		$v = serialize(array($gz, $archive, $rub, $tables_for_dump, $etape, 0));
+		ecrire_meta($meta, $v,'non');
 	}
 	echo ( "</div>\n");
 	// si Javascript est dispo, anticiper le Time-out
