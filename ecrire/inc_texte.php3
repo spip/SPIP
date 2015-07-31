@@ -47,7 +47,7 @@ else {
 //
 // Variables globales : a virer pour une gestion intelligente de la langue
 //
-tester_variable('lang', $GLOBALS['i18nlang']);
+tester_variable('lang', 'fr');
 
 //
 // Trouver une locale qui marche
