@@ -298,13 +298,13 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				while ($next=='{') {
 					phraser_arg($rec, $sep, array(), $champ);
 					$args = ltrim($rec) ;
-					$next = $args[0];
+					$next = isset($args[0]) ? $args[0] : '';
 				}
 				while ($next=='|') {
 					phraser_args($rec, $par, $sep, array(), $champ);
 					$args = $champ->apres ;
 					$champ->apres = '';
-					$next = $args[0];
+					$next = isset($args[0]) ? $args[0] : '';
 				}
 				// Si erreur de syntaxe dans un sous-argument, propager.
 				if ($champ->param === false)
@@ -315,7 +315,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 				$result[] = $champ;
 			}
 		}
-		if ($args[0] == ',') {
+		if (isset($args[0]) AND $args[0] == ',') {
 			$args = ltrim(substr($args,1));
 			if ($collecte) {$res[] = $collecte; $collecte = array();}
 		}
