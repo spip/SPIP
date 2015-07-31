@@ -241,7 +241,7 @@ if ($cookie_prefix <> 'spip') {
 	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
 		if (ereg('^'.$cookie_prefix, $name)) {
 			$spipname = ereg_replace ('^'.$cookie_prefix, 'spip', $name);
-			$HTTP_COOKIE_VARS[$spipname] = $value;
+			$HTTP_COOKIE_VARS[$spipname] = $INSECURE[$spipname] = $value;
 			$$spipname = $value;
 		}
 	}

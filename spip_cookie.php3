@@ -173,7 +173,7 @@ if ($cookie_session) {
 }
 
 // Redirection
-// Sous Apache 1.x, les cookies avec une redirection fonctionnent
+// Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP
 if (ereg("^Apache", $SERVER_SOFTWARE)) {
 	@header("Location: " . $cible->getUrl());
