@@ -338,7 +338,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'គ្មាន​គំរូ <b>@fichier@</b> ទំនេរ...',
 	'info_erreur_systeme' => 'កំហុស​ប្រព័ន្ធ (errno @errsys@)',
 	'info_erreur_systeme2' => 'ថាស​រឹង (hard disk) ប្រហែលជា​ពេញ ឬ មូលដ្ឋានទិន្នន័យ​ខូច ។ <br /> 
-<font color=\'red\'>ព្យាយាម <a href=\'@script@\'>​ជួសជុល​ឃ្លាំង​ទិន្នន័យ </a>, ឬ​ទាក់ទង​អ្នក​ផ្ដល់​សេវាកម្ម​ របស់​អ្នក ។ </font>',
+<span style="color:red;">ព្យាយាម <a href=\'@script@\'>​ជួសជុល​ឃ្លាំង​ទិន្នន័យ </a>, ឬ​ទាក់ទង​អ្នក​ផ្ដល់​សេវាកម្ម​ របស់​អ្នក ។ </span>',
 	'info_fini' => 'រួចរាល់ !',
 	'info_format_image' => 'ទំរង់​រូបភាព អាចត្រូវបាន​ប្រើ​ប្រាស់ សំរាប់ការ​បង្កើត​កូនរូបភាព ៖ @gd_formats@។',
 	'info_format_non_defini' => 'ទ្រង់ទ្រាយ ​គ្មានបានកំណត់',

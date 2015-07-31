@@ -340,7 +340,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'N’eus framm <b>@fichier@</b> ebet da gaout...',
 	'info_erreur_systeme' => 'Fazi reizhiad (errno @errsys@)',
 	'info_erreur_systeme2' => 'Marteze eo leun-chouk ar bladenn-galet, pe neuze eo mazaouet an diaz titouroù.<br />
-<font color=\'red\'>Klaskit <a href=\'@script@\'>ratreañ an diaz</a>, pe kit e darempred gant an herberc’hier.</font>',
+<span style="color:red;">Klaskit <a href=\'@script@\'>ratreañ an diaz</a>, pe kit e darempred gant an herberc’hier.</span>',
 	'info_fini' => 'Echu eo !',
 	'info_format_image' => 'Furmadoù skeudenn a c’hell bezañ implijet da sevel skeudennigoù : @gd_formats@.',
 	'info_format_non_defini' => 'Stumm didermenet',

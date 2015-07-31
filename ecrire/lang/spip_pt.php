@@ -386,7 +386,7 @@ Pediu para alterar o seu endereço e-mail. Para confirmar o seu novo endereço, 
 	'info_erreur_squelette2' => 'Modelo <b>@fichier@</b> não disponível...',
 	'info_erreur_systeme' => 'Erro de Sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'O disco rígido poderá estar cheio, ou a base de dados danificada.<br />
-<font color=\'red\'>Tente <a href=\'@script@\'>reparar a base de dados </a>, ou contacte o seu fornecedor de internet.</font>',
+<span style="color:red;">Tente <a href=\'@script@\'>reparar a base de dados </a>, ou contacte o seu fornecedor de internet.</span>',
 	'info_fini' => 'Terminou !',
 	'info_format_image' => 'Formatos de imagens que podem ser utilizadas para criar vinhetas : @gd_formats@.',
 	'info_format_non_defini' => 'formato não definido',

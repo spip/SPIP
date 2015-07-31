@@ -388,7 +388,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'No <b>@fichier@</b> template available ...',
 	'info_erreur_systeme' => 'System error (errno @errsys@)',
 	'info_erreur_systeme2' => 'The hard disk may be full or the database damaged. <br />
-<font color=\'red\'>Try <a href=\'@script@\'>repairing the database</a>, or contact your service provider.</font>',
+<span style="color:red;">Try <a href=\'@script@\'>repairing the database</a>, or contact your service provider.</span>',
 	'info_fini' => 'Done!',
 	'info_format_image' => 'Image format to be used for vignettes: @gd_formats@.',
 	'info_format_non_defini' => 'undefined format',

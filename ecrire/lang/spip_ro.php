@@ -378,7 +378,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Nici un schelet <b>@fichier@</b> nu este disponibil...',
 	'info_erreur_systeme' => 'Eroare sistem (errno @errsys@)',
 	'info_erreur_systeme2' => 'Discul este probabil plin sau baza de date este coruptă.<br />
-<font color=\'red\'>Încercaţi să <a href=\'@script@\'>reparaţi baza de date</a>, sau contactaţi-l pe furnizorul dumneavoastră de internet.</font>',
+<span style="color:red;">Încercaţi să <a href=\'@script@\'>reparaţi baza de date</a>, sau contactaţi-l pe furnizorul dumneavoastră de internet.</span>',
 	'info_fini' => 'Este gata !',
 	'info_format_image' => 'Formatele de imagini care pot fi folosite la crearea viniételor : @gd_formats@.',
 	'info_format_non_defini' => 'format nedefinit',

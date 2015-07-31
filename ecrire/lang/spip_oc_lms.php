@@ -304,7 +304,7 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_erreur_squelette2' => 'Brisa d’esqueleta <b>@fichier@</b> es disponibla...',
 	'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'Lo disc dur es benleu plen, o la basa de donadas degalhada.<br />
-<font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>, o contactatz vòstre auberjador.</font>',
+<span style="color:red;">Assajatz de <a href=\'@script@\'>reparar la basa</a>, o contactatz vòstre auberjador.</span>',
 	'info_fini' => 'Quo es ’chabat!',
 	'info_format_image' => 'Formats d’imatges que se pòden utilizar per crear de las vinhetas: @gd_formats@.',
 	'info_format_non_defini' => 'format non definit',

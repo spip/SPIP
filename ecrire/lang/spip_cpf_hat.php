@@ -326,7 +326,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'info_erreur_squelette2' => 'Oken leskelèt <b>@fichier@</b> se pa disponib...',
 	'info_erreur_systeme' => 'Erè sistèm (errno @errsys@)',
 	'info_erreur_systeme2' => 'Diskédir se petèt plen osnon bazdoné gen domaj<br />
-<font color=\'red\'>Esey w<a href=\'@script@\'>aranje baz-la</a>, osnon kontak lébèjè ou.</font>', # MODIF
+<span style="color:red;">Esey w<a href=\'@script@\'>aranje baz-la</a>, osnon kontak lébèjè ou.</span>', # MODIF
 	'info_fini' => 'W gen fin fini !',
 	'info_format_image' => 'Kèk sòt imaj SPIP kapab itilize pou kreye vinyèt : @gd_formats@.',
 	'info_format_non_defini' => 'fòma ki pa defini',

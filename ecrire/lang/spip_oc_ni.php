@@ -340,7 +340,7 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 	'info_erreur_squelette2' => 'Minga d’esqueleta <b>@fichier@</b> es disponibla...',
 	'info_erreur_systeme' => 'Error sistèma (errno @errsys@)',
 	'info_erreur_systeme2' => 'Bessai lo disc dur es plen, ò la basa de donadas degalhada.<br />
-<font color=\'red\'>Provatz de <a href=\'@script@\'>reparar la basa</a>, ò contactatz lo voastre aubergador.</font>',
+<span style="color:red;">Provatz de <a href=\'@script@\'>reparar la basa</a>, ò contactatz lo voastre aubergador.</span>',
 	'info_fini' => 'Es acabat !',
 	'info_format_image' => 'Formats d’imatges que poadon èstre utilisats per crear de vinhetas: @gd_formats@.',
 	'info_format_non_defini' => 'format non definit',

@@ -332,7 +332,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Hiçbir @fichier@ iskeleti müsait değil...',
 	'info_erreur_systeme' => 'Sistem hatası (hata no @errsys@)',
 	'info_erreur_systeme2' => 'Sabit disk dolu olabilir veya veritabanı hasar görmüş olabilir.<br />
-<font color=\'red\'>Veritabanını <a href=\'@script@\'>onarmayı deneyiniz </a>, veya sitenizi barındıran firmayı arayınız.</font>',
+<span style="color:red;">Veritabanını <a href=\'@script@\'>onarmayı deneyiniz </a>, veya sitenizi barındıran firmayı arayınız.</span>',
 	'info_fini' => 'Bitti !',
 	'info_format_image' => 'İkon yaratmak için kullanılabilecek resim formatları : @gd_formats@.',
 	'info_format_non_defini' => 'tanımsız format',

@@ -332,7 +332,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Neexistující šablona <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Systémová chyba (číslo: @errsys@)',
 	'info_erreur_systeme2' => 'Pevný disk může být plný nebo může být poškozen. <br />
-<font color=\'red\'>Zkuste <a href=\'@script@\'>opravit databázi</a>, nebo kontaktujte svého poskytovatele prostoru pro web.</font>', # MODIF
+<span style="color:red;">Zkuste <a href=\'@script@\'>opravit databázi</a>, nebo kontaktujte svého poskytovatele prostoru pro web.</span>', # MODIF
 	'info_fini' => 'Hotovo!',
 	'info_format_image' => 'Formát obrázku pro tvorbu náhledů: @gd_formats@.',
 	'info_format_non_defini' => 'formát není definován',
