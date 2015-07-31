@@ -29,7 +29,7 @@ include_spip('inc/editer');
 function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $traduire = true){
 	if (!intval($id_objet))
 		return false;
-	$valeurs = formulaires_editer_objet_charger($objet,$id_objet,0,0,$retour,'');
+	$valeurs = formulaires_editer_objet_charger($objet,$id_objet,null,0,$retour,'');
 	// verifier que l'objet indique possede bien des champs id_trad et lang
 	// attention, charger renomme lang => langue pour ne pas perturber la langue d'affichage du squelette
 	if (!isset($valeurs['langue']))
@@ -39,7 +39,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	$valeurs['_langue'] = '';
 	$langue_parent = '';
 	$id_parent = '';
-	if (isset($valeurs['id_rubrique'])){
+	if (isset($valeurs['id_rubrique']) OR isset($valeurs['id_parent'])){
 		$id_parent = $valeurs['id_rubrique'];
 		if (isset($valeurs['id_parent']))
 			$id_parent = $valeurs['id_parent'];
