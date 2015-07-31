@@ -639,6 +639,7 @@ function extraire_lien ($regs) {
 
 define('_RACCOURCI_URL', ',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S');
 
+// http://doc.spip.org/@typer_raccourci
 function typer_raccourci ($lien) {
 
 	if (!preg_match(_RACCOURCI_URL, trim($lien), $match)) return false;
