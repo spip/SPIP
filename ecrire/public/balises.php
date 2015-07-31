@@ -1078,13 +1078,6 @@ function balise_INCLURE_dist($p) {
 
 	if (isset($_contexte['fond'])) {
 
-		// Gerer ajax
-		if (isset($_contexte['ajax'])){
-			$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
-			$_contexte['fond'] = "'fond' => 'fond/ajax_stat'";
-			unset($_contexte['ajax']);
-		}
-
 		// #INCLURE{doublons}
 		if (isset($_contexte['doublons'])) {
 			$_contexte['doublons'] = "'doublons' => \$doublons";
@@ -1106,7 +1099,19 @@ function balise_INCLURE_dist($p) {
 		$connect = !$id_boucle ? '' 
 		  : $p->boucles[$id_boucle]->sql_serveur;
 
-		$p->code = "recuperer_fond('',".$l.", false, " . sql_quote($connect) .")";
+		$p->code = "recuperer_fond('',\$l = ".$l.", false, " . sql_quote($connect) .")";
+
+		// Gerer ajax
+		if (isset($_contexte['ajax'])) {
+			$p->code = '( // {ajax}
+				($t = '.$p->code.')
+				? "<div class=\'ajaxbloc env-"
+					.encoder_contexte_ajax($l)
+					."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
+				: ""
+			)';
+		}
+
 	} else {
 		$n = interprete_argument_balise(1,$p);
 		if (!$n) {
@@ -1151,33 +1156,38 @@ function balise_MODELE_dist($p) {
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
-	// Gerer ajax
-	if (isset($code_contexte['ajax'])){
-		$code_contexte['fond_ajax'] = "'fond_ajax' => '$nom'";
-		$nom = 'fond/ajax_stat';
-		unset($_contexte['ajax']);
-	}
+	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	// Si le champ existe dans la pile, on le met dans le contexte
 	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
 	// le cas spip_syndic_articles)
-	#$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
+	#$_contexte[] = "'$nom='.".champ_sql($nom, $p);
 
 	// Reserver la cle primaire de la boucle courante si elle existe
 	if ($idb = $p->id_boucle) {
 		if ($primary = $p->boucles[$idb]->primary) {
 			$id = champ_sql($primary, $p);
-			$code_contexte[] = "'$primary='.".$id;
-			$code_contexte[] = "'id='.".$id;
+			$_contexte[] = "'$primary='.".$id;
+			$_contexte[] = "'id='.".$id;
 		}
 	}
 
 	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?
 	recuperer_fond('$nom',
-		creer_contexte_de_modele(array(".join(',', $code_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])), true, " . sql_quote($connect) . "):'')";
+		creer_contexte_de_modele(array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang'])), true, " . sql_quote($connect) . "):'')";
 	$p->interdire_scripts = false; // securite assuree par le squelette
+
+	// Gerer ajax
+	if (isset($_contexte['ajax'])) {
+		$p->code = '( // {ajax}
+			strlen($t = '.$p->code.')
+			? "<div class=\'ajaxbloc env-"
+				.encoder_contexte_ajax($l)
+				."\'>\\n".$t."</div><!-- ajaxbloc -->\\n"
+			: ""
+		)';
+	}
 
 	return $p;
 }

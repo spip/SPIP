@@ -120,7 +120,7 @@ function traiter_formulaires_dynamiques(){
 		AND $args = _request('var_ajax_env')) {
 			include_spip('inc/filtres');
 			if ($args = decoder_contexte_ajax($args)
-			AND $fond = $args['fond_ajax']) {
+			AND $fond = $args['fond']) {
 				include_spip('public/parametrer');
 				$contexte = calculer_contexte();
 				$contexte = array_merge($args, $contexte);
@@ -130,7 +130,7 @@ function traiter_formulaires_dynamiques(){
 			}
 			else {
 				include_spip('inc/actions');
-				ajax_retour('signature ajax incorrecte');
+				ajax_retour('signature ajax incorrecte 1');
 			}
 			exit();
 		}
@@ -165,7 +165,7 @@ function traiter_formulaires_dynamiques(){
 				}
 			} else {
 				include_spip('inc/actions');
-				ajax_retour('signature ajax incorrecte');
+				ajax_retour('signature ajax incorrecte 2');
 				exit;
 			}
 		}
@@ -691,11 +691,6 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$arg_list = creer_contexte_de_modele($params);
-	if (isset($arg_list['ajax']) && $arg_list['ajax']=='ajax'){
-		$contexte['fond_ajax']=$contexte['fond'];
-		$contexte['fond']='fond/ajax';
-		unset($arg_list['ajax']);
-	}
 	$contexte['args'] = $arg_list; // on passe la liste des arguments du modeles dans une variable args
 	$contexte = array_merge($contexte,$arg_list);
 
@@ -736,6 +731,17 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 			trim(str_replace(' spip_lien_ok ', ' ', " $classes ")));
 	} else if ($lien)
 		$retour = "<a href='".$lien[0]."' class='".$lien[1]."'>".$retour."</a>";
+
+	// Gerer ajax
+	if (isset($arg_list['ajax'])
+	AND $arg_list['ajax']=='ajax'
+	AND strlen($retour)) {
+		$retour = "<div class='ajaxbloc env-"
+			. encoder_contexte_ajax($contexte)
+			. "'>\n"
+			. $retour
+			. "</div><!-- ajaxbloc -->\n";
+	}
 
 	$compteur--;
 	return $retour;

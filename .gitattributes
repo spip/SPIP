@@ -4,9 +4,6 @@
 config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
-dist/fond/ajax.html -text
-dist/fond/ajax_fonctions.php -text
-dist/fond/ajax_stat.html -text
 dist/formfx.css -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/editer_article.html -text
