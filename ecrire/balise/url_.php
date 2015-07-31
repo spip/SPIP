@@ -73,8 +73,8 @@ function balise_URL__dist($p) {
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
 		return $f($p);
 	}else {
-		$nom = strtolower(substr($nom,4));
-		$code = generer_generer_url($nom, $p);
+		$nom = strtolower($nom);
+		$code = generer_generer_url(substr($nom,4), $p);
 		$code = champ_sql($nom, $p, $code);
 		if (!$p->etoile)
 			$p->code = "vider_url($code)";
