@@ -1826,19 +1826,34 @@ function direction_css ($css, $voulue='') {
 	if ($voulue == $dir)
 		return $css;
 
-	// 1.
-	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$ndir.'.css', $css);
-	if (@file_exists($f))
-		return $f;
+	if (
+		// url absolue
+		preg_match(",^http:,i",$css)
+		// ou qui contient un ?
+		OR (($p=strpos($css,'?'))!==FALSE)) {
+		$distant = true;
+		$cssf = parse_url($css);
+		$cssf = $cssf['path'].($cssf['query']?"?".$cssf['query']:"");
+		$cssf = preg_replace(',[?:&=],', "_", $cssf);
+	}
+	else {
+		$distant = false;
+		$cssf = $css;
+		// 1. regarder d'abord si un fichier avec la bonne direction n'est pas aussi
+		//propose (rien a faire dans ce cas)
+		$f = preg_replace(',(_rtl)?\.css$,i', '_'.$ndir.'.css', $css);
+		if (@file_exists($f))
+			return $f;
+	}
 
 	// 2.
 	$dir_var = sous_repertoire (_DIR_VAR, 'cache-css');
 	$f = $dir_var
-		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $css)
-		. '.' . substr(md5($css), 0,4) . '_' . $ndir . '.css';
+		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $cssf)
+		. '.' . substr(md5($cssf), 0,4) . '_' . $ndir . '.css';
 
 	// la css peut etre distante (url absolue !)
-	if (preg_match(",^http:,i",$css)){
+	if ($distant){
 		include_spip('inc/distant');
 		$contenu = recuperer_page($css);
 		if (!$contenu) return $css;
