@@ -208,7 +208,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	}
 
 	// Faut-il ajouter des propositions de mots-cles
-	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))
+	if ($table AND (lire_meta("mots_cles_forums") == "oui"))
 		$table = table_des_mots($table, $les_mots);
 	else
 		$table = '';
