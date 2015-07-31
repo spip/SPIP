@@ -19,7 +19,7 @@ function auth_spip_dist ($login, $pass) {
 	$login = auth_spip_retrouver_login($login);
 
 	$md5pass = $md5next = "";
-	if (preg_match(",^\{([0-9a-f]{32});([0-9a-f]{32})\},i",$pass,$regs)){
+	if (preg_match(",^\{([0-9a-f]{32});([0-9a-f]{32})\}$,i",$pass,$regs)){
 		$md5pass = $regs[1];
 		$md5next = $regs[2];
 		$pass="";
