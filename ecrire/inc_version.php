@@ -302,7 +302,6 @@ $spip_pipeline = array(
 	'autoriser' => '',
 	'notifications' => '',
 	'editer_contenu_objet' => '',
-	'creer_chaine_url' => '|creer_chaine_url',
 	'rechercher_liste_des_champs' => '',
 	'rechercher_liste_des_jointures' => '',
 	'recuperer_fond' => '',
