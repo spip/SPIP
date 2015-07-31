@@ -52,6 +52,10 @@ function champs_traitements ($nom_champ) {
 	static $traitements = array (
 		'BIO' => 'traiter_raccourcis(%s)',
 		'CHAPO' => 'traiter_raccourcis(nettoyer_chapo(%s))',
+		'DATE' => 'vider_date(%s)',
+		'DATE_MODIF' => 'vider_date(%s)',
+		'DATE_NOUVEAUTES' => 'vider_date(%s)',
+		'DATE_REDAC' => 'vider_date(%s)',
 		'DESCRIPTIF' => 'traiter_raccourcis(%s)',
 		'LIEN_TITRE' => 'typo(%s)',
 		'LIEN_URL' => 'htmlspecialchars(vider_url(%s))',
