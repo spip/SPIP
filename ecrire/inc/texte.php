@@ -294,12 +294,14 @@ function nettoyer_raccourcis_typo($texte){
 	// remplacer les liens
 	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],S', $texte, $regs, PREG_SET_ORDER))
 		foreach ($regs as $reg) {
-			$titre = supprimer_tags(traiter_raccourci_lien($reg));
+			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
+			$titre = calculer_url($reg[3], $titre, 'titre');
+			$titre = typo(supprimer_tags($titre));
 			$texte = str_replace($reg[0], $titre, $texte);
 		}
 
 	// supprimer les notes
-	$texte = preg_replace(",[[][[]([^]]|[]][^]])*[]][]],UimsS", "", $texte);
+	$texte = preg_replace(",[[][[]([^]]|[]][^]])*[]][]],UimsS","",$texte);
 
 	// supprimer les codes typos
 	$texte = str_replace(array('}','{'), '', $texte);
@@ -339,7 +341,6 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 	// travailler en accents charset
 	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
-
 	$texte = nettoyer_raccourcis_typo($texte);
 
 	// corriger la longueur de coupe 
@@ -1193,10 +1194,30 @@ function traiter_raccourcis_propre($letexte)
 //
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
-	$bulle = $hlang = '';
+
 	list(,$texte, ,$url) = $regs;
+	list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($texte);
+	list ($lien, $class, $texte, $lang) = 
+		calculer_url($url, $texte, 'tout');
+
+	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
+	if (!$hlang AND $lang!=$GLOBALS['spip_lang'])
+		$hlang = $lang;
+	$lang = ($hlang ? ' hreflang="'.$hlang.'"' : '') . $bulle;
+
+	# ici bien passer le lien pour traiter [<doc3>->url]
+	return typo("<a href=\"$lien\" class=\"$class\"$lang>$texte</a>");
+}
+
+// Repere dans la partie texte d'un raccourci [texte->...]
+// la langue et la bulle eventuelles
+
+function traiter_raccourci_lien_atts($texte) {
+
+	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $texte, $m)) {
+
 		$n =count($m);
 		// |infobulle ?
 		if ($n > 2) {
@@ -1224,17 +1245,8 @@ function traiter_raccourci_lien($regs) {
 		}
 		$texte = $m[1];
 	}
+	return array($texte, $bulle, $hlang);
 
-	list ($lien, $class, $texte, $lang) = calculer_url($url, $texte, 'tout');
-
-	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
-	if (!$hlang AND $lang AND ($lang!=$GLOBALS['spip_lang'])) $hlang=$lang;
-	$hreflang = $hlang ? ' hreflang="'.$hlang.'"' : '';
-
-	# ici bien passer le lien pour traiter [<doc3>->url]
-	return typo("<a href=\"$lien\" class=\"$class\"$hreflang$bulle>"
-		. $texte
-		. "</a>");
 }
 
 // Fonction pour les champs chapo commencant par =,  redirection qui peut etre:
