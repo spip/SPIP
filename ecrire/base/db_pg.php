@@ -87,18 +87,20 @@ function spip_pg_select($select, $from, $where,
 		$count = $limatch[3];
 	}
 
+	$select = spip_pg_frommysql($select);
+
+	$orderby = spip_pg_orderby($orderby, $select);
+
 	if ($having) {
 	  if (is_array($having))
 	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
-	  spip_log("SPIP-PG ne sait pas traduire HAVING $having"); # a revoir
-	  $having ='';
 	}
 	$q =  spip_pg_frommysql($select)
 	  . (!$from ? '' : ("\nFROM " . spip_pg_from($from)))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
-	  . ($orderby ? ("\nORDER BY " . spip_pg_frommysql($orderby)) :'')
+	  . ($orderby ? ("\nORDER BY $orderby") :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
 
@@ -132,6 +134,21 @@ function spip_pg_from($from)
 
 }
 
+function spip_pg_orderby($order, $select)
+{
+	$res = array();
+	$arg = (is_array($order) ?  $order : preg_split('\s*,\s*',$order));
+
+	foreach($arg as $v) {
+		if (preg_match('/(case\s+.*?else\s+0\s+end)\s*AS\s+' . $v .'/', $select, $m)) {
+
+		  $res[] = $m[1];
+		} else $res[]=$v;
+	}
+	spip_log("orde $res");
+	return spip_pg_frommysql(join(',',$res));
+}
+
 // Conversion a l'arrach' des jointures MySQL en jointures PG
 // A refaire pour tirer parti des possibilites de PG et de MySQL5
 
@@ -141,7 +158,6 @@ function spip_pg_groupby($groupby, $from, $select)
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
-	  $join = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$join);
 	  $join = preg_replace('/(SUM|COUNT|MAX|MIN)\([^)]+\)\s*,/i','', $join);
 	  $join = preg_replace('/,?\s*(SUM|COUNT|MAX|MIN)\([^)]+\)/i','', $join);
 	}
@@ -165,9 +181,8 @@ function spip_pg_groupby($groupby, $from, $select)
 function spip_pg_frommysql($arg)
 {
 	if (is_array($arg)) $arg = join(", ", $arg);
-	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
-	if ($res != $arg)
-	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
+
+	$res = spip_pg_fromfield($arg);
 
 	$res = preg_replace('/\b0[+]([^, ]+)\s*/',
 			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
@@ -203,6 +218,25 @@ function spip_pg_frommysql($arg)
 	return str_replace('REGEXP', '~', $res);
 }
 
+function spip_pg_fromfield($arg)
+{
+	while(preg_match('/^(.*?)FIELD\s*\(([^,]*)((,[^,)]*)*)\)/', $arg, $m)) {
+
+		preg_match_all('/,([^,]*)/', $m[3], $r, PREG_PATTERN_ORDER);
+		$res = '';
+		$n=0;
+		$index = $m[2];
+		foreach($r[1] as $v) {
+			$n++;
+			spip_log($v);
+			$res .= "\nwhen $index=$v then $n";
+		}
+		spip_log("---- " . substr($arg,strlen($m[0])+1));
+		$arg = $m[1] . "case $res else 0 end "
+		  . substr($arg,strlen($m[0]));
+	}
+	return $arg;
+}
 
 // http://doc.spip.org/@calculer_pg_where
 function calculer_pg_where($v)
