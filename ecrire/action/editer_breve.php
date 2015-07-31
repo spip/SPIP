@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/auth');
-include_spip("inc/lang");
 
 // http://doc.spip.org/@action_editer_breve_dist
 function action_editer_breve_dist() {
@@ -224,6 +223,7 @@ function revisions_breves_langue($id_breve, $id_rubrique, $changer_lang)
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 		spip_query("UPDATE spip_breves SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_breve=$id_breve");
+		include_spip("inc/lang");
 		calculer_langues_utilisees();
 	} else 	spip_query("UPDATE spip_breves SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_breve=$id_breve");
 }

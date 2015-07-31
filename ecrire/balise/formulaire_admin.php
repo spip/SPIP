@@ -141,7 +141,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	//
 	// Regler les boutons dans la langue de l'admin (sinon tant pis)
 	//
-	include_spip('inc/lang');
+
 	include_spip('base/abstract_sql');
 	$login = preg_replace(',^@,','',$GLOBALS['spip_admin']);
 	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),

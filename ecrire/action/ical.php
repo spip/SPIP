@@ -12,9 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 include_spip('inc/lang');
-utiliser_langue_visiteur();
 include_spip('inc/texte');
 include_spip('inc/charsets');
 include_spip('inc/meta');

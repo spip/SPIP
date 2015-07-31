@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 # afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
 
 // http://doc.spip.org/@exec_plonger_dist
@@ -23,7 +22,6 @@ function exec_plonger_dist()
 	$exclus = intval($exclus);
 	$col = intval($col);
 
-	include_spip('inc/texte');
 	$plonger = charger_fonction('plonger', 'inc');
 	ajax_retour($plonger($id, htmlentities($rac), array(), $col, $exclus));
 }

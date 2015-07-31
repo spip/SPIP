@@ -21,7 +21,6 @@ function exec_rechercher_dist()
 	$exclus = intval($exclus);
 	$rac = htmlentities($rac);
 
-	include_spip('inc/texte');
 	$where = split("[[:space:]]+", $type);
 	if ($where) {
 		foreach ($where as $k => $v) 

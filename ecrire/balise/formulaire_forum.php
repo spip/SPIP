@@ -12,10 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('inc/meta');
 include_spip('inc/acces');
 include_spip('inc/texte');
-include_spip('inc/lang');
 include_spip('inc/mail');
 include_spip('inc/forum');
 include_spip('base/abstract_sql');

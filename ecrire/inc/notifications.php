@@ -35,7 +35,6 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 		return;
 	}
 
-	include_spip('inc/lang');
 	include_spip('inc/texte');
 	include_spip('inc/mail');
 

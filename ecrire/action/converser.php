@@ -50,8 +50,6 @@ function action_converser_dist()
 // http://doc.spip.org/@action_converser_post
 function action_converser_post($lang, $ecrire=false)
 {
-  spip_log ("acp $lang");
-
 	if ($lang) {
 		include_spip('inc/lang');
 		if (changer_langue($lang)) {

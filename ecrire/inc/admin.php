@@ -69,12 +69,11 @@ function debut_admin($script, $action='', $commentaire='') {
 		spip_log ("Action admin: $action");
 		return true;
 	}
+	include_spip('inc/minipres');
+
 	if ($commentaire) {
-		include_spip('inc/texte');
 		$commentaire = ("\n<p>".propre($commentaire)."</p>\n");
 	}
-
-	include_spip('inc/minipres');
 
 	// Si on est un super-admin, un bouton de validation suffit
 	// nom de l'autorisation a revoir... 'webmestre' veut tout et rien dire...
