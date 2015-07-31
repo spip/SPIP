@@ -261,7 +261,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 // http://doc.spip.org/@exec_articles_edit_dist
 function exec_articles_edit_dist()
 {
-	$id_article =_request('id_article');
+	$id_article = _request('id_article');
 	$id_rubrique = _request('id_rubrique');
 	$lier_trad = intval(_request('lier_trad'));
 	$new = _request('new');
