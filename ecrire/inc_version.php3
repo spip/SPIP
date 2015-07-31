@@ -793,14 +793,12 @@ function lire_meta($nom) {
 }
 
 // Lire les meta cachees
-if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
+if (!defined('_ECRIRE_INC_META')) {
 	unset($meta); # parano
-
-	if (file_exists(_DIR_SESSIONS . 'meta_cache.php3'))
-		include(_DIR_SESSIONS . 'meta_cache.php3');
+	if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
+		$meta = @unserialize($meta);
 	// en cas d'echec refaire le fichier
 	if (!is_array($meta) AND _FILE_CONNECT) {
-
 		include_ecrire('inc_meta.php3');
 		ecrire_metas();
 	}
