@@ -8,6 +8,7 @@ dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/rien.gif -text
 dist/style_prive.html -text
+dist/win_png.html -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
