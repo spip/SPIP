@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La sindicacion s\'es encalada: impossible d\'accedir au backend d\'aqueu sit.',
 'avis_erreur' => 'Error: vejatz &ccedil;ai sota',
 'avis_erreur_connexion' => 'Error de connexion',
+'avis_erreur_cookie' => '',
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cau pas apelar aquela foncion dins aqueu cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@)! ',
@@ -40,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'Inserir una A accent gr&egrave;u majuscula',
 'barre_aide' => 'Utilizar leis acorchas tipograficas per enriquir v&ograve;stra compaginacion',
+'barre_aide_rac' => '',
 'barre_e_accent_aigu' => 'Inserir una E accent agut majuscula',
 'barre_eo' => 'Inserir una E dins l\'O',
 'barre_eo_maj' => 'Inserir una E dins l\'O majuscula',
@@ -189,7 +191,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // F
 'form_deja_inscrit' => 'Siatz ja inscrich(a).',
 'form_email_non_valide' => 'V&ograve;stra adrei&ccedil;a e-mail es pas valida.',
-'form_forum_access_refuse' => 'Pod&egrave;tz plus accedir a aqueu sit.',
+'form_forum_access_refuse' => 'Pod&egrave;tz pus accedir a aqueu sit.',
 'form_forum_bonjour' => 'Bonjorn @nom@,',
 'form_forum_email_deja_enregistre' => 'Aquela adrei&ccedil;a e-mail ja es registrada, adoncas pod&egrave;tz utilizar v&ograve;stre mot de santa Clara costumier.',
 'form_forum_identifiant_mail' => 'Vos av&egrave;m mandat v&ograve;stre identificant nov&egrave;u per e-mail.',
@@ -253,7 +255,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'form_prop_non_enregistre' => 'V&ograve;stra proposicion es pas estada registrada.',
 'form_prop_sujet' => 'Subj&egrave;cte',
 'form_prop_url_site' => 'Adrei&ccedil;a (URL) dau sit',
-'forum_acces_refuse' => 'Pod&egrave;tz plus accedir a aquelei forums.',
+'forum_acces_refuse' => 'Pod&egrave;tz pus accedir a aquelei forums.',
 'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge ten mens de d&egrave;tz caract&egrave;rs.',
 'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol ten mens de tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat:',
@@ -322,7 +324,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_maintenance_site' => 'Mantenen&ccedil;a dau sit',
 'icone_messagerie_personnelle' => 'Messatjari&aacute; personala',
 'icone_modifier_informations_personnelles' => '',
-'icone_mots_cles' => 'Mots claus',
+'icone_mots_cles' => 'Mots clau',
 'icone_nouvelle_breve' => 'Escriure una br&egrave;va n&ograve;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempuei la comen&ccedil;an&ccedil;a',
@@ -476,15 +478,15 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_propose_2' => 'Article prepausat
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" es prepausat a la publicacion.',
-'info_propose_4' => 'Vos convidam a lo venir consultar e a balhar v&ograve;stre vejaire',
+'info_propose_4' => 'Vos convidam a lo venir consultar e a bailar v&ograve;stre vejaire',
 'info_propose_5' => 'dins lo forum que li es estacat. Es disponible a l\'adrei&ccedil;a:',
 'info_publie_01' => 'L\'article "@titre@" es estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
 'info_question_referers' => '',
-'info_rechercher' => 'Recercar',
-'info_rechercher_02' => 'Recercar:',
+'info_rechercher' => 'Cercar',
+'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
 'info_remplacer_vignette_defaut' => '',
 'info_retablir_lien' => 'Restablir aqueu liame',
@@ -513,7 +515,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_tout_site1' => '',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz mai tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
-'info_trop_resultat' => 'Tr&ograve;p de resultats per "@cherche_mot@"; vougatz afinar la rec&egrave;rca.',
+'info_trop_resultat' => 'Tr&ograve;p de resultats per "@cherche_mot@"; vougatz afinar la c&egrave;rca.',
 'info_utilisation_messagerie_interne' => 'Utilizatz la messatjari&aacute; int&egrave;rna d\'aqueu sit.',
 'info_valider_lien' => 'validar aqueu liame',
 'info_verifier_image' => ', vougatz verificar que leis imatges se sigan ben transferits.',
@@ -631,7 +633,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 // P
 'pass_choix_pass' => 'Vougatz chausir v&ograve;stre mot de santa Clara nov&egrave;u:',
 'pass_erreur' => 'Error',
-'pass_erreur_acces_refuse' => '<b>Error :</b> pod&egrave;tz plus accedir a aqueu sit.',
+'pass_erreur_acces_refuse' => '<b>Error :</b> pod&egrave;tz pus accedir a aqueu sit.',
 'pass_erreur_code_inconnu' => '<b>Error :</b> aqueu c&ograve;de corresp&ograve;nd a ges de vesitaire que p&ograve;sca accedir a aqueu sit.',
 'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adrei&ccedil;a <tt>@email_oubli@</tt> es pas registrada sus aqueu sit.',
 'pass_erreur_non_valide' => '<b>Error:</b> aquel e-mail <tt>@email_oubli@</tt> es pas valid!',
@@ -644,7 +646,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
   reservat ai vesitaires registrats.',
 'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sota l\'adrei&ccedil;a e-mail ont
  vos registreriatz lo c&ograve;p passat. 
-   Recebretz un e-mail que vos balhar&agrave; lo biais de 
+   Recebretz un e-mail que vos bailar&agrave; lo biais de 
     tornar trobar v&ograve;stre acc&egrave;s.',
 'pass_mail_passcookie' => '(aqu&ograve;\'s un messatge automatic)
 Per tornar trobar v&ograve;stre acc&egrave;s au sit
@@ -683,7 +685,7 @@ e vos tornar connectar au sit.
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
+'texte_actualite_site_1' => 'Quand vos seretz familharizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per dobrir mai de possibilitats.',
 'texte_bilan_traductions' => '',
@@ -698,7 +700,7 @@ e vos tornar connectar au sit.
  niv&egrave;u, e verificatz puei que leis imatges aparegan
  encara dins leis articles.',
 'texte_inc_auth_1' => 'Siatz identificat/ada coma
-   <B>@auth_login@</b>, mai aqueu login exist&iacute;s pas o plus dins la basa.
+   <B>@auth_login@</b>, mai aqueu login exist&iacute;s pas o pus dins la basa.
   Assajatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
 'texte_inc_auth_3' => ', apr&egrave;s qu\'auretz quitat eventualament, puei
@@ -738,7 +740,7 @@ e vos tornar connectar au sit.
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Lei liames intrants',
-'titre_mots_cles' => 'MOTS CLAUS',
+'titre_mots_cles' => 'MOTS CLAU',
 'titre_page_admin_vider' => '',
 'titre_page_etat_traductions' => '',
 'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor MySQL) empacha d\'accedir a aquela part dau sit. Grandmerc&eacute; de v&ograve;stra indulg&eacute;ncia.',

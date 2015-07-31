@@ -317,7 +317,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_interface_simple' => 'Interf&agrave;cia simplificada',
 'icone_maintenance_site' => 'Mantienen&ccedil;a deu sit',
 'icone_messagerie_personnelle' => 'Messatjaria personau',
-'icone_mots_cles' => 'Mots claus',
+'icone_mots_cles' => 'Mots clau',
 'icone_nouvelle_breve' => 'Escr&iacute;ver ua br&egrave;va nava',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuau',
 'icone_repartition_debut' => 'Afichar la reparticion dempuish la comen&ccedil;an&ccedil;a',
@@ -462,14 +462,14 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_propose_2' => 'Article perpausat
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" qu\'ei perpausat a la publicacion.',
-'info_propose_4' => 'Que\'vs convidam a vi&eacute;ner consult&agrave;\'u e a balhar la v&ograve;sta id&egrave;a',
+'info_propose_4' => 'Que\'vs convidam a vi&eacute;ner consult&agrave;\'u e a bailar la v&ograve;sta id&egrave;a',
 'info_propose_5' => 'dens lo forum qui l\'ei estacat. Qu\'ei disponible a l\'adrei&ccedil;a:',
 'info_publie_01' => 'L\'article "@titre@" qu\'ei estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] QUE PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat--------------',
 'info_question_referers' => '',
-'info_rechercher' => 'Recercar',
-'info_rechercher_02' => 'Recercar:',
+'info_rechercher' => 'Cercar',
+'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
 'info_retablir_lien' => 'Restablir aqueth ligam',
 'info_retirer_mot' => 'Quitar aqueth mot',
@@ -494,7 +494,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_tout_afficher' => 'Afichar tot',
 'info_travaux_texte' => 'Aqueth sit n\'ei pas enq&uuml;&egrave;ra configurat. Tornatz mei tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
-'info_trop_resultat' => 'Tr&ograve;p de resultats ent&agrave; "@cherche_mot@"; volhatz afinar la rec&egrave;rca.',
+'info_trop_resultat' => 'Tr&ograve;p de resultats ent&agrave; "@cherche_mot@"; volhatz afinar la c&egrave;rca.',
 'info_utilisation_messagerie_interne' => 'Qu\'utilizatz la messatjaria int&egrave;rna d\'aqueth sit.',
 'info_valider_lien' => 'validar aqueth ligam',
 'info_verifier_image' => ', volhatz verificar que los imatges e\'s sian plan transferits.',
@@ -609,7 +609,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
   reservat aus vesitaires registrats.',
 'pass_indiquez_cidessous' => 'Marcatz &ccedil;a devath l\'adrei&ccedil;a e-mail on
  vos registr&egrave;tz lo c&ograve;p passat. 
-   Que receberatz un e-mail qui\'vs balhar&agrave; la man&egrave;ra de 
+   Que receberatz un e-mail qui\'vs bailar&agrave; la man&egrave;ra de 
     tornar trobar lo v&ograve;ste acc&egrave;s.',
 'pass_mail_passcookie' => '(aqu&ograve; qu\'ei un messatge automatic)
 T&agrave; tornar trobar lo v&ograve;ste acc&egrave;s au sit
@@ -648,7 +648,7 @@ e tornar connect&agrave;\'vs au sit.
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'texte_actualite_site_1' => 'Quan vos seretz familiarizat/ada dab l\'interf&agrave;cia, que poiratz clicar sus &laquo;',
+'texte_actualite_site_1' => 'Quan vos seretz familharizat/ada dab l\'interf&agrave;cia, que poiratz clicar sus &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" t&agrave; aubrir mei possibilitats.',
 'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualizacion qu\'ei activada sus aqueth sit. S\'installatz a partir d\'aqueth formulari d\'imatges au(s) format(s) @gd_formats@, que s\'acompanhar&agrave;n d\'ua vinheta d\'ua talha maximau de @taille_preview@ pix&egrave;ls.',
@@ -696,7 +696,7 @@ e tornar connect&agrave;\'vs au sit.
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Los ligams entrants',
-'titre_mots_cles' => 'MOTS CLAUS',
+'titre_mots_cles' => 'MOTS CLAU',
 'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servider MySQL) qu\'empacha d\'accedir a aquera part deu sit. Merc&eacute;s de la v&ograve;sta indulg&eacute;ncia.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DENS AQUERA RUBRICA',
 'titre_statistiques' => 'Estadisticas deu sit',

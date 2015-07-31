@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a ',
 'aucune_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a ',
 'autres_breves' => 'Autras br&egrave;vas',
-'autres_groupes_mots_clefs' => 'Autres grops de mots claus',
+'autres_groupes_mots_clefs' => 'Autres grops de mots clau',
 'autres_sites' => 'Autres sits',
 
 
@@ -67,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mai recents',
-'mots_clefs' => 'Mots claus',
-'mots_clefs_meme_groupe' => 'Mots claus dins lo mesme grop',
+'mots_clefs' => 'Mots clau',
+'mots_clefs_meme_groupe' => 'Mots clau dins lo mesme grop',
 
 
 // N

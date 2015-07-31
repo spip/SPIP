@@ -316,7 +316,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_interface_simple' => 'Interf&agrave;cia simplificada',
 'icone_maintenance_site' => 'Mantenen&ccedil;a del sit',
 'icone_messagerie_personnelle' => 'Messatjari&aacute; personala',
-'icone_mots_cles' => 'Mots claus',
+'icone_mots_cles' => 'Mots clau',
 'icone_nouvelle_breve' => 'Escriure una br&egrave;va n&ograve;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempu&egrave;i la comen&ccedil;an&ccedil;a',
@@ -461,14 +461,14 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_propose_2' => 'Article prepausat
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" es prepausat a la publicacion.',
-'info_propose_4' => 'Vos convidam a lo venir consultar e a balhar v&ograve;stre vejaire',
+'info_propose_4' => 'Vos convidam a lo venir consultar e a donar v&ograve;stre vejaire',
 'info_propose_5' => 'dins lo forum que li es estacat. Es disponible a l\'adrei&ccedil;a:',
 'info_publie_01' => 'L\'article "@titre@" es estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
-'info_rechercher' => 'Recercar',
-'info_rechercher_02' => 'Recercar:',
+'info_rechercher' => 'Cercar',
+'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
 'info_retablir_lien' => 'Restablir aquel ligam',
 'info_retirer_mot' => 'Quitar aquel mot',
@@ -604,7 +604,7 @@ Merc&eacute;s per v&ograve;stra participacion
   reservat als vesitaires registrats.',
 'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sota l\'adrei&ccedil;a e-mail ont
  vos registr&egrave;retz lo c&ograve;p passat. 
-   Recebretz un e-mail que vos balhar&agrave; lo biais de 
+   Recebretz un e-mail que vos bailar&agrave; lo biais de 
     tornar trobar v&ograve;stre acc&egrave;s.',
 'pass_mail_passcookie' => '(aqu&ograve;\'s un messatge automatic)
 Per tornar trobar v&ograve;stre acc&egrave;s al sit
@@ -643,7 +643,7 @@ e vos tornar connectar al sit.
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
+'texte_actualite_site_1' => 'Quand vos seretz familharizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per dobrir mai de possibilitats.',
 'texte_creation_automatique_vignette' => 'La creacion automatica de vinhetas de previsualizacion es activada sus aquel sit. S\'installatz a partir d\'aquel formulari d\'imatges al(s) format(s) @gd_formats@, s\'acompanhar&agrave;n d\'una vinheta d\'una talha maximala de @taille_preview@ pix&egrave;ls.',
@@ -691,7 +691,7 @@ e vos tornar connectar al sit.
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Ligams intrants',
-'titre_mots_cles' => 'MOTS CLAUS',
+'titre_mots_cles' => 'MOTS CLAU',
 'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servidor MySQL) empacha d\'accedir a aquela part del sit. Merc&eacute;s de v&ograve;stra indulg&eacute;ncia.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DINS AQUELA RUBRICA',
 'titre_statistiques' => 'Estadisticas del sit',
