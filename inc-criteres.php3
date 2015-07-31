@@ -509,7 +509,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// Cas particulier : expressions de date
 	else if (ereg("^(date|mois|annee|heure|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
 	  list($col, $col_table) =
-	    calculer_critere_infixe_date($idb, &$boucles, $regs[1], $regs[2]);
+	    calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
 	} 
 
 	// HACK : selection des documents selon mode 'image'
@@ -541,7 +541,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 function calculer_jointure(&$boucle, $depart, $arrivee)
 {
-  $res = calculer_chaine_jointures(&$boucle, $depart, $arrivee);
+  $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
   $n = "";
   foreach($res as $r) {
