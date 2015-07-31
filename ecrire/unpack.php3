@@ -12,6 +12,6 @@
 
 $reinstall = 'non';
 $etape = 'unpack';
-$SCRIPT_NAME = 'install.php3';
+$SCRIPT_NAME = 'install';
 include ("inc.php3");
 ?>

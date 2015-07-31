@@ -335,12 +335,12 @@ if (!$origine) {
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
 		if ($date_premier < $date_debut)
-		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article",
+		  echo http_href_img(http_php_scriptnq("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 				     'loupe-moins.gif',
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article", 
+		  echo http_href_img(http_php_scriptnq("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 				     'loupe-plus.gif',
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '+'), "&nbsp;";
@@ -348,8 +348,12 @@ if (!$origine) {
 	
 if (flag_svg()) {
 	echo "\n<div>";
-	echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
-	echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
+	echo "<object data=",
+	  http_php_script('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"),
+	  " width='450' height='310' type='image/svg+xml'>";
+	echo "<embed src=",
+	  http_php_script('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"),
+	  " width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
 	echo "\n</div>";
 	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));

@@ -12,6 +12,6 @@
 
   // obsolete, mais assurer le service pour les vieux liens
 if (!isset($_GET['type'])) $type = 'semaine';
-$SCRIPT_NAME = 'calendrier.php3';
+$SCRIPT_NAME = 'calendrier';
 include ("inc.php3");
 ?>

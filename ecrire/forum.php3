@@ -11,6 +11,6 @@
 \***************************************************************************/
 
   // obsolete, mais assurer le service pour les vieux liens
-$SCRIPT_NAME = 'forum_admin.php3';
+$SCRIPT_NAME = 'forum_admin';
 include ("inc.php3");
 ?>
