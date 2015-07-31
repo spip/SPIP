@@ -35,6 +35,7 @@ if ($id_article) {
 		$titre = $row["titre"];
 		$soustitre = $row["soustitre"];
 		$id_rubrique = $row["id_rubrique"];
+		$id_secteur = $row['id_secteur'];
 		$descriptif = $row["descriptif"];
 		$chapo = $row["chapo"];
 		$texte = $row["texte"];
@@ -48,8 +49,6 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
-		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$id_secteur = $row_rub['id_secteur'];
 		$extra=$row["extra"];
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
@@ -62,6 +61,8 @@ if ($id_article) {
 else if ($new=='oui') {
 	$flag_editable = true;
 	$titre = filtrer_entites(_T('info_nouvel_article'));
+	$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$id_secteur = $row_rub['id_secteur'];
 }
 
 if (!$flag_editable) {
