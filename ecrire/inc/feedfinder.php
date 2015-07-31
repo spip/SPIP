@@ -10,17 +10,17 @@ Par: courcy.michael@wanadoo.fr
 
 adaptation en php, je ne reprends qu'une partie de cette algorithme
 
-0) A chaque �tape on v�rifie si les feed indiqu� sont r��llement des feeds
-1) Si l'uri pass� est un feed on retourne le r�sultat tout simplement
+0) A chaque etape on verifie si les feed indiques sont reellement des feeds
+1) Si l'uri passe est un feed on retourne le resultat tout simplement
 2) Si le header de la page contient des balises LINK qui renvoient vers des feed on les retourne
 3) on cherche les liens <a> qui se termine par  ".rss", ".rdf", ".xml", ou ".atom"
 4) on cherche les liens <a> contenant "rss", "rdf", "xml", ou "atom"
 
-j'int�gre pas l'interrogation  avec xml_rpc de syndic8, mais on peut le faire assez facilement
-dans la phase de test sur diff�rentes url je n'ai constat� aucune diffr�rence entre les r�ponses 
-donn� par feedfinder.py et les miennes donc je ne suis pas sur de voir l'interet
+j'integre pas l'interrogation  avec xml_rpc de syndic8, mais on peut le faire assez facilement
+dans la phase de test sur differentes url je n'ai constate aucune diffrerence entre les reponses 
+donnees par feedfinder.py et les miennes donc je ne suis pas sur de voir l'interet
 
-Je ne me pr�occupe pas comme l'auteur de savoir si mes liens de feed sont sur le m�me serveur ou pas
+Je ne me preoccupe pas comme l'auteur de savoir si mes liens de feed sont sur le meme serveur ou pas
 
 exemple d'utilisation
 
@@ -38,7 +38,7 @@ Array
 
 *****************************************************************/
 
-$verif_complete = 0; //mettez le � 1 si vous voulez controler la validit� des feed trouv�s mais le temps d'execution
+$verif_complete = 0; //mettez le a 1 si vous voulez controler la validite des feed trouves mais le temps d'execution
                      //est alors plus long
 
 //une fonction qui permet de si un lien est un feed ou nom, si c'est un feed elle retourne son type
@@ -50,7 +50,7 @@ function is_feed($url){
 	if (function_exists('recuperer_page')) {
 		$buffer = recuperer_page($url);
 		if (preg_match("/<(\w*) .*/", $buffer, $matches)){
-                //ici on d�tecte la premiere balise
+                //ici on detecte la premiere balise
                 $type_feed = $matches[1];
                 switch ($type_feed) {
                        case "rss": return "rss";
@@ -65,11 +65,11 @@ function is_feed($url){
       if (!$fp ) {
            return 0;
       }
-      //v�rifion la nature de ce fichier
+      //verifion la nature de ce fichier
       while (!feof($fp)) {
            $buffer = fgets($fp, 4096);
            if (preg_match("/<(\w*) .*/", $buffer, $matches)){
-                //ici on d�tecte la premiere balise
+                //ici on detecte la premiere balise
                 $type_feed = $matches[1];
                 switch ($type_feed) {
                        case "rss": fclose($fp); return "rss";
@@ -87,21 +87,21 @@ echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
 echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
 echo is_feed("http://willy.boerland.com/myblog/atom/feed") //retourne atom
 echo is_feed("http://spip.net/") . "<br />"; //retoune 0
-//pas trouver d'exmples avec rdf j'ai encore du mal � saisir ce que rdf apporte de plus que rss
+//pas trouver d'exmples avec rdf j'ai encore du mal a saisir ce que rdf apporte de plus que rss
 //mais bon j'ai pas aprofondi
 ************************************************************/
 
 //fonction sans finesse mais efficace
-//on parcourt ligne par ligne � la recherche de balise <a> ou <link>
+//on parcourt ligne par ligne a la recherche de balise <a> ou <link>
 //si dans le corps de celle-ci on trouve les mots rss, xml, atom ou rdf
 //alors on recupere la valeur href='<url>', on adapte celle-ci si elle
-//est relative et on v�rifie que c'est bien un feed si oui on l'ajoute
-//au tableau des feed si on ne trouve rien ou si aucun feed est trouv� on retourne 
+//est relative et on verifie que c'est bien un feed si oui on l'ajoute
+//au tableau des feed si on ne trouve rien ou si aucun feed est trouve on retourne 
 //un tableau vide
 // http://doc.spip.org/@get_feed_from_url
 function get_feed_from_url($url, $buffer=false){
          global $verif_complete;
-         //j'ai pr�venu ce sera pas fin
+         //j'ai prevenu ce sera pas fin
          if (!preg_match("/^http:\/\/.*/", $url)) $url = "http://www." . $url;
          if (!$buffer) $buffer = @file_get_contents($url);
 
@@ -116,7 +116,7 @@ function get_feed_from_url($url, $buffer=false){
                          || strpos($link, "xml") ){
                             //voila un candidat on va extraire sa partie href et la placer dans notre tableau
                             if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
-                                 //on aura pris soin de v�rifier si ce lien est relatif d'en faire un absolu
+                                 //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
                                  if (!preg_match("/^http:\/\/.*/", $matches2[1])){
                                         $matches2[1] = concat_url($url,$matches2[1]);
                                  }
@@ -138,7 +138,7 @@ function get_feed_from_url($url, $buffer=false){
                          || strpos($link, "xml") ){
                             //voila un candidat on va extraire sa partie href et la placer dans notre tableau
                             if (preg_match("/href=['|\"]?([^\s'\"]*)['|\"]?/",$link,$matches2)){
-                                 //on aura pris soin de v�rifier si ce lien est relatif d'en faire un absolu
+                                 //on aura pris soin de verifier si ce lien est relatif d'en faire un absolu
                                  if (!preg_match("/^http:\/\/.*/", $matches2[1])){
                                         $matches2[1] = concat_url($url,$matches2[1]);
                                  }
@@ -156,7 +156,7 @@ print_r (get_feed_from_url("spip-contrib.net"));
 print_r (get_feed_from_url("http://liberation.fr/"));
 print_r (get_feed_from_url("cnn.com"));
 print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
-*****************************    R�sultat *****************************************
+*****************************    Resultat *****************************************
 Array
 (
     [0] => http://www.spip-contrib.net/backend.php
@@ -191,7 +191,7 @@ function concat_url($url1, $path){
 		return suivre_lien($url1,$path);
 	}
         $url = $url1 . "/" . $path;
-        //cette op�ration peut tr�s facilement avoir g�n�r� // ou /// 
+        //cette operation peut tres facilement avoir genere // ou /// 
         $url = str_replace("///", "/", $url);
         $url = str_replace("//", "/", $url); 
         //cas particulier de http://
