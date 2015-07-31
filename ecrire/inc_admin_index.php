@@ -37,11 +37,11 @@ echo "<p>";
 icone_horizontale (_L('Voir le vocabulaire indexe'), "index_tous.php", "statistiques-24.gif");
 echo "</p>";
 
-icone_horizontale (_L('Mettre &agrave; jour les infos d\'indexation du site'), "admin_index.php3?mise_a_jour=oui", "cache-24.gif");
-icone_horizontale (_L('Forcer l\'indexation du site'), "admin_index.php3?forcer_indexation=20", "cache-24.gif");
-icone_horizontale (_L('Relancer l\'indexation du site sans purger les donn&eacute;es.'), "admin_index.php3?forcer_indexation=oui", "cache-24.gif");
+ icone_horizontale (_L('Mettre &agrave; jour les infos d\'indexation du site'), generer_url_ecrire("admin_index", "mise_a_jour=oui"), "cache-24.gif");
+ icone_horizontale (_L('Forcer l\'indexation du site'), generer_url_ecrire("admin_index", "forcer_indexation=20"), "cache-24.gif");
+ icone_horizontale (_L('Relancer l\'indexation du site sans purger les donn&eacute;es.'), generer_url_ecrire("admin_index", "forcer_indexation=oui"), "cache-24.gif");
 echo "<div style='width: 100%; border-top: solid 1px white;background: url(img_pack/rayures-danger.png);'>";
-icone_horizontale (_L('Cliquez ici pour purger les tables d\'indexation.'), "admin_index.php3?purger=oui", "effacer-cache-24.gif");
+ icone_horizontale (_L('Cliquez ici pour purger les tables d\'indexation.'), generer_url_ecrire("admin_index", "purger=oui"), "effacer-cache-24.gif");
 echo "</div>";
 
 fin_raccourcis();

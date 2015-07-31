@@ -70,7 +70,7 @@ function index_tous_dist()
 
 	debut_raccourcis();
 	echo "<p>";
-	icone_horizontale (_L('Statut de l\'indexation'), "admin_index.php3", "tout-site-24.gif");
+	icone_horizontale (_L('Statut de l\'indexation'), generer_url_ecrire("admin_index"), "tout-site-24.gif");
 	echo "</p>";
 
 	icone_horizontale (_L('Tout'), "index_tous.php", "tout-site-24.gif");
@@ -111,9 +111,6 @@ function index_tous_dist()
 		fin_page();
 		exit;
 	}
-
-	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
-	$image_url = '../spip_image.php3';
 
 	if ($index_table==''){
 		$titre_table=_L("Tous les Mots Indexes");
