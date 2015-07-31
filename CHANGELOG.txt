@@ -1,3 +1,69 @@
+SPIP-Core spip-3.0.7 -> spip-3.0.8  17 avril 2013
+-------------------------------------------------------------
+
+r20355 | cedric    |  (sam. 23 mars 2013)  | 1sReport oublie et tardif de r15574 : nettoyer_uri() cache son resultat dans une static. On introduit un argument permettant de la reseter a une valeur fournieurl_de_base() cache son resultat dans un tableau static, indexe en fonction de la globale profondeur_url :on introduit un argument  qui permet :- en passant une valeur entiere, de calculer l'url pour cette profondeur- en passant un array(), de reinitialiser la static en cache a cette valeur- en passant false, de recuperer la staticsi aucune valeur n'est fournie, c'est la globale profondeur_url qui est utilisee, comme auparavant.Ces deux modifications permettent de sauvegarder/restaurer le contexte de l'url dans laquelle une page est calculee (pour un calcul differe)+ PHPDoc sur les deux fonctions
+r20359 | suske     |  (mer. 27 mars 2013)  | report de 20358 - le rédac ne peut plus mettre une redirection quand l'article est publié
+r20361 | suske     |  (mer. 27 mars 2013)  | report de 20360
+r20363 | suske     |  (mer. 27 mars 2013)  | report de 20362 - pfff
+r20365 | b_b       |  (mer. 27 mars 2013)  | report de r20364 : indentation
+r20367 | guytarr   |  (mer. 27 mars 2013)  | report de r20366 (chankalan)
+r20369 | kent1     |  (mer. 27 mars 2013)  | report de r20368On met à jour, on n'installe pas si on a déjà une meta du même nomC'est un peu moins ambigue du genre "Installation réussie" pour un plugin qui est là depuis 2 ans alors qu'il est juste mis à jour
+r20378 | cedric    |  (ven. 29 mars 2013)  | optimisation des ecritures disque : pour les bots on utilise tous les caches disponibles même si périmés, et quand il faut calculer un cache on ne l'écrit pas sur le disque (cela évite de générer un flux d'écriture pour des caches qui ne servent pas aux vrais visiteurs, et cela évite aussi de faire gonfler les caches de manière deraisonable)
+r20388 | cedric    |  (ven. 29 mars 2013)  | Suport SQLite de la fonction mysql TIMESTAMPDIFFhttps://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_timestampdiff
+r20389 | cedric    |  (ven. 29 mars 2013)  | Optimisation du critere {age} : utiliser la fonction SQL TIMESTAMPDIFF plutot qu'une expression compliquee. On doit pouvoir optimiser aussi les xxx_relatifs mais c'est à creuser
+r20390 | marcimat  |  (ven. 29 mars 2013)  | Autoriser `#_contenu_article:LESAUTEURS` lorsqu'on demande les auteurs d'une boucle parente.
+r20392 | kent1     |  (ven. 29 mars 2013)  | On est en 3.0.7 maintenantDéclaration du pipeline traduire appelé dans le formulaire prive/traduire.php (http://core.spip.org/projects/spip/repository/entry/branches/spip-3.0/prive/formulaires/traduire.php#L73)Du coup encore une raison de logguer moins ;)
+r20397 | denisb    |  (lun. 01 avril 2013) | debusquer.php : ôter le tableau des erreurs par un clic sur sa barre de titre. résout #2968.
+r20400 | cedric    |  (mar. 02 avril 2013) | simplification de jour_relatif : la fonction SQL TO_DAYS donne exactement le bon resultat, inutile d'y ajouter un calcul basé sur le mois et l'année qui donne un résultat approximatif dès que les dates sont à cheval sur des mois différents.
+r20401 | denisb    |  (mer. 03 avril 2013) | debusquer.php : cosmétique (apparition du 'toogle-bug') ; r20397 cassait la navigation du var_profile : on répare.
+r20402 | denisb    |  (mer. 03 avril 2013) | tracer.php, spip_admin.css : suite (indispensable) de r20401.
+r20404 | denisb    |  (jeu. 04 avril 2013) | debusquer.php :- on revient sur l'utilisation de jQuery qui n'est pas toujours fonctionnelle.- highlight_string ne pose plus de tags obsolètes en PHP5.- un peu de cosmétique.
+r20406 | denisb    |  (lun. 08 avril 2013) | ecrire/inc/filtres.php : on ajoute subrepticement un troisième argument à la fonction appliquer_filtre. si ce troisième argument est fourni et que la fonction ne trouve pas le filtre demandé, elle renvoit quand même la balise non filtrée.si ce troisième argument n'est pas fourni (par défaut) et que la fonction ne trouve pas le filtre demandé, elle ne renvoit rien (compatibilité avec l'utilisation actuelle).
+r20408 | b_b       |  (mar. 09 avril 2013) | report des commentaires de r20243
+r20410 | marcimat  |  (mar. 09 avril 2013) | Coquille dans r18955 : créer un index nécessite le mot clé 'INDEX', pas seulement 'ADD'.
+r20416 | suske     |  (dim. 14 avril 2013) | report de 18952 - il y a environ un an: Pouvoir appeler la fonction Bouton_spip_rss en lui précisant l'info-bulle
+r20419 | ben       |  (mer. 17 avril 2013) | report de langues Pre 3.0.8
+
+SPIP-plugins-dist spip-3.0.7 -> spip-3.0.8  17 avril 2013
+-------------------------------------------------------------
+
+r71097 | guytarr   |  (mar. 26 mars 2013)  | report de r71094 et r71096 (Suske, denisb)
+r71135 | kent1     |  (mer. 27 mars 2013)  | Report de r71134Ne pas pouvoir ajouter des libs dans _DIR_LIB si on n'est pas autorisé à "plugins_ajouter"Bien éviter l'affichage des boutons d'ajouts dans le formulaireVersion 0.80.13 (par contre)
+r71263 | guytarr   |  (ven. 29 mars 2013)  | include manquant (_Eric_)
+r71267 | guytarr   |  (ven. 29 mars 2013)  | collecter_request vidait $c, du coup on avait plus d'objet pour forum_insert_statut et seule la configuration globale du site était prise en compte, ce qui ennuyait Suske.
+r71270 | guytarr   |  (ven. 29 mars 2013)  | r71263 n'est pas utile et ne resout rien, on vire (bis)
+r71272 | rasta     |  (ven. 29 mars 2013)  | Tester si le parent a bien une URL non-vide avant de concaténer, sinon on se retrouve avec une URL ayant un "/" *devant*. Ce qui produit des bugs sur les installations en sous-dossier.Par contre je n'ai pas compris pourquoi il y a un traitement différent entre parent "null" et parent "0".
+r71391 | kent1     |  (lun. 01 avril 2013) | Report de r71390Evitera de faire parler les logs
+r71394 | kent1     |  (lun. 01 avril 2013) | Report de r71392Evitera de faire parler les logs
+r71396 | kent1     |  (lun. 01 avril 2013) | Report de r71395Donner une action vide aux pipelines internes du pluginEvitera de faire parler les logsversion 0.4.11
+r71398 | kent1     |  (lun. 01 avril 2013) | Report de r71397Donner une action vide aux pipelines internes du pluginEvitera de faire parler les logs
+r71408 | teddy     |  (lun. 01 avril 2013) | Report de c68328
+r71453 | kent1     |  (mar. 02 avril 2013) | Report de z71452Si c'est une lib ce n'est pas _DIR_PLUGINS_AUTO mais _DIR_LIB et avoir un plugin non activable à cause d'une lib mise à jour et plugin mis à jour autrement que via svp c'est un peu nulversion 0.80.14
+r71578 | denisb    |  (jeu. 04 avril 2013) | controler_forum.html, controler_petition.html : le filtre 'minifier' est une fonction fournie par le plugin 'compresseur' (qui n'est pas en necessite) ; s'il n'est pas disponible, on s'en passe. résout #2971
+r71579 | denisb    |  (jeu. 04 avril 2013) | petitions : ajout (et utilisation) d'un item de langue.
+r71661 | b_b       |  (ven. 05 avril 2013) | report de r65256 : ft_tu n'est pas une langue (taffit)
+r71662 | b_b       |  (ven. 05 avril 2013) | report de r65257 : ft_tu n'est pas une langue (taffit)
+r71704 | denisb    |  (sam. 06 avril 2013) | medias,portfolio-documents.html : cette action (définitive) mérite bien une confirmation !  (http://forum.spip.net/fr_251453.html)
+r71757 | kent1     |  (lun. 08 avril 2013) | Pourquoi imposer un mode document ou choix pour l'upload ftp alors que l'on veut juste ne pas le montrer lorsque le mode est image ou vignette.En gros ce commit permet d'avoir la partie ftp pour des modes pas forcément par défaut dans SPIP (conversions ...)
+r71758 | kent1     |  (lun. 08 avril 2013) | Indentation et utilisation similaire un peu partout des {} (ok on n'a pas de conventions de code mais bon)
+r71768 | kent1     |  (lun. 08 avril 2013) | Indentation et espaces
+r71771 | kent1     |  (lun. 08 avril 2013) | Répertoire vide
+r71772 | kent1     |  (lun. 08 avril 2013) | Répertoires vides
+r71775 | kent1     |  (lun. 08 avril 2013) | Répertoires vides finalisés (David Prévot)
+r71777 | kent1     |  (lun. 08 avril 2013) | Pas nécessaire
+r71779 | kent1     |  (lun. 08 avril 2013) | Un petit incrément du coup
+r71782 | kent1     |  (lun. 08 avril 2013) | On a déjà du mal avec nos propres tests... on va pas se tapper ceux des autres
+r71783 | denisb    |  (lun. 08 avril 2013) | controler_forum, controler_petition : prise en compte de la nouvelle écriture de appliquer_filtre (http://core.spip.org/projects/spip/repository/revisions/20406). résout (enfin) http://core.spip.org/issues/2972.
+r71789 | kent1     |  (lun. 08 avril 2013) | ne pas utiliser / pour les délimiteurs pour éviter un bug sur les /
+r71848 | marcimat  |  (mar. 09 avril 2013) | Sur les traces de http://core.spip.org/projects/spip/repository/revisions/20410 , ajouter un index nécessite ADD INDEX, pas seulement ADD.
+r72003 | b_b       |  (sam. 13 avril 2013) | report de r72002 : afficher le nom du jour dans le title des barres du graph de visites par jour
+r72031 | b_b       |  (dim. 14 avril 2013) | report de r72030 : #2963 toujours, fermer la balise rss pour avoir un flux valide
+r72033 | b_b       |  (dim. 14 avril 2013) | report de r72032 : http://core.spip.org/issues/2963 jointure sur la table auteurs pour bien renseigner dc:creator dans le flux
+r72035 | b_b       |  (dim. 14 avril 2013) | report de r72034 : http://core.spip.org/issues/2976 un rédacteur ne doit pas pouvroi créer d'annonce
+r72067 | marcimat  |  (mar. 16 avril 2013) | Report de r72066. Nom incorrect du fichier d'un compagnon, et en plus un var_dump trainait dedans.
+r72121 | ben       |  (mer. 17 avril 2013) | report de langues Pre 3.0.8
+
+
 SPIP-Core spip-3.0.6 -> spip-3.0.7  22 mars 2013
 -------------------------------------------------------------
 
