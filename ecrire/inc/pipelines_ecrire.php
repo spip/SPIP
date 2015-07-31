@@ -18,14 +18,14 @@ function f_jQuery_prive ($texte) {
 	$x = '';
 	$jquery_plugins = pipeline('jquery_plugins',
 		array(
-			'javascript/jquery.js',
-			'javascript/jquery.form.js',
-			'javascript/jquery.autosave.js',
-			'javascript/jquery.placeholder-label.js',
-			'javascript/ajaxCallback.js',
-			'javascript/jquery.colors.js',
-			'javascript/jquery.cookie.js',
-			'javascript/spip_barre.js',
+			'prive/javascript/jquery.js',
+			'prive/javascript/jquery.form.js',
+			'prive/javascript/jquery.autosave.js',
+			'prive/javascript/jquery.placeholder-label.js',
+			'prive/javascript/ajaxCallback.js',
+			'prive/javascript/jquery.colors.js',
+			'prive/javascript/jquery.cookie.js',
+			'prive/javascript/spip_barre.js',
 		));
 	$jqueryui_plugins = jqueryui_dependances(pipeline('jqueryui_plugins',
 		array(
