@@ -24,7 +24,7 @@ define('_DEFAULT_DB', 'spip');
 // http://doc.spip.org/@req_pg_dist
 function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 	static $last_connect = array();
-	charger_php_extension('pgsql');
+	if (!charger_php_extension('pgsql')) return false;
 	
 	// si provient de selectdb
 	if (empty($addr) && empty($port) && empty($login) && empty($pass)){
