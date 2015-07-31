@@ -155,7 +155,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . "</select>"
 	  . (($lien === 'ajax')
 	     ? "<input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' />"
-	     : "<noscript><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></noscript>");
+	     : "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>");
 
 	if ($lien === 'ajax') return $ret;
 	return "\n<form action='$lien' method='post' style='margin:0px; padding:0px;'>\n<div>"

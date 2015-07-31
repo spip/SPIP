@@ -366,8 +366,6 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
 	global $spip_display, $menu_accesskey, $compteur_survol;
 
-	$largeur = _LARGEUR_ICONES_BANDEAU;
-
 	$alt = '';
 	$title = '';
 	if ($spip_display == 1){
@@ -375,9 +373,6 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	else if ($spip_display == 3){
 		$title = "title=\"$texte\"";
 		$alt = $texte;
-	}
-	else {
-		$alt = '';
 	}
 	
 	if (!$menu_accesskey = intval($menu_accesskey)) $menu_accesskey = 1;
@@ -393,10 +388,10 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
-		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select";
+		$a_href = "\nonclick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'";
 	}
 	else {
-		$a_href = "\nhref=\"$lien\"$class_select";
+		$a_href = "\nhref=\"$lien\"";
 	}
 
 	$compteur_survol ++;
@@ -409,7 +404,11 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$class = 'cellule-texte';
 	}  
 		
-	return "<td class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'><a$accesskey$a_href>$texte</a></td>\n";
+	return "<td style='width: "
+	. _LARGEUR_ICONES_BANDEAU
+	. "px' class='$class' onmouseover=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\"><a$accesskey$a_href$class_select>"
+	.  $texte
+	. "</a></td>\n";
 }
 
 // http://doc.spip.org/@bandeau_principal2
@@ -523,19 +522,18 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 
-	$res = '';
 	if ($spip_display != 1) {
-		$res .= "<td class='cellule36' style='width: ".$largeur."px;'>";
-		$res .= "$a_href" .
+		$res = "<td class='cellule36' style='width: ".$largeur."px;'>";
+		$res .= $a_href .
 		  http_img_pack("$fond", $alt, "$title");
 		if ($aide AND $spip_display != 3) $res .= aide($aide)." ";
 		if ($spip_display != 3) {
 			$res .= "<span>$texte</span>";
 		}
+		$res .= "</a></td>\n";
 	}
-	else $res .= "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
-	$res .= "</a>";	
-	$res .= "</td>\n";
+	else $res = "<td style='width: $largeur" . "px' class='cellule-texte'>$a_href". $texte . "</a></td>\n";
+
 	return array($res, $largeur);
 }
 

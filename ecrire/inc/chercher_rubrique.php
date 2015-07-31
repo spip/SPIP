@@ -219,7 +219,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
-	return 	"<table width='100%'><tr><td width='45'><a onclick=\""
+	return 	"<table width='100%'><tr><td style='width: 45px'><a onclick=\""
 	.  $js
 	. "charger_node_url_si_vide('"
 	. $url

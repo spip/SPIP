@@ -335,10 +335,9 @@ function afficher_liste($largeurs, $table, $styles = '') {
 function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
 	global $spip_lang_left,$browser_name;
-	$res = '';
+
 	$evt = (eregi("msie", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
 
-	$res .= "\n<tr class='tr_liste'$evt>";
 	reset($largeurs);
 	if ($styles) reset($styles);
 	while (list(, $texte) = each($t)) {
@@ -347,12 +346,12 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 		if ($styles) list(, $style) = each($styles);
 		if (!trim($texte)) $texte .= "&nbsp;";
 		$res .= "\n<td" .
-			($largeur ? " width=\"$largeur\"" : '') .
+			($largeur ? (" style='width: $largeur" ."px;'") : '') .
 			($style ? " class=\"$style\"" : '') .
 			">" . lignes_longues($texte) . "\n</td>";
 	}
-	$res .= "\n</tr>";
-	return $res;
+
+	return "\n<tr class='tr_liste'$evt>$res</tr>";
 }
 
 // http://doc.spip.org/@afficher_liste_display_eq4
@@ -1989,12 +1988,12 @@ function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 
 	$res = "\n<div>&nbsp;</div>"
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
-	. "\n<tr><td valign='top' width='50%' rowspan='2'>"
+	. "\n<tr><td style='width: 50%' valign='top' rowspan='2'>"
 	. $les_enfants
 	. "</td>\n<td style='width: 20px;' rowspan='2'>"
 	. http_img_pack("rien.gif", ' ', "width='20'")
 	. "</td>"
-	. "\n<td valign='top' width='50%'>"
+	. "\n<td style='width: 50%' valign='top'>"
 	. $les_enfants2
 	. "&nbsp;"
 	. "</td></tr>"
@@ -2157,7 +2156,7 @@ function http_calendrier_rv($messages, $type) {
 		  http_href($url,
 				     ($rv ?
 				      http_img_pack("rv.gif", 'rv',
-						    http_style_background($bouton . '.gif', "no-repeat;'")) : 
+						    http_style_background($bouton . '.gif', "no-repeat;")) : 
 				      http_img_pack($bouton.".gif", $bouton, "")),
 				     '', '') .
 		"</td>" .

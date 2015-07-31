@@ -92,30 +92,29 @@ function gadget_rubriques() {
 	$max_lignes = ceil($total_lignes / $nb_col);
 
 	$count_lignes = 0;
+	$style = " style='width: 200px'; z-index: 1;'  valign='top'";
+	$ret = '';
 
 	if ($i > 0) {
-		$ret = "<div>&nbsp;</div>";
-		$ret .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
-				$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
+				$ret .= "</div></td>\n<td$style><div class='bandeau_rubriques'>";
 			}
 			$count_lignes ++;
 
 			$ret .= bandeau_rubrique($id_rubrique, $titre_rubrique, $i);
 			$i = $i - 1;
 		}
-		$ret .= "</div>";
+
+		$ret = "<table><tr>\n<td$style><div class='bandeau_rubriques'>"
+		. $ret
+		. "\n</div></td></tr></table>\n";
 	}
 	unset($GLOBALS['db_art_cache']); // On libere la memoire
 
-	$ret = "<table><tr><td valign='top' width='200'>\n"
-		. $ret
-		. "\n</td></tr></table>\n";
-
-	return $ret;
+	return "<div>&nbsp;</div>" . $ret;
 }
 
 
@@ -439,7 +438,7 @@ function gadget_agenda() {
 	$annee = annee($date);
 	$jour = jour($date);
 	$gadget .= "<table><tr>";
-	$gadget .= "<td valign='top' width='200'>";
+	$gadget .= "<td style='width: 200px' valign='top' >";
 	$gadget .= "<div>";
 	$gadget .= http_calendrier_agenda($annee_today, $mois_today, $jour_today, $mois_today, $annee_today, false, generer_url_ecrire('calendrier'));
 	$gadget .= "</div>";
@@ -449,14 +448,12 @@ function gadget_agenda() {
 	if (!$n['n'])
 		$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1"));
 	if ($n['n']) {
-		$gadget .= "<td valign='top' width='10'> &nbsp; </td>";
-		$gadget .= "<td valign='top' width='200'>";
+		$gadget .= "<td style='width: 10px' valign='top'> &nbsp; </td>";
+		$gadget .= "<td style='width: 200px; color: black;' valign='top'>";
 		$gadget .= "<div>&nbsp;</div>";
-		$gadget .= "<div style='color: black;'>";
 		$gadget .= http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
 		$gadget .=  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
 		$gadget .=  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-		$gadget .= "</div>";
 		$gadget .= "</td>";
 	}
 	$gadget .= "</tr></table>";
