@@ -181,6 +181,10 @@ function inc_forum_insert_dist() {
 	$id_rubrique = intval($id_rubrique);
 	$id_syndic = intval($id_syndic);
 
+	// id_rubrique est parfois passee pour les articles, on n'en veut pas
+	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+		$id_rubrique = 0;
+
 	$statut = controler_forum($id_article, $retour_forum);
 
 	// Ne pas autoriser de changement de nom si forum sur abonnement
