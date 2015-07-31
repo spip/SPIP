@@ -1,4 +1,6 @@
 2.0.2 -> 2.0.4
+- Remettre jQuery 1.2.6 pour ne pas créer de problème de comptabilité. Ceux qui le souhaitent pourront mettre jQuery 1.3.2 dans leur répertoire squelettes dans un fichier : « javascript/jquery.js » (13774)
+- Enlever tous les arobases des sélecteurs jQuery pour autoriser jQuery 1.3.x(13772)
 - report de [13755] et [13763] introduit les valuers date_default et date_redac_default dans le contexte quand SPIP ajoute la date d'office / accepter un tableau pour le filtre alterner (13770)
 - report de [13621]Ajout de jQuery 1.3 ... Attention aux extensions qui utilisent encore [@param=value] dans les sélecteurs jQuery à passer en [param=value] . (13768)
 - Ajout de image_joindre (13766) 
