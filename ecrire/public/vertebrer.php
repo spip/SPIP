@@ -92,7 +92,7 @@ function public_vertebrer_dist($desc)
 <title>SPIPAdmin $surnom [(#NOM_SITE_SPIP|textebrut)]</title>
 <INCLURE{fond=inc-head}>
 </head>
-<body class=page_rubrique><div id='page'>
+<body class='page_rubrique'><div id='page'>
 <h1 style='text-align:center'>SPIPAdmin $surnom</h1><br />\n" .
 	  // au minimum: "<BOUCLE1($fond)></BOUCLE1>#TOTAL_BOUCLE<//B1>")
 	  // au maximum:
@@ -100,7 +100,7 @@ function public_vertebrer_dist($desc)
 	"<table class='spip' border='1' width='90%'>" .
 	"<tr>\n\t<th>Nb</th>" .
 	vertebrer_sort($field,'') .
-	"\n</tr>\n<BOUCLE1($nom)" .
+	"\n</tr>\n<BOUCLE1($surnom)" .
 	vertebrer_crit($field) .
 	'>' .
 	vertebrer_cell($field) .
