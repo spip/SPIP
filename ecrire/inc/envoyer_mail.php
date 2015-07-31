@@ -66,7 +66,7 @@ if ($GLOBALS['hebergeur'] == 'lycos') {
 
 // http://doc.spip.org/@nettoyer_titre_email
 function nettoyer_titre_email($titre) {
-	return str_replace("\n", ' ', supprimer_tags(extraire_multi($titre)));
+	return str_replace("\n", ' ', supprimer_tags(entites_html(corriger_typo($titre))));
 }
 
 // http://doc.spip.org/@nettoyer_caracteres_mail

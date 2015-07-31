@@ -356,7 +356,7 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 				. "<span class='icone'> </span>"
 			  . "<div class='puce_statut'>".$puce_statut($zarticle, $attarticle["statut"], $id_rubrique,'article')."</div>"
 			  . "<span><a"
-			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
+			  . ($auteurs ? (' title="' . entites_html($auteurs). '"') :'')
 			  . "\nhref='"
 			  . generer_url_ecrire("articles","id_article=$zarticle")
 			  . "' class='titre'>"
@@ -373,9 +373,6 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 // http://doc.spip.org/@trouve_auteurs_articles
 function trouve_auteurs_articles($id_article)
 {
-	$result = sql_select("nom", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article", "", "auteurs.nom");
-	$res = array();
-	while ($row = sql_fetch($result))  $res[] = extraire_multi($row["nom"]);
-	return join(", ", $res);
+	return corriger_typo(join(", ", array_map('array_shift', sql_allfetsel("nom", "spip_auteurs AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_auteur=L.id_auteur", "L.id_article=$id_article", "", "nom"))));
 }
 ?>

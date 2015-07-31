@@ -229,7 +229,7 @@ function erreur_squelette($message='', $lieu='') {
 				. ' '
 				. _T('admin_debug')
 				. ' '
-				. supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+				. supprimer_tags(corriger_typo($GLOBALS['meta']['nom_site']));
 			echo minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
 			exit;
 		}
