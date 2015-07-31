@@ -120,8 +120,9 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$fichier_dest = basename($fichier_dest);
 		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight)){
 			// on garde la terminaison initiale car image simplement copiee
-			// et on postfixe son nom avec la date
+			// et on postfixe son nom avec un md5 du path
 			$terminaison_dest = $terminaison;
+			$fichier_dest .= '-'.substr(md5("$fichier"),0,5);
 		}
 		else
 			$fichier_dest .= '-'.substr(md5("$fichier-$effet"),0,5);
