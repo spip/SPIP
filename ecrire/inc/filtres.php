@@ -516,7 +516,7 @@ function antispam($texte) {
 // |sinon{rien} : affiche "rien" si la chaine est vide, affiche la chaine si non vide
 // http://doc.spip.org/@sinon
 function sinon ($texte, $sinon='') {
-	if (strlen($texte))
+	if ($texte OR (is_string($texte) AND strlen($texte)))
 		return $texte;
 	else
 		return $sinon;

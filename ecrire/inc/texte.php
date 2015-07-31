@@ -400,7 +400,7 @@ function protege_js_modeles($t) {
 function interdire_scripts($t) {
 
 	// rien ?
-	if (!$t OR !strstr($t, '<')) return $t;
+	if (!$t OR !is_string($t) OR !strstr($t, '<')) return $t;
 
 	// echapper les tags asp/php
 	$t = str_replace('<'.'%', '&lt;%', $t);
