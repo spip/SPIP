@@ -5,7 +5,7 @@ body { font: 1em Verdana, Geneva, Sans, sans-serif; color: #2e3436; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
 h1 { margin: 1em 0 1em 0; font-size: 1.2em; font-weigth: bold; color: #5c3566; }
-h2 { margin: 0.8em 0 0.8em 0; font-size: 1.1em; font-weigth: normal; }
+h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weigth: normal; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
 ul,ol,li { list-style: none; /*text-align: justify;*/ }
@@ -22,13 +22,13 @@ body { background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 10
 
 /* Habillage (en vrac)
 ---------------------------------------------- */
-fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.9em; }
+fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.90em; }
 legend { font-weight: bold; font-size: 1.1em; color: #000; } /* Preciser la couleur des legend pour IE/Win */
 label {}
 
-.reponse_formulaire { font-weight: bold; color: red; }
+.reponse_formulaire, .erreur_message { font-weight: bold; color: red; }
 
-body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #cccccc; padding: 10px; font-family: helvetica, arial, sans; }
+body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #CCC; padding: 10px; font-family: helvetica, arial, sans; }
 
 #minipres { width: 40em; background: #FFF repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
 
@@ -41,35 +41,32 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #cccccc; pa
 
 .toile_foncee { background: #777; }
 
-.fondl { background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.9em; font-family: Verdana, Geneva, Sans, sans-serif; }
+.fondl { background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.90em; font-family: Verdana, Geneva, Sans, sans-serif; }
 .formo { width: 100%; display: block; background-color: #FFF; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px solid #333; behavior: url(win_width.htc); font-size: 1em; font-family: Verdana, Geneva, Sans, sans-serif; }
 
-p.resultat { background-color: #fcaf3e; padding: 0.2em 0.1em; text-align: center; color: #FFF; font-weight: bold; }
-p.resultat.ok {background-color:#73d216; }
-p.resultat.echec {background-color:#d60c0c; }
+p.resultat { background-color: #fcaf3e; padding: 0.20em 0.10em; text-align: center; color: #FFF; font-weight: bold; }
+p.resultat.ok { background-color: #73d216; }
+p.resultat.echec { background-color: #d60c0c; }
 
 #etapes { display: block; position: absolute; top: 10px; left: 10px; }
-#etapes span { margin-top: -0.5em; display: block; padding: 12px 14px; margin-bottom: 5px; }
+#etapes span { display: block; margin-top: -0.50em; padding: 12px 14px; margin-bottom: 5px; }
 #etapes span em { font-size: 2em; font-weight: bold; }
 #etapes span span { position: absolute; top: -100px; left: -100px; }
 #etapes span.ok { background: url(images/etape-ok.gif) center no-repeat; }
 #etapes span.encours { background: url(images/etape-encours.gif) center no-repeat; }
 #etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
 
-#infos_etapes { padding: 0px; margin: 0px; padding-left: 10px; height: 63px; overflow: hidden; text-align: left; font-family: helvetica, arial, sans; list-style:none; }
-
-#infos_etapes li { float: left; text-align: left; font-size: 0.85em; line-height: 1.05em; margin-left: -28px; padding-left: 29px; }
-#infos_etapes li .fond { height: 69px; width: 9.0em; padding-right: 2em; padding-top: 10px; }
-
-#infos_etapes li span.numero_etape { font-weight: bold; font-size: 3em; padding-right: 3px; padding-left: 3px; padding-top: 7px; margin-left:-10px; float: left; display: block; height: 50px; font-family: helvetica, arial, sans; }
-#infos_etapes li.encours { background: url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat left top; color: #fff; font-weight: bold; }
+#infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
+#infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; text-align: left; font-size: 0.85em; line-height: 1.05em; }
+#infos_etapes li .fond { width: 9em; height: 69px; padding-right: 2em; padding-top: 10px; }
+#infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding-right: 3px; padding-left: 3px; padding-top: 7px; font-weight: bold; font-size: 3em; font-family: helvetica, arial, sans; }
+#infos_etapes li.encours { background: url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat left top; color: #FFF; font-weight: bold; }
 #infos_etapes li.encours .fond { background: #ecb043 url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat -30px top; }
-#infos_etapes li.prochains  { background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #888888; }
+#infos_etapes li.prochains  { background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #888; }
 #infos_etapes li.prochains .fond { background: #dbdbdb url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
-
 #infos_etapes li.valides { background: url(../prive/images/degrade-etapes-vert-left.gif) no-repeat left top; color: #116d05; }
 #infos_etapes li.valides .fond { background: #88f560 url(../prive/images/degrade-etapes-vert-left.gif) no-repeat -30px top; }
-#infos_etapes li.erreur { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat left top; color: #fff; }
+#infos_etapes li.erreur { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat left top; color: #FFF; }
 #infos_etapes li.erreur .fond { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat -30px top; }
 
 
@@ -77,22 +74,22 @@ p.resultat.echec {background-color:#d60c0c; }
 ---------------------------------------------- */
 .page_login { text-align: center; }
 .page_login #minipres { width: 26em; }
-.page_login .formulaire_menu_lang { float: right; font-size: 0.8em; }
+.page_login .formulaire_menu_lang { float: right; font-size: 0.80em; }
 .page_login .formulaire_menu_lang label { display: none; }
 .page_login .formulaire_menu_lang select {}
-.page_login .formulaire_login { clear: both; text-align: left; font-size: 0.8em; }
+.page_login .formulaire_login { clear: both; text-align: left; font-size: 0.80em; }
 .page_login .formulaire_login fieldset { border: 1px solid #BABDB6; padding: 1em; font-size: 1em; }
 .page_login .formulaire_login fieldset ul { margin: 0; padding: 0; list-style: none; }
-.page_login .formulaire_login fieldset ul li { margin: 0; padding: 0.5em 0; }
+.page_login .formulaire_login fieldset ul li { margin: 0; padding: 0.50em 0; }
 .page_login .formulaire_login fieldset ul li label,
-.page_login .formulaire_login fieldset ul li .erreur,
+.page_login .formulaire_login fieldset ul li .erreur_message,
 .page_login .formulaire_login fieldset ul li .details { display: block; width: auto; }
 .page_login .formulaire_login fieldset ul li label.nofx { display: inline; }
 .page_login .formulaire_login fieldset ul li input.text,
-.page_login .formulaire_login fieldset ul li input.password { width: 15em; }
+.page_login .formulaire_login fieldset ul li input.password { width: 15em; font-weight: bold; }
 .page_login .formulaire_login fieldset .spip_logos { float: right; padding-left: 10px; }
 .page_login .boutons { text-align: right; }
-.page_login .retour { clear: both; text-align: center; font-size: 0.8em; }
+.page_login .retour { clear: both; text-align: center; font-size: 0.80em; }
 
 
 /* Couleurs des liens
