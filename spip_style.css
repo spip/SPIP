@@ -61,8 +61,10 @@ table.spip {
 }
 
 table.spip caption{
-	caption-side: bottom; /* top */
-	text-align:center;
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin-left: auto;                                                       
+	margin-right: auto;
 	padding: 3px;
 	font-weight: bold;
 	font-family: Verdana,Arial,Sans,sans-serif;
