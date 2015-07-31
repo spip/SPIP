@@ -30,7 +30,7 @@ function action_tourner_post($r)
 	$arg = $r[1];
 	$result = spip_query("SELECT fichier FROM spip_documents WHERE id_document=$arg");
 
-	if (!$row = spip_fetch_array($result))
+	if (!$row = spip_abstract_fetch($result))
 		return;
 
 	include_spip('inc/charsets');	# pour le nom de fichier

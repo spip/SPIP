@@ -31,7 +31,7 @@ function executer_une_syndication() {
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
-	$row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
+	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'off');
@@ -41,7 +41,7 @@ function executer_une_syndication() {
 	$where = "syndication='oui'
 	AND statut='publie'
 	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
-	$row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
+	$row = spip_abstract_fetch(spip_query("SELECT id_syndic FROM spip_syndic WHERE $where	ORDER BY date_syndic LIMIT 1"));
 
 	if ($row) {
 		$id_syndic = $row["id_syndic"];
@@ -388,7 +388,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
 	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
 	if (spip_num_rows($s) > 1) {
-		while ($a = spip_fetch_array($s))
+		while ($a = spip_abstract_fetch($s))
 			if ($a['titre'] == $data['titre']
 			AND !in_array($a['id_syndic_article'], $faits)) {
 				$id_syndic_article = $a['id_syndic_article'];
@@ -398,7 +398,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// Sinon, s'il y en a un, on verifie qu'on ne vient pas de l'ecrire avec
 	// un autre item du meme feed qui aurait le meme link
-	else if ($a = spip_fetch_array($s)
+	else if ($a = spip_abstract_fetch($s)
 	AND !in_array($a['id_syndic_article'], $faits)) {
 		$id_syndic_article = $a['id_syndic_article'];
 	}
@@ -472,7 +472,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$now_id_syndic");
 
-	if (!$row = spip_fetch_array($result))
+	if (!$row = spip_abstract_fetch($result))
 		return;
 
 	$url_syndic = $row['url_syndic'];

@@ -21,7 +21,7 @@ function action_instituer_forum_dist() {
 	list($id_forum, $statut) = preg_split('/\W/', $arg);
 	$id_forum = intval($id_forum);
 	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum");
-	if (!($row = spip_fetch_array($result)))
+	if (!($row = spip_abstract_fetch($result)))
 		return;
 
 	$id_parent = $row['id_parent'];
@@ -41,7 +41,7 @@ function action_instituer_forum_dist() {
 
 		$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($id_messages)");
 		$id_messages = array();
-		while ($row = spip_fetch_array($result_forum))
+		while ($row = spip_abstract_fetch($result_forum))
 			$id_messages[] = $row['id_forum'];
 	}
 

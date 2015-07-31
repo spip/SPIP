@@ -77,7 +77,7 @@ function translate_init($request) {
 
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
-	while ($r = spip_fetch_array($q)) {
+	while ($r = spip_abstract_fetch($q)) {
 		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], intval($r['ajout']));
 	}
 	return $trans;
@@ -266,7 +266,7 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = spip_fetch_array(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
+	$r = spip_abstract_fetch(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
 	return array($r['id'], $r['titre']);
 }
 
@@ -277,14 +277,14 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
-	$r = spip_fetch_array(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
+	$r = spip_abstract_fetch(spip_query("SELECT id_type AS id, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)));
 	return array($r['id'], $r['titre']);
 }
 
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
-	$r = spip_fetch_array(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
+	$r = spip_abstract_fetch(spip_query("SELECT id_groupe AS id, titre FROM spip_groupes_mots WHERE titre=" . _q($values['titre'])));
 	return array($r['id'], $r['titre']);
 }
 
@@ -305,7 +305,7 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 	if (isset($trans['id_groupe'])
 	AND isset($trans['id_groupe'][$id_groupe])) {
 		$new = $trans['id_groupe'][$id_groupe][0];
-		$r = spip_fetch_array(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
+		$r = spip_abstract_fetch(spip_query("SELECT id_mot FROM spip_mots WHERE titre=$titre AND id_groupe=$new" ));
 		if ($r) return  (0 - $r['id_mot']);
 	}
 	$r = spip_abstract_insert('spip_mots', '', '()');
@@ -327,7 +327,7 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
+	$r = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_articles WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'poubelle'" ));
 	if ($r) return (0 - $r['id_article']);
 
 	$r = spip_abstract_insert('spip_articles', '', '()');
@@ -349,7 +349,7 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	$id_parent = importe_translate_maj('id_rubrique', (0 - $id_parent));
 
 	$titre = _q($titre);
-	$r = spip_fetch_array(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
+	$r = spip_abstract_fetch(spip_query("SELECT id_breve FROM spip_breves WHERE titre=$titre AND id_rubrique=$id_parent AND statut<>'refuse'" ));
 	if ($r) return (0 - $r['id_breve']);
 
 	$r = spip_abstract_insert('spip_breves', '', '()');
@@ -392,7 +392,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 			}
 		}
 
-		$r = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
+		$r = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE titre=" . _q($titre) . " AND id_parent=" . intval($id_parent)));
 		if ($r)  {
 		  return (0 - $r['id_rubrique']);
 		}

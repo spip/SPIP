@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//constantes spip pour spip_fetch_array()
+//constantes spip pour mysql_fetch_array()
 define('SPIP_BOTH', MYSQL_BOTH);
 define('SPIP_ASSOC', MYSQL_ASSOC);
 define('SPIP_NUM', MYSQL_NUM);
@@ -341,8 +341,8 @@ function spip_mysql_showtable($nom_table)
 {
 	$a = spip_mysql_query("SHOW TABLES LIKE '$nom_table'");
 	if (!$a) return "";
-	if (!spip_fetch_array($a)) return "";
-	list(,$a) = spip_mysql_fetch(spip_mysql_query("SHOW CREATE TABLE $nom_table"),MYSQL_NUM);
+	if (!mysql_fetch_array($a)) return "";
+	list(,$a) = mysql_fetch_array(spip_mysql_query("SHOW CREATE TABLE $nom_table"),MYSQL_NUM);
 	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
 		return "";
 	else {
@@ -380,17 +380,11 @@ function spip_mysql_showtable($nom_table)
 // Recuperation des resultats
 //
 
-// interface de abstract_sql.
-
 // http://doc.spip.org/@spip_mysql_fetch
-function spip_mysql_fetch($r, $t=SPIP_ASSOC) {
+function spip_mysql_fetch($r, $t=MYSQL_ASSOC) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
-// http://doc.spip.org/@spip_fetch_array
-function spip_fetch_array($r, $t=SPIP_ASSOC) {
-	if ($r) return mysql_fetch_array($r, $t);
-}
 
 // http://doc.spip.org/@spip_mysql_countsel
 function spip_mysql_countsel($from = array(), $where = array(),

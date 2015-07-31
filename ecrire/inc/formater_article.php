@@ -79,7 +79,7 @@ function inc_formater_article_dist($row)
 	
 	$result = auteurs_article($id_article);
 	$les_auteurs = array();
-	while ($r = spip_fetch_array($result)) {
+	while ($r = spip_abstract_fetch($result)) {
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
 		$les_auteurs[]= "$mail&nbsp;$nom";
 	}

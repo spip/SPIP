@@ -54,7 +54,7 @@ function action_legender_auteur_post($r) {
 //
 	  $auteur = array();
 	  if ($id_auteur) {
-		$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+		$auteur = spip_abstract_fetch(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	  }
 	  if (!$auteur) {
 		$id_auteur = 0;
@@ -85,7 +85,7 @@ function action_legender_auteur_post($r) {
 				if (strlen($new_login) < 4)
 					$echec[]= 'info_login_trop_court';
 				else {
-					$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
+					$n = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login=" . _q($new_login) . " AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
 					if ($n['n'])
 						$echec[]= 'info_login_existant';
 					else if ($new_login != $old_login) {

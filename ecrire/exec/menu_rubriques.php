@@ -158,7 +158,7 @@ function gen_liste_rubriques() {
 	// se restreindre aux rubriques utilisees recemment +secteurs
 	$liste="0";
 	$s = spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_parent=0 DESC, date DESC LIMIT 500");
-	while ($t = spip_fetch_array($s))
+	while ($t = spip_abstract_fetch($s))
 		$liste .=",".$t['id_rubrique']; 
 	 
 	$res = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique IN ($liste)",'', 'id_parent,0+titre,titre');
@@ -166,7 +166,7 @@ function gen_liste_rubriques() {
 	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
 	$GLOBALS['db_art_cache'] = array();
 	if (spip_num_rows($res) > 0) { 
-		while ($row = spip_fetch_array($res)) {
+		while ($row = spip_abstract_fetch($res)) {
 			$id = $row['id_rubrique'];
 			$parent = $row['id_parent'];
 			$GLOBALS['db_art_cache'][$parent][$id] = 

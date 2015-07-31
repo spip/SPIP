@@ -31,7 +31,7 @@ function exec_articles_versions_dist()
 // Lire l'article
 //
 
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
+	$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
 		OR !$row) {
@@ -159,7 +159,7 @@ function exec_articles_versions_dist()
 	$zapn = 0;
 
 	echo "<ul class='verdana3'>";
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 
 	// points de pagination
 		if ($zap
@@ -190,7 +190,7 @@ function exec_articles_versions_dist()
 		if (isset($row['id_auteur'])) {
 			if ($row['id_auteur'] == intval($row['id_auteur'])
 			AND $s = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='".addslashes($row['id_auteur'])."'")) {
-				$t = spip_fetch_array($s);
+				$t = spip_abstract_fetch($s);
 				echo " (".typo($t['nom']).")";
 			} else {
 				echo " (".$row['id_auteur'].")"; #IP edition anonyme

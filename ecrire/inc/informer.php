@@ -22,7 +22,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	include_spip('inc/texte');
 	if ($type == "rubrique") {
 		$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
-		if ($row = spip_fetch_array($res)) {
+		if ($row = spip_abstract_fetch($res)) {
 			$titre = typo($row["titre"]);
 			$descriptif = propre($row["descriptif"]);
 		} else {

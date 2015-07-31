@@ -21,7 +21,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 {
 	global $spip_lang_right;
 
-	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
+	$petition = spip_abstract_fetch(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
 	$res = petitionner_choisir($petition);
 
@@ -72,7 +72,7 @@ function petitionner_choisir($petition)
 // http://doc.spip.org/@petitionner_decompte
 function petitionner_decompte($id_article, $petition)
 {
-	$signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
+	$signatures = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 	$signatures = $signatures['count'];
 	if (!$signatures) return '';
 

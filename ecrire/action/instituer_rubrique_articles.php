@@ -29,7 +29,7 @@ function action_instituer_rubrique_articles_dist() {
 
 	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop' OR statut = 'prepa')"); // on publie tout !?
 
-	while($row = spip_fetch_array($voss)) {
+	while($row = spip_abstract_fetch($voss)) {
 		instituer_article($row['id'], $statut, false);
 	}
 	include_spip('inc/rubriques');

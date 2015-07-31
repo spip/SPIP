@@ -137,7 +137,7 @@ function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 	$cond = '';
 	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
 	if (spip_num_rows($res)<200){ // probleme de performance au dela, on ne filtre plus
-		while ($row = spip_fetch_array($res))
+		while ($row = spip_abstract_fetch($res))
 			$cond .= ",".$row['id_auteur'];
 	}
 	if ($cond) $cond = "id_auteur NOT IN (" . substr($cond,1) . ')  ';
@@ -156,7 +156,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 	elseif (preg_match('/^\d+$/',$ids)) {
 
-		$row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
+		$row = spip_abstract_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
 		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['nom'])."</span></b></span></li></ul>";
 	}
 	else {
@@ -167,7 +167,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 		. _T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))
 		. "</b><br />"
 		.  "<ul class='verdana1'>";
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
@@ -223,7 +223,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 
 	$table = array();
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_auteur = $row['id_auteur'];
 		$vals = $formater_auteur($id_auteur);
 
@@ -281,7 +281,7 @@ function objet_auteur_select($result)
 {
 	$statut_old = $premiere_old = $res = '';
 	$t = 'info_administrateurs';
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_auteur = $row["id_auteur"];
 		$nom = $row["nom"];
 		$email = $row["email"];

@@ -480,7 +480,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	$bouton = bouton_block_depliable($titre,true,$id_liste);
 
 	$table = array();
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		if ($a = $skel($row, $tous_id, $voir_logo, $own))
 			$table[] = $a;
 	}
@@ -541,7 +541,7 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	
 	$res = '';
 
- 	while($row = spip_fetch_array($request)) {
+ 	while($row = spip_abstract_fetch($request)) {
 		$statut=$row['statut'];
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
@@ -694,7 +694,7 @@ function afficher_forum_mots($id_forum)
 	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 	$res = "";
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$res .= "\n<li> <b>"
 		. propre($row['titre'])
 		. " :</b> "
@@ -1312,7 +1312,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$fstatut = 'puce_statut_' . $type;
 	$idom = 'rubrique_' . $table;
 
-	while($row = spip_fetch_array($voss)) {
+	while($row = spip_abstract_fetch($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
 		$statut = $row['statut'];
@@ -1362,7 +1362,7 @@ function afficher_hierarchie($id_rubrique) {
 
 	while ($id_rubrique) {
 
-		$res = spip_fetch_array(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$res = spip_abstract_fetch(spip_query("SELECT id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
 		if (!$res) break; // rubrique inexistante
 
@@ -1407,7 +1407,7 @@ function enfant_rub($collection){
 
 	$result = spip_abstract_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
 
-	while($row=spip_fetch_array($result)){
+	while($row=spip_abstract_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -1466,7 +1466,7 @@ function sous_enfant_rub($collection2){
 
 	if (!spip_num_rows($result3)) return '';
 	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
-	while($row=spip_fetch_array($result3)){
+	while($row=spip_abstract_fetch($result3)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
 		$titre2=$row['titre'];
@@ -1537,7 +1537,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	switch ($type) {
 		case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
-				$n = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
+				$n = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
 				if (!$n) $statut = 'prop';
 			}
 			if ($statut == 'publie')

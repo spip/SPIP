@@ -48,7 +48,7 @@ function get_spip_doc($fichier) {
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 	if (intval($id_document) <= 0)
 		return '';
-	$row = spip_fetch_array(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
+	$row = spip_abstract_fetch(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
 	if (!$row) return '';
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
@@ -117,7 +117,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	$vignette = $document['id_vignette'];
 
 	if ($vignette) 
-		$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$vignette));
+		$vignette = spip_abstract_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$vignette));
 	if ($vignette) {
 			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 				$image = image_pattern($vignette);
@@ -158,7 +158,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if (!$url)
 		return $image;
 	else {
-		$t = spip_fetch_array(spip_query("SELECT mime_type FROM spip_types_documents WHERE extension="._q($document['extension'])));
+		$t = spip_abstract_fetch(spip_query("SELECT mime_type FROM spip_types_documents WHERE extension="._q($document['extension'])));
 		return "<a href='$url'\n\ttype='".$t['mime_type']."'>$image</a>";
 	}
 }
@@ -209,12 +209,12 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
 
 	$documents_lies = array();
-	while ($row = spip_fetch_array($res))
+	while ($row = spip_abstract_fetch($res))
 		$documents_lies[]= $row['id_document'];
 
 	if (count($documents_lies)) {
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents WHERE id_document in (".join(',', $documents_lies).")");
-		while ($v = spip_fetch_array($res))
+		while ($v = spip_abstract_fetch($res))
 			$vignettes[]= $v['id_vignette'];
 		$docs_exclus = preg_replace('/^,/','',join(',', $vignettes).','.join(',', $documents_lies));
 
@@ -225,7 +225,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
-	while ($doc = spip_fetch_array($images_liees)) {
+	while ($doc = spip_abstract_fetch($images_liees)) {
 		$id_document = $doc['id_document'];
 		$deplier = $id_document_actif==$id_document;
 		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
@@ -308,8 +308,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	charger_generer_url();
 	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
-	if (!$document = spip_fetch_array($res)) return "";
-	//$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+	if (!$document = spip_abstract_fetch($res)) return "";
+	//$document = spip_abstract_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
 	$extension = $document['extension'];
@@ -329,7 +329,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
 
 	$result = spip_query("SELECT titre,inclus FROM spip_types_documents WHERE extension="._q($extension));
-	if ($letype = spip_fetch_array($result)) {
+	if ($letype = spip_abstract_fetch($result)) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];
 	}

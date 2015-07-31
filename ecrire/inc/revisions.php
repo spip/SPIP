@@ -74,7 +74,7 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 		// Recuperer la version la plus recente
 		$result = spip_query("SELECT compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND id_fragment=$id_fragment AND version_min<=$id_version ORDER BY version_min DESC LIMIT 1");
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_abstract_fetch($result)) {
 			$fragment = $row['fragment'];
 			$version_min = $row['version_min'];
 			if ($row['compress'] > 0) $fragment = @gzuncompress($fragment);
@@ -127,7 +127,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	// Fragments chevauchant l'ensemble de l'intervalle, s'ils existent
 	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin");
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
 		$fragment = $row['fragment'];
 		if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
@@ -149,7 +149,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<$version_debut AND version_max>=$version_debut AND version_max<=$version_fin");
 
 	$deb_fragment = array();
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
 		$fragment = $row['fragment'];
 		$version_min = $row['version_min'];
@@ -170,7 +170,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	// Fragments chevauchant la fin de l'intervalle, s'ils existent
 	$result = spip_query("SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments WHERE id_article=$id_article AND version_max>$version_fin AND version_min>=$version_debut AND version_min<=$version_fin");
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
 		$fragment = $row['fragment'];
 		$version_min = $row['version_min'];
@@ -235,7 +235,7 @@ function recuperer_fragments($id_article, $id_version) {
 
 	$result = spip_query("SELECT id_fragment, version_min, version_max, compress, fragment FROM spip_versions_fragments WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version");
 
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$id_fragment = $row['id_fragment'];
 		$version_min = $row['version_min'];
 		$fragment = $row['fragment'];
@@ -357,7 +357,7 @@ function apparier_paras($src, $dest, $flou = true) {
 function recuperer_version($id_article, $id_version) {
 	$result = spip_query("SELECT champs FROM spip_versions WHERE id_article=$id_article AND id_version=$id_version");
 	
-	if (!($row = spip_fetch_array($result))) return false;
+	if (!($row = spip_abstract_fetch($result))) return false;
 
 	$fragments = recuperer_fragments($id_article, $id_version);
 	$champs = unserialize($row['champs']);
@@ -397,7 +397,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Examiner la derniere version
 	$result = spip_query("SELECT id_version, (id_auteur=$id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC LIMIT 1");
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = spip_abstract_fetch($result)) {
 		$nouveau = !$row['flag'];
 		$id_version = $row['id_version'];
 		if ($nouveau) {
@@ -418,7 +418,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	}
 	$result = spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1");
 
-	if ($row = spip_fetch_array($result))
+	if ($row = spip_abstract_fetch($result))
 		$id_fragment_next = $row['id_fragment'] + 1;
 	else
 		$id_fragment_next = 1;
@@ -560,7 +560,7 @@ function enregistrer_premiere_revision($x) {
 		if (!spip_num_rows($query)) {
 			$select = join(", ", liste_champs_versionnes($x['args']['table']));
 			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
-			$champs_originaux = spip_fetch_array($query);
+			$champs_originaux = spip_abstract_fetch($query);
 			// Si le titre est vide, c'est qu'on vient de creer l'article
 			if ($champs_originaux['titre'] != '') {
 				$date_modif = $champs_originaux['date_modif'];

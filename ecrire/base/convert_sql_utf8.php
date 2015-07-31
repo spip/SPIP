@@ -57,7 +57,7 @@ function convert_sql_utf8(){
 	}
 	if (!$charset_supporte){
 		$res = spip_query("SHOW CHARACTER SET");
-		while ($row = spip_fetch_array($res)){
+		while ($row = spip_abstract_fetch($res)){
 			if ($row['Charset']=='utf8') $utf8_supporte = true;
 		}
 		echo install_debut_html();
@@ -72,7 +72,7 @@ function convert_sql_utf8(){
 	// lister les collations et leur charset correspondant
 	$res = spip_query("SHOW COLLATION");
 	$charset2collations = array();
-	while ($row = spip_fetch_array($res)){
+	while ($row = spip_abstract_fetch($res)){
 		$charset2collations[$row['Collation']] = $row['Charset'];
 	}
 	
@@ -82,7 +82,7 @@ function convert_sql_utf8(){
 	include_spip('base/auxiliaires');
 
 	$res = spip_query("SHOW TABLES");
-	while (($row = spip_fetch_array($res)) /*&& ($count<1)*/){
+	while (($row = spip_abstract_fetch($res)) /*&& ($count<1)*/){
 		$nom = array_shift($row);
 		if (preg_match(',^'.$GLOBALS['table_prefix'].'_(.*)$,',$nom,$regs)){
 			$count++;
@@ -90,7 +90,7 @@ function convert_sql_utf8(){
 			echo "<hr /><h2>$nom</h2>";
 			// lister les champs de la table
 			$res2 = spip_query("SHOW FULL COLUMNS FROM spip_$nom");
-			while ($row2 = spip_fetch_array($res2)){
+			while ($row2 = spip_abstract_fetch($res2)){
 				$collation = $row2['Collation'];
 				$champ = $row2['Field'];
 				if ($collation!="NULL" 

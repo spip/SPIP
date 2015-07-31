@@ -62,7 +62,7 @@ function _generer_url_propre($type, $id_objet) {
 
 	// D'abord, essayer de recuperer l'URL existante si possible
 	$result = spip_query("SELECT url_propre, $statut, $champ_titre FROM $table WHERE $col_id=$id_objet");
-	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
+	if (!($row = spip_abstract_fetch($result))) return ""; # objet inexistant
 
 	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
 	// ou en preview (astuce pour corriger un url-propre) + admin connecte
@@ -322,7 +322,7 @@ function recuperer_parametres_url(&$fond, $url) {
 	$col_id = id_table_objet($type);
 	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre=" . _q($url_propre));
 
-	if ($row = spip_fetch_array($result)) {
+	if ($row = spip_abstract_fetch($result)) {
 		$contexte[$col_id] = $row[$col_id];
 	}
 

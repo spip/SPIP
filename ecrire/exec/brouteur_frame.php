@@ -72,7 +72,7 @@ jQuery(function(){
 		if (spip_num_rows($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
 			echo "\n<div class='plan-articles'>";
-			while($row=spip_fetch_array($result)){
+			while($row=spip_abstract_fetch($result)){
 				$id_article=$row['id_article'];
 				if (autoriser('voir','article',$id_article)){
 					$titre = typo($row['titre']);
@@ -89,7 +89,7 @@ jQuery(function(){
 		if (spip_num_rows($result)>0) {
 			echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "\n<div class='plan-articles'>";
-			while($row=spip_fetch_array($result)){
+			while($row=spip_abstract_fetch($result)){
 				$id_article=$row['id_article'];
 				if (autoriser('voir','article',$id_article)){
 					$titre = typo($row['titre']);
@@ -104,7 +104,7 @@ jQuery(function(){
 		if (spip_num_rows($result)>0) {
 			echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
 			echo "\n<div class='plan-articles'>";
-			while($row=spip_fetch_array($result)){
+			while($row=spip_abstract_fetch($result)){
 				$id_breve=$row['id_breve'];
 				if (autoriser('voir','breve',$id_breve)){
 					$titre = typo($row['titre']);
@@ -121,7 +121,7 @@ jQuery(function(){
 
 		$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique=$id_rubrique",'', '0+titre,titre');
 
-		if ($row=spip_fetch_array($result)){
+		if ($row=spip_abstract_fetch($result)){
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];
 			
@@ -139,7 +139,7 @@ jQuery(function(){
 
 		$result = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_parent=$id_rubrique",'', '0+titre,titre');
 
-		while($row=spip_fetch_array($result)){
+		while($row=spip_abstract_fetch($result)){
 			$ze_rubrique=$row['id_rubrique'];
 			if (autoriser('voir','rubrique',$ze_rubrique)){
 				$titre = typo($row['titre']);
@@ -177,7 +177,7 @@ jQuery(function(){
 			if (spip_num_rows($result)>0) {
 				echo "\n<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
 				echo "\n<div class='plan-articles'>";
-				while($row=spip_fetch_array($result)){
+				while($row=spip_abstract_fetch($result)){
 					$id_article=$row['id_article'];
 					if (autoriser('voir','article',$id_article)){
 						$titre = typo($row['titre']);
@@ -192,7 +192,7 @@ jQuery(function(){
 			if (spip_num_rows($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
 				echo "\n<div class='plan-articles'>";
-				while($row=spip_fetch_array($result)){
+				while($row=spip_abstract_fetch($result)){
 					$id_breve=$row['id_breve'];
 					if (autoriser('voir','breve',$id_breve)){
 						$titre = typo($row['titre']);
@@ -208,7 +208,7 @@ jQuery(function(){
 			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut!='refuse' ORDER BY nom_site");
 			if (spip_num_rows($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
-				while($row=spip_fetch_array($result)){
+				while($row=spip_abstract_fetch($result)){
 					$id_syndic=$row['id_syndic'];
 					if (autoriser('voir','site',$id_syndic)){
 						$titre = typo($row['nom_site']);

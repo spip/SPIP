@@ -32,7 +32,7 @@ function exec_breves_dist()
 
  	$result = spip_abstract_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
 
- 	while($row=spip_fetch_array($result)){
+ 	while($row=spip_abstract_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=typo($row['titre']);

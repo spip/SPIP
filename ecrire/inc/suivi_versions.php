@@ -94,7 +94,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 		}
 
 		// Afficher les 10 elements
-		while ($row = spip_fetch_array($result)) {
+		while ($row = spip_abstract_fetch($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
 			$date = $row['date'];
@@ -105,7 +105,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				
 				// l'id_auteur peut etre un numero IP (edition anonyme)
 				if ($id_auteur == intval($id_auteur)
-				AND $row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
+				AND $row_auteur = spip_abstract_fetch(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = '".addslashes($id_auteur)."'"))) {
 					$nom = typo($row_auteur["nom"]);
 					$email = $row_auteur['email'];
 				} else {
@@ -191,7 +191,7 @@ function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NU
 	if (!$id_diff) {
 		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1");
 		if ($result_diff) {
-			$row_diff = spip_fetch_array($result_diff);
+			$row_diff = spip_abstract_fetch($result_diff);
 			$id_diff = $row_diff['id_version'];
 		}
 	}

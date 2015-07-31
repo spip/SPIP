@@ -73,7 +73,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	AND $id_parent != $id_rubrique // au fou
 	) {
 		$id_parent = intval($id_parent);
-		$s = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
+		$s = spip_abstract_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
 		$old_parent = $s['id_parent'];
 
 		if ($id_parent != $old_parent
@@ -92,7 +92,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// breves en question
 	if ($champs['id_parent']
 	AND _request('confirme_deplace', $c) == 'oui') {
-		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+		$id_secteur = spip_abstract_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		if ($id_secteur= $id_secteur['id_secteur'])
 			spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
 	}

@@ -40,7 +40,7 @@ function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 
 	$result_forum = spip_query("SELECT * FROM $from " . (!$where ? '' : " WHERE $where ") . "ORDER BY date_heure DESC LIMIT 20");
 
-	while ($t = spip_fetch_array($result_forum)) {
+	while ($t = spip_abstract_fetch($result_forum)) {
 		$item = array();
 		$item['title'] = typo($t['titre']);
 		if ($a['page'] == 'public'
@@ -78,9 +78,9 @@ function rss_suivi_messagerie($a) {
 
 	// 1. les messages
 	$s = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=".$a['id_auteur']." AND lien.id_message=messages.id_message GROUP BY messages.id_message ORDER BY messages.date_heure DESC");
-	while ($t = spip_fetch_array($s)) {
+	while ($t = spip_abstract_fetch($s)) {
 		if ($compte++<10) {
-			$auteur = spip_fetch_array(spip_query("SELECT		auteurs.nom AS nom, auteurs.email AS email					FROM spip_auteurs AS auteurs,	spip_auteurs_messages AS lien			WHERE lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']."	AND lien.id_auteur = auteurs.id_auteur"));
+			$auteur = spip_abstract_fetch(spip_query("SELECT		auteurs.nom AS nom, auteurs.email AS email					FROM spip_auteurs AS auteurs,	spip_auteurs_messages AS lien			WHERE lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']."	AND lien.id_auteur = auteurs.id_auteur"));
 			$item = array(
 				'title' => typo($t['titre']),
 				'date' => $t['date_heure'],
@@ -97,7 +97,7 @@ function rss_suivi_messagerie($a) {
 	if ($messages_vus) {
 		$s = spip_query("SELECT * FROM spip_forum WHERE id_message	IN (".join(',', $messages_vus).") ORDER BY date_heure DESC LIMIT 10");
 
-		while ($t = spip_fetch_array($s)) {
+		while ($t = spip_abstract_fetch($s)) {
 			$item = array(
 				'title' => typo($t['titre']),
 				'date' => $t['date_heure'],
@@ -126,8 +126,8 @@ function rss_a_suivre($a) {
 function rss_articles($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_articles WHERE $critere ORDER BY date DESC LIMIT 10");
-	while ($t = spip_fetch_array($s)) {
-		$auteur = spip_fetch_array(spip_query("SELECT	auteurs.nom AS nom, auteurs.email AS email	FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien	WHERE lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur"));
+	while ($t = spip_abstract_fetch($s)) {
+		$auteur = spip_abstract_fetch(spip_query("SELECT	auteurs.nom AS nom, auteurs.email AS email	FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien	WHERE lien.id_article=".$t['id_article']." AND lien.id_auteur = auteurs.id_auteur"));
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date'],
@@ -148,7 +148,7 @@ function rss_articles($critere) {
 function rss_breves($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_breves WHERE $critere ORDER BY date_heure DESC LIMIT 10");
-	while ($t = spip_fetch_array($s)) {
+	while ($t = spip_abstract_fetch($s)) {
 		$item = array(
 			'title' => typo($t['titre']),
 			'date' => $t['date_heure'],
@@ -167,7 +167,7 @@ function rss_breves($critere) {
 function rss_sites($critere) {
 	$rss = array();
 	$s = spip_query("SELECT * FROM spip_syndic WHERE $critere ORDER BY date DESC LIMIT 10");
-	while ($t = spip_fetch_array($s)) {
+	while ($t = spip_abstract_fetch($s)) {
 		$item = array(
 			'title' => typo($t['titre']." ".$t['url_site']),
 			'date' => $t['date'],
@@ -234,27 +234,27 @@ switch($op) {
 		include_spip('inc/forum');
 		if ($id = intval($a['id_article'])) {
 			$critere = "statut='publie' AND id_article=$id";
-			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
+			$r = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_article($id);
 		}
 		else if ($id = intval($a['id_syndic'])) {
 			$critere = "statut='publie' AND id_syndic=$id";
-			$r = spip_fetch_array(spip_query("SELECT nom_site AS titre FROM spip_syndic WHERE id_article=$id"));
+			$r = spip_abstract_fetch(spip_query("SELECT nom_site AS titre FROM spip_syndic WHERE id_article=$id"));
 			$url = generer_url_site($id);
 		}
 		else if ($id = intval($a['id_breve'])) {
 			$critere = "statut='publie' AND id_breve=$id";
-			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
+			$r = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_breve($id);
 		}
 		else if ($id = intval($a['id_rubrique'])) {
 			$critere = "statut='publie' AND id_rubrique=$id";
-			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
+			$r = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_rubrique($id);
 		}
 		else if ($id = intval($a['id_thread'])) {
 			$critere = "statut='publie' AND id_thread=$id";
-			$r = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
+			$r = spip_abstract_fetch(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 			$url = generer_url_forum($id);
 		}
 		if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);

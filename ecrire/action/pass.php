@@ -45,7 +45,7 @@ function message_oubli($email, $param)
 
 	$res = spip_query("SELECT id_auteur,statut,pass FROM spip_auteurs WHERE email =" . _q($declaration['mail']));
 
-	if (!$row = spip_fetch_array($res)) 
+	if (!$row = spip_abstract_fetch($res)) 
 		return _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));
 
 	if ($row['statut'] == '5poubelle' OR $row['pass'] == '')
@@ -82,7 +82,7 @@ $message = '';
 	  if ($oubli) $message = message_oubli($oubli, 'p');
  } else {
 	$res = spip_query("SELECT login FROM spip_auteurs WHERE cookie_oubli=" . _q($p) . " AND statut<>'5poubelle' AND pass<>''");
-	if (!$row = spip_fetch_array($res)) 
+	if (!$row = spip_abstract_fetch($res)) 
 		$message = _T('pass_erreur_code_inconnu');
 	else {
 		if ($oubli) {

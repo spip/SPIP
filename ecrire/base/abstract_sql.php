@@ -235,7 +235,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	$nom .= _LOCK_TIME;
 
 	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
-	$q = spip_fetch_array($q);
+	$q = spip_abstract_fetch($q);
 	if (!$q) spip_log("pas de lock sql pour $nom");
 	return $q['n'];
 }
@@ -251,7 +251,7 @@ function spip_release_lock($nom) {
 
 // http://doc.spip.org/@spip_sql_version
 function spip_sql_version() {
-	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
+	$row = spip_abstract_fetch(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }
 ?>

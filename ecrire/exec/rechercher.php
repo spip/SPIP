@@ -46,14 +46,14 @@ function exec_rechercher_dist()
 
 	$points = $rub = array();
 
-	while ($row = spip_fetch_array($res)) {
+	while ($row = spip_abstract_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		$points[$id_rubrique] = $points[$id_rubrique] + 3;
 	}
 	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_titre$where_exclus");
-	while ($row = spip_fetch_array($res)) {
+	while ($row = spip_abstract_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
@@ -62,7 +62,7 @@ function exec_rechercher_dist()
 		else $points[$id_rubrique] = 0;
 	}
 	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_desc$where_exclus");
-	while ($row = spip_fetch_array($res)) {
+	while ($row = spip_abstract_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];

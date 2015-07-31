@@ -81,13 +81,13 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
 		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
-		if (!$row = spip_fetch_array($q)) {
+		if (!$row = spip_abstract_fetch($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
 /*			$ext = 'bin';
 			$nom_envoye .= '.bin';
 			spip_log("Extension $ext");
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='bin' AND upload='oui'"));
+			$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='bin' AND upload='oui'"));
 			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
@@ -96,7 +96,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
-			$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
+			$row = spip_abstract_fetch(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"));
 			if (!$row) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;

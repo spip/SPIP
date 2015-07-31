@@ -17,7 +17,7 @@ function base_admin_repair_dist() {
 	$res1= spip_query("SHOW TABLES");
 
 	$res = "";
-	if ($res1) { while ($r = spip_fetch_array($res1)) {
+	if ($res1) { while ($r = spip_abstract_fetch($res1)) {
 		$tab = array_shift($r);
 
 		$res .= "<p><b>$tab</b> ";
@@ -34,7 +34,7 @@ function base_admin_repair_dist() {
 		else
 			$res .= "("._T('texte_vide').")\n";
 
-		$msg = join(" ", spip_fetch_array($result_repair)) . ' ';
+		$msg = join(" ", spip_abstract_fetch($result_repair)) . ' ';
 
 		$ok = strpos($msg, ' OK ');
 

@@ -32,13 +32,13 @@ function exec_statistiques_referers_dist()
 	if ($id_article){
 		$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'");
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_abstract_fetch($result)) {
 			$total_absolu = $row['visites'];
 		}
 	}  else {
 		$result = spip_query("SELECT SUM(visites) AS total_absolu FROM spip_visites");
 
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_abstract_fetch($result)) {
 			$total_absolu = $row['total_absolu'];
 		}
 	}

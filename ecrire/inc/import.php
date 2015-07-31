@@ -190,7 +190,7 @@ function import_init_tables($request)
 // http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
-	$r = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
+	$r = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs"));
 	if ($r['n'] > 1)
 		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 	else {

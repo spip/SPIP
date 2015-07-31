@@ -23,11 +23,11 @@ function inc_informer_auteur_dist($id)
 	include_spip('inc/formater_auteur');
 
 	$res = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id");
-	if ($row = spip_fetch_array($res)) {
+	if ($row = spip_abstract_fetch($res)) {
 			$nom = typo(extraire_multi($row["nom"]));
 			$bio = propre($row["bio"]);
 			$mail = formater_auteur_mail($row, $id);
-			$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_articles WHERE id_auteur=$id"));
+			$nb = spip_abstract_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_articles WHERE id_auteur=$id"));
 			if ($nb['n'] > 1)
 			$nb = $nb['n']."&nbsp;"._T('info_article_2');
 			else if($nb['n'] == 1)

@@ -165,11 +165,6 @@ function spip_pg_fetch($res, $t=PGSQL_ASSOC) {
 	return $res;
 }
  
-// http://doc.spip.org/@spip_fetch_array
-function spip_fetch_array($r, $t=PGSQL_ASSOC) {
-	if ($r) return spip_pg_fetch($r, $t);
-}
-
 // http://doc.spip.org/@spip_pg_countsel
 function spip_pg_countsel($from = array(), $where = array(),
 	$groupby='', $limit='', $sousrequete = '', $having = array())

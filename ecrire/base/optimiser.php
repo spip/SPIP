@@ -39,7 +39,7 @@ function optimiser_base_une_table() {
 	// on n'optimise qu'une seule table a chaque fois,
 	// pour ne pas vautrer le systeme
 	// lire http://dev.mysql.com/doc/refman/5.0/fr/optimize-table.html
-	while ($row = spip_fetch_array($result))
+	while ($row = spip_abstract_fetch($result))
 		$tables[] = array_shift($row);
 
 	if ($tables) {
@@ -65,7 +65,7 @@ function optimiser_base_une_table() {
 function optimiser_sansref($table, $id, $sel)
 {
 	$in = array();
-	while ($row = spip_fetch_array($sel)) $in[$row['id']]=true;
+	while ($row = spip_abstract_fetch($sel)) $in[$row['id']]=true;
 
 	if ($in) {
 		$in = join(',', array_keys($in));
@@ -412,10 +412,10 @@ function optimiser_base_indexation($attente) {
 
 		$suppr = '';
 		$s = spip_query("SELECT $col_id AS n FROM $table_objet WHERE idx='' $critere");
-		while ($t = spip_fetch_array($s))
+		while ($t = spip_abstract_fetch($s))
 			$suppr .= ','.$t['n'];
 		$s = spip_query("SELECT $col_id AS n FROM $table_objet WHERE idx='non'");
-		while ($t = spip_fetch_array($s))
+		while ($t = spip_abstract_fetch($s))
 			$suppr .= ','.$t['n'];
 		if ($suppr)
 			spip_query("DELETE FROM spip_index WHERE id_objet IN (0$suppr) AND id_table=$id_table");

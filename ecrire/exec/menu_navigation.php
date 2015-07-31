@@ -28,7 +28,7 @@ function exec_menu_navigation_dist() {
 			$t = _T('info_en_cours_validation');
 			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire("articles_page")).$t)
 			. "\n<div class='plan-articles'>\n";
-			while($row = spip_fetch_array($vos_articles)) {
+			while($row = spip_abstract_fetch($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
@@ -42,7 +42,7 @@ function exec_menu_navigation_dist() {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= debut_cadre('bandeau-rubriques',"article-24.gif",'',afficher_plus(generer_url_ecrire())._T('info_articles_proposes'));
 			$gadget .= "<div class='plan-articles'>";
-			while($row = spip_fetch_array($vos_articles)) {
+			while($row = spip_abstract_fetch($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
@@ -56,7 +56,7 @@ function exec_menu_navigation_dist() {
 	if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= debut_cadre('bandeau-rubriques',"breve-24.gif",'',afficher_plus(generer_url_ecrire("breves"))._T('info_breves_valider'));
 			$gadget .= "<div class='plan-articles'>";
-			while($row = spip_fetch_array($vos_articles)) {
+			while($row = spip_abstract_fetch($vos_articles)) {
 				$id_breve = $row['id_breve'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
@@ -67,7 +67,7 @@ function exec_menu_navigation_dist() {
 			$gadget .= fin_cadre('bandeau-rubriques');
 	}
 
-	$result = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$result = spip_abstract_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
 
 	if ($result) {
 		$une_rubrique = $result['id_rubrique'];

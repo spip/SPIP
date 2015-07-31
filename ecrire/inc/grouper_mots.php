@@ -43,7 +43,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	$table = array();
 	$occurrences = calculer_liens_mots($id_groupe);
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_abstract_fetch($result)) {
 		$table[] = afficher_groupe_mots_boucle($row, $occurrences, $cpt);
 	}
 
@@ -158,7 +158,7 @@ else $aff_articles = "'prop','publie'";
 
  $articles = array();
  $result_articles = spip_query("SELECT COUNT(*) as cnt, lien.id_mot FROM spip_mots_articles AS lien, spip_articles AS article, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND article.id_article=lien.id_article AND article.statut IN ($aff_articles) GROUP BY lien.id_mot");
- while ($row =  spip_fetch_array($result_articles)){
+ while ($row =  spip_abstract_fetch($result_articles)){
 	$articles[$row['id_mot']] = $row['cnt'];
 }
 
@@ -166,20 +166,20 @@ else $aff_articles = "'prop','publie'";
  $rubriques = array();
  $result_rubriques = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_rubriques AS lien, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe  GROUP BY lien.id_mot");
 
- while ($row = spip_fetch_array($result_rubriques)){
+ while ($row = spip_abstract_fetch($result_rubriques)){
 	$rubriques[$row['id_mot']] = $row['cnt'];
 }
 
  $breves = array();
  $result_breves = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot");
 
- while ($row = spip_fetch_array($result_breves)){
+ while ($row = spip_abstract_fetch($result_breves)){
 	$breves[$row['id_mot']] = $row['cnt'];
 }
 
  $syndic = array(); 
  $result_syndic = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot");
- while ($row = spip_fetch_array($result_syndic)){
+ while ($row = spip_abstract_fetch($result_syndic)){
 	$syndic[$row['id_mot']] = $row['cnt'];
 
  }

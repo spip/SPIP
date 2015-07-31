@@ -49,7 +49,7 @@ function exec_convert_sql_utf8_dist() {
 		}
 		if (!$charset_supporte){
 			$res = spip_query("SHOW CHARACTER SET");
-			while ($row = spip_fetch_array($res)){
+			while ($row = spip_abstract_fetch($res)){
 				if ($row['Charset']=='utf8') $utf8_supporte = true;
 			}
 			echo _L("Le charset SPIP actuel $charset_spip n'est pas supporte par votre serveur MySQL<br/>");

@@ -42,7 +42,7 @@ function action_editer_signatures_post($r)
 	// Invalider les pages ayant trait aux petitions
 	if ($id) {
 		include_spip('inc/invalideur');
-		$id_article = spip_fetch_array(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id"));
+		$id_article = spip_abstract_fetch(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id"));
 		$id_article = $id_article['id_article'];
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
