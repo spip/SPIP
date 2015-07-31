@@ -472,12 +472,6 @@ if ($ajout_doc == 'oui') {
  }
 
 
-// joindre un document
-if ($joindre_doc == 'oui'){
-	$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document, $doc_vignette, $titre_vignette, $descriptif_vignette);
-}
-
-
 //
 // ajouter un logo
 //

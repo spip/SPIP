@@ -8,27 +8,26 @@ global $flag_ecrire;
 define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 function get_image($racine) {
-	foreach (array('gif','jpg','png') as $fmt)
-		if (@file_exists(_DIR_IMG . $racine . '.' .$fmt)) {
-			$fichier = "$racine.".$fmt;
-			break;
-		}
-
-	if ($fichier) {
-		$taille = resize_logo($fichier);
+	foreach (array('gif','jpg','png') as $fmt) {
+		$fichier = "$racine.".$fmt;
 		$fid = _DIR_IMG . $fichier;
-		// contrer le cache du navigateur
-		if ($fid = @filesize($fid) . @filemtime($fid))
-			$fid = "?".md5($fid);
-		return array($fichier, $taille, $fid);
+		if (@file_exists($fid)) {
+			$limage = @getimagesize( _DIR_IMG . $fichier);
+
+			// contrer le cache du navigateur
+			if ($fid = @filesize($fid) . @filemtime($fid))
+				$fid = "?".md5($fid);
+			return array($fichier, 
+				     (!$limage ? '' : resize_logo($limage)),
+				     $fid);
+		}
 	}
-	else return;
+	return '';
 }
 
 
-function resize_logo($image, $maxi=190) {
-	$limage = @getimagesize( _DIR_IMG . $fichier);
-	if (!$limage) return;
+function resize_logo($limage, $maxi=190) {
+
 	$limagelarge = $limage[0];
 	$limagehaut = $limage[1];
 
@@ -55,33 +54,27 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 
 
 	if ($spip_display != 4) {
-		$logo_ok = get_image($logo);
-		if ($logo_ok) $survol_ok = get_image($survol);
 	
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
-		echo "<b>";
-		echo bouton_block_invisible(md5($texteon));
-		echo $texteon;
-		echo "</b>";
 	
-		afficher_logo($logo, $texteon);
+		$logo_ok = get_image($logo);
+		$survol_ok = (!$logo_ok ? '' : get_image($survol));
+		afficher_logo($logo, $texteon, $logo_ok);
 	
 		if ($logo_ok OR $survol_ok) {
-			echo "<br><br><b>";
-			echo bouton_block_invisible(md5($texteoff));
-			echo $texteoff;
-			echo "</b>";
-			afficher_logo($survol, $texteoff);
+			echo "<br><br>";
+			afficher_logo($survol, $texteoff, $survol_ok);
 		}
 	
 		echo "</font></center>";
 		fin_cadre_relief();
+		echo "</p>";
 	}
 }
 
-function afficher_logo($racine, $titre) {
+function afficher_logo($racine, $titre, $logo) {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
@@ -89,7 +82,6 @@ function afficher_logo($racine, $titre) {
 	include_ecrire('inc_admin.php3');
 
 	$redirect = $clean_link->getUrl();
-	$logo = get_image($racine);
 	if ($logo) {
 		$fichier = $logo[0];
 		$taille = $logo[1];
@@ -100,16 +92,20 @@ function afficher_logo($racine, $titre) {
 		}
 	}
 
+	echo "<b>";
+	echo bouton_block_invisible(md5($titre));
+	echo $titre;
+	echo "</b>";
 	echo "<font size=1>";
 
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<P><CENTER><IMG SRC='" . _DIR_IMG . "$fichier$fid' $taille_html alt='' />";
+		echo "<p><center><img src='" . _DIR_IMG . "$fichier$fid' $taille_html alt='' />";
 
 		echo debut_block_invisible(md5($titre));
 		echo "$taille_txt\n";
-		echo "<BR>[<A HREF='../spip_image.php3?";
+		echo "<br />[<A HREF='../spip_image.php3?";
 		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot', 'id_auteur');
 		while (list(,$element) = each ($elements)) {
 			if ($$element) {
@@ -118,7 +114,7 @@ function afficher_logo($racine, $titre) {
 		}
 		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>"._T('lien_supprimer')."</A>]";
 		echo fin_block();
-		echo "</CENTER>";
+		echo "</center></p>";
 	}
 	else {
 		$hash = calculer_action_auteur("ajout_image $racine");
