@@ -1448,9 +1448,10 @@ function calculer_vieux_in($params){
 	$last = $params[$k];
 	$j = count($last)-1;
 	$last = $last[$j];
-	$n = strlen($last->texte);
+	$n = isset($last->texte) ? strlen($last->texte) : 0;
 
-	if (!(($deb->texte[0]=='(') && ($last->texte[$n-1]==')')))
+	if (!((isset($deb->texte[0])     AND $deb->texte[0]=='(')
+	   && (isset($last->texte[$n-1]) AND $last->texte[$n-1]==')')))
 		return $params;
 	$params[0][0]->texte = substr($deb->texte, 1);
 	// attention, on peut avoir k=0,j=0 ==> recalculer

@@ -552,7 +552,9 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	// nettoyer qualif qui peut venir directement d'un objet_trouver_lien :
 	unset($qualif[$primary]);
 	unset($qualif[$objet_source]);
-	unset($qualif[$qualif['objet']]);
+	if (isset($qualif['objet'])) {
+		unset($qualif[$qualif['objet']]);
+	}
 	unset($qualif['objet']);
 	unset($qualif['id_objet']);
 	foreach($objets as $objet => $id_objets){
