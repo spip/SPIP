@@ -607,7 +607,7 @@ function heures_minutes($numdate) {
 // http://doc.spip.org/@recup_date
 function recup_date($numdate){
 	if (!$numdate) return '';
-	if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{1,2}|[0-9]{4})#', $numdate, $regs)) {
+	if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}|[0-9]{1,2})#', $numdate, $regs)) {
 		$jour = $regs[1];
 		$mois = $regs[2];
 		$annee = $regs[3];
