@@ -705,7 +705,8 @@ function affdate_base($numdate, $vue, $param = '') {
 		if (!$mois OR !$jour) return '';
 		$nom = mktime(1,1,1,$mois,$jour,$annee);
 		$nom = 1+date('w',$nom);
-		return _T('date_jour_'.$nom.'_'.$param);
+		$param = $param ? '_'.$param : '';
+		return _T('date_jour_'.$nom.$param);
 
 	case 'mois_annee':
 		if ($avjc) return $annee;
