@@ -715,8 +715,8 @@ function autoriser_sans_cookie($nom)
   return in_array($nom, $autsanscookie);
 }
 
-// Cette fonction charge le bon inc-urls selon qu'on est dans l'espace
-// public ou prive, la presence d'un (old style) inc-urls.php3, etc.
+// Cette fonction charge le bon fichier d'urls selon qu'on est dans l'espace
+// public ou prive
 // http://doc.spip.org/@charger_generer_url
 function charger_generer_url($prive=NULL) {
 	static $ok;
@@ -730,13 +730,12 @@ function charger_generer_url($prive=NULL) {
 	// espace public
 	else {
 		if ($ok++) return; # fichier deja charge
-		// fichier inc-urls ? (old style)
-		if (@is_readable($f = _DIR_RACINE.'inc-urls.php3')
-		OR @is_readable($f = _DIR_RACINE.'inc-urls.php')
-		OR $f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3'))
-			include_once($f);
 
-		else include_spip('urls/'.$GLOBALS['type_urls']);
+		if ($GLOBALS['type_urls'] == 'page'
+		AND $GLOBALS['meta']['type_urls'])
+			$GLOBALS['type_urls'] = $GLOBALS['meta']['type_urls'];
+
+		include_spip('urls/'.$GLOBALS['type_urls']);
 	}
 }
 

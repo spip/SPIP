@@ -150,6 +150,7 @@ ecrire/configuration/relayeur.php -text
 ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
+ecrire/configuration/type_urls.php -text
 ecrire/configuration/versionneur.php -text
 ecrire/configuration/visiteurs.php -text
 ecrire/exec/accueil.php -text

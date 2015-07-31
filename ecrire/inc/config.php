@@ -96,6 +96,8 @@ function liste_metas()
 		'gerer_trad' => 'non',
 		'langues_multilingue' => '',
 
+		'type_urls' => 'page',
+
 		'email_envoi' => '',
 		'email_webmaster' => '',
 		'auto_compress_http'=>'non',

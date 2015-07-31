@@ -263,6 +263,9 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	// verifier que la fonction assembler est bien chargee (cf. #608)
 	$assembler = charger_fonction('assembler', 'public');
 	// et toujours charger les fonctions de generation d'URL.
+	if ($GLOBALS['type_urls'] == 'page'
+	AND $GLOBALS['meta']['type_urls'])
+		$GLOBALS['type_urls'] = $GLOBALS['meta']['type_urls'];
 	$renommer_urls= charger_fonction($GLOBALS['type_urls'], 'urls', true);
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) {

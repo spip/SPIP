@@ -783,8 +783,11 @@ function xml_hack(&$page, $echap = false) {
 
 // http://doc.spip.org/@page_base_href
 function page_base_href(&$texte){
-	if (defined('_SET_HTML_BASE')
-	AND _SET_HTML_BASE
+	if (!defined('_SET_HTML_BASE'))
+		define('_SET_HTML_BASE',
+			$GLOBALS['meta']['type_urls'] == 'arbo');
+
+	if (_SET_HTML_BASE
 	AND $GLOBALS['html']
 	AND $GLOBALS['profondeur_url']>0){
 		list($head, $body) = explode('</head>', $texte, 1);
