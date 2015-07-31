@@ -728,7 +728,9 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			break;
 
 		default: 
-		  erreur_squelette(_T('zbug_info_erreur_squelette'));
+		  // Erreur de construction de l'arbre de syntaxe abstraite
+			$p->descr = $descr;
+			erreur_squelette(_T('zbug_info_erreur_squelette'), $p);
 		} // switch
 
 		if ($code != "''") {
@@ -886,9 +888,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				// ne pas renvoyer d'erreur si la table est optionnelle
 				// declare par ? avant ) dans <BOUCLE_A(table ?)>
 				if (!$boucles[$id]->table_optionnelle) {
-					erreur_squelette(_T('zbug_table_inconnue',
-								array('table' => $x )),
-							 $id);
+					$msg = _T('zbug_table_inconnue',
+							array('table' => $x));
+					erreur_squelette($msg, $boucles[$id]);
 				}
 			}
 		}
@@ -901,9 +903,9 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
 			if (!$rec) {
-				return array(_T('zbug_info_erreur_squelette'),
-						($boucle->param[0]
-						. ' '. _T('zbug_boucle_recursive_undef')));
+				$msg = _T('zbug_boucle_recursive_undef',
+					array('nom' => $boucle->param[0]));
+				return erreur_squelette($msg, $boucle);
 			} else {
 				$rec->externe = $id;
 				$descr['id_mere'] = $id;
