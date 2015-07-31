@@ -44,7 +44,7 @@ function subdir_var($dir, $subdir)
   $dir .=  $subdir;
   if (!@is_writable($dir))
     { 
-      if (!@mkdir ($dir, 0770))
+      if (!@mkdir ($dir, 0777))
 	{
 	  flock($lock, LOCK_UN);
 	  header("Location: spip_test_dirs.php3");
