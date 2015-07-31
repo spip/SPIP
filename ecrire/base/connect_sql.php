@@ -37,7 +37,7 @@ function spip_connect($serveur='', $version='') {
 
 	// Premiere connexion ? 
 	if (!($old = isset($connexions[$index]))) {
-		$f = (!preg_match('/^\w*$/', $serveur))	? ''
+		$f = (!preg_match('/^[\w\.]*$/', $serveur))	? ''
 		: (($serveur AND !$install) ?
 			( _DIR_CONNECT. $serveur . '.php')
 			: (_FILE_CONNECT ? _FILE_CONNECT
