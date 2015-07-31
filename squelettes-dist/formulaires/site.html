@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_site ajax" id="formulaire_site">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<fieldset>
+		<legend><:info_site:></legend>
+		<p class='explication'><:proposer_site:></p>
+		<ul>
+			<li class='saisie_nom_site obligatoire[ (#ENV*{erreurs}|table_valeur{nom_site}|oui)erreur]'>
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{nom_site})</span>]
+				<input type="text" class="text" name="nom_site" id="nom_site" value="#ENV{nom_site}" size="30" />
+			</li>
+			<li class='saisie_url_site[ (#ENV*{erreurs}|table_valeur{url_site}|oui)erreur]'>
+				<label for="url_site"><:form_prop_url_site:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{url_site})</span>]
+				<input type="text" class="text" name="url_site" id="url_site" value="#ENV{url_site}" size="30" />
+			</li>
+			<li class='saisie_description_site[ (#ENV*{erreurs}|table_valeur{description_site}|oui)erreur]'>
+				<label for="description_site"><:form_prop_description:></label>
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{description_site})</span>]
+				<textarea name="description_site" id="description_site" rows="6" cols="60">#ENV{description_site}</textarea>
+			</li>
+		</ul>
+	</fieldset>
+	[(#REM) Piege a robots spammeurs ]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+</form>
+]
+</div>

@@ -1129,6 +1129,14 @@ prive/vignettes/zip.png -text
 /rien.gif -text
 /spip.php -text
 squelettes-dist/favicon.ico.html -text
+squelettes-dist/formulaires/ecrire_auteur.php -text
+squelettes-dist/formulaires/inscription.php -text
+squelettes-dist/formulaires/mot_de_passe.html -text
+squelettes-dist/formulaires/mot_de_passe.php -text
+squelettes-dist/formulaires/oubli.php -text
+squelettes-dist/formulaires/recherche.php -text
+squelettes-dist/formulaires/signature.php -text
+squelettes-dist/formulaires/site.php -text
 squelettes-dist/identifiants.html -text
 squelettes-dist/robots.txt.html -text
 squelettes-dist/sitemap.xml.html -text
