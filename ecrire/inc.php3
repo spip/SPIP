@@ -274,7 +274,9 @@ function changer_statut_forum($id_forum, $statut) {
 		unset($fichiers);
 		if ($result) while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
+			// crade, ne marche pas avec open_basedir=.
 			@unlink("../CACHE/$fichier");
+			@unlink("../CACHE/$fichier.NEW");
 			$fichiers[] = $fichier;
 		}
 		if ($fichiers) {
