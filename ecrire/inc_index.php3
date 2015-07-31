@@ -589,9 +589,16 @@ function requete_hash ($rech) {
 	return array($hash_recherche, $hash_recherche_strict);
 }
 
-
-function prepare_recherche($recherche, $type = 'id_article', $table='articles') {
+//
+// Preparer les elements pour le critere {recherche}
+// Note : si le critere est optionnel {recherche?}, ne pas s'activer
+// si la recherche est vide
+//
+function prepare_recherche($recherche, $type = 'id_article', $table='articles', $cond=false) {
 	static $cache = array();
+
+	if ($cond AND !strlen($recherche))
+		return array("''" /* as points */, /* where */ '1');
 
 	if (!$cache[$type][$recherche]) {
 
