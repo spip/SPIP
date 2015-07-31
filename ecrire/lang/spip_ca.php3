@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_public' => '<NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
 'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
+'correcte' => 'correcte',
 
 
 // D
@@ -345,6 +346,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'image_tourner_droite' => 'Girar 90&deg; cap a la dreta',
 'image_tourner_gauche' => 'Girar 90&deg; cap a l\'esquerre',
 'img_indisponible' => 'imatge no disponible',
+'impossible' => 'impossible',
 'info_a_suivre' => 'NOVETATS&raquo;',
 'info_a_valider' => '[per validar]',
 'info_acces_interdit' => 'Acc&eacute;s prohibit',
@@ -628,6 +630,9 @@ i tornar-vos a connectar al lloc.
 
 
 // S
+'squelette' => 'esquelet',
+'squelette_inclus_ligne' => 'esquelet incl&ograve;s, l&iacute;nia',
+'squelette_ligne' => 'esquelet, l&iacute;nia',
 'stats_visites_et_popularite' => '@visites@ visites; popularitat: @popularite@',
 'suivant' => 'seg&uuml;ent',
 

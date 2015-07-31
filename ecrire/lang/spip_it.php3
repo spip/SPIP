@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_public' => '<NEW>Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
 'calendrier_synchro_sync' => '<NEW>Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
+'correcte' => 'corretto',
 
 
 // D
@@ -346,6 +347,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'image_tourner_droite' => 'Ruota 90&deg; a destra',
 'image_tourner_gauche' => 'Ruota 90&deg; a sinistra',
 'img_indisponible' => 'immagine non disponibile',
+'impossible' => 'impossibile',
 'info_a_suivre' => 'PANNELLO DI CONTROLLO&nbsp;&raquo;',
 'info_a_valider' => '[da convalidare]',
 'info_acces_interdit' => 'Accesso vietato',
@@ -636,6 +638,9 @@ e riconnetterti all\'area riservata.
 
 
 // S
+'squelette' => 'modello di layout',
+'squelette_inclus_ligne' => 'modello incluso, linea',
+'squelette_ligne' => 'modello, linea',
 'stats_visites_et_popularite' => '@visites@ visite; popolarit&agrave;: @popularite@',
 'suivant' => 'successivo',
 

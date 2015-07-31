@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'monthly calendar',
 'cal_par_semaine' => 'weekly calendar',
 'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
+'correcte' => 'correct',
 
 
 // D
@@ -346,6 +347,7 @@ Thank you for your participation!
 'image_tourner_droite' => 'Rotate 90&deg; right',
 'image_tourner_gauche' => 'Rotate 90&deg; left',
 'img_indisponible' => 'image unavailable',
+'impossible' => 'impossible',
 'info_a_suivre' => 'LAUNCH PAD&raquo;',
 'info_a_valider' => '[to be validated]',
 'info_acces_interdit' => 'Access forbidden',
@@ -638,6 +640,9 @@ and connect again to the site.
 
 
 // S
+'squelette' => 'template',
+'squelette_inclus_ligne' => 'included template, line',
+'squelette_ligne' => 'template, line',
 'stats_visites_et_popularite' => '@visites@ visits; popularity: @popularite@',
 'suivant' => 'next',
 
