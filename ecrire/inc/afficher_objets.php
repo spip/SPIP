@@ -13,7 +13,7 @@
 
 // http://doc.spip.org/@icone_table
 function icone_table($type){
-	$derog = array('mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif');
+	$derog = array('document'=> 'doc-24.gif', 'mot'=>'mot-cle-24.gif','syndic_article'=>'site-24.gif');
 	if (isset($derog[$type]))
 		return $derog[$type];
 	return "$type-24.gif";
@@ -21,10 +21,12 @@ function icone_table($type){
 
 // http://doc.spip.org/@lien_editer_objet
 function lien_editer_objet($type,$key,$id){
-	return generer_url_ecrire($type . "s_edit","$key=$id");
+	return $type == 'document' ? '' : generer_url_ecrire($type . "s_edit","$key=$id");
 }
+
 // http://doc.spip.org/@lien_voir_objet
 function lien_voir_objet($type,$key,$id){
+	if ($type == 'document') return generer_url_document($id);
 	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_edit');
 	$exec = isset($exec[$type])?$exec[$type]:$type . "s";
 	return generer_url_ecrire($exec,"$key=$id");
@@ -63,13 +65,13 @@ function afficher_numero_edit($id, $key, $type,$row=NULL) {
 		$numero = _T('info_numero_abbreviation');
 	}
 
-	if (!autoriser('modifier',$type,$id)) {
+	if (!autoriser('modifier',$type,$id) OR
+	    !$href = lien_editer_objet($type,$key,$id)) {
 		$bal ='span';
-		$href = '';
 	} else {
 		$bal = 'a';
 		$href = "\nhref='"
-		. lien_editer_objet($type,$key,$id)
+		. $href
 		. "' title='"
 		. _T('bouton_modifier')
 		. "'";
@@ -236,6 +238,7 @@ function inc_afficher_objets_dist($type, $titre_table,$requete,$formater='', $fo
 		$fonction_ligne = "afficher_objet_boucle";
 		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
+
 	return affiche_tranche_bandeau($requete, icone_table($type), NULL, NULL, $tmp_var, $titre_table, $force, $largeurs, $styles, $fonction_ligne, $arg);
 }
 
@@ -269,16 +272,19 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 				list($fid, $dir, $nom, $format) = $logo;
 				include_spip('inc/filtres_images');
 				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
+
 				if ($logo)
 					$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 			}
 		}
 		if (strlen($titre)){
-			$s .= "<a href='" . lien_voir_objet($type,$primary,$id_objet) . "'"
-				. " title='" . _T('info_numero_abbreviation'). "$id_objet'"
-				. ">";
-			$s .= $titre;
-			$s .= "</a>";
+			$s .= "<a href='"
+			.  lien_voir_objet($type,$primary,$id_objet)
+			.  "' "
+			. "title='" . _T('info_numero_abbreviation'). $id_objet
+			. "'>"
+			. $titre 
+			. "</a>";
 		}
 		$s .= $suite;
 		$s .= "</div>";
