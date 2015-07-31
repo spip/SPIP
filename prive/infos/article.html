@@ -32,21 +32,5 @@
 	|?{[(#VISITES|bouton_lien_statistiques{#ID_ARTICLE})]})]
 
 
-
-[(#REM)
-
-	Bouton revisions des articles
-
-]
-[(#CONFIG{articles_versions}|=={oui}
-	|?{#ID_VERSION}
-	|?{[(#AUTORISER{voirrevisions,article,#ID_ARTICLE})]}
-	|?{
-		[(#VAL{info_historique_lien}|_T
-		|icone_horizontale{?exec=articles_versions&amp;id_article=#ID_ARTICLE,
-			historique-24.gif,rien.gif,0}
-	)]
-})]
-
 </div>
 </BOUCLE_art>

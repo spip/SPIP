@@ -252,12 +252,12 @@ $spip_pipeline = array(
 	'afficher_fiche_objet'=>'',
 	'afficher_config_objet' => '',
 	'afficher_contenu_objet' => '',
-	#'afficher_revision_objet'=>'',
 	'affiche_droite' => '',
 	'affiche_gauche' => '',
 	'affiche_milieu' => '',
 	'affiche_enfants' => '',
 	'affiche_hierarchie' => '',
+	'article_select' => '',
 	'base_admin_repair' => '',
 	'boite_infos' => 'f_boite_infos',
 	'ajouter_boutons' => '',
@@ -297,8 +297,8 @@ $spip_pipeline = array(
 	'post_propre' => '',
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',
-	'pre_edition' => '|enregistrer_premiere_revision',
-	'post_edition' => '|enregistrer_nouvelle_revision',
+	'pre_edition' => '',
+	'post_edition' => '',
 	'pre_insertion' => '',
 	'pre_syndication' => '',
 	'post_syndication' => '',
@@ -321,11 +321,7 @@ $spip_pipeline = array(
 );
 
 # la matrice standard (fichiers definissant les fonctions a inclure)
-$spip_matrice = array (
-	# temporaire pour corriger les revisions, avant de les passer en plugin
-	'enregistrer_premiere_revision' => '_DIR_RESTREINT:inc/revisions.php',
-	'enregistrer_nouvelle_revision' => '_DIR_RESTREINT:inc/revisions.php'
-);
+$spip_matrice = array ();
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
 # les surcharges de include_spip()

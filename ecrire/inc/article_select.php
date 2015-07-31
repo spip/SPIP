@@ -36,6 +36,9 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 			signale_edition ($id_article,  $GLOBALS['visiteur_session'], 'article');
 		}
 		$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
+
+		$row = pipeline('article_select', $row);
+
 	// si une ancienne revision est demandee, la charger
 	// en lieu et place de l'actuelle ; attention les champs
 	// qui etaient vides ne sont pas vide's. Ca permet de conserver

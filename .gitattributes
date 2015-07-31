@@ -100,7 +100,6 @@ ecrire/configuration/relayeur.php -text
 ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
-ecrire/configuration/versionneur.php -text
 ecrire/configuration/visiteurs.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_backup.php -text
@@ -116,7 +115,6 @@ ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
 ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
-ecrire/exec/articles_versions.php -text
 ecrire/exec/auteur_infos.php -text
 ecrire/exec/auteurs.php -text
 ecrire/exec/breves.php -text
@@ -275,7 +273,6 @@ ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/site.php -text
-ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text
 ecrire/inc/traduire.php -text
@@ -753,7 +750,6 @@ prive/puce_prive_rtl.gif -text
 prive/rss.html -text
 prive/rss/a_suivre.html -text
 prive/rss/messagerie.html -text
-prive/rss/revisions.html -text
 prive/rss/signatures.html -text
 prive/rss_fonctions.php -text
 prive/skins/spip/images/SEARCH.png -text
