@@ -211,6 +211,8 @@ Bu ithal istemini onaylamayın.
 'icone_supprimer_signature' => 'Bu imzayı sil',
 'icone_valider_signature' => 'Bu imzayı onayla',
 'image_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 makale',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -236,6 +238,7 @@ Bu ithal istemini onaylamayın.
 'info_administrer_rubrique' => 'Bu bölümü yönetebilirsiniz',
 'info_adresse' => 'şu adresteki :',
 'info_adresse_url' => 'Kamusal sitenin adresi (URL) ',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Şu adrese yapılan ziyaretlerin gösterileceği yer :',
 'info_aide_en_ligne' => 'SPIP çevrimiçi yardım',
 'info_ajout_image' => 'Bir makalenin eki olarak resim eklediğinizde,
@@ -368,6 +371,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_liste_redacteurs_connectes' => 'Bağlanan yazarlar',
 'info_login_existant' => 'Bu kullanıcı ismi zaten var.',
 'info_login_trop_court' => 'Kullanıcı ismi çok kısa.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Logolar',
 'info_maximum' => 'En fazla :',
 'info_meme_rubrique' => 'Aynı bölümde',
@@ -438,6 +442,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_par_statut' => 'duruma göre',
 'info_par_tri' => '\'(@tri@ sıralamasına göre) \'',
 'info_passe_trop_court' => 'Şifre çok kısa.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'İki şifre aynı değil.',
 'info_pense_bete_ancien' => 'Eski hatırlatmalarınız', # MODIF
 'info_plus_cinq_car' => '5 karakterden fazla',
@@ -471,6 +476,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
                (onu durdurmak sistemin işleyişini hızlandırır)',
 'info_question_vignettes_referer_non' => 'Ziyaretlerin yapıldığı kaynak sitelerden alıntıları gösterme',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Sitenin kökü',
 'info_recharger_page' => 'Lütfen bu sayfayı az sonra tekrar yükleyiniz.',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@" için çok fazla sonuç alındı ; lütfen aramayı ayrıntılayınız.',
@@ -660,12 +666,12 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_trier_nombre_articles' => 'Makale sayısına göre sırala',
 'lien_trier_statut' => 'Duruma göre sırala',
 'lien_voir_en_ligne' => 'ÇEVRİMİÇİ GÖSTER :',
-'logo_article' => 'MAKALE LOGOSU',
-'logo_auteur' => 'YAZAR LOGOSU',
-'logo_rubrique' => 'BÖLÜM LOGOSU',
-'logo_site' => 'SİTE LOGOSU',
-'logo_standard_rubrique' => 'STANDART BÖLÜM LOGOSU',
-'logo_survol' => 'ÜZERİNDEN GEÇME LOGOSU',
+'logo_article' => 'MAKALE LOGOSU', # MODIF
+'logo_auteur' => 'YAZAR LOGOSU', # MODIF
+'logo_rubrique' => 'BÖLÜM LOGOSU', # MODIF
+'logo_site' => 'SİTE LOGOSU', # MODIF
+'logo_standard_rubrique' => 'STANDART BÖLÜM LOGOSU', # MODIF
+'logo_survol' => 'ÜZERİNDEN GEÇME LOGOSU', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Veritabanınızın seçimi',
@@ -716,8 +722,12 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_info_automatique_liste_update' => 'Listeleri güncelle',
 'plugin_info_automatique_ou' => 'veya...',
 'plugin_info_automatique_select' => 'Aşağıdan bir eklenti seçiniz : SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracaktır ; eğer bu eklenti zaten kurulu ise güncellenecektir.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
 'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
@@ -754,9 +764,10 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dizin :',

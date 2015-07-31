@@ -213,6 +213,8 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_supprimer_signature' => 'Cancella l\'adesione',
 'icone_valider_signature' => 'Conferma l\'adesione',
 'image_administrer_rubrique' => 'Puoi amministrare questa rubrica',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 articolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -238,6 +240,7 @@ di passare facilmente dal sito pubblico all\'interfaccia privata.',
 'info_administrer_rubrique' => 'Puoi amministrare questa rubrica',
 'info_adresse' => 'all\'indirizzo:',
 'info_adresse_url' => 'Indirizzo (URL) del sito pubblico',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Visualizzare le visite per:',
 'info_aide_en_ligne' => 'Guida in linea SPIP',
 'info_ajout_image' => 'Quando aggiungi delle immagini come documenti allegati ad un articolo,
@@ -371,6 +374,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 'info_liste_redacteurs_connectes' => 'Elenco delle redattrici collegate',
 'info_login_existant' => 'Questo login esiste già.',
 'info_login_trop_court' => 'Login troppo corto.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'I logo',
 'info_maximum' => 'massimo:',
 'info_meme_rubrique' => 'Nella stessa rubrica',
@@ -439,6 +443,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_par_statut' => 'per status',
 'info_par_tri' => '\'(per @tri@)\'',
 'info_passe_trop_court' => 'Password troppo corta.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Le due password non sono uguali.',
 'info_pense_bete_ancien' => 'I vecchi memo', # MODIF
 'info_plus_cinq_car' => 'più di 5 caratteri',
@@ -473,6 +478,7 @@ impossibile.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
 (disattivandolo viene velocizzato il funzionamento del sistema)',
 'info_question_vignettes_referer_non' => 'Non visualizzare la cattura dello schermo dei siti di origine delle visite',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Root del sito',
 'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 'info_recherche_auteur_a_affiner' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
@@ -662,12 +668,12 @@ Le traduzioni sono associate all\'originale,
 'lien_trier_nombre_articles' => 'Ordina per numero di articoli',
 'lien_trier_statut' => 'Ordina per status',
 'lien_voir_en_ligne' => 'VEDI ON LINE:',
-'logo_article' => 'LOGO DELL\'ARTICOLO',
-'logo_auteur' => 'LOGO DELL\'AUTORE',
-'logo_rubrique' => 'LOGO DELLA RUBRICA',
-'logo_site' => 'LOGO DI QUESTO SITO ',
-'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE',
-'logo_survol' => 'LOGO ROLLOVER',
+'logo_article' => 'LOGO DELL\'ARTICOLO', # MODIF
+'logo_auteur' => 'LOGO DELL\'AUTORE', # MODIF
+'logo_rubrique' => 'LOGO DELLA RUBRICA', # MODIF
+'logo_site' => 'LOGO DI QUESTO SITO ', # MODIF
+'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE', # MODIF
+'logo_survol' => 'LOGO ROLLOVER', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Scegliere il database',
@@ -718,8 +724,12 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
 'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricherà e lo installerà nella cartella <code>@rep@</code>; se questo plug-in è già presente verrà aggiornato.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 'plugin_librairies_installees' => 'Librerie installate',
 'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
@@ -756,9 +766,10 @@ Le traduzioni sono associate all\'originale,
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Cartella:',

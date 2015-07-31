@@ -209,6 +209,8 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'icone_supprimer_signature' => 'Suprimir esta assinatura',
 'icone_valider_signature' => 'Validar esta assinatura',
 'image_administrer_rubrique' => 'Você pode administrar esta seção',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 matéria',
 'info_1_article_syndique' => '1 matéria sindicada',
 'info_1_auteur' => '1 autor',
@@ -233,6 +235,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_administrer_rubrique' => 'Você pode administrar esta seção',
 'info_adresse' => 'no endereço:',
 'info_adresse_url' => 'Endereço (URL) do site público',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Exibir as visitas para:',
 'info_aide_en_ligne' => 'Ajuda online SPIP',
 'info_ajout_image' => 'Assim que você incluir imagens e documentos anexados a uma matéria, o SPIP pode criar para você, automaticamente, ícones (miniaturas) das imagens inseridas. Isto permite, por exemplo, criar automaticamente uma galeria ou um portfólio.',
@@ -359,6 +362,7 @@ os autores excluídos por uma lixeira.',
 'info_liste_redacteurs_connectes' => 'Lista de redatores conectados',
 'info_login_existant' => 'Este login já está cadastrado.',
 'info_login_trop_court' => 'Login muito curto.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Os ícones',
 'info_maximum' => 'máximo:',
 'info_meme_rubrique' => 'Na mesma seção',
@@ -424,6 +428,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_par_statut' => 'por status',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'Senha muito curta.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'As duas senhas não são idênticas.',
 'info_pense_bete_ancien' => 'Seus lembretes antigos',
 'info_plus_cinq_car' => 'mais de 5 caracteres',
@@ -449,6 +454,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_question_inscription_nouveaux_redacteurs' => 'Você quer aceitar inscrições de novos redatores a partir do site público? Se você aceitar, os visitantes poderão se cadastrar através de um formulário automatizado, tendo acesso à área privada para propôr as suas próprias matérias.<blockquote><i>Durante a fase de inscrição, os usuários recebem um e-mail automático. fornecendo-lhes os seus códigos de acesso à área privada. Alguns serviços de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscrição automática é impossível.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => 'Você deseja usar o motor de busca integrado ao SPIP? (desativá-lo acelera o funcionamento do sistema.)',
 'info_question_vignettes_referer_non' => 'Não exibir as capturas dos sites de origem das visitas',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiz do site',
 'info_recharger_page' => 'Por favor, atualize esta página em alguns instantes.',
 'info_recherche_auteur_a_affiner' => 'Demasiados resultados para "@cherche_auteur@"; por favor, refine a consulta.',
@@ -637,12 +643,12 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'lien_trier_nombre_articles' => 'Ordenar por número de matérias',
 'lien_trier_statut' => 'Ordenar pelo status',
 'lien_voir_en_ligne' => 'VER ONLINE:',
-'logo_article' => 'LOGO DA MATÉRIA',
-'logo_auteur' => 'LOGO DO AUTOR',
-'logo_rubrique' => 'LOGO DA SEÇÃO',
-'logo_site' => 'LOGO DESTE SITE',
-'logo_standard_rubrique' => 'ÍCONE PADRÃO DAS SEÇÕES',
-'logo_survol' => 'ÍCONE PARA MOUSEOVER',
+'logo_article' => 'LOGO DA MATÉRIA', # MODIF
+'logo_auteur' => 'LOGO DO AUTOR', # MODIF
+'logo_rubrique' => 'LOGO DA SEÇÃO', # MODIF
+'logo_site' => 'LOGO DESTE SITE', # MODIF
+'logo_standard_rubrique' => 'ÍCONE PADRÃO DAS SEÇÕES', # MODIF
+'logo_survol' => 'ÍCONE PARA MOUSEOVER', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Seleção da sua base',
@@ -693,8 +699,12 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'plugin_info_automatique_liste_update' => 'Atualizar as listas',
 'plugin_info_automatique_ou' => 'ou...',
 'plugin_info_automatique_select' => 'Selecione abaixo um plugin: O SPIP o transferirá e o instalará no diretório <code>@rep@</code>; se o plugin já existir, será atualizado.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'As extensões abaixo são carregadas e ativadas no diretório @extensions@.',
 'plugin_info_extension_2' => 'Elas não são desativáveis.',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'transferir de @url@ e instalar em @rep@',
 'plugin_librairies_installees' => 'Bibliotecas instaladas',
 'plugin_necessite_lib' => 'Este plugin precisa da biblioteca @lib@',
@@ -731,9 +741,10 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'queue_executer_maintenant' => 'Executar agora',
 'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera',
 'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s',
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 trabalho em espera',
 'queue_purger_queue' => 'Limpar a lista de trabalhos',
-'queue_titre' => 'Listagem de trabalhos',
+'queue_titre' => 'Listagem de trabalhos', # MODIF
 
 // R
 'repertoire_plugins' => 'Diretório:',

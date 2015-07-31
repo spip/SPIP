@@ -209,6 +209,8 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'icone_supprimer_signature' => 'Suprimir aquesta secció',
 'icone_valider_signature' => 'Validar aquesta signatura',
 'image_administrer_rubrique' => 'Podeu administrar aquesta secció',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 article sindicat',
 'info_1_auteur' => '1 autor',
@@ -233,6 +235,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_administrer_rubrique' => 'Podeu administrar aquesta secció',
 'info_adresse' => 'a l\'adreça:',
 'info_adresse_url' => 'Adreça (URL) del lloc públic',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Mostrar les visites per:',
 'info_aide_en_ligne' => 'Ajuda en línia d\'SPIP',
 'info_ajout_image' => 'Quan afegiu imatges com a documents adjunts en un article, l\'SPIP pot crear automàticament imatges en miniatura de les imatges inserides. Això permet, per exemple, la creació automàtica d\'una galeria o d\'un portafoli.',
@@ -360,6 +363,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_liste_redacteurs_connectes' => 'Llista de redactors connectats',
 'info_login_existant' => 'Aquest nom d\'usuari ja existeix.',
 'info_login_trop_court' => 'Nom d\'usuari massa curt.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Els logotips',
 'info_maximum' => 'màxim:',
 'info_meme_rubrique' => 'Dins la mateixa secció',
@@ -426,6 +430,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_par_statut' => 'per estat',
 'info_par_tri' => '\'(par @tri@)\'',
 'info_passe_trop_court' => 'Contrasenya massa curta.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Les dues contrasenyes no són idèntiques.',
 'info_pense_bete_ancien' => 'Els vostres antics recordatoris',
 'info_plus_cinq_car' => 'més de 5 caràcters',
@@ -454,6 +459,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
  (inhabilitar-lo accelera el funcionament del sistema.)',
 'info_question_vignettes_referer_non' => 'No mostrar les captures dels llocs d\'origen de les visites',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Arrel del lloc',
 'info_recharger_page' => 'Actualitzeu aquesta pàgina en breus instants.',
 'info_recherche_auteur_a_affiner' => 'Massa resultats per "@cherche_auteur@"; afineu la cerca.',
@@ -643,12 +649,12 @@ amb un color que indica el seu estat:',
 'lien_trier_nombre_articles' => 'Classificar per número d\'articles',
 'lien_trier_statut' => 'Classificar per estat',
 'lien_voir_en_ligne' => 'VEURE EN LÍNIA:',
-'logo_article' => 'LOGOTIP DE L\'ARTICLE',
-'logo_auteur' => 'LOGOTIP DE L\'AUTOR',
-'logo_rubrique' => 'LOGOTIP DE LA SECCIÓ',
-'logo_site' => 'LOGOTIP D\'AQUEST LLOC',
-'logo_standard_rubrique' => 'LOGOTIP ESTÀNDARD DE LES SECCIONS',
-'logo_survol' => 'Logotip canviant',
+'logo_article' => 'LOGOTIP DE L\'ARTICLE', # MODIF
+'logo_auteur' => 'LOGOTIP DE L\'AUTOR', # MODIF
+'logo_rubrique' => 'LOGOTIP DE LA SECCIÓ', # MODIF
+'logo_site' => 'LOGOTIP D\'AQUEST LLOC', # MODIF
+'logo_standard_rubrique' => 'LOGOTIP ESTÀNDARD DE LES SECCIONS', # MODIF
+'logo_survol' => 'Logotip canviant', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Trieu la vostra base de dades',
@@ -699,8 +705,12 @@ amb un color que indica el seu estat:',
 'plugin_info_automatique_liste_update' => 'Actualitzar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.',
 'plugin_info_extension_2' => 'No es poden desactivar.',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal·lar-lo a @rep@',
 'plugin_librairies_installees' => 'Llibreries instal·lades',
 'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
@@ -737,9 +747,10 @@ amb un color que indica el seu estat:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directori:',

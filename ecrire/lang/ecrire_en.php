@@ -17,10 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'No results found.',
 'avis_base_inaccessible' => 'Impossible to connect to the database @base@.',
 'avis_chemin_invalide_1' => 'The path you selected',
-'avis_chemin_invalide_2' => 'does not seem valid. Please return to the previous page and verify the information provided.',
+'avis_chemin_invalide_2' => 'does not seem to be valid. Please return to the previous page and verify the information provided.',
 'avis_connexion_echec_1' => 'Connection to the SQL server failed.',
 'avis_connexion_echec_2' => 'Go back to the previous page, and verify the information you provided.',
-'avis_connexion_echec_3' => '<b>N.B.</b> On many servers, you must <b>request</b> activation of your access to the SQL database before you can use it. If you are unable to connect, check that this activation has taken place.',
+'avis_connexion_echec_3' => '<b>N.B.</b> On many servers, you must <b>request</b> activation of your access to the SQL database before you can use it. If you cannot connect to your database, check that activation has been done.',
 'avis_connexion_ldap_echec_1' => 'Connection to the LDAP server failed.',
 'avis_connexion_ldap_echec_2' => 'Go back to the previous page, and verify the information you provided.',
 'avis_connexion_ldap_echec_3' => 'Alternatively, do not use LDAP support to import users.',
@@ -36,9 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     information, please see <a href="@spipnet@">
                                 the SPIP documentation</a>.</p>',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
-'avis_lecture_noms_bases_1' => 'The installer could not read the names of any installed databases.',
-'avis_lecture_noms_bases_2' => 'Either no database is available, or the feature allowing the listing of databases was disabled
-  for security reasons (which is the case with a lot of hosts).',
+'avis_lecture_noms_bases_1' => 'The installer could not read the names of any databases already installed.',
+'avis_lecture_noms_bases_2' => 'Either no database is available, or the option for listing databases was disabled
+  for security reasons (which is the case with a lot of hosting services).',
 'avis_lecture_noms_bases_3' => 'In the second case, it is possible that a database named after your login would be usable:',
 'avis_non_acces_message' => 'You do not have access to this message.',
 'avis_non_acces_page' => 'You do not have access to this page.',
@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_titre_base_sup_choix' => 'Choose an additional database',
 'connexion_ldap' => 'Connection:',
 'copier_en_local' => 'Copy to local site',
-'creer_et_associer_un_auteur' => 'Créer et associer un auteur', # NEW
+'creer_et_associer_un_auteur' => 'Create and associate an author',
 
 // D
 'date_mot_heures' => 'H',
@@ -214,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Delete this signature',
 'icone_valider_signature' => 'Validate this signature',
 'image_administrer_rubrique' => 'You can manage this section',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 article',
 'info_1_article_syndique' => '1 syndicated article',
 'info_1_auteur' => '1 author',
@@ -239,6 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'You can manage this section',
 'info_adresse' => 'to this address:',
 'info_adresse_url' => 'URL of the public site',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Show visits for:',
 'info_aide_en_ligne' => 'SPIP Online Help',
 'info_ajout_image' => 'When you add images as attached documents to an article,
@@ -276,7 +279,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Warning',
 'info_barre_outils' => 'with its toolbar?',
 'info_base_installee' => 'Your database structure has been installed.',
-'info_bio' => 'Biographie', # NEW
+'info_bio' => 'Biography',
 'info_chapeau' => 'Introduction',
 'info_chapeau_2' => 'Introduction:',
 'info_chemin_acces_1' => 'Options: <b>Access path in directory</b>',
@@ -376,6 +379,7 @@ via FTP.</p>',
 'info_liste_redacteurs_connectes' => 'List of editors online',
 'info_login_existant' => 'This login already exists.',
 'info_login_trop_court' => 'Login too short.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'The logos',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'In this section',
@@ -446,6 +450,7 @@ via FTP.</p>',
 'info_par_statut' => 'by status',
 'info_par_tri' => '\'(by @tri@)\'',
 'info_passe_trop_court' => 'Password too short.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'The two passwords are not identical.',
 'info_pense_bete_ancien' => 'Your old memos',
 'info_plus_cinq_car' => 'more than 5 characters',
@@ -481,6 +486,7 @@ via FTP.</p>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 'info_recherche_auteur_a_affiner' => 'Too many results for "@cherche_auteur@"; please refine your search.',
@@ -670,12 +676,12 @@ and their status is colour-coded:',
 'lien_trier_nombre_articles' => 'Sort by total articles',
 'lien_trier_statut' => 'Sort by status',
 'lien_voir_en_ligne' => 'VIEW ONLINE:',
-'logo_article' => 'ARTICLE LOGO',
-'logo_auteur' => 'AUTHOR\'S LOGO',
-'logo_rubrique' => 'SECTION LOGO',
-'logo_site' => 'LOGO FOR THIS SITE',
-'logo_standard_rubrique' => 'STANDARD SECTION LOGO',
-'logo_survol' => 'MOUSEOVER LOGO',
+'logo_article' => 'ARTICLE LOGO', # MODIF
+'logo_auteur' => 'AUTHOR\'S LOGO', # MODIF
+'logo_rubrique' => 'SECTION LOGO', # MODIF
+'logo_site' => 'LOGO FOR THIS SITE', # MODIF
+'logo_standard_rubrique' => 'STANDARD SECTION LOGO', # MODIF
+'logo_survol' => 'MOUSEOVER LOGO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Choosing your database',
@@ -726,8 +732,12 @@ and their status is colour-coded:',
 'plugin_info_automatique_liste_update' => 'Update lists',
 'plugin_info_automatique_ou' => 'or...',
 'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'These extensions have been loaded and are active in the @extensions@ directory.',
 'plugin_info_extension_2' => 'They cannot be uninstalled.',
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'load from @url@ and install to @rep@',
 'plugin_librairies_installees' => 'Libraries installed',
 'plugin_necessite_lib' => 'This plugin requires the library @lib@',
@@ -764,9 +774,10 @@ and their status is colour-coded:',
 'queue_executer_maintenant' => 'Run now',
 'queue_nb_jobs_in_queue' => '@nb@ jobs in queue',
 'queue_next_job_in_nb_sec' => 'Next job in @nb@ s',
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 job in queue',
 'queue_purger_queue' => 'Purge job queue',
-'queue_titre' => 'List of jobs',
+'queue_titre' => 'List of jobs', # MODIF
 
 // R
 'repertoire_plugins' => 'Directory:',
@@ -922,7 +933,7 @@ significant modifications to the site\'s graphics or structure.',
 'texte_travail_collaboratif' => 'If several editors often work on the same article, the system can mark recently "opened" articles in order to avoid multiple simultaneous editing.
   This option is disabled by default to avoid displaying unnecessary warning
   messages.',
-'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
+'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@". Please use more search criteria.',
 'texte_unpack' => 'downloading the latest version',
 'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on syndicated sites and

@@ -210,6 +210,8 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_supprimer_signature' => 'Dës Ënnerschrëft läschen',
 'icone_valider_signature' => 'Dës Ënnerschrëft validéieren',
 'image_administrer_rubrique' => 'Dir kënnt dës Rubrik administréieren',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 Artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -234,6 +236,7 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_administrer_rubrique' => 'Dir kënnt dës Rubrik administréieren',
 'info_adresse' => 'op der Adress:',
 'info_adresse_url' => 'Adress (URL) vum öffentlëche Site',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'D\'Visiten weisen fir:',
 'info_aide_en_ligne' => 'Online-Hëllef vu SPIP',
 'info_ajout_image' => 'Wann dir engem Artikel Biller als Dokumenter derbäi setzt, kann SPIP Iech automatësch Vignetten (Miniaturen) maachen. Dat erlaabt Iech z.B. automatesch eng Galerie ze maachen.',
@@ -359,6 +362,7 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gréng; Redakter =
 'info_liste_redacteurs_connectes' => 'Lëscht vun den ugemelden Redakteren',
 'info_login_existant' => 'Dëse Login gët ët schon.',
 'info_login_trop_court' => 'De Login ass ze kuerz.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'D\'Logo\'en',
 'info_maximum' => 'Maximum:',
 'info_meme_rubrique' => 'An dëser Rubrik',
@@ -424,6 +428,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_par_statut' => 'no Status',
 'info_par_tri' => '\'(no @tri@)\'',
 'info_passe_trop_court' => 'Passwuert ze kuerz.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Déi zwee Passwierder si nët selwecht.',
 'info_pense_bete_ancien' => 'Är al Notizen', # MODIF
 'info_plus_cinq_car' => 'méi wéi 5 Buchstawen',
@@ -450,6 +455,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_question_utilisation_moteur_recherche' => 'Wëllt dir de Sich-Motor vu SPIP benotzen?
 (ausschalten mëcht de System méi séier.)',
 'info_question_vignettes_referer_non' => 'D\'Preview vun den Ausgangs-Site nët weisen',
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Wuerzel vum Site',
 'info_recharger_page' => 'Lued dës Säit an e puer Sekonnen nei.',
 'info_recherche_auteur_a_affiner' => 'Zevill Resultater fir "@cherche_auteur@"; verbessert är Sich.',
@@ -637,12 +643,12 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'lien_trier_nombre_articles' => 'No Zuel vun den Artikelen sortéiren',
 'lien_trier_statut' => 'No Status sortéieren',
 'lien_voir_en_ligne' => 'ONLINE KUCKEN:',
-'logo_article' => 'LOGO VUM ARTIKEL',
-'logo_auteur' => 'LOGO VUM AUTEUR',
-'logo_rubrique' => 'LOGO VUN DER RUBRIK',
-'logo_site' => 'LOGO VUM SITE',
-'logo_standard_rubrique' => 'STANDARD-LOGO VUN DE RUBRIKEN',
-'logo_survol' => 'LOGO FIR DE MOUSEOVER',
+'logo_article' => 'LOGO VUM ARTIKEL', # MODIF
+'logo_auteur' => 'LOGO VUM AUTEUR', # MODIF
+'logo_rubrique' => 'LOGO VUN DER RUBRIK', # MODIF
+'logo_site' => 'LOGO VUM SITE', # MODIF
+'logo_standard_rubrique' => 'STANDARD-LOGO VUN DE RUBRIKEN', # MODIF
+'logo_survol' => 'LOGO FIR DE MOUSEOVER', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Wiel vun ärer Datebank',
@@ -693,8 +699,12 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugin_info_automatique_liste_update' => 'Lëschten updaten',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wielt e Plugin: SPIP lued en erof an installéiert en am Repertoire <code>@rep@</code>; wann de Plugin schons do ass gëtt en Update gemaach.',
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'Eroflueden vun @url@ an Installatioun an @rep@',
 'plugin_librairies_installees' => 'Installéiert Librairie\'en',
 'plugin_necessite_lib' => 'Dëse Plugin brauch d\'Librairie @lib@',
@@ -731,9 +741,10 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Dossier:',

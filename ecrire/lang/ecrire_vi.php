@@ -209,6 +209,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_supprimer_signature' => 'Xoá chữ ký này',
 'icone_valider_signature' => 'Chấp thuận',
 'image_administrer_rubrique' => 'Bạn có thể quản trị đề mục này',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 bài',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -233,6 +235,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_administrer_rubrique' => 'Bạn có thể quản trị đề mục này',
 'info_adresse' => 'đến địa chỉ:',
 'info_adresse_url' => 'Địa chỉ trang web của bạn',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Liệt kê những lần viếng thăm cho:',
 'info_aide_en_ligne' => 'Giúp đỡ SPIP online',
 'info_ajout_image' => 'Khi bạn đính kèm hình (trong dạng hồ sơ) vào một bài, SPIP có thể tự động chế ra các hình mẫu để xem trước (tức thumbnails) từ tấm hình nguyên thủy. Với đặc điểm này có thể tự động thiết lập ra một tập/bộ hình ảnh, album.',
@@ -357,6 +360,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_liste_redacteurs_connectes' => 'Danh sách các chủ bút đang nối vào',
 'info_login_existant' => 'Login này đã có.',
 'info_login_trop_court' => 'Login ngắn quá.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'The logos', # NEW
 'info_maximum' => 'tối đa:',
 'info_meme_rubrique' => 'Cũng đề mục',
@@ -422,6 +426,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_par_statut' => 'by status', # NEW
 'info_par_tri' => '\'(by @tri@)\'', # NEW
 'info_passe_trop_court' => 'Mật mã ngắn quá.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Hai mật mã không giống hệt nhau.',
 'info_pense_bete_ancien' => 'Bản ghi nhớ cũ của bạn', # MODIF
 'info_plus_cinq_car' => 'hơn 5 mẫu tự',
@@ -447,6 +452,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Bạn có muốn dùng cơ phận tìm kiếm có sẵn của SPIP? (<i>Nếu tắt nó đi sẽ làm hệ thống chạy lẹ hơn</i>) ',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Gốc của website',
 'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
 'info_recherche_auteur_a_affiner' => 'Quá nhiều kết quả cho "@cherche_auteur@"; Xin lọc lựa lại việc tìm kiếm.',
@@ -636,12 +642,12 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'lien_trier_nombre_articles' => 'Sắp thứ tự theo số bài',
 'lien_trier_statut' => 'Sắp thứ tự theo tình trạng',
 'lien_voir_en_ligne' => 'XEM ONLINE :',
-'logo_article' => 'LOGO CỦA BÀI',
-'logo_auteur' => 'LOGO CỦA TÁC GIẢ',
-'logo_rubrique' => 'LOGO CỦA ĐỀ MỤC',
-'logo_site' => 'LOGO CỦA WEBSITE NÀY',
-'logo_standard_rubrique' => 'LOGO CỦA ĐỀ MỤC',
-'logo_survol' => 'LOGO NỔI',
+'logo_article' => 'LOGO CỦA BÀI', # MODIF
+'logo_auteur' => 'LOGO CỦA TÁC GIẢ', # MODIF
+'logo_rubrique' => 'LOGO CỦA ĐỀ MỤC', # MODIF
+'logo_site' => 'LOGO CỦA WEBSITE NÀY', # MODIF
+'logo_standard_rubrique' => 'LOGO CỦA ĐỀ MỤC', # MODIF
+'logo_survol' => 'LOGO NỔI', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Chọn database của bạn',
@@ -692,8 +698,12 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -730,9 +740,10 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directory:', # NEW

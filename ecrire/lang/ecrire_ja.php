@@ -213,6 +213,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_supprimer_signature' => 'この署名を削除',
 'icone_valider_signature' => 'この署名を確認',
 'image_administrer_rubrique' => 'あなたはこのセクションを管理することができる',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '１記事',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -238,6 +240,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_administrer_rubrique' => 'あなたはこのセクションを管理することができる',
 'info_adresse' => 'そのアドレスへ:',
 'info_adresse_url' => 'あなたの公開サイトのURL',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => '訪問者の表示:',
 'info_aide_en_ligne' => 'SPIPオンラインヘルプ',
 'info_ajout_image' => '記事に添付書類として画像イメージを付け加えるとき、
@@ -366,6 +369,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_liste_redacteurs_connectes' => '接続中のエディターのリスト',
 'info_login_existant' => 'このIDは既に使われています。',
 'info_login_trop_court' => 'ログインIDが短すぎます。',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => '最大:',
 'info_meme_rubrique' => '同じセクションで',
@@ -434,6 +438,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'パスワードが短すぎます。',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'その二つのパスワードは同一でない。',
 'info_pense_bete_ancien' => 'あなたの古いメモ類', # MODIF
 'info_plus_cinq_car' => '６文字以上',
@@ -460,6 +465,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@"の検索結果が多すぎます; もうちょっとキーワードをひねって検索して下さい。',
@@ -649,12 +655,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'lien_trier_nombre_articles' => '記事番号でソート',
 'lien_trier_statut' => '状態でソート',
 'lien_voir_en_ligne' => 'オンラインで見る:',
-'logo_article' => '記事のロゴ',
-'logo_auteur' => '著者のロゴ',
-'logo_rubrique' => 'セクションのロゴ',
-'logo_site' => 'サイトのロゴ',
-'logo_standard_rubrique' => 'セクションのための標準的なロゴ',
-'logo_survol' => 'ホバリングするロゴ',
+'logo_article' => '記事のロゴ', # MODIF
+'logo_auteur' => '著者のロゴ', # MODIF
+'logo_rubrique' => 'セクションのロゴ', # MODIF
+'logo_site' => 'サイトのロゴ', # MODIF
+'logo_standard_rubrique' => 'セクションのための標準的なロゴ', # MODIF
+'logo_survol' => 'ホバリングするロゴ', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'あなたのデータベースの選択',
@@ -705,8 +711,12 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -743,9 +753,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Directory:', # NEW

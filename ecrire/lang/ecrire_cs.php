@@ -214,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Odstranit podpis',
 'icone_valider_signature' => 'Potvrdit podpis',
 'image_administrer_rubrique' => 'Máte právo správy této sekce',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 článek',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -239,6 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Máte právo správy této sekce',
 'info_adresse' => 'na adrese:',
 'info_adresse_url' => 'Adresa URL veřejného webu',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Zobrazit návštěvy:',
 'info_aide_en_ligne' => 'Nápověda online systému SPIP',
 'info_ajout_image' => 'Přikládáte-li k článku obrázky jako dokumenty,
@@ -376,6 +379,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_liste_redacteurs_connectes' => 'Seznam připojených redaktorů',
 'info_login_existant' => 'Toto uživatelské jméno již existuje.',
 'info_login_trop_court' => 'Uživatelské jeméno je příliš krátké.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'The logos', # NEW
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'Ve stejné sekci',
@@ -445,6 +449,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_par_statut' => 'podle stavu',
 'info_par_tri' => '\'(podle @tri@)\'',
 'info_passe_trop_court' => 'Heslo je příliš krátké.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Zadaná hesla nesouhlasí.',
 'info_pense_bete_ancien' => 'Staré interní poznámky', # MODIF
 'info_plus_cinq_car' => 'vice než 5 znaků',
@@ -480,6 +485,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 'info_question_utilisation_moteur_recherche' => 'Chcete používat vyhledávač, který je součástí systému SPIP?
  (je-li vyhledávač vypnut, zrychluje to chod systému.)',
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Kořenový adresář webu',
 'info_recharger_page' => 'Za okamžik zkuste stránku znovu nahrát.',
 'info_recherche_auteur_a_affiner' => 'Pro "@cherche_auteur@" bylo nalezeno příliš mnoho výsledků. Upřesněte vyhledávací kritéria.',
@@ -669,12 +675,12 @@ ukazuje jejich stav:',
 'lien_trier_nombre_articles' => 'Třídit podle čísel článků',
 'lien_trier_statut' => 'Třídit podle stavu',
 'lien_voir_en_ligne' => 'ZOBRAZIT ONLINE:',
-'logo_article' => 'LOGO ČLÁNKU',
-'logo_auteur' => 'LOGO AUTORA',
-'logo_rubrique' => 'LOGO SEKCE',
-'logo_site' => 'LOGO WEBU',
-'logo_standard_rubrique' => 'STANDARDNÍ LOGO SEKCE',
-'logo_survol' => 'LOGO PŘI PŘECHODU',
+'logo_article' => 'LOGO ČLÁNKU', # MODIF
+'logo_auteur' => 'LOGO AUTORA', # MODIF
+'logo_rubrique' => 'LOGO SEKCE', # MODIF
+'logo_site' => 'LOGO WEBU', # MODIF
+'logo_standard_rubrique' => 'STANDARDNÍ LOGO SEKCE', # MODIF
+'logo_survol' => 'LOGO PŘI PŘECHODU', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Volba databáze',
@@ -725,8 +731,12 @@ ukazuje jejich stav:',
 'plugin_info_automatique_liste_update' => 'Update the lists', # NEW
 'plugin_info_automatique_ou' => 'or...', # NEW
 'plugin_info_automatique_select' => 'Select a plugin below: SPIP will load it and will install it in the <code>@rep@</code> directory. If the plugin already exists, it will be updated.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'load from @url@ and install to @rep@', # NEW
 'plugin_librairies_installees' => 'Installed libraries', # NEW
 'plugin_necessite_lib' => 'This plugin requires the library @lib@', # NEW
@@ -763,9 +773,10 @@ ukazuje jejich stav:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Adresář:',

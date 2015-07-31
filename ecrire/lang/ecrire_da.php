@@ -214,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'Slet denne signatur',
 'icone_valider_signature' => 'Godkend signatur',
 'image_administrer_rubrique' => 'Du kan administrere dette afsnit',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -238,6 +240,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'Du kan administrere dette afsnit',
 'info_adresse' => 'til adressen:',
 'info_adresse_url' => 'Dit offentlige websteds URL',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Vis besøg for:',
 'info_aide_en_ligne' => 'SPIP online hjælp',
 'info_ajout_image' => 'Når du vedhæfter billeder til en artikel, kan
@@ -366,6 +369,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_liste_redacteurs_connectes' => 'Oversigt over tilknyttede reaktører',
 'info_login_existant' => 'Dette login findes allerede.',
 'info_login_trop_court' => 'Login for kort.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maksimum:',
 'info_meme_rubrique' => 'In the same section', # NEW
@@ -433,6 +437,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Adgangskode for kort.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'De to adgangskoder er ikke ens.',
 'info_pense_bete_ancien' => 'Dine gamle huskesedler', # MODIF
 'info_plus_cinq_car' => 'mere end 5 tegn',
@@ -464,6 +469,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_utilisation_moteur_recherche' => 'Ønsker du at anvende den søgefunktion, der findes i SPIP?
 	(At fravælge søgefunktionen gør webstedet hurtigere.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Top',
 'info_recharger_page' => 'Vær venlig at genindlæse denne side om et øjeblik.',
 'info_recherche_auteur_a_affiner' => 'For mange resultater fundet til "@cherche_auteur@"; vær venlig at afgrænse søgningen mere.',
@@ -653,12 +659,12 @@ i en farve, der angiver deres status:',
 'lien_trier_nombre_articles' => 'Sorter efter antal artikler',
 'lien_trier_statut' => 'Sorter efter status',
 'lien_voir_en_ligne' => 'SE ONLINE:',
-'logo_article' => 'LOGO TIL ARTIKLEN',
-'logo_auteur' => 'LOGO TIL FORFATTEREN',
-'logo_rubrique' => 'LOGO TIL AFSNITTETS',
-'logo_site' => 'LOGO TIL WEBSTEDETS',
-'logo_standard_rubrique' => 'STANDARDLOGO TIL AFSNIT',
-'logo_survol' => 'PEGEFØLSOMT LOGO',
+'logo_article' => 'LOGO TIL ARTIKLEN', # MODIF
+'logo_auteur' => 'LOGO TIL FORFATTEREN', # MODIF
+'logo_rubrique' => 'LOGO TIL AFSNITTETS', # MODIF
+'logo_site' => 'LOGO TIL WEBSTEDETS', # MODIF
+'logo_standard_rubrique' => 'STANDARDLOGO TIL AFSNIT', # MODIF
+'logo_survol' => 'PEGEFØLSOMT LOGO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Valg af database',
@@ -709,8 +715,12 @@ i en farve, der angiver deres status:',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -747,9 +757,10 @@ i en farve, der angiver deres status:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW

@@ -214,6 +214,8 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'icone_supprimer_signature' => 'Az aláírás törlése',
 'icone_valider_signature' => 'Az aláírás érvényesítése',
 'image_administrer_rubrique' => 'Ezt a rubrikát adminisztrálhatja',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 cikk',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -238,6 +240,7 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_administrer_rubrique' => 'Ezt a rubrikát Ön adminisztrálhatja',
 'info_adresse' => 'ezen a címen :',
 'info_adresse_url' => 'A nyilvános honlap címe (URL)',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'A látógatások megjelenítése erre :',
 'info_aide_en_ligne' => 'On-line SPIP súgó',
 'info_ajout_image' => 'Ha képeket tesz hozzá, mint cikkhez csatolt dokumentum,
@@ -366,6 +369,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_liste_redacteurs_connectes' => 'Jelenleg csatlakozott szerzők listája',
 'info_login_existant' => 'Ez a login már létezik.',
 'info_login_trop_court' => 'A login túl rövid.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'A legtöbb :',
 'info_meme_rubrique' => 'Abban a rovatban',
@@ -432,6 +436,7 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'A jelszó túl rövid.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'A két jelszó nem egyforma.',
 'info_pense_bete_ancien' => 'Az Ön régebbi emlékeztet?i', # MODIF
 'info_plus_cinq_car' => 'több, mint 5 karakter',
@@ -463,6 +468,7 @@ a felhasználók automatikus emailt kapnak,
 'info_question_utilisation_moteur_recherche' => 'Kivánja-e használni az SPIP integrált kereső motorját ?
  (annak inaktiválása gyorsítja a rendszer működését.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Honlap teteje',
 'info_recharger_page' => 'Legyen szíves újratölteni ezt az oldalt egy kis idő múlva.',
 'info_recherche_auteur_a_affiner' => 'Túl sok eredmény erre "@cherche_auteur@" ; legyen szíves szükíteni a keresést.',
@@ -652,12 +658,12 @@ ami állapotát jelzi :',
 'lien_trier_nombre_articles' => 'Cikk darabszám szerinti sorbarendezés',
 'lien_trier_statut' => 'Státusz szerinti sorbarendezés',
 'lien_voir_en_ligne' => 'JELENLEG :',
-'logo_article' => 'A CIKK LOGOJA',
-'logo_auteur' => 'A SZERZŐ LOGOJA',
-'logo_rubrique' => 'ROVAT LOGOJA',
-'logo_site' => 'A HONLAP LOGOJA',
-'logo_standard_rubrique' => 'A ROVATOK SZABVÁNYOS LOGOJA',
-'logo_survol' => 'LEBEGŐ LOGO',
+'logo_article' => 'A CIKK LOGOJA', # MODIF
+'logo_auteur' => 'A SZERZŐ LOGOJA', # MODIF
+'logo_rubrique' => 'ROVAT LOGOJA', # MODIF
+'logo_site' => 'A HONLAP LOGOJA', # MODIF
+'logo_standard_rubrique' => 'A ROVATOK SZABVÁNYOS LOGOJA', # MODIF
+'logo_survol' => 'LEBEGŐ LOGO', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Adatbázis kiválasztása',
@@ -708,8 +714,12 @@ ami állapotát jelzi :',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -746,9 +756,10 @@ ami állapotát jelzi :',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Mappa :',

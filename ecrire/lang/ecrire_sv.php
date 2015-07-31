@@ -212,6 +212,8 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'icone_supprimer_signature' => 'Radera den här signaturen',
 'icone_valider_signature' => 'Validera signaturen',
 'image_administrer_rubrique' => 'Du kan hantera den här avdelningen',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artikel',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -237,6 +239,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'info_administrer_rubrique' => 'Du kan hantera den här avdelningen',
 'info_adresse' => 'till adressen:',
 'info_adresse_url' => 'Din sajts publika URL',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Visa besök till:',
 'info_aide_en_ligne' => 'SPIP Online Hjälp',
 'info_ajout_image' => 'När du lägget till filer som bifogade dokument till en artikel,
@@ -374,6 +377,7 @@ funktioner hos SPIP inte användas.',
 'info_liste_redacteurs_connectes' => 'Inlogggade redaktörer',
 'info_login_existant' => 'Användarnamnet finns redan.',
 'info_login_trop_court' => 'Användarnamnet är för kort.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Logotyperna',
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'I samma avdelning',
@@ -444,6 +448,7 @@ funktioner hos SPIP inte användas.',
 'info_par_statut' => 'efter status',
 'info_par_tri' => '\'(efter @tri@)\'',
 'info_passe_trop_court' => 'lösenordet är för kort.',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'De två lösenorden är inte identiska.',
 'info_pense_bete_ancien' => 'Dina gamla meddelanden', # MODIF
 'info_plus_cinq_car' => 'mer än 5 tecken',
@@ -479,6 +484,7 @@ funktioner hos SPIP inte användas.',
 'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Sajtens bas',
 'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
 'info_recherche_auteur_a_affiner' => 'För många resultat för "@cherche_auteur@"; Var vänlig och avgränsa sökningen mer.',
@@ -668,12 +674,12 @@ med en färg som visar deras status:',
 'lien_trier_nombre_articles' => 'Sortera efter artikelnummer',
 'lien_trier_statut' => 'Sortera efter status',
 'lien_voir_en_ligne' => 'SE ONLINE:',
-'logo_article' => 'ARTIKELNS LOGOTYPE',
-'logo_auteur' => 'REDAKTÖRENS LOGOTYPE',
-'logo_rubrique' => 'Avdelningens logotype',
-'logo_site' => 'SAJTENS LOGOTYPE',
-'logo_standard_rubrique' => 'STANDARDLOGOTYPE FÖR AVDELNINGAR',
-'logo_survol' => 'LOGOTYPE FÖR MUS-ÖVER',
+'logo_article' => 'ARTIKELNS LOGOTYPE', # MODIF
+'logo_auteur' => 'REDAKTÖRENS LOGOTYPE', # MODIF
+'logo_rubrique' => 'Avdelningens logotype', # MODIF
+'logo_site' => 'SAJTENS LOGOTYPE', # MODIF
+'logo_standard_rubrique' => 'STANDARDLOGOTYPE FÖR AVDELNINGAR', # MODIF
+'logo_survol' => 'LOGOTYPE FÖR MUS-ÖVER', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Välj din databas',
@@ -724,8 +730,12 @@ med en färg som visar deras status:',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -762,9 +772,10 @@ med en färg som visar deras status:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW

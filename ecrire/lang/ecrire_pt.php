@@ -217,6 +217,8 @@ ou da rede',
 'icone_supprimer_signature' => 'Suprimir esta assinatura',
 'icone_valider_signature' => 'Validar esta assinatura',
 'image_administrer_rubrique' => 'Pode administrar esta rubrica',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => '1 artigo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -242,6 +244,7 @@ ou da rede',
 'info_administrer_rubrique' => 'Pode administrar esta rubrica',
 'info_adresse' => 'ao endereço :',
 'info_adresse_url' => 'Endereço (URL) do sítio público',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => 'Exibir as visitas para :',
 'info_aide_en_ligne' => 'Ajuda em linha SPIP',
 'info_ajout_image' => 'Quando acrescentar imagens como documentos ligados a um artigo,
@@ -377,6 +380,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 'info_login_existant' => 'Este login já existe.',
 'info_login_trop_court' => 'Login demasiado curto.',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'máximo :',
 'info_meme_rubrique' => 'Na mesma rubrica',
@@ -447,6 +451,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => 'Palavra-passe demasiado curta',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'As duas palavras-passe não são idênticas.',
 'info_pense_bete_ancien' => 'Os seus antigos memorandos', # MODIF
 'info_plus_cinq_car' => 'mais de 5 carácteres',
@@ -482,6 +487,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP ?
 (desactivá-lo acelera o funcionamento do sistema)',
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'Raiz do sítio',
 'info_recharger_page' => 'Favor voltar a carregar esta página daqui a pouco.',
 'info_recherche_auteur_a_affiner' => 'Demasiados resultados para "@cherche_auteur@" ; favor afinar a pesquisa.',
@@ -671,12 +677,12 @@ numa cor que indica o seu estado:',
 'lien_trier_nombre_articles' => 'seleccionar por número de artgos',
 'lien_trier_statut' => 'Seleccionar por estatuto',
 'lien_voir_en_ligne' => 'VER EM LINHA',
-'logo_article' => 'LOGOTIPO DO ARTIGO',
-'logo_auteur' => 'LOGOTIPO DO AUTOR ',
-'logo_rubrique' => 'LOGOTIPO DA RUBRICA',
-'logo_site' => 'LOGOTIPO DESTE SÍTIO',
-'logo_standard_rubrique' => 'LOGOTIPO MODELO DAS RUBRICAS ',
-'logo_survol' => 'LOGOTIPO PARA  LEITURA  RÁPIDA',
+'logo_article' => 'LOGOTIPO DO ARTIGO', # MODIF
+'logo_auteur' => 'LOGOTIPO DO AUTOR ', # MODIF
+'logo_rubrique' => 'LOGOTIPO DA RUBRICA', # MODIF
+'logo_site' => 'LOGOTIPO DESTE SÍTIO', # MODIF
+'logo_standard_rubrique' => 'LOGOTIPO MODELO DAS RUBRICAS ', # MODIF
+'logo_survol' => 'LOGOTIPO PARA  LEITURA  RÁPIDA', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Escolha da sua base',
@@ -727,8 +733,12 @@ numa cor que indica o seu estado:',
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'ou...', # NEW
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -765,9 +775,10 @@ numa cor que indica o seu estado:',
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'Répertoire :', # NEW

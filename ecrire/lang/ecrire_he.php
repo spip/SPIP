@@ -207,6 +207,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_supprimer_signature' => 'מחק חתימה זו',
 'icone_valider_signature' => 'תן תוקף לחתימה זו',
 'image_administrer_rubrique' => 'אתה יכול לנהל את המדור',
+'impossible_modifier_login_auteur' => 'Impossible de modifier le login.', # NEW
+'impossible_modifier_pass_auteur' => 'Impossible de modifier le mot de passe.', # NEW
 'info_1_article' => 'מאמר 1',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
@@ -232,6 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrer_rubrique' => 'הינך יכול לנהל מדור זה',
 'info_adresse' => ':אל הכתובת',
 'info_adresse_url' => 'הכתובת הכללית של האתר הציבורי שלך',
+'info_afficher_par_nb' => 'Afficher par', # NEW
 'info_afficher_visites' => ':הצג ביקורים ל',
 'info_aide_en_ligne' => 'עזרה מקוונת ל-אס.פי.אי.פי',
 'info_ajout_image' => 'כאשר אתה מוסיף תמונות כמסמכים מצורפים למאמר,
@@ -370,6 +373,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_liste_redacteurs_connectes' => 'רשימה של עורכים מחוברים',
 'info_login_existant' => '.שם ההתחברות הזה תפוס',
 'info_login_trop_court' => '.שם ההתחברות יותר מדי קצר',
+'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Les logos', # NEW
 'info_maximum' => ':מקסימום',
 'info_meme_rubrique' => 'Dans la même rubrique', # NEW
@@ -440,6 +444,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_par_statut' => 'par statut', # NEW
 'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_passe_trop_court' => '.סיסמה קצרה מדי',
+'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => '.שתי הסימאות לא זהות',
 'info_pense_bete_ancien' => 'התזכירים הישנים שלך', # MODIF
 'info_plus_cinq_car' => 'יותר מ-5 תווים',
@@ -475,6 +480,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Souhaitez-vous utiliser le moteur de recherche intégré à SPIP ?
 	(le désactiver accélère le fonctionnement du système.)', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_qui_edite' => '@nom_auteur_modif@ a travaill&eacute; sur ce contenu il y a @date_diff@ minutes', # NEW
 'info_racine_site' => 'בסיס האתר',
 'info_recharger_page' => '.אנא טען מחדש דף זה בעוד כמה רגעים',
 'info_recherche_auteur_a_affiner' => 'יותר מדי תוצאות ל"@cherche_auteur@"; אנא עדן את החיפוש שלך.',
@@ -664,12 +670,12 @@ dans une couleur qui indique leur état :', # NEW
 'lien_trier_nombre_articles' => 'Trier par nombre d\'articles', # NEW
 'lien_trier_statut' => 'Trier par statut', # NEW
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :', # NEW
-'logo_article' => 'למס מאמר',
-'logo_auteur' => 'למס מחבר',
-'logo_rubrique' => 'למס של כותרת',
-'logo_site' => 'למס של אתר זה',
-'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # NEW
-'logo_survol' => 'LOGO POUR SURVOL', # NEW
+'logo_article' => 'למס מאמר', # MODIF
+'logo_auteur' => 'למס מחבר', # MODIF
+'logo_rubrique' => 'למס של כותרת', # MODIF
+'logo_site' => 'למס של אתר זה', # MODIF
+'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES', # MODIF
+'logo_survol' => 'LOGO POUR SURVOL', # MODIF
 
 // M
 'menu_aide_installation_choix_base' => 'Choix de votre base', # NEW
@@ -720,8 +726,12 @@ dans une couleur qui indique leur état :', # NEW
 'plugin_info_automatique_liste_update' => 'Mettre à jour les listes', # NEW
 'plugin_info_automatique_ou' => 'או ...',
 'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
+'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
+'plugin_info_install_ok' => 'Installation réussie', # NEW
+'plugin_info_necessite' => 'Necessite :', # NEW
+'plugin_info_non_compatible_spip' => 'Ce plugin n\'est pas compatible avec cette version de SPIP', # NEW
 'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
 'plugin_librairies_installees' => 'Librairies installées', # NEW
 'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
@@ -758,9 +768,10 @@ dans une couleur qui indique leur état :', # NEW
 'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
+'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 'queue_one_job_in_queue' => '1 travail en attente', # NEW
 'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_titre' => 'Liste des travaux', # NEW
 
 // R
 'repertoire_plugins' => 'ספריה :',
