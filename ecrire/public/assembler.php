@@ -74,7 +74,7 @@ function is_preview()
 //
 // http://doc.spip.org/@assembler_page
 function assembler_page ($fond) {
-	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
+	global $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
 
 	// Cette fonction est utilisee deux fois
@@ -102,7 +102,7 @@ function assembler_page ($fond) {
 	AND !$var_mode
 	AND $chemin_cache
 	AND isset($page['entetes'])
-	AND strstr('max-age=', $page['entetes']['Cache-Control']) // !$flag_dynamique
+	AND strstr('max-age=', $page['entetes']['Cache-Control'])
 	AND !strstr('IIS/', $_SERVER['SERVER_SOFTWARE'])
 	) {
 		$since = preg_replace('/;.*/', '',
@@ -137,25 +137,22 @@ function assembler_page ($fond) {
 		if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 		auto_content_type($page);
-		auto_expire($page);
 
 		$flag_preserver |=  (headers_sent());
 
-	// Definir les entetes si ce n'est fait 
-
+		// Definir les entetes si ce n'est fait 
 		if (!$flag_preserver) {
 			if ($flag_ob) {
-			// Si la page est vide, produire l'erreur 404
+				// Si la page est vide, produire l'erreur 404
 				if (trim($page['texte']) === ''
-				    AND $var_mode != 'debug') {
+				AND $var_mode != 'debug') {
 					$page = message_erreur_404();
-					$flag_dynamique = true;
 				}
-	// pas de cache client en mode 'observation (ou si deja indique)
-				if ($flag_dynamique OR $var_mode) {
-				  $page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
-				  $page['entetes']["Pragma"] = "no-cache";
-				} 
+				// pas de cache client en mode 'observation'
+				if ($var_mode) {
+					$page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
+					$page['entetes']["Pragma"] = "no-cache";
+				}
 			}
 		}
 	}
@@ -178,18 +175,6 @@ function auto_content_type($page)
 	  {
 		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type']));
 	  }
-}
-
-// http://doc.spip.org/@auto_expire
-function auto_expire($page)
-{
-	global $flag_dynamique;
-	if (!isset($flag_dynamique)) {
-		if (preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$page['texte'], $r))
-			$flag_dynamique = (intval($r[1]) === 0);
-		else	if (isset($page['entetes']['Expire']) AND preg_match("/([\s\d])*.\s*\)/is",$page['entetes']['Expire'], $r))
-			$flag_dynamique = (intval($r[1]) === 0);
-	}
 }
 
 // http://doc.spip.org/@stop_inclure
