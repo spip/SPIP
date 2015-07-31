@@ -160,17 +160,14 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id, $url_base, $visible)
 {
 	$les_mots = array();
-	$id_groupes_vus = array();
-	$groupes_vus = array();
-	$flag_tous = 0;
-	$result = sql_select("mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
+	$result = sql_select("mots.id_mot, mots.titre, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
 	if (sql_count($result)) {
 	
 		$tableau= array();
 		$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
 		$ret = generer_url_retour($url_base, "$table_id=$id_objet#mots");
 		while ($row = sql_fetch($result)) {
-			$tableau[] = editer_mots_un($row, $cle, $flag_editable, $id_groupes_vus, $flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
+			$tableau[] = editer_mots_un($row, $cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots);
 		}
 	
 		$largeurs = array('25', '', '', '');
@@ -181,58 +178,49 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	} else $res ='';
 
 	if ($flag_editable)
-	  $res .= formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous);
+	  $res .= formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet);
 
 	return $res;
 }
 
 // http://doc.spip.org/@editer_mots_un
-function editer_mots_un($row, $cle, $flag_editable, &$id_groupes_vus, &$flag_tous, $id_objet, $objet, $ret, $table, $table_id, $url_base, $les_mots)
+function editer_mots_un($row, $cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base, &$les_mots)
 {
 	$id_mot = $row['id_mot'];
-	$les_mots[] = $row['id_mot'];
 	$titre_mot = $row['titre'];
-	$descriptif_mot = $row['descriptif'];
+	$les_mots[] = $row['id_mot']; 
 	$id_groupe = $row['id_groupe'];
 
-	$id_groupes_vus[] = $id_groupe;
 	$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
-	$vals= array("<a href='$url'>$cle</a>");
+	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; 
+	// sinon bug avec arabe
 
-	$r = sql_fetsel("titre, unseul", "spip_groupes_mots", "id_groupe = $id_groupe");
-	$unseul = $r['unseul'];
-	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
-	$type_mot = typo($r['titre']);
+	$groupe = typo(sql_getfetsel("titre", "spip_groupes_mots", "id_groupe = $id_groupe"));
 
 	if (autoriser('modifier', 'groupemots', $id_groupe))
-		$type_mot = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$type_mot</a>";
+		$groupe = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$groupe</a>";
 
-	if (!$flag_editable)
-		$flag_groupe = false;
-	else {
-		$flag_groupe = sql_fetch(editer_mots_droits('COUNT(*) AS n', "id_groupe = $id_groupe"));
-		$flag_groupe = $flag_groupe['n'];
+	$retire = $unseul = '';
+
+	if ($flag_editable) {
+		$r = sql_fetch(editer_mots_droits('unseul', "id_groupe = $id_groupe"));
+		if ($r) {
+			$unseul = ($r['unseul'] == 'oui');
+			$r =  _T('info_retirer_mot')
+			  . "&nbsp;"
+			  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
+
+			$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");
+		}
 	}
 	// Changer
-	if ($unseul == "oui" AND $flag_groupe) {
-		$vals[]= formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
+	if ($unseul) {
+		$mot = formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 	} else {
-		$vals[]= "<a href='$url'>".typo($titre_mot)."</a>";
+		$mot = "<a href='$url'>".typo($titre_mot)."</a>";
 	}
 
-	$vals[]= $type_mot;
-
-	$s = "&nbsp;";
-	if ($flag_editable AND $flag_groupe) {
-		$flag_tous++;
-		$s =  _T('info_retirer_mot')
-		. "&nbsp;"
-		. http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
-
-		$s = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($s,''),"&id_objet=$id_objet&objet=$objet");
-	}
-	$vals[] = $s;
-	return $vals;
+	return array("<a href='$url'>$cle</a>", $mot, $groupe, $retire);
 }
 
 // http://doc.spip.org/@formulaire_mot_remplace
@@ -263,35 +251,47 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
-
 // http://doc.spip.org/@formulaire_mots_cles
-function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet, $flag_tous) {
+function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global  $spip_lang, $spip_lang_right;
 
-	if ($les_mots) {
-		$les_mots = join($les_mots, ",");
+	$cond_mots_vus = !$les_mots ? '' :
+	  sql_in('id_mot', $les_mots);
+
+	$id_groupes_vus = array();
+	$flag_tous = 1;
+	if ($cond_mots_vus) {
+
+		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
+		$q = sql_select("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", $cond_mots_vus, "M.id_groupe");
+		while($r = sql_fetch($q)) {
+			$id_groupes_vus[]= $r['id_groupe'];
+			$flag_tous &= ($r[$droit] === 'oui');
+		}
+		$cond_id_groupes_vus = (" AND " . sql_in('id_groupe', $id_groupes_vus, 'NOT'));
 	} else {
-		$les_mots = "0";
+		$cond_id_groupes_vus = '';
 	}
-	$cond_id_groupes_vus = "0";
-	if ($id_groupes_vus) $cond_id_groupes_vus = join(",",$id_groupes_vus);
-	
-	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
+
+	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "$table = 'oui' AND obligatoire = 'oui'$cond_id_groupes_vus"));
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
-	if ($flag_tous >= 3) {
+	if ($flag_tous AND count($les_mots)>= 3) {
 		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
 		. "</div><br />\n";
 	}
 
-	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus))) ORDER BY multi");
+	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
 
-	// Afficher un menu par groupe de mots
+	// Afficher un menu par groupe de mots non vu
 	$ajouter ='';
+	$cond_mots_vus = !$les_mots ? '' :
+	  (" AND " . sql_in('id_mot', $les_mots, 'NOT'));
+
 	while ($row = sql_fetch($result)) {
-		if ($menu = menu_mots($row, $id_groupes_vus, $les_mots)) {
+		if ($menu = menu_mots($row, $id_groupes_vus, $cond_mots_vu)) {
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
 
@@ -339,7 +339,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 {
 	$id_groupe = $row['id_groupe'];
 
-	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . ($les_mots ? " AND id_mot NOT IN ($les_mots) " : ''));
+	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . $les_mots);
 	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
@@ -380,7 +380,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 
 		$res .= "\n<option value='x' style='font-variant: small-caps;'>$titre</option>";
 
-		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "", "", "titre");
+		$result = sql_select("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $les_mots, "", "titre");
 
 
 		while($row = sql_fetch($result)) {
