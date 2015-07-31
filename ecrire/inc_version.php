@@ -157,8 +157,6 @@ if (isset($_SERVER['REMOTE_ADDR'])) $ip = $_SERVER['REMOTE_ADDR'];
 // ou dans spip.log), ni dans les forums (responsabilite)
 # $ip = substr(md5($ip),0,16);
 
-// faut-il passer les connexions MySQL en mode debug ?
-$mysql_debug = false;
 
 // faut-il faire des connexions completes rappelant le nom du serveur et/ou de
 // la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
