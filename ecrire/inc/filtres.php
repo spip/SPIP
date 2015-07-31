@@ -453,9 +453,10 @@ function taille_en_octets ($taille) {
 // http://doc.spip.org/@attribut_html
 function attribut_html($texte) {
 	$texte = texte_backend(supprimer_tags($texte));
-	$texte = str_replace(array("'",'"'),array('&#039;', '&#034;'), $texte);
+	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
 	
-	return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/","&#38;" , $texte);
+	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
+	return $texte;
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
