@@ -22,15 +22,20 @@ function action_editer_article_dist() {
 
 	$arg = _request('arg');
 	$lier_trad = _request('lier_trad');
-	$id_parent =_request('id_parent');
+
+	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
+	if (!$id_rubrique = intval(_request('id_parent'))) {
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$id_rubrique = $row['id_rubrique'];
+	}
 
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
-	        $id_article = insert_article($id_parent);
+		$id_article = insert_article($id_rubrique);
 	} 
 	  
 	// Enregistre l'envoi dans la BD
-	$err = articles_set($id_article, $id_parent, $lier_trad, $arg=='oui');
+	$err = articles_set($id_article, $id_rubrique, $lier_trad, $arg=='oui');
 
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_article', $id_article, '&') . ($err ? '&trad_err=1' : '');
@@ -39,17 +44,10 @@ function action_editer_article_dist() {
 }
 
 // http://doc.spip.org/@insert_article
-function insert_article($id_parent)
+function insert_article($id_rubrique)
 {
 	include_spip('base/abstract_sql');
 	$id_auteur =  _request('id_auteur');
-	$id_parent =  _request('id_parent');
-
-	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
-	if (!$id_rubrique = intval($id_parent)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
-		$id_rubrique = $row['id_rubrique'];
-	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
