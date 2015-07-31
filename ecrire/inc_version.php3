@@ -1161,7 +1161,7 @@ function find_in_path ($filename, $path='AUTO') {
 		else
 			$f = "$dir$filename";
 
-		if (is_readable($f)) {
+		if (@is_readable($f)) {
 			return $f;
 		}
 	}
