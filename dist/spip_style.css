@@ -3,7 +3,7 @@
 /* Ces styles sont indispensables et doivent necessairement etre        */
 /* definis pour le bon fonctionnement de votre squelette                */
 
-/* Raccourcis typographiques de SPIP : intertitre, citations, etc... */
+/* Raccourcis typographiques de SPIP */
 i.spip {}
 strong.spip {}
 hr.spip {}
@@ -22,10 +22,9 @@ h3.spip {
 	font-size: 1.15em; 
 	font-weight: bold; }
 
+/* Paragraphes, citations, code et poesie */
 p.spip {}
 p.spip_note {}
-
-/* Citations, code et poesie */
 
 blockquote.spip { 
 	margin: 1em; 
@@ -33,17 +32,19 @@ blockquote.spip {
 	padding-right: 1em;
 	border: 1px dotted; }
 
-.spip_poesie { 
+div.spip_poesie { 
 	margin: 1em; 
 	padding-left: 1em; 
 	border-left: 1px solid;
 	font-family: Georgia, Garamond, Times, serif; }
-.spip_poesie div { text-indent: -60px; margin-left: 60px; }
+div.spip_poesie div { text-indent: -60px; margin-left: 60px; }
 
 .spip_serif { font-family: Georgia, Garamond, Times, serif; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
 .spip_cadre { width: 99%; border: 1px solid; }
+
+.spip_surligne { background: #FF6; }
 
 /* Tableaux */
 table.spip {
@@ -63,7 +64,7 @@ table.spip tr.row_even { background: #EEE; }
 table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /* Logos, documents et images */
-.spip_logos { margin: 0; padding: 0; border: 0; }
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 .spip_documents { text-align: center; }
 .spip_documents_center { clear: both; width: 100%; margin: auto; }
@@ -90,9 +91,10 @@ table.spip_barre a:hover img {
 	background: #FFF;
 	border: 1px solid #999; }
 
-table.spip_barre .barre { width: 100%; background: #EEE; }
+table.spip_barre input.barre { width: 100%; background: #EEE; }
 
 /* * Couleurs des liens de Spip */
+a.spip_note {} /* liens vers notes de bas de page */
 a.spip_in { color: #900; } /* liens internes */
 a.spip_out { color: #009; } /* liens sortants */
 a.spip_url { color: #009; } /* liens url sortants */
