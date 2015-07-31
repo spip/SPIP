@@ -188,6 +188,11 @@ $GLOBALS['i18n_spip_ar'] = array(
 'dirs_commencer' => '&#1604;&#1604;&#1576;&#1583;&#1569; &#1601;&#1593;&#1604;&#1575;&#1611; &#1576;&#1593;&#1605;&#1604;&#1610;&#1577; &#1575;&#1604;&#1578;&#1579;&#1576;&#1610;&#1578;',
 'dirs_preliminaire' => '&#1578;&#1605;&#1607;&#1610;&#1583;: <B>&#1573;&#1593;&#1583;&#1575;&#1583; &#1573;&#1605;&#1578;&#1610;&#1575;&#1586;&#1575;&#1578; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604;</b>',
 'dirs_probleme_droits' => '<b>&#1605;&#1588;&#1603;&#1604;&#1577; &#1601;&#1610; &#1573;&#1605;&#1578;&#1610;&#1575;&#1586;&#1575;&#1578; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604;</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<B>&#1575;&#1604;&#1571;&#1583;&#1604;&#1577; &#1575;&#1604;&#1578;&#1575;&#1604;&#1610;&#1577; &#1605;&#1605;&#1606;&#1608;&#1593;&#1577; &#1593;&#1604;&#1609; &#1575;&#1604;&#1603;&#1578;&#1575;&#1576;&#1577;: <ul>@bad_dirs@.</ul> </b>
 	<P>&#1604;&#1581;&#1604; &#1607;&#1584;&#1607; &#1575;&#1604;&#1605;&#1588;&#1603;&#1604;&#1577;&#1548; &#1573;&#1587;&#1578;&#1582;&#1583;&#1605; &#1576;&#1585;&#1606;&#1575;&#1605;&#1580; FTP &#1604;&#1573;&#1593;&#1583;&#1575;&#1583; &#1573;&#1605;&#1578;&#1610;&#1586;&#1575;&#1578; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604; &#1604;&#1603;&#1604; &#1605;&#1606;
 		&#1607;&#1584;&#1607; &#1575;&#1604;&#1571;&#1583;&#1604;&#1577;. &#1608;&#1610;&#1608;&#1590;&#1581; &#1583;&#1604;&#1610;&#1604; &#1575;&#1604;&#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605; &#1607;&#1584;&#1607; &#1575;&#1604;&#1593;&#1605;&#1604;&#1610;&#1577; &#1576;&#1575;&#1604;&#1578;&#1601;&#1589;&#1610;&#1604;.
@@ -704,8 +709,7 @@ $GLOBALS['i18n_spip_ar'] = array(
 'info_multi_cette_rubrique' => '<MODIF> &#1607;&#1584;&#1575; &#1575;&#1604;&#1602;&#1587;&#1605; &#1576;&#1600;:',
 'info_multi_herit' => '&#1604;&#1594;&#1577; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;&#1577; &#1575;&#1604;&#1593;&#1604;&#1610;&#1575;',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-  Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.
-  Attention&nbsp;: seules les langues affich&eacute;es en gras sont int&eacute;gralement g&eacute;r&eacute;es par le syst&egrave;me de publication.',
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => '&#1578;&#1601;&#1593;&#1610;&#1604; &#1602;&#1575;&#1574;&#1605;&#1577; &#1575;&#1604;&#1604;&#1594;&#1575;&#1578; &#1601;&#1610; &#1575;&#1604;&#1575;&#1602;&#1587;&#1575;&#1605;&#1567;',
 'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => '&#1578;&#1593;&#1583;&#1583; &#1575;&#1604;&#1604;&#1594;&#1575;&#1578;',
@@ -1625,7 +1629,6 @@ $GLOBALS['i18n_spip_ar'] = array(
 'trad_lier' => '<NEW> Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
 'trad_new' => '&#1603;&#1578;&#1575;&#1576;&#1577; &#1578;&#1585;&#1580;&#1605;&#1577; &#1580;&#1583;&#1610;&#1583;&#1577; &#1604;&#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;',
 'trad_reference' => '<NEW> (article de r&eacute;f&eacute;rence)'
-
 
 );
 
