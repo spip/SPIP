@@ -277,12 +277,13 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 }
 
 function balise_TOTAL_BOUCLE_dist($p) {
-	if ($p->id_mere === '') {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_mere;
+	if ($b === '') {
 		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$p->code = "\$Numrows['$p->id_mere']";
-		$p->boucles[$p->id_mere]->numrows = true;
+		$p->code = "\$Numrows['$b']";
+		$p->boucles[$b]->numrows = true;
 		$p->statut = 'php';
 	}
 	return $p;
