@@ -114,7 +114,7 @@ if (isset($_GET['set_ecran'])) {
 	// car ce reglage depend plus du navigateur que de l'utilisateur
 	$GLOBALS['spip_ecran'] = $_GET['set_ecran'];
 	spip_setcookie('spip_ecran', $GLOBALS['spip_ecran'], time() + 365 * 24 * 3600);
-} else $GLOBALS['spip_ecran'] = "etroit";
+ } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 
 // deux globales (compatibilite ascendante)
