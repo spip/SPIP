@@ -40,21 +40,6 @@ include ("ecrire/inc_version.php3");
 include_local ("inc-cache.php3");
 
 
-/* else {
-	$visiteur = false;
-	if (ereg("^([0-9]+)@([^@]+)", $HTTP_COOKIE_VARS['spip_admin'], $regs)) {
-		// definir $visiteur a partir du cookie
-		include_ecrire ("inc_connect.php3");
-		$id_auteur = $regs[1];
-		$login = $regs[2];
-		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur AND login='$login'";
-		if (($result = spip_query ($query)) AND ($visiteur = mysql_fetch_object($result))) {
-			$visiteur->pass   = '';
-			$visiteur->htpass = '';
-		}
-	}
-}*/
-
 //
 // Ajouter un forum
 //
@@ -88,6 +73,10 @@ else {
 	include_ecrire("inc_meta.php3");
 }
 
+//
+// Authentification, le cas echeant
+//
+$auteur_session = '';
 if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
 	include_ecrire ("inc_session.php3");
 	verifier_session($cookie);
