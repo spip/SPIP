@@ -159,9 +159,10 @@ function urls_liste_objets($preg = true){
 }
 
 /**
- * Nettoyer une URL, en repérant notamment les raccourcis d'entités
- * comme `?article13`, `?rubrique21` ...
- * et en les traduisant pour compléter le contexte fourni en entrée
+ * Nettoyer une URL, en repérant notamment les raccourcis d'objets
+ * 
+ * Repère les entités comme `?article13`, `?rubrique21` ...
+ * les traduisant pour compléter le contexte fourni en entrée
  *
  * @param string $url
  * @param array $contexte
@@ -177,6 +178,7 @@ function nettoyer_url_page($url, $contexte=array())
 	if (preg_match($raccourci_url_page_html, $url, $regs)
 	OR preg_match($raccourci_url_page_id, $url, $regs)
 	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
+		$regs = array_pad($regs, 4, null);
 		$type = objet_type($regs[1]);
 		$_id = id_table_objet($type);
 		$contexte[$_id] = $regs[2];
