@@ -45,13 +45,10 @@ include_local ("inc-cache.php3");
 //
 if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
 	include_ecrire ("inc_session.php3");
-	$visiteur_authentifie = verifie_cookie_session ($cookie);
-	$visiteur = $visiteur_authentifie;
+	if ($visiteur = verifie_cookie_session ($cookie))
+		$visiteur->authentifie = true;
 } else {
-	$visiteur_authentifie = false;
 	$visiteur = false;
-
-	// extraire quelques donnees visiteur du cookie d'admin
 	if (ereg("^([0-9]+)@([^@]+)", $HTTP_COOKIE_VARS['spip_admin'], $regs)) {
 		// definir $visiteur a partir du cookie
 		include_ecrire ("inc_connect.php3");
@@ -307,7 +304,7 @@ function bouton($titre, $lien) {
 // Fonctionnalites administrateur (declenchees par le cookie visiteur, authentifie ou non)
 //
 
-if ((($HTTP_COOKIE_VARS['spip_admin'] == 'oui') OR ($visiteur->statut == '0minirezo')) AND !$flag_preserver) {
+if ((($HTTP_COOKIE_VARS['spip_admin'] == 'oui') OR ($visiteur->statut == '0minirezo') OR ($visiteur->statut == '1comite')) AND !$flag_preserver) {
 	if ($id_article) {
 		bouton("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
