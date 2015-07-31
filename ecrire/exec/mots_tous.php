@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/mots');
+include_spip('base/abstract_sql');
 
 function exec_mots_tous_dist()
 {
@@ -22,8 +23,7 @@ function exec_mots_tous_dist()
   $id_groupe = intval($id_groupe);
 
   if ($conf_mot = intval($conf_mot)) {
-	$query = "SELECT * FROM spip_mots WHERE id_mot=$conf_mot";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot");
 	if ($row = spip_fetch_array($result)) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = typo($row['titre']);
@@ -32,27 +32,14 @@ function exec_mots_tous_dist()
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
 
-		list($nb_articles) = spip_fetch_array(spip_query(
-			"SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article
-			WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article
-			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"
-			));
-		list($nb_rubriques) = spip_fetch_array(spip_query(
-			"SELECT COUNT(*) FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
-			WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"
-			));
-		list($nb_breves) = spip_fetch_array(spip_query(
-			"SELECT COUNT(*) FROM spip_mots_breves AS lien, spip_breves AS breve
-			WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve
-			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
-		list($nb_sites) = spip_fetch_array(spip_query(
-			"SELECT COUNT(*) FROM spip_mots_syndic AS lien, spip_syndic AS syndic
-			WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic
-			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));
-		list($nb_forum) = spip_fetch_array(spip_query(
-			"SELECT COUNT(*) FROM spip_mots_forum AS lien, spip_forum AS forum
-			WHERE lien.id_mot=$conf_mot AND forum.id_forum=lien.id_forum
-			AND forum.statut='publie'"));
+		list($nb_articles) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"));
+
+		list($nb_rubriques) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"));
+		list($nb_breves) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots_breves AS lien, spip_breves AS breve WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
+
+		list($nb_sites) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots_syndic AS lien, spip_syndic AS syndic WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic	AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));
+
+		list($nb_forum) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots_forum AS lien, spip_forum AS forum WHERE lien.id_mot=$conf_mot AND forum.id_forum=lien.id_forum AND forum.statut='publie'"));
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
@@ -78,26 +65,22 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 		$acces_comite = addslashes($acces_comite);
 		$acces_forum = addslashes($acces_forum);
 		if ($ancien_type) {	// modif groupe
-			$query = "UPDATE spip_mots SET type='$change_type' WHERE id_groupe='$id_groupe'";
-			spip_query($query);
+			spip_query("UPDATE spip_mots SET type='$change_type' WHERE id_groupe='$id_groupe'");
 
-			$query = "UPDATE spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
+
+			spip_query("UPDATE spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
 				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
 				minirezo='$acces_minirezo', comite='$acces_comite', forum='$acces_forum'
-				WHERE id_groupe='$id_groupe'";
-			spip_query($query);
+				WHERE id_groupe='$id_groupe'");
+
 		} else {	// creation groupe
-			spip_query("INSERT INTO spip_groupes_mots
-(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)
-VALUES 
-('$change_type', '$texte', '$descriptif', '$unseul', '$obligatoire', '$articles','$breves', '$rubriques', '$syndic', '$acces_minirezo',  '$acces_comite', '$acces_forum')");
+		  spip_abstract_insert('spip_groupes_mots',
+				       "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
+				       "('$change_type', '$texte', '$descriptif', '$unseul', '$obligatoire', '$articles','$breves', '$rubriques', '$syndic', '$acces_minirezo',  '$acces_comite', '$acces_forum')");
 		}
 	}
-
 	if ($supp_group){
-		$type=addslashes($supp_group);
-		$query="DELETE FROM spip_groupes_mots WHERE id_groupe='$supp_group'";
-		$result=spip_query($query);
+		spip_query("DELETE FROM spip_groupes_mots WHERE id_groupe='" . addslashes($supp_group) ."'");
 	}
  }
 
@@ -158,8 +141,8 @@ if ($conf_mot>0) {
 // On boucle d'abord sur les groupes de mots
 //
 
-$query_groupes = "SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi";
-$result_groupes = spip_query($query_groupes);
+ $result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+
 
 while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$id_groupe = $row_groupes['id_groupe'];
