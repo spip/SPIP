@@ -36,6 +36,7 @@ echo "Documents li&eacute;s &agrave l'article";
 echo "</td></tr>\n";
 
 $docs_affiches = "";
+$id_doc_actif = $id_document;
 
 $query = "SELECT lien.id_document, documents.id_vignette FROM spip_documents_articles AS lien, spip_documents AS documents ".
 	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".
@@ -46,7 +47,7 @@ while ($row = mysql_fetch_array($result)) {
 	$docs_affiches[] = $row[1];
 
 	echo "<tr><td>\n";
-	afficher_document($id_document);
+	afficher_document($id_document, $id_doc_actif);
 	echo "</td></tr>\n";
 }
 
@@ -68,7 +69,7 @@ while ($row = mysql_fetch_array($result)) {
 	$id_document = $row['id_document'];
 
 	echo "<tr><td>\n";
-	afficher_document($id_document);
+	afficher_document($id_document, $id_doc_actif);
 	echo "</td></tr>\n";
 }
 
