@@ -69,8 +69,9 @@ function spip_action_tourner_dist() {
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
 
 	}
-	$link = new Link(_DIR_RESTREINT_ABS . $GLOBALS['redirect']);
-	redirige_par_entete($link->getUrl($GLOBALS['ancre']));
+        $GLOBALS['redirect'] = _DIR_RESTREINT_ABS . $GLOBALS['redirect'];
+	$GLOBALS['redirect'] .=	'&show_docs='.$arg;
+        if ($GLOBALS['ancre'])  $GLOBALS['redirect'] .= '#'. $GLOBALS['ancre'];
 }
 
 

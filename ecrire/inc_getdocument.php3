@@ -196,7 +196,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
 // content-type est connu, et si possible recuperer la taille, voire plus.
-	spip_log ("ajout du document $nom_envoye  ($mode $type_lien $id_lien $id_document)");
+	spip_log ("ajout du document $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id_document')");
 	if ($mode == 'distant') {
 		include_ecrire('inc_distant');
 		if ($a = recuperer_infos_distantes($source)) {
@@ -382,32 +382,13 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	return true;
 }
 
-function afficher_compactes($fichiers, $args, $action) {
-// presenter une interface pour choisir si fichier joint ou decompacte
-// passer ca en squelette un de ces jours.
-
-	include_ecrire('inc_documents');
+function afficher_compactes($action) {
 	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
 		_T('upload_fichier_zip_texte'),
 		"</p>",
 		"<p>",
 		_T('upload_fichier_zip_texte2'),
-		"</p>",
-		construire_upload(
-			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
-			_T('upload_zip_telquel').
-			"</div>".
-			"<div><input type='radio' name='sousaction5' value='6'>".
-			_T('upload_zip_decompacter').
-			"</div>".
-			"<ul><li>" .
-			join("</li>\n<li>",$fichiers) .
-			"</li></ul>".
-			"<div>&nbsp;</div>".
-			"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
-			_T('bouton_valider').
-			"'></div>",
-			$args, $action);
+							"</p>",$action;
 	install_fin_html();
 }
 
@@ -437,16 +418,32 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			include_ecrire('pclzip.lib');
 			$archive = new PclZip($zip);
 			if ($archive) {
-			  // demander confirmation
-			  afficher_compactes(verifier_compactes($archive),
-					     array(
+// presenter une interface pour choisir si fichier joint ou decompacte
+// passer ca en squelette un de ces jours.
+
+			  include_ecrire('inc_documents');
+			  $texte =
+			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
+			_T('upload_zip_telquel').
+			"</div>".
+			"<div><input type='radio' name='sousaction5' value='6'>".
+			_T('upload_zip_decompacter').
+			"</div>".
+			"<ul><li>" .
+			join("</li>\n<li>",verifier_compactes($archive)) .
+			"</li></ul>".
+			"<div>&nbsp;</div>".
+			"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
+			_T('bouton_valider').
+			  "'></div>";
+			  afficher_compactes(construire_upload($texte, array(
 					 'redirect' => $redirect,
 					 'hash' => $hash,
 					 'id_auteur' => $id_auteur,
+					 'id' => $id,
 					 'chemin' => $zip,
 					 'arg' => $mode,
-					 'type' => $type),
-					     generer_url_public('spip_action.php',"id_article=$id"));
+					 'type' => $type)));
 			  // a tout de suite en joindre5 ou joindre6
 			  exit;
 			}
