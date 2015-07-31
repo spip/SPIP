@@ -9,7 +9,7 @@
 
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
-	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+//	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 	@Header ("Content-Type: text/css");
 
 	if ($headers_only) exit;
@@ -662,7 +662,7 @@ a.spip_glossaire:hover {text-decoration: underline overline;}
 .spip_recherche {padding: 2px; width : 100px; font-size: 10px;}
 .spip_cadre {
 	width : 100%;
-	background-color: #FFFFFF;
+	background-color: #eeeeee;
 	padding: 5px;
 }
 blockquote.spip {
