@@ -110,7 +110,6 @@ function exec_export_all_dist()
 	  // l'appel precedent avait fini le boulot. mettre l'en-pied.
 		ecrire_fichier($file, export_enpied(),false,false);
 		include_spip('inc/headers');
-		echo 'toto';
 		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive",'',true));
 	}
 
