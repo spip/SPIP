@@ -56,7 +56,18 @@ class IterFactory{
 
 class IterDecorator implements Iterator {
 	private $iter;
+
+	/**
+	 * Conditions de filtrage
+	 * ie criteres de selection
+	 * @var array
+	 */
 	protected $filtre = array();
+
+	/**
+	 * Fonction de filtrage compilee a partir des criteres de filtre
+	 * @var string
+	 */
 	protected $func_filtre = null;
 
 	public function __construct(Iterator $iter, $command, $info){
@@ -101,13 +112,6 @@ class IterDecorator implements Iterator {
 	public function next(){
 		$this->pos++;
 		$this->iter->next();
-
-		if ($f = $this->func_filtre) {
-			while ($this->valid()
-			AND !$f($this->pos,$this->current())) {
-				$this->iter->next();
-			}
-		}
 	}
 
 	/**
@@ -244,6 +248,7 @@ class IterDecorator implements Iterator {
 	/**
 	 * Renvoyer un tableau des donnees correspondantes
 	 * a la position courante de l'iterateur
+	 * en controlant si on respecte le filtre
 	 *
 	 * @return array|bool
 	 */
@@ -253,7 +258,17 @@ class IterDecorator implements Iterator {
 		} else {
 			if ($this->valid()) {
 				$r = array('cle' => $this->key(), 'valeur' => $this->current());
-				$this->next();
+				if ($f = $this->func_filtre) {
+					do {
+						$this->next();
+						$r = $this->valid()
+							? array('cle' => $this->key(), 'valeur' => $this->current())
+							: false;
+					}
+					while ($r AND !$f($r['cle'], $r['valeur']));
+				}
+				else
+					$this->next();
 			} else
 				$r = false;
 			return $r;

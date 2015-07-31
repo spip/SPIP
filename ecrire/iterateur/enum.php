@@ -60,49 +60,14 @@ class IterateurENUM implements Iterator {
 	 */
 	protected $offset = 0;
 
-	/**
-	 * Conditions de filtrage
-	 * ie criteres de selection
-	 * @var array
-	 */
-	protected $filtre = array();
-
-	/**
-	 * Fonction de filtrage compilee a partir des criteres de filtre
-	 * @var string
-	 */
-	protected $func_filtre = null;
-
 	public function __construct($command=array(), $info=array()) {
 		$this->type='ENUM';
 		$this->command = $command;
 		$this->info = $info;
 
-		$op = '';
-		if (is_array($this->command['where'])) {
-			foreach ($this->command['where'] as $k => $com) {
-				switch($com[1]) {
-					case 'valeur':
-						unset($op);
-						if ($com[0] == 'REGEXP')
-							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
-						else if ($com[0] == '=')
-							$op = '==';
-						else if (in_array($com[0], array('<','<=', '>', '>=')))
-							$op = $com[0];
-
-						if ($op)
-							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
-
-						break;
-				}
-
-			}
-		}
-
 		$this->pos = 0;
-	  $this->total = $this->max;
-	  
+		$this->total = $this->max;
+
 		// critere {2,7}
 		if ($this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
@@ -110,26 +75,15 @@ class IterateurENUM implements Iterator {
 			$this->total = $limit[1];
 		}
 
-		// Appliquer les filtres sur (valeur)
-		if ($this->filtre) {
-			$this->func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
-		}
-
-	  $this->rewind();
+		$this->rewind();
 	}
 
 	/**
 	 * Rembobiner
-	 * On part de n=0 et on next() tant qu'on a pas satisfait les filtres,
-	 * en bloquant pos=0
 	 * @return void
 	 */
 	public function rewind() {
-		$this->n = $this->start-1;
-		for ($i=0; $i<=$this->offset; $i++) {
-			$this->pos = -1; # forcer la position courante
-			$this->next(); # pour filtrage par func_filtre
-		}
+		$this->n = $this->start;
 	}
 
 	/**
@@ -171,12 +125,6 @@ class IterateurENUM implements Iterator {
 	public function next() {
 		$this->pos++;
 		$this->n++;
-		if ($f = $this->func_filtre) {
-			while ($this->valid()
-			  AND !$f($this->pos,$this->n)) {
-				$this->n++;
-			}
-		}
 	}
 
 	/**
