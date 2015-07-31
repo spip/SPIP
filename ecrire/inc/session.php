@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  */
 
-$GLOBALS['visiteur_session'] = ''; # globale decrivant l'auteur
+$GLOBALS['visiteur_session'] = array(); # globale decrivant l'auteur
 
 /**
  * 3 actions sur les sessions, selon le type de l'argument:
