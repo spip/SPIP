@@ -16,7 +16,9 @@ include_spip('inc/presentation');
 
 function exec_brouteur_dist()
 {
-  global $spip_ecran, $spip_lang_left,$id_rubrique;
+	global $spip_ecran, $spip_lang_left, $id_rubrique;
+
+	$id_rubrique = intval($id_rubrique);
 
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
@@ -32,22 +34,18 @@ function exec_brouteur_dist()
 
 	debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site", " hauteurFrame($nb_col);");
 
-	echo "<div>&nbsp;</div>";
+	echo "\n<div>&nbsp;</div>";
 
-	echo "<table border='0' cellpadding='0' cellspacing='2' width='$largeur_table'>";
+	echo "\n<table border='0' cellpadding='0' cellspacing='2' width='$largeur_table'>";
 
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";
-			$result=spip_query($query);
-			while($row=spip_fetch_array($result)){
-				$j = $j-1;
-				$ze_rubrique = $row['id_rubrique'];
-				$titre = typo($row['titre']);
+			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
+			if ($row=spip_fetch_array($result)){
+				$j--;
+				$dest[$j] = $id_rubrique;
 				$id_rubrique =$row['id_parent'];
-				
-				$dest[$j] = $ze_rubrique;
 			}
 		}
 		
@@ -59,61 +57,55 @@ function exec_brouteur_dist()
 			}
 		}
 
-
-
-
 		if ($dest[0] > 0 AND $dest[$nb_col-2]) {
-			// Afficher la hierarchie pour "remonter"
-			echo "<tr><td colspan='$nb_col' style='text-align: $spip_lang_left;'>";
-			
-			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
 			
 			$la_rubrique = $dest[0];
 			
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'";
-			$result = spip_query($query);
-			while ($row = spip_fetch_array($result)) {
+			$result = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
+			if ($row = spip_fetch_array($result)) {
 				$la_rubrique =$row['id_parent'];
 			}
 			
 			while ($la_rubrique > 0) {
-				$query = "SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'";
-				$result = spip_query($query);
-				while ($row = spip_fetch_array($result)) {
-					$compteur = $compteur + 1;
-					$ze_rubrique = $row['id_rubrique'];
+				$result = spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'");
+				if ($row = spip_fetch_array($result)) {
+					$compteur++;
 					$titre = typo($row['titre']);
 					$la_rubrique =$row['id_parent'];
 					$lien = $dest[$nb_col-$compteur-1];
 					if ($la_rubrique == 0) $icone = "secteur-24.gif";
 					else $icone = "rubrique-24.gif";
-					$ret = "<div " .
+					$ret = "\n<div " .
 					  http_style_background($icone,
-								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>$titre</a></div>\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 				}
 			}
 			$lien = $dest[$nb_col-$compteur-2];
-			$ret = "<div " .
-			  http_style_background("racine-site-24.gif",
-						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
-			echo $ret;
+
+			// Afficher la hierarchie pour "remonter"
+			echo "<tr><td colspan='$nb_col' style='text-align: $spip_lang_left;'>";
 			
-			echo "</div>";
-			echo "</td></tr>";
-			
+			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
+			echo "<div ",
+				http_style_background("racine-site-24.gif",
+						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
+				"><a href='",
+				generer_url_ecrire("brouteur","id_rubrique=$lien"),
+				"'>",
+				_T('info_racine_site'),
+				"</a></div>",
+				"\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>",
+				"</div>";
+			echo "</div></td></tr>";
 		}
 	} else {
-		$id_rubrique = 0;
-		$dest[0] = "$id_rubrique";
+		$dest[0] = '0';
 	}
 
-
-	
-	
-	echo "<tr width='$largeur_table'>";
+	echo "\n<tr width='$largeur_table'>";
 
 	for ($i=0; $i < $nb_col; $i++) {
-		echo "<td valign='top' width='$largeur_col'>";
+		echo "\n<td valign='top' width='$largeur_col'>";
 		
 		echo "<iframe width='100%' id='iframe$i' name='iframe$i'",
 		  "src='", generer_url_ecrire('brouteur_frame',"id_rubrique=".$dest[$i]."&frame=$i"), "' class='iframe-bouteur' height='",
@@ -123,7 +115,7 @@ function exec_brouteur_dist()
 		
 		echo "</td>";
 	}
-
-fin_page();
+	echo "\n</tr></table>";
+	fin_page();
 }
 ?>
