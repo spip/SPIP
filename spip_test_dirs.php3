@@ -62,7 +62,18 @@ function absent_dirs($bad_dirs, $test_dir) {
 	install_fin_html();
 }
 
-
+//
+// Tente d'ecrire
+//
+function test_ecrire($my_dir) {
+	$ok = true;
+	$nom_fich = "$my_dir/test.txt";
+	$f = @fopen($nom_fich, "w");
+	if (!$f) $ok = false;
+	else if (!@fclose($f)) $ok = false;
+	else if (!@unlink($nom_fich)) $ok = false;
+	return $ok;
+}
 
 //
 // teste les droits sur les repertoires
@@ -72,35 +83,41 @@ $install = !file_exists("ecrire/inc_connect.php3");
 
 if ($test_dir)
 	$test_dirs[] = $test_dir;
-else
-	$test_dirs = array("CACHE", "IMG", "ecrire", "ecrire/data");
+else {
+	$test_dirs = array("CACHE", "IMG", "ecrire/data");
+	if ($install)
+		$test_dirs[] = "ecrire";
+}
 
 unset($bad_dirs);
 unset($absent_dirs);
 
 while (list(, $my_dir) = each($test_dirs)) {
-	$ok = true;
-	$nom_fich = "$my_dir/test.txt";
-	$f = @fopen($nom_fich, "w");
-	if (!$f) $ok = false;
-	else if (!@fclose($f)) $ok = false;
-	else if (!@unlink($nom_fich)) $ok = false;
+	if (!test_ecrire($my_dir)) {
+		@umask(0); 
+		if (!@file_exists($my_dir))
+			mkdir($my_dir, 0777);
 
-	if (!$ok) {
-		if (file_exists($my_dir))
-			$bad_dirs[] = "<LI>".$my_dir;
-		else
+		if (@file_exists($my_dir)) {
+			@chmod($my_dir, 0777);
+			if (!test_ecrire($my_dir))
+				@chmod($my_dir, 0775);
+			if (!test_ecrire($my_dir))
+				@chmod($my_dir, 0755);
+			if (!test_ecrire($my_dir))
+				$bad_dirs[] = "<LI>".$my_dir;
+		} else
 			$absent_dirs[] = "<LI>".$my_dir;
 	}
 }
 
-if ($absent_dirs) {
-	$absent_dirs = join(" ", $absent_dirs);
-	absent_dirs($absent_dirs, $test_dir);
-}
-else if ($bad_dirs) {
+if ($bad_dirs) {
 	$bad_dirs = join(" ", $bad_dirs);
 	bad_dirs($bad_dirs, $test_dir, $install);
+}
+else if ($absent_dirs) {
+	$absent_dirs = join(" ", $absent_dirs);
+	absent_dirs($absent_dirs, $test_dir);
 }
 else {
 	if ($install)

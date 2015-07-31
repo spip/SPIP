@@ -4,6 +4,8 @@ include ("ecrire/inc_version.php3");
 include_local ("inc-cache.php3");
 
 if ($INSECURE['fond'] || $INSECURE['delais']) exit;
+if (!isset($delais))
+	$delais = 1 * 3600;
 
 /*function t($s = '') {
 	global $t0, $t1;
