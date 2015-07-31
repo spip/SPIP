@@ -24,12 +24,9 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_parent");
 
 	// s'il existe, afficher le message auquel on repond
-	// (mais pas en Ajax, il est deja sur la page)
 	if (!$row)
-		$row = array('titre' =>'', 'texte' =>'', 'id_message' =>'');
-	elseif (!$ajax)
-		$row = forum_envoi_parent($row);
-	else $row['texte'] ='';
+		$row = array('titre' =>'', 'texte' =>'', 'id_forum' =>0);
+	else $row = forum_envoi_parent($row);
 
 	// apres le premier appel, afficher la saisie precedente
 	if ($modif_forum == "oui") {
@@ -54,17 +51,23 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 
 	$form = forum_envoi_formulaire($id, $h, $statut, $texte, $titre_message, $nom_site, $url_site);
 
-	return forum_envoi_form($id, $id_parent, $script, $statut, $titre, $row['texte'] . $corps, $form, $objet, $retour);
+	return forum_envoi_form($id, $row, $script, $statut, $titre, $row['texte'] . $corps, $form, $objet, $retour);
 }
 
 // http://doc.spip.org/@forum_envoi_form
-function forum_envoi_form($id, $id_parent, $script, $statut, $titre, $corps, $form, $objet, $args) {
+function forum_envoi_form($id, $row, $script, $statut, $titre, $corps, $form, $objet, $args) {
 
+	$id_parent = $row['id_forum'];
 	$cat = $id . '/'
 	  . $id_parent . '/'
 	  . $statut . '/'
 	  . $script . '/'
 	  . $objet;
+
+	// si reponse directe a l'article etc, reincruster tout le forum
+	// sinon incruster juste le fil
+	$args .= "#poster_forum_prive" 
+	 . (!$id_parent ? '' : ("-" . $row['id_thread']));
 
 	$corps .= "\n<div>&nbsp;</div>" .
 	  debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true) .
@@ -76,7 +79,7 @@ $form
 	. fin_cadre_formulaire(true);
 
 	if (_request('var_ajaxcharset'))
-	  return ajax_action_post('poster_forum_prive',$cat, $script, "$args#poster_forum_prive", $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
+	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
 	else return redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
 }
 
@@ -229,7 +232,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 {
 	global $spip_lang_rtl;
 
-	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
+	return "\n<br /><br /><table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "<tr>"
 		. (!$parent ? "<td colsan='2'"
@@ -253,7 +256,9 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 			: ("<tr><td valign='top' style='width: 10px; background-image: url("
 			  . _DIR_IMG_PACK
 			  . "rien.gif);'>"
-			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, " style='width: 10px; height: 13px'")
+			  .  http_img_pack("forum-droite$spip_lang_rtl.gif",
+					    '&nbsp;', 
+					   " style='width: 10px; height: 13px'")
 		      . "</td>\n</tr>"))
 		. "</table>";
 }

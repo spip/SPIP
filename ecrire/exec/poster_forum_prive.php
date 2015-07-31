@@ -47,15 +47,15 @@ function forum_envoi(
 		include_spip('inc/headers');
 		$script = preg_replace('/\W/','', $script);
 		$objet = preg_replace('/\W/','', $texte);
-		redirige_url_ecrire('discuter', "script=$script&objet=$texte&$texte=$id&statut=$statut");
+		redirige_url_ecrire('discuter', "script=$script&objet=$texte&$texte=$id&statut=$statut" . ($id_parent ? "&id_parent=$id_parent" : ''));
 	} else {
 		$statut = preg_replace('/\W/','', $statut);
 		$forum_envoi = charger_fonction('forum_envoi', 'inc');
 		$forum_envoi = $forum_envoi($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site);
-		spip_log("exec_poste,r  $modif_forum $ajax $id $id_parent $script $statut");
-	if ($ajax) {
-		ajax_retour($forum_envoi);
-	} else {
+
+		if ($ajax) {
+			ajax_retour($forum_envoi);
+		} else {
 		$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('texte_nouveau_message'), "accueil", "accueil");

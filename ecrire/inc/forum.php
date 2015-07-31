@@ -381,9 +381,11 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			 OR ($statut=="publie" AND $id_parent > 0))) {
-		  $res .= afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg);
 
-		  $res .= afficher_forum(sql_select("*", "spip_forum", "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . "", "", "date_heure"), $retour, $arg, $controle_id_article);
+			$bloc = afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg)
+			. afficher_forum(sql_select("*", "spip_forum", "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'") . "", "", "date_heure"), $retour, $arg, $controle_id_article);
+
+			$res .= ajax_action_greffe('poster_forum_prive', $row['id_forum'], $bloc); 
 		}
 		$thread[$compteur_forum]++;
 	}
@@ -394,9 +396,12 @@ function afficher_forum($request, $retour, $arg, $controle_id_article = false) {
 	return $res;
 }
 
+// Construit une Div comportant un unique message, 
+// plus les lignes verticales de conduite
+
 // http://doc.spip.org/@afficher_forum_thread
 function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
-	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
+	global $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
 
 	if (is_array($voir_logo)) {
@@ -412,22 +417,21 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$id_breve=$row['id_breve'];
 	$id_message=$row['id_message'];
 	$id_syndic=$row['id_syndic'];
-	$date_heure=$row['date_heure'];
+	$id_auteur=$row["id_auteur"];
 	$titre=$row['titre'];
 	$texte=$row['texte'];
-	$auteur= extraire_multi($row['auteur']);
-	$email_auteur=$row['email_auteur'];
 	$nom_site=$row['nom_site'];
 	$url_site=$row['url_site'];
 	$statut=$row['statut'];
 	$ip=$row["ip"];
-	$id_auteur=$row["id_auteur"];
 	
-	if ($spip_display == 4) {
-		$res = "\n<li id='id$id_forum'>".typo($titre)."<br />";
-	} else {
+	$titre_boite .= "<a href='#id$id_forum' id='id$id_forum'>"
+	  . typo($titre)
+	  . '</a>';
 
-		$titre_boite = '';
+	if ($spip_display == 4) {
+		$res = $titre_boite ."<br />";
+	} else {
 		if ($id_auteur AND $voir_logo) {
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if ($logo = $chercher_logo($id_auteur, 'id_auteur', 'on')) {
@@ -435,40 +439,86 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 				include_spip('inc/filtres_images');
 				$logo = image_reduire("<img src='$fid' alt='' />", 48, 48);
 				if ($logo)
-					$titre_boite = "\n<div style='$voir_logo'>$logo</div>" ;
+					$titre_boite = "\n<div style='$voir_logo'>$logo</div>$titre_boite" ;
 			}
-		} 
+		}
 
-		$titre_boite .= "<a href='#id$id_forum' id='id$id_forum'>"
-		. typo($titre)
-		. '</a>';
 
-		$res = "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>"
+		$res = "<tr>"
 		. afficher_forum_4($compteur_forum, $nb_forum, $i)
-		. "\n<td style='width: 100%' valign='top'>";
-		if ($compteur_forum == 1) 
-			$res .= debut_cadre_forum(forum_logo($statut), true, "", $titre_boite);
-		else $res .= debut_cadre_thread_forum("", true, "", $titre_boite);
+		. "\n<td style='width: 100%' valign='top'>"
+		. (($compteur_forum == 1)
+		   ? debut_cadre_forum(forum_logo($statut), true, "", $titre_boite)
+		   : debut_cadre_thread_forum("", true, "", $titre_boite));
 	}
 
 	// Si refuse, cadre rouge
 	if ($statut=="off") {
-		$res .= "\n<div style='border: 2px dashed red; padding: 5px;'>";
+		$style =" style='border: 2px dashed red; padding: 5px;'";
 	}
 	// Si propose, cadre jaune
 	else if ($statut=="prop") {
-		$res .= "\n<div style='border: 1px solid yellow; padding: 5px;'>";
+		$style = " style='border: 1px solid yellow; padding: 5px;'>";
 	}
 	// Si original, cadre vert
 	else if ($statut=="original") {
-		$res .= "\n<div style='border: 1px solid green; padding: 5px;'>";
-	}
-	$res .= "<table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>";
-	$res .= "<div style='font-weight: normal;'>". date_interface($date_heure) . "&nbsp;&nbsp;";
+		$style = " style='border: 1px solid green; padding: 5px;'>";
+	} else $style = '';
+
+	$res .= "<table$style width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>"
+	.  afficher_forum_auteur($row)
+	. (!$controle_id_article ? '' :
+	   boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip))
+	. "<div style='font-weight: normal;'>"
+	. safehtml(justifier(propre($texte)))
+	. "</div>\n"
+	. (!$nom_site ? '' :
+	      ((strlen($url_site) > 10) ? "\n<div style='text-align: left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>"
+	       : "<b>$nom_site</b>"))
+	. ($controle_id_article ? '' :
+	      repondre_forum($row, $titre, $statut, "$retour?$arg", _T('lien_repondre_message')))
+	   . (($GLOBALS['meta']["mots_cles_forums"] <> "oui") ? '' :
+	      afficher_forum_mots($id_forum))
+	   . "</td></tr></table>";
+
+	if ($spip_display == 4) return "\n<li>$res</li>\n";
+
+	if ($compteur_forum == 1) $res .= fin_cadre_forum(true);
+	else $res .= fin_cadre_thread_forum(true);
+	$res .= "</td></tr>";
+
+	return "<table width='100%' cellpadding='0' cellspacing='0' border='0'>$res</table>\n";
+}
+
+// http://doc.spip.org/@repondre_forum
+function repondre_forum($row, $titre, $statut, $retour, $clic)
+{
+	$id_forum = $row['id_forum'];
+	$id_thread = $row['id_thread'];
+	$ancre = "poster_forum_prive-$id_thread";
+
+	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id_parent=$id_forum&titre_message=" . rawurlencode($titre) . "&script=" . urlencode($retour)) . '#formulaire';
+
+	return "<div style='text-align: right' class='verdana1'><b><a onclick="
+	. ajax_action_declencheur($lien, $ancre)
+	. "\nhref='"
+	. $lien
+	. "'>"
+	. $clic
+	. "</a></b></div>\n";
+}
+
+function afficher_forum_auteur($row)
+{
+	$titre=$row['titre'];
+	$id_auteur=$row["id_auteur"];
+	$date_heure=$row['date_heure'];
+	$email_auteur=$row['email_auteur'];
+	$auteur= extraire_multi($row['auteur']);
 
 	if ($id_auteur) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$res .= join(' ',$formater_auteur($id_auteur));
+		$res = join(' ',$formater_auteur($id_auteur));
 	} else {
 		if ($email_auteur) {
 			if (email_valide($email_auteur))
@@ -478,58 +528,12 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 				."</a>";
 			$auteur .= " &mdash; $email_auteur";
 		}
-		$res .= safehtml("<span class='arial2'> / <b>$auteur</b></span>");
+		$res = safehtml("<span class='arial2'> / <b>$auteur</b></span>");
 	}
-
-	$res .= '</div>';
-
-	// boutons de moderation
-	if ($controle_id_article)
-		$res .= boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip);
-
-	$res .= "<div style='font-weight: normal;'>".safehtml(justifier(propre($texte)))."</div>\n";
-
-	if ($nom_site) {
-		if (strlen($url_site) > 10)
-			$res .= "\n<div style='text-align: left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
-		else $res .= "<b>$nom_site</b>";
-	}
-
-	$res .= $controle_id_article ? '' :
-		repondre_forum($id_forum, $titre, $statut, "$retour?$arg", _T('lien_repondre_message'));
-
-	if ($GLOBALS['meta']["mots_cles_forums"] == "oui")
-		$res .= afficher_forum_mots($id_forum);
-
-	$res .= "</td></tr></table>";
-
-	if ($statut == "off" OR $statut == "prop") $res .= "</div>";
-
-	if ($spip_display != 4) {
-		if ($compteur_forum == 1) $res .= fin_cadre_forum(true) . '<br />';
-		else $res .= fin_cadre_thread_forum(true);
-		$res .= "</td></tr></table>\n";
-	} else $res .= "</li>\n";
-
-	return $res;
+	return "<div style='font-weight: normal;'>"
+	  . date_interface($date_heure)
+	  . "&nbsp;&nbsp;$res</div>";
 }
-
-// http://doc.spip.org/@repondre_forum
-function repondre_forum($id_forum, $titre, $statut, $retour, $clic)
-{
-	$ancre = "poster_forum_prive-$id_forum";
-	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id_parent=$id_forum&titre_message=" . rawurlencode($titre) . "&script=" . urlencode($retour)) . '#formulaire';
-	$lien = "<div style='text-align: right' class='verdana1'><b><a onclick="
-	  . ajax_action_declencheur($lien, $ancre)
-	. "\nhref='"
-	. $lien
-	. "'>"
-	. $clic
-	  . "</a></b></div>\n";
-
-	return ajax_action_greffe('poster_forum_prive', $id_forum, $lien); 
-}
-
 
 // http://doc.spip.org/@afficher_forum_mots
 function afficher_forum_mots($id_forum)

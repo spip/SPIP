@@ -43,32 +43,39 @@ function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $obje
 }
 
 // http://doc.spip.org/@inc_discuter_dist
-function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=10)
+function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=10, $id_parent = 0)
 {
 	$debut = intval($debut);
-	$id = intval($id);
 	if (!$pas) $pas = 10;
-	$ancre = "poster_forum_prive";
-	$clic = _T('icone_poster_message');
-	$logo = ($script == 'forum_admin') ?
-	  "forum-admin-24.gif" : "forum-interne-24.gif";
-	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script") ."#formulaire";
-	$res = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
+	$id = intval($id);
+	$args = ($objet ? "$objet=$id&" : '') . "statut=$statut";
+	$ancre = "poster_forum_prive" . ($objet ? '' : "-$id");
 
-	$where = ((!$objet OR !$id) ? '' : ($objet . "=" . sql_quote($id) . " AND "))
-	  . "id_parent=0 AND statut=" . sql_quote($statut);
+	if ($id_parent) {
+	  $id_t = sql_getfetsel('id_thread', 'spip_forum', "id_forum=$id_parent");
+	  $res = afficher_forum(sql_select('*', 'spip_forum', "id_forum=$id_t"), $script, $args);
+#	  $res = afficher_forum_thread(sql_fetsel('*', 'spip_forum', "id_forum=$id"), false,0,0,0,$script, $args);
+	} else {
+		$clic = _T('icone_poster_message');
+		$logo = ($script == 'forum_admin') ?
+		  "forum-admin-24.gif" : "forum-interne-24.gif";
+		$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script") ."#formulaire";
+		$res = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
 
-	$n = sql_countsel('spip_forum', $where);
+		$where = ((!$objet OR !$id) ? '' : ($objet . "=" . sql_quote($id) . " AND "))
+		  . "id_parent=0 AND statut=" . sql_quote($statut);
 
-	if ($n) {
+		$n = sql_countsel('spip_forum', $where);
+		if ($n) {
 
-		$nav = ($n <= $pas) ? '' :
-		  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
+			$nav = ($n <= $pas) ? '' :
+			  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
 
-		$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
-		$args = ($objet ? "$objet=$id&" : '') . "statut=$statut";
-		$q = afficher_forum($q, $script,  $args, false);
-		$res .= $nav . $q	. "<br />" . $nav;
+			$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
+			
+			$q = afficher_forum($q, $script,  $args, false);
+			$res .= $nav . $q	. "<br />" . $nav;
+		}
 	}
 	return ajax_action_greffe($ancre, '', $res);
 }
