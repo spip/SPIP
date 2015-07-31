@@ -311,7 +311,7 @@ function traduire_nom_langue($lang) {
 // afficher 'gaucher' si la langue est arabe, hebreu, persan, 'droitier' sinon
 // utilise par #LANG_DIR, #LANG_LEFT, #LANG_RIGHT
 // ou encore par [(#LANG|lang_dir{"x","y"})]
-function lang_dir($lang, $droitier='', $gaucher='') {
+function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he')
 		return $gaucher;
 	else
@@ -334,13 +334,12 @@ function lang_dselect ($rien='') {
 
 
 // traduire un machin : [(#LANG|traduire{"module:code"}|sinon{"texte non traduit"})]
-// mais aussi notation <<module:code>> ou juste <<code>>
-function traduire($lang, $code) {
+/*function traduire($lang, $code) {
 	lang_select($lang);
 	$texte = _T($code);
 	lang_dselect();
 	return $texte;
-}
+}*/
 
 //
 // Afficher un menu de selection de langue
@@ -460,19 +459,19 @@ utiliser_langue_site();
 // et a passer dans inc_version si on a besoin de ces fonctions ailleurs qu'ici)
 //
 /*
- * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir 
- * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de 
+ * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir
+ * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de
  * COMMERCIALISATION ou d'UTILITE POUR UN BUT QUELCONQUE.
- * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des 
- * auteurs respectifs de chaque fonctions sont laisses ensembles. 
+ * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des
+ * auteurs respectifs de chaque fonctions sont laisses ensembles.
  * En aucun cas, Nexen.net ne pourra etre tenu responsable de quelques consequences que ce soit
  * de l'utilisation ou la mesutilisation de ces fonctions PHP.
  */
 /****
- * Titre : array_push() et array_pop() pour PHP3 
- * Auteur : Cedric Fronteau 
+ * Titre : array_push() et array_pop() pour PHP3
+ * Auteur : Cedric Fronteau
  * Email : charlie@nexen.net
- * Url : 
+ * Url :
  * Description : Implementation de array_push() et array_pop pour PHP3
 ****/
 function php3_array_push(&$stack,$value){
