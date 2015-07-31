@@ -162,6 +162,7 @@ function inc_auth_dist() {
 			preg_match(',^[^/]*//[^/]*(.*)/$,',
 				   url_de_base(),
 				   $r);
+			include_spip('inc/cookie');
 			spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
 		}
 	}
