@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include(_FILE_CONNECT);
+include_local(_FILE_CONNECT);
 include_ecrire("inc_meta");
 include_ecrire("inc_session");
 include_ecrire("inc_filtres");
