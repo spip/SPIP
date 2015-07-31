@@ -14,6 +14,7 @@ include_ecrire ("inc_admin.php3");
 //
 
 function vignette_par_defaut($type_extension) {
+#	$img = dir_img() . "icones";
 	if ($GLOBALS['flag_ecrire'])
 		$img = "../IMG/icones";
 	else
@@ -61,7 +62,9 @@ function vignette_par_defaut($type_extension) {
 //
 
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
-	$GLOBALS['doublons_documents'] .= ",$id_document";
+	global $id_doublons; # ne sert plus aux squelettes
+
+	$id_doublons['documents'] .= ",$id_document";
 
 	if ($les_parametres) {
 		$parametres = explode("|",$les_parametres);
@@ -191,10 +194,11 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 // Integration des images et documents
 //
 
-function integre_image($id_document, $align, $type_aff = 'IMG') {
+function integre_image($id_document, $align, $type_aff) {
+	global $id_doublons; # ne sert plus aux squelettes
 	global $flag_ecrire;
 
-	$GLOBALS['doublons_documents'] .= ",$id_document";
+	$id_doublons['documents'] .= ",$id_document";
 
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
@@ -210,9 +214,6 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$taille = $row['taille'];
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
-
-		// type d'affichage : IMG, DOC
-		$affichage_detaille = (strtoupper($type_aff) == 'DOC');
 
 		// on construira le lien en fonction du type de doc
 		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
@@ -231,8 +232,9 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$hauteur_vignette = $row_vignette['hauteur'];
 
 				// verifier l'existence du fichier correspondant
-				$path = ($flag_ecrire?'../':'') . $fichier_vignette;
-				if (!@file_exists($path) AND (!$flag_ecrire OR !@file_exists('../IMG/test.jpg')))
+				$path = ($flag_ecrire?'../':'') . 
+				  $fichier_vignette;
+				if (!@file_exists($path))
 					$url_fichier_vignette = '';
 			}
 		}
@@ -264,7 +266,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$titre_ko = supprimer_tags(propre($titre_ko));
 				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
 			}
-			if ($affichage_detaille)
+			if  ($type_aff == 'DOC')
 				$vignette .= ">";
 			else {
 				if ($align)
@@ -279,7 +281,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$vignette = "<a href='$url_fichier'>$vignette</a>";
 
 		// si affichage detaille ('DOC'), ajouter une legende
-		if (strtoupper($type_aff) == 'DOC') {
+		if ($type_aff == 'DOC') {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = spip_query($query_type);
 			if ($row_type = @spip_fetch_array($result_type)) {
@@ -464,7 +466,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
-	global $options;
+	global $id_doublons, $options;
 	global $spip_lang_left, $spip_lang_right;
 
 	$image_link = new Link('../spip_image.php3');
@@ -484,7 +486,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"AND docs.mode='document'".
 		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
 
-	if ($GLOBALS['doublons_documents']) $query .= " AND docs.id_document NOT IN (0".$GLOBALS['doublons_documents'].") ";
+	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (".$id_doublons['documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
 	$images_liees = fetch_document($query);
@@ -722,7 +724,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</tr>\n";
 			}
 			
-			$GLOBALS['doublons_documents'] .= ",$id_document";
+			$id_doublons['documents'] .= ",$id_document";
 		}
 		if ($case > 0) {
 			echo "<td style='border-left: 1px solid $couleur_claire;'>&nbsp;</td>";
@@ -739,7 +741,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'";
 
-	if ($GLOBALS['doublons_documents']) $query .= " AND docs.id_document NOT IN (0".$GLOBALS['doublons_documents'].") ";
+	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (".$id_doublons['documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
 	$documents_lies = fetch_document($query);
@@ -911,7 +913,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</tr>\n";
 			}
 			
-			$GLOBALS['doublons_documents'] .= ",$id_document";
+			$id_doublons['documents'] .= ",$id_document";
 		}
 		if ($case > 0) {
 			echo "<td style='border-left: 1px solid #aaaaaa;'>&nbsp;</td>";
@@ -1261,7 +1263,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 			"WHERE id_document in (".join(',', $documents_lies).")");
 		while ($v = spip_fetch_array($res))
-			$vignettes[] = $v['id_vignette'];
+			$vignettes[]= $v['id_vignette'];
 
 		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
 
@@ -1376,6 +1378,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 	global $options;
+	global $id_doublons;
 
 
 	if ($GLOBALS['id_document'] > 0) {
@@ -1384,7 +1387,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 	if ($id_document == $id_document_deplie) $flag_deplie = true;
 
- 	$doublons = $GLOBALS['doublons_documents'].",";
+ 	$doublons = $id_doublons['documents'].",";
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 

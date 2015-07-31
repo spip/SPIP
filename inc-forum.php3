@@ -293,7 +293,7 @@ function balise_FORMULAIRE_FORUM_dist($p) {
 
 	$p->code = code_invalideur_forums($p, "(".$code.")");
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -335,9 +335,9 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	$c .= '.
 	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
 
-	$p->code = code_invalideur_forums($p, "(".$c.")");
+	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 

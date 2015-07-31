@@ -55,21 +55,20 @@ function charger_squelette ($squelette) {
 		#spip_log("Squelette $squelette:\t($nom) deja en memoire");
 		return $nom;
 	}
-	else {
-		$phpfile = 'CACHE/skel_' . $nom . '.php';
+	$phpfile = 'CACHE/skel_' . $nom . '.php';
 
 		// le squelette est-il deja compile, lisible, etc ?
-		if (!squelette_obsolete($phpfile, $sourcefile)
+	if (!squelette_obsolete($phpfile, $sourcefile)
 		AND lire_fichier ($phpfile, $contenu,
-		array('critique' => 'oui', 'phpcheck' => 'oui'))) {
-			eval('?'.'>'.$contenu);
-			if (function_exists($nom))
-				return $nom;
+			array('critique' => 'oui', 'phpcheck' => 'oui'))) {
+		eval('?'.'>'.$contenu);
+		if (function_exists($nom))
+			return $nom;
 		}
 
 		// sinon le compiler
-		include_local("inc-compilo.php3");
-		if (!lire_fichier ($sourcefile, $skel)) { 
+	include_local("inc-compilo.php3");
+	if (!lire_fichier ($sourcefile, $skel)) { 
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html(_T('info_erreur_squelette'));
@@ -80,30 +79,37 @@ function charger_squelette ($squelette) {
 			exit;
 		}
 
-		$skel_compile = "<"."?php\n"
-		. calculer_squelette($skel, $nom, $ext, $sourcefile)."\n?".">";
+	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
+		// Tester si le compilateur renvoie une erreur
+	if (is_array($skel_code)) 
+	  {
+	    erreur_squelette($skel_code[0], $skel_code[1]) ; 
+	    $skel_compile = '';
+	    $skel_code = '';
+	  }
+	else
+	 $skel_compile = "<"."?php\n" . $skel_code ."\n?".">";
 
 		// Parler au debugguer
-		if ($GLOBALS['var_debug'] AND $GLOBALS['debug_objet'] == $nom
-		AND $GLOBALS['debug_affiche'] == 'code')
-			debug_dumpfile ($skel_compile);
-
+	if ($GLOBALS['var_debug'] AND 
+	    $GLOBALS['debug_objet'] == $nom
+	    AND $GLOBALS['debug_affiche'] == 'code')
+		debug_dumpfile ($skel_compile);
+		
 		// Evaluer le squelette
-		eval('?'.'>'.$skel_compile);
-
-		if (function_exists($nom)) {
+	eval($skel_code);
+	if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_compile);
 			return $nom;
-		}
-		else {
-			// en cas d'erreur afficher les boutons de debug
-			echo "<hr /><h2>".
-			_L("Erreur dans la compilation du squelette")." $sourcefile</h2>";
-			$GLOBALS['bouton_admin_debug'] = true;
-			debug_dumpfile ($skel_compile);
-		}
-	}
+			}
+		// en cas d'erreur afficher les boutons de debug
+	echo "<hr /><h2>".
+		_L("Erreur dans la compilation du squelette").
+		" $sourcefile</h2>" .
+		$GLOBALS['bouton_admin_debug'] = true;
+		debug_dumpfile ($skel_compile);
 }
+
 
 
 # Provoque la recherche du squelette $fond d'une $lang donnee,
@@ -128,14 +134,13 @@ function charger_squelette ($squelette) {
 function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	global $dossier_squelettes, $delais;
 
-	/* Bonne idee mais plus tard ?
+	/*
 	$dir = "$dossier_squelettes/mon-chercher.php3";
 	if (file_exists($dir)) {
 		include($dir);
-	} else { */
+		} else */ { 
 		include_local("inc-chercher.php3"); # a renommer
-	/* }
-	*/
+	 }
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$skel = chercher_squelette($fond,
@@ -371,7 +376,7 @@ function spip_abstract_select (
 		echo erreur_requete_boucle($q, $id, $table);
 	}
 
-	#  spip_log(spip_num_rows($result));
+#	 spip_log(spip_num_rows($result) . $q);
 	return $result;
 }
 
