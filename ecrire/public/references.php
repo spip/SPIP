@@ -546,18 +546,17 @@ function compose_filtres_args($p, $args, $sep)
 // ET chez sa maman
 // 
 // http://doc.spip.org/@calculer_argument_precedent
-function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
+function calculer_argument_precedent($idb, $nom_champ, &$boucles, $defaut=null) {
 
 	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
 	if ($boucles[$idb]->externe) {
-		index_pile ($idb, $nom_champ, $boucles); 
-		$zero = '$SP';
-	} else $zero = '0';
-	// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
-	$prec = $boucles[$idb]->id_parent;
-	return (($prec === '')
-		? ('$Pile[' . $zero . "]['$nom_champ']") 
-		: index_pile($prec, $nom_champ, $boucles));
+		index_pile ($idb, $nom_champ, $boucles,'', $defaut);
+		// retourner $Pile[$SP] et pas $Pile[0] si recursion en 1ere boucle
+		// on ignore le defaut fourni dans ce cas
+		$defaut = "@\$Pile[\$SP]['$nom_champ']";
+	}
+
+	return index_pile($prec, $nom_champ, $boucles,'', $defaut);
 }
 
 //
