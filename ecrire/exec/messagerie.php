@@ -45,26 +45,26 @@ debut_boite_info();
 
 echo _T('info_gauche_messagerie');
 
-echo "<p>".http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_vert');
+echo "<p>".http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' border='0'") .' ' . _T('info_symbole_vert'), '</p>';
 
-echo aide ("messut");
+ echo aide ("messut");
 
-echo "<p>".http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_bleu');
+echo "<p>".http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "width='14' height='7' border='0'") .' ' . _T('info_symbole_bleu'), '</p>';
 
 echo aide ("messpense");
 
-echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_jaune');
+echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'") .' ' . _T('info_symbole_jaune'), '</p>';
 
 fin_boite_info();
 
 creer_colonne_droite();
 
 debut_cadre_relief("messagerie-24.gif");
- icone_horizontale(_T('lien_nouvea_pense_bete'),generer_url_ecrire("message_edit","new=oui&type=pb"), "pense-bete.gif");
- icone_horizontale(_T('lien_nouveau_message'),generer_url_ecrire("message_edit","new=oui&type=normal"), "message.gif");
+ icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif");
+ icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message.gif");
 		
 		if ($connect_statut == "0minirezo") {
-		  icone_horizontale(_T('lien_nouvelle_annonce'),generer_url_ecrire("message_edit","new=oui&type=affich"), "annonce.gif");
+			icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif");
 		}
 fin_cadre_relief();
 

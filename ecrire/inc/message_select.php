@@ -82,7 +82,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 	}
 				
 	$s .= http_img_pack("$puce", "", "width='14' height='7'");
-	$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
+	$s .= "&nbsp;&nbsp;".typo($titre)."</a>";
 	$vals[] = $s;
 
 			//
@@ -98,9 +98,9 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 		}
 
 		if ($auteurs AND $type == 'normal') {
-			$s = "<FONT FACE='Arial,Sans,sans-serif' SIZE=1>";
+			$s = "<font face='Arial,Sans,sans-serif' size='1'>";
 			$s .= join(', ', $auteurs);
-			$s .= "</FONT>";
+			$s .= "</font>";
 		} else $s = "&nbsp;";
 		$vals[] = $s;
 	}

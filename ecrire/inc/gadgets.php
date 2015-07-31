@@ -468,13 +468,11 @@ function gadget_agenda() {
 function gadget_messagerie() {
 	global $connect_statut;
 
-	$gadget = "<div>&nbsp;</div>";
-	$gadget .= icone_horizontale(_T('lien_nouvea_pense_bete'),generer_url_ecrire("message_edit","new=oui&type=pb"), "pense-bete.gif", '', false);
-	$gadget .= icone_horizontale(_T('lien_nouveau_message'),generer_url_ecrire("message_edit","new=oui&type=normal"), "message.gif", '', false);
-	if ($connect_statut == "0minirezo") {
-		  $gadget .= icone_horizontale(_T('lien_nouvelle_annonce'),generer_url_ecrire("message_edit","new=oui&type=affich"), "annonce.gif", '', false);
-		}
-	return $gadget;
+	return "<div>&nbsp;</div>"
+	. icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif",'',false)
+	.  icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message.gif",'',false)
+	  . (($connect_statut != "0minirezo") ? '' :
+	     icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif",'',false));
 }
 
 // http://doc.spip.org/@repercuter_gadgets
