@@ -333,7 +333,7 @@ if (!$relief AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 if ($relief) {
 	echo "<p>";
 	debut_cadre_enfonce();
-	echo "<font color='red'><b>Les articles et br&egrave;ves suivants sont propos&eacute;s pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leurs sont attach&eacute;s.</b></font><p>";
+	echo "<font color='red'><b>Les articles et br&egrave;ves suivants sont propos&eacute;s pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.</b></font><p>";
 	//
 	// Les articles a valider
 	//
