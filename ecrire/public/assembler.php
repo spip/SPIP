@@ -130,7 +130,7 @@ function assembler($fond, $connect='') {
 			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 			if ($page === '')
 				erreur_squelette(_T('info_erreur_squelette2',
-					array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES)));
+					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES)));
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
