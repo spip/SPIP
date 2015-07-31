@@ -848,10 +848,10 @@ function autoriser_sans_cookie($nom)
 
 function tester_url_ecrire($nom){
 	// tester si c'est une page en squelette
-	if (find_in_path('prive/squelettes/contenu/' . $nom . '.html'))
+	if (find_in_path('prive/squelettes/contenu/' . $nom . '.' . _EXTENSION_SQUELETTES))
 		return 'fond';
 	// compat skels orthogonaux version precedente
-	elseif (find_in_path('prive/exec/' . $nom . '.html'))
+	elseif (find_in_path('prive/exec/' . $nom . '.' . _EXTENSION_SQUELETTES))
 		return 'fond_monobloc';
 	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
 	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
