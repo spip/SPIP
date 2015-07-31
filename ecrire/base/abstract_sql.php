@@ -13,32 +13,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Chargement a la volee de la description d'un serveur de base de donnees
+// via la fonction spip_connect()
+// qui etablira la premiere connexion si ce n'est fait.
 
 // http://doc.spip.org/@sql_serveur
-function sql_serveur($ins_sql, $serveur) {
+function sql_serveur($ins_sql, $serveur='') {
 
-  // le serveur par defaut est indique par spip_connect
-  // qui etablira la premiere connexion si ce n'est fait.
-	if (!$serveur) {
-		$g = spip_connect();
-		$f = $g ? str_replace('query', $ins_sql, $g) : '';
-	} else {
-	  // c'est un autre; s'y connecter si ce n'est fait
-		$f = 'spip_' . $serveur . '_' . $ins_sql;
-		if (function_exists($f)) return $f;
-
-		$d = find_in_path('inc_connect-' . $serveur . '.php');
-		if (@file_exists($d))
-			include($d);
-		else spip_log("pas de fichier $d pour decrire le serveur '$serveur'");
-	}
-	if (function_exists($f)) return $f;
-
-	include_spip('public/debug');
-	erreur_squelette(" $f " ._T('zbug_serveur_indefini'), $serveur);
-
-	// hack pour continuer la chasse aux erreurs
-	return 'spip_log';
+	$desc = spip_connect($serveur);
+	if (function_exists($f = @$desc[$ins_sql])) return $f;
+	include_spip('inc/minipres');
+	echo minipres("'$serveur' " ._T('zbug_serveur_indefini') . " ($ins_sql )");
+	exit;
 }
 
 // http://doc.spip.org/@spip_sql_set_connect_charset
@@ -85,9 +70,17 @@ function sql_select (
 // http://doc.spip.org/@sql_fetch
 function sql_fetch($res, $serveur='') {
 	$f = sql_serveur('fetch', $serveur);
-	return $f($res);
+	return $f($res, NULL, $serveur);
 }
 
+// http://doc.spip.org/@sql_count
+function sql_selectdb($res, $serveur='')
+{
+	$f = sql_serveur('selectdb', $serveur);
+	return $f($res, $serveur);
+}
+
+// http://doc.spip.org/@sql_free
 // http://doc.spip.org/@sql_count
 function sql_count($res, $serveur='')
 {
@@ -144,9 +137,9 @@ function sql_replace($table, $values, $desc=array(), $serveur='')
 function sql_showtable($table, $serveur='', $table_spip = false)
 {
 	if ($table_spip){
-		if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
-		else $table_pref = "";
-		$table = preg_replace('/^spip_/', $table_pref, $table);
+		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+		$prefixe = $connexion['prefixe'];
+		$table = preg_replace('/^spip_/', $prefixe, $table);
 	}
 	
 	$f = sql_serveur('showtable', $serveur);
@@ -255,6 +248,11 @@ function description_table($nom){
 	return array($nom,array());
 }
 
+function sql_listdbs($serveur='') {
+  	$f = sql_serveur('listdbs', $serveur);
+	return $f($serveur);
+}
+
 // http://doc.spip.org/@spip_num_rows
 function spip_num_rows($r) {
 	return sql_count($r);
@@ -263,16 +261,17 @@ function spip_num_rows($r) {
 
 //
 // Poser un verrou local a un SPIP donne
+// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
 //
 // http://doc.spip.org/@spip_get_lock
 function spip_get_lock($nom, $timeout = 0) {
-	global $spip_mysql_db, $table_prefix;
-	if ($table_prefix) $nom = "$table_prefix:$nom";
-	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
-	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
 	define('_LOCK_TIME', intval(time()/3600-316982));
-	$nom .= _LOCK_TIME;
+
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	$db = $connexion['db'];
+	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
 
 	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
 	$q = @sql_fetch($q);
@@ -282,11 +281,13 @@ function spip_get_lock($nom, $timeout = 0) {
 
 // http://doc.spip.org/@spip_release_lock
 function spip_release_lock($nom) {
-	global $spip_mysql_db, $table_prefix;
-	if ($table_prefix) $nom = "$table_prefix:$nom";
-	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
-	@spip_query("SELECT RELEASE_LOCK(" . _q($nom . _LOCK_TIME) . ")");
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	$db = $connexion['db'];
+	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
+
+	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 
 // http://doc.spip.org/@spip_sql_version

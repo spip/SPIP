@@ -34,26 +34,24 @@ function install_etape_2_dist()
 
 	$chmod = _request('chmod');
 
-	$fconnect = charger_fonction('db_' . $server_db, 'base', true);
-	if (!$fconnect) die(_T('erreur'));
+	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
 
-	$link = $fconnect($adresse_db, 0, $login_db, $pass_db);
+	$GLOBALS['connexions'][$server_db] = $link;
 
 	echo install_debut_html();
 
 // prenons toutes les dispositions possibles pour que rien ne s'affiche !
 
-	echo "<!-- $fconnect $login_db $pass_db";
+	echo "<!-- ", join(', ', $link), " $login_db ";
 	$db_connect = 0; // revoirfunction_exists($ferrno) ? $ferrno() : 0;
-	echo " '$link'";
+	echo join(', ', $GLOBALS['connexions'][0]);
 	echo "-->";
 
 	if (($db_connect=="0") && $link) {
 		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
-		// pourquoi se connecter une deuxieme fois ?
-		$link = $fconnect($adresse_db,0,$login_db,$pass_db);
+		spip_connect_db($adresse_db, 0, $login_db, $pass_db);
 		list($checked, $res) = install_etape_2_bases($login_db, $server_db);
 
 		$hidden = (defined('_SPIP_CHMOD')
@@ -84,15 +82,10 @@ function install_etape_2_dist()
 
 function install_etape_2_bases($login_db, $server_db)
 {
-
-	$flistdbs = sql_serveur('listdbs', $server_db);
-	$fselectdb = sql_serveur('selectdb', $server_db);
-	$ffetch = sql_serveur('fetch', $server_db);
-
-	$result = $flistdbs();
+	$result = sql_listdbs($server_db);
 	$bases = $checked = '';
 	if ($result) {
-		while ($row = $ffetch($result)) {
+		while ($row = sql_fetch($result)) {
 
 			$table_nom = array_shift($row);
 			$base = "<li>\n<input name=\"choix_db\" value=\"".$table_nom."\" type='radio' id='tab$i'";
@@ -117,9 +110,9 @@ function install_etape_2_bases($login_db, $server_db)
 			// Si un login comporte un point, le nom de la base est plus
 			// probablement le login sans le point -- testons pour savoir
 			$test_base = $login_db;
-			$ok = $fselectdb($test_base);
+			$ok = sql_selectdb($test_base, $server_db);
 			$test_base2 = str_replace('.', '_', $test_base);
-			if ($fselectdb($test_base2)) {
+			if (sql_selectdb($test_base2, $server_db)) {
 				$test_base = $test_base2;
 				$ok = true;
 			}

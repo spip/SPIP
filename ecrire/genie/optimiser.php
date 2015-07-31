@@ -39,11 +39,11 @@ function optimiser_base($attente = 86400) {
 // http://doc.spip.org/@optimiser_base_une_table
 function optimiser_base_une_table() {
 
-	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
-	else $table_pref = "";
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
 
 	$tables = array();
-	$result = spip_query("SHOW TABLES LIKE '$table_pref%'");
+	$result = spip_query("SHOW TABLES LIKE '$prefixe%'");
 
 	// on n'optimise qu'une seule table a chaque fois,
 	// pour ne pas vautrer le systeme

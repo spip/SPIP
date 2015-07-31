@@ -15,41 +15,47 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction pour la premiere connexion a un serveur MySQL
 
 // http://doc.spip.org/@base_db_mysql_dist
-function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
-	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
-	// gerer le fichier tmp/mysql_out
-	## TODO : ajouter md5(parametres de connexion)
-	if (@file_exists(_DIR_TMP.'mysql_out')
-	AND (time() - @filemtime(_DIR_TMP.'mysql_out') < 30)
-	    AND !defined('_ECRIRE_INSTALL')) {
-		return false;
-	}
+function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if ($port > 0) $host = "$host:$port";
-	$spip_mysql_link = mysql_connect($host, $login, $pass);
+	$link = mysql_connect($host, $login, $pass);
 
-	if (!$db)
-		$ok = $spip_mysql_link;
-	else  {
-	  $spip_mysql_db = $db;
-	  $ok = spip_mysql_selectdb($db);
-	  if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
-		mysql_query("set sql_mode=''");
-	  if (isset($GLOBALS['meta']['charset_sql_connexion']))
-		mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_connexion']));
-	
-	  if ($ok)
-		  $ok = spip_mysql_count(spip_mysql_query('SELECT COUNT(*) FROM spip_meta'));
+	if (!$db) {
+		$ok = $link;
+		$db = 'spip';
+	} else {
+		$ok = spip_mysql_selectdb($db);
+		if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
+			mysql_query("set sql_mode=''");
+		if (isset($GLOBALS['meta']['charset_sql_connexion']))
+			mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_connexion']));
 	}
-	// En cas d'erreur marquer le fichier mysql_out
-	if (!$ok
-	AND !defined('_ECRIRE_INSTALL')) {
-		@touch(_DIR_TMP.'mysql_out');
-		$err = 'Echec connexion MySQL '.spip_mysql_errno().' '.spip_mysql_error('connexion');
-		spip_log($err);
-		spip_log($err, 'mysql');
-	} 
+#	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
+#		 . ($ok ? "operationnelle sur $link" : 'impossible'));
 
-	return $ok ? 'spip_mysql_query' : false;
+	return !$ok ? false : array(
+		'db' => $db,
+		'prefixe' => $prefixe ? $prefixe : $db,
+		'link' => $GLOBALS['mysql_rappel_connexion'] ? $link : false,
+		'count' => 'spip_mysql_count',
+		'countsel' => 'spip_mysql_countsel',
+		'create' => 'spip_mysql_create',
+		'delete' => 'spip_mysql_delete',
+		'errno' => 'spip_mysql_errno',
+		'error' => 'spip_mysql_error',
+		'fetch' => 'spip_mysql_fetch',
+		'fetsel' => 'spip_mysql_fetsel',
+		'free' => 'spip_mysql_free',
+		'insert' => 'spip_mysql_insert',
+		'listdbs' => 'spip_mysql_listdbs',
+		'multi' => 'spip_mysql_multi',
+		'query' => 'spip_mysql_query',
+		'replace' => 'spip_mysql_replace',
+		'select' => 'spip_mysql_select',
+		'selectdb' => 'spip_mysql_selectdb',
+		'showtable' => 'spip_mysql_showtable',
+		'update' => 'spip_mysql_update',
+		'updateq' => 'spip_mysql_updateq',
+		);
 }
 
 // http://doc.spip.org/@spip_mysql_set_connect_charset
@@ -67,15 +73,17 @@ function spip_query_db($query, $serveur='') {
 // Fonction de requete generale, munie d'une trace a la demande
 
 // http://doc.spip.org/@spip_mysql_query
-function spip_mysql_query($query, $serveur='mysql') {
+function spip_mysql_query($query, $serveur='') {
 
-	$query = traite_query($query); // traitement du prefixe de table
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
 
-	$r = !$GLOBALS['mysql_rappel_connexion'] ?  false
-	  : $GLOBALS['spip_' . $serveur . '_link'];
+	$query = traite_query($query, $db, $prefixe);
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
-	$r = $r ? mysql_query($query, $r) : mysql_query($query);
+	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
 	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query); // et du fautif
@@ -172,29 +180,24 @@ function spip_select_as($args)
 // Quand tous les appels SQL seront abstraits on pourra l'ameliorer
 
 // http://doc.spip.org/@traite_query
-function traite_query($query) {
+function traite_query($query, $db='', $prefixe='') {
 
-	if ($GLOBALS['mysql_rappel_nom_base'] AND $GLOBALS['spip_mysql_db'])
-	  $pref = '`'. $GLOBALS['spip_mysql_db'].'`.';
+	if ($GLOBALS['mysql_rappel_nom_base'] AND $db)
+		$pref = '`'. $db.'`.';
 	else $pref = '';
 
-	if ($GLOBALS['table_prefix']) $pref .= $GLOBALS['table_prefix']."_";
+	if ($prefixe)
+		$pref .= $prefixe . "_";
 
 	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
 	} else $suite ='';
 
-	return preg_replace('/([,\s])spip_/', '\1'.$pref, $query) . $suite;
+	$r = preg_replace('/([,\s])spip_/', '\1'.$pref, $query) . $suite;
+#	spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe");
+	return $r;
 }
-
-// Fonction de creation d'une table SQL nommee $nom
-// a partir de 2 tableaux PHP :
-// champs: champ => type
-// cles: type-de-cle => champ(s)
-// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// Le nom des caches doit etre inferieur a 64 caracteres
-
 
 // http://doc.spip.org/@spip_mysql_selectdb
 function spip_mysql_selectdb($db) {
@@ -205,13 +208,20 @@ function spip_mysql_selectdb($db) {
 // Retourne les bases accessibles
 
 // http://doc.spip.org/@spip_mysql_listdbs
-function spip_mysql_listdbs() {
+function spip_mysql_listdbs($serveur='') {
 	return mysql_list_dbs();
 }
 
+// Fonction de creation d'une table SQL nommee $nom
+// a partir de 2 tableaux PHP :
+// champs: champ => type
+// cles: type-de-cle => champ(s)
+// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
+// Le nom des caches doit etre inferieur a 64 caracteres
 
 // http://doc.spip.org/@spip_mysql_create
 function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
+
 	$query = ''; $keys = ''; $s = ''; $p='';
 
 	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
@@ -299,7 +309,8 @@ function spip_mysql_showtable($nom_table, $serveur='')
 //
 
 // http://doc.spip.org/@spip_mysql_fetch
-function spip_mysql_fetch($r, $t=MYSQL_ASSOC, $serveur='') {
+function spip_mysql_fetch($r, $t='', $serveur='') {
+	if (!$t) $t = MYSQL_ASSOC;
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
@@ -348,9 +359,16 @@ function spip_mysql_free($r, $serveur='') {
 
 // http://doc.spip.org/@spip_mysql_insert
 function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
-	if (!spip_mysql_query("INSERT INTO $table $champs VALUES $valeurs", $serveur))
-		return 0;
-	$r = mysql_insert_id();
+
+	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
+	$link = $connexion['link'];
+	$db = $connexion['db'];
+
+	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
+
+	if (mysql_query("INSERT INTO $table $champs VALUES $valeurs", $link))
+		$r = mysql_insert_id($link);
 	return $r ? $r : (($r===0) ? -1 : 0);
 }
 

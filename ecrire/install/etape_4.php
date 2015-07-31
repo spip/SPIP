@@ -23,6 +23,10 @@ function install_etape_4_dist()
 	$pass = _request('pass');
 	$pass_verif = _request('pass_verif');
 
+	$server_db = defined('_INSTALL_SERVER_DB')
+		? _INSTALL_SERVER_DB
+		: _request('server_db');
+
 	if($login!='' AND ($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3)) {
 		echo minipres(
 			'AUTO',
@@ -32,22 +36,15 @@ function install_etape_4_dist()
 		exit;
 	}
 
-	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
-
-	echo info_etape(_T('info_derniere_etape'),
-			"<b>"._T('info_code_acces')."</b><br />" .
-			_T('info_utilisation_spip')
-	);
-
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
-		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
-	else
-		redirige_par_entete(generer_url_ecrire('install'));
-
 	if (@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
 		include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
+
+	if (!@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+		redirige_par_entete(generer_url_ecrire('install'));
+
+	// Avec ce qui suit, spip_connect et consorts vont marcher.
 
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
 		    _DIR_ETC . 'connect.php')) {
@@ -55,6 +52,13 @@ function install_etape_4_dist()
 		     _DIR_ETC . 'connect.php');
 		spip_unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	}
+
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+
+	echo info_etape(_T('info_derniere_etape'),
+			"<b>"._T('info_code_acces')."</b><br />" .
+			_T('info_utilisation_spip')
+	);
 
 	# maintenant on connait le vrai charset du site s'il est deja configure
 	# sinon par defaut inc/meta reglera _DEFAULT_CHARSET
@@ -73,13 +77,13 @@ function install_etape_4_dist()
 		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login=" . _q($login));
 
 		unset($id_auteur);
-		if ($row = sql_fetch($result)) $id_auteur = $row['id_auteur'];
+		if ($row = sql_fetch($result, $server_db)) $id_auteur = $row['id_auteur'];
 
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 		$alea = creer_uniqid();
 		if ($id_auteur) {
-		  spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=" . _q($alea)  . ", htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
+			spip_query("UPDATE spip_auteurs SET nom=" . _q($nom) . ", email=" . _q($email) . ", login=" . _q($login) . ", pass='$mdpass', alea_actuel='', alea_futur=" . _q($alea)  . ", htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur");
 		}
 		else {
 			spip_query("INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(" . _q($nom) . "," . _q($email) . "," . _q($login) . ",'$mdpass','$htpass', " . _q($alea) .",'0minirezo')");
@@ -101,7 +105,6 @@ function install_etape_4_dist()
 
 	$config = charger_fonction('config', 'inc');
 	$config();
-
 
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
 	spip_unlink($htpasswd);

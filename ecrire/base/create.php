@@ -19,21 +19,21 @@ include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@creer_base
-function creer_base($server='') {
+function creer_base($serveur='') {
 	global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
 	// Note: les mises a jour reexecutent ce code pour s'assurer
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	$fcreate = sql_serveur('create', $server);
-	$freplace = sql_serveur('replace', $server);
+	$fcreate = sql_serveur('create', $serveur);
+	$freplace = sql_serveur('replace', $serveur);
 
 	foreach($tables_principales as $k => $v)
-		$fcreate($k, $v['field'], $v['key'], true);
+		$fcreate($k, $v['field'], $v['key'], true, false, $serveur);
 
 	foreach($tables_auxiliaires as $k => $v)
-		$fcreate($k, $v['field'], $v['key'], false);
+		$fcreate($k, $v['field'], $v['key'], false, false, $serveur);
 
 
 	// Init ou Re-init ==> replace pas insert
@@ -45,15 +45,14 @@ function creer_base($server='') {
 		$freplace('spip_types_documents',
 			  array('mime_type' => $type_mime,
 				'extension' => $extension),
-			  $desc
-		);
+			  $desc, $serveur);
 
 	foreach($tables_images as $k => $v) {
 		$freplace('spip_types_documents',
 			 array('extension' => $k,
 			       'inclus' => 'image',
 			       'titre' => $v),
-			 $desc);
+			 $desc, $serveur);
 	}
 
 	foreach($tables_sequences as $k => $v)
@@ -61,14 +60,14 @@ function creer_base($server='') {
 			 array('extension' => $k,
 			       'titre' => $v,
 			       'inclus'=> 'embed'),
-			 $desc);
+			 $desc, $serveur);
 
 	foreach($tables_documents as $k => $v)
 		$freplace('spip_types_documents',
 			 array('extension' => $k,
 			       'titre' => $v,
 			       'inclus' => 'non'),
-			 $desc);
+			 $desc, $serveur);
 
 
 }
