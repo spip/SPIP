@@ -39,13 +39,12 @@ function balise_LOGO__dist ($p) {
 	}
 
 	$fichier = ($p->etoile === '**') ? -1 : 0;
-	$lien = ($p->etoile === '*') ? ' ' : '';
 	$coord = array();
-	$align = $params = '';
+	$align = $lien = '';
 	$mode_logo = '';
 
 	if ($p->param AND !$p->param[0][0]) {
-		$params = array_shift($p->param);
+		$params = $p->param[0];
 		array_shift($params);
 		foreach($params as $a) {
 			if ($a[0]->type === 'texte') {
@@ -57,63 +56,17 @@ function balise_LOGO__dist ($p) {
 				elseif (in_array($n,array('auto','icone','apercu','vignette')))
 					$mode_logo = $n;
 			}
-			else
-				$lien = $a[0];
+			else $lien =  calculer_liste(array($a[0]), $p->descr, $p->boucles, $p->id_boucle);
+
 		}
 	}
 
 	$coord_x = !$coord  ? 0 : intval(array_shift($coord));
 	$coord_y = !$coord  ? 0 : intval(array_shift($coord));
 	
-	// Bloc de compatibilite SPIP <= 2.0
-	// Ne pas chercher a comprendre.
-	foreach($p->param as $couple) {
-		$nom = trim($couple[0]);
-		if ($nom == '')  break;
-		$r = logo_faux_filtres($nom);
-		if ($r === 0) {
-			$align = $nom;
-			array_shift($p->param);
-			spip_log('filtre de logo obsolete', 'vieilles_defs');
-		} else {
-			if ($r === 2) {
-				$fichier = -1;
-				array_shift($p->param);
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
-			} elseif ($r === 1) {
-				$lien = ' ';
-				array_shift($p->param);
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
-			} elseif (ltrim($nom[0])=='#') {
-				array_shift($p->param);
-				$lien = $nom;
-				// le cas else est la seule incompatibilite
-				spip_log('filtre de logo obsolete', 'vieilles_defs');
-			}
-			break;
-		}
-	}
-	// Fin du bloc
-	// mais reste a traiter les cas ou $lien est une chaine
-	// (ecriture [(#LOGO|#URL...)] 
-
-	if ($lien) {
-		$x = is_string($lien);
-		if ($x) $x = !preg_match(",^[^#]*#([A-Za-z_]+),", $lien, $r);
-		if ($x)  {
-			include_spip('balise/url_');
-			$lien = generer_generer_url_arg($type, $p, $_id_objet);
-		} else {
-			if (is_string($lien)) {
-				$c = new Champ();
-				$c->nom_champ = $r[1];
-				$c->id_boucle = $p->id_boucle;
-				$c->boucles = &$p->boucles;
-				$c->descr = $p->descr;
-				$lien = $c;
-			}
-			$lien = calculer_liste(array($lien), $p->descr, $p->boucles, $p->id_boucle);
-		}
+	if ($p->etoile === '*') {
+		include_spip('balise/url_');
+		$lien = generer_generer_url_arg($type, $p, $_id_objet);
 	}
 
 	$connect = $p->id_boucle ?$p->boucles[$p->id_boucle]->sql_serveur :'';
@@ -164,25 +117,6 @@ function logo_survol($id_objet, $_id_objet, $type, $align, $fichier, $lien, $p, 
 
 }
 
-// Les pseudos filtres |fichier et |lien pour les balises LOGO_XXX
-// donnent le chemin du fichier et son URL.
-// Ecritures obsolete remplacees par ** et *: LOGO_XXX** et LOGO_XXX*
-// Conservees pour compatibilite ascendante mais ne plus utiliser
-// Idem pour le positionnement.
-// -> http://www.spip.net/fr_article901.html
 
-function logo_faux_filtres($nom)
-{
-	switch($nom) {
-	case 'top':
-	case 'left':
-	case 'right':
-	case 'center':
-	case 'bottom':  return 0;
-	case 'lien':    return 1;
-	case 'fichier': return 2;
-	default: return $nom;
-	}
-}
 
 ?>
