@@ -20,7 +20,7 @@ afficher la selection dans un ul class item_picked
 
 <div id="selecteur_#ENV{name}">
 
-<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
+<ul class="item_picked[ (#ENV{select,''}|?{select})][ (#ENV{obligatoire}|?{obligatoire})]">
 <BOUCLE_selected(POUR){tableau #ENV{selected}|picker_selected}>
 	[(#SET{objet, [(#VALEUR|table_valeur{objet})]})]
 	[(#SET{id_objet, [(#VALEUR|table_valeur{id_objet})]})]
@@ -28,7 +28,7 @@ afficher la selection dans un ul class item_picked
 	<li class="#GET{objet}">
 		<input type="hidden" name="[(#ENV{name,id_item})][(#VAL{91}|chr)][(#VAL{93}|chr)]" value="#GET{objet}|#GET{id_objet}" />
 		[(#ENV{afficher_langue,0}|oui)[&#91;(#INFO_LANG{#GET{objet},#GET{id_objet}})&#93;] ]#INFO_TITRE{#GET{objet},#GET{id_objet}}
-		[(#ENV{select,''}|non)<a href='#' onclick='jQuery(this).item_unpick();return false;'><img src='#GET{img_unpick}' alt='(<:lien_supprimer:>)' /></a>]<span class="sep">, </span>
+		[(#ENV{select,''}|non|ou{#ENV{obligatoire}|non})<a href='#' onclick='jQuery(this).item_unpick();return false;' title="<:lien_supprimer:>"><img src='#GET{img_unpick}' alt='(<:lien_supprimer:>)' /></a>]<span class="sep">, </span>
 	</li>
 	]
 	[(#GET{id_objet}|=={0}|oui)
