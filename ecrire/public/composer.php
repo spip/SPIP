@@ -160,35 +160,9 @@ function invalideur_session(&$Cache, $code=NULL) {
 }
 
 
-//
-// Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
-// bien pratiques n'ont guere de logique organisationnelle ; elles sont
-// appelees par certaines balises au moment du calcul des pages. (Peut-on
-// trouver un modele de donnees qui les associe physiquement au fichier
-// definissant leur balise ???
-//
-
-// http://doc.spip.org/@echapper_php_callback
-function echapper_php_callback($r) {
-	static $src = array();
-	static $dst = array();
-
-	// si on recoit un tableau, on est en mode echappement
-	// on enregistre le code a echapper dans dst, et le code echappe dans src
-	if (is_array($r)) {
-		$dst[] = $r[0];
-		return $src[] = '___'.md5($r[0]).'___';
-	}
-
-	// si on recoit une chaine, on est en mode remplacement
-	$r = str_replace($src, $dst, $r);
-	$src = $dst = array(); // raz de la memoire
-	return $r;
-}
-
 // http://doc.spip.org/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source='') {
-	static $filtres = null;
+	static $filtres = array;
 	$headers = array();
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
@@ -226,26 +200,12 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	);
 
 	// traiter #FILTRE{} et filtres
-  if (is_null($filtres)) {
-	  $filtres = pipeline('declarer_filtres_squelettes',array('args'=>$skel,'data'=>array()));
+  if (!isset($filtres[$nom])) {
+	  $filtres[$nom] = pipeline('declarer_filtres_squelettes',array('args'=>$skel,'data'=>array()));
   }
 	if (count($filtres) OR (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))) {
-		// proteger les <INCLUDE> et tous les morceaux de php
-		if ($process_ins == 'php')
-			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
-				'echapper_php_callback', $corps);
-		if (isset($headers['X-Spip-Filtre']) AND strlen($headers['X-Spip-Filtre']))
-			foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
-				if ($f = chercher_filtre($filtre))
-					$corps = $f($corps);
-			}
-		if (count($filtres))
-			foreach ($filtres as $filtre) {
-				if ($f = chercher_filtre($filtre))
-					$corps = $f($corps);
-			}
-		// restaurer les echappements
-		$corps = echapper_php_callback($corps);
+		include_spip('public/sandbox');
+		$corps = sandbox_filtrer_squelette($skel,$corps,explode('|', $headers['X-Spip-Filtre']),$filtres[$skel]);
 		unset($headers['X-Spip-Filtre']);
 	}
 
@@ -254,6 +214,14 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 
 	return $skel;
 }
+
+//
+// Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
+// bien pratiques n'ont guere de logique organisationnelle ; elles sont
+// appelees par certaines balises au moment du calcul des pages. (Peut-on
+// trouver un modele de donnees qui les associe physiquement au fichier
+// definissant leur balise ???
+//
 
 
 //
