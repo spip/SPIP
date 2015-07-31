@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Ativar o plugin',
 'aide_non_disponible' => 'Esta parte da ajuda online ainda n&atilde;o est&aacute; dispon&iacute;vel neste idioma.',
+'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Acesso negado.',
 'avis_article_modifie' => 'Aten&ccedil;&atilde;o, @nom_auteur_modif@ editou esta mat&eacute;ria h&aacute; @date_diff@ minutos',
 'avis_aucun_resultat' => 'Nenhum resultado.',
@@ -86,10 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&atilde;o aparecer na lista de redatores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar os avisos editoriais',
 'bouton_radio_non_syndication' => 'Sem sindica&ccedil;&atilde;o',
-'bouton_radio_occidental' => 'Alfabeto ocidental (<tt>iso-8859-1</tt>): permite principalmente a exibi&ccedil;&atilde;o dos idiomas da Europa Ocidental (ingl&ecirc;s,franc&ecirc;s, alem&atilde;o...);
-O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 'bouton_radio_pas_petition' => 'Sem peti&ccedil;&atilde;o',
-'bouton_radio_personnalise' => 'Conjunto de caracteres personalizado: escolha esta op&ccedil;&atilde;o no caso de querer usar um conjunto de caracteres espec&iacute;fico',
 'bouton_radio_petition_activee' => 'Peti&ccedil;&atilde;o ativada',
 'bouton_radio_publication_immediate' => 'Publica&ccedil;&atilde;o imediata das mensagens
  (as contribui&ccedil;&otilde;es ser&atilde;o exibidas assim que forem enviadas; os administradores poder&atilde;o exclu&iacute;-las em seguida).',
@@ -97,7 +96,6 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 'bouton_radio_sauvegarde_non_compressee' => 'C&oacute;pia de seguran&ccedil;a n&atilde;o compactada em <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Excluir a peti&ccedil;&atilde;o',
 'bouton_radio_syndication' => 'Sindica&ccedil;&atilde;o:',
-'bouton_radio_universel' => 'Alfabeto universal (<tt>utf-8</tt>): permite a exibi&ccedil;&atilde;o de todos os idiomas mas, pode criar problemas de compatibilidade com os programas usados para modificar os seus gabaritos e alguns programas de e-mail.',
 'bouton_redirection' => 'REDIRECIONAMENTO',
 'bouton_relancer_installation' => 'Reiniciar a instala&ccedil;&atilde;o',
 'bouton_restaurer_base' => 'Restaurar a base',
@@ -131,7 +129,7 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Endere&ccedil;o do cat&aacute;logo',
 'entree_adresse_email' => 'Seu endere&ccedil;o de e-mail',
-'entree_adresse_fichier_syndication' => 'Endere&ccedil;o do arquivo &laquo;backend&raquo; para a sindica&ccedil;&atilde;o:',
+'entree_adresse_fichier_syndication' => 'Endere&ccedil;o do arquivo de sindica&ccedil;&atilde;o:',
 'entree_adresse_site' => '<b>endere&ccedil;o do site</b> [Obrigat&oacute;rio]',
 'entree_base_donnee_1' => 'Endere&ccedil;o da base de dados',
 'entree_base_donnee_2' => '(Frequentemente este endere&ccedil;o corresponde ao do seu site, &agrave;s vezes ele corresponde ao nome &laquo;localhost&raquo;, algumas vezes ele deve ser deixado completamente em branco.)',
@@ -166,6 +164,13 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'entree_titre_obligatoire' => '<b>T&iacute;tulo</b> [Obrigat&oacute;rio]
 ',
 'entree_url' => 'O endere&ccedil;o (URL) do seu site',
+'erreur_plugin_fichier_absent' => 'Arquivo ausente',
+'erreur_plugin_fichier_def_absent' => 'Arquivo de defini&ccedil;&atilde;o ausente',
+'erreur_plugin_nom_fonction_interdit' => 'Nome de fun&ccedil;&atilde;o n&atilde;o permitido',
+'erreur_plugin_nom_manquant' => 'Nome do plugin ausente',
+'erreur_plugin_prefix_manquant' => 'Espa&ccedil;o de nomeamento do plugin n&atilde;o definido',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; ausente no arquivo de defini&ccedil;&atilde;o',
+'erreur_plugin_version_manquant' => 'Vers&atilde;o do plugin ausente',
 
 
 // I
@@ -180,8 +185,9 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'ical_texte_rss' => 'Voc&ecirc; pode sindicar as novidades deste site em qualquer leitor de arquivos em formato XML/RSS (Rich Site Summary). &Eacute; tamb&eacute;m o formato que permite ao SPIP ler as novidades publicadas em outros sites que utilizen um formato de troca de informa&ccedil;&otilde;es compat&iacute;vel (sites sindicados).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => 'Arquivos &laquo;backend&raquo;',
+'ical_titre_rss' => 'Arquivos de sindica&ccedil;&atilde;o',
 'icone_activer_cookie' => 'Ativar o coockie de correspond&ecirc;ncia',
+'icone_admin_plugin' => 'Gerenciamento dos plugins',
 'icone_afficher_auteurs' => 'Exibir os autores',
 'icone_afficher_visiteurs' => 'Exibir os visitantes',
 'icone_arret_discussion' => 'N&atilde;o participar mais desta discuss&atilde;o',
@@ -531,6 +537,8 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_sous_titre' => 'Subt&iacute;tulo:',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Status deste autor:',
+'info_statut_auteur_a_confirmer' => 'Inscri&ccedil;&atilde;o a confirmar',
+'info_statut_auteur_autre' => 'Outro status:',
 'info_statut_efface' => 'Exclu&iacute;do',
 'info_statut_redacteur' => 'Redator',
 'info_statut_site_1' => 'Este site est&aacute;:',
@@ -542,6 +550,8 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_suivi_activite' => 'Acompanhamento da atividade editorial',
 'info_supprimer_mot' => 'excluir&nbsp;esta&nbsp;palavra-chave',
 'info_surtitre' => 'Sobret&iacute;tulo:',
+'info_syndication_integrale_1' => 'O seu site prop&otilde;e arquivos de sindica&ccedil;&atilde;o (ver &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Voc&ecirc; deseja transmitir as mat&eacute;rias integralmente, ou difundir apenas um resumo de algumas centenas de caracteres?',
 'info_taille_maximale_vignette' => 'Tamanho m&aacute;ximo dos &iacute;cones gerados pelo sistema:',
 'info_terminer_installation' => 'Voc&ecirc; pode agora terminar o procedimento de instala&ccedil;&atilde;o padr&atilde;o.',
 'info_texte' => 'Texto',
@@ -593,6 +603,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'item_ajout_mots_cles' => 'Autorizar a associa&ccedil;&atilde;o de palavras-chave nos f&oacute;runs',
 'item_autoriser_documents_joints' => 'Autorizar os documentos anexos &agrave;s mat&eacute;rias',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nas se&ccedil;&otilde;es',
+'item_autoriser_syndication_integrale' => 'Difundir a &iacute;ntegra das mat&eacute;rias nos arquivos de sindica&ccedil;&atilde;o',
 'item_bloquer_liens_syndiques' => 'Bloquear os links sindicados para valida&ccedil;&atilde;o',
 'item_breve_refusee' => 'N&Atilde;O - Nota recusada',
 'item_breve_validee' => 'SIM - Nota validada',
@@ -618,6 +629,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'item_non_ajout_mots_cles' => 'Impedir a utiliza&ccedil;&atilde;o das palavras-chaves nos f&oacute;runs',
 'item_non_autoriser_documents_joints' => 'N&atilde;o permitir os documentos nas mat&eacute;rias',
 'item_non_autoriser_documents_joints_rubriques' => 'N&atilde;o autorizar os documentos nas se&ccedil;&otilde;es',
+'item_non_autoriser_syndication_integrale' => 'Difundir apenas um resumo',
 'item_non_bloquer_liens_syndiques' => 'N&atilde;o bloquear os links vindos da sindica&ccedil;&atilde;o',
 'item_non_creer_fichiers_authent' => 'N&atilde;o criar os arquivos',
 'item_non_gerer_annuaire_site_web' => 'Desativar o diret&oacute;rio de websites',
@@ -708,6 +720,18 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'ortho_verifier' => 'Verificar a ortografia',
 
 
+// P
+'plugin_etat_developpement' => 'em desenvolvimento',
+'plugin_etat_experimental' => 'experimental',
+'plugin_etat_stable' => 'est&aacute;vel',
+'plugin_etat_test' => 'em teste',
+'plugins_liste' => 'Lista dos plugins',
+
+
+// R
+'repertoire_plugins' => 'Diret&oacute;rio:',
+
+
 // S
 'statut_admin_restreint' => '(admin limitado)',
 'syndic_choix_moderation' => 'O que fazer com os pr&oacute;ximos links que venham deste site?',
@@ -777,9 +801,11 @@ Se eles n&atilde;o forem &uacute;teis, voc&ecirc; poder&aacute; deixar esta op&c
 'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
 'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstala&ccedil;&atilde;o, e os seus acessos funcionam sem problemas, voc&ecirc; pode',
 'texte_introductif_article' => '(Texto introdut&oacute;rio da mat&eacute;ria.)',
-'texte_jeu_caractere' => 'Esta op&ccedil;&atilde;o &eacute; &uacute;til se o seu site precisa exibir alfabetos diferentes do alfabeto romano (ou &laquo;ocidental&raquo;) e seus derivados.
-Neste caso, &eacute; prefer&iacute;vel alterar a op&ccedil;&atilde;o padr&atilde;o para um conjunto de craract&eacute;res apropriado; &eacute; aconselh&aacute;vel, em todos os casos, efetuar testes para encontrar uma solu&ccedil;&atilde;o satisfat&oacute;ria. Se voc&ecirc; modificar este par&acirc;metro, n&atilde;o se esque&ccedil;a de adaptar o site p&uacute;blico consequentemente (tag <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Esta configura&ccedil;&atilde;o n&atilde;o tem efeito retroativo. Consequentemente, os textos j&aacute; gravados na base de dados podem ser exibidos incorretamente ap&oacute;s uma altera&ccedil;&atilde;o da configura&ccedil;&atilde;o. Em todo o caso, voc&ecirc; poder&aacute; voltar sem problemas &agrave; configura&ccedil;&atilde;o anterior.',
+'texte_jeu_caractere' => '&Eacute; aconselh&aacute;vel usar no seu site o alfabeto universal (<tt>utf-8</tt>): ele permite a exibi&ccedil;&atilde;o de textos em todos os idiomas, e n&atilde;o tem problemas de compatibilidade com os navegadores modernos.',
+'texte_jeu_caractere_2' => 'Aten&ccedil;&atilde;o: esta op&ccedil;&atilde;o n&atilde;o provoca a convers&atilde;o dos textos j&aacute; gravados na base de dados.',
+'texte_jeu_caractere_3' => 'O seu site est&aacute; configurado atualmente com o conjunto de caracteres:',
+'texte_jeu_caractere_4' => 'Se isso n&atilde;o corresponde &agrave; realidade dos seus dados (por ex., em seguimento a um restauro da base de dados), ou se <em>voc&ecirc; lan&ccedil;ou este site</em> e deseja utilizar um outro conjunto de caracteres, por favor, indique-o aqui:',
+'texte_jeu_caractere_conversion' => 'Note: voc&ecirc; pode decidir converter de uma vez todo o conjunto de textos do seu site (mat&eacute;rias, notas, f&oacute;runs etc.) para o alfabeto <tt>utf-8</tt>,  indo para <a href="@url@">a p&aacute;gina de convers&atilde;o para utf-8</a>.',
 'texte_lien_hypertexte' => '(Se a sua mensagem se refere a uma mat&eacute;ria publicada na web, ou a uma p&aacute;gina fornecendo informa&ccedil;&otilde;es adicionais, por favor, informe o t&iacute;tulo da p&aacute;gina e respectivo URL.)',
 'texte_liens_sites_syndiques' => 'Os links gerados pelos sites sindicados podem ser bloqueados previamente; a configura&ccedil;&atilde;o abaixo indica a op&ccedil;&atilde;o padr&atilde;o para os sites sindicados, ap&oacute;s a sua inclus&atilde;o. &Eacute; poss&iacute;vel, em seguida, desbloquear cada link individualmente, ou escolher, site a site, o bloqueio de links originados de um ou outro site.',
 'texte_login_ldap_1' => '(Deixe em branco para acesso an&ocirc;nimo, ou informe o caminho completo, por exemplo &laquo;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&raquo;.)',
@@ -805,6 +831,7 @@ Agora &eacute; necess&aacute;rio atualizar a base de dados do site.',
 'texte_plus_trois_car' => 'mais de 3 caracteres',
 'texte_plusieurs_articles' => 'Demasiados autores encontrados para "@cherche_auteur@":',
 'texte_port_annuaire' => '(O valor padr&atilde;o indicado &eacute; geralmente conveniente.)',
+'texte_presente_plugin' => 'Esta p&aacute;gina lista os plugins dispon&iacute;veis para o site. Voc&ecirc; pode ativar os plugins necess&aacute;rios marcando a op&ccedil;&atilde;o correspondente.',
 'texte_proposer_publication' => 'Assim que a sua mat&eacute;ria estiver pronta, voc&ecirc; pode propor a sua publica&ccedil;&atilde;o.',
 'texte_proxy' => 'Em alguns casos (intranet, redes protegidas...), pode ser necess&aacute;rio utilizar-se um <i>proxy HTTP</i> para atender aos sites sindicados.
 Nesse caso, informe abaixo o endere&ccedil;o, no formato
@@ -815,7 +842,7 @@ Nesse caso, informe abaixo o endere&ccedil;o, no formato
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina compila a lista de documentos que voc&ecirc; anexou &agrave;s se&ccedil;&otilde;es. Para modificar as informa&ccedil;&otilde;es de cada documento, siga o link para a p&aacute;gina da respectiva se&ccedil;&atilde;o.',
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'mat&eacute;ria referenciada no seu site em  SPIP, mas redirecionada para outro URL.',
-'texte_referencement_automatique' => '<b>Referenciamento automatizado de um site</b><br>Voc&ecirc; pode referenciar rapidamente um websites indicando abaixo o URL desejado, ou o endere&ccedil;o do seu arquivo de backend. O SPIP recuperar&aacute; automaticamente as informa&ccedil;&otilde;es relativas ao site (t&iacute;tulo, descri&ccedil;&atilde;o...).',
+'texte_referencement_automatique' => '<b>Referenciamento automatizado de um site</b><br>Voc&ecirc; pode referenciar rapidamente um websites indicando abaixo o URL desejado, ou o endere&ccedil;o do seu arquivo de sindica&ccedil;&atilde;o. O SPIP recuperar&aacute; automaticamente as informa&ccedil;&otilde;es relativas ao site (t&iacute;tulo, descri&ccedil;&atilde;o...).',
 'texte_requetes_echouent' => 'J&aacute; que certas solicita&ccedil;&otilde;es MySQL falharam sistematicamente e sem raz&atilde;o aparente, &eacute; poss&iacute;vel que a causa esteja na base de dados em si.</b><p />
 O MySQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando elas s&atilde;o danificadas por acidente. Voc&ecirc; poder&aacute; tentar esta repara&ccedil;&atilde;o; em caso de falha, conserve uma c&oacute;pia da mensagem de erro, que poder&aacute; conter ind&iacute;cios do que n&atilde;o est&aacute; funcionando...<p />
 Se o problema persistir, contate o seu servi&ccedil;o de hospedagem.<p />',
@@ -852,7 +879,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'texte_travail_collaboratif' => 'Se &eacute; frequente acontecer de mais de um redator trabalhar em uma mesma mat&eacute;ria, o sistema pode exibir as mat&eacute;rias recentemente &laquo;abertas&raquo;, de modo a evitar modifica&ccedil;&otilde;es concorrentes.Esta op&ccedil;&atilde;o est&aacute; desativada por padr&atilde;o para evitar a exibi&ccedil;&atilde;o de mensagens de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@"; por favor, refine a pesquisa.',
 'texte_unpack' => 'transfer&ecirc;ncia da &uacute;ltima vers&atilde;o',
-'texte_utilisation_moteur_syndiques' => 'J&aacute; que voc&ecirc; utiliza o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar procuras nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br><img src=\'puce.gif\'> A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br><img src=\'puce.gif\'> O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
+'texte_utilisation_moteur_syndiques' => 'J&aacute; que voc&ecirc; utiliza o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar procuras nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br>- A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br>- O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
 'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga o SPIP a visitar regularmente os sites referenciados, o que pode provocar um ligeiro retardamento do seu pr&oacute;prio site.',
 'texte_vide' => 'vazia',
 'texte_vider_cache' => 'Esvaziar o cache',
@@ -939,7 +966,20 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o para esta mat&eacute;ria',
 
 
+// U
+'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+
+
 // V
+'version' => 'Vers&atilde;o:',
 'version_initiale' => 'vers&atilde;o inicial'
 
 );

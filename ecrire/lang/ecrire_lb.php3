@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'De Plugin activ&eacute;ieren',
 'aide_non_disponible' => 'D&euml;sen Deel vun der H&euml;llef g&euml;tt et nach n&euml;t an d&auml;r Sprooch.',
+'auteur' => 'Auteur:',
 'avis_acces_interdit' => 'Zougang gespaart.',
 'avis_article_modifie' => 'Opgepasst, den @nom_auteur_modif@ huet un d&euml;sem Artikel virun @date_diff@ Minuten geschafft',
 'avis_aucun_resultat' => 'Kee Resultat.',
@@ -81,16 +83,13 @@ der Dokumentatioun vu SPIP</a>.',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&euml;t op d\'L&euml;scht vun de Redakteren kommen',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Keng editorial Neiegkeeten sch&eacute;cken',
 'bouton_radio_non_syndication' => 'Keng Syndicatioun',
-'bouton_radio_occidental' => 'Westlecht Alphabet (<tt>iso-8859-1</tt>): erlaabt d\'Uweisen vun de westl&euml;chen Sproochen (Englesch, Franz&eacute;isch, D&auml;itsch...); SPIP erlaabt trotzdem einegermoossen gudd mat aneren Sproochen ze schaffen.',
 'bouton_radio_pas_petition' => 'Keng Petitioun',
-'bouton_radio_personnalise' => 'Personnalis&eacute;ierten Buchstawen-Set: wielt d&euml;s Optioun wann der mat engem speziellen Buchstawen-Set w&euml;llt schaffen',
 'bouton_radio_petition_activee' => 'Petitioun ageschalt',
 'bouton_radio_publication_immediate' => 'Direkt Publikatioun vun de Messagen (d\'Beitr&auml;g ginn direkt nom Sch&eacute;cken sichtbar, d\'Administrateuren k&euml;nnen se duerno l&auml;schen).',
 'bouton_radio_sauvegarde_compressee' => 'Backup komprim&eacute;iert gesp&auml;ichert &euml;nner <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'Backup n&euml;t komprim&eacute;iert gesp&auml;ichert &euml;nner <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'D\'Petitioun l&auml;schen',
 'bouton_radio_syndication' => 'Syndicatioun:',
-'bouton_radio_universel' => 'Universelt Alphabet (<tt>utf-8</tt>): erlaabt d\'Weisen vun alle Sproochen, kann awer zu Kompatibilit&eacute;its-Problemer mat den Softwaren fir d\'Skeletter ze &auml;nneren a mat verschiddenen Email-Programmer f&eacute;ieren.',
 'bouton_redirection' => '&Euml;MLEEDUNG',
 'bouton_relancer_installation' => 'D\'Installatioun nei uf&auml;nken',
 'bouton_restaurer_base' => 'Datebank restaur&eacute;ieren',
@@ -124,7 +123,7 @@ der Dokumentatioun vu SPIP</a>.',
 'email_2' => 'Email:',
 'entree_adresse_annuaire' => 'Adress vun der Sammlung',
 'entree_adresse_email' => '&Auml;r Email-Adress',
-'entree_adresse_fichier_syndication' => 'Adress vum Fichier "Backend" fir d\'Syndicatioun:',
+'entree_adresse_fichier_syndication' => 'Adress vum Fichier fir d\'Syndicatioun:',
 'entree_adresse_site' => '<b>Adress vum Site</b> [Obligatoresch]',
 'entree_base_donnee_1' => 'Adress vun der Datebank',
 'entree_base_donnee_2' => '(D&euml;s Adress ass oft selw&euml;cht w&eacute;i d&eacute;i vun &auml;rem Site, heiansdo ass &euml;t "localhost", heiansdo g&euml;t se eidel gelooss.)',
@@ -158,6 +157,13 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<B>Titel</B> [Obligatoresch]<BR>',
 'entree_url' => 'D\'Adress (URL) vun &auml;rem Site',
+'erreur_plugin_fichier_absent' => 'Fichier fehlt',
+'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
+'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',
+'erreur_plugin_nom_manquant' => 'Num vum Plugin fehlt',
+'erreur_plugin_prefix_manquant' => 'Namespace vum Plugin n&euml;t defin&eacute;iert',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; fehlt am Definitiouns-Fichier',
+'erreur_plugin_version_manquant' => 'Versioun vum Plugin fehlt',
 
 
 // I
@@ -172,8 +178,9 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'ical_texte_rss' => 'Dir kennt nei Siten an egal wat fir engem Programm mam Format XML/RSS (Rich Site Summary) syndiqu&eacute;ieren. SPIP kann och d\'Neiegkeetn vun anere Siten mat deem Format liesen (syndik&eacute;iert Siten).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-L&euml;scht',
-'ical_titre_rss' => '"Backend"-Fichier\'en',
+'ical_titre_rss' => 'Syndicatiouns-Fichier\'en',
 'icone_activer_cookie' => 'De Korrespondenz-Cookie activ&eacute;ieren',
+'icone_admin_plugin' => 'Plugin\'en verwalten',
 'icone_afficher_auteurs' => 'Auteuren weisen',
 'icone_afficher_visiteurs' => 'Visiteuren weisen',
 'icone_arret_discussion' => 'N&euml;t m&eacute;i un d&euml;ser Diskussioun deelhuelen',
@@ -522,6 +529,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_sous_titre' => '&Euml;nnertitel:',
 'info_statut_administrateur' => 'Administrateur',
 'info_statut_auteur' => 'Status vun d&euml;sem Auteur:',
+'info_statut_auteur_a_confirmer' => 'Umeldung ze konfirm&eacute;ieren',
+'info_statut_auteur_autre' => 'Aneren Status:',
 'info_statut_efface' => 'Gel&auml;scht',
 'info_statut_redacteur' => 'Redakter',
 'info_statut_site_1' => 'D&euml;se Site ass:',
@@ -533,6 +542,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_suivi_activite' => 'Suivi vun der editorialer Aktivit&eacute;it',
 'info_supprimer_mot' => 'd&euml;st&nbsp;Wuert&nbsp;l&auml;schen',
 'info_surtitre' => 'Iwwertitel:',
+'info_syndication_integrale_1' => '&Auml;re Site propos&eacute;iert Syndicatiouns-Fichier\'en (kuckt op "<a href="@url@">@titre@</a>").',
+'info_syndication_integrale_2' => 'W&euml;llt dir d\'Artikelen ganz oder n&euml;mmen e R&eacute;sum&eacute; vun e puer honnert Buchstawen iwerdro&euml;n?',
 'info_taille_maximale_vignette' => 'Maximal-Gr&eacute;isst vun de Vignetten d&eacute;i vum System gemaach ginn:',
 'info_terminer_installation' => 'Dier k&euml;nnt elo d&eacute;i normal Installatiouns-Prozedur ofschl&eacute;issen.',
 'info_texte' => 'Text',
@@ -583,6 +594,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'item_ajout_mots_cles' => 'Schl&euml;sselwieder an de Forum\'en erlaben',
 'item_autoriser_documents_joints' => 'Dokumenter bei den Artikelen erlaben',
 'item_autoriser_documents_joints_rubriques' => 'Dokumenter an de Rubriken erlaben',
+'item_autoriser_syndication_integrale' => 'D\'Artikelen ganz an de Syndicatiouns-Fichier\'en iwerdro&euml;n',
 'item_bloquer_liens_syndiques' => 'D&eacute;i syndiqu&eacute;iert Linken fir eng Validatioun block&eacute;ieren',
 'item_breve_refusee' => 'NEEN - Kuerzmeldung refus&eacute;iert',
 'item_breve_validee' => 'JO - Kuerzmeldung valid&eacute;iert',
@@ -608,6 +620,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'item_non_ajout_mots_cles' => 'D\'Schl&euml;sselwieder an de Forum\'en verbidden',
 'item_non_autoriser_documents_joints' => 'Keng Dokumenter bei den Artikelen erlaben',
 'item_non_autoriser_documents_joints_rubriques' => 'Keng Dokumenter an de Rubriken erlaben',
+'item_non_autoriser_syndication_integrale' => 'N&euml;mmen e R&eacute;sum&eacute; iwerdro&euml;n',
 'item_non_bloquer_liens_syndiques' => 'D\'Linken aus der Syndicatioun n&euml;t block&eacute;ieren',
 'item_non_creer_fichiers_authent' => 'D&euml;s Fichier\'en n&euml;t maachen',
 'item_non_gerer_annuaire_site_web' => 'D\'Link-Sammlung ausschalten',
@@ -698,6 +711,18 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'ortho_verifier' => 'Orthographie kontroll&eacute;ieren',
 
 
+// P
+'plugin_etat_developpement' => 'an der &Euml;ntw&eacute;cklung',
+'plugin_etat_experimental' => 'experimental',
+'plugin_etat_stable' => 'stabil',
+'plugin_etat_test' => 'am Test',
+'plugins_liste' => 'L&euml;scht vun de Plugin\'en',
+
+
+// R
+'repertoire_plugins' => 'Dossier:',
+
+
 // S
 'statut_admin_restreint' => '(restriktiven Admin)',
 'syndic_choix_moderation' => 'Wat soll mat de n&auml;chste Linken vun d&euml;sem Site gesch&eacute;ien?',
@@ -768,9 +793,11 @@ Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op senger Default-Vale
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
 'texte_informations_personnelles_2' => '(N.B.: wann &euml;t eng Re-Installatioun ass, a wann &auml;ren Zougang nach fonktionn&eacute;iert,',
 'texte_introductif_article' => '(Aleedung vum Artikel.)',
-'texte_jeu_caractere' => 'D&euml;s Option brauch d&euml;r wann der w&euml;lt aner Alphabeter w&eacute;i dat r&eacute;imescht (oder "occidental") an seng Derivater weisen.
-An dem Fall ass et besser den Default g&eacute;int de richtegen Character-Set ze tauschen; maacht e puer Tester fir d&eacute;i richteg Astellung ze fannen. Wann d&euml;r d&euml;sen Parameter &auml;nnert, vergiesst n&euml;t den &ouml;ffentl&euml;chen Site och ze &auml;nneren (den Tag <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'D&euml;s Astellung ass n&euml;t retroaktiv. D&eacute;i al Texter k&euml;nnen falsch ugewisen ginn no enger &Auml;nnerung. Dir kommt awer ouni Schued er&euml;m op d&eacute;i l&auml;scht Astellung zer&euml;ck.',
+'texte_jeu_caractere' => 'Mir roden Iech ob &auml;rem Site dat universalt Alphabet (<tt>UTF-8</tt>) ze gebrauchen: &euml;t kann d\'Texter an allen Sproochen uweisen, an huet keng Kompatibilit&eacute;its-Problemer m&eacute;i mat de moderne Browser\'en.',
+'texte_jeu_caractere_2' => 'Opgepasst: D&euml;s Astellung mecht k&eacute;ng Conversioun vun den Texter d&eacute;i schons an der Datebank sinn.',
+'texte_jeu_caractere_3' => '&Auml;re Site benotzt elo den Character-Set:',
+'texte_jeu_caractere_4' => 'Wann dat n&euml;t der Realit&eacute;it vun &auml;ren Daten entspr&euml;cht (z.B. no enger Restauratioun vun der Datebank), oder wann dir <em>d&euml;sen Site nei uf&auml;nkt</em> an dir ob en aneren Character-Set &euml;mschalten w&euml;llt, dann gitt en elo hie un:',
+'texte_jeu_caractere_conversion' => 'Dir k&euml;nnt d&eacute;cid&eacute;ieren, e fir allemol all d\'Texter vun &auml;rem Site (Artikelen, Kurzmeldungen, Forum\'en, asw) ob d\'Alphabet <tt>UTF-8</tt> ze konvert&eacute;ieren, andem dir ob <a href="@url@">d&euml;s Konversiouns-S&auml;itfir UTF-8 gidd</a>.',
 'texte_lien_hypertexte' => '(Wann &auml;re Message sech op een Artikel um Internet, oder op eng S&auml;it mat m&eacute;i Informatiounen bezitt, da gitt hei s&auml;in Titel an seng URL an.)',
 'texte_liens_sites_syndiques' => 'D\'Linken vun de syndiqu&eacute;ierten Siten k&euml;nnen fir d\'&eacute;ischt mol block&eacute;iert ginn; d&eacute;i Astellung ass den Default fir d&eacute;i nei syndiqu&eacute;iert Siten. Duerno kann een all Link eenzel deblock&eacute;ieren, oder Site fir Site block&eacute;ieren oder n&euml;t.',
 'texte_login_ldap_1' => '(Eidel loossen fir en anonymen Zougang,  oder de kompletten Wee ugin, z.B. "&nbsp;<tt>uid=muller, ou=users, dc=domain, dc=com</tt>&nbsp;".)',
@@ -792,11 +819,12 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_nouveau_message' => 'Neie Message',
 'texte_nouveau_mot' => 'Neit Wuert',
 'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP install&eacute;iert.',
-'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier <tt>inc_connect.php3</tt> vum Dossier <tt>ecrire</tt> a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p />(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier <tt>inc_connect.php3</tt> ier d&euml;r e l&auml;scht...)',
+'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier @connect@ a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p />(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier @connect@ ier d&euml;r e l&auml;scht...)',
 'texte_operation_echec' => 'Gidd op d&eacute;i l&auml;scht S&auml;it zer&euml;ck, wielt eng aner Datebank oder setzt eng derb&auml;i. Kontroll&eacute;iert d\'Informatiounen vun &auml;rem Provider.',
 'texte_plus_trois_car' => 'm&eacute;i w&eacute;i 3 Buchstawen',
 'texte_plusieurs_articles' => 'E puer Artikelen fonnt vum "@cherche_auteur@":',
 'texte_port_annuaire' => '(D\'Default-Valeur ass normalerweis d&eacute;i richteg.)',
+'texte_presente_plugin' => 'D&euml;s S&auml;it weist w&eacute;i eng Plugin\'en do sinn. Dir k&euml;nnt d\'Plugin\'en aktiv&eacute;ieren andeem dier se ukr&auml;izt.',
 'texte_proposer_publication' => 'Wann &auml;ren Artikel f&auml;rdeg ass,<br>k&euml;nnt d&euml;r d\'Publikatioun propos&eacute;ieren.',
 'texte_proxy' => 'A best&euml;mmte F&auml;ll (Intranet, gesch&uuml;tzen Netzer...) kann &euml;t n&eacute;ideg sinn iwwert een <I>HTTP-Proxy</I> ze fueren fir un d&eacute;i syndiqu&eacute;iert Siten ze kommen.
 An deem Fall, gidd hei seng Adress un, &euml;nner der Form
@@ -807,7 +835,7 @@ An deem Fall, gidd hei seng Adress un, &euml;nner der Form
 'texte_recapitiule_liste_documents' => 'D&euml;s S&auml;it ass d\'L&euml;scht vun den Dokumenter aus de Rubriken. Fir d\'Informatiounen vun engem Dokument ze &auml;nneren, gidd mam Link op seng S&auml;it an der Rubrik.',
 'texte_recuperer_base' => 'Datebank fl&eacute;cken',
 'texte_reference_mais_redirige' => 'Artikel aus dem SPIP-Site, awer op eng aner URL &euml;mgeleed.',
-'texte_referencement_automatique' => '<b>Automat&euml;scht Referenz&eacute;ieren vun engem Site</b><br>Dir k&euml;nnt e Site s&eacute;ier referenz&eacute;ieren an dem der hei d\'URL oder d\'Adress vun sengem Backend-Fichier ugitt. SPIP kritt dann automatesch d\'Informatiounen (Titel, Beschreiwung...).',
+'texte_referencement_automatique' => '<strong>Automat&euml;scht Referenz&eacute;ieren vun engem Site</strong><br />Dir k&euml;nnt e Site s&eacute;ier referenz&eacute;ieren an dem der hei d\'URL oder d\'Adress vun sengem Syndicatiouns-Fichier ugitt. SPIP kritt dann automatesch d\'Informatiounen (Titel, Beschreiwung...).',
 'texte_requetes_echouent' => '<b>Wann verschidden MySQL-Query\'en systematesch an ouni sichtbar Ursaach fehlschlo&euml;n, ass &euml;t m&eacute;iglech dat &euml;t un der Datebank h&auml;ngt.</b><p />
 MySQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...<p />
 Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Provider.<p />',
@@ -844,7 +872,7 @@ Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&e
 D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnungen ze weisen.',
 'texte_trop_resultats_auteurs' => 'Ze vill Resultater fir "@cherche_auteur@"; verbessert &auml;r Sich.',
 'texte_unpack' => 'l&auml;scht Versioun downlueden',
-'texte_utilisation_moteur_syndiques' => 'Wann d&euml;r deen integr&eacute;ierten Sich-Motor vu SPIP benotzt, k&euml;nnt dir d\'Sichen op Siten a syndiqu&eacute;iert Artikelen op zwou Man&eacute;ieren maachen.<br><img src=\'puce.gif\'> D&eacute;i einfachst ass n&euml;mmen am Title an an der Beschreiwung vun den Artikelen ze sichen.<br><img src=\'puce.gif\'>Eng aner, vill m&eacute;i staark Method, erlaabt SPIP och am Text vun den Siten ze sichen.',
+'texte_utilisation_moteur_syndiques' => 'Wann d&euml;r deen integr&eacute;ierten Sich-Motor benotzt, k&euml;nnt dir d\'Sichen op Siten a syndiqu&eacute;iert Artikelen op zwou Man&eacute;ieren maachen.<br />- D&eacute;i einfachst ass n&euml;mmen am Title an an der Beschreiwung vun den Artikelen ze sichen.<br />- Eng aner, vill m&eacute;i staark Method, erlaabt SPIP och am Text vun den Siten ze sichen. Wann dir een Site referenz&eacute;iert, da sicht SPIP och am Text vun deem Site',
 'texte_utilisation_moteur_syndiques_2' => 'D&euml;s Method forc&eacute;iert SPIP regelm&eacute;isseg d&eacute;i referenz&eacute;iert Siten ze besichen, wat risk&eacute;iert dass &auml;ren Site e b&euml;sschen m&eacute;i lues g&euml;tt.',
 'texte_vide' => 'eidel',
 'texte_vider_cache' => 'De Cache l&auml;schen',
@@ -931,7 +959,20 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'trad_new' => 'Eng nei Iwwersetzung vun d&euml;sem Artikel schreiwen',
 
 
+// U
+'utf8_convert_attendez' => 'Waart e b&euml;schen a lued dann d&euml;s S&auml;it nei.',
+'utf8_convert_avertissement' => 'Dir w&auml;rt elo den Inhalt vun &auml;rer Datebank (Artikelen, Kurzmeldungen, asw) vum Character-Set <strong>@orig@</strong> ob <strong>@charset@</strong> &auml;nneren.',
+'utf8_convert_backup' => 'Vergiesst n&euml;t virdrun e kompletten Backup vun &auml;rem Site ze maachen. Dir musst och kontroll&eacute;ieren ob &auml;r Skeletter a Sproch-Fichier\'en zu @charset@ kompatibel sinn. D\'L&euml;scht vun den &Auml;nnerungen, wann d&eacute;i aktiv&eacute;iert ass, g&euml;tt zerst&eacute;iert.',
+'utf8_convert_erreur_deja' => '&Auml;ren Site ass schon ob @charset@, kee W&auml;rt ze konvert&eacute;ieren...',
+'utf8_convert_erreur_orig' => 'Fehler: den Character-Set @charset@ g&euml;tt n&euml;t &euml;nnerst&euml;tzt.',
+'utf8_convert_termine' => 'Et ass f&auml;rdeg!',
+'utf8_convert_timeout' => '<strong>Wichteg:</strong> wann &auml;ren Server en <em>Timeout</em> m&euml;cht, lued d&euml;s S&auml;it nei bis se "F&auml;rdeg" weist.',
+'utf8_convert_verifier' => 'Dir musst elo de Cache l&auml;schen a kontroll&eacute;ieren ob alles ob dem &ouml;ffentl&euml;chen Site richteg ass. Fir de Fall vu grousse Problemer l&auml;it am Dossier @rep@ e Backup am Format SQL.',
+'utf8_convertir_votre_site' => '&Auml;ren Site ob UTF-8 konvert&eacute;ieren',
+
+
 // V
+'version' => 'Versioun:',
 'version_initiale' => 'Original-Versioun'
 
 );

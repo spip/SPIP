@@ -222,17 +222,17 @@ Heu sol&middot;licitat signar la petici&oacute;:
 Heu facilitat les seg&uuml;ents informacions:
     Nom: @nom_email@
     Lloc: @nom_site@ - @url_site@
-
+    @message@
 
 IMPORTANT...
-Per validar la signatura heu de connectar-vos a l\'adre&ccedil;a
-indicada a continuaci&oacute; (en cas contrari, la demanda ser&agrave;
+Per validar la vostra signatura, heu de connectar-vos a l\'adre&ccedil;a
+indicada a continuaci&oacute; (en cas contrari, la sol&middot;licitud ser&agrave;
 rebutjada) :
 
     @url@
 
 
-Gr&agrave;cies per la seva participaci&oacute;
+Gr&agrave;cies per la participaci&oacute;
 ',
 'form_pet_message_commentaire' => 'Un missatge, un commentari?',
 'form_pet_nom_site2' => 'Nom del vostre lloc Web',

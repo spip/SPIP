@@ -208,18 +208,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
 'form_pet_deja_signe' => 'Sie haben diesen Text bereits unterschrieben.',
 'form_pet_envoi_mail_confirmation' => 'Eine E-mail mit den Daten zum Best&auml;tigen wurde Ihnen zugeschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
-'form_pet_mail_confirmation' => '<MODIF>Hallo, Sie m&ouml;chten diese Petition unterzeichnen:
-    @titre@.
+'form_pet_mail_confirmation' => 'Hallo,
+
+Sie m&ouml;chten diese Petition unterzeichnen:
+@titre@.
 
 Sie haben die folgenden Angaben gemacht:
-        Name: @nom_email@
-        Website: @nom_site@ - @url_site@
+    Name: @nom_email@
+    Website: @nom_site@ - @url_site@
+    @message@
 
 ACHTUNG:
 Um Ihre Unterschrift zu best&auml;tigen m&uuml;ssen Sie diese Seite aufrufen (wenn Sie es nicht tun, wird Ihre Unterschrift verworfen):
+
     @url@
 
-Vielen Dank f&uuml;r Ihre Teilnahme',
+
+Vielen Dank f&uuml;r Ihre Teilnahme
+',
 'form_pet_message_commentaire' => 'Eine Nachricht, ein Kommentar?',
 'form_pet_nom_site2' => 'Name Ihrer Website',
 'form_pet_probleme_technique' => 'Technisches Problem: Signaturen sind vor&uuml;bergehend nicht m&ouml;glich.',

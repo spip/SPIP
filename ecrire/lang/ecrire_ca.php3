@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Activar el connector',
 'aide_non_disponible' => 'Aquesta part de l\'ajuda en l&iacute;nia no est&agrave; encara disponible en Catal&agrave;.',
+'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Acc&egrave;s prohibit',
 'avis_article_modifie' => 'Atenci&oacute;, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',
 'avis_aucun_resultat' => 'Cap resultat',
@@ -91,18 +93,13 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'No apar&egrave;ixer a la llista de redactors/es ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncis editorials',
 'bouton_radio_non_syndication' => 'Cap sindicaci&oacute;',
-'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>): permet principalment mostrar les lleng&uuml;es de l\'oest europeu (angl&egrave;s, franc&egrave;s, alemany...)&nbsp;;
-SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;es.',
 'bouton_radio_pas_petition' => 'Cap petici&oacute;',
-'bouton_radio_personnalise' => 'Joc de car&agrave;cter personalitzat: Seleccioneu aquesta opci&oacute; per utilitzar
- un joc de car&agrave;cters espec&iacute;fic',
 'bouton_radio_petition_activee' => 'Petici&oacute; activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute; immediata dels missatges (es poden suprimir posteriorment des de l\'administraci&oacute;). ',
 'bouton_radio_sauvegarde_compressee' => 'c&ograve;pia de seguretat comprimida a <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'c&ograve;pia de seguretat no comprimida a <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;',
 'bouton_radio_syndication' => 'Sindicaci&oacute;:',
-'bouton_radio_universel' => 'Alfabet universal&nbsp; (<tt>utf-8</tt>): permet la publicaci&oacute; de totes les lleng&uuml;es, per&ograve; pot posar problemes d\'incompatibilitat amb els  programes utilitzats per modificar les vostres plantilles, i alguns lectors de correu electr&ograve;nic. ',
 'bouton_redirection' => 'REDIRECCI&Oacute;',
 'bouton_relancer_installation' => 'Tornar a llan&ccedil;ar la instal&middot;laci&oacute;',
 'bouton_restaurer_base' => 'Restaurar la base',
@@ -136,7 +133,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'email_2' => 'correu electr&ograve;nic:',
 'entree_adresse_annuaire' => 'Adre&ccedil;a del directori',
 'entree_adresse_email' => 'L\'adre&ccedil;a electr&ograve;nica ',
-'entree_adresse_fichier_syndication' => 'Adre&ccedil;a del fitxer &laquo;&nbsp;backend&nbsp;&raquo; per la sindicaci&oacute;&nbsp;:',
+'entree_adresse_fichier_syndication' => 'Adre&ccedil;a del fitxer de sindicaci&oacute;:',
 'entree_adresse_site' => '<b>Adre&ccedil;a del lloc</b> [Obligat&ograve;ria]',
 'entree_base_donnee_1' => 'Adre&ccedil;a de la base de dades',
 'entree_base_donnee_2' => '(Sovint aquesta adre&ccedil;a correspon a la del vostre lloc, a vegades correspon a la menci&oacute; &laquo;localhost&raquo;, altres vegades es deixa totalment buida.)',
@@ -171,6 +168,13 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'entree_texte_breve' => 'Text de la breu',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</B> [Obligatori]<BR>',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
+'erreur_plugin_fichier_absent' => 'Fitxer absent',
+'erreur_plugin_fichier_def_absent' => 'Fitxer de definici&oacute; absent',
+'erreur_plugin_nom_fonction_interdit' => 'Nom de funci&oacute; prohibit',
+'erreur_plugin_nom_manquant' => 'Falta el nom del connector',
+'erreur_plugin_prefix_manquant' => 'Espai de nom del connector no definit',
+'erreur_plugin_tag_plugin_absent' => 'falta el &lt;connector&gt; al fitxer de definici&oacute;',
+'erreur_plugin_version_manquant' => 'Falta la versi&oacute; del connector',
 
 
 // I
@@ -185,8 +189,9 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'ical_texte_rss' => 'Podeu sindicar les novetats d\'aquest lloc mitjan&ccedil;ant qualsevol lector de fitxers en format XML/RSS (Rich Site Summary). Aquest &eacute;s tamb&eacute; el format que permet a SPIP llegir les novetats publicades en altres llocs que utilitzen un format d\'intercanvi compatible. ',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Llista de correu',
-'ical_titre_rss' => 'Fitxers &laquo; backend &raquo;',
+'ical_titre_rss' => 'Fitxers de sindicaci&oacute;',
 'icone_activer_cookie' => 'Activar la galeta de correspond&egrave;ncia',
+'icone_admin_plugin' => 'Gesti&oacute; dels connectors',
 'icone_afficher_auteurs' => 'Mostrar els autors',
 'icone_afficher_visiteurs' => 'Mostrar els visitants',
 'icone_arret_discussion' => 'No participar m&eacute;s en aquesta conversa',
@@ -542,6 +547,8 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_sous_titre' => 'Subt&iacute;tol:',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Estat d\'aquest autor:',
+'info_statut_auteur_a_confirmer' => 'Inscripci&oacute; per confirmar',
+'info_statut_auteur_autre' => 'Un altre estat:',
 'info_statut_efface' => 'Suprimit',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Aquest lloc &eacute;s:',
@@ -553,6 +560,8 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_suivi_activite' => 'Seguiment de l\'activitat editorial',
 'info_supprimer_mot' => 'suprimir aquesta paraula',
 'info_surtitre' => 'Sobret&iacute;tol:',
+'info_syndication_integrale_1' => 'El vostre lloc Web proposa fitxers de sindicaci&oacute; (veure &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Desitgeu transmetre els articles en la seva totalitat, o difondre\'n nom&eacute;s alguns centenars de car&agrave;cters?',
 'info_taille_maximale_vignette' => 'Mida m&agrave;xima de les vinyetes generades pel sistema:',
 'info_terminer_installation' => 'Ara podeu finalitzar el proc&eacute;s d\'instal&middot;laci&oacute; est&agrave;ndard. ',
 'info_texte' => 'Text',
@@ -583,7 +592,7 @@ amb un color que indica el seu estat:',
 'info_une_rubrique' => 'una secci&oacute;,',
 'info_une_rubrique_02' => '1 secci&oacute;',
 'info_url' => 'URL:',
-'info_url_site' => 'URL DEL LLOC:',
+'info_url_site' => 'URL DEL LLOC WEB:',
 'info_urlref' => 'Enlla&ccedil; hipertext:',
 'info_utilisation_spip' => 'Podeu comen&ccedil;ar a utilitzar el sistema de publicaci&oacute; assistida...',
 'info_visites_par_mois' => 'Mostrar per mes:',
@@ -605,6 +614,7 @@ amb un color que indica el seu estat:',
 'item_ajout_mots_cles' => 'Autoritzar l\'afegit de paraules clau als f&ograve;rums',
 'item_autoriser_documents_joints' => 'Autoritzar els documents adjunts als articles',
 'item_autoriser_documents_joints_rubriques' => 'Autoritzar els documents en les seccions',
+'item_autoriser_syndication_integrale' => 'Difondre la totalitat dels articles als fitxers de sindicaci&oacute;',
 'item_bloquer_liens_syndiques' => 'Bloquejar els enlla&ccedil;os sindicats per validar',
 'item_breve_refusee' => 'NO - Breu rebutjada',
 'item_breve_validee' => 'SI - Breu validada',
@@ -630,6 +640,7 @@ amb un color que indica el seu estat:',
 'item_non_ajout_mots_cles' => 'Prohibir la utilitzaci&oacute; de les paraules clau en els f&ograve;rums',
 'item_non_autoriser_documents_joints' => 'Impedir la inclusi&oacute; de documents en els articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Impedir la inclusi&oacute; de documents en les seccions',
+'item_non_autoriser_syndication_integrale' => 'Nom&eacute;s difondre un resum',
 'item_non_bloquer_liens_syndiques' => 'No bloquejar els enlla&ccedil;os sortits de la sindicaci&oacute;',
 'item_non_creer_fichiers_authent' => 'No crear aquests fitxers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar el directori de llocs Web',
@@ -720,6 +731,18 @@ amb un color que indica el seu estat:',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
 
+// P
+'plugin_etat_developpement' => 'en desenvolupament',
+'plugin_etat_experimental' => 'experimental',
+'plugin_etat_stable' => 'estable',
+'plugin_etat_test' => 'en prova',
+'plugins_liste' => 'Llista dels connectors',
+
+
+// R
+'repertoire_plugins' => 'Directori:',
+
+
 // S
 'statut_admin_restreint' => '(admin restringida)',
 'syndic_choix_moderation' => 'Qu&egrave; fer dels seg&uuml;ents enlla&ccedil;os que procedeixin d\'aquest lloc Web?',
@@ -802,11 +825,11 @@ i <tt>.htpasswd-admin</tt>en el directori <tt>ecrire/date/</tt>? </b></p>
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opci&oacute; &eacute;s &uacute;til si el vostre lloc Web ha de publicar alfabets diferents de l\'alfabet rom&agrave; (o &laquo;occidental&raquo;) i els seus derivats.
- En aquest cas, pot ser preferible canviar les regles per defecte per un joc de car&agrave;cters apropiat; us aconsellem en tot cas de fer proves per tal de trobar una soluci&oacute; satisfact&ograve;ria. Si modifiqueu aquest par&agrave;metre, no oblideu com a conseq&uuml;&egrave;ncia adaptar tamb&eacute; el lloc p&uacute;blic (etiqueta <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Aquesta norma no t&eacute; efectes retroactius. Com
- a consequ&egrave;ncia, els textos ja inserits es poden mostrar incorrectament a partir de la modificaci&oacute; de la regla. En tots
- els casos, es pot retornar a la regla precedent sense cap problema.',
+'texte_jeu_caractere' => '&Eacute;s aconsellable utilitzar, al vostre lloc Web, l\'alfabet universal (<tt>utf-8</tt>)&nbsp;: aquest permet la presentaci&oacute; de texts en totes les lleng&uuml;es, i no posa problemes de compatibilitat amb els navegadors moderns.',
+'texte_jeu_caractere_2' => 'Alerta: aquesta modificaci&oacute; no suposa la conversi&oacute; dels textos ja registrats a la base de dades.',
+'texte_jeu_caractere_3' => 'Actualment el vostre lloc Web est&agrave; configurat amb el joc de car&agrave;cters:',
+'texte_jeu_caractere_4' => 'Si aix&ograve; no correspon a la realitat de les vostres dades (com a conseq&uuml;&egrave;ncia, per exemple, d\'una restauraci&oacute; de la base de dades), o si <em>inicieu aquest lloc Web</em> i desitgeu inicialitzar amb un altre joc de car&agrave;cters, vulgueu indicar-lo aqu&iacute;:',
+'texte_jeu_caractere_conversion' => 'Nota: podeu decidir convertir de cop tot el conjunt de textos del vostre lloc Web (articles, breus, f&ograve;rums, etc.) cap a l\'alfabet <tt>utf-8</tt>, tornant a <a href="@url@">la p&agrave;gina de conversi&oacute; cap a l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Si el vostre missatge se refereix a un article publicat sobre el Web, o a una p&agrave;gina donant m&eacute;s informacions, si us plau indiqueu a continuaci&oacute; el nom de la p&agrave;gina i la seua adre&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Els enlla&ccedil;os provenents de les webs sindicades poden
 ser bloquejats a priori; la norma
@@ -843,6 +866,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_plus_trois_car' => 'm&eacute;s de 3 car&agrave;cters',
 'texte_plusieurs_articles' => 'Diversos autors trobats per  "@cherche_auteur@":',
 'texte_port_annuaire' => ' (El valor indicat per defecte es en general convenient.)',
+'texte_presente_plugin' => 'Aquesta p&agrave;gina llista els connectors disponibles al vostre lloc Web. Podeu activar els connectors marcant la casella corresponent.',
 'texte_proposer_publication' => 'Despr&eacute;s que un article est&agrave; acabat, <br> es pot proposar la seua publicaci&oacute;.',
 'texte_proxy' => 'En alguns casos (intranet, xarxes protegides...),
 pot caldre utilitzar un <I>proxy HTTP</I> per enlla&ccedil;ar amb els llocs sindicats.
@@ -855,7 +879,7 @@ En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la form
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recull un llistat de documents que hi ha a cada secci&oacute; de la seua web. Per modificar la informaci&oacute; de cada document premer el enlla&ccedil; cap a la p&agrave;gina de la seua secci&oacute;.',
 'texte_recuperer_base' => 'Reparar la base de dades',
 'texte_reference_mais_redirige' => 'article referenciat a la web SPIP, pero redirigit cap a un altre URL.',
-'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un web</b><br> Es pot referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant ac&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del fitxer final. SPIP recuperar&agrave; autom&agrave;ticament les dades que referents a aquesta web (T&iacute;tol, descripci&oacute;...)',
+'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un lloc Web</b><br>Podeu referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant aqu&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del seu fitxer de sindicaci&oacute;. SPIP recuperar&agrave; autom&agrave;ticament les informacions pel que fa a aquest lloc Web (t&iacute;tol, descripci&oacute;...).',
 'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
@@ -895,9 +919,7 @@ que es vol testar.',
 Aquesta opci&oacute; est&agrave; desactivada per defecte amb la finalitat d\'evitar mostrar  missatges d\'advert&egrave;ncia intempestius.',
 'texte_trop_resultats_auteurs' => 'Massa resultats "@cherche_auteur@" ; si us plau, fa&ccedil;a una recerca m&eacute;s acurada.',
 'texte_unpack' => 'desc&agrave;rrega de la darrera versi&oacute;',
-'texte_utilisation_moteur_syndiques' => 'Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br><img src=\'puce.gif\'>
-La m&eacute;s simple consisteix en buscar &uacute;nicament dins dels t&iacute;tols i les descripcions dels articles. <br><img src=\'puce.gif\'>
-Un segon m&egrave;tode, molt m&eacute;s potent, permet a l\'SPIP buscar tamb&eacute; dins dels texts dels llocs referenciats. Si referencieu un lloc, l\'SPIP efectuar&agrave; llavors la cerca dins del text d\'aquest lloc.',
+'texte_utilisation_moteur_syndiques' => 'Quan utilitzeu el motor de cerca integrat a l\'SPIP, podeu efectuar les cerques sobre els llocs i els articles sindicats de dues maneres diferents.<br>- La m&eacute;s simple consisteix en buscar &uacute;nicament dins dels t&iacute;tols i les descripcions dels articles. <br>- Un segon m&egrave;tode, molt m&eacute;s potent, permet a l\'SPIP buscar tamb&eacute; dins dels texts dels llocs referenciats. Si referencieu un lloc Web, l\'SPIP efectuar&agrave; llavors la cerca dins del text d\'aquest lloc.',
 'texte_utilisation_moteur_syndiques_2' => 'Aquest metode obliga SPIP a visitar
 regularment les webs referenciades,
 el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
@@ -986,7 +1008,20 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
 
 
+// U
+'utf8_convert_attendez' => 'Espereu-vos uns instants i recarregueu aquesta p&agrave;gina. ',
+'utf8_convert_avertissement' => 'Us prepareu per convertir el contingut de la vostra base de dades (articles, breus, etc) del joc de car&agrave;cter <b>@orig@</b> cap al joc de car&agrave;cters <b>@charset@</b>.',
+'utf8_convert_backup' => 'No oblideu fer abans una c&ograve;pia de seguretat sencera del vostre lloc Web. Haureu tamb&eacute; de verificar que els esquelets i fitxers de llengua s&oacute;n compatibles @charset@. Per altra banda el seguiment de les revisions, si est&agrave; activat, ser&agrave; malm&egrave;s.',
+'utf8_convert_erreur_deja' => 'El vostre lloc Web ja est&agrave; en @charset@, &eacute;s in&uacute;til convertir-lo...',
+'utf8_convert_erreur_orig' => 'Error: no es permet l\'&uacute;s del joc de car&agrave;cters @charset@.',
+'utf8_convert_termine' => 'S\'ha acabat!',
+'utf8_convert_timeout' => 'Important:</b> en cas de <i>temps excedit</i> del servidor, volgueu recarregar la p&agrave;gina fins que indiqui &laquo;acabat&raquo;.',
+'utf8_convert_verifier' => 'Ara heu de buidar la mem&ograve;ria cau, i verificar que tot &eacute;s correcte a les p&agrave;gines publicades del vostre lloc Web. En cas que tingueu problemes, s\'ha fet una c&ograve;pia de seguretat de les vostres dades (en format SQL) dins del directori @rep@.',
+'utf8_convertir_votre_site' => 'Convertir el vostre lloc Web a utf-8',
+
+
 // V
+'version' => 'Versi&oacute;:',
 'version_initiale' => 'Versi&oacute; inicial'
 
 );

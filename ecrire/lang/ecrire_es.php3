@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Activar el plugin',
 'aide_non_disponible' => 'Esta parte de la ayuda en l&iacute;nea a&uacute;n no est&aacute; disponible en este idioma.',
+'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atenci&oacute;n, @nom_auteur_modif@ trabaj&oacute; en este art&iacute;culo hace @date_diff@ minutos.',
 'avis_aucun_resultat' => 'Ning&uacute;n resultado.',
@@ -79,18 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'No aparecer en la lista de redactores y redactoras',
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncios editoriales',
 'bouton_radio_non_syndication' => 'Ninguna sindicaci&oacute;n',
-'bouton_radio_occidental' => 'Alfabeto occidental (<tt>iso-8859-1</tt>):
- permite principalmente visualizar las idiomas de Europa del oeste (ingl&eacute;s, franc&eacute;s, alem&aacute;n...);
- sin embargo SPIP permite manejar relativamente bien los otros idiomas.',
 'bouton_radio_pas_petition' => 'Sin petici&oacute;n',
-'bouton_radio_personnalise' => 'Juego de caracteres personalizado. Seleccionar esta opci&oacute;n para utilizar un juego de caracteres espec&iacute;fico.',
 'bouton_radio_petition_activee' => 'Petici&oacute;n activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute;n inmediata de los mensajes (las contribuciones aparecen en cuanto enviadas, pueden suprimirse posteriormente desde la administraci&oacute;n).',
 'bouton_radio_sauvegarde_compressee' => 'copia comprimida en <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'copia no comprimida en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;n',
 'bouton_radio_syndication' => 'Sindicaci&oacute;n',
-'bouton_radio_universel' => 'Alfabeto universal (<tt>utf-8</tt>): permite visualizar todas las lenguas, pero puede plantear problemas de compatibilidad con los sofwares utilizados para modificar los esqueletos y con ciertos lectores de correo electr&oacute;nico.',
 'bouton_redirection' => 'Redirecci&oacute;n',
 'bouton_relancer_installation' => 'Relanzar la instalaci&oacute;n',
 'bouton_restaurer_base' => 'Restaurar la base',
@@ -124,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'correo electr&oacute;nico:',
 'entree_adresse_annuaire' => 'Direcci&oacute;n del anuario',
 'entree_adresse_email' => 'Tu correo electr&oacute;nico',
-'entree_adresse_fichier_syndication' => 'Direcci&oacute;n del archivo &laquo;backend&raquo; para la sindicaci&oacute;n.',
+'entree_adresse_fichier_syndication' => 'Direcci&oacute;n del archivo de sindicaci&oacute;n:',
 'entree_adresse_site' => '<b>Direcci&oacute;n del sitio</b> [Obligatorio]',
 'entree_base_donnee_1' => 'Direcci&oacute;n de la base de datos',
 'entree_base_donnee_2' => '(A menudo esta direcci&oacute;n corresponde a la de tu sitio, a veces corresponde a la menci&oacute;n &laquo;localhost&raquo; y, en ocasiones, se deja totalmente vac&iacute;a.)',
@@ -157,6 +154,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto de la breve',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obligatorio]<BR>',
 'entree_url' => 'La direcci&oacute;n (URL) de tu sitio',
+'erreur_plugin_fichier_absent' => 'Archivo inexistente ',
+'erreur_plugin_fichier_def_absent' => 'Archivo de definici&oacute;n inexistente',
+'erreur_plugin_nom_fonction_interdit' => 'Nombre de funci&oacute;n prohibido',
+'erreur_plugin_nom_manquant' => 'Falta el nombre del plugin',
+'erreur_plugin_prefix_manquant' => 'Espacio de nombres del plugin no definido',
+'erreur_plugin_tag_plugin_absent' => '<NEW>&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
+'erreur_plugin_version_manquant' => '<NEW>Version du plugin manquante',
 
 
 // I
@@ -171,8 +175,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Puedes sindicar las novedades de este sitio con cualquier lector de archivos al formato XML/RSS (Rich Site Summary). Igualmente, SPIP puede leer las novedades publicadas en otros sitios que utilizan un formato de intercambio compatible (sitios sindicados). ',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de correo',
-'ical_titre_rss' => 'Archivos &laquo;backend&raquo;',
+'ical_titre_rss' => '<MODIF>Archivos &laquo;backend&raquo;',
 'icone_activer_cookie' => 'Activar la "cookie" de correspondencia',
+'icone_admin_plugin' => '<NEW>Gestion des plugins',
 'icone_afficher_auteurs' => 'Mostrar los autores y autoras',
 'icone_afficher_visiteurs' => 'Mostrar los y las visitantes',
 'icone_arret_discussion' => 'No participar m&aacute;s en este di&aacute;logo',
@@ -521,6 +526,8 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_sous_titre' => 'Subt&iacute;tulo',
 'info_statut_administrateur' => 'Administrador/a',
 'info_statut_auteur' => 'Estatuto de este autor o autora:',
+'info_statut_auteur_a_confirmer' => '<NEW>Inscription &agrave; confirmer',
+'info_statut_auteur_autre' => '<NEW>Autre statut&nbsp;:',
 'info_statut_efface' => 'Borrado',
 'info_statut_redacteur' => 'Redactor/a',
 'info_statut_site_1' => 'Este sitio est&aacute;:',
@@ -532,6 +539,8 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_suivi_activite' => 'Seguimiento de la actividad editorial',
 'info_supprimer_mot' => 'Suprimir esta palabra',
 'info_surtitre' => 'Antet&iacute;tulo',
+'info_syndication_integrale_1' => '<NEW>Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => '<NEW>Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?',
 'info_taille_maximale_vignette' => 'Dimensiones m&aacute;ximas de los iconos generados :',
 'info_terminer_installation' => 'Terminar la instalaci&oacute;n.',
 'info_texte' => 'Texto',
@@ -560,8 +569,8 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'info_une_breve' => 'una breve,',
 'info_une_rubrique' => 'una secci&oacute;n,',
 'info_une_rubrique_02' => '1 secci&oacute;n',
-'info_url' => 'URL ',
-'info_url_site' => 'URL del sitio',
+'info_url' => '<MODIF>URL ',
+'info_url_site' => '<MODIF>URL del sitio',
 'info_urlref' => 'Enlace hipertexto:',
 'info_utilisation_spip' => 'Puedes comenzar a utilizar el sistema de publicaci&oacute;n asistida...',
 'info_visites_par_mois' => 'Mostrar por mes :',
@@ -583,6 +592,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'item_ajout_mots_cles' => 'Autorizar las palabres claves en los foros',
 'item_autoriser_documents_joints' => 'Autorizar los documentos adjuntos a los art&iacute;culos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar los documentos en las secciones',
+'item_autoriser_syndication_integrale' => '<NEW>Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication',
 'item_bloquer_liens_syndiques' => 'Bloquear los enlaces sindicados en validaci&oacute;n',
 'item_breve_refusee' => 'Breve rechazada',
 'item_breve_validee' => 'Breve validada',
@@ -608,6 +618,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'item_non_ajout_mots_cles' => 'Impedir la utilizaci&oacute;n de las palabras clave en los foros',
 'item_non_autoriser_documents_joints' => 'Impedir la inclusi&oacute;n de documentos en los art&iacute;culos',
 'item_non_autoriser_documents_joints_rubriques' => 'Impedir la inclusi&oacute;n de documentos en las secciones',
+'item_non_autoriser_syndication_integrale' => '<NEW>Ne diffuser qu\'un r&eacute;sum&eacute;',
 'item_non_bloquer_liens_syndiques' => 'No bloquear los enlaces de sindicaci&oacute;n',
 'item_non_creer_fichiers_authent' => 'No crear esos archivos',
 'item_non_gerer_annuaire_site_web' => 'Desactivar el anuario de sitios Web',
@@ -698,6 +709,18 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'ortho_verifier' => 'Revisar la ortograf&iacute;a',
 
 
+// P
+'plugin_etat_developpement' => '<NEW>en d&eacute;veloppement',
+'plugin_etat_experimental' => '<NEW>exp&eacute;rimental',
+'plugin_etat_stable' => '<NEW>stable',
+'plugin_etat_test' => '<NEW>en test',
+'plugins_liste' => '<NEW>Liste des plugins',
+
+
+// R
+'repertoire_plugins' => '<NEW>R&eacute;pertoire&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(administrador restringido)',
 'syndic_choix_moderation' => '&iquest;Qu&eacute; hacemos con los siguientes enlaces que vengan de este sitio?',
@@ -771,9 +794,12 @@ Si no ves la utilidad puedes dejar esta opci&oacute;n con su valor por omisi&oac
 'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalaci&oacute;n, y tu acceso todav&iacute;a funciona, puedes ',
 'texte_introductif_article' => '(Introducci&oacute;n del art&iacute;culo.)',
-'texte_jeu_caractere' => 'Esta opci&oacute;n es &uacute;til si tu sitio debe visualizar  alfabetos diferentes del alfabeto romano (u &laquo;occidental&raquo;) y sus derivados.
+'texte_jeu_caractere' => '<MODIF>Esta opci&oacute;n es &uacute;til si tu sitio debe visualizar  alfabetos diferentes del alfabeto romano (u &laquo;occidental&raquo;) y sus derivados.
 En ese caso, puede ser preferible cambiar el reglaje por omisi&oacute;n para utilizar un juego de caracteres apropiado. En todo caso, se aconseja hacer pruebas para encontrar una soluci&oacute;n satisfactoria. Si modificas este par&aacute;metro, conviene adaptar el sitio p&uacute;blico en consecuencia (baliza <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Este reglaje no tiene efecto retroactivo. Por lo tanto, los textos incluidos anteriormente pueden mostrarse incorrectamente despu&eacute;s de una modificaci&oacute;n del reglaje. En todos los casos, puedes, sin riesgos, volver a la configuraci&oacute;n anterior.',
+'texte_jeu_caractere_2' => '<MODIF>Este reglaje no tiene efecto retroactivo. Por lo tanto, los textos incluidos anteriormente pueden mostrarse incorrectamente despu&eacute;s de una modificaci&oacute;n del reglaje. En todos los casos, puedes, sin riesgos, volver a la configuraci&oacute;n anterior.',
+'texte_jeu_caractere_3' => '<NEW>Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
+'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en la Web, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
 'texte_liens_sites_syndiques' => 'Los enlaces salidos de los sitios sindicados pueden ser bloqueados a priori; el ajuste indicado a continuaci&oacute;n se refiere al ajuste por defecto de los sitios sindicados despu&eacute;s de su creaci&oacute;n. De todos modos, posteriormente se puede desbloquear cada enlace individualmente, o escoger, sitio a sitio, bloquear los enlaces que viene de tal o cual sitio.',
 'texte_login_ldap_1' => '(Dejar en blanco para un acceso an&oacute;nimo, o indicar la ruta completa, por ejemplo "<tt>uid=perez, ou=users, dc=mi-dominio, dc=com</tt>".)',
@@ -800,6 +826,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_plus_trois_car' => 'm&aacute;s de 3 caracteres',
 'texte_plusieurs_articles' => 'Se han encontrado varios autores o autoras para "@cherche_auteur@":',
 'texte_port_annuaire' => '(El valor indicado por defecto es correcto en general.)',
+'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
 'texte_proposer_publication' => 'Cuando tu art&iacute;culo est&eacute; terminado, <br> puedes proponer su publicaci&oacute;n',
 'texte_proxy' => 'En algunos casos (Intranet, redes protegidas...), puede ser necesario utilizar un <I>proxy HTTP</i> para llegar a los sitios sindicados.
 En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt><html>http://proxy:8080</html></tt>. En general, se dejar&aacute; esta casilla vac&iacute;a.',
@@ -809,7 +836,7 @@ En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina recapitula la lista de documentos que has insertado en las secciones. Para modificar las informaciones de cada documento, utiliza el enlace de su secci&oacute;n.',
 'texte_recuperer_base' => 'Reparar la base de datos',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
-'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br>Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; ya sea la URL del sitio, ya sea la direcci&oacute;n de su archivo &laquo;backend&raquo;. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
+'texte_referencement_automatique' => '<MODIF><b>Referenciar autom&aacute;ticamente un sitio</b><br>Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; ya sea la URL del sitio, ya sea la direcci&oacute;n de su archivo &laquo;backend&raquo;. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
 'texte_requetes_echouent' => '<B>Cuando algunas peticiones MySQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea por culpa de la propia base de datos.</b>
 MySQL dispone de una facultad de reparaci&oacute;n de sus tablas cuando han sido da&ntilde;adas por accidente. Aqu&iacute; puedes intentar esta reparaci&oacute;n; en caso de fallo, conserva una copia del resultado, que posiblemente contiene indicios de lo que no funciona...
 Si el problema persiste, contacta con tu proveedor de hospedaje.',
@@ -846,7 +873,7 @@ Se prudente con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas even
  Esta opci&oacute;n est&aacute; desactivada por omisi&oacute;n para evitar mostrar mensajes de advertencia intempestivos.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para la b&uacute;squeda de "@cherche_auteur@". Precise los criterios.',
 'texte_unpack' => 'Telecargado de la &uacute;ltima versi&oacute;n.',
-'texte_utilisation_moteur_syndiques' => 'Cuando utilizas el motor de b&uacute;squeda integrado
+'texte_utilisation_moteur_syndiques' => '<MODIF>Cuando utilizas el motor de b&uacute;squeda integrado
     en SPIP, puedes efectuar las b&uacute;squedas sobre los sitios y
     los art&iacute;culos sindicados de dos maneras 
     diferentes. <br><img src="puce.gif"> La m&aacute;s simple consiste en buscar &uacute;nicamente en los 
@@ -937,7 +964,20 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br><img src="puce.g
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
 
 
+// U
+'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+
+
 // V
+'version' => '<NEW>Version&nbsp;:',
 'version_initiale' => 'Versi&oacute;n inicial'
 
 );

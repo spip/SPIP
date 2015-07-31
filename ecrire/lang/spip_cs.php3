@@ -216,7 +216,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'form_pet_deja_enregistre' => 'Tento web je ji&#382; zaregistrov&aacute;n',
 'form_pet_deja_signe' => 'Tento text jste ji&#382; podepsali.',
 'form_pet_envoi_mail_confirmation' => 'Byla v&aacute;m zasl&aacute;na elektronick&aacute; zpr&aacute;va s potvrzen&iacute;m. Platnost podpisu ov&#283;&#345;&iacute;te na adrese URL, kter&aacute; je v t&eacute;to zpr&aacute;v&#283; uvedena.',
-'form_pet_mail_confirmation' => '<MODIF>Dobr&yacute; den,
+'form_pet_mail_confirmation' => 'Dobr&yacute; den,
 
 Rozhodli jste se podepsat petici:
 @titre@.
@@ -224,12 +224,15 @@ Rozhodli jste se podepsat petici:
 Uvedli jste n&aacute;sleduj&iacute;c&iacute; &uacute;daje:
     Jm&eacute;no: @nom_email@
     Web: @nom_site@ - @url_site@
+    @message@
 
 D&#366;LE&#381;IT&Eacute; UPOZORN&#282;N&Iacute;...
-Platnost sv&eacute;ho podpisu ov&#283;&#345;&iacute;te p&#345;echodem
+Platnost sv&eacute;ho podpisu potvrd&iacute;te p&#345;echodem
 na n&iacute;&#382;e uvedenou adresu (jinak bude v&aacute;&#353; po&#382;adavek
 zam&iacute;tnut):
+
     @url@
+
 
 D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 ',

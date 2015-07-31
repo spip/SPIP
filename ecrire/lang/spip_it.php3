@@ -224,11 +224,14 @@ Hai richiesto di firmare la petizione:
 Hai fornito le seguenti informazioni:
     Nome: @nom_email@
     Sito: @nom_site@ - @url_site@
+    @message@
 
 IMPORTANTE...
 
 Per confermare la tua adesione &egrave; sufficiente visitare l\'indirizzo web qui sotto (se non lo fai, la tua domanda sar&agrave; respinta):
+
     @url@
+
 
 Grazie per la partecipazione',
 'form_pet_message_commentaire' => 'Un messaggio, un commento?',

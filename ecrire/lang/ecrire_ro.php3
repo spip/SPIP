@@ -854,8 +854,8 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_nouveau_message' => 'Mesaj nou',
 'texte_nouveau_mot' => 'Cuv&acirc;nt nou',
 'texte_nouvelle_version_spip_1' => 'A&#355;i instalat o nou&#259; versiune SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aceast&#259; nou&#259; versiune necesit&#259; o aducere la zi mai complet&#259; dec&acirc;t &icirc;n mod obi&#351;nuit. Dac&#259; sunte&#355;i webmaster-ul site-ului, v&#259; rugam s&#259; &#351;terge&#355;i fi&#351;ierul <tt>inc_connect.php3</tt> din directorul <tt>ecrire</tt> &#351;i s&#259; relua&#355;i instalarea de la cap&#259;t pentru a permite aducerea la zi a parametrilor dumneavoastr&#259; de conectare la baza de date.
-(Nota Bene&nbsp;: dac&#259; cumva a&#355;i uitat parametrii de conectare, arunca&#355;i o privire la fi&#351;ierul <tt>inc_connect.php3</tt> &icirc;nainte de a-l &#351;terge...)',
+'texte_nouvelle_version_spip_2' => 'Aceast&#259; nou&#259; versiune necesit&#259; o aducere la zi mai complet&#259; dec&acirc;t &icirc;n mod obi&#351;nuit. Dac&#259; sunte&#355;i webmaster-ul site-ului, v&#259; rugam s&#259; &#351;terge&#355;i fi&#351;ierul @connect@ &#351;i s&#259; relua&#355;i instalarea de la cap&#259;t pentru a permite aducerea la zi a parametrilor dumneavoastr&#259; de conectare la baza de date.
+(Nota Bene&nbsp;: dac&#259; cumva a&#355;i uitat parametrii de conectare, arunca&#355;i o privire la fi&#351;ierul @connect@ &icirc;nainte de a-l &#351;terge...)',
 'texte_operation_echec' => '&Icirc;ntoarce&#355;i-v&#259; la pagina anterioar&#259;, selec&#355;ionazi o alt&#259; baz&#259; de date sau crea&#355;i una nou&#259;. Verifica&#355;i informa&#355;iile date de furnizorul dumneavoastr&#259; de hosting.',
 'texte_plus_trois_car' => 'mai mult de 3 caractere',
 'texte_plusieurs_articles' => 'Mai multe articole g&#259;site pentru "@cherche_auteur@":',

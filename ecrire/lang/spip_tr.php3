@@ -217,12 +217,13 @@ Bir dilek&ccedil;e imzalamak istediniz :
 @titre@.
 
 Ve &#351;u bilgileri girdiniz :
-    Nom: @nom_email@
+    &#304;sim: @nom_email@
     Site: @nom_site@ - @url_site@
+    @message@
 
 
 &Ouml;NEML&#304; ...
-&#304;mzan&#305;z&#305; onaylamak i&ccedil;in a&#351;a&#287;&#305;daki adrese ba&#351;vurman&#305;z yeterli
+&#304;mzan&#305;z&#305; onaylamak i&ccedil;in a&#351;a&#287;&#305;daki adrese ba&#287;lanman&#305;z yeterli
  (aksi halde iste&#287;iniz
 reddedilecektir) :
 
