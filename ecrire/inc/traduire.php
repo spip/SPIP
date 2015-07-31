@@ -59,7 +59,7 @@ function charger_langue($lang, $module = 'spip') {
 //
 // http://doc.spip.org/@surcharger_langue
 function surcharger_langue($fichier) {
-
+	if (!isset($GLOBALS['idx_lang'])) return;
 	$idx_lang_normal = $GLOBALS['idx_lang'];
 	$idx_lang_surcharge = $GLOBALS['idx_lang'].'_temporaire';
 	$GLOBALS['idx_lang'] = $idx_lang_surcharge;
