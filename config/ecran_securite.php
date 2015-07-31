@@ -50,14 +50,14 @@ define('_ECRAN_SECURITE', '0.6'); // 27 juillet 2009
  *       (sauf pour id_table, qui n'est pas numerique jusqu'a [5743])
  */
 foreach ($_GET as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$_GET[$var] = intval($_GET[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$_GET[$var] = is_array($_GET[$var])?array_map('intval',$_GET[$var]):intval($_GET[$var]);
 foreach ($_POST as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$_POST[$var] = intval($_POST[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$_POST[$var] = is_array($_POST[$var])?array_map('intval',$_POST[$var]):intval($_POST[$var]);
 foreach ($GLOBALS as $var => $val)
-	if (substr($var, 0,3) == 'id_' AND $var!='id_table')
-		$GLOBALS[$var] = intval($GLOBALS[$var]);
+	if (strncmp($var,"id_",3)==0 AND $var!='id_table')
+		$GLOBALS[$var] = is_array($GLOBALS[$var])?array_map('intval',$GLOBALS[$var]):intval($GLOBALS[$var]);
 
 
 /*     - interdit la variable $cjpeg_command, qui etait utilisee sans
