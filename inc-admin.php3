@@ -369,13 +369,19 @@ function debug_dumpfile ($texte) {
 	}
 
 	if ($texte) {
-	  $tableau = explode("\n", $texte);
-	  $format = "%0".strlen(count($tableau))."d";
-	  $texte = '';
-	  foreach ($tableau as $ligne)
-	    $texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
 	  echo "<div id=\"debug_boucle\"><fieldset><legend>".$GLOBALS['debug_affiche']."</legend>";
+	  ob_start();
 	  highlight_string($texte);
+	  $s = ob_get_contents();
+	  ob_end_clean();
+	  $tableau = explode("<br />", $s);
+	  $format = "<br>\n<span style='color: black'>%0".
+	    strlen(count($tableau)).
+	    "d </span>";
+	  $i=0;
+	  foreach ($tableau as $ligne) echo $ligne, sprintf($format, ++$i);
+
+
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div></body>";
