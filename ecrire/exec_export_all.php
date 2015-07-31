@@ -26,7 +26,7 @@ if (!$archive) {
 
 $action = _T('info_exportation_base', array('archive' => $archive));
 
-debut_admin($action);
+debut_admin(generer_url_post_ecrire("export_all","archive=$archive"), $action);
 
 $debug_limit = '';
 

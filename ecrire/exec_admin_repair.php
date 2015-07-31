@@ -82,7 +82,7 @@ else {
 $action = _T('texte_tenter_reparation');
 
 if ($ok) {
-	debut_admin($action, $message);
+	debut_admin(generer_url_post_ecrire("admin_repair"), $action, $message);
 
 	if (! $res = verifier_base())
 	  $res = "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";

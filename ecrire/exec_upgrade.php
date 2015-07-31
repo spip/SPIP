@@ -65,7 +65,7 @@ function upgrade_dist()
 
   include_ecrire('inc_admin');
 
-  debut_admin($upgrade_titre, $commentaire);
+  debut_admin(generer_url_post_ecrire("upgrade"),$upgrade_titre, $commentaire);
 
   include_ecrire ("inc_base");
 
