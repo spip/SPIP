@@ -195,8 +195,9 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) 
 // http://doc.spip.org/@construire_selecteur
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
-	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
-	return 	"<div class='rubrique_actuelle'><a onclick=\""
+	$icone = (strpos($idom, 'auteur')!==false) ? 'message.gif' : 'loupe.png';
+	return
+ 	"<div class='rubrique_actuelle'><a onclick=\""
 	.  $js
 	. "return charger_node_url_si_vide('"
 	. $url
