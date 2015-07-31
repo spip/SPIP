@@ -178,7 +178,7 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
-		foreach($page['entetes'] as $k => $v) @header("$k: $v");
+		envoyer_entetes($page['entetes']);
 	}
 
 	// 2. Cas d'une page contenant du PHP :
@@ -189,7 +189,7 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 		// Si la retention du flux de sortie est impossible
 		// envoi des entetes
 		if (!$flag_ob) {
-			foreach($page['entetes'] as $k => $v) @header("$k: $v");
+			envoyer_entetes($page['entetes']);
 			xml_hack($page, true);
 			eval('?' . '>' . $page['texte']);
 			$page['texte'] = '';
@@ -206,7 +206,7 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 			xml_hack($page);
 			ob_end_clean();
 
-			foreach($page['entetes'] as $k => $v) @header("$k: $v");
+			envoyer_entetes($page['entetes']);
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
 			// On ne revient pas ici si le nb d'erreurs > 4

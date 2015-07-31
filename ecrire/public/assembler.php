@@ -110,6 +110,14 @@ function public_assembler_dist($fond, $connect='') {
 	return assembler_page ($fond, $connect);
 }
 
+// Envoyer les entetes, en retenant ceux qui sont a usage interne
+// et demarrent par X-Spip-...
+function envoyer_entetes($entetes) {
+	foreach ($entetes as $k => $v)
+	#	if (strncmp($k, 'X-Spip-', 7))
+			@header("$k: $v");
+}
+
 
 //
 // calcule la page et les entetes
