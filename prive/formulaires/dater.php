@@ -190,11 +190,12 @@ function formulaires_dater_identifier_dist($objet, $id_objet, $retour='', $optio
 function formulaires_dater_verifier_dist($objet, $id_objet, $retour='', $options=array()){
 	$erreurs = array();
 
-	foreach(array('date','date_redac') as $k)
-		if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v))
+	foreach(array('date','date_redac') as $k){
+		if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v, $k))
 			$erreurs[$k] = _T('format_date_incorrecte');
 		elseif ($v=_request($k."_heure") AND !dater_recuperer_heure_saisie($v))
 			$erreurs[$k] = _T('format_heure_incorrecte');
+	}
 
 	if (!_request('date_jour'))
 		$erreurs['date'] = _T('info_obligatoire');
@@ -243,7 +244,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour='', $options=
 			if (!_request('date_redac_jour') OR _request('sans_redac'))
 				$set['date_redac'] = sql_format_date(0,0,0,0,0,0);
 			else {
-				if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour')))
+				if (!$d = dater_recuperer_date_saisie(_request('date_redac_jour'), "date_redac"))
 					$d = array(date('Y'),date('m'),date('d'));
 				if (!$h = dater_recuperer_heure_saisie(_request('date_redac_heure')))
 					$h = array(0,0);
@@ -268,15 +269,25 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour='', $options=
 /**
  * Récupérer annee,mois,jour sur la date saisie
  * @param string $post
+ * @param string $quoi
  * @return array
  */
-function dater_recuperer_date_saisie($post) {
+function dater_recuperer_date_saisie($post, $quoi="date") {
 	if (!preg_match('#^(?:(?:([0-9]{1,2})[/-])?([0-9]{1,2})[/-])?([0-9]{4}|[0-9]{1,2})#', $post, $regs))
 		return '';
-	if ($regs[3]<>'' AND $regs[3] < 1001)
-		$regs[3] += 9000;
+	if ($quoi=="date_redac") {
+		if ($regs[3]<>'' AND $regs[3] < 1001)
+			$regs[3] += 9000;
 
-	return array($regs[3],$regs[2],$regs[1]);
+		return array($regs[3],$regs[2],$regs[1]);
+	}
+	else {
+		$t = mktime(0,0,0,$regs[2],$regs[1],$regs[3]);
+		// si la date n'est pas valide selon mktime, la refuser
+		if (!$t) return '';
+		return array(date('Y',$t),date('m',$t),date('d',$t));
+	}
+
 }
 
 /**
