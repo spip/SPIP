@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Annuler',
 	'antispam_champ_vide' => 'Veuillez laisser ce champ vide :',
 	'articles_recents' => 'Articles les plus récents',
+	'avis_1_erreur_saisie' => 'Il y a 1 erreur dans dans votre saisie, veuillez vérifier les informations.',
 	'avis_archive_incorrect' => 'le fichier archive n’est pas un fichier SPIP',
 	'avis_archive_invalide' => 'le fichier archive n’est pas valide',
 	'avis_attention' => 'ATTENTION !',
@@ -43,6 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_mysql' => 'Erreur SQL',
 	'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d’accès à l’espace privé',
+	'avis_nb_erreurs_saisie' => 'Il y a @nb@ erreurs dans votre saisie, veuillez vérifier les informations.',
 
 	// B
 	'barre_a_accent_grave' => 'Insérer un A accent grave majuscule',
@@ -110,8 +112,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_heures_minutes_court' => '@h@h@m@',
 	'date_fmt_jour' => '@nomjour@ @jour@',
 	'date_fmt_jour_heure' => '@jour@ à @heure@',
-	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # MODIF
-	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # MODIF
+	'date_fmt_jour_heure_debut_fin' => '@jour@ de @heure_debut@ à @heure_fin@',
+	'date_fmt_jour_heure_debut_fin_abbr' => '@dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtend@@heure_fin@@dtabbr@',
 	'date_fmt_jour_mois' => '@jour@ @nommois@',
 	'date_fmt_jour_mois_annee' => '@jour@ @nommois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
@@ -676,6 +678,7 @@ et vous reconnecter au site.
 	'titre_statistiques' => 'Statistiques du site',
 	'titre_titre_document' => 'Titre du document :',
 	'todo' => 'à venir',
+	'trad_definir_reference' => 'Choisir "@titre@" comme référence des traductions',
 	'trad_reference' => '(référence des traductions)',
 
 	// Z
@@ -689,6 +692,7 @@ et vous reconnecter au site.
 	'zbug_champ_hors_motif' => 'Champ @champ@ hors d’un contexte @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Critère inconnu @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} sur une table sans clef primaire atomique',
 	'zbug_distant_interdit' => 'Externe interdit',
 	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique',
 	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index',
