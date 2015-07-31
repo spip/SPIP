@@ -501,7 +501,6 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  echo debug_affiche($fonc, $debug_objets, $var_mode_objet, $var_mode_affiche);
 	}
 	if ($texte) {
-
 		$err = "";
 		$titre = _request('var_mode_affiche');
 		if ($titre != 'validation') {
@@ -510,6 +509,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		} else {
 		  $valider = charger_fonction('valider', 'xml');
 		  $res = $valider($texte);
+		  // Si erreur, signaler leur nombre dans le formulaire admin
+		  $debug_objets['validation'] = $res[1] ? count($res[1]):'';
 		  list($texte, $err) = emboite_texte($res, $fonc, $self);
 			if ($err === false)
 				$err = _T('impossible');
@@ -625,22 +626,18 @@ function debug_fin()
 }
 
 // http://doc.spip.org/@emboite_texte
-function emboite_texte($texte, $fonc='',$self='')
+function emboite_texte($res, $fonc='',$self='')
 {
+	list($texte, $errs) = $res;
 	if (!$texte)
-		return array(ancre_texte($texte, array('','')), false);
-	if (!isset($GLOBALS['xhtml_error']))
+		return array(ancre_texte('', array('','')), false);
+	if (!$errs)
 		return array(ancre_texte($texte, array('', '')), true);
 
 	if (!isset($GLOBALS['debug_objets'])) {
 
-		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
-				$GLOBALS['xhtml_error'],
-				$regs,
-			       PREG_SET_ORDER);
-
 		$colors = array('#e0e0f0', '#f8f8ff');
-		$encore = count_occ($regs);
+		$encore = count_occ($errs);
 		$encore2 = array();
 		$fautifs = array();
 
@@ -657,9 +654,10 @@ function emboite_texte($texte, $fonc='',$self='')
 		. "</th></tr>";
 
 		$i = 0;
-		foreach($regs as $r) {
+		foreach($errs as $r) {
 			$i++;
-			list(,$msg, $ligne, $fin, $col) = $r;
+			list($msg, $ligne, $col) = $r;
+			spip_log("$r = list($msg, $ligne, $col");
 			if (isset($encore2[$msg]))
 			  $ref = ++$encore2[$msg];
 			else {$encore2[$msg] = $ref = 1;}
@@ -674,7 +672,7 @@ function emboite_texte($texte, $fonc='',$self='')
 			  . "' id='T$i'>"
 			  . $ligne
 			  . "</a></td><td  style='text-align: right'>"
-			  . $fin
+			  . $col
 			  . "</td><td>$msg</td></tr>\n";
 			$fautifs[]= array($ligne, $col, $i, $msg);
 		}
@@ -687,16 +685,12 @@ function emboite_texte($texte, $fonc='',$self='')
 		. " </table><a id='fin_err'></a>";
 		return array(ancre_texte($texte, $fautifs), $err);
 	} else {
-		preg_match(",^(.*?)(\d+)(\D+(\d+)<br />),",
-		     $GLOBALS['xhtml_error'],
-		     $eregs);
-		$fermant = $eregs[2];
-		$ouvrant = $eregs[4];
+		list($msg, $fermant, $ouvrant) = $errs[0];
 		$rf = reference_boucle_debug($fermant, $fonc, $self);
 		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
-		$err = $eregs[1] .
-		  "<a href='#L" . $eregs[2] . "'>$eregs[2]</a>$rf" .
-		  $eregs[3] ."<a href='#L" . $eregs[4] . "'>$eregs[4]</a>$ro";
+		$err = $msg .
+		  "<a href='#L" . $fermant . "'>$fermant</a>$rf<br />" .
+		  "<a href='#L" . $ouvrant . "'>$ouvrant</a>$ro";
 		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
 	}
 }

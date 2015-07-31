@@ -113,30 +113,29 @@ function xml_parsestring($phraseur, $data)
 	$phraseur->contenu[$phraseur->depth] ='';
 
 	if (!xml_parse($phraseur->sax, $data, true)) {
-	  // ne pas commencer le message par un "<" (cf xml_sax_dist)
-	  $phraseur->err = array(
-	    xml_error_string(xml_get_error_code($phraseur->sax)) .
-		  coordonnees_erreur($phraseur) . "<br />\n" .
-		  (!$phraseur->depth ? '' :
-		   (
-		    _T('erreur_balise_non_fermee') .
-		    " <tt>" .
-		    $prhaseur->ouvrant[$phraseur->depth] .
-		    "</tt> " .
-		    _T('ligne') .
-		    $phraseur->reperes[$phraseur->depth] .
-		    " <br />\n" )));
+		coordonnees_erreur($phraseur,
+			xml_error_string(xml_get_error_code($phraseur->sax))
+			. "<br />\n" .
+			(!$phraseur->depth ? '' :
+			 ('(' .
+			  _T('erreur_balise_non_fermee') .
+			  " <tt>" .
+			  $prhaseur->ouvrant[$phraseur->depth] .
+			  "</tt> " .
+			  _T('ligne') .
+			  " " .
+			  $phraseur->reperes[$phraseur->depth] .
+			  ") <br />\n" )));
 	}
 }
 
 // http://doc.spip.org/@coordonnees_erreur
-function coordonnees_erreur($phraseur)
+function coordonnees_erreur($phraseur, $msg)
 {
 	$entete_length = substr_count($phraseur->entete,"\n");
-	return ' ' .
-		xml_get_current_line_number($phraseur->sax) + $entete_length.
-		' ' .
-		xml_get_current_column_number($phraseur->sax);
+	$phraseur->err[] = array($msg,
+		xml_get_current_line_number($phraseur->sax) + $entete_length,
+		xml_get_current_column_number($phraseur->sax));
 }
 
 // http://doc.spip.org/@xml_sax_dist
