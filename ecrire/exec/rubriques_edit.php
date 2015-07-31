@@ -47,7 +47,6 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
 	if ($titre === false
-        OR $connect_statut !='0minirezo'
 	OR ($new=='oui' AND !autoriser('creerrubriquedans','rubrique',$id_parent))
 	OR ($new!='oui' AND !autoriser('modifier','rubrique',$id_rubrique)))  {
 		include_spip('inc/minipres');
