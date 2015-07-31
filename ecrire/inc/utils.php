@@ -922,7 +922,8 @@ function generer_url_public($script='', $args="", $no_entities=false, $rel=false
 	if (!$no_entities)
 		$action = quote_amp($action);
 
-	return ($rel ? '' : url_de_base()) . $action;
+	// ne pas generer une url avec /./?page= en cas d'url absolue et de _SPIP_SCRIPT vide
+	return ($rel ? $action : rtrim(url_de_base(),'/') . preg_replace(",^/[.]/,","/","/$action"));
 }
 
 // http://doc.spip.org/@generer_url_prive
