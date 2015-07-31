@@ -59,14 +59,15 @@ RewriteRule "." - [skip=100]
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
 # voir fichier ecrire/urls/html.php3
-RewriteRule rubrique([0-9]+)\.html$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
-RewriteRule article([0-9]+)\.html$	spip.php?page=article&id_article=$1 [QSA,L]
-RewriteRule breve([0-9]+)\.html$	spip.php?page=breve&id_breve=$1 [QSA,L]
-RewriteRule mot([0-9]+)\.html$		spip.php?page=mot&id_mot=$1 [QSA,L]
-RewriteRule auteur([0-9]+)\.html$	spip.php?page=auteur&id_auteur=$1 [QSA,L]
-RewriteRule site([0-9]+)\.html$	spip.php?page=site&id_syndic=$1 [QSA,L]
+RewriteRule ^rubrique([0-9]+)(\.html)?$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)(\.html)?$	spip.php?page=article&id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)(\.html)?$	spip.php?page=breve&id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)(\.html)?$		spip.php?page=mot&id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)(\.html)?$	spip.php?page=auteur&id_auteur=$1 [QSA,L]
+RewriteRule ^site([0-9]+)(\.html)?$	spip.php?page=site&id_syndic=$1 [QSA,L]
 # Compatibilite avec les anciennes URLS appelant directement des fichiers php
-RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|resume|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
+RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
+RewriteRule ^resume.php[3]?	spip.php?page=sommaire [QSA,L]
 RewriteRule ^page.php[3]?	spip.php [QSA,L]
 RewriteRule ^spip_cal\.php3?$	spip.php?action=ical [QSA,L]
 RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
@@ -98,6 +99,13 @@ RewriteRule ^(.*/)?\.svn/ - [F]
 # ExpiresByType image/jpeg A3600
 # ExpiresByType image/png A3600
 #</IfModule>
+
+#################################
+# gestion des erreurs 404
+# voir http://www.spip.net/fr_article3226.html
+# Pour que le serveur http renvoie les erreurs 404 vers SPIP, supprimer le '#'
+
+# ErrorDocument 404 /spip.php?page=404
 
 #
 ###
