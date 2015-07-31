@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('base/abstract_sql');
-spip_connect();
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
@@ -28,7 +26,7 @@ function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_stat
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
-	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
+	return array($filtres[0] ? $filtres[0] : $args[0], (isset($args[1]) ? $args[1] : ''));
 }
 
 // http://doc.spip.org/@balise_LOGIN_PUBLIC_dyn
