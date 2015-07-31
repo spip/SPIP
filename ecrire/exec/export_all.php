@@ -43,7 +43,9 @@ function exec_export_all_dist()
 
 	if (!isset($GLOBALS['meta']["status_dump"])) {
 		$gz = _request('gz');
-		$archive = export_nom_fichier_dump($dir,$gz);
+		$archive = $gz 
+		?  (_request('znom_sauvegarde') . '.xml.gz')
+		:  (_request('nom_sauvegarde') . '.xml');
 
 		//  creer l'en tete du fichier a partir de l'espace public
 		include_spip('inc/headers');
@@ -72,7 +74,7 @@ function exec_export_all_dist()
 	$all = count($tables_for_dump);
 
 	// concatenation des fichiers crees a l'appel precedent
-	ramasse_parties($file, $file);
+	ramasse_parties($dir, $archive);
 
 	if ($etape_actuelle > $all){ 
 	  // l'appel precedent avait fini le boulot. mettre l'en-pied.
