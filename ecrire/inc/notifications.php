@@ -71,7 +71,7 @@ function extrait_article($row) {
 	$extrait = "** $titre **\n";
 	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
 	if ($statut == 'publie') $extrait .= " "._T('date_fmt_nomjour_date', array('nomjour'=>nom_jour($date), 'date'=>affdate($date)));
-	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
+	$extrait .= "\n\n".textebrut(propre(couper("$chapo<p>$texte ", 700)))."\n\n";
 	return $extrait;
 }
 
