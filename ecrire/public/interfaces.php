@@ -21,7 +21,7 @@ class Texte {
 	var $type = 'texte';
 	var $texte;
 	var $avant, $apres = ""; // s'il y avait des guillemets autour
-	var $ligne = 0; 
+	var $ligne = 0;
 }
 
 // http://doc.spip.org/@Inclure
@@ -29,7 +29,7 @@ class Inclure {
 	var $type = 'include';
 	var $texte;
 	var $avant, $apres; // inutilises mais generiques
-	var $ligne = 0; 
+	var $ligne = 0;
 	var $param = array();  //  valeurs des params
 }
 
@@ -79,9 +79,9 @@ class Boucle {
 	var $cptrows = false;
 	var $ligne = 0;
 	var $descr =  array(); # noms des fichiers source et but etc
-	
+
 	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat, fragment ..., utilisable par les plugins egalement
-	
+
 	// obsoletes, conserves provisoirement pour compatibilite
 	var $fragment; # definir un fragment de page
 	var $tout = false;
@@ -94,9 +94,9 @@ class Boucle {
 // http://doc.spip.org/@Critere
 class Critere {
 	var $op;
-	var $not;	
+	var $not;
 	var $param = array();
-	var $ligne = 0; 
+	var $ligne = 0;
 }
 
 // http://doc.spip.org/@Champ
@@ -120,7 +120,7 @@ class Champ {
 	// sourcefile; pour DOSSIER_SQUELETTE
 	var $descr = array();
 	// pour localiser les erreurs
-	var $ligne = 0; 
+	var $ligne = 0;
 }
 
 
@@ -139,14 +139,14 @@ class Idiome {
 	var $code;
 	var $interdire_scripts = false;
 	var $descr = array();
-	var $ligne = 0; 
+	var $ligne = 0;
 }
 
 // http://doc.spip.org/@Polyglotte
 class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir
-	var $ligne = 0; 
+	var $ligne = 0;
 }
 
 global $table_criteres_infixes;
@@ -199,7 +199,7 @@ $exceptions_des_tables['documents']['mime_type']=array('types_documents'
 # ne sert plus ? verifier balise_URL_ARTICLE
 $exceptions_des_tables['syndic_articles']['url_article']='url';
 # ne sert plus ? verifier balise_LESAUTEURS
-$exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs'; 
+$exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs';
 $exceptions_des_tables['syndic_articles']['url_site']=array('syndic', 'url_site');
 $exceptions_des_tables['syndic_articles']['nom_site']=array('syndic', 'nom_site');
 
@@ -230,7 +230,6 @@ $tables_jointures['spip_articles'][]= 'signatures';
 $tables_jointures['spip_articles'][]= 'petitions';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
-$tables_jointures['spip_auteurs'][]= 'mots'; // ??
 
 $tables_jointures['spip_breves'][]= 'mots_breves';
 $tables_jointures['spip_breves'][]= 'documents_breves';
@@ -253,8 +252,8 @@ $tables_jointures['spip_rubriques'][]= 'mots';
 $tables_jointures['spip_syndic'][]= 'mots_syndic';
 $tables_jointures['spip_syndic'][]= 'mots';
 
-$tables_jointures['spip_syndic_articles'][]= 'syndic';
-$tables_jointures['spip_syndic_articles'][]= 'mots_syndic';
+$tables_jointures['spip_syndic_articles']['id_syndic']= 'syndic';
+$tables_jointures['spip_syndic_articles']['id_syndic']= 'mots_syndic';
 $tables_jointures['spip_syndic_articles'][]= 'mots';
 
 $tables_jointures['spip_mots'][]= 'mots_articles';
@@ -270,6 +269,9 @@ $tables_jointures['spip_groupes_mots'][]= 'mots';
 global  $exceptions_des_jointures;
 $exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre');
 $exceptions_des_jointures['type_mot'] = array('spip_mots', 'type');
+$exceptions_des_jointures['id_mot_syndic']= array('spip_mots_syndic','id_mot');
+$exceptions_des_jointures['titre_mot_syndic']= array('spip_mots','titre');
+$exceptions_des_jointures['type_mot_syndic']= array('spip_mots','type');
 $exceptions_des_jointures['petition'] = array('spip_petitions', 'texte');
 $exceptions_des_jointures['id_signature']= array('spip_signatures', 'id_signature');
 
