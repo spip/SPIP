@@ -157,7 +157,7 @@ function info_etape($titre, $complement = ''){
 			else
 				$etat = "ok";
 		}
-		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"GO")."</span>";
+		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"go")."</span>";
 		if ($etat == "encours")
 			$etat = 'todo';
 		$debut++;
