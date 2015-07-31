@@ -10,19 +10,27 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Filtres d'URL et de liens
+ *
+ * @package SPIP\Core\Filtres\Liens
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Filtres d'URLs
-//
 
-// Nettoyer une URL contenant des ../
-//
-// resolve_url('/.././/truc/chose/machin/./.././.././hopla/..');
-// inspire (de loin) par PEAR:NetURL:resolvePath
-//
-// http://doc.spip.org/@resolve_path
+/**
+ * Nettoyer une URL contenant des `../`
+ *
+ * Inspiré (de loin) par PEAR:NetURL:resolvePath
+ * @example
+ *     ```
+ *     resolve_path('/.././/truc/chose/machin/./.././.././hopla/..');
+ *     ```
+ * 
+ * @param string $url URL
+ * @return string URL nettoyée
+**/
 function resolve_path($url) {
 	list($url, $query) = array_pad(explode('?', $url, 2), 2, null);
 	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
@@ -36,12 +44,22 @@ function resolve_path($url) {
 	return '/'.preg_replace(',^/,S', '', $url);
 }
 
-// 
-// Suivre un lien depuis une adresse donnee -> nouvelle adresse
-//
-// suivre_lien('http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
-// 'a/../../titi.coco.html/tata#titi');
-// http://doc.spip.org/@suivre_lien
+
+/**
+ * Suivre un lien depuis une URL donnée vers une nouvelle URL
+ *
+ * @uses resolve_path()
+ * @example
+ *     ```
+ *     suivre_lien(
+ *         'http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
+ *         'a/../../titi.coco.html/tata#titi');
+ *     ```
+ *
+ * @param string $url URL de base
+ * @param string $lien Lien ajouté à l'URL
+ * @return string URL complète.
+**/
 function suivre_lien($url, $lien) {
 
 	if (preg_match(',^(mailto|javascript):,iS', $lien))
@@ -75,9 +93,25 @@ function suivre_lien($url, $lien) {
 	}
 }
 
-// un filtre pour transformer les URLs relatives en URLs absolues ;
-// ne s'applique qu'aux #URL_XXXX
-// http://doc.spip.org/@url_absolue
+
+/**
+ * Transforme une URL relative en URL absolue
+ *
+ * S'applique sur une balise SPIP d'URL.
+ * 
+ * @filtre url_absolue
+ * @link http://www.spip.net/4127
+ * @uses suivre_lien()
+ * @example
+ *     ```
+ *     [(#URL_ARTICLE|url_absolue)]
+ *     [(#CHEMIN{css/theme.css}|url_absolue)]
+ *     ```
+ * 
+ * @param string $url URL
+ * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
+ * @return string Texte ou URL (en absolus)
+**/
 function url_absolue($url, $base='') {
 	if (strlen($url = trim($url)) == 0)
 		return '';
@@ -96,9 +130,19 @@ function protocole_implicite($url_absolue){
 	return preg_replace(";^[a-z]{3,7}://;i","//",$url_absolue);
 }
 
-// un filtre pour transformer les URLs relatives en URLs absolues ;
-// ne s'applique qu'aux textes contenant des liens
-// http://doc.spip.org/@liens_absolus
+/**
+ * Transforme les URLs relatives en URLs absolues
+ *
+ * Ne s'applique qu'aux textes contenant des liens
+ *
+ * @filtre liens_absolus
+ * @uses url_absolue()
+ * @link http://www.spip.net/4126
+ * 
+ * @param string $texte Texte
+ * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
+ * @return string Texte avec des URLs absolues
+**/
 function liens_absolus($texte, $base='') {
 	if (preg_match_all(',(<(a|link|image)[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),imsS', 
 	$texte, $liens, PREG_SET_ORDER)) {
@@ -119,10 +163,18 @@ function liens_absolus($texte, $base='') {
 	return $texte;
 }
 
-//
-// Ce filtre public va traiter les URL ou les <a href>
-//
-// http://doc.spip.org/@abs_url
+
+/**
+ * Transforme une URL ou des liens en URL ou liens absolus
+ *
+ * @filtre abs_url
+ * @link http://www.spip.net/4128
+ * @global mode_abs_url Pour connaître le mode (url ou texte)
+ * 
+ * @param string $texte Texte ou URL
+ * @param string $base URL de base de destination (par défaut ce sera l'URL de notre site)
+ * @return string Texte ou URL (en absolus)
+**/
 function abs_url($texte, $base='') {
 	if ($GLOBALS['mode_abs_url'] == 'url')
 		return url_absolue($texte, $base);

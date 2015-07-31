@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des headers et redirections
+ *
+ * @package SPIP\Core\Headers
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -124,7 +129,16 @@ function redirige_url_ecrire($script='', $args='', $equiv='') {
 	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
 }
 
-// http://doc.spip.org/@http_status
+/**
+ * Renvoie au client le header HTTP avec le message correspondant au code indiqué.
+ *
+ * Ainsi `http_status(301)` enverra le message `301 Moved Permanently`.
+ * 
+ * @uses header() de PHP
+ * 
+ * @param int $status
+ *     Code d'erreur
+**/
 function http_status($status) {
 	global $REDIRECT_STATUS, $flag_sapi_name;
 	static $status_string = array(
