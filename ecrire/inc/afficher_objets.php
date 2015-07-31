@@ -296,9 +296,7 @@ function afficher_objet_boucle($row, $own)
 		if ($titre) {
 			$titre = "<a href='"
 			.  lien_voir_objet($type,$primary,$id_objet)
-			.  "' "
-			. "title='" . _T('info_numero_abbreviation'). $id_objet
-			. "'>"
+			.  "'>"
 			. $titre
 			. "</a>";
 		}
@@ -432,20 +430,28 @@ function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, 
 	// un cache de tranche issu d'un autre tri
 
 	$arg = "hash=$hash&o=" . $requete['ORDER BY'];
+
+/*
+	// DESACTIVE CAR AJOUTE UNE COMPLEXITE INUTILE -- A REVOIR
+	// le micro "afficher les traductions"
 	if (($GLOBALS['meta']['gerer_trad'] == "oui")) {
 		$url = generer_url_ecrire('memoriser',"$arg&trad=" . (1-$trad));
-		$texte .=
+		$texte =
 		"\n<span style='float: $spip_lang_right;'><a href=\"#\""
 		  . generer_onclic_ajax($url, $tmp_var, 0)
-		  . "><img\nsrc='". chemin_image($icone) ."' alt='$alt' /></a></span>";
+		  . "><img\nsrc='". chemin_image($icone) ."' alt='$alt' title='$alt' /></a></span>" . $texte;
 	}
-	/* En attendant de trouver le bon graphisme
+*/
+
+/*
+	// DESACTIVE CAR AJOUTE UNE COMPLEXITE INUTILE -- A REVOIR
 	$url_t = generer_url_ecrire('memoriser',"hash=$hash&by=0%2Btitre,titre");
 	$url_t = afficher_boutons_tri($url_t, $tmp_var);
 
 	$url_d = generer_url_ecrire('memoriser',"hash=$hash&by=date");
 	$url_d = afficher_boutons_tri($url_d, $tmp_var);
-	*/ $url_t = $url_d = '';
+*/
+	$url_t = $url_d = '';
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
@@ -531,10 +537,7 @@ function afficher_articles_trad_boucle($row, $own='')
 
 	$titre = "\n<div>"
 	  . $img
-	  . "<a href='$h' title='"
-	  . _T('info_numero_abbreviation')
-	  . $id_article
-	  . "' dir='$lang_dir' style=\"display:block;\">"
+	  . "<a href='$h' dir='$lang_dir' style=\"display:block;\">"
 	  . typo(supprime_img($titre,''))
 	  . "</a></div>";
 
