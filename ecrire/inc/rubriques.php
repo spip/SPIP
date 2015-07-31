@@ -603,12 +603,8 @@ function calculer_prochain_postdate($check= false) {
  * 
  * creer_rubrique_nommee('truc/machin/chose') va créer
  * une rubrique truc, une sous-rubrique machin, et une sous-sous-rubrique
- * chose, sans créer de rubrique si elle existe deja
- * à partir de id_rubrique (par défaut, à partir de la racine)
- *
- * La fonction cherche tout de même si les rubriques demandées
- * (pour la parentée indiquée) n'existent pas déjà avant d'en
- * créer de nouvelles
+ * chose, sans créer de rubrique si elle existe déjà
+ * à partir de $id_parent (par défaut, à partir de la racine)
  * 
  * NB: cette fonction est très pratique, mais pas utilisée dans le core
  * pour rester légère elle n'appelle pas calculer_rubriques()
