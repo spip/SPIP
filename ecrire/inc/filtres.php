@@ -2695,7 +2695,7 @@ function filtre_explode_dist($a,$b){return explode($b,$a);}
  * @param string $b
  * @return string
  */
-function filtre_implode_dist($a,$b){return implode($b,$a);}
+function filtre_implode_dist($a,$b){return is_array($a)?implode($b,$a):$a;}
 
 /*
  * Deux verrues pour que le pipeline de revisions soit correct
