@@ -281,37 +281,6 @@ function spip_num_rows($r) {
 }
 
 
-//
-// Poser un verrou local a un SPIP donne
-// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
-//
-// http://doc.spip.org/@spip_get_lock
-function spip_get_lock($nom, $timeout = 0) {
-
-	define('_LOCK_TIME', intval(time()/3600-316982));
-
-	$connexion = $GLOBALS['connexions'][0];
-	$prefixe = $connexion['prefixe'];
-	$db = $connexion['db'];
-	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
-
-	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
-	$q = @sql_fetch($q);
-	if (!$q) spip_log("pas de lock sql pour $nom");
-	return $q['n'];
-}
-
-// http://doc.spip.org/@spip_release_lock
-function spip_release_lock($nom) {
-
-	$connexion = $GLOBALS['connexions'][0];
-	$prefixe = $connexion['prefixe'];
-	$db = $connexion['db'];
-	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
-
-	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
-}
-
 // http://doc.spip.org/@spip_sql_version
 function spip_sql_version() {
 	$row = sql_fetch(spip_query("SELECT version() AS n"));

@@ -94,10 +94,9 @@ function recuperer_parametres_url($fond, $url) {
 	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
 		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
-		$id = id_table_objet($fond);
-		$r = spip_query("SELECT $id AS id FROM spip_" . table_objet($fond) . " WHERE url_propre = " . _q($url_propre));
-		if ($r AND $r = sql_fetch($r))
-			$contexte[$id] = $r['id'];
+
+		$r = sql_fetsel("id_objet", "spip_urls", "url=" . _q($url_propre));
+		if ($r)	$contexte[id_table_objet($fond)] = $r['id_objet'];
 	}
 	/* Fin du bloc compatibilite url-propres */
 }

@@ -168,7 +168,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	$id_auteur = isset($c['id_auteur']) ? $c['id_auteur'] : NULL;   
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_syndic.x)
-	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication', 'url_propre');
+	$champs_normaux = array('nom_site', 'url_site', 'descriptif', 'url_syndic', 'syndication');
 
 	// ne pas accepter de titre vide
 	if (_request('nom_site', $c) === '')

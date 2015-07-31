@@ -155,7 +155,7 @@ function revision_auteur($id_auteur, $c=false) {
 
 	modifier_contenu('auteur', $id_auteur,
 		array(
-			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'url_site', 'email', 'url_propre', 'login'),
+			'champs' => array('nom', 'bio', 'pgp', 'nom_site', 'url_site', 'email', 'login'),
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
 		$c);
@@ -178,7 +178,7 @@ function revision_mot($id_mot, $c=false) {
 
 	modifier_contenu('mot', $id_mot,
 		array(
-			'champs' => array('titre', 'descriptif', 'texte', 'id_groupe', 'type', 'url_propre'),
+			'champs' => array('titre', 'descriptif', 'texte', 'id_groupe', 'type'),
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);

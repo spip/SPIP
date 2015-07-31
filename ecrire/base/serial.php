@@ -42,7 +42,8 @@ $spip_articles = array(
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"nom_site"	=> "tinytext DEFAULT '' NOT NULL",
 		"url_site"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
-		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL");
+#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL"
+);
 
 $spip_articles_key = array(
 		"PRIMARY KEY"		=> "id_article",
@@ -51,7 +52,8 @@ $spip_articles_key = array(
 		"KEY id_trad"		=> "id_trad",
 		"KEY lang"		=> "lang",
 		"KEY statut"		=> "statut, date",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 $spip_articles_join = array(
 		"id_article"=>"id_article",
 		"id_rubrique"=>"id_rubrique");
@@ -79,7 +81,7 @@ $spip_auteurs = array(
 		"cookie_oubli"	=> "tinytext",
 		"source"	=> "VARCHAR(10) DEFAULT 'spip' NOT NULL",
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"url_propre" => "VARCHAR(255)",
+#		"url_propre" => "VARCHAR(255)",
 		"extra"	=> "longtext NULL");
 
 $spip_auteurs_key = array(
@@ -87,7 +89,8 @@ $spip_auteurs_key = array(
 		"KEY login"	=> "login",
 		"KEY statut"	=> "statut",
 		"KEY en_ligne"	=> "en_ligne",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 $spip_auteurs_join = array(
 		"id_auteur"=>"id_auteur",
 		"login"=>"login");
@@ -106,12 +109,14 @@ $spip_breves = array(
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"maj"	=> "TIMESTAMP",
 		"extra"	=> "longtext NULL",
-		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL");
+#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL"
+);
 
 $spip_breves_key = array(
 		"PRIMARY KEY"	=> "id_breve",
 		"KEY id_rubrique"	=> "id_rubrique",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 $spip_breves_join = array(
 		"id_breve"=>"id_breve",
 		"id_rubrique"=>"id_rubrique");
@@ -140,12 +145,13 @@ $spip_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
 		"type"	=> "text DEFAULT '' NOT NULL",
 		"extra"	=> "longtext NULL",
-		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
+#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_mots_key = array(
 		"PRIMARY KEY"	=> "id_mot",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 
 $spip_groupes_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
@@ -181,7 +187,7 @@ $spip_rubriques = array(
 		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"extra"	=> "longtext NULL",
-		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
+#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL",
 		"statut_tmp"	=> "varchar(10) DEFAULT '0' NOT NULL",
 		"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		);
@@ -190,7 +196,8 @@ $spip_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_rubrique",
 		"KEY lang"	=> "lang",
 		"KEY id_parent"	=> "id_parent",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 
 $spip_documents = array(
 		"id_document"	=> "bigint(21) NOT NULL",
@@ -242,7 +249,7 @@ $spip_syndic = array(
 		"url_site"	=> "text DEFAULT '' NOT NULL",
 		"url_syndic"	=> "text DEFAULT '' NOT NULL",
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"url_propre"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+#		"url_propre"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP",
 		"syndication"	=> "VARCHAR(3) DEFAULT '' NOT NULL",
 		"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
@@ -261,7 +268,8 @@ $spip_syndic_key = array(
 		"KEY id_rubrique"	=> "id_rubrique",
 		"KEY id_secteur"	=> "id_secteur",
 		"KEY statut"	=> "statut, date_syndic",
-		"KEY url_propre"	=> "url_propre");
+#		"KEY url_propre"	=> "url_propre"
+);
 $spip_syndic_join = array(
 		"id_syndic"=>"id_syndic",
 		"id_rubrique"=>"id_rubrique");

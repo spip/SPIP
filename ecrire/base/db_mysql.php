@@ -95,7 +95,7 @@ function spip_mysql_query($query, $serveur='') {
 
 // http://doc.spip.org/@spip_mysql_alter
 function spip_mysql_alter($query, $serveur=''){
-	return mysql_query("ALTER ".$query); # i.e. que PG se debrouille
+	return spip_mysql_query("ALTER ".$query); # i.e. que PG se debrouille
 }
 
 // fonction appelant la precedente
@@ -453,5 +453,39 @@ function spip_mysql_multi ($objet, $lang) {
 		"))) AS multi ";
 
 	return $retour;
+}
+
+// Ces deux fonctions n'ont pas d'équivalent exact PostGres
+// et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
+
+//
+// Poser un verrou local a un SPIP donne
+// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+//
+// http://doc.spip.org/@spip_get_lock
+function spip_get_lock($nom, $timeout = 0) {
+
+	define('_LOCK_TIME', intval(time()/3600-316982));
+
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	$db = $connexion['db'];
+	$nom = "$bd:$prefix:$nom" .  _LOCK_TIME;
+
+	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout) AS n");
+	$q = @sql_fetch($q);
+	if (!$q) spip_log("pas de lock sql pour $nom");
+	return $q['n'];
+}
+
+// http://doc.spip.org/@spip_release_lock
+function spip_release_lock($nom) {
+
+	$connexion = $GLOBALS['connexions'][0];
+	$prefixe = $connexion['prefixe'];
+	$db = $connexion['db'];
+	$nom = "$bd:$prefix:$nom" . _LOCK_TIME;
+
+	@spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 ?>

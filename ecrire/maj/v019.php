@@ -466,6 +466,11 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_49();
 	  maj_version('1.949');
 	}
+	if (upgrade_vers(1.950, $version_installee, $version_cible)) {
+	  maj_v019_50();
+	  maj_version('1.950');
+	}
+
 }
 
 function maj_v019_45()
@@ -604,4 +609,33 @@ function maj_v019_49()
 	sql_alter("TABLE spip_versions DROP INDEX id_auteur");
 }
 
+function maj_v019_50()
+{
+  // oubli de gerer le prefixe lors l'introduction de l'abstraction
+  // => on relance les 4 derniers en mode silencieux pour mettre au carre.
+	@maj_v019_46();
+	@maj_v019_47();
+	@maj_v019_48();
+	@maj_v019_49();
+	global $tables_auxiliaires;
+	include_spip('base/auxiliaires');
+	$v = $tables_auxiliaires[$k='spip_urls'];
+	sql_create($k, $v['field'], $v['key'], false, false);
+	foreach(array('article'=>'id_article',
+		      'rubrique'=>'id_rubrique',
+		      'breve'=>'id_breve',
+		      'auteur' => 'id_auteur', 
+		      'mot' => 'id_mot', 
+		      'syndic' => 'id_syndic') as $type => $id_objet){
+		$table = ($type == 'syndic') ? $type : ($type ."s");
+		$date = ($type == 'breve') ? 'date_heure' : 
+		  (($type == 'auteur') ? 'maj' : 
+		   (($type == 'mot') ? 'maj' : 'date'));
+		$q = sql_select("url_propre AS url, $id_objet AS id_objet, '$type' AS type, $date as maj", "spip_$table", "url_propre<>''");
+		while ($r = sql_fetch($q)) sql_replace('spip_urls', $r);
+		spip_log("table $table : " . sql_count($q) . " urls propres copiees");
+		sql_alter("TABLE spip_$table DROP INDEX url_propre");
+		sql_alter("TABLE spip_$table DROP url_propre");		
+	}
+}
 ?>

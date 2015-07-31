@@ -84,7 +84,7 @@ function revisions_breves ($id_breve, $c=false) {
 	include_spip('inc/autoriser');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_breves.x)
-	$champs_normaux = array('titre', 'texte', 'lien_titre', 'lien_url', 'url_propre');
+	$champs_normaux = array('titre', 'texte', 'lien_titre', 'lien_url');
 
 	// ne pas accepter de titre vide
 	if (_request('titre', $c) === '')
