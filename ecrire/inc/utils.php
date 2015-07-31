@@ -746,7 +746,16 @@ function url_de_base() {
 		    test_valeur_serveur($_SERVER['HTTPS']))
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
-	$myself = $http.'://'.$server.$GLOBALS['REQUEST_URI'];
+	if (!$GLOBALS['REQUEST_URI']){
+		if (isset($_SERVER['REQUEST_URI'])) {
+			$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+		} else {
+			$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+			if ($_SERVER['QUERY_STRING']
+			AND !strpos($_SERVER['REQUEST_URI'], '?'))
+				$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
+		}
+	}	$myself = $http.'://'.$server.$GLOBALS['REQUEST_URI'];
 
 	# supprimer la chaine de GET
 	list($myself) = explode('?', $myself);
