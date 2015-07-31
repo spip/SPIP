@@ -100,7 +100,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 						$action = trim(array_pop($pipe['action']));
 					else
 						$action = $nom;
-					$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
+					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
+						$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
 					if (isset($pipe['inclure'])){
 						$GLOBALS['spip_matrice']["$prefix$action"] = 
 							"_DIR_PLUGINS$plug/".array_pop($pipe['inclure']);
