@@ -861,7 +861,28 @@ $GLOBALS[\'all_langs\'] = @$GLOBALS[\'meta\'][\'langues_proposees\'];
 	}
 
 	return "\n<li>$res</li>\n";
-}'
+}',
+
+'barre_textarea' =>'($texte, $rows, $cols, $lang=\'\') {
+	static $num_textarea = 0;
+	include_spip("inc/layer"); // definit browser_barre
+
+	$texte = entites_html($texte);
+	if (!$GLOBALS["browser_barre"])
+		return "<textarea name=\'texte\' rows=\'$rows\' class=\'forml\' cols=\'$cols\'>$texte</textarea>";
+
+	$num_textarea++;
+	include_spip("inc/barre");
+	return afficher_barre("document.getElementById(\'textarea_$num_textarea\')", true, $lang) .
+	  "
+<textarea name=\'texte\' rows=\'$rows\' class=\'forml\' cols=\'$cols\'
+id=\'textarea_$num_textarea\'
+onselect=\'storeCaret(this);\'
+onclick=\'storeCaret(this);\'
+onkeyup=\'storeCaret(this);\'
+ondblclick=\'storeCaret(this);\'>$texte</textarea>";
+}',
+
 ) as $f => $def) {
 	if (!function_exists($f)) {
 		eval("function $f$def");

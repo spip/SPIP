@@ -1653,32 +1653,6 @@ function extraire_balises($texte, $tag='a') {
 		return array();
 }
 
-
-// construit une balise textarea avec la barre de raccourcis std de Spip.
-// ATTENTION: cette barre injecte un script JS que le squelette doit accepter
-// donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
-
-// http://doc.spip.org/@barre_textarea
-function barre_textarea($texte, $rows, $cols, $lang='') {
-	static $num_textarea = 0;
-	include_spip('inc/layer'); // definit browser_barre
-
-	$texte = entites_html($texte);
-	if (!$GLOBALS['browser_barre'])
-		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
-
-	$num_textarea++;
-	include_spip('inc/barre');
-	return afficher_barre("document.getElementById('textarea_$num_textarea')", true, $lang) .
-	  "
-<textarea name='texte' rows='$rows' class='forml' cols='$cols'
-id='textarea_$num_textarea'
-onselect='storeCaret(this);'
-onclick='storeCaret(this);'
-onkeyup='storeCaret(this);'
-ondblclick='storeCaret(this);'>$texte</textarea>";
-}
-
 // comme in_array mais renvoie son 3e arg si le 2er arg n'est pas un tableau
 // prend ' ' comme representant de vrai et '' de faux
 
