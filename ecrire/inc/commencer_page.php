@@ -93,7 +93,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	if ($spip_display == "4") {
 		$res .= "<ul>"
-		. "\n<li><a href='./'>"._T('icone_a_suivre')."</a></li>"
+		. "\n<li><a href='" . generer_url_ecrire() ."'>"._T('icone_a_suivre')."</a></li>"
 		. "\n<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a></li>"
 		. "\n<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a></li>"
 		. "\n<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a></li>"

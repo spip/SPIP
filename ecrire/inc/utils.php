@@ -756,16 +756,12 @@ function url_de_base() {
 // http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
 // http://doc.spip.org/@generer_url_ecrire
-function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
+function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false) {
 	if (!$rel)
-		$rel = url_de_base() . _DIR_RESTREINT_ABS;
+		$rel = url_de_base() . _DIR_RESTREINT_ABS . _SPIP_ECRIRE_SCRIPT;
 	else if (!is_string($rel))
-		$rel = _DIR_RESTREINT ? _DIR_RESTREINT : './';
-
-	// Les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
-	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
-	if (preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']))
-		$rel .= 'index.php';
+		$rel = _DIR_RESTREINT ? _DIR_RESTREINT :
+			('./'  . _SPIP_ECRIRE_SCRIPT);
 
 	if ($script AND $script<>'accueil') 
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
@@ -1002,8 +998,17 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	       "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Frameset//EN' 'http://www.w3.org/TR/1999/REC-html401-19991224/frameset.dtd'>");
 
 	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
-	// le script index.php
+	// le script de l'espace public, alias  index.php
 	define('_SPIP_SCRIPT', 'spip.php');
+
+	// le script de l'espace prive
+	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
+	// les anciens IIS n'acceptent pas les POST sur ecrire/ (#419)
+	// meme pb sur thttpd cf. http://forum.spip.org/fr_184153.html
+
+	define('_SPIP_ECRIRE_SCRIPT', // true ? #decommenter ici et commenter la
+	       preg_match(',IIS|thttpd,',$_SERVER['SERVER_SOFTWARE']) ?
+	       'index.php' : '');
 
 	// le nom du repertoire plugins/
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");

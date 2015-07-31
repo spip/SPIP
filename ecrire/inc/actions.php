@@ -274,13 +274,14 @@ function verifier_php_auth() {
 function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
-	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
+	$ici = generer_url_ecrire();
+	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
 	if ($url) {
 		echo "[<a href='", generer_url_public('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
 	}
 	
 	if ($lien)
-		echo " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
+		echo " [<a href='$ici'>"._T('login_espace_prive')."</a>]";
 	exit;
 }
 

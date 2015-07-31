@@ -52,8 +52,7 @@ function login_explicite($login, $cible) {
 	} else {
 		if (preg_match(",[?&]url=([^&]*),", $action, $m))
 			$cible = rawurldecode($m[1]);
-		else
-			$cible = _DIR_RESTREINT ;
+		else $cible = generer_url_ecrire();
 	}
 
 	verifier_visiteur();
