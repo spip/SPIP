@@ -105,6 +105,8 @@ function base_trouver_table_dist($nom, $serveur=''){
 		$desc['table']= $nom_sql;
 		$desc['id_table']= $nom;
 		$desc['connexion']= $serveur;
+		$desc['titre'] = isset($GLOBALS['table_titre'][$nom])
+		? $GLOBALS['table_titre'][$nom] : '';
 		$connexion['tables'][$nom_sql] = $desc;
 		// une nouvelle table a ete descrite
 		// mettons donc a jour le cache des descriptions de ce serveur
