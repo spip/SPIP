@@ -314,7 +314,7 @@ function traite_svg($file)
 	// Securite si pas admin : virer les scripts et les references externes
 	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
 	if ($GLOBALS['filtrer_javascript'] < 1
-	AND $GLOBALS['auteur_session']['statut'] != '0minirezo')) {
+	AND $GLOBALS['auteur_session']['statut'] != '0minirezo') {
 		include_spip('inc/texte');
 		$new = trim(safehtml($texte));
 		// petit bug safehtml
