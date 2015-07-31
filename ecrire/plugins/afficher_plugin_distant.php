@@ -112,9 +112,9 @@ function affiche_bloc_plugin_distant($plug_file, $info) {
 
 	if (trim($info['url'])) {
 		$lien = $info['url'];
-		if (preg_match(',^https?://,iS', $lien))
-			$lien = "[->$lien]";
-		$s .= "<div class='site'>" . _T('en_savoir_plus') .' '. propre($lien) . "</div>";
+		if (!preg_match(',^https?://,iS', $lien))
+			$lien = extraire_attribut(extraire_balise($lien,'a'),'href');
+		$s .= "<div class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></div>';
 	}
 
 	//

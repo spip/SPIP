@@ -198,6 +198,8 @@ function action_charger_plugin_dist() {
 	else{
 		$redirect_annul = $redirect;
 		$redirect_form = preg_replace(',^.*exec\=,', '', $redirect);
+		if (!$suite)
+			$texte .= form_hidden(parametre_url(generer_url_ecrire($redirect_form), $type,preg_replace(',^[^/]+/|/$,', '', $status['dirname'])));
 		$redirect_action = $redirect_form;
 	}
 	echo minipres($retour." ",
