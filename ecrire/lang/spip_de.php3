@@ -263,8 +263,8 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'forum_voir_avant' => 'Nachricht vor Ver&ouml;ffentlichung ansehen',
 'forum_votre_email' => 'Ihr E-Mail Adresse:',
 'forum_votre_nom' => 'Ihr Name (oder Pseudonym) :',
-'forum_vous_enregistrer' => 'Um an diesem Forum teilnehmen zu k&ouml;nnen, m&uuml;ssen Sie sich anmelden. Bitte tragen Sie weiter unten die Zugangsdaten ein, die Sie per Mail erhalten haben. Wenn Sie noch nicht angemeldet sind, m&uuml;ssen Sie',
-'forum_vous_inscrire' => 'hier Ihre Zugangsdaten anfordern</a>.',
+'forum_vous_enregistrer' => 'Um an diesem Forum teilnehmen zu k&ouml;nnen, m&uuml;ssen Sie sich anmelden. Bitte tragen Sie weiter unten die Zugangsdaten ein, die Sie per Mail erhalten haben. Wenn Sie noch nicht angemeldet sind, k&ouml;nnen Sie sich',
+'forum_vous_inscrire' => 'online anmelden.',
 
 
 // I

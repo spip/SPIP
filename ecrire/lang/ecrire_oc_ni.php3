@@ -993,6 +993,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_sites_tous' => 'Lu sits referen&ccedil;ats',
 'titre_suivi_petition' => 'Seguit dei peticions',
 'titre_syndication' => 'Sindicacion dei sits',
+'tout_dossier_upload' => 'Tot lo dorsier @upload@',
 'trad_article_inexistant' => 'I a minga d\'article que p&ograve;rten aqueu n&uacute;mero.',
 'trad_article_traduction' => 'Toti li versions d\'aquel article&nbsp;:',
 'trad_deja_traduit' => 'Aquel article es ja una revirada dau present article.',

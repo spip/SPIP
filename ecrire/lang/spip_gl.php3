@@ -537,7 +537,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
 'login_acces_prive' => 'acceso &oacute; espazo privado',
-'login_autre_identifiant' => 'conectar.se baixo outro identificador',
+'login_autre_identifiant' => 'conectarse con outro identificador',
 'login_connexion_refusee' => 'Conexi&oacute;n rexeitada.',
 'login_cookie_accepte' => 'Axusta o teu navegador para que as acepte (a.lo menos para este lugar).',
 'login_cookie_oblige' => 'Para indentificar.te dun xeito seguro neste lugar, tes que aceptar as cookies.',

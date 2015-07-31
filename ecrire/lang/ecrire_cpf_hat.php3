@@ -1030,6 +1030,7 @@ ou nan d&eacute;krisyon atik sa-yo
 'titre_sites_tous' => 'Tout sit referanse andan sit la',
 'titre_suivi_petition' => 'Swiv tout petisyon yo',
 'titre_syndication' => 'Sendikasyon pou tout sit yo',
+'tout_dossier_upload' => 'Dosy&eacute;-a tout anty&eacute; @upload@',
 'trad_article_inexistant' => 'Okenn atik gen pa nimewo-a.',
 'trad_article_traduction' => 'Tout versyon pou atik la&nbsp;:',
 'trad_deja_traduit' => 'Atik sa a se deja tradiksyon pou prezan atik la.',

@@ -1035,6 +1035,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_sites_tous' => '&#21442;&#32771;&#31449;&#28857;',
 'titre_suivi_petition' => '&#36319;&#36394;&#35831;&#27714;',
 'titre_syndication' => '&#31449;&#28857;&#32852;&#21512;',
+'tout_dossier_upload' => '<NEW>Tout le dossier @upload@',
 'trad_article_inexistant' => '&#27809;&#26377;&#25991;&#31456;&#20026;&#35813;&#21495;',
 'trad_article_traduction' => '&#36825;&#31687;&#25991;&#31456;&#30340;&#25152;&#26377;&#29256;&#26412;:',
 'trad_deja_traduit' => '&#35813;&#25991;&#26159;&#19968;&#31687;&#35793;&#25991;',

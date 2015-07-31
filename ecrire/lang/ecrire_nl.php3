@@ -1035,6 +1035,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_sites_tous' => 'Gekoppelde sites',
 'titre_suivi_petition' => 'Vervolg van de petities',
 'titre_syndication' => 'Syndicatie van websites',
+'tout_dossier_upload' => 'Alles in de map @upload@',
 'trad_article_inexistant' => 'Er is geen artikel met dit nummer.',
 'trad_article_traduction' => 'Alle versies van dit artikel:',
 'trad_deja_traduit' => 'Dit artikel is reeds een vertaling van het aanwezige artikel.',
