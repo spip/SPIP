@@ -372,7 +372,7 @@ function textebrut($texte) {
 // Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
 // http://doc.spip.org/@liens_ouvrants
 function liens_ouvrants ($texte) {
-	return ereg_replace("<a ([^>]*https?://[^>]*class=\"spip_(out|url)\b[^>]+)>",
+	return preg_replace(",<a ([^>]*https?://[^>]*class=\"spip_(out|url)\b[^>]+)>,",
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
