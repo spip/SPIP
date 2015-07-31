@@ -2378,6 +2378,7 @@ function balise_AIDER_dist($p) {
  * l'URL d'action
  *
  * @balise ACTION_FORMULAIRE
+ * @see form_hidden()
  * @example
  *     ```
  *     <form method='post' action='#ENV{action}'><div>

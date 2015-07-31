@@ -1997,31 +1997,117 @@ function tester_config($dummy, $mode='') {
 //
 // Quelques fonctions de calcul arithmetique
 //
-// http://doc.spip.org/@plus
+
+/**
+ * Additionne 2 nombres
+ * 
+ * @filtre plus
+ * @link http://www.spip.net/4307
+ * @see moins()
+ * @example
+ *     ```
+ *     [(#VAL{28}|plus{14})]
+ *     ```
+ * 
+ * @param int $a
+ * @param int $b
+ * @return int $a+$b
+**/
 function plus($a,$b) {
 	return $a+$b;
 }
-// http://doc.spip.org/@moins
+
+/**
+ * Soustrait 2 nombres
+ * 
+ * @filtre moins
+ * @link http://www.spip.net/4302
+ * @see plus()
+ * @example
+ *     ```
+ *     [(#VAL{28}|moins{14})]
+ *     ```
+ * 
+ * @param int $a
+ * @param int $b
+ * @return int $a-$b
+**/
 function moins($a,$b) {
 	return $a-$b;
 }
-// http://doc.spip.org/@mult
+
+/**
+ * Multiplie 2 nombres
+ * 
+ * @filtre mult
+ * @link http://www.spip.net/4304
+ * @see div()
+ * @see modulo()
+ * @example
+ *     ```
+ *     [(#VAL{28}|mult{14})]
+ *     ```
+ * 
+ * @param int $a
+ * @param int $b
+ * @return int $a*$b
+**/
 function mult($a,$b) {
 	return $a*$b;
 }
-// http://doc.spip.org/@div
+
+/**
+ * Divise 2 nombres
+ *
+ * @filtre div
+ * @link http://www.spip.net/4279
+ * @see mult()
+ * @see modulo()
+ * @example
+ *     ```
+ *     [(#VAL{28}|div{14})]
+ *     ```
+ * 
+ * @param int $a
+ * @param int $b
+ * @return int $a/$b (ou 0 si $b est nul)
+**/
 function div($a,$b) {
 	return $b?$a/$b:0;
 }
-// http://doc.spip.org/@modulo
+
+/**
+ * Retourne le modulo 2 nombres
+ *
+ * @filtre modulo
+ * @link http://www.spip.net/4301
+ * @see mult()
+ * @see div()
+ * @example
+ *     ```
+ *     [(#VAL{28}|modulo{14})]
+ *     ```
+ * 
+ * @param int $nb
+ * @param int $mod
+ * @param int $add
+ * @return int ($nb % $mod) + $add
+**/
 function modulo($nb, $mod, $add=0) {
 	return ($mod?$nb%$mod:0)+$add;
 }
 
 
-// Verifier la conformite d'une ou plusieurs adresses email
-//  retourne false ou la  normalisation de la derniere adresse donnee
-// http://doc.spip.org/@email_valide
+
+/**
+ * Vérifier la conformité d'une ou plusieurs adresses email (suivant RFC 822)
+ *
+ * @param string $adresses
+ *      Adresse ou liste d'adresse
+ * @return bool|string
+ *      - false si pas conforme,
+ *      - la normalisation de la dernière adresse donnée sinon
+**/
 function email_valide($adresses) {
 	// eviter d'injecter n'importe quoi dans preg_match
 	if (!is_string($adresses))
@@ -2044,7 +2130,16 @@ function email_valide($adresses) {
 	return $adresse;
 }
 
-// http://doc.spip.org/@afficher_enclosures
+/**
+ * Permet d'afficher un symbole à côté des liens pointant vers les
+ * documents attachés d'un article (liens ayant `rel=enclosure`).
+ *
+ * @filtre afficher_enclosures
+ * @link http://www.spip.net/4134
+ * 
+ * @param string $tags Texte
+ * @return string Texte
+**/
 function afficher_enclosures($tags) {
 	$s = array();
 	foreach (extraire_balises($tags, 'a') as $tag) {
@@ -2059,7 +2154,18 @@ function afficher_enclosures($tags) {
 	}
 	return join('&nbsp;', $s);
 }
-// http://doc.spip.org/@afficher_tags
+
+/**
+ * Filtre des liens HTML `<a>` selon la valeur de leur attribut `rel`
+ * et ne retourne que ceux là.
+ *
+ * @filtre afficher_tags
+ * @link http://www.spip.net/4187
+ * 
+ * @param string $tags Texte
+ * @param string $rels Attribut `rel` à capturer (ou plusieurs séparés par des virgules)
+ * @return string Liens trouvés
+**/
 function afficher_tags($tags, $rels='tag,directory') {
 	$s = array();
 	foreach (extraire_balises($tags, 'a') as $tag) {
@@ -2070,10 +2176,22 @@ function afficher_tags($tags, $rels='tag,directory') {
 	return join(', ', $s);
 }
 
-// Passe un <enclosure url="fichier" length="5588242" type="audio/mpeg"/>
-// au format microformat <a rel="enclosure" href="fichier" ...>fichier</a>
-// attention length="zz" devient title="zz", pour rester conforme
-// http://doc.spip.org/@enclosure2microformat
+
+/**
+ * Convertir les médias fournis par un flux RSS (podcasts)
+ * en liens conformes aux microformats
+ *
+ * Passe un `<enclosure url="fichier" length="5588242" type="audio/mpeg"/>`
+ * au format microformat `<a rel="enclosure" href="fichier" ...>fichier</a>`.
+ *
+ * Attention : `length="zz"` devient `title="zz"`, pour rester conforme.
+ * 
+ * @filtre enclosure2microformat
+ * @see microformat2enclosure() Pour l'inverse
+ * 
+ * @param string $e Tag RSS `<enclosure>`
+ * @return string Tag HTML `<a>` avec microformat.
+**/
 function enclosure2microformat($e) {
 	if (!$url = filtrer_entites(extraire_attribut($e, 'url')))
 		$url = filtrer_entites(extraire_attribut($e, 'href'));
@@ -2086,8 +2204,21 @@ function enclosure2microformat($e) {
 		. ($length? ' title="'.htmlspecialchars($length).'"' : '')
 		. '>'.$fichier.'</a>';
 }
-// La fonction inverse
-// http://doc.spip.org/@microformat2enclosure
+
+/**
+ * Convertir les liens conformes aux microformats en médias pour flux RSS,
+ * par exemple pour les podcasts
+ *
+ * Passe un texte ayant des liens avec microformat
+ * `<a rel="enclosure" href="fichier" ...>fichier</a>`
+ * au format RSS `<enclosure url="fichier" ... />`.
+ * 
+ * @filtre microformat2enclosure
+ * @see enclosure2microformat() Pour l'inverse
+ * 
+ * @param string $tags Texte HTML ayant des tag `<a>` avec microformat
+ * @return string Tags RSS `<enclosure>`.
+**/
 function microformat2enclosure($tags) {
 	$enclosures = array();
 	foreach (extraire_balises($tags, 'a') as $e)
@@ -2105,8 +2236,19 @@ function microformat2enclosure($tags) {
 	}
 	return join("\n", $enclosures);
 }
-// Creer les elements ATOM <dc:subject> a partir des tags
-// http://doc.spip.org/@tags2dcsubject
+
+
+/**
+ * Créer les éléments ATOM `<dc:subject>` à partir des tags
+ *
+ * Convertit les liens avec attribut `rel="tag"`
+ * en balise `<dc:subject></dc:subject>` pour les flux RSS au format Atom.
+ *
+ * @filtre tags2dcsubject
+ * 
+ * @param string $tags Texte 
+ * @return string Tags RSS Atom `<dc:subject>`.
+**/
 function tags2dcsubject($tags) {
 	$subjects = '';
 	foreach (extraire_balises($tags, 'a') as $e) {
@@ -2225,10 +2367,25 @@ function regledetrois($a,$b,$c)
   return round($a*$b/$c);
 }
 
-// Fournit la suite de Input-Hidden correspondant aux parametres de
-// l'URL donnee en argument, compatible avec les types_urls depuis [14447].
-// cf. tests/filtres/form_hidden.html
-// http://doc.spip.org/@form_hidden
+
+/**
+ * Crée des tags HTML input hidden pour chaque paramètre et valeur d'une URL
+ *
+ * Fournit la suite de Input-Hidden correspondant aux paramètres de
+ * l'URL donnée en argument, compatible avec les types_urls
+ * 
+ * @filtre form_hidden
+ * @link http://www.spip.net/4286
+ * @see balise_ACTION_FORMULAIRE()
+ *     Également pour transmettre les actions à un formulaire
+ * @example
+ *     ```
+ *     [(#ENV{action}|form_hidden)] dans un formulaire
+ *     ```
+ *
+ * @param string $action URL
+ * @return string Suite de champs input hidden
+**/
 function form_hidden($action) {
 
 	$contexte = array();
@@ -2568,24 +2725,28 @@ function url_absolue_css ($css) {
 
 
 /**
- * Le filtre table_valeur
- * permet de recuperer la valeur d'une cle donnee
+ * Récupère la valeur d'une clé donnée
  * dans un tableau (ou un objet).
+ *
+ * @filtre table_valeur
+ * @link http://www.spip.net/4572
+ * @example
+ *     ```
+ *     [(#VALEUR|table_valeur{cle/sous/element})]
+ *     ```
  * 
  * @param mixed $table
- * 		Tableau ou objet
- * 		(ou chaine serialisee de tableau, ce qui permet d'enchainer le filtre)
- * 		
+ *     Tableau ou objet PHP
+ *     (ou chaîne serialisée de tableau, ce qui permet d'enchaîner le filtre)
  * @param string $cle
- * 		Cle du tableau (ou parametre public de l'objet)
- * 		Cette cle peut contenir des caracteres / pour selectionner
- * 		des sous elements dans le tableau, tel que "sous/element/ici"
- * 		pour obtenir la valeur de $tableau['sous']['element']['ici']
- *
+ *     Clé du tableau (ou paramètre public de l'objet)
+ *     Cette clé peut contenir des caractères / pour sélectionner
+ *     des sous éléments dans le tableau, tel que `sous/element/ici`
+ *     pour obtenir la valeur de `$tableau['sous']['element']['ici']`
  * @param mixed $defaut
- * 		Valeur par defaut retournee si la cle demandee n'existe pas
- * 
- * @return mixed Valeur trouvee ou valeur par defaut.
+ *     Valeur par defaut retournée si la clé demandée n'existe pas
+ * @return mixed
+ *     Valeur trouvée ou valeur par défaut.
 **/
 function table_valeur($table, $cle, $defaut='') {
 	foreach (explode('/', $cle) as $k) {

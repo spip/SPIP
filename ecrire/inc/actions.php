@@ -55,7 +55,7 @@ function generer_action_auteur($action, $arg, $redirect = "", $mode = false, $at
  * @api
  * @param string $action
  *     Nom du fichier action/xx.php
- * @param string $args
+ * @param string $arg
  *     Argument passé à l'action, qui sera récupéré par la fonction
  *     `securiser_action()`
  * @param string $ret
