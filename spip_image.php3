@@ -281,8 +281,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if (creer_repertoire('IMG', $ext))
 		$dest .= $ext.'/';
 	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_",
-	nettoyer_chaine_indexation(ereg_replace("\.([^.]+)$", "",
-	basename($orig))));
+	nettoyer_chaine_indexation(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
 	$n = 0;
 	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 	$dest_path = $newFile;

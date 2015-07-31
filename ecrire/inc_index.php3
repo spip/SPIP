@@ -7,8 +7,7 @@ define("_ECRIRE_INC_INDEX", "1");
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
-	$texte = strtolower(translitteration($texte));
-	return $texte;
+	return strtolower(translitteration($texte));
 }
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
@@ -27,16 +26,23 @@ function spip_split($reg, $texte) {
 
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
+	global $indexer_ogm;
 
-	$texte = supprimer_tags($texte);
+	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';	// supprimer_tags()
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, "                                                           ");
-	$table = spip_split(" +([^ ]{0,$min_long} +)*", ' '.$texte);
+
+	$table = spip_split(" +", $texte);
 	while (list(, $mot) = each($table)) {
-		$mot = nettoyer_chaine_indexation($mot);
-		$h = substr(md5($mot), 0, 16);
-		$index[$h] += $val;
-		$mots .= ",(0x$h,'$mot')";
+		if ($mot2 = nettoyer_chaine_indexation($mot)) {
+			if ((strlen($mot2) > $min_long)
+			|| ($indexer_ogm && ereg("[A-Z][A-Z][A-Z]",$mot) && $mot2=strtolower($mot).'_'))
+			{
+				$h = substr(md5($mot2), 0, 16);
+				$index[$h] += $val;
+				$mots .= ",(0x$h,'$mot2')";
+			}
+		}
 	}
 }
 
@@ -273,12 +279,16 @@ function requete_txt_integral($objet, $hash_recherche) {
 
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
+	$min_long = 3;
 	$s = nettoyer_chaine_indexation(urldecode($rech)); 
 	$regs = separateurs_indexation()." "; 
 	$s = split("[$regs]+", $s); 
 	while (list(, $val) = each($s))
-		if (strlen($val) > 3)
-			$dico[] = "dico LIKE \"$val%\""; 
+		if (strlen($val) > $min_long)
+			$dico[] = "dico LIKE '$val%'"; 
+		else if (strlen($val) == $min_long) {
+			$dico[] = "dico = '".$val."_'";
+		}
 	if ($dico) {
 		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 		$result2 = spip_query($query2);

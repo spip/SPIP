@@ -61,7 +61,7 @@
 	<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
 	[<div class="surtitre">(#SOUSTITRE)</div>]
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	<B_auteurs_un>par <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
@@ -73,7 +73,7 @@
 	[(#LOGO_BREVE|right)]
 	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[Le (#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
 	<br>
@@ -83,7 +83,7 @@
 	En r&eacute;ponse au message&nbsp;:
 	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[Le (#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
 	<br>

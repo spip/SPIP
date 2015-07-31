@@ -172,7 +172,7 @@
 <BOUCLE_articles(ARTICLES) {id_mot} {par titre}>
 	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	<B_auteurs>par <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs>
 	</div>
 	<br>
