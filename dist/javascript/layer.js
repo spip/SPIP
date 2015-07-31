@@ -262,11 +262,12 @@ function AjaxSqueezeNode(trig, target, f, event)
 	else {
     callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
   }
-	valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
 
-  valid = false;
-  if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined')
-		valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+	valid = false;
+	if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined'){
+		if (!(navigator.userAgent.toLowerCase().indexOf("firefox/1.0")))
+			valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+	}
 
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
