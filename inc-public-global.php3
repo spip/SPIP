@@ -338,12 +338,63 @@ if ($use_cache AND file_exists('CACHE/.purge')) {
 if (lire_meta("activer_statistiques") != "non") {
 	if (timeout(false, false))	// no lock, no action
 	{
-		// Conditions declanchant un eventuel calcul des stats
+		// Conditions declenchant un eventuel calcul des stats
 		if ((lire_meta('calculer_referers_now') == 'oui')
 		OR (date("Y-m-d") <> lire_meta("date_statistiques"))
 		OR (time() - lire_meta('date_stats_popularite') > 1800)) {
 			include_local ("inc-stats.php3");
 			archiver_stats();
+		}
+	}
+}
+
+
+//
+// Gerer l'indexation automatique
+//
+
+if (lire_meta('activer_moteur') == 'oui') {
+	$fichier_index = 'ecrire/data/.index';
+	if ($db_ok AND ($id_article OR $id_auteur OR $id_breve OR $id_mot OR $id_rubrique)) {
+		include_ecrire("inc_index.php3");
+		$s = '';
+		if ($id_article AND !deja_indexe('article', $id_article))
+			$s .= "article $id_article\n";
+		if ($id_auteur AND !deja_indexe('auteur', $id_auteur))
+			$s .= "auteur $id_auteur\n";
+		if ($id_breve AND !deja_indexe('breve', $id_breve))
+			$s .= "breve $id_breve\n";
+		if ($id_mot AND !deja_indexe('mot', $id_mot))
+			$s .= "mot $id_mot\n";
+		if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
+			$s .= "rubrique $id_rubrique\n";
+		if ($s) {
+			if ($f = @fopen($fichier_index, 'a')) {
+				fputs($f, $s);
+				fclose($f);
+			}
+		}
+	}
+	if ($use_cache AND file_exists($fichier_index)) {
+		if (timeout('indexation')) {
+			include_ecrire("inc_index.php3");
+			effectuer_une_indexation();
+		}
+	}
+}
+
+
+//
+// Mise a jour d'un (ou de zero) site syndique
+//
+
+if ($db_ok AND lire_meta("activer_syndic") == "oui") {
+	if (timeout()) {
+		include_ecrire("inc_sites.php3");
+		executer_une_syndication();
+		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire("inc_index.php3");
+			executer_une_indexation_syndic();
 		}
 	}
 }
@@ -376,70 +427,6 @@ if (file_exists($fichier_poubelle = "ecrire/data/.poubelle")) {
 			}
 		}
 		else @unlink($fichier_poubelle);
-	}
-}
-
-
-//
-// Gerer l'indexation automatique
-//
-
-if (lire_meta('activer_moteur') == 'oui') {
-	$fichier_index = 'ecrire/data/.index';
-	if ($db_ok) {
-		include_ecrire("inc_index.php3");
-		$s = '';
-		if ($id_article AND !deja_indexe('article', $id_article))
-			$s .= "article $id_article\n";
-		if ($id_auteur AND !deja_indexe('auteur', $id_auteur))
-			$s .= "auteur $id_auteur\n";
-		if ($id_breve AND !deja_indexe('breve', $id_breve))
-			$s .= "breve $id_breve\n";
-		if ($id_mot AND !deja_indexe('mot', $id_mot))
-			$s .= "mot $id_mot\n";
-		if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
-			$s .= "rubrique $id_rubrique\n";
-		if ($s) {
-			if ($f = @fopen($fichier_index, 'a')) {
-				fputs($f, $s);
-				fclose($f);
-			}
-		}
-	}
-	if ($use_cache AND file_exists($fichier_index)) {
-		if (timeout('indexation')) {
-			if ($s = sizeof($suite = file($fichier_index))) {
-				include_ecrire("inc_texte.php3");
-				include_ecrire("inc_filtres.php3");
-				include_ecrire("inc_index.php3");
-				$s = $suite[$n = rand(0, $s)];
-				unset($suite[$n]);
-				$f = fopen($fichier_index, 'wb');
-				fwrite($f, join("", $suite));
-				fclose($f);
-				$s = explode(' ', trim($s));
-				indexer_objet($s[0], $s[1], $s[2]);
-			}
-			else @unlink($fichier_index);
-		}
-	}
-}
-
-
-//
-// Mise a jour d'un (ou de zero) site syndique
-//
-
-if ($db_ok AND lire_meta("activer_syndic") != "non") {
-	if (timeout()) {
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_filtres.php3");
-		include_ecrire("inc_sites.php3");
-		include_ecrire("inc_index.php3");
-
-		executer_une_syndication();
-		if (lire_meta('activer_moteur') == 'oui' AND timeout())
-			executer_une_indexation_syndic();
 	}
 }
 
