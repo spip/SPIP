@@ -173,6 +173,9 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	$spip_mysql_db = $db;
 	$ok = @mysql_select_db($db);
 
+	if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
+		mysql_query("set sql_mode=''");
+
 	$GLOBALS['db_ok'] = $ok
 	AND !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));
 
