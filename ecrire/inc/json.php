@@ -73,7 +73,7 @@ function json_export($var) {
 	// flag indiquant qu'on est en iframe et qu'il faut proteger nos
 	// donnees dans un <textarea> ; attention $_FILES a ete vide par array_pop
 	if (defined('FILE_UPLOAD'))
-		return "<textarea>".htmlspecialchars($var)."</textarea>";
+		return "<textarea>".spip_htmlspecialchars($var)."</textarea>";
 	else
 		return $var;
 }

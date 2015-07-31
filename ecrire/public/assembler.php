@@ -102,7 +102,7 @@ function assembler($fond, $connect='') {
 			$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 			if ($page === '') {
 				$erreur = _T('info_erreur_squelette2',
-					array('fichier'=>htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES));
+					array('fichier'=>spip_htmlspecialchars($fond).'.'._EXTENSION_SQUELETTES));
 				erreur_squelette($erreur);
 				// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
 				$page = array('texte' => '', 'erreur' => $erreur);

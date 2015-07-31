@@ -102,7 +102,7 @@ function echappe_js($t,$class=' class="echappe-js"') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
 		$t = str_replace($regs[0],
-			"<code$class>".nl2br(htmlspecialchars($regs[0])).'</code>',
+			"<code$class>".nl2br(spip_htmlspecialchars($regs[0])).'</code>',
 			$t);
 	return $t;
 }

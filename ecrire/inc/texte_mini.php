@@ -111,7 +111,7 @@ function traiter_echap_html_dist($regs) {
 // http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	list(,,$att,$corps) = $regs;
-	$echap = htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
+	$echap = spip_htmlspecialchars($corps); // il ne faut pas passer dans entites_html, ne pas transformer les &#xxx; du code !
 
 	// ne pas mettre le <div...> s'il n'y a qu'une ligne
 	if (is_int(strpos($echap,"\n"))) {
@@ -225,7 +225,7 @@ $preg='') {
 // http://doc.spip.org/@echappe_retour
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
-		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
+		# spip_log(spip_htmlspecialchars($letexte));  ## pour les curieux
 		if (strpos($letexte,"<")!==false AND
 		  preg_match_all(',<(span|div)\sclass=[\'"]base64'.$source.'[\'"]\s(.*)>\s*</\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {

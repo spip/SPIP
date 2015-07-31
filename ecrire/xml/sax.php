@@ -25,7 +25,7 @@ function xml_entites_html($texte){
 	OR strpbrk($texte, "&\"'<>")==false
 	) return $texte;
 
-	$texte = htmlspecialchars($texte,ENT_QUOTES);
+	$texte = spip_htmlspecialchars($texte,ENT_QUOTES);
 	return $texte;
 }
 

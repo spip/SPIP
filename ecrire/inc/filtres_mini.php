@@ -184,5 +184,22 @@ function abs_url($texte, $base='') {
 		return liens_absolus($texte, $base);
 }
 
+/**
+* htmlspecialchars wrapper (PHP >= 5.4 compat issue)
+*
+* @param string $string
+* @param int $flags
+* @param string $encoding
+* @param bool $double_encode
+* @return string
+*/
+function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){
+	if (is_null($flags)) $flags = ENT_COMPAT|ENT_HTML401;
+
+	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
+		return htmlspecialchars($string,$flags,$encoding);
+	else
+		return htmlspecialchars($string,$flags,$encoding,$double_encode);
+}
 
 ?>
