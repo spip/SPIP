@@ -171,6 +171,7 @@ function statistiques_signatures($aff_jours, $id_article, $serveur)
 	. $mois));
 }
 
+// http://doc.spip.org/@statistiques_forums
 function statistiques_forums($aff_jours, $id_article, $serveur)
 {
 

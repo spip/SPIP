@@ -62,6 +62,7 @@ function affiche_navigation_forum(&$query, $script, $args, $debut, $pas=NULL, $e
 	return $nav;
 }
 
+// http://doc.spip.org/@navigation_trouve_date
 function navigation_trouve_date($date, $nom_date, $pas, $query)
 {
 	$debut = 0;
