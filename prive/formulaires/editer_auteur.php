@@ -44,7 +44,7 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 		AND $p !== sql_getfetsel("login", "spip_auteurs", "id_auteur=" . sql_quote($id_auteur))) {
 			$erreurs['login'] = _T('info_login_trop_court');
 			$erreurs['message_erreur'] .= _T('info_login_trop_court');
-		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=" . sql_quote($id_auteur) . " AND statut!='5poubelle'")) {
+		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=" . intval($id_auteur) . " AND statut!='5poubelle'")) {
 			$erreurs['new_login'] .= _T('info_login_existant');
 			$erreurs['message_erreur'] .= _T('info_login_existant');
 		}
