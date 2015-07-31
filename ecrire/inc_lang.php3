@@ -207,6 +207,7 @@ function traduire_nom_langue($lang) {
 	'en' => "English",
 	'eo' => "Esperanto",
 	'es' => "Espa&#241;ol",
+	'es_co' => "Colombiano",
 	'et' => "eesti",
 	'eu' => "euskara",
 	'fa' => "&#1601;&#1575;&#1585;&#1587;&#1609;",
