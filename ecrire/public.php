@@ -145,7 +145,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	}
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
-	$debug = (_request('var_mode') == 'debug') OR $tableau_des_temps;
+	// type tableau pour y mettre des choses au besoin.
+	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
 	$affiche_boutons_admin = (
 		isset($_COOKIE['spip_admin'])
@@ -220,8 +221,6 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
  	}
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
-
-	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps AND isset($_COOKIE['spip_admin'])  AND !$flag_preserver);
 
 	if ($debug) {
 		if ($affiche_boutons_admin) {
