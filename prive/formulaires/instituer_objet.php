@@ -138,6 +138,8 @@ function formulaires_instituer_objet_traiter_dist($objet,$id_objet,$retour=""){
 		$res = array('message_ok'=>_T('info_modification_enregistree'));
 		if ($retour)
 			$res['redirect'] = $retour;
+		set_request('statut');
+		set_request('date_posterieure');
 	}
 
 	return $res;
