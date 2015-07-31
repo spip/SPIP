@@ -671,8 +671,8 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      _DIR_IMG_PACK . $img .
-		      "', '$statut', '" .
-		      generer_url_ecrire('iframe_action') .
+		      "', '" .
+		       generer_url_ecrire('iframe_action', "action=$type"."s&id=$id&statut=$statut",false,true) .
 		      "');",
 		      $img,
 			"title=\"".$title."\"",
