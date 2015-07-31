@@ -207,6 +207,7 @@ function autoriser_modererforum_dist($faire, $type, $id, $qui, $opt) {
 
 // Modifier un forum ?
 // = jamais !
+// http://doc.spip.org/@autoriser_forum_modifier_dist
 function autoriser_forum_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		false;
@@ -214,6 +215,7 @@ function autoriser_forum_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 // Modifier une signature ?
 // = jamais !
+// http://doc.spip.org/@autoriser_signature_modifier_dist
 function autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		false;
