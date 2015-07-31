@@ -74,23 +74,10 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 }
 
 
-function controler_forum($id_article, $retour) {
+function controler_forum_abo($retour)
+{
 	global $auteur_session;
-
-	// Reglage forums d'article
-	if ($id_article) {
-		$q = spip_query("SELECT accepter_forum FROM spip_articles
-			WHERE id_article=$id_article");
-		if ($r = spip_fetch_array($q))
-			$forums_publics = $r['accepter_forum'];
-	}
-
-	// Valeur par defaut
-	if (!$forums_publics)
-		$forums_publics = substr($GLOBALS['meta']["forums_publics"],0,3);
-
-	if ($forums_publics == "abo") {
-		if ($auteur_session) {
+	if ($auteur_session) {
 			$statut = $auteur_session['statut'];
 			if (!$statut OR $statut == '5poubelle') {
 				ask_php_auth(_T('forum_acces_refuse'),
@@ -98,15 +85,28 @@ function controler_forum($id_article, $retour) {
 						array('retour_forum' => $retour)));
 				exit;
 			}
-		} else {
+	} else {
 			ask_php_auth(_T('forum_non_inscrit'),
 				     _T('forum_cliquer_retour',
 					array('retour_forum' => $retour)));
 			exit;
 		}
+}
+
+function controler_forum($id) {
+
+	// Reglage forums d'article
+	if ($id) {
+		$q = spip_query("SELECT accepter_forum FROM spip_articles
+			WHERE id_article=$id");
+		if ($r = spip_fetch_array($q))
+			$id = $r['accepter_forum'];
 	}
 
-	return $forums_publics;
+	// Valeur par defaut
+	return $id ? $id: substr($GLOBALS['meta']["forums_publics"],0,3);
+
+
 }
 
 function mots_du_forum($ajouter_mot, $id_message)
@@ -117,21 +117,50 @@ function mots_du_forum($ajouter_mot, $id_message)
 				VALUES ($id_mot, $id_message)");
 }
 
+// Recalcule la signature faite dans formulaires/inc-formulaire-forum
+// en fonction des input POST (ne pas se fier aux parametres d'URL)
+// Retourne le fichier verrouillant si correct
+
+function forum_insert_secure($alea, $hash)
+{
+	include_spip('inc/session');
+
+	$ids = array();
+
+	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
+		$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
+	}
+
+	if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
+		$hash)) {
+		spip_log('erreur hash forum');
+		die (_T('forum_titre_erreur')); 	# echec du POST
+	}
+
+	$file = _DIR_SESSIONS ."forum_" . preg_replace('/[^0-9]/', '', $alea) .".lck";
+	return  file_exists($file) ? $file : '';
+}
+
+function reduce_strlen($n, $c) 
+{
+  return $n - strlen($c);
+}
+
 function inc_forum_insert_dist() {
 
 	  // Ne pas se laisser polluer par les pollueurs de globales
-	$id_article = _request('id_article');
-	$id_breve = _request('id_breve');
-	$id_forum = _request('id_forum');
-	$id_rubrique = _request('id_rubrique');
-	$id_syndic = _request('id_syndic');
+	$id_article = intval(_request('id_article'));
+	$id_breve = intval(_request('id_breve'));
+	$id_forum = intval(_request('id_forum'));
+	$id_rubrique = intval(_request('id_rubrique'));
+	$id_syndic = intval(_request('id_syndic'));
+	$id_auteur = intval(_request('id_auteur'));
 	$afficher_texte = _request('afficher_texte');
 	$ajouter_mot = _request('ajouter_mot');
 	$alea = _request('alea');
 	$hash = _request('hash');
 	$auteur = _request('auteur');
 	$email_auteur = _request('email_auteur');
-	$id_auteur = _request('id_auteur');
 	$nom_site_forum = _request('nom_site_forum');
 	$retour_forum = _request('retour_forum');
 	$texte = _request('texte');
@@ -145,66 +174,39 @@ function inc_forum_insert_dist() {
 		$retour_forum = self(); # en cas d'echec du post
 		$calculer_retour = true;
 	}
-	// initialisation de l'eventuel visiteur connecte
-	if (!($id_auteur = intval($id_auteur)))
-	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
-	// Verifier hash securite pour les forums avec previsu
-	if ($GLOBALS['afficher_texte'] <> 'non') {
-		include_spip('inc/session');
-
-// Recalcule la signature faite dans formulaires/inc-formulaire-forum
-// en fonction des input POST du formulaire (gaffe a ce qui passe par l'URL)
-		$ids = array();
-
-		foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
-			$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
-		}
-
-		if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
-		$hash)) {
-			spip_log('erreur hash forum');
-			die (_T('forum_titre_erreur')); 	# echec du POST
-		}
-
-		// verifier fichier lock
-		$alea = preg_replace('/[^0-9]/', '', $alea);
-		if (!file_exists($file = _DIR_SESSIONS."forum_$alea.lck"))
-			return $retour_forum; # echec silencieux du POST
-	}
-
-	// securite
-
-	$id_article = intval($id_article);
-	$id_breve = intval($id_breve);
-	$id_forum = intval($id_forum);
-	$id_rubrique = intval($id_rubrique);
-	$id_syndic = intval($id_syndic);
-
-	// id_rubrique est parfois passee pour les articles, on n'en veut pas
-	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
-		$id_rubrique = 0;
-
-	$statut = controler_forum($id_article, $retour_forum);
-
-	// Ne pas autoriser de changement de nom si forum sur abonnement
-	if ($statut == 'abo') {
-		$auteur = $GLOBALS['auteur_session']['nom'];
-		$email_auteur = $GLOBALS['auteur_session']['email'];
-	}
-
-	// trop court ?
-	if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) +
-	strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
+	if (array_reduce($_POST, 'reduce_strlen', (20 * 1024)) < 0) {
 		ask_php_auth(_T('forum_message_trop_long'),
 			_T('forum_cliquer_retour',
 				array('retour_forum' => $retour_forum)));
 		exit;
 	}
 
-	if ($GLOBALS['afficher_texte'] <> 'non') {
-		unlink($file);
+	// Verifier hash securite pour les forums avec previsu
+	if ($afficher_texte <> 'non') {
+		$file = forum_insert_secure($alea, $hash);
+		if (!$file) return $retour_forum; # echec silencieux du POST
 	}
+
+	// id_rubrique est parfois passee pour les articles, on n'en veut pas
+	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+		$id_rubrique = 0;
+
+	// initialisation de l'eventuel visiteur connecte
+	if (!$id_auteur)
+		$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
+
+	$statut = controler_forum($id_article);
+
+	// Ne pas autoriser de changement de nom si forum sur abonnement
+	if ($statut == 'abo') {
+		controler_forum_abo($retour_forum);
+		$auteur = $GLOBALS['auteur_session']['nom'];
+		$email_auteur = $GLOBALS['auteur_session']['email'];
+	}
+
+	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
+						'publie');
 
 	// Entrer le message dans la base
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
@@ -214,9 +216,6 @@ function inc_forum_insert_dist() {
 		"SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
-
-	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
-						'publie');
 
 	spip_query("UPDATE spip_forum
 	SET id_parent = $id_forum,
@@ -238,25 +237,8 @@ function inc_forum_insert_dist() {
 	WHERE id_forum = $id_message
 	");
 
-
-	// Le cas echeant, calculer le retour
-	if ($calculer_retour) {
-		charger_generer_url();
-
-		// le retour automatique envoie sur le thread, ce qui permet
-		// de traiter elegamment le cas des forums moderes a priori.
-		// Cela assure aussi qu'on retrouve son message dans le thread
-		// dans le cas des forums moderes a posteriori, ce qui n'est
-		// pas plus mal.
-		$retour_forum = generer_url_forum($id_message);
-	}
-
 	// Entrer les mots-cles associes
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
-
-	// Prevenir les auteurs de l'article
-	if ($GLOBALS['meta']["prevenir_auteurs"] == "oui" AND ($afficher_texte != "non"))
-		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	if ($statut == 'publie') {
 	//
@@ -270,7 +252,22 @@ function inc_forum_insert_dist() {
 				$id_syndic) . "'");
 	}
 
-	return $retour_forum;
-}
+	// Lever le verrou et prevenir les auteurs de l'article
+	if ($afficher_texte <> 'non') {
+		unlink($file);
+		if ($GLOBALS['meta']["prevenir_auteurs"] == "oui")
+			prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
+	}
 
+	if (!$calculer_retour) 	return $retour_forum;
+
+	// le retour automatique envoie sur le thread, ce qui permet
+	// de traiter elegamment le cas des forums moderes a priori.
+	// Cela assure aussi qu'on retrouve son message dans le thread
+	// dans le cas des forums moderes a posteriori, ce qui n'est
+	// pas plus mal.
+
+	charger_generer_url();
+	return generer_url_forum($id_message);
+}
 ?>
