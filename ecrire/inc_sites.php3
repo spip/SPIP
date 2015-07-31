@@ -144,10 +144,10 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				$le_titre=addslashes($match[1]);
 				$match="";
 				ereg("<link>(.*)</link>",$item[$i],$match);
-				$le_lien=$match[1];
+				$le_lien=addslashes($match[1]);
 				$match="";
 				ereg("<date>(.*)</date>",$item[$i],$match);
-				$la_date=$match[1];
+				$la_date=addslashes($match[1]);
 				$match="";
 				ereg("<author>(.*)</author>",$item[$i],$match);
 				$les_auteurs=addslashes($match[1]);
@@ -175,7 +175,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			while ($i < 50 AND eregi("<a[[:space:]]+href[[:space:]]*=[[:space:]]*\"?([^\">]+)\"?[^>]*>(.*)",$le_retour,$reg)){
 				$i++;
 				
-				$le_lien = stripslashes($reg[1]);
+				$le_lien = addslashes(stripslashes($reg[1]));
 				$la_suite = $reg[2];
 				
 				$pos_fin = strpos($la_suite, "</a");
@@ -183,7 +183,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				if ($pos_fin2 > $pos_fin) $pos_fin = $pos_fin2;
 				
 				$le_titre = substr($la_suite, 0, $pos_fin);
-				$le_titre = stripslashes($le_titre);
+				$le_titre = addslashes(stripslashes($le_titre));
 				$le_titre = ereg_replace("<[^>]*>","",$le_titre);
 				$le_retour = substr($la_suite, $pos_fin + 4, strlen($le_retour));
 				
