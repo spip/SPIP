@@ -577,10 +577,11 @@ function traiter_listes ($texte) {
 			if ($profond > 0) {
 				unset ($ajout);
 
-				// changement de type de liste : il faut descendre un
-				// niveau plus bas, fermer ce niveau, et remonter
+				// changement de type de liste au meme niveau : il faut
+				// descendre un niveau plus bas, fermer ce niveau, et
+				// remonter
 				$nouv_type = (substr($item,0,1) == '*') ? 'ul' : 'ol';
-				$change_type = ($type AND ($type <> $nouv_type)) ? 1 : 0;
+				$change_type = ($type AND ($type <> $nouv_type) AND ($profond == $niveau)) ? 1 : 0;
 				$type = $nouv_type;
 
 				// d'abord traiter les descentes
@@ -592,7 +593,7 @@ function traiter_listes ($texte) {
 					$niveau --;
 				}
 
-				/// puis les identites (y compris en fin de descente)
+				// puis les identites (y compris en fin de descente)
 				if ($niveau == $profond && !$change_type) {
 					$ajout .= $pile_li[$niveau];
 				}
