@@ -1550,6 +1550,7 @@ function init_var_mode(){
 							$GLOBALS['var_mode'] = 'recalcul';
 							// truquer les boucles
 							$GLOBALS['var_preview'] = true;
+							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
 							// et ne pas enregistrer de cache
 							$GLOBALS['var_nocache'] = true;
 							break;
@@ -1597,6 +1598,7 @@ function init_var_mode(){
 				}
 			}
 		}
+		if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',false);
 		$done = true;
 	}
 }

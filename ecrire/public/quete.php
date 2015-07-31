@@ -86,13 +86,45 @@ function quete_profondeur($id, $connect='') {
  * @param string $champ_date
  * @return string
  */
-function quete_condition_postdates($champ_date) {
+function quete_condition_postdates($champ_date, $serveur='') {
 	return
 	  ($GLOBALS['meta']['date_prochain_postdate'] > time())
-			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']))
+			? "$champ_date<".sql_quote(date('Y-m-d H:i:s',$GLOBALS['meta']['date_prochain_postdate']),$serveur)
 	    : "1=1" ;
 }
 
+
+/**
+ * Calculer la condition pour filtrer les status,
+ *
+ * @param string $mstatut
+ *  le champ de la table sur lequel porte la condition
+ * @param string $liste
+ *  statut ou liste des statuts separes par une virgule
+ * @return array
+ */
+function quete_condition_statut($mstatut,$liste, $serveur=''){
+	$not = false;
+	if (strncmp($liste,'!',1)==0){
+		$not = true;
+	  $liste = substr($liste,1);
+	}
+	// '' => ne rien afficher, '!'=> ne rien filtrer
+	if (!strlen($liste))
+		return ($not?"":"'0=1'");
+
+	$liste = explode(',',$liste);
+	foreach($liste as $k=>$v) {
+		// securite
+		$liste[$k] = preg_replace(",\W,","",$v);
+	}
+  if (count($liste)==1){
+		return array(($not?'<>':'='), $mstatut, sql_quote(reset($liste),$serveur));
+  }
+  else {
+	  return sql_in($mstatut,$liste,$not,$serveur);
+  }
+}
 
 # retourne le fichier d'un document
 

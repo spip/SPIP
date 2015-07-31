@@ -193,37 +193,6 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 
 /**
- * Calculer la clause where pour filtrer les status,
- *
- * @param string $mstatut
- *  le champ de la table sur lequel porte la condition
- * @param string $liste
- *  statut ou liste des statuts separes par une virgule
- * @return array
- */
-function calculer_where_statut($mstatut,$liste){
-	$not = false;
-	if (strncmp($liste,'!',1)==0){
-		$not = true;
-	  $liste = substr($liste,1);
-	}
-	// '' => ne rien afficher, '!'=> ne rien filtrer
-	if (!strlen($liste))
-		return ($not?"'1=1'":"'0=1'");
-
-	$liste = explode(',',$liste);
-	foreach($liste as $k=>$v) {
-		$liste[$k] = "\\'".preg_replace(",\W,","",$v)."\\'";
-	}
-  if (count($liste)==1){
-		return "array(".($not?"'<>'":"'='").", '$mstatut', '".reset($liste)."')";
-  }
-  else {
-	  return "array(".($not?"'NOT IN'":"'IN'").", '$mstatut', '(".implode(',',$liste).")')";
-  }
-}
-
-/**
  * calculer_boucle() produit le corps PHP d'une boucle Spip.
  * ce corps remplit une variable $t0 retournee en valeur.
  * Ici on distingue boucles recursives et boucle a requete SQL
@@ -267,7 +236,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$table_sql = $boucle->from[$id_table];
 	if (isset($GLOBALS['table_statut'][$table_sql])){
-		foreach($GLOBALS['table_statut'][$table_sql] as $s){
+		foreach($GLOBALS['table_statut'][$table_sql] as $k=>$s){
 			// Restreindre aux elements publies si pas de {statut} ou autre dans les criteres
 			$filtrer = true;
 			if (isset($s['exception'])) {
@@ -302,13 +271,12 @@ function calculer_boucle($id_boucle, &$boucles) {
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
-					array_unshift($boucle->where,"\$GLOBALS['var_preview']?'':quete_condition_postdates('$date')");
+					array_unshift($boucle->where,"\n_VAR_PREVIEW?'':quete_condition_postdates('$date',"._q($boucle->serveur).")");
 				}
-				array_unshift($boucle->where,$w=
-					"\$GLOBALS['var_preview']?"
-						.calculer_where_statut($mstatut,$s['previsu'])
-						.":"
-						.calculer_where_statut($mstatut,$s['previsu'])
+				array_unshift($boucle->where,
+					"\nquete_condition_statut('$mstatut',"
+					."_VAR_PREVIEW?"._q($s['previsu']).":"._q($s['publie'])
+					.","._q($boucle->serveur).")"
 				);
 			}
 		}
@@ -525,23 +493,38 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 // http://doc.spip.org/@calculer_requete_sql
 function calculer_requete_sql($boucle)
 {
+	$init = array();
+	$init[] = calculer_dec('table',  "'" . $boucle->id_table ."'");
+	$init[] = calculer_dec('id', "'" . $boucle->id_boucle ."'");
+	# En absence de champ c'est un decompte :
+	$init[] = calculer_dec('from',  calculer_from($boucle));
+	$init[] = calculer_dec('type', calculer_from_type($boucle));
+	$init[] = calculer_dec('groupby', 'array(' . (($g=join("\",\n\t\t\"",$boucle->group))?'"'.$g.'"':'') . ")");
+	$init[] = calculer_dec('select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")");
+	$init[] = calculer_dec('orderby', 'array(' . calculer_order($boucle) .	")");
+	$init[] = calculer_dec('where', calculer_dump_array($boucle->where));
+	$init[] = calculer_dec('join', calculer_dump_join($boucle->join));
+	$init[] = calculer_dec('limit',
+			(strpos($boucle->limit, 'intval') === false ?
+				  "'".$boucle->limit."'"
+				:
+				  $boucle->limit));
+	$init[] = calculer_dec('having', calculer_dump_array($boucle->having));
+	$s = $d = "";
+	foreach ($init as $i){
+		if (reset($i))
+			$s .= "\n\t\t".end($i);
+	  else
+		  $d .= "\n\t".end($i);
+	}
+
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 	  . $boucle->in 
-	  . $boucle->hash 
-	  . calculer_dec('table',  "'" . $boucle->id_table ."'")
-	  . calculer_dec('id', "'" . $boucle->id_boucle ."'")
-		# En absence de champ c'est un decompte : 
-	  . calculer_dec('from',  calculer_from($boucle))
-	  . calculer_dec('type', calculer_from_type($boucle))
-	  . calculer_dec('groupby', 'array(' . (($g=join("\",\n\t\t\"",$boucle->group))?'"'.$g.'"':'') . ")")
-	  . calculer_dec('select', 'array("' . join("\",\n\t\t\"", $boucle->select).  "\")")
-	  . calculer_dec('orderby', 'array(' . calculer_order($boucle) .	")")
-	  . calculer_dec('where', calculer_dump_array($boucle->where))
-	  . calculer_dec('join', calculer_dump_join($boucle->join))
-	  . calculer_dec('limit', (strpos($boucle->limit, 'intval') === false ?
-				    "'".$boucle->limit."'" :
-				    $boucle->limit))
-	  . calculer_dec('having', calculer_dump_array($boucle->having));
+	  . $boucle->hash
+		. "\n\t".'if (!isset($command[\'table\'])) {'
+		. $s
+		. "\n\t}"
+		. $d;
 }
 
 function memoriser_contexte_compil($p) {
@@ -570,19 +553,22 @@ function reconstruire_contexte_compil($context_compil)
 function calculer_dec($nom, $val)
 {
 	$static = 'if (!isset($command[\''.$nom.'\'])) ';
+	// si une variable apparait dans le calcul de la clause
+	// il faut la re-evaluer a chaque passage
 	if (
-		strpos($val, '$') !== false 
+		strpos($val, '$') !== false
+		/*
 		OR strpos($val, 'sql_') !== false
 		OR (
 			$test = str_replace(array("array(",'\"',"\'"),array("","",""),$val) // supprimer les array( et les echappements de guillemets
 			AND strpos($test,"(")!==FALSE // si pas de parenthese ouvrante, pas de fonction, on peut sortir
 			AND $test = preg_replace(",'[^']*',UimsS","",$test) // supprimer les chaines qui peuvent contenir des fonctions SQL qui ne genent pas
 			AND preg_match(",\w+\s*\(,UimsS",$test,$regs) // tester la presence de fonctions restantes
-		)
+		)*/
 	)
 		$static = "";
 
-	return "\n\t" . $static . '$command[\''.$nom.'\'] = ' . $val . ';';
+	return array($static,'$command[\''.$nom.'\'] = ' . $val . ';');
 }
 
 // http://doc.spip.org/@calculer_dump_array
