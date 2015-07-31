@@ -613,7 +613,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 		if ((@$f=filemtime($fichier)) AND ($f >= time() - $duree))
 			return false;
 	}
-	if ($touch) {
+	if ($touch!==false) {
 		if (!@touch($fichier)) { spip_unlink($fichier); @touch($fichier); };
 		@chmod($fichier, _SPIP_CHMOD & ~0111);
 	}
@@ -632,12 +632,13 @@ function action_cron() {
 	include_spip('inc/headers');
 	http_status(204); // No Content
 	header("Connection: close");
-	cron (true);
+	cron (2);
 }
 
 // cron() : execution des taches de fond
-// quand il est appele par public.php il n'est pas gourmand;
-// quand il est appele par ?action=cron, il est gourmand
+// Le premier argument indique l'intervalle demande entre deux taches 
+// par defaut, 60 secondes (quand il est appele par public.php)
+// il vaut 2 quand il est appele par ?action=cron, voire 0 en urgence
 // On peut lui passer en 2e arg le tableau de taches attendu par inc_genie()
 // Retourne Vrai si un tache a pu etre effectuee
 
@@ -651,7 +652,7 @@ function cron ($gourmand=false, $taches= array()) {
 	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
 	if (spip_touch(_DIR_TMP.'cron.lock-gourmand', 60, $gourmand)
-	OR $gourmand) {
+	OR ($gourmand!==false)) {
 
 	// Le fichier cron.lock indique la date de la derniere tache
 	// Il permet d'imposer qu'il n'y ait qu'une tache a la fois
@@ -659,7 +660,8 @@ function cron ($gourmand=false, $taches= array()) {
 	// ca soulage le serveur et ca evite
 	// les conflits sur la base entre taches.
 
-		if (spip_touch(_DIR_TMP.'cron.lock', 2)) {
+	if (spip_touch(_DIR_TMP.'cron.lock', 
+			(is_int($gourmand) ? $gourmand : 2))) {
 			$genie = charger_fonction('genie', 'inc', true);
 			if ($genie) {
 				$genie($taches);
