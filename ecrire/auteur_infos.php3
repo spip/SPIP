@@ -16,7 +16,7 @@ $var_f = find_in_path("inc_auteur_infos.php");
 if ($var_f)
   include($var_f);
  else
-   include_ecrire(_DIR_INCLUDE . "inc_auteur_infos.php");
+   include_ecrire("inc_auteur_infos.php");
 
 // securite
 $id_auteur = floor($id_auteur);

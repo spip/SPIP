@@ -17,7 +17,7 @@ $nom = "aide_index";
 $f = find_in_path('inc_' . $nom . '.php');
 if ($f) 
   include($f);
- else include_ecrire(_DIR_INCLUDE . 'inc_' . $nom . '.php');
+ else include_ecrire('inc_' . $nom . '.php');
   
 if (function_exists($nom))
   $nom($img, $frame, $aide, $var_lang, $lang);
