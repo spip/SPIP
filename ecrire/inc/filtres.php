@@ -2246,16 +2246,17 @@ function http_wrapper($img){
 // http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $atts='', $title='') {
 
+	$img = http_wrapper($img);
 	if (strpos($atts, 'width')===FALSE){
 		// utiliser directement l'info de taille presente dans le nom
-		if (preg_match(',-([0-9]+)[.]png$,',$img,$regs)){
+		if (preg_match(',-([0-9]+)[.](png|gif)$,',$img,$regs)){
 				$size = array(intval($regs[1]),intval($regs[1]));
 		}
 		else
 			$size = @getimagesize($img);
 		$atts.=" width='".$size[0]."' height='".$size[1]."'";
 	}
-	return  "<img src='" . http_wrapper($img)
+	return  "<img src='" . $img
 	  . ("'\nalt=\"" .
 	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
 	     . '" ')
