@@ -532,6 +532,7 @@ ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/commencer_page.php -text
 ecrire/inc/compacte_js.php -text
 ecrire/inc/cookie.php -text
+ecrire/inc/couleurs.php -text
 ecrire/inc/dater.php -text
 ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
