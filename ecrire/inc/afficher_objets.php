@@ -410,7 +410,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $hash, $cpt, 
 */
 	$url_t = $url_d = '';
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
-	$styles = array(array('', 11), array('arial2','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
+	$styles = array(array('', 11), array('verdana12','', $url_t), array('arial1', 80), array('arial1', 100, $url_d), array('arial1', 50));
 	$tableau = array();
 	$url = generer_url_ecrire('memoriser', "$arg&trad=$trad");
 	$res = $presenter_liste($requete, $formater, $tableau, array(), false, $styles, $tmp_var, $texte, "article-24.gif", $url, $cpt);
