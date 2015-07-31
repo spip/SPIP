@@ -19,7 +19,7 @@
 	(#REM) image complete ?
 ][(#GET{image})
 [<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>
-]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][ alt="(#TITRE|texte_backend)"][ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]
+]<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"] alt="[(#TITRE|texte_backend)]"[ title="(#TITRE|texte_backend)"] />[(#ENV{lien}|?{</a>})]
 ][
 	(#REM) sinon logo document + lien + alt + title etc
 ][(#GET{image}|?{'',' '})
