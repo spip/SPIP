@@ -1549,8 +1549,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	static $nb_forum;
 	static $i;
 	global $connect_id_auteur;
-	global $mots_cles_forums;
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
+	$mots_cles_forums = ($GLOBALS['meta']["mots_cles_forums"] == "oui");
 
 	$compteur_forum++;
 
@@ -1559,7 +1559,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	
 	if ($spip_display == 4) echo "<ul>";
  
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	$voir_logo = (($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") ? 
+		      "position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;" 
+		      : '');
 		
 	if ($voir_logo) include_spip('inc/logos');
 
@@ -1582,43 +1584,25 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 		$ip=$row["ip"];
 		$id_auteur=$row["id_auteur"];
 	
-		$forum_stat = $statut;
-		if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
-		else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
-		else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
-		else $logo = "forum-public-24.gif";
-
 		if ($compteur_forum==1) echo "\n<br /><br />";
-		$afficher = ($controle_id_article) ? ($statut!="perso") :
+		if (($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
-			OR ($statut=="publie" AND $id_parent > 0));
+			 OR ($statut=="publie" AND $id_parent > 0))) {
 
-		if ($afficher) {
 			echo "<a id='$id_forum'></a>";
-			if ($spip_display != 4) echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
-			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
-				$fond[$count]=_DIR_IMG_PACK . 'rien.gif';
-				if ($i[$count]!=$nb_forum[$count]){
-					$fond[$count]=_DIR_IMG_PACK . 'forum-vert.gif';
-				}
-				$fleche='rien.gif';
-				if ($count==$compteur_forum){
-					$fleche="forum-droite$spip_lang_rtl.gif";
-				}
-				if ($spip_display != 4) echo "<td width='10' valign='top' background=$fond[$count]>" .
-				  http_img_pack($fleche, " ", "width='10' height='13' border='0'"). "</td>\n";
+			if ($spip_display != 4) {
+				echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
+				afficher_forum_4($compteur_forum, $nb_forum,$i);
 			}
-
-			if ($spip_display != 4) echo "\n<td width=100% valign='top'>";
-
 			if ($id_auteur AND $voir_logo) {
-				$titre_boite = baliser_logo("aut", $id_auteur, 48, 48,"position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;") .typo($titre);
+				$titre_boite = baliser_logo("aut", $id_auteur, 48, 48, $voir_log) .typo($titre);
 			} else $titre_boite = $titre;
 		
 			if ($spip_display == 4) {
 				echo "<li>".typo($titre)."<br>";
 			} else {
-				if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", $titre_boite);
+				if ($compteur_forum == 1) 
+				  echo afficher_forum_logo($statut, $titre_boite);
 				else echo debut_cadre_thread_forum("", false, "", $titre_boite);
 			}
 			
@@ -1631,9 +1615,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 				echo "<div style='border: 1px solid yellow; padding: 5px;'>";
 			}
 		
-		
-		
-		echo "<span class='arial2'>";
+			echo "<span class='arial2'>";
 		//	echo affdate_court($date_heure);
 		//	echo ", ";
 		//	echo heures($date_heure).":".minutes($date_heure);
@@ -1668,35 +1650,22 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if (!$controle_id_article) {
 				echo "<div align='right' class='verdana1'>";
-				echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
+				echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=" . rawurlencode($adresse_retour) . "&titre_message=".rawurlencode($titre)), 
 				  "'>",
 				  _T('lien_repondre_message'),
 				  "</a></b></div>";
 			}
 
-			if ($mots_cles_forums == "oui"){
-
-				$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-				$result_mots = spip_query($query_mots);
-
-				while ($row_mots = spip_fetch_array($result_mots)) {
-					$id_mot = $row_mots['id_mot'];
-					$titre_mot = propre($row_mots['titre']);
-					$type_mot = propre($row_mots['type']);
-					echo "<li> <b>$type_mot :</b> $titre_mot";
-				}
-
-			}
+			if ($mots_cles_forums)
+				afficher_forum_mots($id_forum);
 	
 			if ($statut == "off" OR $statut == "prop") echo "</div>";
 
 			if ($spip_display != 4) {
 				if ($compteur_forum == 1) echo fin_cadre_forum();
 				else echo fin_cadre_thread_forum();
+				echo "</td></tr></table>\n";
 			}
-
-			if ($spip_display != 4) echo "</td></tr></table>\n";
-
 
 			afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='$id_forum'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $adresse_retour, $controle_id_article);	
 		}
@@ -1706,6 +1675,50 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	spip_free_result($request);
 	$compteur_forum--;
 }
+
+function afficher_forum_logo($statut, $titre_boite)
+{
+	if ($statut == "prive") $logo = "forum-interne-24.gif";
+	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
+	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
+	else $logo = "forum-public-24.gif";
+	return debut_cadre_forum($logo, false, "", $titre_boite);
+}
+
+function afficher_forum_mots($id_forum)
+{
+	$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
+	$result_mots = spip_query($query_mots);
+
+	echo '<ul>';
+	while ($row_mots = spip_fetch_array($result_mots)) {
+		$id_mot = $row_mots['id_mot'];
+		$titre_mot = propre($row_mots['titre']);
+		$type_mot = propre($row_mots['type']);
+		echo "<li> <b>",$type_mot," :</b> ",$titre_mot, "<li>";
+	}
+	echo '</ul>';
+}
+
+// affiche les traits de liaisons entre les reponses
+
+function afficher_forum_4($compteur_forum, $nb_forum, $i)
+{
+	 $fleche='rien.gif';
+	 for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
+		$fond[$count]=_DIR_IMG_PACK . 'rien.gif';
+		if ($i[$count]!=$nb_forum[$count]){
+			$fond[$count]=_DIR_IMG_PACK . 'forum-vert.gif';
+		}
+		echo "<td width='10' valign='top' background=$fond[$count]>";
+		if ($count==$compteur_forum){
+			$fleche="forum-droite$spip_lang_rtl.gif";
+		}
+		echo http_img_pack($fleche, " ", "width='10' height='13' border='0'"), "</td>\n";
+	}
+	echo "\n<td width=100% valign='top'>";
+}
+
 
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
