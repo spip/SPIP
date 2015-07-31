@@ -106,9 +106,10 @@ function table_auteurs_edit($auteur)
 	echo "<div>&nbsp;</div>";
 
 	if (strlen($email) > 2) echo "<div>"._T('email_2')." <B><A HREF='mailto:$email'>$email</A></B></div>";
-	$texte_case = ($nom_site_auteur.$url_site) ? ""._T('info_site_2')." [{{".$nom_site_auteur."}}->".$url_site."]" : '';
-	echo propre($texte_case);
-
+	if ($url_site) {
+		if (!$nom_site_auteur) $nom_site_auteur = _T('info_site');
+		echo propre(_T('info_site_2')." [{{".$nom_site_auteur."}}->".$url_site."]");
+	}
 		
 	echo "</td>";
 	
