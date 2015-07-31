@@ -178,12 +178,12 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'erreur_plugin_version_manquant' => 'Versão de plugin inexistente',
 
 	// H
-	'htaccess_a_simuler' => 'Atenção: a configuração do servidor HTTP ignora @htaccess@. Para garantir uma boa segurança, deve alterar esta configuração. Alternativamente, deve assegurar que as constantes @constantes@ (dfiníveis no ficheiro mes_options.php) têm como valores diretórios fora de @document_root@.', # MODIF
+	'htaccess_a_simuler' => 'Atenção: a configuração do servidor HTTP ignora @htaccess@. Para garantir uma boa segurança, deve alterar esta configuração. Alternativamente, deve assegurar que as constantes @constantes@ (definíveis no ficheiro mes_options.php) têm como valores diretórios fora de @document_root@.',
 	'htaccess_inoperant' => 'htaccess inoperacional',
 
 	// I
 	'ical_info1' => 'Esta página apresenta muitos modos de permanecer em contacto com as actividades deste sítio.',
-	'ical_info2' => 'Para mais informações sobre estas técnicas, consultar  <a href="@spipnet@">a documentação de SPIP</a>.', # MODIF
+	'ical_info2' => 'Para mais informações sobre estas técnicas, consultar  <a href="@spipnet@">a documentação de SPIP</a>.',
 	'ical_info_calendrier' => 'Estão disponíveis dois calendários. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo é pessoal e contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
 	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Sincronização (webcal://)',
@@ -193,7 +193,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'ical_texte_rss' => 'Pode vincular as novidades deste sítio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). É também o formato que permite a SPIP ler as novidades publicadas em outros sítios que utilizam um formato de troca compatível.',
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'Mailing-list',
-	'ical_titre_rss' => 'Ficheiros « backend »', # MODIF
+	'ical_titre_rss' => 'Ficheiros « backend »',
 	'icone_accueil' => 'Início',
 	'icone_activer_cookie' => 'Activar o cookie de correspondência',
 	'icone_activite' => 'Actividade',
@@ -213,7 +213,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'icone_envoyer_message' => 'Enviar esta mensagem',
 	'icone_ma_langue' => 'Idioma',
 	'icone_mes_infos' => 'Minhas informações',
-	'icone_mes_preferences' => 'Preferências', # MODIF
+	'icone_mes_preferences' => 'Preferências',
 	'icone_modifier_article' => 'Modificar este artigo',
 	'icone_modifier_message' => 'Modificar esta mensagem',
 	'icone_modifier_rubrique' => 'Modificar esta rubrica',
@@ -298,9 +298,9 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Cabeçalho',
 	'info_chapeau_2' => 'Cabeçalho :',
-	'info_chemin_acces_1' => 'Opções : <b>Caminho de acesso no anuário</b>', # MODIF
+	'info_chemin_acces_1' => 'Opções : <b>Caminho de acesso no diretório</b>',
 	'info_chemin_acces_2' => 'Doravante, deve configurar o caminho de acesso às informações no anuário. Esta informação é indispensável para ler os perfis de utilizador armazenados no anuário.',
-	'info_chemin_acces_annuaire' => 'Opções : <b>Caminho de acesso no anuário', # MODIF
+	'info_chemin_acces_annuaire' => 'Opções : <b>Caminho de acesso no diretório',
 	'info_choix_base' => 'Terceira etapa :',
 	'info_classement_1' => '<sup>er</sup> no @liste@',
 	'info_classement_2' => '<sup>e</sup> no @liste@',
@@ -315,22 +315,22 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_conflit_edition_differences' => 'Différences :', # NEW
 	'info_conflit_edition_version_enregistree' => 'Versão guardada :',
 	'info_conflit_edition_votre_version' => 'Votre version :', # NEW
-	'info_connexion_base' => 'Segunda etapa: <b>Teste de ligação à base</b>', # MODIF
+	'info_connexion_base' => 'Segunda etapa: <b>Teste de ligação à base de dados</b>',
 	'info_connexion_base_donnee' => 'Connexion à votre base de données', # NEW
-	'info_connexion_ldap_ok' => 'A ligação LDAP foi bem sucedida.</b><p> Pode passar para a etapa seguinte.</p>', # MODIF
-	'info_connexion_mysql' => 'Primeira etapa : <b>A sua ligação SQL<b>', # MODIF
+	'info_connexion_ldap_ok' => 'A ligação LDAP foi bem sucedida.</b><p> Pode passar para a etapa seguinte.</p>',
+	'info_connexion_mysql' => 'Primeira etapa : <b>A sua ligação SQL<b>',
 	'info_connexion_ok' => 'A ligação foi bem sucedida.',
 	'info_contact' => 'Contacto',
 	'info_contenu_articles' => 'Conteúdo dos artigos',
 	'info_contributions' => 'Contributions', # NEW
-	'info_creation_paragraphe' => '(Para criar parágrafos, deixe simplesmente linhas vazias.)', # MODIF
-	'info_creation_rubrique' => 'Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />', # MODIF
-	'info_creation_tables' => 'Quarta etapa : <b>Criação das tabelas da base<b>', # MODIF
-	'info_creer_base' => '<b>Criar</b> uma nova base de dados', # MODIF
+	'info_creation_paragraphe' => 'Para criar parágrafos, deixe simplesmente linhas vazias.',
+	'info_creation_rubrique' => 'Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />',
+	'info_creation_tables' => 'Quarta etapa : <b>Criação das tabelas da base de dados<b>',
+	'info_creer_base' => '<b>Criar</b> uma nova base de dados',
 	'info_dans_rubrique' => 'Na rubrica :',
 	'info_date_publication_anterieure' => 'Data de publicação anterior:',
 	'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE SÍTIO :',
-	'info_derniere_etape' => 'Última etapa : <b>Acabou !', # MODIF
+	'info_derniere_etape' => 'Última etapa : <b>Terminou !',
 	'info_derniers_articles_publies' => 'Os seus últimos artigos publicados online',
 	'info_desactiver_messagerie_personnelle' => 'Pode activar ou desactivar o seu correio pessoal neste sítio.',
 	'info_descriptif' => 'Descrição:',
@@ -339,7 +339,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_ecrire_article' => 'Antes de poder escrever artigos, deve criar pelo menos uma rubrica.',
 	'info_email_envoi' => 'Endereço de email de envio (opcional)',
 	'info_email_envoi_txt' => 'Indique aqui o endereço a utilizar para enviar os emails (se não for o caso, o endereço do destinatário será utilizado como endereço de envio) :',
-	'info_email_webmestre' => 'Endereço e-mail do webmaster (opcional)', # MODIF
+	'info_email_webmestre' => 'Endereço e-mail do webmaster ',
 	'info_entrer_code_alphabet' => 'Insira o código do alfabeto a utilizar :',
 	'info_envoi_email_automatique' => 'Envio automático de mails',
 	'info_envoyer_maintenant' => 'Enviar agora',
@@ -355,7 +355,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_fichiers_authent' => 'Ficheiros de autenticação « .htpasswd »',
 	'info_forums_abo_invites' => 'O seu sítio contém fóruns por assinatura; os visitantes são convidados a registar-se no sítio público.',
 	'info_gauche_admin_effacer' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>',
-	'info_gauche_admin_tech' => '<b>Esta página está acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
+	'info_gauche_admin_tech' => '<b>Esta página está acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao sítio.</p>',
 	'info_gauche_admin_vider' => '<b>Esta página é acessível apenas aos responsáveis pelo sítio.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao sítio web</p>',
 	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do sítio.
 Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde; redactor = amarelo).',
@@ -380,9 +380,9 @@ os autores apagados, por um ícone cinzento.',
 	'info_historique_texte' => 'O acompanhamento das revisões permite conservar um histórico de todas as  alterações realizadas ao conteúdo de um artigo, e visualizar as diferenças entre as sucessivas versões',
 	'info_identification_publique' => 'A sua identidade pública...',
 	'info_image_process' => 'Seleccione o melhor método para criar as vinhetas clicando sobre a imagem correspondente.',
-	'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>', # MODIF
+	'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>',
 	'info_images_auto' => 'Imagens calculadas automaticamente',
-	'info_informations_personnelles' => 'Quinta etapa : <b>Informações pessoais<b>', # MODIF
+	'info_informations_personnelles' => 'Quinta etapa : <b>Informações pessoais<b>',
 	'info_inscription_automatique' => 'Inscrição automática de novos redactores',
 	'info_jeu_caractere' => 'Conjunto de caracteres do sítio',
 	'info_jours' => 'dias',
@@ -855,7 +855,7 @@ reinstalar SPIP para recriar uma nova base assim como uma primeira conta de admi
 	'texte_compte_element' => '@count@ elemento',
 	'texte_compte_elements' => '@count@ elementos',
 	'texte_conflit_edition_correction' => 'Veuillez contrôler ci-dessous les différences entre les deux versions du texte ; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
-	'texte_connexion_mysql' => 'Consulte as informações fornecidas pelo seu serviço de hospedagem : deve encontrar nelas, se o seu hospedeiro suporta SQL, os códigos de ligação ao servidoe SQL.', # MODIF
+	'texte_connexion_mysql' => 'Consulte as informações fornecidas pelo seu serviço de hospedagem: deve encontrar nelas, se o seu hospedeiro suporta SQL, os códigos de ligação ao servidor SQL.',
 	'texte_contenu_article' => '(Conteúdo do artigo em poucas palavras.)',
 	'texte_contenu_articles' => 'Segundo a maqueta adoptada para o seu sítio, pode decidir
 que alguns elementos dos artigos não são utilizados.
@@ -915,7 +915,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
  maneira normal (a partir da interface SPIP) são automaticamente
  reindexados : este comando portanto só é útil de maneira excepcional',
 	'texte_moteur_recherche_non_active' => 'O motor de pesquisa não está activado.',
-	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.', # MODIF
+	'texte_multilinguisme' => 'Se desejar gerir artigos em muitos idiomas, com uma navegação complexa, pode acrescentar um menu de idioma aos artigos e/ou às rubricas, em função da organização do seu sítio.',
 	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de ligações entre as diferentes traduções de um artigo.',
 	'texte_non_compresse' => '<i>não comprimido</i> ( o seu servidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
@@ -930,8 +930,8 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 	'texte_proxy' => 'Em alguns caso (intranet, redes protegidas...),
  pode ser necessário utilizar um <i>proxy HTTP</i>  para atingir os sítios vinculados.
  Se for o caso, indique a seguir o endereço, sob a forma
- <tt><html>http://proxy:8080</html></tt>. Em geral,
- deixará esta caixa vazia.', # MODIF
+ @proxy_en_cours@. Em geral,
+ poderá deixar esta caixa vazia.',
 	'texte_publication_articles_post_dates' => 'Que comportamento SPIP deve adoptar perante os artigos cuja
  data de publicação foi fixada para um prazo futuro ?',
 	'texte_rappel_selection_champs' => '[Não esquecer de seleccionar correctamente este campo.]',
