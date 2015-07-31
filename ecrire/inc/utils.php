@@ -677,6 +677,13 @@ function url_de_base() {
 	if ($url)
 		return $url;
 
+	// cas particulier des sites filtres par un proxy entrant
+	// cf. http://trac.rezo.net/trac/spip/ticket/401
+	if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
+		$a = $GLOBALS['meta']['adresse_site'];
+		return (substr($a,-1) == '/')?$a:$a.'/';
+	}
+
 	$http = (
 		(isset($_SERVER["SCRIPT_URI"]) AND
 			substr($_SERVER["SCRIPT_URI"],0,5) == 'https')
