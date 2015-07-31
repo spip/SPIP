@@ -25,7 +25,7 @@ function exec_selectionner_dist()
 	$rac = _request('racine');
 	$do  = _request('do');
 	if (!preg_match('/^\w+$/', $do)) die();
-	if (!$do) $do = 'aff_selection_titre';
+	if (!$do) $do = 'aff';
 
 	$selectionner = charger_fonction('selectionner', 'inc');
 	ajax_retour($selectionner($id, "choix_parent", $exclus, $rac, $type!='breve', $do));

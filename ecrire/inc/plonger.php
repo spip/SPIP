@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/texte');
 
 // http://doc.spip.org/@inc_plonger_dist
-function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0, $do='aff_selection_titre') {
+function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0, $do='aff') {
 	global  $spip_lang_left;
 	
 	if ($list) $id_rubrique = $list[$col-1];
@@ -63,13 +63,14 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 				$url = "\nhref='$rec&amp;id=$id'" ;
 			} else {  $url = $classe2 = '' ; }
 
+			$js_func = $do . '_selection_titre';
 			$click = "\nonclick=\"changerhighlight(this.parentNode.parentNode.parentNode);\nreturn "
 			. (!is_array($list) ? ' false' 
 			   : "aff_selection_provisoire($id,$args)")
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 			. "\"\nondblclick=\""
-			. "$do(this."
+			. "$js_func(this."
 			. "firstChild.nodeValue,"
 			. $id
 			. ",'selection_rubrique','id_parent');"

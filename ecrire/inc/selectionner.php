@@ -19,7 +19,7 @@ include_spip('inc/filtres');
 //
 
 // http://doc.spip.org/@inc_selectionner_dist
-function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true, $do='aff_selection_titre') {
+function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true, $do='aff') {
 
 	if ($recur) $recur = mini_hier($sel); else $sel = 0;
 
@@ -34,7 +34,8 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 					textebrut(_T('info_racine_site')))),
 				"\n\r", "  ");
 
-		$ondbClick = "$do('$ondbClick',0,'selection_rubrique','id_parent');";
+		$js_func = $do . '_selection_titre';
+		$ondbClick = "$js_func('$ondbClick',0,'selection_rubrique','id_parent');";
 
 		$aff_racine = "<div class='arial11 petite-racine'\nonclick=\""
 		. $onClick

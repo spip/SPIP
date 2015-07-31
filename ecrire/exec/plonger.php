@@ -23,7 +23,7 @@ function exec_plonger_dist()
 	$col = intval(_request('col'));
 	$do  = _request('do');
 	if (!preg_match('/^\w+$/', $do)) die();
-	if (!$do) $do = 'aff_selection_titre';
+	if (!$do) $do = 'aff';
 
 	include_spip('inc/actions');
 	$plonger = charger_fonction('plonger', 'inc');
