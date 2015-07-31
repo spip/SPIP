@@ -64,7 +64,7 @@ echo "<p>";
 $query = "SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre";
 $result = spip_query($query);
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	$titre = propre($row['titre']);
 	
