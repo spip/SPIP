@@ -158,6 +158,11 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
 
+	// Mettre a jour les donnees de session si on a modifie sa propre fiche auteur
+	// ici encore, comme dans zap_session, on aurait besoin d'un acces direct a toutes les
+	// sessions de l'auteur id_auteur pour les regenerer !..
+	if (($connect_id_auteur == $id_auteur) AND $session = $GLOBALS['spip_session'])
+		ajouter_session($auteur, $session);
 }
 
 
