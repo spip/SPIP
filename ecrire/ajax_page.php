@@ -26,6 +26,10 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		include_ecrire("inc_mini_nav.php");
 		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
 	}
+	else if ($fonction == "aff_nav_recherche") {
+		include_ecrire("inc_mini_nav.php");
+		echo mini_nav ($id_rubrique, "aff_nav_recherche", "document.location.href='naviguer.php3?id_rubrique=::sel::'", 0, $aff_racine=true);
+	}
 	else if ($fonction == "aff_info") {
 		// echo "$type - $id - $rac";
 		
@@ -145,7 +149,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 				
 		}
 		if ($ret) echo $ret;
-		else echo "<div style='padding: 5px; color: red;'>"._T('avis_aucun_resultat')."</div>";
+		else echo "<div style='padding: 5px; color: red;'><b>$recherche_rub</b> :  "._T('avis_aucun_resultat')."</div>";
 		
 		
 	}

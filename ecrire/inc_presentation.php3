@@ -2574,10 +2574,12 @@ else {
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
-		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
+//		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
+//		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
+		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('ajax_page.php?fonction=aff_nav_recherche&id_rubrique=$id_rubrique','nav-recherche');\">" .
+		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") ."</a>";
 		else echo "<a href='brouteur.php3' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
@@ -2707,7 +2709,10 @@ else {
 	echo "<div style='position: relative; z-index: 1000;'>";
 	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>";
 	echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
-	afficher_menu_rubriques();
+	echo "<img src='"._DIR_IMG_PACK."searching.gif' id='img_nav-recherche' style='border:0px; visibility: hidden' />";
+//	afficher_menu_rubriques();
+
+	echo "<div id='nav-recherche' style='width: 450px; visibility: hidden;'></div>";
 	echo "</div>";
 	// FIN GADGET Menu rubriques
 	
