@@ -113,6 +113,20 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		// allez on commit la modif
 		sql_updateq($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
+		// on verifie si elle est bien passee
+		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", array(), array(), '', array(), $serveur);
+		if ($moof != $champs) {
+			foreach($moof as $k=>$v)
+				if ($v !== $champs[$k]
+					// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
+					AND (!is_numeric($v) OR intval($v)!=intval($champs[$k]))
+					) {
+					$conflits[$k]['post'] = $champs[$k];
+					$conflits[$k]['save'] = $v;
+				}
+		}
+
+
 		// Cas particulier des groupes de mots dont le titre est repris
 		// dans la table spip_mots
 		if ($spip_table_objet == 'spip_groupes_mots'
@@ -204,7 +218,19 @@ function marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_obj
 			// Mettre le lien a jour ou le creer s'il n'existe pas deja
 			if (!sql_updateq("spip_documents_liens", array("vu" => 'oui'), "id_objet=$id AND objet=".sql_quote($type)." AND id_document=".$row['id_document']) OR
 			!sql_getfetsel("id_document", "spip_documents_liens", "id_document=".$row['id_document']." AND id_objet=$id AND objet=".sql_quote($type))) {
-				sql_insertq("spip_documents_liens", array('id_objet'=>$id, 'objet'=>$type, 'id_document' => $row['id_document'], 'vu' => 'oui'));
+				sql_insertq("spip_documents_liens", array('id_objet' => $id, 'objet' => $type, 'id_document' => $row['id_document'], 'vu' => 'oui'));
+				pipeline('post_edition',
+					array(
+						'args' => array(
+							'operation' => 'lier_document',
+							'table' => 'spip_documents',
+							'id_objet' => $row['id_document'],
+							'objet' => $type,
+							'id' => $id
+						),
+						'data' => null
+					)
+				);
 			}
 		}
 	}
@@ -263,24 +289,19 @@ function revision_auteur($id_auteur, $c=false) {
 		),
 		$c);
 
-	// synchroniser l'eventuel annuaire d'authentification distant
-	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
-	include_spip('inc/auth');
-	auth_synchroniser_distant($auth_methode, $id_auteur, $c);
-	
-	// Si on change login ou mot de passe, deconnecter cet auteur,
-	// sauf si c'est nous-meme !
-	if ((isset($c['login']) OR isset($c['pass']))
-	  AND $id_auteur != $GLOBALS['visiteur_session']['id_auteur']){
-		$session = charger_fonction('session', 'inc');
-		$session($auteur['id_auteur']);
+	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
+	if (isset($c['login'])
+	OR isset($c['pass'])
+	OR isset($c['statut'])
+	) {
+		include_spip('inc/acces');
+		ecrire_acces();
 	}
-	else {
-		// .. mettre a jour les sessions de cet auteur
-		include_spip('inc/session');
-		$c['id_auteur'] = $id_auteur;
-		actualiser_sessions($c);
-	}
+
+	// .. mettre a jour les sessions de cet auteur
+	include_spip('inc/session');
+	$c['id_auteur'] = $id_auteur;
+	actualiser_sessions($c);
 }
 
 
