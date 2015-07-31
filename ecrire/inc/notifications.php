@@ -81,30 +81,31 @@ function notifications_envoyer_mails($emails, $texte, $sujet="", $from = "", $he
 	notifications_nettoyer_emails($emails);
 
 	// tester si le mail est deja en html
-	if (!strlen($sujet)
-	  AND strpos($texte,"<")!==false // eviter les tests suivants si possible
+	if (strpos($texte,"<")!==false // eviter les tests suivants si possible
 		AND $ttrim = trim($texte)
 		AND substr($ttrim,0,1)=="<"
 	  AND substr($ttrim,-1,1)==">"
 	  AND stripos($ttrim,"</html>")!==false){
 
-		// dans ce cas on ruse un peu : extraire le sujet du title
-		if (preg_match(",<title>(.*)</title>,Uims",$texte,$m))
-			$sujet = $m[1];
-		else {
-			// fallback, on prend le body si on le trouve
-			if (preg_match(",<body[^>]*>(.*)</body>,Uims",$texte,$m))
-				$ttrim = $m[1];
+		if(!strlen($sujet)){
+			// dans ce cas on ruse un peu : extraire le sujet du title
+			if (preg_match(",<title>(.*)</title>,Uims",$texte,$m))
+				$sujet = $m[1];
+			else {
+				// fallback, on prend le body si on le trouve
+				if (preg_match(",<body[^>]*>(.*)</body>,Uims",$texte,$m))
+					$ttrim = $m[1];
 
-			// et on extrait la premiere ligne de vrai texte...
-			// nettoyer le html et les retours chariots
-			$ttrim = textebrut($ttrim);
-			$ttrim = str_replace("\r\n", "\r", $ttrim);
-			$ttrim = str_replace("\r", "\n", $ttrim);
-			// decouper
-			$ttrim = explode("\n",trim($ttrim));
-			// extraire la premiere ligne de texte brut
-			$sujet = array_shift($ttrim);
+				// et on extrait la premiere ligne de vrai texte...
+				// nettoyer le html et les retours chariots
+				$ttrim = textebrut($ttrim);
+				$ttrim = str_replace("\r\n", "\r", $ttrim);
+				$ttrim = str_replace("\r", "\n", $ttrim);
+				// decouper
+				$ttrim = explode("\n",trim($ttrim));
+				// extraire la premiere ligne de texte brut
+				$sujet = array_shift($ttrim);
+			}
 		}
 
 		// si besoin on ajoute le content-type dans les headers
