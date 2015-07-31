@@ -298,10 +298,10 @@ function base_vider_tables_destination_copie($tables, $exlure_tables = array(), 
 	  AND !in_array('spip_auteurs',$exlure_tables)) {
 		// s'asurer qu'on a pas deja fait la manip !
 		if (sql_countsel("spip_auteurs", "id_auteur<>0")) {
-			spip_log('Conserver copieur '.$GLOBALS['visiteur_statut']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
+			spip_log('Conserver copieur '.$GLOBALS['visiteur_session']['id_auteur'] . " dans id_auteur=0 pour le serveur '$serveur'",'dump.'._LOG_INFO_IMPORTANTE);
 			sql_delete("spip_auteurs", "id_auteur=0",$serveur);
 			// utiliser le champ webmestre pour stocker l'ancien id ne marchera pas si l'id comporte plus de 3 chiffres...
-			sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_statut']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_statut']['id_auteur']),array(),$serveur);
+			sql_updateq('spip_auteurs', array('id_auteur'=>0, 'webmestre'=>$GLOBALS['visiteur_session']['id_auteur']), "id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']),array(),$serveur);
 		}
 		sql_delete("spip_auteurs", "id_auteur!=0",$serveur);
 	}
