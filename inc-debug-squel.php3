@@ -8,20 +8,26 @@ define("_INC_DEBUG_SKEL", "1");
 
 function erreur_requete_boucle($query, $id_boucle) {
 	$erreur = spip_sql_error();
-	if (ereg('errno:[[:space:]]+([0-9]+)', $erreur, $regs))
-		$errno = $regs[1];
+	$errno = spip_sql_errno();
+	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
+		$errsys = $regs[2];
+	else if (($errno == 1030 OR $errno <= 1026) AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
+		$errsys = $regs[1];
+
 	$erreur = htmlspecialchars($erreur);
 
 	// Erreur systeme
-	if ($errno > 0) {
-		$retour .= "<tt><br><br><blink>Erreur syst&egrave;me</blink><br>\n".
-			"<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>";
+	if ($errsys > 0 AND $errsys < 200) {
+		$retour .= "<tt><br><br><blink>Erreur syst&egrave;me (errno $errsys)</blink><br>\n";
 		$retour .= "<" ."?php
 		if (\$GLOBALS['spip_admin']) {
-			echo \"<font color='red'>Essayez de <a href='ecrire/admin_repair.php3'>r&eacute;parer la base</a>, \"
+			echo \"<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>\"
+				.\"<font color='red'>Essayez de <a href='ecrire/admin_repair.php3'>r&eacute;parer la base</a>, \"
 				.\"ou contactez votre h&eacute;bergeur.</font><br></b>".
-				"<blink>Erreur syst&egrave;me</blink></tt>\n\";
-		} ?".">";
+				"<blink>Erreur syst&egrave;me (errno $errsys)</blink>\";
+		}
+		echo \"</tt>\n\";
+		?".">";
 	}
 	// Requete erronee
 	else {
