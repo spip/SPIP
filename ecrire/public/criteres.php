@@ -163,8 +163,12 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle->total_parties = $pas;
 
 	// ajouter la cle primaire dans le select pour pouvoir gerer la pagination referencee par @id
+	// sauf si pas de primaire, ou si primaire composee
+	// dans ce cas, on ne sait pas gerer une pagination indirecte
 	$t = $boucle->id_table . '.' . $boucle->primary;
-	if (!in_array($t, $boucles[$idb]->select))
+	if ($boucle->primary
+		AND !preg_match('/[,\s]/',$boucle->primary)
+		AND !in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t;
 }
 
