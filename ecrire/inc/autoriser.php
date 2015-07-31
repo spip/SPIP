@@ -77,9 +77,9 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
 
-	// Aliases pour les types pas generiques (a etendre et ameliorer)
-	if ($type == 'groupes_mot') $type = 'groupemots';
-	#if ($type == 'syndic_article') $type = 'syndicarticle';
+	// passer par objet_type pour avoir les alias
+	// et supprimer les _
+	$type = str_replace('_','',  objet_type($type));
 
 	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
