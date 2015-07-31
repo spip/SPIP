@@ -19,7 +19,7 @@ function action_editer_article_dist() {
 	$arg = $securiser_action();
 
 	// si id_article n'est pas un nombre, c'est une creation 
-	// mais on verifie qu'on a toutes les données qu'il faut.
+	// mais on verifie qu'on a toutes les donnï¿½es qu'il faut.
 	if (!$id_article = intval($arg)) {
 		$id_parent = _request('id_parent');
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
@@ -136,7 +136,7 @@ function revisions_articles ($id_article, $c=false) {
 		array(
 			'champs' => array(
 				'surtitre', 'titre', 'soustitre', 'descriptif',
-				'nom_site', 'url_site', 'chapo', 'texte', 'ps'
+				'nom_site', 'url_site', 'chapo', 'texte', 'ps','date','date_redac'
 			),
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
