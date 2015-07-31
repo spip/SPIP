@@ -325,7 +325,7 @@ function analyser_site($url) {
 		// Cherchons quand meme un backend
 		include_ecrire('feedfinder.php');
 		$feeds = get_feed_from_url($url, $texte);
-		if (count($feeds>1)) {
+		if (count($feeds)>1) {
 			spip_log("feedfinder.php :\n".join("\n", $feeds));
 			$result['url_syndic'] = "select: ".join(' ',$feeds);
 		} else
