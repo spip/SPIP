@@ -354,6 +354,7 @@ function import_all_continue()
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
 	$archive = $dir . $request['archive'];
+	$affiche_progression_pourcent = @filesize($archive);
 
 	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
@@ -363,10 +364,10 @@ function import_all_continue()
 
 	// attention : si $request['archive']=="", alors archive='data/' 
 	// le test is_readable n'est donc pas suffisant
-	if (!@is_readable($archive)||is_dir($archive)) {
+	if (!@is_readable($archive)||is_dir($archive) || !$affiche_progression_pourcent) {
 		$texte_boite = _T('info_erreur_restauration');
 		debut_boite_alerte();
-		echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
 		fin_boite_alerte();
 		fin_html();
 		// faut faire quelque chose, sinon le site est mort :-)
@@ -389,8 +390,6 @@ function import_all_continue()
 			$taille = taille_en_octets($my_pos);
 			$gz = true;
 	} else {
-			$affiche_progression_pourcent = filesize($archive);
-			#echo $affiche_progression_pourcent;
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
 			$gz = false;
 		}
