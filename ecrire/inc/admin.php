@@ -63,8 +63,8 @@ function admin_verifie_session($script, $anonymous=false) {
 		ecrire_meta('admin', $signal, 'non');
 	} else {
 		if (!$anonymous AND ($valeur != $signal)) {
-			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
-			    $GLOBALS['visiteur_session']['id_auteur']) {
+			if (!preg_match('/^(.*)_(\d+)_/', $GLOBALS['meta']["admin"], $l)
+				OR intval($l[2])!=$GLOBALS['visiteur_session']['id_auteur']) {
 				include_spip('inc/minipres');
 				spip_log("refus de lancer $script, priorite a $valeur");
 				return minipres(_T('info_travaux_texte'));
