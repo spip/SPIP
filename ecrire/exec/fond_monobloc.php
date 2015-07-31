@@ -10,14 +10,33 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion d'affichage des pages privées en squelette (méthode dépreciée)
+ *
+ * Chargé depuis ecrire/index.php lorsqu'une page demandée est présente
+ * en tant que squelettes dans `prive/exec`.
+ *
+ * @deprecated
+ *    Il faut créer les squelettes de l'espace privé dans `prive/squelettes`
+ * 
+ * @package SPIP\Core\Exec
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Un exec generique qui utilise le fond homonyme de l'exec demande
- * dans l'url
- * Ancien systeme transitoire base sur un squelette unique avec un
- * pseudo balisage par commentaires html
- * deprecie, ne plus utiliser
+ * Un exec générique qui utilise le fond homonyme de l'exec demandé
+ * dans l'URL
+ * 
+ * Ancien système transitoire basé sur un squelette unique avec un
+ * pseudo balisage par commentaires HTML
+ * 
+ * @deprecated Ne plus utiliser. Migrer vers `prive/squelettes/`
+ * 
+ * @pipeline_appel affiche_hierarchie
+ * @pipeline_appel affiche_gauche
+ * @pipeline_appel affiche_droite
+ * @pipeline_appel affiche_milieu
  *
  */
 function exec_fond_monobloc_dist(){

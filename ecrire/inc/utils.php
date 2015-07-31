@@ -2520,6 +2520,23 @@ function trouver_fond($nom, $dir='', $pathinfo = false) {
 	return $p;
 }
 
+/**
+ * Teste, pour un nom de page de l'espace privé, s'il est possible
+ * de générer son contenu.
+ *
+ * Dans ce cas, on retourne la fonction d'exécution correspondante à utiliser
+ * (du répertoire `ecrire/exec`). Deux cas particuliers et prioritaires :
+ * `fond` ou `fond_monobloc` sont retournés si des squelettes existent.
+ * 
+ * - `fond` : pour des squelettes de `prive/squelettes/contenu`
+ *          ou pour des objets éditoriaux dont les suqelettes seront échaffaudés
+ * - `fond_monobloc` (compatibilité avec SPIP 2.1) : pour des squelettes de `prive/exec`
+ * 
+ * @param string $nom
+ *     Nom de la page
+ * @return string
+ *     Nom de l'exec, sinon chaîne vide.
+**/
 function tester_url_ecrire($nom){
 	static $exec=array();
 	if (isset($exec[$nom])) return $exec[$nom];
