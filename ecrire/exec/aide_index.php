@@ -26,6 +26,7 @@ define('_REPLACE_IMG_PACK', "@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims");
 // http://doc.spip.org/@help_frame
 function help_frame ($aide, $lang) {
 
+	$aide = strtr($aide,'<>"\'', '____');
 	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=menu", false, true) . "' name=\"gauche\" id=\"gauche\" scrolling=\"auto\" />\n";
 	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=body", false, true) . "' name=\"droite\" id=\"droite\" scrolling=\"auto\" />\n";
 
@@ -347,7 +348,8 @@ function help_menu_rubrique($html)
 			$sujet = $section[3];
 			$id = "ligne$ligne";
 
-			if (_request('aide') == $sujet) {
+			$aide = strtr(_request('aide'),'<>"\'', '____');
+			if ($aide == $sujet) {
 				$ouvrir = 1;
 				$class = "article-actif";
 				$texte .= http_script("curr_article = '$id';");
@@ -410,7 +412,7 @@ function exec_aide_index_dist()
 			help_menu(_request('aide'), $html, $lang);
 		}
 		else if (_request('frame') == 'body') {
-			$aide = _request('aide');
+			$aide = strtr(_request('aide'),'<>"\'', '____');
 			if ($aide) {
 				$preg = ',<h2( class="spip")?'. ">$aide/(.+?)</h2>(.*)$,ism";
 				preg_match($preg, $html, $r);
