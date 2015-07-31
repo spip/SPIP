@@ -737,7 +737,7 @@ prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
 prive/squelettes/navigation/dist.html -text
 prive/squelettes/navigation/page-admin_tech.html -text
-prive/squelettes/navigation/page-configurer_identite.html -text
+prive/squelettes/navigation/page-configurer.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
 prive/squelettes/structure.html -text

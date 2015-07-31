@@ -1,0 +1,10 @@
+<?php
+
+	include_spip('inc/bandeau');
+	$contexte = definir_barre_contexte();
+	$boutons = definir_barre_boutons($contexte);
+	$sous = bando_lister_sous_menu($boutons['bando_configuration']->sousmenu,$contexte,"item");
+	$res = $sous ? "<div class='navigation'><ul class='liste_items sous_navigation'>$sous</ul></div>":"";
+	echo $res;
+
+?>

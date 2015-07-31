@@ -1,13 +1,10 @@
-[(#REM)
-
-  Squelette
-  (c) 2009 xxx
-  Distribue sous licence GPL
-
-]
+[(#ENV{exec}|match{configurer_}|oui)
+<INCLURE{fond=prive/squelettes/navigation/page-configurer,env}>
+][(#ENV{exec}|match{configurer_}|non)
 <?php
 
 include_spip('exec/accueil');
 echo exec_accueil_navigation();
 
 ?>
+]

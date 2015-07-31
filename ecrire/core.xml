@@ -122,7 +122,7 @@
 		<url>config_fonctions</url>
 	</bouton>
 	
-	<bouton id='admin_plugin' parent="bando_configuration">
+	<bouton id='admin_plugin' parent="bando_configuration" position="0">
 		<icone>images/plugin-16.png</icone>
 		<titre>icone_admin_plugin</titre>		
 	</bouton>
