@@ -2485,11 +2485,13 @@ else {
 				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_grand_ecran')."\"><img src='img_pack/set-ecran.png' alt=\""._T('info_grand_ecran')."\" width='26' height='20' border='0'></a>";
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
-
+//			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
+		echo "</td>";
+		
+		echo "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>";
 			// Choix de la couleur: automatique en fonction de $couleurs_spip
 
 			$link = new Link;
-			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
 			ksort($couleurs_spip);
 			while (list($key,$val) = each($couleurs_spip)) {
 					$link->delVar('set_couleur');
@@ -2833,13 +2835,13 @@ else {
 			echo _T('titre_changer_couleur_interface');
 		echo "</div>";
 		
-		$decal = $decal + count($couleurs_spip) * 10 + 10;
+		$decal = $decal + 70;
 		
 		echo "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 			echo $ecran;
 		echo "</div>";
 		
-		$decal = $decal + 100;
+		$decal = $decal + 110;
 		
 		// En interface simplifiee, afficher un permanence l'indication de l'interface
 		if ($options != "avancees") {
