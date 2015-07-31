@@ -33,14 +33,41 @@ function vertebrer_sort($fields, $direction)
 	foreach($fields as $n => $t) {
 		$tri = $direction
 		. ((test_sql_int($t) OR test_sql_date($r)) ? 'tri_n' : 'tri');
-		$url ="";
-		foreach (array('tri', 'tri_n', '_tri', '_tri_n') as $c) {
-			if ($tri != $c) $url .= "|$c";
-		}
+
 		$url = "|parametre_url{" . $tri . ",'" . $n . "'}"
-		. '|parametre_url{"' . substr($url,1) .'",""}';
+		  . vertebrer_sanstri($tri);
 
 		$res .= "\n\t\t<th><a href='[(#SELF$url)]'>$n</a></th>";
+	}
+	return $res;
+}
+
+function vertebrer_sanstri($sauf='')
+{
+	$url ="";
+	foreach (array('tri', 'tri_n', '_tri', '_tri_n') as $c) {
+		if ($sauf != $c) $url .= "|$c";
+	}
+	return '|parametre_url{"' . substr($url,1) .'",""}';
+}
+
+// Autant de formulaire que de champs (pour les criteres conditionnels) 
+
+function vertebrer_form($fields)
+{
+	$res = '<td></td>';
+	$url = join('|', array_keys($fields));
+	$url = "#SELF|parametre_url{'$url',''}";
+	foreach($fields as $n => $t) {
+
+		$s = test_sql_int($t) ? 11
+		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
+	  spip_log("$t $s");
+		$res .= "\n\t\t<td><form action='[($url)]' method='get'><div>"
+		 . "\n\t\t\t<input name='$n'[ value='(#ENV{" . $n ."})']"
+		 . ($s ? " size='$s'" : '')
+		 . " />\n\t\t\t[($url|form_hidden)]"
+		 . "\n\t\t</div></form></td>";
 	}
 	return $res;
 }
@@ -56,6 +83,7 @@ function vertebrer_crit($v)
 	 foreach($v as $n => $t) {  $res .= "\n\t{" . $n .  " ?}"; }
 	 return $res;
 }
+
 
 // Class CSS en fonction de la parite du numero de ligne.
 // Si une colonne reference une table, ajoute un href sur sa page dynamique.
@@ -103,9 +131,11 @@ function public_vertebrer_dist($desc)
 	"href='./?page=$surnom&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle'>squelette" .
 	"</a>" .
 	"\n#PAGINATION" .
-	"\n</p>\n<table class='spip' border='1' width='90%'>" .
+	"\n</p><br class='nettoyeur' />\n<table class='spip' border='1' width='90%'>" .
 	"\n\t<tr>\n\t\t<th>Nb</th>" .
 	vertebrer_sort($field,'') .
+	"\n\t</tr>\n\t\t<tr>" .
+	vertebrer_form($field) .
 	"\n\t</tr>\n<BOUCLE1($surnom)" .
 	vertebrer_crit($field) .
 	'>' .
