@@ -553,7 +553,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
   leur fournissant leurs codes d\'acc&egrave;s au site priv&eacute;. Certains
   h&eacute;bergeurs d&eacute;sactivent l\'envoi de mails depuis leurs
   serveurs&nbsp;: dans ce cas, l\'inscription automatique est
-  impossible.', # MODIF
+  impossible.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Vill du anv&auml;nsda nyckelord i din sajt?',
 'info_question_proposer_site' => 'Vem kan f&ouml;resl&aring; l&auml;nkar till sajter?',
 'info_question_utilisation_moteur_recherche' => 'Vill du anv&auml;nda SPIP&#381;s integrerade s&ouml;kfunktion?

@@ -557,7 +557,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   yang memberikan kode akses ke situs pribadi. Sejumlah
   hosting menonaktifkan pengiriman e-mail di server mereka:
   dalam hal ini ini registrasi terotomasi tidak dapat
-  diimplementasikan.', # MODIF
+  diimplementasikan.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Apakah anda ingin menggunakan kata-kata kunci di situs anda?',
 'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?

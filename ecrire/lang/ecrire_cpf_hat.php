@@ -560,7 +560,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
   ki bay azottout kod laks&eacute; sou sit priv&eacute;. K&egrave;k
   l&eacute;b&egrave;j&egrave; ka enpeche lanvwa tout lim&egrave;l  depi zot s&egrave;v&egrave;&nbsp;:
   al&ograve;, lenskrisyon otomatik ke
-  inposib.', # MODIF
+  inposib.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Eske w vle itilize mokle yo nan sitw&egrave;b w&nbsp;?',
 'info_question_proposer_site' => 'Kimoun kapab pwopoze k&egrave;k sit referans&eacute;&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize mot&egrave; pou ch&egrave;che de SPIP&nbsp;?

@@ -562,7 +562,7 @@ propor os seus pr&oacute;prios artigos. <blockquote><i>Durante a fase de inscri&
 fornecendo-lhes os seus c&oacute;digos de acesso ao s&iacute;tio privado.Alguns
 servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
  servidores&nbsp;: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute;
- imposs&iacute;vel.', # MODIF
+ imposs&iacute;vel.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Deseja utilizar as palavras-chave no seu s&iacute;tio&nbsp;?',
 'info_question_proposer_site' => 'Quem pode propor s&iacute;tios referenciados&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP&nbsp;?

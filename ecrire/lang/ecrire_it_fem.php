@@ -556,7 +556,7 @@ i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
 le utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
 hoster disattivano l\'invio di email dai propri server: in questo caso, l\'iscrizione automatica &egrave;
-impossibile.', # MODIF
+impossibile.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave nel sito?',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?

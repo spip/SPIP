@@ -530,7 +530,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
  que li fornisse lu sieus c&ograve;des d\'acc&egrave;s au sit privat. D\'unu
  aubergadors desactivon lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus
  servidors: en aqueu cas, l\'inscripcion automatica es
- impossibla.', # MODIF
+ impossibla.</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilisar lu m&ograve;ts claus sus lo voastre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;u prepauar de sits referen&ccedil;ats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat &agrave; SPIP? (s\'es desactivat, accel&egrave;ra lo foncionament dau sistema.)',

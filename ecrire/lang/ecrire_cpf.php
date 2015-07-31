@@ -575,7 +575,7 @@ versyon SPIP.',
  ou v&eacute;, bann lot&egrave;r i poura inskri azot &egrave;k lo formul&egrave;r otomatik. Zot i poura akost&eacute;
 sir figirw&egrave;b priv&eacute; &eacute; propoz zot prop zartik minm.
 <blockquote><i>Dan moman linskrisyon, bann zitilizat&egrave;r i giny inn lim&egrave;l otomatikman. Lim&egrave;l-la i donn azot bann kod lakostaz sir figirw&egrave;b priv&eacute;. Nana d&eacute;sertin z&eacute;berz&egrave;r
-sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&nbsp;: dann kala, linskrisyon otomatik li l&eacute; pa posib', # MODIF
+sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&nbsp;: dann kala, linskrisyon otomatik li l&eacute; pa posib</i></blockquote>', # MODIF
 'info_question_mots_cles' => 'Anserv bann molakl&eacute; sir out sitw&egrave;b&nbsp;?',
 'info_question_proposer_site' => 'Kisa i p&eacute; propoz bann sit r&eacute;f&eacute;rans&eacute;&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Indik si ou v&eacute; ans&egrave;rv lo rod&egrave;r-dodan SPIP
