@@ -330,13 +330,14 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					$la_date = $match[1];
 				else if (ereg($syndic_regexp['date2'],$item[$i],$match))
 					$la_date = $match[1];
-				if ($GLOBALS['flag_strtotime'] AND $la_date) {
+				if ($la_date) {
 					// http://www.w3.org/TR/NOTE-datetime
 					if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
 						$la_date = str_replace("T", " ", $match[1])." GMT";
 						$la_date = strtotime($la_date) - intval($match[5]) * 3600;
 					}
-					else $la_date = strtotime($la_date);
+					else
+						$la_date = strtotime($la_date);
 				}
 				if ($la_date < $now - 365 * 24 * 3600 OR $la_date > $now + 48 * 3600)
 					$la_date = $now;
