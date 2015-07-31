@@ -274,7 +274,8 @@ if (strlen($texte) > 1) {
 
 /// Mots-cles
 
-if ($flag_mots AND $options == 'avancees' AND $coll > 0) {
+
+if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($coll) AND $options == 'avancees' AND $coll > 0) {
 	echo "<br><br>";
 	formulaire_mots('rubriques', $coll, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
