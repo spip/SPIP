@@ -439,13 +439,4 @@ $GLOBALS['maj'][1957] = array(
 $GLOBALS['maj'][1958] = array(
 	array('sql_alter', "TABLE spip_referers_articles DROP date")
 );
-
-// Un bug permettait au champ 'upload' d'etre vide, provoquant
-// l'impossibilite de telecharger une image
-// http://trac.rezo.net/trac/spip/ticket/1238
-$GLOBALS['maj'][11171] = array(
-	array('spip_query', "UPDATE spip_types_documents SET upload='oui' WHERE upload IS NULL OR upload!='non'")
-);
-
-
 ?>
