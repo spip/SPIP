@@ -109,9 +109,8 @@ function retire_caches() {
 }
 
 //
-// Retourne 0 s'il faut recalculer le cache, 1 sinon
+// Retourne 0 s'il faut calculer le cache, 1 si on peut l'utiliser
 //
-
 function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS;
 
@@ -120,20 +119,17 @@ function utiliser_cache($chemin_cache, $delais) {
 		return 1;
 
 	//  calcul par forcage
-
 	if ($GLOBALS['var_mode'] &&
-	    ($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
-	     || $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
-	     || @file_exists(_ACCESS_FILE_NAME))) # insuffisant...
-	  return 0;
+		($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
+		|| $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
+		|| @file_exists(_ACCESS_FILE_NAME))) # insuffisant...
+		return 0;
 
 	// calcul par absence
-
 	if (!@file_exists($chemin_cache)) return 0;
 
 	// calcul par obsolescence
-
-	return ((time() - @filemtime($chemin_cache)) < $delais) ? 0 : 1;
+	return ((time() - @filemtime($chemin_cache)) > $delais) ? 0 : 1;
 }
 
 
@@ -157,16 +153,14 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	closedir($handle);
 }
 
-function purger_cache()
-{
+function purger_cache() {
 	spip_log('vider le cache');
 	include_ecrire('inc_invalideur.php3');
 	supprime_invalideurs();
 	purger_repertoire(_DIR_CACHE, 0);
 }
 
-function purger_squelettes()
-{
+function purger_squelettes() {
 	spip_log('effacer les squelettes compiles');
 	purger_repertoire(_DIR_CACHE, 0, '^skel_');
 }
