@@ -728,17 +728,20 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "</SELECT><br />";
 		}
 
-		if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image")) {
+		if ($options == "avancees") {
 			echo "<b>"._T('info_description')."</b><br />\n";
 			echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
+		} else {
+			echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' />\n";
+		}
 
+		if ($type_inclus == "embed" OR $type_inclus == "image") {
 			echo "<br /><b>"._T('info_dimension')."</b><br />\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		} else {
-			echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' />\n";
 			echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
 			echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" />\n";
 		}
