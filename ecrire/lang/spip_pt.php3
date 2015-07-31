@@ -172,10 +172,6 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 
 // C
 'calendrier_synchro' => 'Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>, pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste s&iacute;tio.',
-'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
-'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
-'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -667,7 +663,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_gauche_numero_breve' => 'NOT&Iacute;CIA N&Uacute;MERO',
 'info_gauche_statistiques_referers' => 'Esta p&aacute;gina apresenta a lista dos <I>referers</I>, isto &eacute;, s&iacute;tios que cont&ecirc;m v&iacute;nculos que levam para o seu pr&oacute;prio s&iacute;tio,apeanas hoje&nbsp;: com efeito, esta lista &eacute; actulizada cada 24 horas.',
 'info_gauche_suivi_forum' => 'A p&aacute;gina de <I>seguimento dos f&oacute;runs </I> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio ( e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
-'info_gauche_suivi_forum_2' => 'A p&aacute;gina <I>seguido dos f&oacute;runs </I> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio ( e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
+'info_gauche_suivi_forum_2' => 'A p&aacute;gina <I>seguimento dos f&oacute;runs </I> &eacute; um instrumento de gest&atilde;o do seu s&iacute;tio (e n&atilde;o um espa&ccedil;o de discuss&atilde;o ou de redac&ccedil;&atilde;o). Exibe todas as contribui&ccedil;&otilde;es do f&oacute;rum p&uacute;blico deste artigo e permite-lhe gerir essas contribui&ccedil;&otilde;es. ',
 'info_gauche_visiteurs_enregistres' => 'Encontrar&aacute; aqui os visitadores registados
  no espa&ccedil;o p&uacute;blico do s&iacute;tio (f&oacute;runs na base de assinatura).',
 'info_generation_miniatures_images' => 'Gera&ccedil;&atilde;o de miniaturas das imagens',
@@ -1633,7 +1629,7 @@ a SPIP pesquisar igualmente no texto dos
 'titre_nouveau_groupe' => 'Novo grupo',
 'titre_nouvelle_breve' => 'Nova not&iacute;cia',
 'titre_nouvelle_rubrique' => 'Nova rubrica',
-'titre_numero_rubrique' => 'RUBRICA N&Uacute;MER&nbsp;:',
+'titre_numero_rubrique' => 'RUBRICA N&Uacute;MERO&nbsp;:',
 'titre_page_admin_effacer' => 'Manuten&ccedil;&atilde;o t&eacute;cnica : apagar a base',
 'titre_page_admin_vider' => 'Manuten&ccedil;&atilde;o t&eacute;cnica : gest&atilde;o do cache',
 'titre_page_articles_edit' => 'Modificar : @titre@',
@@ -1685,7 +1681,14 @@ a SPIP pesquisar igualmente no texto dos
 'trad_delier' => 'N&atilde;o mais ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
-'trad_reference' => '(artigo de refer&ecirc;ncia)'
+'trad_reference' => '(artigo de refer&ecirc;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
+'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
+'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 
