@@ -292,6 +292,7 @@ function maj_liens($pivot,$l='') {
 		// Preparer
 		$l = preg_replace(',[^\w],','',$l); // securite
 		$primary = "id_$l";
+		$objet = ($l=='syndic'?'site':$l);
 		$ls = (isset($exceptions_pluriel[$l])?$exceptions_pluriel[$l]:$l."s");
 		$ancienne_table = 'spip_'.$pivots.'_'.$ls;
 		$pool = 400;
@@ -306,7 +307,7 @@ function maj_liens($pivot,$l='') {
 
 		$champs = array_keys($champs);
 		$champs[] = "$primary as id_objet";
-		$champs[] = "'$l' as objet";
+		$champs[] = "'$objet' as objet";
 		$champs = implode(', ',$champs);
 
 		// Recopier les donnees
@@ -314,7 +315,7 @@ function maj_liens($pivot,$l='') {
 		while ($ids = array_map('reset',sql_allfetsel("$primary",$ancienne_table,'','','',"0,$sub_pool"))){
 			$insert = array();
 			foreach($ids as $id){
-				$n = sql_countsel($liens,"objet='$l' AND id_objet=".intval($id));
+				$n = sql_countsel($liens,"objet='$objet' AND id_objet=".intval($id));
 				while ($t = sql_allfetsel($champs, $ancienne_table,"$primary=".intval($id),'',$id_pivot,"$n,$pool")) {
 					$n+=count($t);
 					// empiler en s'assurant a minima de l'unicite
