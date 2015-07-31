@@ -38,6 +38,7 @@ function creer_base($serveur='') {
 }
 
 
+// http://doc.spip.org/@creer_base_types_doc
 function creer_base_types_doc($desc, $serveur='') {
 	global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 	// Init ou Re-init ==> replace pas insert
