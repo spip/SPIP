@@ -136,7 +136,14 @@ function retire_caches($chemin = '') {
 
 function cache_valide($chemin_cache, $date) {
 
-	tester_variable('delais', 3600);
+	if (!isset($GLOBALS['delais']))
+		$GLOBALS['delais'] = 3600;
+
+	if (
+		isset($_REQUEST['delais'])
+		AND $GLOBALS['delais'] == $_REQUEST['delais']
+	)
+		die ("tester_variable: 'delais' interdite");
 
 	if (!$GLOBALS['delais']) return -1;
 

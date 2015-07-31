@@ -61,9 +61,9 @@ if (defined('_INC_PUBLIC')) {
 		if (strstr($fond, '/'))
 			die (_L("Faut pas se gener"));
 
-	# par defaut, la globale
+	# par defaut
 	} else
-		tester_variable('fond', 'sommaire');
+		$fond = 'sommaire';
 
 	// Particularites de certains squelettes
 	if ($fond == 'login')
