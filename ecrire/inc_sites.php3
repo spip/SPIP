@@ -349,7 +349,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				elseif (ereg($syndic_regexp['descriptionbis'],$item[$i],$match))
 					$la_description = couper(addslashes(supprimer_tags(filtrer_entites($match[2]))),300);
 				else $la_description = "";
-				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
+				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url='$le_lien' AND id_syndic=$now_id_syndic";
 				$result_deja = spip_query($query_deja);
 				if (spip_num_rows($result_deja) == 0 and !spip_sql_error()) {
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
@@ -381,7 +381,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
 
-				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
+				$query_deja="SELECT * FROM spip_syndic_articles WHERE url='$le_lien' AND id_syndic=$now_id_syndic";
 				$result_deja=spip_query($query_deja);
 				if (spip_num_rows($result_deja)==0){
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".

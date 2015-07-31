@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 if ($statut AND $connect_statut == "0minirezo") {
-	$query="UPDATE spip_breves SET date_heure=NOW(), statut=\"$statut\" WHERE id_breve=$id_breve";
+	$query="UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve";
 	$result=spip_query($query);
 	calculer_rubriques();
 	redirige_par_entete("breves.php3");

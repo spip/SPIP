@@ -328,7 +328,7 @@ function maj_base() {
 		while($row = spip_fetch_array($result)) {
 				$id_groupe = addslashes($row['id_groupe']);
 				$type = addslashes($row['titre']);
-				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type=\"$type\"");
+				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
 		}
 		maj_version (1.405);
 	}

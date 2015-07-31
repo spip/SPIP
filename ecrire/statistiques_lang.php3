@@ -52,14 +52,14 @@ function enfants($id_parent){
 	global $nombre_abs;
 	global $critere;
 
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=\"$id_parent\"";
+	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_parent'";
 	$result = spip_query($query);
 	$nombre = 0;
 
 	while($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$query2 = "SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
+		$query2 = "SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique='$id_rubrique'";
 		$result2 = spip_query($query2);
 		$visites = 0;
 		if ($row2 = spip_fetch_array($result2)) {
