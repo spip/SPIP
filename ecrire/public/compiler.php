@@ -53,7 +53,7 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 		foreach($couple as $val) {
 			$var = $val[0];
 			if ($var->type != 'texte') {
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), '');
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
 				$var = $m[1];
