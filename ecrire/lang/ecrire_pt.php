@@ -184,7 +184,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	// I
 	'ical_info1' => 'Esta página apresenta muitos modos de permanecer em contacto com as actividades deste sítio.',
 	'ical_info2' => 'Para mais informações sobre estas técnicas, consultar  <a href="@spipnet@">a documentação de SPIP</a>.', # MODIF
-	'ical_info_calendrier' => 'estão disponíveis dois calendários. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo é pessoal e contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
+	'ical_info_calendrier' => 'Estão disponíveis dois calendários. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo é pessoal e contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
 	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Sincronização (webcal://)',
 	'ical_texte_js' => 'Uma linha de javascript permite-lhe facilmente exibir, em qualquer sítio que lhe pertença, os artigos recentes publicados neste sítio.',
@@ -207,7 +207,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'icone_creer_auteur' => 'Criar um novo autor e associá-lo a este artigo',
 	'icone_creer_mot_cle' => 'Criar uma nova palavra-chave e vinculá-la a este artigo',
 	'icone_creer_mot_cle_rubrique' => 'Criar uma nova palavra-chave e ligá-la a esta rubrica',
-	'icone_creer_mot_cle_site' => 'Criar uma nova palavra-chave e ligá-la a este site',
+	'icone_creer_mot_cle_site' => 'Criar uma nova palavra-chave e ligá-la a este sítio',
 	'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
 	'icone_edition' => 'Editar', # MODIF
 	'icone_envoyer_message' => 'Enviar esta mensagem',
@@ -219,7 +219,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'icone_modifier_rubrique' => 'Modificar esta rubrica',
 	'icone_publication' => 'Publicação',
 	'icone_relancer_signataire' => 'Contactar o signatário novamente', # MODIF
-	'icone_retour' => 'voltar',
+	'icone_retour' => 'Voltar',
 	'icone_retour_article' => 'Voltar ao artigo',
 	'icone_squelette' => 'Modelos',
 	'icone_suivi_publication' => 'Monitorização da publicação', # MODIF
@@ -240,25 +240,25 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_1_visiteur' => '1 visitante',
 	'info_activer_cookie' => 'Pode activar um <b>cookie de correspondência</b>, o que lhe
  permitirá passar facilmente do sítio público ao sítio privado ',
-	'info_admin_etre_webmestre' => 'Conceder-me os direitos de administrador web',
+	'info_admin_etre_webmestre' => 'Conceder-me os direitos de webmaster',
 	'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.', # MODIF
 	'info_admin_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>',
 	'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
-	'info_admin_webmestre' => 'Este administrador é <b>webmestre</b>',
+	'info_admin_webmestre' => 'Este administrador é <b>webmaster</b>',
 	'info_administrateur' => 'Administrador',
 	'info_administrateur_1' => 'Administrador',
 	'info_administrateur_2' => 'do sítio (<i>utilize com precaução</i>)',
-	'info_administrateur_site_01' => 'Se for o administrador do sítio,favor',
-	'info_administrateur_site_02' => 'clicar sobre este vínculo',
+	'info_administrateur_site_01' => 'Se for o administrador do sítio, por favor',
+	'info_administrateur_site_02' => 'clicar sobre esta ligação',
 	'info_administrateurs' => 'Administradores',
 	'info_administrer_rubrique' => 'Pode administrar esta rubrica',
 	'info_adresse' => 'ao endereço :',
 	'info_adresse_url' => 'Endereço (URL) do sítio público',
-	'info_afficher_par_nb' => 'Mostrar ',
+	'info_afficher_par_nb' => 'Exibir',
 	'info_afficher_visites' => 'Exibir as visitas para :',
-	'info_aide_en_ligne' => 'Ajuda em linha SPIP',
+	'info_aide_en_ligne' => 'Ajuda online SPIP',
 	'info_ajout_image' => 'Quando acrescentar imagens como documentos ligados a um artigo,
  SPIP pode criar para si, automaticamente, vinhetas (miniaturas) das
  imagens inseridas. Isso permite por exemplo criar
@@ -290,10 +290,10 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_auteurs' => 'Os autores',
 	'info_auteurs_par_tri' => 'Autores@partri@',
 	'info_auteurs_trouves' => 'Autores encontrados',
-	'info_authentification_externe' => 'Autentificação externa',
+	'info_authentification_externe' => 'Autenticação externa',
 	'info_avertissement' => 'Aviso',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
-	'info_base_installee' => 'A estrutura da sua base de dados está instalada',
+	'info_base_installee' => 'A estrutura da sua base de dados está instalada.',
 	'info_bio' => 'Biografia',
 	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Cabeçalho',
@@ -331,14 +331,14 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_date_publication_anterieure' => 'Data de publicação anterior:',
 	'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE SÍTIO :',
 	'info_derniere_etape' => 'Última etapa : <b>Acabou !', # MODIF
-	'info_derniers_articles_publies' => 'Os seus últimos artigos publicados em linha',
+	'info_derniers_articles_publies' => 'Os seus últimos artigos publicados online',
 	'info_desactiver_messagerie_personnelle' => 'Pode activar ou desactivar o seu correio pessoal neste sítio.',
 	'info_descriptif' => 'Descrição:',
 	'info_desinstaller_plugin' => 'supprime les données et désactive le plugin', # NEW
 	'info_discussion_cours' => 'Discussões em curso',
 	'info_ecrire_article' => 'Antes de poder escrever artigos, deve criar pelo menos uma rubrica.',
 	'info_email_envoi' => 'Endereço de email de envio (opcional)',
-	'info_email_envoi_txt' => 'Indique aqui o endereço a utilizar para mandar os emails (se não for o caso, o endereço do destinatário será utilizado como endereço de envio) :',
+	'info_email_envoi_txt' => 'Indique aqui o endereço a utilizar para enviar os emails (se não for o caso, o endereço do destinatário será utilizado como endereço de envio) :',
 	'info_email_webmestre' => 'Endereço e-mail do webmestre (opcional)', # MODIF
 	'info_entrer_code_alphabet' => 'Insira o código do alfabeto a utilizar :',
 	'info_envoi_email_automatique' => 'Envio automático de mails',
@@ -353,43 +353,43 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
  a uma <i>mailing-list</i> dos redactores, o anúncio dos pedidos de
  publicação e das validações de artigos.',
 	'info_fichiers_authent' => 'Ficheiros de autenticação « .htpasswd »',
-	'info_forums_abo_invites' => 'O seu site contém fóruns por assinatura; os visitantes são convidados a registar-se no site público.',
+	'info_forums_abo_invites' => 'O seu sítio contém fóruns por assinatura; os visitantes são convidados a registar-se no sítio público.',
 	'info_gauche_admin_effacer' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
 	'info_gauche_admin_tech' => '<b>Esta página está acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website</p>', # MODIF
-	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do site.
+	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do sítio.
 Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde; redactor = amarelo).',
 	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao sítio, são indicados por um ícone azul ;
  os autores apagados, por um caixote de lixo.', # MODIF
-	'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado ( se for administrador).',
+	'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado (se for administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
-	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
+	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sítios que contêm links para o seu sítio, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
 	'info_gauche_visiteurs_enregistres' => 'Encontrará aqui os visitantes registados
  no espaço público do sítio (fóruns por assinatura).',
 	'info_generation_miniatures_images' => 'Geração de miniaturas das imagens',
-	'info_gerer_trad' => 'Gerir os vínculos de tradução?',
+	'info_gerer_trad' => 'Gerir as ligações de tradução?',
 	'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 	'info_hebergeur_desactiver_envoi_email' => 'Alguns serviços de hospedagem desactivam o envio automático de
- mails a partir dos seus  servidores. Nesse caso, as seguintes
+ e-mails a partir dos seus  servidores. Nesse caso, as seguintes
  funcionalidades de SPIP não funcionarão.',
 	'info_hier' => 'ontem :',
 	'info_historique_activer' => 'Activar o acompanhamento das revisões',
 	'info_historique_affiche' => 'Visualizar esta versão',
 	'info_historique_comparaison' => 'comparação',
 	'info_historique_desactiver' => 'Desactivar o acompanhamento das revisões',
-	'info_historique_texte' => 'O acompanhamento das revisões permite conservar um histórico de todas as  alterações realizadas ao conteúdo dum artigo, e visualizar as diferenças entre as sucessivas versões',
+	'info_historique_texte' => 'O acompanhamento das revisões permite conservar um histórico de todas as  alterações realizadas ao conteúdo de um artigo, e visualizar as diferenças entre as sucessivas versões',
 	'info_identification_publique' => 'A sua identidade pública...',
-	'info_image_process' => 'Seleccione o melhor método de criar as vinhetas clicando sobre a imagem correspondente.',
+	'info_image_process' => 'Seleccione o melhor método para criar as vinhetas clicando sobre a imagem correspondente.',
 	'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, então o servidor que alberga o seu sítio não foi configurado para utilizar tais ferramentas. Se deseja utilizar essas funções, contacte o responsavel técnico e peça as extensões  «GD» ou «Imagick».</i>', # MODIF
 	'info_images_auto' => 'Imagens calculadas automaticamente',
 	'info_informations_personnelles' => 'Quinta etapa : <b>Informações pessoais<b>', # MODIF
 	'info_inscription_automatique' => 'Inscrição automática de novos redactores',
-	'info_jeu_caractere' => 'Jogo de carácteres do sítio',
+	'info_jeu_caractere' => 'Conjunto de caracteres do sítio',
 	'info_jours' => 'dias',
 	'info_laisser_champs_vides' => 'deixar estes campos vazios)',
-	'info_langues' => 'Línguas do sítio',
+	'info_langues' => 'Idiomas do sítio',
 	'info_ldap_ok' => 'A autenticação LDAP está instalada.',
-	'info_lien_hypertexte' => 'Vínculo hipertexto :',
+	'info_lien_hypertexte' => 'Hiperligação :',
 	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
 	'info_liste_redacteurs_connectes' => 'Lista dos redactores ligados',
 	'info_login_existant' => 'Este login já existe.',
@@ -398,7 +398,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_logos' => 'Os logos', # MODIF
 	'info_maximum' => 'máximo :',
 	'info_meme_rubrique' => 'Na mesma rubrica',
-	'info_message' => 'Mensagem do',
+	'info_message' => 'Mensagem de',
 	'info_message_efface' => 'MENSAGEM APAGADA',
 	'info_message_en_redaction' => 'As suas mensagens em curso de redacção',
 	'info_message_technique' => 'Mensagem técnica:',
@@ -417,12 +417,12 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_mot_sans_groupe' => '(Palavras sem grupo...)',
 	'info_moteur_recherche' => 'Motor integrado de pesquisa',
 	'info_moyenne' => 'média :',
-	'info_multi_articles' => 'Activar o menu de língua sobre os artigos ?',
-	'info_multi_cet_article' => 'Língua deste artigo :',
-	'info_multi_langues_choisies' => 'Favor seleccionar a seguir as línguas à disposição dos redactores do seu sítio.
- As línguas já utilizadas no seu sítio (exibidas em primeiro lugar) não podem ser desactivadas.',
+	'info_multi_articles' => 'Activar o menu de idioma para os artigos?',
+	'info_multi_cet_article' => 'Idioma deste artigo :',
+	'info_multi_langues_choisies' => 'Por favor seleccione a seguir os idiomas à disposição dos redactores do seu sítio.
+ Os idiomas já utilizados no seu sítio (exibidos em primeiro lugar) não podem ser desactivados.',
 	'info_multi_objets' => '@objets@ : activer le menu de langue', # NEW
-	'info_multi_rubriques' => 'Activar o menu de língua sobre as rubricas ? ',
+	'info_multi_rubriques' => 'Activar o menu de idioma para as rubricas? ',
 	'info_multi_secteurs' => '... só para as rubricas situadas na raíz ?',
 	'info_nb_articles' => '@nb@ articles', # NEW
 	'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
@@ -445,7 +445,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  (artigos e notícias recentemente publicados).',
 	'info_non_envoi_liste_nouveautes' => 'Não enviar a lista das novidades',
 	'info_non_modifiable' => 'não pode ser modificado',
-	'info_non_suppression_mot_cle' => 'não quero suprimir esta palavra-chave.',
+	'info_non_suppression_mot_cle' => 'Não quero suprimir esta palavra-chave.',
 	'info_note_numero' => 'Note @numero@', # NEW
 	'info_notes' => 'Notas',
 	'info_nouveaux_message' => 'Novas mensagens',
