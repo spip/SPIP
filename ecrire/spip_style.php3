@@ -1370,5 +1370,9 @@ table.spip td {
 	vertical-align: center;
  }
 <?php }
-if (_FILE_CONNECT) taches_de_fond();
+if (_FILE_CONNECT) 
+  {	
+	include_ecrire('inc_cron.php3');
+	spip_cron();
+  }
 ?>

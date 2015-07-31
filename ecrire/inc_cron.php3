@@ -1,6 +1,5 @@
 <?php
 
-//
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CRON")) return;
 define("_ECRIRE_INC_CRON", "1");
@@ -9,85 +8,196 @@ define("_ECRIRE_INC_CRON", "1");
 // Gestion des taches de fond
 // --------------------------
 
+// Deux difficultes:
+// - la plupat des hebergeurs ne fournissent pas le Cron d'Unix
+// - les scripts usuels standard sont limites a 30 secondes
 
-//
-// Calcul des referers
-//
+// Solution:
+// les scripts usuels les plus brefs, en plus de livrer la page demandee,
+// s'achevent  par un appel à la fonction spip_cron.
+// Celle-ci prend dans la liste des taches a effectuer la plus prioritaire.
+// Une seule tache est executee pour eviter la guillotine des 30 secondes.
+// Une fonction executant une tache doit retourner un nombre:
+// - nul, si la tache n'a pas a etre effecutee
+// - positif, si la tache a ete effectuee
+// - negatif, si la tache doit etre poursuivie ou recommencee
+// Elle recoit en argument la date de la derniere execution de la tache.
 
-// demarrer le calcul
-function cron_referers($t) {
-	ecrire_meta("date_stats_referers", $t);
-	ecrire_meta('calculer_referers_now', 'oui');
-	ecrire_metas();
-}
+// On peut appeler spip_cron avec d'autres taches (pour etendre Spip)
+// specifiee par des fonctions respectant le protocole ci-dessus
+// On peut modifier la frequence de chaque tache et leur ordre d'analyse
+// en modifiant les variables ci-dessous.
 
-// poursuivre le calcul
-function cron_referers_suite() {
-	if (timeout('calculer_referers')) {
-		include_ecrire("inc_statistiques.php3");
-		ecrire_meta('calculer_referers_now', 'non');
-		ecrire_metas();
-		calculer_referers();
+//----------
+
+// Cette fonction execute la premiere tache d'intervalle de temps expire,
+// sous reserve que le serveur MySQL soit actif.
+// La date de la derniere intervention est donnee par un fichier homonyme,
+// de suffixe ".lock", modifie a chaque intervention et des le debut
+// de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
+// Les taches les plus longues sont tronconnees, ce qui impose d'antidater
+// le fichier de verrouillage.
+// La fonction executant la tache est un homonyme de prefixe "cron_"
+// Le fichier homonyme de prefixe "inc_" et de suffixe _EXTENSION_PHP
+// est automatiquement charge et est supposee la definir si ce n'est fait ici.
+
+function spip_cron($taches=array()) {
+
+	global $frequence_taches;
+	$t = time();
+
+	if (!@file_exists(_FILE_MYSQL_OUT)
+	OR ($t - @filemtime(_FILE_MYSQL_OUT) > 300)) {
+		include(_FILE_CONNECT);
+		if (!$GLOBALS['db_ok']) {
+			@touch(_FILE_MYSQL_OUT);
+			spip_log('pas de connexion DB pour taches de fond (cron)');
+			return;
+		}
 	}
-}
 
-
-//
-// Archiver les stats du jour
-//
-function cron_archiver_stats($last_date) {
-	if (timeout('archiver_stats')) {
-		spip_log("Archivage des statistiques de $last_date");
-		include_ecrire("inc_meta.php3");
-		include_ecrire("inc_statistiques.php3");
-		ecrire_meta("date_statistiques", date("Y-m-d"));
-		ecrire_metas();
-		calculer_visites($last_date);
-
-		// purger les referers du jour
-		// ils deviennent "les referers de la veille"
-		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
-		// poser un message pour traiter les referers au prochain hit
-		ecrire_meta('calculer_referers_now','oui');
-		ecrire_metas();
-	}
-}
-
-//
-// La fonction de base qui distribue les taches
-//
-function spip_cron() {
+	if (!$taches) $taches =  taches_generales();
 
 	include_ecrire("inc_meta.php3");
-	$t = time();
-	//
-	// Envoi du mail quoi de neuf
+	foreach ($taches as $tache)
+	  {
+	    $lock = _DIR_SESSIONS . $tache . '.lock';
+	    clearstatcache();
+	    $last = (@file_exists($lock) ? filemtime($lock) : 0);
+
+	    if (($t - $frequence_taches[$tache]) > $last) {
+		@touch($lock);
+		include_ecrire('inc_' . $tache . _EXTENSION_PHP);
+		$fonction = 'cron_' . $tache;
+		$code_de_retour = $fonction($t);
+		if ($code_de_retour) {
+			$msg = $GLOBALS['PHP_SELF'] . ": tache $tache";
+			if ($code_de_retour < 0) {
+				@touch($lock, $last);
+				spip_log($msg . " en cours");
+			}
+			else spip_log($msg . " faite en " . (time() - $t) . " secondes");
+			break;
+		}
+	      }
+	  }
+}
+
+// Construction de la liste ordonnee des taches.
+// Certaines ne sont pas activables de l'espace prive. A revoir.
+
+function taches_generales() {
+
+  // recalcul des rubriques publiques (cas de la publication post-datee)
+
+	$taches_generales = array('rubriques');
 	
+  // cache
+	if (_DIR_RESTREINT)
+	  $taches_generales[]= 'invalideur';
+
+	// nouveautes
+	if (lire_meta('adresse_neuf') AND lire_meta('jours_neuf') AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
+		$taches_generales[]= 'mail';
+
+// Stat. Attention: la popularite DOIT preceder les visites
+	if (lire_meta("activer_statistiques") == "oui") {
+		$taches_generales[]= 'statistiques';
+		$taches_generales[]= 'popularites';
+		$taches_generales[]= 'visites';
+	}
+
+	// syndication
+	if (lire_meta("activer_syndic") == "oui") 
+		$taches_generales[]= 'sites';
+
+	// indexation
+	if (lire_meta("activer_moteur") == "oui") 
+		$taches_generales[]= 'index';
+
+	return $taches_generales;
+}
+
+// Definit le temps minimal, en secondes, entre deux memes taches 
+// NE PAS METTRE UNE VALEUR INFERIEURE A 30 (cf ci-dessus)
+// ca entrainerait plusieurs execution en parallele de la meme tache
+// Ces valeurs sont destinees a devenir des "metas" accessibles dans
+// le panneau de configuration, comme l'est deja la premiere
+
+global $frequence_taches;
+$frequence_taches = array(
+			  'mail' => 3600 * 24 * lire_meta('jours_neuf'),
+			  'visites' => 3600 * 24,
+			  'statistiques' => 3600,
+			  'invalideur' => 3600,
+			  'rubriques' => 3600,
+			  'popularites' => 1800,
+			  'sites' => 60,
+			  'index' => 60
+);
+
+// Fonctions effectivement appelees.
+// Elles sont destinees a migrer dans leur fichier homonyme.
+
+function cron_rubriques($t) {
+	calculer_rubriques();
+	return 1;
+}
+
+function cron_index($t) {
+	effectuer_une_indexation();
+	return 1;
+}
+
+function cron_sites($t) {
+	executer_une_syndication();
+	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire("inc_index.php3");
+		executer_une_indexation_syndic();
+	}
+	return 1;
+}
+
+// calcule les stats en plusieurs etapes par tranche de 100
+
+function cron_statistiques($t) {
+
+	$ref = calculer_n_referers(100);
+	if ($ref == 100) return -1;
+	// Supprimer les referers trop vieux
+	supprimer_referers();
+	supprimer_referers("article");
+	return 1;
+}
+
+function cron_popularites($t) {
+	calculer_popularites($t);
+	return 1;
+}
+
+function cron_visites($t) {
+	calculer_visites($t);
+	return 1;
+}
+
+function cron_mail($t)
+{
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');
 
-	if (_DIR_RESTREINT
-	    AND $adresse_neuf
-	    AND $jours_neuf
-	    AND (lire_meta('quoi_de_neuf') == 'oui') AND
-	    (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
-		if (timeout('quoide_neuf')) { 
-			ecrire_meta('majnouv', time());
-			ecrire_metas();
-
-			include_local("inc-calcul.php3");
-			$page= cherche_page('',
-				array('date' => date('Y-m-d H:i:s', $majnouv)),
+	include_local("inc-calcul.php3");
+	$page= cherche_page('',
+				array('date' => date('Y-m-d H:i:s', $t)),
 				'nouveautes',
 				'',
 				lire_meta('langue_site'));
-			$page = $page['texte'];
-			if (substr($page,0,5) == '<'.'?php') {
+	$page = $page['texte'];
+	if (substr($page,0,5) == '<'.'?php') {
 # ancienne version: squelette en PHP avec affections. 1 passe de +
 				unset ($mail_nouveautes);
 				unset ($sujet_nouveautes);
 				eval ('?' . '>' . $page);
-			} else {
+	} else {
 # nouvelle version: squelette en mode texte, 1ere ligne = sujet
 # il faudrait ge'ne'raliser en produisant les Headers standars SMTP
 # a` passer en 4e argument de mail. Surtout utile pour le charset.
@@ -95,82 +205,27 @@ function spip_cron() {
 				$p = strpos($page,"\n");
 				$sujet_nouveautes = substr($page,0,$p);
 				$mail_nouveautes = ereg_replace('\$jours_neuf',
-					"$jours_neuf",
-					substr($page,$p+1));
-			}
-
-			// envoi
-			if ($mail_nouveautes) {
-				spip_log("envoi mail nouveautes");
-				include_ecrire('inc_mail.php3');
-				envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
-			} else
-				spip_log("envoi mail nouveautes : pas de nouveautes");
-		}
+								$jours_neuf,
+								substr($page,$p+1));
 	}
 
-	//
-	// Mise a jour d'un (ou de zero) site syndique
-	//
-	if (lire_meta("activer_syndic") == "oui") {
-		if (timeout('syndication')) {
-		  spip_log("activer_syndic");
-			include_ecrire("inc_sites.php3");
-			executer_une_syndication();
-			if (lire_meta('activer_moteur') == 'oui') {
-				include_ecrire("inc_index.php3");
-				executer_une_indexation_syndic();
-			}
-		}
-	}
+	if ($mail_nouveautes)
+		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
+	return 1;
+}
 
+function cron_invalideur($t) {
 	//
-	// Gerer l'indexation quand on appelle de l'espace prive
+	// menage des vieux fichiers du cache
+	// marques par l'invalideur 't' = date de fin de fichier
 	//
-	if (!_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
-		if (timeout('indexation')) {
-			include_ecrire("inc_index.php3");
-			effectuer_une_indexation();
-		}
-	}
 
-	//
-	// Statistiques
-	//
-	if (lire_meta("activer_statistiques") != "non") {
-		if ($t - lire_meta('date_stats_referers') > 3600)
-			cron_referers($t);
-		else if (lire_meta('calculer_referers_now') == 'oui')
-			cron_referers_suite();
-	
-		if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques")))
-			cron_archiver_stats($last_date);
-	
-		if ($t - lire_meta('date_stats_popularite') > 1800) {
-			if (timeout('calculer_popularite')) {
-				include_ecrire("inc_statistiques.php3");
-				calculer_popularites();
-			}
-		}
-	}
+	retire_vieux_caches();
 
-	// recalcul des rubriques publiques (cas de la publication post-datee)
-	if (($t - lire_meta('calcul_rubriques') > 3600)
-	AND timeout('calcul_rubriques')) {
-		ecrire_meta('calcul_rubriques', $t);
-		ecrire_metas();
-		include_ecrire('inc_rubriques.php3');
-		calculer_rubriques();
-	}
-
-	//
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-	//
-	if (($t - lire_meta('quota_cache_vider') > 3600)
-	AND timeout('quota_cache_vider')) {
-		ecrire_meta('quota_cache_vider', $t);
-		ecrire_metas();
 
+	// A revoir: il semble y avoir une désynchro ici.
+	
 		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
 		FROM spip_caches WHERE type IN ('t', 'x')"));
 		spip_log("Taille du CACHE: $total_cache octets");
@@ -189,50 +244,7 @@ function spip_cron() {
 			include_ecrire('inc_invalideur.php3');
 			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
 		}
-	}
-
-	//
-	// Toutes les heures, menage des vieux fichiers du cache
-	// marques par l'invalideur 't' = date de fin de fichier
-	//
-	if ($t - lire_meta('date_purge_cache') > 3600) {
-		ecrire_meta('date_purge_cache', $t);
-		ecrire_metas();
-		include_ecrire('inc_invalideur.php3');
-		retire_vieux_caches();
-	}
-
-
-	//
-	// Effacement de la poubelle (documents supprimes)
-	//
-	if (@file_exists(_FILE_GARBAGE)) {
-		if (timeout('poubelle')) {
-			if ($s = sizeof($suite = file(_FILE_GARBAGE))) {
-				$s = $suite[$n = rand(0, $s)];
-				$s = trim($s);
-
-				// Verifier qu'on peut vraiment effacer le fichier...
-				$query = "SELECT id_document FROM spip_documents
-					WHERE fichier='$s'";
-				$result = spip_query($query);
-
-				if (spip_num_rows($result) OR 
-				    !ereg('^' . _DIR_IMG, $s)
-				    OR strpos($s, '..'))
-					spip_log("Tentative d'effacement interdit: $s");
-				else
-					@unlink($s);
-
-				unset($suite[$n]);
-				$f = fopen(_FILE_GARBAGE, 'wb');
-				fwrite($f, join("", $suite));
-				fclose($f);
-			}
-		}
-		else @unlink(_FILE_GARBAGE);
-	}
+	return 1;
 }
-
 
 ?>

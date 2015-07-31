@@ -221,10 +221,13 @@ function terminer_public_global($use_cache, $chemin_cache='') {
 		ecrire_caches_langues();
 	}
 
-	// Calculs en background
+	// Si on a pu utiliser un cache,
+	// il reste du temps pour une tache de fond, notamment le cache
 	if ($use_cache)
-		taches_de_fond();
-
+	  {
+		include_ecrire('inc_cron.php3');
+		spip_cron();
+	  }
 	// Gestion des statistiques du site public
 	// (a la fin pour ne pas forcer le $db_ok)
 	if (lire_meta("activer_statistiques") != "non") {

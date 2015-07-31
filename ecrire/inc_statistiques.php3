@@ -1,10 +1,12 @@
 <?php
 
-//
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_STATISTIQUES")) return;
 define("_ECRIRE_INC_STATISTIQUES", "1");
 
+//
+// Compiler les statistiques temporaires : visites
+//
 
 // Les deux fonctions suivantes sont adaptees du code des "Visiteurs",
 // par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
@@ -168,12 +170,10 @@ function supprimer_referers($type = "") {
 function calculer_n_referers($nb_referers) {
 	$date = date("Y-m-d");
 
-	// Selectionner 100 referers sur tout le site
-	$query = "SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-		"FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nb_referers";
-	$result = spip_query($query);
+	$result = spip_query("SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
+			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nb_referers");
 
-	$encore = (spip_num_rows($result) == $nb_referers);
+	$tous = spip_num_rows($result);
 
 	$referer_insert = "";
 	$referer_update = "";
@@ -182,7 +182,6 @@ function calculer_n_referers($nb_referers) {
 		$visites = $row['visites'];
 		$referer = addslashes($row['referer']);
 		$referer_md5 = '0x'.$row['md5'];
-
 		$referer_update[$visites][] = $referer_md5;
 		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites, $visites)";
 		$referer_vus[] = $referer_md5;
@@ -241,150 +240,7 @@ function calculer_n_referers($nb_referers) {
 		$result_effacer = spip_query($query_effacer);
 	}
 
-	// A-t-on atteint le dernier referer ?
-	return $encore;
-}
-
-
-function calculer_referers() {
-	$encore = calculer_n_referers(100);
-	spip_log("analyse referers $encore");
-	if ($encore) {
-		include_ecrire("inc_meta.php3");
-		ecrire_meta ("calculer_referers_now", "oui");
-		ecrire_metas();
-	} else {
-		// Supprimer les referers trop vieux
-		supprimer_referers();
-		supprimer_referers("article");
-	}
-}
-
-
-//
-// Compiler les statistiques temporaires : visites
-//
-
-function calculer_visites($date = "") {
-	spip_log("analyse visites $date");
-
-	// calculer les popularites avant d'effacer les donnees
-	calculer_popularites();
-
-	// Date par defaut = hier
-	if (!$date) $date = date("Y-m-d", time() - 24 * 3600);
-
-	// Sur tout le site, nombre de visiteurs uniques pendant la journee
-	$query = "SELECT COUNT(DISTINCT ip) AS total_visites FROM spip_visites_temp";
-	$result = spip_query($query);
-	if ($row = @spip_fetch_array($result))
-		$total_visites = $row['total_visites'];
-	else
-		$total_visites = 0;
-	$query_insert = "INSERT INTO spip_visites (date, visites) VALUES ('$date', $total_visites)";
-	$result_insert = spip_query($query_insert);
-
-	// Nombre de visiteurs uniques par article
-	$query = "SELECT COUNT(DISTINCT ip) AS visites, id_objet FROM spip_visites_temp ".
-		"WHERE type='article' GROUP BY id_objet";
-	$result = spip_query($query);
-
-	$visites_insert = "";
-	$visites_update = "";
-
-	while ($row = @spip_fetch_array($result)) {
-		$id_article = $row['id_objet'];
-		$visites = $row['visites'];
-
-		$visites_update[$visites][] = $id_article;
-		$visites_insert[] = "('$date', $id_article, $visites)";
-	}
-
-	$query_effacer = "DELETE FROM spip_visites_temp";
-	$result_effacer = spip_query($query_effacer);
-
-	// Mise a jour de la base
-	if (is_array($visites_update)) {
-		while (list($visites, $articles) = each($visites_update)) {
-			$query = "UPDATE spip_articles SET maj=maj, visites = visites + $visites ".
-				"WHERE id_article IN (".join(', ', $articles).")";
-			$result = spip_query($query);
-		}
-	}
-	if (is_array($visites_insert)) {
-		$query_insert = "INSERT IGNORE INTO spip_visites_articles (date, id_article, visites) ".
-				"VALUES ".join(', ', $visites_insert);
-		$result_insert = spip_query($query_insert);
-	}
-}
-
-
-//
-// Popularite, modele logarithmique
-//
-
-function calculer_popularites() {
-	spip_log("analyse popularites");
-
-	$date = lire_meta('date_stats_popularite');
-	include_ecrire("inc_meta.php3");
-	ecrire_meta("date_stats_popularite", time());
-	ecrire_metas();	// il faut le marquer de suite pour eviter les acces concurrents
-
-	$duree = time() - $date;
-	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
-	$demivie = 1;
-	// periode de reference en jours
-	$periode = 1;
-	// $a est le coefficient d'amortissement depuis la derniere mesure
-	$a = pow(2, - $duree / ($demivie * 24 * 3600));
-	// $b est la constante multiplicative permettant d'avoir
-	// une visite par jour (periode de reference) = un point de popularite
-	// (en regime stationnaire)
-	// or, magie des maths, ca vaut log(2) * duree journee/demi-vie
-	// si la demi-vie n'est pas trop proche de la seconde ;)
-	$b = log(2) * $periode / $demivie;
-
-	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
-
-	// ajouter les points visites
-	$count_article = Array();
-	$query = "SELECT COUNT(*) as count,id_objet FROM spip_visites_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
-	$res = spip_query($query);
-	while ($row = @spip_fetch_array($res)) {
-		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count visites
-	}
-
-	reset ($count_article);
-	while (list($count,$articles) = each($count_article)) {
-		$query = "UPDATE spip_articles
-			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
-			WHERE id_article IN (0$articles)";
-		spip_query($query);
-	}
-
-	// ajouter les points referers
-	$count_article = Array();
-	$query = "SELECT COUNT(*) as count,id_objet FROM spip_referers_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
-	$res = spip_query($query);
-	while ($row = @spip_fetch_array($res)) {
-		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count referers
-	}
-
-	reset ($count_article);
-	while (list($count,$articles) = each($count_article)) {
-		$query = "UPDATE spip_articles
-			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
-			WHERE id_article IN (0$articles)";
-		spip_query($query);
-	}
-
-	// et enregistrer les metas...
-	list($maxpop, $totalpop) = spip_fetch_array(spip_query("SELECT MAX(popularite), SUM(popularite) FROM spip_articles"));
-	ecrire_meta("popularite_max", $maxpop);
-	ecrire_meta("popularite_total", $totalpop);
-	ecrire_metas();
+	return  $tous ;
 }
 
 
@@ -481,6 +337,5 @@ function aff_referers ($query, $limit=10, $plus = true) {
 
 	return $aff;
 }
-
 
 ?>

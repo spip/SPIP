@@ -367,7 +367,7 @@ function gdRotate($imagePath,$rtt){
 // Normalement le test est vérifié donc on ne rend rien sinon
 
 function creer_fichier_vignette($vignette) {
-	spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
+#	spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
 	if ($vignette && lire_meta("creer_preview") == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
 		$ext = $regs[1];
@@ -453,7 +453,7 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 		else if ($process = "convert") {
 			$commande = "$convert_command -rotate $var_rot ./"
 				. escapeshellcmd($image).' ./'.escapeshellcmd($image);
-			spip_log($commande);
+#			spip_log($commande);
 			exec($commande);
 		}
 
