@@ -97,12 +97,12 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		$contexte['id_parent']=$id_parent;
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($row);
-	$att_text = " class='formo' "
-	. $GLOBALS['browser_caret']
+	$att_text = " class='textarea' "
 	. " rows='"
 	. ($config['lignes'] +15)
 	. "' cols='40'";
-	list($contexte['texte'],$contexte['_texte_trop_long']) = editer_texte_recolle($contexte['texte'],$att_text);
+	if (isset($contexte['texte']))
+		list($contexte['texte'],$contexte['_texte_trop_long']) = editer_texte_recolle($contexte['texte'],$att_text);
 
 	// on veut conserver la langue de l'interface ;
 	// on passe cette donnee sous un autre nom, au cas ou le squelette
