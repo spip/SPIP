@@ -134,6 +134,7 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="636" traduits="636" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="erational" lien="http://trad.spip.net/auteur/erational-7186" />
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
