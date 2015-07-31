@@ -129,6 +129,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	return $ret;
 }
 
+// http://doc.spip.org/@image_imagepng
 function image_imagepng($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagepng($img,$tmp);
@@ -136,12 +137,14 @@ function image_imagepng($img,$fichier) {
 	return $ret;
 }
 
+// http://doc.spip.org/@image_imagegif
 function image_imagegif($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagegif($img,$tmp);
 	rename($tmp, $fichier);
 	return $ret;
 }
+// http://doc.spip.org/@image_imagejpeg
 function image_imagejpeg($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagejpeg($img,$tmp);
