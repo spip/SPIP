@@ -122,11 +122,9 @@ echo "</center>";
 // Logos du mot-clef
 //
 
-$arton = "moton$id_mot";
-$artoff = "motoff$id_mot";
-
 if ($id_mot > 0 AND $connect_statut == '0minirezo')
-	afficher_boite_logo($arton, $artoff, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'));
+	afficher_boite_logo('mot', 'id_mot', $id_mot,
+	_T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'));
 
 
 //

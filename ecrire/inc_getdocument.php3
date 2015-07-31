@@ -1,7 +1,7 @@
 <?php
 
 //
-// Fonctions complementaires a spip_image.php3
+// Fonctions de spip_image.php3
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -9,24 +9,35 @@ if (defined("_ECRIRE_INC_GETDOCUMENT")) return;
 define("_ECRIRE_INC_GETDOCUMENT", "1");
 
 
+// Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
-	global $dossier_squelettes;
-
-# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
 	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
-	// Securite
-	if (!$ext || ($rep == $dossier_squelettes) || (substr($rep,0,-1) == $dossier_squelettes))
-		{
-		  spip_log("creer_repertoire_documents interdit");
-		  exit;
-		}
+
+	if (!$ext OR !$rep) {
+		spip_log("creer_repertoire_documents interdit");
+		exit;
+	}
+
 	if (lire_meta("creer_htaccess") == 'oui') {
 		include_ecrire('inc_acces.php3');
 		verifier_htaccess($rep);
 	}
+
 	return $rep;
 }
 
+// Efface le repertoire de maniere recursive !
+function effacer_repertoire_temporaire($nom) {
+	$d = opendir($nom);
+	while ($f = readdir($d)) {
+		if (is_file("$nom/$f"))
+			@unlink("$nom/$f");
+		else if ($f <> '.' AND $f <> '..'
+		AND is_dir("$nom/$f"))
+			effacer_repertoire_temporaire("$nom/$f");
+	}
+	@rmdir($nom);
+}
 
 function copier_document($ext, $orig, $source) {
 
@@ -36,18 +47,86 @@ function copier_document($ext, $orig, $source) {
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
 
-	# bien vu ?
-	if ($source == ($dest . '.' . $ext)) return $source;
+	// Si le document "source" est deja au bon endroit, ne rien faire
+	if ($source == ($dest . '.' . $ext))
+		return $source;
+
+	// sinon tourner jusqu'a trouver un numero correct
 	$n = 0;
 	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
-	$r = deplacer_fichier_upload($source, $newFile);
-	return (!$r ? '' : $newFile);
+
+	if ($r = deplacer_fichier_upload($source, $newFile))
+		return $newFile;
 }
 
-function verifier_compactes($image_name) {
+//
+// Deplacer un fichier
+//
 
-	$zip = new PclZip($image_name);
+function deplacer_fichier_upload($source, $dest) {
+	// Securite
+	if (strstr($dest, "..")) { exit; }
 
+	$ok = @copy($source, $dest);
+	if (!$ok) $ok = @move_uploaded_file($source, $dest);
+	if ($ok)
+		@chmod($dest, 0666);
+	else {
+		$f = @fopen($dest,'w');
+		if ($f) {
+			fclose ($f);
+		} else {
+			redirige_par_entete("spip_test_dirs.php3?test_dir=".
+				dirname($dest));
+		}
+		@unlink($dest);
+	}
+
+	return $ok;
+}
+
+
+// Erreurs d'upload
+// renvoie false si pas d'erreur
+// et true si erreur = pas de fichier
+// pour les autres erreurs affiche le message d'erreur et meurt
+function check_upload_error($error, $msg='') {
+	switch ($error) {
+		case 0:
+			return false;
+		case 4: /* UPLOAD_ERR_NO_FILE */
+			return true;
+
+		# on peut affiner les differents messages d'erreur
+		case 1: /* UPLOAD_ERR_INI_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 2: /* UPLOAD_ERR_FORM_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 3: /* UPLOAD_ERR_PARTIAL  */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+	}
+
+	spip_log ("erreur upload $error");
+
+	include_ecrire('inc_presentation.php3');
+	install_debut_html(_T('forum_titre_erreur'));
+	echo "<p>$msg</p>\n";
+
+	install_fin_html(_DIR_RESTREINT_ABS . $GLOBALS['redirect']);
+	exit;
+}
+
+
+//
+// Gestion des fichiers ZIP
+//
+function verifier_compactes($zip) {
 	if ($list = $zip->listContent()) {
 	// si pas possible de decompacter: installer comme fichier zip joint
 	// Verifier si le contenu peut etre uploade (verif extension)
@@ -57,7 +136,7 @@ function verifier_compactes($image_name) {
 			
 				if ($key == "stored_filename") {
 					$f =  $list[$i][$key];
-					  // Regexp des fichiers a ignorer
+					// Regexp des fichiers a ignorer
 					if (!ereg("^(\.|.*/\.|.*__MACOSX/)", $f)) {
 						if (ereg("\.([^.]+)$", $f, $match)) {
 							$result = spip_query("SELECT * FROM spip_types_documents WHERE extension='"
@@ -78,7 +157,7 @@ function verifier_compactes($image_name) {
 	return $aff_fichiers ;
 }
 
-function afficher_compactes($image_name, $fichiers, $link) {
+function afficher_compactes($image_name /* not used */, $fichiers, $link) {
 // presenter une interface pour choisir si fichier joint ou decompacter
 // passer ca en squelette un de ces jours.
 
@@ -108,160 +187,483 @@ function afficher_compactes($image_name, $fichiers, $link) {
 	install_fin_html();
 }
 
-//
-// Ajouter un unique document
-//
 
-function ajout_doc($orig, $source, $mode, $id_document) {
-	global $hash_id_auteur, $hash, $id_article, $type;
-
-	//
-	// Securite
-	//
-	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
-		return;
+//
+// Ajouter un document (au format $_FILES)
+//
+function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 	// type de document inconnu ?
-	if (!ereg("\.([^.]+)$", $orig, $match)) return;
+	if (!ereg("\.([^.]+)$", $nom_envoye, $match)) return;
 
+	// tester le type de document :
+	// - interdit a l'upload ?
+	// - quel numero dans spip_types_documents ?  =-(
+	// - est-ce "inclus" comme une image ?
 	$ext = corriger_extension(addslashes(strtolower($match[1])));
-	$row = spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'" . (($mode != 'vignette') ? '' : " AND inclus='image'"));
 
-	// type de document invalide ?
-	if (!$row = spip_fetch_array($row)) {return;}
+	if (!$row = spip_fetch_array(spip_query(
+	"SELECT * FROM spip_types_documents
+	WHERE extension='$ext' AND upload='oui'")))
+		return 'o';
+	$id_type = $row['id_type'];	# numero du type dans spip_types_documents :(
+	$type_inclus_image = ($row['inclus'] == 'image');
 
-	// Recopier le fichier sauf si deja fait (zip tel quel)
-	$dest_path = !$source ? $orig : copier_document($ext,$orig, $source);
-	if (!$dest_path) return;
-	$taille = filesize($dest_path);
+	// Recopier le fichier a son emplacement definitif
+	$definitif = copier_document($ext, $nom_envoye, $source);
+	if (!$definitif)
+		return;
 
-	$size_image = @getimagesize($dest_path);
+	// Quelques infos sur le fichier
+	if (!@file_exists($definitif)
+	OR !$taille = @filesize($definitif))
+		return;
+
+	// Est-ce une image ?
+	$size_image = @getimagesize($definitif);
 	$type_image = decoder_type_image($size_image[2]);
 	if ($type_image) {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 	}
 
-	if ($taille == 0
-	OR ($mode == 'vignette' AND ($largeur == 0 OR $hauteur==0)))
+	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
+	if ($mode == 'vignette' AND !($largeur * $hauteur)) {
+		@unlink($definitif);
 		return;
+	}
 
-	// Preparation
-	if ($mode == 'vignette') {
-		$id_document_lie = $id_document;
-		$query = "UPDATE spip_documents SET mode='document' where id_document='$id_document_lie'";
-		spip_query($query); // requete inutile a mon avis (Fil)...
+	// Preparation vignette du document $id_document
+	$id_document=intval($id_document);
+	if ($mode == 'vignette' AND $id_document_lie = $id_document) {
+		# on force le statut "document" de ce fichier (inutile ?)
+		spip_query("UPDATE spip_documents
+			SET mode='document'
+			WHERE id_document=$id_document");
 		$id_document = 0;
 	}
+
+	// Installer le document dans la base
+	// attention piege semantique : les images s'installent en mode 'vignette'
+	// note : la fonction peut "mettre a jour un document" si on lui
+	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
-		$id_type = $row['id_type'];
-		$id_document = spip_abstract_insert("spip_documents", "(id_type, titre, date)", "($id_type, '', NOW())");
-		$nouveau = true;
-		if ($id_article && isset($type)) {
-			$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
-			spip_query($query);
-		}
-	}
-	if ($nouveau) {
-		$type_inclus = $row['inclus'];
-		if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
+		// Inserer le nouveau doc et recuperer son id_
+		$id_document = spip_abstract_insert("spip_documents",
+		"(id_type, titre, date)", "($id_type, '', NOW())");
+
+		if ($id_lien
+		AND ($type_lien == 'article' OR $type_lien == 'rubrique'))
+			spip_query("INSERT INTO spip_documents_".$type_lien."s
+				(id_document, id_".$type_lien.")
+				VALUES ($id_document, $id_lien)");
+
+		// par defaut (upload ZIP ou ftp) integrer
+		// les images en mode 'vignette' et le reste en mode document
+		if (!$mode)
+			if ($type_image AND $type_inclus_image)
+				$mode = 'vignette';
+			else
+				$mode = 'document';
 			$update = "mode='$mode', ";
 	}
 
-	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' WHERE id_document=$id_document");
+	// Mise a jour des donnees
+	spip_query("UPDATE spip_documents
+		SET $update
+		taille='$taille', largeur='$largeur', hauteur='$hauteur',
+		fichier='$definitif'
+		WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
-		$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
-		spip_query($query);
-		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
+		spip_query ("UPDATE spip_documents
+		SET id_vignette=$id_document
+		WHERE id_document=$id_document_lie");
+		// hack pour que le retour vers ecrire/ active le bon doc.
+		$documents_actifs[] = $id_document_lie; 
 	}
+	else
+		$documents_actifs[] = $id_document; 
 
-	// Creer la vignette
-	if ($mode == 'document' AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
-		creer_fichier_vignette($dest_path);
+	// Creer la vignette des images
+	if ($mode == 'document'
+	AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')
+	AND $type_image)
+		creer_fichier_vignette($definitif);
+
+	return true;
+}
+
+
+
+
+//
+// Convertit le type numerique retourne par getimagesize() en extension fichier
+//
+
+function decoder_type_image($type, $strict = false) {
+	switch ($type) {
+	case 1:
+		return "gif";
+	case 2:
+		return "jpg";
+	case 3:
+		return "png";
+	case 4:
+		return $strict ? "" : "swf";
+	case 5:
+		return "psd";
+	case 6:
+		return "bmp";
+	case 7:
+	case 8:
+		return "tif";
+	default:
+		return "";
 	}
 }
 
-// Ajouter un ou plusieurs documents ?
 
-function ajout_doc_zip($image, $image_name, $mode, $forcer_document, $action_zip, $id_document, $hash, $link)
-{
-// image_name n'est valide que par POST http, mais pas par la methode ftp/upload
-// par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
-// action_zip indique un rappel par la fonction affiche_compactes
-	if (!$action_zip){
-		// on va se rappeler: copier le fichier car PHP va le virer
-		$image_name = copier_document("zip", $image_name, $image);
-		// anormal, on se tire
-		if (!$image_name) exit;
-		// renvoyer un formulaire demandant si on deballe ou pas
-		require_once(_DIR_RESTREINT . 'pclzip.lib.php');
-		$fichiers = verifier_compactes($image_name);
-		if ($fichiers) {
-			$link->addVar("image_name", $image_name);
-			afficher_compactes($image_name, $fichiers, $link);
-			exit;
-		}
-		// pas possible de deballer, on continue
-		$forcer_document = 'oui';
-		$image = $image_name;
-	  }
-	  else {
-	    // reponse au formulaire
-		if ($action_zip == "telquel") {
-			$forcer_document = 'oui';
-			
-		} else {
-			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
-  			$archive = new PclZip($image_name);
-			$tmp_dir = creer_repertoire_documents($hash);
-			$archive->extract(PCLZIP_OPT_PATH, $tmp_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
-			# virer le zip après le déballage
-			@unlink($image_name);
-			$image_name = $tmp_dir;
+//
+// Corrige l'extension du fichier dans quelques cas particuliers
+//
 
-		}
-	  }
-	ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash);
+function corriger_extension($ext) {
+	switch ($ext) {
+	case 'htm':
+		return 'html';
+	case 'jpeg':
+		return 'jpg';
+	case 'tiff':
+		return 'tif';
+	default:
+		return $ext;
+	}
 }
 
-function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash, $error=0) {
 
-	if (check_upload_error($error)) return;
+//
+// Ajouter un logo
+//
 
-	$mode = ($forcer_document == 'oui' ? "document" : $mode);
+// $source = $_FILES[0]
+// $dest = arton12.xxx
+function ajout_logo($source, $dest) {
 
-	if (!is_dir($image_name)) {
-		ajout_doc($image_name,
-			$image,
-			$mode,
-			$id_document);
-	} else {
-		include_ecrire('inc_documents.php3');
-		$fichiers = fichiers_upload($image_name);
+	// Intercepter une erreur d'upload
+	if (check_upload_error($source['error'])) return;
 
-		while (list(,$f) = each($fichiers)) {
-			if (ereg("\.([^.]+)$", $f, $match)) {
-				$ext = strtolower($match[1]);
-				if ($ext == 'jpeg')
-					$ext = 'jpg';
-				$r = spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext'" . ($inclus ? " AND inclus='$inclus'" : ''));
-				if (spip_fetch_array($r))
-					ajout_doc($f, $f, $mode, false);
+	// analyse le type de l'image (on ne fait pas confiance au nom de
+	// fichier envoye par le browser : pour les Macs c'est plus sur)
+	$f =_DIR_DOC . $dest . '.tmp';
+	deplacer_fichier_upload($source['tmp_name'], $f);
+	$size = @getimagesize($f);
+	$type = decoder_type_image($size[2], true);
+
+	if ($type) {
+		$poids = filesize($f);
+		if ($poids > _LOGO_MAX_SIZE*1024) {
+			@unlink ($f);
+			check_upload_error(6,
+			_T('info_logo_max_poids',
+				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+				'actuel' => taille_en_octets($poids))));
+		}
+		if (($size[0] > _LOGO_MAX_WIDTH)
+		OR ($size[1] > _LOGO_MAX_HEIGHT)) {
+			@unlink ($f);
+			check_upload_error(6, 
+			_T('info_logo_max_taille',
+				array(
+				'maxi' =>
+					_T('info_largeur_vignette',
+						array('largeur_vignette' => _LOGO_MAX_WIDTH,
+						'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+				'actuel' =>
+					_T('info_largeur_vignette',
+						array('largeur_vignette' => $size[0],
+						'hauteur_vignette' => $size[1]))
+			)));
+		}
+		@rename ($f, _DIR_DOC . $dest . ".$type");
+	}
+	else {
+		@unlink ($f);
+		check_upload_error(6,
+			_T('info_logo_format_interdit',
+			array ('formats' => 'GIF, JPG, PNG'))
+		);
+	}
+}
+
+
+function effacer_logo($nom) {
+	if (!strstr($nom, ".."))
+		@unlink(_DIR_IMG . $nom);
+}
+
+
+
+//
+// Creation automatique de vignette
+//
+
+// Tester nos capacites
+function tester_vignette ($test_vignette) {
+	global $djpeg_command, $cjpeg_command, $pnmscale_command;
+	// verifier les formats acceptes par GD
+	if ($test_vignette == "gd1") {
+		$gd_formats = Array();
+		if (function_exists('ImageCreateFromJPEG')) {
+			$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
+			if ($srcImage) {
+				$gd_formats[] = "jpg";
+				ImageDestroy( $srcImage );
+			}
+		}
+		if (function_exists('ImageCreateFromGIF')) {
+			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
+			if ($srcImage) {
+				$gd_formats[] = "gif";
+				ImageDestroy( $srcImage );
+			}
+		}
+		if (function_exists('ImageCreateFromPNG')) {
+			$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
+			if ($srcImage) {
+				$gd_formats[] = "png";
+				ImageDestroy( $srcImage );
 			}
 		}
 
-# détruire le repertoire de deballage
-		if ($tmp_dir) effacer_repertoire_temporaire($tmp_dir);
+		if ($gd_formats) $gd_formats = join(",", $gd_formats);
+		ecrire_meta("gd_formats", $gd_formats);
+		ecrire_metas();
+	}
+	// verifier les formats netpbm
+	else if ($test_vignette == "netpbm") {
+		$netpbm_formats= Array();
+
+		$jpegtopnm_command = str_replace("pnmscale",
+			"jpegtopnm", $pnmscale_command);
+		$pnmtojpeg_command = str_replace("pnmscale",
+			"pnmtojpeg", $pnmscale_command);
+
+		$vignette = _DIR_IMG . "test.jpg";
+		$dest = _DIR_IMG . "test-jpg.jpg";
+		$commande = "$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
+		spip_log($commande);
+		exec($commande);
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
+		}
+		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
+		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
+		$vignette = _DIR_IMG . "test.gif";
+		$dest = _DIR_IMG . "test-gif.jpg";
+		$commande = "$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
+		spip_log($commande);
+		exec($commande);
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $netpbm_formats[] = "gif";
+		}
+
+		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
+		$vignette = _DIR_IMG . "test.png";
+		$dest = _DIR_IMG . "test-gif.jpg";
+		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest";
+		spip_log($commande);
+		exec($commande);
+		if ($taille = @getimagesize($dest)) {
+			if ($taille[1] == 10) $netpbm_formats[] = "png";
+		}
+		
+
+		if ($netpbm_formats) $netpbm_formats = join(",", $netpbm_formats);
+		ecrire_meta("netpbm_formats", $netpbm_formats);
+		ecrire_metas();
+	}
+
+	// et maintenant envoyer la vignette de tests
+	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
+		include_ecrire('inc_logos.php3');
+		//$taille_preview = lire_meta("taille_preview");
+		if ($taille_preview < 10) $taille_preview = 120;
+		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
+
+			return ($preview['fichier']);
+	}
+	return '';
+}
+
+// Creation
+function creer_fichier_vignette($vignette, $test_cache_only=false) {
+	if ($vignette && lire_meta("creer_preview") == 'oui') {
+		eregi('\.([a-z0-9]+)$', $vignette, $regs);
+		$ext = $regs[1];
+		$taille_preview = lire_meta("taille_preview");
+		if ($taille_preview < 10) $taille_preview = 120;
+		include_ecrire('inc_logos.php3');
+
+		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
+		{
+			inserer_vignette_base($vignette, $preview['fichier']);
+			return $preview['fichier'];
+		}
+		include_ecrire('inc_documents.php3');
+		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }
 
-function effacer_repertoire_temporaire($nom) {
-	$d = opendir($nom);
-	while ($f = readdir($d)) {
-		if (is_file($f = "$nom/$f")) @unlink($f);
+// Effacer un doc (et sa vignette)
+function supprime_document_et_vignette($doc_supp) {
+
+	$result = spip_query("SELECT id_vignette, fichier
+		FROM spip_documents
+		WHERE id_document=$doc_supp");
+	if ($row = spip_fetch_array($result)) {
+		$fichier = $row['fichier'];
+		$id_vignette = $row['id_vignette'];
+		spip_query("DELETE FROM spip_documents
+			WHERE id_document=$doc_supp");
+		spip_query("UPDATE spip_documents SET id_vignette=0
+			WHERE id_vignette=$doc_supp");
+		spip_query("DELETE FROM spip_documents_articles
+			WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_rubriques
+			WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_breves
+			WHERE id_document=$doc_supp");
+		@unlink($fichier);
+
+		if ($id_vignette > 0) {
+			$query = "SELECT id_vignette, fichier FROM spip_documents
+				WHERE id_document=$id_vignette";
+			$result = spip_query($query);
+			if ($row = spip_fetch_array($result)) {
+				$fichier = $row['fichier'];
+				@unlink($fichier);
+			}
+			spip_query("DELETE FROM spip_documents
+				WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_articles
+				WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_rubriques
+				WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_breves
+				WHERE id_document=$id_vignette");
 		}
-	@rmdir($nom);
+	}
+}
+
+
+
+/////////////////////////////////////////////////////////////////////
+//
+// Faire tourner une image
+//
+function gdRotate ($imagePath,$rtt){
+	if(preg_match("/\.(png)/i", $imagePath))
+		$src_img=ImageCreateFromPNG($imagePath);
+	else if(preg_match("/\.(jpg)/i", $imagePath))
+		$src_img=ImageCreateFromJPEG($imagePath);
+	else if(preg_match("/\.(bmp)/i", $imagePath))
+		$src_img=ImageCreateFromWBMP($imagePath);
+	$size=@getimagesize($imagePath);
+
+	// Sous GD2 : ImageCreateTrueColor
+	$process = lire_meta('image_process');
+	if ($process == "gd2")
+		$dst_img=ImageCreateTrueColor($size[1],$size[0]);
+	else
+		$dst_img=ImageCreate($size[1],$size[0]);
+
+	if($rtt==90){
+		$t=0;
+		$b=$size[1]-1;
+		while($t<=$b){
+			$l=0;
+			$r=$size[0]-1;
+			while($l<=$r){
+				imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
+				imagecopy($dst_img,$src_img,$t,$l,$l,$b,1,1);
+				imagecopy($dst_img,$src_img,$b,$r,$r,$t,1,1);
+				imagecopy($dst_img,$src_img,$b,$l,$l,$t,1,1);
+				$l++;
+				$r--;
+			}
+			$t++;
+			$b--;
+		}
+	}
+	elseif($rtt==-90){
+		$t=0;
+		$b=$size[1]-1;
+		while($t<=$b){
+			$l=0;
+			$r=$size[0]-1;
+			while($l<=$r){
+				imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
+				imagecopy($dst_img,$src_img,$t,$r,$l,$t,1,1);
+				imagecopy($dst_img,$src_img,$b,$l,$r,$b,1,1);
+				imagecopy($dst_img,$src_img,$b,$r,$l,$b,1,1);
+				$l++;
+				$r--;
+			}
+			$t++;
+			$b--;
+		}
+	}
+	ImageDestroy($src_img);
+	ImageInterlace($dst_img,0);
+	ImageJPEG($dst_img,$imagePath);
+}
+
+function tourner_document($var_rot, $doc_rotate, $convert_command) {
+	
+	$var_rot = intval($var_rot);
+
+	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_rotate";
+	$result = spip_query($query);
+	if ($row = spip_fetch_array($result)) {
+		$id_vignette = $row['id_vignette'];
+		$image = $row['fichier'];
+
+		$process = lire_meta('image_process');
+
+		 // imagick (php4-imagemagick)
+		 if ($process == 'imagick') {
+			$handle = imagick_readimage($image);
+			imagick_rotate($handle, $var_rot);
+			imagick_write($handle, $image);
+			if (!@file_exists($image)) return;	// echec imagick
+		}
+		else if ($process == "gd2") { // theoriquement compatible gd1, mais trop forte degradation d'image
+			if ($var_rot == 180) { // 180 = 90+90
+				gdRotate ($image, 90);
+				gdRotate ($image, 90);
+			} else {
+				gdRotate ($image, $var_rot);
+			}
+		}
+		else if ($process = "convert") {
+			$commande = "$convert_command -rotate $var_rot ./"
+				. escapeshellcmd($image).' ./'.escapeshellcmd($image);
+#			spip_log($commande);
+			exec($commande);
+		}
+
+		$size_image = @getimagesize($image);
+		$largeur = $size_image[0];
+		$hauteur = $size_image[1];
+
+		if ($id_vignette > 0) {
+			creer_fichier_vignette($image);
+		}
+
+		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
+
+	}
 }
 
 ?>

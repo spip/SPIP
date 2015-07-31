@@ -331,14 +331,14 @@ if ($spip_display != 4) {
 	// Logos de la rubrique
 	//
 	
-	$rubon = "rubon$id_rubrique";
-	$ruboff = "ruboff$id_rubrique";
-	
 	if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) {
-		if ($id_rubrique > 0)
-			afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
+		if ($id_rubrique)
+			afficher_boite_logo('rub', 'id_rubrique', $id_rubrique,
+			_T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
 		else
-			afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
+			afficher_boite_logo('rub', 'id_rubrique', 0,
+			_T('logo_standard_rubrique')." ".aide ("rublogo"),
+			_T('logo_survol'));
 	}
 	
 	

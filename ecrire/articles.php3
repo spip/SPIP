@@ -424,11 +424,9 @@ fin_boite_info();
 
 // Logos de l'article
 
-$arton = "arton$id_article";
-$artoff = "artoff$id_article";
-
-if ($id_article>0 AND $flag_editable)
-	afficher_boite_logo($arton, $artoff, _T('logo_article').aide ("logoart"), _T('logo_survol'));
+if ($id_article AND $flag_editable)
+	afficher_boite_logo('art', 'id_article', $id_article,
+	_T('logo_article').aide ("logoart"), _T('logo_survol'));
 
 
 //

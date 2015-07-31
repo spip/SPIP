@@ -74,8 +74,11 @@ function calculer_action_auteur($action, $id_auteur = 0) {
 }
 
 function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere')) return true;
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere_ancien')) return true;
+	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere'))
+		return true;
+	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere_ancien'))
+		return true;
+	spip_log("inc_admin: verifier action $action $id_auteur : echec");
 	return false;
 }
 

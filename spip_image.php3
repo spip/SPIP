@@ -1,448 +1,33 @@
 <?php
 
+// Uploader un document, une image ou un logo,
+// supprimer cet element, creer les vignettes, etc.
+
 include ("ecrire/inc_version.php3");
-include_ecrire("inc_charsets.php3");
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_admin.php3");
-include_ecrire("inc_abstract_sql.php3");
-include_ecrire('inc_presentation.php3'); # pour regler la langue en cas d'erreur
+include_ecrire('inc_presentation.php3');	# regler la langue en cas d'erreur
+include_ecrire('inc_getdocument.php3');		# diverses fonctions de ce fichier
+include_ecrire("inc_charsets.php3");		# pour le nom de fichier
+include_ecrire("inc_meta.php3");			# ne pas faire confiance au cache
+											# (alea_ephemere a peut-etre change)
+include_ecrire("inc_admin.php3");			# verifier_action_auteur
+include_ecrire("inc_abstract_sql.php3");	# spip_insert
+include_ecrire('inc_documents.php3');		# fichiers_upload()
 
 
 // Recuperer les variables d'upload
 if (!$_FILES)
-$_FILES = &$HTTP_POST_FILES;
-if (is_array($_FILES))
+	$_FILES = &$HTTP_POST_FILES;
+if (!is_array($_FILES))
+	$_FILES = array();
 foreach ($_FILES as $id => $file) {
 	if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
 		unset ($_FILES[$id]);
 }
 
 
-function effacer_logo($nom) {
-	global $hash_id_auteur, $hash;
-
-	if ((!strstr($nom, "..")) AND
-	    verifier_action_auteur("supp_logo $nom", $hash, $hash_id_auteur))
-		@unlink(_DIR_IMG . $nom);
-}
-
-function tester_vignette ($test_vignette) {
-	global $djpeg_command, $cjpeg_command, $pnmscale_command;
-	// verifier les formats acceptes par GD
-	if ($test_vignette == "gd1") {
-		$gd_formats = Array();
-		if (function_exists('ImageCreateFromJPEG')) {
-			$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
-			if ($srcImage) {
-				$gd_formats[] = "jpg";
-				ImageDestroy( $srcImage );
-			}
-		}
-		if (function_exists('ImageCreateFromGIF')) {
-			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
-			if ($srcImage) {
-				$gd_formats[] = "gif";
-				ImageDestroy( $srcImage );
-			}
-		}
-		if (function_exists('ImageCreateFromPNG')) {
-			$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
-			if ($srcImage) {
-				$gd_formats[] = "png";
-				ImageDestroy( $srcImage );
-			}
-		}
-
-		if ($gd_formats) $gd_formats = join(",", $gd_formats);
-		ecrire_meta("gd_formats", $gd_formats);
-		ecrire_metas();
-	}
-	// verifier les formats netpbm
-	else if ($test_vignette == "netpbm") {
-		$netpbm_formats= Array();
-
-		$jpegtopnm_command = ereg_replace("pnmscale", "jpegtopnm", $pnmscale_command);
-		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
-
-		$vignette = _DIR_IMG . "test.jpg";
-		$dest = _DIR_IMG . "test-jpg.jpg";
-		exec("$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest");
-		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
-		}	
-		
-		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
-		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
-		$vignette = _DIR_IMG . "test.gif";
-		$dest = _DIR_IMG . "test-gif.jpg";
-		exec("$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest");
-		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "gif";
-		}
-
-		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
-		$vignette = _DIR_IMG . "test.png";
-		$dest = _DIR_IMG . "test-gif.jpg";
-		exec("$pngtopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
-		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $netpbm_formats[] = "png";
-		}
-		
-
-		if ($netpbm_formats) $netpbm_formats = join(",", $netpbm_formats);
-		ecrire_meta("netpbm_formats", $netpbm_formats);
-		ecrire_metas();
-	}
-
-	// et maintenant envoyer la vignette de tests
-	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
-		include_ecrire('inc_logos.php3');
-		//$taille_preview = lire_meta("taille_preview");
-		if ($taille_preview < 10) $taille_preview = 120;
-		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
-
-			return ($preview['fichier']);
-	}
-	return '';
-}
-
-
-//
-// Deplacer un fichier
-//
-
-function deplacer_fichier_upload($source, $dest) {
-	// Securite
-	if (strstr($dest, "..")) {
-		exit;
-	}
-
-
-	$ok = @copy($source, $dest);
-	if (!$ok) $ok = @move_uploaded_file($source, $dest);
-	if ($ok)
-		@chmod($dest, 0666);
-	else {
-		$f = @fopen($dest,'w');
-		if ($f)
-			fclose ($f);
-		else {
-			redirige_par_entete("spip_test_dirs.php3?test_dir=".
-					    dirname($dest));
-		}
-		@unlink($dest);
-	}
-
-	return $ok;
-}
-
-// Erreurs d'upload
-// renvoie false si pas d'erreur
-// et true si erreur = pas de fichier
-// pour les autres erreurs affiche le message d'erreur et meurt
-function check_upload_error($error, $msg='') {
-	switch ($error) {
-		case 0:
-			return false;
-		case 4: /* UPLOAD_ERR_NO_FILE */
-			return true;
-
-		# on peut affiner les differents messages d'erreur
-		case 1: /* UPLOAD_ERR_INI_SIZE */
-			$msg = _T('upload_limit',
-			array('max' => ini_get('upload_max_filesize')));
-			break;
-		case 2: /* UPLOAD_ERR_FORM_SIZE */
-			$msg = _T('upload_limit',
-			array('max' => ini_get('upload_max_filesize')));
-			break;
-		case 3: /* UPLOAD_ERR_PARTIAL  */
-			$msg = _T('upload_limit',
-			array('max' => ini_get('upload_max_filesize')));
-			break;
-	}
-
-	spip_log ("erreur upload $error");
-
-	include_ecrire('inc_presentation.php3');
-	install_debut_html(_T('forum_titre_erreur'));
-	echo "<p>$msg</p>\n";
-
-	install_fin_html(_DIR_RESTREINT . $GLOBALS['retour']);
-	exit;
-}
-
-
-//
-// Convertit le type numerique retourne par getimagesize() en extension fichier
-//
-
-function decoder_type_image($type, $strict = false) {
-	switch ($type) {
-	case 1:
-		return "gif";
-	case 2:
-		return "jpg";
-	case 3:
-		return "png";
-	case 4:
-		return $strict ? "" : "swf";
-	case 5:
-		return "psd";
-	case 6:
-		return "bmp";
-	case 7:
-	case 8:
-		return "tif";
-	default:
-		return "";
-	}
-}
-
-
-//
-// Corrige l'extension du fichier dans quelques cas particuliers
-//
-
-function corriger_extension($ext) {
-	switch ($ext) {
-	case 'htm':
-		return 'html';
-	case 'jpeg':
-		return 'jpg';
-	case 'tiff':
-		return 'tif';
-	default:
-		return $ext;
-	}
-}
-
-
-//
-// Ajouter un logo
-//
-
-// $source = $_FILES[0]
-// $dest = arton12.xxx
-function ajout_logo($source, $dest) {
-	global $redirect_url, $hash_id_auteur, $hash, $num_img, $dossier_squelettes;
-
-	// Securite
-	if (!(verifier_action_auteur("ajout_logo $dest", $hash, $hash_id_auteur)
-	AND _DIR_DOC != $dossier_squelettes)) {
-		spip_log("interdiction ajout_logo($source, $dest)");
-		return;
-	}
-
-	// Intercepter une erreur d'upload
-	if (check_upload_error($source['error'])) return;
-
-	// analyse le type de l'image (on ne fait pas confiance au nom de
-	// fichier envoye par le browser : pour les Macs c'est plus sur)
-	$f =_DIR_DOC . $dest . '.tmp';
-	deplacer_fichier_upload($source['tmp_name'], $f);
-	$size = @getimagesize($f);
-	$type = decoder_type_image($size[2], true);
-	if ($type) {
-		$poids = filesize($f);
-		if ($poids > _LOGO_MAX_SIZE*1024) {
-			@unlink ($f);
-			check_upload_error(6,
-			_T('info_logo_max_poids',
-				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
-				'actuel' => taille_en_octets($poids))));
-		}
-		if (($size[0] > _LOGO_MAX_WIDTH)
-		OR ($size[1] > _LOGO_MAX_HEIGHT)) {
-			@unlink ($f);
-			check_upload_error(6, 
-			_T('info_logo_max_taille',
-				array(
-				'maxi' =>
-					_T('info_largeur_vignette',
-						array('largeur_vignette' => _LOGO_MAX_WIDTH,
-						'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
-				'actuel' =>
-					_T('info_largeur_vignette',
-						array('largeur_vignette' => $size[0],
-						'hauteur_vignette' => $size[1]))
-			)));
-		}
-		@rename ($f, _DIR_DOC . $dest . ".$type");
-	}
-	else {
-		@unlink ($f);
-		check_upload_error(6,
-			_T('info_logo_format_interdit',
-			array ('formats' => 'GIF, JPG, PNG'))
-		);
-	}
-}
-
-//
-// Faire tourner une image
-//
-
-//$imagePath - path to your image; function will save rotated image overwriting the old one
-//$rtt - should be 90 or -90 - cw/ccw
-function gdRotate($imagePath,$rtt){
-	if(preg_match("/\.(png)/i", $imagePath)) $src_img=ImageCreateFromPNG($imagePath);
-	elseif(preg_match("/\.(jpg)/i", $imagePath)) $src_img=ImageCreateFromJPEG($imagePath);
-	elseif(preg_match("/\.(bmp)/i", $imagePath)) $src_img=ImageCreateFromWBMP($imagePath);
-	$size=@getimagesize($imagePath);
-	//note: to make it work on GD 2.xx properly change ImageCreate to ImageCreateTrueColor
-
-	$process = lire_meta('image_process');
-	if ($process == "gd2") $dst_img=ImageCreateTrueColor($size[1],$size[0]);
-	else  $dst_img=ImageCreate($size[1],$size[0]);
-	if($rtt==90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$t,$l,$l,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$l,$t,1,1);
-				$l++;
-				$r--;
-			}
-			$t++;
-			$b--;
-		}
-	}
-	elseif($rtt==-90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$t,$r,$l,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$l,$b,1,1);
-				$l++;
-				$r--;
-			}
-			$t++;
-			$b--;
-		}
-	}
-	ImageDestroy($src_img);
-	ImageInterlace($dst_img,0);
-	ImageJPEG($dst_img,$imagePath);
-}
-
-//
-// Creation automatique de vignette new style
-// Normalement le test est vérifié donc on ne rend rien sinon
-
-function creer_fichier_vignette($vignette, $test_cache_only=false) {
-	if ($vignette && lire_meta("creer_preview") == 'oui') {
-		eregi('\.([a-z0-9]+)$', $vignette, $regs);
-		$ext = $regs[1];
-		$taille_preview = lire_meta("taille_preview");
-		if ($taille_preview < 10) $taille_preview = 120;
-		include_ecrire('inc_logos.php3');
-
-		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
-		{
-			inserer_vignette_base($vignette, $preview['fichier']);
-			return $preview['fichier'];
-		}
-		include_ecrire('inc_documents.php3');
-		return vignette_par_defaut($ext ? $ext : 'txt', false);
-	}
-}
-
-function supprime_document_et_vignette($doc_supp) {
-	global $hash_id_auteur, $hash;
-
-
-	// Securite
-	if (verifier_action_auteur("supp_doc $doc_supp", $hash, $hash_id_auteur)) {
-		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$fichier = $row['fichier'];
-			$id_vignette = $row['id_vignette'];
-			spip_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
-			spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
-			spip_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
-			spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
-			spip_query("DELETE FROM spip_documents_breves WHERE id_document=$doc_supp");
-			@unlink($fichier);
-			
-			if ($id_vignette > 0) {
-			  $query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
-			  $result = spip_query($query);
-			  if ($row = spip_fetch_array($result)) {
-			    $fichier = $row['fichier'];
-			    @unlink($fichier);
-			  }
-			  spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
-			  spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
-			  spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
-			  spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
-			}
-		}
-	}
-}
-
-function tourner_document($var_rot, $doc_rotate, $convert_command) {
-	global $hash_id_auteur, $hash;
-	// Securite
-	if (!verifier_action_auteur("rotate $doc_rotate", $hash, $hash_id_auteur)) {
-		return '';
-	}
-	
-	$var_rot = intval($var_rot);
-
-	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_rotate";
-	$result = spip_query($query);
-	if ($row = spip_fetch_array($result)) {
-		$id_vignette = $row['id_vignette'];
-		$image = $row['fichier'];
-
-		$process = lire_meta('image_process');
-
-		 // imagick (php4-imagemagick)
-		 if ($process == 'imagick') {
-			$handle = imagick_readimage($image);
-			imagick_rotate($handle, $var_rot);
-			imagick_write($handle, $image);
-			if (!@file_exists($image)) return;	// echec imagick
-		}
-		else if ($process == "gd2") { // theoriquement compatible gd1, mais trop forte degradation d'image
-			if ($var_rot == 180) { // 180 = 90+90
-				gdRotate ($image, 90);
-				gdRotate ($image, 90);
-			} else {
-				gdRotate ($image, $var_rot);
-			}
-		}
-		else if ($process = "convert") {
-			$commande = "$convert_command -rotate $var_rot ./"
-				. escapeshellcmd($image).' ./'.escapeshellcmd($image);
-#			spip_log($commande);
-			exec($commande);
-		}
-
-		$size_image = @getimagesize($image);
-		$largeur = $size_image[0];
-		$hauteur = $size_image[1];
-
-		if ($id_vignette > 0) {
-			creer_fichier_vignette($image);
-		}
-
-		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
-
-	}
-}
+// Si on est en mode 'document', les images doivent etre installees
+// comme documents dans le portfolio
+if ($forcer_document) $mode = 'document';
 
 
 //
@@ -452,119 +37,211 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 
 // appel de config-fonction
 if ($test_vignette)
-	$redirect = tester_vignette($test_vignette);
+	$retour_image = tester_vignette($test_vignette);
 
-// appels de inc_logo
+// Creation de vignette depuis le portfolio (ou autre)
 else if ($vignette) {
 	if ($creer_vignette == 'oui' AND
-	verifier_action_auteur("vign $vignette", $hash, $hash_id_auteur)) {
+	verifier_action_auteur("vign $vignette",
+	$hash, $hash_id_auteur))
 		creer_fichier_vignette($vignette);
-		$retour = $redirect;
-		$redirect = '';
-	}
 	else
-		$redirect = creer_fichier_vignette($vignette, true); # methode obsolete
+		$retour_image = creer_fichier_vignette($vignette, true); # obsolete
 }
-else {
-	$retour = $redirect;
-	$redirect = '';
+
+
+//
+// Ajout d'un document ou d'une image
+//
+else if ($ajout_doc == 'oui') {
+
+	// Autorisation ?
+	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
+		die ('Interdit');
 
 	//
-	// Ajout d'un document ou d'une image
+	// Cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
 	//
-	if ($ajout_doc == 'oui') {
-		include_ecrire('inc_getdocument.php3');
+	if ($_POST['image2']
+	AND !strstr($_POST['image2'], '..')
+	AND $_POST['ok_ftp']
+	) {
+		$upload = _DIR_TRANSFERT.$_POST['image2'];
 
-		// cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
-		if ($_POST['image2'] AND $_POST['ok_ftp']) {
+		// lire le repertoire upload et remplir $_FILES
+		if (is_dir($upload)) {
+			$fichiers = fichiers_upload($upload);
+
+			$_FILES = array();
+			foreach ($fichiers as $fichier) {
+				$_FILES[] = array (
+					'name' => basename($fichier),
+					'tmp_name' => $fichier
+				);
+			}
+		}
+
+		// seul un fichier est demande
+		else
 			$_FILES = array(
-				array (
-					'name' => _DIR_TRANSFERT . $image2,
-					'tmp_name' => _DIR_TRANSFERT . $image2
-				)
+				array ('name' => basename($upload),
+				'tmp_name' => $upload)
 			);
-		} 
+	}
 
-		// Upload d'un ZIP : retour du formulaire demandant
-		/// quelle action il fallait effectuer
-		if ($_POST['action_zip']) {
-			if (!preg_match('@^IMG/zip/[^/]+\.zip$@', $_POST['image_name']))
-				return;
-			$_FILES = array(
-				array (
-					'name' => $_POST['image_name'],
-					'tmp_name' => $_POST['image_name']
-				)
+	//
+	// Upload d'un ZIP
+	//
+
+	// traiter la reponse de l'utilisateur
+	if (preg_match('@^IMG/zip/[^. ]+\.zip$@i', $_POST['source_zip'])) {
+		$_FILES = array(
+			array('name' => basename($_POST['source_zip']),
+				'tmp_name' => $_POST['source_zip'])
+		);
+	}
+
+	// traiter le zip si c'en est un tout seul
+	if (count($_FILES) == 1
+	AND $action_zip!='telquel') {
+		$desc = array_pop($_FILES); # recuperer la description
+		$_FILES = array($desc);
+
+		if (preg_match('/\.zip$/i', $desc['name'])
+		OR ($desc['type'] == 'application/zip')) {
+
+			// on pose le fichier dans le repertoire zip et on met
+			// a jour $_FILES (nota : copier_document n'ecrase pas
+			// un fichier avec lui-meme : ca autorise a boucler)
+			$zip = copier_document("zip",
+				$desc['name'],
+				$desc['tmp_name']
 			);
-		} 
+			if (!$zip) die ('Erreur upload zip'); # pathologique
+			$desc['tmp_name'] = $zip;	# nouvel emplacement du fichier
+			$_FILES = array($desc);
 
-		// Traiter les fichiers uploades
-		if (is_array($_FILES))
-		foreach ($_FILES as $file) {
-			// ajout d'un doc normal
-			if (!eregi("\.zip$",$file['name']) OR count($_FILES) > 1)
-				ajout_doc_s($file['tmp_name'], $file['name'], $mode, $forcer_document, $id_document, $hash, $file['error']);
-			else
-			// ajout d'un doc au format zip
-			{
-				// bizarre: clean_link ne recupere pas les variables
+			// Est-ce qu'on sait le lire ?
+			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+			$archive = new PclZip($zip);
+			$contenu = verifier_compactes($archive);
+
+			// si non, on le force comme document
+			if (!$contenu) {
+				$forcer_document = 'oui';
+			}
+
+			// si le deballage est demande
+			else if ($action_zip == 'decompacter') {
+				// 1. on deballe
+				define('_tmp_dir', creer_repertoire_documents($hash));
+				$archive->extract(PCLZIP_OPT_PATH,
+					_tmp_dir,
+					PCLZIP_OPT_REMOVE_ALL_PATH);
+				// 2. on supprime le fichier temporaire
+				$contenu = verifier_compactes($archive);
+				@unlink($zip);
+
+				$_FILES = array();
+				foreach ($contenu as $fichier) {
+					$_FILES[] = array(
+						'name' => basename($fichier),
+						'tmp_name' => _tmp_dir.$fichier);
+				}
+			}
+
+			// sinon on demande une reponse
+			else {
 				$link = new Link('spip_image.php3');
-				$link->addVar("ajout_doc", "oui");
-				$link->addVar("redirect", $retour);
-				$link->addVar('id_document', $id_document);
+				$link->addVar('ajout_doc', 'oui');
+				$link->addVar('redirect', $redirect);
 				$link->addVar('id_article', $id_article);
 				$link->addVar('mode', $mode);
 				$link->addVar('type', $type);
 				$link->addVar('hash', $hash);
 				$link->addVar('hash_id_auteur', $hash_id_auteur);
-				ajout_doc_zip($file['tmp_name'], $file['name'], $mode,
-					$forcer_document, $action_zip, $id_document, $hash, $link);
+				$link->addVar('source_zip', $zip);
+				afficher_compactes($desc, $contenu, $link);
+				exit;
 			}
-		}	// foreach $_FILES
+		}
 	}
+	// Fin du bloc ZIP
 
-	// Ajout d'un logo
-	else if ($ajout_logo == "oui")
-		ajout_logo($_FILES['image'], $logo);
 
-	// Suppression d'un logo
-	else if ($image_supp)
+	//
+	// Traiter la liste des fichiers
+	//
+	$documents_actifs = array();
+
+	foreach ($_FILES as $file) {
+
+		// afficher l'erreur 'fichier trop gros' ou autre
+		check_upload_error($file['error']);
+
+		spip_log ("ajout du document ".$file['name'].", $mode ($type $id_article)");
+		ajouter_un_document (
+			$file['tmp_name'],	# le fichier sur le serveur (/var/tmp/xyz34)
+			$file['name'],		# son nom chez le client (portequoi.pdf)
+			$type,				# lie a un article ou  une rubrique ?
+			$id_article,		# identifiant de l'article (ou rubrique) lie
+			$mode,				# 'vignette' => vignette personnalisee
+			$id_document,		# pour une vignette, l'id_document de maman
+			$documents_actifs	# tableau des id_document "actifs" (par ref)
+		);
+	}	// foreach $_FILES
+
+	// Nettoyer le repertoire temporaire d'extraction des fichiers
+	if (defined('_tmp_dir'))
+		effacer_repertoire_temporaire(_tmp_dir);
+}
+
+// Ajout d'un logo
+else if ($ajout_logo == "oui" and $logo) {
+	if ($desc = array_pop($_FILES)
+	AND verifier_action_auteur("ajout_logo $logo",
+	$hash, $hash_id_auteur))
+		ajout_logo($desc, $logo);
+}
+
+// Suppression d'un logo
+else if ($image_supp) {
+	if (verifier_action_auteur("supp_logo $nom",
+	$hash, $hash_id_auteur))
 		effacer_logo($image_supp);
+}
 
-	// Suppression d'un document et de sa vignette
-	else if ($doc_supp)
+// Suppression d'un document et de sa vignette
+else if ($doc_supp) {
+	if (verifier_action_auteur("supp_doc $doc_supp",
+	$hash, $hash_id_auteur))
 		supprime_document_et_vignette($doc_supp);
+}
 
-	// Rotation d'une image
-	else if ($doc_rotate)
+// Rotation d'une image
+else if ($doc_rotate) {
+	if (verifier_action_auteur("rotate $doc_rotate",
+	$hash, $hash_id_auteur))
 		tourner_document($var_rot, $doc_rotate, $convert_command);
 }
 
 
+//
+// Retour a l'envoyeur
+//
 
-//
-// Fin et retour
-//
-if (!($redirect)) {
-	if ($_POST) $vars = $_POST;
-	else $vars = $_GET;
-	$redirect = $vars["redirect"];
+// si nous sommes diriges vers une vignette
+if ($retour_image) {
+	redirige_par_entete($redirect);
+
+} else {
 	$link = new Link(_DIR_RESTREINT_ABS . $redirect);
-	reset($vars);
-	while (list ($key, $val) = each ($vars)) {
-	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip|mode|ok_.*)$", $key)) {
-	    $link->addVar($key, $val);
-	  }
+	if ($documents_actifs) {
+		$show_docs = join('-',$documents_actifs);
+		$link->addVar('show_docs',$show_docs);
 	}
-	if ($id_document)
-	  $link->addVar('id_document',$id_document);
-	if ($type == 'rubrique')
-	  $link->delVar('id_article');
-	
-	$redirect = $link->getUrl();
- }
 
-
-redirige_par_entete($redirect);
+	redirige_par_entete($link->getUrl());
+}
 
 ?>
