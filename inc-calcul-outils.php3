@@ -140,7 +140,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 
 // elles sont traitees comme des inclusions
 function synthetiser_balise_dynamique($nom, $args, $file, $lang) {
-	return
+ return 
 		('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
 lang_select("'.$lang.'");
@@ -170,7 +170,6 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang) {
 		$r = $f($args, $filtres);
 	else
 		$r = $args;
-	
 	if (!is_array($r))
 		return $r;
 	else
@@ -321,6 +320,18 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc) {
 	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
 	return embed_document($id_document, $filtres, false);
+}
+
+// les balises dynamiques et EMBED ont des filtres sans arguments 
+// car en fait ce sont des arguments pas des filtres.
+// Si le besoin s'en fait sentir, il faudra récuperer la 2e moitie du tableau 
+
+function argumenter_balise($fonctions, $sep) {
+  $res = array();
+  if ($fonctions)
+    foreach ($fonctions as $f) $res[] =
+      str_replace('\'', '\\\'', str_replace('\\', '\\\\',$f[0]));
+  return ("'" . join($sep, $res) . "'");
 }
 
 // fonction appelee par la balise #NOTES

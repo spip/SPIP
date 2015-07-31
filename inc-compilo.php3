@@ -123,7 +123,7 @@ function calculer_texte($texte, $id_boucle, &$boucles) {
 			$module = 'public/spip/ecrire';
 		$c = new Champ;
 		$c->code = "_T('$module:$chaine')";
-		$c->fonctions = explode('|', substr($match[4],1));
+		$c->fonctions = phraser_filtres(substr($match[4],1));
 		$c->id_boucle = $id_boucle;
 		$c->boucles = &$boucles;
 		$c->statut = 'php'; // ne pas manger les espaces avec trim()
@@ -536,7 +536,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	include_local("inc-$gram-squel.php3");
 
-	$racine = parser($squelette, '',$boucles, $nom);
+	$racine = phraser($squelette, '',$boucles, $nom);
 
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'documents' => false, 'sourcefile' => $sourcefile);
