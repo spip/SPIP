@@ -163,7 +163,7 @@ französischen SPIP-Dokumentation</a>.',
 	'entree_url_2' => 'Adresse (URL) der Website',
 	'erreur_connect_deja_existant' => 'Ein Server mit diesem Namen existiert bereits.',
 	'erreur_nom_connect_incorrect' => 'Dieser Servername ist nicht zulässig.',
-	'erreur_plugin_desinstalation_echouee' => 'Das Plugin konnte nicht deinstalliert werden. Sie müssen es auf jeden Fall deaktivieren.',
+	'erreur_plugin_desinstalation_echouee' => 'Das Plugin konnte nicht deinstalliert werden. Sie müssen es auf jeden Fall deaktivieren.', # MODIF
 	'erreur_plugin_fichier_absent' => 'Datei nicht vorhanden',
 	'erreur_plugin_fichier_def_absent' => 'Definitionsdatei nicht vorhanden',
 	'erreur_plugin_nom_fonction_interdit' => 'Unzulässiger Funktionsname',
