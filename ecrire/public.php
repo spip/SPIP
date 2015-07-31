@@ -211,8 +211,6 @@ if (defined('_INC_PUBLIC')) {
 	AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
 	AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
 		cron();
-
-	spip_log('fini '.$_SERVER['REQUEST_URI']);
 }
 
 ?>
