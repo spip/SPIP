@@ -12,22 +12,15 @@ function ecrire_stats() {
 		$log_ip = $GLOBALS['HTTP_X_FORWARDED_FOR'];
 	else
 		$log_ip = $GLOBALS['REMOTE_ADDR'];
-	if ($id_rubrique > 0) {
+
+	if ($log_id_num = intval($id_rubrique))
 		$log_type = "rubrique";
-		$log_id_num = $id_rubrique;
-	}
-	else if ($id_article > 0) {
+	else if ($log_id_num = intval($id_article))
 		$log_type = "article";
-		$log_id_num = $id_article;
-	}
-	else if ($id_breve > 0) {
+	else if ($log_id_num = intval($id_breve))
 		$log_type = "breve";
-		$log_id_num = $id_breve;
-	}
-	else {
+	else
 		$log_type = "autre";
-		$log_id_num = 0;
-	}
 
 	// Conversion IP 4 octets -> entier 32 bits
 	if (ereg("^(::ffff:)?([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$", $log_ip, $r)) {
