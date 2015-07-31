@@ -731,7 +731,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'La declaración de este plugin es incorrecta',
 	'plugin_info_install_ok' => 'Instalación exitosa',
-	'plugin_info_necessite' => 'Necesita:', # MODIF
+	'plugin_info_necessite' => 'Necesita:',
 	'plugin_info_non_compatible_spip' => 'Este plugin no es compatible con esta versión de SPIP',
 	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'No pueden desactivarse.',
@@ -844,7 +844,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estadísticas, por ejemplo).<p>
 Si no le ves utilidad, puedes dejar esta opción con su valor por omisión (no crear los archivos).</p>',
 	'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
-	'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalación, y tu acceso todavía funciona, puedes ', # MODIF
+	'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalación, y tu acceso todavía funciona, puedes ',
 	'texte_introductif_article' => '(Introducción del artículo.)',
 	'texte_jeu_caractere' => 'Se aconseja emplear para el sitio el alfabeto universal <tt>utf-8</tt>): permite visualizar textos en todos los idiomas, y ya no plantea problemas de compatibilidad con navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Cuidado: este parametro no provoca la conversión de textos ya ingresados en el sitio. ',
