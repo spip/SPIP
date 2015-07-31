@@ -316,7 +316,6 @@ ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/instituer_article.php -text
 ecrire/action/instituer_auteur.php -text
-ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_forum.php -text
 ecrire/action/instituer_groupe_mots.php -text
