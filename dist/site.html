@@ -62,7 +62,8 @@
 <div class="contenu" id="principal">
 
 <div class="cartouche">
-[(#LOGO_SITE|left)]
+[(#LOGO_SITE|right||sinon{<img src="http://open.thumbshots.org/image.pxf?url=#URL_SITE" style="float: right;" alt="[(#NOM_SITE|addslashes)]" />})]
+
 <h1 class="titre-texte"><a href="#URL_SITE">#NOM_SITE</a></h1>
 
 [<div class="chapo">(#DESCRIPTIF)</div>]
