@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_breve' value='#ENV{id_breve}' />
 	  <ul>
-	    <li class="editer_titre obligatoire">
+	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:info_titre:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_breve}|_T})]"
@@ -22,7 +22,7 @@
 			(#VAL|chercher_rubrique{#ENV{id_breve},#ENV{id_rubrique}|sinon{#ENV{id_parent}},'breve',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
 	    
-	    <li class="editer_texte">
+	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 	      	<label for="text_area"><:entree_texte_breve:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
@@ -34,13 +34,13 @@
 			<fieldset>
 			<legend><:entree_liens_sites:></legend>
 			<ul>
-				<li class="editer_lien_titre">
+				<li class="editer_lien_titre[ (#ENV**{erreurs}|table_valeur{lien_titre}|oui)erreur]">
 					<label for="lien_titre"><:info_titre:></label>
 					<em class='aide'>#AIDER{breveslien}</em>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>]
 					<input type='text' name='lien_titre' id='lien_titre' class='text' value="[(#ENV**{lien_titre})]" />
 				</li>
-				<li class="editer_lien_url">
+				<li class="editer_lien_url[ (#ENV**{erreurs}|table_valeur{lien_url}|oui)erreur]">
 					<label for="lien_url"><:info_url:></label>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{lien_url})</span>]
 					<input type='text' name='lien_url' id='lien_url' class='text' value="[(#ENV**{lien_url})]" />
