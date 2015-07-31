@@ -1462,7 +1462,8 @@ function traiter_raccourcis($letexte) {
 		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/S",
 		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/S",
 		/* 13 */	"/<quote>/S",
-		/* 14 */	"/<\/quote>/S"
+		/* 14 */	"/<\/quote>/S",
+		/* 15 */	"/<\/?intro>/S"
 	);
 	$remplace1 = array(
 		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
@@ -1479,7 +1480,8 @@ function traiter_raccourcis($letexte) {
 		/* 11 */	"<p>",
 		/* 12 */	"<p>",
 		/* 13 */	"<blockquote class=\"spip\"><p>",
-		/* 14 */	"</blockquote><p>"
+		/* 14 */	"</blockquote><p>",
+		/* 15 */	""
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@S", "", $letexte);
