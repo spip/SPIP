@@ -60,7 +60,7 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
 
 	// recuperer le secteur, pour affecter les bons champs extras
 	if (!$row['id_secteur']) {
-		$row_rub = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . sql_quote($id_rubrique));
+		$row_rub = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
 		$row['id_secteur'] = $row_rub;
 	}
 
@@ -74,7 +74,7 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0) {
 // http://doc.spip.org/@article_select_trad
 function article_select_trad($lier_trad, $id_rubrique=0) {
 	// Recuperer les donnees de l'article original
-	$row = sql_fetsel("*", "spip_articles", "id_article=$lier_trad");
+	$row = sql_fetsel("*", "spip_articles", "id_article=".intval($lier_trad));
 	if ($row) {
 		$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
 

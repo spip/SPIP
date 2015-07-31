@@ -76,7 +76,7 @@ function maj_11431 () {
 	// mise a jour de ces mots la
 	if ($res){
 		while ($r = sql_fetch($res)){
-			sql_updateq('spip_mots', array('type'=>$r['type']), 'id_mot='.sql_quote($r['id_mot']));
+			sql_updateq('spip_mots', array('type'=>$r['type']), 'id_mot='.intval($r['id_mot']));
 		}
 	}
 }
