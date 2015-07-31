@@ -157,7 +157,6 @@ function calendrier_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour
 function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal='', $script='', $evt='')
 {
 	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
-
 	if (!$time) 
 	  {
 	    if (!$mois)
@@ -173,7 +172,9 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	if (!$ltype) $ltype = $type ? $type : 'mois';
 	if (!$lechelle) $lechelle = $echelle;
 
-	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
+
+	if (!$lpartie_cal) 
+		$lpartie_cal = $partie_cal ? $partie_cal : DEFAUT_PARTIE;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script); 
 	if (!$evt) {
