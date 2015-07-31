@@ -98,20 +98,49 @@ function picker_selected($selected, $type=''){
 	return $select;
 }
 
-function picker_identifie_id_rapide($ref,$rubriques=0,$articles=0){
-	include_spip("inc/json");
-	include_spip("inc/lien");
-	if (!($match = typer_raccourci($ref)))
+/*
+ * Récupère des informations sur un objet pour pouvoir l'ajouter aux éléments sélectionnés
+ *
+ * @param string $ref Référence de l'objet à chercher, de la forme "type|id", par exemple "rubrique|123".
+ * @param mixed $rubriques_ou_objets Soit un booléen (pouvant être une chaîne vide aussi) indiquant que les rubriques sont sélectionnables soit un tableau complet des objets sélectionnables.
+ * @param bool $articles Booléen indiquant si les articles sont sélectionnables
+ */
+function picker_identifie_id_rapide($ref, $rubriques_ou_objets=false, $articles=false){
+	include_spip('inc/json');
+	include_spip('inc/lien');
+	
+	// On construit un tableau des objets sélectionnables suivant les paramètres
+	$objets = array();
+	if ($rubriques_ou_objets and is_array($rubriques_ou_objets)){
+		$objets = $rubriques_ou_objets;
+	}
+	else{
+		if ($rubriques_ou_objets){ $objets[] = 'rubriques'; }
+		if ($articles){ $objets[] = 'articles'; }
+	}
+	
+	// Si la référence ne correspond à rien, c'est fini
+	if (!($match = typer_raccourci($ref))){
 		return json_export(false);
+	}
+	// Sinon on récupère les infos utiles
 	@list($type,,$id,,,,) = $match;
-	if (!in_array($type,array($rubriques?'rubrique':'x',$articles?'article':'x')))
+	
+	// On regarde si le type trouvé fait partie des objets sélectionnables
+	if (!in_array(table_objet($type), $objets)){
 		return json_export(false);
-	$table_sql = table_objet_sql($type);
-	$id_table_objet = id_table_objet($type);
-	if (!$titre = sql_getfetsel('titre',$table_sql,"$id_table_objet=".intval($id)))
+	}
+	
+	// Maintenant que tout est bon, on cherche les informations sur cet objet
+	include_spip('inc/filtres');
+	if (!$titre = generer_info_entite($id, $type, 'titre')){
 		return json_export(false);
-	$titre = attribut_html(extraire_multi($titre));
-	return json_export(array('type'=>$type,'id'=>"$type|$id",'titre'=>$titre));
+	}
+	
+	// On simplifie le texte
+	$titre = attribut_html($titre);
+	
+	return json_export(array('type' => $type, 'id' => "$type|$id", 'titre' => $titre));
 }
 
 ?>

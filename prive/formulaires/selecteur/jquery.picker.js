@@ -44,6 +44,7 @@ item_picked et picker doivent seulement etre voisins
 	}
 
 	jQuery.fn.item_pick = function(id_item,name,title,type){
+		var label_supprimer = (typeof selecteur_label_supprimer != 'undefined') ? : selecteur_label_supprimer : 'del';
 		var picker = this.parents('.item_picker');
 		var picked = picker.siblings('ul.item_picked');
 		if (!picked.length) {
@@ -65,8 +66,8 @@ item_picked et picker doivent seulement etre voisins
 				picked.append('<li class="last on '+type+'">'
 				+'<input type="hidden" name="'+name+'[]" value="'+id_item+'"/>'
 				+ title
-				+((select&&obligatoire)?"":" <a tile='"+selecteur_label_supprimer+"' href='#' onclick='jQuery(this).item_unpick();return false;'>"
-				  +"<img alt='"+selecteur_label_supprimer+"' src='"+img_unpick+"' /></a>"
+				+((select&&obligatoire)?"":" <a title='"+label_supprimer+"' href='#' onclick='jQuery(this).item_unpick();return false;'>"
+				  +"<img alt='"+label_supprimer+"' src='"+img_unpick+"' /></a>"
 				  )
 				+'<span class="sep">, </span></li>').removeClass('changing').stopAnimeajax();
 				// masquer le selecteur apres un pick
