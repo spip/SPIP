@@ -77,6 +77,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendario giornaliero',
 'cal_par_mois' => 'calendario mensile',
 'cal_par_semaine' => 'calendario settimanale',
+'calendrier_synchro_lien' => '<NEW>R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => '<NEW>Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'calendrier_synchro_public' => '<NEW>Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'calendrier_synchro_sync' => '<NEW>Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 
 
