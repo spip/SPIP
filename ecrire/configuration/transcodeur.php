@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/lang');
 include_spip('inc/presentation');
 
 function configuration_transcodeur_dist()

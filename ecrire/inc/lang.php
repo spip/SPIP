@@ -19,9 +19,10 @@ include_spip('inc/actions');
 //
 // http://doc.spip.org/@changer_langue
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
+	global $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 
-	$liste_langues = ',' . $all_langs.','.@$GLOBALS['meta']['langues_multilingue'] . ',';
+	$liste_langues = ',' . @$GLOBALS['meta']['langues_proposees']
+	. ',' . @$GLOBALS['meta']['langues_multilingue'] . ',';
 
 	// Si la langue demandee n'existe pas, on essaie d'autres variantes
 	// Exemple : 'pt-br' => 'pt_br' => 'pt'
@@ -289,38 +290,42 @@ function repertoire_lang($module='spip', $lang='fr') {
 }
 
 //
-// Initialisation
+// Initialisation de
+// - la meta langues proposees (qui ne change pas)
+// - la globale spip_lang: langue courante (qui peut changer)
 //
 // http://doc.spip.org/@init_langues
 function init_langues() {
-	global $all_langs, $langue_site,  $lang_dir;
+	global $spip_lang;
+
+	// liste des langues dans les meta, sauf a l'install
 
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
-	$lang_dir = '';
 
-	$toutes_langs = Array();
-	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
+	$tout = array();
+	if (!$all_langs || !isset($GLOBALS['meta']['langue_site']) || !_DIR_RESTREINT) {
 		if (!$d = @opendir(repertoire_lang())) return;
 		while (($f = readdir($d)) !== false) {
 			if (preg_match(',^spip_([a-z_]+)\.php[3]?$,', $f, $regs))
-				$toutes_langs[] = $regs[1];
+				$tout[] = $regs[1];
 		}
 		closedir($d);
-		sort($toutes_langs);
-		$all_langs2 = join(',', $toutes_langs);
-		// Si les langues n'ont pas change, ne rien faire
-		if ($all_langs2 != $all_langs) {
-			include_spip('inc/meta');
-			$all_langs = $all_langs2;
-			if (!$langue_site) {
-				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
-				if (strpos(',fr,',",$all_langs,")!==false) $langue_site = 'fr';
-				else list(, $langue_site) = each($toutes_langs);
-				ecrire_meta('langue_site', $langue_site);
-			}
-			ecrire_meta('langues_proposees', $all_langs);
-			ecrire_metas();
+		sort($tout);
+		if (!isset($GLOBALS['meta']['langue_site'])) {
+// Initialisation : le francais si dispo, sinon la premiere langue trouvee
+			$spip_lang = $GLOBALS['meta']['langue_site'] =
+			(strpos(',fr,',",$all_langs,")!==false)
+			? 'fr' :  $tout[0];
+			ecrire_meta('langue_site', $spip_lang);
 		}
+		$tout = join(',', $tout);
+		// Si les langues n'ont pas change, ne rien faire
+		if ($tout != $all_langs) {
+			include_spip('inc/meta');
+			$GLOBALS['meta']['langues_proposees'] =	$tout;
+			ecrire_meta('langues_proposees', $tout);
+		}
+		ecrire_metas();
 	}
 }
 

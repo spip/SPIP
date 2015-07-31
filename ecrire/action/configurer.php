@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // on traite a part seulement le cas du proxy car c'est indispensable
 // (message d'erreur eventuel a afficher)
 
-include_spip('inc/lang');
 include_spip('inc/config');
 
 // http://doc.spip.org/@action_configurer_dist

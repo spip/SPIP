@@ -16,6 +16,7 @@ if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
 include_spip('inc/minipres');
+#include_spip('inc/headers'); // fait dans inc/public
 utiliser_langue_visiteur();
 
 //
@@ -133,9 +134,9 @@ function action_test_dirs_dist()
 
  } else {
 	if (!_FILE_CONNECT)
-	  header("Location: " . generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
+	  redirige_par_entete(generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
 	else
-		header("Location: " . _DIR_RESTREINT_ABS);
+		redirige_par_entete(_DIR_RESTREINT_ABS);
  }
 }
 ?>

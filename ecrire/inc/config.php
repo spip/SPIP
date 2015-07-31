@@ -16,12 +16,10 @@ include_spip('inc/meta');
 
 //
 // Appliquer les valeurs par defaut pour les options non initialisees
+// (pour les langues c'est fait)
 //
 // http://doc.spip.org/@init_config
 function init_config() {
-	// langue par defaut du site = langue d'installation (cookie spip_lang) sinon francais
-	if (!$lang = $GLOBALS['spip_lang'])
-		$lang = 'fr';
 
 	$liste_meta = array(
 		'nom_site' => _T('info_mon_site_spip'),
@@ -70,13 +68,10 @@ function init_config() {
 		'creer_htpasswd' => 'non',
 		'creer_htaccess' => 'non',
 
-		'langue_site' => $lang,
-
 		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
-		'langues_multilingue' => $GLOBALS['all_langs']
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!$GLOBALS['meta'][$nom]) {
@@ -293,6 +288,7 @@ function appliquer_modifs_config() {
 	// langue_site : la globale est mangee par inc_version
 	if ($lang = $GLOBALS['changer_langue_site']) {
 		$lang2 = $GLOBALS['spip_lang'];
+		include_spip('inc/lang');
 		if (changer_langue($lang)) {
 			ecrire_meta('langue_site', $lang);
 			changer_langue($lang2);

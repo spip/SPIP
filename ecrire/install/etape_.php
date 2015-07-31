@@ -18,6 +18,7 @@ function install_etape__dist()
 	global $spip_lang_right;
 
 	include_spip('inc/headers');
+	utiliser_langue_visiteur();
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues) {
 		redirige_par_entete(generer_test_dirs());
