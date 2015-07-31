@@ -28,7 +28,6 @@ function exec_controle_petition_dist()
 // http://doc.spip.org/@exec_controle_petition_args
 function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=NULL)
 {
-	if (!$pas) $pas = 10;
 	if ($id_signature) {
 		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id_signature");
 		$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
@@ -45,36 +44,36 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 		)) {
 		include_spip('inc/minipres'); 
 		echo minipres();}
-	else {
-		if ($date) {
-			include_spip('inc/forum');
-			$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
-					'FROM' => 'spip_signatures', 
-					'WHERE' => $where,
-					'ORDER BY' => $order);
-			$debut = navigation_trouve_date($date, 'd', $pas, $query);
-		}
-		if (!preg_match('/^\w+$/',$type)) $type = 'public';
-		if ($id_article) $where .= "id_article=$id_article AND ";
-		$res = controle_petition_args($id_article, $type, $debut, $titre, $where, $pas);
-		if (_AJAX) {
-			ajax_retour($res);
-		} else {
-		  $ong = controle_petition_onglet($id_article, $debut, $type);
-		  controle_petition_page($id_article, $titre, $ong, $res);
-		}
-	}
+	else controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas);
 }
 
-function controle_petition_args($id_article, $type, $debut, $titre, $where, $pas=10)
+function controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas)
 {
+	if (!preg_match('/^\w+$/',$type)) $type = 'public';
+	if ($id_article) $where .= "id_article=$id_article AND ";
 	$extrait = "(statut='publie' OR statut='poubelle')";
 	if ($type == 'interne') $extrait = "NOT($extrait)";
 	$where .= $extrait;
 	$order = "date_time DESC";
+	if (!$pas) $pas = 10;
+	if ($date) {
+		include_spip('inc/forum');
+		$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
+				'FROM' => 'spip_signatures', 
+				'WHERE' => $where,
+				'ORDER BY' => $order);
+		$debut = navigation_trouve_date($date, 'd', $pas, $query);
+	}
 	$signatures = charger_fonction('signatures', 'inc');
 
-	return $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
+	$res = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
+
+	if (_AJAX) {
+			ajax_retour($res);
+	} else {
+		  $ong = controle_petition_onglet($id_article, $debut, $type);
+		  controle_petition_page($id_article, $titre, $ong, $res);
+		}
 }
 
 // http://doc.spip.org/@controle_petition_page
