@@ -105,9 +105,6 @@ $cookie_prefix = "spip";
 // navigateur l'accepte (valable pour apache 1.3 seulement) ?
 $auto_compress = true;
 
-// faut-il indexer les mots de 3 lettres en capitales ('OGM') ?
-$indexer_ogm = true;
-
 // faut-il loger les infos de debug dans data/spip.log ?  (peu utilise)
 $debug = false;
 
