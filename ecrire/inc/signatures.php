@@ -21,6 +21,8 @@ function message_de_signature($row)
 // http://doc.spip.org/@inc_signatures_dist
 function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
+	charger_generer_url();
+
 	# filtre de duree (a remplacer par une vraie pagination)
 	#$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
 	if ($id) { 
@@ -29,29 +31,12 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	}
 	else $args = "";
 
-	$evt = (_SPIP_AJAX === 1);
-
-	$a = "editer_signature-$id";
-
-	$q = spip_query("SELECT date_time FROM spip_signatures " . ($where ? "WHERE $where" : '') . " ORDER BY date_time DESC");
-
-	charger_generer_url();
-
-	while ($row = spip_fetch_array($q)) {
-		if($c++%$limit==0) {	
-			if ($c > 1) $res .= " | ";
-			$date = affdate_court($row['date_time']);
-			if ($c == ($debut+1))
-				$res .= "<span class='spip_medium'><b>$c</b></span>";
-			else {
-				$h = generer_url_ecrire($script, $args ."debut=".($c-1));
-				if ($evt)
-					$evt = "\nonclick="
-					. ajax_action_declencheur($h,$a);
-				$res .= "<a href='$h$a' title='$date'$evt>$c</a>";
-			}
-		}
+	$q = spip_query("SELECT COUNT(*) AS n FROM spip_signatures " . ($where ? "WHERE $where" : ''));
+	$t = spip_fetch_array($q);
+	if ($t['n'] > $nb_aff = floor(1.5*_TRANCHES)) {
+		$res .= navigation_pagination($t['n'], $nb_aff, generer_url_ecrire($script, $args), false, 'debut');
 	}
+
 
 	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
 #	($limit . ($debut ? " OFFSET $debut" : "")); #PG

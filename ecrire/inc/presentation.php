@@ -375,6 +375,55 @@ function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	return $res;
 }
 
+function navigation_pagination($num_rows, $nb_aff=10, $href=null, $onclick=false, $tmp_var=null) {
+
+	$texte = '';
+	$self = self();
+	$deb_aff = isset($tmp_var) ? intval(_request($tmp_var)) : 0;
+
+	for ($i = 0; $i < $num_rows; $i += $nb_aff){
+		$deb = $i + 1;
+
+		// Pagination : si on est trop loin, on met des '...'
+		if (abs($deb-$deb_aff)>101) {
+			if ($deb<$deb_aff) {
+				if (!isset($premiere)) {
+					$premiere = '0 ... ';
+					$texte .= $premiere;
+				}
+			} else {
+				$derniere = ' | ... '.$num_rows;
+				$texte .= $derniere;
+				break;
+			}
+		} else {
+
+			$fin = $i + $nb_aff;
+			if ($fin > $num_rows)
+				$fin = $num_rows;
+
+			if ($deb > 1)
+				$texte .= " |\n";
+			if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
+				$texte .= "<b>$deb</b>";
+			}
+			else {
+				$script = parametre_url($self, $tmp_var, $deb-1);
+				if ($onclick) {
+					$on = "\nonclick=\"return charger_id_url('"
+					. parametre_url($href, $tmp_var, $deb-1)
+					. "','"
+					. $tmp_var
+					. '\');"';
+				}
+				$texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
+			}
+		}
+	}
+	
+	return $texte;
+}
+
 // http://doc.spip.org/@afficher_tranches_requete
 function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $old_arg=NULL) {
 	static $ancre = 0;
@@ -383,39 +432,16 @@ function afficher_tranches_requete($num_rows, $tmp_var, $url='', $nb_aff = 10, $
 		$tmp_var = $url;		$url = $nb_aff; $nb_aff=$old_arg;
 	}
 
-	$deb_aff = intval(_request($tmp_var));
 	$ancre++;
 	$self = self();
 	$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
 	$texte = "\n<div style='position: relative;$ie_style; background-color: #dddddd; border-bottom: 1px solid #444444; padding: 2px;' class='arial1 tranches' id='a$ancre'>";
+
+	$texte .= navigation_pagination($num_rows, $nb_aff, $url, $onclick=true, $tmp_var);
+
 	$on ='';
 
-	for ($i = 0; $i < $num_rows; $i += $nb_aff){
-		$deb = $i + 1;
-		$fin = $i + $nb_aff;
-		if ($fin > $num_rows) $fin = $num_rows;
-		if ($deb > 1) $texte .= " |\n";
-		if ($deb_aff + 1 >= $deb AND $deb_aff + 1 <= $fin) {
-			$texte .= "<b>$deb</b>";
-		}
-		else {
-			$script = parametre_url($self, $tmp_var, $deb-1);
-			if ($url) {
-				$on = "\nonclick=\"return charger_id_url('"
-				. $url
-				. "&amp;"
-				. $tmp_var
-				. '='
-				. ($deb-1)
-				. "','"
-				. $tmp_var
-				. '\');"';
-			}
-			$texte .= "<a href=\"$script#a$ancre\"$on>$deb</a>";
-		}
-	}
-	
 	$style = " class='arial2' style='border-bottom: 1px solid #444444; position: absolute; top: 1px; $spip_lang_right: 15px;'";
 
 	$script = parametre_url($self, $tmp_var, -1);
