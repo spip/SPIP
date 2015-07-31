@@ -25,6 +25,8 @@ function action_editer_message_dist() {
 		action_editer_message_post_vieux($arg); 
 	elseif (preg_match(',^-(\d+)$,', $arg, $r))
 		action_editer_message_post_supprimer($r[1]);
+	elseif (preg_match(',^(\d+)\W$,', $arg, $r))
+		action_editer_message_post_choisir($r[1]);	  
 	elseif (preg_match(',^(\d+)\W@(\d+)$,', $arg, $r))
 		action_editer_message_post_ajouter($r[1], $r[2]);	  
 	elseif (preg_match(',^(\d+)\W:(\d+)$,', $arg, $r))
@@ -64,6 +66,36 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 		"(id_auteur,id_message,vu)",
 		"('$id_auteur','$id_message','non')");
 }
+
+function action_editer_message_post_choisir($id_message) {
+  spip_log("aempc" . urldecode(_request('redirect')));
+	if ($id_auteur = _request('nouv_auteur'))
+		action_editer_message_post_ajouter($id_message, $id_auteur);
+	else {
+		include_spip('inc/mots');
+		include_spip('inc/charsets'); // pour tranlitteration
+		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		$cherche_auteur= _request('cherche_auteur');
+		$query = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''");
+		$table_auteurs = array();
+		$table_ids = array();
+		while ($row = spip_fetch_array($query)) {
+			$table_auteurs[] = $row['nom'];
+			$table_ids[] = $row['id_auteur'];
+		}
+		$res =  mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
+		$n = count($res);
+
+		if ($n == 1)
+			# Bingo
+			action_editer_message_post_ajouter($id_message, $res[0]);
+		# renvoyer la valeur ==> formulaire de choix si n !=1
+		# notification que $res[0] a ete rajoute sinon
+		  redirige_par_entete(parametre_url(urldecode(_request('redirect')),
+					    'cherche_auteur', _request('chercher_auteur'), '&'));
+	}
+}
+
 
 function action_editer_message_post_envoyer($id_message, $statut) {
 

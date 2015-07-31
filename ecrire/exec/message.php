@@ -19,10 +19,9 @@ include_spip('inc/mots');
 // http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
 {
-	global $cherche_auteur, $connect_id_auteur,$forcer_dest,$id_message, $nouv_auteur;
+	global $cherche_auteur, $connect_id_auteur,$forcer_dest,$id_message;
 
 	$id_message = intval($id_message);
-	$nouv_auteur = intval($nouv_auteur);
 	charger_generer_url();
 
 	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
@@ -45,7 +44,7 @@ function exec_message_dist()
 		}
 	}
 
-	exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur, $forcer_dest);
+	exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest);
 }
 
 // http://doc.spip.org/@http_afficher_rendez_vous
@@ -61,15 +60,6 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 	  echo "<p class='verdana2' style='text-align: center'>"._T('titre_rendez_vous')."<br />\n".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b>, <b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
 	  echo "<br />\n<img src='$dirpuce/puce$spip_lang_rtl.gif' alt=' ' style='border: 0px;' /> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b></p>";
 	}
-}
-
-// http://doc.spip.org/@sql_nouveau_participant
-function sql_nouveau_participant($nouv_auteur, $id_message)
-{
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$nouv_auteur' AND id_message='$id_message'");
-	spip_abstract_insert('spip_auteurs_messages',
-		"(id_auteur,id_message,vu)",
-		"('$nouv_auteur','$id_message','non')");
 }
 
 // http://doc.spip.org/@http_auteurs_ressemblants
@@ -88,12 +78,12 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
     return '<b>' . _T('info_recherche_auteur_zero', array('cherche_auteur' => $cherche_auteur))."</b><br />";
   }
   else if (count($resultat) == 1) {
+    // action/editer_message a du prendre en compte ce cas
     list(, $nouv_auteur) = each($resultat);
-    sql_nouveau_participant($nouv_auteur, $id_message);
     $row = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$nouv_auteur"));
     $nom_auteur = $row['nom'];
     return "<b>"._T('info_ajout_participant')."</b><br />" .
-      "<ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>$nom_auteur</span></b></span>\n</ul>";
+      "<ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>$nom_auteur</span></b></span></li>\n</ul>";
   }
   else if (count($resultat) < 16) {
     $res = '';
@@ -104,15 +94,15 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
       $nom_auteur = $row['nom'];
       $email_auteur = $row['email'];
       $bio_auteur = $row['bio'];
-      $res .= "<li><span class='spip_medium' style='class='verdana1'><b>$nom_auteur</b></span>" .
+      $res .= "\n<li><span class='spip_medium verdana1'><b>$nom_auteur</b></span>" .
 	($email_auteur ? " ($email_auteur)" : '') .
-	" | <a href='" . redirige_action_auteur("editer_message","$id_message/@$id_auteur", 'message', "id_message=$id_message")
+	"\n <a href='" . redirige_action_auteur("editer_message","$id_message/@$id_auteur", 'message', "id_message=$id_message")
 	. "'>" 
 	. _T('lien_ajout_destinataire').
 	"</a>" .
 	(!trim($bio_auteur) ? '' :
-	 ("<br /><span class='spip_x-small'>".propre(couper($bio_auteur, 100))."</span>\n")) .
-	"</font></li>\n";
+	 ("<br />\n<span class='spip_x-small'>".propre(couper($bio_auteur, 100))."</span>\n")) .
+	"</li>\n";
     }
     return  "<b>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</b><br /><ul>$res</ul>";
   }
@@ -137,61 +127,51 @@ function http_visualiser_participants($auteurs_tmp)
 // http://doc.spip.org/@http_ajouter_participants
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
-    $result_ajout_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND ") . " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom");
+	$result_ajout_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND ") . " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom");
 
-    if (spip_num_rows($result_ajout_auteurs) > 0) {
+	if (!spip_num_rows($result_ajout_auteurs) > 0) return '';
 
-      echo "<div align='left'>";
-      echo generer_url_post_ecrire('message');
-      echo "<span class='verdana1 spip_small'><b>", _T('bouton_ajouter_participant')," &nbsp; </b></span>\n",
-	"<input type='hidden' name='id_message' value=\"$id_message\" />";
+	$res = "<span class='verdana1 spip_small'><b>" .
+	  _T('bouton_ajouter_participant') ." &nbsp; </b></span>\n" .
+	  "<input type='hidden' name='id_message' value=\"$id_message\" />";
 
-      if (spip_num_rows($result_ajout_auteurs) > 50) {
-	echo "\n<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
-	echo "\n<input type='submit' name='Chercher' value='"._T('bouton_chercher')."' class='fondo' />";
-      }
-      else {
-	echo "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>";
-	$group = false;
-	$group2 = false;
-	
-	while($row=spip_fetch_array($result_ajout_auteurs)) {
-	  $id_auteur = $row['id_auteur'];
-	  $nom = $row['nom'];
-	  $email = $row['email'];
-	  $statut_auteur = $row['statut'];
-	  
-	  $statut_auteur=ereg_replace("0minirezo", _T('info_statut_administrateur'), $statut_auteur);
-	  $statut_auteur=ereg_replace("1comite", _T('info_statut_redacteur'), $statut_auteur);
-	  $statut_auteur=ereg_replace("2redac", _T('info_statut_redacteur'), $statut_auteur);
-	  $statut_auteur=ereg_replace("5poubelle", _T('info_statut_efface'), $statut_auteur);
-	  
-	  $premiere = strtoupper(substr(trim($nom), 0, 1));
+	if (spip_num_rows($result_ajout_auteurs) > 50) {
+		$res .=  "\n<input type='text' name='cherche_auteur' class='fondl' value='' size='20' />";
+		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
+	} else {
+		$res .=  "<select name='nouv_auteur' size='1' style='width: 150px' class='fondl'>";
+		while($row=spip_fetch_array($result_ajout_auteurs)) {
+			$id_auteur = $row['id_auteur'];
+			$nom = $row['nom'];
+			$email = $row['email'];
+			$statut_auteur = $row['statut'];
+			$premiere = strtoupper(substr(trim($nom), 0, 1));
 
-	  if ($GLOBALS['connect_statut'] != '0minirezo') {
-	    if ($p = strpos($email, '@')) $email = substr($email, 0, $p).'@...';
-	  }
+			if ($GLOBALS['connect_statut'] != '0minirezo') {
+				if ($p = strpos($email, '@')) $email = substr($email, 0, $p).'@...';
+			}
 
-	  if ($statut_auteur != $statut_old) {
-	    echo "\n<option value=\"x\"></option>";
-	    echo "\n<option value=\"x\"> $statut_auteur".'s</option>';
-	  }
+			if ($statut_auteur != $statut_old) {
+				$s =ereg_replace("0minirezo", _T('info_statut_administrateur'), $statut_auteur);
+				$s=ereg_replace("1comite", _T('info_statut_redacteur'), $s);
+				$s=ereg_replace("2redac", _T('info_statut_redacteur'), $s);
+				$s=ereg_replace("5poubelle", _T('info_statut_efface'), $s);
+				$res .=  "\n<option value=\"x\"></option>";
+				$res .=  "\n<option value=\"x\"> " . $s . 's</option>';
+			}
 						
-	  if ($premiere != $premiere_old AND ($statut_auteur != _T('info_administrateur') OR !$premiere_old)) {
-	    echo "\n<option value=\"x\"></option>";
-	  }
+			if ($premiere != $premiere_old AND ($statut_auteur != '0minirezo' OR !$premiere_old))
+				$res .=  "\n<option value=\"x\"></option>";
 	  
-	  $texte_option = supprimer_tags(couper("$nom ($email) ", 40));
-	  echo "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option</option>";
-	  $statut_old = $statut_auteur;
-	  $premiere_old = $premiere;
-	}
+			$res .=  "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" .supprimer_tags(couper("$nom ($email) ", 40)) . "</option>";
+			$statut_old = $statut_auteur;
+			$premiere_old = $premiere;
+		}
 	
-	echo "</select>";
-	echo "<input type='submit' name='Ajouter' value='"._T('bouton_ajouter')."' class='fondo' />";
-      }
-      echo "</form></div>";
-    }
+		$res .=  "</select>"
+		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
+	}
+	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div align='left'>$res</div>", " method='post'");
 }
 
 // http://doc.spip.org/@http_afficher_forum_perso
@@ -209,22 +189,19 @@ function http_afficher_forum_perso($id_message)
 
 
 // http://doc.spip.org/@http_message_avec_participants
-function http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur, $expediteur='')
+function http_message_avec_participants($id_message, $statut, $forcer_dest, $cherche_auteur, $expediteur='')
 {
 	global $connect_id_auteur, $couleur_claire ;
-	echo debut_cadre_enfonce("redacteurs-24.gif", true);
 
 	if ($cherche_auteur) {
-			echo "\n<p align='left'><div class='cadre-info'>" .
-			  http_auteurs_ressemblants($cherche_auteur , $id_message) .
-			  "\n</div></p>";
+		echo "\n<div align='left'><div class='cadre-info'>"
+		. http_auteurs_ressemblants($cherche_auteur , $id_message)
+		. "\n</div></div>";
 	  }
 
-	if ($nouv_auteur > 0) sql_nouveau_participant($nouv_auteur, $id_message);
-
-		//
-		// Liste des participants
-		//
+	//
+	// Liste des participants
+	//
 
 	$result_auteurs = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
@@ -264,20 +241,18 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  }
 
 	  if ($statut == 'redac' OR $forcer_dest)
-		  http_ajouter_participants(join(',', $ze_auteurs),
-					    $id_message);
+		  echo http_ajouter_participants(join(',', $ze_auteurs), $id_message);
 	  else {
 		  echo
 		    debut_block_invisible("ajouter_auteur"),
 		    "<br /><div align='right'><span class='verdana1 spip_small'><a href='" . generer_url_ecrire("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></span></div>",
 		    fin_block();
 		}
-	  fin_cadre_enfonce();
 	  return $total_dest;
 }
 
 // http://doc.spip.org/@http_affiche_message
-function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest)
+function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest)
 {
   global $connect_id_auteur,$connect_statut, $les_notes;
 
@@ -319,7 +294,9 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	//
 	
 	if ($type == 'normal') {
-	  $total_dest = http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur, $expediteur);
+	  echo debut_cadre_enfonce("redacteurs-24.gif", true);
+	  $total_dest = http_message_avec_participants($id_message, $statut, $forcer_dest, $cherche_auteur, $expediteur);
+	  fin_cadre_enfonce();
 	}
 
 	if ($rv != "non") http_afficher_rendez_vous($date_heure, $date_fin);
@@ -390,7 +367,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 }
 
 // http://doc.spip.org/@exec_affiche_message_dist
-function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $forcer_dest)
+function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 {
   global $connect_id_auteur, $echelle, $partie_cal;
   $row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
@@ -445,7 +422,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 
 	debut_droite();
 
-	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest);
+	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $forcer_dest);
 
 	// reponses et bouton poster message
 
