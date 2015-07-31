@@ -119,7 +119,7 @@ body, #navigation, .encart, .formulaire_spip {
 	font-family: "Trebuchet MS", Helvetica, sans-serif; }
 
 /* Typo pour les citations et extraits introductifs */
-q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
+q, blockquote, .introduction, h3.spip, .voirskel {
 	font-family: Georgia, Times, serif; }
 
 
@@ -268,7 +268,7 @@ q, blockquote, .liste-articles li .texte, h3.spip, .voirskel {
 	display: block;
 	font-size: 0.71em; }
 
-.liste-articles li .texte {
+.liste-articles li .introduction {
 	margin-top: 5px;
 	margin-bottom: 2em;
 	border: 1px solid #CCC;
