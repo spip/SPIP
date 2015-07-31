@@ -1217,8 +1217,9 @@ function balise_PLUGIN_dist($p) {
 // http://doc.spip.org/@balise_AIDER_dist
 function balise_AIDER_dist($p) {
 	$_motif = interprete_argument_balise(1,$p);
+	$s = "'" . addslashes($p->descr['sourcefile']) . "'";
 	$aider = charger_fonction('aider','inc');
-	$p->code = "((\$aider=charger_fonction('aider','inc'))?\$aider($_motif):'')";
+	$p->code = "((\$aider=charger_fonction('aider','inc'))?\$aider($_motif,$s, \$Pile[0]):'')";
 	return $p;
 }
 
