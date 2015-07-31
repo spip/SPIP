@@ -433,6 +433,7 @@ function spip_mysql_update($table, $exp, $where='') {
 	spip_mysql_query("UPDATE $table SET $exp" . ($where ? " WHERE $where" : ''));
 }
 
+// http://doc.spip.org/@spip_mysql_delete
 function spip_mysql_delete($table, $where='') {
 	spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''));
 }
