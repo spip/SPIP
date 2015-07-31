@@ -3,7 +3,7 @@
 
 	Modele pour <img>
 
-	Si on est en mode "vignette" ou appele avec embed=oui,
+	Si on est en mode "image" ou appele avec embed=oui,
 	on affiche l'image complete ; sinon le logo
 
 	Si un lien est passe #ENV{lien} on ajoute le a href
@@ -12,7 +12,7 @@
 ]
 [(#SET{
 	image,
-		#MODE|=={vignette}
+		#MODE|=={image}
 		|sinon{#ENV{embed}}
 		|?{' '}
 })][
