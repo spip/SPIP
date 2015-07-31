@@ -78,7 +78,10 @@ function copier_document($ext, $orig, $source) {
 
 function deplacer_fichier_upload($source, $dest) {
 	// Securite
-	if (strstr($dest, "..")) { exit; }
+	if (strstr($dest, "..")) {
+		spip_log("stop deplacer_fichier_upload: '$dest'");
+		exit;
+	}
 
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
@@ -94,7 +97,6 @@ function deplacer_fichier_upload($source, $dest) {
 		}
 		@unlink($dest);
 	}
-
 	return $ok;
 }
 
@@ -139,35 +141,43 @@ function check_upload_error($error, $msg='') {
 //
 // Gestion des fichiers ZIP
 //
+function accepte_fichier_upload ($f) {
+	if (!ereg(".*__MACOSX/", $f)
+	AND !ereg("^(\.|.*/\.|)", basename($f))) {
+		$ext = substr(strrchr($f, "."), 1);
+		$result = spip_query("SELECT * FROM spip_types_documents
+		WHERE extension='"
+		. corriger_extension(addslashes(strtolower($ext)))
+		. "' AND upload='oui'");
+		if ($row = @spip_fetch_array($result))
+			return true;
+	}
+}
+
+# callback pour le deballage dans spip_image.php3
+# http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
+function callback_deballe_fichier($p_event, &$p_header) {
+	if (accepte_fichier_upload($p_header['filename'])) {
+		$p_header['filename'] = _tmp_dir . basename($p_header['filename']);
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
 function verifier_compactes($zip) {
 	if ($list = $zip->listContent()) {
 	// si pas possible de decompacter: installer comme fichier zip joint
 	// Verifier si le contenu peut etre uploade (verif extension)
 		$aff_fichiers = array();
-		for ($i=0; $i<sizeof($list); $i++) {
-			for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
-			
-				if ($key == "stored_filename") {
-					$f =  $list[$i][$key];
-					// Regexp des fichiers a ignorer
-					if (!ereg("^(\.|.*/\.|.*__MACOSX/)", $f)) {
-						if (ereg("\.([^.]+)$", $f, $match)) {
-							$result = spip_query("SELECT * FROM spip_types_documents WHERE extension='"
-. corriger_extension(addslashes(strtolower($match[1]))) 
-									     . "' AND upload='oui'");
-							if ($row = @spip_fetch_array($result))
-								$aff_fichiers[]= $f;
-							else
-							spip_log("chargement de $f interdit");
-							
-						}
-					}
-				}
-			}
+		foreach ($list as $file) {
+			if (accepte_fichier_upload($f = $file['stored_filename']))
+				$aff_fichiers[]= $f;
+			else
+				spip_log("chargement de $f interdit");
 		}
+		return $aff_fichiers ;
 	}
-
-	return $aff_fichiers ;
 }
 
 function afficher_compactes($image_name /* not used */, $fichiers, $link) {

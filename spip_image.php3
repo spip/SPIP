@@ -148,18 +148,19 @@ else if ($ajout_doc == 'oui') {
 				else if ($action_zip == 'decompacter') {
 					// 1. on deballe
 					define('_tmp_dir', creer_repertoire_documents($hash));
-					$archive->extract(PCLZIP_OPT_PATH,
-						_tmp_dir,
-						PCLZIP_OPT_REMOVE_ALL_PATH);
-					// 2. on supprime le fichier temporaire
+					$archive->extract(
+						PCLZIP_OPT_PATH, _tmp_dir,
+						PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+						);
 					$contenu = verifier_compactes($archive);
+					// 2. on supprime le fichier temporaire
 					@unlink($zip);
 	
 					$_FILES = array();
 					foreach ($contenu as $fichier) {
 						$_FILES[] = array(
 							'name' => basename($fichier),
-							'tmp_name' => _tmp_dir.$fichier);
+							'tmp_name' => _tmp_dir.basename($fichier));
 					}
 				}
 	
