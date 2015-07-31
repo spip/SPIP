@@ -97,10 +97,10 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 		return $res;
 	}
-	if ($menu){
-		$res .= bandeau_double_rangee($rubrique, $sous_rubrique, $largeur)
-		. "\n<div id='bandeau_couleur'>"
-	  . "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
+	if (!$menu) return $res;
+
+
+	$items .= "<div class='h-list centered vcentered' style='width:{$largeur}px'><ul>"
 		. "<li id='bandeau_couleur1' class='bandeau_couleur'><div class='menu-item'>"
 		.  installer_gadgets($id_rubrique)
 		. "</div></li>"
@@ -121,47 +121,55 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'
 		. typo($GLOBALS['visiteur_session']['nom'])
-		. "</a></div></li>";
-		$res .= "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>";
+		. "</a></div></li>" 
+	  	. "<li id='bandeau_couleur4' class='bandeau_couleur'><div class='menu-item'>";
 
 		// couleurs
-		$couleurs = charger_fonction('couleurs', 'inc');
-		$res .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
-		$res .= $couleurs() . "</div>";
+	$couleurs = charger_fonction('couleurs', 'inc');
+	$items .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
+	$items .= $couleurs() . "</div>";
 
-		$res .= "</div></li>";
+	$items .= "</div></li>";
 
-		// choix de la langue
-		if ($i = menu_langues('var_lang_ecrire')) {
-			$res .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
+	// choix de la langue
+	if ($i = menu_langues('var_lang_ecrire')) {
+			$items .= "<li id='bandeau_couleur5' class='bandeau_couleur'><div class='menu-item'>"
 			. (_request('lang')?$i:"<a href='".parametre_url(self(),'lang',$GLOBALS['spip_lang'])
 			."' title='".attribut_html(_T('info_langues'))."'>"
 			. traduire_nom_langue($GLOBALS['spip_lang'])
 			."</a>")
 			. "</div></li>";
-		}
+	}
 
-		$res .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
+	$items .= "<li id='bandeau_couleur6' class='bandeau_couleur'><div class='menu-item'>";
 
-		if ($auth_can_disconnect) {
+	if ($auth_can_disconnect) {
 			$alt=_T('icone_deconnecter');
-			$res .= "<a href='".
+			$items .= "<a href='".
 			  generer_url_action("logout","logout=prive") .
 			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
 			  http_img_pack("deconnecter-24.gif", "$alt", "") .
 			  "</a>";
-		}
-		$res .= "</div></li>"
-		. "</ul></div>";
+	}
+	$items .= "</div></li>"
+	  . "</ul></div>";
 
-		// <div> pour la barre des gadgets
-		// (elements invisibles qui s'ouvrent sous la barre precedente)
+	// <div> pour la barre des gadgets
+	// (elements invisibles qui s'ouvrent sous la barre precedente)
 
-		$res .= bandeau_gadgets($largeur, true, $id_rubrique);
-	} // fin bandeau colore
-	$res .= "</div>"
-	  . "</div>\n";
-	return $res;
+	$items .= bandeau_gadgets($largeur, true, $id_rubrique);
+
+	$bandeau = charger_fonction('bandeau', 'inc');
+
+	return $res 
+		. "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"
+		._T("access_mode_texte")
+		."</a></div>"
+		. "<div id='haut-page'>\n"
+		.  $bandeau($rubrique, $sous_rubrique, $largeur)
+		. "\n<div id='bandeau_couleur'>"
+		.  $items
+	  	.  "</div></div>\n";
 }
 
 // http://doc.spip.org/@avertissement_messagerie
