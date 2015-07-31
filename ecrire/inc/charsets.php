@@ -10,26 +10,39 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des charsets et des conversions
+ *
+ * Ce fichier contient les fonctions relatives à la gestion de charsets,
+ * à la conversion de textes dans différents charsets et
+ * propose des fonctions émulant la librairie mb si elle est absente
+ * 
+ * @package Texte/Charsets
+**/
 
-//
+// securité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-/*
- * charsets supportes en natif : voir les tables dans ecrire/charsets/
- * les autres charsets sont supportes via mbstring()
- */
-
-// http://doc.spip.org/@load_charset
-function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
+/**
+ * Charge en mémoire la liste des caractères d'un charset
+ *
+ * Charsets supportes en natif : voir les tables dans ecrire/charsets/
+ * Les autres charsets sont supportes via mbstring()
+ * 
+ * @param string $charset
+ *     Charset à charger
+ *     Par défaut (AUTO), utilise le charset défini dans la configuration du site
+ * @return string|false
+ *     Nom du charset
+ *     false si le charset n'est pas décrit dans le répertoire charsets/
+**/
+function load_charset ($charset = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = $GLOBALS['meta']['charset'];
 	$charset = trim(strtolower($charset));
 	if (isset($GLOBALS['CHARSET'][$charset]))
 		return $charset;
-
-	if ($langue_site == 'AUTO')
-		$langue_site = $GLOBALS['meta']['langue_site'];
 
 	if ($charset == 'utf-8') {
 		$GLOBALS['CHARSET'][$charset] = array();
@@ -51,10 +64,13 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	}
 }
 
-//
-// Verifier qu'on peut utiliser mb_string
-//
-// http://doc.spip.org/@init_mb_string
+
+/**
+ * Verifier qu'on peut utiliser mb_string
+ *
+ * @return bool
+ *     true si toutes les fonctions mb nécessaires sont présentes
+**/
 function init_mb_string() {
 	static $mb;
 
@@ -79,8 +95,17 @@ function init_mb_string() {
 	return ($mb == 1);
 }
 
-// Detecter les versions buggees d'iconv
-// http://doc.spip.org/@test_iconv
+/**
+ * Test le fonctionnement correct d'iconv
+ *
+ * Celui-ci coupe sur certaines versions la chaine
+ * quand un caractère n'appartient pas au charset
+ *  
+ * @link http://php.net/manual/fr/function.iconv.php
+ * 
+ * @return bool
+ *     true si iconv fonctionne correctement
+**/
 function test_iconv() {
 	static $iconv_ok;
 
@@ -97,9 +122,15 @@ function test_iconv() {
 	return ($iconv_ok == 1);
 }
 
-// Test de fonctionnement du support UTF-8 dans PCRE
-// (contournement bug Debian Woody)
-// http://doc.spip.org/@test_pcre_unicode
+
+/**
+ * Test de fonctionnement du support UTF-8 dans PCRE
+ *
+ * Contournement bug Debian Woody
+ * 
+ * @return bool
+ *     true si PCRE supporte l'UTF-8 correctement
+**/
 function test_pcre_unicode() {
 	static $pcre_ok = 0;
 
@@ -111,8 +142,18 @@ function test_pcre_unicode() {
 	return $pcre_ok == 1;
 }
 
-// Plages alphanumeriques (incomplet...)
-// http://doc.spip.org/@pcre_lettres_unicode
+/**
+ * Renvoie une plage de caractères alphanumeriques unicodes (incomplet...)
+ *
+ * Retourne pour une expression rationnelle une plage
+ * de caractères alphanumériques à utiliser entre crochets [$plage]
+ *
+ * @internal
+ *    N'est pas utilisé
+ *    Servait à inc/ortho passé dans le grenier
+ * @return string
+ *    Plage de caractères
+**/
 function pcre_lettres_unicode() {
 	static $plage_unicode;
 
@@ -132,9 +173,20 @@ function pcre_lettres_unicode() {
 	return $plage_unicode;
 }
 
-// Plage ponctuation de 0x2000 a 0x206F
-// (i.e. de 226-128-128 a 226-129-176)
-// http://doc.spip.org/@plage_punct_unicode
+
+/**
+ * Renvoie une plage de caractères de ponctuation unicode de 0x2000 a 0x206F
+ *
+ * Retourne pour une expression rationnelle une plage
+ * de caractères de ponctuation à utiliser entre crochets [$plage]
+ * (i.e. de 226-128-128 a 226-129-176)
+ *
+ * @internal
+ *    N'est pas utilisé
+ *    Servait à inc/ortho passé dans le grenier
+ * @return string
+ *    Plage de caractères
+**/
 function plage_punct_unicode() {
 	return '\xE2(\x80[\x80-\xBF]|\x81[\x80-\xAF])';
 }
@@ -206,11 +258,19 @@ function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='un
 }
 
 
-//
-// Transformer les &eacute; en &#123;
-// $secure = true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
-//
-// http://doc.spip.org/@html2unicode
+
+/**
+ * Transforme les entités HTML en unicode
+ * 
+ * Transforme les &eacute; en &#123;
+ *
+ * @param string $texte
+ *     Texte à convertir
+ * @param bool $secure
+ *     true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
+ * @return string
+ *     Texte converti
+**/
 function html2unicode($texte, $secure=false) {
 	if (strpos($texte,'&') === false) return $texte;
 	static $trans = array();
@@ -230,10 +290,17 @@ function html2unicode($texte, $secure=false) {
 		);
 }
 
-//
-// Transformer les &eacute; en &#123;
-//
-// http://doc.spip.org/@mathml2unicode
+
+/**
+ * Transforme les entités mathématiques (MathML) en unicode
+ *
+ * Transforme &angle; en &#x2220; ainsi que toutes autres entités mathématiques
+ *
+ * @param string $texte
+ *     Texte à convertir
+ * @return string
+ *     Texte converti
+**/
 function mathml2unicode($texte) {
 	static $trans;
 	if (!$trans) {
@@ -248,12 +315,23 @@ function mathml2unicode($texte) {
 }
 
 
-//
-// Transforme une chaine en entites unicode &#129;
-//
-// Note: l'argument $forcer est obsolete : il visait a ne pas
-// convertir les accents iso-8859-1
-// http://doc.spip.org/@charset2unicode
+/**
+ * Transforme une chaine en entites unicode &#129;
+ *
+ * Utilise la librairie mb si elle est présente.
+ * 
+ * @internal
+ *     Note: l'argument $forcer est obsolete : il visait a ne pas
+ *     convertir les accents iso-8859-1
+ * 
+ * @param string $texte
+ *     Texte à convertir
+ * @param string $charset
+ *     Charset actuel du texte
+ *     Par défaut (AUTO), le charset est celui indiqué dans la configuration du site.
+ * @return string
+ *     Texte converti en unicode
+**/
 function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 	static $trans;
 
