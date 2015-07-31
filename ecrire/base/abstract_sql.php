@@ -138,7 +138,7 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 }
 
 // http://doc.spip.org/@sql_insertq
-function sql_insertq($table, $couples, $desc=array(), $serveur='')
+function sql_insertq($table, $couples=array(), $desc=array(), $serveur='')
 {
 	$f = sql_serveur('insertq', $serveur);
 	return $f($table, $couples, $desc, $serveur);

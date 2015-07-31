@@ -257,10 +257,9 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		if ($id_lien AND $id_document
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		) {
-			sql_insert("spip_documents_".$type_lien."s",
-				"(id_document, id_".$type_lien.")",
-				"($id_document, $id_lien)"
-			);
+			sql_insertq("spip_documents_".$type_lien."s",
+				    array('id_document' => $id_document,
+					  'id_'.$type_lien => $id_lien));
 		} else spip_log("Pb d'insertion $id_lien $type_lien");
 	} else 	// Mise a jour des descripteurs d'un vieux doc
 		sql_updateq('spip_documents', array(

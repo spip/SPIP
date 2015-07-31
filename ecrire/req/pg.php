@@ -512,7 +512,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 }
 
 // http://doc.spip.org/@spip_pg_insertq
-function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
+function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='') {
 
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
