@@ -265,6 +265,7 @@ function http_style_background($img, $att='')
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
 }
+// http://doc.spip.org/@info_progression_etape
 function info_progression_etape($en_cours,$phase,$dir){
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php');
