@@ -723,7 +723,6 @@ function test_valeur_serveur($truc) {
 // la racine 0. Sur url/perso/ elle vaut 2
 // http://doc.spip.org/@url_de_base
 function url_de_base() {
-	global $REQUEST_URI;
 
 	static $url;
 
@@ -731,11 +730,11 @@ function url_de_base() {
 		return $url;
 
 	// cas particulier des sites filtres par un proxy entrant
-	// cf. http://trac.rezo.net/trac/spip/ticket/401
-	if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-		$a = $GLOBALS['meta']['adresse_site'];
-		return (substr($a,-1) == '/')?$a:$a.'/';
-	}
+	// cf. http://trac.rezo.net/trac/spip/ticket/478
+	if (isset($_SERVER['HTTP_X_FORWARDED_HOST']))
+		$server = $_SERVER['HTTP_X_FORWARDED_HOST'];
+	else
+		$server = $_SERVER['HTTP_HOST'];
 
 	$http = (
 		(isset($_SERVER["SCRIPT_URI"]) AND
@@ -744,7 +743,7 @@ function url_de_base() {
 		    test_valeur_serveur($_SERVER['HTTPS']))
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
-	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
+	$myself = $http.'://'.$server.$GLOBALS['REQUEST_URI'];
 
 	# supprimer la chaine de GET
 	$myself = preg_replace(',\?.*$,','', $myself);
@@ -1027,29 +1026,22 @@ function spip_initialisation() {
 	$GLOBALS['flag_upload'] = (!$GLOBALS['flag_get_cfg_var'] ||
 		(get_cfg_var('upload_max_filesize') > 0));
 
-	//
+
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	//
-
 	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
 		define ('os_serveur', 'windows');
-	else	define ('os_serveur', '');
-
-	//
-	// Infos sur le fichier courant
-	//
+	else
+		define ('os_serveur', '');
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-	if (!isset($GLOBALS['REQUEST_URI'])) {
-		if (isset($_SERVER['REQUEST_URI'])) {
-			$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
-		} else {
-			$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
-			if ($_SERVER['QUERY_STRING']
-			AND !strpos($_SERVER['REQUEST_URI'], '?'))
-				$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
-		}
+	if (isset($_SERVER['REQUEST_URI'])) {
+		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+	} else {
+		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+		if ($_SERVER['QUERY_STRING']
+		AND !strpos($_SERVER['REQUEST_URI'], '?'))
+			$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
 	}
 
 	//
