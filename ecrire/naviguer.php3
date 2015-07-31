@@ -37,8 +37,8 @@ function enfant($collection){
 			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
 
 		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
-		if (strlen($descriptif)>1) {
-			$les_enfants .= "<div class='verdana1'>$descriptif</span></div>";
+		if (strlen($descriptif)) {
+			$les_enfants .= "<div class='verdana1'>$descriptif</div>";
 		}
 
 		//$les_enfants.= "</FONT>";
