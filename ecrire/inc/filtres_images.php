@@ -116,10 +116,12 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
-	if (!($date_src = @filemtime($fichier))) 
-		$date_src = @filemtime("$fichier.src");
-	if (!($date_dest = @filemtime($fichier_dest))) 
-		$date_dest = @filemtime("$fichier_dest.src");
+	$date_src = 0;
+	$date_dest = 0;
+	if (@file_exists($f = $fichier) OR @file_exists($f = "$fichier.src"))
+		$date_src = @filemtime($f);
+	if (@file_exists($f = $fichier_dest) OR @file_exists($f = "$fichier_dest.src"))
+		$date_dest = @filemtime($f);
 	# il peut y avoir egalite de date si l'on compare deux .src crees dans la foulee
 	if ( $date_src <= $date_dest ){
 		$creer = false;
