@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+include_local ("inc_documents.php3");
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
@@ -71,6 +72,8 @@ if ($id_document) {
 	$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_article=$id_article";
 	$result_doc = mysql_query($query_doc);
 	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
+} else {
+	$flag_document_editable = false;
 }
 
 if ($transformer_vignette == 'oui' AND $flag_document_editable) {
@@ -339,15 +342,6 @@ if ($new != "oui" AND 0) {
 	echo "</div>";
 	echo "</font>\n";
 }
-
-debut_boite_info();
-
-echo "<font size='3'>";
-echo "$puce <b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">\n";
-echo "Documents li&eacute;s &agrave; l'article</a></b>\n";
-echo "</font>\n";
-
-fin_boite_info();
 
 
 debut_droite();
