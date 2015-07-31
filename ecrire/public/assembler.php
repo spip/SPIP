@@ -423,7 +423,7 @@ function creer_contexte_de_modele($args) {
 // Calcule le modele et retourne la mini-page ainsi calculee
 // http://doc.spip.org/@inclure_modele
 function inclure_modele($type, $id, $params, $lien, $connect='') {
-	spip_log("inclumode $compteur $type $id " . @join(',', $params));
+
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment
 
