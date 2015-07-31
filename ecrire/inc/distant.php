@@ -61,57 +61,77 @@ function copie_locale($source, $mode='auto') {
 
 // http://doc.spip.org/@prepare_donnees_post
 function prepare_donnees_post($donnees, $boundary = '') {
-  /* boundary automatique */
-  // Si on a plus de 500 octects de donnees, on "boundarise"
-  if($boundary == '' and is_array($donnees)) {
-    $taille = 0;
-    foreach ($donnees as $cle => $valeur) {
-  		if (is_array($valeur)) {
-  			foreach ($valeur as $val2) {
-          $taille += strlen($val2);
-        }
-      } else {
-        // faut-il utiliser spip_strlen() dans inc/charsets ?
-        $taille += strlen($valeur);
-      }
-    }
-    if($taille>500) {
-      $boundary = substr(md5(rand().'spip'), 0, 8);
-    }
-  }
 
-	if($boundary) {
-		// fabrique une chaine HTTP pour un POST avec boundary
-		$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
-		$chaine = '';
-		if (is_array($donnees)) {
-			foreach ($donnees as $cle => $valeur) {
-				$chaine .= "\r\n--$boundary\r\n";
-				$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
-				$chaine .= "\r\n";
-				$chaine .= $valeur;
-			}
-			$chaine .= "\r\n--$boundary\r\n";
-		}
-	} else {
-		// fabrique une chaine HTTP simple pour un POST
-		$entete = 'Content-Type: application/x-www-form-urlencoded'."\r\n";
-		$chaine = array();
-		if (is_array($donnees)) {
-			foreach ($donnees as $cle => $valeur) {
-				if (is_array($valeur)) {
-					foreach ($valeur as $val2) {
-						$chaine[] = rawurlencode($cle).'='.rawurlencode($val2);
-					}
-				} else {
-					$chaine[] = rawurlencode($cle).'='.rawurlencode($valeur);
+	// permettre a la fonction qui a demande le post de formater elle meme ses donnees
+	// pour un appel soap par exemple
+	// l'entete est separe des donnees par un double retour a la ligne
+	// on s'occupe ici de passer tous les retours lignes (\r\n, \r ou \n) en \r\n
+	if (is_string($donnees) && strlen($donnees)){
+		$entete = "";
+		// on repasse tous les \r\n et \r en simples \n
+		$donnees = str_replace("\r\n","\n",$donnees);
+		$donnees = str_replace("\r","\n",$donnees);
+		// un double retour a la ligne signifie la fin de l'entete et le debut des donnees
+		$p = strpos($donnees,"\n\n");
+  	if ($p!==FALSE){
+  		$entete = str_replace("\n","\r\n",substr($donnees,0,$p+1));
+  		$donnees = substr($donnees,$p+2);
+  	}
+		$chaine = str_replace("\n","\r\n",$donnees);
+  }
+  else {
+	  /* boundary automatique */
+	  // Si on a plus de 500 octects de donnees, on "boundarise"
+	  if($boundary == '') {
+	    $taille = 0;
+	    foreach ($donnees as $cle => $valeur) {
+	  		if (is_array($valeur)) {
+	  			foreach ($valeur as $val2) {
+	          $taille += strlen($val2);
+	        }
+	      } else {
+	        // faut-il utiliser spip_strlen() dans inc/charsets ?
+	        $taille += strlen($valeur);
+	      }
+	    }
+	    if($taille>500) {
+	      $boundary = substr(md5(rand().'spip'), 0, 8);
+	    }
+	  }
+	
+		if($boundary) {
+			// fabrique une chaine HTTP pour un POST avec boundary
+			$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
+			$chaine = '';
+			if (is_array($donnees)) {
+				foreach ($donnees as $cle => $valeur) {
+					$chaine .= "\r\n--$boundary\r\n";
+					$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
+					$chaine .= "\r\n";
+					$chaine .= $valeur;
 				}
+				$chaine .= "\r\n--$boundary\r\n";
 			}
-			$chaine = implode('&', $chaine);
 		} else {
-			$chaine = $donnees;
+			// fabrique une chaine HTTP simple pour un POST
+			$entete = 'Content-Type: application/x-www-form-urlencoded'."\r\n";
+			$chaine = array();
+			if (is_array($donnees)) {
+				foreach ($donnees as $cle => $valeur) {
+					if (is_array($valeur)) {
+						foreach ($valeur as $val2) {
+							$chaine[] = rawurlencode($cle).'='.rawurlencode($val2);
+						}
+					} else {
+						$chaine[] = rawurlencode($cle).'='.rawurlencode($valeur);
+					}
+				}
+				$chaine = implode('&', $chaine);
+			} else {
+				$chaine = $donnees;
+			}
 		}
-	}
+  }
 	return array($entete, $chaine);
 }
 
