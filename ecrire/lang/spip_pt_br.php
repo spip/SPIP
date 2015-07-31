@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
 'bouton_deplacer' => 'Deslocar',
-'bouton_download' => 'Transferir',
+'bouton_download' => 'Transferir', # MODIF
 'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desativar o sistema interno de mensagens',
 'bouton_radio_envoi_annonces' => 'Enviar os avisos editoriais',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Não enviar a lista de novidades',
 'bouton_recharger_page' => 'atualizar esta página',
 'bouton_telecharger' => 'Transferir',
+'bouton_upload' => 'Transferir', # MODIF
 'bouton_valider' => 'Validar',
 
 // C
@@ -456,7 +457,7 @@ Obrigado por participar
 'info_en_ligne' => 'Atualmente online:',
 'info_envoyer_message_prive' => 'Enviar uma mensagem privada a este autor',
 'info_erreur_requete' => 'Erro na requisição:',
-'info_erreur_squelette2' => 'Nenhum gabarito <b>@fichier@</b> está disponível...',
+'info_erreur_squelette2' => 'Nenhum template <b>@fichier@</b> está disponível...',
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
 'info_erreur_systeme2' => 'É possível que não haja espaço livre em disco, ou que a base de dados esteja corrompida.<br />
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
@@ -700,9 +701,9 @@ e reconectar-se com o site.
 
 // S
 'spip_conforme_dtd' => 'O SPIP considera este documento de acordo com o seu DOCTYPE:',
-'squelette' => 'esqueleto',
-'squelette_inclus_ligne' => 'esqueleto incluído, linha',
-'squelette_ligne' => 'esqueleto, linha',
+'squelette' => 'template',
+'squelette_inclus_ligne' => 'template incluído, linha',
+'squelette_ligne' => 'template, linha',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
 'suivant' => 'seguinte',
 
@@ -715,7 +716,7 @@ e reconectar-se com o site.
 'texte_actualite_site_3' => '» para abrir mais possibilidades.',
 'texte_creation_automatique_vignette' => 'A criação automática de ícones de visualização está ativada neste site. Se você transferir por este formulário imagens no(s) formato(s) @gd_formats@, elas serão acompanhadas de um ícone com o tamanho máximo de @taille_preview@ pixels.',
 'texte_documents_associes' => 'Os documentos a seguir estão associados à matéria,
-mas eles não foram inseridos diretamente. Dependendo da elaboração dos gabaritos do site público, eles podem aparecer como documentos anexados.',
+mas eles não foram inseridos diretamente. Dependendo da elaboração dos templates do site público, eles podem aparecer como documentos anexados.',
 'texte_erreur_mise_niveau_base' => 'Erro da base de dados durante a atualização.
 A imagem <b>@fichier@</b> não passou (matéria @id_article@).
 Anote esta referência, tente novamente a atualização e, finalmente, verifique se as imagens aparecem nas matérias.',
@@ -780,7 +781,7 @@ Tente se',
 'zbug_erreur_execution_page' => 'Erro de execução',
 'zbug_erreur_filtre' => 'Filtro @filtre@ não definido',
 'zbug_erreur_meme_parent' => 'O critério {meme_parent} aplica-se exclusivamente aos laços (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => 'Erro(s) no gabarito',
+'zbug_erreur_squelette' => 'Erro(s) no template',
 'zbug_hors_compilation' => 'Fora de Compilação',
 'zbug_info_erreur_squelette' => 'Erro no site',
 'zbug_inversion_ordre_inexistant' => 'Inversão de uma ordem inexistente',

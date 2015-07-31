@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Bà',
 'bouton_choisir' => 'Cyán',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => 'Enregistrer', # NEW
 'bouton_radio_desactiver_messagerie_interne' => 'Mi jo wiwlanmɛ ɖo ',
 'bouton_radio_envoi_annonces' => 'mi sɛ gbètàxojla do',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'mi ma pklé xogbè yɔyɔ lɛ̂ do ',
 'bouton_recharger_page' => 'mi lɛ vɔ wékpa e lɔ ze',
 'bouton_telecharger' => 'ɖɔn',
+'bouton_upload' => 'ɖɔn', # MODIF
 'bouton_valider' => 'sɔ kɛn na',
 
 // C

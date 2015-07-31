@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Thaqhaña',
 'bouton_choisir' => 'Chijllaña',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => 'Imaña',
 'bouton_radio_desactiver_messagerie_interne' => 'Manqhax yatiyawirir suyt\'ayaña',
 'bouton_radio_envoi_annonces' => 'Qillqat yatiyäwinak uk apayaña',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Machaq tantachat yatiyawinakax jan apayañawa',
 'bouton_recharger_page' => 'Aka laphi uñnaq jichhaptaña',
 'bouton_telecharger' => 'Apkataña',
+'bouton_upload' => 'Apkataña', # MODIF
 'bouton_valider' => 'Iyaw saña',
 
 // C

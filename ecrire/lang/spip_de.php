@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Auswählen',
 'bouton_deplacer' => 'Verschieben',
-'bouton_download' => 'Übertragen',
+'bouton_download' => 'Übertragen', # MODIF
 'bouton_enregistrer' => 'Speichern',
 'bouton_radio_desactiver_messagerie_interne' => 'Interne Nachrichten abschalten',
 'bouton_radio_envoi_annonces' => 'Editorische Ankündigungen verschicken',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
 'bouton_telecharger' => 'Herunterladen',
+'bouton_upload' => 'Herunterladen', # MODIF
 'bouton_valider' => 'Bestätigen',
 
 // C
@@ -609,8 +610,8 @@ Vielen Dank für Ihre Teilnahme
 'login_espace_prive' => 'Redaktionssystem',
 'login_identifiant_inconnu' => 'Benutzer «@login@» unbekannt.',
 'login_login' => 'Login:',
-'login_login2' => 'Login-Name (zur Anmeldung bei der Website):',
-'login_login_pass_incorrect' => '(Login-Name oder Passwort falsch.)',
+'login_login2' => 'Login (für diese Website):',
+'login_login_pass_incorrect' => '(Login oder Passwort falsch.)',
 'login_motpasseoublie' => 'Passwort vergessen?',
 'login_non_securise' => 'Achtung, dieses Formular ist nicht abgesichert. Wenn Sie sicher stellen wollen, dass Ihr Passwort nicht im Netzwerk mitgehört werden kann, aktivieren Sie bitte Javascript und',
 'login_nouvelle_tentative' => 'Erneut versuchen',
@@ -684,7 +685,7 @@ Sie können auf dieser Seite ein neues Passwort eingeben und sich wieder bei der
 'pass_ok' => 'O.K.',
 'pass_oubli_mot' => 'Passwort vergessen',
 'pass_quitter_fenetre' => 'Dieses Fenster verlassen',
-'pass_rappel_login' => 'Erinnerung: Ihr Login-Name ist «@login@».',
+'pass_rappel_login' => 'Erinnerung: Ihr Login ist «@login@».',
 'pass_recevoir_mail' => 'Sie erhalten eine E-Mail mit allen Informationen um wieder Zugang zur Website zu erhalten.',
 'pass_retour_public' => 'Zurück zum öffentlichen Bereich',
 'pass_rien_a_faire_ici' => 'Hier ist nichts zu tun.',

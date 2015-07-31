@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'ရှာဖွေရန်',
 'bouton_choisir' => 'ရွေးချယ်ရန်',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => 'သိမ်းဆည်းရန်',
 'bouton_radio_desactiver_messagerie_interne' => 'အတွင်းသတင်းစကား ပေးပို့ခြင်းတားမြစ်ရန်',
 'bouton_radio_envoi_annonces' => 'အယ်ဒီတာ့ ပြန်ကြားချက်များ ပေးပို့ရန်',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'နောက်ဆုံးရ သတင်းစာရင်း မပို့ရန်',
 'bouton_recharger_page' => 'ဤစာမျက်နှာကို ပြန်ဖွင့်ရန်',
 'bouton_telecharger' => 'ထည့်သွင်းရန်',
+'bouton_upload' => 'ထည့်သွင်းရန်', # MODIF
 'bouton_valider' => 'တင်သွင်းရန်',
 
 // C

@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Tìm',
 'bouton_choisir' => 'Chọn',
 'bouton_deplacer' => 'Déplacer', # NEW
-'bouton_download' => 'Télécharger', # NEW
+'bouton_download' => 'Télécharger', # MODIF
 'bouton_enregistrer' => 'Lưu Trữ',
 'bouton_radio_desactiver_messagerie_interne' => 'Không sử dụng thư tín nội bộ ',
 'bouton_radio_envoi_annonces' => 'Gửi thông báo đến Ban Biên Tập',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Không gửi tin tức mới nhất',
 'bouton_recharger_page' => 'Nạp lại trang này',
 'bouton_telecharger' => 'Đem lên',
+'bouton_upload' => 'Đem lên', # MODIF
 'bouton_valider' => 'Cập nhật',
 
 // C

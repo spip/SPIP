@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Escollir',
 'bouton_deplacer' => 'Desplaçar',
-'bouton_download' => 'Descarregar',
+'bouton_download' => 'Descarregar', # MODIF
 'bouton_enregistrer' => 'Enregistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la missatgeria interna',
 'bouton_radio_envoi_annonces' => 'Enviar els anuncis editorials',
@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'No enviar la llista de novetats',
 'bouton_recharger_page' => 'recarregar aquesta pàgina',
 'bouton_telecharger' => 'Baixar',
+'bouton_upload' => 'Baixar', # MODIF
 'bouton_valider' => 'Validar',
 
 // C
