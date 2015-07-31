@@ -62,7 +62,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
-		$descriptif = typo($row['descriptif']);
+		$descriptif = attribut_html(couper(typo($row['descriptif']),80));
 
 		if ($nombre_vis[$id_rubrique]>0 OR $nombre_abs[$id_rubrique]>0){
 			$largeur_rouge = floor(($nombre_vis[$id_rubrique] - $nombre_abs[$id_rubrique]) * $taille / $abs_total);
@@ -94,7 +94,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
 				echo "<span class='verdana1'>";	
-				echo "<A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title='$descriptif'>$titre</A>";
+				echo "<A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</A>";
 				
 				
 				echo "</span>";
