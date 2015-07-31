@@ -89,7 +89,7 @@ div.table_page { margin-top: 1em; }
 }
 
 #chemin li .bloc {	
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
+[	background-color: #(#ENV{couleur_claire});]
 	padding: 2px;	
 	padding-bottom: 4px;
 	padding-#GET{left}: 10px;	
@@ -100,13 +100,13 @@ div.table_page { margin-top: 1em; }
 	font-weight: bold;
 }
 #chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
+[	background-color: #(#ENV{couleur_foncee});]
 }
 
 #chemin li li .bloc { 
 	margin-top: 2px; 
 	font-weight: normal;
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center [(#GET{left})] no-repeat })]
+[	background-color: #(#ENV{couleur_claire}|couleur_eclaircir);]
 }
 #chemin li li .bloc a {
 	color: #[(#GET{foncee}|couleur_foncer)];
@@ -223,11 +223,14 @@ td { text-align: #GET{left}; }
 
 #bando_navigation ul.deroulant > li > a { color:#333;}
 
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { }
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #[(#GET{claire}|couleur_eclaircir)]; }
 
-.navigation_avec_icones #bando_navigation ul li a {background-position:center 5px;background-repeat:no-repeat;padding-top:60px;}
+/* pour les icones pochoir de diala */
+
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
+.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
+
+.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:57px;}
 .navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
 
 
@@ -679,10 +682,6 @@ table.info th a {color:#[(#GET{claire}|couleur_eclaircir|couleur_eclaircir)];tex
 table.info th { vertical-align: bottom; font-weight: bold; }
 table.info td { vertical-align: top; }
 
-#SET{style_prive_skin,#REM|bando_style_prive_skin}
-[(#GET{style_prive_skin}|oui)
-[(#INCLURE{fond=#GET{style_prive_skin}}{env})]
-]
 [(#REM|bando_images_background)]
 
 /******** Formulaires **************/
@@ -692,5 +691,13 @@ table.info td { vertical-align: top; }
 /*** Plugins ***/
 [(#INCLURE{fond=style_prive_plugins}{env}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /**** Plugins fin ***/
+
+/*** Placer la skin tout a la fin ***/
+#SET{style_prive_skin,#REM|bando_style_prive_skin}
+[(#GET{style_prive_skin}|oui)
+[(#INCLURE{fond=#GET{style_prive_skin}}{env})]
+]
+
+
 
 [(#REM)</style>]

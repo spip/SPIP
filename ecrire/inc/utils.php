@@ -705,6 +705,9 @@ function find_in_skin($file, $dirname='', $include=false){
 	foreach($skins as $skin){
 		if ($f = find_in_path($file,"prive/skins/$skin/$dirname",$include))
 			return $f;
+		/* il faut pouvoir recuperer les fichiers "standards", essentiellement images, s'ils ne sont pas dans la skin */
+		else if($f = find_in_path($file,"prive/$dirname",$include))
+			return $f;
 	}
 	spip_log("$dirname/$file introuvable dans la skin ".reset($skins),'skin');
 	return "";
