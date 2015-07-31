@@ -42,14 +42,37 @@ function filtre_text_txt_dist($t) {
 // http://doc.spip.org/@filtre_text_csv_dist
 function filtre_text_csv_dist($t)
 {
-	list($entete, $corps) = preg_split('/\r?\n/',$t,2);
+	$virg = substr_count($t, ',');
+	$pvirg = substr_count($t, ';');
+	if ($virg > $pvirg)
+		{ $sep = ','; $hs = '&#44;';}
+	else	{ $sep = ';'; $hs = '&#59;';}
 
-	return propre(
+	$t = str_replace('""','&#34;', preg_replace('/\r?\n/', "\n", $t));
+	preg_match_all('/"[^"]*"/', $t, $r);
+	foreach($r[0] as $cell) 
+		$t = str_replace($cell, 
+			str_replace($sep, $hs,
+				str_replace("\n", "<br />", 
+					    substr($cell,1,-1))),
+			$t);
+	list($entete, $corps) = split("\n",$t,2);
+	$caption = '';
+	// sauter la ligne de separateur en tete
+	if (substr_count($entete, $sep) == strlen($entete)) {
+		list($entete, $corps) = split("\n",$corps,2);
+	}
+	// si une seule colonne, en faire le titre
+	if (preg_match("/^([^$sep]*)$sep+\$/", $entete, $l)) {
+			$caption = "\n||" .  $l[1] . "|";
+			list($entete, $corps) = split("\n",$corps,2);
+	}
+	return propre($caption .
 		"\n|{{" .
-		str_replace(';','}}|{{',$entete) .
+		str_replace($sep,'}}|{{',$entete) .
 		"}}|" .
 		"\n|" .
-		str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$corps)) .
+		str_replace($sep,'|',str_replace("\n", "|\n|",$corps)) .
 		"|\n");
 }
 
