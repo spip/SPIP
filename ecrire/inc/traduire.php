@@ -51,8 +51,8 @@ function chercher_module_lang($module, $lang = '') {
 		return is_array($f)?$f:array($f);
 
 	// 2) directement dans le chemin (old style, uniquement pour local)
-	return ($module == 'local')
-		? (($f = find_in_path('local'.$lang. '.php')) ? array($f):false)
+	return (($module == 'local') OR strpos($module, '/'))
+		? (($f = find_in_path($module.$lang. '.php')) ? array($f):false)
 		: false;
 }
 
@@ -121,10 +121,10 @@ function inc_traduire_dist($ori, $lang) {
 	if (isset($deja_vu[$lang][$ori]))
 		return $deja_vu[$lang][$ori];
 
-	// modules demandes explicitement <xxx/yyy/zzz:code>
+	// modules demandes explicitement <xxx|yyy|zzz:code> cf MODULES_IDIOMES
 	if (strpos($ori,':')) {
 		list($modules,$code) = explode(':',$ori,2);
-		$modules = explode('/', $modules);
+		$modules = explode('|', $modules);
 	} else {
 		$modules = array('spip', 'ecrire');
 		$code = $ori;
