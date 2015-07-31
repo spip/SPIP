@@ -759,10 +759,9 @@ function balise_ENV_dist($p) {
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
 		$nom = split(',', $nom, 2);
-		$p->code = 'sinon($Pile[0]["' . addslashes($nom[0]) . '"],
-			'. calculer_texte($nom[1],
-					  $p->boucles,
-					  $p->id_boucle) .')';
+		$p->code = 'sinon($Pile[0]["' . addslashes($nom[0]) . '"]' .
+		  filtres_arglist($nom[1], $p, ',') .
+		  ')';
 		$p->statut = 'php';
 	}
 	return $p;
