@@ -38,7 +38,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $context_compil) {
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SIGNATURE',
 				       'motif' => 'ARTICLES'));
-		return denoncer_balise_dynamique($msg, $context_compil);
+		return denoncer_inclure_dynamique($msg, $context_compil);
 	}
 	// article sans petition => pas de balise
 	else if (!$args[1])

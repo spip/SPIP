@@ -253,13 +253,7 @@ function calculer_balise_dynamique($p, $nom, $l, $supp=array()) {
 		$param = compose_filtres_args($p, $c, ',');
 	} else	$param = "";
 	$collecte = join(',', collecter_balise_dynamique($l, $p, $nom));
-	$supp = array_merge(array(
-				  _q($p->descr['sourcefile']),
-				  _q($p->descr['nom']),
-				  _q($p->id_boucle),
-				  intval($p->ligne),
-				  _q($GLOBALS['spip_lang'])),
-			    $supp);
+	$supp = array_merge(fliquer_inclure_dynamique($p), $supp);
 
 	$p->code = sprintf(CODE_EXECUTER_BALISE, $nom,
 		$collecte,

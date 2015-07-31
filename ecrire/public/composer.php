@@ -273,7 +273,8 @@ if ($lang_select) lang_select();
        .'>');
 
 // Cette fonction fabrique l'appel d'une balise dynamique a l'aide du contexte
-// de compilation prepare par calculer_balise_dynamique dans references.php:
+// de compilation prepare par fliquer_inclure_dynamique ci-dessous
+// elle-meme appelee par calculer_balise_dynamique dans references.php:
 // 0: sourcefile
 // 1: codefile
 // 2: id_boucle
@@ -283,6 +284,15 @@ if ($lang_select) lang_select();
 function synthetiser_balise_dynamique($nom, $args, $file, $context_compil) {
 	$r = sprintf(CODE_INCLURE_BALISE, $context_compil[4], $file, $nom, join(", ", array_map('argumenter_squelette', $args)), $context_compil[3]);
 	return $r;
+}
+
+function fliquer_inclure_dynamique($p) {
+	return array(
+		_q($p->descr['sourcefile']),
+		_q($p->descr['nom']),
+		_q($p->id_boucle),
+		intval($p->ligne),
+		_q($GLOBALS['spip_lang']));
 }
 
 // http://doc.spip.org/@argumenter_squelette
@@ -317,7 +327,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		else {
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			return denoncer_balise_dynamique($msg, $context_compil);
+			return denoncer_inclure_dynamique($msg, $context_compil);
 		}
 	}
 	// Y a-t-il une fonction de traitement des arguments ?
@@ -339,7 +349,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			return denoncer_balise_dynamique($msg, $context_compil);
+			return denoncer_inclure_dynamique($msg, $context_compil);
 		}
 	}
 
@@ -348,7 +358,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 	return synthetiser_balise_dynamique($nomfonction, $r, $file, $context_compil);
 }
 
-function denoncer_balise_dynamique($msg, $context_compil)
+function denoncer_inclure_dynamique($msg, $context_compil)
 {
 	include_spip('public/interfaces');
 	$p = new Contexte;
