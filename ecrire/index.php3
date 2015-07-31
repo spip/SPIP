@@ -216,8 +216,11 @@ if ($meta["debut_restauration"]) {
 	$ok = file_exists($archive);
 
 	if ($ok) {
-		$pourcent = floor(100 * $my_pos / filesize($archive));
-		$texte_boite = "La base est en cours de restauration ($pourcent&nbsp;%).<p>
+		if (ereg("\.gz$", $archive))
+			$taille = taille_en_octets($my_pos);
+		else
+			$taille = floor(100 * $my_pos / filesize($archive))."&nbsp;%";
+		$texte_boite = "La base est en cours de restauration ($taille).<p>
 		Veuillez recharger cette page dans quelques instants.";
 	}
 	else {
