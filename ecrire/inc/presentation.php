@@ -563,9 +563,7 @@ function afficher_liste_fin_tableau() {
 
 // http://doc.spip.org/@avoir_visiteurs
 function avoir_visiteurs() {
-
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;
-	if ($GLOBALS['meta']['accepter_visiteurs'] == 'oui') return true;
 	return sql_countsel('spip_articles', "accepter_forum='abo'");
 }
 
