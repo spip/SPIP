@@ -60,9 +60,10 @@ function controler_forum($id) {
 // http://doc.spip.org/@mots_du_forum
 function mots_du_forum($ajouter_mot, $id_message)
 {
+	$t = array('id_forum' => $id_message);
 	foreach ($ajouter_mot as $id_mot)
-		if ($id_mot = intval($id_mot))
-		  sql_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
+		if ($t['id_mot'] = intval($id_mot))
+			sql_insertq('spip_mots_forum', $t);
 }
 
 
@@ -178,7 +179,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 		$statut = $force_statut;
 
 	// Entrer le message dans la base
-	$id_message = sql_insert('spip_forum', '(date_heure)', '(NOW())');
+	$id_message = sql_insertq('spip_forum', array('date_heure'=> 'NOW()'));
 
 	if ($id_forum) {
 		$id_thread = sql_fetsel("id_thread", "spip_forum", "id_forum = $id_forum");
@@ -190,7 +191,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	sql_updateq('spip_forum', array('id_parent' => $id_forum, 'id_rubrique' => $id_rubrique, 'id_article' => $id_article, 'id_breve' => $id_breve, 'id_syndic' => $id_syndic, 'id_thread' => $id_thread, 'statut' => $statut), "id_forum = $id_message");
 
 	// Entrer les mots-cles associes
-	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
+	if ($ajouter_mot) mots_du_forum($ajouter_mot, $id_message);
 
 	//
 	// Entree du contenu et invalidation des caches
