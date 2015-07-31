@@ -9,97 +9,98 @@ debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 debut_gauche();
 
 
-
-//
-// Infos personnelles : nom, utilisation de la messagerie
-//
-
-
-echo "<p>";
-if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre = bouton_block_visible("info_perso");
-else $titre_cadre = bouton_block_invisible("info_perso");
-$titre_cadre .= majuscules(typo($connect_nom));
-
-debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
-echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-
-if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
-else echo debut_block_invisible("info_perso");
-
-if (lire_meta('activer_messagerie') != 'non') {
-	if ($connect_activer_messagerie != "non") {
-		echo _T('info_utilisation_messagerie_interne')." ";
-		if ($connect_activer_imessage != "non")
-			echo _T('info_nom_utilisateurs_connectes');
-		else
-			echo _T('info_nom_non_utilisateurs_connectes');
-	} else
-		echo _T('info_non_utilisation_messagerie');
-}
-
-//
-// Supprimer le cookie, se deconnecter...
-//
-
-if ($connect_statut == "0minirezo" AND $cookie_admin) {
-	icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
-}
-
-echo fin_block();
-fin_cadre_relief();
-
-
-//
-// Annonces
-//
-include_ecrire("inc_agenda.php3");
-afficher_annonces();
-
-
-//
-// Afficher le calendrier du mois s'il y a des rendez-vous
-//
-
-if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
-	$today = getdate(time());
-	$jour_today = $today["mday"];
-	$mois_today = $today["mon"];
-	$annee_today = $today["year"];
-	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-	$mois = mois($date);
-	$annee = annee($date);
-	$jour = jour($date);
-
-	// rendez-vous personnels dans le mois
-	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-			"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
-			"AND messages.statut='publie' LIMIT 0,1");
-	if (spip_num_rows($result_messages)) {
-		echo "<p />";
-		agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+if ($spip_display != 4) {
+	
+	//
+	// Infos personnelles : nom, utilisation de la messagerie
+	//
+	
+	
+	echo "<p>";
+	if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre = bouton_block_visible("info_perso");
+	else $titre_cadre = bouton_block_invisible("info_perso");
+	$titre_cadre .= majuscules(typo($connect_nom));
+	
+	debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+	
+	if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
+	else echo debut_block_invisible("info_perso");
+	
+	if (lire_meta('activer_messagerie') != 'non') {
+		if ($connect_activer_messagerie != "non") {
+			echo _T('info_utilisation_messagerie_interne')." ";
+			if ($connect_activer_imessage != "non")
+				echo _T('info_nom_utilisateurs_connectes');
+			else
+				echo _T('info_nom_non_utilisateurs_connectes');
+		} else
+			echo _T('info_non_utilisation_messagerie');
 	}
-	// rendez-vous personnels dans le mois
-	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-			"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
-			"AND messages.statut='publie' LIMIT 0,1");
-	if (spip_num_rows($result_messages)) {
-		echo "<p />";
-		calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+	
+	//
+	// Supprimer le cookie, se deconnecter...
+	//
+	
+	if ($connect_statut == "0minirezo" AND $cookie_admin) {
+		icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 	}
+	
+	echo fin_block();
+	fin_cadre_relief();
+	
+	
+	//
+	// Annonces
+	//
+	include_ecrire("inc_agenda.php3");
+	afficher_annonces();
+	
+	
+	//
+	// Afficher le calendrier du mois s'il y a des rendez-vous
+	//
+	
+	if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
+		$today = getdate(time());
+		$jour_today = $today["mday"];
+		$mois_today = $today["mon"];
+		$annee_today = $today["year"];
+		$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+		$mois = mois($date);
+		$annee = annee($date);
+		$jour = jour($date);
+	
+		// rendez-vous personnels dans le mois
+		$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+				"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
+				"AND messages.statut='publie' LIMIT 0,1");
+		if (spip_num_rows($result_messages)) {
+			echo "<p />";
+			agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+		}
+		// rendez-vous personnels dans le mois
+		$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+				"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
+				"AND messages.statut='publie' LIMIT 0,1");
+		if (spip_num_rows($result_messages)) {
+			echo "<p />";
+			calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+		}
+	}
+	
+	if ($options != 'avancees') {
+		debut_boite_info();
+		echo "<div class='verdana2'>";
+		echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
+		echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
+		echo "</div>";
+		fin_boite_info();
+	}
+
 }
-
-if ($options != 'avancees') {
-	debut_boite_info();
-	echo "<div class='verdana2'>";
-	echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
-	echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
-	echo "</div>";
-	fin_boite_info();
-}
-
-
 
 //
 // Afficher les raccourcis : boutons de creation d'article et de breve, etc.
