@@ -348,7 +348,7 @@ function base_detruire_copieur_si_besoin($serveur='')
 function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 	$upgrade = false;
 	// si la table existe et qu'on est a l'init, la dropper
-	if ($desc_dest=sql_showtable($table,true,$serveur_dest) AND $init) {
+	if ($desc_dest=sql_showtable($table,false,$serveur_dest) AND $init) {
 		if ($serveur_dest=='' AND in_array($table,array('spip_meta','spip_auteurs'))) {
 			// ne pas dropper auteurs et meta sur le serveur principal
 			// faire un simple upgrade a la place
@@ -374,7 +374,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 		spip_log( "creation '$table' sur serveur '$serveur_dest'",'dump.'._LOG_INFO_IMPORTANTE);
 		include_spip('base/create');
 		creer_ou_upgrader_table($table, $desc, 'auto', $upgrade,$serveur_dest);
-		$desc_dest = sql_showtable($table,true,$serveur_dest);
+		$desc_dest = sql_showtable($table,false,$serveur_dest);
 	}
 	if (!$desc_dest){
 		spip_log( "Erreur creation '$table' sur serveur '$serveur_dest'".var_export($desc,1),'dump.'._LOG_ERREUR);
@@ -424,7 +424,7 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  *
  * @return <type>
  */
-function base_copier_tables($status_file, $tables, $serveur_source=0, $serveur_dest, $options=array()){
+function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $options=array()){
 
 	$callback_progression = isset($options['callback_progression'])?$options['callback_progression']:'';
 	$max_time = isset($options['max_time'])?$options['max_time']:0;
