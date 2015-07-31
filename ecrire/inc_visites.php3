@@ -200,7 +200,7 @@ function calculer_visites($t) {
 		}
 		foreach ($points as $num => $liste) {
 			spip_query("UPDATE spip_articles
-			SET popularite = popularite + $num
+			SET popularite = popularite + $num, maj = maj
 			WHERE ".calcul_mysql_in('id_article', join(',',$liste)));
 		}
 	}
