@@ -19,7 +19,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 	$a = attribut_html($help);
 	return "<a\nhref=\"javascript:"
 		.$action
-		."\" class='spip_barre' tabindex='1000'\ntitle=\""
+		."\" tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonmouseover=\"helpline('"
@@ -46,8 +46,8 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret = ($num_barre > 1)  ? '' :
 	  '<script type="text/javascript" src="' . _DIR_IMG_PACK. 'spip_barre.js"></script>';
-	$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
-	$ret .= "\n<tr width='100%' class='spip_barre'>";
+	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
+	$ret .= "\n<tr>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
 	$col = 1;
 
@@ -57,7 +57,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	if (!$forum) {
 		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", _T('barre_intertitre'), $champhelp);
 	}
-	$ret .= "&nbsp;&nbsp;&nbsp;</td>\n<td>";
+	$ret .= "</td>\n<td>";
 	$col ++;
 
 	// Lien hypertexte, notes de bas de page, citations
@@ -68,11 +68,11 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $champhelp);
 	} else {
 		$col ++;
-		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>\n<td>"
+		$ret .= "</td>\n<td>"
 		  . bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $champhelp);
 	}
 
-	$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+	$ret .= "</td>";
 	$col++;
 
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
@@ -100,7 +100,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	}
 	$ret .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $champhelp);
 
-	$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+	$ret .= "</td>";
 	$col++;
 
 	if (!_DIR_RESTREINT) {
@@ -115,7 +115,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
 	if (_DIR_RESTREINT)
-		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
+		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' class='barre' id='barre_$num_barre' size='45' maxlength='100'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
 
