@@ -136,7 +136,7 @@ $frequence_taches = array(
 			  'invalideur' => 3600,
 			  'rubriques' => 3600,
 			  'popularites' => 1800,
-			  'sites' => 60,
+			  'sites' => 90,
 			  'index' => 60
 );
 
@@ -149,17 +149,18 @@ function cron_rubriques($t) {
 }
 
 function cron_index($t) {
-	effectuer_une_indexation();
-	return 1;
+	return count(effectuer_une_indexation());
 }
 
 function cron_sites($t) {
-	executer_une_syndication();
-	if (lire_meta('activer_moteur') == 'oui') {
+	$r = executer_une_syndication();
+	if ((lire_meta('activer_moteur') == 'oui') &&
+	    (lire_meta("visiter_sites") == 'oui')) {
 		include_ecrire("inc_index.php3");
-		executer_une_indexation_syndic();
+		$r2 = executer_une_indexation_syndic();
+		$r = $r && $r2;
 	}
-	return 1;
+	return $r;
 }
 
 // calcule les stats en plusieurs etapes par tranche de 100
@@ -175,6 +176,8 @@ function cron_statistiques($t) {
 }
 
 function cron_popularites($t) {
+	// Si c'est le premier appel (fichier .lock absent), ne pas calculer
+	if ($t == 0) return 0;
 	calculer_popularites($t);
 	return 1;
 }

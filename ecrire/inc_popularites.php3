@@ -10,9 +10,6 @@ define("_ECRIRE_INC_POPULARITES", "1");
 
 function calculer_popularites($t) {
 
-	// Si c'est le premier appel (fichier .lock absent), ne pas calculer
-	if ($t == 0) return 1;
-
 	$duree = time() - $t;
 	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
 	$demivie = 1;
@@ -67,7 +64,6 @@ function calculer_popularites($t) {
 	ecrire_meta("popularite_max", $maxpop);
 	ecrire_meta("popularite_total", $totalpop);
 	ecrire_metas();
-	return 1;
 }
 ?>
 

@@ -2302,7 +2302,7 @@ else {
 
 	echo "</div>\n";
 	
-	echo "<table width='$largeur' cellpadding='0' cellspacing='0'' align='center'><tr><td>";
+	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
 	
 	// Icones secondaires
