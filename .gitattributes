@@ -12,9 +12,7 @@ dist/formulaires/editer_article.php -text
 dist/formulaires/editer_breve.html -text
 dist/formulaires/editer_breve.php -text
 dist/formulaires/editer_rubrique.html -text
-dist/formulaires/editer_rubrique/charger.php -text
-dist/formulaires/editer_rubrique/traiter.php -text
-dist/formulaires/editer_rubrique/verifier.php -text
+dist/formulaires/editer_rubrique.php -text
 dist/formulaires/editer_site.html -text
 dist/formulaires/editer_site.php -text
 dist/formulaires/editer_site_fonctions.php -text
