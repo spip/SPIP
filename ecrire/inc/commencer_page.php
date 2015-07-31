@@ -18,7 +18,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // http://doc.spip.org/@inc_commencer_page_dist
 function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false, $alertes = true) {
-	global $spip_ecran;
 	global $connect_id_auteur;
 
 	include_spip('inc/headers');
@@ -40,6 +39,10 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
 		$nom_site_spip=  _T('info_mon_site_spip');
 
+	// Pour corriger la position des sous-menus principaux 
+	// (quand intitules sur 2 lignes)
+
+	$js = repercuter_gadgets($id_rubrique);
 	$head = "<title>["
 		. $nom_site_spip
 		. "] " . textebrut(typo($titre)) . "</title>\n"
@@ -47,38 +50,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		. (($c = $GLOBALS['meta']['charset']) ?
 			"; charset=$c" : '')
 		. "' />\n"
-		. envoi_link($nom_site_spip,$minipres);
-
-	// anciennement verifForm
-	// et corriger position des sous-menus principaux (quand intitules sur 2 lignes)
-	$head .= '
-	<script type="text/javascript"><!--
-	function calculer_top_bandeau_sec() {
-		
-		var hauteur_max = 0;
-		var hauteur_bouton = 0;
-	
-		$(".boutons_admin a.boutons_admin .icon_texte").each(function(){
-			hauteur_bouton = parseInt($(this).height());
-			if (hauteur_bouton > hauteur_max) hauteur_max = hauteur_bouton;
-		});
-		$(".boutons_admin a.boutons_admin .icon_texte").height(hauteur_max);
-	}	
-
-	$(document).ready(function(){
-		verifForm();
-		calculer_top_bandeau_sec();
-		$("#page,#bandeau-principal")
-		.mouseover(function(){
-			if (typeof(window["changestyle"])!=="undefined") window.changestyle("garder-recherche");
-		});
-	'
-	.
-	repercuter_gadgets($id_rubrique)
-	.'
-	});
-	// --></script>
-	';
+		. envoi_link($nom_site_spip,$minipres, $js);
 
 	return _DOCTYPE_ECRIRE
 	. html_lang_attributes()

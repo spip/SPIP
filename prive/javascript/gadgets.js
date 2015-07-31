@@ -1,3 +1,24 @@
+function init_bandeau_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie){
+	verifForm();
+	calculer_top_bandeau_sec();
+	$("#page,#bandeau-principal")
+	.mouseover(function(){
+		if (typeof(window["changestyle"])!=="undefined") window.changestyle("garder-recherche");
+		});
+	init_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie);
+}
+
+function calculer_top_bandeau_sec() {
+	var hauteur_max = 0;
+	var hauteur_bouton = 0;
+	
+	$(".boutons_admin a.boutons_admin .icon_texte").each(function(){
+		hauteur_bouton = parseInt($(this).height());
+		if (hauteur_bouton > hauteur_max) hauteur_max = hauteur_bouton;
+	});
+	$(".boutons_admin a.boutons_admin .icon_texte").height(hauteur_max);
+}	
+
 function init_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie){
 	jQuery('#boutonbandeautoutsite')
 	.one('mouseover',function(event){

@@ -346,13 +346,16 @@ function init_langues() {
 }
 
 // http://doc.spip.org/@html_lang_attributes
-function html_lang_attributes()
+function html_lang_attributes($dir=true)
 {
+	if ($dir)
+		$dir = " dir='" . ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr') . "'";
+
 	return  "<html lang='"
 	. $GLOBALS['spip_lang']
-	. "' dir='"
-	. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-	  . "'>\n" ;
+	. "'"
+	. $dir
+	. ">\n" ;
 }
 init_langues();
 utiliser_langue_site();
