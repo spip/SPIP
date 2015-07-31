@@ -772,11 +772,11 @@ function date_relative($date, $decalage_maxi=0,$ref_date=null) {
 	else if ($decal > 3600 * 24) {
 		$jours = floor ($decal / (3600 * 24));
 		if ($jours < 2)
-			return _T("date_hier");
+			return $il_y_a=="date_dans"?_T("date_demain"):_T("date_hier");
 		else
 			$delai = "$jours "._T("date_jours");
 	}
-	else if ($decal > 3600) {
+	else if ($decal >= 3600) {
 		$heures = floor ($decal / 3600);
 		if ($heures < 2)
 			$delai = "$heures "._T("date_une_heure");
