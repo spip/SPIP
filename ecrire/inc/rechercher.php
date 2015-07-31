@@ -117,7 +117,7 @@ function expression_recherche($recherche, $options) {
 
 	} else {
 		$methode = 'REGEXP';
-		$q = sql_quote(substr($recherche,1,-1));
+		$q = sql_quote(trim($recherche, '/'));
 	}
 
 	return array($methode, $q, $preg);
