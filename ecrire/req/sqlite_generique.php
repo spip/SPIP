@@ -950,7 +950,17 @@ function spip_sqlite_set_charset($charset, $serveur='',$requeter=true){
 function spip_sqlite_showbase($match, $serveur='',$requeter=true){
 	// type est le type d'entrée : table / index / view
 	// on ne retourne que les tables (?) et non les vues...
-	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name LIKE '$match' ESCAPE '\'", $serveur, $requeter);
+	# ESCAPE non supporte par les versions sqlite <3
+	#	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name LIKE "._q($match)." ESCAPE '\'", $serveur, $requeter);
+	$match = preg_quote($match);
+	$match = str_replace("\\\_","[[TIRETBAS]]",$match);
+	$match = str_replace("\\\%","[[POURCENT]]",$match);
+	$match = str_replace("_",".",$match);
+	$match = str_replace("%",".*",$match);
+	$match = str_replace("[[TIRETBAS]]","_",$match);
+	$match = str_replace("[[POURCENT]]","%",$match);
+	$match = "^$match$";
+	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name REGEXP "._q($match), $serveur, $requeter);
 }
 
 
