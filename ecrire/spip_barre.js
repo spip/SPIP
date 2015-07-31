@@ -27,8 +27,7 @@ function barre_raccourci(debut,fin,champ) {
 	donotinsert = false;
 	theSelection = false;
 	bblast = 0;
-
-
+	
 	if ((clientVer >= 4) && is_ie && is_win)
 	{
 		theSelection = document.selection.createRange().text; // Get text selection
@@ -68,6 +67,11 @@ function barre_inserer(text,champ) {
 		txtarea.value  += text;
 		txtarea.focus();
 	}
+}
+
+// Shows the help messages in the helpline window
+function helpline(help) {
+	document.formulaire.helpbox.value = help;
 }
 
 
