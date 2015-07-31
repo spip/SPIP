@@ -180,28 +180,30 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	if (function_exists("introduction"))
 		return introduction ($type, $texte, $chapo, $descriptif);
 
+	define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+
 	switch ($type) {
 		case 'articles':
 			# si descriptif contient juste des espaces ca produit une intro vide, 
 			# c'est une fonctionnalite, pas un bug
-			if ($descriptif)
+			if (strlen($descriptif))
 				return propre($descriptif);
 			else if (substr($chapo, 0, 1) == '=')	// article virtuel
 				return '';
 			else
-				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500))));
+				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500, _INTRODUCTION_SUITE))));
 			break;
 		case 'breves':
-			return PtoBR(propre(supprimer_tags(couper_intro($texte, 300))));
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 300, _INTRODUCTION_SUITE))));
 			break;
 		case 'forums':
-			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600, _INTRODUCTION_SUITE))));
 			break;
 		case 'rubriques':
-			if ($descriptif)
+			if (strlen($descriptif))
 				return propre($descriptif);
 			else
-				return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+				return PtoBR(propre(supprimer_tags(couper_intro($texte, 600, _INTRODUCTION_SUITE))));
 			break;
 	}
 }
