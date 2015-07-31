@@ -580,8 +580,8 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	  generer_url_ecrire('ajax_page', "fonction=aff_rubrique&id_rubrique=$id_rubrique$exclus", true) ."',
 				'selection_rubrique');}
 			else {findObj('selection_rubrique').style.display='none';}\"
-	><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;'
-	/></a><img src='img_pack/searching.gif'
+	><img src='". _DIR_IMG_PACK . "loupe.png' style='border: 0px; vertical-align: middle;'
+	/></a><img src='". _DIR_IMG_PACK . "searching.gif'
 		id='img_selection_rubrique' style='visibility: hidden;'>
 	</td><td>
 	<input type='text' id='titreparent' name='titreparent'
