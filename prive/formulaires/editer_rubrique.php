@@ -32,6 +32,14 @@ function rubriques_edit_config($row)
 	return $config;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_rubrique_identifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_rubrique,$lier_trad,$row));
+}
+
 function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $retour='', $lier_trad=0, $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('rubrique',$id_rubrique,array('titre'));

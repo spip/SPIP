@@ -72,6 +72,14 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 }
 
 /**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour='', $options=array()){
+	return serialize(array($objet, $id_objet));
+}
+
+/**
  * Verification avant traitement
  *
  * On verifie que l'upload s'est bien passe et

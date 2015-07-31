@@ -25,6 +25,14 @@ function formulaires_editer_article_charger_dist($id_article='new', $id_rubrique
 	return $valeurs;
 }
 
+/**
+ * Identifier le formulaire en faisant abstraction des parametres qui
+ * ne representent pas l'objet edite
+ */
+function formulaires_editer_article_identifier_dist($id_article='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='articles_edit_config', $row=array(), $hidden=''){
+	return serialize(array($id_article,$lier_trad,$row));
+}
+
 // Choix par defaut des options de presentation
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
