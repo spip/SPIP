@@ -27,19 +27,21 @@ function exec_articles_edit_dist()
 
 
 // http://doc.spip.org/@exec_articles_edit_args
-function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad, $new)
+function exec_articles_edit_args($id_article, $id_rubrique, $lier_trad, $new)
 {
-	$article_select = charger_fonction('article_select','inc');
-	$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad);
-	$id_rubrique = $row['id_rubrique'];
-
-	if (!$row
-	  OR ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique)) 
-	  OR (!$new AND (!autoriser('voir', 'article', $id_article)	OR !autoriser('modifier','article', $id_article))) 
-	  ) {
+	if (!$new AND (!autoriser('voir', 'article', $id_article) OR !autoriser('modifier','article', $id_article))) {
 		include_spip('inc/minipres');
-		echo minipres(_T('public:aucun_article'));
-	} else articles_edit($id_article, $id_rubrique,$lier_trad, $new, 'articles_edit_config', $row);
+		echo minipres(_T('info_acces_interdit'));
+	} else {
+		$article_select = charger_fonction('article_select','inc');
+		$row = $article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
+		$id_rubrique = $row ? $row['id_rubrique'] : false;
+
+		if (!$id_rubrique OR ($new AND !autoriser('creerarticledans','rubrique',$id_rubrique))) {
+			include_spip('inc/minipres');
+			echo minipres(_T('public:aucun_article'));
+		} else articles_edit($id_article, $id_rubrique, $lier_trad, $new, 'articles_edit_config', $row);
+	}
 }
 
 // http://doc.spip.org/@articles_edit
