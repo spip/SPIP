@@ -146,8 +146,11 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	$mois = date("m",$time);
 	$annee = date("Y",$time);
 	if (!$ltype) $ltype = $type ? $type : 'mois';
-	if (!$lechelle) $lechelle = $echelle;
-	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
+	if (!$lechelle = intval($lechelle)) $lechelle = intval($echelle);
+	if (!$lpartie_cal OR !preg_match('/^\w+$/', $$lpartie_cal)) 
+		$lpartie_cal = preg_match('/^\w+$/',$partie_cal) ? 
+		  $partie_cal : 'sansheure';
+
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script ? $script :
 						  $GLOBALS['clean_link']->getUrl()); 
