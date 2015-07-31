@@ -236,18 +236,16 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<P>";
 	debut_cadre_formulaire();
 
-	echo generer_url_post_ecrire("mots_edit");
 	echo "<div class='serif'>";
-	
-	if ($id_mot)
-		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>\n";
-	else if ($new=='oui')
-		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui' />\n";
-	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\" />\n";
-	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui' />\n";
-	echo "<INPUT TYPE='Hidden' NAME='table' VALUE='$table' />\n";
-	echo "<INPUT TYPE='Hidden' NAME='id_table' VALUE='$id_table' />\n";
-	echo "<INPUT TYPE='Hidden' NAME='ajouter_id_article' VALUE=\"$ajouter_id_article\" />\n";
+	echo generer_url_post_ecrire("mots_edit", ($id_mot ? "id_mot=$id_mot" : ""));
+
+	if ($new=='oui')
+		echo "<input type='hidden' name='new' VALUE='oui' />\n";
+	echo "<input type='hidden' name='redirect' VALUE=\"$redirect\" />\n";
+	echo "<input type='hidden' name='redirect_ok' VALUE='oui' />\n";
+	echo "<input type='hidden' name='table' VALUE='$table' />\n";
+	echo "<input type='hidden' name='id_table' VALUE='$id_table' />\n";
+	echo "<input type='hidden' name='ajouter_id_article' VALUE=\"$ajouter_id_article\" />\n";
 
 	$titre_mot = entites_html($titre_mot);
 	$descriptif = entites_html($descriptif);
@@ -256,7 +254,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<B>"._T('info_titre_mot_cle')."</B> "._T('info_obligatoire_02');
 	echo aide ("mots");
 
-	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
+	echo "<BR><input type='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
 
 	// dans le groupe...
 	$query_groupes = "SELECT id_groupe, titre FROM spip_groupes_mots ORDER BY titre";
@@ -294,7 +292,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		echo "</TEXTAREA><P>\n";
 	}
 	else
-		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+		echo "<input type='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 
 	if ($options == 'avancees' OR $texte) {
 		echo "<B>"._T('info_texte_explicatif')."</B><BR>";
@@ -303,14 +301,14 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		echo "</TEXTAREA><P>\n";
 	}
 	else
-		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
+		echo "<input type='hidden' NAME='texte' VALUE=\"$texte\">";
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra");
 		extra_saisie($extra, 'mots', $id_groupe);
 	}
 
-	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
+	echo "<DIV align='right'><input type='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 	
 	echo "</div>";
 	echo "</FORM>";

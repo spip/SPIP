@@ -331,11 +331,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
-			  $s =  generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots") .
-			    "<input type='hidden' name='$id_table' VALUE='$id_objet' />";
-				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
-				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
-	
+				$s =  generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots") . 
+					"<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
 				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre";
 				$result_autres_mots = spip_query($query_autres_mots);
 				while ($row_autres = spip_fetch_array($result_autres_mots)) {
@@ -344,10 +341,10 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 					if ($le_mot == $id_mot) $selected = "SELECTED";
 					else $selected = "";
-					$s .= "<option value='$le_mot' $selected> $le_titre_mot";
+					$s .= "<option value='$le_mot' $selected> $le_titre_mot</option>";
 				}
 				$s .= "</select>";
-				$s .= "<INPUT TYPE='Hidden' NAME='supp_mot' VALUE='$id_mot'>";
+				$s .= "<input type='hidden' name='supp_mot' VALUE='$id_mot' />";
 				$s .= "<span class='visible_au_chargement' id='valider_groupe_$id_groupe'>";
 				$s .= " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_changer')."' CLASS='fondo' style='font-size: 10px';>";
 				$s .= "</span>";
@@ -420,6 +417,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		}
 
 		// il faudrait rajouter STYLE='margin:1px;' qq part
+
 		$form_mot = generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots");
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet' />";
