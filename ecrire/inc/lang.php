@@ -296,15 +296,26 @@ function verifier_lang_url() {
  * Change la langue en cours d'utilisation par la langue du site
  * si ce n'est pas déjà le cas.
  *
+ * Note : Cette fonction initialise la globale spip_lang au chargement de inc/lang
+ *
  * @return string
  *     La langue sélectionnée
 **/
 function utiliser_langue_site() {
+	// s'il existe une langue du site (en gros tout le temps en théorie)
 	if (isset($GLOBALS['meta']['langue_site'])
-	  AND isset($GLOBALS['spip_lang'])
-	  AND $GLOBALS['spip_lang']!=$GLOBALS['meta']['langue_site'])
+	  // et si spip_langue est pas encore définie (ce que va faire changer_langue())
+	  // ou qu'elle n'est pas identique à la langue du site
+	  AND (!isset($GLOBALS['spip_lang'])
+	    OR $GLOBALS['spip_lang']!=$GLOBALS['meta']['langue_site']))
+	{
 		return changer_langue($GLOBALS['meta']['langue_site']);//@:install
-	return isset($GLOBALS['spip_lang']) ? $GLOBALS['spip_lang'] : '';
+	}
+	// en theorie là, la globale est définie, sinon c'est un problème.
+	if (!isset($GLOBALS['spip_lang'])) {
+		spip_log("La globale spip_lang est indéfinie dans utiliser_langue_site() !", _LOG_ERREUR);
+	}
+	return $GLOBALS['spip_lang'];
 }
 
 /**
