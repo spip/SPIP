@@ -45,7 +45,7 @@ jQuery(function(){
 	.bind('change', function(){
 		var id_parent = parseInt(this.value);
 		if (id_parent){
-			var titre = jQuery('#titreparent').attr('value') || this.options[this.selectedIndex].text;
+			var titre = jQuery('#titreparent').val() || this.options[this.selectedIndex].text;
 			titre=titre.replace(/^\\s+/,'');
 			// Ajouter la rubrique selectionnee au formulaire,
 			// sous la forme d'un input name='rubriques[]'
