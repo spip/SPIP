@@ -79,6 +79,7 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
+	set_request('transformer_xml');
 	$var_auth = true;
 } else {
 	$var_auth = charger_fonction('auth', 'inc');

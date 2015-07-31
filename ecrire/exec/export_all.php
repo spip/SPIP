@@ -96,7 +96,8 @@ function exec_export_all_dist()
 		debut_admin(generer_url_post_ecrire("export_all","archive=$archive&gz=$gz"), $action);
 		fin_admin($action);
 	}
-
+		if (!preg_match(',^[\w_][\w_.]*$,', $nom)) 
+		  $archive = 'dump.xml' . ($gz ? '.gz' : '');
 	install_debut_html(_T('info_sauvegarde'));
 
 	$file = $dir . $archive;
