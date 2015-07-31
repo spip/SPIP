@@ -72,7 +72,8 @@ implode('',file((($dossier_squelettes) &&
 
 function calculer_texte($texte, $id_boucle, &$boucles, $id_mere)
 {
-	$code = ".\n '".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
+
+	$code = "'".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
 
         // bloc multi
         if (eregi('<multi>', $texte)) {
@@ -104,6 +105,7 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere)
 				    $code);
 	}
 
-	return (ereg('^\..', $code) ? substr($code,2) : $code);
+	$code = "$ouvre_multi$code$ferme_multi";
+	return ($code);
 }
 ?>
