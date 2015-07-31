@@ -74,14 +74,14 @@
 
 .liste-objets.traductions .trad {text-align:center;}
 
-/* dans une colonne laterale, ne visualiser que l'info principale, le statut et l'id */
-#navigation .liste-objets tr > .secondaire,
-#navigation .liste-objets tr > .auteur,
-#navigation .liste-objets tr > .date,
-#navigation .liste-objets tr > .action,
-#navigation .liste-objets tr > .syndication,
-#navigation .liste-objets tr .spip_logos {display:none;}
-#navigation .liste-objets tr td.principale {font-size:0.9em;max-width:120px;word-wrap: break-word;}
+/* dans une colonne laterale, ne visualiser que l'info .lat, le statut et l'id */
+.lat .liste-objets tr > .secondaire,
+.lat .liste-objets tr > .auteur,
+.lat .liste-objets tr > .date,
+.lat .liste-objets tr > .action,
+.lat .liste-objets tr > .syndication,
+.lat .liste-objets tr .spip_logos {display:none;}
+.lat .liste-objets tr td.principale {font-size:0.9em;max-width:120px;word-wrap: break-word;}
 
 .en-edition .inner {font-size:0.9em;}
 .en-edition h3 {font-size:1.1em;}
@@ -125,8 +125,8 @@
 .pagination + .liste_items, .tri + .liste_items {border-top:0;margin-top:0;}
 .liste_items + .tri, .liste_items + .pagination {margin-top:-1em;margin-bottom:1em;}
 
-#navigation .pagination,#extra .pagination {font-size:9px;}
-#navigation .tri,#extra .tri {font-size:9px;}
+.lat .pagination,#extra .pagination {font-size:9px;}
+.lat .tri,#extra .tri {font-size:9px;}
 
 
 /* menus */
