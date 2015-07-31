@@ -253,7 +253,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	$a = array_shift($url);
 	if (!$a) $a= './';
 
-	$regexp = ',^(' . $c . ')(=.*)?$,';
+	$regexp = ',^(' . str_replace('[]','\[\]',$c) . ')(=.*)?$,';
 	$ajouts = array_flip(explode('|',$c));
 	$u = is_array($v) ? $v : rawurlencode($v);
 	// lire les variables et agir
