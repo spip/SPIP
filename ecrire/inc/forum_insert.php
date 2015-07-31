@@ -137,6 +137,16 @@ function reduce_strlen($n, $c)
   return $n - strlen($c);
 }
 
+
+function tracer_erreur_forum($type='') {
+	spip_log("erreur forum ($type): ".print_r($_POST, true));
+	include_spip('inc/mail');
+	envoyer_mail($GLOBALS['meta']['email_webmaster'], "erreur forum ($type)",
+		"erreur sur le forum ($type) :\n\n".
+		'$_POST = '.print_r($_POST, true)."\n\n".
+		'$_SERVER = '.print_r($_SERVER, true));
+}
+
 function inc_forum_insert_dist() {
 
 	// Ne pas se laisser polluer par les pollueurs de globales
@@ -148,8 +158,6 @@ function inc_forum_insert_dist() {
 	$id_auteur = intval(_request('id_auteur'));
 	$afficher_texte = _request('afficher_texte');
 	$ajouter_mot = _request('ajouter_mot');
-	$alea = _request('alea');
-	$hash = _request('hash');
 	$auteur = _request('auteur');
 	$email_auteur = _request('email_auteur');
 	$nom_site_forum = _request('nom_site_forum');
@@ -189,8 +197,19 @@ function inc_forum_insert_dist() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($afficher_texte <> 'non') {
-		$file = forum_insert_secure($alea, $hash);
-		if (!$file) return $retour_forum; # echec silencieux du POST
+		$file = forum_insert_secure(_request('alea'), _request('hash'));
+		if (!$file) {
+			# ne pas tracer cette erreur, peut etre due a un double POST
+			# tracer_erreur_forum('session absente');
+			return $retour_forum; # echec silencieux du POST
+		}
+
+		// antispam : si le champ au nom aleatoire verif_$hash n'est pas 'ok'
+		// on meurt
+		if (_request('verif_'._request('hash')) != 'ok') {
+			tracer_erreur_forum('champ verif manquant');
+			return $retour_forum;
+		}
 	}
 
 	// id_rubrique est parfois passee pour les articles, on n'en veut pas
@@ -215,12 +234,7 @@ function inc_forum_insert_dist() {
 
 	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
 	if (strlen(_request('nobot'))) {
-		spip_log("spam forum: ".print_r($_POST, true));
-		include_spip('inc/mail');
-		envoyer_mail($GLOBALS['meta']['email_webmaster'], 'intrusion forum',
-			"tentative de spam forum detectee :\n\n".
-			'$_POST = '.print_r($_POST, true)."\n\n".
-			'$_SERVER = '.print_r($_SERVER, true));
+		tracer_erreur_forum('champ interdit (nobot) rempli');
 		return $retour_forum; # echec silencieux du POST
 	}
 
