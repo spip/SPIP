@@ -151,7 +151,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		jQuery.spip.initReaderBuffer();
   return this.each(function() {
 		var cible = target || this;
-		jQuery('form:not(.noajax,.bouton_action_post)', this).each(function(){
+		jQuery('form:not(.noajax):not(.bouton_action_post)', this).each(function(){
 		var leform = this;
 		var leclk,leclk_x,leclk_y;
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
