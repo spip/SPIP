@@ -768,9 +768,8 @@ function debut_html($titre = "") {
 		.sanscadre {padding: 4px; margin: 0px; }
 		.aveccadre {cursor: pointer; padding: 3px; margin: 0px;  border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
 		.fondgris {padding: 4px; margin: 1px;}
-		.fondgris2 {padding: 3px; margin: 1px; border-left: solid 1px #7A92BE; border-top: solid 1px #7A92BE; border-right: solid 1px #000000; border-bottom: solid 1px #000000; background-color: #2b539c;}
 		.fondgrison {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;}
-		.fondgrison2 {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #7A92BE;}
+		.fondgrison2 {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;}
 	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
@@ -785,7 +784,7 @@ function debut_html($titre = "") {
 	.reliefgris {background-image: url(img_pack/barre-noir.gif)}
 	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #e4e4e4}
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
-	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #cccccc;}
+	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
 
 	a { text-decoration: none; }
 	a:hover { color:#FF9900; text-decoration: underline; }
@@ -993,7 +992,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr></table>";
 	} 
 	else {
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1044,7 +1043,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td>";
 	}
 	else {
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"document.location='$lien'\">";
+		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"document.location='$lien'\">";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
@@ -1356,8 +1355,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
 		global $options;
-		if ($options == "avancees") echo "<a href='$lien&set_options=basiques'><font color='white'>Interface simplifi&eacute;e</font></a> / <font color='white'><b>interface compl&egrave;te</b></font>";
-		else  echo "<b><font color='white'>Interface simplifi&eacute;e</font></b> / <a href='$lien&set_options=avancees'><font color='white'>interface compl&egrave;te</font></a>";
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <font color='white'><b>interface compl&egrave;te</b></font>";
+		else  echo "<b><font color='white'>Interface simplifi&eacute;e</font></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
