@@ -88,7 +88,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 // function d'ecriture du tag img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
-function image_ecrit_tag($valeurs,$surcharge){
+function image_ecrire_tag($valeurs,$surcharge){
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
 	// le style
@@ -98,7 +98,7 @@ function image_ecrit_tag($valeurs,$surcharge){
 		unset($surcharge['style']);
 	}
 	// enlever le width et height du style
-	$style = trim(preg_replace(",(width|height)\s*:\s*[^;]*(;)?,","",$style));
+	$style = trim(preg_replace(",(^|;|\s)(width|height)\s*:\s*[^;]*(;)?,i","\\1",$style));
 	
 	// traiter specifiquement la largeur et la hauteur
 	$width = $valeurs['largeur'];
@@ -284,7 +284,7 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 		imagedestroy($im);
 	}
 	
-	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$width,'height'=>$height));
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$width,'height'=>$height));
 }
 
 // http://doc.spip.org/@image_flip_vertical
@@ -321,7 +321,7 @@ function image_flip_vertical($im)
 		imagedestroy($im);
 	}
 	
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flip_horizontal
@@ -357,7 +357,7 @@ function image_flip_horizontal($im)
 		imagedestroy($im);
 	}
 	
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_masque
@@ -693,7 +693,7 @@ function image_masque($im, $masque, $pos="") {
 
 	}
 
-	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$x_dest,'height'=>$y_dest));
 }
 
 // Passage de l'image en noir et blanc
@@ -751,7 +751,7 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 		imagedestroy($im);
 	}
 
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // http://doc.spip.org/@image_flou
@@ -873,7 +873,7 @@ function image_flou($im,$niveau=3)
 		imagedestroy($temp1);	
 	}
 	
-	return image_ecrit_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>($x_i+$niveau),'height'=>($y_i+$niveau)));
 }
 
 // http://doc.spip.org/@image_RotateBicubic
@@ -1073,7 +1073,7 @@ function image_rotation($im, $angle, $crop=false)
 	}
 	include_spip('inc/logos');
 	list ($src_y,$src_x) = taille_image($dest);
-	return image_ecrit_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
+	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 }
 
 // $src_img - a GD image resource
@@ -1145,7 +1145,7 @@ function image_gamma($im, $gamma = 0)
 		}
 		$image["fonction_image"]($im_, "$dest");
 	}
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 // Passe l'image en "sepia"
@@ -1220,7 +1220,7 @@ function image_sepia($im, $rgb = "896f5e")
 		imagedestroy($im);
 	}
 	
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -1291,7 +1291,7 @@ function image_renforcement($im, $k=0.5)
 		$image["fonction_image"]($im_, "$dest");		
 	}
 
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 
 
@@ -1368,7 +1368,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 		$image["fonction_image"]($im_, "$dest");
 	}
 
-	return image_ecrit_tag($image,array('src'=>$dest));
+	return image_ecrire_tag($image,array('src'=>$dest));
 }
 // A partir d'une image,
 // recupere une couleur
