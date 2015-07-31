@@ -257,7 +257,7 @@ window.confirm = _confirm;
 var ajaxbloc_selecteur;
 // mise en cache des url. Il suffit de vider cete variable pour vider le cache
 jQuery.spip.preloaded_urls = {};
-jQuery.spip.on_pagination = function(blocfrag,c,u) {
+jQuery.spip.on_ajax_loaded = function(blocfrag,c,u) {
 	jQuery(blocfrag)
 	.html(c)
 	.removeClass('loading');
@@ -277,7 +277,7 @@ jQuery.spip.on_pagination = function(blocfrag,c,u) {
 	else {
 		//jQuery(blocfrag).positionner(false);
 	}
-	jQuery.spip.log('on_pagination');
+	jQuery.spip.log('on_ajax_loaded');
 	jQuery.spip.triggerAjaxLoad(blocfrag);
 	// si le fragment ajax est dans un form ajax,
 	// il faut remettre a jour les evenements attaches
@@ -293,13 +293,13 @@ jQuery.spip.loadAjax = function(blocfrag,url, href, force, callback){
 	.animeajax()
 	.addClass('loading').positionner(false);
 	if (jQuery.spip.preloaded_urls[url] && !force) {
-		jQuery.spip.on_pagination(blocfrag,jQuery.spip.preloaded_urls[url],href);
+		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href);
 	} else {
 		jQuery.ajax({
 			url: url,
 			onAjaxLoad:false,
 			success: function(c){
-				jQuery.spip.on_pagination(blocfrag,c,href);
+				jQuery.spip.on_ajax_loaded(blocfrag,c,href);
 				jQuery.spip.preloaded_urls[url] = c;
 				if (callback && typeof callback == "function")
 					callback.apply(blocfrag);
@@ -378,7 +378,7 @@ jQuery.fn.ajaxbloc = function() {
 				},
 				onAjaxLoad:false,
 				success: function(c){
-					jQuery.spip.on_pagination(blocfrag,c);
+					jQuery.spip.on_ajax_loaded(blocfrag,c);
 					jQuery.spip.preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
 				},
 				iframe: jQuery.browser.msie
