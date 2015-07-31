@@ -323,23 +323,22 @@ function calcul_exposer ($id, $type, $reference) {
 
 // http://doc.spip.org/@lister_objets_avec_logos
 function lister_objets_avec_logos ($type) {
-	$type_logos = array(
-	'hierarchie' => 'rub',
-	'rubriques' => 'rub',
-	'articles' => 'art',
-	'breves' => 'breve',
-	'mots' => 'mot',
-	'sites' => 'site',
-	'auteurs' => 'aut'
-	);
-
+	global $formats_logos;
 	$logos = array();
-	if ($type = $type_logos[$type]) {
-		$a = preg_files(_DIR_IMG.$type.'on[0-9]+\.(gif|png|jpg)$');
-		foreach ($a as $f)
-			$logos[] = intval(substr($f, strlen(_DIR_IMG.$type.'on')));
-	}
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	$type = '/'
+	. type_du_logo($type)
+	. "on(\d+)\.("
+	. join('|',$formats_logos)
+	. ")$/";
 
+	if ($d = @opendir(_DIR_LOGOS)) {
+		while($f = readdir($d)) {
+			if (preg_match($type, $f, $r))
+				$logos[] = $r[1];
+		}
+	}
+	@closedir($d);
 	return join(',',$logos);
 }
 

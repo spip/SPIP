@@ -247,12 +247,13 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 // {logo} liste les objets qui ont un logo
 // http://doc.spip.org/@critere_logo_dist
 function critere_logo_dist($idb, &$boucles, $crit) {
+
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
 
 	$c = "calcul_mysql_in('" .
 	  $boucle->id_table . '.' . $boucle->primary
-	  . "', lister_objets_avec_logos(". $boucle->type_requete ."), '')";
+	  . "', lister_objets_avec_logos('". $boucle->primary ."'), '')";
 	if ($crit->cond) $c = "($arg ? $c : 1)";
 
 	if ($not)
