@@ -39,7 +39,7 @@ function calcule_fichier_logo($on) {
 // Retrouver le logo d'un objet (et son survol)
 //
 
-function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
+function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff) {
 	include_ecrire('inc_logos.php3');
 
 	$table_logos = array (
@@ -114,7 +114,7 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 //
 // fonction standard de calcul de la balise #INTRODUCTION
 // on peut la surcharger en definissant dans mes_fonctions.php3 :
-// function introduction($type,$texte,$descriptif) {...}
+// function introduction($type,$texte,$chapo,$descriptif) {...}
 //
 function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	if (function_exists("introduction"))
@@ -144,34 +144,33 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
-function calculer_formulaire($nom, $args, $filtres)
-{
-  $file = 'inc-' .$nom . _EXTENSION_PHP;
-  include_local($file);
+function calculer_formulaire($nom, $args, $filtres) {
+	$file = 'inc-' .$nom . _EXTENSION_PHP;
+	include_local($file);
 
-  $f = $nom . '_stat';
-  $r = $f($args, $filtres);
-  if (is_string($r))
-    return $r;
-  else { 
-    return
-    ('<'.'?php 
+	$f = $nom . '_stat';
+	$r = $f($args, $filtres);
+	if (is_string($r))
+		return $r;
+	else { 
+		return
+		('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
 lang_select(\''
-    . $GLOBALS["spip_lang"] 
-    . '\');
+		. $GLOBALS["spip_lang"] 
+		. '\');
 include_local("'
-     . $file
-     . '");
+		. $file
+		. '");
 inclure_formulaire('
-     . $nom
-     . '_dyn(\''
-     . join("', '", array_map("addslashes", $r))
-     . '\'));
-lang_dselect();
+		. $nom
+		. '_dyn(\''
+		. join("', '", array_map("addslashes", $r))
+		. '\'));
+	lang_dselect();
 ?'
-     .">");
-  }
+		.">");
+	}
 }
 
 //
@@ -214,33 +213,32 @@ array("$element=$id_element"));
 	return $exposer[$type][$id];
 }
 
-function table_from_primary($id)
-{
+function table_from_primary($id) {
 	global $tables_principales;
 	include_ecrire('inc_serialbase.php3');
-	foreach ($tables_principales as $k => $v)
-	  { if ($v['key']['PRIMARY KEY'] == $id) 
-	      return array($k, array_key_exists('id_rubrique', $v['field']));
-	  }
+	foreach ($tables_principales as $k => $v) {
+		if ($v['key']['PRIMARY KEY'] == $id)
+			return array($k, array_key_exists('id_rubrique', $v['field']));
+	}
 	return '';
 }
 
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = spip_abstract_select(array('id_rubrique'),
-				       array('rubriques AS rubriques'),
-				       array(calcul_mysql_in('id_parent', 
-							     $generation,
-							     '')),
-				       '','','','','','','');
+				array('rubriques AS rubriques'),
+				array(calcul_mysql_in('id_parent', 
+					$generation,
+					'')),
+				'','','','','','','');
 	while ($row = spip_abstract_fetch($result))
-	  $lesfils[] = $row['id_rubrique'];
+		$lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
 }
 
 function calcul_branche ($generation) {
 	if (!$generation) 
-	  return '0';
+		return '0';
 	else {
 		$branche[] = $generation;
 		while ($generation = calcul_generation ($generation))
@@ -249,9 +247,8 @@ function calcul_branche ($generation) {
 	}
 }
 
-# fonction appelée par la balise #LOGO_DOCUMENT
-
-function calcule_document($id_document, $doubdoc, &$doublons){
+// fonction appelee par la balise #LOGO_DOCUMENT
+function calcule_document($id_document, $doubdoc, &$doublons) {
 	if (!$id_document) return '';
 	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
 
@@ -264,12 +261,12 @@ function calcule_document($id_document, $doubdoc, &$doublons){
 		if ($res = spip_abstract_select(array('fichier'), array('documents AS documents'), array("id_document = $id_vignette"))) {
 			list($vignette) = spip_abstract_fetch($res);
 			if (@file_exists($vignette))
-			  return generer_url_document($id_vignette);
-#			  return ($fichier); # en std g_u_d fait ça
+				return generer_url_document($id_vignette);
+				# return ($fichier); # en std g_u_d fait ca
 		}
 	} else if ($mode == 'vignette') 
-			  return generer_url_document($id_document);
-# return $fichier; # en std g_u_d fait ça
+		return generer_url_document($id_document);
+		# return $fichier; # en std g_u_d fait ca
 
 // calcul de l'extension par tous les moyens
 	if ($id_type) {
@@ -281,40 +278,37 @@ function calcule_document($id_document, $doubdoc, &$doublons){
 // Pas de vignette mais une extension:
 // prendre la vignette de celle-ci dans IMG/icones sauf si on peut faire mieux
 	$formats = ','.lire_meta('formats_graphiques').',';
-	if ((strpos($formats, ",$ext,") === false) || 
-	    !$fichier || (lire_meta("creer_preview") != 'oui')) {
-		return  vignette_par_defaut($ext ? $ext : 'txt', false);
+	if ((strpos($formats, ",$ext,") === false) OR
+	!$fichier OR (lire_meta("creer_preview") != 'oui')) {
+		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 // on peut faire mieux dans le cas des images: une previsualisation
 // on devrait verifier que le fichier existe dans IMG/vignette
 // et sinon lancer creer_vignette (qui fera un UPDATE sur spip_documents)
 // mais on risque de dépasser le temps alloue au processus
-	return 'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
+	return 'spip_image.php3?vignette='.rawurlencode(
+		str_replace('../', '', $fichier));
 }
 
 
-# fonction appelée par la balise #EMBED
-
-function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc){
-  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
-  return embed_document($id_document, $filtres, false);
+// fonction appelee par la balise #EMBED
+function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc) {
+	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+	return embed_document($id_document, $filtres, false);
 }
 
-# fonction appelée par la balise #NOTES
-
-function calculer_notes()
-{
-  $r = $GLOBALS["les_notes"];
-  $GLOBALS["les_notes"] = "";
-  $GLOBALS["compt_note"] = 0;
-  $GLOBALS["marqueur_notes"] ++;
-  return $r;
+// fonction appelee par la balise #NOTES
+function calculer_notes() {
+	$r = $GLOBALS["les_notes"];
+	$GLOBALS["les_notes"] = "";
+	$GLOBALS["compt_note"] = 0;
+	$GLOBALS["marqueur_notes"] ++;
+	return $r;
 }
 
 # retourne la profondeur d'une rubrique
 
-function sql_profondeur($id)
-{
+function sql_profondeur($id) {
 	$n = 0;
 	while ($id) {
 		$n++;
@@ -324,56 +318,51 @@ function sql_profondeur($id)
 }
 
 
-function sql_parent($id_rubrique)
-{
-  $row = spip_abstract_fetsel(array(id_parent), 
-			      array('rubriques'), 
-			      array("id_rubrique=" . intval($id_rubrique)));
-  return $row['id_parent'];
+function sql_parent($id_rubrique) {
+	$row = spip_abstract_fetsel(array(id_parent), 
+			array('rubriques'), 
+			array("id_rubrique=" . intval($id_rubrique)));
+	return $row['id_parent'];
 }
 
-function sql_rubrique($id_article)
-{
-  $row = spip_abstract_fetsel(array('id_rubrique'),
-			      array('articles'),
-			      array("id_article=" . intval($id_article)));
-  return $row['id_rubrique'];
+function sql_rubrique($id_article) {
+	$row = spip_abstract_fetsel(array('id_rubrique'),
+			array('articles'),
+			array("id_article=" . intval($id_article)));
+	return $row['id_rubrique'];
 }
 
-function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
-{
-  $auteurs = "";
-  if ($id_article)
-    {
-      $result_auteurs = spip_abstract_select(array('auteurs.nom', 'auteurs.email'),
-					     array('auteurs AS auteurs',
-						   'auteurs_articles AS lien'), 
-					     array("lien.id_article=$id_article",
-						   "auteurs.id_auteur=lien.id_auteur"),
-					     '','','','',1, 
-					     $table, $id_boucle, $serveur);
+function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
+	$auteurs = "";
+	if ($id_article) {
+		$result_auteurs = spip_abstract_select(array('auteurs.nom', 'auteurs.email'),
+			array('auteurs AS auteurs',
+				'auteurs_articles AS lien'), 
+			array("lien.id_article=$id_article",
+				"auteurs.id_auteur=lien.id_auteur"),
+			'','','','',1, 
+			$table, $id_boucle, $serveur);
 
-      while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
-	$nom_auteur = typo($row_auteur["nom"]);
-	$email_auteur = $row_auteur["email"];
-	if ($email_auteur) {
-	  $auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
+		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
+			$nom_auteur = typo($row_auteur["nom"]);
+			$email_auteur = $row_auteur["email"];
+			if ($email_auteur) {
+				$auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
+			} else {
+				$auteurs[] = "$nom_auteur";
+			}
+		}
 	}
-	else {
-	  $auteurs[] = "$nom_auteur";
-	}
-      }
-    }
-  return (!$auteurs) ? "" : join($auteurs, ", ");
+	return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 	$retour = spip_abstract_fetsel(
-				       array('id_article'),
-				       array('petitions'),
-				       array("id_article=".intval($id_article)),
-				       '','','','',1, 
-				       $table, $id_boucle, $serveur);
+			array('id_article'),
+			array('petitions'),
+			array("id_article=".intval($id_article)),
+			'','','','',1, 
+			$table, $id_boucle, $serveur);
 
 	# cette page est invalidee par toute petition
 	if ($retour AND $Cache)
