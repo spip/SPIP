@@ -1113,6 +1113,7 @@ SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i var
 'upload_fichier_zip' => 'ZIP dosya',
 'upload_fichier_zip_texte' => 'Kurmay&#305; &ouml;nerdi&#287;iniz dosya bir Zip dosya.',
 'upload_fichier_zip_texte2' => 'Bu dosyan&#305;n &#351;u sorunu olabilir&nbsp;:',
+'upload_limit' => 'Bu dosya sunucuya g&ouml;re fazla b&uuml;y&uuml;k&nbsp;; y&uuml;klenmesine izin verilen en b&uuml;y&uuml;k dosya : <i>@max@</i>.',
 'upload_zip_conserver' => 'A&ccedil;t&#305;ktan sonra ar&#351;iv dosyas&#305;n&#305; sakla',
 'upload_zip_decompacter' => 'A&ccedil;&#305;ld&#305; ve i&ccedil;erdi&#287;i t&uuml;m elemanlar siteye kuruldu. Siteye kurulacak dosyalar &#351;unlar&nbsp;:',
 'upload_zip_telquel' => 'S&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; ZIP ar&#351;ivi olarak, oldu&#287;u gibi kurulmu&#351;&nbsp;;',

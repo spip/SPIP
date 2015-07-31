@@ -1020,6 +1020,7 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'upload_fichier_zip' => 'ZIP tipus&uacute; f&aacute;jl',
 'upload_fichier_zip_texte' => 'ZIP tipus&uacute; az a f&aacute;jl, amit akar telep&iacute;teni.',
 'upload_fichier_zip_texte2' => 'Ez a f&aacute;jl lehet :',
+'upload_limit' => 'Ez a f&aacute;jl t&uacute;l nagy a szervernek; a m&aacute;ximalis <i>felt&ouml;lt&eacute;si</i> m&eacute;ret @max@.',
 'upload_zip_decompacter' => 'kit&ouml;m&ouml;ritve, &eacute;s az &ouml;sszes eleme a honlapra telep&iacute;tve. A honlapra telep&iacute;tett f&aacute;jlok a k&ouml;vetkez&#337;k lesznek :',
 'upload_zip_telquel' => 'Egymag&aacute;ban telep&iacute;tve, mint ZIP t&ouml;m&ouml;r&iacute;tett &aacute;ll&oacute;m&aacute;ny;',
 'utf8_convert_attendez' => 'V&aacute;rjon egy kicsit, majd t&ouml;ltse &uacute;jra az oldalt.',

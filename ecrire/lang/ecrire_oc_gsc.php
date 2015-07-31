@@ -1023,6 +1023,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'upload_fichier_zip' => 'Fichi&egrave;r ZIP',
 'upload_fichier_zip_texte' => 'Lo fichi&egrave;r que prepausatz d\'installar qu\'ei un fichi&egrave;r Zip.',
 'upload_fichier_zip_texte2' => 'Aqueth fichi&egrave;r que p&ograve;t estar:',
+'upload_limit' => 'Aqueth fichi&egrave;r qu\'ei tr&ograve;p gr&ograve;s peu servider; la talha maxima autorizada en <i>upload</i> qu\'ei de @max@.',
 'upload_zip_decompacter' => 'descomprimit e cada element que contien installat suu sit. Alavetz los fichi&egrave;rs que ser&agrave;n installats suu sit que son:',
 'upload_zip_telquel' => 'installat tau com ei, com archiu comprimit Zip;',
 

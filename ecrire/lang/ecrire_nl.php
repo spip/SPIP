@@ -1180,6 +1180,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'upload_fichier_zip' => 'ZIP bestand',
 'upload_fichier_zip_texte' => 'Het bestand dat je wil installeren is een ZIP bestand.',
 'upload_fichier_zip_texte2' => 'Dit bestand kan zijn&nbsp;:',
+'upload_limit' => 'Dit bestand is te groot voor de server&nbsp;; de maximale bestandsgrootte voor <i>upload</i> is @max@.',
 'upload_zip_conserver' => 'Het archief behouden na winning',
 'upload_zip_decompacter' => 'uitgepakt en elk bestand ge&iuml;nstalleerd op de site. De bestanden die op de site komen, zijn&nbsp;:',
 'upload_zip_telquel' => 'ge&iuml;nstalleerd als gezipt (gecomprimeerd) bestand&nbsp;;',

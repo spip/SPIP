@@ -1187,6 +1187,7 @@ you can perform searches on sites and
 'upload_fichier_zip' => 'ZIP file',
 'upload_fichier_zip_texte' => 'The file you are intending to install is a ZIP file.',
 'upload_fichier_zip_texte2' => 'This file can be:',
+'upload_limit' => 'This file is too big for the server; the maximum size allowed for <i>upload</i> is @max@.',
 'upload_zip_conserver' => 'Keep the archive file after extracting its contents',
 'upload_zip_decompacter' => 'decompressed and each file it contains will be installed on the site. The files which will be installed are:',
 'upload_zip_telquel' => 'installed as is, as a ZIP file;',

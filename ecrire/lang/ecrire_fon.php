@@ -879,6 +879,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'upload_fichier_zip' => 'Fichier ZIP&ugrave;',
 'upload_fichier_zip_texte' => 'x&oacute;t&aacute; mi j&oacute; n&aacute; z&eacute; x&oacute;t&aacute; zip&ugrave; w&#603;.',
 'upload_fichier_zip_texte2' => 'x&oacute;t&aacute; &eacute; l&#596; s&iacute;w&uacute;&nbsp;:',
+'upload_limit' => 'gb&egrave;t&aacute; &#596; kl&oacute; &#598;&iacute;n @max@.',
 'upload_zip_decompacter' => 's&#596; &#598;&eacute;m&#603; &#598;e&#770; &#598;&eacute; gb&#596;n &#596; :',
 'upload_zip_telquel' => 's&#596; &#598;&eacute;m&#603; &#598;e&#770; &#598;&eacute; gb&#596;n &#596;  Zip&nbsp;;',
 

@@ -1060,6 +1060,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'upload_fichier_zip' => 'Komprimovan&yacute; soubor ZIP',
 'upload_fichier_zip_texte' => 'Chcete nainstalovat komprimovan&yacute; soubor ZIP.',
 'upload_fichier_zip_texte2' => 'Tento soubor m&#367;&#382;e b&yacute;t:',
+'upload_limit' => 'Soubor je pro server p&#345;&iacute;li&#353; velk&yacute;. Maxim&aacute;ln&iacute; povolen&aacute; velikost pro <i>odesl&aacute;n&iacute;</i> je @max@.',
 'upload_zip_decompacter' => 'rozbalen&yacute; a ka&#382;d&yacute; ze soubor&#367; v n&#283;m obsa&#382;en&yacute; bude na web nainstalov&aacute;n. Budou nainstalov&aacute;ny tyto soubory:',
 'upload_zip_telquel' => 'nainstalovat tak, jak je, tedy ve form&aacute;tu ZIP;',
 'utf8_convert_attendez' => 'Po&#269;kejte n&#283;kolik sekund a potom znovu na&#269;t&#283;te tuto str&aacute;nku.',

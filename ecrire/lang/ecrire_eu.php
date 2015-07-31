@@ -893,6 +893,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'upload_fichier_zip' => 'ZIP fitxategia',
 'upload_fichier_zip_texte' => 'Instalatzea proposatzen den fitxategia Zip fitxategi bat da.',
 'upload_fichier_zip_texte2' => 'Fitxategi hau izan ahal da:',
+'upload_limit' => 'Fitxategi hauhandiegia da zerbitzarirako; baimendutako gehienezko tamainia upload-ean@max@-koa da.',
 'upload_zip_decompacter' => 'deskonprimituta eta gunean instalatutadaukan elementu bakoitza. Gunean instalatu egingo diren fitxategiak dira:',
 'upload_zip_telquel' => 'Besterik gabe instalatuta, Zip fitxategi bezala;',
 

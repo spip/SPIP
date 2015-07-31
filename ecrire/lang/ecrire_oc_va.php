@@ -1024,6 +1024,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Lo fichier que prepausatz d\'installar es un fichier Zip.',
 'upload_fichier_zip_texte2' => 'Aqueu fichier p&ograve;t &egrave;sser:',
+'upload_limit' => 'Aqueu fichier es tr&ograve;p gr&ograve;s per lo servior; la talha maxima autorizaa en <i>upload</i> es de @max@.',
 'upload_zip_decompacter' => 'descomprimit e chasque element que conten installat sus lo sit. Aladonc los fichiers que ser&agrave;n installats sus lo sit son:',
 'upload_zip_telquel' => 'installat tau coma es, coma archiu comprimit Zip;',
 
