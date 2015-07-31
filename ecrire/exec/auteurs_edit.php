@@ -121,11 +121,9 @@ function table_auteurs_edit($auteur)
 
 		$vus = array();
 	
-		$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-		afficher_messages(_T('info_discussion_cours'), $query_message, $vus, false, false);
+		afficher_messages(_T('info_discussion_cours'), ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
 	
-		$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-		afficher_messages(_T('info_vos_rendez_vous'), $query_message, $vus, false, false);
+		afficher_messages(_T('info_vos_rendez_vous'), ", spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2", "WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message", $vus, false, false);
 	
 		icone_horizontale(_T('info_envoyer_message_prive'), generer_url_ecrire("message_edit", "new=oui&type=normal&dest=$id_auteur"),
 				  "message.gif");
