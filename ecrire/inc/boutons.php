@@ -197,10 +197,9 @@ function definir_barre_boutons() {
 			new Bouton("cache-24.gif", "onglet_vider_cache");
 	}
 
-	if (/*@file_exists(_DIR_PLUGINS)
-	AND is_dir(_DIR_PLUGINS)
-	AND */
-	autoriser('configurer', 'admin_plugin')) {
+	// Si _DIR_PLUGINS est definie a '', pas de bouton
+	if (_DIR_PLUGINS
+	AND autoriser('configurer', 'admin_plugin')) {
 		$sousmenu['admin_plugin']=
 			new Bouton("plugin-24.gif", "icone_admin_plugin");
 	}
@@ -292,6 +291,12 @@ function definir_barre_onglets($rubrique) {
 		$onglets['fonctions']=
 		  new Bouton('image-24.gif', 'onglet_fonctions_avances',
 			generer_url_ecrire("config_fonctions"));
+/*
+		if (true)
+		$onglets['plugins']=
+		  new Bouton('plugin-24.gif', 'onglet_plugins',
+			generer_url_ecrire("config_plugins"));
+*/
 	break;
 
 	case 'config_lang':

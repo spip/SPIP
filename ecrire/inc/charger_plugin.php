@@ -22,10 +22,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-# l'adresse du repertoire de telechargement et de decompactage des plugins
-#define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS.'auto/');
-define('_DIR_PLUGINS_AUTO', _DIR_PLUGINS);
-
 include_spip('inc/plugin');
 
 
@@ -37,24 +33,41 @@ function formulaire_charger_plugin($retour='') {
 	include_spip('inc/actions');
 	include_spip('inc/presentation');
 
+	// Si defini comme non-existant
+	if (!_DIR_PLUGINS)
+		return '';
 
-	$message = _L("Vous pouvez installer des plugins dans le r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS)."</code>.");
+	$auto = '';
+	if (_DIR_PLUGINS_AUTO) {
+		if (!@is_dir(_DIR_PLUGINS_AUTO)
+		OR !is_writeable(_DIR_PLUGINS_AUTO)) {
+			$auto = _L("Si vous souhaitez autoriser l'installation automatique des plugins, veuillez&nbsp;:
+			<ul>
+			<li>cr&#233;er un r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code>&nbsp;;
+			<li>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.".aide("droits")."</li>
+			</ul>");
+		}
 
+		if (!$auto)
+			$auto = interface_plugins_auto($retour);
 
-	if (!is_dir(_DIR_PLUGINS_AUTO)
-	OR !is_writeable(_DIR_PLUGINS_AUTO)) {
-		$erreur = _L("Pour permettre l'installation automatique des plugins, veuillez cr&#233;er le r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code> et v&#233;rifier que le serveur est autoris&#233; &#224; y &#233;crire.").aide("droits");
+		$auto = "<br />"
+		. debut_cadre_enfonce('', true, '', 'Installation automatique').$auto.fin_cadre_enfonce(true);
 	}
 
+	$message = _L("Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>".joli_repertoire(_DIR_PLUGINS)."</tt>");
+	if (!@is_dir(_DIR_PLUGINS))
+		$message .= " &mdash; "._L("&#224; cr&#233;er &#224; la racine du site.");
 
-	if ($erreur) {
-		return debut_cadre_trait_couleur("spip-pack-24.png", true, "", _L('Ajouter des plugins'))
+	return debut_cadre_trait_couleur("spip-pack-24.png", true, "", _L('Ajouter des plugins'))
 		. "<p>".$message."</p>\n"
-		. "<p>".$erreur."</p>\n"
+		. $auto
 		. fin_cadre_trait_couleur(true);
-	}
+
+}
 
 
+function interface_plugins_auto($retour) {
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
 	if ($retour) {
@@ -62,7 +75,6 @@ function formulaire_charger_plugin($retour='') {
 		$res .= $retour;
 		$res .= "</td></tr>\n";
 	}
-
 
 	$res .= "<tr><td class='verdana2'>";
 
@@ -99,7 +111,7 @@ function formulaire_charger_plugin($retour='') {
 		.  "</div>\n";
 
 	$res = redirige_action_auteur('charger_plugin',
-				0,
+				'auto', // arg = _DIR_PLUGINS_AUTO
 				'',
 				'',
 				$res,
@@ -108,12 +120,7 @@ function formulaire_charger_plugin($retour='') {
 
 	$res .= afficher_liste_listes_plugins();
 
-	$res = debut_cadre_trait_couleur("spip-pack-24.png", true, "", _L('Ajouter un plugin'))
-	. $res
-	. fin_cadre_trait_couleur(true);
-
 	return $res;
-
 }
 
 
@@ -224,6 +231,16 @@ function chargeur_charger_zip($quoi = array())
 		$compressed_size += $f['compressed_size'];
 		$list[$a] = preg_replace($removex,'',$f['filename']);
 	}
+
+	// Indiquer par un fichier install.log
+	// a la racine que c'est chargeur qui a installe ce plugin
+	ecrire_fichier($tmpname.'/install.log',
+		"installation: charger_plugin\n"
+		."date: ".gmdate('Y-m-d\TH:i:s\Z', time())."\n"
+		."source: ".$quoi['zip']."\n"
+	);
+
+
 
 	return array(
 		'files' => $list,
@@ -408,6 +425,22 @@ function afficher_liste_listes_plugins() {
 			generer_action_auteur('charger_plugin', 'update_flux'),'update_flux').'">'._L('Mettre &#224; jour les listes').'</a>';
 
 	return $ret;
+}
+
+function bouton_telechargement_plugin($url) {
+	// pas de chargement auto : on donne l'url du zip
+	if (_DIR_PLUGINS_AUTO
+	AND @is_dir(_DIR_PLUGINS_AUTO))
+		$bouton = redirige_action_auteur('charger_plugin',
+			'auto', // arg = _DIR_PLUGINS_AUTO, a priori
+			'',
+			'',
+			"<input type='hidden' name='url_zip_plugin' value='$url' />"
+			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
+			"\nmethod='post'");
+
+	return _L("&#224; t&#233;l&#233;charger depuis ").$url.$bouton;
+
 }
 
 ?>

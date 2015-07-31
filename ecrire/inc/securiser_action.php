@@ -25,7 +25,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 		$arg = _request('arg');
 		$hash = _request('hash');
 		$action = _request('action');
-		if (verifier_action_auteur("$action-$arg", $hash))
+		if ($a = verifier_action_auteur("$action-$arg", $hash))
 			return $arg;
 		include_spip('inc/minipres');
 		echo minipres();
@@ -99,7 +99,6 @@ function calculer_action_auteur($action) {
 // http://doc.spip.org/@verifier_action_auteur
 function verifier_action_auteur($action, $valeur) {
 	list($id_auteur, $pass) = caracteriser_auteur();
-
 	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere'))
 		return true;
 	if ($valeur == _action_auteur($action, $id_auteur, $pass, 'alea_ephemere_ancien'))

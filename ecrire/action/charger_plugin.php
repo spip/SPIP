@@ -66,7 +66,15 @@ function action_charger_plugin_dist() {
 	if (!$_POST) die('pas normal');
 
 	# destination finale des fichiers
-	$dest = _DIR_PLUGINS_AUTO;
+	switch($arg) {
+		case 'lib':
+			$dest = sous_repertoire(_DIR_PLUGINS_AUTO, 'lib');
+			break;
+		case 'auto':
+		default:
+			$dest = _DIR_PLUGINS_AUTO;
+			break;
+	}
 
 	# si premiere lecture, destination temporaire des fichiers
 	$tmp = _request('extract')
@@ -108,10 +116,10 @@ function action_charger_plugin_dist() {
 
 	// le fichier .zip est la et bien forme
 	if (is_array($status)) {
-		if (!lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml)) {
-			$retour = _L('Erreur plugin.xml absent');
-			$texte = _L("Le zip n'a pas de fichier plugin.xml, d&#233;sol&#233;");
-		} else {
+
+		// C'est un plugin ?
+		if (lire_fichier($xml=$status['tmpname'].'/plugin.xml', $pluginxml)) {
+
 			include_spip('inc/xml');
 			$arbre = spip_xml_load($xml);
 			$retour = typo(spip_xml_aplatit($arbre['plugin'][0]['nom']));
@@ -128,20 +136,25 @@ function action_charger_plugin_dist() {
 			if (_request('extract')) {
 				$texte = plugin_propre(
 					spip_xml_aplatit($arbre['plugin'][0]['description']));
-
 				$texte .= '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233;').'</p>';
 				$texte .= _L("<h2 style='text-align:center;'>Continuez pour l'activer.</h2>");
-
-				// Indiquer par un fichier install.log
-				// a la racine que c'est chargeur qui a installe ce plugin
-				ecrire_fichier($status['dirname'].'/install.log',
-					'installation / charger_plugin / '.gmdate('Y-m-d\TH:i:s\Z', time()));
-
 			} else {
 				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;').'</p>';
 				$texte .= liste_fichiers_pclzip($status);
 				$texte .= _L("<h2 style='text-align:center;'>Vous pouvez maintenant l'installer.</h2>");
-				$suite = 'extract';
+				$suite = 'auto';
+			}
+		}
+
+		// C'est un paquet quelconque
+		else {
+			$retour = _L('Chargement du paquet') . ' '.basename($status['tmpname']);
+			if (_request('extract')) {
+				$texte = '<p>'._L('Le fichier '.$zip.' a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le répertoire '.$dest).'</p>';
+			} else {
+				$texte = "<p>"._L("Le fichier ".$zip.' a &#233;t&#233; t&#233;l&#233;charg&#233;.')."</p>\n";
+				$texte .= liste_fichiers_pclzip($status);
+				$suite = 'lib';
 			}
 		}
 	}
@@ -161,17 +174,14 @@ function action_charger_plugin_dist() {
 	include_spip('exec/install'); // pour bouton_suivant()
 
 	$texte = "<div style='text-align:$spip_lang_left;'>$texte</div>\n";
+
 	echo minipres($retour,
-		$suite == 'extract'
+		$suite
 			? redirige_action_auteur(_request('action'),
-				0,
+				$suite,
 				'',
 				'',
-					form_hidden(
-					'?action='._request('action')
-					.'&url_zip_plugin='.$zip.'&extract=oui'
-					.'&hash='._request('hash')
-					)
+					form_hidden('?url_zip_plugin='.$zip.'&extract=oui')
 					.$texte
 					."<a class='suivant' href='"
 						.generer_url_ecrire('admin_plugin')

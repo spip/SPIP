@@ -54,47 +54,53 @@ function exec_admin_plugin_dist($retour='') {
 
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
 
-	echo "<br /><br />\n";
-
-	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
-		'liste_plugins');
-	echo _T('texte_presente_plugin');
-
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
 
+	echo "<br />\n";
 
-	$sub = "\n<div style='text-align:".$GLOBALS['spip_lang_right']."'>"
-	.  "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />"
-	. "</div>";
+	if ($lpf) {
+		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
+		'liste_plugins');
+		echo _T('texte_presente_plugin');
 
 
-	// S'il y a plus de 10 plugins pas installes, les signaler a part ;
-	// mais on affiche tous les plugins mis a la racine
-	if (count($lpf) - count($lcpa) > 9
-	AND _request('afficher_tous_plugins') != 'oui') {
-		$lcpaffiche = array();
-		foreach ($lpf as $f)
-			if (!strpos($f, '/') OR in_array($f, $lcpa))
-				$lcpaffiche[] = $f;
-		$corps = "<p>"._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
-			. "<p><a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
-			. affiche_arbre_plugins($lcpaffiche, $lcpa);
+		$sub = "\n<div style='text-align:".$GLOBALS['spip_lang_right']."'>"
+		.  "<input type='submit' value='"._T('bouton_valider')
+		."' class='fondo' />" . "</div>";
 
-	} else {
-		$corps = 
-			"<p>"._L(count($lcpa).' plugins activ&#233;s')."&nbsp;;\n"
-			. ""._L(count($lpf).' plugins disponibles.')."</p>\n"
-			. (count($lpf)>20 ? $sub : '')
-			. affiche_arbre_plugins($lpf, $lcpa);
+
+		// S'il y a plus de 10 plugins pas installes, les signaler a part ;
+		// mais on affiche tous les plugins mis a la racine ou dans auto/
+		if (count($lpf) - count($lcpa) > 9
+		AND _request('afficher_tous_plugins') != 'oui') {
+
+			$dir_auto  = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
+			$lcpaffiche = array();
+			foreach ($lpf as $f)
+				if (!strpos($f, '/')
+				or substr($f, 0, strlen($dir_auto)) == $dir_auto
+				OR in_array($f, $lcpa))
+					$lcpaffiche[] = $f;
+			$corps = "<p>"._L(count($lcpa).' plugins activ&#233;s.')."</p>\n"
+				. "<p><a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
+				. affiche_arbre_plugins($lcpaffiche, $lcpa);
+
+		} else {
+			$corps = 
+				"<p>"._L(count($lcpa).' plugins activ&#233;s')."&nbsp;;\n"
+				. ""._L(count($lpf).' plugins disponibles.')."</p>\n"
+				. (count($lpf)>20 ? $sub : '')
+				. affiche_arbre_plugins($lpf, $lcpa);
+		}
+
+		$corps .= "\n<br />" . $sub;
+
+		echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
+
+		echo fin_cadre_trait_couleur(true);
+
 	}
-
-
-	$corps .= "\n<br />" . $sub;
-
-	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
-
-	echo fin_cadre_trait_couleur(true);
 
 	if (include_spip('inc/charger_plugin')) {
 		echo formulaire_charger_plugin($retour);
