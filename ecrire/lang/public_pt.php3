@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Data',
-'dernier_ajout' => '&Uacute;ltima adenda',
+'dernier_ajout' => '&Uacute;ltima actualiza&ccedil;&atilde;o',
 'dernieres_breves' => '&Uacute;ltimas not&iacute;cias',
 'derniers_articles' => '&Uacute;ltimos artigos',
 'derniers_commentaires' => '&Uacute;ltimos coment&aacute;rios',
@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'page_precedente' => 'P&aacute;gina anterior',
+'page_precedente' => 'p&aacute;gina anterior',
 'page_suivante' => 'p&aacute;gina seguinte',
 'par_auteur' => 'por',
 'participer_site' => 'Pode participar na vida deste s&iacute;tio e propor os seus pr&oacute;prios artigos, inscrevendo-se mais abaixo. Receber&aacute; imediatamente um email que indica os seus c&oacute;digos de acesso ao espa&ccedil;o privado do s&iacute;tio.',
