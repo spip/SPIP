@@ -64,24 +64,6 @@ if (autoriser_sans_cookie($exec)) {
 
 // initialiser a la langue par defaut
 include_spip('inc/lang');
-
-//  si la langue est specifiee par cookie alors ...
-if (isset($_COOKIE['spip_lang_ecrire'])) {
-
-	// si pas authentifie, changer juste pour cette execution
-	if ($var_auth)
-		changer_langue($_COOKIE['spip_lang_ecrire']);
-	// si authentifie, changer definitivement si ce n'est fait
-	elseif (($_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang'])
-		AND changer_langue($_COOKIE['spip_lang_ecrire'])) {
-			sql_updateq('spip_auteurs', array('lang' => $_COOKIE['spip_lang_ecrire']), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
-
-			$GLOBALS['visiteur_session']['lang'] = $_COOKIE['spip_lang_ecrire'];
-			$session = charger_fonction('session', 'inc');
-			$session($GLOBALS['visiteur_session']);
-	}
-}
-
 utiliser_langue_visiteur();
 
 if (_request('action') OR _request('var_ajax') OR _request('formulaire_action')){
@@ -153,6 +135,16 @@ $GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'
 	? $GLOBALS['visiteur_session']['prefs']['display']
 	: 0;
 $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
+
+//  si la langue est specifiee par cookie et ne correspond pas
+// (elle a ete changee dans une autre session, et on retombe sur un vieux cookie)
+// il faut traiter ce cas apres les appels d'action, car il appelle une action, sinon cela provoque une boucle infinie
+if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
+  AND $_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang']) {
+  	include_spip('inc/headers');
+  	redirige_par_entete(parametre_url(generer_action_auteur('converser','base',self()),'var_lang_ecrire',$GLOBALS['visiteur_session']['lang'],'&'));
+}
+
 
 // Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
 if ($var_f = _request('transformer_xml')) {

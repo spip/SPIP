@@ -116,7 +116,7 @@ function menu_langues($nom_select) {
 		$cible = self();
 		$base = '';
 	} else {
-		$cible = _DIR_RESTREINT_ABS . self();
+		$cible = self();
 		$base = spip_connect() ? 'base' : '';
 	}
 
