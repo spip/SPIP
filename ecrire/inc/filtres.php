@@ -709,6 +709,8 @@ function affdate_base($numdate, $vue, $param = '') {
 		$nommois = _T('date_mois_'.$mois);
 		if ($jour)
 			$jourmois = _T('date_de_mois_'.$mois, array('j'=>$jour, 'nommois'=>$nommois));
+		else
+			$jourmois = $nommois;
 	}
 
 	if ($annee < 0) {
