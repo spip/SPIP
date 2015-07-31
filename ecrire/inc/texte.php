@@ -476,6 +476,8 @@ function interdire_scripts($arg) {
 function safehtml($t) {
 	static $safehtml;
 
+	if (!$t OR !is_string($t))
+		return $t;
 	# attention safehtml nettoie deux ou trois caracteres de plus. A voir
 	if (strpos($t,'<')===false)
 		return str_replace("\x00", '', $t);
