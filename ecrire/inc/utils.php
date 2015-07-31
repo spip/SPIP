@@ -510,9 +510,6 @@ function action_cron() {
 // http://doc.spip.org/@cron
 function cron ($gourmand=false, $taches= array()) {
 
-	// Si base inaccessible, laisser tomber.
-	if (!spip_connect()) return false;
-
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
@@ -1320,6 +1317,7 @@ function spip_initialisation_suite() {
 	define('_SPIP_SCRIPT', 'spip.php');
 	// argument page, personalisable en cas de conflit avec un autre script
 	define('_SPIP_PAGE', 'page');
+	define('_SPIP_FLUX', 'feed');
 
 	// le script de l'espace prive
 	// Mettre a "index.php" si DirectoryIndex ne le fait pas ou pb connexes:
