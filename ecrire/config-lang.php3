@@ -53,21 +53,15 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 // Configuration i18n
 //
 
-debut_cadre_relief("langues-24.gif");
+debut_cadre_couleur("langues-24.gif", false, "", _T('info_langue_principale'));
 
 $langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langue_principale')."</FONT></B> ".aide ()."</TD></TR>";
-
-echo "<TR><TD class='verdana2'>";
 echo _T('texte_selection_langue_principale');
-echo "</TD></TR>";
 
 
 // langue du site
-echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 echo _T('info_langue_principale')." : ";
 echo "\n<select name='changer_langue_site' class='fondl' align='middle'>\n";
 echo "<option value='$langue_site' selected>".traduire_nom_langue($langue_site)."</option>\n";
@@ -76,16 +70,11 @@ while (list(,$l) = each ($langues_prop)) {
 	if ($l <> $langue_site)
 		echo "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 }
-echo "</select><br>\n";
-echo "</TD></TR>";
-
-echo "<TR><td style='text-align:$spip_lang_right;'>";
+echo "</select>\n";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>\n";
 
 
-fin_cadre_relief();
+fin_cadre_couleur();
 
 echo "<p>";
 
@@ -95,21 +84,14 @@ echo "<p>";
 //
 
 if ($options == 'avancees') {
-	debut_cadre_relief("breve-24.gif");
+	debut_cadre_relief("breve-24.gif", false, "", _T('info_jeu_caractere'));
 
 	$charset = lire_meta("charset");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_jeu_caractere')."</FONT></B></TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('texte_jeu_caractere')."<p>";
-	echo "<blockquote class='spip'>"._T('texte_jeu_caractere_2')."</blockquote>";
+	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_2')."</p></blockquote>";
 
-	echo "</FONT>";
-	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
 	echo bouton_radio('charset', 'iso-8859-1',
 		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
 	echo "<br>";
@@ -125,13 +107,8 @@ if ($options == 'avancees') {
 	}
 	else
 		echo "<input type='hidden' name='charset_custom' value=''>";
-	echo "</TD></TR>";
 
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-
-	echo "</TABLE>";
+	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
 	fin_cadre_relief();
 

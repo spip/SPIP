@@ -50,67 +50,52 @@ debut_droite();
 echo "<form action='config-multilang.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
-debut_cadre_relief("traductions-24.gif");
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('info_multilinguisme')."</FONT></B>" /* .aide ("confart") */ ."</TD></TR>";
+debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
+	echo "<p>"._T('texte_multilinguisme')."</p>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
-	echo _T('texte_multilinguisme');
-	echo "</TD></TR>";
-
-	echo "<TR>";
-	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<div>";
 	echo _T('info_multi_articles');
-	echo "</TD>";
-	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<div style='text-align: $spip_lang_right';>";
 	afficher_choix('multi_articles', lire_meta('multi_articles'),
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-	echo "</TD></TR>\n";
+	echo "</div>";
+	echo "</div>";
 
-	echo "<TR>";
-	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<div>";
 	echo _T('info_multi_rubriques');
-	echo "</TD>";
-	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<div style='text-align: $spip_lang_right';>";
 	afficher_choix('multi_rubriques', lire_meta('multi_rubriques'),
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-	echo "</TD></TR>\n";
+	echo "</div>";
+	echo "</div>";
 
 	if  (lire_meta('multi_rubriques') == 'oui') {
-		echo "<TR>";
-		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		echo "<div>";
 		echo _T('info_multi_secteurs');
-		echo "</TD>";
-		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		echo "<div style='text-align: $spip_lang_right';>";
 		afficher_choix('multi_secteurs', lire_meta('multi_secteurs'),
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-		echo "</TD></TR>\n";
+		echo "</div>";
+		echo "</div>";
 	} else
 		echo "<input type='hidden' name='multi_secteurs' value='".lire_meta('multi_secteurs')."'>";
 
 	if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'><hr>";
-		echo _T('texte_multilinguisme_trad');
-		echo "</TD></TR>";
+		echo "<hr>";
+		echo "<p>"._T('texte_multilinguisme_trad')."</p>";
 
-		echo "<TR>";
-		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
 		echo _T('info_gerer_trad');
-		echo "</TD>";
-		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		echo "<div style='text-align: $spip_lang_right';>";
 		afficher_choix('gerer_trad', lire_meta('gerer_trad'),
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-		echo "</TD></TR>\n";
+		echo "</div>";
 	} else
 		echo "<input type='hidden' name='gerer_trad' value='".lire_meta('gerer_trad')."'>";
 
 
-	echo "<TR><TD style='text-align:$spip_lang_right;' COLSPAN=2>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>";
+	echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
-fin_cadre_relief();
+fin_cadre_couleur();
 
 	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
 		echo "<p>";
@@ -150,7 +135,7 @@ fin_cadre_relief();
 			$langues_bloquees[$row['lang']] = 1;
 		}
 
-		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top' class='verdana1'>";
 
 		ksort($langues_bloquees);
 		while (list($code_langue, ) = each($langues_bloquees)) {
@@ -164,7 +149,7 @@ fin_cadre_relief();
 			echo  " $nom_langue &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
 			echo "</div>\n";
 
-			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+			if ($i == $cesure) echo "</td><td width='50%' align='top' class='verdana1'>";
 		}
 
 		echo "<div>&nbsp;</div>";
@@ -186,10 +171,10 @@ fin_cadre_relief();
 
 			echo "</div>\n";
 
-			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+			if ($i == $cesure) echo "</font></td><td width='50%' align='top' class='verdana1'>";
 		}
 
-		echo "</font></td></tr>";
+		echo "</td></tr>";
 		echo "<tr><td style='text-align:$spip_lang_right;' COLSPAN=2>";
 		echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 		echo "</td></tr></table>";
