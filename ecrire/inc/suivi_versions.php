@@ -24,6 +24,7 @@ function afficher_para_modifies ($texte, $court = false) {
 	$paras = explode ("\n",$texte);
 	for ($i = 0; $i < count($paras) AND strlen($texte_ret) < $max; $i++) {
 		if (strpos($paras[$i], '"diff-')) $texte_ret .= $paras[$i]."\n\n";
+#		if (strlen($texte_ret) > $max) $texte_ret .= '(...)';
 	}
 	$texte = $texte_ret;
 	return $texte;
@@ -131,64 +132,9 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				);
 			}
 
-			if (!$court) { 
-				$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1");
-				if ($result_diff) {
-					$row_diff = spip_fetch_array($result_diff);
-					$id_diff = $row_diff['id_version'];
-				}
-		
-		
-				$result_art = spip_query("SELECT * FROM spip_articles	WHERE id_article='$id_article'");
-				
-				if ($row_art = spip_fetch_array($result_art)) {
-					$id_article = $row_art["id_article"];
-					$id_rubrique = $row_art["id_rubrique"];
-					$date = $row_art["date"];
-					$statut_article = $row_art["statut"];
-					$maj = $row_art["maj"];
-					$date_redac = $row_art["date_redac"];
-					$visites = $row_art["visites"];
-					$referers = $row_art["referers"];
-					$extra = $row_art["extra"];
-					$id_trad = $row_art["id_trad"];
-				}
-				
-				$textes = recuperer_version($id_article, $id_version);		
-
-				// code a unifier avec articles_versions
-				if ($id_version && $id_diff) {		
-					if ($id_diff > $id_version) {
-						$t = $id_version;
-						$id_version = $id_diff;
-						$id_diff = $t;
-						$old = $textes;
-						$new = recuperer_version($id_article, $id_version);
-					}
-					else {
-						$old = recuperer_version($id_article, $id_diff);
-						$new = $textes;
-					}		
-					$textes = array();
-					foreach ($new as $champ => $val) {
-						// la version precedente est partielle, il faut remonter dans le temps
-						$id_ref = $id_diff-1;
-						while (!isset($old[$champ])
-						AND $id_ref>0) {
-							$prev = recuperer_version($id_article, $id_ref--);
-							if (isset($prev[$champ]))
-								$old[$champ] = $prev[$champ];
-						}
-						if (!strlen($val) && !strlen($old[$champ])) continue;
-						// si on n'en a qu'un, pas de modif, donc on n'est pas interesses a l'afficher
-						if (isset($new[$champ])
-						AND isset($old[$champ])) {
-							$diff = new Diff(new DiffTexte);
-							$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
-						}
-					}
-				}
-
+			// "court" n'affiche pas les modifs
+			if (!$court) {
+				$textes = revision_comparee($id_article, $id_version, 'diff');
 				if (!$rss)
 					$revisions .= debut_block_visible("$id_version-$id_article-$id_auteur");
 
@@ -222,6 +168,89 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 	if ($rss)
 		return $items;
 	else return $revisions;
+}
+
+// retourne un array() des champs modifies a la version id_version
+// le format =
+//    - diff => seulement les modifs (suivi_revisions)
+//    - apercu => idem, mais en plus tres cout s'il y en a bcp
+//    - complet => tout, avec surlignage des modifications (articles_versions)
+function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NULL) {
+	include_spip('inc/diff');
+
+	// chercher le numero de la version precedente
+	if (!$id_diff) {
+		$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1");
+		if ($result_diff) {
+			$row_diff = spip_fetch_array($result_diff);
+			$id_diff = $row_diff['id_version'];
+		}
+	}
+
+	if ($id_version && $id_diff) {
+
+		// si l'ordre est inverse, on remet a l'endroit
+		if ($id_diff > $id_version) {
+			$t = $id_version;
+			$id_version = $id_diff;
+			$id_diff = $t;
+		}
+
+		$old = recuperer_version($id_article, $id_diff);
+		$new = recuperer_version($id_article, $id_version);
+
+		$textes = array();
+
+		// Mode "diff": on ne s'interesse qu'aux champs presents dans $new
+		// Mode "complet": on veut afficher tous les champs
+		switch ($format) {
+			case 'complet':
+				$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+				break;
+			case 'diff':
+			case 'apercu':
+			default:
+				$champs = array_keys($new);
+				break;
+		}
+
+		foreach ($champs as $champ) {
+			// si la version precedente est partielle,
+			// il faut remonter dans le temps
+			$id_ref = $id_diff-1;
+			while (!isset($old[$champ])
+			AND $id_ref>0) {
+				$prev = recuperer_version($id_article, $id_ref--);
+				if (isset($prev[$champ]))
+					$old[$champ] = $prev[$champ];
+			}
+			if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
+
+			// si on n'a que le vieux, ou que le nouveau, on ne
+			// l'affiche qu'en mode "complet"
+			if ($format == 'complet')
+				$textes[$champ] = strlen($new[$champ])
+					? $new[$champ] : $old[$champ];
+
+			// si on a les deux, le diff nous interesse, plus ou moins court
+			if (isset($new[$champ])
+			AND isset($old[$champ])) {
+				$diff = new Diff(new DiffTexte);
+				$n = preparer_diff($new[$champ]);
+				$o = preparer_diff($old[$champ]);
+				$textes[$champ] = afficher_diff($diff->comparer($n,$o));
+
+				if ($format == 'diff' OR $format == 'apercu')
+					$textes[$champ] = afficher_para_modifies($textes[$champ], ($format == 'apercu'));
+			}
+		}
+	}
+
+	// que donner par defaut ? (par exemple si id_version=1)
+	if (!$textes)
+		$textes = recuperer_version($id_article, $id_version);
+
+	return $textes;
 }
 
 ?>
