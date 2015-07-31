@@ -72,11 +72,21 @@ function ajouter_tags($matches, $item) {
 		$type = ($match[3] == 'category' OR $match[3] == 'directory')
 			? 'directory':'tag';
 		$mot = supprimer_tags($match[0]);
-		if (!strlen($mot)) break;
+		if (!strlen($mot)
+		AND !strlen($mot = extraire_attribut($match[0], 'label')))
+			break;
 		// rechercher un url
-		if ($url = extraire_attribut($match[0], 'domain')
-		OR $url = extraire_attribut($match[0], 'resource')
-		OR $url = extraire_attribut($match[0], 'url'))
+		if ($url = extraire_attribut($match[0], 'domain')) {
+			// category@domain est la racine d'une url qui se prolonge
+			// avec le contenu text du tag <category> ; mais dans SPIP < 2.0
+			// on donnait category@domain = #URL_RUBRIQUE, et
+			// text = #TITRE_RUBRIQUE ; d'ou l'heuristique suivante sur le slash
+			if (substr($url, -1) == '/')
+				$url .= rawurlencode($mot);
+		}
+		else if ($url = extraire_attribut($match[0], 'resource')
+		OR $url = extraire_attribut($match[0], 'url')
+		)
 			{}
 
 		## cas particuliers
@@ -86,10 +96,18 @@ function ajouter_tags($matches, $item) {
 				'http://www.flickr.com/photos/tags/'.rawurlencode($petit).'/'))
 					$tags[] = $t;
 			$mot = '';
-		} else {
-			# type del.icio.us
+		}
+		else if (
+			// cas atom1, a faire apres flickr
+			$scheme = extraire_attribut($match[0], 'scheme')
+			AND $term = extraire_attribut($match[0], 'term')
+		) {
+				$url = suivre_lien($scheme,$term);
+		}
+		else {
+			# type delicious.com
 			foreach(explode(' ', $mot) as $petit)
-				if (preg_match(',<rdf[^>]* resource=["\']([^>]*/'
+				if (preg_match(',<rdf\b[^>]*\bresource=["\']([^>]*/'
 				.preg_quote(rawurlencode($petit),',').')["\'],i',
 				$item, $m)) {
 					$mot = '';
@@ -103,7 +121,6 @@ function ajouter_tags($matches, $item) {
 	}
 	return $tags;
 }
-
 
 // Retablit le contenu des blocs [[CDATA]] dans un tableau
 // http://doc.spip.org/@cdata_echappe_retour

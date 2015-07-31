@@ -1,7 +1,7 @@
 #CACHE{3600}
 <BOUCLE_un_article(ARTICLES){id_article}>
 	<item>
-		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
+		<title>[(#TITRE|supprimer_tags|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
@@ -10,10 +10,9 @@
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
 
 [(#REM)
-	Le bloc qui suit diffuse la rubrique et les mots-cles a la mode RSS
+	Le bloc qui suit diffuse les mots-cles a la mode RSS
 
-]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
-<BOUCLE_mots_rss(MOTS){id_article}>
+]<BOUCLE_mots_rss(MOTS){id_article}>
 		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
 
 		<description>[(#INTRODUCTION|texte_backend)]
@@ -23,7 +22,7 @@
 	sous forme de "microformats"
 
 ]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
-[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_tags|texte_backend)&lt;/a&gt;]
 </BOUCLE_rubrique_mf><B_mots_mf>
 / <BOUCLE_mots_mf(MOTS){id_article}{", "}>
 [&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
