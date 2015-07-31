@@ -132,46 +132,39 @@ function exec_admin_plugin_dist($retour='') {
 		echo formulaire_charger_plugin($retour);
 	}
 
+	echo affiche_les_extensions($liste_plugins_actifs);
 
-	if ($extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
-		echo "<div class='liste_plugins'>";
-		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_L('Extensions'),
-		'liste_extensions');
-		echo _L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@. Elles ne sont pas d&#233;sactivables.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)));
-
-		foreach($extensions as $ext) {
-			$block .= "<li>"
-			. ligne_plug(_DIR_EXTENSIONS.$ext, -1, 0)
-			. "</li>\n";
-		}
-
-		echo "<ul>$block</ul>\n";
-
-		echo fin_cadre_trait_couleur(true);
-		echo "</div>\n";
-
-	}
 	echo fin_gauche(), fin_page();
 	}
 }
 
+function affiche_les_extensions($liste_plugins_actifs){
+	$res = "";
+	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
+		$res .= "<div id='extensions'>";
+		$res .= debut_cadre_trait_couleur('plugin-24.png',true,'',_L('Extensions'),
+		'liste_extensions');
+		$res .= "<p>"._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@. Elles ne sont pas d&#233;sactivables.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))."</p>";
+
+		$afficher = charger_fonction("afficher_$format",'plugins');
+		$res .= $afficher($liste_extensions,$liste_plugins_actifs);
+
+		$res .= fin_cadre_trait_couleur(true);
+		$res .= "</div>\n";
+	}
+	return $res;
+}
+
 // http://doc.spip.org/@affiche_les_plugins
-function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
-	$get_infos = charger_fonction('get_infos','plugins');
+function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='liste'){
 
 #	(spip_timer('cachexml'));
 
-	if ($format=='liste'){
-		$liste_plugins = array_flip($liste_plugins);
-		foreach(array_keys($liste_plugins) as $chemin) {
-			$info = $get_infos($chemin);
-			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
-		}
-		asort($liste_plugins);
-		$res = affiche_liste_plugins($liste_plugins,$liste_plugins_actifs);
-	}
-	else
-		$res = affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs);
+	if (!in_array($format,array('liste','repertoires')))
+		$format = 'repertoires';
+
+	$afficher = charger_fonction("afficher_$format",'plugins');
+	$res = $afficher($liste_plugins,$liste_plugins_actifs);
 
 #	var_dump(spip_timer('cachexml'));
 
@@ -199,209 +192,6 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 		});
 	});
 	") . $res;
-}
-
-// http://doc.spip.org/@affiche_block_initiale
-function affiche_block_initiale($initiale,$block,$block_actif){
-	if (strlen($block)){
-		return "<li>"
-		  . bouton_block_depliable($initiale,$block_actif?true:false)
-		  . debut_block_depliable($block_actif)
-		  . "<ul>$block</ul>"
-		  . fin_block()
-		  . "</li>";
-	}
-	return "";
-}
-
-// http://doc.spip.org/@affiche_liste_plugins
-function affiche_liste_plugins($liste_plugins, $liste_plugins_actifs){
-	$block_par_lettre = count($liste_plugins)>10;
-	$fast_liste_plugins_actifs = array_flip($liste_plugins_actifs);
-	$maxiter=1000;
-	$res = '';
-	$block = '';
-	$initiale = '';
-	$block_actif = false;
-	foreach($liste_plugins as $plug => $nom){
-		if (($i=substr($nom,0,1))!==$initiale){
-			$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
-			$initiale = $i;
-			$block = '';
-			$block_actif = false;
-		}
-		// le rep suivant
-		$actif = @isset($fast_liste_plugins_actifs[$plug]);
-		$block_actif = $block_actif | $actif;
-		$id = substr(md5($plug),0,16);
-		$block .= "<li>"
-			. ligne_plug($plug, $actif, $id)
-			. "</li>\n";
-	}
-	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
-	return "<ul>"
-	. $res
-	. "</ul>";
-}
-
-// http://doc.spip.org/@tree_open_close_dir
-function tree_open_close_dir(&$current,$target,$deplie=array()){
-	if ($current == $target) return "";
-	$tcur = explode("/",$current);
-	$ttarg = explode("/",$target);
-	$tcom = array();
-	$output = "";
-	// la partie commune
-	while (reset($tcur)==reset($ttarg)){
-		$tcom[] = array_shift($tcur);
-		array_shift($ttarg);
-	}
-	// fermer les repertoires courant jusqu'au point de fork
-	while($close = array_pop($tcur)){
-		$output .= "</ul>\n";
-		$output .= fin_block();
-		$output .= "</li>\n";
-	}
-	$chemin = "";
-	if (count($tcom))
-		$chemin .= implode("/",$tcom)."/";
-	// ouvrir les repertoires jusqu'a la cible
-	while($open = array_shift($ttarg)){
-		$visible = @isset($deplie[$chemin.$open]);
-		$chemin .= $open . "/";
-		$output .= "<li>";
-		$output .= bouton_block_depliable($chemin,$visible);
-		$output .= debut_block_depliable($visible);
-
-		$output .= "<ul>\n";
-	}
-	$current = $target;
-	return $output;
-}
-
-// vraiment n'importe quoi la gestion des chemins des plugins
-// une fonction pour aider...
-// http://doc.spip.org/@chemin_plug
-function chemin_plug($racine, $plug) {
-	return preg_replace(',[^/]+/[.][.]/,', '', "$racine/$plug");
-}
-
-// http://doc.spip.org/@affiche_arbre_plugins
-function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
-	$racine = basename(_DIR_PLUGINS);
-	$init_dir = $current_dir = "";
-	// liste des repertoires deplies : construit en remontant l'arbo de chaque plugin actif
-	// des qu'un path est deja note deplie on s'arrete
-	$deplie = array($racine=>true);
-	$fast_liste_plugins_actifs=array();
-	foreach($liste_plugins_actifs as $key=>$plug){
-		$chemin_plug = chemin_plug($racine, $plug);
-		$fast_liste_plugins_actifs[$chemin_plug]=true;
-		$dir = dirname($chemin_plug);$maxiter=100;
-		while(strlen($dir) && !isset($deplie[$dir]) && $dir!=$racine && $maxiter-->0){
-			$deplie[$dir] = true;
-			$dir = dirname($dir);
-		}
-	}
-	
-	// index repertoires --> plugin
-	$dir_index=array();
-	foreach($liste_plugins as $key=>$plug){
-		$liste_plugins[$key] = chemin_plug($racine, $plug);
-		$dir_index[dirname($liste_plugins[$key])][] = $key;
-	}
-	
-	$visible = @isset($deplie[$current_dir]);
-	$maxiter=1000;
-
-	$res = '';
-	while (count($liste_plugins) && $maxiter--){
-		// le rep suivant
-		$dir = dirname(reset($liste_plugins));
-		if ($dir != $current_dir)
-			$res .= tree_open_close_dir($current_dir,$dir,$deplie);
-			
-		// d'abord tous les plugins du rep courant
-		if (isset($dir_index[$current_dir]))
-			foreach($dir_index[$current_dir] as $key){
-				$plug = $liste_plugins[$key];
-				$actif = @isset($fast_liste_plugins_actifs[$plug]);
-				$id = substr(md5($plug),0,16);
-				$res .= "<li>"
-				. ligne_plug(str_replace(_DIR_PLUGINS, '', _DIR_RACINE.$plug), $actif, $id)
-				. "</li>\n";
-				unset($liste_plugins[$key]);
-			}
-	}
-	$res .= tree_open_close_dir($current_dir,$init_dir, true);
-
-	return "<ul>"
-	. $res
-	. "</ul>";
-}
-
-// http://doc.spip.org/@ligne_plug
-function ligne_plug($plug_file, $actif, $id){
-	global $spip_lang_right;
-	static $id_input=0;
-	static $versions = array();
-
-	$erreur = false;
-	$s = "";
-
-	$get_infos = charger_fonction('get_infos','plugins');
-	$info = $get_infos($plug_file);
-	
-	// plug pour CFG
-	if ($actif
-	AND defined('_DIR_PLUGIN_CFG')) {
-		if (include_spip('inc/cfg') // test CFG version >= 1.0.5
-		AND $i = icone_lien_cfg(_DIR_PLUGINS.$plug_file))
-			$s .= '<div style="float:right;">'.$i.'</div>';
-	}
-
-
-	$versions[$info['prefix']] = isset($versions[$info['prefix']]) ?
-			$versions[$info['prefix']] + 1 : '';
-	$s .= "<div id='" . $info['prefix'] . $versions[$info['prefix']] . "' class='nomplugin ".($actif?'nomplugin_on':'')."'>";
-	if (isset($info['erreur'])){
-		$s .=  "<div class='plugin_erreur'>";
-		$erreur = true;
-		foreach($info['erreur'] as $err)
-			$s .= "/!\ $err <br/>";
-		$s .=  "</div>";
-	}
-
-	$etat = 'dev';
-	if (isset($info['etat']))
-		$etat = $info['etat'];
-	$nom = typo($info['nom']);
-
-	$id = substr(md5("aide_$plug_file"),0,8);
-
-	// si $actif vaut -1, c'est actif, et ce n'est pas desactivable (extension)
-	if (!$erreur
-	AND $actif>=0
-	){
-		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
-		$s .= "\n<input type='checkbox' name='$name' id='label_$id_input' value='O'";
-		$s .= $actif?" checked='checked'":"";
-		$s .= " class='check' />";
-		$s .= "\n<label for='label_$id_input'>"._T('activer_plugin')."</label>";
-	}
-	$id_input++;
-
-	$url_stat = generer_url_ecrire(_request('exec'),"plugin=".urlencode($plug_file));
-	$s .= "<a href='$url_stat' rel='info'>$nom</a>";
-
-	// afficher les details d'un plug en secours ; la div sert pour l'ajax
-	$s .= "<div class='info'>";
-	if (urldecode(_request('plugin'))==$plug_file OR urldecode(_request('plugin'))==substr(_DIR_PLUGINS,strlen(_DIR_RACINE)) . $plug_file)
-		$s .= affiche_bloc_plugin($plug_file, $info);
-	$s .= "</div>";
-
-	$s .= "</div>";
-	return $s;
 }
 
 /**

@@ -382,6 +382,9 @@ ecrire/maj/vieille_base/1927/serial.php -text
 ecrire/maj/vieille_base/1927/typedoc.php -text
 ecrire/maj/vieille_base/charger.php -text
 ecrire/maj/vieille_base/create.php -text
+ecrire/plugins/afficher_liste.php -text
+ecrire/plugins/afficher_plugin.php -text
+ecrire/plugins/afficher_repertoires.php -text
 ecrire/plugins/extraire_boutons.php -text
 ecrire/plugins/extraire_pipelines.php -text
 ecrire/plugins/get_infos.php -text
