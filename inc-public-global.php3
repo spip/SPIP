@@ -18,14 +18,14 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		if (!$contexte)
 			$contexte = calculer_contexte();
 
-		spip_timer();
+		spip_timer('calculer_page');
 		$page = calculer_page($chemin_cache,
 			array('fond' => $fond,
 				'contexte' => $contexte),
 			$delais,
 			$inclusion);
-		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('.spip_timer().
-		"): $chemin_cache");
+		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
+		.spip_timer('calculer_page')."): $chemin_cache");
 		$lastmodified = time();
 
 		// on vient d'ecrire le cache : creer un .NEW fantome qui indique
@@ -41,23 +41,12 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		}
 
 	} else {
-		lire_fichier ($chemin_cache, $page['texte']);
-		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
-		# spip_log ("cache $chemin_cache $lasmodified");
-
-		// Analyser la carte d'identite du squelette
-		if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match)) {
-			$page['texte'] = substr($page['texte'], strlen($match[0]));
-			if (is_array($tablo = unserialize($match[1])))
-				foreach ($tablo as $var=>$val)
-					$page[$var] = $val;
-		}
 
 		// Le fichier compagnon NEW existe => ce cache est utilise
 		// pour la premiere fois : on change alors d'invalideur 't'
 		// pour le rendre plus perenne
 		if (@file_exists($chemin_cache.'.NEW')) {
-			spip_log ("premier acces: $chemin_cache.NEW");
+			spip_log ("premier acces: $chemin_cache (.NEW)");
 			// Attention ne pas mettre time()+$delais mais quelque chose
 			// de plus grand, sinon il y a risque de concurrence entre
 			// l'invalideur et un appel public de page ; plus on en ajoute
@@ -73,6 +62,30 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 			if ($GLOBALS['db_ok'])
 				@unlink($chemin_cache.'.NEW');
 		}
+
+		//
+		// Lire le fichier cache
+		//
+		lire_fichier ($chemin_cache, $page['texte']);
+		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
+		# spip_log ("cache $chemin_cache $lasmodified");
+
+		//
+		// Lire sa carte d'identite & fixer le contexte global
+		//
+		if (preg_match("/^<!-- ([^\n]*) -->\n(.*)/ms", $page['texte'], $match)
+		AND is_array($meta_donnees = unserialize($match[1]))) {
+			foreach ($meta_donnees as $var=>$val)
+				$page[$var] = $val;
+
+			$page['texte'] = $match[2];
+
+			// Remplir les globals pour les boutons d'admin
+			if (!$inclusion AND is_array($page['contexte']))
+				foreach ($page['contexte'] as $var=>$val)
+					$GLOBALS[$var] = $val;
+		}
+
 	}
 
 	return $page;
@@ -139,20 +152,13 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		} else {
 			@header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
-
-		//
-		// Ajouter au besoin les boutons admins
-		//
-		if ($page_boutons_admin = admin_page($use_cache, $page['texte'])) {
-			$page['texte'] = $page_boutons_admin;
-			$page['process_ins'] = 'php';
-		}
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 	return $page;
 }
+
 
 function terminer_public_global($use_cache, $chemin_cache='') {
 
@@ -172,6 +178,14 @@ function terminer_public_global($use_cache, $chemin_cache='') {
 		include_local ("inc-stats.php3");
 		ecrire_stats();
 	}
+}
+
+// Cette fonction sert au dernier ob_start() de inc-public : elle
+// va absorber les eventuels messages d'erreur de inc_cron(), permettant
+// de ne pas planter le content-length qu'on a annonce ; decommenter la ligne
+// pour afficher les bugs
+function masquer_les_bugs ($bugs) {
+	# return $bugs;
 }
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
@@ -206,18 +220,15 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 //
 function admin_page($cached, $texte) {
 	if (!$GLOBALS['flag_preserver']
-	&& ($admin = $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
-		include_local('inc-admin.php3');
+	&& ($GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
 		return calcul_admin_page($cached, $texte);
 	}
 	return false; // pas de boutons admin
 }
 
 // Si l'admin a demande un affichage
-function afficher_page_si_demande_admin ($type, $texte, $fichier){
-	if (
-	$GLOBALS['bouton_admin_debug']
-	AND $GLOBALS['var_afficher_debug'] == $type
+function afficher_page_si_demande_admin ($type, $texte, $fichier) {
+	if ($GLOBALS['var_afficher_debug'] == $type
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
 		include_local('inc-admin.php3');
 		page_debug($type,$texte,$fichier);
@@ -235,9 +246,26 @@ function cherche_image_nommee($nom) {
 	}
 }
 
+
+// La fonction ci-dessous permet a un script de flusher ses resultats partiels
+function spip_ob_flush() {
+	if (!$GLOBALS['flag_ob']
+	OR !strlen($contenu = ob_get_contents())) return false;
+
+	ob_end_clean();
+	echo $contenu;
+	ob_start();
+
+	// Messages pour inc-public :
+	// 1. les boutons ont ete affiches par @@START@@
+	$GLOBALS['affiche_boutons_admin'] = false;
+	// 2. Pour memoire : ne pas envoyer d'entetes; @header() suffit
+}
+
+
+// Gestion des taches de fond ?  toutes les 5 secondes
+// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
-	// Gestion des taches de fond ?  toutes les 5 secondes
-	// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 	if (!@file_exists('ecrire/data/cron.lock')
 	OR (time() - @filemtime('ecrire/data/cron.lock') > 5)) {
 

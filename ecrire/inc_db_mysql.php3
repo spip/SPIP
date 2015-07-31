@@ -146,7 +146,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	$q = spip_query("SELECT GET_LOCK('$nom', $timeout)");
 	list($lock_ok) = spip_fetch_array($q);
 
-	if (!$lock_ok) spip_log("pas de lock sql pour $lock");
+	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
 	return $lock_ok;
 }
 

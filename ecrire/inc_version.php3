@@ -266,7 +266,7 @@ $flag_revisions = ($flag_pcre AND function_exists("gzcompress"));
 // Appliquer le prefixe cookie
 //
 function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
-	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
+	$name = ereg_replace ('^spip_', $GLOBALS['cookie_prefix'].'_', $name);
 	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
 
 	if ($secure)
@@ -283,15 +283,15 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 if ($cookie_prefix != 'spip') {
 	reset ($HTTP_COOKIE_VARS);
 	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
-		if (ereg('^spip', $name)) {
+		if (ereg('^spip_', $name)) {
 			unset($HTTP_COOKIE_VARS[$name]);
 			unset($$name);
 		}
 	}
 	reset ($HTTP_COOKIE_VARS);
 	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
-		if (ereg('^'.$cookie_prefix, $name)) {
-			$spipname = ereg_replace ('^'.$cookie_prefix, 'spip', $name);
+		if (ereg('^'.$cookie_prefix.'_', $name)) {
+			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
 			$HTTP_COOKIE_VARS[$spipname] = $INSECURE[$spipname] = $value;
 			$$spipname = $value;
 		}
@@ -456,69 +456,28 @@ function tester_upload() {
 // Reglage de l'output buffering : si possible, generer une sortie
 // compressee pour economiser de la bande passante
 //
-
+function test_obgz () {
+	return
+	$GLOBALS['auto_compress']
+	&& $GLOBALS['flag_ob']
+	&& $GLOBALS['flag_obgz']
+	// special bug de proxy
+	&& !eregi("NetCache|Hasd_proxy", $GLOBALS['HTTP_VIA'])
+	// special bug Netscape Win 4.0x
+	&& !eregi("Mozilla/4\.0[^ ].*Win", $GLOBALS['HTTP_USER_AGENT'])
+	// special bug Apache2x
+	&& !eregi("Apache(-[^ ]+)?/2", $GLOBALS['SERVER_SOFTWARE'])
+	&& !($GLOBALS['flag_sapi_name'] AND ereg("^apache2", @php_sapi_name()))
+	// si la compression est deja commencee, stop
+	&& !@ini_get("zlib.output_compression")
+	&& !@ini_get("output_handler");
+}
 // si un buffer est deja ouvert, stop
 if ($flag_ob AND !strlen(@ob_get_contents())) {
 	@header("Vary: Cookie, Accept-Encoding");
-	@ob_start("spip_ob_handler");
-} else {
-	$flag_ob = false;
-	@header("Vary: Cookie");
+#	if (test_obgz())
+#		ob_start('ob_gzhandler');
 }
-
-//
-// La fonction elle-meme
-//
-function spip_ob_handler ($page) {
-	global $var_recherche, $flag_pcre, $flag_preserver, $flag_ecrire;
-	static $buffer_continuation = false;
-
-	// buffer de continuation ?
-	global $ob_send;
-	if ($ob_send)
-		$buffer_continuation = true;
-
-	// Surligner les mots sur le site public
-	if ($var_recherche AND $flag_pcre AND !$flag_preserver AND !$flag_ecrire) {
-		include_ecrire("inc_surligne.php3");
-		if ($page_surligne = surligner_mots($page, $var_recherche))
-			$page = $page_surligne;
-	}
-
-	// Tests compression
-	$use_gz = $GLOBALS['auto_compress'] && $GLOBALS['flag_obgz']
-	// pas de continuation detectee
-	&& !$buffer_continuation
-	// special bug de proxy
-	&& !eregi("NetCache|Hasd_proxy", $HTTP_VIA)
-	// special bug Netscape Win 4.0x
-	&& !eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT)
-	// special bug Apache2x
-	&& !eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE)
-	&& !($flag_sapi_name && ereg("^apache2", @php_sapi_name()))
-	// si la compression est deja commencee, stop
-	&& !@ini_get("zlib.output_compression") && !@ini_get("output_handler");
-
-	if ($use_gz AND ($page_gz = @ob_gzhandler($page,5)) !== false)
-		$page = $page_gz;
-
-	# spip_log('Content-Length: '.strlen($page).($page_gz? ', compression':'').($buffer_continuation ? ", portion":""));
-	if (!$buffer_continuation) {
-		@header('Content-Length: '.strlen($page));
-		@header('Connection: close');
-	}
-
-	return $page;
-}
-
-// La fonction ci-dessous permet a un script de flusher ses resultats partiels
-// (en contrepartie cela desactive la compression)
-function spip_ob_flush() {
-	$GLOBALS['ob_send'] = true;
-	ob_end_flush();
-	ob_start('spip_ob_handler');
-}
-
 
 
 class Link {
@@ -893,32 +852,48 @@ function spip_flock($filehandle, $mode, $fichier) {
 		return @flock($filehandle, $mode);
 }
 
+function spip_file_get_contents ($fichier) {
+	if (substr($fichier, -3) != '.gz') {
+		if (function_exists('file_get_contents'))
+			return @file_get_contents($fichier);
+		else
+			return join('', file($fichier));
+	} else
+			return join('', gzfile($fichier));
+	
+}
 // options = array(
 // 'size' => 1024      # recuperer seulement le debut
 // 'phpcheck' => 'oui' # verifier qu'on a bien du php
+// dezippe automatiquement les fichiers .gz
 function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
 	if (!@file_exists($fichier))
 		return false;
+
+	#spip_timer('lire_fichier');
+
 	if ($fl = @fopen($fichier, 'r')) {
 
 		// verrou lecture
 		while (!spip_flock($fl, LOCK_SH, $fichier));
 
-		if (!$s = $options['size'])
-			$s = @filesize($fichier);
-		else
-			$s = min($s, @filesize($fichier));
-		$contenu = @fread($fl, $s);
+		// lire le fichier
+		$contenu = spip_file_get_contents($fichier);
 
 		// liberer le verrou
 		spip_flock($fl, LOCK_UN, $fichier);
 		@fclose($fl);
 
 		// Verifications
-		$ok = (strlen($contenu) == $s);
+		$ok = true;
 		if ($options['phpcheck'] == 'oui')
 			$ok &= (ereg("[?]>\n?$", $contenu));
+
+		#spip_log("$fread $fichier ".spip_timer('lire_fichier'));
+		if (!$ok)
+			spip_log("echec lecture $fichier");
+
 		return $ok;
 	}
 }
@@ -927,6 +902,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 //
 // Ecrire un fichier de maniere un peu sure
 //
+// zippe les fichiers .gz
 function ecrire_fichier ($fichier, $contenu) {
 
 	// Ecriture dans un fichier temporaire
@@ -936,11 +912,26 @@ function ecrire_fichier ($fichier, $contenu) {
 	$fichiertmp = $dir.'/'
 	.uniqid(substr(md5($fichier),0,6).'-'
 	.@getmypid()).".tmp";
-	if ($ft = @fopen($fichiertmp, 'wb')) {
+
+	$gzip = (substr($fichier, -3) == '.gz');
+
+	if ($gzip) {
+		$fopen = gzopen;
+		$fputs = gzputs;
+		$fclose = gzclose;
+	} else {
+		$fopen = fopen;
+		$fputs = fputs;
+		$fclose = fclose;
+	}
+
+	#spip_timer('ecrire_fichier');
+
+	if ($ft = @$fopen($fichiertmp, 'wb')) {
 		// on en profite pour tester flock()
 		$flock = test_flock($dir, $ft);
-		$s = @fputs($ft, $contenu);
-		@fclose($ft);
+		$s = @$fputs($ft, $contenu);
+		@$fclose($ft);
 		$ok = (strlen($contenu) == $s);
 	}
 
@@ -963,6 +954,8 @@ function ecrire_fichier ($fichier, $contenu) {
 	// en cas d'echec effacer le temporaire
 	if (!$ok)
 		@unlink($fichiertmp);
+
+	#spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
 
 	return $ok;
 }

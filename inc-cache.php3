@@ -18,9 +18,10 @@ function nettoyer_uri() {
 	return $fichier_requete;
 }
 
-// le format souhaite : "CACHE/a/8400/bout-d-url.md5"
+// le format souhaite : "CACHE/a/8400/bout-d-url.md5(.gz)"
 function generer_nom_fichier_cache($contexte='', $fond='') {
 	global $delais;
+	global $flag_gz, $compresser_cache;
 
 	if ($delais == 0) return '';
 
@@ -54,7 +55,9 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
 	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
-	return $subdir.$subdir2.$fichier_cache;
+	$gzip = $flag_gz && $compresser_cache;
+
+	return $subdir.$subdir2.$fichier_cache.$gzip;
 }
 
 
@@ -62,11 +65,8 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 // Doit-on recalculer le cache ?
 //
 
-function utiliser_cache($chemin_cache, $delais) {
+function utiliser_cache(&$chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS;
-
-	// A priori cache
-	$ok_cache = true;
 
 	// Existence du fichier
 	$ok_cache = @file_exists($chemin_cache);
@@ -145,18 +145,6 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 }
 
 
-// Recuperer les meta donnees du fichier cache
-function meta_donnees_cache ($chemin_cache) {
-	// Lire le debut du fichier cache ; permet de savoir s'il n'a
-	// pas ete invalide par une modif sur une table
-	if (lire_fichier($chemin_cache, $contenu, array('size' => 1024))) {
-		if (!preg_match("/^<!-- ([^\n]*) -->\n/", $contenu, $match))
-			return false; // non conforme
-		$meta_donnees = unserialize($match[1]);
-		return $meta_donnees;
-	}
-}
-
 // Determination du fichier cache (si besoin)
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 	if ($delais == 0 OR !empty($GLOBALS['HTTP_POST_VARS'])) {
@@ -165,18 +153,6 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 	} else {
 		// Le fichier cache est-il valide ?
 		$use_cache = utiliser_cache($chemin_cache, $delais);
-
-		if ($use_cache) {
-			$meta_donnees = meta_donnees_cache($chemin_cache);
-			if (!is_array($meta_donnees)) {
-				$use_cache = false;
-			} else {
-				// Remplir les globals pour les boutons d'admin
-				if (is_array($meta_donnees['contexte']))
-				foreach ($meta_donnees['contexte'] as $var=>$val)
-					$GLOBALS[$var] = $val;
-			}
-		}
 
 		// S'il faut calculer, poser un lock SQL
 		if (!$use_cache) {

@@ -81,20 +81,22 @@ function charger_squelette ($squelette) {
 		$skel_compile = "<"."?php\n"
 		. calculer_squelette($skel, $nom, $ext, $sourcefile)."\n?".">";
 
+		// Envoyer le debugguer
+		afficher_page_si_demande_admin ('skel', $skel_compile, _L('Fond : ').$sourcefile." ; fichier produit : ".$phpfile);
 		// Evaluer le squelette
-		afficher_page_si_demande_admin ('skel', $skel_compile, "CACHE/skel_$nom.php");
 		eval('?'.'>'.$skel_compile);
 
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_compile);
 			return $nom;
-		} else {
-			# bug du compilo !
-			# appeler le bouton admin
-			echo _L("<h1>Horreur, squelette pas compile !</h1>");
-			include_local('inc-admin.php3');
-			echo boutons_admin_debug();
-			exit;
+		}
+		else {
+			// en cas d'erreur afficher les boutons de debug
+			echo "<hr /><h2>".
+			_L("Erreur dans la compilation du squelette")." $sourcefile</h2>";
+			$GLOBALS['bouton_admin_debug'] = true;
+			$GLOBALS['var_afficher_debug'] = 'skel';
+			afficher_page_si_demande_admin ('skel', $skel_compile, _L('Fond : ').$sourcefile." ; fichier produit : ".$phpfile);
 		}
 	}
 }

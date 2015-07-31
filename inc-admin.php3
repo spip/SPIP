@@ -15,36 +15,27 @@ function bouton_admin($titre, $lien) {
 }
 
 
-function boutons_admin_debug () {
-	if ($GLOBALS['bouton_admin_debug']
+function boutons_admin_debug($forcer_debug = false) {
+	if (($forcer_debug OR $GLOBALS['bouton_admin_debug']
+	OR $GLOBALS['var_afficher_debug'])
 	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 		include_ecrire('inc_filtres.php3');
 
 		$link = $GLOBALS['clean_link'];
-		if ($link->getvar('var_afficher_debug') != 'page') {
-			$link->addvar('var_afficher_debug', 'page');
-			$ret .= bouton_admin(_L('Debug cache'), $link->getUrl());
-		}
+		$link->addvar('var_afficher_debug', 'page');
+		$link->addvar('recalcul', 'oui');
+		$ret .= bouton_admin(_L('Debug cache'), $link->getUrl());
 
 		$link = $GLOBALS['clean_link'];
-		if ($link->getvar('var_afficher_debug') != 'skel') {
-			$link->addvar('var_afficher_debug', 'skel');
-			$link->addvar('recalcul', 'oui');
-			$ret .= bouton_admin(_L('Debug skel'), $link->getUrl());
-		}
-
-		$link = $GLOBALS['clean_link'];
-		if ($link->getvar('var_afficher_debug') != '') {
-			$link->delvar('var_afficher_debug');
-			$link->addvar('recalcul', 'oui');
-			$ret .= bouton_admin(_T('icone_retour'), $link->getUrl());
-		}
+		$link->addvar('var_afficher_debug', 'skel');
+		$link->addvar('recalcul', 'oui');
+		$ret .= bouton_admin(_L('Debug skel'), $link->getUrl());
 	}
 	
 	return $ret;
 }
 
-function afficher_boutons_admin($pop) {
+function afficher_boutons_admin($pop, $forcer_debug = false) {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_lang.php3");
@@ -54,8 +45,8 @@ function afficher_boutons_admin($pop) {
 		$q = spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'");
 		$row = spip_fetch_array($q);
 		$lang = $row['lang'];
+		lang_select($lang);
 	}
-	lang_select($lang);
 
 	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 	// puis celle du squelette (.spip-admin, cf. impression.css)
@@ -86,7 +77,8 @@ function afficher_boutons_admin($pop) {
 	// Bouton Recalculer
 	$link = $GLOBALS['clean_link'];
 	$link->addVar('recalcul', 'oui');
-	$lien =  $link->getUrl();
+	$link->delVar('var_afficher_debug');
+	$lien = $link->getUrl();
 	$ret .= bouton_admin(_T('admin_recalculer').$pop, $lien);
 
 	// Bouton statistiques
@@ -101,7 +93,7 @@ function afficher_boutons_admin($pop) {
 	}
 
 	// Boutons debug
-	$ret .= boutons_admin_debug();
+	$ret .= boutons_admin_debug($forcer_debug);
 
 	$ret .= "</ul></div></div></div>";
 
@@ -111,7 +103,8 @@ function afficher_boutons_admin($pop) {
 }
 
 function calcul_admin_page($cached, $texte) {
-	$a = '<'.'?php echo afficher_boutons_admin("'. ($cached ? ' *' : '').'"); ?'.'>';
+
+	$a = afficher_boutons_admin($cached ? ' *' : '');
 
 	// La constante doit etre definie a l'identique dans inc-form-squel
 	// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
@@ -133,12 +126,18 @@ function page_debug($type,$texte,$fichier) {
 	<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
 	if (@file_exists('spip_admin_perso.css')) echo "\t<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
 	echo "</head><body>\n";
-	echo "<code>$fichier</code>\n";
-	echo '<div class="spip-admin-bloc">
-	<div class="spip-admin">';
-	echo boutons_admin_debug();
-	echo "</ul></div><hr />\n";
+	echo "<p style='whitespace: nowrap;'><br /><code>$fichier</code><hr />\n";
+
+	$tableau = explode("\n", $texte);
+	$format = "%0".strlen(count($tableau))."d";
+	$texte = '';
+	foreach ($tableau as $ligne)
+		$texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
 	highlight_string($texte);
+
+	echo "</p>";
+	echo afficher_boutons_admin('', true);
+	echo "</body></html>\n";
 }
 
 

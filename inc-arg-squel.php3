@@ -412,16 +412,12 @@ function calculer_param_date($date_compare, $date_orig) {
 
 // Calculer les parametres
 function calculer_param_dynamique($val, &$boucles, $idb) {
-	if (ereg("^#([A-Za-z0-9_-]+)$",$val,$m)) {
+	if (ereg("^#([A-Za-z0-9_-]+)$", $val, $m)) {
 		$c = calculer_champ('',$m[1], $idb, $boucles,$idb);
-		#spip_log("trouve $c");
-		if ($a) {
-			return array(_T('info_erreur_squelette'),
-			($val . _L("&nbsp;: champ interdit dans cette comparaison"))) ;
-		} else if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $c, $v))
+		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $c, $v))
 			return $v[0];
 		else {
-			spip_log("hum : $c");
+			spip_log("champ inexistant ? : $c");
 			return $c;
 		}
 	} else {
