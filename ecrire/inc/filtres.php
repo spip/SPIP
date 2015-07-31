@@ -1549,6 +1549,7 @@ function extraire_balise($texte, $tag='a') {
 
 // extraire toutes les balises du type demande, sous forme de tableau
 // Si on a passe un tableau de textes, renvoyer un tableau de resultats
+// http://doc.spip.org/@extraire_balises
 function extraire_balises($texte, $tag='a') {
 	if (is_array($texte)) {
 		array_walk($texte,
