@@ -364,6 +364,7 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 	'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
 	'info_creer_repertoire_2' => 'binnen in de submap <b>@repertoire@</b>, vervolgens :',
 	'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Uitvouwen',
 	'info_descriptif_nombre' => 'Beschrijving(en):',
 	'info_description' => 'Beschrijving:',

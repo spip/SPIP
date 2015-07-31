@@ -364,6 +364,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Prosím, vytvorte súbor alebo priečinok s názvom:',
 	'info_creer_repertoire_2' => 'v podpriečinku <b>@repertoire@</b>, potom',
 	'info_creer_vignette' => 'automatické vytváranie miniatúr',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Rozložiť',
 	'info_descriptif_nombre' => 'Popis(y):',
 	'info_description' => 'Popis:',

@@ -359,6 +359,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 	'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
 	'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>@repertoire@</b>, després:',
 	'info_creer_vignette' => 'creació automàtica de la miniatura',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripció(ns):',
 	'info_description' => 'Descripció:',

@@ -364,6 +364,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Vă rugăm să creaţi un fișier sau un director numit :',
 	'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi :',
 	'info_creer_vignette' => 'crearea viniétei în mod automat ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desfaceţi',
 	'info_descriptif_nombre' => 'descriere(i) :',
 	'info_description' => 'Descriere :',

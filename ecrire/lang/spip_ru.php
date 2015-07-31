@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 	'0_langue' => 'Русский [ru]',
 	'0_liste' => 'spip-ru@rezo.net',
-	'0_mainteneur' => '2009-2010 Serge Markitanenko (ss1945@gmail.com).2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com)upd. Maxim Krioukov (krumax@mail.ru)',
+	'0_mainteneur' => '2009-2012 Serge Markitanenko (ss1945@gmail.com).2005-2007 Vitali Zhulkovsky (vzhulkovsky@cmp.com)upd. Maxim Krioukov (krumax@mail.ru)',
 
 	// A
 	'access_interface_graphique' => 'Возврат к полному интерфейсу',
@@ -113,8 +113,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_fmt_jour_mois_annee' => '@jourmois@ @annee@',
 	'date_fmt_mois_annee' => '@nommois@ @annee@',
 	'date_fmt_nomjour_date' => 'от @nomjour@ @date@',
-	'date_fmt_periode_from' => 'From', # NEW
-	'date_fmt_periode_to' => 'to', # NEW
+	'date_fmt_periode_from' => 'С',
+	'date_fmt_periode_to' => 'по',
 	'date_heures' => 'час',
 	'date_hier' => 'вчера',
 	'date_il_y_a' => '@delai@ назад',
@@ -184,7 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_mois_2' => 'Февраль',
 	'date_mois_2_abbr' => 'Feb', # NEW
 	'date_mois_3' => 'Март',
-	'date_mois_3_abbr' => 'Mar', # NEW
+	'date_mois_3_abbr' => 'Мар',
 	'date_mois_4' => 'Апрель',
 	'date_mois_4_abbr' => 'Apr', # NEW
 	'date_mois_5' => 'Май',
@@ -366,6 +366,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_creer_repertoire' => 'Пожалуйста создайте файл или директорию с названием:',
 	'info_creer_repertoire_2' => 'в поддиректории <b>@repertoire@</b>, потом ',
 	'info_creer_vignette' => 'автоматическое создание миниатюр изображений',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Откройте',
 	'info_descriptif_nombre' => 'описание(я):',
 	'info_description' => 'Описание:',
@@ -623,7 +624,7 @@ and connect again to the site.
 	'suivant' => 'следующий',
 
 	// T
-	'taille_go' => '@taille@ Go', # NEW
+	'taille_go' => '@taille@ Гб',
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => '@taille@ bytes',

@@ -373,6 +373,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Mersi kré inn fisyé o inn répertwar èk non-la :',
 	'info_creer_repertoire_2' => 'andann lo sou-répertwar <b>@repertoire@</b>, é aprè :',
 	'info_creer_vignette' => 'pou kréy inn tite-limaz otomatikman',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Dépliy',
 	'info_descriptif_nombre' => 'Bann zafèr sak i kontyin :',
 	'info_description' => 'Kosa ou va trouv isi :',

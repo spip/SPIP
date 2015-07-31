@@ -363,6 +363,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Krouit ur restr pe ur c\'havlec\'h anvet :',
 	'info_creer_repertoire_2' => 'en iskavlec\'h <b>@repertoire@</b>, ha :',
 	'info_creer_vignette' => 'krouiñ emgefreek ar skeudennig',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Displegañ',
 	'info_descriptif_nombre' => 'deskrivadur(ioù) :',
 	'info_description' => 'Deskrivadur :',

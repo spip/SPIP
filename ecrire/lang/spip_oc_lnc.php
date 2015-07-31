@@ -365,6 +365,7 @@ del sit "@nom_site_spip@" (@adresse_site@) :',
 	'info_creer_repertoire' => 'Volgatz crear un fichièr o un repertòri nommat',
 	'info_creer_repertoire_2' => 'dintre lo sosrepertòri   <b>@repertoire@</b>, puèi:',
 	'info_creer_vignette' => 'creacion automatica de la vinheta',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descriptiu(s) :',
 	'info_description' => 'Descripcion :',

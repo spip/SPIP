@@ -365,6 +365,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'info_creer_repertoire' => 'Kreye yon fichye ousinon yon répètwa sak i rele :',
 	'info_creer_repertoire_2' => 'nan sou-repètwa <b>@repertoire@</b>, epi :', # MODIF
 	'info_creer_vignette' => 'kreyasyon viyèt otomatik ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Etann',
 	'info_descriptif_nombre' => 'dekrisyon(yo) :',
 	'info_description' => 'Dekrisyon :',

@@ -362,6 +362,7 @@ wird Ihre Adresse beibehalten):
 	'info_creer_repertoire' => 'Bitte legen Sie eine Datei oder ein Verzeichnis mit diesem Namen an: ',
 	'info_creer_repertoire_2' => '(Im Unterverzeichnis <b>@repertoire@</b>)',
 	'info_creer_vignette' => 'Miniaturbilder automatisch anlegen',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Öffnen',
 	'info_descriptif_nombre' => 'Beschreibung(en):',
 	'info_description' => 'Beschreibung:',

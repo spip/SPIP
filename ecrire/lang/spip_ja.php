@@ -368,6 +368,7 @@ sera ignorée) :
 	'info_creer_repertoire' => '呼び出されたファイルかディレクトリを作って下さい:',
 	'info_creer_repertoire_2' => 'サブディレクトリ <b>@repertoire@</b>内、それから', # MODIF
 	'info_creer_vignette' => '自動的に作成されたサムネイル',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => '示す',
 	'info_descriptif_nombre' => '記述:',
 	'info_description' => '記述:',

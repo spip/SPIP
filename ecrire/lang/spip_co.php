@@ -366,6 +366,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Create puru un schedariu o un cartulare chjamatu :',
 	'info_creer_repertoire_2' => 'à l\'internu di u sottucartulare <b>@repertoire@</b>, poi :',
 	'info_creer_vignette' => 'creazione autumàtica di a figuretta',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Spalancà',
 	'info_descriptif_nombre' => 'descrittivu/i :',
 	'info_description' => 'Discrizzione :',

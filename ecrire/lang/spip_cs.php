@@ -364,6 +364,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Vytvořte soubor nebo adresář s názvem:',
 	'info_creer_repertoire_2' => 'v podadresáři <b>@repertoire@</b>. Potom',
 	'info_creer_vignette' => 'automatické vytvoření náhledu',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Rozbalit',
 	'info_descriptif_nombre' => 'Popis:',
 	'info_description' => 'Popis:',

@@ -367,6 +367,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Silakan buat sebuah berkas atau direktori yang diberi nama:',
 	'info_creer_repertoire_2' => 'dalam sub directori <b>@repertoire@</b>, kemudian',
 	'info_creer_vignette' => 'pembuatan otomatis gambar kecil',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Tidak dilipat',
 	'info_descriptif_nombre' => 'deskripsi:',
 	'info_description' => 'Deskripsi:',

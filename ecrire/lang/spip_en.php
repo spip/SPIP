@@ -364,6 +364,7 @@ the site "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Please create a file or a directory called:',
 	'info_creer_repertoire_2' => 'inside the sub-directory <b>@repertoire@</b>, then',
 	'info_creer_vignette' => 'automatic thumbnail creation',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Unfold',
 	'info_descriptif_nombre' => 'description(s):',
 	'info_description' => 'Description:',

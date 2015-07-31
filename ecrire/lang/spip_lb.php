@@ -363,6 +363,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Setzt e Fichier oder Dossier mat dësem Numm derbäi:',
 	'info_creer_repertoire_2' => 'am Dossier <b>ecrire/data</b>, dann:',
 	'info_creer_vignette' => 'Automatësch Vignetten maachen',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Opklappen',
 	'info_descriptif_nombre' => 'Beschreiwung(en):',
 	'info_description' => 'Beschreiwung:',

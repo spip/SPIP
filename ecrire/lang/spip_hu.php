@@ -363,6 +363,7 @@ the address below. (Otherwise your request will be ignored.):
 	'info_creer_repertoire' => 'Hozzon létre fájlt, vagy mappát, melynek a neve :',
 	'info_creer_repertoire_2' => 'az almappán <b>@repertoire@</b> belül, ezútán :',
 	'info_creer_vignette' => 'a bélyegkép automatikus létrehozása',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Kibontás',
 	'info_descriptif_nombre' => 'Rövid ismertető(k) :',
 	'info_description' => 'Leírás :',

@@ -361,6 +361,7 @@ sera ignorée) :
 	'info_creer_repertoire' => 'Şu isimde bir dosya veya dizin oluşturunuz :',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b> alt-dizini içerisinde, daha sonra :',
 	'info_creer_vignette' => 'otomatik ikon oluşturma',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Açılıp sergilenmesi',
 	'info_descriptif_nombre' => 'tanımlayıcı(lar) :',
 	'info_description' => 'Tanımlama :',

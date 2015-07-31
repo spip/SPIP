@@ -357,6 +357,7 @@ För att bekräfta din nya adress måste du gå till
 	'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',
 	'info_creer_repertoire_2' => 'i under-katalogen <b>@repertoire@</b>, sedan',
 	'info_creer_vignette' => 'skapa en tumnagel automatiskt ',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Öppna',
 	'info_descriptif_nombre' => 'beskrivning(ar):',
 	'info_description' => 'Bekrivning:',

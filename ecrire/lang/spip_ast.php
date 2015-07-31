@@ -365,6 +365,7 @@ sitiu "@nom_site_spip@" (@adresse_login@):',
 	'info_creer_repertoire' => 'Debes crear un ficheru o un direutoriu nomáu:',
 	'info_creer_repertoire_2' => 'dientro\'l direutoriu <b>@repertoire@</b>, y llueu:',
 	'info_creer_vignette' => 'creación automática de la viñeta',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegar',
 	'info_descriptif_nombre' => 'descripción(es):',
 	'info_description' => 'Descripción:',

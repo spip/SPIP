@@ -362,6 +362,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 	'info_creer_repertoire' => 'Fitxategi edo karpeta bat sortu behar duzu, eta hari izen hau jarri :',
 	'info_creer_repertoire_2' => '<b>@repertoire@</b>, azpidirektorioan, eta ondotik :',
 	'info_creer_vignette' => 'miniaturaren sorkuntza automatikoa',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desplegatu',
 	'info_descriptif_nombre' => 'deskribapena(k):',
 	'info_description' => 'Deskribapena :',

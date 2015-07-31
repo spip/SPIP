@@ -368,6 +368,7 @@ sera ignorée) :
 	'info_creer_repertoire' => ':נא צור קובץ או ספרייה אשר נקראת',
 	'info_creer_repertoire_2' => 'בתוך מדור משנה <b>@repertoire@</b>, ואחרי כן:',
 	'info_creer_vignette' => 'יצירה אוטמטית של הגפנית',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'להבהיר',
 	'info_descriptif_nombre' => ':(תיאור(ים',
 	'info_description' => ':תיאור',

@@ -365,6 +365,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 	'info_creer_repertoire' => 'Debe crear un ficheiro ou cartafol chamado :',
 	'info_creer_repertoire_2' => 'dentro do subcartafol <b>@repertoire@</b>, e logo:',
 	'info_creer_vignette' => 'creación automática da viñeta',
+	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Despregar',
 	'info_descriptif_nombre' => 'descrición(s):',
 	'info_description' => 'Descrición:',
