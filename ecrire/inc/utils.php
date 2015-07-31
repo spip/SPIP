@@ -1187,6 +1187,13 @@ function url_de_base() {
 		    test_valeur_serveur($_SERVER['HTTPS']))
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
+	$host = $_SERVER['HTTP_HOST'];
+	if (isset($_SERVER['SERVER_PORT'])
+		AND $port=$_SERVER['SERVER_PORT']
+		AND strpos($host,":")==false){
+		if ($http=="http" AND $port!=80) $host.=":$port";
+		if ($http=="https" AND $port!=443) $host.=":$port";
+	}
 	if (!$GLOBALS['REQUEST_URI']){
 		if (isset($_SERVER['REQUEST_URI'])) {
 			$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
@@ -1198,7 +1205,7 @@ function url_de_base() {
 		}
 	}
 
-	$url[$GLOBALS['profondeur_url']] = url_de_($http,$_SERVER['HTTP_HOST'],$GLOBALS['REQUEST_URI'],$GLOBALS['profondeur_url']);
+	$url[$GLOBALS['profondeur_url']] = url_de_($http,$host,$GLOBALS['REQUEST_URI'],$GLOBALS['profondeur_url']);
 
 	return $url[$GLOBALS['profondeur_url']];
 }
