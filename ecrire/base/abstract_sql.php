@@ -41,6 +41,7 @@ function spip_abstract_serveur($ins_sql, $serveur) {
 	return 'spip_log';
 }
 
+// http://doc.spip.org/@spip_sql_set_connect_charset
 function spip_sql_set_connect_charset($charset,$serveur=''){
 	$f = spip_abstract_serveur('set_connect_charset', $serveur);
 	return $f($charset);
@@ -287,6 +288,7 @@ function test_sql_int($type)
 }
 
 // donner le character set sql fonction de celui utilise par spip
+// http://doc.spip.org/@spip_sql_character_set
 function spip_sql_character_set($charset){
 	$sql_charset_coll = array(
 	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),

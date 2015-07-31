@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@spip_flock
 function spip_flock($handle,$verrou){
 	if (_SPIP_FLOCK)
 		@flock($handle, $verrou);
@@ -165,6 +166,7 @@ function supprimer_fichier($fichier, $lock=true) {
 	@unlink($fichier);
 }
 // Supprimer brutalement, si le fichier existe
+// http://doc.spip.org/@spip_unlink
 function spip_unlink($fichier) {
 	if (is_dir($fichier))
 		@rmdir($fichier);

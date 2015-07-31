@@ -139,7 +139,7 @@ function taches_generales() {
 // - elle peut retirer les fichiers perimes
 // - elle fait appliquer le quota
 // En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-// http://doc.spip.org/@cron_invalideur
+// http://doc.spip.org/@cron_invalideur_dist
 function cron_invalideur_dist($t) {
 
 	include_spip('inc/invalideur');

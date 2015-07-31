@@ -147,6 +147,7 @@ function spip_pg_groupby($groupby, $from, $select)
 // Et le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
 // de spip_pg_groupby, c'est pas top.
 
+// http://doc.spip.org/@spip_pg_frommysql
 function spip_pg_frommysql($arg)
 {
 	if (is_array($arg)) $arg = join(", ", $arg);
