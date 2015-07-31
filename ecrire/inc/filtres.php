@@ -511,28 +511,6 @@ function vider_url($url, $entites = true) {
 	return $url;
 }
 
-//
-// Ajouter le &var_recherche=toto dans les boucles de recherche
-//
-// http://doc.spip.org/@url_var_recherche
-function url_var_recherche($url) {
-	if (_request('recherche')
-	AND (strpos($url,"var_recherche")===false)) {
-
-		list ($url,$ancre) = preg_split(',#,', $url, 2);
-		if ($ancre) $ancre='#'.$ancre;
-
-		$x = "var_recherche=".rawurlencode(_request('recherche'));
-
-		if (strpos($url, '?') === false)
-			return "$url?$x$ancre";
-		else
-			return "$url&$x$ancre";
-	}
-	else return $url;
-}
-
-
 // Extraire une date de n'importe quel champ (a completer...)
 // http://doc.spip.org/@extraire_date
 function extraire_date($texte) {
@@ -1935,6 +1913,18 @@ function concat(){
 	return join('', $args);
 }
 
+
+function charge_scripts($scripts) {
+  $flux = "";
+  $args = is_array($scripts)?$scripts:explode("|",$scripts);
+  foreach($args as $script) {
+    if(preg_match(",^\w+$,",$script)) {
+      $path = find_in_path("javascript/$script.js");
+      if($path) $flux .= spip_file_get_contents($path);
+    }
+  }
+  return $flux;
+}
 
 // Compacte du javascript grace a javascriptcompressor
 // utile pour dist/jquery.js par exemple
