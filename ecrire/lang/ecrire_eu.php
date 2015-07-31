@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_plugin' => 'Plugina aktibatu',
+	'activer_plugin' => 'Gehigarria aktibatu',
 	'affichage' => 'Ikuspegia',
 	'aide_non_disponible' => 'On line delakoaren laguntza-atal hau prestatzekoa dago hizkuntza honetan.',
 	'annuler_recherche' => 'Bilaketa ezeztatu',
@@ -347,7 +347,7 @@ Horietako batzuk baimentzeko prozesu berezi bat egin behar dute, gunearen FTP sa
 	'info_gauche_admin_vider' => 'Orrialde honetan gunearen arduradunak baizik ezin dira sartu.<b><p>Mantentze teknikoaren funtzio guztietan sartzeko aukera ematen du. Horietako batzuk baimentzeko prozesu berezi bat egin behar dute, gunearen FTP sarrerak eskatzen dituenak.',
 	'info_gauche_auteurs' => 'Guneko autore guztiak ageri dira hemen. 
 Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; administratzailea = horia).',
-	'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ezdutenak, ikono urdin batez adierazten dira; ezabatuak izan direnak, berriz, paperontzibatez.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ez dutenak, ikono urdin batez adieraziak dira; ezabatuak izan direnak, berriz, ikono grisa baten bidez.',
 	'info_gauche_messagerie' => 'Mezularitzak idazlarien artean mezuak trukatzen,abisuak kontserbatzen (zure erabilera pertsonalarentzat), edo eremu pribatuko orri nagusian iragarpenak jartzen (administratzailea bazara) uzten dizu.',
 	'info_gauche_numero_auteur' => 'IDAZLEA ',
 	'info_gauche_statistiques_referers' => 'Orri honetan referers-en zerrenda dago, hau da, zure web-gunera eramaten dituztenloturak dauzkaten tokien zerrenda, bakarrik atzo eta gaurko; zerrenda honek egunerozerora jartzen da.',
@@ -375,7 +375,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 	'info_langues' => 'Gunearen hizkuntzak',
 	'info_ldap_ok' => 'LDAP autentikazioa instalatuta dago.',
 	'info_lien_hypertexte' => 'Hipertestu lotura:',
-	'info_liste_nouveautes_envoyee' => 'La liste des nouveautés a été envoyée', # NEW
+	'info_liste_nouveautes_envoyee' => 'Berrikuntzen zerrenda igorria izan da.',
 	'info_liste_redacteurs_connectes' => 'Konektatuak dauden erredaktoreen zerrenda',
 	'info_login_existant' => 'Login hori dagoeneko existitzen da.',
 	'info_login_trop_court' => 'Login hori laburregia da',
@@ -661,7 +661,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'lien_nom_site' => 'Lekuaren izena',
 	'lien_retirer_auteur' => 'Egile hau baztertu',
 	'lien_retirer_rubrique' => 'Atala kendu',
-	'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
+	'lien_retirer_tous_auteurs' => 'Autore guziak kendu', # NEW
 	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
 	'lien_site' => 'lekua',
@@ -745,7 +745,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_source' => 'iturria: ',
 	'plugin_titre_automatique' => 'Instalazio automatikoa',
 	'plugin_titre_automatique_ajouter' => 'Plugin batzu gehitu',
-	'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+	'plugin_titre_installation' => '@plugin@ gehigarriaren instalazioa',
 	'plugin_titre_modifier' => 'Nire pluginak',
 	'plugin_zip_active' => 'Aktibatzeko, segitu',
 	'plugin_zip_adresse' => 'Hemen zehaz eazu deskargatu nahi duzun plugin  baten zip fitxategiaren helbidea, edo plugin zerrenda baten helbidea.',
@@ -765,7 +765,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugins_erreur' => 'Errorea pluginetan : @plugins@',
 	'plugins_liste' => 'Pluginen zerrenda',
 	'plugins_liste_dist' => 'Extensions', # NEW
-	'plugins_recents' => 'Plugins récents.', # NEW
+	'plugins_recents' => 'Gehigarri berriak.',
 	'plugins_tous_liste' => 'Denak',
 	'plugins_vue_hierarchie' => 'Hierarkia',
 	'plugins_vue_liste' => 'Zerrenda',
@@ -779,7 +779,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 	'queue_one_job_in_queue' => '1 travail en attente', # NEW
 	'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-	'queue_titre' => 'Liste des travaux', # NEW
+	'queue_titre' => 'Obren zerrenda',
 
 	// R
 	'repertoire_plugins' => 'Direktorioa :',
@@ -829,7 +829,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 	'texte_crash_base' => 'Baseak arazo bat baldin badauka, hemen konpontzen saiadaiteke',
 	'texte_creer_rubrique' => 'Artikulu bat idatzi aurretik, atal bat sortu behar duzu.',
 	'texte_date_creation_article' => ' Artikuluaren sortze data',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Sorkuntza data :', # on ajoute le ":"
 	'texte_date_publication_anterieure' => 'Lehengo argitarapen data',
 	'texte_date_publication_anterieure_nonaffichee' => 'Aurreko argitarapen data ez erakutsi.',
 	'texte_date_publication_article' => 'ARGITARAPEN DATA:',
@@ -865,7 +865,7 @@ berrindexazio bizkor bati ekin nahi badiozu (adibidez babeskopiabat berreskuratu
 beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 	'texte_moteur_recherche_non_active' => 'Bilaketarako motorea ez dago aktibaturik.',
 	'texte_multilinguisme' => 'Hizkuntza batbaino gehiago erabili nahi baldin baduzu, nabigatze zailarekin, zure tokiarenantolakuntzaren arabera, artikuluentzat edota atalentzat hizkuntza aukeratzeko menu baterantsi ahal duzu.', # MODIF
-	'texte_multilinguisme_trad' => 'Artikulu baten itzulpen desberdinenarteko lotura sistema bat ere aktiba dezakezu.', # MODIF
+	'texte_multilinguisme_trad' => 'Elementu batzuen itzulpenen arteko loturak kudeatzeko sistema bat ere aktiba dezakezu.',
 	'texte_non_compresse' => 'konpresiorikgabe (zure zerbitzariak ez du funtzionalitate hau jasaten)',
 	'texte_nouveau_message' => 'Mezu berria',
 	'texte_nouvelle_version_spip_1' => 'SPIPren bertsio berri bat instalatu duzu.',
@@ -917,8 +917,8 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 	'titre_admin_effacer' => 'Mantenimendu teknikoa',
 	'titre_admin_tech' => 'Mantentze-lan teknikoa',
 	'titre_admin_vider' => 'Mantentze-lan teknikoa',
-	'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
-	'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
+	'titre_ajouter_un_auteur' => 'Autore bat gehitu',
+	'titre_ajouter_un_mot' => 'gako-hitz bat gehitu',
 	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
 	'titre_cadre_afficher_article' => 'Artikuluak erakutsi',
 	'titre_cadre_afficher_traductions' => 'Hizkuntza honetarako dauden itzulpenen egoeraerakutsi',
@@ -927,9 +927,9 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 	'titre_cadre_numero_auteur' => 'IDAZLEA',
 	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 	'titre_cadre_signature_obligatoire' => 'Izenpetzea [Derrigorrezkoa]',
-	'titre_config_contenu_notifications' => 'Notifications', # NEW
+	'titre_config_contenu_notifications' => 'Notifikazio',
 	'titre_config_contenu_prive' => 'Eremu pribatuan',
-	'titre_config_contenu_public' => 'Sur le site public', # NEW
+	'titre_config_contenu_public' => 'Parte publikoan',
 	'titre_config_fonctions' => 'Tokiaren konfigurazioa',
 	'titre_config_langage' => 'Configurer la langue', # NEW
 	'titre_configuration' => 'Tokiarenkonfigurazioa',
