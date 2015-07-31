@@ -1164,9 +1164,10 @@ function image_sepia($im, $rgb = "896f5e")
 function image_aplatir($im, $format='jpg', $coul='000000')
 {
 	$image = image_valeurs_trans($im, "aplatir-$coul", $format);
+
 	if (!$image) return("");
 
-	include_ecrire("filtres");
+	include_spip("filtres");
 	$couleurs = couleur_hex_to_dec($coul);
 	$dr= $couleurs["red"];
 	$dv= $couleurs["green"];
@@ -1181,7 +1182,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 	$creer = $image["creer"];
 
 	if ($creer) {
-		$im = $image["fonction_imagecreatefrom"]($im);
+		$im = @$image["fonction_imagecreatefrom"]($im);
 		$im_ = imagecreatetruecolor($x_i, $y_i);
 		if ($image["format_source"] == "gif" AND function_exists('ImageCopyResampled')) { 
 			// Si un GIF est transparent, 
