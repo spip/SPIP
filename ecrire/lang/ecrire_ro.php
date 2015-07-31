@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Aten&#355;ie! &Icirc;n aceast&#259; rubric&#259; se g&#259;sesc @contient_breves@ &#351;tiri@scb@: dac&#259; o deplasa&#355;i, bifa&#355;i aceast&#259; caset&#259; de confirmare.',
 'avis_destinataire_obligatoire' => 'Trebuie sa indica&#355;i un destinatar &icirc;nainte de a trimite mesajul',
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune SQL',
-'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.',
+'avis_erreur_version_archive' => '<MODIF><b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.',
 'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><div>SPIP este d&eacute;j&agrave; instalat</div>.',
 'avis_lecture_noms_bases_1' => 'Programul de instalare nu a putut citi numele bazelor de date instalate.',
 'avis_lecture_noms_bases_2' => 'Fie nici o baz&#259; de date nu este disponibil&#259;, fie func&#355;ia de listare a bazelor de date a fost dezactivat&#259; pentru motive de securitate (cei mai mul&#355;i furnizori procedeaz&#259; astfel).',
@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Aceast&#259; pagin&#259; prezint&#259; mai multe metode pentru a r&#259;m&acirc;ne &icirc;n contact cu activitatea de pe acest site.',
-'ical_info2' => 'Pentru mai multe detalii asupra acestor tehnici, nu ezita&#355;i s&#259; consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
+'ical_info2' => '<MODIF>Pentru mai multe detalii asupra acestor tehnici, nu ezita&#355;i s&#259; consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
 'ical_info_calendrier' => 'Dou&#259; calendare v&#259; sunt la dispozi&#355;ie: Primul este un plan al site-ului care anun&#355;&#259; toate articolele publicate. Al doilea con&#355;ine at&acirc;t anun&#355;urile editoriale c&acirc;t &#351;i ultimele mesaje private&nbsp;: acesta v&#259; este rezervat gra&#355;ie unei chei personale pe care o pute&#355;i modifica oric&acirc;nd prin simpla schimbare a parolei dumneavoastr&#259;.  ',
 'ical_lien_rss_breves' => 'Sindicalizarea &#351;tirilor site-ului',
 'ical_methode_http' => 'Desc&#259;rcare',
@@ -910,7 +910,7 @@ incluz&acirc;nd <i>toate</i> informa&#355;iile referitoare la redactori sau admi
 reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351;i un nou acces administrator.',
 'texte_admin_effacer_stats' => 'Aceast&#259; comand&#259; &#351;terge toate datele legate de statisticile vizitelor &icirc;n site, incluz&acirc;nd &#351;i datele de popularitate a articolelor.',
 'texte_admin_tech_01' => 'Aceast&#259; op&#355;iune v&#259; permite s&#259; salva&#355;i con&#355;inutul bazei de date intr-un fi&#351;ier care va fi pus &icirc;n directorul @dossier@. Nu uita&#355;i, de asemenea, s&#259; recupera&#355;i directorul @img@ &icirc;n integralitatea lui - acesta con&#355;ine imaginile &#351;i documentele folosite &icirc;n articole &#351;i rubrici.',
-'texte_admin_tech_02' => 'Aten&#355;ie: aceast&#259; salvare nu va putea fi restaurat&#259; DEC&Acirc;T pe un site folosing ACEEA&#350;I versiune de SPIP. Mai ales, nu trebuie sa &laquo;&nbsp;goli&#355;i baza de date&nbsp;&raquo; sper&acirc;nd c&#259;, dup&#259; o aducere la zi, ve&#355;i putea reinstala ceea ce a&#355;i salvat ... Consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Aten&#355;ie: aceast&#259; salvare nu va putea fi restaurat&#259; DEC&Acirc;T pe un site folosing ACEEA&#350;I versiune de SPIP. Mai ales, nu trebuie sa &laquo;&nbsp;goli&#355;i baza de date&nbsp;&raquo; sper&acirc;nd c&#259;, dup&#259; o aducere la zi, ve&#355;i putea reinstala ceea ce a&#355;i salvat ... Consulta&#355;i <a href="@spipnet@">documenta&#355;ia SPIP</a>.',
 'texte_admin_tech_03' => 'Pute&#355;i s&#259; alege&#355;i s&#259; salva&#355;i fi&#351;ierul sub o form&#259; comprimat&#259;, at&acirc;t pentru
  a mic&#351;ora durata transferului c&#259;tre dumneavoastr&#259; sau spre un server de siguran&#355;&#259;, c&acirc;t &#351;i pentru a face economie de spa&#355;iu de disc.',
 'texte_admin_tech_04' => '&Icirc;n scopul de fuzionare cu o alt&#259; baz&#259; de date, pute&#355;i limita salvarea la rubrica:',

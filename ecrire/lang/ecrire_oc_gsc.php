@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atention! Aquera rubrica que contien @contient_breves@ br&egrave;vas@scb@: se la despla&ccedil;atz, que voleretz plan oscar aquera casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Que devetz indicar un destinatari abans d\'enviar aqueth messatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
-'avis_erreur_version_archive' => '<b>Atencion! Lo fichi&egrave;r @archive@ que correspond a ua auta version d\'SPIP que la qu\'avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
+'avis_erreur_version_archive' => '<MODIF><b>Atencion! Lo fichi&egrave;r @archive@ que correspond a ua auta version d\'SPIP que la qu\'avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
 <a href="@spipnet@">
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP qu\'ei ja installat.',
@@ -162,7 +162,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 
 // I
 'ical_info1' => 'Aquera pagina que muisha met&ograve;des diferents ent&agrave; demorar en contacte dab la vita d\'aqueth sit.',
-'ical_info2' => 'T&agrave; ti&eacute;ner mei informacions suber aqueras tecnicas, n\'esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.',
+'ical_info2' => '<MODIF>T&agrave; ti&eacute;ner mei informacions suber aqueras tecnicas, n\'esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.',
 'ical_info_calendrier' => 'Que i a dus calend&egrave;rs a la v&ograve;sta disposicion. Lo perm&egrave;r qu\'ei un plan deu sit qui an&oacute;ncia tots los articles publicats. Lo segond que contien los anoncis editoriaus en mei deus v&ograve;stes darr&egrave;rs messatges privats: que vs\'ei reservat gr&agrave;cias a ua clau personau, qui podetz modificar en tot moment en renovant lo v&ograve;ste mot de santa Clara. ',
 'ical_methode_http' => 'Telecargament',
 'ical_methode_webcal' => 'Sincronizacion (webcal://)',
@@ -732,7 +732,7 @@ ua color qu\'indica lo lor estat:',
  incl&uacute;s <i>tots</i> los acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auratz executada, qu\'auratz de tornar lan&ccedil;ar l\'installacion d\'SPIP t&agrave; tornar crear ua basa nav&egrave;ra atau com un perm&egrave;r acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquera opcion que\'vs permet de sauvagardar lo contengut de la basa dens un fichi&egrave;r qui ser&agrave; servat dens lo repert&ograve;ri @dossier@.
 N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri <i>IMG/</i>, qui contien los imatges e los documents utilizats dens los articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquera sauvagarda que\'s poir&agrave; restaurar SONQUE dens un sit installat dab la medisha version d\'SPIP. Donc subertot non cau pas "vueidar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s ua actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Atencion: aquera sauvagarda que\'s poir&agrave; restaurar SONQUE dens un sit installat dab la medisha version d\'SPIP. Donc subertot non cau pas "vueidar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s ua actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Que podetz causir de sauvagardar lo fichi&egrave;r devath forma comprimida, ent&agrave;
  accelerar lo son transferiment a v&ograve;ste o a &ccedil;&ograve; d\'un servider de sauvagardas, e ent&agrave; estauviar espaci disc.',
 'texte_adresse_annuaire_1' => '(Se lo v&ograve;ste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',

@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Paznja! Ova rubrika sadrzi @contient_breves@ kratke poruke: Ako je zelite premjestiti, oznacite  ovo polje kao potvrdu.',
 'avis_destinataire_obligatoire' => 'Trebate naznaciti primaoca prije nego sto posaljete ovu poruku.',
 'avis_erreur_connexion_mysql' => 'Greska u SQL konekciji',
-'avis_erreur_version_archive' => '<b>Paznja! Dokument @archive@  odgovara drugoj verziji SPIP od one koju ste instalirali.</b>  Riskirate velike poteskoce: opasnost od unistenja vase baze podataka, razne disfunkcije stranice, itd. Ne potvrdjujte ovaj zahtjev za importovanje! Za vise informacija pogledajte <a  href="@spipnet@"> SPIP dokumentaciju</a>.',
+'avis_erreur_version_archive' => '<MODIF><b>Paznja! Dokument @archive@  odgovara drugoj verziji SPIP od one koju ste instalirali.</b>  Riskirate velike poteskoce: opasnost od unistenja vase baze podataka, razne disfunkcije stranice, itd. Ne potvrdjujte ovaj zahtjev za importovanje! Za vise informacija pogledajte <a  href="@spipnet@"> SPIP dokumentaciju</a>.',
 'avis_espace_interdit' => '<b>Zabranjen prostor</b><p />SPIP je  vec instaliran.',
 'avis_lecture_noms_bases_1' => 'Instalacijski program nije uspio ucitati imena instaliranih baza podataka.',
 'avis_lecture_noms_bases_2' => 'Ili nijedna baza nije na  raspolaganju, ili je funkcija, koja dozvoljava izlistavanje  baza, dezaktivirana iz sigurnosnih razloga (sto je slucaj kod  mnogih racunara).',
@@ -162,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Na ovoj strani je predstavljeno nekoliko metoda kako da ostanete u toku sa aktuelnostima ove web stranice.',
-'ical_info2' => 'Za sve informacije o ovim metodama, mozete konsultovati <a href="@spipnet@"> SPIP  dokumentaciju </a>.',
+'ical_info2' => '<MODIF>Za sve informacije o ovim metodama, mozete konsultovati <a href="@spipnet@"> SPIP  dokumentaciju </a>.',
 'ical_info_calendrier' => 'Na raspolaganju vam stoje dva kalendara. Jedan je plan stranice koji najavljuje sve publicirane artikle. Drugi sadrzi editorijalne najave, kao sto su vase posljednje privatne poruke: On je rezervisan za vas zahvaljujuci licnom kljucu, koji mozete izmijeniti u svakom  momentu, dok mijenjate svoju lozinku.',
 'ical_methode_http' => 'Download',
 'ical_methode_webcal' => 'Sinhronizacija (webcal://)',
@@ -729,7 +729,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_acces_ldap_anonyme_1' => 'Neki LDAP serveri ne prihvataju ni jedan anonimni pristup. U tom slucaju je potrebno odrediti identifikatora za inicijalni pristup, da bi zatim postojala mogucnost pretrage informacija u direktoriju. U vecini slucajeva, sljedeca polja mogu ostati prazna',
 'texte_admin_effacer_01' => 'Ova komanda ce izbrisati <i>sav</i> sadrzaj baze podataka, ukljucujuci <i>sve</i> pristupe urednika i administratora. Prije nego je pokrenete,  trebate pokrenuti reinstalaciju pristupa SPIP-u da biste kreirali novu bazu, kao i prvi pristup administratora.',
 'texte_admin_tech_01' => 'Ova opcija vam omogucuje pohranjivanja sadrzaja baze u dokument koji ce biti pohranjen u  direktoriju @dossier@. Ne zaboravite sacuvati sve sto  obuhvata IMG repertoar, sto ukljucuje slike i dokumente koristene u clancima i rubrikama.',
-'texte_admin_tech_02' => 'Paznja: Ovo pohranjivanje ne moze biti obnovljeno, OSIM na stranici koja je instalirana sa istom verzijom SPIP-a. Nije preporuceno praznjenje baze, ako namjerevate reinstalaciju backup-a nakon update-a  ... Konsultujte <a  href="@spipnet@">SPIP  dokumentaciju</a>.',
+'texte_admin_tech_02' => '<MODIF>Paznja: Ovo pohranjivanje ne moze biti obnovljeno, OSIM na stranici koja je instalirana sa istom verzijom SPIP-a. Nije preporuceno praznjenje baze, ako namjerevate reinstalaciju backup-a nakon update-a  ... Konsultujte <a  href="@spipnet@">SPIP  dokumentaciju</a>.',
 'texte_admin_tech_03' => 'Mozete izabrati pohranjivanje dokumenta u kompresovanoj formi, da bi ste skratili transfer kod vas ili nekog servera za pohranjivanje i da bi ste smanjili prostor na maticnoj ploci. ',
 'texte_adresse_annuaire_1' => '(Ako je vas direktorij instaliran na istoj masini kao ova web stranica, vjerovatno se radi o localhost-u.)',
 'texte_ajout_auteur' => 'Sljedeci autor je dodan clanku:',

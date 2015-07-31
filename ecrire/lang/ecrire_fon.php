@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'vl&#603;! @contient_breves@ br&egrave;ve@scb@&nbsp; &#598;&eacute; l&#603;&#770; do akpa &eacute; l&#596; m&#603; : n s&#603; sin&#596;, mi t&#603;nkp&#596;n bo s&#596; xl&#603; t&#596;n do fi.',
 'avis_destinataire_obligatoire' => 'Mi &#598;o na wlan m&#603; g&#596;n w&#603;n na yi &#596; co na s&#603; w&#603;n do',
 'avis_erreur_connexion_mysql' => 'af&#596;kikl&#603;n do cacado mysql t&#596;n m&#603; ',
-'avis_erreur_version_archive' => 'vl&#603; ! xota @archive@  &eacute; j&#603; do al&#596; supipu t&#596;n d&eacute;vo ji.Mi jan na kp&eacute; af&#596; nyanya  &#598;&eacute; l&#603;, gblogbloji &#596; sin wal&#596; nyanya, mi m&agrave; na gbe sis&#603; do &eacute; l&#596; o. Nu mi na s&egrave; xo g&#596; na',
+'avis_erreur_version_archive' => '<MODIF>vl&#603; ! xota @archive@  &eacute; j&#603; do al&#596; supipu t&#596;n d&eacute;vo ji.Mi jan na kp&eacute; af&#596; nyanya  &#598;&eacute; l&#603;, gblogbloji &#596; sin wal&#596; nyanya, mi m&agrave; na gbe sis&#603; do &eacute; l&#596; o. Nu mi na s&egrave; xo g&#596; na',
 'avis_espace_interdit' => 'ac&#603;ku Y&eacute; ko  ze supipu do fi n&#603;',
 'avis_lecture_noms_bases_1' => 'nyik&#596; kpodo gb&#603;tak&#603;nxokpl&eacute; l&#603;&#770;  ye do Titom&#603; &#596; m&#603; a  ',
 'avis_lecture_noms_bases_2' => 'Kabi gb&#603;tak&#603;nxokpl&eacute; &#598;&eacute; a , kabi  nuw&eacute; n&#596; z&#596;n b&#596; mi n&#596; to gb&#603;tak&#603;nxokpl&eacute; l&#603; sin ac&#603; ku.s&#596; &#598;o ayi ni ja wu &#596; ( m&#596; w&#603; e &#598;&eacute; lo xw&eacute;t&#596; gege g&#596;n)',
@@ -151,7 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'n&uacute; mi n&aacute; &#598;&oacute; &agrave;c&eacute;j&iacute; kp&oacute;&#598;&oacute; gblogbloj&iacute; &eacute; l&#596; mi kp&#596;n w&agrave;l&#596; t&ograve;b&uacute;t&ograve;b&uacute; &eacute; l&ograve; we&#780;kp&aacute; j&iacute; &#596; .',
-'ical_info2' => 'N&uacute; mi l&#603; l&ograve; x&oacute;gb&egrave; xw&iacute;t&iacute;xw&iacute;t&iacute; b&agrave; w&#603; &#596; mi s&iacute;k&uacute; y&iacute; s&ugrave;p&iacute;p&uacute; s&iacute;n x&oacute;x&ograve;kpl&eacute;m&#603;.',
+'ical_info2' => '<MODIF>N&uacute; mi l&#603; l&ograve; x&oacute;gb&egrave; xw&iacute;t&iacute;xw&iacute;t&iacute; b&agrave; w&#603; &#596; mi s&iacute;k&uacute; y&iacute; s&ugrave;p&iacute;p&uacute; s&iacute;n x&oacute;x&ograve;kpl&eacute;m&#603;.',
 'ical_info_calendrier' => 'Y&egrave; s&#603; k&agrave;l&agrave;n&#598;ly&eacute; w&egrave; &#598;&oacute; m&iacute;. &#598;&ograve;kp&oacute; ny&iacute; gblogbloj&iacute; &#596; s&iacute;n t&igrave;t&ograve;m&#603; t&#596;n b&oacute; n&#596; xl&#603; we&#780; &#598;&eacute; y&egrave; wl&agrave;n l&#603; b&iacute;. W&egrave;g&#596; &#596; &eacute; ny&iacute; x&oacute;gb&egrave;&#598;&ograve;t&agrave;j&igrave; kp&oacute; w&#603;n m&igrave; t&#596;n v&iacute;v&#603;n&aacute; l&#603; kp&oacute; j&iacute; : mi &#598;&oacute; c&agrave;v&igrave; mi t&#596;n, b&#596; mi l&#603; h&#603;n &#596; mi n&aacute; l&#603;  n&#596; &#598;y&#596; &#603; kp&oacute;d&oacute; gb&egrave;t&aacute;k&#603;n. .',
 'ical_methode_http' => '&#598;&igrave;&#598;&#596;n ',
 'ical_methode_webcal' => 'm&igrave;m&aacute;',
@@ -684,7 +684,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_acces_ldap_anonyme_1' => 'mi k&#603;nkl&#603;&#770;n b&oacute; n&aacute; l&igrave;nl&igrave;n mi t&#596;n &#598;&eacute; w&uacute;&#598;&ograve; kpl&eacute;kpl&eacute; y&eacute; s&#596; &#598;&oacute; d&ograve; w&#596; m&#603;',
 'texte_admin_effacer_01' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un premier acc&egrave;s administrateur.',
 'texte_admin_tech_01' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;.',
-'texte_admin_tech_02' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;... ',
+'texte_admin_tech_02' => '<MODIF>mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;... ',
 'texte_admin_tech_03' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;.',
 'texte_adresse_annuaire_1' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute; &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute; :',

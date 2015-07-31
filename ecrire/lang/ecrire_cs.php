@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Upozorn&#283;n&iacute;! V t&eacute;to sekci je celkem @contient_breves@ vlo&#382;en&yacute;ch novinek: potvr&#271;te jejich p&#345;esun za&#353;krtnut&iacute;m tohoto pol&iacute;&#269;ka.',
 'avis_destinataire_obligatoire' => 'P&#345;ed odesl&aacute;n&iacute;m zpr&aacute;vy mus&iacute;te vybrat adres&aacute;ta.',
 'avis_erreur_connexion_mysql' => 'Chyba p&#345;ipojen&iacute; SQL',
-'avis_erreur_version_archive' => '<b>Varov&aacute;n&iacute;! Soubor @archive@ odpov&iacute;d&aacute; jin&eacute; verzi
+'avis_erreur_version_archive' => '<MODIF><b>Varov&aacute;n&iacute;! Soubor @archive@ odpov&iacute;d&aacute; jin&eacute; verzi
     syst&eacute;mu SPIP, ne&#382; je ta, kterou m&aacute;te
     nainstalov&aacute;nu.</b> D&#367;sledkem mohou b&yacute;t tyto v&aacute;&#382;n&eacute;
     pot&iacute;&#382;e: zni&#269;en&iacute; datab&aacute;ze,
@@ -176,7 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Tato str&aacute;nka umo&#382;&#328;uje z&#367;stat v kontaktu s d&#283;n&iacute;m na tomto webu n&#283;kolika zp&#367;soby.',
-'ical_info2' => 'Bli&#382;&#353;&iacute; informace naleznete v <a href="@spipnet@">dokumentaci k syst&eacute;mu SPIP</a>.',
+'ical_info2' => '<MODIF>Bli&#382;&#353;&iacute; informace naleznete v <a href="@spipnet@">dokumentaci k syst&eacute;mu SPIP</a>.',
 'ical_info_calendrier' => 'M&aacute;te k dispozici dva kalend&aacute;&#345;e. Prvn&iacute; obsahuje seznam web&#367; s uveden&iacute;m v&#353;ech publikovan&yacute;ch &#269;l&aacute;nk&#367;. Druh&yacute; obsahuje redaktorsk&aacute; ozn&aacute;men&iacute; a va&#353;e posledn&iacute; soukrom&aacute; sd&#283;len&iacute;: k n&#283;mu m&aacute;te p&#345;&iacute;stup pomoc&iacute; osobn&iacute;ho kl&iacute;&#269;e. Tento kl&iacute;&#269; m&#367;&#382;ete kdykoli zm&#283;nit obnoven&iacute;m sv&eacute;ho hesla.',
 'ical_methode_http' => 'Odesl&aacute;n&iacute; / sta&#382;en&iacute;',
 'ical_methode_webcal' => 'Synchronizace (webcal://)',
@@ -787,7 +787,7 @@ ukazuje jejich stav:',
 v&#269;etn&#283; <i>ve&#353;ker&yacute;ch</i> p&#345;&iacute;stup&#367; redaktor&#367; a spr&aacute;vc&#367;. Pokud jej spust&iacute;te, mus&iacute;te n&aacute;sledn&#283; znovu nainstalovat
 syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p&#345;&iacute;stup pro spr&aacute;vce.',
 'texte_admin_tech_01' => 'Tato volba je ur&#269;ena k ulo&#382;en&iacute; obsahu datab&aacute;ze do souboru, jen&#382; bude ulo&#382;en v adres&aacute;&#345;i @dossier@. Nezapome&#328;te z&aacute;lohovat i obsah cel&eacute;ho adres&aacute;&#345;e @img@, ve kter&eacute;m jsou ulo&#382;eny obr&aacute;zky a dokumenty pou&#382;it&eacute; v &#269;l&aacute;nc&iacute;ch a sekc&iacute;ch.',
-'texte_admin_tech_02' => 'Pozor! Takto ulo&#382;en&eacute; soubory lze obnovit POUZE na webu, kde je nainstalov&aacute;na stejn&aacute; verze syst&eacute;mu SPIP. V &#382;&aacute;dn&eacute;m p&#345;&iacute;pad&#283; "nevypr&aacute;zd&#328;ujte datab&aacute;zi" s t&iacute;m, &#382;e obnov&iacute;te z&aacute;lohu po aktualizaci... Viz <a href="@spipnet@">la dokumentace k syst&eacute;mu SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Pozor! Takto ulo&#382;en&eacute; soubory lze obnovit POUZE na webu, kde je nainstalov&aacute;na stejn&aacute; verze syst&eacute;mu SPIP. V &#382;&aacute;dn&eacute;m p&#345;&iacute;pad&#283; "nevypr&aacute;zd&#328;ujte datab&aacute;zi" s t&iacute;m, &#382;e obnov&iacute;te z&aacute;lohu po aktualizaci... Viz <a href="@spipnet@">la dokumentace k syst&eacute;mu SPIP</a>.',
 'texte_admin_tech_03' => 'M&#367;&#382;ete se rozhodnout o ulo&#382;en&iacute; komprimovan&eacute;ho souboru. T&iacute;m zkr&aacute;t&iacute;te
  dobu pot&#345;ebnou k jeho p&#345;enosu u v&aacute;s nebo na serveru kde m&aacute;te z&aacute;lohy a u&#353;et&#345;&iacute;te m&iacute;sto na disku.',
 'texte_adresse_annuaire_1' => '(M&aacute;te-li adres&aacute;&#345; ulo&#382;en na stejn&eacute;m po&#269;&iacute;ta&#269;i jako tento web, jedn&aacute; se nejsp&iacute;&#353;e o "localhost".)',

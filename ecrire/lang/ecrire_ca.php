@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
-'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una
+'avis_erreur_version_archive' => '<MODIF><b>Atenci&oacute;! El fitxer @archive@ correspon a una
     versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us
     podeu trobar amb grans dificultats: risc de
       destrucci&oacute; de la base de dades, mal funcionament
@@ -201,7 +201,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
-'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="@spipnet@">la documentation de SPIP</a>.',
+'ical_info2' => '<MODIF>Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="@spipnet@">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que mostra tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
 'ical_lien_rss_breves' => 'Sindicaci&oacute; de les breus del lloc',
 'ical_methode_http' => 'Desc&agrave;rrega',
@@ -908,7 +908,7 @@ amb un color que indica el seu estat:',
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
 'texte_admin_effacer_stats' => 'Aquesta ordre esborra totes les dades lligades a les estad&iacute;stiques de visita del lloc, fins i tot la popularitat dels articles.',
 'texte_admin_tech_01' => 'Aquesta opci&oacute; us permet desar el contigut de la base en un fitxer que ser&agrave; guardat al directori @dossier@. No oblideu, igualment, recuperar la totalitat del directori @img@, que cont&eacute; les imatges i els documents utilitzats en els articles i les seccions.',
-'texte_admin_tech_02' => 'Atenci&oacute;: aquesta c&ograve;pia de seguretat NOM&Eacute;S podr&agrave; ser restaurada en un lloc Web que estigui instal&middot;lat en la mateixa versi&oacute; d\'SPIP. Per tant, cal sobretot no &laquo;&nbsp;buidar la base&nbsp;&raquo; esperant reinstal&middot;lar la c&ograve;pia de seguretat despr&eacute;s de l\'actualitzaci&oacute;... Consulteu per m&eacute;s detalls <a href="@spipnet@">la documentaci&oacute; d\'SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Atenci&oacute;: aquesta c&ograve;pia de seguretat NOM&Eacute;S podr&agrave; ser restaurada en un lloc Web que estigui instal&middot;lat en la mateixa versi&oacute; d\'SPIP. Per tant, cal sobretot no &laquo;&nbsp;buidar la base&nbsp;&raquo; esperant reinstal&middot;lar la c&ograve;pia de seguretat despr&eacute;s de l\'actualitzaci&oacute;... Consulteu per m&eacute;s detalls <a href="@spipnet@">la documentaci&oacute; d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Es pot triar guardar el fitxer comprimit per retallar temps de transfer&egrave;ncia fins a casa seva o guardar-lo en un servidor per a c&ograve;pies de seguretat, i estalviar l\'espai de disc.',
 'texte_admin_tech_04' => 'En un objectiu de fusi&oacute; amb una altra base, podeu limitar la c&ograve;pia de seguretat a la secci&oacute;:  ',
 'texte_adresse_annuaire_1' => '(Si el vostre anuari est&agrave; instal.lat a la mateixa maquina que aquesta web, es tracta probablement de "localhost".)',

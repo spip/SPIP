@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Diwallit&nbsp;! Er rummad-ma&ntilde; ez eus @contient_breves@ berrskrid@scb@&nbsp;: kadarnait ama&ntilde;-dindan ma zilec\'hiit anezha&ntilde;.',
 'avis_destinataire_obligatoire' => 'Un degemerour a rankit diskleria&ntilde; a-raok kas ar c\'hemennadenn-ma&ntilde;.',
 'avis_erreur_connexion_mysql' => 'Fazi kennaska&ntilde; SQL',
-'avis_erreur_version_archive' => '<b>Diwallit! Ar restr @archive@ a glot gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b> Emaoc\'h o vont da zegouezhout dirak diaesamanto&ugrave; bras: riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all. Arrabat gwiria&ntilde; ar goulenn emporzhiadur-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.',
+'avis_erreur_version_archive' => '<MODIF><b>Diwallit! Ar restr @archive@ a glot gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b> Emaoc\'h o vont da zegouezhout dirak diaesamanto&ugrave; bras: riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all. Arrabat gwiria&ntilde; ar goulenn emporzhiadur-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.',
 'avis_espace_interdit' => '<b>Lec\'h difennet</b><div>Staliet eo SPIP dija.</div>',
 'avis_lecture_noms_bases_1' => 'Ar poellad-stalia&ntilde; n\'en deus ket gallet lenn anvio&ugrave; an diazo&ugrave; titouro&ugrave; staliet.',
 'avis_lecture_noms_bases_2' => 'Pe n\'eus diaz ebet da gaout, pe n\'eo ket aotreet da listenna&ntilde; an diazo&ugrave; evit abego&ugrave; surentez (ar pezh a zegouezh gant meur a voder).',
@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'War ar bajenn-ma&ntilde; ez eus meur a hentenn evit chom e-darempred gant buhez al lec\'hienn.',
-'ical_info2' => 'Evit titouro&ugrave; ouzhpenn diwar-benn an hentenno&ugrave;-se, lennit <a href="@spipnet@">diello&ugrave; SPIP</a>.',
+'ical_info2' => '<MODIF>Evit titouro&ugrave; ouzhpenn diwar-benn an hentenno&ugrave;-se, lennit <a href="@spipnet@">diello&ugrave; SPIP</a>.',
 'ical_info_calendrier' => 'Daou deiziataer a c\'hellit ober ganto. An hini kenta&ntilde; a ziskouez an holl pennado&ugrave; bet embannet. War an eil ema&ntilde; ar c\'hemenno&ugrave;-embann hag ho kemennadenno&ugrave; prevez&nbsp;: a-drugarez d\'un alc\'hwez hiniennel (a c\'hellit che&ntilde;ch forzh pegoulz o kemm ho ker-tremen) e c\'hellit beza&ntilde; an hini nemeta&ntilde; o kaout ar gwir da vont warna&ntilde;.',
 'ical_lien_rss_breves' => 'Liamma&ntilde; berrskrido&ugrave; al lec\'hienn-ma&ntilde; dre RSS',
 'ical_methode_http' => 'Pellgarga&ntilde;',
@@ -904,7 +904,7 @@ da lavaret eo <i>an holl</i> aotreo&ugrave; evit ar merourien hag ar skridaozeri
 adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an nebeuta&ntilde; un aotre evit ar merour',
 'texte_admin_effacer_stats' => 'Diverket e vo an holl roado&ugrave; a denn ouzh gweladenno&ugrave; al lec\'hienn, ha neuze ivez ar re a denn ouzh brud ar pennado&ugrave;.',
 'texte_admin_tech_01' => 'Gant an dilenn-ma&ntilde; e c\'hellit savetei&ntilde; endalc\'had an diaz-titouro&ugrave;, hag a vo lakaet e-barzh @dossier@. N\'ankouait ket kennebeut adpakout an holl drao&ugrave; en teul @img@, enna&ntilde; ar skeudenno&ugrave; hag an teuliado&ugrave; stag ouzh ar pennado&ugrave;.',
-'texte_admin_tech_02' => 'Diwallit : war ul lec\'hienn warna&ntilde; ar memes arreval HEPKEN ouzh SPIP e c\'hello ar restr-savete-ma&ntilde; beza&ntilde; implijet. Arabat neuze &laquo;&nbsp;goullonderi&ntilde; an diaz&nbsp;&raquo; o so&ntilde;jal adstalia&ntilde; ar savete goude beza&ntilde; bet nevesaet SPIP... Sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.',
+'texte_admin_tech_02' => '<MODIF>Diwallit : war ul lec\'hienn warna&ntilde; ar memes arreval HEPKEN ouzh SPIP e c\'hello ar restr-savete-ma&ntilde; beza&ntilde; implijet. Arabat neuze &laquo;&nbsp;goullonderi&ntilde; an diaz&nbsp;&raquo; o so&ntilde;jal adstalia&ntilde; ar savete goude beza&ntilde; bet nevesaet SPIP... Sellit ouzh <a href="@spipnet@">diello&ugrave; SPIP</a>.',
 'texte_admin_tech_03' => 'Gallout a rit dibab savetei&ntilde; stumm gwaeget ar restr evit berraat ar saveteadur, ha ma kemerfe nebeutoc\'h a blas.',
 'texte_admin_tech_04' => 'M\'ho peus c\'hoant da strolla&ntilde; gant un diaz all e c\'hellit dibab savetei&ntilde; ur rubrikenn resis hepken: ',
 'texte_adresse_annuaire_1' => '(Ma \'z eo staliet ar roll dud er memes lec\'h hag ho lec\'hienn, ema&ntilde; moarvat e-barzh &laquo;localhost&raquo;.)',

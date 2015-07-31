@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Opgepasst! D&euml;s Rubrik huet @contient_breves@ br&egrave;ve@scb@: wann der se r&eacute;ckelt, klickt d&euml;st Konfirmatiouns-Feld un.',
 'avis_destinataire_obligatoire' => 'Dir musst d&euml;n Empf&auml;nger uginn ier der d&euml;sen Message fortsch&eacute;ckt.',
 'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
-'avis_erreur_version_archive' => '<b>Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.</b>
+'avis_erreur_version_archive' => '<MODIF><b>Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.</b>
 Dir kommt an grouss Schwieregkeeten:
 Risiko dass &auml;r Datebank zerst&eacute;iert g&euml;t, generellen Disfonktionnement vum Site, asw. Best&auml;tegt d&euml;sen Import n&euml;t.<p />Fir m&eacute;i Informatiounen kuckt an <a href="@spipnet@">
 der Dokumentatioun vu SPIP</a>.',
@@ -190,7 +190,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 
 // I
 'ical_info1' => 'D&euml;s S&auml;it bitt verschidde M&eacute;igl&euml;chkeeten fir mam Liewen vun d&euml;sem Site a Kontakt ze bleiwen.',
-'ical_info2' => 'Fir m&eacute;i Informatiounen iwwer d&euml;s Technik, kuckt an <a href="@spipnet@">der SPIP-Dokumentatioun</a>.',
+'ical_info2' => '<MODIF>Fir m&eacute;i Informatiounen iwwer d&euml;s Technik, kuckt an <a href="@spipnet@">der SPIP-Dokumentatioun</a>.',
 'ical_info_calendrier' => '&Euml;t ginn zwee Kalenneren. Deen &eacute;ischten ass e Plang vum Site mat all den Annoncen vun den publiz&eacute;ierten Artikelen. Deen zweeten huet all editorial Annoncen an &auml;r l&auml;schten privat Messagen: hien ass mat engem pers&eacute;inlechen Schl&euml;ssel fir Iech reserv&eacute;iert, deen dir zu all Moment &auml;nnere k&euml;nnt wann d&euml;r &auml;rt Passwuert &auml;nnert.',
 'ical_lien_rss_breves' => 'Syndicatioun vun de Kurzmeldungen vum Site',
 'ical_methode_http' => 'Downlueden',
@@ -883,7 +883,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'texte_admin_effacer_01' => 'D&euml;s Prozedur l&auml;scht <i>alles</i> aus der Datebank, och <i>all</i> Zoug&auml;ng vun de Redakteren an Administrateuren. Duerno musst dir SPIP nei install&eacute;ieren fir eng nei Datebank an den &eacute;ischten Administrateur-Zougang derb&auml;i ze setzen.',
 'texte_admin_effacer_stats' => 'D&euml;s Prozedur l&auml;scht d\'Statistik an d\'Popularit&eacute;it vun den Artikele vun &auml;rem Site.',
 'texte_admin_tech_01' => 'D&euml;s Optioun erlaabt den Inhalt vun der Datebank am Dossier @dossier@ ze sp&auml;icheren. Vergiesst n&euml;t och de ganzen Inhalt vum Dossier @img@ erofzelueden, wou d\'Biller an d\'Dokumenter vun den Artikelen an an de Rubrike sinn.',
-'texte_admin_tech_02' => 'Opgepasst: d&euml;se Backup kann n&euml;mmen op e Site mat ders&euml;lwechter SPIP-Versioun restaur&eacute;iert ginn. Versicht also nie "&nbsp;Datebank eidel maachen&nbsp;" an der Hoffnung dir kinnt se nei no engem Update install&eacute;ieren... Kuckt <a href="@spipnet@">an der SPIP-Dokumentatioun</a>.',
+'texte_admin_tech_02' => '<MODIF>Opgepasst: d&euml;se Backup kann n&euml;mmen op e Site mat ders&euml;lwechter SPIP-Versioun restaur&eacute;iert ginn. Versicht also nie "&nbsp;Datebank eidel maachen&nbsp;" an der Hoffnung dir kinnt se nei no engem Update install&eacute;ieren... Kuckt <a href="@spipnet@">an der SPIP-Dokumentatioun</a>.',
 'texte_admin_tech_03' => 'Dir k&euml;nnt de Fichier komprim&eacute;iert sp&auml;icheren fir m&eacute;i e s&eacute;ieren Downlued oder Transfert op e Backup-Server, a fir Disk-Plaz ze spueren.',
 'texte_admin_tech_04' => 'Fir mat enger anerer Datebank ze fusionn&eacute;iere k&euml;nnt dir de Backup op d&euml;s Rubrik begrenzen: ',
 'texte_adresse_annuaire_1' => '(Wann &auml;ren Annuaire op ders&euml;lwechter Maschinn install&eacute;iert ass, dann as et hei warscheinl&euml;ch "localhost".)',

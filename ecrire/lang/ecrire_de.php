@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Achtung! diese Rubrik enth&auml;lt @contient_breves@ Meldungen@scb@: wenn Sie Rubrik verschieben wollen, markieren Sie bitte zur Best&auml;tigung dieses K&auml;stchen.',
 'avis_destinataire_obligatoire' => 'Sie m&uuml;ssen einen Empf&auml;nger angeben, bevor Sie die Nachricht abschicken.',
 'avis_erreur_connexion_mysql' => 'Verbindungsfehler (SQL)',
-'avis_erreur_version_archive' => '<b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.',
+'avis_erreur_version_archive' => '<MODIF><b>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen installierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls die Funktionalit&auml;t Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren. Bitte brechen Sie den Vorgang jetzt ab.<p> Mehr dazu finden Sie in der <a href="@spipnet@"> franz&ouml;sischen SPIP-Dokumentation</a>.',
 'avis_espace_interdit' => '<b>Gesperrter Bereich</b><div>SPIP ist bereits installiert.</div>',
 'avis_lecture_noms_bases_1' => 'Das Installationsprogramm konnte die Namen der vorhandenen Datenbanken nicht lesen.',
 'avis_lecture_noms_bases_2' => 'Entweder ist keine Datenbank vorhanden oder die Funktion zum Auflisten der Datenbanken ist abgeschaltet (Das ist bei vielen Webhostern der Fall).',
@@ -186,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Diese Seite erm&ouml;glicht auf mehrere Arten an der Entwicklung der Website teilzunehmen.',
-'ical_info2' => 'Um mehr &uuml;ber diese Techniken zu erfahren, lesen Sie bitte die <a href="@spipnet@">SPIP Dokumentation</a>.',
+'ical_info2' => '<MODIF>Um mehr &uuml;ber diese Techniken zu erfahren, lesen Sie bitte die <a href="@spipnet@">SPIP Dokumentation</a>.',
 'ical_info_calendrier' => 'Sie verf&uuml;gen &uuml;ber zwei Kalender. Einer gibt Ihnen eine &Uuml;bersicht &uuml;ber die Website und alle dort ver&ouml;ffentlichten Artikel. Der zweite enth&auml;lt editorische Ank&uuml;ndigungen und Ihre pers&ouml;nlichen Nachrichten. Sie allein haben Zugriff auf ihn indem Sie Ihr Passwort eingeben. Sie k&ouml;nne es &auml;ndern, indem Sie Ihr Zugangspasswort f&uuml;r diese Website &auml;ndern.',
 'ical_lien_rss_breves' => 'Syndikation der Meldungen dieser Website',
 'ical_methode_http' => 'Download',
@@ -886,7 +886,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_admin_effacer_01' => 'Dieser Befehl l&ouml;scht den <i>gesamten</i> Inhalt der Datenbank mit <i>allen</i> Redakteuren und Administratoren. Nach der Ausf&uuml;hrung dieses Befehls m&uuml;ssen Sie SPIP neu installieren und einen ersten Administrator anlegen.',
 'texte_admin_effacer_stats' => 'Dieser Befehl l&ouml;scht alle Daten der Besucherstatistiken, auch die zur Popularit&auml;t der Artikel.',
 'texte_admin_tech_01' => 'Diese Option erm&ouml;glicht es, den Inhalt der Datenbank in das Verzeichnis @dossier@ zu sichern. Vergessen Sie bitte nicht, ebenfalls den Inhalt des Verzeichnisses <i>img/</i> zu sichern, denn es enth&auml;lt die Bilder und Grafiken, welche f&uuml;r Rubriken und Artikel verwendet werden.',
-'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="@spipnet@">die SPIP Dokumentation</a>.
+'texte_admin_tech_02' => '<MODIF>Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="@spipnet@">die SPIP Dokumentation</a>.
 
 
 
