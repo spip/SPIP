@@ -73,7 +73,10 @@ function recuperer_parametres_url(&$fond, $url) {
 	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $fond)) {
 		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
-		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . _q($url_propre));
+	
+		include_spip('base/abstract_sql'); // chercher dans la table des URLS
+
+		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . sql_quote($url_propre));
 		if ($r) {
 			$fond = ($r['type'] == 'syndic') ?  'site' : $r['type'];
 			$contexte[id_table_objet($fond)] = $r['id_objet'];
