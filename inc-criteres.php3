@@ -365,10 +365,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	  { $op = '=';
 	    $col = $crit->op;
 	    $val = $crit->op;
-
+	    spip_log("op: $val");
 	    // Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 	    if ($val == 'lang')
-	      $val = '".$GLOBALS[\'spip_lang\']."';
+	      $val = array('$GLOBALS[\'spip_lang\']');
 	    else {
 	    // Si id_parent, comparer l'id_parent avec l'id_objet
 	    // de la boucle superieure.... faudrait verifier qu'il existe
