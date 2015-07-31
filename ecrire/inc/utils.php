@@ -461,7 +461,7 @@ function table_objet($type) {
 		'syndic_article' => 'syndic_articles',
 		'type_document' => 'types_documents' # hum
 	);
-	return $surnoms[$type];
+	return isset($surnoms[$type]) ? $surnoms[$type] : $type."s";
 }
 
 // http://doc.spip.org/@id_table_objet
