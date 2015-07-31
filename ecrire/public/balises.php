@@ -575,8 +575,23 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		$p->code = "''";
 		return $p;
 	}
+	// Transforme l'ecriture du deuxieme param {truc=chose,machin=chouette} en
+	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
+	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
+	if ($p->param[0]) {
+		while (count($p->param[0])>2){
+			$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
+		}
+	}
 	$__modele = interprete_argument_balise(1,$p);
-	$__modele = $__modele?", $__modele":"";
+	$__modele = $__modele?", $__modele":", ''";
+	array_shift($p->param);
+	
+	$champ = phraser_arguments_inclure($p, true); 
+	// a priori true
+	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
+	// si true, les arguments simples (sans truc=chose) vont degager
+	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
@@ -587,7 +602,9 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	), ".$p->boucles[$b]->modificateur['debut_nom'].",
 		\$Pile[0]['debut'.".$p->boucles[$b]->modificateur['debut_nom']."],"
 	. $p->boucles[$b]->total_parties
-	  . ", $liste$__modele,''," . sql_quote($connect) . ")";
+	  . ", $liste$__modele," . sql_quote($connect) 
+	  . ", array(" . implode(',',$code_contexte) . ")" 
+	  . ")";
 
 	$p->interdire_scripts = false;
 	return $p;
