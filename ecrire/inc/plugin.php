@@ -599,6 +599,7 @@ function plugin_get_infos($plug, $force_reload=false){
 					$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
 				}
 				plugin_verifie_conformite($plug,$arbre);
+				
 				$ret['nom'] = spip_xml_aplatit($arbre['nom']);
 				$ret['version'] = trim(end($arbre['version']));
 				if (isset($arbre['auteur']))
@@ -613,6 +614,8 @@ function plugin_get_infos($plug, $force_reload=false){
 					$ret['etat'] = trim(end($arbre['etat']));
 				if (isset($arbre['options']))
 					$ret['options'] = $arbre['options'];
+				if (isset($arbre['licence']))
+					$ret['licence'] = $arbre['licence'];
 				if (isset($arbre['install']))
 					$ret['install'] = $arbre['install'];
 				if (isset($arbre['fonctions']))
@@ -754,6 +757,10 @@ function plugin_verifie_conformite($plug,&$arbre){
 				$utilise[] = $att;
 			}
 		}
+		
+		if (spip_xml_match_nodes(',^licence,',$arbre,$licence)){
+			$arbre['licence'] = $licence['licence'][0];
+		}		
 		$arbre['utilise'] = $utilise;
 		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
@@ -864,9 +871,11 @@ function affiche_bloc_plugin($plug_file, $info) {
 
 	$s .= "<div class='detailplugin verdana2'>";
 
-	if (isset($info['icon']))
-		$s .= "<img src='". _DIR_PLUGINS.$plug_file.'/'.trim($info['icon'])."' style='float:$spip_lang_right;' alt=' ' />\n";
+	if (isset($info['icon'])) {
+		include_spip("inc/filtres_images");
+		$s.= "<div  style='float:$spip_lang_right;'>".image_reduire(_DIR_PLUGINS.$plug_file.'/'.trim($info['icon']), 64)."</div>";
 
+	}
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
 	if (isset($info['description']))
@@ -874,6 +883,8 @@ function affiche_bloc_plugin($plug_file, $info) {
 
 	if (isset($info['auteur']))
 		$s .= "<hr/>" . _T('auteur') .' '. plugin_propre($info['auteur']) . "<br/>";
+	if (isset($info['licence']))
+		$s .= "<hr/>" . _T('intitule_licence') .' '. plugin_propre($info['licence']) . "<br/>";
 
 	if (trim($info['lien'])) {
 		if (preg_match(',^https?://,iS', $info['lien']))
