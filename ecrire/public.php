@@ -103,7 +103,7 @@ if (defined('_INC_PUBLIC')) {
 	isset($_COOKIE['spip_admin']) 
 	AND !$flag_preserver
 	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
-	AND !_request('fragment')
+	AND !_request('var_fragment')
 	))
 		include_spip('balise/formulaire_admin');
 
@@ -120,9 +120,19 @@ if (defined('_INC_PUBLIC')) {
 	// dans une fonction).
 	else {
 		// Si la retention du flux de sortie est impossible
-	  	// envoi des entetes
+		// envoi des entetes
 		if (!$flag_ob) {
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
+
+			// si un fragment est demande, on le provoque ici
+			// (mais ca peut planter)
+			if (($var_fragment=_request('var_fragment'))!==NULL) {
+				preg_match(',<div id="'.preg_quote($var_fragment)
+				.'" class="fragment">(.*)<!-- /'.preg_quote($var_fragment)
+				.' --></div>,Uims', $page['texte'], $r);
+				$page['texte'] = $r[1];
+			}
+
 			eval('?' . '>' . $page['texte']);
 			$page['texte'] = '';
 		}
@@ -135,15 +145,6 @@ if (defined('_INC_PUBLIC')) {
 			$page['texte'] = ob_get_contents(); 
 			ob_end_clean();
 			
-			// recuperer le fragment qui nous interesse si c'est possible
-			if (($fragment=_request('fragment'))!==NULL){ // un fragment est demande
-				if (is_array($res) 								// le squelette nous a renvoye des fragments
-						AND (isset($res[$fragment]))){	// et celui qu'on cherche est la
-					$page['texte'] = $res[$fragment]; // le fragment
-				}
-				else
-					$page['texte'] = ""; // fragment vide a priori
-			}
 			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
@@ -167,7 +168,19 @@ if (defined('_INC_PUBLIC')) {
 		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs)
 			. $page['texte'];
 
+	//
 	// Post-traitements et affichage final
+	//
+
+	// si un fragment est demande, l'isoler
+	if (($var_fragment=_request('var_fragment'))!==NULL) {
+		preg_match(',<div id="'.preg_quote($var_fragment)
+		.'" class="fragment">(.*)<!-- /'.preg_quote($var_fragment)
+		.' --></div>,Uims', $page['texte'], $r);
+			$page['texte'] = $r[1];
+	}
+
+
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
