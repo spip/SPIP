@@ -85,7 +85,7 @@ function exec_brouteur_frame_dist()
 	else {
 	  if ($id_rubrique !== "") {
 
-		$result=spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
+		$result=spip_query("SELECT id_parent, id_rubrique, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
 		if ($row=spip_fetch_array($result)){
 			$titre = typo($row['titre']);
 			$id_parent=$row['id_parent'];

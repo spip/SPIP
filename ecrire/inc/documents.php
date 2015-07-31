@@ -54,13 +54,10 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 function document_vu($id_document=0) {
 	static $vu = array();
 
-	if (_DIR_RESTREINT)
-		return;
-
-	if ($id_document)
-		$vu[$id_document]++;
-	else
-		return join(',', array_keys($vu));
+	if (!_DIR_RESTREINT) {
+		if (!$id_document) return join(',', array_keys($vu));
+		if (!isset($vu[$id_document])) $vu[$id_document] = true;
+	}
 }
 
 
@@ -106,7 +103,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 			$image = reduire_image_logo($local, 110, 120);
 		else
 			$image = reduire_image_logo($local);
-	}
+	} else $image = '';
 
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
@@ -439,6 +436,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 	$fichiers = preg_files($dir);
 	$exts = array();
 	$dirs = array(); 
+	$texte_upload = '';
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
@@ -842,6 +840,7 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 	// n'est pas distante, qu'elle est bien presente dans IMG/
 	// qu'elle n'a pas de vignette perso ; et qu'on a la bibli !
 	if ($document['distant']!='oui' AND !$id_vignette
+	AND isset($ftype[$document['id_type']])
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
 	AND ($process == 'imagick' OR $process == 'gd2'
@@ -1339,29 +1338,27 @@ function teste_doc_deplie($id_document) {
 function maj_documents ($id_objet, $type) {
 	global $_POST;
 
-	if ($id_objet
-	AND $id_document = intval($_POST['id_document'])
-	AND $_POST['modif_document'] == 'oui') {
+	if (!isset($_POST['modif_document'])) return;
 
-		// "securite" : verifier que le document est bien lie a l'objet
-		$result_doc = spip_query("SELECT * FROM spip_documents_".$type."s WHERE id_document=".$id_document."	AND id_".$type." = $id_objet");
-		if (spip_num_rows($result_doc) > 0) {
-			$titre_document = (corriger_caracteres(
-				$_POST['titre_document']));
-			$descriptif_document = (corriger_caracteres(
-				$_POST['descriptif_document']));
+	$id_document = intval($_POST['id_document']);
+
+	// "securite" : verifier que le document est bien lie a l'objet
+	$result = spip_num_rows(spip_query("SELECT * FROM spip_documents_".$type."s WHERE id_document=".$id_document."	AND id_".$type." = " . intval($id_objet)));
+	if ($result) {
+		$titre_document = (corriger_caracteres($_POST['titre_document']));
+		$descriptif_document = (corriger_caracteres($_POST['descriptif_document']));
 
 			// taille du document (cas des embed)
-			if ($largeur_document = intval($_POST['largeur_document'])
-			AND $hauteur_document = intval($_POST['hauteur_document']))
+		if ($largeur_document = intval($_POST['largeur_document'])
+		AND $hauteur_document = intval($_POST['hauteur_document']))
 				$wh = ", largeur='$largeur_document',
 					hauteur='$hauteur_document'";
-			else $wh = "";
+		else $wh = "";
 
-			spip_query("UPDATE spip_documents SET titre='" . addslashes($titre_document) . "', descriptif='" . addslashes($descriptif_document) . "' $wh WHERE id_document=".$id_document);
+		spip_query("UPDATE spip_documents SET titre='" . addslashes($titre_document) . "', descriptif='" . addslashes($descriptif_document) . "' $wh WHERE id_document=".$id_document);
 
 			// Date du document (uniquement dans les rubriques)
-			if ($_POST['jour_doc']) {
+		if ($_POST['jour_doc']) {
 				if ($_POST['annee_doc'] == "0000")
 					$_POST['mois_doc'] = "00";
 				if ($_POST['mois_doc'] == "00")
@@ -1375,14 +1372,11 @@ function maj_documents ($id_objet, $type) {
 					// Changement de date, ce qui nous oblige a :
 					calculer_rubriques();
 				}
-			}
-
 		}
 
 		// Demander l'indexation du document
 		include_spip('inc/indexation');
 		marquer_indexer('document', $id_document);
-
 	}
 }
 

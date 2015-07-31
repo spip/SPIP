@@ -116,7 +116,7 @@ function assembler_page ($fond) {
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
 	} else {
-		if (!$use_cache && isset($page['contexte'])) {
+	  if (!$use_cache && isset($page['contexte']) && is_array($page['contexte'])) {
 // Remplir les globals pour les boutons d'admin
 			foreach ($contexte as $var=>$val)
 				$GLOBALS[$var] = $val;

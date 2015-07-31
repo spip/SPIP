@@ -368,24 +368,22 @@ function verifier_lang_url() {
 
 	// quelle langue est demandee ?
 	$lang_demandee = $GLOBALS['meta']['langue_site'];
-	if ($_COOKIE['spip_lang_ecrire'])
+	if (isset($_COOKIE['spip_lang_ecrire']))
 		$lang_demandee = $_COOKIE['spip_lang_ecrire'];
-	if ($_COOKIE['spip_lang'])
+	if (isset($_COOKIE['spip_lang']))
 		$lang_demandee = $_COOKIE['spip_lang'];
-	if ($_GET['lang'])
+	if (isset($_GET['lang']))
 		$lang_demandee = $_GET['lang'];
 
 	// Verifier que la langue demandee existe
 	lang_select($lang_demandee);
-	$lang_demandee = $spip_lang;
 
 	// Renvoyer si besoin
-	if (!($_GET['lang']<>'' AND $lang_demandee == $_GET['lang'])
-	AND !($_GET['lang']=='' AND $lang_demandee == $GLOBALS['meta']['langue_site']))
+	if ($spip_lang != $lang_demandee)
 	{
-		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
-		if ($d = $GLOBALS['var_mode'])
-			$destination = parametre_url($destination, 'var_mode', $d, '&');
+		$destination = parametre_url(self(),'lang', $spip_lang, '&');
+		if (isset($GLOBALS['var_mode']))
+			$destination = parametre_url($destination, 'var_mode', $GLOBALS['var_mode'], '&');
 		redirige_par_entete($destination);
 	}
 
