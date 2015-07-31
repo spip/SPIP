@@ -1069,6 +1069,18 @@ function balise_EVAL_dist($p) {
 	return $p;
 }
 
+// #CHAMP_SQL{x} renvoie la valeur du champ sql 'x'
+// permet de recuperer par exemple un champ notes dans une table sql externe
+// (impossible via #NOTES qui est une balise calculee)
+// ne permet pas de passer une expression pour x qui ne peut etre qu'un texte statique !
+function balise_CHAMP_SQL_dist($p){
+	$p->code = '';
+	if (isset($p->param[0][1][0]) AND $champ = ($p->param[0][1][0]->texte))
+		$p->code = champ_sql($champ, $p);
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
 
 // #VAL{x} renvoie 'x' (permet d'appliquer un filtre a une chaine)
 // Attention #VAL{1,2} renvoie '1', indiquer #VAL{'1,2'}
