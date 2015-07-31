@@ -609,6 +609,7 @@ function statistiques_forums_dist($duree, $interval, $type, $id_article, $serveu
 	$order = 'date_heure';
 	$interval = 24 * 3600;
 	$oldscore = 420;
+	$oldlog = array();
 	while ($interval >= 1) {
 		$log = statistiques_collecte_date('COUNT(*)', "(FLOOR(UNIX_TIMESTAMP($order) / $interval) *  $interval)", 'spip_forum', $where, $serveur);
 		if (count($log) > 3) break;
