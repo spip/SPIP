@@ -51,7 +51,7 @@ function calculer_champ_FORMULAIRE_SIGNATURE($fonctions, $nom_champ, $id_boucle,
 	$milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
 		$lacible = ' . index_pile($id_boucle, 'id_article', $boucles) . ";";
-	$code = '(!query_petitions($lacible) ? "" :
+	$code = '(!sql_petitions($lacible) ? "" :
 		("<"."?php include(\'inc-formulaires.php3\');
 		lang_select(\"$spip_lang\"); formulaire_signature($lacible);
 		lang_dselect(); ?".">"))';

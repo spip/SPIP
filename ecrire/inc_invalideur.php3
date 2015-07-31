@@ -59,7 +59,7 @@ function insere_invalideur($a, $type, $hache) {
 function retire_cache($cache) {
 	if ($GLOBALS['flag_ecrire']) return;
 	# spip_log("kill $cache ?");
-	if (preg_match("|^CACHE/([0-9a-f]/)?([0-9a-f]/)?[-_%0-9a-z.]*$|i", $cache))
+	if (preg_match("|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+$|i", $cache))
 		@unlink($cache);
 }
 
@@ -73,7 +73,58 @@ function retire_caches($caches) {
 	}
 }
 
+//
+// Supprimer les vieux caches
+//
+
+# Teste l'obsolescence d'un cache. 
+# Celle de son include le + bref (indiquee ligne 1) serait + juste
+# mais lors d'un balayage de repertoire, 
+# ouvrir chaque fichier serait couteux, et de gain faible
+function retire_cond_cache($arg,$path) {
+	return (@filemtime($path) < $arg);
+}
+
+function trouve_caches($cond, $arg, $dir) {
+	if ($handle = @opendir($dir))
+		while (($fichier = readdir($handle)) !== false) {
+			if (substr($fichier,0,1)<>'.') {
+				$path = "$dir$fichier";
+				if ($cond($arg, $path))
+					$tous[] = $path;
+			}
+		}
+	return $tous;
+}
+
+
+function retire_vieux_caches($dir) {
+	include_ecrire('inc_meta.php3');
+	include_ecrire('inc_connect.php3');
+	if ($GLOBALS['db_ok']) {
+		ecrire_meta('date_purge_cache', time());
+		ecrire_metas();
+
+		// Inferer la date de peremption du nom du dir
+		// (et si on est a plat, disons 24h)
+		// NB: On ajoute 10 minutes pour eviter tout probleme de lock
+		if (ereg('CACHE/./([0-9]+)', $dir, $regs))
+			$delais = $regs[1] + 600;
+		else
+			$delais = 24*60*60;
+
+		$tous = trouve_caches('retire_cond_cache', time()-$delais, $dir);
+		spip_log("nettoyage de $dir (" . count($tous) . " obsolete(s)");
+		if ($tous) {
+			applique_invalideur($tous);
+		}
+	}
+}
+
+
+//
 // Commentaire ?
+//
 function suivre_invalideur($cond, $table) {
 	if ($GLOBALS['flag_ecrire']) return;
 	$result = spip_query("SELECT DISTINCT hache FROM $table WHERE $cond");

@@ -18,8 +18,11 @@ function nettoyer_uri() {
 	return $fichier_requete;
 }
 
+// le format souhaite : "CACHE/a/8400/bout-d-url.md5"
 function generer_nom_fichier_cache($contexte='', $fond='') {
-	global $HTTP_POST_VARS;
+	global $delais;
+
+	if ($delais == 0) return '';
 
 	if (!$contexte) {
 		$fichier_requete = nettoyer_uri();
@@ -43,16 +46,14 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
 
-	// Cas des POST sur une meme adresse : ne pas melanger (desuet?)
-	if (!empty($HTTP_POST_VARS)) $fichier_cache .= '.'.@getmypid();
+	// morceau de md5
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
-	$subdir_cache = substr($md_cache, 0, 1);
+	// sous-repertoires
+	$subdir = creer_repertoire('CACHE', substr($md_cache, 0, 1));
+	$subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
-	if (creer_repertoire('CACHE', $subdir_cache))
-		$fichier_cache = "$subdir_cache/$fichier_cache";
-
-	return $fichier_cache;
+	return $subdir.$subdir2.$fichier_cache;
 }
 
 
@@ -61,7 +62,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 //
 
 function utiliser_cache($chemin_cache, $delais) {
-	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
+	global $HTTP_SERVER_VARS;
 	global $lastmodified;
 
 	// A priori cache
@@ -86,7 +87,6 @@ function utiliser_cache($chemin_cache, $delais) {
 
 	// recalcul obligatoire
 	$ok_cache &= ($GLOBALS['recalcul'] != 'oui');
-	$ok_cache &= empty($HTTP_POST_VARS);
 
 	// ne jamais recalculer pour les moteurs de recherche, proxies...
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
@@ -94,39 +94,6 @@ function utiliser_cache($chemin_cache, $delais) {
 
 	# spip_log (($ok_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s (reste ".($delais-$age)." s)":''));
 	return $ok_cache;
-}
-
-
-function ecrire_fichier_cache ($fichier, $contenu) {
-	$fichier_tmp = $fichier.'_tmp';
-
-	// Essayer de poser un verrou pour proteger l'ecriture du fichier
-	if (!spip_get_lock($fichier_tmp, 1)) {
-		spip_log ("Echec du lock $fichier_tmp !");
-		return;
-	}
-
-	// Entrer les donnees et verifier qu'on est alle au bout
-	$f = fopen($fichier_tmp, "wb");
-	if (!$f) {
-		spip_log ("Echec d'ouverture de $fichier_tmp !");
-		return $fichier;
-	} else {
-		$r = fwrite($f, $contenu);
-		if ($r != strlen($contenu))
-			$bug = true;
-		if (!fclose($f))
-			$bug = true;
-	}
-
-	// Finaliser
-	if ($bug) {
-		spip_log ("Probleme avec le fichier $fichier_tmp - je meurs");
-		@unlink($fichier_tmp);
-	} else {
-		@rename($fichier_tmp, $fichier);
-	}
-	spip_release_lock($fichier_tmp);
 }
 
 
@@ -191,18 +158,17 @@ function purger_repertoire($dir, $age, $regexp = '') {
 function meta_donnees_cache ($chemin_cache) {
 	// Lire le debut du fichier cache ; permet de savoir s'il n'a
 	// pas ete invalide par une modif sur une table
-	if ($f = fopen($chemin_cache, "r")) {
-		$l = fgets($f,1024);
-		if (!preg_match("/^<!-- ([^\n]*) -->\n/", $l, $match))
+	if (lire_fichier($chemin_cache, $contenu, array('size' => 1024))) {
+		if (!preg_match("/^<!-- ([^\n]*) -->\n/", $contenu, $match))
 			return false; // non conforme
 		$meta_donnees = unserialize($match[1]);
+		return $meta_donnees;
 	}
-	return $meta_donnees;
 }
 
 // Determination du fichier cache (si besoin)
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
-	if ($delais == 0) {
+	if ($delais == 0 OR !empty($GLOBALS['HTTP_POST_VARS'])) {
 		$use_cache = false;
 		$chemin_cache = '';
 	} else {
@@ -221,7 +187,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 			}
 		}
 
-		// S'il faut calculer, poser un lock (et tester MySQL)
+		// S'il faut calculer, poser un lock SQL
 		if (!$use_cache) {
 			// Attendre 20 secondes maxi, que le copain ait
 			// calcule le meme fichier cache ou que

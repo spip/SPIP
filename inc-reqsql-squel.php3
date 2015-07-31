@@ -89,9 +89,7 @@ function calculer_requete(&$boucle) {
     
   case 'hierarchie':
     $boucle->from[] =  "rubriques AS $id_table";
-    $boucle->where[] = 'rubriques.id_rubrique = $hierarchie';
-    // champ oblige' pour ge'rer le 2e while synthe'tise' dans inc-calcul-squel
-    $boucle->select[] = "rubriques.id_parent";
+#    $boucle->select[] = "rubriques.id_parent";
     break;
     
   case 'syndication':
@@ -129,7 +127,9 @@ function calculer_requete(&$boucle) {
 		"), # WHERE
 		'".addslashes($boucle->group)."', # GROUP
 		'".addslashes($boucle->order)."', # ORDER
-		'".$boucle->limit."', # LIMIT
+		" . (strpos($boucle->limit, 'intval') === false ?
+			"'$boucle->limit'" :
+			$boucle->limit). ", # LIMIT
 		'".$boucle->sous_requete."', # sous
 		".$boucle->compte_requete.", # compte
 		'".$id_table."', # table

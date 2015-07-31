@@ -26,7 +26,7 @@ function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 		if (file_exists("$d-$id_rubrique.$ext"))
 			return "$d-$id_rubrique";
 		else
-			$id_rubrique = query_parent($id_rubrique);
+			$id_rubrique = sql_parent($id_rubrique);
 	}
 
 	if (@file_exists("$d.$ext")) {
@@ -36,13 +36,7 @@ function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 	} else if (@file_exists("$fond-dist.$ext")) {
 		return "$fond-dist";
 	} else {
-		// erreur webmaster : $fond ne correspond a rien
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('info_erreur_squelette'));
-		echo "<P>"._T('info_erreur_squelette2', array('fichier'=>"$d"))."</P>";
-		install_fin_html();
-		spip_log ("ERREUR: aucun squelette $d n'est disponible...");
-		exit;
+	  	return '';
 	}
 }
 ?>

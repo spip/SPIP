@@ -6,13 +6,13 @@ class Boucle {
 	var $type = 'boucle';
 	var $id_boucle, $id_parent;
 	var $cond_avant, $milieu, $cond_apres, $cond_altern;
-	var $commande;
 	var $lang_select;
 	var $type_requete;
 	var $param;
 	var $separateur;
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
+	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
 	var $tout = false;
 	var $plat = false;
@@ -27,6 +27,7 @@ class Boucle {
 	var $lien = false;
 	var $sous_requete = false;
 	var $compte_requete = 1;
+	var $hierarchie = '';
 	// champs pour la construction du corps PHP
 	var $return;
 	var $numrows = false; 

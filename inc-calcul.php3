@@ -30,6 +30,17 @@ if (@file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
 else { include_local ("inc-urls-dist.php3"); }
 
 
+// Le squelette compile est-il trop vieux ?
+function squelette_obsolete($skel) {
+	return (
+		($GLOBALS['recalcul'] == 'oui')
+		OR !@file_exists($skel)
+		OR (@filemtime('mes_fonctions.php3') > @filemtime($skel))
+		OR (@filemtime('ecrire/mes_options.php3') > @filemtime($skel))
+	);
+}
+
+
 // Charge un squelette (en demande au besoin la compilation)
 function charger_squelette ($squelette) {
 	$ext = $GLOBALS['extension_squelette'];
@@ -43,28 +54,39 @@ function charger_squelette ($squelette) {
 	else {
 		$phpfile = 'CACHE/skel_' . $nom . '.php';
 
-		// le squelette est-il a compiler ?
-		if (!file_exists($phpfile) OR $GLOBALS['recalcul'] == 'oui') {
-			include_local("inc-calcul-squel.php3");
-			$f = fopen ($sourcefile, "r") OR die ("Horrible souffrances");
-			$skel = fread($f, filesize($sourcefile));
-			fclose($f);
-			$skel_compile = "<"."?php\n" .
-				calculer_squelette($skel, $nom, $ext)."\n?".">";
-			eval('?'.'>'.$skel_compile);
-			if (function_exists($nom)) {
-				ecrire_fichier_cache ($phpfile, $skel_compile);
-				return $nom;
-			} else {
-				die ("Hoorreeur squelette pas compile !!");
-			}
-		} else {
-			// Charge le squelette compile
-			include($phpfile);
+		// le squelette est-il deja compile, lisible, etc ?
+		if (!squelette_obsolete($sourcefile)
+		AND lire_fichier ($phpfile, $contenu,
+		array('critique' => 'oui', 'phpcheck' => 'oui'))) {
+			eval('?'.'>'.$contenu);
 			if (function_exists($nom))
 				return $nom;
-			else
-				die ("Horreur squelette contient du baratin");
+		}
+
+		// sinon le compiler
+		include_local("inc-calcul-squel.php3");
+		if (!lire_fichier ($sourcefile, $skel)) { 
+			// erreur webmaster : $fond ne correspond a rien
+			include_ecrire ("inc_presentation.php3");
+			install_debut_html(_T('info_erreur_squelette'));
+			echo "<P>"._T('info_erreur_squelette2',
+			array('fichier'=>$GLOBALS['fond']))."</P>";
+			install_fin_html();
+			spip_log ("ERREUR: aucun squelette $squelette n'est disponible...");
+			exit;
+		}
+
+		$skel_compile = "<"."?php\n"
+		. calculer_squelette($skel, $nom, $ext)."\n?".">";
+		eval('?'.'>'.$skel_compile);
+
+		if (function_exists($nom)) {
+			ecrire_fichier ($phpfile, $skel_compile);
+			return $nom;
+		} else {
+			echo ("<h1>Horreur, squelette pas compile !</h1>");
+			echo $skel_compile;
+			exit;
 		}
 	}
 }
@@ -74,8 +96,10 @@ function charger_squelette ($squelette) {
 # et l'applique sur un $contexte pour un certain $cache.
 # Retourne un tableau de 3 elements:
 # 'texte' => la page calculee
-# 'process_ins' => 'html' ou 'php' si presence d'un '<?php'
+# 'process_ins' => 'html' ou 'php' si presence d'un '< ?php'
 # 'invalideurs' => les invalideurs (cf inc-calcul-squel)
+
+# En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 # La recherche est assuree par la fonction cherche_squelette
 # definie dans inc-chercher, fichier non charge s'il existe un fichier
@@ -185,7 +209,7 @@ function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
 	$lang = $contexte_local['lang'];
 
 	// Chercher le fond qui va servir de squelette
-	if ($r = cherche_rubrique_fond($contexte_local,
+	if ($r = sql_rubrique_fond($contexte_local,
 	$lang ? $lang : lire_meta('langue_site')))
 		list($id_rubrique_fond, $lang) = $r;
 
@@ -239,7 +263,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 		// Page globale
 		// si le champ chapo commence par '=' c'est une redirection.
 		if ($id_article = intval($GLOBALS['id_article'])) {
-			$page = query_chapo($id_article);
+			$page = sql_chapo($id_article);
 			if ($page) {
 				$page = $page['chapo'];
 				if (substr($page, 0, 1) == '=') {
@@ -262,9 +286,8 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	}
 
 	// Enregistrer le fichier cache
-	if ($delais>0) {
-		ecrire_fichier_cache($chemin_cache, $page['texte']);
-	}
+	if ($delais>0)
+		ecrire_fichier($chemin_cache, $page['texte']);
 
 	return $page;
 }
@@ -281,49 +304,46 @@ tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images in
 //
 
 function cherche_image($id_objet, $type_objet, $flag_fichier) {
-	$image = array('', '');
-	$dossier = $GLOBALS['dossier_images'] . '/';
 	// cherche l'image liee a l'objet
-	$image[0] = cherche_image_nommee($type_objet.'on'.$id_objet,$dossier);
+	$on = cherche_image_nommee($type_objet.'on'.$id_objet);
 
 	// cherche un survol
-	if ($image[0]) {
-	  $image[1] = cherche_image_nommee($type_objet.'off'.$id_objet,$dossier);
-	}
-	if ($flag_fichier)
-	  { 
-	    $image[0] = ereg_replace("^$dossier", '', $image[0]);
-	    $image[1] = ereg_replace("^$dossier", '', $image[1]);}
-	return $image;
+	$off =(!$on ? '' :
+	cherche_image_nommee($type_objet.'off'.$id_objet));
+
+	return (!$flag_fichier ? 
+		array($on, $off) :
+		array(ereg_replace("^[^\/]+/", '', $on),
+		      ereg_replace("^[^\/]+/", '', $off)));
 }
 
 function image_article($id_article, $dossier){
-  return cherche_image($id_article,'art', $dossier);
+	return cherche_image($id_article,'art', $dossier);
 }
 
 function image_auteur($id_auteur, $dossier){
-  return cherche_image($id_auteur,'aut', $dossier);
+	return cherche_image($id_auteur,'aut', $dossier);
 }
 
 function image_breve($id_breve, $dossier){
-  return cherche_image($id_breve,'breve', $dossier);
+	return cherche_image($id_breve,'breve', $dossier);
 }
 
 function image_site($id_syndic, $dossier){
-  return cherche_image($id_syndic,'site', $dossier);
+	return cherche_image($id_syndic,'site', $dossier);
 }
 
 function image_mot($id_mot, $dossier){
-  return cherche_image($id_mot,'mot', $dossier);
+	return cherche_image($id_mot,'mot', $dossier);
 }
 
 function image_rubrique($id_rubrique, $dossier) {
 	// Recherche recursive vers les rubriques parentes (y compris racine)
 	while ($id_rubrique) {
-	  $image = cherche_image($id_rubrique, 'rub', $dossier);
-	  if ($image[0]) return $image;
-	  $id_rubrique = query_parent($id_rubrique);
-	  }
+		$image = cherche_image($id_rubrique, 'rub', $dossier);
+		if ($image[0]) return $image;
+		$id_rubrique = sql_parent($id_rubrique);
+	}
 	return '';
 }
 ?>

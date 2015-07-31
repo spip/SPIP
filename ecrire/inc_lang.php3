@@ -11,28 +11,25 @@ define("_ECRIRE_INC_LANG", "1");
 function ecrire_cache_lang($lang, $module) {
 	include_ecrire('inc_filtres.php3');
 
-	$fichier_lang = $module.'_'.$lang.'.php3';
-	if ($t = @fopen('CACHE/lang_'.$fichier_lang.'_'.@getmypid(), "wb")) {
-		@fwrite($t, "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n");
-		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
-			@fwrite($t, "\$GLOBALS[\$GLOBALS['idx_lang']] = array(\n");
-			$texte = '';
-			ksort($cache);
-			reset($cache);
-			while (list($code, ) = each($cache))
-				$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
-			@fwrite($t, substr($texte,2)."\n);\n\n");
-			@fwrite($t, "\$GLOBALS['cache_lang']['$lang'] = array(\n");
-			$texte = '';
-			reset($cache);
-			while (list($code, ) = each($cache))
-				$texte .= ",\n\t'".$code."' => 1";
-			@fwrite($t, substr($texte,2)."\n);\n\n");
-		}
-		@fwrite($t, "\n\n?".">\n");
-		@fclose($t);
-		@rename('CACHE/lang_'.$fichier_lang.'_'.@getmypid(), 'CACHE/lang_'.$fichier_lang);
+	$contenu = "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n";
+	if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
+		$contenu .= "\$GLOBALS[\$GLOBALS['idx_lang']] = array(\n";
+		$texte = '';
+		ksort($cache);
+		reset($cache);
+		while (list($code, ) = each($cache))
+			$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
+		$contenu .= substr($texte,2)."\n);\n\n";
+		$contenu .= "\$GLOBALS['cache_lang']['$lang'] = array(\n";
+		$texte = '';
+		reset($cache);
+		while (list($code, ) = each($cache))
+			$texte .= ",\n\t'".$code."' => 1";
+		$contenu .= substr($texte,2)."\n);\n\n";
 	}
+	$contenu .= "\n\n?".">\n";
+
+	ecrire_fichier ('CACHE/lang_'.$module.'_'.$lang.'.php3', $contenu);
 }
 
 function ecrire_caches_langues() {
@@ -58,7 +55,11 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))
 		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
+			if (lire_fichier('CACHE/lang_'.$module.'_'.$lang.'.php3',
+			$contenu, array('phpcheck' => 'oui'))) {
+				eval ('?'.'>'.$contenu);
+				return;
+			}
 		}
 		else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
 	}

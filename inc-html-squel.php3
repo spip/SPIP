@@ -187,7 +187,7 @@ function parser_champs_interieurs($texte, $sep, $nested)
 function parser_param($params, &$result, $idb) {
 	$params2 = Array();
 	$i = 1;
-	while (ereg('^[[:space:]]*\{[[:space:]]*([^ \}])([^\"\}]*)([\"\}])(.*)$', $params, $args)) {
+	while (ereg('^[[:space:]]*\{[[:space:]]*([^ }])([^"}]*)(["}])(.*)$', $params, $args)) {
 		if ($args[3] == "}") {
 			$params = $args[4];
 			ereg("^(.*[^ \t\n])[[:space:]]*$", $args[2], $m);
@@ -271,6 +271,16 @@ function parser($texte, $id_parent, &$boucles) {
 	}
 
 	$milieu = substr($milieu, strlen($match[0]));
+
+	if (strpos($milieu, $s))
+	  {
+	    include_local("inc-debug-squel.php3");
+	    erreur_squelette(_T('erreur_boucle_syntaxe'), '',
+			     $id_boucle . 
+			     _L('&nbsp;: balise B en aval'));
+	    exit;
+	  }
+
 	$s = "</BOUCLE$id_boucle>";
 	$p = strpos($milieu, $s);
 	if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) 

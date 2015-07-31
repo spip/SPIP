@@ -250,7 +250,7 @@ AND id_groupe IN (" . join($afficher_groupe, ", ")))
 }
 
 function afficher_petits_logos_mots($id_mot) {
-  $image = cherche_image_nommee("moton$id_mot", $GLOBALS['dossier_images']);
+  $image = cherche_image_nommee("moton$id_mot");
   if ($image) {
     $taille = getimagesize($image);
     $largeur = $taille[0];
