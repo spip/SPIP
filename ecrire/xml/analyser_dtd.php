@@ -22,12 +22,14 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 	if (isset($dtd[$grammaire]))
 		return $dtd[$grammaire];
 
-	if ($avail == 'SYSTEM') $grammaire = find_in_path($grammaire);
+	if ($avail == 'SYSTEM') {
+		$grammaire = find_in_path($grammaire);
+	}
+	if (!$grammaire) return	$dtd[''] = array();
 
 	$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 
 	if (lire_fichier($file, $r)) {
-		if (!$grammaire OR !file_exists($grammaire)) return array();
 		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
 	}
