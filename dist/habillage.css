@@ -147,8 +147,9 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 #signatures table { width: 100%; margin: 1em 0 0 0; }
 #signatures thead { text-align: center; color: #555; }
 #signatures td { padding: 0.50em; border: 2px solid #fefefe; vertical-align: top; }
-#signatures td.signature-date { background: #E4F0F0; white-space: nowrap; }
+#signatures td.signature-date { background: #E4F0F0; text-align: center; white-space: nowrap; }
 #signatures td.signature-nom { background: #ECF4F4; text-align: center; }
+#signatures td.signature-nom small { display: block; }
 #signatures td.signature-message { background: #F4F8F8; }
 #signatures .signature_recherche { text-align: right; }
 #signatures .signature_recherche input.forml { width: 12em; }
