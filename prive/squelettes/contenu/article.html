@@ -32,7 +32,7 @@
 	>
 #BOITE_OUVRIR{'',note center proposer}
 	<p><:texte_proposer_publication:></p>
-	[(#BOUTON_ACTION{<:bouton_demande_publication:>,#URL_ACTION_AUTEUR{instituer_article,#ID_ARTICLE-prop,#SELF},'',<:confirm_changer_statut:>})]
+	[(#BOUTON_ACTION{<:bouton_demande_publication:>,#URL_ACTION_AUTEUR{instituer_objet,article-#ID_ARTICLE-prop,#SELF},'',<:confirm_changer_statut:>})]
 #BOITE_FERMER
 </BOUCLE_proposer>
 [(#STATUT|=={prop}|oui)
