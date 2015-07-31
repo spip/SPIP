@@ -23,7 +23,7 @@ function configuration_type_urls_dist()
 		return '';
 
 	$dispo = array();
-	foreach (find_all_in_path('', 'urls/\w+\.php$', array()) as $f) {
+	foreach (find_all_in_path('urls/', '\w+\.php$', array()) as $f) {
 		$r = basename($f, '.php');
 		if ($r == 'index') continue;
 		include $f;
