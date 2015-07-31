@@ -414,7 +414,7 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary =
 		// http://www.sqlite.org/changes.html
 		$query = str_replace('IF NOT EXISTS','',$query); 
 		if ($r = spip_sqlite_query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='$nom'",$serveur) 
-		    AND spip_sqlite_count($r,serveur) === "0") {
+		    AND spip_sqlite_count($r,$serveur) === "0") {
 			$res = spip_sqlite_query($query, $serveur, $requeter);
 		}
 	}
