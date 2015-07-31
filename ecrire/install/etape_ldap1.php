@@ -45,7 +45,7 @@ function install_etape_ldap1_dist()
 				'valeur' => $port_ldap
 			),
 			'tls_ldap' => array(
-				'label' => '<b>'._L('Transport Layer Security :').'</b>',
+				'label' => '<b>'._T('tls_ldap').'</b>',
 				'valeur' => 'non',
 				'alternatives' => array(
 					'non' => _T('item_non'),
@@ -53,7 +53,7 @@ function install_etape_ldap1_dist()
 				)
 			),
 			'protocole_ldap' => array(
-				'label' => _L('Version du protocole :'),
+				'label' => _T('protocole_ldap'),
 				'valeur' => $protocole_ldap,
 				'alternatives' => array(
 					'3' => '3',
@@ -64,7 +64,7 @@ function install_etape_ldap1_dist()
 	);
 
 	echo '<p>'._T('texte_acces_ldap_anonyme_1').'</p>';
-	echo fieldset(_L('Connexion:'),
+	echo fieldset(_T('connexion_ldap'),
 		array(
 			'login_ldap' => array(
 				'label' => _T('texte_login_ldap_1'),
@@ -72,7 +72,7 @@ function install_etape_ldap1_dist()
 			),
 			'pass_ldap' => array(
 				'label' => _T('entree_passe_ldap'),
-				'vaelur' => ''
+				'valeur' => ''
 			)
 		)
 	);
