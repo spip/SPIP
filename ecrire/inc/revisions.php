@@ -232,7 +232,7 @@ function recuperer_fragments($id_article, $id_version) {
 		$id_fragment = $row['id_fragment'];
 		$version_min = $row['version_min'];
 		$fragment = $row['fragment'];
-		if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
+		if ($row['compress'] > 0) $fragment = @gzuncompress($fragment);
 		$fragment = unserialize($fragment);
 		for ($i = $id_version; $i >= $version_min; $i--) {
 			if (isset($fragment[$i])) {
