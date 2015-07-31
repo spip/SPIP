@@ -278,7 +278,8 @@ $liste_des_statuts = array(
 $liste_des_forums = array(
 			'bouton_radio_modere_posteriori' => 'pos',
 			'bouton_radio_modere_priori' => 'pri',
-			'bouton_radio_modere_abonnement' => 'abo'
+			'bouton_radio_modere_abonnement' => 'abo',
+			'info_pas_de_forum' => 'non'
 );
 
 // Experimental : pour supprimer systematiquement l'affichage des numeros
