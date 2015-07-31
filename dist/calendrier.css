@@ -218,7 +218,7 @@ a.calendrier-annee:hover {
 .calendrier-png { 
 	width: 12px; 
 	height: 12px;
-	behavior: url(win_png.htc);
+	behavior: url(dist/win_png.htc);
 }
 
 .calendrier-icone { 

@@ -31,6 +31,13 @@ function ligne_uid ($texte) {
 function action_ical_dist()
 {
 	global $id_auteur, $arg, $action, $titres;
+
+	// compatibilite des URLs spip_cal.php3?id=xxx&cle=yyy (SPIP 1.8)
+	if (!$id_auteur AND _request('id')) {
+		$id_auteur = _request('id');
+		$arg = _request('cle');
+	}
+
 	if (verifier_low_sec($id_auteur, $arg, $action)) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($id_auteur));
 

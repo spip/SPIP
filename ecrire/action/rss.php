@@ -363,6 +363,12 @@ function action_rss_dist()
 //
 // Verifier la securite du lien et decoder les arguments
 //
+
+// Pour memoire, la forme des URLs : 
+// 1.8: spip_rss.php?op=forums&args=page-public&id=4&cle=047b4183&lang=fr
+// 1.9: spip.php?action=rss&op=forums&args=page-public&id=4&cle=047b4183&lang=fr
+// ou encore spip.php?action=rss&op=a-suivre&id=5&cle=5731e121&lang=fr
+
 spip_timer('rss');
 if (!verifier_low_sec ($id, $cle,
 "rss $op $args"

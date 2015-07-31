@@ -1745,8 +1745,8 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. generer_url_public('style_prive', $args) .'" />
 '
 	// CSS calendrier
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
-	. 'calendrier.css"  />' . "\n"
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('calendrier.css') .'" />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
@@ -1761,7 +1761,9 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	. 'spip_style_visible.css"  title="visible" />' . "\n"
 
 	// favicon.ico
-	  . '<link rel="shortcut icon" href="' . _DIR_IMG_PACK . "favicon.ico\" />\n";
+	. '<link rel="shortcut icon" href="'
+	. url_absolue('x/'.find_in_path('favicon.ico')) # petit hack sur l'url
+	. "\" />\n";
 	$js = debut_javascript($connect_statut == "0minirezo"
 			AND $connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'));

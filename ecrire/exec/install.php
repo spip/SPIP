@@ -267,7 +267,7 @@ function install_4()
 
 	// Message pour spip_query : tout va bien !
 	$GLOBALS['db_ok'] = true;
-	$GLOBALS['spip_connect_version'] = 0.2; # cf. inc_version
+	$GLOBALS['spip_connect_version'] = 0.3;
 
 	// Test si SPIP deja installe
 	spip_query("SELECT COUNT(*) FROM spip_meta");
@@ -305,21 +305,21 @@ function install_4()
 
 
 	if ($result_ok && $maj_ok) {
-		###### format a changer, a terme...
+		if (preg_match(',(.*):(.*),', $adresse_db, $r))
+			list(,$adresse_db, $port) = $r;
+		else
+			$port = '';
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-		$conn .= "\$GLOBALS['spip_connect_version'] = 0.2;\n";
-		$conn .= "include_spip('base/db_mysql');\n";
+		$conn .= "\$GLOBALS['spip_connect_version'] = 0.3;\n";
 		$conn .= $ligne_rappel;
-		$conn .= "spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
-#		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
+		$conn .= "spip_connect_db("
+			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"
+			. ");\n";
 		$conn .= "?".">";
-		if ($myFile =
-		@fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb")) {
-			fputs($myFile, $conn);
-			fclose($myFile);
-		}
-		else
+
+		if (!ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
+		$conn))
 			redirige_par_entete(generer_url_ecrire('install'));
 
 		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
@@ -589,7 +589,7 @@ function install_ldap4()
 		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
 		echo "<P>";
 
-		$conn = join('', file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
+		lire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, $conn);
 		if ($p = strpos($conn, '?'.'>')) 
 			$conn = substr($conn, 0, $p);
 		if (!strpos($conn, 'spip_connect_ldap')) {
@@ -602,9 +602,7 @@ function install_ldap4()
 			$conn .= "\$GLOBALS['ldap_present'] = true;\n";
 		}
 		$conn .= "?".">";
-		$myFile = fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb");
-		fputs($myFile, $conn);
-		fclose($myFile);
+		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, $conn);
 
 		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
