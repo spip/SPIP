@@ -1114,6 +1114,34 @@ function sql_date_proche($champ, $interval, $unite, $serveur='', $option=true)
 	return $f($champ, $interval, $unite);
 }
 
+/**
+ * Retourne une expression IN pour le gestionnaire de base de données
+ *
+ * Retourne un code à insérer dans une requête SQL pour récupérer
+ * les éléments d'une colonne qui appartiennent à une liste donnée
+ *
+ * @example
+ *     sql_in('id_rubrique', array(3,4,5))
+ *     retourne approximativement «id_rubrique IN (3,4,5)» selon ce qu'attend
+ *     le gestionnaire de base de donnée du connecteur en cours.
+ *
+ * @api
+ * @param string $val
+ *     Colonne SQL sur laquelle appliquer le test
+ * @param string|array $valeurs
+ *     Liste des valeurs possibles (séparés par des virgules si string)
+ * @param string $not
+ *     - '' sélectionne les éléments correspondant aux valeurs
+ *     - 'NOT' inverse en sélectionnant les éléments ne correspondant pas aux valeurs
+ * @param string $serveur
+ *   Nom du connecteur
+ * @param bool|string $option
+ *   Peut avoir 2 valeurs : 
+ *   - continue -> ne pas echouer en cas de serveur sql indisponible
+ *   - true ou false -> retourne l'expression
+ * @return string
+ *     Expression de requête SQL
+**/
 function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	if (is_array($valeurs)) {
 		$f = sql_serveur('quote', $serveur, true);

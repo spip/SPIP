@@ -10,21 +10,40 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Definition des {criteres} d'une boucle
-//
-
-// Une Regexp reperant une chaine produite par le compilateur,
-// souvent utilisee pour faire de la concatenation lors de la compilation
-// plutot qu'a l'execution, i.e. pour remplacer 'x'.'y' par 'xy'
-
-define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+/**
+ * Définition des {criteres} d'une boucle
+ *
+ * @package SPIP\Compilateur\Criteres
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// {racine}
-// http://www.spip.net/@racine
-// http://doc.spip.org/@critere_racine_dist
+/**
+ * Une Regexp repérant une chaine produite par le compilateur,
+ * souvent utilisée pour faire de la concaténation lors de la compilation
+ * plutôt qu'à l'exécution, i.e. pour remplacer 'x'.'y' par 'xy'
+**/
+define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
+
+
+
+/**
+ * Compile le critère {racine}
+ *
+ * Ce critère sélectionne les éléments à la racine d'une hiérarchie,
+ * c'est à dire ayant id_parent=0
+ *
+ * @link http://www.spip.net/@racine
+ * 
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_racine_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
 	$not = $crit->not;
@@ -37,9 +56,23 @@ function critere_racine_dist($idb, &$boucles, $crit){
 	$boucle->where[] = ($crit->not ? array("'NOT'", $c) : $c);
 }
 
-// {exclus}
-// http://www.spip.net/@exclus
-// http://doc.spip.org/@critere_exclus_dist
+
+/**
+ * Compile le critère {exclus}
+ *
+ * Exclut du résultat l’élément dans lequel on se trouve déjà
+ * 
+ * @link http://www.spip.net/@exclus
+ *
+ * @param string $idb
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @param array $crit
+ *     Paramètres du critère dans cette boucle
+ * @return
+ *     AST complété de la gestion du critère
+**/
 function critere_exclus_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
@@ -51,10 +84,23 @@ function critere_exclus_dist($idb, &$boucles, $crit){
 	$boucle->where[] = array("'!='", "'$boucle->id_table."."$id'", $arg);
 }
 
-// {doublons} ou {unique}
-// http://www.spip.net/@doublons
-// attention: boucle->doublons designe une variable qu'on affecte
-// http://doc.spip.org/@critere_doublons_dist
+
+/**
+ * Compile le critère {doublons} ou {unique}
+ *
+ * Attention: boucle->doublons désigne une variable qu'on affecte
+ *
+ * @link http://www.spip.net/@doublons
+ * 
+ * @param string $idb
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param array $crit
+ * 		Paramètres du critère dans cette boucle
+ * @return
+ * 		AST complété de la gestion du critère
+**/
 function critere_doublons_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
