@@ -34,7 +34,7 @@ function action_documenter_post($r)
 		// on ne supprime pas, on dissocie
 		// supprimer_document_et_vignette($vignette);
 		// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
-		sql_delete("spip_documents_".$type."s",
+		sql_delete("spip_documents_liens",
 			"id_$type=".sql_quote($id)." AND id_document=".sql_quote($vignette)." AND (vu='non' OR vu IS NULL)");
 		// Cas de destruction de la vignette seulement
 		if ($suite)
@@ -59,15 +59,15 @@ function action_documenter_post($r)
 	}
 	else {
 		if ($sign)
-			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png')");
+			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_liens AS l", "l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.extension IN ('gif', 'jpg', 'png')");
 		else
-			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'  AND docs.extension NOT IN ('gif', 'jpg', 'png')");
+			$x = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_liens AS l", "l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'  AND docs.extension NOT IN ('gif', 'jpg', 'png')");
 
 		while ($r = sql_fetch($x)) {
 			// supprimer_document_et_vignette($r['id_document']);
 			// on dissocie, mais si le doc est utilise dans le texte,
 			// il sera reassocie ..., donc condition sur vu !
-			sql_delete("spip_documents_".$type."s", "id_$type=$id AND id_document=".$r['id_document']." AND (vu='non' OR vu IS NULL)");
+			sql_delete("spip_documents_liens", "id_$type=$id AND id_document=".$r['id_document']." AND (vu='non' OR vu IS NULL)");
 		}
 	}
 	if ($type == 'rubrique') {

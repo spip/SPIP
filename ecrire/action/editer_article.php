@@ -33,7 +33,7 @@ function action_editer_article_dist() {
 		# rattrapper les documents associes a cet article nouveau
 		# ils ont un id = 0-id_auteur
 
-			sql_updateq("spip_documents_articles", array("id_article" => $id_article), "id_article = ".(0-$id_auteur));
+			sql_updateq("spip_documents_liens", array("id_article" => $id_article), "id_article = ".(0-$id_auteur));
 	} 
 
 	// Enregistre l'envoi dans la BD

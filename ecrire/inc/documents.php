@@ -239,7 +239,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. '</div><br />';
 
 	//// Documents associes
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='document'", "", "D.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='document'", "", "D.id_document");
 
 
 	$documents_lies = array();
@@ -247,7 +247,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$documents_lies[]= $row['id_document'];
 
 	//// Images sans documents
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='image'", "", "D.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='image'", "", "D.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
 
@@ -331,7 +331,7 @@ function est_inclus($id_document) {
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
 	global $spip_lang_right;
 
-	$table = 'spip_documents_' . $type . 's';
+	$table = 'spip_documents_liens';
 	$prim = id_table_objet($table);
 	if (!$prim) return '';
 	$prim = 'id_' . $type;
@@ -486,27 +486,21 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 function lister_les_documents_orphelins() {
 	$s = sql_select("d.id_document, d.id_vignette",
 	"spip_documents AS d
-	LEFT JOIN spip_documents_articles AS a
-		ON d.id_document=a.id_document
-	LEFT JOIN spip_documents_breves AS b
-		ON d.id_document=b.id_document
-	LEFT JOIN spip_documents_rubriques AS r
-		ON d.id_document=r.id_document
-	LEFT JOIN spip_documents_forum AS f
-		ON d.id_document=f.id_document
+	LEFT JOIN spip_documents_liens AS l
+		ON d.id_document=l.id_document
 	LEFT JOIN spip_articles AS aa
-		ON aa.id_article=a.id_article
+		ON aa.id_article=l.id_article
 	LEFT JOIN spip_breves AS bb
-		ON bb.id_breve=b.id_breve
+		ON bb.id_breve=l.id_breve
 	LEFT JOIN spip_rubriques AS rr
-		ON rr.id_rubrique=r.id_rubrique
+		ON rr.id_rubrique=l.id_rubrique
 	LEFT JOIN spip_forum AS ff
-		ON ff.id_forum=f.id_forum
+		ON ff.id_forum=l.id_forum
 	",
-	"(a.id_article IS NULL OR aa.id_article IS NULL)
-	AND (b.id_breve IS NULL OR bb.id_breve IS NULL)
-	AND (r.id_rubrique IS NULL OR rr.id_rubrique IS NULL)
-	AND (f.id_forum IS NULL OR ff.id_forum IS NULL)
+	"(aa.id_article IS NULL)
+	AND (bb.id_breve IS NULL)
+	AND (rr.id_rubrique IS NULL)
+	AND (ff.id_forum IS NULL)
 	");
 
 	$orphelins = array();
@@ -558,9 +552,7 @@ function supprimer_documents($liste = array()) {
 
 	// Supprimer les entrees dans spip_documents et associees
 	sql_delete('spip_documents', $in);
-	sql_delete('spip_documents_articles', $in);
-	sql_delete('spip_documents_rubriques', $in);
-	sql_delete('spip_documents_breves', $in);
+	sql_delete('spip_documents_liens', $in);
 }
 
 ?>

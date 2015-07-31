@@ -88,7 +88,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 		if (sql_countsel("spip_rubriques",  "id_parent=$id_pred AND statut='publie'"))
 			return $id_pred != $id_rubrique;;
 	
-		if (sql_countsel("spip_documents_rubriques",  "id_rubrique=$id_pred"))
+		if (sql_countsel("spip_documents_liens",  "id_rubrique=$id_pred"))
 			return $id_pred != $id_rubrique;;
 
 		sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_pred");
@@ -158,7 +158,7 @@ function calculer_rubriques_publiees() {
 		sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un *document* publie
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_documents AS fille, spip_documents_rubriques AS lien", "rub.id_rubrique = lien.id_rubrique AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date AND fille.mode='document' $postdates ", "rub.id_rubrique");
+	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_documents AS fille, spip_documents_liens AS lien", "rub.id_rubrique = lien.id_rubrique AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date AND fille.mode='document' $postdates ", "rub.id_rubrique");
 	while ($row = sql_fetch($r))
 	  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 	

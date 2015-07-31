@@ -26,15 +26,9 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 	}
 
-	$table = 'spip_documents_' . $type . 's';
-	if (!id_table_objet($table)) {
-		spip_log("tourner: $type table inconnue");
-		$type = 'article';
-		$table = 'spip_documents_' . $type . 's';
-	}
 	$prim = 'id_' . $type;
 	// si pas de doc le hash sera inutilisable
-	$id = intval(sql_getfetsel($prim, $table, "id_document = " . intval($id_document)));
+	$id = intval(sql_getfetsel($prim, 'spip_documents_liens', "id_document = " . intval($id_document)));
 
 	$titre = $document['titre'];
 	$id_vignette = $document['id_vignette'];
