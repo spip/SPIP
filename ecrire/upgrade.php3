@@ -38,8 +38,9 @@ if ($reinstall == 'oui') {
 }
 
 
-
-$upgrade_titre = _T('info_mise_a_niveau_base');
+// eviter les actions vides pour cause de fichier de langue inaccessible.
+$upgrade_titre = _T('info_mise_a_niveau_base') ;
+if (!$upgrade_titre) $upgrade_titre = 'info_mise_a_niveau_base';
 
 // Commentaire standard upgrade
 $commentaire = _T('texte_mise_a_niveau_base_1');
@@ -47,6 +48,7 @@ $commentaire = _T('texte_mise_a_niveau_base_1');
 // Erreur downgrade (cas de double installation de fichiers SPIP sur une meme base)
 if ($spip_version < (double) lire_meta('version_installee'))
 	$commentaire = _T('info_mise_a_niveau_base_2');
+
 
 // Qu'est-ce que tu fais ici?
 if ($spip_version == (double) lire_meta('version_installee')) {

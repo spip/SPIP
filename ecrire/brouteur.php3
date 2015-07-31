@@ -23,7 +23,7 @@ echo "<div>&nbsp;</div>";
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique ORDER BY titre";
+			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
 			$result=spip_query($query);
 			while($row=spip_fetch_array($result)){
 				$j = $j-1;
@@ -54,14 +54,14 @@ echo "<div>&nbsp;</div>";
 			
 			$la_rubrique = $dest[0];
 			
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique = $la_rubrique";
+			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'";
 			$result = spip_query($query);
 			while ($row = spip_fetch_array($result)) {
 				$la_rubrique =$row['id_parent'];
 			}
 			
 			while ($la_rubrique > 0) {
-				$query = "SELECT * FROM spip_rubriques WHERE id_rubrique = $la_rubrique";
+				$query = "SELECT * FROM spip_rubriques WHERE id_rubrique ='$la_rubrique'";
 				$result = spip_query($query);
 				while ($row = spip_fetch_array($result)) {
 					$compteur = $compteur + 1;
@@ -106,8 +106,6 @@ echo "<div>&nbsp;</div>";
 	
 	}
 	
-	echo "</tr>";
-	echo "</table>";	
-
+fin_page();
 
 ?>

@@ -66,7 +66,10 @@ debut_html();
 
 	}
 	else {
-		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique ORDER BY titre";
+	  if (isset($id_rubrique) && ($id_rubrique !== ''))
+ {
+
+		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
 		$result=spip_query($query);
 		if ($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
@@ -84,11 +87,9 @@ debut_html();
 			icone_horizontale(_T('info_racine_site'), "javascript:window.parent.location=\"naviguer.php3\"", "racine-site-24.gif","");
 			echo "</div>";
 		}
+
 	
-	
-	
-	
-		$query = "SELECT * FROM spip_rubriques WHERE id_parent=$id_rubrique ORDER BY titre";
+		$query = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY titre";
 		$result=spip_query($query);
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
@@ -96,6 +97,7 @@ debut_html();
 			$id_parent=$row['id_parent'];
 			
 			echo "<div class='brouteur_rubrique' onMouseOver=\"changeclass(this, 'brouteur_rubrique_on');\" onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
+
 			if ($id_parent == '0') 	{
 			  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "secteur-24.gif);'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></div>";
 			}
@@ -106,7 +108,7 @@ debut_html();
 			}
 			echo "</div>\n";
 		}
-	
+
 	
 		if ($id_rubrique > 0) {
 			if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
@@ -191,7 +193,7 @@ debut_html();
 			}
 		}
 
-	
+
 		if ($frame == 0 AND $id_rubrique==0) {
 	
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
@@ -217,7 +219,7 @@ debut_html();
 		}
 
 	}
-
+   }
 	echo "</div>";
 
 echo "</body></html>";
