@@ -7,6 +7,24 @@ define("_ECRIRE_INC_LOGOS", "1");
 global $flag_ecrire;
 define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
+function get_image($racine) {
+	foreach (array('gif','jpg','png') as $fmt) {
+		$fichier = "$racine.".$fmt;
+		$fid = _DIR_IMG . $fichier;
+		if (@file_exists($fid)) {
+			$limage = @getimagesize( _DIR_IMG . $fichier);
+
+			// contrer le cache du navigateur
+			if ($fid = @filesize($fid) . @filemtime($fid))
+				$fid = "&".md5($fid);
+			return array($fichier, 
+				     (!$limage ? '' : resize_logo($limage)),
+				     $fid);
+		}
+	}
+	return '';
+}
+
 function decrire_logo($racine) {
 	global $connect_id_auteur;
 
