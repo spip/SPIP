@@ -110,7 +110,7 @@
 <!ELEMENT procure EMPTY>
 <!ATTLIST procure
 	  nom %NAME; #REQUIRED
-	  compatibilite %INTERVAL; #IMPLIED
+	  version %VNUM; #IMPLIED
 >
 
 <!ELEMENT pipeline EMPTY>
