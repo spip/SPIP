@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Chargement (et affichage) d'une page ou d'un appel public
+ *
+ * @package SPIP\Core\Affichage
+**/
+
 // Distinguer une inclusion d'un appel initial
 // (cette distinction est obsolete a present, on la garde provisoirement
 // par souci de compatiilite).
@@ -121,6 +127,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 	// type tableau pour y mettre des choses au besoin.
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
 
+	// affiche-t-on les boutons d'administration ? voir f_admin() 
 	$affiche_boutons_admin = ($html AND (
 		(isset($_COOKIE['spip_admin']) AND (!isset($flag_preserver) OR !$flag_preserver))
 		OR $debug
