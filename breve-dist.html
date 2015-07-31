@@ -170,10 +170,10 @@
 
 <h1 class="structure">Forum de la br&egrave;ve</h1>
 
-<B_Forums>
+<B_forums>
 <ul class="forum-total">
 
-<BOUCLE_Forums(FORUMS){id_breve}{par date}{inverse}>
+<BOUCLE_forums(FORUMS){id_breve}{par date}{inverse}>
 
 <li>
 <div class="forum-fil">
@@ -189,9 +189,6 @@
 [<div class='forum-repondre-message'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
 </div>
 </div>
-<!--BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
-<li>#LOGO_MOT <b>#TYPE :</b> #TITRE</li>
-</BOUCLE_mots_forum-->
 
 <B_forums_fils>
 	<ul>
@@ -210,10 +207,6 @@
 	[<div class='forum-repondre-message'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
 	</div>
 
-	<!--BOUCLE_mots_fils(MOTS){id_forum}{par type, titre}>
-	#LOGO_MOT <b>#TYPE :</b> #TITRE
-	</BOUCLE_mots_fils-->
-
 	</div>
 
 	<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
@@ -225,10 +218,10 @@
 
 </div>
 </li>
-</BOUCLE_Forums>
+</BOUCLE_forums>
 
 </ul>
-</B_Forums>
+</B_forums>
 
 </div>
 
