@@ -493,7 +493,8 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_mysql_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
-	if (!$r OR !$requeter) return $r;
+	if (!$requeter) return $r;
+	if (!$r) return 0;
 	list($c) = mysql_fetch_array($r, MYSQL_NUM);
 	mysql_free_result($r);
 	return $c;
