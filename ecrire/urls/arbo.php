@@ -376,8 +376,7 @@ function urls_arbo_dist(&$entite, $i, $args='', $ancre='') {
 		}
 	}
 	if ($id_objet) {
-		$func = "generer_url_$type";
-		$url_propre = $func($id_objet);
+		$url_propre = generer_url_entite($id_objet, $type, $args, $ancre);
 		if (strlen($url_propre)
 		AND !strstr($url,$url_propre)) {
 			include_spip('inc/headers');
