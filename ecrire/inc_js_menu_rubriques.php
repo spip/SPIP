@@ -103,8 +103,6 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	$zmax = 6;
 	if ($spip_ecran == "large") $max_lignes = 20;
 	else $max_lignes = 15;
-	
-	
 
 	if ($zindex < 1) $zindex = 1;
 	if ($zdecal == 1) $image = "secteur-12.gif";
@@ -119,8 +117,10 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	$i = sizeof($arr_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
 		$ret .= '<div class=\"pos_r\" style=\"z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
-		$ret .= '<div class=\"brt\"><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
-		$ret .= '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
+		$ret .= '<div class=\"brt\"><a href=\\"'
+		  . http_php_scriptnq('naviguer', 'id_rubrique='.$id_rubrique)
+		  . '\\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>'
+		  . '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
 		
 		$ret .= '<table cellspacing=\"0\" cellpadding=\"0\"><tr><td valign=\"top\">';		
 		$ret .= "<div  style='width: 170px;'>";
@@ -144,7 +144,9 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		
 		$ret .= "</div></div>";
 	} else {
-		$ret .= '<div><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
+		$ret .= '<div><a href=\"'
+		  . http_php_scriptnq('naviguer', 'id_rubrique='.$id_rubrique)
+		  . '\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
 	}
 	$zdecal = $zdecal - 1;
 	return $ret;
