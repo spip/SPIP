@@ -248,7 +248,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
-	if (!preg_match('/^<!ELEMENT\s+(\S+)\s+([^>]*)>\s*(.*)$/s', $dtd, $m))
+	if (!preg_match('/^<!ELEMENT\s+([^>%\s]+)([^>]*)>\s*(.*)$/s', $dtd, $m))
 		return -3;
 
 	list(,$nom, $contenu, $dtd) = $m;
@@ -260,7 +260,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 	}
 	$filles = array();
 	$contenu = expanserEntite($contenu, $dtc->macros);
-	$val = compilerRegle($contenu);
+	$val = $contenu ? compilerRegle($contenu) : '(EMPTY )';
 	if ($val == '(EMPTY )')
 		$dtc->regles[$nom] = 'EMPTY';
 	elseif  ($val == '(ANY )') 
