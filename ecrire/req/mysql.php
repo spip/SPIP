@@ -492,11 +492,22 @@ function spip_mysql_countsel($from = array(), $where = array(),
 			     $groupby = '', $limit = '', $sousrequete = '', $having = array(), $serveur='',$requeter=true)
 {
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
-	$r = spip_mysql_select("COUNT($c)", $from, $where,'', '', $limit,
+
+	// dans le cas d'une LIMIT on ne peut pas appeler COUNT(*)
+	$r = $limit
+		? spip_mysql_select("$c", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
+		: spip_mysql_select("COUNT($c)", $from, $where,'', '', $limit,
+			$having, $serveur, $requeter);
+
 	if (!$requeter) return $r;
 	if (!$r) return 0;
-	list($c) = mysql_fetch_array($r, MYSQL_NUM);
+
+	if ($limit)
+		$c = mysql_num_rows($r);
+	else
+		list($c) = mysql_fetch_array($r, MYSQL_NUM);
+
 	mysql_free_result($r);
 	return $c;
 }
