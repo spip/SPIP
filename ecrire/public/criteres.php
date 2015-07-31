@@ -667,7 +667,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 	if (!$r) {
-		erreur_squelette(_T('zbug_info_erreur_squelette') . ' IN',
+		erreur_squelette(_T('zbug_info_erreur_squelette') . ' IN ',
 			       "BOUCLE$idb");
 		return;
 	}
@@ -845,29 +845,10 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		  $table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op !='='), true);
 		  if (!$table) return '';
 	}
-	else {
-		if (@!array_key_exists($col, $desc['field'])) {
-			$calculer_critere_externe = 'calculer_critere_externe_init';
-			// gestion par les plugins des jointures tordues pas automatiques mais necessaires
-			if (isset($exceptions_des_jointures[$table][$col])){
-				if (count($exceptions_des_jointures[$table][$col])==3)
-					list($t, $col, $calculer_critere_externe) = $exceptions_des_jointures[$table][$col];
-				else
-					list($t, $col) = $exceptions_des_jointures[$table][$col];
-			}
-			else if (isset($exceptions_des_jointures[$col]))
-				list($t, $col) = $exceptions_des_jointures[$col];
-			else $t =''; // jointure non declaree. La trouver.
-			$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
-			if (!$table) return '';
-			list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
-			if (count(trouver_champs_decomposes($col,$desc))>1){
-				$col_alias = $col; // id_article devient juste le nom d'origine
-				$e = decompose_champ_id_objet($col);
-				$col = array_shift($e);
-				$where_complement = primary_doublee($e, $table);
-			}
-		}
+	elseif (@!array_key_exists($col, $desc['field'])) {
+		$r = calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table);
+		if (!$r) return '';
+		list($col, $col_alias, $table, $where_complement) = $r;
 	}
 	// Si la colonne SQL est numerique ou le critere est une date relative
 	// virer les guillemets eventuels qui sont refuses par certains SQL
@@ -906,6 +887,46 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	if ($fct) $arg = "$fct($arg$args_sql)";
 
 	return array($arg, $op, $val, $col_alias, $where_complement);
+}
+
+function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table)
+{
+	global $exceptions_des_jointures;
+	$where = '';
+
+	$calculer_critere_externe = 'calculer_critere_externe_init';
+	// gestion par les plugins des jointures tordues 
+	// pas automatiques mais necessaires
+	if (is_array($exceptions_des_jointures[$table])) {
+		$t = $exceptions_des_jointures[$table];
+		$index = isset($t[$col])
+		?  $t[$col] : (isset($t['']) ? $t[''] : array());
+		
+		if (count($index)==3)
+			list($t, $col, $calculer_critere_externe) = $index;
+		elseif (count($index)==2)
+			list($t, $col) = $t[$col];
+		else 	{
+			list($calculer_critere_externe) = $index;
+			$t = $table;
+		}
+	} else if (isset($exceptions_des_jointures[$col]))
+		list($t, $col) = $exceptions_des_jointures[$col];
+	else $t =''; // jointure non declaree. La trouver.
+
+	$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
+
+	if (!$table) return '';
+
+	list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+	if (count(trouver_champs_decomposes($col,$desc))>1){
+		$col_alias = $col; // id_article devient juste le nom d'origine
+		$e = decompose_champ_id_objet($col);
+		$col = array_shift($e);
+		$where = primary_doublee($e, $table);
+	}
+
+	return array($col, $col_alias, $table, $where);
 }
 
 // Ne pas appliquer sql_quote lors de la compilation,
