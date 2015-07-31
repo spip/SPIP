@@ -84,21 +84,27 @@ function affiche_rss_atom($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
-	$u .= '
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.$intro['language'].'">
+	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']
+	.'"?'.">\n";
+	$u .= '<feed xmlns="http://www.w3.org/2005/Atom"';
+	if ($intro['language'])
+		$u .= ' xml:lang="'.$intro['language'].'"';
+	$u .= '>
 	<title>'.texte_backend($intro['title']).'</title>
 	<id>'.texte_backend(url_absolue($intro['url'])).'</id>
 	<link href="'.texte_backend(url_absolue($intro['url'])).'"/>';
 	if ($intro['description']) $u .= '<subtitle>'.texte_backend($intro['description']).'</subtitle>';
 	$u .= '<link rel="self" type="application/atom+xml" href="'.texte_backend(url_absolue($_SERVER['REQUEST_URI'])).'"/>
-	<updated>'.gmdate("Y-m-d\TH:i:s\Z").'<updated>'; // probleme, <updated> pourrait etre plus precis
+	<updated>'.gmdate("Y-m-d\TH:i:s\Z").'</updated>'; // probleme, <updated> pourrait etre plus precis
 
 	// elements
 	if (is_array($rss)) {
 		usort($rss, 'trier_par_date');
 		foreach ($rss as $article) {
-			$u .= '
-	<entry xml:lang="'.texte_backend($article['lang']).'">
+			$u .= "\n\t<entry";
+			if ($article['lang'])
+				$u .= ' xml:lang="'.texte_backend($article['lang']).'"';
+			$u .= '>
 		<title>'.texte_backend($article['title']).'</title>
 		<id>'.texte_backend(url_absolue($article['url'])).'</id>
 		<link rel="alternate" type="text/html" href="'.texte_backend(url_absolue($article['url'])).'"/>
@@ -460,7 +466,8 @@ switch($op) {
 //
 $intro = array(
 	'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
-	'url' => $url
+	'url' => $url,
+	'language'=> $GLOBALS['spip_lang']
 );
 
 list($content,$header) = affiche_rss($rss, $intro, $fmt);
@@ -468,5 +475,7 @@ if ($header) @header($header);
 echo $content;
 
 spip_log("spip_rss: ".spip_timer('rss'));
+
 }
+
 ?>
