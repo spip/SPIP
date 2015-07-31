@@ -303,7 +303,6 @@ function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=
 			'sites'=>'icone_creer_mot_cle_site'
 			);
 
-	spip_log("creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe");
 	if (!($id_groupe ? 
 		autoriser('modifier','groupemots', $id_groupe) :
 		autoriser('modifier','groupemots'))
