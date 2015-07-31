@@ -544,9 +544,11 @@ function calculer_jointure(&$boucle, $depart, $arrivee)
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
   $n = "";
+  $i = count($res);
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j);
+    $i--;
+    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a, $j, $i);
   }
   return $n;
 }
@@ -571,7 +573,6 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 	      $new[] = $v;
 	      $r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
 	      if ($r)
-		
 		{
 		  array_unshift($r, array($dnom, $table, $k));
 		  return $r;
@@ -630,14 +631,19 @@ function trouver_champ_exterieur($cle, $joints, &$boucle)
 }
 
 // traitement des relations externes par DES jointures.
+// mais ne pas dupliquer les jointures intermediaires
 
-function calculer_critere_externe(&$boucle, $id_table, $lien, $join) {
+function calculer_critere_externe(&$boucle, $id_table, $lien, $join, $suite) {
 	static $num;
 	$id_field = $id_table . '.' . $join; 
+	if ($suite)
+	  foreach ($boucle->join as $v) {
+	    if (ereg("^$id_field=L([0-9]+)\.$join$",$v, $r)) return $r[1];
+	  }
 	$num++;
 	$boucle->lien = true;
 	$boucle->from["L$num"] = $lien;
-	$boucle->where[] = "$id_field=L$num." . $join;
+	$boucle->join[] = "$id_field=L$num." . $join;
 	if (!in_array($id_field, $boucle->group))
 	  $boucle->group[] = $id_field;
 	// postgres exige que le champ pour GROUP soit dans le SELECT

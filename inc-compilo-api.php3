@@ -57,6 +57,7 @@ class Boucle {
 	var $select = array();
 	var $from = array();
 	var $where = array();
+	var $join = array();
 	var $having = 0;
 	var $limit;
 	var $group = array();

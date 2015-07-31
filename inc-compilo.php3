@@ -225,13 +225,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 		(!$boucle->select ? 1 :
 		 join("\",\n\t\t\"", $boucle->select)) .
 		'"), # SELECT
-		' . calculer_from($boucle->from) .
+		' . calculer_from($boucle) .
 		', # FROM
-		array(' .
-		(!$boucle->where ? '' : ( '"' . join('",
-		"', $boucle->where) . '"')) .
-		"), # WHERE
-		" . (!$boucle->group ? "''" : 
+		' . calculer_where($boucle) .
+		', # WHERE
+		' . (!$boucle->group ? "''" : 
 		     ('"' . join(", ", $boucle->group)) . '"') .
 		", # GROUP
 		array(" .
@@ -275,11 +273,20 @@ function calculer_boucle($id_boucle, &$boucles) {
     "\n	return \$t0;";
 }
 
-function calculer_from($t)
+function calculer_from(&$boucle)
 {
   $res = "";
-  foreach($t as $k => $v) $res .= "\", \"$v AS $k";
+  foreach($boucle->from as $k => $v) $res .= "\", \"$v AS $k";
   return 'array(' . substr($res,3) . '")';
+}
+
+function calculer_where(&$boucle)
+{
+  $w = array_merge($boucle->where, $boucle->join);
+  return 'array(' .
+    (!$w ? '' : ( '"' . join('", 
+		"', $w) . '"')) .
+    ")";
 }
 
 //
