@@ -14,25 +14,25 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
 				][<p class='explication'>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_pseudo:>,<:entree_nom_pseudo_2:>})</p>]
 				<input type='text' class='text' name='nom' id='nom' placeholder="<:ecrire:item_nouvel_auteur|attribut_html:>" value="[(#ENV**{nom})]" />
-		    </li>
-		    [(#REM)
-		    	Modification de l'email
+			</li>
+			[(#REM)
+				Modification de l'email
 				ou message disant que seuls les admins peuvent le modifier
 			]
-		    <li class="editer editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+			<li class="editer editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 				[<label for="email">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_adresse_email:>,<:entree_adresse_email_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
 				]<input type='text' class='text' name='email' id='email' value="[(#ENV**{email})]" />
-		    </li>
-		    <li class="editer editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
+			</li>
+			<li class="editer editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
 				[<label for="bio">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_infos_perso:>,<:entree_infos_perso_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>
 				]<p class="explication"><:entree_biographie:></p>
 				<textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
-		    </li>
-		    [(#REM)
-		    	Cle PGP
-			]		  
+			</li>
+			[(#REM)
+				Cle PGP
+			] 
 			<li class="editer editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
 				[<label for="pgp">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_cle_pgp:>,<:entree_cle_pgp_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>
@@ -90,7 +90,7 @@
 							<label for='login'><:item_login:>
 							</label><p class='explication'>(<:info_non_modifiable:>)</p>
 							<input type='text' class='text' disabled='disabled' name='login' id='login' value="[(#ENV**{login})]" />
-						]				
+						]
 					</li>
 					[(#ENV{config}|table_valeur{edit_pass}|oui)
 					<li class='editer editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
@@ -104,7 +104,7 @@
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{new_pass2})</span>
 						]<input type='password' autocomplete="off" class='password' name='new_pass2' id='new_pass2' value="" />
 					</li>]
-					</ul>			
+					</ul>
 				</fieldset>
 			</li>
 		</ul>
