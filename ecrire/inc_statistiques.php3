@@ -239,9 +239,8 @@ function calculer_n_referers($nb_referers) {
 
 	// Effacer les referers traites
 	if ($referer_vus) {
-	  spip_query("DELETE FROM spip_referers_temp WHERE referer_md5 IN ($referer_vus)");
+	  spip_query("DELETE FROM spip_referers_temp WHERE $referer_vus");
 	}
-
 	return  $tous ;
 }
 
