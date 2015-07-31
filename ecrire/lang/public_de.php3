@@ -8,8 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => '<NEW> Accueil du site',
 'articles' => '<NEW> Articles',
+'articles_auteur' => '<NEW> Articles de cet auteur',
 'articles_populaires' => '<NEW> Articles les plus populaires',
 'articles_recents' => '<NEW> Articles les plus r&eacute;cents',
+'articles_rubrique' => '<NEW> Articles de cette rubrique',
 'aucun_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
 'aucun_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
 'aucun_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
@@ -88,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // R
-'repondre_article' => '<NEW> RŽpondre ˆ cet article',
+'repondre_article' => '<NEW> R&eacute;pondre &agrave; cet article',
 'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
 'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
 'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',

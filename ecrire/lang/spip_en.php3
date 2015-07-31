@@ -378,6 +378,7 @@ Thank you for your participation
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Authors',
 'icone_breves' => 'News',
+'icone_brouteur' => 'Quick browsing',
 'icone_calendrier' => 'Calendar',
 'icone_calendrier_messagerie' => 'Diary and messaging',
 'icone_configuration_site' => 'Site configuration',
@@ -549,7 +550,6 @@ Thank you for your participation
 'info_comment_lire_tableau' => 'How to read this graphic',
 'info_config_suivi' => 'If this address corresponds to amailing-list, you can indicate below the address where the site participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address endowed with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can receive, by automated electronic mail, the announcements concerning the editorial activity of this site by subscribing to the following mailing list:',
-'info_config_suivi_lien' => '<NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Second step: <B>Attempting to connect to database</B>',
 'info_connexion_ldap_ok' => '<B>Your LDAP connection succeeded.</B><P> You can go to the next step.',
@@ -563,7 +563,7 @@ Thank you for your participation
 'info_contribution' => 'forum contributions',
 'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
 'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/en\'>http://www.spip.net/en</a>.',
-'info_cours_edition' => 'In progress',
+'info_cours_edition' => '<MODIF> In progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
 'info_creation_rubrique' => 'Before being able to write articles,<BR> you must create at least one section.<BR>',
@@ -1219,6 +1219,12 @@ requiring an FTP access to the Web site.',
 'menu_aide_suivi_forum_statistiques' => 'Visits statistics',
 'menu_aide_suivi_forum_suivi' => 'Forums follow-up',
 'menu_aide_suivi_forum_systeme_breves' => 'The news system',
+'module_fichier_langue' => 'Language file',
+'module_fichiers_langues' => 'Language files',
+'module_raccourci' => 'Shortcut',
+'module_texte_affiche' => 'Displayed text',
+'module_texte_explicatif' => 'You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
+'module_texte_traduction' => 'This language file is available in:',
 'mois_non_connu' => 'unknown',
 
 
@@ -1667,7 +1673,11 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_delier' => 'Stop linking this article to its translations',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
-'trad_reference' => '(reference article)'
+'trad_reference' => '(reference article)',
+
+
+// PLUS_UTILISE
+'info_config_suivi_lien' => '<NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );
 
