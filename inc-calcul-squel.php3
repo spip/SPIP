@@ -1431,7 +1431,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$accepter_inscriptions = lire_meta("accepter_inscriptions");
 
 		if ($accepter_inscriptions == "oui") {
-			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_inscription(); ?".">";
+			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_inscription(\"redac\"); ?".">";
 		}
 		else {
 			$'.$nom_var.' = "";

@@ -119,7 +119,7 @@ else if ($inscriptions_ecrire || forums_sur_abo()) {
 	Votre identifiant personnel vous parviendra rapidement, par courrier
 	&eacute;lectronique.");
 
-	formulaire_inscription();
+	formulaire_inscription('forum');
 }
 
 echo "<p align='right'><script type='text/javascript'><!--
