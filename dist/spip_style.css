@@ -64,8 +64,8 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 .spip_documents_center { clear: both; width: 100%; margin: auto; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: small; }
-.spip_doc_descriptif { clear: both; font-size: x-small; }
+.spip_doc_titre { font-weight: bold; font-size: 0.8em; }
+.spip_doc_descriptif { clear: both; font-size: 0.8em; }
 
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(../win_png.htc); }
@@ -78,8 +78,6 @@ table.spip th, table.spip td { padding: 3px; text-align: left; vertical-align: m
 /* Styles des formulaires de Spip */
 .formulaire_spip {
 	text-align: left;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: small;
 }
 .formulaire_spip p {
 	margin: 0.5em 0;
