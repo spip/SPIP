@@ -84,7 +84,7 @@ function async_upload_article_edit(res,jForm){
 	      cont
 	      .prepend(res.clone2());
 	      //find added documents, remove label and show them nicely
-	      cont.
+	      cont = cont.
 	      find("div.documents_added")
 	        .removeClass("documents_added")
 	        .show("slow",function(){
