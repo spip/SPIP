@@ -160,7 +160,7 @@ function spip_apres_typo ($letexte) {
 	$letexte = corriger_caracteres($letexte);
 	$letexte = str_replace("'", "&#8217;", $letexte);
 
-	relecture des &nbsp;
+	// relecture des &nbsp;
 	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
