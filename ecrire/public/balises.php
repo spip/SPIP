@@ -590,7 +590,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	// pas de calculs superflus si le site est monolingue
 	$lang = strpos($GLOBALS['meta']['langues_utilisees'], ',');
 
-	switch ($p->type_requete) {
+	switch (!$p->id_boucle? '' : $p->boucles[$p->id_boucle]->type_requete) {
 		case 'articles':
 			$c = '"id_article=".' . champ_sql('id_article', $p);
 			if ($lang) $lang = champ_sql('lang', $p);
