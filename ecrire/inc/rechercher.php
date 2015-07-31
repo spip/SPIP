@@ -33,6 +33,12 @@ function liste_des_champs() {
 		),
 		'auteur' => array(
 			'nom', 'bio', 'email', 'nom_site', 'url_site', 'login'
+		),
+		'forum' => array(
+			'titre', 'texte', 'auteur', 'email_auteur', 'nom_site', 'url_site'
+		),
+		'document' => array(
+			'titre', 'descriptif'
 		)
 	);
 }
@@ -111,10 +117,37 @@ function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
 
 // Effectue une recherche sur toutes les tables de la base de donnees
 // http://doc.spip.org/@remplace_en_base
-function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $callback=NULL) {
+function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=array()) {
+	include_spip('inc/modifier');
+
 	if (!is_array($tables))
 		$tables = liste_des_champs();
 
+	$results = recherche_en_base($recherche, $tables, $options);
+
+	if (!isset($options['preg_flags']))
+		$options['flags'] = 'UimsS';
+	$preg = '/'.$recherche.'/' . $options['flags'];
+
+	foreach ($results as $table => $r) {
+		foreach ($r as $id => $x) {
+			if ($options['toutmodifier']
+			OR autoriser('modifier', $table, $id)) {
+				$modifs = array();
+				foreach ($x as $key => $val) {
+					$repl = preg_replace($preg, $remplace, $val);
+					if ($repl <> $val)
+						$modifs[$key] = $repl;
+				}
+				if ($modifs)
+					modifier_contenu($table, $id,
+						array(
+							'champs' => array_keys($modifs),
+						),
+						$modifs);
+			}
+		}
+	}
 }
 
 
