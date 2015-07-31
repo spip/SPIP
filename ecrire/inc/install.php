@@ -46,11 +46,11 @@ function install_connexion($adr, $port, $login, $pass, $base, $type, $pref, $lda
 
 }
 
-function install_mode_appel($server_db)
+function install_mode_appel($server_db, $tout=true)
 {
 	return ($server_db != 'mysql') ? ''
-		: (test_rappel_nom_base_mysql($server_db)
-		   .test_sql_mode_mysql($server_db)	);
+	: (($tout  ? test_rappel_nom_base_mysql($server_db) : '')
+		. test_sql_mode_mysql($server_db)	);
 }
 
 // http://doc.spip.org/@analyse_fichier_connection
