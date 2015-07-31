@@ -634,7 +634,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_derniere_etape' => 'Darriera estapa: <B>Es acabat!',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit se fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'V&ograve;strei darriers articles publicats en linha',
-'info_desactiver_forum_public' => 'Desactivar l\'utilizacion dei forums publics. Lei forums publics podr&agrave;n &egrave;sser autorizats au cas per cas subre leis articles; ser&agrave;n pro&iuml;bits subre lei rubricas, br&egrave;vas, etc.',
+'info_desactiver_forum_public' => 'Desactivar l\'utilizacion dei forums publics. Lei forums publics poir&agrave;n &egrave;sser autorizats au cas per cas subre leis articles; ser&agrave;n pro&iuml;bits subre lei rubricas, br&egrave;vas, etc.',
 'info_desactiver_messagerie_personnelle' => 'Pod&egrave;tz activar o desactivar v&ograve;stra messatjari&aacute; personala sus aqueu sit.',
 'info_descriptif' => 'Descriptiu:',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -882,7 +882,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_publies' => 'V&ograve;streis articles publicats en linha',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, leis estadisticas dei vesitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;us s\'inscrigan
- a partir dau sit public? S\'o acceptatz, lei vesitaires se podr&agrave;n inscriure
+ a partir dau sit public? S\'o acceptatz, lei vesitaires se poir&agrave;n inscriure
  dieumerc&eacute; un formulari automatizat e alora accedir&agrave;n a l\'espaci privat per
  prepausar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, leis utilizaires recebon un e-mail automatic
  que li balha un c&ograve;de d\'acc&egrave;s au sit privat.
@@ -978,7 +978,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_statut_site_3' => 'Prepausat',
 'info_statut_site_4' => 'Au bordilhier',
 'info_statut_utilisateurs_1' => 'Estatut predefinit deis utilizaires importats',
-'info_statut_utilisateurs_2' => 'Chausiss&egrave;tz l\'estatut d\'atribuir ai personas presentas dins l\'annuari LDAP quora se conn&egrave;ctan per lo primier c&ograve;p. Podretz puei modificar aquel estatut per cada autor un cas per un.',
+'info_statut_utilisateurs_2' => 'Chausiss&egrave;tz l\'estatut d\'atribuir ai personas presentas dins l\'annuari LDAP quora se conn&egrave;ctan per lo primier c&ograve;p. Poiretz puei modificar aquel estatut per cada autor un cas per un.',
 'info_suivi_activite' => 'Seguit de l\'activitat editoriala',
 'info_supprimer_mot' => 'suprimir aqueu mot',
 'info_supprimer_vignette' => 'suprimir la vinheta',
@@ -1317,7 +1317,7 @@ una color indica lor estat:',
 'pass_erreur_probleme_technique' => '<b>Error:</b> per am&ograve;r d\'un probl&egrave;ma tecnic, l\'e-mail se p&ograve;t pas mandar. ',
 'pass_espace_prive_bla' => 'L\'espaci privat d\'aquest sit es dob&egrave;rt ai
   vesitaires que se son inscrichs. Un c&ograve;p registrat/ada,
-  podretz consultar leis articles en cors de redaccion,
+  poiretz consultar leis articles en cors de redaccion,
   prepausar d\'articles nov&egrave;us e participar a totei lei forums.',
 'pass_forum_bla' => 'Av&egrave;tz demandat d\'intervenir dins un forum
   reservat ai vesitaires registrats.',
@@ -1333,7 +1333,7 @@ Vougatz anar a l\'adrei&ccedil;a seguenta:
 
     @adresse_site@/spip_pass.php3?p=@cookie@
 
-Alora podretz intrar un mot de santa Clara nov&egrave;u
+Alora poiretz intrar un mot de santa Clara nov&egrave;u
 e vos tornar connectar au sit.
 
 ',
@@ -1367,15 +1367,15 @@ e vos tornar connectar au sit.
 'taille_octets' => '@taille@&nbsp;octets',
 'taille_repertoire_cache' => 'Talha dau repert&ograve;ri escondedor',
 'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre vejaire gr&agrave;cias au forum estacat a aquel article (en bas de pagina).',
-'texte_acces_ldap_anonyme_1' => 'D\'unei servidors LDAP acc&egrave;ptan ges d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder puei recercar d\'informacions dins l\'annuari. Pasmens, lei camps seguents se podr&agrave;n laissar vueges dins la m&agrave;ger part dei cas.',
-'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, podretz clicar sus &laquo;',
+'texte_acces_ldap_anonyme_1' => 'D\'unei servidors LDAP acc&egrave;ptan ges d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder puei recercar d\'informacions dins l\'annuari. Pasmens, lei camps seguents se poir&agrave;n laissar vueges dins la m&agrave;ger part dei cas.',
+'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, poiretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per dobrir mai de possibilitats.',
 'texte_admin_effacer_01' => 'Aquela comanda escafa <i>tot</i> lo contengut de la basa de donadas,
  incl&uacute;s <i>totei</i> leis acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primier acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
 Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten leis imatges e lei documents utilizats dins leis articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se podr&agrave; restaurar REN QUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cau pas "vujar la basa" en esperant de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se poir&agrave; restaurar REN QUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cau pas "vujar la basa" en esperant de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
  d\'abrivar son transferiment au v&ograve;stre o a un servidor de sauvagardas, e per fin d\'esparnhar d\'espaci disc.',
 'texte_adresse_annuaire_1' => '(Se v&ograve;stre annuari es installat sus la meteissa maquina qu\'aqueu sit web, s\'ag&iacute;s probable de "localhost".)',
@@ -1427,7 +1427,7 @@ qu\'apareis quora la rata passa sus lo t&iacute;tol.',
 'texte_documents_associes' => 'Lei documents seguents s\'ass&ograve;cian a l\'article,
  mai s\'inserisson pas
  directament. Segon la compaginacion dau sit public,
- podr&agrave;n apar&eacute;isser sota forma de documents jonchs.',
+ poir&agrave;n apar&eacute;isser sota forma de documents jonchs.',
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fichiers burotics, imatges,
  multim&egrave;dia, etc.) ais articles e/o ai rubricas. Aquelei fichiers,
  p&ograve;don puei &egrave;sser referenciats dins
@@ -1474,7 +1474,7 @@ qu\'apareis quora la rata passa sus lo t&iacute;tol.',
 'texte_jeu_caractere_2' => 'Aquest reglatge a ges d\'efiech retroactiu. Adoncas
  lei t&egrave;xts ja sasits se p&ograve;don afichar
  d\'un biais incorr&egrave;cte apr&egrave;s que s\'aga modificat lo reglatge. De tot biais
- podretz tornar sensa damatge au reglatge precedent.',
+ poiretz tornar sensa damatge au reglatge precedent.',
 'texte_lien_hypertexte' => '(Se v&ograve;stre messatge se refer&iacute;s a un article publicat sus lo web, o a una pagina fornissent mai d\'informacions, vougatz indicar &ccedil;ai sota lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Lei liames eissits dei sits sindicats se p&ograve;don
    blocar a pri&ograve;ri; lo reglatge
@@ -1517,7 +1517,7 @@ qu\'apareis quora la rata passa sus lo t&iacute;tol.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en generau.)',
-'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br> podretz prepausar que si&aacute; publicat.',
+'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins d\'unei cas (intranet, rets protegidas...),
   se p&ograve;t que cauga utilizar un <I>proxy HTTP</i> per at&eacute;nher lei sits sindicats.
   En aqueu cas, marcatz &ccedil;ai sota son adrei&ccedil;a, sota la forma
@@ -1575,7 +1575,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la tiera de sei novetats. Per aqu&ograve; far, vos cau activar la sindicacion. 
   <blockquote><i>D\'uneis aubergadors activan pas aquela foncionalitat; 
-  en aqueu cas, podretz pas utilizar la sindicacion de contengut
+  en aqueu cas, poiretz pas utilizar la sindicacion de contengut
   dempuei v&ograve;stre sit.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Lei taulas d\'indexacion dau motor son vuejas.',
