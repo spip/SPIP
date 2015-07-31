@@ -1523,9 +1523,15 @@ function vider_attribut ($balise, $attribut) {
 
 // http://doc.spip.org/@tester_config
 function tester_config($id, $mode='') {
-
 	include_spip('inc/autoriser');
-	return autoriser('inscrireauteur', $mode, $id) ? $mode : '';
+	if ($mode)
+		return autoriser('inscrireauteur', $mode, $id) ? $mode : '';
+	elseif (
+	     autoriser('inscrireauteur', $mode = "1comite", $id)
+	  OR autoriser('inscrireauteur', $mode = "6forum", $id))
+		return $mode;
+
+	return '';
 }
 
 //

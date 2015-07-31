@@ -32,15 +32,8 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
 	list($mode, $focus, $id) = $args;
 
-	include_spip('inc/autoriser');
-	if ($mode)
-		return autoriser('inscrireauteur', $mode, $id) ? array($mode, $focus, $id) : '';
-	elseif (
-	     autoriser('inscrireauteur', $mode = "1comite", $id)
-	  OR autoriser('inscrireauteur', $mode = "6forum", $id))
-		return array($mode, $focus, $id);
-
-	return '';
+	$mode = tester_config($id, $mode);
+	return $mode ? array($mode, $focus, $id) : '';
 }
 
 ?>
