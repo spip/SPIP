@@ -54,7 +54,9 @@
 	</langue>
 	<langue code="fi" />
 	<langue code="fon" />
-	<langue code="fr" />
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr">
+		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
+	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=fr_tu">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
