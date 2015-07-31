@@ -18,7 +18,7 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
-		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
+		[<span id="spip_logo_auteur">(#ENV*{_logo,''}|image_reduire{40,*})</span>]
 		<ul>
 			<li class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:></label>[
