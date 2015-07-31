@@ -84,9 +84,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'". _ATTRIBUTES_BODY . '>')
 	. "\n<map name='map_layout' id='map_layout'>"
-	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\"")
-	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\"")
-	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\"")
+	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
 	. "\n</map>";
 
 	if ($spip_display == "4") {
@@ -112,29 +112,29 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		$res .= "\n<div align='center' style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">"
 	. "<table align='center' cellpadding='0' style='background: none;' width='$largeur'><tr>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
-		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite');\">"
-		. http_img_pack("tout-site.png", "", "width='26' height='20'") . "</a>";
+		. "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onmouseover=\"changestyle('bandeautoutsite');\" onfocus=\"changestyle('bandeautoutsite');\" onblur=\"changestyle('bandeautoutsite');\">"
+		. http_img_pack("tout-site.png", _T('icone_site_entier'), "width='26' height='20'") . "</a>";
 		if ($id_rubrique > 0)
-			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\">" .
-			  http_img_pack("naviguer-site.png", "", "width='26' height='20'") ."</a>";
-		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" >" .
-		  http_img_pack("naviguer-site.png", "", "width='26' height='20'") . "</a>";
+			$res .= "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" onfocus=\"changestyle('bandeaunavrapide');\" onblur=\"changestyle('bandeaunavrapide');\">" .
+			  http_img_pack("naviguer-site.png",  _T('icone_brouteur'), "width='26' height='20'") ."</a>";
+		else $res .= "<a href='" . generer_url_ecrire("brouteur") . "' class='icone26' onmouseover=\"changestyle('bandeaunavrapide');\" onfocus=\"changestyle('bandeaunavrapide');\" onblur=\"changestyle('bandeaunavrapide');\">" .
+		  http_img_pack("naviguer-site.png", _T('icone_brouteur'), "width='26' height='20'") . "</a>";
 
 		$res .= "<a href='"
 		. generer_url_ecrire("recherche")
-		. "' class='icone26' onmouseover=\"changestyle('bandeaurecherche'); findObj('form_recherche').focus();\" >"
-		. http_img_pack("loupe.png", "", "width='26' height='20'")
+		. "' class='icone26' onmouseover=\"changestyle('bandeaurecherche'); findObj('form_recherche').focus();\" onfocus=\"changestyle('bandeaurecherche');\" onblur=\"changestyle('bandeaurecherche');\">"
+		. http_img_pack("loupe.png", _T('info_rechercher'), "width='26' height='20'")
 		."</a>"
-		. http_img_pack("rien.gif", " ", "width='10'")
+		. http_img_pack("rien.gif", "", "width='10'")
 		. "<a href='"
 		. generer_url_ecrire("calendrier","type=semaine")
 		. "' class='icone26' onmouseover=\"changestyle('bandeauagenda');\">"
-		. http_img_pack("cal-rv.png", "", "width='26' height='20'") ."</a>"
-		. "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\">"
-		. http_img_pack("cal-messagerie.png", "", "width='26' height='20'")
+		. http_img_pack("cal-rv.png", _T('icone_agenda'), "width='26' height='20'") ."</a>"
+		. "<a href='" . generer_url_ecrire("messagerie") . "' class='icone26' onmouseover=\"changestyle('bandeaumessagerie');\" onfocus=\"changestyle('bandeaumessagerie');\" onblur=\"changestyle('bandeaumessagerie');\">"
+		. http_img_pack("cal-messagerie.png", _T('icone_messagerie_personnelle'), "width='26' height='20'")
 		."</a>"
-		. "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\">" .
-		  http_img_pack("cal-suivi.png", "", "width='26' height='20'")
+		. "<a href='" . generer_url_ecrire("synchro") . "' class='icone26' onmouseover=\"changestyle('bandeausynchro');\" onfocus=\"changestyle('bandeausynchro');\" onblur=\"changestyle('bandeausynchro');\">" .
+		  http_img_pack("cal-suivi.png", _T('icone_suivi_activite'), "width='26' height='20'")
 		. "</a>"
 		. "</td>"
 		. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>"
@@ -162,24 +162,26 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		if ($options != "avancees") {
 				$lien = parametre_url(self(), 'set_options', 'avancees');
 				$icone = "interface-display-comp.png";
+				$alt =_T('icone_interface_complet');
 		} else {
 				$lien = parametre_url(self(), 'set_options', 'basiques');
 				$icone = "interface-display.png";
+				$alt =_T('icone_interface_simple');
 		}
-		$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay');\">"
-		. http_img_pack($icone, "", "width='26' height='20'")."</a>"
-		. http_img_pack("rien.gif", " ", "width='10' height='1'")
-		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
-		. http_img_pack("rien.gif", " ", "width='10' height='1'");
+		$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay');\" onfocus=\"changestyle('bandeaudisplay');\" onblur=\"changestyle('bandeaudisplay');\">"
+		. http_img_pack($icone, "$alt", "width='26' height='20'")."</a>"
+		. http_img_pack("rien.gif", "", "width='10' height='1'")
+		. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", _T('amelioration_access:choix_interface'), "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
+		. http_img_pack("rien.gif", "", "width='10' height='1'");
 			// grand ecran
 		if ($spip_ecran == "large") {
 			$i = _T('info_petit_ecran');
-			$res .= "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\">" .
+			$res .= "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
 			  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20'") . "</a>";
 			$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 		} else {
 			$i = _T('info_grand_ecran');
-			$res .= "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\">" .
+			$res .= "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onmouseover=\"changestyle('bandeauecran');\" title=\"$i\" onfocus=\"changestyle('bandeauecran');\" onblur=\"changestyle('bandeauecran');\">" .
 			  http_img_pack("set-ecran.png", $i, "width='26' height='20'") ."</a>";
 			$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 		}
@@ -200,10 +202,11 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		$res .= "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 		if ($auth_can_disconnect) {
+			$alt=_T('icone_deconnecter');
 			$res .= "<a href='".
 			  generer_url_action("logout","logout=prive") .
-			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\">" .
-			  http_img_pack("deconnecter-24.gif", "", "") .
+			  "' class='icone26' onmouseover=\"changestyle('bandeaudeconnecter');\" onfocus=\"changestyle('bandeaudeconnecter');\" onblur=\"changestyle('bandeaudeconnecter');\">" .
+			  http_img_pack("deconnecter-24.gif", "$alt", "") .
 			  "</a>";
 		}
 		$res .= "</td>"
@@ -231,7 +234,7 @@ function choix_couleur() {
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
 			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\""). "</a>";
+				http_img_pack("rien.gif",  _T('amelioration_access:choix_couleur_interface').$key, "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\""). "</a>";
 		}
 	}
 	return $res;
@@ -278,7 +281,7 @@ function auteurs_recemment_connectes()
 // http://doc.spip.org/@lien_change_var
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien = parametre_url($lien, $set, $couleur);
-	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver />";
+	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
 }
 
 

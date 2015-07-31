@@ -299,15 +299,15 @@ function http_wrapper($img){
 function http_img_pack($img, $alt, $att, $title='') {
 	return "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ''))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
 	  . $att . " />";
 }
 
 // http://doc.spip.org/@http_href_img
-function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
-	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
+function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
+	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
 }
 
 
