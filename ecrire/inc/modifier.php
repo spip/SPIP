@@ -204,6 +204,19 @@ function revision_forum($id_forum, $c=false) {
 		),
 		$c);
 
+
+	// Modification des id_article etc: ce n'est pas autorise en standard
+	// mais ca peut servir pour des crayons ; du coup on teste ici que
+	// la donnee provient bien de $c, pour eviter tout hack lors d'un envoi
+	// normal de forum.
+	if (is_array($c)
+	AND count($cles = array_intersect(array_keys($c),
+		array('id_article', 'id_rubrique', 'id_syndic', 'id_breve')))
+	) {
+		foreach ($cles as $k)
+			spip_query("UPDATE spip_forum SET $k="._q($c[$k])." WHERE id_forum=$id_forum");
+	}
+
 	// s'il y a vraiment eu une modif, on stocke le numero IP courant
 	// ainsi que le nouvel id_auteur dans le message modifie ;
 	if ($r) {
