@@ -1643,13 +1643,18 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	if (!$table) return '';
 
 	// il ne reste plus qu'a trouver le champ dans les from
-	list($nom, $desc) = trouver_champ_exterieur($col, $boucle->from, $boucle);
+	list($nom, $desc, $cle) = trouver_champ_exterieur($col, $boucle->from, $boucle);
 
-	if (count(trouver_champs_decomposes($col, $desc))>1){
+	if (count($cle)>1 OR reset($cle)!==$col){
 		$col_alias = $col; // id_article devient juste le nom d'origine
-		$e = decompose_champ_id_objet($col);
-		$col = array_shift($e);
-		$where = primary_doublee($e, $table);
+		if (count($cle)>1 AND reset($cle)=='id_objet'){
+			$e = decompose_champ_id_objet($col);
+			$col = array_shift($e);
+			$where = primary_doublee($e, $table);
+		}
+		else {
+			$col = reset($cle);
+		}
 	}
 
 	return array($col, $col_alias, $table, $where, $desc);
@@ -1723,8 +1728,8 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 		if ($arrivee = trouver_champ_exterieur($col, array($joint), $boucle, $checkarrivee)) {
 			// alias de table dans le from
 			$t = array_search($arrivee[0], $boucle->from);
-			// transformer eventuellement id_xx en (id_objet,objet)
-			$cols = trouver_champs_decomposes($col, $arrivee[1]);
+			// recuperer la cle id_xx eventuellement decomposee en (id_objet,objet)
+			$cols = $arrivee[2];
 			if ($t){
 				// la table est déjà dans le FROM, on vérifie si le champ est utilisé.
 				$joindre = false;
@@ -1778,6 +1783,8 @@ function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $chec
 	$arrivee = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 
 	if (!$intermediaire OR !$arrivee) return '';
+	array_pop($intermediaire); // enlever la cle en 3eme argument
+	array_pop($arrivee); // enlever la cle en 3eme argument
 
 	$res = fabrique_jointures($boucle,
 	                          array(
