@@ -1167,7 +1167,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
 			$s = "<div>";
-			$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve&id_rubrique=$id_rubrique") . "' style=\"display:block;\">";
+			$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
 
 			if ($voir_logo) $s .= baliser_logo("breve", $id_breve, 26, 20);
 			$s .= typo($titre);

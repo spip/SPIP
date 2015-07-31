@@ -95,7 +95,7 @@ echo "</td>";
 if ($flag_editable) {
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_modifier_breve'), generer_url_ecrire("breves_edit","id_breve=$id_breve&id_rubrique=$id_rubrique&retour=nav"), "breve-24.gif", "edit.gif");
+	icone(_T('icone_modifier_breve'), generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"), "breve-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -125,7 +125,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 if ($GLOBALS['meta']["articles_mots"]!='non' AND $flag_editable AND $options == 'avancees') {
-  formulaire_mots('breves', $id_breve, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("breves_voir", "id_breve=$id_breve&id_rubrique=$id_rubrique"));
+  formulaire_mots('breves', $id_breve, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("breves_voir", "id_breve=$id_breve"));
 }
 
 
@@ -198,12 +198,12 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<table>";
 	echo "<td  align='right'>";
-	icone(_T('icone_publier_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=publie&id_rubrique=$id_rubrique"), "breve-24.gif", "racine-24.gif");
+	icone(_T('icone_publier_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=publie"), "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_refuser_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=refuse&id_rubrique=$id_rubrique"), "breve-24.gif", "supprimer.gif");
+	icone(_T('icone_refuser_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=refuse"), "breve-24.gif", "supprimer.gif");
 	echo "</td>";
 	
 
@@ -223,7 +223,7 @@ fin_cadre_relief();
 echo "<BR><BR>";
 
 echo "\n<div align='center'>";
- icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&id_rubrique=$id_rubrique&titre_message=".urlencode($titre) . "&adresse_retour=".urlencode( generer_url_ecrire("breves_voir", "id_breve=$id_breve&id_rubrique=$id_rubrique"))),
+ icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=".urlencode($titre) . "&adresse_retour=".urlencode( generer_url_ecrire("breves_voir", "id_breve=$id_breve"))),
        "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
@@ -231,7 +231,7 @@ echo "</div>";
 echo "<P align='left'>";
 
 
-afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), generer_url_ecrire("breves_voir", "id_breve=$id_breve&id_rubrique=$id_rubrique"));
+afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), generer_url_ecrire("breves_voir", "id_breve=$id_breve"));
 
 fin_page();
 }
