@@ -100,7 +100,7 @@ function session_get($nom) {
 // (auteurs identifies seulement)
 // http://doc.spip.org/@actualiser_sessions
 function actualiser_sessions($auteur) {
-	if (!intval($auteur['id_auteur']))
+	if (!$id_auteur=intval($auteur['id_auteur']))
 		return;
 
 	// memoriser l'auteur courant (celui qui modifie la fiche)
