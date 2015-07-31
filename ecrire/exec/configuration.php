@@ -61,8 +61,8 @@ debut_gauche();
 // Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
 //
  if ($spip_display != 4) {
-	include_spip('inc/chercher_logo');
-	echo afficher_boite_logo('id_syndic', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
+	  $iconifier = charger_fonction('iconifier', 'inc');
+	  echo $iconifier('id_syndic', 0, 'configuration');
  }
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));

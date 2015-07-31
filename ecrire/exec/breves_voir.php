@@ -71,10 +71,8 @@ fin_boite_info();
 //
 
  if (($spip_display != 4) AND $id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique))) {
-	include_spip('inc/chercher_logo');
-	echo afficher_boite_logo('id_breve', $id_breve,
-			    _T('logo_breve').aide ("breveslogo"),
-			    _T('logo_survol'), 'breves_voir'); 
+	  $iconifier = charger_fonction('iconifier', 'inc');
+	  echo $iconifier('id_breve', $id_breve, 'breves_voir'); 
  }
 
 debut_raccourcis();

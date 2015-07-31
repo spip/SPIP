@@ -21,15 +21,16 @@ function action_iconifier_dist()
 	$arg = _request('arg');
 
 	$arg = rawurldecode($arg);
-	if (!preg_match(',^unlink\s,',$arg))
-		action_spip_image_ajouter_dist($arg);
-	else	action_spip_image_effacer_dist($arg);
+	if (!preg_match(',^\d*(\D)(.*)$,',$arg, $r))
+		spip_log("action iconifier: $arg pas compris");
+	elseif ($r[1] == '+')
+		action_spip_image_ajouter_dist($r[2]);
+	else	action_spip_image_effacer_dist($r[2]);
 }
 
 // http://doc.spip.org/@action_spip_image_effacer_dist
 function action_spip_image_effacer_dist($arg) {
 
-	$arg = preg_replace(',^unlink\s*,','',rawurldecode($arg));
 	if (!strstr($arg, ".."))
 		@unlink(_DIR_LOGOS . $arg);
 }

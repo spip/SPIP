@@ -429,4 +429,50 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1, $cherche_image=t
 		return "<img src='$logo$date'$attributs />";
 }
 
+
+// Calculer le ratio
+// http://doc.spip.org/@image_ratio
+function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+	$ratioWidth = $srcWidth/$maxWidth;
+	$ratioHeight = $srcHeight/$maxHeight;
+
+	if ($ratioWidth <=1 AND $ratioHeight <=1) {
+		$destWidth = $srcWidth;
+		$destHeight = $srcHeight;
+	} else if ($ratioWidth < $ratioHeight) {
+		$destWidth = $srcWidth/$ratioHeight;
+		$destHeight = $maxHeight;
+	}
+	else {
+		$destWidth = $maxWidth;
+		$destHeight = $srcHeight/$ratioWidth;
+	}
+	return array (ceil($destWidth), ceil($destHeight),
+		max($ratioWidth,$ratioHeight));
+}
+
+// http://doc.spip.org/@ratio_image
+function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
+{
+	if (!$taille_origine = @getimagesize($logo)) return '';
+	list ($destWidth,$destHeight, $ratio) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
+
+		// Creer effectivement la vignette reduite
+
+	$suffixe = '-'.$destWidth.'x'.$destHeight;
+	$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
+	if ($preview) {
+			$logo = $preview['fichier'];
+			$destWidth = $preview['width'];
+			$destHeight = $preview['height'];
+	}
+
+		// dans l'espace prive mettre un timestamp sur l'adresse 
+		// de l'image, de facon a tromper le cache du navigateur
+		// quand on fait supprimer/reuploader un logo
+		// (pas de filemtime si SAFE MODE)
+	$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
+	return "<img src='$logo$date' width='".$destWidth."' height='".$destHeight."'$attributs />";
+}
+
 ?>

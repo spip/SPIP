@@ -45,9 +45,8 @@ function exec_auteurs_edit_dist()
 	cadre_auteur_infos($id_auteur, $auteur);
 
 	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
-		include_spip('inc/chercher_logo');
-		echo afficher_boite_logo('id_auteur', $id_auteur,
-				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'), 'auteurs_edit');
+		$iconifier = charger_fonction('iconifier', 'inc');
+		echo $iconifier('id_auteur', $id_auteur, 'auteurs_edit');
 	}
 
 	echo pipeline('affiche_gauche',

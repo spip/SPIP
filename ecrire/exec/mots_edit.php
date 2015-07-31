@@ -133,8 +133,8 @@ if ($id_mot) {
 //
 
 if ($id_mot > 0 AND acces_mots() AND ($spip_display != 4)) {
-	include_spip('inc/chercher_logo');
-	echo afficher_boite_logo('id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
+	  $iconifier = charger_fonction('iconifier', 'inc');
+	  echo $iconifier('id_mot', $id_mot, 'mots_edit');
  }
 
 //
