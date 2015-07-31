@@ -39,19 +39,19 @@ function action_editer_site_dist() {
 		))
 			set_request('reload', 'oui');
 
-		revisions_syndics($id_syndic);
+		revisions_sites($id_syndic);
 	}
 	// Envoi depuis le formulaire de creation d'un site
 	else if ($arg == 'oui') {
 		set_request('reload', 'oui');
 		$id_syndic = insert_syndic(_request('id_parent'));
-		revisions_syndics($id_syndic);
+		revisions_sites($id_syndic);
 	}
 	// Envoi depuis le formulaire d'analyse automatique d'un site
 	else if ($arg == 'auto') {
 		if ($auto = analyser_site(_request('url'))) {
 			$id_syndic = insert_syndic(_request('id_parent'));
-			revisions_syndics($id_syndic, $auto);
+			revisions_sites($id_syndic, $auto);
 			if ($auto['syndication'] == 'oui')
 				set_request('reload', 'oui');
 		}
@@ -117,8 +117,8 @@ function insert_syndic($id_rubrique) {
 // Enregistre une revision de syndic
 // $new indique si c'est un INSERT
 // $c est un contenu (par defaut on prend le contenu via _request())
-// http://doc.spip.org/@revisions_syndics
-function revisions_syndics ($id_syndic, $c=false) {
+// http://doc.spip.org/@revisions_sites
+function revisions_sites ($id_syndic, $c=false) {
 
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
