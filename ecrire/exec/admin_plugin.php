@@ -65,9 +65,14 @@ function exec_admin_plugin_dist($retour='') {
 
 	echo debut_droite('plugin', true);
 
+	// message d'erreur au retour d'un operation
+	if (_request('erreur')){
+		echo "<div class='erreur_message-plugins'>" . _T(_request('erreur')) . "</div>";
+	}
+
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
-	echo "<div 'install-plugins'>";
+	echo "<div class='install-plugins'>";
 	installe_plugins();
 	echo "</div>";
 

@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non d&eacute;fini',
 'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
 'erreur_plugin_version_manquant' => 'Version du plugin manquante',
-
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.',
 // F
 'forum_info_original' => 'original',
 
