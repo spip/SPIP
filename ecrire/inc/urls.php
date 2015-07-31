@@ -29,9 +29,8 @@ function nettoyer_url_page($url, $contexte=array())
 	if (preg_match($raccourci_url_page_html, $url, $regs)
 	OR preg_match($raccourci_url_page_id, $url, $regs)
 	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
-		$type = preg_replace(',s$,', '', table_objet($regs[1]));
-		if ($type == 'syndic') $type = 'site';
-		$_id = id_table_objet($regs[1]);
+		$type = objet_type($regs[1]);
+		$_id = id_table_objet($type);
 		$contexte[$_id] = $regs[2];
 		$suite = $regs[3];
 		return array($contexte, $type, null, $type, $suite);
