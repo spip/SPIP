@@ -313,13 +313,13 @@ function echappe_retour_modeles($letexte)
 }
 
 // http://doc.spip.org/@nettoyer_raccourcis_typo
-function nettoyer_raccourcis_typo($texte){
+function nettoyer_raccourcis_typo($texte, $connect=''){
 	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
 	// remplacer les liens
 	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],S', $texte, $regs, PREG_SET_ORDER))
 		foreach ($regs as $reg) {
 			list ($titre,,)= traiter_raccourci_lien_atts($reg[1]);
-			$titre = calculer_url($reg[3], $titre, 'titre');
+			$titre = calculer_url($reg[3], $titre, 'titre', $connect);
 			$titre = corriger_typo(supprimer_tags($titre));
 			$texte = str_replace($reg[0], $titre, $texte);
 		}
@@ -404,30 +404,6 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 	return quote_amp(trim($texte)).$points;
 }
-
-// prendre <intro>...</intro> sinon couper a la longueur demandee
-// http://doc.spip.org/@couper_intro
-function couper_intro($texte, $long, $suite = '&nbsp;(...)') {
-	$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
-	$intro = '';
-	while ($fin = strpos($texte, "</intro>")) {
-		$zone = substr($texte, 0, $fin);
-		$texte = substr($texte, $fin + strlen("</intro>"));
-		if ($deb = strpos($zone, "<intro>") OR substr($zone, 0, 7) == "<intro>")
-			$zone = substr($zone, $deb + 7);
-		$intro .= $zone;
-	}
-
-	if ($intro)
-		$intro .= $suite;
-	else {
-		$intro = preg_replace(',([|]\s*)+,S', '; ', couper($texte, $long, $suite));
-	}
-
-	// supprimer un eventuel chapo redirecteur =http:/.....
-	return $intro;
-}
-
 
 //
 // Les elements de propre()
@@ -634,7 +610,7 @@ function typer_raccourci ($lien) {
 
 // http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url', $connect='') {
-
+	include_spip('base/abstract_sql');
 	if ($match = typer_raccourci($lien)) {
 		@list($f,,$id,,$param,,$ancre) = $match;
 		$res = '';
@@ -1311,6 +1287,8 @@ function chapo_redirige($chapo, $url=false)
 			return $chapo;
 	return !$url ? $m[3] : calculer_url($m[3]);
 }
+
+function chapo_redirigetil($chapo) { return $chapo[0] == '=';}
 
 // http://doc.spip.org/@traiter_poesie
 function traiter_poesie($letexte)

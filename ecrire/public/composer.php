@@ -180,38 +180,32 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
 //
 // fonction standard de calcul de la balise #INTRODUCTION
 // on peut la surcharger en definissant dans mes_fonctions :
-// function introduction($type,$texte,$chapo,$descriptif) {...}
+// function introduction ...
 //
+@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+
 // http://doc.spip.org/@filtre_introduction_dist
-function filtre_introduction_dist($type, $texte, $chapo='', $descriptif='') {
-	define('_INTRODUCTION_SUITE', '&nbsp;(...)');
+function filtre_introduction_dist($texte, $type, $connect) {
 
-	switch ($type) {
-		case 'articles':
-			# si descriptif contient juste des espaces ca produit une intro vide, 
-			# c'est une fonctionnalite, pas un bug
-			if (strlen($descriptif))
-				return propre($descriptif);
-			else if (substr($chapo, 0, 1) == '=')	// article virtuel
-				return '';
-			else
-				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500, _INTRODUCTION_SUITE))));
-			break;
-		case 'breves':
-			return PtoBR(propre(supprimer_tags(couper_intro($texte, 300, _INTRODUCTION_SUITE))));
-			break;
-		case 'forums':
-			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600, _INTRODUCTION_SUITE))));
-			break;
-		case 'rubriques':
-			if (strlen($descriptif))
-				return propre($descriptif);
-			else
-				return PtoBR(propre(supprimer_tags(couper_intro($texte, 600, _INTRODUCTION_SUITE))));
-			break;
+// prendre <intro>...</intro> sinon couper a la longueur demandee
+  
+	$texte = extraire_multi(preg_replace(",(</?)intro>,i", "\\1intro>", $texte)); // minuscules
+	$intro = '';
+	while ($fin = strpos($texte, "</intro>")) {
+		$zone = substr($texte, 0, $fin);
+		$texte = substr($texte, $fin + strlen("</intro>"));
+		if ($deb = strpos($zone, "<intro>") OR substr($zone, 0, 7) == "<intro>")
+			$zone = substr($zone, $deb + 7);
+		$intro .= $zone;
 	}
-}
+	$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte);
+	$long =  $type=='articles' ? 600 : 300;
 
+	// il faudrait optimiser un peu le traitement des raccourcis
+	// (car traiter_raccourcis ne fait pas que ce qu'elle dit)
+	return PtoBR(traiter_raccourcis(preg_replace(',([|]\s*)+,S', '; ', 
+		couper($texte, $long, _INTRODUCTION_SUITE))));
+}
 
 //
 // Balises dynamiques
