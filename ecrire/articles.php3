@@ -853,26 +853,26 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'><b>DATE DE CREATION DE L'ARTICLE :</b> ";
-		echo "<B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'><b>DATE DE CR&Eacute;ATION DE L'ARTICLE : ";
+		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
 	
 	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
 		echo '<p><table cellpadding="5" cellspacing="0" border="0" width="100%">';
-		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="2" color="#000000">';
+		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="1" color="#000000" face="Verdana,Arial,Helvetica,sans-serif">';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = ' : '.majuscules(affdate($date_redac));
 		echo bouton_block_invisible('dateredac');
 		echo '<b>DATE DE PUBLICATION ANT&Eacute;RIEURE'.$date_affichee.'</b></font></td></tr></table>';
 		echo debut_block_invisible('dateredac');
 		echo '<table cellpadding="5" cellspacing="0" border="0" width="100%">';
 		echo '<tr><td align="left">';
-		echo '<input type="radio" name="avec_redac" value="non" id="on"';
+		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
-		echo ' /> <label for="on">Ne pas afficher de date de publication ant&eacute;rieure.</label>';
-		echo '<br /><input type="radio" name="avec_redac" value="oui" id="off"';
+		echo ' /> <label for="avec_redac_on">Ne pas afficher de date de publication ant&eacute;rieure.</label>';
+		echo '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') echo ' checked="checked"';
-		echo ' /> <label for="off">Afficher :</label> ';
+		echo ' /> <label for="avec_redac_off">Afficher :</label> ';
 
 		echo '<select name="jour_redac" class="fondl">';
 		afficher_jour($jour_redac);
@@ -884,7 +884,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 
 		echo '</td><td align="right">';
 		echo '<input type="submit" name="Changer" class="fondo" value="Changer" />';
-		echo aide('artdate-redac');
+		echo aide('artdate_redac');
 		echo '</td></tr>';
 		echo fin_block();
 		echo '</table>';
