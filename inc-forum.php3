@@ -251,14 +251,15 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "</div>\n<p>";
 	}
 	
-	
-	if ($forums_publics == "priori") {
+	/*
+	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}	
 	
-	if ($forums_publics == "abonnement") {
+	if ($forums_publics == "abo") {
 		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?>';
 	}
+	*/
 	
 	$ret .= "\n";
 
@@ -421,7 +422,7 @@ function ajout_forum() {
 	$nom_site_forum = addslashes($nom_site_forum);
 	$auteur = addslashes($auteur);
 	$retour_forum = rawurldecode($retour_forum);
-	$forums_publics = lire_meta("forums_publics");
+	$forums_publics = get_forums_publics($forum_id_article);
 
 	if (strlen($confirmer) > 0 AND !verifier_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea", $hash)) {
 		@header("Location: $retour_forum");
@@ -457,11 +458,12 @@ function ajout_forum() {
 		}
 	}
 
+
 	switch($forums_publics) {
 		case "non":
 			$etat = "off";
 			break;
-		case "priori":
+		case "pri":
 			$etat = "prop";
 			break;
 		default:
@@ -500,7 +502,7 @@ function ajout_forum() {
 	$result_forum = mysql_query($query_forum);
 
 
-	if ($forums_publics == 'abonnement') {
+	if ($forums_publics == 'abo') {
 		$cookie_email = $HTTP_COOKIE_VARS['spip_forum_email'];
 		if ($hash_email && $forum_id_auteur) {
 			if (verifier_action_auteur("email $cookie_email", $hash_email, $forum_id_auteur)) {
@@ -592,6 +594,7 @@ function ajout_forum() {
 				}
 			}
 		}
+
 
 
 		@header("Location: $retour_forum");
