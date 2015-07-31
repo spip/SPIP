@@ -65,7 +65,10 @@ function sql_set_charset($charset,$serveur='', $option=true){
 // - le crite`re de limite (Limit)
 // - le tableau des des post-conditions a remplir (Having)
 // - le serveur sollicite (pour retrouver la connexion)
-// - option peut avoir 3 valeurs : true -> executer la requete, false -> ne pas l'executer mais la retourner, 'continue' -> ne pas echouer en cas de serveur sql indisponible
+// - option peut avoir 3 valeurs : 
+//	true -> executer la requete, 
+//	false -> ne pas l'executer mais la retourner, 
+//	continue -> ne pas echouer en cas de serveur sql indisponible
 
 // http://doc.spip.org/@sql_select
 function sql_select (
@@ -343,11 +346,12 @@ function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
-	$r = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
-	if (!$r OR $option!==true) return $r;
-	$r2 = sql_fetch($r, $serveur, $option);
-	sql_free($r, $serveur, $option);
-	return $r2;
+	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
+	if ($option===false) return $q;
+	if (!$q) return array();
+	$r = sql_fetch($q, $serveur, $option);
+	sql_free($q, $serveur, $option);
+	return $r;
 }
 
 // Retourne le tableau de toutes les lignes d'une requete Select
@@ -357,7 +361,8 @@ function sql_allfetsel(
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
-	if (!$q OR $option!==true) return array();
+	if ($option===false) return $q;
+	if (!$q) return array();
 	$res = array();
 	while ($r = sql_fetch($q, $serveur)) $res[] = $r;
 	sql_free($q, $serveur);
