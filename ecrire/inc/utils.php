@@ -919,9 +919,20 @@ function generer_form_public($script, $corps, $atts='') {
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
 
-	return  generer_url_public('',
+	$url = './';
+	$url = parametre_url($url,'action',$script);
+	if ($args) $url .= '&amp;'.$args;
+	if ($redirect = parametre_url($url,'redirect')){
+		if (test_espace_prive() 
+		  AND substr($redirect,0,strlen(_DIR_RESTREINT_ABS))==_DIR_RESTREINT_ABS)
+			$redirect = './'.substr($redirect,strlen(_DIR_RESTREINT_ABS));
+			$url = parametre_url($url,'redirect',$redirect);
+	}
+	if ($no_entities) $url = str_replace('&amp;','&',$url);
+	/*return  generer_url_public('',
 				  "action=$script" .($args ? "&$args" : ''),
-				  $no_entities,$rel);
+				  $no_entities,$rel);*/
+	return $url;
 }
 
 

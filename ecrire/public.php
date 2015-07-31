@@ -55,22 +55,8 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 
 
 	// Est-ce une action ?
-	if ($action = _request('action')) {
-		define('_ESPACE_PRIVE', true);
-		include_spip('base/abstract_sql'); // chargement systematique pour les actions
-		include_spip('inc/autoriser'); // chargement systematique pour les actions
-		include_spip('inc/headers');
-		$var_f = charger_fonction($action, 'action');
-		$var_f();
-		if ($GLOBALS['redirect']
-		OR $GLOBALS['redirect'] = _request('redirect'))
-			redirige_par_entete(urldecode($GLOBALS['redirect']));
-
-		if (!headers_sent()
-		AND !ob_get_length())
-			http_status(204); // No Content
-		exit;
-	}
+	// les action sont gerees dans public/assembler/traiter_formulaires_dynamiques
+	// de maniere unifiees public/prive
 
 /*	// Code experimental pour faire marcher ecrire/ a partir de spip.php
 	// pour tester decommenter et indiquer dans mes_options :

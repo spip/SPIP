@@ -78,6 +78,41 @@ function init_var_mode(){
 function traiter_formulaires_dynamiques(){
 	static $done = false;
 	if (!$done) {
+		if ($action = _request('action')) {
+			define('_ESPACE_PRIVE', true);
+			include_spip('base/abstract_sql'); // chargement systematique pour les actions
+			include_spip('inc/autoriser'); // chargement systematique pour les actions
+			include_spip('inc/headers');
+			if (($v=_request('var_ajax'))
+			 AND ($v!=='form')
+			 AND ($args = _request('var_ajax_env'))
+			 AND ($cle = _request('var_ajax_cle')) 
+			 AND ($url = _request('redirect'))){
+				$url = parametre_url($url,'var_ajax',$v,'&');
+				$url = parametre_url($url,'var_ajax_env',$args,'&');
+				$url = parametre_url($url,'var_ajax_cle',$cle,'&');
+				set_request('redirect',$url);
+			}
+			$var_f = charger_fonction($action, 'action');
+			$var_f();
+			if ($GLOBALS['redirect']
+			OR $GLOBALS['redirect'] = _request('redirect')){
+				$url = urldecode($GLOBALS['redirect']);
+				if (($v=_request('var_ajax'))
+				 AND ($v!=='form')
+				 AND ($args = _request('var_ajax_env'))
+				 AND ($cle = _request('var_ajax_cle')) ){
+					$url = parametre_url($url,'var_ajax',$v,'&');	
+					$url = parametre_url($url,'var_ajax_env',$args,'&');	
+					$url = parametre_url($url,'var_ajax_cle',$cle,'&');	
+				}
+				redirige_par_entete($url);
+			}
+			if (!headers_sent()
+			AND !ob_get_length())
+				http_status(204); // No Content
+			exit;
+		}
 		// traiter les appels de bloc ajax
 		if (($v=_request('var_ajax'))
 		 AND ($v!=='form')
