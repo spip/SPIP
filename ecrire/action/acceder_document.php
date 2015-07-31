@@ -39,7 +39,7 @@ function action_acceder_document_dist() {
 		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
 
-		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
+		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
 		if (!$doc) {
 			$status = 404;
 		} else {
@@ -87,9 +87,9 @@ function action_acceder_document_dist() {
 		// le navigateur les downloade au lieu de les afficher
 		header("Content-Type: ". $doc['mime_type']);
 
-		if (!preg_match(',^image/,', $doc['mime_type'])) {
+		if ($doc['inclus']=='non') {
 			$f = $doc['titre'] ? $doc['titre'] : basename($file);
-			header('Content-Type: application/octet-stream');
+			//header('Content-Type: application/octet-stream');
 			header("Content-Disposition: attachment; filename=\"$f\";");
 			header("Content-Transfer-Encoding: binary");
 		}
