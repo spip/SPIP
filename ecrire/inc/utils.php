@@ -679,17 +679,20 @@ function chemin($file, $dirname='', $include=false){
 // si on donne un sous-repertoire en 2e arg optionnel, il FAUT le / final
 // si 3e arg vrai, on inclut si ce n'est fait.
 define('_ROOT_CWD', getcwd().'/');
+$GLOBALS['path_files'] = null;
 
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='', $include=false) {
-	static $files=array(), $dirs=array();
+	static $dirs=array();
 	static $inc = array(); # cf http://trac.rezo.net/trac/spip/changeset/14743
-	if (isset($files[$dirname][$file])) {
+	if (isset($GLOBALS['path_files'][$dirname][$file])) {
+		if (!$GLOBALS['path_files'][$dirname][$file])
+			return false;
 		if ($include AND !isset($inc[$dirname][$file])) {
-			include_once _ROOT_CWD . $files[$dirname][$file];
+			include_once _ROOT_CWD . $GLOBALS['path_files'][$dirname][$file];
 			$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 		}
-		return  $files[$dirname][$file];
+		return $GLOBALS['path_files'][$dirname][$file];
 	}
 
 	$a = strrpos($file,'/');
@@ -707,12 +710,38 @@ function find_in_path ($file, $dirname='', $include=false) {
 					include_once _ROOT_CWD . $a;
 					$inc[$dirname][$file] = $inc[''][$dirname . $file] = true;
 				}
-				return $files[$dirname][$file] = $files[''][$dirname . $file] = $a;
+				if (!defined('_SAUVER_CHEMIN'))
+					define('_SAUVER_CHEMIN',true);
+				return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = $a;
 			}
 		}
 	}
+	if (!defined('_SAUVER_CHEMIN'))
+		define('_SAUVER_CHEMIN',true);
+	return $GLOBALS['path_files'][$dirname][$file] = $GLOBALS['path_files'][''][$dirname . $file] = false;
 }
 
+function load_path_cache(){
+	$GLOBALS['path_files'] = array();
+	// si le visiteur est admin,
+	// on ne recharge pas le cache pour forcer sa mise a jour
+	// le cache de chemin n'est utilise que dans le public
+	if (_DIR_RESTREINT 
+		AND (!isset($GLOBALS['visiteur_statut']) OR $GLOBALS['visiteur_statut']!='0minirezo')){
+		lire_fichier(_CACHE_CHEMIN,$contenu);
+		if (!$GLOBALS['path_files']=unserialize($contenu))
+			$GLOBALS['path_files'] = array();
+	}
+	// pas de sauvegarde du chemin si on est pas dans le public
+	if (!_DIR_RESTREINT)
+		define('_SAUVER_CHEMIN',false);
+}
+
+function save_path_cache(){
+	if (defined('_SAUVER_CHEMIN')
+		AND _SAUVER_CHEMIN)
+		ecrire_fichier(_CACHE_CHEMIN,serialize($GLOBALS['path_files']));
+}
 
 // http://doc.spip.org/@find_all_in_path
 function find_all_in_path($dir,$pattern, $recurs=false){
@@ -1092,6 +1121,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
 	define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
 	define('_CACHE_PIPELINES',  _DIR_CACHE."charger_pipelines.php");
+	define('_CACHE_CHEMIN',  _DIR_CACHE."chemin.txt");
 
 	# attention .php obligatoire pour ecrire_fichier_securise
 	define('_FILE_META', $ti . 'meta_cache.php');
@@ -1152,6 +1182,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
 	include_once _DIR_RESTREINT . 'inc/flock.php';
+
+	// charger tout de suite le cache path
+	load_path_cache();
 
 	// *********** traiter les variables ************
 

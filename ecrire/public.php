@@ -243,6 +243,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	AND !strstr($page['texte'], '<!-- SPIP-CRON -->')
 	AND !preg_match(',msie|mozilla|opera|konqueror,i', $_SERVER['HTTP_USER_AGENT']))
 		cron();
+
+	// sauver le cache chemin si necessaire
+	save_path_cache();
 }
 
 ?>
