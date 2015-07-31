@@ -291,7 +291,7 @@ $liste_des_forums = array(
 
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite)
-$spip_version_code = 11056;
+$spip_version_code = 11156;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version = 11088;
 // version de l'interface a la base
