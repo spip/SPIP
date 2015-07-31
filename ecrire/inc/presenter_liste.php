@@ -52,7 +52,7 @@ function inc_presenter_liste_dist($requete, $fonc, &$prims, $own, $force, $style
 				if ($largeur) $largeur = " style='width: $largeur" ."px;'";
 				if ($style) $style = " class=\"$style\"";
 				$t = !trim($t) ? "&nbsp;" : lignes_longues($t);
-				$res .= "\n<td$class$style>$t</td>";
+				$res .= "\n<td$style>$t</td>";
 				if (!$table) {
 				  $th |= $nom ? 1 : 0;
 				  $head .= "\n<th style='text-align:center'>$nom</th>";

@@ -241,6 +241,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	//// Documents associes
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='document'", "", "D.id_document");
 
+
 	$documents_lies = array();
 	while ($row = sql_fetch($res))
 		$documents_lies[]= $row['id_document'];
@@ -249,9 +250,10 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='image'", "", "D.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
+
 	while ($doc = sql_fetch($res)) {
 		$id_document = $doc['id_document'];
-		$deplier = $id_document_actif==$id_document;
+		$deplier = ($id_document_actif==$id_document);
 		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
 	}
 
@@ -278,10 +280,8 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	// Afficher les documents lies
 	$ret .= "<div id='liste_documents'>\n";
 
-	foreach($documents_lies as $doc) {
-		$id_document = $doc['id_document'];
-		$deplier = $id_document_actif==$id_document;
-		$ret .= afficher_case_document($doc, $id, $script, $type, $deplier);
+	foreach($documents_lies as $id_document) {
+		$ret .= afficher_case_document($id_document, $id, $script, $type, ($id_document_actif==$id_document));
 	}
 	$ret .= "</div>";
 	if (test_espace_prive()){
