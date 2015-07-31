@@ -12,8 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/layer');
-include_spip('inc/agenda');
+include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
 include_spip('inc/boutons');
 
 // Choix dynamique de la couleur
@@ -2983,14 +2982,6 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	  icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
 }
 
-
-function http_style_background($img, $att='')
-{
-  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
-    ($att ? (' ' . $att) : '') . ";'";
-}
-
-
 //
 // Creer un bouton qui renvoie vers la bonne url spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
@@ -3030,5 +3021,86 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	. "</a>";
 }
 
+
+// Fonction pour la messagerie et la page d'accueil
+
+function http_calendrier_rv($messages, $type) {
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+
+	$total = '';
+	if (!$messages) return $total;
+	foreach ($messages as $row) {
+		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
+			$url = quote_amp($match[1]);
+		else
+			$url = generer_url_ecrire("message", "id_message=".$row['id_message']);
+
+		$rv = ($row['rv'] == 'oui');
+		$date = $row['date_heure'];
+		$date_fin = $row['date_fin'];
+		if ($row['type']=="pb") $bouton = "pense-bete";
+		else if ($row['type']=="affich") $bouton = "annonce";
+		else $bouton = "message";
+
+		if ($rv) {
+			$date_jour = affdate_jourcourt($date);
+			$total .= "<tr><td colspan='2'>" .
+				(($date_jour == $date_rv) ? '' :
+				"<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
+				"</td></tr>";
+			$rv =
+		((affdate($date) == affdate($date_fin)) ?
+		 ("<div class='calendrier-arial9 fond-agenda'>"
+		  . heures($date).":".minutes($date)."<br />"
+		  . heures($date_fin).":".minutes($date_fin)."</div>") :
+		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
+		  . heures($date).":".minutes($date)."<br />...</div>" ));
+		}
+
+		$total .= "<tr><td style='width: 24px' valign='middle'>" .
+		  http_href($url,
+				     ($rv ?
+				      http_img_pack("rv.gif", 'rv',
+						    http_style_background($bouton . '.gif', "no-repeat;' border='0'")) : 
+				      http_img_pack($bouton.".gif", $bouton, "style='border: 0px'")),
+				     '', '') .
+		"</td>" .
+		"<td valign='middle'>" .
+		$rv .
+		"<div><b>" .
+		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .
+		"</b></div>" .
+		"</td>" .
+		"</tr>\n";
+
+		$date_rv = $date_jour;
+	}
+
+	if ($type == 'annonces') {
+		$titre = _T('info_annonces_generales');
+		$couleur_titre = "ccaa00";
+		$couleur_texte = "black";
+		$couleur_fond = "#ffffee";
+	}
+	else if ($type == 'pb') {
+		$titre = _T('infos_vos_pense_bete');
+		$couleur_titre = "#3874B0";
+		$couleur_fond = "#EDF3FE";
+		$couleur_texte = "white";
+	}
+	else if ($type == 'rv') {
+		$titre = _T('info_vos_rendez_vous');
+		$couleur_titre = "#666666";
+		$couleur_fond = "#eeeeee";
+		$couleur_texte = "white";
+	}
+
+	return
+	  debut_cadre_enfonce("", true, "", $titre) .
+	  "<table width='100%' border='0' cellpadding='0' cellspacing='2'>" .
+	  $total .
+	  "</table>" .
+	  fin_cadre_enfonce(true);
+}
 
 ?>

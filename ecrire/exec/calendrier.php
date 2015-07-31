@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/agenda');
+include_spip('inc/presentation');
 
 function exec_calendrier_dist()
 {
