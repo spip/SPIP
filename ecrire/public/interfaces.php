@@ -286,6 +286,7 @@ global  $table_des_traitements;
 
 define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
 define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
+define('_TRAITEMENT_TYPO_SANS_NUMERO', 'typo(supprimer_numero(%s), "TYPO", $connect)');
 
 $table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;
@@ -309,7 +310,7 @@ $table_des_traitements['SOUSTITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['SURTITRE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['TAGS'][]= '%s';
 $table_des_traitements['TEXTE'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO;
+$table_des_traitements['TITRE'][]= _TRAITEMENT_TYPO_SANS_NUMERO;
 $table_des_traitements['TYPE'][]= _TRAITEMENT_TYPO;
 $table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['ENV'][]= 'entites_html(%s,true)';
