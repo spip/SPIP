@@ -1,8 +1,8 @@
-body { font-family: ,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px;
+body { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px;
 }
 
-h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
-h2 { margin: 0.8em 0 0.8em 0; font-size: 1.2em; font-weigth: normal; }
+h1 { margin: 1em 0 1em 0; font-size: 1.2em; font-weigth: bold; color: #5c3566; }
+h2 { margin: 0.8em 0 0.8em 0; font-size: 1.1em; font-weigth: normal; }
 
 a { color: #8ae234; text-decoration: none; }
 a:visited { color: #75507b; }
@@ -57,16 +57,15 @@ p.resultat.echec {background-color:#d60c0c;}
 	margin: 0px;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	height: 74px;
+	height: 63px;
 	overflow: hidden;
 	text-align: left;
 	font-family: helvetica, arial, sans;
-
 }
 
 #infos_etapes li {
 	float: left; 
-	width: 8.8em;
+	width: 9.0em;
 	padding-left: 2.5em;
 	padding-right: 20px;
 	padding-top: 10px;
@@ -89,19 +88,19 @@ p.resultat.echec {background-color:#d60c0c;}
 	font-family: helvetica, arial, sans;
 }
 #infos_etapes li.encours {
-	background: url(../dist/images/degrade-etapes-fonce-left.gif) top left;
+	background: url(../prive/images/degrade-etapes-fonce-left.gif) top left;
 	color: white;
 	font-weight: bold;
 }
 #infos_etapes li.prochains {
-	background: url(../dist/images/degrade-etapes-clair-left.gif) top left;
-	color: #666666;
+	background: url(../prive/images/degrade-etapes-clair-left.gif) top left;
+	color: #888888;
 }
 #infos_etapes li.valides {
-	background: url(../dist/images/degrade-etapes-vert-left.gif) top left;
-	color: #128f02;
+	background: url(../prive/images/degrade-etapes-vert-left.gif) top left;
+	color: #116d05;
 }
 #infos_etapes li.erreur {
-	background: url(../dist/images/degrade-etapes-rouge-left.gif) top left;
+	background: url(../prive/images/degrade-etapes-rouge-left.gif) top left;
 	color: white;
 }
