@@ -380,6 +380,12 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 
 	define('_TRI_ARTICLES_RUBRIQUE', 'date DESC');  # 0+titre,titre
 	$res .= afficher_objets('article',_T('info_tous_articles_presents'), array("WHERE" => "statut='publie' AND id_rubrique=$id_rubrique", 'ORDER BY' => _TRI_ARTICLES_RUBRIQUE));
+
+	// si une rubrique n'a pas/plus d'article publie, afficher les eventuels articles refuses
+	// pour permettre de la vider et la supprimer eventuellement
+	if (sql_countsel("spip_articles", "statut='publie' AND id_rubrique=".intval($id_rubrique), $groupby, $having)==0)
+		$res .= afficher_objets('article',_T('info_tous_articles_refuses'), array("WHERE" => "statut='refuse' AND id_rubrique=$id_rubrique", 'ORDER BY' => _TRI_ARTICLES_RUBRIQUE));
+
   $res .= $bouton_article;
 
 	//// Les breves
@@ -431,7 +437,7 @@ function tester_rubrique_vide($id_rubrique) {
 	if (sql_countsel('spip_rubriques', "id_parent=$id_rubrique"))
 		return false;
 
-	if (sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prepa' OR statut='prop')"))
+	if (sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND (statut<>'poubelle')"))
 		return false;
 
 	if (sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='publie' OR statut='prop')"))
@@ -442,6 +448,11 @@ function tester_rubrique_vide($id_rubrique) {
 
 	if (sql_countsel('spip_documents_liens', "id_objet=".intval($id_rubrique)." AND objet='rubrique'"))
 		return false;
+
+	$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_rubrique),'data'=>array()));
+	foreach($compte as $objet => $n)
+		if ($n)
+			return false;
 
 	return true;
 }
