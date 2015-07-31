@@ -443,8 +443,12 @@ function aff_referers ($query, $limit=10, $plus = true) {
 				$aff .= "</li><p />\n";
 			} else {
 				$aff .= $ret;
-				eregi("^(<a [^>]+>)(.*) \([0-9]+\)", $lesreferers[$numero][0], $regs);
-				$aff .= "<b>".$regs[1].$lesdomaines[$numero].$regs[2]."</b>";
+				$lien = $lesreferers[$numero][0];
+				if (eregi("^(<a [^>]+>)(.*)( \([0-9]+\))?", $lien, $regs))
+					$lien = $regs[1].$lesdomaines[$numero].$regs[2];
+				else
+					$lien = "<a href='http://".$lesdomaines[$numero]."'>".$lesdomaines[$numero]."</a>";
+				$aff .= "<b>$lien</b>";
 				$aff .= "</li>\n";
 			}
 		}
