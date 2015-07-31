@@ -167,7 +167,7 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	$handle = @opendir($dir);
 	if (!$handle) return;
 
-	while (($fichier = @readdir($handle)) != '') {
+	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
@@ -241,7 +241,7 @@ function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
 
-	while (($fichier = @readdir($handle)) != '') {
+	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
@@ -257,7 +257,7 @@ function calculer_cache_vignettes() {
 	$handle = @opendir(_DIR_IMG);
 	if (!$handle) return;
 
-	while (($fichier = @readdir($handle)) != '') {
+	while (($fichier = @readdir($handle)) !== false) {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;

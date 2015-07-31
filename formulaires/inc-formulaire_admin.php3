@@ -152,4 +152,24 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			)
 		);
 }
+
+// Un outil pour le bouton d'amin "statistiques"
+function afficher_raccourci_stats($id_article) {
+	$query = "SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
+	$result = spip_query($query);
+	if ($row = @spip_fetch_array($result)) {
+		$visites = intval($row['visites']);
+		$popularite = ceil($row['popularite']);
+
+		$query = "SELECT COUNT(DISTINCT ip) AS c FROM spip_visites_temp WHERE type='article' AND id_objet=$id_article";
+		$result = spip_query($query);
+		if ($row = @spip_fetch_array($result)) {
+			$visites = $visites + $row['c'];
+		}
+
+		return array('visites' => $visites, 'popularite' => $popularite);
+	}
+}
+
+
 ?>

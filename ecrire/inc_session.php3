@@ -160,7 +160,7 @@ function zap_sessions ($id_auteur, $zap) {
 
 	$dir = opendir(_DIR_SESSIONS);
 	$t = time();
-	while(($item = readdir($dir)) != '') {
+	while(($item = readdir($dir)) !== false) {
 		$chemin = _DIR_SESSIONS . $item;
 		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)) {
 

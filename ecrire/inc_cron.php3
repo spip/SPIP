@@ -159,12 +159,9 @@ function taches_generales() {
 	AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
 		$taches_generales['mail']= 3600 * 24 * lire_meta('jours_neuf');
 
-	// Stat. Attention: la popularite DOIT preceder les visites
-	if (lire_meta("activer_statistiques") == "oui") {
-		$taches_generales['statistiques'] = 3600;
-		$taches_generales['popularites'] = 1800;
-		$taches_generales['visites'] = 3600 * 24;
-	}
+	// stats : toutes les 5 minutes on peut vider un panier de visites
+	if (lire_meta("activer_statistiques") == "oui")
+		$taches_generales['visites'] = 300; 
 
 	// syndication
 	if (lire_meta("activer_syndic") == "oui") 
@@ -215,43 +212,25 @@ function cron_sites($t) {
 	return $r;
 }
 
-// calcule les stats en plusieurs etapes par tranche de 100
-
-function cron_statistiques($t) {
-	$ref = calculer_n_referers(100);
+//
+// Calcule les stats en plusieurs etapes
+//
+function cron_visites($t) {
+	$encore = calculer_visites($t);
 
 	// Si ce n'est pas fini on redonne la meme date au fichier .lock
 	// pour etre prioritaire lors du cron suivant
-	if ($ref == 100) return (0 - $t);
-
-	// Supprimer les referers trop vieux
-	supprimer_referers();
-	supprimer_referers("article");
-	return 1;
-}
-
-function cron_popularites($t) {
-	calculer_popularites();
-	return 1;
-}
-
-function cron_visites($t) {
-	// Si le fichier .lock est absent, ne pas calculer (mais reparer la date
-	// du .lock de maniere a commencer a 00:00:01 demain).
-	if ($t) {
-		// il faut d'abord faire le calcul des popularites
-		include_ecrire('inc_popularites.php3');
+	if ($encore)
+		return (0 - $t);
+	else {
 		calculer_popularites();
-
-		calculer_visites();
+		return 1;
 	}
-
-	// il vaut mieux le lancer peu apres minuit, 
-	// donc on pretend avoir ete execute precisement "ce matin a 00:00:01"
-	// pour etre appele demain a la meme heure
-	return 0 - (strtotime(date("d F Y", time()))+60);
 }
 
+//
+// Mail des nouveautes
+//
 function cron_mail($t) {
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');

@@ -133,7 +133,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		$afficher = "";
 		if ($GLOBALS['flag_upload']) {
 			$myDir = opendir(_DIR_TRANSFERT);
-			while($entryName = readdir($myDir)){
+			while(($entryName = readdir($myDir)) !== false){
 				if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
 					$entryName = addslashes($entryName);
 					$afficher .= "\n<option value='$entryName'>$entryName</option>";

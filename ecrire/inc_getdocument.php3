@@ -37,7 +37,7 @@ function creer_repertoire_documents($ext) {
 // Efface le repertoire de maniere recursive !
 function effacer_repertoire_temporaire($nom) {
 	$d = opendir($nom);
-	while ($f = readdir($d)) {
+	while (($f = readdir($d)) !== false) {
 		if (is_file("$nom/$f"))
 			@unlink("$nom/$f");
 		else if ($f <> '.' AND $f <> '..'
@@ -594,7 +594,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
   $rubriques = array();
 
   // collecte des 3 sortes d'entrees
-  while (($entree = readdir($handle)) != '') {
+  while (($entree = readdir($handle)) !== false) {
     $chemin = "$DIR/$entree";
     if ($entree[0] !='.') {
       if (is_dir($chemin)) {
