@@ -154,6 +154,8 @@ class Polyglotte {
 global $table_criteres_infixes;
 $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', '<>',  '?');
 
+global $exception_des_connect;
+$exception_des_connect[] = ''; // ne pas transmettre le connect='' par les inclure
 //
 // Globales de description de la base
 
