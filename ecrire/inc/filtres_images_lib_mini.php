@@ -58,35 +58,6 @@ function statut_effacer_images_temporaires($stat){
 	$statut = $stat?true:false;
 }
 
-// http://doc.spip.org/@cherche_image_nommee
-function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
-
-	if (strncmp(_DIR_IMG, $nom,$n=strlen(_DIR_IMG))==0) {
-		$nom = substr($nom,$n);
-	} else 	if (strncmp(_DIR_IMG_PACK, $nom,$n=strlen(_DIR_IMG_PACK))==0) {
-		$nom = substr($nom,$n);
-	} else if (strncmp(_DIR_IMG_ICONE_DIST, $nom,$n=strlen(_DIR_IMG_ICONES_DIST))==0) {
-		$nom = substr($nom,$n);
-	}
-	$pos = strrpos($nom, "/");
-	if ($pos > 0) {
-		$chemin = substr($nom, 0, $pos+1);
-		$nom = substr($nom, $pos+1);
-	} else {
-		$chemin = "";
-	}
-
-	reset($formats);
-	while (list(, $format) = each($formats)) {
-		if (@file_exists(_DIR_IMG . "$chemin$nom.$format")){ 
-			return array((_DIR_IMG . $chemin), $nom, $format);
-		} else if (@file_exists(_DIR_IMG_PACK . "$chemin$nom.$format")){ 
-			return array((_DIR_IMG_PACK . $chemin), $nom, $format);
-		} else if (@file_exists(_DIR_IMG_ICONES_DIST . "$chemin$nom.$format")){ 
-			return array((_DIR_IMG_ICONES_DIST . $chemin), $nom, $format);
-		}
-	}
-}
 
 // Fonctions de traitement d'image
 // uniquement pour GD2
@@ -780,11 +751,6 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
 	if ($image['creer']==false && !$force)
 		return _image_ecrire_tag($image,array('src'=>$image['fichier_dest'],'width'=>$image['largeur_dest'],'height'=>$image['hauteur_dest']));
 
-	if ($cherche_image){
-		$cherche = cherche_image_nommee(substr($image['fichier'],0,-4), array($image["format_source"]));
-		if (!$cherche) return $img;
-		//list($chemin,$nom,$format) = $cherche;
-	}
 	if (in_array($image["format_source"],array('jpg','gif','png'))){
 		$destWidth = $image['largeur_dest'];
 		$destHeight = $image['hauteur_dest'];
