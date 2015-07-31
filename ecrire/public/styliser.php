@@ -57,7 +57,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
  * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
  * Squelette par rubrique squelette-XX.html ou squelette=XX.html
  */
-function styliser_squelette_par_rubrique($flux) {
+function styliser_par_rubrique($flux) {
 
 	// uniquement si un squelette a ete trouve
 	if ($squelette = $flux['data']) {
@@ -91,7 +91,7 @@ function styliser_squelette_par_rubrique($flux) {
  * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
  * Squelette par langue squelette.en.html
  */
-function styliser_squelette_par_langue($flux) {
+function styliser_par_langue($flux) {
 
 	// uniquement si un squelette a ete trouve
 	if ($squelette = $flux['data']) {
