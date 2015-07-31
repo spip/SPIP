@@ -387,7 +387,7 @@ function ajout_forum() {
 		unset($fichiers);
 		while ($row = spip_fetch_array($result)) {
 			$fichier = $row["fichier"];
-			@unlink("CACHE/$fichier");
+			@unlink($GLOBALS['dossier_cache']."/$fichier");
 			$fichiers[] = "'".$fichier."'";
 		}
 		if ($fichiers) {

@@ -101,6 +101,15 @@ $table_prefix = "spip";
 // (a modifier pour installer des sites SPIP dans des sous-repertoires)
 $cookie_prefix = "spip";
 
+// Dossier des squelettes
+// (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)
+$dossier_squelettes = "";
+
+
+// Repertoire du cache
+// (a modifier pour certains besoins tres speciaux : cluster de SPIP...)
+$dossier_cache = "CACHE";
+
 // faut-il autoriser SPIP a compresser les pages a la volee quand le
 // navigateur l'accepte (valable pour apache 1.3 seulement) ?
 $auto_compress = true;
@@ -161,10 +170,6 @@ $auteur_session = '';
 $connect_statut = '';
 $dir_ecrire = '';
 $hash_recherche = '';
-
-// - le dossier des squelettes, a preciser dans mes_fonctions.php3, sous
-//   la forme : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
-$dossier_squelettes = '';
 
 
 //
