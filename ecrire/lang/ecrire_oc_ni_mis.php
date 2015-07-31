@@ -654,7 +654,7 @@ embé una coulou qu’endica lou sieu estat :',
 	'plugin_info_upgrade_ok' => 'Metuda a jou rueisseda',
 	'plugin_librairies_installees' => 'Biblioutéca instaladi',
 	'plugin_necessite_lib' => 'Aqueu plugin demanda la biblioutéca @lib@',
-	'plugin_necessite_plugin' => 'Demanda lou plugin @plugin@ en versioun @version@ minimum.',
+	'plugin_necessite_plugin' => 'Demanda lou plugin @plugin@ en versioun @version@ minimum.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Demanda lou plugin @plugin@',
 	'plugin_necessite_spip' => 'Demanda SPIP en versioun @version@ minimum.',
 	'plugin_source' => 'source : ',

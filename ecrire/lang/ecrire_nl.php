@@ -653,7 +653,7 @@ een kleur geeft hun status aan :',
 	'plugin_info_upgrade_ok' => ' Geslaagde update',
 	'plugin_librairies_installees' => 'Geïnstalleerde libraries',
 	'plugin_necessite_lib' => 'Dit plugin vereist de library @lib@',
-	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.',
+	'plugin_necessite_plugin' => 'Vereist plugin @plugin@ in versie minimale @version@.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Vereist de plugin @plugin@ ',
 	'plugin_necessite_spip' => 'Vereist SPIP in versie minimale @version@.',
 	'plugin_source' => 'bron: ',

@@ -637,7 +637,7 @@ Hutsik utz ezazu ez betetzeko, espazio edo komak tarteka itzazu LDAP eremu bat b
 	'plugin_info_upgrade_ok' => 'Eguneratzea ongi bururatu da',
 	'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 	'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
-	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.',
+	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.', # MODIF
 	'plugin_necessite_plugin_sans_version' => '@plugin@ plugina behar du.',
 	'plugin_necessite_spip' => 'SPIPen @version@ bertsio minimoa behar du.',
 	'plugin_source' => 'iturria: ',

@@ -660,7 +660,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_upgrade_ok' => 'Úspešná aktualizácia',
 	'plugin_librairies_installees' => 'Nainštalované knižnice',
 	'plugin_necessite_lib' => 'Tento zásuvný modul potrebuje knižnicu @lib@',
-	'plugin_necessite_plugin' => 'Vyžaduje sa verzia @version@ alebo novšia verzia zásuvného modulu @plugin@.',
+	'plugin_necessite_plugin' => 'Vyžaduje sa verzia @version@ alebo novšia verzia zásuvného modulu @plugin@.', # MODIF
 	'plugin_necessite_plugin_sans_version' => 'Potrebuje zásuvný modul @plugin@',
 	'plugin_necessite_spip' => 'Vyžaduje sa SPIP, verzia @version@ alebo novšia.',
 	'plugin_source' => 'zdroj: ',

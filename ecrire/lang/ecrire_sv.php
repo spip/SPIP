@@ -494,7 +494,7 @@ med en färg som visar deras status:',
 	'plugin_etat_stable' => 'Stabil',
 	'plugin_etat_test' => 'under test',
 	'plugin_impossible_activer' => 'Omöjligt att aktivera pluginen @plugin@',
-	'plugin_necessite_plugin' => 'Version @version@ eller nyare av pluginen @plugin@ krävs.',
+	'plugin_necessite_plugin' => 'Version @version@ eller nyare av pluginen @plugin@ krävs.', # MODIF
 	'plugin_zip_active' => 'Fortsätt för att aktivera',
 	'plugin_zip_installe_finie' => 'Filen @zip@ har packats upp och installerats.',
 	'plugin_zip_installe_rep_finie' => 'Filen @zip@ har packats upp och installerats i katalogen @rep@',

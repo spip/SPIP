@@ -566,7 +566,7 @@ Le traduzioni sono associate all’originale,
 	'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 	'plugin_librairies_installees' => 'Librerie installate',
 	'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
-	'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.',
+	'plugin_necessite_plugin' => 'Necessita il plug-in @plugin@ con almeno la versione @version@.', # MODIF
 	'plugin_necessite_spip' => 'Necessita SPIP con almeno la versione @version@.',
 	'plugin_source' => 'origine: ',
 	'plugin_titre_automatique' => 'Installazione automatica',

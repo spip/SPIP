@@ -612,7 +612,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_info_plugins_dist_2' => 'Nie mogą zostać wyłączone.',
 	'plugin_librairies_installees' => 'Biblioteka programistyczna została zainstalowana',
 	'plugin_necessite_lib' => 'Ta wtyczka wymaga biblioteki programistycznej @lib@',
-	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',
+	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.', # MODIF
 	'plugin_necessite_spip' => 'Potrzeba co minimum wersji SPIP @version@ .',
 	'plugin_source' => 'źródło:',
 	'plugin_titre_automatique' => 'Instalacja automatyczna ',
