@@ -150,7 +150,7 @@ function controle_un_forum($row, $rappel) {
 	}
 	
 	$controle .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='100%' valign='top'><table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td class='serif'><span class='arial2'>" .
-	  date_relative($forum_date_heure) .
+	  date_interface($forum_date_heure) .
 	  "</span>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)

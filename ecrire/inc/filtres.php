@@ -561,13 +561,24 @@ function recup_date($numdate){
 	return array($annee, $mois, $jour);
 }
 
+// une date pour l'interface : utilise date_relative si le decalage
+// avec time() est de moins de douze heures, sinon la date complete
+function date_interface($date, $decalage_maxi = 43200/* 12*3600 */) {
+	return sinon(
+		date_relative($date, $decalage_maxi),
+		affdate_heure($date)
+	);
+}
 
 // http://doc.spip.org/@date_relative
-function date_relative($date) {
+function date_relative($date, $decalage_maxi=0) {
 	
 	if (!$date) return;
 	$decal = date("U") - date("U", strtotime($date));
-	
+
+	if ($decalage_maxi AND ($decal > $decalage_maxi OR $decal < 0))
+		return '';
+
 	if ($decal < 0) {
 		$il_y_a = "date_dans";
 		$decal = -1 * $decal;
@@ -756,6 +767,7 @@ function affdate_mois_annee($numdate) {
 
 // http://doc.spip.org/@affdate_heure
 function affdate_heure($numdate) {
+	if (!$numdate) return '';
 	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes($numdate)));
 }
 

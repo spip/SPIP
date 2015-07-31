@@ -59,7 +59,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 			       "right");
 		}
 		
-		echo "<FONT SIZE=2>".date_relative($date_time)."</FONT><BR>";
+		echo "<FONT SIZE=2>".date_interface($date_time)."</FONT><BR>";
 		if ($statut=="poubelle"){
 			echo "<FONT SIZE=1 COLOR='red'>"._T('info_message_efface')."</FONT><BR>";
 		}
