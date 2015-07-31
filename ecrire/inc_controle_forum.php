@@ -277,7 +277,6 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
   echo "</FONT>";
 
   // Afficher le lien RSS
-  include_ecrire('inc_rss');
 
   echo "<div style='text-align: "
     . $GLOBALS['spip_lang_right']

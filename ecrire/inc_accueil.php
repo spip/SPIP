@@ -93,7 +93,6 @@ if ($flag_ob) {
 
  if (!$non_affiche) {
 	// Afficher le lien RSS
-	include_ecrire('inc_rss');
 	$op = 'a-suivre';
 	$args = array();
 	echo "<div style='text-align: "
@@ -480,7 +479,7 @@ if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos
 if ($options == 'avancees') {
 
 	// Dernieres modifications d'articles
-	include_ecrire("inc_suivi_revisions");
+	include_ecrire("inc_suivi_versions");
 	afficher_suivi_versions (0, 0, false, "", true);
 }
 
