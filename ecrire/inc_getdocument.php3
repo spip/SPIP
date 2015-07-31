@@ -361,7 +361,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
-			spip_log("Extension $ext");
+
 			if (!$row = spip_fetch_array(spip_query(
 			"SELECT * FROM spip_types_documents
 			WHERE extension='zip' AND upload='oui'"))) {
@@ -593,7 +593,7 @@ function joindre2($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, 
 				   array('name' => basename($arg),
 					 'tmp_name' => $arg)
 				   ), 'distant', $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, &$actifs);
+			     $hash, $hash_id_auteur, $redirect, $actifs);
 }
 
 // Cas d'un fichier transmis
@@ -830,13 +830,19 @@ function corriger_extension($ext) {
 // $dest = arton12.xxx
 function ajout_logo($source, $dest) {
 
-	// Intercepter une erreur d'upload
-	if (check_upload_error($source['error'])) return;
+	if (!$source) return;
+	if (!is_array($source))
+		$f = _DIR_TRANSFERT . $source; // fichier dans upload/
+	else {
+		// Intercepter une erreur a l'envoi
+		if (check_upload_error($source['error'])) return;
 
-	// analyse le type de l'image (on ne fait pas confiance au nom de
-	// fichier envoye par le browser : pour les Macs c'est plus sur)
-	$f =_DIR_DOC . $dest . '.tmp';
-	deplacer_fichier_upload($source['tmp_name'], $f);
+		// analyse le type de l'image (on ne fait pas confiance au nom de
+		// fichier envoye par le browser : pour les Macs c'est plus sur)
+		$f =_DIR_DOC . $dest . '.tmp';
+		deplacer_fichier_upload($source['tmp_name'], $f);
+	}
+
 	$size = @getimagesize($f);
 	$type = decoder_type_image($size[2], true);
 
