@@ -169,7 +169,7 @@
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ru" total="633" traduits="631" relire="0" modifs="1" nouveaux="1" pourcent="99.68">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="633" traduits="632" relire="0" modifs="0" nouveaux="1" pourcent="99.84">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sk" total="633" traduits="633" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="sq" url="http://trad.spip.net/tradlang_module/spip?lang_cible=sq" total="633" traduits="470" relire="0" modifs="51" nouveaux="112" pourcent="74.25">
