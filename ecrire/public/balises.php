@@ -382,8 +382,9 @@ function balise_EXPOSE_dist($p) {
 
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$on = $v;
-		$off = interprete_argument_balise(2,$p);
-
+		if (($v = interprete_argument_balise(2,$p))!==NULL)
+			$off = $v;
+	
 		// autres filtres
 		array_shift($p->param);
 	}
