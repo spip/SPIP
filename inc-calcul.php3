@@ -64,7 +64,7 @@ function cherche_page($fond, $cache, $contexte, $id_rubrique, $lang='')
   $page =  $fonc(array('cache' =>$cache), array($contexte));
   if ($GLOBALS['xhtml']) {
     include_ecrire("inc_tidy.php");
-    $page = xhtml($page);
+    $page['texte'] = xhtml($page['texte']);
   }
   $timer_b = explode(" ", microtime());
   $timer = ceil(1000*($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
