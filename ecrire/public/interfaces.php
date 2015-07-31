@@ -126,6 +126,8 @@ class Champ {
 	var $descr = array();
 	// pour localiser les erreurs
 	var $ligne = 0;
+	// un flag pour reperer les balises calculees par une fonction explicite
+	var $balise_calculee = false;
 }
 
 
@@ -242,6 +244,8 @@ function declarer_interfaces(){
 	$table_des_traitements['*'][]= false; // pas de traitement, mais permet au compilo de trouver la declaration suivante
 	// toujours securiser les DATA
 	$table_des_traitements['*']['DATA']= 'safehtml(%s)';
+	// expliciter pour VALEUR qui est un champ calcule et ne sera pas protege par le catch-all *
+	$table_des_traitements['VALEUR']['DATA']= 'safehtml(%s)';
 
 
 	// gerer l'affectation en 2 temps car si le pipe n'est pas encore declare, on ecrase les globales

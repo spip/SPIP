@@ -196,7 +196,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
  * http://doc.spip.org/@champ_sql
  *
  * @param string $champ
- *   champ recherché
+ *   champ recherchï¿½
  * @param object $p
  *   contexte de compilation
  * @param bool $joker
@@ -229,6 +229,7 @@ function calculer_balise($nom, $p) {
 
 	// S'agit-t-il d'une balise_XXXX[_dist]() ?
 	if ($f = charger_fonction($nom, 'balise', true)) {
+		$p->balise_calculee = true;
 		$res = $f($p);
 		if ($res !== NULL)
 			return $res;
@@ -384,8 +385,15 @@ function champs_traitements ($p) {
 
 	if (isset($table_des_traitements[$p->nom_champ]))
 		$ps = $table_des_traitements[$p->nom_champ];
-	else
-		$ps = $table_des_traitements['*'];
+	else {
+		// quand on utilise un traitement catch-all *
+		// celui-ci ne s'applique pas sur les balises calculees qui peuvent gerer
+		// leur propre securite
+		if (!$p->balise_calculee)
+			$ps = $table_des_traitements['*'];
+		else
+			$ps = false;
+	}
 
 	if (is_array($ps)) {
 	  // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
