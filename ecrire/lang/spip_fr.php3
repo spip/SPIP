@@ -1370,7 +1370,6 @@ et vous reconnecter au site.
 'taille_ko' => '@taille@&nbsp;ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'test' => '',
 'text_article_propose_publication' => 'Article propos&eacute; pour la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
 'texte_actualite_site_1' => 'Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
@@ -1470,9 +1469,9 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 	familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus
 	g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
 	de laisser la charge de ces pages au webmestre principal de votre site.</B>',
-'texte_inc_meta_1' => 'Veuillez, en tant qu\'administrateur du site,',
-'texte_inc_meta_2' => 'v&eacute;rifier les droits d\'ecriture',
-'texte_inc_meta_3' => 'sur le r&eacute;pertoire ecrire/',
+'texte_inc_meta_1' => 'Le syst&egrave;me a rencontr&eacute; une erreur lors de l\'&eacute;criture du fichier <code>ecrire/data/meta_cache.php3</code>. Veuillez, en tant qu\'administrateur du site,',
+'texte_inc_meta_2' => 'v&eacute;rifier les droits d\'&eacute;criture',
+'texte_inc_meta_3' => 'sur le r&eacute;pertoire <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.',
 'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
 'texte_introductif_article' => '(Texte introductif de l\'article.)',
