@@ -49,7 +49,6 @@ $GLOBALS['i18n_vi'] = array(
 'avis_erreur_mysql' => 'C&oacute; L&#7895;i-MySQL',
 'avis_erreur_sauvegarde' => 'L&#7895;i trong backup (@type@ @id_objet@)!',
 'avis_erreur_version_archive' => '<B>B&aacute;o &#273;&#7897;ng! H&#7891; s&#417; @archive@ thu&#7897;c d&#7841;ng SPIP kh&aacute;c v&#7899;i d&#7841;ng m&agrave; b&#7841;n c&oacute;.</b> B&#7841;n s&#7869; g&#7863;p r&#7845;t nhi&#7873;u r&#7855;c r&#7889;i: c&oacute; th&#7875; database b&#7883; ti&ecirc;u h&#7911;y, website b&#7883; tr&#7855;c tr&#7903;, v.v... Xin &#273;&#7915;ng n&#7897;p b&agrave;i n&agrave;y v&agrave;o.<P> &#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t, xem b&agrave;i <A HREF=\'http://www.uzine.net/article1489.html\'>
-
 H&#7891; s&#417; SPIP</A>.',
 'avis_espace_interdit' => '<B>V&ugrave;ng c&#7845;m &#273;&#7883;a</B>SPIP &#273;&atilde; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; r&#7891;i.',
 'avis_lecture_noms_bases_1' => 'Nhu li&#7879;u thi&#7871;t tr&iacute; kh&ocirc;ng &#273;&#7885;c &#273;&#432;&#7907;c t&ecirc;n c&#7911;a database thi&#7871;t tr&iacute;.',
@@ -121,10 +120,8 @@ H&#7891; s&#417; SPIP</A>.',
 'bouton_radio_petition_activee' => 'Th&#7881;nh nguy&#7879;n th&#432; &#273;&#432;&#7907;c m&#7903; l&ecirc;n',
 'bouton_radio_publication_immediate' => 'Ph&aacute;t h&agrave;nh th&#432; t&iacute;n ngay l&#7853;p t&#7913;c (th&#432; g&#7917;i &#273;i s&#7869; hi&#7879;n l&ecirc;n ngay, qu&#7843;n tr&#7883; vi&ecirc;n c&oacute; th&#7875; x&oacute;a ch&uacute;ng sau &#273;&oacute;).',
 'bouton_radio_sauvegarde_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng n&eacute;n trong
-
 <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng th&#432;&#7901;ng trong
-
 <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'X&oacute;a th&#7881;nh nguy&#7879;n th&#432;',
 'bouton_radio_syndication' => 'Syndication:',
@@ -149,6 +146,7 @@ H&#7891; s&#417; SPIP</A>.',
 'date_fmt_jour_mois' => '@jour@ @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@, @nommois@ @annee@',
 'date_fmt_mois_annee' => '@nommois@ @annee@',
+'date_fmt_nomjour_date' => 'v&#224;o @nomjour@ @date@',
 'date_jour_1' => 'Ch&#7911; nh&#7853;t',
 'date_jour_2' => 'Th&#7913; hai',
 'date_jour_3' => 'Th&#7913; ba',
@@ -603,7 +601,6 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ ch&#7845;m',
 'info_ldap_ok' => '&#272;&#7863;c &#273;i&#7875;m x&#225;c nh&#7853;n LDAP &#273;&#432;&#7907;c thi&#7871;t tr&#237;.',
 'info_les_auteurs_1' => 'c&#7911;a @les_auteurs@ ',
-'info_les_auteurs_2' => 'v&#224;o ',
 'info_lettre_heures' => ' :',
 'info_lien' => '&#273;i&#7875;m k&#7871;t n&#7889;i: ',
 'info_lien_hypertexte' => '&#272;i&#7875;m k&#7871;t n&#7889;i:',
@@ -718,7 +715,6 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_publie_01' => 'B&#224;i "@titre@" &#273;&#432;&#7907;c ch&#7845;p thu&#7853;n b&#7903;i @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] &#272;&#258;NG T&#7842;I: @titre@',
 'info_publie_2' => 'B&agrave;i &#273;&#432;&#7907;c &#273;&#259;ng t&#7843;i
-
 -----------------',
 'info_publies' => 'B&agrave;i c&#7911;a b&#7841;n &#273;&#432;&#7907;c &#273;&#259;ng online',
 'info_question_gerer_statistiques' => 'C&oacute; mu&#7889;n qu&#7843;n tr&#7883; c&aacute;c con s&#7889; th&#7889;ng k&ecirc;?',
@@ -1196,7 +1192,6 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 'texte_contenu_articles' => 'D&#7921;a v&agrave;o c&#7845;u tr&uacute;c ch&#7885;n l&#7921;a cho website n&agrave;y, b&#7841;n c&oacute; th&#7875; quy&#7871;t &#273;&#7883;nh nh&#7919;ng ph&#7847;n n&agrave;o c&#7911;a b&agrave;i v&#7903; kh&ocirc;ng c&#7847;n d&ugrave;ng. Chi&#7871;u theo danh s&aacute;ch d&#432;&#7899;i &#273;&acirc;y &#273;&#7875; ch&#7885;n nh&#7919;ng ph&#7847;n n&agrave;o c&#7911;a b&agrave;i v&#7903; d&ugrave;ng &#273;&#432;&#7907;c.',
 'texte_crash_base' => 'N&#7871;u database b&#7883; h&#432;, b&#7841;n c&#243; th&#7875; t&#236;m c&#225;ch s&#7917;a ch&#7919;a t&#7921; &#273;&#7897;ng.',
 'texte_creation_automatique_vignette' => 'Website c&oacute; kh&#7843; n&#259;ng t&#7841;o l&#7853;p t&#7921; &#273;&#7897;ng c&aacute;c h&igrave;nh m&#7851;u.
-
 N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong d&#7841;ng  @gd_formats@, ch&uacute;ng s&#7869; c&oacute; h&igrave;nh m&#7851;u v&#7899;i kh&#7893; t&#7889;i &#273;a l&agrave; @taille_preview@ ch&#7845;m. ',
 'texte_creer_rubrique' => '&#272;&#7875; vi&#7871;t b&#224;i,<BR>b&#7841;n ph&#7843;i l&#7853;p ra m&#7897;t &#273;&#7873; m&#7909;c. ',
 'texte_date_creation_article' => 'NG&#192;Y VI&#7870;T B&#192;I:',
@@ -1260,7 +1255,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'texte_port_annuaire' => 'Gi&#225; tr&#7883; cho s&#7861;n th&#432;&#7901;ng ph&#249; h&#7907;p.',
 'texte_proposer_publication' => 'Khi so&#7841;n b&agrave;i xong,<BR>b&#7841;n n&#7897;p v&agrave;o &#273;&#7875; ch&#7901; &#273;&#432;&#7907;c &#273;&#259;ng l&ecirc;n.',
 'texte_proxy' => 'Trong m&#7897;t s&#7889; tr&#432;&#7901;ng h&#7907;p (intranet, m&#7841;ng &#273;&#432;&#7907;c b&#7843;o v&#7879; ...), c&#7847;n thi&#7871;t ph&#7843;i d&ugrave;ng <I>proxy HTTP</I> &#273;&#7875; v&#7899;i t&#7899;i c&aacute;c website syndicated. N&#7871;u c&oacute; proxy, cho &#273;&#7883;a ch&#7881; v&agrave;o d&#432;&#7899;i &#273;&acirc;y, 
-
 <tt><html>http://proxy:8080</html></tt>. Th&#432;&#7901;ng th&igrave; b&#7841;n &#273;&#7875; khung n&agrave;y tr&#7889;ng.',
 'texte_publication_articles_post_dates' => 'SPIP s&#7869; l&agrave;m g&igrave; khi m&#7897;t b&agrave;i vi&#7871;t c&oacute; &#273;&#7873; ng&agrave;y &#273;&#259;ng t&#7843;i s&#7855;p t&#7899;i (trong t&#432;&#417;ng lai)?',
 'texte_rappel_selection_champs' => '[Nh&#7899; ch&#7885;n ph&#7847;n n&agrave;y cho &#273;&uacute;ng]',
@@ -1276,14 +1270,10 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'texte_sauvegarde_base' => 'D&#7921; tr&#7919; database',
 'texte_sauvegarde_compressee' => 'D&#7921; tr&#7919; s&#7869; ch&#7913;a trong h&#7891; s&#417; kh&#244;ng n&#233;n <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => 'B&#7841;n ch&#7885;n m&#7897;t "ng&ocirc;n ng&#7919; ch&iacute;nh" sau &#273;&acirc;y cho website. &#272;i&#7873;u n&agrave;y kh&ocirc;ng c&oacute; ngh&#297;a l&agrave; b&#7841;n ch&#7881; c&oacute; th&#7875; d&ugrave;ng ng&ocirc;n ng&#7919; &#273;&oacute; cho c&aacute;c b&agrave;i v&#7903;, m&agrave; b&#7841;n mu&#7889;n d&ugrave;ng ng&ocirc;n ng&#7919; n&agrave;o trong b&agrave;i c&#361;ng &#273;&#432;&#7907;c. Ch&#7885;n ng&ocirc;n ng&#7919; ch&iacute;nh cho web site ch&#7881; &#273;&#7875;
-
 <ul>
 <li> ch&#7885;n c&aacute;ch ghi ng&agrave;y th&aacute;ng cho ph&ugrave; h&#7907;p v&#7899;i ng&ocirc;n ng&#7919; &#273;&atilde; ch&#7885;n</li>
-
 <li> gi&uacute;p c&#417; ph&#7853;n tr&igrave;nh b&agrave;y c&#7911;a SPIP bi&#7871;t c&aacute;ch tr&igrave;nh b&agrave;y v&#259;n t&#7921; c&#7911;a b&agrave;i v&#7903; cho &#273;&uacute;ng c&aacute;ch.</i>
-
 <li> ng&ocirc;n ng&#7919; d&ugrave;ng trong c&aacute;c m&#7851;u &#273;&#417;n c&#7911;a website</i>
-
 <li> ng&ocirc;n ng&#7919; ch&iacute;nh hi&#7875;n tr&#7883; trong c&aacute;c v&ugrave;ng ri&ecirc;ng</li>
 </ul>',
 'texte_signification' => 'L&#7857;n &#273;&#7887; bi&#7875;u hi&#7879;n t&#7845;t c&#7843; s&#7889; ph&#7847;n (t&#7893;ng c&#7897;ng c&#7911;a c&aacute;c &#273;&#7873; m&#7909;c ph&#7909;), l&#7857;n xanh l&aacute; c&acirc;y bi&#7875;u hi&#7879;n s&#7889; l&#7847;n v&agrave;o xem c&#7911;a m&#7895;i &#273;&#7873; m&#7909;c. ',
@@ -1309,7 +1299,6 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'texte_titre_obligatoire' => '<B>T&#7921;a &#273;&#7873;</B> [B&#7855;t bu&#7897;c] ',
 'texte_travail_article' => '@nom_auteur_modif@ &#273;&#227; so&#7841;n/b&#7893; t&#250;c b&#224;i n&#224;y c&#225;ch &#273;&#226;y @date_diff@ ph&#250;t',
 'texte_travail_collaboratif' => 'N&#7871;u c&oacute; nhi&#7873;u ng&#432;&#7901;i c&ugrave;ng so&#7841;n/s&#7917;a &#273;&#7893;i m&#7897;t b&agrave;i, h&#7879; th&#7889;ng c&oacute; th&#7875; cho th&#7845;y nh&#7919;ng b&agrave;i &#273;ang &#273;&#432;&#7907;c &laquo;l&agrave;m vi&#7879;c&raquo; &#273;&#7875; tr&aacute;nh tr&#432;&#7901;ng h&#7907;p s&#7917;a &#273;&#7893;i c&ugrave;ng m&#7897;t l&uacute;c. 
-
 B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc;ng:',
 'texte_trop_resultats_auteurs' => 'Qu&#225; nhi&#7873;u k&#7871;t qu&#7843; khi t&#236;m "@cherche_auteur@"; h&#227;y duy&#7879;t l&#7841;i vi&#7879;c t&#236;m ki&#7871;m.',
 'texte_unpack' => '&#272;ang t&#7843;i xu&#7889;ng &#7845;n b&#7843;n m&#7899;i nh&#7845;t',

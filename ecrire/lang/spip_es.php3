@@ -143,6 +143,7 @@ $GLOBALS['i18n_es'] = array(
 'date_fmt_jour_mois' => '@jour@ de @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ del @annee@',
 'date_fmt_mois_annee' => '@nommois@ del @annee@',
+'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
 'date_jour_1' => 'Domingo',
 'date_jour_2' => 'Lunes',
 'date_jour_3' => 'Martes',
@@ -171,19 +172,9 @@ $GLOBALS['i18n_es'] = array(
 'dirs_preliminaire' => 'Preliminar: <B>Regular los derechos de acceso</B>',
 'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
 'dirs_repertoires_suivants' => '<B>Los siguientes directorios no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
-
-
-
 <P>Para solucionar el problema debes utilizar un cliente FTP con el objetivo de regular los derechos de acceso de cada uno
-
-
-
 de los directorios mencionados. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
-
-
-
 <P>Una vez terminado este proceso, puedes 
-
 ',
 
 
@@ -258,46 +249,23 @@ en el sitio "@nom_site_spip@" (@adresse_site@/ecrire/):',
 'form_pet_envoi_mail_confirmation' => 'Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n. Tienes que visitar la direcci&oacute;n Web mencionada en este mensaje para validar tu firma.',
 'form_pet_mail_confirmation' => 'Hola,
 
-
-
 Haz solicitado firmar la petici&oacute;n:
-
 @titre@.
-
-
 
 Haz facilitado las siguientes informaciones:
 
-
-
     Nombre: @nom_email@
-
     Sitio: @nom_site@ - @url_site@
-
-
-
-
 
 IMPORTANTE...
 
-
-
 Para validar tu firma, basta con conectarte a
-
 la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, tu demanda
-
 ser&aacute; rechazada):
-
-
 
     @url@
 
-
-
 Gracias por tu participaci&oacute;n
-
-
-
 ',
 'form_pet_message_commentaire' => '&iquest;Un mensaje, un comentario?',
 'form_pet_nom_site2' => '<B>Nombre de tu sitio Web',
@@ -348,9 +316,7 @@ Gracias por tu participaci&oacute;n
 'forum_votre_email' => 'Tu direcci&oacute;n de correo electr&oacute;nico:',
 'forum_votre_nom' => 'Tu nombre (o seud&oacute;nimo):',
 'forum_vous_enregistrer' => 'Para participar en este foro, previamente debes registrarte.
-
 Gracias por indicar a continuaci&oacute;n el identificador personal que se te ha
-
 suministrado. Si no est&aacute;s inscrito/a, debes',
 'forum_vous_inscrire' => 'inscribiros</a> previamente.',
 
@@ -550,9 +516,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_date_publication_anterieure' => 'Fecha de publicaci&oacute;n anterior',
 'info_date_referencement' => 'Fecha de referenciamiento de este sitio',
 'info_delet_mots_cles' => 'Has solicitado la supresi&oacute;n de la palabra clave 
-
 <B>@titre_mot@</b> (@type_mot@) que esta ligada a 
-
 <b>@texte_lie@</b>. Por favor, confirma tu decisi&oacute;n.',
 'info_demander_blocage_priori' => 'Pedir un bloqueo a priori',
 'info_deplier' => 'Desplegar',
@@ -646,7 +610,6 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_largeur_vignette' => '@largeur_vignette@ por @hauteur_vignette@ p&iacute;xeles',
 'info_ldap_ok' => 'La autentificaci&oacute;n LDAP est&aacute; instalada.',
 'info_les_auteurs_1' => 'por @les_auteurs@',
-'info_les_auteurs_2' => 'el',
 'info_lettre_heures' => 'H',
 'info_lien' => 'enlace :',
 'info_lien_hypertexte' => 'Enlace hipertexto:',
@@ -765,24 +728,14 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_publies' => 'Tus art&iacute;culos publicados',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
 'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceptas las inscripciones de nuevos redactores a
-
 partir del sitio p&uacute;blico? Si aceptas, los visitantes podr&aacute;n inscribirse
-
 desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para
-
 proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n,
-
  los usuarios reciben un correo electr&oacute;nico autom&aacute;tico
-
 que les indica sus c&oacute;digos de acceso al sitio privado. Algunos
-
  proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus 
-
 servidores: en ese caso, la inscripci&oacute;n autom&aacute;tica es 
-
-imposible. 
-
-',
+imposible. ',
 'info_question_mots_cles' => '&iquest;Deseas utilizar las palabras clave en tu sitio?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n puede proponer los sitios referenciados?',
 'info_question_referers' => '&iquest;Deseas gestionar los "referers" (enlaces externos que llevan a tu sitio)?',
@@ -1230,7 +1183,6 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 'texte_actualite_site_3' => '&raquo; que tiene a&uacute;n m&aacute;s posibilidades.',
 'texte_admin_effacer_01' => 'Esta comando borra <i>TODO</i>  el contenido de la base de datos, redactores/as, administradores/as inclu&iacute;dos. Despu&eacute;s de ejecutarla deber&eacute;is reinstalar SPIP, creando una nueva base as&iacute; como tambi&eacute;n un primer acceso en tanto que administrador/a.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de seguridad de la base  en un fichero que se guardar&aacute; en el directorio <i>ecrire/data/</i>.
-
 No olvides igualmente recuperar la totalidad del directorio <i>IMG/</i>, que contiene las im&aacute;genes utilizadas en los art&iacute;culos y las secciones.',
 'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de seguridad NO PODR&Aacute; ser utilizada con otra versi&oacute;n de SPIP. Un error corriente es crear una copia de seguridad antes de hacer una actualizaci&oacute;n. Consulta la <a href="http://www.uzine.net/article1489.html">documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Puedes comprimir la copia de seguridad y as&iacute; facilitar la transferencia hacia tu ordenador, aparte de ganar espacio en el disco.',
@@ -1279,9 +1231,7 @@ No olvides igualmente recuperar la totalidad del directorio <i>IMG/</i>, que con
 La imagen <B>@fichier@</b> no ha pasado (art&iacute;culo @id_article@).
 Anote esta referencia, reintente la actualizaci&oacute;n y verifique que las im&aacute;genes aparecen en los art&iacute;culos.',
 'texte_fichier_authent' => '<b>&iquest; SPIP debe crear los ficheros especiales <tt>.htpasswd</tt> y <tt>.htpasswd-admin</tt> en el directorio <tt>ecrire/data/</tt> ?</b><p>
-
 Estos ficheros pueden servir para restringir el acceso a los autores/as y administradores/as en otros lugares de tu sitio (programa externo de estad&iacute;sticas, por ejemplo).<p>
-
 Si no ves la utilidad puedes dejar esta opci&oacute;n con su valor por defecto (no creaci&oacute;n de los ficheros).',
 'texte_inc_auth_1' => 'Te haz identificado como usuario <B>@auth_login@</b>, pero este no existe en la base.
 Debes intentar',
@@ -1323,7 +1273,6 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_port_annuaire' => '(El valor indicado por defecto es correcto en general.)',
 'texte_proposer_publication' => 'Cuando tu art&iacute;culo est&eacute; terminado, <br> puedes proponer su publicaci&oacute;n',
 'texte_proxy' => 'En algunos casos (Intranet, redes protegidas...), puede ser necesario utilizar un <I>proxy HTTP</i> para llegar a los sitios sindicados.
-
 En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt><html>http://proxy:8080</html></tt>. En general, se dejar&aacute; esta casilla vac&iacute;a.',
 'texte_publication_articles_post_dates' => '&iquest;Qu&eacute; comportamiento debe adoptar SPIP frente a los art&iacute;culos cuya fecha de publicaci&oacute;n ha sido fijada con un plazo futuro?',
 'texte_rappel_selection_champs' => '[Selecciona correctamente este campo.]',
@@ -1333,9 +1282,7 @@ En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br>Si escribes aqu&iacute; la URL de un sitio o la direcci&oacute;n del fichero "backend" del sitio, SPIP recuperar&aacute; autom&aacute;ticamente las informaciones (t&iacute;tulo, descripcci&oacute;n...).',
 'texte_requetes_echouent' => '<B>Cuando algunas peticiones MySQL fracasan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea por culpa de la propia base de datos.</b>
-
 MySQL dispone de una facultad de reparaci&oacute;n de sus tablas cuando han sido da&ntilde;adas por accidente. Aqu&iacute; puedes intentar esta reparaci&oacute;n; en caso de fallo, conserva una copia del resultado, que posiblemente contiene indicios de lo que no funciona...
-
 Si el problema persiste, contacta con tu proveedor de hospedaje.',
 'texte_restaurer_base' => 'Restaurar el contenido de la copia de seguridad',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de seguridad de la base efectuada anteriormente. A este efecto, el fichero que contiene la copia de seguridad se debe haber situado en el directorio <i>ecrire/data/</i>.
@@ -1344,13 +1291,9 @@ Se prudente con  esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eve
 'texte_sauvegarde_base' => 'Crear una copia de seguridad de la base',
 'texte_sauvegarde_compressee' => 'La copia de seguridad ser&aacute; realizada en un fichero sin compressi&oacute;n <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! - a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
-
 <ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
-
 <li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
-
 <li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
-
 <li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
 'texte_signification' => 'Las barras rojas representan las entradas acumuladas (total de las subsecciones), las barras verdes el n&uacute;mero de visitas de cada secci&oacute;n.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
