@@ -741,7 +741,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 }
 
 
-define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
+define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*[^()]*)\)[^()]*$/');
 /**
  * Obtient la description d'une table ou vue MySQL
  *
