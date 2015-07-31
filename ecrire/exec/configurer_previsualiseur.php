@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_configurer_previsualiseur_dist
 function exec_configurer_previsualiseur_dist()
 {
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
