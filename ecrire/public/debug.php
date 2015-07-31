@@ -379,10 +379,14 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	}
 	$js = "this.style.visibility=this.style.visibility=='visible'?'hidden' : 'visible'";
 
-	return "\n<table id='T$ancre' style='border: 0px;'>"
-	  . "\n<tr><th onclick=\"\$('.sinumerote').each(function(){ $js })\" >"
+	return "\n<table id='T$ancre' style='border: 0px;'>\n"
+	  . '<tr><th><a onclick="javascript:'
+	  . "\$('.sinumerote').each(function(){ $js }); return false;"
+	  . '" title="'
+	  . _L('Masquer cette colonne')
+	  . '" >'
 	  . _T('info_numero_abbreviation')
-	  . "</th>\n<th style='text-align: center'>"
+	  . "</a></th>\n<th style='text-align: center'>"
 	  . _T('info_texte')
 	  . "</th></tr>"
 	  . $res
