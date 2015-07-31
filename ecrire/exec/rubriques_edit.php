@@ -103,12 +103,12 @@ function exec_rubriques_edit_dist()
 	echo "<p>";
 
 	$titre = entites_html($titre);
-	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = _T('entree_titre_obligatoire')
 	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus><P>"
 	. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
-	. $selecteur_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
+	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
 
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement

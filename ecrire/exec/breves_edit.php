@@ -139,8 +139,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	}
 
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
-	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$form .= $selecteur_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$form .= $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 
 	$form .= fin_cadre_couleur(true);
 	

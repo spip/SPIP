@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_poster_forum_prive_dist
 function action_poster_forum_prive_dist() {
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL

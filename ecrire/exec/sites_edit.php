@@ -130,9 +130,9 @@ $form .= "<input type='text' class='formo' name='url_site' value=\"$url_site\" s
 	$form .= debut_cadre_couleur("$logo_parent", true, "", _T('entree_interieur_rubrique'));
 
 	// selecteur de rubriques
-	$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 	$restreint = ($GLOBALS['statut'] == 'publie');
-	$form .= $selecteur_rubrique($id_rubrique, 'site', $restreint);
+	$form .= $chercher_rubrique($id_rubrique, 'site', $restreint);
 
 	$form .= fin_cadre_couleur(true);
 

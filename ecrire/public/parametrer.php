@@ -298,18 +298,18 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		$lang_select = true;
 	}
 
-	$f = charger_fonction('styliser', 'public');
+	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
-		$f($fond, $id_rubrique_fond, $GLOBALS['spip_lang']);
+		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang']);
 
 	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$f = charger_fonction('composer', 'public');
+	$composer = charger_fonction('composer', 'public');
 
-	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
+	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$page = $fonc(array('cache' => $cache), array($local));
 

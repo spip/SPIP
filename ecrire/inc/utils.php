@@ -205,8 +205,8 @@ function spip_connect($serveur='') {
 	if (!$serveur) $serveur = 'db_mysql';
 
 	if (!isset($t[$serveur])) {
-		$f = charger_fonction($serveur, 'base', true);
-		$t[$serveur] = $f ? $f() : false;
+		$base_serveur = charger_fonction($serveur, 'base', true);
+		$t[$serveur] = $base_serveur ? $base_serveur() : false;
 	}
 
 	return $t[$serveur];
@@ -398,7 +398,8 @@ function _T($texte, $args=array()) {
 
 	static $traduire=false ;
 
- 	if (!$traduire) $traduire = charger_fonction('traduire', 'inc');
+ 	if (!$traduire)
+		$traduire = charger_fonction('traduire', 'inc');
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
 	if (!$text) 
@@ -1142,8 +1143,8 @@ function verifier_visiteur() {
 
 		@spip_initialisation();
 
-		$var_f = charger_fonction('session', 'inc');
-		if ($var_f()) return $GLOBALS['auteur_session']['statut'];
+		$session = charger_fonction('session', 'inc');
+		if ($session()) return $GLOBALS['auteur_session']['statut'];
 		include_spip('inc/actions');
 		return verifier_php_auth();
 	}

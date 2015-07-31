@@ -58,8 +58,8 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($sourcefile, $skel)) {
-		$f = charger_fonction('compiler', 'public');
-		$skel_code = $f($skel, $nom, $gram, $sourcefile);
+		$compiler = charger_fonction('compiler', 'public');
+		$skel_code = $compiler($skel, $nom, $gram, $sourcefile);
 	}
 
 	// Tester si le compilateur renvoie une erreur
@@ -150,17 +150,17 @@ function affiche_logos($logos, $lien, $align) {
 
 // http://doc.spip.org/@calcule_logo
 function calcule_logo($type, $onoff, $id, $id_rubrique, $flag_fichier) {
-	$logo_f = charger_fonction('chercher_logo', 'inc');
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$nom = strtolower($onoff);
 
 	while (1) {
-		$on = $logo_f($id, $type, $nom);
+		$on = $chercher_logo($id, $type, $nom);
 		if ($on) {
 			if ($flag_fichier)
 				return (array('', "$on[2].$on[3]"));
 			else {
 				$off = ($onoff != 'ON') ? '' :
-					$logo_f($id, $type, 'off');
+					$chercher_logo($id, $type, 'off');
 				return array ($on[0], ($off ? $off[0] : ''));
 			}
 		}

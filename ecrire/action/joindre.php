@@ -27,8 +27,8 @@ function action_joindre_dist()
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');

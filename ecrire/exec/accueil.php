@@ -292,8 +292,8 @@ if ($spip_display != 4) {
 	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
 
 	if ($spip_display != 1) {
-		$logo_f = charger_fonction('chercher_logo', 'inc');
-		if ($res = $logo_f(0, 'id_syndic', 'on'))  {
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if ($res = $chercher_logo(0, 'id_syndic', 'on'))  {
 			list($fid, $dir, $nom, $format) = $res;
 			$res = ratio_image($fid, $nom, $format, 170, 170, "alt=''");
 			if ($res)

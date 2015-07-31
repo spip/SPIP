@@ -15,8 +15,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 // http://doc.spip.org/@action_purger_dist
 function action_purger_dist()
 {
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 

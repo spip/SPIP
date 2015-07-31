@@ -308,8 +308,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 			  "</font></div>";
 		}
 
-		$f = charger_fonction('legender', 'inc');
-		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
+		$legender = charger_fonction('legender', 'inc');
+		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
 
 		$ret .= fin_cadre_enfonce(true);
 		}
@@ -355,8 +355,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		if ($doublon)
 			$ret .= $raccourci_doc;
 
-		$f = charger_fonction('legender', 'inc');
-		$ret .= $f($id_document, $document, $script, $type, $id, "document$id_document");
+		$legender = charger_fonction('legender', 'inc');
+		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document");
 		
 		$ret .= fin_cadre_relief(true);
 	}

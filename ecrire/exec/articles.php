@@ -95,7 +95,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$dater = charger_fonction('dater', 'inc');
 	$editer_mot = charger_fonction('editer_mot', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
-	$traduction = charger_fonction('referencer_traduction', 'inc');
+	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 
 	if ($flag_editable AND ($spip_display != 4)) 
 		$iconifier = charger_fonction('iconifier', 'inc');
@@ -138,7 +138,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	. (!$editer_mot ? '' : $editer_mot('article', $id_article, $cherche_mot, $select_groupe, $flag_editable))
 
-	. (!$traduction ? '' : $traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
+	. (!$referencer_traduction ? '' : $referencer_traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err))
 
 	. pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 
@@ -171,10 +171,10 @@ function articles_documents($flag_editable, $type, $id)
 	global $spip_lang_left;
 	if  ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
 
-		$f = charger_fonction('joindre', 'inc');
+		$joindre = charger_fonction('joindre', 'inc');
 
 		$res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-		. $f('articles', "id_article=$id", $id, _T('info_telecharger_ordinateur'), 'document', 'article','',0,generer_url_ecrire("documenter","id_article=$id&type=$type",true))
+		. $joindre('articles', "id_article=$id", $id, _T('info_telecharger_ordinateur'), 'document', 'article','',0,generer_url_ecrire("documenter","id_article=$id&type=$type",true))
 		. fin_cadre_relief(true);
 
 	// eviter le formulaire upload qui se promene sur la page
@@ -195,10 +195,10 @@ EOF;
 		
 	} else $res = '';
 
-	$f = charger_fonction('documenter', 'inc');
+	$documenter = charger_fonction('documenter', 'inc');
 
-	return "<div id='portfolio'>" . $f($id, 'article', 'portfolio', $flag_editable) . "</div>"
-	. "<div id='documents'>" . $f($id, 'article', 'documents', $flag_editable) . "</div>"
+	return "<div id='portfolio'>" . $documenter($id, 'article', 'portfolio', $flag_editable) . "</div>"
+	. "<div id='documents'>" . $documenter($id, 'article', 'documents', $flag_editable) . "</div>"
 	. $res;
 }
 
@@ -278,9 +278,9 @@ function boites_de_config_articles($id_article)
 function boite_article_virtuel($id_article, $virtuel, $flag)
 {
 
-	$f = charger_fonction('virtualiser', 'inc');
+	$virtualiser = charger_fonction('virtualiser', 'inc');
 
-	$masque = $f($id_article, $flag, $virtuel, "articles", "id_article=$id_article");
+	$masque = $virtualiser($id_article, $flag, $virtuel, "articles", "id_article=$id_article");
 
 	if (!$masque) return '';
 

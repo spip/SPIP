@@ -19,8 +19,8 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@action_legender_auteur_dist
 function action_legender_auteur_dist()
 {
-        $var_f = charger_fonction('securiser_action', 'inc');
-        $var_f();
+        $securiser_action = charger_fonction('securiser_action', 'inc');
+        $securiser_action();
 
         $arg = _request('arg');
 
@@ -122,8 +122,8 @@ function action_legender_auteur_post($r)
 
 	if ($modif_login) {
 	  // supprimer les sessions de cet auteur
-		$var_f = charger_fonction('session', 'inc');
-		$var_f($auteur['id_auteur']);
+		$session = charger_fonction('session', 'inc');
+		$session($auteur['id_auteur']);
 	}
 
 	// seuls les admins peuvent modifier le mail

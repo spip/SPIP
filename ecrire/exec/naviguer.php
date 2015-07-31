@@ -95,9 +95,9 @@ function exec_naviguer_dist()
 
 /// Mots-cles
 	    if ($id_rubrique > 0) {
-	      $f = charger_fonction('editer_mot', 'inc');
+	      $editer_mot = charger_fonction('editer_mot', 'inc');
 	      echo "\n<p>",
-		$f('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable);
+		$editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable);
 	    }
 
 
@@ -374,9 +374,9 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 
 	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
 
-	  $f = charger_fonction('joindre', 'inc');
+	  $joindre = charger_fonction('joindre', 'inc');
 	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
-	  . $f($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type,'',0,generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true))
+	  . $joindre($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type,'',0,generer_url_ecrire("documenter","id_rubrique=$id&type=$type",true))
 	  . fin_cadre_relief(true);
 
 	// eviter le formulaire upload qui se promene sur la page
@@ -395,10 +395,10 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 EOF;
 	} else $res ='';
 
-	$f = charger_fonction('documenter', 'inc');
+	$documenter = charger_fonction('documenter', 'inc');
 
-	return "<div id='portfolio'>".$f($id, $type, 'portfolio', $flag_editable)."</div>"
-	."<div id='documents'>". $f($id, $type, 'documents', $flag_editable)."</div>"
+	return "<div id='portfolio'>".$documenter($id, $type, 'portfolio', $flag_editable)."</div>"
+	."<div id='documents'>". $documenter($id, $type, 'documents', $flag_editable)."</div>"
 	. $res;
 }
 

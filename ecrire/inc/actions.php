@@ -142,8 +142,8 @@ function ajax_retour($corps)
 // http://doc.spip.org/@ajax_debug_retour
 function ajax_debug_retour($c, $corps)
 {
-	$f = charger_fonction('sax', 'inc');
-	$corps = $f($corps);
+	$sax = charger_fonction('sax', 'inc');
+	$corps = $sax($corps);
 	if ($GLOBALS['xhtml_error']) {
 	  spip_log("ajax_retour " .  $GLOBALS['xhtml_error']);
 	  $debut = "<script type='text/javascript'>console.log('";
@@ -162,8 +162,8 @@ function determine_upload()
 	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
 
 	if (!$connect_statut) {
-		$var_auth = charger_fonction('auth', 'inc');
-		$var_auth = $var_auth();
+		$auth = charger_fonction('auth', 'inc');
+		$auth = $auth();
 	}
 	if ($connect_statut != '0minirezo') return false;
 	$repertoire = _DIR_TRANSFERT;
@@ -200,9 +200,9 @@ function verifier_php_auth() {
 		  if (!$row AND !$GLOBALS['ldap_present'])
 		    return false;
 		  else {
-			$f = charger_fonction('auth_ldap', 'inc', true);
-			if ($f) {
-			  $GLOBALS['auteur_session'] =  $f($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+			$auth_ldap = charger_fonction('auth_ldap', 'inc', true);
+			if ($auth_ldap) {
+			  $GLOBALS['auteur_session'] =  $auth_ldap($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
 			  return $GLOBALS['auteur_session']['statut'];
 			}
 		  }

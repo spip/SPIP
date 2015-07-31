@@ -17,8 +17,8 @@ include_spip('inc/rubriques');
 // http://doc.spip.org/@action_editer_rubrique_dist
 function action_editer_rubrique_dist() {
 
-	$var_f = charger_fonction('securiser_action', 'inc');
-	$var_f();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$securiser_action();
 
 	$arg = _request('arg');
 
