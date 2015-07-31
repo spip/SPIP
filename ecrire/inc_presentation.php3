@@ -1654,7 +1654,7 @@ function debut_gauche($rubrique = "asuivre") {
 			echo propre("<b>Avertissement de s&eacute;curit&eacute;</b>");
 
 			if ($securite == 'strict') {
-				if ($zappees > 1)
+				/*if ($zappees > 1)
 					echo "<p>Il y avait " . ($zappees) ." connexion(s) parall&egrave;le(s) &agrave; votre nom. "
 						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
 						. " le syst&egrave;me a supprim&eacute; ces connexions.\n";
@@ -1662,23 +1662,26 @@ function debut_gauche($rubrique = "asuivre") {
 					echo "<p>Il y avait une connexion parall&egrave;le &agrave; votre nom. "
 						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
 						. " le syst&egrave;me a supprim&eacute; cette connexion.\n";
+				*/
 			}
-			else
-				echo "<p>Il y a actuellement " . ($zappees + 1) ." connexions simultan&eacute;es &agrave; votre nom.\n";
+			//else
+			//	echo "<p>Il y a actuellement " . ($zappees + 1) ." connexions simultan&eacute;es &agrave; votre nom.\n";
 
 			echo "<p>";
 			echo propre("<img align='right' src='img_pack/deconnecter-24.gif'>" .
-				"Pour &eacute;viter d'afficher ce message et de rendre votre connexion ".
-				"vuln&eacute;rable, pensez, lorsque vous aurez " .
+				"Lorsque vous aurez " .
 				"fini de travailler dans l'espace priv&eacute;, " .
-				"&agrave; vous d&eacute;connecter en cliquant sur le bouton ".
+				"pensez &agrave; vous d&eacute;connecter en cliquant sur le bouton ".
 				"ci-dessus.");
 			echo "\n<p>";
 
 			echo propre("Pour plus d'informations, vous pouvez afficher les informations de s&eacute;curit&eacute;.");
 			echo "<p>";
 
-			icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
+
+			if ($securite == 'strict') $niveau = "(s&eacute;curit&eacute; stricte)";
+			else $niveau = " (s&eacute;curit&eacute; normale)";
+			icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute; $niveau", "index.php3?secu=oui", "base-24.gif", "");
 			fin_cadre_enfonce();
 		}
 	}
@@ -1881,17 +1884,13 @@ function debut_droite() {
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;stricte&raquo;. ".
 					"Les connexions multiples y sont interdites. ".
 					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n".
-					"- {vous connecter depuis plusieurs machines ou plusieurs navigateurs} diff&eacute;rents ".
-					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;;\n".
+					"- {vous connecter avec plusieurs navigateurs diff&eacute;rents en m&ecirc;me temps} (ou depuis plusieurs machines diff&eacute;rentes);\n".
 					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif);\n".
-					"- {vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
-					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
-					"ordinateur de fa&ccedil;on unique).\n\n\n".
+					"(utile en cas d'auteur collectif).\n\n\n".
 					"Pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
-					"ou {{si vous avez souvent des probl&egrave;mes de connexion}}, ".
-					"vous devez repasser en mode de s&eacute;curit&eacute; normal.");
-				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
+					"vous devez repasser en mode de s&eacute;curit&eacute; normal.".
+					"\n\nSi vos connexions sont fr&eacute;quemment interrompues sans raison apparente, repassez en mode normal.");
+				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne.".aide('deconnect');
 
 				echo "<p><div align='right'>";
 				echo $link->getForm('POST');
@@ -1903,16 +1902,11 @@ function debut_droite() {
 				$link->addVar('securite', 'strict');
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".
-					"Cela veut dire que les connexions multiples sont autoris&eacute;es. ".
-					"Ainsi, vous pouvez faire les choses suivantes :\n".
-					"- {vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents} ".
-					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;;\n".
+					"{{Vous pouvez faire les choses suivantes :}}\n".
+					"- {vous connecter avec plusieurs navigateurs diff&eacute;rents en m&ecirc;me temps} (ou depuis plusieurs machines diff&eacute;rentes);\n".
 					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif);\n".
-					"- {vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
-					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
-					"ordinateur de fa&ccedil;on unique).\n\n\n".
-					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. ".
+					"(utile en cas d'auteur collectif).\n\n\n".
+					"En contrepartie, {{la s&eacute;curit&eacute; n'est pas maximale.}} ".
 					"Si vous n'utilisez pas les possibilit&eacute;s mentionn&eacute;es ci-dessus et ".
 					"que vous &ecirc;tes soucieux de votre s&eacute;curit&eacute;, ".
 					"vous pouvez passer &agrave; un mode de connexion plus strict.\n\n\n\n");
