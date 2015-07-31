@@ -35,7 +35,7 @@
 <form action="#ENV{action}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
 [(#ACTION_FORMULAIRE{#ENV{action}})]
 [<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
-[<fieldset>
+[<fieldset class="moderation_info">
 	<legend><:bouton_radio_modere_priori:></legend>
 	<p class="explication">(#ENV{modere})<:forum_info_modere:></p>
 </fieldset>]
@@ -151,10 +151,13 @@ if (window.jQuery)(function($){
 		});
 		$(window)
 		.bind('unload', function(){
-			if (saveauto)
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}',
-				$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val()
-			);
+			if (saveauto){
+				var s = $('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val();
+				if (s)
+					$.cookie('spip_contenu_formulaire_#ENV{_sign}', s);
+				else
+					$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+			}
 		});
 	});
 }(jQuery));
