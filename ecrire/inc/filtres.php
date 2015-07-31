@@ -2504,7 +2504,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 		else  {
 			$fontps = imagepsloadfont($font);
 			// Est-ce qu'il faut reencoder? Pas testable proprement, alors... 
-			// imagepsencodefont( $fontps, find_in_path(_DIR_POLICES . "standard.enc") );
+			// imagepsencodefont($fontps,find_in_path('polices/standard.enc'));
 			$GLOBALS["font"]["$font"] = $fontps;
 		}
 	}
@@ -2638,9 +2638,16 @@ function image_typo() {
 		&& function_exists('imageCreateTrueColor');
 
 	
-	if (!file_exists($fichier) AND $flag_gd_typo) {
-		# que faire si la police n'existe pas ?
-		$font = find_in_path(_DIR_POLICES . $police);
+	if (file_exists($fichier))
+		$image = $fichier;
+	else if (!$flag_gd_typo)
+		return $texte;
+	else {
+		$font = find_in_path('polices/'.$police);
+		if (!$font) {
+			spip_log(_T('fichier_introuvable', array('fichier' => $police)));
+			$font = find_in_path('polices/'."dustismo.ttf");
+		}
 
 		$imgbidon = imageCreateTrueColor($largeur, 45);
 		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $couleur, $text, $taille, 'left', $hauteur_ligne);
@@ -2671,20 +2678,13 @@ function image_typo() {
 		imagedestroy($im);
 		
 		$image = $fichier;
-		
-	} else if ($flag_gd_typo) {
-		$image = $fichier;
 	}
 
-	if ($image) {
-		$dimensions = getimagesize($image);
-		$largeur = $dimensions[0];
-		$hauteur = $dimensions[1];
-		return inserer_attribut("<img src='$image' style='width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
-	} else {
-		return $texte;
-	}
 
+	$dimensions = getimagesize($image);
+	$largeur = $dimensions[0];
+	$hauteur = $dimensions[1];
+	return inserer_attribut("<img src='$image' style='width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
 }
 
 //
