@@ -83,7 +83,7 @@ function formulaire_signature($id_article) {
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result=spip_query($query);
 				if (spip_num_rows($result)>0){
-					$texte .= erreur(_L("Vous avez d&eacute;j&agrave; sign&eacute; ce texte."));
+					$texte .= erreur(_T('form_pet_deja_signe'));
 					$refus = "oui";
 				}
 			}
@@ -93,22 +93,22 @@ function formulaire_signature($id_article) {
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
 				$result=spip_query($query);
 				if (spip_num_rows($result)>0){
-					$texte .= erreur(_L("Ce site est d&eacute;j&agrave; enregistr&eacute;"));
+					$texte .= erreur(_T('form_pet_deja_enregistre'));
 					$refus = "oui";
 				}
 			}
 
 			if ($refus=="oui") {
-				$texte .= erreur(_L("Vous &ecirc;tes d&eacute;j&agrave; inscrit."));
+				$texte .= erreur(_T('form_deja_inscrit'));
 			}
 			else {
 				$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
 				$result = spip_query($query);
 
-				$texte .= erreur(_L("Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!"));
+				$texte .= erreur(_T('form_pet_signature_validee'));
 			}
 		}else{
-			$texte .= erreur(_L("Aucune signature ne correspond &agrave; ce code..."));
+			$texte .= erreur(_T('form_pet_aucune_signature'));
 		}
 		echo "<div class='reponse_formulaire'>$texte</div>";
 	}
@@ -129,12 +129,12 @@ function formulaire_signature($id_article) {
 			}
 
 			if (strlen($nom_email) < 2) {
-				$reponse_signature .= erreur(_L("Veuillez indiquer votre nom."));
+				$reponse_signature .= erreur(_T('form_indiquer_nom'));
 				$refus = "oui";
 			}
 
 			if ($adresse_email == _T('info_mail_fournisseur')) {
-				$reponse_signature .= erreur(_L("Veuillez indiquer votre adresse email."));
+				$reponse_signature .= erreur(_T('form_indiquer_email'));
 				$refus = "oui";
 			}
 
@@ -143,25 +143,25 @@ function formulaire_signature($id_article) {
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result = spip_query($query);
 				if (spip_num_rows($result) > 0) {
-					$reponse_signature .= erreur(_L("Vous avez d&eacute;j&agrave; sign&eacute; ce texte."));
+					$reponse_signature .= erreur(_T('form_pet_deja_signe'));
 					$refus = "oui";
 				}
 			}
 
 			if (!email_valide($adresse_email)) {
-				$reponse_signature .= erreur(_L("Votre adresse email n'est pas valide."));
+				$reponse_signature .= erreur(_T('form_email_non_valide'));
 				$refus = "oui";
 			}
 
 			if ($site_obli == "oui") {
 				if (!$nom_site) {
-					$reponse_signature .= erreur(_L("Veuillez indiquer le nom de votre site."));
+					$reponse_signature .= erreur(_T('form_indiquer_nom_site'));
 					$refus = "oui";
 				}
 				include_local ("ecrire/inc_sites.php3");
 
 				if (!recuperer_page($url_site)) {
-					$reponse_signature .= erreur(_L("L'URL que vous avez indiqu&eacute;e n'est pas valide."));
+					$reponse_signature .= erreur(_T('form_pet_url_invalide'));
 					$refus = "oui";
 				}
 			}
@@ -170,7 +170,7 @@ function formulaire_signature($id_article) {
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')";
 				$result = spip_query($query);
 				if (spip_num_rows($result) > 0) {
-					$reponse_signature .= erreur(_L("Ce site est d&eacute;j&agrave; enregistr&eacute;"));
+					$reponse_signature .= erreur(_T('form_pet_site_deja_enregistre'));
 					$refus = "oui";
 				}
 			}
@@ -178,7 +178,7 @@ function formulaire_signature($id_article) {
 			$passw = test_pass();
 
 		 	if ($refus == "oui") {
-		  		$reponse_signature.= "<P><FONT COLOR='red'><B>"._L("Votre signature n'est pas prise en compte.")."</B></FONT><P>";
+		  		$reponse_signature.= "<P><FONT COLOR='red'><B>"._T('form_pet_signature_pasprise')."</B></FONT><P>";
 			}
 			else {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
@@ -191,30 +191,11 @@ function formulaire_signature($id_article) {
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 
-				$messagex = _L("Bonjour,
+				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
-Vous avez demand&eacute; &agrave; signer la p&eacute;tition :
-$titre.
+				envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex);
 
-Vous avez fourni les informations suivantes :
-    Nom: $nom_email
-    Site: $nom_site - $url_site
-
-
-IMPORTANT...
-Pour valider votre signature, il suffit de vous connecter &agrave;
-l'adresse ci-dessous (dans le cas contraire, votre demande
-sera rejet&eacute;e) :
-
-    $url
-
-
-Merci de votre participation
-");
-
-				envoyer_mail($adresse_email, _L("Veuillez confirmer votre signature :")." ".$titre, $messagex);
-
-				$reponse_signature.="<P><B>"._L("Un courrier &eacute;lectronique de confirmation vient de vous &ecirc;tre envoy&eacute;. Vous devrez visiter l'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.")."</B>";
+				$reponse_signature.="<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
 
 				$nom_email = addslashes($nom_email);
 				$nom_site = addslashes($nom_site);
@@ -226,7 +207,7 @@ Merci de votre participation
 			}
 		}
 		else {
-			$reponse_signature = _L("Probl&egrave;me technique, les signatures sont temporairement suspendues.");
+			$reponse_signature = _T('form_pet_probleme_technique');
 		}
 		echo "<div class='reponse_formulaire'>$reponse_signature</div>";
 	}
@@ -251,26 +232,26 @@ Merci de votre participation
 
 			echo propre($texte_petition);
 
-			echo "<p><fieldset><B>"._L("Votre nom ou pseudo")."</B><BR>";
+			echo "<p><fieldset><B>"._T('form_pet_votre_nom')."</B><BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\">";
 
-			echo "<p><B>"._L("Votre adresse email")."</B><BR>";
+			echo "<p><B>"._T('form_pet_votre_email')."</B><BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\"></fieldset>";
 
 			echo "<P><fieldset>";
 			if ($site_obli != "oui") {
-				echo  "<B>"._L("Si vous avez un site Web, vous pouvez l'indiquer ci-dessous")."</B><p>";
+				echo  "<B>"._T('form_pet_votre_site')."</B><p>";
 			}
-			echo _L("<B>Nom de votre site Web")."</B><BR>";
+			echo _T('form_pet_nom_site2')."</B><BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\">";
 
-			echo "<p><B>"._L("Adresse de votre site")."</B><BR>";
+			echo "<p><B>"._T('form_pet_adresse_site')."</B><BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\"></fieldset>";
 
 			if ($message_petition == "oui") {
 				echo "<p><fieldset>";
 
-				echo "<B>"._L("Un message, un commentaire&nbsp;?")."</B><BR>";
+				echo "<B>"._T('form_pet_message_commentaire')."</B><BR>";
 				echo "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
 				echo "</textarea></fieldset><p>\n";
 			}
@@ -278,7 +259,7 @@ Merci de votre participation
 				echo "<input type=\"hidden\" name=\"message\" value=\"\">";
 			}
 
-			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._L("Valider")."\">";
+			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
 			echo "</DIV></FORM>\n";
 		}
 	}
@@ -316,12 +297,12 @@ function formulaire_inscription($type) {
 
 			unset ($continue);
 			if ($statut == '5poubelle')
-				echo "<b>"._L("Vous n'avez plus acc&egrave;s &agrave; ce site.")."</b>";
+				echo "<b>"._T('form_forum_access_refuse')."</b>";
 			else if ($statut == 'nouveau') {
 				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
 				$continue = true;
 			} else
-				echo "<b>"._L("Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.")."</b>";
+				echo "<b>"._T('form_forum_email_deja_enregistre')."</b>";
 		} else
 			$continue = true;
 
@@ -340,36 +321,34 @@ function formulaire_inscription($type) {
 			$nom_site_spip = lire_meta("nom_site");
 			$adresse_site = lire_meta("adresse_site");
 
-			$message = _L("(ceci est un message automatique)")."\n\n"._L("Bonjour,")."\n\n";
+			$message = _T('form_forum_message_auto')."\n\n"._T('form_forum_bonjour')."\n\n";
 			if ($type == 'forum') {
-				$message .= _L("Voici vos identifiants pour pouvoir participer aux forums
-du site \"$nom_site_spip\" ($adresse_site/) :");
+				$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site));
 			}
 			else {
-				$message .= _L("Voici vos identifiants pour proposer des articles sur
-le site \"$nom_site_spip\" ($adresse_site/ecrire/) :") . "\n\n";
+				$message .= _T('form_forum_voici2', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
 			}
-			$message .= "- "._L("login :")." $login\n";
-			$message .= "- "._L("mot de passe :")." $pass\n\n";
+			$message .= "- "._T('form_forum_login')." $login\n";
+			$message .= "- "._T('form_forum_pass')." $pass\n\n";
 
-			if (envoyer_mail($mail_inscription, "[$nom_site_spip] "._L("Identifiants personnels"), $message)) {
-				echo _L("Votre nouvel identifiant vient de vous &ecirc;tre envoy&eacute; par email.");
+			if (envoyer_mail($mail_inscription, "[$nom_site_spip] "._T('form_forum_identifiants'), $message)) {
+				echo _T('form_forum_identifiant_mail');
 			}
 			else {
-				echo _L("Probl&egrave;me de mail&nbsp;: l'identifiant ne peut pas &ecirc;tre envoy&eacute;.");
+				echo _T('form_forum_probleme_mail');
 			}
 		}
 		echo "</div>";
 	}
 	else {
-		echo _L("Indiquez ici votre nom et votre adresse email. Votre identifiant personnel vous parviendra rapidement, par courrier &eacute;lectronique.");
+		echo _T('form_forum_indiquer_nom_email');
 		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('GET');
-		echo  "<P><B>"._L("Votre nom ou pseudo")."</B><BR>";
+		echo  "<P><B>"._T('form_pet_votre_nom')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_inscription\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<P><B>"._L("Votre adresse email")."</B><BR>";
+		echo  "<P><B>"._T('form_pet_votre_email')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"mail_inscription\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._L("Valider")."\">";
+		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
 		echo  "</DIV></FORM>";
 	}
 }
@@ -384,14 +363,14 @@ function formulaire_site($la_rubrique) {
 	if ($nom_site) {
 		// Tester le nom du site
 		if (strlen ($nom_site) < 2){
-			$reponse_signature .= erreur(_L("Veuillez indiquer le nom du site."));
+			$reponse_signature .= erreur(_T('form_prop_indiquer_nom_site'));
 			$refus = "oui";
 		}
 
 		// Tester l'URL du site
 		include_ecrire("inc_sites.php3");
 		if (!recuperer_page($url_site)) {
-			$reponse_signature .= erreur(_L("L'URL que vous avez indiqu&eacute;e n'est pas valide."));
+			$reponse_signature .= erreur(_T('form_pet_url_invalide'));
 			$refus = "oui";
 		}
 
@@ -406,11 +385,11 @@ function formulaire_site($la_rubrique) {
 			$query = "INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
 				"VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')";
 			$result = spip_query($query);
-			echo _L("Votre proposition est enregistr&eacute;e, elle appara&icirc;tra en ligne apr&egrave;s validation par les responsables de ce site.");
+			echo _T('form_prop_enregistre');
 		}
 		else {
 			echo $reponse_signature;
-			echo "<p> "._L("Votre proposition n'a pas &eacute;t&eacute; enregistr&eacute;e.");
+			echo "<p> "._T('form_prop_non_enregistre');
 		}
 		
 		echo "</div>";
@@ -418,13 +397,13 @@ function formulaire_site($la_rubrique) {
 	else {
 		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('POST');
-		echo  "<P><div class='spip_encadrer'><B>"._L("Nom du site")."</B><BR>";
+		echo  "<P><div class='spip_encadrer'><B>"._T('form_prop_nom_site')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_site\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<P><B>"._L("Adresse (URL) du site")."</B><BR>";
+		echo  "<P><B>"._T('form_prop_url_site')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"url_site\" VALUE=\"\" SIZE=\"30\"></div>";
-		echo  "<P><B>"._L("Description/commentaire")."</B><BR>";
+		echo  "<P><B>"._T('form_prop_description')."</B><BR>";
 		echo "<TEXTAREA NAME='description_site' ROWS='5' CLASS='forml' COLS='40' wrap=soft></textarea>";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._L("Valider")."\">";
+		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
 		echo  "</DIV></FORM>";
 		}
 }
@@ -439,16 +418,16 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 	$affiche_formulaire = true;
 	if ($GLOBALS['texte_message_auteur'.$id_auteur]) {
 		if ($GLOBALS['sujet_message_auteur'.$id_auteur] == "")
-			$erreur .= erreur(_L("Veuillez indiquer un sujet"));
+			$erreur .= erreur(_T('form_prop_indiquer_sujet'));
 		else if (! email_valide($GLOBALS['email_message_auteur'.$id_auteur]) )
-			$erreur .= erreur(_L("Veuillez indiquer une adresse email valide"));
+			$erreur .= erreur(_T('form_prop_indiquer_email'));
 		else if ($GLOBALS['valide_message_auteur'.$id_auteur]) {  // verifier hash ?
 			$GLOBALS['texte_message_auteur'.$id_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 			envoyer_mail($email_auteur,
 				$GLOBALS['sujet_message_auteur'.$id_auteur],
 				$GLOBALS['texte_message_auteur'.$id_auteur], $GLOBALS['email_message_auteur'.$id_auteur],
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
-			$erreur .= erreur(_L("Message envoy&eacute;"));
+			$erreur .= erreur(_T('form_prop_message_envoye'));
 			$affiche_formulaire = false;
 		} else { //preview
 			echo "<p><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
@@ -462,7 +441,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$link->addVar('texte_message_auteur'.$id_auteur, $GLOBALS['texte_message_auteur'.$id_auteur]);
 			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');
 			echo $link->getForm('POST');
-			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\""._L("Confirmer l'envoi")."\">";
+			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\""._T('form_prop_confirmer_envoi')."\">";
 			echo "</DIV></FORM>";
 		}
 	}
@@ -474,12 +453,12 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 		$retour = $GLOBALS['REQUEST_URI'];
 		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('POST');
-		echo "<div class='spip_encadrer'><P><B>"._L("Votre adresse email")."</B><BR>";
+		echo "<div class='spip_encadrer'><P><B>"._T('form_pet_votre_email')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
-		echo  "<P><B>"._L("Sujet")."</B><BR>";
+		echo  "<P><B>"._T('form_prop_sujet')."</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
 		echo  "<P><TEXTAREA NAME='texte_message_auteur$id_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._L("Envoyer un message")."\">";
+		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('form_prop_envoyer')."\">";
 		echo  "</DIV></FORM>";
 	}
 }

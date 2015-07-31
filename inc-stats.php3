@@ -120,7 +120,7 @@ function afficher_raccourci_stats($id_article) {
 			$visites = $visites + $row['c'];
 		}
 
-		bouton_admin(_L("$visites visites&nbsp;; popularit&eacute;&nbsp;: $popularite"), "./ecrire/statistiques_visites.php3?id_article=$id_article");
+		bouton_admin(_T('stats_visites_et_popularite', array('visites' => $visites, 'popularite' => $popularite)), "./ecrire/statistiques_visites.php3?id_article=$id_article");
 	}
 }
 

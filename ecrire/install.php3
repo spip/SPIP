@@ -360,7 +360,7 @@ else if (!$etape) {
 
 	echo "<p>&nbsp;</p><p align='center'><img src='AIDE/fr/logo-spip.gif'></p>";
 	
-	echo "<p>&nbsp;</p><p>" . _L("S&eacute;lectionnez une langue puis cliquez sur le bouton &laquo;&nbsp;suivant&nbsp;&raquo; pour lancer la proc&eacute;dure d'installation.");
+	echo "<p>&nbsp;</p><p>" . _T('install_select_langue');
 
 	echo "<p><div align='center'>".menu_langues()."</div>";
 
