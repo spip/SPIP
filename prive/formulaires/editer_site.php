@@ -44,7 +44,7 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 	include_spip('inc/site');
 	$oblis = array('nom_site','url_site');
 	// Envoi depuis le formulaire d'analyse automatique d'un site
-	if (strlen(vider_url($u = _request('url_auto')))) {
+	if (_request('ajoute_url_auto') AND strlen(vider_url($u = _request('url_auto')))) {
 		if ($auto = analyser_site($u)) {
 			foreach($auto as $k=>$v){
 				set_request($k,$v);
