@@ -94,19 +94,22 @@ function balise_CHARSET_dist($p) {
 
 
 function balise_LANG_LEFT_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
+	$_lang = champ_sql('lang', $p);
+	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'left','right')";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_RIGHT_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'right','left')";
+	$_lang = champ_sql('lang', $p);
+	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'right','left')";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_DIR_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'ltr','rtl')";
+	$_lang = champ_sql('lang', $p);
+	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'ltr','rtl')";
 	$p->statut = 'php';
 	return $p;
 }
