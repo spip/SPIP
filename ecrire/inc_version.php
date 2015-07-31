@@ -310,7 +310,7 @@ $spip_version = 1.943;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.3 dev';
-$spip_version_code = '1.9259';
+$spip_version_code = '1.9260';
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';

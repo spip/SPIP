@@ -102,7 +102,6 @@ function spip_nfslock($fichier,$max_age=0) {
 
 	$id = creer_uniqid();
 	$tpath = _DIR_TMP."slock.$id";
-	
 	$tmpfd = @fopen($tpath, 'w'); // hum, le 'x' necessite php4,3,2 ...
 	if (!$tmpfd) {	/* open failed */
 		@fclose($tmpfd);

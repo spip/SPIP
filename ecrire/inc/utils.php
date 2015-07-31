@@ -1229,10 +1229,14 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
-	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
+	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
 		define ('os_serveur', 'windows');
-	else
+		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+	}
+	else {
 		define ('os_serveur', '');
+		define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip
+	}
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
 	if (isset($_SERVER['REQUEST_URI'])) {
