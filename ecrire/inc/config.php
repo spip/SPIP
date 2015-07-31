@@ -19,10 +19,12 @@ include_spip('inc/meta');
 // (pour les langues c'est fait)
 //
 
+// http://doc.spip.org/@inc_config_dist
 function inc_config_dist() {
 	actualise_metas(liste_metas());
 }
 
+// http://doc.spip.org/@liste_metas
 function liste_metas()
 {
 	return array(
@@ -76,6 +78,7 @@ function liste_metas()
 	);
 }
 
+// http://doc.spip.org/@actualise_metas
 function actualise_metas($liste_meta)
 {
 	while (list($nom, $valeur) = each($liste_meta)) {
