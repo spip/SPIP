@@ -299,7 +299,7 @@ function utf_8_to_unicode($source) {
 	static $decrement;
 	static $shift;
 
-	// Cf. php.net, par Ronen. Adapte pour compatibilite php3
+	// Cf. php.net, par Ronen. Adapte pour compatibilite < php4
 	if (!is_array($decrement)) {
 		// array used to figure what number to decrement from character order value
 		// according to number of characters used to map unicode to ascii by utf-8
