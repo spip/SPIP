@@ -20,7 +20,7 @@ if (isset($contexte_inclus['delais']))
 
 // Securite 
 if (strstr($fond, '/')
-OR preg_match(',^formulaire_,', $fond)) {
+OR preg_match(',^formulaire_,i', $fond)) {
 	die ("Faut pas se gener");
 }
 if (!find_in_path("$fond.html")) {
