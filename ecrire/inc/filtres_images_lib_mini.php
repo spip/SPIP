@@ -161,7 +161,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$GLOBALS["images_calculees"][] =  $fichier_dest;
-	
+
 	$creer = true;
 	// si recalcul des images demande, recalculer chaque image une fois
 	if (defined('_VAR_IMAGES') AND _VAR_IMAGES AND !isset($images_recalcul[$fichier_dest])){
@@ -219,6 +219,10 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 			),
 			'data'=>$ret)
 	);
+
+	// une globale pour le debug en cas de crash memoire
+	$GLOBALS["derniere_image_calculee"] = $ret;
+
 	if (!function_exists($ret["fonction_imagecreatefrom"])) return false;
 	return $ret;
 }
