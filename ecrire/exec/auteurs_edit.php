@@ -22,7 +22,12 @@ function exec_auteurs_edit_dist()
   global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
-	pipeline('exec_init',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
+	pipeline('exec_init',
+		array('args' => array(
+			'exec'=>'auteurs_edit',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'");
 
@@ -45,9 +50,20 @@ function exec_auteurs_edit_dist()
 				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'), 'auteurs_edit');
 	}
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_gauche',
+		array('args' => array(
+			'exec'=>'auteurs_edit',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 	table_auteurs_edit($auteur);
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_milieu',
+		array('args' => array(
+			'exec'=>'auteurs_edit',
+			'id_auteur'=>$id_auteur
+			),
+		'data'=>'')
+	);
 
 	fin_page();
 }
@@ -68,7 +84,12 @@ function table_auteurs_edit($auteur)
 	$extra = $auteur["extra"];
 
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_droite',
+		array('args' => array(
+			'exec'=>'auteurs_edit',
+			'id_auteur'=>$id_auteur),
+		'data'=>'')
+	);
 	debut_droite();
 
 	debut_cadre_relief("redacteurs-24.gif");
