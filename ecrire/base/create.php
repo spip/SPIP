@@ -17,39 +17,6 @@ include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('base/typedoc');
 
-// Fonction de creation d'une table SQL nommee $nom
-// a partir de 2 tableaux PHP :
-// champs: champ => type
-// cles: type-de-cle => champ(s)
-// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// Le nom des caches doit etre inferieur a 64 caracteres
-
-// http://doc.spip.org/@spip_create_table
-function spip_create_table($nom, $champs, $cles, $autoinc=false, $temporary=false) {
-	$query = ''; $keys = ''; $s = ''; $p='';
-
-	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
-	// sans les renseigner (laisse le compilo recuperer la description)
-	if (!is_array($champs) || !is_array($cles)) 
-		return;
-
-	foreach($cles as $k => $v) {
-		$keys .= "$s\n\t\t$k ($v)";
-		if ($k == "PRIMARY KEY")
-			$p = $v;
-		$s = ",";
-	}
-	$s = '';
-
-	foreach($champs as $k => $v) {
-		$query .= "$s\n\t\t$k $v" .
-		(($autoinc && ($p == $k)) ? " auto_increment" : '');
-		$s = ",";
-	}
-	$temporary = $temporary ? 'TEMPORARY':'';
-	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
-}
-
 
 // http://doc.spip.org/@creer_base
 function creer_base() {
@@ -61,10 +28,10 @@ function creer_base() {
 	# if ($vu) return; else $vu = true;
 
 	foreach($tables_principales as $k => $v)
-		spip_create_table($k, $v['field'], $v['key'], true);
+		spip_mysql_create($k, $v['field'], $v['key'], true);
 
 	foreach($tables_auxiliaires as $k => $v)
-		spip_create_table($k, $v['field'], $v['key'], false);
+		spip_mysql_create($k, $v['field'], $v['key'], false);
 
 	foreach($tables_images as $k => $v)
 		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .

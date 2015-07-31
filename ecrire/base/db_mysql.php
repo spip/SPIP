@@ -236,6 +236,38 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	return $GLOBALS['db_ok'];
 }
 
+// Fonction de creation d'une table SQL nommee $nom
+// a partir de 2 tableaux PHP :
+// champs: champ => type
+// cles: type-de-cle => champ(s)
+// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
+// Le nom des caches doit etre inferieur a 64 caracteres
+
+function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
+	$query = ''; $keys = ''; $s = ''; $p='';
+
+	// certains plugins declarent les tables  (permet leur inclusion dans le dump)
+	// sans les renseigner (laisse le compilo recuperer la description)
+	if (!is_array($champs) || !is_array($cles)) 
+		return;
+
+	foreach($cles as $k => $v) {
+		$keys .= "$s\n\t\t$k ($v)";
+		if ($k == "PRIMARY KEY")
+			$p = $v;
+		$s = ",";
+	}
+	$s = '';
+
+	foreach($champs as $k => $v) {
+		$query .= "$s\n\t\t$k $v" .
+		(($autoinc && ($p == $k)) ? " auto_increment" : '');
+		$s = ",";
+	}
+	$temporary = $temporary ? 'TEMPORARY':'';
+	spip_query_db("CREATE $temporary TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
+}
+
 // http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table)
 {
