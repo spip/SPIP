@@ -297,12 +297,6 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			$page = array();
 	}
 
-	// HEAD : cas sans jamais de calcul pour raisons de performance
-	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
-		$use_cache = 0;
-		$page = array('contexte_implicite'=>$contexte_implicite);
-		return;
-	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if (isset($GLOBALS['meta']['invalider'])) {
