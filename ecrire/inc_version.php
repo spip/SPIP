@@ -60,12 +60,12 @@ $dossier_squelettes = "";
 $auto_compress = true;
 
 // Type d'URLs
-// 'page': ?article=123
+// 'page': spip.php?article123 [c'est la valeur par defaut pour SPIP 1.9]
 // 'html': article123.html
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
-// 'standard': spip.php?page=article&id_article=123
-$type_urls = 'standard';
+// 'standard': article.php3?id_article=123 [urls SPIP < 1.9]
+$type_urls = 'page';
 
 
 //
