@@ -164,7 +164,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 	$id_groupes_vus = array();
 	$groupes_vus = array();
 	$flag_tous = 0;
-	$result = sql_select("mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "", "mots.type, mots.titre");
+	$result = sql_select("mots.id_mot, mots.titre, mots.descriptif, mots.id_groupe", "spip_mots AS mots, spip_mots_$table AS lien", "lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot", "mots.type, mots.titre", "mots.type, mots.titre");
 	if (sql_count($result) > 0) {
 	
 		$tableau= array();

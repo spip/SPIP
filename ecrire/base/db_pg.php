@@ -296,6 +296,8 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/([+<>-]=?)\s*(\'\d+-\d+-\d+\')/', '\1 date \2', $res);
 	$res = preg_replace('/(\'\d+-\d+-\d+\')\s*([+<>-]=?)/', 'date \1 \2', $res);
 
+	$res = preg_replace('/(date .\d+)-00-/','\1-01-', $res);
+	$res = preg_replace('/(date .\d+-\d+)-00/','\1-01',$res);
 	$res = preg_replace('/TO_DAYS\s*[(]([^(]*([(][^)]*[)][()]*)*)[)]/',
 			    'date_part(\'day\', \1 - \'0000-01-01\')',
 			    $res);
