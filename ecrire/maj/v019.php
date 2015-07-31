@@ -138,7 +138,7 @@ function maj_1_939 () {
 		));
 }
 
-function  maj_1_940 ($version_installee, $version_cible) {
+function  maj_1_940 () {
 	spip_query("DROP TABLE spip_caches");
 }
 
