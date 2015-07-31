@@ -1,4 +1,14 @@
 
+SPIP-Core spip-2.1.27 -> spip-2.1.28  23 juin 2015
+-------------------------------------------------------------
+
+r22126 | cedric    |  (dim. 10 mai 2015) | Report minimal de r22116 r22118 r22119 : #3418 : Octave utilise une configuration foireuse de opcode cache, qui persiste 2s apres modification du fichier sans possibilite de l'invalider manuellement. On essaye donc de detecter cette configuration et de faire un sleep() le temps que le cache soit invalide
+r22133 | suske     |  (dim. 10 mai 2015) | report de 22086 (Francky)
+r22138 | marcimat  |  (mar. 12 mai 2015) | Coquille dans le report r21430 : La constante _IMG_IMAGICK_QUALITE n'est présente qu'à partir de SPIP 3. On remet la valeur fixe.
+r22206 | esj       |  (sam. 06 juin 2015)| Deux bugs dans le phraseur illustré par l'exemple ci-dessous fourni par Georges Kandalaft:-* (ligne 295) ce qu'il y a avant un nom de balise dans un argument n'est pas forcément du texte brut, il peut y avoir des chaînes de langues;-* (ligne 256) les apostrophes et guillemets en début d'argument ne sont pas forcément des délimiteurs SPIP, il faut qu'il y en ait un 2e plus loin, ce que preg_match contrôlait sans que SPIP tienne compte de son résultat. On y veille à présent mais il est à noter que cette condition est nécessaire mais non suffisante, du fait de la terrible ambiguité de la syntaxe des squelettes. Il y a donc d'autres bugs potentiels quand on met des balises comme arguments d'une balise.Autre chose qui ne relève pas du phraseur: dans le code ci-dessous le "**" après #SESSION n'est pas seulement destiné à produire un code plus efficace (il ne sécurise pas car ce n'est pas nécessaire quand on ne s'intéresse qu'au résultat booléen), mais aussi parce que le "interdire_script" introduit sinon transcode le chevron dans le "<?php" de la balise dynamique #URL_LOGOUT, ce qui la neutralise. C'est un autre bug à creuser.<pre><code class="html">[(#SESSION**{nom}|?{<:bienvenue:> <strong>#SESSION{nom}</strong>    <br /><a href='#URL_LOGOUT'><:logout:></a>,<p><small><img alt="<:zonep:>" src="#CHEMIN{encrypted.png}" /> <:acces:> <a href="#URL_PAGE{login,url=#SELF}"><:ident:></a></small></p>})]</code></pre>
+r22209 | b_b       |  (mar. 09 juin 2015)| report de r22201 / Fixe #3418 : complément à r22119 ajouter une seconde à la durée de opcache.revalidate_freq, sans quoi on retombe dans le cache
+r22223 | erational |  (ven. 12 juin 2015)| éviter un warning si la session visiteur n'existe pas.
+
 SPIP-Core spip-2.1.26 -> spip-2.1.27  09 mai 2015
 -------------------------------------------------------------
 
