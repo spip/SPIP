@@ -971,7 +971,7 @@ function alterner($i) {
 // recuperer un attribut html d'une balise
 // ($complet demande de retourner $r)
 function extraire_attribut($balise, $attribut, $complet = false) {
-	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([[:space:]/>].*>.*),ims", $balise, $r)) {
+	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([^>]*>.*),ims", $balise, $r)) {
 		$att = $r[4];
 	}
 	else
