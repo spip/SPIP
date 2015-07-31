@@ -12,25 +12,27 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/autoriser');
+// http://doc.spip.org/@action_instituer_article_dist
+function action_instituer_rubrique_breves_dist() {
 
-// http://doc.spip.org/@exec_puce_statut_article_dist
-function exec_puce_statut_article_dist()
-{
-	$id = intval(_request('id'));
-	$type = _request('type');
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
-	if ($type == 'article') {
-		$s = spip_query("SELECT id_rubrique,statut FROM spip_articles WHERE id_article=$id");
-		$r = spip_fetch_array($s);
-		$statut = $r['statut'];
-		$id_rubrique = $r['id_rubrique'];
-	} else {
-		$id_rubrique = $id;
-		$id = 0;
-		$statut = 'prop'; // arbitraire
+	list($id, $statut) = preg_split('/\W/', $arg);
+	$id = intval($id);
+
+	include_spip('action/editer_breve');
+
+	$table = 'articles';
+	$key = 'id_article';
+
+	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop')");
+
+	while($row = spip_fetch_array($voss)) {
+                set_request('statut', $statut);
+		revisions_breves($row['id']);
 	}
-	ajax_retour(puce_statut_article($id,$statut,$id_rubrique,$type, true));
+
+	redirige_par_entete(generer_url_ecrire('meme_rubrique', "id=$id&type=breve&date=date_heure", true));
 }
 ?>

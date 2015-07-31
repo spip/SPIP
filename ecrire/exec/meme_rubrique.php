@@ -13,24 +13,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_puce_statut_article_dist
-function exec_puce_statut_article_dist()
+function exec_meme_rubrique_dist()
 {
 	$id = intval(_request('id'));
 	$type = _request('type');
+	$date = _request('date');
 
-	if ($type == 'article') {
-		$s = spip_query("SELECT id_rubrique,statut FROM spip_articles WHERE id_article=$id");
-		$r = spip_fetch_array($s);
-		$statut = $r['statut'];
-		$id_rubrique = $r['id_rubrique'];
-	} else {
-		$id_rubrique = $id;
-		$id = 0;
-		$statut = 'prop'; // arbitraire
-	}
-	ajax_retour(puce_statut_article($id,$statut,$id_rubrique,$type, true));
+        if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
+        OR (!acces_rubrique($id))
+	OR (!preg_match('/^[\w_-]+$/',$date))
+        OR (!preg_match('/^[\w_-]+$/',$type))) {
+                include_spip('inc/minipres');
+                echo minipres();
+                exit;
+        }
+
+	// on connait pas le vrai 2e arg mais c'est pas dramatique
+	$res = meme_rubrique($id, 0, $type, $date, 30, true);
+	ajax_retour($res);
 }
 ?>

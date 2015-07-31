@@ -254,12 +254,13 @@ function fin_boite_info($return=false) {
 function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $af = true) {
 	global $spip_lang_left, $spip_display, $browser_name;
 	
+	$logo = http_img_pack($logo, "", "");
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
 		$ie_style = ($browser_name == "MSIE") ? "height:1%" : '';
 
 		$retour = "\n<div style='position: relative;$ie_style'>"
-		. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>" .
-		  http_img_pack("$logo", "", "")
+		. "\n<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'>"
+		. $logo  
 		. "</div>"
 		. "\n<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'>$titre</div>"
 		 . "</div>";
@@ -497,99 +498,92 @@ function afficher_liste_fin_tableau() {
 
 
 // http://doc.spip.org/@puce_statut_article
-function puce_statut_article($id, $statut, $id_rubrique, $ajax = false) {
+function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options;
-	static $script=NULL;
 	
+	if (!$id) {
+	  $id = $id_rubrique;
+	  $ajax_node ='';
+	} else	$ajax_node = " id='imgstatut$type$id'";
+
 	switch ($statut) {
 	case 'publie':
 		$clip = 2;
-		$puce = 'verte';
+		$puce = 'puce-verte.gif';
 		$title = _T('info_article_publie');
 		break;
 	case 'prepa':
 		$clip = 0;
-		$puce = 'blanche';
+		$puce = 'puce-blanche.gif';
 		$title = _T('info_article_redaction');
 		break;
 	case 'prop':
 		$clip = 1;
-		$puce = 'orange';
+		$puce = 'puce-orange.gif';
 		$title = _T('info_article_propose');
 		break;
 	case 'refuse':
 		$clip = 3;
-		$puce = 'rouge';
+		$puce = 'puce-rouge.gif';
 		$title = _T('info_article_refuse');
 		break;
 	case 'poubelle':
 		$clip = 4;
-		$puce = 'poubelle';
+		$puce = 'puce-poubelle.gif';
 		$title = _T('info_article_supprime');
 		break;
 	}
-	$puce = "puce-$puce.gif";
+
+	$inser_puce = http_img_pack($puce, $title, " style='margin: 1px;'$ajax_node");
 
 	include_spip('inc/autoriser');
-	if (autoriser('publierdans', 'rubrique', $id_rubrique)) {
-	  // les versions de MSIE ne font pas toutes pareil sur alt/title
-	  // la combinaison suivante semble ok pour tout le monde.
-	  $titles = array(
+	if (!autoriser('publierdans', 'rubrique', $id_rubrique))
+		return $inser_puce;
+
+	$titles = array(
 			  "blanche" => _T('texte_statut_en_cours_redaction'),
 			  "orange" => _T('texte_statut_propose_evaluation'),
 			  "verte" => _T('texte_statut_publie'),
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
-		if ($ajax){
-		  $action = "\nonmouseover=\"montrer('statutdecalarticle$id');\"";
-		  $inser_puce = 
-		  	// "\n<div class='puce_article' id='statut$id'$dir_lang>" .
-				"<div class='puce_article_fixe'\n$action>" .
-			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>"
-				. "<div class='puce_article_popup' id='statutdecalarticle$id'\nonmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
-				. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
-				. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
-				. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
-				. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
-				. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
-			. "</div>"
-			//. "</div>"
-			;
-		}
-		else{
-		  $inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>".
-			  http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'") ."</div>";
-			if ($script==NULL && _SPIP_AJAX){
-				$action = "'".generer_url_ecrire('puce_statut_article',"id='+id",true);
-				$script = "<script type='text/javascript'>//<!--\n";
-				$script .= "$(document).ready(function(){
-					$('div.puce_article').mouseover( function() {
-						if(this.puce_loaded) return;
-						this.puce_loaded = true;
-						id = $(this).id();
-						id = id.substr(6,id.length-1);
-						$('#statut'+id).load($action,function(){ 
-								$('#statutdecalarticle'+id).show(); 
-								/*$('#statut'+id).mouseover(function(){ $(this).children('.puce_article_popup').show(); });*/
-							});
-						});
-					
-				})";
-				$script .= "//--></script>"; 
-				$inser_puce = $script . $inser_puce;
-			}
-		}
-	} else {
-		$inser_puce = http_img_pack($puce, $title, "id='imgstatutarticle$id' style='margin: 1px;'");
+	if ($ajax){
+		$action = "\nonmouseover=\"montrer('statutdecal$type$id');\"";
+		return 	"<div class='puce_article_fixe'\n$action>"
+		. $inser_puce
+		. "</div>"
+		. "<div class='puce_article_popup' id='statutdecal$type$id'\nonmouseout=\"cacher('statutdecal$type$id');\" style='margin-left: -".((11*$clip)+1)."px;'>"
+		  . afficher_script_statut($id, $type, -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
+		  . afficher_script_statut($id, $type, -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
+		  . afficher_script_statut($id, $type, -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
+		  . afficher_script_statut($id, $type, -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
+		  . afficher_script_statut($id, $type, -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+		  . "</div>";
 	}
 
-	return $inser_puce;
+	$nom = "puce_statut_";
+
+	if ((! _SPIP_AJAX) AND $type != 'article') 
+	  $over ='';
+	else {
+
+	  $action = generer_url_ecrire('puce_statut_article',"",true);
+	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut('$nom', '$type', $id, '$action'); } }";
+	  $over = "\nonmouseover=\"$action\"";
+	}
+
+	return 	"<div class='puce_article' id='$nom$type$id'$dir_lang$over>"
+	. $inser_puce
+	. '</div>';
 }
 
 // http://doc.spip.org/@puce_statut_breve
-function puce_statut_breve($id, $statut, $type, $droit) {
+function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
 	global $spip_lang_left, $dir_lang;
 
+	if ($droit == 'AUTO') {
+		include_spip('inc/autoriser');
+		$droit = autoriser('publierdans', 'rubrique', $id_rubrique);
+	}
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
 		       1 => 'puce-verte-breve.gif',
@@ -625,9 +619,6 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 	
 	$type2 = "statutdecal$type$id";
 	$action = "\nonmouseover=\"montrer('$type2');\"";
-
-	  // les versions de MSIE ne font pas toutes pareil sur alt/title
-	  // la combinaison suivante semble ok pour tout le monde.
 
 	return	"<div class='puce_breve' id='$type1'$dir_lang>"
 		. "<div class='puce_breve_fixe' $action>"
@@ -747,9 +738,11 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	}
 	$texte .=  '<b>' . $titre_table  . '</b>';
 
+	$icone = http_img_pack("article-24.gif",'','');
+
 	$res =  "\n<div style='height: 12px;'></div>"
 	. "\n<div class='liste'>"
-	. bandeau_titre_boite2($texte, "article-24.gif", 'white', 'black',false)
+	. bandeau_titre_boite2($texte, $icone, 'white', 'black',false)
 
 	. (($cpt <= $nb_aff) ? ''
 	   : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff))
@@ -913,7 +906,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	else $lang = $langue_defaut;
 	$id_rubrique = $row['id_rubrique'];
 			
-	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
+	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)));
 
 	$s = "\n<div>";
 	$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
@@ -1786,7 +1779,7 @@ function debloquer_article($arg, $texte) {
 }
 
 // http://doc.spip.org/@meme_rubrique
-function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
+function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30, $ajax=false)
 {
 	global $options;
 
@@ -1794,18 +1787,30 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 
 	$table = $type . 's';
 	$key = 'id_' . $type;
+	$where = ($GLOBALS['auteur_session']['statut'] == '0minirezo')
+	? ''
+	:  " AND (statut = 'publie' OR statut = 'prop')"; 
 
-	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
+	$query = "SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique$where AND ($key != $id)";
 
-	if (!spip_num_rows($voss)) return '';
+	$n = spip_num_rows(spip_query($query));
 
+	if (!$n) return '';
+
+	$voss = spip_query($query . " ORDER BY $order DESC LIMIT $limit");
+
+	$limit -= $n;
 	$retour = '';
+	$statuts = array();
+	$fstatut = 'puce_statut_' . $type;
 
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
-		$statut = puce_statut_article($id, $row['statut'], $id_rubrique);
-		$href = "<a href='"
+		$statut = $row['statut'];
+		$statuts[$statut]++;
+		$statut = $fstatut($id, $statut, $id_rubrique);
+		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($table,"$key=$id")
 		. "'>"
 		. typo($row['titre'])
@@ -1813,12 +1818,21 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
 	}
 
-	return "\n<div>&nbsp;</div>"
-	. "\n<div class='bandeau_rubriques' style='z-index: 1;'>"
-	. bandeau_titre_boite2('<b>' . _T('info_meme_rubrique')  . '</b>', "article-24.gif",'','',false)
+	$type = 'rubrique_' . $table;
+	$statut = array_search(max($statuts), $statuts);
+	$icone =  puce_statut_article(0, $statut, $id_rubrique, $type);
+
+	$retour = bandeau_titre_boite2('<b>' . _T('info_meme_rubrique')  . '</b>' . $icone, 'article-24.gif','','',false)
 	. "\n<table style='font-size: 11px; background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
 	. $retour
-	. "</table></div>";
+	. (($limit > 0) ? '' : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>")
+	. "</table>";
+
+	if ($ajax) return $retour;
+
+	// id utilise dans puce_statut_article
+	return "\n<div>&nbsp;</div>"
+	. "\n<div id='imgstatut$type$id_rubrique' class='bandeau_rubriques' style='z-index: 1;'>$retour</div>";
 }
 
 // http://doc.spip.org/@afficher_numero_edit

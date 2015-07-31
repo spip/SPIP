@@ -38,19 +38,34 @@ function selec_statut(id, type, decal, puce, script) {
 	if (!accepter_change_statut)
 		accepter_change_statut = confirm(confirm_changer_statut);
 
-	if (accepter_change_statut) {
-		changestyle ('statutdecal'+type+id, 'marginLeft', decal+'px');
-		cacher ('statutdecal'+type+id);
+	if (!accepter_change_statut) return;
 
-		$.get(script,
-			function (c) {
+	changestyle ('statutdecal'+type+id, 'marginLeft', decal+'px');
+	cacher ('statutdecal'+type+id);
+
+	$.get(script,
+		function (c) {
+			node = findObj('imgstatut'+type+id);
+			if (!((type == 'article') || (type == 'breve'))) {
+				node.innerHTML = c;
+			} else {
+
 				if (!c)
-					findObj('imgstatut'+type+id).src = puce;
+					node.src = puce;
+
 				else
 					alert(c); // eventuel message d'erreur (TODO)
 			}
-		);
-	}
+	      }
+	      );
+}
+
+function prepare_selec_statut(nom, type, id, action)
+{
+	$('#' + nom + type + id).load(action + '&type='+type+'&id='+id,
+		function(){ 
+			findObj_forcer('statutdecal'+type+id).style.visibility = 'visible';
+					  });
 }
 
 function changeclass(objet, myClass) {
@@ -71,7 +86,6 @@ function montrer(objet) {
 function cacher(objet) {
 	setvisibility(objet, 'hidden');
 }
-
 
 
 function getHeight(obj) {
