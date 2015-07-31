@@ -61,7 +61,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	// les protocoles web prennent au moins 3 lettres
 	if (preg_match(';^(\w{3,7}://);', $source)){
 		include_spip("inc/distant");
-		$fichier = fichier_copie_locale($source);
+		$fichier = copie_locale($source);
 	}
 	
 	if (!file_exists($fichier)) return false;

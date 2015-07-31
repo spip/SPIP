@@ -45,8 +45,8 @@ $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 	global $abs_pos;
 	static $buf='';
-	static $ent = array('&lt;','&amp;');
-	static $brut = array('<','&');
+	static $ent = array('&amp;','&lt;');
+	static $brut = array('&','<');
 
 	while (($b=strpos($buf,'<'))===false) {
 		if (!($x = $_fread($f, 1024))) return '';

@@ -58,7 +58,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	}
 
 	$entete = basename($document['fichier']);
-	if (($n=strlen($entete)) > 20) 
+	if (($n=strlen($entete)) > 20)
 		$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
 	if (strlen($document['titre']))
 		$entete = "<b>". lignes_longues(typo($titre),25) . "</b>";

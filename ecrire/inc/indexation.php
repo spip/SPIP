@@ -756,6 +756,7 @@ function requete_dico($val, $min_long = 3) {
 		else
 			return array("0=1","0=1");
 	}
+
 }
 
 

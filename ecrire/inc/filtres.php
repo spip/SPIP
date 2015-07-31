@@ -94,18 +94,13 @@ function image_filtrer($args){
 	$texte = array_shift($args);
 	if (!$texte) return;
 	// Cas du nom de fichier local
-	if (preg_match(',^('._DIR_IMG . '|'. _DIR_IMG_PACK .'),', $texte)) {
-		if (!@file_exists($texte)) {
-			spip_log("Image absente : $texte");
-			return '';
-		} else {
-			if ($inclure){
-				include_spip('inc/filtres_images');
-				$inclure = false;
-			}
-			array_unshift($args,"<img src='$texte' />");
-			return call_user_func_array($filtre, $args);
+	if (preg_match(',^('._DIR_IMG .'|'. _DIR_IMG_PACK .'|'. _DIR_VAR .'),', $texte)) {
+		if ($inclure){
+			include_spip('inc/filtres_images');
+			$inclure = false;
 		}
+		array_unshift($args,"<img src='$texte' />");
+		return call_user_func_array($filtre, $args);
 	}
 
 	// Cas general : trier toutes les images, avec eventuellement leur <span>
@@ -161,7 +156,6 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 }
 // http://doc.spip.org/@valeurs_image_trans
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
-//	return filtrer('image_valeurs_trans',$img, $effet, $forcer_format);
 	include_spip('inc/filtres_images');
 	return image_valeurs_trans($img, $effet, $forcer_format = false);
 }
@@ -1892,8 +1886,10 @@ function compacte_js($flux) {
 	// en cas d'echec (?) renvoyer l'original
 	if (strlen($t = $k->getClean($flux)))
 		return $t;
-	else
-		return $flux;
+
+	// erreur
+	spip_log('erreur de compacte_js');
+	return $flux;
 }
 
 // Si la source est un chemin, on retourne un chemin avec le contenu compacte
