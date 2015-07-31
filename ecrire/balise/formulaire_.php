@@ -9,10 +9,27 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions génériques pour les balises formulaires
+ *
+ * @package SPIP\Formulaires
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
 
+/**
+ * Protéger les saisies d'un champ de formulaire
+ * 
+ * Proteger les ' et les " dans les champs que l'on va injecter,
+ * sans toucher aux valeurs sérialisées
+ *
+ * @see entites_html()
+ * @param string|array $texte
+ *     Saisie à protéger
+ * @return string|array
+ *     Saisie protégée
+**/
 function protege_champ($texte){
 	if (is_array($texte))
 		$texte = array_map('protege_champ',$texte);
@@ -25,6 +42,16 @@ function protege_champ($texte){
 	return $texte;
 }
 
+/**
+ * Teste si un formulaire demandé possède un squelette pour l'afficher
+ *
+ * @see trouver_fond()
+ * @param string
+ *     Nom du formulaire
+ * @return string|bool
+ *     - string : chemin du squelette
+ *     - false : pas de squelette trouvé
+**/
 function existe_formulaire($form)
 {
 	if (substr($form,0,11)=="FORMULAIRE_")
@@ -38,8 +65,16 @@ function existe_formulaire($form)
 }
 
 
-/* prendre en charge par defaut les balises formulaires simples */
-// http://doc.spip.org/@balise_FORMULAIRE__dist
+/**
+ * Balises Formulaires par défaut.
+ *
+ * Compilé en un appel à une balise dynamique. 
+ *
+ * @param Champ $p
+ *     Description de la balise formulaire
+ * @return Champ
+ *     Description complétée du code compilé appelant la balise dynamique
+**/
 function balise_FORMULAIRE__dist($p) {
 
 	// Cas d'un #FORMULAIRE_TOTO inexistant : renvoyer la chaine vide.
@@ -50,12 +85,19 @@ function balise_FORMULAIRE__dist($p) {
 		    return $p;
 	}
 
-	// sinon renvoyer un code php dnamique
+	// sinon renvoyer un code php dynamique
 	return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
 
-/* prendre en charge par defaut les balises dynamiques formulaires simples */
-// http://doc.spip.org/@balise_FORMULAIRE__dyn
+/**
+ * Balise dynamiques par défaut des formulaires
+ *
+ * @param string $form
+ *     Nom du formulaire
+ * @return string|array
+ *     - array : squelette à appeler, durée du cache, contexte
+ *     - string : texte à afficher directement
+ */
 function balise_FORMULAIRE__dyn($form)
 {
 	$form = existe_formulaire($form);
@@ -76,6 +118,16 @@ function balise_FORMULAIRE__dyn($form)
 	return array("formulaires/$form", 3600, $contexte);
 }
 
+/**
+ * Calcule le contexte à envoyer dans le squelette d'un formulaire 
+ *
+ * @param string $form
+ *     Nom du formulaire
+ * @param array $args
+ *     Arguments envoyés à l'appel du formulaire
+ * @return array
+ *     Contexte d'environnement à envoyer au squelette
+**/
 function balise_FORMULAIRE__contexte($form, $args)
 {
 	// tester si ce formulaire vient d'etre poste (memes arguments)
@@ -130,9 +182,9 @@ function balise_FORMULAIRE__contexte($form, $args)
 		if ($champ[0]!=='_' AND !in_array($champ, array('message_ok','message_erreur','editable'))) {
 			if ($dispo AND (($v = _request($champ))!==NULL))
 				$valeurs[$champ] = $v;
+			// nettoyer l'url des champs qui vont etre saisis
 			if ($action)
 				$action = parametre_url($action,$champ,'');
-			// nettoyer l'url des champs qui vont etre saisis
 			// proteger les ' et les " dans les champs que l'on va injecter
 			$valeurs[$champ] = protege_champ($valeurs[$champ]);
 		}
@@ -226,8 +278,9 @@ function formulaire__charger($form, $args, $poste)
 }
 
 /**
- * Verifier que le formulaire en cours est celui qui est poste
- * on se base sur la fonction identifier (si elle existe) qui fournit
+ * Vérifier que le formulaire en cours est celui qui est poste
+ * 
+ * On se base sur la fonction identifier (si elle existe) qui fournit
  * une signature identifiant le formulaire a partir de ses arguments
  * significatifs
  *
