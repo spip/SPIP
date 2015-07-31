@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_once(_DIR_CONNECT . 'ldap.php');
 
 // Authentifie via LDAP et retourne la ligne SQL decrivant l'utilisateur si ok
 

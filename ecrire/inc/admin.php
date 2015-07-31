@@ -59,12 +59,12 @@ function admin_verifie_session($script) {
 	include_spip('base/abstract_sql');
 	$pref = sprintf("_%d_",$GLOBALS['auteur_session']['id_auteur']);
 	$signal = fichier_admin($script, "$script$pref");
-	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
-	if (!$row) {
+	$valeur = sql_getfetsel('valeur', 'spip_meta', "nom='admin'");
+	if ($valeur === NULL) {
 		ecrire_meta('admin', $signal,'non');
 	} else {
-		if (($s = $row['valeur']) != $signal) {
-			if (intval(substr($s, strpos($s,'_')+1))<>
+		if ($valeur != $signal) {
+			if (intval(substr($valeur, strpos($valeur,'_')+1))<>
 			    $GLOBALS['auteur_session']['id_auteur']) {
 			  include_spip('inc/minipres');
 			  echo minipres(_T('info_travaux_texte'));
