@@ -83,7 +83,7 @@ function cherche_image_nommee($nom, $dossier) {
 	}
 }
 
-function taches_de_fond() {
+function taches_de_fond($use_cache) {
 	// Gestion des taches de fond ?  toutes les 5 secondes
 	// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 	if (!@file_exists('ecrire/data/cron.lock')
@@ -93,7 +93,7 @@ function taches_de_fond() {
 		if (!@file_exists('ecrire/data/mysql_out')
 		OR (time() - @filemtime('ecrire/data/mysql_out') > 300)) {
 			include_ecrire('inc_cron.php3');
-			spip_cron();
+			spip_cron($use_cache);
 		}
 	}
 

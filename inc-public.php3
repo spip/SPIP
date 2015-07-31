@@ -187,6 +187,6 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 		ecrire_caches_langues();
 	}
 
-	taches_de_fond();
+	taches_de_fond($page['naissance']);
 } // fin du defined
 ?>

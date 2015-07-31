@@ -55,7 +55,7 @@ function cron_archiver_stats($last_date) {
 //
 // La fonction de base qui distribue les taches
 //
-function spip_cron() {
+function spip_cron($use_cache) {
 	global $flag_ecrire, $dir_ecrire, $db_ok;
 
 	include_ecrire("inc_connect.php3");
@@ -155,7 +155,7 @@ function spip_cron() {
 	// Gerer l'indexation
 	//
 
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($use_cache  &&( lire_meta('activer_moteur') == 'oui')) {
 		if (timeout('indexation')) {
 		  spip_log('effectuer_une_indexation');
 			include_ecrire("inc_index.php3");
