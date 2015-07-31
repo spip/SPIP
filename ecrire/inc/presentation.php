@@ -694,6 +694,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act)
   return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
 }
 
+// http://doc.spip.org/@avoir_visiteurs
 function avoir_visiteurs() {
 
 	if ($GLOBALS['meta']["forums_publics"] == 'abo') return true;

@@ -50,6 +50,7 @@ function exec_auteurs_dist()
 	}
 }
 
+// http://doc.spip.org/@statut_min_redac
 function statut_min_redac($statut)
 {
   $x = !$statut OR strpos($statut, "0minirezo") OR strpos($statut, "1comite");
