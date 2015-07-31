@@ -12,7 +12,7 @@ $url_site = lire_meta('adresse_site');
 if (!$flag_js) {
 	// Rediriger vers la version Javascript-MD5, sauf pour Netscape < 6
 	echo "<script type=\"text/javascript\"><!--\n";
-	echo "if (!(navigator.appName == 'Netscape' && parseInt(navigator.appVersion) <= 4)) ";
+//	echo "if (!(navigator.appName == 'Netscape' && parseInt(navigator.appVersion) <= 4)) ";
 	echo "window.location.href = \"login.php3?flag_js=1\";\n";
 	echo "// --></script>\n";
 }

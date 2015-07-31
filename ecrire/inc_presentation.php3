@@ -1605,7 +1605,7 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 </style>
 </head>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" onLoad="document.forms[0].elements[1].focus();">
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
 <br><br><br>
 <center>
