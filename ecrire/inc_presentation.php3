@@ -260,7 +260,7 @@ function afficher_icone_texte($url, $texte, $image, $largeur, $hauteur, $align =
 	if ($align) echo " align='$align'";
 	echo " cellspacing='0' cellpadding='10'>";
 	echo "<tr><td width='".floor($largeur * 2.0)."' align='center'>\n";
-	echo "\t<a class='icone' href=\"$url\"><font face='Verdana, Arial, Helvetica, sans-serif' size='1'>\n";
+	echo "\t<a class='icone' href=\"$url\"><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>\n";
 	echo "\t<img src='$image' border='0' alt='o' width='$largeur' height='$hauteur'><br>\n";
 	echo "\t<b>$texte</b></font></a>\n";
 	echo "\t</td></tr></table>\n";
@@ -963,12 +963,12 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	if ($spip_display == 1) {
 		if ($onglet_ref == $onglet){
 			echo "\n<td  class='iconeon' valign='middle'>";
-			echo "<font face='verdana,arial,helvetica,sans-serif' size=2 color='black'><b>$texte</b></font>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='black'><b>$texte</b></font>";
 			echo "</td>";
 		}
 		else {
 			echo "\n<td class='iconeoff' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\" valign='middle'>";
-			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a>";
+			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a>";
 			echo "</td>";
 		}
 	}
@@ -981,7 +981,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			echo "</td>";
 			}
 			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
-			echo "&nbsp; <font face='verdana,arial,helvetica,sans-serif' size=2 color='black'><b>$texte</b></font> &nbsp;";
+			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='black'><b>$texte</b></font> &nbsp;";
 			echo "</td>";
 		}
 		else {
@@ -990,7 +990,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			if (strlen($icone)>3){
 				echo "&nbsp; <img src='img_pack/$icone'  alt='o' border=0 align='middle'>";
 			}
-			echo "&nbsp; <a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
+			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
 			echo "</td>";
 		}
 	}
@@ -1090,7 +1090,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	} 
@@ -1104,7 +1104,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	}
@@ -1144,7 +1144,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
-			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td>";
 	}
@@ -1162,7 +1162,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
-			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td>";
 	}	
@@ -1214,7 +1214,7 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 	echo "</td></tr>";
 	if ($spip_display != 3){
 		echo "<tr><td background='' align='center'>";
-		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+		echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		echo "</td></tr>";
 	}
 	echo "</table>";
@@ -1261,7 +1261,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $important
 	echo "</td>";
 
 	echo "<td background='' align='left'>";
-	echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
+	echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
 	echo "</td></tr>";
 
 	echo "</table>";
@@ -1469,7 +1469,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2") {
-			echo "<font face='verdana,arial,helvetica,san-serif' size=1><b>Rechercher&nbsp;:</b></font><br>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>Rechercher&nbsp;:</b></font><br>";
 		}
 		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
 		echo "</form>";
@@ -1518,7 +1518,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 	echo "<td>   </td>";
 	echo "<td>";
-	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
+	echo "<font size=1 face='Verdana,Arial,Helvetica,sans-serif'>";
 		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid $couleur_claire; color: $couleur_claire'><b>interface compl&egrave;te</b></span>";
 		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
 	echo "</font>";
@@ -1537,7 +1537,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	
 		echo "\n<table cellpadding='0' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 		echo "<table cellpadding='0' background='' width='750'><tr width='750'><td>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		//echo propre("Vous travaillez actuellement sur les articles suivants; les autres participants &agrave; ce site sont invit&eacute;s &agrave; ne pas les modifier. Lorsque vous ne travaillez plus sur ces articles, pensez &agrave; l'indiquer ici en les &laquo;d&eacute;bloquant&raquo;.");
 		while ($row = @mysql_fetch_array($result)) {
 			$i++;
@@ -1563,7 +1563,7 @@ function gros_titre($titre, $ze_logo=''){
 	
 	echo "<div>";
 	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='o' border=0 align='middle'> &nbsp; ";
-	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='verdana,arial,helvetica,sans-serif' color='$couleur_foncee'><b>";
+	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='Verdana,Arial,Helvetica,sans-serif' color='$couleur_foncee'><b>";
 	echo propre("$titre");
 	echo "</b></font></span></div>\n";
 }
@@ -1655,17 +1655,17 @@ function debut_gauche($rubrique = "asuivre") {
 		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 		if ($rubrique == "messagerie") {
 			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
+			echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
 			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+			echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
 			if ($connect_statut == "0minirezo") {
 				echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
-				echo "<font color='#ff9900' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+				echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
 			}
 		}
 		
 		if ($flag_cadre) {
-			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 			if ($nb_connectes > 0) {
 				if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
 				echo "<b>Actuellement en ligne&nbsp;:</b>";
@@ -1701,22 +1701,22 @@ function debut_droite() {
 
 		if ($zappees) {
 			debut_cadre_enfonce();
-			gros_titre("Avertissement de sécurité");
+			gros_titre("Avertissement de s&eacute;curit&eacute;");
 			echo "<p>";
 
 			$link = new Link();
 			$link->addVar('secu', 'oui');
 			echo propre("<img src='img_pack/warning.gif' height='48' width='48' align='left'>".
-				"Le système vient de détecter qu'une autre connexion à votre nom existait. ".
-				"Conformément à vos [réglages de sécurité->".$link->getURL()."], cette connexion ".
-				"a été automatiquement supprimée. A l'avenir, n'oubliez cependant pas de vous ".
-				"déconnecter à la fin de chaque passage sur l'espace privé en utilisant le bouton ".
-				"prévu à cet effet dans l'interface.").aide('deconnect');
-			echo "<p>".propre("Si vous ne voulez plus que le système effectue cette vérification, vous ".
-				"devez modifier vos réglages de sécurité.");
+				"Le syst&egrave;me vient de d&eacute;tecter qu'une autre connexion &agrave; votre nom existait. ".
+				"Conform&eacute;ment &agrave; vos [r&eacute;glages de s&eacute;curit&eacute;->".$link->getURL()."], cette connexion ".
+				"a &eacute;t&eacute; automatiquement supprim&eacute;e. A l'avenir, n'oubliez cependant pas de vous ".
+				"d&eacute;connecter &agrave; la fin de chaque passage sur l'espace priv&eacute; en utilisant le bouton ".
+				"pr&eacute;vu &agrave; cet effet dans l'interface.").aide('deconnect');
+			echo "<p>".propre("Si vous ne voulez plus que le syst&egrave;me effectue cette v&eacute;rification, vous ".
+				"devez modifier vos r&eacute;glages de s&eacute;curit&eacute;.");
 			echo "<div align='right'>";
 			echo $link->getForm('POST');
-			echo "<input type='submit' class='fondo' name='submit' value='Modifier vos réglages de sécurité'>\n";
+			echo "<input type='submit' class='fondo' name='submit' value='Modifier vos r&eacute;glages de s&eacute;curit&eacute;'>\n";
 			echo "</form></div>\n";
 
 			fin_cadre_enfonce();
@@ -1725,10 +1725,10 @@ function debut_droite() {
 		else if ($GLOBALS['secu'] == 'oui') {
 			debut_cadre_enfonce();
 			if ($securite == 'parano') {
-				gros_titre("Type de connexion&nbsp;: sécurité avancée");
+				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; avanc&eacute;e");
 			}
 			else
-				gros_titre("Type de connexion&nbsp;: sécurité normale");
+				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; normale");
 			echo "<p>";
 
 			if ($securite == 'parano') {
@@ -1736,41 +1736,41 @@ function debut_droite() {
 				$link->addVar('securite', 'normal');
 
 				echo propre("<img src='img_pack/warning.gif' height='48' width='48' align='left'>".
-					"Vous &ecirc;tes en mode de sécurité &laquo;{avancée}&raquo;. ".
+					"Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;{avanc&eacute;e}&raquo;. ".
 					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n\n\n\n".
 					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
-					"sans être automatiquement déconnecté.\n".
+					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
 					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes ".
 					"(utile en cas de d&eacute;monstration de SPIP, ou d'auteur collectif).\n\n\n".
-					"{{Grâce à ces limitations, la sécurité du système est renforcée.}} ".
-					"D'autre part, le système affichera un avertissement à chaque fois qu'une ".
-					"autre connexion que la vôtre est détectée (soit parce que vous ne vous êtes ".
-					"pas déconnecté la dernière fois, soit parce que quelqu'un a éventuellement ".
-					"réussi à se connecter à votre insu).\n\n\n\n".
-					"Notez que si vous désirez utiliser ".
-					"une des possibilités mentionnées ci-dessus, ".
-					"vous {{devez}} repasser à un mode de connexion normal.\n\n\n\n");
+					"{{Gr&acirc;ce &agrave; ces limitations, la s&eacute;curit&eacute; du syst&egrave;me est renforc&eacute;e.}} ".
+					"D'autre part, le syst&egrave;me affichera un avertissement &agrave; chaque fois qu'une ".
+					"autre connexion que la v&ocirc;tre est d&eacute;tect&eacute;e (soit parce que vous ne vous &ecirc;tes ".
+					"pas d&eacute;connect&eacute; la derni&egrave;re fois, soit parce que quelqu'un a &eacute;ventuellement ".
+					"r&eacute;ussi &agrave; se connecter &agrave; votre insu).\n\n\n\n".
+					"Notez que si vous d&eacute;sirez utiliser ".
+					"une des possibilit&eacute;s mentionn&eacute;es ci-dessus, ".
+					"vous {{devez}} repasser &agrave; un mode de connexion normal.\n\n\n\n");
 				echo "<div align='right'>";
 				echo $link->getForm('POST');
-				echo "<input type='submit' class='fondo' name='submit' value='Repasser en sécurité normale'>\n";
+				echo "<input type='submit' class='fondo' name='submit' value='Repasser en s&eacute;curit&eacute; normale'>\n";
 				echo "</form></div>\n";
 			}
 			else {
 				$link = new Link();
 				$link->addVar('securite', 'parano');
 
-				echo propre("Vous &ecirc;tes en mode de sécurité &laquo;{normal}&raquo;. ".
+				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;{normal}&raquo;. ".
 					"Cela veut dire que vous pouvez faire les choses suivantes :\n\n\n\n".
 					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
-					"sans être automatiquement déconnecté.\n".
+					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
 					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes ".
 					"(utile en cas de d&eacute;monstration de SPIP, ou d'auteur collectif).\n\n\n".
-					"En contrepartie, la sécurité du système n'est pas maximale. Si vous n'utilisez pas les ".
-					"possibilités mentionnées ci-dessus et que vous êtes extrêmement soucieux de votre sécurité, ".
-					"vous pouvez passer à un mode de connexion beaucoup plus strict.\n\n\n\n");
+					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. Si vous n'utilisez pas les ".
+					"possibilit&eacute;s mentionn&eacute;es ci-dessus et que vous &ecirc;tes extr&ecirc;mement soucieux de votre s&eacute;curit&eacute;, ".
+					"vous pouvez passer &agrave; un mode de connexion beaucoup plus strict.\n\n\n\n");
 				echo "<div align='right'>";
 				echo $link->getForm('POST');
-				echo "<input type='submit' class='fondo' name='submit' value='Passer en sécurité avancée'>\n";
+				echo "<input type='submit' class='fondo' name='submit' value='Passer en s&eacute;curit&eacute; avanc&eacute;e'>\n";
 				echo "</form></div>\n";
 			}
 
@@ -1820,7 +1820,7 @@ function fin_html() {
 	global $spip_version_affichee;
 ?>
 <blockquote><p>&nbsp;</p>
-<div align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
+<div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
 

@@ -579,7 +579,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo debut_block_invisible("virtuel");
 		if (strlen($virtuel) == 0) $virtuel = "http://";
 		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><P>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
 		echo "</font>";
 		echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
@@ -842,7 +842,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF' face='verdana,arialn,helvetica,sans-serif'>DATE DE CREATION DE L'ARTICLE";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'>DATE DE CREATION DE L'ARTICLE";
 		echo " : <B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TR>";
 		echo "</TABLE>";
 	

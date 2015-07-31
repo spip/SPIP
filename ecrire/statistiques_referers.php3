@@ -39,7 +39,7 @@ if ($connect_statut != '0minirezo') {
 
 //////
 
-	echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 
 
 		echo "<ul>";

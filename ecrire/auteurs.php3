@@ -212,7 +212,7 @@ echo "</tr>\n";
 
 if ($nombre_auteurs > $max_par_page) {
 	echo "<tr bgcolor='white'><td colspan=5>";
-	echo "<font face='verdana,arial,helvetica,sans-serif' size=1>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 		if ($j > 0) echo " | ";
 
@@ -234,7 +234,7 @@ if ($nombre_auteurs > $max_par_page) {
 	if ($tri == 'nom' OR !$tri) {
 		// affichage des lettres
 		echo "<tr bgcolor='white'><td colspan=5>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		while (list($key,$val) = each($lettre)) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
@@ -249,7 +249,7 @@ if ($nombre_auteurs > $max_par_page) {
 	$debut_prec = max($debut - $max_par_page,0);
 	if ($debut > 0) {
 		echo "<tr bgcolor='white'><td colspan=5>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo "<a href='$myretour&debut=$debut_prec'><<<</a>";
 		echo "</font>";
 		echo "</td></tr>\n";
@@ -332,7 +332,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 $debut_suivant = $debut + $max_par_page;
 if ($debut_suivant < $nombre_auteurs) {
 		echo "<tr bgcolor='white'><td colspan=5>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	echo "<div align='right'><a href='$myretour&debut=$debut_suivant'>>>></a></div>";
 		echo "</font>";
 		echo "</td></tr>\n";

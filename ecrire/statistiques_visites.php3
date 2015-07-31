@@ -62,7 +62,7 @@ if ($connect_statut == '0minirezo') {
 
 	echo "<p>";
 	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	echo typo("Afficher les visites pour:");
 	echo "<ul>";
 	if ($id_article>0) {
@@ -243,7 +243,7 @@ if (count($log)>0){
 	echo "</td>";
 	echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
 	echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
-	echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "<td valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td height=15 valign='top'>";		
 		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
@@ -280,11 +280,11 @@ if (count($log)>0){
 		echo "<font face='arial,helvetica,sans-serif' size=1>(barres fonc&eacute;es :  dimanche / courbe fonc&eacute;e : &eacute;volution de la moyenne)</font>";
 		
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
-		echo "<td valign='top' width='50%'><font face='verdana,arial,helvetica'>";
+		echo "<td valign='top' width='50%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "maximum&nbsp;: $max";
 		echo "<br>moyenne&nbsp;: ".round($moyenne);
 		echo "</td>";
-		echo "<td valign='top' width='50%'><font face='verdana,arial,helvetica'>";
+		echo "<td valign='top' width='50%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "aujourd'hui&nbsp;: $visites_today";
 		echo "<br>total : $total_absolu";
 		echo "</td></tr></table>";		
@@ -300,7 +300,7 @@ if ($activer_statistiques_ref == "oui"){
 	$query = "SELECT * FROM spip_visites_referers WHERE type = '$page' ORDER BY visites DESC LIMIT 0,100";
 	$result = spip_query($query);
 	
-	echo "<p><font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	while ($row = mysql_fetch_array($result)) {
 		$referer = $row['referer'];
 		$visites = $row['visites'];

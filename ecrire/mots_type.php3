@@ -57,13 +57,13 @@ echo "<tr width='100%'>";
 
 
 echo "<td width='100%' valign='top'>";
-echo "<font face='verdana,arial,helvetica' size=1><b>GROUPE DE MOTS :</b><br></font>";
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>GROUPE DE MOTS :</b><br></font>";
 gros_titre($type);
 echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){
 	$type=htmlspecialchars(urldecode($type));
-	echo "<p><font face='verdana,arial,helvetica'>";
+	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<FORM ACTION='mots_tous.php3' METHOD='post'>\n";
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
