@@ -89,14 +89,14 @@ function spip_pg_select($select, $from, $where,
 	  spip_log("SPIP-PG ne sait pas traduire HAVING $having"); # a revoir
 	  $having ='';
 	}
-	$q =  spip_pg_nocast($select) .
+	$q =  spip_pg_frommysql($select) .
 	  (!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_pg_select_as($from))))
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
-	  . ($orderby ? ("\nORDER BY " . spip_pg_nocast($orderby)) :'')
+	  . ($orderby ? ("\nORDER BY " . spip_pg_frommysql($orderby)) :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
 
@@ -136,27 +136,29 @@ function spip_pg_groupby($groupby, $from, $select)
 	}
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
-	$groupby = spip_pg_nocast($groupby);
+	$groupby = spip_pg_frommysql($groupby);
 	$groupby = preg_replace('/\s+AS\s+\w+/','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
 }
 
-// 0+x avec un champ x commencant par des chiffres est converti par MySQL
-// en le nombre qui commence x. PG ne sait pas faire, on elimine.
-// Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
-// Pour les operations sur date, on s'en sort pour les expressions d'un seul
-// niveau, mais c'est a generaliser.
+// Conversion des operateurs (parfois implicites) MySQL en PG
+// Quelques manques encore sur les dates et surtout Field
+// Et le 'as' du 'CAST' est en minuscule pour echapper au dernier preg_replace
+// de spip_pg_groupby, c'est pas top.
 
-// http://doc.spip.org/@spip_pg_nocast
-function spip_pg_nocast($arg)
+function spip_pg_frommysql($arg)
 {
 	if (is_array($arg)) $arg = join(", ", $arg);
 	$res = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$arg);
-	$res = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/', '\1', $res);
-	$res = preg_replace('/\b0[+]([^, ]+\b)/', '\1', $res);
 	if ($res != $arg)
 	  spip_log("SPIP-PG ne sait pas traduire $arg"); # a revoir
+	$res = preg_replace('/\b0[+]([^, ]+)\s*,\s*\1\b/',
+			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
+			    $res);
+	$res = preg_replace('/\b0[+]([^, ]+\b)/',
+			    'CAST(substring(\1, \'^ *[0-9]+\') as int)',
+			    $res);
 	$res = preg_replace('/DATE_SUB\s*[(]([^,]*),/', '(\1 -', $res);
 	$res = preg_replace('/DATE_ADD\s*[(]([^,]*),/', '(\1 +', $res);
 	$res = preg_replace('/INTERVAL\s+(\d+\s+\w+)/', 'INTERVAL \'\1\'', $res);
@@ -174,7 +176,7 @@ function spip_pg_nocast($arg)
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
-	  return spip_pg_nocast($v);
+	  return spip_pg_frommysql($v);
 
 	$op = str_replace('REGEXP', '~', array_shift($v));
 	if (!($n=count($v)))
@@ -259,7 +261,7 @@ function spip_pg_update($table, $exp, $where='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	pg_query($spip_pg_link, "UPDATE $table SET " . spip_pg_nocast($exp) .($where ? (" WHERE " . spip_pg_nocast($where)) : ''));
+	pg_query($spip_pg_link, "UPDATE $table SET " . spip_pg_frommysql($exp) .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
 }
 
 // http://doc.spip.org/@spip_pg_delete
@@ -269,7 +271,7 @@ function spip_pg_delete($table, $where='') {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	pg_query($spip_pg_link, "DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_nocast($where)) : ''));
+	pg_query($spip_pg_link, "DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
 }
 
 
