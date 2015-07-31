@@ -60,6 +60,15 @@ table.spip td {
 hr.spip { }
 b.spip { }
 i.spip { }
+blockquote.spip {
+	margin-left : 40px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	margin-right: 0px;
+	border : solid 1px #aaaaaa;
+	background-color: #ffffff;
+	padding: 5px;
+}
 
 .forml { width: 100% ; background-color: #FFDDAA;}
 
@@ -77,14 +86,6 @@ i.spip { }
 	padding: 5px;
 }
 
-.spip_quote {
-	margin-left : 40px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	border : solid 1px #aaaaaa;
-	background-color: #ffffff;
-	padding: 5px;
-}
 
 .spip_bouton { background-color: #FFCC00;}
 

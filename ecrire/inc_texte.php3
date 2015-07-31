@@ -827,8 +827,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 12 */	"\n<p class=\"spip\">",
 			/* 13 */	"<p class=\"spip\">",
 			/* 14 */	" ",
-			/* 15 */	"<div class=\"spip_quote\">",
-			/* 16 */	"</div>"
+			/* 15 */	"<blockquote class=\"spip\">",
+			/* 16 */	"</blockquote>"
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
