@@ -24,7 +24,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	_T('texte_article_statut') .
 	"</b>" .
 	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
-	"onchange=\"document.statut.src='" .
+	"onchange=\"this.nextSibling.nextSibling.src='" .
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
 	" setvisibility('valider_statut', 'visible');\">\n" .
