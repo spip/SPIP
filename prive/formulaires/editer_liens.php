@@ -154,13 +154,18 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 		if (_request('annuler_oups')
 			AND $oups = _request('_oups')
 			AND $oups = unserialize($oups)){
-			$objet_source = objet_type($table_source);
-			include_spip('action/editer_liens');
-			foreach($oups as $oup) {
-				if ($objet_lien==$objet_source)
-					objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
-				else
-					objet_associer(array($objet=>$oup[$objet]), array($objet_source=>$oup[$objet_source]),$oup);
+			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$oups_objets($oups);
+			}
+			else {
+				$objet_source = objet_type($table_source);
+				include_spip('action/editer_liens');
+				foreach($oups as $oup) {
+					if ($objet_lien==$objet_source)
+						objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
+					else
+						objet_associer(array($objet=>$oup[$objet]), array($objet_source=>$oup[$objet_source]),$oup);
+				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
 			set_request('_oups');
@@ -184,20 +189,25 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 		}
 
 		if ($supprimer){
-			include_spip('action/editer_liens');
-			$oups = array();
+			if ($supprimer_objets = charger_fonction("editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$oups = $supprimer_objets($supprimer);
+			}
+			else {
+				include_spip('action/editer_liens');
+				$oups = array();
 
-			foreach($supprimer as $k=>$v) {
-				if ($lien = lien_verifier_action($k,$v)){
-					$lien = explode("-",$lien);
-					list($objet_source,$ids,$objet_lie,$idl) = $lien;
-					if ($objet_lien==$objet_source){
-						$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
-						objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
-					}
-					else{
-						$oups = array_merge($oups,  objet_trouver_liens(array($objet_lie=>$idl), array($objet_source=>$ids)));
-						objet_dissocier(array($objet_lie=>$idl), array($objet_source=>$ids));
+				foreach($supprimer as $k=>$v) {
+					if ($lien = lien_verifier_action($k,$v)){
+						$lien = explode("-",$lien);
+						list($objet_source,$ids,$objet_lie,$idl) = $lien;
+						if ($objet_lien==$objet_source){
+							$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
+							objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+						}
+						else{
+							$oups = array_merge($oups,  objet_trouver_liens(array($objet_lie=>$idl), array($objet_source=>$ids)));
+							objet_dissocier(array($objet_lie=>$idl), array($objet_source=>$ids));
+						}
 					}
 				}
 			}
@@ -205,17 +215,22 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 		}
 		
 		if ($ajouter){
-			$ajout_ok = false;
-			include_spip('action/editer_liens');
-			foreach($ajouter as $k=>$v){
-				if ($lien = lien_verifier_action($k,$v)){
-					$ajout_ok = true;
-					list($objet1,$ids,$objet2,$idl) = explode("-",$lien);
-					if ($objet_lien==$objet1)
-						objet_associer(array($objet1=>$ids), array($objet2=>$idl));
-					else
-						objet_associer(array($objet2=>$idl), array($objet1=>$ids));
-					set_request('id_lien_ajoute',$ids);
+			if ($ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$ajout_ok = $ajouter_objets($ajouter);
+			}
+			else {
+				$ajout_ok = false;
+				include_spip('action/editer_liens');
+				foreach($ajouter as $k=>$v){
+					if ($lien = lien_verifier_action($k,$v)){
+						$ajout_ok = true;
+						list($objet1,$ids,$objet2,$idl) = explode("-",$lien);
+						if ($objet_lien==$objet1)
+							objet_associer(array($objet1=>$ids), array($objet2=>$idl));
+						else
+							objet_associer(array($objet2=>$idl), array($objet1=>$ids));
+						set_request('id_lien_ajoute',$ids);
+					}
 				}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
