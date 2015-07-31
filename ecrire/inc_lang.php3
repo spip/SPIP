@@ -211,6 +211,7 @@ function init_codes_langues() {
 	'dz' => "Bhutani",
 	'el' => "&#949;&#955;&#955;&#951;&#957;&#953;&#954;&#940;",
 	'en' => "English",
+	'en_hx' => "H4ck3R",
 	'eo' => "Esperanto",
 	'es' => "Espa&#241;ol",
 	'es_co' => "Colombiano",
