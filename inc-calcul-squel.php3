@@ -1050,8 +1050,14 @@ function applique_filtres ($fonctions, $code) {
 	if ($fonctions) {
 		while (list(, $fonc) = each($fonctions)) {
 			if ($fonc) {
+				$arglist = '';
+				if (ereg("([^{}]*){(.+)}$", $fonc, $regs)) {
+					$fonc = $regs[1];
+					if (trim($regs[2]))
+						$arglist = ','.$regs[2];
+				}
 				if ((!$flag_function_exists) OR function_exists($fonc))
-					$code = "$fonc($code)";
+					$code = "$fonc($code$arglist)";
 				else
 					$code = "'Erreur : filtre <b>&laquo; $fonc &raquo;</b> non d&eacute;fini'";
 			}
