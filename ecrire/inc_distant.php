@@ -51,29 +51,6 @@ function copie_locale($source, $mode='auto') {
 	return $local;
 }
 
-// fabrique une chaine HTTP pour un POST
-function buildQueryString($data, $munge_charset = false) {
-	$querystring = '';
-	
-	if (is_array($data)) {
-		// Change data in to postable data
-		foreach ($data as $key => $val) {
-			if (is_array($val)) {
-				foreach ($val as $val2) {
-					$querystring .= urlencode($key).'='.urlencode($val2).'&';
-				}
-			} else {
-				$querystring .= urlencode($key).'='.urlencode($val).'&';
-			}
-		}
-		$querystring = substr($querystring, 0, -1); // Eliminate unnecessary &
-	} else {
-		$querystring = $data;
-	}
-	
-	return $querystring;
-}
-
 function prepare_donnees_post($donnees, $boundary = '') {
 	if($boundary) {
 		// fabrique une chaine HTTP pour un POST avec boundary
