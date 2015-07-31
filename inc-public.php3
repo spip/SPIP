@@ -104,7 +104,7 @@ else {
 			include_local('inc-admin.php3');
 
 			// recuperer les parse errors etc.
-			$drapeau_erreur_page = false;
+			$tableau_des_erreurs = array();
 			if (function_exists('set_error_handler'))
 				set_error_handler('spip_error_handler');
 
@@ -115,12 +115,20 @@ else {
 		//
 		// Evaluer la page php
 		//
-		eval('?' . '>' . $page['texte']); // page 'php'
+		$s = eval('?' . '>' . $page['texte']); // page 'php'
 
 		// en cas d'erreur afficher un message + demander les boutons de debug
-		if ($drapeau_erreur_page) {
-			echo "<hr /><h2>".
+		if ($affiche_boutons_admin AND ($s === false
+		OR count($tableau_des_erreurs) > 0)) {
+			echo "<div style='position: absolute; z-index: 1000; background-color: pink;'><hr /><h2>".
 			_L("Erreur dans le squelette")." $fond.html</h2>";
+			echo "<p>"._L("php a rencontr&eacute; les erreurs suivantes :")."<code><ul>";
+			foreach ($tableau_des_erreurs as $err) {
+				echo "<li>ligne $err[2]: $err[1] ($err[0])</li>\n";
+			}
+			if ($s === false)
+				echo "<li>Erreur de compilation</li>\n";
+			echo "</ul></code></div>";
 			$GLOBALS['bouton_admin_debug'] = true;
 		}
 

@@ -263,10 +263,12 @@ function cherche_image_nommee($nom) {
 //
 // Leve un drapeau si le squelette donne une page generant de graves erreurs php
 //
-function spip_error_handler (&$errno, $errstr) {
-	global $drapeau_erreur_page;
-	if ($errno && (E_ERROR | E_WARNING | E_PARSE))
-		$drapeau_erreur_page = true;
+function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
+	global $tableau_des_erreurs;
+	if ($errno & (E_ERROR | E_WARNING | E_PARSE)) {
+		$tableau_des_erreurs[]
+		= array($errno, $errmsg, $linenum);
+	}
 }
 
 // La fonction ci-dessous permet a un script de flusher ses resultats partiels
