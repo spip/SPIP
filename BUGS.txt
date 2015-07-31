@@ -1,0 +1,82 @@
+BUGS
+===============================
+Ce fichier liste les bugs connus
+N'hesitez pas a les corriger !!
+===============================
+
+* Absence de contexte sur POST (réparation crado, à refaire proprement
+  en générant nous mêmes notre seul et unique tableau de globales $_REQUEST
+  (mais qui ne comprendrait pas les cookies)
+  cf. http://article.gmane.org/gmane.comp.web.spip.devel/19604/
+
+* inc_tidy fait peur par certains cotes :
+  http://thread.gmane.org/gmane.comp.web.spip.devel/19494
+
+* $xhtml fait planter les inclusions (car il ajoute les entetes <DOCTYPE> dessus)...
+
+
+Analyse des pages
+-----------------
+
+# - Bug ?  passage d'une chaine contenant un . dans un filtre ne marche pas ?
+http://thread.gmane.org/gmane.comp.web.spip.devel/18478
+
+
+Retour des pages
+----------------
+
+# les <inclure> avec $xhtml=oui renvoient deux fois les entetes html
+
+# bug surligne utf-8
+http://www.monde-diplomatique.fr/2002/11/COULIBALY/17147?var_recherche=Houpho
+
+
+Espace prive
+------------
+
+# bug liste des auteurs (Jacques Pyrat)
+  http://thread.gmane.org/gmane.comp.web.spip.devel/20697
+
+# les liens de traductions peuvent "voler" un article source ; et autres
+  approximations d'interface
+   http://thread.gmane.org/gmane.comp.web.spip.devel/20509
+   et http://thread.gmane.org/gmane.comp.web.spip.devel/20328
+
+- bug page mots : affiche des breves liées au mot, mais sans lister
+  (1|10|11....)
+
+
+
+Installation
+------------
+
+# a l'installation le charset est mal defini : impossible de s'enregistrer
+  avec un nom accentue sans craindre le ridicule (FranA@ois Schreuer)
+  http://thread.gmane.org/gmane.comp.web.spip.devel/20811
+
+
+
+Mode LTR (arabe, farsi, hebreu)
+------------------------------
+
+quelques remarques esthetiques sur l'interface RTL:
+
+- dans tout l'espace prive, il est preferable que la petite icone d'aide
+(l'image ?) soit en RTL.
+- dans la page article.php3, le texte de la description de l'article
+ainsi que les mentions: date de publication, auteurs, mots-cle et langue
+de l'article sont tous justifies en LTR.
+- dans les articles, les liens hypertextes apparaissent maintenant avec
+de petit triangles au debut du lien. Mais en RTL ces triangles ne
+changent pas, ils sont donc a la fin du lien et plus precisement sur le
+dernier mot du lien le rendant illisible.
+- dans la page du calendrier, il y a une icone qui affiche 3 mois
+consecutifs: les rectangles des mois de l'annee au dessus et au dessous
+sont trop serres et se chevauchent presque rendant les mois a peine
+lisibles.
+- dans la configuration du site, page du contenu du site,
+l'avertissement au debut chevauche l'icone car il y a un grand espace
+vide avant le texte.
+
+
+

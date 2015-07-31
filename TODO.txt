@@ -1,0 +1,463 @@
+TODO
+====
+
+Certains éléments de cette liste sont évidents, d'autres pas, d'autres de
+fausses pistes. Si vous vous lancez dans quelque chose, n'héistez pas en cas
+de doute ou de difficulté à en parler très tôt sur la liste spip-dev.
+Essayez de voir aussi dans les archives de la liste les discussions passées
+surle sujet.
+
+
+
+Espace privé
+------------
+
+# Diffs : propre(diff(a,b)) ou diff(propre(a), propre(b)) ?
+Dans le premier cas, si on modifie une formule de math ou un <cadre> on s'amuse... la seconde méthode serait plus clean, mais plus compliquée (??)
+http://thread.gmane.org/gmane.comp.web.spip.devel/18819
+
+# en mode "texte seul" (ABC) le bloc "supprimer le cookie de correspondance"
+  est affreusement laid
+
+# créer une bibliothèque de fonctions affichage/édition qui permette de
+  composer n'importe quelle page "objet" de l'esapce privé (articles.php3,
+  articles_edit.php3, etc). Factoriser le code redondant (la fonction
+  enfant() est un bon exemple !)
+
+# nettoyer l'espace privé en mode texte (lynx) ; il manque encore des alt
+
+# Lors de la création d'un nouvel auteur / nouveau mot-clé, avertir si
+  jamais il en existe déjà un ressemblant
+
+# La barre d'outils devrait être fonction de la langue de l'article et non
+  de celle de l'interface
+  (et, en croate, il faut des guillemets «»)
+  (et, en bulgare, il faut ajouter un bouton i-accent :
+   http://listes.rezo.net/archives/spip-trad/2004-08/msg00065.html
+
+
+Analyse du texte
+----------------
+
+# Finir le mode <math>, notamment:
+- proposer si le webmestre le souhaite une bascule TeX->MathML (attention aux contrinates xhtml), et à ce moment-là dans l'espace privé aussi (ecrire/mes_options.php3).
+http://article.gmane.org/gmane.comp.web.spip.devel/18930
+- passer en png transparent (probleme : avec tex2im ca fait un truc "baveux")
+
+-* le filtre reduire_image marche assez mal
+  (il ne marche que dans des cas très simples,
+  et s'emboite peu avec d'autres filtres, liens, etc.)
+  [-> http://search.gmane.org/search.php?query=reduire_image&group=gmane.comp.web.spip.devel ]
+
+-* exécution de code lors du calcul de page et non lors de l'appel de cache :
+   ajouter une syntaxe dédiée <PHP>....</PHP>. Le code est alors simplement
+   recopié dans le skel_machin.php3 généré, à l'endroit adéquat.
+
+-* Dans la fonction propre(), transformer automatiquement le texte
+   http://......  en lien (attention à ne pas déjà être dans un lien !)
+
+
+Taches de fond et moteur
+------------------------
+
+-* vérification des appels internes
+   (entre articles, d'article à document, etc.)   (Nicolas Hoizey)
+   et des URLs externes (liens [->] et urls de sites et de brèves)
+
+-* SPIP et les grosses bases de données :
+   problème avec un nb de rubriques imposant
+   => function calculer_dates_rubriques() ,
+   et tous les calculs d'arborescence complète. (c'est un peu mieux
+   maintenant)
+
+-* indexer les documents attachés
+
+-* Découper optimiser.php3 en plusieurs étapes
+
+-* moteur de recherche : accepter les demandes de "mots consecutifs" et de
+   mots -refuses ou +obligatoires (en bidouillant les scores affectes a
+   chaque mot ?)
+
+-* faire un vrai suivi de l'indexation
+
+-* méthode de conversion de charset lorsqu'on change le réglage
+
+-* spip-latex (il existe des maquettes à droite et à gauche :
+   faire un vrai truc puissant, complet et tout)
+
+-* à partir de spip-latex, sortir automatiquement la doc officielle 
+   et spip-contrib en PDF imprimable et beau (et avec un index et une table des matières)
+
+-* régler les problèmes de la sauvegarde (elle est partielle, buggue avec l'indexation,
+   ne contient pas les éléments nécessaire de spip_meta, est lente,
+   n'est pas SQL-compatible, etc.)
+
+-* Détecter les "Got error XX from table handler" de MySQL, et afficher le
+   le message correspondant : plus d'espace disque, etc. ?
+
+-* Possibilité d'uploader des fichiers XML pour créer / mettre à jour les articles.
+   Malheureusement, OpenOffice utilise le format zip, pas super supporté par
+   PHP...  Pour ça prévoir un uniqid pour chaque article, ce qui permet de
+   distinguer les nouveaux articles (à ajouter) des anciens (à modifier) ?
+
+-* abandon de la compatibilité php3 : on doit pouvoir optimiser/accélérer/alléger
+   le code en faisant appel à des constructions php4, des preg_match etc. aux
+   endroits cruciaux
+
+-* Trouver une API pour les "modules" ; notamment pour phpMonExplorateur
+   (adapté à SPIP par neoram), mais on peut aussi penser à un module de
+   gestion de mailing-listes, de modif en ligne des squelettes/css du site,
+   etc.
+
+-* on pourrait stocker dans spip_meta une valeur md5(organisation de la base),
+   qu'on validerait aisément pour détecter toute modif dans inc_serialbase,
+   amenant alors à une page disant "attention votre base ne correspond pas tout à fait
+   à sa description", et fournissant éventuellement les outils pour faire la modif ?
+
+-* normaliser toutes les dates (actuellement on a plein de formats différents)
+   et gérer le décalage horaire du serveur
+     Format pivot :  2004-08-07 13:12:08
+     car il se traite aussi bien en MySQL, en visuel, en php avec des
+     regexp, etc. -> il nous faut une petite libraire maison de gestion des
+     différences entre les dates
+
+
+Suggestions espace privé :
+--------------------------
+
+- Supprimer l'affichage affreux des numéros d'article partout dans l'espace privé
+
+George et Paolo :
+http://thread.gmane.org/gmane.comp.web.spip.devel/18188
+http://thread.gmane.org/gmane.comp.web.spip.devel/18198
+
+- le bloc "infos persos " sur la gauche est un peu vide (cookie de correspondance...), et très moche en display "sans icones".
+
+- afficher les notes de bas de page dans la messagerie interne.
+
+- pouvoir imprimer correctement depuis l'espace privé.
+
+- interface complète/simplifiée pose problème :
+* pas assez différentes
+* http://thread.gmane.org/gmane.comp.web.spip.devel/18815
+
+-* Mettre le nombre de messages du forum privé de chaque article de la
+   liste "Articles proposés" de "A suivre". Comme ca on voit d'un coup
+   d'oeil les contribs qui "vivent". (Gouarfig)
+
+-* Pouvoir désactiver plus de gadgets (calendrier, etc.)
+
+-* Que met-on dans la page principale ecrire/index.php3 ?
+   Là elle est toute vide, c'est perturbant ;
+   l'interface 1.7 était mieux de ce point de vue (liste des rubriques)
+
+-* ecrire/oo/ => bonne idée, mais le résultat est affreux
+   (trop de modes de consultation de l'espace privé, pas assez différenciés) ;
+   par ailleurs en visualisant l'espace privé sous lynx il y a beaucoup d'images pas commentées...
+
+-* améliorer le suivi des forums
+
+-* ecrire/brouteur.php3, si on active le mode mysql_debug :
+   Erreur dans la requête :
+   SELECT * FROM spip_rubriques WHERE id_rubrique= ORDER BY titre
+   => « You have an error in your SQL syntax. Check the manual that corresponds to
+   your MySQL server version for the right syntax to use near 'ORDER BY titre'  
+   at line 1 »
+
+-* neutraliser 'back' sur page de création d'objet (via uniqid)
+
+-* Karim Belkacem : pouvoir mettre en ligne ou en hors ligne des rubriques entières
+
+-* syndication à la main via bouton javascript pour ajouter des liens (comme
+   sur rezo.net)
+
+-* Suggestion de Pierre Dao-Duy :
+   Peut-on prévoir dans l'interface de configuration, de rendre la
+   confirmation de la pétition optionnelle ? Ceci permettrait de conserver
+   la fonctionnalité des pétitions même si, comme c'est souvent le cas chez
+   les providers gratuits, on ne peut pas envoyer d'emails.
+
+-* backporter le inc_cron du spip-lab
+
+
+Documents
+---------
+
+- Reecrire le code inc_documents qui comporte beaucoup trop de copier/coller et de hacks pour être possible à maintenir
+
+- Possibilité de mettre à jour un doc, de le partager, etc. de modifier
+  plusieurs légendes à la fois, de modifier un doc sans perdre ses modifs
+  sur le contenu de l'article qu'on est en train d'éditer...
+
+    --> pour cela il suffit d'ajouter automatiquement un lien
+        (id_article,id_document) lorsqu'un document est intégré dans
+  	un article ; "effacer" un document revient à supprimer ce lien.
+  	Ensuite une galerie permet de modifier un doc, de changer plein
+	de descriptifs d'un coup, de purger les documents oubliés, etc.
+
+- proposer une url-document moins "brute", qui mette un joli cadre HTML avec
+  des boucles autour du doc.
+
+- régler la "suppression des documents non utilisés" et autres
+
+- étendre la syntaxe : <doc32|left|titre de légende|texte de légende> ?
+
+-* Documents bis : configurer la taille maxi des docs uploadés, les
+   types de fichiers autorisés... dans la config précise.
+
+-* pas de suppression des docs attachés si on supprime un article
+
+-* un ptit bug quand on uploade un fichier PDF dont le nom contient un '/', il
+   se charge comme image de taille 0x0 pixels.
+   En fait ça veut dire deux bugs :
+   1) le nom
+   2) une image de 0x0 ne devrait pas être acceptée...
+
+-* chez certains hébergeurs on doit se passer du chmod 0777 et utiliser une
+   autre valeur : spip_loader sait faire, il faut installer le code dans la
+   fonction de création de répertoires.
+
+-* intercepter les chaines '<?xml' dans les squelettes et éviter des les
+   envoyer telles quelles dans l'eval()
+
+
+Autres bugs
+-----------
+
+- BUG: upgrade.php3 ne locke pas, et du coup on peut avoir deux process en train de faire de grosses manips sur les bases en même temps : danger !
+
+
+Notification
+-------------
+
+- Système de notification complet d'événements (via rss)
+http://thread.gmane.org/gmane.comp.web.spip.devel/18890
+
+- Jabber toujours : faire chatter les gens
+http://thread.gmane.org/gmane.comp.web.spip.devel/18809
+
+- possibilité de s'inscrire pour suivre les forums par notification
+
+- recevoir les avis de "nouveau message dans la messagerie", "dans le forum (privé) sous votre article", "nouveau site proposé", etc.
+
+Walk signalait que ça permettrait à un spip d'être plus animé. Il faudrait établir la liste complète des choses à signaler.
+
+-* Création de newsletter "nouveautés" : avec le nouveau compilo on récupère
+   la page, on peut donc faire des squelettes de newsletter tout à fait
+   normaux au lieu des horreurs phpiques actuelles (+ prévisulisation).
+
+-* idée de Tom Dissing ; page de prévisualisation de la lettre automatique (admins seulement) ;
+   ne pas trop cherche la complication : c'est probablement très très simple à faire,
+   INCLURE nouveautes et afficher la variable résultat....
+
+<?php
+  $fond = "nouveautes";
+  $delais = 24 * 3600;
+  include ("inc-public.php3");
+  /* ici vérifier le statut */
+  echo propre("<code>$mail_nouveautes</code>");
+?>
+
+
+Raccourcis
+----------
+
+- peut-être intégrer quelques raccourcis typo intéressants notamment [dsdqsd|www->....], et les tableaux enrichis
+http://thread.gmane.org/gmane.comp.web.spip.devel/16253
+
+
+En client-serveur
+-----------------
+
+* internationalisation de spip_loader
+
+* spip_loader pourrait-il enfin lire le zip ? (et du coup s'ouvrir sur le spip-cvs, etc)
+
+* telecharger liste des serveurs [math, et surtout orthographe] et gérer
+  plusieurs serveurs (si l'un tombe en panne, on le raie de la liste, etc.)
+
+
+Internationalisation et multilinguisme
+--------------------------------------
+
+- le @scb@ qui traine (cf Florent Jugla)
+	_T('breve') . ($contient_breves>1? 's':'');
+	à remplacer par ($contient_breves>1? _T('breves'):_T('breve'));
+
+-* A terme, si on pouvait arriver à extraire les chaînes qui apparaissent
+   sur le site public dans un autre fichier de langue, on aurait un énorme
+   avantage: permettre aux traducteurs de commencer par de "petites"
+   traductions (dates, formulaires de forums...). Ce qui facilitera la mise en
+   place d'un très large multilinguisme (la question de la langue de
+   l'interface privée étant un autre problème).
+
+-* adapter et simplifier le système de traduction en ligne de Florent pour
+   l'intégrer dans l'espace privé, de manière à éditer sans soucis le module
+   de langue 'local' (ps: restreindre l'accès à ce script aux admins et
+   admins restreints, qui seront bien souvent les traducteurs).
+
+-* proposer un module de langue 'public' contenant pas mal de chaînes
+   courantes sur les sites (pas trop non plus !), et sur lesquelles le
+   webmestre multilingue qui ne sait pas traduire dans toutes les langues
+   de SPIP pourra s'appuyer pour les trucs les plus courants.
+
+-* #MENU_LANG plus riche
+   [-> http://thread.gmane.org/gmane.comp.web.spip.devel/18386 ]
+
+
+
+Authentification
+----------------
+
+-* améliorer le choix automatique du login / permettre d'en changer ;
+   le mot de passe doit-il être forcé en ASCCI ?
+
+-* Simplifier le login : en absence de javascript proposer directement la
+   connexion en mode http_auth, sans faire le grand tour ?
+
+-* vérifier les entêtes http nécessaires pour la construction d'une page
+   if ($auteur_session) {} else { #LOGIN_PUBLIC }
+   (autrment dit, activer automagiquement $flag_dynamique)
+
+-* la fonction email_valide() serait bugguée (trop généreuse avec des adresses mal formées)
+   1) Au niveau syntaxique :  verifier la présence d'un TLD
+      on recoit beaucoup de machin@wanadoo (sans le .fr) par exemple!
+>>essayer ça dans function email_valide(...
+>>			// RFC 822
+>>			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)?$', trim($adresse)))
+>>				return false;
+>>			// presence obligatoire d'un @ et d'un .tld
+>>			if (!eregi('^[^()<>@,;:\\"/[:space:]]+@(([-_0-9a-z]+\.)+[-_0-9a-z]+)?$', trim($adresse)))
+>>				return false;
+   2) Au niveau Dns: vérifier le MX ou l'IP du host: C'est fait par:
+      // verifie le Mx d'un domaine...
+      // Si pas de Mx, la RFC 2821 impose de chercher l'IP du host.
+      function testMx($host){
+        if (getmxrr ( $host, $mx)) return true;
+          return (gethostbyname($host)!=$host);
+      }
+      (note : pas sûr que ça soit une bonne idée de faire ça, et surtout pas à chaque fois)
+
+-* auteurs ldap => pas de rappel de mot de passe
+
+-* ne pas créer de login trop court lors de la demande automatique
+
+-* le controle de l'échec cookie pourrait être plus intelligent
+
+
+
+Squelettes et design
+--------------------
+
+-* intégrer divers patches w3c-niania.
+
+-* intégrer modifs W3C de Yannick Patois (mail du 17 juin 2004)
+
+-* Faire de nouveaux squelettes par défaut, plus beaux, plus modulaires
+   (passer le forum et la pétition en INCLURE, par exemple) ;
+   pour la pétition, dès qu'elle devient grosse elle est mal foutue ;
+   or en général à ce moment-là on n'a pas le temps de s'en occuper :
+   faire une page petition.html spécifique
+
+-* Il manque les conditionnelles ("pas d'article à cette adresse") dans les
+   squelettes par défaut ; rendre une page vide, c'est pas top, on devrait
+   peut-être ajouter un <include(404.php3)>.
+
+
+Compilateur et BOUCLES
+----------------------
+
+-* Ajout d'un #WIKI lié à l'article, qui soit double-clicable
+   (en option : pour les connectés ?) et modifiable, et versionné
+
+-* Dans les squelettes, plus grande souplesse dans l'utilisation des
+   minuscules et des majuscules.
+
+-* Gregory Fabre : un critère pour le coupage de boucle par "tranches" de
+   résultats (par exemple dans le moteur de recherches), avec d'éventuels
+   tags [page suivante] [précédente]
+
+-* Gestion multipages() dans l'espace public
+   [Attention: compliqué si on veut que les notes tombent bien etc.]
+
+-* interaction bizarre #FORMULAIRE_ECRIRE_AUTEUR et extras ??
+   [-> http://thread.gmane.org/gmane.comp.web.spip.devel/18384 ]
+   Et l'affichage conditionnel ne marche pas [toto(#FORMULAIRE_ECRIRE_AUTEUR)]
+
+-* incoherence ?
+   [-> http://article.gmane.org/gmane.comp.web.spip.user/39098 ]
+   qu'en dit le nouveau compilo ?
+
+
+Nouvelles fonctionalités
+------------------------
+
+-* mots-clés "automatiques" créés ou apposés aux articles en fonction de leur contenu
+   (fonctionne sur rezo.net, mais très spécifique) ;
+   interface "suggérer les mots".
+
+-* Remplacer {par num titre} par un champ "rang" avec une
+   interface sympa pour faire monter/descendre des articles ?
+
+-* Réfléchir au contrôle social induit par le suivi des modifications : comment redonner
+   à chacun sa liberté tout en profitant de cet outil éditorial indispensable?
+   [-> http://thread.gmane.org/gmane.comp.web.spip.devel/18913 ]
+
+-* Indexer les articles syndiqués (titre auteur descriptif)
+
+-* Proposer un système de purge des anciens titres des articles syndiqués
+
+-* mettre un alt='x' sur les logos d'articles
+
+
+VARIA
+=====
+
+-* petite tartine d'infos de version + copyright au début de tous les
+   fichiers
+
+-* passer son site en utf-8 : insister :-)
+
+
+SPIP.NET
+--------
+
+Faire une vraie belle zone de téléchargement (référence : www.adiumx.com)
+
+On dit qu'il y a un bug dans la doc page http://www.spip.net/fr_article898.html
+
+* documenter les variables de personnalisation qui ne le sont pas
+  (ligne_horizontale, nombre_surligne...) + la fonction introduction(...)
+
+
+-* monter un systeme d'archivages des listes de listes.rezo.net avec un
+   moteur de recherche serieux (gmane a de la pub)
+
+   Les critères mini sont :
+   -** cache local des messages
+   -** indexation du contenu et moteur de recherche performant
+   -** design correct
+   -** gestion des threads.
+
+   Critère supplémentaire :
+   -** passerelle NNTP (newsgroup)
+
+   Il existe deja un acces IMAP lecture seule aux archives, pour ceux qui
+   voudraient faire des essais => fil@rezo.net
+
+-* Preserver notre mascotte
+   [-> http://www.waternunc.com/fr2004/dgEeu103_2004.htm ]
+   [-> http://images.google.com/images?q=Pteromys%20volans ]
+
+* Passer l'aide en ligne "en ligne", avec un cache et tout ça (et s'assurer
+  que ça fonctionne aussi hors-ligne pour l'aide d'installation)
+
+
+CONTRIBS ?
+----------
+
+* couche SQL dans spip_query() sachant traduire les commandes MySQL vers
+  SQLite (au moins)
+
+
+
