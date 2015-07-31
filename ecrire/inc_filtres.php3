@@ -654,10 +654,29 @@ function date_iso($date_heure) {
 // Fonctions graphiques
 //
 
+function extraire_fichier($img) {
+	if (eregi("img src=['\"]([^'\"]+)['\"]", $img, $regs)) $logo = $regs[1];
+	if (!$logo) $logo = $img;
+	return $logo;
+}
+
 function reduire_image($img, $taille = 120, $taille_y=0) {
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
-	return reduire_image_logo($img, $taille, $taille_y);
+	
+	if (eregi("onmouseover=\"this\.firstChild\.src=\'([^']+)\'\"", $img, $match)) {
+		$mouseover = extraire_fichier(reduire_image_logo($match[1], $taille, $taille_y));
+	}
+	
+	$image = reduire_image_logo($img, $taille, $taille_y);
+	
+	if ($mouseover) {
+		$mouseout = extraire_fichier($image);
+		return "<div onmouseover=\"this.firstChild.src='$mouseover'\""
+		." onmouseout=\"this.firstChild.src='$mouseout'\">"
+		.$image."</div>";
+	}
+	else return $image;
 }
 
 function largeur($img) {

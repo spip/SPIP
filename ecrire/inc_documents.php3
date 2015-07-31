@@ -256,11 +256,16 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 	else $alt = " alt='document $id_document'";
 
-	$vignette = "<img src='$url_fichier_vignette' style='border-width: 0px;'" .
+	if ($mode == 'document') {
+		$a_href = "<a href='$url_fichier'>";
+		$a_fin = "</a>";
+	}
+
+	$vignette = "$a_href<img src='$url_fichier_vignette' style='border-width: 0px;'" .
 	  (($largeur_vignette && $hauteur_vignette) ?
 		" width='$largeur_vignette' height='$hauteur_vignette'" :
 	   "")
-	  . "$alt />" 
+	  . "$alt />$a_fin" 
 	  . (($type_aff != 'DOC') ? "" :
 	     ((!$titre ? "" : "<div class='spip_doc_titre'><strong>$titre</strong></div>") .
 	      (!$descriptif ? "" : "<div class='spip_doc_descriptif'>$descriptif</div>")));
@@ -269,15 +274,23 @@ function integre_image($id_document, $align, $type_aff) {
 		if ($type = @spip_fetch_array(spip_query("SELECT titre FROM spip_types_documents WHERE id_type=$id_type")))
 		  $type = $type['titre'];
 		else	$type = 'fichier';
-		$vignette = "<a href='$url_fichier'>$vignette</a>"
+		$vignette = "$vignette"
 		  . "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
 	}
 
+	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>
+	if ($align == 'center' OR $type_aff =='DOC') {
+		$span = "div";
+	} else {
+		$span = "span";
+	}
+	if ($align != 'center') $float = "float: $align;";
+	
 	return 
-	  ("<span class='spip_documents spip_documents_$align'" .
+	  ("<$span class='spip_documents spip_documents_$align' style='$float" .
 	   ((($align == 'center') ||  ($type_aff != 'DOC'))  ?  "" :
-	    (" style='width: " . (($largeur_vignette > 120) ? $largeur_vignette : 120) . "px;'")) .
-	   ">" . $vignette . "</span>\n");
+	    ("width: " . (($largeur_vignette > 120) ? $largeur_vignette : 120) . "px;")) .
+	   "'>" . $vignette . "</$span>\n");
 }
 
 //
