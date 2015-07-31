@@ -1257,7 +1257,7 @@ Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte a
 'texte_actualite_site_2' => 'interfaz completa',
 'texte_actualite_site_3' => '&raquo; que tiene a&uacute;n m&aacute;s posibilidades.',
 'texte_admin_effacer_01' => 'Este comando borra <i>TODO</i>  el contenido de la base de datos, redactoras y administradores inclu&iacute;dos. Despu&eacute;s de ejecutarlo tendr&aacute;s que volver a instalar SPIP, creando una nueva base al igual que un primer acceso de administraci&oacute;n.',
-'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de seguridad de la base  en un fichero que se guardar&aacute; en el directorio <i>ecrire/data/</i>.
+'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de seguridad de la base en un fichero que se guardar&aacute; en el directorio <i>ecrire/data/</i>.
 No olvides igualmente recuperar la totalidad del directorio <i>IMG/</i>, que contiene las im&aacute;genes utilizadas en los art&iacute;culos y las secciones.',
 'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de respaldo S&Oacute;LO PODR&Aacute; ser restaurada en un sitio que utiliza LA MISMA versi&oacute;n de SPIP. Un error corriente es vaciar la base antes de hacer una actualizaci&oacute;n. Para m&aacute;s detalles consulta la <a href="http://www.spip.net/fr_article1489.html">documentaci&oacute;n de SPIP (a&uacute;n s&oacute;lo en franc&eacute;s)</a>.',
 'texte_admin_tech_03' => 'Puedes comprimir la copia de seguridad y as&iacute; facilitar la transferencia hacia tu ordenador, aparte de ganar espacio en el disco.',
@@ -1282,7 +1282,7 @@ No olvides igualmente recuperar la totalidad del directorio <i>IMG/</i>, que con
 'texte_compresse_ou_non' => '(comprimido o no)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
-'texte_config_groupe_mots_cles' => '&iquest;Dese&aacute;is activar la configuraci&oacute;n precisa de las palabras clave y permitir que se pueda, por ejemplo, seleccionar solamente una palabra por grupo o declarar un grupo importante?',
+'texte_config_groupe_mots_cles' => '&iquest;Deseas activar la configuraci&oacute;n precisa de las palabras clave y permitir que se pueda, por ejemplo, seleccionar solamente una palabra por grupo o declarar un grupo importante?',
 'texte_connexion_mysql' => 'Consulta las informaciones facilitadas por tu proveedor de hospedaje: debes encontrar, si tu proveedor soporta MySQL, los c&oacute;digos de conexi&oacute;n al servidor MySQL.',
 'texte_contenu_article' => '(Contenido del art&iacute;culo en pocas palabras)',
 'texte_contenu_articles' => 'Seg&uacute;n el dise&ntilde;o de tu sitio, puedes seleccionar aqu&iacute; los elementos a utilizar.',

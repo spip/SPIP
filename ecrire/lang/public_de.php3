@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil_site' => 'Startseite',
 'articles' => 'Artikel',
 'articles_auteur' => 'Artikel dieses Autors',
-'articles_populaires' => 'Die beliebtesten Artikie',
+'articles_populaires' => 'Die beliebtesten Artikel',
 'articles_recents' => 'Die neuesten Artikel',
 'articles_rubrique' => 'Artikel dieser Rubrik',
 'aucun_article' => 'Unter dieser Adresse gibt es keinen Artikel.',
@@ -83,7 +83,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => 'von ',
 'participer_site' => 'Sie k&ouml;nnen bei dieser Website mitmachen, wenn Sie sich anmelden. Sie erhalten sofort eine E-Mail mit den Zugangsdaten zum Redaktionssystem.',
-'plan_du_site' => 'Sitemap',
 'plan_site' => 'Sitemap',
 'popularite' => 'Beliebtheit',
 'poster_message' => 'Nachricht senden',
@@ -94,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_breve' => 'auf diese Meldung antworten',
 'repondre_message' => 'auf diese Nachricht antworten',
 'resultats_recherche' => 'Suchergebnis(se)',
-'retour_debut_forums' => 'ZUr&uuml;ck zum Beginn des Forums',
+'retour_debut_forums' => 'Zur&uuml;ck zum Beginn des Forums',
 'rubrique' => 'Rubrik',
 'rubriques' => 'Rubriken',
 
@@ -116,7 +115,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Online ansehen'
+'voir_en_ligne' => 'Online ansehen',
+
+
+// PLUS_UTILISE
+'plan_du_site' => 'Sitemap'
 
 );
 

@@ -159,10 +159,6 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 
 // C
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
-'calendrier_synchro_lien' => '-vide-',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -1626,7 +1622,14 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)'
+'trad_reference' => '(article de referen&ccedil;a)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => '-vide-',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)'
 
 );
 
