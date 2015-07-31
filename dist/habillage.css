@@ -42,7 +42,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #page {
 	width: 48em;
 	text-align: left;
-	left: 0; 
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -207,8 +206,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-size: 0.82em;
 	font-weight: bold; }
 	
-.texte { color: #000; }
-.texte *{ font-size: 1em; }
+.texte { color: #000; font-size: 1em; }
+/*.texte *{ font-size: 1em; }*/
 
 .ps, .notes {
 	margin-top: 1.4em;
@@ -238,9 +237,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #documents_joints {
 	margin-top: 1.4em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC;
-	font-size: 0.88em; }
-#documents_joints h2 { margin-bottom: 0.4em; font-weight: bold; }
+	border-top: 2px solid #CCCCCC; }
+#documents_joints h2 { margin-bottom: 0.4em; font-weight: bold; font-size: 0.88em; }
 #documents_joints li { margin-bottom: 0.4em; }
 #documents_joints li .spip_doc_titre { text-align: left; }
 #documents_joints li .spip_doc_titre small { font-weight: normal; }
@@ -249,7 +247,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
-.extrait { margin-bottom: 1em; /*padding-top: 0.3em;*/ }
+.extrait { margin-bottom: 1em; }
 
 .extrait .titre { 
 	font-size: 1.03em; 

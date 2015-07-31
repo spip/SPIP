@@ -52,7 +52,7 @@ table.spip {
 	margin-bottom: 1em;
 	border: 1px solid;
 	border-collapse: collapse;
-	font-size: 0.70em; }
+	font-size: 0.71em; }
 table.spip caption {
 	caption-side: top; /* bottom pas pris en compte par IE */
 	text-align: center;
@@ -72,8 +72,8 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_documents_center { width: 100%; margin: auto; text-align: center; }
 .spip_documents_left { float: left; margin-right: 15px; text-align: left; }
 .spip_documents_right { float: right; margin-left: 15px; text-align: right; }
-.spip_doc_titre { text-align: center; font-weight: bold; font-size: 0.88em; }
-.spip_doc_descriptif { clear: both; font-size: 0.70em; }
+.spip_doc_titre { text-align: center; font-weight: bold; font-size: 0.77em; }
+.spip_doc_descriptif { clear: both; font-size: 0.71em; }
 
 /* *  Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: dist/win_width.htc; }
@@ -91,7 +91,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .formulaire_spip {
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 0.70em; }
+	font-size: 0.77em; }
 
 .formulaire_spip fieldset, .spip_encadrer {
     display: block;
