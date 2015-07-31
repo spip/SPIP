@@ -181,7 +181,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		  $spip_lang .
 		  "' />")) .
 
-		((($options == "avancees" AND $articles_surtitre) OR $surtitre)?
+		(!(($options == "avancees" AND $articles_surtitre) OR $surtitre)?
 			("<input type='hidden' name='surtitre' value=\"$surtitre\" />") :
 			( "<b>" .
 			  _T('texte_sur_titre') .
