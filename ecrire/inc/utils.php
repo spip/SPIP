@@ -146,7 +146,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
 	  . ($logname)
-	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logname);
+	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logsuf);
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
