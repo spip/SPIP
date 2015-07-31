@@ -31,10 +31,12 @@ function balise_LOGO__dist ($p) {
 		$_id_objet = "\"'0'\"";
 		$id_objet = 'id_syndic'; # parait faux mais donne bien "siteNN"
 	} else {
-		if ($type_objet == 'SITE')
-			$id_objet = "id_syndic";
-		else
+		if (in_array($suite_logo, array('', '_NORMAL', '_SURVOL', '_RUBRIQUE'))) {
 			$id_objet = "id_".strtolower($type_objet);
+			if ($id_objet == 'id_site') $id_objet = "id_syndic"; # correction
+		}
+		else
+			$id_objet = "id_".strtolower($type_objet.$suite_logo);
 		$_id_objet = champ_sql($id_objet, $p);
 	}
 
