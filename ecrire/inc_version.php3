@@ -150,6 +150,12 @@ $champs_extra_proposes = false;
 $ignore_auth_http = false;
 $ignore_remote_user = false;
 
+// serveurs externes
+$spip_server = array (
+	'math' => 'http://math.spip.org/tex.php',
+	'ortho' => 'http://ortho.spip.net/ortho_serveur.php'
+);
+
 //
 // *** Fin du parametrage ***
 //

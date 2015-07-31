@@ -587,6 +587,7 @@ function post_autobr($texte, $delim="\n_ ") {
 	return $texte;
 }
 
+
 //
 // Gestion des blocs multilingues
 //
@@ -666,6 +667,40 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 	}
 
 	return $texte;
+}
+
+//
+// Gestion du raccourci <math>...</math> en client-serveur
+//
+function image_math($tex) {
+	// Regarder dans le repertoire local des images TeX
+	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';
+	if (!@is_dir($dir))
+		@mkdir ($dir);
+	$fichier = "$dir/".md5(trim($tex)).'.png';
+
+	if (!@file_exists($fichier)) {
+		// Aller chercher l'image sur le serveur
+		if ($server = $GLOBALS['spip_server']['math']) {
+			spip_log($url = $server.'?'.urlencode($tex));
+			include_ecrire('inc_sites.php3');
+			if ($image = recuperer_page($url)) {
+				if ($f = @fopen($fichier, 'w')) {
+					@fwrite($f, $image);
+					@fclose($f);
+				}
+			}
+		}
+	}
+
+	// Composer la reponse selon presence ou non de l'image
+	$tex = entites_html($tex);
+	if (@file_exists($fichier)) {
+		list(,,,$size) = @getimagesize($fichier);
+		$alt = "alt=\"$tex\" title=\"$tex\""; 
+		return "<img src=\"$fichier\" align=\"middle\" $size $alt />";
+	} else
+		return "<tt><span class='spip_code' dir='ltr'>$tex</span></tt>";
 }
 
 ?>
