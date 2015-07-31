@@ -80,8 +80,21 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 // en une EXPRESSION php (qui peut etre l'argument d'un Return ou la
 // partie droite d'une affectation). Ici sont analyses les elements
 // multilingues des squelettes : <:xxx:> et <multi>[fr]coucou</multi>
+// ainsi que les liens vers des fichiers appelant un chemin (./fichier#)
 //
 function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
+	//
+	// Facile : les liens fichiers (./xxxxx.css# -> chemin/xxxxx.css)
+	//
+	if (preg_match_all('@[.]/([^[[:space:]#<>"$\']+)[#]@',
+	$texte, $matches, PREG_SET_ORDER)
+		foreach ($matches as $r)
+			if ($fichier = find_in_path($r[1]))
+				$texte = str_replace ($r[0], $fichier, $texte);
+
+	//
+	// Plus difficile : les elements multilingues
+	//
 	$code = "'".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
 
 	// bloc multi
