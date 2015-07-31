@@ -29,12 +29,15 @@ function spip_query($query) {
 // (utilise pour les modifs de la base de donnees)
 //
 
-$spip_version = 1.416; // version de la base
+// version de la base
+$spip_version = 1.416;
 
-// dernier tag connu ou date si cvs
-if (! ereg('Name: v(.*) ','$Name$', $regs))
-	ereg('(20../../.. ..:..:..)', '$Id$', $regs);
-$spip_version_affichee = $regs[1];
+// version de spip
+// (mettre a jour a la main et conserver la mention "cvs")
+$spip_version_affichee = "1.4 beta 9 cvs";
+
+// version de spip / tag
+if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 
 
 //
