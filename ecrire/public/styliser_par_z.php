@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2010                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction Page automatique a partir de contenu/xx
@@ -26,6 +26,8 @@ function public_styliser_par_z_dist($flux){
 	static $apl_constant;
 	static $page;
 	static $disponible = array();
+	static $echaffauder;
+	static $prepend = "";
 
 	if (!isset($prefix_path)) {
 		$z_blocs = z_blocs(test_espace_prive());
@@ -35,6 +37,7 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_ECRIRE_AJAX_PARALLEL_LOAD';
 			$page = 'exec';
 			$echaffauder = ""; // pas d'echaffaudage dans ecrire/ pour le moment
+			define('_ZCORE_EXCLURE_PATH','');
 		}
 		else {
 			$prefix_path = "";
@@ -42,12 +45,14 @@ function public_styliser_par_z_dist($flux){
 			$apl_constant = '_Z_AJAX_PARALLEL_LOAD';
 			$page = _SPIP_PAGE;
 			$echaffauder = charger_fonction('echaffauder','public',true);
+		  define('_ZCORE_EXCLURE_PATH','squelettes-dist|prive');
 		}
+	  $prepend = (defined('_Z_PREPEND_PATH')?_Z_PREPEND_PATH:"");
 	}
 	$z_contenu = reset($z_blocs); // contenu par defaut
 
 	$fond = $flux['args']['fond'];
-	if (strncmp($fond,$prefix_path,$prefix_length)==0) {
+	if ($prepend OR strncmp($fond,$prefix_path,$prefix_length)==0) {
 		$fond = substr($fond, $prefix_length);
 		$squelette = $flux['data'];
 		$ext = $flux['args']['ext'];
@@ -59,15 +64,22 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs) // verifier deja qu'on est dans un bloc Z
 			AND in_array($dir,explode(',',constant($apl_constant))) // et dans un demande en APL
-			AND $pipe = z_trouver_bloc($prefix_path,$dir,'z_apl',$ext) // et qui contient le squelette APL
+			AND $pipe = z_trouver_bloc($prefix_path.$prepend,$dir,'z_apl',$ext) // et qui contient le squelette APL
 			){
 			$flux['data'] = $pipe;
 			return $flux;
 		}
 
-		// surcharger aussi les squelettes a la racine venant de squelettes-dist/
-		if (preg_match(',squelettes-dist/[^/]+$,',$squelette))
+		// surcharger aussi les squelettes venant de squelettes-dist/
+		if ($squelette AND !z_fond_valide($squelette)){
 			$squelette = "";
+		  $echaffauder = "";
+		}
+	  if ($prepend){
+		  $squelette = substr(find_in_path($prefix_path.$prepend."$fond.$ext"), 0, - strlen(".$ext"));
+	    if ($squelette)
+		    $flux['data'] = $squelette;
+	  }
 
 		// gerer les squelettes non trouves
 		// -> router vers les /dist.html
@@ -75,18 +87,18 @@ function public_styliser_par_z_dist($flux){
 		if (!$squelette){
 
 			// si on est sur un ?page=XX non trouve
-			if ($flux['args']['contexte'][$page] == $fond OR $flux['args']['contexte']['type'] == $fond) {
+			if ($flux['args']['contexte'][$page] == $fond 
+				OR $flux['args']['contexte']['type'] == $fond
+				OR ($fond=='sommaire' AND !$flux['args']['contexte'][$page])) {
 
 				// si on est sur un ?page=XX non trouve
 				// se brancher sur contenu/xx si il existe
 				// ou si c'est un objet spip, associe a une table, utiliser le fond homonyme
 				if (!isset($disponible[$fond]))
-					$disponible[$fond] = z_contenu_disponible($prefix_path,$z_contenu,$fond,$ext);
+					$disponible[$fond] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$fond,$ext,$echaffauder);
 
-				if ($disponible[$fond]) {
-					$flux['data'] = trouver_fond("page",$prefix_path,true);
-			    $flux['data'] = $flux['data']['fond'];
-				}
+				if ($disponible[$fond])
+					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
 			}
 
 			// echaffaudage :
@@ -98,8 +110,10 @@ function public_styliser_par_z_dist($flux){
 				AND autoriser('webmestre')){
 				$type = substr($fond,strlen($z_contenu)+1);
 				if (!isset($disponible[$type]))
-					$disponible[$type] = z_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
-				if ($echaffauder
+					$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
+				if (is_string($disponible[$type]))
+					$flux['data'] = $disponible[$type];
+				elseif ($echaffauder
 					AND $is = $disponible[$type]
 					AND is_array($is))
 					$flux['data'] = $echaffauder($type,$is[0],$is[1],$is[2],$ext);
@@ -115,9 +129,9 @@ function public_styliser_par_z_dist($flux){
 					AND in_array($dir,$z_blocs)){
 					$type = substr($fond,strlen("$dir/"));
 					if ($type!=='page' AND !isset($disponible[$type]))
-						$disponible[$type] = z_contenu_disponible($prefix_path,$z_contenu,$type,$ext);
+						$disponible[$type] = z_contenu_disponible($prefix_path.$prepend,$z_contenu,$type,$ext,$echaffauder);
 					if ($type=='page' OR $disponible[$type])
-						$flux['data'] = z_trouver_bloc($prefix_path,$dir,'dist',$ext);
+						$flux['data'] = z_trouver_bloc($prefix_path.$prepend,$dir,'dist',$ext);
 				}
 			}
 			$squelette = $flux['data'];
@@ -137,6 +151,11 @@ function public_styliser_par_z_dist($flux){
 					))
 				$flux['data'] = $f;
 		}
+		elseif ($fond=='structure' 
+			AND _request('var_zajax')
+			AND $f = find_in_path($prefix_path.$prepend.'ajax'.".$ext")) {
+			$flux['data'] = substr($f,0,-strlen(".$ext"));
+		}
 		// chercher le fond correspondant a la composition
 		elseif (isset($flux['args']['contexte']['composition'])
 			AND (basename($fond)=='page' OR ($squelette AND substr($squelette,-strlen($fond))==$fond))
@@ -144,9 +163,8 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = explode('/',$dir)
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs)
-			AND $f=trouver_fond($fond."-".$flux['args']['contexte']['composition'],$prefix_path,true)
-			AND $f['fond']){
-			$flux['data'] = $f['fond'];
+			AND $f=find_in_path($prefix_path.$prepend.$fond."-".$flux['args']['contexte']['composition'].".$ext")){
+			$flux['data'] = substr($f,0,-strlen(".$ext"));
 		}
 	}
 	return $flux;
@@ -161,7 +179,7 @@ function public_styliser_par_z_dist($flux){
 function z_blocs($espace_prive=false) {
 	if ($espace_prive)
 		return (isset($GLOBALS['z_blocs_ecrire'])?$GLOBALS['z_blocs_ecrire']:array('contenu','navigation','extra','head','hierarchie','top'));
-	return (isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head','head_js'));
+	return (isset($GLOBALS['z_blocs'])?$GLOBALS['z_blocs']:array('contenu','navigation','extra','head','head_js','entete','pied'));
 }
 
 /**
@@ -174,10 +192,17 @@ function z_blocs($espace_prive=false) {
  * @param string $ext
  * @return mixed
  */
-function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
+function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext,$echaffauder=true){
 	if ($d = z_trouver_bloc($prefix_path,$z_contenu,$type,$ext))
 		return $d;
-	return z_echaffaudable($type);
+	return $echaffauder?z_echaffaudable($type):false;
+}
+
+function z_fond_valide($squelette){
+	if (!_ZCORE_EXCLURE_PATH
+		OR !preg_match(',('._ZCORE_EXCLURE_PATH.')/,',$squelette))
+		return true;
+  return false;
 }
 
 /**
@@ -197,12 +222,13 @@ function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
  * @return string
  */
 function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
-	$f = trouver_fond("$bloc.$fond","$prefix_path$bloc/",true);
-	if ($f['fond']) return $f['fond'];
-
-	$f = trouver_fond($fond,"$prefix_path$bloc/",true);
-	// vide si rien trouve
-	return $f['fond'];
+	if (
+		($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext") AND z_fond_valide($f))
+		OR ($f = find_in_path("$prefix_path$bloc/$fond.$ext") AND z_fond_valide($f))
+		){
+		return substr($f, 0, - strlen(".$ext"));
+	}
+	return "";
 }
 /**
  * Tester si un type est echaffaudable

@@ -661,6 +661,7 @@ prive/rss/a_suivre.html -text
 prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
+prive/squelettes/ajax.html -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
