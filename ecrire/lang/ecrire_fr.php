@@ -782,6 +782,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde',
+'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :',
 'statut_admin_restreint' => '(admin restreint)',
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site&nbsp;?',
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
