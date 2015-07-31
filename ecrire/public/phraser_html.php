@@ -285,15 +285,17 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		    $champ->nom_boucle = $r[2];
 		    $champ->nom_champ = $r[3];
 		    $champ->etoile = $r[5];
-		    if ($r[6]=='{') {
+		    $next = $r[6];
+		    while ($next=='{') {
 		      phraser_arg($rec, $sep, array(), $champ);
 		      $args = ltrim($rec) ;
-		      $r[6] = $args[0];
+		      $next = $args[0];
 		    }
-		    if ($r[6]=='|') {
+		    while ($next=='|') {
 		      phraser_args($rec, $par, $sep, array(), $champ);
 		      $args = $champ->apres ;
 		      $champ->apres = '';
+		      $next = $args[0];
 		    }
 		    phraser_vieux($champ);
 		    if ($par==')') $args = substr($args,1);
