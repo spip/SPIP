@@ -18,7 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
 	charger_php_extension('mysql');
 	if ($port > 0) $host = "$host:$port";
-	$link = mysql_connect($host, $login, $pass, true);
+	$link = @mysql_connect($host, $login, $pass, true);
+	if (!$link) return false;
 
 	if (!$db) {
 		$ok = $link;
