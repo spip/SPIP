@@ -216,12 +216,4 @@ function tester_rubrique_vide($id_rubrique) {
 
 $cookie_admin = $_COOKIE['spip_admin'];
 
-
-// Modifs forum
-if ($controle_forum AND $id_controle_forum) {
-	controler_statut_forum($controle_forum, $id_controle_forum);
-	if ($redirect)
-		redirige_par_entete($redirect);
-}
-
 ?>

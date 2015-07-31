@@ -468,7 +468,6 @@ meme_rubrique_articles($id_rubrique, $id_article, $options);
 
 function changer_statut_articles($id_article, $statut)
 {
-	spip_log("arti $id_article, $statut");
 	$result = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
 
 	if ($row = spip_fetch_array($result)) {

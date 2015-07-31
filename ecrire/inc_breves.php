@@ -42,6 +42,22 @@ function enfant_breves($leparent){
 	}
 }
 
+function changer_statut_breves($id_breve, $statut)
+{
+	$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
+	$result = spip_query($query);
+	if ($row = spip_fetch_array($result)) {
+        	$statut_ancien = $row['statut'];
+	}
+
+	if ($statut != $statut_ancien) {
+        	$query = "UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve";
+		$result = spip_query($query);
+
+		include_ecrire("inc_rubriques.php3");
+		calculer_rubriques();
+	}
+}
 
 function breves_dist()
 {
