@@ -1347,6 +1347,12 @@ function alterner($i) {
 	$num = func_num_args();
 	$args = func_get_args();
 
+	if($num == 2 && is_array($args[1])) {
+    $args = $args[1];
+    array_unshift($args,'');
+    $num = count($args);
+  }
+
 	// renvoyer le i-ieme argument, modulo le nombre d'arguments
 	return $args[(intval($i)-1)%($num-1)+1];
 }
