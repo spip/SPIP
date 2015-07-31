@@ -671,7 +671,7 @@ and their status is colour-coded:',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
 'lien_ajouter_participant' => 'Add a participant',
-'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+'lien_ajouter_une_rubrique' => 'Add this section',
 'lien_email' => 'email',
 'lien_nom_site' => 'SITE NAME:',
 'lien_retirer_auteur' => 'Remove author',

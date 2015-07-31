@@ -444,7 +444,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_nouvel_article' => 'Nuovo articolo',
 'info_nouvelle_traduction' => 'Nuova traduzione:',
 'info_numero_article' => 'ARTICOLO NUMERO:',
-'info_obligatoire_02' => '[Obbligatorio]', # MODIF
+'info_obligatoire_02' => '(Obbligatorio)', # MODIF
 'info_option_accepter_visiteurs' => 'Accetta l\'iscrizione di utenti del sito pubblico',
 'info_option_faire_suivre' => 'Segnala i nuovi messaggi',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifiuta l\'iscrizione di utenti',

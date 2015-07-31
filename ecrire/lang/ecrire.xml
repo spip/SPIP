@@ -57,7 +57,9 @@
 	</langue>
 	<langue code="hu" />
 	<langue code="id" />
-	<langue code="it" />
+	<langue code="it">
+		<traducteur nom="cam.lafit" lien="http://trad.spip.org/auteur/cam-lafit" />
+	</langue>
 	<langue code="it_fem" />
 	<langue code="ja" />
 	<langue code="km" />
