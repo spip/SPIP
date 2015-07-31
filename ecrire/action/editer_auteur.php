@@ -140,11 +140,16 @@ function auteurs_set($id_auteur, $set = null) {
  * Associer un auteur a des objets listes sous forme
  * array('objet'=>$id_objet,...)
  *
+ * on peut passer optionnellement une qualification du (des) lien(s) qui sera
+ * alors appliquee dans la foulee.
+ * En cas de lot de liens, c'est la meme qualification qui est appliquee a tous
+ *
  * @param int $id_auteur
  * @param array $c
+ * @param array $qualif
  * @return string
  */
-function auteur_associer($id_auteur,$c){
+function auteur_associer($id_auteur,$c, $qualif = null){
 	foreach($c as $objet => $id_objet){
 		if ($id_objet=intval($id_objet)
 			AND !sql_getfetsel(
@@ -154,6 +159,8 @@ function auteur_associer($id_auteur,$c){
 		{
 				sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
 		}
+		if ($qualif)
+			auteur_qualifier($id_auteur, $objet, $id_objet, $qualif);
 	}
 
 	return ''; // pas d'erreur
