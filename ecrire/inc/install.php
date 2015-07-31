@@ -343,6 +343,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 		. "\n</select></div></fieldset>")
 	)
 	. '<div id="install_adresse_base_hebergeur">'
+	. '<p>'. _T('texte_connexion_mysql').'</p>'
 	. ($predef[1]
 	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
