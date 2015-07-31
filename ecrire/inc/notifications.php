@@ -317,7 +317,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	// TODO: a passer en meta
 	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
 	if (defined('_MODERATEURS_FORUM'))
-	foreach (explode(',', _SPIP_MODERATEURS_FORUM) as $m) {
+	foreach (explode(',', _MODERATEURS_FORUM) as $m) {
 		$tous[] = $m;
 	}
 
