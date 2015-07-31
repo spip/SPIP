@@ -36,31 +36,14 @@ echo "</FONT>";
 fin_boite_info();
 
 //
-// Afficher les boutons de creation d'article et de breve
+// Raccourcis
 //
-if ($connect_statut == '0minirezo') {
+$activer_stats = lire_meta("activer_statistiques");
+if (($activer_stats != "non") AND ($connect_statut == '0minirezo')) {
 	debut_raccourcis();
-	
-	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
-	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
-
-	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
-	$result_petition = spip_query($query_petition);
-	if ($row = spip_fetch_array($result_petition)){
-		$nombre_petition = $row['cnt'];
-	}
-	if ($nombre_petition > 0) {
-		echo "<p>";
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "petition-24.gif", "rien.gif");
-	}
-			
-	$activer_stats = lire_meta("activer_statistiques");
-	if ($activer_stats != "non") icone_horizontale("Evolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
-	
+	icone_horizontale("Evolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
 	fin_raccourcis();
 }
-
-
 
 
 debut_droite();
@@ -290,52 +273,20 @@ $limitnb = $debut + $enplus - $limitdeb;
 $wheretexte = $controle_sans ? "texte=''" : "texte!=''";
 
 
-// recuperer le marque page
-if ($marque) {
-	$row = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(date_heure) AS dh FROM spip_forum WHERE id_forum=$marque"));
-	$prefs['suivi_forum'] = $row['dh'];
-	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
-}
-$datep = $prefs['suivi_forum'];
-
-$query_forum = "SELECT *, UNIX_TIMESTAMP(date_heure) AS dh FROM spip_forum WHERE $requete_base_controle AND $wheretexte ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
+$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND $wheretexte ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
 $result_forum = spip_query($query_forum);
 
 $controle = '';
 
 $i = $limitdeb;
-if ($i>0) $affichezero = "<A HREF='controle_forum.php3'>0</A> ... | ";
+if ($i>0)
+	echo "<A HREF='controle_forum.php3'>0</A> ... | ";
 
 while ($row = spip_fetch_array($result_forum)) {
 
 	// est-ce que ce message doit s'afficher dans la liste ?
 	$ok_controle = (($i>=$debut) AND ($i<$debut + $pack));
 
-	// nouveaux / anciens
-	$new = ($datep AND ($datep < $row['dh']));
-
-	if ($new AND !$dejaaffichenew) {
-		echo "<small>&gt;&gt; Messages r&eacute;cents&nbsp;:</small> ";
-		$dejaaffichenew = true;
-	}
-	if ($new AND $ok_controle)
-		$marqueranciens = "<br><br><small>&gt;&gt; Si vous avez vu les messages de cette page et des suivantes, vous pouvez <a href='controle_forum.php3?debut=$debut$controle_sans&marque=$marquepage'>les marquer comme &laquo;&nbsp;anciens&nbsp;&raquo;</a></small>";
-
-	if ($affichezero) {
-		echo $affichezero;
-		unset($affichezero);
-	}
-
-	// marque-page
-	if ($ok_controle && !$marquepage)
-		$marquepage = $row['id_forum'];
-	if ($datep == $row['dh']) {
-		echo "<br><small>&gt;&gt; Messages anciens&nbsp;: "; // barre de navigation
-		$fermeanciens = "</small>";
-		if ($ok_controle)
-			$controle .= debut_cadre_enfonce('', true)."<p>".propre("{{Remarque:}} vous avez marqu&eacute; les messages apparaissant ci-dessous et dans les pages suivantes comme &laquo;anciens&raquo;.").fin_cadre_enfonce(true);
-	}
-	
 	// barre de navigation
 	if ($i == $pack*floor($i/$pack)) {
 		if ($i == $debut)
@@ -352,8 +303,7 @@ while ($row = spip_fetch_array($result_forum)) {
 	$i ++;
 }
 
-echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>$fermeanciens";
-echo $marqueranciens;
+echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>";
 
 echo $controle;
 
