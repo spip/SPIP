@@ -226,6 +226,7 @@ dist/javascript/dragdrop_interface.js -text
 dist/javascript/form.js -text
 dist/javascript/jquery-1.0.3.js -text
 dist/javascript/jtip.js -text
+dist/javascript/multilang.js -text
 dist/javascript/pause.js -text
 dist/jquery.js.html -text
 dist/jtip.css -text
