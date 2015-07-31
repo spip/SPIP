@@ -36,7 +36,7 @@ body { padding: 5%; }
 }
 
 @media (max-width: 640px) {
-body { padding: 5% 1%; background-color: #fff; background-image: url(images/background.gif); background-repeat: repeat-x; }
+body { padding: 5% 1%; }
 #minipres { width: auto; background: transparent; }
 fieldset { border-radius: 10px; }
 #etapes, #infos_etapes { display: none; }
