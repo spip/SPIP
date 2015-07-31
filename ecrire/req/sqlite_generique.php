@@ -1722,12 +1722,14 @@ class sqlite_traiter_requete{
 				$err = strip_tags($err['message'])." in ".$err['file']." line ".$err['line'];
 				spip_log("$err - ".$this->query, 'sqlite');
 			}
+		  else $err="";
 
 		} else {
 			$r = false;	
 		}
 
-		$err .= spip_sqlite_error($this->query, $serveur);
+		if (spip_sqlite_errno($serveur))
+			$err .= spip_sqlite_error($this->query, $serveur);
 		return $t ? trace_query_end($this->query, $t, $r, $err, $serveur) : $r;
 	}
 		
