@@ -6,9 +6,9 @@ if ($HTTP_GET_VARS['type'] == 'semaine')
    { include ("calendrier_jour.php3");exit;}
 
 include ("inc.php3");
-include_ecrire ("Include/PHP4/calendrier.php");
-include_ecrire ("Include/MySQL3/calendrier.php");
-include_ecrire ("Include/HTML4/calendrier.php");
+include_ecrire ("Include/PHP4/calendrier_php4.php");
+include_ecrire ("Include/MySQL3/calendrier_mysql3.php");
+include_ecrire ("Include/HTML4/calendrier_html4.php");
 
 $today=getdate(time());
 

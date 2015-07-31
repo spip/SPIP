@@ -2,11 +2,9 @@
 
 include ("inc.php3");
 include_ecrire ("inc_mots.php3");
-include_ecrire ("Include/PHP4/calendrier.php");
-include_ecrire ("Include/MySQL3/calendrier.php");
-include_ecrire ("Include/HTML4/calendrier.php");
-
-
+include_ecrire ("Include/PHP4/calendrier_php4.php");
+include_ecrire ("Include/MySQL3/calendrier_mysql3.php");
+include_ecrire ("Include/HTML4/calendrier_html4.php");
 
 $query = "SELECT COUNT(*) FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message";
 $result = spip_query($query);
