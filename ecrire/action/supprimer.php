@@ -53,7 +53,7 @@ function action_supprimer_rubrique($r)
 	// deviennent redacteurs
 	// (il y a sans doute moyen de faire ca avec un having)
 
-	$q = spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique");
+	$q = sql_select("id_auteur", "spip_auteurs_rubriques", "id_rubrique=$id_rubrique");
 
 	while ($r = sql_fetch($q)) {
 		$id_auteur = $r['id_auteur'];
@@ -76,7 +76,7 @@ function action_supprimer_rubrique($r)
 // http://doc.spip.org/@supprimer_document_et_vignette
 function supprimer_document_et_vignette($arg)
 {
-	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
+	$result = sql_select("id_vignette, fichier", "spip_documents", "id_document=$arg");
 	if ($row = sql_fetch($result)) {
 		spip_unlink(get_spip_doc($row['fichier']));
 		sql_delete("spip_documents", "id_document=$arg");
@@ -86,7 +86,7 @@ function supprimer_document_et_vignette($arg)
 		sql_delete("spip_documents_breves", "id_document=$arg");
 		$id_vignette = $row['id_vignette'];
 		if ($id_vignette > 0) {
-			$result = spip_query("SELECT fichier FROM spip_documents	WHERE id_document=$id_vignette");
+			$result = sql_select("fichier", "spip_documents	", "id_document=$id_vignette");
 
 			if ($row = sql_fetch($result)) {
 				spip_unlink(get_spip_doc($row['fichier']));

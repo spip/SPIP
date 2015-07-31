@@ -49,7 +49,7 @@ function action_tester_taille_dist() {
 			$dummy = propre("<doc1>");
 
 			$image_source = _DIR_IMG_PACK."test.png";
-			$res = spip_query("SELECT valeur FROM spip_meta WHERE nom='max_taille_vignettes_test'");
+			$res = sql_select("valeur", "spip_meta", "nom='max_taille_vignettes_test'");
 			if ($row = sql_fetch($res))
 				$max_size_test = $row['valeur'];
 			if (!$max_size_test OR $max_size_test>$s)

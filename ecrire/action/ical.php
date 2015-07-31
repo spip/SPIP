@@ -38,7 +38,7 @@ function action_ical_dist()
 	}
 
 	if (verifier_low_sec($id_auteur, $arg, $action)) {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($id_auteur));
+		$result = sql_select("*", "spip_auteurs", "id_auteur=" . intval($id_auteur));
 
 		if ($row = sql_fetch($result)) {
 			$id_utilisateur=$row['id_auteur'];
@@ -197,7 +197,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 // http://doc.spip.org/@spip_ical_articles
 function spip_ical_articles($nom_site)
 {
-	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
+	$result_articles = sql_select("id_article, titre, date", "spip_articles", "statut = 'prop'");
 	$titres = array();
 	while($row=sql_fetch($result_articles)){
 		$id_article=$row['id_article'];
@@ -222,7 +222,7 @@ function spip_ical_articles($nom_site)
 function spip_ical_breves($nom_site)
 {
 	$titres = array();
-	$result = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'prop'");
+	$result = sql_select("id_breve, titre, date_heure", "spip_breves", "statut = 'prop'");
 	while($row=sql_fetch($result)){
 		$id_breve=$row['id_breve'];
 		$titre = supprimer_numero($row['titre']);
@@ -273,7 +273,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 				$titre = $row_forum["titre"];
 				$id_auteur = $row_forum["id_auteur"];
 
-				$result_auteurs2 = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
+				$result_auteurs2 = sql_select("*", "spip_auteurs", "id_auteur = $id_auteur");
 				if ($row_auteur2 = sql_fetch($result_auteurs2)){
 					$nom_auteur = $row_auteur2['nom'];
 					$email = $row_auteur2 ['email'];
@@ -305,7 +305,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 // http://doc.spip.org/@spip_ical_forums
 function spip_ical_forums($id_utilisateur, $nom_site)
 {
-	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");
+	$result_forum = sql_select("*", "spip_forum", "statut = 'prop'");
 
 	$nb_forum = 0;
 	while($row=sql_fetch($result_forum)){

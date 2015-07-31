@@ -23,7 +23,7 @@ function inc_auth_spip_dist ($login, $pass) {
 
 	  // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {
-			$result = spip_query("SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login=" . _q($login));
+			$result = sql_select("alea_actuel, alea_futur", "spip_auteurs", "login=" . _q($login));
 
 			if ($row = sql_fetch($result)) {
 				$md5pass = md5($row['alea_actuel'] . $pass);

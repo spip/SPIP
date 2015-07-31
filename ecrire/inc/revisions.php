@@ -603,7 +603,7 @@ function enregistrer_premiere_revision($x) {
 
 		if (!sql_countsel('spip_versions',"id_article=$id_article")) {
 			$select = join(", ", liste_champs_versionnes($x['args']['table']));
-			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
+			$query = sql_select("$select, date, date_modif", "spip_articles", "id_article=$id_article");
 			$champs_originaux = sql_fetch($query);
 			// Si le titre est vide, c'est qu'on vient de creer l'article
 			if ($champs_originaux['titre'] != '') {

@@ -165,7 +165,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) 
        ## la verification est faite a l'arrivee des donnees (Fil)
 
 	if ($id_rubrique) {
-		$titre = sql_fetch(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$titre = sql_fetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$titre = $titre['titre'];
 	} else if ($type == 'auteur')
 		$titre = '&nbsp;';

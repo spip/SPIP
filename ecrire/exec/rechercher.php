@@ -45,7 +45,7 @@ function exec_rechercher_dist()
 	} else
 		$where_exclus = '';
 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_id$where_exclus");
+	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_id$where_exclus");
 
 	$points = $rub = array();
 
@@ -55,7 +55,7 @@ function exec_rechercher_dist()
 		$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
 		$points[$id_rubrique] = $points[$id_rubrique] + 3;
 	}
-	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_titre$where_exclus");
+	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_titre$where_exclus");
 	while ($row = sql_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
@@ -64,7 +64,7 @@ function exec_rechercher_dist()
 		  $points[$id_rubrique] += 2;
 		else $points[$id_rubrique] = 0;
 	}
-	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_desc$where_exclus");
+	$res = sql_select("id_rubrique, id_parent, titre", "spip_rubriques", "$where_desc$where_exclus");
 	while ($row = sql_fetch($res)) {
 		$id_rubrique = $row["id_rubrique"];
 		$rub[$id_rubrique]["titre"] = typo ($row["titre"]);

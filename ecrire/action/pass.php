@@ -42,7 +42,7 @@ function message_oubli($email, $param)
 	if (!is_array($declaration))
 		return $declaration;
 
-	$res = spip_query("SELECT id_auteur,statut,pass FROM spip_auteurs WHERE email =" . _q($declaration['mail']));
+	$res = sql_select("id_auteur,statut,pass", "spip_auteurs", "email =" . _q($declaration['mail']));
 
 	if (!$row = sql_fetch($res)) 
 		return _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email)));

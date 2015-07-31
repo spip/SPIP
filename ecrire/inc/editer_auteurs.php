@@ -155,7 +155,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 	elseif (preg_match('/^\d+$/',$ids)) {
 
-		$row = sql_fetch(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$ids"));
+		$row = sql_fetsel("nom", "spip_auteurs", "id_auteur=$ids");
 		return "<b>"._T('texte_ajout_auteur')."</b><br /><ul><li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['nom'])."</span></b></span></li></ul>";
 	}
 	else {

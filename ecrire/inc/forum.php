@@ -242,7 +242,7 @@ function calculer_threads() {
 // http://doc.spip.org/@racine_forum
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
-	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread FROM spip_forum WHERE id_forum=".$id_forum);
+	$result = sql_select("id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread", "spip_forum", "id_forum=".$id_forum);
 
 	if (!$row = sql_fetch($result))
 		return false;
@@ -272,7 +272,7 @@ function racine_forum($id_forum){
 // http://doc.spip.org/@parent_forum
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
-	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
+	$result = sql_select("id_parent, id_rubrique, id_article, id_breve, id_syndic", "spip_forum", "id_forum=".$id_forum);
 	if($row = sql_fetch($result)){
 		if($row['id_parent']) return array('forum', $row['id_parent']);
 		if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
@@ -312,7 +312,7 @@ function conserver_original($id_forum) {
 		return ''; // pas d'erreur
 
 	// recopier le forum
-	$t = sql_fetch(spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)));
+	$t = sql_fetsel("*", "spip_forum", "id_forum="._q($id_forum));
 
 	if ($t) {
 		unset($t['id_forum']);

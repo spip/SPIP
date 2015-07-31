@@ -20,14 +20,14 @@ function enfants($id_parent, $critere){
 
 	global $nombre_abs;
 
-	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent");
+	$result = sql_select("id_rubrique", "spip_rubriques", "id_parent=$id_parent");
 
 	$nombre = 0;
 
 	while($row = sql_fetch($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$result2 = spip_query("SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique=$id_rubrique");
+		$result2 = sql_select("SUM(".$critere.") AS cnt", "spip_articles", "id_rubrique=$id_rubrique");
 
 		$visites = 0;
 		if ($row2 = sql_fetch($result2)) {

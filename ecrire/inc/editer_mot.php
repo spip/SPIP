@@ -115,7 +115,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	else if ($table == 'breves') $ou = _T('info_la_breve');
 	else if ($table == 'rubriques') $ou = _T('info_la_rubrique');
 
-	$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe=" . _q($id_groupe));
+	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe=" . _q($id_groupe));
 
 	$table_mots = array();
 	$table_ids = array();
@@ -136,7 +136,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
-			$row = sql_fetch(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$resultat[0]"));
+			$row = sql_fetsel("titre", "spip_mots", "id_mot=$resultat[0]");
 			$res .= "<b>"._T('info_mot_cle_ajoute')." $ou : </b><br />\n<ul>";
 			$res .= "\n<li><span class='verdana1 spip_small'><b><span class='spip_medium'>".typo($row['titre'])."</span></b></span></li>";
 			$res .= "\n</ul>";
@@ -181,7 +181,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 			$url = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=$ret");
 			$vals= array("<a href='$url'>$cle</a>");
 
-			$r = sql_fetch(spip_query("SELECT titre, unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
+			$r = sql_fetsel("titre, unseul", "spip_groupes_mots", "id_groupe = $id_groupe");
 			$unseul = $r['unseul'];
 	// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
 			$type_mot = typo($r['titre']);

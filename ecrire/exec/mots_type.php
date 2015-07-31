@@ -36,7 +36,7 @@ function exec_mots_type_dist()
 	  $row = array();
 	} else {
 
-		$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+		$result_groupes = sql_select("*", "spip_groupes_mots", "id_groupe=$id_groupe");
 
 		if ($row = sql_fetch($result_groupes)) {
 			$id_groupe = $row['id_groupe'];

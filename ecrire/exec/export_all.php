@@ -136,7 +136,7 @@ function complete_secteurs($les_rubriques)
 	$res = array();
 	foreach($les_rubriques as $r) {
 		do {
-			$r = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$r");
+			$r = sql_select("id_parent", "spip_rubriques", "id_rubrique=$r");
 			$r = sql_fetch($r);
 			if ($r AND $r = $r['id_parent']) {
 				if ((isset($les_rubriques[$r])) OR isset($res[$r]))

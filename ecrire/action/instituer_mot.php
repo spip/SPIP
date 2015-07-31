@@ -53,7 +53,7 @@ function action_instituer_mot_post($r)
 function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 {
 	if (un_seul_mot_dans_groupe($id_groupe)) {
-		$mots = spip_query("SELECT id_mot FROM spip_mots WHERE id_groupe = $id_groupe");
+		$mots = sql_select("id_mot", "spip_mots", "id_groupe = $id_groupe");
 		$a = array();
 		while ($r = sql_fetch($mots)) $a[]=  $r['id_mot'];
 		sql_delete("spip_mots_$table", "id_mot IN (" . join(',',$a) .") AND $table_id=$id");

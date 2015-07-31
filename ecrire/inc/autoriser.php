@@ -59,7 +59,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($qui === NULL)
 	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
-		$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=".$qui);
+		$s = sql_select("*", "spip_auteurs", "id_auteur=".$qui);
 		$qui = sql_fetch($s);
 	}
 
@@ -187,7 +187,7 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo')
 		return true;
 
-	$s = spip_query("SELECT id_rubrique,statut FROM spip_syndic WHERE id_syndic="._q($id));
+	$s = sql_select("id_rubrique,statut", "spip_syndic", "id_syndic="._q($id));
 	return ($t = sql_fetch($s)
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
 		AND ($t['statut'] == 'prop')
@@ -238,7 +238,7 @@ function autoriser_document_modifier_dist($faire, $type, $id, $qui, $opt){
 		foreach($jointures as $j) {
 			$type = preg_replace(',s?_?documents?_?|s$,', '', $j);
 			$id_table = id_table_objet($type);
-			$s = spip_query("SELECT $id_table FROM spip_$j WHERE id_document="._q($id));
+			$s = sql_select("$id_table", "spip_$j", "id_document="._q($id));
 			while ($t = sql_fetch($s)) {
 				spip_log($t);
 				if (autoriser('modifier', $type, $t[$id_table], $qui, $opt)) {
@@ -343,7 +343,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (!$id) return false;
 
 	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
-	$s = spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id));
+	$s = sql_select("statut", "spip_articles", "id_article="._q($id));
 	$r = sql_fetch($s);
 	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
@@ -484,7 +484,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 					return true;
 			}
 			else if ($id_auteur = intval($id)) {
-				$s = spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur");
+				$s = sql_select("statut", "spip_auteurs", "id_auteur=$id_auteur");
 				if ($t = sql_fetch($s)
 				AND $t['statut'] != '0minirezo')
 					return true;

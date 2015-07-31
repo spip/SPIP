@@ -35,7 +35,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 //
 // Recupere les donnees
 //
-	$row = sql_fetch(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
+	$row = sql_fetsel("*", "spip_mots", "id_mot=$id_mot");
 	 if ($row) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = $row['titre'];

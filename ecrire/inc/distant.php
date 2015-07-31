@@ -306,7 +306,7 @@ function fichier_copie_locale($source) {
 		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
 		) {
 			// verifier que c'est un type autorise
-			$t = sql_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($ext)));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension="._q($ext));
 			if ($t)
 				$extension = $t['extension'];
 		}
@@ -347,19 +347,19 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		$t = null;
 		if (($mime_type == 'text/plain' OR $mime_type == '')
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . _q($rext[1]));
 		}
 
 		// Autre mime/type (ou text/plain avec fichier d'extension inconnue)
 		if (!$t)
-			$t = sql_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE mime_type=" . _q($mime_type)));
+			$t = sql_fetsel("extension", "spip_types_documents", "mime_type=" . _q($mime_type));
 
 		// Toujours rien ? (ex: audio/x-ogg au lieu de application/ogg)
 		// On essaie de nouveau avec l'extension
 		if (!$t
 		AND $mime_type != 'text/plain'
 		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
-			$t = sql_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension=" . _q($rext[1])));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . _q($rext[1]));
 		}
 
 
@@ -369,7 +369,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		} else {
 			# par defaut on retombe sur '.bin' si c'est autorise
 			spip_log("mime-type $mime_type inconnu");
-			$t = sql_fetch(spip_query("SELECT extension FROM spip_types_documents WHERE extension='bin'"));
+			$t = sql_fetsel("extension", "spip_types_documents", "extension='bin'");
 			if (!$t) return false;
 			$a['extension'] = $t['extension'];
 		}

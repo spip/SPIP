@@ -35,7 +35,7 @@ function exec_breves_edit_dist()
 		$id_rubrique = $row_rub['id_rubrique'];
 		if (!autoriser('creerbrevedans','rubrique',$id_rubrique )){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
-			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0");
+			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
 			while (!autoriser('creerbrevedans','rubrique',$id_rubrique ) && $row_rub = sql_fetch($res)){
 				$id_rubrique = $row_rub['id_rubrique'];
 			}
@@ -52,7 +52,7 @@ function exec_breves_edit_dist()
 	}
 
 	if ($new != "oui") {
-		$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
+		$result = sql_select("*", "spip_breves", "id_breve=$id_breve");
 
 	
 		if ($row=sql_fetch($result)) {
@@ -78,7 +78,7 @@ function exec_breves_edit_dist()
 		$lien_titre='';
 		$lien_url='';
 		$statut = "prop";
-		$row = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$id_rubrique = $row['id_secteur'];
 	}
 
@@ -121,7 +121,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+		$result=sql_select("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
 
 		while($row=sql_fetch($result)){
 			$parent_parent=$row['id_parent'];

@@ -76,7 +76,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 		if (strpos(",$id_parent',", "$,filles,") != false)
 			spip_log("La rubrique $id_rubrique ne peut etre fille de sa descendante $id_parent");
 		else {
-			$s = sql_fetch(spip_query("SELECT id_parent, statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$s = sql_fetsel("id_parent, statut", "spip_rubriques", "id_rubrique=$id_rubrique");
 			$old_parent = $s['id_parent'];
 
 			if (!($id_parent != $old_parent
@@ -152,7 +152,7 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 	if (!$t) return true;
 	$t = (_request('confirme_deplace', $c) <> 'oui');
 	if ($t) return false;
-	$id_secteur = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+	$id_secteur = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_parent");
 	if ($id_secteur= $id_secteur['id_secteur'])
 		spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
 	return true;

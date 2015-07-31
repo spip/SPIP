@@ -223,12 +223,12 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 	$res = "";
 	if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0) AND $flag_editable) {
 
-		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$row = sql_fetsel("lang, langue_choisie", "spip_rubriques", "id_rubrique=$id_rubrique");
 		$langue_rubrique = $row['lang'];
 		$langue_choisie_rubrique = $row['langue_choisie'];
 		$langue_parent = '';
 		if ($id_parent) {
-			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+			$row = sql_fetsel("lang", "spip_rubriques", "id_rubrique=$id_parent");
 			$langue_parent = $row['lang'];
 		} 
 		if (!$langue_parent)
@@ -315,7 +315,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		if ($id_rubrique == 0 
 		AND autoriser('publierdans','rubrique',$id_rubrique)) {
 	
-			$cpt = sql_fetch(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
+			$cpt = sql_fetsel("COUNT(*) AS n", "spip_syndic_articles", "statut='dispo'");
 			if ($cpt = $cpt['n'])
 				$res .= "<br /><small><a href='" .
 					generer_url_ecrire("sites_tous") .

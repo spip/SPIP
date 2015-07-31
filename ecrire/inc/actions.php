@@ -264,7 +264,7 @@ function determine_upload($type='') {
 // http://doc.spip.org/@lire_php_auth
 function lire_php_auth($user, $pw) {
 
-	$row = spip_query("SELECT * FROM spip_auteurs WHERE login=" . _q($user));
+	$row = sql_select("*", "spip_auteurs", "login=" . _q($user));
 
 	$row = sql_fetch($row);
 	if ($row AND $row['source'] != 'ldap')

@@ -48,7 +48,7 @@ function get_spip_doc($fichier) {
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 	if (intval($id_document) <= 0)
 		return '';
-	$row = sql_fetch(spip_query("SELECT fichier,distant FROM spip_documents WHERE id_document="._q($id_document)));
+	$row = sql_fetsel("fichier,distant", "spip_documents", "id_document="._q($id_document));
 	if (!$row) return '';
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
@@ -117,7 +117,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	$vignette = $document['id_vignette'];
 
 	if ($vignette) 
-		$vignette = sql_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$vignette));
+		$vignette = sql_fetsel("*", "spip_documents", "id_document = ".$vignette);
 	if ($vignette) {
 			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 				$image = image_pattern($vignette);
@@ -158,7 +158,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if (!$url)
 		return $image;
 	else {
-		$t = sql_fetch(spip_query("SELECT mime_type FROM spip_types_documents WHERE extension="._q($document['extension'])));
+		$t = sql_fetsel("mime_type", "spip_types_documents", "extension="._q($document['extension']));
 		return "<a href='$url'\n\ttype='".$t['mime_type']."'>$image</a>";
 	}
 }
@@ -300,7 +300,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	charger_generer_url();
 	$res = spip_query("SELECT docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
 	if (!$document = sql_fetch($res)) return "";
-	//$document = sql_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+	//$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 
 	$id_vignette = $document['id_vignette'];
 	$extension = $document['extension'];
@@ -319,7 +319,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$cadre = strlen($titre) ? $titre : basename($fichier);
 
-	$result = spip_query("SELECT titre,inclus FROM spip_types_documents WHERE extension="._q($extension));
+	$result = sql_select("titre,inclus", "spip_types_documents", "extension="._q($extension));
 	if ($letype = sql_fetch($result)) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];

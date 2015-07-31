@@ -54,7 +54,7 @@ function inc_documenter_dist(
 	/*if ($type=='article'
 	AND !isset($GLOBALS['doublons_documents_inclus'])
 	AND is_int($doc)) {
-		$r = sql_fetch(spip_query("SELECT chapo,texte FROM spip_articles WHERE id_article="._q($doc)));
+		$r = sql_fetsel("chapo,texte", "spip_articles", "id_article="._q($doc));
 		propre(join(" ",$r));
 	}*/
 

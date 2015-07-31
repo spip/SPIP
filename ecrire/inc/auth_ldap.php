@@ -110,7 +110,7 @@ function auth_ldap_inserer($dn, $statut)
 	include_spip('base/abstract_sql');
 	$n = sql_insert('spip_auteurs', '(source, nom, login, email, bio, statut, pass)', "('ldap', " . _q($nom) . ", " . _q($login) . ", " . _q($email) . ", " . _q($bio) . ", " . _q($statut) . ", '')");
 
-	return spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$n");
+	return sql_select("*", "spip_auteurs", "id_auteur=$n");
 }
 
 

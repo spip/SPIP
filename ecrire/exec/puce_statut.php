@@ -21,7 +21,7 @@ function exec_puce_statut_dist()
 	$type = _request('type');
 
 	if ($type == 'article') {
-		$s = spip_query("SELECT id_rubrique,statut FROM spip_articles WHERE id_article=$id");
+		$s = sql_select("id_rubrique,statut", "spip_articles", "id_article=$id");
 		$r = sql_fetch($s);
 		$statut = $r['statut'];
 		$id_rubrique = $r['id_rubrique'];

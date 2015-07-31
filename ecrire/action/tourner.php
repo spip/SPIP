@@ -28,7 +28,7 @@ function action_tourner_dist() {
 function action_tourner_post($r)
 {
 	$arg = $r[1];
-	$result = spip_query("SELECT fichier FROM spip_documents WHERE id_document=$arg");
+	$result = sql_select("fichier", "spip_documents", "id_document=$arg");
 
 	if (!$row = sql_fetch($result))
 		return;

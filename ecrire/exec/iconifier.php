@@ -39,7 +39,7 @@ function exec_iconifier_dist()
 	  $droit = $connect_toutes_rubriques;
 	else {
 		$table=substr($type, 3) . (($type == 'id_syndic') ? '' : 's');
-		$row = sql_fetch(spip_query("SELECT id_rubrique, statut FROM spip_$table WHERE $type=$id"));
+		$row = sql_fetsel("id_rubrique, statut", "spip_$table", "$type=$id");
 		$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
 		if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle'))
 			$droit = sql_count(determiner_auteurs_objet('article',$id, "id_auteur=$connect_id_auteur"));

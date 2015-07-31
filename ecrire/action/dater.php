@@ -57,7 +57,7 @@ function action_dater_post($r)
 
 	if (($type == 'article')
 	AND $GLOBALS['meta']["post_dates"] == "non") {
-		$t = sql_fetch(spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id"));
+		$t = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id");
 		if ($t['statut'] == 'publie') {
 			include_spip('inc/rubriques');
 			if  (strtotime($date) >  time())

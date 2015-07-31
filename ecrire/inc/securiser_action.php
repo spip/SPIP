@@ -76,7 +76,7 @@ function caracteriser_auteur() {
 	if (isset($auteur_session['pass']) AND $auteur_session['pass'])
 		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
 	else {
-		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		$t = sql_select("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t = sql_fetch($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
 		include_spip('inc/minipres');

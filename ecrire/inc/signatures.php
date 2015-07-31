@@ -105,7 +105,7 @@ function signatures_edit($script, $id, $debut, $row) {
 		$res .= '<br />' . message_de_signature($row);
 		
 		if (!$id) {
-			$r = sql_fetch(spip_query("SELECT titre, statut FROM spip_articles WHERE id_article=$id_article"));
+			$r = sql_fetsel("titre, statut", "spip_articles", "id_article=$id_article");
 
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
 			. _T('info_numero_abbreviation')

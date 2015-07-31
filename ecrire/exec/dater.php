@@ -27,7 +27,7 @@ function exec_dater_dist()
 	}
 
 	$table = ($type=='syndic') ? 'syndic' : ($type . 's');
-	$row = sql_fetch(spip_query("SELECT * FROM spip_$table WHERE id_$type=$id"));
+	$row = sql_fetsel("*", "spip_$table", "id_$type=$id");
 
 	$statut = $row['statut'];
 	$date = $row[($type!='breve')?"date":"date_heure"];
