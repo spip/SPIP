@@ -722,6 +722,18 @@ function ajouter_tags($matches, $item) {
 	return $tags;
 }
 
+
+// Retablit le contenu des blocs [[CDATA]] dans un tableau
+function cdata_echappe_retour(&$table, &$echappe_cdata) {
+	foreach ($table as $var => $val) {
+		$table[$var] = filtrer_entites($table[$var]);
+		foreach ($echappe_cdata as $n => $e)
+			$table[$var] = str_replace("@@@SPIP_CDATA$n@@@",
+				$e, $table[$var]);
+	}
+}
+
+
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
 function analyser_backend($rss, $url_syndic='') {
@@ -882,11 +894,8 @@ function analyser_backend($rss, $url_syndic='') {
 		$data['item'] = $item;
 
 		// Nettoyer les donnees et remettre les CDATA en place
-		foreach ($data as $var => $val) {
-			$data[$var] = filtrer_entites($data[$var]);
-			foreach ($echappe_cdata as $n => $e)
-				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
-		}
+		cdata_echappe_retour($data, $echappe_cdata);
+		cdata_echappe_retour($tags, $echappe_cdata);
 
 		// Trouver les microformats (ecrase les <category> et <dc:subject>)
 		if (preg_match_all(
