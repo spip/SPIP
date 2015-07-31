@@ -784,7 +784,7 @@ function debut_html($titre = "") {
 
 	.reliefblanc {background-image: url(img_pack/barre-blanc.gif)}
 	.reliefgris {background-image: url(img_pack/barre-noir.gif)}
-	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #e4e4e4}
+	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0}
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
 

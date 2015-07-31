@@ -414,15 +414,30 @@ if ($doc_supp) {
 	if (!verifier_action_auteur("supp_doc $doc_supp", $hash, $hash_id_auteur)) {
 		exit;
 	}
-	$query = "SELECT fichier FROM spip_documents WHERE id_document=$doc_supp";
+	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
 	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$fichier = $row['fichier'];
+		$id_vignette = $row['id_vignette'];
 		spip_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
-		unlink($fichier);
+		@unlink($fichier);
 	}
+
+	if ($id_vignette > 0) {
+		$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_supp";
+		$result = spip_query($query);
+		if ($row = mysql_fetch_array($result)) {
+			$fichier = $row['fichier'];
+			@unlink($fichier);
+
+		}	
+		spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
+		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
+	}
+
+
 }
 
 
