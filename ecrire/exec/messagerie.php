@@ -101,7 +101,15 @@ echo "<div style='text-align: "
 
  $result = sql_select('auteurs.id_auteur, auteurs.nom, COUNT(*) AS total', 'spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien', "(lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > NOW() )) AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur)", "auteurs.id_auteur", 'total DESC', 10);
 
-if (sql_count($result) > 0) {
+ $cor = array();
+ while($row = sql_fetch($result)) {
+		$id_auteur = $row['id_auteur'];
+		$nom = typo($row["nom"]);
+		$total = $row["total"];
+		$cor[]= "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . chemin_image('redac-12.gif') . "'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur") . "'>$nom,</a> ($total)</div></div>";
+ }
+
+ if ($cor) {
 
 	echo "<div style='height: 12px;'></div>";
 	$bouton = bouton_block_depliable(_T('info_principaux_correspondants'),true,'principaux');
@@ -109,21 +117,14 @@ if (sql_count($result) > 0) {
 	echo debut_block_depliable(true,'principaux');
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' style='width: 50%'>";
-	$count = 0;
-	while($row = sql_fetch($result)) {
-		$count ++;
-		$id_auteur = $row['id_auteur'];
-		$nom = typo($row["nom"]);
-		$total = $row["total"];
-		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . chemin_image('redac-12.gif') . "'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
-		  $nom,
-		  "</a> ($total)</div></div>";
-		if ($count == ceil(sql_count($result)/2)) echo "</td><td valign='top' style='width: 50%'>";
-	}
+	$count = ceil(count($cor)/2);
+	echo join("\n",array_slice($cor, 0, $count));
+	echo "</td><td valign='top' style='width: 50%'>";
+	echo join("\n",array_slice($cor, $count));
 	echo "</td></tr></table>";
 	echo fin_block();
 	echo fin_cadre('liste');
-}
+ }
 
  echo afficher_messages('<b>' . _T('info_pense_bete_ancien') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false);
 
