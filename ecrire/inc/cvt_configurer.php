@@ -45,7 +45,7 @@ function cvtconf_formulaire_charger($flux){
 			$flux['data'] = cvtconf_formulaires_configurer_recense($form);
 			$flux['data']['editable'] = true;
 			if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
-				## if (!_AJAX) var_dump($flux['data']);
+				if (!_AJAX) var_dump($flux['data']);
 				// reinjecter pour la trace au traitement
 				$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer' />";
 			}
