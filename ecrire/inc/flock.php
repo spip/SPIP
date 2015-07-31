@@ -165,16 +165,16 @@ function sous_repertoire($base, $subdir='', $nobase = false) {
 
 	$path = $base.$subdir; # $path = 'IMG/distant/pdf' ou 'IMG/distant_pdf'
 
-	if (@file_exists("$path/.ok"))
+	if (file_exists("$path/.ok"))
 		return "$baseaff$subdir/";
 
 	@mkdir($path, _SPIP_CHMOD);
 	@chmod($path, _SPIP_CHMOD);
 
 	$ok = false;
-	if ($f = @fopen("$path/dir_test.php", "w")) {
-		@fputs($f, '<'.'?php $ok = true; ?'.'>');
-		@fclose($f);
+	if ($test = @fopen("$path/dir_test.php", "w")) {
+		@fputs($test, '<'.'?php $ok = true; ?'.'>');
+		@fclose($test);
 		@include("$path/dir_test.php");
 		@unlink("$path/dir_test.php");
 	}
@@ -189,9 +189,11 @@ function sous_repertoire($base, $subdir='', $nobase = false) {
 		fclose($f);
 	else {
 		spip_log("echec creation $base${subdir}");
+		if (!_DIR_RESTREINT)
+			$base = preg_replace(',^' . _DIR_RACINE .',', '',$base);
+		if ($test) $base .= $subdir;
 		include_spip('inc/headers');
-		redirige_par_entete(
-			generer_url_action('test_dirs',"test_dir=$base${subdir}",true));
+		redirige_par_entete(generer_url_action('test_dirs',"test_dir=$base",true));
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
 	return "$baseaff${subdir}";
