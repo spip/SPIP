@@ -988,7 +988,7 @@ function spip_sqlite_showtable($nom_table, $serveur='',$requeter=true){
 			foreach(preg_split('/\)\s*,?/',$namedkeys) as $v) {
 				if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
 					$k = str_replace("`", '', trim($r[1]));
-					$t = strtolower(str_replace("`", '', $r[2]));
+					$t = trim(strtolower(str_replace("`", '', $r[2])), '"');
 					if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
 				}
 			}
