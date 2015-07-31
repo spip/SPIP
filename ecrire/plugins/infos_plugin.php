@@ -29,7 +29,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['icon']))
 		$ret['logo'] = trim(spip_xml_aplatit($arbre['icon']));
 	if (isset($arbre['auteur']))
-		$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
+		$ret['auteur'] = $arbre['auteur']; // garder le 1er niveau en tableau
 	if (isset($arbre['licence']))
 		$ret['licence'] = spip_xml_aplatit($arbre['licence']);
 	if (isset($arbre['version']))
@@ -46,8 +46,14 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['description'] = spip_xml_aplatit($arbre['description']);
 	}
 
-	if (isset($arbre['lien']))
-		$ret['lien'] = join(' ',$arbre['lien']);
+	if (isset($arbre['lien'])){
+		$ret['documentation'] = trim(join(' ',$arbre['lien']));
+		if ($ret['documentation']) {
+			if (!preg_match(',^https?://,iS', $ret['documentation']))
+				$ret['documentation'] = extraire_attribut(extraire_balise(propre($ret['documentation']),'a'),'href');
+		}
+	}
+
 	if (isset($arbre['options']))
 		$ret['options'] = $arbre['options'];
 	if (isset($arbre['fonctions']))
