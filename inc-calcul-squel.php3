@@ -1669,7 +1669,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	case 'FORMULAIRE_ADMIN':
 		$milieu = '
-			$'.$nom_var.' = "<"."?php \$GLOBALS[\"flag_boutons_admin\"] = true; include_local(\"inc-admin.php3\"); afficher_boutons_admin(); ?".">";
+			$'.$nom_var.' = "<"."?php \$GLOBALS[\"flag_boutons_admin\"] = true;
+				if (\$GLOBALS[\"HTTP_COOKIE_VARS\"][\"spip_admin\"]) {
+					include_local(\"inc-admin.php3\");
+					afficher_boutons_admin();
+				} ?".">";
 		';
 		break;
 
