@@ -24,13 +24,12 @@ function verifier_version_sauvegarde ($archive) {
 		$buf = $_fread($f, $buf_len);
 
 		if (ereg("<SPIP [^>]* version_base=\"([0-9\.]+)\" ", $buf, $regs)
-		AND $regs[1] == $spip_version)
+			AND $regs[1] == $spip_version)
 			return false; // c'est bon
 		else
 			return _T('avis_erreur_version_archive', array('archive' => $archive));
-    } else
+	} else
 		return _T('avis_probleme_archive', array('archive' => $archive));
-	
 }
 
 if ($archive) {

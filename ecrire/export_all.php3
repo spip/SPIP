@@ -33,7 +33,8 @@ else {
 }
 $_fputs = ($gz) ? gzputs : fputs;
 
-if ($etape < 2) $_fputs($f, "<"."?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
+if ($etape < 2)
+	$_fputs($f, "<"."?xml version=\"1.0\" encoding=\"".lire_meta('charset')."\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
 $query = "SELECT * FROM spip_rubriques";
 export_objets($query, "rubrique", $f, $gz, $etape, 1, _T('info_sauvegarde_rubriques'));
@@ -62,7 +63,7 @@ export_objets($query, "breve", $f, $gz, $etape, 8, _T('info_sauvegarde_breves'))
 //$query = "SELECT * FROM spip_messages";
 //export_objets($query, "message", $f, $gz, $etape, 9, _T('info_sauvegarde_messages'));
 
-$query = "SELECT * FROM spip_forum WHERE statut='publie'".$debug_limit;
+$query = "SELECT * FROM spip_forum".$debug_limit;
 export_objets($query, "forum", $f, $gz, $etape, 9, _T('info_sauvegarde_forums'));
 
 $query = "SELECT * FROM spip_petitions";
@@ -86,23 +87,19 @@ export_objets($query, "spip_referers", $f, $gz, $etape, 15, _T('info_sauvegarde_
 
 if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
-
-
-
 	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='index.php3'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 }
 else {
 	$etape_suivante = $etape + 1;
 	if ($debut_limit > 1) echo "<p align='right'> <a href='export_all.php3?etape=$etape&debut_limit=$debut_limit&gz=$gz'>>>>> "._T('info_etape_suivante')."</a>";
-	else  echo "<p align='right'> <a href='export_all.php3?etape=$etape_suivante&gz=$gz'>>>>> "._T('info_etape_suivante')."</a>";
+	else echo "<p align='right'> <a href='export_all.php3?etape=$etape_suivante&gz=$gz'>>>>> "._T('info_etape_suivante')."</a>";
 }
 install_fin_html();
-	if ($gz) gzclose($f);
-	else fclose($f);
 
+if ($gz) gzclose($f);
+else fclose($f);
 
 if (!$etape OR $etape == 14) fin_admin($action);
-
 
 exit;
 
