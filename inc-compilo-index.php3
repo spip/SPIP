@@ -61,14 +61,13 @@ class Champ {
 	var $fonctions;  // filtre explicites
 	var $etoile;
 	// champs pour la production de code
-	var $process; 	// processeurs standards, exemple 'propre(%s)'
 	var $id_boucle;
 	var $boucles;
 	var $type_requete;
 	var $code;	// code du calcul
 	var $statut;	// 'numerique, 'h'=texte (html) ou 'p'=script (php) ?
 			// -> definira les pre et post-traitements obligatoires
-	// champs pour des balises speciales
+	// champs pour la production de code dependant du contexte
 	var $id_mere;    // pour TOTAL_BOUCLE hors du corps
 	var $document;   // pour embed et <img dans les textes
 }
@@ -204,7 +203,6 @@ function calculer_champ($p) {
 
 // Genere l'application d'une liste de filtres
 function applique_filtres($p) {
-	$code = $p->code;
 	$statut = $p->statut;
 	$fonctions = $p->fonctions;
 	$p->fonctions = ''; # pour réutiliser la structure si récursion
@@ -223,9 +221,7 @@ function applique_filtres($p) {
 	}
 
 //  processeurs standards (cf inc-balises.php3)
-	$ps = champs_traitements($p->nom_champ);
-	if ($ps && (!$p->etoile))
-	  $code = str_replace('%s', $code, $ps);
+	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
 	if ($fonctions) {
 		foreach($fonctions as $fonc) {
@@ -233,26 +229,13 @@ function applique_filtres($p) {
 				$arglist = '';
 				if (ereg('([^\{\}]*)\{(.+)\}$', $fonc, $regs)) {
 					$fonc = $regs[1];
-					$args = $regs[2];
-					while (ereg('([^,]+),?(.*)$', $args, $regs)) {
-						$args = $regs[2];
-						$arg = trim($regs[1]);
-						if ($arg) {
-							if ($arg[0] =='#')
-							  { $p->nom_champ = substr($arg,1);
-							    $arg = calculer_champ($p);}
-							else if ($arg[0] =='$')
-								$arg = '$Pile[0][\'' . substr($arg,1) . "']";
-							$arglist .= ','.$arg;
-						}
-					}
+				        $arglist = filtres_arglist($regs[2],$p);
 				}
-				if (function_exists($fonc))
-					$code = "$fonc($code$arglist)";
-				else
+				if (!function_exists($fonc))
 					$code = "'".texte_script(
 						_T('erreur_filtre', array('filtre' => $fonc))
 					)."'";
+				else $code = "$fonc($code$arglist)";
 			}
 		}
 	}
@@ -263,6 +246,20 @@ function applique_filtres($p) {
 	return $code;
 }
 
+
+function filtres_arglist($args, $p) {
+	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
+		$arg = trim($regs[1]);
+		if ($arg) {
+			if ($arg[0] =='#')
+				{ $p->nom_champ = substr($arg,1);
+				  $arg = calculer_champ($p);}
+			else if ($arg[0] =='$')
+				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
+			$arglist .= ','.$arg;
+		}
+	}
+}
 
 //
 // Reserve les champs necessaires a la comparaison avec le contexte donne par

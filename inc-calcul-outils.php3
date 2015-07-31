@@ -230,8 +230,7 @@ function calcul_branche ($generation) {
 # fonction appelée par la balise #EMBED
 
 function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc){
-  // a finaliser
-  //  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
   return embed_document($id_document, $filtres, false);
 }
 

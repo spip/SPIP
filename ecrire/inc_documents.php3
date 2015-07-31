@@ -62,7 +62,7 @@ function vignette_par_defaut($type_extension) {
 //
 
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
-	global $id_doublons; # ne sert plus aux squelettes
+	global $id_doublons;
 
 	$id_doublons['documents'] .= ",$id_document";
 
@@ -195,7 +195,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 //
 
 function integre_image($id_document, $align, $type_aff) {
-	global $id_doublons; # ne sert plus aux squelettes
+	global $id_doublons;
 	global $flag_ecrire;
 
 	$id_doublons['documents'] .= ",$id_document";
