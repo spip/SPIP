@@ -60,11 +60,7 @@ function spip_connect($serveur='', $version='') {
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false;
-			if ($f AND $readable)
-				spip_log("spip_connect: fichier de connexion '$f' OK.");
-			else
-				spip_log("spip_connect: fichier de connexion '$f' non trouve");
-			spip_log("spip_connect: echec connexion ou serveur $index mal defini dans '$f'.");
+			spip_log("spip_connect: serveur $index mal defini dans '$f'. spip_connect_version: " . @$GLOBALS['spip_connect_version']);
 			// ne plus reessayer si ce n'est pas l'install
 			return $connexions[$index]=false;
 		}
