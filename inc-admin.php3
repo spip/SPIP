@@ -52,7 +52,7 @@ function afficher_boutons_admin($pop) {
 	$link->addVar('recalcul', 'oui');
 	$link->delVar('submit');
 	$ret .=  $link->getForm('GET');
-	$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\"></input>";
+	$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\" />";
 	$ret .= "</form>\n";
 
 	if (lire_meta("activer_statistiques") != "non" AND $id_article AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
