@@ -20,7 +20,7 @@ function exec_install_dist()
 {
 	$etape = _request('etape');
 	if (_FILE_CONNECT && $etape != 'unpack') 
-		minipres(_T('avis_espace_interdit'));
+		minipres('AUTO', _T('avis_espace_interdit'));
 	else {
 
 	// On va supprimer les eventuelles vieilles valeurs de meta,

@@ -17,8 +17,7 @@ function install_etape_4_dist()
 
 	install_debut_html();
 
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
-	echo "<P>\n";
+	echo info_etape(_T('info_creation_tables'));
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
 
@@ -94,7 +93,7 @@ function install_etape_4_dist()
 		$conn))
 			redirige_par_entete(generer_url_ecrire('install'));
 
-		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
+		echo "<p><b>"._T('info_base_installee')."</b></p><p>\n"._T('info_etape_suivante_1');
 
 		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5' />";

@@ -27,46 +27,59 @@ function install_etape_5_dist()
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
-	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>\n";
-
-	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
-	echo aide ("install5");
-	echo "<p>\n"._T('texte_informations_personnelles_2')." ";
-	echo _T('info_laisser_champs_vides');
+	echo info_etape(_T('info_informations_personnelles'),
+		"<b>"._T('texte_informations_personnelles_1')."</b>" .
+		aide ("install5") .
+		"</p><p>" .
+		_T('texte_informations_personnelles_2') . " " .
+		_T('info_laisser_champs_vides')
+	);
 
 	echo generer_url_post_ecrire('install');
 
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6' />";
 
-	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR />\n</label>";
-	echo "<B>"._T('entree_signature')."</B><BR />\n";
-	echo _T('entree_nom_pseudo_1')."<BR />\n";
-	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"$nom\" SIZE='40' /><P>\n";
+	echo fieldset(_T('info_identification_publique'),
+		array(
+			'nom' => array(
+				'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
+				'value' => $nom
+			),
+			'email' => array(
+				'label' => "<b>"._T('entree_adresse_email')."</b>\n",
+				'value' => $email
+			)
+		)
+	);
 
-	echo "<B>"._T('entree_adresse_email')."</B><BR />\n";
-	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"$email\" SIZE='40' /></fieldset>\n";
-
-	echo "<fieldset><label><B>"._T('entree_identifiants_connexion')."</B><BR />\n</label>";
-	echo "<B>"._T('entree_login')."</B><BR />\n";
-	echo _T('info_plus_trois_car')."<BR />\n";
-	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"$login\" SIZE='40' />\n";
-
-	echo "<B>"._T('entree_mot_passe')."</B> <BR />\n";
-	echo _T('info_plus_cinq_car_2')."<BR />\n";
-	echo "<INPUT TYPE='password' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40' /></fieldset>\n";
+	echo fieldset(_T('entree_identifiants_connexion'),
+		array(
+			'login' => array(
+				'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
+				'value' => $login
+			),
+			'pass' => array(
+				'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
+				'value' => $pass
+			)
+		)
+	);
 
 	echo bouton_suivant();
-	echo "</FORM>\n";
+	echo "</form>\n";
 
 	if (function_exists('ldap_connect') AND !$ldap_present) {
-		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
-		echo "<b>"._T('info_authentification_externe')."</b>";
-		echo "<p>\n"._T('texte_annuaire_ldap_1');
 		echo generer_url_post_ecrire('install');
-		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1' />";
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE=\""._T('bouton_acces_ldap')."\" /></div>";
-		echo "</FORM>
-		</div>";
+		echo fieldset(_T('info_authentification_externe'),
+			array(
+				'etape' => array(
+					'label' => _T('texte_annuaire_ldap_1').bouton_suivant('bouton_acces_ldap'),
+					'value' => 'ldap1',
+					'hidden' => true
+				)
+			)
+		);
+		echo "</form>\n";
 	}
 
 	install_fin_html();

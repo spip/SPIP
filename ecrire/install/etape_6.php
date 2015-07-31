@@ -17,11 +17,10 @@ function install_etape_6_dist()
 
 	install_debut_html();
 
-
-	echo "<p><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT></p>";
-	echo "<P>";
-	echo "<B>"._T('info_code_acces')."</B>";
-	echo "</p><P>"._T('info_utilisation_spip')."</p>";
+	echo info_etape(_T('info_derniere_etape'),
+		"<b>"._T('info_code_acces')."</b></p><p>" .
+		_T('info_utilisation_spip')
+	);
 
 	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
 		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
@@ -77,22 +76,22 @@ function install_etape_6_dist()
 	ecrire_acces();
 
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
-		    _FILE_CONNECT_INS . '.php')) {
+		    _DIR_ETC . 'connect.php')) {
 		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
-		     _FILE_CONNECT_INS . '.php');
+		     _DIR_ETC . 'connect.php');
 		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	}
 
 	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
-		    _FILE_CHMOD_INS . '.php')) {
+		    _DIR_ETC . 'chmod.php')) {
 		copy(_FILE_CHMOD_INS . _FILE_TMP . '.php', 
-		     _FILE_CHMOD_INS . '.php');
+		     _DIR_ETC . 'chmod.php');
 		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
 	echo "<form action='./' method='post'>";
 	echo bouton_suivant();
-	echo "</FORM>";
+	echo "</form>";
 
 	ecrire_metas();
 
