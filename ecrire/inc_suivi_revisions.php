@@ -92,7 +92,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 				WHERE id_auteur = $id_auteur";
 			$result_auteur = spip_query($query_auteur);
 			if ($row_auteur = spip_fetch_array($result_auteur)) {
-				$nom = propre($row_auteur["nom"]);
+				$nom = typo($row_auteur["nom"]);
 				if (strlen($nom) > 0) $nom = "($nom)";
 			}
 	
@@ -102,7 +102,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
 			echo "<span class='arial2'>";
-			if (!$court) echo bouton_block_invisible("$id_version-$id_article-$id_auteur");
+			if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
 			echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
 			echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
 			echo "</span>";
@@ -163,12 +163,16 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					}
 				}
 				
-				echo debut_block_invisible("$id_version-$id_article-$id_auteur");
+				echo debut_block_visible("$id_version-$id_article-$id_auteur");
 				if (is_array($textes))
 				foreach ($textes as $var => $t) {
 					if (strlen($t) > 0) {
 						echo "<blockquote class='serif1'>";
-						echo propre($t);
+						echo propre_diff($t);
+						if ($GLOBALS['les_notes']) {
+							echo '<p>'.$GLOBALS['les_notes'];
+							$GLOBALS['les_notes'] = '';
+						}
 						echo "</blockquote>";
 					}		
 				}		

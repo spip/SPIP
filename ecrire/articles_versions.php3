@@ -254,17 +254,17 @@ if ($id_version) {
 	else {
 		echo "<div $dir_lang><b>";
 		$revision_nbsp = ($options == "avancees");	// a regler pour relecture des nbsp dans les articles
-		echo justifier(propre($chapo));
+		echo justifier(propre_diff($chapo));
 		echo "</b></div>\n\n";
 	
 		echo "<div $dir_lang>";
-		echo justifier(propre($texte));
+		echo justifier(propre_diff($texte));
 		echo "</div>";
 	
 		if ($ps) {
 			echo debut_cadre_enfonce();
 			echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-			echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
+			echo justifier("<b>"._T('info_ps')."</b> ".propre_diff($ps));
 			echo "</font></div>";
 			echo fin_cadre_enfonce();
 		}

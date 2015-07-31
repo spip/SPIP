@@ -459,4 +459,47 @@ function ajouter_version($id_article, $champs, $titre_version = "") {
 	return $id_version_new;
 }
 
+// les textes "diff" ne peuvent pas passer dans propre directement,
+// car ils contiennent des <span> et <div> parfois mal places
+function propre_diff($texte) {
+
+	$span_diff = array();
+	if (preg_match_all(',</?(span|div) (class|rem)="diff-[^>]+>,', $texte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $c => $reg)
+			$texte = str_replace($reg[0], '@@@SPIP_DIFF'.$c.'@@@', $texte);
+	}
+
+	// [ ...<span diff> -> lien ]
+	// < tag <span diff> >
+	$texte = preg_replace(',<([^>]*@@@SPIP_DIFF[0-9]+@@@),',
+		'&lt;\1', $texte);
+	# attention ici astuce seulement deux @@ finals car on doit eviter
+	# deux patterns a suivre, afin de pouvoir prendre [ mais eviter [[
+	$texte = preg_replace(',(^|[^[])[[]([^[\]]*@@@SPIP_DIFF[0-9]+@@),',
+		'\1&#91;\2', $texte);
+
+	$texte = propre($texte);
+
+	// un blockquote mal ferme peut gener l'affichage, et title plante safari
+	$texte = preg_replace(',<(/?(blockquote|title)[^>]*)>,i', '&lt;\1>', $texte);
+
+	// Dans les <cadre> c'est un peu plus complique
+	if (preg_match_all(',<textarea (.*)</textarea>,Uims', $texte, $area, PREG_SET_ORDER)) {
+		foreach ($area as $reg) {
+			$remplace = preg_replace(',@@@SPIP_DIFF[0-9]+@@@,', '**', $reg[0]);
+			if ($remplace <> $reg[0])
+				$texte = str_replace($reg[0], $remplace, $texte);
+		}
+	}
+
+	// replacer les valeurs des <span> et <div> diff-
+	if (is_array($regs))
+	foreach ($regs as $c => $reg) {
+		$texte = str_replace('@@@SPIP_DIFF'.$c.'@@@', $reg[0], $texte);
+		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $reg[0], $GLOBALS['les_notes']);
+	}
+
+	return $texte;
+}
+
 ?>
