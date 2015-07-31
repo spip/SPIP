@@ -19,6 +19,11 @@ function formulaires_editer_groupe_mot_charger_dist($id_groupe='new',$retour='',
 	$valeurs = formulaires_editer_objet_charger('groupe_mot',$id_groupe,0,'',$retour,$config_fonc,$row,$hidden);
 
 	$valeurs['tables_liees'] = explode(',',$valeurs['tables_liees']);
+
+	// par defaut a la creation de groupe
+	if ($id_groupe == 'oui')
+		$valeurs['tables_liees'] = array('articles');
+
 	return $valeurs;
 }
 

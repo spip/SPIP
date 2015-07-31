@@ -113,6 +113,13 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		// allez on commit la modif
 		sql_update($spip_table_objet, $champsq, "$id_table_objet=$id", $serveur);
 
+		// Cas particulier des groupes de mots dont le titre est repris
+		// dans la table spip_mots
+		if ($spip_table_objet == 'spip_groupes_mots'
+		AND isset($champsq['titre']))
+			sql_update('spip_mots', array('type' => $champsq['titre']),
+			'id_groupe='.$id);
+
 		// Invalider les caches
 		if ($options['invalideur']) {
 			include_spip('inc/invalideur');
