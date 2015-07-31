@@ -1,0 +1,24 @@
+
+{{{ SPIP, Syst&egrave;me de publication pour l'internet }}}
+
+Copyright &copy; 2001-2002, Arnaud Martin, Antoine Pitrou et Philippe Rivi&egrave;re
+pour le Minir&eacute;zo.
+
+Ce programme est un logiciel libre ; vous pouvez le redistribuer et/ou le
+modifier conform&eacute;ment aux dispositions de la Licence Publique G&eacute;n&eacute;rale GNU,
+telle que publi&eacute;e par la Free Software Foundation ; version 2 de la licence,
+ou encore (&agrave; votre choix) toute version ult&eacute;rieure.
+
+Ce programme est distribu&eacute; dans l'espoir qu'il sera utile, mais SANS AUCUNE
+GARANTIE ; sans même la garantie implicite de COMMERCIALISATION ou
+D'ADAPTATION A UN OBJET PARTICULIER. Pour plus de d&eacute;tails, voir la Licence
+Publique G&eacute;n&eacute;rale GNU.
+
+Un exemplaire de la Licence Publique G&eacute;n&eacute;rale GNU doit &ecirc;tre
+fourni avec ce programme ; si ce n'est pas le cas, &eacute;crivez &agrave; la Free
+Software Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, Etats-Unis.
+
+{{ Ce logiciel est t&eacute;l&eacute;chargeable &agrave; l'adresse
+[->http://www.uzine.net/spip] ; vous trouverez &eacute;galement, sur ce
+site, un mode d'emploi complet et des informations suppl&eacute;mentaires. }}
+

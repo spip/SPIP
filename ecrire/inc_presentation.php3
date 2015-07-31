@@ -1947,7 +1947,7 @@ function fin_page() {
 <p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL.</a>
+est un logiciel libre distribu&eacute; <a href='licence.php3'>sous licence GPL.</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
