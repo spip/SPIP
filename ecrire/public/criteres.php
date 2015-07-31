@@ -643,8 +643,14 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 {
   list($dnom,$ddesc) = $depart;
   list($anom,$adesc) = $arrivee;
-  $prim = $ddesc['key']['PRIMARY KEY'];
-  $v = array_intersect($prim ? split(', *',$prim): $ddesc['key'], $adesc['key']);
+
+  $keys = $ddesc['key'];
+
+  if ($v = $keys['PRIMARY KEY']) {
+    unset($keys['PRIMARY KEY']);
+    $keys = array_merge(split(', *', $v), $keys);
+  }
+  $v = array_intersect($keys, $adesc['key']); 
   if ($v)
     return array(array($dnom, $arrivee, array_shift($v)));
    else    {
@@ -653,7 +659,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 	if ($v && (!in_array($v,$vu)) && 
 	    ($def = trouver_def_table($v, $boucle))) {
 	  list($table,$join) = $def;
-	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
+	  $milieu = array_intersect($keys, trouver_cles_table($join['key']));
 	  foreach ($milieu as $k)
 	    {
 	      $new[] = $v;
