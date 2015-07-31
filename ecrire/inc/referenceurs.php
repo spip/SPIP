@@ -145,14 +145,8 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$path  = $url['path'];
 	} else $query = $host = $path ='';
 
-	// affecter directement les variables depuis la query-string, sans remplacer celles existantes
-	foreach (explode('&', $query) as $chaine) {
-		if (count($Tchaine = explode('=', $chaine)) > 1) {
-			$p = str_replace(array('[', ']'), '', $Tchaine[0]);
-			if (!isset($$p))
-				$$p = $Tchaine[1];
-		}
-	}
+	// construire un array des variables directement depuis la query-string
+	parse_str($query, $Tquery);
 
 	$keywords = '';
 	$found = false;
@@ -175,9 +169,9 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			
 			if (strpos($arr_engines[$cnt][1],'=')!==false) {
 			
-				// Fonctionnement simple: la variable existe
+				// Fonctionnement simple: la variable existe dans l'array
 				$v = str_replace('=', '', $arr_engines[$cnt][1]);
-				$keywords = isset($$v)?$$v:"";
+				$keywords = isset($Tquery[$v]) ? $Tquery[$v]: "";
 				
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
