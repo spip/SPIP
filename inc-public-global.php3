@@ -48,7 +48,7 @@ function calcule_header_et_page ($fond) {
 	// afin que celle-ci contienne la signature
 
 	if ($_GET['var_confirm']) {
-		include_local(find_in_path('inc-formulaire_signature.php3'));
+		include_local(find_in_path('inc-formulaire_signature' . _EXTENSION_PHP));
 		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
 
@@ -60,7 +60,7 @@ function calcule_header_et_page ($fond) {
 		else {
 			$link = new Link();
 			$link->addvar('var_mode', 'debug');
-			redirige_par_entete('spip_login.php3?url='
+			redirige_par_entete('spip_login' . _EXTENSION_PHP . '?url='
 				.urlencode($link->getUrl()));
 			exit;
 		}
@@ -116,7 +116,7 @@ function afficher_page_globale ($fond) {
 	global $_GET, $_POST, $_COOKIE, $_SERVER;
 
 	# methode de surcharge a revoir, car find_in_path donne './inc-cache'
-	$f = find_in_path("inc-cache.php3");
+	$f = find_in_path("inc-cache" . _EXTENSION_PHP);
 	if ($f && is_readable($f)) {
 		include_local($f);
 	} else include_local("inc-cache");
@@ -125,8 +125,8 @@ function afficher_page_globale ($fond) {
 	$chemin_cache = determiner_cache($use_cache, '', $fond);
 
 	// demande de previsualisation ?
-	// -> inc-calcul.php3 n'enregistrera pas les fichiers caches
-	// -> inc-reqsql-squel.php3 acceptera les objets non 'publie'
+	// -> inc-calcul n'enregistrera pas les fichiers caches
+	// -> inc-boucles acceptera les objets non 'publie'
 	if (is_preview()) {
 			$var_mode = 'recalcul';
 			$var_preview = true;
@@ -263,7 +263,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
-		$f = find_in_path("inc-cache.php3");
+		$f = find_in_path("inc-cache" . _EXTENSION_PHP);
 		if ($f && is_readable($f)) {
 		  if (!$GLOBALS['included_files']['inc-cache']++) include($f);
 		} else include_local("inc-cache");
@@ -317,7 +317,7 @@ function message_erreur_404 ($erreur= "") {
 	return array('texte' => '<'.'?php
 			$contexte_inclus = array("fond" => 404,
  				"erreur" => _T("' . $erreur  . '"));
-			include(\'page.php3\'); ?'.'>',
+			include(\'page' . _EXTENSION_PHP .'\'); ?'.'>',
 		     'process_ins' => 'php');
 }
 
