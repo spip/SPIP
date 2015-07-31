@@ -128,12 +128,14 @@ function action_tester_dist() {
 
 	// et maintenant envoyer la vignette de tests
 	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $arg)) {
-		include_spip('inc/logos');
+		include_spip('inc/filtres');
+		include_spip('inc/filtres_images');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 150;
-		if ($preview = creer_vignette(
-		_ROOT_IMG_PACK.'test_image.jpg',
-		$taille_preview, $taille_preview, 'jpg', '', "test_$arg", $arg, true)
+		$image = image_valeurs_trans(_ROOT_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
+
+		$image['fichier_dest']=_DIR_IMG."test_$arg";
+		if ($preview = image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
 		AND ($preview['width'] * $preview['height'] > 0))
 			redirige_par_entete($preview['fichier']);
 	}

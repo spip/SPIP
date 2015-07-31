@@ -285,8 +285,9 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			if ($format == "jpg") {
 				
 				$jpegtopnm_command = str_replace("pnmscale", "jpegtopnm", _PNMSCALE_COMMAND);
-
 				exec("$jpegtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!($s = @filesize($vignette)))
+					@unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-jpg sur $vignette");
 					return;
@@ -294,6 +295,8 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			} else if ($format == "gif") {
 				$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
 				exec("$giftopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!($s = @filesize($vignette)))
+					@unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-gif sur $vignette");
 					return;
@@ -301,6 +304,8 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			} else if ($format == "png") {
 				$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
 				exec("$pngtopnm_command $image | "._PNMSCALE_COMMAND." -width $destWidth | $pnmtojpeg_command > $vignette");
+				if (!($s = @filesize($vignette)))
+					@unlink($vignette);
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-png sur $vignette");
 					return;
@@ -433,7 +438,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 // http://doc.spip.org/@image_reduire
-function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false) {
+function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherche_image=false, $process='AUTO') {
 	// Determiner la taille x,y maxi
 	// prendre le reglage de previsu par defaut
 	if ($taille == -1)
@@ -485,7 +490,7 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 	if (in_array($image["format_source"],array('jpg','gif','png'))){
 		$logo = $image['fichier'];
 		$date = $image["date_src"];
-		$preview = image_creer_vignette($image, $taille, $taille_y,'AUTO',$force);
+		$preview = image_creer_vignette($image, $taille, $taille_y,$process,$force);
 		if ($preview) {
 			$logo = $preview['fichier'];
 			$destWidth = $preview['width'];
