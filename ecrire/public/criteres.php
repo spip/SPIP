@@ -560,7 +560,9 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$boucles[$idb]->select[]=  "SUM(FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \")) AS cpt$cpt";
+	$arg = "FIELD($arg,\" . join(',',array_map('spip_abstract_quote', $var)) . \")";
+	if ($boucles[$idb]->group) $arg = "SUM($arg)";
+	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
 	$op = array("'$op'", "'cpt$cpt'", 0);
 
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
