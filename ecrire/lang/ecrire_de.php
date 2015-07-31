@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'LDAP Zugang hinzuf&uuml;gen >>',
+'bouton_acces_ldap' => '<MODIF>LDAP Zugang hinzuf&uuml;gen >>',
 'bouton_ajouter' => 'Hinzuf&uuml;gen',
 'bouton_ajouter_participant' => 'TEILNEHMER HINZUF&Uuml;GEN:',
 'bouton_annonce' => 'ANK&Uuml;NDIGUNG',
@@ -188,7 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Neue Rubrik anlegen',
 'icone_ecrire_nouvel_article' => 'Meldungen in dieser Rubrik',
 'icone_envoyer_message' => 'Nachricht abschicken',
-'icone_evolution_visites' => 'Besuchsentwicklung<br>@visites@ Abrufe',
+'icone_evolution_visites' => '<MODIF>Besuchsentwicklung<br />@visites@ Abrufe',
 'icone_modif_groupe_mots' => 'Schlagwort-Kategorie bearbeiten',
 'icone_modifier_article' => 'Artikel bearbeiten',
 'icone_modifier_breve' => 'Meldung bearbeiten',
@@ -376,7 +376,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_message_technique' => 'Technische Nachricht:',
 'info_messagerie_interne' => 'Interne Nachrichten',
 'info_mise_a_niveau_base' => 'Update Ihrer MySQL-Datenbank',
-'info_mise_a_niveau_base_2' => '{{ACHTUNG!}} Sie haben eine {&auml;ltere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird m&ouml;glicherweise zerst&ouml;rt und Ihre Website wird nict mehr funktionieren.<br>{{Installieren Sie noch einmal die aktuelle Version von SPIP.}}',
+'info_mise_a_niveau_base_2' => '<MODIF>{{ACHTUNG!}} Sie haben eine {&auml;ltere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird m&ouml;glicherweise zerst&ouml;rt und Ihre Website wird nict mehr funktionieren.<br />{{Installieren Sie noch einmal die aktuelle Version von SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardmodus der &ouml;ffentlichen Foren',
 'info_modifier_breve' => 'Meldung bearbeiten:',
 'info_modifier_rubrique' => 'Rubrik bearbeiten:',
@@ -771,7 +771,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_compresse_ou_non' => '(kann komprimiert oder unkomprimiert sein)',
 'texte_compte_element' => '@count@ Element',
 'texte_compte_elements' => '@count@ Elemente',
-'texte_config_groupe_mots_cles' => 'M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
+'texte_config_groupe_mots_cles' => '<MODIF>M&ouml;chten Sie die erweiterten Einstellungen f&uuml;r Schlagworte einschalten? Sie k&ouml;nnen dann z.B. die Zuordnungen auf ein Wort pro Kategorie begrenzen, eine Kategorie als besonders wichtig definieren etc.',
 'texte_connexion_mysql' => 'Sie erhalten die erforderlichen Informationen von Ihrem Webspace-Provider. Sie erfahren von ihm, ob Ihr Server MySQL unterst&uuml;tzt und welche Verbindungsdaten erforderlich sind.',
 'texte_contenu_article' => '(Zusammenfassung des Artikels in wenigen Worten.)',
 'texte_contenu_articles' => 'Ja nach Vorlage, die Sie f&uuml;r Ihre Website verwenden, k&ouml;nnen Sie Elemente von Artikeln aktivieren oder abschalten. Bitte bestimmen Sie mit dieser Liste, welche Elemente verf&uuml;gbar sein sollen.',
@@ -829,7 +829,7 @@ ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bit
 'texte_plusieurs_articles' => 'Mehrere Autoren f&uuml;r &bdquo;@cherche_auteur@&ldquo; gefunden:',
 'texte_port_annuaire' => '(Der Standardwert kann meistens beibehalten werden.)',
 'texte_presente_plugin' => 'Diese Seite zeigt eine Liste der auf dieser Website verf&uuml;gbaren Plugins. Sie k&ouml;nnen sie aktivieren, indem sie die entsprechenden Eintr&auml;ge mit einem H&auml;cken merkieren.',
-'texte_proposer_publication' => 'Wenn Ihr Artikel fertig ist,<br> k&ouml;nnen Sie ihn zur Ver&ouml;ffentlichung vorschlagen.',
+'texte_proposer_publication' => '<MODIF>Wenn Ihr Artikel fertig ist,<br /> k&ouml;nnen Sie ihn zur Ver&ouml;ffentlichung vorschlagen.',
 'texte_proxy' => 'In manchen F&auml;llen (Intranet, Rechner hinter einer Firewall...),
 kann ein <i>HTTP-Proxy</i> erforderlich sein, um die syndizierten Websites zu erreichen.
  In diesem Fall geben Sie seine Adresse im Format
@@ -841,7 +841,7 @@ Meistens kann dieses Feld aber leer bleiben.',
 'texte_recapitiule_liste_documents' => 'Diese Seite enth&auml;lt eine Liste der Dokumente, die Sie in Rubriken eingeordnet haben. Um die Angaben zu den Dokumenten zu bearbeiten, benutzen Sie bitte den Link zur jeweiligen Rubrik.',
 'texte_recuperer_base' => 'Datenbank reparieren',
 'texte_reference_mais_redirige' => 'Artikel Ihrer Website, der eine Umleitung zu einem anderen URL enth&auml;lt.',
-'texte_referencement_automatique' => '<b>Automatische Verlinkung einer Website</b><br>Sie k&ouml;nnen eine Website im Schnellverfahren verlinken, indem Sie seinen URL oder den seiner Backend-Datei angeben. SPIP wird dann die Daten der Website selbst&auml;ndig einlesen (Titel, Beschreibung ...).',
+'texte_referencement_automatique' => '<MODIF><b>Automatische Verlinkung einer Website</b><br />Sie k&ouml;nnen eine Website im Schnellverfahren verlinken, indem Sie seinen URL oder den seiner Backend-Datei angeben. SPIP wird dann die Daten der Website selbst&auml;ndig einlesen (Titel, Beschreibung ...).',
 'texte_requetes_echouent' => '<b>Wenn manche SQL-Befehle ohne ersichtlichen Grund systematisch fehlschlagen, kann es an einer besch&auml;digten Datenbank liegen.</b><p>
 MySQL kann Tabellen reparieren, die besch&auml;digt worden sind. Starten Sie hier einen Reparaturversuch. Sollte das fehlschlagen, notieren Sie bitte die Fehlermeldung, die u.U. einen Hinweis auf den Grund des Problems gibt ...<p>
 Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf.<p>',
@@ -876,7 +876,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_travail_collaboratif' => 'Wenn es &ouml;fter vorkommt, dass mehrere Redakteure gemeinsam an Artikeln arbeiten, kann SPIP die vor kurzem &bdquo;ge&ouml;ffneten&ldquo; Artikel anzeigen, um gleichzeitige &Auml;nderungen vorzubeugen. Diese Funktion ist normalerweise abgeschaltet, um st&ouml;rende Meldungen zu reduzieren.',
 'texte_trop_resultats_auteurs' => 'Zu viele Ergebnisse f&uuml;r &bdquo;@cherche_auteur@&ldquo;. Bitte pr&auml;zisieren Sie Ihre Suchanfrage.',
 'texte_unpack' => 'neue Version laden.',
-'texte_utilisation_moteur_syndiques' => 'Wenn Sie die Suchmaschine von SPIP einsetzen, k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br>- Im einfachen Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br><img src=\'puce.gif\'> Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
+'texte_utilisation_moteur_syndiques' => '<MODIF>Wenn Sie die Suchmaschine von SPIP einsetzen, k&ouml;nnen Sie syndizierte Artikel und Websites auf zwei Arten behandeln. <br />- Im einfachen Fall werden nur Titel und Beschreibung der Artikel durchsucht. <br /><img src=\'puce.gif\'> Die zweite, wesentlich leistungsf&auml;higere Methode erlaubt es, auch den Text der syndizierten Websites zu durchsuchen. Wenn Sie eine Website verlinken, erfasst SPIP vollautomatisch den Inhalt der Website selber. ',
 'texte_utilisation_moteur_syndiques_2' => 'Diese Methode zwingt SPIP, die verlinkten Websites in regelm&auml;ssigen Abst&auml;nden abzurufen, wodurch Ihre Website etwas langsamer werden kann.',
 'texte_vide' => 'leer',
 'texte_vider_cache' => 'Cache leeren',

@@ -414,7 +414,7 @@ Trugarez da gemer perzh
 'info_erreur_requete' => 'Fazi er galvadenn :',
 'info_erreur_squelette2' => 'N\'eus framm <b>@fichier@</b> ebet da gaout...',
 'info_erreur_systeme' => 'Fazi kenreizhad (errno @errsys@)',
-'info_erreur_systeme2' => 'Marteze eo leun-chouk ar bladenn-galet, pe neuze eo mazaouet an diaz-titouro&ugrave;<br>
+'info_erreur_systeme2' => 'Marteze eo leun-chouk ar bladenn-galet, pe neuze eo mazaouet an diaz-titouro&ugrave;. <br />
  <font color=\'red\'>Klaskit <a href=\'@script@\'>kempenn an diaz</a>,
  pe kit e-darempred gant ho poder.</font>',
 'info_fini' => 'Echu eo !',
@@ -423,7 +423,7 @@ Trugarez da gemer perzh
 'info_grand_ecran' => 'Skramm bras',
 'info_image_aide' => 'SIKOUR',
 'info_image_process_titre' => 'Hentenn da groui&ntilde; skeudennigo&ugrave;',
-'info_impossible_lire_page' => '<B>Fazi !</B> Dibosupl eo lenn ar bajenn <tt><html>@test_proxy@</html></tt> dre ar proxy <tt>',
+'info_impossible_lire_page' => '<b>Fazi !</b> Dibosupl eo lenn ar bajenn <tt><html>@test_proxy@</html></tt> dre ar proxy',
 'info_inclusion_directe' => 'Enklosa&ntilde; warn-eeun:',
 'info_inclusion_vignette' => 'Enklosa&ntilde; ar skeudennig&nbsp;:',
 'info_installation_systeme_publication' => 'Staliadur ar genreizhad-embann...',
@@ -499,9 +499,9 @@ Trugarez da gemer perzh
 'info_site_refuse' => 'Lec\'hienn bet nac\'het',
 'info_sites_referencer' => 'Listenna&ntilde; ul lec\'hienn',
 'info_supprimer_vignette' => 'dilemel ar skeudennig',
-'info_symbole_bleu' => 'An arouez <B>glas</B> a dalvez evit un <B>notennig-e&ntilde;vor</B>: da lavaret eo ur gemennadenn evidoc\'h hepken.',
-'info_symbole_jaune' => 'An arouez <B>melen</B> a dalvez evit ur <B>c\'hemenn d\'an holl skridaozerien</B>&nbsp;: a c\'hell beza&ntilde; kemmet gant ur merour ha lennet gant an holl skridaozerien.',
-'info_symbole_vert' => 'An arouez <B>gwer</B> a dalvez evit ar <B>c\'hemennadenno&ugrave; bet eskemmet gant implijerien all</B> eus al lec\'hienn.',
+'info_symbole_bleu' => 'An arouez <b>glas</b> a dalvez evit un <b>notennig-e&ntilde;vor</b>: da lavaret eo ur gemennadenn evidoc\'h hepken.',
+'info_symbole_jaune' => 'An arouez <b>melen</b> a dalvez evit ur <b>c\'hemenn d\'an holl skridaozerien</b>&nbsp;: a c\'hell beza&ntilde; kemmet gant ur merour ha lennet gant an holl skridaozerien.',
+'info_symbole_vert' => 'An arouez <b>gwer</b> a dalvez evit ar <b>c\'hemennadenno&ugrave; bet eskemmet gant implijerien all</b> al lec\'hienn.',
 'info_syndication' => 'Listnena&ntilde;-RSS&nbsp;:',
 'info_syndication_articles' => 'pennad(o&ugrave;)',
 'info_telecharger' => 'Karga&ntilde; adal hoc\'h urzhiataer&nbsp;:',
@@ -667,17 +667,17 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 				met n\'int ket bet ensoc\'het diouzhtu enna&ntilde;
 				Diouzh doare-kinnig al lec\'hienn e c\'hellint beza&ntilde; diskouezet dindan stumm restro&ugrave; stag.',
 'texte_erreur_mise_niveau_base' => 'Ur fazi a zo bet gant an diaz-titouro&ugrave; da vare an nevezadur.
-		N\'eo ket tremenet ar skeudenn <B>@fichier@</B> (pennad @id_article@).
-		Notennit an dave-se, klaksit en-dro nevesaaat, 
-		ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
-'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login <B>@auth_login@</B>, 
-		met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
-		Klaskit ',
+  N\'eo ket tremenet ar skeudenn <b>@fichier@</b> (pennad @id_article@).
+  Notennit an dave-se, klaksit en-dro nevesaaat, 
+  ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
+'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login
+ <b>@auth_login@</b>, met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
+  Klaskit ',
 'texte_inc_auth_2' => 'adkennaska&ntilde;',
 'texte_inc_auth_3' => ', goude beza&ntilde; kuitaet hag adloc\'het ho merdeer.',
-'texte_inc_config' => 'Ul levezon bras o deus kemmo&ugrave; ar bajenn-ma&ntilde; war mont-en-dro hollek al lec\'hienn.
-	Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
-	<P align="justify"><B>Aliet oc\'h da lezel webmestr penna&ntilde; al lec\'hienn ober war-dro ar pajenno&ugrave;-ma&ntilde;.</B>',
+'texte_inc_config' => '>Ul levezon bras o deus kemmo&ugrave; ar bajenn-ma&ntilde; war mont-en-dro hollek al lec\'hienn.
+Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
+ <p align="justify"><b>Aliet oc\'h da lezel webmestr penna&ntilde; al lec\'hienn ober war-dro ar pajenno&ugrave;-ma&ntilde;.</b>',
 'texte_inc_meta_1' => 'Ur fazi a zo bet o skriva&ntilde; war ar restr <code>@fichier@</code>. o veza&ntilde; ma\'z oc\'h merour al lec\'hienn e rankit ',
 'texte_inc_meta_2' => 'Gwiria&ntilde; ar gwirio&ugrave; da skriva&ntilde; ',
 'texte_inc_meta_3' => 'war an teul <code>@repertoire@</code>.',

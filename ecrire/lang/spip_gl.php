@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
 'calendrier_synchro_prive' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
 'calendrier_synchro_public' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><NEW><pLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro_sync' => '<NEW><NEW><pLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'escolla de interface',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
@@ -424,7 +424,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_erreur_requete' => 'Erro na petici&oacute;n:',
 'info_erreur_squelette2' => 'Ning&uacute;n esqueleto <b>@fichier@</b> est&aacute; dispo&ntilde;ible...',
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
-'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada. <br>
+'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada. <br />
  <font color=\'red\'>Probe a <a href=\'@script@\'>reparar a base</a>,
  ou contacte co seu aloxador.</font>',
 'info_fini' => 'Rematou!',

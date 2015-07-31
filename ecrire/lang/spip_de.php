@@ -411,7 +411,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_erreur_requete' => 'Abfragefehler: ',
 'info_erreur_squelette2' => 'Keine Vorlage <b>@fichier@</b> vorhanden ...',
 'info_erreur_systeme' => 'Systemfahler (Fehler no. @errsys@)',
-'info_erreur_systeme2' => 'M&ouml;glicherweise ist die Festplatte voll oder die Datenbank ist besch&auml;digt. <br>
+'info_erreur_systeme2' => 'M&ouml;glicherweise ist die Festplatte voll oder die Datenbank besch&auml;digt. <br />
  <font color=\'red\'>Versuchen Sie <a href=\'@script@\'>die Datenbank zu reparieren</a>,
  oder wenden Sie sich an Ihren Provider.</font>',
 'info_fini' => 'Fertig!',

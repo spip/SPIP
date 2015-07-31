@@ -199,7 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Crear un novo tema',
 'icone_ecrire_nouvel_article' => 'As breves contidas neste tema',
 'icone_envoyer_message' => 'Enviar a mensaxe',
-'icone_evolution_visites' => 'Evoluci&oacute;n das visitas<br>@visites@ visitas',
+'icone_evolution_visites' => 'Evoluci&amp;oacute;n das visitas<br />@visites@ visitas',
 'icone_modif_groupe_mots' => 'Modificar este grupo de palabras',
 'icone_modifier_article' => 'Modificar este artigo',
 'icone_modifier_breve' => 'Modificar esta breve',
@@ -404,10 +404,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_technique' => 'Mensaxe t&eacute;cnica:',
 'info_messagerie_interne' => 'mensaxer&iacute;a interna',
 'info_mise_a_niveau_base' => 'posta &oacute; d&iacute;a da t&uacute;a base MySQL',
-'info_mise_a_niveau_base_2' => '{{Atenci&oacute;n!}} Instalou unha versi&oacute;n
-  de ficheiros do SPIP {anterior} &aacute; que ti&ntilde;a instalada
-  antes neste web: a s&uacute;a base de datos p&oacute;dese ter perdido
-  e o web non funcionar&aacute;.<br>{{Reinstale os
+'info_mise_a_niveau_base_2' => '{{Atenci&oacute;n!}} Instalou unha versi&amp;oacute;n
+  de ficheiros SPIP {anterior} &amp;aacute; que ti&ntilde;a instalada
+  antes neste web: a s&amp;uacute;a base de datos pode que se perdese
+  e o seu web xa non funcionar&amp;oacute;.<br />{{Reinstale os
   ficheiros de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Configuraci&oacute;n por defecto dos foros p&uacute;blicos',
 'info_modifier_breve' => 'Modificar a breve:',
@@ -911,7 +911,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_plusieurs_articles' => 'Atop&aacute;ron.se varias entradas para "@cherche_auteur@":',
 'texte_port_annuaire' => '(En xeral, conv&eacute;n po&ntilde;er o valor indicado por defecto.)',
 'texte_presente_plugin' => 'Esta p&aacute;xina lista os m&oacute;dulos dispo&ntilde;ibles no web. Pode activar os m&oacute;dulos necesarios marcando a caixa correspondente.',
-'texte_proposer_publication' => 'Cando remates o teu artigo,<br>podes propor a s&uacute;a publicaci&oacute;n.',
+'texte_proposer_publication' => 'Cando remate o seu artigo,<br />pode propor que sexa publicado.',
 'texte_proxy' => 'Nalg&amp;uacute;ns casos (intranet, redes protexidas...), pode ser necesario empregar
   un <i>proxy HTTP</i> para chegar aos webs afiliados. Nese caso, indique aqu&amp;iacute;
 embaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
@@ -923,7 +923,7 @@ embaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;xina recolle a lista dos documentos introducidos nos temas. Para modificar as informaci&oacute;ns de cada documento, siga a ligaz&oacute;n cara &aacute; p&aacute;xina de tal tema.',
 'texte_recuperer_base' => 'Reparar a base de datos',
 'texte_reference_mais_redirige' => 'artigo referido no teu lugar SPIP, mais redirixido cara a outra URL.',
-'texte_referencement_automatique' => '<b>Referencia automatizada dun web</b><br>Pode referir rapidamente un  web ao indicar aqu&iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro de afiliaci&oacute;n. SPIP recuperar&aacute; automaticamente as informaci&oacute;ns concernintes a este lugar (t&iacute;tulo, descrici&oacute;n...).',
+'texte_referencement_automatique' => '<b>Referencia automatizada dun web</b><br />Pode referir rapidamente un  web ao indicar aqu&amp;iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro de afiliaci&oacute;n. SPIP recuperar&amp;aacute; automaticamente as informaci&amp;oacute;ns concernintes a este lugar (t&amp;iacute;tulo, descrici&amp;oacute;n...).',
 'texte_requetes_echouent' => '<b>Cando algunhas petici&oacute;ns MySQL fallan sistematicamente e sen raz&oacute;n aparente, &eacute; posible que a causa sexa a propia base de datos.</b><p>
   MySQL ten unha opci&oacute;n de reparaci&oacute;n das s&uacute;as t&aacute;boas cando estas foron danadas por accidente.
   Aqu&iacute; pode tentar esta reparaci&oacute;n; en caso de fallo, garde unha copia do resultado, que pode que conte&ntilde;a indicios do que non vai ben...<p>
@@ -975,12 +975,12 @@ embaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
 'texte_utilisation_moteur_syndiques' => 'Cando emprega o motor de procura integrado
   no SPIP, pode efectuar as procuras nos webs e nos artigos afiliados
   de dous xeitos diferentes.
-  <br>-  O m&aacute;is
- sinxelo consiste en buscar s&oacute;
- nos t&iacute;tulos  e nas descrici&oacute;ns dos artigos.<br>-
-  Un segundo m&eacute;todo, moito m&aacute;is potente, permite
-  a SPIP buscar, a maiores, no texto dos lugares referidos&nbsp;. Se se referencia un web,
-  o SPIP daquela vai efectuar a procura al&aacute;, no texto do lugar mesmo.',
+  <br />-  O m&amp;aacute;is
+ sinxelo consiste en buscar s&amp;oacute;
+ nos t&amp;iacute;tulos  e nas descrici&amp;oacute;ns dos artigos.<br />-
+  Un segundo m&amp;eacute;todo, moito m&amp;aacute;is potente, perm&amp;iacute;telle
+  a SPIP buscar, a maiores, no texto dos lugares afiliados&nbsp;. Se se referencia un web,
+ daquela SPIP buscar&amp;aacute; tam&amp;eacute;n al&amp;aacute;, no propio texto do web referido.',
 'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga a SPIP a visitar
 		regularmente os lugares referidos, o cal pode provocar unha lixeira perda de
 		velocidade no teu propio lugar.',

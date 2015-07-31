@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => '<NEW><pLUS_UTILISE><NEW>Obtener el archivo <i>iCal</i>',
 'calendrier_synchro_prive' => '<NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestas...).',
 'calendrier_synchro_public' => '<NEW>El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro_sync' => '<NEW>Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'elecci&oacute; de la interf&iacute;cie',
 'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
@@ -428,7 +428,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_erreur_requete' => 'Error en la petici&oacute;:',
 'info_erreur_squelette2' => 'No hi ha cap esquelet <b>@fichier@</b> que estigui disponible...',
 'info_erreur_systeme' => 'Error del sistema (errno @errsys@)',
-'info_erreur_systeme2' => '&Eacute;s probable que el disc dur estigui ple, o la base de dades feta malb&eacute;. <br>
+'info_erreur_systeme2' => '&Eacute;s probable que el disc dur estigui ple, o la base de dades feta malb&eacute;. <br />
  <font color=\'red\'>Proveu de <a href=\'@script@\'>reparar la base</a>,
  o contacteu amb el vostre hostatjador.</font>',
 'info_fini' => 'S\'ha acabat! ',
