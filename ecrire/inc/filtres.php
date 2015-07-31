@@ -2771,6 +2771,9 @@ function pagination_item($num, $txt, $pattern, $lien_base, $debut, $ancre) {
 // on peut la surcharger en definissant dans mes_fonctions :
 // function pagination($total, $nom, $pas, $liste) {...}
 //
+
+define('PAGINATION_MAX', 10);
+
 function calcul_pagination($total, $nom, $pas, $liste = true) {
 	static $ancres = array();
 	$bloc_ancre = "";
@@ -2781,7 +2784,6 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 		return pagination($total, $nom, $pas, $liste);
 
 	$separateur = '&nbsp;| ';
-	define('PAGINATION_MAX', 10);
 
 	$debut = 'debut'.$nom;
 

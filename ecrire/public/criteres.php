@@ -51,7 +51,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if (!$boucle->primary)
 		erreur_squelette(_L('doublons sur une table sans index'), $param);
-	$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 	$boucle->where[]= array("calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
@@ -97,10 +97,9 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 function critere_pagination_dist($idb, &$boucles, $crit) {
 
 	// definition de la taille de la page
-	$pas = calculer_liste($crit->param[0], array(),
-		$boucles, $boucles[$idb]->id_parent);
+	$pas = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 
-	$pas = "((\$a = intval($pas)) ? \$a : 10)"; # par defaut c'est 10
+	$pas = ($pas== "''") ? '10' : "((\$a = intval($pas)) ? \$a : 10)";
 
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
