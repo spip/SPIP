@@ -47,7 +47,7 @@ function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 	// supprimer l'extension pour pouvoir affiner par id_rubrique ou par langue
 	if ($squelette AND preg_match('/^(.*)[.](\w+)$/', $squelette, $r)) {
 		list(, $squelette, $ext) = $r;
-	} else $ext = '';
+	} else $ext = 'html'; // valeur par defaut, historique.
 		
 	$flux = array(
 		'args' => array(
