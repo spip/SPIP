@@ -926,7 +926,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DAU SIT:',
-'info_urlref' => 'Adrei&ccedil;a (URL) de refer&eacute;ncia:',
+'info_urlref' => '<MODIF> Adrei&ccedil;a (URL) de refer&eacute;ncia:',
 'info_utilisation_messagerie_interne' => 'Utilizatz la messatjari&aacute; int&egrave;rna d\'aqueu sit.',
 'info_utilisation_spip' => 'Ara pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_valider_lien' => 'validar aqueu liame',

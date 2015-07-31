@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
 '0_langue' => 'english [en]',
 '0_liste' => 'spip-en@rezo.net',
-'0_mainteneur' => 'kandalaft@MCR1.POPTEL.ORG.UK',
+'0_mainteneur' => 'George Kandalaft (george@diwanalarab.com)',
 
 
 // A
@@ -84,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gras' => 'Put in {{bold type}}',
 'barre_guillemets' => 'Place between &laquo; French inverted commas &raquo;',
 'barre_guillemets_de' => 'Place between „German inverted commas“',
-'barre_guillemets_simples' => '<NEW> <NEW> Rodar amb de &#8220;vergetas&#8221;',
 'barre_intertitre' => 'Turn into a {{{subheading}}}',
 'barre_italic' => 'Put in {italics}',
 'barre_lien' => 'Turn into a [hyperlink->http://...]',
@@ -955,7 +954,7 @@ requiring an FTP access to the Web site.',
 'info_une_rubrique_02' => '1 section',
 'info_url' => 'URL:',
 'info_url_site' => 'SITE\'S URL:',
-'info_urlref' => 'Reference address (URL):',
+'info_urlref' => 'Hyperlink:',
 'info_utilisation_messagerie_interne' => 'You are using the internal messaging of this site.',
 'info_utilisation_spip' => 'SPIP is now ready to be used...',
 'info_valider_lien' => 'validate this link',

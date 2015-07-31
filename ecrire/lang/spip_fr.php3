@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_fr'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -75,21 +75,21 @@ $GLOBALS['i18n_spip_fr'] = array(
 
 
 // B
+'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
 'barre_aide' => 'Utilisez les raccourcis typographiques pour enrichir votre mise en page',
 'barre_aide_rac' => 'En savoir plus sur les raccourcis typographiques',
-'barre_italic' => 'Mettre en {italique}',
+'barre_e_accent_aigu' => 'Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => 'Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => 'Ins&eacute;rer un Edans l\'O majuscule',
 'barre_gras' => 'Mettre en {{gras}}',
+'barre_guillemets' => 'Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_de' => 'Entourer de &bdquo;guillemets&ldquo;',
 'barre_intertitre' => 'Transformer en {{{intertitre}}}',
+'barre_italic' => 'Mettre en {italique}',
 'barre_lien' => 'Transformer en [lien hypertexte->http://...]',
 'barre_lien_input' => 'Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
 'barre_note' => 'Transformer en [[Note de bas de page]]',
 'barre_quote' => '<quote>Citer un message</quote>',
-'barre_guillemets' => 'Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
-'barre_guillemets_de' => 'Entourer de &bdquo;guillemets&ldquo;',
-'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
-'barre_e_accent_aigu' => 'Ins&eacute;rer un E accent aigu majuscule',
-'barre_eo' => 'Ins&eacute;rer un E dans l\'O',
-'barre_eo_maj' => 'Ins&eacute;rer un Edans l\'O majuscule',
 'bouton_acces_ldap' => 'Ajouter l\'acc&egrave;s &agrave; LDAP >>',
 'bouton_ajouter' => 'Ajouter',
 'bouton_ajouter_document' => 'AJOUTER UN DOCUMENT',
@@ -527,7 +527,6 @@ Merci de votre participation
 'info_changer_nom_groupe' => 'Changer le nom de ce groupe :',
 'info_chapeau' => 'Chapeau',
 'info_chapeau_2' => 'Chapeau&nbsp;:',
-'info_urlref' => 'Lien hypertexte&nbsp;:',
 'info_chemin_acces_1' => 'Options : <B>Chemin d\'acc&egrave;s dans l\'annuaire</B>',
 'info_chemin_acces_2' => 'Vous devez d&eacute;sormais configurer le chemin d\'acc&egrave;s aux informations dans l\'annuaire. Cette information est indispensable pour lire les profils utilisateurs stock&eacute;s dans l\'annuaire.',
 'info_chemin_acces_annuaire' => 'Options : <B>Chemin d\'acc&egrave;s dans l\'annuaire',
@@ -961,6 +960,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_une_rubrique_02' => '1 rubrique',
 'info_url' => 'URL :',
 'info_url_site' => 'URL DU SITE :',
+'info_urlref' => 'Lien hypertexte&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Vous utilisez la messagerie interne de ce site.',
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;e...',
 'info_valider_lien' => 'valider ce lien',
