@@ -118,7 +118,7 @@ AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_
 // Si interruption d'une longue restauration
 // detourner le script demande pour qu'il reprenne le boulot
 // mais virer les Ajax pour eviter plusieurs restaurations en parallele
-elseif ($_COOKIE['spip_admin']
+elseif (isset($_COOKIE['spip_admin'])
 AND isset($GLOBALS['meta']["import_all"])) {
 	if (isset($var_ajaxcharset)) exit;
 	$exec = 'import_all';

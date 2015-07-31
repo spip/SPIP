@@ -94,14 +94,11 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	$_contexte = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
 
 	// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
-	if (isset($_contexte['env'])
-	|| isset($_contexte['self'])
-	) {
-		$flag_env = true;
+	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
 	}
 	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
-	if ($flag_env) {
+	if ($env) {
 		$contexte = "array_merge('.spip_var_export(\$Pile[0]).',$contexte)";
 	}
 

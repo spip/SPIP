@@ -99,8 +99,7 @@ function sql_rubrique_fond($contexte) {
 		$row = spip_abstract_fetsel(array('lang'),
 					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
@@ -110,8 +109,7 @@ function sql_rubrique_fond($contexte) {
 			array('spip_breves'), 
 			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
@@ -124,8 +122,7 @@ function sql_rubrique_fond($contexte) {
 		$row = spip_abstract_fetsel(array('lang'),
 			array('spip_rubriques'),
 			array("id_rubrique='$id_rubrique_fond'"));
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
@@ -135,8 +132,7 @@ function sql_rubrique_fond($contexte) {
 			array('spip_articles'),
 			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
+		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 }

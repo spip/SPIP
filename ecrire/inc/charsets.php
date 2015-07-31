@@ -648,7 +648,7 @@ function transcoder_page($texte, $headers='') {
 	// charset de la reponse http
 	else if (preg_match(',charset=([-_a-z0-9]+),i', $headers, $regs))
 		$charset = trim(strtolower($regs[1]));
-
+	else $charset = '';
 	// normaliser les noms du shif-jis japonais
 	if (preg_match(',^(x|shift)[_-]s?jis$,i', $charset))
 		$charset = 'shift-jis';
