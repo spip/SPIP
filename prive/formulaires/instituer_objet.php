@@ -50,7 +50,7 @@ function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour=""){
 	if (!isset($desc['statut_textes_instituer']))
 		return false;
 	
-	if (!autoriser('modifier', 'objet', $id_objet))
+	if (!autoriser('modifier', $objet, $id_objet))
 		$editable = false;
 
 	// charger le contenu de l'objet
