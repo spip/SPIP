@@ -426,7 +426,7 @@ function creer_base() {
 	// Pre-remplissage de la base
 	//
 
-	if ($version_installee < 1.455) {
+	if ($version_installee < 1.456) {
 		spip_query("DELETE FROM spip_types_documents");
 	}
 
@@ -444,8 +444,8 @@ function creer_base() {
 	
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
 		"('aiff', 'AIFF', 'embed'), ".
-		"('asf', 'Windows', 'embed'), ".
-		"('avi', 'Windows', 'embed'), ".
+		"('asf', 'Windows Media', 'embed'), ".
+		"('avi', 'Windows Media', 'embed'), ".
 		"('bz2', 'BZip', 'non'), ".
 		"('doc', 'Word', 'non'), ".
 		"('eps', 'PostScript', 'non'), ".
@@ -471,7 +471,7 @@ function creer_base() {
 		"('wav', 'WAV', 'embed'), ".
 		"('xls', 'Excel', 'non'), ".
 		"('xml', 'XML', 'non'), ".
-		"('wmv', 'Windows', 'embed'), ".
+		"('wmv', 'Windows Media', 'embed'), ".
 		"('zip', 'Zip', 'non')";
 	spip_query($query);
 }
