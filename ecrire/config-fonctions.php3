@@ -77,7 +77,7 @@ if ($flag_function_exists AND @function_exists("imagejpeg")) {
 		echo "Formats d'images pouvant &ecirc;tre utilis&eacute;es pour cr&eacute;er des vignettes&nbsp;: $gd_formats.<p>";
 
 	// Tester les formats acceptes par GD
-	echo "<a href='../spip_image.php3?test_formats=oui&redirect=configuration.php3'>Tester les formats d'image que ce site peut utiliser pour cr&eacute;er des vignettes</a>";
+	echo "<a href='../spip_image.php3?test_formats=oui&redirect=config-fonctions.php3'>Tester les formats d'image que ce site peut utiliser pour cr&eacute;er des vignettes</a>";
 	echo "</div>";
 
 	if ($creer_preview == "oui") {
