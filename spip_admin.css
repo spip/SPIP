@@ -3,7 +3,7 @@
  */
 .spip-admin-float {
 	top: 0px;
-	right: 0px;
+	right: 20px;
 	position: absolute;
 }
 
@@ -53,3 +53,32 @@ a:active.spip-admin-boutons {
 	border-bottom: 2px solid #f00;
 }
 
+/* Style pour le mode debug */
+#spip_debug {
+	background-color: #FFECD9;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+#spip_debug ul ul {
+	font-size: 80%;
+}
+
+#spip_debug fieldset {
+	background-color: #FFF;
+	font-family: "Courier New", Courier, monospace;
+}
+
+#spip_debug legend {
+	background-color: #FFF;
+	border: solid 1px #F00;
+	padding: 1px 1em;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+#spip_debug ul ul a {
+	text-decoration: none;
+}
+
+#spip_debug ul ul a:hover {
+	text-decoration: underline;
+}

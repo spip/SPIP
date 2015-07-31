@@ -73,7 +73,7 @@ echo "</TABLE>";
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-echo _L('Taille du r&eacute;pertoire cache')."</FONT></B></TD></TR>";
+echo _T('taille_repertoire_cache')."</FONT></B></TD></TR>";
 
 
 echo "<TR><TD class='serif'>";
@@ -82,26 +82,24 @@ list ($taille) = spip_fetch_array(spip_query(
 "SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
 
 if ($taille>0) {
-	$info = _L("La taille du cache est actuellement de "
-	.taille_en_octets($taille).".");
+	$info = _T(taille_cache_octets, array('octets' => taille_en_octets($taille));
 } else
-	$info = _L('Le cache est vide.');
+	$info = _T('taille_cache_vide');
 
 echo "<p align='justify'><b>$info</b></p>\n";
 
 echo "\n<p align='justify'>";
 if ($quota_cache) {
-	echo _L('SPIP essaie de limiter la taille du r&eacute;pertoire
-	<code>CACHE/</code> de ce site &agrave; environ')
-	.' <b>' .taille_en_octets($quota_cache*1024*1024).'</b> '._L('de donn&eacute;es.');
+	echo _T('taille_cache_maxi',
+		array('octets' => taille_en_octets($quota_cache*1024*1024)));
 } else {
-	echo _L('Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.');
+	echo _T('taille_cache_infinie');
 }
 
 	echo "\n";
-	echo _L('Les fichiers du cache sont enregistr&eacute;s en mode '
-	.($compresser_cache?'':'non ').'compress&eacute;.');
-	echo ' '._L('(Ces param&egrave;tres sont modifiables par l\'administrateur du site.)').'</p>';
+	echo $compresser_cache? _T('cache_mode_compresse') :
+		_T('cache_mode_non_compresse');
+	echo ' ('._T('cache_modifiable_webmestre').')</p>';
 
 echo "</TD></TR>";
 echo "</TABLE>";

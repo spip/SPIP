@@ -233,7 +233,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 			$select = join(", ", $champs);
 			$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
 			$champs_originaux = spip_fetch_array(spip_query($query));
-			$id_version = ajouter_version($id_article, $champs_originaux, _L("Version initiale"));
+			$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'));
 
 			// Remettre une date un peu ancienne pour la version initiale 
 			if ($id_version == 1) // test inutile ?
@@ -413,7 +413,7 @@ if ($articles_versions AND $id_version>1 AND $options == "avancees") {
 	// Correction orthographique
 	if (lire_meta('articles_ortho') == 'oui') {
 		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-		icone_horizontale(_L("V&eacute;rifier l'orthographe"), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+		icone_horizontale(_T('ortho_verifier'), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
 	}
 
 echo "</div>\n";
