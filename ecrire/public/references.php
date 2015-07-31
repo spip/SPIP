@@ -89,7 +89,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 			return index_exception($boucles[$idb], 
 					       $desc,
 					       $nom_champ,
-					       array($t[0], $nom_champ));
+					       array($t[1]['id_table'], $nom_champ));
 		  }
 		  return array('','');
 		}
