@@ -109,8 +109,6 @@ function spip_avant_typo ($letexte) {
 }
 
 function spip_apres_typo ($letexte) {
-	if (@function_exists('apres_typo'))
-		return apres_typo ($letexte);
 
 	// caracteres speciaux
 	$letexte = corriger_caracteres($letexte);
@@ -119,6 +117,9 @@ function spip_apres_typo ($letexte) {
 	// relecture des &nbsp;
 	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
+
+	if (@function_exists('apres_typo'))
+		return apres_typo ($letexte);
 
 	return $letexte;
 }
