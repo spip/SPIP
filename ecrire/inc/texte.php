@@ -83,10 +83,7 @@ define('_BALISES_BLOCS',
 // Ne pas afficher le chapo si article virtuel
 // http://doc.spip.org/@nettoyer_chapo
 function nettoyer_chapo($chapo){
-	if (substr($chapo,0,1) == "="){
-		$chapo = "";
-	}
-	return $chapo;
+	return (substr($chapo,0,1) == "=") ? '' : $chapo;
 }
 
 
@@ -99,6 +96,8 @@ function nettoyer_chapo($chapo){
 // echappe est un div ou un span
 // http://doc.spip.org/@code_echappement
 function code_echappement($rempl, $source='') {
+	if (!strlen($rempl)) return '';
+
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
 
@@ -117,6 +116,8 @@ function code_echappement($rempl, $source='') {
 // http://doc.spip.org/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg='') {
+	if (!strlen($letexte)) return '';
+
 	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
 			.'(\s[^>]*)?'
 			.'>(.*)</\1>,UimsS';
@@ -534,7 +535,7 @@ function typo_en($letexte) {
 function typo($letexte, $echapper=true) {
 
 	// Plus vite !
-	if (!strlen($letexte)) return '';
+	if (!$letexte) return $letexte;
 
 	// Echapper les codes <html> etc
 	if ($echapper)
@@ -1074,6 +1075,7 @@ function traiter_modeles($texte, $doublons=false) {
 //
 // http://doc.spip.org/@paragrapher
 function paragrapher($letexte) {
+	if (!$letexte OR !strstr($letexte,'<')) return $letexte;
 
 	if (preg_match(',<p[>[:space:]],iS',$letexte)) {
 
@@ -1421,6 +1423,7 @@ function traiter_les_notes($mes_notes) {
 // Filtre a appliquer aux champs du type #TEXTE*
 // http://doc.spip.org/@propre
 function propre($letexte) {
+	if (!$letexte) return $letexte;
 
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
 	$letexte = echappe_html($letexte);
