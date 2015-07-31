@@ -50,10 +50,10 @@ foreach ($GLOBALS as $var => $val)
  */
 $cjpeg_command='';
 
-/*     - controle la variable lang, var_recherche (XSS)
+/*     - controle la variable lang, var_recherche, aide (XSS)
  *
  */
-foreach(array('lang', 'var_recherche') as $var) {
+foreach(array('lang', 'var_recherche', 'aide') as $var) {
 	if (isset($_GET[$var]))
 		$_REQUEST[$var] = $GLOBALS[$var] = $_GET[$var] = preg_replace(',[^\w-]+,',' ',(string)$_GET[$var]);
 	if (isset($_POST[$var]))
