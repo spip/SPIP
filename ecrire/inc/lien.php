@@ -314,6 +314,19 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	return array('url' => $lien, 'titre' => $texte);
 }
 
+function lien_implicite_glose_dist($texte,$id,$type,$args,$ancre,$connect=''){
+	if (function_exists($f = 'glossaire_' . $ancre))
+		$url = $f($texte, $id);
+	else
+		$url = glossaire_std($texte);
+	return $url;
+}
+
+function lien_implicite_site_dist($texte,$id,$type,$args,$ancre,$connect=''){
+	$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
+	return $url;
+}
+
 // http://doc.spip.org/@traiter_lien_implicite
 function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 {
@@ -321,14 +334,12 @@ function traiter_lien_implicite ($ref, $texte='', $pour='url', $connect='')
 	@list($type,,$id,,$args,,$ancre) = $match;
 # attention dans le cas des sites le lien doit pointer non pas sur
 # la page locale du site, mais directement sur le site lui-meme
-	if ($type == 'site')
-		$url = sql_getfetsel('url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
-	elseif ($type == 'glose') {
-		if (function_exists($f = 'glossaire_' . $ancre)) 
-		  $url = $f($texte, $id);
-		else $url = glossaire_std($texte);
-	} else $url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
+	if ($f = charger_fonction("implicite_$type","lien",true))
+		$url = $f($texte,$id,$type,$args,$ancre,$connect);
+	if (!$url)
+		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
 	if (!$url) return false;
+
 	if (is_array($url)) {
 		@list($type,$id) = $url;
 		$url = generer_url_entite($id,$type,$args,$ancre,$connect ? $connect : NULL);
