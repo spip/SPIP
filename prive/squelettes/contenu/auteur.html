@@ -44,5 +44,5 @@ jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'auteur'}});}
 </script>
 ]
 </BOUCLE_auteur>
-[(#ENV**{exec}|=={auteur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/auteur_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+[(#ENV**{exec}|=={auteur_edit}|?{#INCLURE{fond=prive/squelettes/contenu/auteur_edit,env,retourajax=oui},#REM|sinon_interdire_acces})]
 <//B_auteur>

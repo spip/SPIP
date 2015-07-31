@@ -3,15 +3,15 @@
 ][(#ID_AUTEUR|intval|non)
 	[(#AUTORISER{creer,auteur}|sinon_interdire_acces)]
 ]
-#SET{redirect,#ENV{redirect}|sinon{#ID_AUTEUR|intval|?{#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR},#URL_ECRIRE{auteurs}}}}
+#SET{retour,#ENV{redirect}|sinon{#ID_AUTEUR|intval|?{#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR},#URL_ECRIRE{auteurs}}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
-	[(#GET{redirect}|icone_verticale{<:icone_retour:>,auteur,'',left[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{retour}|icone_verticale{<:icone_retour:>,auteur,'',left[(#ENV{retourajax,''}|oui)ajax preload]})]
 	[<:info_modifier_auteur:>
 	<h1>(#ENV{titre,#INFO_NOM{auteur,#ID_AUTEUR}|sinon{<:info_sans_titre:>}})</h1>]
 </div>
-#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#ENV{redirect_edit,#URL_ECRIRE{auteur,id_auteur=0}},#ENV{associer_objet}}
+#FORMULAIRE_EDITER_AUTEUR{#ENV{id_auteur,oui},#ENV{redirect,#URL_ECRIRE{auteur,id_auteur=0}},#ENV{associer_objet}}
 </div>
 [(#ENV{retourajax,''}|oui)
 <script type="text/javascript">if (window.jQuery) jQuery('#navigation>div').ajaxReload({args:{exec:'article_edit'}});</script>
