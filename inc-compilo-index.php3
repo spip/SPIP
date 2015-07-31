@@ -31,7 +31,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 	$c = strtolower($nom_champ);
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
-	// il y a incohérences qu'il vaut mieux éviter
+	// il y a incoherences qu'il vaut mieux eviter
 	while ($boucles[$idb]) {
 #		spip_log("Cherche: $nom_champ '$idb' '$c'");
 		$r = $boucles[$idb]->type_requete;
