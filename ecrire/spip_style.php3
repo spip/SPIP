@@ -8,10 +8,14 @@
 		$couleur_foncee = "#3874B0";
 ?>
 
-/* Police par defaut (bof...) */
+/*
+ * Police par defaut (bof...)
+ */
 body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 
-/* Formulaires */
+/*
+ * Formulaires
+ */
 .forml { width: 100%; padding: 2px; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000 }
 .formo { width: 100%; padding: 2px; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; }
 .fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000 }
@@ -20,7 +24,9 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .sanscadre { padding: 4px; margin: 0px; }
 .aveccadre { cursor: pointer; padding: 3px; margin: 0px; border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000; }
 
-/* Style des icones */
+/*
+ * Style des icones
+ */
 .iconeimpoff { padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4 }
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
@@ -47,6 +53,20 @@ a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
+
+/*
+ * Barre de raccourcis
+ */
+
+a.spip_barre img {
+	border: 0px;
+	padding: 2px;
+}
+a.spip_barre:hover img {
+	border: 1px solid #808080;
+	padding: 1px;
+	background-color: #f8f8f4;
+}
 
 
 td.icone table {
