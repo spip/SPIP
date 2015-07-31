@@ -660,7 +660,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 }
 
 // http://doc.spip.org/@calculer_url_article
-function calculer_url_article($id, $texte) {
+function calculer_url_article($id, $texte='') {
 	$lien = generer_url_article($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
@@ -670,7 +670,7 @@ function calculer_url_article($id, $texte) {
 }
 
 // http://doc.spip.org/@calculer_url_rubrique
-function calculer_url_rubrique($id, $texte)
+function calculer_url_rubrique($id, $texte='')
 {
 	$lien = generer_url_rubrique($id);
 	if (!$texte) {
@@ -681,7 +681,7 @@ function calculer_url_rubrique($id, $texte)
 }
 
 // http://doc.spip.org/@calculer_url_mot
-function calculer_url_mot($id, $texte)
+function calculer_url_mot($id, $texte='')
 {
 	$lien = generer_url_mot($id);
 	if (!$texte) {
@@ -692,7 +692,7 @@ function calculer_url_mot($id, $texte)
 }
 
 // http://doc.spip.org/@calculer_url_breve
-function calculer_url_breve($id, $texte)
+function calculer_url_breve($id, $texte='')
 {
 	$lien = generer_url_breve($id);
 	if (!$texte) {
@@ -703,7 +703,7 @@ function calculer_url_breve($id, $texte)
 }
 
 // http://doc.spip.org/@calculer_url_auteur
-function calculer_url_auteur($id, $texte)
+function calculer_url_auteur($id, $texte='')
 {
 	$lien = generer_url_auteur($id);
 	if (!$texte) {
@@ -714,7 +714,7 @@ function calculer_url_auteur($id, $texte)
 }
 
 // http://doc.spip.org/@calculer_url_document
-function calculer_url_document($id, $texte)
+function calculer_url_document($id, $texte='')
 {
 	$lien = generer_url_document($id);
 	if (!$texte) {
@@ -727,7 +727,7 @@ function calculer_url_document($id, $texte)
 }
 
 // http://doc.spip.org/@calculer_url_site
-function calculer_url_site($id, $texte)
+function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
