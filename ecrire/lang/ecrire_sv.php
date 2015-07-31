@@ -517,7 +517,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_pas_de_forum' => 'inget forum',
 'info_passe_trop_court' => 'l&ouml;senordet &auml;r f&ouml;r kort.',
 'info_passes_identiques' => 'De tv&aring; l&ouml;senorden &auml;r inte identiska.',
-'info_pense_bete_ancien' => 'Dina gamla meddelanden',
+'info_pense_bete_ancien' => 'Dina gamla meddelanden', # MODIF
 'info_plus_cinq_car' => 'mer &auml;n 5 tecken',
 'info_plus_cinq_car_2' => '(Mer &auml;n 5 tecken)',
 'info_plus_trois_car' => '(Mer &auml;n 3 tecken)',

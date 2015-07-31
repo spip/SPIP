@@ -512,7 +512,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_pas_de_forum' => 'Forum yok',
 'info_passe_trop_court' => '&#350;ifre &ccedil;ok k&#305;sa.',
 'info_passes_identiques' => '&#304;ki &#351;ifre ayn&#305; de&#287;il.',
-'info_pense_bete_ancien' => 'Eski hat&#305;rlatmalar&#305;n&#305;z',
+'info_pense_bete_ancien' => 'Eski hat&#305;rlatmalar&#305;n&#305;z', # MODIF
 'info_plus_cinq_car' => '5 karakterden fazla',
 'info_plus_cinq_car_2' => '(5 karakterden fazla)',
 'info_plus_trois_car' => '(3 karakterden fazla)',

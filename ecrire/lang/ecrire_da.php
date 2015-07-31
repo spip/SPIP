@@ -503,7 +503,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_pas_de_forum' => 'intet forum',
 'info_passe_trop_court' => 'Adgangskode for kort.',
 'info_passes_identiques' => 'De to adgangskoder er ikke ens.',
-'info_pense_bete_ancien' => 'Dine gamle huskesedler',
+'info_pense_bete_ancien' => 'Dine gamle huskesedler', # MODIF
 'info_plus_cinq_car' => 'mere end 5 tegn',
 'info_plus_cinq_car_2' => '(Mere end 5 tegn)',
 'info_plus_trois_car' => '(Mere end 3 tegn)',

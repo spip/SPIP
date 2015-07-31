@@ -506,7 +506,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_pas_de_forum' => 'Nat forum',
 'info_passe_trop_court' => 'Mot de santa Clara tr&ograve;p cort.',
 'info_passes_identiques' => 'Los dus mots de santa Clara non son pas identics.',
-'info_pense_bete_ancien' => 'Los v&ograve;stes mementos ancians ',
+'info_pense_bete_ancien' => 'Los v&ograve;stes mementos ancians ', # MODIF
 'info_plus_cinq_car' => 'mei de 5 caract&egrave;rs',
 'info_plus_cinq_car_2' => '(mei de 5 caract&egrave;rs)',
 'info_plus_trois_car' => '(mei de 3 caract&egrave;rs)',

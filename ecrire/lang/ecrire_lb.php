@@ -490,7 +490,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_pas_de_forum' => 'keen Forum',
 'info_passe_trop_court' => 'Passwuert ze kuerz.',
 'info_passes_identiques' => 'D&eacute;i zwee Passwierder si n&euml;t selwecht.',
-'info_pense_bete_ancien' => '&Auml;r al Notizen',
+'info_pense_bete_ancien' => '&Auml;r al Notizen', # MODIF
 'info_plus_cinq_car' => 'm&eacute;i w&eacute;i 5 Buchstawen',
 'info_plus_cinq_car_2' => '(M&eacute;i w&eacute;i 5 Buchstawen)',
 'info_plus_trois_car' => '(M&eacute;i w&eacute;i 3 Buchstawen)',

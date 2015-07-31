@@ -491,7 +491,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_pas_de_forum' => 'sem f&oacute;rum',
 'info_passe_trop_court' => 'Senha muito curta.',
 'info_passes_identiques' => 'As duas senhas n&atilde;o s&atilde;o id&ecirc;nticas.',
-'info_pense_bete_ancien' => 'Seus lembretes antigos',
+'info_pense_bete_ancien' => 'Seus lembretes antigos', # MODIF
 'info_plus_cinq_car' => 'mais de 5 caracteres',
 'info_plus_cinq_car_2' => '(Mais de 5 caracteres)',
 'info_plus_trois_car' => '(Mais de 3 caracteres)',

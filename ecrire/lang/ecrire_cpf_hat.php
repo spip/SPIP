@@ -524,7 +524,7 @@ ak yon lim&egrave;l. W vle itilize opsyon nan&nbsp;?', # MODIF
 'info_pas_de_forum' => 'Okenn fowom',
 'info_passe_trop_court' => 'Modpas se tro piti.',
 'info_passes_identiques' => 'Ou d&egrave; modpas yo se pa parey sa-m&egrave;m.',
-'info_pense_bete_ancien' => 'Ou vy&eacute; raple-w sa-yo ',
+'info_pense_bete_ancien' => 'Ou vy&eacute; raple-w sa-yo ', # MODIF
 'info_plus_cinq_car' => 'plis de 5 kawakt&egrave;-leprimri',
 'info_plus_cinq_car_2' => '(Plis de 5 kawakt&egrave;-lenprimri)',
 'info_plus_trois_car' => '(Plis de 3 kawakt&egrave;-lenprimri)',

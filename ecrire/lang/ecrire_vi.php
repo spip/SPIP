@@ -491,7 +491,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_pas_de_forum' => 'kh&#244;ng c&#243; di&#7877;n &#273;&#224;n',
 'info_passe_trop_court' => 'M&#7853;t m&#227; ng&#7855;n qu&#225;.',
 'info_passes_identiques' => 'Hai m&#7853;t m&#227; kh&#244;ng gi&#7889;ng h&#7879;t nhau.',
-'info_pense_bete_ancien' => 'B&#7843;n ghi nh&#7899; c&#361; c&#7911;a b&#7841;n',
+'info_pense_bete_ancien' => 'B&#7843;n ghi nh&#7899; c&#361; c&#7911;a b&#7841;n', # MODIF
 'info_plus_cinq_car' => 'h&#417;n 5 m&#7851;u t&#7921;',
 'info_plus_cinq_car_2' => '(H&#417;n 5 m&#7851;u t&#7921;) ',
 'info_plus_trois_car' => '(H&#417;n 3 m&#7851;u t&#7921;) ',

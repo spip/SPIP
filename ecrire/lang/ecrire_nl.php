@@ -520,7 +520,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_pas_de_forum' => 'geen forum',
 'info_passe_trop_court' => 'Paswoord te kort.',
 'info_passes_identiques' => 'Beide paswoorden zijn niet identiek.',
-'info_pense_bete_ancien' => 'Voorbije memos',
+'info_pense_bete_ancien' => 'Voorbije memos', # MODIF
 'info_plus_cinq_car' => 'Meer dan 5 karakters',
 'info_plus_cinq_car_2' => '(Meer dan 5 karakters)',
 'info_plus_trois_car' => '(Meer dan 3 karakters)',

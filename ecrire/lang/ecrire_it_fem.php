@@ -521,7 +521,7 @@ avvertite via email. Per ogni tipo di forum, indica se desideri utilizzare quest
 'info_pas_de_forum' => 'nessun forum',
 'info_passe_trop_court' => 'Password troppo corta.',
 'info_passes_identiques' => 'Le due password non sono uguali.',
-'info_pense_bete_ancien' => 'I vecchi memo',
+'info_pense_bete_ancien' => 'I vecchi memo', # MODIF
 'info_plus_cinq_car' => 'pi&ugrave; di 5 caratteri',
 'info_plus_cinq_car_2' => '(Pi&ugrave; di 5 caratteri)',
 'info_plus_trois_car' => '(Pi&ugrave; di 3 caratteri)',

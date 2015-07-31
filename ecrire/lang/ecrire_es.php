@@ -493,7 +493,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_pas_de_forum' => 'sin foro',
 'info_passe_trop_court' => 'Contrase&ntilde;a demasiado corta',
 'info_passes_identiques' => 'Hay diferencias entre las dos contrase&ntilde;as',
-'info_pense_bete_ancien' => 'Tus antiguos recordatorios',
+'info_pense_bete_ancien' => 'Tus antiguos recordatorios', # MODIF
 'info_plus_cinq_car' => 'm&aacute;s de 5 caracteres',
 'info_plus_cinq_car_2' => '(M&aacute;s de 5 caracteres)',
 'info_plus_trois_car' => '(M&aacute;s de tres caracteres)',

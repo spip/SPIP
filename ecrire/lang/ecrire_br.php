@@ -503,7 +503,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_pas_de_forum' => 'forom ebet',
 'info_passe_trop_court' => 'Ger-tremen re verr.',
 'info_passes_identiques' => 'Ne glot ket an daou c\'her-tremen.',
-'info_pense_bete_ancien' => 'Ho notenno&ugrave;igo&ugrave;-e&ntilde;vor kozh',
+'info_pense_bete_ancien' => 'Ho notenno&ugrave;igo&ugrave;-e&ntilde;vor kozh', # MODIF
 'info_plus_cinq_car' => 'ouzhpenn pemp arouezenn',
 'info_plus_cinq_car_2' => '(Ouzhpenn 5 arouezenn)',
 'info_plus_trois_car' => '(Ouzhpenn 3 arouezenn)',
