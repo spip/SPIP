@@ -231,9 +231,9 @@ $tables_jointures['spip_rubriques'][]= 'mots_rubriques';
 $tables_jointures['spip_rubriques'][]= 'documents_rubriques';
 $tables_jointures['spip_rubriques'][]= 'mots';
 
-$tables_jointures['spip_syndication'][]= 'mots_syndic';
-$tables_jointures['spip_syndication'][]= 'documents_syndic';
-$tables_jointures['spip_syndication'][]= 'mots';
+$tables_jointures['spip_syndic'][]= 'mots_syndic';
+$tables_jointures['spip_syndic'][]= 'documents_syndic';
+$tables_jointures['spip_syndic'][]= 'mots';
 
 $tables_jointures['spip_syndic_articles'][]= 'documents_syndic';
 $tables_jointures['spip_syndic_articles'][]= 'mots';
