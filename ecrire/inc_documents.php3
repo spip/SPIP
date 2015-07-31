@@ -498,7 +498,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<div>&nbsp;</div>";
 		echo "<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>PORTFOLIO</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='3'>";
-		reset($images_liees);
+
 		while ($document = spip_fetch_array($images_liees)) {
 
 			$id_document = $document['id_document'];
