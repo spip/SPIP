@@ -1427,7 +1427,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	else if ($spip_display == 3){
 		$hauteur = 30;
 		$largeur = 30;
-		$title = "title=\"$texte\"";
+		$title = "\ntitle=\"$texte\"";
 		$alt = $texte;
 	}
 	else {
@@ -1439,7 +1439,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 
 	if ($spip_display != 1 AND $spip_display != 4){
 		if ($fonction != "rien.gif"){
-		  $icone = http_img_pack($fonction, $alt, "$title width='24' height='24'" .
+		  $icone = http_img_pack($fonction, $alt, "$title width='24' height='24'\n" .
 					  http_style_background($fond, "no-repeat center center"));
 		}
 		else {
@@ -1537,7 +1537,7 @@ function debut_grand_cadre($return=false){
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	$res =  "\n<br /><br /><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
+	$res =  "\n<br /><br />\n<table width='$largeur' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='$largeur' class='serif'>";
 	if ($return) return $res; else echo $res;
 }
 
@@ -1619,7 +1619,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
-	if (!$flag_3_colonnes OR $deja_colonne_droite) return '';
+	if ((!$flag_3_colonnes) OR $deja_colonne_droite) return '';
 	$deja_colonne_droite = true;
 
 	if ($flag_centre_large) {
@@ -1636,7 +1636,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	. "\n<td rowspan='1' class='colonne_etroite'></td>"
 	. "\n<td width='"
 	.  $espacement
-	.  "'rowspan='2' class='colonne_etroite'>&nbsp;</td>"
+	.  "' rowspan='2' class='colonne_etroite'>&nbsp;</td>"
 	. "\n<td width='"
 	. $largeur 
 	. "' rowspan='2' align='"
@@ -1670,7 +1670,7 @@ function debut_droite($rubrique="", $return= false) {
 	}
 	else {
 		$res .= creer_colonne_droite($rubrique, true)
-		. "</td></tr><tr>";
+		. "</td></tr>\n<tr>";
 	}
 
 	if ($spip_ecran == 'large' AND $flag_centre_large)
@@ -1678,7 +1678,7 @@ function debut_droite($rubrique="", $return= false) {
 	else
 		$largeur = 500;
 
-	$res .= '<td width="'.$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
+	$res .= "\n<td width=\"".$largeur.'" valign="top" align="'.$spip_lang_left.'" rowspan="1" class="serif">';
 
 	// touche d'acces rapide au debut du contenu
 	$res .= "\n<a name='saut' href='#saut' accesskey='s'></a>\n";

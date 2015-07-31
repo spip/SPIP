@@ -35,15 +35,15 @@ function exec_recherche_dist()
 	}
 	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'>";
 	echo "<input type='hidden' name='exec' value='recherche' />";
-	echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '">';
+	echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '" />';
 	echo "</form>";
 
 	debut_droite();
 
 	if (strlen($recherche) > 0) {
 
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
-	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche_aff</B></FONT><p>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b><br />";
+	echo "<font size='5' color='$couleur_foncee'><b>$recherche_aff</b></font><p>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';

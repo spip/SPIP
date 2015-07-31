@@ -89,7 +89,7 @@ AND (
 
 	$form_auto = generer_action_auteur('editer_site',
 		'auto',
-		$redirect = generer_url_ecrire('sites'),
+		generer_url_ecrire('sites'),
 		$form_auto,
 		" method='post' name='formulaireauto'"
 	);
@@ -198,11 +198,11 @@ if ($GLOBALS['champs_extra']) {
 }
 
 
-$form .= "\n<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
+$form .= "\n<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 $form = generer_action_auteur('editer_site',
 	($new == 'oui') ? $new : $id_syndic,
-	$redirect = generer_url_ecrire('sites'),
+	generer_url_ecrire('sites'),
 	$form,
 	" method='post' name='formulaire'"
 );
