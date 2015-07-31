@@ -543,22 +543,22 @@ debut_cadre_relief("site-24.gif");
 	$visiter_sites=lire_meta("visiter_sites");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Listes de sites r&eacute;f&eacute;renc&eacute;s et syndication</FONT></B> ".aide ("rubsyn")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Listes de sites r&eacute;f&eacute;renc&eacute;s et syndication</FONT></B> ".aide ("reference")."</TD></TR>";
 
 	$activer_sites = lire_meta('activer_sites');
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
 
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>SPIP vous permet de cr&eacute;er des listes de sites r&eacute;f&eacute;renc&eacute;s (annuaire de liens).<p>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>SPIP vous permet de cr&eacute;er des listes de sites r&eacute;f&eacute;renc&eacute;s (annuaires de liens).<p>";
 	if ($activer_sites=="non"){
 		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on'>";
 		echo " <label for='sites_on'>G&eacute;rer un annuaire de sites</label> ";
-		echo " <br>&nbsp; <INPUT TYPE='radio' NAME='activer_sites' VALUE='non' CHECKED id='sites_off'>";
+		echo " <br><INPUT TYPE='radio' NAME='activer_sites' VALUE='non' CHECKED id='sites_off'>";
 		echo " <B><label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label></B> ";
 	}else{
 		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on' CHECKED>";
 		echo " <B><label for='sites_on'>G&eacute;rer un annuaire de sites</label></B> ";
-		echo " <br>&nbsp; <INPUT TYPE='radio' NAME='activer_sites' VALUE='non' id='sites_off'>";
+		echo " <br><INPUT TYPE='radio' NAME='activer_sites' VALUE='non' id='sites_off'>";
 		echo " <label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label> ";
 	}
 

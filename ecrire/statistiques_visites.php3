@@ -17,7 +17,7 @@ if (mysql_num_rows($result) > 0) {
 debut_page("Statistiques", "administration", "statistiques");
 
 echo "<br><br><br>";
-gros_titre("&Eacute;volution des visites");
+gros_titre("&Eacute;volution des visites<html>".aide("confstat")."</html>");
 barre_onglets("statistiques", "evolution");
 
 if ($id_article){
