@@ -77,6 +77,7 @@ $r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "$l '$v'<br />\n";
 // faire suivre chaque nom d'un espace (et supprimer les autres) ...
 // et parentheser le tout pour que  | + * ? s'applique dessus.
 
+// http://doc.spip.org/@compilerRegle
 function compilerRegle($val)
 {
 	$x = str_replace('()','',
