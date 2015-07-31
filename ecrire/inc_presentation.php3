@@ -1815,32 +1815,53 @@ function bouton($titre,$lien) {
 	echo "</form>";
 }
 
+// point d'entree/hack pour spip-lab
+
+function debut_html($titre = "", $rubrique="") {
+
+	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
+	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	$titre = textebrut(typo($titre));
+
+	// envoi des en-tetes, du doctype et du <head><title...
+	echo debut_entete("[$nom_site_spip] $titre");
+	if (strpos($rubrique, 'script>'))
+	  echo  $rubrique, "\n";
+	envoi_link($nom_site_spip, $rubrique);
+	// Fin des entetes
+	echo "\n</head>\n";
+	debut_body();
+}
+
 //
 // Presentation de l'interface privee, debut du HTML
 //
 
-function debut_html($titre = "", $rubrique="", $onLoad="") {
-	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
-	global $mode, $spip_lang_rtl, $spip_display;
-	global $connect_statut, $connect_toutes_rubriques;
+function debut_body($onLoad="")
+{
+	global $couleur_lien, $couleur_lien_off;
+	global $mode, $spip_lang_rtl;
 	global $browser_name, $browser_rev;
 
-	// hack pour compatibilite spip-lab
-	if (strpos($rubrique, 'script>')) {
-		$code = $rubrique;
-		$rubrique = '';
-	}
-	
-	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
-	$titre = textebrut(typo($titre));
+	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
 
-	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	if ($spip_lang_rtl)
+		echo " dir='rtl'";
+	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
+	echo " onLoad=\"setActiveStyleSheet('invisible'); ";
+
+	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
+	// meme principe que le behavior win_width.htc pour MSIE
+	if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7)
+		echo "verifForm();";
+	echo "$onLoad\">";
+}
+
+function envoi_link($nom_site_spip, $rubrique="")
+{
+	global $connect_statut, $connect_toutes_rubriques, $spip_display;
+	global $couleur_foncee, $couleur_claire;
 	$adresse_site=lire_meta("adresse_site");
-
-	@Header("Expires: 0");
-	@Header("Cache-Control: no-cache,no-store");
-	@Header("Pragma: no-cache");
-	echo debut_entete("[$nom_site_spip] $titre");
 	if ($spip_display != 4) {
 		echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' />";
 		$activer_breves=lire_meta("activer_breves");
@@ -1855,8 +1876,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	$link->addVar('couleur_foncee', $couleur_foncee);
 	$link->addVar('left', $GLOBALS['spip_lang_left']);
 	echo $link->getUrl()."\">\n";
-
-	if ($code) echo $code."\n";
 
 	// Supprime pour l'instant: pas de creation mathml
 	// < script type="text/javascript" src="../mathmlinHTML.js"></script>
@@ -1876,24 +1895,9 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
 	echo '<link rel="alternate stylesheet" href="', _DIR_RESTREINT, 'spip_style_invisible.css" type="text/css" title="invisible" />', "\n",
 		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n";
-	$onLoadInvisible = " onLoad=\"setActiveStyleSheet('invisible'); ";
 
 	// favicon.ico
-	echo '<link rel="shortcut icon" href="', _DIR_IMG_PACK, 'favicon.ico" />';
-
-	// Fin des entetes
-	echo "\n</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
-
-	if ($spip_lang_rtl)
-		echo " dir='rtl'";
-	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo $onLoadInvisible;
-
-	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
-	// meme principe que le behavior win_width.htc pour MSIE
-	if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7)
-		echo "verifForm();";
-	echo "$onLoad\">";
+	echo '<link rel="shortcut icon" href="', _DIR_IMG_PACK, 'favicon.ico" />', "\n";
 }
 
 function debut_javascript($admin, $stat)
@@ -2315,6 +2319,20 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 }
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
+
+	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
+	if (!$nom_site_spip) $nom_site_spip="SPIP";
+
+	// envoi des en-tetes, du doctype et du <head><title...
+	echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre)));
+	envoi_link($nom_site_spip, $rubrique);
+	echo "\n</head>\n";
+	debut_body($onLoad);
+	init_body($rubrique, $sous_rubrique);
+}
+
+
+function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $couleurs_spip;
 	global $couleur_foncee;
 	global $couleur_claire;
@@ -2328,12 +2346,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = "oui";
 
+
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
 	if (strlen($adresse_site)<10) $adresse_site="../";
-
-	debut_html($titre, $rubrique, $onLoad);
 
 	$link = new Link;
 	echo "\n<map name='map_layout'>";
@@ -2373,7 +2390,7 @@ else {
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
 	icone_bandeau_principal (_T('titre_forum'), "forum.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
+	if ($connect_statut == "0minirezo"  AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
 		//bandeau_barre_verticale();
 		icone_bandeau_principal (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
 	}

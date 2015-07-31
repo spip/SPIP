@@ -13,7 +13,11 @@
 
 include ("inc.php3");
 
-debut_html();
+echo debut_entete("");
+envoi_link("","");
+// Fin des entetes
+echo "\n</head>\n";
+debut_body();
 
 	if ($spip_ecran == "large") {
 		$nb_col = 4;
