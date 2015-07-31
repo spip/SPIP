@@ -182,7 +182,7 @@
 <BOUCLE_articles_recents(ARTICLES) {id_rubrique} {par titre}>
 	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
 	<div class="detail">
-	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
 	<B_auteurs_recents>par <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents>
 	</div>
 	<br>
