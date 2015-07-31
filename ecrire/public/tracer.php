@@ -60,6 +60,8 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$tt += $dt;
 	$nb++;
 
+	include_spip('inc/filtres_mini');
+
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', "$1\n<br />$2",spip_htmlentities($query));
 	$e =  sql_explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
