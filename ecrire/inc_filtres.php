@@ -1683,7 +1683,7 @@ function alterner($i) {
 }
 
 // recuperer une balise HTML de type "xxx"
-// exemple : [(#DESCRIPTIF|extraire_attribut{img})] (pour flux RSS-photo)
+// exemple : [(#DESCRIPTIF|extraire_tag{img})] (pour flux RSS-photo)
 function extraire_tag($texte, $tag) {
 	if (preg_match(",<$tag(\\s.*)?".">,Uims", $texte, $regs))
 		return $regs[0];
@@ -1693,6 +1693,10 @@ function extraire_tag($texte, $tag) {
 // recuperer un attribut html d'une balise
 // ($complet demande de retourner $r)
 function extraire_attribut($balise, $attribut, $complet = false) {
+
+var_dump($balise);
+var_dump($attribut);
+
 	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([^>]*>.*),ims", $balise, $r)) {
 		$att = $r[4];
 	}
@@ -2122,6 +2126,14 @@ function boutonne($t, $n, $v, $a='') {
 	return "\n<input type='$t'"
 	. (!$n ? '' : " name='$n'")
 	. " value=\"$v\" $a />";
+}
+
+// valeur_numerique("3*2") => 6
+// n'accepte que les *, + et - (a ameliorer si on l'utilise vraiment)
+function valeur_numerique($expr) {
+	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,', trim($expr)))
+		eval("\$a = $expr;");
+	return intval($a);
 }
 
 ?>

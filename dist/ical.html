@@ -1,4 +1,5 @@
-#HTTP{"Content-type: text/calendar", 3600}
+#HTTP_HEADER{Content-type: text/calendar}
+#CACHE{3600}
 BEGIN:VCALENDAR
 CALSCALE:GREGORIAN
 X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]

@@ -1,4 +1,11 @@
-#HTTP{"Cache-Control: no-store, no-cache, must-revalidate","Pragma: no-cache"}
+[(#REM)
+	Le fichier est en cache dans SPIP, mais les navigateurs ne doivent pas
+	conserver cette page en memoire
+]
+#CACHE{24 * 3600}
+#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"}
+#HTTP_HEADER{Pragma: no-cache}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -39,5 +46,10 @@
 
 </td></tr></table></div>
 
+[(#REM)
+	Esthetique : on ne veut pas des boutons d'admin sur la page de login
+]<!--
+#FORMULAIRE_ADMIN
+-->
 </body>
 </html>
