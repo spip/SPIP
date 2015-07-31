@@ -264,22 +264,26 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 		if ($process == "netpbm") {
 			$format_sortie = "jpg";
 			$vignette = $destination.".".$format_sortie;
+			$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
 			if ($format == "jpg") {
-				exec("$djpeg_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				
+				$jpegtopnm_command = ereg_replace("pnmscale", "jpegtopnm", $pnmscale_command);
+
+				exec("$jpegtopnm_command $image | $pnmscale_command -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-jpg sur $vignette");
 					return;
 				}
 			} else if ($format == "gif") {
 				$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
-				exec("$giftopnm_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				exec("$giftopnm_command $image | $pnmscale_command -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-gif sur $vignette");
 					return;
 				}
 			} else if ($format == "png") {
 				$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
-				exec("$pngtopnm_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				exec("$pngtopnm_command $image | $pnmscale_command -width $destWidth | $pnmtojpeg_command > $vignette");
 				if (!@file_exists($vignette)) {
 					spip_log("echec netpbm-png sur $vignette");
 					return;
