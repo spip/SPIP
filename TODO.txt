@@ -459,5 +459,5 @@ CONTRIBS ?
 * couche SQL dans spip_query() sachant traduire les commandes MySQL vers
   SQLite (au moins)
 
-
+TESTS  tévé
 
