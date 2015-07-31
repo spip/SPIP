@@ -750,12 +750,12 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 	while (list($lang,$bloc) = each($trads)) {
 		if ($lang != $langue_demandee)
 			$survol .= "[$lang] ".supprimer_tags(couper($bloc,20))."\n";
-		$texte_popup .= "<br /><b>".traduire_nom_langue($lang)."</b> ".supprimer_tags(couper(propre($bloc),200));
+		$texte_popup .= "<br /><b>".traduire_nom_langue($lang)."</b> ".ereg_replace("\n+","<br />", supprimer_tags(couper(propre($bloc),200)));
 	}
 
 	if ($survol) {
 		$num_multi ++;
-		$texte .= " <img src=\"img_pack/langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"openmulti($num_multi);\" />";
+		$texte .= " <img src=\"img_pack/langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"return openmulti($num_multi)\" />";
 		$multi_popup .= "textes_multi[$num_multi] = '".addslashes($texte_popup)."';\n";
 	}
 
