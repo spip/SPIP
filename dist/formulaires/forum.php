@@ -138,17 +138,16 @@ function forum_fichier_tmp($arg)
 	return $alea;
 }
 
-
-
 function formulaires_forum_verifier_dist(
-$titre, $table, $type, $script,
-$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
-$ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
+	$titre, $table, $type, $script,
+	$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
+	$ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
+{
 	include_spip('inc/acces');
 	include_spip('inc/texte');
 	include_spip('inc/forum');
+	include_spip('inc/session');
 	include_spip('base/abstract_sql');
-	spip_connect();
 
 	$erreurs = array();
 
@@ -158,7 +157,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
 
 	// stocker un eventuel document dans un espace temporaire
 	// portant la cle du formulaire ; et ses metadonnees avec
-	include_spip('inc/session');
+
 	if (!isset($GLOBALS['visiteur_session']['tmp_forum_document']))
 		session_set('tmp_forum_document',
 		sous_repertoire(_DIR_TMP,'documents_forum').md5(uniqid(rand())));
