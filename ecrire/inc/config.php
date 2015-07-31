@@ -401,6 +401,7 @@ function liste_metas()
 {
 	return pipeline('configurer_liste_metas', array(
 		'nom_site' => _T('info_mon_site_spip'),
+		'slogan_site' => '',
 		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
 		'activer_logos' => 'oui',
