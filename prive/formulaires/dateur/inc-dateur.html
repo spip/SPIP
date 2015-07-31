@@ -2,31 +2,32 @@
 if (window.jQuery){
 	jQuery(function(){
 		if (jQuery('input.date').length)
-			jQuery.getScript('#CHEMIN{formulaires/dateur/dates.js}',function(){
-				jQuery.getScript('#CHEMIN{formulaires/dateur/jquery.date_picker.js}',function(){
-					Date.dayNames = ['<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>'];
-					Date.abbrDayNames = ['<:date_jour_1_abbr:>', '<:date_jour_2_abbr:>', '<:date_jour_3_abbr:>', '<:date_jour_4_abbr:>', '<:date_jour_5_abbr:>', '<:date_jour_6_abbr:>', '<:date_jour_7_abbr:>'];
-					Date.monthNames = ['<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>'];
-					Date.abbrMonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-					Date.firstDayOfWeek = 1;
-					Date.format = '#ENV{dateFormat,'dd/mm/yyyy'}';
-					jQuery.dpText = {
-						TEXT_PREV_YEAR		:	'<:spip_bonux:annee_precedente|texte_script:>',
-						TEXT_PREV_MONTH		:	'<:spip_bonux:mois_precedent|texte_script:>',
-						TEXT_NEXT_YEAR		:	'<:spip_bonux:annee_suivante|texte_script:>',
-						TEXT_NEXT_MONTH		:	'<:spip_bonux:mois_suivant|texte_script:>',
-						TEXT_CLOSE			:	'<:bouton_fermer|texte_script:>',
-						TEXT_CHOOSE_DATE	:	'<img src=\'#CHEMIN_IMAGE{calendrier-16.png}\' alt=\'<:spip_bonux:afficher_calendrier|attribut_html:>\' />',
-						TITLE_CHOOSE_DATE	:	'<:spip_bonux:afficher_calendrier|texte_script:>'
-					}
+			jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.widget.js}',function(){
+				jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.datepicker.js}',function(){
 					jQuery('input.date')
 						.addClass('datePicker')
-						.datePicker({startDate:'#ENV{startDate,'01/01/1900'}'[,endDate:'(#ENV{endDate})']})
-						.dpSetPosition(jQuery.dpConst.POS_TOP, jQuery.dpConst.POS_RIGHT)
-						.each(function(){
-							if ($(this).attr('value')){
-								$(this).dpSetSelected($(this).attr('value'));
-							}
+						.datepicker({
+							showOn: 'button',
+							buttonText: '<:spip_bonux:afficher_calendrier|texte_script:>',
+							buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
+							buttonImageOnly: true,
+							closeText: '<:bouton_fermer|texte_script:>',
+							prevText: '<:precedent|ucfirst|texte_script:>',
+							nextText: '<:suivant|ucfirst|texte_script:>',
+							currentText: '<:date_aujourdhui|ucfirst|texte_script:>',
+							closeText: '<:bouton_fermer|texte_script:>',
+							monthNames: ['<:date_mois_1:>', '<:date_mois_2:>', '<:date_mois_3:>', '<:date_mois_4:>', '<:date_mois_5:>', '<:date_mois_6:>', '<:date_mois_7:>', '<:date_mois_8:>', '<:date_mois_9:>', '<:date_mois_10:>', '<:date_mois_11:>', '<:date_mois_12:>'],
+							monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+							dayNames: ['<:date_jour_1:>', '<:date_jour_2:>', '<:date_jour_3:>', '<:date_jour_4:>', '<:date_jour_5:>', '<:date_jour_6:>', '<:date_jour_7:>'],
+							dayNamesShort: ['<:date_jour_1_abbr:>', '<:date_jour_2_abbr:>', '<:date_jour_3_abbr:>', '<:date_jour_4_abbr:>', '<:date_jour_5_abbr:>', '<:date_jour_6_abbr:>', '<:date_jour_7_abbr:>'],
+							dayNamesMin: ['<:date_jour_1|ucfirst|couper{1}:>', '<:date_jour_2|ucfirst|couper{1}:>', '<:date_jour_3|ucfirst|couper{1}:>', '<:date_jour_4|ucfirst|couper{1}:>', '<:date_jour_5|ucfirst|couper{1}:>', '<:date_jour_6|ucfirst|couper{1}:>', '<:date_jour_7|ucfirst|couper{1}:>'],
+							dateFormat: 'dd/mm/yyyy',
+							firstDay: 1,
+							isRTL: [(#ENV{lang}|lang_dir|=={rtl}|?{true,false})],
+							showOtherMonths: true,
+							selectOtherMonths: true[,
+							minDate:'(#ENV{startDate})'][,
+							maxDate:'(#ENV{endDate})']
 						});
 				});
 			});
@@ -38,9 +39,8 @@ if (window.jQuery){
 }
 /*]]>*/</script>
 <style type="text/css">
-[(#INCLURE{formulaires/dateur/date_picker.css}|compacte{css})]
 [(#INCLURE{formulaires/dateur/time_picker.css}|compacte{css})]
-a.dp-choose-date { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; }
+img.ui-datepicker-trigger { display: inline-block; padding: 0; margin: 0px 0 0 -19px; vertical-align: middle; }
 div.time-picker {font-size:11px;  width:5em; /* needed for IE */}
 .formulaire_spip input.date {width:9em;padding-right:25px;}
 .formulaire_spip input.heure {width:7em;}
