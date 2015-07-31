@@ -258,11 +258,22 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 		$r = intval($r[2]);
 		$pas = strval($r ? $r : 10);
 	}
-	$type = !isset($crit->param[0][1]) ? "'$idb'"
-		: calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucle->id_parent);
-	$debut = ($type[0]!=="'") ? "'debut'.$type"
-		: ("'debut".substr($type, 1));
 
+	// Calcul du nommage de la pagination si il existe.
+	// La nouvelle syntaxe {pagination 20, nom} est prise en compte et privilégiée mais on reste
+	// compatible avec l'ancienne car certains cas fonctionnent correctement
+	$type = "'$idb'";
+	// Calcul d'un nommage spécifique de la pagination si précisé.
+	// Syntaxe {pagination 20, nom}
+	if (isset($crit->param[0][1])) {
+		$type = calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucle->id_parent);
+	}
+	// Ancienne syntaxe {pagination 20 nom} pour compatibilité
+	elseif (isset($crit->param[1][0])) {
+		$type = calculer_liste(array($crit->param[1][0]), array(), $boucles, $boucle->id_parent);
+	}
+
+	$debut = ($type[0]!=="'") ? "'debut'.$type"	: ("'debut".substr($type, 1));
 	$boucle->modificateur['debut_nom'] = $type;
 	$partie =
 		// tester si le numero de page demande est de la forme '@yyy'
