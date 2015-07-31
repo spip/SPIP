@@ -186,17 +186,17 @@ function debusquer_navigation($tableau, $caption='') {
 
 	}
 
-	$style = "text-align: left; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" ;
+	$style = "width: 200px;" ;
 
 	if (_DIR_RESTREINT AND headers_sent())
 		 $style .= " position: absolute; top: 90px; left: 10px;";
 
-	return "\n<table cellpadding='2'  border='1' style='$style'>"
+	return "\n<table id='debug-nav' cellpadding='2'  border='1' style='$style'>"
 	. "<caption style='text-align: center'>"
 	. $caption
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-	. "<br /><br /></caption>"
+	. "</caption>"
 	. "<tr><th>" 
 	. _T('numero')
 	. "</th><th>" 
@@ -413,7 +413,7 @@ function debusquer_squelette ($fonc, $mode, $self) {
 			  $texte = $debug_objets[$mode][$fonc . 'tout'];
 			  $texte = ancre_texte($texte, array('',''));
 			}
-		} else return $res;
+		} else return "<div id='spip-debug'>$res</div>";
 	} else {
 		$valider = charger_fonction('valider', 'xml');
 		$val = $valider($debug_objets['validation'][$fonc . 'tout']);
@@ -428,12 +428,13 @@ function debusquer_squelette ($fonc, $mode, $self) {
 		$legend = _T('validation') . ' ' . $err;
 		$res = $id = '';
 	}
-	return $res
+	return "<div id='spip-debug'>$res"
 		. "<div id='debug_boucle'><fieldset$id><legend>"
 		. $legend
 		. "</legend>"
 		. $texte
-		. "</fieldset></div>";
+		. "</fieldset></div>"
+		. "</div>";
 }
 
 function debusquer_navigation_squelettes($self)
