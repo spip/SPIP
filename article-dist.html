@@ -222,16 +222,24 @@
 </B_signatures>
 
 
-[<P align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet article</A></B></font>]
+[<p align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet article</A></B></font></p>]
 
 
 <B_documents>
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR>
+</TABLE>
+
+
+<center>Documents li&eacute;s</center>
 <ul>
-<p align="left">
 <BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{id_vignette=0}>
-<li>#TITRE </li>
-<!--<li><font size=1>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<a href="IMG/#FICHIER_DOCUMENT">DOCUMENT [(#TYPE|majuscules)]</a></font> <b>#TITRE,</b> [(#TAILLE_DOCUMENT|taille_en_octets)]-->
-[<br>(#DESCRIPTIF)]
+	<li><font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
+	[: (#DESCRIPTIF)]
+		(<BOUCLE_type_doc(TYPES_DOCUMENTS){id_type}>[(#TITRE) - ].#EXTENSION -</BOUCLE_type_doc>
+	[(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]).</li>
 </BOUCLE_documents>
 </ul>
 </B_documents>
