@@ -74,6 +74,7 @@ function init_var_mode(){
 	}
 }
 
+// http://doc.spip.org/@traiter_formulaires_dynamiques
 function traiter_formulaires_dynamiques(){
 	static $done = false;
 	if (!$done) {
