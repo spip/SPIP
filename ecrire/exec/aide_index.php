@@ -172,7 +172,7 @@ function help_body($aide) {
 function help_section($aide, $contenu, $prof=2)
 {
 	$maxprof = ($prof >=2) ? "12" : "1";
-	$r = "@<h$prof" . '(?: class="spip")?' . '>\s*' . $aide 
+	$r = "@<h$prof" . '(?: class="spip")?' . '>\s*' . preg_quote($aide) 
 	  ."\s*(?:/.+?)?</h$prof>(.*?)<(?:(?:h[$maxprof])|/body)@ism";
 
 	if (preg_match($r, $contenu, $m))
