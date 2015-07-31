@@ -18,6 +18,7 @@ function surligner_mots($page, $mots) {
 	global $nombre_surligne;
 	include_ecrire("inc_texte.php3"); // pour le reglage de $nombre_surligne
 
+	// si quelqu'un a une idee pour rendre ca compatible utf-8 ?
 	$accents =
 		/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
 		/* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
@@ -63,10 +64,13 @@ function surligner_mots($page, $mots) {
 		$debut = '';
 
 	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
-	// se limiter a 4 remplacements pour ne pas bouffer le CPU
+	// se limiter a 4 remplacements pour ne pas bouffer le CPU ;
+	// traiter <textarea...>....</textarea> comme un tag.
 	if ($mots_surligne) {
+		$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
 		$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('.join('|', $mots_surligne).')[[:alnum:]_]*?)/Uis';
 		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
+		$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
 	}
 
 	return $debut.$page;
