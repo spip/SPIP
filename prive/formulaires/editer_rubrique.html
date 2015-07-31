@@ -7,7 +7,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <input type='hidden' name='id_article' value='#ENV{id_article}' />
+	  <input type='hidden' name='id_rubrique' value='#ENV{id_rubrique}' />
 	  <ul>
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 				<label for="titre"><:info_titre:><em class="aide">#AIDER{arttitre}</em></label>[
