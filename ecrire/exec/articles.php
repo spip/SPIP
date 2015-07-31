@@ -1344,6 +1344,7 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
 		else
 			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non', date_modif=NOW() WHERE id_article=$id_article");
+                calculer_langues_utilisees();
 	}
  }
 }

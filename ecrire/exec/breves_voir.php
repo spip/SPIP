@@ -139,9 +139,9 @@ if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_breves SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_breve=$id_breve");
-		else {
+		else
 			spip_query("UPDATE spip_breves SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_breve=$id_breve");
-		}
+		calculer_langues_utilisees();
 	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
