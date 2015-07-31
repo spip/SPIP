@@ -483,6 +483,10 @@ function maj_v019_dist($version_installee, $version_cible)
 	  maj_v019_54();
 	  maj_version('1.954');
 	}
+	if (upgrade_vers(1.955, $version_installee, $version_cible)) {
+	  maj_v019_55();
+	  maj_version('1.955');
+	}
 }
 
 function maj_v019_45()
@@ -705,4 +709,10 @@ function maj_v019_54()
 		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre) VALUES ('kmz', 'Google Earth Placemark File')");
 		spip_query("UPDATE spip_types_documents	SET mime_type='application/vnd.google-earth.kmz' WHERE extension='kmz'");
 }
+
+function maj_v019_55()
+{
+	sql_alter("TABLE spip_urls CHANGE maj date DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
+}
+
 ?>

@@ -101,7 +101,7 @@ function _generer_url_propre($type, $id_objet) {
 		$champ_titre = 'titre';
 
 	//  Recuperer une URL propre correspondant a l'objet.
-	$row = sql_fetsel("U.url, U.maj, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.maj DESC', 1);
+	$row = sql_fetsel("U.url, U.date, O.$champ_titre", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
 
 	if (!$row) return ""; # objet inexistant
 
@@ -162,7 +162,7 @@ function _generer_url_propre($type, $id_objet) {
 	while (@sql_insertq('spip_urls', $set) <= 0) {
 		$where = "U.type='$type' AND U.id_objet=$id_objet AND url=";
 		if (sql_countsel('spip_urls AS U', $where  ._q($set['url']))) {
-			sql_update('spip_urls AS U', array('maj' => 'NOW()'), $where  ._q($set['url']));
+			sql_update('spip_urls AS U', array('date' => 'NOW()'), $where  ._q($set['url']));
 			spip_log("reordonne $type $id_objet");
 			return $set['url'];
 		}

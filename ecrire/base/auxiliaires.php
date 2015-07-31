@@ -207,8 +207,10 @@ $spip_urls = array(
 	"type"			=> "varchar(15) DEFAULT 'article' NOT NULL",
 	// l'id dans la table
 	"id_objet"		=> "bigint(21) NOT NULL",
-	// pour connaitre la plus recente
-	"maj"			=> "TIMESTAMP");
+	// pour connaitre la plus recente. 
+	// ATTENTION, pas on update CURRENT_TIMESTAMP implicite
+	// et pas le nom maj, surinterprete par inc/import_1_3
+	"date"			=> "DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL");
 
 $spip_urls_key = array(
 	"PRIMARY KEY"		=> "url",
