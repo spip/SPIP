@@ -1,7 +1,7 @@
 #SET{img_unpick, #CHEMIN_IMAGE{supprimer-12.png}}
 [(#SET{label_supprimer, <:lien_supprimer:>})]
 <script type='text/javascript'>var identifiant_selecteur = 'selecteur_#ENV{name}'; var img_unpick='#GET{img_unpick}'; var selecteur_label_supprimer='#GET{label_supprimer}';
-jQuery.getScript('#CHEMIN{formulaires/selecteur/jquery.picker.js}');
+jQuery.getScript('[(#CHEMIN{formulaires/selecteur/jquery.picker.js}|timestamp)]');
 </script>
 [(#REM)
 
@@ -65,7 +65,7 @@ afficher la selection dans un ul class item_picked
 
 [(#ENV{sortable,'non'}|=={oui}|oui)
 <script type='text/javascript'>
-jQuery.getScript('#CHEMIN{formulaires/selecteur/jquery-ui-1.8.custom.js}',function(){
+jQuery.getScript('[(#CHEMIN{formulaires/selecteur/jquery-ui-1.8.custom.js}|timestamp)]',function(){
 	jQuery(function() {jQuery("ul.item_picked").sortable(); });
 });
 </script>

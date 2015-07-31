@@ -55,7 +55,7 @@ if (window.jQuery){
 	jQuery(function(){
 		if (jQuery('input.date,input.heure').length
 			&& typeof date_picker_loading=="undefined"){
-			date_picker_loading = jQuery.getScript('#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}');
+			date_picker_loading = jQuery.getScript('[(#PRODUIRE{fond=formulaires/dateur/jquery.dateur.js}|timestamp)]');
 			date_picker_loading.done(function(){
 				date_picker_init();
 				onAjaxLoad(date_picker_init);
