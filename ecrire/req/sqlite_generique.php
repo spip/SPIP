@@ -380,7 +380,7 @@ function spip_sqlite_errno($serveur='') {
 
 
 function spip_sqlite_explain($query, $serveur=''){
-	if (strpos($query, 'SELECT') !== 0) return array();
+	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 
 	$query = 'EXPLAIN ' . _sqlite_traite_query($query, $db, $prefixe);
 	$r = spip_sqlite_query($query, $serveur);
@@ -480,7 +480,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 	  if ($e = spip_sqlite_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_sqlite_error($query, $serveur); // et du fautif
 	}
-	return $t ? trace_query_end($query, $t, $nb, $e) : $nb;
+	return $t ? trace_query_end($query, $t, $nb, $e, $serveur) : $nb;
 
 }
 
@@ -1244,7 +1244,7 @@ class sqlite_traiter_requete{
 		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
 			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
 
-		return $t ? trace_query_end($this->query, $t, $r, $e) : $r;		
+		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;		
 	}
 }
 

@@ -110,7 +110,7 @@ function spip_pg_trace_query($query, $serveur='')
 
 	if ($e = spip_pg_errno())	// Log de l'erreur eventuelle
 		$e .= spip_pg_error($query); // et du fautif
-	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
 // Fonction de requete generale quand on est sur que c'est SQL standard.
@@ -210,7 +210,7 @@ function spip_pg_alter_drop($table, $arg, $serveur='') {
 
 // http://doc.spip.org/@spip_pg_explain
 function spip_pg_explain($query, $serveur=''){
-	if (strpos($query, 'SELECT') !== 0) return array();
+	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
