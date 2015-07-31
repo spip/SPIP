@@ -362,12 +362,14 @@ Bedankt voor je deelname
 'icone_admin_site' => 'Beheer van de site',
 'icone_afficher_auteurs' => 'Auteurs tonen',
 'icone_afficher_visiteurs' => 'Bezoekers tonen',
+'icone_agenda' => 'Agenda en berichtensysteem',
 'icone_aide_ligne' => 'Online help',
 'icone_arret_discussion' => 'Niet langer deelnemen aan deze discussie',
 'icone_articles' => 'Artikels',
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Berichten',
 'icone_calendrier' => 'Kalender',
+'icone_calendrier_messagerie' => 'Agenda en berichtensysteem',
 'icone_configuration_site' => 'Configuratie van de site',
 'icone_configurer_site' => 'Je website configureren',
 'icone_creation_groupe_mots' => 'Een nieuwe groep van trefwoorden aanmaken',
@@ -576,7 +578,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_dimension' => 'Afmetingen:',
 'info_discussion_cours' => 'Lopende discussies',
 'info_document' => 'Document',
-'info_donner_rendez_vous' => 'Via deze knop kan je een afspraak maken met een andere deelnemer.',
 'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
 'info_ecire_message_prive' => 'Een priv&eacute;-bericht schrijven',
@@ -747,7 +748,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_notes' => 'Opmerkingen',
 'info_nouveau' => '(Nieuw)',
 'info_nouveau_message' => 'JE HEBT EEN NIEUW BERICHT',
-'info_nouveau_pense_bete' => 'Via deze knop kan je een nieuwe memo aanmaken.',
 'info_nouveaux_message' => 'Nieuwe berichten',
 'info_nouveaux_messages' => 'JE HEBT @total_messages@ NIEUWE BERICHTEN',
 'info_nouvel_article' => 'Nieuw artikel',
@@ -1203,7 +1203,9 @@ De publieke forums kunnen per artikel toegestaan worden
 
 // O
 'onglet_affacer_base' => 'Database verwijderen',
+'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'Auteur',
+'onglet_calendrier' => 'Kalender',
 'onglet_contenu_site' => 'Inhoud van de site',
 'onglet_evolution_visite_mod' => 'Evolutie',
 'onglet_fonctions_avances' => 'Geavanceerde functies',
@@ -1211,6 +1213,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'onglet_interactivite' => 'Interactiviteit',
 'onglet_langues' => 'Talen',
 'onglet_messagerie' => 'Berichtensysteem',
+'onglet_messagerie_personnelle' => 'Persoonlijk berichtensysteem',
 'onglet_messages_internes' => 'Interne berichten',
 'onglet_messages_publics' => 'Publieke berichten',
 'onglet_messages_vide' => 'Berichten zonder tekst',
@@ -1620,7 +1623,12 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_delier' => 'Dit artikel niet meer koppelen aan zijn vertalingen',
 'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel',
-'trad_reference' => '(referentie-artikel)'
+'trad_reference' => '(referentie-artikel)',
+
+
+// PLUS_UTILISE
+'info_donner_rendez_vous' => 'Via deze knop kan je een afspraak maken met een andere deelnemer.',
+'info_nouveau_pense_bete' => 'Via deze knop kan je een nieuwe memo aanmaken.'
 
 );
 
