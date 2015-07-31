@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'alerte_modif_info_concourante' => '<MODIF>ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:',
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Cancelar',
-'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
+'antispam_champ_vide' => '<NEW>Por favor, deixe este campo em branco&nbsp;:',
 'articles_recents' => 'Artigos mais recentes',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
@@ -60,10 +60,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar em [liga&ccedil;&atilde;o hipertexto->http://...]',
 'barre_lien_input' => 'Favor indicar o endere&ccedil;o da sua liga&ccedil;&atilde;o (pode indicar um endere&ccedil;o Web sob a forma  http://www.monsite/com ou simplesmente indicar o n&uacute;mero de um artigo deste s&iacute;tio.) ',
 'barre_note' => 'Transformar em  [[Nota de rodap&eacute; ]]',
-'barre_paragraphe' => '<NEW>Cr&#233;er un paragraphe',
+'barre_paragraphe' => '<NEW>Criar um par&aacute;grafo',
 'barre_quote' => '<quote>Citar uma  mensagem</quote>',
 'bouton_ajouter_document' => '<MODIF>ACRESCENTAR UM  DOCUMENTO',
 'bouton_ajouter_image' => '<MODIF>ACRESCENTAR UMA IMAGEM',
+'bouton_ajouter_image_document' => '<NEW>Ajouter une image ou&nbsp;un&nbsp;document',
 'bouton_changer' => 'Mudar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
@@ -86,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calend&aacute;rio por semana',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => '<NEW>choix  de l\'interface',
-'colonne' => '<NEW>Colonne',
+'colonne' => '<NEW>Coluna',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, solicitou a altera&ccedil;&atilde;o do estatuto deste elemento. Deseja continuar?',
 'correcte' => '<NEW>correcte',
 
@@ -187,7 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'ver&atilde;o',
 'date_saison_4' => 'outono',
+'date_secondes' => '<NEW>secondes',
 'date_semaines' => 'semanas',
+'date_un_mois' => '<NEW>mois',
+'date_une_heure' => '<NEW>tempo',
+'date_une_minute' => '<NEW>minuto',
+'date_une_seconde' => '<NEW>seconde',
+'date_une_semaine' => '<NEW>semaine',
 'dirs_commencer' => 'a fim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar : <b>Configurar os direitos de acesso</b>',
 'dirs_probleme_droits' => '<MODIF>Problema de direitos de acesso',
@@ -203,13 +210,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => '<MODIF>Double occurrence',
 
 // E
+'en_cours' => '<NEW>en cours',
 'entree_dimensions' => 'Dimens&otilde;es&nbsp;:',
 'entree_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
 'entree_titre_image' => 'T&iacute;tulo da imagem&nbsp;:',
 'envoi_via_le_site' => 'Envio pelo site',
-'erreur' => '<NEW>Erreur',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur' => '<NEW>Erro',
+'erreur_balise_non_fermee' => '<NEW>&uacute;ltima etiqueta n&atilde;o fechada:',
 'erreur_texte' => '<NEW>erreur(s)',
+'etape' => '<NEW>&Eacute;tape',
 
 // F
 'fichier_introuvable' => 'Ficheiro @fichier@ n&atilde;o localizado',
@@ -439,7 +448,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o',
-'info_installer_documents' => '<MODIF>Pode instalar automaticamente todos os documentos contidos no dossier @upload@.',
+'info_installer_documents' => '<MODIF>Pode instalar automaticamente todos os documentos contidos no processo @upload@.',
 'info_installer_ftp' => '<MODIF>Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccion&aacute;-los directamente aqui.',
 'info_installer_images' => 'Pode instalar imagens nos formatos JPEG, GIF e PNG.',
 'info_installer_images_dossier' => '<MODIF>Instalar imagens no dossier @upload@ para poder seleccion&aacute;-los aqui.',
@@ -598,10 +607,10 @@ entre os participantes do s&iacute;tio. Pode activar ou
 
 // N
 'navigateur_pas_redirige' => 'Se o seu browser n&atilde;o est&aacute; redireccionado, clique aqui para continuar.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => '<NEW>N&uacute;mero',
 
 // O
-'occurence' => '<NEW>Occurrence',
+'occurence' => '<NEW>Ocorr&ecirc;ncia',
 'onglet_affacer_base' => 'Apagar a base',
 'onglet_auteur' => 'O autor',
 'onglet_contenu_site' => 'Conte&uacute;do do s&iacute;tio',
@@ -734,6 +743,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'titre_signatures_confirmees' => '<NEW>Signatures confirm&eacute;es',
 'titre_statistiques' => 'Estat&iacute;sticas do s&iacute;tio',
 'titre_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
+'todo' => '<NEW>&agrave; venir',
 'trad_reference' => '(artigo de refer&ecirc;ncia)',
 
 // Z
@@ -782,7 +792,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
 'zxml_survoler' => '<NEW>survoler pour voir les corrects',
 'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
-'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vide_balise' => '<NEW>tag vasia',
 'zxml_vu' => '<NEW>vu auparavant'
 );
 
