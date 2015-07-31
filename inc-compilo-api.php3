@@ -60,7 +60,7 @@ class Boucle {
 	var $limit;
 	var $group = array();
 	var $order = array();
-	var $default_order = '';
+	var $default_order = array();
 	var $date = 'date' ;
 	var $hash = "" ;
 	var $lien = false;
