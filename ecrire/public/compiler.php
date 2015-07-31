@@ -847,6 +847,11 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				AND (isset($tables_jointures[$nom_table])) 
 				AND is_array($x = $tables_jointures[$nom_table]))
 					$boucles[$id]->jointures = $x;
+				if ($boucles[$id]->jointures_explicites){
+					$jointures = preg_split("/\s+/",$boucles[$id]->jointures_explicites);
+					while ($j=array_pop($jointures))
+						array_unshift($boucles[$id]->jointures,$j);
+				}
 			} else {
 				// Pas une erreur si la table est optionnelle
 				if ($boucles[$id]->table_optionnelle)
