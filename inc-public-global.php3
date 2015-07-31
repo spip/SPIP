@@ -171,11 +171,8 @@ function afficher_page_globale ($fond) {
 					$status = 404;
 					$flag_dynamique = true;
 				}
-	// pas de cache client pour les observateurs (et si pas deja indique)
-				if ($flag_dynamique 
-				    OR $_COOKIE['spip_admin']
-				    OR $var_mode
-) {
+	// pas de cache client en mode 'observation (ou si deja indique)
+				if ($flag_dynamique  OR $var_mode) {
 				  $page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
 				  $page['entetes']["Pragma"] = "no-cache";
 				} 
