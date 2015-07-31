@@ -407,6 +407,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante_1' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_etape_suivante_2' => 'Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_exportation_base' => 'exportation de la base vers @archive@',
+'info_exceptions_proxy' => 'Exceptions pour le proxy',
 'info_facilite_suivi_activite' => 'Afin de faciliter le suivi de l\'activit&eacute;
 		&eacute;ditoriale du site, SPIP peut faire parvenir par mail, par exemple
 		&agrave; une mailing-list des r&eacute;dacteurs, l\'annonce des demandes de
@@ -721,7 +722,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_une_rubrique' => 'une rubrique,',
 'info_une_rubrique_02' => '1 rubrique',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy',
 'info_url_site' => 'URL DU SITE&nbsp;:',
+'info_url_test_proxy' => 'URL de test',
 'info_urlref' => 'Lien hypertexte&nbsp;:',
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;e...',
 'info_visites_par_mois' => 'Affichage par mois :',
