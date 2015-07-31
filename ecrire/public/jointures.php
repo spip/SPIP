@@ -303,8 +303,10 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
 	}
 
 	$akeys = array();
-	foreach ($adesc['key'] as $k)
-		$akeys = array_merge(preg_split('/,\s*/', $k), $akeys);
+	foreach ($adesc['key'] as $k) {
+		// respecter l'ordre de $adesc['key'] pour ne pas avoir id_trad en premier entre autres...
+		$akeys = array_merge($akeys, preg_split('/,\s*/', $k));
+	}
 
 	// enlever les cles d'arrivee exclues par l'appel
 	$akeys = array_diff($akeys, $milieu_exclus);
