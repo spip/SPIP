@@ -87,6 +87,21 @@ define ('_url_arbo_minuscules',1);
 #define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
 define('_MARQUEUR_URL', false);
 
+function url_arbo_parent($type){
+	static $parents = null;
+	if (is_null($parents)){
+		$parents = array(
+			  'article'=>array('id_rubrique','rubrique'),
+			  'rubrique'=>array('id_parent','rubrique'),
+			  'breve'=>array('id_rubrique','rubrique'),
+			  'site'=>array('id_rubrique','rubrique'));
+		if (isset($GLOBALS['url_arbo_parents']) AND !isset($_REQUEST['url_arbo_parents'])){
+			$parents = array_merge($parents,$GLOBALS['url_arbo_parents']);
+		}			  
+	}
+	return (isset($parents[$type])?$parents[$type]:'');
+}
+
 function url_arbo_terminaison($type){
 	static $terminaison_types = null;
 	if ($terminaison_types==null){
@@ -229,14 +244,7 @@ function declarer_url_arbo($type, $id_objet) {
 			$champ_titre = 'titre';
 			
 		// parent
-		$champ_parent = (isset($GLOBALS['url_arbo_parents']) AND !isset($_REQUEST['url_arbo_parents']))?
-			$GLOBALS['url_arbo_parents']
-			:array(
-			  'article'=>array('id_rubrique','rubrique'),
-			  'rubrique'=>array('id_parent','rubrique'),
-			  'breve'=>array('id_rubrique','rubrique'),
-			  'site'=>array('id_rubrique','rubrique'));
-		$sel_parent = isset($champ_parent[$type])?", O.".reset($champ_parent[$type]).' as parent':'';
+		$sel_parent = ($p=url_arbo_parent($type))?", O.".reset($p).' as parent':'';
 	
 		//  Recuperer une URL propre correspondant a l'objet.
 		$row = sql_fetsel("U.url, U.date, O.$champ_titre $sel_parent", "$table AS O LEFT JOIN spip_urls AS U ON (U.type='$type' AND U.id_objet=O.$col_id)", "O.$col_id=$id_objet", '', 'U.date DESC', 1);
@@ -494,11 +502,12 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			}*/
 	
 			$col_id = id_table_objet($type);
-			$contexte[$col_id] = $row['id_objet'];
-			if ($type!='rubrique' OR !in_array($entite,array('article','breve','site')))
+			if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
+				$contexte[$col_id] = $row['id_objet'];
+			if (!$entite 
+			  OR !$p = url_arbo_parent($entite)
+				OR $type!==end($p))
 				$entite = $row['type'];
-			if ($type=='rubrique')
-				$url_arbo = array();
 		}
 	}
 
