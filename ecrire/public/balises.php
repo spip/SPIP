@@ -630,22 +630,35 @@ function balise_ENV_dist($p, $src = NULL) {
 	return $p;
 }
 
-//
-// #CONFIG
-// les reglages du site
-//
-// Par exemple #CONFIG{gerer_trad} donne 'oui' ou 'non' selon le reglage
-// Attention c'est brut de decoffrage de la table spip_meta
-//
-// La balise fonctionne exactement comme #ENV (ci-dessus)
-//
-// http://doc.spip.org/@balise_CONFIG_dist
+/**
+ * #CONFIG retourne lire_config()
+ * les reglages du site
+ *
+ * Par exemple #CONFIG{gerer_trad} donne 'oui' ou 'non' selon le reglage
+ * Le 3eme argument permet de controler la serialisation du resultat
+ * (mais ne sert que pour le depot 'meta') qui doit parfois deserialiser
+ *
+ * ex: |in_array{#CONFIG{toto,#ARRAY,1}}.
+ *
+ * Ceci n'affecte pas d'autres depots et |in_array{#CONFIG{toto/,#ARRAY}} sera equivalent
+ * #CONFIG{/tablemeta/champ,defaut} lit la valeur de 'champ' dans la table des meta 'tablemeta'
+ *
+ * @param  Object $p  Arbre syntaxique du compilo
+ * @return Object
+ */
 function balise_CONFIG_dist($p) {
-	if(function_exists('balise_ENV'))
-		return balise_ENV($p, '$GLOBALS["meta"]');
-	else
-		return balise_ENV_dist($p, '$GLOBALS["meta"]');
+	if (!$arg = interprete_argument_balise(1,$p)) {
+		$arg = "''";
+	}
+	$_sinon = interprete_argument_balise(2,$p);
+	$_unserialize = sinon(interprete_argument_balise(3,$p),"false");
+
+	$p->code = 'vide(include_spip(\'inc/config\').lire_config(' . $arg . ',' .
+		($_sinon && $_sinon != "''" ? $_sinon : 'null') . ',' . $_unserialize . ')';
+
+	return $p;
 }
+
 
 // http://doc.spip.org/@balise_CONNECT_dist
 function balise_CONNECT_dist($p) {
