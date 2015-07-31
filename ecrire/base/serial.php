@@ -204,10 +204,10 @@ $spip_documents = array(
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"descriptif"	=> "text",
 		"fichier"	=> "varchar(255)",
-		"taille"	=> "integer NOT NULL",
-		"largeur"	=> "integer NOT NULL",
-		"hauteur"	=> "integer NOT NULL",
-		"mode"	=> "ENUM('vignette', 'document') NOT NULL",
+		"taille"	=> "integer",
+		"largeur"	=> "integer",
+		"hauteur"	=> "integer",
+		"mode"	=> "ENUM('vignette', 'document') NOT NULL",//+distant
 		"distant"	=> "VARCHAR(3) DEFAULT 'non'",
 		"maj"	=> "TIMESTAMP");
 
