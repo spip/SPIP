@@ -4,11 +4,11 @@
 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{#OBJET}}
 	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{[creer(#OBJET)dans],rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
 ]
-#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#GET{id_rubrique}|generer_url_entite{rubrique}}}}
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
 
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
-	[(#GET{redirect}|icone_verticale{[(#OBJET|objet_info{texte_retour}|_T)],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{[(#ID_OBJET|?{[(#OBJET|objet_info{texte_retour}|_T)],<:icone_retour:>})],#OBJET|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	[
 		[(#OBJET|objet_info{texte_modifier}|_T)]
 		<h1>(#ENV{titre,#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>}})</h1>
