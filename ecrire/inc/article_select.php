@@ -22,6 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
 	global $connect_id_auteur, $connect_id_rubrique, $spip_lang; 
 
+	include_spip('inc/auth'); // pour auteurs_article si espace public
 	include_spip('inc/autoriser');
 
 	if (is_numeric($id_article)) {

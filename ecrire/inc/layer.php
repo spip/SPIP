@@ -32,7 +32,7 @@ function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false
 	$nom = 'Layer' . renomme_block($nom);
 
 	// initialement invisible, seulement si on sait rendre visible
-	if (!$visible AND (!_SPIP_AJAX))
+	if (!$visible AND _SPIP_AJAX)
 		$visible = 'display:none;';
 	else 	$visible = 'display:block;';
 
