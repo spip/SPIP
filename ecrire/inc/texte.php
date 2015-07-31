@@ -653,6 +653,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 // cf specif ci-dessus
 
+// http://doc.spip.org/@calculer_url_sans_rac
 function calculer_url_sans_rac ($lien, $texte='', $pour='url') {
 	if (preg_match(",^\s*(http:?/?/?|mailto:?)\s*$,iS", $lien))
 		return ($pour != 'tout') ? '' : array('','','','');
@@ -1228,6 +1229,7 @@ function traiter_raccourci_lien($regs, $connect='') {
 	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect);
 }
 
+// http://doc.spip.org/@traiter_raccourci_lien_lang
 function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect='')
 {		
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
