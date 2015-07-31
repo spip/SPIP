@@ -1,11 +1,12 @@
 <?php
 
 /**********************************
-adaptation en php  de :
+adaptation en php de feedfinder.py :
 
-"""Ultra-liberal feed finder
+"""Ultra-liberal feed finder, de Mark Pilgrim
+<http://diveintomark.org/projects/feed_finder/>
 
-courcy.michael@wanadoo.fr
+Par: courcy.michael@wanadoo.fr
 
 adaptation en php, je ne reprends qu'une partie de cette algorithme
 
