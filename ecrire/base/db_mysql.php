@@ -124,13 +124,15 @@ function spip_mysql_optimize($table, $serveur=''){
 function spip_mysql_explain($query, $serveur=''){
 	if (strpos($query, 'SELECT') !== 0) return array();
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
+	$db = $connexion['db'];
+
 	$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 	return spip_mysql_fetch($r, NULL, $serveur);
 }
-// fonction appelant la precedente
-// c'est une instance de sql_select, voir ses specs dans abstract.php
+// fonction  instance de sql_select, voir ses specs dans abstract.php
 // traite_query pourrait y etre fait d'avance ce serait moins cher
 // Les \n et \t sont utiles au debusqueur.
 
