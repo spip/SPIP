@@ -114,8 +114,6 @@ function revision_document($id_document, $c=false) {
 			//,'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
-
-	return ''; // pas d'erreur
 }
 
 // http://doc.spip.org/@revision_signature
@@ -127,8 +125,6 @@ function revision_signature($id_signature, $c=false) {
 			'nonvide' => array('nom_email' => _T('info_sans_titre'))
 		),
 		$c);
-
-	return ''; // pas d'erreur
 }
 
 

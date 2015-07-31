@@ -56,7 +56,7 @@ function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='',
 	. editer_article_chapo($row['chapo'], $config, $aider)
 	. editer_article_texte($row['texte'], $config, $aider)
 	. editer_article_ps($row['ps'], $config, $aider)
-	. editer_article_extra($row['extra'], $config, $aider)
+	. editer_article_extra($row['extra'], $id_secteur, $config, $aider)
 	. $hidden
 	. ("<div align='right'><input class='fondo' type='submit' value='"
 	. _T('bouton_enregistrer')
@@ -291,7 +291,7 @@ function editer_article_chapo($chapo, $config, $aider)
 }
 
 // http://doc.spip.org/@editer_article_extra
-function editer_article_extra($extra, $config, $aider)
+function editer_article_extra($extra, $id_secteur, $config, $aider)
 {
 	if (!$config['extra'])
 		return '';
@@ -303,7 +303,7 @@ function editer_article_extra($extra, $config, $aider)
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
 {
-	global $champs_extra, $spip_ecran, $options, $spip_lang;
+	global $champs_extra, $spip_ecran, $options, $spip_lang, $spip_display;
 
 	$config = $GLOBALS['meta'];
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;

@@ -31,6 +31,8 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 		if ($annee_redac > 4000) $annee_redac -= 9000;
 	} else $annee_redac = $mois_redac = $jour_redac = 0;
 
+	$possedeDateRedac= ($annee_redac + $mois_redac + $jour_redac);
+
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
@@ -83,7 +85,6 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
-	$possedeDateRedac= ($annee_redac + $mois_redac + $jour_redac);
 	if (($type == 'article')
 	AND (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
 		OR $possedeDateRedac)) {

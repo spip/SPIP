@@ -117,7 +117,7 @@ function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 }
 
 // http://doc.spip.org/@spip_abstract_create
-function spip_abstract_create($nom, $champs, $cles, $autoinc=false, $temporary=false) {
+function spip_abstract_create($nom, $champs, $cles, $autoinc=false, $temporary=false, $serveur='') {
 	$f = spip_abstract_serveur('create', $serveur);
 	return $f($nom, $champs, $cles, $autoinc, $temporary);
 }
