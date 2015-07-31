@@ -27,7 +27,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot,
 $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 $result = spip_query($query);
 
-while ($row = spip_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_breve=$row['id_breve'];
 	$date_heure=$row['date_heure'];
 	$titre_breve=$row['titre'];
@@ -50,7 +50,7 @@ debut_grand_cadre();
 afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
-if (!$id_rubrique) {echo _T('public:aucune_breve'); exit;}
+if (!$row) {echo _T('public:aucune_breve'); exit;}
 debut_gauche();
 
 debut_boite_info();
