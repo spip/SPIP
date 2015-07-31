@@ -207,5 +207,7 @@ $GLOBALS['maj'][13833] = array(
 array('sql_alter',"TABLE spip_documents_liens ADD INDEX objet(id_objet,objet)"))
 ;
 
+// Types de fichiers m4a/m4b/m4p/m4u/m4v/dv
+$GLOBALS['maj'][14272] = array(array('upgrade_types_documents'));
 
 ?>
