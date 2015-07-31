@@ -1502,7 +1502,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 // Corps de l'article
 //
 
-echo "\n\n<div align='justify'>";
+echo "\n\n<div align='justify' style='padding: 10px;'>";
 
 if ($virtuel) {
 	debut_boite_info();
@@ -1510,13 +1510,16 @@ if ($virtuel) {
 	fin_boite_info();
 }
 else {
-	echo "<div $dir_lang><b>";
 	$revision_nbsp = $activer_revision_nbsp;
-	echo justifier(propre($chapo));
-	echo "</b></div>\n\n";
+
+	if (strlen($chapo) > 0) {
+		echo "<div $dir_lang><b>";
+		echo propre($chapo);
+		echo "</b></div>\n\n";
+	}
 
 	echo "<div $dir_lang>";
-	echo justifier(propre($texte));
+	echo propre($texte);
 	echo "</div>";
 
 	if ($ps) {

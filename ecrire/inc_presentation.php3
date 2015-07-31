@@ -2444,10 +2444,21 @@ else {
 
 		echo "</div>";
 	
-	
 		echo "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right;'>";
 			echo $simple;
+
+			if ($options != "avancees") {		
+				echo "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
+			}
+
 		echo "</div>";
+		
+		// En interface simplifiee, afficher un permanence l'indication de l'interface
+		if ($options != "avancees") {
+			echo "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right; visibility: visible; background-color: #EDEBE3; color: #999999; z-index: -1000;'>";
+				echo $simple;
+			echo "</div>";
+		}
 	
 		echo "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: 237px; text-align: $spip_lang_right;'>";
 			echo $ecran;
