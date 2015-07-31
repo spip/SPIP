@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Et la liste des evolutions pour : http://sqlite.org/changes.html
  * 
  */
-// http://doc.spip.org/@_sqlite_init_functions
+// http://code.spip.net/@_sqlite_init_functions
 function _sqlite_init_functions(&$sqlite){
 	
 	if (!$sqlite) return false;
@@ -88,7 +88,7 @@ function _sqlite_init_functions(&$sqlite){
 }
 
 // permet au besoin de charger des fonctions ailleurs par _sqlite_init_functions();
-// http://doc.spip.org/@_sqlite_add_function
+// http://code.spip.net/@_sqlite_add_function
 function _sqlite_add_function(&$sqlite, &$f, &$r){
 	if (_sqlite_is_version(3, $sqlite)){
 		isset($r[1])
@@ -110,20 +110,20 @@ function _sqlite_func_ceil($a) {
 	return ceil($a);
 }
 
-// http://doc.spip.org/@_sqlite_func_concat
+// http://code.spip.net/@_sqlite_func_concat
 function _sqlite_func_concat () {
 	$args = func_get_args();
 	return join('',$args);
 }
 
 
-// http://doc.spip.org/@_sqlite_func_dayofmonth
+// http://code.spip.net/@_sqlite_func_dayofmonth
 function _sqlite_func_dayofmonth ($d) {
 	return _sqlite_func_date("d",$d);
 }
 
 
-// http://doc.spip.org/@_sqlite_func_find_in_set
+// http://code.spip.net/@_sqlite_func_find_in_set
 function _sqlite_func_find_in_set($num, $set) {
   $rank=0;
   foreach (explode(",",$set) as $v) {
@@ -137,7 +137,7 @@ function _sqlite_func_floor($a) {
 	return floor($a);
 }
 
-// http://doc.spip.org/@_sqlite_func_if
+// http://code.spip.net/@_sqlite_func_if
 function _sqlite_func_if ($bool, $oui, $non) {
     return ($bool)?$oui:$non;
 }
@@ -148,7 +148,7 @@ function _sqlite_func_if ($bool, $oui, $non) {
  * Retourne une chaine de caracteres a partir d'une chaine dans laquelle "sschaine"
  *  a ete inseree a la position "index" en remplacant "longueur" caracteres.
  */ 
-// http://doc.spip.org/@_sqlite_func_insert
+// http://code.spip.net/@_sqlite_func_insert
 function _sqlite_func_insert ($s, $index, $longueur, $chaine) {
 	return
 			substr($s,0, $index)
@@ -157,13 +157,13 @@ function _sqlite_func_insert ($s, $index, $longueur, $chaine) {
 }
 
 
-// http://doc.spip.org/@_sqlite_func_instr
+// http://code.spip.net/@_sqlite_func_instr
 function _sqlite_func_instr ($s, $search) {
     return strpos($s,$search);
 }
 
 
-// http://doc.spip.org/@_sqlite_func_least
+// http://code.spip.net/@_sqlite_func_least
 function _sqlite_func_least () {
 	$arg_list = func_get_args();
     $least = min($arg_list);
@@ -172,13 +172,13 @@ function _sqlite_func_least () {
 }
 
 
-// http://doc.spip.org/@_sqlite_func_left
+// http://code.spip.net/@_sqlite_func_left
 function _sqlite_func_left ($s, $lenght) {
     return substr($s,$lenght);
 }
 
 
-// http://doc.spip.org/@_sqlite_func_now
+// http://code.spip.net/@_sqlite_func_now
 function _sqlite_func_now(){
 	static $now = null;
 	if (is_null($now))
@@ -188,14 +188,14 @@ function _sqlite_func_now(){
 }
 
 
-// http://doc.spip.org/@_sqlite_func_month
+// http://code.spip.net/@_sqlite_func_month
 function _sqlite_func_month ($d) {
 	return _sqlite_func_date("m",$d);
 }
 
 
 
-// http://doc.spip.org/@_sqlite_func_preg_replace
+// http://code.spip.net/@_sqlite_func_preg_replace
 function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
 	$return = preg_replace('%'.$cherche.'%', $remplace, $quoi);
 	#spip_log("preg_replace : $quoi, $cherche, $remplace, $return",'sqlite.'._LOG_DEBUG);
@@ -230,19 +230,19 @@ function _sqlite_func_extraire_multi($quoi, $lang) {
 }
 
 
-// http://doc.spip.org/@_sqlite_func_rand
+// http://code.spip.net/@_sqlite_func_rand
 function _sqlite_func_rand() {
 	return rand();
 }
 
 
-// http://doc.spip.org/@_sqlite_func_right
+// http://code.spip.net/@_sqlite_func_right
 function _sqlite_func_right ($s, $length) {
 	return substr($s,0 - $length);
 }
 
 
-// http://doc.spip.org/@_sqlite_func_regexp_match
+// http://code.spip.net/@_sqlite_func_regexp_match
 function _sqlite_func_regexp_match($cherche, $quoi) {
 	// optimiser un cas tres courant avec les requetes en base
 	if (!$quoi AND !strlen($quoi)) return false;
@@ -252,14 +252,14 @@ function _sqlite_func_regexp_match($cherche, $quoi) {
 	return $return;
 }
 
-// http://doc.spip.org/@_sqlite_func_strftime
+// http://code.spip.net/@_sqlite_func_strftime
 function _sqlite_func_strftime($date, $conv){
 	return strftime($conv, is_int($date)?$date:strtotime($date));
 }
 
 /**
  * Nombre de jour entre 0000-00-00 et $d
- * http://doc.spip.org/@_sqlite_func_to_days
+ * http://code.spip.net/@_sqlite_func_to_days
  * cf http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_to-days
  * @param string $d
  * @return int
@@ -349,7 +349,7 @@ function _sqlite_timestampdiff($unit,$date1,$date2){
 	}
 }
 
-// http://doc.spip.org/@_sqlite_func_unix_timestamp
+// http://code.spip.net/@_sqlite_func_unix_timestamp
 function _sqlite_func_unix_timestamp($d) {
 	static $mem = array();
 	static $n = 0;
@@ -364,7 +364,7 @@ function _sqlite_func_unix_timestamp($d) {
 }
 
 
-// http://doc.spip.org/@_sqlite_func_year
+// http://code.spip.net/@_sqlite_func_year
 function _sqlite_func_year ($d) {
 	return _sqlite_func_date("Y",$d);
 }
@@ -389,7 +389,7 @@ function _sqlite_func_date($quoi,$d) {
 	return $mem[$d][$quoi];
 }
 
-// http://doc.spip.org/@_sqlite_func_vide
+// http://code.spip.net/@_sqlite_func_vide
 function _sqlite_func_vide(){
 	return;
 }

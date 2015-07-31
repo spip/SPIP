@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/filtres_images_lib_mini'); // par precaution
 
-// http://doc.spip.org/@couleur_html_to_hex
+// http://code.spip.net/@couleur_html_to_hex
 function couleur_html_to_hex($couleur){
 	$couleurs_html=array(
 		'aqua'=>'00FFFF','black'=>'000000','blue'=>'0000FF','fuchsia'=>'FF00FF','gray'=>'808080','green'=>'008000','lime'=>'00FF00','maroon'=>'800000',
@@ -23,7 +23,7 @@ function couleur_html_to_hex($couleur){
 	return $couleur;
 }
 
-// http://doc.spip.org/@couleur_foncer
+// http://code.spip.net/@couleur_foncer
 function couleur_foncer ($couleur, $coeff=0.5) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 
@@ -36,7 +36,7 @@ function couleur_foncer ($couleur, $coeff=0.5) {
 	return $couleur;
 }
 
-// http://doc.spip.org/@couleur_eclaircir
+// http://code.spip.net/@couleur_eclaircir
 function couleur_eclaircir ($couleur, $coeff=0.5) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 
@@ -53,7 +53,7 @@ function couleur_eclaircir ($couleur, $coeff=0.5) {
 // selectionner les images qui vont subir une transformation sur un critere de taille
 // ls images exclues sont marquees d'une class filtre_inactif qui bloque les filtres suivants
 // dans la fonction image_filtrer
-// http://doc.spip.org/@image_select
+// http://code.spip.net/@image_select
 function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $height_max=1000){
 	if (!$img) return $img;
 	list ($h,$l) = taille_image($img);

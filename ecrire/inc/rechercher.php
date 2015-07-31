@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // Donne la liste des champs/tables ou l'on sait chercher/remplacer
 // avec un poids pour le score
-// http://doc.spip.org/@liste_des_champs
+// http://code.spip.net/@liste_des_champs
 function liste_des_champs() {
 	static $liste=null;
 	if (is_null($liste)) {
@@ -43,7 +43,7 @@ function liste_des_champs() {
 
 // Recherche des auteurs et mots-cles associes
 // en ne regardant que le titre ou le nom
-// http://doc.spip.org/@liste_des_jointures
+// http://code.spip.net/@liste_des_jointures
 function liste_des_jointures() {
 	static $liste=null;
 	if (is_null($liste)) {
@@ -206,7 +206,7 @@ function expression_recherche($recherche, $options) {
 // - champs pour retourner les champs concernes
 // - score pour retourner un score
 // On peut passer les tables, ou une chaine listant les tables souhaitees
-// http://doc.spip.org/@recherche_en_base
+// http://code.spip.net/@recherche_en_base
 function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serveur='') {
 	include_spip('base/abstract_sql');
 
@@ -279,7 +279,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
-// http://doc.spip.org/@remplace_en_base
+// http://code.spip.net/@remplace_en_base
 function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=array()) {
 	include_spip('inc/modifier');
 

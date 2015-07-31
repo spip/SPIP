@@ -59,7 +59,7 @@ function aide_cache_image($help_server, $cache, $rep, $lang, $file, $ext) {
 
 // Affichage du menu de gauche avec analyse de la section demandee
 // afin d'ouvrir le sous-menu correspondant a l'affichage a droite
-// http://doc.spip.org/@help_menu_rubrique
+// http://code.spip.net/@help_menu_rubrique
 function aide_menu($aide) {
 	$contenu = aide_contenu();
 	preg_match_all(_SECTIONS_AIDE, $contenu, $sections, PREG_SET_ORDER);

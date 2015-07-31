@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -181,7 +181,7 @@ function minipipe($fonc,&$val){
 }
 
 // chargement du pipeline sous la forme d'un fichier php prepare
-// http://doc.spip.org/@pipeline
+// http://code.spip.net/@pipeline
 function pipeline($action, $val=null) {
 	static $charger;
 
@@ -489,7 +489,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 // Prend une URL et lui ajoute/retire une ancre apres l'avoir nettoyee
 // pour l'ancre on translitere, vire les non alphanum du debut,
 // et on remplace ceux a l'interieur ou au bout par -
-// http://doc.spip.org/@ancre_url
+// http://code.spip.net/@ancre_url
 function ancre_url($url, $ancre) {
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
@@ -506,7 +506,7 @@ function ancre_url($url, $ancre) {
 
 /**
  * pour le nom du cache, les types_urls et self
- * http://doc.spip.org/@nettoyer_uri
+ * http://code.spip.net/@nettoyer_uri
  *
  * @param string|null $reset
  * @return string
@@ -716,7 +716,7 @@ function _L($text, $args=array(), $class=null) {
 
 // Afficher "ecrire/data/" au lieu de "data/" dans les messages
 // ou tmp/ au lieu de ../tmp/
-// http://doc.spip.org/@joli_repertoire
+// http://code.spip.net/@joli_repertoire
 function joli_repertoire($rep) {
 	$a = substr($rep,0,1);
 	if ($a<>'.' AND $a<>'/')
@@ -729,7 +729,7 @@ function joli_repertoire($rep) {
 //
 // spip_timer : on l'appelle deux fois et on a la difference, affichable
 //
-// http://doc.spip.org/@spip_timer
+// http://code.spip.net/@spip_timer
 function spip_timer($t='rien', $raw = false) {
 	static $time;
 	$a=time(); $b=microtime();
@@ -757,7 +757,7 @@ function spip_timer($t='rien', $raw = false) {
 
 // Renvoie False si un fichier n'est pas plus vieux que $duree secondes,
 // sinon renvoie True et le date sauf si ca n'est pas souhaite
-// http://doc.spip.org/@spip_touch
+// http://code.spip.net/@spip_touch
 function spip_touch($fichier, $duree=0, $touch=true) {
 	if ($duree) {
 		clearstatcache();
@@ -778,7 +778,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // c'est plus rassurant.
 // C'est aussi plus discret qu'un <img> sous un navigateur non graphique.
 
-// http://doc.spip.org/@action_cron
+// http://code.spip.net/@action_cron
 function action_cron() {
 	include_spip('inc/headers');
 	http_status(204); // No Content
@@ -795,7 +795,7 @@ function action_cron() {
  * pas de verrou ici : les verrous sont geres sur chaque tache
  * a chaque execution
  *
- * http://doc.spip.org/@cron
+ * http://code.spip.net/@cron
  *
  * @param array $taches
  *   taches forcees
@@ -919,7 +919,7 @@ function queue_sleep_time_to_next_job($force=null) {
 
 
 // transformation XML des "&" en "&amp;"
-// http://doc.spip.org/@quote_amp
+// http://code.spip.net/@quote_amp
 function quote_amp($u) {
 	return preg_replace(
 		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,6};)/i",
@@ -1359,7 +1359,7 @@ function find_all_in_path($dir,$pattern, $recurs=false){
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
 
-// http://doc.spip.org/@autoriser_sans_cookie
+// http://code.spip.net/@autoriser_sans_cookie
 function autoriser_sans_cookie($nom)
 {
   static $autsanscookie = array('install', 'base_repair');
@@ -1454,7 +1454,7 @@ function generer_url_ecrire_entite_edit($id, $entite, $args='', $ancre=''){
 	return $url;
 }
 
-// http://doc.spip.org/@urls_connect_dist
+// http://code.spip.net/@urls_connect_dist
 function urls_connect_dist($i, &$entite, $args='', $ancre='', $public=null) {
 	include_spip('base/connect_sql');
 	$id_type = id_table_objet($entite,$public);
@@ -1484,7 +1484,7 @@ function urlencode_1738($url) {
 	return quote_amp($url);
 }
 
-// http://doc.spip.org/@generer_url_entite_absolue
+// http://code.spip.net/@generer_url_entite_absolue
 function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $connect=NULL)
 {
 	if (!$connect) $connect = true;
@@ -1498,7 +1498,7 @@ function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $co
 
 // Sur certains serveurs, la valeur 'Off' tient lieu de false dans certaines
 // variables d'environnement comme $_SERVER[HTTPS] ou ini_get(register_globals)
-// http://doc.spip.org/@test_valeur_serveur
+// http://code.spip.net/@test_valeur_serveur
 function test_valeur_serveur($truc) {
 	if (!$truc) return false;
 	return (strtolower($truc) !== 'off');
@@ -1514,7 +1514,7 @@ function test_valeur_serveur($truc) {
  * indiquer le nombre de sous-repertoires de l'url courante par rapport a la
  * racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
  * la racine 0. Sur url/perso/ elle vaut 2
- * http://doc.spip.org/@url_de_base
+ * http://code.spip.net/@url_de_base
  *
  * @param int|boo|array $profondeur
  *    si non renseignee : retourne l'url pour la profondeur $GLOBALS['profondeur_url']
@@ -1630,7 +1630,7 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 	return $rel . ($no_entities ? $args : str_replace('&', '&amp;', $args));
 }
 
-// http://doc.spip.org/@generer_url_retour
+// http://code.spip.net/@generer_url_retour
 function generer_url_retour($script, $args="")
 {
 	return rawurlencode(generer_url_ecrire($script, $args, true, true));
@@ -1711,7 +1711,7 @@ function generer_url_public($script='', $args="", $no_entities=false, $rel=true,
 	return ($rel ? _DIR_RACINE . $action : rtrim(url_de_base(),'/') . preg_replace(",^/[.]/,","/","/$action"));
 }
 
-// http://doc.spip.org/@generer_url_prive
+// http://code.spip.net/@generer_url_prive
 function generer_url_prive($script, $args="", $no_entities=false) {
 
 	return generer_url_public($script, $args, $no_entities, false, _DIR_RESTREINT_ABS .  'prive.php');
@@ -1761,7 +1761,7 @@ function generer_form_ecrire($script, $corps, $atts='', $submit='') {
  * Attention, JS/Ajax n'aime pas le melange de param GET/POST
  * On n'applique pas la recommandation ci-dessus pour les scripts publics
  * qui ne sont pas destines a etre mis en signets
- * http://doc.spip.org/@generer_form_action
+ * http://code.spip.net/@generer_form_action
  *
  * @param string $script
  * @param string $corps
@@ -2207,7 +2207,7 @@ function spip_initialisation_suite(){
 
 // Reperer les variables d'URL qui conditionnent la perennite du cache, des urls
 // ou d'autres petit caches (trouver_table, css et js compactes ...)
-// http://doc.spip.org/@init_var_mode
+// http://code.spip.net/@init_var_mode
 function init_var_mode(){
 	static $done = false;
 	if (!$done) {
@@ -2293,7 +2293,7 @@ function init_var_mode(){
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
 // la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')
-// http://doc.spip.org/@spip_desinfecte
+// http://code.spip.net/@spip_desinfecte
 function spip_desinfecte(&$t,$deep = true) {
 	static $magic_quotes;
 	if (!isset($magic_quotes))
@@ -2313,7 +2313,7 @@ function spip_desinfecte(&$t,$deep = true) {
 
 //  retourne le statut du visiteur s'il s'annonce
 
-// http://doc.spip.org/@verifier_visiteur
+// http://code.spip.net/@verifier_visiteur
 function verifier_visiteur() {
 	// Rq: pour que cette fonction marche depuis mes_options
 	// il faut forcer l'init si ce n'est fait
@@ -2382,7 +2382,7 @@ function verifier_visiteur() {
 // Le noyau de Spip sait le faire, mais pour assurer la compatibilite
 // cette fonction retourne toujours non False
 
-// http://doc.spip.org/@lang_select
+// http://code.spip.net/@lang_select
 function lang_select ($lang=NULL) {
 	static $pile_langues = array();
 	if (!function_exists('changer_langue'))
@@ -2406,7 +2406,7 @@ function lang_select ($lang=NULL) {
 // est une chaine arbitraire
 // Cette chaine est courte (8 cars) pour pouvoir etre utilisee dans un nom
 // de fichier cache
-// http://doc.spip.org/@spip_session
+// http://code.spip.net/@spip_session
 function spip_session($force = false) {
 	static $session;
 	if ($force OR !isset($session)) {

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -157,7 +157,7 @@ function install_mode_appel($server_db, $tout=true)
 //
 // Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
 // (sert a l'etape 1 de l'installation)
-// http://doc.spip.org/@tester_compatibilite_hebergement
+// http://code.spip.net/@tester_compatibilite_hebergement
 function tester_compatibilite_hebergement() {
 	$err = array();
 
@@ -210,7 +210,7 @@ function tester_compatibilite_hebergement() {
 
 
 // Une fonction pour faciliter la recherche du login (superflu ?)
-// http://doc.spip.org/@login_hebergeur
+// http://code.spip.net/@login_hebergeur
 function login_hebergeur() {
 	global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
 
@@ -236,7 +236,7 @@ function login_hebergeur() {
 }
 
 
-// http://doc.spip.org/@info_etape
+// http://code.spip.net/@info_etape
 function info_etape($titre, $complement = ''){
 	return "<h2>".$titre."</h2>\n" .
 	($complement ? "".$complement."\n":'');
@@ -258,7 +258,7 @@ function bouton_suivant($code = '') {
 		" >>\" /></p>\n";
 }
 
-// http://doc.spip.org/@info_progression_etape
+// http://code.spip.net/@info_progression_etape
 function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 	//$en_cours = _request('etape')?_request('etape'):"";
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
@@ -303,7 +303,7 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 }
 
 
-// http://doc.spip.org/@fieldset
+// http://code.spip.net/@fieldset
 function fieldset($legend,  $champs = array(), $apres='', $avant='') {
 	return "<fieldset>\n" .
 	  $avant .
@@ -366,7 +366,7 @@ function install_select_serveur()
 	return $options;
 }
 
-// http://doc.spip.org/@install_connexion_form
+// http://code.spip.net/@install_connexion_form
 function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $jquery=true)
 {
 	$server_db = (is_string($predef[0])) ? $predef[0] : '';
@@ -470,7 +470,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 // 4 valeurs qu'on reconduit d'un script a l'autre
 // sauf s'ils sont predefinis.
 
-// http://doc.spip.org/@predef_ou_cache
+// http://code.spip.net/@predef_ou_cache
 function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 {
 	return ((defined('_INSTALL_HOST_DB'))
@@ -494,7 +494,7 @@ function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 
 // presentation des bases existantes
 
-// http://doc.spip.org/@install_etape_liste_bases
+// http://code.spip.net/@install_etape_liste_bases
 function install_etape_liste_bases($server_db, $login_db, $disabled=array())
 {
 	$bases = $checked = array();

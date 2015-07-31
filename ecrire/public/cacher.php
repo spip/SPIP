@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Attention a modifier simultanement le sanity check de
  * la fonction retire_cache() de inc/invalideur
  *
- * http://doc.spip.org/@generer_nom_fichier_cache
+ * http://code.spip.net/@generer_nom_fichier_cache
  *
  * @param array $contexte
  * @param array $page
@@ -78,7 +78,7 @@ function cache_signature(&$page) {
  * (pas de passage par reference car on veut conserver la version non compressee
  * pour l'afficher)
  * on positionne un flag gz si on comprime, pour savoir si on doit decompresser ou pas
- * http://doc.spip.org/@gzip_page
+ * http://code.spip.net/@gzip_page
  *
  * @param array $page
  * @return array
@@ -99,7 +99,7 @@ function gzip_page($page) {
  * on met a jour le flag gz quand on decompresse, pour ne pas risquer
  * de decompresser deux fois de suite un cache (ce qui echoue)
  *
- * http://doc.spip.org/@gunzip_page
+ * http://code.spip.net/@gunzip_page
  *
  * @param array $page
  * @return void
@@ -122,7 +122,7 @@ function gunzip_page(&$page) {
  * 0 si le cache est valide
  * -1 si il faut calculer sans stocker en cache
  */
-/// http://doc.spip.org/@cache_valide
+/// http://code.spip.net/@cache_valide
 function cache_valide(&$page, $date) {
 	$now = $_SERVER['REQUEST_TIME'];
 
@@ -178,7 +178,7 @@ function cache_valide(&$page, $date) {
  * Creer le fichier cache
  * Passage par reference de $page par souci d'economie
  *
- * http://doc.spip.org/@creer_cache
+ * http://code.spip.net/@creer_cache
  *
  * @param array $page
  * @param string $chemin_cache
@@ -236,7 +236,7 @@ function creer_cache(&$page, &$chemin_cache) {
  * purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
  * vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
  *
- * http://doc.spip.org/@nettoyer_petit_cache
+ * http://code.spip.net/@nettoyer_petit_cache
  *
  * @param string $prefix
  * @param int $duree
@@ -269,7 +269,7 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
  * Elle retourne '' si tout va bien
  * un message d'erreur si le calcul de la page est totalement impossible
  *
- * http://doc.spip.org/@public_cacher_dist
+ * http://code.spip.net/@public_cacher_dist
  *
  * @param array $contexte
  * @param int $use_cache

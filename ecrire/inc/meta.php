@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // duree maximale du cache. Le double pour l'antidater
 define('_META_CACHE_TIME', 1<<24);
 
-// http://doc.spip.org/@inc_meta_dist
+// http://code.spip.net/@inc_meta_dist
 function inc_meta_dist($table='meta')
 {
 	// Lire les meta, en cache si present, valide et lisible
@@ -63,7 +63,7 @@ function inc_meta_dist($table='meta')
 // fonctions aussi appelees a l'install ==> spip_query en premiere requete 
 // pour eviter l'erreur fatale (serveur non encore configure)
 
-// http://doc.spip.org/@lire_metas
+// http://code.spip.net/@lire_metas
 function lire_metas($table='meta') {
 
 	if ($result = spip_query("SELECT nom,valeur FROM spip_$table")) {

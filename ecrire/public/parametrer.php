@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -41,7 +41,7 @@ if (test_espace_prive ())
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-// http://doc.spip.org/@public_parametrer_dist
+// http://code.spip.net/@public_parametrer_dist
 function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	static $composer,$styliser,$notes=null;
 	$page = tester_redirection($fond, $contexte, $connect);
@@ -197,7 +197,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
  * avec un eventuel raccourci Spip
  * si le raccourci a un titre il sera pris comme corps du 302
  *
- * http://doc.spip.org/@tester_redirection
+ * http://code.spip.net/@tester_redirection
  *
  * @param string $fond
  * @param array $contexte

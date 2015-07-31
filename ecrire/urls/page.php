@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -25,7 +25,7 @@ define ('_debut_urls_page', get_spip_script('./').'?');
 #######
 
 
-// http://doc.spip.org/@_generer_url_page
+// http://code.spip.net/@_generer_url_page
 function _generer_url_page($type,$id, $args='', $ancre='') {
 
 	if ($generer_url_externe = charger_fonction("generer_url_$type",'urls',true)) {
@@ -42,7 +42,7 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 
 // retrouve le fond et les parametres d'une URL abregee
 // le contexte deja existant est fourni dans args sous forme de tableau ou query string
-// http://doc.spip.org/@urls_page_dist
+// http://code.spip.net/@urls_page_dist
 function urls_page_dist($i, &$entite, $args='', $ancre='')
 {
 	if (is_numeric($i))

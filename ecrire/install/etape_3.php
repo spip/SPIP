@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/headers');
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@install_bases
+// http://code.spip.net/@install_bases
 function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db){
 	global $spip_version_base;
 
@@ -172,7 +172,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	return '';
 }
 
-// http://doc.spip.org/@install_propose_ldap
+// http://code.spip.net/@install_propose_ldap
 function install_propose_ldap()
 {
 	return generer_form_ecrire('install', (
@@ -188,7 +188,7 @@ function install_propose_ldap()
 }
 
 
-// http://doc.spip.org/@install_premier_auteur
+// http://code.spip.net/@install_premier_auteur
 function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_obligatoire)
 {
 	return info_progression_etape(3,'etape_','install/') .
@@ -241,7 +241,7 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden, $auteur_ob
 			  . bouton_suivant()));
 }
 
-// http://doc.spip.org/@install_etape_3_dist
+// http://code.spip.net/@install_etape_3_dist
 function install_etape_3_dist()
 {
 	$ldap_present = _request('ldap_present');

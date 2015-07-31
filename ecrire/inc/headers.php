@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -94,7 +94,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 	exit;
 }
 
-// http://doc.spip.org/@redirige_formulaire
+// http://code.spip.net/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '', $format='message') {
 	if (!_AJAX
 	AND !headers_sent()
@@ -193,7 +193,7 @@ function http_status($status) {
 }
 
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
-// http://doc.spip.org/@http_no_cache
+// http://code.spip.net/@http_no_cache
 function http_no_cache() {
 	if (headers_sent())
 		{ spip_log("http_no_cache arrive trop tard"); return;}

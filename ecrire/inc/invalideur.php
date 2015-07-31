@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -189,7 +189,7 @@ function purger_repertoire($dir, $options=array()) {
 // et on le ratiboise en supprimant les fichiers qui n'ont pas
 // ete sollicites dans l'heure qui vient de s'ecouler
 //
-// http://doc.spip.org/@appliquer_quota_cache
+// http://code.spip.net/@appliquer_quota_cache
 function appliquer_quota_cache() {
 	global $quota_cache;
 	$encore = false;
@@ -240,7 +240,7 @@ function appliquer_quota_cache() {
 //
 
 // Securite : est sur que c'est un cache
-// http://doc.spip.org/@retire_cache
+// http://code.spip.net/@retire_cache
 function retire_cache($cache) {
 
 	if (preg_match(
@@ -262,7 +262,7 @@ function retire_cache($cache) {
 // Supprimer les caches marques "x"
 // A priori dans cette version la fonction ne sera pas appelee, car
 // la meta est toujours false ; mais evitons un bug si elle est appellee
-// http://doc.spip.org/@retire_caches
+// http://code.spip.net/@retire_caches
 function retire_caches($chemin = '') {
 	if (isset($GLOBALS['meta']['invalider_caches']))
 		effacer_meta('invalider_caches'); # concurrence
@@ -272,7 +272,7 @@ function retire_caches($chemin = '') {
 // Fonction permettant au compilo de calculer les invalideurs d'une page
 // (note: si absente, n'est pas appellee)
 /*
-// http://doc.spip.org/@calcul_invalideurs
+// http://code.spip.net/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	return $corps;
 }
@@ -282,23 +282,23 @@ function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 // Elle ne touche pas aux fichiers cache eux memes ; elle est
 // invoquee quand on vide tout le cache en bloc (action/purger)
 //
-// http://doc.spip.org/@supprime_invalideurs
+// http://code.spip.net/@supprime_invalideurs
 function supprime_invalideurs() { }
 
 
 // Calcul des pages : noter dans la base les liens d'invalidation
-// http://doc.spip.org/@maj_invalideurs
+// http://code.spip.net/@maj_invalideurs
 function maj_invalideurs ($fichier, &$page) { }
 
 // les invalideurs sont de la forme "objet/id_objet"
-// http://doc.spip.org/@insere_invalideur
+// http://code.spip.net/@insere_invalideur
 function insere_invalideur($inval, $fichier) { }
 
 
 //
 // Marquer les fichiers caches invalides comme etant a supprimer
 //
-// http://doc.spip.org/@applique_invalideur
+// http://code.spip.net/@applique_invalideur
 function applique_invalideur($depart) { }
 
 ?>

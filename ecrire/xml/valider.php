@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -18,7 +18,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 class ValidateurXML {
 
-// http://doc.spip.org/@validerElement
+// http://code.spip.net/@validerElement
 function validerElement($phraseur, $name, $attrs)
 {
 	if (!($p = isset($this->dtc->elements[$name]))) {
@@ -82,7 +82,7 @@ function validerElement($phraseur, $name, $attrs)
 	}
 }
 
-// http://doc.spip.org/@validerAttribut
+// http://code.spip.net/@validerAttribut
 function validerAttribut($phraseur, $name, $val, $bal)
 {
 	// Si la balise est inconnue, eviter d'insister
@@ -124,7 +124,7 @@ function validerAttribut_NMTOKENS($phraseur, $name, $val, $bal)
 	$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_NMTOKENS);
 }
 
-// http://doc.spip.org/@validerAttribut_ID
+// http://code.spip.net/@validerAttribut_ID
 function validerAttribut_ID($phraseur, $name, $val, $bal)
 {
 	if (isset($this->ids[$val])) {
@@ -142,19 +142,19 @@ function validerAttribut_ID($phraseur, $name, $val, $bal)
 	}
 }
 
-// http://doc.spip.org/@validerAttribut_IDREF
+// http://code.spip.net/@validerAttribut_IDREF
 function validerAttribut_IDREF($phraseur, $name, $val, $bal)
 {
 	$this->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
-// http://doc.spip.org/@validerAttribut_IDREFS
+// http://code.spip.net/@validerAttribut_IDREFS
 function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
 {
 	$this->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
-// http://doc.spip.org/@valider_motif
+// http://code.spip.net/@valider_motif
 function valider_motif($phraseur, $name, $val, $bal, $motif)
 {
 	if (!preg_match($motif, $val)) {
@@ -169,14 +169,14 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 	}
 }
 
-// http://doc.spip.org/@valider_idref
+// http://code.spip.net/@valider_idref
 function valider_idref($nom, $ligne, $col)
 {
 	if (!isset($this->ids[$nom]))
 		$this->err[]= array(" <p><b>$nom</b> " . _T('zxml_inconnu_id'), $ligne, $col);
 }
 
-// http://doc.spip.org/@valider_passe2
+// http://code.spip.net/@valider_passe2
 function valider_passe2()
 {
 	if (!$this->err) {
@@ -192,7 +192,7 @@ function valider_passe2()
 	}
 }
 
-// http://doc.spip.org/@debutElement
+// http://code.spip.net/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { 
 	if ($this->dtc->elements)
@@ -206,7 +206,7 @@ function debutElement($phraseur, $name, $attrs)
 	}
 }
 
-// http://doc.spip.org/@finElement
+// http://code.spip.net/@finElement
 function finElement($phraseur, $name)
 {
 	$depth = $this->depth;
@@ -247,7 +247,7 @@ function finElement($phraseur, $name)
 	if ($f = $this->process['fin']) $f($this, $name, $vide);
 }
 
-// http://doc.spip.org/@textElement
+// http://code.spip.net/@textElement
 function textElement($phraseur, $data)
 {	
 	if (trim($data)) {
@@ -275,7 +275,7 @@ function piElement($phraseur, $target, $data)
 // On ne les verra donc pas passer a cette etape, contrairement a ce que 
 // le source de la page laisse legitimement supposer. 
 
-// http://doc.spip.org/@defautElement
+// http://code.spip.net/@defautElement
 function defaultElement($phraseur, $data)
 {
 	if (!preg_match('/^<!--/', $data)
@@ -293,7 +293,7 @@ function defaultElement($phraseur, $data)
 	}
 }
 
-// http://doc.spip.org/@phraserTout
+// http://code.spip.net/@phraserTout
 function phraserTout($phraseur, $data)
 { 
 	xml_parsestring($this, $data);
@@ -338,7 +338,7 @@ function ValidateurXML($process=array()) {
 // Retourne une structure ValidateurXML, dont le champ "err" est un tableau
 // ayant comme entrees des sous-tableaux [message, ligne, colonne]
 
-// http://doc.spip.org/@xml_valider_dist
+// http://code.spip.net/@xml_valider_dist
 function xml_valider_dist($page, $apply=false, $process=false, $doctype='', $charset=null)
 {
 	$f = new ValidateurXML($process);

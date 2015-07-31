@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -357,7 +357,7 @@ function lien_article_virtuel($virtuel){
  * Filtre pour generer un bouton RSS prive
  * protege par un hash de faible securite
  *
- * http://doc.spip.org/@bouton_spip_rss
+ * http://code.spip.net/@bouton_spip_rss
  *
  * @param string $op
  * @param array $args
@@ -376,7 +376,7 @@ function bouton_spip_rss($op, $args=array(), $lang='', $title='RSS') {
 /**
  * Verifier la presence d'alertes pour les auteur
  *
- * http://doc.spip.org/@alertes_auteur
+ * http://code.spip.net/@alertes_auteur
  *
  * @param int $id_auteur
  * @return string

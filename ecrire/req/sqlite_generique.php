@@ -3,7 +3,7 @@
 /* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * D'abord les fonctions d'abstractions de SPIP
  * 
  */
-// http://doc.spip.org/@req_sqlite_dist
+// http://code.spip.net/@req_sqlite_dist
 function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $sqlite_version = ''){
 	static $last_connect = array();
 
@@ -1801,7 +1801,7 @@ function spip_sqlite_updateq($table, $champs, $where = '', $desc = array(), $ser
 
 /**
  * fonction pour la premiere connexion a un serveur SQLite
- * http://doc.spip.org/@_sqlite_init
+ * http://code.spip.net/@_sqlite_init
  *
  * @return void
  */
@@ -1818,7 +1818,7 @@ function _sqlite_init(){
 
 /**
  * teste la version sqlite du link en cours
- * http://doc.spip.org/@_sqlite_is_version
+ * http://code.spip.net/@_sqlite_is_version
  *
  * @param string $version
  * @param string $link
@@ -2228,7 +2228,7 @@ function _sqlite_modifier_table($table, $colonne, $opt = array(), $serveur = '')
 
 /**
  * Nom des fonctions
- * http://doc.spip.org/@_sqlite_ref_fonctions
+ * http://code.spip.net/@_sqlite_ref_fonctions
  *
  * @return array
  */
@@ -2292,7 +2292,7 @@ function _sqlite_ref_fonctions(){
 
 /**
  * $query est une requete ou une liste de champs
- * http://doc.spip.org/@_sqlite_remplacements_definitions_table
+ * http://code.spip.net/@_sqlite_remplacements_definitions_table
  *
  * @param  $query
  * @param bool $autoinc
@@ -2372,7 +2372,7 @@ function _sqlite_collate_ci($champ){
  * Creer la requete pour la creation d'une table
  * retourne la requete pour utilisation par sql_create() et sql_alter()
  *
- * http://doc.spip.org/@_sqlite_requete_create
+ * http://code.spip.net/@_sqlite_requete_create
  *
  * @param  $nom
  * @param  $champs
@@ -2451,7 +2451,7 @@ function _sqlite_requete_create($nom, $champs, $cles, $autoinc = false, $tempora
  * stocke le resultat pour ne pas faire
  * de requetes showtable intempestives
  *
- * http://doc.spip.org/@_sqlite_ajouter_champs_timestamp
+ * http://code.spip.net/@_sqlite_ajouter_champs_timestamp
  *
  * @param  $table
  * @param  $couples

@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -15,7 +15,7 @@ include_spip('inc/charsets');
 
 /**
  * Afficher une liste de plugins dans l'interface
- * http://doc.spip.org/@affiche_liste_plugins
+ * http://code.spip.net/@affiche_liste_plugins
  *
  * @param string $url_page
  * @param array $liste_plugins
@@ -87,7 +87,7 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ch
 }
 
 
-// http://doc.spip.org/@affiche_block_initiale
+// http://code.spip.net/@affiche_block_initiale
 function affiche_block_initiale($initiale,$block,$block_actif){
 	if (strlen($block)){
 		return "<li class='item'>"

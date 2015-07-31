@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -230,7 +230,7 @@ function nogroupby_if($depart, $arrivee, $col){
  *
  * sinon on construit une liste des champs a partir de la liste des cles de la table
  * 
- * http://doc.spip.org/@liste_champs_jointures
+ * http://code.spip.net/@liste_champs_jointures
  *
  * @param string $nom
  * @param array $desc
@@ -271,7 +271,7 @@ function liste_champs_jointures($nom, $desc, $primary = false){
 /**
  * Eclater une cle composee en plusieurs champs
  *
- * http://doc.spip.org/@split_key
+ * http://code.spip.net/@split_key
  *
  * @param string $v
  * @param array $join
@@ -285,7 +285,7 @@ function split_key($v, $join = array()){
 /**
  * Constuire la chaine de jointures, de proche en proche
  *
- * http://doc.spip.org/@calculer_chaine_jointures
+ * http://code.spip.net/@calculer_chaine_jointures
  *
  * @param objetc $boucle
  * @param array $depart
@@ -413,7 +413,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu = array(), $
  * applatit les cles multiples
  * redondance avec split_key() ? a mutualiser
  *
- * http://doc.spip.org/@trouver_cles_table
+ * http://code.spip.net/@trouver_cles_table
  *
  * @param $keys
  * @return array

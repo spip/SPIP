@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -19,7 +19,7 @@ if (!defined('_CONTEXTE_IGNORE_VARIABLES')) define('_CONTEXTE_IGNORE_VARIABLES',
 // grace a la fonction de passage d'URL a id (reciproque dans urls/*php)
 //
 
-// http://doc.spip.org/@assembler
+// http://code.spip.net/@assembler
 function assembler($fond, $connect='') {
 
 	// flag_preserver est modifie ici, et utilise en globale
@@ -157,7 +157,7 @@ function assembler($fond, $connect='') {
 // il est recommande de modifier $_GET['toto'] (meme si la page est
 // appelee avec la methode POST).
 //
-// http://doc.spip.org/@calculer_contexte
+// http://code.spip.net/@calculer_contexte
 function calculer_contexte() {
 
 	$contexte = array();
@@ -201,7 +201,7 @@ function calculer_contexte_implicite(){
 // fonction pour compatibilite arriere, probablement superflue
 //
 
-// http://doc.spip.org/@auto_content_type
+// http://code.spip.net/@auto_content_type
 function auto_content_type($page)
 {
 	global $flag_preserver;
@@ -211,7 +211,7 @@ function auto_content_type($page)
 	  }
 }
 
-// http://doc.spip.org/@inclure_page
+// http://code.spip.net/@inclure_page
 function inclure_page($fond, $contexte, $connect='') {
 	static $cacher, $produire_page;
 	global $lastmodified;
@@ -306,7 +306,7 @@ function inserer_balise_dynamique($contexte_exec, $contexte_compil)
 // Attention, un appel explicite a cette fonction suppose certains include
 // $echo = faut-il faire echo ou return
 
-// http://doc.spip.org/@inclure_balise_dynamique
+// http://code.spip.net/@inclure_balise_dynamique
 function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 {
 	if (is_array($texte)) {
@@ -365,7 +365,7 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 
 }
 
-// http://doc.spip.org/@message_page_indisponible
+// http://code.spip.net/@message_page_indisponible
 function message_page_indisponible ($page, $contexte) {
 	static $deja = false;
 	if ($deja) return "erreur";
@@ -396,7 +396,7 @@ function message_page_indisponible ($page, $contexte) {
 
 // temporairement ici : a mettre dans le futur inc/modeles
 // creer_contexte_de_modele('left', 'autostart=true', ...) renvoie un array()
-// http://doc.spip.org/@creer_contexte_de_modele
+// http://code.spip.net/@creer_contexte_de_modele
 function creer_contexte_de_modele($args) {
 	$contexte = array();
 	foreach ($args as $var=>$val) {
@@ -420,7 +420,7 @@ function creer_contexte_de_modele($args) {
 }
 
 // Calcule le modele et retourne la mini-page ainsi calculee
-// http://doc.spip.org/@inclure_modele
+// http://code.spip.net/@inclure_modele
 function inclure_modele($type, $id, $params, $lien, $connect='', $env=array()) {
 
 	static $compteur;
@@ -511,7 +511,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='', $env=array()) {
 // fonction interne a spip, ne pas appeler directement
 // pour recuperer $page complet, utiliser:
 // 	recuperer_fond($fond,$contexte,array('raw'=>true))
-// http://doc.spip.org/@evaluer_fond
+// http://code.spip.net/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 
 	$page = inclure_page($fond, $contexte, $connect);
@@ -533,7 +533,7 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 }
 
 
-// http://doc.spip.org/@page_base_href
+// http://code.spip.net/@page_base_href
 function page_base_href(&$texte){
 	static $set_html_base = null;
 	if (is_null($set_html_base)){
@@ -590,7 +590,7 @@ function page_base_href(&$texte){
 
 // Envoyer les entetes, en retenant ceux qui sont a usage interne
 // et demarrent par X-Spip-...
-// http://doc.spip.org/@envoyer_entetes
+// http://code.spip.net/@envoyer_entetes
 function envoyer_entetes($entetes) {
 	foreach ($entetes as $k => $v)
 	#	if (strncmp($k, 'X-Spip-', 7))

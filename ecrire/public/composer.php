@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -37,7 +37,7 @@ include_spip('public/quete');
 # 3. des declaration de tables SQL supplementaires
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
-// http://doc.spip.org/@public_composer_dist
+// http://code.spip.net/@public_composer_dist
 function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='') {
 
 	$nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
@@ -141,7 +141,7 @@ function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
 }
 
 // Le squelette compile est-il trop vieux ?
-// http://doc.spip.org/@squelette_obsolete
+// http://code.spip.net/@squelette_obsolete
 function squelette_obsolete($skel, $squelette) {
 	static $date_change = null;
 	// ne verifier la date de mes_fonctions et mes_options qu'une seule fois
@@ -162,14 +162,14 @@ function squelette_obsolete($skel, $squelette) {
 }
 
 // Activer l'invalideur de session
-// http://doc.spip.org/@invalideur_session
+// http://code.spip.net/@invalideur_session
 function invalideur_session(&$Cache, $code=NULL) {
 	$Cache['session']=spip_session();
 	return $code;
 }
 
 
-// http://doc.spip.org/@analyse_resultat_skel
+// http://code.spip.net/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 	static $filtres = array();
 	$headers = array();
@@ -568,7 +568,7 @@ function lang_select_public($lang, $lang_select, $titre=null) {
 
 // Si un tableau &doublons[articles] est passe en parametre,
 // il faut le nettoyer car il pourrait etre injecte en SQL
-// http://doc.spip.org/@nettoyer_env_doublons
+// http://code.spip.net/@nettoyer_env_doublons
 function nettoyer_env_doublons($envd) {
 	foreach ($envd as $table => $liste) {
 		$n = '';
@@ -917,7 +917,7 @@ function calculer_where_to_string($v, $join = 'AND'){
 
 //condition suffisante (mais non necessaire) pour qu'une table soit utile
 
-// http://doc.spip.org/@calculer_jointnul
+// http://code.spip.net/@calculer_jointnul
 function calculer_jointnul($cle, $exp, $equiv='')
 {
 	if (!is_array($exp)) {
@@ -931,7 +931,7 @@ function calculer_jointnul($cle, $exp, $equiv='')
 	}
 }
 
-// http://doc.spip.org/@reinjecte_joint
+// http://code.spip.net/@reinjecte_joint
 function reinjecte_joint($afrom, $from)
 {
 	  $from_synth = array();
@@ -946,7 +946,7 @@ function reinjecte_joint($afrom, $from)
 	  return $from_synth;
 }
 
-// http://doc.spip.org/@remplacer_jointnul
+// http://code.spip.net/@remplacer_jointnul
 function remplacer_jointnul($cle, $exp, $equiv='')
 {
 	if (!is_array($exp)) {
@@ -960,7 +960,7 @@ function remplacer_jointnul($cle, $exp, $equiv='')
 }
 
 // calcul du nom du squelette
-// http://doc.spip.org/@calculer_nom_fonction_squel
+// http://code.spip.net/@calculer_nom_fonction_squel
 function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 {
 	// ne pas doublonner les squelette selon qu'ils sont calcules depuis ecrire/ ou depuis la racine

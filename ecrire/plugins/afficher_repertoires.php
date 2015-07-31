@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -12,7 +12,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@affiche_arbre_plugins
+// http://code.spip.net/@affiche_arbre_plugins
 function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plugins_actifs){
 	$ligne_plug = charger_fonction('afficher_plugin','plugins');
 	$racine = basename(_DIR_PLUGINS);
@@ -68,12 +68,12 @@ function plugins_afficher_repertoires_dist($url_page, $liste_plugins, $liste_plu
 
 // vraiment n'importe quoi la gestion des chemins des plugins
 // une fonction pour aider...
-// http://doc.spip.org/@chemin_plug
+// http://code.spip.net/@chemin_plug
 function chemin_plug($racine, $plug) {
 	return preg_replace(',[^/]+/\.\./,', '', "$racine/$plug");
 }
 
-// http://doc.spip.org/@tree_open_close_dir
+// http://code.spip.net/@tree_open_close_dir
 function tree_open_close_dir(&$current,$target,$deplie=array()){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);

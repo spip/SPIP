@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('auth/ldap');
 
-// http://doc.spip.org/@install_etape_ldap4_dist
+// http://code.spip.net/@install_etape_ldap4_dist
 function install_etape_ldap4_dist()
 {
 	$adresse_ldap = _request('adresse_ldap');
@@ -71,7 +71,7 @@ function install_etape_ldap4_dist()
 	echo install_fin_html();
 }
 
-// http://doc.spip.org/@liste_statuts_ldap
+// http://code.spip.net/@liste_statuts_ldap
 function liste_statuts_ldap() {
 	$recom = array("info_administrateurs" => ("<b>" ._T('info_administrateur_1')."</b> "._T('info_administrateur_2')."<br />"),
 		       "info_redacteurs" =>  ("<b>"._T('info_redacteur_1')."</b> "._T('info_redacteur_2')."<br />"),

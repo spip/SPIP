@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -56,7 +56,7 @@ define('SQL_ARGS', '(\([^)]*\))');
 /** Fonction SQL sur un champ ex: SUM(visites) */
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_\/][A-Z_\/0-9.]*)' . SQL_ARGS . '?`?');
 
-// http://doc.spip.org/@phraser_inclure
+// http://code.spip.net/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
 
 	while (preg_match(BALISE_INCLURE, $texte, $match)) {
@@ -90,7 +90,7 @@ function phraser_inclure($texte, $ligne, $result) {
 	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));
 }
 
-// http://doc.spip.org/@phraser_polyglotte
+// http://code.spip.net/@phraser_polyglotte
 function phraser_polyglotte($texte,$ligne, $result) {
 
 	if (preg_match_all(BALISE_POLYGLOTTE, $texte, $m, PREG_SET_ORDER))
@@ -135,7 +135,7 @@ function phraser_polyglotte($texte,$ligne, $result) {
 /// <:module:chaine{arg1=texte1,arg2=#BALISE}|filtre1{texte2,#BALISE}|filtre2:>
 /// chaine peut etre vide si =texte1 est present et arg1 est vide
 /// sinon ce n'est pas un idiome
-// http://doc.spip.org/@phraser_idiomes
+// http://code.spip.net/@phraser_idiomes
 function phraser_idiomes($texte,$ligne,$result) {
 	while (preg_match(BALISE_IDIOMES, $texte, $match)) {
 		$p = strpos($texte, $match[0]);
@@ -166,7 +166,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 	return $result;
 }
 
-// http://doc.spip.org/@phraser_champs
+// http://code.spip.net/@phraser_champs
 function phraser_champs($texte,$ligne,$result) {
 	while (preg_match("/".NOM_DE_CHAMP."/S", $texte, $match)) {
 	  $p = strpos($texte, $match[0]);
@@ -213,7 +213,7 @@ function phraser_champs($texte,$ligne,$result) {
 // %###N@ ou N indexe un tableau comportant le resultat de leur analyse
 // on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
-// http://doc.spip.org/@phraser_champs_etendus
+// http://code.spip.net/@phraser_champs_etendus
 function phraser_champs_etendus($texte, $ligne,$result) {
 	if ($texte==="") return $result;
 	$sep = '##';
@@ -228,7 +228,7 @@ function phraser_champs_etendus($texte, $ligne,$result) {
 // sert aussi aux arguments des includes et aux criteres de boucles
 // Tres chevelu
 
-// http://doc.spip.org/@phraser_args
+// http://code.spip.net/@phraser_args
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
@@ -241,7 +241,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   return $result;
 }
 
-// http://doc.spip.org/@phraser_arg
+// http://code.spip.net/@phraser_arg
 function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 	preg_match(",^(\|?[^}{)|]*)(.*)$,ms", $texte, $match);
 	$suite = ltrim($match[2]);
@@ -358,7 +358,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 }
 
 
-// http://doc.spip.org/@phraser_champs_exterieurs
+// http://code.spip.net/@phraser_champs_exterieurs
 function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($texte, "%$sep"))!==false) {
@@ -374,7 +374,7 @@ function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	return (($texte==='') ? $res : phraser_inclure($texte, $ligne, $res));
 }
 
-// http://doc.spip.org/@phraser_champs_interieurs
+// http://code.spip.net/@phraser_champs_interieurs
 function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 	$i = 0; // en fait count($result)
 	$x = "";
@@ -645,7 +645,7 @@ function phraser_criteres($params, &$result) {
 	if (!$err_ci) $result->criteres = $args;
 }
 
-// http://doc.spip.org/@phraser_critere_infixe
+// http://code.spip.net/@phraser_critere_infixe
 function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 {
 	$args[0] = new Texte;
