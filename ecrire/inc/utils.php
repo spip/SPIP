@@ -876,6 +876,12 @@ function spip_initialisation() {
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
 	define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
+	
+	define('_DOC_MAX_SIZE', 0); # poids en ko
+
+	define('_IMG_MAX_SIZE', 0); # poids en ko
+	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
+	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));

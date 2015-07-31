@@ -288,6 +288,46 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$hauteur = intval($size_image[1]);
 		$type_image = decoder_type_image($size_image[2]);
 
+		$poids = filesize($fichier);
+		if (!$type_image) {
+			if (_DOC_MAX_SIZE > 0
+			AND $poids > _DOC_MAX_SIZE*1024) {
+				@unlink ($fichier);
+				check_upload_error(6,
+				_T('info_logo_max_poids',
+					array('maxi' => taille_en_octets(_DOC_MAX_SIZE*1024),
+					'actuel' => taille_en_octets($poids))));
+			}
+		}
+		else {
+			if (_IMG_MAX_SIZE > 0
+			AND $poids > _IMG_MAX_SIZE*1024) {
+				@unlink ($fichier);
+				check_upload_error(6,
+				_T('info_logo_max_poids',
+					array('maxi' => taille_en_octets(_IMG_MAX_SIZE*1024),
+					'actuel' => taille_en_octets($poids))));
+			}
+	
+			if (_IMG_MAX_WIDTH * _IMG_MAX_HEIGHT
+			AND ($size_image[0] > _IMG_MAX_WIDTH
+			OR $size_image[1] > _IMG_MAX_HEIGHT)) {
+				@unlink ($fichier);
+				check_upload_error(6, 
+				_T('info_logo_max_taille',
+					array(
+					'maxi' =>
+						_T('info_largeur_vignette',
+							array('largeur_vignette' => _IMG_MAX_WIDTH,
+							'hauteur_vignette' => _IMG_MAX_HEIGHT)),
+					'actuel' =>
+						_T('info_largeur_vignette',
+							array('largeur_vignette' => $size_image[0],
+							'hauteur_vignette' => $size_image[1]))
+				)));
+			}
+		}
+
 		// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
 		if ($mode == 'vignette' AND !($largeur * $hauteur)) {
 			@unlink($fichier);
