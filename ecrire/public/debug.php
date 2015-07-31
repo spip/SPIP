@@ -94,8 +94,10 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 	$GLOBALS['bouton_admin_debug'] = true;
 
 	if (preg_match(',err(no|code):?[[:space:]]*([0-9]+),i', $erreur, $regs))
+	  {
 		$errno = $regs[2];
-	else if (($errno == 1030 OR $errno <= 1026)
+
+	  } else if (($errno == 1030 OR $errno <= 1026)
 		AND preg_match(',[^[:alnum:]]([0-9]+)[^[:alnum:]],', $erreur, $regs))
 	$errno = $regs[1];
 
@@ -450,7 +452,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    echo "<div id=\"debug_boucle\"><fieldset>";
 	    if ($var_mode_affiche == 'resultat') {
 		echo "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		echo ancre_texte(traite_query($debug_objets['requete'][$var_mode_objet]));
+		$req = $debug_objets['requete'][$var_mode_objet];
+		if (function_exists('traite_query'))
+		  $req = traite_query($req);
+		echo ancre_texte($req);
 		foreach ($res as $view) 
 			if ($view) echo "\n<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 

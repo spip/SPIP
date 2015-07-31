@@ -287,10 +287,13 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_fusion_dist
 function critere_fusion_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
-		$x = $crit->param[0];
-		if ($x[0]->type == 'texte')
-			$boucles[$idb]->group[] = $x[0]->texte;
-		else 	$boucles[$idb]->group[] = '".' . calculer_critere_arg_dynamique($idb, $boucles, $x) . '."';
+		$t = $crit->param[0];
+		if ($t[0]->type == 'texte')
+			$t = $t[0]->texte;
+		else 	$t = '".' . calculer_critere_arg_dynamique($idb, $boucles, $t) . '."';
+		$boucles[$idb]->group[] = $t; 
+		if (!in_array($t, $boucles[$idb]->select))
+		    $boucles[$idb]->select[] = $t;
 	} else 
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
 			"{groupby ?} BOUCLE$idb");
@@ -426,10 +429,20 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	      }
 	      }
 	  }
-	  if ($order)
-	    $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order)
-	    	. $collecte
-	      . (($order[0]=="'") ? $sens : "");
+
+	  if ($order) {
+	    if (preg_match("/^'(.*)'$/", $order, $m)) {
+	      $t = $m[1];
+	      if (strpos($t,'.') AND !in_array($t, $boucle->select)) {
+		$boucle->select[] = $t;
+	      }
+	    }
+	  } else $sens ='';
+	  
+	  $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order)
+	    . $collecte
+	    . $sens;
+
 	}
 }
 
