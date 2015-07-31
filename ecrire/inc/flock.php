@@ -267,7 +267,8 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
  * @param <type> $truncate 
  */
 function ecrire_fichier_securise ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
-	$fichier .= ".php";
+	if (substr($fichier,-4) !== '.php')
+		spip_log('Erreur de programmation: '.$fichier.' doit finir par .php');
 	$contenu = "<"."?php die ('Acces interdit'); ?".">\n" . $contenu;
 	return ecrire_fichier($fichier, $contenu, $ecrire_quand_meme, $truncate);
 }
@@ -279,7 +280,7 @@ function ecrire_fichier_securise ($fichier, $contenu, $ecrire_quand_meme = false
  * @param <type> $options 
  */
 function lire_fichier_securise ($fichier, &$contenu, $options=false) {
-	if ($res = lire_fichier("$fichier.php",$contenu,$options)){
+	if ($res = lire_fichier($fichier,$contenu,$options)){
 		$contenu = substr($contenu,strlen("<"."?php die ('Acces interdit'); ?".">\n"));
 	}
 	return $res;
