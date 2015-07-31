@@ -26,7 +26,6 @@ function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLU
 		foreach($matches as $tag=>$sous){
 			list($tagname,$atts) = spip_xml_decompose_tag($tag);
 			if ($tagname=='plugin' AND is_array($sous)){
-var_dump($atts['spip'].':'.plugin_version_compatible($atts['spip'],$vspip));
 				if (!isset($atts['spip'])
 					OR plugin_version_compatible($atts['spip'],$vspip))
 					// on prend la derniere declaration avec ce nom
