@@ -134,8 +134,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 		$i=0;
 		$item="";
-		while(strpos($le_retour,"<item")>0){
-			$debut_item=strpos($le_retour,"<item");
+		while(ereg("<item[>[:space:]]",$le_retour,$regs)){
+			$debut_item=strpos($le_retour,$regs[0]);
 			$fin_item=strpos($le_retour,"</item>")+strlen("</item>");
 			$item[$i]=substr($le_retour,$debut_item,$fin_item-$debut_item);
 
