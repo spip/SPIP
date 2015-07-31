@@ -17,9 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_editer_article_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	// si id_article n'est pas un nombre, c'est une creation 
 	// mais on verifie qu'on a toutes les données qu'il faut.

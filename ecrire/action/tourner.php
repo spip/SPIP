@@ -20,9 +20,7 @@ function action_tourner_dist() {
 	include_spip('inc/distant'); # pour copie_locale
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
 		spip_log("action_tourner_dist $arg pas compris");

@@ -19,9 +19,7 @@ function action_regler_moderation_dist()
 	include_spip('inc/autoriser');
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		spip_log("action_regler_moderation_dist $arg pas compris");

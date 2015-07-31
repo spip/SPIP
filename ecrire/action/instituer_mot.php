@@ -20,9 +20,7 @@ include_spip('base/abstract_sql');
 function action_instituer_mot_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 	if (!preg_match(",^(\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_mot_dist $arg pas compris");
 	} else action_instituer_mot_post($r);

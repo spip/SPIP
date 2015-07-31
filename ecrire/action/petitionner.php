@@ -18,9 +18,7 @@ function action_petitionner_dist() {
 	include_spip('inc/autoriser');
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	$id_article = intval($arg);
 

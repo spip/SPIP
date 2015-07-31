@@ -16,9 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_instituer_breve_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	list($id_breve, $statut) = preg_split('/\W/', $arg);
 	if (!$statut) $statut = _request('statut_nouv'); // cas POST

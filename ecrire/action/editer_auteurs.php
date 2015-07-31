@@ -18,9 +18,7 @@ include_spip('base/abstract_sql');
 function action_editer_auteurs_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 	$redirect = urldecode(_request('redirect'));
 
 	if (preg_match(",^\W*(\d+)\W-(\d+)$,", $arg, $r)) {

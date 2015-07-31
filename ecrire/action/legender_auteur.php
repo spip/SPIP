@@ -20,9 +20,7 @@ include_spip('base/abstract_sql');
 function action_legender_auteur_dist()
 {
         $securiser_action = charger_fonction('securiser_action', 'inc');
-        $securiser_action();
-
-        $arg = _request('arg');
+        $arg = $securiser_action();
 
 	$echec = array();
 

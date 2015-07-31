@@ -17,9 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_editer_site_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$securiser_action();
-
-	$arg = _request('arg');
+	$arg = $securiser_action();
 
 	// Envoi depuis le formulaire d'edition d'un site existant
 	if ($id_syndic = intval($arg)) {

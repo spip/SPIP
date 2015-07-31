@@ -15,15 +15,20 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // interface d'appel:
-// - avec au moins un argument, construit une URL ou un formulaire securises
-// - sans argument: verifie que les param HTTP attestent de la securite
+// - au moins un argument: retourne une URL ou un formulaire securises
+// - sans argument: verifie la securite et retourne _request('arg'), ou exit.
 
 // http://doc.spip.org/@inc_securiser_action_dist
 function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=false, $att='')
 {
 	if ($action)
 		return securiser_action_auteur($action, $arg, $redirect, $mode, $att);
-	elseif (!verifier_action_auteur(_request('action') . '-' . _request('arg'), _request('hash'))) {
+	else {
+		$arg = _request('arg');
+		$hash = _request('hash');
+		$action = _request('action');
+		if (verifier_action_auteur("$action-$arg", $hash))
+			return $arg;
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
 		exit;

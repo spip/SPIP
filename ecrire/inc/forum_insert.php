@@ -135,9 +135,9 @@ function inc_forum_insert_dist() {
 		// pour se conformer au a general.
 		set_request('action', 'ajout_forum');
 	        $securiser_action = charger_fonction('securiser_action', 'inc');
-        	$securiser_action();
+		$arg = $securiser_action();
 
-		$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', _request('arg')) .".lck";
+		$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $arg) .".lck";
 		if (!file_exists($file)) {
 			# ne pas tracer cette erreur, peut etre due a un double POST
 			# tracer_erreur_forum('session absente');
