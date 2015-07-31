@@ -534,7 +534,6 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if ($align = extraire_attribut($img, 'align'))
 		$attributs .= " align='$align'";
 
-var_dump($style);
 	$style = trim(
 		preg_replace(',(^|[[:space:]])width:[^;]+;?,ims', '', $style)
 	);
