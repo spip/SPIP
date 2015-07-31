@@ -308,10 +308,7 @@ function objet_type($table_objet){
 	$type = preg_replace(',^spip_|s$,', '', $table_objet);
 	if (isset($surnoms[$type]))
 		return $surnoms[$type];
-	
-	// securite : eliminer les caracteres non \w
-	$type = preg_replace(',[^\w-],','',$type);
-	
+
 	// si le type redonne bien la table c'est bon
 	if ( (table_objet($type)==$table_objet)
 	  OR (table_objet_sql($type)==$table_objet))
