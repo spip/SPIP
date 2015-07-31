@@ -18,6 +18,44 @@ include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
 
+//
+// Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
+// (sert a l'etape 1 de l'installation)
+function tester_compatibilite_hebergement() {
+	$err = array();
+
+	$p = phpversion();
+	if (ereg('^([0-9]+)\.([0-9]+)\.([0-9]+)', $p, $regs)) {
+		$php = array($regs[1], $regs[2], $regs[3]);
+		$m = '4.0.8';
+		$min = explode('.', $m);
+		if ($php[0]<$min[0]
+		OR ($php[0]==$min[0] AND $php[1]<$min[1])
+		OR ($php[0]==$min[0] AND $php[1]==$min[1] AND $php[2]<$min[2]))
+			$err[] = _L("PHP version $p insuffisant (minimum = $m)");
+	}
+
+	if (!function_exists('mysql_query'))
+		$err[] = _L("SPIP exige l'extension php"). " <a href='http://se.php.net/mysql'>MYSQL</a>";
+
+	if (!function_exists('preg_match_all'))
+		$err[] = _L("SPIP exige l'extension php"). " <a href='http://se.php.net/pcre'>PCRE</a>";
+
+	if ($a = @ini_get('mbstring.func_overload'))
+		$err[] = _L("SPIP ne fonctionne pas avec mbstring.func_overload=$a")." - voir <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>"._L("Ce probl&egrave;me peut se corriger en installant &agrave; la racine du site un fichier .htaccess avec la ligne&nbsp;:")."<br /><tt>PHP_VALUE mbstring.func_overload 0</tt></small>";
+
+	if ($err) {
+			echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4><b>"._L('Attention&nbsp;!').'</b> <p>'._L('L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...')."</p></FONT>";
+		while (list(,$e) = each ($err))
+			echo "<li>$e</li>\n";
+
+		# a priori ici on pourrait die(), mais il faut laisser la possibilite
+		# de forcer malgre tout (pour tester, ou si bug de detection)
+		echo "<p /><hr />\n";
+	}
+}
+
+
 // Une fonction pour faciliter la recherche du login (superflu ?)
 function login_hebergeur() {
 	global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
@@ -215,8 +253,8 @@ else if ($etape == 4) {
 	else {
 		$sel_db = $choix_db;
 	}
-	echo $sel_db;
-	mysql_select_db("$sel_db");
+	echo "$sel_db ";
+	mysql_select_db($sel_db);
 
 	// Message pour spip_query : tout va bien !
 	$GLOBALS['db_ok'] = true;
@@ -235,9 +273,11 @@ else if ($etape == 4) {
 	$ok_rappel_nom = spip_query("INSERT spip_meta (nom,valeur)
 		VALUES ('mysql_rappel_nom_base', 'test')");
 	if ($ok_rappel_nom) {
+		echo " (ok rappel nom base `$sel_db`.spip_meta) ";
 		$ligne_rappel = '';
 		spip_query("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'");
 	} else {
+		echo " (erreur rappel nom base `$sel_db`.spip_meta) ";
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
@@ -259,6 +299,7 @@ else if ($etape == 4) {
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.1;\n";
 		$conn .= "include_ecrire('inc_db_mysql.php3');\n";
+		$conn .= $ligne_rappel;
 		$conn .= "@spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
 		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
@@ -334,9 +375,10 @@ else if ($etape == 3) {
 			// probablement le login sans le point -- testons pour savoir
 			$test_base = $login_db;
 			$ok = @mysql_select_db($test_base);
-			if (!$ok) {
-				$test_base = str_replace('.', '_', $test_base);
-				$ok = @mysql_select_db($test_base);
+			$test_base2 = str_replace('.', '_', $test_base);
+			if (@mysql_select_db($test_base2)) {
+				$test_base = $test_base2;
+				$ok = true;
 			}
 			
 			if ($ok) {
@@ -404,6 +446,9 @@ else if ($etape == 2) {
 else if ($etape == 1) {
 	install_debut_html();
 	echo _VALIDE_CLAVIER;
+
+	// stopper en cas de grosse incompatibilite de l'hebergement
+	tester_compatibilite_hebergement();
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
 

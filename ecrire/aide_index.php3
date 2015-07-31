@@ -72,7 +72,6 @@ function fichier_aide($lang_aide = '') {
 
 	// fichier local ?
 	if (@file_exists($fichier_aide = "../AIDE/aide-$lang_aide-aide.html")) {
-		echo "oui";
 		return array(spip_file_get_contents($fichier_aide), $lang_aide);
 	}
 

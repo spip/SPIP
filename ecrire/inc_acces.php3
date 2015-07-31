@@ -284,7 +284,7 @@ function verifier_htaccess($rep) {
 	if ((!@file_exists($htaccess)) AND 
 	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
 		spip_log("demande de creation de $htaccess");
-		if ($GLOBALS['hebergeur'] != 'nexenservices'){
+		if ($_SERVER['SERVER_ADMIN'] != 'www@nexenservices.com'){
 			if (!$f = fopen($htaccess, "w"))
 				echo "<b>" .
 				  "ECHEC DE LA CREATION DE $htaccess" . # ne pas traduire
