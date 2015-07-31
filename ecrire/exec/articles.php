@@ -309,7 +309,9 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 // http://doc.spip.org/@titres_articles
 function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif)
 {
-	global  $lang_dir, $spip_lang_left, $spip_lang_right;
+	global  $lang_objet, $spip_lang_left, $spip_lang_right;
+
+	$lang_dir = lang_dir($lang_objet);
 
 	$res = '';
 
@@ -354,8 +356,9 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 // http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
-  global $champs_extra, $les_notes, $lang_dir;
+  global $champs_extra, $les_notes, $lang_objet;
 
+  $lang_dir = lang_dir($lang_objet);
 // HACK TEMPORAIRE POUR TESTER les crayons dans l'espace prive
 global $id_article;
 

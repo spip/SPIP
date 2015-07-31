@@ -500,8 +500,9 @@ function afficher_liste_fin_tableau() {
 
 // http://doc.spip.org/@puce_statut_article
 function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
-	global $spip_lang_left, $lang_dir, $connect_statut, $options;
+	global $spip_lang_left, $lang_objet, $connect_statut, $options;
 	
+	$lang_dir = lang_dir($lang_objet);
 	if (!$id) {
 	  $id = $id_rubrique;
 	  $ajax_node ='';
@@ -578,8 +579,9 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 
 // http://doc.spip.org/@puce_statut_breve
 function puce_statut_breve($id, $statut, $id_rubrique, $type) {
-	global $spip_lang_left, $lang_dir;
+	global $spip_lang_left, $lang_objet;
 
+	$lang_dir = lang_dir($lang_objet);
 	$puces = array(
 		       0 => 'puce-orange-breve.gif',
 		       1 => 'puce-verte-breve.gif',
@@ -755,10 +757,10 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 // http://doc.spip.org/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row)
 {
-  	global $lang_dir,  $spip_lang_right, $spip_display;
+  	global $lang_objet,  $spip_lang_right, $spip_display;
 
+	$lang_dir = lang_dir($lang_objet);
 	$vals = '';
-
 	$id_article = $row['id_article'];
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$id_rubrique = $row['id_rubrique'];
@@ -889,9 +891,10 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 // http://doc.spip.org/@afficher_breves_boucle
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
-	global  $lang_dir, $options, $connect_statut, $spip_lang_right;
+	global $options, $connect_statut, $spip_lang_right;
 	$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
 	list($afficher_langue, $affrub, $langue_defaut) = $own;
+
 	$vals = '';
 
 	$id_breve = $row['id_breve'];
@@ -903,6 +906,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 		if (isset($row['lang']))
 		  changer_typo($lang = $row['lang']);
 		else $lang = $langue_defaut;
+		$lang_dir = lang_dir($lang);
 		$id_rubrique = $row['id_rubrique'];
 		$t= ($droit AND autoriser('publierdans','rubrique',$id_rubrique))
 		  ? $id_rubrique
@@ -1945,9 +1949,9 @@ function afficher_hierarchie($id_rubrique) {
 
 // http://doc.spip.org/@enfant_rub
 function enfant_rub($collection){
-	global $couleur_foncee, $lang_dir;
+	global $couleur_foncee;
 	global $spip_display, $spip_lang_left, $spip_lang_right, $spip_lang;
-	
+
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process']) AND $GLOBALS['meta']['image_process'] != "non");
 		
 	if ($voir_logo) {
@@ -1969,7 +1973,7 @@ function enfant_rub($collection){
 			$les_sous_enfants = sous_enfant_rub($id_rubrique);
 	
 			changer_typo($row['lang']);
-	
+			$lang_dir = lang_dir($row['lang']);	
 			$descriptif=propre($row['descriptif']);
 	
 			if ($voir_logo) {
@@ -2012,18 +2016,18 @@ function enfant_rub($collection){
 
 // http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rub($collection2){
-	global $lang_dir, $spip_lang_left;
+	global $spip_lang_left;
 
 	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
 	if (!spip_num_rows($result3)) return '';
 	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 	while($row=spip_fetch_array($result3)){
-			$id_rubrique2=$row['id_rubrique'];
-			$id_parent2=$row['id_parent'];
-			$titre2=$row['titre'];
-			changer_typo($row['lang']);
-
+		$id_rubrique2=$row['id_rubrique'];
+		$id_parent2=$row['id_parent'];
+		$titre2=$row['titre'];
+		changer_typo($row['lang']);
+		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir','rubrique',$id_rubrique2))
 			$retour.="\n<li><div class='arial11' " .
 			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div></li>\n";

@@ -19,7 +19,7 @@ include_spip('inc/ortho');
 // http://doc.spip.org/@exec_articles_ortho_dist
 function exec_articles_ortho_dist()
 {
-  global $champs_extra, $chapo, $descriptif, $lang_dir, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
+  global $champs_extra, $chapo, $descriptif, $id_article, $les_notes, $ps, $soustitre, $spip_lang_left, $spip_lang_right, $surtitre, $texte, $titre;
 
 
 //charset_texte('utf-8');
@@ -59,9 +59,9 @@ if ($row = spip_fetch_array($result)) {
 	$id_trad = $row["id_trad"];
 	$lang_article = $row["lang"];
 }
-if (!$lang_article) $lang_article = $GLOBALS['meta']['langue_site'];
-changer_typo($lang_article); # pour l'affichage du texte
+ if (!$lang_article) $lang_article = $GLOBALS['meta']['langue_site'];
 
+ $lang_dir = lang_dir(changer_typo($lang_article));
 // pour l'affichage du virtuel
 
 if (substr($chapo, 0, 1) == '=') {

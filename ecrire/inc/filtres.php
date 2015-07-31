@@ -1673,7 +1673,7 @@ function direction_css ($css, $voulue='') {
 			$voulue = lang_dir($voulue);
 	}
 	else
-		$voulue =  lang_dir($GLOBALS['spip_lang']);
+		$voulue =  lang_dir();
 
 	$right = $r[1] ? 'left' : 'right'; // 'right' de la css lue en entree
 	$dir = $r[1] ? 'rtl' : 'ltr';

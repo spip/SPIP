@@ -17,8 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
-	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
-	global $spip_lang, $browser_layer,$spip_lang_right,$spip_lang_left;
+	global $browser_layer,$spip_lang_right,$spip_lang_left;
 	
 	$aff_art = _request('aff_art');
 	$sel_lang = _request('sel_lang');
@@ -31,7 +30,7 @@ function exec_articles_tous_dist()
 		OR $GLOBALS['meta']['multi_articles'] == 'oui') 
 		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
-	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art, lang_dir($spip_lang));
+	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art, lang_dir());
 	if (_request('var_ajaxcharset')&&_request('id_rubrique')) 
 		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
 	else {

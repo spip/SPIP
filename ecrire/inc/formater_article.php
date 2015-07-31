@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_formater_article_dist
 function inc_formater_article_dist($row)
 {
-	global $lang_dir, $options, $spip_lang_right, $spip_display;
+	global $options, $spip_lang_right, $spip_display;
 	static $pret = false;
 	static $chercher_logo, $img_admin, $formater_auteur, $nb, $langue_defaut, $afficher_langue;
 
@@ -54,7 +54,7 @@ function inc_formater_article_dist($row)
 	$date = $row['date'];
 	$statut = $row['statut'];
 	$descriptif = $row['descriptif'];
-	if ($lang = $row['lang']) changer_typo($lang);
+	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
 
 	$vals[]= puce_statut_article($id_article, $statut, $id_rubrique);
 

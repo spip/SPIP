@@ -66,7 +66,7 @@ function balise_CHARSET_dist($p) {
 // http://doc.spip.org/@balise_LANG_LEFT_dist
 function balise_LANG_LEFT_dist($p) {
 	$_lang = champ_sql('lang', $p);
-	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'left','right')";
+	$p->code = "lang_dir($_lang, 'left','right')";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -74,7 +74,7 @@ function balise_LANG_LEFT_dist($p) {
 // http://doc.spip.org/@balise_LANG_RIGHT_dist
 function balise_LANG_RIGHT_dist($p) {
 	$_lang = champ_sql('lang', $p);
-	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'right','left')";
+	$p->code = "lang_dir($_lang, 'right','left')";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -82,7 +82,7 @@ function balise_LANG_RIGHT_dist($p) {
 // http://doc.spip.org/@balise_LANG_DIR_dist
 function balise_LANG_DIR_dist($p) {
 	$_lang = champ_sql('lang', $p);
-	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'ltr','rtl')";
+	$p->code = "lang_dir($_lang, 'ltr','rtl')";
 	$p->interdire_scripts = false;
 	return $p;
 }
