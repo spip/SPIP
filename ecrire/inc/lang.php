@@ -92,7 +92,17 @@ function approcher_langue ($trads, $lang='') {
 	return '';
 }
 
-// http://doc.spip.org/@traduire_nom_langue
+/**
+ * Traduit un code de langue (fr, en, etc...) vers le nom de la langue
+ * en toute lettres dans cette langue (français, English, etc....).
+ *
+ * Si le spip ne connait pas le nom de la langue, il retourne le code
+ *
+ * @param string $lang
+ *     Code de langue
+ * @return string
+ *     Nom de la langue, sinon son code.
+**/
 function traduire_nom_langue($lang) {
 	include_spip('inc/lang_liste');
 	include_spip('inc/charsets');

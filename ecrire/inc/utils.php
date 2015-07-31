@@ -233,9 +233,20 @@ function journal($phrase, $opt = array()) {
 	$journal($phrase, $opt);
 }
 
-// Renvoie le _GET ou le _POST emis par l'utilisateur
-// ou pioche dans $c si c'est un array()
-// http://doc.spip.org/@_request
+
+/**
+ * Renvoie le `$_GET` ou le `$_POST` émis par l'utilisateur
+ * ou pioché dans un tableau transmis
+ *
+ * @api
+ * @param string $var
+ *     Clé souhaitée
+ * @param bool|array $var
+ *     Tableau transmis (sinon cherche dans GET ou POST)
+ * @return mixed|null
+ *     - null si la clé n'a pas été trouvée
+ *     - la valeur de la clé sinon.
+**/
 function _request($var, $c=false) {
 
 	if (is_array($c))
@@ -261,9 +272,20 @@ function _request($var, $c=false) {
 	return $a;
 }
 
-// Methode set de la fonction _request()
-// Attention au cas ou l'on fait set_request('truc', NULL);
-// http://doc.spip.org/@set_request
+
+/**
+ * Affecte une valeur à une clé (pour usage avec `_request()`)
+ *
+ * @see _request() Pour obtenir la valeur
+ * @note Attention au cas ou l'on fait `set_request('truc', NULL);`
+ * 
+ * @param string $var Nom de la clé
+ * @param string $val Valeur à affecter
+ * @param bool|array $c Tableu de données (sinon utilise `$_GET` et `$_POST`)
+ * @return array|bool
+ *     - array $c complété si un $c est transmis,
+ *     - false sinon
+**/
 function set_request($var, $val = NULL, $c=false) {
 	if (is_array($c)) {
 		unset($c[$var]);
@@ -282,8 +304,8 @@ function set_request($var, $val = NULL, $c=false) {
 
 
 /**
- * Tester si une url est absolue
- * @param  $url
+ * Tester si une URL est absolue
+ * @param string $url
  * @return bool
  */
 function tester_url_absolue($url){
@@ -2087,29 +2109,31 @@ function erreur_squelette($message='', $lieu='') {
  * $fond peut etre un nom de squelette, ou une liste de squelette au format array.
  * Dans ce dernier cas, les squelettes sont tous evalues et mis bout a bout
  * $options permet de selectionner les options suivantes :
- * 	trim => true (valeur par defaut) permet de ne rien renvoyer si le fond ne produit que des espaces ;
- * 	raw  => true permet de recuperer la strucure $page complete avec entetes et invalideurs
+ *
+ * - trim => true (valeur par defaut) permet de ne rien renvoyer si le fond ne produit que des espaces ;
+ * - raw  => true permet de recuperer la strucure $page complete avec entetes et invalideurs
  *          pour chaque $fond fourni.
  *
  * @api
  * @param string/array $fond
- * 		Le ou les squelettes à utiliser, sans l'extension, {@example prive/liste/auteurs}
- * 		Le fichier sera retrouvé dans la liste des chemins connus de SPIP (squelettes, plugins, spip)
+ *     - Le ou les squelettes à utiliser, sans l'extension, {@example prive/liste/auteurs}
+ *     - Le fichier sera retrouvé dans la liste des chemins connus de SPIP (squelettes, plugins, spip)
  * @param array $contexte
- * 		Informations de contexte envoyées au squelette, {@example array('id_rubrique' => 8)}
- * 		La langue est transmise automatiquement (sauf option étoile).
+ *     - Informations de contexte envoyées au squelette, {@example array('id_rubrique' => 8)}
+ *     - La langue est transmise automatiquement (sauf option étoile).
  * @param array $options
- * 		Options complémentaires :
- * 		- trim   : applique un trim sur le résultat (true par défaut)
- * 		- raw    : retourne un tableau d'information sur le squelette (false par défaut)
- * 		- etoile : ne pas transmettre la langue au contexte automatiquement (false par défaut),
- * 		           équivalent de INCLURE*
- * 		- ajax   : gere les liens internes du squelette en ajax (équivalent du paramètre {ajax})
+ *     Options complémentaires :
+ *
+ *     - trim   : applique un trim sur le résultat (true par défaut)
+ *     - raw    : retourne un tableau d'information sur le squelette (false par défaut)
+ *     - etoile : ne pas transmettre la langue au contexte automatiquement (false par défaut),
+ *                équivalent de INCLURE*
+ *     - ajax   : gere les liens internes du squelette en ajax (équivalent du paramètre {ajax})
  * @param string $connect
- * 		Non du connecteur de bdd a utiliser
+ *     Non du connecteur de bdd a utiliser
  * @return string|array
- * 		Contenu du squelette calculé
- * 		ou tableau d'information sur le squelette.
+ *     - Contenu du squelette calculé
+ *     - ou tableau d'information sur le squelette.
  */
 function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
 	if (!function_exists('evaluer_fond'))

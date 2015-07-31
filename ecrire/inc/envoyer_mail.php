@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des emails et de leur envoi
+ *
+ * @package SPIP\Core\Mail
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/charsets');
@@ -42,29 +47,28 @@ function nettoyer_caracteres_mail($t) {
 
 /**
  * Envoi d'un mail
- * http://doc.spip.org/@inc_envoyer_mail_dist
  *
  * @param string $destinataire
  * @param string $sujet
  * @param string|array $corps
- *   au format string, c'est un corps d'email au format texte, comme supporte nativement par le core
- *   au format array, c'est un corps etendu qui peut contenir
- *     string texte : le corps d'email au format texte
- *     string from : email de l'envoyeur (prioritaire sur argument $from de premier niveau, deprecie)
- *     array headers : tableau d'en-tetes personalises, une entree par ligne d'en-tete
- *     --- Support partiel par une fonction mail_embarquer_pieces_jointes a fournir, ---
- *     --- chargee de convertir en texte encodee les pieces jointes ---
- *     array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
- *       string chemin : chemin file system pour trouver le fichier a embarquer
- *       string nom : nom du document tel qu'apparaissant dans l'email
- *       string encodage : encodage a utiliser, parmi 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
- *       string mime : mime type du document
- *     --- Non implemente ici ---
- *     string html : le corps d'email au format html
- *     string nom_envoyeur : un nom d'envoyeur pour completer l'email from
- *     string cc : destinataires en copie conforme
- *     string bcc : destinataires en copie conforme cachee
- *     string adresse_erreur : addresse de retour en cas d'erreur d'envoi
+ *   - au format string, c'est un corps d'email au format texte, comme supporte nativement par le core
+ *   - au format array, c'est un corps etendu qui peut contenir
+ *     - string texte : le corps d'email au format texte
+ *     - string from : email de l'envoyeur (prioritaire sur argument $from de premier niveau, deprecie)
+ *     - array headers : tableau d'en-tetes personalises, une entree par ligne d'en-tete
+ *         --- Support partiel par une fonction mail_embarquer_pieces_jointes a fournir, ---
+ *         --- chargee de convertir en texte encodee les pieces jointes ---
+ *     - array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
+ *       - string chemin : chemin file system pour trouver le fichier a embarquer
+ *       - string nom : nom du document tel qu'apparaissant dans l'email
+ *       - string encodage : encodage a utiliser, parmi 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
+ *       - string mime : mime type du document
+ *             --- Non implemente ici ---
+ *     - string html : le corps d'email au format html
+ *     - string nom_envoyeur : un nom d'envoyeur pour completer l'email from
+ *     - string cc : destinataires en copie conforme
+ *     - string bcc : destinataires en copie conforme cachee
+ *     - string adresse_erreur : addresse de retour en cas d'erreur d'envoi
  * @param string $from (deprecie, utiliser l'entree from de $corps)
  * @param string $headers (deprecie, utiliser l'entree headers de $corps)
  * @return bool

@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions pour l'affichage privé des pages exec PHP 
+ *
+ * @package SPIP\Core\Presentation
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/presentation_mini');
@@ -73,7 +78,13 @@ function fin_boite_alerte() {return fin_cadre('alerte');}
 function debut_boite_info() {return debut_cadre('info', '', '', '', '', '');}
 function fin_boite_info() {return fin_cadre('info');}
 
-// http://doc.spip.org/@gros_titre
+/**
+ * Affiche le titre d’une page de l’interface privée. Utilisée par la plupart des fichiers `exec/xx.php`.
+ *
+ * @param string $titre Le titre en question
+ * @param string $ze_logo Une image de logo
+ * @return string Code PHP.
+**/
 function gros_titre($titre, $ze_logo=''){return "<h1 class='grostitre'>" . $ze_logo.' ' . typo($titre)."</h1>\n";}
 
 // La boite des raccourcis

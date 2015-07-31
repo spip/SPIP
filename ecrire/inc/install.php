@@ -240,7 +240,12 @@ function info_etape($titre, $complement = ''){
 	($complement ? "".$complement."\n":'');
 }
 
-// http://doc.spip.org/@bouton_suivant
+/**
+ * Retourne le code HTML d'un bouton `suivant>>` pour les phases d'installation
+ *
+ * @param string $code Texte du bouton
+ * @return string Code HTML du bouton
+**/
 function bouton_suivant($code = '') {
 	if($code=='') $code = _T('bouton_suivant');
 	static $suivant = 0;
