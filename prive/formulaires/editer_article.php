@@ -36,10 +36,10 @@ function formulaires_editer_article_identifier_dist($id_article='new', $id_rubri
 // http://doc.spip.org/@articles_edit_config
 function articles_edit_config($row)
 {
-	global $spip_ecran, $spip_lang;
+	global $spip_lang;
 
 	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
+	$config['lignes'] = 8;
 	$config['langue'] = $spip_lang;
 
 	$config['restreint'] = ($row['statut'] == 'publie');
