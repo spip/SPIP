@@ -581,12 +581,15 @@ function inc_csv_to_array_dist($u) {
 	array_unshift($csv,$entete);
 
 	include_spip('inc/charsets');
+	$i = 1 ;
 	foreach ($entete as $k => $v) {
+		if (trim($v) == "") $v = "col".$i ; // reperer des eventuelles cases vides
 		if (is_numeric($v) and $v < 0) $v = "__".$v; // ne pas risquer d'ecraser une cle numerique
 		if (is_numeric($v)) $v = "_".$v; // ne pas risquer d'ecraser une cle numerique		
 		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
 		foreach ($csv as &$item)
 			$item[$v] = &$item[$k];
+		$i++;	
 	}
 	return $csv;
 }
