@@ -332,7 +332,8 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
  echo "\n";
 
 if ($flag_editable AND $options == 'avancees') {
-  echo formulaire_mots('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable);
+  $f = charger_fonction('editer_mot', 'inc');
+  echo $f('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable);
 }
 echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 

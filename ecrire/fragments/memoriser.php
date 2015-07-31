@@ -15,36 +15,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@fragments_memoriser_dist
 function fragments_memoriser_dist()
 {
-	global $flag_ob;
+	global $flag_ob,$connect_id_auteur, $id_ajax_fonc;
 
 	if ($flag_ob) ob_start();
-	
-	ajax_page_sql();
 
-	if ($flag_ob) {
-			$a = ob_get_contents();
-			ob_end_clean();
-			return $a;
-	}
-}
+	$res = spip_fetch_array(spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur"));
 
-# Une fonction stockee en base de donnees 
-
-// http://doc.spip.org/@ajax_page_sql
-function ajax_page_sql()
-{
-	global $connect_id_auteur, $id_ajax_fonc;
-
-	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur");
-	if ($row = spip_fetch_array($res)) {
+	if ($res = unserialize($res["variables"])) {
 		
-		$variables = unserialize($row["variables"]);
-		while (list($i, $k) = each($variables)) {
-			$$i = $k;
-			
-		}
+		foreach($res as $i => $k) $$i = $k;
+
 		include_spip('inc/presentation');		
-		// Appliquer la fonction
+
 		if ($fonction == "afficher_articles") {
 			afficher_articles ($titre_table, $requete,
 				$afficher_visites, $afficher_auteurs);
@@ -54,6 +36,12 @@ function ajax_page_sql()
 			afficher_articles_trad ($titre_table, $requete,
 				$afficher_visites, $afficher_auteurs);
 		}
+	}
+
+	if ($flag_ob) {
+			$res = ob_get_contents();
+			ob_end_clean();
+			return $res;
 	}
 }
 ?>

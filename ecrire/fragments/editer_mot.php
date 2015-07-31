@@ -41,10 +41,9 @@ function fragments_editer_mot_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 
-	return formulaire_mots($objet, $id_objet, _request('cherche_mot'),
-			      _request('select_groupe'),
-			      'ajax'
-			      ); 
+	$ch = _request('cherche_mot');
+	$id_groupe = _request('select_groupe');
+	$f = charger_fonction('editer_mot', 'inc');
+	return $f($objet, $id_objet, $ch, $id_groupe, 'ajax'); 
 }
-
 ?>
