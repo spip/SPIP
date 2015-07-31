@@ -250,23 +250,29 @@ function applique_filtres($p) {
 	return $code;
 }
 
-function compose_filtres($p, $code)
-{
-  foreach($p->param as $filtre) {
-    $fonc = array_shift($filtre);
-    if ($fonc) {
-      $arglist = compose_filtres_args($p, $filtre, ($fonc == '?' ? ':' : ','));
-      if (function_exists($fonc))
-	$code = "$fonc($code$arglist)";
-      else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
-	$code = "($code $fonc " . substr($arglist,1) . ')';
-      else 
-	$code = "erreur_squelette('"
-	  . texte_script(_T('zbug_erreur_filtre', array('filtre' => $fonc)))
-	  ."','" . $p->id_boucle . "')";
-    }
-  }
-  return $code;
+function compose_filtres($p, $code) {
+	foreach($p->param as $filtre) {
+		$fonc = array_shift($filtre);
+		if ($fonc) {
+			$arglist = compose_filtres_args($p, $filtre,
+				($fonc == '?' ? ':' : ','));
+
+			// le filtre existe sous forme de fonction ou de methode
+			if (function_exists($fonc)
+				OR (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
+					AND is_callable(array($regs[1], $regs[2]))
+			))
+				$code = "$fonc($code$arglist)";
+			// est-ce un test ?
+			else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
+				$code = "($code $fonc " . substr($arglist,1) . ')';
+			else
+				$code = "erreur_squelette('"
+				.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
+				."','" . $p->id_boucle . "')";
+		}
+	}
+	return $code;
 }
 
 function compose_filtres_args($p, $args, $sep)
