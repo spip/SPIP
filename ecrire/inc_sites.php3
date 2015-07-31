@@ -321,7 +321,7 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
 		AND preg_match(',[[:space:]]type=[\'"]?([^\'"]*),i',
 		$enclosure, $enc_regs_type)) {
 
-			$url = urldecode($enc_regs_url[1]);
+			$url = addslashes(substr(urldecode($enc_regs_url[1]), 0,255));
 			$type = $enc_regs_type[1];
 
 			// Verifier que le content-type nous convient
@@ -563,10 +563,10 @@ function analyser_backend($rss) {
 function inserer_article_syndique ($data, $now_id_syndic, $statut) {
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
-	$le_lien = addslashes($data['url']);
+	$le_lien = addslashes(substr($data['url'], 0,255));
 	if (spip_num_rows(spip_query(
 		"SELECT * FROM spip_syndic_articles
-		WHERE url='".addslashes($data['url'])."'
+		WHERE url='$le_lien'
 		AND id_syndic=$now_id_syndic"
 	)) == 0 and !spip_sql_error()) {
 		spip_query("INSERT INTO spip_syndic_articles
