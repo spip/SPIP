@@ -21,7 +21,7 @@ function action_documenter_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d+)$,", $arg, $r))
+	if (!preg_match(",^(-?)(\d+)\W(\w+)(\W(\d+))?$,", $arg, $r))
 		spip_log("action_documenter $arg pas compris");
 	else action_documenter_post($r);
 }
@@ -55,7 +55,7 @@ function action_documenter_post($r)
 	// - id_document le doc a supprimer ou a delier de l'objet
 	//   SI VIDE, on supprime tous les documents du type SIGN
 	//   (bouton "supprimer tous les documents")
-	list(, $sign, $id, $type, $id_document) = $r;
+	list(, $sign, $id, $type, ,$id_document) = $r;
 
 	if ($id_document) {
 		supprimer_lien_document($id_document, $type, $id);
