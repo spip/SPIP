@@ -234,7 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Kadarnait ho sinadur mar-plij :',
 'form_pet_deja_enregistre' => 'Enrollet eo al lec\'hienn-ma&ntilde; c\'hoazh',
 'form_pet_deja_signe' => 'Sinet ho peus an destenn-se c\'hoazh.',
-'form_pet_envoi_mail_confirmation' => 'Ema&ntilde; ur postel-gwiria&ntilde; o paouez beza&ntilde; kaset deoc\'h. Ret e vo deoc\'h gweladenni&ntilde; ar chomlec\'h menneget er postel-se a-benn kadarnaat ho sinadur.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Ema&ntilde; ur postel-gwiria&ntilde; o paouez beza&ntilde; kaset deoc\'h. Ret e vo deoc\'h gweladenni&ntilde; ar chomlec\'h menneget er postel-se a-benn kadarnaat ho sinadur.',
 'form_pet_mail_confirmation' => 'Demat, 
 
 Goulennet ho peus sina&ntilde; ar sinadeg :

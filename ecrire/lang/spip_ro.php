@@ -236,7 +236,7 @@ site-ul "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'V&#259; rug&#259;m s&#259; confirma&#355;i semn&#259;tura dumneavoastr&#259; :',
 'form_pet_deja_enregistre' => 'Acest site este deja &icirc;nregistrat',
 'form_pet_deja_signe' => 'A&#355;i semnat deja acest text.',
-'form_pet_envoi_mail_confirmation' => 'Un email de confirmare tocmai v-a fost trimis. Pentru a valida semn&#259;tura dumneavoastr&#259;, va trebui s&#259; vizita&#355;i adresa de web men&#355;ionat&#259; in email.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Un email de confirmare tocmai v-a fost trimis. Pentru a valida semn&#259;tura dumneavoastr&#259;, va trebui s&#259; vizita&#355;i adresa de web men&#355;ionat&#259; in email.',
 'form_pet_mail_confirmation' => 'Bun&#259; ziua,
 
 A&#355;i cerut s&#259; semna&#355;i peti&#355;ia :

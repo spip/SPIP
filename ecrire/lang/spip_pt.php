@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Recompor esta p&aacute;gina',
 'afficher_trad' => '<NEW>afficher les traductions',
 'alerte_maj_impossible' => '<MODIF><b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base SQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.',
+'alerte_modif_info_concourante' => '<NEW>ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:',
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Cancelar',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
@@ -235,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Favor confirmar a sua assinatura:',
 'form_pet_deja_enregistre' => 'Este s&iacute;tio j&aacute; est&aacute; registado',
 'form_pet_deja_signe' => 'J&aacute; assinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Um correio electr&oacute;nico acabou de lhe ser enviado. Dever&aacute; visitar o endere&ccedil;o do s&iacute;tio Web mencionado neste correio para validar a sua assinatura',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Um correio electr&oacute;nico acabou de lhe ser enviado. Dever&aacute; visitar o endere&ccedil;o do s&iacute;tio Web mencionado neste correio para validar a sua assinatura',
 'form_pet_mail_confirmation' => '<MODIF>Bom dia, 
 
 Pediu para assinar o abaixo assinado :
@@ -474,6 +475,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_nouveau_message' => 'TEM UMA NOVA MENSAGEM',
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_numero_abbreviation' => '<N&deg;&nbsp;>',
+'info_obligatoire' => '<NEW>Cette information est obligatoire',
 'info_panne_site_syndique' => 'S&iacute;tio vinculado avariado',
 'info_pense_bete' => 'MEMORANDO',
 'info_petit_ecran' => 'Ecr&atilde; Pequeno',

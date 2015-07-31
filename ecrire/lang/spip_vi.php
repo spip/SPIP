@@ -234,7 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Xin x&aacute;c nh&#7853;n ch&#7919; k&yacute; c&#7911;a b&#7841;n:',
 'form_pet_deja_enregistre' => 'Website n&agrave;y &#273;&atilde; &#273;&#432;&#7907;c ghi danh',
 'form_pet_deja_signe' => 'B&#7841;n &#273;&atilde; k&yacute; v&#259;n b&#7843;n n&agrave;y.',
-'form_pet_envoi_mail_confirmation' => 'M&#7897;t email x&aacute;c nh&#7853;n &#273;&atilde; &#273;&#432;&#7907;c g&#7917;i cho b&#7841;n. B&#7841;n n&ecirc;n v&agrave;o &#273;&#7883;a ch&#7881; URL &#273;&#7873; c&#7853;p trong email &#273;&oacute; &#273;&#7875; x&aacute;c nh&#7853;n ch&#7919; k&yacute; c&#7911;a m&igrave;nh.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>M&#7897;t email x&aacute;c nh&#7853;n &#273;&atilde; &#273;&#432;&#7907;c g&#7917;i cho b&#7841;n. B&#7841;n n&ecirc;n v&agrave;o &#273;&#7883;a ch&#7881; URL &#273;&#7873; c&#7853;p trong email &#273;&oacute; &#273;&#7875; x&aacute;c nh&#7853;n ch&#7919; k&yacute; c&#7911;a m&igrave;nh.',
 'form_pet_mail_confirmation' => '<MODIF>Ch&agrave;o b&#7841;n,
 
 B&#7841;n y&ecirc;u c&#7847;u k&yacute; v&agrave;o th&#7881;nh nguy&#7879;n th&#432; @titre@.

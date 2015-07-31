@@ -228,7 +228,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Var god och bekr&auml;fta din underskrift:',
 'form_pet_deja_enregistre' => 'Den h&auml;r sajten &auml;r redan registrerad',
 'form_pet_deja_signe' => 'Du har redan skrivit under texten.',
-'form_pet_envoi_mail_confirmation' => 'Ett epost med en beg&auml;ran om bekr&auml;ftelse har precis skickats till dig. Du b&ouml;r bes&ouml;ka den URL som st&aring;r i brevet f&ouml;r att bekr&auml;fta din underskrift.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Ett epost med en beg&auml;ran om bekr&auml;ftelse har precis skickats till dig. Du b&ouml;r bes&ouml;ka den URL som st&aring;r i brevet f&ouml;r att bekr&auml;fta din underskrift.',
 'form_pet_mail_confirmation' => 'Hej,
 
 Du har beg&auml;rt att skriva under namninsamlingen:

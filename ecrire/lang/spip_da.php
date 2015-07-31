@@ -234,7 +234,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Bekr&aelig;ft venligst din signatur:',
 'form_pet_deja_enregistre' => 'Webstedet er allerede registreret',
 'form_pet_deja_signe' => 'Du har allerede signeret denne tekst.',
-'form_pet_envoi_mail_confirmation' => 'En e-mail er netop sendt til dig som bekr&aelig;ftelse. Du b&oslash;r g&aring; ind p&aring; den URL, som er angivet i denne mail, for at bekr&aelig;fte din signatur.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>En e-mail er netop sendt til dig som bekr&aelig;ftelse. Du b&oslash;r g&aring; ind p&aring; den URL, som er angivet i denne mail, for at bekr&aelig;fte din signatur.',
 'form_pet_mail_confirmation' => '<MODIF>Goddag,
 
 Du har &oslash;nsket at st&oslash;tte denne appel:

@@ -236,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Silakan konfirmasi tanda tangan anda:',
 'form_pet_deja_enregistre' => 'Situs ini telah terdaftar',
 'form_pet_deja_signe' => 'Anda telah menandatangani teks ini.',
-'form_pet_envoi_mail_confirmation' => 'Sebuah e-mail konfirmasi telah dikirimkan kepada anda. Anda harus mengunjungi URL yang tercantum dalam email ini untuk menvalidasi tanda tangan anda.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Sebuah e-mail konfirmasi telah dikirimkan kepada anda. Anda harus mengunjungi URL yang tercantum dalam email ini untuk menvalidasi tanda tangan anda.',
 'form_pet_mail_confirmation' => 'Halo,
 
 Anda telah menandatangani petisi:

@@ -234,7 +234,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erl&auml;utert die Details da
 'form_pet_confirmation' => 'Bitte best&auml;tigen Sie Ihre Unterschrift:',
 'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
 'form_pet_deja_signe' => 'Sie haben diesen Text bereits unterschrieben.',
-'form_pet_envoi_mail_confirmation' => 'Eine E-mail mit den Daten zum Best&auml;tigen wurde Ihnen zugeschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Eine E-mail mit den Daten zum Best&auml;tigen wurde Ihnen zugeschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
 'form_pet_mail_confirmation' => 'Hallo,
 
 Sie m&ouml;chten diese Petition unterzeichnen:

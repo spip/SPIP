@@ -235,7 +235,7 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'form_pet_confirmation' => 'Por favor, confirma a t&uacute;a sinatura:',
 'form_pet_deja_enregistre' => 'Este web xa foi rexistrado',
 'form_pet_deja_signe' => 'Xa asinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Envi&oacute;uselle un correo electr&oacute;nico de confirmaci&oacute;n. Ter&aacute; que visitar o enderezo web mencionado nel para validar a s&uacute;a sinatura.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Envi&oacute;uselle un correo electr&oacute;nico de confirmaci&oacute;n. Ter&aacute; que visitar o enderezo web mencionado nel para validar a s&uacute;a sinatura.',
 'form_pet_mail_confirmation' => 'Bos d&iacute;as,
 
 Pediu asinar a solicitude:

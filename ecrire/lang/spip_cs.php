@@ -229,7 +229,7 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'form_pet_confirmation' => 'Potvr&#271;te sv&#367;j podpis:',
 'form_pet_deja_enregistre' => 'Tento web je ji&#382; zaregistrov&aacute;n',
 'form_pet_deja_signe' => 'Tento text jste ji&#382; podepsali.',
-'form_pet_envoi_mail_confirmation' => 'Byla v&aacute;m zasl&aacute;na elektronick&aacute; zpr&aacute;va s potvrzen&iacute;m. Platnost podpisu ov&#283;&#345;&iacute;te na adrese URL, kter&aacute; je v t&eacute;to zpr&aacute;v&#283; uvedena.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Byla v&aacute;m zasl&aacute;na elektronick&aacute; zpr&aacute;va s potvrzen&iacute;m. Platnost podpisu ov&#283;&#345;&iacute;te na adrese URL, kter&aacute; je v t&eacute;to zpr&aacute;v&#283; uvedena.',
 'form_pet_mail_confirmation' => 'Dobr&yacute; den,
 
 Rozhodli jste se podepsat petici:

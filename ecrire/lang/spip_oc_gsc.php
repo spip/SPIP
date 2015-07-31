@@ -233,7 +233,7 @@ deu sit "@nom_site_spip@" (@adresse_site@):',
 'form_pet_confirmation' => 'Volhatz confirmar la v&ograve;sta signatura:',
 'form_pet_deja_enregistre' => 'Ja aqueth sit qu\'ei registrat',
 'form_pet_deja_signe' => 'Qu\'avetz ja signat aqueth t&egrave;xt.',
-'form_pet_envoi_mail_confirmation' => 'Ara que receberatz un e-mail de confirmacion. T&agrave; validar la v&ograve;sta signatura, que cau vesitar l\'adrei&ccedil;a web men&ccedil;onada per aqueste corri&egrave;r.',
+'form_pet_envoi_mail_confirmation' => '<MODIF>Ara que receberatz un e-mail de confirmacion. T&agrave; validar la v&ograve;sta signatura, que cau vesitar l\'adrei&ccedil;a web men&ccedil;onada per aqueste corri&egrave;r.',
 'form_pet_mail_confirmation' => '<MODIF>Adishatz,
 
 qu\'avetz demandat de signar la peticion:
