@@ -2315,8 +2315,12 @@ function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""
 	$title = " title=\"$alt\""; // est-ce pertinent de doubler le alt par un title ?
 
 	$ajax = "";
-	if (strpos($class,"ajax")!==false)
-		$ajax=" class='ajax'";
+	if (strpos($class,"ajax")!==false) {
+			$ajax="ajax";
+		if (strpos($class,"preload")!==false)
+			$ajax.=" preload";
+		$ajax=" class='$ajax'";
+	}
 
 	$size = 24;
 	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))

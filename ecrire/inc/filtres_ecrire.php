@@ -134,4 +134,17 @@ function avoir_visiteurs($past=false, $accepter=true) {
 	return sql_countsel('spip_auteurs',  "statut NOT IN ('0minirezo','1comite', 'nouveau', '5poubelle')");
 }
 
+/**
+ * lister les status d'article visibles dans l'espace prive
+ * en fonction du statut de l'auteur
+ * 
+ * @param string $statut_auteur
+ * @return array
+ */
+function statuts_articles_visibles($statut_auteur){
+	if ($statut_auteur == "0minirezo")
+		return array('prepa','prop','publie','refuse');
+	else
+		return array('prop','publie');
+}
 ?>
