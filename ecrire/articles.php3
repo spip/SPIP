@@ -16,7 +16,8 @@ $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
 
 if ($id_article==0 AND $new=='oui') {
-	spip_query("INSERT INTO spip_articles (id_rubrique, statut, date) VALUES ($id_rubrique, 'prepa', NOW())");
+	$forums_publics = substr(lire_meta('forums_publics'),0,3);
+	spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics')");
 	$id_article = mysql_insert_id();
 	spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
