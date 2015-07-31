@@ -22,6 +22,6 @@ le suffixe '.html' aux adresses ;
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '.html');
 
-include_ecrire('urls/propres');
+include_spip('urls/propres');
 
 ?>

@@ -31,6 +31,6 @@ if (!defined('_terminaison_urls_propres'))
 
 define ('_debut_urls_propres', './?');
 
-include_ecrire('urls/propres');
+include_spip('urls/propres');
 
 ?>
