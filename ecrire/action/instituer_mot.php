@@ -21,8 +21,8 @@ function action_instituer_mot_dist()
 {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	if (!preg_match(",^(\d+)$,", $arg, $r)) {
-		 spip_log("action_instituer_mot_dist $arg pas compris");
+	if (!preg_match(",^(\d+)(\W(\d+)\W(\w+)\W(\w+))?$,", $arg, $r)) {
+		 spip_log("action_instituer_mot_dist '$arg' pas compris");
 	} else action_instituer_mot_post($r);
 }
 
@@ -30,24 +30,24 @@ function action_instituer_mot_dist()
 function action_instituer_mot_post($r)
 {
 	$id_mot = $r[1];
-	global $new, $table, $table_id, $ajouter_id_article;
-
 	$id_groupe = intval(_request('id_groupe'));
 
-	if ($new == 'oui') {
+	if (!$id_mot AND $id_groupe) {
 		$id_mot = spip_abstract_insert("spip_mots",
 			'(id_groupe)', "($id_groupe)");
 
-		if ($ajouter_id_article = intval($ajouter_id_article))
-		// heureusement que c'est pour les admin complet,
-		// sinon bonjour le XSS
+		if ($r[2]) {
+			list(,,,$ajouter_id_article, $table, $table_id) = $r;
 			ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $ajouter_id_article);
-
+		}
 	}
 
 	// modifier le contenu via l'API
 	include_spip('inc/modifier');
 	revision_mot($id_mot);
+	if ($redirect = _request('redirect'))
+		redirige_par_entete(parametre_url(urldecode($redirect),
+						  'id_mot', $id_mot, '&'));
 
 }
 

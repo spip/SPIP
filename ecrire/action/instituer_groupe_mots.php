@@ -21,7 +21,9 @@ function action_instituer_groupe_mots_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?\d+)$,", $arg, $r)) {
+	if (preg_match(",^(\w+)$,", $arg, $r)) 
+	  action_instituer_groupe_mots_get($arg);
+	elseif (!preg_match(",^(-?\d+)$,", $arg, $r)) {
 		 spip_log("action_instituer_groupe_mots_dist $arg pas compris");
 	} else action_instituer_groupe_mots_post($r);
 }
@@ -51,4 +53,16 @@ function action_instituer_groupe_mots_post($r)
 		}
 	}
 }
+
+
+function action_instituer_groupe_mots_get($table)
+{
+	$titre = _T('info_mot_sans_groupe');
+
+	$id_groupe = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
+
+        redirige_par_entete(parametre_url(urldecode(_request('redirect')),
+					  'id_groupe', $id_groupe, '&'));
+}
+
 ?>

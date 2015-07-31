@@ -38,12 +38,14 @@ global
 
  $id_groupe = intval($id_groupe);
  $id_mot = intval($id_mot);
-
+ // Secu un peu superfetatoire car seuls les admin generaux les verront;
+ // mais si un jour on relache les droits, vaut mieux blinder.
+ $table = preg_replace('/\W/','',$table);
+ $table_id = preg_replace('/\W/','',$table_id);
+ $ajouter_id_article = intval($ajouter_id_article);
 //
 // Recupere les donnees
 //
-	$out = "";
-
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$id_mot"));
 	 if ($row) {
 		$id_mot = $row['id_mot'];
@@ -52,14 +54,38 @@ global
 		$texte = $row['texte'];
 		$extra = $row['extra'];
 		$id_groupe = $row['id_groupe'];
-	 } else $id_mot = 0;
- 
+		$onfocus ='';
+	 } else {
+		if (!$new OR !acces_mots()) {
+			echo minipres(_T('info_mot_sans_groupe'));
+			exit;
+		}
+		$id_mot = 0;
+
+		if (!$titre_mot = $titre) {
+			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
+			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		}
+		$res = spip_num_rows(spip_query("SELECT id_groupe FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " LIMIT 1"));
+
+		if (!$res) {
+		  // cas pathologique: 
+		  // creation d'un mot sans groupe de mots cree auparavant
+		  // (ne devrait arriver qu'en cas d'appel explicite ou
+		  // destruction concomittante des groupes de mots idoines)
+			if ($redirect)
+				$redirect = '&redirect=' . $redirect;
+			if ($titre)
+				$titre = "&titre=".rawurlencode($titre);
+			include_spip('inc/headers');
+			redirige_par_entete(redirige_action_auteur('instituer_groupe_mots', $table, 'mots_edit', "new=$new&table=$table&table_id=$table_id&ajouter_id_article=$ajouter_id_article$titre$redirect", true));
+		}
+	 }
+
 	 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
 	 $commencer_page = charger_fonction('commencer_page', 'inc');
-	 $out .= $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
-	 
-	 $out .= debut_gauche('',true);
+	 $out = $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots") . debut_gauche('',true);
 
 
 //////////////////////////////////////////////////////
@@ -67,36 +93,23 @@ global
 //
 
 	 if ($id_mot) {
-		$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
+
+		$out .= debut_boite_info(true);
+		$out .= "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 		.  _T('titre_gauche_mots_edit')
 		.  "<br /><span class='spip_xx-large'>"
 		.  $id_mot
 		.  '</span></div>';
-
-		$out .= debut_boite_info(true);
-		$out .= $res;
 		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false);
 		$out .= fin_boite_info(true);
-		$onfocus ='';
 
-	 } elseif (!$new OR !acces_mots()) {
-		$out .= _T('info_mot_sans_groupe');
-		exit;
-	 } else {
-		if (!$titre_mot = $titre) {
-			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
-			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		// Logos du mot-clef
+
+		if (acces_mots() AND ($spip_display != 4)) {
+			$iconifier = charger_fonction('iconifier', 'inc');
+			$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
 		}
 	 }
-
-//////////////////////////////////////////////////////
-// Logos du mot-clef
-//
-
-	if ($id_mot > 0 AND acces_mots() AND ($spip_display != 4)) {
-		$iconifier = charger_fonction('iconifier', 'inc');
-		$out .= $iconifier('id_mot', $id_mot, 'mots_edit');
-	}
 
 //
 // Afficher les boutons de creation 
@@ -128,7 +141,6 @@ global
 	$out .= "<tr>";
 	$out .= "<td style='width: 100%' valign='top'>";
 	$out .= gros_titre($titre_mot,'',false);
-
 
 	if ($descriptif) {
 		$out .= "<div style='border: 1px dashed #aaaaaa; ' class='verdana1 spip_small'>";
@@ -182,12 +194,6 @@ global
 
 		$res = "<div class='serif'>";
 
-		if ($new=='oui')
-			$res .= "<input type='hidden' name='new' value='oui' />\n";
-		$res .= "<input type='hidden' name='table' value='$table' />\n";
-		$res .= "<input type='hidden' name='table_id' value='$table_id' />\n";
-		$res .= "<input type='hidden' name='ajouter_id_article' value=\"$ajouter_id_article\" />\n";
-		
 		$titre_mot = entites_html($titre_mot);
 		$descriptif = entites_html($descriptif);
 		$texte = entites_html($texte);
@@ -232,7 +238,9 @@ global
 			$redirect = generer_url_ecrire('mots_edit','id_mot='.$id_mot, '&',true);
 		else
 			$redirect = rawurldecode($redirect);
-		$out .= generer_action_auteur("instituer_mot", $id_mot, _DIR_RESTREINT_ABS . $redirect, $res);
+		$arg = "$id_mot,$ajouter_id_article,$table,$table_id";
+
+		$out .= generer_action_auteur("instituer_mot", $arg, _DIR_RESTREINT_ABS . $redirect, $res);
 
 		$out .= fin_cadre_formulaire(true);
 	}
@@ -256,15 +264,10 @@ function determine_groupe_mots($table, $id_groupe) {
 		}			
 		$res .=  "</select>";
 	} else {
+	  // pas de menu si un seul groupe 
+	  // (et on est sur qu'il y en a un grace au redirect preventif)
 		$row = spip_fetch_array($q);
-		if (!$row) {
-		// il faut creer un groupe de mots
-		// (cas d'un mot cree depuis le script articles)
-
-			$titre = _T('info_mot_sans_groupe');
-		  	$row['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($titre) . ", 'non',  'non', '" . (($table=='articles') ? 'oui' : 'non') ."', '" . (($table=='breves') ? 'oui' : 'non') ."','" . (($table=='rubriques') ? 'oui' : 'non') ."','" . (($table=='syndic') ? 'oui' : 'non') ."', 'oui', 'non', 'non'" . ")");
-		} else $titre = $row['titre'];
-		$res = $titre
+		$res = $row['titre']
 		. "<br /><input type='hidden' name='id_groupe' value='".$row['id_groupe']."' />";
 	}
 
