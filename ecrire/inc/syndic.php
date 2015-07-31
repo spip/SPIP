@@ -181,11 +181,11 @@ function analyser_backend($rss, $url_syndic='') {
 		// Description
 		if (preg_match(',<(description|summary)\b.*'
 		.'>(.*)</\1\b,Uims',$item,$match)) {
-			$data['descriptif'] = trim($match[2]);
+			$data['descriptif'] = trim_more($match[2]);
 		}
 		if (preg_match(',<(content)\b.*'
 		.'>(.*)</\1\b,Uims',$item,$match)) {
-			$data['content'] = trim($match[2]);
+			$data['content'] = trim_more($match[2]);
 		}
 
 		// lang
@@ -274,6 +274,16 @@ function analyser_backend($rss, $url_syndic='') {
 	}
 
 	return $articles;
+}
+
+/**
+ * Trim rss content that can have unbreakable space at begining
+ * or ending
+ */
+function trim_more($texte){
+	$texte = preg_replace(",^(\s|&nbsp;)+,ms","",$texte);
+	$texte = preg_replace(",(\s|&nbsp;)$,ms","",$texte);
+	return  $texte;
 }
 
 
