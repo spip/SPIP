@@ -313,10 +313,18 @@ function jeune_fichier($fichier, $n)
 	return (time()-$n <= $c);
 }
 
-//
-// Supprimer le fichier de maniere sympa (flock)
-//
-// http://doc.spip.org/@supprimer_fichier
+/**
+ * Supprimer un fichier de manière sympa (flock)
+ *
+ * @param string $fichier
+ *     Chemin du fichier
+ * @param bool $lock
+ *     true pour utiliser un verrou
+ * @return bool|void
+ *     - true si le fichier n'existe pas
+ *     - false si on n'arrive pas poser le verrou
+ *     - void sinon
+ */
 function supprimer_fichier($fichier, $lock=true) {
 	if (!@file_exists($fichier))
 		return true;
