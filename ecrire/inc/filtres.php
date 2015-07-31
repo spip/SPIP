@@ -79,7 +79,7 @@ function image_filtrer($args){
 	$texte = array_shift($args);
 	if (!$texte) return;
 	// Cas du nom de fichier local
-	if (preg_match(',^'._DIR_IMG.',', $texte)) {
+	if (preg_match(',^('._DIR_IMG . '|'. _DIR_IMG_PACK .'),', $texte)) {
 		if (!@file_exists($texte)) {
 			spip_log("Image absente : $texte");
 			return '';
@@ -1367,13 +1367,6 @@ function calcul_bornes_pagination($max, $nombre, $courante) {
 	return array($premiere, $derniere);
 }
 
-function pagination_item($num, $txt, $pattern, $lien_base, $debut, $ancre) {
-	$url = parametre_url($lien_base, $debut, $num);
-	return str_replace('@url@', $url.'#'.$ancre,
-		str_replace('@item@', $txt,
-		$pattern));
-}
-
 //
 // fonction standard de calcul de la balise #PAGINATION
 // on peut la surcharger en definissant dans mes_fonctions :
@@ -1382,7 +1375,7 @@ function pagination_item($num, $txt, $pattern, $lien_base, $debut, $ancre) {
 
 define('PAGINATION_MAX', 10);
 
-function calcul_pagination($total, $nom, $pas, $liste = true) {
+function calcul_pagination($total, $nom, $pas, $liste = true, $modele='dist') {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
@@ -1394,23 +1387,27 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	$separateur = '&nbsp;| ';
 
 	$debut = 'debut'.$nom;
-
-	$pagination = array(
-		'lien_base' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
-		'total' => $total,
-		'position' => intval(_request($debut)),
-		'pas' => $pas,
-		'nombre_pages' => floor(($total-1)/$pas)+1,
-		'page_courante' => floor(intval(_request($debut))/$pas)+1,
-		'lien_pagination' => '<a href="@url@" class="lien_pagination">@item@</a>',
-		'lien_item_courant' => '<span class="on">@item@</span>'
-	);
-
 	$ancre='pagination'.$nom;
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
 		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+		
+	$nombre_pages = floor(($total-1)/$pas)+1;
+
+	$pagination = array(
+		'debut' => 'debut'.$nom,
+		'url' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
+		'total' => $total,
+		'position' => intval(_request($debut)),
+		'pas' => $pas,
+		'nombre_pages' => $nombre_pages,
+		'page_courante' => floor(intval(_request($debut))/$pas)+1,
+		'lien_pagination' => '<a href="@url@" class="lien_pagination">@item@</a>',
+		'lien_item_courant' => '<span class="on">@item@</span>',
+		'ancre' => $ancre,
+		'bloc_ancre' => $bloc_ancre
+	);
 
 	// Pas de pagination
 	if ($pagination['nombre_pages']<=1)
@@ -1426,44 +1423,13 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 		PAGINATION_MAX,
 		$pagination['nombre_pages'],
 		$pagination['page_courante']);
-
-	$texte = '';
-
-	if ($premiere > 2)
-		$texte .= pagination_item('',
-			'...',
-			$pagination[
-				($i != $pagination['page_courante']) ?
-				'lien_pagination' : 'lien_item_courant'
-			],
-			$pagination['lien_base'], $debut, $ancre)
-			. $separateur;
-
+		
 	if ($premiere == 2) $premiere = 1; # '...' inutile quand on peut mettre 0
-
-	for ($i = $premiere; $i<=$derniere; $i++) {
-		$num = strval(($i-1)*$pas);
-		$texte .= pagination_item($num,
-			$num,
-			$pagination[
-				($i != $pagination['page_courante']) ?
-				'lien_pagination' : 'lien_item_courant'
-			],
-			$pagination['lien_base'], $debut, $ancre);
-		if ($i<$derniere) $texte .= $separateur;
-	}
-
-	if ($derniere < $pagination['nombre_pages'])
-		$texte .= $separateur.
-		pagination_item(strval(($pagination['nombre_pages']-1)*$pas),
-			'...',
-			$pagination[
-				($i != $pagination['page_courante']) ?
-				'lien_pagination' : 'lien_item_courant'
-			],
-			$pagination['lien_base'], $debut, $ancre);
-
-	return $bloc_ancre.$texte;
+	
+	$pagination['premiere'] = $premiere;
+	$pagination['derniere'] = $derniere;
+	
+	return recuperer_fond("modeles/pagination_$modele",$pagination);
 }
 
 // recuperere le chemin d'une css existante et :

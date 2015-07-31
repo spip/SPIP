@@ -9,6 +9,8 @@ dist/inc-head.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
+dist/modeles/pagination_dist.html -text
+dist/modeles/pagination_page.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text

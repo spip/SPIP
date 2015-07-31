@@ -593,6 +593,14 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		$p->code = "''";
 		return $p;
 	}
+	$__modele = "";
+	if ($p->param && !$p->param[0][0]) {
+		$__modele = ",". calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+	}
+	
 
 	$p->boucles[$b]->numrows = true;
 
@@ -601,7 +609,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), '$b', "
 	. $p->boucles[$b]->total_parties
-	. ", $liste)";
+	. ", $liste $__modele)";
 
 	$p->interdire_scripts = false;
 	return $p;
