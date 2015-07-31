@@ -125,16 +125,16 @@ function retire_caches($chemin = '') {
 // > 0 s'il faut calculer la page et le mette en cache pendant N secondes
 //
 
-function cache_valide($chemin_cache) {
+function cache_valide($chemin_cache, $contenu, $date) {
 	global $delais;
 
 	if (!isset($delais)) $delais = 3600;
 
 	if (!$delais) return -1;
 
-	if (!file_exists($chemin_cache)) return $delais;
+	if (!$contenu) return $delais;
 
-	if ((time() - @filemtime($chemin_cache)) > $delais) return $delais;
+	if ((time() - $date) > $delais) return $delais;
 
 	return 0;
 }
@@ -153,7 +153,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$use_cache = -1;
-		return "";
+		return array('','',0);
 	}
 	
 	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
@@ -161,7 +161,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	// cas sans jamais de calcul pour raison interne
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
-		return $chemin_cache;
+		return array($chemin_cache, @filemtime($chemin_cache), 0);
 	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
@@ -179,9 +179,12 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	    supprimer_fichier($chemin_cache);
 	}
 
-	$use_cache = cache_valide($chemin_cache);
+	$ok = lire_fichier($chemin_cache, $page);
+	$time = @filemtime($chemin_cache);
+	$page = restaurer_meta_donnees ($page);
+	$use_cache = cache_valide($chemin_cache, $page, $time);
 
-	if (!$use_cache) return $chemin_cache;
+	if (!$use_cache AND $ok) return array($chemin_cache, $page, $time);
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 
@@ -195,7 +198,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 		}
 	}
 
-	return ($use_cache < 0) ? "" : $chemin_cache;
+	return array((($use_cache < 0) ? "" : $chemin_cache), $page, $time);
 }
 
 // Passage par reference juste par souci d'economie
@@ -229,6 +232,23 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 		spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('$fichier','$bedtime','t','$taille')");
 	}
 }
+
+function restaurer_meta_donnees ($contenu) {
+
+	if (preg_match("/^<!-- ([^\n]*) -->\n/ms", $contenu, $match)) {
+		$meta_donnees = unserialize($match[1]);
+		if (is_array($meta_donnees)) {
+			foreach ($meta_donnees as $var=>$val) {
+				$page[$var] = $val;
+			}
+		}
+
+	}
+
+	$page['texte'] = substr($contenu, strlen($match[0]));
+	return $page;
+}
+
 
 // purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
 // vieux fichiers
