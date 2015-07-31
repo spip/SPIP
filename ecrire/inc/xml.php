@@ -61,7 +61,6 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 		if(substr($tag,-1)=='/'){ // self closing tag
 			$tag = substr($tag,0,strlen($tag)-1);
 			$out[$tag][]="";
-			$txt = trim($txt);
 		}
 		else{
 			// tag fermant
@@ -74,15 +73,15 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 				else return $texte; // un tag qui constitue du texte a reporter dans $before
 			}
 			$content = $chars[0];
-			$txt = trim($chars[2]);
+			$txt = $chars[2]; //trim($chars[2]);
 			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
 				$out[$tag][] = $content;
 			else
 				$out[$tag][]=spip_xml_parse($content, $strict, false);
 		}
-		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split("{<([^>]*?)>}ms",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	}
-	if (count($out)&&(strlen($txt)==0))
+	if (count($out)&&(strlen(trim($txt))==0))
 		return $out;
 	else
 		return $texte;
