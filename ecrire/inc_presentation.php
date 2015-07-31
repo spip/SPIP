@@ -757,7 +757,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 	$tmp_var = substr(md5($jjscript), 0, 4);
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page.php","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::") . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::") . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -1829,7 +1829,7 @@ function debut_javascript($admin, $stat)
 	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire("ajax_page.php","fonction=test") .
+	a.open('GET', '" . generer_url_ecrire("ajax_page","fonction=test") .
 		  "', true) ;
 	a.send(null);
 }";
@@ -1946,7 +1946,7 @@ function barre_onglets($rubrique, $onglet){
 
 	if ($rubrique == "stat_depuis") {
 	  onglet(_T('icone_repartition_actuelle'), generer_url_ecrire("statistiques_repartition"), "popularite", $onglet);
-	  onglet(_T('onglet_repartition_debut'), generer_url_ecrire("statistiques_repartition.php", "critere=debut"), "debut", $onglet);
+	  onglet(_T('onglet_repartition_debut'), generer_url_ecrire("statistiques_repartition", "critere=debut"), "debut", $onglet);
 
 	}
 
@@ -2241,7 +2241,7 @@ function afficher_menu_rubriques() {
 	global $spip_lang_rtl, $spip_ecran;
 	$date_maj = $GLOBALS['meta']["date_calcul_rubriques"];
 
-	echo http_script('',generer_url_ecrire("js_menu_rubriques.php","date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl"),'');
+	echo http_script('',generer_url_ecrire("js_menu_rubriques","date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl"),'');
 }
 
 
@@ -2489,7 +2489,7 @@ else {
 		echo "<div class='$class' id='bandeausuivi' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 		if ($connect_toutes_rubriques) bandeau_barre_verticale();
 
-		icone_bandeau_secondaire (_T('icone_repartition_visites'), generer_url_ecrire("statistiques_repartition.php"), "rubrique-24.gif", "repartition", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_repartition_visites'), generer_url_ecrire("statistiques_repartition"), "rubrique-24.gif", "repartition", $sous_rubrique);
 		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
 			icone_bandeau_secondaire (_T('onglet_repartition_lang'), generer_url_ecrire("statistiques_lang"), "langues-24.gif", "repartition-langues", $sous_rubrique);
 		icone_bandeau_secondaire (_T('titre_liens_entrants'), generer_url_ecrire("statistiques_referers"), "referers-24.gif", "referers", $sous_rubrique);

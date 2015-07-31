@@ -42,7 +42,7 @@ function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$nom = preg_replace("/\.php[3]?$/",'', basename($nom));
-	$inc = ('inc_' . $nom);
+	$inc = ("exec_" . $nom);
 #	spip_log("if $inc");
 	$f = find_in_path($inc  . '.php');
 	if ($f && is_readable($f)) {
@@ -52,11 +52,10 @@ function include_fonction($nom) {
 		if (is_readable($f)) {
 			if (!$GLOBALS['included_files'][$f]++) include($f);
 		} else {
-		  if (!$f = include_rustine($inc)) # provisoire php/php3
 		    $inc = "";
 		}
 	}
-	$f = str_replace('-','_',$nom); // pour config-fonc etc. A renommer
+	$f = $nom;
 	if (function_exists($f))
 		return $f;
 	elseif (function_exists($f .= "_dist"))
@@ -696,10 +695,10 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	else
 		$ecrire = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
-	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? "?" : "");
+	$args = "?exec=$script" . ($args ? "&$args" : "");
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 
-	return "$ecrire$script$ext$args";
+	return "$ecrire$args";
 }
 
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)

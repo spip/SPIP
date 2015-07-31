@@ -399,11 +399,11 @@ $spip_lang = $langue_site;
 // Installer Spip si pas installe... sauf si justement on est en train
 //
 if (!(_FILE_CONNECT
-OR autoriser_sans_cookie($SCRIPT_NAME)
+OR autoriser_sans_cookie($_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie")
 OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
 
 	// Si on peut installer, on lance illico
-	if (@file_exists('inc_version.php3'))
+	if (@file_exists('inc_version.php'))
 		redirige_par_entete(generer_url_ecrire("install"));
 	else if (defined("_INC_PUBLIC")) {
 	// Si on est dans le site public, dire que qq s'en occupe
