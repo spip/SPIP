@@ -647,7 +647,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 		  }
 		}
 		if (($boucle->type_requete == 'documents') && $boucle->doublons)
-			{ $descr['documents'] = true; break; }
+			{ $descr['documents'] = true;  }
 	}
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
