@@ -75,6 +75,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'bouton_envoyer_message' => 'V&eacute;gleges &uuml;zenet: k&uuml;ld&eacute;s',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Oacute;RUM &Eacute;S AL&Aacute;&Iacute;R&Aacute;SGY&#368;JT&Eacute;S (Petici&oacute;)',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'M&oacute;dos&iacute;t&aacute;s',
 'bouton_pense_bete' => 'EML&Eacute;KEZTET&#336; SZEM&Eacute;LYES HASZN&Aacute;LATHOZ',
 'bouton_radio_activer_messagerie' => 'A bels&#337; &uuml;zenetek aktiv&aacute;l&aacute;sa',

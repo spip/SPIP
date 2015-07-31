@@ -75,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Mesaj se bon : voye',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOWOM &amp; PETISYON',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Chanje',
 'bouton_pense_bete' => 'RAPLE-W POU W MEM',
 'bouton_radio_activer_messagerie' => 'M&egrave;t kazmod&eacute;kri',

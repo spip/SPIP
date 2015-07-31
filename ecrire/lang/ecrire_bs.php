@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Definitivna poruka: posalji',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'PETICIJA & FORUM', # MODIF
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Izmijeni',
 'bouton_pense_bete' => 'LICNA BILJESKA',
 'bouton_radio_activer_messagerie' => 'Aktiviraj interni servis poruka',

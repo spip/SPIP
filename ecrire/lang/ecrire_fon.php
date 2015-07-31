@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'w&#603;n gudogudot&#596;n : s&#603;do',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'Pk&eacute;pkl&eacute; kpodo xojla kpo',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => '&#598;y&#596;',
 'bouton_pense_bete' => 'Lin tam&#603; &#598;o zizan wh&#603; d&eacute; su t&#596;n wu ',
 'bouton_radio_activer_messagerie' => 'Mi ta w&#603;nwiwlan ',

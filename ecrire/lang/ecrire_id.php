@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Pesan terakhir: kirim',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; PETISI',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Modifikasi',
 'bouton_pense_bete' => 'MEMO PRIBADI',
 'bouton_radio_activer_messagerie' => 'Aktifkan sistem pesan intern',

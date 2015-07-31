@@ -73,6 +73,7 @@ Ez balidatu inportazio galdera hau.
 'bouton_envoyer_message' => 'Behin-betiko mezua: igorri',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'Foroa eta eskaera',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Aldatu',
 'bouton_pense_bete' => 'OROIGARRI PERTSONALA',
 'bouton_radio_activer_messagerie' => 'Barne mezularitza aktibatu',

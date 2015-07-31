@@ -74,6 +74,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'bouton_envoyer_message' => 'F&auml;rdigt meddelande: skicka',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; NAMNINSAMLINGAR',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => '&Auml;ndra',
 'bouton_pense_bete' => 'PERSONLIG MINNESANTECKNING',
 'bouton_radio_activer_messagerie' => 'M&ouml;jligg&ouml;r interna meddlanden',

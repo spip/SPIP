@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => '&#26368;&#21518;&#28040;&#24687;:&#21457;&#36865;',
 'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => '&#35770;&#22363;&#21644;&#35831;&#27714;', # MODIF
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => '&#20462;&#25913;',
 'bouton_pense_bete' => '&#20010;&#20154;&#22791;&#27880;',
 'bouton_radio_activer_messagerie' => '&#28608;&#27963;&#20869;&#37096;&#28040;&#24687;',

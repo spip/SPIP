@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_envoyer_message' => 'Mensaxe definitivu: unviar',
 'bouton_fermer' => 'Zarrar',
 'bouton_forum_petition' => 'FORU &amp; SOLICIT&Uacute;',
+'bouton_mettre_a_jour_base' => 'Mettre &agrave; jour la base de donn&eacute;es', # NEW
 'bouton_modifier' => 'Camudar',
 'bouton_pense_bete' => 'RECORDATORIU PERSONAL',
 'bouton_radio_activer_messagerie' => 'Activar la mensaxeria interna',
