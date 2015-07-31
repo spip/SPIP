@@ -72,7 +72,7 @@ function exec_mots_tous_dist()
 		$texte = $row_groupes['texte'];
 		$unseul = $row_groupes['unseul'];
 		$obligatoire = $row_groupes['obligatoire'];
-		$tables = $row_groupes['tables'];
+		$tables_liees = $row_groupes['tables_liees'];
 		$acces_minirezo = $row_groupes['minirezo'];
 		$acces_comite = $row_groupes['comite'];
 		$acces_forum = $row_groupes['forum'];
@@ -83,10 +83,10 @@ function exec_mots_tous_dist()
 		echo debut_cadre_enfonce("groupe-mot-24.gif", true, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
 		$res = '';
-		$tables = explode(',',$tables);
+		$tables_liees = explode(',',$tables_liees);
 		
 		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
-		foreach($tables as $table)
+		foreach($tables_liees as $table)
 			$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"info_$table") . " &nbsp;&nbsp;";
 
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
