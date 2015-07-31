@@ -304,9 +304,8 @@ dau sit "@nom_site_spip@" (@adresse_site@):',
 	'info_erreur_requete' => 'Error dins la requista',
 	'info_erreur_squelette2' => 'Ges d’esqueleta <b>@fichier@</b> es disponibla...',
 	'info_erreur_systeme' => 'Error sistèma (errno @errsys@)',
-	'info_erreur_systeme2' => 'Lo disc dur es benlèu plen, o la basa de donadas degalhada. <br />
- <font color=’red’>Assajatz de <a href=’@script@’>reparar la basa</a>,
- o contactatz vòstre aubergador.</font>',
+	'info_erreur_systeme2' => 'Lo disc dur es benlèu plen, o la basa de donadas degalhada.<br />
+<span style="color:red;">Assajatz de <a href=\'@script@\'>reparar la basa</a>, o contactatz vòstre aubergador.</span>',
 	'info_fini' => 'Es acabat!',
 	'info_format_image' => 'Formats d’imatges que se pòdon utilizar per crear de vinhetas: @gd_formats@.',
 	'info_format_non_defini' => 'format non definit',

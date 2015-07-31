@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aide_non_disponible' => '这部分在线帮助尚无中文版本.',
-	'auteur' => 'Auteur :', # 作者 MODIF
 	'avis_acces_interdit' => '限制访问.',
 	'avis_article_modifie' => '警告, @nom_auteur_modif@在@date_diff@分钟前修改过此文',
 	'avis_aucun_resultat' => '没有结果.',
@@ -367,7 +366,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   不生效.', # MODIF
 	'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
  (使它不可用能加速系统的性能.)',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => '站点根',
 	'info_recharger_page' => '请重新载入该页.',
 	'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',
@@ -682,7 +680,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   不可用.',
 	'texte_trop_resultats_auteurs' => '搜索到 "@cherche_auteur@"太多结果; 请重新定义搜索.',
 	'texte_unpack' => '正下载最新版本',
-	'texte_utilisation_moteur_syndiques' => '当你使用集成到SPIP的搜索引擎, 你可以执行搜索携带站点和不同方式联合的文章. <br /><img src=’puce.gif’>最简单的是只搜索文章的标题和描述. <br /><img src=’puce.gif’> 第二种方法, 更强有力, 允许SPIP搜索参考站点的文本. 如果你引用了站点, SPIP 将执行搜索站点的文本.', # MODIF
+	'texte_utilisation_moteur_syndiques' => '当你使用集成到SPIP的搜索引擎, 你可以执行搜索携带站点和不同方式联合的文章. <br /><img src=\'puce.gif\'>最简单的是只搜索文章的标题和描述. <br /><img src=\'puce.gif\'> 第二种方法, 更强有力, 允许SPIP搜索参考站点的文本. 如果你引用了站点, SPIP 将执行搜索站点的文本.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => '该方法强制 SPIP 定期访问参考站点,这将使你自己的站点性能降低.',
 	'texte_vide' => '清空',
 	'texte_vider_cache' => '清空缓存',

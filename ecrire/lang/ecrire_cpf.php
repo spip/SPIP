@@ -243,7 +243,7 @@ inn liv-zimaz (sédir inn galri).',
 	'info_classement_1' => '<sup>yé</sup> si @liste@',
 	'info_classement_2' => '<sup>èm</sup> si @liste@',
 	'info_code_acces' => 'Oubliy pa out prop bann kod-laksé !',
-	'info_config_suivi' => 'Si ladrès-la lé inn ladrès po inlistmèl, ou pé présiz anba tèrla kosa i lé ladrès out bann vizitèr i pé inskri azot. Ladrès-la i pé èt in sinp URL (lapaz pou linskrisyon si lo sit-minm), o in ladrès imèl, po un sizé pli spésifik(égsanp : <tt>@ladrès_swivi@ ?subject=subscribe</tt>) :',
+	'info_config_suivi' => 'Si ladrès-la lé inn ladrès po inlistmèl, ou pé présiz anba tèrla kosa i lé ladrès out bann vizitèr i pé inskri azot. Ladrès-la i pé èt in sinp URL (lapaz pou linskrisyon si lo sit-minm), o in ladrès imèl, po un sizé pli spésifik(égsanp : <tt>@adresse_suivi@?subject=subscribe</tt>) :',
 	'info_config_suivi_explication' => 'Ou pé abonn aou po gigny lo listmèl  lo sit-. Ou sar gigny in limèl pou tout bann zanons èk bann tite-nouvèl sat ni propoz po lapiblikasyon  si lo sit.',
 	'info_confirmer_passe' => 'Konfirm out nouvo modpass-la :',
 	'info_connexion_base' => 'Dezièm étap : <b>Esèy lakostaz-labaz</b>',
@@ -703,7 +703,7 @@ Si lo larlik-la i rest touzour, ifo koz do sa èk out léberzèr.<p>', # MODIF
 Mé vèy byin, lopsyon-la, li lé pa aktivé otomatikman pou anpès lafisaz inn lavizman abizif.',
 	'texte_trop_resultats_auteurs' => 'Néna trod rézilta pou "@cherche_auteur@" ; mersi kadr myé lo rodaz.',
 	'texte_unpack' => 'télézarzman dla dernyèr versyon',
-	'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rodèr SPIP, ou pé fèr bann rodaz sir tout bann sit èk out bann zartik sindiké. Néna plisyèr manyir diféran. <br /><img src=’puce.gif’> Pli sinp lé rod sélman dann lo titr ou dann ladéskrisyon out bann zartik. <br />-
+	'texte_utilisation_moteur_syndiques' => 'Kank ou i anserv lo rodèr SPIP, ou pé fèr bann rodaz sir tout bann sit èk out bann zartik sindiké. Néna plisyèr manyir diféran. <br /><img src=\'puce.gif\' /> Pli sinp lé rod sélman dann lo titr ou dann ladéskrisyon out bann zartik. <br />-
 Inn dézièm métod, pli pwisan, li permè a SPIP rod osi dann kor lo tèks tout out bann sit référansé . Si ou
  la référans inn sitwèb, SPIP i sava rod dann tèks sa-minm.', # MODIF
 	'texte_utilisation_moteur_syndiques_2' => 'Èk métod-la, SPIP lé oblizé d-vizité

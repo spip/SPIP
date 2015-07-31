@@ -309,9 +309,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'Грешка при задаване на въпроса:',
 	'info_erreur_squelette2' => 'Няма наличен шаблон <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Системна грешка (errno @errsys@)',
-	'info_erreur_systeme2' => 'Или твърдият диск е пълен, или базата данни е повредена. <br />
- <font color=’red’>опитайте се<a href=’@script@’>да поправите базата данни</a>,
- или се свържете с доставчика си.</font>',
+	'info_erreur_systeme2' => 'Или твърдият диск е пълен, или базата данни е повредена.<br />
+<span style="color:red;">опитайте се<a href=\'@script@\'>да поправите базата данни</a>, или се свържете с доставчика си.</span>',
 	'info_fini' => 'Готово!',
 	'info_format_image' => 'За създаване на винетките, използвайте същия формат, в който е и изображението: @gd_formats@.',
 	'info_format_non_defini' => 'неопределен формат',

@@ -389,8 +389,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Файл шаблона <b>@fichier@</b> недоступен',
 	'info_erreur_systeme' => 'Ошибка системы (errno @errsys@)',
 	'info_erreur_systeme2' => 'Закончилось место на диске или повреждена база данных. <br />
- <font color=’red’>Попробуйте <a href=’@script@’>восстановить базу данных</a>
- или обратитесь к вашему хостинг-провайдеру.</font>',
+<span style="color:red;">Попробуйте <a href=\'@script@\'>восстановить базу данных</a>
+ или обратитесь к вашему хостинг-провайдеру.</span>',
 	'info_fini' => 'Готово!',
 	'info_format_image' => 'Формат, который используется для автоматического уменьшения изображений @gd_formats@.',
 	'info_format_non_defini' => 'неопределенный формат',

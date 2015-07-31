@@ -373,7 +373,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'هيچ اسكلتي <b>@fichier@</b>در دسترس نميباشد',
 	'info_erreur_systeme' => 'اشتباه در سيستم(errno @errsys@)',
 	'info_erreur_systeme2' => 'يا ديسك رايانه پر شده يا پایگاه داده‌ها صدمه ديده اند.<br />
- <font color=’red’>يا پایگاه داده‌ها را <a href=’@script@’> درست كنيد</a>, يا با ميزبانتان تماس بگيريد.</font>',
+<font color=’red’>يا پایگاه داده‌ها را <a href=\'@script@\'> درست كنيد</a>, يا با ميزبانتان تماس بگيريد.</font>', # MODIF
 	'info_fini' => 'پايان!',
 	'info_format_image' => 'اندازه هاى تصاويرى كه ميتوانند براى ساختن همان تصاوير ولى بصورت كوچك مورد استفاده قرار بگيرند: @gd_formats@.',
 	'info_format_non_defini' => 'اندازه مشخص نشده',

@@ -332,9 +332,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_requete' => 'Hiba a lekérdezésben :',
 	'info_erreur_squelette2' => 'Egyetlen csontváz (template) <b>@fichier@</b> sem áll rendelkezésre...',
 	'info_erreur_systeme' => 'Rendszer hiba (errno @errsys@)',
-	'info_erreur_systeme2' => 'A merevlemez talán tele van, vagy megsérült az adatbázis. <br />
- <font color=’red’>probáljon <a href=’@script@’>javítani az adatbázis</a>,
- vagy keresse fel a rendszergazdát.</font>', # MODIF
+	'info_erreur_systeme2' => 'A merevlemez talán tele van, vagy megsérült az adatbázis.<br />
+<span style="color:red;">probáljon <a href=\'@script@\'>javítani az adatbázis</a>, vagy keresse fel a rendszergazdát.</span>', # MODIF
 	'info_fini' => 'Készen van !',
 	'info_format_image' => 'Használható képformátumok a bélyegképek készítésére : @gd_formats@.',
 	'info_format_non_defini' => 'Határozatlan formátum',

@@ -563,6 +563,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'info_url' => 'URL ',
 	'info_url_proxy' => 'proxy-aren URLa',
 	'info_url_site' => 'Gunearen URL-a',
+	'info_url_site_pas_conforme' => 'Gunearen helbidea baliogabekoa da.',
 	'info_url_test_proxy' => 'Entseguendako URLa',
 	'info_urlref' => 'Hipertestu lotura:',
 	'info_utilisation_spip' => 'Lagundutakoargitaratze sistema erabiltzen has zaitezke...',
@@ -657,6 +658,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'label_texte_et_icones_page' => 'Orria erakutsi',
 	'ldap_correspondance' => '@champ@ eremuaren jaurantsia',
 	'ldap_correspondance_1' => 'LDAP eremuen jaraunspena',
+	'ldap_correspondance_2' => 'Ondoko SPIP eremu bakoitzarentzat, ezar ezazu LDAP eremuaren izena.
+Hutsik utz ezazu ez betetzeko, espazio edo komak tarteka itzazu LDAP eremu bat baino gehiago probatzeko.',
 	'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 	'lien_ajouter_auteur' => 'Egile hau erantsi',
 	'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
@@ -693,6 +696,9 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'module_texte_traduction' => '« @module@ » hizkuntza artxiboaikusgai dago hemen:',
 	'mois_non_connu' => 'ezezagun',
 
+	// N
+	'nouvelle_version_spip' => 'SPIPen @version@ bertsioa eskuragarri da.',
+
 	// O
 	'onglet_contenu' => 'Edukia',
 	'onglet_declarer_une_autre_base' => 'Beste base bat deklaratu',
@@ -718,6 +724,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_etat_test' => 'proban',
 	'plugin_impossible_activer' => '@plugin@ plugin-a ezin da aktibatu',
 	'plugin_info_automatique1' => 'Plugin-en instalazio automatikoa onartu nahi al baduzu, otoi :',
+	'plugin_info_automatique1_lib' => 'Liburutegi honen instalazioa baimendu nahi baduzu, otoi :',
 	'plugin_info_automatique2' => '<code>@rep@</code> direktorio bat sortu;',
 	'plugin_info_automatique3' => 'Direktorio hunetan zerbitzariak idazteko eskubidea baduela segurta ezazu.',
 	'plugin_info_automatique_creer' => 'gunearen erroan sortzekoa.',
@@ -730,8 +737,14 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_info_automatique_ou' => 'edo...',
 	'plugin_info_automatique_select' => 'Plugin bat aukera ezazu beherago : SPIPek deskargatuko du eta <code>@rep@</code> direktorioan instalatuko du ; plugin hau jadanik existitzen bada, gaurkotua izanen da.',
 	'plugin_info_credit' => 'Kredituak',
+	'plugin_info_erreur_xml' => 'Plugin honen deklarapena baliogabekoa da.',
+	'plugin_info_install_ok' => 'Instalazioa ongi burutu da.',
 	'plugin_info_necessite' => 'Behar dira :',
+	'plugin_info_non_compatible_spip' => 'Plugin hau ez da SPIP bertsio honekin bateragarri.',
+	'plugin_info_plugins_dist_1' => 'Plugin hauek kargatuak eta aktibatuak dira, @plugins_dist@ direktorioan.',
+	'plugin_info_plugins_dist_2' => 'Ezin dira desaktibatu.',
 	'plugin_info_telecharger' => '@url@ helbidetik deskargatu beharra, eta @rep@ direktorioan instalatzekoa',
+	'plugin_info_upgrade_ok' => 'Eguneratzea ongi bururatu da',
 	'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 	'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
 	'plugin_necessite_plugin' => 'Beharretsia : @plugin@ plugina @version@ bertsio minimoarekin.',
@@ -750,6 +763,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_zip_installe_rep_finie' => '@zip@ fitxategia deskonprimitua izan da eta @rep@ direktorioan instalatua',
 	'plugin_zip_installer' => 'Orai instalatzen ahal duzu.',
 	'plugin_zip_telecharge' => '@zip@ fitxategia telekargatua izan da',
+	'plugins_actif_aucun' => 'Ez dago aktibatutako plugin-arik.',
+	'plugins_actif_un' => 'Aktibatutako plugin bat.',
 	'plugins_actifs' => '@count@ plugin aktibatuak.',
 	'plugins_actifs_liste' => 'Aktiboak',
 	'plugins_compte' => '@count@ plugin',
@@ -757,6 +772,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugins_disponibles' => '@count@ plugin erabilgarriak',
 	'plugins_erreur' => 'Errorea pluginetan : @plugins@',
 	'plugins_liste' => 'Pluginen zerrenda',
+	'plugins_liste_dist' => 'Plugin gakotuak',
 	'plugins_recents' => 'Gehigarri berriak.',
 	'plugins_tous_liste' => 'Denak',
 	'plugins_vue_hierarchie' => 'Hierarkia',
@@ -764,6 +780,13 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'protocole_ldap' => 'Protokoloaren bersioa :',
 
 	// Q
+	'queue_executer_maintenant' => 'Exekutatu orai',
+	'queue_info_purger' => 'Zain diren lan guziak ezeztatzen ahal dituzu, eta zerrenda berrabiarazi lan periodikoekin',
+	'queue_nb_jobs_in_queue' => '@nb@ lan zain daude',
+	'queue_next_job_in_nb_sec' => 'Ondoko lana @nb@ segundutan',
+	'queue_no_job_in_queue' => 'Zain dauden lanik ez da',
+	'queue_one_job_in_queue' => '1 lan zain dago',
+	'queue_purger_queue' => 'Lanen zerrenda purgatu',
 	'queue_titre' => 'Obren zerrenda',
 
 	// R
@@ -772,11 +795,15 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	// S
 	'sans_heure' => 'ordurik gabe',
 	'statut_admin_restreint' => 'admin mugatua',
+	'statut_webmestre' => 'web-arduraduna',
 
 	// T
+	'tache_cron_asap' => 'CRON zeregina @function@ (Ahal bezain goiz)',
+	'tache_cron_secondes' => 'CRON zeregina@function@ (@nb@ segunda guziz)',
 	'taille_cache_image' => 'SPIPek automatikoki kalkulatzen dituen irudiek (dokumentuen binetak, grafikoki aurkeztutako tituluak, TeX formatuan diren matematika funtzioak...) @dir@ direktorioko @taille@-eko espazioa okupatzen dute.',
 	'taille_cache_infinie' => 'Gune honek ez du ezartzen CACHE direktorioaren tamaina-mugaketarik.',
 	'taille_cache_maxi' => 'SPIP-ek gune honen CACHE direktorioaren tamaina mugatzen saiatzen da @octets@ datura gutxi gora-behera.',
+	'taille_cache_moins_de' => 'Cache-aren tamaina gehienez @octets@-koa da.',
 	'taille_cache_octets' => 'Cache-aren tamaina orain @octets@-koa da.',
 	'taille_cache_vide' => 'Cachea hutsik dago.',
 	'taille_repertoire_cache' => 'Cache direktorioaren tamaina',
@@ -798,6 +825,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'texte_choix_base_3' => 'Aukeratu hemen zure ostapen zuzkitzaileak eman dizuna:',
 	'texte_choix_table_prefix' => 'Mahaien aurrizkiak :',
 	'texte_commande_vider_tables_indexation' => 'Komando hau erabili SPIP-en integratuta dagoen bilaketa-tresnak erabilitako indexazio-taulak husteko. Honek disko-lekua irabazten utziko dizu.',
+	'texte_compatibilite_html' => 'SPIPi galdegin diezaiokezu sortzea, parte publikoan, <i>HTML4</i> normarekin bateragarri den kodea, edo baimentzen ahal zenioke <i>HTML5</i> norma modernoagoaren erabiltzea.',
 	'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
 	'texte_compte_element' => '@count@ osagai',
 	'texte_compte_elements' => '@count@osagai',
