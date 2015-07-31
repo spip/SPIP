@@ -313,7 +313,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
-		if (preg_match(',^'.$c.'(=.*)?$,', $val)) {
+		if (preg_match(',^'.preg_quote($c,',').'(=.*)?$,', urldecode($val))) {
 			// suppression
 			if (!$v) {
 				unset($url[$n]);
