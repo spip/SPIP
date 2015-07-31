@@ -338,7 +338,7 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 
 	$vignette = inserer_attribut($vignette, 'alt', $alt);
-	$vignette = $title?inserer_attribut($vignette, 'title', $title):$vignette;
+	$vignette = strlen($title)?inserer_attribut($vignette, 'title', $title):$vignette;
 
 	// Preparer le texte sous l'image pour les <DOC>
 	if ($type_aff == 'DOC') {
