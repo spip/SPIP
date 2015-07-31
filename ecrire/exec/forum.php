@@ -77,8 +77,8 @@ function forum_affiche($debut, $admin=false)
 	echo icone_inline (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statutforum&script=$script"), $logo, "creer.gif");
 	echo "\n</div>";
 
-	$limit = $debut ? "LIMIT $debut,10" : "LIMIT 10" ;
-	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 ORDER BY date_heure DESC $limit");
+	$limit = $debut ? "$debut,10" : "10" ;
+	$result_forum = spip_abstract_select('*', 'spip_forum', "statut='$statutforum' AND id_parent=0", '', "date_heure DESC", $limit);
  
 	echo afficher_forum($result_forum,$script,"&debut=$debut");
 
