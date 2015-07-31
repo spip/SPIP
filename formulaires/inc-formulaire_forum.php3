@@ -22,11 +22,7 @@ include_ecrire('inc_forum');
 include_ecrire("inc_abstract_sql");
 include_local(_FILE_CONNECT);
 
-// Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls");
-else
-	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+charger_generer_url();
 
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */
@@ -42,7 +38,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// Note : ceci n'est pas documente !!
 	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
-	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum.php3)]
+	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum.php)]
 
 	// $args[5] peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
@@ -201,7 +197,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	// - les abus visant a mettre des forums malgre nous sur un article (??)
 	// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
 	// afin de ne pas bugguer quand on vide le cache)
-	// Le lock est leve au moment de l'insertion en base (inc-messforum.php3)
+	// Le lock est leve au moment de l'insertion en base (inc-messforum)
 	// Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
 	// si $afficher_texte = 'non')
 

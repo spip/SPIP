@@ -51,8 +51,7 @@ function menu_lang_pour_tous($nom, $opt) {
 	if (!$opt)
 		return '';
 
-	$site = $GLOBALS['meta']["adresse_site"];
-	$post = ($site ? $site : '..') . "/spip_cookie.php3";
+	$post = generer_url_public('spip_cookie');
 	$cible = new Link('', /* racine */ true); # lien a partir de /
 	$cible->delVar('lang');
 	$cible = $cible->getUrl();
