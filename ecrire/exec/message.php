@@ -233,7 +233,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
 function http_afficher_forum_perso($id_message, $titre)
 {
-	$forum_retour = rawurlencode(generer_url_ecrire("message","id_message=$id_message"));
+	$forum_retour = rawurlencode(generer_url_ecrire("message","id_message=$id_message", true));
 	$utitre = rawurlencode($titre);
 
 	echo "<br /><br />\n<div align='center'>";
