@@ -634,10 +634,11 @@ function typer_raccourci ($lien) {
 // 'url':   seulement U  (i.e. generer_url_RACCOURCI)
 
 // http://doc.spip.org/@calculer_url
-function calculer_url ($ref, $texte='', $pour='url', $connect=NULL) {
+function calculer_url ($ref, $texte='', $pour='url', $connect='') {
 	if ($match = typer_raccourci($ref)) {
 		@list($type,,$id,,$args,,$ancre) = $match;
-		$r = generer_url_entite($id,$type,$args,$ancre,$connect);
+		$r = generer_url_entite($id,$type,$args,$ancre,
+					$connect ? $connect : NULL);
 		if (!$r) {
 			$g = 'generer_url_' . $type;
 			if (function_exists($g) OR function_exists($g .= '_dist'))
