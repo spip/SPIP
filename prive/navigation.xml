@@ -195,11 +195,11 @@
 		<icone>images/infos_perso-24.png</icone>
 		<titre>icone_mes_infos</titre>
 	</onglet>
-	<onglet id='config_langage' parent="infos_perso">
+	<onglet id='configurer_langage' parent="infos_perso">
 		<icone>images/ma_langue-24.png</icone>
 		<titre>icone_ma_langue</titre>
 	</onglet>
-	<onglet id='config_preferences' parent="infos_perso">
+	<onglet id='configurer_preferences' parent="infos_perso">
 		<icone>images/mes_preferences-24.png</icone>
 		<titre>icone_mes_preferences</titre>
 	</onglet>
