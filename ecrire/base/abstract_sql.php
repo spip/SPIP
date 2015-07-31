@@ -107,8 +107,11 @@ function sql_get_charset($charset, $serveur='', $option=true){
  * 		Le charset souhaite
  * @param string $serveur
  * 		Le nom du connecteur
- * @param bool $option
- * 		Inutilise
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true pour executer la requete.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ * 
  * @return bool
  * 		Retourne true si elle reussie.
 **/
@@ -144,7 +147,7 @@ function sql_set_charset($charset,$serveur='', $option=true){
  * 		Tableau des des post-conditions a remplir (Having)
  * @param string $serveur
  * 		Le serveur sollicite (pour retrouver la connexion)
- * @param bool $option
+ * @param bool|string $option
  * 		Peut avoir 3 valeurs : 
  * 		- false -> ne pas l'executer mais la retourner, 
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
@@ -251,7 +254,7 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
  * 		Tableau des des post-conditions a remplir (Having)
  * @param string $serveur
  * 		Le serveur sollicite (pour retrouver la connexion)
- * @param bool $option
+ * @param bool|string $option
  * 		Peut avoir 3 valeurs : 
  * 		- false -> ne pas l'executer mais la retourner, 
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
@@ -272,7 +275,28 @@ function sql_countsel($from = array(), $where = array(),
 	return $r;
 }
 
-// http://doc.spip.org/@sql_alter
+/**
+ * Modifie la structure de la base de donnees
+ *
+ * Effectue une operation ALTER.
+ *
+ * @example
+ * 		sql_alter('DROP COLUMN supprimer'); 
+ *
+ * @param string $q
+ * 		La requete a executer (sans la preceder de 'ALTER ')
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * @return mixed
+ * 		2 possibilites :
+ * 		- Incertain en cas d'execution correcte de la requete
+ * 		- false en cas de serveur indiponible ou d'erreur
+ * 		Ce retour n'est pas pertinent pour savoir si l'operation est correctement realisee.
+**/
 function sql_alter($q, $serveur='', $option=true) {
 	$f = sql_serveur('alter', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -290,10 +314,10 @@ function sql_alter($q, $serveur='', $option=true) {
  * 		Ressource retournee par sql_select()
  * @param string $serveur
  * 		Le nom du connecteur
- * @param bool $option
+ * @param bool|string $option
  * 		Peut avoir 2 valeurs : 
- * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
- * 		- true -> executer la requete.
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
  * 
  * @ return array
  * 		Tableau de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
@@ -305,6 +329,28 @@ function sql_fetch($res, $serveur='', $option=true) {
 	return $f($res, NULL, $serveur, $option!==false);
 }
 
+
+/**
+ * Retourne tous les enregistrements d'une selection
+ *
+ * Retourne tous les resultats d'une ressource obtenue avec sql_select()
+ * dans un tableau
+ *
+ * @param mixed
+ * 		Ressource retournee par sql_select()
+ * @param string $serveur
+ * 		Le nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @ return array
+ * 		Tableau contenant les enregistrements.
+ * 		Chaque entree du tableau est un autre tableau
+ * 		de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
+ * 		presentant une ligne de resultat d'une selection 
+ */
 function sql_fetch_all($res, $serveur='', $option=true){
 	$rows = array();
 	if (!$res) return $rows;
@@ -316,6 +362,29 @@ function sql_fetch_all($res, $serveur='', $option=true){
 	return $rows;
 }
 
+/**
+ * Deplace le pointeur d'une ressource de selection
+ *
+ * Deplace le pointeur sur un numero de ligne precise
+ * sur une ressource issue de sql_select, afin que
+ * le prochain sql_fetch recupere cette ligne.
+ *
+ * @see sql_skip() Pour sauter des enregistrements
+ *
+ * @param mixed $res
+ * 		Ressource issue de sql_select
+ * @param int $row_number
+ * 		Numero de ligne sur laquelle placer le pointeur
+ * @param string $serveur
+ * 		Le nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true -> executer la requete
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
+ * @return bool
+ * 		Operation effectuee (true), sinon false.
+**/
 function sql_seek($res, $row_number, $serveur='', $option=true) {
 	$f = sql_serveur('seek', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -651,7 +720,32 @@ function sql_version($serveur='', $option=true) {
 
 /**
  * Informe si le moteur SQL prefere utiliser des transactions
- * (Utile pour sqlite)
+ *
+ * Cette fonction experimentale est pour l'instant presente pour accelerer certaines
+ * insertions multiples en SQLite, en les encadrant d'une transaction.
+ * SQLite ne cree alors qu'un verrou pour l'ensemble des insertions
+ * et non un pour chaque, ce qui accelere grandement le processus.
+ * Evidemment, si une des insertions echoue, rien ne sera enregistre.
+ * Pour ne pas perturber les autres moteurs, cette fonction permet
+ * de verifier que le moteur prefere utiliser des transactions dans ce cas.
+ *
+ * @example
+ * 		if (sql_preferer_transaction()) {
+ * 			sql_demarrer_transaction();
+ * 		}
+ *
+ * @see sql_demarrer_transaction()
+ * @see sql_terminer_transaction()
+ *
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true pour executer la requete.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ *
+ * @return bool
+ * 		Le serveur SQL prefere t'il des transactions pour les insertions multiples ?
 **/
 function sql_preferer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('preferer_transaction', $serveur,  'continue');
@@ -663,6 +757,18 @@ function sql_preferer_transaction($serveur='', $option=true) {
 
 /**
  * Demarre une transaction
+ *
+ * @see sql_terminer_transaction() Pour cloturer la transaction
+ * 
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- true pour executer la requete.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ * 		- false pour obtenir le code de la requete
+ * 
+ * @return true
 **/
 function sql_demarrer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('demarrer_transaction', $serveur,  'continue');
@@ -674,6 +780,18 @@ function sql_demarrer_transaction($serveur='', $option=true) {
 
 /**
  * Termine une transaction
+ *
+ * @see sql_demarrer_transaction() Pour demarrer une transaction
+ * 
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- true pour executer la requete.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ * 		- false pour obtenir le code de la requete
+ * 
+ * @return true
 **/
 function sql_terminer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('terminer_transaction', $serveur,  'continue');
@@ -684,10 +802,24 @@ function sql_terminer_transaction($serveur='', $option=true) {
 };
 
 
-// prend une chaine sur l'aphabet hexa
-// et retourne sa representation numerique:
-// FF ==> 0xFF en MySQL mais x'FF' en PG
-// http://doc.spip.org/@sql_hex
+/**
+ * Prepare une chaine hexadecimale
+ * 
+ * Prend une chaine sur l'aphabet hexa
+ * et retourne sa representation numerique attendue par le serveur SQL.
+ * Par exemple : FF ==> 0xFF en MySQL mais x'FF' en PG
+ * 
+ * @param string $val
+ * 		Chaine hexadecimale
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool|string $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- true pour executer la demande.
+ * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
+ * @return string
+ * 		Retourne la valeur hexadecimale attendue par le serveur SQL
+**/
 function sql_hex($val, $serveur='', $option=true)
 {
 	$f = sql_serveur('hex', $serveur,  $option==='continue' OR $option===false);
@@ -742,7 +874,10 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
  * ne fait rien pour une valeur negative ou nulle de $saut
  * retourne la position apres le saut
  *
+ * @see sql_seek()
+ * 
  * @param resource $res
+ * 		Ressource issue d'une selection sql_select
  * @param int $pos
  *   position courante
  * @param int $saut
@@ -751,8 +886,14 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
  *   position maximale
  *   (nombre de resultat de la requete OU position qu'on ne veut pas depasser)
  * @param string $serveur
+ *   Nom du connecteur
  * @param bool|string $option
+ *   Peut avoir 2 valeurs : 
+ *   - true -> executer la requete
+ *   - continue -> ne pas echouer en cas de serveur sql indisponible
+ * 
  * @return int
+ *    Position apres le saut.
  */
 function sql_skip($res, $pos, $saut, $count, $serveur='', $option=true){
 	// pas de saut en arriere qu'on ne sait pas faire sans sql_seek
@@ -815,16 +956,31 @@ function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=
 }
 
 
-// Cette fonction devrait disparaitre
 
-// http://doc.spip.org/@description_table
+/**
+ * Retourne la description de la table SQL
+ *
+ * Retrouve la description de la table SQL en privilegiant
+ * la structure reelle de la base de donnees.
+ * En absence, ce qui arrive lors de l'installation, la fonction
+ * s'appuie sur la declaration des tables SQL principales ou auxiliaires.
+ * 
+ * @internal Cette fonction devrait disparaître
+ * 
+ * @param string $nom
+ * 		Nom de la table dont on souhait la description
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @return array|false
+ * 		Description de la table ou false si elle n'est pas trouvee ou declaree.
+**/
 function description_table($nom, $serveur=''){
 
 	global $tables_principales, $tables_auxiliaires;
 	static $trouver_table;
 
 	/* toujours utiliser trouver_table
-	 qui renverra la description theorique sinon
+	 qui renverra la description theorique
 	 car sinon on va se comporter differement selon que la table est declaree
 	 ou non
 	 */
