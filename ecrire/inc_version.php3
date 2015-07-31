@@ -360,12 +360,14 @@ if (@file_exists(_FILE_OPTIONS)) {
 }
 
 // charger les definitions des plugins
-if ($plugins) {
+function charger_plugins($plugins) {
 	foreach ($plugins as $plug) {
 		include(_DIR_RACINE.'plugins/'.$plug.'/version.php');
 	}
 #var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
 }
+if ($plugins)
+	charger_plugins($plugins);
 
 //
 // Definition des repertoires standards
