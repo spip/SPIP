@@ -116,10 +116,14 @@ function action_cookie_dist() {
 		$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
 			. "var_login=-1";
 	}
+
 	// Ajout de cookie d'admin
-	else if ((isset($set_cookie_admin) OR $set_cookie_admin = _request('cookie_admin'))
-	AND $set_cookie_admin != $cook) {
-		spip_setcookie('spip_admin', $set_cookie_admin, time() + 2 * _RENOUVELLE_ALEA);
+	else if (
+	isset($set_cookie_admin)
+	OR $set_cookie_admin = _request('cookie_admin')
+	) {
+		spip_setcookie('spip_admin', $set_cookie_admin,
+			time() + 14 * 24 * 3600);
 	}
 
 	// Redirection finale
