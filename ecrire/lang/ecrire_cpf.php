@@ -913,8 +913,8 @@ si ou vé fè zwé inn rapid nouvèl indéksasyon (dann ka-la pa égsanp: aprè 
 inn sovgard. Gard an tèt sak bann dokiman ou la sanz normalman (dopwi lafigirwèb lo SPIP), zot lé otomatikman 
 réindéksé : é litilité la komand-la lé donk ésépsyonèl.',
 	'texte_moteur_recherche_non_active' => 'Rodèr do SPIP lé pa an mars.',
-	'texte_multilinguisme' => 'Si ou vé zèr out bann zartik dann plizyèr lang, èk inn sistèm navigasyon konplèks, ou pé azout inn ménidswa lalang lartik ou laribrik.',
-	'texte_multilinguisme_trad' => 'Ou pé osi azout inn sistèm lazéstyon bann gatir ant tout bann tradiksyon inn minm lartik.',
+	'texte_multilinguisme' => 'Si ou vé zèr out bann zartik dann plizyèr lang, èk inn sistèm navigasyon konplèks, ou pé azout inn ménidswa lalang lartik ou laribrik.', # MODIF
+	'texte_multilinguisme_trad' => 'Ou pé osi azout inn sistèm lazéstyon bann gatir ant tout bann tradiksyon inn minm lartik.', # MODIF
 	'texte_non_compresse' => '<i>Lé pa konpèrsé</i> (akoz out servèr i pé pa fé zwé lafonksyon-la)',
 	'texte_nouveau_message' => 'Nouvo modékri',
 	'texte_nouvelle_version_spip_1' => 'Ou la finn instal inn nouvèl versyon do SPIP.',

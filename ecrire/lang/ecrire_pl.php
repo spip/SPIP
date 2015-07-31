@@ -899,8 +899,8 @@ zreinstalować SPIP w celu utworzenia nowej bazy danych i dostępu pierwszego ad
   kopii bezpieczeństwa). Pamiętaj, że dokumenty zmodyfikowane
   w normalny sposób (za pomocą interfejsu SPIP) są automatycznie reindeksowane : dlatego to polecenie jest rzadko stosowane.',
 	'texte_moteur_recherche_non_active' => 'Wyszukiwarka nie jest włączona.',
-	'texte_multilinguisme' => 'Jeśli planujesz edytować artykuły w wielu językach, ze złożoną nawigacją, możesz dołożyć do artykułu lub działu, menu wyboru języka, jako element organizacyjny Twojej strony.',
-	'texte_multilinguisme_trad' => 'Możesz także włączyć system zarządzania linkami pomiędzy przekładami artykułów.',
+	'texte_multilinguisme' => 'Jeśli planujesz edytować artykuły w wielu językach, ze złożoną nawigacją, możesz dołożyć do artykułu lub działu, menu wyboru języka, jako element organizacyjny Twojej strony.', # MODIF
+	'texte_multilinguisme_trad' => 'Możesz także włączyć system zarządzania linkami pomiędzy przekładami artykułów.', # MODIF
 	'texte_non_compresse' => '<i>nie skompresowany</i> (twój serwer nie posiada tej funkcji)',
 	'texte_nouveau_message' => 'Nowa wiadomość',
 	'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP została zainstalowana.',

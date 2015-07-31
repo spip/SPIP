@@ -882,8 +882,8 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
   modificate în mod normal (adică cu ajutorul interfeţei SPIP) sunt în mod automat
   reindexate : aşadar, această comandă nu este utilă decât în mod excepţional.',
 	'texte_moteur_recherche_non_active' => 'Motorul de căutare nu este activat.',
-	'texte_multilinguisme' => 'Dacă doriţi să gestionaţi articole în mai multe limbi, cu o navigare complexă, puteţi să adăugaţi un meniu de selectare a limbii pentru articole şi/sau rubrici, în funcţie de organizarea site-ului dumneavoastră.',
-	'texte_multilinguisme_trad' => 'Puteţi, de asemenea, să activaţi sistemul de gestiune a legăturilor între diferitele traduceri ale unui articol.',
+	'texte_multilinguisme' => 'Dacă doriţi să gestionaţi articole în mai multe limbi, cu o navigare complexă, puteţi să adăugaţi un meniu de selectare a limbii pentru articole şi/sau rubrici, în funcţie de organizarea site-ului dumneavoastră.', # MODIF
+	'texte_multilinguisme_trad' => 'Puteţi, de asemenea, să activaţi sistemul de gestiune a legăturilor între diferitele traduceri ale unui articol.', # MODIF
 	'texte_non_compresse' => '<i>necomprimat</i> (server-ul dumneavoastră nu suportă această funcţionalitate)',
 	'texte_nouveau_message' => 'Mesaj nou',
 	'texte_nouvelle_version_spip_1' => 'Aţi instalat o nouă versiune SPIP.',

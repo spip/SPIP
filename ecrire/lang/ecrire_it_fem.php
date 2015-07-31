@@ -890,8 +890,8 @@ se vuoi procedere a una reindicizzazione rapida (dopo il ripristino
 di un salvataggio, per esempio). Nota bene: i documenti modificati in modo standard (con l\'interfaccia di SPIP) sono automaticamente
 reindicizzati. Questo commando, quindi, è utile solo in casi eccezionali.',
 	'texte_moteur_recherche_non_active' => 'Il motore di ricerca non è attivato.',
-	'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, è possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.',
-	'texte_multilinguisme_trad' => 'È anche possibile attivare un sistema di gestione dei link fra le diverse traduzioni di un articolo.',
+	'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, è possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.', # MODIF
+	'texte_multilinguisme_trad' => 'È anche possibile attivare un sistema di gestione dei link fra le diverse traduzioni di un articolo.', # MODIF
 	'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalità)',
 	'texte_nouveau_message' => 'Nuovo messaggio',
 	'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',

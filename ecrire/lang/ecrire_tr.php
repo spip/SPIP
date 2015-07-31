@@ -881,8 +881,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_modifier_article' => 'Makaleyi değiştir :',
 	'texte_moteur_recherche_active' => '<b>Arama motoru etkin.</b> Bu komutu, eğer (örneğin bir yedeklemeyi geri yükledikten sonra) tekrar hızlı bir endeksleme yapmak istiyorsanız kullanın. Normal bir şekilde (SPIP arayüzünden) değiştirilen dokümanların  otomatik olarak tekrar endekslendiğine dikkatinizi çekeriz : dolayısıyla bu komut ancak istisnai olarak faydalıdır.',
 	'texte_moteur_recherche_non_active' => 'Arama motoru aktif değil.',
-	'texte_multilinguisme' => 'Eğer karmaşık gezintili, bir kaç dilde makaleler yönetmek istiyorsanız makalelere ve/veya bölümlere sitenizin düzenine göre bir dil seçeneği mönüsü ekleyebilirsiniz.',
-	'texte_multilinguisme_trad' => 'Ayrıca, bir makalenin çeşitli çevirileri arasında bir bağlantı yönetme sistemi de çalıştırabilirsiniz. ',
+	'texte_multilinguisme' => 'Eğer karmaşık gezintili, bir kaç dilde makaleler yönetmek istiyorsanız makalelere ve/veya bölümlere sitenizin düzenine göre bir dil seçeneği mönüsü ekleyebilirsiniz.', # MODIF
+	'texte_multilinguisme_trad' => 'Ayrıca, bir makalenin çeşitli çevirileri arasında bir bağlantı yönetme sistemi de çalıştırabilirsiniz. ', # MODIF
 	'texte_non_compresse' => 'Sıkıştırılmamış (sunucunuz bu özniteliği taşıyamıyor). ',
 	'texte_nouveau_message' => 'Yeni ileti',
 	'texte_nouvelle_version_spip_1' => 'SPIP\'in yeni bir sürümünü yüklediniz.',

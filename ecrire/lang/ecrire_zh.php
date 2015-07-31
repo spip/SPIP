@@ -908,8 +908,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    (从SPIP界面) 被重新正常索引
   : 因此这个命令只在异常情况下有用.',
 	'texte_moteur_recherche_non_active' => '搜索引擎未激活.',
-	'texte_multilinguisme' => '如果您希望用复杂导航管理多语言文章, 您可以根据站点的组织, 在文章及/或专栏中添加语言选择菜单.',
-	'texte_multilinguisme_trad' => '同样,在不同的文章翻译中你可以激活连接管理系统.',
+	'texte_multilinguisme' => '如果您希望用复杂导航管理多语言文章, 您可以根据站点的组织, 在文章及/或专栏中添加语言选择菜单.', # MODIF
+	'texte_multilinguisme_trad' => '同样,在不同的文章翻译中你可以激活连接管理系统.', # MODIF
 	'texte_non_compresse' => '<i>未解压</i> (你的服务器不支持)',
 	'texte_nouveau_message' => '新消息',
 	'texte_nouvelle_version_spip_1' => '您已经安装了新版SPIP.',

@@ -879,8 +879,8 @@ i en farve, der angiver deres status:',
 		(f.eks. efter at have indlæst en sikkerhedskopi). Bemærk, at dokumenter der ændres normalt (f.eks. fra SPIP\'s brugergrænseflade)
 		automatisk indekseres igen: derfor er denne kommando kun nyttig under ekstraordinære omstændigheder.',
 	'texte_moteur_recherche_non_active' => 'Søgefunktionen er valgt fra.',
-	'texte_multilinguisme' => 'Hvis du ønsker at administrere artikler på flere sprog med den deraf følgende større kompleksitet, kan du forsyne afsnit og/eller artikler med en sprogvalgsmenu. Denne funktion er afhængig af strukturen på websiden.',
-	'texte_multilinguisme_trad' => 'Du kan også vælge at have link mellem de forskellige sprogversioner af en artikel.',
+	'texte_multilinguisme' => 'Hvis du ønsker at administrere artikler på flere sprog med den deraf følgende større kompleksitet, kan du forsyne afsnit og/eller artikler med en sprogvalgsmenu. Denne funktion er afhængig af strukturen på websiden.', # MODIF
+	'texte_multilinguisme_trad' => 'Du kan også vælge at have link mellem de forskellige sprogversioner af en artikel.', # MODIF
 	'texte_non_compresse' => '<i>ukomprimeret</i> (din server understøtter ikke denne funktion)',
 	'texte_nouveau_message' => 'Ny meddelelse',
 	'texte_nouvelle_version_spip_1' => 'Du har netop installeret en ny version af SPIP.',

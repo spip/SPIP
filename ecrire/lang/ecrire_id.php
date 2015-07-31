@@ -899,8 +899,8 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 		kembali secara otomatis: oleh karenanya perintah ini hanya berlaku dalam
 		situasi tertentu saja.',
 	'texte_moteur_recherche_non_active' => 'Mesin pencari tidak diaktifkan.',
-	'texte_multilinguisme' => 'Jika anda ingin mengelola artikel-artikel dalam beberapa bahasa, dengan navigasi yang kompleks, anda dapat menambah sebuah menu pemilih bahasa di artikel dan/atau bagian, sesuai dengan organisasi dari situs anda.',
-	'texte_multilinguisme_trad' => 'Selain itu, anda juga dapat mengaktifkan sistem manajemen tautan di antara terjemahan yang berbeda dari sebuah artikel.',
+	'texte_multilinguisme' => 'Jika anda ingin mengelola artikel-artikel dalam beberapa bahasa, dengan navigasi yang kompleks, anda dapat menambah sebuah menu pemilih bahasa di artikel dan/atau bagian, sesuai dengan organisasi dari situs anda.', # MODIF
+	'texte_multilinguisme_trad' => 'Selain itu, anda juga dapat mengaktifkan sistem manajemen tautan di antara terjemahan yang berbeda dari sebuah artikel.', # MODIF
 	'texte_non_compresse' => '<i>tidak dikompresi</i> (server anda tidak mendukung fitur ini)',
 	'texte_nouveau_message' => 'Pesan baru',
 	'texte_nouvelle_version_spip_1' => 'Anda baru saja menginstal versi terbaru SPIP.',

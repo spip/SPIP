@@ -853,8 +853,8 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 	'texte_modifier_article' => 'Den Artikel änneren:',
 	'texte_moteur_recherche_active' => '<b>De Sich-Motor ass ageschalt.</b> Benotzt dës Prozedur fir eng séier Indexatioun (z.B. no enger Restauratioun). Déi normal Ännerungen (iwwer de SPIP-Interface) ginn automatësch nei indexéiert: dës Prozedur ass nëmmen an aussergewéinlechen Fäll néideg.',
 	'texte_moteur_recherche_non_active' => 'De Sich-Motor ass ausgeschalt.',
-	'texte_multilinguisme' => 'Wann dir Artikelen a méi Sproochen mat enger komplexer Navigatioun wëllt benotzen, da kënnt dir e Menu fir d\'Sproochwiel bei den Artikelen an/oder de Rubriken aschalten, je no Organisatioun vun ärem Site.',
-	'texte_multilinguisme_trad' => 'Dir kënnt och eng Gestioun vun de Linken tëschent den Iwwersetzungen vun engem Artikel aschalten.',
+	'texte_multilinguisme' => 'Wann dir Artikelen a méi Sproochen mat enger komplexer Navigatioun wëllt benotzen, da kënnt dir e Menu fir d\'Sproochwiel bei den Artikelen an/oder de Rubriken aschalten, je no Organisatioun vun ärem Site.', # MODIF
+	'texte_multilinguisme_trad' => 'Dir kënnt och eng Gestioun vun de Linken tëschent den Iwwersetzungen vun engem Artikel aschalten.', # MODIF
 	'texte_non_compresse' => '<i>nët kompriméiert</i> (äre Server erlaabt dat nët)',
 	'texte_nouveau_message' => 'Neie Message',
 	'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP installéiert.',

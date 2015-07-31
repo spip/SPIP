@@ -864,8 +864,8 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 berrindexazio bizkor bati ekin nahi badiozu (adibidez babeskopiabat berreskuratu ondoren). Modu arruntean aldatutako dokumentuak (SPIP interfazetik)automatikoki berrindexatuak direla antzeman : 
 beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 	'texte_moteur_recherche_non_active' => 'Bilaketarako motorea ez dago aktibaturik.',
-	'texte_multilinguisme' => 'Hizkuntza batbaino gehiago erabili nahi baldin baduzu, nabigatze zailarekin, zure tokiarenantolakuntzaren arabera, artikuluentzat edota atalentzat hizkuntza aukeratzeko menu baterantsi ahal duzu.',
-	'texte_multilinguisme_trad' => 'Artikulu baten itzulpen desberdinenarteko lotura sistema bat ere aktiba dezakezu.',
+	'texte_multilinguisme' => 'Hizkuntza batbaino gehiago erabili nahi baldin baduzu, nabigatze zailarekin, zure tokiarenantolakuntzaren arabera, artikuluentzat edota atalentzat hizkuntza aukeratzeko menu baterantsi ahal duzu.', # MODIF
+	'texte_multilinguisme_trad' => 'Artikulu baten itzulpen desberdinenarteko lotura sistema bat ere aktiba dezakezu.', # MODIF
 	'texte_non_compresse' => 'konpresiorikgabe (zure zerbitzariak ez du funtzionalitate hau jasaten)',
 	'texte_nouveau_message' => 'Mezu berria',
 	'texte_nouvelle_version_spip_1' => 'SPIPren bertsio berri bat instalatu duzu.',

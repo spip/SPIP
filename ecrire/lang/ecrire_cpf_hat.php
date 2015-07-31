@@ -906,8 +906,8 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
   nòmalman (depi  lentèfas SPIP) se endeksé
   otomatikman : komand-la selman itil nan tan ésepsyonel.',
 	'texte_moteur_recherche_non_active' => 'Motè-lachèche ki pa aktive.',
-	'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konplèks,  w kapab ajoute yon meni-dewoulè pou chwazi lalang tout atik ak ribrik yo, selon kouman w te òganize sit aw.',
-	'texte_multilinguisme_trad' => 'Ou kap mèt yon sistèm pou okipe kèk lyen ant plizyè tradiksyon yon mèm atik.',
+	'texte_multilinguisme' => 'Si w vle itilize atik yo sous sit-la nan diferan lang, ak yon navigasyon konplèks,  w kapab ajoute yon meni-dewoulè pou chwazi lalang tout atik ak ribrik yo, selon kouman w te òganize sit aw.', # MODIF
+	'texte_multilinguisme_trad' => 'Ou kap mèt yon sistèm pou okipe kèk lyen ant plizyè tradiksyon yon mèm atik.', # MODIF
 	'texte_non_compresse' => '<i>ki pa konprese</i> (sèvè w ki pa soutni nan fonksyon la)',
 	'texte_nouveau_message' => 'Nouvo mesaj',
 	'texte_nouvelle_version_spip_1' => 'W te enstalé yon nouvo vésyon SPIP.',

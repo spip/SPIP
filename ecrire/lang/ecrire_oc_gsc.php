@@ -890,8 +890,8 @@ ua color qu\'indica lo lor estat:',
   manèra normau (a partir de l\'interfàcia SPIP) que\'s tornan indexar
   automaticament: donc aquesta comanda qu\'ei utila sonque de manèra excepcionau.',
 	'texte_moteur_recherche_non_active' => 'Lo cercader n\'ei pas activat.',
-	'texte_multilinguisme' => 'Se desiratz de gerir articles en mei d\'una lenga, dab ua navigacion complèxa, que podetz hornir un menut entà causir la lenga deus articles e/o de las rubricas, en foncion de l\'organizacion deu vòste sit.',
-	'texte_multilinguisme_trad' => 'Que podetz tanben activar un sistèma de gestion deus ligams entre las diferentas reviradas d\'un article.',
+	'texte_multilinguisme' => 'Se desiratz de gerir articles en mei d\'una lenga, dab ua navigacion complèxa, que podetz hornir un menut entà causir la lenga deus articles e/o de las rubricas, en foncion de l\'organizacion deu vòste sit.', # MODIF
+	'texte_multilinguisme_trad' => 'Que podetz tanben activar un sistèma de gestion deus ligams entre las diferentas reviradas d\'un article.', # MODIF
 	'texte_non_compresse' => '<i>non comprimit</i> (pr\'amor que lo vòste servider non supòrta pas aquera foncionalitat)',
 	'texte_nouveau_message' => 'Messatge nau',
 	'texte_nouvelle_version_spip_1' => 'Qu\'avetz installada ua version navèra d\'SPIP.',

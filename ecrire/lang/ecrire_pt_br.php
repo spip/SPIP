@@ -851,8 +851,8 @@ Agora é necessário atualizar a base de dados do site.',
 	'texte_modifier_article' => 'Editar a matéria:',
 	'texte_moteur_recherche_active' => '<b>O motor de busca foi ativado.</b> Use este comando se quiser proceder a uma reindexação rápida (após restauração de uma cópia de segurança, por exemplo). Note que os documentos modificados de modo normal (através da interface do SPIP) são automaticamente reindexados: este comando só tem utilidade pontual.',
 	'texte_moteur_recherche_non_active' => 'O motor de busca não está ativado.',
-	'texte_multilinguisme' => 'Se você deseja gerar matérias em diversos idiomas, com uma navegação complexa, você pode incluir um menu de seleção de idioma nas matérias e/ou nas seções, de acordo com a organização do seu site.',
-	'texte_multilinguisme_trad' => 'Você pode, igualmente, ativar o sistema de gerenciamento de links entre as diferentes traduções de uma matéria.',
+	'texte_multilinguisme' => 'Se você deseja gerar matérias em diversos idiomas, com uma navegação complexa, você pode incluir um menu de seleção de idioma nas matérias e/ou nas seções, de acordo com a organização do seu site.', # MODIF
+	'texte_multilinguisme_trad' => 'Você pode, igualmente, ativar o sistema de gerenciamento de links entre as diferentes traduções de uma matéria.', # MODIF
 	'texte_non_compresse' => '<i>nã compactado</i> (seu servidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
 	'texte_nouvelle_version_spip_1' => 'Você instalou uma nova versão do SPIP.',

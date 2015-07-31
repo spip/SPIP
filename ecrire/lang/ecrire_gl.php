@@ -903,8 +903,8 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
   (dende a interface do SPIP) son reindexados automaticamente:
   este comando só é útil excepcionalmente.',
 	'texte_moteur_recherche_non_active' => 'O motor de procura non está activado.',
-	'texte_multilinguisme' => 'Se desexa crear artigos en varias linguas, cunha navegación complexa, pode engadir un menú de selección da lingua dos artigos e/ou das seccións, en función da organización do seu web.',
-	'texte_multilinguisme_trad' => 'Pode igualmente activar un sistema de xestión de ligazóns entre as diferentes traducións dun artigo.',
+	'texte_multilinguisme' => 'Se desexa crear artigos en varias linguas, cunha navegación complexa, pode engadir un menú de selección da lingua dos artigos e/ou das seccións, en función da organización do seu web.', # MODIF
+	'texte_multilinguisme_trad' => 'Pode igualmente activar un sistema de xestión de ligazóns entre as diferentes traducións dun artigo.', # MODIF
 	'texte_non_compresse' => '<i>non comprimido</i> (o teu servidor non soporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensaxe',
 	'texte_nouvelle_version_spip_1' => 'Instalaches unha nova versión de SPIP.',

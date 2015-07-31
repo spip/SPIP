@@ -899,8 +899,8 @@ systém SPIP, abyste vytvořili novou databázi a první přístup pro správce.
   (pomocí rozhraní systému SPIP) jsou reindexovány automaticky:
   Příkaz je tedy vhodné používat pouze výjimečně.',
 	'texte_moteur_recherche_non_active' => 'Vyhledávač je vypnut.',
-	'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.',
-	'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.',
+	'texte_multilinguisme' => 'Chcete-li správu článků v několika jazycích se složitou navigací, můžete k článkům, resp. sekcím (záleží na organizační struktuře vašeho webu) přidat nabídku pro výběr jazyka.', # MODIF
+	'texte_multilinguisme_trad' => 'Rovněž můžete zapnout systém správy odkazů mezi překlady jednotlivých článků.', # MODIF
 	'texte_non_compresse' => '<i>nekomprimováno</i> (váš server tuto funkci nepodporuje)',
 	'texte_nouveau_message' => 'Nová zpráva',
 	'texte_nouvelle_version_spip_1' => 'Nainstalovali jste novou verzi systému SPIP.',

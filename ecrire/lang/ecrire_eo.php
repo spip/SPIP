@@ -887,8 +887,8 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
   (ekde la SPIP-interfaco) estas aŭtomate reindeksitaj:
   tiu ĉi komando estas do nur escepte utila.',
 	'texte_moteur_recherche_non_active' => 'La serĉilo ne estas aktivgita.',
-	'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.',
-	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
+	'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/aŭ en la rubrikoj, konforme al la organizo de via retejo.', # MODIF
+	'texte_multilinguisme_trad' => 'Vi povas ankaŭ aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.', # MODIF
 	'texte_non_compresse' => '<i>ne densigita</i> (ĉar via servilo ne eltenas tiun funkcion)',
 	'texte_nouveau_message' => 'Nova mesaĝo',
 	'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
