@@ -51,10 +51,13 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 
 function plugin_bouton_config($nom, $infos, $dir)
 {
+	// la verification se base sur le filesystem
+	// il faut donc n'utiliser que des minuscules, par convention
+	$prefix = strtolower($infos['prefix']);
 	// si plugin.xml fournit un squelette, le prendre
 	if ($infos['config'])
 		return recuperer_fond("$dir$nom/" . $infos['config'],
-				array('script' => 'configurer_' . $infos['prefix'],
+				array('script' => 'configurer_' . $prefix,
 					'nom' => $nom));
 
 	// si le plugin CFG est la, l'essayer
@@ -66,7 +69,7 @@ function plugin_bouton_config($nom, $infos, $dir)
 
 	// sinon prendre le squelette std sur le nom std
 	return recuperer_fond("prive/cfg",
-			array('script' => 'configurer_' . $infos['prefix'],
+			array('script' => 'configurer_' . $prefix,
 				'nom' => $nom));
 }
 
