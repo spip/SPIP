@@ -401,6 +401,8 @@ function supprimer_versions($id_article, $version_min, $version_max) {
 //
 // http://doc.spip.org/@ajouter_version
 function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) {
+	list($ms, $sec) = explode(' ', microtime());
+	$date = $sec . substr($ms,1);
 	$paras = $paras_old = $paras_champ = $fragments = array();
 
 	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
@@ -408,32 +410,63 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	$str_auteur = intval($id_auteur) ? intval($id_auteur) : $GLOBALS['ip'];
 	$permanent = empty($titre_version) ? 'non' : 'oui';
-	$id_version = 0;
 
-	// Eviter les validations entremelees
-	$lock = "ajout_version $id_article";
-	spip_get_lock($lock, 10);
+	$valeurs = array('id_article' => $id_article,
+			 'id_version' => (0 - ($sec + substr($ms,2))),
+			 'date' => 'NOW()',
+			 'id_auteur' => $str_auteur, //  varchar ici!
+			 'titre_version' => $date);
+			 
+	// Signaler qu'on opere en mettant un numero de version négatif
+	// distinctif (pour eviter la violation d'unicite)
+	// et un titre contenant en fait le moment de l'insertion
 
+	sql_insertq('spip_versions',  $valeurs);
+
+	// Eviter les validations entremelees en s'endormant s'il existe
+	// une version <0 plus recente mais pas plus vieille que 30s
+	// Une <0 encore plus vieille est une operation avortee,
+	// on passe outre (vaut mieux archiver mal que pas du tout).
+	// Pour tester:
+	// 1. decommenter le premier sleep(15)
+	// 2. enregistrer une modif
+	// 3. recommenter le premier sleep(15), decommenter le second.
+	// 4. enregistrer une autre modif dans les 15 secondes
+# 	  sleep(15);
+	$delai = $sec-30;
+	while (sql_countsel('spip_versions', "id_article=$id_article AND id_version < 0 AND 0.0+titre_version < $date AND 0.0+titre_version > $delai")) {
+	  spip_log("version $id_article:insertion < $date et > $delai");
+	  sleep(1);
+	  $delai++;
+	}
+#   sleep(15); 	spip_log("sortie $sec $delai");
 	// Determiner le numero du prochain fragment
 	$next = sql_fetch(spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1"));
 
 	// Examiner la derniere version
-	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
+	$result = sql_select("id_version, champs, id_auteur, date, permanent", "spip_versions", "id_article=$id_article AND id_version > 0", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
+
+	$onlylock = '';
 
 	if ($row = sql_fetch($result)) {
+	  spip_log($row['permanent'] . $row['id_auteur']. ' ' . strtotime($row['date']) . ' ' . (time()-3600));
 		$id_version = $row['id_version'];
 		$paras_old = recuperer_fragments($id_article, $id_version);
 		$champs_old = $row['champs'];
-		$row = $row['flag'];
-	}
-	if (!$row) {
-		$id_version++;
-		sql_insert('spip_versions', '(id_article, id_version, id_auteur)', "($id_article, $id_version, '$str_auteur')"); // le champ id_auteur est un varchar dans cette table
-	}
+		if ($row['id_auteur']!= $str_auteur
+		OR $row['permanent']=='oui'
+		OR strtotime($row['date']) < (time()-3600))
+			$id_version++;
+
 	  // version precedente recente, on va la mettre a jour 
 	  // avec les nouveaux arrivants si presents
-	else $champs = reconstuire_version(unserialize($champs_old), $paras_old, $champs);
+		else {
+		  $champs = reconstuire_version(unserialize($champs_old), $paras_old, $champs);
+		  $onlylock = 're';
+		}
+	} else $id_version = 1;
 
+	spip_log("$id_version row $onlylock " . join(',', $row));
 	$next = !$next ? 1 : ($next['id_fragment'] + 1);
 
 	// Generer les nouveaux fragments
@@ -467,13 +500,20 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Enregistrer les modifications
 	ajouter_fragments($id_article, $id_version, $fragments);
 
-	spip_query("UPDATE spip_versions SET date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
-
 	spip_query("UPDATE spip_articles SET id_version=$id_version WHERE id_article=$id_article");
 
-	spip_release_lock($lock);
+	// Si l'insertion ne servait que de verrou, 
+	// la detruire apres mise a jour de l'ancienne entree,
+	// sinon la mise a jour efface en fait le verrou.
 
-	spip_log("memorise la version $id_version de l'article $id_article $titre_version");
+	if (!$onlylock)
+		spip_query("UPDATE spip_versions SET id_version=$id_version, date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version < 0 AND titre_version='$date'");
+	else {
+		spip_query("UPDATE spip_versions SET date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
+
+		spip_query("DELETE FROM spip_versions WHERE id_article=$id_article AND id_version < 0 AND titre_version ='$date'");
+	}
+	spip_log($onlylock . "memorise la version $id_version de l'article $id_article $titre_version");
 
 	return $id_version;
 }
@@ -568,8 +608,7 @@ function enregistrer_premiere_revision($x) {
 				$date = $champs_originaux['date'];
 				unset ($champs_originaux['date_modif']);
 				unset ($champs_originaux['date']);
-				$id_version = ajouter_version($id_article, $champs_originaux,
-					_T('version_initiale'), 0);
+				$id_version = ajouter_version($id_article, $champs_originaux,	_T('version_initiale'), 0);
 				// Inventer une date raisonnable pour la version initiale
 				if ($date_modif>'1970-')
 					$date_modif = strtotime($date_modif);
@@ -595,6 +634,7 @@ function enregistrer_nouvelle_revision($x) {
 			if (isset($x['data'][$key]))
 				$champs[$key] = $x['data'][$key];
 
+		spip_log("enregistrer_nouvelle_revision " . count($champs));
 		if (count($champs))
 			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 	}
