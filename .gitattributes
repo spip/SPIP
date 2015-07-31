@@ -446,6 +446,13 @@ ecrire/xml/interfaces.php -text
 ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
+plugins/testbuilder/formulaires/editer_test_unit.php -text
+plugins/testbuilder/formulaires/esiter_test_unit.html -text
+plugins/testbuilder/inc/tb_lib.php -text
+plugins/testbuilder/plugin.xml -text
+plugins/testbuilder/prive/exec/testbuilder.html -text
+plugins/testbuilder/prive/exec/testbuilder_fonctions.php -text
+plugins/testbuilder/templates/function.php -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
 prive/contenu/article.html -text
