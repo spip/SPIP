@@ -157,7 +157,7 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 //ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
-global $tables_des_serveurs_sql, $tables_principales; // (voir inc_serialbase)
+global $tables_principales; // (voir inc_serialbase)
 global $exceptions_des_tables, $table_des_tables;
 global $table_date;
 
@@ -191,20 +191,18 @@ $exceptions_des_tables['signatures']['date']='date_time';
 $exceptions_des_tables['signatures']['nom']='nom_email';
 $exceptions_des_tables['signatures']['email']='ad_email';
 
-$exceptions_des_tables['documents']['type_document']=array('spip_types_documents'
+$exceptions_des_tables['documents']['type_document']=array('types_documents'
 , 'titre');
-$exceptions_des_tables['documents']['extension_document']=array('spip_types_documents', 'extension');
-$exceptions_des_tables['documents']['mime_type']=array('spip_types_documents'
+$exceptions_des_tables['documents']['extension_document']=array('types_documents', 'extension');
+$exceptions_des_tables['documents']['mime_type']=array('types_documents'
 , 'mime_type');
 
 # ne sert plus ? verifier balise_URL_ARTICLE
 $exceptions_des_tables['syndic_articles']['url_article']='url';
 # ne sert plus ? verifier balise_LESAUTEURS
 $exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs'; 
-$exceptions_des_tables['syndic_articles']['url_site']=array('spip_syndic',
-'url_site');
-$exceptions_des_tables['syndic_articles']['nom_site']=array('spip_syndic',
-'nom_site');
+$exceptions_des_tables['syndic_articles']['url_site']=array('syndic', 'url_site');
+$exceptions_des_tables['syndic_articles']['nom_site']=array('syndic', 'nom_site');
 
 $table_date['articles']='date';
 $table_date['auteurs']='date';

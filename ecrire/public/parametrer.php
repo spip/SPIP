@@ -252,7 +252,7 @@ function generer_generer_url($type, $p)
 
 	if (!$s)
 		return "generer_url_$type($_id)";
-	elseif ($GLOBALS['type_des_serveurs'][$s] != 'spip')
+	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version'])
 		return calculer_champ($p);
 	else {
 		$u = "quete_meta('adresse_site', '$s')";

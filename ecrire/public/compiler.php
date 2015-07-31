@@ -616,6 +616,58 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	return $codes;
 }
 
+
+// Trouve la description d'une table, en particulier celle d'une boucle
+// Si on ne la trouve pas, on demande au serveur SQL
+// retourne False si lui non plus  ne la trouve pas.
+// Si on la trouve, le tableau resultat a les entrees:
+// field (comme dans serial.php)
+// key (comme dans serial.php)
+// serveur = serveur bd associe
+// table = nom complet de la table (avec le prefixe spip_ pour les stds)
+// type = nom court (i.e. type de boucle)
+
+// http://doc.spip.org/@trouver_table
+function trouver_table($type, $boucle)
+{
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $connexions;
+
+	$serveur = $boucle->sql_serveur;
+	if (!spip_connect($serveur)) return null;
+	$s = $serveur ? $serveur : 0;
+	$spip = $connexions[$s]['spip_connect_version'];
+	if ($spip AND isset($table_des_tables[$type])) {
+    	// indirection (pour les rares cas ou le nom de la table!=type)
+		$t = $table_des_tables[$type];
+		$nom_table = 'spip_' . $t;
+		if (!isset($connexions[$s]['tables'][$nom_table]))
+			$connexions[$s]['tables'][$nom_table] = 
+				$tables_principales[$nom_table];
+	} elseif ($spip AND isset($tables_auxiliaires['spip_' .$type])) {
+		$t = $type;
+		$nom_table = 'spip_' . $t;
+		if (!isset($connexions[$s]['tables'][$nom_table]))
+			$connexions[$s]['tables'][$nom_table] = 
+				$tables_auxiliaires[$nom_table];
+	} else	$nom_table = $t = $type;
+	spip_log("%%%% $t $nom_table " . isset($connexions[$s]['tables'][$nom_table]));
+	if (!isset($connexions[$s]['tables'][$nom_table])) {
+		$desc = sql_showtable($nom_table, $serveur, ($nom_table != $type));
+		if (!$desc OR !$desc['field']) {
+		  erreur_squelette(_T('zbug_table_inconnue', array('table' => $s ? "$serveur:$type" : $type)),
+					 $boucle->id_boucle);
+			return null;
+		}
+		$connexions[$s]['tables'][$nom_table] = $desc;
+	} else $desc = $connexions[$s]['tables'][$nom_table];
+	
+	$desc['table']= $nom_table;
+	$desc['serveur']= $s;
+	$desc['type']= $t;
+
+	return $desc;
+}
+
 // affichage du code produit
 
 // http://doc.spip.org/@code_boucle
@@ -673,7 +725,7 @@ function code_boucle(&$boucles, $id, $nom)
 
 // http://doc.spip.org/@public_compiler_dist
 function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect=''){
-	global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales, $tables_auxiliaires, $tables_jointures;
+	global $tables_jointures;
 
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
@@ -695,10 +747,8 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
 
-	// Initialiser les champs necessaires a la compilation
-	// et signaler une boucle documents (les autres influent dessus)
-	$tables_des_serveurs_sql[0] = 
-	  array_merge($tables_principales,  $tables_auxiliaires);
+	// Signaler une boucle documents (les autres influent dessus)
+
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {

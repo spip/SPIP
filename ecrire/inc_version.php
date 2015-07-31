@@ -286,7 +286,6 @@ $tables_auxiliaires = array();
 $table_primary = array();
 $table_date = array();
 $tables_jointures = array();
-$tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 
 // Liste des statuts. 
 $liste_des_statuts = array(
