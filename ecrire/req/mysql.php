@@ -180,13 +180,15 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	$connexion['last'] = $query;
 
 	// ajouter un debug utile dans log/mysql-slow.log ?
-	$debug = (!defined('_DEBUG_SLOW_QUERIES') || !_DEBUG_SLOW_QUERIES)
-		? ''
-		:	' /* '
-			.str_replace('*/','@/',
-				$_SERVER['REQUEST_URI'].' + '.$GLOBALS['ip']
-			)
-			.' */';
+	$debug = '';
+	if (defined('_DEBUG_SLOW_QUERIES') AND _DEBUG_SLOW_QUERIES){
+		if($GLOBALS['debug']['aucasou']){
+			list(,$id,, $infos) = $GLOBALS['debug']['aucasou'];
+			$debug .= " BOUCLE$id dans ".$infos[0];
+		}
+		$debug .= " " . $_SERVER['REQUEST_URI'].' + '.$GLOBALS['ip'];
+		$debug = ' /*'.str_replace('*/','@/',$debug).' */';
+	}
 
 	$r = $link ? mysql_query($query.$debug, $link) : mysql_query($query.$debug);
 
