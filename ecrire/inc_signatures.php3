@@ -49,10 +49,20 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		  "<TR><TD BGCOLOR='#FFFFFF' class='serif'>";
 				
 		if ($statut=="publie"){
-			icone (_T('icone_supprimer_signature'), "$script?supp_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
+			icone (_T('icone_supprimer_signature'), 
+			       http_php_scriptnq($script,
+						 "supp_petition=$id_signature&debut=$debut"),
+			       "forum-interne-24.gif", 
+			       "supprimer.gif",
+			       "right");
 		}
 		if ($statut=="poubelle"){
-			icone (_T('icone_valider_signature'), "$script?add_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
+			icone (_T('icone_valider_signature'),
+			       http_php_scriptnq($script,
+						 "add_petition=$id_signature&debut=$debut"),
+			       "forum-interne-24.gif", 
+			       "creer.gif",
+			       "right");
 		}
 		
 		echo "<FONT SIZE=2>".date_relative($date_time)."</FONT><BR>";
@@ -95,11 +105,11 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 
 function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 {
-	if ($id_article) {
-		$script .= "?id_article=$id_article&";
+	if ($id_article) { 
+		$args = "id_article=$id_article&";
 		$where .= ($where ? " AND " : "") . "id_article=$id_article";
 	}
-	else $script .= '?';
+	else $args = "";
 
 	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)ORDER BY date_time DESC");
 
@@ -110,7 +120,9 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 			if ($c == ($debut+1))
 				echo "<FONT SIZE=3><B>$c</B></FONT>";
 			else
-			  echo "<A alt=\"$date\" title=\"$date\" HREF='$script","debut=".($c-1)."'>$c</A>";
+			  echo "<A alt=\"$date\" title=\"$date\" href=",
+			    http_php_script($script, $args ."debut=".($c-1)),
+			    ">$c</A>";
 		}
 	}
 	return $where;
