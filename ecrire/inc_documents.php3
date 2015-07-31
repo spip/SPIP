@@ -107,7 +107,7 @@ function texte_vignette_non_inclus($largeur_vignette, $hauteur_vignette, $fichie
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false) {
+function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false, $dossier_complet = false) {
 	global $this_link, $connect_statut;
 
 	if (!$link->getVar('redirect')) {
@@ -139,6 +139,14 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 			echo $texte_upload;
 			echo "\n</select>";
 			echo "\n  <input name='ok' type='Submit' value='Choisir' class='fondo'>";
+			
+			
+			if ($dossier_complet){
+				echo "\n<p><b>Portfolio automatique&nbsp;:</b>";
+				echo "\n<br>Vous pouvez installer automatiquement tous les documents contenus dans le dossier <i>upload</i>.";
+				echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='Installer tous les documents' class='fondl'></div>";
+			}
+			
 		}
 		else {
 			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.";
@@ -469,7 +477,7 @@ function afficher_documents_non_inclus($id_article) {
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
 		
-		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true);
+		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true, true);
 		
 		
 		
