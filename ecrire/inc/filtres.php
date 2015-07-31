@@ -1208,7 +1208,7 @@ function agenda_periode($type, $nb, $avec, $sans='')
 		$evt = array($sans, $avec);
 	else {
 		$min = substr($mindate,6,2);
-		$max = !$avec ? time() : strtotime(max(array_keys($avec)));
+		$max = !(is_array($avec) AND $avec) ? time() : strtotime(max(array_keys($avec)));
 		$max = $min + (($max - $start) / (3600 * 24));
 		if ($max < 31) $max = 0;
 		$evt = array($sans, $avec, $min, $max);
