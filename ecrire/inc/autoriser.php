@@ -111,6 +111,7 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+// http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 
 	return ($GLOBALS['meta']['preview'] == '1comite'
