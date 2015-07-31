@@ -148,11 +148,10 @@ else {
 // si $var_recherche est positionnee, on met en rouge les mots cherches (php4 uniquement)
 //
 
-if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver) {
+if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND !$mode_surligne) {
 	include_ecrire("inc_surligne.php3");
-	if (!$mode_surligne) {
-		$mode_surligne = 'auto';
-	}
+	$mode_surligne = 'auto';
+	ob_start("");
 } else {
 	unset ($var_recherche);
 	unset ($mode_surligne);
