@@ -37,10 +37,6 @@ function exec_admin_plugin_dist($retour='') {
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	
 
-	echo "<br />\n";
-	echo "<br />\n";
-
-
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
 
 	

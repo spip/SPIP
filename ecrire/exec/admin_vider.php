@@ -60,7 +60,6 @@ function exec_admin_vider_dist()
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
 
-		echo "<br /><br /><br />";
 		echo gros_titre(_T('titre_admin_vider'),'', false);
 // barre_onglets("administration", "vider");
 

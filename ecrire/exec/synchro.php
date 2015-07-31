@@ -45,7 +45,6 @@ function exec_synchro_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T("icone_suivi_activite"),  "accueil", "synchro");
 
-	echo "<br /><br />";
 	echo gros_titre(_T("icone_suivi_activite"),'', false);
 
 	echo debut_gauche('', true);

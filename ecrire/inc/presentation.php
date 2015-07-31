@@ -106,6 +106,8 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $
 	."'$style_cadre>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
+		if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
+			list($icone,$fonction) = $icone_renommer($icone,$fonction);
 		if ($fonction) {
 			
 			$ret .= http_img_pack("$fonction", "", " class='cadre-icone' ".http_style_background($icone, "no-repeat; padding: 0px; margin: 0px"));
@@ -569,6 +571,8 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
 // http://doc.spip.org/@icone_inline
 function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false, $javascript=''){
 	global $spip_display;
+	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
+		list($fond,$fonction) = $icone_renommer($fond,$fonction);
 
 	if ($fonction == "supprimer.gif") {
 		$style = 'icone36 danger';
@@ -636,6 +640,8 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false
 // http://doc.spip.org/@icone_horizontale
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true, $javascript='') {
 	global $spip_display;
+	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
+		list($fond,$fonction) = $icone_renommer($fond,$fonction);
 
 	$retour = '';
 	// cas d'ajax_action_auteur: faut defaire le boulot
@@ -697,7 +703,7 @@ function f_boite_infos($flux) {
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
 	global $spip_display;
-	$res = "\n<h1>";
+	$res = "\n<h1 class='grostitre'>";
 	if ($spip_display != 4) {
 		$res .= $ze_logo.' ';
 	}
@@ -766,7 +772,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 	// div contenu lui-meme ferme par fin_gauche() ainsi que
 	// div conteneur
 
-	$res = "<br /><div id='conteneur' class='".(_INTERFACE_ONGLETS ? "onglets" : "no_onglets")  ."'>
+	$res = "<div id='conteneur' class='".(_INTERFACE_ONGLETS ? "onglets" : "no_onglets")  ."'>
 		\n<div id='navigation'>\n";
 
 	if ($spip_display == 4) $res .= "<!-- ";

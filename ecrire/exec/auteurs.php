@@ -118,9 +118,7 @@ function bandeau_auteurs($tri, $visiteurs)
 	$ret .= pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	$ret .= debut_droite('',true);
 
-	$ret .= "\n<br />";
 	$ret .= gros_titre($visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'),'',false);
-	$ret .= "\n<br />";
 	return $ret;
 }
 
