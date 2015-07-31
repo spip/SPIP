@@ -163,6 +163,25 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 
 
+//
+// Suivi forums publics
+//
+
+// fonction dupliquee dans inc-forum.php3
+function get_forums_publics($id_article=0) {
+	$forums_publics = lire_meta("forums_publics");
+	if ($id_article) {
+		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
+		$res = mysql_query($query);
+		if ($obj = mysql_fetch_object($res))
+			$forums_publics = $obj->accepter_forum;
+	} else { // dans ce contexte, inutile
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+	}
+	return $forums_publics;
+}
+
+
 //////////////////////////////////////////////////////
 // Affichage de la colonne de gauche
 //
@@ -193,35 +212,6 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>ARTICLE NUM&Ea
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
 
 echo "</div>\n";
-
-
-//
-// Suivi forums publics
-//
-
-// fonction dupliquee dans inc-forum.php3
-function get_forums_publics($id_article=0) {
-	$forums_publics = lire_meta("forums_publics");
-	if ($id_article) {
-		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
-		$res = mysql_query($query);
-		if ($obj = mysql_fetch_object($res))
-			$forums_publics = $obj->accepter_forum;
-	} else { // dans ce contexte, inutile
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
-	}
-	return $forums_publics;
-}
-
-$forums_publics = get_forums_publics($id_article);
-
-if ($forums_publics != 'non' AND acces_rubrique($rubrique_article) AND $connect_statut == '0minirezo' AND $options == 'avancees' AND $statut_article == 'publie') {
-	echo "<p align='center'>\n";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><b>";
-	echo "<a href='articles_forum.php3?id_article=$id_article'>G&eacute;rer le forum public</a>";
-	echo "</b>";
-	echo "</p>\n";
-}
 
 fin_boite_info();
 
@@ -261,7 +251,8 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND ($o
 // Accepter forums...
 //
 
-/* $forums_publics = lire_meta("forums_publics"); */
+
+$forums_publics = get_forums_publics($id_article);
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == 'avancees') {
 
@@ -276,58 +267,72 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$boite_ouverte = true;
 	}
 
+	// boite active ?
+	if ($change_accepter_forum || $petition) $visible = true;
+
 	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
 	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
-	echo bouton_block_invisible("forumarticle");
-	echo "CONFIGURER LE FORUM";
+	if ($visible)
+		echo bouton_block_visible("forumarticle");
+	else
+		echo bouton_block_invisible("forumarticle");
+	echo "FORUM & P&Eacute;TITION";
 	echo "</b></font></td></tr></table></center>";
-	echo debut_block_invisible("forumarticle");
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	echo "\n<form action='articles.php3' method='get'>";
-	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
 
+	if ($visible)
+		echo debut_block_visible("forumarticle");
+	else
+		echo debut_block_invisible("forumarticle");
+
+	echo "\n<form action='articles.php3' method='get'>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><u><b>FORUM PUBLIC</b></u><br>";
+
+	if ($statut_article == 'publie') {
+		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article";
+		if ($row = mysql_fetch_row(mysql_query($req))) {
+			$nbforums = '<br>V&eacute;rifier '.$row[0].' contribution(s).';
+			echo "<a href='articles_forum.php3?id_article=$id_article'>$nbforums</a>\n";
+		}
+	}
+
+	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
+	echo "<i>Mode de mod&eacute;ration&nbsp;:</i>\n";
 	if ($forums_publics == "pos") {
-		echo "<P><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
 		echo "<B><label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label></B>";
 	} else {
-		echo "<P><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos'>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos'>";
 		echo "<label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label>";
 	}
 	if ($forums_publics == "pri") {
-		echo "<P><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri' checked>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri' checked>";
 		echo "<B><label for='accepterforumpri'> mod&eacute;r&eacute; &agrave; priori</label></B>";
 	} else {
-		echo "<P><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri'>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri'>";
 		echo "<label for='accepterforumpri'> mod&eacute;r&eacute; &agrave; priori</label>";
 	}
 	if ($forums_publics == "abo") {
-		echo "<P><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo' checked>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo' checked>";
 		echo "<B><label for='accepterforumabo'> mod&eacute;r&eacute; sur abonnement</label></B>";
 	} else {
-		echo "<P><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo'>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo'>";
 		echo "<label for='accepterforumabo'> mod&eacute;r&eacute; sur abonnement</label>";
 	}
 	if ($forums_publics == "non") {
-		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon' checked>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon' checked>";
 		echo "<B><label for='accepterforumnon'>pas de forum</label></B>";
 	} else {
-		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon'>";
+		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon'>";
 		echo "<label for='accepterforumnon'>pas de forum</label>";
 	}
 
-	echo "<p align='right'><input type='submit' name='Changer' class='fondo' value='Changer'></p>\n";
+	echo "<p align='right'><input type='submit' name='Changer' class='fondo' value='Changer' STYLE='font-size:10px'></p>\n";
 	echo "</form>";
-	echo fin_block();
-	echo "<br>";
-}
 
-
-//
-// Petitions
-//
-
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
+	////////////////////////////////////////////////
+	// Petitions
+	//
 
 	//
 	// Resultat formulaire
@@ -351,87 +356,73 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 		}
 	}
 
-
 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 	$result_petition = mysql_query($query_petition);
 	$petition = (mysql_num_rows($result_petition) > 0);
 
-	if ($options == 'avancees' OR $petition) {
-		while ($row=mysql_fetch_array($result_petition)) {
-			$id_rubrique=$row[0];
-			$email_unique=$row[1];
-			$site_obli=$row[2];
-			$site_unique=$row[3];
-			$message=$row[4];
-			$texte_petition=$row[5];
-		}
-	
-		if (!$boite_ouverte) {
-			debut_boite_info();
-			$boite_ouverte = true;
-		}
-	
-		echo "<CENTER><TABLE WIDTH=100% CELLPADDING=2 BORDER=1 CLASS='hauteur'><TR><TD WIDTH=100% ALIGN='center' BGCOLOR='#FFCC66'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#333333'><B>";
-		echo bouton_block_invisible("petitionarticle");
-		if ($petition) echo "CONFIGURER LA P&Eacute;TITION";
-		else echo "AJOUTER UNE P&Eacute;TITION";
-		echo "</B></FONT></TD></TR></TABLE></CENTER>";
-		echo debut_block_invisible("petitionarticle");
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-		
-		echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
-		echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
-	
-		if ($petition){
-			echo "<P><input type='radio' name='petition' value='on' id='petitionon' checked>";
-			echo "<B><label for='petitionon'>Cet article est une p&eacute;tition</label></B>";
-	
-			echo "<FONT SIZE=1>";
-			if ($email_unique=="oui")
-				echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
-			else
-				echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
-			echo " <label for='emailunique'>une seule signature par adresse email</label>";
-			if ($site_obli=="oui")
-				echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
-			else
-				echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
-			echo " <label for='siteobli'>indiquer obligatoirement un site Web</label>";
-			if ($site_unique=="oui")
-				echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
-			else
-				echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
-			echo " <label for='siteunique'>une seule signature par site Web</label>";
-			if ($message=="oui")
-				echo "<BR><input type='checkbox' name='message' value='oui' id='message' checked>";
-			else
-				echo "<BR><input type='checkbox' name='message' value='oui' id='message'>";
-			echo " <label for='message'>possibilit&eacute; d'envoyer un message</label>";
-			
-			echo "<P>Descriptif de cette p&eacute;tition&nbsp;:</BR>";
-			echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
-			echo $texte_petition;
-			echo "</TEXTAREA><P>\n";
-	
-			echo "</FONT>";
-	
-		}else{
-			echo "<P><input type='radio' name='petition' value='on' id='petitionon'>";
-			echo "<label for='petitionon'>Cet article est une p&eacute;tition</label>";
-		}
-		if (!$petition){
-			echo "<P><input type='radio' name='petition' value='off' id='petitionoff' checked>";
-			echo "<B><label for='petitionoff'>Cet article ne propose pas de p&eacute;tition</label></B>";
-		}else{
-			echo "<P><input type='radio' name='petition' value='off' id='petitionoff'>";
-			echo "<label for='petitionoff'>Cet article ne propose pas de p&eacute;tition</label>";
-		}
-		
-		echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
-		echo "</FORM>";
-		echo "</FONT>";
-		echo fin_block();
+	while ($row=mysql_fetch_array($result_petition)) {
+		$id_rubrique=$row[0];
+		$email_unique=$row[1];
+		$site_obli=$row[2];
+		$site_unique=$row[3];
+		$message=$row[4];
+		$texte_petition=$row[5];
 	}
+
+	echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
+	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><u><b>P&Eacute;TITION</b></u></font><br>\n";
+	
+	if ($petition){
+		echo "<br><input type='radio' name='petition' value='on' id='petitionon' checked>";
+		echo "<B><label for='petitionon'>Cet article est une p&eacute;tition</label></B>";
+
+		echo "<FONT SIZE=1>";
+		if ($email_unique=="oui")
+			echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
+		else
+			echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
+		echo " <label for='emailunique'>une seule signature par adresse email</label>";
+		if ($site_obli=="oui")
+			echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
+		else
+			echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
+		echo " <label for='siteobli'>indiquer obligatoirement un site Web</label>";
+		if ($site_unique=="oui")
+			echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
+		else
+			echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
+		echo " <label for='siteunique'>une seule signature par site Web</label>";
+		if ($message=="oui")
+			echo "<BR><input type='checkbox' name='message' value='oui' id='message' checked>";
+		else
+			echo "<BR><input type='checkbox' name='message' value='oui' id='message'>";
+		echo " <label for='message'>possibilit&eacute; d'envoyer un message</label>";
+		
+		echo "<P>Descriptif de cette p&eacute;tition&nbsp;:</BR>";
+		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
+		echo $texte_petition;
+		echo "</TEXTAREA><P>\n";
+
+		echo "</FONT>";
+
+	}else{
+		echo "<br><input type='radio' name='petition' value='on' id='petitionon'>";
+		echo "<label for='petitionon'>Ajouter une p&eacute;tition</label>";
+	}
+	if (!$petition){
+		echo "<br><input type='radio' name='petition' value='off' id='petitionoff' checked>";
+		echo "<B><label for='petitionoff'>Pas de p&eacute;tition</label></B>";
+	}else{
+		echo "<br><input type='radio' name='petition' value='off' id='petitionoff'>";
+		echo "<label for='petitionoff'>Supprimer la p&eacute;tition</label>";
+	}
+	
+	echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
+	echo "</FORM>";
+	echo "</FONT>";
+	echo fin_block();
 }
 
 
