@@ -2288,12 +2288,16 @@ function filtre_cache_static($scripts,$type='js'){
 		  	$total = 0;
 		  	foreach($scripts as $script){
 		  		if (!is_array($script)) {
+		  			// c'est un fichier
 		  			$comm = $script;
+		  			// enlever le timestamp si besoin
+		  			$script = preg_replace(",[?].+$,",'',$script);
 				  	if ($type=='css')
 				  		$script = url_absolue_css($script);
 		  			lire_fichier($script, $contenu);
 		  		}
 		  		else {
+		  			// c'est un squelette
 		  			$comm = _SPIP_PAGE . "=$script[0]"
 		  				. (strlen($script[1])?"($script[1])":'');
 		  			parse_str($script[1],$contexte);
@@ -2320,7 +2324,7 @@ function filtre_cache_static($scripts,$type='js'){
 	}
 
 	// Le commentaire detaille n'apparait qu'au recalcul, pour debug
-	return array("$nom?".filemtime($nom), $comms ? "<!-- $comms -->\n" : '');
+	return array($nom, $comms ? "<!-- $comms -->\n" : '');
 }
 
 
@@ -2342,9 +2346,14 @@ function compacte_head_js($flux) {
 		AND (
 			preg_match(',^('.$dir.')(.*)$,', $src, $r)
 			OR (
+				// ou si c'est un fichier
 				$src = preg_replace(',^'.preg_quote(url_de_base(),',').',', '', $src)
+				// enlever un timestamp eventuel derriere un nom de fichier statique
+				AND $src2 = preg_replace(",[.]js[?].+$,",'.js',$src)
+				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
 				AND !preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
-				AND @is_readable($src)
+				// et si il est lisible
+				AND @is_readable($src2)
 			)
 		)) {
 			if ($r)
@@ -2385,10 +2394,16 @@ function compacte_head_css($flux) {
 		AND !strlen(strip_tags($s))
 		AND $src = preg_replace(",^$url_base,",_DIR_RACINE,extraire_attribut($s, 'href'))
 		AND (
+			// regarder si c'est du format spip.php?page=xxx
 			preg_match(',^('.$dir.')(.*)$,', $src, $r)
 			OR (
-				!preg_match(',(^/|\.\.),', substr($src,strlen(_DIR_RACINE)))
-				AND @is_readable($src)
+				// ou si c'est un fichier
+				// enlever un timestamp eventuel derriere un nom de fichier statique
+				$src2 = preg_replace(",[.]css[?].+$,",'.css',$src)
+				// verifier qu'il n'y a pas de ../ ni / au debut (securite)
+				AND !preg_match(',(^/|\.\.),', substr($src2,strlen(_DIR_RACINE)))
+				// et si il est lisible
+				AND @is_readable($src2)
 			)
 		)) {
 			$media = strval(extraire_attribut($s, 'media'));
