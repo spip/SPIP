@@ -124,7 +124,7 @@ function naviguer_dist()
 /// Mots-cles
 	    if ($GLOBALS['meta']["articles_mots"] != 'non' AND $id_rubrique > 0) {
 		echo "\n<p>";
-		formulaire_mots('rubriques', $id_rubrique,  $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+		formulaire_mots('rubriques', $id_rubrique,  $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("naviguer","id_rubrique=$id_rubrique&id_parent=$id_parent"));
 	    }
 
 
@@ -268,7 +268,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 function contenu_naviguer($id_rubrique, $id_parent, $ze_logo,$flag_editable) {
 
-global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right;
+global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right;
 
 ///// Afficher les rubriques 
 afficher_enfant_rub($id_rubrique, $flag_editable);
@@ -474,9 +474,6 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
 {
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	unset($_POST['id_parent']);
-	$_POST['id_rubrique'] = $id_parent;
-	$GLOBALS['clean_link'] = new Link();
 	return $id_parent;;
 }
 

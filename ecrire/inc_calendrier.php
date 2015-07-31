@@ -42,7 +42,7 @@ function calendrier_dist()
 
   debut_page($titre, "redacteurs", "calendrier","",$css);
   echo "<div>&nbsp;</div>" ;
-  echo http_calendrier_init('', $type);
+  echo http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')));
   fin_page();
 }
 

@@ -139,11 +139,10 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 }
 
-
 //
 // Afficher les referers d'un article (ou du site)
 //
-function aff_referers ($query, $limit=10, $plus = true) {
+function aff_referers ($query, $limit=10, $plus) {
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
 
@@ -224,9 +223,7 @@ function aff_referers ($query, $limit=10, $plus = true) {
 
 		// Le lien pour en afficher "plus"
 		if ($plus AND (spip_num_rows($result) == $limit)) {
-			$lien = $GLOBALS['clean_link'];
-			$lien->addVar('limit',$limit+200);
-			$aff .= "<div style='text-align:right;'><b><a href='".$lien->getUrl()."'>+++</a></b></div>";
+			$aff .= "<div style='text-align:right;'><b><a href='$plus'>+++</a></b></div>";
 		}
 	}
 

@@ -137,8 +137,7 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	if (!$lechelle) $lechelle = $echelle;
 	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
 	list($script, $ancre) = 
-	  calendrier_retire_args_ancre($script ? $script :
-						  $GLOBALS['clean_link']->getUrl()); 
+	  calendrier_retire_args_ancre($script); 
 	if (!$evt) {
 	  $g = 'sql_calendrier_' . $ltype;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));

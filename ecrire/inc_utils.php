@@ -709,13 +709,15 @@ function generer_url_public($script, $args="", $no_entities=false) {
 
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+
 	return $site . $script . $ext . $args;
 }
 
 function generer_url_action($script, $args="", $no_entities=false) {
 
-	return generer_url_public('spip_action.php',
+	return  generer_url_public('spip_action.php',
 				  "action=$script" .($args ? "&$args" : ''),
 				  $no_entities);
+	
 }
 ?>

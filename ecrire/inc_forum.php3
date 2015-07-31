@@ -245,10 +245,10 @@ function modifier_forums_publics($id_article, $forums_publics) {
 }
 
 // Cree le formulaire de modification du reglage des forums de l'article
-function formulaire_modification_forums_publics($id_article, $forums_publics) {
+function formulaire_modification_forums_publics($id_article, $forums_publics, $appelant) {
 	global $spip_lang_right;
 
-	$r = "\n<form action='". $GLOBALS['clean_link']->getUrl() ."' method='POST'>";
+	$r = "\n<form action='$appelant' method='post'>";
 
 	$r .= "\n<input type='hidden' name='id_article' value='$id_article'>";
 	$r .= "<br>"._T('info_fonctionnement_forum')."\n";
