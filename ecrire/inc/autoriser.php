@@ -543,7 +543,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (in_array($qui['statut'], array('0minirezo', '1comite')))
 		return 'htaccess';
 
-	foreach(array('article','rubrique','breve') as $objet){
+	foreach(array('article','rubrique','breve','forum') as $objet){
 		$table_sql = table_objet_sql($objet);
 		$id_table = id_table_objet($objet);
 		if (sql_countsel('spip_documents_liens AS rel, '.$table_sql.' AS o', "rel.id_objet = o.$id_table AND rel.objet='$objet' AND o.statut = 'publie' AND rel.id_document = $id") > 0)
