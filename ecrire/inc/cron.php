@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // --------------------------
@@ -22,17 +21,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - les scripts usuels standard sont limites a 30 secondes
 
 // Solution:
-// les scripts usuels les plus brefs, en plus de livrer la page demandee,
-// s'achevent  par un appel a la fonction spip_cron.
-// Celle-ci prend dans la liste des taches a effectuer la plus prioritaire.
-// Une seule tache est executee pour eviter la guillotine des 30 secondes.
+// Toute connexion a SPIP s'achevent  par un appel a la fonction cron()
+// qui appelle la fonction surchargeable inc_cron().
+// Sa definition standard ci-dessous prend dans une liste de taches
+// la plus prioritaire, leurs dates etant donnees par leur fichier-verrou.
 // Une fonction executant une tache doit retourner un nombre:
 // - nul, si la tache n'a pas a etre effecutee
 // - positif, si la tache a ete effectuee
 // - negatif, si la tache doit etre poursuivie ou recommencee
 // Elle recoit en argument la date de la derniere execution de la tache.
 
-// On peut appeler spip_cron avec d'autres taches (pour etendre Spip)
+// On peut appeler inc_cron avec d'autres taches (pour etendre Spip)
 // specifiee par des fonctions respectant le protocole ci-dessus
 // On peut modifier la frequence de chaque tache et leur ordre d'analyse
 // en modifiant les variables ci-dessous.
@@ -40,9 +39,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //----------
 
 // Les taches sont dans un tableau ('nom de la tache' => periodicite)
-// Cette fonction execute la tache la plus urgente (celle dont la date
-// de derniere execution + la periodicite est minimale) sous reserve que
-// la base de donnees soit accessible.
+// Cette fonction execute la tache la plus urgente
+// (celle dont la date de derniere execution + la periodicite est minimale)
 // La date de la derniere intervention est donnee par un fichier homonyme,
 // de suffixe ".lock", modifie a chaque intervention et des le debut
 // de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
@@ -52,83 +50,59 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Elle doit etre definie dans le fichier homonyme du repertoire "inc/"
 // qui est automatiquement lu.
 
-// http://doc.spip.org/@spip_cron
-function spip_cron($taches = array()) {
-	$t = time();
-	if (@file_exists(_DIR_TMP.'mysql_out')
-	AND ($t - @filemtime(_DIR_TMP.'mysql_out') < 300))
-		return;
+// Une seule tache est executee pour eviter la guillotine des 30 secondes.
 
-	include_spip('inc/meta');
-	// force un spip_query
-	lire_metas();
+// http://doc.spip.org/@spip_cron
+function inc_cron_dist($taches = array()) {
 
 	if (!$taches)
 		$taches = taches_generales();
 
 	// Quelle est la tache la plus urgente ?
 	$tache = '';
-	$tmin = $t;
+	$tmin = $t = time();
 	clearstatcache();
 	foreach ($taches as $nom => $periode) {
-		$lock = _DIR_TMP . $nom . '.lock';
-		$date_lock = @filemtime($lock);
+		$celock = _DIR_TMP . $nom . '.lock';
+		$date_lock = @filemtime($celock);
 		if ($date_lock + $periode < $tmin) {
 			$tmin = $date_lock + $periode;
 			$tache = $nom;
+			$lock = $celock;
 			$last = $date_lock;
 		}
 	// debug : si la date du fichier est superieure a l'heure actuelle,
-	// c'est que le serveur a (ou a eu) des problemes de reglage horaire
-	// qui peuvent mettre en peril les taches cron : signaler dans le log
+	// c'est que les serveurs Http et de fichiers sont desynchro.
+	// Ca peut mettre en peril les taches cron : signaler dans le log
 	// (On laisse toutefois flotter sur une heure, pas la peine de s'exciter
 	// pour si peu)
 		else if ($date_lock > $t + 3600)
 			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
 	}
-	if (!$tache) return;
 
-	// Interdire des taches paralleles, de maniere a eviter toute concurrence
-	// entre deux SPIP partageant la meme base, ainsi que toute interaction
-	// bizarre entre des taches differentes
-	// Ne rien lancer non plus evidemment si la base est inaccessible.
+	if ($tache) {
 
-	if (!spip_get_lock('cron')) {
-		spip_log("tache $tache: pas de lock cron");
-		return;
-	}
-
-	// Un autre lock dans _DIR_TMP, pour plus de securite
-	$lock = _DIR_TMP . $tache . '.lock';
-	if (spip_touch($lock, $taches[$tache])) {
-		// preparer la tache
 		spip_timer('tache');
-
-		$fonction = 'cron_' . $tache;
-		if (!function_exists($fonction))
-			include_spip('inc/' . $tache);
-
-
-		// l'appeler
-		$code_de_retour = $fonction($last);
-
+		include_spip("inc/$tache");
+		$f = 'cron_' . $tache;
+		$retour = $f($last);
+		touch($lock);
 		// si la tache a eu un effet : log
-		if ($code_de_retour) {
-			spip_log("cron: $tache (" . spip_timer('tache') . ")");
-			// eventuellement modifier la date du fichier
-			if ($code_de_retour < 0) @touch($lock, (0 - $code_de_retour));
-		}# else spip_log("cron $tache a reprendre");
+		if ($retour) {
+			spip_log("cron: $tache (" . spip_timer('tache') . ") $retour");
+			if ($retour < 0)
+				@touch($lock, 0 - $retour);
+		}
 	}
-
-	// relacher le verrour
-	spip_release_lock('cron');
 }
 
 //
 // Construction de la liste des taches.
-// la cle est la tache, la valeur le temps minimal, en secondes, entre
-// deux memes taches
-// NE PAS METTRE UNE VALEUR INFERIEURE A 30 (cf ci-dessus)
+// la cle est la tache, 
+// la valeur le temps minimal, en secondes, entre deux memes taches
+// NE PAS METTRE UNE VALEUR INFERIEURE A 30 
+// les serveurs Http n'accordant en general pas plus de 30 secondes
+// a leur sous-processus
 //
 // http://doc.spip.org/@taches_generales
 function taches_generales() {
@@ -170,8 +144,10 @@ function taches_generales() {
 // il faut donc definir la fonction _cron ici.
 // http://doc.spip.org/@cron_optimiser
 function cron_optimiser($t) {
+
 	include_spip('base/optimiser');
 	optimiser_base();
+	// relacher le verrour
 	return 1;
 }
 

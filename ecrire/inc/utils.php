@@ -586,13 +586,11 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // http://doc.spip.org/@action_cron
 function action_cron() {
 	include_spip('inc/headers');
-	//	envoie_image_vide();
 	http_status(204); // No Content
 	header("Connection: close");
-	cron (1);
+	cron (true);
 }
 
-//
 // cron() : execution des taches de fond
 // quand il est appele par public.php il n'est pas gourmand;
 // quand il est appele par ?action=cron, il est gourmand
@@ -600,18 +598,30 @@ function action_cron() {
 // http://doc.spip.org/@cron
 function cron ($gourmand=false) {
 
+	// Si base inaccessible, laisser tomber.
+	if (!spip_connect()) return; 
+
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
-	// (ou est trop vieux -> 60 sec), on va voir si un cron est necessaire.
+	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
 	if (spip_touch(_DIR_TMP.'cron.lock-gourmand', 60, $gourmand)
 	OR $gourmand) {
 
-		// Faut-il travailler ? Pas tous en meme temps svp
-		// Au passage si on travaille on bloque les autres
+	// Le fichier cron.lock indique la date de la derniere tache
+	// Il permet d'imposer qu'il n'y ait qu'une tache a la fois
+	// et 2 secondes minimum entre chaque:
+	// ca soulage le serveur et ca evite
+	// les conflits sur la base entre taches.
+
 		if (spip_touch(_DIR_TMP.'cron.lock', 2)) {
-			include_spip('inc/cron');
-			spip_cron();
-		}
+			$cron = charger_fonction('cron', 'inc', true);
+			if ($cron) {
+				$cron();
+				// redater a la fin du cron
+				// car il peut prendre plus de 2 secondes.
+				spip_touch(_DIR_TMP.'cron.lock', 0);
+			}
+		}# else spip_log("busy");
 	}
 }
 
