@@ -84,17 +84,17 @@ a:after {
 	display: none;
 }
 
-#encart {
+.encart {
 	display: none;
 }
 
-#cartouche {
+.cartouche {
 	margin-top: 0.5em;
 	padding-top: 1em;
 	margin-bottom: 1em;
 }
 
-#cartouche .spip_logos {
+.cartouche .spip_logos {
 	margin-left: 0px;
 	padding-left: 0px;
 	margin-right: 0.8em;
