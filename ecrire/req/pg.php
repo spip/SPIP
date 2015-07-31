@@ -609,7 +609,7 @@ function spip_pg_frommysql($arg)
 # correct en theorie mais produit des debordements arithmetiques
 #	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)(timestamp *'[^']*' *[+-] *timestamp *'[^']*') *[)]/", '\2', $res);
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)('[^']*')/", '\1 timestamp \2', $res);
-
+	$res = preg_replace("/\sLIKE\s+/", ' ILIKE ', $res);
 	return str_replace('REGEXP', '~', $res);
 }
 
