@@ -69,7 +69,7 @@ function ecrire_tableau_edition($edition) {
 // http://doc.spip.org/@signale_edition
 function signale_edition ($id, $auteur, $type='article') {
 	$edition = lire_tableau_edition();
-	if ($id_a = $auteur['id_auteur'])
+	if (isset($auteur['id_auteur']) and $id_a = $auteur['id_auteur'])
 		$nom = $auteur['nom'];
 	else
 		$nom = $id_a = $GLOBALS['ip'];
