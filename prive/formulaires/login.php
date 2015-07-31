@@ -148,7 +148,8 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 			_T('login_identifiant_inconnu',
 			array('login' => htmlspecialchars($session_login))));
 	}
-	$auteur = verifier_login($login, $session_password, $session_md5pass, $session_md5next);
+	include_spip('inc/auth');
+	$auteur = auth_identifier_login($login, $session_password, $session_md5pass, $session_md5next);
 	if (!$auteur) {
 		if (strlen($session_password) OR strlen($session_md5pass))
 			return array('password' => _T('login_erreur_pass'));
@@ -256,20 +257,4 @@ function retrouver_login($login)
 			" AND (login<>'' AND (nom=$l OR email=$l))");
 }
 
-// Essayer les differentes sources d'authenfication dans l'ordre specifie.
-// S'en souvenir dans visiteur_session['auth']
-
-// http://doc.spip.org/@verifier_login
-function verifier_login($login, $password, $md5pass="", $md5next="")
-{
-	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		if ($auth = charger_fonction($methode, 'auth')
-		AND $auteur = $auth($login, $password, $md5pass, $md5next)) {
-			spip_log("connexion de $login par methode $methode");
-			$auteur['auth'] = $methode;
-			return $auteur;
-		}
-	}
-	return false;
-}
 ?>

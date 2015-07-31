@@ -240,28 +240,13 @@ function determine_upload($type='') {
 //  Verif d'un utilisateur authentifie en php_auth
 //
 
-// http://doc.spip.org/@lire_php_auth
-function lire_php_auth($user, $pw) {
-
-	include_spip('base/abstract_sql');
-	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($user));
-
-	if ($row AND $row['source'] != 'ldap')
-		return ($row['pass'] == md5($row['alea_actuel'] . $pw)) ? $row : false;
-	elseif (spip_connect_ldap()) {
-		$auth_ldap = charger_fonction('ldap', 'auth', true);
-		if ($auth_ldap) return $auth_ldap($user, $pw);
-	}
-	return false;
-}
-
-
 // http://doc.spip.org/@verifier_php_auth
 function verifier_php_auth() {
 
 	if (@$_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !@$GLOBALS['ignore_auth_http']) {
-		if ($r = lire_php_auth($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+		include_spip('inc/auth');
+		if ($r = auth_identifier_login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 		  $GLOBALS['visiteur_session'] = $r;
 		  return $GLOBALS['visiteur_session']['statut'];
 		} 
