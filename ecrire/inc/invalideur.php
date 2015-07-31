@@ -158,7 +158,8 @@ function appliquer_quota_cache() {
 			$n = purger_repertoire($dir,
 				array(
 					'atime' => time() - _AGE_CACHE_ATIME,
-					'limit' => $trop
+					'limit' => $trop,
+					'subdir' => true // supprimer les sous repertoire de session aussi
 				)
 			);
 			spip_log("$dir : $n/$trop caches supprimes [taille moyenne $taille]","invalideur");
