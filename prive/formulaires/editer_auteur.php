@@ -12,6 +12,9 @@ function instituer_auteur_ici($auteur=array()){
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $lier_id_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	if ($lier_id_article) $valeurs['lier_id_article'] = $lier_id_article;
+	// forcer la prise en compte du post, sans verifier si c'est bien le meme formulaire,
+	// c'est trop hasardeux selon le contenud de $row
+	$valeurs['_forcer_request'] = true;
 	return $valeurs;
 }
 
