@@ -11,6 +11,7 @@ include_local ("ecrire/inc_meta.php3");
 include_local ("ecrire/inc_admin.php3");
 include_local ("ecrire/inc_acces.php3");
 include_local ("ecrire/inc_texte.php3");
+include_local ("ecrire/inc_filtres.php3");
 include_local ("ecrire/inc_mail.php3");
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
@@ -322,7 +323,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if ($afficher_groupe) {
 			$afficher_groupe = join($afficher_groupe, ",");
 			$selectionner_groupe = "AND id_groupe IN ('$afficher_groupe')";
-			echo "[$afficher_groupe]";
 		}
 		if ($table){
 			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE 6forum = 'oui' AND $table = 'oui' $selectionner_groupe";
