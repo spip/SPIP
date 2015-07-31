@@ -24,13 +24,18 @@ function formulaires_signature_charger_dist($id_article, $petition, $texte, $sit
 		'debut_signatures'=>'' // pour le nettoyer de l'url d'action !
 		);
 
-	if (_request('var_confirm')) {
-		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature/');
-		$reponse = $reponse_confirmation();  # calculee plus tot: assembler.php
-		return array(false,array('_reponse'=>$reponse));
+	if ($c=_request('var_confirm')) {
+		// on ne passe pas directement le message mais uniquement le pass de confirm
+		// cela permet de conserver le message en cache quelques instants
+		// et se premunir contre le double clic
+		return array(false,array('_confirm'=>$c));
 	}
 	
 	return $valeurs;
+}
+function affiche_reponse_confirmation($confirm){
+	$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature/');
+	return $reponse_confirmation();  # calculee plus tot: assembler.php
 }
 
 function formulaires_signature_verifier_dist($id_article, $petition, $texte, $site_obli, $message) {

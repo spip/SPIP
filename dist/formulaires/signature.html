@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_signature ajax" id="sp#ENV{id_article}">
-[<p class="formulaire_message">(#ENV*{message_ok,#ENV*{_reponse}})</p>]
+[<p class="formulaire_message">(#ENV*{message_ok,#ENV*{_confirm}|affiche_reponse_confirmation})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 [(#ENV{editable})
 <form method="post" action="#ENV{action}">
