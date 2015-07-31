@@ -19,8 +19,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 # compatibilite anciennes versions
 # si vous avez encore un fichier .php3, redefinissez a ".php3"
 # concerne mes_options.php3 / mes_fonctions.php3 / inc_connect.php3
+#define('_EXTENSION_PHP', '.php3');
 define('_EXTENSION_PHP', '');
-#define('_EXTENSION_PHP', '');
 #mettre a true pour compatibilite PHP3
 define('_FEED_GLOBALS', false);
 
