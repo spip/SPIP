@@ -65,20 +65,23 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 
 	echo "<p>";
 	debut_cadre_relief("image-24.gif");
-	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	echo "<center><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<b>";
 	echo bouton_block_invisible(md5($texteon));
 	echo $texteon;
-	echo "</b></center></font>";
+	echo "</b>";
 
 	afficher_logo($logo, $texteon);
 
 	if ($logo_ok OR $survol_ok) {
-		echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
+		echo "<br><br><b>";
 		echo bouton_block_invisible(md5($texteoff));
 		echo $texteoff;
-		echo "</b></font></p>";
+		echo "</b>";
 		afficher_logo($survol, $texteoff);
 	}
+
+	echo "</font></center>";
 	fin_cadre_relief();
 }
 
@@ -99,7 +102,7 @@ function afficher_logo($racine, $titre) {
 		}
 	}
 
-	echo "<font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<font size=1>";
 
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
@@ -123,7 +126,6 @@ function afficher_logo($racine, $titre) {
 		$hash = calculer_action_auteur("ajout_image $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "<FONT SIZE=1>";
 		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
 		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect'>";
 		if ($id_auteur > 0) echo "\n<INPUT NAME='id_auteur' TYPE=Hidden VALUE='$id_auteur'>";
@@ -162,11 +164,10 @@ function afficher_logo($racine, $titre) {
 			}
 
 		}
-
 		echo fin_block();
-		echo "\n</FORM>\n\n";
-		echo "</FONT>";
+		echo "</FORM>\n";
 	}
+
 	echo "</font>";
 }
 
