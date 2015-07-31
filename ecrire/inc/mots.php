@@ -101,9 +101,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  * specifie, plus le formulaire d'ajout de mot-cle
  */
 
-// $retour ne sert plus car deductible des autres
-
-function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, $retour='') {
+function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
 	global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang;
 
