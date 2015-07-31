@@ -85,7 +85,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	global $exceptions_des_tables, $table_des_tables, $tables_principales;
 
 	$i = 0;
-
+	
 	if ($explicite != '') {
 	// Recherche d'un champ dans un etage superieur
 		while (($idb != $explicite) && $idb) {
@@ -97,7 +97,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	$c = strtolower($nom_champ);
 	// attention a la boucle nommee 0 ....
 	while ($idb!== '') {
-		#spip_log("Cherche: $nom_champ '$idb' '$c'");
+#		spip_log("Cherche: $nom_champ '$idb' '$c'");
 		$r = $boucles[$idb]->type_requete;
 		// indirection (pour les rares cas ou le nom de la table est /= du type)
 		$t = $table_des_tables[$r];
@@ -129,13 +129,13 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 			if ($desc['field'][$c])
 				$e = $c;
 			else
-				unset($c);
+				unset($e);
 		}
 
-		#spip_log("Dans $idb ($t $e): $desc");
+#		spip_log("Dans $idb ('$t' '$e'): $desc");
 
 		// On l'a trouve
-		if ($c) {
+		if ($e) {
 			$boucles[$idb]->select[] = $t . "." . $e;
 			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 		}
@@ -145,7 +145,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		$i++;
 	}
 
-	#spip_log("Pas vu $nom_champ dans les " . count($boucles) . " boucles");
+#	spip_log("Pas vu $nom_champ dans les " . count($boucles) . " boucles");
 	// esperons qu'il y sera
 	return('$Pile[0][\''.$nom_champ.'\']');
 }
