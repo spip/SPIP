@@ -457,10 +457,6 @@ function spip_pg_select($select, $from, $where='',
 	  . ($orderby ? ("\nORDER BY $orderby") :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 
-	// Erreur ? C'est du debug, ou une erreur du serveur
-	// il faudrait mettre ici le declenchement du message SQL
-	// actuellement dans erreur_requete_boucle
-
 	// renvoyer la requete inerte si demandee
 	if ($requeter === false) return $query;
 	
