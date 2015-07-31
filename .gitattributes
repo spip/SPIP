@@ -834,6 +834,7 @@ prive/vignettes/odp.png -text
 prive/vignettes/ods.png -text
 prive/vignettes/odt.png -text
 prive/vignettes/ogg.png -text
+prive/vignettes/ogv.png -text
 prive/vignettes/otg.png -text
 prive/vignettes/otp.png -text
 prive/vignettes/ots.png -text
@@ -869,6 +870,7 @@ prive/vignettes/torrent.png -text
 prive/vignettes/ttf.png -text
 prive/vignettes/txt.png -text
 prive/vignettes/wav.png -text
+prive/vignettes/webm.png -text
 prive/vignettes/wmv.png -text
 prive/vignettes/xcf.png -text
 prive/vignettes/xls.png -text
