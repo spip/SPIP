@@ -1,5 +1,5 @@
 [(#REM) Signer la petition ]
-[(#FORMULAIRE_SIGNATURE)]
+[<div class="formulaire_spip">(#FORMULAIRE_SIGNATURE)</div>]
 
 [(#REM) Signatures de la petition ]
 <B_signatures>
@@ -7,11 +7,11 @@
                 <B_signatures_decompte>
                 [(#REM) S'affiche s'il y a pagination]
                 <h3>#TOTAL_BOUCLE <:signatures_petition:></h3>
-                [(#ENV{debut_signatures,0}|=={0}|?{'','<a href="[(#SELF|parametre_url{debut_signatures,''})]#signatures"[ title="(#DATE|affdate)"]>'})][(#ENV{debut_signatures,0}|=={0}|?{'',</a>})]
-                <BOUCLE_signatures_decompte(SIGNATURES){id_article}{par date} {inverse}>
+                [(#ENV{debut_signatures,0}|=={0}|?{'<strong>',<a href="[(#SELF|parametre_url{debut_signatures,''})]#signatures"[ title="(#DATE|affdate)"]>})] [(#TOTAL_BOUCLE|>={30}|?{'0',''})] [(#ENV{debut_signatures,0}|=={0}|?{'</strong>',</a>})]
+				<BOUCLE_signatures_decompte(SIGNATURES){id_article}{par date} {inverse}>
                 [|(#COMPTEUR_BOUCLE|modulo{30}|?{'',[(#COMPTEUR_BOUCLE|=={#ENV{debut_signatures,0}}|?{'<strong>',<a href="[(#SELF|parametre_url{debut_signatures,#COMPTEUR_BOUCLE})]#signatures"[ title="(#DATE|affdate)"]>})] #COMPTEUR_BOUCLE [(#COMPTEUR_BOUCLE|=={#ENV{debut_signatures,0}}|?{'</strong>',</a>})]})]
                 </BOUCLE_signatures_decompte>
-                [(#REM) S'affiche s'il n'y a pas de signature]
+				[(#REM) S'affiche s'il n'y a pas de signature]
                 <h3>0 <:signatures_petition:></h3>
                 <//B_signatures_decompte>
 
