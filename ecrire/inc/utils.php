@@ -283,7 +283,7 @@ function spip_log($message=NULL, $name=NULL) {
 				_LOG_DEBUG=>'debug:');
 			$log = charger_fonction('log', 'inc');
 		}
-		if (!is_string($message)) $message = var_export($message, true);
+		if (!is_string($message)) $message = print_r($message, true);
 		$log($pre[$niveau].' '.$message, $logname);
 	}
 }
