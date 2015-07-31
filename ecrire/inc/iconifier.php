@@ -68,7 +68,6 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 		    . http_script('$("form.form_upload_icon").async_upload(async_upload_icon)');
 
 		} else $js = "";
-		spip_log($js);
 		return ajax_action_greffe("iconifier", $id, $res).$js;
 	}
 	else return '';

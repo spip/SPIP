@@ -975,6 +975,23 @@ function balise_HTTP_HEADER_dist($p) {
 	return $p;
 }
 
+// Filtre a appliquer a l'ensemble de la page une fois calculee
+// (filtrage fait au niveau du squelette, et sans s'appliquer aux <INCLURE>)
+function balise_FILTRE_dist($p) {
+	if ($p->param) {
+		$args = array();
+		foreach ($p->param as $i => $ignore)
+			$args[] = interprete_argument_balise($i+1,$p);
+		$p->code = '\'<'
+			.'?php header("X-Spip-Filtre: \'.'
+				.join('.', $args)
+			. " . '\"); ?'.'>'";
+
+		$p->interdire_scripts = false;
+		return $p;
+	}
+}
+
 //
 // #CACHE
 // definit la duree de vie ($delais) du squelette
