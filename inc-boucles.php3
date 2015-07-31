@@ -37,7 +37,7 @@ define("_INC_BOUCLES", "1");
 		'signatures' => "id_signature",
 		'syndication' => "id_syndic",
 		'syndic_articles' => "id_syndic_article",
-		'types_documents' => "id_document"
+		'types_documents' => "id_type"
 	);
 	
 	# cf. fonction table_objet dans inc_version
