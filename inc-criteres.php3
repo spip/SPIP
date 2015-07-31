@@ -197,7 +197,7 @@ function critere_par_dist($idb, &$boucles, $crit) {
 	foreach ($params as $tri) {
 	// tris specifies dynamiquement
 	    if ($tri[0]->type != 'texte')
-	      $order = calculer_liste($tri, array(), $boucles, $idb);
+	      $order = calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
 	    else {
 	      // on considere que {par   col#ENV{num}} est imposible
 	      $tri = $tri[0]->texte;
@@ -269,7 +269,7 @@ function critere_agenda($idb, &$boucles, $crit)
 	// autrement dit ne pas être des champs
 	foreach ($params as $tri) {
 	    if ($tri[0]->type != 'texte')
-	      $args[] = calculer_liste($tri, array(), $boucles, $idb);
+	      $args[] = calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
 	    else 
 	      $args[] = $tri[0]->texte;
 	}
@@ -312,7 +312,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	    ereg('^(([0-9]+)|n)(-([0-9]+))?$', $param[0]->texte, $m);
 	    return array($m[1], ($m[4] ? $m[4] : 0));
 	  } else {
-	  $a1 = calculer_liste(array($param[0]), array(), $idb, $boucles);
+	  $a1 = calculer_liste(array($param[0]), array(), $boucles[$idb]->id_parent, $boucles);
 	  ereg('^ *(-([0-9]+))?$', $param[1]->texte, $m);
 	  return array("intval($a1)", ($m[2] ? $m[2] : 0));
 	}
@@ -412,7 +412,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    }
 	    $val = array();
 	    foreach ($params as $param) {
-	      $res = calculer_liste($param, array(), $boucles, $idb);
+	      $res = calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent);
 	      // suffisant pour les specs avant 1.8.2 mais à compléter.
 	      if (strpos("'(", $res[0]) === false)
 		$res = "addslashes($res)";
