@@ -869,6 +869,7 @@ squelettes-dist/rss_forum_breve.html -text
 squelettes-dist/rss_forum_rubrique.html -text
 squelettes-dist/rss_forum_syndic.html -text
 squelettes-dist/rss_forum_thread.html -text
+squelettes-dist/sitemap.xml.html -text
 squelettes-dist/spip.ico -text
 squelettes-dist/spip.png -text
 squelettes-dist/spip_formulaires.css -text
