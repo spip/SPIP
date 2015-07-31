@@ -14,9 +14,16 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 // Aide
 //
 function aide ($aide) {
-	return " <font size='1'>[<b><a href=\"javascript:window.open('aide_index.php3?aide=$aide', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\">AIDE</a></b>]</font>";
+	return " <font size='1'>[<b><script><!--\n".
+	'document.write("<a href=\"javascript:window.open(\'aide_index.php3?aide='.
+	$aide.
+	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); ".
+	'void(0);\">");'.
+	"\n// --></script><noscript>".
+	'<a href="aide_index.php3?aide='.
+	$aide.
+	'"></noscript>AIDE</a></b>]</font>';
 }
-
 
 
 //
