@@ -492,11 +492,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle);
-			if ($boucles[$nom]->fragment)
-				$fragment = $boucles[$nom]->fragment;
-			// si le nom du fragment n'a pas ete impose,
-			// ajouter le hash du squelette pour assurer l'unicite dans la page html produite
-			if ($fragment==$nom) $fragment.=$descr['nom'];
 			break;
 
 		case 'idiome':
@@ -549,12 +544,15 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			}
 
 			// gestion d'une boucle-fragment (ahah)
-			if ($fragment) {
+			if (strlen($p->fragment)) {
+				static $nombre_fragments = array();
+				$fragment = $p->fragment;
+				$fragment .= $nombre_fragments[$p->fragment]++;
 				$code = '(($fragment = '.$code.')?
 				\'<div id="'.$fragment.'" class="fragment">\'
 				.$fragment
 				."</div>":"").
-				(($_GET["fragment"]=="'.$fragment.'")?
+				(($Pile[0]["fragment"]=="'.$fragment.'")?
 					exporter_fragment($fragment):""
 				)';
 			}
