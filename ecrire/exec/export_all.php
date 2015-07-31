@@ -83,6 +83,7 @@ function exec_export_all_dist()
 		redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive",'',true));
 	}
 
+	include_spip('inc/minipres');
 	echo install_debut_html(_T('info_sauvegarde') . " ($all)");
 
 	if (!($timeout = ini_get('max_execution_time')*1000));

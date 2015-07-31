@@ -77,6 +77,7 @@ if (defined('_INC_PUBLIC')) {
 		$fond = $_GET['page'];
 		// Securite
 		if (strstr($fond, '/')) {
+			$_GET['action'] = $_GET['page']; // pour voir le nom
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;
