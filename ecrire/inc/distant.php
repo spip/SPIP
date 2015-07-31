@@ -558,16 +558,14 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 	else {
 		$scheme = $t['scheme']; $noproxy = $scheme.'://';
 	}
-	if (isset($t['user'])) {
-		$scheme_fsock .= $t['user'];
-		if (isset($t['pass'])) $scheme_fsock .= ':'.$t['pass'];
-		$scheme_fsock .= '@';
-	}
+	if (isset($t['user']))
+		$user = array($t['user'], $t['pass']);
+
 	if (!isset($t['port']) || !($port = $t['port'])) $port = 80;
 	if (!isset($t['path']) || !($path = $t['path'])) $path = "/";
 	if ($t['query']) $path .= "?" .$t['query'];
 
-	$f = lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
+	$f = lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz, $referer, $datas, $vers);
 	if (!$f) {
 	  // fallback : fopen
 		if (!$GLOBALS['tester_proxy']) {
@@ -581,12 +579,14 @@ function init_http($method, $url, $refuse_gz=false, $referer = '', $datas="", $v
 }
 
 // http://doc.spip.org/@lance_requete
-function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
+function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $refuse_gz=false, $referer = '', $datas="", $vers="HTTP/1.0") {
 
 	$http_proxy = need_proxy($host);
 
 	if ($http_proxy) {
-		$path = "$scheme://$host" . (($port != 80) ? ":$port" : "") . $path;
+		$path = "$scheme://"
+			. (!$user ? '' : urlencode($user[0]).":".urlencode($user[1])."@")
+			. "$host" . (($port != 80) ? ":$port" : "") . $path;
 		$t2 = @parse_url($http_proxy);
 		$proxy_user = $t2['user'];
 		$proxy_pass = $t2['pass'];
@@ -606,6 +606,8 @@ function lance_requete($method, $scheme, $host, $path, $port, $noproxy, $refuse_
 	. "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n"
 	. ($refuse_gz ? '' : "Accept-Encoding: gzip\r\n")
 	. (!$site ? '' : "Referer: $site/$referer\r\n")
+	. (!$user ? '' : "Authorization: Basic "
+	     . base64_encode(urlencode($user[0]).":".urlencode($user[1])) ."\r\n")
 	. (!$proxy_user ? '' :
 	    ("Proxy-Authorization: Basic "
 	     . base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n"));
