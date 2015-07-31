@@ -18,22 +18,6 @@ function icone_table($type){
 		return $derog[$type];
 	return "$type-24.gif";
 }
-// http://doc.spip.org/@icone_objet
-function icone_objet($type,$statut){
-	$derog = array(
-	'mot'=>'petite-cle.gif','rubrique'=>'rubrique-12.gif',
-	auteur=>array('0minirezo'=>'admin-12.gif','1comite'=>'redac-12.gif','5forum'=>'visit-12.gif',''=>'visit-12.gif')
-	);
-	if (isset($derog[$type])){
-		if (is_string($derog[$type])) return $derog[$type];
-		if (is_array($derog[$type])){
-			if (isset($derog[$type][$statut])) return $derog[$type][$statut];
-			if (isset($derog[$type][''])) return $derog[$type][''];
-		}
-	}
-	return "$type-24.gif";
-}
-
 
 // http://doc.spip.org/@lien_editer_objet
 function lien_editer_objet($type,$key,$id){
