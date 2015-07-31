@@ -965,14 +965,11 @@ function spip_initialisation() {
 	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
 	if (isset($_REQUEST['GLOBALS'])) die();
 	// nettoyer les magic quotes \' et les caracteres nuls %00
-var_dump($_GET);
 	spip_desinfecte($_GET);
 	spip_desinfecte($_POST);
 	spip_desinfecte($_COOKIE);
 	spip_desinfecte($_REQUEST);
 	spip_desinfecte($GLOBALS);
-var_dump($_GET);
-exit;
 
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
