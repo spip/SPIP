@@ -2,7 +2,8 @@
 jQuery.fn.async_upload = function(add_function) {
   return this.ajaxForm({
     beforeSubmit:async_upload_before_submit,
-    success:add_function  
+    success:add_function,
+    iframe:true
   });
 }
 
