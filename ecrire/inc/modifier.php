@@ -129,7 +129,10 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		// Invalider les caches
 		if ($options['invalideur']) {
 			include_spip('inc/invalideur');
-			suivre_invalideur($options['invalideur']);
+			if (is_array($options['invalideur']))
+				array_map('suivre_invalideur',$options['invalideur']);
+			else
+				suivre_invalideur($options['invalideur']);
 		}
 
 		// marquer les documents vus dans le texte si il y a lieu
