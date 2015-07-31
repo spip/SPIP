@@ -342,7 +342,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 	'info_gauche_admin_tech' => '<b>A quela pagina, nonmàs los responsables dau sit i pòden accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. Quauques unas implican un procès d\'autentificacion especific, que necessita un accès FTP au sit web.', # MODIF
 	'info_gauche_admin_vider' => '<b>A quela pagina, nonmàs los responsables dau sit i pòden accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. Quauques unas implican un procès d\'autentificacion especific, que necessita un accès FTP au sit web.', # MODIF
 	'info_gauche_auteurs' => 'Trobaretz aicí tots los autors dau sit. La color de las icònas n\'indica l\'estatut (administrator: verd; redactor: jaune).',
-	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès au sit, son indicats emb una icòna blava; los autors esfaçats emb un bordilhier.',
+	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès au sit, son indicats emb una icòna blava; los autors esfaçats emb un bordilhier.', # MODIF
 	'info_gauche_messagerie' => 'La messatjariá vos permet d\'eschamjar daus messatges entre redactors, de servar daus mementos (per vòstre usatge personau) o d\'afichar daus anoncis sus la pagina d\'acuelh de l\'espaci privat (se setz administrator/tritz).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMERO',
 	'info_gauche_statistiques_referers' => 'Quela pagina presenta la lista daus <i>referidors</i>, quò vòu dire daus sits menant a vòstre quite sit, unicament pet ier e uei: quela lista s\'actualiza chasca 24 oras.',

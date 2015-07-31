@@ -349,7 +349,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_tech' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en særlig adgangskontrol, der kræver FTP-adgang til siden.', # MODIF
 	'info_gauche_admin_vider' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en særlig adgangskontrol, der kræver FTP-adgang til siden.', # MODIF
 	'info_gauche_auteurs' => 'Her finder du alle webstedets forfattere. Status på hver enkelt fremgår af farven på ikonet (redaktør = grøn, administrator = gul).',
-	'info_gauche_auteurs_exterieurs' => 'Udenforstående forfattere uden adgang til webstedet vises med et blåt symbol; slettede forfattere repræsenteres af en papirkurv.',
+	'info_gauche_auteurs_exterieurs' => 'Udenforstående forfattere uden adgang til webstedet vises med et blåt symbol; slettede forfattere repræsenteres af en papirkurv.', # MODIF
 	'info_gauche_messagerie' => 'Meddelelsessystemet giver mulighed for at udveksle meddelelser mellem redaktører, for at gemme huskesedler (til personlig brug) 
 	eller for at vise annonceringer i det private område (hvis du er administrator).',
 	'info_gauche_numero_auteur' => 'FORFATTER NUMMER:',

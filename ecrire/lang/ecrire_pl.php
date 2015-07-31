@@ -357,7 +357,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Znajdziesz tutaj informacje o wszystkich autorach serwisu.
  Ich kompetencje są zaznaczone kolorem ikony (redaktor = zielonym; administrator = żółtym).',
 	'info_gauche_auteurs_exterieurs' => 'Autorzy zewnętrzni, bez dostępu do strefy publicznej są zaznaczeni ikoną niebieską ;
-  autorzy skasowani.',
+  autorzy skasowani.', # MODIF
 	'info_gauche_messagerie' => 'Poczta wewnętrzna pozwala Ci wymieniać wiadomości z innymi redaktorami, i zapisywać notki (prywatne) lub publikować ogłoszenia na stronie głównej strefy prywatnej (jeśli jesteś administratorem).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMER',
 	'info_gauche_statistiques_referers' => 'Ta strona wyświetla listę <i>odnośników</i>, to znaczy stron które zawierają łącza prowadzące do Twojej strony, które ktoś użył wczoraj lub dzisiaj : lista jest zerowana co 24 godziny.',

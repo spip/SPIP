@@ -353,7 +353,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Aquí atoparás a todos os autores do web.
   O seu status indícase coa cor da súa ícona (xestor = verde; redactor = amarela).',
 	'info_gauche_auteurs_exterieurs' => 'Os colaboradores exteriores, sen acceso ao web, indícanse por unha ícona azul;
-  os autores que foron eliminados, por unha papeleira.',
+  os autores que foron eliminados, por unha papeleira.', # MODIF
 	'info_gauche_messagerie' => 'A mensaxería permíteche intercambiar mensaxes entre o equipo de redacción, gardar notas (para o teu uso persoal) ou mostrar os anuncios na páxina de entrada do espazo privado (se estás no equipo de xestión).',
 	'info_gauche_numero_auteur' => 'AUTOR/A NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta páxina presenta a lista de <i>referentes</i>,

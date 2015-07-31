@@ -343,7 +343,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_gauche_auteurs' => 'Aqui, você encontra todos os autores do site.
 Os status dos autores é indicado pela côr dos ícones (administrador = verde; redator = amarelo).',
 	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao site, são indicados por um ícone azul;
-os autores excluídos por uma lixeira.',
+os autores excluídos por uma lixeira.', # MODIF
 	'info_gauche_messagerie' => 'O sistema interno de mensagens permite a troca de mensagens entre redatores, a criação de lembretes (para seu uso pessoal) ou de exibir anúncios na página de entrada da área privada (se você fôr administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é zerada a cada 24 horas.',

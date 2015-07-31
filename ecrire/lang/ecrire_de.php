@@ -346,7 +346,7 @@ französischen SPIP-Dokumentation</a>.',
 	'info_gauche_admin_vider' => '<b>Diese Seite ist nur für den Verantwortlichen der Website zugänglich.</b><p>Sie erlaubt bestimmte technische Wartungsvorgänge auszulösen. Für manche Funktionen ist die Authentifizierung per FTP Voraussetzung.',
 	'info_gauche_auteurs' => 'Hier sehen Sie alle Autoren der Website.
 Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Administrator = grün). ',
-	'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gelöschte Autoren haben eine Mülltonne als Symbol.',
+	'info_gauche_auteurs_exterieurs' => 'Externe Autoren ohne Zugang zum Redaktionssystem werden mit einem blauen Symbol gekennzeichnet, gelöschte Autoren haben eine Mülltonne als Symbol.', # MODIF
 	'info_gauche_messagerie' => 'Nachrichtensystem: SPIP ermöglicht den Austausch von Nachrichten zwischen Redakteuren, persönliche Merkzettel und Ankündigungen im privaten Arbeitsbereich der Redakteure (nur Administratoren können diese verschicken).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMMER',
 	'info_gauche_statistiques_referers' => 'Diese Seite zeigt Ihnen <i>REFERER</i>, d.h. Webadressen mit Links zu Ihrer Website. Angezeigt werden nur Links von gestern und heute, diese Liste wird alle 24 Stunden auf Null gesetzt.',

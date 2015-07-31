@@ -347,7 +347,7 @@ Horietako batzuk baimentzeko prozesu berezi bat egin behar dute, gunearen FTP sa
 	'info_gauche_admin_vider' => 'Orrialde honetan gunearen arduradunak baizik ezin dira sartu.<b><p>Mantentze teknikoaren funtzio guztietan sartzeko aukera ematen du. Horietako batzuk baimentzeko prozesu berezi bat egin behar dute, gunearen FTP sarrerak eskatzen dituenak.',
 	'info_gauche_auteurs' => 'Guneko autore guztiak ageri dira hemen. 
 Ikonoaren koloreak autore bakoitzaren egoera adierazten du (idazlaria = berdea; administratzailea = horia).',
-	'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ezdutenak, ikono urdin batez adierazten dira; ezabatuak izan direnak, berriz, paperontzibatez.',
+	'info_gauche_auteurs_exterieurs' => 'Kanpoko autoreak, gunean sartzeko baimenik ezdutenak, ikono urdin batez adierazten dira; ezabatuak izan direnak, berriz, paperontzibatez.', # MODIF
 	'info_gauche_messagerie' => 'Mezularitzak idazlarien artean mezuak trukatzen,abisuak kontserbatzen (zure erabilera pertsonalarentzat), edo eremu pribatuko orri nagusian iragarpenak jartzen (administratzailea bazara) uzten dizu.',
 	'info_gauche_numero_auteur' => 'IDAZLEA ',
 	'info_gauche_statistiques_referers' => 'Orri honetan referers-en zerrenda dago, hau da, zure web-gunera eramaten dituztenloturak dauzkaten tokien zerrenda, bakarrik atzo eta gaurko; zerrenda honek egunerozerora jartzen da.',

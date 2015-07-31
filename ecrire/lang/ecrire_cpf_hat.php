@@ -356,7 +356,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'info_gauche_auteurs' => 'Isit, genyen tout zotè sit sa-a.
 Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
 	'info_gauche_auteurs_exterieurs' => 'Tout lòtè andèyò, ki genyen pa aksè sit-la, se afiche pa yon ikòn blè ;
- lòtè yo ki te kraze se yon bwat poubèl.',
+ lòtè yo ki te kraze se yon bwat poubèl.', # MODIF
 	'info_gauche_messagerie' => 'Mesajri rann w kapab voye tout mesaj ant redaktè, gade pansbèt (pèsonel) osnon fè parèt annons sou paj akey nan espas prive (si w se komandè).',
 	'info_gauche_numero_auteur' => 'LOTE NIMEWO',
 	'info_gauche_statistiques_referers' => 'Paj-la se paj ki done lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit w, yer ak jodila ; li repar zéwo tout 24èr la.',

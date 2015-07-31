@@ -342,7 +342,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Găsiţi aici toţi autorii acestui site.
  Starea lor este indicată prin codul de culori al iconiţei asociate (administrator = verde; redactor = galben).',
 	'info_gauche_auteurs_exterieurs' => 'Autorii existenţi, fără acces la site, sunt indicaţi cu ajutorul unei iconiţe albastre ;
-  iar autorii şterşi - printr-o iconiţă ce simbolizează un coş de gunoi.',
+  iar autorii şterşi - printr-o iconiţă ce simbolizează un coş de gunoi.', # MODIF
 	'info_gauche_messagerie' => 'Mesageria vă permite să schimbaţi mesaje între redactori, să conservaţi ciorne (pentru folosul dumneavoastră personal) sau pentru a afişa anunţuri pe pagina de gardă a spaţiului privat (dacă sunteţi administrator).',
 	'info_gauche_numero_auteur' => 'AUTORUL NUMĂRUL',
 	'info_gauche_statistiques_referers' => 'Această pagină prezintă lista <i>referers</i>, adică a site-urilor care conţin legături către acest site, doar pentru ieri şi astăzi ; această listă este re-iniţializată la fiecare 24 de ore.',

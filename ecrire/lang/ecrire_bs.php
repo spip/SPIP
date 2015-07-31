@@ -338,7 +338,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_tech' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju  mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Ova strana je dostupna samo osobama odgovornim za web stranicu.</b><p> Ona daje pristup raznim funkcijama tehnickog odrzavanja. Neke od njih pruzaju mogucnost specificne autentifikacije, koja zahtijeva pristup FTP-u web stranice.</p>', # MODIF
 	'info_gauche_auteurs' => 'Ovdje cete pronaci sve autore ove web stranice. Njihov status je naznacen bojom njihove ikone (administrator = zelena; urednik = zuta).',
-	'info_gauche_auteurs_exterieurs' => 'Vanjski autori bez pristupa stranici su oznaceni plavom ikonom, a izbrisani autori sa ikonicom korpe za smece.',
+	'info_gauche_auteurs_exterieurs' => 'Vanjski autori bez pristupa stranici su oznaceni plavom ikonom, a izbrisani autori sa ikonicom korpe za smece.', # MODIF
 	'info_gauche_messagerie' => 'Servis za slanje poruka vam omogucuje razmjenu poruka medju piscima, cuvanje biljeske (za licnu upotrebu) ili, ako ste administrator, postavljanje najava na pocetnu stranicu u privatnom prostoru.',
 	'info_gauche_numero_auteur' => 'BROJ AUTORA',
 	'info_gauche_statistiques_referers' => 'Ova strana predstavlja  listu <i>referenci</i>, sto znaci stranice koje sadrze linkove  sa vasom licnom stranicom, ali samo za jucer i danas; ova lista se vraca na nulu svaka 20 sata.',

@@ -343,7 +343,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_auteurs' => 'Je vindt hier alle auteurs van de site.
  Hun status is te herkennen aan de kleur van het icoontje (beheerder = groen; redacteur = geel).',
 	'info_gauche_auteurs_exterieurs' => 'Externe auteurs, zonder toegang tot de site, zijn aangeduid met een blauw icoontje;
-  Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.',
+  Gewiste auteurs hebben een vuilnisbakje naast hun naam staan.', # MODIF
 	'info_gauche_messagerie' => 'Het berichtensysteem laat toe om berichten uit te wisselen tussen redacteurs, memo\'s (voor persoonlijk gebruik) te bewaren of aankondigingen te tonen op de beginpagina van de privé-ruimte (als je beheerder bent).',
 	'info_gauche_numero_auteur' => 'NUMMER AUTEUR',
 	'info_gauche_statistiques_referers' => 'Deze pagina toont een lijst met <i>referers</i>, tw. sites die een koppeling bevatten naar je eigen site, enkel voor vandaag en gisteren: de lijst wordt elke 24 uur opnieuw aangemaakt.',

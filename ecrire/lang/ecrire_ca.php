@@ -343,7 +343,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 	'info_gauche_auteurs' => 'Aquí hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (administrador = verd; redactor = groc).',
 	'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense accés al lloc, estan indicats amb una icona blava;
- els autors esborrats amb una paperera.',
+ els autors esborrats amb una paperera.', # MODIF
 	'info_gauche_messagerie' => 'La missatgeria us permet intercanviar missatges entre els redactors, conservar recordatoris (pel vostre ús personal) o mostrar avisos a la pàgina inicial de l\'espai privat (si sóu administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Aquesta pàgina mostra la llista de  <i>referidors</i>, és a dir, dels llocs que contenen enllaços cap al vostre propi lloc Web, únicament per ahir i avui; aquesta llista es posa a zero cada 24 hores. ',

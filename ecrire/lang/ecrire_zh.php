@@ -354,7 +354,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 (通过FTP访问站点).', # MODIF
 	'info_gauche_auteurs' => '你将找到站点所有的作者.
  每一个的状态用路标的颜色标识(作者 = 绿色; 管理员 = 黄色).', # MODIF
-	'info_gauche_auteurs_exterieurs' => '外部作者用蓝色图标标识, 不能访问站点; 通过垃圾箱删除作者.',
+	'info_gauche_auteurs_exterieurs' => '外部作者用蓝色图标标识, 不能访问站点; 通过垃圾箱删除作者.', # MODIF
 	'info_gauche_messagerie' => '消息允许你在作者中交换消息, 为保护备忘录(给个人用的) 或在主页私有区上显示声明(如果你是管理者).',
 	'info_gauche_numero_auteur' => '作者号:',
 	'info_gauche_statistiques_referers' => '页面显示 <i>引用</i>列表, 例如. 包含你站点的链接, 只有今天: 列表每24小时都要更新.', # MODIF

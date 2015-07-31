@@ -344,7 +344,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_vider' => '<b>Esta página sólo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento técnico. Algunas de ellas dan lugar a un proceso de autentificación para el cual es necesario tener acceso por FTP al sitio web.</p>',
 	'info_gauche_auteurs' => 'Aquí figuran todos los autores y autoras del sitio.
  Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',
-	'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, están indicados con un icono azul; los que están borrados con una papelera.',
+	'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, están indicados con un icono azul; los que están borrados con una papelera.', # MODIF
 	'info_gauche_messagerie' => 'La mensajería permite comunicarse, crear recordatorios para traer a la memoria algo o publicar anuncios (en el caso de pertenecer al grupo de administración).',
 	'info_gauche_numero_auteur' => 'AUTOR O AUTORA NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página presenta la lista de los <i>referers</i>, es decir de los sitios que contienen enlaces que llevan a tu propio sitio, sólo para ayer y hoy; esta lista se pone a cero cada 24 horas.',

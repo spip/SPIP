@@ -351,7 +351,7 @@ maintenance tasks. Some of them require a specific authentication process
 via FTP.</p>',
 	'info_gauche_auteurs' => 'All the site authors are listed here.
  The status of each is indicated by the colour of their icon (administrator = green; editor = yellow).',
-	'info_gauche_auteurs_exterieurs' => 'Visiting authors, without any access to the site, are indicated by a blue icon; deleted authors by a dustbin.',
+	'info_gauche_auteurs_exterieurs' => 'Visiting authors, without any access to the site, are indicated by a blue icon; deleted authors by a dustbin.', # MODIF
 	'info_gauche_messagerie' => 'Messaging allows you to exchange messages amongst editors, to preserve memos (for your personal use) or to display announcements on the homepage of the private area (if you are an administrator).',
 	'info_gauche_numero_auteur' => 'AUTHOR NUMBER:',
 	'info_gauche_statistiques_referers' => 'This page displays the list of <i>referrers</i>, i.e. websites containing links to your own site, for yesterday and today. The list is reset every 24 hours.',

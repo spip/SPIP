@@ -357,7 +357,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_gauche_auteurs' => 'Zde jsou uvedeni všichni autoři webu.
  Jsou rozlišeni barvou ikony (správce = zelená; redaktor = žlutá).',
 	'info_gauche_auteurs_exterieurs' => 'Externí autoři bez přístupu k webu jsou označeni modrou ikonou;
-  odstranění autoři symbolem odpadkového koše.',
+  odstranění autoři symbolem odpadkového koše.', # MODIF
 	'info_gauche_messagerie' => 'Systém zpráv umožňuje zasílat zprávy mezi redaktory, ukládat interní poznámky a zveřejňovat oznámení na hlavní stánce interní části webu (jste-li správce).',
 	'info_gauche_numero_auteur' => 'ČÍSLO AUTORA',
 	'info_gauche_statistiques_referers' => 'Na této stránce je seznam <i>referencí</i>, to je webů, ze kterých vede odkaz na váš vlastní web. Údaje jsou pouze za včerejšek a dnešek. Seznam se každých 24 hodin vynuluje.',

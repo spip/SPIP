@@ -342,7 +342,7 @@ L\'administrator del sistèma o de la ret vos deu poder fornir
 	'info_gauche_admin_tech' => '<b>A aquela pagina, sonque los responsables del sit i pòdon accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. D\'unas que i a implican un procès d\'autentificacion especific, que necessita un accès FTP al sit web.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>A aquela pagina, sonque los responsables del sit i pòdon accedir.</b><p> Permet de trobar las diferentas foncions de mantenença tecnica. D\'unas que i a implican un procès d\'autentificacion especific, que necessita un accès FTP al sit web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Trobaretz aicí totes los autors del sit. La color de las icònas n\'indica l\'estatut (administrator = verd; redactor = jaune).',
-	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès al sit, son indicats per una icòna blava; los autors escafats per un bordilhièr.',
+	'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens accès al sit, son indicats per una icòna blava; los autors escafats per un bordilhièr.', # MODIF
 	'info_gauche_messagerie' => 'La messatjariá vos permet d\'escambiar de messatges entre redactors, de servar de mementos (per vòstre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acuèlh de l\'espaci privat (se sètz administrator/tritz).',
 	'info_gauche_numero_auteur' => 'AUTOR NUMÈRO',
 	'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <i>referidors</i>, valent a dire dels sits que contenon de ligams menant cap a vòstre quite sit, mas unicament per ièr e uèi: aquela lista s\'actualiza cada 24 oras.',
