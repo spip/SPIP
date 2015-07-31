@@ -77,7 +77,7 @@ function install_etape_ldap3_dist()
 	. "\n<input type='hidden' name='tls_ldap' value=\"$tls_ldap\" />"
 
 	. "\n<fieldset>"
-	. "<input type='text' name='base_ldap_text' class='formo' value=\"$base_ldap_text\" size='40' />"
+	. "<input type='text' name='base_ldap_text' class='text' value=\"$base_ldap_text\" size='40' />"
 	. "\n</fieldset>"
 	. bouton_suivant()));
 
