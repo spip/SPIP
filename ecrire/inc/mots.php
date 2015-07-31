@@ -435,7 +435,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	if (!$n) return '';
 
 	$titre = textebrut(typo($row['titre']));
-	$titre_groupe = entites_html($titre_groupe);
+	$titre_groupe = entites_html($titre);
 	$unseul = $row['unseul'] == 'oui';
 	$obligatoire = $row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus);
 
