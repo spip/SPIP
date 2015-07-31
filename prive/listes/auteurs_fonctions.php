@@ -81,7 +81,7 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 		){
 		$newcompt = intval(floor(($compteur-1)/$pas)*$pas);
 		// si fin de la pagination et une seule entree, ne pas l'afficher, ca ne sert a rien
-		if (!$initiale AND !$url AND !$memo['entree']) return "";
+		if (!$initiale AND !$url AND !$memo['compteur']) $memo=null;
 		if ($memo){
 			$on = (($memo['compteur']<=$debut)
 				AND (
@@ -92,6 +92,8 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 		if ($initiale)
 			$memo = array('entree'=>isset($memo['entree'])?$memo['entree']+1:0,'initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
 	}
+	if (!$initiale AND !$url)
+		$memo=null;
 	return $res;
 }
 

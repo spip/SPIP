@@ -1,0 +1,56 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	multi nom,1,
+	site,1,
+	compteur_articles,-1
+}})
+]
+<BOUCLE_exclus(AUTEURS){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+<B_liste_aut>
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
+#SET{debut,#ENV{debutauta,#EVAL{_request("debutauta");}}}
+#ANCRE_PAGINATION
+[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+<div class="liste-objets liste-objets-associer auteurs">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}})</strong>
+<span class="recherche"><label for="recherche-#ENV{id}"><:info_rechercher_02:></label> <input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" /></span>
+</span>
+</caption>]
+	<thead>
+		<B_lettre><tr><td colspan="5"><p class='pagination'><BOUCLE_lettre(AUTEURS){doublons 1}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
+		[(#SELF|parametre_url{debutaut,@#ID_AUTEUR}|ancre_url{paginationaut}|afficher_initiale{[(#NOM**|extraire_multi|initiale)],#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}})]
+		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
+		(#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}})
+		]</p></td></tr></B_lettre>
+		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,#CHEMIN{images/admin-12.gif}|balise_img{<:afficher_objets:info_statut|attribut_html:>},ajax})]</th>
+			<th class='nom'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class='email'>[(#TRI{email,<:email:>,ajax})]</th>
+			<th class='nombre'>[(#TRI{compteur_articles,<:info_articles:>,ajax})]</th>
+			<th class='action'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_aut(AUTEURS){doublons 2}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}{!compteur_articles_filtres #ENV{filtre_statut_articles,"'poubelle'"}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='statut'>[(#ID_AUTEUR|puce_changement_statut{#STATUT,0,auteur})]</td>
+			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
+			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
+			<td class='nombre'>[(#COMPTEUR_ARTICLES|singulier_ou_pluriel{info_1_article,info_nb_articles})][<br /><span>(#PIPELINE{'compter_contributions_auteur',#ARRAY{args,#ARRAY{id_auteur,#ID_AUTEUR},data,#ARRAY{}}}|implode{'<br />'})</span>]</td>
+			<td class='action'><button class="button link" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+">[(#CHEMIN_IMAGE{ajouter-8.png}|balise_img{'+'}|concat{<:lien_ajouter_auteur:>})]</button></td>
+		</tr>
+	</BOUCLE_liste_aut>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_aut>
+<div class="liste-objets auteurs">
+<span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
+<span class="recherche"><label for="recherche-#ENV{id}"><:info_rechercher_02:></label> <input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" /></span>
+</span>
+</div>
+<//B_liste_aut>
