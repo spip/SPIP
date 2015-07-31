@@ -98,15 +98,12 @@ function definir_barre_onglets($script) {
 		$onglets = $f();
 	else  $onglets=array();
 
-	// les onglets du core, issus de prive/navigation.xml
-	include_spip('inc/bandeau');
-	$liste_onglets = boutons_core('onglet');
+	$liste_onglets = array();
 
 	// ajouter les onglets issus des plugin via plugin.xml
-	if (function_exists('onglets_plugins')){
-		$liste_onglets_plugins = onglets_plugins();
-		$liste_onglets = $liste_onglets + $liste_onglets_plugins;
-	}
+	if (function_exists('onglets_plugins'))
+		$liste_onglets = onglets_plugins();
+
 
 	foreach($liste_onglets as $id => $infos){
 		if (($parent = $infos['parent'])

@@ -52,7 +52,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	include_spip('inc/xml');
 	$arbre = ($time < 0) ? false : spip_xml_load($desc);
 	$verifie_conformite = charger_fonction('verifie_conformite','plugins');
-	$verifie_conformite($plug, $arbre, $dir_plugins);
+	$verifie_conformite($plug, $arbre, $dir_plugins, $filename);
 
 	include_spip('inc/charsets');
 

@@ -31,27 +31,6 @@ function definir_barre_contexte(){
 }
 
 /**
- * Construire le tableau qui correspond aux boutons du core
- * decrits dans prive/navigation.xml
- *
- */
-function boutons_core($type='bouton'){
-	static $ret=null;
-	if (!in_array($type,array('bouton','onglet')))
-		return array();
-	if (
-		!is_array($ret)
-		/*OR $GLOBALS['var_mode']='recalcul'*/){
-		$extraire_boutons = charger_fonction('extraire_boutons','plugins');
-		include_spip('inc/xml');
-		$xml = spip_xml_load(find_in_path("prive/navigation.xml"));
-		$ret = $extraire_boutons($xml);
-	}
-
-	return $ret[$type];
-	}
-
-/**
  * definir la liste des boutons du haut et de ses sous-menus
  * On defini les boutons a metrtre selon les droits de l'utilisateur
  * puis on balance le tout au pipeline "ajouter_boutons" pour que des plugins
@@ -67,12 +46,12 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 	$boutons_admin=array();
 
 	// les boutons du core, issus de prive/navigation.xml
-	$liste_boutons = boutons_core();
+	$liste_boutons = array();
 
 	// ajouter les boutons issus des plugin via plugin.xml
 	if (function_exists('boutons_plugins')
 	  AND is_array($liste_boutons_plugins = boutons_plugins()))
-		$liste_boutons = $liste_boutons + $liste_boutons_plugins;
+		$liste_boutons = &$liste_boutons_plugins;
 
 	foreach($liste_boutons as $id => $infos){
 		// les boutons principaux ne sont pas soumis a autorisation

@@ -1,4 +1,7 @@
 <plugin>
+	<nom>SPIP</nom>
+	<version></version>
+	<prefix>spip</prefix>
 	
 	<bouton id="bando_accueil">
 		<icone>images/accueil-48.png</icone>
