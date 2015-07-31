@@ -37,7 +37,7 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 		$js_func = $do . '_selection_titre';
 		$ondbClick = "$js_func('$ondbClick',0,'selection_rubrique','id_parent');";
 
-		$aff_racine = "<div class='arial11 petite-racine'\nonclick=\""
+		$aff_racine = "<div class='petite-racine'\nonclick=\""
 		. $onClick
 		. "\"\nondbclick=\""
 		. $ondbClick
@@ -106,7 +106,7 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. "<div id='"
 	.  $idom2
 	.  "'><div id='$idom4'"
-	. " class='arial1'>" 
+	. " class=''>"
 	. $liste
 	. "</div></div>\n<div id='$idom3'></div></div>\n";
 }
