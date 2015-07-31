@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/texte');
 
 // http://doc.spip.org/@inc_plonger_dist
-function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0) {
+function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0, $do='aff_selection_titre') {
 	global  $spip_lang_left;
 	
 	if ($list) $id_rubrique = $list[$col-1];
@@ -50,8 +50,8 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	}
 	$next = isset($list[$col]) ? $list[$col] : 0;
 	if ($ordre) {
-		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
-		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
+		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&do=$do&col=".($col+1));
+		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&do=$do&id=");
 		$args = "'$idom',this,$col,'$spip_lang_left','$info',event";
 		while (list($id, $titrebrut) = each($ordre)) {
 
@@ -69,7 +69,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
 			. "\"\nondblclick=\""
-			. "aff_selection_titre(this."
+			. "$do(this."
 			. "firstChild.nodeValue,"
 			. $id
 			. ",'selection_rubrique','id_parent');"

@@ -26,7 +26,7 @@ function exec_export_all_dist()
 	global $connect_toutes_rubriques;
 	// utiliser une version fraiche des metas (ie pas le cache)
 	lire_metas();
-	$rub = intval(_request('id_rubrique'));
+	$rub = intval(_request('id_parent'));
 	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
 
 	if (!isset($GLOBALS['meta'][$meta])) {

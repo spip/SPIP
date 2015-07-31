@@ -175,6 +175,14 @@ function aff_selection_titre(titre, id, idom, nid)
 	if (p.is('.submit_plongeur')) p.get(p.length-1).submit();
 }
 
+function admin_tech_selection_titre(titre, id, idom, nid)
+{
+	nom = titre.replace(/\W+/g, '_');
+	findObj_forcer("znom_sauvegarde").value=nom;
+	findObj_forcer("nom_sauvegarde").value=nom;
+	aff_selection_titre(titre, id, idom, nid);
+}
+
 function aff_selection_provisoire(id, racine, url, col, sens,informer,event)
 {
     charger_id_url(url.href,

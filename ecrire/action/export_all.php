@@ -72,7 +72,7 @@ function export_all_fin($file, $meta)
 		
 		$corps = "<p style='text-align: $spip_lang_left'>".
 			  _T('info_sauvegarde_reussi_02',
-			     array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)")) .
+			     array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)")) .
 			  " <a href='" . generer_url_ecrire() . "'>".
 			_T('info_sauvegarde_reussi_03')
 			. "</a> "
