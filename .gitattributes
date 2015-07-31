@@ -400,7 +400,7 @@ ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
 prive/aide_body.css -text
-prive/aide_menu.css -text
+prive/aide_menu.html -text
 prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text

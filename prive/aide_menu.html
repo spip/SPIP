@@ -1,3 +1,7 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
 /**************************************************************************/
 /*  SPIP, Systeme de publication pour l'internet                          */
 /*                                                                        */
@@ -6,31 +10,36 @@
 /*                                                                        */
 /*  Ce programme est un logiciel libre distribue sous licence GNU/GPL.    */
 /*  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.  */ 
-\**************************************************************************/
+/**************************************************************************/
+
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+#SET{chemin_img_pack,#ENV{ie,10}|intval|<{7}|?{#EVAL{_DIR_IMG_PACK}|concat{'wrapper.php?file='},#EVAL{_DIR_IMG_PACK}}}
 
 a {text-decoration: none; }
 A:Hover {text-decoration: underline;}
 
 .article-inactif {
-		float: '.$GLOBALS['spip_lang_left'].';
-		text-align: '.$GLOBALS['spip_lang_left'].';
+		float: #GET{left};
+		text-align: #GET{left};
 		width: 80%;
-		background: ' . "url(" . chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_left'].' center no-repeat;
+		background: url(#GET{chemin_img_pack}triangle[(#GET{rtl})].gif) [(#GET{left})] center no-repeat;
 		margin: 2px;
 		padding: 0px;
-		padding-'.$GLOBALS['spip_lang_left'].': 20px;
+		padding-#GET{left}: 20px;
 		font-family: Arial, Sans, sans-serif;
 		font-size: 12px;
 }
 
 .article-actif {
-		float: '.$GLOBALS['spip_lang_right'].';
-		text-align: '.$GLOBALS['spip_lang_right'].';
+		float: #GET{right};
+		text-align: #GET{right};
 		width: 80%;
-		background: ' . "url(" .  chemin_image('triangle'.$GLOBALS['spip_lang_rtl'].'.gif') . ') ' . $GLOBALS['spip_lang_right'].' center no-repeat;
+		background:  url(#GET{chemin_img_pack}triangle[(#GET{rtl})].gif) [(#GET{right})] center no-repeat;
 		margin: 4px;
 		padding: 0px;
-		padding-'.$GLOBALS['spip_lang_right'].': 20px;
+		padding-#GET{right}: 20px;
 		font-family: Arial, Sans, sans-serif;
 		font-size: 12px;
 		font-weight: bold;
