@@ -82,7 +82,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 	if ($load) $load = " onload=\"$load\"";
 
 	$res = pipeline('body_prive',"<body ". _ATTRIBUTES_BODY	.$load . '>')
-	.  "\n<map id='map_layout'>"
+	.  "\n<map name='map_layout'>"
 	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
 	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
 	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide','visibility', 'visible');\"")
@@ -141,13 +141,17 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 		
 	$res .= "</td>"
 	. "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-		// overflow pour masquer les noms tres longs (et eviter debords, notamment en ecran etroit)
-		if ($spip_ecran == "large") $largeur_nom = 300;
-		else $largeur_nom= 110;
-		$res .= "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>";
-		// Redacteur connecte
-		$res .= typo($GLOBALS['auteur_session']['nom'])
-		. "</div>";
+
+	// Redacteur connecte
+	// overflow pour masquer les noms tres longs
+	// (et eviter debords, notamment en ecran etroit)
+	if ($spip_ecran == "large") $largeur_nom=300; else $largeur_nom= 110;
+
+	$res .= "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>"
+	. "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") 
+	. "' class='icone26'>"
+	. typo($GLOBALS['auteur_session']['nom'])
+	.  "</a></div>";
 	
 	$res .= "</td>"
 	. "<td> &nbsp; </td>"
@@ -163,8 +167,9 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_
 				$icone = "interface-display.png";
 	}
 	$res .= "<a href='$lien' class='icone26' onmouseover=\"changestyle('bandeaudisplay','visibility', 'visible');\">"
-	. http_img_pack("$icone", "", "width='26' height='20'")."</a>"
+	. http_img_pack($icone, "", "width='26' height='20'")."</a>"
 	. http_img_pack("rien.gif", " ", "width='10' height='1'")
+
 	. http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif", "abc", "class='format_png' style='vertical-align: middle' width='59' height='15' usemap='#map_layout'")
 	. http_img_pack("rien.gif", " ", "width='10' height='1'");
 			// grand ecran
@@ -255,4 +260,13 @@ function auteurs_recemment_connectes()
 
 	return "<div class='messages' style='color: #666666;'>$res</div>";
 }
+
+
+// http://doc.spip.org/@lien_change_var
+function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
+	$lien = parametre_url($lien, $set, $couleur);
+	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=' ' $mouseOver />";
+}
+
+
 ?>
