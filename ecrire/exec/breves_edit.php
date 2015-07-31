@@ -141,7 +141,6 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo _T('info_titre')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_titre' VALUE=\"$lien_titre\" SIZE='40'><BR>";
 
-	if (strlen($lien_url) < 8) $lien_url="http://";
 	echo _T('info_url')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
 

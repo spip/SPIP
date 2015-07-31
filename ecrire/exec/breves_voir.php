@@ -175,13 +175,8 @@ if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
 
 echo justifier(propre($texte))."\n";
 
-if (strlen($lien_url)>7 AND strlen($lien_titre)>2){
-	echo "<P><font size=1>"._T('lien_voir_en_ligne')."</font> <A HREF='$lien_url'><B>".typo($lien_titre)."</B></A>\n";
-} else if (strlen($lien_titre)>2) {
-	echo "<P><font size=1>"._T('lien_nom_site')."</font> ".typo($lien_titre)."</B></A>\n";
-} else if (strlen($lien_url)>7) {
-	echo "<P><font size=1>"._T('info_url_site')."</font> <tt>$lien_url</tt>\n";
-}
+$texte_case = ($lien_titre.$lien_url) ? "{{"._T('lien_voir_en_ligne')."}} [".$lien_titre."->".$lien_url."]" : '';
+	echo propre($texte_case);
 
 if ($les_notes) {
 	echo "<hr width='70%' height=1 align='left'><font size=2>$les_notes</font>\n";

@@ -185,9 +185,22 @@ function balise_URL_MOT_dist($p) {
 	return $p;
 }
 
-# remarque : URL_SITE ne figure pas ici car c'est une donnee 'brute'
-# correspondant a l'URL du site reference ; URL_SYNDIC correspond
-# pour sa part a l'adresse de son backend.
+// #NOM_SITE affiche le nom du site, ou sinon l'URL ou le titre de l'objet
+function balise_NOM_SITE_dist($p) {
+	if (!$p->etoile) {
+		$p->code = "construire_titre_lien(" .
+		champ_sql('nom_site',$p) ."," .
+		champ_sql('url_site',$p) . 
+		")";
+	} else
+		$p->code = champ_sql('nom_site',$p);
+
+	$p->interdire_scripts = true;
+	return $p;
+}
+
+# URL_SITE est une donnee "brute" tiree de la base de donnees
+# URL_SYNDIC correspond a l'adresse de son backend.
 # Il n'existe pas de balise pour afficher generer_url_site($id_syndic),
 # a part [(#ID_SYNDIC|generer_url_site)]
 
