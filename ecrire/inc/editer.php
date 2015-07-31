@@ -100,6 +100,13 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 	return $conflits;
 }
 
+function display_conflit_champ($x) {
+	if (strstr($x, "\n") OR strlen($x)>80)
+		return "<textarea style='width:99%; height:10em;'>".entites_html($x)."</textarea>\n";
+	else
+		return "<input type='text' size='40' style='width:99%' value=\"".entites_html($x)."\" />\n";
+}
+
 function signaler_conflits_edition($conflits, $redirect='') {
 	include_spip('inc/minipres');
 	include_spip('inc/revisions');
@@ -115,15 +122,9 @@ function signaler_conflits_edition($conflits, $redirect='') {
 			. "<h3>"._L('Diff&#233;rences&nbsp;:')."</h3>\n"
 			. "<div style='max-height:8em; overflow: auto; width:99%;'>".$d."</div>\n"
 			. "<h4>"._L('Votre version&nbsp;:')."</h4>"
-			. (strstr($a['post'], "\n")
-				? "<textarea style='width:99%; height:10em;'>".entites_html($a['post'])."</textarea>\n"
-				: "<input type='text' size='40' style='width:99%' value=\"".entites_html($a['post'])."\" />\n"
-			)
+			. display_conflit_champ($a['post'])
 			. "<h4>"._L('La version enregistr&#233;e&nbsp;:')."</h4>"
-			. (strstr($a['base'], "\n")
-				? "<textarea style='width:99%; height:10em;'>".entites_html($a['base'])."</textarea>\n"
-				: "<input type='text' size='40' style='width:99%' value=\"".entites_html($a['base'])."\" />\n"
-			);
+			. display_conflit_champ($a['base']);
 	}
 
 	if ($redirect) {
