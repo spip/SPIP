@@ -21,6 +21,7 @@ include_spip('inc/meta');
 // on recalcule toutes les rubriques (a ameliorer).
 // Si publication standard, ne recalculer que la branche
 
+// http://doc.spip.org/@calculer_rubriques_if
 function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 {
 	if ($statut_ancien == 'publie'
@@ -34,6 +35,7 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
 // avec consequence sur ses parentes et les langues
 // (a refaire a terme par une Cascade SQL)
 
+// http://doc.spip.org/@publier_branche_rubrique
 function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
@@ -82,6 +84,7 @@ function calculer_rubriques() {
 // des champs temporaires afin de ne pas casser la base
 // pendant la demi seconde de recalculs
 
+// http://doc.spip.org/@calculer_rubriques_publiees
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
