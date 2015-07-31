@@ -566,7 +566,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 	// Cherche un lien du type [->raccourci 123]
 	// associe a une fonction generer_url_raccourci()
-	if (preg_match(',^(\S*)\s*(\d+)(#[^\s]*)?$,', trim($lien), $match)) {
+	if (preg_match(',^(\S*?)\s*(\d+)(#[^\s]*)?$,', trim($lien), $match)) {
 		$ancre = isset($match[3]) ? $match[3] :'';
 
 		// valeur par defaut
