@@ -670,26 +670,6 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		}
 
 
-
-
-//
-// Afficher les raccourcis
-//
-
-debut_raccourcis();
-
-icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
-	$retour = urlencode($clean_link->getUrl());
-	icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
-	$articles_mots = lire_meta('articles_mots');
-	if ($articles_mots != "non")
-		icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
-}
-
-fin_raccourcis();
-
-
 //////////////////////////////////////////////////////
 // Affichage de la colonne de droite
 //
@@ -844,7 +824,7 @@ if ($flag_editable) {
 echo "</tr></table>\n";
 
 
-
+echo "<div>&nbsp;</div>";
 echo "<div class='serif' align='left'>";
 
 //
@@ -852,17 +832,20 @@ echo "<div class='serif' align='left'>";
 //
 
 if ($flag_editable AND $options == 'avancees') {
-	debut_cadre_enfonce();
+	debut_cadre_couleur();
 
-	echo "<FORM ACTION='articles.php3' METHOD='GET'>";
+	echo "<FORM ACTION='articles.php3' METHOD='GET' style='margin: 0px; padding: 0px;'>";
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
 	if ($statut_article == 'publie') {
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=1 COLOR='#FFFFFF'><B>"._T('texte_date_publication_article');
-		echo aide ("artdate");
-		echo "</B></FONT></TD></TR>";
-		echo "<TR><TD ALIGN='center'>";
+
+		echo "<div><b>";
+		echo bouton_block_invisible("datepub");
+		echo "<span class='verdana1'>"._T('texte_date_publication_article').'</span> ';
+		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+
+		echo debut_block_invisible("datepub");
+		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
 		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 		afficher_jour($jour);
 		echo "</SELECT> ";
@@ -872,26 +855,27 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl'>";
 		afficher_annee($annee);
 		echo "</SELECT>";
-
-		echo "</TD><TD ALIGN='right'>";
-		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
-		echo "</TD></TR></TABLE>";
+		echo " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
+		echo "</div>";
+		echo fin_block();
 	}
 	else {
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article').' ';
-		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
-		echo "</TABLE>";
+		echo "<div><b> <span class='verdana1'>"._T('texte_date_creation_article').'</span> ';
+		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
 	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
-		echo '<p><table cellpadding="5" cellspacing="0" border="0" width="100%">';
-		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="1" color="#000000" face="Verdana,Arial,Sans,sans-serif">';
-		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = ' : '.majuscules(affdate($date_redac));
+		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = affdate($date_redac);
+		else $date_affichee = _T('jour_non_connu_nc');
+		
+		echo "<div><b>";
 		echo bouton_block_invisible('dateredac');
-		echo "<b>"._T('texte_date_publication_anterieure').$date_affichee."</b></font></td></tr></table>";
+		echo "<span class='verdana1'>"._T('texte_date_publication_anterieure').'</span> '.majuscules($date_affichee)." ".aide('artdate_redac')."</b></div>";
+
+
 		echo debut_block_invisible('dateredac');
-		echo '<table cellpadding="5" cellspacing="0" border="0" width="100%">';
+		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
+		echo '<table cellpadding="0" cellspacing="0" border="0" width="100%">';
 		echo '<tr><td align="left">';
 		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
@@ -910,18 +894,31 @@ if ($flag_editable AND $options == 'avancees') {
 
 		echo '</td><td align="right">';
 		echo '<input type="submit" name="Changer" class="fondo" value="'._T('bouton_changer').'" />';
-		echo aide('artdate_redac');
 		echo '</td></tr>';
 		echo '</table>';
+		echo "</div>";
 		echo fin_block();
 	}
 
 	echo "</FORM>";
-	fin_cadre_enfonce();
+	fin_cadre_couleur();
 }
+else {
+	if ($statut_article == 'publie') $texte_date = _T('texte_date_publication_article');
+	else $texte_date = _T('texte_date_creation_article');
 
-else if ($statut_article == 'publie') {
-	echo "<CENTER>".affdate($date)."</CENTER><P>";
+	debut_cadre_couleur();
+		echo "<div style='text-align:center;'><b> <span class='verdana1'>$texte_date</span> ";
+		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+
+
+		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') {
+			$date_affichee = ' : '.majuscules(affdate($date_redac));		
+			echo "<div style='text-align:center;'><b> <span class='verdana1'>"._T(texte_date_publication_anterieure)."</span> ";
+			echo $date_affichee."</b>".aide('artdate_redac')."</div>";
+		}
+
+	fin_cadre_couleur();
 }
 
 
@@ -931,15 +928,13 @@ else if ($statut_article == 'publie') {
 //
 
 echo "<a name='auteurs'></a>";
-debut_cadre_enfonce("redacteurs-24.gif");
 
-echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 if ($flag_editable AND $options == 'avancees') {
-	echo bouton_block_invisible("auteursarticle");
+	$bouton = bouton_block_invisible("auteursarticle");
 }
-echo "<B>"._T('texte_auteurs')."</B>";
-echo aide ("artauteurs");
-echo "</TD></TR></TABLE>";
+
+debut_cadre_enfonce("redacteurs-24.gif", false, "", $bouton._T('texte_auteurs').aide ("artauteurs"));
+
 
 
 ////////////////////////////////////////////////////
@@ -1066,10 +1061,11 @@ $query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien "
 $result = spip_query($query);
 
 if (spip_num_rows($result)) {
-	$ifond = 0;
-
-	echo "\n<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''>\n";
+	echo "<div class='liste'>";
+	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
+	$table = '';
 	while ($row = spip_fetch_array($result)) {
+		$vals = '';
 		$id_auteur = $row["id_auteur"];
 		$nom_auteur = $row["nom"];
 		$email_auteur = $row["email"];
@@ -1092,50 +1088,42 @@ if (spip_num_rows($result)) {
 		if ($result2) list($nombre_articles) = spip_fetch_row($result2);
 		else $nombre_articles = 0;
 
-		$ifond = $ifond ^ 1;
-		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
-
 		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
 
-		echo "<TR BGCOLOR='$couleur' WIDTH=\"100%\">";
-		echo "<TD WIDTH='20'>";
-		echo bonhomme_statut($row);
-		echo "</TD>\n";
+		$vals[] = bonhomme_statut($row);
 
-		echo "<TD CLASS='arial2'>";
-		echo "<A HREF=\"$url_auteur\"$bio_auteur>".typo($nom_auteur)."</A>";
-		echo "</TD>\n";
+		$vals[] = "<A HREF=\"$url_auteur\"$bio_auteur>".typo($nom_auteur)."</A>";
 
-		echo "<TD CLASS='arial2'>";
-		echo bouton_imessage($id_auteur)."&nbsp;";
-		echo "</TD>\n";
+		$vals[] = bouton_imessage($id_auteur);
 
-		echo "<TD CLASS='arial2'>";
-		if ($email_auteur) echo "<A HREF='mailto:$email_auteur'>"._T('email')."</A>";
-		else echo "&nbsp;";
-		echo "</TD>\n";
+		
+		
+		if ($email_auteur) $vals[] =  "<A HREF='mailto:$email_auteur'>"._T('email')."</A>";
+		else $vals[] =  "&nbsp;";
 
-		echo "<TD CLASS='arial2'>";
-		if ($url_site_auteur) echo "<A HREF='$url_site_auteur'>"._T('info_site_min')."</A>";
-		else echo "&nbsp;";
-		echo "</TD>\n";
+		if ($url_site_auteur) $vals[] =  "<A HREF='$url_site_auteur'>"._T('info_site_min')."</A>";
+		else $vals[] =  "&nbsp;";
 
-		echo "<TD CLASS='arial2' ALIGN='right'>";
-		if ($nombre_articles > 1) echo $nombre_articles.' '._T('info_article_2');
-		else if ($nombre_articles == 1) echo _T('info_1_article');
-		else echo "&nbsp;";
-		echo "</TD>\n";
+		if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
+		else if ($nombre_articles == 1) $vals[] =  _T('info_1_article');
+		else $vals[] =  "&nbsp;";
 
-		echo "<TD CLASS='arial1' align='right'>";
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-			echo "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
+			$vals[] =  "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
+		} else {
+			$vals[] = "";
 		}
-		else echo "&nbsp;";
-		echo "</TD>\n";
-
-		echo "</TR>\n";
+		
+		$table[] = $vals;
 	}
-	echo "</TABLE>\n";
+	
+	
+	$largeurs = array('14', '', '', '', '', '', '');
+	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
+	afficher_liste($largeurs, $table, $styles);
+
+	
+	echo "</table></div>\n";
 
 	$les_auteurs = join(',', $les_auteurs);
 }
@@ -1152,11 +1140,23 @@ if ($flag_editable AND $options == 'avancees') {
 	if ($les_auteurs) $query .= "id_auteur NOT IN ($les_auteurs) AND ";
 	$query .= "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom";
 	$result = spip_query($query);
-
+	
+	echo "<table width='100%'>";
+	echo "<tr>";
+	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+		echo "<td width='200'>";
+		$retour = urlencode($clean_link->getUrl());
+		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+		echo "</td>";
+	}
+	
+	echo "<td>";
+	
+	
 	if (spip_num_rows($result) > 0) {
 		echo "<FORM ACTION='articles.php3?id_article=$id_article#auteurs' METHOD='post'>";
-		echo "<DIV align=right><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
-		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
+		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
+		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
 		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
@@ -1206,6 +1206,8 @@ if ($flag_editable AND $options == 'avancees') {
 		}
 		echo "</div></FORM>";
 	}
+	
+	echo "</td></tr></table>";
 
 
 	echo fin_block();
