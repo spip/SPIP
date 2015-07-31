@@ -14,66 +14,66 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-//
-// Lire les auteurs qui nous interessent
-// et memoriser la liste des lettres initiales
-//
-
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
-  global  $debut, $tri, $visiteurs;
+	global  $visiteurs;
 
-if (!$tri) $tri='nom'; else $tri = preg_replace('/["\'?=&<>]/', '', $tri);
-$debut = intval($debut);
-$result = requete_auteurs($tri, $visiteurs);
-$nombre_auteurs = spip_num_rows($result);
-$max_par_page = 30;
-$debut = intval($debut);
-if ($debut > $nombre_auteurs - $max_par_page)
-	$debut = max(0,$nombre_auteurs - $max_par_page);
+	$tri = preg_replace('/\W/', '', _request('tri'));
+	if (!$tri) $tri='nom'; 
 
-$i = 0;
-$auteurs=$lettre=array();
-$lettres_nombre_auteurs =0;
-$lettre_prec ="";
+	$result = requete_auteurs($tri, $visiteurs);
+	$nombre_auteurs = spip_num_rows($result);
+	$max_par_page = 30;
+	$debut = intval(_request('debut'));
+	if ($debut > $nombre_auteurs - $max_par_page)
+		$debut = max(0,$nombre_auteurs - $max_par_page);
 
-while ($auteur = spip_fetch_array($result)) {
-	if ($i>=$debut AND $i<$debut+$max_par_page) {
-		if ($auteur['statut'] == '0minirezo')
-			$auteur['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur']));
-			$auteurs[] = $auteur;
-	}
-	$i++;
+	list($auteurs, $lettre)= lettres_d_auteurs($result, $debut, $max_par_page, $tri);
 
-	if ($tri == 'nom') {
-		$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
-		if ($premiere_lettre != $lettre_prec) {
-			$lettre[$premiere_lettre] = $lettres_nombre_auteurs;
-		}
-		$lettres_nombre_auteurs ++;
-		$lettre_prec = $premiere_lettre;
-	}
- }
+	$res = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
 
- $res = auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
+	if (_request('var_ajaxcharset')) ajax_retour($res);
 
- if (_request('var_ajaxcharset')) ajax_retour($res);
+	pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
-  pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+	bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
 
-  bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
-
-  echo "<div id='auteurs'>$res</div>";
-
-  echo fin_page();
+	echo "<div id='auteurs'>", $res, "</div>", fin_page();
 }
 
+function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
+{
+	$auteurs = $lettre = array();
+	$lettres_nombre_auteurs =0;
+	$lettre_prec ="";
+	$i = 0;
+	while ($auteur = spip_fetch_array($query)) {
+		if ($i>=$debut AND $i<$debut+$max_par_page) {
+			if ($auteur['statut'] == '0minirezo')
+				$auteur['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur']));
+			$auteurs[] = $auteur;
+		}
+		$i++;
+
+		if ($tri == 'nom') {
+			$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
+			if ($premiere_lettre != $lettre_prec) {
+				$lettre[$premiere_lettre] = $lettres_nombre_auteurs;
+			}
+			$lettres_nombre_auteurs ++;
+			$lettre_prec = $premiere_lettre;
+		}
+	}
+
+	return array($auteurs, $lettre);
+}
+
+
 // http://doc.spip.org/@affiche_auteurs
-function bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
+function bandeau_auteurs($auteurs, $debut, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
   global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
-
 
   if ($tri=='nom') $s = _T('info_par_nom');
   if ($tri=='statut') $s = _T('info_par_statut');
@@ -91,12 +91,12 @@ function bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_p
 
  debut_boite_info();
  if ($visiteurs)
-	echo "<p class='arial1'>"._T('info_gauche_visiteurs_enregistres');
+   echo "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'), '</p>';
  else {
-	echo "<p class='arial1'>"._T('info_gauche_auteurs');
+	echo "\n<p class='arial1'>"._T('info_gauche_auteurs'), '</p>';
 
 	if ($connect_statut == '0minirezo')
-		echo '<br>'. _T('info_gauche_auteurs_exterieurs');
+		echo '\n<br />'. _T('info_gauche_auteurs_exterieurs');
  }
  fin_boite_info();
 
@@ -124,32 +124,34 @@ function bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_p
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	debut_droite();
 
-	echo "<br>";
+	echo "\n<br />";
 	if ($visiteurs)
 		gros_titre(_T('info_visiteurs'));
 	else
 		gros_titre(_T('info_auteurs'));
-	echo "<p>";
+	echo "\n<br />";
 }
 
 function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
 	global $options, $spip_lang_right;
 
-	$res ="<TABLE BORDER='0' CELLPADDING='2' CELLSPACING='0' WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-	. "<tr bgcolor='#DBE1C5'>"
-	. "<td width='20'>";
+	$res ="\n<tr bgcolor='#DBE1C5'>"
+	. "\n<td width='20'>";
+
 	if ($tri=='statut')
   		$res .= http_img_pack('admin-12.gif','', "border='0'");
 	else {
 	  $t =  _T('lien_trier_statut');
 	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "border='0'"),'tri=statut', " title=\"$t\"");
 	}
+
 	$res .= "</td><td>";
+
 	if ($tri == '' OR $tri=='nom')
-			$res .= '<b>'._T('info_nom').'</b>';
+		$res .= '<b>'._T('info_nom').'</b>';
 	else
-	  $res .= auteurs_href(_T('info_nom'), "tri=nom", " title='"._T('lien_trier_nom'). "'");
+		$res .= auteurs_href(_T('info_nom'), "tri=nom", " title='"._T('lien_trier_nom'). "'");
 
 	if ($options == 'avancees')
 	 	$res .= "</td><td colspan='2'>"._T('info_contact');
@@ -160,12 +162,13 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 		if ($tri=='nombre')
 			$res .= '<b>'._T('info_articles').'</b>';
 		else
-			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title='"._T('lien_trier_nombre_articles'). "'");
+			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title=\""._T('lien_trier_nombre_articles'). '"');
 	} else $visiteurs = '&visiteurs=oui';
+
 	$res .= "</td></tr>\n";
 
 	if ($nombre_auteurs > $max_par_page) {
-		$res .= "<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
+		$res .= "\n<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
 
 		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 			if ($j > 0) 	$res .= " | ";
@@ -183,7 +186,7 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 		$res .= "</td></tr>\n";
 
 		if ($tri == 'nom' AND $options == 'avancees') {
-			$res .= "<tr bgcolor='white'><td class='arial11' colspan='5'>";
+			$res .= "\n<tr bgcolor='white'><td class='arial11' colspan='5'>";
 			foreach ($lettre as $key => $val) {
 				if ($val == $debut)
 					$res .= "<b>$key</b>\n";
@@ -192,33 +195,32 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_
 			}
 			$res .= "</td></tr>\n";
 		}
-		$res .= "<tr height='5'></tr>";
 	}
 
-	$res .= afficher_n_auteurs($auteurs)
-	. "</table>\n"
-	. "<a name='bas'>"
-	. "<table width='100%' border='0'>";
-
+	$nav = '';
 	$debut_suivant = $debut + $max_par_page;
 	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
-		$res .= "<tr height='10'></tr>"
-		. "<tr bgcolor='white'><td align='left'>";
+		$nav = "\n<table id='bas' width='100%' border='0'>"
+		. "\n<tr bgcolor='white'><td align='left'>";
 
 		if ($debut > 0) {
 			$debut_prec = max($debut - $max_par_page, 0);
-			$res .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec$visiteurs");
+			$nav .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec$visiteurs");
 		}
-		$res .= "</td><td style='text-align: $spip_lang_right'>";
+		$nav .= "</td><td style='text-align: $spip_lang_right'>";
 		if ($debut_suivant < $nombre_auteurs) {
-			$res .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant$visiteurs");
+			$nav .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant$visiteurs");
 		}
-		$res .= "</td></tr>\n";
+		$nav .= "</td></tr></table>\n";
 	}
 
-	$res .= "</table>\n";
-
-	return 	debut_cadre_relief('auteur-24.gif',true) . $res . fin_cadre_relief(true);
+	return 	debut_cadre_relief('auteur-24.gif',true)
+	. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+	. $res
+	. $auteurs
+	. "</table>\n<br />"
+	.  $nav
+	. fin_cadre_relief(true);
 }
 
 function auteurs_href($clic, $args='', $att='')
@@ -293,10 +295,10 @@ function afficher_n_auteurs($auteurs) {
 	$res = '';
 	foreach ($auteurs as $row) {
 
-		$res .= "<tr style='background-color: #eeeeee;'>";
+		$res .= "\n<tr style='background-color: #eeeeee;'>";
 
 	// statut auteur
-		$res .= "<td style='border-top: 1px solid #cccccc;'>";
+		$res .= "\n<td style='border-top: 1px solid #cccccc;'>";
 		$res .= bonhomme_statut($row);
 
 	// nom
@@ -319,12 +321,12 @@ function afficher_n_auteurs($auteurs) {
 				$res .= bouton_imessage($row['id_auteur'],"force")."&nbsp;";
 			if ($connect_statut=="0minirezo")
 				if (strlen($row['email'])>3)
-					$res .= "<A HREF='mailto:".$row['email']."'>"._T('lien_email')."</A>";
+					$res .= "<a href='mailto:".$row['email']."'>"._T('lien_email')."</a>";
 				else
 					$res .= "&nbsp;";
 
 			if (strlen($row['url_site'])>3)
-				$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
+				$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><a href='".$row['url_site']."'>"._T('lien_site')."</a>";
 			else
 				$res .= "</td><td style='border-top: 1px solid #cccccc;'>&nbsp;";
 		}
