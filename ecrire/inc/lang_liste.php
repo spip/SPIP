@@ -87,6 +87,7 @@ $GLOBALS['codes_langues'] = array(
 	'ik' => "Inupiak",
 	'is' => "&#237;slenska",
 	'it' => "italiano",
+	'it_fem' => "italiana",
 	'iu' => "Inuktitut",
 	'ja' => "&#26085;&#26412;&#35486;",
 	'jv' => "Javanese",
