@@ -182,6 +182,7 @@ function calculer_visites($t) {
 				sql_insertq('spip_referers_articles',
 				     array('visites' => $num,
 					   'id_article' => $id_article,
+					   'referer' => $referer,
 					   'referer_md5' => $referer_md5));
 			else $ar[$num][] = $prim;
 		}
