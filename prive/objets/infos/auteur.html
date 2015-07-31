@@ -8,13 +8,13 @@
 [(#AUTORISER{webmestre,'',0,#ID_AUTEUR}|oui)
 	[<p>(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:info_admin_je_suis_webmestre:>,<:info_admin_webmestre:>})</p>]
 ]
-[(#SESSION{id_auteur}|=={#ID_AUTEUR}|et{#AUTORISER{webmestre}|non})
+[(#SESSION{id_auteur}|=={#ID_AUTEUR}|et{#AUTORISER{webmestre}|non}|et{#AUTORISER{etrewebmestre}|oui})
 	[(#VAL{_ID_WEBMESTRES}|defined|oui)
 		#SET{options,#VAL{_FILE_OPTIONS}|constant|basename}}
 		<:info_webmestre_forces{file_options=#GET{options}}:>
 	]
 	[(#VAL{_ID_WEBMESTRES}|defined|non)
-		#BOUTON_ACTION{<:info_admin_etre_webmestre:>,#URL_ACTION_AUTEUR{etre_webmestre,(#REM|time),#SELF}}
+		[(#BOUTON_ACTION{<:info_admin_etre_webmestre:>,[(#URL_ACTION_AUTEUR{etre_webmestre,[(#REM|time)],#SELF})]})]
 	]
 ]
 <B_restreint>
