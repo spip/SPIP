@@ -93,7 +93,10 @@ function formulaires_dater_charger_dist($objet, $id_objet, $retour='', $options=
 
 	$valeurs['sans_redac'] = !$possedeDateRedac;
 
-	$valeurs['_editer_date_anterieure'] = ($objet=='article' AND ($GLOBALS['meta']["articles_redac"] != 'non' OR $possedeDateRedac));
+	if (isset($options['date_redac']))
+		$valeurs['_editer_date_anterieure'] = $options['date_redac'];
+	else
+		$valeurs['_editer_date_anterieure'] = ($objet=='article' AND ($GLOBALS['meta']["articles_redac"] != 'non' OR $possedeDateRedac));
 	$valeurs['_label_date'] = (($statut == 'publie')? _T('texte_date_publication_objet'): _T('texte_date_creation_objet'));
 	$valeurs['_saisie_en_cours'] = (_request('date_jour')!==null);
 
