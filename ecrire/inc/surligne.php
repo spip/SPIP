@@ -44,10 +44,10 @@ function surligner_mots($page) {
     if(preg_match($engine[0],$ref)) 
       if(preg_match($engine[1],$ref,$match)) {
         //good referrer found
-        $script = "<script src='".find_in_path("javascript/SEhighlight.js")."'></script>
+        $script = "<script src='".find_in_path("javascript/SearchHighlight.js")."'></script>
         <script type='text/javascript'>
           jQuery(function(){
-            jQuery(document).SEhighlight({
+            jQuery(document).SearchHighlight({
               style_name:'spip_surligne',
               exact:'whole',
               style_name_suffix:false,
