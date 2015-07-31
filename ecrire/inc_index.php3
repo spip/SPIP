@@ -7,12 +7,12 @@ define("_ECRIRE_INC_INDEX", "1");
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
-	return strtr(strtolower(translitteration($texte)), '\'"','  ');
+	return eregi_replace("[^A-Z0-9_-]","",strtolower(translitteration($texte)));
 }
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
 function separateurs_indexation() {
-	return "].,;`:*'\"?!\r\n\t\\/\~(){}[|&@<>$%#".
+	return "].,`:*'\"?!\r\n\t\\/\~(){}[|@<>$%".
 		chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
 }
 

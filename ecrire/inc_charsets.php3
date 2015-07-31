@@ -5,182 +5,210 @@
 if (defined("_ECRIRE_INC_CHARSETS")) return;
 define("_ECRIRE_INC_CHARSETS", "1");
 
-function filtrer_entites($texte) {	// html -> texte, a completer
 
-	// NB en php4 il suffirait d'utiliser get_html_translation_table/array_flip
-	// HTML_ENTITIES
-	$trans_iso = array(
-		'&iexcl;' => "\xa1",
-		'&cent;' => "\xa2",
-		'&pound;' => "\xa3",
-		'&curren;' => "\xa4",
-		'&yen;' => "\xa5",
-		'&brvbar;' => "\xa6",
-		'&sect;' => "\xa7",
-		'&uml;' => "\xa8",
-		'&ordf;' => "\xaa",
-		'&laquo;' => "\xab",
-		'&not;' => "\xac",
-		'&shy;' => "\xad",
-		'&macr;' => "\xaf",
-		'&deg;' => "\xb0",
-		'&plusmn;' => "\xb1",
-		'&sup2;' => "\xb2",
-		'&sup3;' => "\xb3",
-		'&acute;' => "\xb4",
-		'&micro;' => "\xb5",
-		'&para;' => "\xb6",
-		'&middot;' => "\xb7",
-		'&cedil;' => "\xb8",
-		'&sup1;' => "\xb9",
-		'&ordm;' => "\xba",
-		'&raquo;' => "\xbb",
-		'&iquest;' => "\xbf",
-		'&Agrave;' => "\xc0",
-		'&Aacute;' => "\xc1",
-		'&Acirc;' => "\xc2",
-		'&Atilde;' => "\xc3",
-		'&Auml;' => "\xc4",
-		'&Aring;' => "\xc5",
-		'&AElig;' => "\xc6",
-		'&Ccedil;' => "\xc7",
-		'&Egrave;' => "\xc8",
-		'&Eacute;' => "\xc9",
-		'&Ecirc;' => "\xca",
-		'&Euml;' => "\xcb",
-		'&Igrave;' => "\xcc",
-		'&Iacute;' => "\xcd",
-		'&Icirc;' => "\xce",
-		'&Iuml;' => "\xcf",
-		'&ETH;' => "\xd0",
-		'&Ntilde;' => "\xd1",
-		'&Ograve;' => "\xd2",
-		'&Oacute;' => "\xd3",
-		'&Ocirc;' => "\xd4",
-		'&Otilde;' => "\xd5",
-		'&Ouml;' => "\xd6",
-		'&times;' => "\xd7",
-		'&Oslash;' => "\xd8",
-		'&Ugrave;' => "\xd9",
-		'&Uacute;' => "\xda",
-		'&Ucirc;' => "\xdb",
-		'&Uuml;' => "\xdc",
-		'&Yacute;' => "\xdd",
-		'&THORN;' => "\xde",
-		'&szlig;' => "\xdf",
-		'&agrave;' => "\xe0",
-		'&aacute;' => "\xe1",
-		'&acirc;' => "\xe2",
-		'&atilde;' => "\xe3",
-		'&auml;' => "\xe4",
-		'&aring;' => "\xe5",
-		'&aelig;' => "\xe6",
-		'&ccedil;' => "\xe7",
-		'&egrave;' => "\xe8",
-		'&eacute;' => "\xe9",
-		'&ecirc;' => "\xea",
-		'&euml;' => "\xeb",
-		'&igrave;' => "\xec",
-		'&iacute;' => "\xed",
-		'&icirc;' => "\xee",
-		'&iuml;' => "\xef",
-		'&eth;' => "\xf0",
-		'&ntilde;' => "\xf1",
-		'&ograve;' => "\xf2",
-		'&oacute;' => "\xf3",
-		'&ocirc;' => "\xf4",
-		'&otilde;' => "\xf5",
-		'&ouml;' => "\xf6",
-		'&divide;' => "\xf7",
-		'&oslash;' => "\xf8",
-		'&ugrave;' => "\xf9",
-		'&uacute;' => "\xfa",
-		'&ucirc;' => "\xfb",
-		'&uuml;' => "\xfc",
-		'&yacute;' => "\xfd",
-		'&thorn;' => "\xfe"
-	);
+/* charsets supportes :
+	iso-8859-1 ; utf-8 ;
+	windows-1251  = CP1251 ;
+*/
+function load_charset ($charset = 'AUTO') {
+	if ($charset == 'AUTO')
+		$charset = lire_meta('charset');
 
-	$trans = array (
-		'&nbsp;' => " ",
-		'&copy;' => "(c)",
-		'&reg;' => "(r)",
-		'&frac14;' => "1/4",
-		'&frac12;' => "1/2",
-		'&frac34;' => "3/4",
-		'&amp;' => '&',
-		'&quot;' => '"',
-		'&apos;' => "'",
-		'&lt;' => '<',
-		'&gt;' => '>'
-	);
+	if (is_array($GLOBALS['CHARSET'][$charset]))
+		return $GLOBALS['CHARSET'][$charset];
 
-	$texte = strtr2 ($texte, $trans);
+	switch($charset) {
+		case 'utf-8':
+			return $GLOBALS['CHARSET'][$charset] = array();
 
-	$charset = lire_meta('charset');
-	if ($charset == 'iso-8859-1')	// recuperer les caracteres iso-latin
-		$texte = strtr2 ($texte, $trans_iso);
-	else if (($charset == 'utf-8') OR ($charset == 'windows-1251'))	// autres charsets supportes
-	{
-		// 1. recuperer les caracteres binaires en &#1234;
-		$texte = entites_unicode($texte);
-		// 2. les &eacute; en iso-8859-1
-		$texte = strtr2 ($texte, $trans_iso);
-		// 3. les iso en &#233;
-		$texte = iso_8859_1_to_unicode($texte);
-		// 4. le tout dans le charset cible
+		// iso latin 1
+		case 'iso-8859-1':
+		case '':
+			return $GLOBALS['CHARSET'][$charset] = array (
+			128=>128, 129=>129, 130=>130, 131=>131, 132=>132, 133=>133, 134=>134, 135=>135,
+			136=>136, 137=>137, 138=>138, 139=>139, 140=>140, 141=>141, 142=>142, 143=>143,
+			144=>144, 145=>145, 146=>146, 147=>147, 148=>148, 149=>149, 150=>150, 151=>151,
+			152=>152, 153=>153, 154=>154, 155=>155, 156=>156, 157=>157, 158=>158, 159=>159,
+			160=>160, 161=>161, 162=>162, 163=>163, 164=>164, 165=>165, 166=>166, 167=>167,
+			168=>168, 169=>169, 170=>170, 171=>171, 172=>172, 173=>173, 174=>174, 175=>175,
+			176=>176, 177=>177, 178=>178, 179=>179, 180=>180, 181=>181, 182=>182, 183=>183,
+			184=>184, 185=>185, 186=>186, 187=>187, 188=>188, 189=>189, 190=>190, 191=>191,
+			192=>192, 193=>193, 194=>194, 195=>195, 196=>196, 197=>197, 198=>198, 199=>199,
+			200=>200, 201=>201, 202=>202, 203=>203, 204=>204, 205=>205, 206=>206, 207=>207,
+			208=>208, 209=>209, 210=>210, 211=>211, 212=>212, 213=>213, 214=>214, 215=>215,
+			216=>216, 217=>217, 218=>218, 219=>219, 220=>220, 221=>221, 222=>222, 223=>223,
+			224=>224, 225=>225, 226=>226, 227=>227, 228=>228, 229=>229, 230=>230, 231=>231,
+			232=>232, 233=>233, 234=>234, 235=>235, 236=>236, 237=>237, 238=>238, 239=>239,
+			240=>240, 241=>241, 242=>242, 243=>243, 244=>244, 245=>245, 246=>246, 247=>247,
+			248=>248, 249=>249, 250=>250, 251=>251, 252=>252, 253=>253, 254=>254, 255=>255,
+			256=>256
+			);
+
+
+		// iso latin 15 - Gaetan Ryckeboer <gryckeboer@virtual-net.fr>
+		case 'iso-8859-15':
+			$trans = load_charset('iso-8859-1');
+			$trans[164]=8364;
+			$trans[166]=352;
+			$trans[168]=353;
+			$trans[180]=381;
+			$trans[184]=382;
+			$trans[188]=338;
+			$trans[189]=339;
+			$trans[190]=376;
+			return $GLOBALS['CHARSET'][$charset] = $trans;
+
+
+		// cyrillic - ref. http://czyborra.com/charsets/cyrillic.html
+		case 'windows-1251':
+		case 'CP1251':
+			return $GLOBALS['CHARSET'][$charset] = array (
+			0x80=>0x0402, 0x81=>0x0403, 0x82=>0x201A, 0x83=>0x0453, 0x84=>0x201E,
+			0x85=>0x2026, 0x86=>0x2020, 0x87=>0x2021, 0x88=>0x20AC, 0x89=>0x2030,
+			0x8A=>0x0409, 0x8B=>0x2039, 0x8C=>0x040A, 0x8D=>0x040C, 0x8E=>0x040B,
+			0x8F=>0x040F, 0x90=>0x0452, 0x91=>0x2018, 0x92=>0x2019, 0x93=>0x201C,
+			0x94=>0x201D, 0x95=>0x2022, 0x96=>0x2013, 0x97=>0x2014, 0x99=>0x2122,
+			0x9A=>0x0459, 0x9B=>0x203A, 0x9C=>0x045A, 0x9D=>0x045C, 0x9E=>0x045B,
+			0x9F=>0x045F, 0xA0=>0x00A0, 0xA1=>0x040E, 0xA2=>0x045E, 0xA3=>0x0408,
+			0xA4=>0x00A4, 0xA5=>0x0490, 0xA6=>0x00A6, 0xA7=>0x00A7, 0xA8=>0x0401,
+			0xA9=>0x00A9, 0xAA=>0x0404, 0xAB=>0x00AB, 0xAC=>0x00AC, 0xAD=>0x00AD,
+			0xAE=>0x00AE, 0xAF=>0x0407, 0xB0=>0x00B0, 0xB1=>0x00B1, 0xB2=>0x0406,
+			0xB3=>0x0456, 0xB4=>0x0491, 0xB5=>0x00B5, 0xB6=>0x00B6, 0xB7=>0x00B7,
+			0xB8=>0x0451, 0xB9=>0x2116, 0xBA=>0x0454, 0xBB=>0x00BB, 0xBC=>0x0458,
+			0xBD=>0x0405, 0xBE=>0x0455, 0xBF=>0x0457, 0xC0=>0x0410, 0xC1=>0x0411,
+			0xC2=>0x0412, 0xC3=>0x0413, 0xC4=>0x0414, 0xC5=>0x0415, 0xC6=>0x0416,
+			0xC7=>0x0417, 0xC8=>0x0418, 0xC9=>0x0419, 0xCA=>0x041A, 0xCB=>0x041B,
+			0xCC=>0x041C, 0xCD=>0x041D, 0xCE=>0x041E, 0xCF=>0x041F, 0xD0=>0x0420,
+			0xD1=>0x0421, 0xD2=>0x0422, 0xD3=>0x0423, 0xD4=>0x0424, 0xD5=>0x0425,
+			0xD6=>0x0426, 0xD7=>0x0427, 0xD8=>0x0428, 0xD9=>0x0429, 0xDA=>0x042A,
+			0xDB=>0x042B, 0xDC=>0x042C, 0xDD=>0x042D, 0xDE=>0x042E, 0xDF=>0x042F,
+			0xE0=>0x0430, 0xE1=>0x0431, 0xE2=>0x0432, 0xE3=>0x0433, 0xE4=>0x0434,
+			0xE5=>0x0435, 0xE6=>0x0436, 0xE7=>0x0437, 0xE8=>0x0438, 0xE9=>0x0439,
+			0xEA=>0x043A, 0xEB=>0x043B, 0xEC=>0x043C, 0xED=>0x043D, 0xEE=>0x043E,
+			0xEF=>0x043F, 0xF0=>0x0440, 0xF1=>0x0441, 0xF2=>0x0442, 0xF3=>0x0443,
+			0xF4=>0x0444, 0xF5=>0x0445, 0xF6=>0x0446, 0xF7=>0x0447, 0xF8=>0x0448,
+			0xF9=>0x0449, 0xFA=>0x044A, 0xFB=>0x044B, 0xFC=>0x044C, 0xFD=>0x044D,
+			0xFE=>0x044E, 0xFF=>0x044F); // fin windows-1251
+
+
+		// ------------------------------------------------------------------
+
+		// cas particulier pour les entites html (a completer eventuellement)
+		case 'html':
+			return $GLOBALS['CHARSET'][$charset] = array (
+			'cent'=>'&#162', 'pound'=>'&#163;', 'curren'=>'&#164;', 'yen'=>'&#165;', 'brvbar'=>'&#166;',
+			'sect'=>'&#167;', 'uml'=>'&#168;', 'ordf'=>'&#170;', 'laquo'=>'&#171;', 'not'=>'&#172;',
+			'shy'=>'&#173;', 'macr'=>'&#175;', 'deg'=>'&#176;', 'plusmn'=>'&#177;', 'sup2'=>'&#178;',
+			'sup3'=>'&#179;', 'acute'=>'&#180;', 'micro'=>'&#181;', 'para'=>'&#182;', 'middot'=>'&#183;',
+			'cedil'=>'&#184;', 'sup1'=>'&#185;', 'ordm'=>'&#186;', 'raquo'=>'&#187;', 'iquest'=>'&#191;',
+			'Agrave'=>'&#192;', 'Aacute'=>'&#193;', 'Acirc'=>'&#194;', 'Atilde'=>'&#195;', 'Auml'=>'&#196;',
+			'Aring'=>'&#197;', 'AElig'=>'&#198;', 'Ccedil'=>'&#199;', 'Egrave'=>'&#200;', 'Eacute'=>'&#201;',
+			'Ecirc'=>'&#202;', 'Euml'=>'&#203;', 'Igrave'=>'&#204;', 'Iacute'=>'&#205;', 'Icirc'=>'&#206;',
+			'Iuml'=>'&#207;', 'ETH'=>'&#208;', 'Ntilde'=>'&#209;', 'Ograve'=>'&#210;', 'Oacute'=>'&#211;',
+			'Ocirc'=>'&#212;', 'Otilde'=>'&#213;', 'Ouml'=>'&#214;', 'times'=>'&#215;', 'Oslash'=>'&#216;',
+			'Ugrave'=>'&#217;', 'Uacute'=>'&#218;', 'Ucirc'=>'&#219;', 'Uuml'=>'&#220;', 'Yacute'=>'&#221;',
+			'THORN'=>'&#222;', 'szlig'=>'&#223;', 'agrave'=>'&#224;', 'aacute'=>'&#225;', 'acirc'=>'&#226;',
+			'atilde'=>'&#227;', 'auml'=>'&#228;', 'aring'=>'&#229;', 'aelig'=>'&#230;', 'ccedil'=>'&#231;',
+			'egrave'=>'&#232;', 'eacute'=>'&#233;', 'ecirc'=>'&#234;', 'euml'=>'&#235;', 'igrave'=>'&#236;',
+			'iacute'=>'&#237;', 'icirc'=>'&#238;', 'iuml'=>'&#239;', 'eth'=>'&#240;', 'ntilde'=>'&#241;',
+			'ograve'=>'&#242;', 'oacute'=>'&#243;', 'ocirc'=>'&#244;', 'otilde'=>'&#245;', 'ouml'=>'&#246;',
+			'divide'=>'&#247;', 'oslash'=>'&#248;', 'ugrave'=>'&#249;', 'uacute'=>'&#250;',
+			'ucirc'=>'&#251;', 'uuml'=>'&#252;', 'yacute'=>'&#253;', 'thorn'=>'&#254;',
+			'nbsp' => " ", 'copy' => "(c)", 'reg' => "(r)", 'frac14' => "1/4",
+			'frac12' => "1/2", 'frac34' => "3/4", 'amp' => '&', 'quot' => '"',
+			'apos' => "'", 'lt' => '<', 'gt' => '>'
+			);
+
+		// cas particulier pour la translitteration
+		case 'translit':
+			return $GLOBALS['CHARSET'][$charset] = array (
+			// latin
+			128=>'euro', 131=>'f', 140=>'OE', 153=>'TM', 156=>'oe', 159=>'Y', 160=>' ',
+			161=>'Á', 162=>'c', 163=>'L', 164=>'O', 165=>'yen',166=>'|',
+			167=>'p',169=>'(c)', 171=>'<<',172=>'-',173=>'-',174=>'(R)',
+			176=>'o',177=>'+-',181=>'mu',182=>'p',183=>'.',187=>'>>', 192=>'A',
+			193=>'A', 194=>'A', 195=>'A', 196=>'A', 197=>'A', 198=>'AE', 199=>'C',
+			200=>'E', 201=>'E', 202=>'E', 203=>'E', 204=>'I', 205=>'I', 206=>'I',
+			207=>'I', 209=>'N', 210=>'O', 211=>'O', 212=>'O', 213=>'O', 214=>'O',
+			216=>'O', 217=>'U', 218=>'U', 219=>'U', 220=>'U', 223=>'B', 224=>'a',
+			225=>'a', 226=>'a', 227=>'a', 228=>'a', 229=>'a', 230=>'ae', 231=>'c',
+			232=>'e', 233=>'e', 234=>'e', 235=>'e', 236=>'i', 237=>'i', 238=>'i',
+			239=>'i', 241=>'n', 242=>'o', 243=>'o', 244=>'o', 245=>'o', 246=>'o',
+			248=>'o', 249=>'u', 250=>'u', 251=>'u', 252=>'u', 255=>'y',
+
+			// cyrillique
+			1026=>'D%', 1027=>'G%', 8218=>'\'', 1107=>'g%', 8222=>'"', 8230=>'...',
+			8224=>'/-', 8225=>'/=',  8364=>'EUR', 8240=>'0/00', 1033=>'LJ',
+			8249=>'<', 1034=>'NJ', 1036=>'KJ', 1035=>'Ts', 1039=>'DZ',  1106=>'d%',
+			8216=>'`', 8217=>'\'', 8220=>'"', 8221=>'"', 8226=>' o ', 8211=>'-',
+			8212=>'--', 8212=>'~',  8482=>'(TM)', 1113=>'lj', 8250=>'>', 1114=>'nj',
+			1116=>'kj', 1115=>'ts', 1119=>'dz',  1038=>'V%', 1118=>'v%', 1032=>'J%',
+			1168=>'G3', 1025=>'IO',  1028=>'IE', 1031=>'YI', 1030=>'II', 
+			1110=>'ii', 1169=>'g3', 1105=>'io', 8470=>'No.', 1108=>'ie', 
+			1112=>'j%', 1029=>'DS', 1109=>'ds', 1111=>'yi', 1040=>'A', 1041=>'B',
+			1042=>'V', 1043=>'G', 1044=>'D',  1045=>'E', 1046=>'ZH', 1047=>'Z',
+			1048=>'I', 1049=>'J', 1050=>'K', 1051=>'L', 1052=>'M', 1053=>'N', 
+			1054=>'O', 1055=>'P', 1056=>'R', 1057=>'S', 1058=>'T', 1059=>'U',
+			1060=>'F', 1061=>'H', 1062=>'C',  1063=>'CH', 1064=>'SH', 1065=>'SCH',
+			1066=>'"', 1067=>'Y', 1068=>'\'', 1069=>'`E', 1070=>'YU',  1071=>'YA',
+			1072=>'a', 1073=>'b', 1074=>'v', 1075=>'g', 1076=>'d', 1077=>'e',
+			1078=>'zh', 1079=>'z',  1080=>'i', 1081=>'j', 1082=>'k', 1083=>'l',
+			1084=>'m', 1085=>'n', 1086=>'o', 1087=>'p', 1088=>'r',  1089=>'s',
+			1090=>'t', 1091=>'u', 1092=>'f', 1093=>'h', 1094=>'c', 1095=>'ch',
+			1096=>'sh', 1097=>'sch',  1098=>'"', 1099=>'y', 1100=>'\'', 1101=>'`e',
+			1102=>'yu', 1103=>'ya'
+			);
+
+		default:
+			spip_log("erreur charset $charset non supporte");
+			return $GLOBALS['CHARSET'][$charset] = array();
+
+	}
+}
+
+
+// transformer les &eacute; en unicode
+function filtrer_entites($texte) {
+		$trans = load_charset('html');
+		while (eregi('&([a-z][a-z0-9]+);', $texte, $regs) AND !$vu[$i = $regs[1]]) {
+			$vu[$i] = true;
+			if ($s = $trans[$i])
+				$texte = ereg_replace($regs[0], $s, $texte);
+		}
+
+		// remettre le tout dans le charset cible
 		$texte = unicode2charset($texte);
-	}
-
-	return $texte;
-}
-
-// strtr (string $texte, array $trans) = emuler le php4
-function strtr2 ($texte, $trans) {
-	global $flag_strtr2;
-
-	if ($flag_strtr2)
-		return strtr($texte,$trans);
-	else {
-		reset ($trans);
-		while (list($entite, $remplace) = each ($trans))
-			$texte = ereg_replace($entite, $remplace, $texte);
 		return $texte;
-	}
 }
-
 
 
 // transforme une chaine en entites unicode &#129;
-function entites_unicode($chaine, $charset='AUTO') {
+function entites_unicode($chaine, $charset='AUTO', $forcer = false) {
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
 
 	switch($charset) {
+		case 'utf-8':
+			return utf_8_to_unicode($chaine);
+			break;
+
 		case 'iso-8859-1':
 		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
-		//	$chaine = iso_8859_1_to_unicode($chaine);
-			break;
-		// FORCE-iso-8859-1 passe le message suivant : on VEUT la conversion, meme
-		// si elle est desactivee dans entites_unicode pour maintenir (temporairement)
-		// la lisibilite de notre backend sur des SPIP v<1.5
-		case 'FORCE-iso-8859-1':
-			$chaine = iso_8859_1_to_unicode($chaine);
-			break;
+		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
+			if (!$forcer) return $chaine;
 
-		case 'utf-8':
-			$chaine = utf_8_to_unicode($chaine);
-			break;
-
-		case 'windows-1251':
-			$chaine = windows_1251_to_unicode($chaine);
-			break;
-			
 		default:
-			break;
-
+			$trans = load_charset($charset);
+			$s = '';
+			$len = strlen($chaine);
+			for ($p = 0; $p <= $len; $c = substr($chaine,$p++,1)) {
+				if ((($i=ord($c))>127) and ($j=$trans[$i]))
+					$s .= "&#$j;";
+				else
+					$s .= $c;
+			}
+			return $s;
 	}
-	return $chaine;
 }
 
 // transforme les entites unicode &#129; dans le charset courant
@@ -190,45 +218,23 @@ function unicode2charset($chaine, $charset='AUTO') {
 
 	switch($charset) {
 
-		case 'iso-8859-1':
-			$chaine = unicode_to_iso_8859_1($chaine);
-			break;
-
 		case 'utf-8':
-			$chaine = unicode_to_utf_8($chaine);
+			return unicode_to_utf_8($chaine);
 			break;
 		
-		case 'windows-1251':
-			$chaine = unicode_to_windows_1251($chaine);
-			break;
-
 		default:
-			break;
+			$trans = load_charset($charset);
+			while (list($chr,$uni) = each($trans))	// array_flip
+				$ttrans[$uni] = $chr;
+			while (ereg('&#0*([0-9]+);', $chaine, $regs) AND !$vu[$i = intval($regs[1])]) {
+				$vu[$i] = true;
+				if ($s = $ttrans[$i])
+					$chaine = ereg_replace($regs[0], $s, $chaine);
+			}
+			return $chaine;
 	}
-	return $chaine;
 }
 
-//
-// Il faut deux fonctions par charset : charset->unicode et unicode->charset
-//
-
-// ISO-8859-1
-function iso_8859_1_to_unicode($chaine) {
-	while ($i = ord(substr($chaine,$p++)))
-		if ($i>127)
-			$s .= "&#$i;";
-		else
-			$s .= chr($i);
-	return $s;
-}
-function unicode_to_iso_8859_1($chaine) {
-	while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
-		$vu[$regs[1]] = true;
-		if ($regs[1] < 256)
-			$chaine = ereg_replace($regs[0], chr($regs[1]), $chaine);
-	}
-	return $chaine;
-}
 
 // UTF-8
 function utf_8_to_unicode($source) {
@@ -306,8 +312,9 @@ function utf_8_to_unicode($source) {
 	return $encodedString;
 }
 
+
 function unicode_to_utf_8($chaine) {
-	while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
+	while (ereg('&#0*([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		if($num<128) $s = chr($num);	// Ce bloc provient de php.net, auteur Ronen
@@ -321,58 +328,6 @@ function unicode_to_utf_8($chaine) {
 }
 
 
-// WINDOWS-1251 (CYRILLIQUE)
-function load_windows_1251() {
-	// extrait de la table
-	// http://www.slav.helsinki.fi/atk/codepages/win1251.html
-	static $table;
-	if(is_array($table))
-		return $table;
-	else
-		return $table = array(
-		chr(129)=>'&#1027;',chr(131)=>'&#1107;',chr(138)=>'&#1033;',chr(140)=>'&#1034;',chr(141)=>'&#1036;',
-		chr(142)=>'&#1035;',chr(143)=>'&#1039;',chr(144)=>'&#1106;',chr(154)=>'&#1113;',chr(156)=>'&#1114;',
-		chr(157)=>'&#1116;',chr(158)=>'&#1115;',chr(159)=>'&#1119;',chr(161)=>'&#1038;',chr(162)=>'&#1118;',
-		chr(163)=>'&#1032;',chr(165)=>'&#1168;',chr(168)=>'&#1025;',chr(170)=>'&#1028;',chr(175)=>'&#1031;',
-		chr(178)=>'&#1030;',chr(179)=>'&#1110;',chr(180)=>'&#1169;',chr(184)=>'&#1105;',chr(186)=>'&#1108;',
-		chr(188)=>'&#1112;',chr(189)=>'&#1029;',chr(190)=>'&#1109;',chr(191)=>'&#1111;',chr(192)=>'&#1040;',
-		chr(193)=>'&#1041;',chr(194)=>'&#1042;',chr(195)=>'&#1043;',chr(196)=>'&#1044;',chr(197)=>'&#1045;',
-		chr(198)=>'&#1046;',chr(199)=>'&#1047;',chr(200)=>'&#1048;',chr(201)=>'&#1049;',chr(202)=>'&#1050;',
-		chr(203)=>'&#1051;',chr(204)=>'&#1052;',chr(205)=>'&#1053;',chr(206)=>'&#1054;',chr(207)=>'&#1055;',
-		chr(208)=>'&#1056;',chr(209)=>'&#1057;',chr(210)=>'&#1058;',chr(211)=>'&#1059;',chr(212)=>'&#1060;',
-		chr(213)=>'&#1061;',chr(214)=>'&#1062;',chr(215)=>'&#1063;',chr(216)=>'&#1064;',chr(217)=>'&#1065;',
-		chr(218)=>'&#1066;',chr(219)=>'&#1067;',chr(220)=>'&#1068;',chr(221)=>'&#1069;',chr(222)=>'&#1070;',
-		chr(223)=>'&#1071;',chr(224)=>'&#1072;',chr(225)=>'&#1073;',chr(226)=>'&#1074;',chr(227)=>'&#1075;',
-		chr(228)=>'&#1076;',chr(229)=>'&#1077;',chr(230)=>'&#1078;',chr(231)=>'&#1079;',chr(232)=>'&#1080;',
-		chr(233)=>'&#1081;',chr(234)=>'&#1082;',chr(235)=>'&#1083;',chr(236)=>'&#1084;',chr(237)=>'&#1085;',
-		chr(238)=>'&#1086;',chr(239)=>'&#1087;',chr(240)=>'&#1088;',chr(241)=>'&#1089;',chr(242)=>'&#1090;',
-		chr(243)=>'&#1091;',chr(244)=>'&#1092;',chr(245)=>'&#1093;',chr(246)=>'&#1094;',chr(247)=>'&#1095;',
-		chr(248)=>'&#1096;',chr(249)=>'&#1097;',chr(250)=>'&#1098;',chr(251)=>'&#1099;',chr(252)=>'&#1100;',
-		chr(253)=>'&#1101;',chr(254)=>'&#1102;',chr(255)=>'&#1103;'
-	);
-}
-function windows_1251_to_unicode($chaine) {
-	$trans = load_windows_1251();
-	while ($i = substr($chaine,$p++,1))
-		if ($t = $trans[$i])
-			$s .= $t;
-		else
-			$s .= $i;
-	return $s;
-}
-function unicode_to_windows_1251($chaine) {
-	$trans = load_windows_1251();
-	while (list($chr,$uni) = each($trans))	// array_flip
-		$ttrans[$uni] = $chr;
-	while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
-		$vu[$regs[1]] = true;
-		if ($ttrans[$regs[0]])
-			$chaine = ereg_replace($regs[0], $ttrans[$regs[0]], $chaine);
-	}
-	return $chaine;
-}
-
-
 //
 // Translitteration charset => ascii (pour l'indexation)
 //
@@ -380,58 +335,23 @@ function translitteration ($texte, $charset='AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
-	if ($charset == 'iso-8859-1') {
-		$texte = translit_iso8859_1($texte);
-	} else if ($charset == 'windows-1251') {
-		$texte = translit_windows_1251($texte);
-	} else if ($GLOBALS['flag_iconv']
-	AND ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte))
-	AND !ereg('^\?+$',$iconv))
-		$texte = $iconv;
-	return $texte;
-}
+	// 1. passer en unicode
+	$texte = entites_unicode(filtrer_entites($texte), $charset, true);
 
-function translit_iso8859_1($texte) {
-	// Merci a phpDig (Antoine Bajolet) pour la fonction originale
-	$accents =
-		/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
-		/* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
-		/* O */ chr(210).chr(211).chr(212).chr(213).chr(214).chr(216).
-		/* o */ chr(242).chr(243).chr(244).chr(245).chr(246).chr(248).
-		/* E */ chr(200).chr(201).chr(202).chr(203).
-		/* e */ chr(232).chr(233).chr(234).chr(235).
-		/* Cc */ chr(199).chr(231).
-		/* I */ chr(204).chr(205).chr(206).chr(207).
-		/* i */ chr(236).chr(237).chr(238).chr(239).
-		/* U */ chr(217).chr(218).chr(219).chr(220).
-		/* u */ chr(249).chr(250).chr(251).chr(252).
-		/* yNn */ chr(255).chr(209).chr(241);
-	return strtr($texte,
-		$accents,
-		"AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
-}
-
-function translit_windows_1251($texte) {
-	$code = array (
-		128=>'D',129=>'G',136=>'euro',138=>'LJ',140=>'NJ',141=>'KJ',142=>'Ts',143=>'DZ',144=>'d',149=>'o',
-		154=>'lj',156=>'nj',157=>'kj',158=>'ts',159=>'dz',161=>'V',162=>'v',163=>'J',165=>'G',168=>'IO',
-		170=>'IE',175=>'YI',178=>'II',179=>'ii',180=>'g',181=>'mu',184=>'io',186=>'ie',188=>'j',189=>'DS',
-		190=>'ds',191=>'yi',192=>'A',193=>'B',194=>'V',195=>'G',196=>'D',197=>'E',198=>'ZH',199=>'Z',
-		200=>'I',201=>'J',202=>'K',203=>'L',204=>'M',205=>'N',206=>'O',207=>'P',208=>'R',209=>'S',210=>'T',
-		211=>'U',212=>'F',213=>'H',214=>'C',215=>'CH',216=>'SH',217=>'SCH',218=>'_',219=>'Y',220=>'_',
-		221=>'e',222=>'YU',223=>'YA',224=>'a',225=>'b',226=>'v',227=>'g',228=>'d',229=>'e',230=>'zh',
-		231=>'z',232=>'i',233=>'j',234=>'k',235=>'l',236=>'m',237=>'n',238=>'o',239=>'p',240=>'r',241=>'s',
-		242=>'t',243=>'u',244=>'f',245=>'h',246=>'c',247=>'ch',248=>'sh',249=>'sch',250=>' ',251=>'y',
-		252=>'_',253=>'E',254=>'yu',255=>'ya');
-
-	for ($i=0; $i<strlen($texte);$i++) {
-		$d = substr($texte,$i,1);
-		if ($c = $code[ord($d)])
-			$ret .= $c;
-		else
-			$ret .= $d;
+	// 2. translitterer
+	$trans = load_charset('translit');
+	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$i = $regs[1]]) {
+		$vu[$i] = true;
+		if ($s = $trans[$i])
+			$texte = ereg_replace($regs[0], $s, $texte);
+		// on va tenter de trouver la translitteration ailleurs
+		// - dans iconv par exemple
+		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv($charset, 'ASCII//TRANSLIT', $texte)) AND !ereg('^\?+$',$iconv)) {
+			$GLOBALS['CHARSET']['translit'][$i] = $iconv;
+				$texte = ereg_replace($regs[0], $iconv, $texte);
+		}
 	}
-	return $ret;
+	return $texte;
 }
 
 ?>

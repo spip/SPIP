@@ -3,7 +3,7 @@
 include ("ecrire/inc_version.php3");
 
 include_ecrire("inc_filtres.php3");
-include_ecrire("inc_index.php3");
+include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
@@ -281,8 +281,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	$dest = 'IMG/';
 	if (creer_repertoire('IMG', $ext))
 		$dest .= $ext.'/';
-	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_",
-	nettoyer_chaine_indexation(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
+	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
 	$n = 0;
 	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 	$dest_path = $newFile;

@@ -411,7 +411,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		/// Ajouter nouveau document/image
 
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: ".$GLOBALS['spip_lang_right']."; color: black;'>";
+		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: ".$GLOBALS['spip_lang_left']."; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");
 		if ($type == "rubrique") echo "<b><font size=1>"._T('titre_publier_document')."</font></b>".aide("ins_doc");
 		else echo "<b><font size=1>"._T('titre_joindre_document')."</font></b>".aide("ins_doc");

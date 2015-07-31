@@ -88,13 +88,14 @@ function recuperer_page($url) {
 
 function transcoder_page($texte) {
 	// Si le backend precise son charset et que celui-ci est connu de SPIP,
-	// decoder puis rencoder
+	// decoder puis recoder
 	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
 		$charset_page = $regs[1];
 		$texte = unicode2charset(entites_unicode($texte, $charset_page));
 	}
-	// Si le backend ne precise pas, on considere qu'il est iso-8859-1
-	else $texte = unicode2charset(entites_unicode($texte, 'FORCE-iso-8859-1'));
+	// Si le backend ne precise pas, on considere qu'il est iso-8859-1 : il faut
+	// alors forcer la conversion
+	else $texte = unicode2charset(entites_unicode($texte, 'iso-8859-1', true));
 
 	return $texte;
 }
