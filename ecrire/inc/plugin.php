@@ -97,8 +97,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	}
 	ecrire_meta('plugin_header',substr(strtolower(implode(",",$plugin_header_info)),0,900));
 
-	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
-	$end_file = "\n?".">";
+	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
+	$end_file = "}\n?".">";
 	
 	// generer les fichier 
 	// charger_plugins_options.php
@@ -174,8 +174,8 @@ function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 	$liste_fichier_verif = array();
 	
-	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
-	$end_file = "\n?".">";
+	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
+	$end_file = "}\n?".">";
 	$content = "";
 	foreach($spip_pipeline as $action=>$pipeline){
 		$s_inc = "";
