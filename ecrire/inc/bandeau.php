@@ -246,7 +246,7 @@ function bando_navigation($boutons, $contexte = array())
 function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
-	$img_info = find_in_theme('images/information-24.png');
+	$img_info = find_in_theme('images/information-16.png');
 	$url_config_identite = generer_url_ecrire('config_identite');
 
 	$res = "";
