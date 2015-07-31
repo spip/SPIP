@@ -2,7 +2,7 @@
 #SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{derniere, #GET{bornes}|end}
-#SET{separateur,'|'}
+#SET{separateur,#ENV{separateur,'|'}}
 #SET{i,#ENV{page_courante}|moins{1}}
 [(#GET{i}|>{0}|?{' '})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
