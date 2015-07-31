@@ -222,6 +222,11 @@ if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
 	include(_DIR_RESTREINT . 'mes_options.php3');
 }
 
+if (@file_exists(_DIR_RESTREINT . 'inc_plugins.php3')) {
+	include(_DIR_RESTREINT . 'inc_plugins.php3');
+}
+
+
 define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
@@ -453,6 +458,13 @@ function include_ecrire($file) {
 	$GLOBALS['included_files'][$file] = 1;
 }
 
+function include_plug($file) {
+	$file = _DIR_RESTREINT . $file;
+	if ($GLOBALS['included_files'][$file]) return;
+	if (file_exists($file)) include($file);
+	$GLOBALS['included_files'][$file] = 1;
+}
+
 function spip_query($query) {
 	if (_FILE_CONNECT) {
 		include_ecrire("inc_connect.php3");
@@ -469,6 +481,25 @@ function spip_query($query) {
 	}
 	return spip_query_db($query);
 }
+
+function appliquer_fonction($lafonction, $entree) {
+	global $arr_functions;
+	
+	$sortie = $entree;
+
+	if (@function_exists($lafonction)) $sortie = $lafonction($sortie);
+	
+	if (!$arr_functions) $arr_functions = get_defined_functions();
+	
+	asort($arr_functions[user]);
+	// tester la presence de fonctions "_hello_"
+	foreach($arr_functions['user'] as $key => $value) {
+		if (ereg("^".$lafonction."_",$value)) $sortie = $value($sortie);
+	}
+	if (function_exists($lafonction)) $sortie = $lafonction($sortie);
+	return $sortie;
+}
+
 
 
 //
