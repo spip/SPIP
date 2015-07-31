@@ -219,7 +219,6 @@ div.bandeau_rub {
 	padding: 0px;
 	border: 1px solid #555555;
 	visibility: hidden;
-	width: 170px;
 }
 
 div.brt {
