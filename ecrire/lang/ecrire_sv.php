@@ -228,12 +228,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   aktiviteterna, kan SPIP skicka medddelanden via e-post, exempelvis till en maillista för redaktörer,
   angående publiceringar och godkännanden.',
 	'info_fichiers_authent' => 'Lösenordsfil ".htpasswd"',
-	'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
-exige d’avoir un accès FTP au site Web.</p>', # MODIF
-	'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
-exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Här hittar du alla redaktörer på sajten.
  Status på var och en av dem visas av färgen på ikonen (administratör = grön; redaktör = gul).',
 	'info_gauche_auteurs_exterieurs' => 'Externa redaktörer utan behörighet på sajten, visas med en blå ikon; raderade redaktörer med en soptunna.', # MODIF
@@ -317,16 +311,6 @@ funktioner hos SPIP inte användas.',
 	'info_publier' => 'publicera',
 	'info_publies' => 'Dina onlinepublicerade artiklar',
 	'info_question_accepter_visiteurs' => 'Om sajtens template tillåter besökare att registrera sig utan att gå in i den privata delen, var vänlig och aktivera följande option:',
-	'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
-  partir du site public ? Si vous acceptez, les visiteurs pourront s’inscrire
-  depuis un formulaire automatisé et accéderont alors à l’espace privé pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d’inscription,
-  les utilisateurs reçoivent un courrier électronique automatique
-  leur fournissant leurs codes d’accès au site privé. Certains
-  hébergeurs désactivent l’envoi de mails depuis leurs
-  serveurs : dans ce cas, l’inscription automatique est
-  impossible.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Sajtens bas',
 	'info_recharger_page' => 'Var vänlig och uppdatera sidan om en liten stund.',
 	'info_recherche_auteur_zero' => 'Inga resultat hittades för "@cherche_auteur@".',
@@ -528,16 +512,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 	'texte_choix_table_prefix' => 'Prefix för tabeller:',
 	'texte_compte_element' => '@count@ objekt',
 	'texte_compte_elements' => '@count@ element',
-	'texte_connexion_mysql' => 'Consult the information provided by your service provider. It should contain the connection codes for the SQL server.', # MODIF
-	'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.', # MODIF
-	'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
-  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p>
-  These files can be used to restrict access to authors
-  and administrators in other parts of your site
-  (for instance, external statistical programme).</p><p>
-  If you have no need of such files, you can leave this option
-  with its default value (no files 
-  creation).</p>', # MODIF
 	'texte_jeu_caractere_3' => 'Din sajt använder följande teckenuppsättning:',
 	'texte_mise_a_niveau_base_1' => 'Du har just uppdaterat filerna i SPIP.
  Nu måste du uppgradera sajtens databas.',
@@ -546,23 +520,11 @@ installera om SPIP för att skapa en ny databas och den första administratören
 	'texte_multilinguisme_trad' => 'Dessutom kan du aktivera ett system för länkhantering av de olika översättningarna av en artikel.', # MODIF
 	'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
 	'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
-	'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu’à l’accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l’installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
 	'texte_plus_trois_car' => 'mer än tre tecken',
 	'texte_plusieurs_articles' => 'Flera redaktörer hittades för  "@cherche_auteur@":',
 	'texte_recalcul_page' => 'Om du vill uppdatera
 enbart en sida, är det bäst att göra det från den publika delen genom att klicka på « Ladda om sidan ».',
 	'texte_recuperer_base' => 'Reparera databasen',
-	'texte_requetes_echouent' => '<b>Lorsque certaines requêtes SQL échouent
-  systématiquement et sans raison apparente, il est possible
-  que ce soit à cause de la base de données
-  elle-même.</b><p>
-  Votre serveur SQL dispose d’une faculté de réparation de ses
-  tables lorsqu’elles ont été endommagées par
-  accident. Vous pouvez ici tenter cette réparation ; en
-  cas d’échec, conservez une copie de l’affichage, qui contient
-  peut-être des indices de ce qui ne va pas...</p><p>
-  Si le problème persiste, prenez contact avec votre
-  hébergeur.</p>', # MODIF
 	'texte_sous_titre' => 'Undertitel',
 	'texte_statistiques_visites' => '(mörka staplar:  Söndag / mörk linje: genomsnittlig nivå)',
 	'texte_statut_attente_validation' => 'väntar på godkännande',

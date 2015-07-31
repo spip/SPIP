@@ -234,6 +234,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_aucun_message' => 'Sem mensagens',
 	'info_aucun_rubrique' => 'Sem rubricas',
 	'info_aujourdhui' => 'hoje :',
+	'info_auteur_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>', # MODIF
 	'info_auteurs' => 'Os autores',
 	'info_auteurs_par_tri' => 'Autores@partri@',
 	'info_auteurs_trouves' => 'Autores encontrados',

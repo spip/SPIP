@@ -140,7 +140,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
 
 	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
 	'htaccess_inoperant' => 'htaccess nieczyny',
 
 	// I
@@ -402,7 +401,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   wyłączają możliwość wysyłania maili z ich
   serwerów : w tym przypadku automatyczne zapisanie się jest
   niemożliwe.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Rdzeń strony',
 	'info_recharger_page' => 'Proszę za chwilę ponownie załadować tę stronę.',
 	'info_recherche_auteur_zero' => '<b>Żadnych wyników dla " @cherche_auteur@ ".',

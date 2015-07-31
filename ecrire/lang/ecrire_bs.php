@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_trouves' => 'Pronadjeni clanci',
 	'info_attente_validation' => 'Vasi clanci koji cekaju ovjeru',
 	'info_aujourdhui' => 'danas:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Autori',
 	'info_auteurs_par_tri' => 'Autori@partri@',
 	'info_auteurs_trouves' => 'Pronadjeni autori',

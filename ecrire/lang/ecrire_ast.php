@@ -215,6 +215,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Dengún mensaxe',
 	'info_aucun_rubrique' => 'Denguna seición', # MODIF
 	'info_aujourdhui' => 'güei:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Los autores',
 	'info_auteurs_par_tri' => 'Autores@partri@',
 	'info_auteurs_trouves' => 'Autores alcontráos',

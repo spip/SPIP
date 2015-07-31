@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_plugin_version_manquant' => 'Versiunea plugin-ului lipsă',
 
 	// H
-	'htaccess_a_simuler' => 'Avertissement: la configuration de votre serveur HTTP ne tient pas compte des fichiers @htaccess@. Pour pouvoir assurer une bonne sécurité, il faut que vous modifiez cette configuration sur ce point, ou bien que les constantes @constantes@ (définissables dans le fichier mes_options.php) aient comme valeur des répertoires en dehors de @document_root@.', # MODIF
 	'htaccess_inoperant' => 'htaccess nu funcţionează',
 
 	// I
@@ -378,7 +377,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   furnizori de hosting dezactivează trimiterea de email-uri de pe
   server-ele lor : în acest caz înscrierea automatică este
   imposibilă.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Rădăcina site-ului',
 	'info_recharger_page' => 'Vă rugăm să reîncărcaţi această pagină în câteva momente.',
 	'info_recherche_auteur_zero' => 'Nici un rezultat pentru « @cherche_auteur@ ».',
@@ -404,7 +402,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_2' => 'site :',
 	'info_site_min' => 'site',
 	'info_site_reference_2' => 'Site referenţiat',
-	'info_site_web' => 'SITE WEB :', # MODIF
 	'info_sites' => 'site-uri',
 	'info_sites_lies_mot' => 'Site-urile referenţiate legate la acest cuvânt-cheie',
 	'info_sites_proxy' => 'Utilizaţi un proxy',
@@ -592,7 +589,6 @@ cu o culoare care le indică starea :',
 	'plugin_zip_installer' => 'Puteţi acum să îl instalaţi.',
 	'plugin_zip_telecharge' => 'Fişierul @zip@ a fost descărcat',
 	'plugins_actifs' => '@count@ plug-in-uri activate.',
-	'plugins_actifs_liste' => 'Plugins actifs', # MODIF
 	'plugins_compte' => '@count@ plug-in-uri',
 	'plugins_disponibles' => '@count@ plug-in-uri disponibile.',
 	'plugins_erreur' => 'Eroare în plug-in-urile : @plugins@',
@@ -600,9 +596,6 @@ cu o culoare care le indică starea :',
 	'plugins_vue_hierarchie' => 'Ierarhie',
 	'plugins_vue_liste' => 'Listă',
 	'protocole_ldap' => 'Versiunea protocolului :',
-
-	// Q
-	'queue_titre' => 'Liste de travaux', # MODIF
 
 	// R
 	'repertoire_plugins' => 'Director :',

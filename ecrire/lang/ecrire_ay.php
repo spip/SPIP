@@ -156,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_trouves' => 'Qillqatanak jikita',
 	'info_attente_validation' => 'Qillqatanakax iyaw sañataki suyaski',
 	'info_aujourdhui' => 'jichhüru:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Qillqirinaka',
 	'info_auteurs_par_tri' => 'Qillqirinaka@partri@',
 	'info_auteurs_trouves' => 'Qillqirinaka jikita',

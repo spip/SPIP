@@ -229,6 +229,7 @@ Tamen vi povas malŝalti ĝin.',
 	'info_aucun_message' => 'Neniu mesaĝo',
 	'info_aucun_rubrique' => 'Neniu rubriko',
 	'info_aujourdhui' => 'hodiaŭ : ',
+	'info_auteur_gere_toutes_rubriques_2' => 'Mi mastrumas <b>ĉiujn rubrikojn</b>', # MODIF
 	'info_auteurs' => 'La aŭtoroj',
 	'info_auteurs_par_tri' => 'Aŭtoroj@partri@',
 	'info_auteurs_trouves' => 'Aŭtoroj trovitaj',

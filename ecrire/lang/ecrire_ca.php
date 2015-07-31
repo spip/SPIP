@@ -238,6 +238,7 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d’hostatg
 	'info_aucun_rubrique' => 'Cap secció',
 	'info_aujourdhui' => 'avui:',
 	'info_auteur_gere_toutes_rubriques' => 'Aquest autor gestiona <b>totes les seccions</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Gestiono <b>totes les seccions</b>', # MODIF
 	'info_auteurs' => 'Els autors',
 	'info_auteurs_par_tri' => 'Autors@partri@',
 	'info_auteurs_trouves' => 'Autors trobats',

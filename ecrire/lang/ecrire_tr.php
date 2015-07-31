@@ -337,7 +337,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 <blockquote><i>Kayıt aşamasında,    kullanıcılara,  özel siteye erişim şifresi veren bir otomatik
     e-posta gönderilir. Bazı Hizmet bilgisayarları kendi sunucularından
     e-posta yollanmasını durduruyorlar : bu durumda otomatik kayıt olanaksızdır.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'Sitenin kökü',
 	'info_recharger_page' => 'Lütfen bu sayfayı az sonra tekrar yükleyiniz.',
 	'info_recherche_auteur_zero' => ' "@cherche_auteur@" için hiç bir sonuç elde edilemedi.',

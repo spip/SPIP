@@ -161,6 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_articles_trouves' => 'Намерени статии',
 	'info_attente_validation' => 'Вашите статии, очакващи одобрение за публикуване',
 	'info_aujourdhui' => 'днес:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # MODIF
 	'info_auteurs' => 'Автори',
 	'info_auteurs_par_tri' => 'Автори@partri@',
 	'info_auteurs_trouves' => 'Намерени автори',

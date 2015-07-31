@@ -239,6 +239,7 @@ ar skeudennoù enframmet. Evel-se e c’heller krouiñ, da skouer,
 	'info_aucun_rubrique' => 'Rubrikenn ebet',
 	'info_aujourdhui' => 'hiziv :',
 	'info_auteur_gere_toutes_rubriques' => 'An aozer-mañ a ra war-dro <b>an holl rubrikennoù</b>',
+	'info_auteur_gere_toutes_rubriques_2' => 'Merañ a ran <b>pep rubrikenn</b>', # MODIF
 	'info_auteurs' => 'Ar skridaozerien',
 	'info_auteurs_par_tri' => 'Skridaozerien@partri@',
 	'info_auteurs_trouves' => 'Skridaozerien kavet',

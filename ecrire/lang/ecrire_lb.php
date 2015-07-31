@@ -226,6 +226,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Kee Message',
 	'info_aucun_rubrique' => 'Keng Rubrik',
 	'info_aujourdhui' => 'Haut:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Ech verwalten <b>all d’Rubriken</b>', # MODIF
 	'info_auteurs' => 'D’Auteuren',
 	'info_auteurs_par_tri' => 'Auteuren @partri@',
 	'info_auteurs_trouves' => 'Auteure fonnt',

@@ -267,7 +267,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_publies' => 'yè sɔ kɛn ná',
 	'info_question_accepter_visiteurs' => 'Nɛ nyí ɖɔ tìtòmɛ mi tɔn bà ɖɔ é mi ná wlí jōnɔ lɛ hɛn ɔ :',
 	'info_question_inscription_nouveaux_redacteurs' => 'Mi yí gbè nú nyɔwántɔ yɔyɔ lɛ à.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => 'gblogblojí ɔ sín dɔ',
 	'info_recharger_page' => 'mi lɛ vɔ jlɔ wémà é lɔ ɖò cɛjú ywɛywɛmɛ.',
 	'info_recherche_auteur_zero' => 'xókwìn lɛ « @cherche_auteur@ ».',

@@ -233,6 +233,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_message' => 'Geen bericht',
 	'info_aucun_rubrique' => 'Geen rubriek',
 	'info_aujourdhui' => 'vandaag:',
+	'info_auteur_gere_toutes_rubriques_2' => 'Ik beheer <b>alle onderwerpen</b>', # MODIF
 	'info_auteurs' => 'De auteurs',
 	'info_auteurs_par_tri' => 'Auteur@partri@',
 	'info_auteurs_trouves' => 'Gevonden auteurs',

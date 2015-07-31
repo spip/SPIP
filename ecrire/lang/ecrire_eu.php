@@ -230,6 +230,7 @@ Seguritate hobetzeko, konfigurazio hau aldatu behar zenuke, edo @constantes@ kon
 	'info_aucun_message' => 'Mezurik ez',
 	'info_aucun_rubrique' => 'Atalik ez',
 	'info_aujourdhui' => 'Gaur :',
+	'info_auteur_gere_toutes_rubriques_2' => '<b>Atal guztiak</b> kudeatzen ditut', # MODIF
 	'info_auteurs' => 'Egileak',
 	'info_auteurs_par_tri' => '@partri@ egileak',
 	'info_auteurs_trouves' => 'Aurkitutako idazlariak',
