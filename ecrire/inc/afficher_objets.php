@@ -25,7 +25,7 @@ function lien_editer_objet($type,$key,$id){
 }
 // http://doc.spip.org/@lien_voir_objet
 function lien_voir_objet($type,$key,$id){
-	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_tous');
+	$exec = array('article'=>'articles','breve'=>'breves_voir','rubrique'=>'naviguer','mot'=>'mots_edit');
 	$exec = isset($exec[$type])?$exec[$type]:$type . "s";
 	return generer_url_ecrire($exec,"$key=$id");
 }
