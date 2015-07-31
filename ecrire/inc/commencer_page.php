@@ -30,7 +30,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     $commencer_page = charger_fonction('commencer_page','inc');
  *     echo $commencer_page($titre);
  *     ```
- * 
+ *
  * @param string $titre Titre de la page
  * @param string $rubrique ?
  * @param string $sous_rubrique ?
@@ -56,14 +56,14 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 }
 
 /**
- * Envoi du DOCTYPE et du `<head><title>...</head>`
- * 
+ * Envoi du DOCTYPE et du `<head><title>   </head>`
+ *
  * @uses _DOCTYPE_ECRIRE
  * @uses textebrut()
  * @uses typo()
  * @uses html_lang_attributes()
  * @uses init_head()
- * 
+ *
  * @param string $titre
  *     Titre de la page
  * @param integer $dummy
@@ -79,7 +79,7 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 
 	$titre = "["
 		. $nom_site_spip
-		. "]" 
+		. "]"
 	  . ($titre ? " ".textebrut(typo($titre)):"");
 
 	return _DOCTYPE_ECRIRE
@@ -92,7 +92,7 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
  * Retourne le code HTML du head (intégration des JS et CSS) de l'espace privé
  *
  * Code HTML récupéré du squelette `prive/squelettes/head/dist`
- * 
+ *
  * @param string $titre
  * @param integer $dummy
  * @param bool $minipres
@@ -104,12 +104,12 @@ function init_head($titre='', $dummy=0, $minipres=false) {
 
 /**
  * Fonction envoyant la double série d'icônes de rédac
- * 
+ *
  * @uses init_body_class()
  * @uses inc_bandeau_dist()
- * 
+ *
  * @pipeline_appel body_prive
- * 
+ *
  * @global mixed $connect_id_auteur
  * @global mixed $auth_can_disconnect
  *
@@ -135,12 +135,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	return $res
 	 . $bandeau();
 }
+
 /**
  * Calcule les classes CSS à intégrer à la balise `<body>` de l'espace privé
  *
  * Les classes sont calculées en fonction des préférences de l'utilisateur,
  * par exemple s'il choisit d'avoir ou non les icônes.
- * 
+ *
  * @return string Classes CSS (séparées par des espaces)
  */
 function init_body_class() {
