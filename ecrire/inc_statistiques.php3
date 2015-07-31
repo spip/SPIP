@@ -227,7 +227,7 @@ function calculer_visites($date = "") {
 function supprimer_referers($type = "") {
 	$table = 'spip_referers';
 	if ($type) {
-		$table .= $table . '_'. $type . 's';
+		$table .= '_'. $type . 's';
 		$col_id = 'id_' . $type;
 		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
 		$result = spip_query($query);
