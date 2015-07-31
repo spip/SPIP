@@ -19,8 +19,10 @@ if ($spip_display != 4) {
 	
 	
 	echo "<p>";
-	if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre = bouton_block_visible("info_perso");
-	else $titre_cadre = bouton_block_invisible("info_perso");
+	
+	$titre_cadre = afficher_plus("auteurs_edit.php3?id_auteur=$connect_id_auteur");
+	if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre .= bouton_block_visible("info_perso");
+	else $titre_cadre .= bouton_block_invisible("info_perso");
 	$titre_cadre .= majuscules(typo($connect_nom));
 	
 	debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
