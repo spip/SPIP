@@ -57,7 +57,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
 	echo debut_grand_cadre(true);
-	echo afficher_hierarchie($id_rubrique);
+	echo afficher_hierarchie($id_rubrique,'',$id_article,'article');
 	echo fin_grand_cadre(true);
 
 	echo debut_gauche("",true);
