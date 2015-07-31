@@ -148,10 +148,10 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 	if ($flag_administrable) {
 		echo debut_cadre_relief("racine-site-24.gif", true);
 
-		$corps = "\n<div style='text-align: center'><b>"
+		$corps = "\n<div style='text-align: center'><label for='statut'><b>"
 		. _T('info_statut_site_1')
-		. "</b> &nbsp;&nbsp; \n"
-		.  "<select name='statut' size='1' class='fondl'>\n"
+		. "</b></label> &nbsp;&nbsp; \n"
+		.  "<select name='statut' id='statut' size='1' class='fondl'>\n"
 		.  my_sel("prop",_T('info_statut_site_3'),$statut)
 		.  my_sel("publie",_T('info_statut_site_2'),$statut)
 		.  my_sel("refuse",_T('info_statut_site_4'),$statut);
@@ -290,7 +290,7 @@ else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	$res .= "<div><input type='radio' name='syndication' value='oui' id='syndication_oui' />";
 	$res .= " <label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></div>\n";
 
-	$res .= "<select name='url_syndic'>\n";
+	$res .= "<select name='url_syndic' id='url_syndic'>\n";
 	foreach (explode(' ',$regs[1]) as $feed) {
 		$res .= '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
 	}

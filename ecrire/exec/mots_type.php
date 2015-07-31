@@ -90,17 +90,17 @@ function exec_mots_type_dist()
 	. aide("motsgroupes")
 	. "<div class='verdana1'>"
 	. debut_cadre_formulaire('',true)
-	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
-	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
+	. "<label for='change_type'><b>"._T('info_changer_nom_groupe')."</b></label><br />\n"
+	. "<input type='text' size='40' class='formo' name='change_type' id='change_type' value=\"$type\" $onfocus />\n";
 		
-	$res .= "<br /><b>"._T('texte_descriptif_rapide')
-	  . "</b><br />"
-	  . "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
+	$res .= "<br /><label for='descriptif'><b>"._T('texte_descriptif_rapide')
+	  . "</b></label><br />"
+	  . "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
 	  . entites_html($descriptif)
 	  . "</textarea>\n";
 
-	$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
-	$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b><label><br />";
+	$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 	$res .= entites_html($texte);
 	$res .= "</textarea>\n";
 

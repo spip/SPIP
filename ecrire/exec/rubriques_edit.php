@@ -109,8 +109,8 @@ function exec_rubriques_edit_dist()
 	$titre = entites_html($titre);
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form = _T('entree_titre_obligatoire')
-	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
+	$form = "<label for='titre'>" . _T('entree_titre_obligatoire') ."</label>"
+	.  "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />"
 	. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
 	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
 
@@ -134,16 +134,16 @@ function exec_rubriques_edit_dist()
 
 	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
-			. _T('entree_contenu_rubrique')."<br />"
-			. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
+			. "<label for='descriptif'>" . _T('entree_contenu_rubrique')."<label><br />"
+			. "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
 			. entites_html($descriptif)
 			. "</textarea>\n";
 	}
 
 	if (($GLOBALS['meta']['rubriques_texte'] == "oui") OR strlen($texte)) {
-		$form .= "<b>"._T('info_texte_explicatif')."</b>"
+		$form .= "<label for='texte'><b>"._T('info_texte_explicatif')."</label></b>"
 		. aide ("raccourcis")
-		. "<br /><textarea name='texte' rows='15' class='formo' cols='40'>"
+		. "<br /><textarea name='texte' id='texte' rows='15' class='formo' cols='40'>"
 		. entites_html($texte)
 		. "</textarea>\n";
 	}
