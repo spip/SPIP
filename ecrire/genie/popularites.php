@@ -46,7 +46,7 @@ function genie_popularites_dist($t) {
 	list($a,$b) = genie_popularite_constantes($duree);
 
 	// du passe, faisons table (SQL) rase
-	sql_update('spip_articles', array('maj'=>'maj', 'popularite' => "popularite * $a"));
+	sql_update('spip_articles', array('maj'=>'maj', 'popularite' => "popularite * $a"), 'popularite>1');
 
 	// enregistrer les metas...
 	$row = sql_fetsel('MAX(popularite) AS max, SUM(popularite) AS tot', "spip_articles");

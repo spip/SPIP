@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/mots');
 
+// $flag indique si on est autorise a modifier l'article
 // http://doc.spip.org/@inc_editer_mots_dist
 function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false, $url_base='') {
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
@@ -21,42 +22,36 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$nom = table_objet($objet);
 	$desc = $trouver_table($nom);
-	$table = $desc['table']; 
 	$table_id =  @$desc['key']["PRIMARY KEY"];
-	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	$where = "$droit = 'oui' AND tables_liees REGEXP '(^|,)$nom($|,)' ";
-
-	$n = sql_fetsel(1, "spip_mots AS M LEFT JOIN spip_mots_$nom AS L ON M.id_mot=L.id_mot", "L.$table_id=$id_objet",'','',1);
-
-	if (!$n) {
-		if (!$flag) return; // rien a afficher, et pas droit de modif
-		$n = sql_fetsel(1, 'spip_groupes_mots', $where, '', '', 1);
-		if (!$n) return; // droit de modif, mais sur rien
-	}
 
 	$reponse = ($flag AND $cherche_mot)
-	  ? chercher_inserer_mot($cherche_mot, $select_groupe, $objet, $id_objet, $nom, $table_id, $url_base)
-	  : '';
+		? chercher_inserer_mot($cherche_mot, $select_groupe, $objet, $id_objet, $nom, $table_id, $url_base)
+		: '';
 
 	list($liste, $mots) = afficher_mots_cles($flag, $objet, $id_objet, $nom, $table_id, $url_base);
 
+	$aff =false;
 	$bouton = _T('titre_mots_cles').aide ("artmots");
+
+	if ($liste)
+		$aff = true;
 
 	if ($flag) { 	// si droit de modif donner le formulaire
 		$visible = ($visible OR $cherche_mot OR ($flag === 'ajax'));
-		list($id_groupes_vus, $res) = formulaire_mots_cles($id_objet, $mots, $nom, $table_id, $url_base, $visible, $objet);
-		// forcer la visibilite si au moins un mot obligatoire absent
-		// attention true <> 1 pour bouton_block_depliable
-		if (!$visible)
-			$visible = sql_fetsel($droit, "spip_groupes_mots", "$where AND obligatoire='oui' $id_groupes_vus",'','',1) ? true : false;
+		list($visible, $res) = formulaire_mots_cles($id_objet, $mots, $nom, $table_id, $url_base, $visible, $objet);
 
-		$liste .= debut_block_depliable($visible,"lesmots")
-		  . $res
-		  . creer_mot($nom, $id_objet, $table_id, $url_base, $cherche_mot, $select_groupe)
-		  . fin_block();
-
-		$bouton = bouton_block_depliable($bouton, $visible,"lesmots");
+		if ($res) {
+			$liste .= debut_block_depliable($visible,"lesmots")
+				. $res
+				. creer_mot($nom, $id_objet, $table_id, $url_base, $cherche_mot, $select_groupe)
+				. fin_block();
+			$bouton = bouton_block_depliable($bouton, $visible,"lesmots");
+			$aff = true;
+		}
 	}
+
+	if (!$aff)
+		return '';
 
 	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
 	  . $reponse
@@ -121,7 +116,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	$nouveaux_mots = array();
 	$res = '';
 
-	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
+	foreach (preg_split("/ *[,;] */", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 		$res .= "<br />" . debut_boite_info(true);
@@ -185,21 +180,19 @@ function editer_mots_un($row, $own)
 	if (autoriser('modifier', 'groupemots', $id_groupe))
 		$groupe = "<a href='" . generer_url_ecrire("mots_type","id_groupe=$id_groupe") . "'>$groupe</a>";
 
-	$retire = $unseul = '';
+	$retire = '';
 
 	if ($flag_editable) {
-		$r = editer_mots_droits('unseul', "id_groupe = $id_groupe");
-		if ($r) {
-			$unseul = ($r[0]['unseul'] == 'oui');
-			$r =  _T('info_retirer_mot')
-			  . "&nbsp;"
-			  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
+		$r =  _T('info_retirer_mot')
+		  . "&nbsp;"
+		  . http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'");
 
-			$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");
-		}
+		$retire = ajax_action_auteur('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array($r,''),"&id_objet=$id_objet&objet=$objet");
 	}
-	// Changer
-	if ($unseul) {
+
+	// Changer ; si unseul, poser un petit menu
+	if (sql_getfetsel('unseul', 'spip_groupes_mots', 'id_groupe='.$id_groupe)
+	== 'oui') {
 		$mot = formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_id, $objet, $id_objet);
 	} else {
 		$mot = "<a href='$url'>".typo($titre_mot)."</a>";
@@ -236,54 +229,67 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
+// int $id_objet : id_article
+// array $les_mots : les mots deja apposes
+// string $table : 'articles'
+// string $table_id : 'id_article'
+// string $url_base : 'articles' (?)
+// boolean $visible : determiner si le formulaire est deplie
+// string $objet : 'article'
 // http://doc.spip.org/@formulaire_mots_cles
 function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base, $visible, $objet) {
 	global  $spip_lang, $spip_lang_right;
 
-	$flag_tous = 1;
-	$id_groupes_vus = array();
-	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	if ($les_mots) {
-		$id_groupes_vus = sql_allfetsel("M.id_groupe, G.$droit", "spip_mots AS M LEFT JOIN spip_groupes_mots AS G ON M.id_groupe=G.id_groupe", sql_in('id_mot', $les_mots), "M.id_groupe");
-		foreach($id_groupes_vus as $k => $r) {
-			$id_groupes_vus[$k]= $r['id_groupe'];
-			$flag_tous &= ($r[$droit] === 'oui');
-		}
-		$cond_id_groupes_vus = (" AND " . sql_in('id_groupe', $id_groupes_vus, 'NOT'));
-	} else 	$cond_id_groupes_vus = '';
+	$res = '';
 
-	if ($flag_tous AND count($les_mots)>= 3) {
-		$res .= "<div style='text-align: right' class='arial1'>"
-		  . ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
-		. "</div><br />\n";
-	} else $res = '';
+	// liste des groupes de mots contenant au moins un mot deja appose a l'objet
+	$id_groupes_vus = array_map('array_pop',
+		sql_allfetsel('DISTINCT(id_groupe)', 'spip_mots',
+			sql_in('id_mot', $les_mots)));
 
-	$regexp = "tables_liees REGEXP '(^|,)$table($|,)' ";
-	$where = $regexp . "AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus))";
-	$select = "id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang);
+	// supprimer tous les mots ?
+	// a partir de 3 mots on regarde si l'ensemble des mots sont supprimables
+	// si oui on propose ce lien
+	if (count($les_mots)>= 3) {
+		$ok = true;
+		foreach ($id_groupes_vus as $id_groupe)
+			$ok &= autoriser('editermots', $objet, $id_objet, null,
+					array('id_groupe'=>$id_groupe,'groupe_champs'=>$row));
+		if ($ok)
+			$res .= "<div style='text-align: right' class='arial1'>"
+				. ajax_action_auteur('editer_mots', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")
+				. "</div><br />\n";
+	}
 
-	// Afficher un menu par groupe de mots non vu
+	// formulaire groupe par groupe
 	$ajouter ='';
-	$cond_mots_vus = !$les_mots ? '' :
-	  (" AND " . sql_in('id_mot', $les_mots, 'NOT'));
+	$cond_mots_vus = $les_mots
+		? " AND " . sql_in('id_mot', $les_mots, 'NOT')
+		: '';
 
-	foreach(editer_mots_droits($select, $where, 'multi') as $row) {
-		if ($menu = menu_mots($row, $id_groupes_vus, $cond_mots_vus)) {
-			$id_groupe = $row['id_groupe'];
+	foreach(sql_allfetsel('*', 'spip_groupes_mots') as $row) {
+		$id_groupe = $row['id_groupe'];
+		if (autoriser('editermots', $objet, $id_objet, null,
+		array('id_groupe'=>$id_groupe,'groupe_champs'=>$row))
+		AND $menu = menu_mots($row, $id_groupes_vus, $cond_mots_vus)) {
 			list($corps, $clic) = $menu;
+			$ajouter .= ajax_action_post('editer_mots',
+				"$id_objet,,$table,$table_id,$objet",
+				$url_base,
+				"$table_id=$id_objet",
+				$corps,
+				$clic,
+				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'", "",
+				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 
-			if (autoriser('editermots',$objet,$id_objet,NULL,array('id_groupe'=>$id_groupe,'groupe_champs'=>$row))){
-				$ajouter .= ajax_action_post('editer_mots',
-					"$id_objet,,$table,$table_id,$objet",
-					$url_base,
-					"$table_id=$id_objet",
-					$corps,
-					$clic,
-					" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'", "",
-					"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
-			}
+			// forcer la visibilite si au moins un mot obligatoire absent
+			// attention true <> 1 pour bouton_block_depliable
+			if ($row['obligatoire'] == 'oui'
+			AND !in_array($id_groupe, $id_groupes_vus))
+				$visible = true;
 		}
 	}
+
 	if ($ajouter) {
 		$res .= "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"
 		  . $ajouter
@@ -293,7 +299,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		  ."</b></span><br />\n";
 	}
 
-	return array($cond_id_groupes_vus, $res);
+	return array($visible, $res);
 }
 
 function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=0)
@@ -324,17 +330,23 @@ function creer_mot($table, $id_objet, $table_id, $url_base, $mot='', $id_groupe=
 }
 
 // http://doc.spip.org/@menu_mots
-function menu_mots($row, $id_groupes_vus, $les_mots)
+function menu_mots($row, $id_groupes_vus, $cond_mots_vus)
 {
 	$id_groupe = $row['id_groupe'];
 
-	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . $les_mots);
+	// nombre de mots dans le groupe ?
+	$n = sql_countsel("spip_mots", "id_groupe=$id_groupe" . $cond_mots_vus);
 	if (!$n) return '';
 
+	// mot seul, si deja present on se casse
+	$unseul = ($row['unseul'] == 'oui');
+	if ($unseul
+	AND in_array($id_groupe, $id_groupes_vus))
+		return '';
+
 	$titre = textebrut(typo($row['titre']));
-	$titre_groupe = entites_html($titre);
-	$unseul = $row['unseul'] == 'oui';
-	$obligatoire = ($row['obligatoire']=='oui' AND !in_array($id_groupe, $id_groupes_vus));
+	$obligatoire = ($row['obligatoire']=='oui'
+		AND !in_array($id_groupe, $id_groupes_vus));
 
 	// forcer le recalcul du noeud car on est en Ajax
 	$rand = rand(0,10000); # pour antifocus & ajax
@@ -347,22 +359,23 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#E86519;' value=\"$titre_groupe\" size='20' $jscript />";
-		else if ($unseul)
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"$titre_groupe\" size='20' $jscript />";
-		else
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  class='fondl' style='width: 180px; ' value=\"$titre_groupe\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#E86519;' value=\"".entites_html($titre)."\" size='20' $jscript />";
+		else if ($unseul) {
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"".entites_html($titre)."\" size='20' $jscript />";
+		} else
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  class='fondl' style='width: 180px; ' value=\"".entites_html($titre)."\" size='20' $jscript />";
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />&nbsp;";
 		return array($res, _T('bouton_chercher')); 
 	} else {
 		if ($obligatoire)
 			$style = 'width: 180px; background-color:#E86519;';
-		elseif ($unseul)
+		else if ($unseul)
 			$style = 'width: 180px; background-color:#cccccc;';
-		else	$style = 'width: 180px;';
+		else
+			$style = 'width: 180px;';
 
-		$q = sql_allfetsel("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $les_mots, "", "titre");
+		$q = sql_allfetsel("id_mot, type, titre", "spip_mots", "id_groupe =$id_groupe " . $cond_mots_vus, "", "titre");
 
 		foreach($q as $k => $r) {
 			$q[$k] = "<option value='" .$r['id_mot'] .
@@ -381,15 +394,4 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 	}
 }
 
-// Fonction verifiant que l'auteur a le droit de modifier un groupe de mots.
-// Fondee sur l'egalite du nom du statut et du nom du champ.
-// Il vaudrait mieux rajouter une table des statuts (ou un groupe de mots)
-// et un table de jointure entre ca et la table des groupes de mots.
-
-// http://doc.spip.org/@editer_mots_droits
-function editer_mots_droits($select, $cond, $order=NULL)
-{
-	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	return sql_allfetsel("$select,$droit", "spip_groupes_mots", "$droit = 'oui' AND $cond", NULL, $order);
-}
 ?>
