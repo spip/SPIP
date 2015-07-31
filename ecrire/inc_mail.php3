@@ -111,12 +111,17 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	$charset = lire_meta('charset');
 
+	// Ajouter au besoin le \n final dans les $headers passes en argument
+	if ($headers = trim($headers)) $headers .= "\n";
+
+	// Ajouter le Content-Type s'il n'y est pas deja
 	if (strpos($headers, "Content-Type: ") === false)
 		$headers .=
 		"MIME-Version: 1.0\n".
 		"Content-Type: text/plain; charset=$charset\n".
 		"Content-Transfer-Encoding: 8bit\n";
 
+	// Et maintenant le champ From:
 	$headers .= "From: $from\n";
 
 	// nettoyer les &eacute; &#8217, &emdash; etc...
