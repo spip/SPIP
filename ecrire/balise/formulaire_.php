@@ -26,8 +26,7 @@ function balise_FORMULAIRE__dist($p) {
 	$form = $p->nom_champ;
 	if (substr($form,0,11)=="FORMULAIRE_"
 	AND $form = strtolower(substr($form,11)) 
-	AND (!find_in_path('formulaires/'.$form.'.html')
-        OR !find_in_path($form.'.html'))) {
+	AND (!find_in_path('formulaires/'.$form.'.html'))) {
 		    $p->code = "''";
 		    $p->interdire_scripts = false;
 		    return $p;
