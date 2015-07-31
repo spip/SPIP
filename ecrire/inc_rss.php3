@@ -13,6 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_ecrire("inc_minipres");
+
 // mais d'abord un tri par date (inverse)
 function trier_par_date($a, $b) {
 	return ($a['date'] < $b['date']);
@@ -207,9 +209,9 @@ function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-			$item['url'] = _DIR_RESTREINT_ABS
-			.'controle_forum.php3?page='.$a['page']
-			.'&debut_id_forum='.$t['id_forum'];
+		  $item['url'] = http_php_scriptnq(_DIR_RESTREINT_ABS
+						   .'controle_forum', 'page='.$a['page']
+						   .'&debut_id_forum='.$t['id_forum']);
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
@@ -253,9 +255,9 @@ function rss_suivi_messagerie($a) {
 				'author' => typo($auteur['nom']),
 				'email' => $auteur['email'],
 				'description' => propre($t['texte']),
-				'url' => _DIR_RESTREINT_ABS
-					.'message.php3?id_message='.$t['id_message']
-			);
+				'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+							   .'message', 'id_message='.$t['id_message']
+							   ));
 			$rss[] = $item;
 		}
 		$messages_vus[] = $t['id_message'];
@@ -274,10 +276,10 @@ function rss_suivi_messagerie($a) {
 				'description' => propre($t['texte']),
 				'author' => typo($t['auteur']),
 				'email' => $t['email_auteur'],
-				'url' => _DIR_RESTREINT_ABS
-					.'message.php3?id_message='.$t['id_message']
+				'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+							   .'message', 'id_message='.$t['id_message']
 					.'#'.$t['id_forum']
-			);
+							   ));
 			$rss[] = $item;
 		}
 	}
@@ -311,11 +313,11 @@ function rss_articles($critere) {
 			'author' => typo($auteur['nom']),
 			'email' => $auteur['email'],
 			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
-			'url' => _DIR_RESTREINT_ABS
-				.'articles.php3?id_article='.$t['id_article']
-		);
+			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+						   .'articles', 'id_article='.$t['id_article']
+						   ));
 		if ($t['statut'] == 'prop')
-			$item['title'] = _T('info_article_propose').' : '.$item['title'];
+		  $item['title'] = _T('info_article_propose').' : '.$item['title'];
 
 		$rss[] = $item;
 	}
@@ -332,9 +334,9 @@ function rss_breves($critere) {
 			'title' => typo($t['titre']),
 			'date' => $t['date_heure'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => _DIR_RESTREINT_ABS
-				.'breves_voir.php3?id_breve='.$t['id_breve']
-		);
+			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+						   .'breves_voir', 'id_breve='.$t['id_breve']
+						   ));
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('titre_breve_proposee').' : '.$item['title'];
 
@@ -353,9 +355,9 @@ function rss_sites($critere) {
 			'title' => typo($t['titre']." ".$t['url_site']),
 			'date' => $t['date'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => _DIR_RESTREINT_ABS
-				.'sites.php3?id_syndic='.$t['id_syndic']
-		);
+			'url' => http_php_scriptnq(_DIR_RESTREINT_ABS
+						   .'sites', 'id_syndic='.$t['id_syndic']
+						   ));
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('info_site_attente').' : '.$item['title'];
 
