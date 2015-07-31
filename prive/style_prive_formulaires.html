@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{3600*100,cache-client}
+#CACHE{0*3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -71,7 +71,7 @@
 	padding: 10px 10px 0px 10px;
 	padding-#GET{left}:130px;
 	clear:both;
-	overflow:auto;
+	overflow:hidden;
 }
 .formulaire_spip li fieldset li {
 	border:0; 
@@ -249,7 +249,16 @@ li.extra label,
 *  pour l'avoir horizontale, il faut specifier :
 *  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline;}
 */
-.formulaire_spip .choix label{float:none; margin-#GET{left}:5px; display:inline;font-weight:normal; background: none;}
+.formulaire_spip .choix label{
+	float:none; 
+	display:inline;
+	margin-#GET{left}: 5px; 
+	font-weight:normal; 
+	text-transform: none;
+	font-size: 1em;
+	background: none;
+	padding: 0px;
+}
 .formulaire_spip .choix input.radio,
 .formulaire_spip .choix input.checkbox {width:auto;}
 
@@ -422,7 +431,8 @@ li.extra label,
 /* Bouton de validation */
 input[type="submit"] {
 	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|image_bg{[(#ENV{couleur_foncee}|couleur_foncer)], center center })]
-	border: 1px outset [(#GET{couleur_foncee}|couleur_foncer)];
+	border: 1px outset [(#GET{foncee})];
+	padding: 3px;
 	font-weight: bold;
 	color: white;
 }
