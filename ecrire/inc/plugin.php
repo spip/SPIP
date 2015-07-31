@@ -210,11 +210,15 @@ function liste_plugin_valides($liste_plug, $force = false)
 			$procure['dir_type'] = '_DIR_RESTREINT';
 			$procure['dir'] = $procure['nom'];
 			$liste_non_classee[$p] = $procure;
+			// on fournit une information minimale pour ne pas perturber la compilation
 			$infos['_DIR_RESTREINT'][$procure['nom']] = array(
 				'nom' => $procure['nom'],
 				'etat' => $procure['stable'],
 				'version' => $procure['version'],
 				'chemin' => array(),
+				'necessite' => array(),
+				'utilise' => array(),
+				'lib' => array(),
 			);
 		}
 	}
