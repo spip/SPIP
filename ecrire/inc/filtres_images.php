@@ -32,7 +32,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$terminaison_dest = $terminaison;
 		
 		if ($terminaison == "gif") $terminaison_dest = "png";
-	}
+	} else return false;
+	
 	if ($forcer_format) $terminaison_dest = $forcer_format;
 	
 	$term_fonction = $terminaison;
