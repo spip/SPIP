@@ -16,7 +16,7 @@ include ("ecrire/inc_version.php3");
 include_ecrire("inc_meta");
 include_ecrire("inc_session");
 include_ecrire("inc_invalideur");
-
+spip_log(join(", ", $_REQUEST));
 if ($purger_cache == "oui"
 AND verifier_action_auteur("purger_cache", $hash, $id_auteur)) {
 	purger_cache();

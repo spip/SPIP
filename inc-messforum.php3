@@ -27,13 +27,14 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 	include_ecrire('inc_filtres');
 	include_ecrire('inc_mail');
 	// Gestionnaire d'URLs
-	if (@file_exists("inc-urls.php3"))
+	if (@file_exists("inc-urls" . _EXTENSION_PHP))
 		include_local("inc-urls");
 	else
 		include_local("inc-urls-".$GLOBALS['type_urls']);
 
 	if ($statut == 'prop') # forum modere
-		$url = "ecrire/controle_forum.php3?debut_id_forum=$id_forum";
+	  $url = _DIR_RESTREINT_ABS .
+	    generer_url_ecrire('controle_forum', "debut_id_forum=$id_forum");
 	else if (function_exists('generer_url_forum'))
 		$url = generer_url_forum($id_forum);
 	else {
@@ -217,7 +218,7 @@ function enregistre_forum() {
 	// Le cas echeant, calculer le retour
 	if ($calculer_retour) {
 		// Gestionnaire d'URLs
-		if (@file_exists("inc-urls.php3"))
+		if (@file_exists("inc-urls" . _EXTENSION_PHP))
 			include_local("inc-urls");
 		else
 			include_local("inc-urls-".$GLOBALS['type_urls']);

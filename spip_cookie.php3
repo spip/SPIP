@@ -15,7 +15,6 @@ include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session");
 include_ecrire('inc_cookie');
 
-
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
 	global $_SERVER;
@@ -71,7 +70,7 @@ if ($essai_auth_http AND !$ignore_auth_http) {
 if ($logout_public) {
 	$logout = $logout_public;
 	if (!$url)
-		$url = 'index.php3';
+		$url = 'index' . _EXTENSION_PHP;
 }
 // tentative de logout
 if ($logout) {
@@ -91,7 +90,7 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	redirige_par_entete($url ? $url : "spip_login.php3");
+	redirige_par_entete($url ? $url : "spip_login" . _EXTENSION_PHP);
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -99,7 +98,7 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&url="
+	redirige_par_entete("spip_login" . _EXTENSION_PHP . "?var_echec_cookie=oui&url="
 		. ($url ? urlencode($url) : _DIR_RESTREINT_ABS));
 }
 
@@ -160,7 +159,7 @@ if ($essai_login == "oui") {
 
 	if (!$ok) {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect))
-			$redirect = "spip_login.php3";
+			$redirect = "spip_login" . _EXTENSION_PHP;
 		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
@@ -171,7 +170,7 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	if (!$retour)
-		$retour = 'spip_login.php3?url='.urlencode($url);
+		$retour = 'spip_login' . _EXTENSION_PHP .'?url='.urlencode($url);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$redirect = ereg_replace("([?&])var_login=[^&]*&?", '\1', $retour);

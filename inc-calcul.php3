@@ -30,11 +30,11 @@ include_ecrire("inc_distant");
 include_local("inc-calcul-outils");
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
-if ($f = find_in_path("mes_fonctions.php3"))
+if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP))
 	include_local ($f);
 
 // Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3")) // compat vieille version
+if (@file_exists("inc-urls" . _EXTENSION_PHP)) // compat vieille version
 	include_local("inc-urls");
 else
 	include_local("inc-urls-".$GLOBALS['type_urls']);
@@ -46,7 +46,7 @@ function squelette_obsolete($skel, $squelette) {
 		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
-		OR (@filemtime('mes_fonctions.php3') > $date)
+		OR (@filemtime('mes_fonctions' . _EXTENSION_PHP) > $date)
 		OR (@filemtime(_FILE_OPTIONS) > $date)
 	);
 }
