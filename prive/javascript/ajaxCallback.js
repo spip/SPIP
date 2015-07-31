@@ -264,6 +264,63 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
   });
 }
 
+jQuery.fn.formulaire_verifier = function(callback){
+	var erreurs = {'message_erreur':'form non ajax'};
+	var me=this;
+	// si on est aussi en train de submit pour de vrai, abandonner
+	if (jQuery(me).closest('.ariaformprop').attr('aria-busy')!='true') {
+		if (jQuery(me).is('form.hasajax')){
+			jQuery(me).ajaxSubmit({
+				dataType:"json",
+				data:{formulaire_action_verifier_json:true},
+				success:function(){
+					// si on est aussi en train de submit pour de vrai, abandonner
+					if (jQuery(me).closest('.ariaformprop').attr('aria-busy')!='true')
+						callback.apply(me,arguments);
+				}
+			});
+		}
+		else
+			callback.apply(me,[erreurs]);
+	}
+	return this;
+}
+
+jQuery.fn.formulaire_activer_verif_auto = function(){
+	var me = jQuery(this).closest('.ariaformprop');
+	var activer = function(){
+		if (me.find('form').attr('data-verifjson')!='on'){
+			me.find('form').attr('data-verifjson','on').find('input,select,textare').bind('change',function(){
+				// declencher apres 50ms pour ne pas double submit sur sequence saisie+submit
+				setTimeout(function(){me.find('form').formulaire_verifier(formulaire_actualiser_erreurs);},50);
+			});
+		}
+	}
+	jQuery(activer);
+	onAjaxLoad(function(){setTimeout(activer,150);});
+}
+
+function formulaire_actualiser_erreurs(erreurs){
+	var parent = jQuery(this).closest('.formulaire_spip');
+	if (!parent.length) return;
+	// d'abord effacer tous les messages d'erreurs
+	parent.find('.reponse_formulaire,.erreur_message').fadeOut().remove();
+	parent.find('.erreur').removeClass('erreur');
+	// ensuite afficher les nouveaux messages d'erreur
+	if (erreurs['message_ok'])
+		parent.find('form').before('<p class="reponse_formulaire reponse_formulaire_ok">'+erreurs['message_ok']+'</p>');
+	if (erreurs['message_erreur'])
+		parent.find('form').before('<p class="reponse_formulaire reponse_formulaire_erreur">'+erreurs['message_erreur']+'</p>');
+	for (var k in erreurs){
+		var saisie = parent.find('.editer_'+k);
+		if (saisie.length) {
+			saisie.addClass('erreur');
+			saisie.find('label').after('<span class="erreur_message">'+erreurs[k]+'</span>');
+		}
+	}
+}
+
+
 // permettre d'utiliser onclick='return confirm('etes vous sur?');' sur un lien ajax
 var ajax_confirm=true;
 var ajax_confirm_date=0;
