@@ -66,7 +66,7 @@ function maj_base($version_cible = 0) {
 	}
 }
 
-// A partir des > 1.926 (i.e SPIP 1.9.2), le while ci-dessus aboutit ici.
+// A partir des > 1.926 (i.e SPIP > 1.9.2), le while ci-dessus aboutit ici.
 // Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
 // (qu'on espere pas trop longue chacune)
 // evidemment en ecrivant dans la meta a quel numero on en est.
@@ -82,15 +82,15 @@ function maj_while($version_installee, $version_cible)
 	$time = time();
 	$n = 0;
 
+	$chgt = $GLOBALS['maj'][$pref];
 	while ($installee < $cible) {
 		$installee++;
-		$f = 'maj_'  . $pref . '_' .$installee;
-		if (function_exists($f)) {
-			$f();
-			$n = time() - $time;
-			spip_log("$f ($n secondes de $version_installee a $installee))");
-		} else spip_log("pas de MAJ $pref" . ".$installee");
 		$version = ($pref . '.' . $installee);
+		if (isset($chgt[$installee])) {
+			serie_alter($installee, $chgt[$installee]);
+			$n = time() - $time;
+			spip_log("MAJ de $version_installee a $version en $n secondes",'maj');
+		} else spip_log("MAJ $version: rien pour SQL", 'maj');
 		ecrire_meta('version_installee', $version,'non');
 		if ($n >= _UPGRADE_TIME_OUT) {
 			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
@@ -98,17 +98,20 @@ function maj_while($version_installee, $version_cible)
 	}
 }
 
-// Appliquer une serie de spip_query() qui risquent de partir en timeout
-// cf. maj/v019.php
+// Appliquer une serie de chgt qui risquent de partir en timeout
+// (Alter cree une copie temporaire d'une table, c'est lourd)
 
 // http://doc.spip.org/@serie_alter
 function serie_alter($serie, $q = array()) {
 	$etape = intval(@$GLOBALS['meta']['upgrade_etape_'.$serie]);
 	foreach ($q as $i => $req) {
 		if ($i >= $etape) {
-			spip_log("serie_alter etape $i: ".$req);
-			sql_alter($req);
-			ecrire_meta('upgrade_etape_'.$serie, $i+1);
+			$f = array_shift($req);
+			spip_log("maj $serie etape $i: $f ".join(',',$req),'maj');
+			if (function_exists($f)) {
+			  call_user_func_array($f, $req);
+			  ecrire_meta('upgrade_etape_'.$serie, $i+1);
+			}
 		}
 	}
 	effacer_meta('upgrade_etape_'.$serie);
@@ -123,9 +126,7 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 		if (strtolower($row['Type'])!=strtolower($type)) {
 			$default = $row['Default']?(" DEFAULT "._q($row['Default'])):"";
 			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
-			$q = "ALTER TABLE $table CHANGE $champ $champ $type $default $notnull";
-			spip_log($q);
-			spip_query($q);
+			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
 		}
 	}
 }
@@ -141,16 +142,16 @@ function upgrade_test() {
 	return $result;
 }
 
-// pour versions anterieures a 1.945
+// pour versions anterieures a 1.922
 // http://doc.spip.org/@maj_version
 function maj_version ($version, $test = true) {
 	if ($test) {
 		if ($version>=1.922)
-			ecrire_meta('version_installee', $version,'non');
+			ecrire_meta('version_installee', $version, 'non');
 		else {
 			// on le fait manuellement, car ecrire_meta utilise le champs impt qui est absent sur les vieilles versions
 			$GLOBALS['meta']['version_installee'] = $version;
-			spip_query("UPDATE spip_meta SET valeur=" . _q($version) ."$r WHERE nom=" . _q('version_installee') );
+			sql_updateq('spip_meta',  array('valeur' => $version), "nom=" . _q('version_installee') );
 		}
 		spip_log("mise a jour de la base en $version");
 	} else {
