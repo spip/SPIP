@@ -159,7 +159,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'entree_url_2' => 'Endereço (URL) do site',
 	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome',
 	'erreur_nom_connect_incorrect' => 'Este nome de servidor não é autorizado',
-	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.',
 	'erreur_plugin_fichier_absent' => 'Arquivo ausente',
 	'erreur_plugin_fichier_def_absent' => 'Arquivo de definição ausente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome de função não permitido',
@@ -303,7 +303,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 	'info_conflit_edition_votre_version' => 'A sua versão:',
 	'info_connexion_base' => 'Teste de conexão com a base',
 	'info_connexion_base_donnee' => 'Conexão à sua base de dados',
-	'info_connexion_ldap_ok' => 'A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>A conexão LDAP foi efetuada.</b><p>Você pode passar para o próximo passo.</p>',
 	'info_connexion_mysql' => 'Sua conexão SQL',
 	'info_connexion_ok' => 'A conexão foi obtida.',
 	'info_contact' => 'Contato',
@@ -722,7 +722,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'A declaração deste plugin está incorreta',
 	'plugin_info_install_ok' => 'Instalação bem sucedida',
-	'plugin_info_necessite' => 'Precisa de:', # MODIF
+	'plugin_info_necessite' => 'Requer:',
 	'plugin_info_non_compatible_spip' => 'Este plugin não é compatível com esta versão do SPIP',
 	'plugin_info_plugins_dist_1' => 'Os plugins abaixo são carregados e ativados no diretório @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Eles não são desativáveis.',
@@ -763,7 +763,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// Q
 	'queue_executer_maintenant' => 'Executar agora',
-	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinstalar a lista com as tarefas periódicas', # MODIF
+	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinicializar a lista com as tarefas periódicas',
 	'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s',
 	'queue_no_job_in_queue' => 'Nenhum tarefa em espera',
@@ -779,8 +779,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'statut_admin_restreint' => '(admin limitado)',
 
 	// T
-	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Tarefa CRON @function@ (a cada @nb@ s)', # MODIF
+	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Tarefa CRON @function@ (a cada @nb@ s)',
 	'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (ícones de documentos, títulos apresentados sob a forma gráfica, funções matemáticas em formato TeX...) ocupam, no diretório @dir@, um total de @taille@.',
 	'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório do cache.',
 	'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório do cache deste site em cerca de <b>@octets@</b>.',
@@ -834,7 +834,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
 Se eles não forem úteis, você poderá deixar esta opção com o seu valor padrão (sem criar os arquivos).</p>',
 	'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
-	'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstalação, e os seus acessos funcionam sem problemas, você pode', # MODIF
+	'texte_informations_personnelles_2' => '(Nota: trata-se de uma reinstalação, se o seu acesso funciona corretamente, você pode',
 	'texte_introductif_article' => '(Texto introdutório da matéria.)',
 	'texte_jeu_caractere' => 'É aconselhável usar no seu site o alfabeto universal (<tt>utf-8</tt>): ele permite a exibição de textos em todos os idiomas, e não tem problemas de compatibilidade com os navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atenção: esta opção não provoca a conversão dos textos já gravados na base de dados.',
