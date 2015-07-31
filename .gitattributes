@@ -821,6 +821,7 @@ prive/squelettes/top/configurer_langage.html -text
 prive/squelettes/top/configurer_preferences.html -text
 prive/squelettes/top/dist.html -text
 prive/squelettes/top/infos_perso.html -text
+prive/squelettes/top/plan.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text
 prive/themes/spip/bando.css.html -text
