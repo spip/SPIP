@@ -21,7 +21,6 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_calendrier.php");
 
 function http_afficher_rendez_vous($date_heure, $date_fin)
 {
