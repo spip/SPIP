@@ -141,7 +141,7 @@ function afficher_titre_syndic_article($row){
 			$descriptif = safehtml($descriptif);
 		$s .= '<div class="arial1">'
 			# 385px = largeur de la colonne ou s'affiche le texte
-			. filtrer('image_reduire',$descriptif, 385, 550)
+			. filtrer('image_graver',filtrer('image_reduire',$descriptif, 385, 550))
 			. '</div>';
 	}
 

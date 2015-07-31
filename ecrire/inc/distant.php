@@ -154,7 +154,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 	$date_verif = '', $uri_referer = '') {
   	$gz = false;
 
-	// Accepter les URLs au format feed:// ou qui ont oublie le http://
+  // Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
 	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
 
@@ -292,12 +292,17 @@ function fichier_copie_locale($source) {
 		$extension = $t['extension'];
 
 
-	// si la source n'est pas dans la table des documents, on la ping
-	// regarde si son extension est connue et autorisee
+	// si la source n'est pas dans la table des documents, 
+	// on determine son extension et on verifie que c'est ok
 	} else {
 		if (
-		($a = recuperer_infos_distantes($source) AND $ext = $a['extension'])
+		// voir si l'extension est pas indiquee dans le nom du fichier et si il aurait pas deja ete rapatrie, auquel cas c'est ok
+		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'] AND $f = _DIR_RACINE . nom_fichier_copie_locale($source, $ext) AND file_exists($f))
 		OR
+		// on la ping et on regarde si son extension est connue et autorisee
+		($a = recuperer_infos_distantes($source,0,false) AND $ext = $a['extension'])
+		OR
+		// a defaut on fait confiance a l'extension
 		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
 		) {
 			// verifier que c'est un type autorise
@@ -314,7 +319,7 @@ function fichier_copie_locale($source) {
 
 // Recuperer les infos d'un document distant, sans trop le telecharger
 // http://doc.spip.org/@recuperer_infos_distantes
-function recuperer_infos_distantes($source, $max=0) {
+function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = true) {
 
 	# charger les alias des types mime
 	include_spip('base/typedoc');
@@ -385,7 +390,8 @@ function recuperer_infos_distantes($source, $max=0) {
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
 		if ($max == 0
 		    AND $a['taille'] < 1024*1024
-		    AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false) ){
+		    AND (strpos($GLOBALS['meta']['formats_graphiques'],$a['extension'])!==false)
+		    AND $charger_si_petite_image ){
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {
