@@ -14,19 +14,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-//
-// Calcul du nom du fichier cache
-//
-
-function nettoyer_uri() {
-	$fichier_requete = $GLOBALS['REQUEST_URI'];
-	$fichier_requete = eregi_replace
-		('[?&](PHPSESSID|(var_[^=&]*))=[^&]*',
-		'', $fichier_requete);
-	return $fichier_requete;
-}
-
 //
 // Le format souhaite : "CACHE/a/bout-d-url.md5(.gz)"
 // Attention a modifier simultanement le sanity check de
@@ -117,7 +104,6 @@ function retire_caches($chemin = '') {
 		}
 	}
 
-
 	if ($n = count($suppr)) {
 		spip_log ("Retire $n caches");
 		foreach ($suppr as $cache => $ignore)
@@ -137,150 +123,118 @@ function retire_caches($chemin = '') {
 }
 
 //
-// Retourne 0 s'il faut calculer le cache, 1 si on peut l'utiliser
+// Retourne un nombre N:
+// < 0 s'il faut calculer la page sans la mettre en cache
+// = 0 si on peut utiliser un cache existant
+// > 0 s'il faut calculer la page et le mette en cache pendant N secondes
 //
-function utiliser_cache($chemin_cache, $delais) {
-	global $_SERVER;
 
-	// ne jamais calculer pour les moteurs de recherche, proxies...
-	if ($_SERVER['REQUEST_METHOD'] == 'HEAD')
-		return 1;
+function cache_valide($chemin_cache) {
+	global $delais;
 
-	//  calcul par forcage
-	if ($GLOBALS['var_mode'] &&
+	if (!isset($delais)) $delais = 3600;
+
+	if (!$delais) return -1;
+
+	if (!file_exists($chemin_cache)) return $delais;
+
+	if ((time() - @filemtime($chemin_cache)) > $delais) return $delais;
+
+	return 0;
+}
+
+
+// retourne le nom du fichier cache, 
+// et affecte le 1er param selon les specs de la fonction cache_valide
+
+function determiner_cache(&$use_cache, $contexte,$fond) {
+	global $_SERVER, $recherche;
+
+	// cas sans jamais de cache pour raison interne
+
+	if ($recherche || 
+	    ($_SERVER['REQUEST_METHOD'] == 'POST') ||
+	    ($GLOBALS['var_mode'] &&
 		($GLOBALS['_COOKIE']['spip_session']
-		|| $GLOBALS['_COOKIE']['spip_admin']
-		|| @file_exists(_ACCESS_FILE_NAME))) # insuffisant...
-		return 0;
+		 || $GLOBALS['_COOKIE']['spip_admin']
+		 || @file_exists(_ACCESS_FILE_NAME))))
+	  {
+		include_ecrire('inc_connect.php3');
+		$use_cache = -1;
+		return "";
+	  }
 
-	// calcul par absence
-	if (!@file_exists($chemin_cache)) return 0;
+	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
 
-	// calcul par obsolescence
-	return ((time() - @filemtime($chemin_cache)) > $delais) ? 0 : 1;
-}
-
-
-// Obsolete ?  Utilisee pour vider le cache depuis l'espace prive
-// (ou juste les squelettes si un changement de config le necessite)
-function purger_repertoire($dir, $age='ignore', $regexp = '') {
-	$handle = @opendir($dir);
-	if (!$handle) return;
-
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		$chemin = "$dir/$fichier";
-		if (is_file($chemin))
-			@unlink($chemin);
-		else if (is_dir($chemin))
-			if ($fichier != 'CVS')
-				purger_repertoire($chemin);
+	// cas sans jamais de calcul pour raison interne
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
+		$use_cache = 0;
+		return $chemin_cache;
 	}
-	closedir($handle);
-}
 
-function purger_cache() {
-	spip_log('vider le cache');
-	include_ecrire('inc_invalideur.php3');
-	supprime_invalideurs();
-	purger_repertoire(_DIR_CACHE, 0);
-}
+	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
+	if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok']) {
+		include_ecrire('inc_connect.php3');
+		include_ecrire('inc_meta.php3');
+		lire_metas();
+		retire_caches($chemin_cache);
+	}
 
-function purger_squelettes() {
-	spip_log('effacer les squelettes compiles');
-	purger_repertoire(_DIR_CACHE, 0, '^skel_');
-}
+	$use_cache = cache_valide($chemin_cache);
 
+	if (!$use_cache) return $chemin_cache;
 
-// Determination du fichier cache (si besoin)
-function determiner_cache($delais, &$use_cache, &$chemin_cache) {
-	global $_SERVER;
+	// Si pas valide mais pas de connexion a la base, le garder quand meme
 
-	$post = ($_SERVER['REQUEST_METHOD'] == 'POST');
-
-	// Le fichier cache est-il valide ?
-	if ($delais<>0 AND !$post)
-		$use_cache = utiliser_cache($chemin_cache, $delais);
-
-	// Sinon, tester qu'on a la connexion a la base
-	if (!$use_cache) {
-		include_local(_FILE_CONNECT);
-		if (!$GLOBALS['db_ok']) {
-			if (@file_exists($chemin_cache)) 
-				$use_cache = 1; // passer outre
-			else {
-				if (!spip_interdire_cache) {
-					spip_log("Erreur base de donnees & "
-					. "impossible utiliser $chemin_cache");
-					include_ecrire('inc_minipres.php');
-					install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
-				}
-			}
+	include_ecrire('inc_connect.php3');
+	if (!$GLOBALS['db_ok']) {
+		if (file_exists($chemin_cache))
+  			$use_cache = 0 ;
+		else {
+		  // prevenir du pb (une fois, pas pour chaque inclusion)
+			if (!spip_interdire_cache) {
+				spip_log("Erreur base de donnees & "
+				. "impossible utiliser $chemin_cache");
+				include_ecrire('inc_minipres.php');
+				install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
 				// continuer quand meme, ca n'ira pas loin.
-
-				// mais ne plus rien signaler, ne pas mettre en cache ...
-			$GLOBALS['flag_preserver'] = true;
-			define ('spip_interdire_cache', true);
-		}
-
-		// En cas de POST (et si la connexion est ok) supprimer le cache
-		// histoire de faciliter la gestion de certaines balises dynamiques
-		else if ($post AND $chemin_cache) {
-			supprimer_fichier($chemin_cache);
-		}
-
-	}
-}
-
-// Fonctions pour le cache des images (vues reduites)
-
-
-function calculer_taille_dossier ($dir) {
-	$handle = @opendir($dir);
-	if (!$handle) return;
-
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_file("$dir/$fichier")) {
-			$taille += filesize("$dir/$fichier");
+				// mais ne plus rien signaler
+				$GLOBALS['flag_preserver'] = true;
+				define ('spip_interdire_cache', true);
+			}
 		}
 	}
-	closedir($handle);
-	return $taille;
+
+	return $chemin_cache;
 }
 
-function calculer_cache_vignettes() {
-	$handle = @opendir(_DIR_IMG);
-	if (!$handle) return;
+// Passage par reference juste par souci d'economie
 
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
-			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
-		}
+function creer_cache(&$page, $chemin_cache, $duree)
+{
+	// Entrer dans la base les invalideurs calcules par le compilateur
+	// (et supprimer les anciens)
+
+	include_ecrire('inc_invalideur.php3');
+	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
+
+	// Enregistrer le fichier cache
+
+	$r = ecrire_fichier($chemin_cache, 
+			"<!-- "
+			. str_replace("\n", " ", serialize($page['signal']))
+			. " -->\n"
+			. $page['texte']);
+
+	// Nouveau cache : creer un invalideur 't' fixant la date
+	// d'expiration et la taille du fichier
+	if ($r) {
+			// Ici on ajoute 3600s pour eviter toute concurrence
+			// entre un invalideur et un appel public de page
+		$bedtime = time() + $duree + 3600;
+		$taille = @filesize($chemin_cache);
+		$fichier = addslashes($chemin_cache);
+		spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('$fichier','$bedtime','t','$taille')");
 	}
-	closedir($handle);
-	
-	include_ecrire("inc_filtres.php3");
-	echo "<html><body>\n";
-	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
-	echo "<p align='justify'>\n";
-	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
-		'taille' => "<b>".taille_en_octets($taille)."</b>"));
-	echo "</p></div></body></html>";
-
 }
-
-function purger_cache_images() {
-	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
-}
-
-
-
 ?>

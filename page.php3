@@ -13,11 +13,6 @@ else if (isset($_GET["fond"]))
 else
 	$fond = '404';
 
-// Reglage du $delais
-// par defaut : la valeur existante (inclusion) ou sinon SPIP fera son reglage
-if (isset($contexte_inclus['delais']))
-	$delais = $contexte_inclus['delais'];
-
 // Securite 
 if (strstr($fond, '/')) {
 	die ("Faut pas se gener");

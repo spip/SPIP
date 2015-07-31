@@ -13,7 +13,7 @@
 
 // Distinguer une inclusion d'un appel initial
 if (defined("_INC_PUBLIC")) {
-	$page = inclure_page($fond, $delais, $contexte_inclus);
+	$page = inclure_page($fond, $contexte_inclus);
 	if ($page['process_ins'] == 'html')
 		echo $page['texte'];
 	else
@@ -29,8 +29,9 @@ if (defined("_INC_PUBLIC")) {
 	}
 	include_local('inc-public-global.php3');
 
-	// Calculer la page sans evaluer le php qu'elle contient
-	$page = calcule_header_et_page ($fond, $delais);
+	// Calculer la page en envoyant seulement les en-tetes, pas la page
+	$tableau_des_erreurs = array();
+	$page = calcule_header_et_page ($fond);
 
 	// est-on admin ?
 	if ($affiche_boutons_admin = (
