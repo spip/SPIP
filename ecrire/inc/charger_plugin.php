@@ -490,7 +490,7 @@ function afficher_liste_listes_plugins() {
 	$ret .= '</ul>';
 
 	$ret .= '<a href="'.parametre_url(
-			generer_action_auteur('charger_plugin', 'update_flux'),'update_flux').'">'._L('Mettre &#224; jour les listes').'</a>';
+			generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._L('Mettre &#224; jour les listes').'</a>';
 
 	return $ret;
 }
