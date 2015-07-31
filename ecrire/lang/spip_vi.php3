@@ -825,6 +825,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_symbole_jaune' => 'K&#253; hi&#7879;u <B>v&#224;ng</B> cho bi&#7871;t <B>th&#244;ng b&#225;o &#273;&#7871;n t&#7845;t c&#7843; ch&#7911; b&#250;t</B>: t&#7845;t c&#7843; ch&#7911; b&#250;t c&#243; th&#7875; s&#7917;a &#273;&#7893;i &#273;&#432;&#7907;c, v&#224; ch&#7911; b&#250;t n&#224;o c&#361;ng nh&#236;n th&#7845;y &#273;&#432;&#7907;c.',
 'info_symbole_vert' => 'K&yacute; hi&#7879;u <B>xanh l&aacute; c&acirc;y</B> cho bi&#7871;t <B>th&#432; t&iacute;n trao &#273;&#7893;i v&#7899;i nh&#7919;ng ng&#432;&#7901;i d&ugrave;ng</B> c&#7911;a website.',
 'info_syndication' => 'syndication:',
+'info_syndication_articles' => 'b&agrave;i',
 'info_taille_maximale_vignette' => 'K&iacute;ch th&#432;&#7899;c t&#7889;i &#273;a c&#7911;a h&igrave;nh m&#7851;u:',
 'info_telecharger' => '&#272;em/t&#7843;i l&#234;n t&#7915; m&#225;y b&#7841;n:',
 'info_telecharger_nouveau_logo' => '&#272;em/t&#7843;i l&#234;n m&#7897;t logo m&#7899;i:',
@@ -937,6 +938,10 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'item_utiliser_mots_cles' => 'D&ugrave;ng t&#7915; then ch&#7889;t',
 'item_utiliser_syndication' => 'D&ugrave;ng syndication t&#7921; &#273;&#7897;ng',
 'item_visiteur' => 'kh&aacute;ch',
+
+
+// J
+'jour_non_connu_nc' => 'k.b.',
 
 
 // L
