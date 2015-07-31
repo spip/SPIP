@@ -171,7 +171,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 //
 
 // http://doc.spip.org/@appliquer_modifs_config
-function appliquer_modifs_config() {
+function appliquer_modifs_config($purger_skel=false) {
 
 	if (($i = _request('adresse_site'))!==NULL){
 		if (!strlen($i)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$i = url_de_base();}
