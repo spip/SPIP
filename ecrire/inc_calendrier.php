@@ -132,7 +132,6 @@ function http_calendrier_ics($evenements, $amj = "")
 
 				$desc = propre($evenement['DESCRIPTION']);
 				$sum = $evenement['SUMMARY'];
-				spip_log("_ics $sum");
 				if ($sum[0] != '<')
 				{
 				  if ($sum)
@@ -747,6 +746,16 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 		$jarticles = $articles[$d];
 		$jbreves = $breves[$d];
 		$jevenements = $evenements[$d];
+		if ((_DIR_RESTREINT) && is_array($jarticles)) {
+		  $i = 7;
+		  foreach ($jarticles as $k2 => $v2) {
+		    $jarticles[$k2]['DTSTART'] = $d . sprintf("%02d0000",$i);
+		    $jarticles[$k2]['DTEND'] = $d . sprintf("%02d0000",$i+2);
+		    $i+=2;
+		  }
+		  $jevenements = $jarticles;
+		  $jarticles = '';
+		} 
 		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
 			<div style='background-color: " . 
 			(($v['index'] == 0) ? $couleur_claire :
