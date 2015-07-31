@@ -383,7 +383,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo bouton_block_visible("config_avancee");
 	else
 		echo bouton_block_invisible("config_avancee");
-	echo "<font face='Verdana, Arial, Helvetica, sans-serif' size='1' color='black'><b>OPTIONS AVANCE&Eacute;S</b></font>";
+	echo "<font face='Verdana, Arial, Helvetica, sans-serif' size='1' color='black'><b>OPTIONS AVANC&Eacute;ES</b></font>";
 	if ($visible)
 		echo debut_block_visible("config_avancee");
 	else
