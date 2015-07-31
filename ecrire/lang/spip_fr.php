@@ -468,7 +468,7 @@ Merci de votre participation
 'info_mois_courant' => 'Dans le courant du mois :',
 'info_mot_cle_ajoute' => 'Le mot-cl&eacute; suivant a &eacute;t&eacute; ajout&eacute; &agrave;',
 'info_multi_herit' => 'Langue par d&eacute;faut',
-'info_multi_langues_soulignees' => 'Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
+'info_multi_langues_soulignees' => 'Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction de tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multilinguisme' => 'Multilinguisme',
 'info_nom_non_utilisateurs_connectes' => 'Votre nom n\'appara&icirc;t pas dans la liste des utilisateurs connect&eacute;s.',
 'info_nom_utilisateurs_connectes' => 'Votre nom appara&icirc;t dans la liste des utilisateurs connect&eacute;s.',

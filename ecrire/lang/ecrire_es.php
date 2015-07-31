@@ -14,16 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Ning&uacute;n resultado.',
 'avis_chemin_invalide_1' => 'El camino escogido',
 'avis_chemin_invalide_2' => 'no parece v&aacute;lido. Regresa a la p&aacute;gina precedente y comprueba las informaciones procuradas.',
-'avis_connexion_echec_1' => 'Fall&oacute; la conexi&oacute;n al servidor MySQL.',
+'avis_connexion_echec_1' => 'Fall&oacute; la conexi&oacute;n al servidor SQL.',
 'avis_connexion_echec_2' => 'Regresa a la p&aacute;gina precedente y verifica las informaciones procuradas.',
-'avis_connexion_echec_3' => '<b>OjO:</b> En muchos servidores, es necesario <b>pedir</b> la activaci&oacute;n del acceso a la base MySQL antes de poder usarla. Si no puedes conectarte, verifica que hiciste dicho tr&aacute;mite.',
+'avis_connexion_echec_3' => '<b>OjO:</b> En muchos servidores, es necesario <b>pedir</b> la activaci&oacute;n del acceso a la base SQL antes de poder usarla. Si no puedes conectarte, verifica que hiciste dicho tr&aacute;mite.',
 'avis_connexion_ldap_echec_1' => 'La conexi&oacute;n al servidor LDAP ha fallado.',
 'avis_connexion_ldap_echec_2' => 'Regresa a la p&aacute;gina anterior y comprueba las informaciones procuradas.',
 'avis_connexion_ldap_echec_3' => 'Alternativamente, no utilices el soporte LDAP para importar usuarios y usuarias.',
 'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b> Se aconseja seleccionar una palabra clave de este grupo.',
 'avis_deplacement_rubrique' => '&iexcl;ATENCI&Oacute;N! Esta secci&oacute;n contiene @contient_breves@ breve@scb@. Si la desplazas, activa esta casilla de confirmaci&oacute;n.',
 'avis_destinataire_obligatoire' => 'Debes indicar un destinatario antes de enviar este mensaje.',
-'avis_erreur_connexion_mysql' => 'Error de conexi&oacute;n MySQL',
+'avis_erreur_connexion_mysql' => 'Error de conexi&oacute;n SQL',
 'avis_erreur_version_archive' => '<b>&iexcl;ATENCI&Oacute;N! El archivo @archive@ corresponde a otra versi&oacute;n de SPIP, diferente a la instalada.</b> Te arriesgas a tener grandes problemas: destrucci&oacute;n de tu base de datos, disfuncionamientos varios del sitio, etc. No valides esta importaci&oacute;n.<p>Para mayor informaci&oacute;n, ver
  <a href=\'http://www.spip.net/es_article2436.html\'>la documentaci&oacute;n de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espacio prohibido</b><div>SPIP ya est&aacute; instalado.</div>',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Estos sitios tienen un problema de sindicaci&oacute;n',
 'avis_sites_syndiques_probleme' => 'Estos sitios sindicados tienen problemas',
 'avis_suppression_base' => '&iexcl;ATENCI&Oacute;N, la supresi&oacute;n de datos es irreversible!',
-'avis_version_mysql' => 'Tu versi&oacute;n de MySQL (@version_mysql@) no permite la auto-reparaci&oacute;n de tablas en la base.',
+'avis_version_mysql' => 'Tu servidor SQL (@version_mysql@) no permite la auto-reparaci&oacute;n de tablas en la base.',
 
 
 // B
@@ -300,7 +300,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Confirmar la nueva contrase&ntilde;a:',
 'info_connexion_base' => 'Intento de conexi&oacute;n a la base',
 'info_connexion_ldap_ok' => 'La conexi&oacute;n LDAP ha funcionado.</b><p> Puedes pasar a la siguiente fase.',
-'info_connexion_mysql' => 'Tu conexi&oacute;n MySQL',
+'info_connexion_mysql' => 'Tu conexi&oacute;n SQL',
 'info_connexion_ok' => 'La conexi&oacute;n ha funcionado.',
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Contenido de los art&iacute;culos',
@@ -401,7 +401,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Tus mensajes en curso de redacci&oacute;n',
 'info_message_technique' => 'Mensaje t&eacute;cnico',
 'info_messagerie_interne' => 'Mensajer&iacute;a interna',
-'info_mise_a_niveau_base' => 'Actualizaci&oacute;n de tu base MySQL',
+'info_mise_a_niveau_base' => 'actualizaci&oacute;n de tu base SQL',
 'info_mise_a_niveau_base_2' => '{{&iexcl;ATENCI&Oacute;N!}} Has instalado una versi&oacute;n de los archivos SPIP {anterior} a la que se encontraba antes en este sitio: Corres el riesgo de perder la base de datos y que el sitio deje de funcionar.<br />{{Vuelve a instalar los archivos de SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamiento de los foros p&uacute;blicos',
 'info_modifier_breve' => 'Modificar la breve',
@@ -804,7 +804,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_auteurs' => 'LOS AUTORES Y AUTORAS',
 'texte_breves' => 'Las breves son notas cortas y simples que permiten poner r&aacute;pidamente en l&iacute;nea informaciones concisas, por ejemplo para manejar rese&ntilde;as de prensa, un calendario de eventos...',
 'texte_choix_base_1' => 'Elegir la base',
-'texte_choix_base_2' => 'El servidor MySQL contiene varias bases de datos.',
+'texte_choix_base_2' => 'El servidor SQL contiene varias bases de datos.',
 'texte_choix_base_3' => '<b>Selecciona</b> aqu&iacute; la que te fue atribu&iacute;da por tu proveedor de hospedaje:',
 'texte_choix_table_prefix' => 'Prefijo de las tablas:',
 'texte_commande_vider_tables_indexation' => 'Utilice esta comanda para vaciar las tablas de indexaci&oacute;n del motor de b&uacute;squeda integrado de SPIP. Permite ganar espacio en el disco.',
@@ -813,7 +813,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => '&iquest;Deseas activar la configuraci&oacute;n avanzada de las palabras clave, indicando, por ejemplo, que se puede seleccionar s&oacute;lo una palabra por grupo, que un grupo importante, ...?',
-'texte_connexion_mysql' => 'Consulta las informaciones facilitadas por tu proveedor de hospedaje: debes encontrar, si tu proveedor soporta MySQL, los c&oacute;digos de conexi&oacute;n al servidor MySQL.',
+'texte_connexion_mysql' => 'Consulta las informaciones facilitadas por tu  hospedaje: ah&iacute; deber&iacute;as encontrar los c&oacute;digos de conexi&oacute;n al servidor SQL.',
 'texte_contenu_article' => '(Contenido del art&iacute;culo en pocas palabras)',
 'texte_contenu_articles' => 'Seg&uacute;n el dise&ntilde;o de tu sitio, puedes seleccionar aqu&iacute; los elementos a utilizar.',
 'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de repararla.',
@@ -888,9 +888,9 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_recuperer_base' => 'Reparar la base de datos',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br />Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; la direcci&oacute;n URL deseada, o la direcci&oacute;n de su archivo de sindicaci&oacute;n. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
-'texte_requetes_echouent' => '<b>Cuando algunas peticiones MySQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea por culpa de la propia base de datos.</b>
-MySQL dispone de una facultad de reparaci&oacute;n de sus tablas cuando han sido da&ntilde;adas por accidente. Aqu&iacute; puedes intentar esta reparaci&oacute;n; en caso de fallo, conserva una copia del resultado, que posiblemente contiene indicios de lo que no funciona...
-Si el problema persiste, contacta con tu proveedor de hospedaje.',
+'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos enm s&iacute;.</b><p />
+Tu servidor SQL es capaz de repararar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...<p />
+Si el problema persiste, contacta a tu hospedaje.<p />',
 'texte_restaurer_base' => 'Restaurar el contenido de una copia de respaldo',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n te permite restaurar una copia de respaldo de la base efectuada anteriormente. A tal efecto, se debe haber puesto el archivo que contiene la copia de respaldo en la carpeta  @dossier@.
 Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',
