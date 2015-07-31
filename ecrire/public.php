@@ -83,7 +83,7 @@ if (defined('_INC_PUBLIC')) {
 		http_status($page['status']);
 	}
 
-	$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
+	$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 
 	if ($var_preview AND $html) {
 		include_spip('inc/minipres');
@@ -138,7 +138,7 @@ if (defined('_INC_PUBLIC')) {
 		}
 	}
 
-	// Passer la main au debuggueur le cas echeant 
+	// Passer la main au debuggueur le cas echeant
 	if ($var_mode == 'debug') {
 		include_spip('inc/debug');
 		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
@@ -146,32 +146,13 @@ if (defined('_INC_PUBLIC')) {
 	} 
 
 	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
-		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs) . $page['texte'];
+		$page['texte'] = affiche_erreurs_page($tableau_des_erreurs)
+			. $page['texte'];
 
-	// Traiter var_recherche pour surligner les mots
-	if ($var_recherche) {
-		include_spip('inc/surligne');
-		$page['texte'] = surligner_mots($page['texte'], $var_recherche);
-	}
-
-	// Valider/indenter a la demande.
-	if (trim($page['texte']) AND $xhtml AND $html AND !headers_sent()) {
-		# Compatibilite ascendante
-		if ($xhtml === true) $xhtml ='tidy';
-		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
-
-		if ($f = charger_fonction($xhtml, 'inc'))
-			$page['texte'] = $f($page['texte']);
-	}
-
-	// Inserer au besoin les boutons admins
-	if ($affiche_boutons_admin) {
-		include_spip('public/admin');
-		$page['texte'] = affiche_boutons_admin($page['texte']);
-	}
-
-	// Affichage final s'il en reste
-	echo $page['texte'];
+	// Post-traitements et affichage final
+	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin, 
+	// cf. public/assembler.php)
+	echo pipeline('affichage_final', $page['texte']);
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {

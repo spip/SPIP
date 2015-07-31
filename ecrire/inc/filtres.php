@@ -1110,7 +1110,7 @@ function image_masque($im, $masque, $pos="") {
 	if ($creer) {
 		include_spip('inc/logos'); // bicoz presence reduire_image
 	
-		$masque = find_in_path($masque);	
+		$masque = find_in_path($masque);
 		$mask = valeurs_image_trans($masque,"");
 		$im_m = $mask["fichier"];
 		$x_m = $mask["largeur"];

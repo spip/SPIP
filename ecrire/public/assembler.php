@@ -291,6 +291,43 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 
 }
 
+// Traiter var_recherche pour surligner les mots
+function f_surligne ($texte) {
+	if (isset($_GET['var_recherche'])) {
+		include_spip('inc/surligne');
+		$texte = surligner_mots($texte, $_GET['var_recherche']);
+	}
+	return $texte;
+}
+
+// Valider/indenter a la demande.
+function f_tidy ($texte) {
+	global $xhtml;
+
+	if (strlen($texte)
+	AND $xhtml # tidy demande
+	AND $GLOBALS['html'] # verifie que la page avait l'entete text/html
+	AND !headers_sent()) {
+		# Compatibilite ascendante
+		if ($xhtml === true) $xhtml ='tidy';
+		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
+
+		if ($f = charger_fonction($xhtml, 'inc'))
+			$texte = $f($texte);
+	}
+
+	return $texte;
+}
+
+// Inserer au besoin les boutons admins
+function f_admin ($texte) {
+	if ($GLOBALS['affiche_boutons_admin']) {
+		include_spip('public/admin');
+		$texte = affiche_boutons_admin($texte);
+	}
+
+	return $texte;
+}
 
 function message_erreur_404 ($erreur= "") {
 	if (!$erreur) {
