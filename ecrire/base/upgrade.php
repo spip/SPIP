@@ -146,7 +146,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 		if (isset($maj[$installee])) {
 			$etape = serie_alter($installee, $maj[$installee], $meta, $table);
 			
-			if ($etape) return array($installe, $etape);
+			if ($etape) return array($installee, $etape);
 			$n = time() - $time;
 			spip_log("$table $meta: $installee en $n secondes",'maj');
 			if ($meta) ecrire_meta($meta, $installee,'non', $table);

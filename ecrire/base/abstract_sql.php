@@ -393,7 +393,7 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 function sql_error($serveur='') {
 	$f = sql_serveur('error', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
-	return $f('query inconnue', $serveur, $option!==false);
+	return $f('query inconnue', $serveur);
 }
 
 // http://doc.spip.org/@sql_errno
