@@ -8,15 +8,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Akceptejo de la teksejo',
 'articles' => 'Artikoloj',
+'articles_auteur' => 'Artikoloj de tiu a&#365;toro',
 'articles_populaires' => 'La plej popularaj artikoloj',
 'articles_recents' => 'La plej fre&#349;aj artikoloj',
+'articles_rubrique' => 'Artikoloj de tiu rubriko',
 'aucun_article' => 'Nenia artikolo en tiu adreso',
 'aucun_auteur' => 'Nenia a&#365;toro en tiu adreso',
 'aucun_site' => 'Nenia teksejo en tiu adreso',
 'aucune_breve' => 'Nenia informeto en tiu adreso',
 'aucune_rubrique' => 'Nenia rubriko en tiu adreso',
 'autres_breves' => 'Neniaj informetoj',
-'autres_groupes_de_mots_clefs' => '<NEW> Autres groupes de mots-cl&eacute;s',
 'autres_groupes_mots_clefs' => 'Aliaj grupoj de &#349;losilvortoj',
 'autres_sites' => 'Aliaj teksejoj',
 
@@ -31,13 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'En la sama rubriko',
 'date' => 'Dato',
 'dernier_ajout' => 'Lasta aldono',
 'dernieres_breves' => 'Lastaj informetoj',
 'derniers_articles' => 'Lastaj artikoloj',
 'derniers_commentaires' => 'Lastaj komentoj',
-'derniers_messages_des_forums' => 'Lastaj mesa&#285;oj publikitaj en la forumoj',
 'derniers_messages_forum' => 'Lastaj mesa&#285;oj publikitaj en la forumoj',
 
 
@@ -46,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'Respondo al&nbsp;:',
 'en_resume' => 'Resume',
 'envoyer_message' => 'Sendi mesa&#285;on',
-'envoyer_un_message' => '<NEW> Envoyer un message',
 'espace_prive' => 'Privata spaco',
 
 
@@ -85,20 +83,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => 'de ',
 'participer_site' => 'Por partopreni la vivon de tiu teksejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuje ricevos retpo&#349;tmesa&#285;on indikante vian kodon por aliri en la privata spaco.',
-'pas_d_article' => '',
-'pas_d_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
-'pas_de_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
-'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
-'plan_du_site' => 'Plano de la teksejo',
 'plan_site' => 'Plano de la teksejo',
 'popularite' => 'Populareco',
 'poster_message' => 'Sendi mesa&#285;on',
-'poster_un_message' => '<NEW> Poster un message',
 
 
 // R
-'repondre_article' => 'Respondi al tiu artikolo',
+'repondre_article' => '<MODIF> Respondi al tiu artikolo',
 'repondre_breve' => 'Respondi al tiu informeto',
 'repondre_message' => 'Respondi al tiu mesa&#285;o',
 'resultats_recherche' => 'Rezultoj de la ser&#265;o',
@@ -119,14 +110,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'test' => '<NEW> ',
-'test2' => '<NEW> <NEW> <NEW> ',
 'texte_lettre_information' => '&#264;i-tie estas la inform-letero de teksejo',
 'texte_lettre_information_2' => 'Tiu letero nombrigas artikolojn kaj informetojn publikigitaj de',
 
 
 // V
-'voir_en_ligne' => 'Vidi konektite'
+'voir_en_ligne' => 'Vidi konektite',
+
+
+// PLUS_UTILISE
+'autres_groupes_de_mots_clefs' => '<NEW> Autres groupes de mots-cl&eacute;s',
+'dans_meme_rubrique' => 'En la sama rubriko',
+'derniers_messages_des_forums' => 'Lastaj mesa&#285;oj publikitaj en la forumoj',
+'envoyer_un_message' => '<NEW> Envoyer un message',
+'pas_d_article' => '',
+'pas_d_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
+'pas_de_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
+'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
+'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
+'plan_du_site' => 'Plano de la teksejo',
+'poster_un_message' => '<NEW> Poster un message',
+'test' => '<NEW> ',
+'test2' => '<NEW> <NEW> <NEW> '
 
 );
 
