@@ -157,15 +157,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
 
-	// Appeler ici le debusqueur en cas de demande explicite,
-	// pour qu'il ait toute latitude dans la presentation
-	if ($debug) {
-		$var_mode_affiche = _request('var_mode_affiche');
-		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-		echo erreur_squelette();
-	}
 
-	// Execution de la page calculee
 
  	// decomptage des visites, on peut forcer a oui ou non avec le header X-Spip-Visites
  	// par defaut on ne compte que les pages en html (ce qui exclue les js,css et flux rss)
@@ -174,6 +166,8 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		$spip_compter_visites = in_array($page['entetes']['X-Spip-Visites'],array('oui','non'))?$page['entetes']['X-Spip-Visites']:$spip_compter_visites;
 		unset($page['entetes']['X-Spip-Visites']);
  	}
+
+	// Execution de la page calculee
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
@@ -205,20 +199,13 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	}
 
 	//
-	// Post-traitements et affichage final
+	// Post-traitements
 	//
 	page_base_href($page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
-	echo pipeline('affichage_final', $page['texte']);
-
- 	// Gestion des statistiques du site public
-	if (($GLOBALS['meta']["activer_statistiques"] != "non")
-	AND $spip_compter_visites!='non') {
-		$stats = charger_fonction('stats', 'public');
-		$stats();
- 	}
+	$page['texte'] = pipeline('affichage_final', $page['texte']);
 
 	// Appel au debusqueur en cas d'erreurs ou de demande de trace
 
@@ -229,6 +216,9 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			echo erreur_squelette();
 		}
 	} else {
+		// at last
+		echo $page['texte'];
+
 		if (isset($GLOBALS['meta']['date_prochain_postdate'])
 		AND $GLOBALS['meta']['date_prochain_postdate'] <= time()) {
 			include_spip('inc/rubriques');
@@ -250,6 +240,15 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 		// sauver le cache chemin si necessaire
 		save_path_cache();
 	}
+
+ 	// Gestion des statistiques du site public
+	if (($GLOBALS['meta']["activer_statistiques"] != "non")
+	AND $spip_compter_visites!='non') {
+		$stats = charger_fonction('stats', 'public');
+		$stats();
+ 	}
+
+
 }
 
 ?>
