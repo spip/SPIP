@@ -360,7 +360,7 @@ error_reporting(SPIP_ERREUR_REPORT);
 // ou a defini certaines des constantes que cette fonction doit definir
 // ===> on execute en neutralisant les messages d'erreur
 
-@spip_initialisation_core(
+spip_initialisation_core(
 	(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
 	(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),

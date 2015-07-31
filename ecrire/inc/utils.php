@@ -1190,29 +1190,29 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// Declaration des repertoires
 
 	// le nom du repertoire plugins/ activables/desactivables
-	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+	if (!defined('_DIR_PLUGINS')) define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 	// le nom du repertoire des extensions/ permanentes du core, toujours actives
-	define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
+	if (!defined('_DIR_EXTENSIONS')) define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
 
-	define('_DIR_IMG', $pa);
-	define('_DIR_LOGOS', $pa);
-	define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
+	if (!defined('_DIR_IMG')) define('_DIR_IMG', $pa);
+	if (!defined('_DIR_LOGOS')) define('_DIR_LOGOS', $pa);
+	if (!defined('_DIR_IMG_ICONES')) define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
 
-	define('_DIR_DUMP', $ti . "dump/");
-	define('_DIR_SESSIONS', $ti . "sessions/");
-	define('_DIR_TRANSFERT', $ti . "upload/");
-	define('_DIR_CACHE', $ti . "cache/");
-	define('_DIR_CACHE_XML', _DIR_CACHE . "xml/");
-	define('_DIR_SKELS',  _DIR_CACHE . "skel/");
-	define('_DIR_AIDE',  _DIR_CACHE . "aide/");
-	define('_DIR_TMP', $ti);
+	if (!defined('_DIR_DUMP')) define('_DIR_DUMP', $ti . "dump/");
+	if (!defined('_DIR_SESSIONS')) define('_DIR_SESSIONS', $ti . "sessions/");
+	if (!defined('_DIR_TRANSFERT')) define('_DIR_TRANSFERT', $ti . "upload/");
+	if (!defined('_DIR_CACHE')) define('_DIR_CACHE', $ti . "cache/");
+	if (!defined('_DIR_CACHE_XML')) define('_DIR_CACHE_XML', _DIR_CACHE . "xml/");
+	if (!defined('_DIR_SKELS')) define('_DIR_SKELS',  _DIR_CACHE . "skel/");
+	if (!defined('_DIR_AIDE')) define('_DIR_AIDE',  _DIR_CACHE . "aide/");
+	if (!defined('_DIR_TMP')) define('_DIR_TMP', $ti);
 
-	define('_DIR_VAR', $ta);
+	if (!defined('_DIR_VAR')) define('_DIR_VAR', $ta);
 
-	define('_DIR_ETC', $pi);
-	define('_DIR_CONNECT', $pi);
-	define('_DIR_CHMOD', $pi);
+	if (!defined('_DIR_ETC')) define('_DIR_ETC', $pi);
+	if (!defined('_DIR_CONNECT')) define('_DIR_CONNECT', $pi);
+	if (!defined('_DIR_CHMOD')) define('_DIR_CHMOD', $pi);
 
 	if (!isset($GLOBALS['test_dirs']))
 	  // Pas $pi car il est bon de le mettre hors ecriture apres intstall
@@ -1221,39 +1221,39 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Declaration des fichiers
 
-	define('_CACHE_PLUGINS_PATH', _DIR_CACHE . "charger_plugins_chemins.php");
-	define('_CACHE_PLUGINS_OPT', _DIR_CACHE . "charger_plugins_options.php");
-	define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
-	define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
-	define('_CACHE_PIPELINES',  _DIR_CACHE."charger_pipelines.php");
-	define('_CACHE_CHEMIN',  _DIR_CACHE."chemin.txt");
+	if (!defined('_CACHE_PLUGINS_PATH')) define('_CACHE_PLUGINS_PATH', _DIR_CACHE . "charger_plugins_chemins.php");
+	if (!defined('_CACHE_PLUGINS_OPT')) define('_CACHE_PLUGINS_OPT', _DIR_CACHE . "charger_plugins_options.php");
+	if (!defined('_CACHE_PLUGINS_FCT')) define('_CACHE_PLUGINS_FCT', _DIR_CACHE . "charger_plugins_fonctions.php");
+	if (!defined('_CACHE_PLUGINS_VERIF')) define('_CACHE_PLUGINS_VERIF', _DIR_CACHE . "verifier_plugins.txt");
+	if (!defined('_CACHE_PIPELINES')) define('_CACHE_PIPELINES',  _DIR_CACHE."charger_pipelines.php");
+	if (!defined('_CACHE_CHEMIN')) define('_CACHE_CHEMIN',  _DIR_CACHE."chemin.txt");
 
 	# attention .php obligatoire pour ecrire_fichier_securise
-	define('_FILE_META', $ti . 'meta_cache.php');
-	define('_DIR_LOG', _DIR_TMP);
-	define('_FILE_LOG', 'spip');
-	define('_FILE_LOG_SUFFIX', '.log');
+	if (!defined('_FILE_META')) define('_FILE_META', $ti . 'meta_cache.php');
+	if (!defined('_DIR_LOG')) define('_DIR_LOG', _DIR_TMP);
+	if (!defined('_FILE_LOG')) define('_FILE_LOG', 'spip');
+	if (!defined('_FILE_LOG_SUFFIX')) define('_FILE_LOG_SUFFIX', '.log');
 
 	// Le fichier de connexion a la base de donnees
 	// tient compte des anciennes versions (inc_connect...)
-	define('_FILE_CONNECT_INS', 'connect');
-	define('_FILE_CONNECT',
+	if (!defined('_FILE_CONNECT_INS')) define('_FILE_CONNECT_INS', 'connect');
+	if (!defined('_FILE_CONNECT')) define('_FILE_CONNECT',
 		(@is_readable($f = _DIR_CONNECT . _FILE_CONNECT_INS . '.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php') ? $f
 	:	(@is_readable($f = _DIR_RESTREINT . 'inc_connect.php3') ? $f
 	:	false))));
 
 	// Le fichier de reglages des droits
-	define('_FILE_CHMOD_INS', 'chmod');
-	define('_FILE_CHMOD',
+	if (!defined('_FILE_CHMOD_INS')) define('_FILE_CHMOD_INS', 'chmod');
+	if (!defined('_FILE_CHMOD')) define('_FILE_CHMOD',
 		(@is_readable($f = _DIR_CHMOD . _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
 
-	define('_FILE_LDAP', 'ldap.php');
+	if (!defined('_FILE_LDAP')) define('_FILE_LDAP', 'ldap.php');
 
-	define('_FILE_TMP_SUFFIX', '.tmp.php');
-	define('_FILE_CONNECT_TMP', _DIR_CONNECT . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
-	define('_FILE_CHMOD_TMP', _DIR_CHMOD . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
+	if (!defined('_FILE_TMP_SUFFIX')) define('_FILE_TMP_SUFFIX', '.tmp.php');
+	if (!defined('_FILE_CONNECT_TMP')) define('_FILE_CONNECT_TMP', _DIR_CONNECT . _FILE_CONNECT_INS . _FILE_TMP_SUFFIX);
+	if (!defined('_FILE_CHMOD_TMP')) define('_FILE_CHMOD_TMP', _DIR_CHMOD . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
 
 	// Definition des droits d'acces en ecriture
 	if (!defined('_SPIP_CHMOD') AND _FILE_CHMOD)
@@ -1263,23 +1263,23 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', 0777);
 
 	// Le charset par defaut lors de l'installation
-	define('_DEFAULT_CHARSET', 'utf-8');
-	define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
-	define('_ROOT_EXTENSIONS', _ROOT_RACINE . "extensions/");
+	if (!defined('_DEFAULT_CHARSET')) define('_DEFAULT_CHARSET', 'utf-8');
+	if (!defined('_ROOT_PLUGINS')) define('_ROOT_PLUGINS', _ROOT_RACINE . "plugins/");
+	if (!defined('_ROOT_EXTENSIONS')) define('_ROOT_EXTENSIONS', _ROOT_RACINE . "extensions/");
 
 	// La taille des Log
-	define('_MAX_LOG', 100);
+	if (!defined('_MAX_LOG')) define('_MAX_LOG', 100);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
 	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false){
-		define ('_OS_SERVEUR', 'windows');
-		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+		if (!defined('_OS_SERVEUR')) define('_OS_SERVEUR', 'windows');
+		if (!defined('_SPIP_LOCK_MODE')) define('_SPIP_LOCK_MODE',1); // utiliser le flock php
 	}
 	else {
-		define ('_OS_SERVEUR', '');
-		define('_SPIP_LOCK_MODE',1); // utiliser le flock php
-		#define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
+		if (!defined('_OS_SERVEUR')) define('_OS_SERVEUR', '');
+		if (!defined('_SPIP_LOCK_MODE')) define('_SPIP_LOCK_MODE',1); // utiliser le flock php
+		#if (!defined('_SPIP_LOCK_MODE')) define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
 	}
 
 	//
@@ -1350,7 +1350,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	}
 
 	// Duree de validite de l'alea pour les cookies et ce qui s'ensuit.
-	define('_RENOUVELLE_ALEA', 12 * 3600);
+	if (!defined('_RENOUVELLE_ALEA')) define('_RENOUVELLE_ALEA', 12 * 3600);
 
 	// charger les meta si possible et renouveller l'alea au besoin
 	// charge aussi effacer_meta et ecrire_meta
