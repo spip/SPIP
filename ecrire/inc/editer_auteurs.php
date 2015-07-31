@@ -260,15 +260,14 @@ function objet_auteur_select($cond)
 	$count = sql_countsel('spip_auteurs', $cond);
 	if (!$count) return '';
 	if ($count > _SPIP_SELECT_MIN_AUTEURS) return $count;
-	$statut_old = $premiere_old = $res = '';
-	$t = 'info_administrateurs';
+	$statut_old = $res = '';
+	$groupe_en_cours = false;
 	$result = sql_allfetsel('*', 'spip_auteurs', $cond, '', "statut, nom");
 	foreach ($result as $row) {
 		$id_auteur = $row["id_auteur"];
 		$nom = $row["nom"];
 		$email = $row["email"];
 		$statut = array_search($row["statut"], $GLOBALS['liste_des_statuts']);
-#		$premiere = strtoupper(substr(trim($nom), 0, 1));
 
 		if (!autoriser('voir', 'auteur'))
 			if ($p = strpos($email, '@'))
@@ -277,17 +276,15 @@ function objet_auteur_select($cond)
 			$email = " ($email)";
 
 		if ($statut != $statut_old) {
-			$res .= "\n<option value=\"x\" />";
-			$res .= "\n<option value=\"x\" class='option_separateur_statut_auteur'> " . _T($statut) . "</option>";
+ 			if ($groupe_en_cours) $res .= "\n</optgroup>";
+			$res .= "\n<optgroup class='option_separateur_statut_auteur' label='" . _T($statut) . "'>";
+			$groupe_en_cours = true;
 		}
 
-		if ($premiere != $premiere_old AND ($statut != $t OR !$premiere_old))
-			$res .= "\n<option value=\"x\" />";
-				
-		$res .= "\n<option value=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;" . supprimer_tags(couper(typo("$nom$email"), 40)) . '</option>';
+		$res .= "\n<option class='option_auteur' value=\"$id_auteur\">" . supprimer_tags(couper(typo("$nom$email"), 40)) . '</option>';
 		$statut_old = $statut;
-		$premiere_old = $premiere;
 	}
+	if ($groupe_en_cours) $res .= "\n</optgroup>";
 	return $res;
 }
 
