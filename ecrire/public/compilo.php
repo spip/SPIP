@@ -257,7 +257,7 @@ function calculer_requete_sql(&$boucle)
 	return   ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
 		. $boucle->hash . 
 		"\n\n	// REQUETE
-	\$result = spip_abstract_select(\n\t\tarray(\"" . 
+	\$result = spip_optim_select(\n\t\tarray(\"" . 
 		# En absence de champ c'est un decompte : 
 	  	# prendre une constante pour avoir qqch
 		(!$boucle->select ? 1 :
@@ -265,12 +265,16 @@ function calculer_requete_sql(&$boucle)
 		'"), # SELECT
 		' . calculer_from($boucle) .
 		', # FROM
-		' . calculer_where($boucle) .
-		', # WHERE
+		array(' .
+		($boucle->where  ? ('"'. join('", "', $boucle->where) . '"') : '') .
+		'), # WHERE
+		array(' .
+		($boucle->join  ? ('"'. join('", "', $boucle->join) . '"') : '') .
+		'), # WHERE pour jointure
 		' . (!$boucle->group ? "''" : 
 		     ('"' . join(", ", $boucle->group)) . '"') .
-		", # GROUP
-		array(" .
+		', # GROUP
+		array(' .
 			join(', ', $order) .
 		"), # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
@@ -289,15 +293,6 @@ function calculer_from(&$boucle)
   $res = "";
   foreach($boucle->from as $k => $v) $res .= "\", \"$v AS `$k`";
   return 'array(' . substr($res,3) . '")';
-}
-
-function calculer_where(&$boucle)
-{
-  $w = array_merge($boucle->where, $boucle->join);
-  return 'array(' .
-    (!$w ? '' : ( '"' . join('", 
-		"', $w) . '"')) .
-    ")";
 }
 
 //
