@@ -535,7 +535,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 		$attributs .= " align='$align'";
 
 	$style = trim(
-		preg_replace(',(^|[[:space:]])width:[^;]+;?,ims', '', $style)
+		preg_replace(',(^|[[:space:]])(width|height):[^;]+;?,ims', '', $style)
 	);
 	if ($style)
 		$attributs .= " style='$style'";
@@ -569,7 +569,7 @@ function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
 		// quand on fait supprimer/reuploader un logo
 		// (pas de filemtime si SAFE MODE)
 		$date = _DIR_RESTREINT ? '' : ('?date='.@filemtime($logo));
-		return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
+		return "<img src='$logo$date' style='width:".$destWidth."px; height:".$destHeight."px;'$attributs />";
 	}
 }
 
