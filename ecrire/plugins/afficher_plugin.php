@@ -115,7 +115,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	// couper par securite
 	$slogan = couper($slogan, 80);
 
-	$url = parametre_url($url_page, "plugin", $dir);
+	$url = parametre_url($url_page, "plugin", substr($dir,strlen(_DIR_RACINE)));
 
 	if (isset($info['icon']) and $i = trim($info['icon'])) {
 		include_spip("inc/filtres_images_mini");
