@@ -377,6 +377,7 @@ jQuery.spip.loadAjax = function(blocfrag,url, href, options){
 	} else {
 		jQuery.ajax({
 			url: url,
+			cache:false,
 			onAjaxLoad:false,
 			success: function(c){
 				jQuery.spip.on_ajax_loaded(blocfrag,c,href,options.history);
