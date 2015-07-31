@@ -57,7 +57,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 	// articles du jour
-	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee_today-$mois_today-0' AND date < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date";
+	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee_today-$mois_today-1' AND date < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date";
 	$result=mysql_query($query);
 	while($row=mysql_fetch_array($result)){
 		$id_article=$row[0];
@@ -70,7 +70,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 	// breves du jour
-	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee_today-$mois_today-0' AND date_heure < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date_heure";
+	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee_today-$mois_today-1' AND date_heure < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date_heure";
 	$result=mysql_query($query);
 	while($row=mysql_fetch_array($result)){
 		$id_breve=$row[0];
