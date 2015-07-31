@@ -68,7 +68,7 @@ function exec_admin_plugin_dist($retour='') {
 
 	// Lister les librairies disponibles
 	if ($libs = liste_librairies()) {
-		debut_cadre_enfonce('', '', '', _L('Librairies install&#233;es'));
+		debut_cadre_enfonce('', '', '', _T('plugin_librairies_installees'));
 		ksort($libs);
 		echo '<dl>';
 		foreach ($libs as $lib => $rep)
@@ -111,20 +111,21 @@ function exec_admin_plugin_dist($retour='') {
 					$lcpaffiche[] = $f;
 			if (count($lcpaffiche)<10 && !$format) $format = 'liste';
 			$lien_format = $format!='liste' ?
-			  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
-			  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
-			$corps = "<p>$lien_format | "._L(count($lcpa).' plugins activ&#233;s.')."\n"
-				. " | <a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"._L(count($lpf).' plugins disponibles.')."</a></p>\n"
+			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
+			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
+			$corps = "<p>$lien_format | "._T('plugins_actifs',array('count'=>count($lcpa)))."\n"
+			  . " | <a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"
+			  ._T('plugins_disponibles',array('count'=>count($lpf)))."</a></p>\n"
 				. affiche_les_plugins($lcpaffiche, $lcpa, $format);
 
 		} else {
 			$lien_format = $format!='liste' ?
-			  "<a href='".parametre_url(self(),'format','liste')."'>"._L('Liste')."</a>"
-			  :"<a href='".parametre_url(self(),'format','arbre')."'>"._L('Hierarchie')."</a>";
+			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
+			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
 			$corps = 
 				"<p>$lien_format | "
-				."<a href='". parametre_url(self(),'afficher_tous_plugins', '') ."'>" . _L(count($lcpa).' plugins activ&#233;s')."</a> | \n"
-				. ""._L(count($lpf).' plugins disponibles.')
+			  ."<a href='". parametre_url(self(),'afficher_tous_plugins', '') ."'>" . _T('plugins_actifs',array('count'=>count($lcpa)))."</a> | \n"
+				. ""._T('plugins_disponibles',array('count'=>count($lpf)))
 				. "</p>\n"
 				. (count($lpf)>20 ? $sub : '')
 				. affiche_les_plugins($lpf, $lcpa, $format);

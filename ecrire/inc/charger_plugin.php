@@ -41,26 +41,24 @@ function formulaire_charger_plugin($retour='') {
 	if (_DIR_PLUGINS_AUTO) {
 		if (!@is_dir(_DIR_PLUGINS_AUTO)
 		OR !is_writeable(_DIR_PLUGINS_AUTO)) {
-			$auto = _L("Si vous souhaitez autoriser l'installation automatique des plugins, veuillez&nbsp;:
-			<ul>
-			<li>cr&#233;er un r&#233;pertoire <code>".joli_repertoire(_DIR_PLUGINS_AUTO)."</code>&nbsp;;</li>
-			<li>v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.".aide("install0")."</li>
-			</ul>");
-			$auto .= "\n<p>"._L("Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.")."</p>";
+		  $auto = _T('plugin_info_automatique1')."\n"
+			.'<ol><li>'._T('plugin_info_automatique2',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</li>'
+			.'<li>'._T('plugin_info_automatique3').aide("install0")."</li></ol>"
+		  ."\n<p>"._T('plugin_info_automatique_lib')."</p>";
 		}
 
 		if (!$auto)
 			$auto = interface_plugins_auto($retour);
 
 		$auto = "<br />"
-		. debut_cadre_enfonce('', true, '', 'Installation automatique').$auto.fin_cadre_enfonce(true);
+		  . debut_cadre_enfonce('', true, '', _T('plugin_titre_automatique')).$auto.fin_cadre_enfonce(true);
 	}
 
-	$message = _L("Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>".joli_repertoire(_DIR_PLUGINS)."</tt>");
+	$message = _T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)));
 	if (!@is_dir(_DIR_PLUGINS))
-		$message .= " &mdash; "._L("&#224; cr&#233;er &#224; la racine du site.");
+		$message .= " &mdash; "._T('plugin_info_automatique_creer');
 
-	return debut_cadre_trait_couleur("spip-pack-24.png", true, "", _L('Ajouter des plugins'))
+	return debut_cadre_trait_couleur("spip-pack-24.png", true, "", _T('plugin_titre_automatique_ajouter'))
 		. "<p>".$message."</p>\n"
 		. $auto
 		. fin_cadre_trait_couleur(true);
@@ -84,7 +82,7 @@ function interface_plugins_auto($retour) {
 	$liste = liste_plugins_distants();
 
 	if ($liste) {
-		$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
+	  $res .= '<p>'._T('plugin_info_automatique_select',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</p>';
 
 		$menu = array();
 		$compte = 0;
@@ -114,14 +112,14 @@ function interface_plugins_auto($retour) {
 
 
 
-		$res .= _L("ou...");
+		$res .= _T("plugin_info_automatique_ou");
 	}
 
-	$res .= _L("<p>indiquez ci-dessous l'adresse d'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l'adresse d'une liste de plugins.</p>");
+	$res .= '<p>'._T('plugin_zip_adresse').'</p>';
 	
-	$res .= '<p>('._L('exemples :').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
+	$res .= '<p>('._T('plugin_info_automatique_exemples').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
 
-	$res .= '<label>'._L('Adresse du plugin ou de la liste&nbsp;');
+	$res .= '<label>'._T('plugin_zip_adresse_champ');
 	$res .= "<br />
 	<input type='radio' id='antiradio' name='url_zip_plugin' value='' /></label>
 	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' />\n";
@@ -377,8 +375,7 @@ function chargeur_activer_plugin($plugin)
 function liste_fichiers_pclzip($status) {
 	$list = $status['files'];
 
-	$ret = '<b>'._L('Il contient les fichiers suivants ('
-		.taille_en_octets($status['size']).'),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>'.$status['dirname']).'</code></b>';
+	$ret = '<b>'._T('plugin_zip_content',array('taille'=>taille_en_octets($status['size']), 'rep'=>$status['dirname'])).'</b>';
 
 	$l .= "<ul style='font-size:x-small;'>\n";
 	foreach ($list as $f) {
@@ -479,18 +476,17 @@ function afficher_liste_listes_plugins() {
 	if (!is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug'])))
 		return '';
 
-	$ret = '<p>'._L('Vos listes de plugins :').'</p><ul>';
-		$ret .= '<li>'._L('les plugins officiels').'</li>';
+	$ret = '<p>'._T('plugin_info_automatique_liste').'</p><ul>';
+		$ret .= '<li>'._T('plugin_info_automatique_liste_officielle').'</li>';
 	foreach ($flux as $url => $c) {
 		$a = '<a href="'.parametre_url(
 			generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">x</a>';
-		$ret .= '<li>'.PtoBR(propre("[->$url]")).' ('.$c
-			.' plugins) '.$a.'</li>';
+		$ret .= '<li>'.PtoBR(propre("[->$url]")).' ('._T('plugins_compte',array('count' => $c)).') '.$a.'</li>';
 	}
 	$ret .= '</ul>';
 
 	$ret .= '<a href="'.parametre_url(
-			generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._L('Mettre &#224; jour les listes').'</a>';
+									  generer_action_auteur('charger_plugin', 'update_flux'),'update_flux', 'oui').'">'._T('plugin_info_automatique_liste_update').'</a>';
 
 	return $ret;
 }
@@ -511,7 +507,7 @@ function bouton_telechargement_plugin($url, $rep) {
 			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
 			"\nmethod='post'");
 
-	return _L("&#224; t&#233;l&#233;charger depuis $url et &#224; installer dans $rep/").$bouton;
+	return _T('plugin_info_telecharger',array('url'=>$url,'rep'=>$rep.'/')).$bouton;
 
 }
 
