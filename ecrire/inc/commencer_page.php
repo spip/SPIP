@@ -256,8 +256,10 @@ function auteurs_recemment_connectes($id_auteur)
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	$res = '';
 	while ($row = sql_fetch($result)) {
-		$mail = formater_auteur_mail($row, $row['id_auteur']);
-		$res .= "$mail&nbsp;" . typo($row['nom']) . ", ";
+		$id = $row['id_auteur'];
+		$mail = formater_auteur_mail($row, $id);
+		$auteurs = "<a href='" . generer_url_ecrire("auteur_infos", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
+		$res .= "$mail&nbsp;$auteurs" . ", ";
 	}
 
 	return "<div class='messages' style='color:#666;'>" .
