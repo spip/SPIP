@@ -61,7 +61,7 @@ function install_etape_4_dist()
 	// Prefix des tables :
 	// contrairement a ce qui est dit dans le message (trop strict mais c'est
 	// pour notre bien), on va tolerer les chiffres en plus des minuscules
-	$table_prefix = trim(preg_match(',[^a-z0-9],', '',
+	$table_prefix = trim(preg_replace(',[^a-z0-9],', '',
 		strtolower(_request('table_prefix'))));
 	if ($table_prefix
 	AND $table_prefix != 'spip') {
