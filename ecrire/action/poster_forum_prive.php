@@ -45,6 +45,13 @@ function action_poster_forum_prive_post($r)
 			spip_query("UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message=$id");
 
 		}
+
+	// Notification
+	if ($notifications = charger_fonction('notifications', 'inc'))
+		$notifications('forumprive', $id_forum);
+
+
+
 		redirige_par_entete(urldecode(_request('redirect'))."#id".$id_forum);
 		
 	 } else {

@@ -257,8 +257,8 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 
 	// supprimer les <form> de la previsualisation
 	// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
-	return preg_replace("@<(/?)f(orm[>[:space:]])@ism",
-			    "<\\1no-f\\2",
+	return preg_replace("@<(/?)form\b@ism",
+			    '<\1div',
 		inclure_balise_dynamique(array('formulaires/forum_previsu',
 		      0,
 		      array(

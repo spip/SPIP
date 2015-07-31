@@ -69,6 +69,9 @@ function action_editer_message_post_ajouter($id_message, $id_auteur) {
 	spip_abstract_insert('spip_auteurs_messages',
 		"(id_auteur,id_message,vu)",
 		"('$id_auteur','$id_message','non')");
+
+	// Ne pas notifier ici, car si on se trompe d'auteur, on veut avoir le temps
+	// de supprimer celui qu'on vient d'ajouter... c'est fait en cron
 }
 
 // http://doc.spip.org/@action_editer_message_post_choisir
