@@ -69,8 +69,10 @@ function auth() {
 			$auth_login = $PHP_AUTH_USER;
 			$auth_pass_ok = true;
 			$auth_can_disconnect = true;
-		} else {
-			// normalement on n'arrive pas la sauf changement de mot de passe dans la base
+		}
+		else // normalement on n'arrive pas la sauf changement de mot de passe dans la base...
+		if ($PHP_AUTH_USER != 'root') // ... mais quelques serveurs forcent cette valeur
+		{
 			$auth_login = '';
 			echo "<p><b>"._T('info_connexion_refusee')."</b></p>";
 			echo "[<a href='../spip_cookie.php3?essai_auth_http=oui'>"._T('lien_reessayer')."</a>]";
