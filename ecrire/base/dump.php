@@ -282,12 +282,14 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 			$upgrade = true;
 		}
 		else {
-			sql_drop_table($table);
+			sql_drop_table($table, '', $serveur_dest);
+			spip_log("drop table '$table' sur serveur '$serveur_dest'",'dump');
 		}
 		$desc_dest = false;
 	}
 	// si la table n'existe pas dans la destination, la creer a l'identique !
 	if (!$desc_dest) {
+		spip_log("creation '$table' sur serveur '$serveur_dest'",'dump');
 		include_spip('base/create');
 		$autoinc = (isset($desc['keys']['PRIMARY KEY']) AND strpos($desc['keys']['PRIMARY KEY'],',')===false);
 		creer_ou_upgrader_table($table, $desc, $autoinc, $upgrade,$serveur_dest);
@@ -354,11 +356,11 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		// verifier que la table est presente dans la base source
 		if ($desc_source = sql_showtable($table,false,$serveur_source)){
 			// $status['tables_copiees'][$table] contient l'avancement
-			// de la copie pour la $table : 0 a N et -1 quand elle est finie
+			// de la copie pour la $table : 0 a N et -N quand elle est finie (-1 si vide et finie...)
 			if (!isset($status['tables_copiees'][$table]))
 				$status['tables_copiees'][$table] = 0;
 
-			if ($status['tables_copiees'][$table]!==-1
+			if ($status['tables_copiees'][$table]>=0
 				AND $desc_dest = base_preparer_table_dest($table, $desc_source, $serveur_dest, $status['tables_copiees'][$table] == 0)){
 				if ($callback_progression)
 					$callback_progression(0,0,$table);
@@ -386,15 +388,18 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					sql_drop_table($table,'',$serveur_source);
 					spip_log("drop $table sur serveur source '$serveur_source'",'dump');
 				}
-				$status['tables_copiees'][$table]=-1;
+				$status['tables_copiees'][$table]=-max($status['tables_copiees'][$table],1);
 				ecrire_fichier($status_file,serialize($status));
 				spip_log("tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
+			}
+			else {
+				if ($callback_progression)
+					$callback_progression(0,$status['tables_copiees'][$table],"$table".($status['tables_copiees'][$table]>=0?"[Echec]":""));
 			}
 		}
 	}
 
 	base_detruire_copieur_si_besoin($serveur_dest);
-	spip_unlink($status_file);
 	// OK, copie complete
 	return true;
 }
