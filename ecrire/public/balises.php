@@ -512,13 +512,15 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	}
 
 	$__modele = interprete_argument_balise(1,$p);
-	$__modele = $__modele?", $__modele":", ''";
-	$params = $p->param;
-	array_shift($params);
-	// a priori true
-	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
-	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($params, true, $p, $p->boucles, $p->id_boucle, false);
+	if ($p->param) {
+		$params = $p->param;
+		array_shift($params);
+		// a priori true
+		// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
+		// si true, les arguments simples (sans truc=chose) vont degager
+		$code_contexte = argumenter_inclure($params, true, $p, $p->boucles, $p->id_boucle, false);
+		$code_contexte = implode(',',$code_contexte);
+	} else $code_contexte = '';
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
@@ -526,15 +528,18 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$type = $p->boucles[$b]->modificateur['debut_nom'];
 	$modif = ($type[0]!=="'") ? "'debut'.$type" 
 	  : ("'debut" .substr($type,1));
+
 	$p->code = $f_pagination."(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), $type,
 		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
 	. $p->boucles[$b]->total_parties
-	  . ", $liste$__modele," . _q($connect) 
-	  . ", array(" . implode(',',$code_contexte) . ")" 
-	  . ")";
+	. ", $liste, "
+	. ($__modele ? $__modele : "''")
+	. "," . _q($connect) 
+	. ", array($code_contexte)" 
+	. ")";
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -743,11 +748,15 @@ function balise_EVAL_dist($p) {
 // ne permet pas de passer une expression pour x qui ne peut etre qu'un texte statique !
 // http://doc.spip.org/@balise_CHAMP_SQL_dist
 function balise_CHAMP_SQL_dist($p){
-	$p->code = '';
-	if (isset($p->param[0][1][0])
+
+	if ($p->param
+	AND isset($p->param[0][1][0])
 	AND $champ = ($p->param[0][1][0]->texte))
 		$p->code = champ_sql($champ, $p);
-
+	else {
+		$err_b_s_a = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
+		erreur_squelette($err_b_s_a, $p);
+	}
 	#$p->interdire_scripts = true;
 	return $p;
 }
@@ -825,42 +834,45 @@ function balise_FILTRE_dist($p) {
 //  cf. ecrire/public/cacher.php
 // http://doc.spip.org/@balise_CACHE_dist
 function balise_CACHE_dist($p) {
-	$duree = valeur_numerique($p->param[0][1][0]->texte);
 
-	// noter la duree du cache dans un entete proprietaire
-	$p->code .= '\'<'.'?php header("X-Spip-Cache: '
+	if ($p->param) {
+		$duree = valeur_numerique($p->param[0][1][0]->texte);
+
+		// noter la duree du cache dans un entete proprietaire
+
+		$code = '\'<'.'?php header("X-Spip-Cache: '
 		. $duree
 		. '"); ?'.'>\'';
 
-	// Remplir le header Cache-Control
-	// cas #CACHE{0}
-	if ($duree == 0)
-		$p->code .= '.\'<'
-		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
-		.'><'
-		.'?php header("Pragma: no-cache"); ?'
-		.'>\'';
+		// Remplir le header Cache-Control
+		// cas #CACHE{0}
+		if ($duree == 0)
+			$code .= '.\'<'
+			.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+			.'><'
+			.'?php header("Pragma: no-cache"); ?'
+			.'>\'';
 
-	// recuperer les parametres suivants
-	$i = 1;
-	while (isset($p->param[0][++$i])) {
-		$pa = ($p->param[0][$i][0]->texte);
+		// recuperer les parametres suivants
+		$i = 1;
+		while (isset($p->param[0][++$i])) {
+			$pa = ($p->param[0][$i][0]->texte);
 
-		if ($pa == 'cache-client'
-		AND $duree > 0) {
-			$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
+			if ($pa == 'cache-client'
+			AND $duree > 0) {
+				$code .= '.\'<'.'?php header("Cache-Control: max-age='
 				. $duree
 				. '"); ?'.'>\'';
 			// il semble logique, si on cache-client, de ne pas invalider
-			$pa = 'statique';
+				$pa = 'statique';
+			}
+
+			if ($pa == 'statique'
+			AND $duree > 0)
+				$code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
 		}
-
-		if ($pa == 'statique'
-		AND $duree > 0)
-			$p->code .= '.\'<'.'?php header("X-Spip-Statique: oui"); ?'.'>\'';
-
-	}
-
+	} else $code = "''";
+	$p->code = $code;
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -903,6 +915,10 @@ function balise_INCLURE_dist($p) {
 
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $id_boucle, false, false);
 
+	// erreur de syntaxe = fond absent 
+	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
+	if (!$_contexte) $contexte = array(); 
+
 	if (isset($_contexte['fond'])) {
 
 		$f = $_contexte['fond'];
@@ -932,7 +948,9 @@ function balise_INCLURE_dist($p) {
 		if (isset($_contexte['ajax'])) $_options[] = "'ajax'=>true";
 		if ($p->etoile) $_options[] = "'etoile'=>true";
 		$_options[] = "'compil'=>array(" . memoriser_contexte_compil($p) .")";
+
 		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"''");
+
 	} elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 			erreur_squelette($msg, $p);
@@ -947,6 +965,10 @@ function balise_INCLURE_dist($p) {
 function balise_MODELE_dist($p) {
 
 	$_contexte = argumenter_inclure($p->param, true, $p, $p->boucles, $p->id_boucle, false);
+
+	// erreur de syntaxe = fond absent 
+	// (2 messages d'erreur SPIP pour le prix d'un, mais pas d'erreur PHP
+	if (!$_contexte) $contexte = array(); 
 
 	if (!isset($_contexte[1])) {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));

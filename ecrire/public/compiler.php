@@ -99,7 +99,7 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 			}
 		}
 	}
-
+	if ($erreur_p_i_i) return false;
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
 	// sauf si on n'en veut pas 

@@ -222,18 +222,20 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       $fonc = trim($match[1]);
       if ($fonc && $fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
       $res = array($fonc);
+      $err_f = '';
       // cas du filtre sans argument ou du critere /
       if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
 	// si pas d'argument, alors il faut une fonction ou un double |
 	if (!$match[1]) {
-		$msg = array('zbug_erreur_filtre', array('filtre' => $texte));
-		erreur_squelette($msg, $pointeur_champ);
+		$err_f = array('zbug_erreur_filtre', array('filtre' => $texte));
+		erreur_squelette($err_f, $pointeur_champ);
 		$texte = '';
 	} else 	$texte = $suite;
-	  if ($fonc!=='') $pointeur_champ->param[] = $res;
+	if ($err_f) $pointeur_champ->param = false;
+	elseif ($fonc!=='') $pointeur_champ->param[] = $res;
 	  // pour les balises avec faux filtres qui boudent ce dur larbeur
-	  $pointeur_champ->fonctions[] = array($fonc, '');
-	  return $result;
+	$pointeur_champ->fonctions[] = array($fonc, '');
+	return $result;
       }
       $args = ltrim(substr($suite,1)); // virer le '(' initial
       $collecte = array();
@@ -246,8 +248,8 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
-			$msg = array('zbug_erreur_filtre', array('filtre' => $args));
-			erreur_squelette($msg, $pointeur_champ);
+			$err_f = array('zbug_erreur_filtre', array('filtre' => $args));
+			erreur_squelette($err_f, $pointeur_champ);
 			$champ->apres = $champ->avant = $args = "";
 			break;
 		      }   
@@ -299,7 +301,10 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		      $champ->apres = '';
 		      $next = $args[0];
 		    }
-		    phraser_vieux($champ);
+		    // Si erreur de syntaxe dans un sous-argument, propager.
+		    if ($champ->param === false)
+		      $err_f = true;
+		    else phraser_vieux($champ);
 		    if ($par==')') $args = substr($args,1);
 		    $collecte[] = $champ;
 		    $result[] = $champ;
@@ -313,7 +318,13 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       if ($collecte) {$res[] = $collecte; $collecte = array();}
       $texte = substr($args,1);
       $source = substr($texte, 0, strlen($texte) - strlen($args));
-      if ($fonc!=='' || count($res) > 1) $pointeur_champ->param[] = $res;
+      // propager les erreurs, et ignorer les param vides
+      if ($pointeur_champ->param !== false) {
+	if ($err_f)
+	  $pointeur_champ->param = false;
+	elseif ($fonc!=='' || count($res) > 1) 
+	  $pointeur_champ->param[] = $res;
+      }
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, $source);
       return $result;
@@ -421,7 +432,7 @@ function phraser_vieux(&$champ)
 // http://doc.spip.org/@phraser_criteres
 function phraser_criteres($params, &$result) {
 
-	$msg = ''; // indiquera s'il y a eu une erreur
+	$err_ci = ''; // indiquera s'il y a eu une erreur
 	$args = array();
 	$type = $result->type_requete;
 	$doublons = array();
@@ -466,9 +477,9 @@ function phraser_criteres($params, &$result) {
 		    // cas 1 seul arg ne commencant pas par du texte brut: 
 		    // erreur ou critere infixe "/"
 		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/')) {
-			$msg = array('zbug_critere_inconnu', 
+			$err_ci = array('zbug_critere_inconnu', 
 					array('critere' => $var->nom_champ));
-			erreur_squelette($msg, $result);
+			erreur_squelette($err_ci, $result);
 		    } else {
 		      $crit = new Critere;
 		      $crit->op = '/';
@@ -541,9 +552,9 @@ function phraser_criteres($params, &$result) {
 			    $crit->cond = $m[5];
 			  }
 			  else {
-			 	$msg = array('zbug_critere_inconnu', 
+			 	$err_ci = array('zbug_critere_inconnu', 
 					array('critere' => $param));
-				erreur_squelette($msg, $result);
+				erreur_squelette($err_ci, $result);
 			  }
 			  if ((!preg_match(',^!?doublons *,', $param)) || $crit->not)
 			    $args[] = $crit;
@@ -558,7 +569,7 @@ function phraser_criteres($params, &$result) {
 	// cf critere_doublon
 	if ($doublons) $args= array_merge($args, $doublons);
 	// Si erreur, laisser la chaine dans ce champ pour le HTTP 503
-	if (!$msg) $result->criteres = $args;
+	if (!$err_ci) $result->criteres = $args;
 }
 
 // http://doc.spip.org/@phraser_critere_infixe
@@ -583,7 +594,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 
 	while (($pos_boucle = strpos($texte, BALISE_BOUCLE)) !== false) {
 
-		$msg = ''; // indiquera s'il y a eu une erreur
+		$err_b = ''; // indiquera s'il y a eu une erreur
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
 		$result->descr = $descr;
@@ -609,8 +620,8 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
 		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r)) {
-			$msg = array('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
-			erreur_squelette($msg, $result);
+			$err_b = array('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
+			erreur_squelette($err_b, $result);
 		  }
 		  $pos_boucle = $n;
 		  $n = strpos($milieu, $r[0]);
@@ -634,8 +645,13 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$result->table_optionnelle = $type;
 		}
 		
+		// 1ere passe sur les criteres, vu comme des arguments sans fct
+		// Resultat mis dans result->param
 		phraser_args($milieu,"/>","",$all_res,$result);
 
+		// En 2e passe result->criteres contiendra un tableau
+		// pour l'instant on met le source (chaine) :
+		// si elle reste ici au final, c'est qu'elle contient une erreur
 		$result->criteres =  substr($milieu,0,@strpos($milieu,$result->apres));
 		$milieu = $result->apres;
 		$result->apres = "";
@@ -651,9 +667,9 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
 			$p = strpos($milieu, $s);
 			if ($p === false) {
-				$msg = array('zbug_erreur_boucle_fermant',
+				$err_b = array('zbug_erreur_boucle_fermant',
 					array('id' => $id_boucle));
-				erreur_squelette($msg, $result);
+				erreur_squelette($err_b, $result);
 			}
 
 			$suite = substr($milieu, $p + strlen($s));
@@ -697,14 +713,18 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$soustype = $type;
 
 		$result->type_requete = $soustype;
-		phraser_criteres($result->param, $result);
-
-		if (strncasecmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
-			$result->type_requete = TYPE_RECURSIF;
-			$args = $result->param;
-			array_unshift($args,
-				      substr($type, strlen(TYPE_RECURSIF)));
-			$result->param = $args;
+		// Lancer la 2e passe sur les criteres si la 1ere etait bonne
+		if (!is_array($result->param))
+			$err_b = true;
+		else {
+			phraser_criteres($result->param, $result);
+			if (strncasecmp($soustype, TYPE_RECURSIF, strlen(TYPE_RECURSIF)) == 0) {
+				$result->type_requete = TYPE_RECURSIF;
+				$args = $result->param;
+				array_unshift($args,
+					substr($type, strlen(TYPE_RECURSIF)));
+				$result->param = $args;
+			}
 		}
 
 		$result->avant = public_phraser_html_dist($result->avant, $id_parent,$boucles, $descr, $result->ligne);
@@ -713,15 +733,15 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 		$result->milieu = public_phraser_html_dist($milieu, $id_boucle,$boucles, $descr, $result->ligne+$b);
 
 		// Prevenir le generateur de code que le squelette est faux
-		if ($msg) $result->type_requete = false;
+		if ($err_b) $result->type_requete = false;
 
 		// Verifier qu'il n'y a pas double definition
 		// apres analyse des sous-parties (pas avant).
 		
 		if (isset($boucles[$id_boucle])) {
-			$msg = array('zbug_erreur_boucle_double',
+			$err_b_d = array('zbug_erreur_boucle_double',
 				 	array('id'=>$id_boucle));
-			erreur_squelette($msg, $result);
+			erreur_squelette($err_b_d, $result);
 		// Prevenir le generateur de code que le squelette est faux
 			$boucles[$id_boucle]->type_requete = false;
 		} else
