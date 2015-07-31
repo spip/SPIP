@@ -480,7 +480,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if ($logo = $chercher_logo($id_auteur, 'id_auteur', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
-				include_spip('inc/filtres_images');
+				include_spip('inc/filtres_images_mini');
 				$logo = image_reduire("<img src='$fid' alt='' />", 48, 48);
 				if ($logo)
 					$titre_boite = "\n<div style='$voir_logo'>$logo</div>$titre_boite" ;
