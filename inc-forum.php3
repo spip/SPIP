@@ -27,8 +27,10 @@ else
 /*******************************/
 
 // fabrique un bouton d'attribut Name $n, d'attribut Value $v et autres $a
-function boutonne($a, $n, $v) {
-     return "\n<input $a name='$n' value=\"$v\" />";
+function boutonne($t, $n, $v, $a) {
+  return "\n<input type='$t'" .
+    (!$n ? '' : " name='$n'") .
+    " value=\"$v\" $a />";
 }
 
 //
@@ -128,18 +130,17 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$url = quote_amp($url);
 
 	return ("<form action='$url' method='post' name='formulaire'>\n$hidden" .
-		boutonne("type='hidden'", 'id_message', $id_message) .
-		boutonne("type='hidden'", 'alea', $alea) .
-		boutonne("type='hidden'", 'hash', $hash) .
+		boutonne('hidden', 'id_message', $id_message) .
+		boutonne('hidden', 'alea', $alea) .
+		boutonne('hidden', 'hash', $hash) .
 		(($afficher_texte == "non") ?
-		 (boutonne("type='hidden'", 'titre', $titre) .
+		 (boutonne('hidden', 'titre', $titre) .
 		  $table .
 		  "\n<br /><div align='right'>" .
-		  boutonne("type='submit' class='spip_bouton'",
-			   'Valider',
-			   _T('forum_valider'). "</div>")) :
+		  boutonne('submit', '', _T('forum_valider'), "class='spip_bouton'") .
+		  "</div>") :
 		 ($previsu . "<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />".
-		  boutonne("type='text' class='forml' size='40'", 'titre', $titre) . "</div>\n<br />"
+		  boutonne('text', 'titre', $titre, "class='forml' size='40'") . "</div>\n<br />"
 		  ."<div class='spip_encadrer'><b>" .
 		  _T('forum_texte') .
 		  "</b>\n<br />" .
@@ -159,33 +160,27 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		  "\n<br />" .
 		  _T('forum_titre') .
 		  "\n<br />" .
-		  boutonne("type='text' class='forml' size='40'",
-			   'nom_site_forum',
-			   entites_html($nom_site_forum)) .
+		  boutonne('text', 'nom_site_forum', entites_html($nom_site_forum), " class='forml' size='40'") .
 		  "\n<br />" .
 		  _T('forum_url') .
 		  "\n<br />" .
-		  boutonne("type='text' class='forml'  size='40'", 
-			   'url_site',
-			   entites_html($url_site)) .
+		  boutonne('text', 'url_site', entites_html($url_site),
+			   " class='forml'  size='40'") . 
 		  "</div>\n<br /><div class='spip_encadrer'>" .
 		  _T('forum_qui_etes_vous') .
 		  "\n<br />" .
 		  _T('forum_votre_nom') .
 		  "\n<br />" .
-		  boutonne("type='text' class='forml' size='40'$disabled",
-			   'auteur',
-			   entites_html($auteur)) .
+		  boutonne('text', 'auteur', entites_html($auteur),
+			   "class='forml' size='40'$disabled") .
 		  "\n<br />" .
 		  _T('forum_votre_email') .
 		  "\n<br />" .
-		  boutonne("type='text' class='forml' size='40'$disabled",
+		  boutonne('text', "class='forml' size='40'$disabled",
 			   'email_auteur',
 			   entites_html($email_auteur)) .
 		  "</div>\n<br /><div align='right'>" .
-		  boutonne("type='submit' class='spip_bouton'",
-			   'Valider',
-			   _T('forum_voir_avant')) . 
+		  boutonne('submit', '',  _T('forum_voir_avant'), "class='spip_bouton'") . 
 		  "</div>\n</form>")));
 }
 
@@ -231,9 +226,8 @@ function table_des_mots($table, $les_mots) {
 				<td width='47%' valign='top'>";
 			}
 
-			$ret .= boutonne("type='$unseul' id='mot$id_mot' "
-			. $les_mots[$id_mot], "ajouter_mot[$id_groupe][]", $id_mot)
-			. afficher_petits_logos_mots($id_mot)
+			$ret .= boutonne($unseul, "ajouter_mot[$id_groupe][]", $id_mot, "id='mot$id_mot' " . $les_mots[$id_mot]) .
+			  afficher_petits_logos_mots($id_mot)
 			. "<b><label for='mot$id_mot'>$titre_mot</label></b><br />";
 
 			if ($descriptif_mot)
@@ -361,8 +355,7 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 
 	// url de reference
 	if (!$url = $GLOBALS['HTTP_GET_VARS']['url']) 
-		$url = $GLOBALS['clean_link']->geturl();
-
+	  $url = $GLOBALS['REQUEST_URI'];
 	// url de retour du forum
 	$retour_forum = $GLOBALS['retour'];
 	if (!$retour_forum)
