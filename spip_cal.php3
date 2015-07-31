@@ -19,16 +19,6 @@ function ligne ($texte) {
 	echo $texte."\n";
 }
 
-function filtrer_ical ($texte) {
-	global $charset;
-	$texte = html2unicode($texte);
-	$texte = unicode2charset(charset2unicode($texte, $charset, 1), 'utf-8');
-	$texte = ereg_replace("\n", " ", $texte);
-	//$texte = ereg_replace("\r", " ", $texte);
-	$texte = ereg_replace(",", "\,", $texte);
-
-	return $texte;
-}
 
 
 if (!$charset = lire_meta('charset')) $charset = 'utf-8';
@@ -53,7 +43,7 @@ if (verifier_low_sec($id_auteur, $cle, 'ical')) {
 }
 
 
-//@header ("content-type:text/calendar");
+@header ("content-type:text/calendar");
 
 
 if ($type == "public") {
@@ -71,9 +61,9 @@ if ($type == "public") {
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:$titre [$nom_site]");
 		ligne ("UID:article$id_article @ $adresse_site");
-				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTSTAMP:".date_ical($date_heure));
+				ligne ("DTSTART:".date_ical($date_heure));
+				ligne ("DTEND:".date_ical($date_heure, 60));
 		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
 		ligne("URL:$adresse_site/spip_redirect.php3?id_article=$id_article");
 		ligne("STATUS:CONFIRMED");
@@ -87,9 +77,9 @@ if ($type == "public") {
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:$titre [$nom_site]");
 		ligne ("UID:breve$id_breve @ $adresse_site");
-				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTSTAMP:".date_ical($date_heure));
+				ligne ("DTSTART:".date_ical($date_heure));
+				ligne ("DTEND:".date_ical($date_heure, 60));
 		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
 		ligne("URL:$adresse_site/spip_redirect.php3?id_breve=$id_breve");
 		ligne("STATUS:CONFIRMED");
@@ -147,9 +137,10 @@ if ($id_utilisateur) {
 			ligne ("SUMMARY:".$titre);
 			ligne ("DESCRIPTION:$texte");
 			ligne ("UID:mess$id_message @ $adresse_site");
-			ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-			ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-			if ($date_heure_fin > $date_heure) ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure_fin),minutes($date_heure_fin),0,mois($date_heure_fin),jour($date_heure_fin),annee($date_heure_fin))));
+				ligne ("DTSTAMP:".date_ical($date_heure));
+				ligne ("DTSTART:".date_ical($date_heure));
+			if ($date_heure_fin > $date_heure) ligne ("DTEND:".date_ical($date_heure_fin));
+
 			ligne ("CATEGORIES:$le_type");
 			ligne("URL:$adresse_site/ecrire/message.php3?id_message=$id_message");
 			
@@ -193,8 +184,8 @@ if ($id_utilisateur) {
 			ligne ("SUMMARY:".$titre);
 			ligne ("DESCRIPTION:$texte");
 			ligne ("UID:mess$id_message @ $adresse_site");
-			ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-			ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTSTAMP:".date_ical($date_heure));
+				ligne ("DTSTART:".date_ical($date_heure));
 			ligne ("CATEGORIES:$le_type");
 			ligne("URL:$adresse_site/ecrire/message.php3?id_message=$id_message");
 			ligne ("END:VTODO");
@@ -269,14 +260,31 @@ if ($id_utilisateur) {
 				$result_auteurs=spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE (lien.id_message='$id_message' AND lien.id_auteur=auteurs.id_auteur)");
 				while($row_auteur=spip_fetch_array($result_auteurs)){
 					$id_auteur=$row_auteur['id_auteur'];
-					$nom_auteur=$row_auteur['nom'];
-					$email = $row_auteur ['email'];
+					$nom_auteur = $row_auteur['nom'];
+					$email = filtrer_ical($row_auteur ['email']);
 					$nom_auteur = filtrer_ical($nom_auteur);
 	
 					if ($id_auteur != $id_utilisateur) $titre = $nom_auteur." - ".$titre;
 					
 					if ($id_auteur == $id_utilisateur) ligne ("ORGANIZER:$nom_auteur <$email>");
 					else  ligne ("ATTENDEE:$nom_auteur <$email>");
+				}
+				$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 0,1";
+				$result_forum = spip_query($query_forum);
+				if ($row_forum = spip_fetch_array($result_forum)) {
+					$date_heure = $row_forum["date_heure"];
+					$texte = filtrer_ical($row_forum["texte"]);
+					$titre = filtrer_ical($row_forum["titre"]);
+					$id_auteur = $row_forum["id_auteur"];
+
+					$result_auteurs2 = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
+					if ($row_auteur2 = spip_fetch_array($result_auteurs2)){
+						$nom_auteur = $row_auteur2['nom'];
+						$email = $row_auteur2 ['email'];
+						$nom_auteur = filtrer_ical($nom_auteur);
+						
+						$titre = $nom_auteur." - ".$titre;
+					}
 				}
 			}
 			else if ($type == 'pb') {
@@ -286,6 +294,8 @@ if ($id_utilisateur) {
 				$le_type = filtrer_ical(_T('info_annonce'));
 				$titre = "[$nom_site] $titre";
 			}
+
+			
 			
 			ligne ("BEGIN:VTODO");
 			ligne ("SUMMARY:".$titre);
