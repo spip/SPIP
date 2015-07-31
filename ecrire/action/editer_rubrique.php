@@ -63,6 +63,15 @@ function insert_rubrique($id_parent) {
 	);
 	
 	$id_rubrique = sql_insertq("spip_rubriques", $champs);
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_rubriques',
+				'id_objet' => $id_rubrique
+			),
+			'data' => $champs
+		)
+	);
 	propager_les_secteurs();
 	calculer_langues_rubriques();
 	return $id_rubrique;

@@ -315,6 +315,7 @@ $spip_pipeline = array(
 	'pre_edition' => '',
 	'post_edition' => '',
 	'pre_insertion' => '',
+	'post_insertion' => '',
 	'pre_syndication' => '',
 	'post_syndication' => '',
 	'pre_indexation' => '',
