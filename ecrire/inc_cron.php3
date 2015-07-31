@@ -75,7 +75,7 @@ function spip_cron($taches=array()) {
 			if ($code_de_retour) {
 				$msg = "cron: $tache";
 				if ($code_de_retour < 0) {
-					@touch($lock, $last);
+					@touch($lock, (0 - $code_de_retour));
 					spip_log($msg . " (en cours, " . spip_timer('tache') .")");
 					spip_timer('tache');
 				}
@@ -168,7 +168,7 @@ function cron_sites($t) {
 function cron_statistiques($t) {
 
 	$ref = calculer_n_referers(100);
-	if ($ref == 100) return -1;
+	if ($ref == 100) return (0 - $t);
 	// Supprimer les referers trop vieux
 	supprimer_referers();
 	supprimer_referers("article");
@@ -184,7 +184,10 @@ function cron_popularites($t) {
 
 function cron_visites($t) {
 	calculer_visites();
-	return 1;
+	// il vaut mieux le lancer peu apres minuit, 
+	// donc on retourne "aujourd'hui a 0h 0m 1s 
+	// pour etre appele demain a cette heure
+	return 0 - strtotime(date("d F Y", time())+1);
 }
 
 function cron_mail($t) {
