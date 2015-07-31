@@ -70,7 +70,7 @@ function inc_afficher_contenu_objet_dist($type, $id,$row = NULL){
 		else {
 			$balise = strtoupper($champ);
 			if (isset($table_des_traitements[$balise])) {
-				$filtre = end($table_des_traitements[$balise]);
+				$filtre = isset($table_des_traitements[$balise][$table])?$table_des_traitements[$balise][$table]:$table_des_traitements[$balise][0];
 				$filtre = str_replace('%s',"'".addslashes($valeur)."'", $filtre);
 				$valeur = eval("return $filtre;");
 			}
