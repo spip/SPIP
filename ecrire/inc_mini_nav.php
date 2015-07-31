@@ -67,7 +67,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 				
 				if ($rub[$i]["enfants"]) {
 					$titre = "<div class='rub-ouverte'>$titre</div>";
-					$onClick = "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id_rubrique=$la_rub&col=".($col+1)."', '".$rac."_col_".($col+1)."', 'slide_horizontal(\'".$rac."_principal\', \'".(($col-1)*150)."\')');";
+					$onClick = "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id_rubrique=$la_rub&col=".($col+1)."', '".$rac."_col_".($col+1)."', 'slide_horizontal(\'".$rac."_principal\', \'".(($col-1)*150)."\', \'$spip_lang_left\')');";
 
 				} else {
 					$onClick = " findObj_forcer('".$rac."_col_".($col+1)."').innerHTML='';";
