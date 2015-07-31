@@ -41,35 +41,18 @@ function creer_base($serveur='') {
 
 	// commencer par cette table qui ne s'occupe pas du champ 'inclus'
 	// les suivantes le changeront comme il faut
-	foreach ($tables_mime as $extension => $type_mime)
+	foreach ($tables_mime as $extension => $type_mime) {
+		if (isset($tables_images[$extension])) {$titre = $tables_images[$extension]; $inclus='image';}
+		elseif (isset($tables_sequences[$extension])) {$titre = $tables_sequences[$extension]; $inclus='embed';}
+		elseif (isset($tables_documents[$extension])) {$titre = $tables_documents[$extension];}
+		else { $titre = '';  $inclus='non';}
 		$freplace('spip_types_documents',
 			  array('mime_type' => $type_mime,
+				'titre' => $titre,
+				'inclus' => $inclus,
 				'extension' => $extension),
 			  $desc, $serveur);
-
-	foreach($tables_images as $k => $v) {
-		$freplace('spip_types_documents',
-			 array('extension' => $k,
-			       'inclus' => 'image',
-			       'titre' => $v),
-			 $desc, $serveur);
 	}
-
-	foreach($tables_sequences as $k => $v)
-		$freplace('spip_types_documents',
-			 array('extension' => $k,
-			       'titre' => $v,
-			       'inclus'=> 'embed'),
-			 $desc, $serveur);
-
-	foreach($tables_documents as $k => $v)
-		$freplace('spip_types_documents',
-			 array('extension' => $k,
-			       'titre' => $v,
-			       'inclus' => 'non'),
-			 $desc, $serveur);
-
-
 }
 
 // http://doc.spip.org/@stripslashes_base
