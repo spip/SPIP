@@ -34,7 +34,15 @@ function exec_upgrade_dist()
 		                  array('connect' => '<tt>'._FILE_CONNECT.'</tt>'))
 		              .generer_form_ecrire('upgrade', "<input type='hidden' name='reinstall' value='non' />", '', _T('bouton_relancer_installation')));
 		echo $r;
-	} else {
+	}
+	elseif (_request('fin')) {
+		include_spip('inc/plugin');
+		actualise_plugins_actifs();
+		include_spip('inc/headers');
+		$res = generer_url_ecrire('admin_plugin','var_mode=recalcul');
+		echo redirige_formulaire($res);
+	}
+	else {
 
 		if (!isset($GLOBALS['meta']['version_installee']))
 			$GLOBALS['meta']['version_installee'] = 0.0;
@@ -63,7 +71,7 @@ function exec_upgrade_dist()
 			// si jamais ils ont change pendant l'upgrade
 			unset($GLOBALS['meta']['alea_ephemere']);
 			unset($GLOBALS['meta']['alea_ephemere_ancien']);
-			$res = redirige_action_auteur('purger', 'cache', 'admin_plugin', 'var_mode=recalcul', true);
+			$res = redirige_action_auteur('purger', 'cache', 'upgrade', 'fin=oui', true);
 			echo redirige_formulaire($res);
 		}
 	}
