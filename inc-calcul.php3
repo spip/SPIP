@@ -152,6 +152,11 @@ function calculer_contexte() {
 		if (!eregi("^(recalcul|submit|var_.*)$", $var))
 			$contexte[$var] = $val;
 	}
+	foreach($GLOBALS['HTTP_POST_VARS'] as $var => $val) {
+		if (!eregi("^(recalcul|submit|var_.*)$", $var))
+			$contexte[$var] = $val;
+	}
+
 	if ($GLOBALS['date'])
 		$contexte['date'] = $contexte['date_redac'] = date($GLOBALS['date']);
 	else
