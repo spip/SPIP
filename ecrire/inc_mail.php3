@@ -71,8 +71,9 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		return false;
 	case 'online':
 		return @email('webmaster', $email, $sujet, $texte);
-	case 'nexenservices':
-		return @email($email, $sujet, $texte, $headers);
+//	nexen annonce la fin de ses particularismes (23/01/2003)
+//	case 'nexenservices':
+//		return @email($email, $sujet, $texte, $headers);
 	default:
 		return @mail($email, $sujet, $texte, $headers);
 	}
