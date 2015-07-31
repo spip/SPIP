@@ -59,7 +59,7 @@ else {
 			$champs_extra = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
 		} 
 		spip_query("UPDATE spip_rubriques SET " .
-(acces_rubrique($id_parent) ? "id_parent=\"$id_parent\"," : "") . "
+(acces_rubrique($id_parent) ? "id_parent='$id_parent'," : "") . "
 titre='" . addslashes($titre) ."',
 descriptif='" . addslashes($descriptif) . "',
 texte='" . addslashes($texte) . "'
@@ -390,7 +390,7 @@ if ($relief) {
 
 if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 	afficher_articles(_T('info_tous_articles_en_redaction'),
-		"WHERE statut=\"prepa\" AND id_rubrique='$id_rubrique' ORDER BY date DESC");
+		"WHERE statut='prepa' AND id_rubrique='$id_rubrique' ORDER BY date DESC");
 }
 
 
@@ -398,7 +398,7 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 /////////////////////////
 
 afficher_articles(_T('info_tous_articles_presents'),
-	"WHERE statut=\"publie\" AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
+	"WHERE statut='publie' AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
 
 if ($id_rubrique > 0){
 	echo "<div align='$spip_lang_right'>";
