@@ -19,11 +19,11 @@ function exec_meme_rubrique_dist()
 {
 	$id = intval(_request('id'));
 	$type = _request('type');
-	$date = _request('date');
+	$order = _request('order');
 
         if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
         OR (!acces_rubrique($id))
-	OR (!preg_match('/^[\w_-]+$/',$date))
+	OR (!preg_match('/^[\w_-]+$/',$order))
 	OR (!preg_match('/^[\w_-]+$/',$type))) {
                 include_spip('inc/minipres');
                 echo minipres();
@@ -31,7 +31,7 @@ function exec_meme_rubrique_dist()
         }
 
 	// on connait pas le vrai 2e arg mais c'est pas dramatique
-	$res = meme_rubrique($id, 0, $type, $date, 30, true);
+	$res = meme_rubrique($id, 0, $type, $order, NULL, true);
 	ajax_retour($res);
 }
 ?>

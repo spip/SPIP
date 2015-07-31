@@ -33,6 +33,6 @@ function action_instituer_rubrique_breves_dist() {
 		revisions_breves($row['id']);
 	}
 
-	redirige_par_entete(generer_url_ecrire('meme_rubrique', "id=$id&type=breve&date=date_heure", true));
+	redirige_par_entete(generer_url_ecrire('meme_rubrique', "id=$id&type=breve&order=date_heure", true));
 }
 ?>
