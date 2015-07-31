@@ -10,11 +10,14 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Utilitaires indispensables autour du serveur Http.
+ *
+ * @package SPIP\Core\Utilitaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Utilitaires indispensables autour du serveur Http.
-//
 
 /**
  * charge un fichier perso ou, a defaut, standard
@@ -168,21 +171,32 @@ function pipeline($action, $val=null) {
 }
 
 /**
- * Enregistrement des evenements
- * spip_log($message)
- * spip_log($message,'recherche')
- * spip_log($message,_LOG_DEBUG)
- * spip_log($message,'recherche.'._LOG_DEBUG)
- *  cette derniere notation est controversee mais le 3eme
- *  parametre est plante pour cause de compat ascendante.
- * le niveau par defaut est _LOG_INFO
+ * Enregistrement des événements
+ *
+ * Signature : `spip_log(message[,niveau|type|type.niveau])`
+ *
+ * Le niveau de log par défaut est la valeur de la constante `_LOG_INFO`
  * 
- * http://doc.spip.org/@spip_log
+ * @example
+ *   ```
+ *   spip_log($message)
+ *   spip_log($message,'recherche')
+ *   spip_log($message,_LOG_DEBUG)
+ *   spip_log($message,'recherche.'._LOG_DEBUG)
+ *   ```
+ * 
+ * @link http://doc.spip.org/@spip_log
+ * @see inc_log_dist()
  *
  * @param string $message
+ *     Message à loger
  * @param string|int $name
- * @param string $logdir  ## inutile !! a supprimer ?
- * @param string $logsuf  ## inutile !! a supprimer ?
+ *     
+ *     - int indique le niveau de log, tel que `_LOG_DEBUG`
+ *     - string indique le type de log
+ *     - `string.int` indique les 2 éléments.
+ *     Cette dernière notation est controversée mais le 3ème
+ *     paramètre est planté pour cause de compat ascendante.
  */
 function spip_log($message=NULL, $name=NULL) {
 	static $pre = array();
@@ -695,15 +709,18 @@ function job_queue_link($id_job,$objets){
 
 /**
  * Renvoyer le temps de repos restant jusqu'au prochain job
- * 0 si un job est a traiter
- * null si la queue n'est pas encore initialise
- * $force est utilisee par queue_set_next_job_time() pour maj la valeur
- *  - si true, force la relecture depuis le fichier
- *  - si int, affecte la static directement avec la valeur
- *
+ * 
  * @staticvar int $queue_next_job_time
- * @param int/bool $force_next
+ * @see queue_set_next_job_time()
+ * @param int|bool $force
+ *    Utilisée par `queue_set_next_job_time()` pour mettre à jour la valeur :
+ * 
+ *    - si `true`, force la relecture depuis le fichier
+ *    - si int, affecte la static directement avec la valeur
  * @return int
+ *
+ *  - `0` si un job est à traiter
+ *  - `null` si la queue n'est pas encore initialisée
  */
 function queue_sleep_time_to_next_job($force=null) {
 	static $queue_next_job_time = -1;
@@ -883,12 +900,26 @@ function find_in_theme($file, $subdir='', $include=false){
 	return $themefiles["$subdir$file"] = "";
 }
 
-// Cherche une image dans les dossiers images
-// gere le renommage des icones de facon temporaire (le temps de la migration)
-// definis par _NOM_IMG_PACK et _DIR_IMG_PACK
-// peut se trouver dans un dossier plugin, donc on passe par un find_in_path si elle n'est pas
-// dans _DIR_IMG_PACK
-// http://doc.spip.org/@chemin_image
+
+/**
+ * Cherche une image dans les dossiers d'images
+ *
+ * Cherche en priorité dans les thèmes d'image (prive/themes/X/images)
+ * et si la fonction n'en trouve pas, gère le renommage des icones (ex: 'supprimer' => 'del')
+ * de facon temporaire le temps de la migration, et cherche de nouveau.
+ *
+ * Si l'image n'est toujours pas trouvée, on la cherche dans les chemins,
+ * dans le répertoire défini par la constante `_NOM_IMG_PACK` 
+ *
+ * @see find_in_theme()
+ * @see inc_icone_renommer_dist()
+ * 
+ * @param string $icone
+ *     Nom de l'icone cherchée
+ * @return string
+ *     Chemin complet de l'icone depuis la racine si l'icone est trouée,
+ *     sinon chaîne vide.
+**/
 function chemin_image($icone){
 	static $icone_renommer;
 	// gerer le cas d'un double appel en evitant de refaire le travail inutilement

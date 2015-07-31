@@ -74,7 +74,23 @@ function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_CHARSET_dist
+
+/**
+ * Compile la balise `#CHARSET` qui retourne le nom du jeu de caractères
+ * utilisé par le site tel que `utf-8`
+ *
+ * @balise CHARSET
+ * @link http://www.spip.net/4331
+ * @example
+ *     ```
+ *     <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_CHARSET_dist($p) {
 	$p->code = "\$GLOBALS['meta']['charset']";
 	#$p->interdire_scripts = true;
@@ -230,7 +246,20 @@ function balise_RECHERCHE_dist($p) {
 	return $p;
 }
 
-// http://doc.spip.org/@balise_COMPTEUR_BOUCLE_dist
+
+/**
+ * Compile la balise `#COMPTEUR_BOUCLE` qui retourne le numéro de l’itération
+ * actuelle de la boucle
+ *
+ * @balise COMPTEUR_BOUCLE
+ * @link http://www.spip.net/4333
+ * @see balise_TOTAL_BOUCLE_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
@@ -246,7 +275,20 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 	}
 }
 
-// http://doc.spip.org/@balise_TOTAL_BOUCLE_dist
+/**
+ * Compile la balise `#TOTAL_BOUCLE` qui retourne le nombre de résultats
+ * affichés par la boucle
+ *
+ * @balise TOTAL_BOUCLE
+ * @link http://www.spip.net/4334
+ * @see balise_COMPTEUR_BOUCLE_dist()
+ * @see balise_GRAND_TOTAL_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
@@ -721,9 +763,23 @@ function balise_ANCRE_PAGINATION_dist($p) {
 	else return NULL; // ou une erreur ?
 }
 
-// equivalent a #TOTAL_BOUCLE sauf pour les boucles paginees, ou elle
-// indique le nombre total d'articles repondant aux criteres hors pagination
-// http://doc.spip.org/@balise_GRAND_TOTAL_dist
+
+/**
+ * Compile la balise `#GRAND_TOTAL` qui retourne le nombre total de résultats
+ * d'une boucle
+ *
+ * Cette balise set équivalente à `#TOTAL_BOUCLE` sauf pour les boucles paginées.
+ * Dans ce cas elle indique le nombre total d'éléments répondant aux critères
+ * hors pagination.
+ *
+ * @balise GRAND_TOTAL
+ * @see balise_GRAND_TOTAL_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_GRAND_TOTAL_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
@@ -752,10 +808,29 @@ function balise_SELF_dist($p) {
 	return $p;
 }
 
-//
-// #CHEMIN{fichier} -> find_in_path(fichier)
-//
-// http://doc.spip.org/@balise_CHEMIN_dist
+
+/**
+ * Compile la balise `#CHEMIN` qui cherche un fichier dans les chemins
+ * connus de SPIP et retourne son chemin complet depuis la racine
+ *
+ * Signature : `#CHEMIN{chemin/vers/fichier.ext}`
+ *
+ * Retourne une chaîne vide si le fichier n'est pas trouvé.
+ * 
+ * @balise CHEMIN
+ * @link http://www.spip.net/4332
+ * @see find_in_path() Recherche de chemin
+ * @example
+ *     ```
+ *     [<script type="text/javascript" src="(#CHEMIN{javascript/jquery.flot.js})"></script>]
+ *     [<link rel="stylesheet" href="(#CHEMIN{css/perso.css}|direction_css)" type="text/css" />]
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_CHEMIN_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
@@ -768,6 +843,27 @@ function balise_CHEMIN_dist($p) {
 	return $p;
 }
 
+/**
+ * Compile la balise `#CHEMIN_IMAGE` qui cherche une image dans le thème
+ * de l'espace privé utilisé par SPIP et retourne son chemin complet depuis
+ * la racine
+ * 
+ * Signature : `#CHEMIN_IMAGE{image.png}`
+ *
+ * Retourne une chaîne vide si le fichier n'est pas trouvé.
+ * 
+ * @balise CHEMIN_IMAGE
+ * @see chemin_image()
+ * @example
+ *     ```
+ *     #CHEMIN_IMAGE{article-24.png}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_CHEMIN_IMAGE_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
@@ -958,11 +1054,31 @@ function balise_EVAL_dist($p) {
 	return $p;
 }
 
-// #CHAMP_SQL{x} renvoie la valeur du champ sql 'x'
-// permet de recuperer par exemple un champ notes dans une table sql externe
-// (impossible via #NOTES qui est une balise calculee)
-// ne permet pas de passer une expression pour x qui ne peut etre qu'un texte statique !
-// http://doc.spip.org/@balise_CHAMP_SQL_dist
+
+/**
+ * Compile la balise `#CHAMP_SQL` qui renvoie la valeur d'un champ SQL
+ *
+ * Signature : `#CHAMP_SQL{champ}`
+ *
+ * Cette balise permet de récupérer par exemple un champ `notes` dans une table
+ * SQL externe (impossible avec la balise `#NOTES` qui est une balise calculée).
+ *
+ * Ne permet pas de passer une expression comme argument, qui ne peut
+ * être qu'un texte statique !
+ *
+ * @balise CHAMP_SQL
+ * @link http://www.spip.net/4041
+ * @see champ_sql()
+ * @example
+ *     ```
+ *     #CHAMP_SQL{notes}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_CHAMP_SQL_dist($p){
 
 	if ($p->param
@@ -1041,17 +1157,37 @@ function balise_FILTRE_dist($p) {
 	}
 }
 
-//
-// #CACHE
-// definit la duree de vie ($delais) du squelette
-// #CACHE{24*3600}
-// parametre(s) supplementaire(s) :
-// #CACHE{24*3600, cache-client} autorise gestion du IF_MODIFIED_SINCE
-// #CACHE{24*3600, statique} ne respecte pas l'invalidation par modif de la base
-//  (mais s'invalide tout de meme a l'expiration du delai)
-//  par defaut cache-client => statique
-//  cf. ecrire/public/cacher.php
-// http://doc.spip.org/@balise_CACHE_dist
+
+/**
+ * Compile la balise `#CACHE` definissant la durée de validité du cache du squelette
+ *
+ * Signature : `#CACHE{duree[,type]}`
+ *
+ * Le premier argument est la durée en seconde du cache. Le second
+ * (par défaut `statique`) indique le type de cache :
+ *
+ * - `cache-client` autorise gestion du IF_MODIFIED_SINCE
+ * - `statique` ne respecte pas l'invalidation par modif de la base
+ *   (mais s'invalide tout de même à l'expiration du delai)
+ *
+ * @balise CACHE
+ * @see ecrire/public/cacher.php
+ * @link http://www.spip.net/4330
+ * @example
+ *     ```
+ *     #CACHE{24*3600}
+ *     #CACHE{24*3600, cache-client}
+ *     #CACHE{0} pas de cache
+ *     ```
+ * @note
+ *   En absence de cette balise la durée est du cache est donné
+ *   par la constante `_DUREE_CACHE_DEFAUT`
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_CACHE_dist($p) {
 
 	if ($p->param) {
@@ -1458,6 +1594,8 @@ function balise_LISTE_dist($p) {
  * sinon une chaine vide '' (l'action n'est pas autorisée).
  *
  * Cette balise créée un cache par session.
+ *
+ * Signature : `#AUTORISER{faire[,type[,id[,auteur[,options]]]}`
  * 
  * @note
  *     La priorité des opérateurs exige && plutot que AND
@@ -1508,7 +1646,7 @@ function balise_PLUGIN_dist($p) {
  * Compile la balise `#AIDER` qui permet d’afficher l’icone de l’aide
  * au sein des squelettes.
  *
- * @balise ACTION_FORMULAIRE
+ * @balise AIDER
  * @see inc_aider_dist()
  * @link http://www.spip.net/4733
  * @example

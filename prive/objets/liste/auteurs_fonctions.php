@@ -10,7 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
+/**
+ * Fonctions spécifiques au squelette
+ *
+ * @package SPIP\Core\Fonctions
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
@@ -41,12 +45,20 @@ function critere_compteur_articles_filtres_dist($idb, &$boucles, $crit, $left=fa
 	$boucle->select[]= "COUNT(articles.id_article) AS compteur_articles";
 	$boucle->group[] = 'auteurs.id_auteur';
 }
+
 /**
- * Compter les articles publies lies a un auteur, dans une boucle auteurs
- * pour la vue prive/liste/auteurs.html
+ * Compter les articles publiés liés à un auteur, dans une boucle auteurs
+ * pour la vue `prive/liste/auteurs.html`
  *
- * @param <type> $p
- * @return <type>
+ * Nécessite le critère `compteur_articles_filtres`
+ * 
+ * @balise COMPTEUR_ARTICLES
+ * @see critere_compteur_articles_filtres_dist()
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
  */
 function balise_COMPTEUR_ARTICLES_dist($p) {
 	return rindex_pile($p, 'compteur_articles', 'compteur_articles_filtres');
@@ -56,8 +68,8 @@ function balise_COMPTEUR_ARTICLES_dist($p) {
 /**
  * Calculer l'initiale d'un nom
  *
- * @param <type> $nom
- * @return <type>
+ * @param string $nom
+ * @return string L'initiale en majuscule
  */
 function initiale($nom){
 	return spip_substr(trim(strtoupper($nom)),0,1);
