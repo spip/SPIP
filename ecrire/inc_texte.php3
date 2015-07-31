@@ -15,12 +15,8 @@ include_ecrire("inc_filtres.php3");
 // Par securite ne pas accepter les variables passees par l'utilisateur
 //
 function tester_variable($nom_var, $val){
-	if (!isset($GLOBALS[$nom_var])
-		OR $_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]
-		OR $_PUT[$nom_var] OR $GLOBALS['HTTP_PUT_VARS'][$nom_var]
-		OR $_POST[$nom_var] OR $GLOBALS['HTTP_POST_VARS'][$nom_var]
-		OR $_COOKIE[$nom_var] OR $GLOBALS['HTTP_COOKIE_VARS'][$nom_var]
-		OR $_REQUEST[$nom_var]) {
+	global $INSECURE;
+	if (!isset($GLOBALS[$nom_var]) || $INSECURE[$nom_var]) {
 		$GLOBALS[$nom_var] = $val;
 		return false;
 	}
@@ -127,7 +123,7 @@ function spip_apres_typo ($letexte) {
 
 
 // Mise de cote des echappements
-function echappe_html($letexte, $source, $no_transform=false) {
+function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	global $flag_pcre;
 
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
@@ -250,7 +246,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 }
 
 // Traitement final des echappements
-function echappe_retour($letexte, $les_echap, $source) {
+function echappe_retour($letexte, $les_echap, $source='') {
 	while (ereg("@@SPIP_$source([0-9]+)@@", $letexte, $match)) {
 		$lenum = $match[1];
 		$cherche = $match[0];
@@ -955,8 +951,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
-function propre($letexte) {
-	return interdire_scripts(traiter_raccourcis(trim($letexte)));
+function propre($letexte, $echap=false) {
+	return interdire_scripts(traiter_raccourcis(trim($letexte), $echap));
 //	$a=time(); $b=microtime();
 //	interdire_scripts(traiter_raccourcis(trim($letexte)));
 //	return time()-$a + microtime()-$b;

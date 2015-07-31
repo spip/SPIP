@@ -1250,6 +1250,12 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $mode;
 	global $connect_statut, $connect_toutes_rubriques;
 	global $browser_name, $browser_version, $browser_rev;
+
+	// hack pour compatibilite spip-lab
+	if (strpos($rubrique, 'script>')) {
+		$code = $rubrique;
+		$rubrique = '';
+	}
 	
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
@@ -1279,6 +1285,8 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	$link->addVar('left', $GLOBALS['spip_lang_left']);
 	$link->addVar('right', $GLOBALS['spip_lang_right']);
 	echo $link->getUrl()."\">\n";
+
+	if ($code) echo $code."\n";
 
 	afficher_script_layer();
 ?>
@@ -1857,7 +1865,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		return $icone;
 }
 
-function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true) {
+function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true, $javascript='') {
 	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
 
 	$retour = '';
@@ -1867,7 +1875,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 
 	if ($danger) $retour .= "<div class='danger'>";
 	if ($spip_display != 1) {
-		$retour .= "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
+		$retour .= "<a href='$lien' class='cellule-h' $javascript><table cellpadding='0' valign='middle'><tr>\n";
 		$retour .= "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\") center center no-repeat;' src='img_pack/$fonction' alt=''></div></a></td>\n";
 		$retour .= "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
 		$retour .= "</tr></table></a>\n";

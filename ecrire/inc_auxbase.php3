@@ -289,6 +289,25 @@ $spip_caches_key = array(
 		"KEY fichier" => "fichier",
 		"KEY id" => "id");
 
+$spip_ortho_cache = array(
+	"lang" => "VARCHAR(10) NOT NULL",
+	"mot" => "VARCHAR(255) BINARY NOT NULL",
+	"ok" => "TINYINT NOT NULL",
+	"suggest" => "BLOB NOT NULL",
+	"maj" => "TIMESTAMP");
+$spip_ortho_cache_key = array(
+	"PRIMARY KEY" => "lang, mot",
+	"KEY maj" => "maj");
+
+$spip_ortho_dico = array(
+	"lang" => "VARCHAR(10) NOT NULL",
+	"mot" => "VARCHAR(255) BINARY NOT NULL",
+	"id_auteur" => "BIGINT UNSIGNED NOT NULL",
+	"maj" => "TIMESTAMP");
+$spip_ortho_dico_key = array(
+	"PRIMARY KEY" => "lang, mot",);
+
+
 global $tables_auxiliaires;
 
 $tables_auxiliaires  = 
@@ -354,7 +373,11 @@ $tables_auxiliaires  =
 	'versions_fragments'	=> array('field' => &$spip_versions_fragments,
 					 'key' => &$spip_versions_fragments_key),
 	'caches'	=> array('field' => &$spip_caches,
-					 'key' => &$spip_caches_key)
+					 'key' => &$spip_caches_key),
+	'ortho_cache'	=> array('field' => &$spip_ortho_cache,
+					 'key' => &$spip_ortho_cache_key),
+	'ortho_dico'	=> array('field' => &$spip_ortho_dico,
+					 'key' => &$spip_ortho_dico_key)
 	);
 
 ?>
