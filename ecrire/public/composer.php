@@ -324,23 +324,23 @@ function table_from_primary($id) {
 
 // fonction appelee par la balise #LOGO_DOCUMENT
 function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params) {
+
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
-	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('spip_documents AS documents'), array("id_document = $id_document"))))
+	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('spip_documents'), array("id_document = $id_document"))))
 		// pas de document. Ne devrait pas arriver
 		return ''; 
 
 	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
-
 	// Lien par defaut = l'adresse du document
 	## if (!$lien) $lien = $fichier;
 
 	// Y a t il une vignette personnalisee ?
 	if ($id_vignette) {
 		if ($res = spip_abstract_select(array('fichier'),
-		array('spip_documents AS documents'),
-		array("id_document = $id_vignette"))) {
+				array('spip_documents'),
+				array("id_document = $id_vignette"))) {
 			list($vignette) = spip_abstract_fetch($res);
 			if (@file_exists($vignette))
 				$logo = generer_url_document($id_vignette);
@@ -367,7 +367,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		// Retrouver l'extension
 		list($extension) =
 			spip_abstract_fetch(spip_abstract_select(array('extension'),
-			array('spip_types_documents AS documents'),
+			array('spip_types_documents'),
 			array("id_type = " . intval($id_type))));
 		if (!$extension) $extension = 'txt';
 
