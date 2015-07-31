@@ -61,7 +61,10 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		  ."</td></tr>\n";
 		$anc .= "<a  title='"
 		  .  textebrut($err[0])
-		  . "' href='#req$i'>$i</a> ";
+		  . "' href='#req$i'><tt>"
+		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
+		  . "</tt></a>"
+		  . (($i % 50) ? '' : "<br />\n");
 		$i++;
 		
 	}
@@ -73,7 +76,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	. ($message ? $message : _T('zbug_erreur_squelette'))
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-	. "<br />$anc<br /></th></tr>"
+	. "<p style='text-align: left'>$anc</p></th></tr>"
 	. $res
 	. "</table>";
 }
@@ -84,14 +87,14 @@ function chrono_requete($temps)
 	$res = _DIR_RESTREINT ? '' :
 		affiche_erreurs_page($GLOBALS['tableau_des_erreurs']);
 
+	$t = $q = $n = array();
 	foreach ($temps as $key => $row) {
 		list($dt, $nb, $boucle, $req, $explain, $r) = $row;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-		$temps[$key] = array("$boucle<br />" . 
-				     _T('zbug_profile', array('time'=> "<br />
-$dt")) .
-				     "<br />Rang: $nb<br />Resultat: $r",
+		$temps[$key] = array($boucle . ' (' . @++$n[$boucle] . ")<br />" . 
+				     _T('zbug_profile', array('time'=> "<br />$dt")) .
+				     "<br />Chronologie: $nb<br />Resultat: $r",
 				     $req,
 				     $explain);
 	}
