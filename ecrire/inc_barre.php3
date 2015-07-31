@@ -1,0 +1,31 @@
+<?php
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+//
+// Ce fichier ne sera execute qu'une fois
+if (defined("_INC_BARRE")) return;
+define("_INC_BARRE", "1");
+
+function afficher_barre($champ, $forum=false) {
+	global $barre_typo;
+	tester_variable("barre_typo", "spip");
+	if($barre_typo != '' &&  file_exists(_DIR_RESTREINT."inc_barre_$barre_typo.php3")) {
+		include_ecrire("inc_barre_$barre_typo.php3");
+		$f = "afficher_barre_$barre_typo";
+		if(function_exists($f)) {
+			return $f($champ, $forum);
+		}
+	}
+	return "";
+}
+
+?>
