@@ -355,7 +355,7 @@ sera rexeitada):
 Gracias pola t&uacute;a participaci&oacute;n
 ',
 'form_pet_message_commentaire' => 'Algunha mensaxe, un comentario?',
-'form_pet_nom_site2' => '<B>Nome do seu Web',
+'form_pet_nom_site2' => 'Nome do seu Web',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as sinaturas foron suspendidas temporalmente.',
 'form_pet_signature_pasprise' => 'A t&uacute;a sinatura non foi tida en conta.',
 'form_pet_signature_validee' => 'A s&uacute;a sinatura foi validada. Aparecer&aacute; na seguinte actualizaci&oacute;n da p&aacute;xina. Deus llo pague!',
