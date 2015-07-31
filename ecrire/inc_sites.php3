@@ -824,7 +824,7 @@ function analyser_backend($rss, $url_syndic='') {
 		$data['date'] = $la_date;
 
 		// Honorer le <lastbuilddate> en forcant la date
-		if (preg_match(',<(lastbuilddate|modified)>([^<>]+)</\1>,i',
+		if (preg_match(',<(lastbuilddate|updated|modified)>([^<>]+)</\1>,i',
 		$item, $regs)
 		AND $lastbuilddate = my_strtotime(trim($regs[2]))
 		// pas dans le futur
