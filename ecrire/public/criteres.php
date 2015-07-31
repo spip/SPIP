@@ -158,7 +158,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	else
 		$quoi = '@$Pile[0]["recherche"]';
 
-	$boucle->hash = '
+	$boucle->hash .= '
 	// RECHERCHE
 	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
 	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '");
