@@ -109,11 +109,17 @@ Zhen QIN (zhen_q@21cn.com)',
 	'date_demain' => '明天',
 	'date_fmt_heures_minutes' => '@h@:@m@',
 	'date_fmt_heures_minutes_court' => '@h@h@m@', # NEW
+	'date_fmt_jour' => '@nomjour@ @jour@', # NEW
 	'date_fmt_jour_heure' => '@jour@@heure@时',
+	'date_fmt_jour_heure_debut_fin' => 'le @jour@ de @heure_debut@ à @heure_fin@', # NEW
+	'date_fmt_jour_heure_debut_fin_abbr' => 'le @dtstart@@jour@ de @heure_debut@@dtabbr@ à @dtstart@@heure_fin@@dtend@', # NEW
 	'date_fmt_jour_mois' => '@nommois@@jour@日',
 	'date_fmt_jour_mois_annee' => '@annee@年@nommois@@jour@日',
 	'date_fmt_mois_annee' => '@annee@年@nommois@',
+	'date_fmt_nomjour' => '@nomjour@ @date@', # NEW
 	'date_fmt_nomjour_date' => '@nomjour@ 日@date@',
+	'date_fmt_periode' => 'Du @date_debut@ au @date_fin@', # NEW
+	'date_fmt_periode_abbr' => 'Du @dtart@@date_debut@@dtabbr@ au @dtend@@date_fin@@dtabbr@', # NEW
 	'date_fmt_periode_from' => 'Du', # NEW
 	'date_fmt_periode_to' => 'au', # NEW
 	'date_heures' => '小时',
