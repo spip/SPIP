@@ -246,9 +246,10 @@ function _sqlite_func_unix_timestamp($d) {
 	//2005-12-02 20:53:53
 	#spip_log("Passage avec UNIX_TIMESTAMP : $d",'debug');
 	// mktime ( [int hour [, int minute [, int second [, int month [, int day [, int year [, int is_dst]]]]]]] )
-    if (!$d) return mktime();
-    preg_match(";^([0-9]{4})-([0-9]+)-([0-9]+) ([0-9]+):([0-9]+):([0-9]+).*$;", $d, $f);
-    return mktime($f[4],$f[5],$f[6],$f[2],$f[3],$f[1]);
+	if (!$d) return mktime();
+	return strtotime($d);
+	#preg_match(";^([0-9]{4})-([0-9]+)-([0-9]+)\s*(?:([0-9]+)(?::([0-9]+)(?::([0-9]+))?)?)?;", $d, $f);
+	#return mktime($f[4],$f[5],$f[6],$f[2],$f[3],$f[1]);
 }
 
 
