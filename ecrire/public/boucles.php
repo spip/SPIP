@@ -48,7 +48,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['criteres']['statut'])) {
 		if (!$GLOBALS['var_preview']) {
 			if ($GLOBALS['meta']["post_dates"] == 'non')
-				array_unshift($boucle->where,array("'<'", "'$id_table" . ".date'", "sql_quote(quete_date_postdates())"));
+				array_unshift($boucle->where,"quete_condition_postdates('$id_table.date')");
 			array_unshift($boucle->where,array("'='", "'$mstatut'", "'\\'publie\\''"));
 		} else
 			array_unshift($boucle->where,array("'IN'", "'$mstatut'", "'(\\'publie\\',\\'prop\\')'"));
@@ -78,8 +78,7 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 			array_unshift($boucle->where,
 				array("'='", "'$t.statut'", "'\\'publie\\''"));
 			if ($GLOBALS['meta']['post_dates'] == 'non')
-				array_unshift($boucle->where,
-					array("'<='", "'$t.date'", "sql_quote(quete_date_postdates())"));
+				array_unshift($boucle->where, "quete_condition_postdates('$t.date')");
 		}
 		// pas d'auteurs poubellises
 		array_unshift($boucle->where,array("'!='", "'$mstatut'", "'\\'5poubelle\\''"));
@@ -159,7 +158,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 			.")'");
 		} else {
 			$postdates = ($GLOBALS['meta']['post_dates'] == 'non')
-				? ' AND aa.date<=\'.sql_quote(quete_date_postdates()).\''
+				? ' AND \'.quete_condition_postdates(\'aa.date\').\''
 				: '';
 			array_unshift($boucle->where,"'((aa.statut = \'publie\'$postdates) OR bb.statut = \'publie\' OR rr.statut = \'publie\'"
 			.(test_plugin_actif('forum')? " OR ff.statut=\'publie\'":"")
