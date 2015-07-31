@@ -11,7 +11,7 @@ $balise_MENU_LANG_ECRIRE_collecte = array('menu_lang');
 function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
 	global $all_langs;
 	include_ecrire('inc_lang.php3');
-	if (!strpos($all_langs,',')) return '';
+	if (strpos($all_langs,',') === false) return '';
 	return $args;
 }
 
