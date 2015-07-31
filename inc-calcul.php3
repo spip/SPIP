@@ -419,7 +419,7 @@ function chercher_squelette_hierarchie($fond, $id_rubrique, $dossier='') {
 	}
 }
 
-function chercher_squelette($fond, $id_rubrique) {
+function chercher_squelette($fond, $id_rubrique, $lang='') {
 	global $dossier_squelettes;
 
 	// prendre en compte le bon repertoire (pas grave si on a deux / dans l'arborescence)
@@ -428,11 +428,22 @@ function chercher_squelette($fond, $id_rubrique) {
 	// On selectionne, dans l'ordre :
 	// fond=10.html, fond-10.html, fond-<rubriques parentes>.html, fond.html puis fond-dist.html
 	if (($id_rubrique > 0) AND (@file_exists("$dossier$fond=$id_rubrique.html"))) {
-		return "$dossier$fond=$id_rubrique";
+		$squel = "$dossier$fond=$id_rubrique";
 	}
 	else {
-		return chercher_squelette_hierarchie($fond, $id_rubrique, $dossier); // recursif le long de la hierarchie
+		// recursif le long de la hierarchie
+		$squel = chercher_squelette_hierarchie($fond, $id_rubrique, $dossier); 
 	}
+
+
+	// affiner par langue
+	if ($lang == '')
+		$lang = lire_meta('langue_site');
+
+	if (@file_exists("$squel.$lang.html"))
+		$squel = "$squel.$lang";
+
+	return $squel;
 }
 
 
@@ -476,7 +487,7 @@ function calculer_page_globale($fond) {
 	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
-		'id_mot', 'id_groupe', 'id_document', 'lang');
+		'id_mot', 'id_groupe', 'id_document');
 	reset($contexte_defaut);
 	while (list(, $val) = each($contexte_defaut)) {
 		if ($GLOBALS[$val]) {
@@ -488,6 +499,10 @@ function calculer_page_globale($fond) {
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
+	if (eregi("[a-z_]+",$GLOBALS['lang'], $regs) AND (substr(",".$regs[0].",", "-,".lire_meta('langues_utilisees').","))) {
+		$contexte['lang'] = $regs[0];
+		lang_select($regs[0]);
+	}
 
 	// Analyser les URLs personnalisees (inc-urls-...)
 	recuperer_parametres_url($fond, $fichier_requete);
@@ -524,15 +539,12 @@ function calculer_page_globale($fond) {
 	else {
 		$id_rubrique_fond = 0;
 	}
+	// selectionner la langue & affiner le squelette
 	if ($contexte['lang'])
 		$lang = $contexte['lang'];	// si inc-urls veut fixer la langue
-
-	$fond = chercher_squelette($fond, $id_rubrique_fond);
-
-	// selectionner la langue & affiner le squelette
 	lang_select($lang);
-	if (@file_exists("$fond.$lang.html"))
-		$fond = "$fond.$lang";
+
+	$fond = chercher_squelette($fond, $id_rubrique_fond, $lang);
 
 	// Special stats et boutons admin
 	reset($contexte_defaut);

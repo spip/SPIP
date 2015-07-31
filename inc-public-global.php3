@@ -25,7 +25,8 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	$fichier_requete = $fond;
 	if (is_array($contexte_inclus)) {
 		reset($contexte_inclus);
-		while(list($key, $val) = each($contexte_inclus)) $fichier_requete .= '&'.$key.'='.$val;
+		while(list($key, $val) = each($contexte_inclus))
+			$fichier_requete .= '&'.$key.'='.$val;
 	}
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
 	$chemin_cache = "CACHE/$fichier_cache";
@@ -35,7 +36,8 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	if (!$use_cache) {
 		include_local("inc-calcul.php3");
 		$timer_a = explode(" ", microtime());
-		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
+
+		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique'], $contexte_inclus['lang']);
 		$page = calculer_page($fond, $contexte_inclus);
 		$timer_b = explode(" ", microtime());
 		if ($page) {

@@ -1090,7 +1090,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'LANG':
-		$code = "lire_meta('langue_site')";
+		$code = "\$GLOBALS['spip_lang']";
 		break;
 
 	case 'LANG_LEFT':
@@ -1788,7 +1788,6 @@ function calculer_texte($texte)
 		$fichier = $match[2];
 		ereg('^\\{(.*)\\}$', trim($match[3]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
-		$code .= "	\$retour .= 'include_ecrire(\'inc_lang.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
 		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
 		if ($params) {
@@ -1799,13 +1798,24 @@ function calculer_texte($texte)
 				if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
 					$var = $args[1];
 					$val = $args[3];
-					if ($val)
+
+					// cas de la langue
+					if ($var == 'lang') {
+						$lang_inclus = "\\'".addslashes($val)."\\'";
+						if (! $val)
+							$val = $lang_inclus = '$GLOBALS[spip_lang]';
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = $val; ';\n";
+					}
+					else if ($val)
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
 					else
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \''.addslashes(\$contexte[$var]).'\'; ';\n";
 				}
 			}
 		}
+
+		if (!$lang_inclus) $lang_inclus = 'lire_meta(\\\'langue_site\\\')';
+		$code .= "	\$retour .= 'include_ecrire(\'inc_lang.php3\'); lang_select($lang_inclus);';\n";
 
 		// inclure en priorite dans le dossier_squelettes
 		if ($dossier_squelettes) {
