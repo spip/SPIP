@@ -341,10 +341,12 @@ function sql_accepter_forum($id_article) {
 
 	if (!$id_article) return;
 
-	if (!isset($cache[$id_article]))
-		$cache[$id_article] = spip_abstract_fetsel(array('accepter_forum'),
+	if (!isset($cache[$id_article])) {
+		$row = spip_abstract_fetsel(array('accepter_forum'),
 			array('spip_articles'),
 			array("id_article=".intval($id_article)));
+		$cache[$id_article] = $row['accepter_forum'];
+	}
 
 	return $cache[$id_article];
 }
