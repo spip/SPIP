@@ -68,9 +68,9 @@
 
             [(#REM) Portfolio : album d'images ]
             <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
-            <div id="document_actif">
-                [<h3 class="spip">(#TITRE)</h3>]
-                [(#EMBED_DOCUMENT||inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})]
+            <div class="spip_documents" id="document_actif">
+                [(#EMBED_DOCUMENT)]
+                [<div class="spip_doc_titre">(#TITRE)</div>]
                 [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
             </div>
             </BOUCLE_afficher_document>
@@ -102,7 +102,7 @@
 
             [(#REM) Petition ]
             [ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
-            <INCLURE{fond=inc-petition}{id_article} {debut_signatures}>
+            <INCLURE{fond=inc-petition}{id_article}{debut_signatures}>
 
             [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
