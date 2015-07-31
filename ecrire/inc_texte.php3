@@ -20,9 +20,11 @@ function tester_variable($nom_var, $val){
 		OR $_PUT[$nom_var] OR $GLOBALS['HTTP_PUT_VARS'][$nom_var]
 		OR $_POST[$nom_var] OR $GLOBALS['HTTP_POST_VARS'][$nom_var]
 		OR $_COOKIE[$nom_var] OR $GLOBALS['HTTP_COOKIE_VARS'][$nom_var]
-		OR $_REQUEST[$nom_var]
-	)
+		OR $_REQUEST[$nom_var]) {
 		$GLOBALS[$nom_var] = $val;
+		return false;
+	}
+	return true;
 }
 
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
@@ -33,20 +35,17 @@ tester_variable('ferme_ref', ']');
 tester_variable('ouvre_note', '[');
 tester_variable('ferme_note', '] ');
 tester_variable('les_notes', '');
-$marqueur_notes='';
 tester_variable('compt_note', 0);
 tester_variable('nombre_surligne', 4);
-tester_variable('url_glossaire_externe', "http://".lire_meta('langue_site').".wikipedia.org/wiki/");
+tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
 
 
-if (file_exists("puce$spip_lang_rtl.gif")) {
-	$imgsize = getimagesize("puce$spip_lang_rtl.gif");
-	tester_variable('puce', "<img src='puce$spip_lang_rtl.gif' align='top' alt='- ' ".$imgsize[3]." border='0' />");
+// On ne prend la $puce_rtl par defaut que si $puce n'a pas ete redefinie
+
+if (!tester_variable('puce', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>")) {
+	tester_variable('puce_ltr', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>");
+	tester_variable('puce_rtl', "<li class='spip_puce' style='list-style-image: url(puce_rtl.gif)'>");
 }
-else {
-	tester_variable('puce', "-");
-}
-
 
 
 //
@@ -549,7 +548,6 @@ function traiter_listes ($texte) {
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = 'oui') {
-	global $puce;
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $compt_note;
 	global $les_notes;
@@ -559,6 +557,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $ouvre_note;
 	global $ferme_note;
 	global $flag_pcre;
+
+	// Puce
+	$lang_dir = lang_dir($GLOBALS['spip_lang']);
+	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl']) $puce = $GLOBALS['puce_rtl'];
+	else $puce = $GLOBALS['puce'];
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
@@ -595,7 +598,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 		// preparer la note
 		if ($num_note) {
-			if ($marqueur_notes)
+			if ($marqueur_notes) // ??????
 				$mn = $marqueur_notes.'-';
 			$ancre = $mn.urlencode($num_note);
 			$insert = "$ouvre_ref<a href='#nb$ancre' name='nh$ancre' class='spip_note'>$num_note</a>$ferme_ref";
@@ -630,9 +633,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			$terme = trim($regs[1]);
 			$terme_underscore = urlencode(ereg_replace('[[:space:]]+', '_', $terme));
 			if (strstr($url_glossaire_externe,"%s"))
-				$url = str_replace("%s",$terme_underscore,$url_glossaire_externe);
+				$url = str_replace("%s", $terme_underscore, $url_glossaire_externe);
 			else
 				$url = $url_glossaire_externe.$terme_underscore;
+			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
 			$code = "[$terme->?$url]";
 			$letexte = str_replace($regs[0], $code, $letexte);
 		}
