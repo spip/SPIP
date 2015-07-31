@@ -41,20 +41,24 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		return null;
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
+	$objets_sql = lister_tables_objets_sql("::md5");
 
 	// le nom du cache depend du serveur mais aussi du nom de la db et du prefixe
 	// ce qui permet une auto invalidation en cas de modif manuelle du fichier
 	// de connexion, et tout risque d'ambiguite
-	if (!isset($nom_cache_desc_sql[$serveur]))
-		$nom_cache_desc_sql[$serveur] =
+	if (!isset($nom_cache_desc_sql[$serveur][$objets_sql])){
+		$nom_cache_desc_sql[$serveur][$objets_sql] =
 		  _DIR_CACHE . 'sql_desc_'
 		  . ($serveur ? "{$serveur}_":"")
-		  . substr(md5($connexion['db'].":".$connexion['prefixe']),0,8)
+		  . substr(md5($connexion['db'].":".$connexion['prefixe'].":$objets_sql"),0,8)
 			.'.txt';
+		// nouveau nom de cache = nouvelle version en memoire
+		unset($connexion['tables']);
+	}
 
 	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 	if (!$nom){
-		spip_unlink($nom_cache_desc_sql[$serveur]);
+		spip_unlink($nom_cache_desc_sql[$serveur][$objets_sql]);
 		$connexion['tables'] = array();
 		return null;
 	}
@@ -83,7 +87,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 	if (!isset($connexion['tables'][$nom])
 	  AND _VAR_MODE!=='recalcul'
 	  AND (!isset($connexion['tables']) OR !$connexion['tables'])) {
-		if (lire_fichier($nom_cache_desc_sql[$serveur],$desc_cache)
+		if (lire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],$desc_cache)
 		  AND $desc_cache=unserialize($desc_cache))
 		  $connexion['tables'] = $desc_cache;
 	}
@@ -128,17 +132,12 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		$desc = array_merge(lister_tables_objets_sql($nom_sql,$desc),$desc);
 
 		// si tables_objets_sql est bien fini d'init, on peut cacher
-		if (defined('_init_tables_objets_sql')){
-			$connexion['tables'][$nom] = $desc;
-			$res = &$connexion['tables'][$nom];
-			// une nouvelle table a ete decrite
-			// mettons donc a jour le cache des descriptions de ce serveur
-			if (is_writeable(_DIR_CACHE))
-				ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
-		}
-		// sinon on renvoit ce qu'on a deja, et on ne cache rien
-		else
-			$res = $desc;
+		$connexion['tables'][$nom] = $desc;
+		$res = &$connexion['tables'][$nom];
+		// une nouvelle table a ete decrite
+		// mettons donc a jour le cache des descriptions de ce serveur
+		if (is_writeable(_DIR_CACHE))
+			ecrire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],serialize($connexion['tables']));
 	}
 	else
 		$res = &$connexion['tables'][$nom];
