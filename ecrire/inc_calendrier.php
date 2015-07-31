@@ -746,9 +746,10 @@ function http_calendrier_ics_trois($evt, $largeur, $dimjour, $fontsize, $border)
 	    $res2;
 	}
 		
-	$pos = ((_DIR_RESTREINT || ($largeur > 90)) ? "-$dimjour" : 0);
-	if ($largeur > 90) $largeur += (5*$fontsize);
-	else $largeur = _DIR_RESTREINT ? (3*$fontsize) : 0;
+	if ($largeur > 90) {
+		$largeur += (5*$fontsize);
+		$pos = "-$dimjour";
+	} else { $largeur = (3*$fontsize); $pos= 0; }
 	  
 	return "\n<div style='position: relative; z-index: 2; top: ${pos}px; margin-$spip_lang_left: " . $largeur . "px'>$res</div>";
 }
