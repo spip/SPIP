@@ -1902,7 +1902,7 @@ function compacte($source, $format = null) {
 		. substr(md5("$source-compacte"), 0,4) . "\\2", $f, 1)
 		. '.' . $format;
 
-		if ((@filemtime($f) > @filemtime($css))
+		if ((@filemtime($f) > @filemtime($source))
 		AND ($GLOBALS['var_mode'] != 'recalcul'))
 			return $f;
 
