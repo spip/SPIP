@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_acces_interdit' => 'Zugang verweigert.',
 'avis_article_modifie' => 'Achtung, @nom_auteur_modif@ hat vor @date_diff@ Minute(n) an diesem Artikel gearbeitet.',
 'avis_aucun_resultat' => 'Kein Ergebnis.',
-'avis_base_inaccessible' => 'Impossible de se connecter à la base de données @base@.', # NEW
+'avis_base_inaccessible' => 'Keine Verbindung mit Datenbank @base@ möglich.',
 'avis_chemin_invalide_1' => 'Der gewählte Pfad',
 'avis_chemin_invalide_2' => 'scheint nicht zu stimmen. Bitte kehren Sie zur vorigen Seite zurück und überprüfen sie die Angaben.',
 'avis_connexion_echec_1' => 'Die Verbindung zur Datenbank ist fehlgeschlagen.',
@@ -186,8 +186,8 @@ französischen SPIP-Dokumentation</a>.',
 'entree_texte_breve' => 'Text der Meldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Pflichtfeld]<br />',
 'entree_url' => 'Adresse (URL) Ihrer Website',
-'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
-'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
+'erreur_connect_deja_existant' => 'Ein Server mit diesem Namen existiert bereits.',
+'erreur_nom_connect_incorrect' => 'Dieser Servername ist nicht zulässig.',
 'erreur_plugin_desinstalation_echouee' => 'Das Plugin konnte nicht deinstalliert werden. Sie müssen es auf jeden Fall deaktivieren.',
 'erreur_plugin_fichier_absent' => 'Datei nicht vorhanden',
 'erreur_plugin_fichier_def_absent' => 'Definitionsdatei nicht vorhanden',
@@ -313,8 +313,8 @@ französischen SPIP-Dokumentation</a>.',
 'info_articles_2' => 'Artikel',
 'info_articles_auteur' => 'Alle Artikel dieses Autors',
 'info_articles_lies_mot' => 'Alle Artikel zu diesem Schlagwort',
-'info_articles_miens' => 'Mes articles', # NEW
-'info_articles_tous' => 'Tous les articles', # NEW
+'info_articles_miens' => 'Meine Artikel',
+'info_articles_tous' => 'Alle Artikel',
 'info_articles_trouves' => 'Gefundene Artikel',
 'info_articles_trouves_dans_texte' => 'Gefundene Artikel (im Text)',
 'info_attente_validation' => 'Ihre zur Veröffentlichung vorgeschlagenen Artikel',
@@ -477,7 +477,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_mise_a_niveau_base' => 'Update Ihrer SQL-Datenbank',
 'info_mise_a_niveau_base_2' => '{{ACHTUNG!}} Sie haben eine {ältere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird möglicherweise zerstört und Ihre Website wird nict mehr funktionieren.<br />{{Installieren Sie SPIP noch einmal.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardmodus der öffentlichen Foren',
-'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
+'info_modification_enregistree' => 'Ihre Änderung wurde gespeichert.',
 'info_modifier_auteur' => 'Autor bearbeiten:',
 'info_modifier_breve' => 'Meldung bearbeiten:',
 'info_modifier_mot' => 'Schlagwort ändern:',
@@ -558,7 +558,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_preview_comite' => 'Alle Redakteure können die Vorschau nutzen',
 'info_preview_desactive' => 'Vorschau deaktiviert',
 'info_preview_texte' => 'Man kann sich die Website so anzeigen lassen, als ob alle Artikel veröffentlicht wären, die mindestens den Status « vorgeschlagen » haben. Wem soll diese Möglichkeit zur Verfügung stehen (Adminsitratoren, Redakteure, niemand)?',
-'info_previsions' => 'prévisions :', # NEW
+'info_previsions' => 'Vorschau:',
 'info_principaux_correspondants' => 'Ihre wichtigsten Korrespondezpartner',
 'info_procedez_par_etape' => 'gehen Sie Schritt für Schritt vor',
 'info_procedure_maj_version' => 'Sie müssen die Update-Funktion starten, um Ihre Datenbank an die neue Version von SPIP anzupassen.',
@@ -720,7 +720,7 @@ in einer Farbe, die den Status anzeigt :',
 'info_webmestre_forces' => 'Die Webmaster sind in der Datei <tt>@file_options@</tt> konfiguriert.',
 'install_adresse_base_hebergeur' => 'Adresse der vom Provider zugewiesenen Datenbank',
 'install_base_ok' => 'Die Datenbank @base@ wurde erkannt',
-'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+'install_connect_ok' => 'Die neue Datenbank wurde unter dem Namen @connect@ deklariert.',
 'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
 'install_extension_mbstring' => 'SPIP funktioniert nicht mit:',
 'install_extension_php_obligatoire' => 'SPIP benötigt die Dateierweiterung php:',
@@ -821,7 +821,7 @@ in einer Farbe, die den Status anzeigt :',
 'label_bando_outils_afficher' => 'Werkzeuge anzeigen',
 'label_bando_outils_masquer' => 'Werkzeuge ausblenden',
 'label_choix_langue' => 'Ihre Sprache wählen',
-'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+'label_nom_fichier_connect' => 'Geben Sie den für diesen Server verwendeten Namen an.',
 'label_slogan_site' => 'Slogan der Website',
 'label_taille_ecran' => 'Bildschirmbreite',
 'label_texte_et_icones_navigation' => 'Navigationsmenü',
@@ -949,12 +949,12 @@ in einer Farbe, die den Status anzeigt :',
 'protocole_ldap' => 'Version des Protokolls:',
 
 // Q
-'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
-'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
-'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
-'queue_one_job_in_queue' => '1 travail en attente', # NEW
-'queue_purger_queue' => 'Purger la liste des travaux', # NEW
-'queue_titre' => 'Liste de travaux', # NEW
+'queue_executer_maintenant' => 'Jetzt ausführen',
+'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
+'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
+'queue_one_job_in_queue' => '1 Job in der Warteschlange',
+'queue_purger_queue' => 'Jobliste löschen',
+'queue_titre' => 'Jobliste',
 
 // R
 'repertoire_plugins' => 'Verzeichnis:',
@@ -1149,7 +1149,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_cadre_forum_interne' => 'Internes Forum',
 'titre_cadre_interieur_rubrique' => 'In der Rubrik',
 'titre_cadre_numero_auteur' => 'AUTOR NUMMER',
-'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
+'titre_cadre_numero_objet' => '@objet@ Nummer:',
 'titre_cadre_signature_obligatoire' => '<b>Unterschrift</b> [obligatorisch]<br />',
 'titre_compacter_script_css' => 'Skripte und CSS komprimieren',
 'titre_compresser_flux_http' => 'HTTP-Übertragung komprimieren',
