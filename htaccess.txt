@@ -90,6 +90,13 @@ RewriteRule ^([1-9][0-9]*)$     spip.php?action=redirect&type=article&status=301
 #
 ###
 
+###
+# APIs http://site/api/xmlrpc
+
+RewriteRule ^api/([\w]+)(/(.*))?$ spip.php?action=$1&arg=$3 [QSA,L]
+
+# Fin des APIs
+###
 
 ###
 # URLs "propres", "propres2", "libres", "arbo"
