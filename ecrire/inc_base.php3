@@ -1029,6 +1029,10 @@ function maj_base() {
 		}
 	}
 
+	if ($version_installee < 1.465) {
+		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE NOT NULL");
+	}
+
 	//
 	// Mettre a jour le numero de version installee
 	//
