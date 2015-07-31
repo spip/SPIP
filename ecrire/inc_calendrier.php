@@ -277,10 +277,10 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
  	if ($type != "mois") {
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 		$retour .= http_calendrier_href($script . "type=$type&set_echelle=" .
-				($echelle+$echelle) . "&$args",
+				floor($echelle * 1.5) . "&$args",
 				"<img src='$img_dir/loupe.gif' alt='zoom-' />");
 		$retour .= http_calendrier_href(($script . "type=$type&set_echelle=" .
-			(($echelle > 2) ? floor($echelle / 2) : 1) .
+			floor($echelle / 1.5) .
 			"&$args"),
 					"<img src='$img_dir/loupe.gif'  alt='zoom-' />");
  	
