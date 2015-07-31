@@ -200,13 +200,13 @@ function fin_boite_alerte() {
 //
 function debut_boite_info() {
 	global $couleur_claire,  $couleur_foncee;
-	echo "<p><table cellpadding='5' cellspacing='0' border='1' width='100%' style='border-left: 1px solid $couleur_foncee; border-top: 1px solid $couleur_foncee; border-bottom: 1px solid white; border-bottom: 1px solid white' background=''>";
+	echo "&nbsp;<p><div style='border: 1px dashed #666666;'><table cellpadding='5' cellspacing='0' border='0' width='100%' style='border-left: 1px solid $couleur_foncee; border-top: 1px solid $couleur_foncee; border-bottom: 1px solid white; border-bottom: 1px solid white' background=''>";
 	echo "<tr><td bgcolor='$couleur_claire' width='100%'>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'>";
 }
 
 function fin_boite_info() {
-	echo "</font></td></tr></table>";
+	echo "</font></td></tr></table></div>\n\n";
 }
 
 //
@@ -1053,7 +1053,7 @@ function barre_onglets($rubrique, $onglet){
 
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
-	global $spip_display;
+	global $spip_display, $spip_ecran ;
 	
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -1119,6 +1119,11 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr></table>";
 		echo "</td>\n";
 	}
+	
+	if ($spip_ecran == "large") {
+		echo "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
+	}
+	
 }
 
 
@@ -1282,9 +1287,13 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $important
 
 
 function bandeau_barre_verticale(){
+	global $spip_ecran;
 	echo "<td background='img_pack/tirets-separation.gif' width='2'>";
 	echo "<img src='img_pack/rien.gif' alt='o' width=2 height=2>";
 	echo "</td>";
+	if ($spip_ecran == "large") {
+		echo "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
+	}
 }
 
 

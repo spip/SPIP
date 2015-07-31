@@ -152,7 +152,7 @@ if ($arton_ok) $artoff_ok = get_image($artoff);
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($options == 'avancees' OR $arton_ok)) {
 
-	debut_boite_info();
+	debut_cadre_relief();
 
 	afficher_boite_logo($arton, "LOGO DE LA BREVE".aide ("breveslogo"));
 
@@ -161,7 +161,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($option
 		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
 	}
 
-	fin_boite_info();
+	fin_cadre_relief();
 }
 
 

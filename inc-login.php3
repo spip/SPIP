@@ -38,7 +38,7 @@ function auth_http($cible, $essai_auth_http) {
 
 function ouvre_login($titre) {
 	
-	$retour .= "<div class='spip_encadrer'>";
+	$retour .= "<div>";
 	
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
 	
