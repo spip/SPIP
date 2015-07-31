@@ -189,10 +189,6 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 
 function spip_mysql_showtable($nom_table)
 {
-	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
-	else $table_pref = "";
-	$nom_table = preg_replace('/^spip_/', $table_pref, $nom_table);
-	
 	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
 	if (!a) return "";
 	if (!spip_fetch_array($a)) return "";
