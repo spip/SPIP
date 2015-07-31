@@ -14,23 +14,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_puce_statut_dist
 function inc_puce_statut_dist($id_objet, $statut, $id_rubrique, $type, $ajax=false) {
-	// le function_exists n'est utile qu'aux greffons
-	if (function_exists($f = "puce_statut_$type"))
+	if (function_exists($f = "puce_statut_$type")
+	OR function_exists($f = "puce_statut_${type}_dist"))
 		return $f($id_objet, $statut, $id_rubrique, $type, $ajax);
 	else
 		return "<img src='" . chemin_image("$type-24.gif") . "' alt='' />";
 }
 
-// http://doc.spip.org/@puce_statut_document
-function puce_statut_document($id, $statut, $id_rubrique, $type, $ajax='') {
+// http://doc.spip.org/@puce_statut_document_dist
+function puce_statut_document_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 	return "<img src='" . chemin_image("attachment.gif") . "' alt=''  />";
 }
 
-// http://doc.spip.org/@puce_statut_auteur
+// http://doc.spip.org/@puce_statut_auteur_dist
 // Hack de compatibilite: les appels directs ont un  $type != 'auteur'
 // si l'auteur ne peut pas se connecter
-// http://doc.spip.org/@puce_statut_auteur
-function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
+// http://doc.spip.org/@puce_statut_auteur_dist
+function puce_statut_auteur_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 
 	static $titre_des_statuts ='';
 	static $images_des_statuts ='';
@@ -72,23 +72,24 @@ function puce_statut_auteur($id, $statut, $id_rubrique, $type, $ajax='') {
 
 // http://doc.spip.org/@bonhomme_statut
 function bonhomme_statut($row) {
-	return puce_statut_auteur(0, $row['statut'], 0, ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])) ? '' : 'auteur');
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	return $puce_statut(0, $row['statut'], 0, 'auteur');
 }
 
 
-// http://doc.spip.org/@puce_statut_mot
-function puce_statut_mot($id, $statut, $id_rubrique, $type, $ajax='') {
+// http://doc.spip.org/@puce_statut_mot_dist
+function puce_statut_mot_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 	return "<img src='" . chemin_image('petite-cle.gif') . "' alt='' />";
 }
 
-// http://doc.spip.org/@puce_statut_rubrique
-function puce_statut_rubrique($id, $statut, $id_rubrique, $type, $ajax='') {
+// http://doc.spip.org/@puce_statut_rubrique_dist
+function puce_statut_rubrique_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 
 	return "<img src='" . chemin_image('rubrique-12.gif') . "' alt='' />";
 }
 
-// http://doc.spip.org/@puce_statut_article
-function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax = false) {
+// http://doc.spip.org/@puce_statut_article_dist
+function puce_statut_article_dist($id, $statut, $id_rubrique, $type='article', $ajax = false) {
 	global $lang_objet;
 	
 	static $coord = array('publie' => 2,
@@ -149,8 +150,8 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 }
 
 
-// http://doc.spip.org/@puce_statut_breve
-function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
+// http://doc.spip.org/@puce_statut_breve_dist
+function puce_statut_breve_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 	global $lang_objet;
 	static $coord = array('publie' => 1,
 			      'prop' => 0,
@@ -230,8 +231,8 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 
 }
 
-// http://doc.spip.org/@puce_statut_site
-function puce_statut_site($id, $statut, $id_rubrique, $type, $ajax=''){
+// http://doc.spip.org/@puce_statut_site_dist
+function puce_statut_site_dist($id, $statut, $id_rubrique, $type, $ajax=''){
 	static $coord = array('publie' => 1,
 			      'prop' => 0,
 			      'refuse' => 2,
@@ -311,8 +312,8 @@ function puce_statut_site($id, $statut, $id_rubrique, $type, $ajax=''){
 	. '</span>';
 }
 
-// http://doc.spip.org/@puce_statut_syndic_article
-function puce_statut_syndic_article($id_syndic, $statut, $id_rubrique, $type, $ajax=''){
+// http://doc.spip.org/@puce_statut_syndic_article_dist
+function puce_statut_syndic_article_dist($id_syndic, $statut, $id_rubrique, $type, $ajax=''){
 	if ($statut=='publie') {
 		$puce='puce-verte.gif';
 	}
