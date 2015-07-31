@@ -21,7 +21,7 @@ function message_de_signature($row)
   return propre(echapper_tags($row['message']));
 }
 
-// http://doc.spip.org/@controle_signatures
+// http://doc.spip.org/@inc_signatures_dist
 function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
 	# filtre de duree (a remplacer par une vraie pagination)
@@ -65,6 +65,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	return $res;
 }
 
+// http://doc.spip.org/@signatures_edit
 function signatures_edit($script, $id, $debut, $row) {
 
 		global $couleur_foncee;

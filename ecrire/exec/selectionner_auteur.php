@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # afficher un mini-navigateur de rubriques
 
-// http://doc.spip.org/@exec_selectionner_dist
+// http://doc.spip.org/@exec_selectionner_auteur_dist
 function exec_selectionner_auteur_dist()
 {
   	$id = intval(_request('id_article'));

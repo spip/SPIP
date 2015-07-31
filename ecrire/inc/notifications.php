@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Fonctione appelee par divers pipelines
+// http://doc.spip.org/@notifications
 function notifications($pipeline, $x) {
 
 	// En cas de changement de statut d'article vers 'publie' ou 'prop',

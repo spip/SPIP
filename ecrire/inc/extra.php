@@ -373,6 +373,7 @@ function extra_affichage($extra, $type) {
 
 // s'il y a mise a jour des extras, mixer les champs modifies
 // avec les champs existants (car la mise a jour peut etre partielle)
+// http://doc.spip.org/@extra_update
 function extra_update($type, $id, $c = false) {
 	$extra = @unserialize(extra_recup_saisie($type, $c));
 

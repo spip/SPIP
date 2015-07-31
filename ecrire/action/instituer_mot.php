@@ -17,7 +17,7 @@ include_spip('inc/filtres');
 include_spip('base/abstract_sql');
 
 // Modifier le reglage des forums publics de l'article x
-// http://doc.spip.org/@action_poster_dist
+// http://doc.spip.org/@action_instituer_mot_dist
 function action_instituer_mot_dist()
 {
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -30,7 +30,7 @@ function action_instituer_mot_dist()
 	} else action_instituer_mot_post($r);
 }
 
-// http://doc.spip.org/@action_poster_post
+// http://doc.spip.org/@action_instituer_mot_post
 function action_instituer_mot_post($r)
 {
 	$id_mot = $r[1];

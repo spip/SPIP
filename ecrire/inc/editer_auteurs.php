@@ -225,6 +225,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 	return ajax_action_auteur('editer_auteurs', $id_article,'articles', "id_article=$id_article", $sel);
 }
 
+// http://doc.spip.org/@determiner_non_auteurs
 function determiner_non_auteurs($les_auteurs, $order)
 {
 	if (!$les_auteurs)
@@ -275,6 +276,7 @@ function articles_auteur_select($result)
 	return $res;
 }
 
+// http://doc.spip.org/@selecteur_auteur_ajax
 function selecteur_auteur_ajax($id_article, $js, $text)
 {
 	include_spip('inc/chercher_rubrique');

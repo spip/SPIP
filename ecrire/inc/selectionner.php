@@ -57,6 +57,7 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	return construire_selectionner_hierarchie($idom, $plonger, $aff_racine, $url, 'id_parent', $url_init);
 }
 
+// http://doc.spip.org/@construire_selectionner_hierarchie
 function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name, $url_init='')
 {
 	global $couleur_foncee, $spip_lang_right;

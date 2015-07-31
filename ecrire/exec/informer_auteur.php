@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # Les informations d'une rubrique selectionnee dans le mini navigateur
 
+// http://doc.spip.org/@exec_informer_auteur_dist
 function exec_informer_auteur_dist()
 {
 	$id = intval(_request('id'));

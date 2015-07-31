@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // Modifier le reglage des forums publics de l'article x
-// http://doc.spip.org/@action_poster_dist
+// http://doc.spip.org/@action_editer_signatures_dist
 function action_editer_signatures_dist()
 {
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -28,7 +28,7 @@ function action_editer_signatures_dist()
 	} else action_editer_signatures_post($r);
 }
 
-// http://doc.spip.org/@action_poster_post
+// http://doc.spip.org/@action_editer_signatures_post
 function action_editer_signatures_post($r)
 {
 	$id = intval($r[1]);

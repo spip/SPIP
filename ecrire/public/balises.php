@@ -972,7 +972,7 @@ function balise_URL_ECRIRE_dist($p) {
 //
 // #URL_ACTION_AUTEUR{naviguer} -> ecrire/?exec=naviguer
 //
-// http://doc.spip.org/@balise_URL_ECRIRE_dist
+// http://doc.spip.org/@balise_URL_ACTION_AUTEUR_dist
 function balise_URL_ACTION_AUTEUR_dist($p) {
 
 	$p->code = interprete_argument_balise(1,$p);

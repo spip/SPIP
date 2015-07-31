@@ -218,6 +218,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 // (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
 // getElement en mode Ajax est trop couteux).
 
+// http://doc.spip.org/@construire_selecteur
 function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';

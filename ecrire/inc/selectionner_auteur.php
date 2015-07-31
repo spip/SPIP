@@ -19,6 +19,7 @@ include_spip('inc/selectionner');
 // Affiche un mini-navigateur ajax sur les auteurs
 //
 
+// http://doc.spip.org/@inc_selectionner_auteur_dist
 function inc_selectionner_auteur_dist($id_article)
 {
 	global $spip_lang_right, $couleur_foncee;
@@ -34,6 +35,7 @@ function inc_selectionner_auteur_dist($id_article)
 	return construire_selectionner_hierarchie($idom, $futurs, '', $url, 'nouv_auteur');
 }
 
+// http://doc.spip.org/@selectionner_auteur_boucle
 function selectionner_auteur_boucle($query, $idom)
 {
 	global  $spip_lang_left;

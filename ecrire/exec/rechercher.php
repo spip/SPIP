@@ -85,6 +85,7 @@ function exec_rechercher_dist()
 // car cela qui indique qu'un seul resultat a ete trouve.
 // ==> attention a composer le message d'erreur avec au moins 2 balises
 
+// http://doc.spip.org/@proposer_item
 function proposer_item ($ids, $titles, $rac)
 {
 
