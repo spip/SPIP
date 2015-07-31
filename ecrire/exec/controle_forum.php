@@ -214,9 +214,10 @@ function exec_controle_forum_dist()
 	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
 	// Si un id_controle_forum est demande, on adapte le debut
-	if ($debut_id_forum = intval(_request('debut_id_forum'))
-	AND $d = sql_fetch(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"))) {
-	  $debut = sql_countsel($from, $where . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'")));
+	if (!$debut_id_forum = intval(_request('debut_id_forum'))
+	AND (NULL !== ($d = sql_getfetsel('date_heure', 'spip_forum', "id_forum=$debut_id_forum")))) {
+
+	  $debut = sql_countsel($from, $where . (" AND F.date_heure > '$d'"));
 	}
 
 	$pack = 20;	// nb de forums affiches par page
@@ -251,11 +252,11 @@ function exec_controle_forum_dist()
 		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", $type=='interne', "forum-interne-24.gif");
 
 		list($from,$where) = critere_statut_controle_forum('vide', $id_rubrique);
-		$n = sql_fetch(spip_query("SELECT id_forum FROM $from WHERE $where LIMIT 1"));
+		$n = sql_countsel($from, $where,'','', 1);
 		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $type=='vide');
 
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
-		$f = sql_fetch(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
+		$f = sql_countsel($from, $where, "", "", 1);
 		if ($f)
 			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $type=='prop');
 

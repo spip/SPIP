@@ -193,7 +193,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	// de la rubrique actuelle
 	if ($id_parent = _request('id_parent', $c)
 	AND $id_parent != $id_rubrique
-	AND (sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND (sql_countsel("spip_rubriques", "id_rubrique=$id_parent"))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -307,16 +307,15 @@ function article_referent ($id_article, $c) {
 
 	// selectionner l'article cible, qui doit etre different de nous-meme,
 	// et quitter s'il n'existe pas
-	if (!$row = sql_fetch(
-	spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad AND NOT(id_article=$id_article)")))
+	$id_lier = sql_getfetsel('id_trad', 'spip_articles', "id_article=$lier_trad AND NOT(id_article=$id_article)");
+
+	if ($id_lier === NULL)
 	{
-		spip_log("echec lien de trad vers article inexistant ($lier_trad)");
+		spip_log("echec lien de trad vers article incorrect ($lier_trad)");
 		return '&trad_err=1';
 	}
 
 	// $id_lier est le numero du groupe de traduction
-	$id_lier = $row['id_trad'];
-
 	// Si l'article vise n'est pas deja traduit, son identifiant devient
 	// le nouvel id_trad de ce nouveau groupe et on l'affecte aux deux
 	// articles

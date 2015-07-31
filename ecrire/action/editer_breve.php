@@ -115,12 +115,12 @@ function revisions_breves ($id_breve, $c=false) {
 	// de la rubrique actuelle
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND ($r=sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_parent=0 AND id_rubrique=$id_parent")))) {
+	AND (NULL !== ($lang=sql_getfetsel('lang', 'spip_rubriques', "id_parent=0 AND id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
 		// - changer sa langue (si heritee)
 		if ($langue_choisie_old != "oui") {
-			if ($r['lang'] != $langue_old)
-				$champs['lang'] = $r['lang'];
+			if ($lang != $langue_old)
+				$champs['lang'] = $lang;
 		}
 		// si la breve est publiee
 		// et que le demandeur n'est pas admin de la rubrique
