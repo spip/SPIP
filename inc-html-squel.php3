@@ -75,7 +75,8 @@ function phraser_inclure($texte, $ligne, $result) {
 
 function phraser_polyglotte($texte,$ligne, $result) {
 
-	while (eregi('<multi>([^<]*)</multi>', $texte, $match)) {
+	if (preg_match_all(",<multi>(.*)</multi>,Uims", $texte, $m, PREG_SET_ORDER))
+	foreach ($m as $match) {
 		$p = strpos($texte, $match[0]);
 		$debut = substr($texte, 0, $p);
 		if ($p) {
@@ -83,10 +84,10 @@ function phraser_polyglotte($texte,$ligne, $result) {
 			$champ->texte = $debut;
 			$champ->ligne = $ligne;
 			$result[] = $champ;
+			$ligne += substr_count($champ->texte, "\n");
 		}
 
 		$champ = new Polyglotte;
-		$ligne += substr_count($champ->texte, "\n");
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
 		$lang = '';
