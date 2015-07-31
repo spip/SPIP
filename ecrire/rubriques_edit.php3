@@ -18,6 +18,7 @@ function enfant($leparent){
 	global $id_rubrique;
 	global $connect_toutes_rubriques;
 	global $i;
+	global $couleur_claire;
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -30,13 +31,21 @@ function enfant($leparent){
 		if ($my_rubrique != $id_rubrique){
 
 			$espace="";
-			for ($count=0;$count<$i;$count++){$espace.="&nbsp;&nbsp;";}
-			$espace .= "|";
-			if ($i==1)
-				$espace = "*";
+			for ($count=1;$count<$i;$count++){
+				$espace.="&nbsp;&nbsp;&nbsp; ";
+			}
+			if ($i > 3) $style .= "color: #666666;";
+			if ($i > 4) $style .= "font-style: italic;";
+			if ($i < 3) $style .= "font-weight:bold; ";
+			if ($i==1) {
+				$espace= "";
+				$style .= "background-color: $couleur_claire;";
+			}
+			
+			if ($statut_rubrique!='publie') $titre = "($titre)";
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent).">$espace $titre\n";
+				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">$espace$titre\n";
 			}
 			enfant($my_rubrique);
 		}		
@@ -132,9 +141,9 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><
 if ($options=="avancees") {
 	debut_cadre_relief("$logo_parent");
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
-	echo "<SELECT NAME='id_parent' CLASS='forml' SIZE=1>\n";
+	echo "<SELECT NAME='id_parent'  style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' CLASS='forml' SIZE=1>\n";
 	if ($connect_toutes_rubriques) {
-		echo "<OPTION".mySel("0",$id_parent).">Racine du site\n";
+		echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>Racine du site\n";
 	} else {
 		echo "<OPTION".mySel("0",$id_parent).">Ne pas d&eacute;placer...\n";
 	}
@@ -149,7 +158,7 @@ if ($options=="avancees") {
 	$row = mysql_fetch_array(spip_query($query));
 	$contient_breves = $row['cnt'];
 	if ($contient_breves > 0) {
-		echo "<font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme_deplace'><label for='confirme_deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
+		echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
 	}
 	fin_cadre_relief();
 

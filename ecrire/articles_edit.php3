@@ -199,6 +199,7 @@ function enfant($leparent){
 	global $statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
+	global $couleur_claire;
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -207,6 +208,8 @@ function enfant($leparent){
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
+		$statut_rubrique=$row['statut'];
+		$style = "";
 
 		// si l'article est publie il faut etre admin pour avoir le menu
 		// sinon le menu est present en entier (proposer un article)
@@ -217,13 +220,20 @@ function enfant($leparent){
 		}
 
 		$espace="";
-		for ($count=0;$count<$i;$count++){$espace.="&nbsp;&nbsp;";}
-		$espace .= "|";
-		if ($i==1)
-			$espace = "*";
+		for ($count=1;$count<$i;$count++){
+			$espace.="&nbsp;&nbsp;&nbsp; ";
+		}
+		if ($i > 3) $style .= "color: #666666;";
+		if ($i > 4) $style .= "font-style: italic;";
+		if ($i < 3) $style .= "font-weight:bold; ";
+		if ($i==1) {
+			$espace= "";
+			$style .= "background-color: $couleur_claire;";
+		}
+		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$espace $titre\n";
+			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
 		enfant($my_rubrique);
 	}
@@ -273,7 +283,7 @@ echo "<P><HR><P>";
 	
 	echo "<B>Titre</B> [Obligatoire]";
 	echo aide ("arttitre");
-	echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
+	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
 
 	if (($options=="avancees" AND $articles_soustitre!="non") OR strlen($soustitre) > 0) {
 		echo "<B>Sous-titre</B>";
@@ -301,7 +311,7 @@ echo "<P><HR><P>";
 	
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
 	echo aide ("artrub");
-	echo "<BR><SELECT NAME='id_rubrique' CLASS='formo' SIZE=1>\n";
+	echo "<BR><SELECT NAME='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
 	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
@@ -321,6 +331,25 @@ echo "<P><HR><P>";
 
 	echo "<HR>";
 
+	
+	if (substr($chapo, 0, 1) == '=') {
+		$virtuel = substr($chapo, 1, strlen($chapo));
+		$chapo = "";
+	}
+
+	if ($connect_statut=="0minirezo" AND $options=="avancees"){
+		if (strlen($virtuel) > 0) {
+			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel' checked>";
+		} else {
+			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel'>";
+		}
+		echo "<B><label for='confirme-virtuel'>Redirection</label></B>";
+		echo aide ("artvirt");
+		echo "<br>(Article virtuel&nbsp;: cet article sera r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais il sera redirig&eacute; vers une autre URL.)";
+		echo "<BR><INPUT TYPE='text' NAME='virtuel' CLASS='forml' VALUE=\"$virtuel\" SIZE='40'><P>";
+		echo "<HR>";
+	}
+
 	if (($articles_chapeau!="non") OR strlen($chapeau) > 0) {
 		echo "<B>Chapeau</B>";
 		echo aide ("artchap");
@@ -332,7 +361,7 @@ echo "<P><HR><P>";
 			echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
 
 	}
-
+	
 
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
