@@ -249,16 +249,17 @@ function applique_filtres($p) {
 // analyse des parametres d'un champ etendu
 // [...(#CHAMP{parametres})...] ou [...(#CHAMP|filtre{parametres})...]
 // retourne une suite de N references aux N valeurs indiquées avec N virgules
+// regs2[5] est la pour l'argument special {a:b} du filtre "?".
 
 function filtres_arglist($args, $p) {
 	$arglist ='';;
 	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
 		$arg = trim($regs[1]);
 		if ($arg) {
-		  if (ereg("^" . NOM_DE_CHAMP, $arg, $regs2)) {
+		  if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $regs2)) {
 				$p->nom_boucle = $regs2[2];
 				$p->nom_champ = $regs2[3];
-				$arg = calculer_champ($p);
+				$arg = calculer_champ($p) . $regs2[5];
 			} else if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 			$arglist .= ','.$arg;
