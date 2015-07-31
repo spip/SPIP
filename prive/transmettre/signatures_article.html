@@ -2,7 +2,11 @@
 if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
 ?><BOUCLE2(ARTICLES){id_article}><B1>#TOTAL_BOUCLE <:info_signatures:> <:info_pour:>  #TITRE;
 <:nom:>;<:email:>
-<BOUCLE1(SIGNATURES){id_article}{par nom_email}>#NOM_EMAIL;#AD_EMAIL;#NOM_SITE;#URL_SITE
+<BOUCLE1(SIGNATURES){id_article}{par nom_email}>[(#NOM_EMAIL
+|filtrer_entites|replace{';',','})];[(#AD_EMAIL
+|filtrer_entites|replace{';',','})];[(#NOM_SITE
+|filtrer_entites|replace{';',','})];[(#URL_SITE
+|filtrer_entites|replace{';',','})];
 </BOUCLE1></BOUCLE2>
 <?php
 } else {
