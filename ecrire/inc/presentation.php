@@ -680,35 +680,29 @@ function afficher_articles($titre, $requete, $formater_article='') {
 	
 	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+
+	if (!$cpt = $cpt['n']) return '' ;
+
 	// memorisation des arguments pour gérer l'affichage par tranche
 	// et/ou par langues.
 
 	$hash = substr(md5(serialize($requete) . $GLOBALS['meta']['gerer_trad'] . $titre), 0, 31);
 	$tmp_var = 't' . substr($hash, 0, 7);
+	$nb_aff = floor(1.5 * _TRANCHES);
+	$deb_aff = intval(_request($tmp_var));
 
-	// le champ id_auteur sert finalement a memoriser le nombre de lignes
-	// (a renommer)
-
-	$res_proch = spip_query("SELECT id_ajax_fonc, id_auteur FROM spip_ajax_fonc WHERE hash=0x$hash LIMIT 1");
+	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=0x$hash LIMIT 1");
 
 	if ($row = spip_fetch_array($res_proch)) {
 		$id_ajax = $row["id_ajax_fonc"];
-		$cpt = $row["id_auteur"];
 	} else  {
-
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-
-		if (!$cpt = $cpt['n']) return '' ;
-		
 		if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 		$v = serialize(array($titre, $requete, $tmp_var, $formater_article));
 
 		include_spip ('base/abstract_sql');
-		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, id_auteur, date)", "(" . _q($v) . ", 0x$hash, $cpt, NOW())");
+		$id_ajax = spip_abstract_insert("spip_ajax_fonc", "(variables, hash, date)", "(" . _q($v) . ", 0x$hash, NOW())");
 	}
-
-	$nb_aff = floor(1.5 * _TRANCHES);
-	$deb_aff = intval(_request($tmp_var));
 
 	$requete['FROM'] = preg_replace("/(spip_articles AS \w*)/", "\\1 LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 

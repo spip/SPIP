@@ -17,16 +17,16 @@ function exec_memoriser_dist()
 {
 	$id_ajax = intval(_request('id_ajax_fonc'));
 
-	// le champ id_auteur sert finalement a memoriser le nombre de lignes
-	// (a renommer)
-
-	$res = spip_fetch_array(spip_query($q = "SELECT variables, id_auteur, hash FROM spip_ajax_fonc WHERE id_ajax_fonc = $id_ajax"));
+	$res = spip_fetch_array(spip_query($q = "SELECT variables, hash FROM spip_ajax_fonc WHERE id_ajax_fonc = $id_ajax"));
 
 	if ($res) {
 		
 		include_spip('inc/presentation');
 		list($t,$r,$p,$f) = unserialize($res["variables"]);
-		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $id_ajax, $res['id_auteur'], _request('trad')));
+
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $r['FROM'] . ($r['WHERE'] ? (' WHERE ' . $r['WHERE']) : '') . ($r['GROUP BY'] ? (' GROUP BY ' . $r['GROUP BY']) : '')));
+
+		ajax_retour(afficher_articles_trad($t, $r, $f, $p, $id_ajax, $cpt['n'], _request('trad')));
 
 	} else spip_log("memoriser $q vide");
 }

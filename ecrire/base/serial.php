@@ -339,7 +339,6 @@ $spip_signatures_key = array(
 
 $spip_ajax_fonc = array(
 		"id_ajax_fonc" => "bigint(21) NOT NULL",
-		"id_auteur" => "bigint(21) NOT NULL",
 		"variables" => "text NOT NULL",
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL" );

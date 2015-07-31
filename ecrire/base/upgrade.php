@@ -1208,6 +1208,11 @@ function maj_base($version_cible = 0) {
 		maj_version(1.918);
 	}
 
+	if (upgrade_vers(1.919, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_ajax_fonc DROP id_auteur");
+		maj_version(1.919);
+	}
+
 }
 
 ?>
