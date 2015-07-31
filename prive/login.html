@@ -24,13 +24,11 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 <div id="minipres">
 
 	<h1>#NOM_SITE_SPIP</h1>
-	
 	[(#REM)
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
 	][
-	(#ENV**{url}|=={''}
-	|?{' ',[(#ENV**{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}
-		|?{' '})]})
+	(#ENV**{url}|non
+	|ou{[(#ENV**{url}|match{^(/.*/)?#EVAL{_DIR_RESTREINT_ABS}})]})
 	<h3 class="spip"><:login_acces_prive:></h3>
 	]
 	#MENU_LANG_ECRIRE
