@@ -528,10 +528,10 @@ fin_cadre_relief();
 
 echo "<br><br>\n";
 
- $forum_retour = generer_url_ecrire("sites","id_syndic=$id_syndic");
+ $forum_retour = generer_url_ecrire("sites","id_syndic=$id_syndic", '&');
 
 echo "<div align='center'>";
- icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi',"id_syndic=$id_syndic&statut=prive&adresse_retour=$forum_retour&titre_message=$nom_site"), "forum-interne-24.gif", "creer.gif");
+ icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi',"id_syndic=$id_syndic&statut=prive&adresse_retour=".urlencode($forum_retour)."&titre_message=$nom_site"), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 echo "<p align='left'>\n";
