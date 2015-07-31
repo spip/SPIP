@@ -93,7 +93,7 @@
                 <ul>
                     <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
                     <li>[(#LOGO_DOCUMENT|#URL_DOCUMENT||reduire_image{0,60}|inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{60}|texte_backend)]})]
-                    [<div class="spip_doc_titre">(#TITRE)</div>]
+                    <div class="spip_doc_titre">[(#TITRE) ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
                     [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
                     <br class="nettoyeur" />
                     </BOUCLE_documents_joints>
