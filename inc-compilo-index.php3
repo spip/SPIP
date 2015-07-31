@@ -164,7 +164,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	$param = param_balise($p);
 	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
 	  . join(',',collecter_balise_dynamique($l, $p))
-	  . filtres_arglist($param, $p)
+	  . filtres_arglist($param, $p, ',')
 	  . "),\n\tarray("
 	  . (!$p->fonctions ? '' : ("'" . join("','", $p->fonctions) . "'"))
 	  . "))";
@@ -223,7 +223,7 @@ function applique_filtres($p) {
 				$arglist = '';
 				if (ereg('([^\{\}]*)\{(.+)\}$', $fonc, $regs)) {
 					$fonc = $regs[1];
-				        $arglist = filtres_arglist($regs[2],$p);
+				        $arglist = filtres_arglist($regs[2],$p, ($fonc == '?' ? ':' : ','));
 				}
 				if (function_exists($fonc))
 				  $code = "$fonc($code$arglist)";
@@ -249,20 +249,21 @@ function applique_filtres($p) {
 // analyse des parametres d'un champ etendu
 // [...(#CHAMP{parametres})...] ou [...(#CHAMP|filtre{parametres})...]
 // retourne une suite de N references aux N valeurs indiquées avec N virgules
-// regs2[5] est la pour l'argument special {a:b} du filtre "?".
 
-function filtres_arglist($args, $p) {
-	$arglist ='';;
+function filtres_arglist($args, $p, $sep) {
+	$arglist ='';
 	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
 		$arg = trim($regs[1]);
 		if ($arg) {
-		  if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $regs2)) {
+			if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $regs2)) {
 				$p->nom_boucle = $regs2[2];
 				$p->nom_champ = $regs2[3];
-				$arg = calculer_champ($p) . $regs2[5];
+				# faudrait verifier !trim(regs2[5])
+				$arg = calculer_champ($p);
+				
 			} else if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
-			$arglist .= ','.$arg;
+			$arglist .= $sep . $arg;
 		}
 		$args=$regs[2];
 	}
