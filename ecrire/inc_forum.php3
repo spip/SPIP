@@ -67,7 +67,7 @@ function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect=
 		$link->addvar('redirect', $redirect);
 
 	return icone($texte,
-		$link->geturl(),
+		$link->geturl() . "#id$id",
 		$fond,
 		$fonction,
 		"right",
