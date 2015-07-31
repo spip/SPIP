@@ -296,7 +296,7 @@ function auth_a_loger()
 function auth_trace($row, $date=null)
 {
 	// Indiquer la connexion. A la minute pres ca suffit.
-	if (!is_numeric($connect_quand = $row['quand']))
+	if (!is_numeric($connect_quand = isset($row['quand'])?$row['quand']:''))
 		$connect_quand = strtotime($connect_quand);
 
 	if (is_null($date))
