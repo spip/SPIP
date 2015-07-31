@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Overzicht van de site',
 'popularite' => 'Populariteit',
 'poster_message' => 'Een bericht plaatsen',
+'proposer_site' => 'Je kan voorstellen een site in deze rubriek op te nemen&nbsp;:',
 
 
 // R

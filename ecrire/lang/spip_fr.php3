@@ -1258,7 +1258,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'onglet_origine_visites' => 'Origine des visites',
 'onglet_repartition_actuelle' => 'actuellement',
 'onglet_repartition_debut' => 'depuis le d&eacute;but',
-'onglet_repartition_lang' => 'par langues',
+'onglet_repartition_lang' => 'R&eacute;partition par langues',
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
@@ -1536,7 +1536,7 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
 	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
 	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
-'texte_signification' => 'Les barres rouges repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres vertes le nombre de visites pour chaque rubrique.',
+'texte_signification' => 'Les barres fonc&eacute;es repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.',
 'texte_sous_titre' => 'Sous-titre',
 'texte_statistiques_visites' => '(barres fonc&eacute;es :  dimanche / courbe fonc&eacute;e : &eacute;volution de la moyenne)',
 'texte_statut_attente_validation' => 'en attente de validation',
