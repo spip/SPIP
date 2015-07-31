@@ -200,7 +200,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 	// Gestion du TeX
 	if (!(strpos($letexte, "<math>") === false)) {
 		include_ecrire("inc_math.php3");
-		$letexte = traiter_math($letexte, &$les_echap, &$num_echap, $source);
+		$letexte = traiter_math($letexte, $les_echap, $num_echap, $source);
 	}
 
 	//
