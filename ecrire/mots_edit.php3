@@ -247,7 +247,7 @@ if ($connect_statut =="0minirezo"){
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
 		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots",
-							  "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
+							  "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
 							  "('" .
 							  addslashes(_T('info_mot_sans_groupe'))."', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'");
 

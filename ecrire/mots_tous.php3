@@ -66,13 +66,13 @@ if ($connect_statut == '0minirezo') {
 
 			$query = "UPDATE spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
 				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
-				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'
+				minirezo='$acces_minirezo', comite='$acces_comite', forum='$acces_forum'
 				WHERE id_groupe='$id_groupe'";
 			spip_query($query);
 		} else {	// creation groupe
 			$query = "INSERT INTO spip_groupes_mots SET titre='$change_type', texte='$texte', descriptif='$descriptif', unseul='$unseul', obligatoire='$obligatoire',
 				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic',
-				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'";
+				minirezo='$acces_minirezo', comite='$acces_comite', forum='$acces_forum'";
 			spip_query($query);
 		}
 	}
@@ -198,9 +198,9 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$breves = $row_groupes['breves'];
 	$rubriques = $row_groupes['rubriques'];
 	$syndic = $row_groupes['syndic'];
-	$acces_minirezo = $row_groupes['0minirezo'];
-	$acces_comite = $row_groupes['1comite'];
-	$acces_forum = $row_groupes['6forum'];
+	$acces_minirezo = $row_groupes['minirezo'];
+	$acces_comite = $row_groupes['comite'];
+	$acces_forum = $row_groupes['forum'];
 
 	// Afficher le titre du groupe
 	debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);

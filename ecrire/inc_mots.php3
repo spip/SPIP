@@ -304,8 +304,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$titre_groupe = entites_html($row_groupe['titre']);
 				$unseul = $row_groupe['unseul'];
 				$obligatoire = $row_groupe['obligatoire'];
-				$acces_admin =  $row_groupe['0minirezo'];
-				$acces_redacteur = $row_groupe['1comite'];
+				$acces_admin =  $row_groupe['minirezo'];
+				$acces_redacteur = $row_groupe['comite'];
 	
 				$flag_groupe = ($flag_editable AND (($connect_statut == '1comite' AND $acces_redacteur == 'oui') OR ($connect_statut == '0minirezo' AND $acces_admin == 'oui')));
 			}
@@ -439,9 +439,9 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 			$breves = $row_groupes['breves'];
 			$rubriques = $row_groupes['rubriques'];
 			$syndic = $row_groupes['syndic'];
-			$acces_minirezo = $row_groupes['0minirezo'];
-			$acces_comite = $row_groupes['1comite'];
-			$acces_forum = $row_groupes['6forum'];
+			$acces_minirezo = $row_groupes['minirezo'];
+			$acces_comite = $row_groupes['comite'];
+			$acces_forum = $row_groupes['forum'];
 			
 			$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ";
 			if ($les_mots) $query .= "AND id_mot NOT IN ($les_mots) ";
