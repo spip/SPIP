@@ -1,0 +1,169 @@
+<paquet
+	prefix="spip"
+	categorie="outil"
+	version="3.0.0-rc"
+	etat="test"
+	compatibilite="];["
+	schema="19268"
+	documentation="http://www.spip.net"
+	demonstration="http://demo.spip.org"
+	developpement="http://core.spip.org/projects/spip/"
+>
+
+	<nom>SPIP</nom>
+	<!-- Système de publication pour l'Internet -->
+
+	<auteur>Arnaud Martin</auteur>
+	<auteur>Antoine Pitrou</auteur>
+	<auteur>Philippe Riviere</auteur>
+	<auteur>Emmanuel Saint-James</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<traduire module="spip" reference="fr" gestionnaire="salvatore" />
+	<traduire module="ecrire" reference="fr" gestionnaire="salvatore" />
+	<traduire module="public" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="accueil_encours" action="" />
+	<pipeline nom="accueil_informations" action="" />
+	<pipeline nom="affichage_final" action="f_surligne" inclure="inc/pipelines.php" />
+	<pipeline nom="affichage_final" action="f_tidy" />
+	<pipeline nom="affichage_final" action="f_admin" />
+	<pipeline nom="affichage_final" action="f_queue" />
+	<pipeline nom="affichage_final_prive" action="affichage_final_prive_title_auto" inclure="inc/pipelines_ecrire.php" />
+	<pipeline nom="affichage_entetes_final" action="" />
+	<pipeline nom="affichage_entetes_final_prive" action="" />
+	<pipeline nom="afficher_fiche_objet" action="" />
+	<pipeline nom="afficher_complement_objet" action="" />
+	<pipeline nom="afficher_config_objet" action="" />
+	<pipeline nom="afficher_contenu_objet" action="" />
+	<pipeline nom="afficher_nombre_objets_associes_a" action="" />
+	<pipeline nom="afficher_message_statut_objet" action="" />
+	<pipeline nom="affiche_auteurs_interventions" action="" />
+	<pipeline nom="affiche_droite" action="" />
+	<pipeline nom="affiche_gauche" action="" />
+	<pipeline nom="affiche_milieu" action="f_queue_affiche_milieu" />
+	<pipeline nom="affiche_pied" action="" />
+	<pipeline nom="affiche_enfants" action="" />
+	<pipeline nom="affiche_hierarchie" action="" />
+	<pipeline nom="affiche_formulaire_login" action="auth_formulaire_login" inclure="inc/pipelines.php" />
+	<pipeline nom="alertes_auteur" action="" />
+	<pipeline nom="arbo_creer_chaine_url" action="" />
+	<pipeline nom="autoriser" action="" />
+	<pipeline nom="base_admin_repair" action="" />
+	<pipeline nom="boite_infos" action="f_boite_infos" inclure="inc/pipelines_ecrire.php" />
+	<pipeline nom="ajouter_menus" action="" />
+	<pipeline nom="ajouter_onglets" action="" />
+	<pipeline nom="body_prive" action="" />
+	<pipeline nom="calculer_rubriques" action="" />
+	<pipeline nom="configurer_liste_metas" action="" />
+	<pipeline nom="compter_contributions_auteur" action="" />
+	<pipeline nom="declarer_filtres_squelettes" action="" />
+	<pipeline nom="declarer_tables_interfaces" action="" />
+	<pipeline nom="declarer_tables_objets_sql" action="" />
+	<pipeline nom="declarer_tables_principales" action="" />
+	<pipeline nom="declarer_tables_auxiliaires" action="" />
+	<pipeline nom="declarer_tables_objets_surnoms" action="" />
+	<pipeline nom="declarer_type_surnoms" action="" />
+	<pipeline nom="declarer_url_objets" action="" />
+	<pipeline nom="detecter_fond_par_defaut" action="" />
+	<pipeline nom="definir_session" action="" />
+	<pipeline nom="delete_tables" action="" />
+	<pipeline nom="editer_contenu_objet" action="" />
+	<pipeline nom="exec_init" action="" />
+	<pipeline nom="filtrer_liste_plugins" action="" />
+	<pipeline nom="formulaire_charger" action="cvtmulti_formulaire_charger" inclure="inc/cvt_multietapes.php" />
+	<pipeline nom="formulaire_charger" action="cvtconf_formulaire_charger" inclure="inc/cvt_configurer.php" />
+	<pipeline nom="formulaire_charger" action="cvtautosave_formulaire_charger" inclure="inc/cvt_autosave.php" />
+	<pipeline nom="formulaire_verifier" action="cvtmulti_formulaire_verifier" inclure="inc/cvt_multietapes.php" />
+	<pipeline nom="formulaire_traiter" action="cvtconf_formulaire_traiter" inclure="inc/cvt_configurer.php" />
+	<pipeline nom="formulaire_traiter" action="cvtautosave_formulaire_traiter" inclure="inc/cvt_autosave.php" />
+	<pipeline nom="formulaire_fond" action="" />
+	<pipeline nom="formulaire_admin" action="" />
+	<pipeline nom="header_prive" action="f_jQuery_prive" inclure="inc/pipelines_ecrire.php" />
+	<pipeline nom="header_prive_css" action="" />
+	<pipeline nom="image_preparer_filtre" action="" />
+	<pipeline nom="insert_head" action="f_jQuery" inclure="inc/pipelines.php" />
+	<pipeline nom="insert_head_css" action="" />
+	<pipeline nom="jquery_plugins" action="" />
+	<pipeline nom="jqueryui_plugins" action="" />
+	<pipeline nom="lister_tables_noerase" action="" />
+	<pipeline nom="lister_tables_noexport" action="" />
+	<pipeline nom="lister_tables_noimport" action="" />
+	<pipeline nom="libeller_logo" action="" />
+	<pipeline nom="nettoyer_raccourcis_typo" action="" />
+	<pipeline nom="notifications" action="" />
+	<pipeline nom="objet_compte_enfants" action="" />
+	<pipeline nom="optimiser_base_disparus" action="" />
+	<pipeline nom="prepare_recherche" action="" />
+	<pipeline nom="pre_boucle" action="" />
+	<pipeline nom="post_boucle" action="" />
+	<pipeline nom="post_image_filtrer" action="" />
+	<pipeline nom="preparer_fichier_session" action="" />
+	<pipeline nom="preparer_visiteur_session" action="" />
+	<pipeline nom="pre_propre" action="" />
+	<pipeline nom="pre_liens" action="traiter_raccourci_glossaire" />
+	<pipeline nom="pre_liens" action="traiter_raccourci_ancre" />
+	<pipeline nom="post_propre" action="" />
+	<pipeline nom="pre_typo" action="" />
+	<pipeline nom="post_typo" action="quote_amp" />
+	<pipeline nom="pre_edition" action="" />
+	<pipeline nom="pre_edition_lien" action="" />
+	<pipeline nom="post_edition" action="" />
+	<pipeline nom="post_edition_lien" action="" />
+	<pipeline nom="pre_insertion" action="" />
+	<pipeline nom="post_insertion" action="" />
+	<pipeline nom="pre_indexation" action="" />
+	<pipeline nom="propres_creer_chaine_url" action="" />
+	<pipeline nom="requete_dico" action="" />
+	<pipeline nom="rubrique_encours" action="" />
+	<pipeline nom="taches_generales_cron" action="" />
+	<pipeline nom="rechercher_liste_des_champs" action="" />
+	<pipeline nom="rechercher_liste_des_jointures" action="" />
+	<pipeline nom="recuperer_fond" action="f_recuperer_fond" inclure="inc/pipelines.php" />
+	<pipeline nom="styliser" action="cvtmulti_styliser" inclure="inc/cvt_multietapes.php" />
+	<pipeline nom="trig_auth_trace" action="" />
+	<pipeline nom="trig_calculer_prochain_postdate" action="" />
+	<pipeline nom="trig_calculer_langues_rubriques" action="" />
+	<pipeline nom="trig_propager_les_secteurs" action="" />
+	<pipeline nom="trig_supprimer_objets_lies" action="" />
+	<pipeline nom="trig_purger" action="" />
+
+	<procure nom="iterateurs" version="0.6.1" />
+	<procure nom="queue" version="0.6.6" />
+	<procure nom="jqueryui" version="1.8.19" />
+
+	<menu nom="menu_accueil" titre="icone_accueil" icone="images/accueil-48.png" action="accueil" />
+	<menu nom="menu_edition" titre="icone_edition" icone="images/edition-48.png" action="navigation" parametres="menu=menu_edition" />
+	<menu nom="auteurs" titre="icone_auteurs" parent="menu_edition" icone="images/auteur-16.png" />
+	<menu nom="rubriques" titre="info_rubriques" parent="menu_edition" icone="images/rubrique-16.png" action="rubriques" />
+	<menu nom="articles" titre="info_articles_2" parent="menu_edition" icone="images/article-16.png" />
+	<menu nom="menu_publication" titre="icone_publication" icone="images/publication-48.png" action="navigation" parametres="menu=menu_publication"/>
+	<menu nom="suivi_edito" titre="icone_suivi_publication" parent="menu_publication" icone="images/suivi-16.png" />
+	<menu nom="synchro" titre="icone_suivi_activite" parent="menu_publication" icone="images/rss-16.png" />
+	<menu nom="menu_activite" titre="icone_activite" icone="images/activite-48.png" action="navigation" parametres="menu=menu_activite"/>
+	<menu nom="visiteurs" titre="icone_afficher_visiteurs" parent="menu_activite" icone="images/auteur-6forum-16.png" action="visiteurs" />
+	<menu nom="menu_squelette" titre="icone_squelette" icone="images/squelette-48.png" action="navigation" parametres="menu=menu_squelette"/>
+	<menu nom="menu_administration" titre="icone_administration" icone="images/administration-48.png" action="navigation" parametres="menu=menu_administration"/>
+	<menu nom="admin_vider" titre="onglet_vider_cache" parent="menu_administration" icone="images/cache-empty-16.png" />
+	<menu nom="admin_maintenir" titre="titre_admin_tech" parent="menu_administration" icone="images/base-maintenance-16.png" action="admin_tech" />
+	<menu nom="job_queue" titre="queue_titre" parent="menu_administration" icone="images/queue-process-16.png" />
+	<menu nom="menu_configuration" titre="icone_configuration" icone="images/configuration-48.png" action="navigation" parametres="menu=menu_configuration"/>
+	<menu nom="configurer_identite" titre="titre_identite_site" parent="menu_configuration" icone="images/identite-16.png" action="configurer_identite" />
+	<menu nom="configurer_langue" titre="info_langue_principale" parent="menu_configuration" icone="images/langue-16.png" />
+	<menu nom="configurer_multilang" titre="info_multilinguisme" parent="menu_configuration" icone="images/traduction-16.png" />
+	<menu nom="configurer_contenu" titre="onglet_contenu_site" parent="menu_configuration" icone="images/config-contenu-16.png" />
+	<menu nom="configurer_interactions" titre="onglet_interactivite" parent="menu_configuration" icone="images/config-interaction-16.png" />
+	<menu nom="configurer_avancees" titre="onglet_fonctions_avances" parent="menu_configuration" icone="images/configuration-16.png" />
+	<menu nom="admin_plugin" titre="icone_admin_plugin" parent="menu_configuration" position="-1" icone="images/plugin-16.png" />
+	<menu nom="outils_collaboratifs" titre="icone_outils_collaboratifs" />
+	<menu nom="outils_rapides" titre="icone_outil_rapides" />
+	<menu nom="rubrique_creer" titre="icone_creer_rubrique_2" parent="outils_rapides" icone="images/rubrique-new-16.png" action="rubrique_edit" parametres="new=oui&amp;id_parent=@id_rubrique@"/>
+	<menu nom="article_creer" titre="icone_ecrire_article" parent="outils_rapides" icone="images/article-new-16.png" action="article_edit" parametres="new=oui&amp;id_rubrique=@id_rubrique@"/>
+	<menu nom="auteur_creer" titre="icone_creer_nouvel_auteur" parent="outils_rapides" icone="images/auteur-new-16.png" action="auteur_edit" parametres="new=oui"/>
+
+	<onglet nom="infos_perso" titre="icone_mes_infos" parent="infos_perso" icone="images/information-perso-24.png" />
+	<onglet nom="configurer_langage" titre="icone_ma_langue" parent="infos_perso" icone="images/ma_langue-24.png" />
+	<onglet nom="configurer_preferences" titre="icone_mes_preferences" parent="infos_perso" icone="images/mes_preferences-24.png" />
+	<onglet nom="plugins_actifs" titre="plugin_titre_modifier" parent="plugins" icone="images/plugin-24.png" action="admin_plugin" />
+</paquet>
