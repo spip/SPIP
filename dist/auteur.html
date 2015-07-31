@@ -3,7 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<INCLURE{fond=inc-head}{titre=#NOM}{descriptif=#BIO}>
+	<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+	[<meta name="description" content="(#BIO|couper{150}|textebrut)" />]
+	<INCLURE{fond=inc-head}{lang}>
+
 </head>
 
 <body class="page_auteur">
