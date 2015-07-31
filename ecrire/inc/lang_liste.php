@@ -186,6 +186,7 @@ $GLOBALS['codes_langues'] = array(
 	'uz' => "U'zbek",
 	'vi' => "Ti&#7871;ng Vi&#7879;t",
 	'vo' => "Volapuk",
+	'wa' => "walon",
 	'wo' => "Wolof",
 	'xh' => "Xhosa",
 	'yi' => "Yiddish",
