@@ -437,7 +437,19 @@ function _T($texte, $args=array(), $class='') {
 		$traduire = charger_fonction('traduire', 'inc');
 		include_spip('inc/lang');
 	}
-	$text = $traduire($texte,$GLOBALS['spip_lang']);
+	
+	// On peut passer explicitement la langue dans le tableau
+	// On utilise le même nom de variable que la globale
+	if ($args['spip_lang']){
+		$lang = $args['spip_lang'];
+		// On l'enleve pour ne pas le passer au remplacement
+		unset($args['spip_lang']);
+	}
+	// Sinon on prend la langue du contexte
+	else{
+		$lang = $GLOBALS['spip_lang'];
+	}
+	$text = $traduire($texte, $lang);
 
 	if (!strlen($text))
 		// pour les chaines non traduites, assurer un service minimum
