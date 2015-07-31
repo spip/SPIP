@@ -1768,7 +1768,8 @@ function f_jQuery ($texte) {
 // #TEXTE|concat{texte1,texte2,...}
 // http://doc.spip.org/@concat
 function concat(){
-	return join('', func_get_args());
+	$args = func_get_args();
+	return join('', $args);
 }
 
 ?>
