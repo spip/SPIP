@@ -1,0 +1,24 @@
+	<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_r,#ENV{id_rubrique}}}{statut?}>
+		<div class='chemin'>
+			<a href='[(#SELF|parametre_url{id_r,0})]' class='ajax'><:info_racine_site:></a>
+			<BOUCLE_chemin(HIERARCHIE){id_rubrique}> &gt; <a href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]' class='ajax'>#TITRE</a></BOUCLE_chemin> &gt; <strong class='on'>#TITRE</strong>
+		</div>#SET{n,0}
+		<B_contenu>
+		[(#REM) afficher la racine si la profondeur le permet]
+		[(#GRAND_TOTAL|<{#TOTAL_BOUCLE}|oui)
+		<div class='frame[ total_(#GRAND_TOTAL|max{#TOTAL_BOUCLE|moins{1}})] frame_0'><h2>[<a(#ENV{rubriques,0}|oui) href='#' onclick="jQuery(this).item_pick('rubrique|0','#ENV{name,id_item}','<:info_racine_site|texte_script|attribut_html:>','rubrique');return false;"
+><img class='add' src='#CHEMIN{img_pack/item-add.png}' alt='' /></a>]<:info_racine_site:></h2>
+		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>]
+		<BOUCLE_contenu(HIERARCHIE){id_rubrique}{tout}{n-4,4}>#SET{n,0}
+		<div class='frame[ total_(#GRAND_TOTAL|min{#TOTAL_BOUCLE|moins{1}})][ frame_(#COMPTEUR_BOUCLE|moins{#GRAND_TOTAL|plus{1}|max{#TOTAL_BOUCLE}}|plus{#TOTAL_BOUCLE})]'><a
+		href='[(#SELF|parametre_url{id_r,#_rub:ID_PARENT|?{#_rub:ID_PARENT,racine}})]' class='frame_close ajax'><img src='#CHEMIN{img_pack/frame-close.png}' alt='' /></a>
+		<h2><a class='ajax' href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>#TITRE</a></h2>
+		[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique}{env})]
+		[(#ENV{articles,0}|oui) [(#INCLURE{fond=formulaires/selecteur/inc-nav-articles}{id_rubrique}{id_article}{env})] ]
+		</div>
+		</BOUCLE_contenu>
+
+	</BOUCLE_rub>
+	<div class='chemin'><strong class='on'><:info_racine_site:></strong></div>
+	<div class='frame total_0 frame_0'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>
+	<//B_rub>

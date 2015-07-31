@@ -1,0 +1,34 @@
+#SET{bouton_modif,#ENV{select,''}|?{bouton_modifier,bouton_ajouter}|_T}
+[(#REM) Afficher un bouton ajax Modifier a la premiere fois ----------------------------------------
+][(#ENV{picker,''}|non)
+<div class='picker_bouton'>&#91;<a href='[(#SELF|parametre_url{picker,1})]' class='ajax'>#GET{bouton_modif}</a>&#93;</div>
+]
+[(#REM) Afficher un bouton Fermer/Modifier ensuite ---------------------------------------- 
+][(#ENV{picker,''}|oui)
+<div class='picker_bouton'>&#91;<a class='close'
+href='[(#SELF|parametre_url{picker,0})]' 
+onclick="jQuery(this).parent().picker_toggle();return false;"
+><:bouton_fermer:></a><a class='edit'
+href='[(#SELF|parametre_url{picker,1})]' 
+onclick="jQuery(this).parent().picker_toggle();return false;"
+style='display:none;'>#GET{bouton_modif}</a>&#93;</div>
+
+[(#REM) et enfin le navigateur ------]
+<div class='browser'>
+	<div class="choix choix_rapide">
+		<label for="picker_id"><:spip_bonux:id_rapide:></label>
+		<input type="text" value="" id="picker_id" size="10" />
+		<a href="#"
+			 onclick="jQuery.ajax({'url':'[(#URL_PAGE{ajax_item_pick,rubriques=[(#ENV{rubriques})]&articles=[(#ENV{articles})]&ref=})]'+jQuery('#picker_id').attr('value'),
+			 'success':function(r){
+					eval('r = '+r); // JSON envoye par ajax_item_pick.html
+					if (r){
+						jQuery('#picker_id').item_pick(r.id,'#ENV{name,id_item}',r.titre,r.type);
+					}
+					jQuery('#picker_id').attr('value','');
+			 }
+		 });return false;">#GET{bouton_modif}</a>
+	</div>
+	<INCLURE{fond=formulaires/selecteur/navigateur}{ajax}{env}>
+</div>
+]

@@ -1,0 +1,13 @@
+.item_picker .chemin {border-bottom:1px sold #eee;margin:0.5em 0 0.25em;}
+
+.item_picker .frame {border:1px solid #999;width:180px;height:400px;float:left;overflow:auto;}
+.item_picker .frame h2 {margin:0;padding:5px;background:#999;}
+.item_picker .frame ul {list-style:none;margin:0;padding:0;}
+.item_picker .frame ul li {list-style:none;margin:0;padding:2px;padding-left:26px;}
+.item_picker .frame ul li.rubrique {background:url(prive/images/rubrique-24.gif) no-repeat top left;}
+.item_picker .frame ul li.article {background:url(prive/images/article-24.gif) no-repeat top left;}
+
+.item_picker .frame ul li:hover {background-color:#999;}
+
+.browser .choix_rapide {font-size:0.9em;}
+.browser #picker_id {padding:0;margin:0 5px;border:1px solid;}

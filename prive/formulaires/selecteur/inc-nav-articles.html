@@ -1,0 +1,18 @@
+#SET{p,pa_#ID_RUBRIQUE}<B_articles>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+<ul>
+<BOUCLE_articles(ARTICLES){id_rubrique}{statut?}{pagination 100 #GET{p}}><li
+	class='article[ (#EXPOSE)]'>[(#ENV{picker_article,1}|oui)<a
+	href='#'
+	onclick="jQuery(this).item_pick('article|#ID_ARTICLE','#ENV{name,id_item}','[(#TITRE*|attribut_html|texte_script|replace{'&#039;',#VAL{'\\'}|concat{#EVAL{chr(39)}}})]','article');return false;"
+><img
+	class='add'
+	src='#CHEMIN_IMAGE{ajouter-16.png}'
+	alt='ajouter'
+	width="16"
+	height="16"
+	/>][(#ENV{picker_article,1}|non)<a
+	href='[(#ID_ARTICLE|generer_url_entite{article})]'>]#TITRE</a></li>
+</BOUCLE_articles>
+</ul>
+</B_articles>
