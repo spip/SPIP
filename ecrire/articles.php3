@@ -14,6 +14,7 @@ $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
+$articles_versions = lire_meta("articles_versions");
 
 if ($id_article==0) {
 	if ($new=='oui') {
@@ -221,6 +222,13 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
+	
+	// -- Experimental --
+	// Stockage des versions
+	if ($articles_versions != 'non') {
+		include_ecrire("inc_diff.php3");
+		ajouter_version($id_article, stripslashes($chapo), stripslashes($texte), stripslashes($ps), '');
+	}
 
 	// Changer la langue heritee
 	if ($id_rubrique != $id_rubrique_old) {
