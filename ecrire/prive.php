@@ -20,29 +20,20 @@ $auth = charger_fonction('auth', 'inc');
 $var_auth = $auth();
 
 if ($var_auth !== '') {
-	if (!is_string($var_auth)) {
+	if (!is_int($var_auth)) {
 	// si l'authentifie' n'a pas acces a l'espace de redac
 	// c'est qu'on voulait forcer sa reconnaissance en tant que visiteur.
 	// On reexecute pour deboucher sur le include public.
-		if (is_array($var_auth)) {
-			$redir = '../?' . $_SERVER['QUERY_STRING'];
-			spip_setcookie('spip_session', $_COOKIE['spip_session'], time() + 3600 * 24 * 14);
-		} else {
 	// autrement on insiste
-			$redir = generer_url_public('login',
-			"url=" . 
-			rawurlencode(str_replace('/./', '/',
-				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
-						 . str_replace('&amp;', '&', self()))), true);
+		if (is_array($var_auth)) {
+			$var_auth = '../?' . $_SERVER['QUERY_STRING'];
+			spip_setcookie('spip_session', $_COOKIE['spip_session'], time() + 3600 * 24 * 14);
 		}
 		include_spip('inc/headers');
-		$var_auth = redirige_formulaire($redir);
+		redirige_formulaire($var_auth);
 	}
-	echo $var_auth;
-	exit;
 }
 
 // En somme, est prive' ce qui est publiquement nomme'...
-
 include_once 'public.php';
 ?>
