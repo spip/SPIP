@@ -509,7 +509,6 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 	foreach($ordre as $p => $info){
 		// $ordre peur contenir des plugins en attente et non valides pour ce hit
 		if (isset($plugin_valides[$p])){
-			$sign .= md5(serialize($info));
 			$dir_type = $plugin_valides[$p]['dir_type'];
 			$plug = $plugin_valides[$p]['dir'];
 			$dir = constant($dir_type);
@@ -519,14 +518,36 @@ function plugins_precompile_xxxtions($plugin_valides, $ordre)
 			if ($info['onglet'])
 				$onglets = array_merge($onglets,$info['onglet']);
 			foreach($contenu as $charge => $v){
-				if (isset($info[$charge])) foreach($info[$charge] as $file){
-			// on genere un if file_exists devant chaque include
-			// pour pouvoir garder le meme niveau d'erreur general
-					$file = trim($file);
-					$_file = $root_dir_type . ".'$plug/$file'";
-					$contenu[$charge] .= "include_once_check($_file);\n";
+				// si pas declare/detecte a la lecture du paquet.xml,
+				// detecer a nouveau ici puisque son ajout ne provoque pas une modif du paquet.xml
+				// donc ni sa relecture, ni sa detection
+				if (!isset($info[$charge])
+					AND $dir // exclure le cas du plugin "SPIP"
+					AND file_exists("$dir$plug/paquet.xml") // uniquement pour les paquet.xml
+					){
+					if (is_readable("$dir$plug/".($file=$info['prefix']."_".$charge.".php"))){
+						$info[$charge] = array($file);
+					}
+				}
+				if (isset($info[$charge])){
+					$files = $info[$charge];
+					foreach($files as $k=>$file){
+						// on genere un if file_exists devant chaque include
+						// pour pouvoir garder le meme niveau d'erreur general
+						$file = trim($file);
+						if (!is_readable("$dir$plug/$file")
+							// uniquement pour les paquet.xml
+							AND file_exists("$dir$plug/paquet.xml")){
+							unset($info[$charge][$k]);
+						}
+						else {
+							$_file = $root_dir_type . ".'$plug/$file'";
+							$contenu[$charge] .= "include_once_check($_file);\n";
+						}
+					}
 				}
 			}
+			$sign .= md5(serialize($info));
 		}
 	}
 
