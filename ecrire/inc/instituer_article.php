@@ -13,10 +13,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@inc_instituer_article_dist
-function inc_instituer_article_dist($id_article, $statut=-1)
+function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 {
-	if ($statut == -1) return demande_publication($id_article);
-
 	// menu de date pour les articles post-dates (plugin)
 	/* un branchement sauvage ?
 	if ($statut <> 'publie'
@@ -33,8 +31,16 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 		'poubelle' => array(_T('texte_statut_poubelle'),''),	
 		'refuse' => array(_T('texte_statut_refuse'),'')	
 	);
+	$res = '';
 
-	$res =
+	if (!autoriser('publierdans', 'rubrique', $id_rubrique)) {
+		unset($liste_statuts['publie']);
+		unset($liste_statuts['refuse']);
+		if ($statut == 'prepa')
+			$res = supprimer_tags(_T('texte_proposer_publication'));
+	}
+	
+	$res .=
 	  "<ul id='instituer_article-$id_article' class='instituer_article instituer'>" 
 	  . "<li>" . _T('texte_article_statut') 
 		. aide("artstatut")
@@ -51,7 +57,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
   
 	return $res;
 }
-
+/*
 // http://doc.spip.org/@demande_publication
 function demande_publication($id_article)
 {
@@ -70,5 +76,5 @@ function demande_publication($id_article)
 		"</div>" .
 		fin_cadre_relief(true);
 }
-
+*/
 ?>
