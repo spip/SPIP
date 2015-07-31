@@ -158,7 +158,7 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 					$result = spip_query($query. 
 #" LIMIT  500 OFFSET $debut_limit" # PG
 " LIMIT  $debut_limit, 500"
-							     };
+							     );
 					$debut_limit = $debut_limit + 500;
 					if ($debut_limit > $total) {
 						$debut_limit = 0;
