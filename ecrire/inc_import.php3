@@ -349,10 +349,13 @@ function import_abandon() {
 
 function import_all($f, $gz=false) {
 	global $import_ok;
-	global $meta;
 	global $auth_htaccess;
 	global $connect_id_auteur;
 	$_fseek = ($gz) ? gzseek : fseek;
+
+	// utiliser une version fraiche des metas (ie pas le cache)
+	include_ecrire('inc_meta.php3');
+	lire_metas();
 
 	$my_date = lire_meta_maj("debut_restauration");
 	if (!$my_date) return false;
