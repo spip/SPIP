@@ -806,6 +806,24 @@ function spip_sqlite_optimize($table, $serveur='',$requeter=true){
 	return true;
 }
 
+/**
+ * Optimise une table SQL
+ * Note: Sqlite optimise TOUTE un fichier sinon rien.
+ * On evite donc 2 traitements sur la meme base dans un hit.
+ * 
+ * @param $table nom de la table a optimiser
+ * @param $serveur nom de la connexion
+ * @param $requeter effectuer la requete ? sinon retourner son code
+ * @return bool|string true / false / requete
+**/
+// http://doc.spip.org/@spip_sqlite_optimize
+function spip_sqlite_optimize($table, $serveur='', $requeter=true) {
+	static $do = false;
+	if ($requeter and $do) {return true;}
+	if ($requeter) { $do = true; }
+	return spip_sqlite_query("VACUUM", $serveur, $requeter);
+}
+
 
 // avoir le meme comportement que _q()
 function spip_sqlite_quote($v, $type=''){
