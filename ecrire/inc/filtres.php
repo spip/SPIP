@@ -3046,7 +3046,7 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 		if (!file_exists($filename)
 		  OR md5_file($filename)!==md5_file($filename.".last")){
 			@copy($filename.".last",$filename);
-			clearstatcache(true,$filename); // eviter que PHP ne reserve le vieux timestamp
+			spip_clearstatcache(true,$filename); // eviter que PHP ne reserve le vieux timestamp
 		}
 	}
 	
