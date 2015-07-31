@@ -47,7 +47,8 @@ function balise_BOITE_OUVRIR_dist($p) {
 	$_class = ($_class?", $_class":", 'simple'");
 	$_head_class = ($_head_class?", $_head_class":"");
 
-	$p->code = "boite_ouvrir($_titre$_class$_head_class)";
+	$f = chercher_filtre('boite_ouvrir');
+	$p->code = "$f($_titre$_class$_head_class)";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -63,7 +64,8 @@ function balise_BOITE_PIED_dist($p) {
 	$_class = interprete_argument_balise(1,$p);
 	$_class = ($_class?"$_class":"");
 
-	$p->code = "boite_pied($_class)";
+	$f = chercher_filtre('boite_pied');
+	$p->code = "$f($_class)";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -76,7 +78,8 @@ function balise_BOITE_PIED_dist($p) {
  * @return <type>
  */
 function balise_BOITE_FERMER_dist($p) {
-	$p->code = "boite_fermer()";
+	$f = chercher_filtre('boite_fermer');
+	$p->code = "$f()";
 	$p->interdire_scripts = false;
 	return $p;
 }
