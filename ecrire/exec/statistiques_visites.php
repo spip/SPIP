@@ -35,7 +35,7 @@ function http_img_rien($width, $height, $style='', $title='') {
 		. (!$title ? '' : (" title=\"$title\"")));
 }
 
-function statistiques_visites_dist()
+function exec_statistiques_visites_dist()
 {
   global
     $aff_jours,

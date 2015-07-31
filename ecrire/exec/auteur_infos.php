@@ -16,7 +16,7 @@ include_ecrire("inc_auteur_voir");
 include_ecrire ("inc_acces");
 include_ecrire ("inc_abstract_sql");
 
-function auteur_infos_dist()
+function exec_auteur_infos_dist()
 {
 global $ajouter_id_article,
   $bio,
@@ -199,11 +199,11 @@ if ($nom OR $statut) {
 if (!$echec AND $redirect_ok == "oui") {
   redirige_par_entete($redirect ? rawurldecode($redirect) : generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur", true));
 }
-affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
+exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
 
 }
 
-function affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus)
+function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus)
 {
   global $connect_id_auteur, $extra;
 

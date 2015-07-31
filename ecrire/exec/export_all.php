@@ -16,7 +16,7 @@ $GLOBALS['version_archive'] = '1.2';
 
 include_ecrire('inc_admin');
 
-function export_all_dist()
+function exec_export_all_dist()
 {
   global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive;
 

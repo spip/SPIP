@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_suivi_versions");
 
-function suivi_revisions_dist()
+function exec_suivi_revisions_dist()
 {
   global
     $connect_id_auteur,

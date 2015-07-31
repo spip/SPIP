@@ -62,7 +62,7 @@ function import_all_check() {
 	exit;
 }
 
-function import_all_dist()
+function exec_import_all_dist()
 {
 	// si l'appel est explicite, passer par l'authentification ftp
 	if (!$GLOBALS['meta']["debut_restauration"])

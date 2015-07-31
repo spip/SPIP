@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function forum_admin_dist() {
+function exec_forum_admin_dist() {
 	include_spip('exec/forum');
 	$GLOBALS['admin'] = 'oui';
-	forum_dist();
+	exec_forum_dist();
 }
 
 ?>

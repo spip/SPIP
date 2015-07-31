@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_rubriques");
 
-function rubriques_edit_dist()
+function exec_rubriques_edit_dist()
 {
   global
     $champs_extra,

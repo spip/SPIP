@@ -272,7 +272,7 @@ echo "<P><HR><P>";
 }
 
 
-function affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
+function exec_affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
 {
   global $champs_extra;
 debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles", "hauteurTextarea();");
@@ -312,7 +312,7 @@ fin_page();
 // Creation de l'objet article
 //
 
-function articles_edit_dist()
+function exec_articles_edit_dist()
 {
   global $connect_id_auteur, $spip_lang, $id_article, $id_rubrique, $lier_trad, $new;
   $id_article = intval($id_article);
@@ -453,7 +453,7 @@ if (!$flag_editable) {
 
 spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 
- affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $GLOBALS['meta']);
+ exec_affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $GLOBALS['meta']);
 }
 
 ?>

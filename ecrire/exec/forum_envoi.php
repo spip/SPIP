@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_spip ('inc_barre');
 include_ecrire ("inc_forum");
 
-function forum_envoi_dist()
+function exec_forum_envoi_dist()
 {
 global
   $adresse_retour,

@@ -28,7 +28,7 @@ function ligne_uid ($texte) {
 	echo filtrer_ical("UID:$texte @ " . $GLOBALS['meta']["adresse_site"])."\n";
 }
 
-function ical_dist()
+function action_ical_dist()
 {
 	global $id_auteur, $arg, $action, $titres;
 	if (verifier_low_sec($id_auteur, $arg, $action)) {

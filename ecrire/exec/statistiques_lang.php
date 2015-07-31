@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function statistiques_lang_dist()
+function exec_statistiques_lang_dist()
 {
   global $connect_statut, $couleur_foncee, $critere, $spip_ecran, $spip_lang_right;
 

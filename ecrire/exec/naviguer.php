@@ -22,7 +22,7 @@ include_ecrire("inc_mots");
 include_ecrire("inc_documents");
 include_ecrire("inc_abstract_sql");
 
-function naviguer_dist()
+function exec_naviguer_dist()
 {
   global $action, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
 

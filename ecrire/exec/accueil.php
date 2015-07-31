@@ -423,7 +423,7 @@ if ($spip_display != 4) {
 
 
 
-function accueil_dist()
+function exec_accueil_dist()
 {
 
   global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;

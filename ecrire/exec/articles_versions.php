@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_revisions");
 
-function articles_versions_dist()
+function exec_articles_versions_dist()
 {
   global
     $champs_extra,

@@ -23,11 +23,11 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 $var_auth ="";
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
- } else {
+} else {
 	include_ecrire ("inc_session");
 	$var_auth = include_fonction('auth');
 	if (!$var_auth()) exit;
- } 
+}
 
 //
 // Preferences de presentation
@@ -147,16 +147,14 @@ if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']) {
 //
 
 if (!isset($reinstall)) {
-
 	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
-
-	  include_ecrire('inc_admin');
-	  demande_maj_version();
+		include_ecrire('inc_admin');
+		demande_maj_version();
 	}
- }
+}
 
 //
-// Controle d' interruption d'une longue restauration
+// Controle d'interruption d'une longue restauration
 //
 if ($GLOBALS['_COOKIE']['spip_admin'] AND $GLOBALS['meta']["debut_restauration"])
 	$exec = 'import_all';

@@ -19,7 +19,7 @@ include_ecrire("inc_presentation");
 // et memoriser la liste des lettres initiales
 //
 
-function auteurs_dist()
+function exec_auteurs_dist()
 {
   global  $debut, $tri, $visiteurs;
 

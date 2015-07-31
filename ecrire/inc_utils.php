@@ -52,21 +52,36 @@ function include_ecrire($file, $silence=false) {
 	return include_local(_DIR_INCLUDE . $file, $silence);
 }
 
-// charge un fichier perso ou, a defaut, standard
-// et retourne si elle existe le nom de la fonction homonyme, ou de suffixe _dist
 
+// charge un fichier perso ou, a defaut, standard
+// et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
+// ou de suffixe _dist
 function include_fonction($nom, $dossier='exec') {
-	if(!preg_match(',^[a-z0-9_-]+$,', $nom)) return;
-	$inc = include_spip($dossier.'/'.$nom);
-	if (function_exists($nom))
-		return $nom;
-	elseif (function_exists($f = $nom . "_dist"))
+
+	// Securite de base
+	if (!preg_match(',^[a-z0-9_-]+$,', $nom))
+		redirige_par_entete('./');
+
+	// Si la fonction existe deja (definie par mes_options, par exemple)
+	if (function_exists($f = $dossier.'_'.$nom))
 		return $f;
-	else {
-		spip_log("fonction $nom indisponible" .
-			($inc ? "" : "(fichier $dossier/$nom absent)"));
-		exit;
-	}
+
+	// Sinon charger le fichier de declaration
+	$inc = include_spip($dossier.'/'.$nom);
+	if (function_exists($f = $dossier.'_'.$nom) # definition perso ?
+	OR function_exists($f = $dossier.'_'.$nom.'_dist')) # definition standard
+		return $f;
+
+	// Echec : message d'erreur
+	spip_log("fonction $nom indisponible" .
+		($inc ? "" : "(fichier $dossier/$nom absent)"));
+
+	include_ecrire('inc_minipres');
+	install_debut_html(_T('forum_titre_erreur'));
+	echo '<p>' . _T('fichier_introuvable',
+		array('fichier'=> '<b>'.htmlentities("$dossier/$nom").'</b>'));
+	install_fin_html();
+	exit;
 }
 
 //

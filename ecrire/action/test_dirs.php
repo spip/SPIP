@@ -35,7 +35,7 @@ function test_ecrire($my_dir) {
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
 //
 
-function test_dirs_dist()
+function action_test_dirs_dist()
 {
   global $test_dir, $test_dirs;
 

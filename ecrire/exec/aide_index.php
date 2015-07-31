@@ -446,7 +446,7 @@ function analyse_aide($html, $aide=false) {
 //
 // Distribuer le travail
 //
-function aide_index_dist()
+function exec_aide_index_dist()
 {
 global $img, $frame, $aide, $var_lang, $lang;
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)

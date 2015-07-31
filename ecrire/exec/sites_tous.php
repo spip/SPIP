@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_sites_voir");
 
-function sites_tous_dist()
+function exec_sites_tous_dist()
 {
   global $connect_statut, $supp_syndic, $options;
 

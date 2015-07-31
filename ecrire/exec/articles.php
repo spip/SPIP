@@ -26,7 +26,7 @@ include_ecrire ("inc_abstract_sql");
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
 
-function affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
+function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
 {
   global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
@@ -1544,7 +1544,7 @@ function insert_article($id_parent, $new)
 }
 // Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
 
-function articles_dist()
+function exec_articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
@@ -1647,7 +1647,7 @@ if ($titre) {
  }
  }
 
-affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
+exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
 // Taches lentes
 

@@ -81,7 +81,7 @@ function liste_rubriques($id_rubrique) {
 	return $rubriques;
 }
 
-function export_dist()
+function exec_export_dist()
 {
 
 	global $id_rubrique, $maj;

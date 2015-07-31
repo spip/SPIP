@@ -18,7 +18,7 @@ include_ecrire ("inc_minipres");
 include_ecrire ("inc_base");
 include_ecrire("inc_db_mysql");
 
-function install_dist()
+function exec_install_dist()
 {
 	global $etape;
 	if (_FILE_CONNECT && $etape != 'unpack') {

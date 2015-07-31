@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function admin_vider_dist()
+function exec_admin_vider_dist()
 {
   global
     $connect_id_auteur,

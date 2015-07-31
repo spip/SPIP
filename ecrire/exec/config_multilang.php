@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire("inc_rubriques");
 include_ecrire ("inc_config");
 
-function config_multilang_dist()
+function exec_config_multilang_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $spip_lang_right, $changer_config;
 

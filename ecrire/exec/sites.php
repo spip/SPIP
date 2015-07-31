@@ -21,7 +21,7 @@ include_ecrire ("inc_date");
 include_ecrire ("inc_abstract_sql");
 include_ecrire ("inc_config");
 
-function sites_dist()
+function exec_sites_dist()
 {
 global 
   $analyser_site,

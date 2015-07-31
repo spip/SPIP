@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function brouteur_frame_dist()
+function exec_brouteur_frame_dist()
 {
   global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left,$id_rubrique, $frame, $effacer_suivant, $special;
 	$id_rubrique = is_numeric($id_rubrique) ? intval($id_rubrique) : "";

@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire ("inc_date");
 include_ecrire ("inc_abstract_sql");
 
-function message_edit_dist()
+function exec_message_edit_dist()
 {
 global
   $connect_id_auteur,

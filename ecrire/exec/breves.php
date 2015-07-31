@@ -49,7 +49,7 @@ function enfant_breves($leparent){
 	}
 }
 
-function breves_dist()
+function exec_breves_dist()
 {
 	global $connect_statut,$id_breve, $statut, $id_rubrique;
 	if ($statut AND $connect_statut == "0minirezo") {
