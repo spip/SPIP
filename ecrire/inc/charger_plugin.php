@@ -122,7 +122,7 @@ function interface_plugins_auto($retour) {
 	$res .= '<label>'._T('plugin_zip_adresse_champ');
 	$res .= "<br />
 	<input type='radio' id='antiradio' name='url_zip_plugin' value='' /></label>
-	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' />\n";
+	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://plugins.spip.net/rss-+-selection-2-+' size='50' />\n";
 
 	$res .= http_script("
 	// charger en ajax le descriptif si on click une div
