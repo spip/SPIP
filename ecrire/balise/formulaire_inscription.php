@@ -75,7 +75,8 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 // et donner des infos supplémentaires
 // Std: controler que le nom (qui sert a calculer le login) est assez long
 // et que l'adresse est valide (et on la normalise)
-// Retour: une chaine message d'erreur ou un tableau email/nom au minimum
+// Retour: une chaine message d'erreur 
+// ou un tableau avec au minimum email, nom, mode (redac / forum)
 
 function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
 
@@ -84,14 +85,11 @@ function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
 	if (!$nom || strlen($nom) > 64)
 	    return _T('ecrire:info_login_trop_court');
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
-	return array('email' => $r, 'nom' => ($nom));
+	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
 // cree un nouvel utilisateur et renvoie un message d'impossibilite ou la
 // ligne SQL le decrivant.
-// On enregistre le demandeur comme 'nouveau' 
-// et on lui envoie ses codes par email ; lors de
-// sa premiere connexion il obtiendra son statut final (auth->activer())
 
 function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
 
@@ -122,6 +120,10 @@ function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
 	$row['pass'] = creer_pass_pour_auteur($row['id_auteur']);
 	return $row;
 }
+
+// On enregistre le demandeur comme 'nouveau', en memorisant le statut final
+// provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
+// A sa premiere connexion il obtiendra son statut final (auth->activer())
 
 function inscription_nouveau($declaration)
 {
