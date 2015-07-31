@@ -66,9 +66,24 @@ function ecrire_tableau_edition($edition) {
 	ecrire_meta('drapeau_edition', serialize($edition));
 }
 
-// J'edite tel objet
-// http://doc.spip.org/@signale_edition
+/**
+ * J'edite tel objet
+ * si l'objet est non editable dans l'espace prive, ne pas retenir le signalement
+ * qui correspond a un process unique
+ *
+ * http://doc.spip.org/@signale_edition
+ *
+ * @param int $id
+ * @param $auteur
+ * @param string $type
+ * @return mixed
+ */
 function signale_edition ($id, $auteur, $type='article') {
+	include_spip('base/objets');
+	include_spip('inc/filtres');
+	if (objet_info($type,'editable')!=='oui')
+		return;
+
 	$edition = lire_tableau_edition();
 	if ($id_a = $auteur['id_auteur'])
 		$nom = $auteur['nom'];
@@ -108,8 +123,14 @@ function mention_qui_edite ($id, $type='article') {
 	}
 }
 
-// Quels sont les objets en cours d'edition par X ?
-// http://doc.spip.org/@liste_drapeau_edition
+/**
+ * Quels sont les objets en cours d'edition par X ?
+ *
+ * http://doc.spip.org/@liste_drapeau_edition
+ *
+ * @param $id_auteur
+ * @return array
+ */
 function liste_drapeau_edition ($id_auteur) {
 	$edition = lire_tableau_edition();
 	$objets_ouverts = array();
