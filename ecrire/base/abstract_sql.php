@@ -281,7 +281,7 @@ function sql_countsel($from = array(), $where = array(),
  * Effectue une operation ALTER.
  *
  * @example
- * 		sql_alter('DROP COLUMN supprimer'); 
+ * 		<code>sql_alter('DROP COLUMN supprimer');</code>
  *
  * @api
  * @param string $q
@@ -734,8 +734,10 @@ function sql_query($ins, $serveur='', $option=true) {
  * comme si l'on appelait successivement sql_select() puis sql_fetch()
  * 
  * @example
+ * 		<code>
  * 		$art = sql_fetsel(array('id_rubrique','id_secteur'), 'spip_articles', 'id_article='.sql_quote($id_article));
  *		$id_rubrique = $art['id_rubrique'];
+ * 		</code>
  * 
  * @api
  * @uses sql_select()
@@ -766,7 +768,7 @@ function sql_query($ins, $serveur='', $option=true) {
  * @return array
  * 		Tableau de la premiere ligne de resultat de la selection
  * 		{@example
- * 			array('id_rubrique' => 1, 'id_secteur' => 2)
+ * 			<code>array('id_rubrique' => 1, 'id_secteur' => 2)</code>
  * 		}
  *
 **/
@@ -789,8 +791,10 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * comme si l'on appelait successivement sql_select() puis while(sql_fetch())
  * 
  * @example
+ * 		<code>
  * 		$rubs = sql_allfetsel('id_rubrique', 'spip_articles', 'id_secteur='.sql_quote($id_secteur));
  *		// $rubs = array(array('id_rubrique'=>1), array('id_rubrique'=>3, ...)
+ * 		</code>
  * 
  * @api
  * @uses sql_select()
@@ -822,11 +826,13 @@ function sql_fetsel($select = array(), $from = array(), $where = array(),
  * 		Tableau de toutes les lignes de resultat de la selection
  * 		Chaque entree contient un tableau des elements demandees dans le SELECT.
  * 		{@example
+ * 			<code>
  * 			array(
  * 				array('id_rubrique' => 1, 'id_secteur' => 2)
  * 				array('id_rubrique' => 4, 'id_secteur' => 2)
  * 				...
  * 			)
+ * 			</code>
  * 		}
  *
 **/
@@ -846,7 +852,9 @@ function sql_allfetsel($select = array(), $from = array(), $where = array(),
  * un unique champ demande
  * 
  * @example
+ * 		<code>
  * 		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.sql_quote($id_article));
+ * 		</code>
  *
  * @api
  * @uses sql_fetsel()
@@ -919,9 +927,11 @@ function sql_version($serveur='', $option=true) {
  * de verifier que le moteur prefere utiliser des transactions dans ce cas.
  *
  * @example
+ * 		<code>
  * 		if (sql_preferer_transaction()) {
  * 			sql_demarrer_transaction();
  * 		}
+ * 		</code>
  *
  * @api
  * @see sql_demarrer_transaction()
@@ -1040,7 +1050,7 @@ function sql_hex($val, $serveur='', $option=true)
  * 		Nom du connecteur
  * @param string $type
  * 		Peut contenir une declaration de type de champ SQL
- * 		{@example int NOT NULL} qui sert alors aussi a calculer le type d'echappement
+ * 		{@example <code>int NOT NULL</code>} qui sert alors aussi a calculer le type d'echappement
  * @return string
  * 		La chaine echappee
 **/
