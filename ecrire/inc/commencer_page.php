@@ -225,14 +225,12 @@ function alertes_auteur() {
 			."</div>";
 }
 
-
-
 // http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
 	$res = '';
-	$result_auteurs = auteurs_autorises("id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+	$result_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
 	if (spip_num_rows($result_auteurs)) {
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');

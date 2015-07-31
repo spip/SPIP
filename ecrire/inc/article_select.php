@@ -22,9 +22,7 @@ include_spip('inc/autoriser'); // necessaire si appel de l'espace public
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@article_select
 function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0) {
-	global $connect_id_auteur, $connect_id_rubrique, $spip_lang; 
-
-	include_spip('inc/auth'); // pour auteurs_article si espace public
+	global $connect_id_rubrique, $spip_lang; 
 
 	if (is_numeric($id_article)) {
 

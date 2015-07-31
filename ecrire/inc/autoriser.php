@@ -279,7 +279,8 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_rubrique,statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
-	include_spip('inc/auth');
+	include_spip('inc/auth'); // pour auteurs_article si espace public
+
 	return
 		autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
 		OR (
@@ -344,6 +345,7 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 	// un article 'prepa' ou 'poubelle' dont on n'est pas auteur : interdit
 	$s = spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id));
 	$r = spip_fetch_array($s);
+	include_spip('inc/auth'); // pour auteurs_article si espace public
 	return
 		in_array($r['statut'], array('prop', 'publie'))
 		OR spip_num_rows(auteurs_article($id, "id_auteur=".$qui['id_auteur']));

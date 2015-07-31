@@ -266,9 +266,8 @@ function admin_general($session)
 {
 	static $ok;
 	if (!isset($ok)) {
-		include_spip('inc/auth');
-        $ok = ($session['statut']=='0minirezo') 
-        AND !spip_num_rows(spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=" .$session['id_auteur'] ." AND id_rubrique!='0' LIMIT 1"));
+	        $ok = ($session['statut']=='0minirezo') 
+        	AND !spip_num_rows(spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=" .$session['id_auteur'] ." AND id_rubrique!='0' LIMIT 1"));
 	}
 
 	return $ok;
