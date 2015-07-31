@@ -727,7 +727,7 @@ amb un color que indica el seu estat:',
 	'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
 	'plugin_info_credit' => 'Crèdits',
 	'plugin_info_erreur_xml' => 'La declaració d\'aquest connector és incorrecta',
-	'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'No es poden desactivar.', # MODIF
 	'plugin_info_install_ok' => 'Instal·lació correcta',
 	'plugin_info_necessite' => 'Necessita:',
@@ -760,7 +760,7 @@ amb un color que indica el seu estat:',
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error en els plugins: @plugins@',
 	'plugins_liste' => 'Llista dels connectors',
-	'plugins_liste_extensions' => 'Extensions', # MODIF
+	'plugins_liste_dist' => 'Extensions', # MODIF
 	'plugins_recents' => 'Connectors recents.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Jerarquia',

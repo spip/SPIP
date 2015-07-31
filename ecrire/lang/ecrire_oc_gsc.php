@@ -736,7 +736,7 @@ ua color qu\'indica lo lor estat:',
 	'plugin_info_automatique_select' => 'Sélectionnez ci-dessous un plugin : SPIP le téléchargera et l\'installera dans le répertoire <code>@rep@</code> ; si ce plugin existe déjà, il sera mis à jour.', # NEW
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -769,7 +769,7 @@ ua color qu\'indica lo lor estat:',
 	'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
 	'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
 	'plugins_liste' => 'Liste des plugins', # NEW
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hiérarchie', # NEW

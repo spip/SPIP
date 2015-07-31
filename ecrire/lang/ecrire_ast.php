@@ -758,7 +758,7 @@ con una color que indica el estáu:',
 	'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code> ; si el plugin ya esiste, pondrase al día.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'Les estensiones darréu se carguen y s\'activen nel direutoriu @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'Estes nun pueden desactivase.', # MODIF
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -791,7 +791,7 @@ con una color que indica el estáu:',
 	'plugins_disponibles' => '@count@ plugins disponibles.',
 	'plugins_erreur' => 'Error nos plugins: @plugins@',
 	'plugins_liste' => 'Llista de los plugins',
-	'plugins_liste_extensions' => 'Estensiones', # MODIF
+	'plugins_liste_dist' => 'Estensiones', # MODIF
 	'plugins_recents' => 'Complementos recientes.',
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Xerarquía',

@@ -731,7 +731,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugin_info_automatique_select' => 'Plugin bat aukera ezazu beherago : SPIPek deskargatuko du eta <code>@rep@</code> direktorioan instalatuko du ; plugin hau jadanik existitzen bada, gaurkotua izanen da.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -764,7 +764,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugins_disponibles' => '@count@ plugin erabilgarriak',
 	'plugins_erreur' => 'Errorea pluginetan : @plugins@',
 	'plugins_liste' => 'Pluginen zerrenda',
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Hierarkia',

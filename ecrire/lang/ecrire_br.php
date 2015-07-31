@@ -739,7 +739,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugin_info_automatique_select' => 'Diuzit un adveziant amañ a-is : pellgarget e vo gant SPIP ha staliet er c\'havlec\'h <code>@rep@</code> ; ma\'z eus eus an adveziant-mañ c\'hoazh e vo hizivaet.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -772,7 +772,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'plugins_disponibles' => '@count@ adveziant hegerz.',
 	'plugins_erreur' => 'Fazi en adveziantoù : @plugins@',
 	'plugins_liste' => 'Roll an adveziantoù',
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Urzhaz',

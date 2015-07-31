@@ -739,7 +739,7 @@ cu o culoare care le indică starea :',
 	'plugin_info_automatique_select' => 'Selecţionaţi mai jos un plug-in : SPIP o să îl descarce şi îl va instala în directorul <code>@rep@</code> ; dacă acest plug-in există deja, el va fi adus la zi.',
 	'plugin_info_credit' => 'Crédits', # NEW
 	'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
-	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
+	'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_install_ok' => 'Installation réussie', # NEW
 	'plugin_info_necessite' => 'Necessite :', # NEW
@@ -772,7 +772,7 @@ cu o culoare care le indică starea :',
 	'plugins_disponibles' => '@count@ plug-in-uri disponibile.',
 	'plugins_erreur' => 'Eroare în plug-in-urile : @plugins@',
 	'plugins_liste' => 'Lista plugin-urilor',
-	'plugins_liste_extensions' => 'Extensions', # NEW
+	'plugins_liste_dist' => 'Extensions', # NEW
 	'plugins_recents' => 'Plugins récents.', # NEW
 	'plugins_tous_liste' => 'Tous', # NEW
 	'plugins_vue_hierarchie' => 'Ierarhie',

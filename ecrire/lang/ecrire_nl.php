@@ -736,7 +736,7 @@ een kleur geeft hun status aan :',
 	'plugin_info_automatique_select' => 'Selecteert hieronder een plugin : SPIP zal het downloaden en zal in de lijst <code>@rep@</code>  het plaatsen; als dit plugin reeds bestaat, zal hij bijgewerkt worden.',
 	'plugin_info_credit' => 'Credits',
 	'plugin_info_erreur_xml' => 'De verklaring van deze plugin is onjuist',
-	'plugin_info_extension_1' => 'De onderstaande extensies zijn geladen en geactiveerd in de directory @extensions@.', # MODIF
+	'plugin_info_extension_1' => 'De onderstaande extensies zijn geladen en geactiveerd in de directory @plugins_dist@.', # MODIF
 	'plugin_info_extension_2' => 'Ze zijn niet gedeactiveerd.', # MODIF
 	'plugin_info_install_ok' => 'Succesvolle installatie',
 	'plugin_info_necessite' => 'Nodig hebben :',
@@ -769,7 +769,7 @@ een kleur geeft hun status aan :',
 	'plugins_disponibles' => '@count@ plugins beschikbaar.',
 	'plugins_erreur' => 'De fout in plugins: @plugins@',
 	'plugins_liste' => 'Lijst van plugins',
-	'plugins_liste_extensions' => 'Extensies', # MODIF
+	'plugins_liste_dist' => 'Extensies', # MODIF
 	'plugins_recents' => 'Recent plugins.',
 	'plugins_tous_liste' => 'Alle',
 	'plugins_vue_hierarchie' => 'Hiërarchie',
