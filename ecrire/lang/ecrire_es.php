@@ -731,7 +731,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'plugin_info_credit' => 'Créditos',
 	'plugin_info_erreur_xml' => 'La declaración de este plugin es incorrecta',
 	'plugin_info_install_ok' => 'Instalación exitosa',
-	'plugin_info_necessite' => 'Necesita:',
+	'plugin_info_necessite' => 'Necesita:', # MODIF
 	'plugin_info_non_compatible_spip' => 'Este plugin no es compatible con esta versión de SPIP',
 	'plugin_info_plugins_dist_1' => 'Las plugins siguientes se cargan y se activan en la carpeta @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'No pueden desactivarse.',
