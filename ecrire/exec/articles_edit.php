@@ -251,7 +251,7 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 		 ("<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
 		 ("<input type='hidden' name='ps' value=\"" . $ps . "\">")) .
 
-		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur)) .
+		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
 
 		(!$date ? '' : ("<input type='hidden' name='date' value=\"$date\" size='40'><P>")) .
 

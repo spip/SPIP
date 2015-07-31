@@ -94,7 +94,7 @@ function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 		echo $affiche;
 		fin_cadre_enfonce();
 	  } else {
-	    return debut_cadre_enfonce('',false) . $affiche . fin_cadre_enfonce('',false);
+	    return debut_cadre_enfonce('',true) . $affiche . fin_cadre_enfonce(true);
 	  }
 	}
 }
