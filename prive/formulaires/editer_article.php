@@ -51,6 +51,8 @@ function formulaires_editer_article_verifier_dist($id_article='new', $id_rubriqu
 	titre_automatique('titre',array('descriptif','chapo','texte'));
 	// on ne demande pas le titre obligatoire : il sera rempli a la volee dans editer_article si vide
 	$erreurs = formulaires_editer_objet_verifier('article',$id_article,array('id_parent'));
+	if (!function_exists('autoriser'))
+		include_spip('inc/autoriser');	 // si on utilise le formulaire dans le public
 	if (!isset($erreurs['id_parent'])
 	  AND !autoriser('creerarticledans','rubrique',_request('id_parent'))){
 		$erreurs['id_parent'] = _T('info_creerdansrubrique_non_autorise');
