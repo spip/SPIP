@@ -33,7 +33,8 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 				array ('champ' => 'FORMULAIRE_ECRIRE_AUTEUR',
 					'motif' => 'AUTEURS/ARTICLES'));
 
-		return denoncer_inclure_dynamique($msg, $context_compil);
+		denoncer_inclure_dynamique($msg, $context_compil);
+		return '';
 	}
 	// Si on est dans un contexte article, 
 	// sortir tous les mails des auteurs de l'article

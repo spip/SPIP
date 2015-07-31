@@ -61,9 +61,9 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 			$var = $val[0];
 			if ($var->type != 'texte') {
 			  if ($n OR $k) {
-			    $msg = array('zbug_parametres_inclus_incorrects',
+				$msg = array('zbug_parametres_inclus_incorrects',
 					 array('param' => $var->nom_champ));
-			    erreur_squelette($msg, $p);
+				erreur_squelette($msg, $p);
 			  } 
 			  $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			  break;
@@ -910,7 +910,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			if (!$rec) {
 				$msg = array('zbug_boucle_recursive_undef',
 					array('nom' => $boucle->param[0]));
-				return erreur_squelette($msg, $boucle);
+				erreur_squelette($msg, $boucle);
 			} else {
 				$rec->externe = $id;
 				$descr['id_mere'] = $id;

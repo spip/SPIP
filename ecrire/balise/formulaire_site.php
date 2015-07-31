@@ -28,7 +28,8 @@ function balise_FORMULAIRE_SITE_stat($args, $context_compil) {
 		$msg = array('zbug_champ_hors_motif',
 				array ('champ' => 'FORMULAIRE_SITE',
 					'motif' => 'RUBRIQUES'));
-		return denoncer_inclure_dynamique($msg, $context_compil);
+		denoncer_inclure_dynamique($msg, $context_compil);
+		return '';
 	}
 	// Verifier que les visisteurs sont autorises a proposer un site
 

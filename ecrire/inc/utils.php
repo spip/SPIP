@@ -1652,7 +1652,7 @@ function exec_info_dist() {
 
 function erreur_squelette($message='', $lieu='', $quoi='') {
 	$debusquer = charger_fonction('debusquer', 'public');
-	return $debusquer($message, $lieu, $quoi);
+	$debusquer($message, $lieu, $quoi);
 }
 
 /**

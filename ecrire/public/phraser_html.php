@@ -540,9 +540,9 @@ function phraser_criteres($params, &$result) {
 			    $crit->cond = $m[5];
 			  }
 			  else {
-			    $msg = array('zbug_critere_inconnu', 
+			 	$msg = array('zbug_critere_inconnu', 
 					array('critere' => $param));
-			    erreur_squelette($msg, $result);
+				erreur_squelette($msg, $result);
 			  }
 			  if ((!preg_match(',^!?doublons *,', $param)) || $crit->not)
 			    $args[] = $crit;
@@ -597,13 +597,6 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 					   $k - strlen(BALISE_BOUCLE)));
 		  $milieu = substr($milieu, $k);
 
-		  /* a adapter: si $n pointe sur $id_boucle ...
-		if (strpos($milieu, $s)) {
-			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
-				$id_boucle . 
-				_T('zbug_balise_b_aval'));
-		}
-		  */
 		} else {
 		  $debut = substr($texte, 0, $n);
 		  $milieu = substr($texte, $n);
