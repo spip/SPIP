@@ -593,6 +593,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 
 define('_REGEXP_COND_VIDE_NONVIDE',"/^[(](.*)[?]\s*''\s*:\s*('[^']+')\s*[)]$/");
 define('_REGEXP_COND_NONVIDE_VIDE',"/^[(](.*)[?]\s*('[^']+')\s*:\s*''\s*[)]$/");
+define('_REGEXP_CONCAT_NON_VIDE', "/^(.*)[.]\s*'[^']+'\s*$/");
 
 // http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
@@ -713,8 +714,10 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			AND $code[0]!= "'"
 #			AND (strpos($code,'interdire_scripts') !== 0)
 			AND !preg_match(_REGEXP_COND_VIDE_NONVIDE, $code)
-			AND !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code))
+			AND !preg_match(_REGEXP_COND_NONVIDE_VIDE, $code)
+			AND !preg_match(_REGEXP_CONCAT_NON_VIDE, $code)) {
 				$code = "strval($code)";
+			}
 			break;
 
 		default: 
@@ -744,7 +747,10 @@ function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 	if ($apres == "''") $apres = '';
 	if (!$avant AND !$apres AND ($altern==="''")) return $code;
 
-	if (preg_match(_REGEXP_COND_VIDE_NONVIDE,$code, $r)) {
+	if (preg_match(_REGEXP_CONCAT_NON_VIDE, $code)) {
+		$t = $code;
+		$cond = '';
+	} elseif (preg_match(_REGEXP_COND_VIDE_NONVIDE,$code, $r)) {
 		$t = $r[2];
 		$cond =  '!' . $r[1];
 	} else if  (preg_match(_REGEXP_COND_NONVIDE_VIDE,$code, $r)) {
@@ -760,7 +766,7 @@ function compile_retour($code, $avant, $apres, $altern, $tab, $n)
 		(!$apres ? "" : " . $apres");
 
 	if ($res !== $t) $res = "($res)";
-	return "($cond ?\n\t$tab$res :\n\t$tab$altern)";
+	return !$cond ? $res : "($cond ?\n\t$tab$res :\n\t$tab$altern)";
 }
 
 
