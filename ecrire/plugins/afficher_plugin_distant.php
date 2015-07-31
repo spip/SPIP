@@ -61,10 +61,11 @@ function plugins_afficher_plugin_distant_dist($url_page, $zip_file, $info, $expo
 		// bouton de telechargement
 		if (!$charger_plugin)
 			$charger_plugin = generer_action_auteur('charger_plugin',"charger_zip","./");
+		$balise_img = chercher_filtre('balise_img');
 		$action = parametre_url($charger_plugin,'url_zip_plugin',$plug_file);
 		$s .= "<div class='download'>".
 		"<a href='$action' title='"._T('plugin_charger')."'>"
-		. balise_img(find_in_path("images/telecharger-16.png"),_T('plugin_charger'))
+		. $balise_img(find_in_path("images/telecharger-16.png"),_T('plugin_charger'))
 		."</a></div>"
 		;
 	}
