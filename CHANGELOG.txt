@@ -1,3 +1,12 @@
+SPIP-Core spip-2.1.25 -> spip-2.1.26  13 mars 2014
+-------------------------------------------------------------
+r21167 | fil       |  (mar. 28 janv. 2014)| report de http://zone.spip.org/trac/spip-zone/changeset/79822 (b_b, denisb, ne0futur, jluc)
+r21178 | esj       |  (ven. 07 févr. 2014)| A un moment quelconque il y a du y avoir un renommage de l'ID des blocs de messages dans les forums privés, qui est passé de "idNNN" à "forumNNN" à moins que ce ne soit l'inverse, ce qui fait que l'ancre de l'URL dans le message de notification est inopérant. Plutôt que de faire un remplacement qui risque de faire un ennui ailleurs, on remet l'ancien ancre pas loin de l'autre, ça répare sans risquer de casser ailleurs. Ca aurait été bien de fixer une politique de nommage claire pour éviter ça.
+r21184 | b_b       |  (jeu. 13 févr. 2014)| Ferme #3165 : réparer la suppression des liens de documents liés a un objet inexistant dans genie/optimiser (5 ans tout de même ^^, bien vu Equipement).
+r21242 | esj       |  (mer. 05 mars 2014) | Petit bug dans le modèle des images: l'écriture "[ width='(#LARGEUR)']" est inexacte car un champ valant "0" n'est pas égal à "", du coup on produit un "width='0'" qui produit un affichage vide. Le cas se voit sur des doc distants qu'on veut incruster en mode image sans qu'on ait pu calculer leur dimension auparavant.
+r21247 | cedric    |  (ven. 07 mars 2014) | Un echappement manquant dans une requete SQL, c'est mal (Philippe Baumgart et al)
+r21251 | cedric    |  (sam. 08 mars 2014) | On echappe toujours les < dans les logs, sauf si la constante _LOG_BRUT est definie a true a fin de debug
+
 
 SPIP-Core spip-2.1.24 -> spip-2.1.25  19 janvier 2014
 -------------------------------------------------------------
