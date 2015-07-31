@@ -67,7 +67,8 @@ function ajouter_tags($matches, $item) {
 	include_spip('inc/filtres');
 	$tags = array();
 	foreach ($matches as $match) {
-		$type = ($match[3] == 'category') ? 'category':'tag';
+		$type = ($match[3] == 'category' OR $match[3] == 'directory')
+			? 'directory':'tag';
 		$mot = supprimer_tags($match[0]);
 		if (!strlen($mot)) break;
 		// rechercher un url
@@ -281,10 +282,11 @@ function analyser_backend($rss, $url_syndic='') {
 		# a partir de "<dc:subject>", (del.icio.us)
 		# ou <media:category> (flickr)
 		# ou <itunes:category> (apple)
-		# on cree nos tags microformat <a rel="category" href="url">titre</a>
+		# on cree nos tags microformat <a rel="directory" href="url">titre</a>
+		# http://microformats.org/wiki/rel-directory
 		$tags = array();
 		if (preg_match_all(
-		',<(([a-z]+:)?(subject|category|keywords?|tags?|type))[^>]*>'
+		',<(([a-z]+:)?(subject|category|directory|keywords?|tags?|type))[^>]*>'
 		.'(.*?)</\1>,ims',
 		$item, $matches, PREG_SET_ORDER))
 			$tags = ajouter_tags($matches, $item); # array()

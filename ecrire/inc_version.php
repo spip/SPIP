@@ -200,7 +200,7 @@ $extension_squelette = 'html';
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.907;
+$spip_version = 1.908;
 
 // version de spip
 $spip_version_affichee = '1.9 beta 1';
