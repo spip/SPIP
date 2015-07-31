@@ -95,7 +95,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 		'logo_survol'=>($GLOBALS['meta']['activer_logos_survol'] == 'oui' ? ' ' : ''),
 		'objet'=>$objet,
 		'id_objet'=>$id_objet,
-		'_options'=>$options
+		'_options'=>$options,
+		'_show_upload_off'=>'',
 	);
 	
 	// rechercher le logo de l'objet
@@ -113,6 +114,8 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 	// pas de logo_on -> pas de formulaire pour le survol
 	if (!isset($res['logo_on']))
 		$res['logo_survol']='';
+	elseif (!isset($res['logo_off']) AND _request('logo_up'))
+		$res['_show_upload_off'] = ' ';
 
 	// si le logo n'est pas editable et qu'il n'y en a pas, on affiche pas du tout le formulaire
 	if (!$res['editable']
@@ -198,6 +201,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 		if ($logo)
 			spip_unlink($logo[0]);
 		$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
+		set_request('logo_up',' ');
 	}
 	
 	// sinon supprimer ancien logo puis copier le nouveau
@@ -212,6 +216,7 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $op
 					spip_unlink($logo[0]);
 				$ajouter_image($type.$etat.$id_objet," ",$file);
 				$res['message_ok'] = ''; // pas besoin de message : la validation est visuelle
+				set_request('logo_up',' ');
 			}
 		}
 	}
