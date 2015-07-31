@@ -398,6 +398,13 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 				xml_hack($page);
 				ob_end_clean();
 		}
+		if (isset($contexte_inclus['_pipeline'])
+		 && is_array($contexte_inclus['_pipeline'])
+		 && isset($GLOBALS['spip_pipeline'][reset($contexte_inclus['_pipeline'])])){
+			$texte = pipeline(reset($contexte_inclus['_pipeline']),array(
+			  'data'=>$texte,
+			  'args'=>end($contexte_inclus['_pipeline'])));
+		}
 	}
 
 	if ($GLOBALS['var_mode'] == 'debug')
