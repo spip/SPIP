@@ -2,19 +2,19 @@
 <div id="page">
 	<div class="largeur">
 		<div id="haut">
-		<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax,env}>
-		<INCLURE{fond=prive/squelettes/top/#ENV{type},ajax,env}>
+		<INCLURE{fond=prive/squelettes/hierarchie/#ENV{type},ajax=hierarchie,env}>
+		#INCLURE{fond=prive/squelettes/top/#ENV{type},ajax=top,env}
 		</div>
-		<div id="conteneur" class="no_onglets">
+		<div id="conteneur" class="no_onglets<?php echo $GLOBALS['pleine_largeur']?' pleine_largeur':''; ?>">
 			<div id="navigation">
-				<INCLURE{fond=prive/squelettes/navigation/#ENV{type},ajax,env}>
+				<INCLURE{fond=prive/squelettes/navigation/#ENV{type},ajax=navigation,env}>
 			[(#EVAL{$GLOBALS}|table_valeur{spip_ecran}|=={large}|oui)
 			</div>
 			<div id="extra">]
-				<INCLURE{fond=prive/squelettes/extra/#ENV{type},ajax,env}>
+				<INCLURE{fond=prive/squelettes/extra/#ENV{type},ajax=extra,env}>
 			</div>
 			<div id="contenu">
-				<INCLURE{fond=prive/squelettes/contenu/#ENV{type},ajax,env}>
+				<INCLURE{fond=prive/squelettes/contenu/#ENV{type},ajax=contenu,env}>
 			</div>
 		</div>
 		<br class="nettoyeur" />
