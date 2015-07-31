@@ -978,6 +978,7 @@ function parser($texte) {
 		'ID_TYPE' => 'id_type',
 		'TITRE' => 'titre',
 		'DESCRIPTIF' => 'descriptif',
+		'DATE' => 'date',
 		'LARGEUR' => 'largeur',
 		'HAUTEUR' => 'hauteur',
 		'TAILLE' => 'taille',
@@ -1327,22 +1328,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 
 	case 'INTRODUCTION':
-		switch ($boucles[$id_boucle]->type_requete) {
-		case 'articles':
-			$milieu = 'if (strlen($pile_boucles[$id_instance]->row["descriptif"]) > 0) {
-				$'.$nom_var.' = propre($pile_boucles[$id_instance]->row["descriptif"]);
-				}
-				else {
-				$'.$nom_var.' = PtoBR(propre(supprimer_tags(couper_intro($pile_boucles[$id_instance]->row["chapo"]."\n\n\n".$pile_boucles[$id_instance]->row["texte"], 500))));
-				}';
-			break;
-		case 'breves':
-			$code = "PtoBR(propre(supprimer_tags(couper_intro(\$pile_boucles[\$id_instance]->row['texte'], 300))))";
-			break;
-		case 'forums':
-			$code = "PtoBR(propre(supprimer_tags(couper_intro(\$pile_boucles[\$id_instance]->row['texte'], 600))))";
-			break;
-		}
+		$code = 'calcul_introduction($pile_boucles[$id_instance]->type_requete,
+			$pile_boucles[$id_instance]->row[\'texte\'],
+			$pile_boucles[$id_instance]->row[\'chapo\'],
+			$pile_boucles[$id_instance]->row[\'descriptif\'])';
 		break;
 
 	//

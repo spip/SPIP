@@ -258,6 +258,30 @@ function calcul_branche ($generation) {
 		return '0';
 }
 
+//
+// fonction standard de calcul de la balise #INTRODUCTION
+// on peut la surcharger en definissant dans mes_fonctions.php3 :
+// function introduction($type,$texte,$descriptif) {...}
+//
+function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
+	if (function_exists("introduction"))
+		return introduction ($type, $texte, $chapo, $descriptif);
+
+	switch ($type) {
+		case 'articles':
+			if ($descriptif)
+				return propre($descriptif);
+			else
+				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500))));
+			break;
+		case 'breves':
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 300))));
+			break;
+		case 'forums':
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+			break;
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////////
 //
