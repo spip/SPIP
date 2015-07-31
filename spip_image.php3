@@ -53,6 +53,10 @@ if ($test_vignette) {
 }
 
 
+
+
+
+
 //
 // Deplacer un fichier uploade
 //
@@ -171,6 +175,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		exit;
 	}
 
+
 	if (ereg("\.([^.]+)$", $orig, $match)) {
 		$ext = addslashes(strtolower($match[1]));
 		$ext = corriger_extension($ext);
@@ -287,11 +292,23 @@ if (!$image_name AND $image2) {
 // ajouter un document
 //
 if ($ajout_doc == 'oui') {
-	if ($dossier_complet){
+
+	if (ereg("--unzip$",$image_name)){
+		
+		$nom_zip = substr($image_name, 0, strlen($image_name)-7);		
+		
+		require_once('ecrire/pclzip.lib.php');
+  		$archive = new PclZip($nom_zip);
+		$list = $archive->extract(PCLZIP_OPT_PATH, "IMG/tmp", PCLZIP_OPT_REMOVE_ALL_PATH);
+		
+		$image_name = "IMG/tmp";
+		$effacer_tmp = true;
+	}
+
+
+	if (is_dir("$image_name")) {
 		include_ecrire('inc_documents.php3');
-
-		$fichiers = fichiers_upload('ecrire/upload');
-
+		$fichiers = fichiers_upload("$image_name");
 		while (list(,$f) = each($fichiers)) {
 			if (ereg("\.([^.]+)$", $f, $match)) {
 				$ext = strtolower($match[1]);
@@ -304,13 +321,20 @@ if ($ajout_doc == 'oui') {
 					$id_document = ajout_doc($f, $f, '', 'document', '','','','',false);
 			}
 		}
-
-	}
-	else {
+	} else {
 		if ($forcer_document == 'oui')
 			$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document);
 		else
 			$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	}
+	
+	
+	if ($effacer_tmp) {
+		$d = opendir("IMG/tmp");
+
+		while ($f = readdir($d)) {
+			if (is_file("IMG/tmp/$f")) @unlink("IMG/tmp/$f");
+		}
 	}
 }
 
@@ -341,6 +365,59 @@ if ($image_supp) {
 	}
 	@unlink("IMG/$image_supp");
 }
+
+
+//
+// Faire tourner une image
+//
+
+if ($doc_rotate) {
+	// Securite
+	if (!verifier_action_auteur("rotate $doc_rotate", $hash, $hash_id_auteur)) {
+		exit;
+	}
+	
+	if (!$var_rot) $var_rot = 0;
+
+	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$doc_rotate";
+	$result = spip_query($query);
+	if ($row = spip_fetch_array($result)) {
+		$id_vignette = $row['id_vignette'];
+		$image = $row['fichier'];
+
+		$process = lire_meta('image_process');
+		 // imagick (php4-imagemagick)
+		 if ($process == 'imagick') {
+			$handle = imagick_readimage($image);
+			imagick_rotate($handle, $var_rot);
+			imagick_write($handle, $image);
+			if (!@file_exists($image)) return;	// echec imagick
+		}
+
+		$size_image = @getimagesize($image);
+		$largeur = $size_image[0];
+		$hauteur = $size_image[1];
+
+		if ($id_vignette > 0) {
+			$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$id_vignette";
+			$result = spip_query($query);
+			if ($row = spip_fetch_array($result)) {
+				$fichier = $row['fichier'];
+				@unlink($fichier);
+			}
+			spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
+			spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
+		}
+
+
+		spip_query("UPDATE spip_documents SET id_vignette=0, largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
+
+	}
+
+}
+
 
 //
 // Supprimer un document
@@ -419,7 +496,7 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }

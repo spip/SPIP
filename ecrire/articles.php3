@@ -1246,19 +1246,15 @@ if ((lire_meta('multi_articles') == 'oui')
 	$langue_article = $row['lang'];
 	$langue_choisie_article = $row['langue_choisie'];
 
-	debut_cadre_enfonce('langues-24.gif');
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
-	echo bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions');
-	echo "<B>";
 	if (lire_meta('gerer_trad') == 'oui')
-		echo _T('titre_langue_trad_article');
+		$titre_barre = _T('titre_langue_trad_article');
 	else
-		echo _T('titre_langue_article');
+		$titre_barre = _T('titre_langue_article');
 
-	echo "&nbsp; (".traduire_nom_langue($langue_article).")";
+	$titre_barre .= "&nbsp; (".majuscules(traduire_nom_langue($langue_article)).")";
 
-	echo "</B>";
-	echo "</TD></TR></TABLE>";
+	debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
+
 
 	// Choix langue article
 	if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
@@ -1270,11 +1266,11 @@ if ((lire_meta('multi_articles') == 'oui')
 		if ($langue_choisie_article == 'oui') $herit = false;
 		else $herit = true;
 
-		//debut_cadre_enfonce();
-		echo "<div style='padding: 5px; text-align: center;'><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+		debut_cadre_couleur();
+		echo "<div style='text-align: center;'>";
 		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
-		echo "</font></div>\n";
-		//fin_cadre_enfonce();
+		echo "</div>\n";
+		fin_cadre_couleur();
 
 		echo fin_block();
 	}
@@ -1332,8 +1328,11 @@ if ((lire_meta('multi_articles') == 'oui')
 		if ($id_trad != 0) {
 			$query_trad = "SELECT id_article, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
 			$result_trad = spip_query($query_trad);
-
+			
+			
+			$table='';
 			while ($row = spip_fetch_array($result_trad)) {
+				$vals = '';
 				$id_article_trad = $row["id_article"];
 				$titre_trad = $row["titre"];
 				$lang_trad = $row["lang"];
@@ -1351,43 +1350,45 @@ if ((lire_meta('multi_articles') == 'oui')
 				}
 
 
-				$ret .= "<tr bgcolor='$bgcolor'>";
-				$ret .= "<td width='7'>";
-				$ret .= "<img src='img_pack/puce-".puce_statut($statut_trad).".gif' alt='' width='7' height='7' border='0' NAME='statut'>";
-				$ret .= "</td>";
-
-				$ret .= "<td width='12'>";
-
+				$vals[] = "<img src='img_pack/puce-".puce_statut($statut_trad).".gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+				
 				if ($id_article_trad == $id_trad) {
-					$ret .= "<img src='img_pack/langues-12.gif' width='12' height='12' alt='' border='0'>";
+					$vals[] = "<img src='img_pack/langues-12.gif' width='12' height='12' alt='' border='0'>";
 					$titre_trad = "<b>$titre_trad</b>";
 				} else {
-					if ($connect_statut=='0minirezo') $ret .= "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'><img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'></a>";
-					else $ret .= "<img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'>";
+					if ($connect_statut=='0minirezo') $vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'><img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'></a>";
+					else $vals[] = "<img src='img_pack/langues-off-12.gif' width='12' height='12' alt='' border='0'>";
 				}
 
 				$ret .= "</td>";
 
-				$ret .= "<td class='arial2'>";
-				if ($id_article_trad == $id_article) $ret .= "$titre_trad";
-				else $ret .= "<a href='articles.php3?id_article=$id_article_trad'>$titre_trad</a>";
-				if ($id_article_trad == $id_trad) $ret .= " "._T("trad_reference");
-				$ret .= "</td>";
+				if ($id_article_trad == $id_article) $s = "$titre_trad";
+				else $s = "<a href='articles.php3?id_article=$id_article_trad'>$titre_trad</a>";
+				if ($id_article_trad == $id_trad) $s .= " "._T("trad_reference");
+				$vals[] = $s;
 
-				$ret .= "<td class='arial2'>".traduire_nom_langue($lang_trad)."</td>\n";
+				$vals[] = traduire_nom_langue($lang_trad);
+			
+				$table[] = $vals;
 			}
 
-			changer_typo($spip_lang);
+			// changer_typo($spip_lang); (probleme d'affichage rtl?)
 
 			// bloc traductions
-			if ($ret) {
-				echo "<div align='$spip_lang_left' style='margin-top: 5px; padding: 0px; border: 1px dashed #999999; background-color: #f0f0f0;' $dir_lang>";
-				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
-				echo "<tr bgcolor='#eeeecc'><td colspan='4' class='serif2'><b>"._T('trad_article_traduction')."</b></td></tr>";
-				echo $ret;
+			if (count($vals) > 0) {
+
+				echo "<div class='liste'>";
+				bandeau_titre_boite2(_T('trad_article_traduction'),'');
+				echo "<table width='100%' cellspacing='0' border='0' cellpadding='2'>";
+				//echo "<tr bgcolor='#eeeecc'><td colspan='4' class='serif2'><b>"._T('trad_article_traduction')."</b></td></tr>";
+
+				$largeurs = array(7, 12, '', 100);
+				$styles = array('', '', 'arial2', 'arial2');
+				afficher_liste($largeurs, $table, $styles);
+
 				echo "</table>";
 				echo "</div>";
-				echo "<br>\n";
+
 			}
 
 			changer_typo($langue_article);
@@ -1565,11 +1566,13 @@ if ($flag_editable) {
 }
 
 
+
+
+
 //
 // Documents associes a l'article
 //
 
-echo "<a name='docs'></a>\n";
 afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 //

@@ -83,22 +83,22 @@ switch ($prefs['couleur']) {
 		break;
 	case 2:
 		/// Orange
-		$couleur_foncee="#D64F04";
-		$couleur_claire="#F9A20E";
+		$couleur_foncee="#87585a";
+		$couleur_claire="#f78820";
 		$couleur_lien="#81A0C1";
 		$couleur_lien_off="#FF5B00";
 		break;
 	case 3:
 		/// Saumon
-		$couleur_foncee="#FFCC00";
+		$couleur_foncee="#CDA261";
 		$couleur_claire="#FFDDAA";
 		$couleur_lien="#5E0283";
 		$couleur_lien_off="#472854";
 		break;
 	case 4:
 		/// Bleu pastelle
-		$couleur_foncee="#127896";
-		$couleur_claire="#48B4D3";
+		$couleur_foncee="#316a7e";
+		$couleur_claire="#629599";
 		$couleur_lien="#869100";
 		$couleur_lien_off="#5B55A0";
 		break;

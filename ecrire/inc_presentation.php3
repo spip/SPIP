@@ -68,6 +68,15 @@ function bouton_imessage($destinataire, $row = '') {
 
 }
 
+// Faux HR, avec controle de couleur
+
+function hr($color, $retour = false) {
+	$ret = "<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
+	
+	if ($retour) return $ret;
+	else echo $ret;
+}
+
 
 //
 // Cadres
