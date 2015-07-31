@@ -346,9 +346,9 @@ function extraire_lien ($regs) {
 	$lien_url = trim($regs[3]);
 	$compt_liens++;
 	$lien_interne = false;
-	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site)? *([[:digit:]]+)$', $lien_url, $match)) {
+	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))? *([[:digit:]]+)$', $lien_url, $match)) {
 		// Traitement des liens internes
-		$id_lien = $match[6];
+		$id_lien = $match[8];
 		$type_lien = $match[1];
 		$lien_interne=true;
 		$class_lien = "in";
@@ -385,6 +385,16 @@ function extraire_lien ($regs) {
 					$lien_texte = $row['titre'];
 				}
 				break;
+			case 'im':
+			case 'do':
+				$lien_url = generer_url_document($id_lien);
+				if (!$lien_texte) {
+					$req = "select titre,fichier from spip_documents where id_document=$id_lien";
+					$row = @spip_fetch_array(@spip_query($req));
+					$lien_texte = $row['titre'];
+					if (!$lien_texte)
+						$lien_texte = ereg_replace("^.*/","",$row['fichier']);
+				}
 			case 'si':
 				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
 				if ($row) {
