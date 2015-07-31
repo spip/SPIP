@@ -76,7 +76,7 @@ function exec_sites_edit_dist()
 
 	if ($new != 'oui') {
 		echo "<td>";
-		icone(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
+		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif");
 		echo "</td>";
 		echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 	}
@@ -90,7 +90,7 @@ function exec_sites_edit_dist()
 		$form_auto = "<span class='verdana1 spip_small'>"
 		. _T('texte_referencement_automatique')
 		. "</span>"
-		. "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n"
+		. "\n<div style='text-align: right'><input type=\"text\" name=\"url\" class='fondl' size='40' value=\"http://\" />\n"
 		. "\n<input type='hidden' name='id_parent' value='"
 		. intval(_request('id_rubrique'))
 		. "' />\n"
@@ -204,7 +204,7 @@ function exec_sites_edit_dist()
 		$form .= extra_saisie($extra, 'sites', intval($id_secteur));
 	}
 
-	$form .= "\n<div align='right'><input type='submit' value='"
+	$form .= "\n<div style='text-align: right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' class='fondo' /></div>";
 

@@ -109,7 +109,7 @@ function exec_message_edit_dist()
 	$res .= $texte;
 	$res .= "</textarea></p><br />\n";
 
-	$res .= "\n<div align='right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>"	
+	$res .= "\n<div style='text-align: right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'/></div>"	
 	. "\n</div>";
 
 	echo redirige_action_auteur('editer_message', $id_message, 'message',"id_message=$id_message", $res, " method='post'");

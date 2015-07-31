@@ -78,8 +78,8 @@ function exec_mots_type_dist()
 	$res = debut_cadre_relief("groupe-mot-24.gif", true)
 	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
 	. "<tr>"
-	. "<td  align='right' valign='top'>"
-	. icone(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif",'', false)
+	. "<td  align='right' valign='top'><br />"
+	. icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "mot-cle-24.gif", "rien.gif")
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
@@ -108,7 +108,7 @@ function exec_mots_type_dist()
 	} else
 		  $res .= "<input type='hidden' name='texte' value=\"$texte\" />";
 
-	$res .= "<div align='right'><input type='submit' class='fondo' value='"
+	$res .= "<div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
 	. "' /></div>"
 	. fin_cadre_formulaire(true)
@@ -178,7 +178,7 @@ function exec_mots_type_dist()
 		$res .= "<input type='hidden' name='acces_forum' value='non' />";
 	}
 			
-	$res .= "<br /></div><div align='right'><input type='submit' class='fondo' value='"
+	$res .= "<br /></div><div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
 	. "' /></div>"
 	.  fin_cadre_formulaire(true)
