@@ -902,6 +902,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 		$table = '';
 		while ($row = spip_fetch_array($result)) {
+			$row = safehtml_sur_row($row);
 			$vals = '';
 
 			$id_syndic_article=$row["id_syndic_article"];

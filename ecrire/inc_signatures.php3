@@ -28,6 +28,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 			      " LIMIT " . ($debut ? "$debut," : "") . $limit);
 
  	while($row=spip_fetch_array($request)){
+		$row = safehtml_sur_row($row);
 		$id_signature = $row['id_signature'];
 		$id_article = $row['id_article'];
 		$date_time = $row['date_time'];

@@ -421,6 +421,16 @@ function safehtml($t) {
 	return interdire_scripts($t); # gere le < ?php > en plus
 }
 
+// Passer safehtml sur les rows de l'espace privé
+function safehtml_sur_row($row) {
+	$champs_surs = array(
+	'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx',
+	'parametres_forum');
+	foreach($row as $champ => $valeur)
+		if (!in_array(strtolower($champ), $champs_surs)	AND !preg_match(',^id_,', $champ))
+			$row[$champ] = safehtml($valeur);
+	return $row;
+}
 
 // Correction typographique francaise
 function typo_fr($letexte) {

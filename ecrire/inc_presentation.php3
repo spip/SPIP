@@ -1337,6 +1337,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	if ($spip_display == 4) echo "<ul>";
  
  	while($row = spip_fetch_array($request)) {
+		$row = safehtml_sur_row($row);
 		$id_forum=$row['id_forum'];
 		$id_parent=$row['id_parent'];
 		$id_rubrique=$row['id_rubrique'];
