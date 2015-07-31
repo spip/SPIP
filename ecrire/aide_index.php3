@@ -109,6 +109,13 @@ function fichier_aide($lang_aide = '') {
 		}
 		
 		// Pas d'aide meme sur internet : n'existe pas dans la langue
+
+		// Hack: comportement special sur le serveur d'aide SPIP.NET
+		// (definir la constante SPIP.NET_...)
+		if (defined('SPIP.NET_PAS_DE_BOUCLE_AIDE')) {
+			$GLOBALS['clean_link'] = new Link("../aide/?aide=$aide");
+		}
+
 		erreur_aide_indisponible();
 	}
 
@@ -468,12 +475,6 @@ else {
 
 	// On n'a pas d'aide
 	if (!$html) {
-		// Hack: comportement special sur le serveur d'aide SPIP.NET
-		// (definir la constante SPIP.NET_...)
-		if (defined('SPIP.NET_PAS_DE_BOUCLE_AIDE')) {
-			$GLOBALS['clean_link'] = new Link("../aide/?aide=$aide");
-			erreur_aide_indisponible();
-		}
 		// Renvoyer sur l'aide en ligne du serveur externe
 		if ($help_server)
 			@Header("Location: $help_server/?lang=$spip_lang");
