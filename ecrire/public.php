@@ -30,7 +30,7 @@ if (defined('_INC_PUBLIC')) {
 	define ('_INC_PUBLIC', 1);
 
 	//
-	// Dispatcher les appels
+	// Discriminer les appels
 	//
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
@@ -75,7 +75,7 @@ if (defined('_INC_PUBLIC')) {
 	//
 
 	$tableau_des_erreurs = array();
-	$f = charger_fonction('assembler', 'public');
+	$f = charger_fonction('assembler', _DIR_COMPIL);
 	$page = $f($fond);
 
 	if (isset($page['status'])) {
@@ -157,8 +157,8 @@ if (defined('_INC_PUBLIC')) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		include_spip ('public/stats');
-		ecrire_stats();
+		$f = charger_fonction('decompter', _DIR_COMPIL);
+		$f();
 	}
 
 	// Ecrire le noyau s'il a change ;

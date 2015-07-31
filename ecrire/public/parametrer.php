@@ -316,7 +316,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
-	$f = charger_fonction('styliser', 'public');
+	$f = charger_fonction('styliser', _DIR_COMPIL);
 	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Charger le squelette en specifiant les langages cibles et source
@@ -324,7 +324,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$f = charger_fonction('composer', 'public');
+	$f = charger_fonction('composer', _DIR_COMPIL);
 
 	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer('calcul page');
@@ -338,7 +338,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	} else 	$page = array();
 
 	if ($GLOBALS['var_mode'] == 'debug') {
-		include_spip('public/debug');
+		include_spip(_DIR_COMPIL . 'debug');
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
 	$page['signal'] = signaler_squelette($local);

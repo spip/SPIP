@@ -16,7 +16,7 @@ include_spip('inc/session'); # pour creer_uniq_id
 include_spip('inc/minipres'); # charge lang et execute utiliser_lang
 include_spip('inc/mail'); # pour envoyer_mail
 include_spip('inc/acces'); # pour generer_htpass
-include_spip('public/assembler'); # pour calculer la page
+include_spip(_DIR_COMPIL . 'assembler'); # pour calculer la page
 include_spip('inc/filtres'); # pour email_valide()
 
 // Ce fichier est celui d'une balise dynamique qui s'ignore.

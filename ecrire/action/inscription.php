@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('balise/formulaire_inscription');
-include_spip('public/assembler'); 
+include_spip(_DIR_COMPIL . 'assembler'); 
 include_spip('inc/lang');
 include_spip('inc/headers');
 
