@@ -137,8 +137,8 @@ function traiter_formulaires_dynamiques($get=false){
 		// changer la langue avec celle qui a cours dans le formulaire
 		// on la depile de $args car c'est un argument implicite masque	
 		changer_langue(array_shift($args));
-
 			
+
 		$verifier = charger_fonction("verifier","formulaires/$form/",true);
 		$post["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',

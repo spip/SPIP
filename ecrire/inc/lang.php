@@ -231,10 +231,10 @@ function verifier_lang_url() {
 	global $spip_lang;
 
 	// quelle langue est demandee ?
-	$lang_demandee = $GLOBALS['meta']['langue_site'];
+	$lang_demandee = (test_espace_prive()?$GLOBALS['spip_lang']:$GLOBALS['meta']['langue_site']);
 	if (isset($_COOKIE['spip_lang_ecrire']))
 		$lang_demandee = $_COOKIE['spip_lang_ecrire'];
-	if (isset($_COOKIE['spip_lang']))
+	if (!test_espace_prive() AND isset($_COOKIE['spip_lang']))
 		$lang_demandee = $_COOKIE['spip_lang'];
 	if (isset($_GET['lang']))
 		$lang_demandee = $_GET['lang'];
