@@ -1308,10 +1308,15 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		$GLOBALS['profondeur_url'] = 1;
 	else {
 		$uri = isset($_SERVER['REQUEST_URI']) ? explode('?', $_SERVER['REQUEST_URI']) : '';
-		$uri_ref = (isset($_SERVER["SCRIPT_NAME"])?$_SERVER["SCRIPT_NAME"]:
-						(isset($GLOBALS['meta']['adresse_site'])?parse_url($GLOBALS['meta']['adresse_site'],PHP_URL_PATH).'/':'')
-						);
-		if (!$uri OR  !$uri_ref)
+		$uri_ref = $_SERVER["SCRIPT_NAME"];
+		if (!$uri_ref
+			// si on est appele avec un autre ti, on est sans doute en mutu
+			// si jamais c'est de la mutu avec sous rep, on est perdu si on se fie
+			// a spip.php qui est a la racine du spip, et vue qu'on sait pas se reperer
+			// s'en remettre a l'adresse du site. alea jacta est.
+			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES)
+			$uri_ref = (isset($GLOBALS['meta']['adresse_site'])?parse_url($GLOBALS['meta']['adresse_site'],PHP_URL_PATH).'/':'');
+		if (!$uri OR !$uri_ref)
 			$GLOBALS['profondeur_url'] = 0;
 		else {
 			$GLOBALS['profondeur_url'] = max(0,
