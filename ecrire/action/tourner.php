@@ -38,7 +38,7 @@ function action_tourner_post($r)
 	include_spip('base/abstract_sql');
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $r[2];
-	$src = copie_locale(get_spip_doc($row['fichier']));
+	$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
 	if (preg_match(',^(.*)-r(90|180|270)\.([^.]+)$,', $src, $match)) {
 		$effacer = $src;
 		$src = $match[1].'.'.$match[3];

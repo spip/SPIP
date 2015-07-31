@@ -389,7 +389,7 @@ function recuperer_infos_distantes($source, $max=0) {
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {
-			$a['fichier'] = nom_fichier_copie_locale($source, $a['extension']);
+			$a['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($source, $a['extension']);
 			ecrire_fichier($a['fichier'], $a['body']);
 			$size_image = @getimagesize($a['fichier']);
 			$a['largeur'] = intval($size_image[0]);
