@@ -343,8 +343,21 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 			// Recopie de l'image d'origine avec adaptation de la taille
 			$ok = false;
-			if (($process == 'gd2') AND function_exists('ImageCopyResampled'))
+			if (($process == 'gd2') AND function_exists('ImageCopyResampled')) {
+				if ($format == "gif") {
+					// Si un GIF est transparent,
+					// fabriquer un PNG transparent 
+					$transp = imagecolortransparent($srcImage);
+					if ($transp > 0) $destFormat = "png";
+				}
+				if ($destFormat == "png") {
+					// Conserver la transparence
+					if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true);
+					 @imagealphablending($destImage, false);
+					 @imagesavealpha($destImage,true);
+				}
 				$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			}
 			if (!$ok)
 				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
