@@ -181,11 +181,11 @@ function _generer_url_propre($type, $id_objet) {
 			$urls[$type][$id_objet] = $row;
 	}
 
-	if (!isset($urls[$type][$id_objet]['url'])) return ""; # objet inexistant
+	if (!isset($urls[$type][$id_objet])) return ""; # objet inexistant
 
 	$url_propre = $urls[$type][$id_objet]['url'];
 
-	if ($url_propre AND !$modifier_url)
+	if (!is_null($url_propre) AND !$modifier_url)
 		return _generer_url_arbo($url_propre,$type,$urls[$type][$id_objet]['parent']);
 
 	// Sinon, creer une URL
