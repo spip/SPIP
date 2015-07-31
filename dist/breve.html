@@ -60,16 +60,16 @@
 			<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
 			[(#REM) Breves dans la meme rubrique ]
-			<B_breves_rubrique>
+			<B_breves>
 			<div class="breves" >
 				<h2 class="titre"><:autres_breves:></h2>
 				<ul>
-					<BOUCLE_breves_rubrique(BREVES) {id_rubrique} {par date}{inverse}>
+					<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}>
 					<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
-					</BOUCLE_breves_rubrique>
+					</BOUCLE_breves>
 				</ul>
 			</div>
-			</B_breves_rubrique>
+			</B_breves>
 
 			[(#REM) Menu de navigation mots-cles ]
 			<B_mots>
