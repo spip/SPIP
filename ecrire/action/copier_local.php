@@ -45,7 +45,7 @@ function action_copier_local_post($id_document) {
 	include_spip('inc/documents'); // pour 'set_spip_doc'
 	$fichier = copie_locale($source);
 	if ($fichier) {
-		$fichier = _DIR_RACINE . $f;
+		$fichier = _DIR_RACINE . $fichier;
 		$taille = filesize($fichier);
 		// On le sort du repertoire IMG/distant/
 		$dest = preg_replace(',^.*/distant/[^/_]+[/_],', '', $fichier);
