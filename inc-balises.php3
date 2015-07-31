@@ -661,20 +661,24 @@ function balise_EXTRA_dist ($p) {
 	$p->code = $_extra;
 
 	// Gerer la notation [(#EXTRA|isbn)]
-	if ($p->fonctions) {
-	  $p->param = array();
+	if ($p->params) {
 		include_ecrire("inc_extra.php3");
-		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
+		list ($key, $champ_extra) = each($p->params);	// le premier filtre
 		$type_extra = $p->type_requete;
+		$champ = $champ_extra[1];
+
 	// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
 	// depuis un sous-objet sans champ extra d'un objet a champ extra,
 	// on aura le type_extra du sous-objet (!)
-		if (extra_champ_valide($type_extra, $champ_extra[0])) {
-			unset($p->fonctions[$key]);
-			$p->code = "extra($p->code, '".addslashes($champ_extra)."')";
+		if (extra_champ_valide($type_extra, $champ))
+		{
+			array_shift($p->params);
+# A quoi ca sert ?
+#		$p->code = "extra($p->code, '".addslashes($champ)."')";
+
 
 			// Appliquer les filtres definis par le webmestre
-			$filtres = extra_filtres($type_extra, $champ_extra[0]);
+			$filtres = extra_filtres($type_extra, $champ);
 			if ($filtres) foreach ($filtres as $f)
 				$p->code = "$f($p->code)";
 		}
