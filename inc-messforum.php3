@@ -148,6 +148,8 @@ if ($validation_finale)
 	//  mais il est statistiquement peu re'utilise')
 	// destruction de la page ayant de'clenche' le formulaire si non mode're'
 
+	$cache = rawurldecode($cache);
+
 	if (file_exists('inc-invalideur.php3'))
 	  {
 	    include('inc-invalideur.php3');
