@@ -88,7 +88,9 @@ function exec_sites_edit_dist()
 	$url_syndic = entites_html($url_syndic);
 	$nom_site = entites_html($nom_site);
 	$url_site = entites_html($url_site);
-	if (strlen($url_site)<4) $url_site="http://";
+
+	// url vide => proposer 'http://' a titre d'aide
+	if (strlen($url_site) == 0) $url_site="http://";
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	else {
