@@ -956,29 +956,15 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	$c .= '.
 	(($lien = (_request("retour") ? _request("retour") : str_replace("&amp;", "&", '.$retour.'))) ? "&retour=".rawurlencode($lien) : "")';
 
-	$p->code .= code_invalideur_forums($p, "(".$c.")");
+	// Ajouter le code d'invalideur specifique a cette balise
+	include_spip('inc/invalideur');
+	if (function_exists($i = 'code_invalideur_forums'))
+		$p->code .= $i($p, '('.$c.')');
 
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-
-// Noter l'invalideur de la page contenant ces parametres,
-// en cas de premier post sur le forum
-// http://doc.spip.org/@code_invalideur_forums
-function code_invalideur_forums($p, $code) {
-	$type = 'id_forum';
-	$valeur = "\n\t\tcalcul_index_forum("
-		// Retournera 4 [$SP] mais force la demande du champ SQL
-		. champ_sql('id_article', $p) . ','
-		. champ_sql('id_breve', $p) .  ','
-		. champ_sql('id_rubrique', $p) .','
-		. champ_sql('id_syndic', $p) .  ")\n\t";
-
-	return '
-	// invalideur '.$type.'
-	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
-}
 
 // Reference a l'URL de la page courante
 // Attention dans un INCLURE() ou une balise dynamique on n'a pas le droit de

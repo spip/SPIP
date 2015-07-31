@@ -62,20 +62,6 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-// http://doc.spip.org/@signaler_squelette
-function signaler_squelette($contexte)
-{
-	$signal = array();
-	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
-	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
-	'id_mot', 'id_groupe', 'id_document') as $val) {
-		if (isset($contexte[$val]))
-			$signal['contexte'][$val] = intval($contexte[$val]);
-	}
-
-	return $signal;
-}
-
 // http://doc.spip.org/@analyse_resultat_skel
 function analyse_resultat_skel($nom, $cache, $corps) {
 	$headers = array();
@@ -345,7 +331,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		include_spip('public/debug');
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
-	$page['signal'] = signaler_squelette($local);
+	$page['contexte'] = $local;
 	return $page;
 }
 

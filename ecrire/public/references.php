@@ -205,17 +205,6 @@ function calculer_balise($nom, $p) {
 			return $res;
 	}
 
-/*
-	// appel direct des modeles, remplace par #MODELE{article_traductions}
-	// S'agit-t-il d'un modele ?
-	if (find_in_path('modeles/'.strtolower($nom).'.html')) {
-		if (!function_exists($f = 'calculer_balise_modele')) $f .= '_dist';
-		$res = $f($p);
-		if ($res !== NULL)
-			return $res;
-	}
-*/
-
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
 		if (!function_exists($f = 'calculer_balise_logo')) $f .= '_dist';

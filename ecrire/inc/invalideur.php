@@ -24,7 +24,7 @@ function supprime_invalideurs() {
 // Calcul des pages : noter dans la base les liens d'invalidation
 //
 // http://doc.spip.org/@maj_invalideurs
-function maj_invalideurs ($fichier, &$page, $duree) {
+function maj_invalideurs ($fichier, &$page) {
 	// ne pas noter les POST et les delais=0
 	if ($fichier == '') return;
 
@@ -36,7 +36,7 @@ function maj_invalideurs ($fichier, &$page, $duree) {
 	// et de la taille du fichier cache
 	# Note : on ajoute 3600s pour eviter toute concurrence
 	# entre un invalideur et un appel public de page
-	$bedtime = time() + $duree + 3600;
+	$bedtime = time() + $page['entetes']['X-Spip-Cache'] + 3600;
 	$taille = @filesize(_DIR_CACHE . $fichier);
 	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES (" . spip_abstract_quote($fichier) . ",'$bedtime','t','$taille')");
 
@@ -192,6 +192,99 @@ function cron_invalideur($t) {
 		suivre_invalideur("id <= $date_limite AND type in ('t', 'x')", false);
 	}
 	return 1;
+}
+
+//
+// Destruction des fichiers caches invalides
+//
+
+// Securite : est sur que c'est un cache
+// http://doc.spip.org/@retire_cache
+function retire_cache($cache) {
+
+	if (preg_match(
+	"|^([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
+	$cache)) {
+		// supprimer le fichier (de facon propre)
+		supprimer_fichier(_DIR_CACHE . $cache);
+	} else
+		spip_log("Impossible de retirer $cache");
+}
+
+// Supprimer les caches marques "x"
+// http://doc.spip.org/@retire_caches
+function retire_caches($chemin = '') {
+	include_spip('base/abstract_sql');
+	include_spip('inc/meta');
+	lire_metas();
+	// recuperer la liste des caches voues a la suppression
+	$suppr = array();
+
+	// En priorite le cache qu'on appelle maintenant
+	if ($chemin) {
+		$f = spip_abstract_fetsel(array("fichier"),
+			array("spip_caches"),
+			array("fichier = " . spip_abstract_quote($chemin) . " ",
+				"type='x'"),
+			"",
+			array(),
+			1);
+		if ($f['fichier']) $suppr[$f['fichier']] = true;
+	}
+
+	// Et puis une centaine d'autres
+	$compte = 0;
+	if (isset($GLOBALS['meta']['invalider_caches'])) {
+		$compte = 1;
+		effacer_meta('invalider_caches'); # concurrence
+		ecrire_metas();
+
+		$q = spip_abstract_select(array("fichier"),
+				array("spip_caches"),
+				array("type='x'"),
+				"",
+				array(),
+				100);
+		while ($r = spip_abstract_fetch($q)) {
+			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
+			$suppr[$r['fichier']] = true;
+		}
+	}
+
+	if ($n = count($suppr)) {
+		spip_log ("Retire $n caches");
+		foreach ($suppr as $cache => $ignore)
+			retire_cache($cache);
+		spip_query("DELETE FROM spip_caches WHERE " . calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
+	}
+
+	// Si on a regarde (compte > 0), signaler s'il reste des caches invalides
+	if ($compte > 0) {
+		if ($compte > 100) # s'il y en a 101 c'est qu'on n'a pas fini
+			ecrire_meta('invalider_caches', 'oui');
+		else
+			effacer_meta('invalider');
+		ecrire_metas();
+	}
+}
+
+
+// Pour que le compilo ajoute un invalideur a la balise #PARAMETRES_FORUM
+// Noter l'invalideur de la page contenant ces parametres,
+// en cas de premier post sur le forum
+// http://doc.spip.org/@code_invalideur_forums
+function code_invalideur_forums($p, $code) {
+	$type = 'id_forum';
+	$valeur = "\n\t\tcalcul_index_forum("
+		// Retournera 4 [$SP] mais force la demande du champ SQL
+		. champ_sql('id_article', $p) . ','
+		. champ_sql('id_breve', $p) .  ','
+		. champ_sql('id_rubrique', $p) .','
+		. champ_sql('id_syndic', $p) .  ")\n\t";
+
+	return '
+	// invalideur '.$type.'
+	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
 }
 
 ?>
