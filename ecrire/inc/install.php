@@ -389,7 +389,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $j
 				}
 			});
 			if ($("#sql_serveur_db").length) {
-				if ($("#sql_serveur_db").attr("value").match("sqlite*"))
+				if ($("#sql_serveur_db").prop("value").match("sqlite*"))
 						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").hide();
 					else
 						$("#install_adresse_base_hebergeur,#install_login_base_hebergeur,#install_pass_base_hebergeur").show();
