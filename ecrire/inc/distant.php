@@ -17,27 +17,43 @@ if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCO
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' .$GLOBALS['spip_version_affichee']. " (" .$GLOBALS['home_server']. ")");
 
 //@define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids (inc/utils l'a fait)
-//
-// Cree au besoin la copie locale d'un fichier distant
-// mode = 'test' - ne faire que tester
-// mode = 'auto' - charger au besoin
-// mode = 'modif' - Si deja present, ne charger que si If-Modified-Since
-// mode = 'force' - charger toujours (mettre a jour)
-//
-// Prend en argument un chemin relatif au rep racine, ou une URL
-// Renvoie un chemin relatif au rep racine, ou false
-//
-// http://doc.spip.org/@copie_locale
-function copie_locale($source, $mode='auto') {
+
+/**
+ * Cree au besoin la copie locale d'un fichier distant
+ *
+ *
+ * Prend en argument un chemin relatif au rep racine, ou une URL
+ * Renvoie un chemin relatif au rep racine, ou false
+ *
+ * http://doc.spip.org/@copie_locale
+ *
+ * @param $source
+ * @param string $mode
+ *   'test' - ne faire que tester
+ *   'auto' - charger au besoin
+ *   'modif' - Si deja present, ne charger que si If-Modified-Since
+ *   'force' - charger toujours (mettre a jour)
+ * @param string $local
+ *   permet de specifier le nom du fichier local (stockage d'un cache par exemple, et non document IMG)
+ * @return bool|string
+ */
+function copie_locale($source, $mode='auto', $local=null) {
 
 	// si c'est la protection de soi-meme
 	$reg = ',' . $GLOBALS['meta']['adresse_site']
 	  . "/?spip.php[?]action=acceder_document.*file=(.*)$,";
 
-	if (preg_match($reg, $source, $local)) return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($local[1]);
+	if (preg_match($reg, $source, $m)) return substr(_DIR_IMG,strlen(_DIR_RACINE)) . urldecode($m[1]);
 
-	$local = fichier_copie_locale($source);
+	if (is_null($local))
+		$local = fichier_copie_locale($source);
+	else {
+		if (_DIR_RACINE
+		    AND strncmp(_DIR_RACINE,$local,strlen(_DIR_RACINE))==0)
+			$local = substr($local,strlen(_DIR_RACINE));
+	}
 	$localrac = _DIR_RACINE.$local;
+
 	$t = ($mode=='force') ? false  : @file_exists($localrac);
 
 	// test d'existence du fichier
