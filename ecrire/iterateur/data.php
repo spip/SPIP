@@ -177,9 +177,12 @@ class IterateurDATA implements Iterator {
 					if (!$this->err AND $ttl>0)
 						$this->cache_set($cle, $ttl);
 				}
+
 				# en cas d'erreur http, utiliser le cache si encore dispo
-				else if ($cache)
+				if ($this->err) {
 					$this->tableau = $cache['data'];
+					$this->err = false;
+				}
 			}
 		}
 
