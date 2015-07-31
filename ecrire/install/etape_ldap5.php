@@ -31,14 +31,14 @@ function install_etape_ldap5_dist()
 				       . substr($conn, $p+1));
 	}
 
-	$adresse_ldap = addslashes(_request('adresse_ldap'));
-	$login_ldap = addslashes(_request('login_ldap'));
-	$pass_ldap = addslashes(_request('pass_ldap'));
-	$port_ldap = addslashes(_request('port_ldap'));
-	$tls_ldap = addslashes(_request('tls_ldap'));
-	$protocole_ldap = addslashes(_request('protocole_ldap'));
-	$base_ldap = addslashes(_request('base_ldap'));
-	$base_ldap_text = addslashes(_request('base_ldap_text'));
+	$adresse_ldap = addcslashes(_request('adresse_ldap'),"'\\");
+	$login_ldap = addcslashes(_request('login_ldap'),"'\\");
+	$pass_ldap = addcslashes(_request('pass_ldap'),"'\\");
+	$port_ldap = addcslashes(_request('port_ldap'),"'\\");
+	$tls_ldap = addcslashes(_request('tls_ldap'),"'\\");
+	$protocole_ldap = addcslashes(_request('protocole_ldap'),"'\\");
+	$base_ldap = addcslashes(_request('base_ldap'),"'\\");
+	$base_ldap_text = addcslashes(_request('base_ldap_text'),"'\\");
 
 	$conn = "\$GLOBALS['ldap_base'] = '$base_ldap';\n"
 		. "\$GLOBALS['ldap_link'] = @ldap_connect('$adresse_ldap','$port_ldap');\n"
