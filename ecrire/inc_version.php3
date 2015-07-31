@@ -860,20 +860,17 @@ if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 }
 
 // Verifier la conformite d'une ou plusieurs adresses email
-function email_valide($adresse) {
-	$adresses = explode(',', $adresse);
-	if (is_array($adresses)) {
-		while (list(, $adresse) = each($adresses)) {
-			// nettoyer certains formats
-			// "Marie Toto <Marie@toto.com>"
-			$adresse = eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $adresse);
-			// RFC 822
-			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', trim($adresse)))
-				return false;
-		}
-		return true;
+//  retourne false ou la  normalisation de la derniere adresse donnee
+function email_valide($adresses) {
+	foreach (explode(',', $adresses) as $v) {
+	  // nettoyer certains formats
+	  // "Marie Toto <Marie@toto.com>"
+		$adresse = trim(eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $v));
+		// RFC 822
+		if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', $adresse))
+			return false;
 	}
-	return false;
+	return $adresse;
 }
 
 //
@@ -887,7 +884,7 @@ function _T($texte, $args = '') {
 		$text = html2unicode($text);
 	}
 
-	return $text;
+	return $text ? $text : $texte;
 }
 
 // chaines en cours de traduction
