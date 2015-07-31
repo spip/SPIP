@@ -235,7 +235,7 @@
 
 <center>Documents li&eacute;s</center>
 <ul>
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{id_vignette=0}>
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}>
 	<li><font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
 	[: (#DESCRIPTIF)]
 		(<BOUCLE_type_doc(TYPES_DOCUMENTS){id_type}>[(#TITRE) - ].#EXTENSION -</BOUCLE_type_doc>
