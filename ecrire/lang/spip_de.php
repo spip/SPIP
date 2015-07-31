@@ -737,6 +737,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'zbug_inversion_ordre_inexistant' => 'Umkehrung einer inexistenten Sortierung ',
 'zbug_pagination_sans_critere' => '#PAGINATION ohne Kriterium {pagination} oder in rekursiver Schleife',
 'zbug_parametres_inclus_incorrects' => 'INCLUDE-Parameter fehlerhaft',
+'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'Ergebnis',
 'zbug_serveur_indefini' => 'SQL-Server nicht definiert',
 'zbug_table_inconnue' => 'SQL-Tabelle &laquo; @table@ &raquo; unbekannt',

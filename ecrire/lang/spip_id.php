@@ -557,7 +557,7 @@ Terima kasih atas partisipasi anda!
 'lien_visite_site' => 'kunjungi situs ini',
 'lien_visites' => '@visites@ kunjungan',
 'lien_voir_auteur' => 'Cek penulis ini',
-'ligne' => '<NEW>Line',
+'ligne' => 'Baris',
 'login_acces_prive' => 'akses ke area pribadi',
 'login_autre_identifiant' => 'gunakan ID lain',
 'login_connexion_refusee' => 'Koneksi ditolak.',
@@ -591,17 +591,17 @@ Terima kasih atas partisipasi anda!
 
 
 // M
-'masquer_trad' => '<NEW>hide translations',
+'masquer_trad' => 'sembunyikan terjemahan',
 'module_fichiers_langues' => 'Berkas-berkas bahasa',
 
 
 // N
 'navigateur_pas_redirige' => 'Jika browser anda tidak dialihkan, klik di sini untuk lanjut.',
-'numero' => '<NEW>Number',
+'numero' => 'Nomor',
 
 
 // O
-'occurence' => '<NEW>Instance',
+'occurence' => 'peristiwa',
 'onglet_affacer_base' => 'Hapus database',
 'onglet_auteur' => 'Penulis',
 'onglet_contenu_site' => 'Isi situs',
@@ -668,7 +668,7 @@ dan mengakses situs kembali.
 
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP finds this page to be in compliance with its DOCTYPE:',
+'spip_conforme_dtd' => 'SPIP menemukan bahwasanya halaman ini sesuai dengan DOCTYPE-nya:',
 'squelette' => 'templat',
 'squelette_inclus_ligne' => 'templat yang diikutsertakan, baris',
 'squelette_ligne' => 'templat, baris',
@@ -693,7 +693,7 @@ dan mengakses situs kembali.
 						Perhatikan dengan seksama referensi ini, ulangi prosedur pembaharuan,
 						dan pastikan gambar akhirnya muncul
 						di artikel.',
-'texte_erreur_visiteur' => '<NEW>You have tried to enter the private area using a login which does not permit this.',
+'texte_erreur_visiteur' => 'Anda telah mencoba memasuki area pribadi dengan log masuk yang tidak sah.',
 'texte_inc_auth_1' => 'Anda mengidentifikasikan diri anda dengan log masuk
 		<B>@auth_login@</B>, tapi tidak dapat ditemukan di database (lagi). 
 		Coba untuk',
@@ -727,7 +727,7 @@ dan mengakses situs kembali.
 'titre_image_redacteur' => 'Editor tanpa akses',
 'titre_image_redacteur_02' => 'Editor',
 'titre_image_visiteur' => 'Pengunjung',
-'titre_joindre_document' => 'LAMPIRKAN SEBUH DOKUMEN',
+'titre_joindre_document' => 'LAMPIRKAN SEBUAH DOKUMEN',
 'titre_liens_entrants' => 'Tautan masuk',
 'titre_mots_cles' => 'KATA-KATA KUNCI',
 'titre_probleme_technique' => 'Peringatan: sebuah permasalahan teknis (server MySQL) telah mengganggu akses ke bagian situs ini.<p>Terima kasih atas pengertian anda.',
@@ -755,39 +755,39 @@ dan mengakses situs kembali.
 'zbug_code' => 'kode',
 'zbug_critere_inconnu' => 'kriteria yang tidak dikenal @critere@',
 'zbug_distant_interdit' => 'data eksternal dilarang',
-'zbug_doublon_table_sans_index' => '<NEW>doubles in a table without an index',
+'zbug_doublon_table_sans_index' => 'ganda dalam sebuah tabel tanpa indeks',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: definisi ganda',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag penutup hilang',
 'zbug_erreur_boucle_syntaxe' => 'Sintaks (BOUCLE) loop yang salah ',
-'zbug_erreur_compilation' => '<NEW>Compilation error',
+'zbug_erreur_compilation' => 'Kesalahan kompilasi',
 'zbug_erreur_execution_page' => 'kesalahan dalam kalkulasi halaman',
 'zbug_erreur_filtre' => 'Kesalahan - filter yang tak terdefinisi: <b>"@filtre@"</b>',
 'zbug_erreur_meme_parent' => '{meme_parent} hanya berlaku untuk loop (FORUM) and (RUBRIK)',
 'zbug_erreur_squelette' => 'Kesalahan dalam templat',
 'zbug_info_erreur_squelette' => '&#1615;Kesalahan di situs',
 'zbug_inversion_ordre_inexistant' => 'susunan yang tidak dikenal',
-'zbug_pagination_sans_critere' => '<NEW>#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
+'zbug_pagination_sans_critere' => 'Tag #PAGINATION tanpa kriteria (penomoran halaman), atau digunakan dalam loop rekursif',
 'zbug_parametres_inclus_incorrects' => 'Parameter-parameter tambahan yang salah',
-'zbug_profile' => '<NEW>Calculation time: @time@',
+'zbug_profile' => 'Waktu kalkulasi: @time@',
 'zbug_resultat' => 'hasil',
 'zbug_serveur_indefini' => 'server SQL yang tidak dikenal',
 'zbug_table_inconnue' => 'Tabel SQL yang tidak dikenal "@table@"',
-'zxml_connus_attributs' => '<NEW>known attributes',
-'zxml_de' => '<NEW>from',
-'zxml_inconnu_attribut' => '<NEW>unknown attribute',
-'zxml_inconnu_balise' => '<NEW>unknown tag',
-'zxml_inconnu_entite' => '<NEW>unknown entity',
-'zxml_inconnu_id' => '<NEW>unknown ID',
-'zxml_mais_de' => '<NEW>but from',
-'zxml_non_conforme' => '<NEW>not true to the principle',
-'zxml_non_fils' => '<NEW>is not a child of',
-'zxml_nonvide_balise' => '<NEW>tag not empty',
-'zxml_obligatoire_attribut' => '<NEW>required attribute absent in',
-'zxml_succession_fils_incorrecte' => '<NEW>incorrect child inheritance',
-'zxml_survoler' => '<NEW>to see the correct ones, hover with the cursor',
-'zxml_valeur_attribut' => '<NEW>attribute value',
-'zxml_vide_balise' => '<NEW>empty tag',
-'zxml_vu' => '<NEW>seen before'
+'zxml_connus_attributs' => 'atribut yang dikenal',
+'zxml_de' => 'dari',
+'zxml_inconnu_attribut' => 'atribut yang tidak dikenal',
+'zxml_inconnu_balise' => 'tag yang tidak dikenal',
+'zxml_inconnu_entite' => 'entitas yang tidak dikenal',
+'zxml_inconnu_id' => 'ID yang tidak dikenal',
+'zxml_mais_de' => 'tapi dari',
+'zxml_non_conforme' => 'tidak sesuai dengan prinsipal',
+'zxml_non_fils' => 'bukan turunan dari',
+'zxml_nonvide_balise' => 'tag tidak kosong',
+'zxml_obligatoire_attribut' => 'atribut yang dibutuhkan tidak ditemukan dalam',
+'zxml_succession_fils_incorrecte' => 'turunan yang salah',
+'zxml_survoler' => 'untuk melihat entri yang benar, cukup letakkan kursor di atasnya',
+'zxml_valeur_attribut' => 'nilai atribut',
+'zxml_vide_balise' => 'tag kosong',
+'zxml_vu' => 'dilihat sebelumnya'
 
 );
 

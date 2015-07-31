@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'activer_plugin' => 'Activar el connector',
-'aide_non_disponible' => 'Aquesta part de l\'ajuda en l&iacute;nia no est&agrave; encara disponible en Catal&agrave;.',
+'aide_non_disponible' => 'Aquesta part de l\'ajuda en l&iacute;nia no est&agrave; encara disponible en aquesta llengua.',
 'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Acc&egrave;s prohibit',
 'avis_article_modifie' => 'Atenci&oacute;, @nom_auteur_modif@ ha treballat en aquest article fa @date_diff@ minuts',

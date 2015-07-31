@@ -766,6 +766,7 @@ and connect again to the site.
 'zbug_inversion_ordre_inexistant' => 'reversal of nonexistent order',
 'zbug_pagination_sans_critere' => '#PAGINATION tag without {pagination} criterion, or used in a recursive loop',
 'zbug_parametres_inclus_incorrects' => 'Wrong inclusion parameters',
+'zbug_profile' => 'Calculation time: @time@',
 'zbug_resultat' => 'result',
 'zbug_serveur_indefini' => 'undefined SQL server',
 'zbug_table_inconnue' => 'Unknown SQL table "@table@"',
