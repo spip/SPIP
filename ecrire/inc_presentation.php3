@@ -1177,7 +1177,11 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			if ($compteur_forum == 1) echo debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre));
 			else echo debut_cadre_thread_forum("", false, "", typo($titre));
 			
-			echo "<span class='arial2'>$date_heure</span>";
+			echo "<span class='arial2'>";
+			echo affdate_court($date_heure);
+			echo ", ";
+			echo heures($date_heure).":".minutes($date_heure);
+			echo "</span>";
 
 			if ($email_auteur) {
 				echo " <a href=\"mailto:$email_auteur?subject=".rawurlencode($titre)."\">".typo($auteur)."</a>";
