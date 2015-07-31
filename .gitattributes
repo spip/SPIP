@@ -45,9 +45,7 @@ IMG/icones/xcf-dist.png -text
 IMG/icones/xls-dist.png -text
 IMG/icones/xml-dist.png -text
 IMG/icones/zip-dist.png -text
-IMG/icones_barre/Agrave.png -text
-IMG/icones_barre/Eacute.png -text
-IMG/icones_barre/OElig.png -text
+IMG/icones_barre/agrave-maj.png -text
 IMG/icones_barre/barre-a-grave.png -text
 IMG/icones_barre/barre-bold.png -text
 IMG/icones_barre/barre-cadre.png -text
@@ -66,6 +64,7 @@ IMG/icones_barre/barre-quote.png -text
 IMG/icones_barre/barre-tableau.png -text
 IMG/icones_barre/barre-wiki.png -text
 IMG/icones_barre/blanc.png -text
+IMG/icones_barre/eacute-maj.png -text
 IMG/icones_barre/euro.png -text
 IMG/icones_barre/gras.png -text
 IMG/icones_barre/guillemets.png -text
@@ -73,6 +72,7 @@ IMG/icones_barre/intertitre.png -text
 IMG/icones_barre/italique.png -text
 IMG/icones_barre/lien.png -text
 IMG/icones_barre/notes.png -text
+IMG/icones_barre/oelig-maj.png -text
 IMG/icones_barre/oelig.png -text
 IMG/test.gif -text
 IMG/test.jpg -text
