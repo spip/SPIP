@@ -29,7 +29,7 @@
 	<div id="wysiwyg">
 	<INCLURE{fond=prive/objets/contenu/#OBJET,id=#ID_OBJET,env,wysiwyg=1}>
 	</div>
-				
+
 	[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|et{#OBJET|objet_info{editable}}|oui)
 
 		[(#ID_OBJET|afficher_qui_edite{#OBJET}|non)
@@ -48,7 +48,7 @@
 	[(#OBJET|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
 		[(#SET{enfants,[(#INCLURE{fond=[prive/objets/contenu/(#OBJET)-enfants],id_objet,env})]})]
 	]
-	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,#OBJET,id_objet,#ID_OBJET},data,#GET{enfants}})]})]
+	[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,#ENV**{exec},objet,#OBJET,id_objet,#ID_OBJET},data,#GET{enfants}})]})]
 
 	[(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>
