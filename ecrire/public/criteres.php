@@ -1057,7 +1057,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 
 	list($fct, $col, $op, $val, $args_sql) =
 		calculer_critere_infixe_ops($idb, $boucles, $crit);
-var_dump($val);
+
 	$col_alias = $col;
 	$where_complement = false;
 
