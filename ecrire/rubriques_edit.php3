@@ -74,7 +74,7 @@ if ($new == "oui") {
 	}
 }
 else {
-	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
+	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -82,6 +82,7 @@ else {
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$texte = $row['texte'];
+		$id_secteur = $row['id_secteur'];
 		$extra = $row["extra"];
 	}
 }
