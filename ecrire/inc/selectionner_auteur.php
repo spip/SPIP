@@ -57,7 +57,7 @@ function selectionner_auteur_boucle($query, $idom)
 		. "findObj_forcer('nouv_auteur').value="
 		. $id
 		. "; aff_selection($id,$args); return false;"
-		. "\"\nondbclick=\""
+		. "\"\nondblclick=\""
 		. "findObj_forcer('nouv_auteur').value="
 		. $id
 		. ";findObj_forcer('selection_auteur').style.display="

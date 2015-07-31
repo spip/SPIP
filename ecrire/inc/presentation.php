@@ -532,7 +532,7 @@ function affiche_tranche_bandeau($requete, $icone, $fg, $bg, $tmp_var,  $titre, 
 	sql_free($result);
 
 	$t = afficher_liste($largeurs, $table, $styles);
-	if ($spip_display != 4)
+	if (($spip_display != 4) AND $t)
 	  $t = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>"
 	    . $t
 	    . "</table>";

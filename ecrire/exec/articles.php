@@ -26,8 +26,8 @@ function exec_articles_dist()
 
 	if (!$row
 	OR !autoriser('voir', 'article', $id_article)) {
-		$res = $row['titre'] = _T('public:aucun_article');
-		$row['id_rubrique'] = 0;
+		include_spip('inc/minipres');
+		echo minipres(_T('public:aucun_article'));
 	} else {
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
@@ -35,18 +35,17 @@ function exec_articles_dist()
 		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
 		  . "<br /><br /><div class='centered'>"
 		. "</div>"
-		. fin_gauche()
-;
+		. fin_gauche();
+
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", $row['id_rubrique']);
+
+		echo debut_grand_cadre(true),
+			afficher_hierarchie($row['id_rubrique']),
+			fin_grand_cadre(true),
+			$res,
+			fin_page();
 	}
-
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", $row['id_rubrique']);
-
-	echo debut_grand_cadre(true),
-		afficher_hierarchie($row['id_rubrique']),
-		fin_grand_cadre(true),
-		$res,
-		fin_page();
 }
 
 // http://doc.spip.org/@articles_affiche

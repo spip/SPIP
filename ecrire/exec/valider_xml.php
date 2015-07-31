@@ -19,18 +19,17 @@ function exec_valider_xml_dist()
 	if (!autoriser('ecrire')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else valider_xml_ok(_request('var_url'));
+}
 
+function valider_xml_ok($url)
+{
+	$url = urldecode($url);
 	$titre = _T('analyse_xml');
-
-	$url = urldecode(_request('var_url'));
-
 	if (!$url) {
-	  $url_aff = 'http://';
-	  $onfocus = "this.value='';";
-	  $texte = $err = '';
-
+		$url_aff = 'http://';
+		$onfocus = "this.value='';";
+		$texte = $bandeau = $err = '';
 	} else {
 		include_spip('public/debug');
 		include_spip('inc/distant');
@@ -41,6 +40,7 @@ function exec_valider_xml_dist()
 				$res[]= controle_une_url($transformer_xml, basename($f, '.php'), $url);
 			}
 			$res = valider_resultats($res);
+			$bandeau = $url;
 		} else {
 			@list($server, $script) = preg_split('/[?]/', $url);
 			if ((!$server) OR ($server == './') 
@@ -48,19 +48,36 @@ function exec_valider_xml_dist()
 			  include_spip('inc/headers');
 			  redirige_par_entete(parametre_url($url,'transformer_xml','valider_xml', '&'));
 			}
-			$url_aff = entites_html($url);
+
 			$onfocus = "this.value='" . addslashes($url) . "';";
-			$res .= valider_une_url($transformer_xml, $url);
+			unset($GLOBALS['xhtml_error']);
+			if (preg_match(',^[a-z][0-9a-z_]*$,i', $url)) {
+				$texte = $transformer_xml(charger_fonction($url, 'exec'), true);
+				$url_aff = generer_url_ecrire($url);
+			} else {
+				$texte = $transformer_xml(recuperer_page($url));
+				$url_aff = entites_html($url);
+			}
+			if (isset($GLOBALS['xhtml_error'])) 
+				list($texte, $err) = emboite_texte($texte);
+			else {
+				$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
+				list($texte, ) = emboite_texte($texte);
+			}
+
+			$res =
+			"<div style='text-align: center'>" . $err . "</div>" .
+			"<div style='margin: 10px; text-align: left'>" . $texte . '</div>';
+			$bandeau = "<a href='$url_aff'>$url</a>";
 		}
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-
 	echo $commencer_page($titre);
 	$onfocus = '<input type="text" size="70" value="' .$url_aff .'" name="var_url" id="var_url" onfocus="'.$onfocus . '" />';
 	$onfocus = generer_form_ecrire('valider_xml', $onfocus, " method='get'");
 
-	echo "<h1>", $titre, '</h1>',
+	echo "<h1>", $titre, '<br>', $bandeau, '</h1>',
 	  "<div style='text-align: center'>", $onfocus, "</div>",
 	  $res,
 	  fin_page();
@@ -74,20 +91,25 @@ function valider_resultats($res)
 		$i++;
 		$class = 'row_'.alterner($i, 'even', 'odd');
 		list($script, $texte, $erreurs) = $l;
+		if ($texte < 0) {
+			$texte = (0- $texte);
+			$color = ";color: red";
+		} else  $color = '';
+		$h = generer_url_ecrire('valider_xml', "var_url=$script");
 		$table .= "<tr class='$class'>"
-		. "<td>$script</td>"
-		. "<td style='text-align: right'>$texte</td>"
+		. "<td><a href='$h'>$script</a></td>"
+		. "<td style='text-align: right$color'>$texte</td>"
 		. "<td style='text-align: right'>$erreurs</td>";
 	}
 	return "<table class='spip'>"
-	. "<tr><th>S</th><th>T</th><th>E</th></tr>"
-	. $table
-	. "</table>";
+	  . "<tr><th>script</th><th>"
+	  . _T('taille_octets', array('taille' => ' '))
+	  . "</th><th>" 
+	  . _T('erreur_texte')
+	  . "</th></tr>"
+	  . $table
+	  . "</table>";
 }
-
-// Neutraliser la fonction inc_admin_dist et ses exit
-
-function inc_admin() {return '';}
 
 function controle_une_url($transformer_xml, $script, $dir)
 {
@@ -106,6 +128,10 @@ function controle_une_url($transformer_xml, $script, $dir)
 	if(!$f) return false;
 	$f = $transformer_xml($f, true);
 	$res = strlen($f);
+	// On colore en rouge s'il y a l'attribut minipres:
+	// test non significatif car le script necessite des arguments
+	// (ou une authentification pour action d'administration)
+	if (strpos($f, "id='minipres'")) $res = 0 - $res;
 	if (isset($GLOBALS['xhtml_error'])) {
 		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 		       $GLOBALS['xhtml_error'],
@@ -114,23 +140,5 @@ function controle_une_url($transformer_xml, $script, $dir)
 		$n = count($regs);
 	} else $n = 0;
 	return array($script, $res, $n);
-}
-
-function valider_une_url($transformer_xml, $url)
-{
-	unset($GLOBALS['xhtml_error']);
-	if (preg_match(',^[a-z][0-9a-z_]*$,i', $url))
-		$texte = $transformer_xml(charger_fonction($url, 'exec'), true);
-	else 	$texte = $transformer_xml(recuperer_page($url));
-
-	if (isset($GLOBALS['xhtml_error'])) 
-		list($texte, $err) = emboite_texte($texte);
-	else {
-		$err = '<h3>' . _T('spip_conforme_dtd') . '</h3>';
-		list($texte, ) = emboite_texte($texte);
-	}
-	return
-	  "<div style='text-align: center'>" . $err . "</div>" .
-	  "<div style='margin: 10px; text-align: left'>" . $texte . '</div>';
 }
 ?>
