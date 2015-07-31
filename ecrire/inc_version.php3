@@ -99,8 +99,8 @@ $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 
 if ($flag_function_exists) {
 	$flag_gz = function_exists("gzopen");
-	$flag_obgz = function_exists("ob_gzhandler");
-	$flag_ob = function_exists("ob_start");
+	$flag_ob = (function_exists("ob_start") && function_exists("ob_get_contents"));
+	$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
 	$flag_preg_replace = function_exists("preg_replace");
 	$flag_crypt = function_exists("crypt");
 	$flag_wordwrap = function_exists("wordwrap");
