@@ -43,12 +43,15 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	);
 
 	$table = sinon($options['table'], 'article');
+	if ($options['champs'])
+		$champs = $options['champs'];
+	else {
+		$l = liste_des_champs();
+		$champs = $l['article'];
+	}
 	$serveur = $options['serveur'];
 
 	list($methode, $q, $preg) = expression_recherche($recherche, $options);
-
-	$l = liste_des_champs();
-	$champs = $l[$table];
 
 	$jointures = $options['jointures']
 		? liste_des_jointures()
