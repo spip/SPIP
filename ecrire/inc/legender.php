@@ -124,16 +124,14 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	
 	$corps .=  $vignette . "\n\n";
 
+	//
+	// Bouton de suppression
+	//
 	$texte = _T('icone_supprimer_document');
 	$s = ($ancre =='documents' ? '': '-');
 
-	if (preg_match('/_edit$/', $script)){
-		if ($id==0) {
-			$action = redirige_action_auteur('supprimer', "document-$id_document-$script-$id", $script, "id_$type=$id#$ancre");
-		} else {
-			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
-			$ajax = true;
-		}
+	if (preg_match('/_edit$/', $script)) {
+		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
 	}
 	else {
 		if (test_espace_prive())
@@ -147,15 +145,42 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
 	// et ca buggue si on propose de supprimer => on ne propose pas
+	// Le cas id = 0 correspond au cas d'une mediatheque : l'action est alors
+	// sans doute a revoir car le document serait alors peut-etre orphelin
 	$supprimer = true;
-	if ($id < 0)
+	if ($id <= 0)
 		$supprimer = false;
-
-	if ($document['vu']=='oui')
+	else
 		$supprimer = (sql_countsel('spip_documents_liens', 'id_document='.$id_document) <= 1);
 
 	if ($supprimer)
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
+
+	//
+	// Changement de mode image/document
+	//
+	define('_INTERFACE_DOCUMENTS', false);
+	if (_INTERFACE_DOCUMENTS) {
+	if ($script == 'articles_edit'
+	AND in_array($document['extension'], array('jpg', 'gif', 'png'))) {
+		if ($document['mode'] == 'image') {
+			$texte = _L('Ins&#233;rer cette image dans le portfolio');
+			$mode = 'document';
+			$logo = 'doc-24.gif';
+		} else {
+			$texte = _L('Retirer cette image du portfolio');
+			$mode = 'image';
+			$logo = 'image-24.gif';
+		}
+
+		$action = redirige_action_auteur('changer_mode_document', "$id_document/$mode", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+
+		$corps .= icone_horizontale($texte, $action, $logo, '', false);
+		
+	}
+	}
+
+
 
 	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
 	return ajax_action_greffe("legender", $id_document, $corps);
