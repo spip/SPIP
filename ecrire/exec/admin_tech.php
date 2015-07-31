@@ -100,25 +100,31 @@ function autres_bases()
 		  . "</li>\n</ul></fieldset>";
 	else $tables ='';
 
-	list($adresse, $login, $pass, $sel, $server)
-	= analyse_fichier_connection(_FILE_CONNECT);
+	if (defined('_INSTALL_PASS_DB')) {
 
-	$adresse_db = defined('_INSTALL_HOST_DB') ? '' : $adresse;
+	  // Si l'utilisateur n'a pas a donner le mot de passe de la base SQL
+	  // ce doit etre une installation mutualisee sur une meme base:
+	  // interdiction de creer d'autres acces pour assure la confidentialite
+		$form = '';
 
-	$login_db = defined('_INSTALL_USER_DB') ? '' : $login;
+	} else {
+	  
+	// Lire le fichier de connexion pour valeurs par defaut probables
+		list($adresse_db, $login_db, $pass_db, , $server_db)
+		  = analyse_fichier_connection(_FILE_CONNECT);
 
-	$pass_db = defined('_INSTALL_PASS_DB') ? '' : $pass;
+	// Passer la base courante en Hidden pour ne pas la proposer
+		$name_db = ("\n<input type='hidden' name='sel_db' value='" . $sel . "' />\n");
+		// Dire que rien n'est predefini
+		$predef = array(false, false, false, false);
 
-	$server_db = defined('_INSTALL_SERVER_DB') ? '' : $server;
-
-	$hidden = defined('_INSTALL_NAME_DB')
-		? ''
-	: ("\n<input type='hidden' name='sel_db' value='" . $sel . "' />\n");
+		$form = install_connexion_form(array($adresse_db), array($login_db), array($pass_db), $predef, $name_db, 'sup1');
+	}
 
 	return debut_cadre_trait_couleur('',true,'',_T('onglet_declarer_une_autre_base'))
-	  .  _T('config_info_base_sup')
+	  . _T('config_info_base_sup')
 	  . $tables
-	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array($server_db), $hidden, 'sup1')
+	  . $form
 	  . fin_cadre_trait_couleur(true);
 }
 
