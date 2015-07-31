@@ -228,7 +228,7 @@ function reponse_signature($id_article) {
 	
 				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
-				if (1||envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
+				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 					$reponse_signature .= "<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
 
 					$nom_email = addslashes($nom_email);
