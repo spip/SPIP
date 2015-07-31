@@ -369,32 +369,46 @@ echo "<P><HR><P>";
 
 
 	/// Dans la rubrique....
-
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
+		$query = "SELECT id_parent, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
 		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
+			$titre_parent = $row["titre"];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
 		else $logo_parent = "rubrique-24.gif";
 	}
-
 	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
 
+	if ($spip_display == 4) {
 
-	// Integrer la recherche de rubrique au clavier
-	echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
-	echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
-
-	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
-	enfant(0);
-	echo "</SELECT><BR>\n";
 	
 	
 	
-	echo _T('texte_rappel_selection_champs');
+		// Integrer la recherche de rubrique au clavier
+		echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
+		echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
+	
+		echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+		enfant(0);
+		echo "</SELECT><BR>\n";
+		
+		echo _T('texte_rappel_selection_champs');
+	
+	} else {
+		echo "<table width='100%'><tr width='100%'><td width='45'>";
+		echo "<a href=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';}\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
+		echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
+		echo "</td><td>";
+		echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
+		echo "<input type='hidden' id='id_rubrique' name='id_rubrique' value='$id_rubrique' />";
+		echo "</td></tr></table>";
+		
+		echo "<div id='selection_rubrique' style='display: none;'></div>";
+	
+	}
 	fin_cadre_couleur();
 	
 	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\" >";
