@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Diverses taches de maintenance
+// http://doc.spip.org/@genie_maintenance_dist
 function genie_maintenance_dist ($t) {
 
 	// (re)mettre .htaccess avec deny from all

@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/syndic');
 
+// http://doc.spip.org/@genie_syndic_dist
 function genie_syndic_dist($t) {
 	define('_GENIE_SYNDIC', 1); // pour message de compatibilite ci-dessous
 	return executer_une_syndication();

@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 
-// http://doc.spip.org/@inc_install_ldap3
+// http://doc.spip.org/@install_etape_ldap3_dist
 function install_etape_ldap3_dist()
 {
 	$adresse_ldap = _request('adresse_ldap');

@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@genie_optimiser_dist
 function genie_optimiser_dist($t) {
 
 	optimiser_base_une_table();

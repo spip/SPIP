@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
+// http://doc.spip.org/@xml_ical_dist
 function xml_ical_dist($rss, $intro = '') {
 
 	// entetes

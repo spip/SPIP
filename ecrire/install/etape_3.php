@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/headers');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@install_bases
 function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db, $sel_db, $chmod_db){
 	global $spip_version;
 
@@ -144,6 +145,7 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 	return '';
 }
 
+// http://doc.spip.org/@install_propose_ldap
 function install_propose_ldap()
 {
 	return generer_form_ecrire('install', (
@@ -159,6 +161,7 @@ function install_propose_ldap()
 }
 
 
+// http://doc.spip.org/@install_premier_auteur
 function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 {
 	return info_progression_etape(3,'etape_','install/') .
@@ -205,6 +208,7 @@ function install_premier_auteur($email, $login, $nom, $pass, $hidden)
 			  . bouton_suivant()));
 }
 
+// http://doc.spip.org/@install_etape_3_dist
 function install_etape_3_dist()
 {
 	$ldap_present = _request('ldap_present');
@@ -284,6 +288,7 @@ function install_etape_3_dist()
 
 // Tester si mysql ne veut pas du nom de la base dans les requetes
 
+// http://doc.spip.org/@test_rappel_nom_base_mysql
 function test_rappel_nom_base_mysql($server_db)
 {
 	$GLOBALS['mysql_rappel_nom_base'] = true;
@@ -299,6 +304,7 @@ function test_rappel_nom_base_mysql($server_db)
 		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
 	}
 }
+// http://doc.spip.org/@test_sql_mode_mysql
 function test_sql_mode_mysql($server_db){
 	$res = sql_select("version() as v",'','','','','','',$server_db);
 	$row = sql_fetch($res,$server_db);

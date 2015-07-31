@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
+// http://doc.spip.org/@xml_atom_dist
 function xml_atom_dist($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']

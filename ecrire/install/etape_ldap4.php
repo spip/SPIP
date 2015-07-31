@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// http://doc.spip.org/@inc_install_ldap4
+// http://doc.spip.org/@install_etape_ldap4_dist
 function install_etape_ldap4_dist()
 {
 	$adresse_ldap = _request('adresse_ldap');
@@ -81,6 +81,7 @@ function install_etape_ldap4_dist()
 	echo install_fin_html();
 }
 
+// http://doc.spip.org/@liste_statuts_ldap
 function liste_statuts_ldap() {
 	$recom = array("info_administrateurs" => ("<b>" ._T('info_administrateur_1')."</b> "._T('info_administrateur_2')."<br />"),
 		       "info_redacteurs" =>  ("<b>"._T('info_redacteur_1')."</b> "._T('info_redacteur_2')."<br />"),

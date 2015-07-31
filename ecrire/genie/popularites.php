@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Popularite, modele logarithmique
 //
 
-// http://doc.spip.org/@calculer_popularites
+// http://doc.spip.org/@genie_popularites_dist
 function genie_popularites_dist($t) {
 
 	// Si c'est le premier appel, ne pas calculer

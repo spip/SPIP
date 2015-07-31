@@ -17,6 +17,7 @@ include_spip('inc/acces');
 
 // Mise en place des fichiers de configuration si ce n'est fait
 
+// http://doc.spip.org/@install_etape_fin_dist
 function install_etape_fin_dist()
 {
 	ecrire_acces();

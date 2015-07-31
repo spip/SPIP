@@ -70,6 +70,7 @@ function test_ecrire($my_dir) {
 // rajouter celui passe dans l'url ou celui du source (a l'installation)
 //
 
+// http://doc.spip.org/@install_etape_chmod_dist
 function install_etape_chmod_dist()
 {
 	global $test_dirs;

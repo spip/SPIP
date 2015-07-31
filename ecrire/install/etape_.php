@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-// http://doc.spip.org/@inc_install_
+// http://doc.spip.org/@install_etape__dist
 function install_etape__dist()
 {
 	utiliser_langue_visiteur();

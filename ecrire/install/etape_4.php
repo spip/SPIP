@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
 
+// http://doc.spip.org/@install_etape_4_dist
 function install_etape_4_dist()
 {
 	$login = _request('login');

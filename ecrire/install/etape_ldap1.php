@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// http://doc.spip.org/@inc_install_ldap1
+// http://doc.spip.org/@install_etape_ldap1_dist
 function install_etape_ldap1_dist()
 {
 	$adresse_ldap = defined('_INSTALL_HOST_LDAP')

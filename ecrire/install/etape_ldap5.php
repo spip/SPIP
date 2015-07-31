@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/headers');
 
-// http://doc.spip.org/@inc_install_ldap5
+// http://doc.spip.org/@install_etape_ldap5_dist
 function install_etape_ldap5_dist()
 {
 	if (!@file_exists(_FILE_CONNECT_TMP))

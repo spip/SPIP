@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Mail des nouveautes
 //
+// http://doc.spip.org/@genie_mail_dist
 function genie_mail_dist($t) {
 	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
 	$jours_neuf = $GLOBALS['meta']['jours_neuf'];
