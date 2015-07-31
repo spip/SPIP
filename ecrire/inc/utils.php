@@ -422,7 +422,7 @@ function test_plugin_actif($plugin){
 // Traduction des textes de SPIP
 //
 // http://doc.spip.org/@_T
-function _T($texte, $args=array()) {
+function _T($texte, $args=array(), $style='') {
 
 	static $traduire=false ;
 
@@ -438,17 +438,19 @@ function _T($texte, $args=array()) {
 			 (($n = strpos($texte,':')) === false ? $texte :
 				substr($texte, $n+1)));
 
-	return _L($text, $args, true);
+	return _L($text, $args, $style);
 
 }
 
 // Remplacer les variables @....@ par leur valeur dans une chaine de langue.
 // Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
 // http://doc.spip.org/@_L
-function _L($text, $args=array(), $nostyle=false) {
+function _L($text, $args=array(), $style=NULL) {
 
 	if (is_array($args)) {
 		foreach ($args as $name => $value) {
+			if ($style)
+				$value = "<span style='$style'>$value</span>";
 			$text = str_replace ("@$name@", $value, $text, $n);
 			if ($n) unset($args[$name]);
 		}
@@ -457,7 +459,7 @@ function _L($text, $args=array(), $nostyle=false) {
 		spip_log("$text:  variables inutilisées " . join(', ', $args));
 	}
 
-	if ($GLOBALS['test_i18n'] And (!$nostyle OR $args))
+	if ($GLOBALS['test_i18n'] And ($nostyle===NULL OR $args))
 		return "<span style='color:red;'>$text</span>";
 	else
 		return $text;

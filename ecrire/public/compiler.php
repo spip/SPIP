@@ -888,7 +888,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 				// ne pas renvoyer d'erreur si la table est optionnelle
 				// declare par ? avant ) dans <BOUCLE_A(table ?)>
 				if (!$boucles[$id]->table_optionnelle) {
-					$msg = _T('zbug_table_inconnue',
+					$msg = array('zbug_table_inconnue',
 							array('table' => $x));
 					erreur_squelette($msg, $boucles[$id]);
 				}
@@ -903,7 +903,7 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			$boucles[$id]->descr = &$descr;
 			$rec = &$boucles[$boucle->param[0]];
 			if (!$rec) {
-				$msg = _T('zbug_boucle_recursive_undef',
+				$msg = array('zbug_boucle_recursive_undef',
 					array('nom' => $boucle->param[0]));
 				return erreur_squelette($msg, $boucle);
 			} else {

@@ -226,7 +226,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       if (($suite && ($suite[0] != '{')) || ($fonc  && $fonc[0] == '/')) { 
 	// si pas d'argument, alors il faut une fonction ou un double |
 	if (!$match[1]) {
-		$msg = _T('zbug_erreur_filtre', array('filtre' => $texte));
+		$msg = array('zbug_erreur_filtre', array('filtre' => $texte));
 		erreur_squelette($msg, $pointeur_champ);
 		$texte = '';
 	} else 	$texte = $suite;
@@ -246,7 +246,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		  preg_match("/^([[:space:]]*)([^,([{}]*([(\[{][^])}]*[])}])?[^,}]*)([,}].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
-			$msg = _T('zbug_erreur_filtre', array('filtre' => $args));
+			$msg = array('zbug_erreur_filtre', array('filtre' => $args));
 			erreur_squelette($msg, $pointeur_champ);
 			$champ->apres = $champ->avant = $args = "";
 			break;
@@ -465,7 +465,7 @@ function phraser_criteres($params, &$result) {
 		    // cas 1 seul arg ne commencant pas par du texte brut: 
 		    // erreur ou critere infixe "/"
 		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/')) {
-			$msg = _T('zbug_critere_inconnu', 
+			$msg = array('zbug_critere_inconnu', 
 					array('critere' => $var->nom_champ));
 			erreur_squelette($msg, $result);
 		    } else {
@@ -540,7 +540,7 @@ function phraser_criteres($params, &$result) {
 			    $crit->cond = $m[5];
 			  }
 			  else {
-			    $msg = _T('zbug_critere_inconnu', 
+			    $msg = array('zbug_critere_inconnu', 
 					array('critere' => $param));
 			    erreur_squelette($msg, $result);
 			  }
@@ -613,7 +613,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
 		  if (!preg_match(",".BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(,", $milieu, $r)) {
-			$msg = _T('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
+			$msg = array('zbug_erreur_boucle_syntaxe', array('id' => $id_boucle));
 			erreur_squelette($msg, $result);
 		  }
 		  $pos_boucle = $n;
@@ -655,7 +655,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 			$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
 			$p = strpos($milieu, $s);
 			if ($p === false) {
-				$msg = _T('zbug_erreur_boucle_fermant',
+				$msg = array('zbug_erreur_boucle_fermant',
 					array('id' => $id_boucle));
 				erreur_squelette($msg, $result);
 			}
@@ -720,7 +720,7 @@ function public_phraser_html_dist($texte, $id_parent, &$boucles, $descr, $ligne=
 		// apres analyse des sous-parties (pas avant).
 		
 		if (isset($boucles[$id_boucle])) {
-			$msg = _T('zbug_erreur_boucle_double',
+			$msg = array('zbug_erreur_boucle_double',
 				 	array('id'=>$id_boucle));
 			erreur_squelette($msg, $result);
 		} else
