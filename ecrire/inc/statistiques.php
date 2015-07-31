@@ -141,6 +141,7 @@ function maxgraph($max) {
 	}
 }
 
+// http://doc.spip.org/@cadre_stat
 function cadre_stat($stats, $table)
 {
 	if (!$stats) return '';
@@ -221,6 +222,7 @@ function statistiques_tous($log, $id_article, $table, $where, $order, $serveur, 
 	return array($zoom, $stats, $mark, $legend);
 }
 
+// http://doc.spip.org/@statistiques_resume
 function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
 {
 	return  "\n<td valign='top' style='width: 33%; ' class='verdana1'>"
@@ -245,6 +247,7 @@ function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
 	.  "</td>";
 }
 
+// http://doc.spip.org/@statistiques_classement
 function statistiques_classement($id_article, $classement, $liste)
 {
 	if ($id_article) {
@@ -366,6 +369,7 @@ function statistiques_vides($prec, $largeur, $rapport, $moyenne, $script)
 }
 
 
+// http://doc.spip.org/@statistiques_prevision
 function statistiques_prevision($id_article, $largeur, $moyenne, $rapport, $val_popularite, $visites_today)
 {
 	$hauteur = round($visites_today * $rapport) - 1;
