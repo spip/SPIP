@@ -866,7 +866,8 @@ function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $ser
 	
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	// une premiere fois pour ajouter maj dans les cles
-	$les_cles = spip_pg_ajouter_champs_timestamp($table, $tab_couples[0], $desc, $serveur);
+	$c = isset($tab_couples[0]) ? $tab_couples[0] : array();
+	$les_cles = spip_pg_ajouter_champs_timestamp($table, $c, $desc, $serveur);
 	
 	$cles = "(" . join(',',array_keys($les_cles)). ')';
 	$valeurs = array();
@@ -1088,6 +1089,8 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 //
 // IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
 //
+	// s'il n'y a pas de valeur, eviter de produire un IN vide: PG rale.
+	if (!$valeurs) return $not ? '0=0' : '0=1';
 	if (strpos($valeurs, "CAST(x'") !== false)
 		return "($val=" . join("OR $val=", explode(',',$valeurs)).')';
 	$n = $i = 0;
