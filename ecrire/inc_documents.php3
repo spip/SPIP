@@ -437,7 +437,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $afficher
 	}
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
-		$texte_upload = texte_upload_manuel("upload", $inclus);
+		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
 		if ($texte_upload AND $afficher_texte_ftp) {
 			echo "<p><div style='color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';

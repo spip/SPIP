@@ -119,7 +119,7 @@ function tester_vignette ($test_vignette) {
 
 
 //
-// Deplacer un fichier uploade
+// Deplacer un fichier
 //
 
 function deplacer_fichier_upload($source, $dest) {
@@ -553,7 +553,7 @@ if ($ajout_doc == 'oui') {
 	// image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 	// par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
 	if (!$image_name AND $image2) {
-		$image = "ecrire/upload/".$image2;
+		$image = _DIR_TRANSFERT . $image2;
 		$image_name = $image;
 	} 
 	if (eregi("\.zip$",$image_name))
