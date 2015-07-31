@@ -59,22 +59,11 @@ if ($etape == 6) {
 	init_config();
 	init_langues();
 
-	if ($hebergeur == 'nexenservices') {
-		echo "<p><B>"._T('info_nexen_1')."</B><br />";
-		echo "<p>"._T('info_nexen_2');
-		echo " <a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">"._T('info_nexen_3')."</a>.";
-		echo "<p>"._T('info_nexen_4');
-	}
-	else {
-		include_ecrire ("inc_acces.php3");
-		ecrire_acces();
-		$protec = "deny from all\n";
-		$myFile = fopen("data/.htaccess", "w");
-		fputs($myFile, $protec);
-		fclose($myFile);
-	}
+	include_ecrire ("inc_acces.php3");
+	ecrire_acces();
 
 	@unlink("data/inc_meta_cache.php3");
+	@unlink("data/meta_cache.php3");
 	if (!@rename("inc_connect_install.php3", "inc_connect.php3")) {
 		copy("inc_connect_install.php3", "inc_connect.php3");
 		@unlink("inc_connect_install.php3");
