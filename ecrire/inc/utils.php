@@ -102,6 +102,7 @@ function minipipe($fonc,&$val){
 // chargement du pipeline sous la forme d'un fichier php prepare
 // http://doc.spip.org/@pipeline
 function pipeline($action, $val=null , $create_ifnotexists = true) {
+	static $create_ifnecessary = true;
 	static $charger;
 
 	// chargement initial des fonctions mises en cache, ou generation du cache
@@ -126,7 +127,8 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
 		$val = $fonc($val);
 	}
 	// plantage ?
-	elseif ($create_ifnotexists) {
+	elseif ($create_ifnecessary AND $create_ifnotexists) {
+		$create_ifnecessary = false; // ne plus repasser ici
 		include_spip('inc/plugin');
 		// on passe $action en arg pour creer la fonction meme si le pipe
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
