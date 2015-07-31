@@ -152,16 +152,27 @@ if ($validation_finale)
 
 	if (file_exists('inc-invalideur.php3'))
 	  {
-	    include('inc-invalideur.php3');
-	    applique_invalideur(($statut == 'publie') ?
-				array($var_cache, $cache) :
-				array($var_cache));
-	      }
-	else // minimum vital 
-	  {
-	    @unlink($var_cache);
-	    if ($statut == 'publie') @unlink($cache);
+	    include_local('inc-invalideur.php3');
+	    if ($statut != 'publie')
+	      applique_invalideur(array($var_cache));
+	    else {
+	      include_local('inc-calcul_mysql3.php3');
+	      suivre_invalideur("id_forum='" .
+				calcul_index_forum($forum_id_article,
+						   $forum_id_breve,
+						   $forum_id_rubrique,
+						   $forum_id_syndic) .
+				"'",
+				'spip_id_forum_caches');
+	    }
 	  }
+	// trou de sécurité si on ne vérifie pas
+	// (code transitoire ne cas d'absence d'invalideur)
+	//	else 
+	//	  {
+	// @unlink($var_cache);
+	// if ($statut == 'publie') @unlink($cache);
+	//  }
     }
     $redirect = $retour_forum;
  }

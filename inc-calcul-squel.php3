@@ -60,18 +60,24 @@ function calculer_boucle($id_boucle, &$boucles)
 	  		strpos($return,'compteur_boucle');
 	$primary_key = $table_primary[$type_boucle];
 
-	if ($primary_key) // sinon c'est une boucle hors Spip
+# invalidation des caches si c'est une boucle SPIP, non constante de surcroit
+	if ((!$primary_key) || $constant)
+	  $invalide = '';
+	else
 	  {
-	    // invalidation des caches si la boucle n'est pas constante
-	    if ($constant)
-	      $invalide = '';
-	    else
-	      {$id_table = $table_des_tables[$type_boucle]; 
-		$boucle->select[] = "$id_table.$primary_key";
-		$invalide = '
-		$Cache["' . $primary_key . '"][$Pile[$SP]["'  .
-		  $primary_key . '"]]=1;';
-	      }
+	    $id_table = $table_des_tables[$type_boucle]; 
+	    $boucle->select[] = "$id_table.$primary_key";
+	    $invalide = '
+		$Cache["' . $primary_key . '"][' .
+	      (($primary_key != 'id_forum') ?
+	       ('$Pile[$SP]["'  .  $primary_key . '"]') :
+	       ('calcul_index_forum(' . 
+# Retournera 4 [$SP] mais force la demande du champ au serveur SQL
+		index_pile($id_boucle, 'id_article', $boucles) . ',' .
+		index_pile($id_boucle, 'id_breve', $boucles) . ',' .
+		index_pile($id_boucle, 'id_syndic', $boucles) . ',' .
+		index_pile($id_boucle, 'id_rubrique', $boucles) . ')')) .
+	      '] = 1;';
 	  }
 	$debut =
 	  ((!$flag_cpt) ? "" : "\n\t\t\$compteur_boucle++;") .
@@ -162,7 +168,6 @@ function calculer_boucle($id_boucle, &$boucles)
 		   ' $h0;}
 	return $h0;')));
 }
-
 
 // une grosse fonction pour un petit cas
 
@@ -300,7 +305,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 		  $exp = "";
 	      } else { $texte .= $m;}
 	      $texte .= "\n\t\tif ($t = $c) {\n" . $bm;
-	      $texte .= "\n\t\t$t = $bc . $t";
+	      if ($bc != "''") $texte .= "\n\t\t$t = $bc . $t";
 	      if (!$am) {
 		$texte .= " . $ac";
 	      } else $texte .= "; $am $t .=  $ac";
