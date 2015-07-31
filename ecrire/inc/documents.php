@@ -484,25 +484,39 @@ function lister_les_documents_orphelins() {
 	return array_keys(array_filter($orphelins));
 }
 
-// Supprimer les documents orphelins de la table spip_documents, 
+// Supprimer les documents de la table spip_documents, 
 // ainsi que les fichiers correspondants dans IMG/
-// http://doc.spip.org/@supprimer_les_documents_orphelins
-function supprimer_les_documents_orphelins() {
-	if (!$orphelins = lister_les_documents_orphelins())
+// Fonction a n'appeler que sur des documents orphelins
+// http://doc.spip.org/@supprimer_documents
+function supprimer_documents($liste = array()) {
+	if (!count($liste))
 		return;
 
-	$in = calcul_mysql_in('id_document', $orphelins);
+	$in = calcul_mysql_in('id_document', $liste);
 
-	spip_log("supprime documents $in");
-	$s = sql_select("fichier", "spip_documents", $in." AND distant='non'");
+	// Supprimer les fichiers locaux et les copies locales
+	// des docs distants
+	$s = sql_select("fichier, distant", "spip_documents", $in);
 	while ($t = sql_fetch($s)) {
-		if (@file_exists($f = get_spip_doc($t['fichier']))) {
-			spip_log("efface $f");
-			supprimer_fichier($f);
+		if ($t['distant'] == 'oui') {
+			include_spip('inc/distant');
+			if ($local = copie_locale($t['fichier'], 'test'))
+				spip_log("efface $local = ".$t['fichier']);
+				supprimer_fichier($local);
+		}
+		else {
+			if (@file_exists($f = get_spip_doc($t['fichier']))) {
+				spip_log("efface $f");
+				supprimer_fichier($f);
+			}
 		}
 	}
 
+	// Supprimer les entrees dans spip_documents et associees
 	sql_delete('spip_documents', $in);
+	sql_delete('spip_documents_articles', $in);
+	sql_delete('spip_documents_rubriques', $in);
+	sql_delete('spip_documents_breves', $in);
 }
 
 ?>
