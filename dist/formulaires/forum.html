@@ -49,7 +49,7 @@
 	<legend><:form_pet_message_commentaire:></legend><ul>
 	[<li class='saisie_mots_forum'>(#INCLURE{fond=formulaires/inc-forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
 
-[(#CONFIG{forums_titre}|=={oui}|?{
+[(#CONFIG{forums_titre}|!={non}|?{
 	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
 		<label for="titre"><:forum_titre:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
@@ -59,7 +59,7 @@
 	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
 })]
 
-[(#CONFIG{forums_texte}|=={oui}|?{
+[(#CONFIG{forums_texte}|!={non}|?{
 	<li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
 		<label for='texte'><:forum_texte|typo:></label>
 		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
@@ -70,7 +70,7 @@
 })]
 	</ul></fieldset>
 
-[(#CONFIG{forums_urlref}|=={oui}|?{
+[(#CONFIG{forums_urlref}|!={non}|?{
 	<fieldset>
 	<legend><:forum_lien_hyper:></legend>
 	<p class='explication'><:forum_page_url:></p>
