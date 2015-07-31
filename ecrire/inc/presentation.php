@@ -1654,6 +1654,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	if ($return) return $res; else echo $res;
 }
 
+// http://doc.spip.org/@formulaire_large
 function formulaire_large()
 {
 	return preg_match(',^((articles|breves|rubriques)_edit|forum_envoi),', $_GET['exec']);
