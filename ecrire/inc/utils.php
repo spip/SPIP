@@ -1334,17 +1334,8 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_RENOUVELLE_ALEA', 12 * 3600);
 
 	if  (_FILE_CONNECT) {
-		// Lire les meta, en cache si disponibles.
-		if (lire_fichier(_FILE_META, $meta))
-			$GLOBALS['meta'] = @unserialize($meta);
-		// si cache absent, le refaire.
-		if (!$GLOBALS['meta']) {
-			include_spip('inc/meta');
-			if (lire_metas())
-				ecrire_fichier(_FILE_META,
-					       serialize($GLOBALS['meta']));
-		}
-
+		include_spip('inc/meta');
+		init_metas();
 		// Forcer le renouvellement de l'alea
 
 		if (test_espace_prive()

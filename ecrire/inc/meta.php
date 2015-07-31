@@ -13,7 +13,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Les parametres generaux du site sont dans une table SQL;
-// Recopie dans un tableau PHP global, car on en a souvent besoin
+// Recopie dans le tableau PHP global meta, car on en a souvent besoin
+
+function init_metas()
+{
+	// Lire les meta, en cache si disponibles.
+	if (lire_fichier(_FILE_META, $meta))
+		$GLOBALS['meta'] = @unserialize($meta);
+	// si cache absent, le refaire.
+	if (!$GLOBALS['meta']) {
+		if (lire_metas())
+			ecrire_fichier(_FILE_META,
+				       serialize($GLOBALS['meta']));
+	}
+}
 
 // http://doc.spip.org/@lire_metas
 function lire_metas() {
@@ -37,6 +50,7 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	$GLOBALS['meta'][$nom] = $valeur;
 
 	if (!_FILE_CONNECT && !@file_exists(_FILE_CONNECT_INS .'.php')) return;
+	include_spip('base/abstract_sql');
 	$res = sql_fetsel("impt,valeur", 'spip_meta', "nom=" . _q($nom));
 	// conserver la valeur de impt si existante
 	// et ne pas detruire le cache si affectation a l'identique
