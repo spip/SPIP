@@ -507,6 +507,7 @@ ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text
 ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
+ecrire/inc/validateur.php -text
 ecrire/inc/vieilles_defs.php -text
 ecrire/inc/virtualiser.php -text
 ecrire/inc/xml.php -text
