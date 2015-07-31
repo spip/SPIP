@@ -82,7 +82,7 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 	 && ($id_auteur = $row['id_auteur'])
 	 && ($oubli = _request('oubli'))) {
 		include_spip('action/editer_auteur');
-		instituer_auteur($id_auteur, array('pass'=>$oubli));
+		auteurs_set($id_auteur, array('pass'=>$oubli,'cookie_oubli'=>''));
 
 		$login = $row['login'];
 		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
