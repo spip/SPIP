@@ -44,6 +44,10 @@ function enregistre_modif_plugin(){
 	foreach ($plugin as $plug)
 		$plugins_interessants2[$plug] = 10; // score initial
 	ecrire_meta('plugins_interessants', serialize($plugins_interessants2));
+
+	if (isset($GLOBALS['meta']['plugin_erreur_activation'])){
+		$GLOBALS['redirect'] = parametre_url(_request('redirect'),'voir','recents');
+	}
 }
 
 // http://doc.spip.org/@action_activer_plugins_dist
