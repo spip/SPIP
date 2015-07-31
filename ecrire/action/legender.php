@@ -52,13 +52,19 @@ function action_legender_post($r)
 	else {
 			$mois_doc = _request('mois_doc');
 			$jour_doc = _request('jour_doc');
+			$heure_doc = _request('heure_doc');
+			$minute_doc = _request('minute_doc');
 			if (_request('annee_doc') == "0000")
 					$mois_doc = "00";
 			if ($mois_doc == "00")
 					$jour_doc = "00";
-			$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
+			if ($jour_doc == "00"){
+					$heure_doc = "00";
+					$minute_doc = "00";
+			}
+			$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc.' '.$heure_doc.':'.$minute_doc;
 
-			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
+			if (preg_match('/^[0-9-: ]+$/', $date)) $d=" date='$date',";
 	}
 				  
 	spip_query("UPDATE spip_documents SET$d titre=" . _q($titre_document) . ", descriptif=" . _q($descriptif_document) . " $wh WHERE id_document=".$id_document);
