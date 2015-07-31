@@ -47,7 +47,7 @@ function exec_calendrier_dist()
   if (_request(var_ajax)) return $r;
 
   debut_page($titre, "accueil", "calendrier","",$css);
-  echo "<div>&nbsp;</div><div id='", $ancre, "'>",$r,'</div>';
+  echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
   fin_page();
 }
 
@@ -64,20 +64,20 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
 	      $bleu . ($large ? $b : ''), 
 	      $b,
 	      'color: blue;',
-	      'arial10') .
+	      'calendrier-arial10') .
     "\n" .
     http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=normal"),
 	      $vert . ($large ? $v : ''), 
 	      $v,
 	      'color: green;',
-	      'arial10') .
+	      'calendrier-arial10') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
       http_href(generer_url_ecrire("message_edit","rv=$annee-$mois-$jour&new=oui&type=affich"),
 		$jaune . ($large ? $j : ''), 
 		$j,
 		'color: #ff9900;',
-		'arial10')));
+		'calendrier-arial10')));
 }
 
 // http://doc.spip.org/@http_calendrier_aide_mess
