@@ -93,6 +93,16 @@
 </ul></B_breves>
 
 
+<B_rubs><b>Rubriques :</b>
+<ul>
+<BOUCLE_rubs(RUBRIQUES){id_mot}{unique}{par titre}>
+<li>
+<B><a href="#URL_RUBRIQUE">[(#TITRE)]</a></b>
+[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
+</BOUCLE_rubs>
+</ul></B_rubs>
+
+
 <B_sites><b>Sur le Web :</b>
 <ul>
 <BOUCLE_sites(SITES){id_mot}{unique}{par nom_site}>
