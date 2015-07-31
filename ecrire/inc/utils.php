@@ -341,7 +341,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 // Prend une URL et lui ajoute/retire une ancre après l'avoir nettoyee
 // pour l'ancre on translitere, vire les non alphanum du debut,
 // et on remplace ceux a l'interieur ou au bout par -
-// http://doc.spip.org/@ancre_url replace{}
+// http://doc.spip.org/@ancre_url
 function ancre_url($url, $ancre) {
 	include_spip('inc/charsets');
 	// lever l'#ancre
