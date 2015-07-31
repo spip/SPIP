@@ -636,7 +636,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	}
 
 	// s'il n'y a pas de total_parties, c'est qu'on se trouve
-	// dans un boucle recurive ou qu'on a oublie le critere {pagination}
+	// dans un boucle recursive ou qu'on a oublie le critere {pagination}
 	if (!$p->boucles[$b]->total_parties) {
 		erreur_squelette(
 			_T('zbug_pagination_sans_critere',
@@ -646,16 +646,17 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		return $p;
 	}
 	$__modele = interprete_argument_balise(1,$p);
-	$__modele = $__modele?",$__modele":"";
+	$__modele = $__modele?", $__modele":"";
 
 	$p->boucles[$b]->numrows = true;
 
 	$p->code = "calcul_pagination(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), ".$p->boucles[$b]->modificateur['debut_nom'].", "
+	), ".$p->boucles[$b]->modificateur['debut_nom'].",
+		\$Pile[0]['debut'.".$p->boucles[$b]->modificateur['debut_nom']."],"
 	. $p->boucles[$b]->total_parties
-	. ", $liste $__modele)";
+	. ", $liste$__modele)";
 
 	$p->interdire_scripts = false;
 	return $p;
@@ -1172,6 +1173,7 @@ function balise_INSERT_HEAD_dist($p) {
 // l'inclusion est realisee au calcul du squelette, pas au service
 // ainsi le produit du squelette peut etre utilise en entree de filtres a suivre
 // on peut faire un #INCLURE{fichier} sans squelette
+// (Incompatible avec les balises dynamiques)
 // http://doc.spip.org/@balise_INCLUDE_dist
 function balise_INCLUDE_dist($p) {
 	if(function_exists('balise_INCLURE'))
@@ -1182,16 +1184,24 @@ function balise_INCLUDE_dist($p) {
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$champ = phraser_arguments_inclure($p, true);
-	$l = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
-	if (isset($l['fond'])) {
-		$p->code = "recuperer_fond('',array(".implode(',',$l)."))";
+	if (isset($_contexte['fond'])) {
+		if (isset($_contexte['env'])) {
+			$flag_env = true;
+			unset($_contexte['env']);
+		}
+		$l = 'array(' . join(",\n\t", $_contexte) .')';
+		if ($flag_env) {
+			$l = "array_merge(\$Pile[0],$l)";
+		}
+		$p->code = "recuperer_fond('',".$l.")";
 	} else {
 		$n = interprete_argument_balise(1,$p);
 		$p->code = '(($c = find_in_path(' . $n . ')) ? spip_file_get_contents($c) : "")';
 	}
 
-	$p->interdire_scripts = false;
+	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
 	return $p;
 }
 

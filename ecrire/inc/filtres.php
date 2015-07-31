@@ -1608,14 +1608,14 @@ function calcul_bornes_pagination($courante, $nombre, $max = 10) {
 //
 
 // http://doc.spip.org/@calcul_pagination
-function calcul_pagination($total, $nom, $pas, $liste = true, $modele='') {
+function calcul_pagination($total, $nom, $position, $pas, $liste = true, $modele='') {
 	static $ancres = array();
 	$bloc_ancre = "";
 	
 	if ($pas<1) return;
 
 	if (function_exists("pagination"))
-		return pagination($total, $nom, $pas, $liste);
+		return pagination($total, $nom, $position, $pas, $liste);
 
 	$debut = 'debut'.$nom;
 	$ancre='pagination'.$nom;
@@ -1628,10 +1628,10 @@ function calcul_pagination($total, $nom, $pas, $liste = true, $modele='') {
 		'debut' => 'debut'.$nom,
 		'url' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
 		'total' => $total,
-		'position' => intval(_request($debut)),
+		'position' => intval($position),
 		'pas' => $pas,
 		'nombre_pages' => floor(($total-1)/$pas)+1,
-		'page_courante' => floor(intval(_request($debut))/$pas)+1,
+		'page_courante' => floor(intval($position)/$pas)+1,
 		'ancre' => $ancre,
 		'bloc_ancre' => $bloc_ancre
 	);
@@ -1942,6 +1942,29 @@ function compacte($source, $format = null) {
 
 	// Sinon simple compactage de contenu
 	return $compacte($source);
+}
+
+
+// clone de http://php.net/var_export compatible < 4.2.0 et sans ob_xx
+function spip_var_export($s) {
+	if (is_array($s)) {
+		foreach ($s as $k=>$v)
+			$s[$k] = spip_var_export($k) . ' => ' . spip_var_export($v);
+		return 'array(' . join(',',$s).')';
+	}
+
+	return is_null($s)
+		? 'null'
+		: (is_bool($s)
+			? ($s ? 'true' : 'false')
+			: (is_numeric($s)
+				? "$s"
+				: (is_string($s)
+					? "'".addslashes($s)."'"
+					: "'".gettype($s)."'"
+				)
+			)
+		);
 }
 
 ?>

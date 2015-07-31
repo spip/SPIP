@@ -45,9 +45,9 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 	$lang = '';
 	foreach($struct->param as $val) {
 		$var = array_shift($val);
-		if ($var == 'lang')
+		if ($var == 'lang') {
 			$lang = $val;
-		else
+		} else
 			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")  .
 			($val
 				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
@@ -91,11 +91,19 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 		}
 	}
 
+	$_contexte = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
+	if (isset($_contexte['env'])) {
+		$flag_env = true;
+		unset($_contexte['env']);
+	}
+	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
+	if ($flag_env) {
+		$contexte = "array_merge('.spip_var_export(\$Pile[0]).',$contexte)";
+	}
+
 	return "\n'<".
-		"?php\n\t\$contexte_inclus = array(" .
-		join(",\n\t", argumenter_inclure($struct, $descr, $boucles, $id_boucle)) .
-		");" .
-		"\n\tinclude(" .
+		"?php\n\t\$contexte_inclus = $contexte;"
+		. "\n\tinclude(" .
 		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
 		");" .
 		"\n?'." . "'>'";

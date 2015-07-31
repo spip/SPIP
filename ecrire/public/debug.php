@@ -197,13 +197,8 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	$debug_objets['squelette'][$nom] = $squelette;
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
 
-	if (is_array($GLOBALS['contexte_inclus']))
-		$debug_objets['contexte'][$nom] = $GLOBALS['contexte_inclus'];
-	else {
-	  $debug_objets['contexte'][$nom] = calculer_contexte();
-		if (!isset($debug_objets['principal']))
-		  $debug_objets['principal'] = $nom;
-	}
+	if (!isset($debug_objets['principal']))
+		$debug_objets['principal'] = $nom;
 }
 
 // appelee a chaque analyse syntaxique de squelette
@@ -390,7 +385,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
 
-		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
+		if (is_array($contexte = $debug_objets['contexte'][$sourcefile]))
 			echo afficher_debug_contexte($contexte);
 
 		$i = 0;
