@@ -12,10 +12,38 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
 // http://doc.spip.org/@insere_1_init
 function insere_1_init($request) {
 
 //  table des translations
+
+	$res = insere_1bis_init($request);
+	$desc = $GLOBALS['tables_principales'][_SPIP_TRANSLATE];
+	$v = sql_create(_SPIP_TRANSLATE, $desc['field'], $desc['key'], true);
+	if (!$v) {
+		spip_log("echec de la creation de la table de fusion");
+		return  false; 
+	}
+	// au cas ou la derniere fois ce serait terminee anormalement
+	$d = sql_delete(_SPIP_TRANSLATE);
+	spip_log("init " . _SPIP_TRANSLATE . " : $d");
+	return $res;
+}
+
+// http://doc.spip.org/@insere_1bis_init
+function insere_1bis_init($request='') {
+
+	// l'insertion porte sur les tables principales ...
+	$t = array_keys($GLOBALS['tables_principales']);
+	// ... mais pas cette table a cause de la duplication des login 
+	unset($t[array_search('spip_auteurs', $t)]);
+	// ni celle-ci, les qui est liee implicitement a la precedente
+	unset($t[array_search('spip_messages', $t)]);
+	// et pour celles-ci restent a programmer les regles
+	unset($t[array_search('spip_forum', $t)]);
+	unset($t[array_search('spip_syndic', $t)]);
+	unset($t[array_search('spip_signatures', $t)]);
 
 	$field = array(
 		"type"		=> "VARCHAR(16) NOT NULL",
@@ -28,32 +56,14 @@ function insere_1_init($request) {
                 "PRIMARY KEY"	=> "id_old, id_new, type",
                 "KEY id_old"	=> "id_old");
 
-	$v = sql_create('spip_translate',  $field, $key, true);
-	if (!$v) {
-		spip_log("echec de la creation de la table de fusion");
-		return  false; 
-	}
-	// au cas ou la derniere fois ce serait terminee anormalement
-	sql_delete("spip_translate");
-	// pour PG
-	$GLOBALS['tables_principales']['spip_translate'] = 
+	define('_SPIP_TRANSLATE',
+	       'spip_translate_' . $GLOBALS['visiteur_session']['id_auteur']);
+
+	// Pour que trouver_base ne fasse pas des siennes
+	// mais evidemment elle n'est pas a transferer!
+	$GLOBALS['tables_principales'][_SPIP_TRANSLATE] = 
 		array('field' => $field, 'key' => $key);
-	return insere_1bis_init($request);
-}
 
-// http://doc.spip.org/@insere_1bis_init
-function insere_1bis_init($request) {
-
-	// l'insertion porte sur les tables principales ...
-	$t = array_keys($GLOBALS['tables_principales']);
-	// ... mais pas cette table a cause de la duplication des login 
-	unset($t[array_search('spip_auteurs', $t)]);
-	// ni celle-ci, les qui est liee implicitement a la precedente
-	unset($t[array_search('spip_messages', $t)]);
-	// et pour celles-ci restent a programmer les regles
-	unset($t[array_search('spip_forum', $t)]);
-	unset($t[array_search('spip_syndic', $t)]);
-	unset($t[array_search('spip_signatures', $t)]);
 	return $t;
 }
 
@@ -88,11 +98,14 @@ function translate_init($request) {
 	include_spip('inc/chercher_logo'); // pour les noms des logos
 	include_spip('inc/distant'); // pour recuperer les logos
 
-	$q = sql_select('*', "spip_translate");
+	$q = sql_select('*', _SPIP_TRANSLATE);
 	$trans = array();
 	while ($r = sql_fetch($q)) {
 		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], $r['ajout']);
 	}
+	$r = '';
+	foreach ($trans as $k =>$v) $r .= " $k: " . count($v);
+	spip_log( count($trans) . " types d'objets a transferer: $r");
 	return $trans;
 }
 
@@ -117,7 +130,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	if (is_array($n))
 		list($id, $titre) = $n; 
 	else {$id = $n; $titre = "";}
-	sql_insertq('spip_translate', array(
+	sql_insertq(_SPIP_TRANSLATE, array(
 		   'id_old' => $values[$type_id],
 		   'id_new' => $id,
 		   'titre' => $titre,
@@ -356,12 +369,13 @@ function import_identifie_parent_id_mot($id_groupe, $titre, $v)
 		if ($r) return  (0 - $r['id_mot']);
 	}
 	if ($r = sql_insertq('spip_mots'))
-		sql_replace('spip_translate', array(
+		sql_replace(_SPIP_TRANSLATE, array(
 					    'id_old' => $v,
 					    'id_new' => $r,
 					    'titre' => $titre,
 					    'type' => 'id_mot',
-					    'ajout' => 1));
+					    'ajout' => 1),
+			    $GLOBALS['tables_principales'][_SPIP_TRANSLATE]);
 	else spip_log("Impossible d'inserer dans spip_mots");
 	return $r;
 }
@@ -384,13 +398,13 @@ function import_identifie_parent_id_article($id_parent, $titre, $v)
 	if ($r) return (0 - $r['id_article']);
 
 	if ($r = sql_insertq('spip_articles'))
-		sql_replace('spip_translate', array(
+		sql_replace(_SPIP_TRANSLATE, array(
 					    'id_old' => $v,
 					    'id_new' => $r,
 					    'titre' => $titre,
 					    'type' => 'id_article',
 					    'ajout' => 1),
-			$GLOBALS['tables_principales']['spip_translate']
+			$GLOBALS['tables_principales'][_SPIP_TRANSLATE]
 		    );
 	else spip_log("Impossible d'inserer dans spip_articles");
 	return $r;
@@ -414,13 +428,13 @@ function import_identifie_parent_id_breve($id_parent, $titre, $v)
 	if ($r) return (0 - $r['id_breve']);
 
 	if ($r = sql_insertq('spip_breves'))
-		sql_replace('spip_translate', array(
+		sql_replace(_SPIP_TRANSLATE, array(
 					    'id_old' => $v,
 					    'id_new' => $r,
 					    'titre' => $titre,
 					    'type' => 'id_breve',
 					    'ajout' => 1),
-			$GLOBALS['tables_principales']['spip_translate']
+			$GLOBALS['tables_principales'][_SPIP_TRANSLATE]
 		    );
 	else spip_log("Impossible d'inserer dans spip_breves");
 	return $r;
@@ -474,14 +488,14 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 
 // http://doc.spip.org/@import_alloue_id_rubrique
 function import_alloue_id_rubrique($id_parent, $titre, $v) {
-	if ($r = sql_insertq('spip_rubriques', array('titre' => $titre, id_parent => $id_parent)))
-		sql_replace('spip_translate', array(
+	if ($r = sql_insertq('spip_rubriques', array('titre' => $titre, 'id_parent' => $id_parent)))
+		sql_replace(_SPIP_TRANSLATE, array(
 		    'id_old' => $v,
 		    'id_new' => $r,
 		    'titre' => $titre,
 		    'type' => 'id_rubrique',
 		    'ajout' => 1),
-	  $GLOBALS['tables_principales']['spip_translate']);
+	  $GLOBALS['tables_principales'][_SPIP_TRANSLATE]);
 	else spip_log("Impossible d'inserer dans spip_rubriques");
 	return $r;
 }

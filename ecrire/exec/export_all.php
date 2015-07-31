@@ -23,6 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - on renvoie
  *   vers action=export_all pour afficher le resume
  * 
+ * Deux parametres sont geres mais non disponibles en standard;
+ * 	$serveur : nom d'une base externe qu'on veut exporter
+ *	$save : fonction creant la sauvegarde (defaut: inc_export_xml)
  */
 
 include_spip('inc/presentation');
@@ -30,17 +33,25 @@ include_spip('base/dump');
 
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist(){
-	$rub = intval(_request('id_parent'));
+	exec_export_all_init(intval(_request('id_parent')),
+			_request('gz'),
+			_request('export'),
+			preg_replace('@[^\d\w-_]@', '_', _request('serveur')),
+			preg_replace('@[^\d\w-_]@', '_', _request('save')));
+}
+
+function exec_export_all_init($rub, $gz, $tables, $serveur='', $save=''){
 	$meta = base_dump_meta_name($rub);
+	spip_log("exec_export_all_init($meta $rub, $gz, $tables, $serveur, $save" . isset($GLOBALS['meta'][$meta]));
 	utiliser_langue_visiteur();
 	if (!isset($GLOBALS['meta'][$meta])){
 		// c'est un demarrage en arrivee directe depuis exec=admin_tech
 		// on initialise  (mais si c'est le validateur, ne rien faire)
 		if ($GLOBALS['exec'] == 'valider_xml') return;
-		$gz = _request('gz');
 		$archive = exec_export_all_args($rub, $gz);
-		$tables = export_all_start($meta, $archive, $rub, _request('export'));
-		ecrire_meta($meta, serialize(array($gz, $archive, $rub, $tables, 1, 0)), 'non');
+		$tables = export_all_start($meta, $archive, $rub, $tables);
+		$v = array($gz, $archive, $rub, $tables, 1, 0, $serveur, $save);
+		ecrire_meta($meta, serialize($v), 'non');
 		// rub=$rub sert AUSSI a distinguer cette redirection
 		// d'avec l'appel initial sinon FireFox croit malin
 		// d'optimiser la redirection

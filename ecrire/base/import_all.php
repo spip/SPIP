@@ -114,8 +114,9 @@ function import_all_fin($request) {
 	effacer_meta('vieille_version_installee');
 	effacer_meta('restauration_status_tables');
 	effacer_meta('restauration_recopie_tables');
-	if ($request['insertion'] == 'passe2') 
-		sql_drop_table("spip_translate");
-	 
+	if ($request['insertion'] == 'passe2') {
+		spip_log("destruction des translations " . _SPIP_TRANSLATE);
+		sql_drop_table(_SPIP_TRANSLATE);
+	}
 }
 ?>
