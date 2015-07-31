@@ -1602,4 +1602,56 @@ function critere_POUR_tableau_dist($idb, &$boucles, $crit) {
 	$command[\'sourcemode\'] = \'table\';';
 }
 
+
+/**
+ * Trouver toutes les objets qui ont des enfants (les noeuds de l'arbre)
+ * {noeud}
+ * {!noeud} retourne les feuilles
+ *
+ * @global array $exceptions_des_tables
+ * @param string $idb
+ * @param array $boucles
+ * @param <type> $crit
+ */
+function critere_noeud_dist($idb, &$boucles, $crit) {
+	global $exceptions_des_tables;
+	$not = $crit->not;
+	$boucle = &$boucles[$idb];
+	$primary = $boucle->primary;
+
+	if (!$primary OR strpos($primary,',')) {
+		erreur_squelette(_T('zbug_doublon_sur_table_sans_cle_primaire'), "BOUCLE$idb");
+		return;
+	}
+	$table = $boucle->type_requete;
+	$table_sql = table_objet_sql(objet_type($table));
+
+	$id_parent = isset($exceptions_des_tables[$boucle->id_table]['id_parent']) ?
+		$exceptions_des_tables[$boucle->id_table]['id_parent'] :
+		'id_parent';
+
+	$in = "IN";
+	$where= array("'IN'", "'$boucle->id_table." . "$primary'","'('.sql_get_select('$id_parent', '$table_sql').')'");
+	if ($not)
+		$where = array("'NOT'",$where);
+
+	$boucle->where[]= $where;
+}
+
+/**
+ * Trouver toutes les objets qui n'ont pas d'enfants (les feuilles de l'arbre)
+ * {feuille}
+ * {!feuille} retourne les noeuds
+ *
+ * @global array $exceptions_des_tables
+ * @param string $idb
+ * @param array $boucles
+ * @param <type> $crit
+ */
+function critere_feuille_dist($idb, &$boucles, $crit) {
+	$not = $crit->not;
+	$crit->not = $not ? false:true;
+	critere_noeud_dist($idb,$boucles,$crit);
+	$crit->not = $not;
+}
 ?>
