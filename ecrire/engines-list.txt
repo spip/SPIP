@@ -16,9 +16,11 @@ rien=
 
 [Google]
 (^q|\&q|as_q)=
-(www|ww)\.(google|gogole)\.(.*)
+(www|ww|maps)\.(google|gogole)\.(.*)
 (web|www).toile.com
 www\.cegetel\.net
+search\.conduit\.com
+search\.sweetim\.com
 
 [Voila]
 (kw|rdata)=
@@ -31,6 +33,10 @@ p=
 [AltaVista]
 q=
 (.*)altavista\.com
+
+[Ask]
+q=
+(.*)\.ask\.com
 
 [HotBot]
 query=
@@ -80,6 +86,10 @@ recherche\.francite\.com
 search(.*)\.msn\.([a-z.]+)$
 leguide(.*)\.msn\.([a-z]+)$
 search\.ninemsn\.com\.au
+
+[Live]
+q=
+search\.live\.com
 
 [Excite]
 search=
@@ -182,6 +192,26 @@ search\.virgilio\.it
 [Libero.it]
 query=
 arianna\.libero\.it
+
+[LemmeFind]
+t=
+www\.lemmefind\.fr
+
+[NovoNeo]
+q=
+www\.novoneo\.com
+
+[MyWebSearch]
+searchfor=
+search\.mywebsearch\.com
+
+[Copernic]
+query=
+find\.copernic\.com
+
+[Seek]
+qry_str=
+\.seek\.fr
 
 #
 # Dmoz

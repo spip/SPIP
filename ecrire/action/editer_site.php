@@ -288,14 +288,14 @@ function analyser_site($url) {
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 
-	if (preg_match(',<(channel|feed)([:[:space:]][^>]*)?'
+	if (preg_match(',<(channel|feed)([\:[:space:]][^>]*)?'
 	.'>(.*)</\1>,ims', $texte, $regs)) {
 		$result['syndication'] = 'oui';
 		$result['url_syndic'] = $url;
 		$channel = $regs[3];
 
 		list($header) = preg_split(
-		',<(entry|item)([:[:space:]][^>]*)?'.'>,Uims', $channel,2);
+		',<(entry|item)([\:[:space:]][^>]*)?'.'>,Uims', $channel,2);
 		if (preg_match(',<title[^>]*>(.*)</title>,Uims', $header, $r))
 			$result['nom_site'] = supprimer_tags(filtrer_entites(trim($r[1])));
 		if (preg_match(
