@@ -319,6 +319,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
+			$descriptif = attribut_html(textebrut($row['descriptif']));
 
 			$query_petition = "SELECT COUNT(*) FROM spip_petitions WHERE id_article=$id_article";
 			$row_petition = mysql_fetch_array(spip_query($query_petition));
@@ -342,7 +343,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$les_auteurs = substr($les_auteurs, 2);
 			}
 
-			$s = "<A HREF=\"articles.php3?id_article=$id_article\">";
+			$s = "<a href=\"articles.php3?id_article=$id_article\" title=\"$descriptif\">";
 			if ($statut=='publie') $puce = 'verte';
 			else if ($statut == 'prepa') $puce = 'blanche';
 			else if ($statut == 'prop') $puce = 'orange';
@@ -354,8 +355,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$puce = "puce-$puce.gif";
 
 			$s .= "<img src=\"IMG2/$puce\" width=\"13\" height=\"14\" border=\"0\">";
-			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
-			if ($petition) $s .= " <Font size=1 color='red'>P&Eacute;TITION</font>";
+			$s .= "&nbsp;&nbsp;".typo($titre)."</a>";
+			if ($petition) $s .= " <font size='1' color='red'>P&Eacute;TITION</font>";
 
 			$vals[] = $s;
 		
