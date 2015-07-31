@@ -34,7 +34,7 @@ function iterateur_ENUM_dist($b) {
  * IterateurENUM pour iterer sur un intervalle de nombre
  * repondant eventuellement a des conditions de filtrage
  */
-class IterateurENUM extends IterateurSPIP {
+class IterateurENUM implements Iterator {
 
 	/**
 	 * Valeur entiere de l'iterateur, ce qui est renvoye
