@@ -79,6 +79,7 @@ function fin_admin($action) {
 }
 
 
+// http://doc.spip.org/@copy_request
 function copy_request($script)
 {
 	$hidden = ""; 
