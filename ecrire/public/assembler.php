@@ -32,7 +32,7 @@ function assembler($fond, $connect='') {
 
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
-	// Les quatre derniers parametres sont modifes par la fonction:
+	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
 	// Si un resultat est retourne, c'est un message d'impossibilite
