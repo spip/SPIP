@@ -79,7 +79,7 @@ function utiliser_cache($chemin_cache, $delais) {
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$use_cache = true;
 
-	spip_debug (($use_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s":''));
+	spip_debug (($use_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s (reste ".($delais-$age)." s)":''));
 	return $use_cache;
 }
 
