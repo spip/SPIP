@@ -161,8 +161,26 @@ function balise_SPIP_VERSION_dist($p) {
 }
 
 
-// #NOM_SITE affiche le nom du site, ou sinon l'URL ou le titre de l'objet
-// http://doc.spip.org/@balise_NOM_SITE_dist
+
+/**
+ * Affiche le nom du site.
+ *
+ * Affiche le nom du site ou sinon l'URL ou le titre de l'objet
+ * Utiliser #NOM_SITE* pour avoir le nom du site ou rien.
+ *
+ * Cette balise interroge les colonnes 'nom_site' ou 'url_site'
+ * dans la boucle la plus proche.
+ *
+ * @example
+ * 		<code>
+ * 			<a href="#URL_SITE">#NOM_SITE</a>
+ * 		</code>
+ *
+ * @param array $p
+ * 		Pile au niveau de la balise
+ * @return array
+ * 		Pile complete par le code a generer
+**/
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
 		$p->code = "supprimer_numero(calculer_url(" .
