@@ -20,12 +20,12 @@ function exec_referencer_traduction_dist()
 	if (!autoriser('modifier','article',$id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
-	include_spip('inc/actions');
-	$row = sql_fetsel("id_trad, id_rubrique", "spip_articles", "id_article=$id_article");
+	} else {
+		include_spip('inc/actions');
+		$row = sql_fetsel("id_trad, id_rubrique", "spip_articles", "id_article=$id_article");
 
-	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
-	ajax_retour($referencer_traduction($id_article, 'ajax', $row['id_rubrique'], $row['id_trad'])); 
+		$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
+		ajax_retour($referencer_traduction($id_article, 'ajax', intval($row['id_rubrique']), intval($row['id_trad']))); 
+	}
 }
 ?>
