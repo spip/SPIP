@@ -1,0 +1,101 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{annonce-24.png}" class="cadre-icone" /><:info_envoi_email_automatique:>#AIDER{confmails}</h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<p class="notice"><:info_hebergeur_desactiver_envoi_email:></p>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{name,suivi_edito}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:info_suivi_activite:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<p class="explication"><:info_facilite_suivi_activite:></p>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"] 
+					onchange="if ($(this).attr('checked')) $('#suivi_complements').hide('fast');"
+					/><label for="#GET{name}_non"><:bouton_radio_non_envoi_annonces_editoriales:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
+					onchange="if ($(this).attr('checked')) $('#suivi_complements').show('fast');"
+					/><label for="#GET{name}_oui"><:bouton_radio_envoi_annonces_adresse:></label>
+				</div>
+				<fieldset id="suivi_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
+					<ul>
+						#SET{name,adresse_suivi}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:info_adresse:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+						</li>
+						#SET{name,adresse_suivi_inscription}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							#SET{adresse_suivi,#ENV{adresse_suivi}|sinon{mailing@monsite.net}}
+							<label for="#GET{name}">Adresse de desincription</label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<p class="explication"><:info_config_suivi{adresse_suivi=#GET{adresse_suivi}}:></p>
+							<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			#SET{name,quoi_de_neuf}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:info_annonce_nouveautes:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<p class="explication"><:info_non_envoi_annonce_dernieres_nouveautes:></p>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_non" value="non"
+					[(#ENV{#GET{name}}|=={oui}|non)checked="checked"]
+					onchange="if ($(this).attr('checked')) $('#neuf_complements').hide('fast');"
+					/><label for="#GET{name}_non"><:info_non_envoi_liste_nouveautes:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="oui"
+					[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"]
+					onchange="if ($(this).attr('checked')) $('#neuf_complements').show('fast');"
+					/><label for="#GET{name}_oui"><:bouton_radio_envoi_liste_nouveautes:></label>
+				</div>
+				<fieldset id="neuf_complements"[(#ENV{#GET{name}}|=={oui}|non)style='display:none;']>
+					<ul>
+						#SET{name,adresse_neuf}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label for="#GET{name}"><:info_adresse:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+						</li>
+						#SET{name,jours_neuf}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							#SET{adresse_suivi,#ENV{adresse_suivi}|sinon{mailing@monsite.net}}
+							<label for="#GET{name}"><:info_tous_les:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<input type="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+							<:info_jours:>
+							<input type='submit' class="submit" name='envoi_now' id='envoi_now' value='<:info_envoyer_maintenant:>' />
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+
+			#SET{name,email_envoi}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:info_email_envoi:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<p class="explication"><:info_email_envoi_txt:></p>
+				<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
+			</li>
+
+		</ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

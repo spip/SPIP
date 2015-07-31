@@ -74,7 +74,6 @@ ecrire/charsets/iso-8859-9.php -text
 ecrire/charsets/mathml.php -text
 ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
-ecrire/configuration/annonces.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/moderniseur_html.php -text
@@ -356,6 +355,8 @@ prive/editer/auteur.html -text
 prive/editer/breve.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
+prive/formulaires/configurer_annonces.html -text
+prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
 prive/formulaires/configurer_articles.php -text
 prive/formulaires/configurer_breves.html -text

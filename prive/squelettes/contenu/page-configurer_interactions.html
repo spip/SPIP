@@ -24,13 +24,9 @@
 
 <div class='contenu_notifications'>
 	<h3><:titre_config_contenu_notifications:></h3>
-<?php
-	include_spip('inc/presentation');
 
-	$annonces = charger_fonction('annonces', 'configuration');
-	$res.= "";
-	$res.=  $annonces();
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_ANNONCES
+	</div>
 
-	echo $res;
-?>
 </div>
