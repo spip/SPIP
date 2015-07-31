@@ -54,7 +54,19 @@ function cherche_page($cache, $contexte, $fond, $id_rubrique, $lang='')
 
   $fonc =  ramener_squelette($skel);
   $timer_a = explode(" ", microtime());
-  $page =  $fonc(array('cache' =>$cache), array($contexte));
+  $page =  $fonc(array('cache' =>$cache),
+		 array($contexte),
+		 array(	'articles' => '0',
+			'rubriques' => '0',
+			'breves' => '0',
+			'auteurs' => '0',
+			'forums' => '0',
+			'signatures' => '0',
+			'mots' => '0',
+			'groupes_mots' => '0',
+			'syndication' => '0',
+			'documents' => '0'));
+
   if ($GLOBALS['xhtml']) {
     include_ecrire("inc_tidy.php");
     $page['texte'] = xhtml($page['texte']);
