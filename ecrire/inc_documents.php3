@@ -85,6 +85,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
+		include_ecrire('inc_distant.php');
 		include_ecrire('inc_logos.php3');
 		#var_dump($document);
 		$local = copie_locale($document['fichier']);

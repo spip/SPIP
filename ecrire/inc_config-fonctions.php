@@ -407,7 +407,7 @@ function proxy_config()
 
 	// Masquer un eventuel password authentifiant
 	if ($http_proxy = $GLOBALS['meta']["http_proxy"]) {
-		include_ecrire ("inc_sites.php3");
+		include_ecrire ("inc_distant.php3");
 		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
 	}
 

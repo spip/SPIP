@@ -185,110 +185,6 @@ function verifier_compactes($zip) {
 	}
 }
 
-// Si on doit conserver une copie locale des fichiers distants, autant que ca
-// soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
-// mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
-// des filesystems
-function nom_fichier_copie_locale($source, $extension) {
-	$dir = _DIR_IMG. creer_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
-	$dir2 = $dir . creer_repertoire($dir, $extension); 		# IMG/distant/pdf/
-	return $dir2 . substr(basename($source).'-'.md5($source),0,12).
-		substr(md5($source),0,4).'.'.$extension;
-}
-
-//
-// Donne le nom de la copie locale de la source
-//
-function fichier_copie_locale($source) {
-	// Si c'est une image de IMG/ pas de souci
-	if (preg_match(',^'._DIR_IMG.',', $source))
-		return $source;
-
-	// Si l'extension n'est pas precisee, aller la chercher dans la table
-	// des documents -- si la source n'est pas dans la table des documents,
-	// on ne fait rien
-	if ($t = spip_fetch_array(spip_query("SELECT * FROM spip_documents
-	WHERE fichier='".addslashes($source)."' AND distant='oui'")))
-		list($extension) = spip_fetch_array(spip_query("SELECT extension
-		FROM spip_types_documents WHERE id_type=".$t['id_type']));
-
-	if ($extension)
-		return nom_fichier_copie_locale($source, $extension);
-}
-
-
-// Recuperer les infos d'un document distant, sans trop le telecharger
-function recuperer_infos_distantes($source, $max=0) {
-	include_ecrire('inc_sites.php3');
-
-	$a = array();
-
-	// On va directement charger le debut des images et des fichiers html,
-	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
-	// ca echoue l'utilisateur devra les entrer...
-	if ($headers = recuperer_page($source, false, true, $max)) {
-		list($headers, $a['body']) = split("\n\n", $headers, 2);
-		if (preg_match(",\nContent-Type: *([^[:space:];]*),i",
-			"\n$headers", $regs)
-		AND $mime_type = addslashes(trim($regs[1]))
-		AND $s = spip_query("SELECT id_type,extension FROM spip_types_documents
-			WHERE mime_type='$mime_type'")
-		AND $t = spip_fetch_array($s)) {
-			spip_log("mime-type $mime_type ok");
-			$a['id_type'] = $t['id_type'];
-			$a['extension'] = $t['extension'];
-		} else {
-			# par defaut on retombe sur '.bin' si c'est autorise
-			spip_log("mime-type $mime_type inconnu");
-			$t = spip_fetch_array(spip_query(
-				"SELECT id_type,extension FROM spip_types_documents
-				WHERE extension='bin'"));
-			if (!$t) return false;
-			$a['id_type'] = $t['id_type'];
-			$a['extension'] = $t['extension'];
-		}
-
-		if (preg_match(",\nContent-Length: *([^[:space:]]*),i",
-			"\n$headers", $regs))
-			$a['taille'] = intval($regs[1]);
-	}
-
-	// Echec avec HEAD, on tente avec GET
-	if (!$a AND !$max) {
-	spip_log("tente $source");
-		$a = recuperer_infos_distantes($source, 1024*1024);
-	}
-
-	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
-	// recharger le document en GET et recuperer des donnees supplementaires...
-	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
-		if ($max == 0
-		    AND $a['taille'] < 1024*1024
-		AND ereg(",".$a['extension'].",",
-		','.$GLOBALS['meta']['formats_graphiques'].',')){
-			$a = recuperer_infos_distantes($source, 1024*1024);
-		}
-		else if ($a['body']) {
-			$a['fichier'] = nom_fichier_copie_locale($source, $a['extension']);
-			ecrire_fichier($a['fichier'], $a['body']);
-			$size_image = @getimagesize($a['fichier']);
-			$a['largeur'] = intval($size_image[0]);
-			$a['hauteur'] = intval($size_image[1]);
-			$a['type_image'] = true;
-		}
-	}
-	
-	if ($mime_type == 'text/html') {
-		$page = recuperer_page($source, true, false, 1024*1024);
-		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs))
-			$a['titre'] = corriger_caracteres(trim($regs[1]));
-			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
-	}
-
-	return $a;
-}
-
-
 //
 // Ajouter un document (au format $_FILES)
 //
@@ -310,6 +206,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 // content-type est connu, et si possible recuperer la taille, voire plus.
 	spip_log ("ajout du document $nom_envoye  ($mode $type_lien $id_lien $id_document)");
 	if ($mode == 'distant') {
+		include_ecrire('inc_distant.php');
 		if ($a = recuperer_infos_distantes($source)) {
 			# fichier local pour creer la vignette (!!),
 			# on retablira la valeur de l'url a la fin

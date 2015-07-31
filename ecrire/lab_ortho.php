@@ -161,7 +161,7 @@ function choisir_miroirs_ortho($lang) {
 // Envoyer une requete a un serveur d'orthographe
 //
 function post_ortho($url, $texte, $lang) {
-	include_ecrire('inc_sites.php3');
+	include_ecrire('inc_distant.php3');
 
 	list($f, $fopen) = init_http('POST', $url, true /* refuse gz */);
 	if (!$f OR $fopen) {

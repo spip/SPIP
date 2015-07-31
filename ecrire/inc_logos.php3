@@ -451,6 +451,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (!$logo) return '';
 
 	// Si c'est une image distante, la recuperer (si possible)
+	include_ecrire('inc_distant.php');
 	if (!$local = copie_locale($logo)) {
 		spip_log("pas de version locale de $logo");
 		return $img;
