@@ -65,12 +65,24 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 	if (_request('var_confirm')) # _GET
 		$reponse = reponse_confirmation();  # calculee plus tot: assembler.php
 
-	else if (_request('nom_email') AND _request('adresse_email')) # _POST
-		$reponse = reponse_signature($id_article,
+	else if (_request('nom_email') AND _request('adresse_email')){ # _POST 
+		if (!spip_connect())
+		  $reponse = _T('form_pet_probleme_technique');
+		else {
+		  // Eviter les doublons
+			$lock = "petition $id_article $adresse_email";
+			if (!spip_get_lock($lock, 5))
+				$reponse = _T('form_pet_probleme_technique');
+			else {
+			  $controler_signature = charger_fonction('controler_signature', 'inc');
+			  $reponse = $controler_signature($id_article,
 			_request('nom_email'), _request('adresse_email'),
 			_request('message'), _request('signature_nom_site'),
-			_request('signature_url_site'), _request('url_page')
-		);
+			_request('signature_url_site'), _request('url_page'));
+			  spip_release_lock($lock);
+			}
+		}
+	}
 
 	return array('formulaires/formulaire_signature', $GLOBALS['delais'],
 	array(
@@ -174,32 +186,24 @@ function reponse_confirmation($var_confirm = '') {
 }
 
 //
-// Retour a l'ecran de la signature d'une petition
+// Recevabilite de la signature d'une petition
 //
 
 // http://doc.spip.org/@reponse_signature
-function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
-
-	if (!spip_connect()) return _T('form_pet_probleme_technique');
+function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
 
-	// Eviter les doublons
-	$lock = "petition $id_article $adresse_email";
-	if (!spip_get_lock($lock, 5)) return _T('form_pet_probleme_technique');
-
 	$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
-	while ($row = spip_fetch_array($result_petition)) {
-		$id_article = $row['id_article'];
+	if ($row = spip_fetch_array($result_petition)) {
 		$email_unique = $row['email_unique'];
 		$site_obli = $row['site_obli'];
 		$site_unique = $row['site_unique'];
-		$message_petition = $row['message'];
-		$texte_petition = $row['texte'];
 	}
+
 	$texte = '';
 	if (strlen($nom_email) < 2)
 		$texte = _T('form_indiquer_nom');
@@ -219,8 +223,9 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 			}
 		}
 		include_spip('inc/sites');
-		if (!$texte AND !recuperer_page($url_site)) {
-			$texte = _T('form_pet_url_invalide');
+		if (!$texte) {
+			if (!recuperer_page($url_site, false, true, 0))
+				$texte = _T('form_pet_url_invalide');
 		}
 		if (!$texte AND $site_unique == "oui") {
 			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . _q($url_site) . " AND (statut='publie' OR statut='poubelle')");
@@ -228,6 +233,8 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				$texte = _T('form_pet_site_deja_enregistre');
 			}
 		}
+		if ($texte) return $texte;
+
 		$passw = test_pass();
 
 		$row = spip_fetch_array(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
@@ -259,7 +266,6 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 			$texte = _T('form_pet_probleme_technique');
 		}
 	}
-	spip_release_lock($lock);
 	return $texte;
 }
 
