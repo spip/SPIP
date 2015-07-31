@@ -64,6 +64,7 @@ function lire_metas($table='meta') {
 		$GLOBALS[$table] = array();
 		while ($row = sql_fetch($result))
 			$GLOBALS[$table][$row['nom']] = $row['valeur'];
+        sql_free($result);
 
 		if (!$GLOBALS[$table]['charset']
 		  OR $GLOBALS[$table]['charset']=='_DEFAULT_CHARSET' // hum, correction d'un bug ayant abime quelques install
@@ -117,18 +118,21 @@ function ecrire_meta($nom, $valeur, $importable = NULL, $table='meta') {
 		$GLOBALS[$table][$nom] = $valeur;
 		return;
 	}
-	$res = sql_fetch($res);
+	$row = sql_fetch($res);
+    sql_free($res);
+
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
-	if ($res AND $valeur == $res['valeur'] AND $GLOBALS[$table][$nom] == $valeur) return;
+	if ($row AND $valeur == $row['valeur'] AND $GLOBALS[$table][$nom] == $valeur) return;
+
 	$GLOBALS[$table][$nom] = $valeur;
 	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
 	if (!isset($touch[$table])) {touch_meta($antidate, $table);}
 	$r = array('nom' => $nom, 'valeur' => $valeur);
 	// Gaffe aux tables sans impt (vieilles versions de SPIP notamment)
-	if ($importable AND isset($res['impt'])) $r['impt'] = $importable;
-	if ($res) {
+	if ($importable AND isset($row['impt'])) $r['impt'] = $importable;
+	if ($row) {
 		sql_updateq('spip_' . $table, $r,"nom=" . sql_quote($nom));
 	} else {
 		sql_insertq('spip_' . $table, $r);
