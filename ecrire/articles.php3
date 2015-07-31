@@ -136,6 +136,22 @@ if ($jour_redac && $flag_editable) {
 }
 
 
+// appliquer la modification de langue
+if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$langue_parent = $row['lang'];
+
+	if ($changer_lang) {
+		if ($changer_lang != "herit") {
+			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
+			$langue_article = $changer_lang;
+		} else {
+			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
+			$langue_article = $langue_parent;
+		}
+	}
+}
+
 // Passer les images/docs en "inclus=non"
 $query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
 $result = spip_query($query);
@@ -273,6 +289,7 @@ if ($row = spip_fetch_array($result)) {
 	$referers = $row["referers"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
+	$langue_article = $row["lang"];
 }
 
 // pour l'affichage du virtuel
@@ -605,6 +622,9 @@ fin_raccourcis();
 debut_droite();
 
 
+changer_typo($langue_article);
+
+
 // qu'est-ce que c'est que ces choses ??
 
 function mySel($varaut,$variable){
@@ -691,20 +711,20 @@ else if ($statut_article == 'poubelle') {
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 if ($surtitre) {
-	echo "<font face='arial,helvetica' size=3><b>";
+	echo "<span $lang_dir><font face='arial,helvetica' size=3><b>";
 	echo typo($surtitre);
-	echo "</b></font>\n";
+	echo "</b></font></span>\n";
 }
 	gros_titre($titre, $logo_statut);
 if ($soustitre) {
-	echo "<font face='arial,helvetica' size=3><b>";
+	echo "<span $lang_dir><font face='arial,helvetica' size=3><b>";
 	echo typo($soustitre);
-	echo "</b></font>\n";
+	echo "</b></font></span>\n";
 }
 
 
 if ($descriptif) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
+	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $lang_dir>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
@@ -1148,35 +1168,30 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 if ((lire_meta('multi_articles') == 'oui')
 	OR ((lire_meta('multi_rubriques') == 'oui') AND (lire_meta('gerer_trad') == 'oui'))) {
 
+	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+	$langue_article = $row['lang'];
+	$langue_choisie_article = $row['langue_choisie'];
+
 	debut_cadre_enfonce('langues-24.gif');
 	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
-	echo bouton_block_invisible('languesarticle');
+	echo bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions');
 	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
 	if (lire_meta('gerer_trad') == 'oui')
 		echo _T('titre_langue_trad_article');
 	else
 		echo _T('titre_langue_article');
+
+	echo "&nbsp; (".traduire_nom_langue($langue_article).")";
+
 	echo "</B></FONT>";
 	echo "</TD></TR></TABLE>";
 
-	echo debut_block_invisible('languesarticle');
-
 	// Choix langue article
 	if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
+		echo debut_block_invisible('languesarticle');
+
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
-
-		if ($changer_lang) {
-			if ($changer_lang != "herit")
-				spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
-			else {
-				spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
-			}
-		}
-
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-		$langue_article = $row['lang'];
-		$langue_choisie_article = $row['langue_choisie'];
 
 		if ($langue_choisie_article == 'oui') $herit = false;
 		else $herit = true;
@@ -1186,7 +1201,10 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
 		echo "</font></center>\n";
 		fin_cadre_enfonce();
+
+		echo fin_block();
 	}
+
 
 	// Gerer les groupes de traductions
 	if (lire_meta('gerer_trad') == 'oui') {
@@ -1295,32 +1313,21 @@ if ((lire_meta('multi_articles') == 'oui')
 			if ($ret) {
 				debut_cadre_enfonce("traductions-24.gif");
 				echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
-				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'>".bouton_block_invisible("ne_plus_lier")."<b>"._T('trad_article_traduction')."</b></font></td></tr>";
+				echo "<tr bgcolor='#eeeecc'><td colspan='4'><font size=2 face='Georgia,Garamond,Times,serif'><b>"._T('trad_article_traduction')."</b></font></td></tr>";
 				echo $ret;
 				echo "<tr><td><img src='img_pack/rien.gif' height='3'></td></tr>";
 				echo "</table>";
 
 
-				echo debut_block_invisible("ne_plus_lier");
-				if ($flag_editable) {
-					$lien = $GLOBALS['clean_link'];
-					$lien->delVar($nom_select);
-					$lien = $lien->getUrl();
-
-					echo "<div align='right'>";
-					echo "<table width='180' cellpadding='0' cellspacing='0' border='0'><tr><td>";
-					icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
-					echo "</td></tr></table>";
-					echo "</div>";
-				}
-				echo fin_block();
 
 				fin_cadre_enfonce();
 			}
 		}
 
+		echo debut_block_invisible('lier_traductions');
+
 		echo "<table width='100%'><tr>";
-		echo "<td valign='top' width='50%' class='arial2'>";
+		echo "<td valign='top' width='40%' class='arial2'>";
 		if ($flag_editable AND $options == "avancees") { // Formulaire pour lier a un article
 
 			$lien = $GLOBALS['clean_link'];
@@ -1329,7 +1336,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
-			echo " <input type='text' class='fondl' name='lier_trad' size='10'>";
+			echo " <input type='text' class='fondl' name='lier_trad' size='5'>";
 			echo "<div align='right'><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
 			echo "</form>";
 
@@ -1337,11 +1344,23 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo "  </td>";
 
 		echo "<td><img src='img_pack/rien.gif' width=10></td>";
-		echo "<td valign='top' width='50%'>";
+		echo "<td valign='top' width='40%'>";
 		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
+
+		if ($ret) {
+			if ($flag_editable) {
+				$lien = $GLOBALS['clean_link'];
+				$lien->delVar($nom_select);
+				$lien = $lien->getUrl();
+				icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
+			}
+		}
+
 		echo "</td>";
 
 		echo "</tr></table>";
+
+		echo fin_block();
 	}
 
 	echo fin_block();
@@ -1442,25 +1461,25 @@ if ($virtuel) {
 	fin_boite_info();
 }
 else {
-	echo "<div><b>";
+	echo "<div $lang_dir><b>";
 	echo justifier(propre($chapo));
 	echo "</b></div>\n\n";
 
-	echo justifier(propre($texte));
+	echo "<div $lang_dir>".justifier(propre($texte))."</div>";
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<div $lang_dir><font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
-		echo "</font>";
+		echo "</font></div>";
 		echo fin_cadre_enfonce();
 	}
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<font size=2>";
+		echo "<div $lang_dir><font size=2>";
 		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-		echo "</font>";
+		echo "</font></div>";
 		echo fin_cadre_relief();
 	}
 
