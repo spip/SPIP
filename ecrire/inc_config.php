@@ -23,6 +23,7 @@ function init_config() {
 		$lang = 'fr';
 
 	$liste_meta = array(
+		'nom_site' => _T('info_mon_site_spip'),
 		'activer_breves' => 'oui',
 		'config_precise_groupes' => 'non',
 		'mots_cles_forums' =>  'non',
