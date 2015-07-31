@@ -228,8 +228,13 @@ function instituer_boucle(&$boucle, $echapper=true){
 				if (is_array($s['champ'])){
 					$statut = preg_replace(',\W,','',array_pop($s['champ'])); // securite
 					$jointures = array();
+					// indiquer la description de chaque table dans le tableau de jointures,
+					// ce qui permet d'eviter certains GROUP BY inutiles.
+					$trouver_table = charger_fonction('trouver_table', 'base');
 					foreach($s['champ'] as $j) {
-						$jointures[] = array('',array($id=reset($j)),end($j));
+						$id = reset($j);
+						$def = $trouver_table($id);
+						$jointures[] = array('',array($id,$def),end($j));
 					}
 					$jointures[0][0] = $id_table;
 					if (!array_search($id, $boucle->from)){
