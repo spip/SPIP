@@ -422,7 +422,7 @@ function _image_tag_changer_taille($tag,$width,$height,$style=false){
 
 // function d'ecriture du de la balise img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
-function _image_ecrire_tag($valeurs,$surcharge){
+function _image_ecrire_tag($valeurs,$surcharge=array()){
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
 	// le style
