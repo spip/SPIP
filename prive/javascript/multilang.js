@@ -146,14 +146,14 @@ function forms_init_field(el,lang) {
 	el.field_pre_lang = ""; //this is the 01. part of the string, the will be put outside the <multi>
 	el.titre_el = $("#titre_"+el.id);
 	if(m!=null) {
-	  el.field_pre_lang = m[1];
+	  el.field_pre_lang = m[1] || "";
 		el.multi = true;
 		match_multi.lastIndex=0;
 		while((langs=match_multi.exec(m[2]))!=null) {
 			var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
       if(text!=null) {
         value = text[2];
-        el.field_pre_lang = text[1];
+        el.field_pre_lang = text[1] || "";
       } else {
         value = langs[2];
       }
@@ -171,7 +171,7 @@ function forms_set_lang(el,lang) {
 	//if current lang is not setted use default lang value
 	if(el.field_lang[lang]==undefined)
 			el.field_lang[lang] = el.field_lang[multilang_def_lang];
-	el.value = el.field_pre_lang+el.field_lang[lang]; //show the common part (01. ) before the value
+	el.value = el.field_pre_lang+(el.field_lang[lang]==undefined?"":el.field_lang[lang]); //show the common part (01. ) before the value
 	el.titre_el.html(el.value);
 }
 
@@ -207,7 +207,7 @@ function forms_multi_submit(params) {
 		forms_save_lang(this,form.form_lang || multilang_def_lang);
 		//build the string value
 		var def_value = this.field_lang[multilang_def_lang];
-		if(!this.multi) this.value = def_value;
+		if(!this.multi) this.value = this.field_pre_lang+(def_value==undefined?"":def_value);
 		else {
 			var value="",count=0;
 			$.each(this.field_lang,function(name){
