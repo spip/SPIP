@@ -113,14 +113,7 @@ function _sqlite_func_concat ($a, $b) {
 
 // http://doc.spip.org/@_sqlite_func_dayofmonth
 function _sqlite_func_dayofmonth ($d) {
-    if (!$d){
-    	 $result = date("j");
-	} else {
-    	preg_match(";^([0-9]{4})-([0-9]+)-([0-9]+) .*$;", $d, $f);
-    	$result = $f[3];
-	}
-	#spip_log("Passage avec DAYOFMONTH : $d, $result",'debug');
-    return $result;
+	return date("d",_sqlite_func_unix_timestamp($d));
 }
 
 
@@ -151,10 +144,10 @@ function _sqlite_func_if ($bool, $oui, $non) {
  */ 
 // http://doc.spip.org/@_sqlite_func_insert
 function _sqlite_func_insert ($s, $index, $longueur, $chaine) {
-    return 
-    	  substr($s,0, $index) 
-    	. $chaine 
-    	. substr(substr($s, $index), $longueur);
+	return
+			substr($s,0, $index)
+		. $chaine
+		. substr(substr($s, $index), $longueur);
 }
 
 
@@ -185,7 +178,7 @@ function _sqlite_func_left ($s, $lenght) {
 
 // http://doc.spip.org/@_sqlite_func_now
 function _sqlite_func_now(){
-	$result = date("Y-m-d H:i:s", strtotime("now"));
+	$result = date("Y-m-d H:i:s");
 	#spip_log("Passage avec NOW : $result",'debug');
 	return $result;
 }
@@ -193,10 +186,7 @@ function _sqlite_func_now(){
 
 // http://doc.spip.org/@_sqlite_func_month
 function _sqlite_func_month ($d) {
-	#spip_log("Passage avec MONTH : $d",'debug');
-    if (!$d) return date("n");
-    preg_match(";^([0-9]{4})-([0-9]+).*$;", $d, $f);
-    return $f[2];
+	return date("m",_sqlite_func_unix_timestamp($d));
 }
 
 
@@ -211,13 +201,13 @@ function _sqlite_func_preg_replace($quoi, $cherche, $remplace) {
 
 // http://doc.spip.org/@_sqlite_func_rand
 function _sqlite_func_rand() {
-  return rand();
+	return rand();
 }
 
 
 // http://doc.spip.org/@_sqlite_func_right
-function _sqlite_func_right ($s, $lenght) {
-    return substr($s,0 - $lenght);
+function _sqlite_func_right ($s, $length) {
+	return substr($s,0 - $length);
 }
 
 
@@ -255,14 +245,7 @@ function _sqlite_func_unix_timestamp($d) {
 
 // http://doc.spip.org/@_sqlite_func_year
 function _sqlite_func_year ($d) {
-    if (!$d){
-    	 $result = date("Y");
-    } else {
-    	preg_match(";^([0-9]{4}).*$;", $d, $f);
-    	$result = $f[1];
-    }
-    spip_log("Passage avec YEAR : $d, $result",'debug');
-    return $result;
+	return date("Y",_sqlite_func_unix_timestamp($d));
 }
 
 
