@@ -984,7 +984,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1){	
-			echo "<a href=\"$lien\"><img src='img_pack/$fond' $title border='0'></a><br>";
+			echo "<a href=\"$lien\"><img src='img_pack/$fond' $title border='0' alt=' '></a><br>";
 		}
 		if ($spip_display != 3){
 			echo "<a href=\"$lien\" class='icone'><font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
@@ -998,7 +998,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1){	
-			echo "<a href=\"$lien\"><img src='img_pack/$fond' $title border='0'></a><br>";
+			echo "<a href=\"$lien\"><img src='img_pack/$fond' $title border='0' alt=' '></a><br>";
 		}
 		if ($spip_display != 3){
 			echo "<a href=\"$lien\" class='icone'><font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
