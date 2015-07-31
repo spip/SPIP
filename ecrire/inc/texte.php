@@ -38,7 +38,7 @@ function tester_variable($var, $val){
 // Retourne aussi un double tableau raccourci / texte-clair les utilisant.
 
 // http://doc.spip.org/@traiter_variables_sales
-function traiter_variables_sales($puce)
+function traiter_variables_sales()
 {
 	global $class_spip, $class_spip_plus;
 // class_spip : savoir si on veut class="spip" sur p i strong & li
@@ -51,7 +51,6 @@ function traiter_variables_sales($puce)
 	return array(array(
 		/* 0 */ 	"/\n(----+|____+)/S",
 		/* 1 */ 	"/\n-- */S",
-		/* 2 */ 	"/\n- */S",
 		/* 3 */ 	"/\n_ +/S",
 		/* 4 */   "/(^|[^{])[{][{][{]/S",
 		/* 5 */   "/[}][}][}]($|[^}])/S",
@@ -69,7 +68,6 @@ function traiter_variables_sales($puce)
 		     array(
 		/* 0 */ 	"\n\n" . tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n") . "\n\n",
 		/* 1 */ 	"\n<br />&mdash;&nbsp;",
-		/* 2 */ 	"\n<br />$puce&nbsp;",
 		/* 3 */ 	"\n<br />",
 		/* 4 */ 	"\$1\n\n" . tester_variable('debut_intertitre', "\n<h3$class_spip_plus>"),
 		/* 5 */ 	tester_variable('fin_intertitre', "</h3>\n") ."\n\n\$1",
@@ -1332,7 +1330,15 @@ function traiter_raccourcis($letexte) {
 	// A present on introduit des attributs class_spip*
 	// Init de leur valeur et connexes au premier appel
 	if (!$remplace)
-		$remplace = traiter_variables_sales((strpos($letexte, "\n- ") == false) ? '' : definir_puce());
+		$remplace = traiter_variables_sales();
+
+	// La puce depend de la direction, on ne peut pas la definir static
+	$r = $remplace;
+	if (strpos("\n".$letexte, "\n-") !== false) {
+		$r[0][] = /* 2 */ 	"/\n- */S";
+		$r[1][] = /* 2 */ 	"\n<br />".definir_puce()."&nbsp;";
+	}
+
 
 	//
 	// Tableaux
@@ -1370,7 +1376,7 @@ function traiter_raccourcis($letexte) {
 	}
 
 	// autres raccourcis
-	$letexte = preg_replace($remplace[0], $remplace[1], $letexte);
+	$letexte = preg_replace($r[0], $r[1], $letexte);
 	$letexte = preg_replace("@^ <br />@S", "", $letexte);
 
 	// Retablir les caracteres proteges
