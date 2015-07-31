@@ -73,14 +73,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		$composer = charger_fonction('composer', 'public');
 		$code = $composer($skel, $mime_type, $gram, $sourcefile, $connect);
-	} 
-	else {
-		erreur_squelette(_T('info_erreur_squelette2',
-			array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES)));
-		//"'$fond.$ext'"
-		//erreur_squelette($message, $lieu);
-		$code = '';
-	}
+	} else $code = '';
 
 	if (!$code) { // squelette inconnu (==='') ou faux (===false)
 		$page = $code;
