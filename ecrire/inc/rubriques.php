@@ -176,12 +176,13 @@ function calculer_rubriques_publiees() {
 		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
 		WHERE id_rubrique=".$row['id']);
 	
-	// Publier et dater les rubriques qui ont un document publie
+	// Publier et dater les rubriques qui ont un *document* publie
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
 	FROM spip_rubriques AS rub, spip_documents AS fille,
 	spip_documents_rubriques AS lien
 	WHERE rub.id_rubrique = lien.id_rubrique
 	AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date
+	AND fille.mode='document'
 	$postdates GROUP BY rub.id_rubrique");
 	while ($row = sql_fetch($r))
 		spip_query("UPDATE spip_rubriques
