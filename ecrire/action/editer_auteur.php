@@ -131,15 +131,67 @@ function auteurs_set($id_auteur, $set = null) {
 	$err .= instituer_auteur($id_auteur, $c);
 
 	// Un lien auteur a prendre en compte ?
-	$err .= auteur_referent($id_auteur, array('article' => _request('lier_id_article',$set)));
+	$err .= auteur_associer($id_auteur, array('article' => _request('lier_id_article',$set)));
 
 	return $err;
 }
 
-function auteur_referent($id_auteur,$c){
+/**
+ * Associer un auteur a des objets listes sous forme
+ * array('objet'=>$id_objet,...)
+ *
+ * @param int $id_auteur
+ * @param array $c
+ * @return string
+ */
+function auteur_associer($id_auteur,$c){
 	foreach($c as $objet => $id_objet){
-		if ($id_objet=intval($id_objet)){
-			sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
+		if ($id_objet=intval($id_objet)
+			AND !sql_getfetsel(
+							'id_auteur',
+							"spip_auteurs_liens",
+							array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur))))
+		{
+				sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
+		}
+	}
+
+	return ''; // pas d'erreur
+}
+
+
+/**
+ * Ancien nommage pour compatibilite
+ * @param int $id_auteur
+ * @param array $c
+ * @return string
+ */
+function auteur_referent($id_auteur,$c){
+	return auteur_associer($id_auteur,$c);
+}
+
+/**
+ * Dossocier un auteur des objets listes sous forme
+ * array('objet'=>$id_objet,...)
+ *
+ * 'objet'=>'*' permet de supprimer tous les liens avec un type d'objet
+ * '*'=>'*' permet de supprimer tous les liens de cet auteur
+ *
+ * @param int $id_auteur
+ * @param array $c
+ * @return string
+ */
+function auteur_dissocier($id_auteur,$c){
+	foreach($c as $objet => $id_objet){
+		if ($objet=='*'){
+			if ($id_objet=='*')
+				sql_delete("spip_auteurs_liens", 'id_auteur='.intval($id_auteur));
+		}
+		elseif ($id_objet=='*'){
+			sql_delete("spip_auteurs_liens", array('objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur)));
+		}
+		elseif ($id_objet=intval($id_objet)){
+			sql_delete("spip_auteurs_liens", array('id_objet='.intval($id_objet), 'objet='.sql_quote($objet), 'id_auteur='.intval($id_auteur)));
 		}
 	}
 
