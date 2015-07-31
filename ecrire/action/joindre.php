@@ -148,6 +148,14 @@ function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $red
 	return $ajouter_documents($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs, $iframe_redirect);
 }
 
+#-----------------------------------------------------------------------
+
+// sous-actions suite a l'envoi d'un Zip:
+// la fonction ajouter_documents standard a construit un formulaire 
+// qui renvoie sur une des 3 sous-actions qui suivent. 
+// On recharge ajouter_document sans l'appeler, car son fichier doit
+// contenir les acolytes qui nous interessent (pas bien beau)
+
 //  Zip avec confirmation "tel quel"
 
 // http://doc.spip.org/@spip_action_joindre5
@@ -158,12 +166,10 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $red
 	if (!$pos) {
 		$pos = strpos($path, '/zip_');
 	}
-	return $ajouter_documents($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
+	return ajouter_un_document($path, substr($path, $pos+5), $type, $id, $mode, $id_document, $actifs);
 }
 
 // Zip a deballer. 
-// Pas tres beau: on charge une fonction pas appelee mais dont le fichier
-// contient les acolytes qui nous interessent.
 
 // http://doc.spip.org/@spip_action_joindre6
 function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
@@ -184,5 +190,6 @@ function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $red
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
+
 
 ?>
