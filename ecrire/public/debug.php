@@ -342,19 +342,12 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 			  $s);
 
 	$tableau = explode("<br />", $s);
-
-	$ancre = md5($texte);
-	if (!$nocpt) {
-		$format = '%0' . strval(@strlen(count($tableau))). 'd';
-	} else $format ='%s';
-	$format = "<tr id='L%d'><td><a class='sinumerote' style='text-align: right; background-color: white;visibility: " . ($nocpt ? 'hidden' : 'visible') . ";%s' href='#T%s' title=\"%s\">$format</a></td><td style='padding-left:10px'>%s</td></tr>\n";
+	$format = "<tr id='L%d'><td><a class='sinumerote' style='text-align: right; background-color: white;visibility: " . ($nocpt ? 'hidden' : 'visible') . ";%s' href='#T%s' title=\"%s\">%0" . strval(@strlen(count($tableau))). "d</a></td><td style='padding-left:10px'>%s</td></tr>\n";
 
 	$format10=str_replace('white','lightgrey',$format);
 	$formaterr="color: red;";
 	$i=1;
-
 	$flignes = array();
-
 	$loc = array(0,0);
 	foreach ($fautifs as $lc)
 	  if (is_array($lc)) {
@@ -362,6 +355,7 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	    $flignes[$l] = $lc;
 	  } else $flignes[$lc] = $loc;
 
+	$ancre = md5($texte);
 	foreach ($tableau as $ligne) {
 	  if (isset($flignes[$i])) {
 	    $ligne = str_replace('&nbsp;',' ', $ligne);
@@ -374,7 +368,7 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 	    //  sprintf($formaterr, substr($ligne,$m));
 	    $bg = $formaterr; 
 	  } else {$indexmesg = $ancre; $err= $bg='';}
-	  $res .= sprintf((($i%10) ? $format :$format10), $i, $bg, $indexmesg, $err, ($nocpt ? '' : $i), $ligne);
+	  $res .= sprintf((($i%10) ? $format :$format10), $i, $bg, $indexmesg, $err, $i, $ligne);
 	  $i++;
 	}
 	$js = "this.style.visibility=this.style.visibility=='visible'?'hidden' : 'visible'";
