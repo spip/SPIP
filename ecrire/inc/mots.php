@@ -560,6 +560,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
+	$limit = ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : "99999");
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
@@ -576,7 +577,7 @@ function afficher_groupe_mots($id_groupe) {
 	echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
 	$table = array();
-	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $deb_aff, $nb_aff");
+	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $limit");
 	while ($row = spip_fetch_array($result)) {
 		$table[] = afficher_groupe_mots_boucle($row, $occurrences);
 	}
