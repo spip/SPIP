@@ -1,26 +1,120 @@
 /* Les boutons d'admin survolent la page (sauf #FORMULAIRE_ADMIN) */
-.spip-admin-float { position: absolute; right: 20px; top: 0; background-color: transparent; z-index: 100; }
+.spip-admin-float {
+	top: 0;
+	right: 20px;
+	position: absolute;
+	background-color: transparent;
+	z-index: 100;
+}
+
 
 /* Couleurs et design des boutons d'admin */
-a.spip-admin-boutons { border-top: 1px solid #CECECE; border-bottom: 2px solid #4A4A4A; border-left: 1px solid #CECECE; border-right: 1px solid #CECECE; text-decoration: none; text-align: center; margin: 0; padding: 1px .5em; font-family: helvetica,arial, sans-serif; font-size: 10px; font-weight: bold; background-color: #FFF; color: #0C479D; }
-a:hover.spip-admin-boutons { background-color: #fc3; border-bottom: 2px solid #36F; }
-a:active.spip-admin-boutons { background-color: #CCC; border-bottom: 2px solid #f00; }
+
+a.spip-admin-boutons {
+	border-top: 1px solid #CECECE;
+	border-bottom: 2px solid #4A4A4A;
+	border-left: 1px solid #CECECE;
+	border-right: 1px solid #CECECE;
+	text-decoration: none;
+	text-align: center;
+	margin: 0;
+	padding: 1px .5em;
+	font-family: helvetica,arial, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #FFF;
+	color: #0C479D;
+}
+
+a:hover.spip-admin-boutons {
+	background-color: #fc3;
+	border-bottom: 2px solid #36F;
+}
+
+a:active.spip-admin-boutons {
+	background-color: #CCC;
+	border-bottom: 2px solid #f00;
+}
+
 
 /* Style pour le mode debug */
-#spip-debug { background-color: #F0F0F0; font-family: Verdana, Geneva, Helvetica, sans-serif; }
-#spip-debug ul table { font-size: 80%; }
-#spip-debug fieldset { background-color: #FFF; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; }
-#spip-debug fieldset fieldset { background-color: #CCF; font-family: Verdana, Geneva, Helvetica, sans-serif; font-size: 80%; }
-#spip-debug legend { background-color: #FFF; border: solid 1px #F00; padding: 1px 1em; font-family: Verdana, Geneva, Helvetica, sans-serif; font-weight: bold; }
-#spip-debug fieldset fieldset legend { border: solid 1px #00F; font-weight: normal; }
-#spip-debug a { text-decoration: none; }
-#spip-debug a:hover { text-decoration: underline; }
+#spip-debug {
+	background-color: #F0F0F0;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
+}
 
-#debug_boucle fieldset { background-color: #CCF; }
-#debug_boucle fieldset fieldset { background-color: #FFF; font-family: Verdana, Geneva, Helvetica, sans-serif; padding: 0.5em 1.5em; }
+#spip-debug ul table {
+	font-size: 80%;
+}
 
-#spip-boucles { min-height: 200px; max-height: 50%; margin: 0 0 1em 0; padding: .5em 0; overflow: -moz-scrollbars-vertical; overflow-y: auto; border-top: 1px solid #39F; border-bottom: 2px solid #666; }
+#spip-debug fieldset {
+	background-color: #FFF;
+	font-family: Courier, "Courier New", monospace;
+	font-size: 12px;
+	margin-bottom: 1em;
+}
 
-.spip-env fieldset { background-color: #FFF; border: solid 1px #008; margin: 2px 2em; }
-.spip-env legend { background-color: #FFF; border: solid 1px #F00; padding: 1px 1em; font-weight: bold; }
-.spip-env fieldset div { max-height: 10em; overflow: auto; }
+#spip-debug fieldset fieldset {
+	background-color: #CCF;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
+	font-size: 80%;
+}
+
+#spip-debug legend {
+	background-color: #FFF;
+	border: solid 1px #F00;
+	padding: 1px 1em;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+#spip-debug fieldset fieldset legend {
+	border: solid 1px #00F;
+	font-weight: normal;
+}
+
+#spip-debug a {
+	text-decoration: none;
+}
+
+#spip-debug a:hover {
+	text-decoration: underline;
+}
+
+#debug_boucle fieldset {
+	background-color: #CCF;
+}
+#debug_boucle fieldset fieldset {
+	background-color: #FFF;
+	font-family: Verdana, Geneva,Arial, Helvetica, sans-serif;
+	padding: 0.5em 1.5em;
+}
+
+#spip-boucles {
+	min-height: 200px;
+	max-height: 50%;
+	margin: 0 0 1em 0;
+	padding: .5em 0;
+	overflow: -moz-scrollbars-vertical;
+	overflow-y: auto;
+	border-top: 1px solid #39F;
+	border-bottom: 2px solid #666;
+}
+
+.spip-env fieldset {
+	background-color: #FFF;
+	border: solid 1px #008;
+	margin: 2px 2em;
+}
+
+.spip-env legend {
+	background-color: #FFF;
+	border: solid 1px #F00;
+	padding: 1px 1em;
+	font-weight: bold;
+}
+
+.spip-env fieldset div {
+	max-height: 10em;
+	overflow: auto; 
+}

@@ -1,41 +1,167 @@
-body { background-color: #babdb6; font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; }
+body {
+	color: #2e3436;
+	font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif;
+	font-size: 0.9em;
+	background-color: #babdb6;
+}
 
-h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
-h2 { margin: 0.8em 0 0.8em 0; font-size: 1.2em; font-weigth: normal; }
+h1 {
+	color: #5c3566;
+	margin: 1em 0 1em 0;
+	font-weigth: bold;
+	font-size: 1.3em;
+}
 
-a { color: #8ae234; text-decoration: none; }
-a:visited { color: #75507b; }
-a:active { color: #8ae234; }
+h2 {
+	font-weigth: normal;
+	font-size: 1.2em;
+	margin: 0.8em 0 0.8em 0;
+}
 
-img { border: 0; }
+a {
+	color: #8ae234;
+	text-decoration: none;
+}
 
-ul { text-align: justify; list-style-type: none; }
+a:visited {
+	color: #75507b;
+}
 
-fieldset, .fieldset { text-align: left; padding: 0; border: 0; margin-top: 1em; font-size: 0.9em; }
-legend { font-weight: bold; font-size: 1.1em; color: #000; }
-label {}
+a:active {
+	color: #8ae234;
+}
 
-#minipres { width: 40em; background: #FFF; margin: 1em auto; padding: 1em; border: 1px solid #888; text-align: center; }
-.pass #minipres { width: 90%; }
+img {
+	border: 0;
+}
 
-.petit-centre { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 1em; }
-.petit-centre p { text-align: center; }
+p {}
 
-.suivant { display: block; margin-top: 1em; text-align: right; }
+ul {
+	text-align: justify;
+	list-style-type: none;
+}
 
-.toile_foncee { background: #777; }
+fieldset, .fieldset {
+	text-align: left;
+	border: none;
+	padding: 0px;
+	margin-top: 1em;
+	font-size: 0.9em;
+}
 
-.fondl { background-color: #eee; background-position: center bottom; padding: 3px; border: 1px solid #333; font-size: 0.9em; font-family: Verdana, Geneva, Sans, sans-serif; }
-.formo { width: 100%; display: block; background-color: #FFF; background-position: center bottom; margin-bottom: 1em; padding: 3px; border: 1px solid #333; behavior: url(win_width.htc); font-size: 1em; font-family: Verdana, Geneva, Sans, sans-serif; }
+legend {
+	font-weight: bold;
+	font-size: 1.1em;
+	color: black;
+}
 
-p.resultat { background-color: #fcaf3e; padding: 0.2em 0.1em; border: 1px solid  #f57900; text-align: center; color: #FFF; font-weight: bold; }
+label {
+	
+}
 
-#etapes { display: block; position: absolute; top: 10px; left: 10px; }
-#etapes span { margin-top: -0.5em; display: block; padding: 12px 14px; margin-bottom: 5px; }
-#etapes span em { font-size: 2em; font-weight: bold; }
-#etapes span span { position: absolute; top: -100px; left: -100px; }
-#etapes span.ok { background: url(images/etape-ok.gif) center no-repeat; }
-#etapes span.encours { background: url(images/etape-encours.gif) center no-repeat; }
-#etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
+#minipres {
+	border: 1px solid #888888;
+	width: 40em;
+	text-align: center;
+	margin: 1em auto 1em auto;
+	padding: 1em;
+	background: #fff;
+}
+.pass #minipres {width:90%;}
 
-.nettoyeur { clear: both; height: 0; line-height: 0; font-size: 0; margin: 0; padding: 0; }
+.petit-centre {
+	font-family: Verdana, Geneva, Sans, sans-serif;
+	font-size: 1em;
+}
+
+.petit-centre p {
+	text-align: center;
+}
+
+.suivant {
+	text-align: right;
+	display: block;
+	margin-top: 1em;
+}
+
+.toile_foncee {
+	background: #777;
+}
+
+.fondl {
+	padding: 3px;
+	background-color: #eee;
+	border: 1px solid #333;
+	background-position: center bottom;
+	font-size: 0.9em;
+	font-family: Verdana, Geneva, Sans, sans-serif;
+}
+
+.formo {
+	width: 100%;
+	display: block;
+	padding: 3px;
+	margin-bottom: 1em;
+	background-color: #FFF;
+	border: 1px solid #333;
+	background-position: center bottom;
+	behavior: url(win_width.htc);
+	font-size: 1em;
+	font-family: Verdana, Geneva, Sans, sans-serif;
+}
+
+p.resultat {
+	color: #fff;
+	padding: 0.2em 0.1em;
+	text-align: center;
+	font-weight: bold;
+	border: 1px solid  #f57900;
+	background-color: #fcaf3e;
+}
+
+#etapes {
+	display: block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+#etapes span {
+	margin-top: -0.5em;
+	display: block;
+	padding: 12px 14px;
+	margin-bottom: 5px;
+}
+
+#etapes span em {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+#etapes span span {
+	position: absolute;
+	top: -100px;
+	left: -100px;
+}
+
+#etapes span.ok {
+	background: url(images/etape-ok.gif) center no-repeat;
+}
+
+#etapes span.encours {
+	background: url(images/etape-encours.gif) center no-repeat;
+}
+
+#etapes span.todo {
+	background: url(images/etape-todo.gif) center no-repeat;
+}
+
+.nettoyeur {
+	clear: both;
+	height: 0px;
+	line-height: 0px;
+	font-size: 0px;
+	padding: 0;
+	margin: 0;
+}

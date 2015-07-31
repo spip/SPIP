@@ -1,36 +1,177 @@
-/* ------------------------------------------ */
-/* Styles pour l'agenda de SPIP
-/* ------------------------------------------ */
-.calendrier-arial9 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
-.calendrier-arial10 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
-.calendrier-arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
-.calendrier-verdana10 { font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; }
-.calendrier-helvetica16 { font-family: arial, helvetica, sans-serif; font-size: 16px; color: #000; }
+/*  ------------------------------------------ */
+/*  Styles pour l'agenda de SPIP
+/*  ------------------------------------------ */
 
-div.navigation-calendrier { color: #FFF; background-color: #CCC; font-family: Verdana, Geneva, Sans, sans-serif; font-weight: bold; font-size: 14px; }
-div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; }
+.calendrier-arial9 { 
+	font-family: Arial, Sans, sans-serif; font-size: 9px;
+}
 
-.calendrier-annee { background: #AAA; padding: 3px; margin: 1px; font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; font-weight: bold; color: #FFF; }
-.calendrier-annee:hover { color: #000; background-color: #FFF; }
-.calendrier-table-large { border: 0; width: 900px; }
-.calendrier-table-etroit { border: 0; width: 750px; }
-.calendrier-td-centre { width: 550px; padding-left: 25px; padding-right: 25px; vertical-align: top; }
-.calendrier-td { width: 14%; vertical-align: top; }
-.calendrier-th { width: 14%; padding: 5px; text-align: center; vertical-align: middle; font-size: 10px; font-weight: bold; font-family: Verdana, Geneva, Sans, sans-serif; }
-.calendrier-th a { color: #000; }
-.calendrier-table-etroit .calendrier-td-gauche { width: 0; vertical-align: top; }
-.calendrier-table-large .calendrier-td-gauche { width: 150px; vertical-align: top; }
-.calendrier-table-etroit .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-table-large .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-jour { position: relative; color: #999; /*background-color: #FFF;*/ border: 1px solid #AAA; }
-.calendrier-agenda { margin-left: 1px; margin-top: 1px; padding: 1px; text-align: center; background-color: #FFF; }
-.calendrier-demiagenda { margin-left: 0; margin-top: 0; padding: 0; text-align: center; background-color: #FFF; }
-.calendrier-tripleagenda { vertical-align: top; width: 33%; }
-.calendrier-cadreagenda { visibility: hidden; width: 100%; position: absolute; padding-top: 5px; padding-bottom: 5px; border: 0; background-color: #FFF; }
-.calendrier-titre { padding: 5px; text-align: center; font-weight: bold; }
-.calendrier-evenement { padding: 2px; margin-top: 2px; }
-.calendrier-heurepile { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; font-weight: bold; }
-.calendrier-heureface { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; }
+.calendrier-arial10 { 
+	font-family: Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-arial11 { 
+	font-family: Arial, Sans, sans-serif; font-size: 11px;
+}
+
+.calendrier-verdana10 {
+	font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-helvetica16 {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px; 
+	color: #000;
+}
+
+div.navigation-calendrier {
+	color: #FFF;
+	background-color: #CCC;
+	font-family: Verdana, Geneva, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+div.navigation-calendrier img {
+	border: 0;
+	vertical-align: middle;
+	margin: 1px;
+}
+
+.calendrier-annee {
+	background: #AAA;
+	padding: 3px;
+	margin: 1px;
+	font-family: Verdana, Geneva, Sans, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.calendrier-annee:hover {
+	color: #000;
+	background-color: #FFF;
+}
+
+.calendrier-table-large { 
+	border: 0;
+	width: 900px;
+ }
+
+.calendrier-table-etroit { 
+	border: 0;
+	width: 750px;
+ }
+
+.calendrier-td-centre { 
+	width: 550px;
+	padding-left: 25px;
+	padding-right: 25px;
+  	vertical-align: top;
+ }
+
+.calendrier-td { 
+	width: 14%;
+  	vertical-align: top;
+ }
+
+.calendrier-th { 
+	width: 14%;
+	padding: 5px;
+	text-align: center; 
+  	vertical-align: middle;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: Verdana, Geneva, Sans, sans-serif;
+ }
+
+.calendrier-th a { 
+  color: #000;
+}
+
+.calendrier-table-etroit  .calendrier-td-gauche {
+	width: 0;
+  	vertical-align: top;
+ }
+
+.calendrier-table-large  .calendrier-td-gauche {
+	width: 150px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-etroit  .calendrier-td-droit {
+	width: 150px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-large  .calendrier-td-droit {
+	width: 150px;
+  	vertical-align: top;
+ }
+
+.calendrier-jour {
+	position: relative; 
+	color: #999;
+	/*background-color: #FFF;*/
+	border: 1px solid #AAA;
+}
+
+.calendrier-agenda { 
+	margin-left: 1px;
+	margin-top: 1px;
+	padding: 1px;
+	text-align: center; 
+	background-color: #FFF;
+ }
+
+.calendrier-demiagenda { 
+	margin-left: 0;
+	margin-top: 0;
+	padding: 0;
+	text-align: center; 
+	background-color: #FFF;
+ }
+
+.calendrier-tripleagenda { 
+	vertical-align: top;
+	width: 33%;  
+ }
+
+.calendrier-cadreagenda { 
+	visibility: hidden;
+	width: 100%;
+	position: absolute; 
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border: 0;
+	background-color: #FFF;
+ }
+
+.calendrier-titre { 
+	padding: 5px;
+	text-align: center; 
+	font-weight: bold;
+ }
+
+.calendrier-evenement { 
+	padding: 2px;
+	margin-top: 2px;
+ }
+
+.calendrier-heurepile { 
+	position: absolute;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-top: 1px solid #CCC;
+	font-weight: bold;
+ }
+
+.calendrier-heureface { 
+	position: absolute;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-top: 1px solid #CCC;
+ }
 
 .calendrier-mozleft {}
 .calendrier-mozright {}
@@ -39,51 +180,187 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-moztop6 {}
 .calendrier-mozbottom6 {}
 
-.calendrier-opacity { -moz-opacity: 0.3; filter: alpha(opacity=30); }
-.calendrier-png { width: 12px; height: 12px; behavior: url(win_png.htc); } /* URL a revoir */
-.calendrier-icone { width: 14px; height: 7px; border: 0; }
-.calendrier-noir  { color: #000; } /* style anar */
-.calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; } /* style cinemat(yp)ographe */
-.calendrier-couleur1 { background: #FDE5F2; border: 1px solid #CD006F; color: #CD006F; } /* Fushia */
-.calendrier-couleur1i { background: #CD006F; border: 1px solid #FDE5F2; color: #FDE5F2; } /* Fushia */
-.calendrier-couleur2 { background: #EDF3FE; border: 1px solid #5da7c5; color: #5da7c5; } /* Bleu */
-.calendrier-couleur2i { background: #5da7c5; border: 1px solid #EDF3FE; color: #EDF3FE; } /* Bleu */
-.calendrier-couleur3 { background: #EBE9FF; border: 1px solid #766CF6; color: #766CF6; } /* Bleu pastel */
-.calendrier-couleur3i { background: #766CF6; border: 1px solid #EBE9FF; color: #EBE9FF; } /* Bleu pastel */
-.calendrier-couleur4 { background: #FEC; border: 1px solid #FA9A00; color: #FA9A00; } /* Orange */
-.calendrier-couleur4i { background: #FA9A00; border: 1px solid #FEC; color: #FEC; } /* Orange */
-.calendrier-couleur5 { background: #FFEDED; border: 1px solid #F00; color: #F00; } /* Rouge (Vermillon) */
-.calendrier-couleur5i { background: #F00; border: 1px solid #FFEDED; color: #FFEDED; } /* Rouge (Vermillon) */
-.calendrier-couleur6 { background: #FFF2EB; border: 1px solid #E95503; color: #E95503; } /* Orange */
-.calendrier-couleur6i { background: #E95503; border: 1px solid #FFF2EB; color: #FFF2EB; } /* Orange */
-.calendrier-couleur7 { background: #FFE; border: 1px solid #ccaa00; color: #ccaa00; } /* Jaune */
-.calendrier-couleur7i { background: #ccaa00; border: 1px solid #FFE; color: #FFE; } /* Jaune */
-.calendrier-couleur8 { background: #E2FDEC; border: 1px solid #009F3C; color: #009F3C; } /* Vert pastel */
-.calendrier-couleur8i { background: #009F3C; border: 1px solid #E2FDEC; color: #E2FDEC; } /* Vert pastel */
-.calendrier-couleur9 { background: #e5fd63; border: 1px solid #9DBA00; color: #9DBA00; } /* Vert */
-.calendrier-couleur9i { background: #9DBA00; border: 1px solid #e5fd63; color: #e5fd63; } /* Vert */
-.calendrier-couleur10 { background: #FFE0E0; border: 1px solid #640707; color: #640707; } /* Rouge (Bordeaux) */
-.calendrier-couleur10i { background: #640707; border: 1px solid #FFE0E0; color: #FFE0E0; } /* Rouge (Bordeaux) */
-.calendrier-couleur11 { background: #F2F2F2; border: 1px solid #3F3F3F; color: #3F3F3F; } /* Gris */
-.calendrier-couleur11i { background: #3F3F3F; border: 1px solid #F2F2F2; color: #F2F2F2; } /* Gris */
-.calendrier-couleur12 { background: #AAA; border: 1px solid #000; color: #000; }
-.calendrier-couleur12i { background: #000; border: 1px solid #AAA; color: #AAA; }
-.calendrier-couleur13 { background: #FFFFE0; border: 1px solid #666500; color: #666500; } /* Caca d'oie */
-.calendrier-couleur13i { background: #666500; border: 1px solid #FFFFE0; color: #FFFFE0; } /* Caca d'oie */
-.calendrier-couleur14 { background: #F5EEE5; border: 1px solid #8C6635; color: #8C6635; } /* Marron */
-.calendrier-couleur14i { background: #8C6635; border: 1px solid #F5EEE5; color: #F5EEE5; } /* Marron */
+.calendrier-opacity { 
+	-moz-opacity: 0.3;
+	filter: alpha(opacity=30);
+}
 
+
+.calendrier-png { 
+	width: 12px; 
+	height: 12px;
+	/* URL a revoir */
+	behavior: url(win_png.htc);
+}
+
+.calendrier-icone { 
+	width: 14px;
+	height: 7px;
+	border: 0;
+}
+
+.calendrier-noir  { 		/*  style anar */
+	color: #000;
+}
+
+.calendrier-nb  { 		/*  style cinemat(yp)ographe */
+	background-color: #FFF;
+	border: 1px solid #000;
+	color: #000;
+}
+
+.calendrier-couleur1 { 		/* Fushia */
+		background: #FDE5F2;
+		border: 1px solid #CD006F;
+		color: #CD006F;
+}
+.calendrier-couleur1i { 		/* Fushia */
+		background: #CD006F;
+		border: 1px solid #FDE5F2;
+		color: #FDE5F2
+}
+.calendrier-couleur2 { 		/* Bleu */
+		background: #EDF3FE;
+		border: 1px solid #5da7c5;
+		color: #5da7c5;
+}
+.calendrier-couleur2i { 		/* Bleu */
+		background: #5da7c5;
+		border: 1px solid #EDF3FE;
+		color: #EDF3FE
+}
+.calendrier-couleur3 { 		/* Bleu pastel */
+		background: #EBE9FF;
+		border: 1px solid #766CF6;
+		color: #766CF6;
+}
+.calendrier-couleur3i { 		/* Bleu pastel */
+		background: #766CF6;
+		border: 1px solid #EBE9FF;
+		color: #EBE9FF
+}
+.calendrier-couleur4 { 		/* Orange */
+		background: #FEC;
+		border: 1px solid #FA9A00;
+		color: #FA9A00;
+}
+.calendrier-couleur4i { 		/* Orange */
+		background: #FA9A00;
+		border: 1px solid #FEC;
+		color: #FEC
+}
+.calendrier-couleur5 { 		/* Rouge (Vermillon) */
+		background: #FFEDED;
+		border: 1px solid #F00;
+		color: #F00;
+}
+.calendrier-couleur5i { 		/* Rouge (Vermillon) */
+		background: #F00;
+		border: 1px solid #FFEDED;
+		color: #FFEDED
+}
+.calendrier-couleur6 { 		/* Orange */
+		background: #FFF2EB;
+		border: 1px solid #E95503;
+		color: #E95503;
+}
+.calendrier-couleur6i { 		/* Orange */
+		background: #E95503;
+		border: 1px solid #FFF2EB;
+		color: #FFF2EB
+}
+.calendrier-couleur7 { 		/* Jaune */
+		background: #FFE;
+		border: 1px solid #ccaa00;
+		color: #ccaa00;
+}
+.calendrier-couleur7i { 		/* Jaune */
+		background: #ccaa00;
+		border: 1px solid #FFE;
+		color: #FFE
+}
+.calendrier-couleur8 { 		/* Vert pastel */
+		background: #E2FDEC;
+		border: 1px solid #009F3C;
+		color: #009F3C;
+}
+.calendrier-couleur8i { 		/* Vert pastel */
+		background: #009F3C;
+		border: 1px solid #E2FDEC;
+		color: #E2FDEC
+}
+.calendrier-couleur9 { 		/* Vert */
+		background: #e5fd63;
+		border: 1px solid #9DBA00;
+		color: #9DBA00;
+}
+.calendrier-couleur9i { 		/* Vert */
+		background: #9DBA00;
+		border: 1px solid #e5fd63;
+		color: #e5fd63
+}
+.calendrier-couleur10 { 		/* Rouge (Bordeaux) */
+		background: #FFE0E0;
+		border: 1px solid #640707;
+		color: #640707;
+}
+.calendrier-couleur10i { 		/* Rouge (Bordeaux) */
+		background: #640707;
+		border: 1px solid #FFE0E0;
+		color: #FFE0E0
+}
+.calendrier-couleur11 { 		/* Gris */
+		background: #F2F2F2;
+		border: 1px solid #3F3F3F;
+		color: #3F3F3F;
+}
+.calendrier-couleur11i { 		/* Gris */
+		background: #3F3F3F;
+		border: 1px solid #F2F2F2;
+		color: #F2F2F2
+}
+.calendrier-couleur12 { 
+		background: #AAA;
+		border: 1px solid #000;
+		color: #000;
+}
+.calendrier-couleur12i {
+		background: #000;
+		border: 1px solid #AAA;
+		color: #AAA}
+.calendrier-couleur13 { 		/* Caca d'oie */
+		background: #FFFFE0;
+		border: 1px solid #666500;
+		color: #666500;
+}
+.calendrier-couleur13i { 		/* Caca d'oie */
+		background: #666500;
+		border: 1px solid #FFFFE0;
+		color: #FFFFE0
+}
+.calendrier-couleur14 { 		/* Marron */
+		background: #F5EEE5;
+		border: 1px solid #8C6635;
+		color: #8C6635;
+}
+.calendrier-couleur14i { 		/* Marron */
+		background: #8C6635;
+		border: 1px solid #F5EEE5;
+		color: #F5EEE5
+}
 /* agenda */
-.bandeau_agenda { background: #DDD; }
-.jour_dimanche { background: #eee;color: #000; }
-.jour_encours { background: #FFF;color: #000; }
-.jour_gris { background: #eee;color: #000; }
-.jour_pris { background: #FFF;color: #000; }
-.calendrier-cadreagenda { background: #eee; } /* grille du calendrier pour espace public */
+.bandeau_agenda { background:#ddd;}
+.jour_dimanche { background:#eee;color:#000;}
+.jour_encours { background:#fff;color:#000;}
+.jour_gris { background:#eee;color:#000;}
+.jour_pris { background:#fff;color:#000;}
+.calendrier-cadreagenda { background:#eee;}
+
+/* grille du calendrier pour espace public */
 /* (pour le prive, style_prive predomine */
 
-.bordure_claire { border: 1px solid #666; }
-.bordure_foncee { border: 1px solid #000; }
-.bordure_claire_basse { border-bottom: 1px solid #666; }
-.bordure_claire_left { border-left: 1px solid #666; }
-.bordure_claire_right { border-right: 1px solid #666; }
+.bordure_claire {	border: 1px solid gray;}
+.bordure_foncee {	border: 1px solid black;}
+.bordure_claire_basse {	border-bottom: 1px solid gray;}
+.bordure_claire_left {	border-left: 1px solid gray;}
+.bordure_claire_right {	border-right: 1px solid gray;}

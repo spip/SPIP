@@ -2,7 +2,7 @@
 <BOUCLE_site(SITES){id_syndic}>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 [(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". ]
-<BOUCLE_lang(RUBRIQUES){id_rubrique}><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR"></BOUCLE_lang>
+<BOUCLE_lang(RUBRIQUES){id_rubrique}><html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
 <head>
 <title>[(#NOM_SITE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF|couper{150}|textebrut)" />]
@@ -16,88 +16,86 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Contenu principal : affichage du site ]
-    <div id="conteneur">
-    <div id="contenu">
-    
-        [(#REM) Fil d'Ariane ]
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#NOM_SITE|couper{80})</strong>]</div>
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
 
-        <div class="cartouche">
-            <a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
-            <h1 class="#EDIT{nom_site}">#NOM_SITE</h1>
-        </div>
+	<div id="conteneur">
 
-        [<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
-        [<p class="#EDIT{url_site} hyperlien"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+		[(#REM) Contenu principal : affichage du site ]
+		<div id="contenu">
 
-        [(#REM) Articles issus de la syndication ]
-        <B_articles>
-        <div class="menu articles">
-            #ANCRE_PAGINATION
-            <h2><:articles:></h2>
-            <ul>
-                <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
-                <li>
-                    <h3><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
-                    [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
-                    <small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
-                    [<div class="texte">(#DESCRIPTIF|image_reduire{300})</div>]
-                </li>
-                </BOUCLE_articles>
-            </ul>
-            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
-        </div>
-        </B_articles>
+			<div class="cartouche">
+				<a href="#URL_SITE">[(#LOGO_SITE||image_reduire{150,100})]</a>
+				<h1 class="#EDIT{nom_site} titre">#NOM_SITE</h1>
+				[<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+			</div>
 
-        [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+			[<div class="#EDIT{descriptif} chapo">(#DESCRIPTIF)</div>]
 
-	</div><!--#contenu-->
-	</div><!--#conteneur-->
+			[(#REM) Articles issus de la syndication ]
+			<B_articles>
+			<div class="liste-articles">
+				#ANCRE_PAGINATION
+				<h2 class="invisible"><:articles:></h2>
+				<ul>
+					<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 5}>
+					<li>
+						<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
+						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
+						<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)][ &mdash; <em>(#TAGS|afficher_tags)</em>]</small>
+						[<div class="texte">(#DESCRIPTIF|image_reduire{300})
+						<br class="nettoyeur" /></div>]
+					</li>
+					</BOUCLE_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_articles>
 
-    [(#REM) Menu de navigation laterale ]
-    <div id="navigation">
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-        [(#REM) Menu de navigation par rubriques ]
-        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+		</div><!-- fin contenu -->
 
-    </div><!--#navigation-->
-    
-    [(#REM) Menu de navigation laterale ]
-    <div id="extra">
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
 
-        [(#REM) Autres sites web ]
-        <B_sites>
-        <div class="menu">
-            #ANCRE_PAGINATION
-            <h2><:sites_web:></h2>
-            <ul>
-                <BOUCLE_sites(SITES) {par nom_site} {pagination 20}>
-                <li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
-                </BOUCLE_sites>
-            </ul>
-            [<p class="pagination"><:suite:> : (#PAGINATION)</p>]
-        </div>
-        </B_sites>
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{id_rubrique}>
 
-        [(#REM) Menu de navigation mots-cles ]
-        <B_mots>
-        <div class="menu">
-            <h2><:mots_clefs:></h2>
-            <ul>
-                <BOUCLE_mots(MOTS) {id_syndic} {par titre}>
-                <li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
-                </BOUCLE_mots>
-            </ul>
-        </div>
-        </B_mots>
-        
-    </div><!--#extra-->
+			[(#REM) Autres sites web ]
+			<B_sites>
+			<div class="syndic">
+				#ANCRE_PAGINATION
+				<h2 class="menu-titre"><:sites_web:></h2>
+				[<p class="pagination">(#PAGINATION)</p>]
+				<ul>
+					<BOUCLE_sites(SITES) {par nom_site} {pagination 20}>
+					<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
+					</BOUCLE_sites>
+				</ul>
+			</div>
+			</B_sites>
+
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="divers">
+				<h2 class="menu-titre"><:mots_clefs:></h2>
+				<ul>
+					<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
+
+		</div><!-- fin navigation -->
+
+	</div><!-- fin conteneur -->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
 
-</div><!--#page-->
+</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_site>

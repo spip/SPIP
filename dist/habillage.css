@@ -1,136 +1,318 @@
-/* ----------------------------------------------------------- */
-/* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
-/* ----------------------------------------------------------- */
+/*  ----------------------------------------------------------- */
+/*  Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
+/*  ----------------------------------------------------------- */
 
+/* taille typo
+ * Base				100%
+ * -------------------------------------
+ * 20px				1.27em
+ * 19px				1.21em
+ * 18px				1.15em
+ * 17px				1.09em
+ * 16px				1.03em
+ * 15px				0.96em
+ * 14px				0.88em
+ * 13px				0.82em
+ * 12px				0.77em
+ * 11px				0.71em
+ * 10px				0.65em
+ *  9px				0.59em
+ * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE
+ */
 
-/* Disposition a l'ecran des blocs principaux
----------------------------------------------- */
-body { background: #FFF; margin: 0; padding: 0; text-align: center; }
+/*  ------------------------------------------
+/*  Correction des styles HTML par defaut
+/*  ------------------------------------------ */
+body {
+	background: #FFF;
+	margin: 1.5em;
+	text-align: center;
+	font-size: 1em;
+	color: #333;
+}
 
-div#page { width: 48em; margin: 0 auto; text-align: left; }
+img, table { margin: 0; padding: 0; border: none; }
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
-div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
-div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
-div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
-div#top .formulaire_recherche label { display: none; }
+/*  ------------------------------------------
+/*  Disposition a l'ecran des blocs principaux
+/*  ------------------------------------------ */
+#page {
+	width: 48em;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-div#conteneur { clear: both; float: left; width: 67%; min-height: 450px; overflow: hidden; }
-div#contenu { padding-top: 0.30em; }
+#conteneur { width: 100%; }
 
-div#navigation { float: right; width: 30%; overflow: hidden; }
-div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
+#conteneur #contenu {
+	float: left;
+	width: 33em;
+}
 
-div#pied { clear: both; width: 100%; margin: 1em 0 0 0; padding: 0.20em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.77em; }
-div#pied img { vertical-align: bottom; }
+#conteneur #navigation {
+	float: right;
+	width: 12em;
+	text-align: center;
+}
+
+/* Blocs du contenu (c-a-d. la colonne principale) */
+#contenu .contre-encart {
+	float: left;
+	width: 21em;
+}
+
+#contenu .encart {
+	float: right;
+	width: 11em;
+	margin: 0;
+	margin-bottom: 1em;
+}
+
+/* Entete */
+#entete {
+	width: 100%;
+	border-bottom: 2px solid #333; }
+#entete #nom_site_spip, #entete a .spip_logos {
+	display: block;
+	float: left;
+	font-weight: bold;
+	font-size: 1.5em; }
+#entete a { text-decoration: none; }
+#entete .formulaire_recherche { float: right; }
+
+/* Fil d'Ariane */
+#hierarchie {
+	clear: both;
+	margin-bottom: 2em;
+	font-size: 0.77em; }
+
+/* Pied de page */
+#pied {
+	clear: both;
+	width: 100%;
+	margin-top: 4em;
+	border-top: 1px dotted #CCC;
+	padding: 2px;
+	text-align: center; }
+#pied small { font-size: 0.77em; }
+#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: none; line-height: 1px; font-size: 1px; }
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
 
-/* Typographie generale du site
+/*  ------------------------------------------
+/*  Typographie generale du site
+/*  ------------------------------------------ */
+
+/* Typo pour les menus et la navigation */
+body, #navigation, .encart, .formulaire_spip {
+	font-family: Verdana, Tahoma, Geneva, sans-serif; }
+
+/* Typo pour le contenu */
+#contenu {
+	font-family: "Trebuchet MS", Helvetica, sans-serif; }
+
+/* Typo pour les citations et extraits introductifs */
+q, blockquote, .introduction, h3.spip, .voirskel {
+	font-family: Georgia, Times, serif; }
+
+
+/*  ------------------------------------------
+/*  Habillage des menus et de la navigation
+/*  ------------------------------------------ */
+
+/*  Habillage general des menus de navigation
 ---------------------------------------------- */
-body { font-size: 100%; color: #333; }
-#top, #contenu, #navigation, #extra, #pied { font-size: 0.82em; }
+.rubriques, .breves, .syndic, .forums, .divers {
+	min-width: 10em;
+	border: 1px solid #CCC;
+	margin-bottom: 1em;
+	font-size: 0.77em;
+}
 
-h1, h2, .chapo, .hyperlien, .texte, .ps, .notes, .introduction, #contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
-h3 { font-family: Georgia, Times, serif; }
-body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, Tahoma, Geneva, sans-serif; }
+.menu-titre {
+	padding: 0.2em 0.4em;
+	border-bottom: 1px dotted #CCC;
+	text-align: center;
+	font-weight: bold;
+}
 
+#navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
+#navigation ul, .encart ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
+#navigation li, .encart li { margin: 0; padding: 0 0.7em; }
 
-/* Personnalisation des styles HTML par defaut
+/*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
+.rubriques { background: #EAFFEA;}
+.rubriques .menu-titre { background: #F2FFF2; }
 
-/* Titraille */
-h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
-h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
-h2, h2 a, h2 a:hover { color: #EEE; }
-h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CC6; font-size: 1.10em; font-weight: bold; }
-h3.spip { color: #CC6; }
+.breves { background: #FFEAEA; }
+.breves .menu-titre { background: #FFF2F2; }
 
-/* Divers */
-abbr, acronym { border-bottom: 1px dotted; cursor: help; }
-small { font-size: 0.71em; color: #666; }
-/* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE */
+.syndic { background: #E8F8F8; }
+.syndic .menu-titre { background: #F0FCFC; }
 
-/* Listes SPIP */
-/*.spip_puce { list-style-position: outside; }*/
-ul.spip {}
-ol.spip {}
+.forums { background: #EAEAFF; }
+.forums .menu-titre { background: #F2F2FF; }
 
-/* Citations, code et poesie */
-blockquote { padding-left: 1em; border-left: 4px solid #DDD; }
-.spip_poesie { margin: 1em 3em; padding-left: 1em; border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
-.spip_poesie div { text-indent: -60px; margin-left: 60px; }
-code, .spip_cadre { font-family: "Courier New", Courier, mono; font-size: 1.10em; color: #009; }
-div.spip_code, .spip_cadre { margin-bottom: 1em; }
+.divers { background: #F8F8E8; }
+.divers .menu-titre { background: #FCFCF0; }
 
-/* Tableaux */
-table { border-collapse: collapse; border-spacing: 0; }
-table.spip { margin-bottom: 1em; color: #633E6D; }
-table.spip caption { caption-side: top; font-weight: bold; color: #9DBA00; line-height: normal; }
-table.spip tr.row_first { background: #C5E41C url(pale.gif); }
-table.spip tr.row_odd { background: #EEE; }
-table.spip tr.row_even { background: #DDD; }
-table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
-table.spip th { padding: 0.20em; vertical-align: middle; font-weight: bold; }
-table.spip td { padding: 0.40em; vertical-align: top; }
+/*  ------------------------------------------
+/*  Habillage du contenu
+/*  ------------------------------------------ */
 
-/* Logos, documents et images */
-img, .spip_logos { margin: 0; padding: 0; border: 0; }
-
-.spip_documents { text-align: center; line-height: normal; color: #666; }
-.spip_documents p { margin: 0.10em; padding: 0; }
-.spip_documents_center { clear: both; width: 100%; margin: 1em auto; }
-span.spip_documents_center { display: block; margin-top: 1em; }
-.spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
-.spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.90em; margin-left: auto; margin-right: auto; }
-.spip_doc_descriptif { clear: both; font-size: 0.90em; margin-left: auto; margin-right: auto; }
-
-
-/* Blocs et elements du contenu
+/*  Cartouche et titraille
 ---------------------------------------------- */
-
-#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
-
-.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #CC6; }
-
 .cartouche { margin-bottom: 2em; }
-.cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
+
+.cartouche .titre {
+	font-size: 1.27em;
+	font-weight: bold;
+	color: #000; }
+#contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
+
+.cartouche .spip_logos {
+	float: right;
+	margin-left: 16px;
+	margin-bottom: 16px; }
+
 .cartouche p { margin: 0; padding: 0; clear: left; }
-.cartouche .traductions { font-size: 0.77em; }
+.cartouche small { font-size: 0.71em; }
+
+.cartouche .traductions { font-size: 0.71em; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-.chapo { margin-bottom: 1.50em; font-weight: bold; line-height: 1.40em; color: #669; }
-.texte { line-height: 1.60em; }
-.ps, .notes { line-height: 1.40em; margin-bottom: 2em; }
-.notes { clear: both; }
 
-.hyperlien { display: block; background: #EEE url(pale.gif); padding: 0.50em 1em; font-weight: bold; color: #8B6F92; }
+/*  Mise en forme des textes du contenu
+---------------------------------------------- */
+.chapo {
+	margin-bottom: 1.5em;
+	font-weight: bold;
+	line-height: 1.4em; }
 
-/* modeles par defaut */
-.spip_modele { float: right; display: block; border: 1px dotted #666; width: 180px; }
+.lien {
+	background: #EEE;
+	margin: 1em;
+	margin-bottom: 1.5em;
+	padding: 0.82em;
+	border: 1px solid #CCC;
+	font-size: 0.82em;
+	font-weight: bold; }
 
-/* Portfolio */
-#documents_portfolio { clear: both; margin-top: 1.40em; margin-bottom: 2em; text-align: center; }
-#documents_portfolio .spip_logos { margin: 6px 2px 0 2px; padding: 4px; border: 1px solid #DDD; }
-#documents_portfolio a:hover .spip_logos { border-color: #F57900; }
-#documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
+.texte { color: #000; font-size: 0.96em; }
+
+.ps, .notes {
+	margin-top: 1.4em;
+	padding-top: 2px;
+	border-top: 2px solid #CCC; }
+.ps { font-size: 0.82em; }
+.notes { clear: both; font-size: 0.77em; }
+.ps h2, .notes h2 { font-size: 1.19em; font-weight: bold; }
+
+/*  Portfolio
+---------------------------------------------- */
+#documents_portfolio {
+	clear: both;
+	margin-top: 1.4em;
+	padding-top: 2px;
+	border-top: 2px solid #CCC; }
+#documents_portfolio h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
+
 #document_actif { margin-top: 1em; }
 
-
-/* Habillage des formulaires
+/*  Listes de documents joints (a un article ou une rubrique)
 ---------------------------------------------- */
-.formulaire_spip { background: #CC9 url(pale.gif); margin-bottom: 2em; padding: 1em; text-align: left; }
-.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
-.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #663; }
-.formulaire_spip label { display: block; color: #404040; color: #663; font-size: 0.90em; }
-.forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; color: #000; }
-.formulaire_spip textarea { margin-bottom: 1em; }
+#documents_joints {
+	margin-top: 1.4em;
+	padding-top: 2px;
+	border-top: 2px solid #CCC; }
+#documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
+#documents_joints ul { margin: 0; padding: 0; list-style: none; }
+#documents_joints li { margin-bottom: 0.4em; }
+#documents_joints li .spip_doc_titre {}
+#documents_joints li .spip_doc_titre small { font-weight: normal; }
+#documents_joints li .spip_doc_descriptif {}
+
+/* Listes d'articles et extraits introductifs
+----------------------------------------------- */
+.liste-articles ul { margin: 0; padding: 0; list-style: none; }
+.liste-articles li { margin-bottom: 1em; clear: both; }
+
+.liste-articles li .titre {
+	font-size: 1.03em;
+	font-weight: bold; }
+
+.liste-articles li .spip_logos {
+	float: right;
+	margin-left: 16px;
+	margin-bottom: 16px;
+	clear: right; }
+
+.liste-articles li p { margin: 0; padding: 0; }
+
+.liste-articles li .enclosures {
+	float: right;
+	text-align: right;
+	max-width: 60%;
+	margin: 0; }
+
+.liste-articles li small {
+	display: block;
+	font-size: 0.71em; }
+
+.liste-articles li .introduction {
+	margin-top: 5px;
+	margin-bottom: 2em;
+	border: 1px solid #CCC;
+	padding: 0.9em;
+	font-size: 0.82em;
+	line-height: 1.4em; }
+
+.pagination { font-size: 0.90em; }
+
+/*  ------------------------------------------
+/*  Habillage specifique du plan du site
+/*  ------------------------------------------ */
+
+.page_plan .cartouche { display: none; }
+
+.page_plan #contenu h2 {
+	clear: both;
+	background: #EEE;
+	border: 1px solid #CCC;
+	padding: 0.5em;
+	margin-bottom: 1em;
+	font-weight: bold;
+	text-align: center; }
+
+.page_plan #contenu .contre-encart ul {
+	display: block;
+	clear: left;
+	margin-top: 0;
+	margin-bottom: 1em;
+	padding-top: 0; }
+.page_plan #contenu .contre-encart li {}
+
+/*  ------------------------------------------
+/*  Habillage des formulaires
+/*  ------------------------------------------ */
+
+.formulaire_spip { text-align: left; font-size: 0.77em; }
+.formulaire_spip p { margin: 0.5em 0; padding: 0; }
+
+.formulaire_spip fieldset {}
+.formulaire_spip legend {}
+
+.formulaire_spip label {}
+.formulaire_spip .forml { width: 99%; font-family: inherit; font-size: inherit; }
 
 /* Boutons */
 .spip_bouton { text-align: right; }
@@ -139,7 +321,6 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #e86519; }
 fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
-.spip_surligne { background: #FF6; }
 
 /* Previsualisation du message */
 fieldset.previsu { padding: 1em; }
@@ -153,33 +334,31 @@ ul.choix_mots { float: left; width: 47%; margin: 0; padding: 0; list-style: none
 ul.choix_mots label { display: inline; }
 
 /* Formulaire de recherche */
-.formulaire_recherche {}
-.formulaire_recherche .forml {}
+.formulaire_recherche { width: 12em; text-align: left; }
+.formulaire_recherche label { display: none; }
 
-/* menu langues */
-#menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
-.formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
+/*  ------------------------------------------
+/*  Habillage des forums
+/*  ------------------------------------------ */
 
-/* Barre de raccourcis typographiques */
-table.spip_barre { width: 100%; }
-table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #999; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #999; }
-table.spip_barre input.barre { width: 100%; background: #EEE; }
-
-
-/* Habillage des forums
----------------------------------------------- */
-.repondre { clear: both; margin-top: 2.50em; margin-right: 1em; text-align: right; font-weight: bold; }
+.forum-repondre, .forum-decompte {
+	clear: both;
+	margin-top: 2.5em;
+	padding-top: 2px;
+	border-top: 2px solid #CCC;
+	font-size: 0.88em;
+	font-weight: bold; }
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 ul.forum, ul.forum ul { list-style: none; }
-.forum-fil { margin-top: 1.50em; }
+.forum-fil { margin-top: 1.5em; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
-.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
-.forum-texte { margin: 0; padding: 0.50em 1em; color: #333; }
-.forum-texte .hyperlien {}
-.forum-texte .repondre { margin: 0; padding: 0.10em 0; text-align: right; }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; text-decoration: none; color: #333; }
+.forum-chapo small {}
+.forum-texte { margin: 0; padding: 0.5em 1em; color: #333; font-size: 0.82em; }
+.forum-texte .forum-lien {}
+.forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
 ul .forum-message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
@@ -190,63 +369,53 @@ ul ul ul ul ul .forum-message { border: 1px solid #E0E0E0; }
 ul ul ul ul ul ul .forum-message { border: 1px dotted #E0E0E0; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
-ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; /*font-size: 0.88em;*/ background: #C4E0E0; }
+ul .forum-chapo { border: none; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #C4E0E0; }
 ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
 ul ul ul ul ul .forum-chapo { background: #FFF; }
 
+/*  ------------------------------------------
+/*  Habillage des petitions
+/*  ------------------------------------------ */
 
-/* Habillage des petitions
----------------------------------------------- */
-#signatures { clear: both; /*font-size: 0.77em;*/ }
-#signatures h2 { padding: 0.50em; text-align: center; font-size: 1.20em; font-weight: bold; }
+#signatures { clear: both; font-size: 0.77em; }
+
+#signatures h2 {
+	padding: 0.5em;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold; }
+
 #signatures table { width: 100%; margin: 1em 0; }
 #signatures thead { display: none; } /* On n'affiche pas les titres du tableau */
-#signatures td.signature-date { background: #E4F0F0; padding: 0.50em; white-space: nowrap; }
-#signatures td.signature-nom { background: #ECF4F4; padding: 0.20em; text-align: center; font-weight: bold; }
-#signatures td.signature-message { background: #F4F8F8; padding: 0.40em; /*font-size: 0.96em;*/ }
 
+#signatures td.signature-date {
+	background: #E4F0F0;
+	padding: 0.5em;
+	white-space: nowrap; }
 
-/* Habillage des sommaires et menus
----------------------------------------------- */
+#signatures td.signature-nom {
+	background: #ECF4F4;
+	padding: 0.2em;
+	text-align: center;
+	font-weight: bold; }
 
-/* Habillage general des menus de navigation */
-.menu { clear: both; margin-bottom: 2em; text-align: left; }
-#contenu .menu {}
-#navigation .menu { min-width: 10em; }
-#navigation .menu a {}
+#signatures td.signature-message {
+	background: #F4F8F8;
+	padding: 0.4em;
+	font-size: 0.96em; }
 
-.menu p { margin: 0.20em 0; padding: 0.20em 0.10em; }
-.menu ul { margin: 0; padding: 0; list-style: none; }
-.menu ul li { margin: 0.20em 0; padding: 0.20em; border-bottom: 1px solid #DDD; }
-.menu ul li ul { margin-left: 1em; }
-.menu ul li li { padding: 0; border: 0; }
+/*  ------------------------------------------
+/*  Couleurs des liens
+/*  ------------------------------------------ */
+a { text-decoration: none; color: #333; }
+a:hover { text-decoration: underline;}
 
-.pagination { clear: both; text-align: right; font-size: 0.90em; color: #666; }
-.pagination .on { font-weight: bold; color: #666; }
-
-/* Rubriques */
-.rubriques ul li { background: #EEE; border: 0; text-transform: uppercase; }
-.rubriques ul li ul li { text-transform: none; }
-
-/* Listes d'articles et extraits introductifs */
-.articles ul li { clear: both; padding: 0.40em 0.20em; }
-.articles ul li h3 { margin: 0; padding: 0; border: 0; font-weight: bold; }
-.articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
-.articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
-.articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
-
-
-/* Couleurs des liens
----------------------------------------------- */
-a { color: #604A7F; text-decoration: none; }
-a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
-a.spip_in {} /* liens internes */
-a.spip_out {} /* liens sortants */
-a.spip_url {} /* liens url sortants */
-a.spip_glossaire {} /* liens vers encyclopedie */
-.spip_out, .spip_url, .spip_glossaire { padding-right: 12px; background: url(spip_out.gif) no-repeat right; text-decoration: underline; }
-.feed { background: url(feed.png) no-repeat left center; padding-left: 18px; }
-.on { font-weight: bold; } /* liens exposes */
-a:hover { color: #F57900; text-decoration: underline; }
+/* menu langues */
+#menu_langues {
+	vertical-align: top;
+	max-height: 24px; 
+	margin-bottom: 5px; 
+	width: 120px;
+}

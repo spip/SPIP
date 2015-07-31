@@ -1,13 +1,12 @@
 #CACHE{3600}
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
-version="1.0"[ encoding="(#CHARSET)"]?>
-<rss version="2.0" [(#REM) rss 2.0.9)]
-	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 >
 
-<channel[ xml:lang="(#LANG)"]>
+<channel>
 
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
@@ -26,7 +25,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 
 <BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{id_mot ?}
 {par date}{inverse}{0,20}>
-	<item[ xml:lang="(#LANG)"]>
+	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_BREVE|url_absolue)]</link>
 		[<guid isPermaLink="true">(#URL_BREVE|url_absolue)</guid>]

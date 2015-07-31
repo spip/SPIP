@@ -6,14 +6,14 @@
 ---------------------------------------------- */
 body { background: #FFF; margin: 15pt; text-align: left; font: 12pt Verdana, Tahoma, Geneva, sans-serif; color: #000; }
 
-img, table { margin: 0; padding: 0; border: 0; }
+img, table { margin: 0; padding: 0; border: none; }
 ul, ol, li { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
-/*  Ne pas imprimer : on elimine les elements de navigation (display: none; )
+/*  Ne pas imprimer : on elimine les elements de navigation (display: none;)
 ---------------------------------------------- */
-#top, #hierarchie, #navigation, #pied { display: none; }
-.repondre, .repondre, .formulaire_spip { display: none; }
+#entete, #hierarchie, #navigation, .encart, #pied { display: none; }
+.forum-repondre, .forum-repondre-message, .formulaire_spip { display: none; }
 .spip-admin, .spip-admin-float, .invisible { display: none; }
 
 /*  Disposition a l'ecran
@@ -32,28 +32,42 @@ a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(h
 
 .cartouche { margin-bottom: 2em; }
 .cartouche small { font-size: 0.71em; }
-h1 { font-size: 1.27em; font-weight: bold; }
+.cartouche .titre { font-size: 1.27em; font-weight: bold; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
 .cartouche .traductions { display: none; }
 .cartouche .surtitre, .cartouche .soustitre { font-size: 0.82em; font-variant: small-caps; }
 
 .spip_logos { float: right; margin-left: 0.8em; }
 
-.chapo { margin-bottom: 1.5em; font-size: 0.82em; font-weight: bold; line-height: 1.4em; }
+.chapo {
+	margin-bottom: 1.5em; 
+	font-size: 0.82em; 
+	font-weight: bold; 
+	line-height: 1.4em;
+}
 .lien { font-size: 0.82em; font-weight: bold; }
 
 .texte { line-height: 1.4em; }
 
 h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15em; }
 
-.ps, .notes, #documents_portfolio, #documents_joints { margin-top: 1.4em; padding-top: 0.2em; border-top: 2pt solid #CCC; font-size: 0.82em; }
-.ps h2, .notes h2, #documents_joints h2 { font-weight: bold; clear: both; }
+.ps, .notes, .forum-decompte, #documents_portfolio, #documents_joints {
+	margin-top: 1.4em;
+	padding-top: 0.2em;
+	border-top: 2pt solid #CCC;
+	font-size: 0.82em;
+}
+.ps h2, .notes h2, .forum-decompte, #documents_joints h2 { font-weight: bold; clear: both; }
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */
 q, blockquote { font-family: Georgia, Times, serif; }
 
-.lien, blockquote.spip, .spip_poesie, .spip_cadre, .articles li .texte { background: #FFF; margin: 1em; padding: 1em; border: 1pt dotted #CCC; }
+.lien, blockquote.spip, .spip_poesie, .spip_cadre, .liste-articles li .texte {
+	background: #FFF;
+	margin: 1em;
+	padding: 1em;
+	border: 1pt dotted #CCC; }
 
 /*  Messages de forums
 ---------------------------------------------- */
@@ -64,10 +78,10 @@ ul .forum-message { background: #EEE; border: 1pt solid #CCC; padding: 1em; marg
 
 /* Listes d'articles
 ----------------------------------------------- */
-.articles li { margin-bottom: 1em; padding-top: 0.3em; }
-.articles li .titre { font-size: 1.03em; font-weight: bold; }
-.articles li p { margin: 0; padding: 0; }
-.articles li small { display: block; font-size: 0.71em; }
+.liste-articles li { margin-bottom: 1em; padding-top: 0.3em; }
+.liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
+.liste-articles li p { margin: 0; padding: 0; }
+.liste-articles li small { display: block; font-size: 0.71em; }
 
 /*  Plan du site
 ---------------------------------------------- */
