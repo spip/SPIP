@@ -88,9 +88,10 @@ function assembler($fond, $connect='') {
 			// 1. $contexte est global
 			// (a evacuer car urls_decoder_url gere ce probleme ?)
 			// et calculer la page
-			include_spip('inc/urls');
-			list($fond,$contexte,$url_redirect) = urls_decoder_url(nettoyer_uri(),$fond,$contexte,true);
-
+			if (!test_espace_prive()) {
+				include_spip('inc/urls');
+				list($fond,$contexte,$url_redirect) = urls_decoder_url(nettoyer_uri(),$fond,$contexte,true);
+			}
 			// squelette par defaut
 			if (!strlen($fond))
 				$fond = 'sommaire';
