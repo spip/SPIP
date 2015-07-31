@@ -38,12 +38,17 @@ if (autoriser_sans_cookie($exec)) {
 			rawurlencode(str_replace('/./', '/',
 				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 				. str_replace('&amp;', '&', self())))
-		// $var_auth indique si c'est le statut qui est insuffisant
+			// $var_auth indique si c'est le statut qui est insuffisant
+			// un echec au "bonjour" (login initial) quand var_auth renvoie
+			// 'inconnu' signale sans doute un probleme de cookies
 			. ((!isset($_GET['bonjour'])) ? ''
-			    : (($var_auth == '6forum') ?
-				 '&var_echec_visiteur=true'
-			       : '&var_echec_cookie=true')),
-						       true));
+			    : ($var_auth=='inconnu'
+					? '&var_echec_cookie=true'
+					: '&var_echec_visiteur=true'
+				)
+			),
+			true)
+		);
 	}
  }
 

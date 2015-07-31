@@ -43,8 +43,7 @@ define('DEFAUT_PARTIE', DEFAUT_PARTIE_R);
 // http://doc.spip.org/@calendrier_retire_args_ancre
 function calendrier_retire_args_ancre($script)
 {
-	$script = str_replace('&amp;', '&', $script);
-  $script = str_replace('?bonjour=oui&?','?',$script);
+	$script = parametre_url($script, 'bonjour', '', '&');
   if (preg_match(',^(.*)#([^=&]*)$,',$script, $m)) {
 	  $script = $m[1];
 	  $ancre = $m[2];
