@@ -41,8 +41,6 @@ function exec_admin_plugin() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	$dir_img_pack = _DIR_IMG_PACK;
-	echo "<link rel='stylesheet' href='".find_in_path('jtip.css')."' type='text/css' media='screen' />";
-	echo "<script src='"._DIR_JAVASCRIPT."jtip.js' type='text/javascript'></script>";
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -107,8 +105,7 @@ span.dev,span.test,span.stable,span.experimental{
 }
 div.nomplugin label {display:none;}
 EOF;
-	echo "</style>";
-
+	echo "</style>\n";
 	echo "<br/><br/><br/>";
 	
 	gros_titre(_T('icone_admin_plugin'));
@@ -157,12 +154,6 @@ EOF;
 	echo "<div style='text-align:$spip_lang_right'>";
 	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
 	echo "</div>";
-
-# ce bouton est trop laid :-)
-# a refaire en javascript, qui ne fasse que "decocher" les cases
-#	echo "<div style='text-align:$spip_lang_left'>";
-#	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl'>";
-#	echo "</div>";
 
 	echo "</form></tr></table>\n";
 
@@ -236,7 +227,14 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$(document).ready(
 		function(){
 			$('input.check').click(function(){\$(this).parent().toggleClass('nomplugin_on');});
-		});");
+		});
+	$(document).ready(function(){
+		$('div.nomplugin a[@rel=info]').click(function(){
+			$(this).siblings('div.info').prepend(ajax_image_searching).load($(this).name());
+			return false;
+		});
+	});
+	");
 	while (count($liste_plugins) && $maxiter--){
 		// le rep suivant
 		$dir = dirname(reset($liste_plugins));
@@ -280,9 +278,8 @@ function ligne_plug($plug_file, $actif, $id){
 	$nom = typo($info['nom']);
 	// puce d'etat du plugin
 	// <etat>dev|experimental|test|stable</etat>
-	$url = urlencode(generer_url_ecrire('admin_plugin',"plug=$plug_file",'&'));
 	$id = substr(md5("aide_$plug_file"),0,8);
-	$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500&link=$url")."' class='jTip' name=\"".attribut_html($nom)."\" id='$id'>?</a></span>";
+	//$s .= "<span class='formInfo'><a href='".generer_url_ecrire('info_plugin',"plug=$plug_file&width=500&link=$url")."' class='jTip' name=\"".attribut_html($nom)."\" id='$id'>?</a></span>";
 	$s .= "<span class='$etat'>&nbsp;</span>";
 	if (!$erreur){
 		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
@@ -292,14 +289,15 @@ function ligne_plug($plug_file, $actif, $id){
 	$id_input++;
 
 	//$s .= bouton_block_invisible("$plug_file");
-
-	$s .= $nom;
-	$s .= "</div>";
-
+	$url_stat = generer_url_ecrire('admin_plugin',"plug=$plug_file",'&');
+	$url_dyn = generer_url_ecrire('info_plugin',"plug=$plug_file");
+	$s .= "<a href='$url_stat' rel='info' name='$url_dyn'>$nom</a>";
+	$s .= "<div class='info'>";
 	// afficher les details d'un plug en secours
 	if (_request('plug')==$plug_file)
 		$s .= affiche_bloc_plugin($plug_file, $info);
-
+	$s .= "</div>";
+	$s .= "</div>";
 	return $s;
 }
 ?>
