@@ -73,7 +73,10 @@ function RatioResizeImg( $image, $newWidth, $newHeight, $format){
 		
 		
 		// creating the destination image with the new Width and Height 
-		$destImage = imagecreate( $destWidth, $destHeight); 
+		if ($GLOBALS['flag_function_exists'] && function_exists('imagecreatetruecolor'))
+			$destImage = imagecreatetruecolor( $destWidth, $destHeight); 
+		else
+			$destImage = imagecreate( $destWidth, $destHeight); 
 		
 		//copy the srcImage to the destImage 
 		ImageCopyResized( $destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight ); 
