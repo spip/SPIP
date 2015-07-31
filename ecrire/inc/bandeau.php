@@ -179,8 +179,9 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 		$sous = "";
 		foreach($sousmenu as $souspage => $sousdetail){
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
+			$souspage = preg_replace(',\W,', '_', $souspage); # cas cfg&cfg=xx
 			if (!$image){
-					$sous .= "<li$class>"
+				$sous .= "<li$class>"
 			 . "<a href='$url' id='bando2_$souspage'>"
 			 . _T($sousdetail->libelle)
 			 . "</a>"
