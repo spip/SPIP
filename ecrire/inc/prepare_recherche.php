@@ -41,7 +41,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		 OR ($row['fraicheur']>_DELAI_CACHE_RECHERCHES)){
 		 	$rechercher = true;
 		}
-		$cache[$recherche][$table] = array("points","(recherche='$hash')");
+		$cache[$recherche][$table] = array("points","recherche='$hash'");
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
