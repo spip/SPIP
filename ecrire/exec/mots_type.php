@@ -51,7 +51,7 @@ function exec_mots_type_dist()
 	
 	$out .= "";debut_cadre_formulaire('',true);
 	$contexte = array(
-		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+		'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("mots_tous",""), "groupe-mot-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 		'titre'=>$type,
 		'redirect'=>generer_url_ecrire("mots_tous",""),
 		'new'=>_request('new') == "oui"?"oui":$id_groupe,

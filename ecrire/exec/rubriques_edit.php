@@ -81,7 +81,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	echo debut_droite('', true);
 
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$GLOBALS['spip_lang_right']),
+	'icone_retour'=>icone_inline(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("naviguer"),
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_rubrique,

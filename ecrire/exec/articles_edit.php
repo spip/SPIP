@@ -104,7 +104,7 @@ function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article,
 		: generer_url_ecrire("articles","id_article=$id_article")
 		));
 	$contexte = array(
-	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_right']),
+	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("articles"),
 	'titre'=>$titre,
 	'new'=>$new?$new:$id_article,

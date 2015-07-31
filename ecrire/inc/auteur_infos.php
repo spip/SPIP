@@ -55,7 +55,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	}
 	
 	$contexte = array(
-		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.gif","rien.gif",$GLOBALS['spip_lang_right'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
+		'icone_retour'=>($retour)?icone_inline(_T('icone_retour'),$retour,"auteur-24.gif","rien.gif",$GLOBALS['spip_lang_left'],false,($editer&$redirect)?"":" onclick=\"jQuery('#auteur_infos_edit').hide();jQuery('#auteur-voir').show();return false;\""):"",
 		'redirect'=>$redirect?rawurldecode($redirect):generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur, '&',true),
 		'titre'=>($auteur['nom']?$auteur['nom']:_T('nouvel_auteur')),
 		'new'=>$new == "oui"?$new:$id_auteur,
