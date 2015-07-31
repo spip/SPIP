@@ -81,7 +81,6 @@ ecrire/configuration/annonces.php -text
 ecrire/configuration/avertisseur.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/index.php -text
-ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/moderniseur_html.php -text
 ecrire/configuration/previsualiseur.php -text
@@ -388,6 +387,8 @@ prive/formulaires/configurer_langage.html -text
 prive/formulaires/configurer_langage.php -text
 prive/formulaires/configurer_langue.html -text
 prive/formulaires/configurer_langue.php -text
+prive/formulaires/configurer_logos.html -text
+prive/formulaires/configurer_logos.php -text
 prive/formulaires/configurer_metas.php -text
 prive/formulaires/configurer_multilinguisme.html -text
 prive/formulaires/configurer_multilinguisme.php -text
