@@ -202,7 +202,7 @@
 <div><hr>
 <BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
-	[<a href="article.php3?id_article=#ID_ARTICLE&amp;id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT||reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT||reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
 </div>
