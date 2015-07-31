@@ -95,7 +95,7 @@ agenda($mois+1, $annee, $jour, $mois, $annee);
 
 
 afficher_taches();
-afficher_ical();
+afficher_ical($connect_id_auteur);
 
 // afficher en reduction le tableau du jour suivant
 if ($spip_ecran == "large") {

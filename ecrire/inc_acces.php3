@@ -36,7 +36,12 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	return $pass;
 }
 
-function afficher_low_sec($id_auteur) {
+
+//
+// low-security : un ensemble de fonctions pour gerer de l'identification
+// faible via les URLs (suivi RSS, iCal...)
+//
+function low_sec($id_auteur) {
 	$query = "SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur";
 	$result = spip_query($query);
 
@@ -50,9 +55,18 @@ function afficher_low_sec($id_auteur) {
 	}
 }
 
+function afficher_low_sec ($id_auteur, $action='') {
+	return substr(md5($action.low_sec($id_auteur)),0,8);
+}
+
+function verifier_low_sec ($id_auteur, $cle, $action='') {
+	return ($cle == afficher_low_sec($id_auteur, $action));
+}
+
 function effacer_low_sec($id_auteur) {
 	spip_query("UPDATE spip_auteurs SET low_sec = '' WHERE id_auteur = $id_auteur");
 }
+
 
 
 function initialiser_sel() {

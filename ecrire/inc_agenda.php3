@@ -5,6 +5,7 @@
 if (defined("_ECRIRE_INC_AGENDA")) return;
 define("_ECRIRE_INC_AGENDA", "1");
 
+// pour low_sec (iCal)
 include_ecrire("inc_acces.php3");
 
 
@@ -328,10 +329,10 @@ function afficher_taches () {
 }
 
 // afficher l'encadre "lien iCal"
-function afficher_ical() {
+function afficher_ical($id) {
 	echo debut_cadre_enfonce();
 	echo "<div class='verdana1'>"._T("calendrier_synchro")."</div>";
-	icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
+	icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?id=$id&cle=".afficher_low_sec($id,'ical'), "calendrier-24.gif");
 	echo fin_cadre_enfonce();
 }
 
