@@ -1,10 +1,21 @@
-<script type='text/javascript'>var img_unpick='#CHEMIN{img_pack/item-remove.png}';</script>
+<script type='text/javascript'>var img_unpick='#CHEMIN_IMAGE{supprimer-12.png}';</script>
 <script type='text/javascript' src='#CHEMIN{formulaires/selecteur/jquery.picker.js}'></script>
+[(#REM)
 
-[(#REM) afficher la selection dans un ul class item_picked ----------------------------------------
-select=1 => le selecteur se comporte comme un select, avec un seul choix possible
+afficher la selection dans un ul class item_picked
+
+@param int select
+	1 => le selecteur se comporte comme un select, avec un seul choix possible
+@param string name
+	nom de l'input envoye
+@param string|array selected
+	liste de valeurs sour la forme array("rubrique|9","article|8",...) ou "rubrique|9,article|8,..."
+@param int id_rubrique
+@param int id_article
+@param int afficher_langue
+
 ]<ul class='item_picked[ (#ENV{select,''}|?{select})]'>
-<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected}{select}{img_unpick=#CHEMIN{img_pack/item-remove.png}}{afficher_langue}>
+<INCLURE{fond=formulaires/selecteur/inc-sel-rubriques}{name}{selected}{select}{img_unpick=#CHEMIN_IMAGE{supprimer-12.png}}{afficher_langue}>
 </ul>
 
 #SET{id_rubrique,#ENV{id_rubrique}}
