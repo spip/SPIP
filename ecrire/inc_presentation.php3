@@ -114,7 +114,11 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 	
 	if (strlen($titre) > 0) {
-		$ret .= "<h3 class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</h3>";
+		if ($spip_display == 4) {
+			$ret .= "<h3 class='cadre-titre'>$titre</h3>";
+		} else {
+			$ret .= "<div class='cadre-titre' style='z-index: 1; margin: 0px;$style_gauche'>$titre</div>";
+		}
 	}
 	
 	
@@ -1222,7 +1226,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$fid = $logo_auteur[2];
 					$hash = calculer_action_auteur ("reduire $w $h");
 	
-					$titre_boite = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre_boite;
+					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-spip_lang_right: 1px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
 					
 				}
 			}
@@ -1230,8 +1234,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			if ($spip_display == 4) {
 				echo "<li>".typo($titre)."<br>";
 			} else {
-				if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre_boite));
-				else echo debut_cadre_thread_forum("", false, "", typo($titre_boite));
+				if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", $titre_boite);
+				else echo debut_cadre_thread_forum("", false, "", $titre_boite);
 			}
 			
 			// Si refuse, cadre rouge
@@ -1394,12 +1398,13 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	@Header("Pragma: no-cache");
 	@Header("Content-Type: text/html; charset=$charset");
 	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n";
-	echo '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
+//	echo '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
 
-	if (eregi("msie", $browser_name)) {
+/*	if (eregi("msie", $browser_name)) {
 		echo '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
 		echo '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
 	}
+*/
 	echo "<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 
@@ -1423,8 +1428,10 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	if ($code) echo $code."\n";
 
+	// Supprime pour l'instant: pas de creation mathml
+	// <script type="text/javascript" src="../mathmlinHTML.js"></script>
+
 ?>
-<script type="text/javascript" src="../mathmlinHTML.js"></script>
 <script type="text/javascript" src="js_detectplugins.js"></script>
 
 <script type='text/javascript'><!--
@@ -1634,7 +1641,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 			document.cookie = "spip_svg_plugin=non";
 			
 	
-		convert2math();
+		//convert2math();
 	<?php
 		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 		// meme principe que le behavior win_width.htc pour MSIE
