@@ -70,7 +70,8 @@
 				<ul>
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
 					<li>
-						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						<strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+                        <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
 						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
 					</li>
 					</BOUCLE_documents_joints>
@@ -88,8 +89,8 @@
 
 			[(#REM) Forum de l'article ]
 			<a href="#forum" name="forum" id="forum"></a>
-			[<span class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></span>]
 			<INCLURE{fond=inc-forum}{id_article}>
+			[<p class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
 
 		</div><!-- fin contenu -->
 

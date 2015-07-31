@@ -46,8 +46,8 @@ h1 { font-size: 1.27em; font-weight: bold; }
 
 h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15em; }
 
-.ps, .notes, .forum-decompte, #documents_portfolio, #documents_joints { margin-top: 1.4em; padding-top: 0.2em; border-top: 2pt solid #CCC; font-size: 0.82em; }
-.ps h2, .notes h2, .forum-decompte, #documents_joints h2 { font-weight: bold; clear: both; }
+.ps, .notes, #documents_portfolio, #documents_joints { margin-top: 1.4em; padding-top: 0.2em; border-top: 2pt solid #CCC; font-size: 0.82em; }
+.ps h2, .notes h2, #documents_joints h2 { font-weight: bold; clear: both; }
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */

@@ -7,10 +7,10 @@
 /* Raccourcis typographiques de SPIP */
 .spip_puce { list-style-position: outside; }
 
-h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; }
+/*h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; }*/
 
 /* Paragraphes, citations, code et poesie */
-blockquote.spip, .spip_serif { font-family: Georgia, Times, serif; }
+/*blockquote.spip, .spip_serif { font-family: Georgia, Times, serif; }
 
 blockquote.spip { margin: 1em; padding-left: 1em; padding-right: 1em; border: 1px dotted; }
 
@@ -20,11 +20,11 @@ blockquote.spip { margin: 1em; padding-left: 1em; padding-right: 1em; border: 1p
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.2em; }
 .spip_cadre { width: 99%; border: 1px inset; }
 
-.spip_surligne { background: #FF6; }
+.spip_surligne { background: #FF6; }*/
 
 /* Tableaux */
-table.spip { margin: auto; margin-bottom: 1em; border: 1px solid; border-collapse: collapse; }
-table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; padding: 3px; font-weight: bold; }
+table.spip { margin-bottom: 1em; border-collapse: collapse; }
+table.spip caption { caption-side: top; padding: 3px; text-align: center; font-weight: bold; }
 table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #DDD; }
 table.spip tr.row_even { background: #EEE; }
