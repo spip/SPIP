@@ -477,6 +477,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 'infos_vos_pense_bete' => 'Vos pense-bêtes',
 
 // L
+'label_poids_fichier' => 'Taille',
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
 'lien_afficher_texte_icones' => 'Afficher les icones et le texte',
 'lien_afficher_texte_seul' => 'Afficher uniquement le texte',
