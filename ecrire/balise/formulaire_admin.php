@@ -82,7 +82,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
 		}
 	}
-
+	$statut = isset($GLOBALS['auteur_session']) ? $GLOBALS['auteur_session']['statut'] : '';
 	// Bouton de debug
 	$debug =
 	(
@@ -93,7 +93,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				AND $GLOBALS['_COOKIE']['spip_debug']
 			)
 		) AND (
-			$GLOBALS['auteur_session']['statut'] == '0minirezo'
+			$statut == '0minirezo'
 		) AND (
 			!$var_preview
 		)
@@ -117,9 +117,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	if (!$GLOBALS['var_preview'] AND (
 	(($GLOBALS['meta']['preview']=='1comite'
-		AND $GLOBALS['auteur_session']['statut'] =='1comite')
+		AND $statut =='1comite')
 	OR ($GLOBALS['meta']['preview']<>''
-		AND $GLOBALS['auteur_session']['statut'] =='0minirezo'))
+		AND $statut =='0minirezo'))
 	)) {
 		$p = ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui');
 
@@ -154,7 +154,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'use_cache' => ($use_cache ? '' : ' *'),
 			'divclass' => $float,
 			'analyser' => $analyser,
-			'xhtml_error' => $GLOBALS['xhtml_error']
+			'xhtml_error' => isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : ''
 			)
 		     );
 }
