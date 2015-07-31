@@ -190,7 +190,7 @@ function test_login($nom, $mail) {
 	// il faut eviter que le login soit vraiment trop court
 	if (strlen($login_base) < 3) {
 		$mail = strtolower(translitteration(preg_replace('/@.*/', '', $mail)));
-		$login_base = preg_replace("/[^\w\d]/", "_", $nom);
+		$login_base = preg_replace("/[^\w\d]/", "_", $mail);
 	}
 	if (strlen($login_base) < 3)
 		$login_base = 'user';
