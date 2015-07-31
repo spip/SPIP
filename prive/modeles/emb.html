@@ -1,4 +1,4 @@
 <BOUCLE_ext(DOCUMENTS types_documents) {id_document} {tout}>[(#INCLURE
-{fond=modeles/[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]})]}{id=#ID_DOCUMENT}{env}
+{fond=modeles/[(#MIME_TYPE|substr{0,[(#MIME_TYPE|strpos{/})]})]}{id=#ID_DOCUMENT}{env}{emb=' '}
 )]
 </BOUCLE_ext>
