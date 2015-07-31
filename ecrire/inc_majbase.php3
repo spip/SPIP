@@ -30,7 +30,7 @@ function maj_base() {
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
 	//   => ne pas passer par le processus de mise a jour
 	//
-#	$version_installee = 1.702; quand on a besoin de forcer une MAJ
+	//	$version_installee = 1.702; quand on a besoin de forcer une MAJ
 	if (!$version_installee) {
 		$version_installee = $spip_version;
 		maj_version($version_installee);
@@ -38,7 +38,7 @@ function maj_base() {
 	}
 
 
-//
+	//
 	// Verification des droits de modification sur la base
 	//
 
@@ -48,7 +48,7 @@ function maj_base() {
 	spip_query("INSERT INTO spip_test (b) VALUES (1)");
 	$result = spip_query("SELECT b FROM spip_test");
 	spip_query("ALTER TABLE spip_test DROP b");
-#	if (!$result) return false;
+	if (!$result) return false;
 
 	//
 	// Selection en fonction de la version

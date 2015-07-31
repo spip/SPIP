@@ -10,58 +10,59 @@ include_ecrire("inc_serialbase.php3");
 include_ecrire("inc_auxbase.php3");
 include_ecrire("inc_majbase.php3");
 
-// Fonction de cre'ation d'une table SQL nomme'e $nom
-// a` partir de 2 tableaux PHP:
+// Fonction de creation d'une table SQL nommee $nom
+// a partir de 2 tableaux PHP :
 // champs: champ => type
-// cles: type-de-cle' => champ(s)
-// si $f est vrai, c'est une auto-increment (i.e. serial) sur la Primary Key
-// si en  plus la Primary Key re'fe'rence un champ unique,
-// on cre'e aussi une table des de'pendances de caches selon ce champ.
-// Le nom des caches doit e^tre infe'rieur a` 64 caracte`res
+// cles: type-de-cle => champ(s)
+// si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
+// si en  plus la Primary Key reference un champ unique,
+// on cree aussi une table des dependances de caches selon ce champ.
+// Le nom des caches doit etre inferieur a 64 caracteres
 
-function spip_create($nom, $champs, $cles, $f=false)
-{
-  # en fait c'est table_prefix, pas forcement 'spip_' faudra finaliser
-  $nom = 'spip_' . $nom;
-  $query = ''; $keys = ""; $s = '';
-  foreach($cles as $k => $v)
-    {
-      $keys .= "$s\n\t\t$k ($v)";
-      if ($k == "PRIMARY KEY") $p = $v;
-      $s = ",";
-    }
-  $s = '';
-  foreach($champs as $k => $v)
-    {
-      $query .= "$s\n\t\t$k $v" .
-		(($f && ($p == $k)) ? " auto_increment" : '');
-      $s = ",";
-    }
-  $query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
-    	($keys ? ",$keys" : '') .
-    	")\n";
-  spip_query($query);  
-#  spip_log($query);
-  if (($f && !strpos($p, ",")))
-    {
-      $t = "spip_" . $p . _SUFFIXE_DES_CACHES;
-      spip_query("DROP TABLE IF EXISTS $t");
-      spip_log("Create $t");
-      spip_query("
-CREATE TABLE $t (
-hache char (64) NOT NULL, $p char (64) NOT NULL,
-KEY hache (hache),
-KEY $p ($p))
-");
-    }
+function spip_create_table($nom, $champs, $cles, $autoinc=false) {
+	$query = ''; $keys = ''; $s = '';
+	$nom = 'spip_' . $nom;
+
+	foreach($cles as $k => $v) {
+		$keys .= "$s\n\t\t$k ($v)";
+		if ($k == "PRIMARY KEY")
+			$p = $v;
+		$s = ",";
+	}
+	$s = '';
+
+	foreach($champs as $k => $v) {
+		$query .= "$s\n\t\t$k $v" .
+		(($autoinc && ($p == $k)) ? " auto_increment" : '');
+		$s = ",";
+	}
+
+	$query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
+		($keys ? ",$keys" : '') .
+		")\n";
+	spip_query($query);  
+
+	if (($autoinc && !strpos($p, ","))) {
+		$t = "spip_" . $p . _SUFFIXE_DES_CACHES;
+		spip_query("DROP TABLE IF EXISTS $t");
+		spip_log("Destruction/creation de la table $t");
+		spip_query("CREATE TABLE $t (hache char (64) NOT NULL,
+			$p char (64) NOT NULL, KEY hache (hache), KEY $p ($p))");
+	}
 }
 
 function creer_base() {
 	global $tables_principales, $tables_auxiliaires;
+
+	// ne pas revenir plusieurs fois
+	static $vu = false;
+	if ($vu) return; else $vu = true;
+
 	foreach($tables_principales as $k => $v)
-	  {spip_create($k, $v['field'], $v['key'], true);}
+		spip_create_table($k, $v['field'], $v['key'], true);
 	foreach($tables_auxiliaires as $k => $v)
-	  {spip_create($k, $v['field'], $v['key'], false);}
+		spip_create_table($k, $v['field'], $v['key'], false);
+
 	// Images reconnues par PHP
 	$query = "INSERT IGNORE spip_types_documents (id_type, extension, titre, inclus) VALUES ".
 		"(1, 'jpg', 'JPEG', 'image'), ".
