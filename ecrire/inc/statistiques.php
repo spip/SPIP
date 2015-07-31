@@ -79,7 +79,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$keywords = '';
 	$found = false;
 	
-	
+	if (!empty($url_site)) {
 	if (strpos('-'.$kw_referer, preg_replace(",^(https?:?/?/?)?(www\.)?,", "",$url_site))!==false) {
 		if (preg_match(",(s|search|r|recherche)=([^&]+),i", $kw_referer, $regs))
 			$keywords = urldecode($regs[2]);
@@ -120,6 +120,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			}
 			$buffer["hostname"] = $kw_referer_host;
 		}
+	}
 	}
 
 	$buffer["host"] = $host;
