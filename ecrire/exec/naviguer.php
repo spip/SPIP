@@ -305,8 +305,8 @@ if ($relief) {
 	//
 	// Les breves a valider
 	//
-	$query = "SELECT * FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') ORDER BY date_heure DESC";
-	afficher_breves(_T('info_breves_valider'), $query, true);
+	afficher_breves(_T('info_breves_valider'), "SELECT * FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') ORDER BY date_heure DESC", true);
+
 
 	//
 	// Les sites references a valider

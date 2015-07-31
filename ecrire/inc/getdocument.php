@@ -345,9 +345,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
-		spip_query ("UPDATE spip_documents
-		SET id_vignette=$id_document
-		WHERE id_document=$id_document_lie");
+		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
 		// hack pour que le retour vers ecrire/ active le bon doc.
 		$documents_actifs[] = $id_document_lie; 
 	}
@@ -356,8 +354,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	// Pour les fichiers distants remettre l'URL de base
 	if ($distant == 'oui')
-		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."'
-		WHERE id_document = $id_document");
+		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."' WHERE id_document = $id_document");
 
 	// Demander l'indexation du document
 	include_spip('inc/indexation');

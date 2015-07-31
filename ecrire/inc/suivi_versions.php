@@ -47,12 +47,10 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	if ($id_secteur > 0)
 		$req_where .= " AND articles.id_secteur = ".intval($id_secteur);
 
-	$query = "
-		SELECT versions.*, articles.statut, articles.titre 
-		FROM spip_versions AS versions, spip_articles AS articles 
-		WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req_where ";
+	$req_where = "versions.id_article = articles.id_article AND versions.id_version > 1 $req_where";
 
-	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
+	$result = spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
+
 	if (spip_num_rows($result) > 0) {
 
 		// Afficher l'entete de la boite
@@ -66,7 +64,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, "historique-24.gif");
 	
-			$total = spip_num_rows(spip_query($query . "LIMIT 0, 149"));
+			$total = spip_num_rows(spip_query("SELECT versions.*, articles.statut, articles.titre FROM spip_versions AS versions, spip_articles AS articles WHERE $req_where LIMIT 0, 149"));
 		
 			if ($total > $nb_aff) {
 				$nb_tranches = ceil($total / $nb_aff);

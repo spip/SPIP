@@ -39,8 +39,7 @@ function instituer_collaboration($debloquer_article) {
 	if ($debloquer_article AND ($id_auteur = intval($id_auteur))) {
 		if ($debloquer_article <> 'tous')
 			$where_id = "AND id_article=".intval($debloquer_article);
-		spip_query ("UPDATE spip_articles SET auteur_modif='0'
-		WHERE auteur_modif=$id_auteur $where_id");
+		spip_query("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$id_auteur $where_id");
 	}
 }
 
