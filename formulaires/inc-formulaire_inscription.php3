@@ -142,7 +142,8 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 		'form_forum_voici1' :
 		'form_forum_voici2'),
 	       array('nom_site_spip' => $nom_site_spip,
-		     'adresse_site' => $adresse_site))
+		     'adresse_site' => $adresse_site . '/',
+		     'adresse_login' => $adresse_site .'/'. _DIR_RESTREINT_ABS))
 	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
 	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
 
