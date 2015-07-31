@@ -1,8 +1,8 @@
 <BOUCLE_semaine(ARTICLES)
     {agenda date, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}>[
-(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 2})
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'calendrier-couleur2'})
 ]</BOUCLE_semaine>
-[(#DATE|agenda_memo{'', '', '', 2, 'semaine'})]
+[(#DATE|agenda_memo{'', '', '', 'calendrier-couleur2', 'semaine'})]
 </B_semaine>
 <:aucun_article:>
 <//B_semaine>

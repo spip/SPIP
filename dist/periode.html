@@ -2,9 +2,9 @@
     {agenda date, periode,
   #ENV{annee}, #ENV{mois}, #ENV{jour},
   #ENV{annee_fin}, #ENV{mois_fin}, #ENV{jour_fin}}>[
-(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 4})
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'calendrier-couleur4'})
 ]</BOUCLE_periode>
-[(#DATE|agenda_memo{'', '', '', 4, 'periode'})]
+[(#DATE|agenda_memo{'', '', '', 'calendrier-couleur4', 'periode'})]
 </B_periode>
 <:aucun_article:>
 <//B_periode>

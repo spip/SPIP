@@ -725,7 +725,7 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
   if (!$type)
     {
     $agenda[$cal][(date_anneemoisjour($date))][] =  array(
-			'CATEGORIES' => intval($cal),
+			'CATEGORIES' => $cal,
 			'DTSTART' => date_ical($date),
 			'DTEND' => date_ical($date),
                         'DESCRIPTION' => texte_script($descriptif),

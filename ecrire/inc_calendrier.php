@@ -46,70 +46,9 @@ $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "class='calendrier-
 $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "class='calendrier-icone'");
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "class='calendrier-icone'");
 
-// ce tableau est l'equivalent du switch affectant des globales dans inc.php
-// plus 2 autres issus du inc_agenda originel
-
-global $contrastes;
-$contrastes = array(
-		/// Marron
-		array("#8C6635","#F5EEE5","#1A64DF","#955708"),
-		/// Fushia
-		array("#CD006F","#FDE5F2","#E95503","#8F004D"),
-		/// Bleu
-		array("#5da7c5","#EDF3FE","#814E1B","#435E79"),
-		/// Bleu pastel
-		array("#766CF6","#EBE9FF","#869100","#5B55A0"),
-		/// Orange
-		array("#fa9a00","#ffeecc","#396B25","#472854"),
-		/// Rouge (Vermillon)
-		array("#FF0000","#FFEDED","#D302CE","#D40202"),
-		/// Orange
-		array("#E95503","#FFF2EB","#81A0C1","#FF5B00"),
-		/// Jaune
-		array("#ccaa00", "#ffffee", "#65659C","#6A6A43"),
-		/// Vert pastel
-		array("#009F3C","#E2FDEC","#EE0094","#02722C"),
-		/// Vert
-		array("#9DBA00", "#e5fd63","#304C38","#854270"),
-		/// Rouge (Bordeaux)
-		array("#640707","#FFE0E0","#346868","#684747"),
-		/// Gris
-		array("#3F3F3F","#F2F2F2","#854270","#666666"),
-		// Noir
-		array("black","#aaaaaa",  "#000000", "#ffffff"),
-		/// Caca d'oie
-		array("#666500","#FFFFE0","#65659C","#6A6A43")
-		);
-
 // 
 // Utilitaires sans html ni sql
 //
-
-# Choisit dans le tableau ci-dessus les couleurs d'un evenement
-# si l'indice fourni par CATEGORIES est negatif, inversion des plans
-# +++ un hack pour le cas special de ecrire/message.php
-
-function calendrier_div_style($evenement)
-{
-  global $contrastes;
-  global $calendrier_message_fermeture;
-  if (isset($calendrier_message_fermeture) && 
-      (ereg("=$calendrier_message_fermeture$", $evenement['URL'])))
-    {return array('white', 'black');}
-  else
-    {
-      $categ = $evenement['CATEGORIES'];
-
-      if (!is_int($categ))
-	return "";
-      else 
-	{ 
-	  if ($categ >= 0) {$f=0;$b=1;$i=$categ;}else{$f=1;$b=0;$i=0-$categ;}
-	  $i %= count($contrastes);
-	  return array($contrastes[$i][$b], $contrastes[$i][$f]);
-	}
-    }
-}
 
 // utilitaire de separation script / ancre
 // et de retrait des arguments a remplacer
@@ -386,7 +325,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		  foreach ($evts as $evenement)
 		    {
 		      list($ev, $style, $class) =
-			is_int($evenement['CATEGORIES']) ?
+			isset($evenement['DTSTART']) ?
 			http_calendrier_avec_heure($evenement, $amj) :
 			http_calendrier_sans_heure($evenement);
 		      $res .= "\n<div class='$class' style='$style'>$ev\n</div>\n";
@@ -603,7 +542,7 @@ function http_calendrier_jour_sept($annee, $mois, $jour, $echelle,  $partie_cal,
 
 
 // Conversion d'un tableau de champ ics en des balises div positionnees    
-// Les $evenements a $date commencant a $debut heure et finissant a $fin heure// ont des couleurs definies par calendrier_div_style 
+// Le champ categories indique la Classe de CSS a prendre
 // $echelle est le nombre de secondes representees par 1 pixel
 
 function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $largeur, $evt, $style='') {
@@ -647,9 +586,10 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$debut_avant = false;
 			$fin_apres = false;
 			
-			$radius_top = " radius-top";
+			/* disparues sauf erreur
+			 $radius_top = " radius-top";
 			$radius_bottom = " radius-bottom";
-
+			*/
 			if ($d_jour <= $date AND $e_jour >= $date)
 			{
 
@@ -676,7 +616,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			}
 			else
 			{
-				$bordure = "border: 1px solid";
+				$bordure = "";
 				if (substr($e,0,8) > $date) 
 				{
 					$heure_fin = 23; $minutes_fin = 59;
@@ -711,17 +651,9 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			  $sum = "<span class='calendrier-verdana10'><b>$sum</b>$lieu $perso</span>";
 			if (($largeur > 90) && $desc)
 			  $sum .=  "\n<br /><span style='color: black'>$desc</span>";
-			$colors = calendrier_div_style($evenement);
-			if ($colors)
-			{
-				list($bcolor,$fcolor) = $colors;
-			}
-			else 
-			{ 
-				$bcolor = 'white';
-				$fcolor = 'black';
-			}
-			$total .= "\n<div class='calendrier-arial10$radius_top$radius_bottom' 
+			$colors = $evenement['CATEGORIES'];
+
+			$total .= "\n<div class='calendrier-arial10 $colors' 
 	style='cursor: auto; position: absolute; overflow: hidden;$opacity z-index: " .
 				$i .
 				"; $spip_lang_left: " .
@@ -736,16 +668,12 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 				floor($fontsize * 1.3) .
 				"px; padding: " .
 				$padding . 
-				"px; background-color: " .
-				$bcolor .
-				";color: " .
-				$fcolor .
-				"; $bordure $fcolor;'
+				"px; $bordure'
 	onmouseover=\"this.style.zIndex=" . $tous . "\"
 	onmouseout=\"this.style.zIndex=" . $i . "\">" .
 			  ((!$url) ? 
 					$sum :
-				 http_href($url, $sum, $desc,"color: $fcolor")) . 
+			   http_href($url, $sum, $desc,"border: 0px",$colors)) . 
 				"</div>";
 			}
 		}
@@ -952,12 +880,10 @@ function http_calendrier_avec_heure($evenement, $amj)
 	    $opacity = " -moz-opacity: 0.5; filter: alpha(opacity=50);";
 	  }
 	} else { $opacity = "";	}
-	list($b,$c) = calendrier_div_style($evenement);
 
 	return array($sum,
-		     "padding: 2px; margin-top: 2px;
-$opacity background-color: $b; color: $c; border: 1px solid $c",
-		     "calendrier-arial10$radius_top$radius_bottom");
+		     "padding: 2px; margin-top: 2px;$opacity",
+		     "calendrier-arial10 " . $evenement['CATEGORIES']);
 }
 
 function http_calendrier_aide_mess()
@@ -1485,15 +1411,15 @@ ORDER BY messages.date_heure
 		$id_message=$row['id_message'];
 
 		if ($type=="pb")
-		  $cat = 2;
+		  $cat = 'calendrier-couleur2';
 		else {
 		  if ($type=="affich")
-		  $cat = 4;
+		  $cat = 'calendrier-couleur4';
 		  else {
 		    if ($type!="normal")
-		      $cat = 12;
+		      $cat = 'calendrier-couleur12';
 		    else {
-		      $cat = 9;
+		      $cat = 'calendrier-couleur9';
 		      $auteurs = array();
 		      $result_aut=spip_query("
 SELECT	auteurs.nom 
@@ -1508,7 +1434,6 @@ WHERE	(lien.id_message='$id_message'
 		    }
 		  }
 		}
-
 
 		$jour_avant = substr($avant, 9,2);
 		$mois_avant = substr($avant, 6,2);
