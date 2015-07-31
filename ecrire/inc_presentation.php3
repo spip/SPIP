@@ -1545,9 +1545,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		while ($row = @mysql_fetch_array($result)) {
 			$i++;
 			$ze_article = $row['id_article'];
-			$ze_titre = propre($row['titre']);
+			$ze_titre = typo($row['titre']);
 			echo "<div>Article r&eacute;serv&eacute; : <b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
-			echo " [<a href='$lien&debloquer_article=$ze_article'>d&eacute;bloquer cet article</a>]";
+
+			// ne pas proposer de debloquer si c'est l'article en cours d'edition
+			if ($ze_article != $GLOBALS['id_article_bloque']) echo " [<a href='$lien&debloquer_article=$ze_article'>d&eacute;bloquer cet article</a>]";
 			if ($i == 1) echo aide("artmodif");
 			echo "</div>";
 		}
