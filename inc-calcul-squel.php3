@@ -106,7 +106,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	  return 'return "";';
 	else
 	return  ($texte . '
-	$result = ' . calculer_requete(&$boucle) . ';
+	$result = ' . calculer_requete($boucle) . ';
 	$t0 = "";
 	$SP++;' .
 		 (($flag_parties) ? 
@@ -194,7 +194,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 	reset($tableau);
 	while (list(, $objet) = each($tableau)) {
 	  if ($objet->type == 'texte') {
-	    $c = calculer_texte($objet->texte,$id_boucle, &$boucles, $id_mere);
+	    $c = calculer_texte($objet->texte,$id_boucle, $boucles, $id_mere);
 	    if (!$exp)
 	      $exp = $c;
 	    else 
@@ -207,18 +207,18 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 	  if ($objet->type == 'include') {
 	    $c = calculer_inclure($objet->fichier,$objet->params,
 				  $id_boucle,
-				  &$boucles,
+				  $boucles,
 				  $pi);
 	    $exp .= (!$exp ? $c : (" .\n\t\t$c"));
 	  } else {
 	    if ($objet->type ==  'boucle') {
 		$nom = $objet->id_boucle;
 		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix,
-					       $objet->id_boucle, $niv+2,$rec, &$boucles, $id_mere);
+					       $objet->id_boucle, $niv+2,$rec, $boucles, $id_mere);
 		list($ac,$am) = calculer_liste($objet->cond_apres, $prefix,
-					       $objet->id_boucle, $niv+2,$rec, &$boucles, $id_mere);
+					       $objet->id_boucle, $niv+2,$rec, $boucles, $id_mere);
 		list($oc,$om) = calculer_liste($objet->cond_altern, $prefix,
-					       $objet->id_boucle, $niv+1,$rec, &$boucles, $id_mere);
+					       $objet->id_boucle, $niv+1,$rec, $boucles, $id_mere);
 
 	      // on transmet avec & pour e'viter la recopie
 	      // et re'cupe'rer les affectations (Total_boucles & Cache)
@@ -233,10 +233,10 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 		  calculer_champ($objet->fonctions, 
 				 $objet->nom_champ,
 				 $id_boucle,
-				 &$boucles,
+				 $boucles,
 				 $id_mere);
-		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,false, &$boucles, $id_mere); 
-	      	list($ac,$am) = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,false, &$boucles, $id_mere);
+		list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,false, $boucles, $id_mere); 
+	      	list($ac,$am) = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,false, $boucles, $id_mere);
 		$oc = "''";
 		$om = "";
 	    }
@@ -311,7 +311,7 @@ function calculer_squelette($squelette, $nom, $gram) {
 # pour le moment: "html" seul connu (HTML+balises BOUCLE)
   $boucles = '';
   include_local("inc-$gram-squel.php3");
-  $racine = parser($squelette, '',&$boucles);
+  $racine = parser($squelette, '',$boucles);
 
   // Traduction des se'quences syntaxique des boucles 
 
@@ -327,7 +327,7 @@ function calculer_squelette($squelette, $nom, $gram) {
 			       $boucle->param,
 			       1,
 			       true,
-			       &$boucles,
+			       $boucles,
 			       $id);
 	    }
 	} 
@@ -336,7 +336,7 @@ function calculer_squelette($squelette, $nom, $gram) {
 	  if ($boucle->type_requete != 'boucle') 
 	    {
 #	  spip_log("calcul_liste $id de type" . $boucle->type_requete);
-	  calculer_params($boucle->type_requete, $boucle->param, $id, &$boucles);
+	  calculer_params($boucle->type_requete, $boucle->param, $id, $boucles);
 
 	  $boucles[$id]->return =
 	    calculer_liste($boucle->milieu,
@@ -344,7 +344,7 @@ function calculer_squelette($squelette, $nom, $gram) {
 			   $id,
 			   1,
 			   false,
-			   &$boucles,
+			   $boucles,
 			   $id);
 	    }
 	}
@@ -353,7 +353,7 @@ function calculer_squelette($squelette, $nom, $gram) {
   // idem pour la racine
 
   list($return,$corps) =
-    calculer_liste($racine, $nom, '',0, false, &$boucles, '');
+    calculer_liste($racine, $nom, '',0, false, $boucles, '');
 
   // Corps de toutes les fonctions PHP,
   // en particulier les requetes SQL et TOTAL_BOUCLE
@@ -368,7 +368,7 @@ function calculer_squelette($squelette, $nom, $gram) {
     {
       foreach($boucles as $id => $boucle)
 	{
-	  $boucles[$id]->return = calculer_boucle($id, &$boucles); 
+	  $boucles[$id]->return = calculer_boucle($id, $boucles); 
 	}
       
       foreach($boucles as $id => $boucle) 

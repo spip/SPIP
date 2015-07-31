@@ -263,7 +263,7 @@ function parser($texte, $id_parent, &$boucles) {
       } else {
 	if ($type == 'sites') $type = 'syndication';
 	$result->type_requete = $type;
-	parser_param($match[3], &$result, $id_boucle);
+	parser_param($match[3], $result, $id_boucle);
       }
 
 	$s = "<B$id_boucle>";
@@ -302,10 +302,10 @@ function parser($texte, $id_parent, &$boucles) {
 		$texte = substr($texte, $p + strlen($s));
 	}
 
-	$result->cond_avant = parser($result->cond_avant, $id_parent,&$boucles);
-	$result->cond_apres = parser($result->cond_fin, $id_parent,&$boucles);
-	$result->cond_altern = parser($result->cond_altern, $id_parent,&$boucles);
-	$result->milieu = parser($milieu, $id_boucle,&$boucles);
+	$result->cond_avant = parser($result->cond_avant, $id_parent,$boucles);
+	$result->cond_apres = parser($result->cond_fin, $id_parent,$boucles);
+	$result->cond_altern = parser($result->cond_altern, $id_parent,$boucles);
+	$result->milieu = parser($milieu, $id_boucle,$boucles);
 	
 	$all_res = array_merge($all_res, parser_champs_etendus($debut));
 	$all_res[] = $result;

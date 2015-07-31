@@ -2,7 +2,7 @@
 
 // traduction des arguments d'une boucle par affectation du tableau $boucles
 
-function calculer_params($type, $params, $idb, $boucles)
+function calculer_params($type, $params, $idb, &$boucles)
 {
  global $tables_relations, $table_primary, $table_des_tables, $table_date;
  $boucle = &$boucles[$idb];
@@ -14,7 +14,7 @@ function calculer_params($type, $params, $idb, $boucles)
     while (list(, $param) = each($params)) {
       if ($param == 'exclus') {
 	$boucle->where[] = "$id_field!='\"." .
-	  index_pile($boucles[$idb]->id_parent, $table_primary[$type], &$boucles) .
+	  index_pile($boucles[$idb]->id_parent, $table_primary[$type], $boucles) .
 	  ".\"'";  }
       else if ($param == 'unique' OR $param == 'doublons') {
 	$boucle->doublons = true;
@@ -68,7 +68,7 @@ function calculer_params($type, $params, $idb, $boucles)
       // Gerer les traductions
       else if ($param == 'traduction') {
 	$req_where[] = "$id_table.id_trad > 0 AND  $id_table.id_trad ='\"." .
-	  index_pile($boucles[$idb]->id_parent, 'id_trad', &$boucles) . ".\"'";
+	  index_pile($boucles[$idb]->id_parent, 'id_trad', $boucles) . ".\"'";
       }
       else if ($param == 'origine_traduction') {
 	$req_where[] = "$id_table.id_trad = $id_table.id_article";
@@ -77,7 +77,7 @@ function calculer_params($type, $params, $idb, $boucles)
       // Special rubriques
       else if ($param == 'meme_parent') {
 	$boucle->where[] = "$id_table.id_parent='\"." .
-	  index_pile($boucles[$idb]->id_parent, 'id_parent', &$boucles) . ".\"'";
+	  index_pile($boucles[$idb]->id_parent, 'id_parent', $boucles) . ".\"'";
 	if ($type == 'forums') {
 	  $boucle->where[] = "$id_table.id_parent > 0";
 	  $boucle->plat = true;
@@ -88,7 +88,7 @@ function calculer_params($type, $params, $idb, $boucles)
       }
       else if (ereg("^branche *(\??)", $param, $regs)) {
 	$c = "$id_table.id_rubrique IN (\".calcul_branche(" .
-	  index_pile($boucles[$idb]->id_parent, 'id_rubrique', &$boucles) .
+	  index_pile($boucles[$idb]->id_parent, 'id_rubrique', $boucles) .
 	  ").\")";
 	if (!$regs[1])
 	  $boucle->where[] = $c ;
@@ -100,7 +100,7 @@ function calculer_params($type, $params, $idb, $boucles)
 	  // Hack spe'cifique; cf comple'ment dans calculer_boucle
 	  $boucle->tout = index_pile($boucles[$idb]->id_parent,
 				     'id_rubrique',
-				     &$boucles);
+				     $boucles);
 	}
       // Restriction de valeurs (implicite ou explicite)
       else if (ereg('^([a-zA-Z_]+) *(\??)((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
@@ -110,7 +110,7 @@ function calculer_params($type, $params, $idb, $boucles)
 	// Valeur de comparaison
 	if ($match[3])
 	  {
-	    $val = calculer_param_dynamique($match[6], &$boucles, $idb);
+	    $val = calculer_param_dynamique($match[6], $boucles, $idb);
 	  }
 	else {
 	  $val = $match[1];
@@ -120,7 +120,7 @@ function calculer_params($type, $params, $idb, $boucles)
 	  // Si id_enfant, comparer l'id_objet avec l'id_parent de la boucle superieure
 	  else if ($val == 'id_enfant')
 	    $val = 'id_parent';
-	  $val = index_pile($boucles[$idb]->id_parent, $val, &$boucles) ;
+	  $val = index_pile($boucles[$idb]->id_parent, $val, $boucles) ;
 	}
 	if (ereg('^\$',$val))
 	  $val = '" . addslashes(' . $val . ') . "';
@@ -288,7 +288,7 @@ function calculer_params($type, $params, $idb, $boucles)
 	}
 	else { 
 # tris par crite`re dynamique ou bizarres (formule composee, virgules, etc).
-	  $boucle->order = calculer_param_dynamique($tri, &$boucles, $idb);
+	  $boucle->order = calculer_param_dynamique($tri, $boucles, $idb);
 	}
       }
 # pas de else, c~a a du etre e'vacue' lors du phrase'
@@ -300,7 +300,7 @@ function calculer_params($type, $params, $idb, $boucles)
 function calculer_param_dynamique($val, &$boucles, $idb)
 {
   if (ereg("^#(.*)$",$val,$m))
-    return index_pile($boucles[$idb]->id_parent, $m[1], &$boucles) ;
+    return index_pile($boucles[$idb]->id_parent, $m[1], $boucles) ;
   else
     {if (ereg('^\$(.*)$',$val,$m))
 	return '$PileRow[0][\''. $m[1] ."']";

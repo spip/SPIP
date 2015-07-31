@@ -6,7 +6,7 @@
 # Teste' & valide', mais mettre c~a en option car l'incidence sur des squelettes
 # avec de'lais configure's pour l'ancienne version peuvent en souffir
 
-function calculer_inclure($fichier, $params, $id_boucle, $boucles, $pi)
+function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi)
 {
 	global $dossier_squelettes;
 	/*	if (!$pi && (preg_match("/\s*<.php\s*.fond\s*=\s*[\"\']([^;]*)[\"\']\s*;\s*.delais\s*=\s*([^;]*);\s*include\s*..inc-public.php3?..;\s*.>/",
@@ -26,7 +26,7 @@ implode('',file((($dossier_squelettes) &&
 		    $l .= "'$var' =>" .
 		      ($val ?
 		       ("'" . addslashes($val) . "'") :
-		       (index_pile($id_boucle, $var, &$boucles))) .
+		       (index_pile($id_boucle, $var, $boucles))) .
 		      ",";
 		  }
 		}
@@ -47,7 +47,7 @@ implode('',file((($dossier_squelettes) &&
 		    if ($val)
 		      $l[] = "'\'$var\' => " . addslashes($val) . "'";
 		    else
-		      $l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, &$boucles) . ") .'\''";
+		      $l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\''";
 		  }
 		}
 	      }
@@ -70,7 +70,7 @@ implode('',file((($dossier_squelettes) &&
 // donc qqch qui peut e^tre l'argument d'un Return 
 // ou la partie droite d'une affectation
 
-function calculer_texte($texte, $id_boucle, $boucles, $id_mere)
+function calculer_texte($texte, $id_boucle, &$boucles, $id_mere)
 {
 	$code = ".\n '".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
 

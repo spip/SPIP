@@ -25,7 +25,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 			  array('fond' => $fond, 
 				'cache_incluant' => $cache_incluant,
 				'contexte' => $contexte_inclus),
-			  &$pile_delais[$ptr_delais]);
+			  $pile_delais[$ptr_delais]);
     
    // si son de'lai est + court que l'incluant, il pre'domine
    if ($ptr_delais == 1)

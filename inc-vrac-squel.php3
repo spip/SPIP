@@ -14,9 +14,9 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
   case 'INTRODUCTION':
 		$code = 'calcul_introduction(\'' .
 		  $boucles[$id_boucle]->type_requete . "',\n" .
-		  index_pile($id_boucle,  "texte", &$boucles) . ",\n" .
-		  index_pile($id_boucle,  "chapo", &$boucles) . ",\n" .
-		  index_pile($id_boucle,  "descriptif", &$boucles) . ")\n"; 
+		  index_pile($id_boucle,  "texte", $boucles) . ",\n" .
+		  index_pile($id_boucle,  "chapo", $boucles) . ",\n" .
+		  index_pile($id_boucle,  "descriptif", $boucles) . ")\n"; 
 		break;
 
   case 'NOM_SITE_SPIP':
@@ -59,7 +59,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
   case 'URL_ARTICLE':
 		$code = "generer_url_article(" . 
-		  index_pile($id_boucle,  'id_article', &$boucles) . 
+		  index_pile($id_boucle,  'id_article', $boucles) . 
 		  ")" ;
 		  if ($boucles[$id_boucle]->hash)
 		    $code = "url_var_recherche(" . $code . ")";
@@ -67,7 +67,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
   case 'URL_RUBRIQUE':
 		$code = "generer_url_rubrique(" . 
-		  index_pile($id_boucle,  'id_rubrique', &$boucles) . 
+		  index_pile($id_boucle,  'id_rubrique', $boucles) . 
 		  ")" ;
 		  if ($boucles[$id_boucle]->hash)
 		    $code = "url_var_recherche(" . $code . ")";
@@ -75,7 +75,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
   case 'URL_BREVE':
 		$code = "generer_url_breve(" .
-		  index_pile($id_boucle,  'id_breve', &$boucles) . 
+		  index_pile($id_boucle,  'id_breve', $boucles) . 
 		  ")";
 		  if ($boucles[$id_boucle]->hash)
 		    $code = "url_var_recherche(" . $code . ")";
@@ -83,24 +83,24 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
   case 'URL_MOT':
 		$code = "generer_url_mot(" .
-		  index_pile($id_boucle,  'id_mot', &$boucles) .
+		  index_pile($id_boucle,  'id_mot', $boucles) .
 		  ")";
 		$code = "url_var_recherche(" . $code . ")";
 		break;
 
   case 'URL_FORUM':
 		$code = "generer_url_forum(" .
-		  index_pile($id_boucle,  'id_forum', &$boucles) .")";
+		  index_pile($id_boucle,  'id_forum', $boucles) .")";
 		break;
 
   case 'URL_DOCUMENT':
 		$code = "generer_url_document(" .
-		  index_pile($id_boucle,  'id_document', &$boucles) . ")";
+		  index_pile($id_boucle,  'id_document', $boucles) . ")";
 		break;
 
   case 'URL_AUTEUR': # 1.7.2
                $code = "generer_url_auteur(" .
-                 index_pile($id_boucle,  'id_forum', &$boucles) .")";
+                 index_pile($id_boucle,  'id_forum', $boucles) .")";
                if ($boucles[$id_boucle]->hash)
                    $code = "url_var_recherche(" . $code . ")";
                break;
@@ -142,7 +142,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
   case 'POPULARITE_ABSOLUE':
 		$code = 'ceil(' .
-		  index_pile($id_boucle,  "popularite", &$boucles) .
+		  index_pile($id_boucle,  "popularite", $boucles) .
 		  ')';
 		break;
 
@@ -188,7 +188,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		$milieu = "
 		include_ecrire('inc_documents.php3');";
 		$code = "embed_document(" .
-		  index_pile($id_boucle,  'id_document', &$boucles) . ", '" .
+		  index_pile($id_boucle,  'id_document', $boucles) . ", '" .
 			($fonctions) ? join($fonctions, "|") : "" .
 			"', false)";
 		$fonctions = "";
@@ -269,7 +269,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
   case 'LOGO_RUBRIQUE_SURVOL':
   case 'LOGO_DOCUMENT' :
     // retour imme'diat: filtres de'rogatoires traite's dans la fonction
-    return calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere);
+    return calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
     break; 
 
   default:
