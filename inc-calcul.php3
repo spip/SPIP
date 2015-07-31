@@ -386,4 +386,17 @@ function spip_abstract_free($res, $serveur='')
   $f = serveur_defini('spip_' . $serveur . '_free', $serveur);
   return $f($res);
 }
+
+# une composition tellement fréquente...
+
+function spip_abstract_fetsel(
+	$select = array(), $from = array(), $where = '',
+	$groupby = '', $orderby = '', $limit = '',
+	$sousrequete = '', $cpt = '',
+	$table = '', $id = '', $serveur='') {
+	return spip_abstract_fetch(spip_abstract_select(
+$select, $from, $where,	$groupby, $orderby, $limit,
+$sousrequete, $cpt, $table, $id, $serveur),
+				   $serveur);
+}
 ?>
