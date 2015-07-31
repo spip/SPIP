@@ -708,7 +708,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 
 	    $val = array();
 	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
-	      $v = calculer_liste($p, array(), $boucles, $boucles[$idb]->id_parent);
+	      $v = calculer_liste($p, array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
 	      $val[] = (preg_match(",^(\n//[^\n]*\n)?'(.*)'$,", $v, $r) ? 
 			($r[1] . "'" . addslashes($r[2]) . "'") :
 			("addslashes(" . $v . ")"));
