@@ -19,6 +19,7 @@ $GLOBALS['i18n_eo'] = array(
 'admin_modifier_mot' => 'Modifu tiun &#265;i &#349;losilvorton',
 'admin_modifier_rubrique' => 'Modifu tiun &#265;i rubrikon',
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
+'aide_non_disponible' => 'Tiu parto de la konektita helpilo ankora&#365; ne estas disponebla en tiu lingvo.',
 'avis_acces_interdit' => 'Malpermesita aliro.',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne estas valida',
