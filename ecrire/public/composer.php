@@ -572,19 +572,31 @@ function calculer_select ($select = array(), $from = array(),
 	
 	$sfrom = '';
 	$equiv = array();
-	for($k = count($join); $k > 0; $k--) {
-		list($t,$c) = $join[$k];
-		$cle = "L$k";
+	$k = count($join);
+	foreach(array_reverse($join) as $cledef=>$j) {
+		$cle = $cledef;
+		if (count($join[$cle])<3){
+			list($t,$c) = $join[$cle];
+			$carr = $c;
+		}
+		else
+			// le nom de la cle d'arrivee est different de celui du depart, et est specifie
+			list($t,$c,$carr) = $join[$cle];
+		// si le nom de la jointure n'a pas ete specifiee, on prend Lx avec x sont rang dans la liste
+		// pour compat avec ancienne convention
+		if (intval($cle))
+			$cle = "L$k";
 		if (!$menage
 		OR strpos($sfrom, " $cle.")
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
-			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$c)" . $sfrom;
+			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$carr)" . $sfrom;
 			$equiv[]= $c;
-		} else { unset($join[$k]);}
+		} else { unset($join[$cledef]);}
 		unset($from[$cle]);
+		$k--;
 	}
 
 	// Regarder si la table principale ne sert finalement a rien comme dans
