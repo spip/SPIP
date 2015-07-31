@@ -48,7 +48,7 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 		if ($mode===-1)
 			return array('action'=>$action,'arg'=>$arg,'hash'=>$hash);
 		else
-			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $att);
+			return generer_url_action($action, "arg=$arg&hash=$hash" . (!$r ? '' : "&redirect=$r"), $mode, $public);
 	}
 
 	$att .= " style='margin: 0px; border: 0px'";
