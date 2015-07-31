@@ -126,16 +126,12 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 		$desc['table']= $nom_sql;
 		$desc['connexion']= $serveur;
-		// objet_type peut provoquer un appel reentrant ici.
-		// pour ne pas faire de boucle infinie, on stocke ce qu'on a deja trouve
-		$connexion['tables'][$nom] = $desc;
 
-		$surnom = (strpos($nom, $connexion['prefixe']) === 0) ? substr($nom, strlen($connexion['prefixe'])+1) : $nom;
-		$table = table_objet(objet_type($surnom));
-		$desc['titre'] =
-		  isset($GLOBALS['table_titre'][$table]) ? $GLOBALS['table_titre'][$table] : '';
-		$desc['date'] =
-		  isset($GLOBALS['table_date'][$table]) ? $GLOBALS['table_date'][$table] : '';
+		// charger les infos declarees pour cette table
+		// en lui passant les infos connues
+		include_spip('base/objets');
+		$desc = lister_table_objets_sql($nom_sql,$desc);
+		
 		$connexion['tables'][$nom] = $desc;
 		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur

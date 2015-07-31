@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
+include_spip('base/objets');
 
 //
 // Utilitaires indispensables autour des serveurs SQL
@@ -233,107 +234,6 @@ function _q ($a) {
 		 : join(",", array_map('_q', $a)));
 }
 
-// Nommage bizarre des tables d'objets
-// http://doc.spip.org/@table_objet
-function table_objet($type,$serveur='') {
-	static $surnoms = null;
-	$type = preg_replace(',^spip_|^id_|s$,', '', $type);
-	if (!$type) return;
-	if (!$surnoms){
-		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
-		$surnoms = pipeline('declarer_tables_objets_surnoms',
-			array(
-				# pour les modeles
-				# a enlever ?
-				'doc' => 'documents',
-				'img' => 'documents',
-				'emb' => 'documents',
-			));
-	}
-	if (isset($surnoms[$type]))
-		return $surnoms[$type];
-
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
-		return $desc['id_table'];
-	elseif ($desc = $trouver_table($type,$serveur))
-		return $desc['id_table'];
-
-	spip_log( 'table_objet('.$type.') calculee sans verification', _LOG_AVERTISSEMENT);
-	return rtrim($type,'s')."s"; # cas historique ne devant plus servir
-}
-
-// http://doc.spip.org/@table_objet_sql
-function table_objet_sql($type,$serveur='') {
-	global $table_des_tables;
-	$nom = table_objet($type, $serveur);
-	include_spip('public/interfaces');
-	if (isset($table_des_tables[$nom])) {
-		$t = $table_des_tables[$nom];
-		$nom = 'spip_' . $t;
-	}
-	return $nom ;
-}
-
-// http://doc.spip.org/@id_table_objet
-function id_table_objet($type,$serveur='') {
-	$type = objet_type($type,$serveur);
-	if (!$type) return;
-	$t = table_objet($type);
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	$desc = $trouver_table($t,$serveur);
-	return @$desc['key']["PRIMARY KEY"];
-}
-
-// http://doc.spip.org/@objet_type
-function objet_type($table_objet){
-	static $surnoms = null;
-	if (!$table_objet) return;
-	if (!$surnoms)
-		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
-		$surnoms = pipeline('declarer_type_surnoms', array('racine-site'=>'site'));
-
-	// scenario de base
-	// le type est decline a partir du nom de la table en enlevant le prefixe eventuel
-	// et la marque du pluriel
-	// on accepte id_xx en entree aussi
-	$type = preg_replace(',^spip_|^id_|s$,', '', $table_objet);
-	if (isset($surnoms[$type]))
-		return $surnoms[$type];
-
-	// securite : eliminer les caracteres non \w
-	$type = preg_replace(',[^\w-],','',$type);
-	
-	// si le type redonne bien la table c'est bon
-	// oui si table_objet ressemblait deja a un type
-	if ( $type==$table_objet
-		OR (table_objet($type)==$table_objet)
-	  OR (table_objet_sql($type)==$table_objet))
-	  return $type;
-
-	// sinon on passe par la cle primaire id_xx pour trouver le type
-	// car le s a la fin est incertain
-	// notamment en cas de pluriel derogatoire
-	// id_jeu/spip_jeux id_journal/spip_journaux qui necessitent tout deux
-	// une declaration jeu => jeux, journal => journaux
-	// dans le pipeline declarer_tables_objets_surnoms
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	if (
-		($desc = $trouver_table($table_objet)
-		 OR $desc = $trouver_table(table_objet($type)))
-					
-	  AND isset($desc['key']["PRIMARY KEY"])){
-		$primary = $desc['key']["PRIMARY KEY"];
-		$primary = explode(',',$primary);
-		$primary = reset($primary);
-		$type = preg_replace(',^id_,', '', $primary);
-		$type = preg_replace(',^spip_|^id_|s$,', '', table_objet($type));
-	}
-	if (isset($surnoms[$type]))
-		$type = $surnoms[$type];
-	// on a fait ce qu'on a pu
-	return $type;
-}
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
 // http://doc.spip.org/@table_jointure
