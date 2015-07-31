@@ -252,9 +252,7 @@ function fichier_session($alea, $tantpis=false) {
 
 	if (!isset($GLOBALS['meta'][$alea])) {
 		include_spip('base/abstract_sql');
-
-		$r = sql_fetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
-		$GLOBALS['meta'][$alea] = $r ? $r['valeur'] : '';
+		$GLOBALS['meta'][$alea]  = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea), '','', '', '', '', 'continue');
 	}
 
 	if (!$GLOBALS['meta'][$alea] AND !$tantpis) {
