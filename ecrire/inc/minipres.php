@@ -192,11 +192,11 @@ function http_style_background($img, $att='')
 
 // Attention: generer_url_ecrire peut rajouter des args
 
-function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
+function generer_url_post_ecrire($script, $args='', $name='', $ancre='', $onchange='') {
 	include_spip('inc/filtres');
 	$action = generer_url_ecrire($script, $args);
 	if ($name) $name = " name='$name'";
-	return "\n<form action='$action$ancre'$name method='post'>"
+	return "\n<form action='$action$ancre'$name method='post'$onchange>"
 	.form_hidden($action);
 }
 

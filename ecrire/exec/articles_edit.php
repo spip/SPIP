@@ -147,7 +147,7 @@ echo "<P><HR><P>";
 	// (et donc: pas de lien de traduction)
 	if ($lier_trad) $id_article = "";
 	
-	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire');
+	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire','',' onchange="disable_other_forms(this);"');
 
 	if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
@@ -160,7 +160,11 @@ echo "<P><HR><P>";
 	if (($options == "avancees" AND $articles_surtitre) OR $surtitre) {
 		echo "<B>"._T('texte_sur_titre')."</B>";
 		echo aide ("arttitre");
-		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
+		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'"
+// Pour faire fonctionner le onchange sur Safari il faudrait modifier
+// chaque input. Conclusion : c'est la mauvaise methode.
+// .' onchange="disable_other_forms(this.parentNode);"'.
+."><P>";
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='surtitre' VALUE=\"$surtitre\" >";

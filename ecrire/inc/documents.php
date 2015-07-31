@@ -581,7 +581,8 @@ function construire_upload($corps, $args, $enctype='')
 	return "\n<form method='post' action='" . generer_url_action('joindre') .
 	  "'" .
 	  (!$enctype ? '' : " enctype='$enctype'") .
-	  " style='border: 0px; margin: 0px;'>\n" .
+	  " style='border: 0px; margin: 0px;'
+	  >\n" .
 	  "<div>" .
   	  "\n<input type='hidden' name='action' value='joindre' />" .
 	  $res . $corps . "</div></form>";
@@ -991,7 +992,6 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	echo "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
-
 	echo afficher_upload($id, _T('info_telecharger'),'','vignette',$type);
 
 	fin_cadre_relief();

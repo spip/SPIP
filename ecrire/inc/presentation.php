@@ -98,7 +98,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$ret .= "<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
 		if ($fonction) {
-			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px");
+			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px") . ">";
 			$ret .= http_img_pack($fonction, "", "");
 			$ret .= "</div>";
 		}
@@ -2036,8 +2036,8 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 	$id_rubrique = intval($id_rubrique);
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
-		. 'onLoad="'
-		. "setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
+		. ' onLoad="'
+		. "forms_manager();setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
 		. '">');
 
 	if ($spip_ecran == "large") $largeur = 974;
@@ -2313,7 +2313,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page",""))._T('info_en_cours_validation'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("articles_page",""))._T('info_en_cours_validation'), "article-24.gif", $couleur_foncee, 'white', false);
 			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2330,7 +2330,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus('./')._T('info_articles_proposes'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus('./')._T('info_articles_proposes'), "article-24.gif", $couleur_foncee, 'white', false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
