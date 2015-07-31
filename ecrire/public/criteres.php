@@ -1052,7 +1052,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
 	$desc = $boucle->show;
-	$date = array();
+	$col_vraie = null;
 
 	list($fct, $col, $op, $val, $args_sql) =
 		calculer_critere_infixe_ops($idb, $boucles, $crit);
@@ -1087,7 +1087,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	}
 		// Cas particulier : expressions de date
 	else if ($c = calculer_critere_infixe_date($idb, $boucles, $col)){
-		list($col,$date) = $c;
+		list($col,$col_vraie) = $c;
 		$table = '';
 	}
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)){
@@ -1114,16 +1114,18 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		list($col, $col_alias, $table, $where_complement, $desc) = $r;
 	}
 
+	$col_vraie = ($col_vraie?$col_vraie:$col);
 	// Dans tous les cas,
 	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL) et passer dans sql_quote avec le type si connu
 	// et int sinon si la valeur est numerique
 	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 	if ($op=='=' OR in_array($op, $table_criteres_infixes)){
+
 		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
 		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
 		if (preg_match(",^\\A(\s*//.*?$\s*)?\"'(-?\d+)'\"\\z,ms", $val[0], $r))
-			$val[0] = $r[1].'"'.sql_quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col])?$desc['field'][$col]:'int NOT NULL')).'"';
+			$val[0] = $r[1].'"'.sql_quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col_vraie])?$desc['field'][$col_vraie]:'int NOT NULL')).'"';
 
 		// sinon expliciter les
 		// sql_quote(truc) en sql_quote(truc,'',type)
@@ -1136,7 +1138,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		  AND !$r[3]) {
 			$r = $r[1]
 				.($r[2] ? $r[2] : ",''")
-				.",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int NOT NULL')."'";
+				.",'".(isset($desc['field'][$col_vraie])?addslashes($desc['field'][$col_vraie]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
 		}
 	}
@@ -1144,8 +1146,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	// leurs requetes par defaut, notamment le champ statut
 	// Ne pas confondre champs de la table principale et des jointures
 	if ($table===$boucle->id_table){
-		$boucles[$idb]->modificateur['criteres'][$col] = true;
-		if ($col_alias!=$col)
+		$boucles[$idb]->modificateur['criteres'][$col_vraie] = true;
+		if ($col_alias!=$col_vraie)
 			$boucles[$idb]->modificateur['criteres'][$col_alias] = true;
 	}
 
@@ -1494,6 +1496,8 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 	$date_compare = "\"' . normaliser_date(".
 	                calculer_argument_precedent($idb, $pred, $boucles).
 	                ") . '\"";
+
+	$col_vraie = $date_orig;
 	$date_orig = $boucle->id_table.'.'.$date_orig;
 
 	switch ($col) {
@@ -1536,7 +1540,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 			       $date_orig.")";
 			break;
 	}
-	return array($col,$regs);
+	return array($col,$col_vraie);
 }
 
 // http://doc.spip.org/@calculer_param_date
