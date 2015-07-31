@@ -1680,10 +1680,7 @@ function debut_droite($rubrique="", $return= false) {
 
 	if ($spip_display == 4) $res .= " -->";
 
-	if ($options == "avancees") {
-
-		$res .= liste_articles_bloques();
-	}
+	$res .= liste_articles_bloques();
 
 	if ($spip_ecran != "large") {
 		$res .= "</div></td><td style='width: 50px'>&nbsp;</td>";
@@ -1727,15 +1724,26 @@ function liste_articles_bloques()
 				$ze_article = $row['id_article'];
 				$ze_titre = $row['titre'];
 				$statut = $row["statut"];
-					
-				$res .= "\n<div class='$statut spip_xx-small'><a  href='" 
+
+				$res .= "\n<div class='$statut spip_xx-small'>"
+				. "\n<div style='float:right; '>"
+				. debloquer_article($ze_article,_T('lien_liberer'))
+				. "</div>"
+				. "<a  href='" 
 				. generer_url_ecrire("articles","id_article=$ze_article")
 				. "'>$ze_titre</a>"
+				. "</div>";
+			}
+
+			if (count($articles_ouverts) >= 4) {
+				$res .= "\n<div class='spip_x-small'>"
 				. "\n<div style='text-align:right; '>"
-				. debloquer_article($ze_article,_T('lien_liberer'))
+				. debloquer_article('tous', _T('lien_liberer_tous'))
 				. "</div>"
 				. "</div>";
 			}
+
+
 			$res .= "</div></div>";
 		}
 	}
@@ -1777,13 +1785,20 @@ function fin_page()
 
 // http://doc.spip.org/@debloquer_article
 function debloquer_article($arg, $texte) {
+
+	// cas d'un article pas liberable : on esst sur sa page d'edition
+	if (_request('exec') == 'articles_edit'
+	AND $arg == _request('id_article'))
+		return '';
+
 	$lien = parametre_url(self(), 'debloquer_article', $arg, '&');
 	return "<a href='" .
 	  generer_action_auteur('instituer_collaboration',$arg, _DIR_RESTREINT_ABS . $lien) .
 	  "' title=\"" .
-	  entites_html($texte) .
-	  "\">$texte&nbsp;" .
-	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
+	  attribut_html($texte) .
+	  "\">"
+	  . ($arg == 'tous' ? "$texte&nbsp;" : '')
+	  . http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
 			"width='7' height='7' align='baseline'") .
 	  "</a>";
 }
@@ -1791,6 +1806,7 @@ function debloquer_article($arg, $texte) {
 // http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
+
 	// propose de tout publier + nombre d'elements
 	// du code experimental qu'on peut activer via un switch
 	define('_MODE_MEME_RUBRIQUE', 'non');
