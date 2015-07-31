@@ -33,14 +33,14 @@ function sql_serveur($ins_sql='', $serveur='', $continue=false) {
 
 // Demande si un charset est disponible. 
 // http://doc.spip.org/@sql_get_charset
-function sql_get_charset($charset, $serveur='',$requeter=true){
+function sql_get_charset($charset, $serveur='', $option=true){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
 	$desc = sql_serveur('', $serveur, true,true);
 	$desc = $desc[sql_ABSTRACT_VERSION];
 	$c = $desc['charsets'][$charset];
 	if ($c) {
 		if (function_exists($f=@$desc['get_charset'])) 
-			if ($f($c, $serveur, $requeter)) return $c;
+			if ($f($c, $serveur, $option!==false)) return $c;
 	}
 	spip_log("SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.");
 	return false;
@@ -49,9 +49,10 @@ function sql_get_charset($charset, $serveur='',$requeter=true){
 // Regler le codage de connexion
 
 // http://doc.spip.org/@sql_set_charset
-function sql_set_charset($charset,$serveur='',$requeter=true){
-	$f = sql_serveur('set_charset', $serveur);
-	return $f($charset, $serveur, $requeter);
+function sql_set_charset($charset,$serveur='', $option=true){
+	$f = sql_serveur('set_charset', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($charset, $serveur, $option!==false);
 }
 
 // Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
@@ -64,15 +65,16 @@ function sql_set_charset($charset,$serveur='',$requeter=true){
 // - le crite`re de limite (Limit)
 // - le tableau des des post-conditions a remplir (Having)
 // - le serveur sollicite (pour retrouver la connexion)
+// - option peut avoir 3 valeurs : true -> executer la requete, false -> ne pas l'executer mais la retourner, 'continue' -> ne pas echouer en cas de serveur sql indisponible
 
 // http://doc.spip.org/@sql_select
 function sql_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
-	$serveur='',$requeter=true) {
-
-	$f = sql_serveur('select', $serveur);
-	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $requeter);
+	$serveur='', $option=true) {
+	$f = sql_serveur('select', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option!==false);
 }
 
 // Comme ci-dessus, mais ramene seulement et tout de suite le nombre de lignes
@@ -80,47 +82,54 @@ function sql_select (
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
 		      $groupby = array(), $limit = '', $having = array(),
-	$serveur='',$requeter=true) {
-  	$f = sql_serveur('countsel', $serveur);
-	return $f($from, $where, $groupby, $limit, '', $having, $serveur, $requeter);
+	$serveur='', $option=true) {
+	$f = sql_serveur('countsel', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($from, $where, $groupby, $limit, '', $having, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_alter
-function sql_alter($q, $serveur='',$requeter=true) {
-	$f = sql_serveur('alter', $serveur);
-	return $f($q, $serveur, $requeter);
+function sql_alter($q, $serveur='', $option=true) {
+	$f = sql_serveur('alter', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($q, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_fetch
-function sql_fetch($res, $serveur='',$requeter=true) {
-	$f = sql_serveur('fetch', $serveur);
-	return $f($res, NULL, $serveur, $requeter);
+function sql_fetch($res, $serveur='', $option=true) {
+	$f = sql_serveur('fetch', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($res, NULL, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_listdbs
-function sql_listdbs($serveur='',$requeter=true) {
-  	$f = sql_serveur('listdbs', $serveur);
+function sql_listdbs($serveur='', $option=true) {
+	$f = sql_serveur('listdbs', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
 	return $f($serveur);
 }
 
 // http://doc.spip.org/@sql_selectdb
-function sql_selectdb($res, $serveur='',$requeter=true)
+function sql_selectdb($res, $serveur='', $option=true)
 {
-	$f = sql_serveur('selectdb', $serveur);
-	return $f($res, $serveur, $requeter);
+	$f = sql_serveur('selectdb', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($res, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_count
-function sql_count($res, $serveur='',$requeter=true)
+function sql_count($res, $serveur='', $option=true)
 {
-	$f = sql_serveur('count', $serveur);
-	return $f($res, $serveur, $requeter);
+	$f = sql_serveur('count', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($res, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_free
-function sql_free($res, $serveur='',$requeter=true)
+function sql_free($res, $serveur='', $option=true)
 {
-	$f = sql_serveur('free', $serveur);
+	$f = sql_serveur('free', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
 	return $f($res);
 }
 
@@ -129,86 +138,96 @@ function sql_free($res, $serveur='',$requeter=true)
 // Elle est fournie pour permettre l'actualisation de vieux codes 
 // par un Sed brutal qui peut donner des resultats provisoirement acceptables
 // http://doc.spip.org/@sql_insert
-function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='',$requeter=true)
+function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('insert', $serveur);
-	return $f($table, $noms, $valeurs, $desc, $serveur, $requeter);
+	$f = sql_serveur('insert', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_insertq
-function sql_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true)
+function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('insertq', $serveur);
-	return $f($table, $couples, $desc, $serveur, $requeter);
+	$f = sql_serveur('insertq', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $couples, $desc, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_insertq_multi
-function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true)
+function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('insertq_multi', $serveur);
-	return $f($table, $tab_couples, $desc, $serveur, $requeter);
+	$f = sql_serveur('insertq_multi', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_update
-function sql_update($table, $exp, $where='', $desc=array(), $serveur='',$requeter=true)
+function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('update', $serveur);
-	return $f($table, $exp, $where, $desc, $serveur, $requeter);
+	$f = sql_serveur('update', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
 }
 
 // Update est presque toujours appelee sur des constantes ou des dates
 // Cette fonction est donc plus utile que la precedente,d'autant qu'elle
 // permet de gerer les differences de representation des constantes.
 // http://doc.spip.org/@sql_updateq
-function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='',$requeter=true)
+function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('updateq', $serveur);
-	return $f($table, $exp, $where, $desc, $serveur, $requeter);
+	$f = sql_serveur('updateq', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_delete
-function sql_delete($table, $where='', $serveur='',$requeter=true)
+function sql_delete($table, $where='', $serveur='', $option=true)
 {
-	$f = sql_serveur('delete', $serveur);
-	return $f($table, $where, $serveur, $requeter);
+	$f = sql_serveur('delete', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $where, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_replace
-function sql_replace($table, $couples, $desc=array(), $serveur='',$requeter=true)
+function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('replace', $serveur);
-	return $f($table, $couples, $desc, $serveur, $requeter);
+	$f = sql_serveur('replace', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $couples, $desc, $serveur, $option!==false);
 }
 
 
 // http://doc.spip.org/@sql_replace_multi
-function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='',$requeter=true)
+function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $option=true)
 {
-	$f = sql_serveur('replace_multi', $serveur);
-	return $f($table, $tab_couples, $desc, $serveur, $requeter);
+	$f = sql_serveur('replace_multi', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_drop_table
-function sql_drop_table($table, $exist='', $serveur='',$requeter=true)
+function sql_drop_table($table, $exist='', $serveur='', $option=true)
 {
-	$f = sql_serveur('drop_table', $serveur);
-	return $f($table, $exist, $serveur, $requeter);
+	$f = sql_serveur('drop_table', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($table, $exist, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_showbase
-function sql_showbase($spip=NULL, $serveur='',$requeter=true)
+function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
 	if ($spip == NULL){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$spip = $connexion['prefixe'] . '%';
 	}
 	
-	$f = sql_serveur('showbase', $serveur);
-	return $f($spip, $serveur, $requeter);
+	$f = sql_serveur('showbase', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($spip, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_showtable
-function sql_showtable($table, $table_spip = false, $serveur='',$requeter=true)
+function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 {
 	if ($table_spip){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
@@ -216,8 +235,9 @@ function sql_showtable($table, $table_spip = false, $serveur='',$requeter=true)
 		$table = preg_replace('/^spip/', $prefixe, $table);
 	}
 	
-	$f = sql_serveur('showtable', $serveur);
-	$f = $f($table, $serveur, $requeter);
+	$f = sql_serveur('showtable', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	$f = $f($table, $serveur, $option!==false);
 	if (!$f) return array();
 	if (isset($GLOBALS['tables_principales'][$table]['join']))
 		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
@@ -227,55 +247,63 @@ function sql_showtable($table, $table_spip = false, $serveur='',$requeter=true)
 }
 
 // http://doc.spip.org/@sql_create
-function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='',$requeter=true) {
-	$f = sql_serveur('create', $serveur);
-	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $requeter);
+function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=false, $serveur='', $option=true) {
+	$f = sql_serveur('create', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($nom, $champs, $cles, $autoinc, $temporary, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_multi
-function sql_multi($sel, $lang, $serveur='',$requeter=true)
+function sql_multi($sel, $lang, $serveur='', $option=true)
 {
-  	$f = sql_serveur('multi', $serveur);
+  $f = sql_serveur('multi', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
 	return $f($sel, $lang);
 }
 
 // http://doc.spip.org/@sql_error
-function sql_error($query='requete inconnue', $serveur='',$requeter=true) {
-  	$f = sql_serveur('error', $serveur);
-	return $f($query, $serveur, $requeter);
+function sql_error($query='requete inconnue', $serveur='', $option=true) {
+	$f = sql_serveur('error', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($query, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_errno
-function sql_errno($serveur='',$requeter=true) {
-  	$f = sql_serveur('errno', $serveur);
+function sql_errno($serveur='', $option=true) {
+	$f = sql_serveur('errno', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
 	return $f($serveur);
 }
 
 // http://doc.spip.org/@sql_explain
-function sql_explain($q, $serveur='',$requeter=true) {
-	$f = sql_serveur('explain', $serveur, true);
-	return @function_exists($f) ? $f($q, $serveur, $requeter) : false;
+function sql_explain($q, $serveur='', $option=true) {
+	$f = sql_serveur('explain', $serveur, true, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
 
 // http://doc.spip.org/@sql_optimize
-function sql_optimize($q, $serveur='',$requeter=true) {
-	$f = sql_serveur('optimize', $serveur, true);
-	return @function_exists($f) ? $f($q, $serveur, $requeter) : false;
+function sql_optimize($q, $serveur='', $option=true) {
+	$f = sql_serveur('optimize', $serveur, true, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
 
 // http://doc.spip.org/@sql_repair
-function sql_repair($q, $serveur='',$requeter=true) {
-	$f = sql_serveur('repair', $serveur, true);
-	return @function_exists($f) ? $f($q, $serveur, $requeter) : false;
+function sql_repair($q, $serveur='', $option=true) {
+	$f = sql_serveur('repair', $serveur, true, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return @function_exists($f) ? $f($q, $serveur, $option!==false) : false;
 }
 
 // Fonction la plus generale ... et la moins portable
 // A n'utiliser qu'en derniere extremite
 
 // http://doc.spip.org/@sql_query
-function sql_query($ins, $serveur='',$requeter=true) {
-  	$f = sql_serveur('query', $serveur);
-	return $f($ins, $serveur, $requeter);
+function sql_query($ins, $serveur='', $option=true) {
+	$f = sql_serveur('query', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($ins, $serveur, $option!==false);
 }
 
 # une composition tellement frequente...
@@ -283,21 +311,21 @@ function sql_query($ins, $serveur='',$requeter=true) {
 function sql_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
-	$having = array(), $serveur='',$requeter=true) {
-	return sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $requeter), $serveur, $requeter);
+	$having = array(), $serveur='', $option=true) {
+	return sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
 function sql_getfetsel(
 		       $select, $from = array(), $where = array(), $groupby = array(), 
-	$orderby = array(), $limit = '', $having = array(), $serveur='',$requeter=true) {
-	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $requeter), $serveur, $requeter);
+	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
+	$r = sql_fetch(sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option!==false), $serveur, $option!==false);
 	return $r ? $r[$select] : NULL;
 }
 
 // http://doc.spip.org/@sql_version
-function sql_version($serveur='',$requeter=true) {
+function sql_version($serveur='', $option=true) {
 	$row = sql_fetsel("version() AS n", '','','','','','',$serveur);
 	return ($row['n']);
 }
@@ -306,34 +334,38 @@ function sql_version($serveur='',$requeter=true) {
 // et retourne sa representation numerique:
 // FF ==> 0xFF en MySQL mais x'FF' en PG
 // http://doc.spip.org/@sql_hex
-function sql_hex($val, $serveur='',$requeter=true)
+function sql_hex($val, $serveur='', $option=true)
 {
-	$f = sql_serveur('hex', $serveur);
+	$f = sql_serveur('hex', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
 	return $f($val);
 }
 
 // http://doc.spip.org/@sql_quote
-function sql_quote($val, $serveur='',$requeter=true)
+function sql_quote($val, $serveur='', $option=true)
 {
-	$f = sql_serveur('quote', $serveur);
+	$f = sql_serveur('quote', $serveur, true);
+	if (!$f) $f = '_q';
 	return $f($val);
 }
 
 // http://doc.spip.org/@sql_in
-function sql_in($val, $valeurs, $not='', $serveur='',$requeter=true) {
+function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	if (is_array($valeurs)) {
-		$f = sql_serveur('quote', $serveur);
+		$f = sql_serveur('quote', $serveur, $continue = $option==='continue' OR $option===false);
+		if (!$f && $continue) return false;
 		$valeurs = join(',', array_map($f, array_unique($valeurs)));
 	} elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
-	$f = sql_serveur('in', $serveur);
-	return $f($val, $valeurs, $not, $serveur, $requeter);
+	$f = sql_serveur('in', $serveur, $continue = $option==='continue' OR $option===false);
+	if (!$f && $continue) return false;
+	return $f($val, $valeurs, $not, $serveur, $option!==false);
 }
 
 
 // http://doc.spip.org/@sql_test_int
-function sql_test_int($type, $serveur='',$requeter=true)
+function sql_test_int($type, $serveur='', $option=true)
 {
   return (preg_match('/^bigint/i',$type)
 	  OR preg_match('/^int/i',$type)
@@ -341,7 +373,7 @@ function sql_test_int($type, $serveur='',$requeter=true)
 }
 
 // http://doc.spip.org/@sql_test_date
-function sql_test_date($type, $serveur='',$requeter=true)
+function sql_test_date($type, $serveur='', $option=true)
 {
   return (preg_match('/^datetime/i',$type)
 	  OR preg_match('/^timestamp/i',$type));
