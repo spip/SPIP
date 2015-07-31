@@ -39,10 +39,15 @@ function liste_des_champs() {
 
 
 // Effectue une recherche sur toutes les tables de la base de donnees
+// options :
+// - toutvoir pour eviter autoriser(voir)
+// - flags pour eviter les flags regexp par defaut (UimsS)
 // http://doc.spip.org/@recherche_en_base
-function recherche_en_base($recherche='', $tables=NULL) {
+function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
 	if (!is_array($tables))
 		$tables = liste_des_champs();
+
+	include_spip('inc/autoriser');
 
 	$results = array();
 
@@ -50,7 +55,7 @@ function recherche_en_base($recherche='', $tables=NULL) {
 		return array();
 
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
-	if (preg_quote($recherche) == $recherche) {
+	if (preg_quote($recherche, '/') == $recherche) {
 		$methode = 'LIKE';
 		$q = _q(
 			"%"
@@ -58,9 +63,13 @@ function recherche_en_base($recherche='', $tables=NULL) {
 			. "%"
 		);
 	} else {
-		$methode == 'REGEXP';
+		$methode = 'REGEXP';
 		$q = _q($recherche);
 	}
+
+	if (!isset($options['preg_flags']))
+		$options['flags'] = 'UimsS';
+	$preg = '/'.$recherche.'/' . $options['flags'];
 
 	foreach ($tables as $table => $champs) {
 		$a = array();
@@ -81,7 +90,18 @@ function recherche_en_base($recherche='', $tables=NULL) {
 			. join (' OR ', $a)
 			. ")");
 		while ($t = spip_fetch_array($s)) {
-			$results[$table][$t[$_id_table]] = $t;
+			$id = $t[$_id_table];
+			if ($options['toutvoir'] OR autoriser('voir', $table, $id)) {
+				// indiquer les champs concernes
+				$vus = array();
+				foreach ($champs as $champ) {
+					if (preg_match($preg, $t[$champ]))
+						$vus[$champ] = $t[$champ];
+				}
+				// et l'id, si besoin
+				if ($vus OR $recherche == "$id")
+					$results[$table][$id] = array_merge(array($_id_table => $id), $vus);
+			}
 		}
 	}
 

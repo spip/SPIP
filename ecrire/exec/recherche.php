@@ -28,26 +28,12 @@ function exec_recherche_dist() {
 		include_spip('inc/rechercher');
 		include_spip('base/abstract_sql');
 
-		// Si on demande /xxx/ on passe en REGEXP
-		if (preg_match(',^/(.*)/$,', $recherche, $r))
-			$results = recherche_en_base($r[1], NULL, 'REGEXP');
-		// sinon LIKE, plus simple et rapide
-		else
-			$results = recherche_en_base($recherche);
-
+		$results = recherche_en_base($recherche);
 		$modifier = false;
 		foreach ($results as $table => $r) {
 			foreach ($r as $id => $x) {
-				if (!autoriser('voir', $table, $id)) {
-					unset($r[$id]);
-				} else {
-					$modifier |= autoriser('modifier', $table, $id);
-				}
+				$modifier |= autoriser('modifier', $table, $id);
 			}
-			if (!$r)
-				unset($results[$table]);
-			else
-				$results[$table] = $r;
 		}
 	}
 
@@ -57,8 +43,6 @@ function exec_recherche_dist() {
 		$recherche_aff = _T('info_rechercher');
 		$onfocus = " onfocus=\"this.value='';\"";
 	}
-
-	// TODO: aide expliquant qu'on peut utiliser REGEXP en entrant /xxx/
 
 	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'><div>";
 	echo "<input type='hidden' name='exec' value='recherche' />";
@@ -112,8 +96,10 @@ function exec_recherche_dist() {
 				array(
 					// gasp: la requete spip_articles exige AS articles...
 					'FROM' => 'spip_'.table_objet($table).' AS '.$table.'s',
-					'WHERE' => id_table_objet($table)
-						.' IN ('.join(',',array_keys($r)).')',
+					'WHERE' => calcul_mysql_in(
+						$table.'s.'.id_table_objet($table),
+						join(',',array_keys($r))
+					),
 					'ORDER BY' => $order
 				)
 			);
