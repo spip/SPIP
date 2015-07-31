@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_ecrire('inc_forum.php3');
+
 function forum_parent($id_forum) {
 	$row=spip_fetch_array(spip_query("
 SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'
