@@ -13,15 +13,44 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/charsets');
 
-// http://doc.spip.org/@affiche_liste_plugins
+/**
+ * Afficher une liste de plugins dans l'interface
+ * http://doc.spip.org/@affiche_liste_plugins
+ *
+ * @param string $url_page
+ * @param array $liste_plugins
+ * @param array $liste_plugins_checked
+ * @param array $liste_plugins_actifs
+ * @param string $dir_plugins
+ * @param string $afficher_un
+ * @return string
+ */
 function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_checked, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
 	$get_infos = charger_fonction('get_infos','plugins');
 	$ligne_plug = charger_fonction($afficher_un,'plugins');
 
 	$all_infos = $get_infos($liste_plugins, false, $dir_plugins);
+
+	$all_infos = pipeline('filtrer_liste_plugins',
+	                     array(
+											  'args'=>array(
+		                      'liste_plugins'=>$liste_plugins,
+		                      'liste_plugins_checked'=>$liste_plugins_checked,
+		                      'liste_plugins_actifs'=>$liste_plugins_actifs,
+		                      'dir_plugins'=>$dir_plugins),
+												'data'=>$all_infos
+	                     )
+							);
+
 	$liste_plugins = array_flip($liste_plugins);
 	foreach($liste_plugins as $chemin => $v) {
-		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$chemin]['nom']))))));
+		// des plugins ont pu etre enleves de la liste par le pipeline. On en tient compte.
+		if (isset($all_infos[$chemin])){
+			$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($all_infos[$chemin]['nom']))))));
+		}
+		else {
+			unset($liste_plugins[$chemin]);
+		}
 	}
 	asort($liste_plugins);
 	$exposed = urldecode(_request('plugin'));

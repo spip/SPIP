@@ -260,6 +260,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 	<pipeline><nom>delete_tables</nom><action></action></pipeline>
 	<pipeline><nom>editer_contenu_objet</nom><action></action></pipeline>
 	<pipeline><nom>exec_init</nom><action></action></pipeline>
+	<pipeline><nom>filtrer_liste_plugins</nom><action></action></pipeline>
 	<pipeline><nom>formulaire_charger</nom>
 		<action>cvtmulti_formulaire_charger</action>
 		<inclure>inc/cvt_multietapes.php</inclure>
