@@ -76,7 +76,7 @@ function assembler_page ($fond) {
 		$use_cache, $var_mode, $var_preview;
 
 	// Cette fonction est utilisee deux fois
-	$fcache = charger_fonction('cacher', _DIR_COMPIL);
+	$fcache = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 
@@ -120,7 +120,7 @@ function assembler_page ($fond) {
 			foreach ($page['contexte'] as $var=>$val)
 				$GLOBALS[$var] = $val;
 		} else {
-			$f = charger_fonction('parametrer', _DIR_COMPIL);
+			$f = charger_fonction('parametrer', 'public');
 			$page = $f($fond, '', $chemin_cache);
 			if ($chemin_cache)
 				$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -191,7 +191,7 @@ function auto_expire($page)
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
 
-	$fcache = charger_fonction('cacher', _DIR_COMPIL);
+	$fcache = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
@@ -216,7 +216,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
 	} else {
-		$f = charger_fonction('parametrer', _DIR_COMPIL);
+		$f = charger_fonction('parametrer', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
 		if ($chemin_cache) 
@@ -310,7 +310,7 @@ function f_tidy ($texte) {
 // Inserer au besoin les boutons admins
 function f_admin ($texte) {
 	if ($GLOBALS['affiche_boutons_admin']) {
-		include_spip(_DIR_COMPIL . 'admin');
+		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
 	}
 

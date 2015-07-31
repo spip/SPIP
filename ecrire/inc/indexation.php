@@ -15,7 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/create');
 include_spip('base/abstract_sql');
-include_spip(_DIR_COMPIL . 'interfaces');
+include_spip('public/interfaces');
 
 // Quels formats sait-on extraire ?
 $GLOBALS['extracteur'] = array (

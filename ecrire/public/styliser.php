@@ -22,7 +22,7 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 	$ext = 'html';
 	// Accrocher un squelette de base dans le chemin, sinon erreur
 	if (!$base = find_in_path("$fond.$ext")) {
-		include_spip(_DIR_COMPIL . 'debug');
+		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
 			array('fichier'=>$fond)),
 			$GLOBALS['dossier_squelettes']);
