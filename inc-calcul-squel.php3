@@ -360,6 +360,10 @@ function parser_boucle($texte, $id_parent) {
 							$flag_lien = true;
 						}
 
+						// Cas particulier : selection des documents selon l'extension
+						else if ($type == 'documents' AND $col == 'extension') {
+							$col_table = 'types_d';
+						}
 						// Cas particulier : lier les articles syndiques au site correspondant
 						else if ($type == 'syndic_articles')
 							$col_table = 'source';
