@@ -15,8 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
 // il faut donc definir la fonction _cron ici.
-// http://doc.spip.org/@cron_optimiser
-function cron_optimiser_dist($t) {
+function genie_optimiser_dist($t) {
 
 	optimiser_base();
 	return 1;

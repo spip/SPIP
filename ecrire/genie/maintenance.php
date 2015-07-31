@@ -13,8 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Diverses taches de maintenance
-// http://doc.spip.org/@cron_maintenance
-function cron_maintenance_dist ($t) {
+function genie_maintenance_dist ($t) {
 
 	// (re)mettre .htaccess avec deny from all
 	// dans les deux repertoires dits inaccessibles par http

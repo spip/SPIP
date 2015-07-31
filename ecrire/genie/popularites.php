@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@calculer_popularites
-function cron_popularites_dist($t) {
+function genie_popularites_dist($t) {
 
 	// Si c'est le premier appel, ne pas calculer
 	$t = $GLOBALS['meta']['date_popularites'];
