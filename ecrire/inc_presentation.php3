@@ -1771,8 +1771,8 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "stat_referers") {
-		onglet(_T('info_aujourdhui'), "statistiques_referers.php3", "jour", $onglet);
-		onglet(_T('info_hier'), "statistiques_referers.php3?jour=veille", "veille", $onglet);
+		onglet(ucfirst(_T('date_aujourdhui')), "statistiques_referers.php3", "jour", $onglet);
+		onglet(ucfirst(_T('date_hier')), "statistiques_referers.php3?jour=veille", "veille", $onglet);
 	}
 
 	if ($rubrique == "administration"){
