@@ -27,7 +27,6 @@ function exec_sites_dist()
 
   global
   $analyser_site,
-  $ajouter_lien,
   $annee,
   $champs_extra,
   $cherche_mot,
@@ -50,29 +49,20 @@ function exec_sites_dist()
   $reload,
   $resume,
   $supp_mot,
-  $supprimer_lien,
   $syndication,
   $syndication_old,
   $url,
   $url_site,
   $url_syndic;
 
-$id_rubrique = intval($id_parent);
-$id_syndic = intval($id_syndic);
+  $id_rubrique = intval($id_parent); // pas toujours present, mais tant pis.
+  $id_syndic = intval($id_syndic);
 
 //
 // Creation d'un site
 //
 
 $flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));
-
-
-	if ($flag_administrable) {
-		if ($supprimer_lien = intval($supprimer_lien))
-			spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
-		if ($ajouter_lien = intval($ajouter_lien))
-			spip_query("UPDATE spip_syndic_articles SET statut='publie'	WHERE id_syndic_article='$ajouter_lien'");
-	}
 
 if ($new == 'oui') {
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0));
@@ -396,7 +386,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
 		fin_boite_info();
 	}
-	afficher_syndic_articles(_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"));
+	afficher_syndic_articles(_T('titre_articles_syndiques'), array('FROM' => 'spip_syndic_articles', 'WHERE' => "id_syndic=$id_syndic", 'ORDER BY' => "date DESC"), $id_syndic);
 
 
 	echo "<font face='verdana,arial,helvetica' size=2>";
