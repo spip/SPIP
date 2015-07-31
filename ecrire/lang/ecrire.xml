@@ -13,7 +13,9 @@
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=ca">
 		<traducteur nom="merce" lien="http://trad.spip.net/auteur/merce" />
 	</langue>
-	<langue code="co" />
+	<langue code="co" url="http://trad.spip.net/tradlang_module/ecrire_?lang_cible=co">
+		<traducteur nom="tavamig" lien="http://trad.spip.net/auteur/tavamig" />
+	</langue>
 	<langue code="cpf" />
 	<langue code="cpf_hat" />
 	<langue code="cs" />
