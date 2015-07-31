@@ -30,6 +30,8 @@ function optimiser_base() {
 		spip_query($query);
 		$query = "DELETE FROM spip_auteurs_rubriques WHERE id_rubrique NOT IN ($rubriques)";
 		spip_query($query);
+		$query = "DELETE FROM spip_mots_rubriques WHERE id_rubrique NOT IN ($rubriques)";
+		spip_query($query);
 	}
 
 
@@ -68,6 +70,8 @@ function optimiser_base() {
 	if ($breves) {
 		$breves = join(",", $breves);
 
+		$query = "DELETE FROM spip_mots_breves WHERE id_breve NOT IN ($breves)";
+		spip_query($query);
 		$query = "DELETE FROM spip_forum WHERE id_breve NOT IN (0,$breves)";
 		spip_query($query);
 	}
@@ -76,7 +80,6 @@ function optimiser_base() {
 	//
 	// Sites
 	//
-
 
 	$query = "DELETE FROM spip_syndic WHERE maj < $mydate AND statut = 'refuse'";
 	spip_query($query);
@@ -89,6 +92,10 @@ function optimiser_base() {
 		$syndic = join(",", $syndic);
 
 		$query = "DELETE FROM spip_syndic_articles WHERE id_syndic NOT IN (0,$syndic)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_syndic WHERE id_syndic NOT IN ($syndic)";
+		spip_query($query);
+		$query = "DELETE FROM spip_forum WHERE id_syndic NOT IN (0,$syndic)";
 		spip_query($query);
 	}
 
@@ -118,7 +125,7 @@ function optimiser_base() {
 		$id_auteur = $row['id_auteur'];
 		$nom = $row['nom'];
 		$email = $row['email'];
-	
+
 		$query2 = "SELECT * FROM spip_auteurs_articles WHERE id_auteur=$id_auteur";
 		$result2 = spip_query($query2);
 		if (!spip_num_rows($result2)) {
@@ -127,80 +134,93 @@ function optimiser_base() {
 			spip_log ("suppression auteur $id_auteur ($nom, $email)");
 		}
 	}
-	
-	
-	//
-	// Forums
-	//
-	
-	$query = "SELECT id_forum FROM spip_forum";
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) $forums[] = $row[0];
-	
-	if ($forums) {
-		$forums = join(",", $forums);
-	
-		$query = "DELETE FROM spip_forum WHERE id_parent NOT IN (0,$forums)";
-		spip_query($query);
 
-		spip_query("DELETE FROM spip_forum WHERE statut='redac' AND  date_heure<DATE_SUB(NOW(),INTERVAL 1 DAY)");
 
-	}
-	
-	
-	
-	
 	//
-	// Messages
+	// Messages prives
 	//
-	
+
 	$query = "SELECT m.id_message FROM spip_messages AS m, spip_auteurs_messages AS lien ".
 		"WHERE m.id_message = lien.id_message GROUP BY m.id_message";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $messages[] = $row['id_message'];
-	
+
 	$query = "SELECT id_message FROM spip_messages ".
 		"WHERE type ='affich'";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $messages[] = $row['id_message'];
-	
+
 	if ($messages) {
 		$messages = join(",", $messages);
-	
+
 		$query = "DELETE FROM spip_messages WHERE id_message NOT IN ($messages)";
 		spip_query($query);
 		$query = "DELETE FROM spip_forum WHERE id_message NOT IN (0,$messages)";
 		spip_query($query);
 	}
-	
-	
+
+
 	//
 	// Mots-cles
 	//
-	
+
 	$query = "DELETE FROM spip_mots WHERE titre='' AND maj < $mydate";
 	$result = spip_query($query);
-	
+
 	$query = "SELECT id_mot FROM spip_mots";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $mots[] = $row['id_mot'];
-	
+
 	if ($mots) {
 		$mots = join(",", $mots);
-	
+
 		$query = "DELETE FROM spip_mots_articles WHERE id_mot NOT IN ($mots)";
 		spip_query($query);
+		$query = "DELETE FROM spip_mots_breves WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_forum WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_syndic WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
 	}
-	
+
+	//
+	// Forums
+	//
+
+	$query = "DELETE FROM spip_forum WHERE statut='redac' AND maj < $mydate";
+	spip_query($query);
+
+	$query = "SELECT id_forum FROM spip_forum";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $forums[] = $row[0];
+
+	if ($forums) {
+		$forums = join(",", $forums);
+
+		$query = "DELETE FROM spip_forum WHERE id_parent NOT IN (0,$forums)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_forum WHERE id_forum NOT IN ($forums)";
+		spip_query($query);
+	}
+
+
 	//
 	// MySQL
 	//
-	
-	$query = "OPTIMIZE TABLE spip_meta, "
-		. "spip_articles, spip_rubriques, spip_breves, spip_auteurs, spip_auteurs_articles, spip_forum, spip_forum_cache, spip_mots, spip_mots_articles, "
-		. "spip_index_dico, spip_index_articles, spip_index_rubriques, spip_index_breves, spip_index_auteurs, spip_index_mots, spip_index_syndic";
-	spip_query($query);
-	
+
+	$query = "SHOW TABLES LIKE '".$GLOBALS['table_prefix']."_%'";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $tables[] = $row[0];
+
+	if ($tables) {
+		$tables = join(",", $tables);
+		$query = "OPTIMIZE TABLE ".$tables;
+		spip_query($query);
+	}
+
 	spip_log("optimisation ok");
 }
 
