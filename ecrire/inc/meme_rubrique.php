@@ -45,14 +45,14 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=
 
 	$limit = $n - $limit;
 	$retour = '';
-	$fstatut = 'puce_statut_' . ($type!='syndic'?$type:'site');
+	$puce_statut = charger_fonction('puce_statut', 'inc');
 	$idom = 'rubrique_' . $type;
 
 	while($row = sql_fetch($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $prim, $type);
 		$statut = $row['statut'];
-		$statut = $fstatut($id, $statut, $id_rubrique, $type);
+		$statut = $puce_statut($id, $statut, $id_rubrique, $type);
 		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($exec[$type],"$prim=$id")
 		. "'>"
