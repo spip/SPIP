@@ -260,6 +260,13 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 	return $output;
 }
 
+// vraiment n'importe quoi la gestion des chemins des plugins
+// une fonction pour aider...
+// http://doc.spip.org/@chemin_plug
+function chemin_plug($racine, $plug) {
+	return preg_replace(',[^/]+/[.][.]/,', '', "$racine/$plug");
+}
+
 // http://doc.spip.org/@affiche_arbre_plugins
 function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	$racine = basename(_DIR_PLUGINS);
@@ -269,8 +276,9 @@ function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	$deplie = array($racine=>true);
 	$fast_liste_plugins_actifs=array();
 	foreach($liste_plugins_actifs as $key=>$plug){
-		$fast_liste_plugins_actifs["$racine/$plug"]=true;
-		$dir = dirname("$racine/$plug");$maxiter=100;
+		$chemin_plug = chemin_plug($racine, $plug);
+		$fast_liste_plugins_actifs[$chemin_plug]=true;
+		$dir = dirname($chemin_plug);$maxiter=100;
 		while(strlen($dir) && !isset($deplie[$dir]) && $dir!=$racine && $maxiter-->0){
 			$deplie[$dir] = true;
 			$dir = dirname($dir);
@@ -280,8 +288,8 @@ function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 	// index repertoires --> plugin
 	$dir_index=array();
 	foreach($liste_plugins as $key=>$plug){
-		$liste_plugins[$key] = "$racine/$plug";
-		$dir_index[dirname("$racine/$plug")][] = $key;
+		$liste_plugins[$key] = chemin_plug($racine, $plug);
+		$dir_index[dirname($liste_plugins[$key])][] = $key;
 	}
 	
 	$visible = @isset($deplie[$current_dir]);
@@ -301,7 +309,7 @@ function affiche_arbre_plugins($liste_plugins, $liste_plugins_actifs){
 				$actif = @isset($fast_liste_plugins_actifs[$plug]);
 				$id = substr(md5($plug),0,16);
 				$res .= "<li>"
-				. ligne_plug(substr($plug,strlen($racine)+1), $actif, $id)
+				. ligne_plug(str_replace(_DIR_PLUGINS, '', _DIR_RACINE.$plug), $actif, $id)
 				. "</li>\n";
 				unset($liste_plugins[$key]);
 			}
