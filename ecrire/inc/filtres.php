@@ -336,7 +336,10 @@ function image_filtrer($args){
 		$texte, $tags, PREG_SET_ORDER)) {
 		foreach ($tags as $tag) {
 			$class = extraire_attribut($tag[3],'class');
-			if (!$class || (strpos($class,'no_image_filtrer')===FALSE)){
+			if (!$class OR
+				(strpos($class,'filtre_inactif')==false
+					// compat historique a virer en 3.2
+					AND strpos($class,'no_image_filtrer')===false)){
 				array_unshift($args,$tag[3]);
 				if ($reduit = call_user_func_array($filtre, $args)) {
 					// En cas de span spip_documents, modifier le style=...width:
