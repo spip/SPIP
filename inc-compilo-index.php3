@@ -250,6 +250,7 @@ function applique_filtres($p) {
 function filtres_arglist($args, $p) {
 	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
 		$arg = trim($regs[1]);
+	  spip_log($arg);
 		if ($arg) {
 			if ($arg[0] =='#')
 				{ $p->nom_champ = substr($arg,1);
@@ -257,6 +258,7 @@ function filtres_arglist($args, $p) {
 			else if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 			$arglist .= ','.$arg;
+			$args=$regs[2];
 		}
 	}
 }
