@@ -177,6 +177,9 @@ function definir_barre_boutons() {
 			new Bouton("base-24.gif", "icone_maintenance_site");
 		$sousmenu['admin_vider']=
 			new Bouton("cache-24.gif", "onglet_vider_cache");
+  	if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS)))
+			$sousmenu['admin_plugin']=
+				new Bouton("plugin-24.png", "icone_admin_plugin");
 	} else {
 		$sousmenu['admin_tech']=
 			new Bouton("base-24.gif", "icone_sauver_site");
@@ -286,7 +289,7 @@ function definir_barre_onglets($rubrique) {
 
 	}
 
-	$onglets = pipeline('ajouter_onglets', $onglets, $rubrique);
+	$onglets = pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
 
 	return $onglets;
 }

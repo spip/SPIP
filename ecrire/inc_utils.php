@@ -73,49 +73,46 @@ function include_fonction($nom) {
 // Cf. compose_filtres dans inc-compilo-index.php3, qui est le
 // pendant "compilé" de cette fonctionnalite
 
-function pipeline($action, $val) {
-	global $spip_pipeline, $spip_matrice;
-	static $pipe = array();
-	if (!strlen($spip_pipeline[$action])) return $val;
+// appel unitaire d'une fonction du pipeline
+// utilisee dans le script pipeline precompile
+function minipipe($fonc,$val){
+	// fonction
+	if (function_exists($fonc))
+		$val = call_user_func($fonc, $val);
 
-	// Analyser le pipeline
-	// TODO - traiter les arguments  |filtre{arg1,arg2}
-	// TODO - traiter le filtre test |?{true,false}
-	if (!isset($pipe[$action]))
-		$pipe[$action] = array_filter(explode('|',$spip_pipeline[$action]));
-
-	// Eclater le pipeline en filtres et appliquer chaque filtre
-	foreach ($pipe[$action] as $fonc) {
-
-		// fonction
-		if (function_exists($fonc))
-			$val = call_user_func($fonc, $val);
-
-		// Class::Methode
-		else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
-		AND $methode = array($regs[1], $regs[2])
-		AND is_callable($methode))
-			$val = call_user_func($methode, $val);
-
-		// Charger un fichier
-		else if ($f = $spip_matrice[$fonc]) {
-			require_once($f);
-			// fonction (2eme chance)
-			if (function_exists($fonc))
-				$val = call_user_func($fonc, $val);
-			// Class::Methode (2eme chance)
-			else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
-			AND $methode = array($regs[1], $regs[2])
-			AND is_callable($methode))
-				$val = call_user_func($methode, $val);
-			else
-				spip_log("Erreur - '$fonc' non definie !");
-		}
-	}
-
+	// Class::Methode
+	else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)
+	AND $methode = array($regs[1], $regs[2])
+	AND is_callable($methode))
+		$val = call_user_func($methode, $val);
+	else
+		spip_log("Erreur - '$fonc' non definie !");
 	return $val;
 }
 
+// chargement du pipeline sous la forme d'un fichier php prepare
+function pipeline($action,$val){
+	$ok = @is_readable($f = _DIR_SESSIONS."charger_pipeline_$action.php");
+	if (!$ok){
+		include_ecrire('inc_plugin');
+		// generer les fichiers php precompiles
+		// de chargement des plugins et des pipelines
+		verif_plugin();
+		$ok = @is_readable($f = _DIR_SESSIONS."charger_pipeline_$action.php");
+		if (!$ok)
+			spip_log("generation de $f impossible; pipeline desactives");
+	}
+	if ($ok){
+		require_once($f);
+		$f = "execute_pipeline_$action";
+		$val = $f($val);
+		// si le flux est une table qui encapsule donnees et autres
+		// on ne ressort du pipe que les donnees
+		if (is_array($val)&&isset($val['data']))
+			$val = $val['data'];
+	}
+	return $val;
+}
 
 //
 // Enregistrement des evenements
@@ -606,19 +603,7 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			return $f;
 		}
 	}
-#	spip_log("find_in_apth a pas vu '$filename' dans $autopath");
-
-}
-
-// charger les definitions des plugins
-function charger_plugins($plugins) {
-	foreach ($plugins as $plug) {
-		if (@is_readable($f = _DIR_PLUGINS.$plug.'/version.php'))
-			include($f);
-		else if (isset($_COOKIE['spip_admin']))
-			echo _L("Erreur plugin &laquo; $plug &raquo; absent.<br />\n");
-	}
-#var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
+#	spip_log("find_in_path n'a pas vu '$filename' dans $path");
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie

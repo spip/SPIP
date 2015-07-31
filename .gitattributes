@@ -84,6 +84,7 @@ ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/exec_accueil.php -text
 ecrire/exec_admin_effacer.php -text
+ecrire/exec_admin_plugin.php -text
 ecrire/exec_admin_repair.php -text
 ecrire/exec_admin_tech.php -text
 ecrire/exec_admin_vider.php -text
@@ -190,6 +191,7 @@ ecrire/img_pack/degrade.jpg -text
 ecrire/img_pack/deplierbas.gif -text
 ecrire/img_pack/deplierhaut.gif -text
 ecrire/img_pack/deplierhaut_rtl.gif -text
+ecrire/img_pack/descendre-16.png -text
 ecrire/img_pack/doc-24.gif -text
 ecrire/img_pack/documents-48.png -text
 ecrire/img_pack/documents-48_rtl.png -text
@@ -238,12 +240,14 @@ ecrire/img_pack/m_envoi_rtl.gif -text
 ecrire/img_pack/message.gif -text
 ecrire/img_pack/messagerie-24.gif -text
 ecrire/img_pack/messagerie-48.png -text
+ecrire/img_pack/monter-16.png -text
 ecrire/img_pack/mot-cle-24.gif -text
 ecrire/img_pack/naviguer-site.png -text
 ecrire/img_pack/ortho-24.gif -text
 ecrire/img_pack/pense-bete.gif -text
 ecrire/img_pack/petite-cle.gif -text
 ecrire/img_pack/petition-24.gif -text
+ecrire/img_pack/plugin-24.png -text
 ecrire/img_pack/plus.gif -text
 ecrire/img_pack/poubelle.gif -text
 ecrire/img_pack/puce-blanche-anim.gif -text
@@ -335,6 +339,7 @@ ecrire/inc_lang_liste.php -text
 ecrire/inc_magicquotes.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
+ecrire/inc_plugin.php -text
 ecrire/inc_popularites.php -text
 ecrire/inc_sites_voir.php -text
 ecrire/inc_suivi_versions.php -text
@@ -343,6 +348,7 @@ ecrire/inc_utils.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_cs.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
+ecrire/lang/plugin_fr.php3 -text
 ecrire/lang/public_br.php3 -text
 ecrire/lang/public_cs.php3 -text
 ecrire/lang/public_ru.php3 -text
