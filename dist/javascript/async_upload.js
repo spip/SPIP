@@ -15,20 +15,18 @@ jQuery.fn.async_upload = function(add_function) {
     if(!form.async_init) {
       form.async_init = true
       jForm
-      .attr("target","upload_frame"+num)
       .append("<input type='hidden' name='iframe' value='iframe'>")
       .find("input[@name='redirect']")
         .val("")
       .end();
     }
-  
-    if (!form.jFrame) {
-      form.jFrame = $("<iframe id='upload_frame"+num+"' name='upload_frame"+num+"' frameborder='0' marginwidth='0' marginheight='0' scrolling='no' style='position:absolute;width:1px;height:1px;' onload='this.iframeload("+num+")'></iframe>")
+    
+		jForm.attr("target","upload_frame"+num);
+    var jFrame = $("<iframe id='upload_frame"+num+"' name='upload_frame"+num+"' frameborder='0' marginwidth='0' marginheight='0' scrolling='no' style='position:absolute;width:1px;height:1px;' onload='this.iframeload("+num+")'></iframe>")
       .appendTo("body");
-    }
     
     //IE apparently do not write anything in an iframe onload event handler 
-    form.jFrame[0].iframeload = function(num) {
+    jFrame[0].iframeload = function(num) {
         //remove the previous message
         $("div.upload_message",par).remove();
         var res = $(".upload_answer",this.contentDocument || document.frames(this.name).document.body);
