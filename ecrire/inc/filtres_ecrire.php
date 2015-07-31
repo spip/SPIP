@@ -160,24 +160,6 @@ function statuts_articles_visibles($statut_auteur){
 	return $auth[$statut_auteur];
 }
 
-/**
- * Afficher le nom de la table
- * @param  $table
- * @return mixed|string
- */
-function affiche_nom_table($table){
-	static $libelles = null;
-	if (!$libelles){
-		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
-		$libelles = pipeline('libelle_association_mots',$libelles);
-	}
-	if (!strlen($table))
-		return '';
-
-	return _T(isset($libelles[$table])?$libelles[$table]:"$table:info_$table");
-}
-
-
 //
 /**
  * Traduire le statut technique de l'auteur en langage comprehensible
