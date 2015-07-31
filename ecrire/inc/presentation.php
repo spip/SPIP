@@ -2939,7 +2939,7 @@ function debut_droite($rubrique="") {
 						$ifond = 1;
 					}
 					
-					echo "<div style='padding: 3px; background-color: $couleur;'>";
+					echo "<div style='padding: 3px; background-color: $couleur; overflow:hidden;'>";
 					echo "<div class='verdana1'><b><a href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a></div></b>";
 					
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
