@@ -435,6 +435,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_mise_a_niveau_base' => 'actualitzaci&oacute; de la vostra base de dades SQL',
 'info_mise_a_niveau_base_2' => '{{Atenci&oacute;!}} Heu instal&middot;lat una versi&oacute; dels fitxers d\'SPIP {anterior} a la que hi havia anteriorment en aquest lloc: correu el risc de perdre la vostra base de dades i que el vostre lloc deixi de funcionar.<br />{{Torneu a instal&middot;lar els fitxers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Mode de funcionament per defecte dels f&ograve;rums p&uacute;blics',
+'info_modifier_auteur' => 'Modificar l\'autor:',
 'info_modifier_breve' => 'Modificar la breu:',
 'info_modifier_mot' => 'Modificar la paraula clau:',
 'info_modifier_rubrique' => 'Modificar la secci&oacute;:',

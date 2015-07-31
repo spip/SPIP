@@ -412,6 +412,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_mise_a_niveau_base' => 'Update Ihrer SQL-Datenbank',
 'info_mise_a_niveau_base_2' => '{{ACHTUNG!}} Sie haben eine {&auml;ltere} Version der SPIP-Dateien installiert als sich vorher auf Ihrem Server befand. Ihre Datenbank wird m&ouml;glicherweise zerst&ouml;rt und Ihre Website wird nict mehr funktionieren.<br />{{Installieren Sie SPIP noch einmal.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardmodus der &ouml;ffentlichen Foren',
+'info_modifier_auteur' => 'Autor bearbeiten:',
 'info_modifier_breve' => 'Meldung bearbeiten:',
 'info_modifier_mot' => 'Schlagwort &auml;ndern:',
 'info_modifier_rubrique' => 'Rubrik bearbeiten:',
