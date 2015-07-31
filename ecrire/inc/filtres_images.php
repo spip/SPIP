@@ -2764,12 +2764,14 @@ function produire_image_typo() {
 //        available at http://phpthumb.sourceforge.net     ///
 //////////////////////////////////////////////////////////////
 class phpthumb_functions {
+// http://doc.spip.org/@GetPixelColor
 	function GetPixelColor(&$img, $x, $y) {
 		if (!is_resource($img)) {
 			return false;
 		}
 		return @ImageColorsForIndex($img, @ImageColorAt($img, $x, $y));
 	}
+// http://doc.spip.org/@LittleEndian2String
 	function LittleEndian2String($number, $minbytes=1) {
 		$intstring = '';
 		while ($number > 0) {
@@ -2778,6 +2780,7 @@ class phpthumb_functions {
 		}
 		return str_pad($intstring, $minbytes, "\x00", STR_PAD_RIGHT);
 	}
+// http://doc.spip.org/@GD2ICOstring
 	function GD2ICOstring(&$gd_image_array) {
 		foreach ($gd_image_array as $key => $gd_image) {
 
