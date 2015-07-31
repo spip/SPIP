@@ -1878,6 +1878,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 	if (!$liste)
 		return $ancres[$ancre];
 
+	$position = min($position,$total);
 	$pagination = array(
 		'debut' => $debut,
 		'url' => parametre_url(self(),'fragment',''), // nettoyer l'id ahah eventuel
