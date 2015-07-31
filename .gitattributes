@@ -180,6 +180,7 @@ ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
 ecrire/inc/puce_statut.php -text
+ecrire/inc/recherche_to_array.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/ressembler.php -text
