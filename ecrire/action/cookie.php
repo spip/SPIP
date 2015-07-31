@@ -16,21 +16,29 @@ include_spip('inc/actions');
 include_spip('inc/cookie');
 
 // http://doc.spip.org/@action_cookie_dist
-function action_cookie_dist() {
+function action_cookie_dist($set_cookie_admin=null, $change_session = null) {
+	$redirect = null;
+	$test_echec_cookie = null;
+	if (is_null($set_cookie_admin)){
+		$set_cookie_admin = _request('cookie_admin');
+		$change_session = _request('change_session');
+		$test_echec_cookie = _request('test_echec_cookie');
 
-	// La cible de notre operation de connexion
-	$url = securiser_redirect_action(_request('url'));
-	$redirect = $url ? $url : generer_url_ecrire('accueil');
-	$redirect_echec = _request('url_echec');
-	if (!isset($redirect_echec)) {
-		if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
-			$redirect_echec = generer_url_public('login','',true);
-		else
-			$redirect_echec = $redirect;
+		// La cible de notre operation de connexion
+		$url = securiser_redirect_action(_request('url'));
+		$redirect = $url ? $url : generer_url_ecrire('accueil');
+		$redirect_echec = _request('url_echec');
+		if (!isset($redirect_echec)) {
+			if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
+				$redirect_echec = generer_url_public('login','',true);
+			else
+				$redirect_echec = $redirect;
+		}
 	}
 
+
 	// rejoue le cookie pour renouveler spip_session
-	if (_request('change_session') == 'oui') {
+	if ($change_session == 'oui') {
 		$session = charger_fonction('session', 'inc');
 		$session(true);
 		spip_log("statut 204 pour " . $_SERVER['REQUEST_URI']);
@@ -52,30 +60,35 @@ function action_cookie_dist() {
 			     _T('login_nouvelle_tentative'),
 			     (strpos($url,_DIR_RESTREINT_ABS)!==false));
 	}
+	else {
+		
+		// en cas de login sur bonjour=oui, on tente de poser un cookie
+		// puis de passer au login qui diagnostiquera l'echec de cookie
+		// le cas echeant.
+		if ($test_echec_cookie == 'oui') {
+			spip_setcookie('spip_session', 'test_echec_cookie');
+			if ($redirect)
+				$redirect = parametre_url(parametre_url($redirect_echec,'var_echec_cookie','oui','&'),'url',rawurlencode($redirect),'&');
+		}
+		else {
 
-	// en cas de login sur bonjour=oui, on tente de poser un cookie
-	// puis de passer au login qui diagnostiquera l'echec de cookie
-	// le cas echeant.
-	if (_request('test_echec_cookie') == 'oui') {
-		spip_setcookie('spip_session', 'test_echec_cookie');
-		redirige_par_entete(parametre_url(parametre_url($redirect_echec,'var_echec_cookie','oui','&'),'url',rawurlencode($redirect),'&'));
-	}
-
-	$cook = isset($_COOKIE['spip_admin']) ? $_COOKIE['spip_admin'] : '';
-	// Suppression cookie d'admin ?
-	if (_request('cookie_admin') == "non") {
-		if ($cook)
-			spip_setcookie('spip_admin', $cook, time() - 3600 * 24);
-	}
-	// Ajout de cookie d'admin
-	else if (isset($set_cookie_admin)
-	  OR $set_cookie_admin = _request('cookie_admin')) {
-		spip_setcookie('spip_admin', $set_cookie_admin,
-			time() + 14 * 24 * 3600);
+			$cook = isset($_COOKIE['spip_admin']) ? $_COOKIE['spip_admin'] : '';
+			// Suppression cookie d'admin ?
+			if ($set_cookie_admin == "non") {
+				if ($cook)
+					spip_setcookie('spip_admin', $cook, time() - 3600 * 24);
+			}
+			// Ajout de cookie d'admin
+			else if ($set_cookie_admin) {
+				spip_setcookie('spip_admin', $set_cookie_admin,
+					time() + 14 * 24 * 3600);
+			}
+		}
 	}
 	
 	// Redirection finale
-	redirige_par_entete($redirect, true);
+	if ($redirect)
+		redirige_par_entete($redirect, true);
 }
 
 ?>
