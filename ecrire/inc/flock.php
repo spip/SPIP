@@ -292,11 +292,7 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 	$base = str_replace("//", "/", $base);
 
 	# suppr le dernier caractere si c'est un / ou un _
-	switch(substr($base,-1)) {
-		case '/':
-		case '_':
-			$base = substr($base,0,-1);
-	}
+	$base = rtrim($base, '/_');
 
 	if (!strlen($subdir)) {
 		$n = strrpos($base, "/");
