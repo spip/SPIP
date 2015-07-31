@@ -625,15 +625,16 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 // Sinon, ne retourne rien (affectation directe dans l'arbre)
 
 // http://doc.spip.org/@calculer_criteres
-function calculer_criteres ($idb, &$boucles) {
-
+function calculer_criteres ($idb, &$boucles)
+{
+	$msg = '';
+	$boucle = $boucles[$idb];
+	$table = strtoupper($boucle->id_table);
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
-	$err = '';
-	foreach($boucles[$idb]->criteres as $crit) {
+	foreach($boucle->criteres as $crit) {
 		$critere = $crit->op;
 		// critere personnalise ?
-		if (
-		  (!function_exists($f="critere_".strtoupper($boucles[$idb]->id_table)."_".$critere))
+		if ((!function_exists($f="critere_".$table."_".$critere))
 		AND (!function_exists($f=$f."_dist"))
 		AND (!function_exists($f="critere_".$critere))
 		AND (!function_exists($f=$f."_dist"))	) {
@@ -645,11 +646,11 @@ function calculer_criteres ($idb, &$boucles) {
 
 		// Gestion centralisee des erreurs pour pouvoir propager
 		if (is_array($res)) {
-			$err = $res;
-			erreur_squelette($res, $boucles[$idb]);
+			$msg = $res;
+			erreur_squelette($msg, $boucle);
 		}
 	}
-	return $err;
+	return $msg;
 }
 
 // Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989

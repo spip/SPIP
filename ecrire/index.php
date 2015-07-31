@@ -158,7 +158,7 @@ $var_f = charger_fonction($exec);
 $var_f();
 
 if ($GLOBALS['var_mode'] == 'debug') {
-	erreur_squelette("", "");
+	erreur_squelette('', '');
 }
 if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin) {
 	include_spip('public/debusquer');

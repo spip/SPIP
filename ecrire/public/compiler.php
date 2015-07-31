@@ -118,8 +118,8 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 
 define('CODE_INCLURE_SCRIPT', 'if (is_readable($path = %s))
 	include $path;
-else  denoncer_inclure_dynamique(array("fichier_introuvable", array("fichier" => "%s")),
-		array(%s));'
+else { include_spip("public/compiler");
+	erreur_squelette(array("fichier_introuvable", array("fichier" => "%s")), reconstruire_contexte_compil(array(%s)));}'
 );
 
 // http://doc.spip.org/@calculer_inclure
@@ -438,6 +438,18 @@ function memoriser_contexte_compil($p) {
 		_q($GLOBALS['spip_lang'])));
 }
 
+function reconstruire_contexte_compil($context_compil)
+{
+	if (!is_array($context_compil)) return $context_compil;
+	include_spip('public/interfaces');
+	$p = new Contexte;
+	$p->descr = array('sourcefile' => $context_compil[0],
+				  'nom' => $context_compil[1]);
+	$p->id_boucle = $context_compil[2];
+	$p->ligne = $context_compil[3];
+	$p->lang = $context_compil[4];
+	return $p;
+}
 
 // http://doc.spip.org/@calculer_dec
 function calculer_dec($nom, $val)
@@ -914,14 +926,15 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 					$boucles[$id]->jointures = $x;
 			} else {
 				$boucles[$id]->type_requete = '';
-				$x = $boucles[$id]->sql_serveur;
-				$x = $x ? "$x:$type" : $type;
-				// ne pas renvoyer d'erreur si la table est optionnelle
-				// declare par ? avant ) dans <BOUCLE_A(table ?)>
+				// Pas une erreur si la table est optionnelle
 				if (!$boucles[$id]->table_optionnelle) {
+					$boucle = $boucles[$id];
+					$x = (!$boucle->sql_serveur ? '' :
+					      ($boucle->sql_serveur . ":")) .
+					  $type;
 					$msg = array('zbug_table_inconnue',
 							array('table' => $x));
-					erreur_squelette($msg, $boucles[$id]);
+					erreur_squelette($msg, $boucle);
 				}
 			}
 		}

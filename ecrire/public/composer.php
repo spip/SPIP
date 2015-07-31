@@ -68,7 +68,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		$f = $boucle->return;
 		if (@eval("return true; $f ;") ===  false) {
 		// Code syntaxiquement faux (critere etc mal programme')
-			erreur_squelette(_T('zbug_erreur_compilation'), $boucle); 
+			erreur_squelette(_T('zbug_erreur_compilation'), $boucle);
 			// continuer pour trouver d'autres fautes eventuelles
 			// mais prevenir que c'est mort
 			$nom = '';
@@ -366,7 +366,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 		else {
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			denoncer_inclure_dynamique($msg, $context_compil);
+			erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
 			return '';
 		}
 	}
@@ -389,7 +389,7 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
-			denoncer_inclure_dynamique($msg, $context_compil);
+			erreur_squelette($msg, reconstruire_contexte_compil($context_compil));
 			return '';
 		}
 	}
