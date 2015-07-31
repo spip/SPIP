@@ -33,8 +33,11 @@ function inc_msiefix_dist($texte) {
 "<script type='text/javascript'><!--
 if (window.jQuery && jQuery.browser.msie) {
 $ifixpng
+
 jQuery.ifixpng('".str_repeat('../', $GLOBALS['profondeur_url'])."rien.gif');
-jQuery('img').ifixpng();
+var fixie = function(){jQuery('img').ifixpng();}
+fixie();
+onAjaxLoad(fixie);
 }
 // --></script>\n";
 	}
