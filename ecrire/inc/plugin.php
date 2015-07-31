@@ -139,16 +139,17 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 
 	foreach($liste_plug as $plug)
 		$infos[$plug] = plugin_get_infos($plug,$force);
-	
+
 	if (is_array($liste_plug)){
 		// construire une liste ordonnee des plugins
 		$count = 0;
 		while ($c=count($liste_plug) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
 			#echo "tour::";var_dump($liste_plug);
 			$count = $c;
-			foreach($liste_plug as $k=>$plug){
-				if (isset($infos[$plug]['erreur'])) unset($liste_plug[$k]);
-				else{
+			foreach($liste_plug as $k=>$plug) {
+				if (isset($infos[$plug]['erreur'])) {
+					unset($liste_plug[$k]);
+				} else {
 					$version = isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL;
 					if (isset($liste[$p=strtoupper($infos[$plug]['prefix'])])){
 						// prendre le plus recent
@@ -216,12 +217,15 @@ function liste_chemin_plugin_actifs(){
 }
 
 // http://doc.spip.org/@ecrire_plugin_actifs
-function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
+function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
+
+	include_spip('inc/meta');
+
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
-	
+
 	if ($operation!='raz'){
 		$plugin_actifs = liste_chemin_plugin_actifs();
 		$plugin_liste = liste_plugin_files();
@@ -231,10 +235,10 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 		if ($operation=='enleve')
 			$plugin = array_diff($plugin_valides,$plugin);
 	}
-	
-	// recharcher le xml des plugins a activer
+
+	// recharger le xml des plugins a activer
 	$plugin_valides = liste_plugin_valides($plugin,$infos,true);
-	
+
 	ecrire_meta('plugin',serialize($plugin_valides));
 	$plugin_header_info = array();
 	foreach($plugin_valides as $p=>$info){
@@ -345,11 +349,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 	$liste_fichier_verif2 = pipeline_precompile();
 	$liste_fichier_verif = array_merge($liste_fichier_verif,$liste_fichier_verif2);
 
-	// horrible !
+	// on note dans tmp la liste des fichiers qui doivent etre presents,
+	// pour les verifier "souvent"
 	foreach ($liste_fichier_verif as $k => $f)
 		$liste_fichier_verif[$k] = _DIR_PLUGINS.preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
 	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
 		serialize($liste_fichier_verif));
+
+	ecrire_metas();
 }
 
 // precompilation des pipelines
@@ -417,7 +424,6 @@ function verif_plugin($pipe_recherche = false){
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
-	ecrire_metas();
 }
 
 // http://doc.spip.org/@ordonne_plugin
@@ -434,7 +440,6 @@ function ordonne_plugin(){
 	}
 	ksort($liste_triee);
 	ecrire_plugin_actifs($liste_triee);
-	ecrire_metas();
 }
 
 // http://doc.spip.org/@spip_plugin_install
@@ -760,7 +765,10 @@ function plugin_pipeline_props(&$arbre){
 
 // http://doc.spip.org/@verifie_include_plugins
 function verifie_include_plugins() {
-	if (_request('exec')!="admin_plugin"
+	include_spip('inc/meta');
+	ecrire_meta('message_crash_plugins', 1);
+
+/*	if (_request('exec')!="admin_plugin"
 	AND $_SERVER['X-Requested-With'] != 'XMLHttpRequest'){
 		if (@is_readable(_DIR_PLUGINS)) {
 			include_spip('inc/headers');
@@ -773,7 +781,32 @@ function verifie_include_plugins() {
 		verif_plugin();
 		spip_log("desactivation des plugins suite a suppression du repertoire");
 	}
+*/
 }
+
+
+function message_crash_plugins() {
+	if (autoriser('configurer')
+	AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
+	AND $l = @unserialize($l)) {
+		$err = array();
+		foreach ($l as $fichier) {
+			if (!@is_readable($fichier)) {
+				spip_log("Verification plugin: echec sur $fichier !");
+				$err[] = $fichier;
+			}
+		}
+
+		if ($err) {
+			$err = array_map('joli_repertoire', array_unique($err));
+			return "<a href='".generer_url_ecrire('admin_plugin')."'>"
+				._L("Erreur dans les plugins : @plugins@",
+					array('plugins' => join(', ', $err)))
+				.'</a>';
+		}
+	}
+}
+
 
 // http://doc.spip.org/@affiche_bloc_plugin
 function affiche_bloc_plugin($plug_file, $info) {

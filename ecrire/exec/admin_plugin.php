@@ -80,6 +80,9 @@ function exec_admin_plugin_dist($retour='') {
 
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
+	$plugins_interessants = @array_keys(unserialize(lire_meta('plugins_interessants')));
+	if (!is_array($plugins_interessants))
+		$plugins_interessants = array();
 
 	if ($lpf) {
 		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
@@ -102,7 +105,8 @@ function exec_admin_plugin_dist($retour='') {
 			foreach ($lpf as $f)
 				if (!strpos($f, '/')
 				OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
-				OR in_array($f, $lcpa))
+				OR in_array($f, $lcpa)
+				OR in_array($f, $plugins_interessants))
 					$lcpaffiche[] = $f;
 			if (count($lcpaffiche)<10 && !$format) $format = 'liste';
 			$lien_format = $format!='liste' ?

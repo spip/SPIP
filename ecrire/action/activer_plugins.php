@@ -36,7 +36,20 @@ function enregistre_modif_plugin(){
 
 	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['auteur_session']['id_auteur'] . ": " . join(',', $plugin));
 	ecrire_plugin_actifs($plugin);
-	include_spip('inc/meta');
+
+	// Chaque fois que l'on valide des plugins, on memorise la liste de ces plugins comme etant "interessants", avec un score initial, qui sera decremente a chaque tour : ainsi un plugin active pourra reter visible a l'ecran, jusqu'a ce qu'il tombe dans l'oubli.
+	$plugins_interessants = @unserialize(lire_meta('plugins_interessants'));
+	if (!is_array($plugins_interessants))
+		$plugins_interessants = array();
+
+	$plugins_interessants2 = array();
+
+	foreach($plugins_interessants as $plug => $score)
+		if ($score > 1)
+			$plugins_interessants2[$plug] = $score-1;
+	foreach ($plugin as $plug)
+		$plugins_interessants2[$plug] = 10; // score initial
+	ecrire_meta('plugins_interessants', serialize($plugins_interessants2));
 	ecrire_metas();
 }
 
