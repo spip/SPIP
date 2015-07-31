@@ -23,7 +23,7 @@ jQuery.fn.async_upload = function(add_function) {
     }
   
     if (!form.jFrame) {
-      form.jFrame = $("<iframe id='upload_frame"+num+"' name='upload_frame"+num+"' frameborder='0' marginwidth='0' marginheight='0' scrolling='no' style='position:absolute;display:none' onload='this.iframeload("+num+")'></iframe>")
+      form.jFrame = $("<iframe id='upload_frame"+num+"' name='upload_frame"+num+"' frameborder='0' marginwidth='0' marginheight='0' scrolling='no' style='position:absolute;width:1px;height:1px;' onload='this.iframeload("+num+")'></iframe>")
       .appendTo("body");
     }
     
