@@ -134,7 +134,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	if ($edit_login) {
 		$corps .= "<label for='new_login'><b>"._T('item_login')."</b></label> "
 		. "<span style='color: red'>("._T('texte_plus_trois_car').")</span> :<br />\n"
-		. "<input type='text' name='new_login' id='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n";
+		. "<input type='text' name='new_login' id='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' autocomplete='off' /><br />\n";
 	} else {
 		$corps .= "<fieldset style='padding:5'><legend><b>"._T('item_login')."</b><br />\n</legend><br /><b>".$auteur['login']."</b> "
 		. "<i> ("._T('info_non_modifiable').")</i>\n<br />";
@@ -144,9 +144,9 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	if ($edit_pass) {
 		$res = "<label for='new_pass'><b>"._T('entree_nouveau_passe')."</b></label> "
 		. "<span style='color: red'>("._T('info_plus_cinq_car').")</span> :<br />\n"
-		. "<input type='password' name='new_pass' id='new_pass' class='formo' value=\"\" size='40' /><br />\n"
+		. "<input type='password' name='new_pass' id='new_pass' class='formo' value=\"\" size='40' autocomplete='off' /><br />\n"
 		. "<label for='new_pass2'>" . _T('info_confirmer_passe')."</label><br />\n"
-		. "<input type='password' name='new_pass2' id='new_pass2' class='formo' value=\"\" size='40' /><br />\n";
+		. "<input type='password' name='new_pass2' id='new_pass2' class='formo' value=\"\" size='40' autocomplete='off' /><br />\n";
 		$corps .= $res;
 	}
 
