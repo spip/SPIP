@@ -161,6 +161,14 @@ function inc_traduire_dist($ori, $lang) {
 	if (substr($text,0,1) === '<')
 		$text = str_replace(array('<NEW>', '<MODIF>'), array(), $text);
 
+	// Si on n'est pas en utf-8, la chaine peut l'etre...
+	// le cas echeant on la convertit en entites html &#xxx;
+	if ($GLOBALS['meta']['charset'] !== 'utf-8'
+	AND preg_match(',[\x7f-\xff],S', $text)) {
+		include_spip('inc/charsets');
+		$text = charset2unicode($text,'utf-8');
+	}
+
 	$deja_vu[$lang][$ori] = $text;
 
 	return $text;
