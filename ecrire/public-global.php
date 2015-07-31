@@ -20,12 +20,6 @@ function calcule_header_et_page ($fond) {
 	  $var_confirm, $var_mode;
 	  global $_GET, $_POST, $_COOKIE, $_SERVER;
 
-	// authentification du visiteur
-	if ($_COOKIE['spip_session'] OR
-	($_SERVER['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
-		include_ecrire ("inc_session");
-		verifier_visiteur();
-	}
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
 		include_ecrire('inc_lang');

@@ -223,8 +223,8 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 // verifie si on a un cookie de session ou un auth_php correct
 // et charge ses valeurs dans $GLOBALS['auteur_session']
 //
-function verifier_visiteur() {
-	if (verifier_session($GLOBALS['_COOKIE']['spip_session']))
+function verifier_session_visiteur() {
+	if (verifier_session($_COOKIE['spip_session']))
 		return true;
 	if (verifier_php_auth())
 		return true;

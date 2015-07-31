@@ -455,10 +455,6 @@ global $img, $frame, $aide, $var_lang, $lang;
   exit;
 
 // Recuperer les infos de langue (preferences auteur), si possible
-if (_FILE_CONNECT) {
-	include_ecrire ("inc_session");
-	verifier_visiteur();
-}
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
 if ($lang) changer_langue($lang); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
