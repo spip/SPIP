@@ -567,7 +567,8 @@ function afficher_groupe_mots($id_groupe) {
 
 		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var' style='position: relative;'>";
 
-		echo "<img src='img_pack/searching.gif' id='img_$tmp_var' style='position: absolute; $spip_lang_right: 0px; top: -20px; visibility: hidden; border: 0px;' />";;
+//		echo "<img src='img_pack/searching.gif' id='img_$tmp_var' style='position: absolute; $spip_lang_right: 0px; top: -20px; visibility: hidden; border: 0px;' />";;
+		echo http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
 
 		
 		echo "<div class='liste'>";

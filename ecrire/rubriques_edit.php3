@@ -170,9 +170,11 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $
 debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
 
 // Integrer la recherche de rubrique au clavier
-echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
-echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
+//echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
+//echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
 
+
+/*
 echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
 
 if ($connect_toutes_rubriques) {
@@ -188,6 +190,26 @@ if (acces_rubrique($id_parent)) {
 	enfant(0);
 }
 echo "</SELECT>\n";
+*/
+
+
+$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");
+if ($row = spip_fetch_array($query)) {
+	$titre_parent = entites_html(typo($row["titre"])); 
+} else {
+	$titre_parent = entites_html(_T("info_racine_site"));
+}
+echo "<a href=\"javascript:findObj('selection_rubrique').style.display='block';charger_id_url('ajax_page.php?fonction=aff_parent&id_rubrique=$id_parent&exclus=$id_rubrique','selection_rubrique');\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
+echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
+
+echo "<input type='hidden' id='id_parent' name='id_parent' value='$id_parent' />";
+echo "<input  type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
+echo "<div id='selection_rubrique' style='display: none;'></div>";
+
+//include_ecrire("inc_mini_nav.php");
+//echo mini_nav ($id_parent, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';", $id_rubrique, $aff_racine=true);
+
+
 
 // si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
 $query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";

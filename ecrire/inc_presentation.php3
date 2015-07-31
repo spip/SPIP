@@ -830,10 +830,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
+			$texte_img = http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
 
-			if ($afficher_trad) $texte_img .= "<img src='img_pack/searching.gif' id='img_$div_trad' style='visibility: hidden; border: 0px; float: $spip_lang_right;' /><div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
-
+			if ($afficher_trad) {
+				$texte_img .= http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
+			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
 			echo "<div id='$tmp_var'>";
@@ -1051,9 +1053,11 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
+			$texte_img = http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
+			
+			$texte_img .= http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<img src='img_pack/searching.gif' id='img_$div_trad' style='visibility: hidden; border: 0px; float: $spip_lang_right;' /><div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -2825,17 +2829,9 @@ else {
 			//	$onfocus = "onfocus=this.value='';";
 			echo "<form method='get' style='margin: 0px; position: relative;' action='recherche.php3'>";
 			
-			echo "<img src='img_pack/searching.gif' style='position: absolute; left: -25px; top: 5px; visibility: hidden;' id='img_resultats_recherche'>";
-
-			echo "<div id='resultats_recherche' style='position: absolute; visibility: hidden; background-color: $couleur_claire; top:-5px; left: 150px; width: 470px; padding: 5px;'></div>";
 
 			
 			echo "<input type=\"search\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value='$recherche_aff' name=\"recherche\" onkeypress=\"t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" autocomplete=\"off\" class=\"formo\" accesskey=\"r\" ".$onfocus.">";
-			echo "<div id='sugg_recherche' style='margin: 5px;'></div>";
-			
-			
-			
-			
 			echo "</form>";
 		echo "</div>";
 	// FIN GADGET recherche

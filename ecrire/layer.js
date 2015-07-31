@@ -98,29 +98,66 @@ function acceder_couche(couches, n, dir, icone, texte, sens) {
 }
 
 
+
+//
+// Fonctions pour mini_nav
+//
+
+function slide_horizontal (couche, slide, depart, etape ) {
+	obj = findObj_forcer(couche);
+	if (!obj) return;
+	if (!etape) {
+		depart = obj.scrollLeft;
+		etape = 0;
+	}
+	etape = Math.round(etape) + 1;
+	pos = Math.round(depart) + Math.round(((slide - depart) / 10) * etape);
+
+	obj.scrollLeft = pos;
+	if (etape < 10) setTimeout("slide_horizontal('"+couche+"', '"+slide+"', '"+depart+"', '"+etape+"')", 60);
+	else obj.scrollLeft = slide;
+}
+
+function changerhighlight (couche) {
+
+	kids = couche.parentNode.childNodes;
+	for (var i = 0; i < kids.length; i++) {
+ 		kids[i].className = "pashighlight";
+	}
+	couche.className = "highlight";
+}
+
+function aff_selection (type, rac, id) {
+//	alert (type + " - " + rac + " - " + id);
+	
+	charger_id_url("ajax_page.php?fonction=aff_info&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
+}
+
 //
 // Cette fonction charge du contenu - dynamiquement - dans un 
 
 
 var url_chargee = new Array();
 var xmlhttp = new Array();
+var image_search = new Array();
 
-function charger_id_url(myUrl,myField) 
+function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField); // selects the given element
 
 	if (!Field) return;
-	
-	image = findObj_forcer('img_'+myField);
-	
-	if (image) image.style.visibility = "visible";
-	
+		
 	if (xmlhttp[myField]) xmlhttp[myField].abort();
 	
 	if (url_chargee['mem_'+myUrl]) {
 		Field.innerHTML = url_chargee['mem_'+myUrl];
+		Field.style.visibility = "visible";
+		if(jjscript) eval(jjscript);
 	} else {
-        if(window.XMLHttpRequest) {
+		image_search[myField] = findObj_forcer('img_'+myField);
+		if (image_search[myField]) image_search[myField].style.visibility = "visible";
+    
+    	if(window.XMLHttpRequest) {
                 xmlhttp[myField] = new XMLHttpRequest(); 
         } else if(window.ActiveXObject) {
                 xmlhttp[myField] = new ActiveXObject("Microsoft.XMLHTTP");
@@ -132,9 +169,12 @@ function charger_id_url(myUrl,myField)
         xmlhttp[myField].onreadystatechange = function() {
                 if (xmlhttp[myField].readyState == 4) { 
                         Field.innerHTML = xmlhttp[myField].responseText; // puts the result into the element
-					//	url_chargee['mem_'+myUrl] = Field.innerHTML;
+						url_chargee['mem_'+myUrl] = Field.innerHTML;
 						Field.style.visibility = "visible";
-						if (image) image.style.visibility = "hidden";
+						if (image_search[myField]) {
+							image_search[myField].style.visibility = "hidden";
+						}
+						if(jjscript) eval(jjscript);
                }
         }
         xmlhttp[myField].send(null); 
