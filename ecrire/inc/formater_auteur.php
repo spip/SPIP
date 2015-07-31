@@ -26,13 +26,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // il n'a pas de messagerie interne, et n'a publie que des messages de forum
 
 // http://doc.spip.org/@inc_formater_auteur_dist
-function inc_formater_auteur_dist($id_auteur) {
+function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 
   global $connect_id_auteur, $connect_statut;
 
 	$id_auteur = intval($id_auteur);
 
-	$row = spip_fetch_array(spip_query("SELECT *, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti FROM spip_auteurs where id_auteur=$id_auteur"));
+	if ($row===NULL)
+		$row = spip_fetch_array(spip_query("SELECT *, (en_ligne<DATE_SUB(NOW(),INTERVAL 15 DAY)) AS parti FROM spip_auteurs where id_auteur=$id_auteur"));
 
 	$vals = array();
 

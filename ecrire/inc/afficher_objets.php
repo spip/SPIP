@@ -102,6 +102,13 @@ function afficher_titre_site($row){
 	
 	return array($s,$s2);
 }
+function afficher_titre_auteur($row){
+	return array($row['nom'],
+		((isset($row['restreint']) AND $row['restreint'])
+		   ? (" &nbsp;<small>"._T('statut_admin_restreint')."</small>")
+		   : ''));
+}
+
 // http://doc.spip.org/@afficher_titre_syndic_article
 function afficher_titre_syndic_article($row){
 	$titre=safehtml($row["titre"]);
@@ -533,4 +540,26 @@ function afficher_articles_trad_boucle($row)
 	: afficher_liste_display_eq4($largeurs, $vals, $styles);
 }
 
+function afficher_auteurs_boucle($row, &$tous_id,  $voir_logo, $own){
+	$vals = array();
+	$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	if ($row['statut'] == '0minirezo')
+		$row['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".intval($row['id_auteur'])));
+	
+	list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur'],$row);
+	if ($w) {
+	  if (preg_match(',^([^>]*>)[^<]*(.*)$,', $w,$r)) {
+	    $w = $r[1] . substr($row['site'],0,20) . $r[2];
+	  }
+	}
+	$vals[] = $s;
+	$vals[] = $mail;
+	$vals[] = $nom
+		. ((isset($row['restreint']) AND $row['restreint'])
+		   ? (" &nbsp;<small>"._T('statut_admin_restreint')."</small>")
+		   : '');
+	$vals[] = $w;
+	$vals[] = $p;
+	return $vals;	
+}
 ?>
