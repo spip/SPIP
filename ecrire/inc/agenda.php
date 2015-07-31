@@ -1153,8 +1153,7 @@ function calendrier_categories($table, $num, $objet)
     return generer_calendrier_class($table, $num, $objet);
   else {
     // cf calendrier.css
-    $result= spip_fetch_array(spip_query("
-SELECT	" . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . "
+    $result= spip_fetch_array(spip_query("SELECT " . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . "
 FROM	$table
 WHERE	$objet=$num
 "));
@@ -1248,7 +1247,7 @@ ORDER BY date
 			  'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
-			'URL' => generer_url_article($id));
+			'URL' => generer_url_article($id, 'prop'));
 	}
 }
 
@@ -1271,7 +1270,7 @@ ORDER BY date
 			  'CATEGORIES' => calendrier_categories('spip_rubriques', $id, 'id_rubrique'),
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
-			'URL' => generer_url_rubrique($id));
+			'URL' => generer_url_rubrique($id, 'prop'));
 	}
 }
 
@@ -1290,7 +1289,7 @@ ORDER BY date_heure
 		$ir = $row['id_rubrique'];
 		$evenements[$amj][]=
 		array(
-		      'URL' => generer_url_breve($id),
+		      'URL' => generer_url_breve($id, 'prop'),
 		      'CATEGORIES' => calendrier_categories('spip_breves', $ir, 'id_breve'),
 		      'SUMMARY' => $row['titre']);
 	}
