@@ -56,21 +56,6 @@ function barre_onglets_configuration() {
 	return $onglets;
 }
 
-
-// http://doc.spip.org/@barre_onglets_config_lang
-function barre_onglets_config_lang() {
-
-	$onglets=array();
-	$onglets['langues']=
-		  new Bouton('langue-24.png', 'info_langue_principale',
-			generer_url_ecrire("config_lang"));
-	$onglets['multi']=
-		  new Bouton('traduction-24.png', 'info_multilinguisme',
-			generer_url_ecrire("config_multilang"));
-	return $onglets;
-}
-
-
 function barre_onglets_plugins() {
 
 	$onglets=array();

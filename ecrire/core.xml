@@ -102,7 +102,7 @@
 		<titre>titre_identite_site</titre>		
 		<url>configurer_identite</url>
 	</bouton>
-	<bouton id='config_lang' parent="bando_configuration">
+	<bouton id='configurer_langue' parent="bando_configuration">
 		<icone>images/langue-16.png</icone>
 		<titre>icone_gestion_langues</titre>		
 	</bouton>
@@ -203,6 +203,14 @@
 		<url>charger_plugin</url>
 	</onglet>
 
+	<onglet id='configurer_langue' parent="config_lang">
+		<icone>images/langue-24.png</icone>
+		<titre>info_langue_principale</titre>
+	</onglet>
+	<onglet id='config_multilang' parent="config_lang">
+		<icone>images/traduction-24.png</icone>
+		<titre>info_multilinguisme</titre>
+	</onglet>
 
 
 	<pipeline><nom>accueil_encours</nom><action></action></pipeline>
