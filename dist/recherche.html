@@ -42,19 +42,19 @@
 
 				[(#REM) Articles trouves ]
 				<B_articles>
-				#ANCRE_PAGINATION
-				<h2 class="invisible"><:articles:></h2>
-
-				<ul>
-					<BOUCLE_articles(ARTICLES) {recherche}
-					{par points} {inverse} {pagination}>
-					<li class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-					<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
-					</li>
-					</BOUCLE_articles>
-				</ul>
-				[<p class="pagination">(#PAGINATION)</p>]
+				<div class="liste-articles">
+					#ANCRE_PAGINATION
+					<h2 class="invisible"><:articles:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {pagination}>
+						<li class="extrait">
+						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+						<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
 				</B_articles>
 
 			</div><!-- fin contre-encart -->
@@ -131,7 +131,7 @@
 				</div>
 				</B_sites>
 
-			</div>
+			</div><!-- fin encart -->
 
 		</div><!-- fin contenu -->
 
@@ -146,9 +146,8 @@
 
 	</div><!-- fin conteneur -->
 	
-
-[(#REM) Pied de page ]
-<INCLURE{fond=inc-pied}{lang}>
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
 
 </div><!-- fin page -->
 </body>

@@ -18,10 +18,10 @@
 </head>
 
 <body id="page_forum">
-	<div id="page">
+<div id="page">
 
-		[(#REM) Entete de la page + titre du site ]
-		<INCLURE{fond=inc-entete}{lang}>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
 
 	[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
@@ -64,18 +64,20 @@
 		&gt; <a href="#URL_FORUM">[(#TITRE|couper{80})]</a>
 		</BOUCLE_contexte_forum>
 
-		 &gt; <:poster_message:>
+		&gt; <:poster_message:>
 		
-		</div>
+	</div>
 
 
-		<div id="conteneur">
+	<div id="conteneur">
 
-			[(#REM) Contenu : poster un message dans le forum ]
+		[(#REM) Contenu : poster un message dans le forum ]
 
-			<div id="contenu">
+		<div id="contenu">
 
-				<h1 class="invisible"><:poster_message:></h1>
+			<h1 class="invisible"><:poster_message:></h1>
+
+			<div class="liste-articles">
 
 				<BOUCLE_forum_parent(FORUMS) {id_forum}>
 				<div class="extrait">
@@ -126,25 +128,27 @@
 
 				<//B_forum_parent>
 
-				[<h3 class="spip"><:envoyer_message:></h3>
-				(#FORMULAIRE_FORUM)]
+			</div>
 
-			</div><!-- fin contenu -->
+			[<h3 class="spip"><:envoyer_message:></h3>
+			(#FORMULAIRE_FORUM)]
 
-			[(#REM) Menu de navigation laterale ]
-			<div id="navigation">
-				<h1 class="invisible"><:navigation:></h1>
+		</div><!-- fin contenu -->
 
-				[(#REM) Menu de navigation par rubriques ]
-				<INCLURE{fond=inc-rubriques}{lang}>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
 
-			</div><!-- fin navigation -->
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}>
 
-		</div><!-- fin conteneur -->
+		</div><!-- fin navigation -->
 
-		[(#REM) Pied de page ]
-		<INCLURE{fond=inc-pied}{lang}>
+	</div><!-- fin conteneur -->
 
-	</div><!-- fin page -->
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{lang}>
+
+</div><!-- fin page -->
 </body>
 </html>

@@ -18,7 +18,7 @@
 </head>
 
 <body id="page_auteur">
-	<div id="page">
+<div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}{lang}>
@@ -44,18 +44,24 @@
 
 			[<div class="encart">
 			(#FORMULAIRE_ECRIRE_AUTEUR)
-			</div>]
+			</div><!-- fin encart -->]
 
 			[(#REM) Articles de l'auteur ]
 			<B_articles>
 			<div class="contre-encart">
-				<h2 class="invisible"><:articles_auteur:></h2>
-				<ul>
-					<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse}>
-					<li class="extrait"><h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-					<small>[(#DATE|affdate)]</small></li>
-					</BOUCLE_articles>
-				</ul>
+
+				<div class="liste-articles">
+					<h2 class="invisible"><:articles_auteur:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse}>
+						<li class="extrait">
+							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							<small>[(#DATE|affdate)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+				</div>
+
 			</div><!-- fin contre-encart -->
 			</B_articles>
 
@@ -91,7 +97,7 @@
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{lang}>
 
-	</div><!-- fin page -->
+</div><!-- fin page -->
 </body>
 </html>
 </BOUCLE_auteur_principal>
