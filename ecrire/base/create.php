@@ -24,7 +24,7 @@ function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false) {
 	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
 
 	if (!$upgrade OR !($sql_desc = sql_showtable($table,true,$serveur)))
-		$fcreate($k, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+		$fcreate($table, $desc['field'], $desc['key'], $autoinc, false, $serveur);
 	if ($upgrade && ($sql_desc OR $sql_desc = sql_showtable($k,true,$serveur))) {
 		// ajouter les champs manquants
 		$last = '';
@@ -51,7 +51,7 @@ function creer_base($serveur='') {
 		creer_ou_upgrader_table($k,$v,false);
 }
 
-function maj_base($upgrade_tables=array(),$serveur=''){
+function maj_tables($upgrade_tables=array(),$serveur=''){
 	global $tables_principales, $tables_auxiliaires;
 	foreach($tables_principales as $k => $v)
 		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
