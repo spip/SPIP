@@ -50,8 +50,10 @@ function genie_mail_dist($t) {
 				}
 	}
 
-	if (strlen($mail_nouveautes) > 10)
-		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
+	if (strlen($mail_nouveautes) > 10) {
+		$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
+		$envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
+	}
 	else
 		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");
 	return 1;
