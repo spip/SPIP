@@ -60,13 +60,6 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		  .join("</td>\n<td>",$err)
 		  ."</td></tr>\n";
 
-		$anc .= "<a style='font-family: monospace' title='"
-		  .  textebrut(preg_replace(',</?tr>,', "\n",$err[0]))
-		  . "' href='#req$i'>"
-		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
-		  . "</a>"
-		  . (($i % 50) ? '' : "<br />\n");
-
 		$i++;
 	}
 	$cols = 1+count($err);
@@ -85,14 +78,19 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 // http://doc.spip.org/@chrono_requete
 function chrono_requete($temps)
 {
-	$t = $q = $n = array();
+	$total = 0;
+	$t = $q = $n = $d = array();
 	foreach ($temps as $key => $row) {
 		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
-		$boucle .= '&nbsp;(' . @++$n[$boucle] . ")";
+		$total += $dt;
+		$d[$boucle]+= $dt;
 		$t[$key] = $dt;
 		$q[$key] = $nb;
 
-		$e = "<tr><th colspan='2' style='text-align:center'>$boucle</th></tr>"
+		$e = "<tr><th colspan='2' style='text-align:center'>"
+		. $boucle 
+		. '&nbsp;(' . @++$n[$boucle] . ")"
+		. "</th></tr>"
 		.  "<tr><td>Time</td><td>$dt</td></tr>" 
 		.  "<tr><td>Order</td><td>$nb</td></tr>" 
 		. "<tr><td>Res</td><td>$res</td></tr>" ;
@@ -103,12 +101,38 @@ function chrono_requete($temps)
 			  . "</td></tr>";
 		}
 
-		$temps[$key] = array("<br /><table border='1'>$e</table>", $query);
+		$temps[$key] = array($boucle, "<br /><table border='1'>$e</table>", $query);
 	}
 	array_multisort($t, SORT_DESC, $q, $temps);
 
+	$i = 1;
+	$t = array();
+	foreach($temps as $k => $v) {
+		$boucle = array_shift($v);
+		$temps[$k] = $v;
+		$x = "<a style='font-family: monospace' title='"
+		  .  textebrut(preg_replace(',</tr>,', "\n",$v[0]))
+		  . "' href='#req$i'>"
+		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
+		  . "</a>";
+		if (count($t[$boucle]) % 30 == 29) $x .= "<br />";
+		$t[$boucle][] = $x;
+		$i++;
+	}
+
+	foreach ($d as $k => $v) {
+		$d[$k] =  $n[$k] . "</td><td>$k</td><td>$v</td><td>"
+		  . join('',$t[$k]);
+	}
+
+	$titre = count($temps) . ' ' . _T('icone_statistiques_visites')
+	  . ' SQL<br />' . _T('zbug_profile', array('time' => $total)) 
+	  . "<table style='text-align: left; border: 1px solid;'><tr><td>"
+	  . join("</td></tr>\n<tr><td>", $d)
+	  . "</td></tr></table>";
+
 	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
-	. affiche_erreurs_page($temps, _T('icone_statistiques_visites'));
+	. affiche_erreurs_page($temps, $titre);
 }
 
 //
