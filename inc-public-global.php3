@@ -115,7 +115,7 @@ function calcule_header_et_page ($fond, $delais) {
 	}
 
 	// Content-type: par defaut html+charset (poss surcharge par la suite)
-	if (!headers_sent())
+	if (!headers_sent() AND !$flag_preserver)
 		header("Content-Type: text/html; charset=".lire_meta('charset'));
 
 	return $page;
