@@ -12,12 +12,17 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
-// Attention a modifier simultanement le sanity check de
-// la fonction retire_cache() de inc/invalideur
-//
-// http://doc.spip.org/@generer_nom_fichier_cache
+/**
+ * Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
+ * Attention a modifier simultanement le sanity check de
+ * la fonction retire_cache() de inc/invalideur
+ *
+ * http://doc.spip.org/@generer_nom_fichier_cache
+ *
+ * @param array $contexte
+ * @param array $page
+ * @return string
+ */
 function generer_nom_fichier_cache($contexte, $page) {
 
 	$cache = $page['contexte_implicite']['cache'] . '-';
@@ -54,10 +59,16 @@ function generer_nom_fichier_cache($contexte, $page) {
 	return $subdir.$cache;
 }
 
-// Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
-// (pas de passage par reference car on veut conserver la version non compressee
-// pour l'afficher)
-// http://doc.spip.org/@gzip_page
+/**
+ * Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
+ * (pas de passage par reference car on veut conserver la version non compressee
+ * pour l'afficher)
+ * on positionne un flag gz si on comprime, pour savoir si on doit decompresser ou pas
+ * http://doc.spip.org/@gzip_page
+ *
+ * @param array $page
+ * @return array
+ */
 function gzip_page($page) {
 	if (function_exists('gzcompress') AND strlen($page['texte']) > 16*1024) {
 		$page['gz'] = true;
@@ -68,9 +79,17 @@ function gzip_page($page) {
 	return $page;
 }
 
-// Faut-il decompresser ce cache ?
-// (passage par reference pour alleger)
-// http://doc.spip.org/@gunzip_page
+/**
+ * Faut-il decompresser ce cache ?
+ * (passage par reference pour alleger)
+ * on met a jour le flag gz quand on decompresse, pour ne pas risquer
+ * de decompresser deux fois de suite un cache (ce qui echoue)
+ *
+ * http://doc.spip.org/@gunzip_page
+ *
+ * @param array $page
+ * @return void
+ */
 function gunzip_page(&$page) {
 	if ($page['gz']) {
 		$page['texte'] = gzuncompress($page['texte']);
@@ -82,14 +101,12 @@ function gunzip_page(&$page) {
  * gestion des delais d'expiration du cache...
  * $page passee par reference pour accelerer
  * 
- * La fonction retourne 
+ * @param array $page
+ * @param int $date
+ * @return int
  * 1 si il faut mettre le cache a jour
  * 0 si le cache est valide
  * -1 si il faut calculer sans stocker en cache
- *
- * @param array $page
- * @param int $date
- * @return -1/0/1
  */
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
@@ -133,9 +150,16 @@ function cache_valide(&$page, $date) {
 		return 0;
 }
 
-// Creer le fichier cache
-# Passage par reference de $page par souci d'economie
-// http://doc.spip.org/@creer_cache
+/**
+ * Creer le fichier cache
+ * Passage par reference de $page par souci d'economie
+ *
+ * http://doc.spip.org/@creer_cache
+ *
+ * @param array $page
+ * @param string $chemin_cache
+ * @return void
+ */
 function creer_cache(&$page, &$chemin_cache) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
@@ -184,9 +208,16 @@ function creer_cache(&$page, &$chemin_cache) {
 }
 
 
-// purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
-// vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
-// http://doc.spip.org/@nettoyer_petit_cache
+/**
+ * purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
+ * vieux fichiers ; (cette fonction ne sert que dans des plugins obsoletes)
+ *
+ * http://doc.spip.org/@nettoyer_petit_cache
+ *
+ * @param string $prefix
+ * @param int $duree
+ * @return void
+ */
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'tmp/CACHE/rech/'
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
@@ -199,21 +230,30 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 }
 
 
-// Interface du gestionnaire de cache
-// Si son 3e argument est non vide, elle passe la main a creer_cache
-// Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI)
-// et affecte les 4 autres parametres recus par reference:
-// - use_cache qui vaut
-//     -1 s'il faut calculer la page sans la mettre en cache
-//      0 si on peut utiliser un cache existant
-//      1 s'il faut calculer la page et la mettre en cache
-// - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
-// - page qui est le tableau decrivant la page, si le cache la contenait
-// - lastmodified qui vaut la date de derniere modif du fichier.
-// Elle retourne '' si tout va bien
-// un message d'erreur si le calcul de la page est totalement impossible
-
-// http://doc.spip.org/@public_cacher_dist
+/**
+ * Interface du gestionnaire de cache
+ * Si son 3e argument est non vide, elle passe la main a creer_cache
+ * Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI)
+ * et affecte les 4 autres parametres recus par reference:
+ * - use_cache qui vaut
+ *     -1 s'il faut calculer la page sans la mettre en cache
+ *      0 si on peut utiliser un cache existant
+ *      1 s'il faut calculer la page et la mettre en cache
+ * - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
+ * - page qui est le tableau decrivant la page, si le cache la contenait
+ * - lastmodified qui vaut la date de derniere modif du fichier.
+ * Elle retourne '' si tout va bien
+ * un message d'erreur si le calcul de la page est totalement impossible
+ *
+ * http://doc.spip.org/@public_cacher_dist
+ *
+ * @param array $contexte
+ * @param int $use_cache
+ * @param string $chemin_cache
+ * @param array $page
+ * @param int $lastmodified
+ * @return string|void
+ */
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
 	# fonction de cache minimale : dire "non on ne met rien en cache"
@@ -227,7 +267,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Cas ignorant le cache car completement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'
-	OR (substr($contexte_implicite['cache'],0,8)=='modeles/') 
+	OR (substr($contexte_implicite['cache'],0,8)=='modeles/')
 	OR (_request('connect'))
 // Mode auteur authentifie appelant de ecrire/ : il ne faut rien lire du cache
 // et n'y ecrire que la compilation des squelettes (pas les pages produites)
@@ -296,7 +336,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			supprimer_fichier(_DIR_CACHE.$chemin_cache_session);
 	}
 
-	// $delais par defaut (pour toutes les pages sans #CACHE{})
+	// $delais par defaut
+	// pour toutes les pages sans #CACHE{} hors modeles/ et espace privé
+	// qui sont a cache nul par defaut
 	if (!isset($GLOBALS['delais'])) {
 		define('_DUREE_CACHE_DEFAUT', 24*3600);
 		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
