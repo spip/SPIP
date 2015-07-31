@@ -80,6 +80,11 @@ function urls_html_dist($i, &$entite, $args='', $ancre='') {
 			$entite = ($r['type'] == 'syndic') ?  'site' : $r['type'];
 			$contexte[id_table_objet($entite)] = $r['id_objet'];
 		}
+		// vraiment on n'a rien trouve
+		if ($entite == 'type_urls') {
+			$entite = '404';
+			$contexte['erreur'] = '';
+		}
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
