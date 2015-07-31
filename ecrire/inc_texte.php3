@@ -454,9 +454,9 @@ function typo($letexte, $echapper=true) {
 	$letexte = corriger_caracteres($letexte);
 
 	// Proteger les caracteres typographiques a l'interieur des tags html
-	$protege = "!':;?";
-	$illegal = "\x1\x2\x3\x4\x5";
-	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?][^<>]*>,ims",
+	$protege = "!':;?~";
+	$illegal = "\x1\x2\x3\x4\x5\x6";
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?~][^<>]*>,ims",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
