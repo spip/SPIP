@@ -5,6 +5,7 @@ config/remove.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
 dist/formulaires/choix_mots.html -text
+dist/formulaires/ecrire_auteur.php -text
 dist/formulaires/forum/charger.php -text
 dist/formulaires/forum/traiter.php -text
 dist/formulaires/forum/verifier.php -text

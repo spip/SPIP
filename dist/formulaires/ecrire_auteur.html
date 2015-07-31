@@ -1,53 +1,48 @@
-<div class="formulaire_spip formulaire_ecrire_auteur formfx" id="formulaire_ecrire_auteur#ENV{id}">
-
-[<fieldset class="reponse_formulaire">
-    <legend><:envoyer_message:></legend>
-    <p>(#ENV*{mailenvoye})</p>
-</fieldset>]
-
-[(#ENV**{mailenvoye}|?{'',' '})
-    <form action="#SELF#formulaire_ecrire_auteur#ENV{id}" method="post">
-
-        [(#REM) Previsualisation... ]
-        [<input type="hidden" name="num_formulaire_ecrire_auteur" value="(#ENV{valide})" />]
-        [<fieldset class="previsu">
-            <legend><:previsualisation:></legend>
-            <ul class="formfx">
-                <li><strong>#ENV{sujet}</strong> - <em>#ENV{mail}</em></li>
-                <li>[(#ENV{texte}|nl2br)]</li>
-            </ul>
-        </fieldset>
-	    <p class="boutons">
-            <input type="submit" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" />
-        </p>
-        ]
-
-        [(#REM) Sinon, formulaire normal ]
-
-        <fieldset>
-            <legend><:envoyer_message:></legend>
-            
-            <ul class="formfx">
-                <li>
-                    [<p class="erreur">(#ENV*{mailko})</p>]
-                    <label for="email_message_auteur#ENV{id}"><:form_pet_votre_email:></label>
-                    <input type="text" class="forml" name="email_message_auteur#ENV{id}" id="email_message_auteur#ENV{id}" value="#ENV{mail}" size="30" />
-                </li>
-                <li>
-                    [<p class="erreur">(#ENV*{sujetko})</p>]
-                    <label for="sujet_message_auteur#ENV{id}"><:form_prop_sujet:></label>
-                    <input type="text" class="forml" name="sujet_message_auteur#ENV{id}" id="sujet_message_auteur#ENV{id}" value="#ENV{sujet}" size="30" />
-                </li>
-                <li>
-                    [<p class="erreur">(#ENV*{texteko})</p>]
-                    <label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
-                    <textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea>
-                </li>
-            </ul>
-        </fieldset>
-        [<p class="boutons">
-            <input type="submit" name="valide" value="(#ENV{bouton})" />
-        </p>]
-    </form>
+<div class="formulaire_spip formulaire_ecrire_auteur" id="formulaire_ecrire_auteur#ENV{id}">
+[<p class="formulaire_message">(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+	<form method='post' action='#ENV{action}#formulaire_ecrire_auteur#ENV{id}' enctype='multipart/form-data'>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#REM) Previsualisation... ]
+		[(#ENV*{erreurs}|table_valeur{previsu}|oui)
+			<fieldset class="previsu">
+        <legend><:previsualisation:></legend>
+        <ul>
+            <li><strong>#ENV{sujet_message_auteur}</strong> - <em>#ENV{email_message_auteur}</em></li>
+            <li>[(#ENV{texte_message_auteur}|nl2br)]</li>
+        </ul>
+				<p class="boutons">
+					<input type="submit" name="confirmer" value="<:form_prop_confirmer_envoi:>" />
+				</p>
+	    </fieldset>
+	  ]
+    [(#REM) Sinon, formulaire normal ]
+    <fieldset>
+        <legend><:envoyer_message:></legend>
+        <ul>
+            <li class='saisie_email_message_auteur[ (#ENV*{erreurs}|table_valeur{email_message_auteur}|oui)erreur]'>
+                <label for="email_message_auteur#ENV{id}"><:form_pet_votre_email:></label>
+									[<span class="erreur">(#ENV*{erreurs}|table_valeur{email_message_auteur})</span>]
+                <input type="text" class="text" name="email_message_auteur" id="email_message_auteur#ENV{id}" value="#ENV{email_message_auteur}" size="30" />
+            </li>
+            <li class='saisie_sujet_message_auteur[ (#ENV*{erreurs}|table_valeur{sujet_message_auteur}|oui)erreur]'>
+                <label for="sujet_message_auteur#ENV{id}"><:form_prop_sujet:></label>
+                [<span class="erreur">(#ENV*{erreurs}|table_valeur{sujet_message_auteur})</span>]
+                <input type="text" class="text" name="sujet_message_auteur" id="sujet_message_auteur#ENV{id}" value="#ENV{sujet_message_auteur}" size="30" />
+            </li>
+            <li class='saisie_texte_message_auteur[ (#ENV*{erreurs}|table_valeur{texte_message_auteur}|oui)erreur]'>
+                <label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
+                [<span class="erreur">(#ENV*{erreurs}|table_valeur{texte_message_auteur})</span>]
+                <textarea name="texte_message_auteur" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte_message_auteur}</textarea>
+            </li>
+        </ul>
+    </fieldset>
+    <p class="boutons">
+        <input type="submit" name="valide" value="<:form_prop_envoyer:>" />
+    </p>
+  </form>
 ]
 </div>

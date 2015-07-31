@@ -11,12 +11,6 @@ fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
 /* Formulaire de login au forum */
 .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 
-/* Formulaire de recherche */
-.formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
-.formulaire_recherche label { display: inline; font-size: 1em; }
-.formulaire_recherche input.forml { width: 12em; }
-.formulaire_recherche input.bouton { vertical-align: middle; }
-
 /* Menu langues */
 .menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
 .formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
@@ -232,10 +226,9 @@ fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
 .formulaire_forum li.saisie_mot .choix {float:left;width:30%;}
 
 /* Previsualisation du message */
-fieldset.previsu li { padding: 3px;}
-fieldset.previsu legend { padding: 0 .4em; color: #F57900; font-weight: bold; }
+fieldset.previsu li { padding: 3px;border:none;}
+fieldset.previsu legend { padding: 0 5px; color: #F57900; font-weight: bold; }
 fieldset.previsu .boutons input { background: #F57900; border-color: #F57900; color: #FFF; }
-
 
 /* barre typo */
 
@@ -250,3 +243,9 @@ table.spip_barre {
 table.spip_barre a img {padding: 3px; border: 1px outset #GET{claire}; }
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+/* Formulaire de recherche */
+#formulaire_recherche { float: right; background: none; margin: 0; padding: 0; }
+#formulaire_recherche label { display: inline; font-size: 1em; }
+#formulaire_recherche input.text { width: 12em; }
+#formulaire_recherche input.bouton { vertical-align: middle; }
