@@ -165,16 +165,16 @@ $effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est 
 
 // Envoyer les entetes
 $headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
-if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD') $flag_dynamique = true;
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui' && !$HTTP_COOKIE_VARS['spip_admin']) {
 	if ($lastmodified) {
 		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-		@Header ("Last-Modified: ".$gmoddate." GMT");
 		$if_modified_since = ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE);
+		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
-			@Header("HTTP/1.0 304 Not Modified");
+			http_status(304);
 			$headers_only = true;
 		}
+		@Header ("Last-Modified: ".$gmoddate." GMT");
 		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
 	}
 }
@@ -183,15 +183,17 @@ else {
 	@Header("Cache-Control: no-cache,must-revalidate");
 	@Header("Pragma: no-cache");
 }
+$flag_preserver |= $headers_only;	// ne pas se fatiguer a envoyer des donnees
 if (!$flag_preserver) {
 	@Header("Content-Type: text/html; charset=".lire_meta('charset'));
 }
 
 
 // Envoyer la page
-if (file_exists($chemin_cache) && !$headers_only) {
-	include($chemin_cache);
-} else if (!$flag_preserver) {
+if (file_exists($chemin_cache)) {
+	if (!$headers_only) include($chemin_cache);
+}
+else if (!$flag_preserver) {
 	// Message d'erreur base de donnees
 	include_ecrire('inc_presentation.php3');
 	install_debut_html(_T('info_travaux_titre'));

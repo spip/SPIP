@@ -211,7 +211,6 @@ $flag_ImagePng = function_exists("ImagePng");
 $flag_multibyte = function_exists("mb_encode_mimeheader");
 $flag_iconv = function_exists("iconv");
 $flag_strtotime = function_exists("strtotime");
-$flag_php_sapi_name = function_exists("php_sapi_name");
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 
@@ -360,11 +359,27 @@ function spip_query($query) {
 // Infos de config PHP
 //
 
-$php_module = (($flag_sapi_name AND @php_sapi_name() == 'apache') OR
+$php_module = (($flag_sapi_name AND ereg("^apache", @php_sapi_name())) OR
 	ereg("^Apache.* PHP", $SERVER_SOFTWARE));
+$php_cgi = ($flag_sapi_name AND ereg("^cgi", @php_sapi_name));
+
+function http_status($status) {
+	global $php_cgi, $REDIRECT_STATUS;
+
+	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
+	$status_string = array(
+		200 => '200 OK',
+		304 => '304 Not Modified',
+		401 => '401 Unauthorized',
+		403 => '403 Forbidden',
+		404 => '404 Not Found'
+	);
+	if ($php_cgi) Header("Status: $status");
+	else Header("HTTP/1.0 ".$status_string[$status]);
+}
+
 
 $flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
-
 
 function tester_upload() {
 	return $GLOBALS['flag_upload'];
@@ -404,7 +419,7 @@ if ($auto_compress && $flag_obgz) {
 	// special bug Apache2x
 	else if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
 		$use_gz = false;
-	else if ($flag_php_sapi_name && ereg("^apache2", @php_sapi_name()))
+	else if ($flag_sapi_name && ereg("^apache2", @php_sapi_name()))
 		$use_gz = false;
 	
 	if ($use_gz) {
