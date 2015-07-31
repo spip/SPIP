@@ -347,8 +347,10 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 	$arbo = explode('/', preg_replace(',^/,', '', $titre));
 	include_spip('base/abstract_sql');
 	foreach ($arbo as $titre) {
-		$s = sql_fetsel("id_rubrique, id_parent, id_secteur, titre", "spip_rubriques", "titre = "._q($titre)." AND id_parent=".intval($id_parent));
-		if (!$t) {
+		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = "._q($titre)." AND id_parent=".intval($id_parent));
+		if ($r !== NULL) 	       
+			$id_parent = $r;
+		else {
 			$id_rubrique = sql_insert('spip_rubriques',
 				'(titre, id_parent, statut)',
 				'('._q($titre).", $id_parent, 'prive')"
@@ -363,12 +365,10 @@ function creer_rubrique_nommee($titre, $id_parent=0) {
 			}
 
 			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique");
-		} else {
-			$id_rubrique = $t['id_rubrique'];
-		}
 
-		// pour la recursion
-		$id_parent = $id_rubrique;
+			// pour la recursion
+			$id_parent = $id_rubrique;
+		}
 	}
 
 	return intval($id_rubrique);
