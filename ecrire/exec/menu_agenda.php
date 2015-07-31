@@ -12,26 +12,25 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_gadgets_dist
-function exec_gadgets_dist()
-{
-	$id_rubrique = intval(_request('id_rubrique'));
-	$gadget = _request('gadget');
-	$gadgets = charger_fonction('gadgets', 'inc');
+include_spip('inc/presentation');
 
-	header("Cache-Control: max-age=3600");
+function exec_menu_agenda_dist() {
 
-	if ($date = intval(_request('date')))
-		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
+	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d"));
 
-	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')) {
-		include_spip('inc/headers');
-		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
-		http_status(304);
-		exit;
-	} else {
-		ajax_retour($gadgets($id_rubrique, $gadget));
-	}
+	$ret = "<table><tr>"
+		. "<td style='width: 200px; vertical-align: top;' >"
+		. "<div>"
+		. $evtm
+		. "</div>"
+		. "</td>"
+		.  (!$evtt ? '' :
+			( "<td style='width: 10px; vertical-align: top'> &nbsp; </td>"
+			. "<td style='width: 200px; color: black; vertical-align: top'>"
+			. "<div>&nbsp;</div>$evtt</td>"))
+		  . "</tr></table>";
+
+	ajax_retour($ret);
 }
+
 ?>

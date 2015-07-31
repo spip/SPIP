@@ -390,33 +390,6 @@ function etat_base_accueil()
 	return $res ;
 }
 
-//
-// Affiche les messsages
-// et les calendrier du mois et du jour s'il y a des rendez-vous
-//
-
-// http://doc.spip.org/@accueil_evenements
-function accueil_evenements()
-{
-	global  $partie_cal, $echelle;
-
-	$mois = date("m");
-	$annee = date("Y");
-	$jour = date("d");
-	$date = date("Y-m-d");
-
-	$evtm = sql_calendrier_agenda($annee, $mois);
-	$evt = sql_calendrier_interval_rv("'$date'", "'$date 23:59:59'");
-
-	return "<div>&nbsp;</div>"
-	. http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces")
-	. http_calendrier_rv(sql_calendrier_taches_pb(),"pb")
-	. http_calendrier_rv(sql_calendrier_taches_rv(), "rv")
-	. ($evtm ? http_calendrier_agenda($annee, $mois, $jour, $mois, $annee, false, generer_url_ecrire('calendrier'), '', $evtm) : '')
-	. ($evt ? ( http_calendrier_ics_titre($annee,$mois,$jour,generer_url_ecrire('calendrier')) . http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $evt))) : '');
-}
-
-
 // http://doc.spip.org/@exec_accueil_dist
 function exec_accueil_dist()
 {
@@ -442,7 +415,10 @@ function exec_accueil_dist()
 	}
 
 	creer_colonne_droite();
-	echo accueil_evenements();
+	list($evtm, $evtt, $evtr) = http_calendrier_messages(date("Y"), date("m"), date("d")," 23:59:59");
+
+	echo "<div>&nbsp;</div>", $evtt, $evtm, $evtr;
+
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	debut_droite();
