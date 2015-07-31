@@ -1121,8 +1121,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
 	if ($op=='=' OR in_array($op, $table_criteres_infixes)){
 		// defaire le quote des int et les passer dans sql_quote avec le bon type de champ si on le connait, int sinon
-		if (preg_match("/^\"'(-?\d+)'\"$/", $val[0], $r))
-			$val[0] = '"'.sql_quote($r[1],$boucle->sql_serveur,(isset($desc['field'][$col])?$desc['field'][$col]:'int NOT NULL')).'"';
+		// prendre en compte le debug ou la valeur arrive avec un commentaire PHP en debut
+		if (preg_match(",^\\A(\s*//.*?$\s*)?\"'(-?\d+)'\"\\z,ms", $val[0], $r))
+			$val[0] = $r[1].'"'.sql_quote($r[2],$boucle->sql_serveur,(isset($desc['field'][$col])?$desc['field'][$col]:'int NOT NULL')).'"';
 		elseif (preg_match('/^sql_quote[(]([^,]*?)(,[^)]*)?[)]\s*$/m', $val[0], $r)) {
 			$r = $r[1].($r[2] ? $r[2] : ",''").",'".(isset($desc['field'][$col])?addslashes($desc['field'][$col]):'int NOT NULL')."'";
 			$val[0] = "sql_quote($r)";
