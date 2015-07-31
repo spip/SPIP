@@ -139,7 +139,11 @@ if (spip_num_rows($result) > 0) {
 	if ($activer_breves == "oui") {
 		
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
-		echo propre('<ul><cadre>' . generer_url_public('backend-breves'). "</cadre></ul>");
+		echo '<ul><li>' .
+		http_href( generer_url_public('backend-breves', ""), 
+			http_img_pack( 'feed.png', 'RSS', ' border="0" ') .'&nbsp; '.
+			_L('syndication des br&egrave;ves du site'), _L('syndication des br&egrave;ves du site')) .
+		"</li></ul>";
 		
 	}
 
@@ -155,9 +159,12 @@ debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 
 echo _T('ical_texte_js').'<p />';
 
-echo propre('<cadre><script type="text/javascript" src="'.
-	    generer_url_public('distrib') .
-	    '"></script></cadre>');
+echo propre('<code>
+<script
+    type="text/javascript"
+    src="'.generer_url_public('distrib').'">
+</script>
+</code>');
 
 fin_cadre_relief();
 
