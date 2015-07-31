@@ -94,18 +94,19 @@ $('#var_login').blur(function(){
       alea_actuel = c.alea_actuel;
       alea_futur = c.alea_futur;
 			$('input#session_login_hidden').attr('value',c.login);
+			$('input#session').attr('checked',c.cnx=='1'?'checked':'');
     });
 });
 $('form#login').submit(function(){
 	pass = $('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value');
+	// ne jamais laisser le pass circuler en clair
+	$('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value','');
 	if (pass) {
 		if (alea_actuel!=undefined) {
 			$(this).attr('action','#ENV{pose_cookie}');
 			$('input#EVAL{chr(91)}@name=session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_actuel + pass));
 			$('input#EVAL{chr(91)}@name=next_session_password_md5#EVAL{chr(93)}').attr('value',calcMD5(alea_futur + pass));
 		}
-		// ne jamais laisser le pass circuler en clair
-		$('input#EVAL{chr(91)}@name=session_password#EVAL{chr(93)}').attr('value','');
 	}
 });
 </script>

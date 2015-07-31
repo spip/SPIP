@@ -74,10 +74,15 @@ include_spip('base/abstract_sql');
 function action_aleer_dist() {
 	$row = array();
 	if ($login=_request('var_login')) {
-		$row =  sql_fetsel('login,alea_actuel,alea_futur', 'spip_auteurs', "login=" . sql_quote($login));
+		$row =  sql_fetsel('login,alea_actuel,alea_futur,prefs', 'spip_auteurs', "login=" . sql_quote($login));
 		// Retrouver ceux qui signent de leur nom ou email
 		if (!$row AND !spip_connect_ldap()) {
-			$row = sql_fetsel('login,alea_actuel,alea_futur', 'spip_auteurs', "(nom = " . sql_quote($login) . " OR email = " . sql_quote($login) . ") AND login<>'' AND statut<>'5poubelle'");
+			$row = sql_fetsel('login,alea_actuel,alea_futur,prefs', 'spip_auteurs', "(nom = " . sql_quote($login) . " OR email = " . sql_quote($login) . ") AND login<>'' AND statut<>'5poubelle'");
+		}
+		if ($row) {
+			$prefs = unserialize($row['prefs']);
+			$row['cnx'] = $prefs['cnx'] == 'perma' ? '1' : '0';
+			unset($row['prefs']);
 		}
 		echo json_export($row);
 	}
