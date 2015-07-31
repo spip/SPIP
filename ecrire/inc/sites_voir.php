@@ -216,11 +216,11 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 				
 	if ($connect_statut == '0minirezo'){
 		if ($statut == "publie"){
-			$s =  "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
+		  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-refuse", $GLOBALS['exec'], $redirect) . "'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
 		
 		}
 		else if ($statut == "refuse"){
-			$s =  "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_retablir_lien')."</a>]";
+		  $s =  "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_retablir_lien')."</a>]";
 		}
 		else if ($statut == "off"
 		AND $my_sites[$id_syndic]['miroir'] == 'oui') {
@@ -228,7 +228,7 @@ function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 		}
 		else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
 		{
-			$s = "[<a href='". redirige_action_auteur("instituer", "syndic_article-$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_valider_lien')."</a>]";
+		  $s = "[<a href='". redirige_action_auteur('instituer_syndic',"$id_syndic_article-publie", $GLOBALS['exec'], $redirect) . "'>"._T('info_valider_lien')."</a>]";
 		}
 		$vals[] = $s;
 	}
