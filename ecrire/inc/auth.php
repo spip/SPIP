@@ -13,24 +13,49 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
-//
-// Fonctions de gestion de l'acces restreint aux rubriques
-//
 
-// http://doc.spip.org/@acces_restreint_rubrique
+
+/**
+ * Tester si on est admin restreint sur une rubrique donnee
+ * ne devrait plus rien faire ici : c'est du domaine des autorisations
+ *
+ * http://doc.spip.org/@acces_restreint_rubrique
+ *
+ * @param  $id_rubrique
+ * @return bool
+ */
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
 }
 
-// http://doc.spip.org/@auteurs_article
+/**
+ * Lister les auteurs d'un article
+ * ne devrait plus rien faire ici
+ *
+ * http://doc.spip.org/@auteurs_article
+ *
+ * @param int $id_article
+ * @param string $cond
+ * @return array|bool
+ */
 function auteurs_article($id_article, $cond='')
 {
 	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='article' AND id_objet=$id_article". ($cond ? " AND $cond" : ''));
 }
 
-// http://doc.spip.org/@auteurs_autorises
+
+/**
+ * Lister les auteurs autorises a on ne sait quoi ...
+ * Plus rien a faire ici
+ * 
+ * // http://doc.spip.org/@auteurs_autorises
+ *
+ * @param string $in
+ * @param string $cond
+ * @return string
+ */
 function auteurs_autorises($in, $cond='')
 {
 	return sql_in("statut", array('0minirezo','1comite'))
@@ -39,13 +64,19 @@ function auteurs_autorises($in, $cond='')
 }
 
 
-// Fonction d'authentification. Retourne:
-//  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
-//  - un tableau si visiteur sans droit (tableau = sa ligne SQL)
-//  - code numerique d'erreur SQL
-//  - une chaine vide si autorisation a penetrer dans l'espace prive.
-
-// http://doc.spip.org/@inc_auth_dist
+/**
+ * Fonction d'authentification. Retourne:
+ *  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
+ *  - URL de connexion  si on ne sait rien (pas de cookie, pas Auth_user);
+ *  - un tableau si visiteur sans droit (tableau = sa ligne SQL)
+ *  - code numerique d'erreur SQL
+ *  - une chaine vide si autorisation a penetrer dans l'espace prive.
+ *
+ * 
+ * http://doc.spip.org/@inc_auth_dist
+ *
+ * @return array|int|string
+ */
 function inc_auth_dist() {
 
 	global $connect_login ;
@@ -71,10 +102,14 @@ function inc_auth_dist() {
 	return $n ? $n : 1;
 }
 
-// fonction appliquee par ecrire/index sur le resultat de la precedente
-// en cas de refus de connexion.
-// Retourne un message a afficher ou redirige illico.
-
+/**
+ * fonction appliquee par ecrire/index sur le resultat de la precedente
+ * en cas de refus de connexion.
+ * Retourne un message a afficher ou redirige illico.
+ *
+ * @param  $raison
+ * @return array|string
+ */
 function auth_echec($raison)
 {
 	include_spip('inc/minipres');
@@ -107,9 +142,12 @@ function auth_echec($raison)
 	return $raison;
 }
 
-// Retourne la description d'un authentifie par cookie ou http_auth
-// Et affecte la globale $connect_login
-
+/**
+ * Retourne la description d'un authentifie par cookie ou http_auth
+ * Et affecte la globale $connect_login
+ *
+ * @return array|bool|string
+ */
 function auth_mode()
 {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
@@ -178,14 +216,17 @@ function auth_mode()
 	return sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 }
 
-//
-// Init des globales pour tout l'espace prive si visiteur connu
-// Le tableau global visiteur_session contient toutes les infos pertinentes et
-// a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
-// s'il est pris dans le fichier de session)
-// Les plus utiles sont aussi dans les variables simples ci-dessus
-// si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
-
+/**
+ * Init des globales pour tout l'espace prive si visiteur connu
+ * Le tableau global visiteur_session contient toutes les infos pertinentes et
+ * a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
+ * s'il est pris dans le fichier de session)
+ * Les plus utiles sont aussi dans les variables simples ci-dessus
+ * si la globale est vide ce n'est pas un tableau, on la force pour empecher un warning
+ *
+ * @param array $row
+ * @return array|string
+ */
 function auth_init_droits($row)
 {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique, $connect_login, $connect_id_auteur;
@@ -222,11 +263,15 @@ function auth_init_droits($row)
 	}
 
 	// reinjecter les preferences_auteur apres le reset de spip_session
+	// car utilisees au retour par auth_loger()
 	$r = @unserialize($row['prefs']);
 	$GLOBALS['visiteur_session']['prefs'] = ($r ? $r : array());
+	// si prefs pas definies, les definir par defaut
 	if (!isset($GLOBALS['visiteur_session']['prefs']['couleur'])){
 		$GLOBALS['visiteur_session']['prefs']['couleur'] = 1;
 		$GLOBALS['visiteur_session']['prefs']['display'] = 0;
+		$GLOBALS['visiteur_session']['prefs']["display_navigation"] = "navigation_avec_icones";
+		$GLOBALS['visiteur_session']['prefs']["display_outils"] = "oui";
 	}
 
 	// Etablir les droits selon le codage attendu
@@ -256,6 +301,11 @@ function auth_init_droits($row)
 	return ''; // i.e. pas de pb.
 }
 
+/**
+ * Retourne l'url de connexion
+ *
+ * @return string
+ */
 function auth_a_loger()
 {
 	$redirect = generer_url_public('login',
@@ -275,7 +325,13 @@ function auth_a_loger()
 	return $redirect;
 }
 
-// http://doc.spip.org/@auth_trace
+/**
+ * Tracer en base la date de derniere connexion de l'auteur
+ * http://doc.spip.org/@auth_trace
+ *
+ * @param array $row
+ * @param null|string $date
+ */
 function auth_trace($row, $date=null)
 {
 	// Indiquer la connexion. A la minute pres ca suffit.
@@ -574,7 +630,7 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serve
  * Synchroniser un compte sur une base distante pour la methode
  * donnee lorsque des modifications sont faites dans la base auteur
  *
- * @param string $auth_methode
+ * @param string|bool $auth_methode
  *   ici true permet de forcer la synchronisation de tous les acces pour toutes les methodes
  * @param int $id_auteur
  * @param array $champs
@@ -633,12 +689,12 @@ function lire_php_auth($login, $pw, $serveur=''){
 /**
  * entete php_auth (est-encore utilise ?)
  *
- * @param <type> $pb
- * @param <type> $raison
- * @param <type> $retour
- * @param <type> $url
- * @param <type> $re
- * @param <type> $lien
+ * @param string $pb
+ * @param string $raison
+ * @param string $retour
+ * @param string $url
+ * @param string $re
+ * @param string $lien
  */
 function ask_php_auth($pb, $raison, $retour='', $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
