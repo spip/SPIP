@@ -258,8 +258,8 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 		spip_log("calcul ("
 			.spip_timer('calcul page')
 			.") [$skel] ".
-			($cache ? $cache.cache_gz($page).' ' : '')
-			.'- '.strlen($page['texte']).' octets'
+			 join(", ", $local)
+			.' ('.strlen($page['texte']).' octets)'
 		);
 	}
 

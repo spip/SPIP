@@ -87,10 +87,10 @@ function afficher_page_globale ($fond) {
 		$use_cache, $var_mode, $var_preview;
 
 	include_spip('public/cache');
-
-	// Peut-on utiliser un fichier cache ?
-	list($chemin_cache, $page, $lastmodified) = 
-		determiner_cache($use_cache, NULL);
+	$fcache = 'public_utiliser_cache_dist';
+#	$fcache = include_fonction('utiliser_cache', 'public');
+	// Garnir ces quatre parametres avec les infos sur le cache
+	$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
@@ -132,7 +132,7 @@ function afficher_page_globale ($fond) {
 			$f = include_fonction('localiser_page', 'public');
 			$page = $f($fond, '', $chemin_cache);
 			if ($chemin_cache)
-				creer_cache($page, $chemin_cache, $use_cache);
+				$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 		}
 
 		if ($chemin_cache) $page['cache'] = $chemin_cache;
@@ -199,9 +199,11 @@ function auto_expire($page)
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
 
-	// Peut-on utiliser un fichier cache ?
-	list($chemin_cache, $page, $lastinclude) = 
-		determiner_cache($use_cache, $contexte_inclus);
+	include_spip('public/cache');
+	$fcache = 'public_utiliser_cache_dist';
+#	$fcache = include_fonction('utiliser_cache', 'public');
+	// Garnir ces quatre parametres avec les infos sur le cache
+	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -227,7 +229,8 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		$f = include_fonction('localiser_page', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
-		if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
+		if ($chemin_cache) 
+			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastmodified);
 	}
 
 	$page['lang_select'] = $lang_select;
@@ -250,8 +253,6 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
-
-		include_spip('public/cache');
 
 		$d = $GLOBALS['delais'];
 		$GLOBALS['delais'] = $delainc;

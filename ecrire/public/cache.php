@@ -169,75 +169,6 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 }
 
 
-// retourne le nom du fichier cache, 
-// et affecte le param use_cache avec un nombre N:
-// < 0 s'il faut calculer la page sans la mettre en cache
-// = 0 si on peut utiliser un cache existant
-// > 0 s'il faut calculer la page et le mette en cache pendant N secondes
-//
-
-function determiner_cache(&$use_cache, $contexte) {
-
-	// cas ignorant le cache car complement dynamique
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$use_cache = -1;
-		return array('','',0);
-	}
-
-	$chemin_cache = generer_nom_fichier_cache($contexte);
-	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
-		$chemin_cache .= '.gz';
-
-	// HEAD : cas sans jamais de calcul pour raisons de performance
-	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
-		$use_cache = 0;
-		return array($chemin_cache, array(),
-			@filemtime(_DIR_CACHE . $chemin_cache));
-	}
-
-	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
-	if ($GLOBALS['meta']['invalider']) {
-		// tester si la base est dispo
-		spip_connect();
-		if ($GLOBALS['db_ok']) {
-			include_spip('inc/meta');
-			lire_metas();
-			retire_caches($chemin_cache);
-		}
-	}
-
-	// cas sans jamais de cache pour raison interne
-	if ($GLOBALS['var_mode'] &&
-		($GLOBALS['_COOKIE']['spip_session']
-		 || $GLOBALS['_COOKIE']['spip_admin']
-		 || @file_exists(_ACCESS_FILE_NAME))) {
-			supprimer_fichier(_DIR_CACHE . $chemin_cache);
-	}
-
-	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
-	$time = @filemtime(_DIR_CACHE . $chemin_cache);
-	$page = restaurer_meta_donnees ($page);
-	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $time);
-
-	if (!$use_cache AND $ok) return array($chemin_cache, $page, $time);
-
-	// tester si la base est dispo
-	spip_connect();
-
-	// Si pas valide mais pas de connexion a la base, le garder quand meme
-	if (!$GLOBALS['db_ok']) {
-		if (file_exists(_DIR_CACHE . $chemin_cache))
-			$use_cache = 0 ;
-		else {
-			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
-			include_spip('inc/minipres');
-			minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
-		}
-	}
-
-	return array((($use_cache < 0) ? "" : $chemin_cache), $page, $time);
-}
-
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
 function creer_cache(&$page, &$chemin_cache, $duree) {
@@ -268,6 +199,7 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 		. " -->\n"
 		. $page['texte']);
 
+	spip_log("Creation du cache $chemin_cache pour $duree secondes");
 	// Inserer ses invalideurs
 	include_spip('inc/invalideur');
 	maj_invalideurs($chemin_cache, $page, $duree);
@@ -307,4 +239,84 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	}
 }
 
+
+// Interface du gestionnaire de cache
+// Si son 3e argument est non vide, elle passe la main a creer_cache
+// Sinon, elle recoit un contexte (ou le construit a partir de REQUEST_URI) 
+// et affecte les 4 autres parametres recus par reference:
+// - use_cache qui est
+//	< 0 s'il faut calculer la page sans la mettre en cache
+// 	= 0 si on peut utiliser un cache existant
+//	> 0 s'il faut calculer la page et la mette en cache use_cache secondes
+// - chemin_cache qui est le chemin d'acces au fichier ou vide si pas cachable
+// - page qui est le tableau decrivant la page, si le cache la contenait
+// - lastmodifed qui vaut la date de derniere modif du fichier.
+
+function public_utiliser_cache_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
+
+	if ($chemin_cache) return creer_cache($page, $chemin_cache, $use_cache);
+	// cas ignorant le cache car complement dynamique
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+		$use_cache = -1;
+		$lastmodified = 0;
+		$chemin_cache = "";
+		$page = array();
+		return;
+	}
+
+	$chemin_cache = generer_nom_fichier_cache($contexte);
+	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
+		$chemin_cache .= '.gz';
+
+	// HEAD : cas sans jamais de calcul pour raisons de performance
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
+		$use_cache = 0;
+		$page = array();
+		$lastmodified = @filemtime(_DIR_CACHE . $chemin_cache);
+		return;
+	}
+
+	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
+	if ($GLOBALS['meta']['invalider']) {
+		// tester si la base est dispo
+		spip_connect();
+		if ($GLOBALS['db_ok']) {
+			include_spip('inc/meta');
+			lire_metas();
+			retire_caches($chemin_cache);
+		}
+	}
+
+	// cas sans jamais de cache pour raison interne
+	if ($GLOBALS['var_mode'] &&
+		($GLOBALS['_COOKIE']['spip_session']
+		 || $GLOBALS['_COOKIE']['spip_admin']
+		 || @file_exists(_ACCESS_FILE_NAME))) {
+			supprimer_fichier(_DIR_CACHE . $chemin_cache);
+	}
+
+	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
+	$lastmodified = @filemtime(_DIR_CACHE . $chemin_cache);
+	$page = restaurer_meta_donnees ($page);
+	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $lastmodified);
+
+	if (!$use_cache AND $ok) return;
+
+	// tester si la base est dispo
+	spip_connect();
+
+	// Si pas valide mais pas de connexion a la base, le garder quand meme
+	if (!$GLOBALS['db_ok']) {
+		if (file_exists(_DIR_CACHE . $chemin_cache))
+			$use_cache = 0 ;
+		else {
+			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
+			include_spip('inc/minipres');
+			minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
+		}
+	}
+
+	if ($use_cache < 0) $chemin_cache = "";
+	return;
+}
 ?>
