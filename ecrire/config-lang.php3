@@ -55,7 +55,7 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 
 debut_cadre_couleur("langues-24.gif", false, "", _T('info_langue_principale'));
 
-$langues_prop = split(",",lire_meta("langues_proposees"));
+$langues_prop = split(",",$all_langs);
 $langue_site = lire_meta('langue_site');
 
 echo _T('texte_selection_langue_principale');

@@ -551,7 +551,8 @@ function init_langues() {
 	global $all_langs, $langue_site;
 	global $pile_langues, $lang_typo, $lang_dir;
 
-	$all_langs = lire_meta('langues_proposees');
+	$all_langs = lire_meta('langues_proposees')
+		.lire_meta('langues_proposees2');
 	$langue_site = lire_meta('langue_site');
 	$pile_langues = array();
 	$lang_typo = '';
@@ -579,7 +580,15 @@ function init_langues() {
 					ecrire_meta('langue_site', $langue_site);
 			}
 			if (defined("_ECRIRE_INC_META")) {
-				ecrire_meta('langues_proposees', $all_langs);
+				# sur spip.net le nombre de langues proposees fait exploser
+				# ce champ limite a 255 caracteres ; a revoir...
+				if (strlen($all_langs) <= 255) {
+					ecrire_meta('langues_proposees', $all_langs);
+					effacer_meta('langues_proposees2');
+				} else {
+					ecrire_meta('langues_proposees', substr($all_langs,0,255));
+					ecrire_meta('langues_proposees2', substr($all_langs,255));
+				}
 				ecrire_metas();
 			}
 		}
