@@ -1587,7 +1587,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
 		if (isset($options['ajax'])AND $options['ajax'])
-			$page['texte'] = encoder_contexte_ajax($contexte,'',$page['texte']);
+			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
 			
 		if ($GLOBALS['var_inclure'])
 			$page['texte'] = "<fieldset class='blocs'><legend>".$page['sourcefile']."</legend>".$page['texte']."</fieldset>";
