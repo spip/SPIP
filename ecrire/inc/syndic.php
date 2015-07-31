@@ -171,7 +171,17 @@ function analyser_backend($rss, $url_syndic='') {
 		$data = array();
 
 		// URL (semi-obligatoire, sert de cle)
-		if (preg_match(
+
+		// guid n'est un URL que si marque de <guid ispermalink="true"> ;
+		// attention la valeur par defaut est 'true' ce qui oblige a quelque
+		// gymnastique
+		if (preg_match(',<guid.*>[[:space:]]*(https?:[^<]*)</guid>,Uims',
+		$item, $regs) AND preg_match(',^(true|1)?$,i',
+		extraire_attribut($regs[0], 'ispermalink')))
+			$data['url'] = $regs[1];
+
+		// <link>, plus classique
+		else if (preg_match(
 		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
 		$item, $regs))
 			$data['url'] = $regs[1];
@@ -182,13 +192,13 @@ function analyser_backend($rss, $url_syndic='') {
 			$data['url'] = $regs[1];
 		else if (preg_match(',<link[^>]*>,Uims', $item, $regs))
 			$data['url'] = extraire_attribut($regs[0], 'href');
-		// guid n'est un URL que si marque de <guid permalink="true">
-		else if (preg_match(',<guid.*>[[:space:]]*(https?:[^<]*)</guid>,Uims',
-		$item, $regs))
-			$data['url'] = $regs[1];
+
+		// Aucun link ni guid, mais une enclosure
 		else if (preg_match(',<enclosure[^>]*>,ims', $item, $regs)
 		AND $url = extraire_attribut($regs[0], 'url'))
 			$data['url'] = $url;
+
+		// pas d'url, c'est genre un compteur...
 		else
 			$data['url'] = '';
 
