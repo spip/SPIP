@@ -25,7 +25,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 	# en theorie on devrait faire ca tout le temps, mais quand la chaine
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
 	if ($url[0]=='?')
-		$url = url_de_base().$url;
+		$url = url_de_base().(_DIR_RESTREINT?'':_DIR_RESTREINT_ABS.'/').$url;
 	if ($url[0]=='#')
 		$url = self('&').$url;
 
@@ -98,7 +98,7 @@ function redirige_formulaire($url, $equiv = '', $format='message') {
 		# en theorie on devrait faire ca tout le temps, mais quand la chaine
 		# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
 		if ($url[0]=='?')
-			$url = url_de_base().$url;
+			$url = url_de_base().(_DIR_RESTREINT?'':_DIR_RESTREINT_ABS.'/').$url;
 		$url = str_replace('&amp;','&',$url);
 		spip_log("redirige formulaire ajax: $url");
 		include_spip('inc/filtres');
