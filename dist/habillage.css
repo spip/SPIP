@@ -31,7 +31,7 @@ body {
 	color: #333;
 }
 
-img, table { margin: 0; padding: 0; border: 0; }
+img, table { margin: 0; padding: 0; border: none; }
 ul, ol, li { margin: 0; padding: 0; }
 ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
@@ -302,7 +302,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 /*  ------------------------------------------ */
 
 /* Correction des styles HTML par defaut */
-.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: 0; background: none; }
+.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: none; background: none; }
 
 /* Styles des formulaires de Spip */
 .formulaire_spip {
@@ -393,7 +393,7 @@ ul ul ul ul ul .forum-message { border: 1px solid #E0E0E0; }
 ul ul ul ul ul ul .forum-message { border: 1px dotted #E0E0E0; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
-ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #C4E0E0; }
+ul .forum-chapo { border: none; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; font-size: 0.88em; background: #C4E0E0; }
 ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
