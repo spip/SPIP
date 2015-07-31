@@ -342,7 +342,7 @@ function generer_url_forum_dist($id_forum, $args='', $ancre='') {
 		list($type, $id,) = racine_forum($id_forum);
 		if ($type) {
 			if (!$ancre) $ancre = "forum$id_forum";
-			return generer_url_entite($id, $type, $args, $ancre);
+			return generer_url_entite($id, $type, $args, $ancre, true);
 		}
 	}
 	return '';
