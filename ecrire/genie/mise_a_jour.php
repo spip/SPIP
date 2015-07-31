@@ -23,7 +23,7 @@ function genie_mise_a_jour_dist($t) {
 	$maj = info_maj ('spip', 'SPIP', $GLOBALS['spip_version_branche']);
 	ecrire_meta('info_maj_spip',$maj?($GLOBALS['spip_version_branche']."|$maj"):"",'non');
 
-	spip_log("Verification version SPIP : ".($maj?$maj:"version a jour"),"majspip");
+	spip_log("Verification version SPIP : ".($maj?$maj:"version a jour"),"verifie_maj");
 	return 1;
 }
 
