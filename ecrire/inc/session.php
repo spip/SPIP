@@ -33,7 +33,7 @@ $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 function inc_session_dist($auteur=false)
 {
 	if (is_numeric($auteur))
-		return supprimer_sessions($auteur, $auteur > 0);
+		return supprimer_sessions($auteur);
 	else if (is_array($auteur))
 		return ajouter_session($auteur);
 	else
@@ -59,22 +59,22 @@ function ajouter_session($auteur) {
 	$fichier_session = fichier_session('alea_ephemere');
 	
 	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
-	// on va vérifier s'il y a vraiment des choses à écrire
+	// on verifie qu'il y a vraiment des choses
 	if (!$id_auteur){
-		// On supprime les données de base pour voir le contenu réel de la session
+		// On supprime les basiques pour voir le contenu effectif
 		$auteur_verif = $auteur;
 		if (isset($auteur_verif['id_auteur'])) unset($auteur_verif['id_auteur']);
 		if (isset($auteur_verif['hash_env'])) unset($auteur_verif['hash_env']);
 		if (isset($auteur_verif['ip_change'])) unset($auteur_verif['ip_change']);
 		
-		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
+		// Si c'est vide alors on supprime et on ne fait rien
 		if (!$auteur_verif){
 			if (@file_exists($fichier_session)) spip_unlink($fichier_session);
 			return false;
 		}
 	}
 	
-	// Maintenant on sait qu'on a des choses à écrire
+	// Maintenant on sait qu'il faut memoriser.
 	// On s'assure d'avoir au moins ces valeurs
 	$auteur['id_auteur'] = $id_auteur;
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
@@ -170,31 +170,34 @@ function ecrire_fichier_session($fichier, $auteur) {
 }
 
 //
-// Cette fonction efface toutes les sessions appartenant a l'auteur
+// Cette fonction efface toutes les sessions appartenant a un auteur.
 // On en profite pour effacer toutes les sessions
-// creees il y a plus de 4*_RENOUVELLE_ALEA
+// creees depuis plus de 4*_RENOUVELLE_ALEA.
 // Tenir compte de l'ancien format ou les noms commencaient par "session_"
-// et du meme coup des repertoires plats
+// et du meme coup des repertoires plats, et de l'ID 0 qui vaut les anonymes. 
 
 // http://doc.spip.org/@supprimer_sessions
-function supprimer_sessions($id_auteur, $toutes=true) {
+function supprimer_sessions($id_auteur) {
 
-	if ($toutes) {
-		$dir = opendir(_DIR_SESSIONS);
-		$t = time()  - (4*_RENOUVELLE_ALEA);
-		while(($f = readdir($dir)) !== false) {
-			if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
-				$f = _DIR_SESSIONS . $f;
-				if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
-					spip_unlink($f);
-			}
+	$i = 0;
+	$t = (time()  - (_RENOUVELLE_ALEA << 2));
+	$dir = opendir(_DIR_SESSIONS);
+	while(($e = readdir($dir)) !== false) {
+		if (!preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $e, $r))
+			continue;
+		$f = _DIR_SESSIONS . $e;
+		if (($id_auteur AND ($r[1] == $id_auteur))
+		OR ($t > filemtime($f))) {
+			spip_unlink($f);
+			$i++;
 		}
 	}
-	else {
+	// pour un anonyme, se fonder sur le cookie pour trouver le fichier
+	if (!$id_auteur) {
 		verifier_session();
 		spip_unlink(fichier_session('alea_ephemere', true));
 	}
-
+	spip_log("destruction des $i fichiers de session de $id_auteur et 0");
 	// forcer le recalcul de la session courante
 	spip_session(true);
 }
