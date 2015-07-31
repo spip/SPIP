@@ -13,6 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/cookie');
+include_spip('public/aiguiller');
 
 // http://doc.spip.org/@action_logout_dist
 function action_logout_dist()
