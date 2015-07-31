@@ -22,7 +22,7 @@ function action_redirect_dist()
 		$GLOBALS['var_urls'] = true; // forcer la mise a jour de l'url de cet objet !
 		$m = 'var_mode='.urlencode($m);
 	}
-	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m '', true);
+	$h = generer_url_entite_absolue(intval(_request('id')), $type, $m, '', true);
 	if ($h)
 		redirige_par_entete(str_replace('&amp;', '&', $h));
 	else
