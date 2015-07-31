@@ -115,7 +115,7 @@
 	<BOUCLE_syndic(SYNDIC_ARTICLES) {par date} {inverse} {0,15}>
 		<li class="menu-item">
 		[<i>(#DATE|affdate_court)</i>:]
-		<a href="#URL_ARTICLE">#TITRE</a>
+		<a href="#URL_ARTICLE">[(#TITRE*)]</a>
 		</li>
 	</BOUCLE_syndic>
 		</ul>
