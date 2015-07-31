@@ -36,7 +36,7 @@ function auth_http($cible, $essai_auth_http) {
 	}
 }
 
-function ouvre_login($titre) {
+function ouvre_login($titre='') {
 
 	$retour .= "<div>";
 
@@ -48,7 +48,7 @@ function ouvre_login($titre) {
 
 function ferme_login() {
 	$retour =  "</font>";
-	$retour .= "<div>";
+	$retour .= "</div>";
 	return $retour;
 }
 
@@ -132,14 +132,12 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$js_focus = 'document.form_login.var_login.focus();';
 
 	if ($echec_cookie == "oui") {
-		echo ouvre_login ("$nom_site : probl&egrave;me de cookie");
+		echo ouvre_login (_T('erreur_probleme_cookie'));
 		echo "<p><b>"._T('login_cookie_oblige')."</b> ";
 		echo _T('login_cookie_accepte')."\n";
 	}
-	else if ($prive) {
-		echo ouvre_login ("$nom_site<br><small>"._T('login_acces_prive')."</small>");
-	} else {
-		echo ouvre_login ("$nom_site<br><small>"._T('login_identification')."</small>");
+	else {
+		echo ouvre_login ();
 		echo "<br>$message_login<br>\n";
 	}
 
