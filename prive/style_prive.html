@@ -792,6 +792,11 @@ body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 	background: url(#GET{chemin_img_pack}fond-grille.gif) top left;
 }
 
+/* controle des forums : afficher les liens */
+.controle a:after {
+	display: inline; content: " [\27a0" attr(href) "]";
+}
+
 /******** Formulaires **************/
 [(#INCLURE{fond=style_prive_formulaires}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/
