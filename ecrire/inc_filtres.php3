@@ -223,6 +223,7 @@ function sinon ($texte, $sinon='') {
 
 function normaliser_date($date) {
 	if ($date) {
+		$date = vider_date($date);
 		if (ereg("^[0-9]{8,10}$", $date))
 			$date = date("Y-m-d H:i:s", $date);
 		if (ereg("^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$", $date, $regs))
@@ -238,7 +239,8 @@ function normaliser_date($date) {
 }
 
 function vider_date($letexte) {
-	if (ereg("^0000-00-00", $letexte)) return '';
+	if (ereg("^0000-00-00", $letexte)) return;
+	if (ereg("^1970-01-01", $date)) return;	// eviter le bug GMT-1
 	return $letexte;
 }
 
