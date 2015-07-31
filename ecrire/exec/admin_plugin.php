@@ -71,8 +71,10 @@ function exec_admin_plugin_dist($retour='') {
 	if ($libs = liste_librairies()) {
 		debut_cadre_enfonce('', '', '', _L('Librairies install&#233;es'));
 		ksort($libs);
+		echo '<dl>';
 		foreach ($libs as $lib => $rep)
-		echo "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
+			echo "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
+		echo '</dl>';
 		echo fin_cadre_enfonce(true);
 	}
 

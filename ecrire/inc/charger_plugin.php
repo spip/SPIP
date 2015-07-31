@@ -87,7 +87,9 @@ function interface_plugins_auto($retour) {
 		$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
 
 		$menu = array();
+		$compte = 0;
 		foreach ($liste as $url => $info) {
+			$compte += 1;
 			$titre = $info[0];
 			$url_doc = $info[1];
 			$titre = typo('<multi>'.$titre.'</multi>'); // recuperer les blocs multi du flux de la zone (temporaire?)
@@ -97,18 +99,9 @@ function interface_plugins_auto($retour) {
 			
 			
 			$nick = strtolower(basename($url, '.zip'));
-			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" id="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
+			$menu[$nick] = '<div class="desc_plug"><label><input type="radio" name="url_zip_plugin" id="url_zip_plugin_n'.$compte.'" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
 		}
 		ksort($menu);
-
-		$res .= "<style type='text/css'><!--
-		.desc_plug {
-	height:1.9em;overflow:hidden;border-bottom:1px dotted grey;
-}
-#liste_plug {
-	border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;
-}
-// --></style>\n";
 
 		$res .= "<div id='liste_plug' class='cadre-trait-couleur'>\n";
 # <select name='url_zip_plugin' id='url_zip_plugin'>
@@ -124,15 +117,14 @@ function interface_plugins_auto($retour) {
 		$res .= _L("ou...");
 	}
 
-	$res .= '<label>';
 	$res .= _L("<p>indiquez ci-dessous l'adresse d'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l'adresse d'une liste de plugins.</p>");
 	
 	$res .= '<p>('._L('exemples :').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
 
-
+	$res .= '<label>'._L('Adresse du plugin ou de la liste&nbsp;');
 	$res .= "<br />
 	<input type='radio' id='antiradio' name='url_zip_plugin' value='' />
-	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' /></p></label>\n";
+	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' /></label>\n";
 
 	$res .= http_script("
 	// charger en ajax le descriptif si on click une div
