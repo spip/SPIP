@@ -1133,7 +1133,7 @@ function urls_connect_dist($i, &$entite, $args='', $ancre='', $public=null) {
 
 // Transformer les caracteres utf8 d'une URL (farsi par ex) selon la RFC 1738
 function urlencode_1738($url) {
-	if (preg_match(',[^\x00-\x7E],sS','', $url)){
+	if (preg_match(',[^\x00-\x7E],sS', $url)){
 		$uri = '';
 		for ($i=0; $i < strlen($url); $i++) {
 			if (ord($a = $url[$i]) > 127)
