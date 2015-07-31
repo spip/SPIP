@@ -2804,7 +2804,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
 
 	// On va ensuite chercher les traitements automatiques a faire
 	$champ = strtoupper($info);
-	$traitement = $table_des_traitements[$champ];
+	$traitement = isset($table_des_traitements[$champ]) ? $table_des_traitements[$champ] : false;
 	$table_objet = table_objet($type_objet);
 
 	if (!$etoile
