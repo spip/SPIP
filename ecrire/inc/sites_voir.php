@@ -13,8 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function afficher_sites($titre_table, $requete) {
-	global $couleur_claire, $spip_lang_left, $spip_lang_right;
-	global $connect_id_auteur;
+	global $couleur_claire, $connect_id_auteur;
 
 	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
 
@@ -143,7 +142,7 @@ function afficher_sites($titre_table, $requete) {
 }
 
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
-	global $connect_statut, $spip_lang_rtl, $spip_lang_right;
+	global $connect_statut, $spip_lang_right;
 
 	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
 	if (!$requete['FROM']) $requete['FROM']= 'spip_syndic_articles';
@@ -153,7 +152,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
-	$tmp_var = substr(md5(join('', $cpt)), 0, 4);
+	$tmp_var = substr(md5(join('', $requete)), 0, 4);
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
