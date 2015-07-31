@@ -213,6 +213,7 @@ ecrire/inc/commencer_page.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/couleurs.php -text
 ecrire/inc/dater.php -text
+ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/documenter.php -text
 ecrire/inc/drapeau_edition.php -text
