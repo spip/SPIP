@@ -82,8 +82,6 @@ function affiche_rss_rss($rss, $intro = '') {
 
 function affiche_rss_atom($rss, $intro = '') {
 	// entetes
-	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
-
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']
 	.'"?'.">\n";
 	$u .= '<feed xmlns="http://www.w3.org/2005/Atom"';
