@@ -249,6 +249,8 @@ function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 					(!$taille ? '' : (" ".$taille[3])));
 			}
 		}
+        else if (defined('_LOGO_RUBRIQUE_DESACTIVER_HERITAGE'))
+            return '';
 		else if ($id_rubrique) {
 			$type = 'id_rubrique';
 			$id = $id_rubrique;
