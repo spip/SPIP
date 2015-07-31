@@ -79,12 +79,12 @@ function rss_suivi_forums($page, $from, $where, $lien_moderation=false) {
 
 	foreach ($rss as $k => $t) {
 		$item = array();
-		$item['title'] = typo($t['titre']);
+		$item['titre'] = $t['titre'];
 		if ($page == 'public' AND $t['statut']<>'publie')
-			$item['title'] .= ' ('.$t['statut'].')';
+			$item['titre'] .= ' ('.$t['statut'].')';
 		$item['date'] = $t['date_heure'];
-		$item['author'] = typo($t['auteur']);
-		$item['email'] = $t['email_auteur'];
+		$item['nom'] = $t['auteur'];
+		$item['email_auteur'] = $t['email_auteur'];
 
 		if ($lien_moderation)
 			$item['url'] = generer_url_ecrire('controle_forum', 'type='.$page .'&debut_id_forum='.$t['id_forum']);
@@ -92,13 +92,9 @@ function rss_suivi_forums($page, $from, $where, $lien_moderation=false) {
 			$item['url'] = generer_url_forum($t['id_forum']);
 
 		$item['in_reply_to_url'] = generer_url_forum_parent($t['id_forum']);
-		$item['description'] = propre($t['texte']);
-		if ($GLOBALS['les_notes']) {
-			$item['description'] .= '<hr />'.$GLOBALS['les_notes'];
-			$GLOBALS['les_notes'] = '';
-		}
+		$item['texte'] = $t['texte'];
 		if ($t['nom_site'] OR vider_url($t['url_site']))
-			$item['description'] .= propre("\n- [".$t['nom_site']."->".$t['url_site']."]<br />");
+			$item['texte'] .= ("<br />\n- [".$t['nom_site']."->".$t['url_site']."]<br />");
 
 		$rss[$k] = $item;
 	}
@@ -116,13 +112,13 @@ function  rss_messagerie($a)
 	$s = sql_select("*", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=".$a['id_auteur']." AND lien.id_message=messages.id_message ", " messages.id_message ", " messages.date_heure DESC");
 	while ($t = sql_fetch($s)) {
 		if ($compte++<10) {
-			$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']." AND lien.id_auteur = auteurs.id_auteur");
+			$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email_auteur", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "lien.id_message=".$t['id_message']." AND lien.id_auteur!=".$t['id_auteur']." AND lien.id_auteur = auteurs.id_auteur");
 			$item = array(
-				'title' => typo($t['titre']),
+				'titre' => $t['titre'],
 				'date' => $t['date_heure'],
-				'author' => typo($auteur['nom']),
-				'email' => $auteur['email'],
-				'description' => propre($t['texte']),
+				'nom' => $auteur['nom'],
+				'email_auteur' => $auteur['email_auteur'],
+				'texte' => $t['texte'],
 				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message'] ));
 			$rss[] = $item;
 		}
@@ -135,16 +131,16 @@ function  rss_messagerie($a)
 
 		while ($t = sql_fetch($s)) {
 			$item = array(
-				'title' => typo($t['titre']),
+				'titre' => $t['titre'],
 				'date' => $t['date_heure'],
-				'description' => propre($t['texte']),
-				'author' => typo($t['auteur']),
-				'email' => $t['email_auteur'],
+				'texte' => $t['texte'],
+				'nom' => $t['auteur'],
+				'email_auteur' => $t['email_auteur'],
 				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message']	.'#'.$t['id_forum']  ));
 			$rss[] = $item;
 		}
 	}
-
+	usort($rss, 'trier_par_date');
 	$title = _T("icone_messagerie_personnelle");
 	$url = generer_url_ecrire('messagerie');
 	return array($title, $rss, $url);
@@ -155,16 +151,16 @@ function  rss_messagerie($a)
 function rss_articles($critere) {
 	$rss = sql_allfetsel("*", "spip_articles", $critere, "", "date DESC", "10");
 	foreach ($rss as $k => $t) {
-		$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_articles AS lien ON lien.id_auteur = auteurs.id_auteur", "lien.id_article=".$t['id_article']);
+		$auteur = sql_fetsel("auteurs.nom AS nom, auteurs.email AS email_auteur", "spip_auteurs AS auteurs LEFT JOIN spip_auteurs_articles AS lien ON lien.id_auteur = auteurs.id_auteur", "lien.id_article=".$t['id_article']);
 		$item = array(
-			'title' => typo($t['titre']),
+			'titre' => $t['titre'],
 			'date' => $t['date'],
-			'author' => typo($auteur['nom']),
-			'email' => $auteur['email'],
-			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
+			'nom' => $auteur['nom'],
+			'email_auteur' => $auteur['email_auteur'],
+			'texte' => couper("{{".$t['chapo']."}}\n\n".$t['texte'],300),
 			'url' => generer_url_ecrire('articles', 'id_article='.$t['id_article']   ));
 		if ($t['statut'] == 'prop')
-		  $item['title'] = _T('info_article_propose').' : '.$item['title'];
+		  $item['titre'] = _T('info_article_propose').' : '.$item['titre'];
 
 		$rss[$k] = $item;
 	}
@@ -177,12 +173,12 @@ function rss_breves($critere) {
 	$rss = sql_allfetsel("*", "spip_breves", $critere, "", "date_heure DESC", "10");
 	foreach ($rss as $k =>$t) {
 		$item = array(
-			'title' => typo($t['titre']),
+			'titre' => $t['titre'],
 			'date' => $t['date_heure'],
-			'description' => propre(couper($t['texte'],300)),
+			'texte' => couper($t['texte'],300),
 			'url' => generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']   ));
 		if ($t['statut'] == 'prop')
-			$item['title'] = _T('titre_breve_proposee').' : '.$item['title'];
+			$item['titre'] = _T('titre_breve_proposee').' : '.$item['titre'];
 
 		$rss[$k] = $item;
 	}
@@ -195,12 +191,12 @@ function rss_sites($critere) {
 	$rss = sql_allfetsel("*", "spip_syndic", $critere, "", "date DESC", "10");
 	foreach ($rss  as $k => $t) {
 		$item = array(
-			'title' => typo($t['titre']." ".$t['url_site']),
+			'titre' => $t['titre']." ".$t['url_site'],
 			'date' => $t['date'],
-			'description' => propre(couper($t['texte'],300)),
+			'texte' => couper($t['texte'],300),
 			'url' => generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']   ));
 		if ($t['statut'] == 'prop')
-			$item['title'] = _T('info_site_attente').' : '.$item['title'];
+			$item['titre'] = _T('info_site_attente').' : '.$item['titre'];
 
 		$rss[$k] = $item;
 	}
@@ -210,14 +206,14 @@ function rss_sites($critere) {
 
 // http://doc.spip.org/@rss_signatures
 function rss_signatures($a) {
-	$rss = sql_allfetsel("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
+	$rss = sql_allfetsel("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email_auteur, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
 	foreach ($rss as $k => $t) {
 		$item = array(
-			'title' => typo($t['titre']),
+			'titre' => $t['titre'],
 			'date' => $t['date'],
-			'author' => typo($t['nom']),
-			'email' => $t['email'],
-			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
+			'nom' => $t['nom'],
+			'email_auteur' => $t['email_auteur'],
+			'texte' => couper("{{".$t['chapo']."}}\n\n".$t['texte'],300),
 			'url' => generer_url_article($t['id_article']));
 
 		$rss[$k] = $item;
@@ -300,6 +296,7 @@ function rss_a_suivre($a) {
 	$rss_sites = rss_sites("statut = 'prop'");
 
 	$rss = array_merge($rss_articles, $rss_breves, $rss_sites);
+	usort($rss, 'trier_par_date');
 	$title = _T("icone_a_suivre");
 	$url = _DIR_RESTREINT_ABS;
 	return array($title, $rss, $url);
@@ -308,7 +305,7 @@ function rss_a_suivre($a) {
 // http://doc.spip.org/@rss_erreur
 function  rss_erreur($a)
 {
-	$rss = array(array('title' => _T('login_erreur_pass')));
+	$rss = array(array('titre' => _T('login_erreur_pass')));
 	$title = _T('login_erreur_pass');
 	$url = '';
 	return array($title, $rss, $url);
@@ -327,32 +324,38 @@ function xml_rss($trio) {
 
 	$u = '';
 	if (is_array($rss)) {
-		usort($rss, 'trier_par_date');
-		foreach ($rss as $article) {
+		foreach ($rss as $row) {
+			$lang = texte_backend($row['lang']);
+			$url = texte_backend(url_absolue($row['url']));
 			$u .= '
 	<item';
-			if ($article['lang']) 
-				$u .= 'xml:lang="'.texte_backend($article['lang']).'"';
+			if ($lang) $u .= 'xml:lang="'.$lang.'"';
 			$u .= '>
-		<title>'.texte_backend($article['title']).'</title>
-		<link>'.texte_backend(url_absolue($article['url'])).'</link>
-		<guid isPermaLink="true">'.texte_backend(url_absolue($article['url'])).'</guid>
-		<dc:date>'.date_iso($article['date']).'</dc:date>
+		<title>'.texte_backend(typo($row['titre'])).'</title>
+		<link>'.$url.'</link>
+		<guid isPermaLink="true">'.$url.'</guid>
+		<dc:date>'.date_iso($row['date']).'</dc:date>
 		<dc:format>text/html</dc:format>';
-			if ($article['lang']) $u .= '
-		<dc:language>'.texte_backend($article['lang']).'</dc:language>';
-			if ($article['in_reply_to_url']) $u .= ' 
-		<thr:in-reply-to ref="'.texte_backend(url_absolue($article['in_reply_to_url'])).
-				'" href="'.texte_backend(url_absolue($article['in_reply_to_url'])).'" type="text/html" />';
-			if ($article['author']) {
-				if ($article['email'])
-					$article['author'].=' <'.$article['email'].'>';
+			if ($lang) $u .= '
+		<dc:language>'.$lang.'</dc:language>';
+			if ($row['in_reply_to_url']) $u .= ' 
+		<thr:in-reply-to ref="'.texte_backend(url_absolue($row['in_reply_to_url'])).
+				'" href="'.texte_backend(url_absolue($row['in_reply_to_url'])).'" type="text/html" />';
+			if ($row['nom']) {
+				$nom = typo($row['nom']) .
+				  (!$row['email_auteur'] ? '' :
+				   (' <'.$row['email_auteur'].'>'));
 
 				$u .= '
-		<dc:creator>'.texte_backend($article['author']).'</dc:creator>';
+		<dc:creator>'.texte_backend($nom).'</dc:creator>';
+			}
+			$description = propre($row['texte']);
+			if ($GLOBALS['les_notes']) {
+				$description .= '<hr />'.$GLOBALS['les_notes'];
+				$GLOBALS['les_notes'] = '';
 			}
 			$u .= '
-		<description>'.texte_backend(liens_absolus($article['description'])).'</description>
+		<description>'.texte_backend(liens_absolus($description)).'</description>
 	</item>
 ';
 		}
