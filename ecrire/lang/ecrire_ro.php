@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_destinataire_obligatoire' => 'Trebuie sa indica&#355;i un destinatar &icirc;nainte de a trimite mesajul',
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune MySQL',
 'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href=\'http://www.spip.net/fr_article1489.html\'>                                documenta&#355;ia SPIP.</a>.',
-'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><br />SPIP este d&eacute;j&agrave; instalat.',
+'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><div>SPIP este d&eacute;j&agrave; instalat</div>.',
 'avis_lecture_noms_bases_1' => 'Programul de instalare nu a putut citi numele bazelor de date instalate.',
 'avis_lecture_noms_bases_2' => 'Fie nici o baz&#259; de date nu este disponibil&#259;, fie func&#355;ia de listare a bazelor de date a fost dezactivat&#259; pentru motive de securitate (cei mai mul&#355;i furnizori procedeaz&#259; astfel).',
 'avis_lecture_noms_bases_3' => 'Cu cea de-a doua alternativ&#259;, este probabil c&#259; o baz&#259; de date cu un nume la fel ca login-ul dumneavoastr&#259; este disponibil&#259;&nbsp;:',
@@ -301,7 +301,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_delet_mots_cles' => 'A&#355;i cerut &#351;tergerea cuv&acirc;ntului-cheie
 <b>@titre_mot@</b> (@type_mot@). Acest cuv&acirc;nt-cheie fiind legat de
 <b>@texte_lie@</b> v&#259; rug&#259;m s&#259; confirma&#355;i aceast&#259; decizie&nbsp;:',
-'info_derniere_etape' => 'Ultima etap&#259;: <b>Gata !</b>',
+'info_derniere_etape' => 'Ultima etap&#259;: S-a terminat !',
 'info_derniere_syndication' => 'Ultima sindicalizare a acestui site a fost f&#259;cuta la data de',
 'info_derniers_articles_publies' => 'Articolele dumneavoastr&#259; publicate recent',
 'info_desactiver_forum_public' => 'Dezactiva&#355;i folosirea forum-urilor publice. Forum-urile pot fi activate pentru fiecare articol &icirc;n parte, dup&#259; caz; vor r&#259;m&acirc;ne deactivate pentru rubrici, &#351;tiri, &#351;.a.m.d.',
@@ -680,6 +680,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 
 
 // L
+'les_deux' => 'am&acirc;ndou&#259;',
 'lien_ajout_destinataire' => 'Ad&#259;uga&#355;i acest destinatar',
 'lien_ajouter_auteur' => 'Ad&#259;uga&#355;i acest autor',
 'lien_ajouter_participant' => 'Ad&#259;uga&#355;i un participant',

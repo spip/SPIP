@@ -184,15 +184,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' pentru a &icirc;ncepe cu adev&#259;rat instalarea',
 'dirs_preliminaire' => 'Preliminar : <b>Regla&#355;i drepturile de acces</b>',
 'dirs_probleme_droits' => 'Problem&#259; de drepturi de acces',
-'dirs_repertoires_absents' => '<b>Urm&#259;toarele directoare nu au fost g&#259;site&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  Cel mai probabil, aceast&#259; situa&#355;ie este datorat&#259; unei probleme de litere majuscule sau minuscule.
+'dirs_repertoires_absents' => '<p><b>Urm&#259;toarele directoare nu au fost g&#259;site&nbsp;:</b></p> <ul>@bad_dirs@.</ul>
+  <p>Cel mai probabil, aceast&#259; situa&#355;ie este datorat&#259; unei probleme de litere majuscule sau minuscule.
  Verifica&#539;i ca litere majuscule &#351;i minuscule a acestor directoare s&#259; concorde cu ceea ce este afi&#351;at
  mai sus; dac&#259; nu este cazul, redenumi&#539;i directoarele cu ajutorul programului dumneavoastr&#259; favorit de FTP pentru a corecta eroarea.
-  Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#539;i ',
-'dirs_repertoires_suivants' => '<b>Directoarele urm&#259;toare nu sunt accesibile &icirc;n mod scriere&nbsp;: <ul>@bad_dirs@.</ul></b>
-  Pentru a remedia aceast&#259; problem&#259;, utiliza&#355;i clientul dumneavoastr&#259; favorit de FTP pentru a modifica drepturile de acces ale fiec&#259;rui
-  dintre aceste directoare. Procedura este explicat&#259; &icirc;n detaliu &icirc;n manualul de instalare.
-  Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
+  <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#539;i ',
+'dirs_repertoires_suivants' => '<p><b>Directoarele urm&#259;toare nu sunt accesibile &icirc;n mod scriere&nbsp;:</b></p> <ul>@bad_dirs@.</ul></b>
+  <p>Pentru a remedia aceast&#259; problem&#259;, utiliza&#355;i clientul dumneavoastr&#259; favorit de FTP pentru a modifica drepturile de acces ale fiec&#259;rui
+  dintre aceste directoare. Procedura este explicat&#259; &icirc;n detaliu &icirc;n manualul de instalare.</p>
+  <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
 
 
 // E
@@ -273,6 +273,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'forum_acces_refuse' => 'Nu mai ave&#355;i acces la aceste forum-uri.',
 'forum_attention_dix_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> mesajul dumneavoastr&#259; trebuie s&#259; con&#355;in&#259; cel pu&#355;in  zece caractere.',
 'forum_attention_trois_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> titlul dumneavoastr&#259; trebuie s&#259; con&#355;in&#259; cel pu&#355;in trei caractere.',
+'forum_attention_trop_caracteres' => '<b>Aten&#355;ie&nbsp;!</b> mesajul dumneavoastr&#259; este prea lung(@compte@ caractere)&nbsp;: pentru a-l putea &icirc;nregistra, mesajul nu trebuie s&#259; dep&#259;&#351;easc&#259; @max@ caractere.',
 'forum_avez_selectionne' => 'A&#355;i selec&#355;ionat&nbsp;:',
 'forum_cliquer_retour' => 'Face&#355;i click <a href=\'@retour_forum@\'>aici</a> pentru a continua.',
 'forum_forum' => 'forum',

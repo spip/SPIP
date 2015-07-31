@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => '<b>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
-'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
+'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><div>SPIP es ja installat.</div>',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir los noms de las basas de donadas installadas.',
 'avis_lecture_noms_bases_2' => 'Si&aacute; cap de basa es pas disponibla, si&aacute; la foncion que permet d\'entierar las basas es estada desactivada per de rasons de seguretat (aqu&ograve;\'s lo cas en c&ograve; de mai d\'un albergador).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta lo v&ograve;stre nom de login si&aacute; utilizabla:',
@@ -61,7 +61,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_effacer_tout' => 'O escafar tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
-'bouton_forum_petition' => 'FORUM E PETICION',
+'bouton_forum_petition' => 'FORUM &amp; PETICION',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMENTO (D\'USATGE PERSONAL)',
 'bouton_radio_activer_messagerie' => 'Activar la messatjari&aacute; int&egrave;rna',
@@ -92,8 +92,8 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_publication_immediate' => 'Publicar los messatges sul pic
  (las contribucions apareisson tre mandadas, los administrators las p&ograve;don
  suprimir pu&egrave;i).',
-'bouton_radio_sauvegarde_compressee' => 'Salvagarda comprimida jos <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'Salvagarda non comprimida jos <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'Salvagarda comprimida jos @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'Salvagarda non comprimida jos @fichier@',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
 'bouton_redirection' => 'TORNAR DIRIGIR',
@@ -303,7 +303,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
 <B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
  <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
-'info_derniere_etape' => 'Darri&egrave;ra estapa: <B>Es acabat!',
+'info_derniere_etape' => 'Darri&egrave;ra estapa: Es acabat!',
 'info_derniere_syndication' => 'La darri&egrave;ra sindicacion d\'aquel sit se fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'V&ograve;stres darri&egrave;rs articles publicats en linha',
 'info_desactiver_forum_public' => 'Desactivar l\'utilizacion dels forums publics. Los forums publics poir&agrave;n &egrave;sser autorizats al cas per cas suls articles; ser&agrave;n pro&iuml;bits sus las rubricas, br&egrave;vas, etc.',
@@ -444,8 +444,10 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_ou' => 'o... ',
 'info_oui_suppression_mot_cle' => 'V&ograve;li suprimir aquel mot clau definitivament.',
 'info_page_interdite' => 'Pagina pro&iuml;bida',
-'info_par_nombre_article' => '(per nombre d\'articles)',
-'info_par_tri' => '(per @tri@)',
+'info_par_nom' => 'per nom',
+'info_par_nombre_article' => 'per nombre d\'articles',
+'info_par_statut' => 'per estatut',
+'info_par_tri' => '\'(per @tri@)\'',
 'info_pas_de_forum' => 'Pas cap de forum',
 'info_passe_trop_court' => 'Mot de santa Clara tr&ograve;p cort.',
 'info_passes_identiques' => 'Los dos mots de santa Clara son pas identics.',
@@ -523,7 +525,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_sauvegarde_petitions' => 'Salvagardar las peticions',
 'info_sauvegarde_refers' => 'Salvagardar los referidors',
 'info_sauvegarde_reussi_01' => 'Salvagarda capitada.',
-'info_sauvegarde_reussi_02' => 'La basa es estada salvagardada dins <b>ecrire/data/@archive@</b>. Pod&egrave;tz',
+'info_sauvegarde_reussi_02' => 'La basa es estada salvagardada dins @archive@. Pod&egrave;tz',
 'info_sauvegarde_reussi_03' => 'tornar a la gestion',
 'info_sauvegarde_reussi_04' => ' de v&ograve;stre sit.',
 'info_sauvegarde_rubriques' => 'Salvagardar las rubricas',
@@ -675,6 +677,7 @@ una color indica lor estat:',
 
 
 // L
+'les_deux' => 'los dos',
 'lien_ajout_destinataire' => 'Apondre aquel destinatari',
 'lien_ajouter_auteur' => 'Apondre aquel autor',
 'lien_ajouter_participant' => 'Apondre un participant',
@@ -762,8 +765,8 @@ una color indica lor estat:',
 
 // T
 'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas dels documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repert&ograve;ri @dir@ un total de @taille@.',
-'taille_cache_infinie' => 'Aquel sit prevei pas cap de limitacion de talha del repert&ograve;ri <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP assaja de limitar la talha del repert&ograve;ri <code>CACHE/</code> d\'aquel sit a <b>@octets@</b> de donadas aperaqu&iacute;.',
+'taille_cache_infinie' => 'Aquel sit prevei pas cap de limitacion de talha del repert&ograve;ri de l\'escondedor.',
+'taille_cache_maxi' => 'SPIP assaja de limitar la talha del repert&ograve;ri de l\'escondedor d\'aquel sit a <b>@octets@</b> de donadas aperaqu&iacute;.',
 'taille_cache_octets' => 'Ara la talha de l\'escondedor compassa @octets@.',
 'taille_cache_vide' => 'L\'escondedor es void.',
 'taille_repertoire_cache' => 'Talha del repert&ograve;ri escondedor',
@@ -771,8 +774,7 @@ una color indica lor estat:',
 'texte_acces_ldap_anonyme_1' => 'D\'unes servidors LDAP acc&egrave;ptan pas ges d\'acc&egrave;s anonim. En aquel cas, cal especificar un identificant d\'acc&egrave;s inicial per poder pu&egrave;i cercar d\'informacions dins l\'annuari. Pasmens, los camps seguents se poir&agrave;n daissar vu&egrave;ges dins la m&agrave;ger part dels cases.',
 'texte_admin_effacer_01' => 'Aquela comanda escafa <i>tot</i> lo contengut de la basa de donadas,
  incluses <i>totes</i> los acc&egrave;sses redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primi&egrave;r acc&egrave;s administrator.',
-'texte_admin_tech_01' => 'Aquela opcion vos permet de salvagardar lo contengut de la basa dins un fichi&egrave;r que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
-Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri <i>IMG/</i>, que conten los imatges e los documents utilizats dins los articles e rubricas.',
+'texte_admin_tech_01' => 'Aquela opcion vos permet de salvagardar lo contengut de la basa dins un fichi&egrave;r que ser&agrave; servat dins lo repert&ograve;ri @dossier@.Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri @img@, que conten los imatges e los documents utilizats dins los articles e rubricas.',
 'texte_admin_tech_02' => 'Atencion: aquela salvagarda se poir&agrave; restaurar SONQUE dins un sit installat amb la meteissa version d\'SPIP. Donc subretot cal pas "voidar la basa" en esperar de re&iuml;nstallar la salvagarda apr&egrave;s una actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz causir de salvagardar lo fichi&egrave;r jos forma comprimida, per tal
  d\'abrivar son transferiment en c&ograve; v&ograve;stre o a un servidor de salvagardas, e per tal d\'estalviar d\'espaci disc.',
@@ -829,10 +831,10 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_en_cours_validation' => 'Se prepausa de publicar los articles e br&egrave;vas &ccedil;ai sota. Esitetz pas de donar lo v&ograve;stre vejaire gr&agrave;cias als forums que i son estacats.',
 'texte_enrichir_mise_a_jour' => 'Pod&egrave;tz enriquir la compaginacion del v&ograve;stre t&egrave;xt en utilizar d\'"acorchas tipograficas".',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichi&egrave;rs especials  <tt>.htpasswd</tt>
-  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt>?</b><p>
+  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Aqueles fichi&egrave;rs vos p&ograve;don servir per restr&eacute;nher l\'acc&egrave;s als autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
-  (programa ext&egrave;rne d\'estadisticas, per exemple).<p/>
+  (programa ext&egrave;rne d\'estadisticas, per exemple).<p />
  Se vos serv&iacute;s pas, pod&egrave;tz daissar aquesta opcion
   a sa valor predefinida (pas cap de creacion
   dels fichi&egrave;rs).',
@@ -914,12 +916,12 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una salvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una salvagarda 
  de la basa que l\'aviatz facha abans. Per aqu&ograve; faire, cal aver botat lo fichi&egrave;r que conten la salvagarda 
-dins lo repert&ograve;ri <i>ecrire/data/</i>.
+dins lo repert&ograve;ri @dossier@.
   &Ccedil;a que la, siatz prudent(a) amb aquela foncionalitat: <b>las modificacions e p&egrave;rdas eventualas son
   irreversiblas.</b>',
 'texte_sauvegarde' => 'Salvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Salvagardar la basa',
-'texte_sauvegarde_compressee' => 'La salvagarda se far&agrave; dins lo fichi&egrave;r non comprimit <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La salvagarda se far&agrave; dins lo fichi&egrave;r non comprimit @fichier@.',
 'texte_selection_langue_principale' => 'Pod&egrave;tz seleccionar &ccedil;ai sota la "lenga principala" del sit. Aquela causida vos obliga pas -grand gaug- d\'escriure v&ograve;stres articles dins la lenga seleccionada, mas permet de determinar:
  <ul><li> lo format predefinit de las datas sul sit public;</li>
  <li> la natura del motor tipografic que SPIP deu utilizar pel rendut dels t&egrave;xtes;</li>
@@ -1052,7 +1054,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'tout_dossier_upload' => 'Tot lo dorsi&egrave;r @upload@',
 'trad_article_inexistant' => 'I a pas cap d\'article que p&ograve;rte aquel num&egrave;ro.',
 'trad_article_traduction' => 'Totas las versions d\'aquel article:',
-'trad_deja_traduit' => 'Aquel article ja es una revirada de l\'article present.',
+'trad_deja_traduit' => 'Error : impossible de religar aquel article al num&egrave;ro demandat.',
 'trad_delier' => 'Ligar pas mai aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
@@ -1061,7 +1063,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 // U
 'utf8_convert_attendez' => 'Esperatz un momenton e tornatz cargar aquesta pagina.',
 'utf8_convert_avertissement' => 'S&egrave;tz a mand de convertir lo  contengut de v&ograve;stra basa de donadas (articles, br&egrave;vas, etc) del j&ograve;c de caract&egrave;rs <b>@orig@</b> cap al j&ograve;c de caract&egrave;rs <b>@charset@</b>.',
-'utf8_convert_backup' => 'Doblid&egrave;tz pas de far d\'en primi&egrave;r un salvament complet de v&ograve;stre sit. Vos cal tanben verificar que v&ograve;stras esqueletas e fichi&egrave;rs de lenga son compatibles @charset@. De mai, lo seguit de las revisions, s\'es activat, ser&agrave; degalhat.',
+'utf8_convert_backup' => 'Doblid&egrave;tz pas de far d\'en primi&egrave;r un salvament complet de v&ograve;stre sit. Vos cal tanben verificar que v&ograve;stras esqueletas e fichi&egrave;rs de lenga son compatibles @charset@. ',
 'utf8_convert_erreur_deja' => 'V&ograve;tre sit es ja en @charset@, inutil de lo convertir...',
 'utf8_convert_erreur_orig' => 'Error&nbsp;: lo j&ograve;c de caract&egrave;rs @charset@ es pas suportat.',
 'utf8_convert_termine' => 'Es acabat&nbsp;!',

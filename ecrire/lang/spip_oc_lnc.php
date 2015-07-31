@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Tornar calcular la pagina',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualizar la basa MySQL v&egrave;rs la version @version@; saique i a un probl&egrave;ma relatiu al drech de modificar la basa de donadas. Volgatz contactar v&ograve;stre albergador.',
 'analyse_xml' => 'Analisi XML',
+'antispam_champ_vide' => 'Volgatz daissar aquel camp void&nbsp;:',
 'avis_archive_incorrect' => 'lo fichi&egrave;r archiu es pas un fichi&egrave;r SPIP',
 'avis_archive_invalide' => 'lo fichi&egrave;r archiu es pas valid',
 'avis_attention' => 'ATENCION!',
@@ -143,12 +144,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'dimenge',
+'date_jour_1_abbr' => 'dmg.',
+'date_jour_1_initiale' => 'dg.',
 'date_jour_2' => 'diluns',
+'date_jour_2_abbr' => 'dil.',
+'date_jour_2_initiale' => 'dl.',
 'date_jour_3' => 'dimars',
+'date_jour_3_abbr' => 'dmr.',
+'date_jour_3_initiale' => 'dm.',
 'date_jour_4' => 'dim&egrave;cres',
+'date_jour_4_abbr' => 'dmc.',
+'date_jour_4_initiale' => 'dc.',
 'date_jour_5' => 'dij&ograve;us',
+'date_jour_5_abbr' => 'dij.',
+'date_jour_5_initiale' => 'dj.',
 'date_jour_6' => 'divendres',
+'date_jour_6_abbr' => 'div.',
+'date_jour_6_initiale' => 'dv.',
 'date_jour_7' => 'dissabte',
+'date_jour_7_abbr' => 'dis.',
+'date_jour_7_initiale' => 'ds.',
 'date_jours' => 'jorns',
 'date_minutes' => 'minutas',
 'date_mois' => 'mes(es)',
@@ -172,15 +187,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'per comen&ccedil;ar vertadi&egrave;rament l\'installacion',
 'dirs_preliminaire' => 'Preliminar: <b>Reglar los dreches d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;ma de dreches d\'acc&egrave;s',
-'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
-  <p />Se p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mal mesas.
+'dirs_repertoires_absents' => '<p><b>S\'es pas trobat los repert&ograve;ris seguents: </b></p> <ul>@bad_dirs@.</ul> 
+  <p>Se p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mal mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
-  &ccedil;ai subre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logicial FTP en corregir l\'error.
-  <p />Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
-'dirs_repertoires_suivants' => '<b>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
-  <p />Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP per tal de reglar los dreches d\'acc&egrave;s de cadun
-  d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coss&iacute; cal procedir.
-  <p />Tre qu\'auretz facha aquela manipulacion, poiretz ',
+  &ccedil;ai subre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logicial FTP en corregir l\'error.</p>
+  <p>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
+'dirs_repertoires_suivants' => '<p><b>Los repert&ograve;ris seguents son pas accessibles en escritura: </b></p><ul>@bad_dirs@.</ul> </b>
+  <p>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP per tal de reglar los dreches d\'acc&egrave;s de cadun
+  d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coss&iacute; cal procedir.</p>
+  <p>Tre qu\'auretz facha aquela manipulacion, poiretz ',
 
 
 // E
@@ -262,6 +277,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_acces_refuse' => 'Pod&egrave;tz pas mai accedir a aqueles forums.',
 'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge deu t&eacute;ner almens d&egrave;tz caract&egrave;rs.',
 'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol deu t&eacute;ner almens tres caract&egrave;rs.',
+'forum_attention_trop_caracteres' => '<b>Atencion&nbsp;!</b> v&ograve;stre messatge es tr&ograve;p long (@compte@ caract&egrave;rs)&nbsp;: per se poder  registrar, cal pas que passe @max@ caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat&nbsp;:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aic&iacute;</a> per contunhar.',
 'forum_forum' => 'forum',
