@@ -85,6 +85,7 @@ function exec_admin_plugin_dist($retour='') {
 		$plugins_interessants = array();
 
 	if ($lpf) {
+		echo "<div class='liste_plugins'>";
 		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_T('plugins_liste'),
 		'liste_plugins');
 		echo _T('texte_presente_plugin');
@@ -136,6 +137,7 @@ function exec_admin_plugin_dist($retour='') {
 		echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
 
 		echo fin_cadre_trait_couleur(true);
+		echo "</div>\n";
 
 	}
 
@@ -143,12 +145,34 @@ function exec_admin_plugin_dist($retour='') {
 		echo formulaire_charger_plugin($retour);
 	}
 
+
+	if ($extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
+		echo "<div class='liste_plugins'>";
+		echo debut_cadre_trait_couleur('plugin-24.png',true,'',_L('Extensions'),
+		'liste_extensions');
+		echo _L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@. Elles ne sont pas d&#233;sactivables.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)));
+
+		foreach($extensions as $ext) {
+			$block .= "<li>"
+			. ligne_plug(_DIR_EXTENSIONS.$ext, -1, 0)
+			. "</li>\n";
+		}
+
+		echo "<ul>$block</ul>\n";
+
+		echo fin_cadre_trait_couleur(true);
+		echo "</div>\n";
+
+	}
 	echo fin_gauche(), fin_page();
 	}
 }
 
 // http://doc.spip.org/@affiche_les_plugins
 function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arbre'){
+
+#	(spip_timer('cachexml'));
+
 	if ($format=='liste'){
 		$liste_plugins = array_flip($liste_plugins);
 		foreach(array_keys($liste_plugins) as $chemin) {
@@ -160,6 +184,10 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 	}
 	else
 		$res = affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs);
+
+#	var_dump(spip_timer('cachexml'));
+
+
 	return http_script("
 	jQuery(function(){
 		jQuery('input.check').click(function(){
@@ -369,9 +397,12 @@ function ligne_plug($plug_file, $actif, $id){
 	);
 	
 	if (isset($puce_etat[$etat]))
-	$s .= $puce_etat[$etat];
+	$s .= $puce_etat[$etat]."\n";
 
-	if (!$erreur){
+	// si $actif vaut -1, c'est actif, et ce n'est pas desactivable (extension)
+	if (!$erreur
+	AND $actif>=0
+	){
 		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
 		$s .= "\n<input type='checkbox' name='$name' id='label_$id_input' value='O'";
 		$s .= $actif?" checked='checked'":"";
