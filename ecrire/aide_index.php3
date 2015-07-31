@@ -106,18 +106,32 @@ function fichier_aide($lang_aide = '') {
 function help_body($aide, $html) {
 	global $help_server;
 
-	if (!$aide) $aide = 'spip';
 
 	// Recuperation du contenu de l'aide demandee
-	$html = analyse_aide($html, $aide);
+	if ($aide) {
+		$html = analyse_aide($html, $aide);
 
-	if (!$html) {
-		include_ecrire('inc_presentation.php3');
-		install_debut_html(_T('forum_titre_erreur'));
-		echo "<div>"._T('aide_non_disponible')."</div>";
-		echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
-		install_fin_html();
-		exit;
+		if (!$html) {
+			include_ecrire('inc_presentation.php3');
+			install_debut_html(_T('forum_titre_erreur'));
+			echo "<div>"._T('aide_non_disponible')."</div>";
+			echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
+			install_fin_html();
+			exit;
+		}
+	} else {
+		// panneau d'accueil
+		$html = '<CENTER>
+			<img src="'._DIR_IMG_PACK.
+			'logo-spip.gif" alt="SPIP" width="267" height="170" border="0">
+			<p />
+			<div align="center" style="font-variant: small-caps;">
+			Syst&egrave;me de publication pour l\'Internet
+			</div></CENTER>
+			<div style="position:absolute; bottom: 10px; right:20px;
+			font-size: 12px; ">'.
+		preg_replace(",<a ,i", "<a target='_new' ",_T('info_copyright_doc')).
+			'</div>';
 	}
 
 	// Recherche des images de l'aide
