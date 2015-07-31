@@ -308,15 +308,12 @@ sera ignorée) :
 'icone_interface_simple' => 'シンプルなインターフェース',
 'icone_maintenance_site' => 'サイトメンテナンス',
 'icone_messagerie_personnelle' => '個人的なメッセージ交換',
-'icone_repartition_actuelle' => '現在のディストリビューションを表示する',
 'icone_repartition_debut' => '初めからのディストリビューションを表示',
-'icone_repartition_visites' => 'ディストリビューションを訪問',
 'icone_rubriques' => 'セクション',
 'icone_sauver_site' => 'サイトのバックアップ',
 'icone_site_entier' => 'サイトの全体',
 'icone_sites_references' => '参照されたサイト',
 'icone_statistiques' => 'サイトの統計',
-'icone_statistiques_visites' => '統計',
 'icone_suivi_activite' => 'サイトの活動の手助け',
 'icone_suivi_actualite' => 'サイトの統計',
 'icone_suivi_pettions' => '署名の把握、管理',
@@ -435,7 +432,6 @@ sera ignorée) :
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'ピクセル',
 'info_plusieurs_mots_trouves' => '"@cherche_mot@"についていくつかのキーワードが見つかった:',
-'info_popularite_5' => '人気:',
 'info_portfolio_automatique' => '自動作成の代表作品集:',
 'info_premier_resultat' => '[@debut_limit@ 初めの結果、トータル @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最初の結果、トータル @total@]',
@@ -476,12 +472,11 @@ sera ignorée) :
 'info_vignette_defaut' => '標準の写真、模様',
 'info_vignette_personnalisee' => 'ビネット(半身写真、模様など)をカスタマイズ',
 'info_visite' => '１つの訪問:',
-'info_visites' => '訪問:',
 'info_vos_rendez_vous' => 'あなたの次の約束',
-'info_zoom' => 'ズーム',
 'infos_vos_pense_bete' => 'あなたのメモ', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'アイコン表示のみ',
 'lien_afficher_texte_icones' => 'アイコンとテキストの表示',
 'lien_afficher_texte_seul' => 'テキスト表示のみ',
@@ -552,9 +547,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => '個人情報',
 'onglet_interactivite' => '対話性',
 'onglet_messagerie' => 'メッセージ交換',
-'onglet_origine_visites' => 'オリジナルを訪問',
-'onglet_repartition_debut' => '初めから',
-'onglet_repartition_lang' => '言語によるディストリビューション',
 'onglet_repartition_rubrique' => 'セクションによるディストリビューション',
 'onglet_save_restaur_base' => 'バックアップ/復元 データベース',
 'onglet_vider_cache' => '空のキャッシュ',
@@ -660,7 +652,6 @@ sera ignorée) :
 'titre_image_redacteur_02' => '編集者',
 'titre_image_visiteur' => '訪問者',
 'titre_joindre_document' => 'ドキュメントを置く',
-'titre_liens_entrants' => '入ってくるリンク',
 'titre_mots_cles' => 'キーワード',
 'titre_probleme_technique' => '警告: 技術的な問題 (SQL server) サイトのこの部分へのアクセスを防ぎます。<p>あなたの理解に感謝します。', # MODIF
 'titre_publier_document' => 'このセクションで文章を公開する',

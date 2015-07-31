@@ -305,15 +305,12 @@ sera ignorée) :
 'icone_interface_simple' => 'Forenklet brugergrænseflade',
 'icone_maintenance_site' => 'Vedligeholdelse',
 'icone_messagerie_personnelle' => 'Personlige meddelelser',
-'icone_repartition_actuelle' => 'Vis faktisk fordeling',
 'icone_repartition_debut' => 'Vis fordeling siden start',
-'icone_repartition_visites' => 'Besøgsfordeling',
 'icone_rubriques' => 'Afsnit',
 'icone_sauver_site' => 'Websted backup',
 'icone_site_entier' => 'Hele webstedet',
 'icone_sites_references' => 'Links',
 'icone_statistiques' => 'Webstedsstatistik',
-'icone_statistiques_visites' => 'Besøgsstatistik',
 'icone_suivi_activite' => 'Opfølgning på webstedets aktiviteter',
 'icone_suivi_actualite' => 'Webstedets udvikling',
 'icone_suivi_pettions' => 'Administrer appeller',
@@ -432,7 +429,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Der blev fundet flere nøgleord ved søgning efter "@cherche_mot@":',
-'info_popularite_5' => 'polularitet:',
 'info_portfolio_automatique' => 'Automatisk album:',
 'info_premier_resultat' => '[@debut_limit@ første resultater af @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ første resultater af @total@]',
@@ -473,12 +469,11 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'info_vignette_defaut' => 'Standardpiktogram',
 'info_vignette_personnalisee' => 'Tilpasset piktogram',
 'info_visite' => 'besøg:',
-'info_visites' => 'besøg:',
 'info_vos_rendez_vous' => 'Dine fremtidige aftaler',
-'info_zoom' => 'zoom', # NEW
 'infos_vos_pense_bete' => 'Dine memoer', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => 'Vis kun piktogrammer',
 'lien_afficher_texte_icones' => 'Vis piktogrammer og tekst',
 'lien_afficher_texte_seul' => 'Vis kun tekst',
@@ -550,9 +545,6 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'onglet_informations_personnelles' => 'Personlige oplysninger',
 'onglet_interactivite' => 'Interaktivitet',
 'onglet_messagerie' => 'Meddelelsesfunktion',
-'onglet_origine_visites' => 'Besøgendes oprindelse',
-'onglet_repartition_debut' => 'fra begyndelsen',
-'onglet_repartition_lang' => 'efter sprog',
 'onglet_repartition_rubrique' => 'Fordeling på afsnit',
 'onglet_save_restaur_base' => 'Sikkerhedskopi/genindlæsning af databasen',
 'onglet_vider_cache' => 'Tøm cachen',
@@ -645,7 +637,6 @@ og igen få adgang til webstedet.', # MODIF
 'titre_image_redacteur_02' => 'Forfatter',
 'titre_image_visiteur' => 'Besøgende',
 'titre_joindre_document' => 'VEDHÆFT DOKUMENT',
-'titre_liens_entrants' => 'Dagens indkomne links',
 'titre_mots_cles' => 'NØGLEORD',
 'titre_probleme_technique' => 'Advarsel: et teknisk problem (SQL server) forhindrer adgang til denne del af webstedet.<p>
 		Tak for din forståelse.', # MODIF

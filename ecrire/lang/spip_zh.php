@@ -306,15 +306,12 @@ sera ignorée) :
 'icone_interface_simple' => '简单界面',
 'icone_maintenance_site' => '站点维护',
 'icone_messagerie_personnelle' => '个人消息',
-'icone_repartition_actuelle' => '显示实际分布',
 'icone_repartition_debut' => '显示从开始的分布',
-'icone_repartition_visites' => '访问分布',
 'icone_rubriques' => '专栏',
 'icone_sauver_site' => '站点备份',
 'icone_site_entier' => '整个站点',
 'icone_sites_references' => '参考站点',
 'icone_statistiques' => '站点统计',
-'icone_statistiques_visites' => '访问统计', # MODIF
 'icone_suivi_activite' => '跟踪站点的活动',
 'icone_suivi_actualite' => '站点评估',
 'icone_suivi_pettions' => '跟踪/管理请求',
@@ -433,7 +430,6 @@ sera ignorée) :
 'info_petition_close' => 'Pétition close', # NEW
 'info_pixels' => '像素',
 'info_plusieurs_mots_trouves' => '几个关键词找到了 "@cherche_mot@":',
-'info_popularite_5' => '流行:',
 'info_portfolio_automatique' => '自动相册:',
 'info_premier_resultat' => '[@debut_limit@ 最新结果出了 @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ 最新结果出了@total@]',
@@ -474,12 +470,11 @@ sera ignorée) :
 'info_vignette_defaut' => '缺省的小插图',
 'info_vignette_personnalisee' => '定制小插图',
 'info_visite' => '访问:',
-'info_visites' => '访问:',
 'info_vos_rendez_vous' => '将来的约会',
-'info_zoom' => '缩放',
 'infos_vos_pense_bete' => '备注', # MODIF
 
 // L
+'label_poids_fichier' => 'Taille', # NEW
 'lien_afficher_icones_seuls' => '只显示图片',
 'lien_afficher_texte_icones' => '显示文本和图片',
 'lien_afficher_texte_seul' => '只显示正文',
@@ -550,9 +545,6 @@ sera ignorée) :
 'onglet_informations_personnelles' => '个人信息',
 'onglet_interactivite' => '互动',
 'onglet_messagerie' => '消息',
-'onglet_origine_visites' => '访问者起源',
-'onglet_repartition_debut' => '从开始',
-'onglet_repartition_lang' => '<MODIF>根据语言重新分布',
 'onglet_repartition_rubrique' => '按专栏发布',
 'onglet_save_restaur_base' => '备份/恢复数据库',
 'onglet_vider_cache' => '清空缓存',
@@ -661,7 +653,6 @@ sera ignorée) :
 'titre_image_redacteur_02' => '编辑者',
 'titre_image_visiteur' => '访问者',
 'titre_joindre_document' => '附加文档',
-'titre_liens_entrants' => '访问链接', # MODIF
 'titre_mots_cles' => '关键词',
 'titre_probleme_technique' => '警告:技术问题 MYSQL 制止访问站点的这部分,谢谢理解 .', # MODIF
 'titre_publier_document' => '在此栏下发布文档',
