@@ -44,7 +44,6 @@ global $ajouter_id_article,
 
 // securite
  $id_auteur = intval($id_auteur);
- spip_log("auteur_inf $id_auteur '$new'");
 
 //
 // Recuperer id_auteur ou se preparer a l'inventer
@@ -122,11 +121,10 @@ if (strval($nom)!='') {
 	// mais pas des autres admins
 	if ($connect_statut == '0minirezo'
 	AND ($connect_toutes_rubriques OR $statut<>'0minirezo')) { 
-		if ($email !='' AND !email_valide($email)) {
+		$email = trim($email);	 
+		if ($email !='' AND !email_valide($email)) 
 			$echec .= "<p>"._T('info_email_invalide');
-			$auteur['email'] = $email;
-		} else
-			$auteur['email'] = $email;
+		$auteur['email'] = $email;
 	}
 
 	if ($connect_id_auteur == $id_auteur) {
