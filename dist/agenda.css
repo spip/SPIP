@@ -112,7 +112,7 @@ div.navigation-calendrier img {
 .calendrier-jour {
 	position: relative; 
 	color: #999;
-	background-color: #FFF;
+	/*background-color: #FFF;*/
 	border: 1px solid #AAA;
 }
 
@@ -348,3 +348,9 @@ div.navigation-calendrier img {
 		border: 1px solid #F5EEE5;
 		color: #F5EEE5
 }
+/* agenda */
+.bandeau_agenda { background:#ddd;}
+.jour_dimanche { background:#eee;}
+.jour_encours { background:#fff;}
+.jour_gris { background:#eee;}
+.calendrier-cadreagenda { background:#eee;}

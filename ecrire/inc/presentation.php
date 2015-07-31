@@ -771,6 +771,10 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. find_in_path('style_prive_defaut.css')
 	. '" />'  . "\n"
 	
+	// CSS calendrier
+	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('agenda.css') .'" />' . "\n"
+	
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
@@ -779,10 +783,6 @@ function envoi_link($nom_site_spip, $minipres=false) {
   . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
   . "<![endif]-->\n"
   
-	// CSS calendrier
-	. '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('agenda.css') .'" />' . "\n"
-
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_print.css')
