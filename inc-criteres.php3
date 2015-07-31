@@ -288,7 +288,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	    if ($n)
 	      $boucle->order[$n-1] .= " . ' DESC'";
 	    else
-	      erreur_squelette(_T('zbug_info_erreur_squelette'), "{inverse ?} BOUCLE$idb");
+	      $boucle->default_order[] =  ' DESC';
 	  }
 }
 
@@ -465,9 +465,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	      if ($crit->not) {
 		$where = "NOT ($where)";
 	      } else {
-			$boucles[$idb]->default_order = array('rang');
+			$boucles[$idb]->default_order[] = "'cpt'";
 			$boucles[$idb]->select[]= "FIND_IN_SET($ct, '\" . " . 
-			  join(" .\n\",\" . ", $val) . ' . "\') AS rang';
+			  join(" .\n\",\" . ", $val) . ' . "\') AS cpt';
 	      }
 	} else {
 		$val = ereg("^'[^']*'$", $val[0]) ? $val[0] :

@@ -1015,7 +1015,7 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	do {
 		$q = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 		list($id_rubrique) = spip_fetch_array($q);
-		$hierarchie = ",$id_rubrique".$hierarchie;
+		$hierarchie = "," . intval($id_rubrique) . $hierarchie;
 	} while ($id_rubrique);
 
 	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'

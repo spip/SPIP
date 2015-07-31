@@ -207,9 +207,13 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$exclure_feuille = ($boucle->tout ? 'false' : 'true');
 
 	// $hierarchie sera calculee par une fonction de inc-calcul-outils
-	$boucle->where[] = 'id_rubrique IN ($hierarchie)';
-	$boucle->select[] = 'FIND_IN_SET(id_rubrique, \'$hierarchie\')-1 AS rang';
-	$boucle->default_order = array('rang');
+	$boucle->where[] = $id_table . '.id_rubrique IN ($hierarchie)';
+	$boucle->select[] = "FIND_IN_SET($id_table" . '.id_rubrique, \'$hierarchie\')-1 AS rang';
+
+	if ($boucle->default_order[0] != " DESC")
+	  $boucle->default_order[] = "'rang'" ;
+	else
+	  $boucle->default_order[0] = "'rang DESC'" ;
 	$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
 	. ', '
