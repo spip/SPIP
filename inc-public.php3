@@ -52,10 +52,7 @@ else {
 		if ($redirect) redirige_par_entete($redirect);
 	}
 	if ($val_confirm) {
-		// il nous faut id_article ! C'est donc encore a nettoyer...
-		include_local('inc-calcul.php3');
-		calculer_contexte();
-		include_local('inc-signature.php3');
+		include_local('inc-formulaire_signature.php3');
 		reponse_confirmation($id_article, $val_confirm);
 	}
 

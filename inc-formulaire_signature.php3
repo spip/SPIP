@@ -19,24 +19,12 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article) {
 		return reponse_signature($id_article);
 	else {
 		include(_FILE_CONNECT);
-		$query_petition = "SELECT * FROM spip_petitions WHERE id_article='$id_article'";
-		$result_petition = spip_query($query_petition);
-		
-		if (!$row = spip_fetch_array($result_petition)) return '';
-		$site_obli = $row['site_obli'];
-		$message = $row['message'];
-		$texte = $row['texte'];
-		return array('formulaire_signature',
-			     0,
-			     array(
-				'id_article' => $id_article,
-				'texte' => $texte,
-				'message' => (($message == 'oui') ? ' ' : ''),
-				'site_obli' => (($site_obli != 'oui') ? ' ' : '')
-				)
-			     );
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article='$id_article'"));
+		return !$row ? '': array('formulaire_signature', 0, $row);
 	}
 }
+
+function choixsiegal($a1,$a2,$v,$f) {return ($a1 == $a2) ? $v : $f;}
 
 //
 // Retour a l'ecran du lien de confirmation d'une signature de petition
