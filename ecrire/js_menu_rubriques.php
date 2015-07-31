@@ -98,6 +98,10 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	
 	// Limiter volontairement le nombre de sous-menus 
 	$zmax = 6;
+	if ($spip_ecran == "large") $max_lignes = 20;
+	else $max_lignes = 15;
+	
+	
 
 	if ($zindex < 1) $zindex = 1;
 	if ($zdecal == 1) $image = "secteur-12.gif";
@@ -114,11 +118,27 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret .= '<div class=\"pos_r\" style=\"z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
 		$ret .= '<div class=\"brt\"><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
 		$ret .= '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
+		
+		$ret .= '<table cellspacing=\"0\" cellpadding=\"0\"><tr><td valign=\"top\">';		
+		$ret .= "<div class='bandeau_rubriques' style='width: 170px;'>";
 		foreach( $arr_rub as $id_rub => $titre_rub) {
+			$count_ligne ++;
+			
+			if ($count_ligne == $max_lignes) {
+				$count_ligne = 0;
+				$ret .= "</div>";
+				$ret .= '</td><td>&nbsp;</td><td valign=\"top\">';
+				$ret .= "<div class='bandeau_rubriques' style='width: 170px;'>";
+
+			}
+		
 			$titre_rub = supprimer_numero(typo($titre_rub));
 			$ret .= bandeau_rubrique($id_rub, $titre_rub, ($z+$i));
 			$i = $i - 1;
 		}
+		
+		$ret .= '</div></td></tr></table>';
+		
 		$ret .= "</div></div>";
 	} else {
 		$ret .= '<div><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
