@@ -22,10 +22,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Cherche une fonction surchargeable et en retourne le nom exact,
  * après avoir chargé le fichier la contenant si nécessaire.
- * 
+ *
  * Charge un fichier (suivant les chemins connus) et retourne si elle existe
  * le nom de la fonction homonyme `$dir_$nom`, ou suffixé `$dir_$nom_dist`
- * 
+ *
  * Peut être appelé plusieurs fois, donc optimisé.
  *
  * @api
@@ -35,7 +35,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
  *     $envoyer_mail($email, $sujet, $texte);
  *     ```
- * 
+ *
  * @param string $nom
  *     Nom de la fonction (et du fichier)
  * @param string $dossier
@@ -103,14 +103,14 @@ function include_once_check($file){
 
 /**
  * Inclut un fichier PHP (en le cherchant dans les chemins)
- * 
+ *
  * @api
  * @uses find_in_path()
  * @example
  *     ```
  *     include_spip('inc/texte');
  *     ```
- * 
+ *
  * @param string $f
  *     Nom du fichier (sans l'extension)
  * @param bool $include
@@ -126,14 +126,14 @@ function include_spip($f, $include = true) {
 
 /**
  * Requiert un fichier PHP (en le cherchant dans les chemins)
- * 
+ *
  * @uses find_in_path()
  * @see include_spip()
  * @example
  *     ```
  *     require_spip('inc/texte');
  *     ```
- * 
+ *
  * @param string $f
  *     Nom du fichier (sans l'extension)
  * @return string|bool
@@ -146,19 +146,19 @@ function require_spip($f) {
 
 /**
  * Exécute une fonction (appellée par un pipeline) avec la donnée transmise.
- * 
+ *
  * Un pipeline est lie a une action et une valeur
  * chaque element du pipeline est autorise a modifier la valeur
  * le pipeline execute les elements disponibles pour cette action,
  * les uns apres les autres, et retourne la valeur finale
- * 
+ *
  * Cf. compose_filtres dans references.php, qui est la
  * version compilee de cette fonctionnalite
  * appel unitaire d'une fonction du pipeline
  * utilisee dans le script pipeline precompile
- * 
+ *
  * on passe $val par reference pour limiter les allocations memoire
- * 
+ *
  * @param string $fonc
  *     Nom de la fonction appelée par le pipeline
  * @param string|array $val
@@ -227,7 +227,7 @@ function pipeline($action, $val=null) {
  * Signature : `spip_log(message[,niveau|type|type.niveau])`
  *
  * Le niveau de log par défaut est la valeur de la constante `_LOG_INFO`
- * 
+ *
  * Les différents niveaux possibles sont :
  *
  * - `_LOG_HS` : écrira 'HS' au début de la ligne logguée
@@ -254,7 +254,7 @@ function pipeline($action, $val=null) {
  * @param string $message
  *     Message à loger
  * @param string|int $name
- *     
+ *
  *     - int indique le niveau de log, tel que `_LOG_DEBUG`
  *     - string indique le type de log
  *     - `string.int` indique les 2 éléments.
@@ -349,7 +349,7 @@ function _request($var, $c=false) {
  *
  * @see _request() Pour obtenir la valeur
  * @note Attention au cas ou l'on fait `set_request('truc', NULL);`
- * 
+ *
  * @param string $var Nom de la clé
  * @param string $val Valeur à affecter
  * @param bool|array $c Tableu de données (sinon utilise `$_GET` et `$_POST`)
@@ -561,7 +561,7 @@ function self($amp = '&amp;', $root = false) {
 	return $url;
 }
 
- 
+
 /**
  * Indique si on est dans l'espace prive
  *
@@ -586,7 +586,7 @@ function test_plugin_actif($plugin){
  * Traduction des textes de SPIP
  *
  * Traduit une clé de traduction en l'obtenant dans les fichiers de langues.
- * 
+ *
  * @api
  * @uses inc_traduire_dist()
  * @uses _L()
@@ -596,7 +596,7 @@ function test_plugin_actif($plugin){
  *     _T('medias:image_tourner_droite')
  *     _T('medias:erreurs', array('nb'=>3)
  *     ```
- * 
+ *
  * @param string $texte
  *     Clé de traduction
  * @param array $args
@@ -621,7 +621,7 @@ function _T($texte, $args=array(), $options=array()) {
 		$traduire = charger_fonction('traduire', 'inc');
 		include_spip('inc/lang');
 	}
-	
+
 	// On peut passer explicitement la langue dans le tableau
 	// On utilise le même nom de variable que la globale
 	if (isset($args['spip_lang'])){
@@ -666,7 +666,7 @@ function _T($texte, $args=array(), $options=array()) {
  *     ```
  *     _L('Texte avec @nb@ ...', array('nb'=>3)
  *     ```
- * 
+ *
  * @param string $text
  *     Texte
  * @param array $args
@@ -852,12 +852,12 @@ function job_queue_link($id_job,$objets){
 
 /**
  * Renvoyer le temps de repos restant jusqu'au prochain job
- * 
+ *
  * @staticvar int $queue_next_job_time
  * @see queue_set_next_job_time()
  * @param int|bool $force
  *    Utilisée par `queue_set_next_job_time()` pour mettre à jour la valeur :
- * 
+ *
  *    - si `true`, force la relecture depuis le fichier
  *    - si int, affecte la static directement avec la valeur
  * @return int
@@ -912,7 +912,7 @@ function quote_amp($u) {
  *     echo http_script('alert("ok");');
  *     echo http_script('','js/jquery.js');
  *     ```
- * 
+ *
  * @param string $script
  *     Code source du script
  * @param string $src
@@ -962,13 +962,13 @@ function texte_script($texte) {
  * Ainsi, si l'argument est de la forme `dir1:dir2:dir3`, ces 3 chemins sont placés
  * en tête du path, dans cet ordre (hormis `squelettes` & la globale
  * `$dossier_squelette` si définie qui resteront devant)
- * 
+ *
  * Retourne dans tous les cas la liste des chemins.
  *
  * @note
  *     Cette fonction est appelée à plusieurs endroits et crée une liste
  *     de chemins finale à peu près de la sorte :
- * 
+ *
  *     - dossiers squelettes (si globale précisée)
  *     - squelettes/
  *     - plugins (en fonction de leurs dépendances) : ceux qui dépendent
@@ -977,7 +977,7 @@ function texte_script($texte) {
  *     - squelettes-dist/
  *     - prive/
  *     - ecrire/
- * 
+ *
  * @param string $dir_path
  *     - Répertoire(s) à empiler au path
  *     - '' provoque un recalcul des chemins.
@@ -1043,7 +1043,7 @@ function _chemin($dir_path=NULL){
  * Recalcule la liste si le nom ou liste de dossier squelettes a changé.
  *
  * @uses _chemin()
- * 
+ *
  * @return array Liste de chemins
 **/
 function creer_chemin() {
@@ -1105,11 +1105,11 @@ function find_in_theme($file, $subdir='', $include=false){
  * de facon temporaire le temps de la migration, et cherche de nouveau.
  *
  * Si l'image n'est toujours pas trouvée, on la cherche dans les chemins,
- * dans le répertoire défini par la constante `_NOM_IMG_PACK` 
+ * dans le répertoire défini par la constante `_NOM_IMG_PACK`
  *
  * @see find_in_theme()
  * @see inc_icone_renommer_dist()
- * 
+ *
  * @param string $icone
  *     Nom de l'icone cherchée
  * @return string
@@ -1120,7 +1120,7 @@ function chemin_image($icone){
 	static $icone_renommer;
 	// gerer le cas d'un double appel en evitant de refaire le travail inutilement
 	if (strpos($icone,"/")!==false AND file_exists($icone)) return $icone;
-	
+
 	// si c'est un nom d'image complet (article-24.png) essayer de le renvoyer direct
 	if (preg_match(',[.](png|gif|jpg)$,',$icone) AND $f = find_in_theme("images/$icone"))
 		return $f;
@@ -1146,8 +1146,8 @@ $GLOBALS['path_files'] = null;
  * Recherche un fichier dans les chemins de SPIP (squelettes, plugins, core)
  *
  * Retournera le premier fichier trouvé (ayant la plus haute priorité donc),
- * suivant l'ordre des chemins connus de SPIP. 
- * 
+ * suivant l'ordre des chemins connus de SPIP.
+ *
  * @api
  * @see charger_fonction()
  * @uses creer_chemin() Pour la liste des chemins.
@@ -1156,7 +1156,7 @@ $GLOBALS['path_files'] = null;
  *     $f = find_in_path('css/perso.css');
  *     $f = find_in_path('perso.css', 'css');
  *     ```
- * 
+ *
  * @param string $file
  *     Fichier recherché
  * @param string $dirname
@@ -1272,14 +1272,14 @@ function save_path_cache(){
 
 /**
  * Trouve tous les fichiers du path correspondants à un pattern
- * 
+ *
  * Pour un nom de fichier donné, ne retourne que le premier qui sera trouvé
  * par un `find_in_path()`
  *
  * @api
  * @uses creer_chemin()
  * @uses preg_files()
- * 
+ *
  * @param string $dir
  * @param string $pattern
  * @param bool $recurs
@@ -1549,7 +1549,7 @@ function url_de_($http,$host,$request,$prof=0){
  *     ```
  *     generer_url_ecrire('admin_plugin')
  *     ```
- * 
+ *
  * @param string $script
  *     Nom de la page privée (xx dans exec=xx)
  * @param string $args
@@ -1598,7 +1598,7 @@ function generer_url_retour($script, $args="")
  * @note
  *   Detecter le fichier de base, a la racine, comme etant spip.php ou ''
  *   dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
- * 
+ *
  * @param string $default
  *     Script par défaut
  * @return string
@@ -1619,7 +1619,7 @@ function get_spip_script($default='') {
  *     ```
  *     generer_url_public("rubrique","id_rubrique=$id_rubrique")
  *     ```
- * 
+ *
  * @param string $script
  *     Nom de la page
  * @param string|array $args
@@ -1741,16 +1741,16 @@ function generer_form_action($script, $corps, $atts='', $public=false) {
 /**
  * Créer une URL
  *
- * @param  string  $script
+ * @param  string $script
  *     Nom du script à exécuter
- * @param  string|array  $args
- *     Arguments à transmettre a l'URL, soit sous la forme d'un string 
- *     tel que `arg1=yy&arg2=zz` soit sous la forme d'un array tel que 
+ * @param  string|array $args
+ *     Arguments à transmettre a l'URL, soit sous la forme d'un string
+ *     tel que `arg1=yy&arg2=zz` soit sous la forme d'un array tel que
  *    `array( arg1 => yy, arg2 => zz )`
- * @param  boolean $no_entities
+ * @param bool $no_entities
  *     Si false : transforme les & en &amp;
- * @param  boolean $public
- *     URL relative ? false : l’URL sera complète et contiendra l’URL du site. 
+ * @param boolean $public
+ *     URL relative ? false : l’URL sera complète et contiendra l’URL du site.
  *     true : l’URL sera relative.
  * @return string
  *     URL
@@ -1785,12 +1785,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 /**
  * Fonction d'initialisation, appellée dans inc_version ou mes_options
- * 
+ *
  * Elle définit les répertoires et fichiers non partageables
  * et indique dans $test_dirs ceux devant être accessibles en écriture
  * mais ne touche pas à cette variable si elle est déjà définie
  * afin que mes_options.php puisse en spécifier d'autres.
- * 
+ *
  * Elle définit ensuite les noms des fichiers et les droits.
  * Puis simule un register_global=on sécurisé.
  *
@@ -1802,7 +1802,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	static $too_late = 0;
 	if ($too_late++) return;
-	
+
 	// Declaration des repertoires
 
 	// le nom du repertoire plugins/ activables/desactivables
@@ -1813,7 +1813,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// le nom du repertoire des librairies
 	if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . "lib/");
-	
+
 	if (!defined('_DIR_IMG')) define('_DIR_IMG', $pa);
 	if (!defined('_DIR_LOGOS')) define('_DIR_LOGOS', $pa);
 	if (!defined('_DIR_IMG_ICONES')) define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
@@ -2370,10 +2370,10 @@ function spip_session($force = false) {
 
 /**
  * Retourne un lien vers une aide
- * 
+ *
  * Aide, aussi depuis l'espace privé à présent.
  * Surchargeable mais pas d'erreur fatale si indisponible.
- * 
+ *
  * @param string $aide
  * 		Cle d'identification de l'aide desiree
  * @param bool $distante
@@ -2388,7 +2388,7 @@ function aide($aide='', $distante = false) {
 
 /**
  * Page `exec=info` : retourne le contenu de la fonction php `phpinfo()`
- * 
+ *
  * Si l’utiliseur est un administrateur.
  */
 function exec_info_dist() {
@@ -2403,7 +2403,7 @@ function exec_info_dist() {
  * Génère une erreur de squelette
  *
  * Génère une erreur de squelette qui sera bien visible par un
- * administrateur authentifié lors d'une visite de la page en erreur 
+ * administrateur authentifié lors d'une visite de la page en erreur
  *
  * @param bool|string|array $message
  *     - Message d'erreur (string|array)
@@ -2426,7 +2426,7 @@ function erreur_squelette($message='', $lieu='') {
 
 /**
  * Calcule un squelette avec un contexte et retourne son contenu
- * 
+ *
  * La fonction de base de SPIP : un squelette + un contexte => une page.
  * $fond peut etre un nom de squelette, ou une liste de squelette au format array.
  * Dans ce dernier cas, les squelettes sont tous evalues et mis bout a bout
@@ -2565,11 +2565,11 @@ function trouver_fond($nom, $dir='', $pathinfo = false) {
  * Dans ce cas, on retourne la fonction d'exécution correspondante à utiliser
  * (du répertoire `ecrire/exec`). Deux cas particuliers et prioritaires :
  * `fond` ou `fond_monobloc` sont retournés si des squelettes existent.
- * 
+ *
  * - `fond` : pour des squelettes de `prive/squelettes/contenu`
  *          ou pour des objets éditoriaux dont les suqelettes seront échaffaudés
  * - `fond_monobloc` (compatibilité avec SPIP 2.1) : pour des squelettes de `prive/exec`
- * 
+ *
  * @param string $nom
  *     Nom de la page
  * @return string
@@ -2602,7 +2602,7 @@ function tester_url_ecrire($nom){
  *     $ok = charger_php_extension('sqlite');
  *     ```
  * @uses inc_charger_php_extension_dist() Si la librairie n'est pas déjà charchée
- * 
+ *
  * @param string $module Nom du module à charger
  * @return bool true si le module est chargé
 **/
