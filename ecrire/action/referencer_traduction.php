@@ -27,12 +27,12 @@ function action_referencer_traduction_dist() {
 			redirige_par_entete(urldecode(_request('redirect')) . $err);
 	} elseif (preg_match(",^(\d+)\D-(\d+)$,", $arg, $r))  {
 	  // supprimer le lien de traduction
-		spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);
+		sql_updateq("spip_articles", array("id_trad" => 0), "id_article=" . $r[1]);
 		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
 		$cpt = sql_fetsel("COUNT(*) AS n", "spip_articles", "id_trad=" . $r[2]);
 
 		if ($cpt['n'] == 1)
-			spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);
+			sql_updateq("spip_articles", array("id_trad" => 0), "id_trad=" . $r[2]);
 	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
 	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
 		spip_query("UPDATE spip_articles SET id_trad = " . $r[3] . " WHERE id_trad =" . $r[2]);

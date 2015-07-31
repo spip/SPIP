@@ -222,7 +222,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	$id_document_lie = $id_document=intval($id_document);
 	if ($mode == 'vignette' AND  $id_document) {
 		# on force le statut "document" de ce fichier (inutile ?)
-		spip_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
+		sql_updateq("spip_documents", array("mode" => 'document'), "id_document=$id_document");
 		$id_document = 0;
 	}
 

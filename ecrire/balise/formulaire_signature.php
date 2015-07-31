@@ -126,7 +126,7 @@ function reponse_confirmation($var_confirm = '') {
 				OR
 			$_GET['refus'] == _action_auteur("supprimer signature $id_signature", '', '', 'alea_ephemere_ancien')
 			)) {
-			spip_query("UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$id_signature");
+			sql_updateq("spip_signatures", array("statut" => 'poubelle'), "id_signature=$id_signature");
 			$confirm = _T('info_signature_supprimee');
 		} else $confirm = _T('info_signature_supprimee_erreur');
 		return '';

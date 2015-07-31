@@ -53,7 +53,7 @@ function action_editer_message_post_supprimer($id_message) {
 // http://doc.spip.org/@action_editer_message_post_vu
 function action_editer_message_post_vu($id_message, $id_auteur) {
 	spip_log("efface $id_message $id_auteur");
-	spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message=$id_message AND id_auteur=$id_auteur");
+	sql_updateq("spip_auteurs_messages", array("vu" => 'oui'), "id_message=$id_message AND id_auteur=$id_auteur");
 
 }
 

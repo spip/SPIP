@@ -113,7 +113,7 @@ function verifier_low_sec ($id_auteur, $cle, $action='') {
 // http://doc.spip.org/@effacer_low_sec
 function effacer_low_sec($id_auteur) {
 	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
-	spip_query("UPDATE spip_auteurs SET low_sec = '' WHERE id_auteur = $id_auteur");
+	sql_updateq("spip_auteurs", array("low_sec" => ''), "id_auteur = $id_auteur");
 }
 
 // http://doc.spip.org/@initialiser_sel
