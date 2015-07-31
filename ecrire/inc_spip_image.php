@@ -18,20 +18,14 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// faudrait ne charger qu'a bon escient
-
-include_ecrire('inc_getdocument');	# diverses fonctions de ce fichier
 include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_meta");	# ne pas faire confiance au cache
-					# (alea_ephemere a peut-etre change)
 include_ecrire("inc_session");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
-include_ecrire('inc_documents');	# fichiers_upload()
 
-
-function spip_image_joindre_dist($doc)
+function spip_image_joindre_dist()
 {
   global 
+    $doc,
     $sousaction1,
     $sousaction2,
     $sousaction3,
@@ -44,6 +38,7 @@ function spip_image_joindre_dist($doc)
   if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
 
+  include_ecrire('inc_getdocument');     
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
      $action = 'spip_image_joindre' .
@@ -73,113 +68,20 @@ function spip_image_joindre_dist($doc)
      redirige_par_entete($link->getUrl($ancre));
 }
 
-
-// Cas d'un document distant reference sur internet
-
-function spip_image_joindre2($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	examiner_les_fichiers(array(
-				   array('name' => basename($arg),
-					 'tmp_name' => $arg)
-				   ), 'distant', $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-}
-
-// Cas d'un fichier transmis
-
-function spip_image_joindre1($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	$files = array();
-	if (is_array($arg))
-	  foreach ($arg as $file) {
-		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
-			$files[]=$file;
-	}
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-} 
-
-// copie de tout ou partie du repertoire upload
-
-function spip_image_joindre3($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	if (!$arg || strstr($arg, '..')) return;
-	    
-	$upload = (_DIR_TRANSFERT .$arg);
-
-	if (!is_dir($upload))
-	  // seul un fichier est demande
-	  $files = array(array ('name' => basename($upload),
-				'tmp_name' => $upload)
-			 );
-	else {
-	  $files = array();
-	  foreach (fichiers_upload($upload) as $fichier) {
-			$files[]= array (
-					'name' => basename($fichier),
-					'tmp_name' => $fichier
-					);
-	  }
-	}
-
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-}
-
-//  identifie les repertoires de upload aux rubriques Spip
-
-function spip_image_joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$documents_actifs)
-{
-	if (!$arg || strstr($arg, '..')) return;
-	$upload = (_DIR_TRANSFERT .$arg);
-	identifie_repertoire_et_rubrique($upload, $id, $hash_id_auteur);
-	include_ecrire("inc_rubriques");
-	calculer_rubriques();
-}
-
-//  Zip avec confirmation "tel quel"
-
-function spip_image_joindre5($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
-}
-
-// cas du zip a deballer. On ressort la bibli 
-
-function spip_image_joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	    define('_tmp_dir', creer_repertoire_documents($hash));
-	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_ecrire('pclzip.lib');
-	    $archive = new PclZip($arg);
-	    $archive->extract(
-			      PCLZIP_OPT_PATH, _tmp_dir,
-			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
-			      );
-	    $contenu = verifier_compactes($archive);
-	    //  on supprime la copie temporaire
-	    @unlink($arg);
-	    
-	    foreach ($contenu as $fichier)
-		ajouter_un_document(_tmp_dir.basename($fichier),
-				    basename($fichier),
-				    $type, $id, $mode, $id_document, $actifs);
-	    effacer_repertoire_temporaire(_tmp_dir);
-}
-
 //
 // Ajouter un logo
 //
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
-function spip_image_ajouter_dist($doc) {
-	global $sousaction2, $source;
+function spip_image_ajouter_dist() {
+	global $sousaction2, $source, $doc;
 	global $action, $hash, $hash_id_auteur;
 
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
 
+	include_ecrire('inc_getdocument');
 	if (!$sousaction2) {
 		if (!$_FILES) $_FILES = $HTTP_POST_FILES;
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
@@ -252,8 +154,8 @@ function spip_image_ajouter_dist($doc) {
 }
 
 
-function spip_image_effacer_dist($doc) {
-	global $action, $hash, $hash_id_auteur;
+function spip_image_effacer_dist() {
+	global $action, $hash, $hash_id_auteur, $doc;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
 
@@ -268,8 +170,8 @@ function spip_image_effacer_dist($doc) {
 //
 
 // Tester nos capacites
-function spip_image_tester_dist($test_vignette) {
-	global $pnmscale_command;
+function spip_image_tester_dist() {
+	global $pnmscale_command,$test_vignette;
 
 	// verifier les formats acceptes par GD
 	if ($test_vignette == "gd1") {
@@ -394,9 +296,9 @@ function spip_image_tester_dist($test_vignette) {
 
 
 // Effacer un doc (et sa vignette)
-function spip_image_supprimer_dist($doc) {
+function spip_image_supprimer_dist() {
 
-	global $action, $hash, $hash_id_auteur;
+	global $action, $hash, $hash_id_auteur, $doc;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
 
@@ -441,12 +343,13 @@ function spip_image_supprimer_dist($doc) {
 }
 
 
-function spip_image_tourner_dist($doc) {
+function spip_image_tourner_dist() {
 	
-	global $action, $hash, $hash_id_auteur;
+	global $action, $hash, $hash_id_auteur, $doc;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
 
+	include_ecrire('inc_getdocument');
 	global $var_rot, $convert_command;
 	$var_rot = intval($var_rot);
 
@@ -505,9 +408,9 @@ function spip_image_tourner_dist($doc) {
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-function spip_image_autoriser_dist($id_document)
+function spip_image_autoriser_dist()
 {
-  global $file;
+  global $file, $id_document;
 
   $file = urldecode($file);
 
@@ -591,8 +494,9 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 // pour envoyer un article proprement
 // spip_image.php?action=telecharger&doc=$id_article
 
-function spip_image_telecharger_dist($id_article)
+function spip_image_telecharger_dist()
 {
+  global $id_article;
   $r = spip_query("
 SELECT	texte, soustitre, titre, date
 FROM	spip_articles

@@ -26,9 +26,9 @@ if ($var_f)
 $var_nom .= '_' . $action;
 
 if (function_exists($var_nom))
-	$var_nom($doc);
+	$var_nom();
 elseif (function_exists($var_f = $var_nom . '_dist'))
-	$var_f($doc);
+	$var_f();
  else
 	spip_log("fonction $var_nom indisponible");
 ?>
