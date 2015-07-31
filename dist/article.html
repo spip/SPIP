@@ -2,11 +2,13 @@
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
-<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
-<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
-<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
-<INCLURE{fond=inc-head}>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>[
+<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />
+]<B_URLMOT>
+<link rel="alternate" type="application/rss+xml" title="<:titre_page_mots_tous:>" href="#URL_PAGE{backend}<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+</B_URLMOT><B_URLAUTEURS>
+<link rel="alternate" type="application/rss+xml" title="<:icone_auteurs:>" href="#URL_PAGE{backend}<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
+</B_URLAUTEURS><INCLURE{fond=inc-head}>
 </head>
 
 <body class="page_article">
@@ -46,7 +48,7 @@
         <div id="documents_portfolio">
             <h2><:info_portfolio:></h2>
             <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
-            [<a href="#URL_DOCUMENT" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"][ class="(#_article_principal:EXPOSE)"]>(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+            [<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"][ class="(#_article_principal:EXPOSE)"]>[(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>]
             </BOUCLE_documents_portfolio>
         </div>
         </B_documents_portfolio>
@@ -63,8 +65,8 @@
 		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
         [(#REM) Autres documents joints a l'article. Si un seul et texte vide, incrustation automatique ]
-		<BOUCLE_documents_decompte(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}{doublons A}></BOUCLE_documents_decompte>
-		[(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE}|?{'',' '})
+		<BOUCLE_documents_decompte(DOCUMENTS) {id_article} {mode=document}{doublons}{doublons A}
+		 />[(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE}|?{'',' '})
 		<INCLURE{fond=inc-documents}{id_article}>]
 		<//B_documents_decompte>
 		
@@ -72,20 +74,20 @@
         <div class="menu" id="documents_joints">
             <h2><:titre_documents_joints:></h2>
             <ul>
-                <BOUCLE_documents_joints(DOCUMENTS){!doublons A}>
+                <BOUCLE_documents_joints(DOCUMENTS){!doublons A} {par num titre, date}>[
                 <li>
                     <strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
-                    <small>(#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)])</small>
+                    <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
                     #DESCRIPTIF
-                </li>
+                ]</li>
                 </BOUCLE_documents_joints>
             </ul>
         </div>
-        </B_documents_joints>
+        </B_documents_joints>[
         
-        [(#REM) Petition :
-		La petition ayant une PAGINATION il faut absolument lui passer le critere env ]
-        [(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}>]
+        (#REM) Petition :
+		La petition ayant une PAGINATION il faut absolument {env}][
+	(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}>]
 
         [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
