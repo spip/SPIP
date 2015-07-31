@@ -172,7 +172,7 @@ function action_legender_post($r)
 	// l'entrer dans la base
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
-			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom)", "('temp')");
+			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','1comite')");
 			if ($ajouter_id_article)
 				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
