@@ -33,7 +33,7 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 function type_du_logo($_id_objet) {
 	return isset($GLOBALS['table_logos'][$_id_objet])
 		? $GLOBALS['table_logos'][$_id_objet]
-		: preg_replace(',^id_,', '', $_id_objet);
+		: objet_type($_id_objet);
 }
 
 // Exceptions standards (historique)
@@ -41,9 +41,6 @@ global $table_logos;
 $table_logos = array( 
 	'id_article' => 'art', 
 	'id_auteur' => 'aut', 
-#	'id_breve' => 'breve', 
-#	'id_mot' => 'mot', 
-	'id_syndic'=> 'site',
 	'id_rubrique' => 'rub'
 );
 
