@@ -2112,7 +2112,7 @@ function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accuei
 	echo "<center onmouseover='recherche_desesperement()'>", // ????
 		avertissement_messagerie(),
 		(($rubrique == "messagerie")
-		 OR ($GLOBALS['changer_config']!="oui")) 
+		 OR (_request('changer_config')!="oui")) 
 		? auteurs_recemment_connectes() : '';
 }
 
@@ -2162,7 +2162,7 @@ function init_entete($titre='', $id_rubrique=0) {
 
 // fonction envoyant la double serie d'icones de redac
 // http://doc.spip.org/@init_body
-function init_body($rubrique='accueil', $sous_rubrique='accueil', $onLoad='', $id_rubrique='') {
+function init_body($rubrique='accueil', $sous_rubrique='accueil', $load='', $id_rubrique='') {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur, $connect_toutes_rubriques;
 	global $auth_can_disconnect;
