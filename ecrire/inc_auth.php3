@@ -119,7 +119,7 @@ function auth() {
 			@header("Location: ../spip_login.php3");
 		/*
 		 * Hack : si le referer est vide, c'est probablement qu'on vient
-		 * d'un bookmark posé sur la page ?bonjour=oui ; evitons donc de
+		 * d'un bookmark pose' sur la page ?bonjour=oui ; evitons donc de
 		 * signaler un probleme de cookie. Et si quelqu'un bloque ses referers
 		 * de maniere qu'ils soient toujours vides, et refuse les cookies,
 		 * qu'est-ce qu'on y peut ? -- Pas satisfaisant, donc, ce hack.
