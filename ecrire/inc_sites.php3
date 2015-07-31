@@ -329,6 +329,9 @@ function afficher_syndic_articles($titre_table, $requete) {
 	if (ereg("\?",$adresse_page)) $lien_url = "&";
 	else $lien_url = "?";
 
+	$lien_url .= "debut_liste_sites[".$n_liste_sites."]=".$debut_liste_sites[$n_liste_sites]."&";
+
+
 	$nombre_aff = 10;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
