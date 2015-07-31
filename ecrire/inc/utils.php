@@ -2268,6 +2268,7 @@ function init_var_mode(){
 							if (!defined('_VAR_MODE')) define('_VAR_MODE',$_GET['var_mode']);
 							break;
 					}
+          if (isset($GLOBALS['visiteur_session']['nom']))
 					spip_log($GLOBALS['visiteur_session']['nom']
 						. " "._VAR_MODE);
 				}
