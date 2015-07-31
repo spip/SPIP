@@ -109,8 +109,9 @@ function serie_alter($serie, $q = array()) {
 			if (is_array($r)
 			AND function_exists($f = array_shift($r))) {
 				spip_log("$serie/$i: $f " . join(',',$r),'maj');
+				ecrire_meta('upgrade_etape_'.$serie, $i+1); // attention on enregistre le meta avant de lancer la fonction, de maniere a eviter de boucler sur timeout
 				call_user_func_array($f, $r);
-				ecrire_meta('upgrade_etape_'.$serie, $i+1);
+				spip_log("$serie/$i: ok", 'maj');
 			} else {
 			  echo "maj $serie etape $i incorrecte";
 			  exit;
