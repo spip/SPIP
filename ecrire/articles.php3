@@ -813,7 +813,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 
 	if ($statut_article == 'publie') {	
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
+		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=1 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		echo aide ("artdate");
 		echo "</B></FONT></TD></TR>";
 		echo "<TR><TD ALIGN='center'>";
@@ -833,8 +833,8 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'>DATE DE CREATION DE L'ARTICLE";
-		echo " : <B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Helvetica,sans-serif'><b>DATE DE CREATION DE L'ARTICLE :</b> ";
+		echo "<B><font color='black'>".majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
 	

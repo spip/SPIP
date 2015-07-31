@@ -6,8 +6,8 @@
 	if (!isset($couleur_foncee))
 		$couleur_foncee = "#3874B0";
 ?>
-.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
-.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
+.forml {width: 100%; padding: 2px; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
+.formo {width: 100%; padding: 2px; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
 .fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
 .fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
 .fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
@@ -38,7 +38,7 @@ a.icone:hover { text-decoration: none; }
 a.spip_in  {background-color:#eeeeee;}
 a.spip_out {}
 a.spip_note {}
-.spip_recherche {width : 100px; font-size: 9px;}
+.spip_recherche {padding: 2px; width : 100px; font-size: 9px;}
 .spip_cadre { 
 	width : 100%;
 	background-color: #FFFFFF; 
