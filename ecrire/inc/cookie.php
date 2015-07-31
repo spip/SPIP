@@ -21,7 +21,7 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 	if ($path == 'AUTO')
 		$path = preg_replace(',^\w+://[^/]*,', '', url_de_base());
 
-spip_log("path cookie = $path");
+	#spip_log("cookie('$name', '$value', '$expire', '$path', '$domain', '$secure'");
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
