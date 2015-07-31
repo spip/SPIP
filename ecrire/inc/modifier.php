@@ -114,16 +114,22 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		sql_updateq($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
 		// on verifie si elle est bien passee
+		// pour detecter le cas ou un caractere illicite a ete utilise dans un champ texte
+		// et provoque la troncature du champ lors de l'enregistrement
 		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", array(), array(), '', array(), $serveur);
 		if ($moof != $champs) {
-			foreach($moof as $k=>$v)
-				if ($v !== $champs[$k] 
-					// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
-					AND (!is_numeric($v) OR intval($v)!=intval($champs[$k]))
+			foreach($moof as $k=>$v) {
+				if ($v !== $champs[$k]
+					// ne pas alerter si le champ est d'un type numerique ou date
+				  // car c'est surement un cast sql, tout a fait normal
+				  // sinon cela provoque des fausses alertes a la moindre saisie vide
+				  // ou n'ayant pas la bonne resolution numerique ou le bon format
+					AND (!preg_match(',(int|float|double|date|time|year|enum|decimal),',$desc['field'][$k]))
 					) {
 					$conflits[$k]['post'] = $champs[$k];
 					$conflits[$k]['save'] = $v;
 				}
+			}
 		}
 
 
