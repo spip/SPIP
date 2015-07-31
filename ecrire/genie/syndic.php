@@ -35,7 +35,6 @@ function executer_une_syndication() {
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue
 	$where = sql_in("syndication", array('sus','off')) . "
-	AND statut='publie'
 	AND date_syndic < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL
 	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)";
 	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
@@ -45,7 +44,6 @@ function executer_une_syndication() {
 
 	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
 	$where = "syndication='oui'
-	AND statut='publie'
 	AND date_syndic < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL "._PERIODE_SYNDICATION." MINUTE)";
 	$id_syndic = sql_getfetsel("id_syndic", "spip_syndic", $where, '', "date_syndic", "1");
 
@@ -135,14 +133,30 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	// sur une URL de plus de 255 qui exloserait la base de donnees
 	$le_lien = substr($data['url'], 0,255);
 
-// Chercher les liens de meme cle
-// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
-// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
+	// si true, un lien deja syndique arrivant par une autre source est ignore
+	// par defaut [false], chaque source a sa liste de liens, eventuellement
+	// les memes
+	define('_SYNDICATION_URL_UNIQUE', false);
 
+	// Si false, on ne met pas a jour un lien deja syndique avec ses nouvelles
+	// donnees ; par defaut [true] : on met a jour si le contenu a change
+	// Attention si on modifie a la main un article syndique, les modifs sont
+	// ecrasees lors de la syndication suivante
+	define('_SYNDICATION_CORRECTION', true);
+
+	// Chercher les liens de meme cle
+	// S'il y a plusieurs liens qui repondent, il faut choisir le plus proche
+	// (ie meme titre et pas deja fait), le mettre a jour et ignorer les autres
 	$n = 0;
-	$s = sql_select("id_syndic_article,titre", "spip_syndic_articles", "url=" . sql_quote($le_lien) . " AND id_syndic=$now_id_syndic AND " . sql_in('id_syndic_article', $faits, 'NOT'), "", "maj DESC");
+	$s = sql_select("id_syndic_article,titre,id_syndic,statut", "spip_syndic_articles",
+		"url=" . sql_quote($le_lien)
+		. (_SYNDICATION_URL_UNIQUE
+			? ''
+			: " AND id_syndic=$now_id_syndic")
+		." AND " . sql_in('id_syndic_article', $faits, 'NOT'), "", "maj DESC");
 	while ($a = sql_fetch($s)) {
 		$id =  $a['id_syndic_article'];
+		$id_syndic = $a['id_syndic'];
 		if ($a['titre'] == $data['titre']) {
 			$id_syndic_article = $id;
 			break;
@@ -162,6 +176,18 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 		if (!$ajout) return;
 	}
 	$faits[] = $id_syndic_article;
+
+
+	// Si le lien n'est pas nouveau, plusieurs options :
+	if (!$ajout) {
+		// 1. Lien existant : on corrige ou pas ?
+		if (!_SYNDICATION_CORRECTION) {
+			return;
+		}
+		// 2. Le lien existait deja, lie a un autre spip_syndic
+		if (_SYNDICATION_URL_UNIQUE AND $id_syndic != $now_id_syndic)
+			return;
+	}
 
 	// Descriptif, en mode resume ou mode 'full text'
 	// on prend en priorite data['descriptif'] si on est en mode resume,
