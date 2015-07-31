@@ -12,7 +12,7 @@
  (#ENV{controls}=={PositionSlider}|?{#SET{largeur,#GET{largeur}|moins{40}},''})
 ][(#INCLUS|=={embed}|?{[(#ENV{controls,''}|?{'',' '})
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
-style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|intval|max{120})px]']>
 ]})
 ][(#EXTENSION|=={svg}|?{' '})
 <embed src='#URL_DOCUMENT' [(#ENV*|env_to_attributs)] width='#GET{largeur}' height='#GET{hauteur}' />
