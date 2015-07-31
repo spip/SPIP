@@ -251,7 +251,7 @@ debut_droite();
 
 if ($echec){
 	debut_cadre_relief();
-	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="left">');
+	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="left"');
 	echo "<font color='red'>$echec <p>"._T('info_recommencer')."</font>";
 	fin_cadre_relief();
 	echo "<p>";
