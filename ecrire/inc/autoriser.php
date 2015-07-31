@@ -74,8 +74,10 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type == 'groupes_mot') $type = 'groupemots';
 	#if ($type == 'syndic_article') $type = 'syndicarticle';
 
+	// Si une exception a ete decretee plus haut dans le code, l'appliquer
 	if (isset($GLOBALS['autoriser_exception'][$faire][$type][$id])
-	  && autoriser_exception($faire,$type,$id,'verifier')) return true;
+	AND autoriser_exception($faire,$type,$id,'verifier'))
+		return true;
 	
 	// Chercher une fonction d'autorisation
 	// Dans l'ordre on va chercher autoriser_type_faire, autoriser_type,
@@ -100,7 +102,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	
 	foreach ($fonctions as $f) {
 		if (function_exists($f)) {
-			$a = $f($faire,$type,intval($id),$qui,$opt);
+			$a = $f($faire,$type,$id,$qui,$opt);
 			break;
 		}
 	}
@@ -400,7 +402,6 @@ function autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return
 		false;
 }
-
 
 // Moderer la petition ?
 // = modifier l'article correspondant
