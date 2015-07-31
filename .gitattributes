@@ -262,6 +262,7 @@ ecrire/inc/ajouter_documents.php -text
 ecrire/inc/article_select.php -text
 ecrire/inc/auteur_infos.php -text
 ecrire/inc/autoriser.php -text
+ecrire/inc/bandeau.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/charger_php_extension.php -text
 ecrire/inc/charger_plugin.php -text
