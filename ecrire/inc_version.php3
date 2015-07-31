@@ -11,7 +11,7 @@ define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT',
        (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-/* + tard
+/*
 if ($d = urldecode($GLOBALS['HTTP_GET_VARS']['var_install']))
   {
     $d = substr($d,0,strrpos($d,'/')+1);
@@ -24,8 +24,8 @@ if ($d = urldecode($GLOBALS['HTTP_GET_VARS']['var_install']))
       }
     define('_FILE_OPTIONS', $d . 'mes_options.php3');
     define('_FILE_CONNECT_INS', ($d . "inc_connect"));
-    } else */ {
-  define('_FILE_OPTIONS', 'mes_options.php3');
+    } else  */ {
+  define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
   define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
  }
 
@@ -34,7 +34,7 @@ define_once('_FILE_CONNECT',
 		(_FILE_CONNECT_INS . _EXTENSION_PHP)
 	 : false));
 
-# Si Spip n'est pas installe, redirection... sauf si justement on l'installe!
+# Refus si Spip n'est pas installe... sauf si justement on l'installe!
 
 if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
   if (!defined("_INC_PUBLIC"))
@@ -1215,7 +1215,7 @@ function debut_entete($title)
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
 	  "<head>\n" .
-#	  "<base href='$base' />\n" .
+	  "<base href='$base' />\n" .
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
