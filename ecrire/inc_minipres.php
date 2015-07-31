@@ -100,7 +100,6 @@ function version_svn_courante() {
 	AND lire_fichier(_DIR_RESTREINT.'.svn/entries', $c2)
 	# repertoires relativement accessoires
 	AND (lire_fichier(_DIR_RACINE.'formulaires/.svn/entries', $c3) or true)
-	AND (lire_fichier(_DIR_RACINE.'plugins/.svn/entries', $c4) or true)
 	AND (lire_fichier(_DIR_RACINE.'IMG/.svn/entries', $c5) or true)
 	AND preg_match_all(',committed-rev="([0-9]+)",', "$c1$c2$c3$c4$c5",
 	$r, PREG_PATTERN_ORDER))
