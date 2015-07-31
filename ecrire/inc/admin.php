@@ -41,7 +41,7 @@ function inc_admin_dist($script, $titre, $comment='', $anonymous=false)
 // pour eviter des executions en parallele, notamment apres Time-Out.
 // Cette meta contient le nom du script et, a un hachage pres, du demandeur.
 // Le code de ecrire/index.php devie toute demande d'execution d'un script
-// vers le script d'administration indique par cette meta si elle est là.
+// vers le script d'administration indique par cette meta si elle est lÃ .
 // Au niveau de la fonction inc_admin, on controle la meta 'admin'.
 // Si la meta n'est pas la, 
 //	c'est le debut on la cree.
@@ -167,7 +167,7 @@ function copy_request($script, $suite, $submit='')
         include_spip('inc/filtres');
 	foreach($_POST as $n => $c) {
 	  if (($n != 'fichier') AND !is_array($c))
-		$suite .= "\n<input type='hidden' name='$n' value='" .
+		$suite .= "\n<input type='hidden' name='".htmlspecialchars($n)."' value='" .
 		  entites_html($c) .
 		  "'  />";
 	}
