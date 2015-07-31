@@ -10,31 +10,7 @@ $.fn.hoverClass = function(c) {
 };
 
 
-var bandeau_elements = false;
-var dir_page = $("html").attr("dir");
-
-
-function changestyle(id_couche, element, style) {
-
-	// La premiere fois, regler l'emplacement des sous-menus
-	if (!bandeau_elements) {
-		bandeau_elements = $('#haut-page div.bandeau');
-	}
-
-	// Masquer les elements du bandeau
-	var select = $(bandeau_elements).not('#'+id_couche);
-	// sauf eventuellement la boite de recherche si la souris passe en-dessous
-	if (id_couche=='garder-recherche') select.not('#bandeaurecherche');
-		select.css({'visibility':'hidden', 'display':'none'});
-	// Afficher, le cas echeant, celui qui est demande
-	if (element)
-		$('#'+id_couche).css({element:style});
-	else
-		$('#'+id_couche).css({'visibility':'visible', 'display':'block'});
-}
-
 var accepter_change_statut = false;
-
 function selec_statut(id, type, decal, puce, script) {
 
 	node = $('.imgstatut'+type+id);
@@ -67,59 +43,114 @@ function prepare_selec_statut(node, nom, type, id, action)
 	.load(action + '&type='+type+'&id='+id);
 }
 
-function changeclass(objet, myClass) {
-	objet.className = myClass;
+
+// deplier un ou plusieurs blocs
+jQuery.fn.showother = function(cible) {
+	var me = this;
+	if (me.is('.replie')) {
+		me.addClass('deplie').removeClass('replie');
+		jQuery(cible)
+		.slideDown('fast',
+			function(){
+				jQuery(me)
+				.addClass('blocdeplie')
+				.removeClass('blocreplie')
+				.removeClass('togglewait');
+			}
+		).trigger('deplie');
+	}
+	return this;
 }
 
-
-function hauteurFrame(nbCol) {
-	hauteur = $(window).height() - 40;
-	hauteur = hauteur - $('#haut-page').height();
-	
-	if (findObj('brouteur_hierarchie'))
-		hauteur = hauteur - $('#brouteur_hierarchie').height();
-
-	for (i=0; i<nbCol; i++) {
-		$('#iframe' + i)
-		.height(hauteur + 'px');
-	}
+// replier un ou plusieurs blocs
+jQuery.fn.hideother = function(cible) {
+	var me = this;
+	if (!me.is('.replie')){
+		me.addClass('replie').removeClass('deplie');
+		jQuery(cible)
+		.slideUp('fast',
+			function(){
+				jQuery(me)
+				.addClass('blocreplie')
+				.removeClass('blocdeplie')
+				.removeClass('togglewait');
+			}
+		).trigger('replie');
+}
+	return this;
 }
 
-function changeVisible(input, id, select, nonselect) {
-	if (input) {
-		element = findObj_forcer(id);
-		if (element.style.display != select)  element.style.display = select;
-	} else {
-		element = findObj_forcer(id);
-		if (element.style.display != nonselect)  element.style.display = nonselect;
-	}
+// pour le bouton qui deplie/replie un ou plusieurs blocs
+jQuery.fn.toggleother = function(cible) {
+	if (this.is('.deplie'))
+		return this.hideother(cible);
+	else
+		return this.showother(cible);
 }
 
+// deplier/replier en hover
+// on le fait subtilement : on attend 400ms avant de deplier, periode
+// durant laquelle, si la souris  sort du controle, on annule le depliement
+// le repliement ne fonctionne qu'au clic
+// Cette fonction est appelee a chaque hover d'un bloc depliable
+// la premiere fois, elle initialise le fonctionnement du bloc ; ensuite
+// elle ne fait plus rien
+jQuery.fn.depliant = function(cible) {
+	// premier passage
+	if (!this.is('.depliant')) {
+		var time = 400;
 
+		var me = this;
+		this
+		.addClass('depliant');
 
-// livesearchlike...
+		// effectuer le premier hover
+		if (!me.is('.deplie')) {
+			me.addClass('hover')
+			.addClass('togglewait');
+			var t = setTimeout(function(){
+				me.toggleother(cible);
+				t = null;
+			}, time);
+		}
 
+		me
+		// programmer les futurs hover
+		.hover(function(e){
+			me
+			.addClass('hover');
+			if (!me.is('.deplie')) {
+				me.addClass('togglewait');
+				if (t) { clearTimeout(t); t = null; }
+				t = setTimeout(function(){
+					me.toggleother(cible);
+					t = null;
+					}, time);
+			}
+		}
+		, function(e){
+			if (t) { clearTimeout(t); t = null; }
+			me
+			.removeClass('hover');
+		})
 
+		// gerer le triangle clicable
+		/*.find("a.titremancre")
+			.click(function(){
+				if (me.is('.togglewait') || t) return false;
+				me
+				.toggleother(cible);
+				return false;
+			})*/
+		.end();
 
-// effacement titre quand new=oui
-var antifocus=false;
-// effacement titre des groupes de mots-cles de plus de 50 mots
-var antifocus_mots = new Array();
-
-function puce_statut(selection){
-	if (selection=="publie"){
-		return "puce-verte.gif";
 	}
-	if (selection=="prepa"){
-		return "puce-blanche.gif";
-	}
-	if (selection=="prop"){
-		return "puce-orange.gif";
-	}
-	if (selection=="refuse"){
-		return "puce-rouge.gif";
-	}
-	if (selection=="poubelle"){
-		return "puce-poubelle.gif";
-	}
+	return this;
+}
+jQuery.fn.depliant_clicancre = function(cible) {
+		var me = this.parent();
+		// gerer le triangle clicable
+		if (me.is('.togglewait')) return false;
+		me.toggleother(cible);
+		return false;
 }
