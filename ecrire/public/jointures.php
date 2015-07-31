@@ -66,6 +66,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	static $num=array();
 	$id_table = "";
 	$cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
+		spip_log("jointure $nom $col %%%");
 	foreach($res as $cle=>$r) {
 		list($d, $a, $j) = $r;
 		if (!$id_table) $id_table = $d;
@@ -82,6 +83,8 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 		}
 		else
 			$boucle->join["L$n"]= array("'$id_table'","'$j'");
+#		var_dump($a);exit;
+		spip_log("jointure $nom $col %%%" . join(',', $a[1]['key']));
 		$boucle->from[$id_table = "L$n"] = $a[0];    
 	}
 
