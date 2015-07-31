@@ -127,14 +127,14 @@ function affiche_logos($logos, $lien, $align) {
 		. ($align ? " align=\"$align\"" : '') 
 		. $taille
 		. $artoff
-		. ' style="border-width: 0px;" class="spip_logos" />';
+		. ' class="spip_logos" />';
 
 	return (!$lien ? $milieu :
 		('<a href="' .
 		 quote_amp($lien) .
 		'">' .
 		$milieu .
-		'</a>'	 ));
+		'</a>'));
 }
 
 //
