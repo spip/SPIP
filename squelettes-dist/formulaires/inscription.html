@@ -5,7 +5,7 @@
 <form method="post" action="#ENV{action}">
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
-		[(#REM) on affiche plus ce message en cas d'erreur pour eviter d'allonger trop le formulaire]
+		#INCLURE{fond=formulaires/inc-inscription-explication,env}
 		<legend><:form_forum_identifiants:></legend>
 		<p class='explication'><:form_forum_indiquer_nom_email:></p>
 		<ul>
