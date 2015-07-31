@@ -20,7 +20,7 @@ function exec_admin_plugin() {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
-		echo fin_page();
+		echo fin_gauche(), fin_page();
 		exit;
 	}
 
@@ -168,7 +168,7 @@ EOF;
 
 	echo "<br />";
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 
 }
 

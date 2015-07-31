@@ -56,7 +56,7 @@ function exec_breves_dist()
 
 	}
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 ?>

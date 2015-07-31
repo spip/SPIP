@@ -26,7 +26,7 @@ function exec_demande_mise_a_jour_dist() {
 	_T('info_administrateur_site_01'),
 	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
 	_T('info_administrateur_site_02'),
-	"</a></blockquote></blockquote><p>";
+	"</a></blockquote></blockquote>";
 	echo fin_page();
 }
 ?>

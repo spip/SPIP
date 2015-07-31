@@ -85,7 +85,7 @@ debut_droite();
 
 if (!$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 	exit;
 }
 
@@ -176,7 +176,7 @@ fin_cadre_trait_couleur();
 
 echo "<br />";
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 
 ?>

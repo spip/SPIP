@@ -118,6 +118,6 @@ $charset = $GLOBALS['meta']["charset"];
 
 echo "</form>";
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 ?>

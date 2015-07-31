@@ -121,7 +121,7 @@ echo debut_droite("", true);
 
  echo afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 
 ?>

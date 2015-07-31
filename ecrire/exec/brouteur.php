@@ -104,7 +104,7 @@ function exec_brouteur_dist()
 		$dest[0] = '0';
 	}
 
-	echo "\n<tr width='$largeur_table'>";
+	echo "\n<tr>";
 
 	for ($i=0; $i < $nb_col; $i++) {
 		echo "\n<td valign='top' width='$largeur_col'>";

@@ -186,6 +186,7 @@ function exec_mots_type_dist()
 	. "</div>";
 
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
+		fin_gauche(),
 		fin_page();
 }
 

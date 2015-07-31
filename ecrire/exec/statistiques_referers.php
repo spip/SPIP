@@ -53,7 +53,7 @@ debut_droite();
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 	exit;
 }
 
@@ -81,7 +81,7 @@ echo barre_onglets("stat_referers", $jour);
 
  echo "</div><br />";
 
- echo fin_page();
+ echo fin_gauche(), fin_page();
 }
 
 ?>

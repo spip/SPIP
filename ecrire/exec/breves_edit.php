@@ -185,7 +185,7 @@ else
 	echo "<h2>"._T('info_page_interdite')."</h2>";
 
 fin_cadre_formulaire();
-echo fin_page();
+echo fin_gauche(), fin_page();
 
 }
 

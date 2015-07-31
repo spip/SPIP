@@ -103,7 +103,8 @@ function exec_auteur_infos_dist()
 	auteurs_interventions($id_auteur, $auteur['statut']);
 
 	echo fin_cadre_relief(true),
-	  fin_page();
+		fin_gauche(),
+		fin_page();
 }
 
 // http://doc.spip.org/@cadre_auteur_infos

@@ -130,7 +130,7 @@ function exec_recherche_dist()
 		echo "<font face='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</font><p>";
 	}
 	}
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 
 

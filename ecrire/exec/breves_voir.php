@@ -237,7 +237,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	echo afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), "breves_voir", "id_breve=$id_breve");
 	
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@exec_breves_voir_dist

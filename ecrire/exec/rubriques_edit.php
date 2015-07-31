@@ -172,6 +172,6 @@ function exec_rubriques_edit_dist()
 
 	fin_cadre_formulaire();
 
-	echo fin_page();
+	echo fin_gauche(), fin_page();
 }
 ?>

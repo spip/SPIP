@@ -49,7 +49,7 @@ if ($options == 'avancees' AND $connect_statut == '0minirezo') {
 
  echo afficher_syndic_articles('<b>' . _T('titre_dernier_article_syndique') . '</b>', array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC",  'LIMIT' => "50"));
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 }
 
 ?>

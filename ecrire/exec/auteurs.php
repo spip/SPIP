@@ -39,7 +39,7 @@ function exec_auteurs_dist()
 
 	bandeau_auteurs($tri, $statut);
 
-	echo "<div id='auteurs'>", $res, "</div>", fin_page();
+	echo "<div id='auteurs'>", $res, "</div>", fin_gauche(), fin_page();
 }
 
 // http://doc.spip.org/@lettres_d_auteurs

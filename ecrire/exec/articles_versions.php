@@ -316,7 +316,7 @@ if ($id_version) {
 fin_cadre_relief();
 
 
-echo fin_page();
+echo fin_gauche(), fin_page();
 
 }
 
