@@ -261,9 +261,7 @@ function verifier_langue_miroir($url, $lang) {
 //
 function suggerer_dico_ortho(&$mots, $lang) {
 	$lang = addslashes($lang);
-	$query = "SELECT mot FROM spip_ortho_dico WHERE lang='$lang' ".
-		"AND mot IN ('".join("', '", array_map('addslashes', $mots))."')";
-	$result = spip_query($query);
+	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang='$lang' AND mot IN ('".join("', '", array_map('addslashes', $mots))."')");
 
 	$mots = array_flip($mots);
 	$bons = array();
@@ -287,16 +285,15 @@ function ajouter_dico_ortho($mot, $lang) {
 	$lang = addslashes($lang);
 	$mot = addslashes($mot);
 	$id_auteur = intval($connect_id_auteur);
-	$query = "INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur) ".
-		"VALUES ('$lang', '$mot', '$id_auteur')";
-	spip_query($query);
+	spip_query("INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur)  VALUES ('$lang', '$mot', '$id_auteur')");
+
 }
 
 function supprimer_dico_ortho($mot, $lang) {
 	$lang = addslashes($lang);
 	$mot = addslashes($mot);
-	$query = "DELETE FROM spip_ortho_dico WHERE lang='$lang' AND mot='$mot'";
-	spip_query($query);
+	spip_query("DELETE FROM spip_ortho_dico WHERE lang='$lang' AND mot='$mot'");
+
 }
 
 function gerer_dico_ortho($lang) {
@@ -317,10 +314,8 @@ function suggerer_cache_ortho(&$mots, $lang) {
 	global $duree_cache_ortho;
 
 	$lang = addslashes($lang);
-	$query = "SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang='$lang' ".
-		"AND mot IN ('".join("', '", array_map('addslashes', $mots))."') ".
-		"AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")";
-	$result = spip_query($query);
+	$result = spip_query("SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang='$lang' AND mot IN ('".join("', '", array_map('addslashes', $mots))."') AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
+
 	
 	$mots = array_flip($mots);
 	$suggest = array();
@@ -359,12 +354,10 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 		}
 	}
 	if (count($values)) {
-		$query = "DELETE FROM spip_ortho_cache ".
-			"WHERE maj < FROM_UNIXTIME(".(time() - $duree_cache_ortho).")";
-		spip_query($query);
-		$query = "INSERT IGNORE INTO spip_ortho_cache (lang, mot, ok, suggest) ".
-			"VALUES ".join(", ", $values);
-		spip_query($query);
+		spip_query("DELETE FROM spip_ortho_cache WHERE maj < FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
+
+		spip_query("INSERT IGNORE INTO spip_ortho_cache (lang, mot, ok, suggest) VALUES ".join(", ", $values));
+
 	}
 }
 

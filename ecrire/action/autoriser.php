@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
@@ -51,35 +50,35 @@ function action_autoriser_dist()
     ## /code inutile
 
     if (!$arg) {
-      $arg = spip_query("select id_document from spip_documents as documents where documents.fichier='". addslashes($file) ."'");
-	$arg = spip_fetch_array($arg);
+      $arg = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents AS documents WHERE documents.fichier='". addslashes($file) ."'"));
+
       if (!$arg) $refus = 2;
       $arg = $arg['id_document'];
     } else {
       $arg = intval($arg);
-      $file = spip_query("select fichier from spip_documents as documents where id_document='". $arg ."'");
-      $file = spip_fetch_array($file);
+      $file = spip_fetch_array(spip_query("SELECT fichier FROM spip_documents AS documents WHERE id_document='". $arg ."'"));
+
       if (!$file) $refus = 3;
       $file = $file['fichier'];
     }
   }
   spip_log("arg $arg $auth_login");
 if (!$auth_login && !$refus) { 
-    if (!spip_num_rows(spip_query("select articles.id_article
-from spip_documents_articles as rel_articles, spip_articles as articles 
-where rel_articles.id_article = articles.id_article AND
+    if (!spip_num_rows(spip_query("SELECT articles.id_article
+FROM spip_documents_articles AS rel_articles, spip_articles AS articles 
+WHERE rel_articles.id_article = articles.id_article AND
 articles.statut = 'publie' AND rel_articles.id_document ='".
 			       $arg .
 				"' LIMIT 1"))) {
-      if (!spip_num_rows(spip_query("select rubriques.id_rubrique
-from spip_documents_rubriques as rel_rubriques, spip_rubriques as rubriques 
-where rel_rubriques.id_rubrique = rubriques.id_rubrique AND
+      if (!spip_num_rows(spip_query("SELECT rubriques.id_rubrique
+FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques 
+WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND
 rubriques.statut = 'publie' AND rel_rubriques.id_document ='".
 			       $arg .
 				  "' LIMIT 1"))) {
-	if (!spip_num_rows(spip_query("select breves.id_breve
-from spip_documents_breves as rel_breves, spip_breves as breves 
-where rel_breves.id_breve = breves.id_breve AND
+	if (!spip_num_rows(spip_query("SELECT breves.id_breve
+FROM spip_documents_breves AS rel_breves, spip_breves AS breves
+WHERE rel_breves.id_breve = breves.id_breve AND
 breves.statut = 'publie' AND rel_breves.id_document ='".
 			       $arg .
 				  "' LIMIT 1")))

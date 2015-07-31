@@ -10,7 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php");
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/session'); # pour creer_uniq_id
 include_spip('inc/minipres'); # charge lang et execute utiliser_lang
 include_spip('inc/mail'); # pour envoyer_mail

@@ -268,8 +268,7 @@ function primary_index_table($table){
 function deja_indexe($table, $id_objet) {
 	$table_index = 'spip_index';
 	$id_table = id_index_table($table);
-	$query = "SELECT id_objet FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table LIMIT 1";
-	$n = @spip_num_rows(@spip_query($query));
+	$n = @spip_num_rows(@spip_query("SELECT id_objet FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table LIMIT 1"));
 	return ($n > 0);
 }
 
@@ -304,9 +303,7 @@ function indexer_contenu_document ($row) {
 	global $extracteur;
 
 	if ($row['mode'] == 'vignette') return;
-	list($extension) = spip_fetch_array(spip_query(
-		"SELECT extension FROM spip_types_documents
-		WHERE id_type = ".$row['id_type']
+	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = ".$row['id_type']
 	));
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
@@ -390,12 +387,8 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
 			$select="assoc.$col_id_as";
 			foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
 				$select.=',assoc.' . $quoi;
-			$q = "SELECT $select FROM $table_associe AS assoc,
-				spip_$table_rel AS lien
-				WHERE lien.$col_id=$id_objet
-				AND assoc.$col_id_as=lien.$col_id_as";
-	
-			$r = spip_query($q);
+			$r = spip_query("SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien	WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
+
 			while ($row = spip_fetch_array($r)) {
 	      indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
 			}
@@ -427,8 +420,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	$index = '';
 	$mots = '';
 
-	$query = "SELECT * FROM $table WHERE $col_id=$id_objet";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM $table WHERE $col_id=$id_objet");
+
 	$row = spip_fetch_array($result);
 
 	if (!$row) return;
@@ -498,10 +491,8 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			if ($table=='spip_syndic'){
 				// 2. Indexer les articles syndiques
 				if (($row['syndication'] = "oui")&&(isset($INDEX_elements_objet['syndic_articles']))) {
-					$query_syndic = "SELECT titre FROM spip_syndic_articles
-					WHERE id_syndic=$id_objet AND statut='publie'
-					ORDER BY date DESC LIMIT 100";
-					$result_syndic = spip_query($query_syndic);
+					$result_syndic = spip_query("SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet AND statut='publie' ORDER BY date DESC LIMIT 100");
+
 					while ($row_syndic = spip_fetch_array($result_syndic)) {
 		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles']);
 					}
@@ -514,13 +505,13 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	 	}
  	}
 
-	$query = "DELETE FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table";
-	$result = spip_query($query);
+	$result = spip_query("DELETE FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table");
+
 
 	if ($index) {
 		if ($mots) {
-			$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES ".substr($mots,1);	// supprimer la virgule du debut
-			spip_query($mots);
+			spip_query("INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES ".substr($mots,1));	// supprimer la virgule du debut
+
 		}
 		reset($index);
 		while (list($hash, $points) = each($index)) {
@@ -546,7 +537,7 @@ function marquer_indexer ($objet, $id_objet) {
 	spip_log ("demande indexation $objet $id_objet");
 	$table = 'spip_'.table_objet($objet);
 	$id = id_table_objet($objet);
-	spip_query ("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
+	spip_query("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
 }
 
 // A garder pour compatibilite bouton memo...
@@ -684,16 +675,14 @@ function requete_hash ($rech) {
 
 	// compose la recherche dans l'index
 	if ($dico_strict) {
-		$query2 = "SELECT $select_hash FROM spip_index_dico WHERE "
-			.join(" OR ", $dico_strict);
-		$result2 = spip_query($query2);
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE "			.join(" OR ", $dico_strict));
+
 		while ($row2 = spip_fetch_array($result2))
 			$h_strict[] = $hex_fmt.$row2['h'];
 	}
 	if ($dico) {
-		$query2 = "SELECT $select_hash FROM spip_index_dico WHERE "
-			.join(" OR ", $dico);
-		$result2 = spip_query($query2);
+		$result2 = spip_query("SELECT $select_hash FROM spip_index_dico WHERE " .join(" OR ", $dico));
+
 		while ($row2 = spip_fetch_array($result2))
 			$h[] = $hex_fmt.$row2['h'];
 	}
@@ -745,7 +734,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 		$index_id_table = id_index_table($nom_table);
 		$points = array();
-		$s = spip_query ("SELECT hash,points,id_objet as id
+		$s = spip_query("SELECT hash,points,id_objet as id
 			FROM spip_index
 			WHERE hash IN ($hash_recherche) AND id_table='$index_id_table'");
 			
