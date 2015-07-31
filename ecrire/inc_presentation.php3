@@ -1262,18 +1262,4 @@ function install_fin_html() {
 	';
 }
 
-function install_bad_dirs($bad_dirs) {
-		echo "
-<BR><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>Pr&eacute;liminaire : <B>R&eacute;gler les droits d'acc&egrave;s</B></FONT>
-
-<P><B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <UL>$bad_dirs.</UL> </B>
-
-<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d'acc&egrave;s de chacun
-de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d'installation.
-
-<P>Une fois cette manipulation effectu&eacute;e, vous pourrez <B><A HREF='spip_test_dirs.php3'>recharger
-cette page</A> afin de commencer r&eacute;ellement l'installation.";
-
-}
-
 ?>
