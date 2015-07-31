@@ -49,8 +49,10 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	$href = redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article");
 	foreach($liste_statuts as $s=>$affiche){
 		$href = parametre_url($href,'statut_nouv',$s);
-		$sel = ($s==$statut) ? " selected":"";
-		$res .= "<li class='$s$sel'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
+		if ($s==$statut)
+			$res .= "<li class='$s selected'>" . puce_statut($s) . $affiche[0] . '</li>';
+		else
+			$res .= "<li class='$s'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
 	}
 
 	$res .= "</ul></li></ul>";

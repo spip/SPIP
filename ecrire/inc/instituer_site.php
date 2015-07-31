@@ -34,8 +34,10 @@ function inc_instituer_site_dist($id_syndic, $statut=-1)
 	$href = redirige_action_auteur('editer_site',$id_syndic,'sites', "id_syndic=$id_syndic" /*"&id_parent=$id_rubrique"*/);
 	foreach($liste_statuts as $s=>$affiche){
 		$href = parametre_url($href,'statut',$s);
-		$sel = ($s==$statut) ? " selected":"";
-		$res .= "<li class='$s$sel'><a href='$href' onclick='return confirm(confirm_changer_statut);>" . puce_statut($s) . $affiche[0] . '</a></li>';
+		if ($s==$statut)
+			$res .= "<li class='$s selected'>" . puce_statut($s) . $affiche[0] . '</li>';
+		else
+			$res .= "<li class='$s'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
 	}
 
 	$res .= "</ul></li></ul>";
