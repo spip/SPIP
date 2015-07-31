@@ -367,6 +367,18 @@ Merci de votre participation
 
 
 // I
+'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
+'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => 'Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_methode_http' => 'T&eacute;l&eacute;chargement',
+'ical_methode_webcal' => 'Synchronisation (webcal://)',
+'ical_texte_js' => 'Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
+'ical_texte_prive' => 'Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'ical_texte_public' => 'Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_rss' => 'Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Mailing-list',
+'ical_titre_rss' => 'Fichier &laquo; backend &raquo;',
 'icone_a_suivre' => '&Agrave; suivre',
 'icone_activer_cookie' => 'Activer le cookie de correspondance',
 'icone_admin_site' => 'Administration du site',
@@ -550,7 +562,7 @@ Merci de votre participation
 'info_code_acces' => 'N\'oubliez pas vos propres codes d\'acc&egrave;s&nbsp;!',
 'info_comment_lire_tableau' => 'Comment lire ce tableau',
 'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):', 
-'info_config_suivi_explication' => 'Abonnez-vous, si vous le souhaitez, &agrave; la mailing-list de ce site&nbsp;:',
+'info_config_suivi_explication' => 'Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_connexion_base' => 'Deuxi&egrave;me &eacute;tape : <B>Essai de connexion &agrave; la base</B>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
