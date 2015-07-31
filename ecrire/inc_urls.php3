@@ -67,7 +67,7 @@ function generer_url_document($id_document) {
 		} else {
 			if (($GLOBALS['meta']["creer_htaccess"]) != 'oui')
 				return '../' . ($row['fichier']);
-			else 	return generer_url_public('spip_image',"action=autoriser&doc=$id_document");
+			else 	return generer_url_public('spip_action.php',"action=autoriser&arg=$id_document");
 		}
 	}
 
