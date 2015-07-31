@@ -2269,6 +2269,10 @@ class sqlite_traducteur {
 			                                     $this->query);
 		}
 
+		if (strpos($this->query, 'LEFT(')!==false){
+			$this->query = str_replace('LEFT(','_LEFT(',$this->query);
+		}
+
 		// Correction Using
 		// USING (non reconnu en sqlite2)
 		// problematique car la jointure ne se fait pas du coup.

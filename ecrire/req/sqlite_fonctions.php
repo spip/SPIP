@@ -43,7 +43,7 @@ function _sqlite_init_functions(&$sqlite){
 		'INSTR'			=> array( '_sqlite_func_instr'			,2),
 
 		'LEAST'			=> array( '_sqlite_func_least'			,3),
-		'LEFT'			=> array( '_sqlite_func_left'			,2),
+		'_LEFT'			=> array( '_sqlite_func_left'			,2),
 #		'LENGTH'		=> array( 'strlen'						,1), // present v1.0.4
 #		'LOWER'			=> array( 'strtolower'					,1), // present v2.4
 #		'LTRIM'			=> array( 'ltrim'						,1), // present en theorie
