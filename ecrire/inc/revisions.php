@@ -463,9 +463,10 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 function propre_diff($texte) {
 
 	$span_diff = array();
-	if (preg_match_all(',</?(span|div) (class|rem)="diff-[^>]+>,', $texte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $c => $reg)
+	if (preg_match_all(',<(/)?(span|div) (class|rem)="diff-[^>]*>,', $texte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $c => $reg) {
 			$texte = str_replace($reg[0], '@@@SPIP_DIFF'.$c.'@@@', $texte);
+		}
 	}
 
 	// [ ...<span diff> -> lien ]
@@ -499,8 +500,9 @@ function propre_diff($texte) {
 	// replacer les valeurs des <span> et <div> diff-
 	if (is_array($regs))
 	foreach ($regs as $c => $reg) {
-		$texte = str_replace('@@@SPIP_DIFF'.$c.'@@@', $reg[0], $texte);
-		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $reg[0], $GLOBALS['les_notes']);
+		$bal = (!$reg[1]) ? $reg[0] : "</$reg[2]>";
+		$texte = str_replace('@@@SPIP_DIFF'.$c.'@@@', $bal, $texte);
+		$GLOBALS['les_notes'] = str_replace('@@@SPIP_DIFF'.$c.'@@@', $$bal, $GLOBALS['les_notes']);
 	}
 
 	return $texte;
