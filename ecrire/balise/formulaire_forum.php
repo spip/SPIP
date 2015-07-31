@@ -44,7 +44,11 @@ function balise_FORMULAIRE_FORUM ($p) {
 	return $p;
 }
 
-// verification des droits a faire du forum
+//
+// Chercher le titre et la configuration d'un forum 
+// valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
+// Donner aussi la table de reference pour afficher_groupes[]
+
 // http://doc.spip.org/@balise_FORMULAIRE_FORUM_stat
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
@@ -56,20 +60,49 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	// le denier arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
 
-	// recuperer les donnees du forum auquel on repond, false = forum interdit
+	// recuperer les donnees du forum auquel on repond.
 	list ($idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url) = $args;
 	$idr = intval($idr);
 	$idf = intval($idf);
 	$ida = intval($ida);
 	$idb = intval($idb);
 	$ids = intval($ids);
-	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
-		return '';
 
-	list ($titre, $table, $forums_publics) = $r;
+	$type = substr($GLOBALS['meta']["forums_publics"],0,3);
 
-	if (($GLOBALS['meta']["mots_cles_forums"] != "oui"))
+	if ($ida) {
+		$titre = spip_abstract_fetsel('accepter_forum AS type, titre', 'spip_articles', "statut = 'publie' AND id_article = $ida");
+		if ($titre) {
+			if ($titre['type']) $type = $titre['type'];
+			$table = "articles";
+		}
+		if (!$type == 'non') return false;
+	} else {
+		if ($type == 'non') return false;
+		if ($idb) {
+			$titre = spip_abstract_fetsel('titre', 'spip_breves', "statut = 'publie' AND id_breve = $idb");
+			$table = "breves";
+		} else if ($ids) {
+			$titre = spip_abstract_fetsel('nom_site AS titre', 'spip_syndic', "statut = 'publie' AND id_syndic = $ids");
+			$table = "syndic";
+		} else if ($idr) {
+			$titre = spip_abstract_fetsel('titre', 'spip_rubriques', "statut = 'publie' AND id_rubrique = $idr");
+			$table = "rubriques";
+		}
+	}
+
+	if (!$titre) return false; // inexistant ou non public
+
+	if ($idf) {
+		$titre_m = spip_abstract_fetsel('titre', 'spip_forum', "id_forum = $idf");
+		if (!$titre_m) return false; // URL fabriquee
+		$titre = $titre_m;
+	}
+
+	if ($GLOBALS['meta']["mots_cles_forums"] != "oui")
 		$table = '';
+
+	$titre = supprimer_numero($titre['titre']);
 
 	// Sur quelle adresse va-t-on "boucler" pour la previsualisation ?
 	if ($script = $filtres[0])
@@ -79,7 +112,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 		$script = self(); # sur soi-meme
 
 	return
-		array($titre, $table, $forums_publics, $script,
+		array($titre, $table, $type, $script,
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
@@ -269,54 +302,4 @@ function forum_fichier_tmp($arg)
 				@unlink(_DIR_TMP.$file);
 	return $alea;
 }
-
-
-/*******************************************************/
-/* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */
-/*******************************************************/
-
-//
-// Chercher le titre et la configuration du forum de l'element auquel on repond
-//
-
-// http://doc.spip.org/@sql_recherche_donnees_forum
-function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
-
-	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)
-	if ($ida) {
-		$titre = spip_abstract_fetsel('titre', 'spip_articles', "statut = 'publie' AND id_article = $ida");
-		$table = "articles";
-	} else if ($idb) {
-		$titre = spip_abstract_fetsel('titre', 'spip_breves', "statut = 'publie' AND id_breve = $idb");
-		$table = "breves";
-	} else if ($ids) {
-		$titre = spip_abstract_fetsel('nom_site AS titre', 'spip_syndic', "statut = 'publie' AND id_syndic = $ids");
-		$table = "syndic";
-	} else if ($idr) {
-		$titre = spip_abstract_fetsel('titre', 'spip_rubriques', "statut = 'publie' AND id_rubrique = $idr");
-		$table = "rubriques";
-	}
-
-	if ($idf AND $titre)
-		$titre = spip_abstract_fetsel('titre', 'spip_forum', "statut = 'publie' AND id_forum = $idf");
-
-	if ($titre) {
-		$titre = supprimer_numero($titre['titre']);
-	} else 
-		return false;
-
-	// quelle est la configuration du forum ?
-	$type = !$ida ? false : spip_abstract_fetsel('accepter_forum', 'spip_articles', "id_article=$ida");
-
-	if ($type) $type = $type['accepter_forum'];
-
-	if (!$type) $type = substr($GLOBALS['meta']["forums_publics"],0,3);
-
-	// valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
-	if ($type == "non")
-		return false;
-
-	return array ($titre, $table, $type);
-}
-
 ?>
