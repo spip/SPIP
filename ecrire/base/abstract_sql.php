@@ -88,14 +88,14 @@ function sql_get_select	(
 }
 
 // Comme ci-dessus, mais ramene seulement et tout de suite le nombre de lignes
-// Pas de colonne ni de tri a donner donc.
+// Pas de colonne ni de tri a donner donc, et l'argument LIMIT est trompeur
 // http://doc.spip.org/@sql_countsel
 function sql_countsel($from = array(), $where = array(),
-		      $groupby = array(), $limit = '', $having = array(),
+		      $groupby = array(), $having = array(),
 	$serveur='', $option=true) {
 	$f = sql_serveur('countsel', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	return $f($from, $where, $groupby, $limit, '', $having, $serveur, $option!==false);
+	return $f($from, $where, $groupby, $having, $serveur, $option!==false);
 }
 
 // http://doc.spip.org/@sql_alter

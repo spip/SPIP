@@ -535,12 +535,11 @@ function spip_pg_fetch($res, $t='', $serveur='',$requeter=true) {
 }
 
 // http://doc.spip.org/@spip_pg_countsel
-function spip_pg_countsel($from = array(), $where = array(),
-			  $groupby=array(), $limit='', $sousrequete = '', 
+function spip_pg_countsel($from = array(), $where = array(), $groupby=array(),
 			  $having = array(), $serveur='',$requeter=true) 
 {
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
-	$r = spip_pg_select("COUNT($c)", $from, $where,'', '', $limit, $having, $serveur, $requeter);
+	$r = spip_pg_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
 	if (!$requeter) return $r;
 	if (!$r) return 0;
 	list($c) = pg_fetch_array($r, NULL, PGSQL_NUM);
