@@ -424,6 +424,8 @@ function traite_svg($file)
 	if ($connect_statut != '0minirezo') {
 		include_spip('inc/texte');
 		$new = trim(safehtml($texte));
+		// petit bug safehtml
+		if (substr($new,0,2) == ']>') $new = ltrim(substr($new,2));
 		if ($new != $texte) ecrire_fichier($file, $new);
 	}
 
