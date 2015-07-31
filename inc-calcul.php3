@@ -310,6 +310,20 @@ function executer_squelette($squelette, $contexte) {
 		// L'inclusion du squelette permet de definir les fonctions associees
 		// aux boucles, et de recuperer le nom de la fonction principale	
 		include($squelette_cache);
+
+		// Si le squelette compile est vide, pour une raison inconnue
+		// (plantage disque lors du calcul precedent), tenter un recalcul
+		if (!$func_squelette_executer) {
+			@unlink($squelette_cache);
+			spip_log ("ERREUR $squelette_cache est vide");
+			if ($use_cache) {
+				include_local ("inc-calcul-squel.php3");
+				calculer_squelette($squelette, $squelette_cache);
+				include($squelette_cache);
+			}
+		}
+		// fin du plantage squelette compile
+
 		$fonctions_squelettes[$squelette] = $func_squelette_executer;
 		if ($GLOBALS['flag_apc']) {
 			apc_rm($squelette_cache);
