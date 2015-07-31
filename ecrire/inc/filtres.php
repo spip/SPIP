@@ -430,6 +430,8 @@ function corriger_caracteres ($texte) {
 }
 
 // Encode du HTML pour transmission XML
+// A noter : ce filtre assure la securite des ' a l'instar de |texte_script
+// mais pas de la meme maniere (&#39; vs \' )
 // http://doc.spip.org/@texte_backend
 function texte_backend($texte) {
 
