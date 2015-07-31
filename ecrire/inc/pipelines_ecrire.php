@@ -79,9 +79,11 @@ function f_boite_infos($flux) {
 
 
 /**
+ * pipeline recuperer_fond
  * Branchement automatise de affiche_gauche, affiche_droite, affiche_milieu
  * pour assurer la compat avec les versions precedentes des exec en php
- *
+ * Branche de affiche_objet
+ * 
  * Les pipelines ne recevront plus exactement le meme contenu en entree,
  * mais la compat multi vertions pourra etre assuree
  * par une insertion au bon endroit quand le contenu de depart n'est pas vide
@@ -96,6 +98,11 @@ function f_afficher_blocs_ecrire($flux) {
 			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		if (strncmp($fond,"prive/squelettes/contenu/",25)==0)
 			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
+		if (strncmp($fond,"prive/contenu/",14)==0
+		  AND $objet=basename($fond)
+			AND $objet==substr($fond,14)){
+			$flux['data']['texte'] = pipeline('afficher_contenu_objet',array('args'=>array('type'=>$objet,'id_objet'=>$flux['args']['contexte']['id'],'contexte'=>$flux['args']['contexte']),'data'=>$flux['data']['texte']));
+		}
 	}
 
 	return $flux;

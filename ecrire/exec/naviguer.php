@@ -106,17 +106,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 
 	$type = 'rubrique';
 	$contexte = array('id'=>$id_rubrique,'id_rubrique'=>$id_rubrique);
-	$fond = recuperer_fond("prive/contenu/$type",$contexte);
-	// permettre aux plugin de faire des modifs ou des ajouts
-	$fond = pipeline('afficher_contenu_objet',
-			array(
-			'args'=>array(
-				'type'=>$type,
-				'id_objet'=>$id_rubrique,
-				'contexte'=>$contexte),
-			'data'=> $fond));
-	
-	$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
+
+	$onglet_contenu = "<div id='wysiwyg'>".recuperer_fond("prive/contenu/$type",$contexte)."</div>";
 
 	include_spip('inc/presenter_enfants');
 	$onglet_enfants =
