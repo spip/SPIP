@@ -27,6 +27,11 @@ function copie_locale($source, $mode='auto') {
 
 	$local = fichier_copie_locale($source);
 
+	// test d'existence du fichier
+	if ($mode == 'test')
+		return @file_exists(_DIR_RACINE.$local) ? $local : '';
+
+	// sinon voir si on doit le telecharger
 	if (($source != $local) AND (preg_match(',^\w+://,', $source))) {
 		if (($mode=='auto' AND !@file_exists($local))
 		OR $mode=='force') {
