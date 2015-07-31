@@ -150,7 +150,8 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 				}
 				
 				$textes = recuperer_version($id_article, $id_version);		
-						
+
+				// code a unifier avec articles_versions
 				if ($id_version && $id_diff) {		
 					if ($id_diff > $id_version) {
 						$t = $id_version;
@@ -163,14 +164,18 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 						$old = recuperer_version($id_article, $id_diff);
 						$new = $textes;
 					}		
-					$textes = array();			
+					$textes = array();
 					foreach ($champs as $champ) {
-						if (!$new[$champ] && !$old[$champ]) continue;
-						$diff = new Diff(new DiffTexte);
-						$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
+						if (!strlen($new[$champ]) && !strlen($old[$champ])) continue;
+						// si on n'en a qu'un, pas de modif, donc on n'est pas interesses a l'afficher
+						if (isset($new[$champ])
+						AND isset($old[$champ])) {
+							$diff = new Diff(new DiffTexte);
+							$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
+						}
 					}
 				}
-				
+
 				if (!$rss)
 					echo debut_block_visible("$id_version-$id_article-$id_auteur");
 
