@@ -100,8 +100,10 @@ if ($essai_login == "oui") {
 				alea_futur = '$nouvel_alea_futur'
 			WHERE login='$login'";
 		@spip_query($query);
-		if (ereg("ecrire/", $cible->getUrl()))
+		if (ereg("ecrire/", $cible->getUrl())) {
 			$cible->addVar('bonjour','oui');
+			$cible->addVar('essai_cookie','oui');
+		}
 	}
 	else {
 		if (ereg("ecrire/", $cible->getUrl())) {

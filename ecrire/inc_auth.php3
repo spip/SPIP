@@ -113,17 +113,10 @@ function auth() {
 		}
 	}
 	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
-		if ($GLOBALS['HTTP_REFERER'])
+		if ($GLOBALS['essai_cookie'] == 'oui')
 			@header("Location: ../spip_login.php3?var_echec_cookie=oui");
 		else
 			@header("Location: ../spip_login.php3");
-		/*
-		 * Hack : si le referer est vide, c'est probablement qu'on vient
-		 * d'un bookmark pose' sur la page ?bonjour=oui ; evitons donc de
-		 * signaler un probleme de cookie. Et si quelqu'un bloque ses referers
-		 * de maniere qu'ils soient toujours vides, et refuse les cookies,
-		 * qu'est-ce qu'on y peut ? -- Pas satisfaisant, donc, ce hack.
-		 */
 		exit;
 	}
 
@@ -175,9 +168,6 @@ function auth() {
 			else $GLOBALS['set_options'] = 'basiques';
 		}
 
-		// Verifier si pass ok
-		if ($connect_pass == $auth_mdpass) $auth_pass_ok = true;
-	
 		// Indiquer connexion
 		if ($connect_activer_messagerie != "non") {
 			@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
@@ -217,9 +207,6 @@ function auth() {
 		$auth_pass_ok = false;
 	}
 
-	// Securite, ne pas garder la valeur en memoire
-	$auth_mdpass = '';
-	
 	if (!$auth_pass_ok) {
 		@header("Location: ../spip_login.php3?erreur=pass");
 		exit;
