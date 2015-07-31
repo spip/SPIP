@@ -134,8 +134,7 @@ function calculer_rubriques() {
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
-	spip_query("UPDATE spip_rubriques
-	SET date_tmp='0000-00-00 00:00:00', statut_tmp='prive'");
+	sql_updateq('spip_rubriques', array('date_tmp' => '0000-00-00 00:00:00', 'statut_tmp' => 'prive'));
 
 	//
 	// Publier et dater les rubriques qui ont un article publie

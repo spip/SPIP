@@ -25,6 +25,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 	if (!$tables OR $trans) {
 		$init = $request['init'];
 		$tables = $init($request);
+		if (!$tables) return  ($import_ok = false);
 		$phpmyadmin = preg_match("{^phpmyadmin::}is",
 			$GLOBALS['meta']['version_archive_restauration'])
 			? array(array('&quot;','&gt;'),array('"','>'))
@@ -55,7 +56,8 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 		list($nom,$desc) = description_table($table);
 		if (!isset($desc['field']))
 			$desc = $defaut;
-		elseif ($request['insertion']=='on')
+		elseif (isset($request['insertion']) 
+		AND $request['insertion']=='on')
 			$desc['field'] = import_collecte($desc); 
 		$field_desc[$boucle][$table] = $desc;
 	}
@@ -115,36 +117,30 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 		// impt=oui : la ligne est surchargeable par import
 		// impt=non : la ligne ne doit pas etre ecrasee par un import
 		// il faut gerer l'existence de la primary, et l'autorisation ou non de mettre a jour
-		$where = "";
 		if (!isset($desc['key']["PRIMARY KEY"]))
 			$GLOBALS['erreur_restauration'] = "champ impt sans cle primaire sur la table $table";
 		else {
 			$keys = $desc['key']["PRIMARY KEY"];
 			$keys = explode(",",$keys);
 			if (!is_array($keys)) $keys = array($keys);
-			$w = "";
+			$where = "";
 			foreach($keys as $key){
 				if (!isset($values[$key])){
 					$GLOBALS['erreur_restauration'] = "champ $key manquant a l'import sur la table $table";
-					$w .= " AND 0=1";
-					continue;
+					$where .= "";
+					break;
 				}
-				$w .= " AND $key="._q($values[$key]);
+				$where .= " AND $key="._q($values[$key]);
 			}
-			$where = strlen($w)?substr($w,5):"0=1";
-		}
-		if ($where!="") {
-			$res = spip_query("SELECT * FROM $table WHERE ".$where." AND impt='oui'");
-			if (spip_num_rows($res)){
-				$set = "";
-				foreach($values as $key=>$value) $set .= ",$key="._q($value);
-				$set = substr($set,1);
-				if (!spip_query("UPDATE $table SET $set WHERE ".$where." AND impt='oui'")) {
-					$GLOBALS['erreur_restauration'] = sql_error();
+			if ($where) {
+				$where = "impt='oui' $where";
+				if (sql_countsel($table, $where,'',1)) {
+					if (!sql_updateq($table, $values, $where)) {
+						$GLOBALS['erreur_restauration'] = sql_error();
+					}
+				}else{
+				  sql_insert($table, "(".join(',',array_keys($values)).")", "(".join(',',array_map('_q', $values)).")");
 				}
-			}
-			else{
-			  sql_insert($table, "(".join(',',array_keys($values)).")", "(".join(',',array_map('_q', $values)).")");
 			}
 		}
 	}

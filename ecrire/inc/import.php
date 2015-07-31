@@ -303,13 +303,13 @@ function import_init_meta($tag, $atts, $charset, $request)
 			// faire la conversion de charset en php :(
 			effacer_meta('restauration_charset_sql_connexion'); # precaution
 			spip_log("charset de restauration inconnu de sql : $charset");
-			if ( $i = $request['insertion'])
+			if ($request['insertion'])
 				ecrire_meta('charset_insertion', $charset,'non');
 			else	ecrire_meta('charset_restauration', $charset,'non');
 		}
 	}
 	ecrire_metas();
-	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
+	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($request['insertion'] ? " insertion $i" : ''));
 	return $version_archive;
 }
 

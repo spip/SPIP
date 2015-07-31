@@ -374,19 +374,10 @@ function spip_pg_updateq($table, $champs, $where='', $desc=array()) {
 	$fields = $desc['field'];
 	$r = '';
 	foreach ($champs as $champ => $val) {
-		$t = $fields[$champ];
-		if (!test_sql_int($t)) {
-			if ((strpos($t, 'datetime')!==0)
-			    AND (strpos($t, 'TIMESTAMP')!==0))
-			  $val = _q($val);
-			elseif (strpos("012345678", $val[0]) !==false)
-			  $val = "date '$val'";
-			else $val = spip_pg_frommysql($val);
-		}
-		$r .= ',' . $champ . '=' . $val;
+		$r .= ',' . $champ . '=' . spip_pg_cite($val, $fields[$champ]);
 	}
 	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
-	pg_query($r);
+	return pg_query($r);
 }
 
 
@@ -401,7 +392,6 @@ function spip_pg_replace($table, $values, $desc) {
 	$prim = $desc['key']['PRIMARY KEY'];
 	$ids = preg_split('/,\s*/', $prim);
 	$noprims = $prims = array();
-
 	foreach($values as $k=>$v) {
 		$values[$k] = $v = spip_pg_cite($v, $desc['field'][$k]);
 
@@ -416,24 +406,23 @@ function spip_pg_replace($table, $values, $desc) {
 		return 0;
 	}
 	$set = join(',', $noprims);
-	
 	if ($set) {
-	  $r = pg_query($spip_pg_link, $q = "UPDATE $table SET $set WHERE $where");
-	  if (!$r) {
+	  $set = pg_query($spip_pg_link, $q = "UPDATE $table SET $set WHERE $where");
+	  if (!$set) {
 	    $n = spip_pg_errno();
 	    $m = spip_pg_error($q);
 	  } else {
-	    $r = pg_affected_rows($r);
+	    $set = pg_affected_rows($set);
 	  }
 	}
-	if (!$r) {
-	    $r = pg_query($spip_pg_link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
-	    if (!$r) {
+	if (!$set) {
+	    $set = pg_query($spip_pg_link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ')');
+	    if (!$set) {
 	      $n = spip_pg_errno();
 	      $m = spip_pg_error($q);
 	    }
 	}
-	return $r;
+	return $set;
 }
 
 // Explicite les conversions de Mysql d'une valeur $v de type $t
@@ -443,9 +432,13 @@ function spip_pg_replace($table, $values, $desc) {
 function spip_pg_cite($v, $t)
 {
 	if ((strpos($t, 'datetime')===0) OR (strpos($t, 'TIMESTAMP')===0)) {
-		if  (strpos($v, "-00-00") === 4)
-			return _q(substr($v,0,4)."-01-01".substr($v,10));
-		else return spip_pg_frommysql($v);
+		if (strpos("0123456789", $v[0]) === false)
+			return spip_pg_frommysql($v);
+		else {
+			if (strpos($v, "-00-00") === 4)
+				$v = substr($v,0,4)."-01-01".substr($v,10);
+			return "date '$v'";
+		}
 	}
 	elseif  (test_sql_int($t))
 		  return intval($v);
@@ -553,9 +546,10 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false) 
 	($character_set?" DEFAULT $character_set":"")
 	."\n";
 
-	@pg_query($spip_pg_link, $q);
+	$r = @pg_query($spip_pg_link, $q);
 
 	foreach($keys as $index)  {@pg_query($spip_pg_link, $index);}
+	return $r;
 }
 
 // Selectionner la sous-chaine dans $objet
