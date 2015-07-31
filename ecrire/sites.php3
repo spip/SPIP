@@ -429,6 +429,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 		echo "<p><div align='left'>"._T('syndic_choix_oublier');
 
+		echo "<ul>\n";
+
 		# miroir
 		if (!$miroir AND !$miroir = $row['miroir']) $miroir = 'non';
 		echo "<li>"._T('syndic_option_miroir').' ';
@@ -444,6 +446,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
 			" &nbsp; ");
 		echo "</li>\n";
+
+		echo "</ul>\n";
 
 		// Bouton "Valider"
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
