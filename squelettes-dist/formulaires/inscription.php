@@ -37,6 +37,8 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 
 	if (!$nom = _request('nom_inscription'))
 		$erreurs['nom_inscription'] = _T("info_obligatoire");
+	elseif (!nom_acceptable(_request('nom_inscription')))
+		$erreurs['nom_inscription'] = _T("ecrire:info_nom_pas_conforme");
 	if (!$mail = _request('mail_inscription'))
 		$erreurs['mail_inscription'] = _T("info_obligatoire");
 	
