@@ -191,6 +191,11 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {
+					// commencons par vider le cache des urls, si jamais un js au retour
+					// essaye tout de suite de suivre un lien en cache
+					// dans le doute sur la validite du cache il vaut mieux l'invalider
+					var preloaded = jQuery.spip.preloaded_urls;
+					jQuery.spip.preloaded_urls = {};
 					jQuery(cible).html(c);
 					var a = jQuery('a:first',cible).eq(0);
 					var d = jQuery('div.ajax',cible);
@@ -225,9 +230,10 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							},10);
 						}
 					}
-					// on vide le cache des urls car on a fait une action en bdd
-					if (jQuery('.reponse_formulaire_ok',cible).length)
-						jQuery.spip.preloaded_urls = {};
+					// si jamais le formulaire n'a pas un retour OK, retablissons le cache
+					// car a priori on a pas fait d'operation en base de donnee
+					if (!jQuery('.reponse_formulaire_ok',cible).length)
+						jQuery.spip.preloaded_urls = preloaded;
 					// mettre a jour le buffer du navigateur pour aider jaws et autres readers
 					jQuery.spip.updateReaderBuffer();
 				}
@@ -271,15 +277,8 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,u) {
 	if (a.length
 		&& a.is('a[name=ajax_ancre]')
 		&& jQuery(a.attr('href'),blocfrag).length){
-			a = a.attr('href')
-		setTimeout(function(){
-			jQuery(a,blocfrag).positionner(false);
-			//a = a.split('#');
-			//window.location.hash = a[1];
-		},10);
-	}
-	else {
-		//jQuery(blocfrag).positionner(false);
+		a = a.attr('href');
+		jQuery(a,blocfrag).positionner(false);
 	}
 	jQuery.spip.log('on_ajax_loaded');
 	jQuery.spip.triggerAjaxLoad(blocfrag);
@@ -295,7 +294,7 @@ jQuery.spip.on_ajax_loaded = function(blocfrag,c,u) {
 jQuery.spip.loadAjax = function(blocfrag,url, href, force, callback){
 	jQuery(blocfrag)
 	.animeajax()
-	.addClass('loading').positionner(false);
+	.addClass('loading');/*.positionner(false)*/;
 	if (jQuery.spip.preloaded_urls[url] && !force) {
 		jQuery.spip.on_ajax_loaded(blocfrag,jQuery.spip.preloaded_urls[url],href);
 	} else {
