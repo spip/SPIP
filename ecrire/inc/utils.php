@@ -760,8 +760,8 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 		include_spip('inc/urls');
 		if (function_exists($f = 'generer_url_ecrire_' . $entite)
 			// ou definie par un plugin
-		  OR $f = charger_fonction($f,'urls',true));
-	    $res = $f($id, $args, $ancre, ' ');
+		  OR $f = charger_fonction($f,'urls',true))
+			$res = $f($id, $args, $ancre, ' ');
 	} else {
 		if (is_string($public)) {
 			include_spip('base/connect_sql');
