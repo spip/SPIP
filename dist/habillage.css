@@ -80,14 +80,14 @@ div.spip_code, .spip_cadre { margin-bottom: 1em; }
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
-table.spip { width: 99%; margin: 0 auto 1em auto; }
-table.spip caption { caption-side: top; font-weight: bold; color: #999; line-height: normal; }
-table.spip tr.row_first { background: #CCC; }
+table.spip { margin: auto; margin-bottom: 1em; border-collapse: collapse; border-spacing: 0; }
+table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; font-weight: bold; }
+table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
-table.spip th, table.spip td { text-align: left; border: 2px solid #FFF; }
-table.spip th { padding: 0.20em; vertical-align: middle; font-weight: bold; }
-table.spip td { padding: 0.40em; vertical-align: top; }
+table.spip th, table.spip td { padding: 0.20em 0.40em; text-align: left; border: 1px solid; }
+table.spip th { vertical-align: bottom; font-weight: bold; }
+table.spip td { vertical-align: top; }
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
