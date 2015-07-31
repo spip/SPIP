@@ -86,7 +86,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  .">"
 	  // une ancre pour rendre accessible au clavier le depliage du sous bloc
 	  // on ne la mets pas en interface "accessible", dans laquelle il n'y  pas de sous bloc ... un comble !
-	  . ($GLOBALS['spip_display']==4?"":"<a href=\"#\" onclick=\"jQuery(this).parent().toggleother('$cible');return false;\" class='titremancre'></a>")
+	  . ($GLOBALS['spip_display']==4?"":"<a class='titremancre'></a>")
 	  . "$texte</div>"
 	  . http_script( ($deplie==='incertain')
 			? "jQuery(document).ready(function(){if (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');});"
