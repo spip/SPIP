@@ -109,18 +109,6 @@ der Dokumentatioun vu SPIP</a>.',
 
 
 // D
-'date_mois_1' => 'Januar',
-'date_mois_10' => 'Oktober',
-'date_mois_11' => 'November',
-'date_mois_12' => 'Dezember',
-'date_mois_2' => 'Februar',
-'date_mois_3' => 'M&auml;rz',
-'date_mois_4' => 'Abr&euml;l',
-'date_mois_5' => 'Mee',
-'date_mois_6' => 'Juni',
-'date_mois_7' => 'Juli',
-'date_mois_8' => 'August',
-'date_mois_9' => 'September',
 'date_mot_heures' => 'h',
 'diff_para_ajoute' => 'Kapitel derb&auml;i setzen',
 'diff_para_deplace' => 'Kapitel ger&eacute;ckelt',

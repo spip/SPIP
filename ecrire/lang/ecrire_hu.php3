@@ -118,18 +118,6 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 
 
 // D
-'date_mois_1' => 'janu&aacute;r',
-'date_mois_10' => 'okt&oacute;ber',
-'date_mois_11' => 'november',
-'date_mois_12' => 'december',
-'date_mois_2' => 'febru&aacute;r',
-'date_mois_3' => 'm&aacute;rcius',
-'date_mois_4' => '&aacute;prilis',
-'date_mois_5' => 'm&aacute;jus',
-'date_mois_6' => 'j&uacute;nius',
-'date_mois_7' => 'j&uacute;lius',
-'date_mois_8' => 'augusztus',
-'date_mois_9' => 'szeptember',
 'date_mot_heures' => '&oacute;r&aacute;k',
 'diff_para_ajoute' => 'Paragr&aacute;fus besz&uacute;rva',
 'diff_para_deplace' => 'Paragr&aacute;fus &aacute;thelyezve',
