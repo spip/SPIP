@@ -79,7 +79,10 @@ function copier_document($ext, $orig, $source) {
 // http://doc.spip.org/@deplacer_fichier_upload
 function deplacer_fichier_upload($source, $dest, $move=false) {
 	// Securite
-	$dest = preg_replace(',\.\.+,', '.', $dest);
+	if (substr($dest,0,strlen(_DIR_RACINE))==_DIR_RACINE)
+		$dest = _DIR_RACINE.preg_replace(',\.\.+,', '.', substr($dest,strlen(_DIR_RACINE)));
+	else
+		$dest = preg_replace(',\.\.+,', '.', $dest);
 
 	if ($move)	$ok = @rename($source, $dest);
 	else				$ok = @copy($source, $dest);
