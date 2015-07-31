@@ -344,15 +344,21 @@ function taille_image($img) {
 	$srcsize = false;
 	if (isset($largeur_img[$mem]))
 		$srcWidth = $largeur_img[$mem];
-	if (!$srcWidth AND $srcsize = @getimagesize($logo)) {
-		$srcWidth = $srcsize[0];
-	 	$largeur_img[$mem] = $srcWidth;
-	}
 	if (isset($hauteur_img[$mem]))
 		$srcHeight = $hauteur_img[$mem];
-	if (!$srcHeight AND ($srcsize OR ($srcsize = @getimagesize($logo)))) {
-		$srcHeight = $srcsize[1];
-		$hauteur_img[$mem] = $srcHeight;
+	if (!$srcWidth OR !$srcHeight){
+		if ($srcsize = @getimagesize($logo)){
+			if (!$srcWidth)	$largeur_img[$mem] = $srcWidth = $srcsize[0];
+			if (!$srcHeight)	$hauteur_img[$mem] = $srcHeight = $srcsize[1];
+		}
+		// $logo peut etre une reference a une image temporaire dont a n'a que le log .src
+		// on s'y refere, l'image sera reconstruite en temps utile si necessaire
+		elseif(@file_exists($f = "$logo.src")
+		  AND lire_fichier($f,$valeurs)
+		  AND $valeurs=unserialize($valeurs)) {
+			if (!$srcWidth)	$largeur_img[$mem] = $srcWidth = $valeurs["largeur_dest"];
+			if (!$srcHeight)	$hauteur_img[$mem] = $srcHeight = $valeurs["hauteur_dest"];
+	  }
 	}
 	return array($srcHeight, $srcWidth);
 }
