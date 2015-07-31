@@ -187,7 +187,7 @@ function AjaxSqueeze(trig, id)
 
 	for (i=0;i < trig.elements.length;i++) {
 		n = trig.elements[i];
-		s = (n.type != 'checkbox') ? n.name : n.checked;
+		s = ((n.type != 'checkbox')&&(n.type != 'radio')) ? n.name : n.checked;
 		if (s) {
 			u += n.name+"="+ encodeURIComponent(n.value) + '&';
 		}

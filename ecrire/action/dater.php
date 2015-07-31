@@ -15,8 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@action_dater_dist
 function action_dater_dist() {
 	
-
-
 	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
@@ -27,19 +25,20 @@ function action_dater_dist() {
 		spip_log("action_dater_dist $arg pas compris");
 	}
 	else {
+	  spip_log("dater : " ._request('avec_redac'));
 		include_spip('inc/date');
-		if (!isset($_POST['avec_redac']))
-			spip_query("UPDATE spip_articles SET date='" . format_mysql_date($_POST['annee'], $_POST['mois'], $_POST['jour'], $_POST['heure'], $_POST['minute']) ."'	WHERE id_article=$r[1]");
+		if (!isset($_REQUEST['avec_redac']))
+			spip_query("UPDATE spip_articles SET date='" . format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute')) ."'	WHERE id_article=$r[1]");
 		else {
 
-			if ($_POST['avec_redac'] == 'non')
+		  if (_request('avec_redac') == 'non')
 				$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
 			else  {
-				$annee_redac = $_POST['annee_redac'];
-				$mois_redac = $_POST['mois_redac'];
-				$jour_redac = $_POST['jour_redac'];
-				$heure_redac = $_POST['heure_redac'];
-				$minute_redac = $_POST['minute_redac'];
+				$annee_redac = _request('annee_redac');
+				$mois_redac = _request('mois_redac');
+				$jour_redac = _request('jour_redac');
+				$heure_redac = _request('heure_redac');
+				$minute_redac = _request('minute_redac');
 
 				if ($annee_redac<>'' AND $annee_redac < 1001) 
 					$annee_redac += 9000;

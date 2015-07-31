@@ -101,6 +101,7 @@ ecrire/exec/dater.php -text
 ecrire/exec/delete_all.php -text
 ecrire/exec/documenter.php -text
 ecrire/exec/documents_liste.php -text
+ecrire/exec/editer_mot.php -text
 ecrire/exec/export_all.php -text
 ecrire/exec/forum.php -text
 ecrire/exec/forum_admin.php -text

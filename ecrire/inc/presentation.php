@@ -1957,9 +1957,8 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 // http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
-	global $spip_display, $compteur_survol;
+	global $spip_display;
 
-	$compteur_survol ++;
 	if ($fonction == "supprimer.gif") {
 		$style = '-danger';
 	} else {
@@ -2014,7 +2013,6 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 	global $spip_display;
 
 	$retour = '';
-
 
 	if ($spip_display != 4) {
 		//if (!$fonction) $fonction = "rien.gif";
