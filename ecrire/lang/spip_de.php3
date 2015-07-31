@@ -6,7 +6,7 @@ $GLOBALS['i18n_spip_de'] = array(
 
 
 // 0
-'0_URL' => 'http://www.uzine.net/spip-de',
+'0_URL' => 'http://www.spip.net/\2_',
 '0_langue' => 'Deutsch [de]',
 '0_liste' => 'spip-trad@rezo.net',
 '0_mainteneur' => '<MODIF> Klaus at spip.de',
@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_de'] = array(
 'avis_erreur_fonction_contexte' => 'Programmfehler. Diese Funktion darf nicht in diesem Zusammenhang aufgerufen werden.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
-'avis_erreur_version_archive' => '<B>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen instalierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls das Funktionieren Ihrer Website zu beeintr&auml;chtigen oder socgar die Datenbank zu zerst&ouml;ren.<p> Mehr dazu finden Sie in der <A HREF="http://www.uzine.net/article1489.html"> franz&ouml;sischen SPIP-Dokumentation</a>.',
+'avis_erreur_version_archive' => '<B>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen instalierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls das Funktionieren Ihrer Website zu beeintr&auml;chtigen oder socgar die Datenbank zu zerst&ouml;ren.<p> Mehr dazu finden Sie in der <A HREF="http://www.spip.net/fr_article1489.html"> franz&ouml;sischen SPIP-Dokumentation</a>.',
 'avis_espace_interdit' => '<B>Gesperrter Bereich</b><p>SPIP ist bereits installiert.',
 'avis_lecture_noms_bases_1' => 'Das Installationsprogram konnte die Namen der vorhandenen Datenbanken nicht lesen.',
 'avis_lecture_noms_bases_2' => 'Entweder ist keine Datenbank vorhanden oder die Funktion zum Auflisten der Datenbanken ist abgeschaltet (Das ist bei vielen Webhostern der Fall).',
@@ -486,7 +486,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_contenu_articles' => 'Inhalt der Artikel',
 'info_contribution' => 'Forumsbeitr&auml;ge',
 'info_copyright' => 'ist freie Software im Sinne der <a href=\'copyright_fr.html\'>GNU Public License.</a>',
-'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href=\'http://www.uzine.net/spip-de\'>http://www.uzine.net/spip-de</a>.',
+'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href=\'http://www.spip.net/de_\'>http://www.spip.net/de_</a>.',
 'info_cours_edition' => 'Ihre Artikel in Bearbeitung',
 'info_creation_mots_cles' => 'Hier verwalten Sie die Schlagworte der Website',
 'info_creation_paragraphe' => '(Um einen Absatz einzuf&uuml;gen, lassen Sie einfach eine Zeile frei.)',
@@ -1165,7 +1165,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_actualite_site_3' => 'um zus&auml;tzliche Funktionen zu nutzen.',
 'texte_admin_effacer_01' => 'Dieser Befehl l&ouml;scht den <i>gesamten</i> Inhalt der Datenbank mit <i>allen</i> Redakteuren und Administratoren. Nach der Ausf&uuml;hrung dieses Befehls m&uuml;ssen Sie SPIP neu installieren und einen ersten Administrator anlegen.',
 'texte_admin_tech_01' => 'Diese Option erm&ouml;glicht es, den Inhalt der Datenbank in das Verzeichnis <i>ecrire/data/</i> zu sichern. Vergessen Sie bitte nicht, ebenfalls den Inhalt des Verzeichnisses <i>IMG/</i> zu sichern, denn es enth&auml;lt s&auml;mtliche Bilder und Grafiken, die f&uuml;r Rubriken und Artikel verwendet werden.',
-'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="http://www.uzine.net/article1489.html">die SPIP Dokumentation</a>.
+'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="http://www.spip.net/fr_article1489.html">die SPIP Dokumentation</a>.
 
 
 

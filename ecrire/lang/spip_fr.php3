@@ -54,7 +54,7 @@ $GLOBALS['i18n_spip_fr'] = array(
 				difficult&eacute;s: risque de destruction de votre base de
 				donn&eacute;es, dysfonctionnements divers du site, etc. Ne
 				validez pas cette demande d\'importation.<p>Pour plus
-				d\'informations, voyez <A HREF=\'http://www.uzine.net/article1489.html\'>
+				d\'informations, voyez <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 la documentation de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espace interdit</B><p>SPIP est d&eacute;j&agrave; install&eacute;.',
 'avis_lecture_noms_bases_1' => 'Le programme d\'installation n\'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.',
@@ -526,7 +526,7 @@ Merci de votre participation
 'info_contenu_articles' => 'Contenu des articles',
 'info_contribution' => 'contributions de forum',
 'info_copyright' => 'est un logiciel libre distribu&eacute; <a href=\'copyright_fr.html\'>sous licence GPL.</a>',
-'info_copyright_doc' => 'Pour plus d\'informations, voir le site <a href=\'http://www.uzine.net/spip\'>http://www.uzine.net/spip</a>.',
+'info_copyright_doc' => 'Pour plus d\'informations, voir le site <a href=\'http://www.spip.net/fr_\'>http://www.spip.net/fr_</a>.',
 'info_cours_edition' => 'Vos articles en cours d\'&eacute;dition',
 'info_creation_mots_cles' => 'Cr&eacute;ez et configurez ici les mots-cl&eacute;s du site',
 'info_creation_paragraphe' => '(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
@@ -1269,7 +1269,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e
 	QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. L\'erreur
 	consistant &agrave; faire une sauvegarde avant de faire une mise &agrave; jour
-	de SPIP est courante... Pour plus de d&eacute;tails consultez <a href="http://www.uzine.net/article1489.html">la documentation de SPIP</a>.',
+	de SPIP est courante... Pour plus de d&eacute;tails consultez <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
 'texte_adresse_annuaire_1' => '(Si votre annuaire est install&eacute; sur la m&ecirc;me machine que ce site Web, il s\'agit probablement de &laquo;localhost&raquo;.)',

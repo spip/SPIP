@@ -66,7 +66,7 @@ inn ot versyon Spip sak ou la mi dann sit.</b> Ou va giny gro traka :
 
 
 
-Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bezwin inn p&eacute; plid zinformasyon, g&egrave;t <A HREF=\'http://www.uzine.net/article1489.html\'>
+Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bezwin inn p&eacute; plid zinformasyon, g&egrave;t <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 
                                 ladocumentasyon lo SPIP-la</a>.',
 'avis_espace_interdit' => '<B>Ou na pwinn permisyon ariv dann z&eacute;pas-la </b><p>Ou la d&eacute;za finn m&egrave;t inn versyon d-SPIP.',
@@ -554,7 +554,7 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_contenu_articles' => 'Kosa bann zartik i kontyin ',
 'info_contribution' => 'bann kontribusyon dann forom',
 'info_copyright' => 'l&eacute; inn lozisyel lib sak l&eacute; don&eacute; <a href=\'copyright_fr.html\'>sou lisans GPL.</a>',
-'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href=\'http://www.uzine.net/spip-cpf\'>http://www.uzine.net/spip-cpf</a>.',
+'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href=\'http://www.spip.net/cpf_\'>http://www.spip.net/cpf_</a>.',
 'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
 'info_creation_mots_cles' => 'Kr&eacute; &egrave;k konfigir t&egrave;rla tout bann molakl&eacute; lo sit',
 'info_creation_paragraphe' => '(Pou kr&eacute; bann paragraf, l&egrave;s sinpman trwakat liyn vid.)',
@@ -1268,7 +1268,7 @@ la bazdodn&eacute;. Pou sa minm, oubli pa m&egrave;t ali andann  fisy&eacute; pr
 Oubli pa r&eacute;kup&egrave;r osi tout sak nana dann r&eacute;pertwar <i>IMG/</i>, s&eacute; dir
 tout bann zimaz &egrave;k tout bann dokiman kn&eacute;na dann bann zartik &egrave;k bann rubrik.',
 'texte_admin_tech_02' => 'Tansyon pangar : sovgard-la li sra pou nir r&eacute;stor&eacute; 
-S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Souvandfwa nanna d-moun sak i kanard azot : moun-la i f&eacute; inn sovgard labaz avan larnouv&egrave;lman la versyon SPIP. Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.uzine.net/article1489.html">la documentation de SPIP</a>.',
+S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Souvandfwa nanna d-moun sak i kanard azot : moun-la i f&eacute; inn sovgard labaz avan larnouv&egrave;lman la versyon SPIP. Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Ou p&eacute; swazi sovgard lo fisy&eacute; dann manyir-konpers&eacute;. Manyir-la i perm&eacute; rand pli takini lo transf&egrave;r d-fisy&eacute; sir out lordinat&egrave;r oubyin sa lo serv&egrave;r pou bann sovgard. L&eacute; itil aou pour kons&egrave;rv out l&eacute;spas-diks.',
 'texte_adresse_annuaire_1' => '(Si out karn&eacute; l&eacute; instal&eacute; sir lamasin par&eacute;y minm sitw&egrave;b-la, n&eacute;na grannsans i sra pour &egrave;t &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Lot&egrave;r answit la fin d&egrave;t azout&eacute; pou lartik-la :',

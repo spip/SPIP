@@ -54,7 +54,7 @@ $GLOBALS['i18n_spip_en'] = array(
 				difficulties: risk of destruction of your database
 				various dysfunctions in the site, etc. Do not
 				submit this import request.<p>For more
-				information, please refer to <A HREF=\'http://www.uzine.net/article1489.html\'>
+				information, please refer to <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 the SPIP documentation</A>.',
 'avis_espace_interdit' => '<B>Forbidden area</B><p>SPIP is already installed.',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
@@ -521,7 +521,7 @@ Thank you for your participation
 'info_contenu_articles' => 'Articles content',
 'info_contribution' => 'forum contributions',
 'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
-'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.uzine.net/spip-en\'>http://www.uzine.net/spip-en</a>.',
+'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/es_\'>http://www.spip.net/es_</a>.',
 'info_cours_edition' => 'In progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
@@ -1268,7 +1268,7 @@ the images and the documents used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
 	in a site installed under the same version of SPIP. It is a common mistake
 	to backup the database before upgrading
-	SPIP... For more information refer to <a href=\'http://www.uzine.net/article1489.html\'>SPIP documentation</a>.',
+	SPIP... For more information refer to <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_adresse_annuaire_1' => '( If your directory is installed on the same machine as your Web site, it is probably &laquo;localhost&raquo;.)',

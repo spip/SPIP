@@ -54,7 +54,7 @@ $GLOBALS['i18n_spip_da'] = array(
 				vanskeligheder: risiko for at &oslash;del&aelig;gge din database, 
 				forskellige funktionsfejl p&aring; webstedet, osv. Undlad at 
 				forts&aelig;tte indl&aelig;sningen.<p>For mere
-				information henvises til <A HREF=\'http://www.uzine.net/article1489.html\'>,
+				information henvises til <A HREF=\'http://www.spip.net/fr_article1489.html\'>,
                                 SPIP-dokumentationen</A>.',
 'avis_espace_interdit' => '<B>Forbudt omr&aring;de</B><p>SPIP er allerede installeret.',
 'avis_lecture_noms_bases_1' => 'Installationsprogrammet kunne ikke l&aelig;se navnene p&aring; de installerede databaser.',
@@ -510,7 +510,7 @@ Tak for din deltagelse
 'info_contenu_articles' => 'Artiklens bestanddele',
 'info_contribution' => 'indl&aelig;g i fora',
 'info_copyright' => 'er fri software der distribueres <a href=\'license.txt\'>under GPL licens.</a>',
-'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href=\'http://www.uzine.net/spip-da\'>http://www.uzine.net/spip-da</a>.',
+'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href=\'http://www.spip.net/da_\'>http://www.spip.net/da_</a>.',
 'info_cours_edition' => 'Igang',
 'info_creation_mots_cles' => 'Opret og konfigurer webstedets n&oslash;gleord her',
 'info_creation_paragraphe' => '(For at lave afsnit skal du inds&aelig;tte blanke linier.)',
@@ -1220,7 +1220,7 @@ og igen f&aring; adgang til webstedet.',
  Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
 'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
 	Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
-	For mere information henvises til <a href=\'http://www.uzine.net/article1489.html\'>SPIP documentation</a>.',
+	For mere information henvises til <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'Du kan v&aelig;lge at gemme filen i komprimeret form for hurtigere at kunne overf&oslash;re den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
 'texte_adresse_annuaire_1' => '(Hvis dit katalog findes p&aring; samme server som webstedet, er det formentlig &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'F&oslash;lgende forfatter har bidraget til artiklen:',
