@@ -349,13 +349,13 @@ function safehtml($t) {
 	if ($test > 0) {
 		# reset ($process->clear() ne vide que _xhtml...),
 		# on doit pouvoir programmer ca plus propremement
-		$process->$_counter = array();
-		$process->$_stack = array();
-		$process->$_dcCounter = array();
-		$process->$_dcStack = array();
-		$process->$_listScope = 0; 
-		$process->$_liStack = array();
-		$process->parse('');
+		$process->_counter = array();
+		$process->_stack = array();
+		$process->_dcCounter = array();
+		$process->_dcStack = array();
+		$process->_listScope = 0;
+		$process->_liStack = array();
+#		$process->parse(''); # cas particulier ?
 		$process->clear();
 		$t = $process->parse($t);
 	}
