@@ -182,12 +182,12 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	if ($f)
 		fclose($f);
 	else {
-		spip_log("echec creation $base${subdir}_");
+		spip_log("echec creation $base${subdir}");
 		redirige_par_entete(
-			generer_url_action('test_dirs',"test_dir=$base${subdir}_",true));
+			generer_url_action('test_dirs',"test_dir=$base${subdir}",true));
 	}
-	spip_log("faux sous-repertoire $base${subdir}_");
-	return "$baseaff${subdir}_";
+	spip_log("faux sous-repertoire $base${subdir}");
+	return "$baseaff${subdir}";
 }
 // compatibilite ascendante
 // http://doc.spip.org/@creer_repertoire

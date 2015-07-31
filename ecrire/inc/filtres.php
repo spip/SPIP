@@ -1589,7 +1589,7 @@ function direction_css ($css, $voulue='') {
 		return $f;
 
 	// 2.
-	$f = sous_repertoire (_DIR_TMP_IMG, 'cache-css')
+	$f = sous_repertoire (_DIR_VAR, 'cache-css')
 		. preg_replace(',.*/(.*?)(_rtl)?\.css,', '\1', $css)
 		. '.' . substr(md5($css), 0,4) . '_' . $ndir . '.css';
 

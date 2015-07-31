@@ -31,19 +31,57 @@ define("_ECRIRE_INC_VERSION", "1");
 // nombre de repertoires depuis la racine
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
 
+# le chemin http (relatif) vers les bibliotheques JavaScript
+define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/javascript/'));
+
+	// Icones
+# le chemin http (relatif) vers les images standard
+define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
+# le chemin des vignettes de type de document
+define('_DIR_IMG_ICONES_DIST', _DIR_RACINE . "dist/vignettes/");
+# le chemin des icones de la barre d'edition des formulaires
+define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
+
+# le chemin php (absolu) vers les images standard (pour hebergement centralise)
+define('_ROOT_IMG_PACK', dirname(dirname(dirname(__FILE__))) . '/dist/images/');
+define('_ROOT_IMG_ICONES_DIST', dirname(dirname(dirname(__FILE__))) . '/dist/vignettes/');
+
+
+# Le nom des 4 repertoires modifiables par les scripts lances par httpd
+# Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
+# mais on peut les mettre ailleurs et changer completement les noms
+
+# le nom du repertoire des fichiers Temporaires Inaccessibles par http://
+define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
+# le nom du repertoire des fichiers Temporaires Accessibles par http://
+define('_NOM_TEMPORAIRES_ACCESSIBLES', "var/");
+# le nom du repertoire des fichiers Permanents Inaccessibles par http://
+define('_NOM_PERMANENTS_INACCESSIBLES', "etc/");
+# le nom du repertoire des fichiers Permanents Accessibles par http://
+define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
+
+// Le nom du fichier de personnalisation
+define('_NOM_CONFIG', 'mes_options');
+
+// Son emplacement absolu si on le trouve
+
+if (@file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . '.php')
+OR (_EXTENSION_PHP
+	AND @file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . _EXTENSION_PHP))
+OR (@file_exists($f = _DIR_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php'))) {
+	define('_FILE_OPTIONS', $f);
+} else define('_FILE_OPTIONS', '');
+
+// *** Fin des define *** //
 
 //
 // *** Parametrage par defaut de SPIP ***
 //
-// Ces parametres d'ordre technique peuvent etre modifies
-// dans config/mes_options (_FILE_OPTIONS) Les valeurs
-// specifiees dans ce dernier fichier remplaceront automatiquement
-// les valeurs ci-dessous.
-//
-// Pour creer config/mes_options : recopier simplement
-// les lignes ci-dessous, et ajouter le marquage de debut et
-// de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
-//
+// Les globales qui suivent peuvent etre modifiees
+// dans le fichier de personnalisation indique ci-dessus.
+// Il suffit de copier les lignes ci-dessous, et ajouter le marquage de debut
+// et fin de fichier PHP ("< ?php" et "? >", sans les espaces)
+// Ne pas les rendre indefinies.
 
 // Prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
@@ -254,47 +292,36 @@ $spip_version_code = 1.9203;
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';
 
-//
-// Inclure le fichier config/mes_options (ou equivalent)
-//
-
-if (defined('_FILE_OPTIONS')
-#OR @file_exists($f = _DIR_CONFIG.'mes_options.php') # _DIR_CONFIG pas defini!
-OR @file_exists($f = _DIR_RESTREINT.'mes_options.php')
-OR (_EXTENSION_PHP AND @file_exists($f = _DIR_RESTREINT.'mes_options.php3'))
-OR !($f = false)) {
-	define('_FILE_OPTIONS', $f);
-	if ($f) { @include_once _FILE_OPTIONS; }
-}
-
+// *** Fin des globales *** //
 
 //
-// Definitions standards (charge aussi inc/flock)
+// Definitions des fonctions (charge aussi inc/flock)
 //
 
 require_once(_DIR_RESTREINT . 'inc/utils.php');
 
+// Definition personnelles eventuelles
+
+if (_FILE_OPTIONS) include_once _FILE_OPTIONS;
 
 //
-// INITIALISER LES REPERTOIRES NON PARTAGEABLES
+// INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
 //
-// 
-// mais cette fonction a peut-etre deja ete appelee par mes_options
-spip_initialisation_parametree();
+// mais l'inclusion precedente a peut-etre deja appelee cette fonction
+// ou a defini certaines des constantes que cette fontion doit definir
+// ===> on execute en neutralisant les messages d'erreur
 
-
-//
-// INITIALISER LES CONSTANTES ET LES VARIABLES SYSTEMES DE SPIP
-//
-
-spip_initialisation();
+@spip_initialisation(
+       (_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
+       (_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
+       (_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
+       (_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
+       );
 
 // chargement des plugins : doit arriver en dernier
 // car dans les plugins on peut inclure inc-version
 // qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
 // donc il faut avoir tout fini ici avant de charger les plugins
-# le nom du repertoire plugins/
-define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	// chargement optimise precompile

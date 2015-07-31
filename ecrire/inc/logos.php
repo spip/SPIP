@@ -65,7 +65,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !$img) return;
 
-	$destination = sous_repertoire(_DIR_IMG, $destdir) . $destfile;
+	$destination = sous_repertoire(_DIR_VAR, $destdir) . $destfile;
 
 	// chercher un cache
 	$vignette = '';
