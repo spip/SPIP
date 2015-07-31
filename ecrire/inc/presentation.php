@@ -413,12 +413,12 @@ function afficher_liste($largeurs, $table, $styles = '') {
 				list(, $largeur) = each($largeurs);
 				if ($styles) list(, $style) = each($styles);
 				if (!trim($texte)) $texte .= "&nbsp;";
-				$res .= "<td" .
+				$res .= "\n<td" .
 				  ($largeur ? " width=\"$largeur\"" : '') .
 				  ($style ? " class=\"$style\"" : '') .
-				  ">$texte</td>";
+				  ">$texte\n</td>";
 			}
-			$res .= "</tr>\n";
+			$res .= "\n</tr>";
 		}
 	} else {
 	  	$res = "\n<ul style='text-align: $spip_lang_left;'>";
@@ -436,7 +436,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 			}
 			$res .= "</li>\n";
 		}
-		$res .= "</ul>\n";
+		$res .= "\n</ul>";
 	}
 	return $res;
 }
@@ -449,8 +449,9 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 	$deb_aff = intval(_request($tmp_var));
 	$ancre++;
 	$self = self();
-	$texte = "\n<a name='a$ancre'></a>";
-	if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial1\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+
+	$texte = ($spip_display == 4) ? '' :  "<tr style='background-color: #dddddd;'><td class=\"arial1\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+	$texte .= "\n<a name='a$ancre'></a>";
 
 	for ($i = 0; $i < $num_rows; $i += $nb_aff){
 			$deb = $i + 1;

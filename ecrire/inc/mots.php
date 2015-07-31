@@ -541,7 +541,7 @@ function afficher_groupe_mots($id_groupe) {
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr($hash, 2, 6);
 			
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
 	$select = 'id_mot, titre, ' . creer_objet_multi ("titre", $spip_lang);
 	$from = 'spip_mots';
