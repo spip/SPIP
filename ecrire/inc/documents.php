@@ -307,7 +307,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	global $spip_lang_right;
 
 	charger_generer_url();
-	$res = spip_query("SELECT docs.*,l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
+	$res = spip_query("SELECT docs.id_document, docs.id_vignette,docs.extension,docs.titre,docs.descriptif,docs.fichier,docs.largeur,docs.hauteur,docs.taille,docs.mode,docs.distant, docs.date, l.vu FROM spip_documents AS docs JOIN spip_documents_".$type."s AS l ON l.id_document=docs.id_document WHERE l.id_$type="._q($id)." AND l.id_document="._q($id_document));
 	if (!$document = spip_abstract_fetch($res)) return "";
 	//$document = spip_abstract_fetch(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
@@ -326,7 +326,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	// le doc est-il appele dans le texte ?
 	$doublon = est_inclus($id_document);
 
-	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
+	$cadre = strlen($titre) ? $titre : basename($fichier);
 
 	$result = spip_query("SELECT titre,inclus FROM spip_types_documents WHERE extension="._q($extension));
 	if ($letype = spip_abstract_fetch($result)) {
@@ -343,7 +343,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
 
-		if ($document['distant'] == 'oui') {
+		if ($distant == 'oui') {
 			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
 			// Signaler les documents distants par une icone de trombone

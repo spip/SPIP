@@ -163,7 +163,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result_auteurs = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
+	$result_auteurs = spip_query("SELECT auteurs.id_auteur,auteurs.nom,auteurs.bio,auteurs.email,auteurs.nom_site,auteurs.url_site,auteurs.login,auteurs.pass,auteurs.low_sec,auteurs.statut,auteurs.maj,auteurs.pgp,auteurs.htpass,auteurs.en_ligne,auteurs.imessage,auteurs.messagerie,auteurs.alea_actuel,auteurs.alea_futur,auteurs.prefs,auteurs.cookie_oubli,auteurs.source,auteurs.lang,auteurs.url_propre,auteurs.extra FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur");
 
 	$total_dest = spip_num_rows($result_auteurs);
 
