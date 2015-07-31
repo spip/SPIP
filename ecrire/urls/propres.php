@@ -44,6 +44,9 @@ c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
+// option pour tout passer en minuscules
+define ('_url_arbo_minuscules',0);
+
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
 // indiquer la table ou les chercher (articles, auteurs etc),
 // et elles etaient retirees par les preg_match dans la fonction ci-dessous.
@@ -83,6 +86,8 @@ function creer_chaine_url($x) {
 	@define('_URLS_PROPRES_MIN', 3);
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($objet['titre'])));
 	$url = translitteration(corriger_caracteres($titre));
+	if (_url_arbo_minuscules)
+		$url = strtolower($url);
 
 	// on va convertir tous les caracteres de ponctuation et espaces
 	// a l'exception de l'underscore (_), car on veut le conserver dans l'url
