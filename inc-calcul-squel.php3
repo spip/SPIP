@@ -36,10 +36,21 @@ function calculer_boucle($id_boucle, &$boucles)
 	    return ("$corps\n\treturn  $return;");
 	}
 
-	$lang_select = (!$GLOBALS['forcer_lang'] && ($boucle->lang_select != "non")) &&
-		($type_boucle == 'articles' OR $type_boucle == 'rubriques'
-		OR $type_boucle == 'hierarchie' OR $type_boucle == 'breves');
-	
+	// La boucle doit-elle selectionner la langue ?
+	// 1. par defaut 
+	$lang_select = (
+		$type_boucle == 'articles' OR $type_boucle == 'rubriques'
+		OR $type_boucle == 'hierarchie' OR $type_boucle == 'breves'
+	);
+	// 2. si forcer_lang, le defaut est non
+	if ($GLOBALS['forcer_lang']) $lang_select = false;
+	// 3. demande explicite
+	if ($boucle->lang_select == 'oui') $lang_select = true;
+	if ($boucle->lang_select == 'non') $lang_select = false;
+	// 4. penser a demander le champ lang
+	if ($lang_select)
+		$boucle->select[] = (($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '') .'lang';
+
 	$flag_h = ($type_boucle == 'hierarchie');
 	$flag_parties = ($boucle->partie AND $boucle->total_parties);
 	$flag_cpt = $flag_parties || # pas '$compteur' a` cause du cas 0
