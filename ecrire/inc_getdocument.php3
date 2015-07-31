@@ -12,10 +12,12 @@
 
 
 //
-// Fonctions de spip_image.php3
+// Fonctions de spip_image
 
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_ecrire('inc_minipres');
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
@@ -89,8 +91,8 @@ function deplacer_fichier_upload($source, $dest) {
 		if ($f) {
 			fclose ($f);
 		} else {
-			redirige_par_entete("spip_test_dirs.php3?test_dir=".
-				dirname($dest));
+		  redirige_par_entete(http_php_scriptnq("spip_test_dirs",
+							"test_dir=". dirname($dest)));
 		}
 		@unlink($dest);
 	}
@@ -127,7 +129,6 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-	include_ecrire('inc_minipres');
 	install_debut_html($msg); echo '<form action="' ,
 	  _DIR_RESTREINT_ABS,
 	  urldecode($GLOBALS['redirect']),
@@ -158,7 +159,7 @@ function accepte_fichier_upload ($f) {
 	}
 }
 
-# callback pour le deballage dans spip_image.php3
+# callback pour le deballage dans spip_image
 # http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
 function callback_deballe_fichier($p_event, &$p_header) {
 	if (accepte_fichier_upload($p_header['filename'])) {
@@ -272,7 +273,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
 			$nom_envoye .= '.zip'; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
 			$fichier = deplacer_fichier_upload($source, $tmp);
-			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+			include_ecrire('pclzip.lib');
 			$source = _DIR_IMG.'tmp/archive.zip';
 			$archive = new PclZip($source);
 			$v_list = $archive->create($tmp,
@@ -405,7 +406,6 @@ function afficher_compactes($fichiers, $args, $action) {
 // presenter une interface pour choisir si fichier joint ou decompacte
 // passer ca en squelette un de ces jours.
 
-	include_ecrire ("inc_minipres");
 	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
 		_T('upload_fichier_zip_texte'),
 		"</p>",
@@ -453,7 +453,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 				);
 			if (!$zip) die ('Erreur upload zip'); # pathologique
 			// Est-ce qu'on sait le lire ?
-			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+			include_ecrire('pclzip.lib');
 			$archive = new PclZip($zip);
 			if ($archive) {
 			  // demander confirmation
@@ -465,7 +465,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 					 'chemin' => $zip,
 					 'doc' => $mode,
 					 'type' => $type),
-				   "spip_image.php3?id_article=$id");
+					     http_php_scriptnq("spip_image","id_article=$id"));
 			  // a tout de suite en joindre5 ou joindre6
 			  exit;
 			}
