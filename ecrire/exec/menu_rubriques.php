@@ -77,7 +77,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 	static $zmax = 6;
 
 	$nav = "<a href='"
-	. generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique, false, true)
+	. generer_url_entite($id_rubrique,'rubrique')
 	. "'>"
 	. supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique))
 	. "</a>\n";

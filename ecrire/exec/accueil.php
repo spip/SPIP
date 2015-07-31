@@ -48,7 +48,7 @@ function personnel_accueil($coockcookie)
 			$res[$k] = "<a title='" .
 			  typo($r['descriptif']) .
 			  "' href='" .
-			  generer_url_ecrire('naviguer', "id_rubrique=" .$r['id_rubrique']) . "'>" .
+			  generer_url_entite($r['id_rubrique'],'rubrique') . "'>" .
 			  typo($r['titre']) .
 			  '</a>';
 		}

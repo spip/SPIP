@@ -33,7 +33,7 @@ jQuery(function(){
 		titre=titre.replace(/^\\s+/,'');
 		// Ajouter la rubrique selectionnee au formulaire,
 		// sous la forme d'un input name='rubriques[]'
-		var el = '<input type=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=naviguer&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
+		var el = '<input type=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
 		if (!jQuery('#liste_rubriques_restreintes input[value='+id_parent+']').length) {
 			jQuery('#liste_rubriques_restreintes').append('<li>'+el+'</li>');
 		}
