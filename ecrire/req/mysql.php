@@ -158,9 +158,9 @@ function spip_mysql_select($select, $from, $where='',
 	$query = 'SELECT ' .
 		(!is_array($select) ? $select : join(", ", $select)) .
 		(!$from ? '' :"\nFROM $from")
-		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
+		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_mysql_where', $where))))))
 		. (!$groupby ? '' : ("\nGROUP BY " . (is_array($groupby) ? join(',',$groupby) : $groupby)))
-		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
+		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_mysql_where', $having)))))
 		. ($orderby ? ("\nORDER BY " . spip_mysql_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
@@ -192,8 +192,8 @@ function spip_mysql_order($orderby)
 }
 
 
-// http://doc.spip.org/@calculer_where
-function calculer_where($v)
+// http://doc.spip.org/@calculer_mysql_where
+function calculer_mysql_where($v)
 {
 	if (!is_array($v))
 	  return $v ;
@@ -202,11 +202,11 @@ function calculer_where($v)
 	if (!($n=count($v)))
 		return $op;
 	else {
-		$arg = calculer_where(array_shift($v));
+		$arg = calculer_mysql_where(array_shift($v));
 		if ($n==1) {
 			  return "$op($arg)";
 		} else {
-			$arg2 = calculer_where(array_shift($v));
+			$arg2 = calculer_mysql_where(array_shift($v));
 			if ($n==2) {
 				return "($arg $op $arg2)";
 			} else return "($arg $op ($arg2) : $v[0])";
