@@ -960,7 +960,7 @@ calendrier_args_date($annee_today, $mois_today, $jour_today) .
 			  _T("ecrire:info_aujourdhui"))
 	  . "&nbsp;"
 	  . (!$args_pred ? '' :
-	     http_href($script . "type=$type&echelle=$echelle&partie_cal=$partie_cal&args_pred$ancre",
+	     http_href($script . "type=$type&echelle=$echelle&partie_cal=$partie_cal&$args_pred$ancre",
 		       http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='calendrier-png'"),
 		       _T('precedent')))
 	  . (!$args_suiv ? '' :
