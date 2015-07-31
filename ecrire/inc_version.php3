@@ -698,7 +698,7 @@ class Link {
 		if ($anchor) $anchor = '#'.$anchor;
 		$form = "<form method='$method' action='".$this->file.$anchor."'";
 		if ($enctype) $form .= " enctype='$enctype'";
-		$form .= ">\n";
+		$form .= " style='border: 0px; margin: 0px;'>\n";
 		$vars = $this->getAllVars();
 		if (is_array($vars)) {
 			reset($vars);
