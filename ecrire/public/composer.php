@@ -399,8 +399,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$extension = $ex['extension'];
 	$mime = $ex['mime_type'];
 	if (!$extension) $extension = 'txt';
-
-	if ($logo AND @file_exists($logo)) {
+	if (($logo) AND (@file_exists($logo) OR (strpos($logo,'?')!==FALSE))) {
 		if ($x OR $y)
 			$logo = reduire_image($logo, $x, $y);
 		else {
