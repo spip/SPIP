@@ -850,7 +850,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-			$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") .
+			$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") .
 				"'$descriptif$dir_lang style=\"display:block;\">";
 
 			if ($voir_logo)	$s .= baliser_logo("art", $id_article, 26, 20);
@@ -1047,20 +1047,20 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			while (list(,$k) = each($langues_site)) {
 				if ($langues_art[$k]) {
 					if ($langues_art[$k] == $id_trad) {
-					  $span_lang = "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k] . "&id_rubrique=$id_rubrique") . "'><span class='lang_base'>$k</a></a>";
+					  $span_lang = "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "'><span class='lang_base'>$k</a></a>";
 						$l .= $span_lang;
 					} else {
 						$date = $dates_art[$k];
 						if ($date < $date_ref) 
-						  $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k] . "&id_rubrique=$id_rubrique") . "' class='claire'>$k</a>";
-						else $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k] . "&id_rubrique=$id_rubrique") . "' class='foncee'>$k</a>";
+						  $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='claire'>$k</a>";
+						else $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='foncee'>$k</a>";
 					}			
 				}
 #				else $l.= "<span class='creer'>$k</span>";
 			}
 			
 			if (!$span_lang)
-				$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "'><span class='lang_base'>$lang</a></a>";
+				$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'><span class='lang_base'>$lang</a></a>";
 
 			
 			$vals[] = "<div style='text-align: center;'>$span_lang</div>";
@@ -1072,7 +1072,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-			$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "'$descriptif$dir_lang style=\"display:block;\">";
+			$s .= "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'$descriptif$dir_lang style=\"display:block;\">";
 			
 			
 			if ($id_article == $id_trad) $titre = "<b>$titre</b>";
@@ -2487,7 +2487,7 @@ if (true /*$gadgets*/) {
 				$id_article = $row['id_article'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "'>$titre</a>\n";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>\n";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -2505,7 +2505,7 @@ if (true /*$gadgets*/) {
 				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
 	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "'>$titre</a>";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$id_article") . "'>$titre</a>";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -2940,7 +2940,7 @@ function debut_droite($rubrique="") {
 					}
 					
 					echo "<div style='padding: 3px; background-color: $couleur;'>";
-					echo "<div class='verdana1'><b><a href='" . generer_url_ecrire("articles","id_article=$ze_article&id_rubrique=$id_rubrique") . "'>$ze_titre</a></div></b>";
+					echo "<div class='verdana1'><b><a href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a></div></b>";
 					
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
