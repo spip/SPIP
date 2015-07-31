@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Nh&oacute;m quan tr&#7885;ng</b>: &#273;&#7873; ngh&#7883; b&#7841;n n&ecirc;n ch&#7885;n m&#7897;t t&#7915; then ch&#7889;t trong nh&oacute;m n&agrave;y.',
 'avis_deplacement_rubrique' => 'L&#431;U &Yacute;! &#272;&#7873; m&#7909;c n&agrave;y ch&#7913;a @contient_breves@ c&aacute;c tin ng&#7855;n @scb@: n&#7871;u b&#7841;n d&#7901;i n&oacute; &#273;i, xin &#273;&aacute;nh d&#7845;u v&agrave;o &ocirc; n&agrave;y &#273;&#7875; x&aacute;c nh&#7853;n.',
 'avis_destinataire_obligatoire' => 'Ph&#7843;i ch&#7885;n m&#7897;t ng&#432;&#7901;i nh&#7853;n tr&#432;&#7899;c khi g&#7917;i th&#432; t&iacute;n n&agrave;y &#273;i.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'C&oacute; L&#7895;i-kh&ocirc;ng n&#7889;i v&#7899;i SQL',
 'avis_erreur_version_archive' => '<b>B&aacute;o &#273;&#7897;ng! H&#7891; s&#417; @archive@ thu&#7897;c d&#7841;ng SPIP kh&aacute;c v&#7899;i d&#7841;ng m&agrave; b&#7841;n c&oacute;.</b>
  B&#7841;n s&#7869; g&#7863;p r&#7845;t nhi&#7873;u r&#7855;c r&#7889;i: c&oacute; th&#7875; database b&#7883; ti&ecirc;u h&#7911;y, website b&#7883; tr&#7855;c tr&#7903;, v.v...

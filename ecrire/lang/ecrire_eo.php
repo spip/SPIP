@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Ampleksa grupo&nbsp;:</b> Estas tre konsilate elekti &#349;losilvorton el tiu grupo.',
 'avis_deplacement_rubrique' => 'Atentu! Tiu &#265;i rubriko enhavas @contient_breves@ fulm-informon @scb@&nbsp;: se vi translokas &#285;in, bonvolu no&#265;i tiun por-konfirman no&#265;ujon. ',
 'avis_destinataire_obligatoire' => 'Vi devas indiki adresaton anta&#365; ol sendi &#265;i tiun mesa&#285;on.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL-konekta eraro ',
 'avis_erreur_version_archive' => '<b>Atentu! La dosiero @archive@ kongruas kun
     alia versio de SPIP ol tiu, kiun vi instalis.</b>

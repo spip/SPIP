@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => 'Talde garrantzitsua: talde honetatik gako-hitz bat aukeratzea aholkatzen da.',
 'avis_deplacement_rubrique' => 'ADI EGON!. Atal honek (@contient_breves@)breve@scb@. Mugitzen baduzu, eragin ezazu baieztapen-kutxatila hau.',
 'avis_destinataire_obligatoire' => 'Mezu hau igorri aurretik jasotzailea zehaztu behar duzu.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL lokarri-errorea',
 'avis_erreur_version_archive' => '<b>KONTUZ !
 

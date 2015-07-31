@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Kelompok penting:</b> Sangat dianjurkan untuk memilih sebuah kata kunci untuk kelompok ini.',
 'avis_deplacement_rubrique' => 'Peringatan! Bagian ini mengandung @contient_breves@ berita@scb@: jika anda memindahkannya, silakan cek kotak ini untuk konfirmasi.',
 'avis_destinataire_obligatoire' => 'Anda harus memilih satu orang penerima sebelum mengirimkan pesan ini.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Kesalahan koneksi SQL',
 'avis_erreur_version_archive' => '<b>Peringatan! Berkas @archive@ berkaitan dengan
     sebuah versi SPIP yang lain dengan yang anda

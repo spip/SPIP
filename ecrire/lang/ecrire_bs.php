@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Vazna grupa:</b> savjetuje se da izaberete kljucnu rijec za ovu grupu.',
 'avis_deplacement_rubrique' => 'Paznja! Ova rubrika sadrzi @contient_breves@ kratke poruke: Ako je zelite premjestiti, oznacite  ovo polje kao potvrdu.',
 'avis_destinataire_obligatoire' => 'Trebate naznaciti primaoca prije nego sto posaljete ovu poruku.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Greska u SQL konekciji', # MODIF
 'avis_erreur_version_archive' => '<b>Paznja! Dokument @archive@  odgovara drugoj verziji SPIP od one koju ste instalirali.</b>  Riskirate velike poteskoce: opasnost od unistenja vase baze podataka, razne disfunkcije stranice, itd. Ne potvrdjujte ovaj zahtjev za importovanje! Za vise informacija pogledajte <a  href="@spipnet@"> SPIP dokumentaciju</a>.', # MODIF
 'avis_espace_interdit' => '<b>Zabranjen prostor</b><p>SPIP je  vec instaliran.</p>', # MODIF

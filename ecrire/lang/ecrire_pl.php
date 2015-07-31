@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wa&#380;na grupa:</b> Zaleca si&#281; wyb&oacute;r s&#322;owa kluczowego dla tej grupy.',
 'avis_deplacement_rubrique' => 'Uwaga! Ten dzia&#322; zawiera @contient_breves@ news@scb@: je&#347;li chcesz go przenie&#347;&#263;, prosz&#281; zaznacz to okienko.',
 'avis_destinataire_obligatoire' => 'Aby wys&#322;a&#263; t&#281; wiadomo&#347;&#263;, musisz wybra&#263; odbiorc&#281;.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'B&#322;&#261;d po&#322;&#261;czenia z SQL', # MODIF
 'avis_erreur_version_archive' => '<b>Ostrze&#380;enie! Plik @archive@ odpowiada
     wersji SPIP innej, ni&#380;

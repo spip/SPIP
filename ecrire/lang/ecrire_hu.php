@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Fontos csoport&nbsp;:</b> Er&#337;sen tan&aacute;csoljuk, hogy kulcs sz&oacute;t v&aacute;lasszon abban a csoportban.',
 'avis_deplacement_rubrique' => 'Vigy&aacute;zat&nbsp;! Ez a rovat @contient_breves@ h&iacute;rt tartalmaz&nbsp;: ha &aacute;t akarja helyezni, ezt a meger&#337;s&iacute;t&eacute;si jel&ouml;l&#337;kock&aacute;t kell jel&ouml;lni.',
 'avis_destinataire_obligatoire' => 'Egy c&iacute;mzettet kell jel&ouml;lni miel&#337;bb elk&uuml;ldi ezt az &uuml;zenetet.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL-es csatlakoz&aacute;si hiba', # MODIF
 'avis_erreur_version_archive' => '<b>Vigy&aacute;zat! A @archive@ f&aacute;jl az itt telep&iacute;tett SPIP
     egy m&aacute;sik verzi&oacute;nak felel meg

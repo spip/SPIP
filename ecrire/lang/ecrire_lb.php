@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wichtege Grupp:</b> &euml;t ass wiirklech ugeroden e Schl&euml;sselwuert aus d&euml;sem Grupp ze wielen.',
 'avis_deplacement_rubrique' => 'Opgepasst! D&euml;s Rubrik huet @contient_breves@ br&egrave;ve@scb@: wann der se r&eacute;ckelt, klickt d&euml;st Konfirmatiouns-Feld un.',
 'avis_destinataire_obligatoire' => 'Dir musst d&euml;n Empf&auml;nger uginn ier der d&euml;sen Message fortsch&eacute;ckt.',
-'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;me ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
 'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.
 Dir kommt an grouss Schwieregkeeten:
