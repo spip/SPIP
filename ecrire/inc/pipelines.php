@@ -117,7 +117,9 @@ function f_recuperer_fond($flux) {
 function f_queue(&$texte){
 
 	// eviter une inclusion si rien a faire
-	if (queue_sleep_time_to_next_job() OR defined('_DEBUG_BLOCK_QUEUE')){
+	if (_request('action')=='cron'
+		OR queue_sleep_time_to_next_job()
+	  OR defined('_DEBUG_BLOCK_QUEUE')){
 		return $texte;
 	}
 
