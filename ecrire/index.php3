@@ -37,8 +37,6 @@ if ($spip_display != 4) {
 		icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
 	}
 
-
-
 	$nom_site_spip = propre(lire_meta("nom_site"));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 	
@@ -59,36 +57,35 @@ if ($spip_display != 4) {
 		}
 	}
 	echo "<div class='verdana1'>";
-	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_art_publie = $result['cnt'];
-	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='prop'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_art_prop = $result['cnt'];
-	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='prepa'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_art_redac= $result['cnt'];
-	
-	
-	if ($nb_art_redac OR $nb_art_prop OR $nb_art_publie) 
-	{
+
+  $query = "SELECT count(*) AS cnt, statut FROM spip_articles GROUP BY statut";
+  $res = spip_query($query);
+  
+  while($row = spip_fetch_array($res)) {
+    $var  = 'nb_art_'.$row['statut'];
+    $$var = $row['cnt']; 
+  }
+  
+	if ($nb_art_prepa OR $nb_art_prop OR $nb_art_publie) {
+
 		echo afficher_plus("articles_page.php3")."<b>"._T('info_articles')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if ($nb_art_redac) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_redac;
+		if ($nb_art_prepa) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_prepa;
 		if ($nb_art_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_art_prop;
 		if ($nb_art_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_art_publie."</b>";
 		echo "</ul>";
+
 	}
 
-	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_bre_publie = $result['cnt'];
-	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='prop'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_bre_prop = $result['cnt'];
+	$query = "SELECT count(*) AS cnt, statut FROM spip_breves GROUP BY statut";
+	$res = spip_query($query);
 
-	if ($nb_bre_prop OR $nb_bre_publie) 
-	{
+	while($row = spip_fetch_array($res)) {
+		$var  = 'nb_bre_'.$row['statut'];
+		$$var = $row['cnt']; 
+	}
+
+	if ($nb_bre_prop OR $nb_bre_publie) {
 		echo afficher_plus("breves.php3")."<b>"._T('info_breves_02')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_bre_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_bre_prop;
@@ -108,32 +105,25 @@ if ($spip_display != 4) {
 		echo "</ul>";
 	}
 
-	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='0minirezo'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_admin = $result['cnt'];
+	$query = "SELECT count(*) AS cnt, statut FROM spip_auteurs GROUP BY statut";
+	$res = spip_query($query);
 
-	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='1comite'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_redac = $result['cnt'];
+	while($row = spip_fetch_array($res)) {
+		$var  = 'nb_aut_'.$row['statut'];
+		$$var = $row['cnt']; 
+	}
 
-	$query = "SELECT count(*) AS cnt FROM spip_auteurs where statut='6forum'";
-	$result = spip_fetch_array(spip_query($query));
-	$nb_abonn = $result['cnt'];
-
-	if ($nb_admin OR $nb_redac OR $nb_abonn) 
-	{
+	if ($nb_aut_0minirezo OR $nb_aut_1comite OR $nb_aut_6forum) {
 		echo afficher_plus("auteurs.php3")."<b>"._T('icone_auteurs')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		if ($nb_admin) echo "<li>"._T("info_administrateurs").": ".$nb_admin;
-		if ($nb_redac) echo "<li>"._T("info_redacteurs").": ".$nb_redac;
-		if ($nb_abonn) echo "<li>"._T("info_visiteurs").": ".$nb_abonn;
+		if ($nb_aut_0minirezo) echo "<li>"._T("info_administrateurs").": ".$nb_aut_0minirezo;
+		if ($nb_aut_1comite) echo "<li>"._T("info_redacteurs").": ".$nb_aut_1comite;
+		if ($nb_aut_6forum) echo "<li>"._T("info_visiteurs").": ".$nb_aut_6forum;
 		echo "</ul>";
 	}
 
-
 	echo "</div>";
 
-	
 	echo fin_cadre_relief();
 
 
