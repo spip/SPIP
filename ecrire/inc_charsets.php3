@@ -13,18 +13,18 @@ define("_ECRIRE_INC_CHARSETS", "1");
 function load_charset ($charset = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
-
 	if (is_array($GLOBALS['CHARSET'][$charset]))
-		return $GLOBALS['CHARSET'][$charset];
+		return $charset;
 
 	switch($charset) {
 		case 'utf-8':
-			return $GLOBALS['CHARSET'][$charset] = array();
+			$GLOBALS['CHARSET'][$charset] = array();
+			return $charset;
 
 		// iso latin 1
 		case 'iso-8859-1':
 		case '':
-			return $GLOBALS['CHARSET'][$charset] = array (
+			$GLOBALS['CHARSET'][$charset] = array (
 			128=>128, 129=>129, 130=>130, 131=>131, 132=>132, 133=>133, 134=>134, 135=>135,
 			136=>136, 137=>137, 138=>138, 139=>139, 140=>140, 141=>141, 142=>142, 143=>143,
 			144=>144, 145=>145, 146=>146, 147=>147, 148=>148, 149=>149, 150=>150, 151=>151,
@@ -43,11 +43,13 @@ function load_charset ($charset = 'AUTO') {
 			248=>248, 249=>249, 250=>250, 251=>251, 252=>252, 253=>253, 254=>254, 255=>255,
 			256=>256
 			);
+			return $charset;
 
 
 		// iso latin 15 - Gaetan Ryckeboer <gryckeboer@virtual-net.fr>
 		case 'iso-8859-15':
-			$trans = load_charset('iso-8859-1');
+			load_charset('iso-8859-1');
+			$trans = $GLOBALS['CHARSET']['iso-8859-1'];
 			$trans[164]=8364;
 			$trans[166]=352;
 			$trans[168]=353;
@@ -56,13 +58,14 @@ function load_charset ($charset = 'AUTO') {
 			$trans[188]=338;
 			$trans[189]=339;
 			$trans[190]=376;
-			return $GLOBALS['CHARSET'][$charset] = $trans;
+			$GLOBALS['CHARSET'][$charset] = $trans;
+			return $charset;
 
 
 		// cyrillic - ref. http://czyborra.com/charsets/cyrillic.html
 		case 'windows-1251':
 		case 'CP1251':
-			return $GLOBALS['CHARSET'][$charset] = array (
+			$GLOBALS['CHARSET'][$charset] = array (
 			0x80=>0x0402, 0x81=>0x0403, 0x82=>0x201A, 0x83=>0x0453, 0x84=>0x201E,
 			0x85=>0x2026, 0x86=>0x2020, 0x87=>0x2021, 0x88=>0x20AC, 0x89=>0x2030,
 			0x8A=>0x0409, 0x8B=>0x2039, 0x8C=>0x040A, 0x8D=>0x040C, 0x8E=>0x040B,
@@ -89,14 +92,15 @@ function load_charset ($charset = 'AUTO') {
 			0xF4=>0x0444, 0xF5=>0x0445, 0xF6=>0x0446, 0xF7=>0x0447, 0xF8=>0x0448,
 			0xF9=>0x0449, 0xFA=>0x044A, 0xFB=>0x044B, 0xFC=>0x044C, 0xFD=>0x044D,
 			0xFE=>0x044E, 0xFF=>0x044F); // fin windows-1251
+			return $charset;
 
 
 		// ------------------------------------------------------------------
 
 		// cas particulier pour les entites html (a completer eventuellement)
 		case 'html':
-			return $GLOBALS['CHARSET'][$charset] = array (
-			'cent'=>'&#162', 'pound'=>'&#163;', 'curren'=>'&#164;', 'yen'=>'&#165;', 'brvbar'=>'&#166;',
+			$GLOBALS['CHARSET'][$charset] = array (
+			'cent'=>'&#162;', 'pound'=>'&#163;', 'curren'=>'&#164;', 'yen'=>'&#165;', 'brvbar'=>'&#166;',
 			'sect'=>'&#167;', 'uml'=>'&#168;', 'ordf'=>'&#170;', 'laquo'=>'&#171;', 'not'=>'&#172;',
 			'shy'=>'&#173;', 'macr'=>'&#175;', 'deg'=>'&#176;', 'plusmn'=>'&#177;', 'sup2'=>'&#178;',
 			'sup3'=>'&#179;', 'acute'=>'&#180;', 'micro'=>'&#181;', 'para'=>'&#182;', 'middot'=>'&#183;',
@@ -118,10 +122,11 @@ function load_charset ($charset = 'AUTO') {
 			'frac12' => "1/2", 'frac34' => "3/4", 'amp' => '&', 'quot' => '"',
 			'apos' => "'", 'lt' => '<', 'gt' => '>'
 			);
+			return $charset;
 
 		// cas particulier pour la translitteration
 		case 'translit':
-			return $GLOBALS['CHARSET'][$charset] = array (
+			$GLOBALS['CHARSET'][$charset] = array (
 			// latin
 			128=>'euro', 131=>'f', 140=>'OE', 153=>'TM', 156=>'oe', 159=>'Y', 160=>' ',
 			161=>'Á', 162=>'c', 163=>'L', 164=>'O', 165=>'yen',166=>'|',
@@ -166,51 +171,57 @@ function load_charset ($charset = 'AUTO') {
 			1096=>'sh', 1097=>'sch',  1098=>'"', 1099=>'y', 1100=>'\'', 1101=>'`e',
 			1102=>'yu', 1103=>'ya'
 			);
+			return $charset;
 
 		default:
 			spip_log("erreur charset $charset non supporte");
-			return $GLOBALS['CHARSET'][$charset] = array();
+			$GLOBALS['CHARSET'][$charset] = array();
+			return $charset;
 
 	}
 }
 
 
 // transformer les &eacute; en unicode
-function filtrer_entites($texte) {
-		$trans = load_charset('html');
-		while (eregi('&([a-z][a-z0-9]+);', $texte, $regs) AND !$vu[$i = $regs[1]]) {
-			$vu[$i] = true;
-			if ($s = $trans[$i])
-				$texte = ereg_replace($regs[0], $s, $texte);
-		}
+function html2unicode($texte) {
+	$trans = load_charset('html');
 
-		// remettre le tout dans le charset cible
-		$texte = unicode2charset($texte);
-		return $texte;
+	while ($a = strpos(' '.$texte, '&')) {
+		$traduit .= substr($texte,0,$a-1);
+		$texte = substr($texte,$a-1);
+		if (eregi('^&([a-z][a-z0-9]+);',$texte,$match) AND !$vu[$i = $match[1]]) {
+			if ($s = $GLOBALS['CHARSET'][$trans][$i])
+				$texte = ereg_replace($match[0], "&#$s;", $texte); 
+		}
+		// avancer d'un cran
+		$traduit .= $texte[0];
+		$texte = substr($texte,1);
+	}
+	return $traduit.$texte;
 }
 
 
 // transforme une chaine en entites unicode &#129;
-function entites_unicode($chaine, $charset='AUTO', $forcer = false) {
+function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
 
 	switch($charset) {
 		case 'utf-8':
-			return utf_8_to_unicode($chaine);
+			return utf_8_to_unicode($texte);
 			break;
 
 		case 'iso-8859-1':
 		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
 		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
-			if (!$forcer) return $chaine;
+			if (!$forcer) return $texte;
 
 		default:
 			$trans = load_charset($charset);
 			$s = '';
-			$len = strlen($chaine);
-			for ($p = 0; $p <= $len; $c = substr($chaine,$p++,1)) {
-				if ((($i=ord($c))>127) and ($j=$trans[$i]))
+			$len = strlen($texte);
+			for ($p = 0; $p <= $len; $c = substr($texte,$p++,1)) {
+			  if ((($i=ord($c))>127) and ($j=$GLOBALS['CHARSET'][$trans][$i]))
 					$s .= "&#$j;";
 				else
 					$s .= $c;
@@ -220,53 +231,66 @@ function entites_unicode($chaine, $charset='AUTO', $forcer = false) {
 }
 
 // transforme les entites unicode &#129; dans le charset courant
-function unicode2charset($chaine, $charset='AUTO') {
+function unicode2charset($texte, $charset='AUTO') {
+	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
 
 	switch($charset) {
 
 		case 'utf-8':
-			return unicode_to_utf_8($chaine);
+			return unicode_to_utf_8($texte);
 			break;
 		
 		default:
-			$trans = load_charset($charset);
-			while (list($chr,$uni) = each($trans))	// array_flip
-				$ttrans[$uni] = $chr;
-			while (ereg('&#0*([0-9]+);', $chaine, $regs) AND !$vu[$i = intval($regs[1])]) {
-				$vu[$i] = true;
-				if ($s = $ttrans[$i])
-					$chaine = ereg_replace($regs[0], $s, $chaine);
+			$charset = load_charset($charset);
+
+			// array_flip
+			if (!is_array($CHARSET_REVERSE[$charset])) {
+				$trans = $GLOBALS['CHARSET'][$charset];
+				while (list($chr,$uni) = each($trans))
+					$CHARSET_REVERSE[$charset][$uni] = $chr;
 			}
-			return $chaine;
+
+			while ($a = strpos(' '.$texte, '&')) {
+				$traduit .= substr($texte,0,$a-1);
+				$texte = substr($texte,$a-1);
+				if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
+					$texte = ereg_replace($match[0], chr($s), $texte); 
+				// avancer d'un cran
+				$traduit .= $texte[0];
+				$texte = substr($texte,1);
+			}
+			return $traduit.$texte;
 	}
 }
 
 
 // UTF-8
 function utf_8_to_unicode($source) {
-/*
- * Ce code provient de php.net, son auteur est Ronen. Adapte pour compatibilite php3
- */
-	// array used to figure what number to decrement from character order value
-	// according to number of characters used to map unicode to ascii by utf-8
-	$decrement[4] = 240;
-	$decrement[3] = 224;
-	$decrement[2] = 192;
-	$decrement[1] = 0;
+	static $decrement;
+	static $shift;
 
-	// the number of bits to shift each charNum by
-	$shift[1][0] = 0;
-	$shift[2][0] = 6;
-	$shift[2][1] = 0;
-	$shift[3][0] = 12;
-	$shift[3][1] = 6;
-	$shift[3][2] = 0;
-	$shift[4][0] = 18;
-	$shift[4][1] = 12;
-	$shift[4][2] = 6;
-	$shift[4][3] = 0;
+	// Cf. php.net, par Ronen. Adapte pour compatibilite php3
+	if (!is_array($decrement)) {
+		// array used to figure what number to decrement from character order value
+		// according to number of characters used to map unicode to ascii by utf-8
+		$decrement[4] = 240;
+		$decrement[3] = 224;
+		$decrement[2] = 192;
+		$decrement[1] = 0;
+		// the number of bits to shift each charNum by
+		$shift[1][0] = 0;
+		$shift[2][0] = 6;
+		$shift[2][1] = 0;
+		$shift[3][0] = 12;
+		$shift[3][1] = 6;
+		$shift[3][2] = 0;
+		$shift[4][0] = 18;
+		$shift[4][1] = 12;
+		$shift[4][2] = 6;
+		$shift[4][3] = 0;
+	}
 
 	$pos = 0;
 	$len = strlen ($source);
@@ -321,8 +345,8 @@ function utf_8_to_unicode($source) {
 }
 
 
-function unicode_to_utf_8($chaine) {
-	while (ereg('&#0*([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
+function unicode_to_utf_8($texte) {
+	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$regs[1]]) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		if($num<128) $s = chr($num);	// Ce bloc provient de php.net, auteur Ronen
@@ -330,9 +354,9 @@ function unicode_to_utf_8($chaine) {
 		else if($num<32768) $s = chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
 		else if($num<2097152) $s = chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
 		else $s = '';
-		$chaine = ereg_replace($regs[0], $s, $chaine);
+		$texte = ereg_replace($regs[0], $s, $texte);
 	}
-	return $chaine;
+	return $texte;
 }
 
 
@@ -343,14 +367,14 @@ function translitteration ($texte, $charset='AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
-	// 1. passer en unicode
-	$texte = entites_unicode(filtrer_entites($texte), $charset, true);
+	// 1. passer le charset et les eacute en unicode
+	$texte = html2unicode(charset2unicode($texte, $charset, true));
 
 	// 2. translitterer
 	$trans = load_charset('translit');
 	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$j = $regs[0]]) {
 		$vu[$j] = true;
-		if ($s = $trans[$regs[1]])
+		if ($s = $GLOBALS['CHARSET'][$trans][$regs[1]])
 			$texte = ereg_replace($j, $s, $texte);
 		// on va tenter de trouver la translitteration ailleurs
 		// - dans iconv par exemple
@@ -364,5 +388,8 @@ function translitteration ($texte, $charset='AUTO') {
 	}
 	return $texte;
 }
+
+// initialisation securite
+$GLOBALS['CHARSET'] = Array();
 
 ?>
