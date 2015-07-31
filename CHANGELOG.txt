@@ -1,5 +1,6 @@
 2.0.6 -> 2.0.7 (13 avril 2009)
 
+Revision: 13887 Le datage des urls reecrites echouait pour cause de requette eronnee. Le suspens continue : y aura-t-il une version stable 2.0.x avec des urls reecrites non bugguees ?
 Revision: 13882 patch de vincent ramos pour #1703 + report des trucs modernes de inc/rechercher dans la branche 2.0
 Revision: 13881 pas de . en dehors de celui separant l'extension, sinon il est possible d'injecter du php dans un toto.php.txt, qu'apache peut vouloir traiter comme un .php normal (attaque dite 'de vlad' )
 Revision: 13880 session_set() lorsqu'on renseigne son email (suite de [13878])
