@@ -1,9 +1,9 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Este e un ficheiro de linguaxe para SPIP (popular unoficial galician)
-// se non estas dacordo coa escrita, pois nos tampouco. Reclamacions a
-// joshe@@hacklab.casaencantada.org e a cristasol@@hacklab.casaencantada.org
+// Est&eacute; &eacute; un ficheiro de linguaxe para SPIP (popular unoficial galician)
+// se non est&aacute;s dacordo coa escrita, pois n&oacute;s tampouco. Reclamaci&oacute;ns a
+// joshe@hacklab.casaencantada.org e a cristasol@hacklab.casaencantada.org
 
 $GLOBALS['i18n_gl'] = array(
 
@@ -444,7 +444,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_adresse_non_indiquee' => 'Non escribiches un enderezo a probar!',
 'info_adresse_url' => 'Enderezo (URL) do lugar p&uacute;blico',
 'info_afficher_visites' => 'Amosar as visitas para:',
-'info_affichier_visites_articles_plus_visites' => 'Amosar as visitas para <b>os artigos m&aacute;is visitados dende o primeiro:</b>',
+'info_affichier_visites_articles_plus_visites' => 'Amosar as visitas para <b>os artigos m&aacute;is visitados dende o principio:</b>',
 'info_aide' => 'AXUDA:',
 'info_aide_en_ligne' => 'Axuda en li&ntilde;a do SPIP',
 'info_ajout_image' => 'Cando engades imaxes coma documentos adxuntos a un artigo,
@@ -522,7 +522,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_contenu_articles' => 'Contido dos artigos',
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
-'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.uzine.net/spip-gl\'>http://www.uzine.net/spip-gl</a>.',
+'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.uzine.net/spip\'>http://www.uzine.net/spip</a>.',
 'info_cours_edition' => 'Os teus artigos en proceso de edici&oacute;n',
 'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
@@ -570,7 +570,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_entrer_code_alphabet' => 'Teclea o c&oacute;digo do alfabeto a empregar:',
 'info_envoi_email_automatique' => 'Env&iacute;o autom&aacute;tico de e-mails',
 'info_envoi_forum' => 'Env&iacute;o de foros &aacute;s/&oacute;s autoras/es dos artigos',
-'info_envoyer_maintenant' => 'enviar agora',
+'info_envoyer_maintenant' => 'Enviar agora',
 'info_envoyer_message_prive' => 'enviar unha mensaxe privada a esta persoa',
 'info_erreur_requete' => 'Erro na petici&oacute;n:',
 'info_erreur_restauration' => 'Erro de restauraci&oacute;n: o ficheiro non existe.',
@@ -721,7 +721,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_nouveaux_message' => 'Novas mensaxes',
 'info_nouveaux_messages' => 'TES @total_messages@ NOVAS MENSAXES',
 'info_nouvel_article' => 'Novo artigo',
-'info_numero_article' => 'ARTIGO N&Uacute;MERO:',
+'info_numero_article' => 'ARTIGO N&Uacute;MERO',
 'info_obligatoire_02' => '[Obrigatorio]',
 'info_option_email' => 'Cando unha visita env&iacute;a unha nova mensaxe no foro
 		vencellado a un artigo, a persoa responsable do artigo pode receber
@@ -814,7 +814,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_retablir_lien' => 'reestablecer esta ligaz&oacute;n',
 'info_retirer_mot' => 'Retirar esta palabra',
 'info_retirer_mots' => 'Retirar toda.las palabras',
-'info_rubriques' => 'Temas',
+'info_rubriques' => 'temas',
 'info_rubriques_02' => 'temas',
 'info_rubriques_liees_mot' => 'Os temas ligados a esta palabra chave',
 'info_rubriques_trouvees' => 'Temas atopados',
@@ -948,7 +948,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'item_bloquer_liens_syndiques' => 'Bloquear as ligaz&oacute;ns afiliadas para validaci&oacute;n',
 'item_breve_proposee' => 'Breve proposta',
 'item_breve_refusee' => 'NON - Breve rexeitada',
-'item_breve_validee' => 'S&Iacute; - Breve validada',
+'item_breve_validee' => 'S&iacute; - Breve validada',
 'item_choix_administrateurs' => 'o equipo de xesti&oacute;n',
 'item_choix_generation_miniature' => 'Crear autom&aacute;ticamente as miniaturas das imaxes.',
 'item_choix_non_generation_miniature' => 'Non crear miniaturas das imaxes.',
@@ -1048,7 +1048,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
 'lien_voir_en_ligne' => 'VER EN LI&Ntilde;A:',
-'lnfo_liens' => 'ligaz&oacute;ns:',
+'lnfo_liens' => 'ligaz&oacute;ns',
 'login_acces_prive' => 'acceso &oacute; espazo privado',
 'login_autre_identifiant' => 'conectar.se baixo outro identificador',
 'login_connexion_refusee' => 'Conexi&oacute;n rexeitada.',
@@ -1062,7 +1062,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'login_login' => 'Login:',
 'login_login2' => 'Login (identificador de conexi&oacute;n &oacute; lugar):',
 'login_login_pass_incorrect' => '(Login ou contrasinal incorrectos.)',
-'login_motpasseoublie' => 'Esqueciches o contrasinal?',
+'login_motpasseoublie' => 'esqueciches o contrasinal?',
 'login_non_securise' => 'Atenci&oacute;n, este formul&aacute;rio non &eacute; seguro.
 		Se non queres que o teu contrasinal poda ser interceptado
 		na rede, activa o Xavascript no teu navegador e',
@@ -1072,7 +1072,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'login_par_ici' => 'Xa te rexistraches... por eiqu&iacute;...',
 'login_pass2' => 'Contrasinal:',
 'login_preferez_refuser' => '<b>Se prefires non usar as cookies</b>, tes outro m&eacute;todo de conexi&oacute;n (menos seguro) &aacute; t&uacute;a disposici&oacute;n:',
-'login_recharger' => 'recargar a p&aacute;xina',
+'login_recharger' => 'recarga a p&aacute;xina',
 'login_retour_public' => 'Voltar &oacute; lugar p&uacute;blico',
 'login_retour_site' => 'Voltar &oacute; lugar p&uacute;blico',
 'login_retoursitepublic' => 'voltar &oacute; lugar p&uacute;blico',
@@ -1230,8 +1230,8 @@ e reconectar co lugar.
 
 
 // T
-'taille_ko' => '@taille@ KBytes',
-'taille_mo' => '@taille@ MBytes',
+'taille_ko' => '@taille@ KB',
+'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
 'text_article_propose_publication' => 'Artigo proposto para a publicaci&oacute;n. Non dubides en deixar un aviso no foro que leva engadido este artigo (enbaixo da p&aacute;xina).',
 'texte_acces_ldap_anonyme_1' => 'Alg&uacute;ns servidores LDAP non aceptan neng&uacute;n acceso an&oacute;nimo. En tal caso hai que especificar un identificador de acceso inicial para poder percurar informaci&oacute;ns na gu&iacute;a. Na meirande parte dos casos poder&aacute;s deixar os seguintes campos valeiros.',
@@ -1422,7 +1422,7 @@ e reconectar co lugar.
 		<li>a lingua empregada nos formul&aacute;rios do lugar p&uacute;blico;</li>
 		<li>a lingua presentada por defecto no espazo privado.</li></ul>',
 'texte_signification' => 'As barras bermellas representan as entradas acumuladas (total dos apartados), as barras verdes o n&uacute;mero de visitas para cada tema.',
-'texte_sous_titre' => 'Sobret&iacute;tulo',
+'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(barras escuras:  domingo / curva escura: evoluci&oacute;n da media)',
 'texte_statut_attente_validation' => 'agardando po.la validaci&oacute;n',
 'texte_statut_en_cours_redaction' => 'en proceso de redacci&oacute;n',
