@@ -25,7 +25,7 @@ function exec_admin_vider_dist()
     $quota_cache,
     $spip_lang;
 
-debut_page(_T('onglet_vider_cache'), "administration", "cache");
+debut_page(_T('onglet_vider_cache'), "configuration", "cache");
 
 
 echo "<br><br><br>";

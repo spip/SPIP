@@ -492,7 +492,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	if ($type != "affich")
 		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
-	debut_page($titre, "redacteurs", "messagerie");
+	debut_page($titre, "accueil", "messagerie");
 
 	debut_gauche();
 	

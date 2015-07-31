@@ -42,7 +42,7 @@ $flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubriqu
 
 pipeline('exec_init',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 
-debut_page("&laquo; $titre_breve &raquo;", "documents", "breves", "", "", $id_rubrique);
+debut_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", "", "", $id_rubrique);
 
 debut_grand_cadre();
 

@@ -34,7 +34,7 @@ else {
 	}
 }
 
-debut_page(_T('titre_page_statistiques_referers'), "suivi", "referers");
+debut_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
 echo "<br /><br /><br />";
 
 	gros_titre(_T('titre_liens_entrants'));

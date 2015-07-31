@@ -448,28 +448,30 @@ function gadget_messagerie() {
 
 
 function dessiner_gadgets($id_rubrique) {
-	$script =
-	http_script("document.getElementById('gadget-rubriques').innerHTML = \""
+	if ($_COOKIE['spip_accepte_ajax'] != -1) {
+		return "\n<!-- javascript gadgets -->\n" .
+		http_script(
+		"document.getElementById('gadget-rubriques').innerHTML = \""
 		. addslashes(strtr(gadget_rubriques($id_rubrique),"\n\r","  "))
-		. "\";")
-	. http_script("document.getElementById('gadget-navigation').innerHTML = \""
+		. "\";\n" .
+		"document.getElementById('gadget-navigation').innerHTML = \""
 		. addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))
-		. "\";")
-#	. http_script("document.getElementById('gadget-recherche').innerHTML = \""
+		. "\";\n" .
+#		"document.getElementById('gadget-recherche').innerHTML = \""
 #		. addslashes(strtr(gadget_recherche($id_rubrique),"\n\r","  "))
-#		. "\";")
-	. http_script("document.getElementById('gadget-agenda').innerHTML = \""
+#		. "\";\n" .
+		"document.getElementById('gadget-agenda').innerHTML = \""
 		. addslashes(strtr(gadget_agenda($id_rubrique),"\n\r","  "))
-		. "\";")
-	. http_script("document.getElementById('gadget-messagerie').innerHTML = \""
+		. "\";\n" .
+		"document.getElementById('gadget-messagerie').innerHTML = \""
 		. addslashes(strtr(gadget_messagerie($id_rubrique),"\n\r","  "))
-		. "\";")
-#	. http_script("document.getElementById('gadget-suivi').innerHTML = \""
+		. "\";\n" .
+#		"document.getElementById('gadget-suivi').innerHTML = \""
 #		. addslashes(strtr(gadget_suivi($id_rubrique),"\n\r","  "))
-#		. "\";")
-	;
+#		. "\";\n" .
 
-	return $script;
+		'');
+	}
 }
 
 ?>

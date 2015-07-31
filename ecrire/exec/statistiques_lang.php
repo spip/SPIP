@@ -18,7 +18,7 @@ function exec_statistiques_lang_dist()
 {
   global $connect_statut, $couleur_foncee, $critere, $spip_ecran, $spip_lang_right;
 
-  debut_page(_T('onglet_repartition_lang'), "suivi", "repartition-langues");
+  debut_page(_T('onglet_repartition_lang'), "statistiques_visites", "repartition-langues");
 
  if ($spip_ecran == "large") {
 		$largeur_table = 974;

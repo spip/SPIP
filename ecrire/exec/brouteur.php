@@ -31,7 +31,7 @@ function exec_brouteur_dist()
 	}
 	$largeur_col = round($largeur_table/$nb_col);
 
-	debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site", " hauteurFrame($nb_col);");
+	debut_page(_T('titre_page_articles_tous'), "accueil", "tout-site", " hauteurFrame($nb_col);");
 
 	echo "\n<div>&nbsp;</div>";
 

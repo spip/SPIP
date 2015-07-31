@@ -196,7 +196,7 @@ function exec_controle_forum_dist()
 
   global $page, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
 
-  debut_page(_T('titre_page_forum_suivi'), "redacteurs", "forum-controle");
+  debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
   if (!preg_match('/^\w+$/', $page)) $page = "public";
 

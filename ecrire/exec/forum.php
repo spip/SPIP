@@ -37,12 +37,12 @@ function exec_forum_dist()
   $debut = intval($debut);
 
   if ($admin) {
-	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
+	debut_page(_T('titre_page_forum'), "forum", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
 	$script = 'forum_admin';
   } else {
-	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
+	debut_page(_T('titre_forum'), "forum", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
 	$script = 'forum';

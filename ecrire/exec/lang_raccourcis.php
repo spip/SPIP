@@ -33,7 +33,7 @@ function exec_lang_raccourcis_dist() {
 		$module = 'public';
 
 	debut_page(_T('module_fichier_langue').": $module",
-		"administration", "langues");
+		"configuration", "langues");
 
 	echo "<br><br><br>";
 	gros_titre(_T('module_fichier_langue').": $module");

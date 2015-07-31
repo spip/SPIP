@@ -130,9 +130,20 @@ function exec_info_dist() {
 // Tester si Ajax fonctionne pour ce brouteur
 // (si on arrive la c'est que c'est bon, donc poser le cookie)
 
-function exec_test_ajax_dist()
-{
-	spip_setcookie('spip_accepte_ajax', 1);
+function exec_test_ajax_dist() {
+	switch (_request('js')) {
+		// on est appele par <noscript>
+		case -1:
+			spip_setcookie('spip_accepte_ajax', -1);
+			redirige_par_entete(_DIR_IMG_PACK.'puce-orange-anim.gif');
+			break;
+
+		// ou par ajax
+		case 1:
+		default:
+			spip_setcookie('spip_accepte_ajax', 1);
+			break;
+	}
 }
 
 // Afficher le bouton "preview" dans l'espace public

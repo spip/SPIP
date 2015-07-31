@@ -21,7 +21,7 @@ function exec_breves_dist()
 	charger_generer_url();
  	pipeline('exec_init',array('args'=>array('exec'=>'breves'),'data'=>''));
 	
-	debut_page(_T('titre_page_breves'), "documents", "breves");
+	debut_page(_T('titre_page_breves'), "naviguer", "breves");
 	debut_gauche();
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves'),'data'=>''));
 	creer_colonne_droite();

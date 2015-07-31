@@ -110,12 +110,12 @@ function inc_auth_dist() {
 				$_SERVER['PHP_AUTH_PW'] = '';
 			}
 
-		} else if ($GLOBALS['_SERVER']['REMOTE_USER'])
+		} else if ($_SERVER['REMOTE_USER'])
 
 	// Authentification .htaccess old style, car .htaccess semble
 	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
 
-			$connect_login = $GLOBALS['_SERVER']['REMOTE_USER'];
+			$connect_login = $_SERVER['REMOTE_USER'];
 	}    
 
 	$where = $connect_id_auteur ?
@@ -176,11 +176,11 @@ function inc_auth_dist() {
 
 function auth_prefs()
 {
-	if (!$GLOBALS['set_disp'] = $GLOBALS['_COOKIE']['spip_display'])
+	if (!$GLOBALS['set_disp'] = $_COOKIE['spip_display'])
 		$GLOBALS['set_disp'] = 2;
-	if (!$GLOBALS['set_couleur'] = $GLOBALS['_COOKIE']['spip_couleur'])
+	if (!$GLOBALS['set_couleur'] = $_COOKIE['spip_couleur'])
 		$GLOBALS['set_couleur'] = 6;
-	if (!$GLOBALS['set_options'] = $GLOBALS['_COOKIE']['spip_options'])
+	if (!$GLOBALS['set_options'] = $_COOKIE['spip_options'])
 		$GLOBALS['set_options'] = 'basiques';
 }
 

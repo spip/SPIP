@@ -15,7 +15,7 @@ function exec_admin_plugin() {
 	$surligne = "";
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "administration", "plugin");
+		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
@@ -34,7 +34,7 @@ function exec_admin_plugin() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('icone_admin_plugin'), "administration", "plugin");
+	debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -95,7 +95,7 @@ EOF;
 	echo "<br/><br/><br/>";
 	
 	gros_titre(_T('icone_admin_plugin'));
-	// barre_onglets("administration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ?
+	// barre_onglets("configuration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ?
 	
 	debut_gauche();
 	debut_boite_info();

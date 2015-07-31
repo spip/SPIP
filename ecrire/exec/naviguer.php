@@ -78,7 +78,7 @@ function exec_naviguer_dist()
 
 	debut_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
 		    _T('titre_naviguer_dans_le_site')),
-		   "documents",
+		   "naviguer",
 		   "rubriques",
 		   '',
 		   '',

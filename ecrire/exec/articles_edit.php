@@ -293,7 +293,7 @@ function exec_articles_edit_dist()
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 
 	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)),
-			"documents", "articles", "hauteurTextarea();", 
+			"naviguer", "articles", "hauteurTextarea();", 
 			"",
 			$id_rubrique);
 

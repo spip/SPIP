@@ -34,7 +34,7 @@ function exec_synchro_dist()
 {
 global   $connect_id_auteur;
 ///// debut de la page
-debut_page(_T("icone_suivi_activite"),  "asuivre", "synchro");
+debut_page(_T("icone_suivi_activite"),  "accueil", "synchro");
 
 echo "<br><br><br>";
 gros_titre(_T("icone_suivi_activite"));

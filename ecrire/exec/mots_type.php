@@ -58,7 +58,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 }
 
 pipeline('exec_init',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
-debut_page("&laquo; $titre &raquo;", "documents", "mots");
+debut_page("&laquo; $titre &raquo;", "naviguer", "mots");
 
 debut_gauche();
 

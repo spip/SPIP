@@ -356,7 +356,7 @@ function import_all_continue()
 	$archive = $dir . $request['archive'];
 	$affiche_progression_pourcent = @filesize($archive);
 
-	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
+	debut_page(_T('titre_page_index'), "accueil", "accueil");
 
 	debut_gauche();
 

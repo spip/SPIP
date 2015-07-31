@@ -18,7 +18,7 @@ function exec_admin_tech_dist()
 {
   global $connect_statut, $connect_login, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options;
 
- debut_page(_T('titre_admin_tech'), "administration", "base");
+ debut_page(_T('titre_admin_tech'), "configuration", "base");
 
  echo "<br />";
 
