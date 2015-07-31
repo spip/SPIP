@@ -62,7 +62,7 @@ jQuery.fn.animeajax = function(end) {
 	this.children().css('opacity', 0.5);
 	if (typeof ajax_image_searching != 'undefined'){
 		var i = (this).find('.image_loading');
-		if (i.length) i.html(ajax_image_searching);
+		if (i.length) i.eq(0).html(ajax_image_searching);
 		else this.prepend('<span class="image_loading">'+ajax_image_searching+'</span>');
 	}
 	return this; // don't break the chain
