@@ -488,7 +488,7 @@ via FTP.</p>',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use SPIP\'s integrated search engine?
  (Disabling it speeds up system performance.)',
 'info_question_vignettes_referer_non' => 'Do not show screenshots of referring sites',
-'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ worked on the contents @date_diff@ minutes ago',
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please wait a few moments, then reload this page.',
 'info_recherche_auteur_a_affiner' => 'Too many results for "@cherche_auteur@"; please refine your search.',
