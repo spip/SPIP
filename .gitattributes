@@ -340,6 +340,7 @@ ecrire/img_pack/warning.gif -text
 ecrire/img_pack/xml.gif -text
 ecrire/inc/agenda.php -text
 ecrire/inc/ajax.php -text
+ecrire/inc/article_update.php -text
 ecrire/inc/auteur_voir.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/cookie.php -text
