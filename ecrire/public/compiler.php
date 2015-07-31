@@ -271,12 +271,13 @@ function calculer_boucle($id_boucle, &$boucles) {
 				if (isset($s['post_date']) AND $s['post_date']
 					AND $GLOBALS['meta']["post_dates"] == 'non'){
 					$date = $id.'.'.preg_replace(',\W,','',$s['post_date']); // securite
-					array_unshift($boucle->where,"\n_VAR_PREVIEW?'':quete_condition_postdates('$date',"._q($boucle->serveur).")");
+					array_unshift($boucle->where,"\nquete_condition_postdates('$date',"._q($boucle->serveur).")");
 				}
 				array_unshift($boucle->where,
 					"\nquete_condition_statut('$mstatut',"
-					."_VAR_PREVIEW?"._q($s['previsu']).":"._q($s['publie'])
-					.","._q($boucle->serveur).")"
+						. _q($s['previsu']).","
+						._q($s['publie']).","
+						._q($boucle->serveur).")"
 				);
 			}
 		}

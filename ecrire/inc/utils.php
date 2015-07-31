@@ -1526,10 +1526,7 @@ function init_var_mode(){
 	if (!$done) {
 		// On fixe $GLOBALS['var_mode']
 		$GLOBALS['var_mode'] = false;
-		$GLOBALS['var_preview'] = false;
-		$GLOBALS['var_images'] = false;
-		$GLOBALS['var_inclure'] = false;
-		$GLOBALS['var_urls'] = false;
+
 		if (isset($_GET['var_mode'])) {
 			// tout le monde peut calcul/recalcul
 			if ($_GET['var_mode'] == 'calcul'
@@ -1546,36 +1543,35 @@ function init_var_mode(){
 				)) {
 					switch($_GET['var_mode']){
 						case 'preview':
-							// forcer le compilo et ignorer les caches existants
-							$GLOBALS['var_mode'] = 'recalcul';
-							// truquer les boucles
-							$GLOBALS['var_preview'] = true;
+							// basculer sur les criteres de preview dans les boucles
 							if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',true);
+							// forcer le calcul
+							$GLOBALS['var_mode'] = 'calcul';
 							// et ne pas enregistrer de cache
-							$GLOBALS['var_nocache'] = true;
+							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						case 'inclure':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
-							$GLOBALS['var_inclure'] = true;
+							if (!defined('_VAR_INCLURE')) define('_VAR_INCLURE',true);
 							// et ne pas enregistrer de cache
-							$GLOBALS['var_nocache'] = true;
+							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						case 'urls':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
-							$GLOBALS['var_urls'] = true;
+							define('_VAR_URLS',true);
 							break;
 						case 'images':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
 							// indiquer qu'on doit recalculer les images
-							$GLOBALS['var_images'] = true;
+							if (!defined('_VAR_IMAGES')) define('_VAR_IMAGES',true);
 							break;
 						case 'debug':
 							$GLOBALS['var_mode'] = 'debug';
 							// et ne pas enregistrer de cache
-							$GLOBALS['var_nocache'] = true;
+							if (!defined('_VAR_NOCACHE')) define('_VAR_NOCACHE',true);
 							break;
 						default :
 							$GLOBALS['var_mode'] = $_GET['var_mode'];
@@ -1598,7 +1594,6 @@ function init_var_mode(){
 				}
 			}
 		}
-		if (!defined('_VAR_PREVIEW')) define('_VAR_PREVIEW',false);
 		$done = true;
 	}
 }

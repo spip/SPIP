@@ -80,7 +80,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 
 		$boucle->group[] = "$id_table.id_document";
 
-		if (_VAR_PREVIEW) {
+		if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW) {
 			array_unshift($boucle->where,"'(aa.statut IN (\'publie\',\'prop\') OR bb.statut  IN (\'publie\',\'prop\') OR rr.statut IN (\'publie\',\'prive\')"
 			.(test_plugin_actif('forum')? " OR ff.statut IN (\'publie\',\'prop\')":"")
 			.")'");

@@ -94,7 +94,7 @@ function gunzip_page(&$page) {
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
 
-	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
+	if (defined('_VAR_NO_CACHE') AND _VAR_NO_CACHE) return -1;
 	if (isset($GLOBALS['meta']['cache_inhib']) AND $_SERVER['REQUEST_TIME']<$GLOBALS['meta']['cache_inhib']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
 	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
@@ -142,7 +142,7 @@ function creer_cache(&$page, &$chemin_cache) {
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
 	// le cas var_nocache ne devrait jamais arriver ici (securite)
 	// le cas spip_interdire_cache correspond a une ereur SQL grave non anticipable
-	if ((isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache'])
+	if ((defined('_VAR_NO_CACHE') AND _VAR_NO_CACHE)
 		OR defined('spip_interdire_cache'))
 		return;
 
