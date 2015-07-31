@@ -782,7 +782,7 @@ function plugin_installes_meta()
 						  .boite_ouvrir(_T('plugin_titre_installation', array('plugin' => typo($infos['nom']))), ($ok ? 'success' : 'error'))
 					      .$trace
 					      ."<div class='result'>"
-					      .($ok ? _T("plugin_info_install_ok") : _T("avis_operation_echec"))
+					      .($ok ? ((isset($infos['upgrade']) && $infos['upgrade']) ? _T("plugin_info_upgrade_ok") : _T("plugin_info_install_ok")) : _T("avis_operation_echec"))
 					      ."</div>"
 					      .boite_fermer()
 					      ."</div>";
