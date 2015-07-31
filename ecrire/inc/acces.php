@@ -41,11 +41,13 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	return $pass;
 }
 
-//
-// Creer un identifiant aleatoire
-//
-
-// http://doc.spip.org/@creer_uniqid
+/**
+ * Creer un identifiant aleatoire
+ *
+ * http://doc.spip.org/@creer_uniqid
+ *
+ * @return string
+ */
 function creer_uniqid() {
 	static $seeded;
 
