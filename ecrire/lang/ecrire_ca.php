@@ -879,6 +879,7 @@ amb un color que indica el seu estat:',
 'repertoire_plugins' => 'Directori:',
 
 // S
+'sans_heure' => 'sense hora',
 'sauvegarde_fusionner' => 'Fusionar la base actual i la de seguretat',
 'sauvegarde_fusionner_depublier' => 'Despublicar els objectes fusionats',
 'sauvegarde_url_origine' => 'Eventualment, URL del lloc d\'origen: ',
