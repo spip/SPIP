@@ -99,6 +99,9 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "' type='submit' />" .
 	  "</div>\n";
 
+	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+	.  $vignette . "\n\n";
+
 	$texte = _T('icone_supprimer_document');
 	if (preg_match('/_edit$/', $script))
 		$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
@@ -107,10 +110,10 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
 	}
 
-	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
-	.  $vignette
-	. "\n\n\n\n"
-	. icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
+	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
+	// et ca buggue si on propose de supprimer => on ne propose pas
+	if ($id > 0)
+		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
 	$corps = "<div class='verdana1' style='color: "
 	. $GLOBALS['couleur_foncee']
@@ -141,10 +144,13 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	$joindre = charger_fonction('joindre', 'inc');
 
+	$supprimer = icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false);
+	if ($id<0) $supprimer = ''; // cf. ci-dessus, article pas encore cree
+
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
 	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document,$iframe_redirect)
-	   : icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false));
+	   : $supprimer);
 }
 
 
