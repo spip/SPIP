@@ -20,32 +20,30 @@ function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre)
 	$adresse_site = lire_meta("adresse_site");
 	$nom_site_spip = lire_meta("nom_site");
 	$url = "$adresse_site/$url";
-	$courr = _T('form_forum_message_auto')."\n\n";
-	$parauteur = '';
-	if (strlen($auteur) > 2) {
-		$parauteur = " "._T('forum_par_auteur',
-				    array('auteur' => $auteur));
-		if ($email_auteur)
-			$parauteur .= " <$email_auteur>";
-	}
-	$courr .= _T('forum_poste_par',
-		     array('parauteur' => $parauteur))."\n";
-	$courr .= _T('forum_ne_repondez_pas')."\n";
-	$courr .= "$url\n";
-	$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte)).
-	  "\n\n$nom_site_forum\n$url_site\n";
+	$parauteur = (strlen($auteur) <= 2) ? '' :
+	  (" "
+	   ._T('forum_par_auteur',
+	       array('auteur' => $auteur)) .
+	   (!$email_auteur ? '' : (' <' . $email_auteur . '>')));
+	$courr =  _T('form_forum_message_auto')."\n\n"
+		. _T('forum_poste_par',
+		     array('parauteur' => $parauteur))."\n"
+		. _T('forum_ne_repondez_pas')."\n"
+		. $url
+		. "\n\n\n".$titre."\n\n".textebrut(propre($texte))
+		. "\n\n$nom_site_forum\n$url_site\n";
 	$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-	$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs,
+	$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs,
 				spip_auteurs_articles AS lien
 				WHERE lien.id_article='$id_article'
 				AND auteurs.id_auteur=lien.id_auteur");
 
-	while ($row = spip_fetch_array($result)) {
-		$email_auteur = trim($row["email"]);
-		if (strlen($email_auteur) < 3) continue;
-		envoyer_mail($email_auteur, $sujet, $courr);
+	while (list($email) = spip_fetch_array($result)) {
+		$email = trim($email);
+		if (strlen($email) < 3) continue;
+		envoyer_mail($email, $sujet, $courr);
 	}
-}			
+}	
 
 $retour_forum = rawurldecode($retour);
 $forum_id_article = intval($id_article);
@@ -59,9 +57,8 @@ $slash_nom_site_forum = addslashes($nom_site_forum);
 $slash_url_site = addslashes($url_site);
 $id_message = intval($id_message);
 
-// Nature du forum
 if (!$id_auteur)
-	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
+	$id_auteur = intval($auteur_session['id_auteur']);
 
 if ($forum_id_article) {
 	$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$forum_id_article");
@@ -78,15 +75,17 @@ if ($forums_publics == "abo") {
 	if ($auteur_session) {
 		$statut = $auteur_session['statut'];
 		if (!$statut OR $statut == '5poubelle') {
-			die ("<h4>"._T('forum_acces_refuse'). "</h4>" . 
-			_T('forum_cliquer_retour', array('retour_forum' => $retour_forum)).
-			"<p>");
+			ask_php_auth(_T('forum_acces_refuse'),
+				     _T('forum_cliquer_retour',
+					array('retour_forum' => $retour_forum)));
+			exit;		  
 		}
 	}
 	else {
-		die ("<h4>"._T('forum_non_inscrit'). "</h4>" . 
-		_T('forum_cliquer_retour', array('retour_forum' => $retour_forum)).
-		"<p>");
+		ask_php_auth(_T('forum_non_inscrit'),
+			     _T('forum_cliquer_retour',
+				array('retour_forum' => $retour_forum)));
+		exit;		  
 	}
 
 	// Ne pas autoriser de changement de nom si forum sur abonnement
@@ -98,9 +97,10 @@ $slash_auteur = addslashes($auteur);
 $slash_email_auteur = addslashes($email_auteur);
 
 if ((strlen($slash_texte) + strlen($slash_titre) + strlen($slash_nom_site_forum) + strlen($slash_url_site) + strlen($slash_auteur) + strlen($slash_email_auteur)) > 20 * 1024) {
-	die ("<h4>"._T('forum_message_trop_long')."</h4>\n" .
-	_T('forum_cliquer_retour', array('retour_forum' => $retour_forum)).
-	"<p>");
+	ask_php_auth(_T('forum_message_trop_long'),
+		     _T('forum_cliquer_retour',
+			array('retour_forum' => $retour_forum)));
+			exit;		  
 }
 
 spip_query("DELETE FROM spip_mots_forum WHERE id_forum='$id_message'");

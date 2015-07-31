@@ -100,6 +100,21 @@ function liens_ouvrants ($texte) {
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
+// Fabrique une balise A, avec un href conforme au validateur W3C
+// attention au cas ou la href est du Javascript avec des "'"
+
+function http_href($href, $clic, $title='', $style='', $class='') {
+	return '<a href="' .
+		str_replace('&', '&amp;', $href) .
+		'"' .
+		(!$style ? '' : (" style=\"" . $style . "\"")) .
+		(!$title ? '' : (" title=\"" . supprimer_tags($title)."\"")) .
+		(!$class ? '' : (" class=\"" . $class . "\"")) .
+		'>' .
+		$clic .
+		'</a>';
+}
+
 // Corrige les caracteres degoutants utilises par les Windozeries
 function corriger_caracteres($texte) {
 	static $trans;

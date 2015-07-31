@@ -121,7 +121,7 @@ function http_calendrier_ics($evenements, $amj = "")
 				$res .=
 					"\n<div style='$c'>" .
 					$date_affichee .
-				  (!$url ? "$sum $desc" : http_calendrier_href($url, $sum, $desc)) .
+				  (!$url ? "$sum $desc" : http_href($url, $sum, $desc)) .
 					"\n</div>\n"; 
 			}
 		}
@@ -243,14 +243,14 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	  
   	$retour = "<div class='navigation-calendrier'>";
   
-	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
+	$retour .= http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
 			"<img\nsrc='" . _DIR_IMG_PACK . "/fleche-$spip_lang_left.png' class='format_png' alt='&lt;&lt;&lt;' width='12' height='12' />",
 			'pr&eacute;c&eacute;dent');
 	$retour .= "&nbsp;";
  
  	$retour .= "<b>$nom</b>";
  	$retour .= "&nbsp;";
-	$retour .= http_calendrier_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
+	$retour .= http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
 					"<img\nsrc='" . _DIR_IMG_PACK . "/fleche-$spip_lang_right.png' class='format_png' alt='&gt;&gt;&gt;' width='12' height='12' />",
 			'suivant');
 
@@ -258,15 +258,15 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
  
  
         $img_att = ($type == 'jour') ? " class='navigation-bouton-desactive'" : '';
-	$retour .= http_calendrier_href(($script . "type=jour&echelle=$echelle&$args"),
+	$retour .= http_href(($script . "type=jour&echelle=$echelle&$args"),
 				    ("<img\nsrc='" . _DIR_IMG_PACK . "/cal-jour.gif' alt='jour' $img_att />"),
 		    'calendrier par jour');
 	($type == 'semaine') ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
-	$retour .= http_calendrier_href($script . "type=semaine&echelle=$echelle&$args",
+	$retour .= http_href($script . "type=semaine&echelle=$echelle&$args",
 					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-semaine.gif' alt='semaine' $img_att />"),
 		    'calendrier par semaine');
 	($type == 'mois') ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
-	$retour .= http_calendrier_href($script . "type=mois&echelle=$echelle&$args",
+	$retour .= http_href($script . "type=mois&echelle=$echelle&$args",
 					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-mois.gif' alt='mois' $img_att />"),
 		    'calendrier par mois');
 	
@@ -285,17 +285,17 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	$condition ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
 	
 	$retour .= "<span onMouseOver=\"montrer('nav_agenda');\">";
-	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$arguments",
+	$retour .= http_href($script . "type=$type&echelle=$echelle&$arguments",
 					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-today.gif' alt=\"aujourd\'hui\" $img_att />"),
 		    'aujourd\'hui');
 	$retour .= "</span>";
 
  	if ($type != "mois") {
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-		$retour .= http_calendrier_href($script . "type=$type&set_echelle=" .
+		$retour .= http_href($script . "type=$type&set_echelle=" .
 				floor($echelle * 1.5) . "&$args",
 				"<img\nsrc='" . _DIR_IMG_PACK . "/loupe-moins.gif' alt='zoom-' />");
-		$retour .= http_calendrier_href(($script . "type=$type&set_echelle=" .
+		$retour .= http_href(($script . "type=$type&set_echelle=" .
 			floor($echelle / 1.5) .
 			"&$args"),
 					"<img\nsrc='" . _DIR_IMG_PACK . "/loupe-plus.gif'  alt='zoom+' />");
@@ -305,21 +305,21 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	
 		if ($GLOBALS['partie_cal'] == "tout") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
-		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
+		$retour .= "<span$img_att>".http_href(($script . "type=$type".
 			"&set_partie_cal=tout" .
 			"&$args"),
 								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-tout.png' width='13' height='13' alt='tout' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "matin") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
-		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
+		$retour .= "<span$img_att>".http_href(($script . "type=$type".
 			"&set_partie_cal=matin" .
 			"&$args"),
 								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-am.png' width='13' height='13' alt='AM' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "soir") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
-		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
+		$retour .= "<span$img_att>".http_href(($script . "type=$type".
 			"&set_partie_cal=soir" .
 			"&$args"),
 								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-pm.png' width='13' height='13' alt='PM' class='format_png' />") . "</span>";
@@ -343,11 +343,11 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 			$gadget .= "<table cellpadding='0' cellspacing='5' border='0' width='100%'>";
 			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 			for ($i=$mois; $i < 13; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
+				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee_avant",
 					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
 			}
 			for ($i=1; $i < $mois - 1; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee",
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 			$gadget .= "</td>";
@@ -363,11 +363,11 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 			$gadget .= "</tr>";
 			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
 			for ($i=$mois+2; $i <= 12; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee",
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 			for ($i=1; $i < $mois+1; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
+				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee_apres",
 					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
 			}
 			$gadget .= "</td></tr>";
@@ -585,9 +585,9 @@ function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic)
   $semaine = $m[1] . "S" . date("W", $d) . $m[2];
   return 
     "<table width='100%'>\n<tr><td align='left'>". 
-    http_calendrier_href("$commun&type=jour#$ancre", $clic) .
+    http_href("$commun&type=jour#$ancre", $clic) .
     "</td><td align='right'>" .
-    http_calendrier_href("$commun&type=semaine#$ancre",$semaine) .
+    http_href("$commun&type=semaine#$ancre",$semaine) .
     "</td></tr>\n</table>";
 }
 
@@ -597,20 +597,20 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
 
   return "\n" .
-    http_calendrier_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee", $clic) .
+    http_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee", $clic) .
     "\n" .
-    http_calendrier_href("$href&type=pb", 
+    http_href("$href&type=pb", 
 		 $bleu, 
 		 _T("lien_nouvea_pense_bete"),
 		 'color: blue; font-family: Arial, Sans, sans-serif; font-size: 10px; ') .
     "\n" .
-    http_calendrier_href("$href&type=normal",
+    http_href("$href&type=normal",
 		 $vert,
 		 _T("lien_nouveau_message"),
 		 'color: green; font-family: Arial, Sans, sans-serif; font-size: 10px; ') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
-      http_calendrier_href("$href&type=affich",
+      http_href("$href&type=affich",
 		   $jaune,
 		   _T("lien_nouvelle_annonce"),
 		   'color: #ff9900; font-family: Arial, Sans, sans-serif; font-size: 10px; ')));
@@ -655,7 +655,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 			'index' => date("w", $nom));
 		$intitul[$j] = $v;
 		$liens[$j] = 
-		http_calendrier_href(($script .
+		http_href(($script .
 			(strpos($script,'?') ? '&' : '?') .
 			"type=jour&jour=" .
 			$v['jour'] .
@@ -722,7 +722,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false) {
   return 
     "<div style='text-align: center; padding: 5px;'>" .
-    http_calendrier_href("calendrier.php3?mois=$mois&annee=$annee",
+    http_href("calendrier.php3?mois=$mois&annee=$annee",
 		       "<b class='verdana1'>" .
 		       affdate_mois_annee("$annee-$mois-1").
 		       "</b>",
@@ -742,7 +742,7 @@ function http_calendrier_agenda_href($type, $jour, $mois, $annee, $color)
 	static $scripts = array('jour' => "calendrier_jour.php3?",
 			        'semaine' => "calendrier_semaine.php3?");
 
-	return http_calendrier_href($scripts[$type] . "jour=$jour&mois=$mois&annee=$annee", 
+	return http_href($scripts[$type] . "jour=$jour&mois=$mois&annee=$annee", 
 				    "<b>$jour</b>",
 				    '',
 				    "color: $color");
@@ -1067,7 +1067,7 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 				onmouseout=\"this.style.zIndex=" . $i . "\">" .
 			  ((!$url) ? 
 					$sum :
-				 http_calendrier_href($url, $sum, $desc,"color: $fcolor")) . 
+				 http_href($url, $sum, $desc,"color: $fcolor")) . 
 			  ((!$evenement['LOCATION']) ? '' : 
 			   ("<br />" . $evenement['LOCATION'])) .
 				"</div>";
@@ -1204,7 +1204,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 
 	if ($large == "col" ) {
 	  $entete = "<div align='center' style='padding: 5px;'><b class='verdana1'>" .
-	    http_calendrier_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee",
+	    http_href("calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee",
 				 affdate_jourcourt("$annee-$mois-$jour"),
 				 '',
 				 'color:black;') .
@@ -1213,18 +1213,18 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	else {
 		if ($large == "large") 
 			$entete = "<div align='center' style='padding: 5px;'>" .
-			http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
+			http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
 				$bleu ._T("lien_nouvea_pense_bete"),
 				'',
 				'font-family: Arial, Sans, sans-serif; font-size: 10px; color: blue;') .
 			" &nbsp; " .
-			http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal",
+			http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal",
 				$vert ._T("lien_nouveau_message"),
 				'',
 				'font-family: Arial, Sans, sans-serif; font-size: 10px; color: green;') .
 			(!($GLOBALS['connect_statut'] == "0minirezo") ? '' :
 				(" &nbsp; " .
-				http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich",
+				http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich",
 					$jaune ._T("lien_nouvelle_annonce"),
 					'',
 					'font-family: Arial, Sans, sans-serif; font-size: 10px; color: #ff9900;'))) .
@@ -1330,7 +1330,7 @@ function http_calendrier_rv($messages, $type) {
 		}
 
 		$total .= "<tr><td width='24' valign='middle'>" .
-		http_calendrier_href($url,
+		http_href($url,
 				     ($rv ?
 				      http_img_pack("rv.gif",
 						    http_style_background($bouton . '.gif', "no-repeat;' border='0' alt=''")) : 
@@ -1350,7 +1350,7 @@ function http_calendrier_rv($messages, $type) {
 					"$spip_lang_right center no-repeat; float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; text-align: center;")
 		  . heures($date).":".minutes($date)."<br />...</div>" ))) .
 		"<div><b>" .
-		http_calendrier_href($url, typo($row['titre']), '', 
+		http_href($url, typo($row['titre']), '', 
 'font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;') .
 		"</b></div>" .
 		"</td>" .
@@ -1386,25 +1386,6 @@ function http_calendrier_rv($messages, $type) {
 	  fin_cadre_enfonce(true);
 }
 
-// Fabrique une balise A, avec un href conforme au validateur W3C
-// et une classe uniquement destinee a retirer l'URL lors d'une impression
-// attention au cas ou la href est du Javascript avec des "'"
-
-function http_calendrier_href($href, $clic, $title='', $style='', $class='') {
-	return '<a href="' .
-		str_replace('&', '&amp;', $href) .
-		'"' . # class="forum-repondre-message"' .
-		(!$style ? '' : (" style=\"" . $style . "\"")) .
-		(!$title ? '' : (" title=\"" . supprimer_tags($title)."\"")) .
-		(!$class ? '' : (" class=\"" . $class . "\"")) .
-		'>' .
-		$clic .
-		'</a>';
-}
-
-function http_calendrier_title($echelle, $href, $clic, $title='', $style='', $class='') {
-  if ($echelle);
-}
 
 
 function sql_calendrier_interval_jour($annee,$mois,$jour) {
