@@ -42,7 +42,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		if ($deja_la) {
 			spip_log ("Re-entrance anormale sur lister_tables_objets_sql :"
 				. var_export(debug_backtrace(),true),_LOG_CRITIQUE);
-			return array();
+			return ($table_sql==="::md5"?$md5:array());
 		}
 		$deja_la = true;
 		$plugin_hash = _PLUGINS_HASH; // avant de lancer les pipelines
