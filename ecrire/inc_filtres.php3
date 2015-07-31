@@ -447,6 +447,13 @@ function lang_rtl ($lang) {
 	if ($lang=='fa' OR $lang=='ar' OR $lang == 'he')
 		return 'rtl';
 }
+// idem, mais qui renvoie rtl ou ltr
+function lang_rtl_ltr ($lang) {
+	if (lang_rtl($lang))
+		return 'rtl';
+	else
+		return 'ltr';
+}
 
 // selectionner une langue
 function lang_select ($lang='') {
