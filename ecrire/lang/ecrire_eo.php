@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Forigi &#264;ION',
 'bouton_envoi_message_02' => 'SENDI MESA&#284;ON',
 'bouton_envoyer_message' => 'Definitiva mesa&#285;o: sendi',
-'bouton_forum_petition' => '<MODIF>FORUMO &amp; PETSKRIBO',
+'bouton_forum_petition' => 'FORUMO &amp; PETSKRIBO',
 'bouton_modifier' => 'Modifi',
 'bouton_pense_bete' => 'PROPRA MEMORIGILO',
 'bouton_radio_activer_messagerie' => '&#348;alti la internan mesa&#285;ilon',
@@ -92,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_petition_activee' => 'Aktivigita petskribo',
 'bouton_radio_publication_immediate' => 'Tuja publikigo de mesa&#285;oj (la kontribua&#309;oj afi&#349;i&#285;as tuj post ties sendo, la mastrumantoj povas
  forigi ilin poste).',
-'bouton_radio_sauvegarde_compressee' => '<MODIF>dosiero konserv-cele kompaktita en @fichier@',
-'bouton_radio_sauvegarde_non_compressee' => '<MODIF>dosiero nekompaktita en @fichier@',
+'bouton_radio_sauvegarde_compressee' => 'savkopio kompaktita en @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'savkopio nekompaktita en @fichier@',
 'bouton_radio_supprimer_petition' => 'Forigi la petsbribon',
 'bouton_radio_syndication' => 'Abonrilato:',
 'bouton_redirection' => 'ALIDIREKTO',
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'retpo&#349;tadreso',
 'email_2' => 'retpo&#349;tadreso :',
-'entree_adresse_annuaire' => '<MODIF>Adreso de la ',
+'entree_adresse_annuaire' => 'Adreso al la dosierujilo',
 'entree_adresse_email' => 'Via retpo&#349;tadreso',
 'entree_adresse_fichier_syndication' => 'Retadreso de la abonrilatiga dosiero&nbsp;:',
 'entree_adresse_site' => '<b>Adreso de la retejo</b> [Deviga]',
@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_contenu_rubrique' => '(Enhavo de la rubriko per kelkaj vortoj.)',
 'entree_description_site' => 'Priskribo de la retejo',
 'entree_identifiants_connexion' => 'Viaj ensalutiloj...',
-'entree_informations_connexion_ldap' => '<MODIF>En tiun formularon bonvolu entajpi informojn por ensaluti en via LDAP-(item). Tiujn informojn disponigu la sistema a&#365; reta mastrumanto.',
+'entree_informations_connexion_ldap' => 'En tiun formularon, bonvolu entajpi informojn por konekti al via LDAP-dosierujilo. Tiujn informojn disponigu al vi la sistema a&#365; reta mastrumanto.',
 'entree_infos_perso' => 'Kiu vi estas ?',
 'entree_interieur_rubrique' => 'En la rubriko&nbsp;:',
 'entree_liens_sites' => '<B>Hiperligilo</b> (referenco, vizitinda retejo...)',
@@ -157,7 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_nom_site' => 'La nomo de via retejo',
 'entree_nouveau_passe' => 'Nova pasvorto',
 'entree_passe_ldap' => 'Pasvorto',
-'entree_port_annuaire' => '<MODIF>La numero de la dosierujila pordo',
+'entree_port_annuaire' => 'Numero de la dosierujila pordo',
 'entree_signature' => 'Subskribo',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
 'entree_titre_obligatoire' => '<B>Titolo</b> [Deviga]<BR>',
@@ -176,7 +176,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="http://www.spip.net/fr_suivi">la dokumentaron de SPIP</a>.',
 'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iumomente povas modifi &#349;an&#285;ante vian pasvorton.',
 'ical_methode_http' => 'Al&#349;uto',
-'ical_methode_webcal' => '<MODIF>Sinkroniga &#285;isdatigo (webcal://)',
+'ical_methode_webcal' => 'Sinkroniga &#285;isdatigo (webcal://)',
 'ical_texte_js' => 'Per ununura linio de &#285;avaskripto, vi povas simplege afi&#349;i &#265;e kiu ajn retejo, kiun vi havas, la lastajn artikolojn publikigitajn &#265;e tiu retejo.',
 'ical_texte_prive' => 'Tiu strikte persona kalendaro, informas vin pri la privataj eldonoj de la retejo (personaj taskoj kaj rendevuoj, proponitaj artikoloj kaj fulm-informoj...).',
 'ical_texte_public' => 'Per tiu kalendaro, vi povas observi la publikan funkciadon de tiu retejo (publikigitaj fulm-informoj kaj artikoloj).',
@@ -239,7 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_afficher_visites' => 'Afi&#349;i la vizitojn de&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Afi&#349;i la vizitojn por la <b>plej vizititaj artikoloj ekde la komenco&nbsp;:</b>',
 'info_aide_en_ligne' => 'Reta SPIP-helpilo',
-'info_ajout_image' => '<MODIF>Kiam vi aldonas bildojn kiel alkro&#265;itajn dokumentojn al artikolo,
+'info_ajout_image' => 'Kiam vi aldonas bildojn kiel alkro&#265;itajn dokumentojn al artikolo,
  SPIP povas a&#365;tomate krei por vi etajn vinjetojn de la
  enmetitaj bildoj. Tio ebligas ekzemple, a&#365;tomate krei bildaron, &#265;u en sukcesiva, &#265;u samtempa ordo.',
 'info_ajout_participant' => 'La jena partoprenanto estas aldonita&nbsp;:',
@@ -273,11 +273,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_breves_touvees' => 'Trovitaj fulm-informoj',
 'info_breves_touvees_dans_texte' => 'Trovitaj fulm-informoj (en la teksto)',
 'info_changer_nom_groupe' => '&#348;an&#285;i la nomon de tiu grupo:',
-'info_chapeau' => '<MODIF>&#264;apelo',
-'info_chapeau_2' => '<MODIF>&#264;apelo&nbsp;:',
-'info_chemin_acces_1' => '<MODIF>Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
-'info_chemin_acces_2' => '<MODIF>Ekde nun vi devas konfiguri la alirvojon al la LDAP-dosierujilo. Tiu informo estas nepre necesa por legi la profilojn de uzantoj stokataj en la dosierujilo.',
-'info_chemin_acces_annuaire' => '<MODIF>Opcioj: <B>Aliro al la LDAP-dosierujilo',
+'info_chapeau' => '&#264;apo',
+'info_chapeau_2' => '&#264;apo&nbsp;:',
+'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
+'info_chemin_acces_2' => 'Ekde nun vi devas konfiguri la alirvojon al la LDAP-dosierujilo. Tiu informo estas nepre necesa por legi la profilojn de uzantoj stokataj en la dosierujilo.',
+'info_chemin_acces_annuaire' => 'Opcioj: <B>Aliro en la LDAP-dosierujilo',
 'info_choix_base' => 'Tria etapo&nbsp;: ',
 'info_classement_1' => '<sup>a</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
@@ -307,9 +307,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_etape' => 'Lasta etapo: <b>Finite!',
 'info_derniere_syndication' => 'La lasta abonrilato-&#285;isdatigo de tiu retejo estis farita la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste rete publikigitaj',
-'info_desactiver_forum_public' => '<MODIF>Malaktivigi la uzon de la publikaj forumoj.
+'info_desactiver_forum_public' => 'Malaktivigi la uzon de la publikaj forumoj.
 La publikaj forumoj estos unu post la alia permesitaj
- koncerne la artikolojn; ili estos malpermesataj koncerne rubrikojn, fulm-informojn, ktp.',
+ la&#365; la artikolojn; ili estos malpermesataj koncerne rubrikojn, fulm-informojn, ktp.',
 'info_desactiver_messagerie_personnelle' => 'Vi povas aktivigi a&#365; malaktivigi vian personan mesa&#285;ilon &#265;e tiu retejo.',
 'info_descriptif' => 'Priskribo:',
 'info_discussion_cours' => 'Nunaj diskutoj',
@@ -347,7 +347,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_gauche_messagerie' => 'La mesa&#285;ilo ebligas al vi inter&#349;an&#285;i mesa&#285;ojn inter a&#365;toroj, konservi memorigilojn (por via propra uzado) a&#365; afi&#349;i anoncojn sur la hejmpa&#285;o de la privata spaco (se vi estas mastrumanto).',
 'info_gauche_numero_auteur' => 'A&#364;TORA NUMERO',
 'info_gauche_numero_breve' => 'FULM-INFORMA NUMERO',
-'info_gauche_statistiques_referers' => '<MODIF>Tiu pa&#285;o prezentas la liston de la  <i>referencejoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hiera&#365; kaj hodia&#365;&nbsp;: tiu listo estas prastatigita &#265;iujn 24 horojn.',
+'info_gauche_statistiques_referers' => 'Tiu pa&#285;o prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hiera&#365; kaj hodia&#365;&nbsp;: tiu listo estas prastatigita &#265;iujn 24 horojn.',
 'info_gauche_suivi_forum' => 'La pa&#285;o pri <i>supervidado de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_suivi_forum_2' => 'La pa&#285;o pri <i>kontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_visiteurs_enregistres' => 'Vi trovos &#265;i tie la vizitantojn registritajn
@@ -363,7 +363,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_historique_comparaison' => 'kompari',
 'info_historique_desactiver' => 'Malaktivigi la supervidon de la revizioj',
 'info_historique_lien' => 'Afi&#349;i historion pri modifoj',
-'info_historique_texte' => '<MODIF>La supervido de revizioj ebligas konservi historion de &#265;iuj modifoj al la enhavo de artikolo, kaj afi&#349;i la diferencojn inter la sinsekvaj versioj.',
+'info_historique_texte' => 'La supervido de revizioj ebligas konservi historion de &#265;iuj modifoj al la enhavo de artikolo, kaj afi&#349;i la diferencojn inter la sinsekvaj versioj.',
 'info_historique_titre' => 'Supervido de revizioj',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante la&#365;cele bildon.',
@@ -373,7 +373,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_inscription_automatique' => 'A&#365;tomata registri&#285;ado de novaj redaktantoj',
 'info_jeu_caractere' => 'Litertiparo de la retejo',
 'info_jours' => 'tagoj',
-'info_laisser_champs_vides' => '<MODIF>lasi tiujn tajpejojn malplenaj)',
+'info_laisser_champs_vides' => 'lasi tiujn tajpejojn malplenaj)',
 'info_langues' => 'Lingvoj de la retejo',
 'info_ldap_ok' => 'La LDAP-a&#365;tentokontrolilo estas instalita.',
 'info_lien_hypertexte' => 'Hiperligilo:',
@@ -394,10 +394,10 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_message_en_redaction' => 'Viaj redaktataj mesa&#285;oj',
 'info_message_technique' => 'Teknika mesa&#285;o:',
 'info_messagerie_interne' => 'Interna mesa&#285;ilo',
-'info_mise_a_niveau_base' => '<MODIF>niveligo de via MySQL-datenbazo',
+'info_mise_a_niveau_base' => 'niveligo de via MySQL-datenbazo',
 'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj via retejo ne plu funkcios.<br>{{Reinstalu la
  SPIP-dosierojn.}}',
-'info_mode_fonctionnement_defaut_forum_public' => '<MODIF>Defa&#365;lta funkcimodo de la publikaj forumoj',
+'info_mode_fonctionnement_defaut_forum_public' => 'Defa&#365;lta funkcimodo de la publikaj forumoj',
 'info_modifier_breve' => 'Modifi la fulm-informon:',
 'info_modifier_rubrique' => 'Modifi la rubrikon:',
 'info_modifier_titre' => 'Modifi: @titre@',
@@ -439,7 +439,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_option_faire_suivre' => 'Plusendi la mesa&#285;ojn de la forumoj al la a&#365;toroj de la artikoloj',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifuzi registri&#285;on de vizitantoj',
 'info_option_ne_pas_faire_suivre' => 'Ne plusendi la mesa&#285;ojn de la forumoj',
-'info_options_avancees' => '<MODIF>AMPLEKSAJ EBLOJ',
+'info_options_avancees' => 'FAJNAJ OPCIOJ',
 'info_ortho_activer' => 'Aktivigi la ortografian kontrolilon',
 'info_ortho_desactiver' => 'Malaktivigi la ortografian kontrolilon',
 'info_ou' => 'a&#365;...',
@@ -469,10 +469,10 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_procedez_par_etape' => 'procedu etapon post etapo',
 'info_procedure_maj_version' => 'la &#285;isdatiga proceduro devas esti lan&#265;ita por adapti
  la datenbazon al la nova versio de SPIP.',
-'info_ps' => '<MODIF>P.S.',
+'info_ps' => 'P.S.',
 'info_publier' => 'publikigi',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
-'info_question_accepter_visiteurs' => '<MODIF>Se via skeleto planas la registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-supran opcion&nbsp;:',
+'info_question_accepter_visiteurs' => 'Se via skeleto ebligas registradon de vizitantoj, kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-suban opcion&nbsp;:',
 'info_question_gerer_statistiques' => '&#264;u via retejo devas mastrumi la statistikojn pri la vizitoj&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => '&#264;u vi akceptas la registri&#285;adon de novaj redaktantoj ekde
   la publika spaco&nbsp;? Se vi akceptas tion, la vizitantoj povos registri&#285;i
@@ -500,7 +500,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_redirection' => 'Alidirekto',
 'info_referencer_doc_distant' => 'Referencigi dokumenton &#265;e la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
-'info_reglage_ldap' => '<MODIF>Opcioj: <B>&#284;ustigo de la LDAP &#349;argo</b>',
+'info_reglage_ldap' => 'Opcioj: <B>&#284;ustigo de la LDAP &#349;argo</b>',
 'info_renvoi_article' => '<B>Alidirekto.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun adreson.',
 'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
@@ -523,10 +523,10 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sauvegarde_groupe_mots' => 'Konservi la vortogrupojn',
 'info_sauvegarde_messages' => 'Konservi la mesa&#285;ojn',
 'info_sauvegarde_mots_cles' => 'Konservi la &#349;losilvortojn',
-'info_sauvegarde_petitions' => '<MODIF>Konservi la subskriblistojn',
-'info_sauvegarde_refers' => '<MODIF>Konservi la referencantojn',
+'info_sauvegarde_petitions' => 'Savkopii subskriblistojn',
+'info_sauvegarde_refers' => 'Savkopii referencojn',
 'info_sauvegarde_reussi_01' => 'Savkopio sukcesis.',
-'info_sauvegarde_reussi_02' => '<MODIF>La datenbazo estas konservita en @archive@. Vi povas',
+'info_sauvegarde_reussi_02' => 'Datenbazo estas konservita en @archive@. Vi povas',
 'info_sauvegarde_reussi_03' => 'reen al pa&#285;o pri mastrumado',
 'info_sauvegarde_reussi_04' => 'de via retejo.',
 'info_sauvegarde_rubriques' => 'Konservi la rubrikojn',
@@ -534,7 +534,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sauvegarde_sites_references' => 'Konservi la referencigitajn retejojn',
 'info_sauvegarde_type_documents' => 'Konservi la dokumentotipojn',
 'info_sauvegarde_visites' => 'Konservi la vizitojn',
-'info_selection_chemin_acces' => '<MODIF><b>Selektu</b> &#265;i-sube la alirvojon en la dosierujilo:',
+'info_selection_chemin_acces' => '<b>Selektu</b> &#265;i-sube alirvojon en la dosierujilo:',
 'info_selection_un_seul_mot_cle' => 'Oni povas elekti nur<b>po unu &#349;losilvorto</b> samtempe por tiu grupo.',
 'info_signatures' => 'subskriboj',
 'info_site' => 'Retejo',
@@ -547,7 +547,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_site_web' => 'RETEJO :',
 'info_sites' => 'retejoj',
 'info_sites_lies_mot' => 'La referencigitaj retejoj ligitaj al tiu &#265;i &#349;losilvorto',
-'info_sites_proxy' => '<MODIF>Uzi prokuran servilon',
+'info_sites_proxy' => 'Uzi prokuran servilon',
 'info_sites_refuses' => 'La rifuzitaj retejoj',
 'info_sites_trouves' => 'Retejoj trovitaj',
 'info_sites_trouves_dans_texte' => 'Retejoj trovitaj (en la teksto)',
@@ -563,14 +563,14 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_statut_site_3' => 'Proponita',
 'info_statut_site_4' => 'En rubujo',
 'info_statut_utilisateurs_1' => 'Defa&#365;lta statuso de la importitaj uzantoj',
-'info_statut_utilisateurs_2' => '<MODIF>Elektu la statuton atribuotan al la personoj &#265;eestantaj en la LDAP-dosierujilo, kiam ili unuafoje konekti&#285;as. Poste vi povos modifi tiun valoron por &#265;iu a&#365;toro la&#365;kaze.',
+'info_statut_utilisateurs_2' => 'Elektu la statuton atribuotan al la personoj &#265;eestantaj en LDAP-dosierujilo, kiam ili unuafoje konekti&#285;as. Poste vi povos modifi tiun valoron per &#265;iu a&#365;toro la&#365;kaze.',
 'info_suivi_activite' => 'Superrigardo de la redakta agado',
 'info_supprimer_mot' => 'forigi&nbsp;tiun&nbsp;vorton',
 'info_surtitre' => 'Surtitolo:',
 'info_syndication_integrale_1' => 'Via retejo proponas abonrilatigajn dosierojn (vidu &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => '&#264;u vi deziras transdoni tutajn artikolojn, a&#365; nur afi&#349;i kelkcent-literan resumon&nbsp;?',
 'info_taille_maximale_vignette' => 'Maksimuma grandeco de la vinjetoj generataj de la sistemo&nbsp;:',
-'info_terminer_installation' => '<MODIF>Vi povas nun fini la proceduron de la&#365;norma instalado.',
+'info_terminer_installation' => 'Vi povas nun fini la&#365;norman proceduron de  instalado.',
 'info_texte' => 'Teksto',
 'info_texte_explicatif' => 'Klariga teksto',
 'info_texte_long' => '(la teksto estas longa&nbsp;: &#285;i aperas do en pluraj partoj kiuj estos rekunigitaj post validigo.)',
@@ -706,7 +706,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'logo_mot_cle' => 'VINJETO DE LA &#348;LOSILVORTO',
 'logo_rubrique' => 'VINJETO DE LA RUBRIKO',
 'logo_site' => 'VINJETO DE LA RETEJO',
-'logo_standard_rubrique' => '<MODIF>NORMA VINJETO DE LA RUBRIKOJ',
+'logo_standard_rubrique' => 'NORMA VINJETO DE RUBRIKOJ',
 'logo_survol' => 'VINJETO POR FLUGVIDO',
 
 
@@ -746,7 +746,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 
 // R
-'repertoire_plugins' => '<MODIF>Kromprogramo-indekso&nbsp;:',
+'repertoire_plugins' => 'Dosierujo&nbsp;:',
 
 
 // S
@@ -763,28 +763,25 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 
 
 // T
-'taille_cache_image' => '<MODIF>La bildoj a&#365;tomate kalkulitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en la datenaro @dir@ spacon je @taille@.',
-'taille_cache_infinie' => '<MODIF>Tiu retejo ne limigas memorspacon de la dosierujo <code>CACHE/</coche> (staplo).',
-'taille_cache_maxi' => '<MODIF>SPIP provas limigi memorspacon de la dosierujo <code>CACHE/</coche> po cirka&#365; <b>@octets@</b> da datenoj.',
+'taille_cache_image' => 'La bildoj a&#365;tomate kalkulitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
+'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapl-dosierujo.',
+'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapl-dosierujo po cirka&#365; <b>@octets@</b> da datenoj.',
 'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.',
 'taille_cache_vide' => 'La staplo estas malplena.',
 'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
 'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita al tiu artikolo (malsupre de la pa&#285;o).',
-'texte_acces_ldap_anonyme_1' => '<MODIF>Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze necesas difini ensalutilon por komenca aliro, ebligante poste ser&#265;i informojn en la adresaro. Plejofte tamen la sekvaj &#265;eloj povas resti malplenaj.',
+'texte_acces_ldap_anonyme_1' => 'Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze, necesas difini identecnomon por ser&#265;i informojn en dosierujilo. Plejofte tamen, la sekvaj &#265;eloj povas resti malplenaj.',
 'texte_admin_effacer_01' => 'Tiu komando forvi&#349;as <i>la tutan</i> enhavon de la datenbazo,
 inkluzive de <i>&#265;iuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lan&#265;i la
 SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumantan alirrajton.',
-'texte_admin_tech_01' => '<MODIF>Tiu opcio ebligas al vi konservi
-la enhavon de la bazo en dosiero stokota en la dosierujo @dossier@.
-Ne forgesu anka&#365; reakiri la tuton de la dosierujo <i>IMG/</i>, kiu enhavas
-la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
+'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi enhavon de bazo en dosiero stokota en dosierujo @dossier@. Ne forgesu anka&#365; reakiri la tuton de la dosierujo @img@, kiu enhavas bildojn kaj dokumentojn uzatajn en artikoloj kaj rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti resta&#365;rita
 NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu la datenbazon&nbsp;" esperante poste reinstali savkopion post &#285;isdatigo... Konsultu <a href="http://www.spip.net/fr_article1489.html">la dokumentaron de SPIP</a>.',
 'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron en densigita formo, por
  rapidigi ties &#349;uton hejmen a&#365; al konservo-servilo, kaj por &#349;pari diskospacon.',
 'texte_adresse_annuaire_1' => '(Se via adresaro estas instalita &#265;e la sama ma&#349;ino kiel la retejo, temas ver&#349;ajne pri &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'La jena a&#365;toro estis aldonita al la artikolo:',
-'texte_annuaire_ldap_1' => '<MODIF>Se vi havas aliron al adresaro (LDAP), vi povas uzi &#285;in por importi a&#365;tomate uzantojn sub SPIP.',
+'texte_annuaire_ldap_1' => 'Se vi havas aliron al dosierujilo (LDAP), vi povas uzi &#285;in por a&#365;tomate importi uzantojn sub SPIP.',
 'texte_article_statut' => 'Tiu artikolo estas:',
 'texte_article_virtuel' => 'Virtuala artikolo',
 'texte_article_virtuel_reference' => '<b>Virtuala artikolo&nbsp;:</b> artikolo referencigita en via SPIP-retejo, sed alidirektita al alia URL. Por forigi la alidirekton, forvi&#349;u la &#265;i supran URL-n.',
@@ -827,7 +824,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTO&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redakto.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO&nbsp;:',
-'texte_descriptif_petition' => '<MODIF>Priskribo de la subskriblisto',
+'texte_descriptif_petition' => 'Priskribo de subskriblisto',
 'texte_descriptif_rapide' => 'Konciza priskribo',
 'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficikajn dosierojn, bildojn,
  a&#365;d-vida&#309;ojn, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
@@ -838,9 +835,8 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_effacer_donnees_indexation' => 'Forigi la indeksajn datenojn',
 'texte_en_cours_validation' => 'La artikoloj kaj fulm-informoj &#265;i-subaj estas proponitaj por publikigo. Ne hezitu doni vian opinion pere de la forumoj, kiuj estas kunligitaj al ili.',
 'texte_enrichir_mise_a_jour' => 'Vi povas pliri&#265;igi la enpa&#285;igon de via teksto uzante &laquo;&nbsp;tipografiajn rapidklavojn&nbsp;&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>
-  kaj <tt>.htpasswd-admin</tt> en la dosierujo @dossier@ ?</b><p>
-  Tiuj dosieroj povas servi al vi por limigi la alirrajton de la a&#365;toroj
+'texte_fichier_authent' => '<b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>   kaj <tt>.htpasswd-admin</tt> en dosierujo @dossier@ ?</b><p>
+  Tiuj dosieroj ebligas limigi la alirrajton de a&#365;toroj
   kaj administrantoj en aliaj lokoj de via retejo
   (ekzemple, ekstera statistik-programo).<p>
   Se tio ne utilas al vi, vi povas lasi tiun opcion
@@ -862,7 +858,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_jeu_caractere_4' => 'Se tio ne kongruas kun la realo de viaj datenoj (ekzemple, sekve de datenbazo-resta&#365;ro), a&#365; se <em>vi &#309;us ekkreis tiun retejon</em> kaj deziras ekuzi novan litertiparon, bonvolu indiki &#285;in &#265;i tie&nbsp;:',
 'texte_jeu_caractere_conversion' => 'Noto&nbsp;: vi povas decidi konverti definitive &#265;iujn tekstojn de via retejo (artikoloj, fulm-informoj, forumoj, ktp...) en alfabeton <tt>utf-8</tt>, irante &#265;e <a href="@url@"> la al-utf-8-konvertan pa&#285;on</a>.',
 'texte_lien_hypertexte' => 'Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties URL-adreson.)',
-'texte_liens_sites_syndiques' => '<MODIF>La ligoj el la abonrilatigitaj retejoj povas
+'texte_liens_sites_syndiques' => '<MODIF>Ligoj el kunligitaj retejoj povas
    esti blokataj apriore; la &#265;i-suba &#285;ustigo
    indikas la defa&#365;ltan &#285;ustigon de la
    abonrilatigitaj retejoj je ties kreo. Poste
@@ -878,7 +874,7 @@ ligilojn al jena a&#365; alia retejo.',
  Necesas nun niveligi la datenbazon
  de la retejo.',
 'texte_modifier_article' => 'Modifi la artikolon:',
-'texte_moteur_recherche_active' => '<MODIF><b>La ser&#265;ilo estas aktiva.</b> Uzu tiun ordonon
+'texte_moteur_recherche_active' => '<b>La ser&#265;ilo estas aktiva.</b> Uzu tiun ordonon
   se vi volas reindeksigi (ekzemple post resta&#365;ro
   de savkopio). Notu ke la dokumentoj normale modifitaj
   (ekde la SPIP-interfaco) estas a&#365;tomate reindicataj:
@@ -888,7 +884,7 @@ ligilojn al jena a&#365; alia retejo.',
   sendepende de ties situo en la rubrikoj. Vi povas tiel
   pliri&#265;igi la retumadon &#265;e via retejo, e&#265; uzi tiujn trajtojn
   por fasoni la aspekton de la artikoloj en viaj skeletoj.',
-'texte_mots_cles_dans_forum' => '<MODIF>&#264;u vi deziras permesi la uzadon de &#349;losilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
+'texte_mots_cles_dans_forum' => '&#264;u vi deziras permesi uzadon de &#349;losilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
 'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon de lingvoelekto en la artikoloj kaj/a&#365; en la rubrikoj, konforme al la organizado de via retejo.',
 'texte_multilinguisme_trad' => 'Vi povas anka&#365; aktivigi ilon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (&#265;ar via servilo ne eltenas tiun funkcion)',
@@ -977,7 +973,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
 'texte_utilisation_moteur_syndiques' => '<MODIF>Kiam vi uzas la SPIP-internan ser&#265;ilon,
     vi povas fari ser&#265;adojn en la kunligitaj teksejoj kaj artikoloj
-    en du diversaj manieroj.
+    per du diversaj manieroj.
     <br><img src=\'puce.gif\'> La plej simpla
     estas ser&#265;i nur en la titoloj
     kaj la priskriboj de la artikoloj. <br><img src=\'puce.gif\'>
@@ -1078,7 +1074,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 // U
 'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refre&#349;igu tiun pa&#285;on.',
 'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) de la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
-'utf8_convert_backup' => 'Ne forgesu anta&#365;e kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@. Aliflanke, la superrigardo de revizioj, se aktivigita, estos dama&#285;ita.',
+'utf8_convert_backup' => '<MODIF>Ne forgesu anta&#365;e kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@. Aliflanke, la superrigardo de revizioj, se aktivigita, estos dama&#285;ita.',
 'utf8_convert_erreur_deja' => 'Via retejo jam estas je @charset@, estas senutile konverti &#285;in...',
 'utf8_convert_erreur_orig' => 'Eraro&nbsp;: la litertiparo @charset@ ne estas eltenata.',
 'utf8_convert_termine' => 'Farite&nbsp;!',

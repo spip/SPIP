@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Atualizar esta p&aacute;gina',
 'alerte_maj_impossible' => 'Aten&ccedil;&atilde;o! A atualiza&ccedil;&atilde;o da base de dados MySQL para a vers&atilde;o @version@ n&atilde;o &eacute; poss&iacute;vel, provavelmente por problema de direitos de edi&ccedil;&atilde;o na base de dados. Por favor, contate o seu provedor de hospedagem.',
 'analyse_xml' => 'Analisar XML',
+'antispam_champ_vide' => 'Deixe, por favor, este campo vazio:',
 'avis_archive_incorrect' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; um arquivo do SPIP',
 'avis_archive_invalide' => 'a c&oacute;pia de seguran&ccedil;a n&atilde;o &eacute; v&aacute;lida',
 'avis_attention' => 'ATEN&Ccedil;&Atilde;O!',

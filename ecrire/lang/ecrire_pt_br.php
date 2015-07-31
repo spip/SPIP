@@ -93,8 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_petition_activee' => 'Peti&ccedil;&atilde;o ativada',
 'bouton_radio_publication_immediate' => 'Publica&ccedil;&atilde;o imediata das mensagens
  (as contribui&ccedil;&otilde;es ser&atilde;o exibidas assim que forem enviadas; os administradores poder&atilde;o exclu&iacute;-las em seguida).',
-'bouton_radio_sauvegarde_compressee' => 'C&oacute;pia de seguran&ccedil;a compactadas em <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'C&oacute;pia de seguran&ccedil;a n&atilde;o compactada em <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'C&oacute;pia de seguran&ccedil;a compactadas em @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'C&oacute;pia de seguran&ccedil;a n&atilde;o compactada em @fichier@',
 'bouton_radio_supprimer_petition' => 'Excluir a peti&ccedil;&atilde;o',
 'bouton_radio_syndication' => 'Sindica&ccedil;&atilde;o:',
 'bouton_redirection' => 'REDIRECIONAMENTO',
@@ -510,7 +510,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_sauvegarde_petitions' => 'Fazer c&oacute;pia de seguran&ccedil;a das peti&ccedil;&otilde;es',
 'info_sauvegarde_refers' => 'Fazer c&oacute;pia de seguran&ccedil;a dos referenciadores',
 'info_sauvegarde_reussi_01' => 'C&oacute;pia de seguran&ccedil;a completada com sucesso.',
-'info_sauvegarde_reussi_02' => 'A c&oacute;pia de seguran&ccedil;a da base foi gravada em  <b>ecrire/data/@archive@</b>. Voc&ecirc; pode',
+'info_sauvegarde_reussi_02' => 'A c&oacute;pia de seguran&ccedil;a da base foi gravada em @archive@. Voc&ecirc; pode',
 'info_sauvegarde_reussi_03' => 'voltar para o gerenciamento',
 'info_sauvegarde_reussi_04' => 'do seu site.',
 'info_sauvegarde_rubriques' => 'Fazer c&oacute;pia de seguran&ccedil;a das se&ccedil;&otilde;es',
@@ -748,15 +748,15 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 
 // T
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (&iacute;cones de documentos, t&iacute;tulos apresentados sob a forma gr&aacute;fica, fun&ccedil;&otilde;es matem&aacute;ticas em formato TeX...) ocupam, no diret&oacute;rio @dir@, um total de @taille@.',
-'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
-'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
+'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio do cache.',
+'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio do cache deste site em cerca de <b>@octets@</b>.',
 'taille_cache_octets' => 'O tamanho do cache &eacute; atualmente de  @octets@.',
 'taille_cache_vide' => 'O cache est&aacute; vazio.',
 'taille_repertoire_cache' => 'Tamanho do diret&oacute;rio cache',
 'text_article_propose_publication' => 'Mat&eacute;ria proposta para publica&ccedil;&atilde;o. N&atilde;o deixe de contribuir no f&oacute;rum anexado &agrave; mat&eacute;ria (no p&eacute; da p&aacute;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP n&atilde;o aceitam nenhum acesso an&ocirc;nimo. Neste caso, &eacute; necess&aacute;rio especificar um identificador de acesso inicial de modo a poder, em seguida, pesquisar as informa&ccedil;&otilde;es no diret&oacute;rio. Na maior parte dos casos, entretanto, os campos a seguir poder&atilde;o ser deixados em branco.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,incluindo <i>todos</i> os acessos dos redatores e administradores. Ap&oacute;s execut&aacute;-lo, voc&ecirc; dever&aacute; reinstalar o SPIP para recriar uma nova base de dados bem como um acesso inicial de administrador.',
-'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite-lhe fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base num arquivo que ser&aacute; gravado no diret&oacute;rio <i>ecrire/data/</i>. N&atilde;o se esque&ccedil;a, tamb&eacute;m, de tranferir a totalidade do diret&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens o os documentos usados nas mat&eacute;rias e nas se&ccedil;&otilde;es.',
+'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base num arquivo que ser&aacute; gravado no diret&oacute;rio @dossier@. N&atilde;o se esque&ccedil;a, tamb&eacute;m, de tranferir a totalidade do diret&oacute;rio @img@, que cont&eacute;m as imagens e os documentos usados nas mat&eacute;rias e nas se&ccedil;&otilde;es.',
 'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta c&oacute;pia de seguran&ccedil;a s&oacute; poder&aacute; ser restaurada em um site com a mesma vers&atilde;o do SPIP. Sobretudo, n&atilde;o &laquo;limpe a base&raquo; com o objetivo de reinstalar a c&oacute;pia de seguran&ccedil;a ap&oacute;s uma atualiza&ccedil;&atilde;o... Consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o do SPIP</a>.',
 'texte_admin_tech_03' => 'Voc&ecirc; pode escolher fazer a c&oacute;pia de seguran&ccedil;a em formato compactado, para encurtar a sua transfer&ecirc;ncia para a sua m&aacute;quina local, ou para um servidor de c&oacute;pias de seguran&ccedil;a, e para economizar espa&ccedil;o em disco.',
 'texte_adresse_annuaire_1' => '(Se o seu diret&oacute;rio est&aacute; instalado na mesma m&aacute;quina que este website, trata-se provavelmente de &laquo;localhost&raquo;.)',
@@ -796,7 +796,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
 'texte_en_cours_validation' => 'As mat&eacute;rias e notas abaixo est&atilde;o propostas para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o sobre as mesmas nos f&oacute;runs anexos.',
 'texte_enrichir_mise_a_jour' => 'Voc&ecirc; pode enriquecer a diagrama&ccedil;&atilde;o do seu texto usando &laquo;atalhos tipogr&aacute;ficos&raquo;.',
-'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio <tt>ecrire/data/</tt>?</b><p />
+'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio @dossier@?</b><p />
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras &aacute;reas do seu site (programas externos de estat&iacute;sticas, por exemplo).<p />
 Se eles n&atilde;o forem &uacute;teis, voc&ecirc; poder&aacute; deixar esta op&ccedil;&atilde;o com o seu valor padr&atilde;o (sem criar os arquivos).',
 'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
@@ -848,11 +848,11 @@ Nesse caso, informe abaixo o endere&ccedil;o, no formato
 O MySQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando elas s&atilde;o danificadas por acidente. Voc&ecirc; poder&aacute; tentar esta repara&ccedil;&atilde;o; em caso de falha, conserve uma c&oacute;pia da mensagem de erro, que poder&aacute; conter ind&iacute;cios do que n&atilde;o est&aacute; funcionando...<p />
 Se o problema persistir, contate o seu servi&ccedil;o de hospedagem.<p />',
 'texte_restaurer_base' => 'Restaurar o conte&uacute;do de uma c&oacute;pia de seguran&ccedil;a da base',
-'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite-lhe restaurar uma c&oacute;pia de seguran&ccedil;a previamente efetuada na base. Para isso, o arquivo contendo a c&oacute;pia de seguran&ccedil;a precisa ser colocada no diret&oacute;rio <i>ecrire/data/</i>.
+'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite restaurar uma c&oacute;pia de seguran&ccedil;a previamente efetuada na base. Para isso, o arquivo contendo a c&oacute;pia de seguran&ccedil;a precisa ser colocada no diret&oacute;rio @dossier@.
 Seja cuidadoso com esta funcionalidade: <b>as perdas eventuais causadas pela modifica&ccedil;&atilde;o s&atilde;o irrevers&iacute;veis.</b>',
 'texte_sauvegarde' => 'Fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base',
 'texte_sauvegarde_base' => 'Fazer uma c&oacute;pia de seguran&ccedil;a da base',
-'texte_sauvegarde_compressee' => 'A c&oacute;pia de seguran&ccedil;a da base ser&aacute; feita no arquivo n&atilde;o compactado <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'A c&oacute;pia de seguran&ccedil;a da base ser&aacute; feita no arquivo n&atilde;o compactado @fichier@.',
 'texte_selection_langue_principale' => 'Voc&ecirc; pode escolher abaixo o &laquo;idioma principal&raquo; do site. esta escolha n&atilde;o o obriga - felizmente! - a escrever as suas mat&eacute;rias no idioma selecionado, mas permite determinar:
  <ul><li> o formato padr&atilde;o das datas no site p&uacute;blico;</li>
  <li> a natureza do motor tipogr&aacute;fico que o SPIP dever&aacute; usar para a composi&ccedil;&atilde;o dos textos;</li>
@@ -970,7 +970,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 // U
 'utf8_convert_attendez' => 'Aguarde alguns instantes e atualize esta p&aacute;gina.',
 'utf8_convert_avertissement' => 'Voc&ecirc; est&aacute; prestes a converter o conte&uacute;do da sua base de dados(mat&eacute;rias, notas etc) do conjunto de caracteres <b>@orig@</b> para o conjunto de caracteres <b>@charset@</b>.',
-'utf8_convert_backup' => 'N&atilde;o se esque&ccedil;a de fazer primeiro uma c&oacute;pia de seguran&ccedil;a completa do seu site. Voc&ecirc; deve tamb&eacute;m verificar se os seus esqueletos e arquivos de idioma s&atilde;o compat&iacute;veis com @charset@. Caso contr&aacute;rio, se o acompanhamento de revis&otilde;es estiver ativado, o mesmo poder&aacute; ser danificado.',
+'utf8_convert_backup' => 'N&atilde;o se esque&ccedil;a de fazer primeiro uma c&oacute;pia de seguran&ccedil;a completa do seu site. Voc&ecirc; deve tamb&eacute;m verificar se os seus esqueletos e arquivos de idioma s&atilde;o compat&iacute;veis com @charset@.',
 'utf8_convert_erreur_deja' => 'O seu site j&aacute; est&aacute; em @charset@, a convers&atilde;o n&atilde;o ocorreu...',
 'utf8_convert_erreur_orig' => 'Erro: o conjunto de caracteres @charset@ n&atilde;o &eacute; suportado.',
 'utf8_convert_termine' => 'Terminou!',
