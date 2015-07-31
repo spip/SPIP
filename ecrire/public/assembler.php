@@ -113,7 +113,7 @@ function assembler_page ($fond) {
 				$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 			$since = str_replace('GMT', '', $since);
 			if (trim($since) == http_gmoddate($lastmodified)) {
-				$page['status'] = $status;
+				$page['status'] = 304;
 				$headers_only = true;
 			}
 		}
