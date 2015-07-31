@@ -14,6 +14,7 @@ include_ecrire('inc_lang.php3');
 include_ecrire('inc_mail.php3');
 include_ecrire('inc_barre.php3');
 include_ecrire('inc_forum.php3');
+include_ecrire("inc_abstract_sql.php3");
 
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
