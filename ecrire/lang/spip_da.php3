@@ -246,10 +246,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' for at kunne begynde installationen',
 'dirs_preliminaire' => 'Forberedelser: <B>Ops&aelig;tning af adgangsrettigheder</b>',
 'dirs_probleme_droits' => '<b>Problem med adgangsrettigheder</b>',
-'dirs_repertoires_absents' => '<MODIF> <B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
   <P>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
-  Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist o venfor.
-  Hvis ikke, s&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
+  Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
+  Hvis ikke, sm&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
   <P>Derefter kan du',
 'dirs_repertoires_suivants' => '<b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
 
@@ -300,11 +300,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Billedoverskrift:',
 'entree_titre_obligatoire' => '<B>Titel</b> [Skal oplyses]<BR>',
 'entree_url' => 'Dit websteds URL',
-'erreur_boucle_double' => '<NEW>BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW>BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW>Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW>La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW>Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: flertydig definition',
+'erreur_boucle_fermant' => 'BOUCLE@id@: mangler slutkoden der lukker',
+'erreur_boucle_syntaxe' => 'forkert loop (BOUCLE) syntax ',
+'erreur_boucle_syntaxe2' => 'Loopet (BOUCLE) @milieu@ er forkert.',
+'erreur_filtre' => 'Fejl - udefineret filter: <b>"@filter@"</b>',
 
 
 // F
@@ -660,12 +660,12 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_envoyer_message_prive' => 'Send en privat meddelelse til forfatteren',
 'info_erreur_requete' => 'Fejl i foresp&oslash;rgsel:',
 'info_erreur_restauration' => 'Fejl under genopretning: fil findes ikke.',
-'info_erreur_squelette' => '<NEW>Erreur sur le site',
-'info_erreur_squelette2' => '<NEW>Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => '<NEW><b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
-	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
-	ou contactez votre h&eacute;bergeur.</font><br></b>',
+'info_erreur_squelette' => 'Fejl p&aring; sitet',
+'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
+'info_erreur_systeme' => 'System fejl (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
+ <font color=\'red\'>pr&oslash;v <a href=\'ecrire/admin_repair.php3\'>at reparere databasen</a>,
+eller kontakt din internetudbyder.</font><br></b>',
 'info_etape_suivante' => 'G&aring; til n&aelig;ste trin',
 'info_etape_suivante_1' => 'Du kan g&aring; til n&aelig;ste trin.',
 'info_etape_suivante_2' => 'Du kan g&aring; til n&aelig;ste trin.',
@@ -701,7 +701,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_hier' => 'i g&aring;r:',
 'info_identification_publique' => 'Din offentlige identitet...',
 'info_image_aide' => 'HJ&AElig;LP',
-'info_image_process' => '<NEW>Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process' => 'V&aelig;lg den bedste metode til at skabe miniaturebilleder ved at klikke p&aring; det korresponderende billede.',
 'info_impossible_lire_page' => '<B>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>',
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
@@ -1350,7 +1350,7 @@ og igen f&aring; adgang til webstedet.',
 'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
  <i>ecrire/data/</i>.
  Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
-'texte_admin_tech_02' => '<MODIF> Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
+'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
  Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
  For mere information henvises til <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP dokumentation</a>.',
 'texte_admin_tech_03' => 'Du kan v&aelig;lge at gemme filen i komprimeret form for hurtigere at kunne overf&oslash;re den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
