@@ -646,7 +646,7 @@ function calculer_criteres ($idb, &$boucles) {
 		// Gestion centralisee des erreurs pour pouvoir propager
 		if (is_array($res)) {
 			$err = $res;
-			erreur_squelette($res[0], $boucles[$idb]);
+			erreur_squelette($res, $boucles[$idb]);
 		}
 	}
 	return $err;
