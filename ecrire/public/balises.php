@@ -1209,7 +1209,7 @@ function balise_SET_dist($p){
 		array_shift($p->param);
 	}
 
-	$p->code = "(\$Pile['vars'][$_nom] = $_valeur)";
+	$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
 
 	#$p->interdire_scripts = true;
 	return $p;
