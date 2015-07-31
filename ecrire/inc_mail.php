@@ -249,7 +249,7 @@ function envoyer_mail_proposition($id_article) {
 				     ."\n" 
 				     . _T('info_propose_5')
 				     ."\n" 
-				     . generer_url_ecrire("articles", "id_article=$id_article")
+				     . generer_url_ecrire("articles", "id_article=$id_article", true)
 				     . "\n\n\n" 
 				     . extrait_article($row));
 			changer_langue($lang_utilisateur);
