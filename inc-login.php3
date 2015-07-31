@@ -20,7 +20,7 @@ function auth_http($cible, $essai_auth_http) {
 		if (!verifier_php_auth()) {
 			$url = urlencode($cible->getUrl());
 			$page_erreur = "<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&url=$url'>Nouvelle tentative</a>]";
-			if (ereg("ecrire", $url))
+			if (ereg("ecrire/", $url))
 				$page_erreur .= " [<a href='ecrire/'>espace priv&eacute</a>]";
 			ask_php_auth($page_erreur);
 		}
@@ -67,7 +67,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 	if (!$cible) {
 		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
-		else if ($prive) $cible = new Link('ecrire');
+		else if ($prive) $cible = new Link('ecrire/');
 		else $cible = $clean_link;
 	}
 	$cible->delVar('var_erreur');
