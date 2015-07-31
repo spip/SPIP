@@ -38,19 +38,19 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	// Ne pas proposer de "rester connecte quelques jours"
 	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
 	$rester_connecte = (_RENOUVELLE_ALEA < 12*3600) ? '' : ' ';
+
 	$valeurs = array(
-					#'auth_http' => $auth_http,
-					'var_login' => $login,
-					'rester_connecte' => $rester_connecte,
-					'_logo' => isset($auteur['logo'])?$auteur['logo']:'',
-					'cnx' => isset($auteur['cnx'])?$auteur['cnx']:'',
-					'_alea_actuel' => isset($auteur['alea_actuel'])?$auteur['alea_actuel']:'',
-					'_alea_futur' => isset($auteur['alea_futur'])?$auteur['alea_futur']:'',
+		#'auth_http' => $auth_http,
+		'var_login' => $login,
+		'rester_connecte' => $rester_connecte,
+		'_logo' => isset($auteur['logo'])?$auteur['logo']:'',
+		'cnx' => isset($auteur['cnx'])?$auteur['cnx']:'',
+		'_alea_actuel' => isset($auteur['alea_actuel'])?$auteur['alea_actuel']:'',
+		'_alea_futur' => isset($auteur['alea_futur'])?$auteur['alea_futur']:'',
 	);
 	$valeurs['_hidden'] = 
 	'<input type="hidden" name="session_password_md5" value="" />'
-	. '<input type="hidden" name="next_session_password_md5" value="" />'
-	. '<input type="hidden" name="session_login_hidden" id="session_login_hidden" value="" />';
+	. '<input type="hidden" name="next_session_password_md5" value="" />';
 
 	// Si on est connecte, envoyer vers la destination
 	// si on en a le droit, et sauf si on y est deja
@@ -79,6 +79,14 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 		}
 	}
 
+	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
+	// pose de cookie ; s'il n'est pas la, c'est echec cookie
+	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
+	// et pas un echec cookie.
+	if (_request('var_erreur') == 'cookie')
+		$valeurs['echec_cookie'] = ' ';
+
+
 	return array($editable,$valeurs);
 }
 
@@ -93,26 +101,8 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	$session_password = _request('password');
 	$session_md5pass = _request('session_password_md5');
 	$session_md5next = _request('next_session_password_md5');
-	
-	// en cas d'echec de cookie, inc_auth a renvoye vers le script de
-	// pose de cookie ; s'il n'est pas la, c'est echec cookie
-	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
-	// et pas un echec cookie.
-	/*if (_request('var_echec_cookie'))
-		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
-	else $echec_cookie = '';*/
-	
-	if ($echec_cookie){
-		$erreurs['message_erreur'] = "echec cookie ";
-		/*
-		[(#ENV{echec_cookie})
-<fieldset class="reponse_formulaire">
-<legend><:avis_erreur_cookie:></legend>
-<p><:login_cookie_oblige:></p>
-<p><:login_cookie_accepte:></p>
-</fieldset>]*/
-	}
-	
+	$session_remember = _request('session_remember');
+
 	#$pose_cookie = generer_url_action('cookie',"",false,true);
 	$auth_http = '';	
 	if ($echec_cookie AND !$ignore_auth_http) {
@@ -151,7 +141,8 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 			unset($row['lang']);
 		}
 		$identifier_login = charger_fonction('identifier_login','inc');
-		if (!$identifier_login($session_login,$session_password,$session_md5pass,$session_md5next)){
+		if (!$identifier_login($session_login, $session_password,
+		$session_md5pass, $session_md5next, $session_remember)){
 			$erreurs['password'] = _T('login_erreur_pass');
 		}
 		else {
@@ -200,6 +191,12 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 		else $cible = generer_url_ecrire();
 	}*/
 
+	// Si on est admin, poser le cookie de correspondance
+	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
+		include_spip('inc/cookie');
+		spip_setcookie('spip_admin', '@'.$GLOBALS['auteur_session']['login'],
+		time() + 7 * 24 * 3600);
+	}
 
 	// Si on est connecte, envoyer vers la destination
 	if ($cible
