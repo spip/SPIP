@@ -332,10 +332,13 @@ function declarer_url_arbo($type, $id_objet) {
 		// Soit c'est un Come Back d'une ancienne url propre de l'objet
 		// Soit c'est un vrai conflit. Rajouter l'ID jusqu'a ce que ca passe, 
 		// mais se casser avant que ca ne casse.
+
+		// il peut etre du a un changement de casse de l'url simplement
+		// pour ce cas, on reecrit systematiquement l'url en plus d'actualiser la date
 		do {
 			$where = "type='$type' AND id_objet=$id_objet AND url=";
-			if (sql_countsel('spip_urls', $where  .sql_quote($set['url']))) {
-				sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
+			if (sql_countsel('spip_urls AS U', $where  .sql_quote($set['url']))) {
+				sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
 				spip_log("reordonne $type $id_objet");
 				return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 			}
@@ -344,8 +347,8 @@ function declarer_url_arbo($type, $id_objet) {
 				if (strlen($set['url']) > 200)
 					//serveur out ? retourner au mieux
 					return  declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
-				elseif (sql_countsel('spip_urls', $where . sql_quote($set['url']))) {
-					sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), 'url='.sql_quote($set['url']));
+				elseif (sql_countsel('spip_urls AS U', $where . sql_quote($set['url']))) {
+					sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), 'url='.sql_quote($set['url']));
 					return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 				}
 			}
