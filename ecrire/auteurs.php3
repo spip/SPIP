@@ -26,7 +26,7 @@ $retour = urlencode($retour);
 
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
-	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
 	fin_raccourcis();
 }
 

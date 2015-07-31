@@ -160,11 +160,6 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 
 }
 
-// inutile ?
-if ($redirect_ok == 'oui' AND $redirect AND !$echec) {
-	@header("Location: ".rawurldecode($redirect));
-	exit;
-}
 
 //
 // Affichage
@@ -211,7 +206,6 @@ if ($echec){
 debut_cadre_formulaire();
 echo "<FORM ACTION='auteur_infos.php3?id_auteur=$id_auteur' METHOD='post'>";
 echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
-echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">";
 
 //
 // Infos personnelles
