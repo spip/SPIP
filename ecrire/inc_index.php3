@@ -61,7 +61,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
 
 	// Cas particulier : sigles d'au moins deux lettres
-	$texte = preg_replace(", ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) ,",
+	$texte = preg_replace("/ ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) /",
 		' \\1___ ', $texte);
 	$texte = strtolower($texte);
 
