@@ -425,6 +425,7 @@ function calculer_page($fond, $contexte) {
 	$id_doublons['breves'] = '0';
 	$id_doublons['auteurs'] = '0';
 	$id_doublons['forums'] = '0';
+	$id_doublons['signatures'] = '0';
 	$id_doublons['mots'] = '0';
 	$id_doublons['groupes_mots'] = '0';
 	$id_doublons['syndication'] = '0';
@@ -477,9 +478,8 @@ function calculer_page_globale($fond) {
 		$lang = $contexte['lang'];	// l'URL peut fixer lang=xx, mais inc-urls peut aussi agir sur $contexte[lang]
 	}
 
-	if ($GLOBALS['forcer_lang']) {
-		// on ne touche plus
-	} else if ($id_rubrique = $contexte['id_rubrique']) {
+	// chercher la langue de l'objet et sa rubrique (pour article=3.html)
+	if ($id_rubrique = $contexte['id_rubrique']) {
 		$id_rubrique_fond = $id_rubrique;
 		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique'")))
 			if ($row['lang']) $lang = $row['lang'];
@@ -507,7 +507,9 @@ function calculer_page_globale($fond) {
 	else {
 		$id_rubrique_fond = 0;
 	}
-	lang_select($lang);
+
+	if (!$GLOBALS['forcer_lang'])
+		lang_select($lang);
 
 	$fond = chercher_squelette($fond, $id_rubrique_fond, $spip_lang);
 

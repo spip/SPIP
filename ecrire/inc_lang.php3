@@ -505,7 +505,7 @@ function verifier_lang_url() {
 	// Subtilite : si la langue demandee par cookie est la bonne
 	// alors on fait comme si $lang etait passee dans l'URL
 	// (pour criteres {lang}).
-	$GLOBALS['lang'] = $spip_lang;
+	$GLOBALS['lang'] = $GLOBALS['HTTP_GET_VARS']['lang'] = $spip_lang;
 }
 
 
