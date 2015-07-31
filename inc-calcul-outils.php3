@@ -51,7 +51,7 @@ function affiche_logos($logos, $lien, $align, $alt='logo') {
 		$mouseover = " onmouseover=\"this.src='$artoff'\" "
 			."onmouseout=\"this.src='$arton'\"";
 
-	$milieu = "<img src=\"$arton\" alt=\"".entites_html($alt).'"'
+	$milieu = "<img src=\"$arton\" alt=\"".entites_html(strtolower($alt)).'"'
 		. ($align ? " align='$align'" : '') 
 		. $taille
 		. $mouseover

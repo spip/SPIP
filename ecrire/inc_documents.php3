@@ -54,12 +54,23 @@ function vignette_par_defaut($type_extension, $size=true) {
 
 //
 // Affiche le document avec sa vignette par defaut
-// Attention : si c'est un fichier graphique on prefere afficher une vue
-// reduite, quand c'est possible (presque toujours, donc)
+//
+// Attention : en mode 'doc', si c'est un fichier graphique on prefere
+// afficher une vue reduite, quand c'est possible (presque toujours, donc)
+// En mode 'vignette', l'image conserve sa taille
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
-function document_et_vignette($document, $url, $portfolio = false) {
+function image_pattern($vignette) {
+	return "<img src='"
+			. (_DIR_RESTREINT ? '' : '../')
+			. $vignette['fichier']."'
+			width='".$vignette['largeur']."'
+			height='".$vignette['hauteur']."'
+			style='border-width: 0px' />";
+}
+
+function document_et_vignette($document, $url, $portfolio=false) {
 	// a supprimer avec spip_types_documents
 	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM
 		spip_types_documents WHERE id_type=".$document['id_type']));
@@ -68,22 +79,17 @@ function document_et_vignette($document, $url, $portfolio = false) {
 	AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents
 	WHERE id_document = ".$document['id_vignette']))) {
 		if (!$portfolio OR !(lire_meta('creer_preview') == 'oui')) {
-			$image = "<img src='"
-			. (_DIR_RESTREINT ? '' : '../')
-			. $vignette['fichier']."'
-			width='".$vignette['largeur']."'
-			height='".$vignette['hauteur']."'
-			style='border-width: 0px' />";
+			$image = image_pattern($vignette);
 		} else {
 			$image = prive_lien_image_reduite ($vignette['largeur'],
 				$vignette['hauteur'], $vignette['fichier']);
 		}
 	} else if (strstr(lire_meta('formats_graphiques'), $extension)
 	AND lire_meta('creer_preview') == 'oui') {
-		if (!_DIR_RESTREINT)
-			$image = prive_lien_image_reduite ($document['largeur'], $document['hauteur'], $document['fichier']);
-		else
-			$image = reduire_image(copie_locale($document['fichier']));
+		include_ecrire('inc_logos.php3');
+		#var_dump($document);
+		$image = reduire_image_logo(copie_locale(
+			(_DIR_RESTREINT ? '' : '../' ) . $document['fichier']));
 	}
 
 	if (!$image) {
@@ -238,42 +244,74 @@ function integre_image($id_document, $align, $type_aff) {
 	$id_vignette = $row['id_vignette'];
 
 	// on construira le lien en fonction du type de doc
-	if ($extension = @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = $id_type"))) {
-
-			$extension = $extension['extension'];
+	if ($t = @spip_fetch_array(spip_query(
+	"SELECT titre,extension FROM spip_types_documents
+	WHERE id_type = $id_type"))) {
+			$extension = $t['extension']; # jpg, tex
+			$type = $t['titre']; # JPEG, LaTeX
 	}
 
-	// recuperer la vignette pour affichage inline
-	if ($mode == 'document')
-		$url = $url_fichier;
+	// Attention ne pas confondre :
+	// pour un document affiche avec le raccourci <IMG> on a
+	// $mode == 'document' et $type_aff == 'IMG'
+	// inversement, pour une image presentee en mode 'DOC',
+	// $mode == 'vignette' et $type_aff == 'DOC'
 
-	$vignette = document_et_vignette($row, $url);
-
-	if ($titre) {
-		if ($mode == 'document')
-			$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
-		else $titre_ko = $titre;
-		$titre_ko = supprimer_tags(propre($titre_ko));
-		$alt = " alt=\"$titre_ko\" title=\"$titre_ko\"";
+	// Type : vignette ou document ?
+	if ($mode == 'document') {
+		$vignette = document_et_vignette($row, $url_fichier);
+	} else {
+		$vignette = image_pattern($row);
 	}
-	else if ($mode == 'document')
-		$alt = " alt='document $id_document'";
-	else
-		$alt = " alt=''";
+
+	//
+	// Regler le alt et title
+	//
+	$alt_titre_doc = entites_html(texte_backend(supprimer_tags($titre)));
+	$alt_infos_doc = entites_html($type
+		. (($taille>0) ? ' - '.taille_en_octets($taille) : ''));
+	if ($row['distant'] == 'oui')
+		$alt_infos_doc .= ", ".$url_fichier;
+	if ($alt_titre_doc) $alt_sep = ', ';
+
+	// documents presentes en mode <DOC> : pas de title detaille
+	// puisque tout est en dessous
+	if ($mode == 'document' AND $type_aff == 'DOC') {
+		$alt = " alt=\"\"";
+	}
+	// document en mode <IMG> : alt + title detailles
+	else if ($mode == 'document' AND $type_aff == 'IMG') {
+		$alt = " alt=\"$alt_titre_doc$alt_sep$alt_infos_doc\"
+			title=\"$alt_titre_doc$alt_sep$alt_infos_doc\"";
+	}
+	// vignette en mode <DOC> : alt disant "JPEG", pas de title
+	else if ($mode == 'vignette' AND $type_aff == 'DOC') {
+		$alt = " alt=\"($type)\"";
+	}
+	// vignette en mode <IMG> : alt + title s'il y a un titre
+	else if ($mode == 'vignette' AND $type_aff == 'IMG') {
+		if (strlen($titre))
+			$alt = " alt=\"$alt_titre_doc ($type)\" title=\"$alt_titre_doc\"";
+		else
+			$alt = " alt=\"($type)\"";
+	}
 
 	$vignette = str_replace(' />', "$alt />", $vignette); # inserer l'attribut
 
-	$vignette .= (($type_aff != 'DOC') ? "" :
-	     ((!$titre ? "" : "<div class='spip_doc_titre'><strong>$titre</strong></div>") .
-	      (!$descriptif ? "" : "<div class='spip_doc_descriptif'>$descriptif</div>")));
-
-	if (($type_aff == 'DOC') && ($mode == 'document')) { 
-		if ($type = @spip_fetch_array(spip_query("SELECT titre FROM spip_types_documents WHERE id_type=$id_type")))
-			$type = $type['titre'];
-		else
-			$type = 'fichier';
-		$vignette .= "<div>(<a href='$url_fichier'>$type, "
-			.taille_en_octets($taille)."</a>)</div>";
+	// Preparer le texte sous l'image pour les <DOC>
+	if ($type_aff == 'DOC') {
+		if (strlen($titre))
+			$txt = "<div class='spip_doc_titre'><strong>"
+				. $titre
+				. "</strong></div>\n";
+		if (strlen($descriptif))
+			$txt .= "<div class='spip_doc_descriptif'>$descriptif</div>\n";
+		if ($mode == 'document') {
+			list($type) = @spip_fetch_array(spip_query(
+			"SELECT titre FROM spip_types_documents WHERE id_type=$id_type"));
+			$txt .= "<div>(<a href='$url_fichier'>$type, "
+				.taille_en_octets($taille)."</a>)</div>";
+		}
 	}
 
 	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>
@@ -282,13 +320,22 @@ function integre_image($id_document, $align, $type_aff) {
 	} else {
 		$span = "span";
 	}
-	if ($align != 'center') $float = "float: $align;";
-	
-	return 
-	  ("<$span class='spip_documents spip_documents_$align' style='$float" .
-	   ((($align == 'center') ||  ($type_aff != 'DOC'))  ?  "" :
-	    ("width: " . (($largeur_vignette > 120) ? $largeur_vignette : 120) . "px;")) .
-	   "'>" . $vignette . "</$span>\n");
+
+	if ($align != 'center') {
+		$float = "float: $align;";
+		if ($type_aff == 'IMG') {
+			$width = extraire_attribut($vignette, 'width');
+			if ($width < 120) $width = 120;
+			$width = ' width: '.$width.'px;';
+		}
+		$style = " style='$float$width'";
+	}
+
+	return
+		"<$span class='spip_documents spip_documents_$align' $style>"
+		. $vignette
+		. $txt
+		. "</$span>\n";
 }
 
 //
