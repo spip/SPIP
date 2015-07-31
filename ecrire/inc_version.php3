@@ -35,6 +35,7 @@ $flag_levenshtein = ($php_version_maj >= 4);
 $flag_mt_rand = ($php_version_maj > 3 OR $php_version_min >= 6);
 $flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
 $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
+$flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 
 if ($flag_function_exists) {
 	$flag_gz = function_exists("gzopen");
@@ -214,7 +215,7 @@ function include_ecrire($file) {
 $php_module = ($flag_sapi_name AND @php_sapi_name() == 'apache') OR
 	(ereg("^Apache", $SERVER_SOFTWARE) AND ereg(" PHP", $SERVER_SOFTWARE));
 
-$flag_upload = get_cfg_var('upload_max_filesize') > 0;
+$flag_upload = !$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0);
 
 
 function tester_upload() {
