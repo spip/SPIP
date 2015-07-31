@@ -1440,7 +1440,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
-	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.id_message", "M.date_heure");
+	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_liens AS L ON (L.objet='message' AND L.id_objet=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.id_message", "M.date_heure");
 	while($row=sql_fetch($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
@@ -1457,7 +1457,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 		      $cat = 'calendrier-couleur12';
 		    else {
 		      $cat = 'calendrier-couleur9';
-		      $auteurs = array_map('array_shift', sql_allfetsel("nom", "spip_auteurs AS A LEFT JOIN spip_auteurs_messages AS L ON L.id_auteur=A.id_auteur", "(L.id_message=$id_message AND (A.id_auteur!=$connect_id_auteur))"));
+		      $auteurs = array_map('array_shift', sql_allfetsel("nom", "spip_auteurs AS A LEFT JOIN spip_auteurs_liens AS L ON L.id_auteur=A.id_auteur", "(L.objet='message' AND L.id_objet=$id_message AND (A.id_auteur!=$connect_id_auteur))"));
 		    }
 		  }
 		}
@@ -1539,7 +1539,7 @@ function quete_calendrier_taches_rv () {
 
 	if (!$connect_id_auteur) return array();
 
-	$r = sql_allfetsel("M.texte AS description, M.id_message AS uid, M.date_heure AS dtstart, M.date_fin AS dtend, M.titre AS summary, M.type AS category, M.rv AS location", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui' AND (( " . sql_date_proche('M.date_heure', -1, 'DAY') . ' AND ' .  sql_date_proche('M.date_heure', 1,  'MONTH') . ") OR (M.date_heure < NOW() AND M.date_fin > NOW() )) AND M.statut='publie'", "M.id_message",  "M.date_heure");
+	$r = sql_allfetsel("M.texte AS description, M.id_message AS uid, M.date_heure AS dtstart, M.date_fin AS dtend, M.titre AS summary, M.type AS category, M.rv AS location", "spip_messages AS M LEFT JOIN spip_auteurs_liens AS L ON (L.id_objet=M.id_message)", "(L.objet='message' AND L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui' AND (( " . sql_date_proche('M.date_heure', -1, 'DAY') . ' AND ' .  sql_date_proche('M.date_heure', 1,  'MONTH') . ") OR (M.date_heure < NOW() AND M.date_fin > NOW() )) AND M.statut='publie'", "M.id_message",  "M.date_heure");
 	foreach ($r as $k => $row) $r[$k]['url'] = tache_redirige($row);
 	return  $r;
 }
@@ -1555,7 +1555,7 @@ function quete_calendrier_agenda ($annee, $mois) {
 	$annee = annee($date);
 
 	// rendez-vous personnels dans le mois
-	$result_messages = sql_select("M.titre AS summary, M.texte AS description, M.id_message AS uid, M.date_heure", "spip_messages AS M, spip_auteurs_messages AS L", "((L.id_auteur=$connect_id_auteur AND L.id_message=M.id_message) OR M.type='affich') AND M.rv='oui' AND M.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND M.statut='publie'");
+	$result_messages = sql_select("M.titre AS summary, M.texte AS description, M.id_message AS uid, M.date_heure", "spip_messages AS M, spip_auteurs_liens AS L", "((L.id_auteur=$connect_id_auteur AND L.id_objet=M.id_message AND L.objet='message') OR M.type='affich') AND M.rv='oui' AND M.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND M.statut='publie'");
 	while($row=sql_fetch($result_messages)) {
 		$rv[journum($row['date_heure'])] = $row;
 	}

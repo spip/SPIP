@@ -25,7 +25,16 @@ $spip_resultats_key = array(
 // pas de cle ni index, ca fait des insertions plus rapides et les requetes jointes utilisees en recheche ne sont pas plus lentes ...
 );
 
+$spip_auteurs_liens = array(
+		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL",
+		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
+$spip_auteurs_liens_key = array(
+		"PRIMARY KEY"		=> "id_auteur,id_objet,objet",
+		"KEY id_auteur"	=> "id_auteur");
+/*
 $spip_auteurs_articles = array(
 		"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL");
@@ -50,7 +59,7 @@ $spip_auteurs_messages = array(
 $spip_auteurs_messages_key = array(
 		"PRIMARY KEY"	=> "id_auteur, id_message",
 		"KEY id_message"	=> "id_message");
-
+*/
 $spip_documents_liens = array(
 		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -69,7 +78,7 @@ $spip_meta = array(
 
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
-
+/*
 $tables_auxiliaires['spip_auteurs_articles'] = array(
 	'field' => &$spip_auteurs_articles,
 	'key' => &$spip_auteurs_articles_key);
@@ -79,6 +88,11 @@ $tables_auxiliaires['spip_auteurs_rubriques'] = array(
 $tables_auxiliaires['spip_auteurs_messages'] = array(
 	'field' => &$spip_auteurs_messages,
 	'key' => &$spip_auteurs_messages_key);
+*/
+$tables_auxiliaires['spip_auteurs_liens'] = array(
+	'field' => &$spip_auteurs_liens,
+	'key' => &$spip_auteurs_liens_key);
+
 $tables_auxiliaires['spip_documents_liens'] = array(
 	'field' => &$spip_documents_liens,
 	'key' => &$spip_documents_liens_key);

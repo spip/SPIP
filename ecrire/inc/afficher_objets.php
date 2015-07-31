@@ -520,7 +520,7 @@ function afficher_auteurs_boucle($row, $own){
 	list($afficher_langue, $affrub, $langue_defaut, $formater,$type,$primary) = $own;
 	$formater_auteur = $formater ? $formater : charger_fonction('formater_auteur', 'inc');
 	if ($row['statut'] == '0minirezo')
-		$row['restreint'] = sql_countsel('spip_auteurs_rubriques', "id_auteur=".intval($row['id_auteur']));
+		$row['restreint'] = sql_countsel('spip_auteurs_liens', "objet='rubrique' AND id_auteur=".intval($row['id_auteur']));
 
 	list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur'],$row);
 	if ($w) {

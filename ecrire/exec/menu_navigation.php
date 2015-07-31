@@ -22,7 +22,7 @@ function exec_menu_navigation_dist() {
 
 	$gadget = '<div style="width: 300px;">';
 
-	$vos_articles = sql_select("A.id_article, A.id_rubrique, A.titre, A.statut", "spip_articles AS A, spip_auteurs_articles AS L", "A.id_article=L.id_article AND L.id_auteur=$connect_id_auteur AND A.statut='prepa'", "A.date", "A.date DESC", "5");
+	$vos_articles = sql_select("A.id_article, A.id_rubrique, A.titre, A.statut", "spip_articles AS A, spip_auteurs_liens AS L", "L.objet='article' AND A.id_article=L.id_objet AND L.id_auteur=$connect_id_auteur AND A.statut='prepa'", "A.date", "A.date DESC", "5");
 	$vos = '';
 	while($row = sql_fetch($vos_articles)) {
 		$id_article = $row['id_article'];

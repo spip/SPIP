@@ -41,7 +41,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $context_compil) {
 	if (!$args[0] AND $id) {
 		$r = '';
 		$s = sql_allfetsel('email',
-				   'spip_auteurs AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_auteur=L.id_auteur',
+				   'spip_auteurs AS A LEFT JOIN spip_auteurs_liens AS L ON (A.id_auteur=L.id_auteur AND L.objet=\'article\')',
 				   "A.email != '' AND L.id_article=$id");
 		foreach($s as $row) {
 			if (email_valide($row['email']))

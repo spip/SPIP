@@ -381,7 +381,7 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo'
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
-	$n = sql_fetsel('A.id_article', 'spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON L.id_article=A.id_article', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
+	$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
 	return $n ? true : false;
 }
 
@@ -512,8 +512,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	if ($raz) unset($restreint[$id_auteur]);
 	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
 
-	$where = "id_auteur=$id_auteur AND id_rubrique!=0";
-	$table =  "spip_auteurs_rubriques";
+	$where = "id_auteur=$id_auteur AND id_objet!=0 AND objet='rubrique'";
+	$table =  "spip_auteurs_liens";
 	// Recurrence sur les sous-rubriques
 	$rubriques = array();
 	while (true) {

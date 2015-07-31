@@ -84,7 +84,7 @@ function presenter_message_boucles($row, $afficher_auteurs)
 			// Auteurs
 
 	if ($afficher_auteurs) {
-		$auteurs = sql_allfetsel("A.id_auteur, A.nom", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur!=$connect_id_auteur AND L.id_auteur=A.id_auteur");
+		$auteurs = sql_allfetsel("A.id_auteur, A.nom", "spip_auteurs AS A, spip_auteurs_liens AS L", "L.objet='message' AND L.id_objet=$id_message AND L.id_auteur!=$connect_id_auteur AND L.id_auteur=A.id_auteur");
 
 		foreach ($auteurs as $k => $row_auteurs) {
 			$id_auteur = $row_auteurs['id_auteur'];

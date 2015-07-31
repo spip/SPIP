@@ -177,7 +177,7 @@ function infos_naviguer($id_rubrique, $statut, $row)
 	$navigation =
 	  ($boite ?debut_boite_info(true). $boite . fin_boite_info(true):"");
 
-	$res = sql_allfetsel("A.nom, A.id_auteur", "spip_auteurs AS A LEFT JOIN spip_auteurs_rubriques AS R ON A.id_auteur=R.id_auteur", "A.statut = '0minirezo' AND R.id_rubrique=$id_rubrique");
+	$res = sql_allfetsel("A.nom, A.id_auteur", "spip_auteurs AS A LEFT JOIN spip_auteurs_liens AS R ON (R.objet='rubrique' AND A.id_auteur=R.id_auteur)", "A.statut = '0minirezo' AND R.id_objet=$id_rubrique");
 
 	if (!$res) return $navigation;
 

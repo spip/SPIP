@@ -14,11 +14,11 @@
 				[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="html4"
+					<input type="radio" name="#GET{name}" id="#GET{name}_html4" value="html4"
 					[(#ENV{#GET{name}}|=={html5}|non)checked="checked"] /><label for="#GET{name}_html4"><:item_version_html_max_html4:></label>
 				</div>
 				<div class="choix">
-					<input type="radio" name="#GET{name}" id="#GET{name}_oui" value="html5"
+					<input type="radio" name="#GET{name}" id="#GET{name}_html5" value="html5"
 					[(#ENV{#GET{name}}|=={html5}|oui)checked="checked"] /><label for="#GET{name}_html5"><:item_version_html_max_html5:></label>
 				</div>
 				<p class="explication"><:texte_compatibilite_html_attention:></p>

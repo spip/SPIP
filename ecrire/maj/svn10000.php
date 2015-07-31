@@ -260,4 +260,44 @@ $GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 // Type de fichiers : webm http://en.wikipedia.org/wiki/Flv#File_formats
 $GLOBALS['maj'][15827] = array(array('upgrade_types_documents'));
 
+$GLOBALS['maj'][16428] = array(
+	array('maj_auteurs_16428'),
+	array('sql_drop_table',"spip_auteurs_articles"),
+	array('sql_drop_table',"spip_auteurs_rubriques"),
+	array('sql_drop_table',"spip_auteurs_messages"),
+);
+
+// Reunir en une seule table les liens de documents
+//  spip_documents_articles et spip_documents_forum
+function maj_auteurs_16428 () {
+	// Creer spip_auteurs_liens
+	global $tables_auxiliaires;
+	include_spip('base/auxiliaires');
+	include_spip('base/create');
+	creer_ou_upgrader_table('spip_auteurs_liens', $tables_auxiliaires['spip_auteurs_liens'], false);
+
+	// Recopier les donnees
+	foreach (array('article', 'rubrique', 'message') as $l) {
+		while ($s = sql_select('*', 'spip_auteurs_'.$l.'s','','','',"0,1000")) {
+			$tampon = array();
+			$delete = array();
+			while ($t = sql_fetch($s)) {
+				$delete[] = "id_auteur=".$t['id_auteur']." AND id_$l=".$t["id_$l"];
+				// transformer id_xx=N en (id_objet=N, objet=xx)
+				$t['id_objet'] = $t["id_$l"];
+				$t['objet'] = $l;
+				unset($t["id_$l"]);
+				unset($t['maj']);
+				$tampon[] = $t;
+			}
+			sql_free($s);
+			if (count($tampon)) {
+				sql_insertq_multi('spip_auteurs_liens',$tampon);
+				while ($d = array_shift($delete))
+				 sql_delete ('spip_auteurs_'.$l.'s', $d);
+			}
+		}
+	}
+}
+
 ?>

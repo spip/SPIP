@@ -139,12 +139,7 @@ function auteurs_set($id_auteur, $set = null) {
 function auteur_referent($id_auteur,$c){
 	foreach($c as $objet => $id_objet){
 		if ($id_objet=intval($id_objet)){
-			$table = table_objet($objet);
-			$primary = id_table_objet($objet);
-			// Lier a un article sur lequel on a une liaison possible
-			if (in_array($table, array('articles','rubriques','messages'))){
-				sql_insertq("spip_auteurs_$table", array($primary => $id_objet, 'id_auteur' =>$id_auteur));
-			}
+			sql_insertq("spip_auteurs_liens", array('id_objet' => $id_objet, 'objet'=>$objet, 'id_auteur' =>$id_auteur));
 		}
 	}
 
@@ -201,10 +196,10 @@ function instituer_auteur($id_auteur, $c, $force_webmestre = false) {
 	
 	if (is_array($c['restreintes'])
 	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$c['restreintes']))) {
-		sql_delete("spip_auteurs_rubriques", "id_auteur=".sql_quote($id_auteur));
+		sql_delete("spip_auteurs_liens", "objet='rubrique' AND id_auteur=".sql_quote($id_auteur));
 		foreach (array_unique($c['restreintes']) as $id_rub)
 			if ($id_rub = intval($id_rub)) // si '0' on ignore
-				sql_insertq('spip_auteurs_rubriques', array('id_auteur' => $id_auteur, 'id_rubrique'=>$id_rub));
+				sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'objet'=>'rubrique', 'id_objet'=>$id_rub));
 	}
 
 	if (!count($champs)) return;

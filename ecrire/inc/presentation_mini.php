@@ -451,7 +451,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.png', $af =
 			$en_ligne = 'calcul';
 			break;
 	case 'auteur':
-			$n = sql_fetsel('A.id_article', 'spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON L.id_article=A.id_article', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
+			$n = sql_fetsel('A.id_article', 'spip_auteurs_liens AS L LEFT JOIN spip_articles AS A ON (L.objet=\'article\' AND L.id_objet=A.id_article)', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
 			if ($n) $en_ligne = 'calcul';
 			else $en_ligne = 'preview';
 			break;

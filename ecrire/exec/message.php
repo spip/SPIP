@@ -29,7 +29,7 @@ function exec_message_args($id_message, $forcer_dest, $cherche_auteur)
 	$res = sql_getfetsel("type", "spip_messages", "id_message=$id_message");
 
 	if ($res AND $res != "affich")
-		$res = sql_fetsel("vu", "spip_auteurs_messages", "id_auteur=$connect_id_auteur AND id_message=$id_message");
+		$res = sql_fetsel("vu", "spip_auteurs_liens", "id_auteur=$connect_id_auteur AND objet='message' AND id_objet=$id_message");
 
 	if (!$res) {
 		include_spip('inc/minipres');
@@ -149,7 +149,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	// Liste des participants
 	//
 
-	$result = sql_allfetsel("A.*", "spip_auteurs AS A, spip_auteurs_messages AS L", "L.id_message=$id_message AND L.id_auteur=A.id_auteur");
+	$result = sql_allfetsel("A.*", "spip_auteurs AS A, spip_auteurs_liens AS L", "L.objet='message' AND L.id_objet=$id_message AND L.id_auteur=A.id_auteur");
 
 	$total_dest = count($result);
 
