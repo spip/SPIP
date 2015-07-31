@@ -15,7 +15,7 @@ include_ecrire("inc_presentation");
 
 function sites_edit_dist()
 {
-  global $champs_extra, $clean_link, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic;
+  global $champs_extra, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic;
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic);
 $result = spip_query($query);
@@ -75,9 +75,9 @@ if ($new == 'oui'){
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",
 		  "<input type='hidden' name='redirect' value='",
-		  ($clean_link->getUrl()),
+		  generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&new=oui"),
 		  "' />\n",
-		  "<font face='Verdana,Arial,Sans,sans-serif' size=2>",
+		  "<font face='Verdana,Arial,Sans,sans-serif' size='2'>",
 		  _T('texte_referencement_automatique'),
 		  "</font>",
 		  "\n<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\" />\n",
