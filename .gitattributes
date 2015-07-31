@@ -267,6 +267,7 @@ ecrire/inc_ajax_page.php -text
 ecrire/inc_articles.php -text
 ecrire/inc_articles_edit.php -text
 ecrire/inc_articles_forum.php -text
+ecrire/inc_articles_ortho.php -text
 ecrire/inc_articles_page.php -text
 ecrire/inc_articles_tous.php -text
 ecrire/inc_articles_versions.php -text

@@ -157,7 +157,6 @@ function choisir_miroirs_ortho($lang) {
 // Envoyer une requete a un serveur d'orthographe
 //
 function post_ortho($url, $texte, $lang) {
-	include_ecrire('inc_distant.php3');
 
 	list($f, $fopen) = init_http('POST', $url, true /* refuse gz */);
 	if (!$f OR $fopen) {
@@ -378,7 +377,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 // Cette fonction doit etre appelee pour reecrire le texte en utf-8 "propre"
 //
 function preparer_ortho($texte, $lang) {
-	include_ecrire("inc_charsets.php");
+	include_ecrire("inc_charsets.php3");
 
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -404,9 +403,9 @@ function afficher_ortho($texte) {
 // et retourne un tableau de mots mal orthographies associes chacun a un tableau de mots suggeres
 //
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
-	include_ecrire("inc_charsets.php");
-	include_ecrire("inc_index.php");
-	include_ecrire("inc_filtres.php");
+	include_ecrire("inc_charsets.php3");
+	include_ecrire("inc_index.php3");
+	include_ecrire("inc_filtres.php3");
 
 	$texte = preg_replace(',<code>.*?</code>,is', '', $texte);
 	$texte = preg_replace(',<cadre>.*?</cadre>,is', '', $texte);
