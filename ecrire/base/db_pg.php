@@ -235,15 +235,19 @@ function spip_pg_groupby($groupby, $from, $select)
 {
 	$join = is_array($from) ? (count($from) > 1) : 
 	  (strpos($from, ",") OR strpos($from, "JOIN"));
-	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
+	if ($join OR $groupby) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
-	  $join = preg_replace('/(SUM|COUNT|MAX|MIN)\([^)]+\)\s*,/i','', $join);
-	  $join = preg_replace('/,?\s*(SUM|COUNT|MAX|MIN)\([^)]+\)/i','', $join);
+	  $join = str_replace('DISTINCT ','',$join);
+	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)(\s+AS\s+\w+)\s*,?/i','', $join);
+	  $join = preg_replace('/\w+\(\s*([^(),\']*),\s*\'[^\']*\'[^)]*\)(\s+AS\s+\w+)\s*,?/i','\\1', $join);
+	  $join = preg_replace('/(SUM|COUNT|MAX|MIN|UPPER)\([^)]+\)\s*,?/i','', $join);
+	  if (preg_match('/^(.*),\s*$/',$join,$m)) $join=$m[1];
+#	  if (preg_match('/^(.*)\b[*]\b(.*)$/',$join,$m)) $join=$m[1].$m[2];
 	}
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
 	$groupby = spip_pg_frommysql($groupby);
-	$groupby = preg_replace('/\bAS\s+\w+/','', $groupby);
+	$groupby = preg_replace('/\s+AS\s+\w+\s*/','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
 }
