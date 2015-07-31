@@ -79,6 +79,10 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 			$values = "";
 			foreach ($points as $id => $p){
 				$values.= ",(0x$hash,".intval($id).",".intval($p['score']).")";
+				if (strlen($values)>16000) { // eviter les debordements de pile sur tres gros resultats
+					sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
+					$values = "";
+				}
 			}
 			sql_insert('spip_recherches',"(recherche,id,points)",substr($values,1),array(),$serveur);
 		}
