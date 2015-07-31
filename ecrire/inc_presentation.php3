@@ -1828,8 +1828,8 @@ if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statist
 ?>
 </div></blockquote>
 <?php 
-// rejouer le cookie de session
-if ($GLOBALS['spip_session']) {
+// rejouer le cookie de session en mode parano
+if ($GLOBALS['spip_session'] && $GLOBALS['prefs']['securite'] == 'strict') {
 	echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
 	echo "<script type='text/javascript'><!-- \n";
 	echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
