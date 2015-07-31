@@ -548,7 +548,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 		if (strncmp($table,"spip_",5)==0){
 			$desc_source = $trouver_table(preg_replace(",^spip_,","",$table), $serveur_source, true);
 		}
-		if (!$desc_source OR !$desc_source['exist'])
+		if (!$desc_source OR !isset($desc_source['exist']) OR !$desc_source['exist'])
 			$desc_source = $trouver_table($table, $serveur_source, false);
 
 		// verifier que la table est presente dans la base source
