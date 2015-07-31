@@ -283,11 +283,11 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", $type=='interne', "forum-interne-24.gif");
 
 		list($from,$where) = critere_statut_controle_forum('vide', $id_rubrique);
-		$n = sql_countsel($from, $where,'','', 1);
+		$n = sql_fetsel('1', $from, $where);
 		if ($n) echo onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $type=='vide');
 
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
-		$f = sql_countsel($from, $where, "", "", 1);
+		$f = sql_fetsel('1', $from, $where);
 		if ($f)
 			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $type=='prop');
 
