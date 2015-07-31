@@ -14,8 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_tourner_dist
 function action_tourner_dist() {
-	include_spip('inc/distant'); # pour copie_locale
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
@@ -36,6 +34,7 @@ function action_tourner_post($r)
 	include_spip('inc/documents'); 
 	// Fichier destination : on essaie toujours de repartir de l'original
 	$var_rot = $r[2];
+	include_spip('inc/distant'); # pour copie_locale
 	$src = _DIR_RACINE . copie_locale(get_spip_doc($row['fichier']));
 	if (preg_match(',^(.*)-r(90|180|270)\.([^.]+)$,', $src, $match)) {
 		$effacer = $src;
@@ -186,6 +185,33 @@ function gdRotate ($src, $dest, $rtt){
 	// obligatoire d'enregistrer dans le meme format, puisqu'on change le doc
 	// mais pas son extension
 	$save($dst_img,$dest);
+}
+
+// Appliquer l'EXIF orientation
+// cf. http://trac.rezo.net/trac/spip/ticket/1494
+// http://doc.spip.org/@tourner_selon_exif_orientation
+function tourner_selon_exif_orientation($id_document, $fichier) {
+
+	if (function_exists('exif_read_data')
+	AND function_exists('imagerotate')
+	AND $exif = exif_read_data($fichier)
+	AND (
+		$ort = $exif['IFD0']['Orientation']
+		OR $ort = $exif['Orientation'])
+	) {
+	spip_log("rotation: $ort");
+		$rot = null;
+		switch ($ort) {
+			case 3:
+				$rot = 180;
+			case 6:
+				$rot = 90;
+			case 8:
+				$rot = -90;
+		}
+		if ($rot)
+			action_tourner_post(array(null,$id_document, $rot));
+	}
 }
 
 ?>
