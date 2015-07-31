@@ -15,15 +15,7 @@
 	  <ul>
 	    <li class="editer_logo_on [ (#ENV**{erreurs}|table_valeur{logo_on}|oui)erreur]">
 			[(#ENV{logo_on}|oui)
-				<div class="apercu">
-					[<div class="spip_logos">(#ENV{logo_on}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{170})]}|inserer_attribut{alt,logo_on})</div>]
-					#SET{largeur,#ENV{logo_on}|largeur}
-					#SET{hauteur,#ENV{logo_on}|hauteur}
-					<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
-					[(#ENV{logo_off}|non|et{#ENV{editable}})
-						<input type='submit' class='submit supprimer' id="supprimer_logo_on_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_on" value='<:lien_supprimer|ucfirst|attribut_html:>' />
-					]
-				</div>
+				[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_on},quoi=logo_on,editable=#ENV{logo_off}|non|et{#ENV{editable}}})]
 			][(#ENV{editable})
 				[(#ENV{logo_on}|non)
 					<label for="logo_on_#ENV{objet}_#ENV{id_objet}">[(#ENV{_options}|table_valeur{label}|sinon{<:info_telecharger_nouveau_logo:>})]</label>[
@@ -36,16 +28,7 @@
 		[(#ENV{logo_survol}|ou{#ENV{logo_off}}|oui)
 	    <li class="editer_logo_off [ (#ENV**{erreurs}|table_valeur{logo_off}|oui)erreur]">
 			[(#ENV{logo_off}|oui)
-				<div class="apercu">
-					<:logo_survol:>
-					[<div class="spip_logos">(#ENV{logo_off}|image_reduire{[(#ENV{_options}|table_valeur{image_reduire}|sinon{170})]}|inserer_attribut{alt,logo_off})</div>]
-					#SET{largeur,#ENV{logo_off}|largeur}
-					#SET{hauteur,#ENV{logo_off}|hauteur}
-					<div class="taille"><:info_largeur_vignette{largeur_vignette=#GET{largeur},hauteur_vignette=#GET{hauteur}}:></div>
-					[(#ENV{editable})
-					<input type='submit' class='submit supprimer' id="supprimer_logo_off_#ENV{objet}_#ENV{id_objet}" name="supprimer_logo_off" value='<:lien_supprimer|ucfirst|attribut_html:>' />
-					]
-				</div>
+				[(#INCLURE{fond=formulaires/inc-apercu-logo,env,logo=#ENV{logo_off},quoi=logo_off,editable=#ENV{editable}})]
 			][(#ENV{editable})
 				[(#ENV{logo_off}|non)
 					<div [(#ENV**{erreurs}|table_valeur{logo_off}|non)
