@@ -27,20 +27,28 @@ function inc_informer_auteur_dist($id)
 			$bio = propre($row["bio"]);
 			$mail = $row['email'];
 			if (!email_valide($mail))
-				$mail = "<span style='color:red'>"
+				$nom .= "(<span style='color:red'>"
 				. _T('info_email_invalide')
-				. '</span>';
-			else $mail = "<a href='mailto:$mail'>"
+				. '</span>)';
+			else $nom = "<a href='mailto:$mail' title=\""
 			  . _T('info_ecire_message_prive')
+			  . '">'
+			  . $nom
 			  . "</a>";
-			$mail = "<br /> ($mail)<br />";
+
+			$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_articles WHERE id_auteur=$id"));
+			if ($nb['n'] > 1)
+			$nb = $nb['n']."&nbsp;"._T('info_article_2');
+			else if($nb['n'] == 1)
+			$nb = "1&nbsp;"._T('info_article');
+			else $nb = "&nbsp;";
 	} else {
 			$nom = "<span style='color:red'>"
 			. _T('texte_vide')
 			. '</span>';
-			$bio = $mail = '';
+			$bio = $mail = $nb = '';
 	}
-
+			spip_log("nb $nb $bio");
 	$res = '';
 	if ($spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
 		$logo_f = charger_fonction('chercher_logo', 'inc');
@@ -54,13 +62,15 @@ function inc_informer_auteur_dist($id)
 
 	return 	"<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>"
 	. (!$res ? '' : $res)
-	. "<div>"
+	. "<div><a href='"
+	. generer_url_ecrire('auteur_infos', "id_auteur=$id&initial=-1")
+	. "'>"
 	. bonhomme_statut($row)
-	. " <b>"
+	. "</a> <b>"
 	. $nom
-	. "</b>"
-	. $mail
-	. "</div>"
+	. "</b><br />"
+	. $nb
+	. "</div><br />"
 	. "<div>$bio</div>"
 	.  "</div>";
 }
