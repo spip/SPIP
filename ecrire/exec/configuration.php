@@ -375,6 +375,7 @@ function configuration_bloc_mots_cles(){
 //
 // http://doc.spip.org/@configuration_bloc_syndication
 
+// http://doc.spip.org/@configuration_bloc_syndication
 function configuration_bloc_syndication(){
 	global $spip_lang_left, $spip_lang_right;
 	debut_cadre_trait_couleur("site-24.gif", false, "", _T('titre_referencement_sites').aide ("reference"));
