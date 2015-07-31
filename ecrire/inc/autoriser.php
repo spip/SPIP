@@ -235,6 +235,7 @@ function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
 // pour modifier les fichiers, cf. notamment inc/admin
 // = rien ni personne sauf definition de 
 // a l'avenir peut-etre autoriser "admin numero 1" ou une interface de selection
+// http://doc.spip.org/@autoriser_webmestre_dist
 function autoriser_webmestre_dist($faire, $type, $id, $qui, $opt) {
 	return
 		(defined('_ID_WEBMESTRES') AND in_array($qui['id_auteur'], explode(':', _ID_WEBMESTRES)) AND $qui['statut'] == '0minirezo' AND !$qui['restreint'])
