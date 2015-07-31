@@ -220,6 +220,9 @@ function auth_init_droits($row)
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
+	// on force l'écriture de cette info dans le fichier de session
+	// pour pouvoir récupérer #SESSION{en_ligne} dans les squelettes
+	session_set('en_ligne', $row['en_ligne']);
 
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
