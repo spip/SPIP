@@ -24,14 +24,14 @@ function champs_supplement($type, $id_objet, $ensemble) {
 	if ($type == "auteur") {
 		return Array (
 			"sexe" => "ligne|brut",
-			"age" => "ligne|propre|&Acirc;ge du capitaine"
-			"biblio" => "bloc|propre|Bibliographie",
+			"age" => "ligne|propre|&Acirc;ge du capitaine",
+			"biblio" => "bloc|propre|Bibliographie"
 		);
 	}
 
 	if ($type == "article" && $ensemble == 7) {
 		return array(
-			"isbn" => "ligne|typo",
+			"isbn" => "ligne|typo"
 		);
 	}
 
