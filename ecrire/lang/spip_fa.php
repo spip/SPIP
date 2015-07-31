@@ -246,6 +246,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_email_non_valide' => '.آدرس ايميلتان معتبر نميباشد',
 'form_forum_access_refuse' => '.شما ديگر اجازه ورود به اين سايت را نداريد ',
 'form_forum_bonjour' => 'سلام @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'اين آدرس ايميل قبلأ ثبت شده، شما ميتوانيد از كلمه ورود هميشگى تان استفاده كنيد ',
 'form_forum_identifiant_mail' => ' كلمه شناسائى جديد برايتان با ايميل فرستاده شد ',
 'form_forum_identifiants' => 'كلمه شناسايى                ',

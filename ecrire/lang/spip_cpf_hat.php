@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Ladrès limèl ou se pa bon.',
 'form_forum_access_refuse' => 'W pli ap gen lakse sou sit-la.',
 'form_forum_bonjour' => 'Bonjou @nom@,,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Adrès limèl-a deja enskri, w pé itiliz  modpas òdinè ou.',
 'form_forum_identifiant_mail' => 'Nouvo lidantifyan ou sé voye andan bwatlimèl ou. ',
 'form_forum_identifiants' => 'Idantifyan pèsonèl yo',

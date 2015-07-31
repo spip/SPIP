@@ -253,6 +253,7 @@ s\'encaboxará) :
 'form_email_non_valide' => 'Les señes de corréu electrónicu nun son válides.',
 'form_forum_access_refuse' => 'Ya nun ties accesu a esti sitiu.',
 'form_forum_bonjour' => 'Hola, @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Estes señes de corréu electrónicu ya tan rexistráes; poro, puedes usar la to contraseña normal.',
 'form_forum_identifiant_mail' => 'La to nueva identificación ta acabante d\'unviase por email.',
 'form_forum_identifiants' => 'Identificación personal',

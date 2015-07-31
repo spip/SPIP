@@ -255,6 +255,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Неалиден електронен адрес.',
 'form_forum_access_refuse' => 'Преустановен достъп до сайта',
 'form_forum_bonjour' => 'Добър ден, @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Този електронен адрес е вече регистриран; за по-нататъшен достъп използвайте обичайната си парола. ',
 'form_forum_identifiant_mail' => 'Новото Ви име за достъп бе изпратено по електронна поща.',
 'form_forum_identifiants' => 'Лични идентификатори ',

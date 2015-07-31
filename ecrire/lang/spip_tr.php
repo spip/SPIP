@@ -251,6 +251,7 @@ sera ignorée) :
 'form_email_non_valide' => 'E-posta adresiniz geçersiz.',
 'form_forum_access_refuse' => 'Artık bu siteye erişim izniniz yok.',
 'form_forum_bonjour' => 'Merhaba @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Bu e-posta adresi zaten kayıtlı, kullanmakta olduğunuz şifrenizi kullanmaya devam edebilirsiniz.',
 'form_forum_identifiant_mail' => 'Yeni tanımlayıcınız e-posta yoluyla gönderildi.',
 'form_forum_identifiants' => 'Kişisel tanımlayıcılar',

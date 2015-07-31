@@ -247,6 +247,7 @@ sera ignorée) :
 'form_email_non_valide' => 'သင့်အီးမေးလ် မှန်ကန်မှုမရှိပါ',
 'form_forum_access_refuse' => 'ဤဝက်ဘ်ဆိုက်ထဲသို့ ဝင်​ခွင့် သင့်မှာမရှိတော့ပါ',
 'form_forum_bonjour' => 'မင်္ဂလာပါ @nom@',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'ဤအီးမေးလ်သည် မှတ်ပုံတင်ထားပြီးဖြစ်ပါတယ်၊ ပုံမှန်စကားဝှက်ကို အသုံးပြုနိုင်ပါသည်',
 'form_forum_identifiant_mail' => 'သင့်အမှတ်အသားသစ်ကို အီးမေးလ်မှတဆင့် ပို့ထားပြီးပြီ',
 'form_forum_identifiants' => 'ကိုယ်ပိုင် အမှတ်အသား',

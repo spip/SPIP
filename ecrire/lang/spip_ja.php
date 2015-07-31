@@ -256,6 +256,7 @@ sera ignorée) :
 'form_email_non_valide' => 'あなたのe-mailアドレスは有効ではありません。',
 'form_forum_access_refuse' => 'あなたはもう、このサイトへアクセスすることができません。',
 'form_forum_bonjour' => '素晴らしい日を @nom@、',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'このe-mailアドレスは登録済みです、従って、あなたはいつものパスワードを使うことが出来ます。',
 'form_forum_identifiant_mail' => 'あなたの新しいIDは、ちょうど今、e-mailであなたに送られたところです。',
 'form_forum_identifiants' => '個人ID',

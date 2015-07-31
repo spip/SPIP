@@ -252,6 +252,7 @@ Caso contrario, la solicitud será simplemente ignorada.
 'form_email_non_valide' => 'La dirección de correo electrónico no es válida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
 'form_forum_bonjour' => 'Hola, @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Esta dirección de correo electrónico ya está registrada, por lo que puedes utilizar tu contraseña habitual.',
 'form_forum_identifiant_mail' => 'Hemos enviado tu nuevo identificador por correo electrónico.',
 'form_forum_identifiants' => 'Identificadores personales',

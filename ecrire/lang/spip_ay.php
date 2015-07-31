@@ -256,6 +256,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Aruskipayirimanx utjawipax janiw walikiti',
 'form_forum_access_refuse' => 'Aka qamawirux mantawimax janiw utjiti',
 'form_forum_bonjour' => 'kamisaki @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Aka aruskipayirit utjawix qillqt\'ataxiwa ukatx imt\'awimx lurasmaw',
 'form_forum_identifiant_mail' => 'Machaq uñacht\'ayirima apayapxtwa aruskipayirita.',
 'form_forum_identifiants' => 'Sapa maynit uñacht\'ayiri',

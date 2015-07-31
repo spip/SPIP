@@ -246,6 +246,7 @@ sera ignorée) :
 'form_email_non_valide' => 'e-mailù mī tɔn ɔ sɔ gbè á',
 'form_forum_access_refuse' => 'mī sɔ sǐwu yì gblogblo é lɔ jí á',
 'form_forum_bonjour' => 'mī fɔn án @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'gesí é lɔ kó sɔ gbè, mī sǐwu zán cávì mī tɔn ',
 'form_forum_identifiant_mail' => 'e-mailù ɖòkpó kó sɛ ɖéxlɛ mì tɔn ɖó',
 'form_forum_identifiants' => 'ɖéxlɛ mì tɔn ',

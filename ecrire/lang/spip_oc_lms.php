@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Vòstra adreiça e-mail es pas valida.',
 'form_forum_access_refuse' => 'Podetz pas mai accedir a queu sit.',
 'form_forum_bonjour' => 'Bonjorn,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Quela adreiça e-mail ja es registrada, adonc podetz utilizar vòstre mot de santa Clara costumier.',
 'form_forum_identifiant_mail' => 'Vos avem mandat vòstre identificant noveu per e-mail.',
 'form_forum_identifiants' => 'Identificants personaus',

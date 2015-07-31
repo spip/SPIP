@@ -254,6 +254,7 @@ sera ignorée) :
 'form_email_non_valide' => '您的电子邮件无效.',
 'form_forum_access_refuse' => '您无权继续访问该站点.',
 'form_forum_bonjour' => '<MODIF>您好@nom@，',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => '该电子邮件地址已经记录,您可以使用常用密码.',
 'form_forum_identifiant_mail' => '您的新标识已经通过邮件发送给您了.',
 'form_forum_identifiants' => '个人标识符',

@@ -252,6 +252,7 @@ the address below. (Otherwise your request will be ignored.):
 'form_email_non_valide' => 'A megadott e-mail cím érvénytelen.',
 'form_forum_access_refuse' => 'Önnek már nincs hozzáférése ehhez az oldalhoz.',
 'form_forum_bonjour' => 'Üdvözöljük, @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Ez az email cím már regisztrálva van, tehát használhatja a szokásos jelszavát.',
 'form_forum_identifiant_mail' => 'Új azonosítóját elküldtük az e-mail címére.',
 'form_forum_identifiants' => 'Személyes azonosítók',

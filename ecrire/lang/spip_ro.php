@@ -252,6 +252,7 @@ adresa de mai jos (în caz contrat cererea dumneavoastră va fi ignorată) :
 'form_email_non_valide' => 'Adresa dumneavoastră de email nu este valabilă.',
 'form_forum_access_refuse' => 'Nu mai aveţi dreptul de acces la acest site.',
 'form_forum_bonjour' => 'Bun? ziua @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Această adresă de email este deja înregistrată. Puteţi, aşadar, utiliza parola dumneavoastră obişnuită.',
 'form_forum_identifiant_mail' => 'Noul dumneavoastră identificator tocmai v-a fost trimis pe email.',
 'form_forum_identifiants' => 'Identificatori personali',

@@ -253,6 +253,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Är Email-Adress ass nët richteg.',
 'form_forum_access_refuse' => 'Dir hutt keen Zougang méi zu dësem Site.',
 'form_forum_bonjour' => 'Moien @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Dës Email-Adress ass schon ageschriwen, dir kënnt also ärt normadt Passwuert benotzen.',
 'form_forum_identifiant_mail' => 'Äre neie Login gouf Iech lo grad per Email geschéckt.',
 'form_forum_identifiants' => 'Perséinlech Identifikatiounen',

@@ -255,6 +255,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Din e-mail-adresse er ikke gyldig.',
 'form_forum_access_refuse' => 'Du har ikke mere adgang til dette websted.',
 'form_forum_bonjour' => 'Goddag,', # MODIF
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Denne e-mail-adresse er allerede tilmeldt. Du kan derfor benytte din sædvanlige adgangskode.',
 'form_forum_identifiant_mail' => 'Dine nye adgangsoplysninger er netop sendt til dig via e-mail.',
 'form_forum_identifiants' => 'Personlige adgangsoplysninger',

@@ -256,6 +256,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Alamat e-mail anda tidak sah.',
 'form_forum_access_refuse' => 'Anda tidak memiliki akses ke situs ini lagi.',
 'form_forum_bonjour' => 'Salam sejahtera @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Alamat e-mail ini telah terdaftar, oleh karenanya anda dapat menggunakan kata sandi anda.',
 'form_forum_identifiant_mail' => 'Pengidentifikasi baru anda telah dikirimkan kepada anda melalui e-mail.',
 'form_forum_identifiants' => 'Pengidentifikasi pribadi',

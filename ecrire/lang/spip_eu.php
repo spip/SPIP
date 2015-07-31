@@ -252,6 +252,7 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'form_email_non_valide' => 'Posta elektronikoaren helbideak ez du balio.',
 'form_forum_access_refuse' => 'Ezin zara gune honetan sartu dagoeneko.',
 'form_forum_bonjour' => 'Kaixo @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 'form_forum_email_deja_enregistre' => 'Dagoeneko, posta elektronikoaren helbide hau erregistraturik dago, beraz ohizko pasahitza erabili dezakezu.',
 'form_forum_identifiant_mail' => 'Zure identifikadore berria posta elektonikoaren bidez igorri dugu.',
 'form_forum_identifiants' => 'Identifikadore pertsonalak',
