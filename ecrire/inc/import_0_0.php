@@ -23,16 +23,16 @@ function inc_import_0_0_dist($f, $request, $gz=false) {
 	$tables = $init($request);
 
 	$import_ok = false;
-	$b = '';
+	$b = false;
 	if (!($type = xml_fetch_tag($f, $b, $gz))) return false;
 	if ($type == '/SPIP') return !($import_ok = true);
 	$is_art = ($type == 'article');
 	$is_mot = ($type == 'mot');
 	for (;;) {
-		$b = '';
+		$b = false;
 		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
 		if ($col == ("/$type")) break;
-		$value = '';
+		$value = true;
 		if (!xml_fetch_tag($f, $value, $gz)) return false;
 		if ($is_art AND $col == 'id_auteur') {
 			$auteurs[] = $value;
