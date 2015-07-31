@@ -10,10 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Sauvegarde automatique des formulaires CVT
+ * 
+ * @package SPIP\Core\CVT\Autosave
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Nettoyer les echappements
+ * Nettoyer les échappements
  * @param $val
  * @return string
  */
@@ -22,7 +28,7 @@ function autosave_clean_value($val){
 }
 
 /**
- * Reperer une demande de formulaire autosave
+ * Repérer une demande de formulaire autosave
  * et la conditionner
  *
  * @param array $flux
@@ -63,11 +69,14 @@ function cvtautosave_formulaire_charger($flux){
 }
 
 /**
- * Quand on poste definitivement un formulaire autosave,
- * on peut vider la session autosave
- * et on vide aussi toutes les autosave de plus de 72H (delai par defaut) ou sans __timestamp (vieilles sessions)
- * @param $flux
- * @return
+ * Traitement d'un formulaire ayant activé `autosave`
+ *
+ * Quand on poste définitivement un formulaire `autosave`,
+ * on peut vider la session `autosave`
+ * et on vide aussi toutes les `autosave` de plus de 72H (délai par défaut) ou sans `__timestamp` (vieilles sessions)
+ *
+ * @param array $flux
+ * @return array
  */
 function cvtautosave_formulaire_traiter($flux){
 	// si on poste 'autosave' c'est qu'on n'a plus besoin de sauvegarder :
