@@ -280,16 +280,6 @@ function import_identifie_id_type($values, $table, $desc, $request) {
 	return $r;
 }
 
-// un type de document importe est considere comme identique a un type present
-// s'ils ont meme extension et meme titre
-// Sinon il ne sera PAS importe
-function import_identifie_id_type($values, $table, $desc, $request) {
-	$e = $values['extension'];
-	$t = $values['titre'];
-	$r = spip_fetch_array(spip_query($q="SELECT id_type, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)), SPIP_NUM);
-	return $r;
-}
-
 // deux groupes de mots ne peuvent avoir le meme titre ==> identification
 // http://doc.spip.org/@import_identifie_id_groupe
 function import_identifie_id_groupe($values, $table, $desc, $request)  {
