@@ -20,7 +20,6 @@ include_spip ('inc/barre');
 function exec_breves_edit_dist()
 {
 global
-  $champs_extra,
   $connect_statut,
   $connect_id_rubrique,
   $id_breve,
@@ -162,7 +161,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	. _T('info_url')."<BR>"
 	. "<INPUT TYPE='text' CLASS='forml' NAME='lien_url' VALUE=\"$lien_url\" SIZE='40'><P>";
 
-	if ($champs_extra) {
+	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
 		$form .= extra_saisie($extra, 'breves', $id_rubrique);
 	}
