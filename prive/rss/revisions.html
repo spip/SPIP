@@ -1,5 +1,9 @@
-#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
-if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}#CACHE{900}<B0><?php
+if (
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}>
+[(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]
+</BOUCLE0>
+) {
 ?><?xml version="1.0" encoding="#CHARSET" ?>
 
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
@@ -8,7 +12,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	<link>[(#URL_ECRIRE{suivi_revisions, [id_secteur=(#ENV{id_secteur})&][id_auteur=(#ENV{id_auteur})&][langue_choisie=(#ENV{lang_choisie})&]}|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>[(#ENV{lang_choisie}|texte_backend)]</language>
-<BOUCLE_RSS(versions articles){id_version >1}{statut IN prop, publie, #ENV{statut, prop}}{!par date}{0,10}{lang==#ENV{langue_choisie,'.*'}}{id_secteur ?}{id_auteur ?}>
+<BOUCLE_RSS(versions articles){id_version >1}{statut IN prop, publie, #ENV{statut, prop}}{!par date}{0,10}{lang ?}{id_secteur ?}{id_auteur ?}>
 	<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>[(#URL_ECRIRE{articles_versions, id_article=#ID_ARTICLE&id_version=#ID_VERSION}|url_absolue|texte_backend)]</link>
@@ -17,11 +21,7 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG|texte_backend)</dc:language>]
 		<dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
-		<description>[(#ID_ARTICLE|revisions_diff{#ID_VERSION}|texte_backend)]</description>
+		<description><BOUCLE00(AUTEURS){id_auteur=#ENV{id}}{lang_select}>[(#ID_ARTICLE|revisions_diff{#ID_VERSION}|texte_backend)]</BOUCLE00></description>
 	</item></BOUCLE_RSS>
 </channel>
-</rss><?php
-} else {
-include_spip('inc/minipres'); 
-echo minipres();
-}?></BOUCLE0>
+</rss><?php } ?></B0>
