@@ -147,7 +147,8 @@ function deplacer_fichier_upload($source, $dest) {
 		exit;
 	}
 
-	$ok = @copy($source, $dest);
+
+	$ok = copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
 	if ($ok)
 		@chmod($dest, 0666);
@@ -261,11 +262,11 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	if (!ereg("\.([^.]+)$", $orig, $match)) return;
 
 	$ext = corriger_extension(addslashes(strtolower($match[1])));
-	$row = @spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'" . (($mode != 'vignette') ? '' : " AND inclus='image'")));
+	$row = spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'" . (($mode != 'vignette') ? '' : " AND inclus='image'"));
 
 	// type de document invalide ?
 
-	if (!$row) return;
+	if (!$row = spip_fetch_array($row)) {return;}
 
 	// Recopier le fichier
 
@@ -297,7 +298,6 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 	}
-	$taille = filesize($dest_path);
 
 	if ($nouveau) {
 		$type_inclus = $row['inclus'];
@@ -313,6 +313,7 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		spip_query($query);
 		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
+
 	// Creer la vignette
 	if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
 	    AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
@@ -321,6 +322,7 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		$d = lire_meta('taille_preview');
 		creer_fichier_vignette($dest_path);
 	}
+
 }
 
 
@@ -388,21 +390,19 @@ function gdRotate($imagePath,$rtt){
 // Normalement le test est vérifié donc on ne rend rien sinon
 
 function creer_fichier_vignette($vignette) {
-#	spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
 	if ($vignette && lire_meta("creer_preview") == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
 		$ext = $regs[1];
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
+
 		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
 		{
-		
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];
         }
-        
-        include_ecrire('inc_documents.php3');
+		include_ecrire('inc_documents.php3');
 		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }
@@ -615,15 +615,14 @@ if ($ajout_doc == 'oui') {
 	} else {
 		include_ecrire('inc_documents.php3');
 		$fichiers = fichiers_upload($image_name);
+
 		while (list(,$f) = each($fichiers)) {
 			if (ereg("\.([^.]+)$", $f, $match)) {
 				$ext = strtolower($match[1]);
 				if ($ext == 'jpeg')
 					$ext = 'jpg';
-				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-				if ($inclus)
-					$req .= " AND inclus='$inclus'";
-				if (@spip_fetch_array(spip_query($req)))
+				$r = spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext'" . ($inclus ? " AND inclus='$inclus'" : ''));
+				if (spip_fetch_array($r))
 					ajout_doc($f, $f, 'document', false);
 			}
 		}
