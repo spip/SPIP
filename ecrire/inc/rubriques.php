@@ -340,34 +340,39 @@ function calculer_langues_utilisees ($serveur='') {
 	return $langues;
 }
 
-// http://doc.spip.org/@calcul_generation
-function calcul_generation ($generation) {
-	$lesfils = array();
-	$result = sql_select('id_rubrique',
-			     'spip_rubriques',
-			     sql_in('id_parent', $generation));
-	while ($row = sql_fetch($result))
-		$lesfils[] = $row['id_rubrique'];
-	return join(",", $lesfils);
-}
+/**
+ * http://doc.spip.org/@calcul_branche
+ * depreciee, pour compatibilite
+ *
+ * @param string|int|array $generation
+ * @return string
+ */
+function calcul_branche ($generation) {return calcul_branche_in($generation);}
 
-// http://doc.spip.org/@calcul_branche
-function calcul_branche ($generation) {
-	if (!$generation) 
-		return '0';
-	else {
-		$branche[] = $generation;
-		while ($generation = calcul_generation ($generation))
-			$branche[] = $generation;
-		return join(",",$branche);
-	}
-}
-
-// Calcul d'une branche
-// (liste des id_rubrique contenues dans une rubrique donnee)
-// pour le critere {branche}
-// http://doc.spip.org/@calcul_branche_in
+/**
+ * Calcul d'une branche
+ * (liste des id_rubrique contenues dans une rubrique donnee)
+ * pour le critere {branche}
+ * http://doc.spip.org/@calcul_branche_in
+ *
+ * @param string|int|array $id
+ * @return string
+ */
 function calcul_branche_in($id) {
+	$calcul_branche_in = charger_fonction('calcul_branche_in','inc');
+	return $calcul_branche_in($id);
+}
+
+/**
+ * Calcul d'une branche
+ * (liste des id_rubrique contenues dans une rubrique donnee)
+ * pour le critere {branche}
+ * fonction surchargeable pour optimisation
+ *
+ * @param string|int|array $id
+ * @return string
+ */
+function inc_calcul_branche_in_dist($id) {
 	static $b = array();
 
 	// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
