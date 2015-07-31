@@ -130,7 +130,7 @@ if (isset($GLOBALS['_INC_PUBLIC']) AND $GLOBALS['_INC_PUBLIC']) {
 	// affiche-t-on les boutons d'administration ? voir f_admin() 
 	$affiche_boutons_admin = ($html AND (
 		(isset($_COOKIE['spip_admin']) AND (!isset($flag_preserver) OR !$flag_preserver))
-		OR $debug
+		OR ($debug and include_spip('inc/autoriser') and autoriser('debug'))
 		OR (defined('_VAR_PREVIEW') AND _VAR_PREVIEW)
 	));
 
