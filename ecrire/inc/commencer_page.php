@@ -227,6 +227,17 @@ function alertes_auteur($id_auteur) {
 
 	$alertes[] = avertissement_messagerie($id_auteur);
 
+	$alertes = pipeline(
+		'alertes_auteur',
+			array(
+			'args' => array(
+				'id_auteur' => $id_auteur,
+				'exec' => _request('exec'),
+				),
+			'data' => $alertes
+			)
+		);
+
 	if ($alertes = array_filter($alertes))
 		return "<div class='wrap-messages'><div class='messages'>".
 			join('<hr />', $alertes)

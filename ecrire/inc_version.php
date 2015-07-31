@@ -272,6 +272,7 @@ $spip_pipeline = array(
 	'affiche_hierarchie' => '',
 	'affiche_formulaire_login' => '|auth_formulaire_login',
 	'afficher_revision_objet'=>'',
+	'alertes_auteur' => '',
 	'base_admin_repair' => '',
 	'boite_infos' => 'f_boite_infos',
 	'ajouter_boutons' => '',
