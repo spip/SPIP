@@ -2092,7 +2092,7 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 // http://doc.spip.org/@puce_changement_statut
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
 	$puce_statut = charger_fonction('puce_statut','inc');
-	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false);
+	return $puce_statut($id_objet, $statut, $id_rubrique, $type, $ajax);
 }
 
 /**
@@ -2613,7 +2613,7 @@ function filtre_print_dist($u, $join=', ') {
  * @param string $info
  * @return string
  */
-function info_objet($objet,$info){
+function objet_info($objet,$info){
 	include_spip('base/objets');
 	$table = table_objet_sql($objet);
 	$infos = lister_tables_objets_sql($table);
@@ -2627,11 +2627,25 @@ function info_objet($objet,$info){
  * @param  $objet
  * @return mixed|string
  */
-function afficher_nb_objets($nb, $objet){
+function objet_afficher_nb($nb, $objet){
 	if (!$nb)
-		return _T(info_objet($objet,'info_aucun_objet'));
+		return _T(objet_info($objet,'info_aucun_objet'));
 	else
-		return _T(info_objet($objet,$nb==1?'info_1_objet':'info_nb_objets'),array('nb'=>$nb));
+		return _T(objet_info($objet,$nb==1?'info_1_objet':'info_nb_objets'),array('nb'=>$nb));
+}
+
+/**
+ * Filtre pour afficher l'img icone d'un objet
+ *
+ * @param string $objet
+ * @param int $taille
+ * @return string
+ */
+function objet_icone($objet,$taille=24){
+	$icone = objet_info($objet,'icone_objet')."-".$taille.".png";
+	$icone = chemin_image($icone);
+	$balise_img = charger_filtre('balise_img');
+	return $icone?$balise_img($icone,_T(objet_info($objet,'texte_objet'))):'';
 }
 
 /**

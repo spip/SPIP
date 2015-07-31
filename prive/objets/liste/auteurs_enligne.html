@@ -6,7 +6,7 @@
 	{statut IN 1comite,0minirezo}
 	{en_ligne>#VAL{'Y-m-d H:i:s'}|date{#VAL{'-15 minutes'}|strtotime}}{!par en_ligne}{pagination 10}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_enligne>[&nbsp;...
 	(#GRAND_TOTAL|>{10}|oui)
-	([(#GRAND_TOTAL|afficher_nb_objets{auteur})])
+	([(#GRAND_TOTAL|objet_afficher_nb{auteur})])
 	]
 </div>
 </B_enligne>
