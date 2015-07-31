@@ -311,15 +311,18 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  $fct = ""; // en cas de fonction SQL
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
+	    // on sait pas faire pour les serveurs externes. A revoir.
+	 	if (!$boucles[$idb]->sql_serveur) {
 	  	// calculer le order dynamique qui verifie les champs
-	    $order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
+			$order = calculer_critere_arg_dynamique($idb, $boucles, $tri, $sens);
 	    // et ajouter un champ hasard dans le select pour supporter 'hasard' comme tri dynamique
-		  if (spip_abstract_select(array("RAND()")))
-			$par = "RAND()";
-		  else
-			$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
+			if (spip_abstract_select(array("RAND()")))
+				$par = "RAND()";
+			else
+				$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
 			  ." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP()";
-		  $boucle->select[]= $par . " AS hasard";
+			$boucle->select[]= $par . " AS hasard";
+		}
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
