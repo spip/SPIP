@@ -56,6 +56,10 @@ function ecrire_logins($fichier, $tableau_logins) {
 function ecrire_acces() {
 	global $htaccess, $htpasswd;
 
+	// ne pas creer ce fichier s'il n'existe pas deja
+	if (!file_exists($htpasswd))
+		return;
+
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
 	$result = spip_query($query);
 	unset($logins);
