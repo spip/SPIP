@@ -530,7 +530,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 
 	return sql_countsel('spip_documents_articles AS rel_articles, spip_articles AS articles', "rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id") > 0
 	OR sql_countsel('spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques', "rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id") > 0
-	OR sql_countsel('spip_documents_breves AS rel_breves, spip_breves AS breves', "rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document") > 0
+	OR sql_countsel('spip_documents_breves AS rel_breves, spip_breves AS breves', "rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id") > 0
 	;
 }
 
