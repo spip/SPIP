@@ -40,26 +40,29 @@ function surligner_mots($page) {
 
     
   $ref = $_SERVER['HTTP_REFERER'];
+  //avoid a js injection
+  $surcharge_surligne = preg_replace(",(?<!\\\\)',","\'",$_GET["var_recherche"]);
   foreach($surlignejs_engines as $engine) 
-    if(preg_match($engine[0],$ref)) 
-      if(preg_match($engine[1],$ref,$match)) {
-        //good referrer found
-        $script = "<script src='".find_in_path("javascript/SearchHighlight.js")."'></script>
-        <script type='text/javascript'>
-          jQuery(function(){
-            jQuery(document).SearchHighlight({
-              style_name:'spip_surligne',
-              exact:'whole',
-              style_name_suffix:false,
-              engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/recherche=([^&]+)/i],
-              startHighlightComment:'".MARQUEUR_SURLIGNE."',
-              stopHighlightComment:'".MARQUEUR_FSURLIGNE."'
-            })
-          });
-        </script>";
-        $page = preg_replace(",</head>,",$script."\n</head>",$page);
-        break;
-      }
+    if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
+      //good referrer found or var_recherche is not null
+      $script = "<script src='".find_in_path("javascript/SearchHighlight.js")."'></script>
+      <script type='text/javascript'>
+        jQuery(function(){
+          jQuery(document).SearchHighlight({
+            style_name:'spip_surligne',
+            exact:'whole',
+            style_name_suffix:false,
+            engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/recherche=([^&]+)/i],
+            startHighlightComment:'".MARQUEUR_SURLIGNE."',
+            stopHighlightComment:'".MARQUEUR_FSURLIGNE."'".
+            ($surcharge_surligne?",
+            keys:'$surcharge_surligne'":"")."
+          })
+        });
+      </script>";
+      $page = preg_replace(",</head>,",$script."\n</head>",$page);
+      break;
+    }
   return $page;
 }
 
