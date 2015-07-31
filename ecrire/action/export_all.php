@@ -79,13 +79,14 @@ function action_export_all_dist()
 			. "</a> "
 			._T('info_sauvegarde_reussi_04')
 			. "</p>\n";
-			
+						
 			// afficher la liste des tables qu'on a sauvegarde
 			$tables_sauvegardees = array_keys($tables_sauvegardees);
 			sort($tables_sauvegardees);
 			$n = floor(count($tables_sauvegardees)/2);
 			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
-			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>";
+			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
+			. "<br class='nettoyeur' />";
 		}
 		echo minipres(_T('info_sauvegarde'), $corps);
 		exit;
