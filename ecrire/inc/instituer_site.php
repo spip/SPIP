@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@inc_instituer_site_dist
 function inc_instituer_site_dist($id_syndic, $statut=-1)
 {
 	if ($statut == -1) return "";
