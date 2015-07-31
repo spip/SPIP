@@ -314,7 +314,7 @@ function ancre_texte($texte, $fautifs=array())
 
 	$ancre = md5($texte);
 	$n = strlen(count($tableau));
-	$format = "<a href='#T$ancre'><span id='L%d' style='text-align: right;color: black;'>%0"
+	$format = "<a href='#T%s'><span id='L%d' style='text-align: right;color: black;'>%0"
 	. strval($n)
 	. "d&nbsp;&nbsp;</span></a>\n";
 
@@ -324,23 +324,26 @@ function ancre_texte($texte, $fautifs=array())
 
 	$flignes = array();
 
+	$loc = array(0,0);
 	foreach ($fautifs as $lc)
-	  if (is_array($lc))
-	    $flignes[$lc[0]] = $lc[1];
-	  else $flignes[$lc] = 0;
+	  if (is_array($lc)) {
+	    $l = array_shift($lc);
+	    $flignes[$l] = $lc;
+	  } else $flignes[$lc] = $loc;
 
 	foreach ($tableau as $ligne) {
 	  if (isset($flignes[$i])) {
 	    $ligne = str_replace('&nbsp;',' ', $ligne);
+	    $indexmesg = $flignes[$i][1];
 	    // tentative de pointer sur la colonne fautive;
 	    // marche pas car highlight_string rajoute des entites. A revoir.
-	    // $m = $flignes[$i];
+	    // $m = $flignes[$i][0];
 	    //  $ligne = substr($ligne, 0, $m-1) .
 	    //  sprintf($formaterr, substr($ligne,$m));
 	    $ligne = sprintf($formaterr, $ligne);
-	  }
+	  } else $indexmesg = $ancre;
 	  $res .= "<br />\n"
-		.  sprintf((($i%10) ? $format :$format10), $i, $i)
+	  .  sprintf((($i%10) ? $format :$format10), $indexmesg, $i, $i)
 		.   $ligne;
 	  $i++;
 	}
@@ -531,18 +534,44 @@ function emboite_texte($texte, $fonc='',$self='')
                      $eregs))
 		return array(ancre_texte($texte, array('', '')), true);
 	if (!isset($GLOBALS['debug_objets'])) {
-		preg_match_all(",([^0-9]* )([0-9]+)(.*?(\d*)<br />),",
+		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
 				$GLOBALS['xhtml_error'],
 				$regs,
 			       PREG_SET_ORDER);
-		$err = '';
+		$err = '<tr><th>#</th><th>Occ.</th><th>Msg</th><th>L</th><th>Col</th></tr>';
 		$fautifs = array();
+		$i = 0;
+		$encore = array();
 		foreach($regs as $r) {
-			$err .= $r[1] .
-			  "<a href='#L" . $r[2] . "'>$r[2]</a>$r[3]";
-			$fautifs[]= array($r[2], $r[4]);
+			if (isset($encore[$r[1]]))
+			   $encore[$r[1]]++;
+			else $encore[$r[1]] = 1;
+		}			
+		$encore2 = array();
+		$colors = array('#e0e0f0', '#f8f8ff');
+		foreach($regs as $r) {
+			$i++;
+			list(,$msg, $ligne, $fin, $col) = $r;
+			if (isset($encore2[$msg]))
+			  $ref = $encore2[$msg]++;
+			else $encore2[$msg] = $ref = 1;
+			$err .= "<tr  style='background-color: "
+			  . $colors[$i%2]
+			  . "'><td style='text-align: right'>"
+			  . $i
+			  . "</td><td  style='text-align: right'>"
+			  . "$ref/$encore[$msg]</td><td>$msg</td>"
+			  . "<td  style='text-align: right'><a href='#L"
+			  . $ligne
+			  . "' id='T$i'>"
+			  . $ligne
+			  . "</a></td><td  style='text-align: right'>"
+			  . $fin
+			  . "</td></tr>\n";
+			$fautifs[]= array($ligne, $col, $i);
 		}
-		return array(ancre_texte($texte, $fautifs), $err);
+		return array(ancre_texte($texte, $fautifs),
+			     "<table>$err</table>");
 	} else {
 		$fermant = $eregs[2];
 		$ouvrant = $eregs[4];
