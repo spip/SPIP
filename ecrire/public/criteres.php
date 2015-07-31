@@ -143,6 +143,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 // {fragment}
 // http://doc.spip.org/@critere_fragment_dist
 // deprecie, doit on le supprimer ? cela ne concerne vraiment que peu de monde ...
+// http://doc.spip.org/@critere_fragment_dist
 function critere_fragment_dist($idb, &$boucles, $crit) {
 }
 
