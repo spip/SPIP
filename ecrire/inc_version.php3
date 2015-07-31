@@ -257,10 +257,13 @@ $mysql_debug = false;
 // faut-il chronometrer les requetes MySQL ?
 $mysql_profile = false;
 
-// faut-il faire des connexions completes rappelant le nom du serveur et de
-// la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL ;
-// a desactiver en cas de soucis de connexion chez certains hebergeurs [??])
+// faut-il faire des connexions completes rappelant le nom du serveur et/ou de
+// la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
+// (A desactiver en cas de soucis de connexion chez certains hebergeurs)
+// Note: un test a l'installation peut aussi avoir desactive
+// $mysql_rappel_nom_base directement dans le fichier inc_connect.php3
 $mysql_rappel_connexion = true;
+$mysql_rappel_nom_base = true;
 
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;

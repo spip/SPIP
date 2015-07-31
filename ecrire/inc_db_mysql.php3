@@ -111,7 +111,7 @@ function traite_query($query) {
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "";
 
-	if ($GLOBALS['mysql_rappel_connexion'] AND $db = $GLOBALS['spip_mysql_db'])
+	if ($GLOBALS['mysql_rappel_nom_base'] AND $db = $GLOBALS['spip_mysql_db'])
 		$db = '`'.$db.'`.';
 
 	// changer les noms des tables ($table_prefix)

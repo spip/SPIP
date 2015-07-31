@@ -22,6 +22,8 @@ include_ecrire ("inc_presentation.php3");
 function login_hebergeur() {
 	global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
 
+	$base_hebergeur = 'localhost'; # par defaut
+
 	// Lycos (ex-Multimachin)
 	if ($HTTP_X_HOST == 'membres.lycos.fr') {
 		ereg('^/([^/]*)', $REQUEST_URI, $regs);
@@ -33,11 +35,12 @@ function login_hebergeur() {
 		$login_hebergeur = ereg_replace('[^a-zA-Z0-9]', '_', $regs[1]);
 	}
 	// Free
-	else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
+	else if (ereg('(.*)\.free\.fr$', $SERVER_NAME, $regs)) {
+		$base_hebergeur = 'sql.free.fr';
 		$login_hebergeur = $regs[1];
 	}
 
-	return $login_hebergeur;
+	return array($base_hebergeur, $login_hebergeur);
 }
 
 
@@ -226,6 +229,20 @@ else if ($etape == 4) {
 
 	$maj_ok = maj_base();
 
+	// Tester $mysql_rappel_nom_base
+	$GLOBALS['mysql_rappel_nom_base'] = true;
+	$GLOBALS['spip_mysql_db'] = $sel_db;
+	$ok_rappel_nom = spip_query("INSERT spip_meta (nom,valeur)
+		VALUES ('mysql_rappel_nom_base', 'test')");
+	if ($ok_rappel_nom) {
+		$ligne_rappel = '';
+		spip_query("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'");
+	} else {
+		$GLOBALS['mysql_rappel_nom_base'] = false;
+		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
+		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
+	}
+
 	if ($nouvelle) {
 		spip_query("INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
 		$result_ok = !spip_sql_errno();
@@ -394,8 +411,7 @@ else if ($etape == 1) {
 
 	echo aide ("install1");
 
-	$adresse_db = 'localhost';
-	$login_db = login_hebergeur();
+	list($adresse_db, $login_db) = login_hebergeur();
 	$pass_db = '';
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
