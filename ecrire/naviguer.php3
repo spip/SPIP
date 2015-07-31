@@ -54,7 +54,7 @@ function enfant($collection){
 				$hash = calculer_action_auteur ("reduire $w $h");
 
 //				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' />";
-				$les_enfants.= "<div style='position: absolute; right: 0px; top: 0px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' /></div>";
+				$les_enfants.= "<div style='position: absolute; right: 0px; top: 0px; width: ".$w."px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' /></div>";
 				$les_enfants.= "<img src='img_pack/rien.gif' width='$w' height='$h' align='right' />";
 				
 			}
