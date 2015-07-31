@@ -45,7 +45,7 @@
 #SET{line-height,#ENV{line-height,1.2em}} [ line-height: (#GET{line-height});]
 #SET{margin-bottom,#ENV{margin-bottom,1.2em}} [ margin-bottom: (#GET{margin-bottom});]
 #SET{text-indent,#ENV{text-indent,50px}} [ text-indent: (#GET{text-indent});]
-#SET{font-family,#ENV{font-family,'Helvetica, Arial, sans-serif'}} [ font-family: (#GET{font-family});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [ font-family: (#GET{font-family});]
 #SET{background-color,#ENV{background-color,#F8F7F3}} [ background-color : (#GET{background-color});]
 #SET{color,#ENV{color,#000000}} [ color: (#GET{color});]
 */
