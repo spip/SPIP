@@ -22,7 +22,8 @@ function action_session_dist()
 	AND preg_match(',^[a-z_0-9-]+$,i', $var)
 	) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
-			session_set('session_'.$var, _request('val'));
+			session_set('session_'.$var, $val=_request('val'));
+		#spip_log("autosave:$var:$val",'autosave');
 	}
 
 	# TODO: mode lecture de session ; n'afficher que ce qu'il faut
