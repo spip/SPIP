@@ -1,5 +1,5 @@
 <BOUCLE_jour(ARTICLES)
-    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}{par date}
+    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}
 >[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 
   calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})]</BOUCLE_jour>[(#TOTAL_BOUCLE|agenda_affiche{<:aucun_article:>, 'jour', 
   calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})][(#TOTAL_BOUCLE|?{' ',''})
