@@ -770,6 +770,9 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'jour_non_connu_nc' => 'dianav',
 
 // L
+'ldap_correspondance' => 'h&ecirc;rezh ar vaezienn @champ@',
+'ldap_correspondance_1' => 'H&ecirc;rezh ar maezienno&ugrave; LDAP',
+'ldap_correspondance_2' => 'Merka&ntilde; anv ar vaezienn LDAP evit pep hini eus ar maezienno&ugrave; SPIP da-heul. Lezel goullo kuit na vefe leuniet pa dispartia&ntilde; dre skejo&ugrave; evit esaea&ntilde; meur a vaezienn LDAP.',
 'lien_ajout_destinataire' => 'Ouzhpenna&ntilde; an degemerer-ma&ntilde;',
 'lien_ajouter_auteur' => 'Ouzhpenna&ntilde; ar skridaozer-ma&ntilde;',
 'lien_ajouter_participant' => 'Ouzhpenna&ntilde; ur perzhiad',

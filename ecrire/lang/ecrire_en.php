@@ -792,6 +792,9 @@ in a colour indicating their status:',
 'jour_non_connu_nc' => 'unknown',
 
 // L
+'ldap_correspondance' => 'inherit field @champ@',
+'ldap_correspondance_1' => 'Inherit LDAP fields',
+'ldap_correspondance_2' => 'For each of the following SPIP fields, enter the name of the corresponding LDAP field. Leave it blank if you don\'t wanted it filled, separate with spaces or commas to try several LDAP fields.',
 'lien_ajout_destinataire' => 'Add this recipient',
 'lien_ajouter_auteur' => 'Add this author',
 'lien_ajouter_participant' => 'Add a participant',

@@ -794,6 +794,9 @@ ukazuje jejich stav:',
 'jour_non_connu_nc' => 'neuvedeno',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'P&#345;idat p&#345;&iacute;jemce',
 'lien_ajouter_auteur' => 'P&#345;idat autora',
 'lien_ajouter_participant' => 'P&#345;idat &uacute;&#269;astn&iacute;ka',

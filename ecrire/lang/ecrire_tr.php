@@ -779,6 +779,9 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'jour_non_connu_nc' => 'Bilinmeyen ',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Bu al&#305;c&#305;y&#305; ekle',
 'lien_ajouter_auteur' => 'Bu yazar&#305;n ekle',
 'lien_ajouter_participant' => 'Bir kat&#305;l&#305;mc&#305;y&#305; ekle',

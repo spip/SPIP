@@ -767,6 +767,9 @@ SPIP&#12489;&#12461;&#12517;&#12513;&#12531;&#12488;</a>&#12434;&#12372;&#35239;
 'jour_non_connu_nc' => '&#26410;&#23450;&#32681;',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => '&#12371;&#12398;&#21463;&#21462;&#20154;&#12434;&#36861;&#21152;',
 'lien_ajouter_auteur' => '&#12371;&#12398;&#33879;&#32773;&#12434;&#36861;&#21152;',
 'lien_ajouter_participant' => '&#38306;&#20418;&#32773;&#12434;&#36861;&#21152;',

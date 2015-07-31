@@ -750,6 +750,9 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'jour_non_connu_nc' => 'k.b.',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Th&#234;m ng&#432;&#7901;i nh&#7853;n n&#224;y',
 'lien_ajouter_auteur' => 'Th&#234;m t&#225;c gi&#7843; n&#224;y',
 'lien_ajouter_participant' => 'Th&#234;m m&#7897;t tham d&#7921; vi&#234;n',

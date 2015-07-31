@@ -773,6 +773,9 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'jour_non_connu_nc' => 'necunoscut',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ad&#259;uga&#355;i acest destinatar',
 'lien_ajouter_auteur' => 'Ad&#259;uga&#355;i acest autor',
 'lien_ajouter_participant' => 'Ad&#259;uga&#355;i un participant',

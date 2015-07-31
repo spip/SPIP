@@ -742,6 +742,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'jour_non_connu_nc' => '&#4129;&#4121;&#4106;&#4154;&#4121;&#4126;&#4141;',
 
 // L
+'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
+'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
+'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => '&#4132;&#4124;&#4096;&#4154;&#4097;&#4150;&#4126;&#4144;&#4096;&#4141;&#4143; &#4113;&#4117;&#4154;&#4113;&#4106;&#4154;&#4151;&#4117;&#4139;',
 'lien_ajouter_auteur' => '&#4132;&#4101;&#4140;&#4123;&#4145;&#4152;&#4126;&#4144;&#4096;&#4141;&#4143; &#4113;&#4117;&#4154;&#4113;&#4106;&#4154;&#4151;&#4117;&#4139;',
 'lien_ajouter_participant' => '&#4117;&#4139;&#4125;&#4100;&#4154;&#4126;&#4144;&#4112;&#4122;&#4145;&#4140;&#4096;&#4154;&#4113;&#4117;&#4154;&#4113;&#4106;&#4154;&#4151;&#4117;&#4139;',

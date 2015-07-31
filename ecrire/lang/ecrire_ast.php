@@ -797,6 +797,9 @@ con una color que indica el est&aacute;u:',
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'ldap_correspondance' => 'herencia del campu @champ@',
+'ldap_correspondance_1' => 'Herencia de campos LDAP',
+'ldap_correspondance_2' => 'Pa ca&uacute;n de los campos SPIP siguientes, conse&ntilde;ar el nome del campu LDAP correspondiente. Dexar balero pa nun llenalu, separtar con espacios o comes pa tentar dellos campos LDAP.',
 'lien_ajout_destinataire' => 'Amestar esti destinatariu',
 'lien_ajouter_auteur' => 'Amestar esti autor',
 'lien_ajouter_participant' => 'Amestar un participante',
