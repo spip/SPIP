@@ -663,6 +663,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (el m&aacute;s extendido), <b>PostgreSQL</b> y <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Atenci&oacute;n: varios plugins s&oacute;lo funcionan con MySQL',
 'intem_redacteur' => 'redactor/a',
+'intitule_licence' => 'Licencia',
 'item_accepter_inscriptions' => 'Aceptar las inscripciones',
 'item_activer_forum_administrateur' => 'Activar el foro del equipo de administraci&oacute;n.',
 'item_activer_messages_avertissement' => 'Activar los mensajes de advertencia',
@@ -989,6 +990,7 @@ Utiliza este formulario con precauci&oacute;n...',
 'texte_recuperer_base' => 'Reparar la base de datos',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br />Se puede referenciar r&aacute;pidamente un sitio Web indicando aqu&iacute; la direcci&oacute;n URL deseada, o la direcci&oacute;n de su archivo de sindicaci&oacute;n. SPIP recuperar&aacute; autom&aacute;ticamente las informaciones correspondientes (t&iacute;tulo, descripci&oacute;n...).',
+'texte_referencement_automatique_verifier' => 'Deber&iacute;as verificar la informaci&oacute;n facilitada por <tt>@url@</tt> antes de guardar.',
 'texte_requetes_echouent' => '<b>Cuando algunas peticiones SQL fallan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea debido a la base de datos enm s&iacute;.</b><p />
 Tu servidor SQL es capaz de repararar sus tablas cuando fueron da&ntilde;adas por accidente.  Puedes intentar aqu&iacute; esta reparaci&oacute;n: si falla, conserva una copia del resultado, que posiblemente contenga indicios de lo que no funciona...<p />
 Si el problema persiste, contacta a tu hospedaje.<p />',

@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'activer_plugin' => 'Activa&#355;i plugin-ul',
+'affichage' => 'Afi&#351;aj',
 'aide_non_disponible' => 'Aceast&#259; parte din Help &icirc;nca nu e disponibil&#259; &icirc;n aceast&#259; limb&#259;',
 'auteur' => 'Autor&nbsp;:',
 'avis_acces_interdit' => 'Accesul interzis.',
@@ -285,6 +286,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_auteurs_trouves' => 'Autori g&#259;si&#355;i',
 'info_authentification_externe' => 'Autentificare extern&#259;',
 'info_avertissement' => 'Avertisment',
+'info_barre_outils' => 'cu toolbar-ul s&#259;u ?',
 'info_base_installee' => 'Structura bazei dumneavoastr&#259; de date a fost instalat&#259;.',
 'info_base_restauration' => 'Baza de date este pe cale s&#259; fie restaurat&#259;.',
 'info_bloquer' => 'bloca&#355;i',
@@ -304,11 +306,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => 'pe @liste@',
 'info_code_acces' => 'Nu uita&#355;i propriile dumeavoastr&#259; coduri de acces&nbsp;!',
 'info_comment_lire_tableau' => 'Cum se cite&#351;te acest tablou',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Este recomandabil s&#259; verifica&#355;i &icirc;n prealabil dac&#259; server-ul comprim&#259; &icirc;n mod sistematic scripturile php&nbsp;; pentru a face acest test, pute&#355;i s&#259; folosi&#355;i de exemplu serviciul urm&#259;tor&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'Dac&#259; server-ul dumneavoastr&#259; nu comprim&#259; &icirc;n mod automat paginile html c&acirc;nd acestea sunt trimise pe internet, pute&#355;i &icirc;ncerca s&#259; for&#355;a&#355;i aceast&#259; compresie  pentru a diminua m&#259;rimea paginilor &icirc;nc&#259;rcate. <b>Aten&#355;ie</b> : aceast&#259; opera&#355;ie poate &icirc;ncetini considerabil anumite servere.',
 'info_compresseur_titre' => 'Optimiz&#259;ri &#351;i compresie',
+'info_config_forums_prive' => '&Icirc;n cadrul spa&#355;iului privat al site-ului, pute&#355;i activa mai multe tipuri de forumuri&nbsp;:',
+'info_config_forums_prive_admin' => 'Un forum rezervat administratorilor site-ului&nbsp;:',
+'info_config_forums_prive_global' => 'Un forum global, deschis la to&#355;i redactorii&nbsp;:',
+'info_config_forums_prive_objets' => 'Un forum ata&#351;at fiec&#259;rui articol, &#351;tire, site referen&#355;iat, etc.&nbsp;:',
 'info_config_suivi' => 'Dac&#259; aceast&#259; adres&#259; corespunde unei liste de email-uri, pute&#355;i indica mai jos adresa la care participan&#355;ii la site se pot &icirc;nscrie. Aceast&#259; adres&#259; poate fi un URL (de exemplu adresa paginii de &icirc;nsriere la list&#259; pe Web) sau o adres&#259; de email dotat&#259; cu un subiect specific (de exemplu: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Pute&#355;i s&#259; v&#259; abona&#355;i la lista de email-uri a acestui site. Ve&#355;i primi ca urmare anun&#355;uri de &#351;tiri sau articole propuse spre publicare.',
 'info_confirmer_passe' => 'Confirma&#355;i aceast&#259; nou&#259; parol&#259; :',
+'info_conflit_edition_avis_non_sauvegarde' => 'Aten&#355;ie, c&acirc;mpurile urm&#259;toare au fost modificate &icirc;n alt&#259; parte. Modific&#259;rile dumneavoastr&#259; asupra acestor c&acirc;mpuri nu au fost, a&#351;adar, &icirc;nregistrate.',
+'info_conflit_edition_differences' => 'Diferen&#355;e&nbsp;:',
+'info_conflit_edition_version_enregistree' => 'Versiunea &icirc;nregistrat&#259;&nbsp;:',
+'info_conflit_edition_votre_version' => 'Versiunea dumneavoastr&#259;&nbsp;:',
 'info_connexion_base' => '&Icirc;ncercarea conexiunii la baza de date',
 'info_connexion_base_donnee' => 'Conexiunea la baza dumneavoastr&#259; de date',
 'info_connexion_ldap_ok' => 'Conexiunea LDAP a reu&#351;it.</b><br /> Pute&#355;i trece la etapa urm&#259;toare.',
@@ -425,6 +436,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   pierdut&#259; &#351;i site-ul dumneavoastr&#259; nu va mai func&#355;iona.
 {{Reinstala&#355;i fi&#351;ierele originale SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modul implicit de func&#355;ionare a forum-urilor publice',
+'info_modifier_auteur' => 'Modifica&#355;i autorul&nbsp;:',
 'info_modifier_breve' => 'Modifica&#355;i &#351;tirea:',
 'info_modifier_mot' => 'Modifica&#355;i cuv&acirc;ntul-cheie :',
 'info_modifier_rubrique' => 'Modifica&#355;i rubrica :',
@@ -462,9 +474,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTICOL NUM&#258;RUL&nbsp;:',
 'info_obligatoire_02' => '[Obligatorie]',
 'info_option_accepter_visiteurs' => 'Accepta&#355;i &icirc;nscrierea vizitatorilor site-ului public',
-'info_option_email' => '<MODIF>Atunci c&acirc;nd un vizitator trimite un mesaj nou &icirc;ntr-un forum
+'info_option_email' => 'Atunci c&acirc;nd un vizitator trimite un mesaj nou &icirc;ntr-un forum
   asociat unui articol, autorii articolului pot fi
-  preveni&#355;i de acest mesaj prin-un email. Dori&#355;i s&#259; activa&#355;i aceast&#259; op&#355;iune&nbsp;?',
+  preveni&#355;i de acest mesaj printr-un email. Indica&#355;i pentru fiecare tip de forum dac&#259; aceast&#259; op&#355;iune este utilizabil&#259;.',
 'info_option_faire_suivre' => 'Face&#355;i ca mesajele forum-urilor s&#259; fie trimise autorilor articolelor',
 'info_option_ne_pas_accepter_visiteurs' => 'Refuza&#355;i &icirc;nscrierea vizitatorilor',
 'info_option_ne_pas_faire_suivre' => 'Face&#355;i ca mesajele forum-urilor s&#259; nu fie trimise autorilor articolelor',
@@ -505,6 +517,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publica&#355;i',
 'info_publies' => 'Articolele dumneavoatr&#259; publicate &icirc;n direct',
 'info_question_accepter_visiteurs' => 'Dac&#259; scheletele site-ului dumneavoastr&#259; prev&#259;d &icirc;nregistrarea vizitatorilor f&#259;r&#259; acces la spa&#355;iul privat, v&#259; rug&#259;m s&#259; activa&#355;i op&#355;iunea de mai jos&nbsp;:',
+'info_question_activer_compactage_css' => 'Dori&#355;i s&#259; activa&#355;i compactarea foilor de stil (CSS) ?',
+'info_question_activer_compactage_js' => 'Dori&#355;i s&#259; activa&#355;i compactarea scripturilor (javascript) ?',
+'info_question_activer_compresseur' => 'Dori&#355;i s&#259; activa&#355;i compresia fluxului HTTP ?',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastr&#259; trebuie s&#259; gestioneze statisticile vizitelor&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accepta&#355;i &icirc;nscrierea de noi redactori
   &icirc;n partea public&#259; a site-ului&nbsp;? Dac&#259; accepta&#355;i, vizitatorii vor putea s&#259; se &icirc;nscrie
@@ -522,6 +537,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_vignettes_referer' => 'Atunci c&acirc;nd vizualiza&#355;i statisticile, pute&#355;i vizualiza pre-vederi ale site-uri de unde provin vizitele',
 'info_question_vignettes_referer_non' => 'Nu afi&#351;ati capturile site-urilor de unde vin vizitele',
 'info_question_vignettes_referer_oui' => 'Afi&#351;a&#355;i capturile site-urilor de unde provin vizitele',
+'info_question_visiteur_ajout_document_forum' => 'Dori&#355;i s&#259; autoriza&#355;i ca vizitatorii s&#259; ata&#351;eze documente (imagini, sunete, etc.) la mesajele din forum-uri ?',
+'info_question_visiteur_ajout_document_forum_format' => '&Icirc;n acest caz, indica&#355;i mai jos lista de extensii pentru documentele autorizate &icirc;n forum-uri (de exemplu: gif, jpg, png, mp3).',
 'info_qui_attribue_mot_cle' => 'Cuvintele-cheie din acest grup pot fi atribuite de c&#259;tre&nbsp;:',
 'info_racine_site' => 'R&#259;d&#259;cina site-ului',
 'info_recharger_page' => 'V&#259; rug&#259;m s&#259; re&icirc;nc&#259;rca&#355;i aceast&#259; pagin&#259; &icirc;n c&acirc;teva momente.',
@@ -679,6 +696,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'item_ajout_mots_cles' => 'Autoriza&#355;i ad&#259;ugarea cuvintelor-cheie la forum-uri',
 'item_autoriser_documents_joints' => 'Autoriza&#355;i documentele ata&#351;ate &icirc;n articole',
 'item_autoriser_documents_joints_rubriques' => 'Autoriza&#355;i documentele ata&#351;ate &icirc;n rubrici',
+'item_autoriser_selectionner_date_en_ligne' => 'Posibilitatea de a selec&#355;iona data de punere &icirc;n linie a fiec&#259;rui document',
 'item_autoriser_syndication_integrale' => 'Difuza&#355;i integralitatea articolelor &icirc;n fi&#351;ierele de sindicalizare',
 'item_bloquer_liens_syndiques' => 'Bloca&#355;i leg&#259;turile sindicalizate pentru validare',
 'item_breve_refusee' => 'NU - &#350;tire refuzat&#259;',
@@ -688,12 +706,16 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'item_choix_non_generation_miniature' => 'Nu genera&#355;i miniaturile imaginilor.',
 'item_choix_redacteurs' => 'redactorii',
 'item_choix_visiteurs' => 'vizitatorii site-ului public',
+'item_compresseur' => 'Activa&#355;i compresia',
+'item_config_forums_prive_global' => 'Activa&#355;i forum-ul redactorilor',
+'item_config_forums_prive_objets' => 'Activa&#355;i aceste forum-uri',
 'item_creer_fichiers_authent' => 'Crea&#355;i fi&#351;ierele .htpasswd',
 'item_desactiver_forum_administrateur' => 'Dezactiva&#355;i forum-ul administratorilor',
 'item_gerer_annuaire_site_web' => 'Gestiona&#355;i un anuar de site-uri Web',
 'item_gerer_statistiques' => 'Gestiona&#355;i statisticile',
 'item_limiter_recherche' => 'Limita&#355;i c&#259;utarea la informa&#355;ille con&#355;inute pe site-ul dumneavoastr&#259;',
 'item_login' => 'Login',
+'item_messagerie_agenda' => 'Activa&#355;i mesageria &#351;i agenda',
 'item_mots_cles_association_articles' => 'articolelor',
 'item_mots_cles_association_breves' => '&#351;tirilor',
 'item_mots_cles_association_rubriques' => 'rubricilor',
@@ -705,12 +727,17 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'item_non_ajout_mots_cles' => 'Interzice&#355;i utilizarea cuvintelor-cheie &icirc;n forum-uri',
 'item_non_autoriser_documents_joints' => 'Nu autoriza&#355;i documentele &icirc;n articole',
 'item_non_autoriser_documents_joints_rubriques' => 'Nu autoriza&#355;i documentele &icirc;n rubrici',
+'item_non_autoriser_selectionner_date_en_ligne' => 'Nu se poate schimba manual data documentelor',
 'item_non_autoriser_syndication_integrale' => 'Difuza&#355;i doar un rezumat',
 'item_non_bloquer_liens_syndiques' => 'Nu bloca&#355;i leg&#259;turile provenite din sindicalizare',
+'item_non_compresseur' => 'Dezactiva&#355;i compresia',
+'item_non_config_forums_prive_global' => 'Dezactiva&#355;i forum-ul redactorilor',
+'item_non_config_forums_prive_objets' => 'Dezactiva&#355;i aceste forum-uri',
 'item_non_creer_fichiers_authent' => 'Nu crea&#355;i aceste fi&#351;iere',
 'item_non_gerer_annuaire_site_web' => 'Dezactiva&#355;i anuarul site-urilor Web',
 'item_non_gerer_statistiques' => 'Nu gestiona&#355;i statisticile',
 'item_non_limiter_recherche' => 'M&#259;ri&#355;i zona de c&#259;utare la con&#355;inutul site-urilor referen&#355;iate',
+'item_non_messagerie_agenda' => 'Dezactiva&#355;i mesageria &#351;i agenda',
 'item_non_publier_articles' => 'Nu publica&#355;i articolele &icirc;naintea datei de publicare fixat&#259;.',
 'item_non_utiliser_breves' => 'Nu folosi&#355;i &#351;tirile',
 'item_non_utiliser_config_groupe_mots_cles' => 'Nu folosi&#355;i configurarea avansat&#259; a grupurilor de cuvinte-cheie',
@@ -777,8 +804,14 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'mois_non_connu' => 'necunoscut',
 
 // O
+'onglet_contenu' => 'Con&#355;inut',
 'onglet_declarer_une_autre_base' => 'Declara&#355;i o alt&#259; baz&#259; de date',
+'onglet_discuter' => 'Discuta&#355;i',
+'onglet_documents' => 'Documente',
+'onglet_interactivite' => 'Interactivitate',
+'onglet_proprietes' => 'Propriet&#259;&#355;i',
 'onglet_repartition_actuelle' => 'actual&#259;',
+'onglet_sous_rubriques' => 'Sub-rubrici',
 'ortho_ajouter_ce_mot' => 'Ad&#259;uga&#355;i acest cuv&acirc;nt &icirc;n dic&#355;ionar',
 'ortho_aucune_suggestion' => 'Nici o sugestie nu a fost g&#259;sit&#259; pentru acest cuv&acirc;nt.',
 'ortho_avis_privacy' => 'Un verificator de ortografie este integrat &icirc;n SPIP. V&#259; rug&#259;m, totu&#351;i, ca &icirc;nainte s&#259; activa&#355;i aceast&#259; func&#355;ie s&#259; citi&#355;i paragraful urm&#259;tor&nbsp;:',
@@ -901,12 +934,16 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
   &icirc;n clasamentul de popularitate este indicat cu o marj&#259;&nbsp;;
   popularitatea articolului (care este o estimare a num&#259;rului de vizite zilnice pe care articolul le va primi dac&#259; ritmul actual de consultare se men&#355;ine) &#351;i num&#259;rul de vizite primite
   de la &icirc;nceput sunt afi&#351;ate &icirc;n mica fereastr&#259; care apare la un survol al mouse-ului deasupra titlului.',
+'texte_compacter_avertissement' => 'Aten&#355;ie: nu activa&#355;i aceste op&#355;iuni &icirc;n timpul dezvolt&#259;rii site-ului dumneavoastr&#259;, pentru c&#259; elementele compactate &icirc;&#351;i pierd lizibilitatea.',
+'texte_compacter_script_css' => 'SPIP poate compacta script-urile javascript &#351;i foile de stil CSS pentru a le &icirc;nregistra &icirc;n fi&#351;iere statice; aceasta opera&#355;iune accelereaz&#259; afi&#351;area site-ului.',
 'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
+'texte_compresseur_page' => 'SPIP poate comprima &icirc;n mod automatic fiecare pagin&#259; pe care o trimite vizitatorilor site-ului. Aceast reglaj permite s&#259; optimiza&#355;i banda pasant&#259; (site-ul este mai rapid chiar &#351;i cu o conexiune internet cu debit sc&#259;zut) dar cere mai multe resurse server.',
 'texte_compte_element' => '@count@ element(e)',
 'texte_compte_elements' => '@count@ element(e)',
 'texte_config_groupe_mots_cles' => 'Dori&#355;i s&#259; activa&#355;i configurarea avansat&#259; a cuvintelor-cheie,
    indic&acirc;nd, de exemplu, c&#259; pute&#355;i selec&#355;iona un cuv&acirc;nt unic
    pe grup, sau c&#259; un grup este important...&nbsp;?',
+'texte_conflit_edition_correction' => 'V&#259; rug&#259;m s&#259; controla&#355;i mai jos diferen&#355;ele &icirc;ntre cele dou&#259; versiuni ale textului; pute&#355;i de asemenea s&#259; copia&#355;i modific&#259;rile dumneavoastr&#259;, pentru a re&icirc;ncepe.',
 'texte_connexion_mysql' => 'V&#259; rug&#259;m s&#259; consulta&#355;i informa&#355;iile care v-au fost date de c&#259;tre furnizorul dumneavoastr&#259;&nbsp;: ar trebui s&#259; g&#259;si&#355;i codurile de acces la server-ul de baze de date.',
 'texte_contenu_article' => '(Con&#355;inutul articolului &icirc;n c&acirc;teva cuvinte.)',
 'texte_contenu_articles' => '&Icirc;n func&#355;ie de formatul ales pentru site-ul dumneavoastr&#259;, pute&#355;i decide
@@ -930,8 +967,8 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_effacer_statistiques' => '&#350;terge&#355;i statisticile',
 'texte_en_cours_validation' => 'Articolele &#351;i &#351;tirile de mai jos sunt propuse pentru publicare. Nu ezita&#355;i s&#259; v&#259; exprima&#355;i p&#259;rerea folosind forum-urile care le sunt ata&#351;ate.',
 'texte_enrichir_mise_a_jour' => 'Pute&#355;i &icirc;mbog&#259;&#355;i aranjarea &icirc;n pagin&#259; a textului dumneavoastr&#259; prin folosirea &laquo;&nbsp;scurt&#259;turilor tipografice&nbsp;&raquo;.',
-'texte_fichier_authent' => '<MODIF>Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
-  &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul @dossier@ ?
+'texte_fichier_authent' => '<b>Trebuie ca SPIP s&#259; creeze fi&#351;ierele speciale <tt>.htpasswd</tt>
+  &#351;i <tt>.htpasswd-admin</tt> &icirc;n directorul @dossier@ ?</b>
   Aceste fi&#351;iere v&#259; pot servi pentru a rest&acirc;nge accesul autorilor &#351;i administratorilor &icirc;n alte locuri ale site-ului dumneavoastr&#259;
   (programe externe de statistici, de exemplu).
   Dac&#259; nu vede&#355;i utilitatea unui astfel de mecanism de protec&#355;ie, pute&#355;i l&#259;sa aceast&#259; op&#355;iune
@@ -955,6 +992,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_login_precaution' => 'Aten&#355;ie&nbsp;! Acesta este login-ul cu care sunte&#355;i conectat acum.
  Utiliza&#355;i acest formular cu precau&#355;ie...',
 'texte_message_edit' => 'Aten&#355;ie&nbsp;! acest mesaj poate fi modificat de c&#259;tre to&#355;i administratorii site-ului, &#351;i este vizibil la to&#355;i redactorii. Nu utiliza&#355;i anun&#355;urile dec&acirc;t pentru a expune evenimente importante din via&#355;a site-ului.',
+'texte_messagerie_agenda' => 'O mesagerie permite redactorilor site-ului s&#259; comunice &icirc;ntre ei direct &icirc;n spa&#355;iul privat al site-ului. O mesagerie este asociat&#259; unei agende.',
 'texte_messages_publics' => 'Mesajele publice ale articolului :',
 'texte_mise_a_niveau_base_1' => 'Tocmai a&#355;i adus la zi fi&#351;ierele SPIP.
  Trebuie ca acum s&#259; aduce&#355;i la zi &#351;i baza de date a site-ului.',
@@ -993,6 +1031,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_recuperer_base' => 'Repara&#355;i baza de date',
 'texte_reference_mais_redirige' => 'articol referen&#355;iat &icirc;n site-ul dumneavoastr&#259;, dar redirijat c&#259;tre un alt URL.',
 'texte_referencement_automatique' => '<b>Referen&#355;ierea automatic&#259; a unui site</b><br />Pute&#355;i s&#259; referen&#355;ia&#355;i rapid un site Web indic&acirc;nd mai jos adresa sa URL, sau adresa fi&#351;ierului s&#259;u de sindicalizare. SPIP va recupera &icirc;n mod automat informa&#355;iile referitoare la acest site (titlu, descriere, &#351;.a.m.d.).',
+'texte_referencement_automatique_verifier' => 'V&#259; rug&#259;m s&#259; verifica&#355;i informa&#355;iile furnizate de <tt>@url@</tt> &icirc;nainte de a &icirc;nregistra.',
 'texte_requetes_echouent' => '<b>Atunci c&acirc;nd cererile SQL e&#351;ueaz&#259;
  &icirc;n mod sistematic &#351;i f&#259;r&#259; un motiv evident, este posibil
  ca baza de date &icirc;ns&#259;&#351;i s&#259; fie cauza.</b>
@@ -1022,7 +1061,7 @@ reinstalare a SPIP pentru a recrea o nou&#259; baz&#259; de date c&acirc;t &#351
 'texte_suppression_fichiers' => 'Utiliza&#355;i aceast&#259; comand&#259; pentru a &#351;terge toate fi&#351;ierele prezente &icirc;n tamponul SPIP. Aceasta permite, de exemplu, for&#355;area unui recalcul al tuturor paginilor dac&#259; a&#355;i f&#259;cut modific&#259;ri importante de grafic&#259; sau structur&#259; a site-ului
 avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_sur_titre' => 'Supra-titlu',
-'texte_syndication' => '<MODIF>Este posibil&#259; recuperarea &icirc;m mod automat, pentru site-urile de Web care o permit, 
+'texte_syndication' => 'Este posibil&#259; recuperarea &icirc;m mod automat, pentru site-urile de Web care o permit, 
   a listei nout&#259;&#355;ilor lor. Pentru aceasta trebuie s&#259; activa&#355;i sindicalizarea. 
   <blockquote><i>Anumi&#355;i furnizori dezactiveaz&#259; aceast&#259; func&#355;ionalitate&nbsp;;
   &icirc;n acest caz, nu ve&#355;i putea folosi sindicalizarea con&#355;inutului &icirc;n site-ul dumneavoastr&#259;.</i></blockquote>',
@@ -1043,7 +1082,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
   pentru a evita afi&#351;area de mesaje intempensive de avertisment.',
 'texte_trop_resultats_auteurs' => 'Prea multe rezultate pentru "@cherche_auteur@" ; v&#259; rug&#259;m s&#259; rafina&#355;i termenii c&#259;ut&#259;rii.',
 'texte_unpack' => 'desc&#259;rcarea ultimei versiuni',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Atunci c&acirc;nd folosi&#355;i motorul de c&#259;utare integrat
+'texte_utilisation_moteur_syndiques' => 'Atunci c&acirc;nd folosi&#355;i motorul de c&#259;utare integrat
 &icirc;n SPIP, pute&#355;i efectua c&#259;utari &icirc;n articolele &#351;i site-urile sindicalizate cu dou&#259; metode diferite
  - Prima &#351;i cea mai simpl&#259; consist&#259; &icirc;n c&#259;utarea doar &icirc;n titlurile &#351;i descrierile articolelor.
   - A doua metod&#259;, mult mai puternic&#259;, permite lui SPIP s&#259; caute deasemenea &icirc;n textul site-urilor referen&#355;iate. C&acirc;nd referen&#355;iati un site, SPIP va efectua c&#259;utarea &icirc;n chiar textul site-ului respectiv.',
@@ -1066,9 +1105,16 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_cadre_numero_auteur' => 'AUTOR NUM&#258;RUL',
 'titre_cadre_signature_obligatoire' => '<b>Semn&#259;tura</b> [Obligatorie]
 ',
+'titre_compacter_script_css' => 'Compactarea script-urilor &#351;i a CSS-urlor',
+'titre_compresser_flux_http' => 'Comprimarea fluxului HTTP',
+'titre_config_contenu_notifications' => 'Notific&#259;ri',
+'titre_config_contenu_prive' => '&Icirc;n spa&#355;iul privat',
+'titre_config_contenu_public' => 'Pe site-ul public',
 'titre_config_fonctions' => 'Configura&#355;ia site-ului',
+'titre_config_forums_prive' => 'Forum-uri &icirc;n spa&#355;iul privat',
 'titre_config_groupe_mots_cles' => 'Configura&#355;ia grupurilor de cuvinte-cheie',
 'titre_configuration' => 'Configura&#355;ia site-ului',
+'titre_conflit_edition' => 'Conflict &icirc;n timpul edit&#259;rii',
 'titre_connexion_ldap' => 'Op&#355;iuni : <b>Conexiunea dumneavoastr&#259; LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimele articole sindicalizate',
 'titre_documents_joints' => 'Documente ata&#351;ate',
@@ -1081,6 +1127,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_langue_rubrique' => 'LIMBA RUBRICII',
 'titre_langue_trad_article' => 'LIMBA &#350;I TRADUCERILE ARTICOLULUI',
 'titre_les_articles' => 'ARTICOLELE',
+'titre_messagerie_agenda' => 'Mesagerie &#351;i agend&#259;',
 'titre_mots_cles_dans_forum' => 'Cuvinte-cheie &icirc;n forum-urile site-ului public',
 'titre_mots_tous' => 'Cuvintele-cheie',
 'titre_naviguer_dans_le_site' => 'Naviga&#355;i &icirc;n structura site-ului...',
@@ -1112,6 +1159,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_recherche' => 'Rezultatele c&#259;ut&#259;rii @recherche@',
 'titre_page_sites_tous' => 'Site-urile referen&#355;iate',
 'titre_page_statistiques' => 'Statisticile pe rubrici',
+'titre_page_statistiques_messages_forum' => 'Mesajele forum-ului',
 'titre_page_statistiques_referers' => 'Statistici (leg&#259;turi &icirc;n intrare)',
 'titre_page_statistiques_signatures_jour' => 'Num&#259;r de semn&#259;turi pe zi',
 'titre_page_statistiques_signatures_mois' => 'Num&#259;r de semn&#259;turi pe lun&#259;',

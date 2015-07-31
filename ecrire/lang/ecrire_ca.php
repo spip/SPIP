@@ -1018,6 +1018,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_recuperer_base' => 'Reparar la base de dades',
 'texte_reference_mais_redirige' => 'article referenciat a la web SPIP, pero redirigit cap a un altre URL.',
 'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un lloc Web</b><br />Podeu referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant aqu&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del seu fitxer de sindicaci&oacute;. SPIP recuperar&agrave; autom&agrave;ticament les informacions pel que fa a aquest lloc Web (t&iacute;tol, descripci&oacute;...).',
+'texte_referencement_automatique_verifier' => 'Verifiqueu les informacions subministrades per <tt>@url@</tt> abans d\'enregistrar. ',
 'texte_requetes_echouent' => '<b>Quan algunes peticions SQL fracassen sistem&agrave;ticament i sense tenir una ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   El vostre servidor SQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu intentar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat ja que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',

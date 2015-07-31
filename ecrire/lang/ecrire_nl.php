@@ -1057,6 +1057,7 @@ Als u geen nut ervan hebt, kunt u deze keuze
 'texte_recuperer_base' => 'De databank herstellen',
 'texte_reference_mais_redirige' => 'Gekoppeld artikel in je SPIP site, maar doorgestuurd naar een andere URL.',
 'texte_referencement_automatique' => '..<b>Geautomatiseerde koppelen van een site</b><br />U kunt een website snel verwijzen door het verlangde naar URL adres, of het adres van zijn bestand van syndication hieronder aan te geven. SPIP zal de informatie automatisch terugkrijgen betreffende deze plaats (titel, beschrijving...).',
+'texte_referencement_automatique_verifier' => 'Gelieve de inlichtingen te controleren die per <tt>@url@</tt> worden verstrekt, alvorens te registreren.',
 'texte_requetes_echouent' => 'b>Wanneer SQL verbindingen systematisch en zonder
  aanwijsbare redenen mislukken is het mogelijk dat het
  probleem bij de databank ligt. </b><p />
