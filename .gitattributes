@@ -387,7 +387,7 @@ ecrire/maj/vieille_base/charger.php -text
 ecrire/maj/vieille_base/create.php -text
 ecrire/prive.php -text
 ecrire/public/aiguiller.php -text
-ecrire/public/decompile.php -text
+ecrire/public/decompiler.php -text
 ecrire/public/format_html.php -text
 ecrire/public/index.php -text
 ecrire/public/jointures.php -text
