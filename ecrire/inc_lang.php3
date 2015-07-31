@@ -254,7 +254,7 @@ function traduire_nom_langue($lang) {
 //
 // Afficher un menu de selection de langue
 //
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $uniq_langues_traduites = false) {
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 	global $couleur_foncee;
 
 	if ($default == '')
@@ -269,9 +269,13 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $uni
 		$default = substr($default,1);
 	}
 
-	if ($uniq_langues_traduites) $langues = explode(',', $GLOBALS['all_langs']);
-	else $langues = explode(',', lire_meta('multi_auth'));
-
+	if ($nom_select == 'var_lang') {
+		$langues = explode(',', $GLOBALS['all_langs']);
+	}
+	else {
+		$langues = explode(',', lire_meta('multi_auth'));
+	}
+	
 	if (count($langues) <= 1) return;
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
@@ -284,7 +288,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $uni
 
 	$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
 	$ret .= $texte;
-	$ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
+	if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
+	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 	$ret .= $premier_option;
 	while (list(,$l) = each ($langues)) {
 		if ($l == $default)
@@ -293,7 +298,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $uni
 			$ret .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
-	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+	else $ret .= "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
 	$ret .= "</form>";
 	return $ret;
 }

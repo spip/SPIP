@@ -1595,7 +1595,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<td>   </td>";
 
 		echo "<td align='center'>";
-		echo menu_langues('var_lang','','',true);
+		echo menu_langues();
 		echo "</td>";
 
 	}

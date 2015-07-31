@@ -1118,6 +1118,28 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 }
 
 
+//
+// Langue de l'article
+//
+if ((lire_meta('multi_articles') <> 'non') AND ($flag_editable)) {
+	if ($changer_lang) {
+		spip_log ("article $id_article = $changer_lang");
+		spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."' WHERE id_article=$id_article");
+	}
+
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
+	$langue_article = $row['lang'];
+
+	$langue_default = ($langue_article ? $langue_article : '--');
+	debut_cadre_enfonce("langues-24.gif");
+		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+		echo menu_langues('changer_lang', $langue_default, _T('info_multi_cet_article').' ');
+		echo "</font></center>\n";
+	fin_cadre_enfonce();
+}
+
+
+
 //////////////////////////////////////////////////////
 // Modifier le statut de l'article
 //
@@ -1269,23 +1291,6 @@ echo "</div>";
 afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 
-//
-// Langue de l'article
-//
-if ((lire_meta('multi_articles') <> 'non') AND ($connect_statut == '0minirezo')) {
-	if ($changer_lang) {
-		spip_log ("article $id_article = $changer_lang");
-		spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."' WHERE id_article=$id_article");
-	}
-
-	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
-	$langue_article = $row['lang'];
-
-	$langue_default = ($langue_article ? $langue_article : '--');
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
-	echo menu_langues('changer_lang', $langue_default, _T('info_multi_cet_article').' ');
-	echo "</font>\n";
-}
 
 
 //
