@@ -10,6 +10,56 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+// Placer definition des couleurs avant inc_version,
+// sinon impossible de les redefinir dans mes_options
+$GLOBALS['couleurs_spip'] = array(
+
+// Vert
+1 => array (
+		"couleur_foncee" => "#9DBA00",
+		"couleur_claire" => "#C5E41C",
+		"couleur_lien" => "#657701",
+		"couleur_lien_off" => "#A6C113"
+		),
+// Violet clair
+2 => array (
+		"couleur_foncee" => "#eb68b3",
+		"couleur_claire" => "#ffa9e6",
+		"couleur_lien" => "#8F004D",
+		"couleur_lien_off" => "#BE6B97"
+		),
+// Orange
+3 => array (
+		"couleur_foncee" => "#fa9a00",
+		"couleur_claire" => "#ffc000",
+		"couleur_lien" => "#FF5B00",
+		"couleur_lien_off" => "#B49280"
+		),
+// Saumon
+4 => array (
+		"couleur_foncee" => "#CDA261",
+		"couleur_claire" => "#FFDDAA",
+		"couleur_lien" => "#AA6A09",
+		"couleur_lien_off" => "#B79562"
+		),
+//  Bleu pastel
+5 => array (
+		"couleur_foncee" => "#5da7c5",
+		"couleur_claire" => "#97d2e1",
+		"couleur_lien" => "#116587",
+		"couleur_lien_off" => "#81B7CD"
+		),
+//  Gris
+6 => array (
+		"couleur_foncee" => "#85909A",
+		"couleur_claire" => "#C0CAD4",
+		"couleur_lien" => "#3B5063",
+		"couleur_lien_off" => "#6D8499"
+		),
+);
+
+
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php");
 include_spip('inc/cookie');
 
@@ -57,51 +107,6 @@ if ($set_ecran) {
 if (!$spip_ecran) $spip_ecran = "etroit";
 
 
-$GLOBALS['couleurs_spip'] = array(
-
-// Vert
-1 => array (
-		"couleur_foncee" => "#9DBA00",
-		"couleur_claire" => "#C5E41C",
-		"couleur_lien" => "#657701",
-		"couleur_lien_off" => "#A6C113"
-		),
-// Violet clair
-2 => array (
-		"couleur_foncee" => "#eb68b3",
-		"couleur_claire" => "#ffa9e6",
-		"couleur_lien" => "#8F004D",
-		"couleur_lien_off" => "#BE6B97"
-		),
-// Orange
-3 => array (
-		"couleur_foncee" => "#fa9a00",
-		"couleur_claire" => "#ffc000",
-		"couleur_lien" => "#FF5B00",
-		"couleur_lien_off" => "#B49280"
-		),
-// Saumon
-4 => array (
-		"couleur_foncee" => "#CDA261",
-		"couleur_claire" => "#FFDDAA",
-		"couleur_lien" => "#AA6A09",
-		"couleur_lien_off" => "#B79562"
-		),
-//  Bleu pastel
-5 => array (
-		"couleur_foncee" => "#5da7c5",
-		"couleur_claire" => "#97d2e1",
-		"couleur_lien" => "#116587",
-		"couleur_lien_off" => "#81B7CD"
-		),
-//  Gris
-6 => array (
-		"couleur_foncee" => "#85909A",
-		"couleur_claire" => "#C0CAD4",
-		"couleur_lien" => "#3B5063",
-		"couleur_lien_off" => "#6D8499"
-		),
-);
 
 // deux globales (compatibilite ascendante)
 $options      = $prefs['options'];
