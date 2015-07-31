@@ -1365,7 +1365,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'POPULARITE':
-		$code = 'ceil(min(100,100*$pile_boucles[$id_instance]->row[\'popularite\']/max(1,lire_meta(\'popularite_max\'))))';
+		$code = 'ceil(min(100, 100 * $pile_boucles[$id_instance]->row[\'popularite\'] / max(1 , 0 + lire_meta(\'popularite_max\'))))';
 		break;
 
 	case 'POPULARITE_ABSOLUE':
