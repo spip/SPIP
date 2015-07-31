@@ -267,77 +267,79 @@ echo "<p>";
 // Gestion des mots-cles
 //
 
-debut_cadre_relief("mot-cle-24.gif");
+if ($options == "avancees") {
 
-$articles_mots = lire_meta("articles_mots");
-$config_precise_groupes = lire_meta("config_precise_groupes");
-$mots_cles_forums = lire_meta("mots_cles_forums");
-$forums_publics = lire_meta("forums_publics");
+	debut_cadre_relief("mot-cle-24.gif");
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Les mots-cl&eacute;s</FONT></B> </TD></TR>";
+	$articles_mots = lire_meta("articles_mots");
+	$config_precise_groupes = lire_meta("config_precise_groupes");
+	$mots_cles_forums = lire_meta("mots_cles_forums");
+	$forums_publics = lire_meta("forums_publics");
 
-echo "<TR><TD class='verdana2'>";
-echo "Les mots-cl&eacute;s permettent de cr&eacute;er des liens th&eacute;matiques entre vos articles
-	ind&eacute;pendamment de leur placement dans des rubriques. Vous pouvez ainsi
-	enrichir la navigation de votre site, voire utiliser ces propri&eacute;t&eacute;s
-	pour personnaliser la pr&eacute;sentation des articles dans vos squelettes.<p>";
-echo "Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?";
-echo "</TD></TR>";
-
-echo "<TR>";
-echo "<TD align='center' class='verdana2'>";
-afficher_choix('articles_mots', $articles_mots,
-	array('oui' => 'Utiliser les mots-cl&eacute;s',
-		'non' => 'Ne pas utiliser les mots-cl&eacute;s'), " &nbsp; ");
-echo "</FONT>";
-echo "</TD></TR>";
-
-if ($options == "avancees" AND $articles_mots != "non") {
-
-	echo "<TR><TD>&nbsp;</TD></TR>";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Configuration des groupes de mots-cl&eacute;s</FONT></B></TD></TR>";
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Les mots-cl&eacute;s</FONT></B> </TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
-	echo "Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
-		en indiquant par exemple qu'on peut s&eacute;lectionner un mot unique
-		par groupe, qu'un groupe est important...&nbsp?";
+	echo "Les mots-cl&eacute;s permettent de cr&eacute;er des liens th&eacute;matiques entre vos articles
+		ind&eacute;pendamment de leur placement dans des rubriques. Vous pouvez ainsi
+		enrichir la navigation de votre site, voire utiliser ces propri&eacute;t&eacute;s
+		pour personnaliser la pr&eacute;sentation des articles dans vos squelettes.<p>";
+	echo "Souhaitez-vous utiliser les mots-cl&eacute;s sur votre site&nbsp;?";
 	echo "</TD></TR>";
 
 	echo "<TR>";
-	echo "<TD ALIGN='left' class='verdana2'>";
-	afficher_choix('config_precise_groupes', $config_precise_groupes,
-		array('oui' => 'Utiliser la configuration avanc&eacute;e des groupes de mots-cl&eacute;s',
-			'non' => 'Ne pas utiliser la configuration avanc&eacute;e des groupes de mots-cl&eacute;s'));
+	echo "<TD align='center' class='verdana2'>";
+	afficher_choix('articles_mots', $articles_mots,
+		array('oui' => 'Utiliser les mots-cl&eacute;s',
+			'non' => 'Ne pas utiliser les mots-cl&eacute;s'), " &nbsp; ");
+	echo "</FONT>";
 	echo "</TD></TR>";
 
-	if ($forums_publics != "non"){
+	if ($articles_mots != "non") {
+
 		echo "<TR><TD>&nbsp;</TD></TR>";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Mots-cl&eacute;s dans les forums du site public</FONT></B></TD></TR>";
+		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Configuration des groupes de mots-cl&eacute;s</FONT></B></TD></TR>";
 
 		echo "<TR><TD class='verdana2'>";
-		echo "Souhaitez-vous permettre d'utilisation des mots-cl&eacute;s, s&eacute;lectionnables par les visiteurs, dans les forums du site public&nbsp;? (Attention&nbsp;: cette option est relativement complexe &agrave; utiliser correctement.)";
+		echo "Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
+			en indiquant par exemple qu'on peut s&eacute;lectionner un mot unique
+			par groupe, qu'un groupe est important...&nbsp?";
 		echo "</TD></TR>";
 
 		echo "<TR>";
-		echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
-		afficher_choix('mots_cles_forums', $mots_cles_forums,
-			array('oui' => "Autoriser l'ajout de mots-cl&eacute;s aux forums",
-				'non' => "Interdire l'utilisation des mots-cl&eacute;s dans les forums"));
-		echo "</FONT>";
+		echo "<TD ALIGN='left' class='verdana2'>";
+		afficher_choix('config_precise_groupes', $config_precise_groupes,
+			array('oui' => 'Utiliser la configuration avanc&eacute;e des groupes de mots-cl&eacute;s',
+				'non' => 'Ne pas utiliser la configuration avanc&eacute;e des groupes de mots-cl&eacute;s'));
 		echo "</TD></TR>";
+
+		if ($forums_publics != "non"){
+			echo "<TR><TD>&nbsp;</TD></TR>";
+			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Mots-cl&eacute;s dans les forums du site public</FONT></B></TD></TR>";
+
+			echo "<TR><TD class='verdana2'>";
+			echo "Souhaitez-vous permettre d'utilisation des mots-cl&eacute;s, s&eacute;lectionnables par les visiteurs, dans les forums du site public&nbsp;? (Attention&nbsp;: cette option est relativement complexe &agrave; utiliser correctement.)";
+			echo "</TD></TR>";
+
+			echo "<TR>";
+			echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
+			afficher_choix('mots_cles_forums', $mots_cles_forums,
+				array('oui' => "Autoriser l'ajout de mots-cl&eacute;s aux forums",
+					'non' => "Interdire l'utilisation des mots-cl&eacute;s dans les forums"));
+			echo "</FONT>";
+			echo "</TD></TR>";
+		}
 	}
 
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+
+	echo "<p>";
 }
-
-echo "<TR><TD ALIGN='right'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>\n";
-
-fin_cadre_relief();
-
-echo "<p>";
 
 
 //
@@ -479,13 +481,17 @@ echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Documents joints</FONT></B> </TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
-echo propre("Vous pouvez autoriser l'ajout de documents joints aux articles et/ou aux rubriques, &agrave; condition de pr&eacute;voir les boucles correspondantes dans les squelettes des pages articles/rubriques (les squelettes propos&eacute;s par d&eacute;faut contiennent ces boucles).");
+echo "Vous pouvez autoriser l'ajout de documents (fichiers bureautiques, images,
+	multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
+	peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
+	l'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p>";
+echo "Ce r&eacute;glage n'emp&ecirc;che pas l'insertion d'images directement dans les articles.";
 echo "</TD></TR>";
 
 echo "<TR>";
 echo "<TD align='left' class='verdana2'>";
 afficher_choix('documents_article', $documents_article,
-	array('oui' => 'Autoriser les documents joints dans les articles',
+	array('oui' => 'Autoriser les documents joints aux articles',
 		'non' => 'Ne pas autoriser les documents dans les articles'), "<br>");
 echo "<br><br>\n";
 afficher_choix('documents_rubrique', $documents_rubrique,
