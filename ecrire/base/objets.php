@@ -36,7 +36,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 	// prealablement recuperer les tables_principales
 	if (is_null($infos_tables)){
 		// pas de reentrance (cas base/serial)
-		if ($deja_la) return;
+		if ($deja_la) return array();
 		$deja_la = true;
 		# recuperer les interfaces (table_titre, table_date)
 		include_spip('public/interfaces');
@@ -192,7 +192,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 		return renseigner_table_objet_sql($table_sql,$desc);
 	}
 	if ($table_sql)
-		return $infos_tables[$table_sql];
+		return isset($infos_tables[$table_sql])?$infos_tables[$table_sql]:array();
 
 	return $infos_tables;
 }
