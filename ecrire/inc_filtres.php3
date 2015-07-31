@@ -484,17 +484,7 @@ function secondes($numdate) {
 }
 
 function heures_minutes($numdate) {
-	global $spip_lang;
-	switch ($spip_lang) {
-		case 'en':
-		case 'es':
-		case 'fr':
-		default:
-			$th = 'h ';
-			$tm = 'min';
-		
-	} 
-	return heures($numdate).$th.minutes($numdate).$tm;
+	return _T('date_fmt_heures_minutes', array('h'=> heures($numdate), 'm'=> minutes($numdate)));
 }
 
 function recup_date($numdate){
@@ -593,6 +583,7 @@ function affdate_base($numdate, $vue) {
 		return $nommois;
 
 	case 'mois':
+		return $mois;
 
 	case 'jour':
 		return $jour;

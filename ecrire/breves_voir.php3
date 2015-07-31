@@ -22,18 +22,18 @@ function my_sel($num,$tex,$comp){
 
 function afficher_mois($mois){
 	my_sel("00",_T('mois_non_connu'),$mois);
-	my_sel("01",_T('mois_janvier'),$mois);
-	my_sel("02",_T('mois_fevrier'),$mois);
-	my_sel("03",_T('mois_mars'),$mois);
-	my_sel("04",_T('mois_avril'),$mois);
-	my_sel("05",_T('mois_mai'),$mois);
-	my_sel("06",_T('mois_juin'),$mois);
-	my_sel("07",_T('mois_juillet'),$mois);
-	my_sel("08",_T('mois_aout'),$mois);
-	my_sel("09",_T('mois_septembre'),$mois);
-	my_sel("10",_T('mois_octobre'),$mois);
-	my_sel("11",_T('mois_novembre'),$mois);
-	my_sel("12",_T('mois_decembre'),$mois);
+	my_sel("01",_T('date_mois_1'),$mois);
+	my_sel("02",_T('date_mois_2'),$mois);
+	my_sel("03",_T('date_mois_3'),$mois);
+	my_sel("04",_T('date_mois_4'),$mois);
+	my_sel("05",_T('date_mois_5'),$mois);
+	my_sel("06",_T('date_mois_6'),$mois);
+	my_sel("07",_T('date_mois_7'),$mois);
+	my_sel("08",_T('date_mois_8'),$mois);
+	my_sel("09",_T('date_mois_9'),$mois);
+	my_sel("10",_T('date_mois_10'),$mois);
+	my_sel("11",_T('date_mois_11'),$mois);
+	my_sel("12",_T('date_mois_12'),$mois);
 }
 
 function afficher_annee($annee){
