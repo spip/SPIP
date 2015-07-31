@@ -38,8 +38,9 @@ if ($f = include_spip('mes_fonctions', false)) {
 }
 
 // http://doc.spip.org/@base_import_all_dist
-function base_import_all_dist($titre, $reprise=false)
+function base_import_all_dist($titre='', $reprise=false)
 {
+	if (!$titre) return; // anti-testeur automatique
 	if (!$reprise) import_all_debut();
 
 	$request = unserialize($GLOBALS['meta']['import_all']);

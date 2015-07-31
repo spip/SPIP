@@ -14,8 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // http://doc.spip.org/@base_convert_sql_utf8_dist
-function base_convert_sql_utf8_dist($titre, $reprise=false)
+function base_convert_sql_utf8_dist($titre='', $reprise=false)
 {
+	if (!$titre) return; // anti-testeur automatique
 	ecrire_meta('convert_sql_utf8','oui','non');
 	echo install_debut_html($titre);
 	

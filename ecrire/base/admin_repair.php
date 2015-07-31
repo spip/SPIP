@@ -13,13 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_admin_repair_dist
-function base_admin_repair_dist() {
+function base_admin_repair_dist($titre='', $reprise='') {
 
 	$desc = spip_connect();
-	if (function_exists($f = @$desc['repair'])) {
+	if (function_exists($f = @$desc['repair']) AND $titre) {
 		$res = admin_repair_tables();
 	} else {
-		spip_log("Pas d'instruction REPAIR dans ce serveur SQL");
+		if ($titre)
+		  spip_log("Pas d'instruction REPAIR dans ce serveur SQL");
 		$res = '     ';
 	}
 
@@ -45,7 +46,7 @@ function admin_repair_tables() {
 	if ($res1) { while ($r = sql_fetch($res1)) {
 		$tab = array_shift($r);
 
-		$res .= "<p><b>$tab</b> ";
+		$res .= "<br /><b>$tab</b> ";
 		spip_log("Repare $tab");
 		$result_repair = sql_repair($tab);
 		if (!$result_repair) return false;

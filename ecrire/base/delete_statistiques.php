@@ -18,8 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 // ca vaudrait mieux
 
 // http://doc.spip.org/@base_delete_statistiques_dist
-function base_delete_statistiques_dist($titre)
+function base_delete_statistiques_dist($titre='', $reprise='')
 {
+	if (!$titre) return; // anti-testeur automatique
 	sql_delete("spip_visites");
 	sql_delete("spip_visites_articles");
 	sql_delete("spip_referers");
