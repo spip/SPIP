@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion_mysql' => 'C&oacute; L&#7895;i-kh&ocirc;ng n&#7889;i v&#7899;i SQL',
 'avis_erreur_version_archive' => '<b>B&aacute;o &#273;&#7897;ng! H&#7891; s&#417; @archive@ thu&#7897;c d&#7841;ng SPIP kh&aacute;c v&#7899;i d&#7841;ng m&agrave; b&#7841;n c&oacute;.</b>
  B&#7841;n s&#7869; g&#7863;p r&#7845;t nhi&#7873;u r&#7855;c r&#7889;i: c&oacute; th&#7875; database b&#7883; ti&ecirc;u h&#7911;y, website b&#7883; tr&#7855;c tr&#7903;, v.v...
- Xin &#273;&#7915;ng n&#7897;p b&agrave;i n&agrave;y v&agrave;o.<p> &#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t, xem b&agrave;i <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+ Xin &#273;&#7915;ng n&#7897;p b&agrave;i n&agrave;y v&agrave;o.<p> &#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t, xem b&agrave;i <a href="@spipnet@">
 H&#7891; s&#417; SPIP</a>.',
 'avis_espace_interdit' => '<b>V&ugrave;ng c&#7845;m &#273;&#7883;a</b><p>SPIP &#273;&atilde; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; r&#7891;i.',
 'avis_lecture_noms_bases_1' => 'Nhu li&#7879;u thi&#7871;t tr&iacute; kh&ocirc;ng &#273;&#7885;c &#273;&#432;&#7907;c t&ecirc;n c&#7911;a database thi&#7871;t tr&iacute;.',
@@ -183,7 +183,7 @@ H&#7891; s&#417; SPIP</a>.',
 
 // I
 'ical_info1' => 'Trang n&agrave;y cho b&#7841;n bi&#7871;t c&aacute;c c&aacute;ch &#273;&#7875; theo d&otilde;i c&aacute;c ho&#7841;t &#273;&#7897;ng c&#7911;a trang web n&agrave;y.',
-'ical_info2' => '&#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t xin v&agrave;o xem trang web <a href="http://www.spip.net/fr_suivi">SPIP\'s documentation</a>.',
+'ical_info2' => '&#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t xin v&agrave;o xem trang web <a href="@spipnet@">SPIP\'s documentation</a>.',
 'ical_info_calendrier' => 'B&#7841;n c&oacute; 2 th&#7901;i bi&#7875;u &#273;&#7875; s&#7917; d&#7909;ng. Th&#7901;i bi&#7875;u th&#7913; nh&#7845;t li&#7879;t k&ecirc; t&#7845;t c&#7843; c&aacute;c b&agrave;i vi&#7871;t &#273;&#432;&#7907;c &#273;&#259;ng. Th&#7901;i bi&#7875;u th&#7913; hai li&#7879;t k&ecirc; c&aacute;c th&ocirc;ng b&aacute;o c&#7911;a Ban Bi&ecirc;n T&#7853;p v&agrave; nh&#7919;ng th&ocirc;ng tin c&aacute; nh&acirc;n c&#7911;a b&#7841;n. Ph&#7847;n n&agrave;y &#273;&#432;&#7907;c d&agrave;nh cho b&#7841;n qua m&#7897;t m&#7853;t m&atilde; ri&ecirc;ng m&agrave; b&#7841;n c&oacute; th&#7875; thay &#273;&#7893;i b&#7857;ng c&aacute;ch thay &#273;&#7893;i m&#7853;t m&atilde; c&#7911;a m&igrave;nh.',
 'ical_lien_rss_breves' => '<NEW>Syndication of the site\'s news items',
 'ical_methode_http' => '&#272;ang t&#7843;i xu&#7889;ng',

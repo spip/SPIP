@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     generalizado do site etc.
     N&atilde;o valide este pedido de importa&ccedil;&atilde;o.
     <p />Para mais informa&ccedil;&otilde;es, leia
-    <a href=\'http://www.spip.net/fr_article1489.html\'>a documenta&ccedil;&atilde;o do SPIP</a>.',
+    <a href="@spipnet@">a documenta&ccedil;&atilde;o do SPIP</a>.',
 'avis_espace_interdit' => '<MODIF><b>Espa&ccedil;o interdito</b><p>SPIP j&aacute; est&aacute; instalado.',
 'avis_lecture_noms_bases_1' => 'O programa de instala&ccedil;&atilde;o n&atilde;o conseguiu ler os nomes das bases de dados instaladas. ',
 'avis_lecture_noms_bases_2' => 'Ou nenhuma base est&aacute; dispon&iacute;vel, ou a fun&ccedil;&atilde;o que permite listar as bases foi desactivada
@@ -185,7 +185,7 @@ ou da rede',
 
 // I
 'ical_info1' => 'Esta p&aacute;gina apresenta muitos m&eacute;todos para permanecer em contacto com a vida deste s&iacute;tio.',
-'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="http://www.spip.net/fr_suivi">a documenta&ccedil;&atilde;o de SPIP</a>.',
+'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; uma planta do s&iacute;tio anunciando todos os artigos publicados. O segundo cont&eacute;m os an&uacute;ncios editoriais assim como as &uacute;ltimas mensagens privadas&nbsp;: est&aacute; reservado para si gra&ccedil;as a uma chave pessoal, que pode modificar a qualquer momento com a renova&ccedil;&atilde;o da sua palavra-passe.',
 'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Telecarregamento',
@@ -804,7 +804,7 @@ inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o t
 reinstala&ccedil;&atilde;o de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
 'texte_admin_tech_01' => '<MODIF>Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado no direct&oacute;rio @dossier@.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do direct&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens e os documentos utlizados nos artigos e rubricas.',
 'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
- num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada ap&oacute;s a actualiza&ccedil;&atilde;o. Consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o de SPIP</a>.',
+ num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada ap&oacute;s a actualiza&ccedil;&atilde;o. Consulte <a href="@spipnet@">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escolher a salvaguarda do ficheiro sob a forma comprimida, para
 encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de salvaguarda e poupar o espa&ccedil;o do disco.',
 'texte_adresse_annuaire_1' => '(Se o seu anu&aacute;rio est&aacute; instalado na mesma m&aacute;quina que este s&iacute;tio Web, trata-se de &laquo;localhost&raquo;.)',

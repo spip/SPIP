@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 .</b> W ke genyen gwo pwobl&egrave;m sa-yo m&egrave;m
  : bazdone ke pet&egrave;t kraze, ouswa sit w ke pa mache. Ann
  pa konfime domann lenp&ograve;tasyon-nan    .<p />W ke trouve k&egrave;k enf&ograve;masyon sou paj 
- <a href=\'http://www.spip.net/fr_article1489.html\'>
+ <a href="@spipnet@">
                                  dokimantasyon SPIP la</a>.',
 'avis_espace_interdit' => '<b>Espas ent&egrave;di</b><div>SPIP se d&eacute;ja instal&eacute;.</div>',
 'avis_lecture_noms_bases_1' => 'Pwogwam pou enstalasyon, li te pa kap f&egrave; lekti kouman ki rele bazdone yo, yo ki deja enstale.',
@@ -202,7 +202,7 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 
 // I
 'ical_info1' => 'Paj-la ka donn a w kouman w kap gen lyen ak lavi sit-la.',
-'ical_info2' => 'Si w vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="http://www.spip.net/fr_suivi">tout paj dokimantasyon pou SPIP</a>.',
+'ical_info2' => 'Si w vle dot ranseyman sou tout teknik anl&egrave;r, ezit pa gad <a href="@spipnet@">tout paj dokimantasyon pou SPIP</a>.',
 'ical_info_calendrier' => 'W genyen d&eacute; kalandry&eacute;. Promy&egrave; s&eacute; kart sit-la ki anons&eacute; tout atik pibly&eacute;. L&ograve;t dezy&egrave;m se kalandry&eacute; ka kontni tout anons editoryal yo ak mesaj prive yo ki w te genyen&nbsp;: kalandry&eacute; a se r&eacute;s&egrave;v&egrave; pou w s&egrave;lman akoz w gen ositou yon kl&eacute; p&egrave;s&ograve;nel. Kl&eacute; ou-a kap chanje nep&ograve;t kan w vle pa chanje modpas w-a.',
 'ical_lien_rss_breves' => '<NEW>Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'Telechajman',
@@ -930,7 +930,7 @@ ak <i>tout</i> aks&eacute; r&eacute;dakt&egrave; ak koman&egrave; yo. Si w te f&
 lenstalasyon SPIP pou w kreye yon l&ograve;t nouvo baz ak son promy&eacute; laks&eacute; komand&egrave;',
 'texte_admin_effacer_stats' => '<NEW>Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Opsyon nan ka p&egrave;m&egrave; aw kembe kontni labazdone nan yon fichye ke sere nan repertwar @dossier@. Pa oublye genyen tout repetwar-la @img@, pou sere byen tout limaj ak dokiman ki nan zot atik, zot ki repertwar-la ka kembe azot li m&egrave;m.',
-'texte_admin_tech_02' => 'Atansyon: s&ograve;vgad-la ke kapab restore SELMAN sou yon sit ki enstal&eacute; sou yon m&egrave;m v&egrave;syon SPIP. F&ograve;k pa w &laquo;&nbsp;vid labaz&nbsp;&raquo; po enstal&eacute; s&ograve;vgad-la apr&eacute; met nan nivo... Gade <a href="http://www.spip.net/fr_article1489.html">dokimantasyon SPIP</a>.',
+'texte_admin_tech_02' => 'Atansyon: s&ograve;vgad-la ke kapab restore SELMAN sou yon sit ki enstal&eacute; sou yon m&egrave;m v&egrave;syon SPIP. F&ograve;k pa w &laquo;&nbsp;vid labaz&nbsp;&raquo; po enstal&eacute; s&ograve;vgad-la apr&eacute; met nan nivo... Gade <a href="@spipnet@">dokimantasyon SPIP</a>.',
 'texte_admin_tech_03' => 'Ou kapab chwazi s&ograve;vgad fichye-a nan f&ograve;m kopr&eacute;s&eacute;, pou rann transf&egrave; ali taptap
  sou machin a w osnon yon s&egrave;v&egrave; pou las&ograve;vgad &egrave; pou gad swen pa depanse tro lespas diks l&ograve;dinat&egrave;.',
 'texte_admin_tech_04' => '<NEW>Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',

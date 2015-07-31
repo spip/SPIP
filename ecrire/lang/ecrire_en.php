@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     difficulties: the risk of destroying your database,
     various malfunctions of your site, etc. Do not
     submit this import request.<p>For more
-    information, please see <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+    information, please see <a href="@spipnet@">
                                 the SPIP documentation</a>.',
 'avis_espace_interdit' => '<b>Forbidden area</b><div>SPIP is already installed.</div>',
 'avis_lecture_noms_bases_1' => 'The installer could not read the names of the installed databases.',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'This page presents you with several methods to keep in contact with this site\'s activity.',
-'ical_info2' => 'For more information, do not hesitate to visit <a href="http://www.spip.net/en_suivi">SPIP\'s documentation</a>.',
+'ical_info2' => 'For more information, do not hesitate to visit <a href="@spipnet@">SPIP\'s documentation</a>.',
 'ical_info_calendrier' => 'Two calendars are at your disposal. The first is a site map showing all the published articles. The second contains editorial annoucements as well as your latest private messages: it is reserved for you thanks to a personal key that you can modify at any time by renewing your password.',
 'ical_lien_rss_breves' => 'Syndication of the site\'s news items',
 'ical_methode_http' => 'Downloading',
@@ -930,7 +930,7 @@ including <i>all</i> the access parameters for editors and administrators. After
 reinstall SPIP in order to recreate a new database and the first administrator\'s access.',
 'texte_admin_effacer_stats' => 'This command deletes all data linked to the statistics of visits to the site, including the relative popularity of articles.',
 'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole @img@, directory, which contains the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href=\'http://www.spip.net/en_article2428.html\'>SPIP documentation</a>.',
+'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href="@spipnet@">SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_admin_tech_04' => 'In order to merge with another database, you can restrict the backup to one section: ',

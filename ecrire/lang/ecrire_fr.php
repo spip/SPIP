@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     difficult&eacute;s: risque de destruction de votre base de
     donn&eacute;es, dysfonctionnements divers du site, etc. Ne
     validez pas cette demande d\'importation.<p />Pour plus
-    d\'informations, voyez <a href=\'http://www.spip.net/fr_article1489.html\'>
+    d\'informations, voyez <a href="@spipnet@">
                                 la documentation de SPIP</a>.',
 'avis_espace_interdit' => '<b>Espace interdit</b><div>SPIP est d&eacute;j&agrave; install&eacute;.</div>',
 'avis_lecture_noms_bases_1' => 'Le programme d\'installation n\'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.',
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
-'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="@spipnet@">la documentation de SPIP</a>.',
 'ical_info_calendrier' => 'Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
 'ical_lien_rss_breves' => 'Syndication des br&egrave;ves du site',
 'ical_methode_http' => 'T&eacute;l&eacute;chargement',
@@ -933,7 +933,7 @@ y compris <i>tous</i> les acc&egrave;s r&eacute;dacteurs et administrateurs. Apr
 r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un premier acc&egrave;s administrateur.',
 'texte_admin_effacer_stats' => 'Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.',
 'texte_admin_tech_01' => 'Cette option vous permet de sauvegarder le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire @dossier@. N\'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l\'int&eacute;gralit&eacute; du r&eacute;pertoire @img@, qui contient les images et les documents utilis&eacute;s dans les articles et les rubriques.',
-'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
+'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. Il ne faut donc surtout pas &laquo;&nbsp;vider la base&nbsp;&raquo; en esp&eacute;rant r&eacute;installer la sauvegarde apr&egrave;s une mise &agrave; jour... Consultez <a href="@spipnet@">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
 'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ',
