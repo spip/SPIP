@@ -148,9 +148,13 @@ function nettoie_nom_fichier($fichier){
 // http://doc.spip.org/@mots_indexation
 function mots_indexation($texte, $min_long = 3) {
 	include_spip('inc/charsets');
+	include_spip('inc/texte');
 
 	// Point d'entree pour traiter le texte avant indexation
 	$texte = pipeline('pre_indexation', $texte);
+
+	// Recuperer les parametres des modeles
+	$texte = traiter_modeles($texte, true);
 
 	// Supprimer les tags HTML
 	$texte = preg_replace(',<.*>,Ums',' ',$texte);
@@ -544,7 +548,6 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			// 6. Changer l'id_objet en id_forum de la racine du thread
 			$id_objet = $id_forum;
 		} else {
-
 			indexer_les_champs($row,$INDEX_elements_objet[$table]);
 			if (isset($INDEX_objet_associes[$table]))
 				foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
@@ -565,10 +568,10 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 				indexer_contenu_document($row);
 			}
 	 	}
- 	}
+	} else
+		spip_log("je ne sais pas indexer '$table'");
 
 	$result = spip_query("DELETE FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table");
-
 
 	if ($index) {
 		if ($mots) {
