@@ -10,10 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+
 if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
-#include("ecrire/inc_version.php3");
 include_ecrire("inc_minipres");
 
 //
