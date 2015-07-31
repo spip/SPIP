@@ -351,40 +351,12 @@ echo "<div>&nbsp;</div>";
 
 
 //
-// Verifier les boucles a mettre en relief
+// On utilise ob_start pour ne pas afficher de bloc vide (sinon tant pis)
 //
-
-$relief = false;
-
-if (!$relief) {
-	$result = spip_query("SELECT id_article FROM spip_articles AS articles WHERE statut='prop'$vos_articles LIMIT 0,1");
-
-	$relief = (spip_num_rows($result) > 0);
-}
-
-if (!$relief) {
-	$result = spip_query("SELECT id_breve FROM spip_breves WHERE statut='prop' LIMIT 0,1");
-
-	$relief = (spip_num_rows($result) > 0);
-}
-
-if (!$relief AND lire_meta('activer_syndic') != 'non') {
-	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1");
-	
-	$relief = (spip_num_rows($result) > 0);
-}
-
-if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1");
-
-	$relief = (spip_num_rows($result) > 0);
-}
-
-
-if ($relief) {
+if ($flag_ob)
+	ob_start();
+else
 	debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
-	
-	//echo "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')."</b></div><p>";
 
 	//
 	// Les articles a valider
@@ -416,24 +388,35 @@ if ($relief) {
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
+			echo "<br><small><a href='sites_tous.php3' style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
 	}
 
 	// Les forums en attente de moderation
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
-			echo "<br><small> <a href='controle_forum.php3'>".$row['compte'];
+			echo "<br><small> <a href='controle_forum.php3' style='color: black;'>".$row['compte'];
 			if ($row['compte']>1)
-				echo " "._T('info_liens_syndiques_3')."</a> "._T('info_liens_syndiques_4');
+				echo " "._T('info_liens_syndiques_3')
+				." "._T('info_liens_syndiques_4');
 			else
-				echo " "._T('info_liens_syndiques_5')."</a> "._T('info_liens_syndiques_6');
-			echo " "._T('info_liens_syndiques_7')."</small>.";
+				echo " "._T('info_liens_syndiques_5')
+				." "._T('info_liens_syndiques_6');
+			echo " "._T('info_liens_syndiques_7').".</a></small>";
 		}
 	}
 
+
+if ($flag_ob) {
+	$a = ob_get_contents();
+	ob_end_clean();
+	if ($a) {
+		debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
+		echo $a;
+		fin_cadre_couleur_foncee();
+	}
+} else
 	fin_cadre_couleur_foncee();
-}
 
 
 if ($options == 'avancees') {
