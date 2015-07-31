@@ -35,9 +35,9 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 	$b = false;
 	if (!($table = xml_fetch_tag($lecteur, $b, $gz))) return false;
 	if ($table == $fin) return !($import_ok = true);
-	if (strpos($table,'=')) {
-	  list($table, $attl) = xml_parse_tag($table);
-	  $atts = array_merge($atts, $attl);
+	if (strpos($table,'=')!==FALSE) {
+		list($table, $attl) = xml_parse_tag($table);
+		$atts = array_merge($atts, $attl);
 	}
 
 	$new = isset($tables_trans[$table]) ? $tables_trans[$table]: $table; 
