@@ -127,8 +127,7 @@ function action_tester_dist() {
 	if (in_array($arg,array("gd1","gd2","imagick","convert","netpbm"))) {
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_images');
-		$taille_preview = $GLOBALS['meta']["taille_preview"];
-		if ($taille_preview < 10) $taille_preview = 150;
+		$taille_preview = 150;
 		$image = image_valeurs_trans(_ROOT_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
 
 		$image['fichier_dest']=_DIR_VAR."test_$arg";
