@@ -919,22 +919,31 @@ function balise_CACHE_dist($p) {
 	return $p;
 }
 
+
 //
 // #INSERT_HEAD
 // pour permettre aux plugins d'inserer des styles, js ou autre
 // dans l'entete sans modification du squelette
+// les css doivent etre inserees de preference par #INSERT_HEAD_CSS
+// pour en faciliter la surcharge
 //
 // http://doc.spip.org/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_dist($p) {
 	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
 	$p->code .= '. \'<'
 		.'?php header("X-Spip-Filtre: \'.'
-			.'\'compacte_head\''
+			.'\'insert_head_css_conditionnel\''
 		. " . '\"); ?'.'>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_INSERT_HEAD_CSS_dist
+function balise_INSERT_HEAD_CSS_dist($p) {
+	$p->code = "pipeline('insert_head_css','<!-- insert_head_css -->')";
+	$p->interdire_scripts = false;
+	return $p;
+}
 //
 // #INCLURE statique
 // l'inclusion est realisee au calcul du squelette, pas au service
