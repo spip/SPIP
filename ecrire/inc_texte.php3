@@ -210,15 +210,17 @@ function echappe_html($letexte,$source) {
 	//
 	// Echapper les tags html contenant des caracteres sensibles a la typo
 	//
-	$regexp_echap = "<[^<>!':;\?]*[!':;\?][^>]*>";
+	$regexp_echap = "<[a-zA-Z!][^<>!':;\?]*[!':;\?][^<>]*>";
 	if ($flag_pcre)
-		if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER)) while (list(,$reg) = each($regs)) {
-			$num_echap++;
-			$les_echap[$num_echap] = $reg[0];
-			$pos = strpos($letexte, $les_echap[$num_echap]);
-			$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($letexte,$pos+strlen($les_echap[$num_echap]));
-		}
+		if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER))
+			while (list(,$reg) = each($regs)) {
+				$num_echap++;
+				$les_echap[$num_echap] = $reg[0];
+				echo htmlspecialchars($reg[0])."<p>";
+				$pos = strpos($letexte, $les_echap[$num_echap]);
+				$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+					.substr($letexte,$pos+strlen($les_echap[$num_echap]));
+			}
 	else
 		while (ereg($regexp_echap, $letexte, $reg)) {
 			$num_echap++;
