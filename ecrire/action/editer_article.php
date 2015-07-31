@@ -159,6 +159,26 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 		}
 	}
 
+
+	//
+	// Post-modifications
+	//
+	$row = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article"));
+	$statut = $row['statut'];
+
+	// Invalider les caches
+	if ($statut == 'publie') {
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_article/$id_article'");
+	}
+
+	// Demander une reindexation de l'article
+	if ($statut == 'publie') {
+		include_spip('inc/indexation');
+		marquer_indexer('article', $id_article);
+	}
+
+	// Recalculer les rubriques (statuts et dates)
 	calculer_rubriques();
  }
 }
@@ -170,7 +190,6 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 
 // http://doc.spip.org/@trop_longs_articles
 function trop_longs_articles() {
-#	print_r($_POST);exit;
 	if (isset($_POST['texte_plus']) && is_array($_POST['texte_plus'])) {
 		foreach ($_POST['texte_plus'] as $t) {
 			$_POST['texte'] = preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
