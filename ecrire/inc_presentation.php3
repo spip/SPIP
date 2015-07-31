@@ -1585,7 +1585,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	echo '<link rel="alternate stylesheet" href="', _DIR_RESTREINT, 'spip_style_invisible.css" type="text/css" title="invisible" />', "\n",
 		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n",
 		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_print.css" type="text/css" media="print">', "\n",
-		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'calendrier.css" type="text/css" title="calendrier">', "\n",
 		"</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
 
 	if ($spip_lang_rtl)

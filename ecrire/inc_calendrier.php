@@ -625,8 +625,8 @@ function http_calendrier_clics($annee, $mois, $jour, $clic, $script)
     "\n" .
     (_DIR_RESTREINT ? '' : (
     http_href("$href&type=pb", 
-		 $bleu, 
-		 _T("lien_nouvea_pense_bete"),
+	      $bleu, 
+	      _T("lien_nouvea_pense_bete"),
 	      'color: blue;',
 	      'calendrier-arial10') .
     "\n" .
@@ -1170,32 +1170,31 @@ function http_calendrier_entete($script, $large, $jour,$mois,$annee)
 {
 	global $bleu, $vert,$jaune;
 	if ($large == "col" ) {
-	  return "<div style='text-align: center; padding: 5px;'>" .
-	    "<b class='calendrier-arial10'>" .
+	  return "<div class='calendrier-arial10' style='text-align: center; padding: 5px; font-weight: bold'>" .
 	    http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee",
-				 affdate_jourcourt("$annee-$mois-$jour"),
-				 '',
-				 'color:black;') .
-	    "</b></div>";
+		      affdate_jourcourt("$annee-$mois-$jour"),
+		      '',
+		      'color:black;') .
+	    "</div>";
 	}
 	else {
-	  return  ((($large != "large") || _DIR_RESTREINT) ?  '' :
-		   ("<div align='center' style='padding: 5px;'>" .
+	  return  (($large != "large") ?  '' :
+		   ("<div class='calendrier-arial10' style='text-align: center; padding: 5px;'>" .
 		   http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
-		    $bleu ._T("lien_nouvea_pense_bete"),
-		    '',
-		    'color: blue;', 'calendrier-arial10') .
-		   " &nbsp; " .
+			     $bleu ._T("lien_nouvea_pense_bete"),
+			     '',
+			     'color: blue;') .
+		    " &nbsp; " .
 		   http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal",
-		    $vert ._T("lien_nouveau_message"),
-		    '',
-		    'color: green;', 'calendrier-arial10') .
+			     $vert ._T("lien_nouveau_message"),
+			     '',
+			     'color: green;') .
 	  (!($GLOBALS['connect_statut'] == "0minirezo") ? '' :
 	   (" &nbsp; " .
 	    http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich",
 		      $jaune ._T("lien_nouvelle_annonce"),
 		      '',
-		      'color: #ff9900;', 'calendrier-arial10'))) .
+		      'color: #ff9900;'))) .
 		    "</div>\n"));
 	}
 }
@@ -1237,7 +1236,8 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, 
 	// faute de fermeture en PHP...
 	$calendrier_message_fermeture = $le_message;
 
-	return http_calendrier_entete($script,$large,$jour,$mois,$annee) .
+	return  (_DIR_RESTREINT ? '' : 
+		 http_calendrier_entete($script,$large,$jour,$mois,$annee)) .
 		"\n<div style='position: relative; color: #666666; " .
 		"height: ${dimjour}px; " .
 		"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;".
