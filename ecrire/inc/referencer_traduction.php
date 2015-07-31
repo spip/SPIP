@@ -18,6 +18,11 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 {
 	global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right, $dir_lang;
 
+	if (! (($GLOBALS['meta']['multi_articles'] == 'oui')
+		OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') 
+			AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) )
+		return '';
+
 	$langue_article = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 
 	$langue_article = $langue_article['lang'];

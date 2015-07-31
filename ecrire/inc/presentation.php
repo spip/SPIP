@@ -2665,6 +2665,9 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left, $options;
 
+spip_log("option mr $options");
+	if ($options != "avancees") return '';
+
 	$table = $type . 's';
 	$key = 'id_' . $type;
 
@@ -2672,7 +2675,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 
 	if (!spip_num_rows($voss)) return '';
 
-	$numero = ($options != "avancees") ?'':_T('info_numero_abbreviation');
+	$numero = _T('info_numero_abbreviation');
 	$style = "float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;";
 	$retour = '';
 
@@ -2683,8 +2686,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 		. "' style='font-size: 10px;' href='"
 		  . generer_url_ecrire($table,"$key=$ze")
 		. "'>"
-		. (($options !== "avancees") ? '' :
-		     "<div class='arial1' style='$style'><b>$numero$ze</b></div>")
+		. "<div class='arial1' style='$style'><b>$numero$ze</b></div>"
 		. typo($row['titre'])
 		. "</a>";
 	}

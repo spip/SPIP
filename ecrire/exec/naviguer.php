@@ -96,7 +96,7 @@ function exec_naviguer_dist()
 	  }
 
 /// Mots-cles
-	    if ($GLOBALS['meta']["articles_mots"] != 'non' AND $id_rubrique > 0) {
+	    if ($id_rubrique > 0) {
 	      $f = charger_fonction('editer_mot', 'inc');
 	      echo "\n<p>",
 		$f('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable);
