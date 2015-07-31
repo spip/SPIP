@@ -74,21 +74,24 @@ function exec_statistiques_visites_dist()
 
 	$id_article = intval(_request('id_article'));
 	$aff_jours = intval(_request('aff_jours'));
+	if (!$aff_jours) $aff_jours = 105;
 	$origine = _request('origine');
+	// nombre de referers a afficher
+	$limit = intval(_request('limit'));
+	if ($limit == 0) $limit = 100;
 
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 	  include_spip('inc/minipres');
 	  echo minipres();
 	} else {
+		if (_request('format') == 'csv')
+			statistiques_csv($id_article);
+		else exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limit);
+	}
+}
 
-	if (!$aff_jours) $aff_jours = 105;
-	// nombre de referers a afficher
-	$limit = intval(_request('limit'));
-	if ($limit == 0) $limit = 100;
-
-	if (_request('format') == 'csv')
-		return statistiques_csv($id_article);
-
+function exec_statistiques_visites_args($id_article, $aff_jours, $origine, $limit)
+{
 	$titre = $pourarticle = "";
 	$class = " class='arial1 spip_x-small'";
 	$style = 'color: #999999';
@@ -104,6 +107,7 @@ function exec_statistiques_visites_dist()
 	} else {
 		$row = sql_fetsel("SUM(visites) AS total_absolu", "spip_visites");
 		$total_absolu = $row ? $row['total_absolu'] : 0;
+		$val_popularite = 0;
 	}
 
 	if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
@@ -120,9 +124,7 @@ function exec_statistiques_visites_dist()
 	echo fin_boite_info(true);
 	
 	echo debut_droite('', true);
-
-}
-else {
+	} else {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
 	echo gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>",'', false);
@@ -143,10 +145,9 @@ else {
 		echo "<li><b>"._T('titre_page_articles_tous')."</b></li>";
 	}
 
-		echo "</ul>";
-		echo "</div>";
-		echo "</div>";
-
+	echo "</ul>";
+	echo "</div>";
+	echo "</div>";
 	
 	// Par popularite
 	$articles_recents[] = "0";
@@ -190,11 +191,10 @@ else {
 		}
 		$articles_vus = join($articles_vus, ",");
 			
-		// Par popularite
 		$result_suite = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus)", "", "popularite DESC");
 
 		if (sql_count($result_suite) > 0) {
-		  echo "</ol><div style='text-align: center'>[...]</div>",$open;
+			echo "</ol><div style='text-align: center'>[...]</div>",$open;
 			while ($row = sql_fetch($result_suite)) {
 				$titre = typo(supprime_img($row['titre'], ''));
 				$l_article = $row['id_article'];
@@ -218,11 +218,9 @@ else {
 		echo "</div>";
 	}
 
-
 	// Par visites depuis le debut
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "visites DESC", "30");
 
-		
 	if (sql_count($result) > 0
 	OR $id_article > 0)
 		echo creer_colonne_droite('', true);
@@ -242,11 +240,11 @@ else {
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
 			$popularite = round($row['popularite']);
-				$numero = $classement[$l_article];
+			$numero = $classement[$l_article];
 				
-				if ($l_article == $id_article){
+			if ($l_article == $id_article){
 					echo "\n<li><b>$titre</b></li>";
-				} else {
+			} else {
 					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "'\ntitle='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
@@ -255,42 +253,79 @@ else {
 		echo "</div>";
 	}
 
-
 	echo debut_droite('', true);
- }
 
+	}
 
-//////
+	if (!$origine) {
 
- if (!$origine) {
+		$vis = "visites";
+		if ($id_article) {
+			$table = "spip_visites_articles";
+			$table_ref = "spip_referers_articles";
+			$where = "id_article=$id_article";
+		} else {
+			$table = "spip_visites";
+			$table_ref = "spip_referers";
+			$where = "0=0";
+		}
 
-	if ($id_article) {
-		$table = "spip_visites_articles";
-		$table_ref = "spip_referers_articles";
-		$where = "id_article=$id_article";
+		$select = "UNIX_TIMESTAMP(date) AS date, UNIX_TIMESTAMP(date) AS date_time, visites";
+		$where2 = " date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)";
+		$order = "date";
+
+		statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement, $id_article, $liste);
+
+		if ($id_article AND  $n = sql_countsel('spip_signatures', "id_article=$id_article")) {
+
+			echo "<br />", gros_titre(_L('Nombre de signatures par jour'),'', false);
+
+			$stable = "spip_signatures";
+			$swhere = "id_article=$id_article";
+			$sselect = "UNIX_TIMESTAMP(date_time) AS date_time, (ROUND(UNIX_TIMESTAMP(date_time) / (24*3600)) *  (24*3600)) AS date, COUNT(*) AS visites";
+			$swhere2 = " date_time > DATE_SUB(NOW(),INTERVAL 420 DAY)";
+			$sgroupby = 'date';
+			$sorder = "date_time";
+
+			statistiques_tous($sselect, $stable, $swhere, $swhere2, $sgroupby, $sorder, 0, $n, 0, $class, $style, $aff_jours);
+
+			echo "<br />", gros_titre(_L('Nombre de signatures par mois'),'', false);
+			stat_log60(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m') AS date_unix, COUNT(*) AS total_visites", 'spip_signatures',  "id_article=$id_article AND date_time > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date_unix"), 0, $class, $style);
+		}
 	} else {
-		$table = "spip_visites";
+		$where = "visites_jour>0";
+		$vis = "visites_jour";
 		$table_ref = "spip_referers";
-		$where = "0=0";
-	}
-	
-	$result = sql_select('UNIX_TIMESTAMP(date) AS date_unix', $table, $where, '',  'date', "1");
-
-	if ($row = sql_fetch($result)) {
-		$date_premier = $row['date_unix'];
 	}
 
-	$result= sql_select("UNIX_TIMESTAMP(date) AS date_unix, visites", $table, "$where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY)", '', "date");
+	$result = sql_select("referer, referer_md5, $vis AS vis", "$table_ref", "$where", "", "vis DESC", "$limit");
 
+	if (sql_count($result)) {
+		echo gros_titre(_T("onglet_origine_visites"),'', false);
+
+		echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
+		echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
+		echo "<br /></div>";	
+	}
+
+	echo fin_gauche(), fin_page();	
+}
+
+function statistiques_tous($select, $table, $where, $where2, $groupby, $order, $limit, $total_absolu, $val_popularite, $class, $style, $aff_jours, $classement=array(), $id_article=0, $liste=0)
+{
+	$row = sql_fetsel($select, $table, $where, $groupby,  $order, "1");
+	$date_premier = $row[$order];
 	$date_debut = '';
 	$log = array();
+	$result = sql_select($select, $table, "$where AND $where2", $groupby, $order);
 	while ($row = sql_fetch($result)) {
-		$date = $row['date_unix'];
+		$date = $row['date'];
 		if (!$date_debut) $date_debut = $date;
 		$log[$date] = $row['visites'];
+		spip_log("$table $date" . $row['visites']) ;
 	}
 
-
+	$accepte_svg = flag_svg();
 	// S'il y a au moins cinq minutes de stats :-)
 	if (count($log)>0) {
 		// les visites du jour
@@ -355,248 +390,11 @@ else {
 				 "&nbsp;");
 
 
-	if ($accepte_svg) {
-	echo "\n<div>";
-	echo "<object data='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
-	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
-	echo "</object>";
-	echo "\n</div>";
-	$total_absolu = $total_absolu + $visites_today;
-	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
-	foreach ($log as $key => $value) {
-		# quand on atteint aujourd'hui, stop
-		if ($key == $date_today) break; 
-		$test_agreg ++;
-		if ($test_agreg == $agreg) {	
-			$test_agreg = 0;
-			if ($decal == 30) $decal = 0;
-			$decal ++;
-			$tab_moyenne[$decal] = $value;
-			// Inserer des jours vides si pas d'entrees	
-			if ($jour_prec > 0) {
-				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
-				for ($i=0; $i < $ecart; $i++){
-					if ($decal == 30) $decal = 0;
-					$decal ++;
-					$tab_moyenne[$decal] = $value;
-					reset($tab_moyenne);
-					$moyenne = 0;
-					while (list(,$val_tab) = each($tab_moyenne))
-						$moyenne += $val_tab;
-					$moyenne = $moyenne / count($tab_moyenne);
-					$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				}
-			}
-			$total_loc = $total_loc + $value;
-			reset($tab_moyenne);
-
-			$moyenne = 0;
-			while (list(,$val_tab) = each($tab_moyenne))
-				$moyenne += $val_tab;
-			$moyenne = $moyenne / count($tab_moyenne);
-			$moyenne = round($moyenne,2); // Pour affichage harmonieux
-			$jour_prec = $key;
-			$val_prec = $value;
+		if ($accepte_svg) {
+		  list($moyenne,$val_prec) = stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $visites_today);
+		} else {
+		  list($moyenne,$val_prec) = stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $largeur, $log, $max, $maxgraph, $rapport, $style, $val_popularite, $visites_today);
 		}
-	}
-} else {
-	
-	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
-	  "\n<td ".http_style_background("fond-stats.gif").">";
-	echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
-	
-	echo "\n<td style='background-color: black'>", http_img_rien(1,200), "</td>";
-	
-	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
-
-	// Presentation graphique (rq: on n'affiche pas le jour courant)
-	foreach ($log as $key => $value) {
-		# quand on atteint aujourd'hui, stop
-		if ($key == $date_today) break; 
-
-		$test_agreg ++;
-		
-		if ($test_agreg == $agreg) {	
-				
-			$test_agreg = 0;
-			
-			if ($decal == 30) $decal = 0;
-			$decal ++;
-			$tab_moyenne[$decal] = $value;
-			// Inserer des jours vides si pas d'entrees	
-			if ($jour_prec > 0) {
-					$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
-		
-					for ($i=0; $i < $ecart; $i++){
-						if ($decal == 30) $decal = 0;
-						$decal ++;
-						$tab_moyenne[$decal] = $value;
-	
-						$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-						$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
-	
-						reset($tab_moyenne);
-						$moyenne = 0;
-						while (list(,$val_tab) = each($tab_moyenne))
-							$moyenne += $val_tab;
-						$moyenne = $moyenne / count($tab_moyenne);
-		
-						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-						echo "\n<td style='width: ${largeur}px'>";
-						$difference = ($hauteur_moyenne) -1;
-						$moyenne = round($moyenne,2); // Pour affichage harmonieux
-						$tagtitle= attribut_html(supprimer_tags("$jour | "
-						._T('info_visites')." | "
-						._T('info_moyenne')." $moyenne"));
-						if ($difference > 0) {	
-						  echo http_img_rien($largeur,1, 'trait_moyen', $tagtitle);
-						  echo http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
-						}
-						echo 
-						    http_img_rien($largeur,1,'trait_bas', $tagtitle);
-						echo "</td>";
-					}
-				}
-	
-				$ce_jour=date("Y-m-d", $key);
-				$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
-	
-				$total_loc = $total_loc + $value;
-				reset($tab_moyenne);
-	
-				$moyenne = 0;
-				while (list(,$val_tab) = each($tab_moyenne))
-					$moyenne += $val_tab;
-				$moyenne = $moyenne / count($tab_moyenne);
-			
-				$hauteur_moyenne = round($moyenne * $rapport) - 1;
-				$hauteur = round($value * $rapport) - 1;
-				$moyenne = round($moyenne,2); // Pour affichage harmonieux
-				echo "\n<td style='width: ${largeur}px'>";
-	
-				$tagtitle= attribut_html(supprimer_tags("$jour | "
-				._T('info_visites')." ".$value));
-	
-				if ($hauteur > 0){
-					if ($hauteur_moyenne > $hauteur) {
-						$difference = ($hauteur_moyenne - $hauteur) -1;
-						echo http_img_rien($largeur, 1,'trait_moyen',$tagtitle);
-						echo http_img_rien($largeur, $difference, '', $tagtitle);
-						echo http_img_rien($largeur,1, "trait_haut", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
-						else
-						  echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
-					} else if ($hauteur_moyenne < $hauteur) {
-						$difference = ($hauteur - $hauteur_moyenne) -1;
-						echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-							$couleur =  'couleur_dimanche';
-						else
-							$couleur = 'couleur_jour';
-						echo http_img_rien($largeur, $difference, $couleur, $tagtitle);
-						echo http_img_rien($largeur,1,"trait_moyen", $tagtitle);
-						echo http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
-					} else {
-					  echo http_img_rien($largeur, 1, "trait_haut", $tagtitle);
-						if (date("w",$key) == "0") // Dimanche en couleur foncee
-						  echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
-						else
-						  echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
-					}
-				}
-				echo http_img_rien($largeur, 1, 'trait_bas', $tagtitle);
-				echo "</td>\n";
-			
-				$jour_prec = $key;
-				$val_prec = $value;
-			}
-			}
-	
-			// Dernier jour
-			$hauteur = round($visites_today * $rapport)	- 1;
-			$total_absolu = $total_absolu + $visites_today;
-			echo "\n<td style='width: ${largeur}px'>";
-			// prevision de visites jusqu'a minuit
-			// basee sur la moyenne (site) ou popularite (article)
-			if (! $id_article) $val_popularite = $moyenne;
-			$prevision = (1 - (date("H")*60 + date("i"))/(24*60)) * $val_popularite;
-			$hauteurprevision = ceil($prevision * $rapport);
-			// Afficher la barre tout en haut
-			if ($hauteur+$hauteurprevision>0)
-				echo http_img_rien($largeur, 1, "trait_haut");
-			// preparer le texte de survol (prevision)
-			$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; ".(round($prevision,0)+$visites_today)));
-			// afficher la barre previsionnelle
-			if ($hauteurprevision>0)
-				echo http_img_rien($largeur, $hauteurprevision,'couleur_prevision', $tagtitle);
-				// afficher la barre deja realisee
-			if ($hauteur>0)
-				echo http_img_rien($largeur, $hauteur, 'couleur_realise', $tagtitle);
-			// et afficher la ligne de base
-			echo http_img_rien($largeur, 1, 'trait_bas');
-			echo "</td>";
-
-
-			echo "\n<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
-			echo "</tr></table>";
-			echo "</td>",
-			  "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'trait_bas'),"</td>";
-			echo "\n<td>", http_img_rien(5, 1),"</td>";
-			echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
-			echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
-			echo "\n<tr><td style='height: 15' valign='top'>";		
-			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
-			echo "</td></tr>";
-			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
-			echo round(7*($maxgraph/8));
-			echo "</td></tr>";
-			echo "\n<tr><td style='height: 25px' valign='middle'>";		
-			echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
-			echo "</td></tr>";
-			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
-			echo round(5*($maxgraph/8));
-			echo "</td></tr>";
-			echo "\n<tr><td style='height: 25px' valign='middle'>";		
-			echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
-			echo "</td></tr>";
-			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
-			echo round(3*($maxgraph/8));
-			echo "</td></tr>";
-			echo "\n<tr><td style='height: 25px' valign='middle'>";		
-			echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
-			echo "</td></tr>";
-			echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
-			echo round(1*($maxgraph/8));
-			echo "</td></tr>";
-			echo "\n<tr><td style='height: 10px' valign='bottom'>";		
-			echo "<span class='arial1 spip_x-small'><b>0</b></span>";
-			echo "</td>";
-			echo "</tr></table>";
-			echo "</div></td>";
-			echo "</tr></table>";
-			
-			echo "<div style='position: relative; height: 15px'>";
-			$gauche_prec = -50;
-			for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
-				$ce_jour = date("d", $jour);
-				
-				if ($ce_jour == "1") {
-					$afficher = nom_mois(date("Y-m-d", $jour));
-					if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
-					
-				
-					$gauche = floor($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
-					
-					if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
-						echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
-						$gauche_prec = $gauche;
-					}
-				}
-			}
-			echo "</div>";
-	}
-		//}
 
 		// cette ligne donne la moyenne depuis le debut
 		// (desactive au profit de la moeynne "glissante")
@@ -622,36 +420,251 @@ else {
 				      $ch = _T('info_classement_2', array('liste' => $liste));
 				echo "<br />".$classement[$id_article].$ch;
 			}
-		} else {
+		} elseif ($table != 'spip_signatures') {
 		  echo "<span class='spip_x-small'><br />"._T('info_popularite_2')." ", ceil($GLOBALS['meta']['popularite_total']), "</span>";
 		}
 		echo "</td></tr></table>";	
-	}		
-	
-	if (count($log) > 60) {
-		echo "<br />";
-		echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
 
-		///////// Affichage par mois
-		  $result = sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date");
 
-		
-		$i = 0;
-		while ($row = sql_fetch($result)) {
-			$date = $row['date_unix'];
-			$visites = $row['total_visites'];
-			$i++;
-			$entrees["$date"] = $visites;
+	///////////// Affichage par mois
+
+		  if ((count($log) > 60) AND ($table <> 'spip_signatures')) {
+			echo "<br />";
+			echo "<span class='verdana1 spip_small'><b>"._T('info_visites_par_mois')."</b></span>";
+
+			stat_log60(sql_select("FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites", $table,  "$where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY)", 'date_unix', "date"), $visites_today, $class, $style);
 		}
-		// Pour la derniere date, rajouter les visites du jour sauf si premier jour du mois
-		if (date("d",time()) > 1) {
-			$entrees["$date"] += $visites_today;
+	
+		echo fin_cadre_relief(true);
+
+	// Le bouton pour passer de svg a htm
+		if ($accepte_svg) {
+		  $lien = 'non'; $alter = 'HTML';
+		} else {
+		  $lien = 'oui'; $alter = 'SVG';
+		}
+	
+		echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . "; font-size:x-small;' class='verdana1'>
+	<a href='".
+		  parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
+		  parametre_url(self(), 'format', 'csv')."'>CSV</a>".
+		  "</div>\n";
+	}
+}
+
+function stat_log1($agreg, $class, $date_debut, $date_today, $id_article, $largeur, $log, $max, $maxgraph, $rapport, $style, $val_popularite, $visites_today) {
+  global $spip_lang_left;
+	
+	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
+	  "\n<td ".http_style_background("fond-stats.gif").">";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
+	
+	echo "\n<td style='background-color: black'>", http_img_rien(1,200), "</td>";
+	
+	$test_agreg = $decal = $jour_prec = $val_prec =0;
+
+	// Presentation graphique (rq: on n'affiche pas le jour courant)
+	foreach ($log as $key => $value) {
+		# quand on atteint aujourd'hui, stop
+		if ($key == $date_today) break; 
+
+		$test_agreg ++;
+		
+		if ($test_agreg == $agreg) {	
+				
+			$test_agreg = 0;
+			
+			if ($decal == 30) $decal = 0;
+			$decal ++;
+			$tab_moyenne[$decal] = $value;
+			// Inserer des jours vides si pas d'entrees	
+			if ($jour_prec > 0) {
+				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
+				for ($i=0; $i < $ecart; $i++){
+					if ($decal == 30) $decal = 0;
+					$decal ++;
+					$tab_moyenne[$decal] = $value;
+	
+					$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
+					$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
+	
+					reset($tab_moyenne);
+					$moyenne = 0;
+					while (list(,$val_tab) = each($tab_moyenne))
+						$moyenne += $val_tab;
+					$moyenne = $moyenne / count($tab_moyenne);
+		
+					$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
+					echo "\n<td style='width: ${largeur}px'>";
+					$difference = ($hauteur_moyenne) -1;
+					$moyenne = round($moyenne,2); // Pour affichage harmonieux
+					$tagtitle= attribut_html(supprimer_tags("$jour | "
+						._T('info_visites')." | "
+						._T('info_moyenne')." $moyenne"));
+					if ($difference > 0) {	
+						echo http_img_rien($largeur,1, 'trait_moyen', $tagtitle);
+						echo http_img_rien($largeur, $hauteur_moyenne, '', $tagtitle);
+					}
+					echo http_img_rien($largeur,1,'trait_bas', $tagtitle);
+					echo "</td>";
+				}
+			}
+	
+			$ce_jour=date("Y-m-d", $key);
+			$jour = nom_jour($ce_jour).' '.affdate_jourcourt($ce_jour);
+	
+			reset($tab_moyenne);
+			
+			$moyenne = 0;
+			while (list(,$val_tab) = each($tab_moyenne))
+					$moyenne += $val_tab;
+			$moyenne = $moyenne / count($tab_moyenne);
+			
+			$hauteur_moyenne = round($moyenne * $rapport) - 1;
+			$hauteur = round($value * $rapport) - 1;
+			$moyenne = round($moyenne,2); // Pour affichage harmonieux
+			echo "\n<td style='width: ${largeur}px'>";
+	
+			$tagtitle= attribut_html(supprimer_tags("$jour | "
+				._T('info_visites')." ".$value));
+	
+			if ($hauteur > 0){
+				if ($hauteur_moyenne > $hauteur) {
+					$difference = ($hauteur_moyenne - $hauteur) -1;
+					echo http_img_rien($largeur, 1,'trait_moyen',$tagtitle);
+					echo http_img_rien($largeur, $difference, '', $tagtitle);
+					echo http_img_rien($largeur,1, "trait_haut", $tagtitle);
+					if (date("w",$key) == "0") // Dimanche en couleur foncee
+						echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
+					else
+						 echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
+				} else if ($hauteur_moyenne < $hauteur) {
+						$difference = ($hauteur - $hauteur_moyenne) -1;
+						echo http_img_rien($largeur,1,"trait_haut", $tagtitle);
+						if (date("w",$key) == "0") // Dimanche en couleur foncee
+							$couleur =  'couleur_dimanche';
+						else
+							$couleur = 'couleur_jour';
+						echo http_img_rien($largeur, $difference, $couleur, $tagtitle);
+						echo http_img_rien($largeur,1,"trait_moyen", $tagtitle);
+						echo http_img_rien($largeur, $hauteur_moyenne, $couleur, $tagtitle);
+				} else {
+					  echo http_img_rien($largeur, 1, "trait_haut", $tagtitle);
+					  if (date("w",$key) == "0") // Dimanche en couleur foncee
+						echo http_img_rien($largeur, $hauteur, "couleur_dimanche", $tagtitle);
+					  else
+						  echo http_img_rien($largeur,$hauteur, "couleur_jour", $tagtitle);
+				}
+			}
+			echo http_img_rien($largeur, 1, 'trait_bas', $tagtitle);
+			echo "</td>\n";
+			
+			$jour_prec = $key;
+			$val_prec = $value;
+		}
+	}
+	
+	// Dernier jour
+	$hauteur = round($visites_today * $rapport)	- 1;
+	$total_absolu = $total_absolu + $visites_today;
+	echo "\n<td style='width: ${largeur}px'>";
+	// prevision de visites jusqu'a minuit
+	// basee sur la moyenne (site) ou popularite (article)
+	if (! $id_article) $val_popularite = $moyenne;
+	$prevision = (1 - (date("H")*60 + date("i"))/(24*60)) * $val_popularite;
+	$hauteurprevision = ceil($prevision * $rapport);
+	// Afficher la barre tout en haut
+	if ($hauteur+$hauteurprevision>0)
+	  echo http_img_rien($largeur, 1, "trait_haut");
+	// preparer le texte de survol (prevision)
+	$tagtitle= attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; ".(round($prevision,0)+$visites_today)));
+	// afficher la barre previsionnelle
+	if ($hauteurprevision>0)
+		echo http_img_rien($largeur, $hauteurprevision,'couleur_prevision', $tagtitle);
+	// afficher la barre deja realisee
+	if ($hauteur>0)
+		echo http_img_rien($largeur, $hauteur, 'couleur_realise', $tagtitle);
+	// et afficher la ligne de base
+	echo http_img_rien($largeur, 1, 'trait_bas');
+	echo "</td>";
+	
+
+	echo "\n<td style='background-color: black'>",http_img_rien(1, 1),"</td>";
+	echo "</tr></table>";
+	echo "</td>",
+	  "\n<td ".http_style_background("fond-stats.gif")."  valign='bottom'>", http_img_rien(3, 1, 'trait_bas'),"</td>";
+	echo "\n<td>", http_img_rien(5, 1),"</td>";
+	echo "\n<td valign='top'><div style='font-size:small;' class='verdana1'>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0'>";
+	echo "\n<tr><td style='height: 15' valign='top'>";		
+	echo "<span class='arial1 spip_x-small'><b>".round($maxgraph)."</b></span>";
+	echo "</td></tr>";
+	echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
+	echo round(7*($maxgraph/8));
+	echo "</td></tr>";
+	echo "\n<tr><td style='height: 25px' valign='middle'>";		
+	echo "<span class='arial1 spip_x-small'>".round(3*($maxgraph/4))."</span>";
+	echo "</td></tr>";
+	echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
+	echo round(5*($maxgraph/8));
+	echo "</td></tr>";
+	echo "\n<tr><td style='height: 25px' valign='middle'>";		
+	echo "<span class='arial1 spip_x-small'><b>".round($maxgraph/2)."</b></span>";
+	echo "</td></tr>";
+	echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
+	echo round(3*($maxgraph/8));
+	echo "</td></tr>";
+	echo "\n<tr><td style='height: 25px' valign='middle'>";		
+	echo "<span class='arial1 spip_x-small'>".round($maxgraph/4)."</span>";
+	echo "</td></tr>";
+	echo "\n<tr><td valign='middle' $class style='$style;height: 25px'>";		
+	echo round(1*($maxgraph/8));
+	echo "</td></tr>";
+	echo "\n<tr><td style='height: 10px' valign='bottom'>";		
+	echo "<span class='arial1 spip_x-small'><b>0</b></span>";
+	echo "</td>";
+	echo "</tr></table>";
+	echo "</div></td>";
+	echo "</tr></table>";
+	// affichage des noms de mois			
+	echo "<div style='position: relative; height: 15px'>";
+	$gauche_prec = -50;
+	for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
+		$ce_jour = date("d", $jour);
+		
+		if ($ce_jour == "1") {
+			$afficher = nom_mois(date("Y-m-d", $jour));
+			if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
+				
+			$gauche = floor($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
+			if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
+				echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
+				$gauche_prec = $gauche;
+			}
+		}
+	}
+	echo "</div>";  
+	return array($moyenne, $val_prec);
+}
+
+function stat_log60($query, $visites_today, $class, $style)
+ {
+	$entrees = array();
+
+
+	while ($row = sql_fetch($query)) {
+		$date = $row['date_unix'];
+		$entrees[$date] = $row['total_visites'];
+	}
+	// Pour la derniere date, rajouter les visites du jour sauf si premier jour du mois
+	if (date("d",time()) > 1) {
+			$entrees[$date] += $visites_today;
 		} else { // Premier jour du mois : le rajouter dans le tableau des date (car il n'etait pas dans le resultat de la requete SQL precedente)
 			$date = date("Y-m",time());
-			$entrees["$date"] = $visites_today;
+			$entrees[$date] = $visites_today;
 		}
 		
-		if (count($entrees)>0){
+	if (count($entrees)>0){
 		
 			$max = max($entrees);
 			$maxgraph = maxgraph($max);
@@ -662,15 +675,15 @@ else {
 			if ($largeur > 50) $largeur = 50;
 		}
 		
-		echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
+	echo "\n<table cellpadding='0' cellspacing='0' border='0'><tr>",
 		  "\n<td ".http_style_background("fond-stats.gif").">";
-		echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
-		echo "\n<td class='trait_bas'>", http_img_rien(1, 200),"</td>";
+	echo "\n<table cellpadding='0' cellspacing='0' border='0' class='bottom'><tr>";
+	echo "\n<td class='trait_bas'>", http_img_rien(1, 200),"</td>";
 		// Presentation graphique
-		$decal = 0;
-		$tab_moyenne = "";
+	$decal = 0;
+	$tab_moyenne = "";
 			
-		while (list($key, $value) = each($entrees)) {
+	while (list($key, $value) = each($entrees)) {
 			
 			$mois = affdate_mois_annee($key);
 
@@ -678,7 +691,6 @@ else {
 			$decal ++;
 			$tab_moyenne[$decal] = $value;
 			
-			$total_loc = $total_loc + $value;
 			reset($tab_moyenne);
 	
 			$moyenne = 0;
@@ -770,50 +782,53 @@ else {
 
 		echo "</tr></table>";
 		echo "</div></td></tr></table>";
-	}
-	
-	/////
-		
-	echo fin_cadre_relief(true);
-
-
-	// Le bouton pour passer de svg a htm
-	if ($accepte_svg) {
-		$lien = 'non'; $alter = 'HTML';
-	} else {
-		$lien = 'oui'; $alter = 'SVG';
-	}
-	echo "\n<div style='text-align:".$GLOBALS['spip_lang_right'] . "; font-size:x-small;' class='verdana1'>
-	<a href='".
-	parametre_url(self(), 'var_svg', $lien)."'>$alter</a> | <a href='".
-	parametre_url(self(), 'format', 'csv')."'>CSV</a>".
-	"</div>\n";
  }
+	
+function stat_logsvg($aff_jours, $agreg, $date_today, $id_article, $log, $total_absolu, $visites_today) {
+	echo "\n<div>";
+	echo "<object data='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
+	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
+	echo "</object>";
+	echo "\n</div>";
+	$total_absolu = $total_absolu + $visites_today;
+	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
+	foreach ($log as $key => $value) {
+		# quand on atteint aujourd'hui, stop
+		if ($key == $date_today) break; 
+		$test_agreg ++;
+		if ($test_agreg == $agreg) {	
+			$test_agreg = 0;
+			if ($decal == 30) $decal = 0;
+			$decal ++;
+			$tab_moyenne[$decal] = $value;
+			// Inserer des jours vides si pas d'entrees	
+			if ($jour_prec > 0) {
+				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
+				for ($i=0; $i < $ecart; $i++){
+					if ($decal == 30) $decal = 0;
+					$decal ++;
+					$tab_moyenne[$decal] = $value;
+					reset($tab_moyenne);
+					$moyenne = 0;
+					while (list(,$val_tab) = each($tab_moyenne))
+						$moyenne += $val_tab;
+					$moyenne = $moyenne / count($tab_moyenne);
+					$moyenne = round($moyenne,2); // Pour affichage harmonieux
+				}
+			}
+			$total_loc = $total_loc + $value;
+			reset($tab_moyenne);
 
-
-//
-// Affichage des referers
-//
-
-// afficher quels referers ?
-$vis = "visites";
-if ($origine) {
-	$where = "visites_jour>0";
-	$vis = "visites_jour";
-	$table_ref = "spip_referers";
+			$moyenne = 0;
+			while (list(,$val_tab) = each($tab_moyenne))
+				$moyenne += $val_tab;
+			$moyenne = $moyenne / count($tab_moyenne);
+			$moyenne = round($moyenne,2); // Pour affichage harmonieux
+			$jour_prec = $key;
+			$val_prec = $value;
+		}
+	}
+	return array($moyenne, $val_prec);
 }
 
-
-$result = sql_select("referer, referer_md5, $vis AS vis", "$table_ref", "$where", "", "vis DESC", "$limit");
-
-
-echo gros_titre(_T("onglet_origine_visites"),'', false);
-
-echo "<div style='font-size:small;overflow:hidden;' class='verdana1'><br />";
-echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ($id_article?"id_article=$id_article&":'').('limit=' . strval($limit+200))));
-echo "<br /></div>";	
-
-echo fin_gauche(), fin_page();
-	}
-     }
 ?>
