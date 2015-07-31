@@ -245,7 +245,7 @@ function statistiques_resume($max, $moyenne, $last, $prec, $popularite)
 	. _T('info_aujourdhui')
 	. '</a> '
 	. $last
-	. (($prec <= 0) ? 0 :
+	. (($prec <= 0) ? '' :
 	     ('<br /><a href="' 
 	      . generer_url_ecrire("statistiques_referers","jour=veille")
 	      .'"  title="'._T('titre_liens_entrants').'">'
@@ -353,7 +353,7 @@ function stat_log1($log, $agreg, $date_today, $largeur, $rapport, $interval, $sc
 function statistiques_href($jour, $moyenne, $script, $value='')
 {
 	$ce_jour=date("Y-m-d H:i:s", $jour);
-	$title = nom_jour($ce_jour)
+	$title = nom_jour($ce_jour) . ' ' 
 	  . ($script ? affdate_heure($ce_jour) :
 	     (affdate_court($ce_jour)  .' '.
 	      (" | " ._T('info_visites')." $value | " ._T('info_moyenne')." "
