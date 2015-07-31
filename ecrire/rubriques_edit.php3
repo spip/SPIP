@@ -19,7 +19,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $i;
 	global $couleur_claire;
-	
+
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
@@ -27,7 +27,7 @@ function enfant($leparent){
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
-		
+
 		if ($my_rubrique != $id_rubrique){
 
 			$espace="";
@@ -41,14 +41,14 @@ function enfant($leparent){
 				$espace= "";
 				$style .= "background-color: $couleur_claire;";
 			}
-			
+
 			if ($statut_rubrique!='publie') $titre = "($titre)";
 
 			if (acces_rubrique($my_rubrique)) {
 				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">$espace$titre\n";
 			}
 			enfant($my_rubrique);
-		}		
+		}
 
 	}
 	$i=$i-1;
@@ -144,35 +144,31 @@ echo "<B>Titre</B> [Obligatoire]<BR>";
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
 
 
-if ($options=="avancees") {
-	debut_cadre_relief("$logo_parent");
-	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
-	echo "<SELECT NAME='id_parent'  style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' CLASS='forml' SIZE=1>\n";
-	if ($connect_toutes_rubriques) {
-		echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>Racine du site\n";
-	} else {
-		echo "<OPTION".mySel("0",$id_parent).">Ne pas d&eacute;placer...\n";
-	}
-	// si le parent ne fait pas partie des rubriques restreintes, modif impossible
-	if (acces_rubrique($id_parent)) {
-		enfant(0);
-	}
-	echo "</SELECT>\n";
-
-	// si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
-	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
-	$row = spip_fetch_array(spip_query($query));
-	$contient_breves = $row['cnt'];
-	if ($contient_breves > 0) {
-		echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
-	}
-	fin_cadre_relief();
-
-	echo "<P>";
-
+debut_cadre_relief("$logo_parent");
+echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
+echo "<SELECT NAME='id_parent'  style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' CLASS='forml' SIZE=1>\n";
+if ($connect_toutes_rubriques) {
+	echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>Racine du site\n";
 } else {
-	echo "<INPUT TYPE='Hidden' NAME='id_parent' VALUE=\"$id_parent\">";
+	echo "<OPTION".mySel("0",$id_parent).">Ne pas d&eacute;placer...\n";
 }
+// si le parent ne fait pas partie des rubriques restreintes, modif impossible
+if (acces_rubrique($id_parent)) {
+	enfant(0);
+}
+echo "</SELECT>\n";
+
+// si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
+$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
+$row = spip_fetch_array(spip_query($query));
+$contient_breves = $row['cnt'];
+if ($contient_breves > 0) {
+	echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
+}
+fin_cadre_relief();
+
+echo "<P>";
+
 
 if ($options == "avancees" OR $descriptif) {
 	echo "<B>Descriptif rapide</B><BR>";
@@ -182,7 +178,7 @@ if ($options == "avancees" OR $descriptif) {
 	echo "</TEXTAREA><P>\n";
 }
 else {
-	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"$descriptif\">";
+	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"".entites_html($descriptif)."\">";
 }
 
 echo "<B>Texte explicatif</B>";
