@@ -515,14 +515,14 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 				$res = sql_select("L.$primary AS id,L.id_objet",
 								"$table_lien AS L
 									LEFT JOIN $spip_table_objet AS O
-										ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
-						"O.$id_table_objet IS NULL");
+										ON O.$id_table_objet=L.id_objet",
+						"L.objet=".sql_quote($type)." AND O.$id_table_objet IS NULL");
 				// sur une cle primaire composee, pas d'autres solutions que de virer un a un
 				while ($row = sql_fetch($res)){
 					$e = sql_delete($table_lien, array("$primary=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
 					if ($e!=false){
 						$dels+=$e;
-						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien");
+						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien",_LOG_INFO_IMPORTANTE);
 					}
 				}
 			}
