@@ -1287,10 +1287,10 @@ function critere_tri_dist($idb, &$boucles, $crit){
 	$_variable = !isset($crit->param[2][0]) ? "'$idb'"
 		: calculer_liste(array($crit->param[2][0]), array(), $boucles, $boucle->id_parent);
 
-	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:$_champ_defaut)?tri_protege_champ(\$t):'')";
+	$_tri = "((\$t=(isset(\$Pile[0]['tri'.$_variable]))?\$Pile[0]['tri'.$_variable]:((strncmp($_variable,'session',7)==0 AND session_get('tri'.$_variable))?session_get('tri'.$_variable):$_champ_defaut))?tri_protege_champ(\$t):'')";
 
 	$_sens_defaut = "(is_array(\$s=$_sens_defaut)?(isset(\$s[\$st=$_tri])?\$s[\$st]:reset(\$s)):\$s)";
-	$_sens = "((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:$_sens_defaut)==-1 OR \$t=='inverse')?-1:1)";
+	$_sens = "((intval(\$t=(isset(\$Pile[0]['sens'.$_variable]))?\$Pile[0]['sens'.$_variable]:((strncmp($_variable,'session',7)==0 AND session_get('sens'.$_variable))?session_get('sens'.$_variable):$_sens_defaut))==-1 OR \$t=='inverse')?-1:1)";
 
 	$boucle->modificateur['tri_champ'] = $_tri;
 	$boucle->modificateur['tri_sens'] = $_sens;
