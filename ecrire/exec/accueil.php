@@ -165,10 +165,10 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	
 		$gadget .= "<table><tr>";
 	
-		$cpt = sql_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur=$connect_id_auteur AND art.id_article=lien.id_article");
+		$cpt = sql_fetsel('spip_auteurs_articles', "id_auteur=$connect_id_auteur");
 		if ($cpt) {
 			$gadget .= "<td>"
-			. icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page",""), "article-24.gif", "", false)
+			. icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", "", false)
 			. "</td>";
 		}
 	
