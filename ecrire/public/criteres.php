@@ -91,9 +91,17 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 	  '"' ;
 }
 // {pagination}
+// {pagination 20}
+// {pagination #ENV{pages,5}} etc
 // http://www.spip.net/@pagination
 function critere_pagination_dist($idb, &$boucles, $crit) {
-	$pas = _PAS>0 ? _PAS : 10;
+
+	// definition de la taille de la page
+	$pas = calculer_liste($crit->param[0], array(),
+		$boucles, $boucles[$idb]->id_parent);
+
+	$pas = "((\$a = intval($pas)) ? \$a : 10)"; # par defaut c'est 10
+
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
 	$boucle->partie = 'intval(_request("debut'.$idb.'"))';

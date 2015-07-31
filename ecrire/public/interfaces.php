@@ -73,9 +73,9 @@ class Boucle {
 	var $id_table;
 	var $primary;
 	var $return;
-	var $numrows = false; 
-	var $cptrows = false; 
-	var $ligne = 0; 
+	var $numrows = false;
+	var $cptrows = false;
+	var $ligne = 0;
 	var $descr =  array(); # noms des fichiers source et but etc
 }
 
