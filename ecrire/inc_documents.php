@@ -590,8 +590,7 @@ $document=0) {
 
 	$res .= "</div>\n" . fin_block();
 
-	$script = retour_a_l_envoyeur($type);
-	$redirect = generer_url_ecrire($script,
+	$redirect = generer_url_ecrire($GLOBALS['exec'],
 				       ("id_$type=$id" .
 					(($type == "rubrique") ?
 					 '&action=calculer_rubriques' : '')));
@@ -893,20 +892,9 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 }
 
 
-function retour_a_l_envoyeur($type)
-{
-	if ($type == "rubrique") {
-		return  strpos($GLOBALS['REQUEST_URI'], '_edit.php') ? 'rubriques_edit' :  'naviguer';
-	} else {
-	  return strpos($GLOBALS['REQUEST_URI'], '_edit.php') ? ($type . 's_edit') :   ($type . 's');
-	}
-}
-
 function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 {
-	$script = retour_a_l_envoyeur('article');
-	
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&show_docs=$id"), true) . "#$album";
+	$redirect = generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article&show_docs=$id"), true) . "#$album";
 
 	return generer_action_auteur('tourner', $id, $redirect) .
 		("&amp;var_rot=$rot");
@@ -915,8 +903,7 @@ function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
 {
 
-	$script = retour_a_l_envoyeur($type);
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article"), true) . "#$album";
+	$redirect = generer_url_ecrire($GLOBALS['exec'], ("id_$type=$id_article"), true) . "#$album";
 
 	return generer_action_auteur('supprimer', $id_v, $redirect);
 }
@@ -1225,7 +1212,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			echo "</div>";
 		}
 
-		echo generer_url_post_ecrire(retour_a_l_envoyeur($type),
+		echo generer_url_post_ecrire($GLOBALS['exec'],
 					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
 					     "",
 					     "#document$id_document");
@@ -1341,7 +1328,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur)),
 		  "</div>\n";
 
-		echo generer_url_post_ecrire(retour_a_l_envoyeur($type),
+		echo generer_url_post_ecrire($GLOBALS['exec'],
 					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
 					     "",
 					     "#document$id_document");
