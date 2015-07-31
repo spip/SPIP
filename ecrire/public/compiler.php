@@ -38,6 +38,7 @@ include_spip('public/interfaces');
 
 # definition des tables
 include_spip('base/serial');
+include_spip('base/auxiliaires');
 
 // http://doc.spip.org/@argumenter_inclure
 function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
@@ -697,19 +698,17 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 
 	// Initialiser les champs necessaires a la compilation
 	// et signaler une boucle documents (les autres influent dessus)
+	$tables_des_serveurs_sql[0] = 
+	  array_merge($tables_principales,  $tables_auxiliaires);
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
-			$table = isset($table_des_tables[$type])
-			? $table_des_tables[$type]
-			: $type;
-			$show = trouver_def_table($table, $boucles[$id]);
+			$show = trouver_table($type, $boucles[$id]);
 			if ($show) {
-				$nom_table = $show[0];
-				$show = $show[1]['key'];
+				$nom_table = $show['table'];
+				$boucles[$id]->id_table = $show['type'];
+				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->descr = &$descr;
-				$boucles[$id]->id_table = $table;
-				$boucles[$id]->primary = $show["PRIMARY KEY"];
 				if ((!$boucles[$id]->jointures)
 				AND (is_array($x = $tables_jointures[$nom_table])))
 					$boucles[$id]->jointures = $x;

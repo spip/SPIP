@@ -202,12 +202,12 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	AND !defined('_ECRIRE_INSTALL')) {
 		return;
 	}
-
 	if (!$prefixe) 
 		$prefixe = isset($GLOBALS['table_prefix'])
 		? $GLOBALS['table_prefix'] : $db;
 	$db_ok = charger_fonction('db_' . $type, 'base', true);
-	if ($db_ok AND $db_ok = $db_ok($host, $port, $login, $pass, $db, $prefixe)) 
+	if ($db_ok
+	AND $db_ok = $db_ok($host, $port, $login, $pass, $db, $prefixe)) 
 
 		return $db_ok;
 
@@ -229,7 +229,7 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 
 // http://doc.spip.org/@spip_connect
 function spip_connect($serveur='') {
-	global $connexions;
+	global $connexions, $type_des_serveurs;
 
 	$index = $serveur ? $serveur : 0;
 	if (isset($connexions[$index])) return $connexions[$index];
@@ -244,6 +244,7 @@ function spip_connect($serveur='') {
 	    : ($install ? (_FILE_CONNECT_INS .  '.php')
 	       : ''));
 
+	unset($GLOBALS['spip_connect_version']);
 	if ($f AND is_readable($f)) include($f);
 	if (!isset($GLOBALS['db_ok'])) {
 		if ($install) return 'spip_' . $serveur . '_query';
@@ -252,13 +253,14 @@ function spip_connect($serveur='') {
 	}
 
 	$connexions[$index] = $GLOBALS['db_ok'];
+	$type_des_serveurs[$index] = isset($GLOBALS['spip_connect_version'])
+	? 'spip' : 'inconnu';
+
+	if ($serveur) return $connexions[$index];
 
 	// Premiere connexion au serveur principal:
 	// verifier que la table principale est la
 	// et que le fichier de connexion n'est pas une version trop vieille
-
-	if (!$serveur) {
-
 	// Version courante = 0.6 (indication du prefixe comme 6e arg)
 	//
 	// La version 0.0 (non numerotee) doit etre refaite par un admin
@@ -266,19 +268,17 @@ function spip_connect($serveur='') {
 	// - la version 0.1 est moins performante que la 0.2
 	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
 	// - la version 0.5 indique le serveur comme 5e arg
-	//  On ne force pas la mise a niveau pour les autres.
 
-		if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
-			include_spip('inc/headers');
-			redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
-		}
+	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
+	}
 
-		$f = str_replace('query', 'countsel', $GLOBALS['db_ok']['query']);
-		if (!$f('spip_meta', '', '', '', '', '', '', $index)) {
-			unset($connexions[$index]);
-			spip_log("spip_connect: table meta vide ($index)");
-			return false;
-		}
+	$f = $GLOBALS['db_ok']['countsel'];
+	if (!$f('spip_meta', '', '', '', '', '', '', $index)) {
+		unset($connexions[$index]);
+		spip_log("spip_connect: table meta vide ($index)");
+		return false;
 	}
 
 	return $connexions[$index];
