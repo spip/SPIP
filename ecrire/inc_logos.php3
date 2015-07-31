@@ -195,7 +195,13 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
 	global $convert_command;
-	global $formats_sortie;
+
+	// ordre de preference des formats graphiques pour creer les vignettes
+	// le premier format disponible, selon la methode demandee, est utilise
+	if ($format == 'png')
+		$formats_sortie = array('png','jpg','gif');
+	else
+		$formats_sortie = array('jpg','png','gif');
 
 	if ($process == 'AUTO')
 		$process = lire_meta('image_process');
@@ -208,7 +214,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 		return;
 
 	// chercher un cache
-	while (list(,$fmt) = each ($formats_sortie))
+	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {
 			$vignette = $destination.'.'.$fmt;
 			if ($force) @unlink($vignette);

@@ -127,10 +127,6 @@ $type_urls = 'standard';
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
 $convert_command = 'convert';
 
-// ordre de preference des formats graphiques pour creer les vignettes
-// le premier format disponible, selon la methode demandee, est utilise
-$formats_sortie = array('png','jpg','gif');
-
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
 
