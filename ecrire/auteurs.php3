@@ -37,16 +37,13 @@ debut_droite();
 // Construire la requete
 //
 
-// statuts auteurs affiches
-if ($connect_statut != '0minirezo')
-	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite,5poubelle')";
-else
-	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite')";
-
-// statuts articles affiches
+// limiter les statuts affiches
 unset($sql_statut_articles);
-if ($connect_statut<>"0minirezo")
+unset($sql_statut_articles);
+if ($connect_statut != '0minirezo') {
+	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite')";
 	$sql_statut_articles = " AND FIND_IN_SET(articles.statut,'prop,publie')";
+}
 
 // tri
 switch ($tri) {
@@ -96,7 +93,7 @@ if ($type_requete == 'auteur') {
 		$auteurs[$row['id_auteur']]['compteur'] = $row['compteur'];
 
 	// si on n'est pas minirezo, supprimer les auteurs sans article publie
-	if ($connect_statut <> '0minirezo') {
+	if ($connect_statut != '0minirezo') {
 		reset($auteurs);
 		while (list(,$auteur) = each ($auteurs)) {
 			if (! $auteurs[$row['id_auteur']]['compteur']) {
@@ -119,6 +116,8 @@ if ($type_requete == 'auteur') {
 		$vus .= ','.$row['id_auteur'];
 		$nombre_auteurs ++;
 	}
+
+	// si on est minirezo, ajouter les auteurs sans articles
 	if ($connect_statut == '0minirezo') {
 		$result_auteurs = spip_query("SELECT auteurs.*, 0 as compteur
 			FROM spip_auteurs AS auteurs
@@ -254,7 +253,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	// contact
 	echo '</td><td>';
 	if ($row['messagerie'] == 'oui' AND $row['login']
-	AND $activer_messagerie<>"non" AND $connect_activer_messagerie<>"non" AND $messagerie<>"non")
+	AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non" AND $messagerie != "non")
 		echo bouton_imessage($id_auteur,"force")."&nbsp;";
 	if ($connect_statut=="0minirezo")
 		if (strlen($row['email'])>3)
