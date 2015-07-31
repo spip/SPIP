@@ -178,7 +178,7 @@ function editer_article_descriptif($descriptif, $config, $aider)
 // http://doc.spip.org/@editer_article_url
 function editer_article_url($url, $nom, $config, $aider)
 {
-	if (($config['articles_urlref'] == "non") AND !$url AND $nom)
+	if (($config['articles_urlref'] == "non") AND !$url AND !$nom)
 		return '';
 
 	$url_site = entites_html($url);
