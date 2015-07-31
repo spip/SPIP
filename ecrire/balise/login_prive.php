@@ -27,7 +27,8 @@ function balise_LOGIN_PRIVE ($p) {
 #    programme une <boucle(AUTEURS)>[(#LOGIN_PRIVE{#LOGIN})]
 
 function balise_LOGIN_PRIVE_stat ($args, $filtres) {
-	return array($args[1], ($filtres[0] ? $filtres[0] : $args[0]));
+	 return array(isset($args[1]) ? $args[1] : '',
+		      ($filtres[0] ? $filtres[0] : $args[0]));
 }
 
 function balise_LOGIN_PRIVE_dyn($login, $cible) {

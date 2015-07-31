@@ -822,6 +822,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 		case 'forums':
 		default:
 			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+			$c = '';
 			foreach ($liste_champs as $champ) {
 				$x = champ_sql( $champ, $p);
 				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
