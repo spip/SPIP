@@ -40,15 +40,8 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 		$status = 302;
 
 	$url = trim(strtr($url, "\n\r", "  "));
-	# en theorie on devrait faire ca tout le temps, mais quand la chaine
-	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
-	if ($url[0]=='?')
-		$url = url_de_base().$url;
-	if ($url[0]=='#')
-		$url = self('&').$url;
-	# si profondeur non nulle et url relative, il faut la passer en absolue
-	if ($GLOBALS['profondeur_url']>(_DIR_RESTREINT?1:2)
-		AND !preg_match(",^(\w+:)?//,",$url)){
+	# si l'url de redirection est relative, on la passe en absolue
+	if (!preg_match(",^(\w+:)?//,",$url)){
 		include_spip("inc/filtres_mini");
 		$url = url_absolue($url);
 	}
