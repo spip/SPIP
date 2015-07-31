@@ -71,16 +71,15 @@ function test_ecrire($my_dir) {
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
 //
 
-// http://doc.spip.org/@action_test_dirs_dist
-function action_test_dirs_dist()
+function install_etape_chmod_dist()
 {
 	global $test_dirs;
-	$test_dir = _request('test_dir');
+	$test_dir =  _request('test_dir');
 	$chmod = 0;
 
 	if ($test_dir) {
 		if (substr($test_dir,-1)!=='/') $test_dir .= '/';
-		if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
+		if (!in_array($test_dir, $test_dirs)) $test_dirs[] = _DIR_RACINE  . $test_dir;
 	} else {
 		if (!_FILE_CONNECT)
 			$test_dirs[] = dirname(_FILE_CONNECT_INS).'/';
@@ -91,13 +90,13 @@ function action_test_dirs_dist()
 
 	while (list(, $my_dir) = each($test_dirs)) {
 		$test = test_ecrire($my_dir);
-		if (!test_ecrire($my_dir)) {
+		if (!$test) {
+			$m = preg_replace(',^' . _DIR_RACINE . ',', '',$my_dir);
 			if (@file_exists($my_dir)) {
-				$bad_dirs[] = "<li>".$my_dir."</li>";
+				$bad_dirs[] = "<li>".$m."</li>";
 			} else
-				$absent_dirs[] = "<li>".$my_dir."</li>";
-		}
-		$chmod = max($chmod, $test);
+				$absent_dirs[] = "<li>".$m."</li>";
+		} else $chmod = max($chmod, $test);
 	}
 
 	if ($bad_dirs OR $absent_dirs) {
@@ -124,19 +123,20 @@ function action_test_dirs_dist()
 			   array('bad_dirs' => join(" ", $absent_dirs))) .
 			"<b>". _T('login_recharger')."</b>.";
 	}
-	$t = _T('login_recharger');
-	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
-	  generer_test_dirs('',
-		(!$test_dir ? "" : 
-		 "<input type='hidden' name='test_dir' value='$test_dir' />")
-		 . "<div style='text-align: right'><input type='submit' class='fondl' value='$t' /></div>"); 
-	echo minipres($titre, $res);
+	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>";
 
- } else {
-	if (!_FILE_CONNECT)
-	  redirige_par_entete(generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
-	else
-		redirige_par_entete(_DIR_RESTREINT_ABS);
- }
+	$t = _T('login_recharger');
+	$t = (!$test_dir ? "" : 
+		 "<input type='hidden' name='test_dir' value='$test_dir' />")
+	. "<input type='hidden' name='etape' value='chmod' />"
+	. "<div style='text-align: right'><input type='submit' class='fondl' value='$t' /></div>"; 
+
+	echo minipres($titre, $res . generer_form_ecrire('install',  $t));
+
+	} else {
+		if (!_FILE_CONNECT)
+			redirige_par_entete(generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
+		else	redirige_par_entete(generer_url_ecrire());
+	}
 }
 ?>

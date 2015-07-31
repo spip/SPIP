@@ -122,9 +122,12 @@ function raler_fichier($fichier)
 {
 	include_spip('inc/minipres');
 	$dir = dirname($fichier);
+	http_status(401);
 	echo minipres(_T('texte_inc_meta_2'), "<h4 style='color: red'>"
 		. _T('texte_inc_meta_1', array('fichier' => $fichier))
-		. " <a href='" . generer_test_dirs($dir) . "'>"
+		. " <a href='"
+		. generer_url_ecrire('install', "etape=chmod&test_dir=$dir")
+		. "'>"
 		. _T('texte_inc_meta_2')
 		. "</a> "
 		. _T('texte_inc_meta_3',
@@ -206,12 +209,11 @@ function sous_repertoire($base, $subdir='', $nobase = false, $tantpis=false) {
 		fclose($f);
 	else {
 		spip_log("echec creation $base${subdir}");
+		if ($tantpis) return '';
 		if (!_DIR_RESTREINT)
 			$base = preg_replace(',^' . _DIR_RACINE .',', '',$base);
 		if ($test) $base .= $subdir;
-		if ($tantpis) return '';
-		include_spip('inc/headers');
-		redirige_par_entete(generer_test_dirs($base, true));
+		raler_fichier($base . '/.ok');
 	}
 	spip_log("faux sous-repertoire $base${subdir}");
 	return "$baseaff${subdir}";

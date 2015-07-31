@@ -94,8 +94,8 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 		if ($f) {
 			fclose ($f);
 		} else {
-			include_spip('inc/headers');
-			redirige_par_entete(generer_test_dirs(dirname($dest), true));
+			include_spip('inc/flock');
+			raler_fichier($dest);
 		}
 		@unlink($dest);
 	}

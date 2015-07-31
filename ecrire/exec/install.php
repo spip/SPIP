@@ -21,7 +21,7 @@ define('_FILE_TMP', '_install');
 function exec_install_dist()
 {
 	$etape = _request('etape');
-	if (_FILE_CONNECT) {
+	if (_FILE_CONNECT AND ($etape != 'chmod')) {
 		echo minipres();
 		exit;
 	}

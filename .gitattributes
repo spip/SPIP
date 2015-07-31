@@ -391,7 +391,6 @@ ecrire/action/regler_moderation.php -text
 ecrire/action/reorganiser.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_traduction.php -text
-ecrire/action/test_dirs.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
 ecrire/action/tourner.php -text
@@ -616,6 +615,7 @@ ecrire/install/etape_1.php -text
 ecrire/install/etape_2.php -text
 ecrire/install/etape_3.php -text
 ecrire/install/etape_4.php -text
+ecrire/install/etape_chmod.php -text
 ecrire/install/etape_ldap1.php -text
 ecrire/install/etape_ldap2.php -text
 ecrire/install/etape_ldap3.php -text
