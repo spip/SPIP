@@ -33,7 +33,7 @@ function generer_generer_url($type, $p)
 
 	$s = $p->id_boucle;
 
-	if ($s AND $s = $p->boucles[$s]->sql_serveur) {
+	if ($s !== '' AND $s = $p->boucles[$s]->sql_serveur) {
 
 // si une fonction de generation des url a ete definie pour ce connect l'utiliser
 		if (function_exists($f = 'generer_generer_url_'.$s)){
