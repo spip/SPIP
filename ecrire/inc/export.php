@@ -74,6 +74,10 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
 		$string = build_while($debut, $table, $prim);
+		$cpt++;
+		$debut +=  _EXPORT_TRANCHES_LIMITE;
+		$status_dump = "$gz::$archive::$etape::$cpt";
+
 		// attention $string vide ne suffit pas a sortir
 		// car les admins restreints peuvent parcourir
 		// une portion de table vide pour eux.
@@ -81,33 +85,23 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total) {
 			// on ecrit dans un fichier generique
 			// puis on le renomme pour avoir une operation atomique 
 			ecrire_fichier ($temp = $filetable . '.temp' . _EXTENSION_PARTIES, $string);
-			// le fichier destination peut deja exister si on sort d'un timeout entre le rename et le ecrire_meta
+	// le fichier destination peut deja exister
+	// si on sort d'un timeout entre le rename et le ecrire_meta
 			if (file_exists($f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES)) @unlink($f);
 			rename($temp, $f);
 		}
-		$cpt++;
-		$status_dump = "$gz::$archive::$etape::$cpt";
 		// on se contente d'une ecriture en base pour aller plus vite
 		// a la relecture on en profitera pour mettre le cache a jour
 		ecrire_meta("status_dump", $status_dump,'non');
-
-		$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
 		echo " $debut";
-
 	}
 	echo " $total."; 
 	
 	# on prefere ne pas faire le ramassage ici de peur d'etre interrompu par le timeout au mauvais moment
 	# le ramassage aura lieu en debut de hit suivant, et ne sera normalement pas interrompu car le temps pour ramasser
 	# est plus court que le temps pour creer les parties
-	# ramasse_parties($dir.$archive, $dir.$archive);
-	
-	$status_dump = "$gz::$archive::" . ($etape+1) . "::0";
-	// on se contente d'une ecriture en base pour aller plus vite
-	// a la relecture on en profitera pour mettre le cache a jour
-	ecrire_meta("status_dump", $status_dump,'non');
-
+	// ramasse_parties($dir.$archive, $dir.$archive);
 }
 
 // Construit la version xml  des champs d'une table
