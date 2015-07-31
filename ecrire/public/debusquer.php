@@ -459,7 +459,7 @@ function debusquer_squelette($fonc, $mode, $self){
 		"<div id='spip-debug'>$res"
 			. "<div id='debug_boucle'><fieldset$id><legend>"
 			. "<a href='".$self."#f_".substr($fonc, 0, 37)."'> &#8593; "
-			. $legend
+			. ($legend ? $legend : $mode)
 			. "</a></legend>"
 			. $texte
 			. "</fieldset></div>"
