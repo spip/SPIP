@@ -68,6 +68,23 @@
 .icone.verticale.historique-24 { width: 90px; }
 .icone.verticale.suivi-forum-24 { width: 100px; }
 
+/* onglets simple 1er et second niveau
+<div class='onglets_simple clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
+<div class='onglets_simple second clearfix'><ul><li><strong></strong></li><li><a></a></li></ul></div>
+*/
+.onglets_simple { margin:1em 0;clear:#GET{left};border-bottom:1px solid #GET{foncee};padding-#GET{left}:5px;}
+.onglets_simple ul {list-style:none;margin-left:1px;padding:0;}
+.onglets_simple ul li {float:left;padding:0;margin:0;margin-bottom:-1px;}
+
+.onglets_simple ul li strong,.onglets_simple ul li a {display:block;float:#GET{left};padding:4px 7px;border:1px solid #GET{foncee};margin-#GET{left}:5px;background-color:#eee;background-position:center left;background-repeat:no-repeat;}
+.onglets_simple ul li strong,.onglets_simple ul li a:hover {background-color:#f8f7f3;}
+.onglets_simple ul li a:hover {cursor:hand;cursor:pointer;}
+.onglets_simple ul li strong {border-bottom:1px solid #f8f7f3;color:#555;}
+
+.onglets_simple.second {font-size:0.9em;border:0;padding-#GET{left}:0;}
+.onglets_simple.second ul li strong,.onglets_simple.second ul li a {margin-#GET{left}:0px;margin-#GET{right}:5px;margin-bottom:5px;}
+.onglets_simple.second ul li strong {border:1px solid #GET{foncee};}
+.onglets_simple.second ul li strong,.onglets_simple.second ul li a:hover {background-color:#fff;}
 
 
 /* * Style des onglets historiques */
