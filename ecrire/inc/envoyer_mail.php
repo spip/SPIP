@@ -217,7 +217,7 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts="")
 	else $type = '';
 
 	// calculer un identifiant unique
-	preg_match('/@\S+/', $from, $domain);
+	preg_match('/@[^\s()<>]+/', $from, $domain);
 	$uniq = rand() . '_' . md5($to . $texte) . $domain[0];
 
 	// Si multi-part, s'en servir comme borne ...
@@ -235,8 +235,9 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts="")
 	}
 
 	// .. et s'en servir pour plaire a SpamAssassin
-
-	$mid = 'Message-Id: <' . $uniq . ">";
+	if (!preg_match('/^Message-Id:/mi', $headers)) {
+		$mid = 'Message-Id: <' . $uniq . ">\n";
+	} else $mid = '';
 
 	// indispensable pour les sites qui collent d'office From: serveur-http
 	// sauf si deja mis par l'envoyeur
@@ -245,9 +246,8 @@ function mail_normaliser_headers($headers, $from, $to, $texte, $parts="")
 	// Nettoyer les en-tetes envoyees
 	if (strlen($headers)) $headers = trim($headers)."\n";
 
-	// Et mentionner l'indeboulonable nomenclature ratee 
-
-	$headers .= "From: $from\n$type$rep$mid\nMIME-Version: 1.0\n";
+	// Et mentionner l'indeboulonnable nomenclature ratee 
+	$headers .= "From: $from\n$type$rep${mid}MIME-Version: 1.0\n";
 
 	return array($headers, $texte);
 }
