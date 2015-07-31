@@ -2111,7 +2111,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// C'est dommage, parce que la rasterisation des caracteres est autrement plus jolie qu'avec TTF.
 	// A garder sous le coude en attendant que ca ne soit plus une grosse bouse.
 	// Si police Postscript et que fonction existe...
-	if (ereg("\.pfb$", $font) AND function_exists("imagepstext") AND 1==2) {
+	if (false AND strtolower(substr($font,-4)) == ".pfb" AND function_exists("imagepstext")) {
 		// Traitement specifique pour polices PostScript (experimental)
 		$textSizePs = round(1.32 * $textSize);
 		if ($GLOBALS["font"]["$font"]) {
@@ -2152,14 +2152,14 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// Deux passes pour recuperer, d'abord, largeur_ligne
 	// necessaire pour alignement right et center
 	foreach ($lines as $line) {
-		$line = ereg_replace("~", " ", $line);
+		$line = str_replace("~", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 	}
 
 	foreach ($lines as $line) {
-		$line = ereg_replace("~", " ", $line);
+		$line = str_replace("~", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;
