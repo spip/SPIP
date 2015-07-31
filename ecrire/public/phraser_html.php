@@ -156,11 +156,11 @@ function phraser_champs($texte,$ligne,$result) {
 		$champ->nom_champ = $match[3];
 		$champ->etoile = $match[5];
 		if ($suite[0] == '{') {
-		  phraser_arg($suite, '', array(), $champ);
-		}
-		// ce ltrim est une ereur de conception
-		// mais on le conserve par souci de compatibilité
+			phraser_arg($suite, '', array(), $champ);
+			// ce ltrim est une ereur de conception
+			// mais on le conserve par souci de compatibilité
 		$texte = ltrim($suite);
+		}
 		if ($champ->nom_champ == 'EMBED_DOCUMENT')
 			phraser_vieux_emb($champ);
 		$result[] = $champ;
