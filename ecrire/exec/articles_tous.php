@@ -52,7 +52,7 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 		echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-		echo creer_colonne_droite(true);
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
 		echo debut_droite('', true);
 

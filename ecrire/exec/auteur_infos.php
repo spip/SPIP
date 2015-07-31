@@ -79,7 +79,7 @@ function exec_auteur_infos_dist() {
 		);
 
 
-		echo creer_colonne_droite(true);
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',
 			      array('args' => array(
 						    'exec'=>'auteur_infos',

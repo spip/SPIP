@@ -276,7 +276,7 @@ function exec_controle_forum_dist()
 		echo fin_boite_info(true);
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
-		echo creer_colonne_droite(true);
+		echo creer_colonne_droite('', true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
 			

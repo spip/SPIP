@@ -42,7 +42,7 @@ function exec_articles_page_dist()
 	}
 }
 
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 echo debut_droite('', true);
 

@@ -100,7 +100,7 @@ function exec_breves_edit_dist()
 		echo afficher_documents_colonne($id_breve, "breve");
 	}
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
-echo creer_colonne_droite(true);
+echo creer_colonne_droite('', true);
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 echo debut_droite('', true);
 echo debut_cadre_formulaire("", true);

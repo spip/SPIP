@@ -27,7 +27,7 @@ function debut_raccourcis() {
 spip_log('debut_raccourcis() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
         global $spip_display;
         echo "<div>&nbsp;</div>";
-        echo creer_colonne_droite(true);
+        echo creer_colonne_droite('', true);
 
         echo debut_cadre_enfonce('',true);
         if ($spip_display != 4) {

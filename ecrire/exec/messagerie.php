@@ -44,7 +44,7 @@ echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "style='width: 
 
 echo fin_boite_info(true);
 
-echo creer_colonne_droite(true);
+echo creer_colonne_droite('', true);
 
 echo debut_cadre_relief("messagerie-24.gif", true);
 echo icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif", "", false);

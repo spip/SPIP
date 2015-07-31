@@ -18,12 +18,13 @@ include_spip('inc/actions');
 include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
+define('_SIGNALER_ECHOS', true);
 
 // http://doc.spip.org/@echo_log
 function echo_log($f, $ret) {
 	spip_log("Page " . self() . " function $res: echo ".substr($ret,0,50)."...",'echo');
 	echo 
-	/*(defined('_SIGNALER_ECHOS')?*/"#Echo par $f#"/* :"")*/
+	(_SIGNALER_ECHOS?"#Echo par $f#" :"")
 		. $ret;
 }
 // Faux HR, avec controle de couleur

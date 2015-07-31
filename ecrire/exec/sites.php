@@ -101,7 +101,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row)
 	}
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
-	echo creer_colonne_droite(true);
+	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo debut_droite('', true);
