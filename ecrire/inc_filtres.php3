@@ -437,7 +437,7 @@ function affdate_heure($numdate) {
 // renvoie "d'octobre" (ocitan) ou "de octubre" (espagnol)
 function d_apostrophe($texte) {
 	global $spip_lang;
-	if (ereg("^(oci_.+|fr|ca)$",$spip_lang))
+	if (ereg("^(oc_.+|fr|ca)$",$spip_lang))
 		return ereg_replace("^(.+ )?de ([aeiou])", "\\1d'\\2", $texte);
 	else
 		return $texte;
