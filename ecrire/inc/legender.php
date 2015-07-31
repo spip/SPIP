@@ -110,7 +110,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$corps = "<div>"
 		       . $corps 
 		       . "<span"
-		       . $att
+		       . $att_span
 		       . "><input type='submit' class='fondo' value='"
 		       . _T('bouton_enregistrer')
 		       ."' /></span><br class='nettoyeur' /></div>";
