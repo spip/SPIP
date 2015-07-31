@@ -1,8 +1,6 @@
 <BOUCLE_mois(ARTICLES)
-    {agenda date, mois, #ENV{annee}, #ENV{mois}}>[
-(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'calendrier-couleur3'})
-]</BOUCLE_mois>
-[(#DATE|agenda_memo{'', '', '','calendrier-couleur3', 'mois'})]
-</B_mois>
-<:aucun_article:>
-<//B_mois>
+    {agenda date, mois, #ENV{annee}, #ENV{mois}}{par date}>[
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE,'calendrier-couleur5'})]</BOUCLE_mois>[(#TOTAL_BOUCLE|
+	agenda_affiche{'mois', 'calendrier-couleur5'}
+)][(#TOTAL_BOUCLE|
+	choixsivide{<:aucun_article:>,''})]<//B_mois>
