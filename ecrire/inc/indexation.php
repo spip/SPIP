@@ -602,7 +602,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 // http://doc.spip.org/@marquer_indexer
 function marquer_indexer ($table, $id_objet) {
 	spip_log ("demande indexation $table id=$id_objet");
-	$id = primary_index_tables($table);
+	$id = primary_index_table($table);
 	spip_query("UPDATE $table SET idx='1' WHERE $id=$id_objet AND idx!='non'");
 }
 
