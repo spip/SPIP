@@ -213,7 +213,7 @@ function f_queue(&$texte){
 
 	// eviter une inclusion si rien a faire
 	if (_request('action')=='cron'
-		OR queue_sleep_time_to_next_job()
+		OR queue_sleep_time_to_next_job()>0
 	  OR defined('_DEBUG_BLOCK_QUEUE')){
 		return $texte;
 	}
