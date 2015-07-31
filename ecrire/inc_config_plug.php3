@@ -31,7 +31,7 @@ function fichiers_plugins($dir) {
 
 function installer_plugins () {
 	$fichiers = array();
-	$fichiers = fichiers_plugins("plugins");
+	$fichiers = fichiers_plugins($GLOBALS['dir_ecrire']."plugins");
 
 	$plugs = "<"."?php\n\n";
 	$plugs .= "if(defined('_ECRIRE_INC_PLUGINS')) return;\n";
@@ -42,7 +42,7 @@ function installer_plugins () {
 	$plugs .= "\n?".">";
 
 
-	if ($f = @fopen('inc_plugins.php3', 'w')) {
+	if ($f = @fopen($GLOBALS['dir_ecrire'].'data/inc_plugins.php3', 'w')) {
 		@fwrite($f, $plugs);
 		@fclose($f);
 	}
