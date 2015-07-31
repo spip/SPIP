@@ -447,7 +447,7 @@ function corriger_extension_et_nom($nom, $titrer=false)
 	else $nom = str_replace('.','-',$titre).'.'.$ext;
 
 	if ($titrer) {
-	  $titre = is_string($titrer) ? $titrer : preg_replace($titrer, ' ', $titre ? $titre : $nom);
+	  $titre = is_string($titrer) ? $titrer : preg_replace("%".$titrer."%", ' ', $titre ? $titre : $nom);
 	} else $titre = '';
 	$ext = corriger_extension(strtolower($ext));
 	$row = sql_fetsel("inclus", "spip_types_documents", "extension=" . sql_quote($ext) . " AND upload='oui'");
