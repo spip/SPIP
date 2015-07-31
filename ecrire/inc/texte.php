@@ -413,12 +413,11 @@ function protege_js_modeles($t) {
 // aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
 // http://doc.spip.org/@interdire_scripts
 function interdire_scripts($arg) {
-
 	// on memorise le resultat sur les arguments non triviaux
 	static $dejavu = array();
 
 	// Attention, si ce n'est pas une chaine, laisser intact
-	if (!is_string($arg) OR !strstr($arg, '<')) return $arg; 
+	if (!$arg OR !is_string($arg) OR !strstr($arg, '<')) return $arg; 
 
 	if (isset($dejavu[$arg])) return $dejavu[$arg];
 

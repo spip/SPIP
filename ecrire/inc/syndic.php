@@ -66,9 +66,13 @@ function analyser_backend($rss, $url_syndic='') {
 	OR ($l = extraire_attribut(extraire_balise($header, 'feed'), 'xml:lang'))
 	)
 		$langue_du_site = $l;
+	// atom
+	elseif (preg_match(',<feed\s[^>]*xml:lang=[\'"]([^<>\'"]+)[\'"],i', $header, $match))
+		$langue_du_site = $match[1];
 
 	// Recuperer les blocs item et entry
 	$items = array_merge(extraire_balises($rss, 'item'), extraire_balises($rss, 'entry'));
+
 
 	//
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
@@ -372,8 +376,14 @@ function ajouter_tags($matches, $item) {
 			// cas atom1, a faire apres flickr
 			$term = extraire_attribut($match[0], 'term')
 		) {
+<<<<<<< .working
 				$scheme = extraire_attribut($match[0], 'scheme');
+=======
+			if ($scheme = extraire_attribut($match[0], 'scheme'))
+>>>>>>> .merge-right.r15241
 				$url = suivre_lien($scheme,$term);
+			else
+				$url = $term;
 		}
 		else {
 			# type delicious.com
