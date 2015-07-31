@@ -69,7 +69,7 @@ function image_math($tex) {
 		else {
 			list(,,,$size) = @getimagesize($fichier);
 			$alt = "alt=\"$tex\" title=\"$tex\""; 
-			return "<img src=\"$fichier\" align=\"middle\" $size $alt />";
+			return "<img src=\"$fichier\" style=\"vertical-align:middle;\" $size $alt />";
 		}
 
 	}
