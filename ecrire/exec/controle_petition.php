@@ -66,15 +66,15 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 		ajax_retour($res);
 	} else {
 		$count = ($type != 'interne') ? 0 : sql_countsel("spip_signatures", $where);
-		controle_petition_page($id_article, $id_signature ? '' : $type, $res, $count);
+		controle_petition_page($id_article, $titre, $id_signature ? '' : $type, $res, $count);
 	}
 }
 
 // http://doc.spip.org/@controle_petition_page
-function controle_petition_page($id_article, $type,  $corps, $count)
+function controle_petition_page($id_article, $titre, $type,  $corps, $count)
 {
 	$args = array();
-	$rac = $titre = '';
+	$rac = '';
 
 	if (!(autoriser('modererpetition')
 	OR (
