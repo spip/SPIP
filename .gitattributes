@@ -261,6 +261,7 @@ dist/modeles/audio.html -text
 dist/modeles/doc.html -text
 dist/modeles/emb.html -text
 dist/modeles/foreach.html -text
+dist/modeles/formulaire.html -text
 dist/modeles/image.html -text
 dist/modeles/img.html -text
 dist/modeles/lesauteurs.html -text

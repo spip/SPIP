@@ -715,8 +715,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
-	$contexte = array_merge($contexte,
-		creer_contexte_de_modele($params));
+	$arg_list = creer_contexte_de_modele($params);
+	$contexte['args'] = $arg_list; // on passe la liste des arguments du modeles dans une variable args
+	$contexte = array_merge($contexte,$arg_list);
 
 	// On cree un marqueur de notes unique lie a ce modele
 	// et on enregistre l'etat courant des globales de notes...
