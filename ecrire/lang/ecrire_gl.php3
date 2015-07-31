@@ -746,9 +746,12 @@ cunha cor que indica o seu estado&nbsp;:',
 'statut_admin_restreint' => '(admin restrinxido)',
 'syndic_choix_moderation' => 'Que facer das vindeiras ligaz&oacute;ns que prove&ntilde;an deste web&nbsp;?',
 'syndic_choix_oublier' => 'Que facer das ligaz&oacute;ns que xa non figuran no ficheiro de sindicaci&oacute;n&nbsp;?',
+'syndic_choix_resume' => 'Alg&uacute;ns webs difunden o texto completo dos artigos. No caso de que isto estea dispo&ntilde;&iacute;bel desexa sindicalo&nbsp;:',
 'syndic_lien_obsolete' => 'ligaz&oacute;n obsoleta',
 'syndic_option_miroir' => 'bloquealas automaticamente',
 'syndic_option_oubli' => 'borralas (tras @mois@&nbsp;mois)',
+'syndic_option_resume_non' => 'o contido completo dos artigos (en formato HTML)',
+'syndic_option_resume_oui' => 'un simple resumo (en formato de texto)',
 'syndic_options' => 'Opci&oacute;ns da sindicaci&oacute;n&nbsp;:',
 
 
