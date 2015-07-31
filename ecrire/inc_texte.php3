@@ -216,39 +216,21 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$texte_milieu = substr($texte_a_voir, $debut+strlen("<math>"), $fin-$debut-strlen("<math></math>"));
 		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
 
-		$traiter_math = "image";
-		//$traiter_math = "mathml";
-		
-		if ($traiter_math == "image") {
-			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
-				$num_echap++;
-				$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[2])."</p>\n";
-				$pos = strpos($texte_milieu, $regs[0]);
-				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-					.substr($texte_milieu,$pos+strlen($regs[0]));
-			}
-			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
-				$num_echap++;
-				$les_echap[$num_echap] = image_math($regs[2]);
-				$pos = strpos($texte_milieu, $regs[0]);
-				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-					.substr($texte_milieu,$pos+strlen($regs[0]));
-			}
-		} else {
-			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
-				$num_echap++;
-				$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".mathml_math($regs[2])."</p>\n";
-				$pos = strpos($texte_milieu, $regs[0]);
-				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-					.substr($texte_milieu,$pos+strlen($regs[0]));
-			}
-			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
-				$num_echap++;
-				$les_echap[$num_echap] = mathml_math($regs[2]);
-				$pos = strpos($texte_milieu, $regs[0]);
-				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-					.substr($texte_milieu,$pos+strlen($regs[0]));
-			}
+		$traiter_math = "image_math";	// "mathml_math";
+
+		while((ereg("[$][$]([^$]+)[$][$]",$texte_milieu, $regs))) {
+			$num_echap++;
+			$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".$traiter_math($regs[1])."</p>\n";
+			$pos = strpos($texte_milieu, $regs[0]);
+			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+				.substr($texte_milieu,$pos+strlen($regs[0]));
+		}
+		while((ereg("[$]([^$]+)[$]",$texte_milieu, $regs))) {
+			$num_echap++;
+			$les_echap[$num_echap] = $traiter_math($regs[1]);
+			$pos = strpos($texte_milieu, $regs[0]);
+			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+				.substr($texte_milieu,$pos+strlen($regs[0]));
 		}
 
 		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
@@ -899,7 +881,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	//
 
 	$letexte = "\n".trim($letexte);
-
 
 	// les listes
 	if (ereg("\n-[*#]", $letexte))

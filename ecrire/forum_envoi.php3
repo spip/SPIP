@@ -40,9 +40,9 @@ if ($id_parent) {
 		$id_message = $row['id_message'];
 		$id_syndic = $row['id_syndic'];
 		$statut = $row['statut'];
-		$titre_parent = stripslashes($row['titre']);
-		$texte_parent = stripslashes($row['texte']);
-		$auteur_parent = stripslashes($row['auteur']);
+		$titre_parent = $row['titre'];
+		$texte_parent = $row['texte'];
+		$auteur_parent = $row['auteur'];
 		$id_auteur_parent = $row['id_auteur'];
 		$date_heure_parent = $row['date_heure'];
 		$nom_site_parent = $row['nom_site'];
