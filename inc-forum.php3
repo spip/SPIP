@@ -156,12 +156,14 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$ret.= "<li class='font-size=80%'> $type_mot&nbsp;: <b>$titre_mot</b></li>";
 			}
 
+			$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 			if (strlen($texte) < 10 AND !$presence_mots) {
 				$ret .= "<p align='right'><font color=red>"._T('forum_attention_dix_caracteres')."</font></p>\n";
-			} else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
+			}
+			else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
 				$ret .= "<p align='right'><font color=red>"._T('forum_attention_trois_caracteres')."</font></p>\n";
-			} else {
-				$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
+			}
+			else {
 				$ret .= "\n<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
 			}
 			$ret .= "</div>\n<br />";
@@ -498,7 +500,7 @@ function ajout_forum() {
 
 		// Poser un cookie pour ne pas retaper le nom / email
 		$cookie_user = array('nom' => $auteur, 'email' => $email_auteur);
-		spip_setcookie('spip_forum_user', serialize($cookie_user), time() + 3600 * 24 * 7);
+		spip_setcookie('spip_forum_user', serialize($cookie_user));
 
 		// Envoi d'un mail aux auteurs
 		$prevenir_auteurs = lire_meta("prevenir_auteurs");
