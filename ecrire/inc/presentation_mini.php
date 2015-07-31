@@ -90,7 +90,7 @@ function debut_droite($rubrique="", $return= false) {
 
 	if ($spip_display == 4) $res .= " -->";
 
-	$res .= liste_articles_bloques();
+	$res .= liste_objets_bloques();
 
 	$res .= creer_colonne_droite($rubrique, true)
 	. "</div>";
@@ -106,40 +106,16 @@ function debut_droite($rubrique="", $return= false) {
 }
 
 // http://doc.spip.org/@liste_articles_bloques
-function liste_articles_bloques()
-{
-	global $connect_id_auteur;
+function liste_objets_bloques($id_auteur=null){
+	if (is_null($id_auteur))
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {
 		include_spip('inc/drapeau_edition');
-		include_spip('inc/presentation');
-		$articles_ouverts = liste_drapeau_edition ($connect_id_auteur, 'article');
-		if (count($articles_ouverts)) {
-			$res .=
-				debut_cadre('bandeau-rubriques',"article-24.png",'',_T('info_cours_edition'))
-				. "\n<div class='plan-articles-bloques'>";
-			foreach ($articles_ouverts as $row) {
-				$ze_article = $row['id_article'];
-				$ze_titre = $row['titre'];
-				$statut = $row["statut"];
-
-				$res .= "\n<div class='$statut'>"
-				. "\n<div style='float:right; '>"
-				. debloquer_article($ze_article,_T('lien_liberer'))
-				. "</div>"
-				. "<a  href='"
-				. generer_url_ecrire("articles","id_article=$ze_article")
-				. "'>$ze_titre</a>"
-				. "</div>";
-			}
-
-			if (count($articles_ouverts) >= 4) {
-				$res .= "\n<div style='text-align:right; '>"
-				. debloquer_article('tous', _T('lien_liberer_tous'))
-				. "</div>";
-			}
-			$res .= fin_cadre('bandeau-rubriques') . "</div>";
+		$objets_ouverts = liste_drapeau_edition($id_auteur);
+		if (count($objets_ouverts)) {
+			$res .= recuperer_fond('prive/objets/liste/objets-en-edition',array(),array('ajax'=>true));
 		}
 	}
 	return $res;
@@ -244,26 +220,6 @@ function info_copyright() {
 			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' onclick=\"window.open(this.href, 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"))
 		. $secu;
 
-}
-
-// http://doc.spip.org/@debloquer_article
-function debloquer_article($arg, $texte) {
-
-	// cas d'un article pas liberable : on est sur sa page d'edition
-	if (_request('exec') == 'article_edit'
-	AND $arg == _request('id_article'))
-		return '';
-
-	$lien = parametre_url(self(), 'debloquer_article', '', '&');
-	return "<a href='" .
-	  generer_action_auteur('instituer_collaboration', $arg, $lien) .
-	  "' title=\"" .
-	  attribut_html($texte) .
-	  "\">"
-	  . ($arg == 'tous' ? "$texte&nbsp;" : '')
-	  . http_img_pack(chemin_image('supprimer-8.png'), ($arg=='tous' ? "" : "X"),
-			"") .
-	  "</a>";
 }
 
 // http://doc.spip.org/@formulaire_recherche
