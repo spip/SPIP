@@ -42,8 +42,8 @@ function exec_recherche_dist()
 
 	if (strlen($recherche) > 0) {
 
-	echo "<font face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b><br />";
-	echo "<font size='5' color='$couleur_foncee'><b>$recherche_aff</b></font><p>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_resultat_recherche')."</b></font><br />";
+	echo "<font size='5' face='Verdana,Arial,Sans,sans-serif' color='$couleur_foncee'><b>$recherche_aff</b></font>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';
@@ -159,7 +159,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td width='100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
+			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>";
 			echo "<b>$titre_table</b></font></td></tr>";
 		}
 	else {
