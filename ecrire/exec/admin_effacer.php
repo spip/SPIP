@@ -57,6 +57,10 @@ function exec_admin_effacer_dist()
 
 	debut_cadre_relief();
 
+	$res .= "\n<input type='hidden' name='reinstall' value='non' />";
+
+	$res = generer_post_ecrire('delete_all', $res, '', _T('bouton_effacer_tout'));
+
 	echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
 		"<tr><td style='font-weight: bold; color: #FFFFFF;' class='toile_foncee verdana1 spip_medium'>",
 		_T('texte_effacer_base'),
@@ -70,11 +74,7 @@ function exec_admin_effacer_dist()
 		debut_boite_alerte(),
 		"\n<div class='serif'>",
 		"\n<b>"._T('avis_suppression_base')."&nbsp;!</b>",
-		 generer_url_post_ecrire("delete_all", "reinstall=non"),
-		"\n<div style='text-align: right'>",
-		"<input class='fondo' type='submit' value='",
-		_T('bouton_effacer_tout'),
-		"' /></div></form>",
+		$res,
 		"\n</div>",
 		fin_boite_alerte(),
 		"</div>",
