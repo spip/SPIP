@@ -282,7 +282,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					if ($match[4] == '!')
 						$boucle->where[] = "NOT ($ou_rien$col $op'$val')";
 					else
-						$boucle->where[] = "$ou_rien$col $op'$val'";
+						$boucle->where[] = "($ou_rien$col $op'$val')";
 				}
 			} // fin du if sur les restrictions de valeurs
 
