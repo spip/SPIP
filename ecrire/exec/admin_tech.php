@@ -84,11 +84,12 @@ function exec_admin_tech_dist()
 
 	$form = $chercher_rubrique(0, 'rubrique', !$GLOBALS['connect_toutes_rubriques'], 0, 'admin_tech');
 
-	$res .= "\n<label for='id_parent'>" .
-		  _T('texte_admin_tech_04') .
-		  "</label><br /><br />" .
-		  $form . '<br />';
-
+	if ($form) {
+		$res .= "\n<label for='id_parent'>" .
+			  _T('texte_admin_tech_04') .
+			  "</label><br /><br />" .
+			  $form . '<br />';
+	}
 	$file = nom_fichier_dump();
 	$nom = "\n<input name='nom_sauvegarde' id='nom_sauvegarde' size='40' value='$file' />";
 	$znom = "\n<input name='znom_sauvegarde' id='znom_sauvegarde' size='40' value='$file' />";
@@ -174,16 +175,16 @@ function admin_sauvegardes($dir_dump, $tri)
 	$self = self();
 	$class = 'row_'.alterner($i+1, 'even', 'odd');
 	$head = !$tl ? '' : (
-		"<tr>"
+		"\n<tr>"
 		. '<th></th><th><a href="'
 		. parametre_url($self, 'tri', 'nom')
 		. '#sauvegardes">'
 		. _T('info_nom')
-	  	. '</a></th><th><a href="'
+	  	. "</a></th>\n" . '<th><a href="'
 		. parametre_url($self, 'tri', 'taille')
 		. '#sauvegardes">'
 		. _T('taille_octets', array('taille' => ''))
-	 	. '</th><th><a href="'
+	 	. "</a></th>\n" . '<th><a href="'
 		. parametre_url($self, 'tri', 'date')
 		. '#sauvegardes">'
 		. _T('public:date')
@@ -198,7 +199,7 @@ function admin_sauvegardes($dir_dump, $tri)
 		.  '</p>'
 		. _T('entree_nom_fichier', array('texte_compresse' => $texte))
 
-		. "<br /><br /><table class='spip' id='sauvegardes'>"
+		. "\n<br /><br /><table class='spip' id='sauvegardes'>"
 		. $head
 		.  join('',$tl)
 		. "\n<tr class='$class'><td><input type='radio' name='archive' id='archive' value='' /></td><td  colspan='3'>"
