@@ -106,7 +106,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 		. $res;
 	}
 
-	$bouton = (!$flag ? $titre_boite : bouton_block_depliable($titre_boite,$flag === 'ajax',"auteurs$type"));
+	$bouton = bouton_block_depliable($titre_boite,$flag ?($flag === 'ajax'):-1,"auteurs$type");
 	$res = debut_cadre_enfonce("auteur-24.gif", true, "", $bouton)
 	. $reponse
 	. debut_block_depliable($flag === 'ajax',"auteurs$type")

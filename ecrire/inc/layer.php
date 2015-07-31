@@ -24,12 +24,6 @@ $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'a
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false){
 	if (!$GLOBALS['browser_layer']) return '';
 
-	$bouton = bouton_block_depliable($invite,$visible,$nom);
-	// initialement invisible, seulement si on sait rendre visible
-	if (!$visible AND _SPIP_AJAX)
-		$visible = 'display:none;';
-	else 	$visible = 'display:block;';
-
 	return "\n"
 	. bouton_block_depliable($invite,$visible,$nom)
 	. debut_block_depliable($visible,$nom)
@@ -49,11 +43,12 @@ function fin_block() {
 	return "<br class='nettoyeur' /></div>";
 }
 // $texte : texte du bouton
-// $deplie : true ou false
+// $deplie : true (deplie) ou false (plie) ou -1 (inactif)
 // $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
 function bouton_block_depliable($texte,$deplie,$ids=""){
+	if (!_SPIP_AJAX) $deplie=true; // forcer un bouton deplie si pas de js
 	$bouton_id = substr(md5($texte.microtime()),8);
-	$class= $deplie?" deplie":"";
+	$class= ($deplie==true)?" deplie":(($deplie==-1)?" impliable":" replie");
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
 		$cible = 'div#'.implode(",div#",$cible);
@@ -64,10 +59,11 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	}
 	return "<div "
 	  .($bouton_id?"id='$bouton_id' ":"")
-	  ."class='bouton_depliable$class'"
-	  ." onclick=\"jQuery('$cible').toggleClass('deplie');jQuery(this).toggleClass('deplie');\""
+	  ."class='titrem$class'"
+	  . (($deplie==-1)?"":
+	  " onclick=\"toggleBouton(jQuery(this),jQuery('$cible'));\""
 	  ." onmouseover=\"jQuery(this).addClass('hover');\""
-	  ." onmouseout=\"jQuery(this).removeClass('hover');\""
+	  ." onmouseout=\"jQuery(this).removeClass('hover');\"")
 	  .">$texte</div>";
 }
 

@@ -1000,19 +1000,26 @@ td.icone a img {
 /*
 * Cadre couleur foncee
 */
-
+/*
 .cadre-padding {
 	font-family: verdana, arial, helvetica, sans;
 	font-size: 12px;
 	padding: 6px;
 	position: relative;
-}
-
+}*/
+/*
 .cadre-titre {
 	font-family: verdana, arial, helvetica, sans;
 	font-weight: bold;
 	font-size: 12px;
 	padding: 3px;
+}*/
+
+.cadre { 
+	margin-bottom:5px;
+	font-family: verdana, arial, helvetica, sans;
+	font-size: 12px;
+	position:relative;
 }
 
 .cadre-fonce {
@@ -1044,8 +1051,6 @@ td.icone a img {
 	color: #fff;	
 }
 
-
-
 .cadre-trait-couleur {
 	background-color: #fff;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
@@ -1061,7 +1066,6 @@ td.icone a img {
 	border: 1px solid #666;
 }
 
-
 .cadre-r div.cadre-titre {
 	background-color: #aaa;
 	border-bottom: 1px solid #666;
@@ -1074,6 +1078,7 @@ td.icone a img {
 	border-left: 1px solid #aaa;
 	border-bottom: 1px solid #fff;
 	border-right: 1px solid #fff;
+	border: 1px solid #666;
 }
 
 .cadre-e div.cadre-titre {
@@ -1082,13 +1087,10 @@ td.icone a img {
 	color: #000;	
 }
 
-.cadre-e-noir {
-	border: 1px solid #666;
-}
-
 .cadre-forum {
 	background-color: #fff;
 	border: 1px solid #aaa;
+	margin-bottom:0;
 }
 .cadre-forum div.cadre-titre {
 	background-color: ##ENV{couleur_claire,edf3fe};
@@ -1106,6 +1108,7 @@ td.icone a img {
 	background-color: #eee;
 	border: 1px solid #ccc;
 	border-top: 0;
+	margin-bottom:0;
 }
 .cadre-thread-forum div.cadre-titre {
 	background-color: #CCC;
@@ -1680,11 +1683,15 @@ a.ical {
 	width: 10px;
 }
 
-.bouton_depliable { display: block;
-background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); background-repeat: no-repeat;
-background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] top; padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px; }
-.bouton_depliable.hover { background-color: #eee; }
-.bouton_depliable.deplie { display: block; background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.titrem { 
+	display: block;
+	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] top; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px; 
+	background-repeat: no-repeat;
+	}
+.titrem.replie {background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif);}
+.titrem.hover { background-color: #eee; }
+.titrem.deplie { display: block; background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
 .bloc_depliable { display: none; }
 .bloc_depliable.deplie { display: block; }
 

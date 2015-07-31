@@ -44,6 +44,18 @@ function hide_obj(obj) {
 	}
 }
 
+function toggleBouton(bouton,cible){
+	//alert(jQuery(bouton));
+	if (jQuery(bouton).is('.deplie')){
+		jQuery(bouton).addClass('replie').removeClass('deplie');
+		jQuery(cible).addClass('replie').removeClass('deplie');
+	}
+	else if (jQuery(bouton).is('.replie')){
+		jQuery(bouton).addClass('deplie').removeClass('replie');
+		jQuery(cible).addClass('deplie').removeClass('replie');
+	}
+}
+
 function swap_couche(couche, rtl, dir, no_swap) {
 	var layer;
 	var triangle = document.getElementById('triangle' + couche);

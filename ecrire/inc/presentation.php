@@ -43,7 +43,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	$style_cadre = " style='";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = "padding-$spip_lang_left: 38px;";
-		$style_cadre .= "margin-top: 14px;'";
+		$style_cadre .= "margin-top: 20px;'";
 	} else {
 		$style_cadre .= "'"; 
 		$style_gauche = '';
@@ -56,14 +56,9 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		$ret = "<a id='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 	} else $ret ='';
 
-	if ($style == "e") {
-		$ret .= "\n<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
-	}
-	else {
-		$ret .= "\n<div class='cadre-$style'$style_cadre>";
-	}
+	$ret .= "\n<div class='cadre cadre-$style'$style_cadre>";
 
-	$ret .= "\n<div style='position: relative;'>";
+	//$ret .= "\n<div style='position: relative;'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$ret .= "\n<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
@@ -79,23 +74,28 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 
 	if (strlen($titre) > 0) {
-		if ($spip_display == 4) {
+		if (strpos($titre,'titrem')!==false) {
+			$ret .= $titre;
+		} elseif ($spip_display == 4) {
 			$ret .= "\n<h3 class='cadre-titre'>$titre</h3>";
 		} else {
-			$ret .= "\n<div class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</div>";
+			$ret .= bouton_block_depliable($titre,-1);
 		}
 	}
 	
-	return $ret . "</div>\n<div class='cadre-padding' style='overflow:hidden'>";
+	return $ret
+	 //. "</div>\n"
+	."<div class='cadre-padding' style='overflow:hidden'>"
+	;
 }
 
 // http://doc.spip.org/@fin_cadre
 function fin_cadre($style='') {
 
-	$ret = ($style == "e") ? "</div></div></div>\n" : "</div></div>\n";
+	$ret = "</div></div>\n";
 
-	if ($style != "forum" AND $style != "thread-forum")
-		$ret .= "<div style='height: 5px;'></div>\n";
+	/*if ($style != "forum" AND $style != "thread-forum")
+		$ret .= "<div style='height: 5px;'></div>\n";*/
 
 	return $ret;
 }
@@ -1685,7 +1685,7 @@ function enfant_rub($collection){
 			$les_enfants = "\n<div class='enfants'>" .
 			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
 			  (is_string($logo) ? $logo : '') .
-			  (!$les_sous_enfants ? $lib_bouton : bouton_block_depliable($lib_bouton,false,"enfants$id_rubrique")) .
+			  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique") .
 			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
 			  (($spip_display == 4) ? '' : $les_sous_enfants) .
 			  "\n<div style='clear:both;'></div>"  .
