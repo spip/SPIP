@@ -456,6 +456,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 
 // Fonction pour l'espace de redaction, appeler par ecrire/index.php
 
+// http://doc.spip.org/@debug_script
 function debug_script ($fonc) {
 
 	$sax = charger_fonction($GLOBALS['xml_indent'], 'inc');
@@ -471,6 +472,7 @@ function debug_script ($fonc) {
 	}
 }
 
+// http://doc.spip.org/@debug_debut
 function debug_debut($titre)
 {
 	global $auteur_session;
@@ -491,6 +493,7 @@ function debug_debut($titre)
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 }
 
+// http://doc.spip.org/@debug_fin
 function debug_fin()
 {
 	global $debug_objets;
