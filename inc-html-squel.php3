@@ -275,7 +275,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		$s = "<B$id_boucle>";
 		$p = strpos($debut, $s);
-		if ($p || (substr($debut, 0, strlen($s)) == $s)) {
+		if ($p !== false) {
 			$result->cond_avant = substr($debut, $p + strlen($s));
 			$debut = substr($debut, 0, $p);
 		}
@@ -292,7 +292,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		$s = "</BOUCLE$id_boucle>";
 		$p = strpos($milieu, $s);
-		if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) {
+		if ($p === false) {
 			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
 					 _T('erreur_boucle_fermant',
@@ -306,7 +306,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		$s = "</B$id_boucle>";
 		$p = strpos($texte, $s);
-		if ($p || (substr($texte, 0, strlen($s)) == $s)) {
+		if ($p !== false) {
 			$result->cond_fin = substr($texte, 0, $p);
 			$texte = substr($texte, $p + strlen($s));
 		}
@@ -314,9 +314,9 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		// 2. Recuperer la partie alternative
 		//
-		$s = "<//B$id_boucle>";
+		echo $s = "<//B$id_boucle>";
 		$p = strpos($texte, $s);
-		if ($p || (substr($texte, 0, strlen($s)) == $s)) {
+		if ($p !== false) {
 			$result->cond_altern = substr($texte, 0, $p);
 			$texte = substr($texte, $p + strlen($s));
 		}
