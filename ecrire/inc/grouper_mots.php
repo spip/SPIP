@@ -36,7 +36,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	$deb_aff = _request($tmp_var);
 	$deb_aff = ($deb_aff !== NULL ? intval($deb_aff) : 0);
-	$select = 'id_mot, id_groupe, titre, '
+	$select = 'id_mot, id_groupe, titre, descriptif,'
 	. creer_objet_multi ("titre", $spip_lang);
 
 	$result = spip_query($q="SELECT $select FROM spip_mots WHERE id_groupe=$id_groupe ORDER BY multi" . (($deb_aff < 0) ? '' : " LIMIT $deb_aff, $nb_aff"));
@@ -72,14 +72,15 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 
 	$id_mot = $row['id_mot'];
 	$id_groupe = $row['id_groupe'];
-	$titre_mot = typo($row['titre']);
+	$titre = typo($row['titre']);
+	$descriptif = entites_html($row['descriptif']);
 			
-	if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
-		$titre_mot = "<a href='" .
-		  generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe") .
-		  "' class='liste-mot'>$titre_mot</a>";
-
-	$vals = array($titre_mot);
+	if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0) {
+		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe");
+		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
+		$titre = "<a href='$h' class='liste-mot'$descriptif>$titre</a>";
+	}
+	$vals = array($titre);
 
 	$texte_lie = array();
 
