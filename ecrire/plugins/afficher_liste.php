@@ -44,9 +44,8 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 		$block .= $ligne_plug($url_page, $plug, $actif, $expose, "item", $dir_plugins)."\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
-	return "<ul class='liste-items plugins'>"
-	. $res
-	. "</ul>";
+
+	return $res ? "<ul class='liste-items plugins'>$res</ul>" : "";
 }
 
 

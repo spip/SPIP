@@ -136,7 +136,6 @@ ecrire/exec/breves_edit.php -text
 ecrire/exec/breves_voir.php -text
 ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
-ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
 ecrire/exec/config_lang.php -text
@@ -170,6 +169,7 @@ ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
 ecrire/exec/index.php -text
 ecrire/exec/info_plugin.php -text
+ecrire/exec/info_plugin_distant.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/informer_auteur.php -text
 ecrire/exec/install.php -text
@@ -407,6 +407,7 @@ ecrire/maj/vieille_base/charger.php -text
 ecrire/maj/vieille_base/create.php -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_plugin.php -text
+ecrire/plugins/afficher_plugin_distant.php -text
 ecrire/plugins/afficher_repertoires.php -text
 ecrire/plugins/extraire_boutons.php -text
 ecrire/plugins/extraire_pipelines.php -text

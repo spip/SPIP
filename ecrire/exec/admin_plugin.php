@@ -84,69 +84,53 @@ function exec_admin_plugin_dist($retour='') {
 		$quoi = _request('voir');
 		$quoi = $quoi ? $quoi : 'actifs';
 
+		$no_button = false;
 		$corps .= "<div class='liens'>"
-		 . lien_ou_expose(parametre_url(self(),'voir','actifs'), _T('plugins_actifs',array('count'=>count($lcpa))), $quoi=='actifs')
+		 . lien_ou_expose(parametre_url(self(),'voir','actifs'), sinon(singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'),_T('plugins_actif_aucun')), $quoi=='actifs')
 		 . ' | '
 		 . lien_ou_expose(parametre_url(self(),'voir','recents'), _T('plugins_recents'), $quoi=='recents')
 		 . ' | '
-		 . lien_ou_expose(parametre_url(self(),'voir','tous'), _T('plugins_disponibles',array('count'=>count($lpf))), $quoi=='tous')
+		 . lien_ou_expose(parametre_url(self(),'voir','tous'), singulier_ou_pluriel(count($lpf),'plugins_disponible_un','plugins_disponibles','count'), $quoi=='tous')
 		 . "</div>";
 
-		// les liens de navigation (actifs, frequents, tous)
-		/*	$lien_format = $format!='liste' ?
-			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
-			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
-			$corps = "<p>$lien_format | "._T('plugins_actifs',array('count'=>count($lcpa)))."\n"
-			  . " | <a href='". parametre_url(self(),'afficher_tous_plugins', 'oui') ."'>"
-			  ._T('plugins_disponibles',array('count'=>count($lpf)))."</a></p>\n"
-		 *
-		else {
-			if (count($lpf)<10 AND !$format) $format = 'liste';
-			$lien_format = $format!='liste' ?
-			  ("<a href='".parametre_url(self(),'format','liste')."'>"._T('plugins_vue_liste')."</a>")
-			  :("<a href='".parametre_url(self(),'format','arbre')."'>"._T('plugins_vue_hierarchie')."</a>");
-			$corps =
-				"<p>$lien_format | "
-			  ."<a href='". parametre_url(self(),'afficher_tous_plugins', '') ."'>" . _T('plugins_actifs',array('count'=>count($lcpa)))."</a> | \n"
-				. ""._T('plugins_disponibles',array('count'=>count($lpf)))
-				. "</p>\n"
-				. (count($lpf)>20 ? $sub : '')
-				. affiche_les_plugins($lpf, $lcpa, $format);
+		if ($quoi!='distants'){
+			// la liste
+			if ($quoi=='actifs')
+				$corps .= sinon(affiche_les_plugins($lcpa, $lcpa, $format),$no_button = "<h3>"._T('plugins_actif_aucun')."</h3>");
+			elseif ($quoi=='tous')
+				$corps .= affiche_les_plugins($lpf, $lcpa, $format);
+			else {
+				$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
+				$lcpaffiche = array();
+				foreach ($lpf as $f)
+					if (!strpos($f, '/')
+					OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
+					OR in_array($f, $lcpa)
+					OR in_array($f, $plugins_interessants))
+						$lcpaffiche[] = $f;
+
+				$corps .= affiche_les_plugins($lcpaffiche, $lcpa, $format);
+
+			}
+
+			if (!$no_button)
+				$corps .= "\n<br />" . $sub;
+
+			echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
+
+			echo fin_cadre_trait_couleur(true);
+			echo affiche_les_extensions($liste_plugins_actifs);
 		}
-		 */
-
-		// la liste
-		if ($quoi=='actifs')
-			$corps .= affiche_les_plugins($lcpa, $lcpa, $format);
-		elseif ($quoi=='tous')
-			$corps .= affiche_les_plugins($lpf, $lcpa, $format);
 		else {
-			$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
-			$lcpaffiche = array();
-			foreach ($lpf as $f)
-				if (!strpos($f, '/')
-				OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
-				OR in_array($f, $lcpa)
-				OR in_array($f, $plugins_interessants))
-					$lcpaffiche[] = $f;
-
-			$corps .= affiche_les_plugins($lcpaffiche, $lcpa, $format);
-
+			include_spip('inc/charger_plugin');
+			echo formulaire_charger_plugin($retour);
+			echo fin_cadre_trait_couleur(true);
 		}
+		echo lien_ou_expose(parametre_url(self(),'voir','distants'), _T('plugin_titre_automatique_ajouter'), $quoi=='distants')
 
-		$corps .= "\n<br />" . $sub;
-
-		echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
-
-		echo fin_cadre_trait_couleur(true);
 
 	}
 
-	if (include_spip('inc/charger_plugin')) {
-		echo formulaire_charger_plugin($retour);
-	}
-
-	echo affiche_les_extensions($liste_plugins_actifs);
 
 	echo fin_gauche(), fin_page();
 	}
@@ -179,6 +163,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='lis
 	$afficher = charger_fonction("afficher_$format",'plugins');
 	$res = $afficher(self(), $liste_plugins,$liste_plugins_actifs);
 
+	if (!$res) return "";
 #	var_dump(spip_timer('cachexml'));
 
 

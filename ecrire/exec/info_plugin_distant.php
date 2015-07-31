@@ -12,18 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/plugin');
+
 include_spip('inc/actions');
 // http://doc.spip.org/@exec_info_plugin_dist
-function exec_info_plugin_dist() {
+function exec_info_plugin_distant_dist() {
 	if (!autoriser('configurer', 'plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 		$plug = _request('plugin');
-		$get_infos = charger_fonction('get_infos','plugins');
-		$info = $get_infos($plug);
-		$afficher_plugin = charger_fonction("afficher_plugin","plugins");
-		ajax_retour(affiche_bloc_plugin($plug, $info));
+		include_spip('inc/charger_plugin');
+		include_spip('inc/texte');
+		$liste = liste_plugins_distants($plug);
+		$item = $liste[$plug][2];
+		$afficher_plugin_distant = charger_fonction("afficher_plugin_distant","plugins");
+		ajax_retour(affiche_bloc_plugin_distant($plug, $liste[$plug][2]));
 	}
 }
 
