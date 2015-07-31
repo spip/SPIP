@@ -92,8 +92,7 @@ function controle_petition_page($id_article, $type,  $corps, $count)
 				$h = redirige_action_auteur('editer_signatures', $id_article . 'A', 'controle_petition', "id_article=$id_article&type=interne");
 				$rac .= icone_horizontale(_T('icone_relancer_signataire') . " ($count)", $h, "envoi-message-24.gif","rien.gif", false);
 			}
-			$rac = "<br /><br /><br /><br /><br />" . bloc_des_raccourcis($rac);
-
+			$rac = bloc_des_raccourcis($rac);
 			$titre = "<a href='" .
 			generer_url_entite($id_article,'article') .
 			"'>" .
@@ -108,7 +107,31 @@ function controle_petition_page($id_article, $type,  $corps, $count)
 				$titre .= '<br >' . _T('info_petition_close');
 
 			$args = array('id_article' => $id_article);
+		} else {
+
+		  $q = sql_select('A.titre, A.date, A.id_article, count(*) AS n', 
+			     'spip_signatures AS S LEFT JOIN spip_articles AS A ON A.id_article=S.id_article',
+			     '',
+			     'A.id_article',
+				  'n desc',
+				  "0,10");
+		  while ($r = sql_fetch($q)) {
+		    $id = $r['id_article'];
+		    $h = generer_url_entite($id, 'article');
+		    $title = affdate_jourcourt($r['date']) . "\n" .$r['titre'];
+		    $rac .= "<li><a href='$h' title=\"" .  attribut_html($title).  '">' . _T('info_numero_abbreviation') . " $id" . '</a>&nbsp;: '. $r['n'] . ' ' . _T('signatures') . "</li>";
+		  }
+		  $rac = "<ul>$rac</ul>";
+		  $rac = debut_cadre_enfonce('',true)
+		    . "\n<div style='font-size: x-small' class='verdana1'><b>"
+		    ._T('public:articles_populaires')
+		    ."</b>"
+		    . $rac
+		    . "</div>"
+		    . fin_cadre_enfonce(true);
+
 		}
+		$rac = "<br /><br /><br /><br /><br />" . $rac;
 	}
 	$head = _T('titre_page_controle_petition');
 	$idom = "editer_signature-" . $id_article;
