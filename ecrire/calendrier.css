@@ -1,0 +1,34 @@
+/*
+ * Styles du calendrier
+ */
+ 
+div.navigation-calendrier {
+	color: white;
+	font-family: verdana, arial, sans,sans-serif;
+	font-size: 14px;
+	padding: 2px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+}
+
+div.navigation-calendrier img {
+	border: 0px;
+	vertical-align: middle;
+	margin: 1px;
+}
+
+a.calendrier-annee {
+	background-color: #aaaaaa;
+	padding: 3px;
+	margin: 1px;
+	font-family: verdana, arial, sans,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: white;
+	-moz-border-radius: 5px;
+}
+a.calendrier-annee:hover {
+	color: black;
+	background-color: white;
+}
+
