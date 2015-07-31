@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
-
 define('_ESPACE_PRIVE', true);
+if (!defined('_ECRIRE_INC_VERSION')) include 'inc_version.php';
 
 // Verification anti magic_quotes_sybase, pour qui addslashes("'") = "''"
 // On prefere la faire ici plutot que dans inc_version, c'est moins souvent et
