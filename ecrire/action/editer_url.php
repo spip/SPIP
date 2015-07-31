@@ -83,7 +83,7 @@ function url_insert(&$set,$confirmer,$separateur){
 	// Si l'insertion echoue, c'est une violation d'unicite.
 	if (@sql_insertq('spip_urls', $set) <= 0) {
 		// On veut chiper une ancienne adresse ?
-		if ((!is_dir($set['url']) AND !file_exists($set['url'])) AND
+		if (
 		// un vieux url
 		$vieux = sql_fetsel('*', 'spip_urls', 'url='.sql_quote($set['url']))
 		// l'objet a une url plus recente
@@ -113,7 +113,7 @@ function url_insert(&$set,$confirmer,$separateur){
 		// pour ce cas, on reecrit systematiquement l'url en plus d'actualiser la date
 		do {
 			$where = "type=".sql_quote($set['type'])." AND id_objet=".intval($set['id_objet'])." AND url=";
-			if (!is_dir($set['url']) && !file_exists($set['url']) && sql_countsel('spip_urls', $where  .sql_quote($set['url']))) {
+			if (sql_countsel('spip_urls', $where  .sql_quote($set['url']))) {
 				sql_updateq('spip_urls', array('url'=>$set['url'], 'date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
 				spip_log("reordonne ".$set['type']." ".$set['id_objet']);
 				return true;
