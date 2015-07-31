@@ -510,13 +510,15 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 function changer_statut_articles($id_article, $statut)
 {
 	$id_article = intval($id_article);
-	$result = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
+	$result = spip_query("SELECT statut,id_rubrique FROM spip_articles WHERE id_article=$id_article");
 
 	if ($row = spip_fetch_array($result)) {
-			$statut_ancien = $row['statut'];
+		$id_rubrique= $row['id_rubrique'];
+		$statut_ancien = $row['statut'];
 		}
 
-	if ($statut != $statut_ancien) {
+	if (($statut != $statut_ancien) AND 
+	    ($connect_toutes_rubriques OR acces_rubrique($id_rubrique))) {
 		spip_query("UPDATE spip_articles SET statut='$statut', date=NOW() WHERE id_article=$id_article");			
 		include_ecrire("inc_rubriques");
 		include_ecrire('inc_texte');
