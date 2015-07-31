@@ -1625,6 +1625,10 @@ function debut_gauche($rubrique = "asuivre") {
 	// Ecran panoramique ?
 	if ($spip_ecran == "large") {
 		$largeur_ecran = 974;
+			$flag_3_colonnes = true;
+			$rspan = " rowspan=2";
+		
+		/*
 		// Si edition de texte, formulaires larges
 		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $REQUEST_URI)) {
 			$largeur = 250;
@@ -1634,6 +1638,7 @@ function debut_gauche($rubrique = "asuivre") {
 			$flag_3_colonnes = true;
 			$rspan = " rowspan=2";
 		}
+		*/
 	}
 	else {
 		$largeur_ecran = 750;

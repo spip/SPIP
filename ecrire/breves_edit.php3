@@ -146,8 +146,11 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	fin_cadre_relief();
 	
+	if ($spip_ecran == "large") $rows = 30;
+	else $rows = 15;
+	
 	echo "<B>Texte de la br&egrave;ve</B><BR>";
-	echo "<TEXTAREA NAME='texte' ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
+	echo "<TEXTAREA NAME='texte' ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
