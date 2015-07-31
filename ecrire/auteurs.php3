@@ -107,10 +107,11 @@ if ($type_requete == 'auteur') {
 		$auteurs[$row['id_auteur']]['compteur'] = $row['compteur'];
 
 	// si on n'est pas minirezo, supprimer les auteurs sans article publie
+	// sauf les admins, toujours visibles.
 	if ($connect_statut != '0minirezo') {
 		reset($auteurs);
 		while (list(,$auteur) = each ($auteurs)) {
-			if (! $auteur['compteur']) {
+			if (! $auteur['compteur'] AND ($auteur['statut'] != '0minirezo')) {
 				unset($auteurs[$auteur['id_auteur']]);
 				$nombre_auteurs --;
 			}
@@ -131,16 +132,21 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 	}
 
-	// si on est minirezo, ajouter les auteurs sans articles
-	if ($connect_statut == '0minirezo') {
-		$result_auteurs = spip_query("SELECT auteurs.*, UPPER(nom) AS unom, 0 as compteur
-			FROM spip_auteurs AS auteurs
-			WHERE id_auteur NOT IN (0$vus) $sql_statut_auteurs
-			$sql_order");
-		while ($row = mysql_fetch_array($result_auteurs)) {
-			$auteurs[$row['id_auteur']] = $row;
-			$nombre_auteurs ++;
-		}
+	// si on est minirezo, ajouter tous les auteurs sans articles
+	// sinon ajouter seulement les admins sans articles
+	if ($connect_statut == '0minirezo')
+		$sql_statut_auteurs_ajout = $sql_statut_auteurs;
+	else
+		$sql_statut_auteurs_ajout = " AND FIND_IN_SET(auteurs.statut,'0minirezo')";
+
+	$result_auteurs = spip_query("SELECT auteurs.*, UPPER(nom) AS unom, 0 as compteur
+		FROM spip_auteurs AS auteurs
+		WHERE id_auteur NOT IN (0$vus)
+		$sql_statut_auteurs_ajout
+		$sql_order");
+	while ($row = mysql_fetch_array($result_auteurs)) {
+		$auteurs[$row['id_auteur']] = $row;
+		$nombre_auteurs ++;
 	}
 }
 
