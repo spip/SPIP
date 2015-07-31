@@ -472,21 +472,21 @@ function gadget_messagerie() {
 function repercuter_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] == -1) return '';
 
-	$rub = $id_rubrique ? "&amp;id_rubrique=$id_rubrique" : '';
+	$rub = $id_rubrique ? "&id_rubrique=$id_rubrique" : '';
 
 	return
 	 "
 	$('#gadget-rubriques')
-	.load('./?exec=gadgets&amp;gadget=rubriques');" #pas de $rub
+	.load('./?exec=gadgets&gadget=rubriques');" #pas de $rub
 	."
 	$('#gadget-navigation')
-	.load('./?exec=gadgets&amp;gadget=navigation$rub');"
+	.load('./?exec=gadgets&gadget=navigation$rub');"
 	."
 	$('#gadget-agenda')
-	.load('./?exec=gadgets&amp;gadget=agenda$rub');"
+	.load('./?exec=gadgets&gadget=agenda$rub');"
 	."
 	$('#gadget-messagerie')
-	.load('./?exec=gadgets&amp;gadget=messagerie$rub');";
+	.load('./?exec=gadgets&gadget=messagerie$rub');";
 }
 
 ?>
