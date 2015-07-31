@@ -155,7 +155,8 @@ function validerElement($parser, $name, $attrs)
 	            .  $pere
 	            . '</b>'
 	            . (!$bons_peres ? ''
-	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'));
+	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
+		    .  coordonnees_erreur($parser);
 		    }
 	    }
 	  }
