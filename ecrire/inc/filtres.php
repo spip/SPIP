@@ -2131,4 +2131,27 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
 	return $texte;
 }
 
+// renvoie la liste des plugins actifs du site
+// si le premier parametre est un prefix de cette liste, renvoie vrai, faux sinon
+// la valeur du second parametre si celui-ci renvoie a une information connue
+// cf liste_plugin_actifs() pour connaitre les informations affichables
+// appelee par la balise #PLUGIN
+function calcul_info_plugin($plugin, $type_info) {
+	//surcharge possible pour afficher des donnees plus complexes
+	if(function_exists('info_plugin')
+		return info_plugin($plugin, $type_info);
+
+	include_spip('inc/plugin');
+	$plugin = strtoupper($plugin);
+	$plugins_actifs = liste_plugin_actifs();
+
+	if(!$plugin)
+		return serialize(array_keys($plugins_actifs));
+	if(!empty($plugins_actifs[$plugin]))
+		if($type_info == 'est_actif')
+			return $plugins_actifs[$plugin] ? 1 : 0;
+		else
+			return $plugins_actifs[$plugin][$type_info];
+}
+
 ?>
