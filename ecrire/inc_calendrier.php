@@ -1366,7 +1366,7 @@ ORDER BY date_heure
 		  }
 		else {
 		    $script = 'articles_forum';
-		    $id = $row['id_forum'];
+		    $id = $row['id_article'];
 		}
 		$evenements[$amj][]=
 		array(
