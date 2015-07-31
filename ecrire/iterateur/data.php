@@ -176,6 +176,8 @@ class IterateurDATA implements Iterator {
 				if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
 					if ($r[1] == 'valeur')
 						$tv = '%s';
+					else if ($r[1] == 'alea') # {par hasard}
+						$tv = 'rand(0,1)';
 					else
 						$tv = 'table_valeur(%s, '.var_export($r[1],true).')';
 					$sortfunc .= '
@@ -195,8 +197,8 @@ class IterateurDATA implements Iterator {
 		}
 
 		// grouper les resultats {fusion /x/y/z} ;
-		if (isset($this->command['groupby'])) {
-			$fusion = $this->command['groupby'][0][1];
+		if ($this->command['groupby']
+		AND strlen($fusion = $this->command['groupby'][0][1])) {
 			$vu = array();
 			foreach($this->tableau as $k => $v) {
 				$val = table_valeur($v, $fusion);
