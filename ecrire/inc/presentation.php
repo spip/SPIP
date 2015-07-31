@@ -499,10 +499,6 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. url_absolue($favicon)
 	. "\" type='image/x-icon' />\n";
 	
-	$res .= "<!--[if lt IE 8]>
-		<script src='http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE8.js' type='text/javascript'></script>
-		<![endif]-->";
-
 	$js = debut_javascript();
 
 	if ($spip_display == 4) return $res . $js;
