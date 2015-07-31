@@ -142,59 +142,6 @@ if ($spip_display != 4) {
 //
 
 
-//
-// Afficher les boutons de creation d'article et de breve
-//
-
-/*
-debut_raccourcis();
-
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = spip_query($query);
-
-if (spip_num_rows($result) > 0) {
-	icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
-
-	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non") {
-		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
-	}
-}
-else {
-	if ($connect_statut == '0minirezo') {
-		echo "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
-	}
-}
-if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
-}
-
-
-// La nouvelle interface rend ces raccourcis inutiles
-if ($options == "avancees") {
-	echo "<p>";
-	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
-
-	if ($connect_statut == "0minirezo") {
-		if (lire_meta('forum_prive_admin') == 'oui') {
-			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
-		}
-			echo "<p>";
-		if (lire_meta("activer_statistiques") == 'oui')
-			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
-		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
-		if ($connect_toutes_rubriques)
-			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
-	}
-}
-else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	echo "<p>";
-	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
-}
-
-
-fin_raccourcis();
-*/
 	creer_colonne_droite();
 	echo "<div>&nbsp;</div>";	
 
@@ -362,7 +309,7 @@ if ($spip_display == 4) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
 			}
-			$gadget = "<table width='95%'><tr>";
+			$gadget = "<center><table><tr>";
 			if ($connect_statut == "0minirezo") {
 				$gadget .= "<td>";
 				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
@@ -390,10 +337,52 @@ if ($spip_display == 4) {
 			
 		}
 
-		$gadget .= "</tr></table>";
+		$gadget .= "</tr></table></center>\n";
 
 	echo $gadget;
+
+
+
+	if ($connect_statut != "0minirezo") {
+	
+		$gadget = "<center><table><tr>";
+	
+		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 0,1"));
+		if ($nombre_articles > 0) {
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "", false);
+			$gadget .= "</td>";
+		}
+	
+		$activer_breves=lire_meta("activer_breves");
+		if ($activer_breves != "non"){
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale (_T('icone_breves'), "breves.php3", "breve-24.gif", "", false);
+			$gadget .= "</td>";
+		}
+	
+		$articles_mots = lire_meta('articles_mots');
+		if ($articles_mots != "non") {
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale  (_T('icone_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "", false);
+			$gadget .= "</td>";
+		}
+
+		$activer_sites = lire_meta('activer_sites');
+		if ($activer_sites<>'non') {
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale  (_T('icone_sites_references'), "sites_tous.php3", "site-24.gif", "", false);
+			$gadget .= "</td>";
+		}
+		$gadget .= "</tr></table></center>\n";
+		
+		echo $gadget;
+	}
+
 }
+
+
+
 
 //
 // Modification du cookie
