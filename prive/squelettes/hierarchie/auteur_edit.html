@@ -1,6 +1,1 @@
-<div id="chemin"><a href="#URL_ECRIRE{auteurs}"><:info_auteurs:></a>
-<BOUCLE_ariane(AUTEURS){id_auteur}{tout}> &gt;
-[(#ID_AUTEUR|generer_url_entite{auteur}|lien_ou_expose{[(#NOM|couper{80}|sinon{<:ecrire:info_sans_titre:>})],1})]
-</BOUCLE_ariane>
-&gt; <strong><:ecrire:item_nouvel_auteur:></strong>
-<//B_ariane>
+<INCLURE{fond=prive/squelettes/hierarchie/auteur,env}>

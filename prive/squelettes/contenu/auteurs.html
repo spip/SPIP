@@ -1,12 +1,12 @@
 <h1><:info_auteurs:></h1>
 
-#SET{statuts,#REM|auteurs_lister_statuts}
+#SET{statuts,#VAL{redacteurs}|auteurs_lister_statuts}
 <B_st>
 <div class="onglets_simple clearfix">
 	<ul>
 		<li>[(#SELF|parametre_url{statut,''}|lien_ou_expose{<:info_tout_afficher:>,[(#ENV{statut,''}|non)],ajax})]</li>
 		<BOUCLE_st(POUR){tableau #GET{statuts}}{si #GET{statuts}|count|>{1}}>
-		<li>[(#SELF|parametre_url{statut,#VALEUR}|lien_ou_expose{[(#VALEUR|traduit_statut)],#ENV{statut,''}|=={#VALEUR},ajax})]</li>
+		<li>[(#SELF|parametre_url{statut,#VALEUR}|lien_ou_expose{[(#VALEUR|traduire_statut_auteur)],#ENV{statut,''}|=={#VALEUR},ajax})]</li>
 		</BOUCLE_st>
 	</ul>
 </div>

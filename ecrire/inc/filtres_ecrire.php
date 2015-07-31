@@ -214,7 +214,9 @@ function traduire_statut_auteur($statut,$attente=""){
 		return $t.$plus;
 	}
 
-	return '';
+	// si on a pas reussi a le traduire, retournons la chaine telle quelle
+	// c'est toujours plus informatif que rien du tout
+	return $statut;
 }
 
 /**
@@ -237,6 +239,28 @@ function afficher_qui_edite($id_objet,$objet){
 	if (!$modif) return $qui[$objet][$id_objet] = '';
 	// TODO -- _L("Fil a travaille sur cet objet il y a x minutes")
 	return $qui[$objet][$id_objet] = _T('texte_travail_article', $modif);
+}
+
+/**
+ * Lister les statuts des auteurs
+ *
+ * @param bool $redacteurs
+ *   true : retourne les auteurs au moins redacteur, tels que defini par AUTEURS_MIN_REDAC
+ *   false : retourne les autres auteurs, cad les visiteurs et autres statuts perso
+ * @return array
+ */
+function auteurs_lister_statuts($redacteurs=true) {
+	if (!defined('AUTEURS_MIN_REDAC')) define('AUTEURS_MIN_REDAC', "0minirezo,1comite,5poubelle");
+	$statut = AUTEURS_MIN_REDAC;
+	$statut = explode(',',$statut);
+
+	if ($redacteurs)
+		return $statut;
+
+	// si autre que redacteurs, retourner tous les existants sauf ceux du define
+	$statut = sql_allfetsel('DISTINCT statut','spip_auteurs',sql_in('statut',$statut,'NOT'));
+	return array_map('reset',$statut);
+
 }
 
 
