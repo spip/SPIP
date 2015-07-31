@@ -388,7 +388,10 @@ function typo($letexte) {
 	else
 		$letexte = typo_en($letexte);
 
-	$letexte = str_replace("'", "&#146;", $letexte);
+	$letexte = str_replace("'", "&#8217;", $letexte);
+
+	// "pas encore mur!"
+	// $letexte = ereg_replace('"([^" &;]([^"]*[^" &;])?)"', "&#8220;\\1&#8221;", $letexte);
 
 	//$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
@@ -611,8 +614,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $lang_dir;
 
 	// Puce
-	if (!$lang_dir)
+	if (!$lang_dir) {
+		include_ecrire('inc_lang.php3');
 		$lang_dir = lang_dir($GLOBALS['spip_lang']);
+	}
 	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl'])
 		$puce = $GLOBALS['puce_rtl'];
 	else
