@@ -12,26 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_meme_rubrique_dist
-function exec_meme_rubrique_dist()
-{
-	exec_meme_rubrique_args(intval(_request('id')), _request('type'), _request('order'));
+include_spip('inc/presentation');
+
+
+// afficher les nons redacteurs !
+@define('AUTEURS_DEFAUT', '!');
+function exec_visiteurs_dist(){
+
+	$auteurs = charger_fonction('auteurs','exec');
+	return $auteurs('visiteurs');
 }
 
-// http://doc.spip.org/@exec_meme_rubrique_args
-function exec_meme_rubrique_args($id, $type, $order)
-{
-        if ((!autoriser('publierdans','rubrique',$id))
-	OR (!preg_match('/^[\w_-]*$/',$order))) {
-		include_spip('inc/minipres');
-                echo minipres();
-        } else {
-		$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
-	// on connait pas le vrai 2e arg mais c'est pas dramatique
-		if (!$order) $order = 'date';
-		$res = $meme_rubrique($id, 0, $type, $order, NULL, true);
-		include_spip('inc/actions');
-		ajax_retour($res);
-	}
-}
 ?>

@@ -179,17 +179,19 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 	if ($id_mot) {
 
 		if ($connect_statut == "0minirezo")
-			$aff_articles = "'prepa','prop','publie','refuse'";
+			$aff_articles = array('prepa','prop','publie','refuse');
 		else
-			$aff_articles = "'prop','publie'";
+			$aff_articles = array('prop','publie');
 
-		$out .= afficher_objets('rubrique','<b>' . _T('info_rubriques_liees_mot') . '</b>', array("FROM" => 'spip_rubriques AS R LEFT JOIN spip_mots_rubriques AS L ON L.id_rubrique=R.id_rubrique', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "R.titre"));
+		$lister_objets = charger_fonction('lister_objets','inc');
 
-		$out .= afficher_objets('article',_T('info_articles_lies_mot'), array('FROM' => "spip_articles AS A LEFT JOIN spip_mots_articles AS L ON L.id_article=A.id_article", 'WHERE' => "L.id_mot=$id_mot AND A.statut IN ($aff_articles)", 'ORDER BY' => "A.date DESC"));
+		$out .=  $lister_objets('rubriques',array('titre'=>_T('info_rubriques_liees_mot'), 'id_mot'=>$id_mot, 'par'=>'titre'));
 
-		$out .= afficher_objets('breve','<b>' . _T('info_breves_liees_mot') . '</b>', array("FROM" => 'spip_breves AS B LEFT JOIN spip_mots_breves AS L ON L.id_breve=B.id_breve', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "B.date_heure DESC"));
+		$out .=  $lister_objets('articles',array('titre'=>_T('info_articles_lies_mot'),'statut'=>$aff_articles, 'id_mot'=>$id_mot, 'par'=>'date'));
 
-		$out .= afficher_objets('site','<b>' . _T('info_sites_lies_mot') . '</b>', array("FROM" => 'spip_syndic AS S LEFT JOIN spip_mots_syndic AS L ON L.id_syndic=S.id_syndic', 'WHERE' => "L.id_mot=$id_mot", 'ORDER BY' => "S.nom_site DESC"));
+		$out .=  $lister_objets('breves',array('titre'=>_T('info_breves_liees_mot'), 'id_mot'=>$id_mot, 'par'=>'date_heure'));
+
+		$out .=  $lister_objets('sites',array('titre'=>_T('info_sites_lies_mot'), 'id_mot'=>$id_mot, 'par'=>'nom_site'));
 	}
 
 	$out .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''))

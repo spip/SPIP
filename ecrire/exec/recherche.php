@@ -71,25 +71,25 @@ function exec_recherche_dist() {
 	if ($results) {
 		echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
 		echo "<h1>$recherche_aff</h1>";
-		include_spip('inc/afficher_objets');
+		$lister_objets = charger_fonction('lister_objets','inc');
 
 		foreach($results as $table => $r) {
 			switch ($table) {
 			case 'article':
 				$titre = _T('info_articles_trouves');
-				$order = 'date DESC';
+				$order = 'date';
 				break;
 			case 'breve':
 				$titre = _T('info_breves_touvees');
-				$order = 'date_heure DESC';
+				$order = 'date_heure';
 				break;
 			case 'rubrique':
 				$titre = _T('info_rubriques_trouvees');
-				$order = 'date DESC';
+				$order = 'date';
 				break;
 			case 'site':
 				$titre = _T('info_sites_trouves');
-				$order = 'date DESC';
+				$order = 'date';
 				break;
 			case 'auteur':
 				$titre = _T('info_auteurs_trouves');
@@ -109,16 +109,7 @@ function exec_recherche_dist() {
 				break;
 			}
 
-			echo afficher_objets($table,$titre,
-				array(
-			// gasp: la requete spip_articles exige AS A
-					'FROM' => table_objet_sql($table).' AS A',
-					'WHERE' => sql_in('A.'.id_table_objet($table),
-						array_keys($r)
-					),
-					'ORDER BY' => $order
-				)
-			);
+			echo $lister_objets(table_objet($table),array('titre'=>$titre,id_table_objet($table)=>array_keys($r),'par'=>$order));
 		}
 
 	}

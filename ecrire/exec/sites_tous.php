@@ -27,11 +27,12 @@ function exec_sites_tous_dist() {
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 	echo debut_droite('', true);
 
-	echo afficher_objets('site','<b>' . _T('titre_sites_tous') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "syndication='non' AND statut='publie'", 'ORDER BY'=> "nom_site"));
+	$lister_objets = charger_fonction('lister_objets','inc');
+	echo $lister_objets('sites',array('titre'=>_T('titre_sites_tous'),'syndication'=>'non','statut'=>'publie','par'=>"nom_site"));
 
-	echo afficher_objets('site','<b>' . _T('titre_sites_syndiques') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='oui' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
+	echo $lister_objets('sites',array('titre'=>_T('titre_sites_syndiques'),'syndication'=>array('oui','sus'),'statut'=>'publie','par'=>"nom_site"));
 
-	echo afficher_objets('site','<b>' . _T('titre_sites_proposes') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY' => "nom_site"));
+	echo $lister_objets('sites',array('titre'=>_T('titre_sites_proposes'),'statut'=>'prop','par'=>"nom_site"));
 
 	if (autoriser('bouton','site_creer')) {
 		echo
@@ -42,13 +43,13 @@ function exec_sites_tous_dist() {
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 
 
-	echo afficher_objets('site','<b>' . _T('avis_sites_probleme_syndication') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "syndication='off' AND statut='publie'", 'ORDER BY' => "nom_site"));
+	echo $lister_objets('sites',array('titre'=>_T('avis_sites_probleme_syndication'),'syndication'=>'off','statut'=>'publie','par'=>"nom_site"));
 
 	if ($GLOBALS['visiteur_session']['statut'] == '0minirezo') {
-		echo afficher_objets('site','<b>' . _T('info_sites_refuses') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='refuse'", 'ORDER BY' => "nom_site"));
+		echo $lister_objets('sites',array('titre'=>_T('info_sites_refuses'),'statut'=>'refuse','par'=>"nom_site"));
 	}
 
-	echo afficher_objets('syndic_article','<b>' . _T('titre_dernier_article_syndique') . '</b>', array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC"));
+	echo $lister_objets('syndic_articles',array('titre'=>_T('titre_dernier_article_syndique'),'par'=>'date'));
 
 	echo fin_gauche(), fin_page();
 }

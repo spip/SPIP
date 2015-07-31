@@ -17,53 +17,8 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@encours_accueil
 function encours_accueil()
 {
-	global $connect_statut;
-
-
-	$res = '';
-
-	// Les articles a valider
-	//
-
-	$res .=  afficher_objets('article',_T('info_articles_proposes'), array("WHERE" => "statut='prop'", 'ORDER BY' => "date DESC"));
-
-	//
-	// Les breves a valider
-	//
-	$res .= afficher_objets('breve',afficher_plus(generer_url_ecrire('breves'))._T('info_breves_valider'), array("FROM" => 'spip_breves', 'WHERE' => "statut='prepa' OR statut='prop'", 'ORDER BY' => "date_heure DESC"), true);
-
-	//
-	// Les sites references a valider
-	//
-	if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= afficher_objets('site',afficher_plus(generer_url_ecrire('sites_tous')).'<b>' . _T('info_site_valider') . '</b>', array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY'=> "nom_site"));
-	}
-
-	if ($connect_statut == '0minirezo') {
-	//
-	// Les sites a probleme
-	//
-	  if ($GLOBALS['meta']['activer_sites'] != 'non') {
-		$res .= afficher_objets('site',afficher_plus(generer_url_ecrire('sites_tous')). '<b>' . _T('avis_sites_syndiques_probleme') . '</b>', array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='off' OR syndication='sus') AND statut='publie'", 'ORDER BY' => 'nom_site'));
-	}
-
-	// Les articles syndiques en attente de validation
-		$cpt = sql_countsel("spip_syndic_articles", "statut='dispo'");
-		if ($cpt)
-			$res .= "\n<br /><small><a href='"
-			. generer_url_ecrire("sites_tous","")
-			. "' style='color: black;'>"
-			. $cpt
-			. " "
-			. _T('info_liens_syndiques_1')
-			. " "
-			. _T('info_liens_syndiques_2')
-			. "</a></small>";
-
-	}
-	
-	$res = pipeline('accueil_encours',$res);
-
+	include_spip("exec/suivi_edito");
+	$res = encours_suivi();
 	if (!$res) return '';
 
 	return 
@@ -388,25 +343,26 @@ function exec_accueil_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	echo debut_droite("", true);
+	
+	$lister_objets = charger_fonction('lister_objets','inc');
 
+	$date_now = date('Y-m-d H:i:s');
 	if ($GLOBALS['meta']["post_dates"] == "non"
 	AND $connect_statut == '0minirezo')
-		echo afficher_objets('article',_T('info_article_a_paraitre'), array("WHERE" => "statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')), 'ORDER BY' => "date"));
-
+		echo $lister_objets('articles',array('titre'=>_T('info_article_a_paraitre'),'statut'=>'publie', 'par'=>'date', 'where'=>'date>'.sql_quote($date_now), 'date_sens'=>1));
 
 	// Les articles recents
 	//
-	echo afficher_objets('article',
-	#afficher_plus(generer_url_ecrire('articles_page')) .
-	_T('articles_recents'), array("WHERE" => "statut='publie'" .($GLOBALS['meta']["post_dates"] == "non"
-		? " AND date<=".sql_quote(date('Y-m-d H:i:s')) : ''),
-		'ORDER BY' => "date DESC", 'LIMIT' => '0,4'));
+	$contexte = array('titre'=>_T('articles_recents'),'statut'=>'publie', 'par'=>'date','nb'=>5);
+	if ($GLOBALS['meta']["post_dates"] == "non")
+		$contexte['where']='date<='.sql_quote($date_now);
+	echo $lister_objets('articles',$contexte);
 
 //
 // Vos articles en cours 
 //
 
-	echo afficher_objets('article',afficher_plus_info(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$connect_id_auteur AND A.statut='prepa'", "ORDER BY" => "A.date DESC"));
+	echo $lister_objets('articles',array('titre'=>afficher_plus_info(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),'statut'=>'prepa', 'par'=>'date','id_auteur'=>$GLOBALS['visiteur_session']['id_auteur']));
 
 	if ($spip_display == 4)
 	  echo colonne_droite_eq4($id_rubrique,

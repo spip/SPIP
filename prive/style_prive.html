@@ -9,7 +9,6 @@
 
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
-	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -289,7 +288,7 @@ a.cellule-h-texte:hover { text-decoration: none; color: #000; border-#GET{right}
 
 
 /* * Style des icones */
-
+/*
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999; background-color: #e4e4e4; }
 .fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999; background-color: #fff; }
@@ -297,6 +296,7 @@ a.cellule-h-texte:hover { text-decoration: none; color: #000; border-#GET{right}
 .bouton36blanc { padding: 6px; margin-top: 2px; border: 1px solid #999; background-color: #fff; }
 .bouton36rouge { padding: 6px; margin-top: 2px; border: 1px solid red; background-color: #fff; }
 .bouton36off { padding: 6px; margin-top: 2px; width: 24px; height: 24px; }
+*/
 
 div.onglet { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #fff; }
 div.onglet a { color: #GET{foncee}; }
@@ -333,8 +333,8 @@ div.onglet_off { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px;
 
 
 /* Liens hypertexte */
-a { text-decoration: none; color: #GET{foncee}; }
-a:hover { text-decoration: none; }
+a { text-decoration: none; color: [#(#GET{foncee}|couleur_foncer{0.25})]; }
+a:hover { text-decoration: underline; }
 a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
 
@@ -391,64 +391,6 @@ td.icone a img { border: 0; }
 .cadre-alerte { border: 6px solid red; }
 
 
-/* * Styles pour "Tout le site" */
-
-.plan-rubrique { margin-#GET{left}: 12px; padding-#GET{left}: 10px; border-#GET{left}: 1px dotted #888; }
-.plan-secteur { margin-#GET{left}: 12px; padding-#GET{left}: 10px; border-#GET{left}: 1px dotted #404040; }
- 
-.plan-articles, .plan-articles-bloques { border-top: 1px solid #ccc; border-#GET{left}: 1px solid #ccc; border-#GET{right}: 1px solid #ccc; }
-.plan-articles a, .plan-articles-bloques .publie, .plan-articles-bloques .prepa, .plan-articles-bloques .prop, .plan-articles-bloques .refuse, .plan-articles-bloques .poubelle { display: block; padding: 2px; padding-#GET{left}: 18px; border-bottom: 1px solid #ccc; background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat; background-color: #eee; font-size: 11px; text-decoration: none; }
-.plan-articles a:hover { background-color: #fff; text-decoration: none; }
-.plan-articles .publie, .plan-articles-bloques .publie { background-image: url(#CHEMIN_IMAGE{puce-verte.gif}); }
-.plan-articles .prepa, .plan-articles-bloques .prepa { background-image: url(#CHEMIN_IMAGE{puce-blanche.gif}); }
-.plan-articles .prop, .plan-articles-bloques .prop { background-image: url(#CHEMIN_IMAGE{puce-orange.gif}); }
-.plan-articles .refuse, .plan-articles-bloques .refuse { background-image: url(#CHEMIN_IMAGE{puce-rouge.gif}); }
-.plan-articles .poubelle, .plan-articles-bloques .poubelle { background-image: url(#CHEMIN_IMAGE{puce-poubelle.gif}); }
-
-a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base { display: inline; float: none; padding: 2px; margin: 0; margin-#GET{left}: 1px; margin-#GET{right}: 1px; border: 0; font-family: Arial, Helvetica, Sans, sans-serif; font-size: 9px; text-decoration: none; z-index: 1; }
-a.foncee, a.foncee:hover { background-color: #GET{foncee}; color: #fff; border: 1px solid #GET{foncee}; }
-a.claire, a.claire:hover { background-color: #GET{claire}; color: #GET{foncee}; border: 1px solid #GET{foncee}; }
-span.lang_base { color: #666; border: 1px solid #666; background-color: #eee; }
-span.creer { color: #333; border: 1px solid #333; background-color: #fff; }
-.trad_float { float: #GET{right}; z-index: 20; margin-top: 4px; }
-
-div.liste,div.cadre-liste { border: 1px solid #ccc; background:white; }
-div.cadre div.cadre-liste { margin-top: 3px; margin-bottom: 3px; }
-div.cadre-couleur-foncee div.cadre-liste { margin-top: 10px; margin-bottom: 3px; }
-div.cadre-liste .cadre_padding {padding: 0; }
-div.cadre-liste .padding_x .bloc_depliable {padding: 0; }
-div.cadre-liste .tranches{ position: relative;border-top: 1px solid #ccc; background-color: #ddd; border-bottom: 1px solid #ccc; padding: 2px;padding-#GET{right}:25px; }
-div.cadre-liste .tranches a.plus {position: absolute; top: 3px; #GET{right}:10px;}
-	
-.tout-site #page ul#articles_tous,.tout-site ul#articles_tous ul { list-style: none; }
-.tout-site #page ul { margin-#GET{left}: 10px; padding-#GET{left}: 12px; border-#GET{left}: 1px dotted #888; }
-.tout-site #page ul,.tout-site #page li { clear: both; }
-li.sec, li.rub { display: inline; }
-ul>li.sec,ul>li.rub { display: block; }
-li.sec a.titre,  li.rub a.titre { display: block; height: 20px; margin: 0; margin-bottom: 5px; padding: 0; padding-top: 4px; padding-#GET{left}: 5px; font-weight: bold; }
-li.art { display: block; height:24px; }
-li.sec a.titre { background-color: #GET{claire}; }
-li.rub a.titre { background-color: transparent; }
-li.art a.titre { display: inline; background-color: transparent; font-weight: normal; padding-#GET{left}: 5px; padding-top: 4px; height: 20px; }
-span.icone { float: #GET{left}; position: relative; display: block; width: 28px; height: 24px; margin-#GET{left}: -14px; }
-li.art span.icone { margin-#GET{left}: 0; }
-
-span.holder {}
-li.sec span.icone { background: url(#CHEMIN_IMAGE{secteur-24.gif}) [(#GET{left})] bottom no-repeat; }
-li.rub span.icone { background: url(#CHEMIN_IMAGE{rubrique-24.gif}) [(#GET{left})] top no-repeat; }
-li.art span.icone { background: url(#CHEMIN_IMAGE{article-24.gif}) [(#GET{left})] top no-repeat; }
-li.sec ul{ display: none; }
-li.rub ul{ display: none; }
-
-li img.expandImage { display: block; float: #GET{left}; position: relative; #GET{left}: -20px; width: 16px; height: 16px; }
-li.selected { background-color: #GET{claire}}
-
-.tr_liste { background-color: #eee; }
-.tr_liste_over, .tr_liste:hover { background-color: #fff; }
-.tr_liste td, .tr_liste:hover td, .tr_liste_over td { border-bottom: 1px solid #ddd; }
-tbody>.tr_liste:last-child td { border-bottom: 0px; }
-.tr_liste td div.liste_clip { height: 12px; overflow: hidden; }
-.tr_liste:hover td div.liste_clip, span.liste_clip { overflow: visible; height: 100%; }
 
 img.puce { width: 7px; height: 7px; border: 0; }
 img.lang { width: 12px; height: 12px; border: 0; }
@@ -550,9 +492,6 @@ h3.titrem {position:relative;}
 
 
 
-.cadre-liste .titrem { background-color: #fff; color: #444; }
-.cadre-liste .titrem.hover { background-color: #GET{claire}}
-.cadre-liste .tr_liste .titrem { background-color:#eee; }
 .cadre-couleur .titrem { background-color: #fff; }
 
 .joindre .titrem, #navigation .joindre .titrem { background-color: #GET{claire}; }
@@ -585,6 +524,68 @@ td.message, a.message { background: url([(#CHEMIN_IMAGE{m_envoi[(#GET{rtl})].gif
 
 .enfants ul { list-style: none; }
 .enfants ul li.rubrique_12 {background:url(#CHEMIN_IMAGE{rubrique-12.gif})[ (#GET{left})] center no-repeat; padding: 2px; padding-#GET{left}: 18px; margin-#GET{left}: 6px;position:relative;}
+
+/* Listes d'objet */
+.liste-objets{
+	margin:1em 0;
+	font-size:.85em;
+	border: 1px solid #dfdfdf;
+}
+.cadre .liste-objets{font-size:1em;}
+
+.liste-objets .pagination {
+	margin-top:0; padding:1px 5px;
+	background:#eee; border:none;
+}
+.liste-objets .pagination .separateur {color:#aaa;}
+
+.liste-objets table.spip {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin-bottom:0;}
+.liste-objets table.spip caption {margin:0;text-align:left;}
+.liste-objets .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px 6px 30px;background:none no-repeat scroll 2px 2px #FFFFFF}
+.liste-objets table.spip tr {background:white;}
+.liste-objets table.spip tr.row_odd {background:white;}
+.liste-objets table.spip tr.row_even {background:white;}
+.liste-objets table.spip thead tr {background:#eee;}
+.liste-objets table.spip tbody tr:hover {background-color: #f8f8f8;}
+.liste-objets table.spip tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
+.liste-objets table.spip tr td {border-color:#dfdfdf; border-left:0; border-right:0;}
+
+.liste-objets tr > .statut,.liste-objets tr > .icone {width: 16px; padding-left:2px;padding-right:2px;text-align:center;}
+.liste-objets tr > .auteur {width: 80px;}
+.liste-objets tr > .date {width: 90px;}
+.liste-objets tr > .id {width: 40px; text-align:#GET{right};}
+.liste-objets tr > .action {width: 90px; text-align:#GET{right};}
+.liste-objets tr td .spip_logos {float:#GET{right};}
+.liste-objets tr td.syndication .etat {display:block;color:red;}
+
+.liste-objets tr td {font-size:0.9em;}
+.liste-objets tr td.secondaire {font-size:0.85em;}
+.liste-objets tr td.principale {font-size:1.025em;}
+.liste-objets tr td > span {font-size:0.85em;}
+.liste-objets .bouton_action_post .submit {font-size:1em;}
+
+.liste-objets.syndic_articles tr > .action {width: 50px;}
+.liste-objets.syndic_articles td .tags,
+.liste-objets.syndic_articles td .source {display:block;text-align:#GET{right};}
+.liste-objets.syndic_articles td .tags a {color:#666;}
+
+.liste-objets.mots .caption {background-image:url(#CHEMIN_IMAGE{mot-cle-24.gif});}
+.liste-objets.rubriques .caption {background-image:url(#CHEMIN_IMAGE{rubrique-24.gif});}
+.liste-objets.articles .caption {background-image:url(#CHEMIN_IMAGE{article-24.gif});}
+.liste-objets.breves .caption {background-image:url(#CHEMIN_IMAGE{breve-24.gif});}
+.liste-objets.sites .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});}
+.liste-objets.syndic_articles .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});}
+
+/* dans une colonne laterale, ne visualiser que l'info principale, le statut et l'id */
+#navigation .liste-objets tr > .secondaire,
+#navigation .liste-objets tr > .auteur,
+#navigation .liste-objets tr > .date,
+#navigation .liste-objets tr > .action,
+#navigation .liste-objets tr > .syndication,
+#navigation .liste-objets tr .spip_logos
+{display:none;}
+#navigation .liste-objets tr td.principale {font-size:0.9em;max-width:120px;}
+
 
 /* * ***************************************************/
 /* directives specifiques a une page */

@@ -155,7 +155,8 @@ function auteurs_interventions($auteur) {
 	else if ($connect_id_auteur == $id_auteur) $aff_art = array('prepa','prop','publie'); 
 	else $aff_art = array('prop','publie'); 
 
-	echo afficher_objets('article',_T('info_articles_auteur'), 	array('FROM' => "spip_articles AS A LEFT JOIN spip_auteurs_articles AS L ON A.id_article=L.id_article", "WHERE" => "L.id_auteur=$id_auteur AND " . sql_in('A.statut', $aff_art), "ORDER BY" => "A.date DESC"));
+	$lister_objets = charger_fonction('lister_objets','inc');
+	echo $lister_objets('articles',array('titre'=>_T('info_articles_auteur'),'statut'=>$aff_art, 'par'=>'date','id_auteur'=>$id_auteur));
 
 	// Messages de l'auteur et discussions en cours
 	if ($GLOBALS['meta']['messagerie_agenda'] != 'non'
