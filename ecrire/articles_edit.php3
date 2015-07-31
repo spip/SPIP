@@ -293,7 +293,7 @@ debut_page();
 debut_gauche();
 
 
-if ($new != "oui") {
+if ($new != "oui" AND 0) {
 	echo "<p>\n";
 	afficher_images($id_article);
 
@@ -339,6 +339,15 @@ if ($new != "oui") {
 	echo "</div>";
 	echo "</font>\n";
 }
+
+debut_boite_info();
+
+echo "<font size='3'>";
+echo "$puce <b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">\n";
+echo "Documents li&eacute;s &agrave; l'article</a></b>\n";
+echo "</font>\n";
+
+fin_boite_info();
 
 
 debut_droite();

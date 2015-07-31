@@ -111,13 +111,13 @@ function fin_cadre_relief(){
 // une boite alerte
 //
 function debut_boite_alerte() {
-	echo "<P><TABLE CELLPADDING=6 BORDER=0><TR><TD WIDTH='100%' BGCOLOR='red'>";
-	echo "<TABLE WIDTH='100%' CELLPADDING=12 BORDER=0><TR><TD WIDTH='100%' bgcolor='white'>";
+	echo "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'>";
+	echo "<table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
 }
 
 function fin_boite_alerte() {
-	echo "</TD></TR></TABLE>";
-	echo "</TD></TR></TABLE>";
+	echo "</td></tr></table>";
+	echo "</td></tr></table>";
 }
 
 
@@ -125,13 +125,13 @@ function fin_boite_alerte() {
 // une boite info
 //
 function debut_boite_info() {
-	echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=1 WIDTH='100%' CLASS='profondeur' BACKGROUND=''>";
-	echo "<TR><TD BGCOLOR='#DBE1C5' WIDTH='100%'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#333333'>";
+	echo "<p><table cellpadding='5' cellspacing='0' border='1' width='100%' class='profondeur' background=''>";
+	echo "<tr><td bgcolor='#DBE1C5' width='100%'>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'>";
 }
 
 function fin_boite_info() {
-	echo "</FONT></TD></TR></TABLE>";
+	echo "</font></td></tr></table>";
 }
 
 //
@@ -654,16 +654,16 @@ function bouton($titre,$lien) {
 
 
 //
-// presentation de l'interface privee, debut
+// Presentation de l'interface privee, debut du HTML
 //
-function debut_page($titre = "") {
+
+function debut_html($titre = "") {
 	global $couleur_foncee;
 	global $couleur_claire;
-	$nom_site_spip=htmlspecialchars(lire_meta("nom_site"));
+	$nom_site_spip = htmlspecialchars(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
-	if ($nom_site_spip == "")
-		$nom_site_spip="SPIP";
+	if ($nom_site_spip == "") $nom_site_spip="SPIP";
 	
 	?>
 	<html>
@@ -697,7 +697,6 @@ function debut_page($titre = "") {
 		padding: 5px; 
 	}
 
-
 	.boutonlien {
 		font-family: Verdana,Arial,Helvetica,sans-serif;
 		font-weight: bold;
@@ -705,7 +704,6 @@ function debut_page($titre = "") {
 	}
 	a.boutonlien:hover {color:#454545; text-decoration: none;}
 	a.boutonlien {color:#808080; text-decoration: none;}
-
 
 	h3.spip {
 		font-family: Verdana,Arial,Helvetica,sans-serif;
@@ -751,19 +749,29 @@ afficher_script_layer();
 </head>
 <body bgcolor="#E4E4E4" <?php
 	global $fond;
-	if ($fond==1) $img='IMG2/rayures.gif';
-	if ($fond==2) $img='IMG2/blob.gif';
-	if ($fond==3) $img='IMG2/carreaux.gif';
-	if ($fond==4) $img='IMG2/fond-trame.gif';
-	if ($fond==5) $img='IMG2/degrade.jpg';
-	if (!$img) $img='IMG2/rayures.gif';
+	if ($fond == 1) $img='IMG2/rayures.gif';
+	else if ($fond == 2) $img='IMG2/blob.gif';
+	else if ($fond == 3) $img='IMG2/carreaux.gif';
+	else if ($fond == 4) $img='IMG2/fond-trame.gif';
+	else if ($fond == 5) $img='IMG2/degrade.jpg';
+	else if (!$img) $img='IMG2/rayures.gif';
 
 	echo "background='$img'";
 	
 	?> text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" >
-	
+
+<?php
+
+}
+
+//
+// Debut du corps de la page
+//
+
+function debut_page($titre = "") {
+	debut_html($titre);
+?>
 	<center>
-	
 <?php
 	global $spip_survol;
 	if ($spip_survol=="off"){
@@ -933,7 +941,6 @@ afficher_script_layer();
 
 ?>
 
-
 	<map name="map-interface">
 	<area shape='rect' coords='19,29,31,44' href='interface.php3' onMouseOver="fond.src='IMG2/modifier-interface-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'">
 	<?php
@@ -960,8 +967,9 @@ afficher_script_layer();
 
 	<?php
 
-
-	/// Messagerie...
+	//
+	// Resume de messagerie
+	//
 	
 	global $changer_config;
 	global $activer_messagerie;
@@ -1011,6 +1019,10 @@ afficher_script_layer();
 }
 
 
+//
+// Debut de la colonne de gauche
+//
+
 function debut_gauche() {
 	global $connect_statut, $cookie_admin;
 	global $REQUEST_URI;
@@ -1030,9 +1042,9 @@ function debut_gauche() {
 	
 	?>
 	<br><br>
-	
+
 	<table width=700 cellpadding=0 cellspacing=0 border=0>
-	
+
 	<tr>
 	<td width=180 valign="top">
 	<font face='Georgia,Garamond,Times,serif' size=2>
@@ -1083,8 +1095,9 @@ function debut_gauche() {
 
 
 //
-// presentation de l'interface privee, marge de droite
+// Presentation de l'interface privee, marge de droite
 //
+
 function debut_droite() {
 	//
 	// Boite de recherche
@@ -1111,23 +1124,34 @@ function debut_droite() {
 
 
 //
-// presentation de l'interface privee, fin de page et flush()
+// Presentation de l'interface privee, fin de page et flush()
 //
-function fin_page() {
-	global $spip_version_affichee;
 
+function fin_html() {
+	global $spip_version_affichee;
 ?>
-<p align='right'><font size='2'><a href='http://www.uzine.net/spip'>SPIP
-<?php echo $spip_version_affichee; ?></a> est distribu&eacute;
-<a href='gpl.txt'>sous licence GPL</a>.</p></td></tr>
-<tr><td width="180" valign="bottom"></td></tr></table></center></body></html>
+<p align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
+<a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
+est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>.</p>
+</body></html>
 <?php
 	flush();
 }
 
+
+function fin_page() {
+
+?>
+</td></tr>
+</table></center>
+<?php
+	fin_html();
+}
+
 //
-// presentation pages d'installation et d'erreurs
+// Presentation des pages d'installation et d'erreurs
 //
+
 function install_debut_html($titre="Installation du syst&egrave;me de publication...") {
 	?>
 <html>
