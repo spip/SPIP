@@ -4,6 +4,12 @@
 <head>
 <title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#INTRODUCTION|couper{150}|attribut_html)" />]
+<link rel="alternate" type="application/rss+xml" 
+	title="<:titre_page_mots_tous:>" 
+href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_article}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
+<link rel="alternate" type="application/rss+xml" 
+	title="<:icone_auteurs:>" 
+href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_auteur[]=#ID_AUTEUR</BOUCLE_URLAUTEURS>" />
 <INCLURE{fond=inc-head}>
 </head>
 

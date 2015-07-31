@@ -10,6 +10,9 @@
 <INCLURE{fond=inc-head}>
 [(#REM) Lien vers le flux RSS de la rubrique ]
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+<link rel="alternate" type="application/rss+xml" 
+	title="<:titre_page_mots_tous:>" 
+href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_MOT</BOUCLE_URLMOT>" />
 </head>
 
 <body class="page_rubrique">
