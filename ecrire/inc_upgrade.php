@@ -28,14 +28,14 @@ function upgrade_dist()
 	@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
 	install_debut_html(_T('titre_page_upgrade')); 
-	echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ";
-	echo _T('texte_nouvelle_version_spip_2');
-	echo "<p><div align='right'>";
-	echo '<form action="upgrade.php3">';
-	echo "<input type='submit' value=\"",
+	echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
+	 _T('texte_nouvelle_version_spip_2'),
+	 "<p><div align='right'>",
+	 '<form action=', http_php_script("upgrade"), '>',
+	 "<input type='submit' value=\"",
 	  _T('bouton_relancer_installation'),
-	  "\" class='fondl'>";
-	echo "</form>\n";
+	  "\" class='fondl'>",
+	 "</form>\n";
 	install_fin_html();
 	exit;
   }
@@ -110,7 +110,7 @@ function demande_maj_version()
 function info_install()
  {
 	// Soit on est dans ecrire/ et on envoie sur l'installation
-	if (@file_exists("inc_version.php3")) {
+	if (@file_exists("inc_version" . _EXTENSION_PHP)) {
 		header("Location: " . 'install' . _EXTENSION_PHP);
 		exit;
 	}

@@ -19,12 +19,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $included_files = array();
 
 function include_local($file, $silence=false) {
-	$nom = preg_replace("/\.php3?$/",'', $file);
+	$nom = preg_replace("/\.php[3]?$/",'', $file);
 #	spip_log("$nom $file");
 	if (@$GLOBALS['included_files'][$nom]++) return;
 	if (is_readable($f = $nom . '.php'))
 	  include($f);
-	else if (is_readable($f = $nom . '.php3'))
+	else if (is_readable($f = $nom . _EXTENSION_PHP))
 	  include($f);
 	else if (!$silence) spip_log($file . " illisible");
 }
@@ -41,7 +41,7 @@ function include_ecrire($file) {
 function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-	$nom = preg_replace("/\.php3?$/",'', basename($nom));
+	$nom = preg_replace("/\.php[3]?$/",'', basename($nom));
 	$inc = ('inc_' . $nom);
 #	spip_log("if $inc");
 	$f = find_in_path($inc  . '.php');
@@ -52,8 +52,8 @@ function include_fonction($nom) {
 		if (is_readable($f)) {
 			if (!$GLOBALS['included_files'][$inc]++) include($f);
 		} else {
-		  // provisoire avant renommage php/php3
-			$f = _DIR_INCLUDE . ('inc_' . $nom . '.php3');
+		  // provisoire avant renommage 
+			$f = _DIR_INCLUDE . ('inc_' . $nom . _EXTENSION_PHP);
 			if (is_readable($f)) {
 				if (!$GLOBALS['included_files'][$inc]++) include($f);
 			} else  $inc = "";
@@ -428,7 +428,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 
 //
 // cron() : execution des taches de fond
-// quand il est appele par spip_background.php3, il est gourmand ;
+// quand il est appele par spip_background, il est gourmand ;
 // quand il est appele par inc-public il n'est pas gourmand
 //
 function cron($gourmand = false) {
