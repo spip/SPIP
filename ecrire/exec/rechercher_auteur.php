@@ -20,10 +20,11 @@ function exec_rechercher_auteur_dist()
 	$idom = _request('idom');
 	if (!preg_match('/\w+/',$idom))
 	      {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	      }
-
+	include_spip('inc/actions');
 	$where = split("[[:space:]]+", _request('nom'));
 	if ($where) {
 		foreach ($where as $k => $v) 

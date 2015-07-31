@@ -54,8 +54,9 @@ function exec_admin_vider_dist()
 
 	// autorisation a affiner 
 	if (!autoriser('configurer', 'admin_vider')){
-	    echo minipres();
-	    exit;
+		include_spip('inc/minipres');
+		echo minipres();
+		exit;
 	  }
 	  $commencer_page = charger_fonction('commencer_page', 'inc');
 	  echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");

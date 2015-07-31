@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 # Les informations d'une rubrique selectionnee dans le mini navigateur
 
 // http://doc.spip.org/@exec_informer_dist

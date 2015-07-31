@@ -23,6 +23,7 @@ function exec_documents_colonne_dist()
 		? autoriser('modifier','article',$id)
 		: autoriser('publierdans','rubrique',$id))) {
 
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

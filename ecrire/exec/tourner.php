@@ -22,11 +22,11 @@ function exec_tourner_dist()
 	if (!($type == 'article' 
 		? autoriser('modifier','article',$id)
 		: autoriser('publierdans','rubrique',$id))) {
-
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-
+	include_spip('inc/actions');
 	$tourner = charger_fonction('tourner', 'inc');
 	ajax_retour($tourner($id_document, array(), $script, 'ajax', $type));
 }

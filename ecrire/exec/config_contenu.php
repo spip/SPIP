@@ -21,6 +21,7 @@ include_spip('inc/meta');
 function exec_config_contenu_dist()
 {
 	if (!autoriser('configurer', 'contenu')) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+include_spip('inc/filtres');
+
 // http://doc.spip.org/@exec_rechercher_dist
 function exec_rechercher_dist()
 {

@@ -18,11 +18,11 @@ function exec_referencer_traduction_dist()
 	$id_article = intval(_request('id_article'));
 
 	if (!autoriser('modifier','article',$id_article)) {
-
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-
+	include_spip('inc/actions');
 	$row = spip_fetch_array(spip_query("SELECT id_trad, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
 
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');

@@ -23,10 +23,12 @@ function exec_legender_dist()
 		? autoriser('modifier','article',$id)
 		: autoriser('publierdans','rubrique',$id))) {
 
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
 
+	include_spip('inc/actions');
 	$legender = charger_fonction('legender', 'inc');
 	ajax_retour($legender($id_document, array(), $script, $type, $id, $ancre));
 }

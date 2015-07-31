@@ -47,8 +47,9 @@ function exec_admin_repair_dist()
 		$admin('admin_repair', $action, $message);
 	}
 	else {
-	  echo minipres(_T('titre_reparation'), "<p>$message</p>");
-	  exit;
+		include_spip('inc/minipres');
+		echo minipres(_T('titre_reparation'), "<p>$message</p>");
+		exit;
 	}
 }
 ?>

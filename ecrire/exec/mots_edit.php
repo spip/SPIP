@@ -42,6 +42,7 @@ global $ajouter_id_article, $champs_extra, $connect_statut, $descriptif, $id_gro
 		$onfocus ='';
 	 } else {
 		if (!$new OR !autoriser('modifier','groupemots',$id_groupe)) {
+			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
 			exit;
 		}

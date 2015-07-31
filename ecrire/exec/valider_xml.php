@@ -17,6 +17,7 @@ include_spip('inc/presentation');
 function exec_valider_xml_dist()
 {
 	if ($GLOBALS['connect_statut'] != '0minirezo') {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

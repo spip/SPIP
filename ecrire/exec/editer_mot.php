@@ -34,6 +34,7 @@ function exec_editer_mot_dist()
 	}
 
 	if (!$droit) {
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}

@@ -19,11 +19,11 @@ function exec_virtualiser_dist()
 	$id_article = intval($id_article);
 
 	if (!autoriser('modifier','article',$id_article)) {
-
+		include_spip('inc/minipres');
 		echo minipres();
 		exit;
 	}
-
+	include_spip('inc/actions');
 	$row = spip_fetch_array(spip_query("SELECT chapo FROM spip_articles WHERE id_article='$id_article'"));
 	$virtuel = $row['chapo'];
 	if (substr($virtuel, 0, 1) == '=') {

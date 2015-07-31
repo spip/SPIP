@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/headers');
+include_spip("inc/texte");
 include_spip('inc/layer');
 
 /////////////////////////////
@@ -484,7 +485,6 @@ else {
 	header("Content-Type: text/html; charset=utf-8");
 	echo _DOCTYPE_AIDE, html_lang_attributes();
 	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
-	include_spip("inc/filtres");
 	echo f_jQuery("");
 
 	if ($frame == 'menu')

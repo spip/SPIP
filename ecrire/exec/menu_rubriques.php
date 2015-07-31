@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/texte');
+
 // http://doc.spip.org/@exec_menu_rubriques_dist
 function exec_menu_rubriques_dist() {
 	global $spip_ecran;
