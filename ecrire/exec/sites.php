@@ -335,10 +335,11 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 					 " method='post'"),
 		  fin_cadre_relief();
 	}
- }
-// Cas d'un site ayant un feedfinder detecte
-// Bug: action/editer_site ne le voit pas passer.
- else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
+}
+
+// Cas d'un site pour lesquels feedfinder a un ou plusieurs flux,
+// et l'on propose de choisir
+else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 
 	$res = "<br /><br />\n";
 	foreach (
@@ -348,10 +349,10 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	}
 
 	$res .= "<div align='$spip_lang_left'>\n";
-	$res .= "<input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
-	$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b>";
-	$res .= "<input type='radio' name='syndication' value='oui' id='syndication_oui' />";
-	$res .= " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
+	$res .= "<div><input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
+	$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b></div>\n";
+	$res .= "<div><input type='radio' name='syndication' value='oui' id='syndication_oui' />";
+	$res .= " <label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></div>\n";
 
 	$res .= "<select name='url_syndic'>\n";
 	foreach (explode(' ',$regs[1]) as $feed) {
