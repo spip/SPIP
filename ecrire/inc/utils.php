@@ -152,6 +152,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
+	  . (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
 	  . ($logname)
 	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logsuf);
 
