@@ -845,8 +845,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// autres raccourcis
 	if ($flag_str_replace && !$flag_preg_replace) {
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
-		$letexte = ereg_replace("^- +", "$puce&nbsp;", $letexte);
-		$letexte = str_replace("\n- +", "\n<br>$puce&nbsp;",$letexte);
+		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
+		$letexte = str_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
 		$letexte = str_replace("\n_ +", "\n<br>",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
 		$letexte = str_replace("{{{", $debut_intertitre, $letexte);
@@ -862,8 +862,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	else {
 		$cherche1 = array(
 			/* 0 */ 	"/\n(----+|____+)/",
-			/* 1 */ 	"/^- +/",
-			/* 2 */ 	"/\n- +/",
+			/* 1 */ 	"/^- */",
+			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
 			/* 4 */ 	"/(( *)\n){2,}/",
 			/* 5 */ 	"/\{\{\{/",
