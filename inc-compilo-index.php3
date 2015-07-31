@@ -363,8 +363,14 @@ function compose_filtres($p, $code) {
 			$arglist = compose_filtres_args($p, $filtre,
 				($fonc == '?' ? ':' : ','));
 
-			// le filtre existe sous forme de fonction ou de methode
-			if (function_exists($fonc)
+			// le filtre est defini dans la matrice ? il faut alors l'appeler
+			// de maniere indirecte, pour charger au prealable sa definition
+			if (isset($GLOBALS['spip_matrice'][$fonc])) {
+				$code = "filtrer('$fonc',$code$arglist)";
+			}
+			// le filtre est defini sous forme de fonction ou de methode
+			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
+			else if (function_exists($fonc)
 				OR (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
 					AND is_callable(array($regs[1], $regs[2]))
 			))

@@ -13,6 +13,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
+// et arguments
+function filtrer($filtre) {
+	if ($f = $GLOBALS['spip_matrice'][$filtre])
+		include_local($f);
+
+	$tous = func_get_args();
+	array_shift($tous); # enlever $filtre
+	return call_user_func_array($filtre, $tous);
+}
+
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
 // pas au charset de la page [iso-8859-1 par defaut])
@@ -2106,9 +2117,9 @@ function tags2dcsubject($tags) {
 }
 // fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
 function boutonne($t, $n, $v, $a='') {
-  return "\n<input type='$t'" .
-    (!$n ? '' : " name='$n'") .
-    " value=\"$v\" $a />";
+	return "\n<input type='$t'"
+	. (!$n ? '' : " name='$n'")
+	. " value=\"$v\" $a />";
 }
 
 ?>
