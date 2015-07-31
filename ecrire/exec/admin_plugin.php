@@ -31,18 +31,12 @@ function exec_admin_plugin_dist($retour='') {
 	if (_request('format')!==NULL)
 		$format = _request('format');
 
-	verif_plugin();
-
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	
-
 	echo "<br />\n";
 	echo "<br />\n";
-
 
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-
 	
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -57,7 +51,11 @@ function exec_admin_plugin_dist($retour='') {
 
 	// on fait l'installation ici, 
 	// cela permet aux scripts d'install de faire des affichages (moches...)
-	$lcpa = installe_plugins();
+	verif_plugin();
+	installe_plugins();
+	// la valeur de retour de la fonction ci-dessus n'est pas compatible
+	// avec ce que fait verif_plugin, il faut recalculer. A revoir.
+	$lcpa = liste_chemin_plugin_actifs(); 
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
 	if (defined('_DIR_PLUGIN_CFG')) {

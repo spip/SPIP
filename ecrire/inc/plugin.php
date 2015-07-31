@@ -569,7 +569,7 @@ function installe_plugins(){
 		if (isset($infos['install'])) {
 			if (installe_un_plugin($plug, $infos))
 			  $install[] = $plug;
-			else unset($liste);
+			else unset($liste[$k]);
 		}
 	}
 
