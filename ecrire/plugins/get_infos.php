@@ -26,21 +26,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_PLUGINS, $filename='plugin.xml'){
 
 	static $cache='';
-	$filecache = _DIR_TMP."plugin_xml_cache.gz";
+	static $filecache = '';
 
 	if ($cache===''){
+		$filecache = _DIR_TMP."plugin_xml_cache.gz";
 		if (is_file($filecache)){
 			lire_fichier($filecache, $contenu);
 			$cache = unserialize($contenu);
 		}
 		if (!is_array($cache)) $cache = array();
-	} elseif ($force_reload)
-		unset($cache[$dir_plugins][$plug]);
-
+	} 
+	$force_reload |= !isset($cache[$dir_plugins][$plug]['filemtime']);
+ 
 	$desc = "$dir_plugins$plug/$filename";
 	$time = @(!file_exists($desc) ? -1 : intval(@filemtime($desc)));
 
-	if (isset($cache[$dir_plugins][$plug]['filemtime'])
+	if (!$force_reload
 	AND ($time > 0)
 	AND ($time <= $cache[$dir_plugins][$plug]['filemtime'])) {
 		return $cache[$dir_plugins][$plug];
