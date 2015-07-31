@@ -61,7 +61,6 @@ function http_calendrier_init($date='', $ltype='', $lechelle='', $lpartie_cal=''
 	    $date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 	if (!$script) $script = $GLOBALS['REQUEST_URI']; 
 	$script = http_calendrier_retire_args($script);
-
 	if (!_DIR_RESTREINT) http_calendrier_titre($date, $type);
 	$f = 'http_calendrier_init_' . $type;
 	return $f($date, $echelle, $partie_cal, $script);
@@ -476,7 +475,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	if (ereg('^(.*)(#[^=&]*)$',$script, $m)) {
 	  $purscript = $m[1];
 	  $ancre = $m[2];
-	} else $ancre = '';
+	} else { $ancre = ''; $purscript = $script; }
       $nav = http_calendrier_navigation($j,
 					$mois,
 					$annee,
@@ -714,7 +713,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 		$d = $v['date'];
 		$arbrev = (!($articles[$d] OR $breves[$d]) ? '' :
 			   ("<div style='$style'>" .
-			    http_calendrier_articles_et_breves($articles[$d], $breves[$d], $style) .
+			    http_calendrier_articles_et_breves($articles[$d], $breves[$d]) .
 			    "</div>"));
 		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
 			<div style='background-color: " . 
