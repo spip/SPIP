@@ -152,16 +152,18 @@ function spip_cron() {
 	//
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
 	//
-	global $quota_cache;
-	if ($quota_cache > 0)
-	if ($t - lire_meta('quota_cache_vider') > 3600) {
+	if (($t - lire_meta('quota_cache_vider') > 3600)
+	AND timeout('quota_cache_vider')) {
 		ecrire_meta('quota_cache_vider', $t);
 		ecrire_metas();
-		if ($q = spip_query("SELECT SUM(taille) FROM spip_caches WHERE type='t'"))
-			list ($total_cache) = spip_fetch_array($q);
 
+		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
+		FROM spip_caches WHERE type='t'"));
+		spip_log("Taille du CACHE: $total_cache octets");
+
+		global $quota_cache;
 		$total_cache -= $quota_cache*1024*1024;
-		if ($total_cache > 0) {
+		if ($quota_cache > 0 AND $total_cache > 0) {
 			$q = spip_query("SELECT id, taille FROM spip_caches ORDER BY id");
 			while ($r = spip_fetch_array($q)
 			AND ($total_cache > $taille_supprimee)) {
