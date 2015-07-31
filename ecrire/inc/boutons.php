@@ -422,12 +422,9 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 	if ($GLOBALS['browser_name']=="MSIE") $coeff_decalage = 1.0;
 	$largeur_maxi_menu = $largeur-100;
 	$largitem_moy = 85;
-	$ajax =  isset($_COOKIE['spip_accepte_ajax']) 
-	  ? ($_COOKIE['spip_accepte_ajax']!=-1)
-	: 1;
 
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		if (($rubrique == $page) AND $ajax) {
+		if (($rubrique == $page) AND (_SPIP_AJAX !=-1)) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";

@@ -87,7 +87,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 	$moi = preg_match("/exec=" . $GLOBALS['exec'] .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
 	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
-	if (_DIR_RESTREINT  || !$moi || (isset($_COOKIE['spip_accepte_ajax']) && ($_COOKIE['spip_accepte_ajax'] != 1 )))
+	if (_DIR_RESTREINT  || !$moi || (_SPIP_AJAX != 1 ))
 
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {

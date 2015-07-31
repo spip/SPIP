@@ -297,7 +297,7 @@ function ligne_plug($plug_file, $actif, $id){
 	// TODO : n'afficher que les actifs, les autres en AHAH
 	if (true
 	OR $actif
-	OR $GLOBALS['spip_accepte_ajax']!=1) # va-t-on afficher le bloc ?
+	OR _SPIP_AJAX!=1) # va-t-on afficher le bloc ?
 		$s .= affiche_bloc_plugin($plug_file, $info);
 
 	return $s;

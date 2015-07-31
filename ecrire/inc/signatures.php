@@ -32,13 +32,12 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	}
 	else $args = "";
 
-	$evt = (isset($_COOKIE['spip_accepte_ajax']) AND ($_COOKIE['spip_accepte_ajax'] == 1));
+	$evt = (_SPIP_AJAX == 1);
 
 	$a = "editer_signature-$id";
 
 	$q = spip_query("SELECT date_time FROM spip_signatures " . ($where ? "WHERE $where" : '') . " ORDER BY date_time DESC");
 
-	spip_log("sig $evt");
 	while ($row = spip_fetch_array($q)) {
 		if($c++%$limit==0) {	
 			if ($c > 1) $res .= " | ";

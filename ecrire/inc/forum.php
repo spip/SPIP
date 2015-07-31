@@ -18,7 +18,7 @@ function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $qu
 {
 	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");
 
-	$e = ($_COOKIE['spip_accepte_ajax'] == 1 );
+	$e = (_SPIP_AJAX == 1 );
 
 	$n = spip_num_rows($query);
 

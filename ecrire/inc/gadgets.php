@@ -478,7 +478,7 @@ function gadget_messagerie() {
 
 // http://doc.spip.org/@repercuter_gadgets
 function repercuter_gadgets($id_rubrique) {
-	if (isset($_COOKIE['spip_accepte_ajax']) && ($_COOKIE['spip_accepte_ajax'] == -1)) return '';
+	if (_SPIP_AJAX == -1) return '';
 
 	$rub = $id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '';
 

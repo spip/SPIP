@@ -1040,6 +1040,9 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
 	}
 
+	define('_SPIP_AJAX',  isset($_COOKIE['spip_accepte_ajax']) 
+		? ($_COOKIE['spip_accepte_ajax']!=-1)
+		: 1);
 
 	//
 	// Capacites php (en fonction de la version)
