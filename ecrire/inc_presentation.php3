@@ -830,10 +830,10 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
+			$texte_img = http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
 
 			if ($afficher_trad) {
-				$texte_img .= http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
+				$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
@@ -1053,9 +1053,9 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img = http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
+			$texte_img = http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = '$id_img'");
 			
-			$texte_img .= http_img_pack("searching", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
+			$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
 			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
 
