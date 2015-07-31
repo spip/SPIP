@@ -158,6 +158,9 @@ $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
 
+// Controler les dates des item dans les flux RSS ?
+$controler_dates_rss = true;
+
 
 //
 // Plugins
@@ -171,6 +174,7 @@ $spip_pipeline = array(
 	'pre_propre' => '|extraire_multi',
 	'post_propre' => '',
 	'pre_indexation' => '',
+	'pre_syndication' => '',
 	'post_syndication' => ''
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
