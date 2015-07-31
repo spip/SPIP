@@ -244,7 +244,8 @@ function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 
 //
 // Transforme les entites unicode &#129; dans le charset specifie
-//
+// Attention on ne transforme pas les entites < &#128; car si elles
+// ont ete encodees ainsi c'est a dessein
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
@@ -265,19 +266,22 @@ function unicode2charset($texte, $charset='AUTO') {
 		$trans = array();
 		// Construire la table de remplacements
 		// 1. Entites decimales (type "&#123;")
-		if (preg_match_all(',&#([0-9]+);,', $texte, $regs, PREG_PATTERN_ORDER)) {
+		if (preg_match_all(',&#(0*[1-9][0-9][0-9]+);,',
+		$texte, $regs, PREG_PATTERN_ORDER)) {
 			$entites = array_flip($regs[1]);
 			foreach ($entites as $e => $v) {
-				if ($s = ($e < 128) ? $e : $CHARSET_REVERSE[$charset][intval($e)])
+				if (intval($e)>127
+				AND $s = $CHARSET_REVERSE[$charset][intval($e)])
 					$trans['&#'.$e.';'] = chr($s);
 			}
 		}
-		// 2. Entites hexadecimales (type "&#xD;")
-		if (preg_match_all(',&#x([0-9a-zA-Z]+);,', $texte, $regs, PREG_PATTERN_ORDER)) {
+		// 2. Entites hexadecimales (type "&#xd0a;")
+		if (preg_match_all(',&#x(0*[1-9a-f][0-9a-f][0-9a-f]+);,i',
+		$texte, $regs, PREG_PATTERN_ORDER)) {
 			$entites = array_flip($regs[1]);
 			foreach ($entites as $e => $v) {
 				$h = hexdec($e);
-				if ($s = ($h < 128) ? $h : $CHARSET_REVERSE[$charset][$h])
+				if ($s = $CHARSET_REVERSE[$charset][$h])
 					$trans['&#x'.$e.';'] = chr($s);
 			}
 		}
@@ -425,10 +429,28 @@ function caractere_utf_8($num) {
 }
 
 function unicode_to_utf_8($texte) {
-	while (preg_match(',&#0*([0-9]+);,', $texte, $regs)) {
-		$s = caractere_utf_8($regs[1]);
-		$texte = str_replace($regs[0], $s, $texte);
+	$vu = array();
+
+	// 1. Entites &#128; et suivantes
+	if (preg_match_all(',&#0*([1-9][0-9][0-9]+);,',
+	$texte, $regs, PREG_SET_ORDER))
+	foreach ($regs as $reg) {
+		if ($reg[1]>127 AND !$vu[$reg[0]]++) {
+			$s = caractere_utf_8($reg[1]);
+			$texte = str_replace($reg[0], $s, $texte);
+		}
 	}
+
+	// 2. Entites > &#xFF;
+	if (preg_match_all(',&#x0*([1-9a-f][0-9a-f][0-9a-f]+);,i',
+	$texte, $regs, PREG_SET_ORDER))
+	foreach ($regs as $reg) {
+		if (!$vu[$reg[0]]++) {
+			$s = caractere_utf_8(hexdec($reg[1]));
+			$texte = str_replace($reg[0], $s, $texte);
+		}
+	}
+
 	return $texte;
 }
 
@@ -524,7 +546,7 @@ function is_utf8($string) {
 function is_ascii($string) {
 	return !strlen(
 	preg_replace(
-	',[\x20-\x7E],s',
+	',[\x09\x0A\x0D\x20-\x7E],s',
 	'', $string));
 }
 
