@@ -48,9 +48,9 @@ $flag_editable = (acces_rubrique($rubrique_article)
 /// En double avec articles_edit.php3, mais necessite le flag_editable
 $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_editable) {
-	$titre = addslashes(corriger_caracteres($titre));
-	$descriptif = addslashes(corriger_caracteres($descriptif));
-	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
+	$titre_document = texte_script(corriger_caracteres($titre_document));
+	$descriptif_document = texte_script(corriger_caracteres($descriptif_document));
+	spip_query("UPDATE spip_documents SET titre='".$titre_document."', descriptif='".$descriptif_document."' WHERE id_document=$id_document");
 }
 
 
