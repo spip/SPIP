@@ -23,34 +23,34 @@ function changer_accents($dir) {
 		if ($fichier) {
 			echo "$nomfich<br>";
 			$fichier = join('', $fichier);
-			$fichier = ereg_replace('é', '&eacute;', $fichier);
-			$fichier = ereg_replace('É', '&Eacute;', $fichier);
 
-			$fichier = ereg_replace('à', '&agrave;', $fichier);
-			$fichier = ereg_replace('è', '&egrave;', $fichier);
-			$fichier = ereg_replace('ù', '&ugrave;', $fichier);
-			$fichier = ereg_replace('À', '&Agrave;', $fichier);
-			$fichier = ereg_replace('È', '&Egrave;', $fichier);
-			$fichier = ereg_replace('Ù', '&Ugrave;', $fichier);
+			$fichier = ereg_replace(chr(233), '&eacute;', $fichier);
+			$fichier = ereg_replace(chr(201), '&Eacute;', $fichier);
 
-			$fichier = ereg_replace('â', '&acirc;', $fichier);
-			$fichier = ereg_replace('ê', '&ecirc;', $fichier);
-			$fichier = ereg_replace('î', '&icirc;', $fichier);
-			$fichier = ereg_replace('ô', '&ocirc;', $fichier);
-			$fichier = ereg_replace('û', '&ucirc;', $fichier);
-			$fichier = ereg_replace('Â', '&Acirc;', $fichier);
-			$fichier = ereg_replace('Ê', '&Ecirc;', $fichier);
-			$fichier = ereg_replace('Î', '&Icirc;', $fichier);
-			$fichier = ereg_replace('Ô', '&Ocirc;', $fichier);
-			$fichier = ereg_replace('Û', '&Ucirc;', $fichier);
+			$fichier = ereg_replace(chr(224), '&agrave;', $fichier);
+			$fichier = ereg_replace(chr(232), '&egrave;', $fichier);
+			$fichier = ereg_replace(chr(249), '&ugrave;', $fichier);
+			$fichier = ereg_replace(chr(192), '&Agrave;', $fichier);
+			$fichier = ereg_replace(chr(200), '&Egrave;', $fichier);
+			$fichier = ereg_replace(chr(217), '&Ugrave;', $fichier);
 
-			$fichier = ereg_replace('ç', '&ccedil;', $fichier);
-			$fichier = ereg_replace('Ç', '&Ccedil;', $fichier);
+			$fichier = ereg_replace(chr(226), '&acirc;', $fichier);
+			$fichier = ereg_replace(chr(234), '&ecirc;', $fichier);
+			$fichier = ereg_replace(chr(238), '&icirc;', $fichier);
+			$fichier = ereg_replace(chr(244), '&ocirc;', $fichier);
+			$fichier = ereg_replace(chr(251), '&ucirc;', $fichier);
+			$fichier = ereg_replace(chr(194), '&Acirc;', $fichier);
+			$fichier = ereg_replace(chr(202), '&Ecirc;', $fichier);
+			$fichier = ereg_replace(chr(206), '&Icirc;', $fichier);
+			$fichier = ereg_replace(chr(212), '&Ocirc;', $fichier);
+			$fichier = ereg_replace(chr(219), '&Ucirc;', $fichier);
 
-			$fichier = ereg_replace('«', '&laquo;', $fichier);
-			$fichier = ereg_replace('»', '&raquo;', $fichier);
+			$fichier = ereg_replace(chr(231), '&ccedil;', $fichier);
+			$fichier = ereg_replace(chr(199), '&Ccedil;', $fichier);
 
-	
+			$fichier = ereg_replace(chr(171), '&laquo;', $fichier);
+			$fichier = ereg_replace(chr(187), '&raquo;', $fichier);
+
 			$fichier = eregi_replace("(face *= *['\"\\]+)[^'\"\\]*georgia[^'\"\\]*(['\"\\]+)", "\\1Georgia,Garamond,Times,serif\\2", $fichier);
 			$fichier = eregi_replace("(face *= *['\"\\]+)[^'\"\\]*verdana[^'\"\\]*(['\"\\]+)", "\\1Verdana,Arial,Helvetica,sans-serif\\2", $fichier);
 

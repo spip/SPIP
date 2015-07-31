@@ -11,7 +11,7 @@ define("_ECRIRE_INC_FILTRES", "1");
 
 // pour les titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
-	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)°][[:space:]]+", "", $texte);
+	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
 	return $texte;
 }
 
@@ -167,7 +167,7 @@ function affdate_base($numdate, $vue) {
 	if ($mois > 0){
 		$saison = "hiver";
 		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = "printemps";
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = "été";
+		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = chr(233)."t".chr(233);
 		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = "automne";
 		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = "hiver";
 	}
@@ -175,8 +175,8 @@ function affdate_base($numdate, $vue) {
 	if ($lang == "fr") {
 		if ($jour == '1') $jour = '1er';
 		$tab_mois = array('',
-			'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
-			'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+			'janvier', 'f'.chr(233).'vrier', 'mars', 'avril', 'mai', 'juin',
+			'juillet', 'ao'.chr(251).'t', 'septembre', 'octobre', 'novembre', 'd'.chr(233).'cembre');
 		$avjc = ' av. J.C.';
 	}
 	elseif ($lang == "en"){
