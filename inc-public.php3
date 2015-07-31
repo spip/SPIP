@@ -48,7 +48,6 @@ else {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
-
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($HTTP_POST_VARS)) {
 		include_ecrire('inc_lang.php3');
@@ -58,7 +57,6 @@ else {
 		include_ecrire('inc_lang.php3');
 		lang_select($HTTP_GET_VARS['lang']);
 	}
-
 	// Ajout_forum (pour les forums) et $val_confirm signalent des modifications
 	// a faire avant d'afficher la page
 	if ($ajout_forum) {
@@ -87,12 +85,14 @@ else {
 			} else
 			   $var_debug = false; 
 
+
 	// Faut-il preparer les boutons d'admin ?
 	$affiche_boutons_admin = (!$flag_preserver
 		AND ($HTTP_COOKIE_VARS['spip_admin']
 			OR $HTTP_COOKIE_VARS['spip_debug']));
 	if ($affiche_boutons_admin)
 		include_local('inc-admin.php3');
+
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);

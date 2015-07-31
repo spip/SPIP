@@ -135,6 +135,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 	$lang ? $lang : lire_meta('langue_site')))
 		list($id_rubrique_fond, $lang) = $r;
 
+
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 

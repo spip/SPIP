@@ -1,6 +1,13 @@
 <?php
 	include("inc_version.php3");
 
+	// En-tetes
+	$lastmodified = @filemtime("spip_style.php3");
+	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+	@Header ("Content-Type: text/css");
+
+if (!$headers_only) {
+
 	// parano XSS
 	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
 	list (,$couleur_claire,$couleur_foncee,$left,$right) = $regs;
@@ -9,13 +16,6 @@
 	
 	if ($left == 'left') $_rtl = "";
 	else $_rtl = "_rtl";
-	
-	// En-tetes
-	$lastmodified = @filemtime("spip_style.php3");
-	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-	@Header ("Content-Type: text/css");
-
-	if ($headers_only) exit;
 	
 	// Envoyer la feuille de style
 	if (!isset($couleur_claire))
@@ -70,8 +70,11 @@ td {
 	background-position: center bottom; 
 	float: none;
 }
-.fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF; }
-.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; }
+.fondo { background-color: <?php echo $couleur_foncee; ?>; 
+	background-position: center bottom; float: none; color: #FFFFFF;
+}
+.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; 
+}
 .maj-debut:first-letter { text-transform: uppercase; }
 
 
@@ -550,8 +553,12 @@ a.cellule-h-texte:hover {
  */
 
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
-.fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
-.fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white; }
+.fondgrison {
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; 
+}
+.fondgrison2 {
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;
+}
 .bouton36gris {
 	padding: 6px;
 	margin-top: 2px;
@@ -625,7 +632,9 @@ div.onglet_off {
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
 }
-.iconeon { cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee; }
+.iconeon {
+	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
+}
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif);}
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
@@ -1251,7 +1260,9 @@ a.spip_out {
 	padding-<?php echo $right; ?>: 10px;
 	border-bottom: 1px solid;
 }
-a.spip_note {background-color:#eeeeee;}
+a.spip_note {
+	background-color:#eeeeee;
+}
 a.spip_url {}
 a.spip_glossaire:hover {text-decoration: underline overline;}
 
@@ -1305,8 +1316,12 @@ div.spip_poesie div {
 	font-weight: bold;
 	font-size: 9px;
 }
-a.boutonlien:hover {color:#454545; text-decoration: none;}
-a.boutonlien {color:#808080; text-decoration: none;}
+a.boutonlien:hover {
+	color:#454545; text-decoration: none;
+}
+a.boutonlien {
+	color:#808080; text-decoration: none;
+}
 
 a.triangle_block {
 	margin-top: -3px;
@@ -1345,5 +1360,7 @@ table.spip td {
 	padding: 1px;
 	text-align: left;
 	vertical-align: center;
-}
-
+ }
+<?php }
+taches_de_fond();
+?>

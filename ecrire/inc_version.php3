@@ -1141,17 +1141,16 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	}
 }
 
-// Gestion des taches de fond ?  toutes les 5 secondes
-// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
 	verifier_htaccess(_DIR_SESSIONS);
 	if (!@file_exists(_FILE_CRON_LOCK)
-	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 5)) {
+	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 30)) {
 
 		// Si MySQL est out, laisser souffler
 		if (!@file_exists(_FILE_MYSQL_OUT)
 		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
 			include_ecrire('inc_cron.php3');
+#			spip_log($GLOBALS['PHP_SELF'] . ": taches de fond");
 			spip_cron();
 		}
 	}
@@ -1176,7 +1175,6 @@ function debut_entete($title)
 // '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
 // '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
 
-	$dir = ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr');
 	$base=lire_meta("adresse_site");
 	if (!$base)
 		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
@@ -1185,8 +1183,8 @@ function debut_entete($title)
 	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
-	  "<html dir='$dir'>\n" .
-	  "<head dir='$dir'>\n" .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
 #	  "<base href='$base' />\n" . # + tard
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset'>\n";
