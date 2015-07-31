@@ -695,6 +695,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plugin_info_automatique_liste_update' => 'روزآمدسازي فهرست‌ها',
 'plugin_info_automatique_ou' => 'يا...',
 'plugin_info_automatique_select' => 'يكي از پلاگين‌هاي زير را انتخاب كنيد: اسپيپ آن را در ديركتوري <code>@rep@</code> بارگذاري مي‌كند؛ اگر آن پلاگين آنجا باشد آن را به روز مي‌كند.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'توسعه‌ها(اكستنشن‌)ي زير در ديركتوري @extensions@ بارگذار و فعال مي‌شوند.',
 'plugin_info_extension_2' => 'آن‌ها نصب‌ زدايي نمي‌شوند.',

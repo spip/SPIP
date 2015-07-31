@@ -699,6 +699,7 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'plugin_info_automatique_liste_update' => 'Lëschten updaten',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wielt e Plugin: SPIP lued en erof an installéiert en am Repertoire <code>@rep@</code>; wann de Plugin schons do ass gëtt en Update gemaach.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW

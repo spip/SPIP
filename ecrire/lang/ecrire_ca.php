@@ -705,6 +705,7 @@ amb un color que indica el seu estat:',
 'plugin_info_automatique_liste_update' => 'Actualitzar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleccioneu més avall un plugin: SPIP el baixarà i l\'instal·larà a dins del directori <code>@rep@</code> ; si aquest plugin ja existeix, s\'actualitzarà.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions que hi ha a sota es carreguen i s\'activen al directori @extensions@.',
 'plugin_info_extension_2' => 'No es poden desactivar.',

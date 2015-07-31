@@ -724,6 +724,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
 'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricherà e lo installerà nella cartella <code>@rep@</code>; se questo plug-in è già presente verrà aggiornato.',
+'plugin_info_credit' => 'Crédits', # NEW
 'plugin_info_erreur_xml' => 'La déclaration de ce plugin est incorrecte', # NEW
 'plugin_info_extension_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @extensions@.', # NEW
 'plugin_info_extension_2' => 'Elles ne sont pas désactivables.', # NEW
