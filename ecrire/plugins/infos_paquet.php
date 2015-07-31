@@ -39,6 +39,10 @@ function plugins_infos_paquet($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		// compatibilite avec l'existant:
 		$tree = $vxml->versions['0'];
 
+		// l'arbre renvoie parfois un tag vide... etrange. Pas la peine de garder ca.
+		if (isset($tree['']) and !strlen($tree['']))
+			unset($tree['']);
+
 		$tree['slogan'] = $tree['prefix']."_slogan";
 		$tree['description'] = $tree['prefix']."_description";
 		paquet_readable_files($tree, "$dir_plugins$plug/");
