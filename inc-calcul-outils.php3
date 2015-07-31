@@ -204,7 +204,7 @@ function calcul_exposer ($id, $type, $reference) {
 					list ($id_rubrique) = spip_abstract_fetsel(
 array('id_rubrique'), 
 array($table),
-array("$element=$id_element"));
+array("$element=".intval($id_element)));
 				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
@@ -353,7 +353,7 @@ function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc) {
 
 // les balises dynamiques et EMBED ont des filtres sans arguments 
 // car en fait ce sont des arguments pas des filtres.
-// Si le besoin s'en fait sentir, il faudra récuperer la 2e moitie du tableau 
+// Si le besoin s'en fait sentir, il faudra rï¿½cuperer la 2e moitie du tableau 
 
 function argumenter_balise($fonctions, $sep) {
   $res = array();
