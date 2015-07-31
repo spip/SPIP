@@ -14,21 +14,79 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
+
+// Fonction a appeler lorsque le statut d'un objet change dans une rubrique
+
+// Si l'objet etait publie' et est deplace' ou depublie'
+// on recalcule toutes les rubriques (a ameliorer).
+// Si publication standard, ne recalculer que la branche
+
+function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='')
+{
+	if ($statut_ancien == 'publie'
+	AND (isset($modifs['id_rubrique']) OR isset($modifs['statut'])))
+		calculer_rubriques();
+	elseif ($modifs['statut']=='publie')
+		publier_branche_rubrique($id_rubrique);
+}
+
+// Si premiere publication dans une rubrique, la passer en statut "publie"
+// avec consequence sur ses parentes et les langues
+// (a refaire a terme par une Cascade SQL)
+
+function publier_branche_rubrique($id_rubrique)
+{
+	$id_pred = $id_rubrique;
+
+	while ($r = spip_abstract_fetch(spip_query("SELECT statut, id_parent FROM spip_rubriques AS R WHERE R.id_rubrique=$id_pred AND  R.statut != 'publie'"))) {
+
+		spip_query("UPDATE spip_rubriques SET statut='publie', date=NOW() WHERE id_rubrique=$id_pred");
+		if (!($id_pred = $r['id_parent'])) break;
+	}
+
+	if (!$id_pred)
+	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
+	  ecrire_meta("date_calcul_rubriques", date("U"));
+
+	$langues = calculer_langues_utilisees();
+	ecrire_meta('langues_utilisees', $langues);
+	ecrire_metas();
+}
+
 //
-// Recalculer l'ensemble des donnees associees a l'arborescence des rubriques
-// (cette fonction est a appeler a chaque modification sur les rubriques)
+// Fonction appelee lorsqu'on (de)publie dans une rubrique.
+// Restreindre ses appels le plus possible
 //
 // http://doc.spip.org/@calculer_rubriques
 function calculer_rubriques() {
-	if (!spip_get_lock("calcul_rubriques")) return;
+	if (!spip_get_lock($t="calcul_rubriques")) return;
+
+	calculer_rubriques_publiees();
+
+	// Apres chaque (de)publication 
+	// recalculer les langues utilisees sur le site
+	$langues = calculer_langues_utilisees();
+	ecrire_meta('langues_utilisees', $langues);
+
+	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
+	ecrire_meta("date_calcul_rubriques", date("U"));
+
+	// on calcule la date du prochain article post-date
+	calculer_prochain_postdate(); // fera le ecrire_metas();
+
+	spip_release_lock($t);
+}
+
+// Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
+// Attention, faute de SQL transactionnel on travaille sur
+// des champs temporaires afin de ne pas casser la base
+// pendant la demi seconde de recalculs
+
+function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
-	// Attention, faute de SQL transactionnel on travaille sur
-	// des champs temporaires afin de ne pas  casser la base
-	// pendant la demi seconde de recalculs
 	spip_query("UPDATE spip_rubriques
 	SET date_tmp='0000-00-00 00:00:00', statut_tmp='prive'");
-
 
 	//
 	// Publier et dater les rubriques qui ont un article publie
@@ -101,7 +159,6 @@ function calculer_rubriques() {
 			$continuer = true;
 		}
 	} while ($continuer);
-
 	// point d'entree pour permettre a des plugins de gerer le statut
 	// autrement (par ex: toute rubrique est publiee des sa creation)
 	// Ce pipeline fait ce qu'il veut, mais s'il touche aux statuts/dates
@@ -110,16 +167,6 @@ function calculer_rubriques() {
 
 	// Enregistrement des modifs
 	spip_query("UPDATE spip_rubriques SET date=date_tmp, statut=statut_tmp");
-	// Comme ce calcul est fait apres chaque publication on en profite
-	// pour recalculer les langues utilisees sur le site
-	$langues = calculer_langues_utilisees();
-	ecrire_meta('langues_utilisees', $langues);
-
-	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
-	ecrire_meta("date_calcul_rubriques", date("U"));
-
-	// on calcule la date du prochain article post-date
-	calculer_prochain_postdate(); // fera le ecrire_metas();
 }
 
 // http://doc.spip.org/@propager_les_secteurs
@@ -149,8 +196,8 @@ function propager_les_secteurs()
 	FROM spip_articles AS fille, spip_rubriques AS maman
 	WHERE fille.id_rubrique = maman.id_rubrique
 	AND fille.id_secteur <> maman.id_secteur");
+
 	while ($row = spip_abstract_fetch($r)) {
-#	  spip_log("change " . $row['id'] . " secteur " . $row['secteur']);
 		spip_query("UPDATE spip_articles
 		SET id_secteur=".$row['secteur']." WHERE id_article=".$row['id']);
 	}
@@ -162,7 +209,6 @@ function propager_les_secteurs()
 	while ($row = spip_abstract_fetch($r))
 		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']."
 		WHERE id_syndic=".$row['id']);
-	
 }
 
 //

@@ -59,33 +59,32 @@ function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents
 	  ($sousaction4 ? 4 :
 	   $sousaction5 ))));
 
-     $path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
-	     ($sousaction2 ? $url : $chemin));
+	$path = ($sousaction1 ? ($_FILES ? $_FILES : $GLOBALS['HTTP_POST_FILES']) :
+		($sousaction2 ? $url : $chemin));
 
-     $sousaction = charger_fonction('joindre' . $sousaction, 'inc');
-     $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
+	$sousaction = charger_fonction('joindre' . $sousaction, 'inc');
+	$type_image = $sousaction($path, $mode, $type, $id, $id_document, 
 		 $hash, $redirect, $documents_actifs, $iframe_redirect);
 
-     $redirect = urldecode($redirect);
-     if ($documents_actifs) {
-	$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
-     }
+	$redirect = urldecode($redirect);
+	if ($documents_actifs) {
+		$redirect = parametre_url($redirect,'show_docs',join(',',$documents_actifs),'&');
+	}
      
-    if (!$ancre) {
-
+	if (!$ancre) {
 		if ($mode=='vignette')
 			$ancre = 'images';
 		else if ($type_image)
 			$ancre = 'portfolio';
 		else
 			$ancre = 'documents';
-     }
+	}
 
-    $redirect .= '#' . $ancre;
-    if ($type == 'rubrique') {
-	include_spip('inc/rubriques');
-	calculer_rubriques();
-     }
+	$redirect .= '#' . $ancre;
+	if ($type == 'rubrique') {
+		include_spip('inc/rubriques');
+		calculer_rubriques_if($id, array('statut' => 'publie'));
+	}
 
 	if(_request("iframe") == 'iframe') {
 		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe";

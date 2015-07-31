@@ -101,7 +101,7 @@ function revisions_breves ($id_breve, $c=false) {
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_breves WHERE id_breve=$id_breve");
 	$row = spip_abstract_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
-	$statut = $row['statut'];
+	$statut_ancien = $statut = $row['statut'];
 
 	if (_request('statut', $c)
 	AND _request('statut', $c) != $statut
@@ -194,13 +194,9 @@ function revisions_breves ($id_breve, $c=false) {
 		marquer_indexer('spip_breves', $id_breve);
 	}
 
-	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// une breve publiee, ou si l'on publie/depublie une breve
-	if (isset($champs['statut'])
-	OR ($statut == 'publie' AND isset($champ['id_rubrique']))
-	) {
-		calculer_rubriques();
-	}
+	// Au besoin, changer le statut des rubriques concernees 
+
+	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 
 	// Notification ?
 	pipeline('post_edition',
