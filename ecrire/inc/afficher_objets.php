@@ -246,28 +246,31 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 
 	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], ($deb_aff > 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND isset($GLOBALS['meta']['image_process'])) ? ($GLOBALS['meta']['image_process'] != "non") : false;
 
-	$table = $tous_id = array(); // $tous_id obsolete.
-	while ($row = sql_fetch($result)) {
-		if ($a = $skel($row, $tous_id, $voir_logo, $arg))
-			$table[] = $a;
-	}
-	sql_free($result);
+	$tableau = array(); // ne sert pas ici
+	return xhtml_table_id_type($result, $skel, $tableau, $arg, $force, $largeurs, $styles, $tranches, $titre, $icone);
+}
 
-	return !($table OR $force) ? '' :
-		xhtml_table_id_type($table, $largeurs, $styles, $tranches, $titre, $icone);
+function charger_fonction_logo_if()
+{
+	global $spip_display;
+
+	if ($spip_display == 1 OR $spip_display == 4 OR !isset($GLOBALS['meta']['image_process']))
+	  return false;
+	if ($GLOBALS['meta']['image_process'] == "non") return false;
+	return charger_fonction('chercher_logo', 'inc');
 }
 
 // http://doc.spip.org/@afficher_objet_boucle
-function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
+function afficher_objet_boucle($row, $own)
 {
 	global $connect_statut, $spip_lang_right;
+	static $chercher_logo = true;
+
 	list($type,$primary,$afficher_langue, $affrub, $langue_defaut) = $own;
 	$vals = array();
 	$id_objet = $row[$primary];
 	if (autoriser('voir',$type,$id_objet)){
-		$tous_id[] = $id_objet;
 
 		$date_heure = isset($row['date'])?$row['date']:(isset($row['date_heure'])?$row['date_heure']:"");
 
@@ -283,16 +286,17 @@ function afficher_objet_boucle($row, &$tous_id,  $voir_logo, $own)
 
 		list($titre,$suite) = afficher_titre_objet($type,$row);
 		$s = "\n<div>";
-		if ($voir_logo) {
-			$chercher_logo = charger_fonction('chercher_logo', 'inc');
-			if ($logo = $chercher_logo($id_objet, $primary, 'on')) {
+		if ($chercher_logo) {
+			if ($chercher_logo !== true
+			    OR $chercher_logo = charger_fonction_logo_if())
+			  if ($logo = $chercher_logo($id_objet, $primary, 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
 				include_spip('inc/filtres_images');
 				$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
 
 				if ($logo)
 					$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
-			}
+			  }
 		}
 		if (strlen($titre)){
 			$s .= "<a href='"
@@ -441,20 +445,18 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	$largeurs = array(11, '', 80, 100, 50);
 	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 
-	$table = array();
-	while ($r = sql_fetch($q)) if ($a = $formater($r)) $table[] = $a;
-	sql_free($q);
+	$tableau = array();
 
 	$tranches = ($cpt <= $nb_aff) ? ''
 	  : afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('memoriser', "hash=$hash&trad=$trad"), $nb_aff);
 
-	$res = xhtml_table_id_type($table, $largeurs, $styles, $tranches, $texte, "article-24.gif");
+	$res = xhtml_table_id_type($q, $formater, $tableau, array(), false, $largeurs, $styles, $tranches, $texte, "article-24.gif");
 
 	return ajax_action_greffe($tmp_var, '', $res);
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle
-function afficher_articles_trad_boucle($row)
+function afficher_articles_trad_boucle($row, $own='')
 {
   	global $spip_lang_right, $spip_display;
 
@@ -536,7 +538,7 @@ function afficher_articles_trad_boucle($row)
 }
 
 // http://doc.spip.org/@afficher_auteurs_boucle
-function afficher_auteurs_boucle($row, &$tous_id,  $voir_logo, $own){
+function afficher_auteurs_boucle($row, $own){
 	$vals = array();
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	if ($row['statut'] == '0minirezo')

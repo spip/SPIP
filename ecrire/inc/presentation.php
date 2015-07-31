@@ -446,18 +446,24 @@ function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
 }
 
 // http://doc.spip.org/@xhtml_table_id_type
-function xhtml_table_id_type($table, $largeurs, $styles, $tranches = '', $title='', $icone='')
+function xhtml_table_id_type($req, $fonc, &$prims, $own, $force, $largeurs, $styles, $tranches = '', $title='', $icone='')
 {
 	global $spip_display, $spip_lang_left;
 
-	if ($table) {
+	$prim = $prims;
+	$prims = array();
+	if (!sql_count($req)) {
+		if (!$force) return '';
+	} else {
 	if ($spip_display != 4) {
 		$evt = !preg_match(",msie,i", $GLOBALS['browser_name']) ? ''
 		: "
 			onmouseover=\"changeclass(this,'tr_liste_over');\"
 			onmouseout=\"changeclass(this,'tr_liste');\"" ;
 
-		foreach ($table as $vals) {
+		while ($r = sql_fetch($req)) {
+		  if ($prim) $prims[]= $r[$prim];
+		  if ($vals = $fonc($r, $own)) {
 			reset($largeurs);
 			reset($styles);
 			$res = '';
@@ -470,19 +476,24 @@ function xhtml_table_id_type($table, $largeurs, $styles, $tranches = '', $title=
 				$res .= "\n<td$class$style>$t</td>";
 			}
 			$tranches .= "\n<tr class='tr_liste'$evt>$res</tr>";
+		  }
 		}
 
 		$tranches = "<table width='100%' cellpadding='2' cellspacing='0' border='0'>$tranches</table>";
-	}
-	else {
-		foreach ($table as $t) 
-			if ($t)
+	} else {
+		while ($r = sql_fetch($req)) {
+			if ($prim) $prims[]= $r[$prim];
+			if ($t = $fonc($r, $own)) {
 			  	$tranches = '<li>' . join('</li><li>', $t) . '</li>';
 		$tranches = "\n<ul style='text-align: $spip_lang_left; background-color: white;'>"
 		. $tranches
 		. "</ul>";
+			}
+		}
 	}
+	sql_free($req);
 	}
+
 	$id = 't'.substr(md5($title),0,8);
 	$bouton = !$icone ? '' : bouton_block_depliable($title, true, $id);
 

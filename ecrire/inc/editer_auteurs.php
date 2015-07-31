@@ -218,24 +218,19 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond_les_auteurs, $
 
 	if (!sql_count($result)) return '';
 
-	$table = array();
-
 	$retirer = array(_T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", " class='puce' style='vertical-align: bottom;'"));
-
-	while ($row = sql_fetch($result)) {
-		$table[] = ajouter_auteur_un($row, $formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit);
-	}
 
 	$largeurs = array('14', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
-	return xhtml_table_id_type($table, $largeurs, $styles, $tranche);
+	$tableau = array(); // ne sert pas
+	return xhtml_table_id_type($result, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
 }
 
 // http://doc.spip.org/@ajouter_auteur_un
-function ajouter_auteur_un($row, $formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit)
-{
+function ajouter_auteur_un($row, $own) {
 	global $connect_statut, $connect_id_auteur;
+	list($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit) = $own;
 
 	$id_auteur = $row['id_auteur'];
 	$vals = $formater($id_auteur);

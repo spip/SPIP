@@ -15,7 +15,7 @@ include_spip('inc/afficher_objets');
 // Fonction appelee dans une boucle, calculer les invariants au premier appel.
 
 // http://doc.spip.org/@inc_formater_article_dist
-function inc_formater_article_dist($row)
+function inc_formater_article_dist($row, $own='')
 {
 	global $options, $spip_lang_right, $spip_display;
 	static $pret = false;

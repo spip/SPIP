@@ -41,12 +41,8 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	$result = sql_select($select, 'spip_mots', "id_groupe=$id_groupe", '',  'multi', (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff"));
 
-	$table = array();
+	$tableau = array();
 	$occurrences = calculer_liens_mots($id_groupe);
-	while ($row = sql_fetch($result)) {
-		$table[] = afficher_groupe_mots_boucle($row, $occurrences, $cpt, "$tmp_var=$deb_aff");
-	}
-
 	if ($connect_statut=="0minirezo") {
 			$largeurs = array('', 100, 130);
 			$styles = array('arial11', 'arial1', 'arial1');
@@ -56,14 +52,15 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	}
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . xhtml_table_id_type($table, $largeurs, $styles, $tranches);
+	  . xhtml_table_id_type($result, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
-function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
+function afficher_groupe_mots_boucle($row, $own)
 {
 	global $connect_statut;
 
+	list($occurrences, $total, $deb_aff) = $own;
 	$id_mot = $row['id_mot'];
 	$id_groupe = $row['id_groupe'];
 	$titre = typo($row['titre']);

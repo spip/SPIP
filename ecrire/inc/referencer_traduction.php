@@ -59,19 +59,17 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($trad_err)
 		$reponse .= "<div><span style='color: red' size='2' face='Verdana, Geneva, helvetica, sans-serif'>"._T('trad_deja_traduit'). "</span></div>";
 
-		// Afficher la liste des traductions
-	$table = array();
+	// Afficher la liste des traductions
+
 	if ($id_trad) {
 		$result = sql_select("id_article, id_rubrique, titre, lang, statut, id_trad", "spip_articles", "id_trad = $id_trad");
-		while ($row = sql_fetch($result)) {
-			$table[] = articles_traduction($row, $id_article);
-		}
 	}
 		// bloc traductions
-	if (count($table) > 0) {
+	if (sql_count($result)) {
 		$largeurs = array(7, 12, '', 100);
 		$styles = array('', '', 'arial2', 'arial2');
-		$liste = xhtml_table_id_type($table, $largeurs, $styles, '',_T('trad_article_traduction'));
+		$tableau = array();
+		$liste = xhtml_table_id_type($result, 'articles_traduction', $tableau,  $id_article, false, $largeurs, $styles, '',_T('trad_article_traduction'));
 	} else $liste = '';
 
 	// changer les globales de direction de langue
@@ -81,7 +79,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($spip_display == 4) $form =''; else {
 	$form = "<table width='100%'><tr>";
 
-	if ($flag  AND !$table) {
+	if ($flag  AND !$liste) {
 			// Formulaire pour lier a un article
 		$form .= "<td style='width: 60%' class='arial2'>"
 		. ajax_action_post("referencer_traduction",
@@ -102,7 +100,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
 	. "</td>";
 
-	if ($flag AND $table) {
+	if ($flag AND $tableau) {
 		$clic = _T('trad_delier');
 		$form .= "<td style='width: 10px'> &nbsp; </td>"
 		. "<td style='width: 2px; background: url(" . chemin_image("tirets-separation.gif") . ")'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
