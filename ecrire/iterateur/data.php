@@ -194,6 +194,19 @@ class IterateurDATA implements Iterator {
 			}
 		}
 
+		// grouper les resultats {fusion /x/y/z} ;
+		if (isset($this->command['groupby'])) {
+			$fusion = $this->command['groupby'][0][1];
+			$vu = array();
+			foreach($this->tableau as $k => $v) {
+				$val = table_valeur($v, $fusion);
+				if (isset($vu[$val]))
+					unset($this->tableau[$k]);
+				else
+					$vu[$val] = true;
+			}
+		}
+
 		$this->rewind();
 		#var_dump($this->tableau);
 	}
