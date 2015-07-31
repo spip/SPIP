@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_da'] = array(
 'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenh&aelig;ng.',
 'avis_erreur_mysql' => 'MySQL fejl',
 'avis_erreur_sauvegarde' => 'Fejl i sikkerhedskopi (@type@ @id_objet@)!',
-'avis_erreur_version_archive' => '<B>Advarsel! Filen @archive@ h&oslash;rer til 
+'avis_erreur_version_archive' => '<MODIF> <B>Advarsel! Filen @archive@ h&oslash;rer til 
 				en anden version af SPIP end den du har
 				installeret.</B> Du risikerer store
 				vanskeligheder: risiko for at &oslash;del&aelig;gge din database, 
@@ -510,7 +510,7 @@ Tak for din deltagelse
 'info_contenu_articles' => 'Artiklens bestanddele',
 'info_contribution' => 'indl&aelig;g i fora',
 'info_copyright' => 'er fri software der distribueres <a href=\'license.txt\'>under GPL licens.</a>',
-'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href=\'http://www.spip.net/da_\'>http://www.spip.net/da_</a>.',
+'info_copyright_doc' => '<MODIF> For yderligere oplysninger bes&oslash;g webstedet <a href=\'http://www.spip.net/da\'>http://www.spip.net/da</a>.',
 'info_cours_edition' => 'Igang',
 'info_creation_mots_cles' => 'Opret og konfigurer webstedets n&oslash;gleord her',
 'info_creation_paragraphe' => '(For at lave afsnit skal du inds&aelig;tte blanke linier.)',
@@ -1044,7 +1044,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'login_login2' => 'Login (brugeridentifikation til dette websted):',
 'login_login_pass_incorrect' => '(Forkert adgangskode eller ).',
 'login_motpasseoublie' => 'glemt adgangskode?',
-'login_non_securise' => 'Advarsel, denne formular er ikke sikret.
+'login_non_securise' => '<MODIF> Advarsel, denne formular er ikke sikret.
 
 			Hvis du ikke vil risikere at din adgangskode bliver opsnappet p&aring; nettet, skal du aktivere
 
@@ -1054,6 +1054,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'login_pass2' => 'Adgangskode:',
 'login_preferez_refuser' => '<b>Hvis du foretr&aelig;kker at afvise cookies</b>, kan du anvende en anden opkoblingsm&aring;de (mindre sikker):',
 'login_recharger' => 'genindl&aelig;s denne side',
+'login_rester_identifie' => 'V&aelig;r kendt nogle dage',
 'login_retour_public' => 'Tilbage til det offentlige websted',
 'login_retour_site' => 'Tilbage til den offentlige websted',
 'login_retoursitepublic' => 'tilbage til den offentlige websted',
@@ -1218,7 +1219,7 @@ og igen f&aring; adgang til webstedet.',
 'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
  <i>ecrire/data/</i>.
  Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
-'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
+'texte_admin_tech_02' => '<MODIF> Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
 	Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
 	For mere information henvises til <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'Du kan v&aelig;lge at gemme filen i komprimeret form for hurtigere at kunne overf&oslash;re den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
