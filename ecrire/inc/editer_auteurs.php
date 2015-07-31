@@ -196,6 +196,9 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit,
 	if (!$from) return '' ; // securite
 	$from = "spip_{$from}";
 	$where = "id_{$type}=".sql_quote($id) . ($cond ? " AND $cond" : '');
+
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
+
 	$result = sql_select("id_auteur", $from, $where);
 	$cpt = sql_count($result);
 	$tmp_var = "editer_auteurs-$id";
@@ -222,7 +225,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $cond, $script_edit,
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	$tableau = array(); // ne sert pas
-	return xhtml_table_id_type($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
+	return 	$presenter_liste($requete, 'ajouter_auteur_un', $tableau, array($formater, $retirer, $arg_ajax, $flag_editable, $id, $type, $script_edit), false, $largeurs, $styles, $tranche);
 }
 
 // http://doc.spip.org/@ajouter_auteur_un

@@ -20,14 +20,14 @@ include_spip('base/abstract_sql');
 function inc_grouper_mots_dist($id_groupe, $cpt) {
 	global $connect_statut, $spip_lang_right, $spip_lang;
 
+	$presenter_liste = charger_fonction('presenter_liste', 'inc');
+
 	// ceci sert a la fois:
 	// - a construire le nom du parametre d'URL indiquant la tranche
 	// - a donner un ID a la balise ou greffer le retour d'Ajax
 	// tant pour la prochaine tranche que pour le retrait de mot
 	$tmp_var = "editer_mots-$id_groupe";
-
 	$nb_aff = floor(1.5 * _TRANCHES);
-
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
 		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe&total=$cpt"), $nb_aff);
@@ -52,7 +52,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	}
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . xhtml_table_id_type($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
+	  . 	$presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
