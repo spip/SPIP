@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le public
+include_spip('inc/autoriser');
 
 /**
  * Chargement du formulaire d'édition d'un auteur
@@ -36,6 +37,9 @@ include_spip('inc/filtres_ecrire'); // si on utilise le formulaire dans le publi
 function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	$valeurs['new_login'] = $valeurs['login'];
+
+	if (!autoriser('modifier','auteur',intval($id_auteur)))
+		$valeurs['editable'] = '';
 
 	return $valeurs;
 }
@@ -87,15 +91,12 @@ function auteurs_edit_config($row)
 	//$config['restreint'] = ($row['statut'] == 'publie');
 	$auth_methode = $row['source'];
 	include_spip('inc/auth');
-	include_spip('inc/autoriser');
-	$autoriser = autoriser('modifier','auteur',$row['id_auteur'],null, array('email'=>true));
 	$config['edit_login'] =
-		(auth_autoriser_modifier_login($auth_methode) AND $autoriser);
+		(auth_autoriser_modifier_login($auth_methode)
+			AND autoriser('modifier','auteur',$row['id_auteur'],null, array('email'=>true)));
 	$config['edit_pass'] =
 		(auth_autoriser_modifier_pass($auth_methode)
-		AND
-			($GLOBALS['visiteur_session']['id_auteur'] == $row['id_auteur'] OR $autoriser)
-		);
+		AND autoriser('modifier','auteur',$row['id_auteur']));
 
 	return $config;
 }
