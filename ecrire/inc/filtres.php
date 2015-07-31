@@ -3012,4 +3012,16 @@ function sinon_interdire_acces($ok=false, $url='', $statut=0){
 	exit;
 }
 
+/**
+ * Assurer le fonctionnement de |compacte meme sans l'extension compresseur
+ * @param string $source
+ * @param null|string $format
+ * @return string
+ */
+function filtre_compacte_dist($source, $format = null){
+	if (function_exists('compacte'))
+		return compacte($source, $format);
+	return $source;
+}
+
 ?>
