@@ -398,7 +398,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		  $boucle->select[] =  "\".sql_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
 		  $order = "'multi'";
 	// par num champ(, suite)
-	      }	else if (preg_match(",^num (.*)$,",$par, $m)) {
+	      }	else if (preg_match(",^num (.*)$,m",$par, $m)) {
 		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
 		  $suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
 		  if ($suite !== "''")
