@@ -657,8 +657,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			if ($marqueur_notes) // ??????
 				$mn = $marqueur_notes.'-';
 			$ancre = $mn.urlencode($num_note);
-			$insert = "$ouvre_ref<a href='#nb$ancre' name='nh$ancre' class='spip_note'>$num_note</a>$ferme_ref";
-			$appel = "<html>$ouvre_note<a href='#nh$ancre' name='nb$ancre' class='spip_note'>$num_note</a>$ferme_note</html>";
+			$insert = "$ouvre_ref<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\">$num_note</a>$ferme_ref";
+			$appel = "<html>$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note</html>";
 		} else {
 			$insert = '';
 			$appel = '';
