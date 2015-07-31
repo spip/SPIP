@@ -224,7 +224,7 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 	} else $suite ='';
 	$query = 'EXPLAIN ' . preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
 
-	$r = pg_query($link,$query,$requeter);
+	$r = pg_query($link,$query);
 	if (!$requeter) return $r;
 	return spip_pg_fetch($r, NULL, $serveur);
 }
