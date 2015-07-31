@@ -242,14 +242,15 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					else{
 						//jQuery(cible).positionner(false);
 						if (a.length && a.is('a[name=ajax_redirect]')){
-							a = a.attr('href');
+							a = a.get(0).href;
 							setTimeout(function(){
 								var cur = window.location.href.split('#');
 								document.location.replace(a);
 								// regarder si c'est juste un changement d'ancre : dans ce cas il faut reload
 								// (le faire systematiquement provoque des bugs)
-								if (cur[0]==a.split('#')[0])
+								if (cur[0]==a.split('#')[0]){
 									window.location.reload();
+								}
 							},10);
 							// ne pas arreter l'etat loading, puisqu'on redirige !
 							// mais le relancer car l'image loading a pu disparaitre
