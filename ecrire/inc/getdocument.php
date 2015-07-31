@@ -50,9 +50,9 @@ function effacer_repertoire_temporaire($nom) {
 function copier_document($ext, $orig, $source) {
 
 	$dir = creer_repertoire_documents($ext);
-	$dest = ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
-			translitteration(ereg_replace("\.([^.]+)$", "", 
-						      ereg_replace("<[^>]*>", '', basename($orig)))));
+	$dest = preg_replace("/[^._=-\w\d]+", "_", 
+			translitteration(preg_replace("/\.([^.]+)$/", "", 
+						      preg_replace("/<[^>]*>/", '', basename($orig)))));
 
 	// ne pas accepter de noms de la forme -r90.jpg qui sont reserves
 	// pour les images transformees par rotation (action/documenter)

@@ -430,7 +430,7 @@ function utf_8_to_unicode($source) {
 				}
 				$thisPos++;
 			}
-			$encodedLetter = "&#". ereg_replace('^0+', '', $decimalCode) . ';';
+			$encodedLetter = "&#". preg_replace('/^0+/', '', $decimalCode) . ';';
 			$encodedString .= $encodedLetter;
 		}
 	}

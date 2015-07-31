@@ -207,7 +207,7 @@ jQuery(function(){
 
 	$html = justifier($html . $suite );
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
-	$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 class="target_blank">', $html);
+	$html = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@', '<a href="\\1"\\2 class="target_blank">', $html);
 
 	echo $html, '</body>';
 }

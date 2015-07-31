@@ -314,7 +314,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 		if (trim($table))
 			echo "document.progression.recharge.value='$table';\n";
 		if (!$size)
-			$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
+			$taille = preg_replace("/&nbsp;/", " ", taille_en_octets($abs_pos));
 		else
 			$taille = floor(100 * $abs_pos / $size)." %";
 		echo "document.progression.taille.value='$taille';\n";

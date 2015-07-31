@@ -157,7 +157,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents WHERE id_document in (".join(',', $documents_lies).")");
 		while ($v = spip_fetch_array($res))
 			$vignettes[]= $v['id_vignette'];
-		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
+		$docs_exclus = preg_replace('/^,/','',join(',', $vignettes).','.join(',', $documents_lies));
 
 		if ($docs_exclus) $docs_exclus = "AND l.id_document NOT IN ($docs_exclus) ";
 	} else $docs_exclus = '';

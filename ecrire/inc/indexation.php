@@ -188,7 +188,7 @@ function mots_indexation($texte, $min_long = 3) {
 
 	// Supprimer les caracteres de ponctuation, les guillemets...
 	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^(";
-	$texte = strtr($texte, $e, ereg_replace('.', ' ', $e));
+	$texte = strtr($texte, $e, preg_replace('/./', ' ', $e));
 
 	//delete  +\- not at the beginning of a word
 	$texte = preg_replace(",(?:\S)[\-+],"," ",$texte);

@@ -2273,14 +2273,14 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// Deux passes pour recuperer, d'abord, largeur_ligne
 	// necessaire pour alignement right et center
 	foreach ($lines as $line) {
-		$line = ereg_replace("~", " ", $line);
+		$line = preg_replace("/~/", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 	}
 
 	foreach ($lines as $line) {
-		$line = ereg_replace("~", " ", $line);
+		$line = preg_replace("/~/", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;

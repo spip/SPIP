@@ -26,7 +26,7 @@ function afficher_liens_calendrier($lien, $icone, $texte) {
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
-	icone_horizontale (_T('ical_methode_webcal'), ereg_replace("https?://", "webcal://", $lien), "calendrier-24.gif");
+	icone_horizontale (_T('ical_methode_webcal'), preg_replace("@https?://@", "webcal://", $lien), "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();
 }

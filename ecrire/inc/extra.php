@@ -145,7 +145,7 @@ function extra_form($extra, $type, $ensemble='') {
 			// complique car la valeur n'esst pas envoyee ar le nav si unchecked
 			case "case":
 			case "checkbox":
-				$affiche = ereg_replace("<br />$", "&nbsp;", $affiche);
+				$affiche = preg_replace("@<br />$@", "&nbsp;", $affiche);
 				$affiche .= "<input type='hidden' name='suppl_$champ' value='1' /><input type='checkbox' name='suppl_{$champ}_check'";
 				if ($extra[$champ] == 'true')
 					$affiche .= " checked";
@@ -353,7 +353,7 @@ function extra_affichage($extra, $type) {
 						else if ($contenu[$i] <> '')
 							$contenu_ = "Choix incoh&eacute;rents, "
 							."v&eacute;rifiez la configuration... ";
-				$contenu = ereg_replace(", $", "", $contenu_);
+				$contenu = preg_replace("/, $/", "", $contenu_);
 				break;
 		}
 		if ($filtre != 'brut' AND function_exists($filtre))
