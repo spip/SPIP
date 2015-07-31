@@ -101,7 +101,7 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 	}
 	else $script .= '?';
 
-	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)");
+	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)ORDER BY date_time DESC");
 
 	while ($row = spip_fetch_array($res)) {
 		if($c++%10==0) {	
