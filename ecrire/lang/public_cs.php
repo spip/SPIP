@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Poslední články',
 'derniers_commentaires' => 'Poslední komentáře',
 'derniers_messages_forum' => 'Poslední příspěvky v diskusních fórech',
-'documents_interdits_forum' => 'Dokumenty jsou ve fóru zakázané',
 
 // E
 'edition_mode_texte' => 'Textový režim',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Povolené formáty: @formats@.',
-'forum' => 'Fórum',
 
 // H
 'hierarchie_site' => 'Struktura stránek',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Reagovat na tento článek',
 'repondre_breve' => 'Reagovat na tuto novinku ',
-'repondre_message' => 'Reagovat na tuto zprávu',
 'resultats_recherche' => 'Výsledky hledání',
 'retour_debut_forums' => 'Zpět na začátek diskusních fór',
 'rubrique' => 'Rubrika',

@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => '最新文章',
 'derniers_commentaires' => '最新评论',
 'derniers_messages_forum' => '论坛最近发表的消息',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => '文本编辑模式',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => '论坛',
 
 // H
 'hierarchie_site' => '站点层次',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => '回复文章',
 'repondre_breve' => '回复简要',
-'repondre_message' => '回复消息',
 'resultats_recherche' => '搜索结果',
 'retour_debut_forums' => '返回论坛顶',
 'rubrique' => '专栏',

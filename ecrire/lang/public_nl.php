@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Laatste artikels',
 'derniers_commentaires' => 'Laatste commentaren',
 'derniers_messages_forum' => 'Laatst gepubliceerde berichten in het forum',
-'documents_interdits_forum' => 'Verboden documenten in het forum',
 
 // E
 'edition_mode_texte' => 'Uitgave in tekstmodus van',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Aanvaarde formaten : @formats@.',
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Structuur van de site',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Dit artikel beantwoorden',
 'repondre_breve' => 'Dit nieuwsbericht beantwoorden',
-'repondre_message' => 'Dit bericht beantwoorden',
 'resultats_recherche' => 'Resultaten van de zoekopdracht',
 'retour_debut_forums' => 'Terug naar de startpagina van de forums',
 'rubrique' => 'Rubriek',

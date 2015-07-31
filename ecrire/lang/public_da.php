@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Seneste artikler',
 'derniers_commentaires' => 'Seneste kommentarer',
 'derniers_messages_forum' => 'Seneste indlæg offentliggjort i forummer',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Tekstudgave',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Webstedets struktur',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Lav et svar til denne artikel',
 'repondre_breve' => 'Lav et svar på denne nyhed',
-'repondre_message' => 'Lav et svar på dette indlæg',
 'resultats_recherche' => 'Søgeresultater',
 'retour_debut_forums' => 'Tilbage til starten på forummet',
 'rubrique' => 'Afsnit',

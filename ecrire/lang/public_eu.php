@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Azken artikuluak',
 'derniers_commentaires' => 'Azken oharrak',
 'derniers_messages_forum' => 'Foroetan argitaratu azken berriak',
-'documents_interdits_forum' => 'Dokumentuak debekatuak dira foroetan',
 
 // E
 'edition_mode_texte' => 'Honen edizioa testu formatuan :',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Onartutako formatuak : @formats@.',
-'forum' => 'Foroa',
 
 // H
 'hierarchie_site' => 'Gunearen hierarkia',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Artikuluari erantzun',
 'repondre_breve' => 'Berri-laburrari erantzun',
-'repondre_message' => 'Mezuari erantzun',
 'resultats_recherche' => 'Bilaketaren emaitzak',
 'retour_debut_forums' => 'Foroen hasierara itzuli',
 'rubrique' => 'Atal',

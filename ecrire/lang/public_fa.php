@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'آخرين مقاله ها',
 'derniers_commentaires' => 'آخرين نقدها',
 'derniers_messages_forum' => 'آخرين پيامهاى منتشر شده در سخنگاه',
-'documents_interdits_forum' => 'سندهاي ممنوع در سخناگاه ',
 
 // E
 'edition_mode_texte' => 'انتشار بشيوه ى متن',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'فرمت مورد قبول:@formats@. ',
-'forum' => 'سخنگاه',
 
 // H
 'hierarchie_site' => 'سلسله مراتب سايت',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'پاسخ به اين مقاله',
 'repondre_breve' => 'پاسخ به اين خبر',
-'repondre_message' => 'پاسخ به اين پيام',
 'resultats_recherche' => 'نتيجه ى جستجو',
 'retour_debut_forums' => 'بازگشت به ابتداى سخنگاه',
 'rubrique' => 'بخش',

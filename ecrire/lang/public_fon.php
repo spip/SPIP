@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Wekpa gùdogùdotɔn',
 'derniers_commentaires' => 'ɖɛtitɛ gùdogùdotɔn',
 'derniers_messages_forum' => 'whɛn gùdogùdotɔn yē ɖɔdotoji',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'winwlanmɛ',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Kplékplé ',
 
 // H
 'hierarchie_site' => 'Tito gblogbloji ɔ tɔn',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'ɖò sin nu wékpa e lɔ',
 'repondre_breve' => 'ɖò sin nu xó klewun é lɔ',
-'repondre_message' => 'ɖò sin nu wɛn  é lɔ',
 'resultats_recherche' => 'Gbètakɛn nu do biba tɔn lɛ̂',
 'retour_debut_forums' => 'kɔlɛ sɔ yì  kplékplé sin bibɛ',
 'rubrique' => 'Akpa ',

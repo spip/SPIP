@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Artikel-artikel terbaru',
 'derniers_commentaires' => 'Komentar-komentar terbaru',
 'derniers_messages_forum' => 'Pesan-pesan terbaru yang dipublikasikan di forum ini',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Tampilan teks saja',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Hirarki situs',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Balasan pada artikel ini',
 'repondre_breve' => 'Balasan pada artikel berita ini',
-'repondre_message' => 'Balasan pada pesan ini',
 'resultats_recherche' => 'Hasil pencarian',
 'retour_debut_forums' => 'Kembali ke awal forum',
 'rubrique' => 'Bagian',

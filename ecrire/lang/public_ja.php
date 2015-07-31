@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => '最新の記事',
 'derniers_commentaires' => '最新のコメント',
 'derniers_messages_forum' => 'フォーラムで投稿された最新のメッセージ',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'テキストモードonly',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'フォーラム',
 
 // H
 'hierarchie_site' => 'サイトの階層',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'この記事に返信',
 'repondre_breve' => 'このニュースに返信',
-'repondre_message' => 'このメッセージに返信',
 'resultats_recherche' => '検索結果',
 'retour_debut_forums' => 'フォーラムの最初のページに戻る',
 'rubrique' => 'セクション',

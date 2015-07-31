@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'နောက်ဆုံးရ ဆောင်းပါးများ',
 'derniers_commentaires' => 'နောက်ဆုံးရ မှတ်ချက်များ',
 'derniers_messages_forum' => 'ဖိုရမ်တွင် နောက်ဆုံး ထုတ်လွင်သည့် အ​ချက်အလက်များ',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'စာသားသက်သက်',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'ဖိုရမ်',
 
 // H
 'hierarchie_site' => 'ဝဘ်ဆိုက်ဆင်းသက်မှု',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'ဤဆောင်းပါးကို အကြောင်းပြန်ရန်',
 'repondre_breve' => 'ဤသတင်းကို အ​ကြောင်းပြန်ရန်',
-'repondre_message' => 'ဤစာဆောင်ကိုပြန်ရန်',
 'resultats_recherche' => 'ရှာဖွေတွေ့ရှိချက်',
 'retour_debut_forums' => 'ဖိုရမ်အစသို့ ပြန်သွားပါ',
 'rubrique' => 'အခန်းကဏ္ဍ',

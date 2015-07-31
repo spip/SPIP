@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Qhiphankir qillqatanaka',
 'derniers_commentaires' => 'Qhipha aruskipt\'awinaka',
 'derniers_messages_forum' => 'Qhipha yatiyawinak aruskipawinakan yatiyata',
-'documents_interdits_forum' => 'Documentos prohibidos en el foro', # NEW
 
 // E
 'edition_mode_texte' => 'Sawutjama lurawi',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formatos aceptados: @formats@.', # NEW
-'forum' => 'Aruskipaña',
 
 // H
 'hierarchie_site' => 'Qamawita kamachiñawi',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Aka qillqat amuykipaña',
 'repondre_breve' => 'Aka jisk\'aptata amuykipaña',
-'repondre_message' => 'Aka yatiyawir jaysaña',
 'resultats_recherche' => 'Thaqhata uñstayi',
 'retour_debut_forums' => 'Aruskipawi qalltar kutiña',
 'rubrique' => 'T\'aqa',

@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Posljedni clanci',
 'derniers_commentaires' => 'Posljednji komentari',
 'derniers_messages_forum' => 'Posljednje poruke u forumu',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Obradjivanje u text modu',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Forum',
 
 // H
 'hierarchie_site' => 'Hierarhija stranice',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Odgovori na ovaj clanak',
 'repondre_breve' => 'Odgovori na ovu kratku poruku',
-'repondre_message' => 'Odgovori na ovu poruku',
 'resultats_recherche' => 'Rezultati pretrage',
 'retour_debut_forums' => 'Nazad na pocetak foruma',
 'rubrique' => 'Rubrika',

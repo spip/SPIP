@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Ùltimi artìculi',
 'derniers_commentaires' => 'Ùltimi cummenti',
 'derniers_messages_forum' => 'Ùltimi messagi pubblicati in i fori',
-'documents_interdits_forum' => 'Ducumenti interdetti in u foru',
 
 // E
 'edition_mode_texte' => 'Edizione in modu testu di',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Furmati accettati : @formats@.',
-'forum' => 'Foru',
 
 // H
 'hierarchie_site' => 'Ierarchia di u situ',
@@ -94,7 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Risponde à st\'artìculu',
 'repondre_breve' => 'Risponde à stu dispacciu',
-'repondre_message' => 'Risponde à stu messagiu',
 'resultats_recherche' => 'Risultati di a ricerca',
 'retour_debut_forums' => 'Ritornu à u principiu di i fori',
 'rubrique' => 'Rùbbrica',

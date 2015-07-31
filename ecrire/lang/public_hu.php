@@ -39,7 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Utolsó cikkek',
 'derniers_commentaires' => 'Utolsó hozzászólások',
 'derniers_messages_forum' => 'A fórumokba küldött legutolsó üzenetek',
-'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Szöveges módban szerkesztés',
@@ -50,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
-'forum' => 'Fórum',
 
 // H
 'hierarchie_site' => 'A honlap felépítése',
@@ -93,7 +91,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Hozzászólás a cikkhez',
 'repondre_breve' => 'Válaszolni erre a hírre',
-'repondre_message' => 'Válaszolni erre az üzenetre',
 'resultats_recherche' => 'Keresés eredményei',
 'retour_debut_forums' => 'Vissza a fórumok kezdetére',
 'rubrique' => 'Rovat',
