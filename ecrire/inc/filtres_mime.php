@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Déclaration de filtres relatifs au Mime Types pour les squelettes 
+ *
+ * @package SPIP\Core\Filtres
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/filtres');
 
@@ -30,10 +36,17 @@ function filtre_text_dist($t) {
 	return '<pre>' . str_replace($t1, $t2, $t) . '</pre>';
 }
 
-// http://doc.spip.org/@filtre_text_csv_dist
+/**
+ * Produit un joli tableau à partir d'un texte CSV
+ *
+ * @param string $t
+ *     Texte CSV
+ * @return string
+ *     Tableau (formaté en SPIP)
+**/
 function filtre_text_csv_dist($t) {
 	include_spip('inc/csv');
-	list($entete, $lignes) = analyse_csv($t);
+	list($entete, $lignes, $caption) = analyse_csv($t);
 	foreach ($lignes as &$l)
 		$l = join('|', $l);
 	$corps = join("\n", $lignes) . "\n";
