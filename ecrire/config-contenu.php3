@@ -68,8 +68,8 @@ if ($changer_config == 'oui') {
 		'activer_syndic',
 		'visiter_sites'
 	);
-	while (list(,$meta) = each($liste_meta))
-		if ($$meta) ecrire_meta($meta, $$meta);
+	while (list(,$i) = each($liste_meta))
+		if ($$i) ecrire_meta($i, $$i);
 	ecrire_metas();	
 
 	if ($purger_skel) {

@@ -256,4 +256,45 @@ function creer_liste_indexation() {
 	}
 }
 
+// cree la requete pour une recherche en txt integral
+function requete_txt_integral($objet, $hash_recherche) {
+	if ($objet == 'syndic') {
+		$table = "spip_".$objet;
+		$index_table = "spip_index_".$objet;
+	} else {
+		$table = "spip_".$objet."s";
+		$index_table = "spip_index_".$objet."s";
+	}
+	$id_objet = "id_".$objet;
+	return "SELECT objet.*, SUM(idx.points) AS points
+		FROM $table AS objet, $index_table AS idx
+		WHERE objet.$id_objet = idx.$id_objet
+		AND idx.hash IN ($hash_recherche)
+		GROUP BY objet.$id_objet
+		ORDER BY points DESC
+		LIMIT 0,10";
+}
+
+// decode la chaine recherchee et la traduit en hash
+function requete_hash ($rech) {
+	$s = nettoyer_chaine_indexation(urldecode($rech)); 
+	$regs = separateurs_indexation()." "; 
+	$s = split("[$regs]+", $s); 
+	while (list(, $val) = each($s))
+		if (strlen($val) > 3)
+			$dico[] = "dico LIKE \"$val%\""; 
+	if ($dico) {
+		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
+		$result2 = spip_query($query2);
+		while ($row2 = mysql_fetch_array($result2)) 
+			$h[] = "0x".$row2["hx"];
+	}
+	if ($h)
+		$hash_recherche = join(",", $h);
+	else
+		$hash_recherche = "0";
+
+	return $hash_recherche;
+}
+
 ?>
