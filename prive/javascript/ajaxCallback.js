@@ -444,12 +444,14 @@ jQuery.fn.animeajax = jQuery.fn.animateLoading;
  *
  */
 jQuery.fn.animateRemove = function(callback){
-	var color = $("<div class='remove'></div>").css('background-color');
-	$(this).addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
-		$(this).removeClass('remove').css({backgroundColor: ''});
-		if (callback)
-			callback.apply(this);
-	});
+	if (this.length){
+		var color = $("<div class='remove'></div>").css('background-color');
+		$(this).addClass('remove').css({backgroundColor: color}).animate({opacity: "0.0"}, 'fast',function(){
+			$(this).removeClass('remove').css({backgroundColor: ''});
+			if (callback)
+				callback.apply(this);
+		});
+	}
 	return this; // don't break the chain
 }
 
@@ -462,23 +464,26 @@ jQuery.fn.animateRemove = function(callback){
  * @param function callback
  */
 jQuery.fn.animateAppend = function(callback){
-	var me=this;
-	// recuperer la couleur portee par la classe append (permet une personalisation)
-	var color = $("<div class='append'></div>").css('background-color');
-	var origin = $(this).css('background-color') || '#ffffff';
-	// pis aller
-	if (origin=='transparent') origin='#ffffff';
-	var sel=$(this);
-	// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
-	if (sel.is('tr'))
-		sel.add('>td',sel);
-	sel.css('opacity','0.0').addClass('append').css({backgroundColor: color}).animate({opacity: "1.0"}, 1000,function(){
-		sel.animate({backgroundColor: origin}, 3000,function(){
-			sel.removeClass('append').css({backgroundColor: ''});
-			if (callback)
-				callback.apply(me);
+	if (this.length){
+		var me=this;
+		// recuperer la couleur portee par la classe append (permet une personalisation)
+		var color = $("<div class='append'></div>").css('background-color');
+		var origin = $(this).css('background-color') || '#ffffff';
+		// pis aller
+		if (origin=='transparent') origin='#ffffff';
+		var sel=$(this);
+		// if target is a tr, include td childrens cause background color on tr doesn't works in a lot of browsers
+		if (sel.is('tr'))
+			sel.add('>td',sel);
+		sel.css('opacity','0.0').addClass('append').css({backgroundColor: color}).animate({opacity: "1.0"}, 1000,function(){
+			sel.animate({backgroundColor: origin}, 3000,function(){
+				sel.removeClass('append').css({backgroundColor: ''});
+				if (callback)
+					callback.apply(me);
+			});
 		});
-	});
+	}
+	return this; // don't break the chain
 }
 
 /**
