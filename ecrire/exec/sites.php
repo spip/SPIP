@@ -341,7 +341,7 @@ fin_cadre_relief();
 
  echo "<br /><br />\n<div align='center'>";
 
- icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id_syndic=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
+ icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id=$id_syndic&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
 
  echo "</div>\n";
 
