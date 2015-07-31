@@ -440,7 +440,6 @@ function calculer_criteres ($idb, &$boucles) {
 
 	foreach($boucles[$idb]->criteres as $crit) {
 		$critere = $crit->op;
-
 		// critere personnalise ?
 		$f = "critere_".$critere;
 		if (!function_exists($f))
@@ -461,13 +460,117 @@ function calculer_criteres ($idb, &$boucles) {
 	}
 }
 
+function critere_IN_dist ($idb, &$boucles, $crit)
+{
+	static $cpt = 0;
+	list($col, $op, $val)= calculer_critere_infixe($idb, $boucles, $crit);
+
+	$var = '$in' . $cpt++;
+	$x= "\n\t$var = array();";
+	foreach ($val as $k => $v) {
+		if (preg_match(",^(\n//.*\n)?'(.*)'$,", $v, $r)) {
+		  // optimiser le traitement des constantes
+			if (is_numeric($r[2]))
+				$x .= "\n\t$var" . "[]= $r[2];";
+			else
+				$x .= "\n\t$var" . "[]= '".addslashes($r[2])."';";
+		} else {
+		  // Pour permettre de passer des tableaux de valeurs
+		  // on repere l'utilisation brute de #ENV**{X}, 
+		  // c'est-a-dire sa  traduction en ($PILE[0][X]).
+		  // et on deballe mais en rajoutant l'anti XSS
+		  $t = preg_match(",^(\n//.*\n)?\\\$Pile.0,", $v) ? 
+		    "array_map('addslashes', $v)" : $v;
+		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= addslashes($v);\n\telse $var = array_merge($var, $t);";
+		}
+	}
+
+	$boucles[$idb]->in .= $x;
+
+	$where = array("'IN'", "\"$col\"", "('(\''  . join(\"','\",$var) . '\')')");
+
+	// inserer la negation (cf !...)
+	if ($crit->not) {
+			$where = array("'NOT'", $where);
+		} else {
+			$boucles[$idb]->default_order[] = "'cpt'";
+			$boucles[$idb]->select[]=  "FIND_IN_SET($col, '\" .
+			  join(',', $var) .\"') AS cpt";
+		}
+
+	 // inserer la condition (cf {lang?}) et c'est fini
+
+	$boucles[$idb]->where[]= (!$crit->cond ? $where :
+	  array("'?'",
+		calculer_argument_precedent($idb, $col, $boucles),
+		$where,
+		"''"));
+}
+
+
 # Criteres de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 {
-	list($fct, $col, $op, $val, $table, $args_sql) =
-	  calculer_critere_infixe($idb, $boucles, $crit);
+	list($col, $op, $val)= calculer_critere_infixe($idb, $boucles, $crit);
 
+	$where = array("'$op'", "'$col'", $val[0]);
+
+	// inserer la negation (cf !...)
+
+	if ($crit->not) $where = array("'NOT'", $where);
+
+	 // inserer la condition (cf {lang?})
+
+	$boucles[$idb]->where[]= (!$crit->cond ? $where :
+	  array("'?'",
+		calculer_argument_precedent($idb, $col, $boucles),
+		$where,
+		"''"));
+}
+
+function calculer_critere_infixe($idb, &$boucles, $crit) {
+
+	global $table_des_tables, $tables_principales, $table_date;
+	global $exceptions_des_jointures;
+	$boucle = &$boucles[$idb];
+	$type = $boucle->type_requete;
+	$table = $boucle->id_table;
+
+	list($fct, $col, $op, $val, $args_sql) =
+	  calculer_critere_infixe_ops($idb, $boucles, $crit);
+
+	// Cas particulier : id_enfant => utiliser la colonne id_objet
+	if ($col == 'id_enfant')
+	  $col = $boucle->primary;
+
+	// Cas particulier : id_secteur = id_rubrique pour certaines tables
+	else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
+	  $col = 'id_rubrique';
+
+	// Cas particulier : expressions de date
+	else if ($table_date[$type]
+	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
+	$col, $regs)) {
+		list($col, $table) =
+		calculer_critere_infixe_date($idb, $boucles, $regs);
+	}
+
+	// HACK : selection des documents selon mode 'image'
+	// => on cherche en fait 'vignette'
+	else if ($type == 'documents' AND $col == 'mode')
+		$val[0] = str_replace('image', 'vignette', $val[0]);
+
+	else  {
+	  $nom = $table_des_tables[$type];
+	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+	  if (@!array_key_exists($col, $desc['field'])) {
+		if ($exceptions_des_jointures[$col])
+		  // on ignore la table, quel luxe!
+			list($t, $col) = $exceptions_des_jointures[$col];
+		$table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
+	  }
+	}
 	// ajout pour le cas special d'une condition sur le champ statut:
 	// il faut alors interdire a la fonction de boucle
 	// de mettre ses propres criteres de statut
@@ -486,81 +589,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
-		  $ct = "$table." . substr($col,1,-1);
-		else $ct = "$table.$col";
-	} else $ct = $col;
+		  $col = "$table." . substr($col,1,-1);
+		else $col = "$table.$col";
+	}
 
 	// inserer la fonction SQL
-	if ($fct) $ct = "$fct($ct$args_sql)";
+	if ($fct) $col = "$fct($col$args_sql)";
 
-	// inserer la negation (cf !...)
-	if (strtoupper($op) == 'IN') {
-	  
-		$kval = "'(\'' . " . join(" .\n\"','\" . ", $val) . " . '\')'";
-		$where = array("'IN'", "\"$ct\"", $kval);
-		if ($crit->not) {
-			$where = array("'NOT'", $where);
-		} else {
-			$boucles[$idb]->default_order[] = "'cpt'";
-			$boucles[$idb]->select[]=  "FIND_IN_SET($ct, '\" ." .
-			  join(" .','.", $val) . " .\"') AS cpt";
-		}
-	} else {
-		$where = array("'$op'", "'$ct'", $val[0]);
-		if ($crit->not) $where = array("'NOT'", $where);
-	}
-	 // inserer la condition (cf {lang?}) et c'est fini
-
-	$boucles[$idb]->where[]= (!$crit->cond ? $where :
-	  array("'?'",
-		calculer_argument_precedent($idb, $col, $boucles),
-		$where,
-		"''"));
-}
-
-function calculer_critere_infixe($idb, &$boucles, $crit) {
-
-	global $table_des_tables, $tables_principales, $table_date;
-	global $exceptions_des_jointures;
-	$boucle = &$boucles[$idb];
-	$type = $boucle->type_requete;
-	$col_table = $boucle->id_table;
-
-	list($fct, $col, $op, $val, $args_sql) =
-	  calculer_critere_infixe_ops($idb, $boucles, $crit);
-
-	// Cas particulier : id_enfant => utiliser la colonne id_objet
-	if ($col == 'id_enfant')
-	  $col = $boucle->primary;
-
-	// Cas particulier : id_secteur = id_rubrique pour certaines tables
-	else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
-	  $col = 'id_rubrique';
-
-	// Cas particulier : expressions de date
-	else if ($table_date[$type]
-	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
-	$col, $regs)) {
-		list($col, $col_table) =
-		calculer_critere_infixe_date($idb, $boucles, $regs);
-	}
-
-	// HACK : selection des documents selon mode 'image'
-	// => on cherche en fait 'vignette'
-	else if ($type == 'documents' AND $col == 'mode')
-		$val[0] = str_replace('image', 'vignette', $val[0]);
-
-	else  {
-	  $nom = $table_des_tables[$type];
-	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
-	  if (@!array_key_exists($col, $desc['field'])) {
-		if ($exceptions_des_jointures[$col])
-		  // on ignore la table, quel luxe!
-			list($t, $col) = $exceptions_des_jointures[$col];
-		$col_table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
-	  }
-	}
-	return array($fct, $col, $op, $val, $col_table, $args_sql);
+	return array($col, $op, $val);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.

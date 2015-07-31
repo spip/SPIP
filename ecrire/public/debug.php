@@ -337,7 +337,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	include_spip('inc/filtres');
 	http_no_cache();
 	lang_select($auteur_session['lang']);
-	$self = self();
+	$self = str_replace("\\'", '&#39;', self());
 	$self .= ((strpos($self, '?') !== false) ? '&amp;' : '?') . 
 	  'var_mode=debug';
 	echo _DOCTYPE_ECRIRE,

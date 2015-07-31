@@ -255,6 +255,7 @@ function calculer_requete_sql(&$boucle)
 		$order = array();
 
 	return   ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
+		. $boucle->in 
 		. $boucle->hash . 
 		"\n\n	// REQUETE
 	\$result = spip_optim_select(\n\t\tarray(\"" . 
