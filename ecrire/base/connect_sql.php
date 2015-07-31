@@ -37,21 +37,20 @@ function spip_connect($serveur='', $version='') {
 
 	// Premiere connexion ? 
 	if (!($old = isset($connexions[$index]))) {
-		$f = (!preg_match('/^[\w\.]*$/', $serveur))	? ''
-		: (($serveur AND !$install) ?
-			( _DIR_CONNECT. $serveur . '.php')
-			: (_FILE_CONNECT ? _FILE_CONNECT
-			   : ($install ? _FILE_CONNECT_TMP : '')));
+		$f = (!preg_match('/^[\w\.]*$/', $serveur))
+		? '' // nom de serveur mal ecrit
+		: ($serveur ?
+		   ( _DIR_CONNECT. $serveur . '.php') // serveur externe
+		   : ($install ? _FILE_CONNECT_TMP // init du serveur principal
+		      : (_FILE_CONNECT ? _FILE_CONNECT // serveur principal ok
+			 : ''))); // installation pas faite
 
 		unset($GLOBALS['db_ok']);
 		unset($GLOBALS['spip_connect_version']);
-		if ($f) {
-			if (is_readable($f)) {
-				include($f);
-			}
-			elseif($serveur AND !$install)
-			  find_in_path("$serveur.php",'connect/',true);
+		if ($f AND is_readable($f)) {
+			include($f);
 		}
+
 		if (!isset($GLOBALS['db_ok'])) {
 		  // fera mieux la prochaine fois
 			if ($install) return false; 
