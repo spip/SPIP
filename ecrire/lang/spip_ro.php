@@ -651,7 +651,6 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'onglet_repartition_rubrique' => 'Reparti&#355;ia pe rubrici',
 'onglet_save_restaur_base' => 'Salva&#355;i/restaura&#355;i baza de date',
 'onglet_vider_cache' => 'Goli&#355;i memoria tampon',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'V&#259; rug&#259;m s&#259; alege&#355;i noua dumneavoastr&#259; parol&#259; :',

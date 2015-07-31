@@ -616,7 +616,6 @@ sera ignor&eacute;e) :
 'onglet_repartition_rubrique' => 'Mi t&ograve; &agrave;kp&aacute;xw&eacute;  l&#603;',
 'onglet_save_restaur_base' => 'wl&iacute;h&#603;n/ l&#603;v&#596; x&oacute;x&ograve;kpl&eacute; bl&oacute;&#598;&oacute;',
 'onglet_vider_cache' => 'B&#603;&#770; e&#770; &eacute; &#598;&ograve; gb&agrave;v&iacute; &#596; m&#603; b&iacute; s&iacute;n',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Mi s&#596; c&agrave;v&igrave; &#598;&eacute;v&oacute; :',

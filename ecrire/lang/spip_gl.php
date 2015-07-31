@@ -652,7 +652,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'onglet_repartition_rubrique' => 'Distribuci&oacute;n por secci&oacute;ns',
 'onglet_save_restaur_base' => 'Gardar/restaurar a base',
 'onglet_vider_cache' => 'Baleirar a memoria cach&eacute;',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Elixa s&uacute;a nova chave:',

@@ -641,7 +641,6 @@ Se voc&ecirc; n&atilde;o quiser que a sua senha possa ser interceptada na rede, 
 'onglet_repartition_rubrique' => 'Reparti&ccedil;&atilde;o por se&ccedil;&otilde;es',
 'onglet_save_restaur_base' => 'Fazer c&oacute;pia de seguran&ccedil;a/restaurar a base',
 'onglet_vider_cache' => 'Esvaziar o cache',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Por favor, escolha a sua nova senha:',

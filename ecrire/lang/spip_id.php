@@ -654,7 +654,6 @@ Terima kasih atas partisipasi anda!
 'onglet_repartition_rubrique' => 'Distribusi berdasarkan bagian',
 'onglet_save_restaur_base' => 'Backup/pulihkan database',
 'onglet_vider_cache' => 'Kosongkan cache',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Silakan pilih kata sandi baru anda:',

@@ -642,7 +642,6 @@ Tack f&ouml;r ditt deltagande
 'onglet_repartition_rubrique' => 'F&ouml;rdelning efter avdelning',
 'onglet_save_restaur_base' => 'Backup/&aring;terst&auml;llande av databas',
 'onglet_vider_cache' => 'T&ouml;m cachen',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Var v&auml;nlig, v&auml;lj ett nytt l&ouml;senord:',

@@ -651,7 +651,6 @@ Thank you for your participation!
 'onglet_repartition_rubrique' => 'Distribution by section',
 'onglet_save_restaur_base' => 'Backup/restore the database',
 'onglet_vider_cache' => 'Empty the cache',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Please choose your new password:',

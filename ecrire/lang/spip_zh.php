@@ -647,7 +647,6 @@ sera ignor&eacute;e) :
 'onglet_repartition_rubrique' => '&#25353;&#19987;&#26639;&#21457;&#24067;',
 'onglet_save_restaur_base' => '&#22791;&#20221;/&#24674;&#22797;&#25968;&#25454;&#24211;',
 'onglet_vider_cache' => '&#28165;&#31354;&#32531;&#23384;',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => '&#35831;&#36873;&#25321;&#26032;&#23494;&#30721;:',

@@ -649,7 +649,6 @@ amit kapott. Amennyiben nincs regisztr&aacute;lva, akkor',
 'onglet_repartition_rubrique' => 'Rovat szerinti bont&aacute;s',
 'onglet_save_restaur_base' => 'Adatb&aacute;zis ment&eacute;se/resztaur&aacute;l&aacute;sa',
 'onglet_vider_cache' => 'Cache &uuml;r&iacute;t&eacute;se',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Legyen sz&iacute;ves v&aacute;lasztani az &uacute;j jelszav&aacute;t :',

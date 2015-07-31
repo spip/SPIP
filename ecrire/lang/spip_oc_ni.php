@@ -652,7 +652,6 @@ Merc&eacute; de la voastra participacion
 'onglet_repartition_rubrique' => 'Reparticion per rubricas',
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vuar l\'amagador',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Vorgatz chausir lo voastre nov&egrave;u m&ograve;t de santa Clara&nbsp;:',

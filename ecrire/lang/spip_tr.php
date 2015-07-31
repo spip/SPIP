@@ -650,7 +650,6 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'onglet_repartition_rubrique' => 'B&ouml;l&uuml;mlere g&ouml;re da&#287;&#305;l&#305;m',
 'onglet_save_restaur_base' => 'Veritaban&#305;n&#305; yedekle / Geri y&uuml;kle',
 'onglet_vider_cache' => '&Ouml;nbelle&#287;i bo&#351;alt',
-'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'L&uuml;tfen yeni &#351;ifrenizi se&ccedil;iniz :',
