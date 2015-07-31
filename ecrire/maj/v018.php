@@ -102,7 +102,7 @@ function maj_v018_dist($version_installee, $version_cible)
 
 	// Annuler les brouillons de forum jamais valides
 	if (upgrade_vers(1.810, $version_installee, $version_cible)) {
-		spip_query("DELETE FROM spip_forum WHERE statut='redac'");
+		sql_delete("spip_forum", "statut='redac'");
 		maj_version(1.810);
 	}
 

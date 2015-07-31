@@ -48,7 +48,7 @@ function action_supprimer_document($arg) {
 function action_supprimer_rubrique($r)
 {
 	list(,,$id_rubrique) = $r;
-	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	sql_delete("spip_rubriques", "id_rubrique=$id_rubrique");
 	// Les admin restreints qui n'administraient que cette rubrique
 	// deviennent redacteurs
 	// (il y a sans doute moyen de faire ca avec un having)
@@ -57,7 +57,7 @@ function action_supprimer_rubrique($r)
 
 	while ($r = sql_fetch($q)) {
 		$id_auteur = $r['id_auteur'];
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
+		sql_delete("spip_auteurs_rubriques", "id_rubrique=$id_rubrique AND id_auteur=$id_auteur");
 		$n = sql_countsel("spip_auteurs_rubriques", "id_auteur=$id_auteur");
 		if (!$n)
 			spip_query("UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$id_auteur");
@@ -79,11 +79,11 @@ function supprimer_document_et_vignette($arg)
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
 	if ($row = sql_fetch($result)) {
 		spip_unlink(get_spip_doc($row['fichier']));
-		spip_query("DELETE FROM spip_documents WHERE id_document=$arg");
+		sql_delete("spip_documents", "id_document=$arg");
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$arg");
-		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$arg");
-		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$arg");
-		spip_query("DELETE FROM spip_documents_breves WHERE id_document=$arg");
+		sql_delete("spip_documents_articles", "id_document=$arg");
+		sql_delete("spip_documents_rubriques", "id_document=$arg");
+		sql_delete("spip_documents_breves", "id_document=$arg");
 		$id_vignette = $row['id_vignette'];
 		if ($id_vignette > 0) {
 			$result = spip_query("SELECT fichier FROM spip_documents	WHERE id_document=$id_vignette");
@@ -91,10 +91,10 @@ function supprimer_document_et_vignette($arg)
 			if ($row = sql_fetch($result)) {
 				spip_unlink(get_spip_doc($row['fichier']));
 			}
-			spip_query("DELETE FROM spip_documents	WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_articles	WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
-			spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
+			sql_delete("spip_documents", "id_document=$id_vignette");
+			sql_delete("spip_documents_articles", "id_document=$id_vignette");
+			sql_delete("spip_documents_rubriques", "id_document=$id_vignette");
+			sql_delete("spip_documents_breves", "id_document=$id_vignette");
 		}
 	}
 }

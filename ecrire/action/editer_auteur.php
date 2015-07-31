@@ -200,7 +200,7 @@ function action_legender_auteur_post($r) {
 	}
 	if (is_array($restreintes)
 	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreint'=>$restreintes))) {
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur="._q($id_auteur));
+		sql_delete("spip_auteurs_rubriques", "id_auteur="._q($id_auteur));
 		foreach (array_unique($restreintes) as $id_rub)
 			if ($id_rub = intval($id_rub)) // si '0' on ignore
 				sql_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur,$id_rub)");

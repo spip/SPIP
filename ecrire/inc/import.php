@@ -150,16 +150,16 @@ function import_init_tables($request)
 		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase))){
 			$desc = description_table($table);
 			if (isset($desc['field']['impt']))
-				spip_query("DELETE FROM $table WHERE impt='oui'");
+				sql_delete($table, "impt='oui'");
 			else
-				spip_query("DELETE FROM $table");
+				spip_delete($table);
 		}
 	}
 
 	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
+	sql_delete("spip_auteurs", "id_auteur=0");
 	spip_query("UPDATE spip_auteurs SET id_auteur=0, extra=$connect_id_auteur WHERE id_auteur=$connect_id_auteur");
-	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
+	sql_delete("spip_auteurs", "id_auteur!=0");
 
 	return $tables;
 }
@@ -173,7 +173,7 @@ function import_init_tables($request)
 function detruit_restaurateur()
 {
 	if (sql_countsel("spip_auteurs", "id_auteur<>0"))
-		spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
+		sql_delete("spip_auteurs", "id_auteur=0");
 	else {
 	  	spip_query("UPDATE spip_auteurs SET id_auteur=extra WHERE id_auteur=0");
 	}

@@ -64,7 +64,7 @@ function envoi_replace_fragments($replaces) {
 // http://doc.spip.org/@envoi_delete_fragments
 function envoi_delete_fragments($id_article, $deletes) {
 	if (count($deletes)) {
-		spip_query("DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND ((".	join(") OR (", $deletes)."))");
+		sql_delete("spip_versions_fragments", "id_article=$id_article AND ((".	join(") OR (", $deletes)."))");
 	}
 }
 
@@ -129,7 +129,7 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 	$deletes = array();
 
 	// D'abord, vider les fragments inutiles
-	spip_query("DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND version_min>=$version_debut AND version_max<=$version_fin");
+	sql_delete("spip_versions_fragments", "id_article=$id_article AND version_min>=$version_debut AND version_max<=$version_fin");
 
 
 	// Fragments chevauchant l'ensemble de l'intervalle, s'ils existent
@@ -391,7 +391,7 @@ function reconstuire_version($champs, $fragments, $res=array()) {
 
 // http://doc.spip.org/@supprimer_versions
 function supprimer_versions($id_article, $version_min, $version_max) {
-	spip_query("DELETE FROM spip_versions WHERE id_article=$id_article AND id_version>=$version_min AND id_version<=$version_max");
+	sql_delete("spip_versions", "id_article=$id_article AND id_version>=$version_min AND id_version<=$version_max");
 
 	supprimer_fragments($id_article, $version_min, $version_max);
 }
@@ -515,7 +515,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	} else {
 		spip_query("UPDATE spip_versions SET date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
-		spip_query("DELETE FROM spip_versions WHERE id_article=$id_article AND id_version < 0 AND titre_version ='$date'");
+		sql_delete("spip_versions", "id_article=$id_article AND id_version < 0 AND titre_version ='$date'");
 	}
 	spip_log($onlylock . "memorise la version $id_version de l'article $id_article $titre_version");
 

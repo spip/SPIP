@@ -65,7 +65,7 @@ function inc_import_0_0_dist($f, $request, $gz='fread') {
 	spip_query("REPLACE $table (" . join(",", $cols) . ") VALUES (" . join(",", $values) . ")");
 
 	if ($is_art && $id_article) {
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_article");
+		sql_delete("spip_auteurs_articles", "id_article=$id_article");
 		if ($auteurs) {
 			reset ($auteurs);
 			while (list(, $auteur) = each($auteurs)) {
@@ -74,11 +74,11 @@ function inc_import_0_0_dist($f, $request, $gz='fread') {
 		}
 	}
 	if ($is_mot && $id_mot) {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot");
+		sql_delete("spip_mots_articles", "id_mot=$id_mot");
+		sql_delete("spip_mots_breves", "id_mot=$id_mot");
+		sql_delete("spip_mots_forum", "id_mot=$id_mot");
+		sql_delete("spip_mots_rubriques", "id_mot=$id_mot");
+		sql_delete("spip_mots_syndic", "id_mot=$id_mot");
 		if ($articles) {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {

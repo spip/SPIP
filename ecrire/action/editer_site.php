@@ -84,7 +84,7 @@ function action_editer_site_dist() {
 	if (_request('reload') == 'oui') {
 		// Effacer les messages si on supprime la syndication
 		if (_request('syndication') == 'non')
-			spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic="._q($id_syndic));
+			sql_delete("spip_syndic_articles", "id_syndic="._q($id_syndic));
 
 		$s = spip_query("SELECT id_syndic, descriptif FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
 		if ($t = sql_fetch($s)) {

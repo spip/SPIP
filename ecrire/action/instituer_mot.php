@@ -56,7 +56,7 @@ function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 		$mots = spip_query("SELECT id_mot FROM spip_mots WHERE id_groupe = $id_groupe");
 		$a = array();
 		while ($r = sql_fetch($mots)) $a[]=  $r['id_mot'];
-		spip_query("DELETE FROM spip_mots_$table WHERE id_mot IN (" . join(',',$a) .") AND $table_id=$id");
+		sql_delete("spip_mots_$table", "id_mot IN (" . join(',',$a) .") AND $table_id=$id");
 	}
 	sql_insertq("spip_mots_$table", array("id_mot" => $id_mot, $table_id => $id));
 }

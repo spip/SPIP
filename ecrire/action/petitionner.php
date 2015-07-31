@@ -46,7 +46,7 @@ function action_petitionner_dist() {
 		);
 		break;
 	case 'off':
-		spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
+		sql_delete("spip_petitions", "id_article=$id_article");
 		break;
 	}
 

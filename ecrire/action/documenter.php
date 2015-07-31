@@ -64,7 +64,7 @@ function action_documenter_post($r)
 			// supprimer_document_et_vignette($r['id_document']);
 			// on dissocie, mais si le doc est utilise dans le texte,
 			// il sera reassocie ..., donc condition sur vu !
-			spip_query("DELETE FROM spip_documents_".$type."s WHERE id_$type=$id AND id_document=".$r['id_document']." AND (vu='non' OR vu IS NULL)");
+			sql_delete("spip_documents_".$type."s", "id_$type=$id AND id_document=".$r['id_document']." AND (vu='non' OR vu IS NULL)");
 		}
 	}
 	if ($type == 'rubrique') {

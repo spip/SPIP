@@ -28,7 +28,7 @@ function maj_v014_dist($version_installee, $version_cible)
 				// New style, devrait marcher
 				spip_query("INSERT INTO spip_groupes_mots 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 		}
-		spip_query("DELETE FROM spip_mots WHERE titre='kawax'");
+		sql_delete("spip_mots", "titre='kawax'");
 		maj_version (1.404);
 	}
 
@@ -241,7 +241,7 @@ function maj_v014_dist($version_installee, $version_cible)
 				$vu[$titre] = true;
 				$id_groupe = $row['id_groupe'];
 				spip_query("UPDATE spip_mots SET id_groupe=$id_groupe WHERE type='$titre'");
-				spip_query("DELETE FROM spip_groupes_mots WHERE titre='$titre' AND id_groupe<>$id_groupe");
+				sql_delete("spip_groupes_mots", "titre='$titre' AND id_groupe<>$id_groupe");
 			}
 		}
 		maj_version (1.460);

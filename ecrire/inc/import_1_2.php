@@ -101,28 +101,28 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 	}
 
 	if ($type == 'article') {
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
-		spip_query("DELETE FROM spip_documents_articles WHERE id_article=$id_objet");
+		sql_delete("spip_auteurs_articles", "id_article=$id_objet");
+		sql_delete("spip_documents_articles", "id_article=$id_objet");
 	}
 	else if ($type == 'rubrique') {
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_objet");
-		spip_query("DELETE FROM spip_documents_rubriques WHERE id_rubrique=$id_objet");
+		sql_delete("spip_auteurs_rubriques", "id_rubrique=$id_objet");
+		sql_delete("spip_documents_rubriques", "id_rubrique=$id_objet");
 	}
 	else if ($type == 'breve') {
-		spip_query("DELETE FROM spip_documents_breves WHERE id_breve=$id_objet");
+		sql_delete("spip_documents_breves", "id_breve=$id_objet");
 	}
 	else if ($type == 'mot') {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_objet");
+		sql_delete("spip_mots_articles", "id_mot=$id_objet");
+		sql_delete("spip_mots_breves", "id_mot=$id_objet");
+		sql_delete("spip_mots_forum", "id_mot=$id_objet");
+		sql_delete("spip_mots_rubriques", "id_mot=$id_objet");
+		sql_delete("spip_mots_syndic", "id_mot=$id_objet");
 	}
 	else if ($type == 'auteur') {
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
+		sql_delete("spip_auteurs_rubriques", "id_auteur=$id_objet");
 	}
 	else if ($type == 'message') {
-		spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_objet");
+		sql_delete("spip_auteurs_messages", "id_message=$id_objet");
 	}
 	if ($liens) {
 		reset($liens);
