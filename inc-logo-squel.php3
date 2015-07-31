@@ -232,14 +232,19 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
       index_pile($id_boucle,  "id_rubrique", $boucles) . ", $flag_fichier);
 			";
   }
-  if ($flag_fichier)
-    $code = '$logon';
-  else
-    $code = "affiche_logos(\$logon, \$logoff, \$lien, '".
-      addslashes($align) . "')";
-  
-  list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
-		return array($c,$milieu . $m);
+
+	// Pour les documents comme pour les logos, le filtre |fichier donne
+	// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+	// remarquable, mais a conserver pour compatibilite ascendante.
+	// -> http://www.spip.net/fr_article901.html
+	if ($flag_fichier)
+		$code = 'ereg_replace("^IMG/","",$logon)';
+	else
+		$code = "affiche_logos(\$logon, \$logoff, \$lien, '".
+		addslashes($align) . "')";
+
+	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	return array($c,$milieu . $m);
 }
 
 ?>
