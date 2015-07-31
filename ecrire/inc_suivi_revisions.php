@@ -25,7 +25,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	$nb_aff = 10;
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 
-	if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
+	if ($uniq_auteur) $req_where = " AND spip_articles.statut IN ('prepa','prop','publie', 'refuse', 'poubelle')"; 
 	else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
 	
 	if ($uniq_auteur) $req_where = " AND spip_versions.id_auteur = $connect_id_auteur";
