@@ -46,11 +46,25 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 		return (array($texte,''));
 }
 
+function articles_edit_recolle($texte, $att_text)
+{
+	$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
+	$nombre = 0;
 
+	while (strlen($texte)>29*1024) {
+		$nombre ++;
+		list($texte1,$texte) = coupe_trop_long($texte);
+
+		$textes_supplement .= "<br />" .
+			afficher_barre('document.formulaire.texte'.$nombre)  .
+			"<textarea id='texte$nombre' name='texte_plus[$nombre]'$att_text>$texte1</textarea><p>\n";
+		}
+	return array($texte,$textes_supplement);
+}
 
 function chapo_articles_edit($chapo, $articles_chapeau)
 {
-	global $connect_statut, $spip_ecran;
+	global $spip_ecran;
 
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1);
@@ -58,48 +72,47 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	}
 
 	if ($virtuel) {
-		echo "<p><div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>";
-		echo "<table width=100% cellspacing=0 cellpadding=0 border=0>";
-		echo "<tr><td valign='top'>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		echo "<B><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></B>";
-		echo aide ("artvirt");
-		echo "</font>";
-		echo "</td>";
-		echo "<td width=10>&nbsp;</td>";
-		echo "<td valign='top' width='50%'>";
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml'
-		style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>";
-		echo "<input type='hidden' name='changer_virtuel' value='oui'>";
-		echo "</td></tr></table>\n";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		echo _T('texte_article_virtuel_reference');
-		echo "</font>";
-		echo "</div><p>\n";
+		return "<p><div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>" .
+			"<table width=100% cellspacing=0 cellpadding=0 border=0>" .
+			"<tr><td valign='top'>" .
+			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
+			"<B><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></B>" .
+			aide ("artvirt") .
+			"</font>" .
+			"</td>" .
+			"<td width=10>&nbsp;</td>" .
+			"<td valign='top' width='50%'>" .
+			"<INPUT TYPE='text' NAME='virtuel' CLASS='forml'
+		style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>" .
+			"<input type='hidden' name='changer_virtuel' value='oui'>" .
+			"</td></tr></table>\n" .
+			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
+			_T('texte_article_virtuel_reference') .
+			"</font>" .
+			"</div><p>\n";
 	}
 
 	else {
-		echo "<hr />";
 
 		if (($articles_chapeau) OR strlen($chapo)) {
 			if ($spip_ecran == "large") $rows = 8;
 			else $rows = 5;
-			echo "<B>"._T('info_chapeau')."</B>";
-			echo aide ("artchap");
-			echo "<BR>"._T('texte_introductif_article')."<BR>";
-			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
-			echo $chapo;
-			echo "</TEXTAREA><P>\n";
+			return "<br /><B>"._T('info_chapeau')."</B>" .
+				aide ("artchap") .
+				"<BR>"._T('texte_introductif_article')."<BR>" .
+				"<textarea name='chapo' class='forml' rows='$rows' COLS='40' wrap=soft>" .
+				$chapo .
+				"</textarea><P>\n";
 		}
 		else {
-			echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
+			return "<br /><INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
 		}
 	}
 }
 
 function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 
-  global   $champs_extra, $spip_lang, $options , $spip_ecran, $spip_display;
+	global $champs_extra, $spip_lang, $options, $spip_ecran, $spip_display;
 
 	$articles_surtitre = $champs_article['articles_surtitre'] != 'non';
 	$articles_soustitre = $champs_article['articles_soustitre'] != "non";
@@ -108,24 +121,11 @@ function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
 	$articles_chapeau = $champs_article['articles_chapeau'] != "non";
 	$articles_ps = $champs_article['articles_ps']  != "non";
 
-	$id_article = $row['id_article'];
-	$titre = $row['titre'];
-
-echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-echo "<tr width='100%'>";
-echo "<td>";
-	if ($lier_trad) icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif");
-	else icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif", "rien.gif");
-
-echo "</td>";
-echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
-echo "<td width='100%'>";
-echo _T('texte_modifier_article');
-gros_titre($titre);
-echo "</td></tr></table>";
-echo "<p>";
-
-echo "<P><HR><P>";
+	$id_trad = $row['id_article'];
+	$gros_titre = $row['titre'];
+	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
+	// (et donc: pas de lien de traduction)
+	$id_article = $lier_trad ? '' : $id_trad;
 
 	$titre = entites_html($row['titre']);
 	$soustitre = entites_html($row['soustitre']);
@@ -142,143 +142,128 @@ echo "<P><HR><P>";
 	$date = $row['date'];
 	$extra = $row['extra'];
 	$onfocus = $row['onfocus'];
+	$statut = $row['statut'];
 	
-	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
-	// (et donc: pas de lien de traduction)
-	if ($lier_trad) $id_article = "";
-	
-	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire','',' onchange="disable_other_forms(this);"');
-
-	if ($new == 'oui')
-		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
-
-	if ($lier_trad) {
-		echo "<INPUT TYPE='Hidden' NAME='lier_trad' VALUE='$lier_trad'>";
-		echo "<INPUT TYPE='Hidden' NAME='changer_lang' VALUE='$spip_lang'>";
-	}
-
-	if (($options == "avancees" AND $articles_surtitre) OR $surtitre) {
-		echo "<B>"._T('texte_sur_titre')."</B>";
-		echo aide ("arttitre");
-		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'"
-// Pour faire fonctionner le onchange sur Safari il faudrait modifier
-// chaque input. Conclusion : c'est la mauvaise methode.
-// .' onchange="disable_other_forms(this.parentNode);"'.
-."><P>";
-	}
-	else {
-		echo "<INPUT TYPE='hidden' NAME='surtitre' VALUE=\"$surtitre\" >";
-	}
-
-	echo _T('texte_titre_obligatoire');
-	echo aide ("arttitre");
-	echo "\n<br /><INPUT TYPE='text' NAME='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus>\n<P>";
-
-	if (($articles_soustitre) OR $soustitre) {
-		echo "<B>"._T('texte_sous_titre')."</B>";
-		echo aide ("arttitre");
-		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
-	}
-	else {
-		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";
-	}
-
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
 	else $logo = "rubrique-24.gif";
 
-	debut_cadre_couleur($logo, false, "", _T('titre_cadre_interieur_rubrique'). aide("artrub"));
+	if ($spip_ecran == "large") $rows = 28;	else $rows = 20;
+	$att_text = " class='formo' ".$GLOBALS['browser_caret']." rows='$rows' COLS='40' wrap='soft'";
+	if (strlen($texte)>29*1024) { // texte > 32 ko -> decouper en morceaux
+	  list($texte, $sup) = articles_edit_recolle($texte, $att_text);
+	} else $sup='';
 
-	 echo selecteur_rubrique($id_rubrique, 'article', ($GLOBALS['statut'] == 'publie'));
+	if ($champs_extra) include_spip('inc/extra');
 
-	fin_cadre_couleur();
+	return
+		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
+		"<tr width='100%'>" .
+		"<td>" .
+		($lier_trad ?
+		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif", '',false) :
+		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_trad"), "article-24.gif", "rien.gif",'',false)) .
+		"</td>\n<td>" .
+		http_img_pack('rien.gif', " ", "width='10'") .
+		"</td>\n" .
+		"<td width='100%'>" .
+	 	_T('texte_modifier_article') .
+		gros_titre($gros_titre,'',false) . 
+		"</td></tr></table><p><hr /><p>" .
+
+		generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire','',' onchange="disable_other_forms(this);"') .
+		(!$new ? '' : "<input type='hidden' name='new' value='oui' />") .
+		(!$lier_trad ? '' :
+		 ("<input type='hidden' name='lier_trad' value='" .
+		  $lier_trad .
+		  "' />" .
+		  "<input type='hidden' name='changer_lang' value='" .
+		  $spip_lang .
+		  "' />")) .
+
+		((($options == "avancees" AND $articles_surtitre) OR $surtitre)?
+			("<input type='hidden' name='surtitre' value=\"$surtitre\" />") :
+			( "<b>" .
+			  _T('texte_sur_titre') .
+			  "</b>" .
+			  aide ("arttitre") .
+			  "<br /><input type='text' name='surtitre' class='forml' value=\"" .
+			  $surtitre .
+			  "\" size='40'" .
+// Pour faire fonctionner le onchange sur Safari il faudrait modifier
+// chaque input. Conclusion : c'est la mauvaise methode.
+// ' onchange="disable_other_forms(this.parentNode);"'.
+			  " /><P>")) .
+		_T('texte_titre_obligatoire') .
+		aide ("arttitre") .
+		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"" .
+		$titre .
+		"\" size='40' " .
+		$onfocus .
+		" />\n<P>" .
+
+		(($articles_soustitre OR $soustitre) ?
+		 ("<b>" .
+		  _T('texte_sous_titre') .
+		  "</b>" .
+		  aide ("arttitre") .
+		  "<br /><input type='text' name='soustitre' class='forml' value=\"" .
+		  $soustitre .
+		  "\" size='40' /><br /><br />") :
+		 ("<input type='hidden' name='soustitre' value=\"$soustitre\" />")) .
+
+		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
+
+		selecteur_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
+
+		fin_cadre_couleur(true) .
 	
-	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE='$id_rubrique'>";
+		($new ? '' : "<input type='hidden' name='id_rubrique_old' value='$id_rubrique'>") .
 
-	if (($options == "avancees" AND $articles_descriptif) OR $descriptif) {
-		echo "<P><B>"._T('texte_descriptif_rapide')."</B>";
-		echo aide ("artdesc");
-		echo "</p><br />",_T('texte_contenu_article'),"<br />";
-		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
-		echo $descriptif;
-		echo "</TEXTAREA>\n";
-	}
-	else {
-		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
-	}
+		((($options == "avancees" AND $articles_descriptif) OR $descriptif)?
+		 ("<P><B>" ._T('texte_descriptif_rapide') ."</B>" .
+		  aide ("artdesc") .
+		  "</p><br />" ._T('texte_contenu_article') ."<br />" .
+		  "<textarea name='descriptif' class='forml' rows='2' cols='40' wrap=soft>" .
+		  $descriptif .
+		  "</textarea>\n") :
+		 ("<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\" />")) .
 
-	if (($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) {
-		echo _T('entree_liens_sites'),"<br />\n";
-		echo _T('info_titre')," ";
-		echo "<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n";
-		echo _T('info_url')," ";
-		echo "<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>";
-	}
+		((($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) ?
+		 (_T('entree_liens_sites') ."<br />\n" .
+		  _T('info_titre') ." " .
+		  "<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n" .
+		  _T('info_url') ." " .
+		  "<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>") : '') .
 
-	chapo_articles_edit($chapo, $articles_chapeau);
+		chapo_articles_edit($chapo, $articles_chapeau) .
 
-	if ($spip_ecran == "large") $rows = 28;
-	else $rows = 20;
+		"<b>" ._T('info_texte') ."</b>" . 
+		aide ("arttexte") . "<br />" .
+		_T('texte_enrichir_mise_a_jour') .
+		aide("raccourcis") .
+		$sup .
+		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
+		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n" .
 
-	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
-	{
-		$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
-		while (strlen($texte)>29*1024)
-		{
-			$nombre_textes ++;
-			list($texte1,$texte) = coupe_trop_long($texte);
+		((($articles_ps AND $options == "avancees") OR $ps) ?
+		 ("<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
+		 ("<input type='hidden' name='ps' value=\"" . $ps . "\">")) .
 
-			$textes_supplement .= "<BR />";
-			$textes_supplement .= afficher_barre('document.formulaire.texte'.$nombre_textes);
-			$textes_supplement .= "<TEXTAREA id='texte$nombre_textes' NAME='texte_plus[$nombre_textes]'".
-				" CLASS='formo' ".$GLOBALS['browser_caret']." ROWS='$rows' COLS='40' wrap=soft>" .
-				$texte1 . "</TEXTAREA><P>\n";
-		}
-	}
-	echo "<b>"._T('info_texte')."</b>";
-	echo aide ("arttexte");
-	echo "<br />"._T('texte_enrichir_mise_a_jour');
-	echo aide("raccourcis");
+		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur)) .
 
-	echo $textes_supplement;
+		(!$date ? '' : ("<input type='hidden' name='date' value=\"$date\" size='40'><P>")) .
 
-	
-	if ($spip_display!=4) echo afficher_barre('document.formulaire.texte');
-	echo "<TEXTAREA id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
-	echo $texte;
-	echo "</TEXTAREA>\n";
+		(!$new ? '' : ("<input type='hidden' name='statut_nouv' value=\"prepa\" SIZE='40' /><p>")) .
 
-	if (($articles_ps AND $options == "avancees") OR $ps) {
-		echo "<P><B>"._T('info_post_scriptum')."</B><BR>";
-		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
-		echo $ps;
-		echo "</TEXTAREA><P>\n";
-	}
-	else {
-		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
-	}
-
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		extra_saisie($extra, 'articles', $id_secteur);
-	}
-
-	if ($date)
-		echo "<INPUT TYPE='Hidden' NAME='date' VALUE=\"$date\" SIZE='40'><P>";
-
-	if ($new == "oui")
-		echo "<INPUT TYPE='Hidden' NAME='statut_nouv' VALUE=\"prepa\" SIZE='40'><P>";
-
-	echo "<DIV ALIGN='right'>";
-	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
-	echo "</DIV></FORM>";
+		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "'></div></form>";
 }
 
 function exec_articles_edit_dist()
 {
 	$id_article =_request('id_article');
 	$id_rubrique = _request('id_rubrique');
-	$lier_trad = _request('lier_trad');
+	$lier_trad = intval(_request('lier_trad'));
 	$new = _request('new');
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
@@ -301,16 +286,15 @@ function exec_articles_edit_dist()
 		}
 	}
 
-
 	$id_rubrique = $row['id_rubrique'];
 	$titre = $row['titre'];
 
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 
 	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)),
-		   "documents", "articles", "hauteurTextarea();", 
-		   "",
-		   $id_rubrique);
+			"documents", "articles", "hauteurTextarea();", 
+			"",
+			$id_rubrique);
 
 	debut_grand_cadre();
 	afficher_hierarchie($id_rubrique);
@@ -320,7 +304,7 @@ function exec_articles_edit_dist()
 
 	// Pave "documents associes a l'article"
 
-	if ($new != 'oui'){
+	if (!$new){
 	# modifs de la description d'un des docs joints
 		maj_documents($id_article, 'article');
 
@@ -337,7 +321,7 @@ function exec_articles_edit_dist()
 	debut_droite();
 	
 	debut_cadre_formulaire();
-	formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
+	echo formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 	fin_cadre_formulaire();
 
 	fin_page();

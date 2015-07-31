@@ -25,7 +25,7 @@ include_spip('base/abstract_sql');
 
 function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad,  $id_trad_new)
 {
-  global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
+	global $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
   $row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 
@@ -175,7 +175,8 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
-afficher_statut_articles($id_article, $rubrique_article, $statut_article);
+ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) 
+	echo afficher_statut_articles($id_article, $rubrique_article, $statut_article);
 
 
  afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
@@ -1267,39 +1268,33 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 
 function afficher_statut_articles($id_article, $rubrique_article, $statut_article)
 {
-  global $connect_statut;
-
-  if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
-  	
-    echo "\n<form method='post' action='",
-      redirige_action_auteur("instituer", "article-$id_article",'articles', "id_article=$id_article"),
-      "'>",
-	  debut_cadre_relief("", true),
-      "\n<center>", "<B>",_T('texte_article_statut'),"</B>",
-	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
-	  "onChange=\"document.statut.src='",
-	  _DIR_IMG_PACK,
-	  "' + puce_statut(options[selectedIndex].value);",
-	  " setvisibility('valider_statut', 'visible');\">\n",
-	 "<OPTION" , mySel("prepa", $statut_article) ," style='background-color: white'>",_T('texte_statut_en_cours_redaction'),"</OPTION>\n",
-	 "<OPTION" , mySel("prop", $statut_article) , " style='background-color: #FFF1C6'>",_T('texte_statut_propose_evaluation'),"</OPTION>\n",
-	 "<OPTION" , mySel("publie", $statut_article) , " style='background-color: #B4E8C5'>",_T('texte_statut_publie'),"</OPTION>\n",
-	 "<OPTION" , mySel("poubelle", $statut_article),
-	   http_style_background('rayures-sup.gif') , '>' ,_T('texte_statut_poubelle'),"</OPTION>\n",
-	 "<OPTION" , mySel("refuse", $statut_article) , " style='background-color: #FFA4A4'>",_T('texte_statut_refuse'),"</OPTION>\n",
-	  "</SELECT>",
-	  " &nbsp; ",
-	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
-	  "  &nbsp;\n";
-
-	echo "<span class='visible_au_chargement' id='valider_statut'>";
-	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</span>";
-	echo aide("artstatut");
-	echo "</center>";
-	fin_cadre_relief();
-	echo "\n</form>";
- }
+  return "\n<form method='post' action='" .
+	redirige_action_auteur("instituer", "article-$id_article",'articles', "id_article=$id_article") .
+      "'>" .
+	debut_cadre_relief("", true) .
+	"\n<center>" . "<B>" ._T('texte_article_statut') ."</B>" .
+	"\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n" .
+	"onChange=\"document.statut.src='" .
+	_DIR_IMG_PACK .
+	"' + puce_statut(options[selectedIndex].value);" .
+	" setvisibility('valider_statut', 'visible');\">\n" .
+	"<option"  . mySel("prepa", $statut_article)  ." style='background-color: white'>" ._T('texte_statut_en_cours_redaction') ."</option>\n" .
+	"<option"  . mySel("prop", $statut_article)  . " style='background-color: #FFF1C6'>" ._T('texte_statut_propose_evaluation') ."</option>\n" .
+	"<option"  . mySel("publie", $statut_article)  . " style='background-color: #B4E8C5'>" ._T('texte_statut_publie') ."</option>\n" .
+	"<option"  . mySel("poubelle", $statut_article) .
+	http_style_background('rayures-sup.gif')  . '>'  ._T('texte_statut_poubelle') ."</option>\n" .
+	"<option"  . mySel("refuse", $statut_article)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
+	"</SELECT>" .
+	" &nbsp; " .
+	http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") .
+	"  &nbsp;\n" .
+	"<span class='visible_au_chargement' id='valider_statut'>" .
+	"<input type='submit' value='"._T('bouton_valider')."' CLASS='fondo' />" .
+	"</span>" .
+	aide("artstatut") .
+	"</center>" .
+	fin_cadre_relief('', true) .
+	"\n</form>";
 }
 
 //
@@ -1456,6 +1451,7 @@ function exec_articles_dist()
 
 
  $id_parent = intval($id_parent);
+ $lier_trad = intval($lier_trad);
  $nouv_auteur = intval($nouv_auteur);
  $supp_mot = intval($supp_mot);
  $supp_auteur = intval($supp_auteur);
