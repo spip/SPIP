@@ -14,7 +14,7 @@ function calculer_droits() {
 	$flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));
 	if ($id_rubrique_depart > 0)
 		 $flag_administrable &= acces_rubrique($id_rubrique_depart);
-	$flag_editable = ($flag_administrable OR ($statut == 'prop' AND $proposer_sites > 0) OR $new == 'oui');
+	$flag_editable = ($flag_administrable OR ($proposer_sites > 0 AND ($statut == 'prop' OR $new == 'oui')));
 }
 
 
@@ -24,7 +24,6 @@ function my_sel($num,$tex,$comp){
 	}else{
 		echo "<OPTION VALUE='$num'>$tex\n";
 	}
-
 }
 
 
@@ -65,25 +64,27 @@ function afficher_jour($jour){
 }
 
 
-
-
 //
 // Creation d'un site
 //
 
-if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
-	$id_rubrique = intval($id_rubrique);
+if ($new == 'oui') {
+	calculer_droits();
 
-	$mydate = date("YmdHis", time() - 12 * 3600);
-	$query = "DELETE FROM spip_syndic WHERE (statut = 'refuse') && (maj < $mydate)";
-	$result = spip_query($query);
-
-	$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
-
-	$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
-		"VALUES ('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
-	$result = spip_query($query);
-	$id_syndic = spip_insert_id();
+	if ($flag_editable) {
+		$id_rubrique = intval($id_rubrique);
+	
+		$mydate = date("YmdHis", time() - 12 * 3600);
+		$query = "DELETE FROM spip_syndic WHERE (statut = 'refuse') && (maj < $mydate)";
+		$result = spip_query($query);
+	
+		$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
+	
+		$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
+			"VALUES ('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
+		$result = spip_query($query);
+		$id_syndic = spip_insert_id();
+	}
 }
 
 $query = "SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
@@ -92,6 +93,7 @@ $result = spip_query($query);
 if ($row = spip_fetch_array($result)) {
 	$statut = $row["statut"];
 	$id_rubrique_depart = $row["id_rubrique"];
+	if (!$id_rubrique) $id_rubrique = $id_rubrique_depart;
 }
 if ($new == 'oui') $statut = 'prop';
 
@@ -180,7 +182,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 }
 
 
-if ($jour AND $connect_statut == '0minirezo') {
+if ($jour AND $flag_administrable) {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_syndic SET date='$annee-$mois-$jour' WHERE id_syndic=".intval($id_syndic);
@@ -330,12 +332,8 @@ echo "</tr></table>\n";
 
 
 
-
-
-
 if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
-
-	if ($statut == 'publie') {	
+	if ($statut == 'publie') {
 		echo "<p>";
 
 		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_heure, $regs)) {
