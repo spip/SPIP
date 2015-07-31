@@ -18,11 +18,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_memoriser_dist()
 {
 	$hash = _request('hash');
+	$order = _request('order');
+	$by = _request('by');
 	lire_fichier(_DIR_SESSIONS.'ajax_fonctions.txt', $ajax_fonctions);
 	$ajax_fonctions = @unserialize($ajax_fonctions);
 
 	if ($res = $ajax_fonctions[$hash]) {
 		list(,$t,$r,$p,$f) = $res;
+		if (preg_match('/^[a-z0-9+.,]+$/', $by)
+		AND preg_match('/^\w*$/', $order)) 
+			$r['ORDER BY'] = str_replace(',', " $order, ", $by) .  " $order";
 		$cpt = sql_countsel($r['FROM'], $r['WHERE'], $r['GROUP BY']);
 		include_spip('inc/presentation');
 		include_spip('inc/afficher_objets');
