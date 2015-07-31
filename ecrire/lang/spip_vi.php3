@@ -174,6 +174,11 @@ H&#7891; s&#417; SPIP</a>.',
 'dirs_commencer' => ' &#273;&#7875; th&#7921;c s&#7921; b&#7855;t &#273;&#7847;u vi&#7879;c thi&#7871;t tr&iacute;',
 'dirs_preliminaire' => 'Ti&ecirc;n kh&#7903;i: <B>Thi&#7871;t k&#7871; quy&#7873;n h&#7841;n ra/v&ocirc;</B>',
 'dirs_probleme_droits' => '<b>C&oacute; v&#7845;n &#273;&#7873; v&#7899;i quy&#7873;n h&#7841;n ra/v&ocirc;</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<B>Nh&#7919;ng ng&#259;n sau &#273;&acirc;y kh&ocirc;ng &#273;&#432;&#7907;c ph&eacute;p Vi&#7871;t: <ul>@bad_dirs@.</ul> </b>
 <P>&#272;&#7875; thay &#273;&#7893;i, d&ugrave;ng FTP v&agrave;o thay &#273;&#7893;i quy&#7873;n h&#7841;n ra/v&ocirc; c&#7911;a t&#7915;ng ng&#259;n. Th&#7875; th&#7913;c n&agrave;y c&oacute; ghi trong c&#7849;m nang s&#7917; d&#7909;ng.
 <P>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;',
@@ -492,7 +497,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_contenu_articles' => 'N&#7897;i dung b&#224;i',
 'info_contribution' => 'th&#432; t&iacute;n c&#7911;a di&#7877;n &#273;&agrave;n',
 'info_copyright' => 'l&#224; nhu li&#7879;u mi&#7877;n ph&#237; ph&#7893; bi&#7871;n <a href=\'license.txt\'>theo gi&#7845;y ph&#233;p GPL.</a>',
-'info_copyright_doc' => '<MODIF> &#272;&#7875; bi&#7871;t th&ecirc;m, v&agrave;o xem trang <a href=\'http://www.spip.net/vi\'>http://www.spip.net/vi</a>.',
+'info_copyright_doc' => '&#272;&#7875; bi&#7871;t th&ecirc;m, xin v&agrave;o xem trang <a href=\'http://www.spip.net/vi\'>http://www.spip.net/vi</a>.',
 'info_cours_edition' => '&#272;ang so&#7841;n',
 'info_creation_mots_cles' => 'Th&ecirc;m b&#7899;t, s&#7917;a &#273;&#7893;i, s&#7855;p x&#7871;p c&aacute;c t&#7915; then ch&#7889;t c&#7911;a website',
 'info_creation_paragraphe' => '(&#272;&#7875; b&#7855;t &#273;&#7847;u &#273;o&#7841;n v&#259;n m&#7899;i, b&#7841;n ch&#7881; c&#7847;n ch&#7915;a h&#224;ng tr&#7889;ng)',
@@ -642,12 +647,11 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_mots_cles_association' => 'C&aacute;c t&#7915; then ch&#7889;t trong nh&oacute;m n&agrave;y c&oacute; th&#7875; &#273;&#432;&#7907;c d&ugrave;ng cho:',
 'info_moyenne' => 'trung b&#236;nh: ',
 'info_multi_articles' => 'Cho ph&eacute;p d&#7909;ng nhi&#7873;u th&#7913; ti&#7871;ng trong nh&#7919;ng b&agrave;i&nbsp;?',
-'info_multi_cet_article' => '<MODIF> B&agrave;i ti&#7871;ng&nbsp;:',
-'info_multi_cette_rubrique' => '<MODIF> &ETH;&#7873; M&#7909;c ti&#7871;ng&nbsp;:',
+'info_multi_cet_article' => 'B&agrave;i ti&#7871;ng&nbsp;:',
+'info_multi_cette_rubrique' => '&ETH;&#7873; M&#7909;c ti&#7871;ng&nbsp;:',
 'info_multi_herit' => '<NEW> langue de la rubrique sup&eacute;rieure',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.
-		Attention&nbsp;: seules les langues affich&eacute;es en gras sont int&eacute;gralement g&eacute;r&eacute;es par le syst&egrave;me de publication.',
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => 'Cho ph&eacute;p d&#7909;ng nhi&#7873;u th&#7913; ti&#7871;ng trong nh&#7919;ng &#273;&#7873; m&#7909;c&nbsp;?',
 'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => 'D&#7909;ng nhi&#7873;u th&#7913; ti&#7871;ng',
@@ -1016,12 +1020,15 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'login_login2' => 'Login (danh t&aacute;nh &#273;&#7875; v&agrave;o trang web):',
 'login_login_pass_incorrect' => '(login ho&#7863;c m&#7853;t m&atilde; kh&ocirc;ng &#273;&uacute;ng).',
 'login_motpasseoublie' => 'qu&ecirc;n m&#7853;t m&atilde;?',
-'login_non_securise' => 'C&#7843;nh b&aacute;o, phi&#7871;u &#273;i&#7873;n n&agrave;y kh&ocirc;ng an to&agrave;n. N&#7871;u b&#7841;n kh&ocirc;ng mu&#7889;n m&#7853;t m&atilde; b&#7883; ch&#7863;n l&#7845;y tr&ecirc;n net, xin m&#7903; Javascript trong browser l&ecirc;n v&agrave;',
+'login_non_securise' => 'C&#7843;nh b&aacute;o, phi&#7871;u &#273;i&#7873;n n&agrave;y kh&ocirc;ng an to&agrave;n.
+ N&#7871;u b&#7841;n kh&ocirc;ng mu&#7889;n m&#7853;t m&atilde; b&#7883; ch&#7863;n l&#7845;y tr&ecirc;n net,
+ xin m&#7903; Javascript trong browser l&ecirc;n v&agrave;',
 'login_nouvelle_tentative' => 'Th&#7917; l&#7841;i',
 'login_par_ici' => 'B&#7841;n &#273;&#432;&#7907;c ghi danh ... l&#7889;i n&agrave;y ...',
 'login_pass2' => 'M&#7853;t m&atilde;:',
 'login_preferez_refuser' => '<B>N&#7871;u b&#7841;n ch&#7885;n kh&ocirc;ng m&#7903; cookies l&ecirc;n</B>, c&oacute; m&#7897;t c&aacute;ch kh&aacute;c &#273;&#7875; v&agrave;o (kh&ocirc;ng an to&agrave;n b&#7857;ng):',
 'login_recharger' => 'n&#7841;p l&#7841;i trang n&agrave;y',
+'login_rester_identifie' => '<NEW> Rester identifi&eacute; quelques jours',
 'login_retour_public' => 'Tr&#7903; l&#7841;i trang web c&ocirc;ng c&#7897;ng',
 'login_retour_site' => 'Tr&#7903; l&#7841;i trang web c&ocirc;ng c&#7897;ng',
 'login_retoursitepublic' => 'tr&#7903; l&#7841;i trang web c&ocirc;ng c&#7897;ng',
@@ -1180,7 +1187,9 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 'texte_actualite_site_3' => '&raquo; &#273;&#7875; xem nh&#7919;ng &#273;&#7863;c &#273;i&#7875;m kh&aacute;c.',
 'texte_admin_effacer_01' => 'M&#7879;nh l&#7879;nh n&agrave;y x&oacute;a <i>t&#7845;t c&#7843;</i> n&#7897;i dung c&#7911;a database, lu&ocirc;n c&#7843; login/m&#7853;t m&atilde; c&#7911;a c&aacute;c ch&#7911; b&uacute;t v&agrave; qu&#7843;n l&yacute;. Sau khi ch&#7841;y m&#7879;nh l&#7879;nh n&agrave;y xong, b&#7841;n n&ecirc;n thi&#7871;t tr&iacute; l&#7841;i SPIP &#273;&#7875; t&aacute;i l&#7853;p l&#7841;i m&#7897;t database m&#7899;i c&ugrave;ng v&#7899;i login/m&#7853;t m&atilde; c&#7911;a qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#7847;u ti&ecirc;n.',
 'texte_admin_tech_01' => 'Ch&#7885;n l&#7921;a n&agrave;y cho ph&eacute;p b&#7841;n gi&#7919; l&#7841;i n&#7897;i dung c&#7911;a database v&agrave;o trong m&#7897;t h&#7891; s&#417; &#273;&#7921;ng trong ng&#259;n <i>ecrire/data/</i>. V&agrave; c&#361;ng &#273;&#7915;ng qu&ecirc;n c&#7845;t gi&#7919; l&#7841;i l&#7841;i to&agrave;n b&#7897; ng&#259;n <i>IMG/</i>, ch&#7913;a &#273;&#7921;ng c&aacute;c h&igrave;nh &#7843;nh d&ugrave;ng trong c&aacute;c b&agrave;i v&#7903; v&agrave; &#273;&#7873; m&#7909;c.',
-'texte_admin_tech_02' => '<MODIF> <B>C&#7843;nh b&aacute;o</B>: CH&#7880; C&Oacute; TH&#7874; ph&#7909;c h&#7891;i b&#7843;n d&#7921; tr&#7919; n&agrave;y trong m&#7897;t website c&oacute; c&ugrave;ng &#7845;n b&#7843;n SPIP. L&#7895;i l&#7847;m th&#432;&#7901;ng hay v&#7845;p ph&#7843;i l&agrave; th&#7921;c hi&#7879;n vi&#7879;c d&#7921; tr&#7919; database tr&#432;&#7899;c khi n&acirc;ng c&#7845;p SPIP... &#272;&#7875; bi&#7871;t th&ecirc;m, xin &#273;&#7885;c [t&agrave;i li&#7879;u SPIP->http://www.spip.net/fr_article1489.html].',
+'texte_admin_tech_02' => '<B>C&#7843;nh b&aacute;o</b>: CH&#7880; C&Oacute; TH&#7874; ph&#7909;c h&#7891;i b&#7843;n d&#7921; tr&#7919; n&agrave;y trong m&#7897;t website c&oacute; c&ugrave;ng &#7845;n b&#7843;n SPIP.
+ L&#7895;i l&#7847;m th&#432;&#7901;ng hay v&#7845;p ph&#7843;i l&agrave; th&#7921;c hi&#7879;n vi&#7879;c d&#7921; tr&#7919; database tr&#432;&#7899;c khi n&acirc;ng c&#7845;p SPIP...
+ &#272;&#7875; bi&#7871;t th&ecirc;m, xin &#273;&#7885;c [t&agrave;i li&#7879;u SPIP->http://www.spip.net/fr_article1489.html].',
 'texte_admin_tech_03' => 'B&#7841;n c&oacute; th&#7875; ch&#7885;n gi&#7919; h&#7891; s&#417; trong d&#7841;ng n&eacute;n &#273;&#7875; sao ch&eacute;p, chuy&#7875;n t&#7843;i cho l&#7865;, c&#361;ng nh&#432; ti&#7871;t ki&#7879;m &#273;&#432;&#7907;c ch&#7895; trong d&#297;a.',
 'texte_adresse_annuaire_1' => '(N&#7871;u ng&#259;n c&#7911;a b&#7841;n &#273;&#432;&#7907;c thi&#7871;t tr&#237; tr&#234;n c&#249;ng m&#225;y v&#7899;i website c&#7911;a b&#7841;n, t&#234;n n&#243; th&#432;&#7901;ng l&#224; &#38;laquo;localhost&#38;raquo;.)',
 'texte_ajout_auteur' => 'T&#225;c gi&#7843; sau &#273;&#226;y &#273;&#432;&#7907;c th&#234;m v&#224;o cho b&#224;i: ',
@@ -1425,7 +1434,6 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'trad_lier' => '<NEW> Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
 'trad_new' => '<NEW> &Eacute;crire une nouvelle traduction de cet article',
 'trad_reference' => '<NEW> (article de r&eacute;f&eacute;rence)'
-
 
 );
 

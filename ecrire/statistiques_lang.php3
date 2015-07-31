@@ -171,7 +171,7 @@ debut_cadre_enfonce("langues-24.gif");
 			}
 
 			echo "<tr bgcolor='$couleur'>";
-			if (lang_rtl($lang)) $dir=' dir=rtl'; else $dir='';
+			$dir=lang_dir($lang,'',' dir=rtl');
 			echo "<td width='100%'><font face='verdana,arial,helvetica' size='2'><span$dir>".traduire_nom_langue($lang)." : $visites%</span></font></td>";
 			
 			echo "<td>";
