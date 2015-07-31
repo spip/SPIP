@@ -13,7 +13,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 //
 // Charger un fichier langue
 //
@@ -274,10 +273,11 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		if (!_DIR_RESTREINT) {
 			$cible = _DIR_RESTREINT_ABS . 
 			  (is_object($lien) ? $lien->getUrl() : $lien);
-			include_ecrire('inc_session.php3');
 			$lien = "$site/spip_cookie.php3";
-			if (FILE_CONNECT)
+			if (_FILE_CONNECT) {
+			  include_ecrire('inc_session.php3');
 			  $lien .= "?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			}
 		} else {
 			$cible = $lien->getUrl();
 			$lien = "$site/spip_cookie.php3";
