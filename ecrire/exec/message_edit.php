@@ -71,7 +71,7 @@ function exec_message_edit_args($id_message, $new, $dest)
 	if($type == 'normal' AND $dest) {
 		$email = sql_getfetsel("email", "spip_auteurs", "id_auteur=$dest");
 		if (strlen($email) > 3) {
-			echo icone(_T('info_envoyer_message_prive'), "mailto:".$email, "envoi-message-24.gif");
+			echo icone_inline(_T('info_envoyer_message_prive'), "mailto:".$email, "envoi-message-24.gif");
 		}
 	}
 
