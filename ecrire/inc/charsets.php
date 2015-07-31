@@ -490,6 +490,7 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 	$table_translit ='translit'.$complexe;
 
 	// 0. Supprimer les caracteres illegaux
+	include_spip('inc/filtres');
 	$texte = corriger_caracteres($texte);
 
 	// 1. Passer le charset et les &eacute en utf-8
