@@ -145,9 +145,10 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 }
 
 // http://doc.spip.org/@debut_page
-function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "", $id_rubrique = "") {
+function debut_page($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $onLoad = "" /* ignore */, $id_rubrique = "") {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page($titre, $rubrique, $sous_rubrique, $onLoad, $id_rubrique);
+	echo $commencer_page($titre, $rubrique, $sous_rubrique, $id_rubrique);
+	if ($onLoad) spip_log("parametre obsolete onLoad=$onLoad");
 }
 
 ?>

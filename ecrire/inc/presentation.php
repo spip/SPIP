@@ -24,8 +24,8 @@ function choix_couleur() {
 	$res = '';
 	if ($couleurs_spip) {
 		foreach ($couleurs_spip as $key => $val) {
-			$res = "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
+			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
+				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\""). "</a>";
 		}
 	}
 	return $res;
@@ -1357,7 +1357,6 @@ function debut_javascript($admin, $stat)
 	 	http_script(
 			$tester_javascript . 
 			"\nvar ajax_image_searching = '<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" /></div>';" .
-			"\nvar admin = " . ($admin ? 1 : 0) .
 			"\nvar stat = " . ($stat ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
@@ -1795,7 +1794,7 @@ function fin_page() {
 		. '</div>'))
 
 	. fin_grand_cadre(true)
-	. "</center>"
+	. "</div>" // cf. <div center> ouverte dans conmmencer_page()
 	. $GLOBALS['rejoue_session']
 	. generer_spip_cron()
 	. (defined('_TESTER_NOSCRIPT') ? _TESTER_NOSCRIPT : '')

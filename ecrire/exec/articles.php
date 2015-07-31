@@ -42,7 +42,7 @@ function exec_articles_dist()
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", "", $row['id_rubrique']);
+	echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", $row['id_rubrique']);
 
 	echo debut_grand_cadre(true),
 		afficher_hierarchie($row['id_rubrique']),

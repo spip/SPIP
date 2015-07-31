@@ -1755,7 +1755,8 @@ function env_to_attributs ($texte){
 // Inserer jQuery
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
-	if (!_request('jquery_debug'))
+	if (!_request('jquery_debug')
+	AND _DIR_RESTREINT)
 		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.pack.js\" type=\"text/javascript\"></script>\n";
 	else
 		$js = "<script src=\""._DIR_JAVASCRIPT."jquery-1.0.2-forms.js\" type=\"text/javascript\"></script>\n";
@@ -1763,15 +1764,11 @@ function f_jQuery ($texte) {
  	return $js.$texte;
 }
 
-// Concatenet des chaines
+// Concatener des chaines
 // #TEXTE|concat{texte1,texte2,...}
 // http://doc.spip.org/@concat
 function concat(){
-	$tous = func_get_args();
-	$texte = "";
-	foreach($tous as $arg)
-		$texte.=$arg;
-	return $texte;
+	return join('', func_get_args());
 }
 
 ?>

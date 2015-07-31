@@ -59,7 +59,7 @@ function exec_rubriques_edit_dist()
 
 	pipeline('exec_init',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", '', $id_rubrique);
+	echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
 
 	if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 	else $ze_logo = "rubrique-24.gif";
