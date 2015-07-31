@@ -279,28 +279,11 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	AND strlen($texte) > 2.5*$longueur)
 		$texte = couper($texte, 2*$longueur);
 
-
-	// ne pas tenir compte des notes ;
-	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
-	foreach(array('les_notes','compt_note','marqueur_notes','notes_vues') as $k)
-		if (isset($GLOBALS[$k]))
-			$mem[$k] = $GLOBALS[$k];
-	// memoriser l'etat de la pile unique
-	$mem_unique = unique('','_spip_raz_');
-
-
+	// ne pas tenir compte des notes
+	$notes = charger_fonction('notes', 'inc');
+	$notes(true);
 	$texte = propre($texte,$connect);
-
-
-	// restituer les notes comme elles etaient avant d'appeler propre()
-	foreach(array('les_notes','compt_note','marqueur_notes','notes_vues') as $k)
-		if (isset($mem[$k]))
-			$GLOBALS[$k] = $mem[$k];
-		else 
-			unset($GLOBALS[$k]);
-	// restituer l'etat de la pile unique
-	unique($mem_unique,'_spip_set_');
-
+	$notes(false);
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
@@ -424,14 +407,13 @@ function lister_objets_avec_logos ($type) {
 }
 
 // fonction appelee par la balise #NOTES
+// Renvoyer l'etat courant des notes, le purger et en preparer un nouveau
 // http://doc.spip.org/@calculer_notes
 function calculer_notes() {
-	if (!isset($GLOBALS["les_notes"])) return '';
-	if ($r = $GLOBALS["les_notes"]) {
-		$GLOBALS["les_notes"] = "";
-		$GLOBALS["compt_note"] = 0;
-		$GLOBALS["marqueur_notes"] ++;
-	}
+	$notes = charger_fonction('notes', 'inc');
+	$r = $notes(array());
+	$notes(false);
+	$notes(true);
 	return $r;
 }
 

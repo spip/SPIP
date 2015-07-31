@@ -82,7 +82,11 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 		list($fonc) = $code;
 		spip_timer($a = 'calcul page '.rand(0,1000));
-		$notes = calculer_notes(); // conserver les notes...
+
+		// On cree un marqueur de notes unique lie a cette composition
+		// et on enregistre l'etat courant des globales de notes...
+		$notes = charger_fonction('notes', 'inc');
+		$notes(true);
 
 		// Rajouter d'office ces deux parametres
 		// (mais vaudrait mieux que le compilateur sache le simuler
@@ -100,9 +104,12 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	// Passer le nom du cache pour produire sa destruction automatique
 		$page = $fonc(array('cache' => $cache), array($contexte));
 
-		// ... et les retablir
-		if ($n = calculer_notes()) spip_log("notes ignorees par $fonc: $n");
-		$GLOBALS['les_notes'] = $notes;
+	// Restituer les globales de notes telles qu'elles etaient avant l'appel
+	// Si l'inclus n'a pas affiche ses notes, tant pis (elles *doivent*
+	// etre dans son resultat, autrement elles ne seraient pas prises en
+	// compte a chaque calcul d'un texte contenant un modele, mais seulement
+	// quand le modele serait calcule, et on aurait des resultats incoherents)
+		$notes(false);
 
 		// spip_log: un joli contexte
 		$infos = array();
