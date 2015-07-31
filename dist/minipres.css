@@ -29,7 +29,7 @@ fieldset, .fieldset {
 	margin-top: 1em; 
 	font-size:0.9em;
 }
-legend { font-weight: bold; font-size:1.1em;color:#0033cc;}
+legend { font-weight: bold; font-size:1.1em; color:black;}
 label {}
 #minipres {
 	border:2px solid #888888;
