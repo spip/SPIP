@@ -118,22 +118,25 @@ function inc_traduire_dist($ori, $lang) {
 	static $deja_vu = array();
 	static $local = array();
   
-	if (isset($deja_vu[$lang][$ori]))
+	if (isset($deja_vu[$lang][$ori]) AND (_request('var_mode') != 'traduction'))
 		return $deja_vu[$lang][$ori];
 
 	// modules demandes explicitement <xxx|yyy|zzz:code> cf MODULES_IDIOMES
 	if (strpos($ori,':')) {
 		list($modules,$code) = explode(':',$ori,2);
 		$modules = explode('|', $modules);
+		$ori_complet = $ori;
 	} else {
 		$modules = array('spip', 'ecrire');
 		$code = $ori;
+		$ori_complet = implode('|', $modules) . ':' . $ori;
 	}
 
 	$text = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
 		$var = "i18n_".$module."_".$lang;
+
 		if (empty($GLOBALS[$var])) {
 			charger_langue($lang, $module);
 
@@ -148,7 +151,9 @@ function inc_traduire_dist($ori, $lang) {
 			if ($local['local'])
 				surcharger_langue($local['local']);
 		}
+
 		if (isset($GLOBALS[$var][$code])) {
+			$module_retenu = $module;
 			$text = $GLOBALS[$var][$code];
 			break;
 		}
@@ -156,12 +161,17 @@ function inc_traduire_dist($ori, $lang) {
 
 	// Retour aux sources si la chaine est absente dans la langue cible ;
 	// on essaie d'abord la langue du site, puis a defaut la langue fr
+	$langue_retenue = $lang;
 	if (!strlen($text)
 	AND $lang !== 'fr') {
-		if ($lang !== $GLOBALS['meta']['langue_site'])
+		if ($lang !== $GLOBALS['meta']['langue_site']) {
 			$text = inc_traduire_dist($ori, $GLOBALS['meta']['langue_site']);
-		else 
+			$langue_retenue = (!strlen($text) ? $GLOBALS['meta']['langue_site'] : '');
+		}
+		else {
 			$text = inc_traduire_dist($ori, 'fr');
+			$langue_retenue = (!strlen($text) ? 'fr' : '');
+		}
 	}
 
 	// Supprimer la mention <NEW> ou <MODIF>
@@ -176,7 +186,16 @@ function inc_traduire_dist($ori, $lang) {
 		$text = charset2unicode($text,'utf-8');
 	}
 
-	$deja_vu[$lang][$ori] = $text;
+	if (_request('var_mode') == 'traduction') {
+		if ($text)  {
+			$classe = 'debug-traduction' . ($module_retenu == 'ecrire' ? '-prive' : '');
+			$text = '<span lang=' . $langue_retenue . ' class=' . $classe . ' title=' . $ori_complet . '(' . $langue_retenue . ')>' . $text . '</span>';
+			$text = str_replace($module_retenu, "*$module_retenu*", $text);
+		}
+	}
+	else {
+		$deja_vu[$lang][$ori] = $text;
+	}
 
 	return $text;
 }
