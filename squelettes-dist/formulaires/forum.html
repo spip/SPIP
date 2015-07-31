@@ -135,29 +135,26 @@
 ]
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 if (window.jQuery)(function($){
-	$.getScript('[(#CHEMIN{javascript/jquery.cookie.js}|url_absolue)]',
-	function(){
-		var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
-		var saveauto = true;
-		if (a) {
-			$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
-			.val(a);
-			$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+	var a = $.cookie('spip_contenu_formulaire_#ENV{_sign}');
+	var saveauto = true;
+	if (a) {
+		$('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}')
+		.val(a);
+		$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
+	}
+	$('#formulaire_forum form')
+	.bind('submit', function() {
+		saveauto = false;
+	});
+	$(window)
+	.bind('unload', function(){
+		if (saveauto){
+			var s = $('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val();
+			if (s)
+				$.cookie('spip_contenu_formulaire_#ENV{_sign}', s);
+			else
+				$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
 		}
-		$('#formulaire_forum form')
-		.bind('submit', function() {
-			saveauto = false;
-		});
-		$(window)
-		.bind('unload', function(){
-			if (saveauto){
-				var s = $('#formulaire_forum textarea#EVAL{chr(91)}name=texte#EVAL{chr(93)}').val();
-				if (s)
-					$.cookie('spip_contenu_formulaire_#ENV{_sign}', s);
-				else
-					$.cookie('spip_contenu_formulaire_#ENV{_sign}', null);
-			}
-		});
 	});
 }(jQuery));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
