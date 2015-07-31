@@ -872,13 +872,8 @@ reinstall SPIP, create a new database and a new administrator account.',
 	'texte_en_cours_validation' => 'The following articles and news have been submitted for evaluation.',
 	'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using "typographical shortcuts".',
 	'texte_fichier_authent' => '<b>Should SPIP create the special files <tt>.htpasswd</tt>
-  and <tt>.htpasswd-admin</tt> in the directory @dossier@?</b><p>
-  These files can be used to restrict access to authors
-  and administrators to other parts of your site
-  (for instance, external statistical programme).</p><p>
-  If you have no need of such files, you can keep this option
-  with its default value (no file 
-  creation).</p>', # MODIF
+  and <tt>.htpasswd-admin</tt> in the directory @dossier@?</b>
+<p>These files can be used to restrict access to authors and administrators to other parts of your site (for instance, external statistical programme).</p><p>If you have no need of such files, you can keep this option with its default value (no file creation).</p>',
 	'texte_informations_personnelles_1' => 'The system will now  create your personal account for this site.',
 	'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, if your former access is still working, you can',
 	'texte_introductif_article' => '(Introductory text for the article.)',
