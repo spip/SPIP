@@ -94,85 +94,85 @@ function article($titre, $lien, $statut = "redac") {
 if ($supp_rub) $les_rub=ereg_replace(",$supp_rub,","",$les_rub);
 if ($addrub) $les_rub.=",$addrub,";
 
-rubrique("Installation de SPIP","admin");
-article("R&eacute;gler les droits d'acc&egrave;s", "install0", "admin");
-article("Votre connexion MySQL", "install1", "admin");
-article("Choix de votre base", "install2", "admin");
-article("Informations personnelles", "install5", "admin");
-article("V&eacute;rification par FTP", "ftp_auth", "admin");
-article("Un probl&egrave;me de squelette ?", "erreur_mysql", "admin");
+rubrique(_T('menu_aide_installation_spip'),"admin");
+article(_T('menu_aide_installation_reactuliser_droits'), "install0", "admin");
+article(_T('menu_aide_installation_connexion_mysql'), "install1", "admin");
+article(_T('menu_aide_installation_choix_base'), "install2", "admin");
+article(_T('menu_aide_installation_informations_personnelles'), "install5", "admin");
+article(_T('menu_aide_installation_ftp'), "ftp_auth", "admin");
+article(_T('menu_aide_installation_probleme_squelette'), "erreur_mysql", "admin");
 
-rubrique("Les articles");
-article("Les raccourcis typographiques","raccourcis");
-article("Titre, surtitre, soustitre","arttitre");
-article("Choisir la rubrique","artrub");
-article("Descriptif rapide","artdesc");
-article("Chapeau","artchap");
-article("Redirection d'article","artvirt","admin");
-article("Texte","arttexte");
-article("Date","artdate");
-article("Date de publication ant&eacute;rieure","artdate_redac");
-article("Les auteurs","artauteurs");
-article("Logo de l'article","logoart","admin");
-article("Le statut de l'article","artstatut");
-article("Proposer son article","artprop");
-article("Articles en cours de modification","artmodif");
-
-
-rubrique("Les rubriques");
-article("Une structure hi&eacute;rarchis&eacute;e","rubhier");
-article("Choisir la rubrique","rubrub","admin");
-article("Logo de la rubrique","rublogo","admin");
-
-rubrique("Les br&egrave;ves");
-article("Les br&egrave;ves","breves");
-article("Choisir la rubrique","brevesrub");
-article("Le lien hypertexte","breveslien");
-article("Le statut de la br&egrave;ve","brevesstatut","admin");
-article("Le logo de la br&egrave;ve","breveslogo","admin");
-
-rubrique("Images et documents");
-article("Ins&eacute;rer des images","ins_img");
-article("Joindre des documents","ins_doc");
-article("Installer des fichiers par FTP","ins_upload","admin");
-
-rubrique("Les mots-cl&eacute;s");
-article("Principe des mots-cl&eacute;s","mots");
-article("Les mots-cl&eacute;s","artmots");
-article("Les groupes de mots","motsgroupes","admin");
+rubrique(_T('menu_aide_articles'));
+article(_T('menu_aide_articles_raccourcis_typo'),"raccourcis");
+article(_T('menu_aide_articles_titres'),"arttitre");
+article(_T('menu_aide_articles_choix_rubrique'),"artrub");
+article(_T('menu_aide_articles_descriptif_rapide'),"artdesc");
+article(_T('menu_aide_articles_chapeau'),"artchap");
+article(_T('menu_aide_articles_redirection'),"artvirt","admin");
+article(_T('menu_aide_articles_texte'),"arttexte");
+article(_T('menu_aide_articles_date'),"artdate");
+article(_T('menu_aide_articles_date_anterieure'),"artdate_redac");
+article(_T('menu_aide_articles_auteurs'),"artauteurs");
+article(_T('menu_aide_articles_logos'),"logoart","admin");
+article(_T('menu_aide_articles_statut'),"artstatut");
+article(_T('menu_aide_articles_proposer'),"artprop");
+article(_T('menu_aide_articles_en_cours_modification'),"artmodif");
 
 
-rubrique("Les sites r&eacute;f&eacute;renc&eacute;s");
-article("R&eacute;f&eacute;rencer un site","reference");
-article("Sites syndiqu&eacute;s","rubsyn");
-article("Articles syndiqu&eacute;s","artsyn");
-article("Utiliser un proxy","confhttpproxy","admin");
+rubrique(_T('menu_aide_rubriques'));
+article(_T('menu_aide_rubriques_structure'),"rubhier");
+article(_T('menu_aide_rubriques_choix'),"rubrub","admin");
+article(_T('menu_aide_rubriques_logo'),"rublogo","admin");
 
-rubrique("La messagerie interne");
-article("<img src='img_pack/m_envoi.gif' align='left' border=0> Les messages entre utilisateurs","messut");
-article("<img src='img_pack/m_envoi_bleu.gif' align='left' border=0> Les pense-b&ecirc;te","messpense");
-article("Le calendrier","messcalen");
-article("Configuration personnelle de la messagerie","messconf");
+rubrique(_T('menu_aide_breves'));
+article(_T('menu_aide_breves_breves'),"breves");
+article(_T('menu_aide_breves_choix'),"brevesrub");
+article(_T('menu_aide_breves_lien'),"breveslien");
+article(_T('menu_aide_breves_statut'),"brevesstatut","admin");
+article(_T('menu_aide_breves_logo'),"breveslogo","admin");
+
+rubrique(_T('menu_aide_images_doc'));
+article(_T('menu_aide_images_doc_inserer'),"ins_img");
+article(_T('menu_aide_images_doc_joindre'),"ins_doc");
+article(_T('menu_aide_images_doc_ftp'),"ins_upload","admin");
+
+rubrique(_T('menu_aide_mots_cles'));
+article(_T('menu_aide_mots_cles_principe'),"mots");
+article(_T('menu_aide_mots_cles_mots_cles'),"artmots");
+article(_T('menu_aide_mots_cles_groupes'),"motsgroupes","admin");
 
 
-rubrique("Suivi des forums","admin");
-article("Suivi des forums","suiviforum","admin");
+rubrique(_T('menu_aide_sites'));
+article(_T('menu_aide_sites_referencer'),"reference");
+article(_T('menu_aide_sites_syndiquer'),"rubsyn");
+article(_T('menu_aide_sites_articles_syndiques'),"artsyn");
+article(_T('menu_aide_sites_proxy'),"confhttpproxy","admin");
 
-rubrique("Configuration pr&eacute;cise","admin");
-article("Nom et adresse de votre site","confnom","admin");
-article("Contenu des articles","confart","admin");
-article("Articles post-dat&eacute;s","confdates","admin");
-article("Fonctionnement des forums","confforums","admin");
-article("Syst&egrave;me de br&egrave;ves","confbreves","admin");
-article("Messagerie interne","confmessagerie","admin");
-article("Statistiques des visites","confstat","admin");
-article("Envoi automatique de mails","confmails","admin");
-article("Moteur de recherche int&eacute;gr&eacute;","confmoteur","admin");
+rubrique(_T('menu_aide_messagerie'));
+article("<img src='img_pack/m_envoi.gif' align='left' border=0> "._T('menu_aide_messagerie_utilisateurs'),"messut");
+article("<img src='img_pack/m_envoi_bleu.gif' align='left' border=0> "._T('menu_aide_messagerie_pense_bete'),"messpense");
+article(_T('menu_aide_messagerie_calendrier'),"messcalen");
+article(_T('menu_aide_messagerie_configuration_perso'),"messconf");
 
-rubrique("Configuration de l'interface personnelle");
-article("Interface simplifi&eacute;e / compl&egrave;te","intersimple");
-article("Le cookie de correspondance","cookie");
-article("Se d&eacute;connecter","deconnect");
+
+rubrique(_T('menu_aide_suivi_forum'),"admin");
+article(_T('menu_aide_suivi_forum_suivi'),"suiviforum","admin");
+
+rubrique(_T('menu_aide_suivi_forum_configuration'),"admin");
+article(_T('menu_aide_suivi_forum_nom_adresse'),"confnom","admin");
+article(_T('menu_aide_suivi_forum_contenu_articles'),"confart","admin");
+article(_T('menu_aide_suivi_forum_articles_postes'),"confdates","admin");
+article(_T('menu_aide_suivi_forum_fonctionnement'),"confforums","admin");
+article(_T('menu_aide_suivi_forum_systeme_breves'),"confbreves","admin");
+article(_T('menu_aide_suivi_forum_messagerie_interne'),"confmessagerie","admin");
+article(_T('menu_aide_suivi_forum_statistiques'),"confstat","admin");
+article(_T('menu_aide_suivi_forum_envoi_emails'),"confmails","admin");
+article(_T('menu_aide_suivi_forum_moteur_recherche'),"confmoteur","admin");
+
+rubrique(_T('menu_aide_interface_perso'));
+article(_T('menu_aide_interface_perso_simplifiee'),"intersimple");
+article(_T('menu_aide_interface_perso_cookie'),"cookie");
+article(_T('menu_aide_interface_perso_deconnecter'),"deconnect");
 
 for ($i=0; $i<=count($texte); $i++) {
 	

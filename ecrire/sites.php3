@@ -29,19 +29,19 @@ function my_sel($num,$tex,$comp){
 
 
 function afficher_mois($mois){
-	my_sel("00","non connu",$mois);
-	my_sel("01","janvier",$mois);
-	my_sel("02","f&eacute;vrier",$mois);
-	my_sel("03","mars",$mois);
-	my_sel("04","avril",$mois);
-	my_sel("05","mai",$mois);
-	my_sel("06","juin",$mois);
-	my_sel("07","juillet",$mois);
-	my_sel("08","ao&ucirc;t",$mois);
-	my_sel("09","septembre",$mois);
-	my_sel("10","octobre",$mois);
-	my_sel("11","novembre",$mois);
-	my_sel("12","d&eacute;cembre",$mois);
+	my_sel("00",_T('mois_non_connu'),$mois);
+	my_sel("01",_T('mois_janvier'),$mois);
+	my_sel("02",_T('mois_fevrier'),$mois);
+	my_sel("03",_T('mois_mars'),$mois);
+	my_sel("04",_T('mois_avril'),$mois);
+	my_sel("05",_T('mois_mai'),$mois);
+	my_sel("06",_T('mois_juin'),$mois);
+	my_sel("07",_T('mois_juillet'),$mois);
+	my_sel("08",_T('mois_aout'),$mois);
+	my_sel("09",_T('mois_septembre'),$mois);
+	my_sel("10",_T('mois_octobre'),$mois);
+	my_sel("11",_T('mois_novembre'),$mois);
+	my_sel("12",_T('mois_decembre'),$mois);
 }
 
 function afficher_annee($annee){
@@ -81,7 +81,7 @@ if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
 
 	$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
-		"VALUES ('Site introuvable', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
+		"VALUES ('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
 	$result = spip_query($query);
 	$id_syndic = spip_insert_id();
 }
@@ -232,7 +232,7 @@ if ($row = spip_fetch_array($result)) {
 if ($nom_site)
 	$titre_page = "&laquo; $nom_site &raquo;";
 else
-	$titre_page = "Site";
+	$titre_page = _T('info_site');
 
 
 
@@ -245,7 +245,7 @@ debut_page("$titre_page","documents","sites");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -260,21 +260,21 @@ debut_gauche();
 
 debut_boite_info();
 	echo "<center>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>SITE NUM&Eacute;RO&nbsp;:</b></font>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('titre_site_numero')."</b></font>";
 	echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=6><b>$id_syndic</b></font>";
 	echo "</center>";
 fin_boite_info();
 
 
 echo "<p><center>";
-	icone ("Voir les sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif","rien.gif");
+	icone (_T('icone_voir_sites_references'), "sites_tous.php3", "site-24.gif","rien.gif");
 echo "</center>";
 
 $rubon = "siteon$id_syndic";
 $ruboff = "siteoff$id_syndic";
 
 if ($id_syndic>0 AND $flag_administrable)
-	afficher_boite_logo($rubon, $ruboff, "LOGO DE CE SITE ".aide ("rublogo"), "LOGO POUR SURVOL");
+	afficher_boite_logo($rubon, $ruboff, _T('logo_site').aide ("rublogo"), _T('logo_survol'));
 
 
 debut_droite();
@@ -309,7 +309,7 @@ echo "<a href='$url_site'><b>$url_affichee</b></a>";
 if (strlen($descriptif) > 1) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<b>Descriptif :</b> ";
+	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
 	echo "</font>";
@@ -323,7 +323,7 @@ if ($flag_editable) {
 	$link->addVar('target', $clean_link->getUrl());
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Modifier ce site", $link->getUrl(), "site-24.gif", "edit.gif");
+	icone(_T('icone_modifier_site'), $link->getUrl(), "site-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -350,7 +350,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<INPUT TYPE='hidden' NAME='id_syndic' VALUE='$id_syndic'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE R&Eacute;F&Eacute;RENCEMENT DE CE SITE&nbsp;:";
+		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>"._T('info_date_referencement');
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
 		echo "<TR><TD ALIGN='center'>";
@@ -365,13 +365,13 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "</SELECT>";
  		
 		echo "</TD><TD ALIGN='right'>";
-		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
+		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
 		echo "</TD></TR></TABLE>";
 		echo "</FORM>";
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Site propos&eacute; le : <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_site_propose')." <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
 	}
 }
 
@@ -386,47 +386,47 @@ if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 	echo "\n<center>";
 
-	echo "<b>Ce site est&nbsp;:</b> &nbsp;&nbsp; \n";
+	echo "<b>"._T('info_statut_site_1')."</b> &nbsp;&nbsp; \n";
 
 	echo "<select name='nouveau_statut' size=1 class='fondl'>\n";
 
-	my_sel("publie","Publi&eacute;",$statut);
-	my_sel("prop","Propos&eacute;",$statut);
-	my_sel("refuse","A la poubelle",$statut);
+	my_sel("publie",_T('info_statut_site_2'),$statut);
+	my_sel("prop",_T('info_statut_site_3'),$statut);
+	my_sel("refuse",_T('info_statut_site_4'),$statut);
 
 	echo "</select>\n";
 
-	echo " &nbsp;&nbsp;&nbsp; <input type='submit' name='Valider' value='Valider' class='fondo'>\n</center>\n";
+	echo " &nbsp;&nbsp;&nbsp; <input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>\n</center>\n";
 	fin_cadre_relief();
 	echo "</form>\n";
 }
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><b>Ce site est syndiqu&eacute;...</b></font>";
+	echo "<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><b>"._T('info_site_syndique')."</b></font>";
 
 	if ($erreur_syndic)
 		echo "<p><font color=red><b>$erreur_syndic</b></font>";
 
 	if ($syndication == "off") {
 		debut_boite_info();
-		echo "Attention : la syndication de ce site a rencontr&eacute; un probl&egrave;me&nbsp;; ";
-		echo "le syst&egrave;me est donc temporairement interrompu pour l'instant. V&eacute;rifiez ";
-		echo "l'adresse du fichier de syndication de ce site (<b>$url_syndic</b>), et tentez une nouvelle ";
-		echo "r&eacute;cup&eacute;ration des informations.</font>\n";
+		echo _T('avis_site_syndique_probleme_1');
+		echo _T('avis_site_syndique_probleme_2');
+		echo _T('avis_site_syndique_probleme_3', array('url_syndic' => $url_syndic));
+		echo _T('avis_site_syndique_probleme_4')."</font>\n";
 		echo "<center><b>";
 		echo "<a ".newLinkHref("sites.php3?id_syndic=$id_syndic&recalcul=oui").">";
-		echo "Tenter une nouvelle r&eacute;cup&eacute;ration des donn&eacute;es</a></b></center>\n";
+		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
 		fin_boite_info();
 	}
-	afficher_syndic_articles("Articles syndiqu&eacute;s tir&eacute;s de ce site",
+	afficher_syndic_articles(_T('titre_articles_syndiques'),
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
 
 
 	echo "<font face='verdana,arial,helvetica' size=2>";
 	// afficher la date de dernier acces a la syndication
 	if ($date_syndic)
-		echo "<p><div align='left'>La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le ".affdate($date_syndic)
-		." &agrave; ".heures($date_syndic)."h ".minutes($date_syndic)."min.</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>Mettre &agrave; jour maintenant</a></div>\n";
+		echo "<p><div align='left'>"._T('info_derniere_syndication').affdate($date_syndic)
+		." &agrave; ".heures($date_syndic)."h ".minutes($date_syndic)."min.</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>"._T('lien_mise_a_jour_syndication')."</a></div>\n";
 
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {
@@ -436,17 +436,13 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			$moderation = $mod;
 
 		if ($moderation == 'non' || $moderation =='')
-			echo "<p><div align='left'>Les prochains liens en
-				provenance de ce site seront affich&eacute;s imm&eacute;diatement sur le site public.". aide('artsyn') .
+			echo "<p><div align='left'>"._T('texte_liens_syndication'). aide('artsyn') .
 				"</div><div align='right'><a
-				href='sites.php3?id_syndic=$id_syndic&moderation=oui'>Demander
-				un blocage a priori</a></div>\n";
+				href='sites.php3?id_syndic=$id_syndic&moderation=oui'>"._T('info_demander_blocage_priori')."</a></div>\n";
 		else if ($moderation == 'oui')
-			echo "<p><div align='left'>Les prochains liens en
-				provenance de ce site seront bloqu&eacute;s a priori.". aide('artsyn') .
+			echo "<p><div align='left'>"._T('texte_demander_blocage_priori'). aide('artsyn') .
 				"</div><div align='right'> <a
-				href='sites.php3?id_syndic=$id_syndic&moderation=non'>Annuler
-				ce blocage a priori</a></div>\n";
+				href='sites.php3?id_syndic=$id_syndic&moderation=non'>"._T('info_annuler_blocage_priori')."</a></div>\n";
 	}
 	echo "</font>";
 }
@@ -471,7 +467,7 @@ $link->addVar('titre_message', $nom_site);
 
 
 echo "<div align='center'>";
-icone ("Poster un message", $link->getUrl(), "forum-interne-24.gif", "creer.gif");
+icone (_T('icone_poster_message'), $link->getUrl(), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 echo "<p align='left'>\n";

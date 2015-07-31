@@ -42,7 +42,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	if (!$from) $from = $email;
 	if (!email_valide($email)) return false;
-	if ($email == "vous@fournisseur.com") return false;
+	if ($email == _T('info_mail_fournisseur')) return false;
 
 	spip_log("mail ($email): $sujet");
 
@@ -103,8 +103,8 @@ function extrait_article($row) {
 	}
 
 	$extrait = "** $titre **\n";
-	if ($les_auteurs) $extrait .= "par $les_auteurs ";
-	if ($statut == 'publie') $extrait .= "le ".nom_jour($date)." ".filtrer_entites(affdate($date));
+	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
+	if ($statut == 'publie') $extrait .= _T('info_les_auteurs_2').nom_jour($date)." ".filtrer_entites(affdate($date));
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') $extrait .= "-> ".$adresse_site."/spip_redirect.php3?id_article=$id_article\n\n";
 	return $extrait;
@@ -130,9 +130,9 @@ function envoyer_mail_publication($id_article) {
 		if ($row = spip_fetch_array($result)) {
 			$titre = nettoyer_titre_email($row['titre']);
 
-			$sujet = "[$nom_site_spip] PUBLIE : $titre";
-			$courr = "Article publi\xe9\n--------------\n\n";
-			$courr .= "L'article \"$titre\" a \xe9t\xe9 valid\xe9 par $connect_nom.\n\n\n";
+			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
+			$courr = _T('info_publie_2')."\n\n";
+			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $connect_nom))."\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 		}
@@ -152,11 +152,11 @@ function envoyer_mail_proposition($id_article) {
 		if ($row = spip_fetch_array($result)) {
 			$titre = nettoyer_titre_email($row['titre']);
 
-			$sujet = "[$nom_site_spip] Propose : $titre";
-			$courr = "Article propos\xe9\n---------------\n\n";
-			$courr .= "L'article \"$titre\" est propos\xe9 \xe0 la publication.\n";
-			$courr .= "Vous \xeates invit\xe9 \xe0 venir le consulter et \xe0 donner votre opinion\n";
-			$courr .= "dans le forum qui lui est attach\xe9. Il est disponible \xe0 l'adresse :\n";
+			$sujet = _T('info_propose_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
+			$courr = _T('info_propose_2')."\n\n";
+			$courr .= _T('info_propose_3', array('titre' => $titre))."\n";
+			$courr .= _T('info_propose_4')."\n";
+			$courr .= _T('info_propose_5')."\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);

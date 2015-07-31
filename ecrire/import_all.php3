@@ -27,21 +27,14 @@ function verifier_version_sauvegarde ($archive) {
 		AND $regs[1] == $spip_version)
 			return false; // c'est bon
 		else
-			return "{{Attention! Le fichier $archive correspond &agrave;
-				une autre version de SPIP que celle que vous avez
-				install&eacute;e.}} Vous allez au-devant de grosses
-				difficult&eacute;s: risque de destruction de votre base de
-				donn&eacute;es, dysfonctionnements divers du site, etc. Ne
-				validez pas cette demande d'importation.<p>Pour plus
-				d'informations, voyez [la documentation de
-				SPIP->http://www.uzine.net/article1489.html].";
+			return _T('avis_erreur_version_archive', array('archive' => $archive));
     } else
-		return "Probl&egrave;me de lecture du fichier $archive";
+		return _T('avis_probleme_archive', array('archive' => $archive));
 	
 }
 
 if ($archive) {
-	$action = "restauration de la sauvegarde $archive";
+	$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
 	$commentaire = verifier_version_sauvegarde ($archive);
 }
 

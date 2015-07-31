@@ -123,13 +123,13 @@ echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=
 echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'>>>></A></TD></TR>";
 
 	echo "<TR>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>lundi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>mardi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>mercredi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>jeudi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>vendredi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>samedi</B></TD>";
-	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>dimanche</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_lundi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_mardi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_mercredi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_jeudi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_vendredi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_samedi')."</B></TD>";
+	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('item_dimanche')."</B></TD>";
 
 	echo "</TR><TR>";
 	
@@ -201,7 +201,7 @@ if (!$mois){
 
 $nom_mois = nom_mois('2000-'.chiffrespar2($mois).'-01');
 
-debut_page("Calendrier $nom_mois $annee", "asuivre", "calendrier");
+debut_page(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier");
 
 echo "<BR><BR><BR>";
 
@@ -214,7 +214,7 @@ afficher_mois($jour,chiffrespar2($mois),$annee,$nom_mois);
 
 	if (strlen($les_breves["0"]) > 0 OR $les_articles["0"] > 0){
 			echo "<table width=200 background=''><tr width=200><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
-			echo "<b>Dans le courant du mois :</b>";
+			echo "<b>"._T('info_mois_courant')."</b>";
 			echo $les_breves["0"];
 			echo $les_articles["0"];
 			
@@ -225,10 +225,10 @@ afficher_mois($jour,chiffrespar2($mois),$annee,$nom_mois);
 	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
 		echo "<br><br><br><table width='700' background=''><tr width='700'><td><FONT FACE='arial,helvetica,sans-serif' SIZE=2>";
-		echo "<b>AIDE :</b>";
+		echo "<b>"._T('info_aide')."</b>";
 	
-		echo "<br><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de cr&eacute;er un nouveau pense-b&ecirc;te personnel.\n";
-		echo "<br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de donner un rendez-vous &agrave; un autre participant.\n";
+		echo "<br><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_nouveau_pense_bete')."\n";
+		echo "<br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_donner_rendez_vous')."\n";
 		
 		echo "</font></td></tr></table>";
 	

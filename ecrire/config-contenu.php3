@@ -15,10 +15,10 @@ function mySel($varaut,$variable){
 }
 
 
-debut_page("Configuration du site", "administration", "configuration");
+debut_page(_T('titre_page_config_contenu'), "administration", "configuration");
 
 echo "<br><br><br>";
-gros_titre("Configuration du site");
+gros_titre(_T('titre_page_config_contenu'));
 barre_onglets("configuration", "interactivite");
 
 
@@ -27,7 +27,7 @@ debut_gauche();
 debut_droite();
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
+	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
@@ -53,7 +53,7 @@ debut_cadre_relief("forum-interne-24.gif");
 $forums_publics=lire_meta("forums_publics");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement par d&eacute;faut des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_mode_fonctionnement_defaut_forum_public')."</FONT></B> ".aide ("confforums")."</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 if ($forums_publics=="non") {
@@ -64,15 +64,12 @@ if ($forums_publics=="non") {
 	$gras = ''; $fingras = '';
 }
 echo "<INPUT$checked TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non'>";
-echo $gras."<label for='forums_non'>D&eacute;sactiver l'utilisation des forums
-	publics. Les forums publics pourront &ecirc;tre autoris&eacute;s au cas par cas
-	sur les articles ; ils seront interdits sur les rubriques, br&egrave;ves, etc.
+echo $gras."<label for='forums_non'>"._T('info_desactiver_forum_public')."
 	</label>.".$fingras;
 echo "</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-echo propre("{Pour activer les forums publics, veuillez choisir leur mode
-	de mod&eacute;ration par d&eacute;faut:}");
+echo _T('info_activer_forum_public');
 echo "</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
@@ -85,9 +82,7 @@ if ($forums_publics=="posteriori") {
 	$gras = ''; $fingras = '';
 }
 echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='posteriori' id='forums_posteriori'>";
-echo " $gras<label for='forums_posteriori'>Publication imm&eacute;diate des messages
-	(les contributions s'affichent d&egrave;s leur envoi, les administrateurs peuvent
-	les supprimer ensuite).</label>$fingras\n<br>";
+echo " $gras<label for='forums_posteriori'>"._T('bouton_radio_publication_immediate')."</label>$fingras\n<br>";
 
 if ($forums_publics=="priori") {
 	$checked = ' CHECKED';
@@ -98,9 +93,7 @@ if ($forums_publics=="priori") {
 }
 echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='priori'
 id='forums_priori'>";
-echo " $gras<label for='forums_priori'>Mod&eacute;ration &agrave; priori (les
-	contributions ne s'affichent publiquement qu'apr&egrave;s validation par les
-	administrateurs).</label>$fingras ";
+echo " $gras<label for='forums_priori'>"._T('bouton_radio_moderation_priori')."</label>$fingras ";
 
 if (tester_mail()){
 	echo "\n<BR>";
@@ -112,9 +105,7 @@ if (tester_mail()){
 		$gras = ''; $fingras = '';
 	}
 	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
-	echo " $gras<label for='forums_abonnement'>Enregistrement obligatoire (les
-		utilisateurs doivent s'abonner en fournissant leur adresse e-mail avant de
-		pouvoir poster des contributions).</label>$fingras ";
+	echo " $gras<label for='forums_abonnement'>"._T('bouton_radio_enregistrement_obligatoire')."</label>$fingras ";
 }
 
 echo "</TD></TR>\n";
@@ -126,19 +117,19 @@ if ($options == 'avancees') {
 	echo "<tr><td width='100%' bgcolor='#FFCC66'>\n";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
 	echo bouton_block_invisible('forum');
-	echo "OPTIONS AVANC&Eacute;ES";
+	echo _T('info_options_avancees');
 	echo "</b></font></td></tr></table>";
 	echo debut_block_invisible('forum');
 	echo "<table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
 	echo "<tr><td class='verdana2'>";
-	echo "Appliquer ce choix de mod&eacute;ration :<br>";
+	echo _T('info_appliquer_choix_moderation')."<br>";
 
 	echo "<INPUT TYPE='radio' CHECKED NAME='forums_publics_appliquer' VALUE='futur' id='forums_appliquer_futur'>";
-	echo " <b><label for='forums_appliquer_futur'>aux articles futurs uniquement (pas d'action sur la base de donn&eacute;es).</label></b><br>";
+	echo " <b><label for='forums_appliquer_futur'>"._T('bouton_radio_articles_futurs')."</label></b><br>";
 	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='saufnon' id='forums_appliquer_saufnon'>";
-	echo " <label for='forums_appliquer_saufnon'>&agrave; tous les articles, sauf ceux dont le forum est d&eacute;sactiv&eacute;.</label><br>";
+	echo " <label for='forums_appliquer_saufnon'>"._T('bouton_radio_articles_tous_sauf_forum_desactive')."</label><br>";
 	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='tous' id='forums_appliquer_tous'>";
-	echo " <label for='forums_appliquer_tous'>&agrave; tous les articles sans exception.</label><br>";
+	echo " <label for='forums_appliquer_tous'>"._T('bouton_radio_articles_tous')."</label><br>";
 	echo "</TD></TR></table>\n";
 	echo fin_block();
 	echo "</ul>";
@@ -149,7 +140,7 @@ else {
 
 
 echo "<TR><TD ALIGN='right'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
 
@@ -170,34 +161,30 @@ if ($options == "avancees") {
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-	echo "Messagerie interne</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
+	echo _T('info_messagerie_interne')."</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "SPIP permet l'&eacute;change de messages et la constitution de forums de discussion
-		priv&eacute;s entre les participants du site. Vous pouvez activer ou
-		d&eacute;sactiver cette fonctionnalit&eacute;.";
+	echo _T('info_echange_message');
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	afficher_choix('activer_messagerie', $activer_messagerie,
-		array('oui' => 'Activer la messagerie interne',
-			'non' => 'D&eacute;sactiver la messagerie interne'));
+		array('oui' => _T('bouton_radio_activer_messagerie_interne'),
+			'non' => _T('bouton_radio_desactiver_messagerie_interne')));
 	echo "</TD></TR>\n";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo "<hr>\n";
-	echo propre("Dans l'espace priv&eacute; du site, un forum est ouvert &agrave; tous
-		les r&eacute;dacteurs enregistr&eacute;s. Vous pouvez, ci-dessous, activer un
-		forum suppl&eacute;mentaire, r&eacute;serv&eacute; aux seuls administrateurs.");
+	echo _T('info_forum_ouvert');
 	echo "</TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
-		array('oui' => 'Activer le forum des administrateurs',
-			'non' => 'D&eacute;sactiver le forum des administrateurs'));
+		array('oui' => _T('item_activer_forum_administrateur'),
+			'non' => _T('item_desactiver_forum_administrateur')));
 	echo "</TD></TR>\n";
 
 
 	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 
@@ -217,29 +204,21 @@ if ($options == "avancees") {
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-	echo "Inscription automatique de nouveaux r&eacute;dacteurs</FONT></B> </TD></TR>";
+	echo _T('info_inscription_automatique')."</FONT></B> </TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
-		partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s'inscrire
-		depuis un formulaire automatis&eacute et acc&eacute;deront alors &agrave; l'espace priv&eacute; pour
-		proposer leurs propres articles. <blockquote><i>Lors de la phase d'inscription,
-		les utilisateurs re&ccedil;oivent un courrier &eacute;lectronique automatique
-		leur fournissant leurs codes d'acc&egrave;s au site priv&eacute;. Certains
-		h&eacute;bergeurs d&eacute;sactivent l'envoi de mails depuis leurs
-		serveurs&nbsp;: dans ce cas, l'inscription automatique est
-		impossible.</i></blockquote>";
+	echo _T('info_question_inscription_nouveaux_redacteurs')."</i></blockquote>";
 	echo "</TD></TR>";
 
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
 	afficher_choix('accepter_inscriptions', $accepter_inscriptions,
-		array('oui' => 'Accepter les inscriptions',
-			'non' => 'Ne pas accepter les inscriptions'), " &nbsp; ");
+		array('oui' => _T('item_accepter_inscriptions'),
+			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
 	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 
@@ -258,28 +237,24 @@ if (tester_mail()) {
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Envoi de mails automatique</FONT></B> ".aide ("confmails")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_envoi_email_automatique')."</FONT></B> ".aide ("confmails")."</TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "<blockquote><i>Certains h&eacute;bergeurs d&eacute;sactivent l'envoi automatique de
-		mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes
-		de SPIP ne fonctionneront pas.</i></blockquote>";
+	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
 	echo "</TD></TR>";
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
 
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
-	echo "Envoi des forums aux auteurs des articles</FONT></B></TD></TR>";
+	echo _T('info_envoi_forum')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "Lorsqu'un visiteur du site poste un nouveau message dans le forum
-		associ&eacute; &agrave; un article, les auteurs de l'article peuvent &ecirc;tre
-		pr&eacute;venus de ce message par e-mail. Souhaitez-vous utiliser cette option&nbsp;?";
+	echo _T('info_option_email');
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 	afficher_choix('prevenir_auteurs', $prevenir_auteurs,
-		array('oui' => 'Faire suivre les messages des forums aux auteurs des articles',
-			'non' => 'Ne pas faire suivre les messages des forums'));
+		array('oui' => _T('info_option_faire_suivre'),
+			'non' => _T('info_option_ne_pas_faire_suivre')));
 	echo "</TD></TR>\n";
 
 	//
@@ -291,28 +266,25 @@ if (tester_mail()) {
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
-	echo "Suivi de l'activit&eacute; &eacute;ditoriale</FONT></B></TD></TR>";
+	echo _T('info_suivi_activite')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "Afin de faciliter le suivi de l'activit&eacute;
-		&eacute;ditoriale du site, SPIP peut faire parvenir par mail, par exemple
-		&agrave; une mailing-list des r&eacute;dacteurs, l'annonce des demandes de
-		publication et des validations d'articles.</FONT>";
+	echo _T('info_facilite_suivi_activite')."</FONT>";
 	echo "</TD></TR>";
 
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 	if ($suivi_edito!="oui"){
 		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on'>";
-		echo " <label for='suivi_edito_on'>Envoyer les annonces &eacute;ditoriales</label> ";
+		echo " <label for='suivi_edito_on'>"._T('bouton_radio_envoi_annonces')."</label> ";
 		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' CHECKED id='suivi_edito_off'>";
-		echo " <B><label for='suivi_edito_off'>Ne pas envoyer d'annonces</label></B>";
+		echo " <B><label for='suivi_edito_off'>"._T('bouton_radio_non_envoi_annonces')."</label></B>";
 	}else{
 		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on' CHECKED>";
-		echo " <B><label for='suivi_edito_on'>Envoyer les annonces &agrave; l'adresse :</label></B> ";
+		echo " <B><label for='suivi_edito_on'>"._T('bouton_radio_envoi_annonces_adresse')."</label></B> ";
 		echo "<input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' CLASS='fondl'>";
 		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' id='suivi_edito_off'>";
-		echo " <label for='suivi_edito_off'>Ne pas envoyer d'annonces &eacute;ditoriales </label> ";
+		echo " <label for='suivi_edito_off'>"._T('bouton_radio_non_envoi_annonces_editoriales')."</label> ";
 	}
 	echo "</TD></TR>\n";
 
@@ -330,36 +302,35 @@ if (tester_mail()) {
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
-	echo "Annonce des nouveaut&eacute;s</FONT></B></TD></TR>";
+	echo _T('info_annonce_nouveautes')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "SPIP peut envoyer, r&eacute;guli&egrave;rement, l'annonce des derni&egrave;res nouveaut&eacute;s du site
-		(articles et br&egrave;ves r&eacute;cemment publi&eacute;s).";
+	echo _T('info_non_envoi_annonce_dernieres_nouveautes');
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 	if ($quoi_de_neuf != "oui") {
 		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on'>";
-		echo " <label for='quoi_de_neuf_on'>Envoyer la liste des nouveaut&eacute;s</label> ";
+		echo " <label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label> ";
 		echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' CHECKED id='quoi_de_neuf_off'>";
-		echo " <B><label for='quoi_de_neuf_off'>Ne pas envoyer  la liste des nouveaut&eacute;s</label></B> ";
+		echo " <B><label for='quoi_de_neuf_off'>"._T('bouton_radio_non_envoi_liste_nouveautes')."</label></B> ";
 	}
 	else {
 		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on' CHECKED>";
-		echo " <B><label for='quoi_de_neuf_on'>Envoyer la liste des nouveaut&eacute;s</label></B> ";
+		echo " <B><label for='quoi_de_neuf_on'>"._T('bouton_radio_envoi_liste_nouveautes')."</label></B> ";
 
 		echo "<UL>";
-		echo "<LI>&agrave; l'adresse : <input type='text' name='adresse_neuf' value='$adresse_neuf' size='30' CLASS='fondl'>";
-		echo "<LI>tous les : <input type='text' name='jours_neuf' value='$jours_neuf' size='4' CLASS='fondl'> jours";
-		echo " &nbsp;  &nbsp;  &nbsp; <INPUT TYPE='submit' NAME='envoi_now' VALUE='Envoyer maintenant' CLASS='fondl'>";
+		echo "<LI>"._T('info_adresse')." <input type='text' name='adresse_neuf' value='$adresse_neuf' size='30' CLASS='fondl'>";
+		echo "<LI>"._T('info_tous_les')." <input type='text' name='jours_neuf' value='$jours_neuf' size='4' CLASS='fondl'> jours";
+		echo " &nbsp;  &nbsp;  &nbsp; <INPUT TYPE='submit' NAME='envoi_now' VALUE='"._T('info_envoyer_maintenant')."' CLASS='fondl'>";
 		echo "</UL>";
 		echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' id='quoi_de_neuf_off'>";
-		echo " <label for='quoi_de_neuf_off'>Ne pas envoyer  la liste des nouveaut&eacute;s</label> ";
+		echo " <label for='quoi_de_neuf_off'>"._T('info_non_envoi_liste_nouveautes')."</label> ";
 	}
 	echo "</TD></TR>\n";
 
 	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
 

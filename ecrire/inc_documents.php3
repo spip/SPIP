@@ -303,7 +303,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 	if (tester_upload()) {
 		echo "<br><b>$intitule</b>";
 		echo "<br><small><input name='image' type='File'  class='fondl' style='font-size: 9px; width: 100px;'>\n";
-		echo "<div align='right'><input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size: 9px;'></div></small>\n";
+		echo "<div align='right'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo' style='font-size: 9px;'></div></small>\n";
 	}
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
@@ -311,24 +311,24 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		if ($texte_upload) {
 			echo "<p><div style='border: 1px #303030 dashed; padding: 4px; color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
-			echo "\nVous pouvez s&eacute;lectionner un fichier du dossier <i>upload</i>&nbsp;:";
+			echo "\n"._T('info_selectionner_fichier')."&nbsp;:";
 			echo "\n<select name='image2' size='1' class='fondl' style='width:100%; font-size: 9px;'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='right'><input name='ok' type='Submit' value='Choisir' class='fondo' style='font-size: 9px;'></div>";
+			echo "\n  <div align='right'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo' style='font-size: 9px;'></div>";
 
 			if ($afficher_texte_ftp){
 				if ($dossier_complet){
 					echo "\n<p><b>Portfolio automatique&nbsp;:</b>";
-					echo "\n<br>Vous pouvez installer automatiquement tous les documents contenus dans le dossier <i>upload</i>.";
-					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='Installer tous les documents' class='fondo' style='font-size:9px;'></div>";
+					echo "\n<br>"._T('info_installer_documents');
+					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo' style='font-size:9px;'></div>";
 				}
 			}
 			echo "</div>\n";
 		}
 		else if ($afficher_texte_ftp) {
 			echo "<div style='border: 1px #303030 dashed; padding: 4px; color: #505050;'>";
-			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.".aide("ins_upload");
+			echo _T('info_installer_ftp').aide("ins_upload");
 			echo "</div>";
 		}
 	}
@@ -373,10 +373,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 		if ($type == "article")
 			echo "<font size='2' face='Verdana,Arial,Helvetica,sans-serif'>
-				Les documents suivants sont associ&eacute;s &agrave; l'article,
-				mais ils n'y ont pas &eacute;t&eacute; directement
-				ins&eacute;r&eacute;s. Selon la mise en page du site public,
-				ils pourront appara&icirc;tre sous forme de documents joints.</font>";
+				"._T('texte_documents_associes')."</font>";
 
 		$case = "gauche";
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
@@ -409,8 +406,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
 		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");
-		if ($type == "rubrique") echo "<b><font size=1>PUBLIER UN DOCUMENT DANS CETTE RUBRIQUE</font></b>".aide("ins_doc");
-		else echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>".aide("ins_doc");
+		if ($type == "rubrique") echo "<b><font size=1>"._T('titre_publier_document')."</font></b>".aide("ins_doc");
+		else echo "<b><font size=1>"._T('titre_joindre_document')."</font></b>".aide("ins_doc");
 		echo "</div>\n";
 		echo debut_block_invisible("ajouter_document");
 
@@ -419,9 +416,9 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<td width='200' valign='top' class='verdana2'>";
 
 		if ($type == "article")
-			echo "Vous pouvez joindre &agrave; cet article des documents de type&nbsp;: ";
+			echo _T('info_joindre_document_article')."&nbsp;: ";
 		else if ($type == "rubrique")
-			echo "Vous pouvez ajouter dans cette rubrique des documents de type&nbsp;: ";
+			echo _T('info_joindre_document_rubrique')."&nbsp;: ";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 		$result_types_docs = spip_query($query_types_docs);
 
@@ -440,7 +437,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($taille_preview < 15) $taille_preview = 120;
 
 			if ($creer_preview == 'oui'){
-				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au(x) format(s) $gd_formats, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
+				echo "<p>"._T('texte_creation_automatique_vignette', array('gd_formats' => $gd_formats, 'taille_preview' => $taille_preview));
 			}
 		}
 		echo "</td><td width=20>&nbsp;</td>";
@@ -452,7 +449,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		$link->addVar('ajout_doc', 'oui');
 		$link->addVar('type', $type);
 
-		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true, true);
+		afficher_upload($link, _T('info_telecharger'), '', true, true, true);
 
 		echo "</font>\n";
 		echo "</td></tr></table>";
@@ -544,10 +541,10 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			if ($flag_deplie) echo debut_block_visible($block);
 			else echo debut_block_invisible($block);
 
-			echo "<b>Vignette personnalis&eacute;e</b>";
+			echo "<b>"._T('info_vignette_personnalisee')."</b>";
 			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			if ($flag_modif)
-				echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
+				echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -577,11 +574,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				if ($flag_deplie) echo debut_block_visible($block);
 				else  echo debut_block_invisible($block);
 			
-				echo "<b>Vignette par d&eacute;faut</b>";
+				echo "<b>"._T('info_vignette_defaut')."</b>";
 
 				if ($flag_modif) {
 					echo "<p></p><div><font size=1>";
-					afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
+					afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
 					echo "</font></div>";
 				}
 				echo fin_block();
@@ -612,7 +609,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		if ($flag_modif) {
 			echo $link->getForm('POST');
 
-			echo "<b>Titre du document&nbsp;:</b><br>\n";
+			echo "<b>"._T('titre_titre_document')."</b><br>\n";
 			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
 
 			if ($GLOBALS['coll'] > 0){
@@ -621,7 +618,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 					$jour = $regs[3];
 					$annee = $regs[1];
 				}
-				echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
+				echo "<b>"._T('info_mise_en_ligne')."</b><br>\n";
 				echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
 				afficher_jour($jour);
 				echo "</SELECT> ";
@@ -633,19 +630,19 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo "</SELECT><br>";
 			}
 
-			echo "<b>Description&nbsp;:</b><br>\n";
+			echo "<b>"._T('info_description')."</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
 
 			if ($type_inclus == "embed" OR $type_inclus == "image") {
-				echo "<br><b>Dimensions&nbsp;:</b><br>\n";
+				echo "<br><b>"._T('info_dimension')."</b><br>\n";
 				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
 			}
 
 			echo "<div align='right'>";
-			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
+			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 			echo "</div>";
 			echo "</form>";
 		}
@@ -662,7 +659,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 		if ($flag_modif) {
 			echo "<p></p><div align='center'>";
-			icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
+			icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 			echo "</div>";
 		}
 		echo fin_block();
@@ -734,12 +731,12 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 	echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
 	echo bouton_block_invisible("ajouter_image");
-	echo "<b><font size='2'>AJOUTER UNE IMAGE".aide("ins_img")."</font></b>";
+	echo "<b><font size='2'>"._T('bouton_ajouter_image').aide("ins_img")."</font></b>";
 	echo "</div>\n";
 
 	echo debut_block_invisible("ajouter_image");
 	echo "<font size='2'>";
-	echo "Vous pouvez installer des images aux formats JPEG, GIF et PNG.";
+	echo _T('info_installer_images');
 	echo "</font>";
 
 	$link = $image_link;
@@ -750,7 +747,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	$link->addVar('mode', 'vignette');
 	$link->addVar('type', $type);
 
-	afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
+	afficher_upload($link, _T('info_telecharger'));
 	echo fin_block();
 
 	echo "</font>\n";
@@ -774,12 +771,12 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
 			echo "<div style='padding: 2px;background-color: $couleur_claire; text-align: center; color: black;'>";
 			echo bouton_block_invisible("ajouter_document");
-			echo "<b><font size='2'>AJOUTER UN DOCUMENT</font></b>".aide("ins_doc");
+			echo "<b><font size='2'>"._T('bouton_ajouter_document')."</font></b>".aide("ins_doc");
 			echo "</div>\n";
 
 			echo debut_block_invisible("ajouter_document");
 			echo "<font size='2'>";
-			echo "Vous pouvez joindre &agrave; votre article des documents de type&nbsp;: ";
+			echo _T('info_joindre_documents_article');
 			$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 			$result_types_docs = spip_query($query_types_docs);
 
@@ -799,7 +796,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			$link->addVar('mode', 'document');
 			$link->addVar('type', $type);
 
-			afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
+			afficher_upload($link, _T('info_telecharger_ordinateur'));
 			echo fin_block();
 
 			echo "</font>\n";
@@ -843,7 +840,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 	if (!$titre) {
-		$titre_fichier = "<i>sans titre</i> <small>(".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier).")</small>";
+		$titre_fichier = "<i>"._T('info_sans_titre_2')."</i> <small>(".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier).")</small>";
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
@@ -895,9 +892,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('doc_supp', $id_vignette);
 			if ($flag_deplie) echo debut_block_visible("doc_vignette $id_document");
 			else  echo debut_block_invisible("doc_vignette $id_document");
-			echo "<b>Vignette personnalis&eacute;e</b>";
-			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
-			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
+			echo "<b>"._T('info_vignette_personnalisee')."</b>";
+			echo "<center>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette))."</center>";
+			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -926,10 +923,10 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if ($options == 'avancees'){
 				if ($flag_deplie) echo debut_block_visible("doc_vignette $id_document");
 				else  echo debut_block_invisible("doc_vignette $id_document");
-				echo "<b>Vignette par d&eacute;faut</b>";
+				echo "<b>"._T('info_vignette_defaut')."</b>";
 
 				echo "<p></p><div><font size=1>";
-				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
+				afficher_upload($link, _T('info_remplacer_vignette_defaut'), 'image', false);
 				echo "</font></div>";
 				echo fin_block();
 			}
@@ -940,14 +937,14 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		if (!ereg(",$id_document,", "$doublons")) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				echo "<b>Inclusion de la vignette&nbsp;:</b></br>";
+				echo "<b>"._T('info_inclusion_vignette')."</b></br>";
 			}
 			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
 			echo "</font></div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
-				echo "<b>Inclusion directe&nbsp;:</b></br>";
+				echo "<b>"._T('info_inclusion_directe')."</b></br>";
 				echo "<font color='333333'><div align=left>&lt;emb$id_document|left&gt;</div><div align=center>&lt;emb$id_document|center&gt;</div><div align=right>&lt;emb$id_document|right&gt;</div></font>\n";
 				echo "</font></div>";
 			}
@@ -975,7 +972,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if ($type_titre){
 				echo "$type_titre";
 			} else {
-				echo "Document ".majuscules($type_extension);
+				echo _T('info_document').majuscules($type_extension);
 			}
 			echo " : <a href='$fichier'>".taille_en_octets($taille)."</a>";
 		}
@@ -985,7 +982,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		$link->addVar('id_document', $id_document);
 		echo $link->getForm('POST');
 
-		echo "<b>Titre du document&nbsp;:</b><br>\n";
+		echo "<b>"._T('entree_titre_document')."</b><br>\n";
 		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
 
 		if ($descriptif OR $options == "avancees") {
@@ -996,13 +993,13 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		}
 
 		if (($type_inclus == "embed" OR $type_inclus == "image") AND $options == "avancees") {
-			echo "<br><b>Dimensions&nbsp;:</b><br>\n";
+			echo "<br><b>"._T('entree_dimensions')."</b><br>\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
 		}
 
 		echo "<div align='right'>";
-		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
+		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 		echo "</div>";
 		echo "</form>";
 
@@ -1015,7 +1012,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "</font></div>";
 
 		echo "<p></p><div align='center'>";
-		icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
+		icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 		echo fin_block();
 
@@ -1087,7 +1084,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo $link->getForm('POST');
 
 		echo "<p></p><div class='iconeoff'>";
-		echo "<b>Titre de l'image&nbsp;:</b><br>\n";
+		echo "<b>"._T('entree_titre_image')."</b><br>\n";
 		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
 
 		if ($descriptif OR $options == "avancees") {
@@ -1098,7 +1095,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		}
 
 		echo "<div align='right'>";
-		echo "<input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+		echo "<input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 		echo "</div>";
 		echo "</div>";
 		echo "</form>";
@@ -1109,7 +1106,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('doc_supp', $id_document);
-		icone_horizontale ("Supprimer cette image", $link->getUrl(), "image-24.gif", "supprimer.gif");
+		icone_horizontale (_T('icone_supprimer_image'), $link->getUrl(), "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
 
 		echo fin_block();

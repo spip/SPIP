@@ -8,10 +8,10 @@ define("_ECRIRE_INC_OBJET_BASE", "1");
 
 class _Abstract {
 	function abstract_error($str) {
-		die ("<h4>".$str."<br>Veuillez contacter un developpeur.</h4>");
+		die ("<h4>".$str."<br>"._T('info_contact_developpeur')."</h4>");
 	}
 	function abstract() {
-		$this->abstract_error("Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.");
+		$this->abstract_error(_T('avis_erreur_fonction_contexte'));
 	}
 	function _Abstract() { $this->abstract(); }
 }
@@ -139,7 +139,7 @@ class _ObjectFactory extends _Abstract {
 			return $GLOBALS[$g]->slow_vars[$v];
 		}
 		else {
-			$this->abstract_error("Nom de champ incorrect $name pour objet de type ".$this->object_class);
+			$this->abstract_error(_T('avis_champ_incorrect_type_objet', array('name' => $name)).$this->object_class);
 		}
 	}
 
@@ -159,7 +159,7 @@ class _ObjectFactory extends _Abstract {
 			$GLOBALS[$g]->dirty = true;
 		}
 		else {
-			$this->abstract_error("Nom de champ incorrect $name pour objet de type ".$this->object_class);
+			$this->abstract_error(_T('avis_champ_incorrect_type_objet', array('name' => $name)).$this->object_class);
 		}
 	}
 

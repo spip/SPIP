@@ -139,9 +139,9 @@ function afficher_logo($racine, $titre) {
 		echo "\n<INPUT NAME='ajout_logo' TYPE=Hidden VALUE='oui'>";
 		echo "\n<INPUT NAME='logo' TYPE=Hidden VALUE='$racine'>";
 		if (tester_upload()){
-			echo "\nT&eacute;l&eacute;charger un nouveau logo&nbsp;:<BR>";
+			echo "\n"._T('info_telecharger_nouveau_logo')."<BR>";
 			echo "\n<INPUT NAME='image' TYPE=File CLASS='forml' style='font-size:9px;' SIZE=15>";
-			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size:9px;'></div>";
+			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='"._T('bouton_telecharger')."' CLASS='fondo' style='font-size:9px;'></div>";
 		} else {
 
 			$myDir = opendir("upload");
@@ -154,13 +154,13 @@ function afficher_logo($racine, $titre) {
 			closedir($myDir);
 
 			if (strlen($afficher) > 10){
-				echo "\nS&eacute;lectionner un fichier&nbsp;:";
+				echo "\n"._T('info_selectionner_fichier_2');
 				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
 				echo $afficher;
 				echo "\n</SELECT>";
-				echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='Choisir' CLASS='fondo'>";
+				echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='"._T('bouton_choisir')."' CLASS='fondo'>";
 			} else {
-				echo "Installer des images dans le dossier /ecrire/upload pour pouvoir les s&eacute;lectionner ici.";
+				echo _T('info_installer_images_dossier');
 			}
 
 		}

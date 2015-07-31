@@ -4,7 +4,7 @@ include ("inc.php3");
 
 
 
-debut_page("Suivi des p&eacute;titions", "messagerie", "suivi-petition");
+debut_page(_T('titre_page_controle_petition'), "messagerie", "suivi-petition");
 debut_gauche();
 
 
@@ -50,22 +50,22 @@ function controle_forum($request,$adresse_retour) {
 		echo "<FONT SIZE=3 FACE='Georgia,Garamond,Times,serif'>";
 				
 		if ($statut=="publie"){
-			icone ("Supprimer cette signature", "controle_petition.php3?supp_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
+			icone (_T('icone_supprimer_signature'), "controle_petition.php3?supp_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
 		}
 		if ($statut=="poubelle"){
-			icone ("Valider cette signature", "controle_petition.php3?add_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
+			icone (_T('icone_valider_signature'), "controle_petition.php3?add_petition=$id_signature&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
 		}
 		
 		
 		echo "<FONT SIZE=2>".affdate($date_time)."</FONT><BR>";
 		if ($statut=="poubelle"){
-			echo "<FONT SIZE=1 COLOR='red'>MESSAGE EFFAC&Eacute;</FONT><BR>";
+			echo "<FONT SIZE=1 COLOR='red'>"._T('info_message_efface')."</FONT><BR>";
 		}
 		if (strlen($url_site)>6 AND strlen($nom_site)>0){
-			echo "<FONT SIZE=1>SITE WEB :</FONT> <A HREF='$url_site'>$nom_site</A><BR>";
+			echo "<FONT SIZE=1>"._T('info_site_web')."</FONT> <A HREF='$url_site'>$nom_site</A><BR>";
 		}
 		if (strlen($ad_email)>0){
-			echo "<FONT SIZE=1>ADRESSE EMAIL :</FONT> <A HREF='mailto:$ad_email'>$ad_email</A><BR>";
+			echo "<FONT SIZE=1>"._T('info_adresse_email')."</FONT> <A HREF='mailto:$ad_email'>$ad_email</A><BR>";
 		}
 		if (strlen($message)>0) echo "<P>$message";
 		
@@ -89,7 +89,7 @@ function controle_forum($request,$adresse_retour) {
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
  
 if ($connect_statut == "0minirezo") {
-	gros_titre("Suivi des p&eacute;titions");
+	gros_titre(_T('titre_suivi_petition'));
 
 	if ($supp_petition){
 		$query_forum = "UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$supp_petition";
@@ -134,7 +134,7 @@ if ($connect_statut == "0minirezo") {
 	controle_forum($result_forum, "forum.php3");
 }
 else {
-	echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
+	echo "<B>"._T('avis_non_acces_page')."</B>";
 }	
 		
 

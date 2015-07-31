@@ -3,14 +3,14 @@
 include ("inc.php3");
 
 
-debut_page("Suivi des forums", "messagerie", "forum-controle");
+debut_page(_T('titre_page_forum_suivi'), "messagerie", "forum-controle");
 
 $requete_base_controle = "statut!='perso' AND statut != 'redac'";
 
 if (!$page) $page = "public";
 
 echo "<br><br><br>";
-gros_titre("Suivi des forums");
+gros_titre(_T('titre_forum_suivi'));
 
 barre_onglets("suivi_forum", $page);
 
@@ -20,7 +20,7 @@ debut_gauche();
 debut_boite_info();
 
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.");
+echo _T('info_gauche_suivi_forum_2');
 
 echo aide ("suiviforum");
 echo "</FONT>";
@@ -33,7 +33,7 @@ fin_boite_info();
 $activer_stats = lire_meta("activer_statistiques");
 if (($activer_stats != "non") AND ($connect_statut == '0minirezo')) {
 	debut_raccourcis();
-	icone_horizontale("Evolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
+	icone_horizontale(_T('icone_evolution_visites_2'), "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
 	fin_raccourcis();
 }
 
@@ -76,11 +76,11 @@ function forum_parent($id_forum) {
 			}
 
 			if ($forum_stat == "prive" OR $forum_stat == "privoff") {
-				return $retour."<B>R&eacute;ponse &agrave; l'article <A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
+				return $retour."<B>"._T('item_reponse_article')."<A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
 			}
 			else {
-				$retour .= "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>G&eacute;rer le forum public de cet article</font></a><br>";
-				return $retour."<B>R&eacute;ponse &agrave; l'article <A HREF='".generer_url_article($id_article)."'>$titre</A></B>";
+				$retour .= "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>"._T('lien_forum_public')."</font></a><br>";
+				return $retour."<B>"._T('lien_reponse_article')." <A HREF='".generer_url_article($id_article)."'>$titre</A></B>";
 			}
 		}
 		else if ($forum_id_rubrique > 0) {
@@ -91,7 +91,7 @@ function forum_parent($id_forum) {
 				$id_rubrique = $row['id_rubrique'];
 				$titre = $row['titre'];
 			}
-			return "<B>R&eacute;ponse &agrave; la rubrique <A HREF='".generer_url_rubrique($id_rubrique)."'>$titre</A></B>";
+			return "<B>"._T('lien_reponse_rubrique')." <A HREF='".generer_url_rubrique($id_rubrique)."'>$titre</A></B>";
 		}
 		else if ($forum_id_syndic > 0) {
 			$query2 = "SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\"";
@@ -102,7 +102,7 @@ function forum_parent($id_forum) {
 				$titre = $row['nom_site'];
 				$statut = $row['statut'];
 			}
-			return "<B>R&eacute;ponse au site r&eacute;f&eacute;renc&eacute; : <A HREF='sites.php3?id_syndic=$id_syndic'>$titre</A></B>";
+			return "<B>"._T('lien_reponse_site_reference')." <A HREF='sites.php3?id_syndic=$id_syndic'>$titre</A></B>";
 		}
 		else if ($forum_id_breve > 0) {
 			$query2 = "SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\"";
@@ -114,23 +114,23 @@ function forum_parent($id_forum) {
 				$titre = $row['titre'];
 			}
 			if ($forum_stat == "prive") {
-				return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='breves_voir.php3?id_breve=$id_breve'>$titre</A></B>";
+				return "<B>"._T('lien_reponse_breve')." <A HREF='breves_voir.php3?id_breve=$id_breve'>$titre</A></B>";
 			}
 			else {
-				return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='".generer_url_breve($id_breve)."'>$titre</A></B>";
+				return "<B>"._T('lien_reponse_breve_2')." <A HREF='".generer_url_breve($id_breve)."'>$titre</A></B>";
 			}
 		}
 		else if ($forum_stat == "privadm") {
 			$retour = forum_parent($forum_id_parent);
 			
 			if (strlen($retour)>0) return $retour;
-			else return "<B>Message du <A HREF='forum_admin.php3'>forum des administrateurs</A></B>";
+			else return "<B>"._T('info_message')."<A HREF='forum_admin.php3'>"._T('info_forum_administrateur')."</A></B>";
 		}
 		else {
 			$retour = forum_parent($forum_id_parent);
 
 			if (strlen($retour)>0) return $retour;
-			else return "<B>Message du <A HREF='forum.php3'>forum interne</A></B>";
+			else return "<B>"._T('info_message')."<A HREF='forum.php3'>._T('info_forum_interne')."</A></B>";
 		}
 	}
 
@@ -179,15 +179,15 @@ function controle_forum($row, $new) {
 	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 	/*if ($forum_stat=="publie" OR $forum_stat == "off") {
 		$controle .= "<img src='img_pack/racine-site-24.gif' border=0 align='left'>";
-		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[sur le site public]</FONT> ";
+		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>"._T('info_sur_site_public')."</FONT> ";
 	}
 	else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm" OR $forum_stat == "privoff"){
 		$controle .= "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
-		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[dans l'espace priv&eacute;]</FONT> ";
+		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>"._T('info_dans_espace_prive')."</FONT> ";
 	}*/
 
 	if ($new)
-		$new = " &nbsp; <i>(Nouveau)</i>";
+		$new = " &nbsp; <i>"._T('info_nouveau')."</i>";
 
 	$controle .= "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."$new</FONT>";
 	if (strlen($forum_auteur) > 2) {
@@ -198,18 +198,18 @@ function controle_forum($row, $new) {
 
 	if ($forum_stat != "off" AND $forum_stat != "privoff") {
 		if ($forum_stat == "publie" OR $forum_stat == "prop")
-			$controle .= icone("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+			$controle .= icone(_T('icone_supprimer_message'), "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
 		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-			$controle .= icone("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+			$controle .= icone(_T('icone_supprimer_message'), "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
 	}
 	else {
-		$controle .= "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
+		$controle .= "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 		if($forum_id_auteur>0)
-			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>Voir cet auteur</A>";
+			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>"._T('lien_voir_auteur')."</A>";
 	}
 
 	if ($forum_stat=="prop")
-		$controle .= icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut&page=$page", "forum-interne-24.gif", "creer.gif", "right", 'non');
+		$controle .= icone(_T('icone_valider_message'), "controle_forum.php3?valid_forum=$id_forum&debut=$debut&page=$page", "forum-interne-24.gif", "creer.gif", "right", 'non');
 
 	$controle .= "<BR>".forum_parent($id_forum);
 
@@ -251,7 +251,7 @@ function controle_forum($row, $new) {
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
 if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
-	echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
+	echo "<B>"._T('avis_non_acces_page')."</B>";
 	exit;
 }
 

@@ -6,7 +6,7 @@ include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
 	install_debut_html();
-	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>Espace interdit</B><p>SPIP est d&eacute;j&agrave; install&eacute;.</FONT>";
+	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
 	install_fin_html();
 	exit;
 }
@@ -21,10 +21,10 @@ include_ecrire ("inc_base.php3");
 if ($etape == 6) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Derni&egrave;re &eacute;tape : <B>C'est termin&eacute; !</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT>";
 	echo "<P>";
-	echo "<B>N'oubliez pas vos propres codes d'acc&egrave;s&nbsp;!</B>";
-	echo "<P>Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;...";
+	echo "<B>"._T('info_code_acces')."</B>";
+	echo "<P>"._T('info_utilisation_spip');
 
 	include_ecrire ("inc_connect_install.php3");
 
@@ -58,10 +58,10 @@ if ($etape == 6) {
 	init_config();
 
 	if ($hebergeur == 'nexenservices') {
-		echo "<p><B>Votre h&eacute;bergeur est Nexen Services.</B><br />";
-		echo "<p>La protection du r&eacute;pertoire <tt>ecrire/data/</tt> doit se faire par l'interm&eacute;diaire de ";
-		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">l'espace webmestres</a>.";
-		echo "<p>Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).";
+		echo "<p><B>"._T('info_nexen_1')."</B><br />";
+		echo "<p>"._T('info_nexen_2');
+		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">"._T('info_nexen_3')."</a>.";
+		echo "<p>"._T('info_nexen_4');
 	}
 	else {
 		include_ecrire ("inc_acces.php3");
@@ -79,7 +79,7 @@ if ($etape == 6) {
 	}
 
 	echo "<FORM ACTION='index.php3' METHOD='post'>";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
 	install_fin_html();
@@ -91,46 +91,46 @@ else if ($etape == 5) {
 
 	include_ecrire ("inc_connect_install.php3");
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Cinqui&egrave;me &eacute;tape : <B>Informations personnelles</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
 	echo "<P>";
 
-	echo "<b>Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.</b>";
+	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
 	echo aide ("install5");
-	echo "<p>(Note : s'il s'agit d'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez ";
-	echo "laisser ces champs vides)";
+	echo "<p>"._T('texte_informations_personnelles_2');
+	echo _T('info_laisser_champs_vides');
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6'>";
 
-	echo "<fieldset><label><B>Votre identit&eacute; publique...</B><BR></label>";
-	echo "<B>Signature</B><BR>";
-	echo "(Votre nom ou votre pseudo)<BR>";
+	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR></label>";
+	echo "<B>"._T('entree_signature')."</B><BR>";
+	echo _T('entree_nom_pseudo_1')."<BR>";
 	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"$nom\" SIZE='40'><P>";
 
-	echo "<B>Votre adresse email</B><BR>";
+	echo "<B>"._T('entree_adresse_email')."</B><BR>";
 	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"$email\" SIZE='40'></fieldset><P>\n";
 
-	echo "<fieldset><label><B>Vos identifiants de connexion...</B><BR></label>";
-	echo "<B>Votre login</B><BR>";
-	echo "(Plus de 3 caract&egrave;res)<BR>";
+	echo "<fieldset><label><B>"._T('entree_identifiants_connexion')."</B><BR></label>";
+	echo "<B>"._T('entree_login')."</B><BR>";
+	echo _T('info_plus_trois_car')."<BR>";
 	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"$login\" SIZE='40'><P>\n";
 
-	echo "<B>Votre mot de passe</B> <BR>";
-	echo "(Plus de 5 caract&egrave;res)<BR>";
+	echo "<B>"._T('entree_mot_passe')."</B> <BR>";
+	echo _T('info_plus_cinq_car_2')."<BR>";
 	echo "<INPUT TYPE='password' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 	echo "<p>";
 
 	if ($flag_ldap AND !$ldap_present) {
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
-		echo "<b>Authentification externe</b>";
-		echo "<p>Si vous avez acc&egrave;s &agrave; un annuaire (LDAP), vous pouvez l'utiliser pour ";
-		echo "importer automatiquement des utilisateurs sous SPIP.";
+		echo "<b>"._T('info_authentification_externe')."</b>";
+		echo "<p>"._T('texte_annuaire_ldap_1');
+		echo _T('texte_annuaire_ldap_2');
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE=\"Ajouter l'acc&egrave;s &agrave; LDAP >>\">";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE=\""._T('bouton_acces_ldap')."\">";
 		echo "</FORM>";
 	}
 
@@ -145,7 +145,7 @@ else if ($etape == 4) {
 	// Necessaire pour appeler les fonctions SQL wrappees
 	include_ecrire("inc_db_mysql.php3");
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Quatri&egrave;me &eacute;tape : <B>Cr&eacute;ation des tables de la base</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
 	echo "<P>";
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
@@ -184,17 +184,17 @@ else if ($etape == 4) {
 		fputs($myFile, $conn);
 		fclose($myFile);
 
-		echo "<B>La structure de votre base de donn&eacute;es est install&eacute;e.</B><P>Vous pouvez passer &agrave; l'&eacute;tape suivante.";
+		echo "<B>"._T('info_base_installee')."</B><P>"._T('info_etape_suivante_1');
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 		echo "</FORM>";
 	}
 	else {
-		echo "<B>L'op&eacute;ration a &eacute;chou&eacute;.</B> Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.";
+		echo "<B>"._T('avis_operation_echec')."</B> "._T('texte_operation_echec');
 	}
 
 	install_fin_html();
@@ -205,7 +205,7 @@ else if ($etape == 3) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Troisi&egrave;me &eacute;tape : <B>Choix de votre base</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_choix_base')."<B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
 	echo aide ("install2");
 	echo "<P>";
@@ -219,10 +219,10 @@ else if ($etape == 3) {
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$result = @mysql_list_dbs();
 
-	echo "<fieldset><label><B>Choisissez votre base :</B><BR></label>";
+	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B><BR></label>";
 
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
-		echo "<B>Le serveur MySQL contient plusieurs bases de donn&eacute;es.</B><P> <B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:";
+		echo "<B>"._T('texte_choix_base_2')."</B><P>"._T('texte_choix_base_3');
 		echo "<UL>";
 		$bases = "";
 		for ($i = 0; $i < $n; $i++) {
@@ -238,28 +238,27 @@ else if ($etape == 3) {
 			}
 		}
 		echo $bases."</UL>";
-		echo "ou... ";
+		echo _T('info_ou');
 	}
 	else {
-		echo "<B>Le programme d'installation n'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.</B>
-		Soit aucune base n'est disponible, soit la fonction permettant de lister les bases a &eacute;t&eacute; d&eacute;sactiv&eacute;e
-		pour des raisons de s&eacute;curit&eacute; (ce qui est le cas chez de nombreux h&eacute;bergeurs).<P>";
+		echo "<B>"._T('avis_lecture_noms_bases_1')."</B>
+		"._T('avis_lecture_noms_bases_2')."<P>";
 		if ($login_db) {
-			echo "Dans la seconde alternative, il est probable qu'une base portant votre nom de login soit utilisable&nbsp;:";
+			echo _T('avis_lecture_noms_bases_3');
 			echo "<UL>";
 			echo "<INPUT NAME=\"choix_db\" VALUE=\"".$login_db."\" TYPE=Radio id='stand' CHECKED>";
 			echo "<label for='stand'>".$login_db."</label><BR>\n";
 			echo "</UL>";
-			echo "ou... ";
+			echo _T('info_ou');
 			$checked = true;
 		}
 	}
 	echo "<INPUT NAME=\"choix_db\" VALUE=\"new_spip\" TYPE=Radio id='nou'";
 	if (!$checked) echo " CHECKED";
-	echo "> <label for='nou'><B>Cr&eacute;er</B> une nouvelle base de donn&eacute;es&nbsp;:</label> ";
+	echo "> <label for='nou'>"._T('info_creer_base')."</label> ";
 	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondo' VALUE=\"spip\" SIZE='20'></fieldset><P>";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 
 	echo "</FORM>";
@@ -272,7 +271,7 @@ else if ($etape == 2) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Deuxi&egrave;me &eacute;tape : <B>Essai de connexion &agrave; la base</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
 
 	echo "<!--";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
@@ -282,7 +281,7 @@ else if ($etape == 2) {
 	echo "<P>";
 
 	if (($db_connect=="0") && $link){
-		echo "<B>La connexion a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
+		echo "<B>"._T('info_connexion_ok')."</B><P> "._T('info_etape_suivante_2');
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='3'>";
@@ -290,13 +289,13 @@ else if ($etape == 2) {
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
 		echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>";
 
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 	}
 	else {
-		echo "<B>La connexion au serveur MySQL a &eacute;chou&eacute;.</B>";
-		echo "<P>Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.";
-		echo "<P><FONT SIZE=2><B>N.B.</B> Sur de nombreux serveurs, vous devez <B>demander</B> l'activation de votre acc&egrave;s &agrave; la base MySQL avant de pouvoir l'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.</FONT>";
+		echo "<B>"._T('avis_connexion_echec_1')."</B>";
+		echo "<P>"._T('avis_connexion_echec_2');
+		echo "<P><FONT SIZE=2>"._T('avis_connexion_echec_3')."</FONT>";
 	}
 
 	install_fin_html();
@@ -305,9 +304,9 @@ else if ($etape == 2) {
 else if ($etape == 1) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Premi&egrave;re &eacute;tape : <B>Votre connexion MySQL</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
 
-	echo "<P>Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte MySQL, les codes de connexion au serveur MySQL.";
+	echo "<P>"._T('texte_connexion_mysql');
 
 	echo aide ("install1");
 
@@ -331,19 +330,19 @@ else if ($etape == 1) {
 
 	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2'>";
-	echo "<fieldset><label><B>Adresse de la base de donn&eacute;es</B><BR></label>";
-	echo "(Souvent cette adresse correspond &agrave; celle de votre site, parfois elle correspond &agrave; la mention &laquo;localhost&raquo;, parfois elle est laiss&eacute;e totalement vide.)<BR>";
+	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR></label>";
+	echo _T('entree_base_donnee_2')."<BR>";
 	echo "<INPUT TYPE='text' NAME='adresse_db' CLASS='formo' VALUE=\"$adresse_db\" SIZE='40'></fieldset><P>";
 
-	echo "<fieldset><label><B>Le login de connexion</B><BR></label>";
-	echo "(Correspond parfois &agrave; votre login d'acc&egrave;s au FTP; parfois laiss&eacute; vide)<BR>";
+	echo "<fieldset><label><B>"._T('entree_login_connexion_1')."</B><BR></label>";
+	echo _T('entree_login_connexion_2')."<BR>";
 	echo "<INPUT TYPE='text' NAME='login_db' CLASS='formo' VALUE=\"$login_db\" SIZE='40'></fieldset><P>";
 
-	echo "<fieldset><label><B>Le mot de passe de connexion</B><BR></label>";
-	echo "(Correspond parfois &agrave; votre mot de passe pour le FTP; parfois laiss&eacute; vide)<BR>";
+	echo "<fieldset><label><B>"._T('entree_mot_passe_1')."</B><BR></label>";
+	echo _T('entree_mot_passe_2')."<BR>";
 	echo "<INPUT TYPE='password' NAME='pass_db' CLASS='formo' VALUE=\"$pass_db\" SIZE='40'></fieldset><P>";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 
 	echo "</FORM>";
@@ -368,13 +367,13 @@ else if ($etape == 'ldap5') {
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();
 
-	echo "<B>L'authentification LDAP est install&eacute;e.</B>";
-	echo "<P>Vous pouvez maintenant terminer la proc&eacute;dure d'installation standard.";
+	echo "<B>"._T('info_ldap_ok')."</B>";
+	echo "<P>"._T('info_terminer_installation');
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 	echo "</FORM>";
 }
@@ -392,15 +391,15 @@ else if ($etape == 'ldap4') {
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>Chemin d'acc&egrave;s dans l'annuaire</B></FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
 		echo "<P>";
 
-		echo "<B>L'op&eacute;ration a &eacute;chou&eacute;.</B> Le chemin que vous avez choisi (<tt>".htmlspecialchars($base_ldap);
-		echo "</tt>) ne semble pas valide. Veuillez retourner &agrave; la page pr&eacute;c&eacute;dente ";
-		echo "et v&eacute;rifier les informations fournies.";
+		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
+		echo "</tt>) "._T('avis_chemin_invalide_2');
+		echo _T('avis_chemin_invalide_3');
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>R&eacute;glage de l'importation LDAP</B></FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
 		echo "<P>";
 
 		$conn = join('', file("inc_connect_install.php3"));
@@ -422,19 +421,19 @@ else if ($etape == 'ldap4') {
 
 		echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
-		echo "<fieldset><label><B>Statut par d&eacute;faut des utilisateurs import&eacute;s</B></label><BR>";
-		echo "Choisissez le statut qui est attribu&eacute; aux personnes pr&eacute;sentes dans ";
-		echo "l'annuaire LDAP lorsqu'elles se connectent pour la première fois. ";
-		echo "Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas. ";
+		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR>";
+		echo _T('info_statut_utilisateurs_2');
+		echo _T('info_statut_utilisateurs_3');
+		echo _T('info_statut_utilisateurs_4');
 		echo "<p>";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"6forum\" id='visit'>";
-		echo "<label for='visit'><b>Visiteur</b></label> du site public<br>";
+		echo "<label for='visit'><b>"._T('info_visiteur_1')."</b></label> "._T('info_visiteur_2')."<br>";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"1comite\" id='redac' CHECKED>";
-		echo "<label for='redac'><b>R&eacute;dacteur</b></label> ayant acc&egrave;s &agrave; l'espace priv&eacute; (<i>recommand&eacute;</i>)<br>";
+		echo "<label for='redac'><b>"._T('info_redacteur_1')."</b></label> "._T('info_redacteur_2')."<br>";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"0minirezo\" id='admin'>";
-		echo "<label for='admin'><b>Administrateur</b></label> du site (<i>utilisez avec pr&eacute;caution</i>)<br>";
+		echo "<label for='admin'><b>"._T('info_administrateur_1')."</b></label> "._T('info_administrateur_2')."<br>";
 	
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 		echo "</FORM>";
 	}
@@ -445,10 +444,10 @@ else if ($etape == 'ldap4') {
 else if ($etape == 'ldap3') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>Chemin d'acc&egrave;s dans l'annuaire</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
 
-	echo "<P>Vous devez d&eacute;sormais configurer le chemin d'acc&egrave;s aux informations dans l'annuaire. ";
-	echo "Cette information est indispensable pour lire les profils utilisateurs stock&eacute;s dans l'annuaire. ";
+	echo "<P>"._T('info_chemin_acces_2');
+	echo _T('info_chemin_acces_3');
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
@@ -468,7 +467,7 @@ else if ($etape == 'ldap3') {
 	$checked = false;
 
 	if (is_array($info) AND $info["count"] > 0) {
-		echo "<P><b>S&eacute;lectionnez</b> ci-apr&egrave;s le chemin d'acc&egrave;s dans l'annuaire&nbsp;:";
+		echo "<P>"._T('info_selection_chemin_acces');
 		echo "<UL>";
 		$n = 0;
 		for ($i = 0; $i < $info["count"]; $i++) {
@@ -487,7 +486,7 @@ else if ($etape == 'ldap3') {
 			}
 		}
 		echo "</UL>";
-		echo "ou... ";
+		echo _T('info_ou');
 	}
 	echo "<INPUT NAME=\"base_ldap\" VALUE=\"\" TYPE='Radio' id='manuel'";
 	if (!$checked) {
@@ -495,10 +494,10 @@ else if ($etape == 'ldap3') {
 		$checked = true;
 	}
 	echo ">";
-	echo "<label for='manuel'><B>Entrer</B> le chemin d'acc&egrave;s&nbsp;:</label> ";
+	echo "<label for='manuel'>"._T('entree_chemin_acces')."</label> ";
 	echo "<INPUT TYPE='text' NAME='base_ldap_text' CLASS='formo' VALUE=\"ou=users, dc=mon-domaine, dc=com\" SIZE='40'></fieldset><P>";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
 	install_fin_html();
@@ -508,7 +507,7 @@ else if ($etape == 'ldap3') {
 else if ($etape == 'ldap2') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>Votre connexion LDAP</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
 	echo "<P>";
 
@@ -516,7 +515,7 @@ else if ($etape == 'ldap2') {
 	$r = @ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
 	if ($ldap_link && ($r || !$login_ldap)) {
-		echo "<B>La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
+		echo "<B>"._T('info_connexion_ldap_ok');
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap3'>";
@@ -525,13 +524,13 @@ else if ($etape == 'ldap2') {
 		echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
 		echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
 
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 	}
 	else {
-		echo "<B>La connexion au serveur LDAP a &eacute;chou&eacute;.</B>";
-		echo "<P>Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies. ";
-		echo "<br>Alternativement, n'utilisez pas le support LDAP pour importer des utilisateurs.";
+		echo "<B>"._T('avis_connexion_ldap_echec_1')."</B>";
+		echo "<P>"._T('avis_connexion_ldap_echec_2');
+		echo "<br>"._T('avis_connexion_ldap_echec_3');
 	}
 
 	install_fin_html();
@@ -541,11 +540,11 @@ else if ($etape == 'ldap2') {
 else if ($etape == 'ldap1') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>Votre connexion LDAP</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
-	echo "<P>Veuillez entrer dans ce formulaire les informations de connexion &agrave; votre annuaire LDAP. ";
-	echo "Ces informations doivent pouvoir vous &ecirc;tre fournies par l'administrateur du syst&egrave;me ";
-	echo "ou du r&eacute;seau.";
+	echo "<P>"._T('entree_informations_connexion_ldap_1');
+	echo _T('entree_informations_connexion_ldap_2');
+	echo _T('entree_informations_connexion_ldap_3');
 
 	$adresse_ldap = 'localhost';
 	$port_ldap = 389;
@@ -561,29 +560,29 @@ else if ($etape == 'ldap1') {
 
 	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
-	echo "<fieldset><label><B>Adresse de l'annuaire</B><BR></label>";
-	echo "(Si votre annuaire est install&eacute; sur la m&ecirc;me machine que ce site Web, il s'agit ";
-	echo "probablement de &laquo;localhost&raquo;.)<BR>";
+	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR></label>";
+	echo _T('texte_adresse_annuaire_1');
+	echo _T('texte_adresse_annuaire_2')."<BR>";
 	echo "<INPUT TYPE='text' NAME='adresse_ldap' CLASS='formo' VALUE=\"$adresse_ldap\" SIZE='20'><P>";
 
-	echo "<label><B>Le num&eacute;ro de port de l'annuaire</B><BR></label>";
-	echo "(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)<BR>";
+	echo "<label><B>"._T('entree_port_annuaire')."</B><BR></label>";
+	echo _T('texte_port_annuaire')."<BR>";
 	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"$port_ldap\" SIZE='20'><P></fieldset>";
 
 	echo "<p><fieldset>";
-	echo "Certains serveurs LDAP n'acceptent aucun acc&egrave;s anonyme. Dans ce cas ";
-	echo "il faut sp&eacute;cifier un identifiant d'acc&egrave;s initial afin de pouvoir ";
-	echo "ensuite rechercher des informations dans l'annuaire. Dans la plupart des cas ";
-	echo "n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.<p>";
-	echo "<label><B>Login LDAP initial</B><BR></label>";
-	echo "(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, ";
-	echo "par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)<br>";
+	echo _T('texte_acces_ldap_anonyme_1');
+	echo _T('texte_acces_ldap_anonyme_2');
+	echo _T('texte_acces_ldap_anonyme_3');
+	echo _T('texte_acces_ldap_anonyme_4')."<p>";
+	echo "<label><B>"._T('entree_login_ldap')."</B><BR></label>";
+	echo _T('texte_login_ldap_1');
+	echo _T('texte_login_ldap_2')."<br>";
 	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
 
-	echo "<label><B>Mot de passe</B><BR></label>";
+	echo "<label><B>"._T('entree_passe_ldap')."</B><BR></label>";
 	echo "<INPUT TYPE='password' NAME='pass_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
 
-	echo "<p><DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<p><DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 
 	echo "</FORM>";
 

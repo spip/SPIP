@@ -83,7 +83,7 @@ debut_boite_info();
 
 echo "<CENTER>";
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>AUTEUR NUM&Eacute;RO&nbsp;:</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('info_gauche_numero_auteur')."&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
 echo "</CENTER>";
 
@@ -100,7 +100,7 @@ $arton = "auton$id_auteur";
 $artoff = "autoff$id_auteur";
 
 if ($id_auteur>0 AND (($connect_statut == '0minirezo') OR ($connect_id_auteur == $id_auteur)))
-	afficher_boite_logo($arton, $artoff, "LOGO DE L'AUTEUR".aide ("logoart"), "LOGO POUR SURVOL");
+	afficher_boite_logo($arton, $artoff, _T('logo_auteur').aide ("logoart"), _T('logo_survol'));
 
 
 debut_droite();
@@ -121,8 +121,8 @@ else $logo = "redacteurs-24.gif";
 	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0) {
 		debut_cadre_relief("$logo");
 		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
-		if (strlen($email) > 2) echo "email : <B><A HREF='mailto:$email'>$email</A></B><BR> ";
-		if (strlen($nom_site_auteur) > 2) echo "site : <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
+		if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
+		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')."<B><A HREF='$url_site'>$nom_site_auteur</A></B>";
 		echo "<P>".propre($bio);
 		echo "</FONT>";
 		fin_cadre_relief();
@@ -134,7 +134,7 @@ else $logo = "redacteurs-24.gif";
 	else if($connect_id_auteur == $id_auteur) $aff_art = "prepa,prop,publie";
 	else $aff_art = "prop,publie";
 	
-	afficher_articles("Les articles de cet auteur",
+	afficher_articles(_T('info_articles_auteur'),
 	"SELECT article.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS article, spip_auteurs_articles AS lien WHERE lien.id_auteur='$id_auteur' AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_art')>0 ORDER BY article.date DESC");
 

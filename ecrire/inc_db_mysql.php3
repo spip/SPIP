@@ -37,7 +37,7 @@ function spip_query_db($query) {
 	}
 
 	if ($my_debug AND $s = mysql_error()) {
-		echo "Erreur dans la requ&ecirc;te : ".htmlentities($query)."<br>";
+		echo _T('info_erreur_requete').htmlentities($query)."<br>";
 		echo "&laquo; ".htmlentities($s)." &raquo;<p>";
 	}
 

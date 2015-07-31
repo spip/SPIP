@@ -46,7 +46,7 @@ if ($new != "oui") {
 	}
 }
 else {
-	$titre = "Nouvelle br\xe8ve";
+	$titre = _T('titre_nouvelle_breve');
 	$statut = "prop";
 }
 
@@ -69,13 +69,13 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 
 
 
-debut_page("Modifier la br&egrave;ve : &laquo; $titre &raquo;", "documents", "breves");
+debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "documents", "breves");
 
 
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -95,12 +95,12 @@ if ($new != "oui") {
 	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr width='100%'>";
 	echo "<td>";
-		icone("Retour", "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
+		icone(_T('icone_retour'), "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
 	
 	echo "</td>";
 		echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 	echo "<td width='100%'>";
-	echo "Modifier la br&egrave;ve :";
+	echo _T('info_modifier_breve');
 	gros_titre($titre);
 	echo "</td></tr></table>";
 	echo "<p>";
@@ -118,10 +118,10 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$titre = entites_html($titre);
 	$lien_titre = entites_html($lien_titre);
 
-	echo "<B>Titre</B> [Obligatoire]<BR>";
+	echo _T('entree_titre_obligatoire');
 	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
 
-		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>".aide ("brevesrub")."<BR>\n";
+		echo "<B>"._T('entree_interieur_rubrique')."</B>".aide ("brevesrub")."<BR>\n";
 
 
 
@@ -149,13 +149,13 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
-	echo "<B>Texte de la br&egrave;ve</B><BR>";
+	echo "<B>"._T('entree_texte_breve')."</B><BR>";
 	echo "<TEXTAREA NAME='texte' ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
 
-	echo "<B>Lien hypertexte</B> (r&eacute;f&eacute;rence, site &agrave; visiter...)".aide ("breveslien")."<BR>";
+	echo _T('entree_liens_sites').aide ("breveslien")."<BR>";
 	echo "Titre :<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='lien_titre' VALUE=\"$lien_titre\" SIZE='40'><BR>";
 
@@ -166,13 +166,13 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
 		debut_cadre_relief();
-		echo "<B>Cette br&egrave;ve doit-elle &ecirc;tre publi&eacute;e ?</B>\n";
+		echo "<B>"._T('entree_breve_publiee')."</B>\n";
 
 		echo "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n";
 		
-		echo "<OPTION".mySel("prop",$statut).">Br&egrave;ve propos&eacute;e\n";		
-		echo "<OPTION".mySel("refuse",$statut).">NON - Br&egrave;ve refus&eacute;e\n";		
-		echo "<OPTION".mySel("publie",$statut).">OUI - Br&egrave;ve valid&eacute;e\n";		
+		echo "<OPTION".mySel("prop",$statut).">"._T('item_breve_proposee')."\n";		
+		echo "<OPTION".mySel("refuse",$statut).">"._T('item_breve_refusee')."\n";		
+		echo "<OPTION".mySel("publie",$statut).">"._T('item_breve_validee')."\n";		
 
 		echo "</SELECT>".aide ("brevesstatut")."<P>\n";
 		fin_cadre_relief();
@@ -180,10 +180,10 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else {
 		echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">";
 	}
-	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'  >";
+	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'  >";
 	echo "</FORM>";
 }
-else echo "<H2>Page interdite</H2>";
+else echo "<H2>"._T('info_page_interdite')."</H2>";
 
 fin_cadre_formulaire();
 fin_page();

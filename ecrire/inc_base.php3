@@ -16,7 +16,7 @@ function creer_base() {
 	// Elements redactionnels
 	//
 
-	spip_log("creation des tables d'objets");
+	spip_log(_T('log_creation_table'));
 	$query = "CREATE TABLE spip_articles (
 		id_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		surtitre text NOT NULL,
@@ -220,7 +220,7 @@ function creer_base() {
 	// Elements interactifs
 	//
 
-	spip_log("creation des tables interactions");
+	spip_log(_T('log_creation_table_interactions'));
 	$query = "CREATE TABLE spip_forum (
 		id_forum bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_parent bigint(21) DEFAULT '0' NOT NULL,
@@ -335,7 +335,7 @@ function creer_base() {
 	// Relations
 	//
 
-	spip_log("creation des tables relations");
+	spip_log(_T('log_tables_relations'));
 	$query = "CREATE TABLE spip_auteurs_articles (
 		id_auteur bigint(21) DEFAULT '0' NOT NULL,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -420,7 +420,7 @@ function creer_base() {
 	// Gestion du site
 	//
 
-	spip_log("creation des tables gestion du site");
+	spip_log(_T('log_tables_gestion_site'));
 	$query = "CREATE TABLE spip_forum_cache (
 		id_forum bigint(21) DEFAULT '0' NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
@@ -506,7 +506,7 @@ function creer_base() {
 	//
 	// Pre-remplissage de la base
 	//
-	spip_log("pre-remplissage de la base");
+	spip_log(_T('log_tables_remplissage_base'));
 	remplir_type_documents();
 
 	//
@@ -587,7 +587,7 @@ function stripslashes_base($table, $champs) {
 
 function maj_version ($version) {
 	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
-	spip_log("mise a jour de la base vers $version");
+	spip_log(_T('log_tables_mise_a_jour_base', array('version' => $version)));
 }
 
 function maj_base() {
@@ -922,11 +922,7 @@ function maj_base() {
 					spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 					$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
 				} else {
-					echo propre("Erreur de base de donn&eacute;es lors de la mise &agrave; niveau.
-						L'image {{$fichier}} n'est pas pass&eacute;e (article $id_article).\n\n
-						Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
-						niveau, et enfin v&eacute;rifiez que les images apparaissent
-						toujours dans les articles.");
+					echo _T('texte_erreur_mise_niveau_base', array('fichier' => $fichier, 'id_article' => $id_article));
 					exit;
 				}
 			}
