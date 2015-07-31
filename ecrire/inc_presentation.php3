@@ -1021,7 +1021,7 @@ function barre_onglets($rubrique, $onglet){
 		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
 			onglet("Messagerie", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
 		}
-		onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
+		//onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
 	}
 
 	if ($rubrique == "configuration"){
