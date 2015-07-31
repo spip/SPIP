@@ -24,6 +24,11 @@ function public_stats_dist() {
 	$_SERVER['HTTP_USER_AGENT']))
 		return;
 
+	// rejet des pages 404
+	if (isset($GLOBALS['page']['status'])
+	AND $GLOBALS['page']['status'] == 404)
+		return;
+
 	// Identification du client
 	$client_id = substr(md5(
 		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
