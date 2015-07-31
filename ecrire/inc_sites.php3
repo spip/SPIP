@@ -485,7 +485,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 //
 
 function executer_une_syndication() {
-	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' ".
+	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ".
 			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1";
 	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
@@ -498,7 +498,7 @@ function executer_une_syndication() {
 	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
 			$id_syndic = $row["id_syndic"];
-			syndic_a_jour($id_syndic, 'sus');
+			syndic_a_jour($id_syndic, 'off');
 		}
 	}
 }
