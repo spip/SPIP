@@ -22,7 +22,7 @@
 					  <li class="editer_url_auto[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
 						<label for='url_auto'><:texte_referencement_automatique:></label>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
-						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="[(#ENV{url_site}|sinon{http://})]" />
+						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="http://" />
 					  </li>
 				  </ul>
 				  <p class="boutons"><input type='submit' class='submit' value='<:bouton_ajouter:>' /></p>
