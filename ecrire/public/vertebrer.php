@@ -33,13 +33,14 @@ function vertebrer_sort($fields, $direction)
 	foreach($fields as $n => $t) {
 		$tri = $direction
 		. ((test_sql_int($t) OR test_sql_date($r)) ? 'tri_n' : 'tri');
-		$args ="";
+		$url ="";
 		foreach (array('tri', 'tri_n', '_tri', '_tri_n') as $c) {
-		  if ($tri != $c) $args .= '|parametre_url{' . $c .',""}';
+			if ($tri != $c) $url .= "|$c";
 		}
-      // #SELF contient tous les parametes *tri*. A ameliorer
-		$url = "[(#SELF$args|parametre_url{" . $tri . ",'" . $n . "'})]";
-		$res .= "\n\t\t<th><a href='$url'>$n</a></th>";
+		$url = "|parametre_url{" . $tri . ",'" . $n . "'}"
+		. '|parametre_url{"' . substr($url,1) .'",""}';
+
+		$res .= "\n\t\t<th><a href='[(#SELF$url)]'>$n</a></th>";
 	}
 	return $res;
 }
@@ -96,18 +97,24 @@ function public_vertebrer_dist($desc)
 <h1 style='text-align:center'>SPIPAdmin $surnom</h1><br />\n" .
 	  // au minimum: "<BOUCLE1($fond)></BOUCLE1>#TOTAL_BOUCLE<//B1>")
 	  // au maximum:
-	"<B1>#ANCRE_PAGINATION[<p class='pagination'>(#PAGINATION)</p>]" .
-	"<table class='spip' border='1' width='90%'>" .
-	"<tr>\n\t<th>Nb</th>" .
+	"<B1>#ANCRE_PAGINATION" .
+	"\n<p class='pagination'>" .
+	"\n<a style='float:left;' " .
+	"href='./?page=$surnom&amp;var_mode=debug&amp;var_mode_affiche=squelette#debug_boucle'>squelette" .
+	"</a>" .
+	"\n#PAGINATION" .
+	"\n</p>\n<table class='spip' border='1' width='90%'>" .
+	"\n\t<tr>\n\t\t<th>Nb</th>" .
 	vertebrer_sort($field,'') .
-	"\n</tr>\n<BOUCLE1($surnom)" .
+	"\n\t</tr>\n<BOUCLE1($surnom)" .
 	vertebrer_crit($field) .
 	'>' .
 	vertebrer_cell($field) .
 	"\n\t</tr>\n</BOUCLE1>" .
-	"\n\t<tr>\n\t<th>Nb</th>" .
+	"\n\t<tr>\n\t\t<th>Nb</th>" .
 	vertebrer_sort($field,'_') .
-	"\n</tr></table>" .
-"</B1><h2 style='text-align:center'><:texte_vide:></h2><//B1></div></body></html>";
+	"\n\t</tr>\n</table>" .
+"\n</B1>\n<h2 style='text-align:center'><:texte_vide:></h2>" .
+"\n<//B1></div></body></html>";
 }
 ?>

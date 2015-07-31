@@ -399,8 +399,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	ob_end_clean();
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
-
 	echo debug_debut($fonc);
+
 	if ($var_mode_affiche !== 'validation') {
 		$self = parametre_url($self,'var_mode', 'debug');
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
@@ -452,31 +452,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "</fieldset>\n";
 	  }
 	  echo "</div>\n<a id='$fonc'></a>\n"; 
-	  if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
-	    echo "<div id=\"debug_boucle\"><fieldset>";
-	    if ($var_mode_affiche == 'resultat') {
-		echo "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		$req = $debug_objets['requete'][$var_mode_objet];
-		if (function_exists('traite_query'))
-		  $req = traite_query($req);
-		echo ancre_texte($req);
-		foreach ($res as $view) 
-			if ($view) echo "\n<br /><fieldset>",interdire_scripts($view),"</fieldset>";
-
-	    } else if ($var_mode_affiche == 'code') {
-		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		echo ancre_texte("<"."?php\n".$res."\n?".">");
-	    } else if ($var_mode_affiche == 'boucle') {
-		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		echo ancre_texte($res);
-	    } else if ($var_mode_affiche == 'squelette') {
-		echo  "<legend>",$debug_objets['sourcefile'][$var_mode_objet],"</legend>";
-		echo ancre_texte($debug_objets['squelette'][$var_mode_objet]);
-	    }
-	    echo "</fieldset></div>";
-	  }
+	  echo debug_affiche($fonc, $debug_objets, $var_mode_objet, $var_mode_affiche);
 	}
-
 	if ($texte) {
 
 		$err = "";
@@ -505,6 +482,34 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	}
 	debug_fin();
 	exit;
+}
+
+function debug_affiche($fonc, $tout, $objet, $affiche)
+{
+	if (!$objet) {if ($affiche == 'squelette') $objet = $fonc;}
+	if (!$objet OR !$res = $tout[$affiche][$objet]) return;
+	$res = "<div id=\"debug_boucle\"><fieldset>";
+	if ($affiche == 'resultat') {
+		$res .= "<legend>" .$tout['pretty'][$objet] ."</legend>";
+		$req = $tout['requete'][$objet];
+		if (function_exists('traite_query'))
+			$req = traite_query($req);
+		$res .= ancre_texte($req);
+		foreach ($res as $view) 
+			if ($view) $res .= "\n<br /><fieldset>" .interdire_scripts($view) ."</fieldset>";
+
+	} else if ($affiche == 'code') {
+		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
+		$res .= ancre_texte("<"."?php\n".$res."\n?".">");
+	} else if ($affiche == 'boucle') {
+		$res .=  "<legend>" .$tout['pretty'][$objet] ."</legend>";
+		$res .= ancre_texte($res);
+	} else if ($affiche == 'squelette') {
+		$res .=  "<legend>" .$tout['sourcefile'][$objet] ."</legend>";
+		$res .= ancre_texte($tout['squelette'][$objet]);
+	}
+	$res .= "</fieldset></div>";
+	return $res;
 }
 
 // http://doc.spip.org/@debug_debut
