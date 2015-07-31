@@ -190,6 +190,10 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 		AND ($t['statut'] == 'prop')
 	);
 }
+// Autoriser a voir un site $id_syndic
+function autoriser_site_voir_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt);
+}
 
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id
@@ -283,27 +287,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 			AND sql_count(auteurs_article($id, "id_auteur=".$qui['id_auteur']))
 		);
 }
-// Autoriser a modifir un site $id_syndic
-function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
-	$s = spip_query(
-	"SELECT id_rubrique,statut FROM spip_syndic WHERE id_syndic="._q($id));
-	$r = spip_fetch_array($s);
-	return
-		$r
-		AND $GLOBALS['meta']['activer_sites'] != 'non'
-		AND (
-			autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-			OR (
-				( ($qui['statut']=='0minirezo')
-				OR ($qui['statut']=='1comite' AND $GLOBALS['meta']["proposer_sites"]>=1) )
-				AND in_array($r['statut'], array('prop','prepa', 'poubelle'))
-			)
-		);
-}
-// Autoriser a voir un site $id_syndic
-function autoriser_site_voir_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt);
-}
+
 
 // Autoriser a creer un groupe de mots
 // http://doc.spip.org/@autoriser_groupemots_creer_dist
