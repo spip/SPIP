@@ -278,17 +278,20 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$hauteur_vignette = $hauteur;
 		}
 
+		if (eregi("(left|right|center)",$align,$regs))
+			$align = " align='".$regs[1]."'";
+		else
+			unset($align);
+
 		if ($GLOBALS['flag_ecrire']) {
 			if ($fichier) $fichier = "../$fichier";
 			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
 		}
 
 		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette' border=0";
+			$vignette = "<img src='$fichier_vignette' border=0$align";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			if (eregi("(left|right|center)",$align,$regs))
-				$vignette .= " align='".$regs[1]."'";
 			if ($titre)
 				$vignette .= " alt=\"$titre\" title=\"$titre\"";
 			if ($affichage_detaille)
@@ -300,10 +303,9 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$vignette = vignette_par_defaut($extension);
 		}
 
-		if ($mode == 'document' OR $affichage_detaille)
+		if ($mode == 'document')
 			$vignette = "<a href='$fichier'>$vignette</a>";
-		if ($align == 'center')
-			$vignette = "<div align='center'>$vignette</div>";
+
 		if ($affichage_detaille) {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = mysql_query($query_type);
@@ -314,7 +316,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 
 			$taille_ko = floor($taille / 1024);
 
-			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
+			$retour = "<table cellpadding=5 cellspacing=0 border=0$align>\n";
 			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
