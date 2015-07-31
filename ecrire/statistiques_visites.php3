@@ -304,204 +304,206 @@ if (!$origine) {
 		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
 	
-		echo "<div>";
-		echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
-		echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
-		echo "</object>";
-		echo "</div>";
-	
-		/*
-		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
-		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
-
-		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
-
-		// Presentation graphique
-		while (list($key, $value) = each($log)) {
+		if ($_COOKIE['spip_svg_support'] == true) {
+			echo "<div>";
+			echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
+			echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
+			echo "</object>";
+			echo "</div>";
+		} 
+		else {
 			
-			$test_agreg ++;
+			echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
+			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
-			if ($test_agreg == $agreg) {	
+			echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
+	
+			// Presentation graphique
+			while (list($key, $value) = each($log)) {
+				
+				$test_agreg ++;
+		
+				if ($test_agreg == $agreg) {	
+				
+				$test_agreg = 0;
+				$n++;
 			
-			$test_agreg = 0;
-			$n++;
+				if ($decal == 30) $decal = 0;
+				$decal ++;
+				$tab_moyenne[$decal] = $value;
+			
+				// Inserer des jours vides si pas d'entrees	
+				if ($jour_prec > 0) {
+					$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
 		
-			if ($decal == 30) $decal = 0;
-			$decal ++;
-			$tab_moyenne[$decal] = $value;
+					for ($i=0; $i < $ecart; $i++){
+						if ($decal == 30) $decal = 0;
+						$decal ++;
+						$tab_moyenne[$decal] = $value;
+	
+						$ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
+						$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
+	
+						reset($tab_moyenne);
+						$moyenne = 0;
+						while (list(,$val_tab) = each($tab_moyenne))
+							$moyenne += $val_tab;
+						$moyenne = $moyenne / count($tab_moyenne);
 		
-			// Inserer des jours vides si pas d'entrees	
-			if ($jour_prec > 0) {
-				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
-	
-				for ($i=0; $i < $ecart; $i++){
-					if ($decal == 30) $decal = 0;
-					$decal ++;
-					$tab_moyenne[$decal] = $value;
-
-                    $ce_jour=date("Y-m-d", $jour_prec+(3600*24*($i+1)));
-			        $jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
-
-					reset($tab_moyenne);
-					$moyenne = 0;
-					while (list(,$val_tab) = each($tab_moyenne))
-						$moyenne += $val_tab;
-					$moyenne = $moyenne / count($tab_moyenne);
-	
-					$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
-					echo "<td valign='bottom' width=$largeur>";
-					$difference = ($hauteur_moyenne) -1;
-					$moyenne = round($moyenne,2); // Pour affichage harmonieux
-					$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
-					._T('info_visites')." | "
-					._T('info_moyenne')." $moyenne")).'"';
-					if ($difference > 0) {	
-						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
+						$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
+						echo "<td valign='bottom' width=$largeur>";
+						$difference = ($hauteur_moyenne) -1;
+						$moyenne = round($moyenne,2); // Pour affichage harmonieux
+						$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
+						._T('info_visites')." | "
+						._T('info_moyenne')." $moyenne")).'"';
+						if ($difference > 0) {	
+							echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
+							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
+						}
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+						echo "</td>";
+						$n++;
 					}
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
-					echo "</td>";
-					$n++;
 				}
-			}
-
-			$ce_jour=date("Y-m-d", $key);
-			$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
-
-			$total_loc = $total_loc + $value;
-			reset($tab_moyenne);
-
-			$moyenne = 0;
-			while (list(,$val_tab) = each($tab_moyenne))
-				$moyenne += $val_tab;
-			$moyenne = $moyenne / count($tab_moyenne);
-		
-			$hauteur_moyenne = round($moyenne * $rapport) - 1;
-			$hauteur = round($value * $rapport) - 1;
-			$moyenne = round($moyenne,2); // Pour affichage harmonieux
-			echo "<td valign='bottom' width=$largeur>";
-
-			$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
-			._T('info_visites')." ".$value)).'"';
-
-			if ($hauteur > 0){
-				if ($hauteur_moyenne > $hauteur) {
-					$difference = ($hauteur_moyenne - $hauteur) -1;
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=$difference title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
-					if (date("w",$key) == "0") // Dimanche en couleur foncee
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
-					else
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
-				} else if ($hauteur_moyenne < $hauteur) {
-					$difference = ($hauteur - $hauteur_moyenne) -1;
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
-					if (date("w",$key) == "0") // Dimanche en couleur foncee
-						$couleur =  $couleur_foncee;
-					else
-						$couleur = $couleur_claire;
-					echo "<img src='img_pack/rien.gif' width=$largeur height='$difference' style='background-color:$couleur;' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-					echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne style='background-color:$couleur;' title=$tagtitle>";
-				} else {
-					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
-					if (date("w",$key) == "0") // Dimanche en couleur foncee
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
-					else
-						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
-				}
-			}
-			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
-			echo "</td>\n";
-		
-			$jour_prec = $key;
-			$val_prec = $value;
-		}
-		}
-
-		// Dernier jour
-		$hauteur = round($visites_today * $rapport)	- 1;
-		$total_absolu = $total_absolu + $visites_today;
-		echo "<td valign='bottom' width=$largeur>";
-		if ($hauteur > 0){
-			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
-
-			// prevision de visites jusqu'a minuit
-			// basee sur la moyenne (site) ou popularite (article)
-			if (! $id_article) $val_popularite = $moyenne;
-			$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
-			$hauteurprevision = ceil($prevision * $rapport);
-			$prevision = round($prevision,0)+$visites_today; // Pour affichage harmonieux
-            $tagtitle='"'.attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision")).'"';
-			echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteurprevision style='background-color:#eeeeee;' title=$tagtitle>";
-
-			echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#cccccc;' title=$tagtitle>";
-		}
-		echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
-		echo "</td>";
 	
-		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
-		echo "</tr></table>";
-		echo "</td>";
-		echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
-		echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		echo "<table cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr><td height=15 valign='top'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=25 valign='middle'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
-		echo "</td></tr>";
-		echo "<tr><td height=10 valign='bottom'>";		
-		echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
-		echo "</td>";
-		
-		
-		echo "</table>";
-		echo "</font></td>";
-		echo "</td></tr></table>";
-		
-		echo "<div style='position: relative; height: 15px;'>";
-		$gauche_prec = -50;
-		for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
-			$ce_jour = date("d", $jour);
+				$ce_jour=date("Y-m-d", $key);
+				$jour = nom_jour($ce_jour).' '.affdate_court($ce_jour);
+	
+				$total_loc = $total_loc + $value;
+				reset($tab_moyenne);
+	
+				$moyenne = 0;
+				while (list(,$val_tab) = each($tab_moyenne))
+					$moyenne += $val_tab;
+				$moyenne = $moyenne / count($tab_moyenne);
 			
-			if ($ce_jour == "1") {
-				$afficher = nom_mois(date("Y-m-d", $jour));
-				if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
-				
+				$hauteur_moyenne = round($moyenne * $rapport) - 1;
+				$hauteur = round($value * $rapport) - 1;
+				$moyenne = round($moyenne,2); // Pour affichage harmonieux
+				echo "<td valign='bottom' width=$largeur>";
+	
+				$tagtitle='"'.attribut_html(supprimer_tags("$jour | "
+				._T('info_visites')." ".$value)).'"';
+	
+				if ($hauteur > 0){
+					if ($hauteur_moyenne > $hauteur) {
+						$difference = ($hauteur_moyenne - $hauteur) -1;
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$difference title=$tagtitle>";
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+						if (date("w",$key) == "0") // Dimanche en couleur foncee
+							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
+						else
+							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
+					} else if ($hauteur_moyenne < $hauteur) {
+						$difference = ($hauteur - $hauteur_moyenne) -1;
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+						if (date("w",$key) == "0") // Dimanche en couleur foncee
+							$couleur =  $couleur_foncee;
+						else
+							$couleur = $couleur_claire;
+						echo "<img src='img_pack/rien.gif' width=$largeur height='$difference' style='background-color:$couleur;' title=$tagtitle>";
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne style='background-color:$couleur;' title=$tagtitle>";
+					} else {
+						echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;' title=$tagtitle>";
+						if (date("w",$key) == "0") // Dimanche en couleur foncee
+							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;' title=$tagtitle>";
+						else
+							echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;' title=$tagtitle>";
+					}
+				}
+				echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+				echo "</td>\n";
 			
-				$gauche = ($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
+				$jour_prec = $key;
+				$val_prec = $value;
+			}
+			}
+	
+			// Dernier jour
+			$hauteur = round($visites_today * $rapport)	- 1;
+			$total_absolu = $total_absolu + $visites_today;
+			echo "<td valign='bottom' width=$largeur>";
+			if ($hauteur > 0){
+				echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+	
+				// prevision de visites jusqu'a minuit
+				// basee sur la moyenne (site) ou popularite (article)
+				if (! $id_article) $val_popularite = $moyenne;
+				$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
+				$hauteurprevision = ceil($prevision * $rapport);
+				$prevision = round($prevision,0)+$visites_today; // Pour affichage harmonieux
+				$tagtitle='"'.attribut_html(supprimer_tags(_T('info_aujourdhui')." $visites_today &rarr; $prevision")).'"';
+				echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteurprevision style='background-color:#eeeeee;' title=$tagtitle>";
+	
+				echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:#cccccc;' title=$tagtitle>";
+			}
+			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
+			echo "</td>";
+		
+			echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+			echo "</tr></table>";
+			echo "</td>";
+			echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
+			echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
+			echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
+			echo "<table cellpadding=0 cellspacing=0 border=0>";
+			echo "<tr><td height=15 valign='top'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=10 valign='bottom'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
+			echo "</td>";
+			
+			
+			echo "</table>";
+			echo "</font></td>";
+			echo "</td></tr></table>";
+			
+			echo "<div style='position: relative; height: 15px;'>";
+			$gauche_prec = -50;
+			for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
+				$ce_jour = date("d", $jour);
 				
-				if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
-					echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
-					$gauche_prec = $gauche;
+				if ($ce_jour == "1") {
+					$afficher = nom_mois(date("Y-m-d", $jour));
+					if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
+					
+				
+					$gauche = ($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
+					
+					if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
+						echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
+						$gauche_prec = $gauche;
+					}
 				}
 			}
+			echo "</div>";
+			
 		}
-		echo "</div>";
-		
-		*/
 				
 		
 
