@@ -247,7 +247,10 @@ function calcul_branche ($generation) {
 	if (!$generation) 
 		return '0';
 	else {
-		$branche[] = join(',',array_map('intval',explode(',',$generation)));
+ 		// normaliser $id qui a pu arriver comme un array, comme un entier, ou comme une chaine NN,NN,NN
+ 		if (!is_array($generation)) $generation = explode(',',$generation);
+		$generation = join(',',array_map('intval',explode(',',$generation)));
+		$branche[] = $generation
 		while ($generation = calcul_generation ($generation))
 			$branche[] = $generation;
 		return join(",",$branche);
