@@ -32,21 +32,32 @@ function inc_export_dist($meta)
 			$maindir = _DIR_DUMP;
 		$dir = sous_repertoire($maindir, $meta);
 		$file = $dir . $archive;
+		$parties = preg_files($file .  ".part_[0-9]+_[0-9]+");
 		$metatable = $meta . '_tables';
 
-		// Reperer une situation anormale (echec reprise sur interruption)
+		// Faire le menage en cas d'echec de reprise sur interruption
+		// d'un essai anterieur
 		if (!$etape_actuelle AND !$sous_etape) {
-			$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
-			if ($l) {
+
+			if ($parties) {
 				spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
-				foreach($l as $dummy) spip_unlink($dummy);
+				foreach($parties as $dummy) spip_unlink($dummy);
 			}
 			$start = true; //  utilise pour faire un premier hit moitie moins long
-			$tables_sauvegardees = array();
-		} else 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
+			$tables_sauvegardees = array();		
+		} elseif (!file_exists($file) AND !$files)
+		    // Si qqch en cours ne s'est traduit par aucun fichier
+		    // c'est une intervention manuelle ou un pb de place
+		    // on revient a la case depart
+		    // Note: detruire ces fichiers est une methode pour
+		    // forcer l'arret d'une sauvegarde qui boucle
+			  return false;
+		else {
+			$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
 
-		// concatenation des fichiers crees a l'appel precedent
-		ramasse_parties($dir, $archive);
+			// concatenation des fichiers crees a l'appel precedent
+			ramasse_parties($file, $parties);
+		}
 		$all = count($tables_for_dump);
 		if ($etape_actuelle > $all OR !$all){
 			include_spip('inc/headers');
@@ -112,6 +123,7 @@ function inc_export_dist($meta)
 		echo  ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"$redirect\";',0);</script>\n");
 		echo (install_fin_html());
 		flush();
+		return true;
 	}
 }
 
@@ -155,13 +167,11 @@ function complete_fils($rubriques)
 // prevenir autant que possible un Time-out.
 
 // http://doc.spip.org/@ramasse_parties
-function ramasse_parties($dir, $archive)
+function ramasse_parties($but, $files)
 {
-	$files = preg_files($dir . $archive . ".part_[0-9]+_[0-9]+[.gz]?");
-
 	$ok = true;
 	$files_o = array();
-	$but = $dir . $archive;
+
 	foreach($files as $f) {
 	  $contenu = "";
 	  if (lire_fichier ($f, $contenu)) {

@@ -59,14 +59,17 @@ $EXPORT_tables_noexport = pipeline('lister_tables_noexport',$EXPORT_tables_noexp
 function exec_export_all_dist()
 {
 	$rub = intval(_request('id_parent'));
-	$meta = "status_dump_$rub_"  . $GLOBALS['visiteur_session']['id_auteur'];
+	$meta = "status_dump_"
+	  . ($rub ? ($rub .'_') : '')  
+	  . $GLOBALS['visiteur_session']['id_auteur'];
 
 	if (!isset($GLOBALS['meta'][$meta]))
 		echo exec_export_all_args($rub, _request('gz'));
 	else {
 		$export = charger_fonction('export', 'inc');
-		$export($meta);
-	} 	
+		if (!$export($meta))
+			echo exec_export_all_args($rub, _request('gz'));
+	}
 }
 
 // L'en tete du fichier doit etre cree a partir de l'espace public
