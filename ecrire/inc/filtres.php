@@ -2002,12 +2002,13 @@ function table_valeur($table, $cle, $defaut='') {
 	foreach (explode('/', $cle) as $k) {
 		$table = is_string($table) ? unserialize($table) : $table;
 
-		if (is_object($table))
+		if (is_object($table)) {
 			$table =  (($k !== "") and isset($table->$k)) ? $table->$k : $defaut;
-		else if (is_array($table))
+		} elseif (is_array($table)) {
 			$table = isset($table[$k]) ? $table[$k] : $defaut;
-		else
+		} else {
 			$table = $defaut;
+		}
 	}
 	return $table;
 }
